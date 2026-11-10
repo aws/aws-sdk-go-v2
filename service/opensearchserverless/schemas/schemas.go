@@ -4,3905 +4,2807 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var BatchGetCollection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "BatchGetCollection",
-}, smithy.ShapeTypeOperation, 0)
-
-var BatchGetCollectionGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "BatchGetCollectionGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var BatchGetEffectiveLifecyclePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "BatchGetEffectiveLifecyclePolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var BatchGetLifecyclePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "BatchGetLifecyclePolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var BatchGetVpcEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "BatchGetVpcEndpoint",
-}, smithy.ShapeTypeOperation, 0)
-
-var CancelIngestionJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CancelIngestionJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateAccessPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CreateAccessPolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateCollection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CreateCollection",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateCollectionGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CreateCollectionGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateIndex = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CreateIndex",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateIngestionJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CreateIngestionJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateIngestionStream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CreateIngestionStream",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateLifecyclePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CreateLifecyclePolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateSecurityConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CreateSecurityConfig",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateSecurityPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CreateSecurityPolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateVpcEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CreateVpcEndpoint",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteAccessPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "DeleteAccessPolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteCollection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "DeleteCollection",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteCollectionGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "DeleteCollectionGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteIndex = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "DeleteIndex",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteIngestionStream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "DeleteIngestionStream",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteLifecyclePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "DeleteLifecyclePolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteSecurityConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "DeleteSecurityConfig",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteSecurityPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "DeleteSecurityPolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteVpcEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "DeleteVpcEndpoint",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetAccessPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "GetAccessPolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetAccountSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "GetAccountSettings",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetIndex = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "GetIndex",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetIngestionJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "GetIngestionJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetIngestionStream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "GetIngestionStream",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetPoliciesStats = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "GetPoliciesStats",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetSecurityConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "GetSecurityConfig",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetSecurityPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "GetSecurityPolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListAccessPolicies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "ListAccessPolicies",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListCollectionGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "ListCollectionGroups",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListCollections = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "ListCollections",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListIngestionJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "ListIngestionJobs",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListIngestionStreams = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "ListIngestionStreams",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListLifecyclePolicies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "ListLifecyclePolicies",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListSecurityConfigs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "ListSecurityConfigs",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListSecurityPolicies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "ListSecurityPolicies",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListVpcEndpoints = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "ListVpcEndpoints",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateAccessPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "UpdateAccessPolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateAccountSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "UpdateAccountSettings",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateCollection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "UpdateCollection",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateCollectionGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "UpdateCollectionGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateIndex = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "UpdateIndex",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateLifecyclePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "UpdateLifecyclePolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateSecurityConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "UpdateSecurityConfig",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateSecurityPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "UpdateSecurityPolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateVpcEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "UpdateVpcEndpoint",
-}, smithy.ShapeTypeOperation, 0)
-
-var _OpenSearchServerless = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "OpenSearchServerless",
-}, smithy.ShapeTypeService, 0)
-
-var OpenSearchServerless = smithy.NewServiceSchema(_OpenSearchServerless, "2021-11-01")
-
-var AccessPolicyDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "AccessPolicyDetail",
-}, smithy.ShapeTypeStructure, 7)
-var AccessPolicyDetail_type *smithy.Schema
-
-var AccessPolicyDetail_name *smithy.Schema
-
-var AccessPolicyDetail_policyVersion *smithy.Schema
-
-var AccessPolicyDetail_description *smithy.Schema
-
-var AccessPolicyDetail_policy *smithy.Schema
-
-var AccessPolicyDetail_createdDate *smithy.Schema
-
-var AccessPolicyDetail_lastModifiedDate *smithy.Schema
-
-var AccessPolicyStats = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "AccessPolicyStats",
-}, smithy.ShapeTypeStructure, 1)
-var AccessPolicyStats_DataPolicyCount *smithy.Schema
-
-var _AccessPolicySummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "AccessPolicySummaries",
-}, smithy.ShapeTypeList, 1)
-var _AccessPolicySummaries_member *smithy.Schema
-
-var AccessPolicySummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "AccessPolicySummary",
-}, smithy.ShapeTypeStructure, 6)
-var AccessPolicySummary_type *smithy.Schema
-
-var AccessPolicySummary_name *smithy.Schema
-
-var AccessPolicySummary_policyVersion *smithy.Schema
-
-var AccessPolicySummary_description *smithy.Schema
-
-var AccessPolicySummary_createdDate *smithy.Schema
-
-var AccessPolicySummary_lastModifiedDate *smithy.Schema
-
-var _AccessPolicyType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "AccessPolicyType",
-}, smithy.ShapeTypeString, 0)
-
-var AccountSettingsDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "AccountSettingsDetail",
-}, smithy.ShapeTypeStructure, 1)
-var AccountSettingsDetail_capacityLimits *smithy.Schema
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var _AutoscalingStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "AutoscalingStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _BucketOwnerAccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "BucketOwnerAccountId",
-}, smithy.ShapeTypeString, 0)
-
-var CapacityDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CapacityDetails",
-}, smithy.ShapeTypeStructure, 2)
-var CapacityDetails_capacityInOcu *smithy.Schema
-
-var CapacityDetails_autoscalingStatus *smithy.Schema
-
-var CapacityLimits = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CapacityLimits",
-}, smithy.ShapeTypeStructure, 2)
-var CapacityLimits_maxIndexingCapacityInOCU *smithy.Schema
-
-var CapacityLimits_maxSearchCapacityInOCU *smithy.Schema
-
-var _ClientToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "ClientToken",
-}, smithy.ShapeTypeString, 0)
-
-var CollectionDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CollectionDetail",
-}, smithy.ShapeTypeStructure, 18)
-var CollectionDetail_id *smithy.Schema
-
-var CollectionDetail_name *smithy.Schema
-
-var CollectionDetail_status *smithy.Schema
-
-var CollectionDetail_type *smithy.Schema
-
-var CollectionDetail_description *smithy.Schema
-
-var CollectionDetail_arn *smithy.Schema
-
-var CollectionDetail_kmsKeyArn *smithy.Schema
-
-var CollectionDetail_standbyReplicas *smithy.Schema
-
-var CollectionDetail_deletionProtection *smithy.Schema
-
-var CollectionDetail_vectorOptions *smithy.Schema
-
-var CollectionDetail_createdDate *smithy.Schema
-
-var CollectionDetail_lastModifiedDate *smithy.Schema
-
-var CollectionDetail_collectionEndpoint *smithy.Schema
-
-var CollectionDetail_dashboardEndpoint *smithy.Schema
-
-var CollectionDetail_fipsEndpoints *smithy.Schema
-
-var CollectionDetail_failureCode *smithy.Schema
-
-var CollectionDetail_failureMessage *smithy.Schema
-
-var CollectionDetail_collectionGroupName *smithy.Schema
-
-var _CollectionDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CollectionDetails",
-}, smithy.ShapeTypeList, 1)
-var _CollectionDetails_member *smithy.Schema
-
-var CollectionErrorDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CollectionErrorDetail",
-}, smithy.ShapeTypeStructure, 4)
-var CollectionErrorDetail_id *smithy.Schema
-
-var CollectionErrorDetail_name *smithy.Schema
-
-var CollectionErrorDetail_errorMessage *smithy.Schema
-
-var CollectionErrorDetail_errorCode *smithy.Schema
-
-var _CollectionErrorDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CollectionErrorDetails",
-}, smithy.ShapeTypeList, 1)
-var _CollectionErrorDetails_member *smithy.Schema
-
-var CollectionFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CollectionFilters",
-}, smithy.ShapeTypeStructure, 3)
-var CollectionFilters_name *smithy.Schema
-
-var CollectionFilters_status *smithy.Schema
-
-var CollectionFilters_collectionGroupName *smithy.Schema
-
-var CollectionGroupCapacityLimits = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CollectionGroupCapacityLimits",
-}, smithy.ShapeTypeStructure, 4)
-var CollectionGroupCapacityLimits_maxIndexingCapacityInOCU *smithy.Schema
-
-var CollectionGroupCapacityLimits_maxSearchCapacityInOCU *smithy.Schema
-
-var CollectionGroupCapacityLimits_minIndexingCapacityInOCU *smithy.Schema
-
-var CollectionGroupCapacityLimits_minSearchCapacityInOCU *smithy.Schema
-
-var CollectionGroupDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CollectionGroupDetail",
-}, smithy.ShapeTypeStructure, 11)
-var CollectionGroupDetail_id *smithy.Schema
-
-var CollectionGroupDetail_arn *smithy.Schema
-
-var CollectionGroupDetail_name *smithy.Schema
-
-var CollectionGroupDetail_standbyReplicas *smithy.Schema
-
-var CollectionGroupDetail_description *smithy.Schema
-
-var CollectionGroupDetail_tags *smithy.Schema
-
-var CollectionGroupDetail_createdDate *smithy.Schema
-
-var CollectionGroupDetail_capacityLimits *smithy.Schema
-
-var CollectionGroupDetail_currentCapacity *smithy.Schema
-
-var CollectionGroupDetail_numberOfCollections *smithy.Schema
-
-var CollectionGroupDetail_generation *smithy.Schema
-
-var _CollectionGroupDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CollectionGroupDetails",
-}, smithy.ShapeTypeList, 1)
-var _CollectionGroupDetails_member *smithy.Schema
-
-var CollectionGroupErrorDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CollectionGroupErrorDetail",
-}, smithy.ShapeTypeStructure, 4)
-var CollectionGroupErrorDetail_id *smithy.Schema
-
-var CollectionGroupErrorDetail_name *smithy.Schema
-
-var CollectionGroupErrorDetail_errorMessage *smithy.Schema
-
-var CollectionGroupErrorDetail_errorCode *smithy.Schema
-
-var _CollectionGroupErrorDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CollectionGroupErrorDetails",
-}, smithy.ShapeTypeList, 1)
-var _CollectionGroupErrorDetails_member *smithy.Schema
-
-var _CollectionGroupId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CollectionGroupId",
-}, smithy.ShapeTypeString, 0)
-
-var _CollectionGroupIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CollectionGroupIds",
-}, smithy.ShapeTypeList, 1)
-var _CollectionGroupIds_member *smithy.Schema
-
-var _CollectionGroupMaxIndexingCapacityValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CollectionGroupMaxIndexingCapacityValue",
-}, smithy.ShapeTypeFloat, 0)
-
-var _CollectionGroupMaxSearchCapacityValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CollectionGroupMaxSearchCapacityValue",
-}, smithy.ShapeTypeFloat, 0)
-
-var _CollectionGroupMinIndexingCapacityValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CollectionGroupMinIndexingCapacityValue",
-}, smithy.ShapeTypeFloat, 0)
-
-var _CollectionGroupMinSearchCapacityValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CollectionGroupMinSearchCapacityValue",
-}, smithy.ShapeTypeFloat, 0)
-
-var _CollectionGroupName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CollectionGroupName",
-}, smithy.ShapeTypeString, 0)
-
-var _CollectionGroupNames = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CollectionGroupNames",
-}, smithy.ShapeTypeList, 1)
-var _CollectionGroupNames_member *smithy.Schema
-
-var _CollectionGroupSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CollectionGroupSummaries",
-}, smithy.ShapeTypeList, 1)
-var _CollectionGroupSummaries_member *smithy.Schema
-
-var CollectionGroupSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CollectionGroupSummary",
-}, smithy.ShapeTypeStructure, 7)
-var CollectionGroupSummary_id *smithy.Schema
-
-var CollectionGroupSummary_arn *smithy.Schema
-
-var CollectionGroupSummary_name *smithy.Schema
-
-var CollectionGroupSummary_numberOfCollections *smithy.Schema
-
-var CollectionGroupSummary_createdDate *smithy.Schema
-
-var CollectionGroupSummary_capacityLimits *smithy.Schema
-
-var CollectionGroupSummary_generation *smithy.Schema
-
-var _CollectionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CollectionId",
-}, smithy.ShapeTypeString, 0)
-
-var _CollectionIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CollectionIds",
-}, smithy.ShapeTypeList, 1)
-var _CollectionIds_member *smithy.Schema
-
-var _CollectionName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CollectionName",
-}, smithy.ShapeTypeString, 0)
-
-var _CollectionNames = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CollectionNames",
-}, smithy.ShapeTypeList, 1)
-var _CollectionNames_member *smithy.Schema
-
-var _CollectionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CollectionStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _CollectionSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CollectionSummaries",
-}, smithy.ShapeTypeList, 1)
-var _CollectionSummaries_member *smithy.Schema
-
-var CollectionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CollectionSummary",
-}, smithy.ShapeTypeStructure, 6)
-var CollectionSummary_id *smithy.Schema
-
-var CollectionSummary_name *smithy.Schema
-
-var CollectionSummary_status *smithy.Schema
-
-var CollectionSummary_arn *smithy.Schema
-
-var CollectionSummary_kmsKeyArn *smithy.Schema
-
-var CollectionSummary_collectionGroupName *smithy.Schema
-
-var _CollectionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CollectionType",
-}, smithy.ShapeTypeString, 0)
-
-var _ConfigDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "ConfigDescription",
-}, smithy.ShapeTypeString, 0)
-
-var _ConfigName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "ConfigName",
-}, smithy.ShapeTypeString, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var CreateCollectionDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CreateCollectionDetail",
-}, smithy.ShapeTypeStructure, 13)
-var CreateCollectionDetail_id *smithy.Schema
-
-var CreateCollectionDetail_name *smithy.Schema
-
-var CreateCollectionDetail_status *smithy.Schema
-
-var CreateCollectionDetail_type *smithy.Schema
-
-var CreateCollectionDetail_description *smithy.Schema
-
-var CreateCollectionDetail_arn *smithy.Schema
-
-var CreateCollectionDetail_kmsKeyArn *smithy.Schema
-
-var CreateCollectionDetail_standbyReplicas *smithy.Schema
-
-var CreateCollectionDetail_deletionProtection *smithy.Schema
-
-var CreateCollectionDetail_vectorOptions *smithy.Schema
-
-var CreateCollectionDetail_createdDate *smithy.Schema
-
-var CreateCollectionDetail_lastModifiedDate *smithy.Schema
-
-var CreateCollectionDetail_collectionGroupName *smithy.Schema
-
-var CreateCollectionGroupDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CreateCollectionGroupDetail",
-}, smithy.ShapeTypeStructure, 9)
-var CreateCollectionGroupDetail_id *smithy.Schema
-
-var CreateCollectionGroupDetail_arn *smithy.Schema
-
-var CreateCollectionGroupDetail_name *smithy.Schema
-
-var CreateCollectionGroupDetail_standbyReplicas *smithy.Schema
-
-var CreateCollectionGroupDetail_description *smithy.Schema
-
-var CreateCollectionGroupDetail_tags *smithy.Schema
-
-var CreateCollectionGroupDetail_createdDate *smithy.Schema
-
-var CreateCollectionGroupDetail_capacityLimits *smithy.Schema
-
-var CreateCollectionGroupDetail_generation *smithy.Schema
-
-var CreateIamIdentityCenterConfigOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CreateIamIdentityCenterConfigOptions",
-}, smithy.ShapeTypeStructure, 3)
-var CreateIamIdentityCenterConfigOptions_instanceArn *smithy.Schema
-
-var CreateIamIdentityCenterConfigOptions_userAttribute *smithy.Schema
-
-var CreateIamIdentityCenterConfigOptions_groupAttribute *smithy.Schema
-
-var CreateVpcEndpointDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CreateVpcEndpointDetail",
-}, smithy.ShapeTypeStructure, 3)
-var CreateVpcEndpointDetail_id *smithy.Schema
-
-var CreateVpcEndpointDetail_name *smithy.Schema
-
-var CreateVpcEndpointDetail_status *smithy.Schema
-
-var CurrentCapacity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CurrentCapacity",
-}, smithy.ShapeTypeStructure, 2)
-var CurrentCapacity_search *smithy.Schema
-
-var CurrentCapacity_indexing *smithy.Schema
-
-var DeleteCollectionDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "DeleteCollectionDetail",
-}, smithy.ShapeTypeStructure, 4)
-var DeleteCollectionDetail_id *smithy.Schema
-
-var DeleteCollectionDetail_name *smithy.Schema
-
-var DeleteCollectionDetail_status *smithy.Schema
-
-var DeleteCollectionDetail_deletionProtection *smithy.Schema
-
-var DeleteVpcEndpointDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "DeleteVpcEndpointDetail",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteVpcEndpointDetail_id *smithy.Schema
-
-var DeleteVpcEndpointDetail_name *smithy.Schema
-
-var DeleteVpcEndpointDetail_status *smithy.Schema
-
-var _DeletionProtection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "DeletionProtection",
-}, smithy.ShapeTypeString, 0)
-
-var EffectiveLifecyclePolicyDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "EffectiveLifecyclePolicyDetail",
-}, smithy.ShapeTypeStructure, 6)
-var EffectiveLifecyclePolicyDetail_type *smithy.Schema
-
-var EffectiveLifecyclePolicyDetail_resource *smithy.Schema
-
-var EffectiveLifecyclePolicyDetail_policyName *smithy.Schema
-
-var EffectiveLifecyclePolicyDetail_resourceType *smithy.Schema
-
-var EffectiveLifecyclePolicyDetail_retentionPeriod *smithy.Schema
-
-var EffectiveLifecyclePolicyDetail_noMinRetentionPeriod *smithy.Schema
-
-var _EffectiveLifecyclePolicyDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "EffectiveLifecyclePolicyDetails",
-}, smithy.ShapeTypeList, 1)
-var _EffectiveLifecyclePolicyDetails_member *smithy.Schema
-
-var EffectiveLifecyclePolicyErrorDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "EffectiveLifecyclePolicyErrorDetail",
-}, smithy.ShapeTypeStructure, 4)
-var EffectiveLifecyclePolicyErrorDetail_type *smithy.Schema
-
-var EffectiveLifecyclePolicyErrorDetail_resource *smithy.Schema
-
-var EffectiveLifecyclePolicyErrorDetail_errorMessage *smithy.Schema
-
-var EffectiveLifecyclePolicyErrorDetail_errorCode *smithy.Schema
-
-var _EffectiveLifecyclePolicyErrorDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "EffectiveLifecyclePolicyErrorDetails",
-}, smithy.ShapeTypeList, 1)
-var _EffectiveLifecyclePolicyErrorDetails_member *smithy.Schema
-
-var EncryptionConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "EncryptionConfig",
-}, smithy.ShapeTypeStructure, 2)
-var EncryptionConfig_aWSOwnedKey *smithy.Schema
-
-var EncryptionConfig_kmsKeyArn *smithy.Schema
-
-var FipsEndpoints = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "FipsEndpoints",
-}, smithy.ShapeTypeStructure, 2)
-var FipsEndpoints_collectionEndpoint *smithy.Schema
-
-var FipsEndpoints_dashboardEndpoint *smithy.Schema
-
-var IamFederationConfigOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "IamFederationConfigOptions",
-}, smithy.ShapeTypeStructure, 2)
-var IamFederationConfigOptions_groupAttribute *smithy.Schema
-
-var IamFederationConfigOptions_userAttribute *smithy.Schema
-
-var _iamFederationGroupAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "iamFederationGroupAttribute",
-}, smithy.ShapeTypeString, 0)
-
-var _iamFederationUserAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "iamFederationUserAttribute",
-}, smithy.ShapeTypeString, 0)
-
-var _IamIdentityCenterApplicationArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "IamIdentityCenterApplicationArn",
-}, smithy.ShapeTypeString, 0)
-
-var IamIdentityCenterConfigOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "IamIdentityCenterConfigOptions",
-}, smithy.ShapeTypeStructure, 6)
-var IamIdentityCenterConfigOptions_instanceArn *smithy.Schema
-
-var IamIdentityCenterConfigOptions_applicationArn *smithy.Schema
-
-var IamIdentityCenterConfigOptions_applicationName *smithy.Schema
-
-var IamIdentityCenterConfigOptions_applicationDescription *smithy.Schema
-
-var IamIdentityCenterConfigOptions_userAttribute *smithy.Schema
-
-var IamIdentityCenterConfigOptions_groupAttribute *smithy.Schema
-
-var _IamIdentityCenterGroupAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "IamIdentityCenterGroupAttribute",
-}, smithy.ShapeTypeString, 0)
-
-var _IamIdentityCenterInstanceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "IamIdentityCenterInstanceArn",
-}, smithy.ShapeTypeString, 0)
-
-var _IamIdentityCenterUserAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "IamIdentityCenterUserAttribute",
-}, smithy.ShapeTypeString, 0)
-
-var _IndexingCapacityValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "IndexingCapacityValue",
-}, smithy.ShapeTypeInteger, 0)
-
-var _IndexName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "IndexName",
-}, smithy.ShapeTypeString, 0)
-
-var _IndexSchema = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "IndexSchema",
-}, smithy.ShapeTypeDocument, 0)
-
-var IngestionAlert = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "IngestionAlert",
-}, smithy.ShapeTypeStructure, 2)
-var IngestionAlert_code *smithy.Schema
-
-var IngestionAlert_message *smithy.Schema
-
-var _IngestionAlertCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "IngestionAlertCode",
-}, smithy.ShapeTypeString, 0)
-
-var _IngestionAlerts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "IngestionAlerts",
-}, smithy.ShapeTypeList, 1)
-var _IngestionAlerts_member *smithy.Schema
-
-var _IngestionFailureCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "IngestionFailureCode",
-}, smithy.ShapeTypeString, 0)
-
-var IngestionFailureReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "IngestionFailureReason",
-}, smithy.ShapeTypeStructure, 2)
-var IngestionFailureReason_code *smithy.Schema
-
-var IngestionFailureReason_message *smithy.Schema
-
-var _IngestionFailureReasons = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "IngestionFailureReasons",
-}, smithy.ShapeTypeList, 1)
-var _IngestionFailureReasons_member *smithy.Schema
-
-var _IngestionIndexName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "IngestionIndexName",
-}, smithy.ShapeTypeString, 0)
-
-var IngestionJobDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "IngestionJobDetail",
-}, smithy.ShapeTypeStructure, 15)
-var IngestionJobDetail_ingestionJobId *smithy.Schema
-
-var IngestionJobDetail_arn *smithy.Schema
-
-var IngestionJobDetail_collectionId *smithy.Schema
-
-var IngestionJobDetail_ingestionJobName *smithy.Schema
-
-var IngestionJobDetail_indexName *smithy.Schema
-
-var IngestionJobDetail_failureIndexName *smithy.Schema
-
-var IngestionJobDetail_source *smithy.Schema
-
-var IngestionJobDetail_status *smithy.Schema
-
-var IngestionJobDetail_state *smithy.Schema
-
-var IngestionJobDetail_statistics *smithy.Schema
-
-var IngestionJobDetail_revision *smithy.Schema
-
-var IngestionJobDetail_createdAt *smithy.Schema
-
-var IngestionJobDetail_updatedAt *smithy.Schema
-
-var IngestionJobDetail_failureReasons *smithy.Schema
-
-var IngestionJobDetail_activeAlerts *smithy.Schema
-
-var _IngestionJobId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "IngestionJobId",
-}, smithy.ShapeTypeString, 0)
-
-var _IngestionJobName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "IngestionJobName",
-}, smithy.ShapeTypeString, 0)
-
-var _IngestionJobResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "IngestionJobResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var IngestionJobS3Source = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "IngestionJobS3Source",
-}, smithy.ShapeTypeStructure, 3)
-var IngestionJobS3Source_bucket *smithy.Schema
-
-var IngestionJobS3Source_bucketOwnerAccountId *smithy.Schema
-
-var IngestionJobS3Source_keyPrefix *smithy.Schema
-
-var IngestionJobSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "IngestionJobSource",
-}, smithy.ShapeTypeStructure, 1)
-var IngestionJobSource_s3 *smithy.Schema
-
-var _IngestionJobStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "IngestionJobStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _IngestionJobSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "IngestionJobSummaries",
-}, smithy.ShapeTypeList, 1)
-var _IngestionJobSummaries_member *smithy.Schema
-
-var IngestionJobSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "IngestionJobSummary",
-}, smithy.ShapeTypeStructure, 7)
-var IngestionJobSummary_ingestionJobId *smithy.Schema
-
-var IngestionJobSummary_arn *smithy.Schema
-
-var IngestionJobSummary_ingestionJobName *smithy.Schema
-
-var IngestionJobSummary_indexName *smithy.Schema
-
-var IngestionJobSummary_status *smithy.Schema
-
-var IngestionJobSummary_createdAt *smithy.Schema
-
-var IngestionJobSummary_updatedAt *smithy.Schema
-
-var _IngestionState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "IngestionState",
-}, smithy.ShapeTypeString, 0)
-
-var IngestionStatistics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "IngestionStatistics",
-}, smithy.ShapeTypeStructure, 1)
-var IngestionStatistics_s3 *smithy.Schema
-
-var IngestionStreamDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "IngestionStreamDetail",
-}, smithy.ShapeTypeStructure, 16)
-var IngestionStreamDetail_ingestionStreamId *smithy.Schema
-
-var IngestionStreamDetail_arn *smithy.Schema
-
-var IngestionStreamDetail_collectionId *smithy.Schema
-
-var IngestionStreamDetail_ingestionStreamName *smithy.Schema
-
-var IngestionStreamDetail_indexName *smithy.Schema
-
-var IngestionStreamDetail_failureIndexName *smithy.Schema
-
-var IngestionStreamDetail_source *smithy.Schema
-
-var IngestionStreamDetail_roleArn *smithy.Schema
-
-var IngestionStreamDetail_status *smithy.Schema
-
-var IngestionStreamDetail_state *smithy.Schema
-
-var IngestionStreamDetail_statistics *smithy.Schema
-
-var IngestionStreamDetail_revision *smithy.Schema
-
-var IngestionStreamDetail_createdAt *smithy.Schema
-
-var IngestionStreamDetail_updatedAt *smithy.Schema
-
-var IngestionStreamDetail_failureReasons *smithy.Schema
-
-var IngestionStreamDetail_activeAlerts *smithy.Schema
-
-var _IngestionStreamId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "IngestionStreamId",
-}, smithy.ShapeTypeString, 0)
-
-var _IngestionStreamName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "IngestionStreamName",
-}, smithy.ShapeTypeString, 0)
-
-var _IngestionStreamResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "IngestionStreamResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var IngestionStreamS3Source = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "IngestionStreamS3Source",
-}, smithy.ShapeTypeStructure, 2)
-var IngestionStreamS3Source_sqsArn *smithy.Schema
-
-var IngestionStreamS3Source_buckets *smithy.Schema
-
-var IngestionStreamSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "IngestionStreamSource",
-}, smithy.ShapeTypeStructure, 1)
-var IngestionStreamSource_s3 *smithy.Schema
-
-var _IngestionStreamStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "IngestionStreamStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _IngestionStreamSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "IngestionStreamSummaries",
-}, smithy.ShapeTypeList, 1)
-var _IngestionStreamSummaries_member *smithy.Schema
-
-var IngestionStreamSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "IngestionStreamSummary",
-}, smithy.ShapeTypeStructure, 7)
-var IngestionStreamSummary_ingestionStreamId *smithy.Schema
-
-var IngestionStreamSummary_arn *smithy.Schema
-
-var IngestionStreamSummary_ingestionStreamName *smithy.Schema
-
-var IngestionStreamSummary_indexName *smithy.Schema
-
-var IngestionStreamSummary_status *smithy.Schema
-
-var IngestionStreamSummary_createdAt *smithy.Schema
-
-var IngestionStreamSummary_updatedAt *smithy.Schema
-
-var _InitialScan = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "InitialScan",
-}, smithy.ShapeTypeString, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var LifecyclePolicyDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "LifecyclePolicyDetail",
-}, smithy.ShapeTypeStructure, 7)
-var LifecyclePolicyDetail_type *smithy.Schema
-
-var LifecyclePolicyDetail_name *smithy.Schema
-
-var LifecyclePolicyDetail_policyVersion *smithy.Schema
-
-var LifecyclePolicyDetail_description *smithy.Schema
-
-var LifecyclePolicyDetail_policy *smithy.Schema
-
-var LifecyclePolicyDetail_createdDate *smithy.Schema
-
-var LifecyclePolicyDetail_lastModifiedDate *smithy.Schema
-
-var _LifecyclePolicyDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "LifecyclePolicyDetails",
-}, smithy.ShapeTypeList, 1)
-var _LifecyclePolicyDetails_member *smithy.Schema
-
-var LifecyclePolicyErrorDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "LifecyclePolicyErrorDetail",
-}, smithy.ShapeTypeStructure, 4)
-var LifecyclePolicyErrorDetail_type *smithy.Schema
-
-var LifecyclePolicyErrorDetail_name *smithy.Schema
-
-var LifecyclePolicyErrorDetail_errorMessage *smithy.Schema
-
-var LifecyclePolicyErrorDetail_errorCode *smithy.Schema
-
-var _LifecyclePolicyErrorDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "LifecyclePolicyErrorDetails",
-}, smithy.ShapeTypeList, 1)
-var _LifecyclePolicyErrorDetails_member *smithy.Schema
-
-var LifecyclePolicyIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "LifecyclePolicyIdentifier",
-}, smithy.ShapeTypeStructure, 2)
-var LifecyclePolicyIdentifier_type *smithy.Schema
-
-var LifecyclePolicyIdentifier_name *smithy.Schema
-
-var _LifecyclePolicyIdentifiers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "LifecyclePolicyIdentifiers",
-}, smithy.ShapeTypeList, 1)
-var _LifecyclePolicyIdentifiers_member *smithy.Schema
-
-var LifecyclePolicyResourceIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "LifecyclePolicyResourceIdentifier",
-}, smithy.ShapeTypeStructure, 2)
-var LifecyclePolicyResourceIdentifier_type *smithy.Schema
-
-var LifecyclePolicyResourceIdentifier_resource *smithy.Schema
-
-var _LifecyclePolicyResourceIdentifiers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "LifecyclePolicyResourceIdentifiers",
-}, smithy.ShapeTypeList, 1)
-var _LifecyclePolicyResourceIdentifiers_member *smithy.Schema
-
-var LifecyclePolicyStats = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "LifecyclePolicyStats",
-}, smithy.ShapeTypeStructure, 1)
-var LifecyclePolicyStats_RetentionPolicyCount *smithy.Schema
-
-var _LifecyclePolicySummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "LifecyclePolicySummaries",
-}, smithy.ShapeTypeList, 1)
-var _LifecyclePolicySummaries_member *smithy.Schema
-
-var LifecyclePolicySummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "LifecyclePolicySummary",
-}, smithy.ShapeTypeStructure, 6)
-var LifecyclePolicySummary_type *smithy.Schema
-
-var LifecyclePolicySummary_name *smithy.Schema
-
-var LifecyclePolicySummary_policyVersion *smithy.Schema
-
-var LifecyclePolicySummary_description *smithy.Schema
-
-var LifecyclePolicySummary_createdDate *smithy.Schema
-
-var LifecyclePolicySummary_lastModifiedDate *smithy.Schema
-
-var _LifecyclePolicyType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "LifecyclePolicyType",
-}, smithy.ShapeTypeString, 0)
-
-var _LifecycleResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "LifecycleResource",
-}, smithy.ShapeTypeString, 0)
-
-var _LifecycleResourceFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "LifecycleResourceFilter",
-}, smithy.ShapeTypeList, 1)
-var _LifecycleResourceFilter_member *smithy.Schema
-
-var OcuLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "OcuLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var OcuLimitExceededException_message *smithy.Schema
-
-var _openSearchServerlessEntityId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "openSearchServerlessEntityId",
-}, smithy.ShapeTypeString, 0)
-
-var _PolicyDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "PolicyDescription",
-}, smithy.ShapeTypeString, 0)
-
-var _PolicyDocument = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "PolicyDocument",
-}, smithy.ShapeTypeString, 0)
-
-var _PolicyName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "PolicyName",
-}, smithy.ShapeTypeString, 0)
-
-var _PolicyVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "PolicyVersion",
-}, smithy.ShapeTypeString, 0)
-
-var _Resource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "Resource",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "ResourceFilter",
-}, smithy.ShapeTypeList, 1)
-var _ResourceFilter_member *smithy.Schema
-
-var _ResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "ResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var _ResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "ResourceType",
-}, smithy.ShapeTypeString, 0)
-
-var _RoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "RoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var _S3BucketNameOrArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "S3BucketNameOrArn",
-}, smithy.ShapeTypeString, 0)
-
-var S3Statistics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "S3Statistics",
-}, smithy.ShapeTypeStructure, 3)
-var S3Statistics_objectsDiscovered *smithy.Schema
-
-var S3Statistics_objectsIngested *smithy.Schema
-
-var S3Statistics_objectsFailed *smithy.Schema
-
-var SamlConfigOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "SamlConfigOptions",
-}, smithy.ShapeTypeStructure, 5)
-var SamlConfigOptions_metadata *smithy.Schema
-
-var SamlConfigOptions_userAttribute *smithy.Schema
-
-var SamlConfigOptions_groupAttribute *smithy.Schema
-
-var SamlConfigOptions_openSearchServerlessEntityId *smithy.Schema
-
-var SamlConfigOptions_sessionTimeout *smithy.Schema
-
-var _samlGroupAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "samlGroupAttribute",
-}, smithy.ShapeTypeString, 0)
-
-var _samlMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "samlMetadata",
-}, smithy.ShapeTypeString, 0)
-
-var _samlUserAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "samlUserAttribute",
-}, smithy.ShapeTypeString, 0)
-
-var _SearchCapacityValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "SearchCapacityValue",
-}, smithy.ShapeTypeInteger, 0)
-
-var SecurityConfigDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "SecurityConfigDetail",
-}, smithy.ShapeTypeStructure, 9)
-var SecurityConfigDetail_id *smithy.Schema
-
-var SecurityConfigDetail_type *smithy.Schema
-
-var SecurityConfigDetail_configVersion *smithy.Schema
-
-var SecurityConfigDetail_description *smithy.Schema
-
-var SecurityConfigDetail_samlOptions *smithy.Schema
-
-var SecurityConfigDetail_iamIdentityCenterOptions *smithy.Schema
-
-var SecurityConfigDetail_iamFederationOptions *smithy.Schema
-
-var SecurityConfigDetail_createdDate *smithy.Schema
-
-var SecurityConfigDetail_lastModifiedDate *smithy.Schema
-
-var _SecurityConfigId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "SecurityConfigId",
-}, smithy.ShapeTypeString, 0)
-
-var SecurityConfigStats = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "SecurityConfigStats",
-}, smithy.ShapeTypeStructure, 1)
-var SecurityConfigStats_SamlConfigCount *smithy.Schema
-
-var _SecurityConfigSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "SecurityConfigSummaries",
-}, smithy.ShapeTypeList, 1)
-var _SecurityConfigSummaries_member *smithy.Schema
-
-var SecurityConfigSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "SecurityConfigSummary",
-}, smithy.ShapeTypeStructure, 6)
-var SecurityConfigSummary_id *smithy.Schema
-
-var SecurityConfigSummary_type *smithy.Schema
-
-var SecurityConfigSummary_configVersion *smithy.Schema
-
-var SecurityConfigSummary_description *smithy.Schema
-
-var SecurityConfigSummary_createdDate *smithy.Schema
-
-var SecurityConfigSummary_lastModifiedDate *smithy.Schema
-
-var _SecurityConfigType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "SecurityConfigType",
-}, smithy.ShapeTypeString, 0)
-
-var _SecurityGroupId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "SecurityGroupId",
-}, smithy.ShapeTypeString, 0)
-
-var _SecurityGroupIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "SecurityGroupIds",
-}, smithy.ShapeTypeList, 1)
-var _SecurityGroupIds_member *smithy.Schema
-
-var SecurityPolicyDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "SecurityPolicyDetail",
-}, smithy.ShapeTypeStructure, 7)
-var SecurityPolicyDetail_type *smithy.Schema
-
-var SecurityPolicyDetail_name *smithy.Schema
-
-var SecurityPolicyDetail_policyVersion *smithy.Schema
-
-var SecurityPolicyDetail_description *smithy.Schema
-
-var SecurityPolicyDetail_policy *smithy.Schema
-
-var SecurityPolicyDetail_createdDate *smithy.Schema
-
-var SecurityPolicyDetail_lastModifiedDate *smithy.Schema
-
-var SecurityPolicyStats = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "SecurityPolicyStats",
-}, smithy.ShapeTypeStructure, 2)
-var SecurityPolicyStats_EncryptionPolicyCount *smithy.Schema
-
-var SecurityPolicyStats_NetworkPolicyCount *smithy.Schema
-
-var _SecurityPolicySummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "SecurityPolicySummaries",
-}, smithy.ShapeTypeList, 1)
-var _SecurityPolicySummaries_member *smithy.Schema
-
-var SecurityPolicySummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "SecurityPolicySummary",
-}, smithy.ShapeTypeStructure, 6)
-var SecurityPolicySummary_type *smithy.Schema
-
-var SecurityPolicySummary_name *smithy.Schema
-
-var SecurityPolicySummary_policyVersion *smithy.Schema
-
-var SecurityPolicySummary_description *smithy.Schema
-
-var SecurityPolicySummary_createdDate *smithy.Schema
-
-var SecurityPolicySummary_lastModifiedDate *smithy.Schema
-
-var _SecurityPolicyType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "SecurityPolicyType",
-}, smithy.ShapeTypeString, 0)
-
-var _ServerlessGeneration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "ServerlessGeneration",
-}, smithy.ShapeTypeString, 0)
-
-var _ServerlessVectorAccelerationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "ServerlessVectorAccelerationStatus",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var ServiceQuotaExceededException_resourceId *smithy.Schema
-
-var ServiceQuotaExceededException_resourceType *smithy.Schema
-
-var ServiceQuotaExceededException_serviceCode *smithy.Schema
-
-var ServiceQuotaExceededException_quotaCode *smithy.Schema
-
-var _SqsArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "SqsArn",
-}, smithy.ShapeTypeString, 0)
-
-var _StandbyReplicas = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "StandbyReplicas",
-}, smithy.ShapeTypeString, 0)
-
-var StreamBucketConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "StreamBucketConfig",
-}, smithy.ShapeTypeStructure, 3)
-var StreamBucketConfig_bucket *smithy.Schema
-
-var StreamBucketConfig_bucketOwnerAccountId *smithy.Schema
-
-var StreamBucketConfig_initialScan *smithy.Schema
-
-var _StreamBucketConfigs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "StreamBucketConfigs",
-}, smithy.ShapeTypeList, 1)
-var _StreamBucketConfigs_member *smithy.Schema
-
-var _SubnetId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "SubnetId",
-}, smithy.ShapeTypeString, 0)
-
-var _SubnetIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "SubnetIds",
-}, smithy.ShapeTypeList, 1)
-var _SubnetIds_member *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_key *smithy.Schema
-
-var Tag_value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "TagKeys",
-}, smithy.ShapeTypeList, 1)
-var _TagKeys_member *smithy.Schema
-
-var _Tags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "Tags",
-}, smithy.ShapeTypeList, 1)
-var _Tags_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var UpdateCollectionDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "UpdateCollectionDetail",
-}, smithy.ShapeTypeStructure, 11)
-var UpdateCollectionDetail_id *smithy.Schema
-
-var UpdateCollectionDetail_name *smithy.Schema
-
-var UpdateCollectionDetail_status *smithy.Schema
-
-var UpdateCollectionDetail_type *smithy.Schema
-
-var UpdateCollectionDetail_description *smithy.Schema
-
-var UpdateCollectionDetail_vectorOptions *smithy.Schema
-
-var UpdateCollectionDetail_kmsKeyArn *smithy.Schema
-
-var UpdateCollectionDetail_arn *smithy.Schema
-
-var UpdateCollectionDetail_createdDate *smithy.Schema
-
-var UpdateCollectionDetail_lastModifiedDate *smithy.Schema
-
-var UpdateCollectionDetail_deletionProtection *smithy.Schema
-
-var UpdateCollectionGroupDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "UpdateCollectionGroupDetail",
-}, smithy.ShapeTypeStructure, 8)
-var UpdateCollectionGroupDetail_id *smithy.Schema
-
-var UpdateCollectionGroupDetail_arn *smithy.Schema
-
-var UpdateCollectionGroupDetail_name *smithy.Schema
-
-var UpdateCollectionGroupDetail_description *smithy.Schema
-
-var UpdateCollectionGroupDetail_capacityLimits *smithy.Schema
-
-var UpdateCollectionGroupDetail_createdDate *smithy.Schema
-
-var UpdateCollectionGroupDetail_lastModifiedDate *smithy.Schema
-
-var UpdateCollectionGroupDetail_generation *smithy.Schema
-
-var UpdateIamIdentityCenterConfigOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "UpdateIamIdentityCenterConfigOptions",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateIamIdentityCenterConfigOptions_userAttribute *smithy.Schema
-
-var UpdateIamIdentityCenterConfigOptions_groupAttribute *smithy.Schema
-
-var UpdateVpcEndpointDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "UpdateVpcEndpointDetail",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateVpcEndpointDetail_id *smithy.Schema
-
-var UpdateVpcEndpointDetail_name *smithy.Schema
-
-var UpdateVpcEndpointDetail_status *smithy.Schema
-
-var UpdateVpcEndpointDetail_subnetIds *smithy.Schema
-
-var UpdateVpcEndpointDetail_securityGroupIds *smithy.Schema
-
-var UpdateVpcEndpointDetail_lastModifiedDate *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var VectorOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "VectorOptions",
-}, smithy.ShapeTypeStructure, 1)
-var VectorOptions_ServerlessVectorAcceleration *smithy.Schema
-
-var VpcEndpointDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "VpcEndpointDetail",
-}, smithy.ShapeTypeStructure, 9)
-var VpcEndpointDetail_id *smithy.Schema
-
-var VpcEndpointDetail_name *smithy.Schema
-
-var VpcEndpointDetail_vpcId *smithy.Schema
-
-var VpcEndpointDetail_subnetIds *smithy.Schema
-
-var VpcEndpointDetail_securityGroupIds *smithy.Schema
-
-var VpcEndpointDetail_status *smithy.Schema
-
-var VpcEndpointDetail_createdDate *smithy.Schema
-
-var VpcEndpointDetail_failureCode *smithy.Schema
-
-var VpcEndpointDetail_failureMessage *smithy.Schema
-
-var _VpcEndpointDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "VpcEndpointDetails",
-}, smithy.ShapeTypeList, 1)
-var _VpcEndpointDetails_member *smithy.Schema
-
-var VpcEndpointErrorDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "VpcEndpointErrorDetail",
-}, smithy.ShapeTypeStructure, 3)
-var VpcEndpointErrorDetail_id *smithy.Schema
-
-var VpcEndpointErrorDetail_errorMessage *smithy.Schema
-
-var VpcEndpointErrorDetail_errorCode *smithy.Schema
-
-var _VpcEndpointErrorDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "VpcEndpointErrorDetails",
-}, smithy.ShapeTypeList, 1)
-var _VpcEndpointErrorDetails_member *smithy.Schema
-
-var VpcEndpointFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "VpcEndpointFilters",
-}, smithy.ShapeTypeStructure, 1)
-var VpcEndpointFilters_status *smithy.Schema
-
-var _VpcEndpointId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "VpcEndpointId",
-}, smithy.ShapeTypeString, 0)
-
-var _VpcEndpointIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "VpcEndpointIds",
-}, smithy.ShapeTypeList, 1)
-var _VpcEndpointIds_member *smithy.Schema
-
-var _VpcEndpointName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "VpcEndpointName",
-}, smithy.ShapeTypeString, 0)
-
-var _VpcEndpointStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "VpcEndpointStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _VpcEndpointSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "VpcEndpointSummaries",
-}, smithy.ShapeTypeList, 1)
-var _VpcEndpointSummaries_member *smithy.Schema
-
-var VpcEndpointSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "VpcEndpointSummary",
-}, smithy.ShapeTypeStructure, 3)
-var VpcEndpointSummary_id *smithy.Schema
-
-var VpcEndpointSummary_name *smithy.Schema
-
-var VpcEndpointSummary_status *smithy.Schema
-
-var _VpcId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "VpcId",
-}, smithy.ShapeTypeString, 0)
-
-var BatchGetCollectionGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "BatchGetCollectionGroupRequest",
-}, smithy.ShapeTypeStructure, 2)
-var BatchGetCollectionGroupRequest_ids *smithy.Schema
-
-var BatchGetCollectionGroupRequest_names *smithy.Schema
-
-var BatchGetCollectionGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "BatchGetCollectionGroupResponse",
-}, smithy.ShapeTypeStructure, 2)
-var BatchGetCollectionGroupResponse_collectionGroupDetails *smithy.Schema
-
-var BatchGetCollectionGroupResponse_collectionGroupErrorDetails *smithy.Schema
-
-var BatchGetCollectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "BatchGetCollectionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var BatchGetCollectionRequest_ids *smithy.Schema
-
-var BatchGetCollectionRequest_names *smithy.Schema
-
-var BatchGetCollectionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "BatchGetCollectionResponse",
-}, smithy.ShapeTypeStructure, 2)
-var BatchGetCollectionResponse_collectionDetails *smithy.Schema
-
-var BatchGetCollectionResponse_collectionErrorDetails *smithy.Schema
-
-var BatchGetEffectiveLifecyclePolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "BatchGetEffectiveLifecyclePolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var BatchGetEffectiveLifecyclePolicyRequest_resourceIdentifiers *smithy.Schema
-
-var BatchGetEffectiveLifecyclePolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "BatchGetEffectiveLifecyclePolicyResponse",
-}, smithy.ShapeTypeStructure, 2)
-var BatchGetEffectiveLifecyclePolicyResponse_effectiveLifecyclePolicyDetails *smithy.Schema
-
-var BatchGetEffectiveLifecyclePolicyResponse_effectiveLifecyclePolicyErrorDetails *smithy.Schema
-
-var BatchGetLifecyclePolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "BatchGetLifecyclePolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var BatchGetLifecyclePolicyRequest_identifiers *smithy.Schema
-
-var BatchGetLifecyclePolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "BatchGetLifecyclePolicyResponse",
-}, smithy.ShapeTypeStructure, 2)
-var BatchGetLifecyclePolicyResponse_lifecyclePolicyDetails *smithy.Schema
-
-var BatchGetLifecyclePolicyResponse_lifecyclePolicyErrorDetails *smithy.Schema
-
-var BatchGetVpcEndpointRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "BatchGetVpcEndpointRequest",
-}, smithy.ShapeTypeStructure, 1)
-var BatchGetVpcEndpointRequest_ids *smithy.Schema
-
-var BatchGetVpcEndpointResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "BatchGetVpcEndpointResponse",
-}, smithy.ShapeTypeStructure, 2)
-var BatchGetVpcEndpointResponse_vpcEndpointDetails *smithy.Schema
-
-var BatchGetVpcEndpointResponse_vpcEndpointErrorDetails *smithy.Schema
-
-var CancelIngestionJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CancelIngestionJobRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CancelIngestionJobRequest_collectionId *smithy.Schema
-
-var CancelIngestionJobRequest_ingestionJobId *smithy.Schema
-
-var CancelIngestionJobRequest_clientToken *smithy.Schema
-
-var CancelIngestionJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CancelIngestionJobResponse",
-}, smithy.ShapeTypeStructure, 4)
-var CancelIngestionJobResponse_ingestionJobId *smithy.Schema
-
-var CancelIngestionJobResponse_collectionId *smithy.Schema
-
-var CancelIngestionJobResponse_ingestionJobName *smithy.Schema
-
-var CancelIngestionJobResponse_status *smithy.Schema
-
-var CreateAccessPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CreateAccessPolicyRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateAccessPolicyRequest_type *smithy.Schema
-
-var CreateAccessPolicyRequest_name *smithy.Schema
-
-var CreateAccessPolicyRequest_description *smithy.Schema
-
-var CreateAccessPolicyRequest_policy *smithy.Schema
-
-var CreateAccessPolicyRequest_clientToken *smithy.Schema
-
-var CreateAccessPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CreateAccessPolicyResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateAccessPolicyResponse_accessPolicyDetail *smithy.Schema
-
-var CreateCollectionGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CreateCollectionGroupRequest",
-}, smithy.ShapeTypeStructure, 7)
-var CreateCollectionGroupRequest_name *smithy.Schema
-
-var CreateCollectionGroupRequest_standbyReplicas *smithy.Schema
-
-var CreateCollectionGroupRequest_description *smithy.Schema
-
-var CreateCollectionGroupRequest_tags *smithy.Schema
-
-var CreateCollectionGroupRequest_capacityLimits *smithy.Schema
-
-var CreateCollectionGroupRequest_generation *smithy.Schema
-
-var CreateCollectionGroupRequest_clientToken *smithy.Schema
-
-var CreateCollectionGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CreateCollectionGroupResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateCollectionGroupResponse_createCollectionGroupDetail *smithy.Schema
-
-var CreateCollectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CreateCollectionRequest",
-}, smithy.ShapeTypeStructure, 10)
-var CreateCollectionRequest_name *smithy.Schema
-
-var CreateCollectionRequest_type *smithy.Schema
-
-var CreateCollectionRequest_description *smithy.Schema
-
-var CreateCollectionRequest_tags *smithy.Schema
-
-var CreateCollectionRequest_standbyReplicas *smithy.Schema
-
-var CreateCollectionRequest_vectorOptions *smithy.Schema
-
-var CreateCollectionRequest_collectionGroupName *smithy.Schema
-
-var CreateCollectionRequest_encryptionConfig *smithy.Schema
-
-var CreateCollectionRequest_deletionProtection *smithy.Schema
-
-var CreateCollectionRequest_clientToken *smithy.Schema
-
-var CreateCollectionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CreateCollectionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateCollectionResponse_createCollectionDetail *smithy.Schema
-
-var CreateIndexRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CreateIndexRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateIndexRequest_id *smithy.Schema
-
-var CreateIndexRequest_indexName *smithy.Schema
-
-var CreateIndexRequest_indexSchema *smithy.Schema
-
-var CreateIndexResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CreateIndexResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var CreateIngestionJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CreateIngestionJobRequest",
-}, smithy.ShapeTypeStructure, 7)
-var CreateIngestionJobRequest_collectionId *smithy.Schema
-
-var CreateIngestionJobRequest_ingestionJobName *smithy.Schema
-
-var CreateIngestionJobRequest_indexName *smithy.Schema
-
-var CreateIngestionJobRequest_failureIndexName *smithy.Schema
-
-var CreateIngestionJobRequest_source *smithy.Schema
-
-var CreateIngestionJobRequest_tags *smithy.Schema
-
-var CreateIngestionJobRequest_clientToken *smithy.Schema
-
-var CreateIngestionJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CreateIngestionJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateIngestionJobResponse_ingestionJobDetail *smithy.Schema
-
-var CreateIngestionStreamRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CreateIngestionStreamRequest",
-}, smithy.ShapeTypeStructure, 8)
-var CreateIngestionStreamRequest_collectionId *smithy.Schema
-
-var CreateIngestionStreamRequest_ingestionStreamName *smithy.Schema
-
-var CreateIngestionStreamRequest_indexName *smithy.Schema
-
-var CreateIngestionStreamRequest_failureIndexName *smithy.Schema
-
-var CreateIngestionStreamRequest_source *smithy.Schema
-
-var CreateIngestionStreamRequest_roleArn *smithy.Schema
-
-var CreateIngestionStreamRequest_tags *smithy.Schema
-
-var CreateIngestionStreamRequest_clientToken *smithy.Schema
-
-var CreateIngestionStreamResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CreateIngestionStreamResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateIngestionStreamResponse_ingestionStreamDetail *smithy.Schema
-
-var CreateLifecyclePolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CreateLifecyclePolicyRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateLifecyclePolicyRequest_type *smithy.Schema
-
-var CreateLifecyclePolicyRequest_name *smithy.Schema
-
-var CreateLifecyclePolicyRequest_description *smithy.Schema
-
-var CreateLifecyclePolicyRequest_policy *smithy.Schema
-
-var CreateLifecyclePolicyRequest_clientToken *smithy.Schema
-
-var CreateLifecyclePolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CreateLifecyclePolicyResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateLifecyclePolicyResponse_lifecyclePolicyDetail *smithy.Schema
-
-var CreateSecurityConfigRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CreateSecurityConfigRequest",
-}, smithy.ShapeTypeStructure, 7)
-var CreateSecurityConfigRequest_type *smithy.Schema
-
-var CreateSecurityConfigRequest_name *smithy.Schema
-
-var CreateSecurityConfigRequest_description *smithy.Schema
-
-var CreateSecurityConfigRequest_samlOptions *smithy.Schema
-
-var CreateSecurityConfigRequest_iamIdentityCenterOptions *smithy.Schema
-
-var CreateSecurityConfigRequest_iamFederationOptions *smithy.Schema
-
-var CreateSecurityConfigRequest_clientToken *smithy.Schema
-
-var CreateSecurityConfigResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CreateSecurityConfigResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateSecurityConfigResponse_securityConfigDetail *smithy.Schema
-
-var CreateSecurityPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CreateSecurityPolicyRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateSecurityPolicyRequest_type *smithy.Schema
-
-var CreateSecurityPolicyRequest_name *smithy.Schema
-
-var CreateSecurityPolicyRequest_description *smithy.Schema
-
-var CreateSecurityPolicyRequest_policy *smithy.Schema
-
-var CreateSecurityPolicyRequest_clientToken *smithy.Schema
-
-var CreateSecurityPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CreateSecurityPolicyResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateSecurityPolicyResponse_securityPolicyDetail *smithy.Schema
-
-var CreateVpcEndpointRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CreateVpcEndpointRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateVpcEndpointRequest_name *smithy.Schema
-
-var CreateVpcEndpointRequest_vpcId *smithy.Schema
-
-var CreateVpcEndpointRequest_subnetIds *smithy.Schema
-
-var CreateVpcEndpointRequest_securityGroupIds *smithy.Schema
-
-var CreateVpcEndpointRequest_clientToken *smithy.Schema
-
-var CreateVpcEndpointResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "CreateVpcEndpointResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateVpcEndpointResponse_createVpcEndpointDetail *smithy.Schema
-
-var DeleteAccessPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "DeleteAccessPolicyRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteAccessPolicyRequest_type *smithy.Schema
-
-var DeleteAccessPolicyRequest_name *smithy.Schema
-
-var DeleteAccessPolicyRequest_clientToken *smithy.Schema
-
-var DeleteAccessPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "DeleteAccessPolicyResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteCollectionGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "DeleteCollectionGroupRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteCollectionGroupRequest_id *smithy.Schema
-
-var DeleteCollectionGroupRequest_clientToken *smithy.Schema
-
-var DeleteCollectionGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "DeleteCollectionGroupResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteCollectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "DeleteCollectionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteCollectionRequest_id *smithy.Schema
-
-var DeleteCollectionRequest_clientToken *smithy.Schema
-
-var DeleteCollectionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "DeleteCollectionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteCollectionResponse_deleteCollectionDetail *smithy.Schema
-
-var DeleteIndexRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "DeleteIndexRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteIndexRequest_id *smithy.Schema
-
-var DeleteIndexRequest_indexName *smithy.Schema
-
-var DeleteIndexResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "DeleteIndexResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteIngestionStreamRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "DeleteIngestionStreamRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteIngestionStreamRequest_collectionId *smithy.Schema
-
-var DeleteIngestionStreamRequest_ingestionStreamId *smithy.Schema
-
-var DeleteIngestionStreamRequest_clientToken *smithy.Schema
-
-var DeleteIngestionStreamResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "DeleteIngestionStreamResponse",
-}, smithy.ShapeTypeStructure, 4)
-var DeleteIngestionStreamResponse_ingestionStreamId *smithy.Schema
-
-var DeleteIngestionStreamResponse_collectionId *smithy.Schema
-
-var DeleteIngestionStreamResponse_ingestionStreamName *smithy.Schema
-
-var DeleteIngestionStreamResponse_status *smithy.Schema
-
-var DeleteLifecyclePolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "DeleteLifecyclePolicyRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteLifecyclePolicyRequest_type *smithy.Schema
-
-var DeleteLifecyclePolicyRequest_name *smithy.Schema
-
-var DeleteLifecyclePolicyRequest_clientToken *smithy.Schema
-
-var DeleteLifecyclePolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "DeleteLifecyclePolicyResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteSecurityConfigRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "DeleteSecurityConfigRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteSecurityConfigRequest_id *smithy.Schema
-
-var DeleteSecurityConfigRequest_clientToken *smithy.Schema
-
-var DeleteSecurityConfigResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "DeleteSecurityConfigResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteSecurityPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "DeleteSecurityPolicyRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteSecurityPolicyRequest_type *smithy.Schema
-
-var DeleteSecurityPolicyRequest_name *smithy.Schema
-
-var DeleteSecurityPolicyRequest_clientToken *smithy.Schema
-
-var DeleteSecurityPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "DeleteSecurityPolicyResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteVpcEndpointRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "DeleteVpcEndpointRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteVpcEndpointRequest_id *smithy.Schema
-
-var DeleteVpcEndpointRequest_clientToken *smithy.Schema
-
-var DeleteVpcEndpointResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "DeleteVpcEndpointResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteVpcEndpointResponse_deleteVpcEndpointDetail *smithy.Schema
-
-var GetAccessPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "GetAccessPolicyRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetAccessPolicyRequest_type *smithy.Schema
-
-var GetAccessPolicyRequest_name *smithy.Schema
-
-var GetAccessPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "GetAccessPolicyResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetAccessPolicyResponse_accessPolicyDetail *smithy.Schema
-
-var GetAccountSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "GetAccountSettingsRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetAccountSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "GetAccountSettingsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetAccountSettingsResponse_accountSettingsDetail *smithy.Schema
-
-var GetIndexRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "GetIndexRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetIndexRequest_id *smithy.Schema
-
-var GetIndexRequest_indexName *smithy.Schema
-
-var GetIndexResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "GetIndexResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetIndexResponse_indexSchema *smithy.Schema
-
-var GetIngestionJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "GetIngestionJobRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetIngestionJobRequest_collectionId *smithy.Schema
-
-var GetIngestionJobRequest_ingestionJobId *smithy.Schema
-
-var GetIngestionJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "GetIngestionJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetIngestionJobResponse_ingestionJobDetail *smithy.Schema
-
-var GetIngestionStreamRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "GetIngestionStreamRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetIngestionStreamRequest_collectionId *smithy.Schema
-
-var GetIngestionStreamRequest_ingestionStreamId *smithy.Schema
-
-var GetIngestionStreamResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "GetIngestionStreamResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetIngestionStreamResponse_ingestionStreamDetail *smithy.Schema
-
-var GetPoliciesStatsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "GetPoliciesStatsRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetPoliciesStatsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "GetPoliciesStatsResponse",
-}, smithy.ShapeTypeStructure, 5)
-var GetPoliciesStatsResponse_AccessPolicyStats *smithy.Schema
-
-var GetPoliciesStatsResponse_SecurityPolicyStats *smithy.Schema
-
-var GetPoliciesStatsResponse_SecurityConfigStats *smithy.Schema
-
-var GetPoliciesStatsResponse_LifecyclePolicyStats *smithy.Schema
-
-var GetPoliciesStatsResponse_TotalPolicyCount *smithy.Schema
-
-var GetSecurityConfigRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "GetSecurityConfigRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetSecurityConfigRequest_id *smithy.Schema
-
-var GetSecurityConfigResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "GetSecurityConfigResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetSecurityConfigResponse_securityConfigDetail *smithy.Schema
-
-var GetSecurityPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "GetSecurityPolicyRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetSecurityPolicyRequest_type *smithy.Schema
-
-var GetSecurityPolicyRequest_name *smithy.Schema
-
-var GetSecurityPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "GetSecurityPolicyResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetSecurityPolicyResponse_securityPolicyDetail *smithy.Schema
-
-var ListAccessPoliciesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "ListAccessPoliciesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListAccessPoliciesRequest_type *smithy.Schema
-
-var ListAccessPoliciesRequest_resource *smithy.Schema
-
-var ListAccessPoliciesRequest_nextToken *smithy.Schema
-
-var ListAccessPoliciesRequest_maxResults *smithy.Schema
-
-var ListAccessPoliciesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "ListAccessPoliciesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAccessPoliciesResponse_accessPolicySummaries *smithy.Schema
-
-var ListAccessPoliciesResponse_nextToken *smithy.Schema
-
-var ListCollectionGroupsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "ListCollectionGroupsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListCollectionGroupsRequest_nextToken *smithy.Schema
-
-var ListCollectionGroupsRequest_maxResults *smithy.Schema
-
-var ListCollectionGroupsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "ListCollectionGroupsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListCollectionGroupsResponse_collectionGroupSummaries *smithy.Schema
-
-var ListCollectionGroupsResponse_nextToken *smithy.Schema
-
-var ListCollectionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "ListCollectionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListCollectionsRequest_collectionFilters *smithy.Schema
-
-var ListCollectionsRequest_nextToken *smithy.Schema
-
-var ListCollectionsRequest_maxResults *smithy.Schema
-
-var ListCollectionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "ListCollectionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListCollectionsResponse_collectionSummaries *smithy.Schema
-
-var ListCollectionsResponse_nextToken *smithy.Schema
-
-var ListIngestionJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "ListIngestionJobsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListIngestionJobsRequest_collectionId *smithy.Schema
-
-var ListIngestionJobsRequest_nextToken *smithy.Schema
-
-var ListIngestionJobsRequest_maxResults *smithy.Schema
-
-var ListIngestionJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "ListIngestionJobsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListIngestionJobsResponse_ingestionJobSummaries *smithy.Schema
-
-var ListIngestionJobsResponse_nextToken *smithy.Schema
-
-var ListIngestionStreamsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "ListIngestionStreamsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListIngestionStreamsRequest_collectionId *smithy.Schema
-
-var ListIngestionStreamsRequest_nextToken *smithy.Schema
-
-var ListIngestionStreamsRequest_maxResults *smithy.Schema
-
-var ListIngestionStreamsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "ListIngestionStreamsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListIngestionStreamsResponse_ingestionStreamSummaries *smithy.Schema
-
-var ListIngestionStreamsResponse_nextToken *smithy.Schema
-
-var ListLifecyclePoliciesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "ListLifecyclePoliciesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListLifecyclePoliciesRequest_type *smithy.Schema
-
-var ListLifecyclePoliciesRequest_resources *smithy.Schema
-
-var ListLifecyclePoliciesRequest_nextToken *smithy.Schema
-
-var ListLifecyclePoliciesRequest_maxResults *smithy.Schema
-
-var ListLifecyclePoliciesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "ListLifecyclePoliciesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListLifecyclePoliciesResponse_lifecyclePolicySummaries *smithy.Schema
-
-var ListLifecyclePoliciesResponse_nextToken *smithy.Schema
-
-var ListSecurityConfigsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "ListSecurityConfigsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListSecurityConfigsRequest_type *smithy.Schema
-
-var ListSecurityConfigsRequest_nextToken *smithy.Schema
-
-var ListSecurityConfigsRequest_maxResults *smithy.Schema
-
-var ListSecurityConfigsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "ListSecurityConfigsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSecurityConfigsResponse_securityConfigSummaries *smithy.Schema
-
-var ListSecurityConfigsResponse_nextToken *smithy.Schema
-
-var ListSecurityPoliciesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "ListSecurityPoliciesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListSecurityPoliciesRequest_type *smithy.Schema
-
-var ListSecurityPoliciesRequest_resource *smithy.Schema
-
-var ListSecurityPoliciesRequest_nextToken *smithy.Schema
-
-var ListSecurityPoliciesRequest_maxResults *smithy.Schema
-
-var ListSecurityPoliciesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "ListSecurityPoliciesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSecurityPoliciesResponse_securityPolicySummaries *smithy.Schema
-
-var ListSecurityPoliciesResponse_nextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_resourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var ListVpcEndpointsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "ListVpcEndpointsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListVpcEndpointsRequest_vpcEndpointFilters *smithy.Schema
-
-var ListVpcEndpointsRequest_nextToken *smithy.Schema
-
-var ListVpcEndpointsRequest_maxResults *smithy.Schema
-
-var ListVpcEndpointsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "ListVpcEndpointsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListVpcEndpointsResponse_vpcEndpointSummaries *smithy.Schema
-
-var ListVpcEndpointsResponse_nextToken *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateAccessPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "UpdateAccessPolicyRequest",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateAccessPolicyRequest_type *smithy.Schema
-
-var UpdateAccessPolicyRequest_name *smithy.Schema
-
-var UpdateAccessPolicyRequest_policyVersion *smithy.Schema
-
-var UpdateAccessPolicyRequest_description *smithy.Schema
-
-var UpdateAccessPolicyRequest_policy *smithy.Schema
-
-var UpdateAccessPolicyRequest_clientToken *smithy.Schema
-
-var UpdateAccessPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "UpdateAccessPolicyResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateAccessPolicyResponse_accessPolicyDetail *smithy.Schema
-
-var UpdateAccountSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "UpdateAccountSettingsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateAccountSettingsRequest_capacityLimits *smithy.Schema
-
-var UpdateAccountSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "UpdateAccountSettingsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateAccountSettingsResponse_accountSettingsDetail *smithy.Schema
-
-var UpdateCollectionGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "UpdateCollectionGroupRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateCollectionGroupRequest_id *smithy.Schema
-
-var UpdateCollectionGroupRequest_description *smithy.Schema
-
-var UpdateCollectionGroupRequest_capacityLimits *smithy.Schema
-
-var UpdateCollectionGroupRequest_clientToken *smithy.Schema
-
-var UpdateCollectionGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "UpdateCollectionGroupResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateCollectionGroupResponse_updateCollectionGroupDetail *smithy.Schema
-
-var UpdateCollectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "UpdateCollectionRequest",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateCollectionRequest_id *smithy.Schema
-
-var UpdateCollectionRequest_description *smithy.Schema
-
-var UpdateCollectionRequest_vectorOptions *smithy.Schema
-
-var UpdateCollectionRequest_deletionProtection *smithy.Schema
-
-var UpdateCollectionRequest_encryptionConfig *smithy.Schema
-
-var UpdateCollectionRequest_clientToken *smithy.Schema
-
-var UpdateCollectionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "UpdateCollectionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateCollectionResponse_updateCollectionDetail *smithy.Schema
-
-var UpdateIndexRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "UpdateIndexRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateIndexRequest_id *smithy.Schema
-
-var UpdateIndexRequest_indexName *smithy.Schema
-
-var UpdateIndexRequest_indexSchema *smithy.Schema
-
-var UpdateIndexResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "UpdateIndexResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateLifecyclePolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "UpdateLifecyclePolicyRequest",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateLifecyclePolicyRequest_type *smithy.Schema
-
-var UpdateLifecyclePolicyRequest_name *smithy.Schema
-
-var UpdateLifecyclePolicyRequest_policyVersion *smithy.Schema
-
-var UpdateLifecyclePolicyRequest_description *smithy.Schema
-
-var UpdateLifecyclePolicyRequest_policy *smithy.Schema
-
-var UpdateLifecyclePolicyRequest_clientToken *smithy.Schema
-
-var UpdateLifecyclePolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "UpdateLifecyclePolicyResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateLifecyclePolicyResponse_lifecyclePolicyDetail *smithy.Schema
-
-var UpdateSecurityConfigRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "UpdateSecurityConfigRequest",
-}, smithy.ShapeTypeStructure, 7)
-var UpdateSecurityConfigRequest_id *smithy.Schema
-
-var UpdateSecurityConfigRequest_configVersion *smithy.Schema
-
-var UpdateSecurityConfigRequest_description *smithy.Schema
-
-var UpdateSecurityConfigRequest_samlOptions *smithy.Schema
-
-var UpdateSecurityConfigRequest_iamIdentityCenterOptionsUpdates *smithy.Schema
-
-var UpdateSecurityConfigRequest_iamFederationOptions *smithy.Schema
-
-var UpdateSecurityConfigRequest_clientToken *smithy.Schema
-
-var UpdateSecurityConfigResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "UpdateSecurityConfigResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateSecurityConfigResponse_securityConfigDetail *smithy.Schema
-
-var UpdateSecurityPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "UpdateSecurityPolicyRequest",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateSecurityPolicyRequest_type *smithy.Schema
-
-var UpdateSecurityPolicyRequest_name *smithy.Schema
-
-var UpdateSecurityPolicyRequest_policyVersion *smithy.Schema
-
-var UpdateSecurityPolicyRequest_description *smithy.Schema
-
-var UpdateSecurityPolicyRequest_policy *smithy.Schema
-
-var UpdateSecurityPolicyRequest_clientToken *smithy.Schema
-
-var UpdateSecurityPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "UpdateSecurityPolicyResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateSecurityPolicyResponse_securityPolicyDetail *smithy.Schema
-
-var UpdateVpcEndpointRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "UpdateVpcEndpointRequest",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateVpcEndpointRequest_id *smithy.Schema
-
-var UpdateVpcEndpointRequest_addSubnetIds *smithy.Schema
-
-var UpdateVpcEndpointRequest_removeSubnetIds *smithy.Schema
-
-var UpdateVpcEndpointRequest_addSecurityGroupIds *smithy.Schema
-
-var UpdateVpcEndpointRequest_removeSecurityGroupIds *smithy.Schema
-
-var UpdateVpcEndpointRequest_clientToken *smithy.Schema
-
-var UpdateVpcEndpointResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.opensearchserverless",
-	Name:      "UpdateVpcEndpointResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateVpcEndpointResponse_UpdateVpcEndpointDetail *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessPolicyDetail_type = AccessPolicyDetail.AddMember("type", _AccessPolicyType)
-
-	AccessPolicyDetail_name = AccessPolicyDetail.AddMember("name", _PolicyName)
-
-	AccessPolicyDetail_policyVersion = AccessPolicyDetail.AddMember("policyVersion", _PolicyVersion)
-
-	AccessPolicyDetail_description = AccessPolicyDetail.AddMember("description", _PolicyDescription)
-
-	AccessPolicyDetail_policy = AccessPolicyDetail.AddMember("policy", smithyprelude.Document)
-
-	AccessPolicyDetail_createdDate = AccessPolicyDetail.AddMember("createdDate", smithyprelude.Long)
-
-	AccessPolicyDetail_lastModifiedDate = AccessPolicyDetail.AddMember("lastModifiedDate", smithyprelude.Long)
-
-	AccessPolicyStats_DataPolicyCount = AccessPolicyStats.AddMember("DataPolicyCount", smithyprelude.Long)
-
-	AccessPolicySummary_type = AccessPolicySummary.AddMember("type", _AccessPolicyType)
-
-	AccessPolicySummary_name = AccessPolicySummary.AddMember("name", _PolicyName)
-
-	AccessPolicySummary_policyVersion = AccessPolicySummary.AddMember("policyVersion", _PolicyVersion)
-
-	AccessPolicySummary_description = AccessPolicySummary.AddMember("description", _PolicyDescription)
-
-	AccessPolicySummary_createdDate = AccessPolicySummary.AddMember("createdDate", smithyprelude.Long)
-
-	AccessPolicySummary_lastModifiedDate = AccessPolicySummary.AddMember("lastModifiedDate", smithyprelude.Long)
-
-	_AccessPolicySummaries_member = _AccessPolicySummaries.AddMember("member", AccessPolicySummary)
-
-	CapacityLimits_maxIndexingCapacityInOCU = CapacityLimits.AddMember("maxIndexingCapacityInOCU", _IndexingCapacityValue)
-
-	CapacityLimits_maxSearchCapacityInOCU = CapacityLimits.AddMember("maxSearchCapacityInOCU", _SearchCapacityValue)
-
-	AccountSettingsDetail_capacityLimits = AccountSettingsDetail.AddMember("capacityLimits", CapacityLimits)
-
-	CapacityDetails_capacityInOcu = CapacityDetails.AddMember("capacityInOcu", smithyprelude.Float)
-
-	CapacityDetails_autoscalingStatus = CapacityDetails.AddMember("autoscalingStatus", _AutoscalingStatus)
-
-	VectorOptions_ServerlessVectorAcceleration = VectorOptions.AddMember("ServerlessVectorAcceleration", _ServerlessVectorAccelerationStatus)
-
-	FipsEndpoints_collectionEndpoint = FipsEndpoints.AddMember("collectionEndpoint", smithyprelude.String)
-
-	FipsEndpoints_dashboardEndpoint = FipsEndpoints.AddMember("dashboardEndpoint", smithyprelude.String)
-
-	CollectionDetail_id = CollectionDetail.AddMember("id", _CollectionId)
-
-	CollectionDetail_name = CollectionDetail.AddMember("name", _CollectionName)
-
-	CollectionDetail_status = CollectionDetail.AddMember("status", _CollectionStatus)
-
-	CollectionDetail_type = CollectionDetail.AddMember("type", _CollectionType)
-
-	CollectionDetail_description = CollectionDetail.AddMember("description", smithyprelude.String)
-
-	CollectionDetail_arn = CollectionDetail.AddMember("arn", smithyprelude.String)
-
-	CollectionDetail_kmsKeyArn = CollectionDetail.AddMember("kmsKeyArn", smithyprelude.String)
-
-	CollectionDetail_standbyReplicas = CollectionDetail.AddMember("standbyReplicas", _StandbyReplicas)
-
-	CollectionDetail_deletionProtection = CollectionDetail.AddMember("deletionProtection", _DeletionProtection)
-
-	CollectionDetail_vectorOptions = CollectionDetail.AddMember("vectorOptions", VectorOptions)
-
-	CollectionDetail_createdDate = CollectionDetail.AddMember("createdDate", smithyprelude.Long)
-
-	CollectionDetail_lastModifiedDate = CollectionDetail.AddMember("lastModifiedDate", smithyprelude.Long)
-
-	CollectionDetail_collectionEndpoint = CollectionDetail.AddMember("collectionEndpoint", smithyprelude.String)
-
-	CollectionDetail_dashboardEndpoint = CollectionDetail.AddMember("dashboardEndpoint", smithyprelude.String)
-
-	CollectionDetail_fipsEndpoints = CollectionDetail.AddMember("fipsEndpoints", FipsEndpoints)
-
-	CollectionDetail_failureCode = CollectionDetail.AddMember("failureCode", smithyprelude.String)
-
-	CollectionDetail_failureMessage = CollectionDetail.AddMember("failureMessage", smithyprelude.String)
-
-	CollectionDetail_collectionGroupName = CollectionDetail.AddMember("collectionGroupName", _CollectionGroupName)
-
-	_CollectionDetails_member = _CollectionDetails.AddMember("member", CollectionDetail)
-
-	CollectionErrorDetail_id = CollectionErrorDetail.AddMember("id", _CollectionId)
-
-	CollectionErrorDetail_name = CollectionErrorDetail.AddMember("name", _CollectionName)
-
-	CollectionErrorDetail_errorMessage = CollectionErrorDetail.AddMember("errorMessage", smithyprelude.String)
-
-	CollectionErrorDetail_errorCode = CollectionErrorDetail.AddMember("errorCode", smithyprelude.String)
-
-	_CollectionErrorDetails_member = _CollectionErrorDetails.AddMember("member", CollectionErrorDetail)
-
-	CollectionFilters_name = CollectionFilters.AddMember("name", _CollectionName)
-
-	CollectionFilters_status = CollectionFilters.AddMember("status", _CollectionStatus)
-
-	CollectionFilters_collectionGroupName = CollectionFilters.AddMember("collectionGroupName", _CollectionGroupName)
-
-	CollectionGroupCapacityLimits_maxIndexingCapacityInOCU = CollectionGroupCapacityLimits.AddMember("maxIndexingCapacityInOCU", _CollectionGroupMaxIndexingCapacityValue)
-
-	CollectionGroupCapacityLimits_maxSearchCapacityInOCU = CollectionGroupCapacityLimits.AddMember("maxSearchCapacityInOCU", _CollectionGroupMaxSearchCapacityValue)
-
-	CollectionGroupCapacityLimits_minIndexingCapacityInOCU = CollectionGroupCapacityLimits.AddMember("minIndexingCapacityInOCU", _CollectionGroupMinIndexingCapacityValue)
-
-	CollectionGroupCapacityLimits_minSearchCapacityInOCU = CollectionGroupCapacityLimits.AddMember("minSearchCapacityInOCU", _CollectionGroupMinSearchCapacityValue)
-
-	Tag_key = Tag.AddMember("key", _TagKey)
-
-	Tag_value = Tag.AddMember("value", _TagValue)
-
-	_Tags_member = _Tags.AddMember("member", Tag)
-
-	CurrentCapacity_search = CurrentCapacity.AddMember("search", CapacityDetails)
-
-	CurrentCapacity_indexing = CurrentCapacity.AddMember("indexing", CapacityDetails)
-
-	CollectionGroupDetail_id = CollectionGroupDetail.AddMember("id", _CollectionGroupId)
-
-	CollectionGroupDetail_arn = CollectionGroupDetail.AddMember("arn", smithyprelude.String)
-
-	CollectionGroupDetail_name = CollectionGroupDetail.AddMember("name", _CollectionGroupName)
-
-	CollectionGroupDetail_standbyReplicas = CollectionGroupDetail.AddMember("standbyReplicas", _StandbyReplicas)
-
-	CollectionGroupDetail_description = CollectionGroupDetail.AddMember("description", smithyprelude.String)
-
-	CollectionGroupDetail_tags = CollectionGroupDetail.AddMember("tags", _Tags)
-
-	CollectionGroupDetail_createdDate = CollectionGroupDetail.AddMember("createdDate", smithyprelude.Long)
-
-	CollectionGroupDetail_capacityLimits = CollectionGroupDetail.AddMember("capacityLimits", CollectionGroupCapacityLimits)
-
-	CollectionGroupDetail_currentCapacity = CollectionGroupDetail.AddMember("currentCapacity", CurrentCapacity)
-
-	CollectionGroupDetail_numberOfCollections = CollectionGroupDetail.AddMember("numberOfCollections", smithyprelude.Integer)
-
-	CollectionGroupDetail_generation = CollectionGroupDetail.AddMember("generation", _ServerlessGeneration)
-
-	_CollectionGroupDetails_member = _CollectionGroupDetails.AddMember("member", CollectionGroupDetail)
-
-	CollectionGroupErrorDetail_id = CollectionGroupErrorDetail.AddMember("id", _CollectionGroupId)
-
-	CollectionGroupErrorDetail_name = CollectionGroupErrorDetail.AddMember("name", _CollectionGroupName)
-
-	CollectionGroupErrorDetail_errorMessage = CollectionGroupErrorDetail.AddMember("errorMessage", smithyprelude.String)
-
-	CollectionGroupErrorDetail_errorCode = CollectionGroupErrorDetail.AddMember("errorCode", smithyprelude.String)
-
-	_CollectionGroupErrorDetails_member = _CollectionGroupErrorDetails.AddMember("member", CollectionGroupErrorDetail)
-
-	_CollectionGroupIds_member = _CollectionGroupIds.AddMember("member", _CollectionGroupId)
-
-	_CollectionGroupNames_member = _CollectionGroupNames.AddMember("member", _CollectionGroupName)
-
-	CollectionGroupSummary_id = CollectionGroupSummary.AddMember("id", _CollectionGroupId)
-
-	CollectionGroupSummary_arn = CollectionGroupSummary.AddMember("arn", smithyprelude.String)
-
-	CollectionGroupSummary_name = CollectionGroupSummary.AddMember("name", _CollectionGroupName)
-
-	CollectionGroupSummary_numberOfCollections = CollectionGroupSummary.AddMember("numberOfCollections", smithyprelude.Integer)
-
-	CollectionGroupSummary_createdDate = CollectionGroupSummary.AddMember("createdDate", smithyprelude.Long)
-
-	CollectionGroupSummary_capacityLimits = CollectionGroupSummary.AddMember("capacityLimits", CollectionGroupCapacityLimits)
-
-	CollectionGroupSummary_generation = CollectionGroupSummary.AddMember("generation", _ServerlessGeneration)
-
-	_CollectionGroupSummaries_member = _CollectionGroupSummaries.AddMember("member", CollectionGroupSummary)
-
-	_CollectionIds_member = _CollectionIds.AddMember("member", _CollectionId)
-
-	_CollectionNames_member = _CollectionNames.AddMember("member", _CollectionName)
-
-	CollectionSummary_id = CollectionSummary.AddMember("id", _CollectionId)
-
-	CollectionSummary_name = CollectionSummary.AddMember("name", _CollectionName)
-
-	CollectionSummary_status = CollectionSummary.AddMember("status", _CollectionStatus)
-
-	CollectionSummary_arn = CollectionSummary.AddMember("arn", smithyprelude.String)
-
-	CollectionSummary_kmsKeyArn = CollectionSummary.AddMember("kmsKeyArn", smithyprelude.String)
-
-	CollectionSummary_collectionGroupName = CollectionSummary.AddMember("collectionGroupName", _CollectionGroupName)
-
-	_CollectionSummaries_member = _CollectionSummaries.AddMember("member", CollectionSummary)
-
-	ConflictException_message = ConflictException.AddMember("message", smithyprelude.String)
-
-	CreateCollectionDetail_id = CreateCollectionDetail.AddMember("id", _CollectionId)
-
-	CreateCollectionDetail_name = CreateCollectionDetail.AddMember("name", _CollectionName)
-
-	CreateCollectionDetail_status = CreateCollectionDetail.AddMember("status", _CollectionStatus)
-
-	CreateCollectionDetail_type = CreateCollectionDetail.AddMember("type", _CollectionType)
-
-	CreateCollectionDetail_description = CreateCollectionDetail.AddMember("description", smithyprelude.String)
-
-	CreateCollectionDetail_arn = CreateCollectionDetail.AddMember("arn", smithyprelude.String)
-
-	CreateCollectionDetail_kmsKeyArn = CreateCollectionDetail.AddMember("kmsKeyArn", smithyprelude.String)
-
-	CreateCollectionDetail_standbyReplicas = CreateCollectionDetail.AddMember("standbyReplicas", _StandbyReplicas)
-
-	CreateCollectionDetail_deletionProtection = CreateCollectionDetail.AddMember("deletionProtection", _DeletionProtection)
-
-	CreateCollectionDetail_vectorOptions = CreateCollectionDetail.AddMember("vectorOptions", VectorOptions)
-
-	CreateCollectionDetail_createdDate = CreateCollectionDetail.AddMember("createdDate", smithyprelude.Long)
-
-	CreateCollectionDetail_lastModifiedDate = CreateCollectionDetail.AddMember("lastModifiedDate", smithyprelude.Long)
-
-	CreateCollectionDetail_collectionGroupName = CreateCollectionDetail.AddMember("collectionGroupName", _CollectionGroupName)
-
-	CreateCollectionGroupDetail_id = CreateCollectionGroupDetail.AddMember("id", _CollectionGroupId)
-
-	CreateCollectionGroupDetail_arn = CreateCollectionGroupDetail.AddMember("arn", smithyprelude.String)
-
-	CreateCollectionGroupDetail_name = CreateCollectionGroupDetail.AddMember("name", _CollectionGroupName)
-
-	CreateCollectionGroupDetail_standbyReplicas = CreateCollectionGroupDetail.AddMember("standbyReplicas", _StandbyReplicas)
-
-	CreateCollectionGroupDetail_description = CreateCollectionGroupDetail.AddMember("description", smithyprelude.String)
-
-	CreateCollectionGroupDetail_tags = CreateCollectionGroupDetail.AddMember("tags", _Tags)
-
-	CreateCollectionGroupDetail_createdDate = CreateCollectionGroupDetail.AddMember("createdDate", smithyprelude.Long)
-
-	CreateCollectionGroupDetail_capacityLimits = CreateCollectionGroupDetail.AddMember("capacityLimits", CollectionGroupCapacityLimits)
-
-	CreateCollectionGroupDetail_generation = CreateCollectionGroupDetail.AddMember("generation", _ServerlessGeneration)
-
-	CreateIamIdentityCenterConfigOptions_instanceArn = CreateIamIdentityCenterConfigOptions.AddMember("instanceArn", _IamIdentityCenterInstanceArn)
-
-	CreateIamIdentityCenterConfigOptions_userAttribute = CreateIamIdentityCenterConfigOptions.AddMember("userAttribute", _IamIdentityCenterUserAttribute)
-
-	CreateIamIdentityCenterConfigOptions_groupAttribute = CreateIamIdentityCenterConfigOptions.AddMember("groupAttribute", _IamIdentityCenterGroupAttribute)
-
-	CreateVpcEndpointDetail_id = CreateVpcEndpointDetail.AddMember("id", _VpcEndpointId)
-
-	CreateVpcEndpointDetail_name = CreateVpcEndpointDetail.AddMember("name", _VpcEndpointName)
-
-	CreateVpcEndpointDetail_status = CreateVpcEndpointDetail.AddMember("status", _VpcEndpointStatus)
-
-	DeleteCollectionDetail_id = DeleteCollectionDetail.AddMember("id", _CollectionId)
-
-	DeleteCollectionDetail_name = DeleteCollectionDetail.AddMember("name", _CollectionName)
-
-	DeleteCollectionDetail_status = DeleteCollectionDetail.AddMember("status", _CollectionStatus)
-
-	DeleteCollectionDetail_deletionProtection = DeleteCollectionDetail.AddMember("deletionProtection", _DeletionProtection)
-
-	DeleteVpcEndpointDetail_id = DeleteVpcEndpointDetail.AddMember("id", _VpcEndpointId)
-
-	DeleteVpcEndpointDetail_name = DeleteVpcEndpointDetail.AddMember("name", _VpcEndpointName)
-
-	DeleteVpcEndpointDetail_status = DeleteVpcEndpointDetail.AddMember("status", _VpcEndpointStatus)
-
-	EffectiveLifecyclePolicyDetail_type = EffectiveLifecyclePolicyDetail.AddMember("type", _LifecyclePolicyType)
-
-	EffectiveLifecyclePolicyDetail_resource = EffectiveLifecyclePolicyDetail.AddMember("resource", _Resource)
-
-	EffectiveLifecyclePolicyDetail_policyName = EffectiveLifecyclePolicyDetail.AddMember("policyName", _PolicyName)
-
-	EffectiveLifecyclePolicyDetail_resourceType = EffectiveLifecyclePolicyDetail.AddMember("resourceType", _ResourceType)
-
-	EffectiveLifecyclePolicyDetail_retentionPeriod = EffectiveLifecyclePolicyDetail.AddMember("retentionPeriod", smithyprelude.String)
-
-	EffectiveLifecyclePolicyDetail_noMinRetentionPeriod = EffectiveLifecyclePolicyDetail.AddMember("noMinRetentionPeriod", smithyprelude.Boolean)
-
-	_EffectiveLifecyclePolicyDetails_member = _EffectiveLifecyclePolicyDetails.AddMember("member", EffectiveLifecyclePolicyDetail)
-
-	EffectiveLifecyclePolicyErrorDetail_type = EffectiveLifecyclePolicyErrorDetail.AddMember("type", _LifecyclePolicyType)
-
-	EffectiveLifecyclePolicyErrorDetail_resource = EffectiveLifecyclePolicyErrorDetail.AddMember("resource", _Resource)
-
-	EffectiveLifecyclePolicyErrorDetail_errorMessage = EffectiveLifecyclePolicyErrorDetail.AddMember("errorMessage", smithyprelude.String)
-
-	EffectiveLifecyclePolicyErrorDetail_errorCode = EffectiveLifecyclePolicyErrorDetail.AddMember("errorCode", smithyprelude.String)
-
-	_EffectiveLifecyclePolicyErrorDetails_member = _EffectiveLifecyclePolicyErrorDetails.AddMember("member", EffectiveLifecyclePolicyErrorDetail)
-
-	EncryptionConfig_aWSOwnedKey = EncryptionConfig.AddMember("aWSOwnedKey", smithyprelude.Boolean)
-
-	EncryptionConfig_kmsKeyArn = EncryptionConfig.AddMember("kmsKeyArn", smithyprelude.String)
-
-	IamFederationConfigOptions_groupAttribute = IamFederationConfigOptions.AddMember("groupAttribute", _iamFederationGroupAttribute)
-
-	IamFederationConfigOptions_userAttribute = IamFederationConfigOptions.AddMember("userAttribute", _iamFederationUserAttribute)
-
-	IamIdentityCenterConfigOptions_instanceArn = IamIdentityCenterConfigOptions.AddMember("instanceArn", _IamIdentityCenterInstanceArn)
-
-	IamIdentityCenterConfigOptions_applicationArn = IamIdentityCenterConfigOptions.AddMember("applicationArn", _IamIdentityCenterApplicationArn)
-
-	IamIdentityCenterConfigOptions_applicationName = IamIdentityCenterConfigOptions.AddMember("applicationName", smithyprelude.String)
-
-	IamIdentityCenterConfigOptions_applicationDescription = IamIdentityCenterConfigOptions.AddMember("applicationDescription", smithyprelude.String)
-
-	IamIdentityCenterConfigOptions_userAttribute = IamIdentityCenterConfigOptions.AddMember("userAttribute", _IamIdentityCenterUserAttribute)
-
-	IamIdentityCenterConfigOptions_groupAttribute = IamIdentityCenterConfigOptions.AddMember("groupAttribute", _IamIdentityCenterGroupAttribute)
-
-	IngestionAlert_code = IngestionAlert.AddMember("code", _IngestionAlertCode)
-
-	IngestionAlert_message = IngestionAlert.AddMember("message", smithyprelude.String)
-
-	_IngestionAlerts_member = _IngestionAlerts.AddMember("member", IngestionAlert)
-
-	IngestionFailureReason_code = IngestionFailureReason.AddMember("code", _IngestionFailureCode)
-
-	IngestionFailureReason_message = IngestionFailureReason.AddMember("message", smithyprelude.String)
-
-	_IngestionFailureReasons_member = _IngestionFailureReasons.AddMember("member", IngestionFailureReason)
-
-	IngestionJobS3Source_bucket = IngestionJobS3Source.AddMember("bucket", _S3BucketNameOrArn)
-
-	IngestionJobS3Source_bucketOwnerAccountId = IngestionJobS3Source.AddMember("bucketOwnerAccountId", _BucketOwnerAccountId)
-
-	IngestionJobS3Source_keyPrefix = IngestionJobS3Source.AddMember("keyPrefix", smithyprelude.String)
-
-	IngestionJobSource_s3 = IngestionJobSource.AddMember("s3", IngestionJobS3Source)
-
-	S3Statistics_objectsDiscovered = S3Statistics.AddMember("objectsDiscovered", smithyprelude.Long)
-
-	S3Statistics_objectsIngested = S3Statistics.AddMember("objectsIngested", smithyprelude.Long)
-
-	S3Statistics_objectsFailed = S3Statistics.AddMember("objectsFailed", smithyprelude.Long)
-
-	IngestionStatistics_s3 = IngestionStatistics.AddMember("s3", S3Statistics)
-
-	IngestionJobDetail_ingestionJobId = IngestionJobDetail.AddMember("ingestionJobId", _IngestionJobId)
-
-	IngestionJobDetail_arn = IngestionJobDetail.AddMember("arn", _IngestionJobResourceArn)
-
-	IngestionJobDetail_collectionId = IngestionJobDetail.AddMember("collectionId", _CollectionId)
-
-	IngestionJobDetail_ingestionJobName = IngestionJobDetail.AddMember("ingestionJobName", _IngestionJobName)
-
-	IngestionJobDetail_indexName = IngestionJobDetail.AddMember("indexName", _IngestionIndexName)
-
-	IngestionJobDetail_failureIndexName = IngestionJobDetail.AddMember("failureIndexName", _IngestionIndexName)
-
-	IngestionJobDetail_source = IngestionJobDetail.AddMember("source", IngestionJobSource)
-
-	IngestionJobDetail_status = IngestionJobDetail.AddMember("status", _IngestionJobStatus)
-
-	IngestionJobDetail_state = IngestionJobDetail.AddMember("state", _IngestionState)
-
-	IngestionJobDetail_statistics = IngestionJobDetail.AddMember("statistics", IngestionStatistics)
-
-	IngestionJobDetail_revision = IngestionJobDetail.AddMember("revision", smithyprelude.Long)
-
-	IngestionJobDetail_createdAt = IngestionJobDetail.AddMember("createdAt", smithyprelude.Timestamp)
-
-	IngestionJobDetail_updatedAt = IngestionJobDetail.AddMember("updatedAt", smithyprelude.Timestamp)
-
-	IngestionJobDetail_failureReasons = IngestionJobDetail.AddMember("failureReasons", _IngestionFailureReasons)
-
-	IngestionJobDetail_activeAlerts = IngestionJobDetail.AddMember("activeAlerts", _IngestionAlerts)
-
-	IngestionJobSummary_ingestionJobId = IngestionJobSummary.AddMember("ingestionJobId", _IngestionJobId)
-
-	IngestionJobSummary_arn = IngestionJobSummary.AddMember("arn", _IngestionJobResourceArn)
-
-	IngestionJobSummary_ingestionJobName = IngestionJobSummary.AddMember("ingestionJobName", _IngestionJobName)
-
-	IngestionJobSummary_indexName = IngestionJobSummary.AddMember("indexName", _IngestionIndexName)
-
-	IngestionJobSummary_status = IngestionJobSummary.AddMember("status", _IngestionJobStatus)
-
-	IngestionJobSummary_createdAt = IngestionJobSummary.AddMember("createdAt", smithyprelude.Timestamp)
-
-	IngestionJobSummary_updatedAt = IngestionJobSummary.AddMember("updatedAt", smithyprelude.Timestamp)
-
-	_IngestionJobSummaries_member = _IngestionJobSummaries.AddMember("member", IngestionJobSummary)
-
-	StreamBucketConfig_bucket = StreamBucketConfig.AddMember("bucket", _S3BucketNameOrArn)
-
-	StreamBucketConfig_bucketOwnerAccountId = StreamBucketConfig.AddMember("bucketOwnerAccountId", _BucketOwnerAccountId)
-
-	StreamBucketConfig_initialScan = StreamBucketConfig.AddMember("initialScan", _InitialScan)
-
-	_StreamBucketConfigs_member = _StreamBucketConfigs.AddMember("member", StreamBucketConfig)
-
-	IngestionStreamS3Source_sqsArn = IngestionStreamS3Source.AddMember("sqsArn", _SqsArn)
-
-	IngestionStreamS3Source_buckets = IngestionStreamS3Source.AddMember("buckets", _StreamBucketConfigs)
-
-	IngestionStreamSource_s3 = IngestionStreamSource.AddMember("s3", IngestionStreamS3Source)
-
-	IngestionStreamDetail_ingestionStreamId = IngestionStreamDetail.AddMember("ingestionStreamId", _IngestionStreamId)
-
-	IngestionStreamDetail_arn = IngestionStreamDetail.AddMember("arn", _IngestionStreamResourceArn)
-
-	IngestionStreamDetail_collectionId = IngestionStreamDetail.AddMember("collectionId", _CollectionId)
-
-	IngestionStreamDetail_ingestionStreamName = IngestionStreamDetail.AddMember("ingestionStreamName", _IngestionStreamName)
-
-	IngestionStreamDetail_indexName = IngestionStreamDetail.AddMember("indexName", _IngestionIndexName)
-
-	IngestionStreamDetail_failureIndexName = IngestionStreamDetail.AddMember("failureIndexName", _IngestionIndexName)
-
-	IngestionStreamDetail_source = IngestionStreamDetail.AddMember("source", IngestionStreamSource)
-
-	IngestionStreamDetail_roleArn = IngestionStreamDetail.AddMember("roleArn", _RoleArn)
-
-	IngestionStreamDetail_status = IngestionStreamDetail.AddMember("status", _IngestionStreamStatus)
-
-	IngestionStreamDetail_state = IngestionStreamDetail.AddMember("state", _IngestionState)
-
-	IngestionStreamDetail_statistics = IngestionStreamDetail.AddMember("statistics", IngestionStatistics)
-
-	IngestionStreamDetail_revision = IngestionStreamDetail.AddMember("revision", smithyprelude.Long)
-
-	IngestionStreamDetail_createdAt = IngestionStreamDetail.AddMember("createdAt", smithyprelude.Timestamp)
-
-	IngestionStreamDetail_updatedAt = IngestionStreamDetail.AddMember("updatedAt", smithyprelude.Timestamp)
-
-	IngestionStreamDetail_failureReasons = IngestionStreamDetail.AddMember("failureReasons", _IngestionFailureReasons)
-
-	IngestionStreamDetail_activeAlerts = IngestionStreamDetail.AddMember("activeAlerts", _IngestionAlerts)
-
-	IngestionStreamSummary_ingestionStreamId = IngestionStreamSummary.AddMember("ingestionStreamId", _IngestionStreamId)
-
-	IngestionStreamSummary_arn = IngestionStreamSummary.AddMember("arn", _IngestionStreamResourceArn)
-
-	IngestionStreamSummary_ingestionStreamName = IngestionStreamSummary.AddMember("ingestionStreamName", _IngestionStreamName)
-
-	IngestionStreamSummary_indexName = IngestionStreamSummary.AddMember("indexName", _IngestionIndexName)
-
-	IngestionStreamSummary_status = IngestionStreamSummary.AddMember("status", _IngestionStreamStatus)
-
-	IngestionStreamSummary_createdAt = IngestionStreamSummary.AddMember("createdAt", smithyprelude.Timestamp)
-
-	IngestionStreamSummary_updatedAt = IngestionStreamSummary.AddMember("updatedAt", smithyprelude.Timestamp)
-
-	_IngestionStreamSummaries_member = _IngestionStreamSummaries.AddMember("member", IngestionStreamSummary)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	LifecyclePolicyDetail_type = LifecyclePolicyDetail.AddMember("type", _LifecyclePolicyType)
-
-	LifecyclePolicyDetail_name = LifecyclePolicyDetail.AddMember("name", _PolicyName)
-
-	LifecyclePolicyDetail_policyVersion = LifecyclePolicyDetail.AddMember("policyVersion", _PolicyVersion)
-
-	LifecyclePolicyDetail_description = LifecyclePolicyDetail.AddMember("description", _PolicyDescription)
-
-	LifecyclePolicyDetail_policy = LifecyclePolicyDetail.AddMember("policy", smithyprelude.Document)
-
-	LifecyclePolicyDetail_createdDate = LifecyclePolicyDetail.AddMember("createdDate", smithyprelude.Long)
-
-	LifecyclePolicyDetail_lastModifiedDate = LifecyclePolicyDetail.AddMember("lastModifiedDate", smithyprelude.Long)
-
-	_LifecyclePolicyDetails_member = _LifecyclePolicyDetails.AddMember("member", LifecyclePolicyDetail)
-
-	LifecyclePolicyErrorDetail_type = LifecyclePolicyErrorDetail.AddMember("type", _LifecyclePolicyType)
-
-	LifecyclePolicyErrorDetail_name = LifecyclePolicyErrorDetail.AddMember("name", _PolicyName)
-
-	LifecyclePolicyErrorDetail_errorMessage = LifecyclePolicyErrorDetail.AddMember("errorMessage", smithyprelude.String)
-
-	LifecyclePolicyErrorDetail_errorCode = LifecyclePolicyErrorDetail.AddMember("errorCode", smithyprelude.String)
-
-	_LifecyclePolicyErrorDetails_member = _LifecyclePolicyErrorDetails.AddMember("member", LifecyclePolicyErrorDetail)
-
-	LifecyclePolicyIdentifier_type = LifecyclePolicyIdentifier.AddMember("type", _LifecyclePolicyType)
-
-	LifecyclePolicyIdentifier_name = LifecyclePolicyIdentifier.AddMember("name", _PolicyName)
-
-	_LifecyclePolicyIdentifiers_member = _LifecyclePolicyIdentifiers.AddMember("member", LifecyclePolicyIdentifier)
-
-	LifecyclePolicyResourceIdentifier_type = LifecyclePolicyResourceIdentifier.AddMember("type", _LifecyclePolicyType)
-
-	LifecyclePolicyResourceIdentifier_resource = LifecyclePolicyResourceIdentifier.AddMember("resource", _ResourceName)
-
-	_LifecyclePolicyResourceIdentifiers_member = _LifecyclePolicyResourceIdentifiers.AddMember("member", LifecyclePolicyResourceIdentifier)
-
-	LifecyclePolicyStats_RetentionPolicyCount = LifecyclePolicyStats.AddMember("RetentionPolicyCount", smithyprelude.Long)
-
-	LifecyclePolicySummary_type = LifecyclePolicySummary.AddMember("type", _LifecyclePolicyType)
-
-	LifecyclePolicySummary_name = LifecyclePolicySummary.AddMember("name", _PolicyName)
-
-	LifecyclePolicySummary_policyVersion = LifecyclePolicySummary.AddMember("policyVersion", _PolicyVersion)
-
-	LifecyclePolicySummary_description = LifecyclePolicySummary.AddMember("description", _PolicyDescription)
-
-	LifecyclePolicySummary_createdDate = LifecyclePolicySummary.AddMember("createdDate", smithyprelude.Long)
-
-	LifecyclePolicySummary_lastModifiedDate = LifecyclePolicySummary.AddMember("lastModifiedDate", smithyprelude.Long)
-
-	_LifecyclePolicySummaries_member = _LifecyclePolicySummaries.AddMember("member", LifecyclePolicySummary)
-
-	_LifecycleResourceFilter_member = _LifecycleResourceFilter.AddMember("member", _LifecycleResource)
-
-	OcuLimitExceededException_message = OcuLimitExceededException.AddMember("message", smithyprelude.String)
-
-	_ResourceFilter_member = _ResourceFilter.AddMember("member", _Resource)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	SamlConfigOptions_metadata = SamlConfigOptions.AddMember("metadata", _samlMetadata)
-
-	SamlConfigOptions_userAttribute = SamlConfigOptions.AddMember("userAttribute", _samlUserAttribute)
-
-	SamlConfigOptions_groupAttribute = SamlConfigOptions.AddMember("groupAttribute", _samlGroupAttribute)
-
-	SamlConfigOptions_openSearchServerlessEntityId = SamlConfigOptions.AddMember("openSearchServerlessEntityId", _openSearchServerlessEntityId)
-
-	SamlConfigOptions_sessionTimeout = SamlConfigOptions.AddMember("sessionTimeout", smithyprelude.Integer)
-
-	SecurityConfigDetail_id = SecurityConfigDetail.AddMember("id", _SecurityConfigId)
-
-	SecurityConfigDetail_type = SecurityConfigDetail.AddMember("type", _SecurityConfigType)
-
-	SecurityConfigDetail_configVersion = SecurityConfigDetail.AddMember("configVersion", _PolicyVersion)
-
-	SecurityConfigDetail_description = SecurityConfigDetail.AddMember("description", _ConfigDescription)
-
-	SecurityConfigDetail_samlOptions = SecurityConfigDetail.AddMember("samlOptions", SamlConfigOptions)
-
-	SecurityConfigDetail_iamIdentityCenterOptions = SecurityConfigDetail.AddMember("iamIdentityCenterOptions", IamIdentityCenterConfigOptions)
-
-	SecurityConfigDetail_iamFederationOptions = SecurityConfigDetail.AddMember("iamFederationOptions", IamFederationConfigOptions)
-
-	SecurityConfigDetail_createdDate = SecurityConfigDetail.AddMember("createdDate", smithyprelude.Long)
-
-	SecurityConfigDetail_lastModifiedDate = SecurityConfigDetail.AddMember("lastModifiedDate", smithyprelude.Long)
-
-	SecurityConfigStats_SamlConfigCount = SecurityConfigStats.AddMember("SamlConfigCount", smithyprelude.Long)
-
-	SecurityConfigSummary_id = SecurityConfigSummary.AddMember("id", _SecurityConfigId)
-
-	SecurityConfigSummary_type = SecurityConfigSummary.AddMember("type", _SecurityConfigType)
-
-	SecurityConfigSummary_configVersion = SecurityConfigSummary.AddMember("configVersion", _PolicyVersion)
-
-	SecurityConfigSummary_description = SecurityConfigSummary.AddMember("description", _ConfigDescription)
-
-	SecurityConfigSummary_createdDate = SecurityConfigSummary.AddMember("createdDate", smithyprelude.Long)
-
-	SecurityConfigSummary_lastModifiedDate = SecurityConfigSummary.AddMember("lastModifiedDate", smithyprelude.Long)
-
-	_SecurityConfigSummaries_member = _SecurityConfigSummaries.AddMember("member", SecurityConfigSummary)
-
-	_SecurityGroupIds_member = _SecurityGroupIds.AddMember("member", _SecurityGroupId)
-
-	SecurityPolicyDetail_type = SecurityPolicyDetail.AddMember("type", _SecurityPolicyType)
-
-	SecurityPolicyDetail_name = SecurityPolicyDetail.AddMember("name", _PolicyName)
-
-	SecurityPolicyDetail_policyVersion = SecurityPolicyDetail.AddMember("policyVersion", _PolicyVersion)
-
-	SecurityPolicyDetail_description = SecurityPolicyDetail.AddMember("description", _PolicyDescription)
-
-	SecurityPolicyDetail_policy = SecurityPolicyDetail.AddMember("policy", smithyprelude.Document)
-
-	SecurityPolicyDetail_createdDate = SecurityPolicyDetail.AddMember("createdDate", smithyprelude.Long)
-
-	SecurityPolicyDetail_lastModifiedDate = SecurityPolicyDetail.AddMember("lastModifiedDate", smithyprelude.Long)
-
-	SecurityPolicyStats_EncryptionPolicyCount = SecurityPolicyStats.AddMember("EncryptionPolicyCount", smithyprelude.Long)
-
-	SecurityPolicyStats_NetworkPolicyCount = SecurityPolicyStats.AddMember("NetworkPolicyCount", smithyprelude.Long)
-
-	SecurityPolicySummary_type = SecurityPolicySummary.AddMember("type", _SecurityPolicyType)
-
-	SecurityPolicySummary_name = SecurityPolicySummary.AddMember("name", _PolicyName)
-
-	SecurityPolicySummary_policyVersion = SecurityPolicySummary.AddMember("policyVersion", _PolicyVersion)
-
-	SecurityPolicySummary_description = SecurityPolicySummary.AddMember("description", _PolicyDescription)
-
-	SecurityPolicySummary_createdDate = SecurityPolicySummary.AddMember("createdDate", smithyprelude.Long)
-
-	SecurityPolicySummary_lastModifiedDate = SecurityPolicySummary.AddMember("lastModifiedDate", smithyprelude.Long)
-
-	_SecurityPolicySummaries_member = _SecurityPolicySummaries.AddMember("member", SecurityPolicySummary)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", smithyprelude.String)
-
-	ServiceQuotaExceededException_resourceId = ServiceQuotaExceededException.AddMember("resourceId", smithyprelude.String)
-
-	ServiceQuotaExceededException_resourceType = ServiceQuotaExceededException.AddMember("resourceType", smithyprelude.String)
-
-	ServiceQuotaExceededException_serviceCode = ServiceQuotaExceededException.AddMember("serviceCode", smithyprelude.String)
-
-	ServiceQuotaExceededException_quotaCode = ServiceQuotaExceededException.AddMember("quotaCode", smithyprelude.String)
-
-	_SubnetIds_member = _SubnetIds.AddMember("member", _SubnetId)
-
-	_TagKeys_member = _TagKeys.AddMember("member", _TagKey)
-
-	UpdateCollectionDetail_id = UpdateCollectionDetail.AddMember("id", _CollectionId)
-
-	UpdateCollectionDetail_name = UpdateCollectionDetail.AddMember("name", _CollectionName)
-
-	UpdateCollectionDetail_status = UpdateCollectionDetail.AddMember("status", _CollectionStatus)
-
-	UpdateCollectionDetail_type = UpdateCollectionDetail.AddMember("type", _CollectionType)
-
-	UpdateCollectionDetail_description = UpdateCollectionDetail.AddMember("description", smithyprelude.String)
-
-	UpdateCollectionDetail_vectorOptions = UpdateCollectionDetail.AddMember("vectorOptions", VectorOptions)
-
-	UpdateCollectionDetail_kmsKeyArn = UpdateCollectionDetail.AddMember("kmsKeyArn", smithyprelude.String)
-
-	UpdateCollectionDetail_arn = UpdateCollectionDetail.AddMember("arn", smithyprelude.String)
-
-	UpdateCollectionDetail_createdDate = UpdateCollectionDetail.AddMember("createdDate", smithyprelude.Long)
-
-	UpdateCollectionDetail_lastModifiedDate = UpdateCollectionDetail.AddMember("lastModifiedDate", smithyprelude.Long)
-
-	UpdateCollectionDetail_deletionProtection = UpdateCollectionDetail.AddMember("deletionProtection", _DeletionProtection)
-
-	UpdateCollectionGroupDetail_id = UpdateCollectionGroupDetail.AddMember("id", _CollectionGroupId)
-
-	UpdateCollectionGroupDetail_arn = UpdateCollectionGroupDetail.AddMember("arn", smithyprelude.String)
-
-	UpdateCollectionGroupDetail_name = UpdateCollectionGroupDetail.AddMember("name", _CollectionGroupName)
-
-	UpdateCollectionGroupDetail_description = UpdateCollectionGroupDetail.AddMember("description", smithyprelude.String)
-
-	UpdateCollectionGroupDetail_capacityLimits = UpdateCollectionGroupDetail.AddMember("capacityLimits", CollectionGroupCapacityLimits)
-
-	UpdateCollectionGroupDetail_createdDate = UpdateCollectionGroupDetail.AddMember("createdDate", smithyprelude.Long)
-
-	UpdateCollectionGroupDetail_lastModifiedDate = UpdateCollectionGroupDetail.AddMember("lastModifiedDate", smithyprelude.Long)
-
-	UpdateCollectionGroupDetail_generation = UpdateCollectionGroupDetail.AddMember("generation", _ServerlessGeneration)
-
-	UpdateIamIdentityCenterConfigOptions_userAttribute = UpdateIamIdentityCenterConfigOptions.AddMember("userAttribute", _IamIdentityCenterUserAttribute)
-
-	UpdateIamIdentityCenterConfigOptions_groupAttribute = UpdateIamIdentityCenterConfigOptions.AddMember("groupAttribute", _IamIdentityCenterGroupAttribute)
-
-	UpdateVpcEndpointDetail_id = UpdateVpcEndpointDetail.AddMember("id", _VpcEndpointId)
-
-	UpdateVpcEndpointDetail_name = UpdateVpcEndpointDetail.AddMember("name", _VpcEndpointName)
-
-	UpdateVpcEndpointDetail_status = UpdateVpcEndpointDetail.AddMember("status", _VpcEndpointStatus)
-
-	UpdateVpcEndpointDetail_subnetIds = UpdateVpcEndpointDetail.AddMember("subnetIds", _SubnetIds)
-
-	UpdateVpcEndpointDetail_securityGroupIds = UpdateVpcEndpointDetail.AddMember("securityGroupIds", _SecurityGroupIds)
-
-	UpdateVpcEndpointDetail_lastModifiedDate = UpdateVpcEndpointDetail.AddMember("lastModifiedDate", smithyprelude.Long)
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	VpcEndpointDetail_id = VpcEndpointDetail.AddMember("id", _VpcEndpointId)
-
-	VpcEndpointDetail_name = VpcEndpointDetail.AddMember("name", _VpcEndpointName)
-
-	VpcEndpointDetail_vpcId = VpcEndpointDetail.AddMember("vpcId", _VpcId)
-
-	VpcEndpointDetail_subnetIds = VpcEndpointDetail.AddMember("subnetIds", _SubnetIds)
-
-	VpcEndpointDetail_securityGroupIds = VpcEndpointDetail.AddMember("securityGroupIds", _SecurityGroupIds)
-
-	VpcEndpointDetail_status = VpcEndpointDetail.AddMember("status", _VpcEndpointStatus)
-
-	VpcEndpointDetail_createdDate = VpcEndpointDetail.AddMember("createdDate", smithyprelude.Long)
-
-	VpcEndpointDetail_failureCode = VpcEndpointDetail.AddMember("failureCode", smithyprelude.String)
-
-	VpcEndpointDetail_failureMessage = VpcEndpointDetail.AddMember("failureMessage", smithyprelude.String)
-
-	_VpcEndpointDetails_member = _VpcEndpointDetails.AddMember("member", VpcEndpointDetail)
-
-	VpcEndpointErrorDetail_id = VpcEndpointErrorDetail.AddMember("id", _VpcEndpointId)
-
-	VpcEndpointErrorDetail_errorMessage = VpcEndpointErrorDetail.AddMember("errorMessage", smithyprelude.String)
-
-	VpcEndpointErrorDetail_errorCode = VpcEndpointErrorDetail.AddMember("errorCode", smithyprelude.String)
-
-	_VpcEndpointErrorDetails_member = _VpcEndpointErrorDetails.AddMember("member", VpcEndpointErrorDetail)
-
-	VpcEndpointFilters_status = VpcEndpointFilters.AddMember("status", _VpcEndpointStatus)
-
-	_VpcEndpointIds_member = _VpcEndpointIds.AddMember("member", _VpcEndpointId)
-
-	VpcEndpointSummary_id = VpcEndpointSummary.AddMember("id", _VpcEndpointId)
-
-	VpcEndpointSummary_name = VpcEndpointSummary.AddMember("name", _VpcEndpointName)
-
-	VpcEndpointSummary_status = VpcEndpointSummary.AddMember("status", _VpcEndpointStatus)
-
-	_VpcEndpointSummaries_member = _VpcEndpointSummaries.AddMember("member", VpcEndpointSummary)
-
-	BatchGetCollectionGroupRequest_ids = BatchGetCollectionGroupRequest.AddMember("ids", _CollectionGroupIds)
-
-	BatchGetCollectionGroupRequest_names = BatchGetCollectionGroupRequest.AddMember("names", _CollectionGroupNames)
-
-	BatchGetCollectionGroupResponse_collectionGroupDetails = BatchGetCollectionGroupResponse.AddMember("collectionGroupDetails", _CollectionGroupDetails)
-
-	BatchGetCollectionGroupResponse_collectionGroupErrorDetails = BatchGetCollectionGroupResponse.AddMember("collectionGroupErrorDetails", _CollectionGroupErrorDetails)
-
-	BatchGetCollectionRequest_ids = BatchGetCollectionRequest.AddMember("ids", _CollectionIds)
-
-	BatchGetCollectionRequest_names = BatchGetCollectionRequest.AddMember("names", _CollectionNames)
-
-	BatchGetCollectionResponse_collectionDetails = BatchGetCollectionResponse.AddMember("collectionDetails", _CollectionDetails)
-
-	BatchGetCollectionResponse_collectionErrorDetails = BatchGetCollectionResponse.AddMember("collectionErrorDetails", _CollectionErrorDetails)
-
-	BatchGetEffectiveLifecyclePolicyRequest_resourceIdentifiers = BatchGetEffectiveLifecyclePolicyRequest.AddMember("resourceIdentifiers", _LifecyclePolicyResourceIdentifiers)
-
-	BatchGetEffectiveLifecyclePolicyResponse_effectiveLifecyclePolicyDetails = BatchGetEffectiveLifecyclePolicyResponse.AddMember("effectiveLifecyclePolicyDetails", _EffectiveLifecyclePolicyDetails)
-
-	BatchGetEffectiveLifecyclePolicyResponse_effectiveLifecyclePolicyErrorDetails = BatchGetEffectiveLifecyclePolicyResponse.AddMember("effectiveLifecyclePolicyErrorDetails", _EffectiveLifecyclePolicyErrorDetails)
-
-	BatchGetLifecyclePolicyRequest_identifiers = BatchGetLifecyclePolicyRequest.AddMember("identifiers", _LifecyclePolicyIdentifiers)
-
-	BatchGetLifecyclePolicyResponse_lifecyclePolicyDetails = BatchGetLifecyclePolicyResponse.AddMember("lifecyclePolicyDetails", _LifecyclePolicyDetails)
-
-	BatchGetLifecyclePolicyResponse_lifecyclePolicyErrorDetails = BatchGetLifecyclePolicyResponse.AddMember("lifecyclePolicyErrorDetails", _LifecyclePolicyErrorDetails)
-
-	BatchGetVpcEndpointRequest_ids = BatchGetVpcEndpointRequest.AddMember("ids", _VpcEndpointIds)
-
-	BatchGetVpcEndpointResponse_vpcEndpointDetails = BatchGetVpcEndpointResponse.AddMember("vpcEndpointDetails", _VpcEndpointDetails)
-
-	BatchGetVpcEndpointResponse_vpcEndpointErrorDetails = BatchGetVpcEndpointResponse.AddMember("vpcEndpointErrorDetails", _VpcEndpointErrorDetails)
-
-	CancelIngestionJobRequest_collectionId = CancelIngestionJobRequest.AddMember("collectionId", _CollectionId)
-
-	CancelIngestionJobRequest_ingestionJobId = CancelIngestionJobRequest.AddMember("ingestionJobId", _IngestionJobId)
-
-	CancelIngestionJobRequest_clientToken = CancelIngestionJobRequest.AddMember("clientToken", _ClientToken)
-
-	CancelIngestionJobResponse_ingestionJobId = CancelIngestionJobResponse.AddMember("ingestionJobId", _IngestionJobId)
-
-	CancelIngestionJobResponse_collectionId = CancelIngestionJobResponse.AddMember("collectionId", _CollectionId)
-
-	CancelIngestionJobResponse_ingestionJobName = CancelIngestionJobResponse.AddMember("ingestionJobName", _IngestionJobName)
-
-	CancelIngestionJobResponse_status = CancelIngestionJobResponse.AddMember("status", _IngestionJobStatus)
-
-	CreateAccessPolicyRequest_type = CreateAccessPolicyRequest.AddMember("type", _AccessPolicyType)
-
-	CreateAccessPolicyRequest_name = CreateAccessPolicyRequest.AddMember("name", _PolicyName)
-
-	CreateAccessPolicyRequest_description = CreateAccessPolicyRequest.AddMember("description", _PolicyDescription)
-
-	CreateAccessPolicyRequest_policy = CreateAccessPolicyRequest.AddMember("policy", _PolicyDocument)
-
-	CreateAccessPolicyRequest_clientToken = CreateAccessPolicyRequest.AddMember("clientToken", _ClientToken)
-
-	CreateAccessPolicyResponse_accessPolicyDetail = CreateAccessPolicyResponse.AddMember("accessPolicyDetail", AccessPolicyDetail)
-
-	CreateCollectionGroupRequest_name = CreateCollectionGroupRequest.AddMember("name", _CollectionGroupName)
-
-	CreateCollectionGroupRequest_standbyReplicas = CreateCollectionGroupRequest.AddMember("standbyReplicas", _StandbyReplicas)
-
-	CreateCollectionGroupRequest_description = CreateCollectionGroupRequest.AddMember("description", smithyprelude.String)
-
-	CreateCollectionGroupRequest_tags = CreateCollectionGroupRequest.AddMember("tags", _Tags)
-
-	CreateCollectionGroupRequest_capacityLimits = CreateCollectionGroupRequest.AddMember("capacityLimits", CollectionGroupCapacityLimits)
-
-	CreateCollectionGroupRequest_generation = CreateCollectionGroupRequest.AddMember("generation", _ServerlessGeneration)
-
-	CreateCollectionGroupRequest_clientToken = CreateCollectionGroupRequest.AddMember("clientToken", _ClientToken)
-
-	CreateCollectionGroupResponse_createCollectionGroupDetail = CreateCollectionGroupResponse.AddMember("createCollectionGroupDetail", CreateCollectionGroupDetail)
-
-	CreateCollectionRequest_name = CreateCollectionRequest.AddMember("name", _CollectionName)
-
-	CreateCollectionRequest_type = CreateCollectionRequest.AddMember("type", _CollectionType)
-
-	CreateCollectionRequest_description = CreateCollectionRequest.AddMember("description", smithyprelude.String)
-
-	CreateCollectionRequest_tags = CreateCollectionRequest.AddMember("tags", _Tags)
-
-	CreateCollectionRequest_standbyReplicas = CreateCollectionRequest.AddMember("standbyReplicas", _StandbyReplicas)
-
-	CreateCollectionRequest_vectorOptions = CreateCollectionRequest.AddMember("vectorOptions", VectorOptions)
-
-	CreateCollectionRequest_collectionGroupName = CreateCollectionRequest.AddMember("collectionGroupName", _CollectionGroupName)
-
-	CreateCollectionRequest_encryptionConfig = CreateCollectionRequest.AddMember("encryptionConfig", EncryptionConfig)
-
-	CreateCollectionRequest_deletionProtection = CreateCollectionRequest.AddMember("deletionProtection", _DeletionProtection)
-
-	CreateCollectionRequest_clientToken = CreateCollectionRequest.AddMember("clientToken", _ClientToken)
-
-	CreateCollectionResponse_createCollectionDetail = CreateCollectionResponse.AddMember("createCollectionDetail", CreateCollectionDetail)
-
-	CreateIndexRequest_id = CreateIndexRequest.AddMember("id", _CollectionId)
-
-	CreateIndexRequest_indexName = CreateIndexRequest.AddMember("indexName", _IndexName)
-
-	CreateIndexRequest_indexSchema = CreateIndexRequest.AddMember("indexSchema", _IndexSchema)
-
-	CreateIngestionJobRequest_collectionId = CreateIngestionJobRequest.AddMember("collectionId", _CollectionId)
-
-	CreateIngestionJobRequest_ingestionJobName = CreateIngestionJobRequest.AddMember("ingestionJobName", _IngestionJobName)
-
-	CreateIngestionJobRequest_indexName = CreateIngestionJobRequest.AddMember("indexName", _IngestionIndexName)
-
-	CreateIngestionJobRequest_failureIndexName = CreateIngestionJobRequest.AddMember("failureIndexName", _IngestionIndexName)
-
-	CreateIngestionJobRequest_source = CreateIngestionJobRequest.AddMember("source", IngestionJobSource)
-
-	CreateIngestionJobRequest_tags = CreateIngestionJobRequest.AddMember("tags", _Tags)
-
-	CreateIngestionJobRequest_clientToken = CreateIngestionJobRequest.AddMember("clientToken", _ClientToken)
-
-	CreateIngestionJobResponse_ingestionJobDetail = CreateIngestionJobResponse.AddMember("ingestionJobDetail", IngestionJobDetail)
-
-	CreateIngestionStreamRequest_collectionId = CreateIngestionStreamRequest.AddMember("collectionId", _CollectionId)
-
-	CreateIngestionStreamRequest_ingestionStreamName = CreateIngestionStreamRequest.AddMember("ingestionStreamName", _IngestionStreamName)
-
-	CreateIngestionStreamRequest_indexName = CreateIngestionStreamRequest.AddMember("indexName", _IngestionIndexName)
-
-	CreateIngestionStreamRequest_failureIndexName = CreateIngestionStreamRequest.AddMember("failureIndexName", _IngestionIndexName)
-
-	CreateIngestionStreamRequest_source = CreateIngestionStreamRequest.AddMember("source", IngestionStreamSource)
-
-	CreateIngestionStreamRequest_roleArn = CreateIngestionStreamRequest.AddMember("roleArn", _RoleArn)
-
-	CreateIngestionStreamRequest_tags = CreateIngestionStreamRequest.AddMember("tags", _Tags)
-
-	CreateIngestionStreamRequest_clientToken = CreateIngestionStreamRequest.AddMember("clientToken", _ClientToken)
-
-	CreateIngestionStreamResponse_ingestionStreamDetail = CreateIngestionStreamResponse.AddMember("ingestionStreamDetail", IngestionStreamDetail)
-
-	CreateLifecyclePolicyRequest_type = CreateLifecyclePolicyRequest.AddMember("type", _LifecyclePolicyType)
-
-	CreateLifecyclePolicyRequest_name = CreateLifecyclePolicyRequest.AddMember("name", _PolicyName)
-
-	CreateLifecyclePolicyRequest_description = CreateLifecyclePolicyRequest.AddMember("description", _PolicyDescription)
-
-	CreateLifecyclePolicyRequest_policy = CreateLifecyclePolicyRequest.AddMember("policy", _PolicyDocument)
-
-	CreateLifecyclePolicyRequest_clientToken = CreateLifecyclePolicyRequest.AddMember("clientToken", _ClientToken)
-
-	CreateLifecyclePolicyResponse_lifecyclePolicyDetail = CreateLifecyclePolicyResponse.AddMember("lifecyclePolicyDetail", LifecyclePolicyDetail)
-
-	CreateSecurityConfigRequest_type = CreateSecurityConfigRequest.AddMember("type", _SecurityConfigType)
-
-	CreateSecurityConfigRequest_name = CreateSecurityConfigRequest.AddMember("name", _ConfigName)
-
-	CreateSecurityConfigRequest_description = CreateSecurityConfigRequest.AddMember("description", _ConfigDescription)
-
-	CreateSecurityConfigRequest_samlOptions = CreateSecurityConfigRequest.AddMember("samlOptions", SamlConfigOptions)
-
-	CreateSecurityConfigRequest_iamIdentityCenterOptions = CreateSecurityConfigRequest.AddMember("iamIdentityCenterOptions", CreateIamIdentityCenterConfigOptions)
-
-	CreateSecurityConfigRequest_iamFederationOptions = CreateSecurityConfigRequest.AddMember("iamFederationOptions", IamFederationConfigOptions)
-
-	CreateSecurityConfigRequest_clientToken = CreateSecurityConfigRequest.AddMember("clientToken", _ClientToken)
-
-	CreateSecurityConfigResponse_securityConfigDetail = CreateSecurityConfigResponse.AddMember("securityConfigDetail", SecurityConfigDetail)
-
-	CreateSecurityPolicyRequest_type = CreateSecurityPolicyRequest.AddMember("type", _SecurityPolicyType)
-
-	CreateSecurityPolicyRequest_name = CreateSecurityPolicyRequest.AddMember("name", _PolicyName)
-
-	CreateSecurityPolicyRequest_description = CreateSecurityPolicyRequest.AddMember("description", _PolicyDescription)
-
-	CreateSecurityPolicyRequest_policy = CreateSecurityPolicyRequest.AddMember("policy", _PolicyDocument)
-
-	CreateSecurityPolicyRequest_clientToken = CreateSecurityPolicyRequest.AddMember("clientToken", _ClientToken)
-
-	CreateSecurityPolicyResponse_securityPolicyDetail = CreateSecurityPolicyResponse.AddMember("securityPolicyDetail", SecurityPolicyDetail)
-
-	CreateVpcEndpointRequest_name = CreateVpcEndpointRequest.AddMember("name", _VpcEndpointName)
-
-	CreateVpcEndpointRequest_vpcId = CreateVpcEndpointRequest.AddMember("vpcId", _VpcId)
-
-	CreateVpcEndpointRequest_subnetIds = CreateVpcEndpointRequest.AddMember("subnetIds", _SubnetIds)
-
-	CreateVpcEndpointRequest_securityGroupIds = CreateVpcEndpointRequest.AddMember("securityGroupIds", _SecurityGroupIds)
-
-	CreateVpcEndpointRequest_clientToken = CreateVpcEndpointRequest.AddMember("clientToken", _ClientToken)
-
-	CreateVpcEndpointResponse_createVpcEndpointDetail = CreateVpcEndpointResponse.AddMember("createVpcEndpointDetail", CreateVpcEndpointDetail)
-
-	DeleteAccessPolicyRequest_type = DeleteAccessPolicyRequest.AddMember("type", _AccessPolicyType)
-
-	DeleteAccessPolicyRequest_name = DeleteAccessPolicyRequest.AddMember("name", _PolicyName)
-
-	DeleteAccessPolicyRequest_clientToken = DeleteAccessPolicyRequest.AddMember("clientToken", _ClientToken)
-
-	DeleteCollectionGroupRequest_id = DeleteCollectionGroupRequest.AddMember("id", _CollectionGroupId)
-
-	DeleteCollectionGroupRequest_clientToken = DeleteCollectionGroupRequest.AddMember("clientToken", _ClientToken)
-
-	DeleteCollectionRequest_id = DeleteCollectionRequest.AddMember("id", _CollectionId)
-
-	DeleteCollectionRequest_clientToken = DeleteCollectionRequest.AddMember("clientToken", _ClientToken)
-
-	DeleteCollectionResponse_deleteCollectionDetail = DeleteCollectionResponse.AddMember("deleteCollectionDetail", DeleteCollectionDetail)
-
-	DeleteIndexRequest_id = DeleteIndexRequest.AddMember("id", _CollectionId)
-
-	DeleteIndexRequest_indexName = DeleteIndexRequest.AddMember("indexName", _IndexName)
-
-	DeleteIngestionStreamRequest_collectionId = DeleteIngestionStreamRequest.AddMember("collectionId", _CollectionId)
-
-	DeleteIngestionStreamRequest_ingestionStreamId = DeleteIngestionStreamRequest.AddMember("ingestionStreamId", _IngestionStreamId)
-
-	DeleteIngestionStreamRequest_clientToken = DeleteIngestionStreamRequest.AddMember("clientToken", _ClientToken)
-
-	DeleteIngestionStreamResponse_ingestionStreamId = DeleteIngestionStreamResponse.AddMember("ingestionStreamId", _IngestionStreamId)
-
-	DeleteIngestionStreamResponse_collectionId = DeleteIngestionStreamResponse.AddMember("collectionId", _CollectionId)
-
-	DeleteIngestionStreamResponse_ingestionStreamName = DeleteIngestionStreamResponse.AddMember("ingestionStreamName", _IngestionStreamName)
-
-	DeleteIngestionStreamResponse_status = DeleteIngestionStreamResponse.AddMember("status", _IngestionStreamStatus)
-
-	DeleteLifecyclePolicyRequest_type = DeleteLifecyclePolicyRequest.AddMember("type", _LifecyclePolicyType)
-
-	DeleteLifecyclePolicyRequest_name = DeleteLifecyclePolicyRequest.AddMember("name", _PolicyName)
-
-	DeleteLifecyclePolicyRequest_clientToken = DeleteLifecyclePolicyRequest.AddMember("clientToken", _ClientToken)
-
-	DeleteSecurityConfigRequest_id = DeleteSecurityConfigRequest.AddMember("id", _SecurityConfigId)
-
-	DeleteSecurityConfigRequest_clientToken = DeleteSecurityConfigRequest.AddMember("clientToken", _ClientToken)
-
-	DeleteSecurityPolicyRequest_type = DeleteSecurityPolicyRequest.AddMember("type", _SecurityPolicyType)
-
-	DeleteSecurityPolicyRequest_name = DeleteSecurityPolicyRequest.AddMember("name", _PolicyName)
-
-	DeleteSecurityPolicyRequest_clientToken = DeleteSecurityPolicyRequest.AddMember("clientToken", _ClientToken)
-
-	DeleteVpcEndpointRequest_id = DeleteVpcEndpointRequest.AddMember("id", _VpcEndpointId)
-
-	DeleteVpcEndpointRequest_clientToken = DeleteVpcEndpointRequest.AddMember("clientToken", _ClientToken)
-
-	DeleteVpcEndpointResponse_deleteVpcEndpointDetail = DeleteVpcEndpointResponse.AddMember("deleteVpcEndpointDetail", DeleteVpcEndpointDetail)
-
-	GetAccessPolicyRequest_type = GetAccessPolicyRequest.AddMember("type", _AccessPolicyType)
-
-	GetAccessPolicyRequest_name = GetAccessPolicyRequest.AddMember("name", _PolicyName)
-
-	GetAccessPolicyResponse_accessPolicyDetail = GetAccessPolicyResponse.AddMember("accessPolicyDetail", AccessPolicyDetail)
-
-	GetAccountSettingsResponse_accountSettingsDetail = GetAccountSettingsResponse.AddMember("accountSettingsDetail", AccountSettingsDetail)
-
-	GetIndexRequest_id = GetIndexRequest.AddMember("id", _CollectionId)
-
-	GetIndexRequest_indexName = GetIndexRequest.AddMember("indexName", _IndexName)
-
-	GetIndexResponse_indexSchema = GetIndexResponse.AddMember("indexSchema", _IndexSchema)
-
-	GetIngestionJobRequest_collectionId = GetIngestionJobRequest.AddMember("collectionId", _CollectionId)
-
-	GetIngestionJobRequest_ingestionJobId = GetIngestionJobRequest.AddMember("ingestionJobId", _IngestionJobId)
-
-	GetIngestionJobResponse_ingestionJobDetail = GetIngestionJobResponse.AddMember("ingestionJobDetail", IngestionJobDetail)
-
-	GetIngestionStreamRequest_collectionId = GetIngestionStreamRequest.AddMember("collectionId", _CollectionId)
-
-	GetIngestionStreamRequest_ingestionStreamId = GetIngestionStreamRequest.AddMember("ingestionStreamId", _IngestionStreamId)
-
-	GetIngestionStreamResponse_ingestionStreamDetail = GetIngestionStreamResponse.AddMember("ingestionStreamDetail", IngestionStreamDetail)
-
-	GetPoliciesStatsResponse_AccessPolicyStats = GetPoliciesStatsResponse.AddMember("AccessPolicyStats", AccessPolicyStats)
-
-	GetPoliciesStatsResponse_SecurityPolicyStats = GetPoliciesStatsResponse.AddMember("SecurityPolicyStats", SecurityPolicyStats)
-
-	GetPoliciesStatsResponse_SecurityConfigStats = GetPoliciesStatsResponse.AddMember("SecurityConfigStats", SecurityConfigStats)
-
-	GetPoliciesStatsResponse_LifecyclePolicyStats = GetPoliciesStatsResponse.AddMember("LifecyclePolicyStats", LifecyclePolicyStats)
-
-	GetPoliciesStatsResponse_TotalPolicyCount = GetPoliciesStatsResponse.AddMember("TotalPolicyCount", smithyprelude.Long)
-
-	GetSecurityConfigRequest_id = GetSecurityConfigRequest.AddMember("id", _SecurityConfigId)
-
-	GetSecurityConfigResponse_securityConfigDetail = GetSecurityConfigResponse.AddMember("securityConfigDetail", SecurityConfigDetail)
-
-	GetSecurityPolicyRequest_type = GetSecurityPolicyRequest.AddMember("type", _SecurityPolicyType)
-
-	GetSecurityPolicyRequest_name = GetSecurityPolicyRequest.AddMember("name", _PolicyName)
-
-	GetSecurityPolicyResponse_securityPolicyDetail = GetSecurityPolicyResponse.AddMember("securityPolicyDetail", SecurityPolicyDetail)
-
-	ListAccessPoliciesRequest_type = ListAccessPoliciesRequest.AddMember("type", _AccessPolicyType)
-
-	ListAccessPoliciesRequest_resource = ListAccessPoliciesRequest.AddMember("resource", _ResourceFilter)
-
-	ListAccessPoliciesRequest_nextToken = ListAccessPoliciesRequest.AddMember("nextToken", smithyprelude.String)
-
-	ListAccessPoliciesRequest_maxResults = ListAccessPoliciesRequest.AddMember("maxResults", smithyprelude.Integer)
-
-	ListAccessPoliciesResponse_accessPolicySummaries = ListAccessPoliciesResponse.AddMember("accessPolicySummaries", _AccessPolicySummaries)
-
-	ListAccessPoliciesResponse_nextToken = ListAccessPoliciesResponse.AddMember("nextToken", smithyprelude.String)
-
-	ListCollectionGroupsRequest_nextToken = ListCollectionGroupsRequest.AddMember("nextToken", smithyprelude.String)
-
-	ListCollectionGroupsRequest_maxResults = ListCollectionGroupsRequest.AddMember("maxResults", smithyprelude.Integer)
-
-	ListCollectionGroupsResponse_collectionGroupSummaries = ListCollectionGroupsResponse.AddMember("collectionGroupSummaries", _CollectionGroupSummaries)
-
-	ListCollectionGroupsResponse_nextToken = ListCollectionGroupsResponse.AddMember("nextToken", smithyprelude.String)
-
-	ListCollectionsRequest_collectionFilters = ListCollectionsRequest.AddMember("collectionFilters", CollectionFilters)
-
-	ListCollectionsRequest_nextToken = ListCollectionsRequest.AddMember("nextToken", smithyprelude.String)
-
-	ListCollectionsRequest_maxResults = ListCollectionsRequest.AddMember("maxResults", smithyprelude.Integer)
-
-	ListCollectionsResponse_collectionSummaries = ListCollectionsResponse.AddMember("collectionSummaries", _CollectionSummaries)
-
-	ListCollectionsResponse_nextToken = ListCollectionsResponse.AddMember("nextToken", smithyprelude.String)
-
-	ListIngestionJobsRequest_collectionId = ListIngestionJobsRequest.AddMember("collectionId", _CollectionId)
-
-	ListIngestionJobsRequest_nextToken = ListIngestionJobsRequest.AddMember("nextToken", smithyprelude.String)
-
-	ListIngestionJobsRequest_maxResults = ListIngestionJobsRequest.AddMember("maxResults", smithyprelude.Integer)
-
-	ListIngestionJobsResponse_ingestionJobSummaries = ListIngestionJobsResponse.AddMember("ingestionJobSummaries", _IngestionJobSummaries)
-
-	ListIngestionJobsResponse_nextToken = ListIngestionJobsResponse.AddMember("nextToken", smithyprelude.String)
-
-	ListIngestionStreamsRequest_collectionId = ListIngestionStreamsRequest.AddMember("collectionId", _CollectionId)
-
-	ListIngestionStreamsRequest_nextToken = ListIngestionStreamsRequest.AddMember("nextToken", smithyprelude.String)
-
-	ListIngestionStreamsRequest_maxResults = ListIngestionStreamsRequest.AddMember("maxResults", smithyprelude.Integer)
-
-	ListIngestionStreamsResponse_ingestionStreamSummaries = ListIngestionStreamsResponse.AddMember("ingestionStreamSummaries", _IngestionStreamSummaries)
-
-	ListIngestionStreamsResponse_nextToken = ListIngestionStreamsResponse.AddMember("nextToken", smithyprelude.String)
-
-	ListLifecyclePoliciesRequest_type = ListLifecyclePoliciesRequest.AddMember("type", _LifecyclePolicyType)
-
-	ListLifecyclePoliciesRequest_resources = ListLifecyclePoliciesRequest.AddMember("resources", _LifecycleResourceFilter)
-
-	ListLifecyclePoliciesRequest_nextToken = ListLifecyclePoliciesRequest.AddMember("nextToken", smithyprelude.String)
-
-	ListLifecyclePoliciesRequest_maxResults = ListLifecyclePoliciesRequest.AddMember("maxResults", smithyprelude.Integer)
-
-	ListLifecyclePoliciesResponse_lifecyclePolicySummaries = ListLifecyclePoliciesResponse.AddMember("lifecyclePolicySummaries", _LifecyclePolicySummaries)
-
-	ListLifecyclePoliciesResponse_nextToken = ListLifecyclePoliciesResponse.AddMember("nextToken", smithyprelude.String)
-
-	ListSecurityConfigsRequest_type = ListSecurityConfigsRequest.AddMember("type", _SecurityConfigType)
-
-	ListSecurityConfigsRequest_nextToken = ListSecurityConfigsRequest.AddMember("nextToken", smithyprelude.String)
-
-	ListSecurityConfigsRequest_maxResults = ListSecurityConfigsRequest.AddMember("maxResults", smithyprelude.Integer)
-
-	ListSecurityConfigsResponse_securityConfigSummaries = ListSecurityConfigsResponse.AddMember("securityConfigSummaries", _SecurityConfigSummaries)
-
-	ListSecurityConfigsResponse_nextToken = ListSecurityConfigsResponse.AddMember("nextToken", smithyprelude.String)
-
-	ListSecurityPoliciesRequest_type = ListSecurityPoliciesRequest.AddMember("type", _SecurityPolicyType)
-
-	ListSecurityPoliciesRequest_resource = ListSecurityPoliciesRequest.AddMember("resource", _ResourceFilter)
-
-	ListSecurityPoliciesRequest_nextToken = ListSecurityPoliciesRequest.AddMember("nextToken", smithyprelude.String)
-
-	ListSecurityPoliciesRequest_maxResults = ListSecurityPoliciesRequest.AddMember("maxResults", smithyprelude.Integer)
-
-	ListSecurityPoliciesResponse_securityPolicySummaries = ListSecurityPoliciesResponse.AddMember("securityPolicySummaries", _SecurityPolicySummaries)
-
-	ListSecurityPoliciesResponse_nextToken = ListSecurityPoliciesResponse.AddMember("nextToken", smithyprelude.String)
-
-	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", _Arn)
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _Tags)
-
-	ListVpcEndpointsRequest_vpcEndpointFilters = ListVpcEndpointsRequest.AddMember("vpcEndpointFilters", VpcEndpointFilters)
-
-	ListVpcEndpointsRequest_nextToken = ListVpcEndpointsRequest.AddMember("nextToken", smithyprelude.String)
-
-	ListVpcEndpointsRequest_maxResults = ListVpcEndpointsRequest.AddMember("maxResults", smithyprelude.Integer)
-
-	ListVpcEndpointsResponse_vpcEndpointSummaries = ListVpcEndpointsResponse.AddMember("vpcEndpointSummaries", _VpcEndpointSummaries)
-
-	ListVpcEndpointsResponse_nextToken = ListVpcEndpointsResponse.AddMember("nextToken", smithyprelude.String)
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _Arn)
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _Tags)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", _Arn)
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeys)
-
-	UpdateAccessPolicyRequest_type = UpdateAccessPolicyRequest.AddMember("type", _AccessPolicyType)
-
-	UpdateAccessPolicyRequest_name = UpdateAccessPolicyRequest.AddMember("name", _PolicyName)
-
-	UpdateAccessPolicyRequest_policyVersion = UpdateAccessPolicyRequest.AddMember("policyVersion", _PolicyVersion)
-
-	UpdateAccessPolicyRequest_description = UpdateAccessPolicyRequest.AddMember("description", _PolicyDescription)
-
-	UpdateAccessPolicyRequest_policy = UpdateAccessPolicyRequest.AddMember("policy", _PolicyDocument)
-
-	UpdateAccessPolicyRequest_clientToken = UpdateAccessPolicyRequest.AddMember("clientToken", _ClientToken)
-
-	UpdateAccessPolicyResponse_accessPolicyDetail = UpdateAccessPolicyResponse.AddMember("accessPolicyDetail", AccessPolicyDetail)
-
-	UpdateAccountSettingsRequest_capacityLimits = UpdateAccountSettingsRequest.AddMember("capacityLimits", CapacityLimits)
-
-	UpdateAccountSettingsResponse_accountSettingsDetail = UpdateAccountSettingsResponse.AddMember("accountSettingsDetail", AccountSettingsDetail)
-
-	UpdateCollectionGroupRequest_id = UpdateCollectionGroupRequest.AddMember("id", _CollectionGroupId)
-
-	UpdateCollectionGroupRequest_description = UpdateCollectionGroupRequest.AddMember("description", smithyprelude.String)
-
-	UpdateCollectionGroupRequest_capacityLimits = UpdateCollectionGroupRequest.AddMember("capacityLimits", CollectionGroupCapacityLimits)
-
-	UpdateCollectionGroupRequest_clientToken = UpdateCollectionGroupRequest.AddMember("clientToken", _ClientToken)
-
-	UpdateCollectionGroupResponse_updateCollectionGroupDetail = UpdateCollectionGroupResponse.AddMember("updateCollectionGroupDetail", UpdateCollectionGroupDetail)
-
-	UpdateCollectionRequest_id = UpdateCollectionRequest.AddMember("id", _CollectionId)
-
-	UpdateCollectionRequest_description = UpdateCollectionRequest.AddMember("description", smithyprelude.String)
-
-	UpdateCollectionRequest_vectorOptions = UpdateCollectionRequest.AddMember("vectorOptions", VectorOptions)
-
-	UpdateCollectionRequest_deletionProtection = UpdateCollectionRequest.AddMember("deletionProtection", _DeletionProtection)
-
-	UpdateCollectionRequest_encryptionConfig = UpdateCollectionRequest.AddMember("encryptionConfig", EncryptionConfig)
-
-	UpdateCollectionRequest_clientToken = UpdateCollectionRequest.AddMember("clientToken", _ClientToken)
-
-	UpdateCollectionResponse_updateCollectionDetail = UpdateCollectionResponse.AddMember("updateCollectionDetail", UpdateCollectionDetail)
-
-	UpdateIndexRequest_id = UpdateIndexRequest.AddMember("id", _CollectionId)
-
-	UpdateIndexRequest_indexName = UpdateIndexRequest.AddMember("indexName", _IndexName)
-
-	UpdateIndexRequest_indexSchema = UpdateIndexRequest.AddMember("indexSchema", _IndexSchema)
-
-	UpdateLifecyclePolicyRequest_type = UpdateLifecyclePolicyRequest.AddMember("type", _LifecyclePolicyType)
-
-	UpdateLifecyclePolicyRequest_name = UpdateLifecyclePolicyRequest.AddMember("name", _PolicyName)
-
-	UpdateLifecyclePolicyRequest_policyVersion = UpdateLifecyclePolicyRequest.AddMember("policyVersion", _PolicyVersion)
-
-	UpdateLifecyclePolicyRequest_description = UpdateLifecyclePolicyRequest.AddMember("description", _PolicyDescription)
-
-	UpdateLifecyclePolicyRequest_policy = UpdateLifecyclePolicyRequest.AddMember("policy", _PolicyDocument)
-
-	UpdateLifecyclePolicyRequest_clientToken = UpdateLifecyclePolicyRequest.AddMember("clientToken", _ClientToken)
-
-	UpdateLifecyclePolicyResponse_lifecyclePolicyDetail = UpdateLifecyclePolicyResponse.AddMember("lifecyclePolicyDetail", LifecyclePolicyDetail)
-
-	UpdateSecurityConfigRequest_id = UpdateSecurityConfigRequest.AddMember("id", _SecurityConfigId)
-
-	UpdateSecurityConfigRequest_configVersion = UpdateSecurityConfigRequest.AddMember("configVersion", _PolicyVersion)
-
-	UpdateSecurityConfigRequest_description = UpdateSecurityConfigRequest.AddMember("description", _ConfigDescription)
-
-	UpdateSecurityConfigRequest_samlOptions = UpdateSecurityConfigRequest.AddMember("samlOptions", SamlConfigOptions)
-
-	UpdateSecurityConfigRequest_iamIdentityCenterOptionsUpdates = UpdateSecurityConfigRequest.AddMember("iamIdentityCenterOptionsUpdates", UpdateIamIdentityCenterConfigOptions)
-
-	UpdateSecurityConfigRequest_iamFederationOptions = UpdateSecurityConfigRequest.AddMember("iamFederationOptions", IamFederationConfigOptions)
-
-	UpdateSecurityConfigRequest_clientToken = UpdateSecurityConfigRequest.AddMember("clientToken", _ClientToken)
-
-	UpdateSecurityConfigResponse_securityConfigDetail = UpdateSecurityConfigResponse.AddMember("securityConfigDetail", SecurityConfigDetail)
-
-	UpdateSecurityPolicyRequest_type = UpdateSecurityPolicyRequest.AddMember("type", _SecurityPolicyType)
-
-	UpdateSecurityPolicyRequest_name = UpdateSecurityPolicyRequest.AddMember("name", _PolicyName)
-
-	UpdateSecurityPolicyRequest_policyVersion = UpdateSecurityPolicyRequest.AddMember("policyVersion", _PolicyVersion)
-
-	UpdateSecurityPolicyRequest_description = UpdateSecurityPolicyRequest.AddMember("description", _PolicyDescription)
-
-	UpdateSecurityPolicyRequest_policy = UpdateSecurityPolicyRequest.AddMember("policy", _PolicyDocument)
-
-	UpdateSecurityPolicyRequest_clientToken = UpdateSecurityPolicyRequest.AddMember("clientToken", _ClientToken)
-
-	UpdateSecurityPolicyResponse_securityPolicyDetail = UpdateSecurityPolicyResponse.AddMember("securityPolicyDetail", SecurityPolicyDetail)
-
-	UpdateVpcEndpointRequest_id = UpdateVpcEndpointRequest.AddMember("id", _VpcEndpointId)
-
-	UpdateVpcEndpointRequest_addSubnetIds = UpdateVpcEndpointRequest.AddMember("addSubnetIds", _SubnetIds)
-
-	UpdateVpcEndpointRequest_removeSubnetIds = UpdateVpcEndpointRequest.AddMember("removeSubnetIds", _SubnetIds)
-
-	UpdateVpcEndpointRequest_addSecurityGroupIds = UpdateVpcEndpointRequest.AddMember("addSecurityGroupIds", _SecurityGroupIds)
-
-	UpdateVpcEndpointRequest_removeSecurityGroupIds = UpdateVpcEndpointRequest.AddMember("removeSecurityGroupIds", _SecurityGroupIds)
-
-	UpdateVpcEndpointRequest_clientToken = UpdateVpcEndpointRequest.AddMember("clientToken", _ClientToken)
-
-	UpdateVpcEndpointResponse_UpdateVpcEndpointDetail = UpdateVpcEndpointResponse.AddMember("UpdateVpcEndpointDetail", UpdateVpcEndpointDetail)
-
-}
+var (
+	iBatchGetCollection                       = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "BatchGetCollection"}
+	iBatchGetCollectionGroup                  = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "BatchGetCollectionGroup"}
+	iBatchGetEffectiveLifecyclePolicy         = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "BatchGetEffectiveLifecyclePolicy"}
+	iBatchGetLifecyclePolicy                  = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "BatchGetLifecyclePolicy"}
+	iBatchGetVpcEndpoint                      = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "BatchGetVpcEndpoint"}
+	iCancelIngestionJob                       = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CancelIngestionJob"}
+	iCreateAccessPolicy                       = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CreateAccessPolicy"}
+	iCreateCollection                         = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CreateCollection"}
+	iCreateCollectionGroup                    = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CreateCollectionGroup"}
+	iCreateIndex                              = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CreateIndex"}
+	iCreateIngestionJob                       = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CreateIngestionJob"}
+	iCreateIngestionStream                    = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CreateIngestionStream"}
+	iCreateLifecyclePolicy                    = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CreateLifecyclePolicy"}
+	iCreateSecurityConfig                     = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CreateSecurityConfig"}
+	iCreateSecurityPolicy                     = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CreateSecurityPolicy"}
+	iCreateVpcEndpoint                        = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CreateVpcEndpoint"}
+	iDeleteAccessPolicy                       = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "DeleteAccessPolicy"}
+	iDeleteCollection                         = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "DeleteCollection"}
+	iDeleteCollectionGroup                    = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "DeleteCollectionGroup"}
+	iDeleteIndex                              = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "DeleteIndex"}
+	iDeleteIngestionStream                    = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "DeleteIngestionStream"}
+	iDeleteLifecyclePolicy                    = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "DeleteLifecyclePolicy"}
+	iDeleteSecurityConfig                     = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "DeleteSecurityConfig"}
+	iDeleteSecurityPolicy                     = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "DeleteSecurityPolicy"}
+	iDeleteVpcEndpoint                        = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "DeleteVpcEndpoint"}
+	iGetAccessPolicy                          = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "GetAccessPolicy"}
+	iGetAccountSettings                       = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "GetAccountSettings"}
+	iGetIndex                                 = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "GetIndex"}
+	iGetIngestionJob                          = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "GetIngestionJob"}
+	iGetIngestionStream                       = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "GetIngestionStream"}
+	iGetPoliciesStats                         = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "GetPoliciesStats"}
+	iGetSecurityConfig                        = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "GetSecurityConfig"}
+	iGetSecurityPolicy                        = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "GetSecurityPolicy"}
+	iListAccessPolicies                       = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "ListAccessPolicies"}
+	iListCollectionGroups                     = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "ListCollectionGroups"}
+	iListCollections                          = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "ListCollections"}
+	iListIngestionJobs                        = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "ListIngestionJobs"}
+	iListIngestionStreams                     = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "ListIngestionStreams"}
+	iListLifecyclePolicies                    = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "ListLifecyclePolicies"}
+	iListSecurityConfigs                      = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "ListSecurityConfigs"}
+	iListSecurityPolicies                     = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "ListSecurityPolicies"}
+	iListTagsForResource                      = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "ListTagsForResource"}
+	iListVpcEndpoints                         = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "ListVpcEndpoints"}
+	iTagResource                              = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "TagResource"}
+	iUntagResource                            = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "UntagResource"}
+	iUpdateAccessPolicy                       = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "UpdateAccessPolicy"}
+	iUpdateAccountSettings                    = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "UpdateAccountSettings"}
+	iUpdateCollection                         = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "UpdateCollection"}
+	iUpdateCollectionGroup                    = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "UpdateCollectionGroup"}
+	iUpdateIndex                              = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "UpdateIndex"}
+	iUpdateLifecyclePolicy                    = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "UpdateLifecyclePolicy"}
+	iUpdateSecurityConfig                     = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "UpdateSecurityConfig"}
+	iUpdateSecurityPolicy                     = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "UpdateSecurityPolicy"}
+	iUpdateVpcEndpoint                        = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "UpdateVpcEndpoint"}
+	i_OpenSearchServerless                    = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "OpenSearchServerless"}
+	iAccessPolicyDetail                       = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "AccessPolicyDetail"}
+	iAccessPolicyStats                        = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "AccessPolicyStats"}
+	i_AccessPolicySummaries                   = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "AccessPolicySummaries"}
+	iAccessPolicySummary                      = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "AccessPolicySummary"}
+	i_AccessPolicyType                        = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "AccessPolicyType"}
+	iAccountSettingsDetail                    = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "AccountSettingsDetail"}
+	i_Arn                                     = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "Arn"}
+	i_AutoscalingStatus                       = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "AutoscalingStatus"}
+	i_BucketOwnerAccountId                    = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "BucketOwnerAccountId"}
+	iCapacityDetails                          = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CapacityDetails"}
+	iCapacityLimits                           = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CapacityLimits"}
+	i_ClientToken                             = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "ClientToken"}
+	iCollectionDetail                         = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CollectionDetail"}
+	i_CollectionDetails                       = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CollectionDetails"}
+	iCollectionErrorDetail                    = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CollectionErrorDetail"}
+	i_CollectionErrorDetails                  = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CollectionErrorDetails"}
+	iCollectionFilters                        = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CollectionFilters"}
+	iCollectionGroupCapacityLimits            = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CollectionGroupCapacityLimits"}
+	iCollectionGroupDetail                    = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CollectionGroupDetail"}
+	i_CollectionGroupDetails                  = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CollectionGroupDetails"}
+	iCollectionGroupErrorDetail               = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CollectionGroupErrorDetail"}
+	i_CollectionGroupErrorDetails             = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CollectionGroupErrorDetails"}
+	i_CollectionGroupId                       = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CollectionGroupId"}
+	i_CollectionGroupIds                      = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CollectionGroupIds"}
+	i_CollectionGroupMaxIndexingCapacityValue = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CollectionGroupMaxIndexingCapacityValue"}
+	i_CollectionGroupMaxSearchCapacityValue   = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CollectionGroupMaxSearchCapacityValue"}
+	i_CollectionGroupMinIndexingCapacityValue = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CollectionGroupMinIndexingCapacityValue"}
+	i_CollectionGroupMinSearchCapacityValue   = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CollectionGroupMinSearchCapacityValue"}
+	i_CollectionGroupName                     = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CollectionGroupName"}
+	i_CollectionGroupNames                    = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CollectionGroupNames"}
+	i_CollectionGroupSummaries                = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CollectionGroupSummaries"}
+	iCollectionGroupSummary                   = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CollectionGroupSummary"}
+	i_CollectionId                            = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CollectionId"}
+	i_CollectionIds                           = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CollectionIds"}
+	i_CollectionName                          = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CollectionName"}
+	i_CollectionNames                         = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CollectionNames"}
+	i_CollectionStatus                        = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CollectionStatus"}
+	i_CollectionSummaries                     = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CollectionSummaries"}
+	iCollectionSummary                        = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CollectionSummary"}
+	i_CollectionType                          = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CollectionType"}
+	i_ConfigDescription                       = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "ConfigDescription"}
+	i_ConfigName                              = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "ConfigName"}
+	iConflictException                        = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "ConflictException"}
+	iCreateCollectionDetail                   = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CreateCollectionDetail"}
+	iCreateCollectionGroupDetail              = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CreateCollectionGroupDetail"}
+	iCreateIamIdentityCenterConfigOptions     = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CreateIamIdentityCenterConfigOptions"}
+	iCreateVpcEndpointDetail                  = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CreateVpcEndpointDetail"}
+	iCurrentCapacity                          = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CurrentCapacity"}
+	iDeleteCollectionDetail                   = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "DeleteCollectionDetail"}
+	iDeleteVpcEndpointDetail                  = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "DeleteVpcEndpointDetail"}
+	i_DeletionProtection                      = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "DeletionProtection"}
+	iEffectiveLifecyclePolicyDetail           = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "EffectiveLifecyclePolicyDetail"}
+	i_EffectiveLifecyclePolicyDetails         = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "EffectiveLifecyclePolicyDetails"}
+	iEffectiveLifecyclePolicyErrorDetail      = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "EffectiveLifecyclePolicyErrorDetail"}
+	i_EffectiveLifecyclePolicyErrorDetails    = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "EffectiveLifecyclePolicyErrorDetails"}
+	iEncryptionConfig                         = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "EncryptionConfig"}
+	iFipsEndpoints                            = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "FipsEndpoints"}
+	iIamFederationConfigOptions               = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "IamFederationConfigOptions"}
+	i_iamFederationGroupAttribute             = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "iamFederationGroupAttribute"}
+	i_iamFederationUserAttribute              = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "iamFederationUserAttribute"}
+	i_IamIdentityCenterApplicationArn         = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "IamIdentityCenterApplicationArn"}
+	iIamIdentityCenterConfigOptions           = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "IamIdentityCenterConfigOptions"}
+	i_IamIdentityCenterGroupAttribute         = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "IamIdentityCenterGroupAttribute"}
+	i_IamIdentityCenterInstanceArn            = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "IamIdentityCenterInstanceArn"}
+	i_IamIdentityCenterUserAttribute          = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "IamIdentityCenterUserAttribute"}
+	i_IndexingCapacityValue                   = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "IndexingCapacityValue"}
+	i_IndexName                               = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "IndexName"}
+	i_IndexSchema                             = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "IndexSchema"}
+	iIngestionAlert                           = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "IngestionAlert"}
+	i_IngestionAlertCode                      = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "IngestionAlertCode"}
+	i_IngestionAlerts                         = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "IngestionAlerts"}
+	i_IngestionFailureCode                    = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "IngestionFailureCode"}
+	iIngestionFailureReason                   = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "IngestionFailureReason"}
+	i_IngestionFailureReasons                 = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "IngestionFailureReasons"}
+	i_IngestionIndexName                      = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "IngestionIndexName"}
+	iIngestionJobDetail                       = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "IngestionJobDetail"}
+	i_IngestionJobId                          = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "IngestionJobId"}
+	i_IngestionJobName                        = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "IngestionJobName"}
+	i_IngestionJobResourceArn                 = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "IngestionJobResourceArn"}
+	iIngestionJobS3Source                     = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "IngestionJobS3Source"}
+	iIngestionJobSource                       = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "IngestionJobSource"}
+	i_IngestionJobStatus                      = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "IngestionJobStatus"}
+	i_IngestionJobSummaries                   = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "IngestionJobSummaries"}
+	iIngestionJobSummary                      = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "IngestionJobSummary"}
+	i_IngestionState                          = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "IngestionState"}
+	iIngestionStatistics                      = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "IngestionStatistics"}
+	iIngestionStreamDetail                    = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "IngestionStreamDetail"}
+	i_IngestionStreamId                       = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "IngestionStreamId"}
+	i_IngestionStreamName                     = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "IngestionStreamName"}
+	i_IngestionStreamResourceArn              = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "IngestionStreamResourceArn"}
+	iIngestionStreamS3Source                  = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "IngestionStreamS3Source"}
+	iIngestionStreamSource                    = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "IngestionStreamSource"}
+	i_IngestionStreamStatus                   = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "IngestionStreamStatus"}
+	i_IngestionStreamSummaries                = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "IngestionStreamSummaries"}
+	iIngestionStreamSummary                   = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "IngestionStreamSummary"}
+	i_InitialScan                             = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "InitialScan"}
+	iInternalServerException                  = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "InternalServerException"}
+	iLifecyclePolicyDetail                    = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "LifecyclePolicyDetail"}
+	i_LifecyclePolicyDetails                  = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "LifecyclePolicyDetails"}
+	iLifecyclePolicyErrorDetail               = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "LifecyclePolicyErrorDetail"}
+	i_LifecyclePolicyErrorDetails             = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "LifecyclePolicyErrorDetails"}
+	iLifecyclePolicyIdentifier                = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "LifecyclePolicyIdentifier"}
+	i_LifecyclePolicyIdentifiers              = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "LifecyclePolicyIdentifiers"}
+	iLifecyclePolicyResourceIdentifier        = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "LifecyclePolicyResourceIdentifier"}
+	i_LifecyclePolicyResourceIdentifiers      = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "LifecyclePolicyResourceIdentifiers"}
+	iLifecyclePolicyStats                     = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "LifecyclePolicyStats"}
+	i_LifecyclePolicySummaries                = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "LifecyclePolicySummaries"}
+	iLifecyclePolicySummary                   = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "LifecyclePolicySummary"}
+	i_LifecyclePolicyType                     = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "LifecyclePolicyType"}
+	i_LifecycleResource                       = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "LifecycleResource"}
+	i_LifecycleResourceFilter                 = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "LifecycleResourceFilter"}
+	iOcuLimitExceededException                = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "OcuLimitExceededException"}
+	i_openSearchServerlessEntityId            = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "openSearchServerlessEntityId"}
+	i_PolicyDescription                       = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "PolicyDescription"}
+	i_PolicyDocument                          = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "PolicyDocument"}
+	i_PolicyName                              = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "PolicyName"}
+	i_PolicyVersion                           = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "PolicyVersion"}
+	i_Resource                                = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "Resource"}
+	i_ResourceFilter                          = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "ResourceFilter"}
+	i_ResourceName                            = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "ResourceName"}
+	iResourceNotFoundException                = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "ResourceNotFoundException"}
+	i_ResourceType                            = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "ResourceType"}
+	i_RoleArn                                 = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "RoleArn"}
+	i_S3BucketNameOrArn                       = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "S3BucketNameOrArn"}
+	iS3Statistics                             = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "S3Statistics"}
+	iSamlConfigOptions                        = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "SamlConfigOptions"}
+	i_samlGroupAttribute                      = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "samlGroupAttribute"}
+	i_samlMetadata                            = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "samlMetadata"}
+	i_samlUserAttribute                       = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "samlUserAttribute"}
+	i_SearchCapacityValue                     = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "SearchCapacityValue"}
+	iSecurityConfigDetail                     = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "SecurityConfigDetail"}
+	i_SecurityConfigId                        = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "SecurityConfigId"}
+	iSecurityConfigStats                      = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "SecurityConfigStats"}
+	i_SecurityConfigSummaries                 = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "SecurityConfigSummaries"}
+	iSecurityConfigSummary                    = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "SecurityConfigSummary"}
+	i_SecurityConfigType                      = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "SecurityConfigType"}
+	i_SecurityGroupId                         = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "SecurityGroupId"}
+	i_SecurityGroupIds                        = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "SecurityGroupIds"}
+	iSecurityPolicyDetail                     = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "SecurityPolicyDetail"}
+	iSecurityPolicyStats                      = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "SecurityPolicyStats"}
+	i_SecurityPolicySummaries                 = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "SecurityPolicySummaries"}
+	iSecurityPolicySummary                    = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "SecurityPolicySummary"}
+	i_SecurityPolicyType                      = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "SecurityPolicyType"}
+	i_ServerlessGeneration                    = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "ServerlessGeneration"}
+	i_ServerlessVectorAccelerationStatus      = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "ServerlessVectorAccelerationStatus"}
+	iServiceQuotaExceededException            = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "ServiceQuotaExceededException"}
+	i_SqsArn                                  = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "SqsArn"}
+	i_StandbyReplicas                         = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "StandbyReplicas"}
+	iStreamBucketConfig                       = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "StreamBucketConfig"}
+	i_StreamBucketConfigs                     = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "StreamBucketConfigs"}
+	i_SubnetId                                = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "SubnetId"}
+	i_SubnetIds                               = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "SubnetIds"}
+	iTag                                      = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "Tag"}
+	i_TagKey                                  = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "TagKey"}
+	i_TagKeys                                 = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "TagKeys"}
+	i_Tags                                    = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "Tags"}
+	i_TagValue                                = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "TagValue"}
+	iUpdateCollectionDetail                   = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "UpdateCollectionDetail"}
+	iUpdateCollectionGroupDetail              = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "UpdateCollectionGroupDetail"}
+	iUpdateIamIdentityCenterConfigOptions     = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "UpdateIamIdentityCenterConfigOptions"}
+	iUpdateVpcEndpointDetail                  = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "UpdateVpcEndpointDetail"}
+	iValidationException                      = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "ValidationException"}
+	iVectorOptions                            = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "VectorOptions"}
+	iVpcEndpointDetail                        = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "VpcEndpointDetail"}
+	i_VpcEndpointDetails                      = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "VpcEndpointDetails"}
+	iVpcEndpointErrorDetail                   = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "VpcEndpointErrorDetail"}
+	i_VpcEndpointErrorDetails                 = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "VpcEndpointErrorDetails"}
+	iVpcEndpointFilters                       = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "VpcEndpointFilters"}
+	i_VpcEndpointId                           = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "VpcEndpointId"}
+	i_VpcEndpointIds                          = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "VpcEndpointIds"}
+	i_VpcEndpointName                         = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "VpcEndpointName"}
+	i_VpcEndpointStatus                       = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "VpcEndpointStatus"}
+	i_VpcEndpointSummaries                    = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "VpcEndpointSummaries"}
+	iVpcEndpointSummary                       = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "VpcEndpointSummary"}
+	i_VpcId                                   = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "VpcId"}
+	iBatchGetCollectionGroupRequest           = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "BatchGetCollectionGroupRequest"}
+	iBatchGetCollectionGroupResponse          = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "BatchGetCollectionGroupResponse"}
+	iBatchGetCollectionRequest                = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "BatchGetCollectionRequest"}
+	iBatchGetCollectionResponse               = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "BatchGetCollectionResponse"}
+	iBatchGetEffectiveLifecyclePolicyRequest  = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "BatchGetEffectiveLifecyclePolicyRequest"}
+	iBatchGetEffectiveLifecyclePolicyResponse = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "BatchGetEffectiveLifecyclePolicyResponse"}
+	iBatchGetLifecyclePolicyRequest           = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "BatchGetLifecyclePolicyRequest"}
+	iBatchGetLifecyclePolicyResponse          = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "BatchGetLifecyclePolicyResponse"}
+	iBatchGetVpcEndpointRequest               = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "BatchGetVpcEndpointRequest"}
+	iBatchGetVpcEndpointResponse              = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "BatchGetVpcEndpointResponse"}
+	iCancelIngestionJobRequest                = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CancelIngestionJobRequest"}
+	iCancelIngestionJobResponse               = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CancelIngestionJobResponse"}
+	iCreateAccessPolicyRequest                = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CreateAccessPolicyRequest"}
+	iCreateAccessPolicyResponse               = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CreateAccessPolicyResponse"}
+	iCreateCollectionGroupRequest             = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CreateCollectionGroupRequest"}
+	iCreateCollectionGroupResponse            = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CreateCollectionGroupResponse"}
+	iCreateCollectionRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CreateCollectionRequest"}
+	iCreateCollectionResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CreateCollectionResponse"}
+	iCreateIndexRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CreateIndexRequest"}
+	iCreateIndexResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CreateIndexResponse"}
+	iCreateIngestionJobRequest                = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CreateIngestionJobRequest"}
+	iCreateIngestionJobResponse               = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CreateIngestionJobResponse"}
+	iCreateIngestionStreamRequest             = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CreateIngestionStreamRequest"}
+	iCreateIngestionStreamResponse            = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CreateIngestionStreamResponse"}
+	iCreateLifecyclePolicyRequest             = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CreateLifecyclePolicyRequest"}
+	iCreateLifecyclePolicyResponse            = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CreateLifecyclePolicyResponse"}
+	iCreateSecurityConfigRequest              = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CreateSecurityConfigRequest"}
+	iCreateSecurityConfigResponse             = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CreateSecurityConfigResponse"}
+	iCreateSecurityPolicyRequest              = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CreateSecurityPolicyRequest"}
+	iCreateSecurityPolicyResponse             = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CreateSecurityPolicyResponse"}
+	iCreateVpcEndpointRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CreateVpcEndpointRequest"}
+	iCreateVpcEndpointResponse                = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "CreateVpcEndpointResponse"}
+	iDeleteAccessPolicyRequest                = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "DeleteAccessPolicyRequest"}
+	iDeleteAccessPolicyResponse               = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "DeleteAccessPolicyResponse"}
+	iDeleteCollectionGroupRequest             = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "DeleteCollectionGroupRequest"}
+	iDeleteCollectionGroupResponse            = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "DeleteCollectionGroupResponse"}
+	iDeleteCollectionRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "DeleteCollectionRequest"}
+	iDeleteCollectionResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "DeleteCollectionResponse"}
+	iDeleteIndexRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "DeleteIndexRequest"}
+	iDeleteIndexResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "DeleteIndexResponse"}
+	iDeleteIngestionStreamRequest             = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "DeleteIngestionStreamRequest"}
+	iDeleteIngestionStreamResponse            = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "DeleteIngestionStreamResponse"}
+	iDeleteLifecyclePolicyRequest             = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "DeleteLifecyclePolicyRequest"}
+	iDeleteLifecyclePolicyResponse            = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "DeleteLifecyclePolicyResponse"}
+	iDeleteSecurityConfigRequest              = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "DeleteSecurityConfigRequest"}
+	iDeleteSecurityConfigResponse             = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "DeleteSecurityConfigResponse"}
+	iDeleteSecurityPolicyRequest              = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "DeleteSecurityPolicyRequest"}
+	iDeleteSecurityPolicyResponse             = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "DeleteSecurityPolicyResponse"}
+	iDeleteVpcEndpointRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "DeleteVpcEndpointRequest"}
+	iDeleteVpcEndpointResponse                = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "DeleteVpcEndpointResponse"}
+	iGetAccessPolicyRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "GetAccessPolicyRequest"}
+	iGetAccessPolicyResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "GetAccessPolicyResponse"}
+	iGetAccountSettingsRequest                = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "GetAccountSettingsRequest"}
+	iGetAccountSettingsResponse               = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "GetAccountSettingsResponse"}
+	iGetIndexRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "GetIndexRequest"}
+	iGetIndexResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "GetIndexResponse"}
+	iGetIngestionJobRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "GetIngestionJobRequest"}
+	iGetIngestionJobResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "GetIngestionJobResponse"}
+	iGetIngestionStreamRequest                = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "GetIngestionStreamRequest"}
+	iGetIngestionStreamResponse               = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "GetIngestionStreamResponse"}
+	iGetPoliciesStatsRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "GetPoliciesStatsRequest"}
+	iGetPoliciesStatsResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "GetPoliciesStatsResponse"}
+	iGetSecurityConfigRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "GetSecurityConfigRequest"}
+	iGetSecurityConfigResponse                = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "GetSecurityConfigResponse"}
+	iGetSecurityPolicyRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "GetSecurityPolicyRequest"}
+	iGetSecurityPolicyResponse                = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "GetSecurityPolicyResponse"}
+	iListAccessPoliciesRequest                = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "ListAccessPoliciesRequest"}
+	iListAccessPoliciesResponse               = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "ListAccessPoliciesResponse"}
+	iListCollectionGroupsRequest              = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "ListCollectionGroupsRequest"}
+	iListCollectionGroupsResponse             = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "ListCollectionGroupsResponse"}
+	iListCollectionsRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "ListCollectionsRequest"}
+	iListCollectionsResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "ListCollectionsResponse"}
+	iListIngestionJobsRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "ListIngestionJobsRequest"}
+	iListIngestionJobsResponse                = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "ListIngestionJobsResponse"}
+	iListIngestionStreamsRequest              = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "ListIngestionStreamsRequest"}
+	iListIngestionStreamsResponse             = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "ListIngestionStreamsResponse"}
+	iListLifecyclePoliciesRequest             = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "ListLifecyclePoliciesRequest"}
+	iListLifecyclePoliciesResponse            = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "ListLifecyclePoliciesResponse"}
+	iListSecurityConfigsRequest               = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "ListSecurityConfigsRequest"}
+	iListSecurityConfigsResponse              = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "ListSecurityConfigsResponse"}
+	iListSecurityPoliciesRequest              = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "ListSecurityPoliciesRequest"}
+	iListSecurityPoliciesResponse             = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "ListSecurityPoliciesResponse"}
+	iListTagsForResourceRequest               = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse              = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "ListTagsForResourceResponse"}
+	iListVpcEndpointsRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "ListVpcEndpointsRequest"}
+	iListVpcEndpointsResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "ListVpcEndpointsResponse"}
+	iTagResourceRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "TagResourceRequest"}
+	iTagResourceResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "TagResourceResponse"}
+	iUntagResourceRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "UntagResourceResponse"}
+	iUpdateAccessPolicyRequest                = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "UpdateAccessPolicyRequest"}
+	iUpdateAccessPolicyResponse               = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "UpdateAccessPolicyResponse"}
+	iUpdateAccountSettingsRequest             = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "UpdateAccountSettingsRequest"}
+	iUpdateAccountSettingsResponse            = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "UpdateAccountSettingsResponse"}
+	iUpdateCollectionGroupRequest             = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "UpdateCollectionGroupRequest"}
+	iUpdateCollectionGroupResponse            = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "UpdateCollectionGroupResponse"}
+	iUpdateCollectionRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "UpdateCollectionRequest"}
+	iUpdateCollectionResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "UpdateCollectionResponse"}
+	iUpdateIndexRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "UpdateIndexRequest"}
+	iUpdateIndexResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "UpdateIndexResponse"}
+	iUpdateLifecyclePolicyRequest             = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "UpdateLifecyclePolicyRequest"}
+	iUpdateLifecyclePolicyResponse            = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "UpdateLifecyclePolicyResponse"}
+	iUpdateSecurityConfigRequest              = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "UpdateSecurityConfigRequest"}
+	iUpdateSecurityConfigResponse             = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "UpdateSecurityConfigResponse"}
+	iUpdateSecurityPolicyRequest              = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "UpdateSecurityPolicyRequest"}
+	iUpdateSecurityPolicyResponse             = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "UpdateSecurityPolicyResponse"}
+	iUpdateVpcEndpointRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "UpdateVpcEndpointRequest"}
+	iUpdateVpcEndpointResponse                = smithy.ShapeID{Namespace: "com.amazonaws.opensearchserverless", Name: "UpdateVpcEndpointResponse"}
+	pDocument                                 = smithy.ShapeID{Namespace: "smithy.api", Name: "Document"}
+	pLong                                     = smithy.ShapeID{Namespace: "smithy.api", Name: "Long"}
+	pFloat                                    = smithy.ShapeID{Namespace: "smithy.api", Name: "Float"}
+	pString                                   = smithy.ShapeID{Namespace: "smithy.api", Name: "String"}
+	pInteger                                  = smithy.ShapeID{Namespace: "smithy.api", Name: "Integer"}
+	pBoolean                                  = smithy.ShapeID{Namespace: "smithy.api", Name: "Boolean"}
+	pTimestamp                                = smithy.ShapeID{Namespace: "smithy.api", Name: "Timestamp"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+
+var mAccessPolicyDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessPolicyDetail_type, &sAccessPolicyDetail_name, &sAccessPolicyDetail_policyVersion, &sAccessPolicyDetail_description, &sAccessPolicyDetail_policy, &sAccessPolicyDetail_createdDate, &sAccessPolicyDetail_lastModifiedDate}}
+var mAccessPolicyStats = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessPolicyStats_DataPolicyCount}}
+var m_AccessPolicySummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_AccessPolicySummaries_member}}
+var mAccessPolicySummary = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessPolicySummary_type, &sAccessPolicySummary_name, &sAccessPolicySummary_policyVersion, &sAccessPolicySummary_description, &sAccessPolicySummary_createdDate, &sAccessPolicySummary_lastModifiedDate}}
+var mAccountSettingsDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sAccountSettingsDetail_capacityLimits}}
+var mCapacityDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sCapacityDetails_capacityInOcu, &sCapacityDetails_autoscalingStatus}}
+var mCapacityLimits = smithy.SchemaMembers{List: []*smithy.Schema{&sCapacityLimits_maxIndexingCapacityInOCU, &sCapacityLimits_maxSearchCapacityInOCU}}
+var mCollectionDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sCollectionDetail_id, &sCollectionDetail_name, &sCollectionDetail_status, &sCollectionDetail_type, &sCollectionDetail_description, &sCollectionDetail_arn, &sCollectionDetail_kmsKeyArn, &sCollectionDetail_standbyReplicas, &sCollectionDetail_deletionProtection, &sCollectionDetail_vectorOptions, &sCollectionDetail_createdDate, &sCollectionDetail_lastModifiedDate, &sCollectionDetail_collectionEndpoint, &sCollectionDetail_dashboardEndpoint, &sCollectionDetail_fipsEndpoints, &sCollectionDetail_failureCode, &sCollectionDetail_failureMessage, &sCollectionDetail_collectionGroupName}, Seed: 33, Slots: []uint16{
+	16, 0, 0, 0, 0, 7, 0, 0, 0, 0, 18, 0, 8, 0, 0, 0, 9, 0, 0, 14, 0, 0, 4, 0,
+	0, 0, 0, 0, 0, 0, 5, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 13, 10, 11, 15,
+	0, 0, 2, 0, 6, 0, 0, 0, 0, 0, 0, 3, 12, 1, 0, 0,
+}}
+var m_CollectionDetails = smithy.SchemaMembers{List: []*smithy.Schema{&s_CollectionDetails_member}}
+var mCollectionErrorDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sCollectionErrorDetail_id, &sCollectionErrorDetail_name, &sCollectionErrorDetail_errorMessage, &sCollectionErrorDetail_errorCode}}
+var m_CollectionErrorDetails = smithy.SchemaMembers{List: []*smithy.Schema{&s_CollectionErrorDetails_member}}
+var mCollectionFilters = smithy.SchemaMembers{List: []*smithy.Schema{&sCollectionFilters_name, &sCollectionFilters_status, &sCollectionFilters_collectionGroupName}}
+var mCollectionGroupCapacityLimits = smithy.SchemaMembers{List: []*smithy.Schema{&sCollectionGroupCapacityLimits_maxIndexingCapacityInOCU, &sCollectionGroupCapacityLimits_maxSearchCapacityInOCU, &sCollectionGroupCapacityLimits_minIndexingCapacityInOCU, &sCollectionGroupCapacityLimits_minSearchCapacityInOCU}}
+var mCollectionGroupDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sCollectionGroupDetail_id, &sCollectionGroupDetail_arn, &sCollectionGroupDetail_name, &sCollectionGroupDetail_standbyReplicas, &sCollectionGroupDetail_description, &sCollectionGroupDetail_tags, &sCollectionGroupDetail_createdDate, &sCollectionGroupDetail_capacityLimits, &sCollectionGroupDetail_currentCapacity, &sCollectionGroupDetail_numberOfCollections, &sCollectionGroupDetail_generation}, Seed: 1, Slots: []uint16{
+	2, 1, 9, 11, 6, 0, 3, 0, 0, 7, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	5, 0, 0, 0, 10, 0, 8, 0,
+}}
+var m_CollectionGroupDetails = smithy.SchemaMembers{List: []*smithy.Schema{&s_CollectionGroupDetails_member}}
+var mCollectionGroupErrorDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sCollectionGroupErrorDetail_id, &sCollectionGroupErrorDetail_name, &sCollectionGroupErrorDetail_errorMessage, &sCollectionGroupErrorDetail_errorCode}}
+var m_CollectionGroupErrorDetails = smithy.SchemaMembers{List: []*smithy.Schema{&s_CollectionGroupErrorDetails_member}}
+var m_CollectionGroupIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_CollectionGroupIds_member}}
+var m_CollectionGroupNames = smithy.SchemaMembers{List: []*smithy.Schema{&s_CollectionGroupNames_member}}
+var m_CollectionGroupSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_CollectionGroupSummaries_member}}
+var mCollectionGroupSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sCollectionGroupSummary_id, &sCollectionGroupSummary_arn, &sCollectionGroupSummary_name, &sCollectionGroupSummary_numberOfCollections, &sCollectionGroupSummary_createdDate, &sCollectionGroupSummary_capacityLimits, &sCollectionGroupSummary_generation}}
+var m_CollectionIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_CollectionIds_member}}
+var m_CollectionNames = smithy.SchemaMembers{List: []*smithy.Schema{&s_CollectionNames_member}}
+var m_CollectionSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_CollectionSummaries_member}}
+var mCollectionSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sCollectionSummary_id, &sCollectionSummary_name, &sCollectionSummary_status, &sCollectionSummary_arn, &sCollectionSummary_kmsKeyArn, &sCollectionSummary_collectionGroupName}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message}}
+var mCreateCollectionDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCollectionDetail_id, &sCreateCollectionDetail_name, &sCreateCollectionDetail_status, &sCreateCollectionDetail_type, &sCreateCollectionDetail_description, &sCreateCollectionDetail_arn, &sCreateCollectionDetail_kmsKeyArn, &sCreateCollectionDetail_standbyReplicas, &sCreateCollectionDetail_deletionProtection, &sCreateCollectionDetail_vectorOptions, &sCreateCollectionDetail_createdDate, &sCreateCollectionDetail_lastModifiedDate, &sCreateCollectionDetail_collectionGroupName}, Seed: 24, Slots: []uint16{
+	0, 12, 0, 0, 0, 0, 13, 4, 6, 0, 0, 0, 2, 0, 10, 8, 9, 0, 0, 0, 3, 0, 5, 0,
+	0, 0, 11, 1, 0, 0, 0, 7,
+}}
+var mCreateCollectionGroupDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCollectionGroupDetail_id, &sCreateCollectionGroupDetail_arn, &sCreateCollectionGroupDetail_name, &sCreateCollectionGroupDetail_standbyReplicas, &sCreateCollectionGroupDetail_description, &sCreateCollectionGroupDetail_tags, &sCreateCollectionGroupDetail_createdDate, &sCreateCollectionGroupDetail_capacityLimits, &sCreateCollectionGroupDetail_generation}, Seed: 1, Slots: []uint16{
+	2, 1, 0, 9, 6, 0, 3, 0, 0, 7, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	5, 0, 0, 0, 0, 0, 8, 0,
+}}
+var mCreateIamIdentityCenterConfigOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateIamIdentityCenterConfigOptions_instanceArn, &sCreateIamIdentityCenterConfigOptions_userAttribute, &sCreateIamIdentityCenterConfigOptions_groupAttribute}}
+var mCreateVpcEndpointDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateVpcEndpointDetail_id, &sCreateVpcEndpointDetail_name, &sCreateVpcEndpointDetail_status}}
+var mCurrentCapacity = smithy.SchemaMembers{List: []*smithy.Schema{&sCurrentCapacity_search, &sCurrentCapacity_indexing}}
+var mDeleteCollectionDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteCollectionDetail_id, &sDeleteCollectionDetail_name, &sDeleteCollectionDetail_status, &sDeleteCollectionDetail_deletionProtection}}
+var mDeleteVpcEndpointDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteVpcEndpointDetail_id, &sDeleteVpcEndpointDetail_name, &sDeleteVpcEndpointDetail_status}}
+var mEffectiveLifecyclePolicyDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sEffectiveLifecyclePolicyDetail_type, &sEffectiveLifecyclePolicyDetail_resource, &sEffectiveLifecyclePolicyDetail_policyName, &sEffectiveLifecyclePolicyDetail_resourceType, &sEffectiveLifecyclePolicyDetail_retentionPeriod, &sEffectiveLifecyclePolicyDetail_noMinRetentionPeriod}}
+var m_EffectiveLifecyclePolicyDetails = smithy.SchemaMembers{List: []*smithy.Schema{&s_EffectiveLifecyclePolicyDetails_member}}
+var mEffectiveLifecyclePolicyErrorDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sEffectiveLifecyclePolicyErrorDetail_type, &sEffectiveLifecyclePolicyErrorDetail_resource, &sEffectiveLifecyclePolicyErrorDetail_errorMessage, &sEffectiveLifecyclePolicyErrorDetail_errorCode}}
+var m_EffectiveLifecyclePolicyErrorDetails = smithy.SchemaMembers{List: []*smithy.Schema{&s_EffectiveLifecyclePolicyErrorDetails_member}}
+var mEncryptionConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sEncryptionConfig_aWSOwnedKey, &sEncryptionConfig_kmsKeyArn}}
+var mFipsEndpoints = smithy.SchemaMembers{List: []*smithy.Schema{&sFipsEndpoints_collectionEndpoint, &sFipsEndpoints_dashboardEndpoint}}
+var mIamFederationConfigOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sIamFederationConfigOptions_groupAttribute, &sIamFederationConfigOptions_userAttribute}}
+var mIamIdentityCenterConfigOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sIamIdentityCenterConfigOptions_instanceArn, &sIamIdentityCenterConfigOptions_applicationArn, &sIamIdentityCenterConfigOptions_applicationName, &sIamIdentityCenterConfigOptions_applicationDescription, &sIamIdentityCenterConfigOptions_userAttribute, &sIamIdentityCenterConfigOptions_groupAttribute}}
+var mIngestionAlert = smithy.SchemaMembers{List: []*smithy.Schema{&sIngestionAlert_code, &sIngestionAlert_message}}
+var m_IngestionAlerts = smithy.SchemaMembers{List: []*smithy.Schema{&s_IngestionAlerts_member}}
+var mIngestionFailureReason = smithy.SchemaMembers{List: []*smithy.Schema{&sIngestionFailureReason_code, &sIngestionFailureReason_message}}
+var m_IngestionFailureReasons = smithy.SchemaMembers{List: []*smithy.Schema{&s_IngestionFailureReasons_member}}
+var mIngestionJobDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sIngestionJobDetail_ingestionJobId, &sIngestionJobDetail_arn, &sIngestionJobDetail_collectionId, &sIngestionJobDetail_ingestionJobName, &sIngestionJobDetail_indexName, &sIngestionJobDetail_failureIndexName, &sIngestionJobDetail_source, &sIngestionJobDetail_status, &sIngestionJobDetail_state, &sIngestionJobDetail_statistics, &sIngestionJobDetail_revision, &sIngestionJobDetail_createdAt, &sIngestionJobDetail_updatedAt, &sIngestionJobDetail_failureReasons, &sIngestionJobDetail_activeAlerts}, Seed: 136, Slots: []uint16{
+	0, 12, 0, 0, 0, 7, 0, 0, 0, 0, 10, 5, 0, 0, 8, 4, 0, 0, 9, 6, 0, 14, 11, 0,
+	13, 0, 3, 0, 1, 2, 15, 0,
+}}
+var mIngestionJobS3Source = smithy.SchemaMembers{List: []*smithy.Schema{&sIngestionJobS3Source_bucket, &sIngestionJobS3Source_bucketOwnerAccountId, &sIngestionJobS3Source_keyPrefix}}
+var mIngestionJobSource = smithy.SchemaMembers{List: []*smithy.Schema{&sIngestionJobSource_s3}}
+var m_IngestionJobSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_IngestionJobSummaries_member}}
+var mIngestionJobSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sIngestionJobSummary_ingestionJobId, &sIngestionJobSummary_arn, &sIngestionJobSummary_ingestionJobName, &sIngestionJobSummary_indexName, &sIngestionJobSummary_status, &sIngestionJobSummary_createdAt, &sIngestionJobSummary_updatedAt}}
+var mIngestionStatistics = smithy.SchemaMembers{List: []*smithy.Schema{&sIngestionStatistics_s3}}
+var mIngestionStreamDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sIngestionStreamDetail_ingestionStreamId, &sIngestionStreamDetail_arn, &sIngestionStreamDetail_collectionId, &sIngestionStreamDetail_ingestionStreamName, &sIngestionStreamDetail_indexName, &sIngestionStreamDetail_failureIndexName, &sIngestionStreamDetail_source, &sIngestionStreamDetail_roleArn, &sIngestionStreamDetail_status, &sIngestionStreamDetail_state, &sIngestionStreamDetail_statistics, &sIngestionStreamDetail_revision, &sIngestionStreamDetail_createdAt, &sIngestionStreamDetail_updatedAt, &sIngestionStreamDetail_failureReasons, &sIngestionStreamDetail_activeAlerts}, Seed: 87, Slots: []uint16{
+	0, 14, 3, 1, 0, 0, 0, 16, 0, 7, 0, 0, 0, 0, 0, 0, 2, 0, 5, 11, 0, 12, 8, 10,
+	0, 9, 0, 0, 13, 15, 6, 4,
+}}
+var mIngestionStreamS3Source = smithy.SchemaMembers{List: []*smithy.Schema{&sIngestionStreamS3Source_sqsArn, &sIngestionStreamS3Source_buckets}}
+var mIngestionStreamSource = smithy.SchemaMembers{List: []*smithy.Schema{&sIngestionStreamSource_s3}}
+var m_IngestionStreamSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_IngestionStreamSummaries_member}}
+var mIngestionStreamSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sIngestionStreamSummary_ingestionStreamId, &sIngestionStreamSummary_arn, &sIngestionStreamSummary_ingestionStreamName, &sIngestionStreamSummary_indexName, &sIngestionStreamSummary_status, &sIngestionStreamSummary_createdAt, &sIngestionStreamSummary_updatedAt}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message}}
+var mLifecyclePolicyDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sLifecyclePolicyDetail_type, &sLifecyclePolicyDetail_name, &sLifecyclePolicyDetail_policyVersion, &sLifecyclePolicyDetail_description, &sLifecyclePolicyDetail_policy, &sLifecyclePolicyDetail_createdDate, &sLifecyclePolicyDetail_lastModifiedDate}}
+var m_LifecyclePolicyDetails = smithy.SchemaMembers{List: []*smithy.Schema{&s_LifecyclePolicyDetails_member}}
+var mLifecyclePolicyErrorDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sLifecyclePolicyErrorDetail_type, &sLifecyclePolicyErrorDetail_name, &sLifecyclePolicyErrorDetail_errorMessage, &sLifecyclePolicyErrorDetail_errorCode}}
+var m_LifecyclePolicyErrorDetails = smithy.SchemaMembers{List: []*smithy.Schema{&s_LifecyclePolicyErrorDetails_member}}
+var mLifecyclePolicyIdentifier = smithy.SchemaMembers{List: []*smithy.Schema{&sLifecyclePolicyIdentifier_type, &sLifecyclePolicyIdentifier_name}}
+var m_LifecyclePolicyIdentifiers = smithy.SchemaMembers{List: []*smithy.Schema{&s_LifecyclePolicyIdentifiers_member}}
+var mLifecyclePolicyResourceIdentifier = smithy.SchemaMembers{List: []*smithy.Schema{&sLifecyclePolicyResourceIdentifier_type, &sLifecyclePolicyResourceIdentifier_resource}}
+var m_LifecyclePolicyResourceIdentifiers = smithy.SchemaMembers{List: []*smithy.Schema{&s_LifecyclePolicyResourceIdentifiers_member}}
+var mLifecyclePolicyStats = smithy.SchemaMembers{List: []*smithy.Schema{&sLifecyclePolicyStats_RetentionPolicyCount}}
+var m_LifecyclePolicySummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_LifecyclePolicySummaries_member}}
+var mLifecyclePolicySummary = smithy.SchemaMembers{List: []*smithy.Schema{&sLifecyclePolicySummary_type, &sLifecyclePolicySummary_name, &sLifecyclePolicySummary_policyVersion, &sLifecyclePolicySummary_description, &sLifecyclePolicySummary_createdDate, &sLifecyclePolicySummary_lastModifiedDate}}
+var m_LifecycleResourceFilter = smithy.SchemaMembers{List: []*smithy.Schema{&s_LifecycleResourceFilter_member}}
+var mOcuLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sOcuLimitExceededException_message}}
+var m_ResourceFilter = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceFilter_member}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message}}
+var mS3Statistics = smithy.SchemaMembers{List: []*smithy.Schema{&sS3Statistics_objectsDiscovered, &sS3Statistics_objectsIngested, &sS3Statistics_objectsFailed}}
+var mSamlConfigOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sSamlConfigOptions_metadata, &sSamlConfigOptions_userAttribute, &sSamlConfigOptions_groupAttribute, &sSamlConfigOptions_openSearchServerlessEntityId, &sSamlConfigOptions_sessionTimeout}}
+var mSecurityConfigDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sSecurityConfigDetail_id, &sSecurityConfigDetail_type, &sSecurityConfigDetail_configVersion, &sSecurityConfigDetail_description, &sSecurityConfigDetail_samlOptions, &sSecurityConfigDetail_iamIdentityCenterOptions, &sSecurityConfigDetail_iamFederationOptions, &sSecurityConfigDetail_createdDate, &sSecurityConfigDetail_lastModifiedDate}, Seed: 4, Slots: []uint16{
+	1, 8, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 7, 5,
+	9, 0, 0, 0, 6, 0, 3, 0,
+}}
+var mSecurityConfigStats = smithy.SchemaMembers{List: []*smithy.Schema{&sSecurityConfigStats_SamlConfigCount}}
+var m_SecurityConfigSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_SecurityConfigSummaries_member}}
+var mSecurityConfigSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sSecurityConfigSummary_id, &sSecurityConfigSummary_type, &sSecurityConfigSummary_configVersion, &sSecurityConfigSummary_description, &sSecurityConfigSummary_createdDate, &sSecurityConfigSummary_lastModifiedDate}}
+var m_SecurityGroupIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_SecurityGroupIds_member}}
+var mSecurityPolicyDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sSecurityPolicyDetail_type, &sSecurityPolicyDetail_name, &sSecurityPolicyDetail_policyVersion, &sSecurityPolicyDetail_description, &sSecurityPolicyDetail_policy, &sSecurityPolicyDetail_createdDate, &sSecurityPolicyDetail_lastModifiedDate}}
+var mSecurityPolicyStats = smithy.SchemaMembers{List: []*smithy.Schema{&sSecurityPolicyStats_EncryptionPolicyCount, &sSecurityPolicyStats_NetworkPolicyCount}}
+var m_SecurityPolicySummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_SecurityPolicySummaries_member}}
+var mSecurityPolicySummary = smithy.SchemaMembers{List: []*smithy.Schema{&sSecurityPolicySummary_type, &sSecurityPolicySummary_name, &sSecurityPolicySummary_policyVersion, &sSecurityPolicySummary_description, &sSecurityPolicySummary_createdDate, &sSecurityPolicySummary_lastModifiedDate}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message, &sServiceQuotaExceededException_resourceId, &sServiceQuotaExceededException_resourceType, &sServiceQuotaExceededException_serviceCode, &sServiceQuotaExceededException_quotaCode}}
+var mStreamBucketConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sStreamBucketConfig_bucket, &sStreamBucketConfig_bucketOwnerAccountId, &sStreamBucketConfig_initialScan}}
+var m_StreamBucketConfigs = smithy.SchemaMembers{List: []*smithy.Schema{&s_StreamBucketConfigs_member}}
+var m_SubnetIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_SubnetIds_member}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_key, &sTag_value}}
+var m_TagKeys = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeys_member}}
+var m_Tags = smithy.SchemaMembers{List: []*smithy.Schema{&s_Tags_member}}
+var mUpdateCollectionDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateCollectionDetail_id, &sUpdateCollectionDetail_name, &sUpdateCollectionDetail_status, &sUpdateCollectionDetail_type, &sUpdateCollectionDetail_description, &sUpdateCollectionDetail_vectorOptions, &sUpdateCollectionDetail_kmsKeyArn, &sUpdateCollectionDetail_arn, &sUpdateCollectionDetail_createdDate, &sUpdateCollectionDetail_lastModifiedDate, &sUpdateCollectionDetail_deletionProtection}, Seed: 7, Slots: []uint16{
+	0, 0, 8, 2, 0, 0, 0, 0, 11, 0, 0, 0, 5, 0, 0, 0, 7, 0, 0, 0, 9, 1, 0, 0,
+	4, 0, 0, 3, 0, 10, 6, 0,
+}}
+var mUpdateCollectionGroupDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateCollectionGroupDetail_id, &sUpdateCollectionGroupDetail_arn, &sUpdateCollectionGroupDetail_name, &sUpdateCollectionGroupDetail_description, &sUpdateCollectionGroupDetail_capacityLimits, &sUpdateCollectionGroupDetail_createdDate, &sUpdateCollectionGroupDetail_lastModifiedDate, &sUpdateCollectionGroupDetail_generation}}
+var mUpdateIamIdentityCenterConfigOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateIamIdentityCenterConfigOptions_userAttribute, &sUpdateIamIdentityCenterConfigOptions_groupAttribute}}
+var mUpdateVpcEndpointDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateVpcEndpointDetail_id, &sUpdateVpcEndpointDetail_name, &sUpdateVpcEndpointDetail_status, &sUpdateVpcEndpointDetail_subnetIds, &sUpdateVpcEndpointDetail_securityGroupIds, &sUpdateVpcEndpointDetail_lastModifiedDate}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message}}
+var mVectorOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sVectorOptions_ServerlessVectorAcceleration}}
+var mVpcEndpointDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sVpcEndpointDetail_id, &sVpcEndpointDetail_name, &sVpcEndpointDetail_vpcId, &sVpcEndpointDetail_subnetIds, &sVpcEndpointDetail_securityGroupIds, &sVpcEndpointDetail_status, &sVpcEndpointDetail_createdDate, &sVpcEndpointDetail_failureCode, &sVpcEndpointDetail_failureMessage}, Seed: 1, Slots: []uint16{
+	0, 1, 0, 0, 0, 0, 2, 8, 0, 7, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 5, 6, 0,
+	0, 0, 0, 0, 4, 9, 0, 0,
+}}
+var m_VpcEndpointDetails = smithy.SchemaMembers{List: []*smithy.Schema{&s_VpcEndpointDetails_member}}
+var mVpcEndpointErrorDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sVpcEndpointErrorDetail_id, &sVpcEndpointErrorDetail_errorMessage, &sVpcEndpointErrorDetail_errorCode}}
+var m_VpcEndpointErrorDetails = smithy.SchemaMembers{List: []*smithy.Schema{&s_VpcEndpointErrorDetails_member}}
+var mVpcEndpointFilters = smithy.SchemaMembers{List: []*smithy.Schema{&sVpcEndpointFilters_status}}
+var m_VpcEndpointIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_VpcEndpointIds_member}}
+var m_VpcEndpointSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_VpcEndpointSummaries_member}}
+var mVpcEndpointSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sVpcEndpointSummary_id, &sVpcEndpointSummary_name, &sVpcEndpointSummary_status}}
+var mBatchGetCollectionGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetCollectionGroupRequest_ids, &sBatchGetCollectionGroupRequest_names}}
+var mBatchGetCollectionGroupResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetCollectionGroupResponse_collectionGroupDetails, &sBatchGetCollectionGroupResponse_collectionGroupErrorDetails}}
+var mBatchGetCollectionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetCollectionRequest_ids, &sBatchGetCollectionRequest_names}}
+var mBatchGetCollectionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetCollectionResponse_collectionDetails, &sBatchGetCollectionResponse_collectionErrorDetails}}
+var mBatchGetEffectiveLifecyclePolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetEffectiveLifecyclePolicyRequest_resourceIdentifiers}}
+var mBatchGetEffectiveLifecyclePolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetEffectiveLifecyclePolicyResponse_effectiveLifecyclePolicyDetails, &sBatchGetEffectiveLifecyclePolicyResponse_effectiveLifecyclePolicyErrorDetails}}
+var mBatchGetLifecyclePolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetLifecyclePolicyRequest_identifiers}}
+var mBatchGetLifecyclePolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetLifecyclePolicyResponse_lifecyclePolicyDetails, &sBatchGetLifecyclePolicyResponse_lifecyclePolicyErrorDetails}}
+var mBatchGetVpcEndpointRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetVpcEndpointRequest_ids}}
+var mBatchGetVpcEndpointResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetVpcEndpointResponse_vpcEndpointDetails, &sBatchGetVpcEndpointResponse_vpcEndpointErrorDetails}}
+var mCancelIngestionJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelIngestionJobRequest_collectionId, &sCancelIngestionJobRequest_ingestionJobId, &sCancelIngestionJobRequest_clientToken}}
+var mCancelIngestionJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelIngestionJobResponse_ingestionJobId, &sCancelIngestionJobResponse_collectionId, &sCancelIngestionJobResponse_ingestionJobName, &sCancelIngestionJobResponse_status}}
+var mCreateAccessPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAccessPolicyRequest_type, &sCreateAccessPolicyRequest_name, &sCreateAccessPolicyRequest_description, &sCreateAccessPolicyRequest_policy, &sCreateAccessPolicyRequest_clientToken}}
+var mCreateAccessPolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAccessPolicyResponse_accessPolicyDetail}}
+var mCreateCollectionGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCollectionGroupRequest_name, &sCreateCollectionGroupRequest_standbyReplicas, &sCreateCollectionGroupRequest_description, &sCreateCollectionGroupRequest_tags, &sCreateCollectionGroupRequest_capacityLimits, &sCreateCollectionGroupRequest_generation, &sCreateCollectionGroupRequest_clientToken}}
+var mCreateCollectionGroupResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCollectionGroupResponse_createCollectionGroupDetail}}
+var mCreateCollectionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCollectionRequest_name, &sCreateCollectionRequest_type, &sCreateCollectionRequest_description, &sCreateCollectionRequest_tags, &sCreateCollectionRequest_standbyReplicas, &sCreateCollectionRequest_vectorOptions, &sCreateCollectionRequest_collectionGroupName, &sCreateCollectionRequest_encryptionConfig, &sCreateCollectionRequest_deletionProtection, &sCreateCollectionRequest_clientToken}, Seed: 3, Slots: []uint16{
+	0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 4, 0, 0, 2, 7, 5, 0, 6,
+	0, 8, 0, 0, 0, 3, 0, 9,
+}}
+var mCreateCollectionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCollectionResponse_createCollectionDetail}}
+var mCreateIndexRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateIndexRequest_id, &sCreateIndexRequest_indexName, &sCreateIndexRequest_indexSchema}}
+var mCreateIngestionJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateIngestionJobRequest_collectionId, &sCreateIngestionJobRequest_ingestionJobName, &sCreateIngestionJobRequest_indexName, &sCreateIngestionJobRequest_failureIndexName, &sCreateIngestionJobRequest_source, &sCreateIngestionJobRequest_tags, &sCreateIngestionJobRequest_clientToken}}
+var mCreateIngestionJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateIngestionJobResponse_ingestionJobDetail}}
+var mCreateIngestionStreamRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateIngestionStreamRequest_collectionId, &sCreateIngestionStreamRequest_ingestionStreamName, &sCreateIngestionStreamRequest_indexName, &sCreateIngestionStreamRequest_failureIndexName, &sCreateIngestionStreamRequest_source, &sCreateIngestionStreamRequest_roleArn, &sCreateIngestionStreamRequest_tags, &sCreateIngestionStreamRequest_clientToken}}
+var mCreateIngestionStreamResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateIngestionStreamResponse_ingestionStreamDetail}}
+var mCreateLifecyclePolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLifecyclePolicyRequest_type, &sCreateLifecyclePolicyRequest_name, &sCreateLifecyclePolicyRequest_description, &sCreateLifecyclePolicyRequest_policy, &sCreateLifecyclePolicyRequest_clientToken}}
+var mCreateLifecyclePolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLifecyclePolicyResponse_lifecyclePolicyDetail}}
+var mCreateSecurityConfigRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSecurityConfigRequest_type, &sCreateSecurityConfigRequest_name, &sCreateSecurityConfigRequest_description, &sCreateSecurityConfigRequest_samlOptions, &sCreateSecurityConfigRequest_iamIdentityCenterOptions, &sCreateSecurityConfigRequest_iamFederationOptions, &sCreateSecurityConfigRequest_clientToken}}
+var mCreateSecurityConfigResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSecurityConfigResponse_securityConfigDetail}}
+var mCreateSecurityPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSecurityPolicyRequest_type, &sCreateSecurityPolicyRequest_name, &sCreateSecurityPolicyRequest_description, &sCreateSecurityPolicyRequest_policy, &sCreateSecurityPolicyRequest_clientToken}}
+var mCreateSecurityPolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSecurityPolicyResponse_securityPolicyDetail}}
+var mCreateVpcEndpointRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateVpcEndpointRequest_name, &sCreateVpcEndpointRequest_vpcId, &sCreateVpcEndpointRequest_subnetIds, &sCreateVpcEndpointRequest_securityGroupIds, &sCreateVpcEndpointRequest_clientToken}}
+var mCreateVpcEndpointResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateVpcEndpointResponse_createVpcEndpointDetail}}
+var mDeleteAccessPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAccessPolicyRequest_type, &sDeleteAccessPolicyRequest_name, &sDeleteAccessPolicyRequest_clientToken}}
+var mDeleteCollectionGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteCollectionGroupRequest_id, &sDeleteCollectionGroupRequest_clientToken}}
+var mDeleteCollectionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteCollectionRequest_id, &sDeleteCollectionRequest_clientToken}}
+var mDeleteCollectionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteCollectionResponse_deleteCollectionDetail}}
+var mDeleteIndexRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteIndexRequest_id, &sDeleteIndexRequest_indexName}}
+var mDeleteIngestionStreamRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteIngestionStreamRequest_collectionId, &sDeleteIngestionStreamRequest_ingestionStreamId, &sDeleteIngestionStreamRequest_clientToken}}
+var mDeleteIngestionStreamResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteIngestionStreamResponse_ingestionStreamId, &sDeleteIngestionStreamResponse_collectionId, &sDeleteIngestionStreamResponse_ingestionStreamName, &sDeleteIngestionStreamResponse_status}}
+var mDeleteLifecyclePolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteLifecyclePolicyRequest_type, &sDeleteLifecyclePolicyRequest_name, &sDeleteLifecyclePolicyRequest_clientToken}}
+var mDeleteSecurityConfigRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSecurityConfigRequest_id, &sDeleteSecurityConfigRequest_clientToken}}
+var mDeleteSecurityPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSecurityPolicyRequest_type, &sDeleteSecurityPolicyRequest_name, &sDeleteSecurityPolicyRequest_clientToken}}
+var mDeleteVpcEndpointRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteVpcEndpointRequest_id, &sDeleteVpcEndpointRequest_clientToken}}
+var mDeleteVpcEndpointResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteVpcEndpointResponse_deleteVpcEndpointDetail}}
+var mGetAccessPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAccessPolicyRequest_type, &sGetAccessPolicyRequest_name}}
+var mGetAccessPolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAccessPolicyResponse_accessPolicyDetail}}
+var mGetAccountSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAccountSettingsResponse_accountSettingsDetail}}
+var mGetIndexRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetIndexRequest_id, &sGetIndexRequest_indexName}}
+var mGetIndexResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetIndexResponse_indexSchema}}
+var mGetIngestionJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetIngestionJobRequest_collectionId, &sGetIngestionJobRequest_ingestionJobId}}
+var mGetIngestionJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetIngestionJobResponse_ingestionJobDetail}}
+var mGetIngestionStreamRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetIngestionStreamRequest_collectionId, &sGetIngestionStreamRequest_ingestionStreamId}}
+var mGetIngestionStreamResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetIngestionStreamResponse_ingestionStreamDetail}}
+var mGetPoliciesStatsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPoliciesStatsResponse_AccessPolicyStats, &sGetPoliciesStatsResponse_SecurityPolicyStats, &sGetPoliciesStatsResponse_SecurityConfigStats, &sGetPoliciesStatsResponse_LifecyclePolicyStats, &sGetPoliciesStatsResponse_TotalPolicyCount}}
+var mGetSecurityConfigRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSecurityConfigRequest_id}}
+var mGetSecurityConfigResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSecurityConfigResponse_securityConfigDetail}}
+var mGetSecurityPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSecurityPolicyRequest_type, &sGetSecurityPolicyRequest_name}}
+var mGetSecurityPolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSecurityPolicyResponse_securityPolicyDetail}}
+var mListAccessPoliciesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAccessPoliciesRequest_type, &sListAccessPoliciesRequest_resource, &sListAccessPoliciesRequest_nextToken, &sListAccessPoliciesRequest_maxResults}}
+var mListAccessPoliciesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAccessPoliciesResponse_accessPolicySummaries, &sListAccessPoliciesResponse_nextToken}}
+var mListCollectionGroupsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListCollectionGroupsRequest_nextToken, &sListCollectionGroupsRequest_maxResults}}
+var mListCollectionGroupsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListCollectionGroupsResponse_collectionGroupSummaries, &sListCollectionGroupsResponse_nextToken}}
+var mListCollectionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListCollectionsRequest_collectionFilters, &sListCollectionsRequest_nextToken, &sListCollectionsRequest_maxResults}}
+var mListCollectionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListCollectionsResponse_collectionSummaries, &sListCollectionsResponse_nextToken}}
+var mListIngestionJobsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListIngestionJobsRequest_collectionId, &sListIngestionJobsRequest_nextToken, &sListIngestionJobsRequest_maxResults}}
+var mListIngestionJobsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListIngestionJobsResponse_ingestionJobSummaries, &sListIngestionJobsResponse_nextToken}}
+var mListIngestionStreamsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListIngestionStreamsRequest_collectionId, &sListIngestionStreamsRequest_nextToken, &sListIngestionStreamsRequest_maxResults}}
+var mListIngestionStreamsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListIngestionStreamsResponse_ingestionStreamSummaries, &sListIngestionStreamsResponse_nextToken}}
+var mListLifecyclePoliciesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListLifecyclePoliciesRequest_type, &sListLifecyclePoliciesRequest_resources, &sListLifecyclePoliciesRequest_nextToken, &sListLifecyclePoliciesRequest_maxResults}}
+var mListLifecyclePoliciesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListLifecyclePoliciesResponse_lifecyclePolicySummaries, &sListLifecyclePoliciesResponse_nextToken}}
+var mListSecurityConfigsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListSecurityConfigsRequest_type, &sListSecurityConfigsRequest_nextToken, &sListSecurityConfigsRequest_maxResults}}
+var mListSecurityConfigsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListSecurityConfigsResponse_securityConfigSummaries, &sListSecurityConfigsResponse_nextToken}}
+var mListSecurityPoliciesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListSecurityPoliciesRequest_type, &sListSecurityPoliciesRequest_resource, &sListSecurityPoliciesRequest_nextToken, &sListSecurityPoliciesRequest_maxResults}}
+var mListSecurityPoliciesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListSecurityPoliciesResponse_securityPolicySummaries, &sListSecurityPoliciesResponse_nextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_resourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_tags}}
+var mListVpcEndpointsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListVpcEndpointsRequest_vpcEndpointFilters, &sListVpcEndpointsRequest_nextToken, &sListVpcEndpointsRequest_maxResults}}
+var mListVpcEndpointsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListVpcEndpointsResponse_vpcEndpointSummaries, &sListVpcEndpointsResponse_nextToken}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_resourceArn, &sTagResourceRequest_tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_resourceArn, &sUntagResourceRequest_tagKeys}}
+var mUpdateAccessPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAccessPolicyRequest_type, &sUpdateAccessPolicyRequest_name, &sUpdateAccessPolicyRequest_policyVersion, &sUpdateAccessPolicyRequest_description, &sUpdateAccessPolicyRequest_policy, &sUpdateAccessPolicyRequest_clientToken}}
+var mUpdateAccessPolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAccessPolicyResponse_accessPolicyDetail}}
+var mUpdateAccountSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAccountSettingsRequest_capacityLimits}}
+var mUpdateAccountSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAccountSettingsResponse_accountSettingsDetail}}
+var mUpdateCollectionGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateCollectionGroupRequest_id, &sUpdateCollectionGroupRequest_description, &sUpdateCollectionGroupRequest_capacityLimits, &sUpdateCollectionGroupRequest_clientToken}}
+var mUpdateCollectionGroupResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateCollectionGroupResponse_updateCollectionGroupDetail}}
+var mUpdateCollectionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateCollectionRequest_id, &sUpdateCollectionRequest_description, &sUpdateCollectionRequest_vectorOptions, &sUpdateCollectionRequest_deletionProtection, &sUpdateCollectionRequest_encryptionConfig, &sUpdateCollectionRequest_clientToken}}
+var mUpdateCollectionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateCollectionResponse_updateCollectionDetail}}
+var mUpdateIndexRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateIndexRequest_id, &sUpdateIndexRequest_indexName, &sUpdateIndexRequest_indexSchema}}
+var mUpdateLifecyclePolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateLifecyclePolicyRequest_type, &sUpdateLifecyclePolicyRequest_name, &sUpdateLifecyclePolicyRequest_policyVersion, &sUpdateLifecyclePolicyRequest_description, &sUpdateLifecyclePolicyRequest_policy, &sUpdateLifecyclePolicyRequest_clientToken}}
+var mUpdateLifecyclePolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateLifecyclePolicyResponse_lifecyclePolicyDetail}}
+var mUpdateSecurityConfigRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSecurityConfigRequest_id, &sUpdateSecurityConfigRequest_configVersion, &sUpdateSecurityConfigRequest_description, &sUpdateSecurityConfigRequest_samlOptions, &sUpdateSecurityConfigRequest_iamIdentityCenterOptionsUpdates, &sUpdateSecurityConfigRequest_iamFederationOptions, &sUpdateSecurityConfigRequest_clientToken}}
+var mUpdateSecurityConfigResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSecurityConfigResponse_securityConfigDetail}}
+var mUpdateSecurityPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSecurityPolicyRequest_type, &sUpdateSecurityPolicyRequest_name, &sUpdateSecurityPolicyRequest_policyVersion, &sUpdateSecurityPolicyRequest_description, &sUpdateSecurityPolicyRequest_policy, &sUpdateSecurityPolicyRequest_clientToken}}
+var mUpdateSecurityPolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSecurityPolicyResponse_securityPolicyDetail}}
+var mUpdateVpcEndpointRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateVpcEndpointRequest_id, &sUpdateVpcEndpointRequest_addSubnetIds, &sUpdateVpcEndpointRequest_removeSubnetIds, &sUpdateVpcEndpointRequest_addSecurityGroupIds, &sUpdateVpcEndpointRequest_removeSecurityGroupIds, &sUpdateVpcEndpointRequest_clientToken}}
+var mUpdateVpcEndpointResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateVpcEndpointResponse_UpdateVpcEndpointDetail}}
+
+var sBatchGetCollection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetCollection, Type: smithy.ShapeTypeOperation})
+var sBatchGetCollectionGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetCollectionGroup, Type: smithy.ShapeTypeOperation})
+var sBatchGetEffectiveLifecyclePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetEffectiveLifecyclePolicy, Type: smithy.ShapeTypeOperation})
+var sBatchGetLifecyclePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetLifecyclePolicy, Type: smithy.ShapeTypeOperation})
+var sBatchGetVpcEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetVpcEndpoint, Type: smithy.ShapeTypeOperation})
+var sCancelIngestionJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelIngestionJob, Type: smithy.ShapeTypeOperation})
+var sCreateAccessPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAccessPolicy, Type: smithy.ShapeTypeOperation})
+var sCreateCollection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCollection, Type: smithy.ShapeTypeOperation})
+var sCreateCollectionGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCollectionGroup, Type: smithy.ShapeTypeOperation})
+var sCreateIndex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIndex, Type: smithy.ShapeTypeOperation})
+var sCreateIngestionJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIngestionJob, Type: smithy.ShapeTypeOperation})
+var sCreateIngestionStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIngestionStream, Type: smithy.ShapeTypeOperation})
+var sCreateLifecyclePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLifecyclePolicy, Type: smithy.ShapeTypeOperation})
+var sCreateSecurityConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSecurityConfig, Type: smithy.ShapeTypeOperation})
+var sCreateSecurityPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSecurityPolicy, Type: smithy.ShapeTypeOperation})
+var sCreateVpcEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVpcEndpoint, Type: smithy.ShapeTypeOperation})
+var sDeleteAccessPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAccessPolicy, Type: smithy.ShapeTypeOperation})
+var sDeleteCollection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCollection, Type: smithy.ShapeTypeOperation})
+var sDeleteCollectionGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCollectionGroup, Type: smithy.ShapeTypeOperation})
+var sDeleteIndex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIndex, Type: smithy.ShapeTypeOperation})
+var sDeleteIngestionStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIngestionStream, Type: smithy.ShapeTypeOperation})
+var sDeleteLifecyclePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLifecyclePolicy, Type: smithy.ShapeTypeOperation})
+var sDeleteSecurityConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSecurityConfig, Type: smithy.ShapeTypeOperation})
+var sDeleteSecurityPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSecurityPolicy, Type: smithy.ShapeTypeOperation})
+var sDeleteVpcEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVpcEndpoint, Type: smithy.ShapeTypeOperation})
+var sGetAccessPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccessPolicy, Type: smithy.ShapeTypeOperation})
+var sGetAccountSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountSettings, Type: smithy.ShapeTypeOperation})
+var sGetIndex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIndex, Type: smithy.ShapeTypeOperation})
+var sGetIngestionJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIngestionJob, Type: smithy.ShapeTypeOperation})
+var sGetIngestionStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIngestionStream, Type: smithy.ShapeTypeOperation})
+var sGetPoliciesStats = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPoliciesStats, Type: smithy.ShapeTypeOperation})
+var sGetSecurityConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSecurityConfig, Type: smithy.ShapeTypeOperation})
+var sGetSecurityPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSecurityPolicy, Type: smithy.ShapeTypeOperation})
+var sListAccessPolicies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccessPolicies, Type: smithy.ShapeTypeOperation})
+var sListCollectionGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCollectionGroups, Type: smithy.ShapeTypeOperation})
+var sListCollections = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCollections, Type: smithy.ShapeTypeOperation})
+var sListIngestionJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIngestionJobs, Type: smithy.ShapeTypeOperation})
+var sListIngestionStreams = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIngestionStreams, Type: smithy.ShapeTypeOperation})
+var sListLifecyclePolicies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLifecyclePolicies, Type: smithy.ShapeTypeOperation})
+var sListSecurityConfigs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSecurityConfigs, Type: smithy.ShapeTypeOperation})
+var sListSecurityPolicies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSecurityPolicies, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation})
+var sListVpcEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVpcEndpoints, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation})
+var sUpdateAccessPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAccessPolicy, Type: smithy.ShapeTypeOperation})
+var sUpdateAccountSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAccountSettings, Type: smithy.ShapeTypeOperation})
+var sUpdateCollection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCollection, Type: smithy.ShapeTypeOperation})
+var sUpdateCollectionGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCollectionGroup, Type: smithy.ShapeTypeOperation})
+var sUpdateIndex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateIndex, Type: smithy.ShapeTypeOperation})
+var sUpdateLifecyclePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLifecyclePolicy, Type: smithy.ShapeTypeOperation})
+var sUpdateSecurityConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSecurityConfig, Type: smithy.ShapeTypeOperation})
+var sUpdateSecurityPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSecurityPolicy, Type: smithy.ShapeTypeOperation})
+var sUpdateVpcEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVpcEndpoint, Type: smithy.ShapeTypeOperation})
+var s_OpenSearchServerless = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OpenSearchServerless, Type: smithy.ShapeTypeService})
+var sAccessPolicyDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessPolicyDetail, Members: &mAccessPolicyDetail, Type: smithy.ShapeTypeStructure})
+var sAccessPolicyStats = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessPolicyStats, Members: &mAccessPolicyStats, Type: smithy.ShapeTypeStructure})
+var s_AccessPolicySummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessPolicySummaries, Members: &m_AccessPolicySummaries, Type: smithy.ShapeTypeList})
+var sAccessPolicySummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessPolicySummary, Members: &mAccessPolicySummary, Type: smithy.ShapeTypeStructure})
+var s_AccessPolicyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessPolicyType, Type: smithy.ShapeTypeString})
+var sAccountSettingsDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountSettingsDetail, Members: &mAccountSettingsDetail, Type: smithy.ShapeTypeStructure})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString})
+var s_AutoscalingStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AutoscalingStatus, Type: smithy.ShapeTypeString})
+var s_BucketOwnerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BucketOwnerAccountId, Type: smithy.ShapeTypeString})
+var sCapacityDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCapacityDetails, Members: &mCapacityDetails, Type: smithy.ShapeTypeStructure})
+var sCapacityLimits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCapacityLimits, Members: &mCapacityLimits, Type: smithy.ShapeTypeStructure})
+var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCollectionDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCollectionDetail, Members: &mCollectionDetail, Type: smithy.ShapeTypeStructure})
+var s_CollectionDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CollectionDetails, Members: &m_CollectionDetails, Type: smithy.ShapeTypeList})
+var sCollectionErrorDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCollectionErrorDetail, Members: &mCollectionErrorDetail, Type: smithy.ShapeTypeStructure})
+var s_CollectionErrorDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CollectionErrorDetails, Members: &m_CollectionErrorDetails, Type: smithy.ShapeTypeList})
+var sCollectionFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCollectionFilters, Members: &mCollectionFilters, Type: smithy.ShapeTypeStructure})
+var sCollectionGroupCapacityLimits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCollectionGroupCapacityLimits, Members: &mCollectionGroupCapacityLimits, Type: smithy.ShapeTypeStructure})
+var sCollectionGroupDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCollectionGroupDetail, Members: &mCollectionGroupDetail, Type: smithy.ShapeTypeStructure})
+var s_CollectionGroupDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CollectionGroupDetails, Members: &m_CollectionGroupDetails, Type: smithy.ShapeTypeList})
+var sCollectionGroupErrorDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCollectionGroupErrorDetail, Members: &mCollectionGroupErrorDetail, Type: smithy.ShapeTypeStructure})
+var s_CollectionGroupErrorDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CollectionGroupErrorDetails, Members: &m_CollectionGroupErrorDetails, Type: smithy.ShapeTypeList})
+var s_CollectionGroupId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CollectionGroupId, Type: smithy.ShapeTypeString})
+var s_CollectionGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CollectionGroupIds, Members: &m_CollectionGroupIds, Type: smithy.ShapeTypeList})
+var s_CollectionGroupMaxIndexingCapacityValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CollectionGroupMaxIndexingCapacityValue, Type: smithy.ShapeTypeFloat})
+var s_CollectionGroupMaxSearchCapacityValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CollectionGroupMaxSearchCapacityValue, Type: smithy.ShapeTypeFloat})
+var s_CollectionGroupMinIndexingCapacityValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CollectionGroupMinIndexingCapacityValue, Type: smithy.ShapeTypeFloat})
+var s_CollectionGroupMinSearchCapacityValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CollectionGroupMinSearchCapacityValue, Type: smithy.ShapeTypeFloat})
+var s_CollectionGroupName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CollectionGroupName, Type: smithy.ShapeTypeString})
+var s_CollectionGroupNames = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CollectionGroupNames, Members: &m_CollectionGroupNames, Type: smithy.ShapeTypeList})
+var s_CollectionGroupSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CollectionGroupSummaries, Members: &m_CollectionGroupSummaries, Type: smithy.ShapeTypeList})
+var sCollectionGroupSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCollectionGroupSummary, Members: &mCollectionGroupSummary, Type: smithy.ShapeTypeStructure})
+var s_CollectionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CollectionId, Type: smithy.ShapeTypeString})
+var s_CollectionIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CollectionIds, Members: &m_CollectionIds, Type: smithy.ShapeTypeList})
+var s_CollectionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CollectionName, Type: smithy.ShapeTypeString})
+var s_CollectionNames = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CollectionNames, Members: &m_CollectionNames, Type: smithy.ShapeTypeList})
+var s_CollectionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CollectionStatus, Type: smithy.ShapeTypeString})
+var s_CollectionSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CollectionSummaries, Members: &m_CollectionSummaries, Type: smithy.ShapeTypeList})
+var sCollectionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCollectionSummary, Members: &mCollectionSummary, Type: smithy.ShapeTypeStructure})
+var s_CollectionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CollectionType, Type: smithy.ShapeTypeString})
+var s_ConfigDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfigDescription, Type: smithy.ShapeTypeString})
+var s_ConfigName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfigName, Type: smithy.ShapeTypeString})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var sCreateCollectionDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCollectionDetail, Members: &mCreateCollectionDetail, Type: smithy.ShapeTypeStructure})
+var sCreateCollectionGroupDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCollectionGroupDetail, Members: &mCreateCollectionGroupDetail, Type: smithy.ShapeTypeStructure})
+var sCreateIamIdentityCenterConfigOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIamIdentityCenterConfigOptions, Members: &mCreateIamIdentityCenterConfigOptions, Type: smithy.ShapeTypeStructure})
+var sCreateVpcEndpointDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVpcEndpointDetail, Members: &mCreateVpcEndpointDetail, Type: smithy.ShapeTypeStructure})
+var sCurrentCapacity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCurrentCapacity, Members: &mCurrentCapacity, Type: smithy.ShapeTypeStructure})
+var sDeleteCollectionDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCollectionDetail, Members: &mDeleteCollectionDetail, Type: smithy.ShapeTypeStructure})
+var sDeleteVpcEndpointDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVpcEndpointDetail, Members: &mDeleteVpcEndpointDetail, Type: smithy.ShapeTypeStructure})
+var s_DeletionProtection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeletionProtection, Type: smithy.ShapeTypeString})
+var sEffectiveLifecyclePolicyDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEffectiveLifecyclePolicyDetail, Members: &mEffectiveLifecyclePolicyDetail, Type: smithy.ShapeTypeStructure})
+var s_EffectiveLifecyclePolicyDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EffectiveLifecyclePolicyDetails, Members: &m_EffectiveLifecyclePolicyDetails, Type: smithy.ShapeTypeList})
+var sEffectiveLifecyclePolicyErrorDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEffectiveLifecyclePolicyErrorDetail, Members: &mEffectiveLifecyclePolicyErrorDetail, Type: smithy.ShapeTypeStructure})
+var s_EffectiveLifecyclePolicyErrorDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EffectiveLifecyclePolicyErrorDetails, Members: &m_EffectiveLifecyclePolicyErrorDetails, Type: smithy.ShapeTypeList})
+var sEncryptionConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionConfig, Members: &mEncryptionConfig, Type: smithy.ShapeTypeStructure})
+var sFipsEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFipsEndpoints, Members: &mFipsEndpoints, Type: smithy.ShapeTypeStructure})
+var sIamFederationConfigOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIamFederationConfigOptions, Members: &mIamFederationConfigOptions, Type: smithy.ShapeTypeStructure})
+var s_iamFederationGroupAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_iamFederationGroupAttribute, Type: smithy.ShapeTypeString})
+var s_iamFederationUserAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_iamFederationUserAttribute, Type: smithy.ShapeTypeString})
+var s_IamIdentityCenterApplicationArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IamIdentityCenterApplicationArn, Type: smithy.ShapeTypeString})
+var sIamIdentityCenterConfigOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIamIdentityCenterConfigOptions, Members: &mIamIdentityCenterConfigOptions, Type: smithy.ShapeTypeStructure})
+var s_IamIdentityCenterGroupAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IamIdentityCenterGroupAttribute, Type: smithy.ShapeTypeString})
+var s_IamIdentityCenterInstanceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IamIdentityCenterInstanceArn, Type: smithy.ShapeTypeString})
+var s_IamIdentityCenterUserAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IamIdentityCenterUserAttribute, Type: smithy.ShapeTypeString})
+var s_IndexingCapacityValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IndexingCapacityValue, Type: smithy.ShapeTypeInteger})
+var s_IndexName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IndexName, Type: smithy.ShapeTypeString})
+var s_IndexSchema = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IndexSchema, Type: smithy.ShapeTypeDocument})
+var sIngestionAlert = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngestionAlert, Members: &mIngestionAlert, Type: smithy.ShapeTypeStructure})
+var s_IngestionAlertCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IngestionAlertCode, Type: smithy.ShapeTypeString})
+var s_IngestionAlerts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IngestionAlerts, Members: &m_IngestionAlerts, Type: smithy.ShapeTypeList})
+var s_IngestionFailureCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IngestionFailureCode, Type: smithy.ShapeTypeString})
+var sIngestionFailureReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngestionFailureReason, Members: &mIngestionFailureReason, Type: smithy.ShapeTypeStructure})
+var s_IngestionFailureReasons = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IngestionFailureReasons, Members: &m_IngestionFailureReasons, Type: smithy.ShapeTypeList})
+var s_IngestionIndexName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IngestionIndexName, Type: smithy.ShapeTypeString})
+var sIngestionJobDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngestionJobDetail, Members: &mIngestionJobDetail, Type: smithy.ShapeTypeStructure})
+var s_IngestionJobId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IngestionJobId, Type: smithy.ShapeTypeString})
+var s_IngestionJobName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IngestionJobName, Type: smithy.ShapeTypeString})
+var s_IngestionJobResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IngestionJobResourceArn, Type: smithy.ShapeTypeString})
+var sIngestionJobS3Source = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngestionJobS3Source, Members: &mIngestionJobS3Source, Type: smithy.ShapeTypeStructure})
+var sIngestionJobSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngestionJobSource, Members: &mIngestionJobSource, Type: smithy.ShapeTypeStructure})
+var s_IngestionJobStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IngestionJobStatus, Type: smithy.ShapeTypeString})
+var s_IngestionJobSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IngestionJobSummaries, Members: &m_IngestionJobSummaries, Type: smithy.ShapeTypeList})
+var sIngestionJobSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngestionJobSummary, Members: &mIngestionJobSummary, Type: smithy.ShapeTypeStructure})
+var s_IngestionState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IngestionState, Type: smithy.ShapeTypeString})
+var sIngestionStatistics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngestionStatistics, Members: &mIngestionStatistics, Type: smithy.ShapeTypeStructure})
+var sIngestionStreamDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngestionStreamDetail, Members: &mIngestionStreamDetail, Type: smithy.ShapeTypeStructure})
+var s_IngestionStreamId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IngestionStreamId, Type: smithy.ShapeTypeString})
+var s_IngestionStreamName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IngestionStreamName, Type: smithy.ShapeTypeString})
+var s_IngestionStreamResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IngestionStreamResourceArn, Type: smithy.ShapeTypeString})
+var sIngestionStreamS3Source = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngestionStreamS3Source, Members: &mIngestionStreamS3Source, Type: smithy.ShapeTypeStructure})
+var sIngestionStreamSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngestionStreamSource, Members: &mIngestionStreamSource, Type: smithy.ShapeTypeStructure})
+var s_IngestionStreamStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IngestionStreamStatus, Type: smithy.ShapeTypeString})
+var s_IngestionStreamSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IngestionStreamSummaries, Members: &m_IngestionStreamSummaries, Type: smithy.ShapeTypeList})
+var sIngestionStreamSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngestionStreamSummary, Members: &mIngestionStreamSummary, Type: smithy.ShapeTypeStructure})
+var s_InitialScan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InitialScan, Type: smithy.ShapeTypeString})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sLifecyclePolicyDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLifecyclePolicyDetail, Members: &mLifecyclePolicyDetail, Type: smithy.ShapeTypeStructure})
+var s_LifecyclePolicyDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LifecyclePolicyDetails, Members: &m_LifecyclePolicyDetails, Type: smithy.ShapeTypeList})
+var sLifecyclePolicyErrorDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLifecyclePolicyErrorDetail, Members: &mLifecyclePolicyErrorDetail, Type: smithy.ShapeTypeStructure})
+var s_LifecyclePolicyErrorDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LifecyclePolicyErrorDetails, Members: &m_LifecyclePolicyErrorDetails, Type: smithy.ShapeTypeList})
+var sLifecyclePolicyIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLifecyclePolicyIdentifier, Members: &mLifecyclePolicyIdentifier, Type: smithy.ShapeTypeStructure})
+var s_LifecyclePolicyIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LifecyclePolicyIdentifiers, Members: &m_LifecyclePolicyIdentifiers, Type: smithy.ShapeTypeList})
+var sLifecyclePolicyResourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLifecyclePolicyResourceIdentifier, Members: &mLifecyclePolicyResourceIdentifier, Type: smithy.ShapeTypeStructure})
+var s_LifecyclePolicyResourceIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LifecyclePolicyResourceIdentifiers, Members: &m_LifecyclePolicyResourceIdentifiers, Type: smithy.ShapeTypeList})
+var sLifecyclePolicyStats = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLifecyclePolicyStats, Members: &mLifecyclePolicyStats, Type: smithy.ShapeTypeStructure})
+var s_LifecyclePolicySummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LifecyclePolicySummaries, Members: &m_LifecyclePolicySummaries, Type: smithy.ShapeTypeList})
+var sLifecyclePolicySummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLifecyclePolicySummary, Members: &mLifecyclePolicySummary, Type: smithy.ShapeTypeStructure})
+var s_LifecyclePolicyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LifecyclePolicyType, Type: smithy.ShapeTypeString})
+var s_LifecycleResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LifecycleResource, Type: smithy.ShapeTypeString})
+var s_LifecycleResourceFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LifecycleResourceFilter, Members: &m_LifecycleResourceFilter, Type: smithy.ShapeTypeList})
+var sOcuLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOcuLimitExceededException, Members: &mOcuLimitExceededException, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var s_openSearchServerlessEntityId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_openSearchServerlessEntityId, Type: smithy.ShapeTypeString})
+var s_PolicyDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyDescription, Type: smithy.ShapeTypeString})
+var s_PolicyDocument = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyDocument, Type: smithy.ShapeTypeString})
+var s_PolicyName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyName, Type: smithy.ShapeTypeString})
+var s_PolicyVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyVersion, Type: smithy.ShapeTypeString})
+var s_Resource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Resource, Type: smithy.ShapeTypeString})
+var s_ResourceFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceFilter, Members: &m_ResourceFilter, Type: smithy.ShapeTypeList})
+var s_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t3, Type: smithy.ShapeTypeStructure})
+var s_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceType, Type: smithy.ShapeTypeString})
+var s_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var s_S3BucketNameOrArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3BucketNameOrArn, Type: smithy.ShapeTypeString})
+var sS3Statistics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3Statistics, Members: &mS3Statistics, Type: smithy.ShapeTypeStructure})
+var sSamlConfigOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSamlConfigOptions, Members: &mSamlConfigOptions, Type: smithy.ShapeTypeStructure})
+var s_samlGroupAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_samlGroupAttribute, Type: smithy.ShapeTypeString})
+var s_samlMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_samlMetadata, Type: smithy.ShapeTypeString})
+var s_samlUserAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_samlUserAttribute, Type: smithy.ShapeTypeString})
+var s_SearchCapacityValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchCapacityValue, Type: smithy.ShapeTypeInteger})
+var sSecurityConfigDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSecurityConfigDetail, Members: &mSecurityConfigDetail, Type: smithy.ShapeTypeStructure})
+var s_SecurityConfigId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityConfigId, Type: smithy.ShapeTypeString})
+var sSecurityConfigStats = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSecurityConfigStats, Members: &mSecurityConfigStats, Type: smithy.ShapeTypeStructure})
+var s_SecurityConfigSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityConfigSummaries, Members: &m_SecurityConfigSummaries, Type: smithy.ShapeTypeList})
+var sSecurityConfigSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSecurityConfigSummary, Members: &mSecurityConfigSummary, Type: smithy.ShapeTypeStructure})
+var s_SecurityConfigType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityConfigType, Type: smithy.ShapeTypeString})
+var s_SecurityGroupId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroupId, Type: smithy.ShapeTypeString})
+var s_SecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroupIds, Members: &m_SecurityGroupIds, Type: smithy.ShapeTypeList})
+var sSecurityPolicyDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSecurityPolicyDetail, Members: &mSecurityPolicyDetail, Type: smithy.ShapeTypeStructure})
+var sSecurityPolicyStats = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSecurityPolicyStats, Members: &mSecurityPolicyStats, Type: smithy.ShapeTypeStructure})
+var s_SecurityPolicySummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityPolicySummaries, Members: &m_SecurityPolicySummaries, Type: smithy.ShapeTypeList})
+var sSecurityPolicySummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSecurityPolicySummary, Members: &mSecurityPolicySummary, Type: smithy.ShapeTypeStructure})
+var s_SecurityPolicyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityPolicyType, Type: smithy.ShapeTypeString})
+var s_ServerlessGeneration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServerlessGeneration, Type: smithy.ShapeTypeString})
+var s_ServerlessVectorAccelerationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServerlessVectorAccelerationStatus, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var s_SqsArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SqsArn, Type: smithy.ShapeTypeString})
+var s_StandbyReplicas = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StandbyReplicas, Type: smithy.ShapeTypeString})
+var sStreamBucketConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamBucketConfig, Members: &mStreamBucketConfig, Type: smithy.ShapeTypeStructure})
+var s_StreamBucketConfigs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamBucketConfigs, Members: &m_StreamBucketConfigs, Type: smithy.ShapeTypeList})
+var s_SubnetId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetId, Type: smithy.ShapeTypeString})
+var s_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetIds, Members: &m_SubnetIds, Type: smithy.ShapeTypeList})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeys, Members: &m_TagKeys, Type: smithy.ShapeTypeList})
+var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sUpdateCollectionDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCollectionDetail, Members: &mUpdateCollectionDetail, Type: smithy.ShapeTypeStructure})
+var sUpdateCollectionGroupDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCollectionGroupDetail, Members: &mUpdateCollectionGroupDetail, Type: smithy.ShapeTypeStructure})
+var sUpdateIamIdentityCenterConfigOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateIamIdentityCenterConfigOptions, Members: &mUpdateIamIdentityCenterConfigOptions, Type: smithy.ShapeTypeStructure})
+var sUpdateVpcEndpointDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVpcEndpointDetail, Members: &mUpdateVpcEndpointDetail, Type: smithy.ShapeTypeStructure})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t4, Type: smithy.ShapeTypeStructure})
+var sVectorOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVectorOptions, Members: &mVectorOptions, Type: smithy.ShapeTypeStructure})
+var sVpcEndpointDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcEndpointDetail, Members: &mVpcEndpointDetail, Type: smithy.ShapeTypeStructure})
+var s_VpcEndpointDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcEndpointDetails, Members: &m_VpcEndpointDetails, Type: smithy.ShapeTypeList})
+var sVpcEndpointErrorDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcEndpointErrorDetail, Members: &mVpcEndpointErrorDetail, Type: smithy.ShapeTypeStructure})
+var s_VpcEndpointErrorDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcEndpointErrorDetails, Members: &m_VpcEndpointErrorDetails, Type: smithy.ShapeTypeList})
+var sVpcEndpointFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcEndpointFilters, Members: &mVpcEndpointFilters, Type: smithy.ShapeTypeStructure})
+var s_VpcEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcEndpointId, Type: smithy.ShapeTypeString})
+var s_VpcEndpointIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcEndpointIds, Members: &m_VpcEndpointIds, Type: smithy.ShapeTypeList})
+var s_VpcEndpointName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcEndpointName, Type: smithy.ShapeTypeString})
+var s_VpcEndpointStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcEndpointStatus, Type: smithy.ShapeTypeString})
+var s_VpcEndpointSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcEndpointSummaries, Members: &m_VpcEndpointSummaries, Type: smithy.ShapeTypeList})
+var sVpcEndpointSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcEndpointSummary, Members: &mVpcEndpointSummary, Type: smithy.ShapeTypeStructure})
+var s_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcId, Type: smithy.ShapeTypeString})
+var sBatchGetCollectionGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetCollectionGroupRequest, Members: &mBatchGetCollectionGroupRequest, Type: smithy.ShapeTypeStructure})
+var sBatchGetCollectionGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetCollectionGroupResponse, Members: &mBatchGetCollectionGroupResponse, Type: smithy.ShapeTypeStructure})
+var sBatchGetCollectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetCollectionRequest, Members: &mBatchGetCollectionRequest, Type: smithy.ShapeTypeStructure})
+var sBatchGetCollectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetCollectionResponse, Members: &mBatchGetCollectionResponse, Type: smithy.ShapeTypeStructure})
+var sBatchGetEffectiveLifecyclePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetEffectiveLifecyclePolicyRequest, Members: &mBatchGetEffectiveLifecyclePolicyRequest, Type: smithy.ShapeTypeStructure})
+var sBatchGetEffectiveLifecyclePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetEffectiveLifecyclePolicyResponse, Members: &mBatchGetEffectiveLifecyclePolicyResponse, Type: smithy.ShapeTypeStructure})
+var sBatchGetLifecyclePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetLifecyclePolicyRequest, Members: &mBatchGetLifecyclePolicyRequest, Type: smithy.ShapeTypeStructure})
+var sBatchGetLifecyclePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetLifecyclePolicyResponse, Members: &mBatchGetLifecyclePolicyResponse, Type: smithy.ShapeTypeStructure})
+var sBatchGetVpcEndpointRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetVpcEndpointRequest, Members: &mBatchGetVpcEndpointRequest, Type: smithy.ShapeTypeStructure})
+var sBatchGetVpcEndpointResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetVpcEndpointResponse, Members: &mBatchGetVpcEndpointResponse, Type: smithy.ShapeTypeStructure})
+var sCancelIngestionJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelIngestionJobRequest, Members: &mCancelIngestionJobRequest, Type: smithy.ShapeTypeStructure})
+var sCancelIngestionJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelIngestionJobResponse, Members: &mCancelIngestionJobResponse, Type: smithy.ShapeTypeStructure})
+var sCreateAccessPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAccessPolicyRequest, Members: &mCreateAccessPolicyRequest, Type: smithy.ShapeTypeStructure})
+var sCreateAccessPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAccessPolicyResponse, Members: &mCreateAccessPolicyResponse, Type: smithy.ShapeTypeStructure})
+var sCreateCollectionGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCollectionGroupRequest, Members: &mCreateCollectionGroupRequest, Type: smithy.ShapeTypeStructure})
+var sCreateCollectionGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCollectionGroupResponse, Members: &mCreateCollectionGroupResponse, Type: smithy.ShapeTypeStructure})
+var sCreateCollectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCollectionRequest, Members: &mCreateCollectionRequest, Type: smithy.ShapeTypeStructure})
+var sCreateCollectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCollectionResponse, Members: &mCreateCollectionResponse, Type: smithy.ShapeTypeStructure})
+var sCreateIndexRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIndexRequest, Members: &mCreateIndexRequest, Type: smithy.ShapeTypeStructure})
+var sCreateIndexResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIndexResponse, Type: smithy.ShapeTypeStructure})
+var sCreateIngestionJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIngestionJobRequest, Members: &mCreateIngestionJobRequest, Type: smithy.ShapeTypeStructure})
+var sCreateIngestionJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIngestionJobResponse, Members: &mCreateIngestionJobResponse, Type: smithy.ShapeTypeStructure})
+var sCreateIngestionStreamRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIngestionStreamRequest, Members: &mCreateIngestionStreamRequest, Type: smithy.ShapeTypeStructure})
+var sCreateIngestionStreamResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIngestionStreamResponse, Members: &mCreateIngestionStreamResponse, Type: smithy.ShapeTypeStructure})
+var sCreateLifecyclePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLifecyclePolicyRequest, Members: &mCreateLifecyclePolicyRequest, Type: smithy.ShapeTypeStructure})
+var sCreateLifecyclePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLifecyclePolicyResponse, Members: &mCreateLifecyclePolicyResponse, Type: smithy.ShapeTypeStructure})
+var sCreateSecurityConfigRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSecurityConfigRequest, Members: &mCreateSecurityConfigRequest, Type: smithy.ShapeTypeStructure})
+var sCreateSecurityConfigResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSecurityConfigResponse, Members: &mCreateSecurityConfigResponse, Type: smithy.ShapeTypeStructure})
+var sCreateSecurityPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSecurityPolicyRequest, Members: &mCreateSecurityPolicyRequest, Type: smithy.ShapeTypeStructure})
+var sCreateSecurityPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSecurityPolicyResponse, Members: &mCreateSecurityPolicyResponse, Type: smithy.ShapeTypeStructure})
+var sCreateVpcEndpointRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVpcEndpointRequest, Members: &mCreateVpcEndpointRequest, Type: smithy.ShapeTypeStructure})
+var sCreateVpcEndpointResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVpcEndpointResponse, Members: &mCreateVpcEndpointResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteAccessPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAccessPolicyRequest, Members: &mDeleteAccessPolicyRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteAccessPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAccessPolicyResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteCollectionGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCollectionGroupRequest, Members: &mDeleteCollectionGroupRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteCollectionGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCollectionGroupResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteCollectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCollectionRequest, Members: &mDeleteCollectionRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteCollectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCollectionResponse, Members: &mDeleteCollectionResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteIndexRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIndexRequest, Members: &mDeleteIndexRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteIndexResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIndexResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteIngestionStreamRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIngestionStreamRequest, Members: &mDeleteIngestionStreamRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteIngestionStreamResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIngestionStreamResponse, Members: &mDeleteIngestionStreamResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteLifecyclePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLifecyclePolicyRequest, Members: &mDeleteLifecyclePolicyRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteLifecyclePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLifecyclePolicyResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteSecurityConfigRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSecurityConfigRequest, Members: &mDeleteSecurityConfigRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteSecurityConfigResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSecurityConfigResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteSecurityPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSecurityPolicyRequest, Members: &mDeleteSecurityPolicyRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteSecurityPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSecurityPolicyResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteVpcEndpointRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVpcEndpointRequest, Members: &mDeleteVpcEndpointRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteVpcEndpointResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVpcEndpointResponse, Members: &mDeleteVpcEndpointResponse, Type: smithy.ShapeTypeStructure})
+var sGetAccessPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccessPolicyRequest, Members: &mGetAccessPolicyRequest, Type: smithy.ShapeTypeStructure})
+var sGetAccessPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccessPolicyResponse, Members: &mGetAccessPolicyResponse, Type: smithy.ShapeTypeStructure})
+var sGetAccountSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sGetAccountSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountSettingsResponse, Members: &mGetAccountSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sGetIndexRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIndexRequest, Members: &mGetIndexRequest, Type: smithy.ShapeTypeStructure})
+var sGetIndexResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIndexResponse, Members: &mGetIndexResponse, Type: smithy.ShapeTypeStructure})
+var sGetIngestionJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIngestionJobRequest, Members: &mGetIngestionJobRequest, Type: smithy.ShapeTypeStructure})
+var sGetIngestionJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIngestionJobResponse, Members: &mGetIngestionJobResponse, Type: smithy.ShapeTypeStructure})
+var sGetIngestionStreamRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIngestionStreamRequest, Members: &mGetIngestionStreamRequest, Type: smithy.ShapeTypeStructure})
+var sGetIngestionStreamResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIngestionStreamResponse, Members: &mGetIngestionStreamResponse, Type: smithy.ShapeTypeStructure})
+var sGetPoliciesStatsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPoliciesStatsRequest, Type: smithy.ShapeTypeStructure})
+var sGetPoliciesStatsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPoliciesStatsResponse, Members: &mGetPoliciesStatsResponse, Type: smithy.ShapeTypeStructure})
+var sGetSecurityConfigRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSecurityConfigRequest, Members: &mGetSecurityConfigRequest, Type: smithy.ShapeTypeStructure})
+var sGetSecurityConfigResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSecurityConfigResponse, Members: &mGetSecurityConfigResponse, Type: smithy.ShapeTypeStructure})
+var sGetSecurityPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSecurityPolicyRequest, Members: &mGetSecurityPolicyRequest, Type: smithy.ShapeTypeStructure})
+var sGetSecurityPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSecurityPolicyResponse, Members: &mGetSecurityPolicyResponse, Type: smithy.ShapeTypeStructure})
+var sListAccessPoliciesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccessPoliciesRequest, Members: &mListAccessPoliciesRequest, Type: smithy.ShapeTypeStructure})
+var sListAccessPoliciesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccessPoliciesResponse, Members: &mListAccessPoliciesResponse, Type: smithy.ShapeTypeStructure})
+var sListCollectionGroupsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCollectionGroupsRequest, Members: &mListCollectionGroupsRequest, Type: smithy.ShapeTypeStructure})
+var sListCollectionGroupsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCollectionGroupsResponse, Members: &mListCollectionGroupsResponse, Type: smithy.ShapeTypeStructure})
+var sListCollectionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCollectionsRequest, Members: &mListCollectionsRequest, Type: smithy.ShapeTypeStructure})
+var sListCollectionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCollectionsResponse, Members: &mListCollectionsResponse, Type: smithy.ShapeTypeStructure})
+var sListIngestionJobsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIngestionJobsRequest, Members: &mListIngestionJobsRequest, Type: smithy.ShapeTypeStructure})
+var sListIngestionJobsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIngestionJobsResponse, Members: &mListIngestionJobsResponse, Type: smithy.ShapeTypeStructure})
+var sListIngestionStreamsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIngestionStreamsRequest, Members: &mListIngestionStreamsRequest, Type: smithy.ShapeTypeStructure})
+var sListIngestionStreamsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIngestionStreamsResponse, Members: &mListIngestionStreamsResponse, Type: smithy.ShapeTypeStructure})
+var sListLifecyclePoliciesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLifecyclePoliciesRequest, Members: &mListLifecyclePoliciesRequest, Type: smithy.ShapeTypeStructure})
+var sListLifecyclePoliciesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLifecyclePoliciesResponse, Members: &mListLifecyclePoliciesResponse, Type: smithy.ShapeTypeStructure})
+var sListSecurityConfigsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSecurityConfigsRequest, Members: &mListSecurityConfigsRequest, Type: smithy.ShapeTypeStructure})
+var sListSecurityConfigsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSecurityConfigsResponse, Members: &mListSecurityConfigsResponse, Type: smithy.ShapeTypeStructure})
+var sListSecurityPoliciesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSecurityPoliciesRequest, Members: &mListSecurityPoliciesRequest, Type: smithy.ShapeTypeStructure})
+var sListSecurityPoliciesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSecurityPoliciesResponse, Members: &mListSecurityPoliciesResponse, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure})
+var sListVpcEndpointsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVpcEndpointsRequest, Members: &mListVpcEndpointsRequest, Type: smithy.ShapeTypeStructure})
+var sListVpcEndpointsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVpcEndpointsResponse, Members: &mListVpcEndpointsResponse, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateAccessPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAccessPolicyRequest, Members: &mUpdateAccessPolicyRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateAccessPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAccessPolicyResponse, Members: &mUpdateAccessPolicyResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateAccountSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAccountSettingsRequest, Members: &mUpdateAccountSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateAccountSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAccountSettingsResponse, Members: &mUpdateAccountSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateCollectionGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCollectionGroupRequest, Members: &mUpdateCollectionGroupRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateCollectionGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCollectionGroupResponse, Members: &mUpdateCollectionGroupResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateCollectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCollectionRequest, Members: &mUpdateCollectionRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateCollectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCollectionResponse, Members: &mUpdateCollectionResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateIndexRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateIndexRequest, Members: &mUpdateIndexRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateIndexResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateIndexResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateLifecyclePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLifecyclePolicyRequest, Members: &mUpdateLifecyclePolicyRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateLifecyclePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLifecyclePolicyResponse, Members: &mUpdateLifecyclePolicyResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateSecurityConfigRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSecurityConfigRequest, Members: &mUpdateSecurityConfigRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateSecurityConfigResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSecurityConfigResponse, Members: &mUpdateSecurityConfigResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateSecurityPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSecurityPolicyRequest, Members: &mUpdateSecurityPolicyRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateSecurityPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSecurityPolicyResponse, Members: &mUpdateSecurityPolicyResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateVpcEndpointRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVpcEndpointRequest, Members: &mUpdateVpcEndpointRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateVpcEndpointResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVpcEndpointResponse, Members: &mUpdateVpcEndpointResponse, Type: smithy.ShapeTypeStructure})
+
+var sAccessPolicyDetail_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_AccessPolicyType, Type: smithy.ShapeTypeString})
+var sAccessPolicyDetail_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PolicyName, Type: smithy.ShapeTypeString})
+var sAccessPolicyDetail_policyVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyVersion", ID: &i_PolicyVersion, Type: smithy.ShapeTypeString})
+var sAccessPolicyDetail_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_PolicyDescription, Type: smithy.ShapeTypeString})
+var sAccessPolicyDetail_policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policy", ID: &pDocument, Type: smithy.ShapeTypeDocument})
+var sAccessPolicyDetail_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sAccessPolicyDetail_lastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedDate", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sAccessPolicyStats_DataPolicyCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataPolicyCount", ID: &pLong, Type: smithy.ShapeTypeLong})
+var s_AccessPolicySummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAccessPolicySummary, Members: &mAccessPolicySummary, Type: smithy.ShapeTypeStructure})
+var sAccessPolicySummary_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_AccessPolicyType, Type: smithy.ShapeTypeString})
+var sAccessPolicySummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PolicyName, Type: smithy.ShapeTypeString})
+var sAccessPolicySummary_policyVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyVersion", ID: &i_PolicyVersion, Type: smithy.ShapeTypeString})
+var sAccessPolicySummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_PolicyDescription, Type: smithy.ShapeTypeString})
+var sAccessPolicySummary_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sAccessPolicySummary_lastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedDate", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sAccountSettingsDetail_capacityLimits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capacityLimits", ID: &iCapacityLimits, Members: &mCapacityLimits, Type: smithy.ShapeTypeStructure})
+var sCapacityDetails_capacityInOcu = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capacityInOcu", ID: &pFloat, Type: smithy.ShapeTypeFloat})
+var sCapacityDetails_autoscalingStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "autoscalingStatus", ID: &i_AutoscalingStatus, Type: smithy.ShapeTypeString})
+var sCapacityLimits_maxIndexingCapacityInOCU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxIndexingCapacityInOCU", ID: &i_IndexingCapacityValue, Type: smithy.ShapeTypeInteger})
+var sCapacityLimits_maxSearchCapacityInOCU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxSearchCapacityInOCU", ID: &i_SearchCapacityValue, Type: smithy.ShapeTypeInteger})
+var sCollectionDetail_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CollectionId, Type: smithy.ShapeTypeString})
+var sCollectionDetail_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_CollectionName, Type: smithy.ShapeTypeString})
+var sCollectionDetail_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_CollectionStatus, Type: smithy.ShapeTypeString})
+var sCollectionDetail_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_CollectionType, Type: smithy.ShapeTypeString})
+var sCollectionDetail_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString})
+var sCollectionDetail_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &pString, Type: smithy.ShapeTypeString})
+var sCollectionDetail_kmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sCollectionDetail_standbyReplicas = smithy.NewStaticSchema(smithy.StaticSchema{Member: "standbyReplicas", ID: &i_StandbyReplicas, Type: smithy.ShapeTypeString})
+var sCollectionDetail_deletionProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deletionProtection", ID: &i_DeletionProtection, Type: smithy.ShapeTypeString})
+var sCollectionDetail_vectorOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorOptions", ID: &iVectorOptions, Members: &mVectorOptions, Type: smithy.ShapeTypeStructure})
+var sCollectionDetail_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sCollectionDetail_lastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedDate", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sCollectionDetail_collectionEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectionEndpoint", ID: &pString, Type: smithy.ShapeTypeString})
+var sCollectionDetail_dashboardEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dashboardEndpoint", ID: &pString, Type: smithy.ShapeTypeString})
+var sCollectionDetail_fipsEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fipsEndpoints", ID: &iFipsEndpoints, Members: &mFipsEndpoints, Type: smithy.ShapeTypeStructure})
+var sCollectionDetail_failureCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureCode", ID: &pString, Type: smithy.ShapeTypeString})
+var sCollectionDetail_failureMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureMessage", ID: &pString, Type: smithy.ShapeTypeString})
+var sCollectionDetail_collectionGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectionGroupName", ID: &i_CollectionGroupName, Type: smithy.ShapeTypeString})
+var s_CollectionDetails_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCollectionDetail, Members: &mCollectionDetail, Type: smithy.ShapeTypeStructure})
+var sCollectionErrorDetail_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CollectionId, Type: smithy.ShapeTypeString})
+var sCollectionErrorDetail_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_CollectionName, Type: smithy.ShapeTypeString})
+var sCollectionErrorDetail_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &pString, Type: smithy.ShapeTypeString})
+var sCollectionErrorDetail_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &pString, Type: smithy.ShapeTypeString})
+var s_CollectionErrorDetails_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCollectionErrorDetail, Members: &mCollectionErrorDetail, Type: smithy.ShapeTypeStructure})
+var sCollectionFilters_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_CollectionName, Type: smithy.ShapeTypeString})
+var sCollectionFilters_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_CollectionStatus, Type: smithy.ShapeTypeString})
+var sCollectionFilters_collectionGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectionGroupName", ID: &i_CollectionGroupName, Type: smithy.ShapeTypeString})
+var sCollectionGroupCapacityLimits_maxIndexingCapacityInOCU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxIndexingCapacityInOCU", ID: &i_CollectionGroupMaxIndexingCapacityValue, Type: smithy.ShapeTypeFloat})
+var sCollectionGroupCapacityLimits_maxSearchCapacityInOCU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxSearchCapacityInOCU", ID: &i_CollectionGroupMaxSearchCapacityValue, Type: smithy.ShapeTypeFloat})
+var sCollectionGroupCapacityLimits_minIndexingCapacityInOCU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minIndexingCapacityInOCU", ID: &i_CollectionGroupMinIndexingCapacityValue, Type: smithy.ShapeTypeFloat})
+var sCollectionGroupCapacityLimits_minSearchCapacityInOCU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minSearchCapacityInOCU", ID: &i_CollectionGroupMinSearchCapacityValue, Type: smithy.ShapeTypeFloat})
+var sCollectionGroupDetail_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CollectionGroupId, Type: smithy.ShapeTypeString})
+var sCollectionGroupDetail_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &pString, Type: smithy.ShapeTypeString})
+var sCollectionGroupDetail_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_CollectionGroupName, Type: smithy.ShapeTypeString})
+var sCollectionGroupDetail_standbyReplicas = smithy.NewStaticSchema(smithy.StaticSchema{Member: "standbyReplicas", ID: &i_StandbyReplicas, Type: smithy.ShapeTypeString})
+var sCollectionGroupDetail_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString})
+var sCollectionGroupDetail_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sCollectionGroupDetail_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sCollectionGroupDetail_capacityLimits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capacityLimits", ID: &iCollectionGroupCapacityLimits, Members: &mCollectionGroupCapacityLimits, Type: smithy.ShapeTypeStructure})
+var sCollectionGroupDetail_currentCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "currentCapacity", ID: &iCurrentCapacity, Members: &mCurrentCapacity, Type: smithy.ShapeTypeStructure})
+var sCollectionGroupDetail_numberOfCollections = smithy.NewStaticSchema(smithy.StaticSchema{Member: "numberOfCollections", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sCollectionGroupDetail_generation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "generation", ID: &i_ServerlessGeneration, Type: smithy.ShapeTypeString})
+var s_CollectionGroupDetails_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCollectionGroupDetail, Members: &mCollectionGroupDetail, Type: smithy.ShapeTypeStructure})
+var sCollectionGroupErrorDetail_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CollectionGroupId, Type: smithy.ShapeTypeString})
+var sCollectionGroupErrorDetail_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_CollectionGroupName, Type: smithy.ShapeTypeString})
+var sCollectionGroupErrorDetail_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &pString, Type: smithy.ShapeTypeString})
+var sCollectionGroupErrorDetail_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &pString, Type: smithy.ShapeTypeString})
+var s_CollectionGroupErrorDetails_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCollectionGroupErrorDetail, Members: &mCollectionGroupErrorDetail, Type: smithy.ShapeTypeStructure})
+var s_CollectionGroupIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CollectionGroupId, Type: smithy.ShapeTypeString})
+var s_CollectionGroupNames_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CollectionGroupName, Type: smithy.ShapeTypeString})
+var s_CollectionGroupSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCollectionGroupSummary, Members: &mCollectionGroupSummary, Type: smithy.ShapeTypeStructure})
+var sCollectionGroupSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CollectionGroupId, Type: smithy.ShapeTypeString})
+var sCollectionGroupSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &pString, Type: smithy.ShapeTypeString})
+var sCollectionGroupSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_CollectionGroupName, Type: smithy.ShapeTypeString})
+var sCollectionGroupSummary_numberOfCollections = smithy.NewStaticSchema(smithy.StaticSchema{Member: "numberOfCollections", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sCollectionGroupSummary_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sCollectionGroupSummary_capacityLimits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capacityLimits", ID: &iCollectionGroupCapacityLimits, Members: &mCollectionGroupCapacityLimits, Type: smithy.ShapeTypeStructure})
+var sCollectionGroupSummary_generation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "generation", ID: &i_ServerlessGeneration, Type: smithy.ShapeTypeString})
+var s_CollectionIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CollectionId, Type: smithy.ShapeTypeString})
+var s_CollectionNames_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CollectionName, Type: smithy.ShapeTypeString})
+var s_CollectionSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCollectionSummary, Members: &mCollectionSummary, Type: smithy.ShapeTypeStructure})
+var sCollectionSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CollectionId, Type: smithy.ShapeTypeString})
+var sCollectionSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_CollectionName, Type: smithy.ShapeTypeString})
+var sCollectionSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_CollectionStatus, Type: smithy.ShapeTypeString})
+var sCollectionSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &pString, Type: smithy.ShapeTypeString})
+var sCollectionSummary_kmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sCollectionSummary_collectionGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectionGroupName", ID: &i_CollectionGroupName, Type: smithy.ShapeTypeString})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateCollectionDetail_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CollectionId, Type: smithy.ShapeTypeString})
+var sCreateCollectionDetail_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_CollectionName, Type: smithy.ShapeTypeString})
+var sCreateCollectionDetail_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_CollectionStatus, Type: smithy.ShapeTypeString})
+var sCreateCollectionDetail_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_CollectionType, Type: smithy.ShapeTypeString})
+var sCreateCollectionDetail_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateCollectionDetail_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateCollectionDetail_kmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateCollectionDetail_standbyReplicas = smithy.NewStaticSchema(smithy.StaticSchema{Member: "standbyReplicas", ID: &i_StandbyReplicas, Type: smithy.ShapeTypeString})
+var sCreateCollectionDetail_deletionProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deletionProtection", ID: &i_DeletionProtection, Type: smithy.ShapeTypeString})
+var sCreateCollectionDetail_vectorOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorOptions", ID: &iVectorOptions, Members: &mVectorOptions, Type: smithy.ShapeTypeStructure})
+var sCreateCollectionDetail_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sCreateCollectionDetail_lastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedDate", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sCreateCollectionDetail_collectionGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectionGroupName", ID: &i_CollectionGroupName, Type: smithy.ShapeTypeString})
+var sCreateCollectionGroupDetail_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CollectionGroupId, Type: smithy.ShapeTypeString})
+var sCreateCollectionGroupDetail_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateCollectionGroupDetail_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_CollectionGroupName, Type: smithy.ShapeTypeString})
+var sCreateCollectionGroupDetail_standbyReplicas = smithy.NewStaticSchema(smithy.StaticSchema{Member: "standbyReplicas", ID: &i_StandbyReplicas, Type: smithy.ShapeTypeString})
+var sCreateCollectionGroupDetail_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateCollectionGroupDetail_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sCreateCollectionGroupDetail_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sCreateCollectionGroupDetail_capacityLimits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capacityLimits", ID: &iCollectionGroupCapacityLimits, Members: &mCollectionGroupCapacityLimits, Type: smithy.ShapeTypeStructure})
+var sCreateCollectionGroupDetail_generation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "generation", ID: &i_ServerlessGeneration, Type: smithy.ShapeTypeString})
+var sCreateIamIdentityCenterConfigOptions_instanceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceArn", ID: &i_IamIdentityCenterInstanceArn, Type: smithy.ShapeTypeString})
+var sCreateIamIdentityCenterConfigOptions_userAttribute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userAttribute", ID: &i_IamIdentityCenterUserAttribute, Type: smithy.ShapeTypeString})
+var sCreateIamIdentityCenterConfigOptions_groupAttribute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupAttribute", ID: &i_IamIdentityCenterGroupAttribute, Type: smithy.ShapeTypeString})
+var sCreateVpcEndpointDetail_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_VpcEndpointId, Type: smithy.ShapeTypeString})
+var sCreateVpcEndpointDetail_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_VpcEndpointName, Type: smithy.ShapeTypeString})
+var sCreateVpcEndpointDetail_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_VpcEndpointStatus, Type: smithy.ShapeTypeString})
+var sCurrentCapacity_search = smithy.NewStaticSchema(smithy.StaticSchema{Member: "search", ID: &iCapacityDetails, Members: &mCapacityDetails, Type: smithy.ShapeTypeStructure})
+var sCurrentCapacity_indexing = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexing", ID: &iCapacityDetails, Members: &mCapacityDetails, Type: smithy.ShapeTypeStructure})
+var sDeleteCollectionDetail_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CollectionId, Type: smithy.ShapeTypeString})
+var sDeleteCollectionDetail_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_CollectionName, Type: smithy.ShapeTypeString})
+var sDeleteCollectionDetail_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_CollectionStatus, Type: smithy.ShapeTypeString})
+var sDeleteCollectionDetail_deletionProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deletionProtection", ID: &i_DeletionProtection, Type: smithy.ShapeTypeString})
+var sDeleteVpcEndpointDetail_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_VpcEndpointId, Type: smithy.ShapeTypeString})
+var sDeleteVpcEndpointDetail_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_VpcEndpointName, Type: smithy.ShapeTypeString})
+var sDeleteVpcEndpointDetail_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_VpcEndpointStatus, Type: smithy.ShapeTypeString})
+var sEffectiveLifecyclePolicyDetail_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_LifecyclePolicyType, Type: smithy.ShapeTypeString})
+var sEffectiveLifecyclePolicyDetail_resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resource", ID: &i_Resource, Type: smithy.ShapeTypeString})
+var sEffectiveLifecyclePolicyDetail_policyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyName", ID: &i_PolicyName, Type: smithy.ShapeTypeString})
+var sEffectiveLifecyclePolicyDetail_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_ResourceType, Type: smithy.ShapeTypeString})
+var sEffectiveLifecyclePolicyDetail_retentionPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retentionPeriod", ID: &pString, Type: smithy.ShapeTypeString})
+var sEffectiveLifecyclePolicyDetail_noMinRetentionPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "noMinRetentionPeriod", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var s_EffectiveLifecyclePolicyDetails_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEffectiveLifecyclePolicyDetail, Members: &mEffectiveLifecyclePolicyDetail, Type: smithy.ShapeTypeStructure})
+var sEffectiveLifecyclePolicyErrorDetail_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_LifecyclePolicyType, Type: smithy.ShapeTypeString})
+var sEffectiveLifecyclePolicyErrorDetail_resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resource", ID: &i_Resource, Type: smithy.ShapeTypeString})
+var sEffectiveLifecyclePolicyErrorDetail_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &pString, Type: smithy.ShapeTypeString})
+var sEffectiveLifecyclePolicyErrorDetail_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &pString, Type: smithy.ShapeTypeString})
+var s_EffectiveLifecyclePolicyErrorDetails_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEffectiveLifecyclePolicyErrorDetail, Members: &mEffectiveLifecyclePolicyErrorDetail, Type: smithy.ShapeTypeStructure})
+var sEncryptionConfig_aWSOwnedKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aWSOwnedKey", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sEncryptionConfig_kmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sFipsEndpoints_collectionEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectionEndpoint", ID: &pString, Type: smithy.ShapeTypeString})
+var sFipsEndpoints_dashboardEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dashboardEndpoint", ID: &pString, Type: smithy.ShapeTypeString})
+var sIamFederationConfigOptions_groupAttribute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupAttribute", ID: &i_iamFederationGroupAttribute, Type: smithy.ShapeTypeString})
+var sIamFederationConfigOptions_userAttribute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userAttribute", ID: &i_iamFederationUserAttribute, Type: smithy.ShapeTypeString})
+var sIamIdentityCenterConfigOptions_instanceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceArn", ID: &i_IamIdentityCenterInstanceArn, Type: smithy.ShapeTypeString})
+var sIamIdentityCenterConfigOptions_applicationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "applicationArn", ID: &i_IamIdentityCenterApplicationArn, Type: smithy.ShapeTypeString})
+var sIamIdentityCenterConfigOptions_applicationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "applicationName", ID: &pString, Type: smithy.ShapeTypeString})
+var sIamIdentityCenterConfigOptions_applicationDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "applicationDescription", ID: &pString, Type: smithy.ShapeTypeString})
+var sIamIdentityCenterConfigOptions_userAttribute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userAttribute", ID: &i_IamIdentityCenterUserAttribute, Type: smithy.ShapeTypeString})
+var sIamIdentityCenterConfigOptions_groupAttribute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupAttribute", ID: &i_IamIdentityCenterGroupAttribute, Type: smithy.ShapeTypeString})
+var sIngestionAlert_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_IngestionAlertCode, Type: smithy.ShapeTypeString})
+var sIngestionAlert_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var s_IngestionAlerts_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIngestionAlert, Members: &mIngestionAlert, Type: smithy.ShapeTypeStructure})
+var sIngestionFailureReason_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_IngestionFailureCode, Type: smithy.ShapeTypeString})
+var sIngestionFailureReason_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var s_IngestionFailureReasons_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIngestionFailureReason, Members: &mIngestionFailureReason, Type: smithy.ShapeTypeStructure})
+var sIngestionJobDetail_ingestionJobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestionJobId", ID: &i_IngestionJobId, Type: smithy.ShapeTypeString})
+var sIngestionJobDetail_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_IngestionJobResourceArn, Type: smithy.ShapeTypeString})
+var sIngestionJobDetail_collectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectionId", ID: &i_CollectionId, Type: smithy.ShapeTypeString})
+var sIngestionJobDetail_ingestionJobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestionJobName", ID: &i_IngestionJobName, Type: smithy.ShapeTypeString})
+var sIngestionJobDetail_indexName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexName", ID: &i_IngestionIndexName, Type: smithy.ShapeTypeString})
+var sIngestionJobDetail_failureIndexName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureIndexName", ID: &i_IngestionIndexName, Type: smithy.ShapeTypeString})
+var sIngestionJobDetail_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iIngestionJobSource, Members: &mIngestionJobSource, Type: smithy.ShapeTypeStructure})
+var sIngestionJobDetail_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_IngestionJobStatus, Type: smithy.ShapeTypeString})
+var sIngestionJobDetail_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_IngestionState, Type: smithy.ShapeTypeString})
+var sIngestionJobDetail_statistics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statistics", ID: &iIngestionStatistics, Members: &mIngestionStatistics, Type: smithy.ShapeTypeStructure})
+var sIngestionJobDetail_revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revision", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sIngestionJobDetail_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sIngestionJobDetail_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sIngestionJobDetail_failureReasons = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureReasons", ID: &i_IngestionFailureReasons, Members: &m_IngestionFailureReasons, Type: smithy.ShapeTypeList})
+var sIngestionJobDetail_activeAlerts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activeAlerts", ID: &i_IngestionAlerts, Members: &m_IngestionAlerts, Type: smithy.ShapeTypeList})
+var sIngestionJobS3Source_bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucket", ID: &i_S3BucketNameOrArn, Type: smithy.ShapeTypeString})
+var sIngestionJobS3Source_bucketOwnerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketOwnerAccountId", ID: &i_BucketOwnerAccountId, Type: smithy.ShapeTypeString})
+var sIngestionJobS3Source_keyPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keyPrefix", ID: &pString, Type: smithy.ShapeTypeString})
+var sIngestionJobSource_s3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3", ID: &iIngestionJobS3Source, Members: &mIngestionJobS3Source, Type: smithy.ShapeTypeStructure})
+var s_IngestionJobSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIngestionJobSummary, Members: &mIngestionJobSummary, Type: smithy.ShapeTypeStructure})
+var sIngestionJobSummary_ingestionJobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestionJobId", ID: &i_IngestionJobId, Type: smithy.ShapeTypeString})
+var sIngestionJobSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_IngestionJobResourceArn, Type: smithy.ShapeTypeString})
+var sIngestionJobSummary_ingestionJobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestionJobName", ID: &i_IngestionJobName, Type: smithy.ShapeTypeString})
+var sIngestionJobSummary_indexName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexName", ID: &i_IngestionIndexName, Type: smithy.ShapeTypeString})
+var sIngestionJobSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_IngestionJobStatus, Type: smithy.ShapeTypeString})
+var sIngestionJobSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sIngestionJobSummary_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sIngestionStatistics_s3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3", ID: &iS3Statistics, Members: &mS3Statistics, Type: smithy.ShapeTypeStructure})
+var sIngestionStreamDetail_ingestionStreamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestionStreamId", ID: &i_IngestionStreamId, Type: smithy.ShapeTypeString})
+var sIngestionStreamDetail_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_IngestionStreamResourceArn, Type: smithy.ShapeTypeString})
+var sIngestionStreamDetail_collectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectionId", ID: &i_CollectionId, Type: smithy.ShapeTypeString})
+var sIngestionStreamDetail_ingestionStreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestionStreamName", ID: &i_IngestionStreamName, Type: smithy.ShapeTypeString})
+var sIngestionStreamDetail_indexName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexName", ID: &i_IngestionIndexName, Type: smithy.ShapeTypeString})
+var sIngestionStreamDetail_failureIndexName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureIndexName", ID: &i_IngestionIndexName, Type: smithy.ShapeTypeString})
+var sIngestionStreamDetail_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iIngestionStreamSource, Members: &mIngestionStreamSource, Type: smithy.ShapeTypeStructure})
+var sIngestionStreamDetail_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sIngestionStreamDetail_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_IngestionStreamStatus, Type: smithy.ShapeTypeString})
+var sIngestionStreamDetail_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_IngestionState, Type: smithy.ShapeTypeString})
+var sIngestionStreamDetail_statistics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statistics", ID: &iIngestionStatistics, Members: &mIngestionStatistics, Type: smithy.ShapeTypeStructure})
+var sIngestionStreamDetail_revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revision", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sIngestionStreamDetail_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sIngestionStreamDetail_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sIngestionStreamDetail_failureReasons = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureReasons", ID: &i_IngestionFailureReasons, Members: &m_IngestionFailureReasons, Type: smithy.ShapeTypeList})
+var sIngestionStreamDetail_activeAlerts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activeAlerts", ID: &i_IngestionAlerts, Members: &m_IngestionAlerts, Type: smithy.ShapeTypeList})
+var sIngestionStreamS3Source_sqsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sqsArn", ID: &i_SqsArn, Type: smithy.ShapeTypeString})
+var sIngestionStreamS3Source_buckets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buckets", ID: &i_StreamBucketConfigs, Members: &m_StreamBucketConfigs, Type: smithy.ShapeTypeList})
+var sIngestionStreamSource_s3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3", ID: &iIngestionStreamS3Source, Members: &mIngestionStreamS3Source, Type: smithy.ShapeTypeStructure})
+var s_IngestionStreamSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIngestionStreamSummary, Members: &mIngestionStreamSummary, Type: smithy.ShapeTypeStructure})
+var sIngestionStreamSummary_ingestionStreamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestionStreamId", ID: &i_IngestionStreamId, Type: smithy.ShapeTypeString})
+var sIngestionStreamSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_IngestionStreamResourceArn, Type: smithy.ShapeTypeString})
+var sIngestionStreamSummary_ingestionStreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestionStreamName", ID: &i_IngestionStreamName, Type: smithy.ShapeTypeString})
+var sIngestionStreamSummary_indexName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexName", ID: &i_IngestionIndexName, Type: smithy.ShapeTypeString})
+var sIngestionStreamSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_IngestionStreamStatus, Type: smithy.ShapeTypeString})
+var sIngestionStreamSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sIngestionStreamSummary_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sLifecyclePolicyDetail_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_LifecyclePolicyType, Type: smithy.ShapeTypeString})
+var sLifecyclePolicyDetail_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PolicyName, Type: smithy.ShapeTypeString})
+var sLifecyclePolicyDetail_policyVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyVersion", ID: &i_PolicyVersion, Type: smithy.ShapeTypeString})
+var sLifecyclePolicyDetail_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_PolicyDescription, Type: smithy.ShapeTypeString})
+var sLifecyclePolicyDetail_policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policy", ID: &pDocument, Type: smithy.ShapeTypeDocument})
+var sLifecyclePolicyDetail_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sLifecyclePolicyDetail_lastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedDate", ID: &pLong, Type: smithy.ShapeTypeLong})
+var s_LifecyclePolicyDetails_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLifecyclePolicyDetail, Members: &mLifecyclePolicyDetail, Type: smithy.ShapeTypeStructure})
+var sLifecyclePolicyErrorDetail_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_LifecyclePolicyType, Type: smithy.ShapeTypeString})
+var sLifecyclePolicyErrorDetail_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PolicyName, Type: smithy.ShapeTypeString})
+var sLifecyclePolicyErrorDetail_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &pString, Type: smithy.ShapeTypeString})
+var sLifecyclePolicyErrorDetail_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &pString, Type: smithy.ShapeTypeString})
+var s_LifecyclePolicyErrorDetails_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLifecyclePolicyErrorDetail, Members: &mLifecyclePolicyErrorDetail, Type: smithy.ShapeTypeStructure})
+var sLifecyclePolicyIdentifier_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_LifecyclePolicyType, Type: smithy.ShapeTypeString})
+var sLifecyclePolicyIdentifier_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PolicyName, Type: smithy.ShapeTypeString})
+var s_LifecyclePolicyIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLifecyclePolicyIdentifier, Members: &mLifecyclePolicyIdentifier, Type: smithy.ShapeTypeStructure})
+var sLifecyclePolicyResourceIdentifier_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_LifecyclePolicyType, Type: smithy.ShapeTypeString})
+var sLifecyclePolicyResourceIdentifier_resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resource", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var s_LifecyclePolicyResourceIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLifecyclePolicyResourceIdentifier, Members: &mLifecyclePolicyResourceIdentifier, Type: smithy.ShapeTypeStructure})
+var sLifecyclePolicyStats_RetentionPolicyCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionPolicyCount", ID: &pLong, Type: smithy.ShapeTypeLong})
+var s_LifecyclePolicySummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLifecyclePolicySummary, Members: &mLifecyclePolicySummary, Type: smithy.ShapeTypeStructure})
+var sLifecyclePolicySummary_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_LifecyclePolicyType, Type: smithy.ShapeTypeString})
+var sLifecyclePolicySummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PolicyName, Type: smithy.ShapeTypeString})
+var sLifecyclePolicySummary_policyVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyVersion", ID: &i_PolicyVersion, Type: smithy.ShapeTypeString})
+var sLifecyclePolicySummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_PolicyDescription, Type: smithy.ShapeTypeString})
+var sLifecyclePolicySummary_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sLifecyclePolicySummary_lastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedDate", ID: &pLong, Type: smithy.ShapeTypeLong})
+var s_LifecycleResourceFilter_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_LifecycleResource, Type: smithy.ShapeTypeString})
+var sOcuLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var s_ResourceFilter_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Resource, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sS3Statistics_objectsDiscovered = smithy.NewStaticSchema(smithy.StaticSchema{Member: "objectsDiscovered", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sS3Statistics_objectsIngested = smithy.NewStaticSchema(smithy.StaticSchema{Member: "objectsIngested", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sS3Statistics_objectsFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "objectsFailed", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sSamlConfigOptions_metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadata", ID: &i_samlMetadata, Type: smithy.ShapeTypeString})
+var sSamlConfigOptions_userAttribute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userAttribute", ID: &i_samlUserAttribute, Type: smithy.ShapeTypeString})
+var sSamlConfigOptions_groupAttribute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupAttribute", ID: &i_samlGroupAttribute, Type: smithy.ShapeTypeString})
+var sSamlConfigOptions_openSearchServerlessEntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "openSearchServerlessEntityId", ID: &i_openSearchServerlessEntityId, Type: smithy.ShapeTypeString})
+var sSamlConfigOptions_sessionTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionTimeout", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sSecurityConfigDetail_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_SecurityConfigId, Type: smithy.ShapeTypeString})
+var sSecurityConfigDetail_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_SecurityConfigType, Type: smithy.ShapeTypeString})
+var sSecurityConfigDetail_configVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configVersion", ID: &i_PolicyVersion, Type: smithy.ShapeTypeString})
+var sSecurityConfigDetail_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ConfigDescription, Type: smithy.ShapeTypeString})
+var sSecurityConfigDetail_samlOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "samlOptions", ID: &iSamlConfigOptions, Members: &mSamlConfigOptions, Type: smithy.ShapeTypeStructure})
+var sSecurityConfigDetail_iamIdentityCenterOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "iamIdentityCenterOptions", ID: &iIamIdentityCenterConfigOptions, Members: &mIamIdentityCenterConfigOptions, Type: smithy.ShapeTypeStructure})
+var sSecurityConfigDetail_iamFederationOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "iamFederationOptions", ID: &iIamFederationConfigOptions, Members: &mIamFederationConfigOptions, Type: smithy.ShapeTypeStructure})
+var sSecurityConfigDetail_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sSecurityConfigDetail_lastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedDate", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sSecurityConfigStats_SamlConfigCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SamlConfigCount", ID: &pLong, Type: smithy.ShapeTypeLong})
+var s_SecurityConfigSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSecurityConfigSummary, Members: &mSecurityConfigSummary, Type: smithy.ShapeTypeStructure})
+var sSecurityConfigSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_SecurityConfigId, Type: smithy.ShapeTypeString})
+var sSecurityConfigSummary_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_SecurityConfigType, Type: smithy.ShapeTypeString})
+var sSecurityConfigSummary_configVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configVersion", ID: &i_PolicyVersion, Type: smithy.ShapeTypeString})
+var sSecurityConfigSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ConfigDescription, Type: smithy.ShapeTypeString})
+var sSecurityConfigSummary_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sSecurityConfigSummary_lastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedDate", ID: &pLong, Type: smithy.ShapeTypeLong})
+var s_SecurityGroupIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SecurityGroupId, Type: smithy.ShapeTypeString})
+var sSecurityPolicyDetail_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_SecurityPolicyType, Type: smithy.ShapeTypeString})
+var sSecurityPolicyDetail_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PolicyName, Type: smithy.ShapeTypeString})
+var sSecurityPolicyDetail_policyVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyVersion", ID: &i_PolicyVersion, Type: smithy.ShapeTypeString})
+var sSecurityPolicyDetail_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_PolicyDescription, Type: smithy.ShapeTypeString})
+var sSecurityPolicyDetail_policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policy", ID: &pDocument, Type: smithy.ShapeTypeDocument})
+var sSecurityPolicyDetail_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sSecurityPolicyDetail_lastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedDate", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sSecurityPolicyStats_EncryptionPolicyCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionPolicyCount", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sSecurityPolicyStats_NetworkPolicyCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkPolicyCount", ID: &pLong, Type: smithy.ShapeTypeLong})
+var s_SecurityPolicySummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSecurityPolicySummary, Members: &mSecurityPolicySummary, Type: smithy.ShapeTypeStructure})
+var sSecurityPolicySummary_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_SecurityPolicyType, Type: smithy.ShapeTypeString})
+var sSecurityPolicySummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PolicyName, Type: smithy.ShapeTypeString})
+var sSecurityPolicySummary_policyVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyVersion", ID: &i_PolicyVersion, Type: smithy.ShapeTypeString})
+var sSecurityPolicySummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_PolicyDescription, Type: smithy.ShapeTypeString})
+var sSecurityPolicySummary_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sSecurityPolicySummary_lastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedDate", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &pString, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &pString, Type: smithy.ShapeTypeString})
+var sStreamBucketConfig_bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucket", ID: &i_S3BucketNameOrArn, Type: smithy.ShapeTypeString})
+var sStreamBucketConfig_bucketOwnerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketOwnerAccountId", ID: &i_BucketOwnerAccountId, Type: smithy.ShapeTypeString})
+var sStreamBucketConfig_initialScan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "initialScan", ID: &i_InitialScan, Type: smithy.ShapeTypeString})
+var s_StreamBucketConfigs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStreamBucketConfig, Members: &mStreamBucketConfig, Type: smithy.ShapeTypeStructure})
+var s_SubnetIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SubnetId, Type: smithy.ShapeTypeString})
+var sTag_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var sTag_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_TagKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_Tags_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var sUpdateCollectionDetail_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CollectionId, Type: smithy.ShapeTypeString})
+var sUpdateCollectionDetail_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_CollectionName, Type: smithy.ShapeTypeString})
+var sUpdateCollectionDetail_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_CollectionStatus, Type: smithy.ShapeTypeString})
+var sUpdateCollectionDetail_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_CollectionType, Type: smithy.ShapeTypeString})
+var sUpdateCollectionDetail_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString})
+var sUpdateCollectionDetail_vectorOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorOptions", ID: &iVectorOptions, Members: &mVectorOptions, Type: smithy.ShapeTypeStructure})
+var sUpdateCollectionDetail_kmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sUpdateCollectionDetail_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &pString, Type: smithy.ShapeTypeString})
+var sUpdateCollectionDetail_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sUpdateCollectionDetail_lastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedDate", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sUpdateCollectionDetail_deletionProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deletionProtection", ID: &i_DeletionProtection, Type: smithy.ShapeTypeString})
+var sUpdateCollectionGroupDetail_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CollectionGroupId, Type: smithy.ShapeTypeString})
+var sUpdateCollectionGroupDetail_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &pString, Type: smithy.ShapeTypeString})
+var sUpdateCollectionGroupDetail_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_CollectionGroupName, Type: smithy.ShapeTypeString})
+var sUpdateCollectionGroupDetail_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString})
+var sUpdateCollectionGroupDetail_capacityLimits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capacityLimits", ID: &iCollectionGroupCapacityLimits, Members: &mCollectionGroupCapacityLimits, Type: smithy.ShapeTypeStructure})
+var sUpdateCollectionGroupDetail_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sUpdateCollectionGroupDetail_lastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedDate", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sUpdateCollectionGroupDetail_generation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "generation", ID: &i_ServerlessGeneration, Type: smithy.ShapeTypeString})
+var sUpdateIamIdentityCenterConfigOptions_userAttribute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userAttribute", ID: &i_IamIdentityCenterUserAttribute, Type: smithy.ShapeTypeString})
+var sUpdateIamIdentityCenterConfigOptions_groupAttribute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupAttribute", ID: &i_IamIdentityCenterGroupAttribute, Type: smithy.ShapeTypeString})
+var sUpdateVpcEndpointDetail_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_VpcEndpointId, Type: smithy.ShapeTypeString})
+var sUpdateVpcEndpointDetail_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_VpcEndpointName, Type: smithy.ShapeTypeString})
+var sUpdateVpcEndpointDetail_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_VpcEndpointStatus, Type: smithy.ShapeTypeString})
+var sUpdateVpcEndpointDetail_subnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subnetIds", ID: &i_SubnetIds, Members: &m_SubnetIds, Type: smithy.ShapeTypeList})
+var sUpdateVpcEndpointDetail_securityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityGroupIds", ID: &i_SecurityGroupIds, Members: &m_SecurityGroupIds, Type: smithy.ShapeTypeList})
+var sUpdateVpcEndpointDetail_lastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedDate", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sVectorOptions_ServerlessVectorAcceleration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerlessVectorAcceleration", ID: &i_ServerlessVectorAccelerationStatus, Type: smithy.ShapeTypeString})
+var sVpcEndpointDetail_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_VpcEndpointId, Type: smithy.ShapeTypeString})
+var sVpcEndpointDetail_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_VpcEndpointName, Type: smithy.ShapeTypeString})
+var sVpcEndpointDetail_vpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString})
+var sVpcEndpointDetail_subnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subnetIds", ID: &i_SubnetIds, Members: &m_SubnetIds, Type: smithy.ShapeTypeList})
+var sVpcEndpointDetail_securityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityGroupIds", ID: &i_SecurityGroupIds, Members: &m_SecurityGroupIds, Type: smithy.ShapeTypeList})
+var sVpcEndpointDetail_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_VpcEndpointStatus, Type: smithy.ShapeTypeString})
+var sVpcEndpointDetail_createdDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdDate", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sVpcEndpointDetail_failureCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureCode", ID: &pString, Type: smithy.ShapeTypeString})
+var sVpcEndpointDetail_failureMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureMessage", ID: &pString, Type: smithy.ShapeTypeString})
+var s_VpcEndpointDetails_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVpcEndpointDetail, Members: &mVpcEndpointDetail, Type: smithy.ShapeTypeStructure})
+var sVpcEndpointErrorDetail_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_VpcEndpointId, Type: smithy.ShapeTypeString})
+var sVpcEndpointErrorDetail_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &pString, Type: smithy.ShapeTypeString})
+var sVpcEndpointErrorDetail_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &pString, Type: smithy.ShapeTypeString})
+var s_VpcEndpointErrorDetails_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVpcEndpointErrorDetail, Members: &mVpcEndpointErrorDetail, Type: smithy.ShapeTypeStructure})
+var sVpcEndpointFilters_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_VpcEndpointStatus, Type: smithy.ShapeTypeString})
+var s_VpcEndpointIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_VpcEndpointId, Type: smithy.ShapeTypeString})
+var s_VpcEndpointSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVpcEndpointSummary, Members: &mVpcEndpointSummary, Type: smithy.ShapeTypeStructure})
+var sVpcEndpointSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_VpcEndpointId, Type: smithy.ShapeTypeString})
+var sVpcEndpointSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_VpcEndpointName, Type: smithy.ShapeTypeString})
+var sVpcEndpointSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_VpcEndpointStatus, Type: smithy.ShapeTypeString})
+var sBatchGetCollectionGroupRequest_ids = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ids", ID: &i_CollectionGroupIds, Members: &m_CollectionGroupIds, Type: smithy.ShapeTypeList})
+var sBatchGetCollectionGroupRequest_names = smithy.NewStaticSchema(smithy.StaticSchema{Member: "names", ID: &i_CollectionGroupNames, Members: &m_CollectionGroupNames, Type: smithy.ShapeTypeList})
+var sBatchGetCollectionGroupResponse_collectionGroupDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectionGroupDetails", ID: &i_CollectionGroupDetails, Members: &m_CollectionGroupDetails, Type: smithy.ShapeTypeList})
+var sBatchGetCollectionGroupResponse_collectionGroupErrorDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectionGroupErrorDetails", ID: &i_CollectionGroupErrorDetails, Members: &m_CollectionGroupErrorDetails, Type: smithy.ShapeTypeList})
+var sBatchGetCollectionRequest_ids = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ids", ID: &i_CollectionIds, Members: &m_CollectionIds, Type: smithy.ShapeTypeList})
+var sBatchGetCollectionRequest_names = smithy.NewStaticSchema(smithy.StaticSchema{Member: "names", ID: &i_CollectionNames, Members: &m_CollectionNames, Type: smithy.ShapeTypeList})
+var sBatchGetCollectionResponse_collectionDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectionDetails", ID: &i_CollectionDetails, Members: &m_CollectionDetails, Type: smithy.ShapeTypeList})
+var sBatchGetCollectionResponse_collectionErrorDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectionErrorDetails", ID: &i_CollectionErrorDetails, Members: &m_CollectionErrorDetails, Type: smithy.ShapeTypeList})
+var sBatchGetEffectiveLifecyclePolicyRequest_resourceIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceIdentifiers", ID: &i_LifecyclePolicyResourceIdentifiers, Members: &m_LifecyclePolicyResourceIdentifiers, Type: smithy.ShapeTypeList})
+var sBatchGetEffectiveLifecyclePolicyResponse_effectiveLifecyclePolicyDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "effectiveLifecyclePolicyDetails", ID: &i_EffectiveLifecyclePolicyDetails, Members: &m_EffectiveLifecyclePolicyDetails, Type: smithy.ShapeTypeList})
+var sBatchGetEffectiveLifecyclePolicyResponse_effectiveLifecyclePolicyErrorDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "effectiveLifecyclePolicyErrorDetails", ID: &i_EffectiveLifecyclePolicyErrorDetails, Members: &m_EffectiveLifecyclePolicyErrorDetails, Type: smithy.ShapeTypeList})
+var sBatchGetLifecyclePolicyRequest_identifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifiers", ID: &i_LifecyclePolicyIdentifiers, Members: &m_LifecyclePolicyIdentifiers, Type: smithy.ShapeTypeList})
+var sBatchGetLifecyclePolicyResponse_lifecyclePolicyDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lifecyclePolicyDetails", ID: &i_LifecyclePolicyDetails, Members: &m_LifecyclePolicyDetails, Type: smithy.ShapeTypeList})
+var sBatchGetLifecyclePolicyResponse_lifecyclePolicyErrorDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lifecyclePolicyErrorDetails", ID: &i_LifecyclePolicyErrorDetails, Members: &m_LifecyclePolicyErrorDetails, Type: smithy.ShapeTypeList})
+var sBatchGetVpcEndpointRequest_ids = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ids", ID: &i_VpcEndpointIds, Members: &m_VpcEndpointIds, Type: smithy.ShapeTypeList})
+var sBatchGetVpcEndpointResponse_vpcEndpointDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vpcEndpointDetails", ID: &i_VpcEndpointDetails, Members: &m_VpcEndpointDetails, Type: smithy.ShapeTypeList})
+var sBatchGetVpcEndpointResponse_vpcEndpointErrorDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vpcEndpointErrorDetails", ID: &i_VpcEndpointErrorDetails, Members: &m_VpcEndpointErrorDetails, Type: smithy.ShapeTypeList})
+var sCancelIngestionJobRequest_collectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectionId", ID: &i_CollectionId, Type: smithy.ShapeTypeString})
+var sCancelIngestionJobRequest_ingestionJobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestionJobId", ID: &i_IngestionJobId, Type: smithy.ShapeTypeString})
+var sCancelIngestionJobRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCancelIngestionJobResponse_ingestionJobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestionJobId", ID: &i_IngestionJobId, Type: smithy.ShapeTypeString})
+var sCancelIngestionJobResponse_collectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectionId", ID: &i_CollectionId, Type: smithy.ShapeTypeString})
+var sCancelIngestionJobResponse_ingestionJobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestionJobName", ID: &i_IngestionJobName, Type: smithy.ShapeTypeString})
+var sCancelIngestionJobResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_IngestionJobStatus, Type: smithy.ShapeTypeString})
+var sCreateAccessPolicyRequest_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_AccessPolicyType, Type: smithy.ShapeTypeString})
+var sCreateAccessPolicyRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PolicyName, Type: smithy.ShapeTypeString})
+var sCreateAccessPolicyRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_PolicyDescription, Type: smithy.ShapeTypeString})
+var sCreateAccessPolicyRequest_policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policy", ID: &i_PolicyDocument, Type: smithy.ShapeTypeString})
+var sCreateAccessPolicyRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateAccessPolicyResponse_accessPolicyDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessPolicyDetail", ID: &iAccessPolicyDetail, Members: &mAccessPolicyDetail, Type: smithy.ShapeTypeStructure})
+var sCreateCollectionGroupRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_CollectionGroupName, Type: smithy.ShapeTypeString})
+var sCreateCollectionGroupRequest_standbyReplicas = smithy.NewStaticSchema(smithy.StaticSchema{Member: "standbyReplicas", ID: &i_StandbyReplicas, Type: smithy.ShapeTypeString})
+var sCreateCollectionGroupRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateCollectionGroupRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sCreateCollectionGroupRequest_capacityLimits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capacityLimits", ID: &iCollectionGroupCapacityLimits, Members: &mCollectionGroupCapacityLimits, Type: smithy.ShapeTypeStructure})
+var sCreateCollectionGroupRequest_generation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "generation", ID: &i_ServerlessGeneration, Type: smithy.ShapeTypeString})
+var sCreateCollectionGroupRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateCollectionGroupResponse_createCollectionGroupDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createCollectionGroupDetail", ID: &iCreateCollectionGroupDetail, Members: &mCreateCollectionGroupDetail, Type: smithy.ShapeTypeStructure})
+var sCreateCollectionRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_CollectionName, Type: smithy.ShapeTypeString})
+var sCreateCollectionRequest_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_CollectionType, Type: smithy.ShapeTypeString})
+var sCreateCollectionRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateCollectionRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sCreateCollectionRequest_standbyReplicas = smithy.NewStaticSchema(smithy.StaticSchema{Member: "standbyReplicas", ID: &i_StandbyReplicas, Type: smithy.ShapeTypeString})
+var sCreateCollectionRequest_vectorOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorOptions", ID: &iVectorOptions, Members: &mVectorOptions, Type: smithy.ShapeTypeStructure})
+var sCreateCollectionRequest_collectionGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectionGroupName", ID: &i_CollectionGroupName, Type: smithy.ShapeTypeString})
+var sCreateCollectionRequest_encryptionConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionConfig", ID: &iEncryptionConfig, Members: &mEncryptionConfig, Type: smithy.ShapeTypeStructure})
+var sCreateCollectionRequest_deletionProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deletionProtection", ID: &i_DeletionProtection, Type: smithy.ShapeTypeString})
+var sCreateCollectionRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateCollectionResponse_createCollectionDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createCollectionDetail", ID: &iCreateCollectionDetail, Members: &mCreateCollectionDetail, Type: smithy.ShapeTypeStructure})
+var sCreateIndexRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CollectionId, Type: smithy.ShapeTypeString})
+var sCreateIndexRequest_indexName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexName", ID: &i_IndexName, Type: smithy.ShapeTypeString})
+var sCreateIndexRequest_indexSchema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexSchema", ID: &i_IndexSchema, Type: smithy.ShapeTypeDocument})
+var sCreateIngestionJobRequest_collectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectionId", ID: &i_CollectionId, Type: smithy.ShapeTypeString})
+var sCreateIngestionJobRequest_ingestionJobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestionJobName", ID: &i_IngestionJobName, Type: smithy.ShapeTypeString})
+var sCreateIngestionJobRequest_indexName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexName", ID: &i_IngestionIndexName, Type: smithy.ShapeTypeString})
+var sCreateIngestionJobRequest_failureIndexName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureIndexName", ID: &i_IngestionIndexName, Type: smithy.ShapeTypeString})
+var sCreateIngestionJobRequest_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iIngestionJobSource, Members: &mIngestionJobSource, Type: smithy.ShapeTypeStructure})
+var sCreateIngestionJobRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sCreateIngestionJobRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateIngestionJobResponse_ingestionJobDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestionJobDetail", ID: &iIngestionJobDetail, Members: &mIngestionJobDetail, Type: smithy.ShapeTypeStructure})
+var sCreateIngestionStreamRequest_collectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectionId", ID: &i_CollectionId, Type: smithy.ShapeTypeString})
+var sCreateIngestionStreamRequest_ingestionStreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestionStreamName", ID: &i_IngestionStreamName, Type: smithy.ShapeTypeString})
+var sCreateIngestionStreamRequest_indexName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexName", ID: &i_IngestionIndexName, Type: smithy.ShapeTypeString})
+var sCreateIngestionStreamRequest_failureIndexName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureIndexName", ID: &i_IngestionIndexName, Type: smithy.ShapeTypeString})
+var sCreateIngestionStreamRequest_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iIngestionStreamSource, Members: &mIngestionStreamSource, Type: smithy.ShapeTypeStructure})
+var sCreateIngestionStreamRequest_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sCreateIngestionStreamRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sCreateIngestionStreamRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateIngestionStreamResponse_ingestionStreamDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestionStreamDetail", ID: &iIngestionStreamDetail, Members: &mIngestionStreamDetail, Type: smithy.ShapeTypeStructure})
+var sCreateLifecyclePolicyRequest_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_LifecyclePolicyType, Type: smithy.ShapeTypeString})
+var sCreateLifecyclePolicyRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PolicyName, Type: smithy.ShapeTypeString})
+var sCreateLifecyclePolicyRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_PolicyDescription, Type: smithy.ShapeTypeString})
+var sCreateLifecyclePolicyRequest_policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policy", ID: &i_PolicyDocument, Type: smithy.ShapeTypeString})
+var sCreateLifecyclePolicyRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateLifecyclePolicyResponse_lifecyclePolicyDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lifecyclePolicyDetail", ID: &iLifecyclePolicyDetail, Members: &mLifecyclePolicyDetail, Type: smithy.ShapeTypeStructure})
+var sCreateSecurityConfigRequest_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_SecurityConfigType, Type: smithy.ShapeTypeString})
+var sCreateSecurityConfigRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ConfigName, Type: smithy.ShapeTypeString})
+var sCreateSecurityConfigRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ConfigDescription, Type: smithy.ShapeTypeString})
+var sCreateSecurityConfigRequest_samlOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "samlOptions", ID: &iSamlConfigOptions, Members: &mSamlConfigOptions, Type: smithy.ShapeTypeStructure})
+var sCreateSecurityConfigRequest_iamIdentityCenterOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "iamIdentityCenterOptions", ID: &iCreateIamIdentityCenterConfigOptions, Members: &mCreateIamIdentityCenterConfigOptions, Type: smithy.ShapeTypeStructure})
+var sCreateSecurityConfigRequest_iamFederationOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "iamFederationOptions", ID: &iIamFederationConfigOptions, Members: &mIamFederationConfigOptions, Type: smithy.ShapeTypeStructure})
+var sCreateSecurityConfigRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateSecurityConfigResponse_securityConfigDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityConfigDetail", ID: &iSecurityConfigDetail, Members: &mSecurityConfigDetail, Type: smithy.ShapeTypeStructure})
+var sCreateSecurityPolicyRequest_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_SecurityPolicyType, Type: smithy.ShapeTypeString})
+var sCreateSecurityPolicyRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PolicyName, Type: smithy.ShapeTypeString})
+var sCreateSecurityPolicyRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_PolicyDescription, Type: smithy.ShapeTypeString})
+var sCreateSecurityPolicyRequest_policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policy", ID: &i_PolicyDocument, Type: smithy.ShapeTypeString})
+var sCreateSecurityPolicyRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateSecurityPolicyResponse_securityPolicyDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityPolicyDetail", ID: &iSecurityPolicyDetail, Members: &mSecurityPolicyDetail, Type: smithy.ShapeTypeStructure})
+var sCreateVpcEndpointRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_VpcEndpointName, Type: smithy.ShapeTypeString})
+var sCreateVpcEndpointRequest_vpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString})
+var sCreateVpcEndpointRequest_subnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subnetIds", ID: &i_SubnetIds, Members: &m_SubnetIds, Type: smithy.ShapeTypeList})
+var sCreateVpcEndpointRequest_securityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityGroupIds", ID: &i_SecurityGroupIds, Members: &m_SecurityGroupIds, Type: smithy.ShapeTypeList})
+var sCreateVpcEndpointRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateVpcEndpointResponse_createVpcEndpointDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createVpcEndpointDetail", ID: &iCreateVpcEndpointDetail, Members: &mCreateVpcEndpointDetail, Type: smithy.ShapeTypeStructure})
+var sDeleteAccessPolicyRequest_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_AccessPolicyType, Type: smithy.ShapeTypeString})
+var sDeleteAccessPolicyRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PolicyName, Type: smithy.ShapeTypeString})
+var sDeleteAccessPolicyRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sDeleteCollectionGroupRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CollectionGroupId, Type: smithy.ShapeTypeString})
+var sDeleteCollectionGroupRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sDeleteCollectionRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CollectionId, Type: smithy.ShapeTypeString})
+var sDeleteCollectionRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sDeleteCollectionResponse_deleteCollectionDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleteCollectionDetail", ID: &iDeleteCollectionDetail, Members: &mDeleteCollectionDetail, Type: smithy.ShapeTypeStructure})
+var sDeleteIndexRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CollectionId, Type: smithy.ShapeTypeString})
+var sDeleteIndexRequest_indexName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexName", ID: &i_IndexName, Type: smithy.ShapeTypeString})
+var sDeleteIngestionStreamRequest_collectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectionId", ID: &i_CollectionId, Type: smithy.ShapeTypeString})
+var sDeleteIngestionStreamRequest_ingestionStreamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestionStreamId", ID: &i_IngestionStreamId, Type: smithy.ShapeTypeString})
+var sDeleteIngestionStreamRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sDeleteIngestionStreamResponse_ingestionStreamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestionStreamId", ID: &i_IngestionStreamId, Type: smithy.ShapeTypeString})
+var sDeleteIngestionStreamResponse_collectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectionId", ID: &i_CollectionId, Type: smithy.ShapeTypeString})
+var sDeleteIngestionStreamResponse_ingestionStreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestionStreamName", ID: &i_IngestionStreamName, Type: smithy.ShapeTypeString})
+var sDeleteIngestionStreamResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_IngestionStreamStatus, Type: smithy.ShapeTypeString})
+var sDeleteLifecyclePolicyRequest_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_LifecyclePolicyType, Type: smithy.ShapeTypeString})
+var sDeleteLifecyclePolicyRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PolicyName, Type: smithy.ShapeTypeString})
+var sDeleteLifecyclePolicyRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sDeleteSecurityConfigRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_SecurityConfigId, Type: smithy.ShapeTypeString})
+var sDeleteSecurityConfigRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sDeleteSecurityPolicyRequest_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_SecurityPolicyType, Type: smithy.ShapeTypeString})
+var sDeleteSecurityPolicyRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PolicyName, Type: smithy.ShapeTypeString})
+var sDeleteSecurityPolicyRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sDeleteVpcEndpointRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_VpcEndpointId, Type: smithy.ShapeTypeString})
+var sDeleteVpcEndpointRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sDeleteVpcEndpointResponse_deleteVpcEndpointDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleteVpcEndpointDetail", ID: &iDeleteVpcEndpointDetail, Members: &mDeleteVpcEndpointDetail, Type: smithy.ShapeTypeStructure})
+var sGetAccessPolicyRequest_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_AccessPolicyType, Type: smithy.ShapeTypeString})
+var sGetAccessPolicyRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PolicyName, Type: smithy.ShapeTypeString})
+var sGetAccessPolicyResponse_accessPolicyDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessPolicyDetail", ID: &iAccessPolicyDetail, Members: &mAccessPolicyDetail, Type: smithy.ShapeTypeStructure})
+var sGetAccountSettingsResponse_accountSettingsDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountSettingsDetail", ID: &iAccountSettingsDetail, Members: &mAccountSettingsDetail, Type: smithy.ShapeTypeStructure})
+var sGetIndexRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CollectionId, Type: smithy.ShapeTypeString})
+var sGetIndexRequest_indexName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexName", ID: &i_IndexName, Type: smithy.ShapeTypeString})
+var sGetIndexResponse_indexSchema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexSchema", ID: &i_IndexSchema, Type: smithy.ShapeTypeDocument})
+var sGetIngestionJobRequest_collectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectionId", ID: &i_CollectionId, Type: smithy.ShapeTypeString})
+var sGetIngestionJobRequest_ingestionJobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestionJobId", ID: &i_IngestionJobId, Type: smithy.ShapeTypeString})
+var sGetIngestionJobResponse_ingestionJobDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestionJobDetail", ID: &iIngestionJobDetail, Members: &mIngestionJobDetail, Type: smithy.ShapeTypeStructure})
+var sGetIngestionStreamRequest_collectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectionId", ID: &i_CollectionId, Type: smithy.ShapeTypeString})
+var sGetIngestionStreamRequest_ingestionStreamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestionStreamId", ID: &i_IngestionStreamId, Type: smithy.ShapeTypeString})
+var sGetIngestionStreamResponse_ingestionStreamDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestionStreamDetail", ID: &iIngestionStreamDetail, Members: &mIngestionStreamDetail, Type: smithy.ShapeTypeStructure})
+var sGetPoliciesStatsResponse_AccessPolicyStats = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessPolicyStats", ID: &iAccessPolicyStats, Members: &mAccessPolicyStats, Type: smithy.ShapeTypeStructure})
+var sGetPoliciesStatsResponse_SecurityPolicyStats = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityPolicyStats", ID: &iSecurityPolicyStats, Members: &mSecurityPolicyStats, Type: smithy.ShapeTypeStructure})
+var sGetPoliciesStatsResponse_SecurityConfigStats = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityConfigStats", ID: &iSecurityConfigStats, Members: &mSecurityConfigStats, Type: smithy.ShapeTypeStructure})
+var sGetPoliciesStatsResponse_LifecyclePolicyStats = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LifecyclePolicyStats", ID: &iLifecyclePolicyStats, Members: &mLifecyclePolicyStats, Type: smithy.ShapeTypeStructure})
+var sGetPoliciesStatsResponse_TotalPolicyCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalPolicyCount", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sGetSecurityConfigRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_SecurityConfigId, Type: smithy.ShapeTypeString})
+var sGetSecurityConfigResponse_securityConfigDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityConfigDetail", ID: &iSecurityConfigDetail, Members: &mSecurityConfigDetail, Type: smithy.ShapeTypeStructure})
+var sGetSecurityPolicyRequest_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_SecurityPolicyType, Type: smithy.ShapeTypeString})
+var sGetSecurityPolicyRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PolicyName, Type: smithy.ShapeTypeString})
+var sGetSecurityPolicyResponse_securityPolicyDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityPolicyDetail", ID: &iSecurityPolicyDetail, Members: &mSecurityPolicyDetail, Type: smithy.ShapeTypeStructure})
+var sListAccessPoliciesRequest_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_AccessPolicyType, Type: smithy.ShapeTypeString})
+var sListAccessPoliciesRequest_resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resource", ID: &i_ResourceFilter, Members: &m_ResourceFilter, Type: smithy.ShapeTypeList})
+var sListAccessPoliciesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListAccessPoliciesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sListAccessPoliciesResponse_accessPolicySummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessPolicySummaries", ID: &i_AccessPolicySummaries, Members: &m_AccessPolicySummaries, Type: smithy.ShapeTypeList})
+var sListAccessPoliciesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListCollectionGroupsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListCollectionGroupsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sListCollectionGroupsResponse_collectionGroupSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectionGroupSummaries", ID: &i_CollectionGroupSummaries, Members: &m_CollectionGroupSummaries, Type: smithy.ShapeTypeList})
+var sListCollectionGroupsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListCollectionsRequest_collectionFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectionFilters", ID: &iCollectionFilters, Members: &mCollectionFilters, Type: smithy.ShapeTypeStructure})
+var sListCollectionsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListCollectionsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sListCollectionsResponse_collectionSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectionSummaries", ID: &i_CollectionSummaries, Members: &m_CollectionSummaries, Type: smithy.ShapeTypeList})
+var sListCollectionsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListIngestionJobsRequest_collectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectionId", ID: &i_CollectionId, Type: smithy.ShapeTypeString})
+var sListIngestionJobsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListIngestionJobsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sListIngestionJobsResponse_ingestionJobSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestionJobSummaries", ID: &i_IngestionJobSummaries, Members: &m_IngestionJobSummaries, Type: smithy.ShapeTypeList})
+var sListIngestionJobsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListIngestionStreamsRequest_collectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectionId", ID: &i_CollectionId, Type: smithy.ShapeTypeString})
+var sListIngestionStreamsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListIngestionStreamsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sListIngestionStreamsResponse_ingestionStreamSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ingestionStreamSummaries", ID: &i_IngestionStreamSummaries, Members: &m_IngestionStreamSummaries, Type: smithy.ShapeTypeList})
+var sListIngestionStreamsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListLifecyclePoliciesRequest_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_LifecyclePolicyType, Type: smithy.ShapeTypeString})
+var sListLifecyclePoliciesRequest_resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resources", ID: &i_LifecycleResourceFilter, Members: &m_LifecycleResourceFilter, Type: smithy.ShapeTypeList})
+var sListLifecyclePoliciesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListLifecyclePoliciesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sListLifecyclePoliciesResponse_lifecyclePolicySummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lifecyclePolicySummaries", ID: &i_LifecyclePolicySummaries, Members: &m_LifecyclePolicySummaries, Type: smithy.ShapeTypeList})
+var sListLifecyclePoliciesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListSecurityConfigsRequest_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_SecurityConfigType, Type: smithy.ShapeTypeString})
+var sListSecurityConfigsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListSecurityConfigsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sListSecurityConfigsResponse_securityConfigSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityConfigSummaries", ID: &i_SecurityConfigSummaries, Members: &m_SecurityConfigSummaries, Type: smithy.ShapeTypeList})
+var sListSecurityConfigsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListSecurityPoliciesRequest_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_SecurityPolicyType, Type: smithy.ShapeTypeString})
+var sListSecurityPoliciesRequest_resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resource", ID: &i_ResourceFilter, Members: &m_ResourceFilter, Type: smithy.ShapeTypeList})
+var sListSecurityPoliciesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListSecurityPoliciesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sListSecurityPoliciesResponse_securityPolicySummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityPolicySummaries", ID: &i_SecurityPolicySummaries, Members: &m_SecurityPolicySummaries, Type: smithy.ShapeTypeList})
+var sListSecurityPoliciesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sListVpcEndpointsRequest_vpcEndpointFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vpcEndpointFilters", ID: &iVpcEndpointFilters, Members: &mVpcEndpointFilters, Type: smithy.ShapeTypeStructure})
+var sListVpcEndpointsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListVpcEndpointsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sListVpcEndpointsResponse_vpcEndpointSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vpcEndpointSummaries", ID: &i_VpcEndpointSummaries, Members: &m_VpcEndpointSummaries, Type: smithy.ShapeTypeList})
+var sListVpcEndpointsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeys, Members: &m_TagKeys, Type: smithy.ShapeTypeList})
+var sUpdateAccessPolicyRequest_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_AccessPolicyType, Type: smithy.ShapeTypeString})
+var sUpdateAccessPolicyRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PolicyName, Type: smithy.ShapeTypeString})
+var sUpdateAccessPolicyRequest_policyVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyVersion", ID: &i_PolicyVersion, Type: smithy.ShapeTypeString})
+var sUpdateAccessPolicyRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_PolicyDescription, Type: smithy.ShapeTypeString})
+var sUpdateAccessPolicyRequest_policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policy", ID: &i_PolicyDocument, Type: smithy.ShapeTypeString})
+var sUpdateAccessPolicyRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sUpdateAccessPolicyResponse_accessPolicyDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessPolicyDetail", ID: &iAccessPolicyDetail, Members: &mAccessPolicyDetail, Type: smithy.ShapeTypeStructure})
+var sUpdateAccountSettingsRequest_capacityLimits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capacityLimits", ID: &iCapacityLimits, Members: &mCapacityLimits, Type: smithy.ShapeTypeStructure})
+var sUpdateAccountSettingsResponse_accountSettingsDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountSettingsDetail", ID: &iAccountSettingsDetail, Members: &mAccountSettingsDetail, Type: smithy.ShapeTypeStructure})
+var sUpdateCollectionGroupRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CollectionGroupId, Type: smithy.ShapeTypeString})
+var sUpdateCollectionGroupRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString})
+var sUpdateCollectionGroupRequest_capacityLimits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capacityLimits", ID: &iCollectionGroupCapacityLimits, Members: &mCollectionGroupCapacityLimits, Type: smithy.ShapeTypeStructure})
+var sUpdateCollectionGroupRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sUpdateCollectionGroupResponse_updateCollectionGroupDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateCollectionGroupDetail", ID: &iUpdateCollectionGroupDetail, Members: &mUpdateCollectionGroupDetail, Type: smithy.ShapeTypeStructure})
+var sUpdateCollectionRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CollectionId, Type: smithy.ShapeTypeString})
+var sUpdateCollectionRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString})
+var sUpdateCollectionRequest_vectorOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vectorOptions", ID: &iVectorOptions, Members: &mVectorOptions, Type: smithy.ShapeTypeStructure})
+var sUpdateCollectionRequest_deletionProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deletionProtection", ID: &i_DeletionProtection, Type: smithy.ShapeTypeString})
+var sUpdateCollectionRequest_encryptionConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionConfig", ID: &iEncryptionConfig, Members: &mEncryptionConfig, Type: smithy.ShapeTypeStructure})
+var sUpdateCollectionRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sUpdateCollectionResponse_updateCollectionDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateCollectionDetail", ID: &iUpdateCollectionDetail, Members: &mUpdateCollectionDetail, Type: smithy.ShapeTypeStructure})
+var sUpdateIndexRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CollectionId, Type: smithy.ShapeTypeString})
+var sUpdateIndexRequest_indexName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexName", ID: &i_IndexName, Type: smithy.ShapeTypeString})
+var sUpdateIndexRequest_indexSchema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "indexSchema", ID: &i_IndexSchema, Type: smithy.ShapeTypeDocument})
+var sUpdateLifecyclePolicyRequest_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_LifecyclePolicyType, Type: smithy.ShapeTypeString})
+var sUpdateLifecyclePolicyRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PolicyName, Type: smithy.ShapeTypeString})
+var sUpdateLifecyclePolicyRequest_policyVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyVersion", ID: &i_PolicyVersion, Type: smithy.ShapeTypeString})
+var sUpdateLifecyclePolicyRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_PolicyDescription, Type: smithy.ShapeTypeString})
+var sUpdateLifecyclePolicyRequest_policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policy", ID: &i_PolicyDocument, Type: smithy.ShapeTypeString})
+var sUpdateLifecyclePolicyRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sUpdateLifecyclePolicyResponse_lifecyclePolicyDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lifecyclePolicyDetail", ID: &iLifecyclePolicyDetail, Members: &mLifecyclePolicyDetail, Type: smithy.ShapeTypeStructure})
+var sUpdateSecurityConfigRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_SecurityConfigId, Type: smithy.ShapeTypeString})
+var sUpdateSecurityConfigRequest_configVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configVersion", ID: &i_PolicyVersion, Type: smithy.ShapeTypeString})
+var sUpdateSecurityConfigRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ConfigDescription, Type: smithy.ShapeTypeString})
+var sUpdateSecurityConfigRequest_samlOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "samlOptions", ID: &iSamlConfigOptions, Members: &mSamlConfigOptions, Type: smithy.ShapeTypeStructure})
+var sUpdateSecurityConfigRequest_iamIdentityCenterOptionsUpdates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "iamIdentityCenterOptionsUpdates", ID: &iUpdateIamIdentityCenterConfigOptions, Members: &mUpdateIamIdentityCenterConfigOptions, Type: smithy.ShapeTypeStructure})
+var sUpdateSecurityConfigRequest_iamFederationOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "iamFederationOptions", ID: &iIamFederationConfigOptions, Members: &mIamFederationConfigOptions, Type: smithy.ShapeTypeStructure})
+var sUpdateSecurityConfigRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sUpdateSecurityConfigResponse_securityConfigDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityConfigDetail", ID: &iSecurityConfigDetail, Members: &mSecurityConfigDetail, Type: smithy.ShapeTypeStructure})
+var sUpdateSecurityPolicyRequest_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_SecurityPolicyType, Type: smithy.ShapeTypeString})
+var sUpdateSecurityPolicyRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PolicyName, Type: smithy.ShapeTypeString})
+var sUpdateSecurityPolicyRequest_policyVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyVersion", ID: &i_PolicyVersion, Type: smithy.ShapeTypeString})
+var sUpdateSecurityPolicyRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_PolicyDescription, Type: smithy.ShapeTypeString})
+var sUpdateSecurityPolicyRequest_policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policy", ID: &i_PolicyDocument, Type: smithy.ShapeTypeString})
+var sUpdateSecurityPolicyRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sUpdateSecurityPolicyResponse_securityPolicyDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityPolicyDetail", ID: &iSecurityPolicyDetail, Members: &mSecurityPolicyDetail, Type: smithy.ShapeTypeStructure})
+var sUpdateVpcEndpointRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_VpcEndpointId, Type: smithy.ShapeTypeString})
+var sUpdateVpcEndpointRequest_addSubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "addSubnetIds", ID: &i_SubnetIds, Members: &m_SubnetIds, Type: smithy.ShapeTypeList})
+var sUpdateVpcEndpointRequest_removeSubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "removeSubnetIds", ID: &i_SubnetIds, Members: &m_SubnetIds, Type: smithy.ShapeTypeList})
+var sUpdateVpcEndpointRequest_addSecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "addSecurityGroupIds", ID: &i_SecurityGroupIds, Members: &m_SecurityGroupIds, Type: smithy.ShapeTypeList})
+var sUpdateVpcEndpointRequest_removeSecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "removeSecurityGroupIds", ID: &i_SecurityGroupIds, Members: &m_SecurityGroupIds, Type: smithy.ShapeTypeList})
+var sUpdateVpcEndpointRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sUpdateVpcEndpointResponse_UpdateVpcEndpointDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateVpcEndpointDetail", ID: &iUpdateVpcEndpointDetail, Members: &mUpdateVpcEndpointDetail, Type: smithy.ShapeTypeStructure})
+
+var BatchGetCollection = &sBatchGetCollection
+
+var BatchGetCollectionGroup = &sBatchGetCollectionGroup
+
+var BatchGetEffectiveLifecyclePolicy = &sBatchGetEffectiveLifecyclePolicy
+
+var BatchGetLifecyclePolicy = &sBatchGetLifecyclePolicy
+
+var BatchGetVpcEndpoint = &sBatchGetVpcEndpoint
+
+var CancelIngestionJob = &sCancelIngestionJob
+
+var CreateAccessPolicy = &sCreateAccessPolicy
+
+var CreateCollection = &sCreateCollection
+
+var CreateCollectionGroup = &sCreateCollectionGroup
+
+var CreateIndex = &sCreateIndex
+
+var CreateIngestionJob = &sCreateIngestionJob
+
+var CreateIngestionStream = &sCreateIngestionStream
+
+var CreateLifecyclePolicy = &sCreateLifecyclePolicy
+
+var CreateSecurityConfig = &sCreateSecurityConfig
+
+var CreateSecurityPolicy = &sCreateSecurityPolicy
+
+var CreateVpcEndpoint = &sCreateVpcEndpoint
+
+var DeleteAccessPolicy = &sDeleteAccessPolicy
+
+var DeleteCollection = &sDeleteCollection
+
+var DeleteCollectionGroup = &sDeleteCollectionGroup
+
+var DeleteIndex = &sDeleteIndex
+
+var DeleteIngestionStream = &sDeleteIngestionStream
+
+var DeleteLifecyclePolicy = &sDeleteLifecyclePolicy
+
+var DeleteSecurityConfig = &sDeleteSecurityConfig
+
+var DeleteSecurityPolicy = &sDeleteSecurityPolicy
+
+var DeleteVpcEndpoint = &sDeleteVpcEndpoint
+
+var GetAccessPolicy = &sGetAccessPolicy
+
+var GetAccountSettings = &sGetAccountSettings
+
+var GetIndex = &sGetIndex
+
+var GetIngestionJob = &sGetIngestionJob
+
+var GetIngestionStream = &sGetIngestionStream
+
+var GetPoliciesStats = &sGetPoliciesStats
+
+var GetSecurityConfig = &sGetSecurityConfig
+
+var GetSecurityPolicy = &sGetSecurityPolicy
+
+var ListAccessPolicies = &sListAccessPolicies
+
+var ListCollectionGroups = &sListCollectionGroups
+
+var ListCollections = &sListCollections
+
+var ListIngestionJobs = &sListIngestionJobs
+
+var ListIngestionStreams = &sListIngestionStreams
+
+var ListLifecyclePolicies = &sListLifecyclePolicies
+
+var ListSecurityConfigs = &sListSecurityConfigs
+
+var ListSecurityPolicies = &sListSecurityPolicies
+
+var ListTagsForResource = &sListTagsForResource
+
+var ListVpcEndpoints = &sListVpcEndpoints
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateAccessPolicy = &sUpdateAccessPolicy
+
+var UpdateAccountSettings = &sUpdateAccountSettings
+
+var UpdateCollection = &sUpdateCollection
+
+var UpdateCollectionGroup = &sUpdateCollectionGroup
+
+var UpdateIndex = &sUpdateIndex
+
+var UpdateLifecyclePolicy = &sUpdateLifecyclePolicy
+
+var UpdateSecurityConfig = &sUpdateSecurityConfig
+
+var UpdateSecurityPolicy = &sUpdateSecurityPolicy
+
+var UpdateVpcEndpoint = &sUpdateVpcEndpoint
+
+var _OpenSearchServerless = &s_OpenSearchServerless
+
+var AccessPolicyDetail = &sAccessPolicyDetail
+var AccessPolicyDetail_type = &sAccessPolicyDetail_type
+var AccessPolicyDetail_name = &sAccessPolicyDetail_name
+var AccessPolicyDetail_policyVersion = &sAccessPolicyDetail_policyVersion
+var AccessPolicyDetail_description = &sAccessPolicyDetail_description
+var AccessPolicyDetail_policy = &sAccessPolicyDetail_policy
+var AccessPolicyDetail_createdDate = &sAccessPolicyDetail_createdDate
+var AccessPolicyDetail_lastModifiedDate = &sAccessPolicyDetail_lastModifiedDate
+
+var AccessPolicyStats = &sAccessPolicyStats
+var AccessPolicyStats_DataPolicyCount = &sAccessPolicyStats_DataPolicyCount
+
+var _AccessPolicySummaries = &s_AccessPolicySummaries
+var _AccessPolicySummaries_member = &s_AccessPolicySummaries_member
+
+var AccessPolicySummary = &sAccessPolicySummary
+var AccessPolicySummary_type = &sAccessPolicySummary_type
+var AccessPolicySummary_name = &sAccessPolicySummary_name
+var AccessPolicySummary_policyVersion = &sAccessPolicySummary_policyVersion
+var AccessPolicySummary_description = &sAccessPolicySummary_description
+var AccessPolicySummary_createdDate = &sAccessPolicySummary_createdDate
+var AccessPolicySummary_lastModifiedDate = &sAccessPolicySummary_lastModifiedDate
+
+var _AccessPolicyType = &s_AccessPolicyType
+
+var AccountSettingsDetail = &sAccountSettingsDetail
+var AccountSettingsDetail_capacityLimits = &sAccountSettingsDetail_capacityLimits
+
+var _Arn = &s_Arn
+
+var _AutoscalingStatus = &s_AutoscalingStatus
+
+var _BucketOwnerAccountId = &s_BucketOwnerAccountId
+
+var CapacityDetails = &sCapacityDetails
+var CapacityDetails_capacityInOcu = &sCapacityDetails_capacityInOcu
+var CapacityDetails_autoscalingStatus = &sCapacityDetails_autoscalingStatus
+
+var CapacityLimits = &sCapacityLimits
+var CapacityLimits_maxIndexingCapacityInOCU = &sCapacityLimits_maxIndexingCapacityInOCU
+var CapacityLimits_maxSearchCapacityInOCU = &sCapacityLimits_maxSearchCapacityInOCU
+
+var _ClientToken = &s_ClientToken
+
+var CollectionDetail = &sCollectionDetail
+var CollectionDetail_id = &sCollectionDetail_id
+var CollectionDetail_name = &sCollectionDetail_name
+var CollectionDetail_status = &sCollectionDetail_status
+var CollectionDetail_type = &sCollectionDetail_type
+var CollectionDetail_description = &sCollectionDetail_description
+var CollectionDetail_arn = &sCollectionDetail_arn
+var CollectionDetail_kmsKeyArn = &sCollectionDetail_kmsKeyArn
+var CollectionDetail_standbyReplicas = &sCollectionDetail_standbyReplicas
+var CollectionDetail_deletionProtection = &sCollectionDetail_deletionProtection
+var CollectionDetail_vectorOptions = &sCollectionDetail_vectorOptions
+var CollectionDetail_createdDate = &sCollectionDetail_createdDate
+var CollectionDetail_lastModifiedDate = &sCollectionDetail_lastModifiedDate
+var CollectionDetail_collectionEndpoint = &sCollectionDetail_collectionEndpoint
+var CollectionDetail_dashboardEndpoint = &sCollectionDetail_dashboardEndpoint
+var CollectionDetail_fipsEndpoints = &sCollectionDetail_fipsEndpoints
+var CollectionDetail_failureCode = &sCollectionDetail_failureCode
+var CollectionDetail_failureMessage = &sCollectionDetail_failureMessage
+var CollectionDetail_collectionGroupName = &sCollectionDetail_collectionGroupName
+
+var _CollectionDetails = &s_CollectionDetails
+var _CollectionDetails_member = &s_CollectionDetails_member
+
+var CollectionErrorDetail = &sCollectionErrorDetail
+var CollectionErrorDetail_id = &sCollectionErrorDetail_id
+var CollectionErrorDetail_name = &sCollectionErrorDetail_name
+var CollectionErrorDetail_errorMessage = &sCollectionErrorDetail_errorMessage
+var CollectionErrorDetail_errorCode = &sCollectionErrorDetail_errorCode
+
+var _CollectionErrorDetails = &s_CollectionErrorDetails
+var _CollectionErrorDetails_member = &s_CollectionErrorDetails_member
+
+var CollectionFilters = &sCollectionFilters
+var CollectionFilters_name = &sCollectionFilters_name
+var CollectionFilters_status = &sCollectionFilters_status
+var CollectionFilters_collectionGroupName = &sCollectionFilters_collectionGroupName
+
+var CollectionGroupCapacityLimits = &sCollectionGroupCapacityLimits
+var CollectionGroupCapacityLimits_maxIndexingCapacityInOCU = &sCollectionGroupCapacityLimits_maxIndexingCapacityInOCU
+var CollectionGroupCapacityLimits_maxSearchCapacityInOCU = &sCollectionGroupCapacityLimits_maxSearchCapacityInOCU
+var CollectionGroupCapacityLimits_minIndexingCapacityInOCU = &sCollectionGroupCapacityLimits_minIndexingCapacityInOCU
+var CollectionGroupCapacityLimits_minSearchCapacityInOCU = &sCollectionGroupCapacityLimits_minSearchCapacityInOCU
+
+var CollectionGroupDetail = &sCollectionGroupDetail
+var CollectionGroupDetail_id = &sCollectionGroupDetail_id
+var CollectionGroupDetail_arn = &sCollectionGroupDetail_arn
+var CollectionGroupDetail_name = &sCollectionGroupDetail_name
+var CollectionGroupDetail_standbyReplicas = &sCollectionGroupDetail_standbyReplicas
+var CollectionGroupDetail_description = &sCollectionGroupDetail_description
+var CollectionGroupDetail_tags = &sCollectionGroupDetail_tags
+var CollectionGroupDetail_createdDate = &sCollectionGroupDetail_createdDate
+var CollectionGroupDetail_capacityLimits = &sCollectionGroupDetail_capacityLimits
+var CollectionGroupDetail_currentCapacity = &sCollectionGroupDetail_currentCapacity
+var CollectionGroupDetail_numberOfCollections = &sCollectionGroupDetail_numberOfCollections
+var CollectionGroupDetail_generation = &sCollectionGroupDetail_generation
+
+var _CollectionGroupDetails = &s_CollectionGroupDetails
+var _CollectionGroupDetails_member = &s_CollectionGroupDetails_member
+
+var CollectionGroupErrorDetail = &sCollectionGroupErrorDetail
+var CollectionGroupErrorDetail_id = &sCollectionGroupErrorDetail_id
+var CollectionGroupErrorDetail_name = &sCollectionGroupErrorDetail_name
+var CollectionGroupErrorDetail_errorMessage = &sCollectionGroupErrorDetail_errorMessage
+var CollectionGroupErrorDetail_errorCode = &sCollectionGroupErrorDetail_errorCode
+
+var _CollectionGroupErrorDetails = &s_CollectionGroupErrorDetails
+var _CollectionGroupErrorDetails_member = &s_CollectionGroupErrorDetails_member
+
+var _CollectionGroupId = &s_CollectionGroupId
+
+var _CollectionGroupIds = &s_CollectionGroupIds
+var _CollectionGroupIds_member = &s_CollectionGroupIds_member
+
+var _CollectionGroupMaxIndexingCapacityValue = &s_CollectionGroupMaxIndexingCapacityValue
+
+var _CollectionGroupMaxSearchCapacityValue = &s_CollectionGroupMaxSearchCapacityValue
+
+var _CollectionGroupMinIndexingCapacityValue = &s_CollectionGroupMinIndexingCapacityValue
+
+var _CollectionGroupMinSearchCapacityValue = &s_CollectionGroupMinSearchCapacityValue
+
+var _CollectionGroupName = &s_CollectionGroupName
+
+var _CollectionGroupNames = &s_CollectionGroupNames
+var _CollectionGroupNames_member = &s_CollectionGroupNames_member
+
+var _CollectionGroupSummaries = &s_CollectionGroupSummaries
+var _CollectionGroupSummaries_member = &s_CollectionGroupSummaries_member
+
+var CollectionGroupSummary = &sCollectionGroupSummary
+var CollectionGroupSummary_id = &sCollectionGroupSummary_id
+var CollectionGroupSummary_arn = &sCollectionGroupSummary_arn
+var CollectionGroupSummary_name = &sCollectionGroupSummary_name
+var CollectionGroupSummary_numberOfCollections = &sCollectionGroupSummary_numberOfCollections
+var CollectionGroupSummary_createdDate = &sCollectionGroupSummary_createdDate
+var CollectionGroupSummary_capacityLimits = &sCollectionGroupSummary_capacityLimits
+var CollectionGroupSummary_generation = &sCollectionGroupSummary_generation
+
+var _CollectionId = &s_CollectionId
+
+var _CollectionIds = &s_CollectionIds
+var _CollectionIds_member = &s_CollectionIds_member
+
+var _CollectionName = &s_CollectionName
+
+var _CollectionNames = &s_CollectionNames
+var _CollectionNames_member = &s_CollectionNames_member
+
+var _CollectionStatus = &s_CollectionStatus
+
+var _CollectionSummaries = &s_CollectionSummaries
+var _CollectionSummaries_member = &s_CollectionSummaries_member
+
+var CollectionSummary = &sCollectionSummary
+var CollectionSummary_id = &sCollectionSummary_id
+var CollectionSummary_name = &sCollectionSummary_name
+var CollectionSummary_status = &sCollectionSummary_status
+var CollectionSummary_arn = &sCollectionSummary_arn
+var CollectionSummary_kmsKeyArn = &sCollectionSummary_kmsKeyArn
+var CollectionSummary_collectionGroupName = &sCollectionSummary_collectionGroupName
+
+var _CollectionType = &s_CollectionType
+
+var _ConfigDescription = &s_ConfigDescription
+
+var _ConfigName = &s_ConfigName
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+
+var CreateCollectionDetail = &sCreateCollectionDetail
+var CreateCollectionDetail_id = &sCreateCollectionDetail_id
+var CreateCollectionDetail_name = &sCreateCollectionDetail_name
+var CreateCollectionDetail_status = &sCreateCollectionDetail_status
+var CreateCollectionDetail_type = &sCreateCollectionDetail_type
+var CreateCollectionDetail_description = &sCreateCollectionDetail_description
+var CreateCollectionDetail_arn = &sCreateCollectionDetail_arn
+var CreateCollectionDetail_kmsKeyArn = &sCreateCollectionDetail_kmsKeyArn
+var CreateCollectionDetail_standbyReplicas = &sCreateCollectionDetail_standbyReplicas
+var CreateCollectionDetail_deletionProtection = &sCreateCollectionDetail_deletionProtection
+var CreateCollectionDetail_vectorOptions = &sCreateCollectionDetail_vectorOptions
+var CreateCollectionDetail_createdDate = &sCreateCollectionDetail_createdDate
+var CreateCollectionDetail_lastModifiedDate = &sCreateCollectionDetail_lastModifiedDate
+var CreateCollectionDetail_collectionGroupName = &sCreateCollectionDetail_collectionGroupName
+
+var CreateCollectionGroupDetail = &sCreateCollectionGroupDetail
+var CreateCollectionGroupDetail_id = &sCreateCollectionGroupDetail_id
+var CreateCollectionGroupDetail_arn = &sCreateCollectionGroupDetail_arn
+var CreateCollectionGroupDetail_name = &sCreateCollectionGroupDetail_name
+var CreateCollectionGroupDetail_standbyReplicas = &sCreateCollectionGroupDetail_standbyReplicas
+var CreateCollectionGroupDetail_description = &sCreateCollectionGroupDetail_description
+var CreateCollectionGroupDetail_tags = &sCreateCollectionGroupDetail_tags
+var CreateCollectionGroupDetail_createdDate = &sCreateCollectionGroupDetail_createdDate
+var CreateCollectionGroupDetail_capacityLimits = &sCreateCollectionGroupDetail_capacityLimits
+var CreateCollectionGroupDetail_generation = &sCreateCollectionGroupDetail_generation
+
+var CreateIamIdentityCenterConfigOptions = &sCreateIamIdentityCenterConfigOptions
+var CreateIamIdentityCenterConfigOptions_instanceArn = &sCreateIamIdentityCenterConfigOptions_instanceArn
+var CreateIamIdentityCenterConfigOptions_userAttribute = &sCreateIamIdentityCenterConfigOptions_userAttribute
+var CreateIamIdentityCenterConfigOptions_groupAttribute = &sCreateIamIdentityCenterConfigOptions_groupAttribute
+
+var CreateVpcEndpointDetail = &sCreateVpcEndpointDetail
+var CreateVpcEndpointDetail_id = &sCreateVpcEndpointDetail_id
+var CreateVpcEndpointDetail_name = &sCreateVpcEndpointDetail_name
+var CreateVpcEndpointDetail_status = &sCreateVpcEndpointDetail_status
+
+var CurrentCapacity = &sCurrentCapacity
+var CurrentCapacity_search = &sCurrentCapacity_search
+var CurrentCapacity_indexing = &sCurrentCapacity_indexing
+
+var DeleteCollectionDetail = &sDeleteCollectionDetail
+var DeleteCollectionDetail_id = &sDeleteCollectionDetail_id
+var DeleteCollectionDetail_name = &sDeleteCollectionDetail_name
+var DeleteCollectionDetail_status = &sDeleteCollectionDetail_status
+var DeleteCollectionDetail_deletionProtection = &sDeleteCollectionDetail_deletionProtection
+
+var DeleteVpcEndpointDetail = &sDeleteVpcEndpointDetail
+var DeleteVpcEndpointDetail_id = &sDeleteVpcEndpointDetail_id
+var DeleteVpcEndpointDetail_name = &sDeleteVpcEndpointDetail_name
+var DeleteVpcEndpointDetail_status = &sDeleteVpcEndpointDetail_status
+
+var _DeletionProtection = &s_DeletionProtection
+
+var EffectiveLifecyclePolicyDetail = &sEffectiveLifecyclePolicyDetail
+var EffectiveLifecyclePolicyDetail_type = &sEffectiveLifecyclePolicyDetail_type
+var EffectiveLifecyclePolicyDetail_resource = &sEffectiveLifecyclePolicyDetail_resource
+var EffectiveLifecyclePolicyDetail_policyName = &sEffectiveLifecyclePolicyDetail_policyName
+var EffectiveLifecyclePolicyDetail_resourceType = &sEffectiveLifecyclePolicyDetail_resourceType
+var EffectiveLifecyclePolicyDetail_retentionPeriod = &sEffectiveLifecyclePolicyDetail_retentionPeriod
+var EffectiveLifecyclePolicyDetail_noMinRetentionPeriod = &sEffectiveLifecyclePolicyDetail_noMinRetentionPeriod
+
+var _EffectiveLifecyclePolicyDetails = &s_EffectiveLifecyclePolicyDetails
+var _EffectiveLifecyclePolicyDetails_member = &s_EffectiveLifecyclePolicyDetails_member
+
+var EffectiveLifecyclePolicyErrorDetail = &sEffectiveLifecyclePolicyErrorDetail
+var EffectiveLifecyclePolicyErrorDetail_type = &sEffectiveLifecyclePolicyErrorDetail_type
+var EffectiveLifecyclePolicyErrorDetail_resource = &sEffectiveLifecyclePolicyErrorDetail_resource
+var EffectiveLifecyclePolicyErrorDetail_errorMessage = &sEffectiveLifecyclePolicyErrorDetail_errorMessage
+var EffectiveLifecyclePolicyErrorDetail_errorCode = &sEffectiveLifecyclePolicyErrorDetail_errorCode
+
+var _EffectiveLifecyclePolicyErrorDetails = &s_EffectiveLifecyclePolicyErrorDetails
+var _EffectiveLifecyclePolicyErrorDetails_member = &s_EffectiveLifecyclePolicyErrorDetails_member
+
+var EncryptionConfig = &sEncryptionConfig
+var EncryptionConfig_aWSOwnedKey = &sEncryptionConfig_aWSOwnedKey
+var EncryptionConfig_kmsKeyArn = &sEncryptionConfig_kmsKeyArn
+
+var FipsEndpoints = &sFipsEndpoints
+var FipsEndpoints_collectionEndpoint = &sFipsEndpoints_collectionEndpoint
+var FipsEndpoints_dashboardEndpoint = &sFipsEndpoints_dashboardEndpoint
+
+var IamFederationConfigOptions = &sIamFederationConfigOptions
+var IamFederationConfigOptions_groupAttribute = &sIamFederationConfigOptions_groupAttribute
+var IamFederationConfigOptions_userAttribute = &sIamFederationConfigOptions_userAttribute
+
+var _iamFederationGroupAttribute = &s_iamFederationGroupAttribute
+
+var _iamFederationUserAttribute = &s_iamFederationUserAttribute
+
+var _IamIdentityCenterApplicationArn = &s_IamIdentityCenterApplicationArn
+
+var IamIdentityCenterConfigOptions = &sIamIdentityCenterConfigOptions
+var IamIdentityCenterConfigOptions_instanceArn = &sIamIdentityCenterConfigOptions_instanceArn
+var IamIdentityCenterConfigOptions_applicationArn = &sIamIdentityCenterConfigOptions_applicationArn
+var IamIdentityCenterConfigOptions_applicationName = &sIamIdentityCenterConfigOptions_applicationName
+var IamIdentityCenterConfigOptions_applicationDescription = &sIamIdentityCenterConfigOptions_applicationDescription
+var IamIdentityCenterConfigOptions_userAttribute = &sIamIdentityCenterConfigOptions_userAttribute
+var IamIdentityCenterConfigOptions_groupAttribute = &sIamIdentityCenterConfigOptions_groupAttribute
+
+var _IamIdentityCenterGroupAttribute = &s_IamIdentityCenterGroupAttribute
+
+var _IamIdentityCenterInstanceArn = &s_IamIdentityCenterInstanceArn
+
+var _IamIdentityCenterUserAttribute = &s_IamIdentityCenterUserAttribute
+
+var _IndexingCapacityValue = &s_IndexingCapacityValue
+
+var _IndexName = &s_IndexName
+
+var _IndexSchema = &s_IndexSchema
+
+var IngestionAlert = &sIngestionAlert
+var IngestionAlert_code = &sIngestionAlert_code
+var IngestionAlert_message = &sIngestionAlert_message
+
+var _IngestionAlertCode = &s_IngestionAlertCode
+
+var _IngestionAlerts = &s_IngestionAlerts
+var _IngestionAlerts_member = &s_IngestionAlerts_member
+
+var _IngestionFailureCode = &s_IngestionFailureCode
+
+var IngestionFailureReason = &sIngestionFailureReason
+var IngestionFailureReason_code = &sIngestionFailureReason_code
+var IngestionFailureReason_message = &sIngestionFailureReason_message
+
+var _IngestionFailureReasons = &s_IngestionFailureReasons
+var _IngestionFailureReasons_member = &s_IngestionFailureReasons_member
+
+var _IngestionIndexName = &s_IngestionIndexName
+
+var IngestionJobDetail = &sIngestionJobDetail
+var IngestionJobDetail_ingestionJobId = &sIngestionJobDetail_ingestionJobId
+var IngestionJobDetail_arn = &sIngestionJobDetail_arn
+var IngestionJobDetail_collectionId = &sIngestionJobDetail_collectionId
+var IngestionJobDetail_ingestionJobName = &sIngestionJobDetail_ingestionJobName
+var IngestionJobDetail_indexName = &sIngestionJobDetail_indexName
+var IngestionJobDetail_failureIndexName = &sIngestionJobDetail_failureIndexName
+var IngestionJobDetail_source = &sIngestionJobDetail_source
+var IngestionJobDetail_status = &sIngestionJobDetail_status
+var IngestionJobDetail_state = &sIngestionJobDetail_state
+var IngestionJobDetail_statistics = &sIngestionJobDetail_statistics
+var IngestionJobDetail_revision = &sIngestionJobDetail_revision
+var IngestionJobDetail_createdAt = &sIngestionJobDetail_createdAt
+var IngestionJobDetail_updatedAt = &sIngestionJobDetail_updatedAt
+var IngestionJobDetail_failureReasons = &sIngestionJobDetail_failureReasons
+var IngestionJobDetail_activeAlerts = &sIngestionJobDetail_activeAlerts
+
+var _IngestionJobId = &s_IngestionJobId
+
+var _IngestionJobName = &s_IngestionJobName
+
+var _IngestionJobResourceArn = &s_IngestionJobResourceArn
+
+var IngestionJobS3Source = &sIngestionJobS3Source
+var IngestionJobS3Source_bucket = &sIngestionJobS3Source_bucket
+var IngestionJobS3Source_bucketOwnerAccountId = &sIngestionJobS3Source_bucketOwnerAccountId
+var IngestionJobS3Source_keyPrefix = &sIngestionJobS3Source_keyPrefix
+
+var IngestionJobSource = &sIngestionJobSource
+var IngestionJobSource_s3 = &sIngestionJobSource_s3
+
+var _IngestionJobStatus = &s_IngestionJobStatus
+
+var _IngestionJobSummaries = &s_IngestionJobSummaries
+var _IngestionJobSummaries_member = &s_IngestionJobSummaries_member
+
+var IngestionJobSummary = &sIngestionJobSummary
+var IngestionJobSummary_ingestionJobId = &sIngestionJobSummary_ingestionJobId
+var IngestionJobSummary_arn = &sIngestionJobSummary_arn
+var IngestionJobSummary_ingestionJobName = &sIngestionJobSummary_ingestionJobName
+var IngestionJobSummary_indexName = &sIngestionJobSummary_indexName
+var IngestionJobSummary_status = &sIngestionJobSummary_status
+var IngestionJobSummary_createdAt = &sIngestionJobSummary_createdAt
+var IngestionJobSummary_updatedAt = &sIngestionJobSummary_updatedAt
+
+var _IngestionState = &s_IngestionState
+
+var IngestionStatistics = &sIngestionStatistics
+var IngestionStatistics_s3 = &sIngestionStatistics_s3
+
+var IngestionStreamDetail = &sIngestionStreamDetail
+var IngestionStreamDetail_ingestionStreamId = &sIngestionStreamDetail_ingestionStreamId
+var IngestionStreamDetail_arn = &sIngestionStreamDetail_arn
+var IngestionStreamDetail_collectionId = &sIngestionStreamDetail_collectionId
+var IngestionStreamDetail_ingestionStreamName = &sIngestionStreamDetail_ingestionStreamName
+var IngestionStreamDetail_indexName = &sIngestionStreamDetail_indexName
+var IngestionStreamDetail_failureIndexName = &sIngestionStreamDetail_failureIndexName
+var IngestionStreamDetail_source = &sIngestionStreamDetail_source
+var IngestionStreamDetail_roleArn = &sIngestionStreamDetail_roleArn
+var IngestionStreamDetail_status = &sIngestionStreamDetail_status
+var IngestionStreamDetail_state = &sIngestionStreamDetail_state
+var IngestionStreamDetail_statistics = &sIngestionStreamDetail_statistics
+var IngestionStreamDetail_revision = &sIngestionStreamDetail_revision
+var IngestionStreamDetail_createdAt = &sIngestionStreamDetail_createdAt
+var IngestionStreamDetail_updatedAt = &sIngestionStreamDetail_updatedAt
+var IngestionStreamDetail_failureReasons = &sIngestionStreamDetail_failureReasons
+var IngestionStreamDetail_activeAlerts = &sIngestionStreamDetail_activeAlerts
+
+var _IngestionStreamId = &s_IngestionStreamId
+
+var _IngestionStreamName = &s_IngestionStreamName
+
+var _IngestionStreamResourceArn = &s_IngestionStreamResourceArn
+
+var IngestionStreamS3Source = &sIngestionStreamS3Source
+var IngestionStreamS3Source_sqsArn = &sIngestionStreamS3Source_sqsArn
+var IngestionStreamS3Source_buckets = &sIngestionStreamS3Source_buckets
+
+var IngestionStreamSource = &sIngestionStreamSource
+var IngestionStreamSource_s3 = &sIngestionStreamSource_s3
+
+var _IngestionStreamStatus = &s_IngestionStreamStatus
+
+var _IngestionStreamSummaries = &s_IngestionStreamSummaries
+var _IngestionStreamSummaries_member = &s_IngestionStreamSummaries_member
+
+var IngestionStreamSummary = &sIngestionStreamSummary
+var IngestionStreamSummary_ingestionStreamId = &sIngestionStreamSummary_ingestionStreamId
+var IngestionStreamSummary_arn = &sIngestionStreamSummary_arn
+var IngestionStreamSummary_ingestionStreamName = &sIngestionStreamSummary_ingestionStreamName
+var IngestionStreamSummary_indexName = &sIngestionStreamSummary_indexName
+var IngestionStreamSummary_status = &sIngestionStreamSummary_status
+var IngestionStreamSummary_createdAt = &sIngestionStreamSummary_createdAt
+var IngestionStreamSummary_updatedAt = &sIngestionStreamSummary_updatedAt
+
+var _InitialScan = &s_InitialScan
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+
+var LifecyclePolicyDetail = &sLifecyclePolicyDetail
+var LifecyclePolicyDetail_type = &sLifecyclePolicyDetail_type
+var LifecyclePolicyDetail_name = &sLifecyclePolicyDetail_name
+var LifecyclePolicyDetail_policyVersion = &sLifecyclePolicyDetail_policyVersion
+var LifecyclePolicyDetail_description = &sLifecyclePolicyDetail_description
+var LifecyclePolicyDetail_policy = &sLifecyclePolicyDetail_policy
+var LifecyclePolicyDetail_createdDate = &sLifecyclePolicyDetail_createdDate
+var LifecyclePolicyDetail_lastModifiedDate = &sLifecyclePolicyDetail_lastModifiedDate
+
+var _LifecyclePolicyDetails = &s_LifecyclePolicyDetails
+var _LifecyclePolicyDetails_member = &s_LifecyclePolicyDetails_member
+
+var LifecyclePolicyErrorDetail = &sLifecyclePolicyErrorDetail
+var LifecyclePolicyErrorDetail_type = &sLifecyclePolicyErrorDetail_type
+var LifecyclePolicyErrorDetail_name = &sLifecyclePolicyErrorDetail_name
+var LifecyclePolicyErrorDetail_errorMessage = &sLifecyclePolicyErrorDetail_errorMessage
+var LifecyclePolicyErrorDetail_errorCode = &sLifecyclePolicyErrorDetail_errorCode
+
+var _LifecyclePolicyErrorDetails = &s_LifecyclePolicyErrorDetails
+var _LifecyclePolicyErrorDetails_member = &s_LifecyclePolicyErrorDetails_member
+
+var LifecyclePolicyIdentifier = &sLifecyclePolicyIdentifier
+var LifecyclePolicyIdentifier_type = &sLifecyclePolicyIdentifier_type
+var LifecyclePolicyIdentifier_name = &sLifecyclePolicyIdentifier_name
+
+var _LifecyclePolicyIdentifiers = &s_LifecyclePolicyIdentifiers
+var _LifecyclePolicyIdentifiers_member = &s_LifecyclePolicyIdentifiers_member
+
+var LifecyclePolicyResourceIdentifier = &sLifecyclePolicyResourceIdentifier
+var LifecyclePolicyResourceIdentifier_type = &sLifecyclePolicyResourceIdentifier_type
+var LifecyclePolicyResourceIdentifier_resource = &sLifecyclePolicyResourceIdentifier_resource
+
+var _LifecyclePolicyResourceIdentifiers = &s_LifecyclePolicyResourceIdentifiers
+var _LifecyclePolicyResourceIdentifiers_member = &s_LifecyclePolicyResourceIdentifiers_member
+
+var LifecyclePolicyStats = &sLifecyclePolicyStats
+var LifecyclePolicyStats_RetentionPolicyCount = &sLifecyclePolicyStats_RetentionPolicyCount
+
+var _LifecyclePolicySummaries = &s_LifecyclePolicySummaries
+var _LifecyclePolicySummaries_member = &s_LifecyclePolicySummaries_member
+
+var LifecyclePolicySummary = &sLifecyclePolicySummary
+var LifecyclePolicySummary_type = &sLifecyclePolicySummary_type
+var LifecyclePolicySummary_name = &sLifecyclePolicySummary_name
+var LifecyclePolicySummary_policyVersion = &sLifecyclePolicySummary_policyVersion
+var LifecyclePolicySummary_description = &sLifecyclePolicySummary_description
+var LifecyclePolicySummary_createdDate = &sLifecyclePolicySummary_createdDate
+var LifecyclePolicySummary_lastModifiedDate = &sLifecyclePolicySummary_lastModifiedDate
+
+var _LifecyclePolicyType = &s_LifecyclePolicyType
+
+var _LifecycleResource = &s_LifecycleResource
+
+var _LifecycleResourceFilter = &s_LifecycleResourceFilter
+var _LifecycleResourceFilter_member = &s_LifecycleResourceFilter_member
+
+var OcuLimitExceededException = &sOcuLimitExceededException
+var OcuLimitExceededException_message = &sOcuLimitExceededException_message
+
+var _openSearchServerlessEntityId = &s_openSearchServerlessEntityId
+
+var _PolicyDescription = &s_PolicyDescription
+
+var _PolicyDocument = &s_PolicyDocument
+
+var _PolicyName = &s_PolicyName
+
+var _PolicyVersion = &s_PolicyVersion
+
+var _Resource = &s_Resource
+
+var _ResourceFilter = &s_ResourceFilter
+var _ResourceFilter_member = &s_ResourceFilter_member
+
+var _ResourceName = &s_ResourceName
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+
+var _ResourceType = &s_ResourceType
+
+var _RoleArn = &s_RoleArn
+
+var _S3BucketNameOrArn = &s_S3BucketNameOrArn
+
+var S3Statistics = &sS3Statistics
+var S3Statistics_objectsDiscovered = &sS3Statistics_objectsDiscovered
+var S3Statistics_objectsIngested = &sS3Statistics_objectsIngested
+var S3Statistics_objectsFailed = &sS3Statistics_objectsFailed
+
+var SamlConfigOptions = &sSamlConfigOptions
+var SamlConfigOptions_metadata = &sSamlConfigOptions_metadata
+var SamlConfigOptions_userAttribute = &sSamlConfigOptions_userAttribute
+var SamlConfigOptions_groupAttribute = &sSamlConfigOptions_groupAttribute
+var SamlConfigOptions_openSearchServerlessEntityId = &sSamlConfigOptions_openSearchServerlessEntityId
+var SamlConfigOptions_sessionTimeout = &sSamlConfigOptions_sessionTimeout
+
+var _samlGroupAttribute = &s_samlGroupAttribute
+
+var _samlMetadata = &s_samlMetadata
+
+var _samlUserAttribute = &s_samlUserAttribute
+
+var _SearchCapacityValue = &s_SearchCapacityValue
+
+var SecurityConfigDetail = &sSecurityConfigDetail
+var SecurityConfigDetail_id = &sSecurityConfigDetail_id
+var SecurityConfigDetail_type = &sSecurityConfigDetail_type
+var SecurityConfigDetail_configVersion = &sSecurityConfigDetail_configVersion
+var SecurityConfigDetail_description = &sSecurityConfigDetail_description
+var SecurityConfigDetail_samlOptions = &sSecurityConfigDetail_samlOptions
+var SecurityConfigDetail_iamIdentityCenterOptions = &sSecurityConfigDetail_iamIdentityCenterOptions
+var SecurityConfigDetail_iamFederationOptions = &sSecurityConfigDetail_iamFederationOptions
+var SecurityConfigDetail_createdDate = &sSecurityConfigDetail_createdDate
+var SecurityConfigDetail_lastModifiedDate = &sSecurityConfigDetail_lastModifiedDate
+
+var _SecurityConfigId = &s_SecurityConfigId
+
+var SecurityConfigStats = &sSecurityConfigStats
+var SecurityConfigStats_SamlConfigCount = &sSecurityConfigStats_SamlConfigCount
+
+var _SecurityConfigSummaries = &s_SecurityConfigSummaries
+var _SecurityConfigSummaries_member = &s_SecurityConfigSummaries_member
+
+var SecurityConfigSummary = &sSecurityConfigSummary
+var SecurityConfigSummary_id = &sSecurityConfigSummary_id
+var SecurityConfigSummary_type = &sSecurityConfigSummary_type
+var SecurityConfigSummary_configVersion = &sSecurityConfigSummary_configVersion
+var SecurityConfigSummary_description = &sSecurityConfigSummary_description
+var SecurityConfigSummary_createdDate = &sSecurityConfigSummary_createdDate
+var SecurityConfigSummary_lastModifiedDate = &sSecurityConfigSummary_lastModifiedDate
+
+var _SecurityConfigType = &s_SecurityConfigType
+
+var _SecurityGroupId = &s_SecurityGroupId
+
+var _SecurityGroupIds = &s_SecurityGroupIds
+var _SecurityGroupIds_member = &s_SecurityGroupIds_member
+
+var SecurityPolicyDetail = &sSecurityPolicyDetail
+var SecurityPolicyDetail_type = &sSecurityPolicyDetail_type
+var SecurityPolicyDetail_name = &sSecurityPolicyDetail_name
+var SecurityPolicyDetail_policyVersion = &sSecurityPolicyDetail_policyVersion
+var SecurityPolicyDetail_description = &sSecurityPolicyDetail_description
+var SecurityPolicyDetail_policy = &sSecurityPolicyDetail_policy
+var SecurityPolicyDetail_createdDate = &sSecurityPolicyDetail_createdDate
+var SecurityPolicyDetail_lastModifiedDate = &sSecurityPolicyDetail_lastModifiedDate
+
+var SecurityPolicyStats = &sSecurityPolicyStats
+var SecurityPolicyStats_EncryptionPolicyCount = &sSecurityPolicyStats_EncryptionPolicyCount
+var SecurityPolicyStats_NetworkPolicyCount = &sSecurityPolicyStats_NetworkPolicyCount
+
+var _SecurityPolicySummaries = &s_SecurityPolicySummaries
+var _SecurityPolicySummaries_member = &s_SecurityPolicySummaries_member
+
+var SecurityPolicySummary = &sSecurityPolicySummary
+var SecurityPolicySummary_type = &sSecurityPolicySummary_type
+var SecurityPolicySummary_name = &sSecurityPolicySummary_name
+var SecurityPolicySummary_policyVersion = &sSecurityPolicySummary_policyVersion
+var SecurityPolicySummary_description = &sSecurityPolicySummary_description
+var SecurityPolicySummary_createdDate = &sSecurityPolicySummary_createdDate
+var SecurityPolicySummary_lastModifiedDate = &sSecurityPolicySummary_lastModifiedDate
+
+var _SecurityPolicyType = &s_SecurityPolicyType
+
+var _ServerlessGeneration = &s_ServerlessGeneration
+
+var _ServerlessVectorAccelerationStatus = &s_ServerlessVectorAccelerationStatus
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+var ServiceQuotaExceededException_resourceId = &sServiceQuotaExceededException_resourceId
+var ServiceQuotaExceededException_resourceType = &sServiceQuotaExceededException_resourceType
+var ServiceQuotaExceededException_serviceCode = &sServiceQuotaExceededException_serviceCode
+var ServiceQuotaExceededException_quotaCode = &sServiceQuotaExceededException_quotaCode
+
+var _SqsArn = &s_SqsArn
+
+var _StandbyReplicas = &s_StandbyReplicas
+
+var StreamBucketConfig = &sStreamBucketConfig
+var StreamBucketConfig_bucket = &sStreamBucketConfig_bucket
+var StreamBucketConfig_bucketOwnerAccountId = &sStreamBucketConfig_bucketOwnerAccountId
+var StreamBucketConfig_initialScan = &sStreamBucketConfig_initialScan
+
+var _StreamBucketConfigs = &s_StreamBucketConfigs
+var _StreamBucketConfigs_member = &s_StreamBucketConfigs_member
+
+var _SubnetId = &s_SubnetId
+
+var _SubnetIds = &s_SubnetIds
+var _SubnetIds_member = &s_SubnetIds_member
+
+var Tag = &sTag
+var Tag_key = &sTag_key
+var Tag_value = &sTag_value
+
+var _TagKey = &s_TagKey
+
+var _TagKeys = &s_TagKeys
+var _TagKeys_member = &s_TagKeys_member
+
+var _Tags = &s_Tags
+var _Tags_member = &s_Tags_member
+
+var _TagValue = &s_TagValue
+
+var UpdateCollectionDetail = &sUpdateCollectionDetail
+var UpdateCollectionDetail_id = &sUpdateCollectionDetail_id
+var UpdateCollectionDetail_name = &sUpdateCollectionDetail_name
+var UpdateCollectionDetail_status = &sUpdateCollectionDetail_status
+var UpdateCollectionDetail_type = &sUpdateCollectionDetail_type
+var UpdateCollectionDetail_description = &sUpdateCollectionDetail_description
+var UpdateCollectionDetail_vectorOptions = &sUpdateCollectionDetail_vectorOptions
+var UpdateCollectionDetail_kmsKeyArn = &sUpdateCollectionDetail_kmsKeyArn
+var UpdateCollectionDetail_arn = &sUpdateCollectionDetail_arn
+var UpdateCollectionDetail_createdDate = &sUpdateCollectionDetail_createdDate
+var UpdateCollectionDetail_lastModifiedDate = &sUpdateCollectionDetail_lastModifiedDate
+var UpdateCollectionDetail_deletionProtection = &sUpdateCollectionDetail_deletionProtection
+
+var UpdateCollectionGroupDetail = &sUpdateCollectionGroupDetail
+var UpdateCollectionGroupDetail_id = &sUpdateCollectionGroupDetail_id
+var UpdateCollectionGroupDetail_arn = &sUpdateCollectionGroupDetail_arn
+var UpdateCollectionGroupDetail_name = &sUpdateCollectionGroupDetail_name
+var UpdateCollectionGroupDetail_description = &sUpdateCollectionGroupDetail_description
+var UpdateCollectionGroupDetail_capacityLimits = &sUpdateCollectionGroupDetail_capacityLimits
+var UpdateCollectionGroupDetail_createdDate = &sUpdateCollectionGroupDetail_createdDate
+var UpdateCollectionGroupDetail_lastModifiedDate = &sUpdateCollectionGroupDetail_lastModifiedDate
+var UpdateCollectionGroupDetail_generation = &sUpdateCollectionGroupDetail_generation
+
+var UpdateIamIdentityCenterConfigOptions = &sUpdateIamIdentityCenterConfigOptions
+var UpdateIamIdentityCenterConfigOptions_userAttribute = &sUpdateIamIdentityCenterConfigOptions_userAttribute
+var UpdateIamIdentityCenterConfigOptions_groupAttribute = &sUpdateIamIdentityCenterConfigOptions_groupAttribute
+
+var UpdateVpcEndpointDetail = &sUpdateVpcEndpointDetail
+var UpdateVpcEndpointDetail_id = &sUpdateVpcEndpointDetail_id
+var UpdateVpcEndpointDetail_name = &sUpdateVpcEndpointDetail_name
+var UpdateVpcEndpointDetail_status = &sUpdateVpcEndpointDetail_status
+var UpdateVpcEndpointDetail_subnetIds = &sUpdateVpcEndpointDetail_subnetIds
+var UpdateVpcEndpointDetail_securityGroupIds = &sUpdateVpcEndpointDetail_securityGroupIds
+var UpdateVpcEndpointDetail_lastModifiedDate = &sUpdateVpcEndpointDetail_lastModifiedDate
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+
+var VectorOptions = &sVectorOptions
+var VectorOptions_ServerlessVectorAcceleration = &sVectorOptions_ServerlessVectorAcceleration
+
+var VpcEndpointDetail = &sVpcEndpointDetail
+var VpcEndpointDetail_id = &sVpcEndpointDetail_id
+var VpcEndpointDetail_name = &sVpcEndpointDetail_name
+var VpcEndpointDetail_vpcId = &sVpcEndpointDetail_vpcId
+var VpcEndpointDetail_subnetIds = &sVpcEndpointDetail_subnetIds
+var VpcEndpointDetail_securityGroupIds = &sVpcEndpointDetail_securityGroupIds
+var VpcEndpointDetail_status = &sVpcEndpointDetail_status
+var VpcEndpointDetail_createdDate = &sVpcEndpointDetail_createdDate
+var VpcEndpointDetail_failureCode = &sVpcEndpointDetail_failureCode
+var VpcEndpointDetail_failureMessage = &sVpcEndpointDetail_failureMessage
+
+var _VpcEndpointDetails = &s_VpcEndpointDetails
+var _VpcEndpointDetails_member = &s_VpcEndpointDetails_member
+
+var VpcEndpointErrorDetail = &sVpcEndpointErrorDetail
+var VpcEndpointErrorDetail_id = &sVpcEndpointErrorDetail_id
+var VpcEndpointErrorDetail_errorMessage = &sVpcEndpointErrorDetail_errorMessage
+var VpcEndpointErrorDetail_errorCode = &sVpcEndpointErrorDetail_errorCode
+
+var _VpcEndpointErrorDetails = &s_VpcEndpointErrorDetails
+var _VpcEndpointErrorDetails_member = &s_VpcEndpointErrorDetails_member
+
+var VpcEndpointFilters = &sVpcEndpointFilters
+var VpcEndpointFilters_status = &sVpcEndpointFilters_status
+
+var _VpcEndpointId = &s_VpcEndpointId
+
+var _VpcEndpointIds = &s_VpcEndpointIds
+var _VpcEndpointIds_member = &s_VpcEndpointIds_member
+
+var _VpcEndpointName = &s_VpcEndpointName
+
+var _VpcEndpointStatus = &s_VpcEndpointStatus
+
+var _VpcEndpointSummaries = &s_VpcEndpointSummaries
+var _VpcEndpointSummaries_member = &s_VpcEndpointSummaries_member
+
+var VpcEndpointSummary = &sVpcEndpointSummary
+var VpcEndpointSummary_id = &sVpcEndpointSummary_id
+var VpcEndpointSummary_name = &sVpcEndpointSummary_name
+var VpcEndpointSummary_status = &sVpcEndpointSummary_status
+
+var _VpcId = &s_VpcId
+
+var BatchGetCollectionGroupRequest = &sBatchGetCollectionGroupRequest
+var BatchGetCollectionGroupRequest_ids = &sBatchGetCollectionGroupRequest_ids
+var BatchGetCollectionGroupRequest_names = &sBatchGetCollectionGroupRequest_names
+
+var BatchGetCollectionGroupResponse = &sBatchGetCollectionGroupResponse
+var BatchGetCollectionGroupResponse_collectionGroupDetails = &sBatchGetCollectionGroupResponse_collectionGroupDetails
+var BatchGetCollectionGroupResponse_collectionGroupErrorDetails = &sBatchGetCollectionGroupResponse_collectionGroupErrorDetails
+
+var BatchGetCollectionRequest = &sBatchGetCollectionRequest
+var BatchGetCollectionRequest_ids = &sBatchGetCollectionRequest_ids
+var BatchGetCollectionRequest_names = &sBatchGetCollectionRequest_names
+
+var BatchGetCollectionResponse = &sBatchGetCollectionResponse
+var BatchGetCollectionResponse_collectionDetails = &sBatchGetCollectionResponse_collectionDetails
+var BatchGetCollectionResponse_collectionErrorDetails = &sBatchGetCollectionResponse_collectionErrorDetails
+
+var BatchGetEffectiveLifecyclePolicyRequest = &sBatchGetEffectiveLifecyclePolicyRequest
+var BatchGetEffectiveLifecyclePolicyRequest_resourceIdentifiers = &sBatchGetEffectiveLifecyclePolicyRequest_resourceIdentifiers
+
+var BatchGetEffectiveLifecyclePolicyResponse = &sBatchGetEffectiveLifecyclePolicyResponse
+var BatchGetEffectiveLifecyclePolicyResponse_effectiveLifecyclePolicyDetails = &sBatchGetEffectiveLifecyclePolicyResponse_effectiveLifecyclePolicyDetails
+var BatchGetEffectiveLifecyclePolicyResponse_effectiveLifecyclePolicyErrorDetails = &sBatchGetEffectiveLifecyclePolicyResponse_effectiveLifecyclePolicyErrorDetails
+
+var BatchGetLifecyclePolicyRequest = &sBatchGetLifecyclePolicyRequest
+var BatchGetLifecyclePolicyRequest_identifiers = &sBatchGetLifecyclePolicyRequest_identifiers
+
+var BatchGetLifecyclePolicyResponse = &sBatchGetLifecyclePolicyResponse
+var BatchGetLifecyclePolicyResponse_lifecyclePolicyDetails = &sBatchGetLifecyclePolicyResponse_lifecyclePolicyDetails
+var BatchGetLifecyclePolicyResponse_lifecyclePolicyErrorDetails = &sBatchGetLifecyclePolicyResponse_lifecyclePolicyErrorDetails
+
+var BatchGetVpcEndpointRequest = &sBatchGetVpcEndpointRequest
+var BatchGetVpcEndpointRequest_ids = &sBatchGetVpcEndpointRequest_ids
+
+var BatchGetVpcEndpointResponse = &sBatchGetVpcEndpointResponse
+var BatchGetVpcEndpointResponse_vpcEndpointDetails = &sBatchGetVpcEndpointResponse_vpcEndpointDetails
+var BatchGetVpcEndpointResponse_vpcEndpointErrorDetails = &sBatchGetVpcEndpointResponse_vpcEndpointErrorDetails
+
+var CancelIngestionJobRequest = &sCancelIngestionJobRequest
+var CancelIngestionJobRequest_collectionId = &sCancelIngestionJobRequest_collectionId
+var CancelIngestionJobRequest_ingestionJobId = &sCancelIngestionJobRequest_ingestionJobId
+var CancelIngestionJobRequest_clientToken = &sCancelIngestionJobRequest_clientToken
+
+var CancelIngestionJobResponse = &sCancelIngestionJobResponse
+var CancelIngestionJobResponse_ingestionJobId = &sCancelIngestionJobResponse_ingestionJobId
+var CancelIngestionJobResponse_collectionId = &sCancelIngestionJobResponse_collectionId
+var CancelIngestionJobResponse_ingestionJobName = &sCancelIngestionJobResponse_ingestionJobName
+var CancelIngestionJobResponse_status = &sCancelIngestionJobResponse_status
+
+var CreateAccessPolicyRequest = &sCreateAccessPolicyRequest
+var CreateAccessPolicyRequest_type = &sCreateAccessPolicyRequest_type
+var CreateAccessPolicyRequest_name = &sCreateAccessPolicyRequest_name
+var CreateAccessPolicyRequest_description = &sCreateAccessPolicyRequest_description
+var CreateAccessPolicyRequest_policy = &sCreateAccessPolicyRequest_policy
+var CreateAccessPolicyRequest_clientToken = &sCreateAccessPolicyRequest_clientToken
+
+var CreateAccessPolicyResponse = &sCreateAccessPolicyResponse
+var CreateAccessPolicyResponse_accessPolicyDetail = &sCreateAccessPolicyResponse_accessPolicyDetail
+
+var CreateCollectionGroupRequest = &sCreateCollectionGroupRequest
+var CreateCollectionGroupRequest_name = &sCreateCollectionGroupRequest_name
+var CreateCollectionGroupRequest_standbyReplicas = &sCreateCollectionGroupRequest_standbyReplicas
+var CreateCollectionGroupRequest_description = &sCreateCollectionGroupRequest_description
+var CreateCollectionGroupRequest_tags = &sCreateCollectionGroupRequest_tags
+var CreateCollectionGroupRequest_capacityLimits = &sCreateCollectionGroupRequest_capacityLimits
+var CreateCollectionGroupRequest_generation = &sCreateCollectionGroupRequest_generation
+var CreateCollectionGroupRequest_clientToken = &sCreateCollectionGroupRequest_clientToken
+
+var CreateCollectionGroupResponse = &sCreateCollectionGroupResponse
+var CreateCollectionGroupResponse_createCollectionGroupDetail = &sCreateCollectionGroupResponse_createCollectionGroupDetail
+
+var CreateCollectionRequest = &sCreateCollectionRequest
+var CreateCollectionRequest_name = &sCreateCollectionRequest_name
+var CreateCollectionRequest_type = &sCreateCollectionRequest_type
+var CreateCollectionRequest_description = &sCreateCollectionRequest_description
+var CreateCollectionRequest_tags = &sCreateCollectionRequest_tags
+var CreateCollectionRequest_standbyReplicas = &sCreateCollectionRequest_standbyReplicas
+var CreateCollectionRequest_vectorOptions = &sCreateCollectionRequest_vectorOptions
+var CreateCollectionRequest_collectionGroupName = &sCreateCollectionRequest_collectionGroupName
+var CreateCollectionRequest_encryptionConfig = &sCreateCollectionRequest_encryptionConfig
+var CreateCollectionRequest_deletionProtection = &sCreateCollectionRequest_deletionProtection
+var CreateCollectionRequest_clientToken = &sCreateCollectionRequest_clientToken
+
+var CreateCollectionResponse = &sCreateCollectionResponse
+var CreateCollectionResponse_createCollectionDetail = &sCreateCollectionResponse_createCollectionDetail
+
+var CreateIndexRequest = &sCreateIndexRequest
+var CreateIndexRequest_id = &sCreateIndexRequest_id
+var CreateIndexRequest_indexName = &sCreateIndexRequest_indexName
+var CreateIndexRequest_indexSchema = &sCreateIndexRequest_indexSchema
+
+var CreateIndexResponse = &sCreateIndexResponse
+
+var CreateIngestionJobRequest = &sCreateIngestionJobRequest
+var CreateIngestionJobRequest_collectionId = &sCreateIngestionJobRequest_collectionId
+var CreateIngestionJobRequest_ingestionJobName = &sCreateIngestionJobRequest_ingestionJobName
+var CreateIngestionJobRequest_indexName = &sCreateIngestionJobRequest_indexName
+var CreateIngestionJobRequest_failureIndexName = &sCreateIngestionJobRequest_failureIndexName
+var CreateIngestionJobRequest_source = &sCreateIngestionJobRequest_source
+var CreateIngestionJobRequest_tags = &sCreateIngestionJobRequest_tags
+var CreateIngestionJobRequest_clientToken = &sCreateIngestionJobRequest_clientToken
+
+var CreateIngestionJobResponse = &sCreateIngestionJobResponse
+var CreateIngestionJobResponse_ingestionJobDetail = &sCreateIngestionJobResponse_ingestionJobDetail
+
+var CreateIngestionStreamRequest = &sCreateIngestionStreamRequest
+var CreateIngestionStreamRequest_collectionId = &sCreateIngestionStreamRequest_collectionId
+var CreateIngestionStreamRequest_ingestionStreamName = &sCreateIngestionStreamRequest_ingestionStreamName
+var CreateIngestionStreamRequest_indexName = &sCreateIngestionStreamRequest_indexName
+var CreateIngestionStreamRequest_failureIndexName = &sCreateIngestionStreamRequest_failureIndexName
+var CreateIngestionStreamRequest_source = &sCreateIngestionStreamRequest_source
+var CreateIngestionStreamRequest_roleArn = &sCreateIngestionStreamRequest_roleArn
+var CreateIngestionStreamRequest_tags = &sCreateIngestionStreamRequest_tags
+var CreateIngestionStreamRequest_clientToken = &sCreateIngestionStreamRequest_clientToken
+
+var CreateIngestionStreamResponse = &sCreateIngestionStreamResponse
+var CreateIngestionStreamResponse_ingestionStreamDetail = &sCreateIngestionStreamResponse_ingestionStreamDetail
+
+var CreateLifecyclePolicyRequest = &sCreateLifecyclePolicyRequest
+var CreateLifecyclePolicyRequest_type = &sCreateLifecyclePolicyRequest_type
+var CreateLifecyclePolicyRequest_name = &sCreateLifecyclePolicyRequest_name
+var CreateLifecyclePolicyRequest_description = &sCreateLifecyclePolicyRequest_description
+var CreateLifecyclePolicyRequest_policy = &sCreateLifecyclePolicyRequest_policy
+var CreateLifecyclePolicyRequest_clientToken = &sCreateLifecyclePolicyRequest_clientToken
+
+var CreateLifecyclePolicyResponse = &sCreateLifecyclePolicyResponse
+var CreateLifecyclePolicyResponse_lifecyclePolicyDetail = &sCreateLifecyclePolicyResponse_lifecyclePolicyDetail
+
+var CreateSecurityConfigRequest = &sCreateSecurityConfigRequest
+var CreateSecurityConfigRequest_type = &sCreateSecurityConfigRequest_type
+var CreateSecurityConfigRequest_name = &sCreateSecurityConfigRequest_name
+var CreateSecurityConfigRequest_description = &sCreateSecurityConfigRequest_description
+var CreateSecurityConfigRequest_samlOptions = &sCreateSecurityConfigRequest_samlOptions
+var CreateSecurityConfigRequest_iamIdentityCenterOptions = &sCreateSecurityConfigRequest_iamIdentityCenterOptions
+var CreateSecurityConfigRequest_iamFederationOptions = &sCreateSecurityConfigRequest_iamFederationOptions
+var CreateSecurityConfigRequest_clientToken = &sCreateSecurityConfigRequest_clientToken
+
+var CreateSecurityConfigResponse = &sCreateSecurityConfigResponse
+var CreateSecurityConfigResponse_securityConfigDetail = &sCreateSecurityConfigResponse_securityConfigDetail
+
+var CreateSecurityPolicyRequest = &sCreateSecurityPolicyRequest
+var CreateSecurityPolicyRequest_type = &sCreateSecurityPolicyRequest_type
+var CreateSecurityPolicyRequest_name = &sCreateSecurityPolicyRequest_name
+var CreateSecurityPolicyRequest_description = &sCreateSecurityPolicyRequest_description
+var CreateSecurityPolicyRequest_policy = &sCreateSecurityPolicyRequest_policy
+var CreateSecurityPolicyRequest_clientToken = &sCreateSecurityPolicyRequest_clientToken
+
+var CreateSecurityPolicyResponse = &sCreateSecurityPolicyResponse
+var CreateSecurityPolicyResponse_securityPolicyDetail = &sCreateSecurityPolicyResponse_securityPolicyDetail
+
+var CreateVpcEndpointRequest = &sCreateVpcEndpointRequest
+var CreateVpcEndpointRequest_name = &sCreateVpcEndpointRequest_name
+var CreateVpcEndpointRequest_vpcId = &sCreateVpcEndpointRequest_vpcId
+var CreateVpcEndpointRequest_subnetIds = &sCreateVpcEndpointRequest_subnetIds
+var CreateVpcEndpointRequest_securityGroupIds = &sCreateVpcEndpointRequest_securityGroupIds
+var CreateVpcEndpointRequest_clientToken = &sCreateVpcEndpointRequest_clientToken
+
+var CreateVpcEndpointResponse = &sCreateVpcEndpointResponse
+var CreateVpcEndpointResponse_createVpcEndpointDetail = &sCreateVpcEndpointResponse_createVpcEndpointDetail
+
+var DeleteAccessPolicyRequest = &sDeleteAccessPolicyRequest
+var DeleteAccessPolicyRequest_type = &sDeleteAccessPolicyRequest_type
+var DeleteAccessPolicyRequest_name = &sDeleteAccessPolicyRequest_name
+var DeleteAccessPolicyRequest_clientToken = &sDeleteAccessPolicyRequest_clientToken
+
+var DeleteAccessPolicyResponse = &sDeleteAccessPolicyResponse
+
+var DeleteCollectionGroupRequest = &sDeleteCollectionGroupRequest
+var DeleteCollectionGroupRequest_id = &sDeleteCollectionGroupRequest_id
+var DeleteCollectionGroupRequest_clientToken = &sDeleteCollectionGroupRequest_clientToken
+
+var DeleteCollectionGroupResponse = &sDeleteCollectionGroupResponse
+
+var DeleteCollectionRequest = &sDeleteCollectionRequest
+var DeleteCollectionRequest_id = &sDeleteCollectionRequest_id
+var DeleteCollectionRequest_clientToken = &sDeleteCollectionRequest_clientToken
+
+var DeleteCollectionResponse = &sDeleteCollectionResponse
+var DeleteCollectionResponse_deleteCollectionDetail = &sDeleteCollectionResponse_deleteCollectionDetail
+
+var DeleteIndexRequest = &sDeleteIndexRequest
+var DeleteIndexRequest_id = &sDeleteIndexRequest_id
+var DeleteIndexRequest_indexName = &sDeleteIndexRequest_indexName
+
+var DeleteIndexResponse = &sDeleteIndexResponse
+
+var DeleteIngestionStreamRequest = &sDeleteIngestionStreamRequest
+var DeleteIngestionStreamRequest_collectionId = &sDeleteIngestionStreamRequest_collectionId
+var DeleteIngestionStreamRequest_ingestionStreamId = &sDeleteIngestionStreamRequest_ingestionStreamId
+var DeleteIngestionStreamRequest_clientToken = &sDeleteIngestionStreamRequest_clientToken
+
+var DeleteIngestionStreamResponse = &sDeleteIngestionStreamResponse
+var DeleteIngestionStreamResponse_ingestionStreamId = &sDeleteIngestionStreamResponse_ingestionStreamId
+var DeleteIngestionStreamResponse_collectionId = &sDeleteIngestionStreamResponse_collectionId
+var DeleteIngestionStreamResponse_ingestionStreamName = &sDeleteIngestionStreamResponse_ingestionStreamName
+var DeleteIngestionStreamResponse_status = &sDeleteIngestionStreamResponse_status
+
+var DeleteLifecyclePolicyRequest = &sDeleteLifecyclePolicyRequest
+var DeleteLifecyclePolicyRequest_type = &sDeleteLifecyclePolicyRequest_type
+var DeleteLifecyclePolicyRequest_name = &sDeleteLifecyclePolicyRequest_name
+var DeleteLifecyclePolicyRequest_clientToken = &sDeleteLifecyclePolicyRequest_clientToken
+
+var DeleteLifecyclePolicyResponse = &sDeleteLifecyclePolicyResponse
+
+var DeleteSecurityConfigRequest = &sDeleteSecurityConfigRequest
+var DeleteSecurityConfigRequest_id = &sDeleteSecurityConfigRequest_id
+var DeleteSecurityConfigRequest_clientToken = &sDeleteSecurityConfigRequest_clientToken
+
+var DeleteSecurityConfigResponse = &sDeleteSecurityConfigResponse
+
+var DeleteSecurityPolicyRequest = &sDeleteSecurityPolicyRequest
+var DeleteSecurityPolicyRequest_type = &sDeleteSecurityPolicyRequest_type
+var DeleteSecurityPolicyRequest_name = &sDeleteSecurityPolicyRequest_name
+var DeleteSecurityPolicyRequest_clientToken = &sDeleteSecurityPolicyRequest_clientToken
+
+var DeleteSecurityPolicyResponse = &sDeleteSecurityPolicyResponse
+
+var DeleteVpcEndpointRequest = &sDeleteVpcEndpointRequest
+var DeleteVpcEndpointRequest_id = &sDeleteVpcEndpointRequest_id
+var DeleteVpcEndpointRequest_clientToken = &sDeleteVpcEndpointRequest_clientToken
+
+var DeleteVpcEndpointResponse = &sDeleteVpcEndpointResponse
+var DeleteVpcEndpointResponse_deleteVpcEndpointDetail = &sDeleteVpcEndpointResponse_deleteVpcEndpointDetail
+
+var GetAccessPolicyRequest = &sGetAccessPolicyRequest
+var GetAccessPolicyRequest_type = &sGetAccessPolicyRequest_type
+var GetAccessPolicyRequest_name = &sGetAccessPolicyRequest_name
+
+var GetAccessPolicyResponse = &sGetAccessPolicyResponse
+var GetAccessPolicyResponse_accessPolicyDetail = &sGetAccessPolicyResponse_accessPolicyDetail
+
+var GetAccountSettingsRequest = &sGetAccountSettingsRequest
+
+var GetAccountSettingsResponse = &sGetAccountSettingsResponse
+var GetAccountSettingsResponse_accountSettingsDetail = &sGetAccountSettingsResponse_accountSettingsDetail
+
+var GetIndexRequest = &sGetIndexRequest
+var GetIndexRequest_id = &sGetIndexRequest_id
+var GetIndexRequest_indexName = &sGetIndexRequest_indexName
+
+var GetIndexResponse = &sGetIndexResponse
+var GetIndexResponse_indexSchema = &sGetIndexResponse_indexSchema
+
+var GetIngestionJobRequest = &sGetIngestionJobRequest
+var GetIngestionJobRequest_collectionId = &sGetIngestionJobRequest_collectionId
+var GetIngestionJobRequest_ingestionJobId = &sGetIngestionJobRequest_ingestionJobId
+
+var GetIngestionJobResponse = &sGetIngestionJobResponse
+var GetIngestionJobResponse_ingestionJobDetail = &sGetIngestionJobResponse_ingestionJobDetail
+
+var GetIngestionStreamRequest = &sGetIngestionStreamRequest
+var GetIngestionStreamRequest_collectionId = &sGetIngestionStreamRequest_collectionId
+var GetIngestionStreamRequest_ingestionStreamId = &sGetIngestionStreamRequest_ingestionStreamId
+
+var GetIngestionStreamResponse = &sGetIngestionStreamResponse
+var GetIngestionStreamResponse_ingestionStreamDetail = &sGetIngestionStreamResponse_ingestionStreamDetail
+
+var GetPoliciesStatsRequest = &sGetPoliciesStatsRequest
+
+var GetPoliciesStatsResponse = &sGetPoliciesStatsResponse
+var GetPoliciesStatsResponse_AccessPolicyStats = &sGetPoliciesStatsResponse_AccessPolicyStats
+var GetPoliciesStatsResponse_SecurityPolicyStats = &sGetPoliciesStatsResponse_SecurityPolicyStats
+var GetPoliciesStatsResponse_SecurityConfigStats = &sGetPoliciesStatsResponse_SecurityConfigStats
+var GetPoliciesStatsResponse_LifecyclePolicyStats = &sGetPoliciesStatsResponse_LifecyclePolicyStats
+var GetPoliciesStatsResponse_TotalPolicyCount = &sGetPoliciesStatsResponse_TotalPolicyCount
+
+var GetSecurityConfigRequest = &sGetSecurityConfigRequest
+var GetSecurityConfigRequest_id = &sGetSecurityConfigRequest_id
+
+var GetSecurityConfigResponse = &sGetSecurityConfigResponse
+var GetSecurityConfigResponse_securityConfigDetail = &sGetSecurityConfigResponse_securityConfigDetail
+
+var GetSecurityPolicyRequest = &sGetSecurityPolicyRequest
+var GetSecurityPolicyRequest_type = &sGetSecurityPolicyRequest_type
+var GetSecurityPolicyRequest_name = &sGetSecurityPolicyRequest_name
+
+var GetSecurityPolicyResponse = &sGetSecurityPolicyResponse
+var GetSecurityPolicyResponse_securityPolicyDetail = &sGetSecurityPolicyResponse_securityPolicyDetail
+
+var ListAccessPoliciesRequest = &sListAccessPoliciesRequest
+var ListAccessPoliciesRequest_type = &sListAccessPoliciesRequest_type
+var ListAccessPoliciesRequest_resource = &sListAccessPoliciesRequest_resource
+var ListAccessPoliciesRequest_nextToken = &sListAccessPoliciesRequest_nextToken
+var ListAccessPoliciesRequest_maxResults = &sListAccessPoliciesRequest_maxResults
+
+var ListAccessPoliciesResponse = &sListAccessPoliciesResponse
+var ListAccessPoliciesResponse_accessPolicySummaries = &sListAccessPoliciesResponse_accessPolicySummaries
+var ListAccessPoliciesResponse_nextToken = &sListAccessPoliciesResponse_nextToken
+
+var ListCollectionGroupsRequest = &sListCollectionGroupsRequest
+var ListCollectionGroupsRequest_nextToken = &sListCollectionGroupsRequest_nextToken
+var ListCollectionGroupsRequest_maxResults = &sListCollectionGroupsRequest_maxResults
+
+var ListCollectionGroupsResponse = &sListCollectionGroupsResponse
+var ListCollectionGroupsResponse_collectionGroupSummaries = &sListCollectionGroupsResponse_collectionGroupSummaries
+var ListCollectionGroupsResponse_nextToken = &sListCollectionGroupsResponse_nextToken
+
+var ListCollectionsRequest = &sListCollectionsRequest
+var ListCollectionsRequest_collectionFilters = &sListCollectionsRequest_collectionFilters
+var ListCollectionsRequest_nextToken = &sListCollectionsRequest_nextToken
+var ListCollectionsRequest_maxResults = &sListCollectionsRequest_maxResults
+
+var ListCollectionsResponse = &sListCollectionsResponse
+var ListCollectionsResponse_collectionSummaries = &sListCollectionsResponse_collectionSummaries
+var ListCollectionsResponse_nextToken = &sListCollectionsResponse_nextToken
+
+var ListIngestionJobsRequest = &sListIngestionJobsRequest
+var ListIngestionJobsRequest_collectionId = &sListIngestionJobsRequest_collectionId
+var ListIngestionJobsRequest_nextToken = &sListIngestionJobsRequest_nextToken
+var ListIngestionJobsRequest_maxResults = &sListIngestionJobsRequest_maxResults
+
+var ListIngestionJobsResponse = &sListIngestionJobsResponse
+var ListIngestionJobsResponse_ingestionJobSummaries = &sListIngestionJobsResponse_ingestionJobSummaries
+var ListIngestionJobsResponse_nextToken = &sListIngestionJobsResponse_nextToken
+
+var ListIngestionStreamsRequest = &sListIngestionStreamsRequest
+var ListIngestionStreamsRequest_collectionId = &sListIngestionStreamsRequest_collectionId
+var ListIngestionStreamsRequest_nextToken = &sListIngestionStreamsRequest_nextToken
+var ListIngestionStreamsRequest_maxResults = &sListIngestionStreamsRequest_maxResults
+
+var ListIngestionStreamsResponse = &sListIngestionStreamsResponse
+var ListIngestionStreamsResponse_ingestionStreamSummaries = &sListIngestionStreamsResponse_ingestionStreamSummaries
+var ListIngestionStreamsResponse_nextToken = &sListIngestionStreamsResponse_nextToken
+
+var ListLifecyclePoliciesRequest = &sListLifecyclePoliciesRequest
+var ListLifecyclePoliciesRequest_type = &sListLifecyclePoliciesRequest_type
+var ListLifecyclePoliciesRequest_resources = &sListLifecyclePoliciesRequest_resources
+var ListLifecyclePoliciesRequest_nextToken = &sListLifecyclePoliciesRequest_nextToken
+var ListLifecyclePoliciesRequest_maxResults = &sListLifecyclePoliciesRequest_maxResults
+
+var ListLifecyclePoliciesResponse = &sListLifecyclePoliciesResponse
+var ListLifecyclePoliciesResponse_lifecyclePolicySummaries = &sListLifecyclePoliciesResponse_lifecyclePolicySummaries
+var ListLifecyclePoliciesResponse_nextToken = &sListLifecyclePoliciesResponse_nextToken
+
+var ListSecurityConfigsRequest = &sListSecurityConfigsRequest
+var ListSecurityConfigsRequest_type = &sListSecurityConfigsRequest_type
+var ListSecurityConfigsRequest_nextToken = &sListSecurityConfigsRequest_nextToken
+var ListSecurityConfigsRequest_maxResults = &sListSecurityConfigsRequest_maxResults
+
+var ListSecurityConfigsResponse = &sListSecurityConfigsResponse
+var ListSecurityConfigsResponse_securityConfigSummaries = &sListSecurityConfigsResponse_securityConfigSummaries
+var ListSecurityConfigsResponse_nextToken = &sListSecurityConfigsResponse_nextToken
+
+var ListSecurityPoliciesRequest = &sListSecurityPoliciesRequest
+var ListSecurityPoliciesRequest_type = &sListSecurityPoliciesRequest_type
+var ListSecurityPoliciesRequest_resource = &sListSecurityPoliciesRequest_resource
+var ListSecurityPoliciesRequest_nextToken = &sListSecurityPoliciesRequest_nextToken
+var ListSecurityPoliciesRequest_maxResults = &sListSecurityPoliciesRequest_maxResults
+
+var ListSecurityPoliciesResponse = &sListSecurityPoliciesResponse
+var ListSecurityPoliciesResponse_securityPolicySummaries = &sListSecurityPoliciesResponse_securityPolicySummaries
+var ListSecurityPoliciesResponse_nextToken = &sListSecurityPoliciesResponse_nextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_resourceArn = &sListTagsForResourceRequest_resourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_tags = &sListTagsForResourceResponse_tags
+
+var ListVpcEndpointsRequest = &sListVpcEndpointsRequest
+var ListVpcEndpointsRequest_vpcEndpointFilters = &sListVpcEndpointsRequest_vpcEndpointFilters
+var ListVpcEndpointsRequest_nextToken = &sListVpcEndpointsRequest_nextToken
+var ListVpcEndpointsRequest_maxResults = &sListVpcEndpointsRequest_maxResults
+
+var ListVpcEndpointsResponse = &sListVpcEndpointsResponse
+var ListVpcEndpointsResponse_vpcEndpointSummaries = &sListVpcEndpointsResponse_vpcEndpointSummaries
+var ListVpcEndpointsResponse_nextToken = &sListVpcEndpointsResponse_nextToken
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_resourceArn = &sTagResourceRequest_resourceArn
+var TagResourceRequest_tags = &sTagResourceRequest_tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_resourceArn = &sUntagResourceRequest_resourceArn
+var UntagResourceRequest_tagKeys = &sUntagResourceRequest_tagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateAccessPolicyRequest = &sUpdateAccessPolicyRequest
+var UpdateAccessPolicyRequest_type = &sUpdateAccessPolicyRequest_type
+var UpdateAccessPolicyRequest_name = &sUpdateAccessPolicyRequest_name
+var UpdateAccessPolicyRequest_policyVersion = &sUpdateAccessPolicyRequest_policyVersion
+var UpdateAccessPolicyRequest_description = &sUpdateAccessPolicyRequest_description
+var UpdateAccessPolicyRequest_policy = &sUpdateAccessPolicyRequest_policy
+var UpdateAccessPolicyRequest_clientToken = &sUpdateAccessPolicyRequest_clientToken
+
+var UpdateAccessPolicyResponse = &sUpdateAccessPolicyResponse
+var UpdateAccessPolicyResponse_accessPolicyDetail = &sUpdateAccessPolicyResponse_accessPolicyDetail
+
+var UpdateAccountSettingsRequest = &sUpdateAccountSettingsRequest
+var UpdateAccountSettingsRequest_capacityLimits = &sUpdateAccountSettingsRequest_capacityLimits
+
+var UpdateAccountSettingsResponse = &sUpdateAccountSettingsResponse
+var UpdateAccountSettingsResponse_accountSettingsDetail = &sUpdateAccountSettingsResponse_accountSettingsDetail
+
+var UpdateCollectionGroupRequest = &sUpdateCollectionGroupRequest
+var UpdateCollectionGroupRequest_id = &sUpdateCollectionGroupRequest_id
+var UpdateCollectionGroupRequest_description = &sUpdateCollectionGroupRequest_description
+var UpdateCollectionGroupRequest_capacityLimits = &sUpdateCollectionGroupRequest_capacityLimits
+var UpdateCollectionGroupRequest_clientToken = &sUpdateCollectionGroupRequest_clientToken
+
+var UpdateCollectionGroupResponse = &sUpdateCollectionGroupResponse
+var UpdateCollectionGroupResponse_updateCollectionGroupDetail = &sUpdateCollectionGroupResponse_updateCollectionGroupDetail
+
+var UpdateCollectionRequest = &sUpdateCollectionRequest
+var UpdateCollectionRequest_id = &sUpdateCollectionRequest_id
+var UpdateCollectionRequest_description = &sUpdateCollectionRequest_description
+var UpdateCollectionRequest_vectorOptions = &sUpdateCollectionRequest_vectorOptions
+var UpdateCollectionRequest_deletionProtection = &sUpdateCollectionRequest_deletionProtection
+var UpdateCollectionRequest_encryptionConfig = &sUpdateCollectionRequest_encryptionConfig
+var UpdateCollectionRequest_clientToken = &sUpdateCollectionRequest_clientToken
+
+var UpdateCollectionResponse = &sUpdateCollectionResponse
+var UpdateCollectionResponse_updateCollectionDetail = &sUpdateCollectionResponse_updateCollectionDetail
+
+var UpdateIndexRequest = &sUpdateIndexRequest
+var UpdateIndexRequest_id = &sUpdateIndexRequest_id
+var UpdateIndexRequest_indexName = &sUpdateIndexRequest_indexName
+var UpdateIndexRequest_indexSchema = &sUpdateIndexRequest_indexSchema
+
+var UpdateIndexResponse = &sUpdateIndexResponse
+
+var UpdateLifecyclePolicyRequest = &sUpdateLifecyclePolicyRequest
+var UpdateLifecyclePolicyRequest_type = &sUpdateLifecyclePolicyRequest_type
+var UpdateLifecyclePolicyRequest_name = &sUpdateLifecyclePolicyRequest_name
+var UpdateLifecyclePolicyRequest_policyVersion = &sUpdateLifecyclePolicyRequest_policyVersion
+var UpdateLifecyclePolicyRequest_description = &sUpdateLifecyclePolicyRequest_description
+var UpdateLifecyclePolicyRequest_policy = &sUpdateLifecyclePolicyRequest_policy
+var UpdateLifecyclePolicyRequest_clientToken = &sUpdateLifecyclePolicyRequest_clientToken
+
+var UpdateLifecyclePolicyResponse = &sUpdateLifecyclePolicyResponse
+var UpdateLifecyclePolicyResponse_lifecyclePolicyDetail = &sUpdateLifecyclePolicyResponse_lifecyclePolicyDetail
+
+var UpdateSecurityConfigRequest = &sUpdateSecurityConfigRequest
+var UpdateSecurityConfigRequest_id = &sUpdateSecurityConfigRequest_id
+var UpdateSecurityConfigRequest_configVersion = &sUpdateSecurityConfigRequest_configVersion
+var UpdateSecurityConfigRequest_description = &sUpdateSecurityConfigRequest_description
+var UpdateSecurityConfigRequest_samlOptions = &sUpdateSecurityConfigRequest_samlOptions
+var UpdateSecurityConfigRequest_iamIdentityCenterOptionsUpdates = &sUpdateSecurityConfigRequest_iamIdentityCenterOptionsUpdates
+var UpdateSecurityConfigRequest_iamFederationOptions = &sUpdateSecurityConfigRequest_iamFederationOptions
+var UpdateSecurityConfigRequest_clientToken = &sUpdateSecurityConfigRequest_clientToken
+
+var UpdateSecurityConfigResponse = &sUpdateSecurityConfigResponse
+var UpdateSecurityConfigResponse_securityConfigDetail = &sUpdateSecurityConfigResponse_securityConfigDetail
+
+var UpdateSecurityPolicyRequest = &sUpdateSecurityPolicyRequest
+var UpdateSecurityPolicyRequest_type = &sUpdateSecurityPolicyRequest_type
+var UpdateSecurityPolicyRequest_name = &sUpdateSecurityPolicyRequest_name
+var UpdateSecurityPolicyRequest_policyVersion = &sUpdateSecurityPolicyRequest_policyVersion
+var UpdateSecurityPolicyRequest_description = &sUpdateSecurityPolicyRequest_description
+var UpdateSecurityPolicyRequest_policy = &sUpdateSecurityPolicyRequest_policy
+var UpdateSecurityPolicyRequest_clientToken = &sUpdateSecurityPolicyRequest_clientToken
+
+var UpdateSecurityPolicyResponse = &sUpdateSecurityPolicyResponse
+var UpdateSecurityPolicyResponse_securityPolicyDetail = &sUpdateSecurityPolicyResponse_securityPolicyDetail
+
+var UpdateVpcEndpointRequest = &sUpdateVpcEndpointRequest
+var UpdateVpcEndpointRequest_id = &sUpdateVpcEndpointRequest_id
+var UpdateVpcEndpointRequest_addSubnetIds = &sUpdateVpcEndpointRequest_addSubnetIds
+var UpdateVpcEndpointRequest_removeSubnetIds = &sUpdateVpcEndpointRequest_removeSubnetIds
+var UpdateVpcEndpointRequest_addSecurityGroupIds = &sUpdateVpcEndpointRequest_addSecurityGroupIds
+var UpdateVpcEndpointRequest_removeSecurityGroupIds = &sUpdateVpcEndpointRequest_removeSecurityGroupIds
+var UpdateVpcEndpointRequest_clientToken = &sUpdateVpcEndpointRequest_clientToken
+
+var UpdateVpcEndpointResponse = &sUpdateVpcEndpointResponse
+var UpdateVpcEndpointResponse_UpdateVpcEndpointDetail = &sUpdateVpcEndpointResponse_UpdateVpcEndpointDetail
+
+var OpenSearchServerless = &smithy.ServiceSchema{Schema: &s_OpenSearchServerless, Version: "2021-11-01"}

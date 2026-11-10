@@ -4,782 +4,599 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var GetGlyphs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "GetGlyphs",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+var (
+	iGetGlyphs                     = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "GetGlyphs"}
+	iGetSprites                    = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "GetSprites"}
+	iGetStaticMap                  = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "GetStaticMap"}
+	iGetStyleDescriptor            = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "GetStyleDescriptor"}
+	iGetTile                       = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "GetTile"}
+	i_MapsService                  = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "MapsService"}
+	iAccessDeniedException         = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "AccessDeniedException"}
+	i_ApiKey                       = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "ApiKey"}
+	iBuildings                     = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "Buildings"}
+	iColorScheme                   = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "ColorScheme"}
+	i_CompactOverlay               = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "CompactOverlay"}
+	iContourDensity                = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "ContourDensity"}
+	i_CountryCode                  = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "CountryCode"}
+	i_DistanceMeters               = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "DistanceMeters"}
+	i_GeoJsonOverlay               = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "GeoJsonOverlay"}
+	iInternalServerException       = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "InternalServerException"}
+	iLabelSize                     = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "LabelSize"}
+	i_LanguageTag                  = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "LanguageTag"}
+	iMapFeatureMode                = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "MapFeatureMode"}
+	iMapStyle                      = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "MapStyle"}
+	iPoiCategory                   = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "PoiCategory"}
+	i_PoiCategoryList              = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "PoiCategoryList"}
+	iPoiDensity                    = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "PoiDensity"}
+	i_PositionListString           = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "PositionListString"}
+	i_PositionString               = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "PositionString"}
+	iResourceNotFoundException     = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "ResourceNotFoundException"}
+	iScaleBarUnit                  = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "ScaleBarUnit"}
+	i_SensitiveFloat               = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "SensitiveFloat"}
+	i_SensitiveInteger             = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "SensitiveInteger"}
+	i_SensitiveString              = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "SensitiveString"}
+	iStaticMapStyle                = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "StaticMapStyle"}
+	iTerrain                       = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "Terrain"}
+	iThrottlingException           = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "ThrottlingException"}
+	iTileAdditionalFeature         = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "TileAdditionalFeature"}
+	i_TileAdditionalFeatureList    = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "TileAdditionalFeatureList"}
+	i_Tileset                      = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "Tileset"}
+	iTraffic                       = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "Traffic"}
+	iTravelMode                    = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "TravelMode"}
+	i_TravelModeList               = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "TravelModeList"}
+	iValidationException           = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "ValidationException"}
+	iValidationExceptionField      = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "ValidationExceptionField"}
+	i_ValidationExceptionFieldList = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "ValidationExceptionFieldList"}
+	iValidationExceptionReason     = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "ValidationExceptionReason"}
+	iVariant                       = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "Variant"}
+	iGetGlyphsRequest              = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "GetGlyphsRequest"}
+	iGetGlyphsResponse             = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "GetGlyphsResponse"}
+	iGetSpritesRequest             = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "GetSpritesRequest"}
+	iGetSpritesResponse            = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "GetSpritesResponse"}
+	iGetStaticMapRequest           = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "GetStaticMapRequest"}
+	iGetStaticMapResponse          = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "GetStaticMapResponse"}
+	iGetStyleDescriptorRequest     = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "GetStyleDescriptorRequest"}
+	iGetStyleDescriptorResponse    = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "GetStyleDescriptorResponse"}
+	iGetTileRequest                = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "GetTileRequest"}
+	iGetTileResponse               = smithy.ShapeID{Namespace: "com.amazonaws.geomaps", Name: "GetTileResponse"}
+	pString                        = smithy.ShapeID{Namespace: "smithy.api", Name: "String"}
+	pUnit                          = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+	pBlob                          = smithy.ShapeID{Namespace: "smithy.api", Name: "Blob"}
+	pBoolean                       = smithy.ShapeID{Namespace: "smithy.api", Name: "Boolean"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/glyphs/{FontStack}/{FontUnicodeRange}",
-	Code: 200})
-
-var GetSprites = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "GetSprites",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/styles/{Style}/{ColorScheme}/{Variant}/sprites/{FileName}",
-	Code: 200})
-
-var GetStaticMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "GetStaticMap",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/static/{FileName}",
-	Code: 200})
-
-var GetStyleDescriptor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "GetStyleDescriptor",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/styles/{Style}/descriptor",
-	Code: 200})
-
-var GetTile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "GetTile",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/tiles/{Tileset}/{Z}/{X}/{Y}",
-	Code: 200})
-
-var _MapsService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "MapsService",
-}, smithy.ShapeTypeService, 0)
-
-var MapsService = smithy.NewServiceSchema(_MapsService, "2020-11-19")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var _ApiKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "ApiKey",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var Buildings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "Buildings",
-}, smithy.ShapeTypeEnum, 1)
-var Buildings_BUILDINGS_3D *smithy.Schema
-
-var ColorScheme = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "ColorScheme",
-}, smithy.ShapeTypeEnum, 2)
-var ColorScheme_LIGHT *smithy.Schema
-
-var ColorScheme_DARK *smithy.Schema
-
-var _CompactOverlay = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "CompactOverlay",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ContourDensity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "ContourDensity",
-}, smithy.ShapeTypeEnum, 3)
-var ContourDensity_LOW *smithy.Schema
-
-var ContourDensity_MEDIUM *smithy.Schema
-
-var ContourDensity_HIGH *smithy.Schema
-
-var _CountryCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "CountryCode",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _DistanceMeters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "DistanceMeters",
-}, smithy.ShapeTypeLong, 0, &smithytraits.Sensitive{})
-
-var _GeoJsonOverlay = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "GeoJsonOverlay",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_Message *smithy.Schema
-
-var LabelSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "LabelSize",
-}, smithy.ShapeTypeEnum, 2)
-var LabelSize_SMALL *smithy.Schema
-
-var LabelSize_LARGE *smithy.Schema
-
-var _LanguageTag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "LanguageTag",
-}, smithy.ShapeTypeString, 0)
-
-var MapFeatureMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "MapFeatureMode",
-}, smithy.ShapeTypeEnum, 2)
-var MapFeatureMode_ENABLED *smithy.Schema
-
-var MapFeatureMode_DISABLED *smithy.Schema
-
-var MapStyle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "MapStyle",
-}, smithy.ShapeTypeEnum, 4)
-var MapStyle_STANDARD *smithy.Schema
-
-var MapStyle_MONOCHROME *smithy.Schema
-
-var MapStyle_HYBRID *smithy.Schema
-
-var MapStyle_SATELLITE *smithy.Schema
-
-var PoiCategory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "PoiCategory",
-}, smithy.ShapeTypeEnum, 9)
-var PoiCategory_FOOD_AND_DRINK *smithy.Schema
-
-var PoiCategory_ENTERTAINMENT *smithy.Schema
-
-var PoiCategory_SIGHTS_AND_MUSEUMS *smithy.Schema
-
-var PoiCategory_TRANSPORTATION *smithy.Schema
-
-var PoiCategory_ACCOMMODATIONS *smithy.Schema
-
-var PoiCategory_LEISURE_AND_OUTDOOR *smithy.Schema
-
-var PoiCategory_SHOPPING *smithy.Schema
-
-var PoiCategory_BUSINESS_AND_SERVICES *smithy.Schema
-
-var PoiCategory_FACILITIES_AND_BUILDINGS *smithy.Schema
-
-var _PoiCategoryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "PoiCategoryList",
-}, smithy.ShapeTypeList, 1)
-var _PoiCategoryList_member *smithy.Schema
-
-var PoiDensity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "PoiDensity",
-}, smithy.ShapeTypeEnum, 6)
-var PoiDensity_OFF *smithy.Schema
-
-var PoiDensity_VERY_SPARSE *smithy.Schema
-
-var PoiDensity_SPARSE *smithy.Schema
-
-var PoiDensity_DEFAULT *smithy.Schema
-
-var PoiDensity_DENSE *smithy.Schema
-
-var PoiDensity_VERY_DENSE *smithy.Schema
-
-var _PositionListString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "PositionListString",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _PositionString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "PositionString",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var ScaleBarUnit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "ScaleBarUnit",
-}, smithy.ShapeTypeEnum, 4)
-var ScaleBarUnit_KILOMETERS *smithy.Schema
-
-var ScaleBarUnit_KILOMETERS_MILES *smithy.Schema
-
-var ScaleBarUnit_MILES *smithy.Schema
-
-var ScaleBarUnit_MILES_KILOMETERS *smithy.Schema
-
-var _SensitiveFloat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "SensitiveFloat",
-}, smithy.ShapeTypeFloat, 0, &smithytraits.Sensitive{})
-
-var _SensitiveInteger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "SensitiveInteger",
-}, smithy.ShapeTypeInteger, 0, &smithytraits.Sensitive{})
-
-var _SensitiveString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "SensitiveString",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var StaticMapStyle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "StaticMapStyle",
-}, smithy.ShapeTypeEnum, 2)
-var StaticMapStyle_SATELLITE *smithy.Schema
-
-var StaticMapStyle_STANDARD *smithy.Schema
-
-var Terrain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "Terrain",
-}, smithy.ShapeTypeEnum, 2)
-var Terrain_HILLSHADE *smithy.Schema
-
-var Terrain_TERRAIN_3D *smithy.Schema
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_Message *smithy.Schema
-
-var TileAdditionalFeature = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "TileAdditionalFeature",
-}, smithy.ShapeTypeEnum, 4)
-var TileAdditionalFeature_CONTOUR_LINES *smithy.Schema
-
-var TileAdditionalFeature_HILLSHADE *smithy.Schema
-
-var TileAdditionalFeature_LOGISTICS *smithy.Schema
-
-var TileAdditionalFeature_TRANSIT *smithy.Schema
-
-var _TileAdditionalFeatureList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "TileAdditionalFeatureList",
-}, smithy.ShapeTypeList, 1)
-var _TileAdditionalFeatureList_member *smithy.Schema
-
-var _Tileset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "Tileset",
-}, smithy.ShapeTypeString, 0)
-
-var Traffic = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "Traffic",
-}, smithy.ShapeTypeEnum, 2)
-var Traffic_ALL *smithy.Schema
-
-var Traffic_CONGESTION *smithy.Schema
-
-var TravelMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "TravelMode",
-}, smithy.ShapeTypeEnum, 2)
-var TravelMode_TRANSIT *smithy.Schema
-
-var TravelMode_TRUCK *smithy.Schema
-
-var _TravelModeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "TravelModeList",
-}, smithy.ShapeTypeList, 1)
-var _TravelModeList_member *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_Message *smithy.Schema
-
-var ValidationException_Reason *smithy.Schema
-
-var ValidationException_FieldList *smithy.Schema
-
-var ValidationExceptionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "ValidationExceptionField",
-}, smithy.ShapeTypeStructure, 2)
-var ValidationExceptionField_Name *smithy.Schema
-
-var ValidationExceptionField_Message *smithy.Schema
-
-var _ValidationExceptionFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "ValidationExceptionFieldList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationExceptionFieldList_member *smithy.Schema
-
-var ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeEnum, 6)
-var ValidationExceptionReason_UNKNOWN_OPERATION *smithy.Schema
-
-var ValidationExceptionReason_MISSING *smithy.Schema
-
-var ValidationExceptionReason_CANNOT_PARSE *smithy.Schema
-
-var ValidationExceptionReason_FIELD_VALIDATION_FAILED *smithy.Schema
-
-var ValidationExceptionReason_OTHER *smithy.Schema
-
-var ValidationExceptionReason_UNKNOWN_FIELD *smithy.Schema
-
-var Variant = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "Variant",
-}, smithy.ShapeTypeEnum, 1)
-var Variant_DEFAULT *smithy.Schema
-
-var GetGlyphsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "GetGlyphsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetGlyphsRequest_FontStack *smithy.Schema
-
-var GetGlyphsRequest_FontUnicodeRange *smithy.Schema
-
-var GetGlyphsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "GetGlyphsResponse",
-}, smithy.ShapeTypeStructure, 4)
-var GetGlyphsResponse_Blob *smithy.Schema
-
-var GetGlyphsResponse_ContentType *smithy.Schema
-
-var GetGlyphsResponse_CacheControl *smithy.Schema
-
-var GetGlyphsResponse_ETag *smithy.Schema
-
-var GetSpritesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "GetSpritesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetSpritesRequest_FileName *smithy.Schema
-
-var GetSpritesRequest_Style *smithy.Schema
-
-var GetSpritesRequest_ColorScheme *smithy.Schema
-
-var GetSpritesRequest_Variant *smithy.Schema
-
-var GetSpritesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "GetSpritesResponse",
-}, smithy.ShapeTypeStructure, 4)
-var GetSpritesResponse_Blob *smithy.Schema
-
-var GetSpritesResponse_ContentType *smithy.Schema
-
-var GetSpritesResponse_CacheControl *smithy.Schema
-
-var GetSpritesResponse_ETag *smithy.Schema
-
-var GetStaticMapRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "GetStaticMapRequest",
-}, smithy.ShapeTypeStructure, 20)
-var GetStaticMapRequest_BoundingBox *smithy.Schema
-
-var GetStaticMapRequest_BoundedPositions *smithy.Schema
-
-var GetStaticMapRequest_Center *smithy.Schema
-
-var GetStaticMapRequest_ColorScheme *smithy.Schema
-
-var GetStaticMapRequest_CompactOverlay *smithy.Schema
-
-var GetStaticMapRequest_CropLabels *smithy.Schema
-
-var GetStaticMapRequest_GeoJsonOverlay *smithy.Schema
-
-var GetStaticMapRequest_Height *smithy.Schema
-
-var GetStaticMapRequest_Key *smithy.Schema
-
-var GetStaticMapRequest_LabelSize *smithy.Schema
-
-var GetStaticMapRequest_Language *smithy.Schema
-
-var GetStaticMapRequest_Padding *smithy.Schema
-
-var GetStaticMapRequest_PoliticalView *smithy.Schema
-
-var GetStaticMapRequest_PointsOfInterests *smithy.Schema
-
-var GetStaticMapRequest_Radius *smithy.Schema
-
-var GetStaticMapRequest_FileName *smithy.Schema
-
-var GetStaticMapRequest_ScaleBarUnit *smithy.Schema
-
-var GetStaticMapRequest_Style *smithy.Schema
-
-var GetStaticMapRequest_Width *smithy.Schema
-
-var GetStaticMapRequest_Zoom *smithy.Schema
-
-var GetStaticMapResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "GetStaticMapResponse",
-}, smithy.ShapeTypeStructure, 5)
-var GetStaticMapResponse_Blob *smithy.Schema
-
-var GetStaticMapResponse_ContentType *smithy.Schema
-
-var GetStaticMapResponse_CacheControl *smithy.Schema
-
-var GetStaticMapResponse_ETag *smithy.Schema
-
-var GetStaticMapResponse_PricingBucket *smithy.Schema
-
-var GetStyleDescriptorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "GetStyleDescriptorRequest",
-}, smithy.ShapeTypeStructure, 11)
-var GetStyleDescriptorRequest_Style *smithy.Schema
-
-var GetStyleDescriptorRequest_ColorScheme *smithy.Schema
-
-var GetStyleDescriptorRequest_PoliticalView *smithy.Schema
-
-var GetStyleDescriptorRequest_Terrain *smithy.Schema
-
-var GetStyleDescriptorRequest_ContourDensity *smithy.Schema
-
-var GetStyleDescriptorRequest_Traffic *smithy.Schema
-
-var GetStyleDescriptorRequest_TravelModes *smithy.Schema
-
-var GetStyleDescriptorRequest_Buildings *smithy.Schema
-
-var GetStyleDescriptorRequest_PoiDensity *smithy.Schema
-
-var GetStyleDescriptorRequest_PoiCategories *smithy.Schema
-
-var GetStyleDescriptorRequest_Key *smithy.Schema
-
-var GetStyleDescriptorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "GetStyleDescriptorResponse",
-}, smithy.ShapeTypeStructure, 4)
-var GetStyleDescriptorResponse_Blob *smithy.Schema
-
-var GetStyleDescriptorResponse_ContentType *smithy.Schema
-
-var GetStyleDescriptorResponse_CacheControl *smithy.Schema
-
-var GetStyleDescriptorResponse_ETag *smithy.Schema
-
-var GetTileRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "GetTileRequest",
-}, smithy.ShapeTypeStructure, 6)
-var GetTileRequest_AdditionalFeatures *smithy.Schema
-
-var GetTileRequest_Tileset *smithy.Schema
-
-var GetTileRequest_Z *smithy.Schema
-
-var GetTileRequest_X *smithy.Schema
-
-var GetTileRequest_Y *smithy.Schema
-
-var GetTileRequest_Key *smithy.Schema
-
-var GetTileResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.geomaps",
-	Name:      "GetTileResponse",
-}, smithy.ShapeTypeStructure, 5)
-var GetTileResponse_Blob *smithy.Schema
-
-var GetTileResponse_ContentType *smithy.Schema
-
-var GetTileResponse_CacheControl *smithy.Schema
-
-var GetTileResponse_ETag *smithy.Schema
-
-var GetTileResponse_PricingBucket *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", smithyprelude.String, &smithytraits.JSONName{Name: "message"})
-
-	Buildings_BUILDINGS_3D = Buildings.AddMember("BUILDINGS_3D", smithyprelude.Unit)
-
-	ColorScheme_LIGHT = ColorScheme.AddMember("LIGHT", smithyprelude.Unit)
-
-	ColorScheme_DARK = ColorScheme.AddMember("DARK", smithyprelude.Unit)
-
-	ContourDensity_LOW = ContourDensity.AddMember("LOW", smithyprelude.Unit)
-
-	ContourDensity_MEDIUM = ContourDensity.AddMember("MEDIUM", smithyprelude.Unit)
-
-	ContourDensity_HIGH = ContourDensity.AddMember("HIGH", smithyprelude.Unit)
-
-	InternalServerException_Message = InternalServerException.AddMember("Message", smithyprelude.String, &smithytraits.JSONName{Name: "message"})
-
-	LabelSize_SMALL = LabelSize.AddMember("SMALL", smithyprelude.Unit)
-
-	LabelSize_LARGE = LabelSize.AddMember("LARGE", smithyprelude.Unit)
-
-	MapFeatureMode_ENABLED = MapFeatureMode.AddMember("ENABLED", smithyprelude.Unit)
-
-	MapFeatureMode_DISABLED = MapFeatureMode.AddMember("DISABLED", smithyprelude.Unit)
-
-	MapStyle_STANDARD = MapStyle.AddMember("STANDARD", smithyprelude.Unit)
-
-	MapStyle_MONOCHROME = MapStyle.AddMember("MONOCHROME", smithyprelude.Unit)
-
-	MapStyle_HYBRID = MapStyle.AddMember("HYBRID", smithyprelude.Unit)
-
-	MapStyle_SATELLITE = MapStyle.AddMember("SATELLITE", smithyprelude.Unit)
-
-	PoiCategory_FOOD_AND_DRINK = PoiCategory.AddMember("FOOD_AND_DRINK", smithyprelude.Unit)
-
-	PoiCategory_ENTERTAINMENT = PoiCategory.AddMember("ENTERTAINMENT", smithyprelude.Unit)
-
-	PoiCategory_SIGHTS_AND_MUSEUMS = PoiCategory.AddMember("SIGHTS_AND_MUSEUMS", smithyprelude.Unit)
-
-	PoiCategory_TRANSPORTATION = PoiCategory.AddMember("TRANSPORTATION", smithyprelude.Unit)
-
-	PoiCategory_ACCOMMODATIONS = PoiCategory.AddMember("ACCOMMODATIONS", smithyprelude.Unit)
-
-	PoiCategory_LEISURE_AND_OUTDOOR = PoiCategory.AddMember("LEISURE_AND_OUTDOOR", smithyprelude.Unit)
-
-	PoiCategory_SHOPPING = PoiCategory.AddMember("SHOPPING", smithyprelude.Unit)
-
-	PoiCategory_BUSINESS_AND_SERVICES = PoiCategory.AddMember("BUSINESS_AND_SERVICES", smithyprelude.Unit)
-
-	PoiCategory_FACILITIES_AND_BUILDINGS = PoiCategory.AddMember("FACILITIES_AND_BUILDINGS", smithyprelude.Unit)
-
-	_PoiCategoryList_member = _PoiCategoryList.AddMember("member", PoiCategory)
-
-	PoiDensity_OFF = PoiDensity.AddMember("OFF", smithyprelude.Unit)
-
-	PoiDensity_VERY_SPARSE = PoiDensity.AddMember("VERY_SPARSE", smithyprelude.Unit)
-
-	PoiDensity_SPARSE = PoiDensity.AddMember("SPARSE", smithyprelude.Unit)
-
-	PoiDensity_DEFAULT = PoiDensity.AddMember("DEFAULT", smithyprelude.Unit)
-
-	PoiDensity_DENSE = PoiDensity.AddMember("DENSE", smithyprelude.Unit)
-
-	PoiDensity_VERY_DENSE = PoiDensity.AddMember("VERY_DENSE", smithyprelude.Unit)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", smithyprelude.String, &smithytraits.JSONName{Name: "message"})
-
-	ScaleBarUnit_KILOMETERS = ScaleBarUnit.AddMember("KILOMETERS", smithyprelude.Unit)
-
-	ScaleBarUnit_KILOMETERS_MILES = ScaleBarUnit.AddMember("KILOMETERS_MILES", smithyprelude.Unit)
-
-	ScaleBarUnit_MILES = ScaleBarUnit.AddMember("MILES", smithyprelude.Unit)
-
-	ScaleBarUnit_MILES_KILOMETERS = ScaleBarUnit.AddMember("MILES_KILOMETERS", smithyprelude.Unit)
-
-	StaticMapStyle_SATELLITE = StaticMapStyle.AddMember("SATELLITE", smithyprelude.Unit)
-
-	StaticMapStyle_STANDARD = StaticMapStyle.AddMember("STANDARD", smithyprelude.Unit)
-
-	Terrain_HILLSHADE = Terrain.AddMember("HILLSHADE", smithyprelude.Unit)
-
-	Terrain_TERRAIN_3D = Terrain.AddMember("TERRAIN_3D", smithyprelude.Unit)
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", smithyprelude.String, &smithytraits.JSONName{Name: "message"})
-
-	TileAdditionalFeature_CONTOUR_LINES = TileAdditionalFeature.AddMember("CONTOUR_LINES", smithyprelude.Unit)
-
-	TileAdditionalFeature_HILLSHADE = TileAdditionalFeature.AddMember("HILLSHADE", smithyprelude.Unit)
-
-	TileAdditionalFeature_LOGISTICS = TileAdditionalFeature.AddMember("LOGISTICS", smithyprelude.Unit)
-
-	TileAdditionalFeature_TRANSIT = TileAdditionalFeature.AddMember("TRANSIT", smithyprelude.Unit)
-
-	_TileAdditionalFeatureList_member = _TileAdditionalFeatureList.AddMember("member", TileAdditionalFeature)
-
-	Traffic_ALL = Traffic.AddMember("ALL", smithyprelude.Unit)
-
-	Traffic_CONGESTION = Traffic.AddMember("CONGESTION", smithyprelude.Unit)
-
-	TravelMode_TRANSIT = TravelMode.AddMember("TRANSIT", smithyprelude.Unit)
-
-	TravelMode_TRUCK = TravelMode.AddMember("TRUCK", smithyprelude.Unit)
-
-	_TravelModeList_member = _TravelModeList.AddMember("member", TravelMode)
-
-	ValidationExceptionReason_UNKNOWN_OPERATION = ValidationExceptionReason.AddMember("UNKNOWN_OPERATION", smithyprelude.Unit)
-
-	ValidationExceptionReason_MISSING = ValidationExceptionReason.AddMember("MISSING", smithyprelude.Unit)
-
-	ValidationExceptionReason_CANNOT_PARSE = ValidationExceptionReason.AddMember("CANNOT_PARSE", smithyprelude.Unit)
-
-	ValidationExceptionReason_FIELD_VALIDATION_FAILED = ValidationExceptionReason.AddMember("FIELD_VALIDATION_FAILED", smithyprelude.Unit)
-
-	ValidationExceptionReason_OTHER = ValidationExceptionReason.AddMember("OTHER", smithyprelude.Unit)
-
-	ValidationExceptionReason_UNKNOWN_FIELD = ValidationExceptionReason.AddMember("UNKNOWN_FIELD", smithyprelude.Unit)
-
-	ValidationExceptionField_Name = ValidationExceptionField.AddMember("Name", smithyprelude.String, &smithytraits.JSONName{Name: "name"})
-
-	ValidationExceptionField_Message = ValidationExceptionField.AddMember("Message", smithyprelude.String, &smithytraits.JSONName{Name: "message"})
-
-	_ValidationExceptionFieldList_member = _ValidationExceptionFieldList.AddMember("member", ValidationExceptionField)
-
-	ValidationException_Message = ValidationException.AddMember("Message", smithyprelude.String, &smithytraits.JSONName{Name: "message"})
-
-	ValidationException_Reason = ValidationException.AddMember("Reason", ValidationExceptionReason, &smithytraits.JSONName{Name: "reason"})
-
-	ValidationException_FieldList = ValidationException.AddMember("FieldList", _ValidationExceptionFieldList, &smithytraits.JSONName{Name: "fieldList"})
-
-	Variant_DEFAULT = Variant.AddMember("DEFAULT", smithyprelude.Unit)
-
-	GetGlyphsRequest_FontStack = GetGlyphsRequest.AddMember("FontStack", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	GetGlyphsRequest_FontUnicodeRange = GetGlyphsRequest.AddMember("FontUnicodeRange", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	GetGlyphsResponse_Blob = GetGlyphsResponse.AddMember("Blob", smithyprelude.Blob, &smithytraits.HTTPPayload{})
-
-	GetGlyphsResponse_ContentType = GetGlyphsResponse.AddMember("ContentType", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Content-Type"})
-
-	GetGlyphsResponse_CacheControl = GetGlyphsResponse.AddMember("CacheControl", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Cache-Control"})
-
-	GetGlyphsResponse_ETag = GetGlyphsResponse.AddMember("ETag", smithyprelude.String, &smithytraits.HTTPHeader{Name: "ETag"})
-
-	GetSpritesRequest_FileName = GetSpritesRequest.AddMember("FileName", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	GetSpritesRequest_Style = GetSpritesRequest.AddMember("Style", MapStyle, &smithytraits.HTTPLabel{})
-
-	GetSpritesRequest_ColorScheme = GetSpritesRequest.AddMember("ColorScheme", ColorScheme, &smithytraits.HTTPLabel{})
-
-	GetSpritesRequest_Variant = GetSpritesRequest.AddMember("Variant", Variant, &smithytraits.HTTPLabel{})
-
-	GetSpritesResponse_Blob = GetSpritesResponse.AddMember("Blob", smithyprelude.Blob, &smithytraits.HTTPPayload{})
-
-	GetSpritesResponse_ContentType = GetSpritesResponse.AddMember("ContentType", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Content-Type"})
-
-	GetSpritesResponse_CacheControl = GetSpritesResponse.AddMember("CacheControl", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Cache-Control"})
-
-	GetSpritesResponse_ETag = GetSpritesResponse.AddMember("ETag", smithyprelude.String, &smithytraits.HTTPHeader{Name: "ETag"})
-
-	GetStaticMapRequest_BoundingBox = GetStaticMapRequest.AddMember("BoundingBox", _PositionListString, &smithytraits.HTTPQuery{Name: "bounding-box"})
-
-	GetStaticMapRequest_BoundedPositions = GetStaticMapRequest.AddMember("BoundedPositions", _PositionListString, &smithytraits.HTTPQuery{Name: "bounded-positions"})
-
-	GetStaticMapRequest_Center = GetStaticMapRequest.AddMember("Center", _PositionString, &smithytraits.HTTPQuery{Name: "center"})
-
-	GetStaticMapRequest_ColorScheme = GetStaticMapRequest.AddMember("ColorScheme", ColorScheme, &smithytraits.HTTPQuery{Name: "color-scheme"})
-
-	GetStaticMapRequest_CompactOverlay = GetStaticMapRequest.AddMember("CompactOverlay", _CompactOverlay, &smithytraits.HTTPQuery{Name: "compact-overlay"})
-
-	GetStaticMapRequest_CropLabels = GetStaticMapRequest.AddMember("CropLabels", smithyprelude.Boolean, &smithytraits.HTTPQuery{Name: "crop-labels"})
-
-	GetStaticMapRequest_GeoJsonOverlay = GetStaticMapRequest.AddMember("GeoJsonOverlay", _GeoJsonOverlay, &smithytraits.HTTPQuery{Name: "geojson-overlay"})
-
-	GetStaticMapRequest_Height = GetStaticMapRequest.AddMember("Height", _SensitiveInteger, &smithytraits.HTTPQuery{Name: "height"})
-
-	GetStaticMapRequest_Key = GetStaticMapRequest.AddMember("Key", _ApiKey, &smithytraits.HTTPQuery{Name: "key"})
-
-	GetStaticMapRequest_LabelSize = GetStaticMapRequest.AddMember("LabelSize", LabelSize, &smithytraits.HTTPQuery{Name: "label-size"})
-
-	GetStaticMapRequest_Language = GetStaticMapRequest.AddMember("Language", _LanguageTag, &smithytraits.HTTPQuery{Name: "lang"})
-
-	GetStaticMapRequest_Padding = GetStaticMapRequest.AddMember("Padding", _SensitiveInteger, &smithytraits.HTTPQuery{Name: "padding"})
-
-	GetStaticMapRequest_PoliticalView = GetStaticMapRequest.AddMember("PoliticalView", _CountryCode, &smithytraits.HTTPQuery{Name: "political-view"})
-
-	GetStaticMapRequest_PointsOfInterests = GetStaticMapRequest.AddMember("PointsOfInterests", MapFeatureMode, &smithytraits.HTTPQuery{Name: "pois"})
-
-	GetStaticMapRequest_Radius = GetStaticMapRequest.AddMember("Radius", _DistanceMeters, &smithytraits.HTTPQuery{Name: "radius"})
-
-	GetStaticMapRequest_FileName = GetStaticMapRequest.AddMember("FileName", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	GetStaticMapRequest_ScaleBarUnit = GetStaticMapRequest.AddMember("ScaleBarUnit", ScaleBarUnit, &smithytraits.HTTPQuery{Name: "scale-unit"})
-
-	GetStaticMapRequest_Style = GetStaticMapRequest.AddMember("Style", StaticMapStyle, &smithytraits.HTTPQuery{Name: "style"})
-
-	GetStaticMapRequest_Width = GetStaticMapRequest.AddMember("Width", _SensitiveInteger, &smithytraits.HTTPQuery{Name: "width"})
-
-	GetStaticMapRequest_Zoom = GetStaticMapRequest.AddMember("Zoom", _SensitiveFloat, &smithytraits.HTTPQuery{Name: "zoom"})
-
-	GetStaticMapResponse_Blob = GetStaticMapResponse.AddMember("Blob", smithyprelude.Blob, &smithytraits.HTTPPayload{})
-
-	GetStaticMapResponse_ContentType = GetStaticMapResponse.AddMember("ContentType", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Content-Type"})
-
-	GetStaticMapResponse_CacheControl = GetStaticMapResponse.AddMember("CacheControl", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Cache-Control"})
-
-	GetStaticMapResponse_ETag = GetStaticMapResponse.AddMember("ETag", smithyprelude.String, &smithytraits.HTTPHeader{Name: "ETag"})
-
-	GetStaticMapResponse_PricingBucket = GetStaticMapResponse.AddMember("PricingBucket", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-geo-pricing-bucket"})
-
-	GetStyleDescriptorRequest_Style = GetStyleDescriptorRequest.AddMember("Style", MapStyle, &smithytraits.HTTPLabel{})
-
-	GetStyleDescriptorRequest_ColorScheme = GetStyleDescriptorRequest.AddMember("ColorScheme", ColorScheme, &smithytraits.HTTPQuery{Name: "color-scheme"})
-
-	GetStyleDescriptorRequest_PoliticalView = GetStyleDescriptorRequest.AddMember("PoliticalView", _CountryCode, &smithytraits.HTTPQuery{Name: "political-view"})
-
-	GetStyleDescriptorRequest_Terrain = GetStyleDescriptorRequest.AddMember("Terrain", Terrain, &smithytraits.HTTPQuery{Name: "terrain"})
-
-	GetStyleDescriptorRequest_ContourDensity = GetStyleDescriptorRequest.AddMember("ContourDensity", ContourDensity, &smithytraits.HTTPQuery{Name: "contour-density"})
-
-	GetStyleDescriptorRequest_Traffic = GetStyleDescriptorRequest.AddMember("Traffic", Traffic, &smithytraits.HTTPQuery{Name: "traffic"})
-
-	GetStyleDescriptorRequest_TravelModes = GetStyleDescriptorRequest.AddMember("TravelModes", _TravelModeList, &smithytraits.HTTPQuery{Name: "travel-modes"})
-
-	GetStyleDescriptorRequest_Buildings = GetStyleDescriptorRequest.AddMember("Buildings", Buildings, &smithytraits.HTTPQuery{Name: "buildings"})
-
-	GetStyleDescriptorRequest_PoiDensity = GetStyleDescriptorRequest.AddMember("PoiDensity", PoiDensity, &smithytraits.HTTPQuery{Name: "poi-density"})
-
-	GetStyleDescriptorRequest_PoiCategories = GetStyleDescriptorRequest.AddMember("PoiCategories", _PoiCategoryList, &smithytraits.HTTPQuery{Name: "poi-categories"})
-
-	GetStyleDescriptorRequest_Key = GetStyleDescriptorRequest.AddMember("Key", _ApiKey, &smithytraits.HTTPQuery{Name: "key"})
-
-	GetStyleDescriptorResponse_Blob = GetStyleDescriptorResponse.AddMember("Blob", smithyprelude.Blob, &smithytraits.HTTPPayload{})
-
-	GetStyleDescriptorResponse_ContentType = GetStyleDescriptorResponse.AddMember("ContentType", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Content-Type"})
-
-	GetStyleDescriptorResponse_CacheControl = GetStyleDescriptorResponse.AddMember("CacheControl", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Cache-Control"})
-
-	GetStyleDescriptorResponse_ETag = GetStyleDescriptorResponse.AddMember("ETag", smithyprelude.String, &smithytraits.HTTPHeader{Name: "ETag"})
-
-	GetTileRequest_AdditionalFeatures = GetTileRequest.AddMember("AdditionalFeatures", _TileAdditionalFeatureList, &smithytraits.HTTPQuery{Name: "additional-features"})
-
-	GetTileRequest_Tileset = GetTileRequest.AddMember("Tileset", _Tileset, &smithytraits.HTTPLabel{})
-
-	GetTileRequest_Z = GetTileRequest.AddMember("Z", _SensitiveString, &smithytraits.HTTPLabel{})
-
-	GetTileRequest_X = GetTileRequest.AddMember("X", _SensitiveString, &smithytraits.HTTPLabel{})
-
-	GetTileRequest_Y = GetTileRequest.AddMember("Y", _SensitiveString, &smithytraits.HTTPLabel{})
-
-	GetTileRequest_Key = GetTileRequest.AddMember("Key", _ApiKey, &smithytraits.HTTPQuery{Name: "key"})
-
-	GetTileResponse_Blob = GetTileResponse.AddMember("Blob", smithyprelude.Blob, &smithytraits.HTTPPayload{})
-
-	GetTileResponse_ContentType = GetTileResponse.AddMember("ContentType", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Content-Type"})
-
-	GetTileResponse_CacheControl = GetTileResponse.AddMember("CacheControl", smithyprelude.String, &smithytraits.HTTPHeader{Name: "Cache-Control"})
-
-	GetTileResponse_ETag = GetTileResponse.AddMember("ETag", smithyprelude.String, &smithytraits.HTTPHeader{Name: "ETag"})
-
-	GetTileResponse_PricingBucket = GetTileResponse.AddMember("PricingBucket", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amz-geo-pricing-bucket"})
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "message"}}, DirectMask: 0x1}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "reason"}}, DirectMask: 0x1}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "fieldList"}}, DirectMask: 0x1}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "name"}}, DirectMask: 0x1}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPPayload{}}, DirectMask: 0x800}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Content-Type"}}, DirectMask: 0x80}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Cache-Control"}}, DirectMask: 0x80}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "ETag"}}, DirectMask: 0x80}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "bounding-box"}, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x10}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "bounded-positions"}, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x10}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "center"}, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x10}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "color-scheme"}}, DirectMask: 0x10}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "compact-overlay"}, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x10}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "crop-labels"}}, DirectMask: 0x10}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "geojson-overlay"}, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x10}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "height"}, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x10}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "key"}, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x10}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "label-size"}}, DirectMask: 0x10}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "lang"}}, DirectMask: 0x10}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "padding"}, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x10}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "political-view"}, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x10}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "pois"}}, DirectMask: 0x10}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "radius"}, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x10}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "scale-unit"}}, DirectMask: 0x10}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "style"}}, DirectMask: 0x10}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "width"}, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x10}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "zoom"}, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x10}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-geo-pricing-bucket"}}, DirectMask: 0x80}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "terrain"}}, DirectMask: 0x10}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "contour-density"}}, DirectMask: 0x10}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "traffic"}}, DirectMask: 0x10}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "travel-modes"}}, DirectMask: 0x10}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "buildings"}}, DirectMask: 0x10}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "poi-density"}}, DirectMask: 0x10}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "poi-categories"}}, DirectMask: 0x10}
+var t47 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "additional-features"}}, DirectMask: 0x10}
+var t48 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x4}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_Message}}
+var mBuildings = smithy.SchemaMembers{List: []*smithy.Schema{&sBuildings_BUILDINGS_3D}}
+var mColorScheme = smithy.SchemaMembers{List: []*smithy.Schema{&sColorScheme_LIGHT, &sColorScheme_DARK}}
+var mContourDensity = smithy.SchemaMembers{List: []*smithy.Schema{&sContourDensity_LOW, &sContourDensity_MEDIUM, &sContourDensity_HIGH}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_Message}}
+var mLabelSize = smithy.SchemaMembers{List: []*smithy.Schema{&sLabelSize_SMALL, &sLabelSize_LARGE}}
+var mMapFeatureMode = smithy.SchemaMembers{List: []*smithy.Schema{&sMapFeatureMode_ENABLED, &sMapFeatureMode_DISABLED}}
+var mMapStyle = smithy.SchemaMembers{List: []*smithy.Schema{&sMapStyle_STANDARD, &sMapStyle_MONOCHROME, &sMapStyle_HYBRID, &sMapStyle_SATELLITE}}
+var mPoiCategory = smithy.SchemaMembers{List: []*smithy.Schema{&sPoiCategory_FOOD_AND_DRINK, &sPoiCategory_ENTERTAINMENT, &sPoiCategory_SIGHTS_AND_MUSEUMS, &sPoiCategory_TRANSPORTATION, &sPoiCategory_ACCOMMODATIONS, &sPoiCategory_LEISURE_AND_OUTDOOR, &sPoiCategory_SHOPPING, &sPoiCategory_BUSINESS_AND_SERVICES, &sPoiCategory_FACILITIES_AND_BUILDINGS}, Seed: 1, Slots: []uint16{
+	8, 2, 0, 6, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 7, 9, 0, 0, 4, 5, 0,
+	0, 0, 0, 0, 0, 0, 0, 0,
+}}
+var m_PoiCategoryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PoiCategoryList_member}}
+var mPoiDensity = smithy.SchemaMembers{List: []*smithy.Schema{&sPoiDensity_OFF, &sPoiDensity_VERY_SPARSE, &sPoiDensity_SPARSE, &sPoiDensity_DEFAULT, &sPoiDensity_DENSE, &sPoiDensity_VERY_DENSE}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message}}
+var mScaleBarUnit = smithy.SchemaMembers{List: []*smithy.Schema{&sScaleBarUnit_KILOMETERS, &sScaleBarUnit_KILOMETERS_MILES, &sScaleBarUnit_MILES, &sScaleBarUnit_MILES_KILOMETERS}}
+var mStaticMapStyle = smithy.SchemaMembers{List: []*smithy.Schema{&sStaticMapStyle_SATELLITE, &sStaticMapStyle_STANDARD}}
+var mTerrain = smithy.SchemaMembers{List: []*smithy.Schema{&sTerrain_HILLSHADE, &sTerrain_TERRAIN_3D}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_Message}}
+var mTileAdditionalFeature = smithy.SchemaMembers{List: []*smithy.Schema{&sTileAdditionalFeature_CONTOUR_LINES, &sTileAdditionalFeature_HILLSHADE, &sTileAdditionalFeature_LOGISTICS, &sTileAdditionalFeature_TRANSIT}}
+var m_TileAdditionalFeatureList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TileAdditionalFeatureList_member}}
+var mTraffic = smithy.SchemaMembers{List: []*smithy.Schema{&sTraffic_ALL, &sTraffic_CONGESTION}}
+var mTravelMode = smithy.SchemaMembers{List: []*smithy.Schema{&sTravelMode_TRANSIT, &sTravelMode_TRUCK}}
+var m_TravelModeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TravelModeList_member}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_Message, &sValidationException_Reason, &sValidationException_FieldList}}
+var mValidationExceptionField = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionField_Name, &sValidationExceptionField_Message}}
+var m_ValidationExceptionFieldList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ValidationExceptionFieldList_member}}
+var mValidationExceptionReason = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionReason_UNKNOWN_OPERATION, &sValidationExceptionReason_MISSING, &sValidationExceptionReason_CANNOT_PARSE, &sValidationExceptionReason_FIELD_VALIDATION_FAILED, &sValidationExceptionReason_OTHER, &sValidationExceptionReason_UNKNOWN_FIELD}}
+var mVariant = smithy.SchemaMembers{List: []*smithy.Schema{&sVariant_DEFAULT}}
+var mGetGlyphsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetGlyphsRequest_FontStack, &sGetGlyphsRequest_FontUnicodeRange}}
+var mGetGlyphsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetGlyphsResponse_Blob, &sGetGlyphsResponse_ContentType, &sGetGlyphsResponse_CacheControl, &sGetGlyphsResponse_ETag}}
+var mGetSpritesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSpritesRequest_FileName, &sGetSpritesRequest_Style, &sGetSpritesRequest_ColorScheme, &sGetSpritesRequest_Variant}}
+var mGetSpritesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSpritesResponse_Blob, &sGetSpritesResponse_ContentType, &sGetSpritesResponse_CacheControl, &sGetSpritesResponse_ETag}}
+var mGetStaticMapRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetStaticMapRequest_BoundingBox, &sGetStaticMapRequest_BoundedPositions, &sGetStaticMapRequest_Center, &sGetStaticMapRequest_ColorScheme, &sGetStaticMapRequest_CompactOverlay, &sGetStaticMapRequest_CropLabels, &sGetStaticMapRequest_GeoJsonOverlay, &sGetStaticMapRequest_Height, &sGetStaticMapRequest_Key, &sGetStaticMapRequest_LabelSize, &sGetStaticMapRequest_Language, &sGetStaticMapRequest_Padding, &sGetStaticMapRequest_PoliticalView, &sGetStaticMapRequest_PointsOfInterests, &sGetStaticMapRequest_Radius, &sGetStaticMapRequest_FileName, &sGetStaticMapRequest_ScaleBarUnit, &sGetStaticMapRequest_Style, &sGetStaticMapRequest_Width, &sGetStaticMapRequest_Zoom}, Seed: 8, Slots: []uint16{
+	0, 7, 0, 0, 0, 0, 0, 18, 0, 6, 5, 0, 0, 19, 0, 0, 0, 0, 0, 0, 0, 11, 0, 0,
+	0, 0, 0, 1, 0, 0, 4, 15, 0, 0, 0, 0, 0, 0, 0, 0, 20, 8, 0, 2, 16, 0, 0, 17,
+	0, 10, 3, 12, 14, 0, 0, 0, 0, 9, 0, 0, 0, 0, 13, 0,
+}}
+var mGetStaticMapResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetStaticMapResponse_Blob, &sGetStaticMapResponse_ContentType, &sGetStaticMapResponse_CacheControl, &sGetStaticMapResponse_ETag, &sGetStaticMapResponse_PricingBucket}}
+var mGetStyleDescriptorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetStyleDescriptorRequest_Style, &sGetStyleDescriptorRequest_ColorScheme, &sGetStyleDescriptorRequest_PoliticalView, &sGetStyleDescriptorRequest_Terrain, &sGetStyleDescriptorRequest_ContourDensity, &sGetStyleDescriptorRequest_Traffic, &sGetStyleDescriptorRequest_TravelModes, &sGetStyleDescriptorRequest_Buildings, &sGetStyleDescriptorRequest_PoiDensity, &sGetStyleDescriptorRequest_PoiCategories, &sGetStyleDescriptorRequest_Key}, Seed: 1, Slots: []uint16{
+	0, 0, 7, 0, 0, 9, 0, 0, 0, 2, 6, 0, 0, 0, 0, 4, 0, 0, 3, 11, 0, 8, 0, 0,
+	0, 0, 0, 10, 0, 0, 5, 1,
+}}
+var mGetStyleDescriptorResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetStyleDescriptorResponse_Blob, &sGetStyleDescriptorResponse_ContentType, &sGetStyleDescriptorResponse_CacheControl, &sGetStyleDescriptorResponse_ETag}}
+var mGetTileRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTileRequest_AdditionalFeatures, &sGetTileRequest_Tileset, &sGetTileRequest_Z, &sGetTileRequest_X, &sGetTileRequest_Y, &sGetTileRequest_Key}}
+var mGetTileResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTileResponse_Blob, &sGetTileResponse_ContentType, &sGetTileResponse_CacheControl, &sGetTileResponse_ETag, &sGetTileResponse_PricingBucket}}
+
+var sGetGlyphs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetGlyphs, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sGetSprites = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSprites, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sGetStaticMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetStaticMap, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sGetStyleDescriptor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetStyleDescriptor, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sGetTile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTile, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var s_MapsService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MapsService, Type: smithy.ShapeTypeService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t5, Type: smithy.ShapeTypeStructure})
+var s_ApiKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApiKey, Traits: &t7, Type: smithy.ShapeTypeString})
+var sBuildings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBuildings, Members: &mBuildings, Type: smithy.ShapeTypeEnum})
+var sColorScheme = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iColorScheme, Members: &mColorScheme, Type: smithy.ShapeTypeEnum})
+var s_CompactOverlay = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CompactOverlay, Traits: &t7, Type: smithy.ShapeTypeString})
+var sContourDensity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContourDensity, Members: &mContourDensity, Type: smithy.ShapeTypeEnum})
+var s_CountryCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CountryCode, Traits: &t7, Type: smithy.ShapeTypeString})
+var s_DistanceMeters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DistanceMeters, Traits: &t7, Type: smithy.ShapeTypeLong})
+var s_GeoJsonOverlay = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GeoJsonOverlay, Traits: &t7, Type: smithy.ShapeTypeString})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t8, Type: smithy.ShapeTypeStructure})
+var sLabelSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLabelSize, Members: &mLabelSize, Type: smithy.ShapeTypeEnum})
+var s_LanguageTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LanguageTag, Type: smithy.ShapeTypeString})
+var sMapFeatureMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMapFeatureMode, Members: &mMapFeatureMode, Type: smithy.ShapeTypeEnum})
+var sMapStyle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMapStyle, Members: &mMapStyle, Type: smithy.ShapeTypeEnum})
+var sPoiCategory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPoiCategory, Members: &mPoiCategory, Type: smithy.ShapeTypeEnum})
+var s_PoiCategoryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PoiCategoryList, Members: &m_PoiCategoryList, Type: smithy.ShapeTypeList})
+var sPoiDensity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPoiDensity, Members: &mPoiDensity, Type: smithy.ShapeTypeEnum})
+var s_PositionListString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PositionListString, Traits: &t7, Type: smithy.ShapeTypeString})
+var s_PositionString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PositionString, Traits: &t7, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t9, Type: smithy.ShapeTypeStructure})
+var sScaleBarUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScaleBarUnit, Members: &mScaleBarUnit, Type: smithy.ShapeTypeEnum})
+var s_SensitiveFloat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensitiveFloat, Traits: &t7, Type: smithy.ShapeTypeFloat})
+var s_SensitiveInteger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensitiveInteger, Traits: &t7, Type: smithy.ShapeTypeInteger})
+var s_SensitiveString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensitiveString, Traits: &t7, Type: smithy.ShapeTypeString})
+var sStaticMapStyle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStaticMapStyle, Members: &mStaticMapStyle, Type: smithy.ShapeTypeEnum})
+var sTerrain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTerrain, Members: &mTerrain, Type: smithy.ShapeTypeEnum})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t10, Type: smithy.ShapeTypeStructure})
+var sTileAdditionalFeature = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTileAdditionalFeature, Members: &mTileAdditionalFeature, Type: smithy.ShapeTypeEnum})
+var s_TileAdditionalFeatureList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TileAdditionalFeatureList, Members: &m_TileAdditionalFeatureList, Type: smithy.ShapeTypeList})
+var s_Tileset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tileset, Type: smithy.ShapeTypeString})
+var sTraffic = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTraffic, Members: &mTraffic, Type: smithy.ShapeTypeEnum})
+var sTravelMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTravelMode, Members: &mTravelMode, Type: smithy.ShapeTypeEnum})
+var s_TravelModeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TravelModeList, Members: &m_TravelModeList, Type: smithy.ShapeTypeList})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t11, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure})
+var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList})
+var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum})
+var sVariant = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVariant, Members: &mVariant, Type: smithy.ShapeTypeEnum})
+var sGetGlyphsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetGlyphsRequest, Members: &mGetGlyphsRequest, Type: smithy.ShapeTypeStructure})
+var sGetGlyphsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetGlyphsResponse, Members: &mGetGlyphsResponse, Type: smithy.ShapeTypeStructure})
+var sGetSpritesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSpritesRequest, Members: &mGetSpritesRequest, Type: smithy.ShapeTypeStructure})
+var sGetSpritesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSpritesResponse, Members: &mGetSpritesResponse, Type: smithy.ShapeTypeStructure})
+var sGetStaticMapRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetStaticMapRequest, Members: &mGetStaticMapRequest, Type: smithy.ShapeTypeStructure})
+var sGetStaticMapResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetStaticMapResponse, Members: &mGetStaticMapResponse, Type: smithy.ShapeTypeStructure})
+var sGetStyleDescriptorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetStyleDescriptorRequest, Members: &mGetStyleDescriptorRequest, Type: smithy.ShapeTypeStructure})
+var sGetStyleDescriptorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetStyleDescriptorResponse, Members: &mGetStyleDescriptorResponse, Type: smithy.ShapeTypeStructure})
+var sGetTileRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTileRequest, Members: &mGetTileRequest, Type: smithy.ShapeTypeStructure})
+var sGetTileResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTileResponse, Members: &mGetTileResponse, Type: smithy.ShapeTypeStructure})
+
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Traits: &t6, Type: smithy.ShapeTypeString})
+var sBuildings_BUILDINGS_3D = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUILDINGS_3D", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sColorScheme_LIGHT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LIGHT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sColorScheme_DARK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DARK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sContourDensity_LOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sContourDensity_MEDIUM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEDIUM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sContourDensity_HIGH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HIGH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Traits: &t6, Type: smithy.ShapeTypeString})
+var sLabelSize_SMALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SMALL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLabelSize_LARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMapFeatureMode_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMapFeatureMode_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMapStyle_STANDARD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STANDARD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMapStyle_MONOCHROME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MONOCHROME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMapStyle_HYBRID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HYBRID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMapStyle_SATELLITE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SATELLITE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPoiCategory_FOOD_AND_DRINK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FOOD_AND_DRINK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPoiCategory_ENTERTAINMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENTERTAINMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPoiCategory_SIGHTS_AND_MUSEUMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SIGHTS_AND_MUSEUMS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPoiCategory_TRANSPORTATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRANSPORTATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPoiCategory_ACCOMMODATIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCOMMODATIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPoiCategory_LEISURE_AND_OUTDOOR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LEISURE_AND_OUTDOOR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPoiCategory_SHOPPING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHOPPING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPoiCategory_BUSINESS_AND_SERVICES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUSINESS_AND_SERVICES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPoiCategory_FACILITIES_AND_BUILDINGS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FACILITIES_AND_BUILDINGS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_PoiCategoryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPoiCategory, Members: &mPoiCategory, Type: smithy.ShapeTypeEnum})
+var sPoiDensity_OFF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OFF", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPoiDensity_VERY_SPARSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VERY_SPARSE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPoiDensity_SPARSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SPARSE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPoiDensity_DEFAULT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEFAULT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPoiDensity_DENSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DENSE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPoiDensity_VERY_DENSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VERY_DENSE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Traits: &t6, Type: smithy.ShapeTypeString})
+var sScaleBarUnit_KILOMETERS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KILOMETERS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScaleBarUnit_KILOMETERS_MILES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KILOMETERS_MILES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScaleBarUnit_MILES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MILES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScaleBarUnit_MILES_KILOMETERS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MILES_KILOMETERS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStaticMapStyle_SATELLITE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SATELLITE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStaticMapStyle_STANDARD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STANDARD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTerrain_HILLSHADE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HILLSHADE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTerrain_TERRAIN_3D = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TERRAIN_3D", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Traits: &t6, Type: smithy.ShapeTypeString})
+var sTileAdditionalFeature_CONTOUR_LINES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTOUR_LINES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTileAdditionalFeature_HILLSHADE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HILLSHADE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTileAdditionalFeature_LOGISTICS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOGISTICS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTileAdditionalFeature_TRANSIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRANSIT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_TileAdditionalFeatureList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTileAdditionalFeature, Members: &mTileAdditionalFeature, Type: smithy.ShapeTypeEnum})
+var sTraffic_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTraffic_CONGESTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONGESTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTravelMode_TRANSIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRANSIT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTravelMode_TRUCK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRUCK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_TravelModeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTravelMode, Members: &mTravelMode, Type: smithy.ShapeTypeEnum})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Traits: &t6, Type: smithy.ShapeTypeString})
+var sValidationException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Traits: &t12, Type: smithy.ShapeTypeEnum})
+var sValidationException_FieldList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FieldList", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Traits: &t13, Type: smithy.ShapeTypeList})
+var sValidationExceptionField_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Traits: &t14, Type: smithy.ShapeTypeString})
+var sValidationExceptionField_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Traits: &t6, Type: smithy.ShapeTypeString})
+var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionReason_UNKNOWN_OPERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN_OPERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionReason_MISSING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISSING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionReason_CANNOT_PARSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANNOT_PARSE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionReason_FIELD_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIELD_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionReason_OTHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionReason_UNKNOWN_FIELD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN_FIELD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVariant_DEFAULT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEFAULT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sGetGlyphsRequest_FontStack = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FontStack", ID: &pString, Traits: &t15, Type: smithy.ShapeTypeString})
+var sGetGlyphsRequest_FontUnicodeRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FontUnicodeRange", ID: &pString, Traits: &t15, Type: smithy.ShapeTypeString})
+var sGetGlyphsResponse_Blob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Blob", ID: &pBlob, Traits: &t16, Type: smithy.ShapeTypeBlob})
+var sGetGlyphsResponse_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentType", ID: &pString, Traits: &t17, Type: smithy.ShapeTypeString})
+var sGetGlyphsResponse_CacheControl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CacheControl", ID: &pString, Traits: &t18, Type: smithy.ShapeTypeString})
+var sGetGlyphsResponse_ETag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ETag", ID: &pString, Traits: &t19, Type: smithy.ShapeTypeString})
+var sGetSpritesRequest_FileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileName", ID: &pString, Traits: &t15, Type: smithy.ShapeTypeString})
+var sGetSpritesRequest_Style = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Style", ID: &iMapStyle, Members: &mMapStyle, Traits: &t15, Type: smithy.ShapeTypeEnum})
+var sGetSpritesRequest_ColorScheme = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ColorScheme", ID: &iColorScheme, Members: &mColorScheme, Traits: &t15, Type: smithy.ShapeTypeEnum})
+var sGetSpritesRequest_Variant = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Variant", ID: &iVariant, Members: &mVariant, Traits: &t15, Type: smithy.ShapeTypeEnum})
+var sGetSpritesResponse_Blob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Blob", ID: &pBlob, Traits: &t16, Type: smithy.ShapeTypeBlob})
+var sGetSpritesResponse_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentType", ID: &pString, Traits: &t17, Type: smithy.ShapeTypeString})
+var sGetSpritesResponse_CacheControl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CacheControl", ID: &pString, Traits: &t18, Type: smithy.ShapeTypeString})
+var sGetSpritesResponse_ETag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ETag", ID: &pString, Traits: &t19, Type: smithy.ShapeTypeString})
+var sGetStaticMapRequest_BoundingBox = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BoundingBox", ID: &i_PositionListString, Traits: &t20, Type: smithy.ShapeTypeString})
+var sGetStaticMapRequest_BoundedPositions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BoundedPositions", ID: &i_PositionListString, Traits: &t21, Type: smithy.ShapeTypeString})
+var sGetStaticMapRequest_Center = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Center", ID: &i_PositionString, Traits: &t22, Type: smithy.ShapeTypeString})
+var sGetStaticMapRequest_ColorScheme = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ColorScheme", ID: &iColorScheme, Members: &mColorScheme, Traits: &t23, Type: smithy.ShapeTypeEnum})
+var sGetStaticMapRequest_CompactOverlay = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompactOverlay", ID: &i_CompactOverlay, Traits: &t24, Type: smithy.ShapeTypeString})
+var sGetStaticMapRequest_CropLabels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CropLabels", ID: &pBoolean, Traits: &t25, Type: smithy.ShapeTypeBoolean})
+var sGetStaticMapRequest_GeoJsonOverlay = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GeoJsonOverlay", ID: &i_GeoJsonOverlay, Traits: &t26, Type: smithy.ShapeTypeString})
+var sGetStaticMapRequest_Height = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Height", ID: &i_SensitiveInteger, Traits: &t27, Type: smithy.ShapeTypeInteger})
+var sGetStaticMapRequest_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_ApiKey, Traits: &t28, Type: smithy.ShapeTypeString})
+var sGetStaticMapRequest_LabelSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LabelSize", ID: &iLabelSize, Members: &mLabelSize, Traits: &t29, Type: smithy.ShapeTypeEnum})
+var sGetStaticMapRequest_Language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Language", ID: &i_LanguageTag, Traits: &t30, Type: smithy.ShapeTypeString})
+var sGetStaticMapRequest_Padding = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Padding", ID: &i_SensitiveInteger, Traits: &t31, Type: smithy.ShapeTypeInteger})
+var sGetStaticMapRequest_PoliticalView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoliticalView", ID: &i_CountryCode, Traits: &t32, Type: smithy.ShapeTypeString})
+var sGetStaticMapRequest_PointsOfInterests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PointsOfInterests", ID: &iMapFeatureMode, Members: &mMapFeatureMode, Traits: &t33, Type: smithy.ShapeTypeEnum})
+var sGetStaticMapRequest_Radius = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Radius", ID: &i_DistanceMeters, Traits: &t34, Type: smithy.ShapeTypeLong})
+var sGetStaticMapRequest_FileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileName", ID: &pString, Traits: &t15, Type: smithy.ShapeTypeString})
+var sGetStaticMapRequest_ScaleBarUnit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScaleBarUnit", ID: &iScaleBarUnit, Members: &mScaleBarUnit, Traits: &t35, Type: smithy.ShapeTypeEnum})
+var sGetStaticMapRequest_Style = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Style", ID: &iStaticMapStyle, Members: &mStaticMapStyle, Traits: &t36, Type: smithy.ShapeTypeEnum})
+var sGetStaticMapRequest_Width = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Width", ID: &i_SensitiveInteger, Traits: &t37, Type: smithy.ShapeTypeInteger})
+var sGetStaticMapRequest_Zoom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Zoom", ID: &i_SensitiveFloat, Traits: &t38, Type: smithy.ShapeTypeFloat})
+var sGetStaticMapResponse_Blob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Blob", ID: &pBlob, Traits: &t16, Type: smithy.ShapeTypeBlob})
+var sGetStaticMapResponse_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentType", ID: &pString, Traits: &t17, Type: smithy.ShapeTypeString})
+var sGetStaticMapResponse_CacheControl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CacheControl", ID: &pString, Traits: &t18, Type: smithy.ShapeTypeString})
+var sGetStaticMapResponse_ETag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ETag", ID: &pString, Traits: &t19, Type: smithy.ShapeTypeString})
+var sGetStaticMapResponse_PricingBucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PricingBucket", ID: &pString, Traits: &t39, Type: smithy.ShapeTypeString})
+var sGetStyleDescriptorRequest_Style = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Style", ID: &iMapStyle, Members: &mMapStyle, Traits: &t15, Type: smithy.ShapeTypeEnum})
+var sGetStyleDescriptorRequest_ColorScheme = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ColorScheme", ID: &iColorScheme, Members: &mColorScheme, Traits: &t23, Type: smithy.ShapeTypeEnum})
+var sGetStyleDescriptorRequest_PoliticalView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoliticalView", ID: &i_CountryCode, Traits: &t32, Type: smithy.ShapeTypeString})
+var sGetStyleDescriptorRequest_Terrain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Terrain", ID: &iTerrain, Members: &mTerrain, Traits: &t40, Type: smithy.ShapeTypeEnum})
+var sGetStyleDescriptorRequest_ContourDensity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContourDensity", ID: &iContourDensity, Members: &mContourDensity, Traits: &t41, Type: smithy.ShapeTypeEnum})
+var sGetStyleDescriptorRequest_Traffic = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Traffic", ID: &iTraffic, Members: &mTraffic, Traits: &t42, Type: smithy.ShapeTypeEnum})
+var sGetStyleDescriptorRequest_TravelModes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TravelModes", ID: &i_TravelModeList, Members: &m_TravelModeList, Traits: &t43, Type: smithy.ShapeTypeList})
+var sGetStyleDescriptorRequest_Buildings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Buildings", ID: &iBuildings, Members: &mBuildings, Traits: &t44, Type: smithy.ShapeTypeEnum})
+var sGetStyleDescriptorRequest_PoiDensity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoiDensity", ID: &iPoiDensity, Members: &mPoiDensity, Traits: &t45, Type: smithy.ShapeTypeEnum})
+var sGetStyleDescriptorRequest_PoiCategories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoiCategories", ID: &i_PoiCategoryList, Members: &m_PoiCategoryList, Traits: &t46, Type: smithy.ShapeTypeList})
+var sGetStyleDescriptorRequest_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_ApiKey, Traits: &t28, Type: smithy.ShapeTypeString})
+var sGetStyleDescriptorResponse_Blob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Blob", ID: &pBlob, Traits: &t16, Type: smithy.ShapeTypeBlob})
+var sGetStyleDescriptorResponse_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentType", ID: &pString, Traits: &t17, Type: smithy.ShapeTypeString})
+var sGetStyleDescriptorResponse_CacheControl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CacheControl", ID: &pString, Traits: &t18, Type: smithy.ShapeTypeString})
+var sGetStyleDescriptorResponse_ETag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ETag", ID: &pString, Traits: &t19, Type: smithy.ShapeTypeString})
+var sGetTileRequest_AdditionalFeatures = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalFeatures", ID: &i_TileAdditionalFeatureList, Members: &m_TileAdditionalFeatureList, Traits: &t47, Type: smithy.ShapeTypeList})
+var sGetTileRequest_Tileset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tileset", ID: &i_Tileset, Traits: &t15, Type: smithy.ShapeTypeString})
+var sGetTileRequest_Z = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Z", ID: &i_SensitiveString, Traits: &t48, Type: smithy.ShapeTypeString})
+var sGetTileRequest_X = smithy.NewStaticSchema(smithy.StaticSchema{Member: "X", ID: &i_SensitiveString, Traits: &t48, Type: smithy.ShapeTypeString})
+var sGetTileRequest_Y = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Y", ID: &i_SensitiveString, Traits: &t48, Type: smithy.ShapeTypeString})
+var sGetTileRequest_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_ApiKey, Traits: &t28, Type: smithy.ShapeTypeString})
+var sGetTileResponse_Blob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Blob", ID: &pBlob, Traits: &t16, Type: smithy.ShapeTypeBlob})
+var sGetTileResponse_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentType", ID: &pString, Traits: &t17, Type: smithy.ShapeTypeString})
+var sGetTileResponse_CacheControl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CacheControl", ID: &pString, Traits: &t18, Type: smithy.ShapeTypeString})
+var sGetTileResponse_ETag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ETag", ID: &pString, Traits: &t19, Type: smithy.ShapeTypeString})
+var sGetTileResponse_PricingBucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PricingBucket", ID: &pString, Traits: &t39, Type: smithy.ShapeTypeString})
+
+var GetGlyphs = &sGetGlyphs
+
+var GetSprites = &sGetSprites
+
+var GetStaticMap = &sGetStaticMap
+
+var GetStyleDescriptor = &sGetStyleDescriptor
+
+var GetTile = &sGetTile
+
+var _MapsService = &s_MapsService
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_Message = &sAccessDeniedException_Message
+
+var _ApiKey = &s_ApiKey
+
+var Buildings = &sBuildings
+var Buildings_BUILDINGS_3D = &sBuildings_BUILDINGS_3D
+
+var ColorScheme = &sColorScheme
+var ColorScheme_LIGHT = &sColorScheme_LIGHT
+var ColorScheme_DARK = &sColorScheme_DARK
+
+var _CompactOverlay = &s_CompactOverlay
+
+var ContourDensity = &sContourDensity
+var ContourDensity_LOW = &sContourDensity_LOW
+var ContourDensity_MEDIUM = &sContourDensity_MEDIUM
+var ContourDensity_HIGH = &sContourDensity_HIGH
+
+var _CountryCode = &s_CountryCode
+
+var _DistanceMeters = &s_DistanceMeters
+
+var _GeoJsonOverlay = &s_GeoJsonOverlay
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_Message = &sInternalServerException_Message
+
+var LabelSize = &sLabelSize
+var LabelSize_SMALL = &sLabelSize_SMALL
+var LabelSize_LARGE = &sLabelSize_LARGE
+
+var _LanguageTag = &s_LanguageTag
+
+var MapFeatureMode = &sMapFeatureMode
+var MapFeatureMode_ENABLED = &sMapFeatureMode_ENABLED
+var MapFeatureMode_DISABLED = &sMapFeatureMode_DISABLED
+
+var MapStyle = &sMapStyle
+var MapStyle_STANDARD = &sMapStyle_STANDARD
+var MapStyle_MONOCHROME = &sMapStyle_MONOCHROME
+var MapStyle_HYBRID = &sMapStyle_HYBRID
+var MapStyle_SATELLITE = &sMapStyle_SATELLITE
+
+var PoiCategory = &sPoiCategory
+var PoiCategory_FOOD_AND_DRINK = &sPoiCategory_FOOD_AND_DRINK
+var PoiCategory_ENTERTAINMENT = &sPoiCategory_ENTERTAINMENT
+var PoiCategory_SIGHTS_AND_MUSEUMS = &sPoiCategory_SIGHTS_AND_MUSEUMS
+var PoiCategory_TRANSPORTATION = &sPoiCategory_TRANSPORTATION
+var PoiCategory_ACCOMMODATIONS = &sPoiCategory_ACCOMMODATIONS
+var PoiCategory_LEISURE_AND_OUTDOOR = &sPoiCategory_LEISURE_AND_OUTDOOR
+var PoiCategory_SHOPPING = &sPoiCategory_SHOPPING
+var PoiCategory_BUSINESS_AND_SERVICES = &sPoiCategory_BUSINESS_AND_SERVICES
+var PoiCategory_FACILITIES_AND_BUILDINGS = &sPoiCategory_FACILITIES_AND_BUILDINGS
+
+var _PoiCategoryList = &s_PoiCategoryList
+var _PoiCategoryList_member = &s_PoiCategoryList_member
+
+var PoiDensity = &sPoiDensity
+var PoiDensity_OFF = &sPoiDensity_OFF
+var PoiDensity_VERY_SPARSE = &sPoiDensity_VERY_SPARSE
+var PoiDensity_SPARSE = &sPoiDensity_SPARSE
+var PoiDensity_DEFAULT = &sPoiDensity_DEFAULT
+var PoiDensity_DENSE = &sPoiDensity_DENSE
+var PoiDensity_VERY_DENSE = &sPoiDensity_VERY_DENSE
+
+var _PositionListString = &s_PositionListString
+
+var _PositionString = &s_PositionString
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+
+var ScaleBarUnit = &sScaleBarUnit
+var ScaleBarUnit_KILOMETERS = &sScaleBarUnit_KILOMETERS
+var ScaleBarUnit_KILOMETERS_MILES = &sScaleBarUnit_KILOMETERS_MILES
+var ScaleBarUnit_MILES = &sScaleBarUnit_MILES
+var ScaleBarUnit_MILES_KILOMETERS = &sScaleBarUnit_MILES_KILOMETERS
+
+var _SensitiveFloat = &s_SensitiveFloat
+
+var _SensitiveInteger = &s_SensitiveInteger
+
+var _SensitiveString = &s_SensitiveString
+
+var StaticMapStyle = &sStaticMapStyle
+var StaticMapStyle_SATELLITE = &sStaticMapStyle_SATELLITE
+var StaticMapStyle_STANDARD = &sStaticMapStyle_STANDARD
+
+var Terrain = &sTerrain
+var Terrain_HILLSHADE = &sTerrain_HILLSHADE
+var Terrain_TERRAIN_3D = &sTerrain_TERRAIN_3D
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_Message = &sThrottlingException_Message
+
+var TileAdditionalFeature = &sTileAdditionalFeature
+var TileAdditionalFeature_CONTOUR_LINES = &sTileAdditionalFeature_CONTOUR_LINES
+var TileAdditionalFeature_HILLSHADE = &sTileAdditionalFeature_HILLSHADE
+var TileAdditionalFeature_LOGISTICS = &sTileAdditionalFeature_LOGISTICS
+var TileAdditionalFeature_TRANSIT = &sTileAdditionalFeature_TRANSIT
+
+var _TileAdditionalFeatureList = &s_TileAdditionalFeatureList
+var _TileAdditionalFeatureList_member = &s_TileAdditionalFeatureList_member
+
+var _Tileset = &s_Tileset
+
+var Traffic = &sTraffic
+var Traffic_ALL = &sTraffic_ALL
+var Traffic_CONGESTION = &sTraffic_CONGESTION
+
+var TravelMode = &sTravelMode
+var TravelMode_TRANSIT = &sTravelMode_TRANSIT
+var TravelMode_TRUCK = &sTravelMode_TRUCK
+
+var _TravelModeList = &s_TravelModeList
+var _TravelModeList_member = &s_TravelModeList_member
+
+var ValidationException = &sValidationException
+var ValidationException_Message = &sValidationException_Message
+var ValidationException_Reason = &sValidationException_Reason
+var ValidationException_FieldList = &sValidationException_FieldList
+
+var ValidationExceptionField = &sValidationExceptionField
+var ValidationExceptionField_Name = &sValidationExceptionField_Name
+var ValidationExceptionField_Message = &sValidationExceptionField_Message
+
+var _ValidationExceptionFieldList = &s_ValidationExceptionFieldList
+var _ValidationExceptionFieldList_member = &s_ValidationExceptionFieldList_member
+
+var ValidationExceptionReason = &sValidationExceptionReason
+var ValidationExceptionReason_UNKNOWN_OPERATION = &sValidationExceptionReason_UNKNOWN_OPERATION
+var ValidationExceptionReason_MISSING = &sValidationExceptionReason_MISSING
+var ValidationExceptionReason_CANNOT_PARSE = &sValidationExceptionReason_CANNOT_PARSE
+var ValidationExceptionReason_FIELD_VALIDATION_FAILED = &sValidationExceptionReason_FIELD_VALIDATION_FAILED
+var ValidationExceptionReason_OTHER = &sValidationExceptionReason_OTHER
+var ValidationExceptionReason_UNKNOWN_FIELD = &sValidationExceptionReason_UNKNOWN_FIELD
+
+var Variant = &sVariant
+var Variant_DEFAULT = &sVariant_DEFAULT
+
+var GetGlyphsRequest = &sGetGlyphsRequest
+var GetGlyphsRequest_FontStack = &sGetGlyphsRequest_FontStack
+var GetGlyphsRequest_FontUnicodeRange = &sGetGlyphsRequest_FontUnicodeRange
+
+var GetGlyphsResponse = &sGetGlyphsResponse
+var GetGlyphsResponse_Blob = &sGetGlyphsResponse_Blob
+var GetGlyphsResponse_ContentType = &sGetGlyphsResponse_ContentType
+var GetGlyphsResponse_CacheControl = &sGetGlyphsResponse_CacheControl
+var GetGlyphsResponse_ETag = &sGetGlyphsResponse_ETag
+
+var GetSpritesRequest = &sGetSpritesRequest
+var GetSpritesRequest_FileName = &sGetSpritesRequest_FileName
+var GetSpritesRequest_Style = &sGetSpritesRequest_Style
+var GetSpritesRequest_ColorScheme = &sGetSpritesRequest_ColorScheme
+var GetSpritesRequest_Variant = &sGetSpritesRequest_Variant
+
+var GetSpritesResponse = &sGetSpritesResponse
+var GetSpritesResponse_Blob = &sGetSpritesResponse_Blob
+var GetSpritesResponse_ContentType = &sGetSpritesResponse_ContentType
+var GetSpritesResponse_CacheControl = &sGetSpritesResponse_CacheControl
+var GetSpritesResponse_ETag = &sGetSpritesResponse_ETag
+
+var GetStaticMapRequest = &sGetStaticMapRequest
+var GetStaticMapRequest_BoundingBox = &sGetStaticMapRequest_BoundingBox
+var GetStaticMapRequest_BoundedPositions = &sGetStaticMapRequest_BoundedPositions
+var GetStaticMapRequest_Center = &sGetStaticMapRequest_Center
+var GetStaticMapRequest_ColorScheme = &sGetStaticMapRequest_ColorScheme
+var GetStaticMapRequest_CompactOverlay = &sGetStaticMapRequest_CompactOverlay
+var GetStaticMapRequest_CropLabels = &sGetStaticMapRequest_CropLabels
+var GetStaticMapRequest_GeoJsonOverlay = &sGetStaticMapRequest_GeoJsonOverlay
+var GetStaticMapRequest_Height = &sGetStaticMapRequest_Height
+var GetStaticMapRequest_Key = &sGetStaticMapRequest_Key
+var GetStaticMapRequest_LabelSize = &sGetStaticMapRequest_LabelSize
+var GetStaticMapRequest_Language = &sGetStaticMapRequest_Language
+var GetStaticMapRequest_Padding = &sGetStaticMapRequest_Padding
+var GetStaticMapRequest_PoliticalView = &sGetStaticMapRequest_PoliticalView
+var GetStaticMapRequest_PointsOfInterests = &sGetStaticMapRequest_PointsOfInterests
+var GetStaticMapRequest_Radius = &sGetStaticMapRequest_Radius
+var GetStaticMapRequest_FileName = &sGetStaticMapRequest_FileName
+var GetStaticMapRequest_ScaleBarUnit = &sGetStaticMapRequest_ScaleBarUnit
+var GetStaticMapRequest_Style = &sGetStaticMapRequest_Style
+var GetStaticMapRequest_Width = &sGetStaticMapRequest_Width
+var GetStaticMapRequest_Zoom = &sGetStaticMapRequest_Zoom
+
+var GetStaticMapResponse = &sGetStaticMapResponse
+var GetStaticMapResponse_Blob = &sGetStaticMapResponse_Blob
+var GetStaticMapResponse_ContentType = &sGetStaticMapResponse_ContentType
+var GetStaticMapResponse_CacheControl = &sGetStaticMapResponse_CacheControl
+var GetStaticMapResponse_ETag = &sGetStaticMapResponse_ETag
+var GetStaticMapResponse_PricingBucket = &sGetStaticMapResponse_PricingBucket
+
+var GetStyleDescriptorRequest = &sGetStyleDescriptorRequest
+var GetStyleDescriptorRequest_Style = &sGetStyleDescriptorRequest_Style
+var GetStyleDescriptorRequest_ColorScheme = &sGetStyleDescriptorRequest_ColorScheme
+var GetStyleDescriptorRequest_PoliticalView = &sGetStyleDescriptorRequest_PoliticalView
+var GetStyleDescriptorRequest_Terrain = &sGetStyleDescriptorRequest_Terrain
+var GetStyleDescriptorRequest_ContourDensity = &sGetStyleDescriptorRequest_ContourDensity
+var GetStyleDescriptorRequest_Traffic = &sGetStyleDescriptorRequest_Traffic
+var GetStyleDescriptorRequest_TravelModes = &sGetStyleDescriptorRequest_TravelModes
+var GetStyleDescriptorRequest_Buildings = &sGetStyleDescriptorRequest_Buildings
+var GetStyleDescriptorRequest_PoiDensity = &sGetStyleDescriptorRequest_PoiDensity
+var GetStyleDescriptorRequest_PoiCategories = &sGetStyleDescriptorRequest_PoiCategories
+var GetStyleDescriptorRequest_Key = &sGetStyleDescriptorRequest_Key
+
+var GetStyleDescriptorResponse = &sGetStyleDescriptorResponse
+var GetStyleDescriptorResponse_Blob = &sGetStyleDescriptorResponse_Blob
+var GetStyleDescriptorResponse_ContentType = &sGetStyleDescriptorResponse_ContentType
+var GetStyleDescriptorResponse_CacheControl = &sGetStyleDescriptorResponse_CacheControl
+var GetStyleDescriptorResponse_ETag = &sGetStyleDescriptorResponse_ETag
+
+var GetTileRequest = &sGetTileRequest
+var GetTileRequest_AdditionalFeatures = &sGetTileRequest_AdditionalFeatures
+var GetTileRequest_Tileset = &sGetTileRequest_Tileset
+var GetTileRequest_Z = &sGetTileRequest_Z
+var GetTileRequest_X = &sGetTileRequest_X
+var GetTileRequest_Y = &sGetTileRequest_Y
+var GetTileRequest_Key = &sGetTileRequest_Key
+
+var GetTileResponse = &sGetTileResponse
+var GetTileResponse_Blob = &sGetTileResponse_Blob
+var GetTileResponse_ContentType = &sGetTileResponse_ContentType
+var GetTileResponse_CacheControl = &sGetTileResponse_CacheControl
+var GetTileResponse_ETag = &sGetTileResponse_ETag
+var GetTileResponse_PricingBucket = &sGetTileResponse_PricingBucket
+
+var MapsService = &smithy.ServiceSchema{Schema: &s_MapsService, Version: "2020-11-19"}

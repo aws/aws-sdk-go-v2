@@ -4,4259 +4,2904 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CountClosedWorkflowExecutions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "CountClosedWorkflowExecutions",
-}, smithy.ShapeTypeOperation, 0)
-
-var CountOpenWorkflowExecutions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "CountOpenWorkflowExecutions",
-}, smithy.ShapeTypeOperation, 0)
-
-var CountPendingActivityTasks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "CountPendingActivityTasks",
-}, smithy.ShapeTypeOperation, 0)
-
-var CountPendingDecisionTasks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "CountPendingDecisionTasks",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteActivityType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "DeleteActivityType",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteWorkflowType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "DeleteWorkflowType",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeprecateActivityType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "DeprecateActivityType",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeprecateDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "DeprecateDomain",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeprecateWorkflowType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "DeprecateWorkflowType",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeActivityType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "DescribeActivityType",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "DescribeDomain",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeWorkflowExecution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "DescribeWorkflowExecution",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeWorkflowType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "DescribeWorkflowType",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetWorkflowExecutionHistory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "GetWorkflowExecutionHistory",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListActivityTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ListActivityTypes",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListClosedWorkflowExecutions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ListClosedWorkflowExecutions",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListDomains = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ListDomains",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListOpenWorkflowExecutions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ListOpenWorkflowExecutions",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListWorkflowTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ListWorkflowTypes",
-}, smithy.ShapeTypeOperation, 0)
-
-var PollForActivityTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "PollForActivityTask",
-}, smithy.ShapeTypeOperation, 0)
-
-var PollForDecisionTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "PollForDecisionTask",
-}, smithy.ShapeTypeOperation, 0)
-
-var RecordActivityTaskHeartbeat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "RecordActivityTaskHeartbeat",
-}, smithy.ShapeTypeOperation, 0)
-
-var RegisterActivityType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "RegisterActivityType",
-}, smithy.ShapeTypeOperation, 0)
-
-var RegisterDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "RegisterDomain",
-}, smithy.ShapeTypeOperation, 0)
-
-var RegisterWorkflowType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "RegisterWorkflowType",
-}, smithy.ShapeTypeOperation, 0)
-
-var RequestCancelWorkflowExecution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "RequestCancelWorkflowExecution",
-}, smithy.ShapeTypeOperation, 0)
-
-var RespondActivityTaskCanceled = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "RespondActivityTaskCanceled",
-}, smithy.ShapeTypeOperation, 0)
-
-var RespondActivityTaskCompleted = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "RespondActivityTaskCompleted",
-}, smithy.ShapeTypeOperation, 0)
-
-var RespondActivityTaskFailed = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "RespondActivityTaskFailed",
-}, smithy.ShapeTypeOperation, 0)
-
-var RespondDecisionTaskCompleted = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "RespondDecisionTaskCompleted",
-}, smithy.ShapeTypeOperation, 0)
-
-var SignalWorkflowExecution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "SignalWorkflowExecution",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartWorkflowExecution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "StartWorkflowExecution",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var TerminateWorkflowExecution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "TerminateWorkflowExecution",
-}, smithy.ShapeTypeOperation, 0)
-
-var UndeprecateActivityType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "UndeprecateActivityType",
-}, smithy.ShapeTypeOperation, 0)
-
-var UndeprecateDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "UndeprecateDomain",
-}, smithy.ShapeTypeOperation, 0)
-
-var UndeprecateWorkflowType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "UndeprecateWorkflowType",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var _SimpleWorkflowService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "SimpleWorkflowService",
-}, smithy.ShapeTypeService, 0, &smithytraits.XMLNamespace{URI: "http://swf.amazonaws.com/doc/2012-01-25"})
-
-var SimpleWorkflowService = smithy.NewServiceSchema(_SimpleWorkflowService, "2012-01-25")
-
-var _ActivityId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ActivityId",
-}, smithy.ShapeTypeString, 0)
-
-var ActivityTaskCanceledEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ActivityTaskCanceledEventAttributes",
-}, smithy.ShapeTypeStructure, 4)
-var ActivityTaskCanceledEventAttributes_details *smithy.Schema
-
-var ActivityTaskCanceledEventAttributes_scheduledEventId *smithy.Schema
-
-var ActivityTaskCanceledEventAttributes_startedEventId *smithy.Schema
-
-var ActivityTaskCanceledEventAttributes_latestCancelRequestedEventId *smithy.Schema
-
-var ActivityTaskCancelRequestedEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ActivityTaskCancelRequestedEventAttributes",
-}, smithy.ShapeTypeStructure, 2)
-var ActivityTaskCancelRequestedEventAttributes_decisionTaskCompletedEventId *smithy.Schema
-
-var ActivityTaskCancelRequestedEventAttributes_activityId *smithy.Schema
-
-var ActivityTaskCompletedEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ActivityTaskCompletedEventAttributes",
-}, smithy.ShapeTypeStructure, 3)
-var ActivityTaskCompletedEventAttributes_result *smithy.Schema
-
-var ActivityTaskCompletedEventAttributes_scheduledEventId *smithy.Schema
-
-var ActivityTaskCompletedEventAttributes_startedEventId *smithy.Schema
-
-var ActivityTaskFailedEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ActivityTaskFailedEventAttributes",
-}, smithy.ShapeTypeStructure, 4)
-var ActivityTaskFailedEventAttributes_reason *smithy.Schema
-
-var ActivityTaskFailedEventAttributes_details *smithy.Schema
-
-var ActivityTaskFailedEventAttributes_scheduledEventId *smithy.Schema
-
-var ActivityTaskFailedEventAttributes_startedEventId *smithy.Schema
-
-var ActivityTaskScheduledEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ActivityTaskScheduledEventAttributes",
-}, smithy.ShapeTypeStructure, 11)
-var ActivityTaskScheduledEventAttributes_activityType *smithy.Schema
-
-var ActivityTaskScheduledEventAttributes_activityId *smithy.Schema
-
-var ActivityTaskScheduledEventAttributes_input *smithy.Schema
-
-var ActivityTaskScheduledEventAttributes_control *smithy.Schema
-
-var ActivityTaskScheduledEventAttributes_scheduleToStartTimeout *smithy.Schema
-
-var ActivityTaskScheduledEventAttributes_scheduleToCloseTimeout *smithy.Schema
-
-var ActivityTaskScheduledEventAttributes_startToCloseTimeout *smithy.Schema
-
-var ActivityTaskScheduledEventAttributes_taskList *smithy.Schema
-
-var ActivityTaskScheduledEventAttributes_taskPriority *smithy.Schema
-
-var ActivityTaskScheduledEventAttributes_decisionTaskCompletedEventId *smithy.Schema
-
-var ActivityTaskScheduledEventAttributes_heartbeatTimeout *smithy.Schema
-
-var ActivityTaskStartedEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ActivityTaskStartedEventAttributes",
-}, smithy.ShapeTypeStructure, 2)
-var ActivityTaskStartedEventAttributes_identity *smithy.Schema
-
-var ActivityTaskStartedEventAttributes_scheduledEventId *smithy.Schema
-
-var ActivityTaskTimedOutEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ActivityTaskTimedOutEventAttributes",
-}, smithy.ShapeTypeStructure, 4)
-var ActivityTaskTimedOutEventAttributes_timeoutType *smithy.Schema
-
-var ActivityTaskTimedOutEventAttributes_scheduledEventId *smithy.Schema
-
-var ActivityTaskTimedOutEventAttributes_startedEventId *smithy.Schema
-
-var ActivityTaskTimedOutEventAttributes_details *smithy.Schema
-
-var ActivityTaskTimeoutType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ActivityTaskTimeoutType",
-}, smithy.ShapeTypeEnum, 4)
-var ActivityTaskTimeoutType_START_TO_CLOSE *smithy.Schema
-
-var ActivityTaskTimeoutType_SCHEDULE_TO_START *smithy.Schema
-
-var ActivityTaskTimeoutType_SCHEDULE_TO_CLOSE *smithy.Schema
-
-var ActivityTaskTimeoutType_HEARTBEAT *smithy.Schema
-
-var ActivityType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ActivityType",
-}, smithy.ShapeTypeStructure, 2)
-var ActivityType_name *smithy.Schema
-
-var ActivityType_version *smithy.Schema
-
-var ActivityTypeConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ActivityTypeConfiguration",
-}, smithy.ShapeTypeStructure, 6)
-var ActivityTypeConfiguration_defaultTaskStartToCloseTimeout *smithy.Schema
-
-var ActivityTypeConfiguration_defaultTaskHeartbeatTimeout *smithy.Schema
-
-var ActivityTypeConfiguration_defaultTaskList *smithy.Schema
-
-var ActivityTypeConfiguration_defaultTaskPriority *smithy.Schema
-
-var ActivityTypeConfiguration_defaultTaskScheduleToStartTimeout *smithy.Schema
-
-var ActivityTypeConfiguration_defaultTaskScheduleToCloseTimeout *smithy.Schema
-
-var ActivityTypeInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ActivityTypeInfo",
-}, smithy.ShapeTypeStructure, 5)
-var ActivityTypeInfo_activityType *smithy.Schema
-
-var ActivityTypeInfo_status *smithy.Schema
-
-var ActivityTypeInfo_description *smithy.Schema
-
-var ActivityTypeInfo_creationDate *smithy.Schema
-
-var ActivityTypeInfo_deprecationDate *smithy.Schema
-
-var _ActivityTypeInfoList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ActivityTypeInfoList",
-}, smithy.ShapeTypeList, 1)
-var _ActivityTypeInfoList_member *smithy.Schema
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var _Canceled = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "Canceled",
-}, smithy.ShapeTypeBoolean, 0)
-
-var CancelTimerDecisionAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "CancelTimerDecisionAttributes",
-}, smithy.ShapeTypeStructure, 1)
-var CancelTimerDecisionAttributes_timerId *smithy.Schema
-
-var CancelTimerFailedCause = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "CancelTimerFailedCause",
-}, smithy.ShapeTypeEnum, 2)
-var CancelTimerFailedCause_TIMER_ID_UNKNOWN *smithy.Schema
-
-var CancelTimerFailedCause_OPERATION_NOT_PERMITTED *smithy.Schema
-
-var CancelTimerFailedEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "CancelTimerFailedEventAttributes",
-}, smithy.ShapeTypeStructure, 3)
-var CancelTimerFailedEventAttributes_timerId *smithy.Schema
-
-var CancelTimerFailedEventAttributes_cause *smithy.Schema
-
-var CancelTimerFailedEventAttributes_decisionTaskCompletedEventId *smithy.Schema
-
-var CancelWorkflowExecutionDecisionAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "CancelWorkflowExecutionDecisionAttributes",
-}, smithy.ShapeTypeStructure, 1)
-var CancelWorkflowExecutionDecisionAttributes_details *smithy.Schema
-
-var CancelWorkflowExecutionFailedCause = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "CancelWorkflowExecutionFailedCause",
-}, smithy.ShapeTypeEnum, 2)
-var CancelWorkflowExecutionFailedCause_UNHANDLED_DECISION *smithy.Schema
-
-var CancelWorkflowExecutionFailedCause_OPERATION_NOT_PERMITTED *smithy.Schema
-
-var CancelWorkflowExecutionFailedEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "CancelWorkflowExecutionFailedEventAttributes",
-}, smithy.ShapeTypeStructure, 2)
-var CancelWorkflowExecutionFailedEventAttributes_cause *smithy.Schema
-
-var CancelWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId *smithy.Schema
-
-var _CauseMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "CauseMessage",
-}, smithy.ShapeTypeString, 0)
-
-var ChildPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ChildPolicy",
-}, smithy.ShapeTypeEnum, 3)
-var ChildPolicy_TERMINATE *smithy.Schema
-
-var ChildPolicy_REQUEST_CANCEL *smithy.Schema
-
-var ChildPolicy_ABANDON *smithy.Schema
-
-var ChildWorkflowExecutionCanceledEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ChildWorkflowExecutionCanceledEventAttributes",
-}, smithy.ShapeTypeStructure, 5)
-var ChildWorkflowExecutionCanceledEventAttributes_workflowExecution *smithy.Schema
-
-var ChildWorkflowExecutionCanceledEventAttributes_workflowType *smithy.Schema
-
-var ChildWorkflowExecutionCanceledEventAttributes_details *smithy.Schema
-
-var ChildWorkflowExecutionCanceledEventAttributes_initiatedEventId *smithy.Schema
-
-var ChildWorkflowExecutionCanceledEventAttributes_startedEventId *smithy.Schema
-
-var ChildWorkflowExecutionCompletedEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ChildWorkflowExecutionCompletedEventAttributes",
-}, smithy.ShapeTypeStructure, 5)
-var ChildWorkflowExecutionCompletedEventAttributes_workflowExecution *smithy.Schema
-
-var ChildWorkflowExecutionCompletedEventAttributes_workflowType *smithy.Schema
-
-var ChildWorkflowExecutionCompletedEventAttributes_result *smithy.Schema
-
-var ChildWorkflowExecutionCompletedEventAttributes_initiatedEventId *smithy.Schema
-
-var ChildWorkflowExecutionCompletedEventAttributes_startedEventId *smithy.Schema
-
-var ChildWorkflowExecutionFailedEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ChildWorkflowExecutionFailedEventAttributes",
-}, smithy.ShapeTypeStructure, 6)
-var ChildWorkflowExecutionFailedEventAttributes_workflowExecution *smithy.Schema
-
-var ChildWorkflowExecutionFailedEventAttributes_workflowType *smithy.Schema
-
-var ChildWorkflowExecutionFailedEventAttributes_reason *smithy.Schema
-
-var ChildWorkflowExecutionFailedEventAttributes_details *smithy.Schema
-
-var ChildWorkflowExecutionFailedEventAttributes_initiatedEventId *smithy.Schema
-
-var ChildWorkflowExecutionFailedEventAttributes_startedEventId *smithy.Schema
-
-var ChildWorkflowExecutionStartedEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ChildWorkflowExecutionStartedEventAttributes",
-}, smithy.ShapeTypeStructure, 3)
-var ChildWorkflowExecutionStartedEventAttributes_workflowExecution *smithy.Schema
-
-var ChildWorkflowExecutionStartedEventAttributes_workflowType *smithy.Schema
-
-var ChildWorkflowExecutionStartedEventAttributes_initiatedEventId *smithy.Schema
-
-var ChildWorkflowExecutionTerminatedEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ChildWorkflowExecutionTerminatedEventAttributes",
-}, smithy.ShapeTypeStructure, 4)
-var ChildWorkflowExecutionTerminatedEventAttributes_workflowExecution *smithy.Schema
-
-var ChildWorkflowExecutionTerminatedEventAttributes_workflowType *smithy.Schema
-
-var ChildWorkflowExecutionTerminatedEventAttributes_initiatedEventId *smithy.Schema
-
-var ChildWorkflowExecutionTerminatedEventAttributes_startedEventId *smithy.Schema
-
-var ChildWorkflowExecutionTimedOutEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ChildWorkflowExecutionTimedOutEventAttributes",
-}, smithy.ShapeTypeStructure, 5)
-var ChildWorkflowExecutionTimedOutEventAttributes_workflowExecution *smithy.Schema
-
-var ChildWorkflowExecutionTimedOutEventAttributes_workflowType *smithy.Schema
-
-var ChildWorkflowExecutionTimedOutEventAttributes_timeoutType *smithy.Schema
-
-var ChildWorkflowExecutionTimedOutEventAttributes_initiatedEventId *smithy.Schema
-
-var ChildWorkflowExecutionTimedOutEventAttributes_startedEventId *smithy.Schema
-
-var CloseStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "CloseStatus",
-}, smithy.ShapeTypeEnum, 6)
-var CloseStatus_COMPLETED *smithy.Schema
-
-var CloseStatus_FAILED *smithy.Schema
-
-var CloseStatus_CANCELED *smithy.Schema
-
-var CloseStatus_TERMINATED *smithy.Schema
-
-var CloseStatus_CONTINUED_AS_NEW *smithy.Schema
-
-var CloseStatus_TIMED_OUT *smithy.Schema
-
-var CloseStatusFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "CloseStatusFilter",
-}, smithy.ShapeTypeStructure, 1)
-var CloseStatusFilter_status *smithy.Schema
-
-var CompleteWorkflowExecutionDecisionAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "CompleteWorkflowExecutionDecisionAttributes",
-}, smithy.ShapeTypeStructure, 1)
-var CompleteWorkflowExecutionDecisionAttributes_result *smithy.Schema
-
-var CompleteWorkflowExecutionFailedCause = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "CompleteWorkflowExecutionFailedCause",
-}, smithy.ShapeTypeEnum, 2)
-var CompleteWorkflowExecutionFailedCause_UNHANDLED_DECISION *smithy.Schema
-
-var CompleteWorkflowExecutionFailedCause_OPERATION_NOT_PERMITTED *smithy.Schema
-
-var CompleteWorkflowExecutionFailedEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "CompleteWorkflowExecutionFailedEventAttributes",
-}, smithy.ShapeTypeStructure, 2)
-var CompleteWorkflowExecutionFailedEventAttributes_cause *smithy.Schema
-
-var CompleteWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId *smithy.Schema
-
-var ContinueAsNewWorkflowExecutionDecisionAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ContinueAsNewWorkflowExecutionDecisionAttributes",
-}, smithy.ShapeTypeStructure, 9)
-var ContinueAsNewWorkflowExecutionDecisionAttributes_input *smithy.Schema
-
-var ContinueAsNewWorkflowExecutionDecisionAttributes_executionStartToCloseTimeout *smithy.Schema
-
-var ContinueAsNewWorkflowExecutionDecisionAttributes_taskList *smithy.Schema
-
-var ContinueAsNewWorkflowExecutionDecisionAttributes_taskPriority *smithy.Schema
-
-var ContinueAsNewWorkflowExecutionDecisionAttributes_taskStartToCloseTimeout *smithy.Schema
-
-var ContinueAsNewWorkflowExecutionDecisionAttributes_childPolicy *smithy.Schema
-
-var ContinueAsNewWorkflowExecutionDecisionAttributes_tagList *smithy.Schema
-
-var ContinueAsNewWorkflowExecutionDecisionAttributes_workflowTypeVersion *smithy.Schema
-
-var ContinueAsNewWorkflowExecutionDecisionAttributes_lambdaRole *smithy.Schema
-
-var ContinueAsNewWorkflowExecutionFailedCause = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ContinueAsNewWorkflowExecutionFailedCause",
-}, smithy.ShapeTypeEnum, 9)
-var ContinueAsNewWorkflowExecutionFailedCause_UNHANDLED_DECISION *smithy.Schema
-
-var ContinueAsNewWorkflowExecutionFailedCause_WORKFLOW_TYPE_DEPRECATED *smithy.Schema
-
-var ContinueAsNewWorkflowExecutionFailedCause_WORKFLOW_TYPE_DOES_NOT_EXIST *smithy.Schema
-
-var ContinueAsNewWorkflowExecutionFailedCause_DEFAULT_EXECUTION_START_TO_CLOSE_TIMEOUT_UNDEFINED *smithy.Schema
-
-var ContinueAsNewWorkflowExecutionFailedCause_DEFAULT_TASK_START_TO_CLOSE_TIMEOUT_UNDEFINED *smithy.Schema
-
-var ContinueAsNewWorkflowExecutionFailedCause_DEFAULT_TASK_LIST_UNDEFINED *smithy.Schema
-
-var ContinueAsNewWorkflowExecutionFailedCause_DEFAULT_CHILD_POLICY_UNDEFINED *smithy.Schema
-
-var ContinueAsNewWorkflowExecutionFailedCause_CONTINUE_AS_NEW_WORKFLOW_EXECUTION_RATE_EXCEEDED *smithy.Schema
-
-var ContinueAsNewWorkflowExecutionFailedCause_OPERATION_NOT_PERMITTED *smithy.Schema
-
-var ContinueAsNewWorkflowExecutionFailedEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ContinueAsNewWorkflowExecutionFailedEventAttributes",
-}, smithy.ShapeTypeStructure, 2)
-var ContinueAsNewWorkflowExecutionFailedEventAttributes_cause *smithy.Schema
-
-var ContinueAsNewWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId *smithy.Schema
-
-var _Count = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "Count",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Data = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "Data",
-}, smithy.ShapeTypeString, 0)
-
-var Decision = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "Decision",
-}, smithy.ShapeTypeStructure, 14)
-var Decision_decisionType *smithy.Schema
-
-var Decision_scheduleActivityTaskDecisionAttributes *smithy.Schema
-
-var Decision_requestCancelActivityTaskDecisionAttributes *smithy.Schema
-
-var Decision_completeWorkflowExecutionDecisionAttributes *smithy.Schema
-
-var Decision_failWorkflowExecutionDecisionAttributes *smithy.Schema
-
-var Decision_cancelWorkflowExecutionDecisionAttributes *smithy.Schema
-
-var Decision_continueAsNewWorkflowExecutionDecisionAttributes *smithy.Schema
-
-var Decision_recordMarkerDecisionAttributes *smithy.Schema
-
-var Decision_startTimerDecisionAttributes *smithy.Schema
-
-var Decision_cancelTimerDecisionAttributes *smithy.Schema
-
-var Decision_signalExternalWorkflowExecutionDecisionAttributes *smithy.Schema
-
-var Decision_requestCancelExternalWorkflowExecutionDecisionAttributes *smithy.Schema
-
-var Decision_startChildWorkflowExecutionDecisionAttributes *smithy.Schema
-
-var Decision_scheduleLambdaFunctionDecisionAttributes *smithy.Schema
-
-var _DecisionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "DecisionList",
-}, smithy.ShapeTypeList, 1)
-var _DecisionList_member *smithy.Schema
-
-var DecisionTaskCompletedEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "DecisionTaskCompletedEventAttributes",
-}, smithy.ShapeTypeStructure, 5)
-var DecisionTaskCompletedEventAttributes_executionContext *smithy.Schema
-
-var DecisionTaskCompletedEventAttributes_scheduledEventId *smithy.Schema
-
-var DecisionTaskCompletedEventAttributes_startedEventId *smithy.Schema
-
-var DecisionTaskCompletedEventAttributes_taskList *smithy.Schema
-
-var DecisionTaskCompletedEventAttributes_taskListScheduleToStartTimeout *smithy.Schema
-
-var DecisionTaskScheduledEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "DecisionTaskScheduledEventAttributes",
-}, smithy.ShapeTypeStructure, 4)
-var DecisionTaskScheduledEventAttributes_taskList *smithy.Schema
-
-var DecisionTaskScheduledEventAttributes_taskPriority *smithy.Schema
-
-var DecisionTaskScheduledEventAttributes_startToCloseTimeout *smithy.Schema
-
-var DecisionTaskScheduledEventAttributes_scheduleToStartTimeout *smithy.Schema
-
-var DecisionTaskStartedEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "DecisionTaskStartedEventAttributes",
-}, smithy.ShapeTypeStructure, 2)
-var DecisionTaskStartedEventAttributes_identity *smithy.Schema
-
-var DecisionTaskStartedEventAttributes_scheduledEventId *smithy.Schema
-
-var DecisionTaskTimedOutEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "DecisionTaskTimedOutEventAttributes",
-}, smithy.ShapeTypeStructure, 3)
-var DecisionTaskTimedOutEventAttributes_timeoutType *smithy.Schema
-
-var DecisionTaskTimedOutEventAttributes_scheduledEventId *smithy.Schema
-
-var DecisionTaskTimedOutEventAttributes_startedEventId *smithy.Schema
-
-var DecisionTaskTimeoutType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "DecisionTaskTimeoutType",
-}, smithy.ShapeTypeEnum, 2)
-var DecisionTaskTimeoutType_START_TO_CLOSE *smithy.Schema
-
-var DecisionTaskTimeoutType_SCHEDULE_TO_START *smithy.Schema
-
-var DecisionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "DecisionType",
-}, smithy.ShapeTypeEnum, 13)
-var DecisionType_ScheduleActivityTask *smithy.Schema
-
-var DecisionType_RequestCancelActivityTask *smithy.Schema
-
-var DecisionType_CompleteWorkflowExecution *smithy.Schema
-
-var DecisionType_FailWorkflowExecution *smithy.Schema
-
-var DecisionType_CancelWorkflowExecution *smithy.Schema
-
-var DecisionType_ContinueAsNewWorkflowExecution *smithy.Schema
-
-var DecisionType_RecordMarker *smithy.Schema
-
-var DecisionType_StartTimer *smithy.Schema
-
-var DecisionType_CancelTimer *smithy.Schema
-
-var DecisionType_SignalExternalWorkflowExecution *smithy.Schema
-
-var DecisionType_RequestCancelExternalWorkflowExecution *smithy.Schema
-
-var DecisionType_StartChildWorkflowExecution *smithy.Schema
-
-var DecisionType_ScheduleLambdaFunction *smithy.Schema
-
-var DefaultUndefinedFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "DefaultUndefinedFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var DefaultUndefinedFault_message *smithy.Schema
-
-var _Description = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "Description",
-}, smithy.ShapeTypeString, 0)
-
-var DomainAlreadyExistsFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "DomainAlreadyExistsFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var DomainAlreadyExistsFault_message *smithy.Schema
-
-var DomainConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "DomainConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var DomainConfiguration_workflowExecutionRetentionPeriodInDays *smithy.Schema
-
-var DomainDeprecatedFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "DomainDeprecatedFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var DomainDeprecatedFault_message *smithy.Schema
-
-var DomainInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "DomainInfo",
-}, smithy.ShapeTypeStructure, 4)
-var DomainInfo_name *smithy.Schema
-
-var DomainInfo_status *smithy.Schema
-
-var DomainInfo_description *smithy.Schema
-
-var DomainInfo_arn *smithy.Schema
-
-var _DomainInfoList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "DomainInfoList",
-}, smithy.ShapeTypeList, 1)
-var _DomainInfoList_member *smithy.Schema
-
-var _DomainName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "DomainName",
-}, smithy.ShapeTypeString, 0)
-
-var _DurationInDays = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "DurationInDays",
-}, smithy.ShapeTypeString, 0)
-
-var _DurationInSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "DurationInSeconds",
-}, smithy.ShapeTypeString, 0)
-
-var _DurationInSecondsOptional = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "DurationInSecondsOptional",
-}, smithy.ShapeTypeString, 0)
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _EventId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "EventId",
-}, smithy.ShapeTypeLong, 0)
-
-var EventType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "EventType",
-}, smithy.ShapeTypeEnum, 54)
-var EventType_WorkflowExecutionStarted *smithy.Schema
-
-var EventType_WorkflowExecutionCancelRequested *smithy.Schema
-
-var EventType_WorkflowExecutionCompleted *smithy.Schema
-
-var EventType_CompleteWorkflowExecutionFailed *smithy.Schema
-
-var EventType_WorkflowExecutionFailed *smithy.Schema
-
-var EventType_FailWorkflowExecutionFailed *smithy.Schema
-
-var EventType_WorkflowExecutionTimedOut *smithy.Schema
-
-var EventType_WorkflowExecutionCanceled *smithy.Schema
-
-var EventType_CancelWorkflowExecutionFailed *smithy.Schema
-
-var EventType_WorkflowExecutionContinuedAsNew *smithy.Schema
-
-var EventType_ContinueAsNewWorkflowExecutionFailed *smithy.Schema
-
-var EventType_WorkflowExecutionTerminated *smithy.Schema
-
-var EventType_DecisionTaskScheduled *smithy.Schema
-
-var EventType_DecisionTaskStarted *smithy.Schema
-
-var EventType_DecisionTaskCompleted *smithy.Schema
-
-var EventType_DecisionTaskTimedOut *smithy.Schema
-
-var EventType_ActivityTaskScheduled *smithy.Schema
-
-var EventType_ScheduleActivityTaskFailed *smithy.Schema
-
-var EventType_ActivityTaskStarted *smithy.Schema
-
-var EventType_ActivityTaskCompleted *smithy.Schema
-
-var EventType_ActivityTaskFailed *smithy.Schema
-
-var EventType_ActivityTaskTimedOut *smithy.Schema
-
-var EventType_ActivityTaskCanceled *smithy.Schema
-
-var EventType_ActivityTaskCancelRequested *smithy.Schema
-
-var EventType_RequestCancelActivityTaskFailed *smithy.Schema
-
-var EventType_WorkflowExecutionSignaled *smithy.Schema
-
-var EventType_MarkerRecorded *smithy.Schema
-
-var EventType_RecordMarkerFailed *smithy.Schema
-
-var EventType_TimerStarted *smithy.Schema
-
-var EventType_StartTimerFailed *smithy.Schema
-
-var EventType_TimerFired *smithy.Schema
-
-var EventType_TimerCanceled *smithy.Schema
-
-var EventType_CancelTimerFailed *smithy.Schema
-
-var EventType_StartChildWorkflowExecutionInitiated *smithy.Schema
-
-var EventType_StartChildWorkflowExecutionFailed *smithy.Schema
-
-var EventType_ChildWorkflowExecutionStarted *smithy.Schema
-
-var EventType_ChildWorkflowExecutionCompleted *smithy.Schema
-
-var EventType_ChildWorkflowExecutionFailed *smithy.Schema
-
-var EventType_ChildWorkflowExecutionTimedOut *smithy.Schema
-
-var EventType_ChildWorkflowExecutionCanceled *smithy.Schema
-
-var EventType_ChildWorkflowExecutionTerminated *smithy.Schema
-
-var EventType_SignalExternalWorkflowExecutionInitiated *smithy.Schema
-
-var EventType_SignalExternalWorkflowExecutionFailed *smithy.Schema
-
-var EventType_ExternalWorkflowExecutionSignaled *smithy.Schema
-
-var EventType_RequestCancelExternalWorkflowExecutionInitiated *smithy.Schema
-
-var EventType_RequestCancelExternalWorkflowExecutionFailed *smithy.Schema
-
-var EventType_ExternalWorkflowExecutionCancelRequested *smithy.Schema
-
-var EventType_LambdaFunctionScheduled *smithy.Schema
-
-var EventType_LambdaFunctionStarted *smithy.Schema
-
-var EventType_LambdaFunctionCompleted *smithy.Schema
-
-var EventType_LambdaFunctionFailed *smithy.Schema
-
-var EventType_LambdaFunctionTimedOut *smithy.Schema
-
-var EventType_ScheduleLambdaFunctionFailed *smithy.Schema
-
-var EventType_StartLambdaFunctionFailed *smithy.Schema
-
-var ExecutionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ExecutionStatus",
-}, smithy.ShapeTypeEnum, 2)
-var ExecutionStatus_OPEN *smithy.Schema
-
-var ExecutionStatus_CLOSED *smithy.Schema
-
-var ExecutionTimeFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ExecutionTimeFilter",
-}, smithy.ShapeTypeStructure, 2)
-var ExecutionTimeFilter_oldestDate *smithy.Schema
-
-var ExecutionTimeFilter_latestDate *smithy.Schema
-
-var ExternalWorkflowExecutionCancelRequestedEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ExternalWorkflowExecutionCancelRequestedEventAttributes",
-}, smithy.ShapeTypeStructure, 2)
-var ExternalWorkflowExecutionCancelRequestedEventAttributes_workflowExecution *smithy.Schema
-
-var ExternalWorkflowExecutionCancelRequestedEventAttributes_initiatedEventId *smithy.Schema
-
-var ExternalWorkflowExecutionSignaledEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ExternalWorkflowExecutionSignaledEventAttributes",
-}, smithy.ShapeTypeStructure, 2)
-var ExternalWorkflowExecutionSignaledEventAttributes_workflowExecution *smithy.Schema
-
-var ExternalWorkflowExecutionSignaledEventAttributes_initiatedEventId *smithy.Schema
-
-var _FailureReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "FailureReason",
-}, smithy.ShapeTypeString, 0)
-
-var FailWorkflowExecutionDecisionAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "FailWorkflowExecutionDecisionAttributes",
-}, smithy.ShapeTypeStructure, 2)
-var FailWorkflowExecutionDecisionAttributes_reason *smithy.Schema
-
-var FailWorkflowExecutionDecisionAttributes_details *smithy.Schema
-
-var FailWorkflowExecutionFailedCause = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "FailWorkflowExecutionFailedCause",
-}, smithy.ShapeTypeEnum, 2)
-var FailWorkflowExecutionFailedCause_UNHANDLED_DECISION *smithy.Schema
-
-var FailWorkflowExecutionFailedCause_OPERATION_NOT_PERMITTED *smithy.Schema
-
-var FailWorkflowExecutionFailedEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "FailWorkflowExecutionFailedEventAttributes",
-}, smithy.ShapeTypeStructure, 2)
-var FailWorkflowExecutionFailedEventAttributes_cause *smithy.Schema
-
-var FailWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId *smithy.Schema
-
-var _FunctionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "FunctionId",
-}, smithy.ShapeTypeString, 0)
-
-var _FunctionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "FunctionInput",
-}, smithy.ShapeTypeString, 0)
-
-var _FunctionName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "FunctionName",
-}, smithy.ShapeTypeString, 0)
-
-var HistoryEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "HistoryEvent",
-}, smithy.ShapeTypeStructure, 57)
-var HistoryEvent_eventTimestamp *smithy.Schema
-
-var HistoryEvent_eventType *smithy.Schema
-
-var HistoryEvent_eventId *smithy.Schema
-
-var HistoryEvent_workflowExecutionStartedEventAttributes *smithy.Schema
-
-var HistoryEvent_workflowExecutionCompletedEventAttributes *smithy.Schema
-
-var HistoryEvent_completeWorkflowExecutionFailedEventAttributes *smithy.Schema
-
-var HistoryEvent_workflowExecutionFailedEventAttributes *smithy.Schema
-
-var HistoryEvent_failWorkflowExecutionFailedEventAttributes *smithy.Schema
-
-var HistoryEvent_workflowExecutionTimedOutEventAttributes *smithy.Schema
-
-var HistoryEvent_workflowExecutionCanceledEventAttributes *smithy.Schema
-
-var HistoryEvent_cancelWorkflowExecutionFailedEventAttributes *smithy.Schema
-
-var HistoryEvent_workflowExecutionContinuedAsNewEventAttributes *smithy.Schema
-
-var HistoryEvent_continueAsNewWorkflowExecutionFailedEventAttributes *smithy.Schema
-
-var HistoryEvent_workflowExecutionTerminatedEventAttributes *smithy.Schema
-
-var HistoryEvent_workflowExecutionCancelRequestedEventAttributes *smithy.Schema
-
-var HistoryEvent_decisionTaskScheduledEventAttributes *smithy.Schema
-
-var HistoryEvent_decisionTaskStartedEventAttributes *smithy.Schema
-
-var HistoryEvent_decisionTaskCompletedEventAttributes *smithy.Schema
-
-var HistoryEvent_decisionTaskTimedOutEventAttributes *smithy.Schema
-
-var HistoryEvent_activityTaskScheduledEventAttributes *smithy.Schema
-
-var HistoryEvent_activityTaskStartedEventAttributes *smithy.Schema
-
-var HistoryEvent_activityTaskCompletedEventAttributes *smithy.Schema
-
-var HistoryEvent_activityTaskFailedEventAttributes *smithy.Schema
-
-var HistoryEvent_activityTaskTimedOutEventAttributes *smithy.Schema
-
-var HistoryEvent_activityTaskCanceledEventAttributes *smithy.Schema
-
-var HistoryEvent_activityTaskCancelRequestedEventAttributes *smithy.Schema
-
-var HistoryEvent_workflowExecutionSignaledEventAttributes *smithy.Schema
-
-var HistoryEvent_markerRecordedEventAttributes *smithy.Schema
-
-var HistoryEvent_recordMarkerFailedEventAttributes *smithy.Schema
-
-var HistoryEvent_timerStartedEventAttributes *smithy.Schema
-
-var HistoryEvent_timerFiredEventAttributes *smithy.Schema
-
-var HistoryEvent_timerCanceledEventAttributes *smithy.Schema
-
-var HistoryEvent_startChildWorkflowExecutionInitiatedEventAttributes *smithy.Schema
-
-var HistoryEvent_childWorkflowExecutionStartedEventAttributes *smithy.Schema
-
-var HistoryEvent_childWorkflowExecutionCompletedEventAttributes *smithy.Schema
-
-var HistoryEvent_childWorkflowExecutionFailedEventAttributes *smithy.Schema
-
-var HistoryEvent_childWorkflowExecutionTimedOutEventAttributes *smithy.Schema
-
-var HistoryEvent_childWorkflowExecutionCanceledEventAttributes *smithy.Schema
-
-var HistoryEvent_childWorkflowExecutionTerminatedEventAttributes *smithy.Schema
-
-var HistoryEvent_signalExternalWorkflowExecutionInitiatedEventAttributes *smithy.Schema
-
-var HistoryEvent_externalWorkflowExecutionSignaledEventAttributes *smithy.Schema
-
-var HistoryEvent_signalExternalWorkflowExecutionFailedEventAttributes *smithy.Schema
-
-var HistoryEvent_externalWorkflowExecutionCancelRequestedEventAttributes *smithy.Schema
-
-var HistoryEvent_requestCancelExternalWorkflowExecutionInitiatedEventAttributes *smithy.Schema
-
-var HistoryEvent_requestCancelExternalWorkflowExecutionFailedEventAttributes *smithy.Schema
-
-var HistoryEvent_scheduleActivityTaskFailedEventAttributes *smithy.Schema
-
-var HistoryEvent_requestCancelActivityTaskFailedEventAttributes *smithy.Schema
-
-var HistoryEvent_startTimerFailedEventAttributes *smithy.Schema
-
-var HistoryEvent_cancelTimerFailedEventAttributes *smithy.Schema
-
-var HistoryEvent_startChildWorkflowExecutionFailedEventAttributes *smithy.Schema
-
-var HistoryEvent_lambdaFunctionScheduledEventAttributes *smithy.Schema
-
-var HistoryEvent_lambdaFunctionStartedEventAttributes *smithy.Schema
-
-var HistoryEvent_lambdaFunctionCompletedEventAttributes *smithy.Schema
-
-var HistoryEvent_lambdaFunctionFailedEventAttributes *smithy.Schema
-
-var HistoryEvent_lambdaFunctionTimedOutEventAttributes *smithy.Schema
-
-var HistoryEvent_scheduleLambdaFunctionFailedEventAttributes *smithy.Schema
-
-var HistoryEvent_startLambdaFunctionFailedEventAttributes *smithy.Schema
-
-var _HistoryEventList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "HistoryEventList",
-}, smithy.ShapeTypeList, 1)
-var _HistoryEventList_member *smithy.Schema
-
-var _Identity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "Identity",
-}, smithy.ShapeTypeString, 0)
-
-var LambdaFunctionCompletedEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "LambdaFunctionCompletedEventAttributes",
-}, smithy.ShapeTypeStructure, 3)
-var LambdaFunctionCompletedEventAttributes_scheduledEventId *smithy.Schema
-
-var LambdaFunctionCompletedEventAttributes_startedEventId *smithy.Schema
-
-var LambdaFunctionCompletedEventAttributes_result *smithy.Schema
-
-var LambdaFunctionFailedEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "LambdaFunctionFailedEventAttributes",
-}, smithy.ShapeTypeStructure, 4)
-var LambdaFunctionFailedEventAttributes_scheduledEventId *smithy.Schema
-
-var LambdaFunctionFailedEventAttributes_startedEventId *smithy.Schema
-
-var LambdaFunctionFailedEventAttributes_reason *smithy.Schema
-
-var LambdaFunctionFailedEventAttributes_details *smithy.Schema
-
-var LambdaFunctionScheduledEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "LambdaFunctionScheduledEventAttributes",
-}, smithy.ShapeTypeStructure, 6)
-var LambdaFunctionScheduledEventAttributes_id *smithy.Schema
-
-var LambdaFunctionScheduledEventAttributes_name *smithy.Schema
-
-var LambdaFunctionScheduledEventAttributes_control *smithy.Schema
-
-var LambdaFunctionScheduledEventAttributes_input *smithy.Schema
-
-var LambdaFunctionScheduledEventAttributes_startToCloseTimeout *smithy.Schema
-
-var LambdaFunctionScheduledEventAttributes_decisionTaskCompletedEventId *smithy.Schema
-
-var LambdaFunctionStartedEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "LambdaFunctionStartedEventAttributes",
-}, smithy.ShapeTypeStructure, 1)
-var LambdaFunctionStartedEventAttributes_scheduledEventId *smithy.Schema
-
-var LambdaFunctionTimedOutEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "LambdaFunctionTimedOutEventAttributes",
-}, smithy.ShapeTypeStructure, 3)
-var LambdaFunctionTimedOutEventAttributes_scheduledEventId *smithy.Schema
-
-var LambdaFunctionTimedOutEventAttributes_startedEventId *smithy.Schema
-
-var LambdaFunctionTimedOutEventAttributes_timeoutType *smithy.Schema
-
-var LambdaFunctionTimeoutType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "LambdaFunctionTimeoutType",
-}, smithy.ShapeTypeEnum, 1)
-var LambdaFunctionTimeoutType_START_TO_CLOSE *smithy.Schema
-
-var _LimitedData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "LimitedData",
-}, smithy.ShapeTypeString, 0)
-
-var LimitExceededFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "LimitExceededFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var LimitExceededFault_message *smithy.Schema
-
-var _MarkerName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "MarkerName",
-}, smithy.ShapeTypeString, 0)
-
-var MarkerRecordedEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "MarkerRecordedEventAttributes",
-}, smithy.ShapeTypeStructure, 3)
-var MarkerRecordedEventAttributes_markerName *smithy.Schema
-
-var MarkerRecordedEventAttributes_details *smithy.Schema
-
-var MarkerRecordedEventAttributes_decisionTaskCompletedEventId *smithy.Schema
-
-var _Name = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "Name",
-}, smithy.ShapeTypeString, 0)
-
-var _OpenDecisionTasksCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "OpenDecisionTasksCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var OperationNotPermittedFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "OperationNotPermittedFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var OperationNotPermittedFault_message *smithy.Schema
-
-var _PageSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "PageSize",
-}, smithy.ShapeTypeInteger, 0)
-
-var _PageToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "PageToken",
-}, smithy.ShapeTypeString, 0)
-
-var RecordMarkerDecisionAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "RecordMarkerDecisionAttributes",
-}, smithy.ShapeTypeStructure, 2)
-var RecordMarkerDecisionAttributes_markerName *smithy.Schema
-
-var RecordMarkerDecisionAttributes_details *smithy.Schema
-
-var RecordMarkerFailedCause = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "RecordMarkerFailedCause",
-}, smithy.ShapeTypeEnum, 1)
-var RecordMarkerFailedCause_OPERATION_NOT_PERMITTED *smithy.Schema
-
-var RecordMarkerFailedEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "RecordMarkerFailedEventAttributes",
-}, smithy.ShapeTypeStructure, 3)
-var RecordMarkerFailedEventAttributes_markerName *smithy.Schema
-
-var RecordMarkerFailedEventAttributes_cause *smithy.Schema
-
-var RecordMarkerFailedEventAttributes_decisionTaskCompletedEventId *smithy.Schema
-
-var RegistrationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "RegistrationStatus",
-}, smithy.ShapeTypeEnum, 2)
-var RegistrationStatus_REGISTERED *smithy.Schema
-
-var RegistrationStatus_DEPRECATED *smithy.Schema
-
-var RequestCancelActivityTaskDecisionAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "RequestCancelActivityTaskDecisionAttributes",
-}, smithy.ShapeTypeStructure, 1)
-var RequestCancelActivityTaskDecisionAttributes_activityId *smithy.Schema
-
-var RequestCancelActivityTaskFailedCause = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "RequestCancelActivityTaskFailedCause",
-}, smithy.ShapeTypeEnum, 2)
-var RequestCancelActivityTaskFailedCause_ACTIVITY_ID_UNKNOWN *smithy.Schema
-
-var RequestCancelActivityTaskFailedCause_OPERATION_NOT_PERMITTED *smithy.Schema
-
-var RequestCancelActivityTaskFailedEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "RequestCancelActivityTaskFailedEventAttributes",
-}, smithy.ShapeTypeStructure, 3)
-var RequestCancelActivityTaskFailedEventAttributes_activityId *smithy.Schema
-
-var RequestCancelActivityTaskFailedEventAttributes_cause *smithy.Schema
-
-var RequestCancelActivityTaskFailedEventAttributes_decisionTaskCompletedEventId *smithy.Schema
-
-var RequestCancelExternalWorkflowExecutionDecisionAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "RequestCancelExternalWorkflowExecutionDecisionAttributes",
-}, smithy.ShapeTypeStructure, 3)
-var RequestCancelExternalWorkflowExecutionDecisionAttributes_workflowId *smithy.Schema
-
-var RequestCancelExternalWorkflowExecutionDecisionAttributes_runId *smithy.Schema
-
-var RequestCancelExternalWorkflowExecutionDecisionAttributes_control *smithy.Schema
-
-var RequestCancelExternalWorkflowExecutionFailedCause = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "RequestCancelExternalWorkflowExecutionFailedCause",
-}, smithy.ShapeTypeEnum, 3)
-var RequestCancelExternalWorkflowExecutionFailedCause_UNKNOWN_EXTERNAL_WORKFLOW_EXECUTION *smithy.Schema
-
-var RequestCancelExternalWorkflowExecutionFailedCause_REQUEST_CANCEL_EXTERNAL_WORKFLOW_EXECUTION_RATE_EXCEEDED *smithy.Schema
-
-var RequestCancelExternalWorkflowExecutionFailedCause_OPERATION_NOT_PERMITTED *smithy.Schema
-
-var RequestCancelExternalWorkflowExecutionFailedEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "RequestCancelExternalWorkflowExecutionFailedEventAttributes",
-}, smithy.ShapeTypeStructure, 6)
-var RequestCancelExternalWorkflowExecutionFailedEventAttributes_workflowId *smithy.Schema
-
-var RequestCancelExternalWorkflowExecutionFailedEventAttributes_runId *smithy.Schema
-
-var RequestCancelExternalWorkflowExecutionFailedEventAttributes_cause *smithy.Schema
-
-var RequestCancelExternalWorkflowExecutionFailedEventAttributes_initiatedEventId *smithy.Schema
-
-var RequestCancelExternalWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId *smithy.Schema
-
-var RequestCancelExternalWorkflowExecutionFailedEventAttributes_control *smithy.Schema
-
-var RequestCancelExternalWorkflowExecutionInitiatedEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "RequestCancelExternalWorkflowExecutionInitiatedEventAttributes",
-}, smithy.ShapeTypeStructure, 4)
-var RequestCancelExternalWorkflowExecutionInitiatedEventAttributes_workflowId *smithy.Schema
-
-var RequestCancelExternalWorkflowExecutionInitiatedEventAttributes_runId *smithy.Schema
-
-var RequestCancelExternalWorkflowExecutionInitiatedEventAttributes_decisionTaskCompletedEventId *smithy.Schema
-
-var RequestCancelExternalWorkflowExecutionInitiatedEventAttributes_control *smithy.Schema
-
-var ResourceTag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ResourceTag",
-}, smithy.ShapeTypeStructure, 2)
-var ResourceTag_key *smithy.Schema
-
-var ResourceTag_value *smithy.Schema
-
-var _ResourceTagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ResourceTagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceTagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ResourceTagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceTagKeyList_member *smithy.Schema
-
-var _ResourceTagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ResourceTagList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceTagList_member *smithy.Schema
-
-var _ResourceTagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ResourceTagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _ReverseOrder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ReverseOrder",
-}, smithy.ShapeTypeBoolean, 0)
-
-var ScheduleActivityTaskDecisionAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ScheduleActivityTaskDecisionAttributes",
-}, smithy.ShapeTypeStructure, 10)
-var ScheduleActivityTaskDecisionAttributes_activityType *smithy.Schema
-
-var ScheduleActivityTaskDecisionAttributes_activityId *smithy.Schema
-
-var ScheduleActivityTaskDecisionAttributes_control *smithy.Schema
-
-var ScheduleActivityTaskDecisionAttributes_input *smithy.Schema
-
-var ScheduleActivityTaskDecisionAttributes_scheduleToCloseTimeout *smithy.Schema
-
-var ScheduleActivityTaskDecisionAttributes_taskList *smithy.Schema
-
-var ScheduleActivityTaskDecisionAttributes_taskPriority *smithy.Schema
-
-var ScheduleActivityTaskDecisionAttributes_scheduleToStartTimeout *smithy.Schema
-
-var ScheduleActivityTaskDecisionAttributes_startToCloseTimeout *smithy.Schema
-
-var ScheduleActivityTaskDecisionAttributes_heartbeatTimeout *smithy.Schema
-
-var ScheduleActivityTaskFailedCause = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ScheduleActivityTaskFailedCause",
-}, smithy.ShapeTypeEnum, 11)
-var ScheduleActivityTaskFailedCause_ACTIVITY_TYPE_DEPRECATED *smithy.Schema
-
-var ScheduleActivityTaskFailedCause_ACTIVITY_TYPE_DOES_NOT_EXIST *smithy.Schema
-
-var ScheduleActivityTaskFailedCause_ACTIVITY_ID_ALREADY_IN_USE *smithy.Schema
-
-var ScheduleActivityTaskFailedCause_OPEN_ACTIVITIES_LIMIT_EXCEEDED *smithy.Schema
-
-var ScheduleActivityTaskFailedCause_ACTIVITY_CREATION_RATE_EXCEEDED *smithy.Schema
-
-var ScheduleActivityTaskFailedCause_DEFAULT_SCHEDULE_TO_CLOSE_TIMEOUT_UNDEFINED *smithy.Schema
-
-var ScheduleActivityTaskFailedCause_DEFAULT_TASK_LIST_UNDEFINED *smithy.Schema
-
-var ScheduleActivityTaskFailedCause_DEFAULT_SCHEDULE_TO_START_TIMEOUT_UNDEFINED *smithy.Schema
-
-var ScheduleActivityTaskFailedCause_DEFAULT_START_TO_CLOSE_TIMEOUT_UNDEFINED *smithy.Schema
-
-var ScheduleActivityTaskFailedCause_DEFAULT_HEARTBEAT_TIMEOUT_UNDEFINED *smithy.Schema
-
-var ScheduleActivityTaskFailedCause_OPERATION_NOT_PERMITTED *smithy.Schema
-
-var ScheduleActivityTaskFailedEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ScheduleActivityTaskFailedEventAttributes",
-}, smithy.ShapeTypeStructure, 4)
-var ScheduleActivityTaskFailedEventAttributes_activityType *smithy.Schema
-
-var ScheduleActivityTaskFailedEventAttributes_activityId *smithy.Schema
-
-var ScheduleActivityTaskFailedEventAttributes_cause *smithy.Schema
-
-var ScheduleActivityTaskFailedEventAttributes_decisionTaskCompletedEventId *smithy.Schema
-
-var ScheduleLambdaFunctionDecisionAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ScheduleLambdaFunctionDecisionAttributes",
-}, smithy.ShapeTypeStructure, 5)
-var ScheduleLambdaFunctionDecisionAttributes_id *smithy.Schema
-
-var ScheduleLambdaFunctionDecisionAttributes_name *smithy.Schema
-
-var ScheduleLambdaFunctionDecisionAttributes_control *smithy.Schema
-
-var ScheduleLambdaFunctionDecisionAttributes_input *smithy.Schema
-
-var ScheduleLambdaFunctionDecisionAttributes_startToCloseTimeout *smithy.Schema
-
-var ScheduleLambdaFunctionFailedCause = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ScheduleLambdaFunctionFailedCause",
-}, smithy.ShapeTypeEnum, 4)
-var ScheduleLambdaFunctionFailedCause_ID_ALREADY_IN_USE *smithy.Schema
-
-var ScheduleLambdaFunctionFailedCause_OPEN_LAMBDA_FUNCTIONS_LIMIT_EXCEEDED *smithy.Schema
-
-var ScheduleLambdaFunctionFailedCause_LAMBDA_FUNCTION_CREATION_RATE_EXCEEDED *smithy.Schema
-
-var ScheduleLambdaFunctionFailedCause_LAMBDA_SERVICE_NOT_AVAILABLE_IN_REGION *smithy.Schema
-
-var ScheduleLambdaFunctionFailedEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ScheduleLambdaFunctionFailedEventAttributes",
-}, smithy.ShapeTypeStructure, 4)
-var ScheduleLambdaFunctionFailedEventAttributes_id *smithy.Schema
-
-var ScheduleLambdaFunctionFailedEventAttributes_name *smithy.Schema
-
-var ScheduleLambdaFunctionFailedEventAttributes_cause *smithy.Schema
-
-var ScheduleLambdaFunctionFailedEventAttributes_decisionTaskCompletedEventId *smithy.Schema
-
-var SignalExternalWorkflowExecutionDecisionAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "SignalExternalWorkflowExecutionDecisionAttributes",
-}, smithy.ShapeTypeStructure, 5)
-var SignalExternalWorkflowExecutionDecisionAttributes_workflowId *smithy.Schema
-
-var SignalExternalWorkflowExecutionDecisionAttributes_runId *smithy.Schema
-
-var SignalExternalWorkflowExecutionDecisionAttributes_signalName *smithy.Schema
-
-var SignalExternalWorkflowExecutionDecisionAttributes_input *smithy.Schema
-
-var SignalExternalWorkflowExecutionDecisionAttributes_control *smithy.Schema
-
-var SignalExternalWorkflowExecutionFailedCause = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "SignalExternalWorkflowExecutionFailedCause",
-}, smithy.ShapeTypeEnum, 3)
-var SignalExternalWorkflowExecutionFailedCause_UNKNOWN_EXTERNAL_WORKFLOW_EXECUTION *smithy.Schema
-
-var SignalExternalWorkflowExecutionFailedCause_SIGNAL_EXTERNAL_WORKFLOW_EXECUTION_RATE_EXCEEDED *smithy.Schema
-
-var SignalExternalWorkflowExecutionFailedCause_OPERATION_NOT_PERMITTED *smithy.Schema
-
-var SignalExternalWorkflowExecutionFailedEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "SignalExternalWorkflowExecutionFailedEventAttributes",
-}, smithy.ShapeTypeStructure, 6)
-var SignalExternalWorkflowExecutionFailedEventAttributes_workflowId *smithy.Schema
-
-var SignalExternalWorkflowExecutionFailedEventAttributes_runId *smithy.Schema
-
-var SignalExternalWorkflowExecutionFailedEventAttributes_cause *smithy.Schema
-
-var SignalExternalWorkflowExecutionFailedEventAttributes_initiatedEventId *smithy.Schema
-
-var SignalExternalWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId *smithy.Schema
-
-var SignalExternalWorkflowExecutionFailedEventAttributes_control *smithy.Schema
-
-var SignalExternalWorkflowExecutionInitiatedEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "SignalExternalWorkflowExecutionInitiatedEventAttributes",
-}, smithy.ShapeTypeStructure, 6)
-var SignalExternalWorkflowExecutionInitiatedEventAttributes_workflowId *smithy.Schema
-
-var SignalExternalWorkflowExecutionInitiatedEventAttributes_runId *smithy.Schema
-
-var SignalExternalWorkflowExecutionInitiatedEventAttributes_signalName *smithy.Schema
-
-var SignalExternalWorkflowExecutionInitiatedEventAttributes_input *smithy.Schema
-
-var SignalExternalWorkflowExecutionInitiatedEventAttributes_decisionTaskCompletedEventId *smithy.Schema
-
-var SignalExternalWorkflowExecutionInitiatedEventAttributes_control *smithy.Schema
-
-var _SignalName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "SignalName",
-}, smithy.ShapeTypeString, 0)
-
-var _StartAtPreviousStartedEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "StartAtPreviousStartedEvent",
-}, smithy.ShapeTypeBoolean, 0)
-
-var StartChildWorkflowExecutionDecisionAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "StartChildWorkflowExecutionDecisionAttributes",
-}, smithy.ShapeTypeStructure, 11)
-var StartChildWorkflowExecutionDecisionAttributes_workflowType *smithy.Schema
-
-var StartChildWorkflowExecutionDecisionAttributes_workflowId *smithy.Schema
-
-var StartChildWorkflowExecutionDecisionAttributes_control *smithy.Schema
-
-var StartChildWorkflowExecutionDecisionAttributes_input *smithy.Schema
-
-var StartChildWorkflowExecutionDecisionAttributes_executionStartToCloseTimeout *smithy.Schema
-
-var StartChildWorkflowExecutionDecisionAttributes_taskList *smithy.Schema
-
-var StartChildWorkflowExecutionDecisionAttributes_taskPriority *smithy.Schema
-
-var StartChildWorkflowExecutionDecisionAttributes_taskStartToCloseTimeout *smithy.Schema
-
-var StartChildWorkflowExecutionDecisionAttributes_childPolicy *smithy.Schema
-
-var StartChildWorkflowExecutionDecisionAttributes_tagList *smithy.Schema
-
-var StartChildWorkflowExecutionDecisionAttributes_lambdaRole *smithy.Schema
-
-var StartChildWorkflowExecutionFailedCause = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "StartChildWorkflowExecutionFailedCause",
-}, smithy.ShapeTypeEnum, 11)
-var StartChildWorkflowExecutionFailedCause_WORKFLOW_TYPE_DOES_NOT_EXIST *smithy.Schema
-
-var StartChildWorkflowExecutionFailedCause_WORKFLOW_TYPE_DEPRECATED *smithy.Schema
-
-var StartChildWorkflowExecutionFailedCause_OPEN_CHILDREN_LIMIT_EXCEEDED *smithy.Schema
-
-var StartChildWorkflowExecutionFailedCause_OPEN_WORKFLOWS_LIMIT_EXCEEDED *smithy.Schema
-
-var StartChildWorkflowExecutionFailedCause_CHILD_CREATION_RATE_EXCEEDED *smithy.Schema
-
-var StartChildWorkflowExecutionFailedCause_WORKFLOW_ALREADY_RUNNING *smithy.Schema
-
-var StartChildWorkflowExecutionFailedCause_DEFAULT_EXECUTION_START_TO_CLOSE_TIMEOUT_UNDEFINED *smithy.Schema
-
-var StartChildWorkflowExecutionFailedCause_DEFAULT_TASK_LIST_UNDEFINED *smithy.Schema
-
-var StartChildWorkflowExecutionFailedCause_DEFAULT_TASK_START_TO_CLOSE_TIMEOUT_UNDEFINED *smithy.Schema
-
-var StartChildWorkflowExecutionFailedCause_DEFAULT_CHILD_POLICY_UNDEFINED *smithy.Schema
-
-var StartChildWorkflowExecutionFailedCause_OPERATION_NOT_PERMITTED *smithy.Schema
-
-var StartChildWorkflowExecutionFailedEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "StartChildWorkflowExecutionFailedEventAttributes",
-}, smithy.ShapeTypeStructure, 6)
-var StartChildWorkflowExecutionFailedEventAttributes_workflowType *smithy.Schema
-
-var StartChildWorkflowExecutionFailedEventAttributes_cause *smithy.Schema
-
-var StartChildWorkflowExecutionFailedEventAttributes_workflowId *smithy.Schema
-
-var StartChildWorkflowExecutionFailedEventAttributes_initiatedEventId *smithy.Schema
-
-var StartChildWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId *smithy.Schema
-
-var StartChildWorkflowExecutionFailedEventAttributes_control *smithy.Schema
-
-var StartChildWorkflowExecutionInitiatedEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "StartChildWorkflowExecutionInitiatedEventAttributes",
-}, smithy.ShapeTypeStructure, 12)
-var StartChildWorkflowExecutionInitiatedEventAttributes_workflowId *smithy.Schema
-
-var StartChildWorkflowExecutionInitiatedEventAttributes_workflowType *smithy.Schema
-
-var StartChildWorkflowExecutionInitiatedEventAttributes_control *smithy.Schema
-
-var StartChildWorkflowExecutionInitiatedEventAttributes_input *smithy.Schema
-
-var StartChildWorkflowExecutionInitiatedEventAttributes_executionStartToCloseTimeout *smithy.Schema
-
-var StartChildWorkflowExecutionInitiatedEventAttributes_taskList *smithy.Schema
-
-var StartChildWorkflowExecutionInitiatedEventAttributes_taskPriority *smithy.Schema
-
-var StartChildWorkflowExecutionInitiatedEventAttributes_decisionTaskCompletedEventId *smithy.Schema
-
-var StartChildWorkflowExecutionInitiatedEventAttributes_childPolicy *smithy.Schema
-
-var StartChildWorkflowExecutionInitiatedEventAttributes_taskStartToCloseTimeout *smithy.Schema
-
-var StartChildWorkflowExecutionInitiatedEventAttributes_tagList *smithy.Schema
-
-var StartChildWorkflowExecutionInitiatedEventAttributes_lambdaRole *smithy.Schema
-
-var StartLambdaFunctionFailedCause = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "StartLambdaFunctionFailedCause",
-}, smithy.ShapeTypeEnum, 1)
-var StartLambdaFunctionFailedCause_ASSUME_ROLE_FAILED *smithy.Schema
-
-var StartLambdaFunctionFailedEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "StartLambdaFunctionFailedEventAttributes",
-}, smithy.ShapeTypeStructure, 3)
-var StartLambdaFunctionFailedEventAttributes_scheduledEventId *smithy.Schema
-
-var StartLambdaFunctionFailedEventAttributes_cause *smithy.Schema
-
-var StartLambdaFunctionFailedEventAttributes_message *smithy.Schema
-
-var StartTimerDecisionAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "StartTimerDecisionAttributes",
-}, smithy.ShapeTypeStructure, 3)
-var StartTimerDecisionAttributes_timerId *smithy.Schema
-
-var StartTimerDecisionAttributes_control *smithy.Schema
-
-var StartTimerDecisionAttributes_startToFireTimeout *smithy.Schema
-
-var StartTimerFailedCause = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "StartTimerFailedCause",
-}, smithy.ShapeTypeEnum, 4)
-var StartTimerFailedCause_TIMER_ID_ALREADY_IN_USE *smithy.Schema
-
-var StartTimerFailedCause_OPEN_TIMERS_LIMIT_EXCEEDED *smithy.Schema
-
-var StartTimerFailedCause_TIMER_CREATION_RATE_EXCEEDED *smithy.Schema
-
-var StartTimerFailedCause_OPERATION_NOT_PERMITTED *smithy.Schema
-
-var StartTimerFailedEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "StartTimerFailedEventAttributes",
-}, smithy.ShapeTypeStructure, 3)
-var StartTimerFailedEventAttributes_timerId *smithy.Schema
-
-var StartTimerFailedEventAttributes_cause *smithy.Schema
-
-var StartTimerFailedEventAttributes_decisionTaskCompletedEventId *smithy.Schema
-
-var _Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "Tag",
-}, smithy.ShapeTypeString, 0)
-
-var TagFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "TagFilter",
-}, smithy.ShapeTypeStructure, 1)
-var TagFilter_tag *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var TaskList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "TaskList",
-}, smithy.ShapeTypeStructure, 1)
-var TaskList_name *smithy.Schema
-
-var _TaskPriority = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "TaskPriority",
-}, smithy.ShapeTypeString, 0)
-
-var _TaskToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "TaskToken",
-}, smithy.ShapeTypeString, 0)
-
-var _TerminateReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "TerminateReason",
-}, smithy.ShapeTypeString, 0)
-
-var TimerCanceledEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "TimerCanceledEventAttributes",
-}, smithy.ShapeTypeStructure, 3)
-var TimerCanceledEventAttributes_timerId *smithy.Schema
-
-var TimerCanceledEventAttributes_startedEventId *smithy.Schema
-
-var TimerCanceledEventAttributes_decisionTaskCompletedEventId *smithy.Schema
-
-var TimerFiredEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "TimerFiredEventAttributes",
-}, smithy.ShapeTypeStructure, 2)
-var TimerFiredEventAttributes_timerId *smithy.Schema
-
-var TimerFiredEventAttributes_startedEventId *smithy.Schema
-
-var _TimerId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "TimerId",
-}, smithy.ShapeTypeString, 0)
-
-var TimerStartedEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "TimerStartedEventAttributes",
-}, smithy.ShapeTypeStructure, 4)
-var TimerStartedEventAttributes_timerId *smithy.Schema
-
-var TimerStartedEventAttributes_control *smithy.Schema
-
-var TimerStartedEventAttributes_startToFireTimeout *smithy.Schema
-
-var TimerStartedEventAttributes_decisionTaskCompletedEventId *smithy.Schema
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var TooManyTagsFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "TooManyTagsFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var TooManyTagsFault_message *smithy.Schema
-
-var _Truncated = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "Truncated",
-}, smithy.ShapeTypeBoolean, 0)
-
-var TypeAlreadyExistsFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "TypeAlreadyExistsFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var TypeAlreadyExistsFault_message *smithy.Schema
-
-var TypeDeprecatedFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "TypeDeprecatedFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var TypeDeprecatedFault_message *smithy.Schema
-
-var TypeNotDeprecatedFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "TypeNotDeprecatedFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var TypeNotDeprecatedFault_message *smithy.Schema
-
-var UnknownResourceFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "UnknownResourceFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var UnknownResourceFault_message *smithy.Schema
-
-var _Version = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "Version",
-}, smithy.ShapeTypeString, 0)
-
-var _VersionOptional = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "VersionOptional",
-}, smithy.ShapeTypeString, 0)
-
-var WorkflowExecution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "WorkflowExecution",
-}, smithy.ShapeTypeStructure, 2)
-var WorkflowExecution_workflowId *smithy.Schema
-
-var WorkflowExecution_runId *smithy.Schema
-
-var WorkflowExecutionAlreadyStartedFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "WorkflowExecutionAlreadyStartedFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var WorkflowExecutionAlreadyStartedFault_message *smithy.Schema
-
-var WorkflowExecutionCanceledEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "WorkflowExecutionCanceledEventAttributes",
-}, smithy.ShapeTypeStructure, 2)
-var WorkflowExecutionCanceledEventAttributes_details *smithy.Schema
-
-var WorkflowExecutionCanceledEventAttributes_decisionTaskCompletedEventId *smithy.Schema
-
-var WorkflowExecutionCancelRequestedCause = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "WorkflowExecutionCancelRequestedCause",
-}, smithy.ShapeTypeEnum, 1)
-var WorkflowExecutionCancelRequestedCause_CHILD_POLICY_APPLIED *smithy.Schema
-
-var WorkflowExecutionCancelRequestedEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "WorkflowExecutionCancelRequestedEventAttributes",
-}, smithy.ShapeTypeStructure, 3)
-var WorkflowExecutionCancelRequestedEventAttributes_externalWorkflowExecution *smithy.Schema
-
-var WorkflowExecutionCancelRequestedEventAttributes_externalInitiatedEventId *smithy.Schema
-
-var WorkflowExecutionCancelRequestedEventAttributes_cause *smithy.Schema
-
-var WorkflowExecutionCompletedEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "WorkflowExecutionCompletedEventAttributes",
-}, smithy.ShapeTypeStructure, 2)
-var WorkflowExecutionCompletedEventAttributes_result *smithy.Schema
-
-var WorkflowExecutionCompletedEventAttributes_decisionTaskCompletedEventId *smithy.Schema
-
-var WorkflowExecutionConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "WorkflowExecutionConfiguration",
-}, smithy.ShapeTypeStructure, 6)
-var WorkflowExecutionConfiguration_taskStartToCloseTimeout *smithy.Schema
-
-var WorkflowExecutionConfiguration_executionStartToCloseTimeout *smithy.Schema
-
-var WorkflowExecutionConfiguration_taskList *smithy.Schema
-
-var WorkflowExecutionConfiguration_taskPriority *smithy.Schema
-
-var WorkflowExecutionConfiguration_childPolicy *smithy.Schema
-
-var WorkflowExecutionConfiguration_lambdaRole *smithy.Schema
-
-var WorkflowExecutionContinuedAsNewEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "WorkflowExecutionContinuedAsNewEventAttributes",
-}, smithy.ShapeTypeStructure, 11)
-var WorkflowExecutionContinuedAsNewEventAttributes_input *smithy.Schema
-
-var WorkflowExecutionContinuedAsNewEventAttributes_decisionTaskCompletedEventId *smithy.Schema
-
-var WorkflowExecutionContinuedAsNewEventAttributes_newExecutionRunId *smithy.Schema
-
-var WorkflowExecutionContinuedAsNewEventAttributes_executionStartToCloseTimeout *smithy.Schema
-
-var WorkflowExecutionContinuedAsNewEventAttributes_taskList *smithy.Schema
-
-var WorkflowExecutionContinuedAsNewEventAttributes_taskPriority *smithy.Schema
-
-var WorkflowExecutionContinuedAsNewEventAttributes_taskStartToCloseTimeout *smithy.Schema
-
-var WorkflowExecutionContinuedAsNewEventAttributes_childPolicy *smithy.Schema
-
-var WorkflowExecutionContinuedAsNewEventAttributes_tagList *smithy.Schema
-
-var WorkflowExecutionContinuedAsNewEventAttributes_workflowType *smithy.Schema
-
-var WorkflowExecutionContinuedAsNewEventAttributes_lambdaRole *smithy.Schema
-
-var WorkflowExecutionFailedEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "WorkflowExecutionFailedEventAttributes",
-}, smithy.ShapeTypeStructure, 3)
-var WorkflowExecutionFailedEventAttributes_reason *smithy.Schema
-
-var WorkflowExecutionFailedEventAttributes_details *smithy.Schema
-
-var WorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId *smithy.Schema
-
-var WorkflowExecutionFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "WorkflowExecutionFilter",
-}, smithy.ShapeTypeStructure, 1)
-var WorkflowExecutionFilter_workflowId *smithy.Schema
-
-var WorkflowExecutionInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "WorkflowExecutionInfo",
-}, smithy.ShapeTypeStructure, 9)
-var WorkflowExecutionInfo_execution *smithy.Schema
-
-var WorkflowExecutionInfo_workflowType *smithy.Schema
-
-var WorkflowExecutionInfo_startTimestamp *smithy.Schema
-
-var WorkflowExecutionInfo_closeTimestamp *smithy.Schema
-
-var WorkflowExecutionInfo_executionStatus *smithy.Schema
-
-var WorkflowExecutionInfo_closeStatus *smithy.Schema
-
-var WorkflowExecutionInfo_parent *smithy.Schema
-
-var WorkflowExecutionInfo_tagList *smithy.Schema
-
-var WorkflowExecutionInfo_cancelRequested *smithy.Schema
-
-var _WorkflowExecutionInfoList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "WorkflowExecutionInfoList",
-}, smithy.ShapeTypeList, 1)
-var _WorkflowExecutionInfoList_member *smithy.Schema
-
-var WorkflowExecutionOpenCounts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "WorkflowExecutionOpenCounts",
-}, smithy.ShapeTypeStructure, 5)
-var WorkflowExecutionOpenCounts_openActivityTasks *smithy.Schema
-
-var WorkflowExecutionOpenCounts_openDecisionTasks *smithy.Schema
-
-var WorkflowExecutionOpenCounts_openTimers *smithy.Schema
-
-var WorkflowExecutionOpenCounts_openChildWorkflowExecutions *smithy.Schema
-
-var WorkflowExecutionOpenCounts_openLambdaFunctions *smithy.Schema
-
-var WorkflowExecutionSignaledEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "WorkflowExecutionSignaledEventAttributes",
-}, smithy.ShapeTypeStructure, 4)
-var WorkflowExecutionSignaledEventAttributes_signalName *smithy.Schema
-
-var WorkflowExecutionSignaledEventAttributes_input *smithy.Schema
-
-var WorkflowExecutionSignaledEventAttributes_externalWorkflowExecution *smithy.Schema
-
-var WorkflowExecutionSignaledEventAttributes_externalInitiatedEventId *smithy.Schema
-
-var WorkflowExecutionStartedEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "WorkflowExecutionStartedEventAttributes",
-}, smithy.ShapeTypeStructure, 12)
-var WorkflowExecutionStartedEventAttributes_input *smithy.Schema
-
-var WorkflowExecutionStartedEventAttributes_executionStartToCloseTimeout *smithy.Schema
-
-var WorkflowExecutionStartedEventAttributes_taskStartToCloseTimeout *smithy.Schema
-
-var WorkflowExecutionStartedEventAttributes_childPolicy *smithy.Schema
-
-var WorkflowExecutionStartedEventAttributes_taskList *smithy.Schema
-
-var WorkflowExecutionStartedEventAttributes_taskPriority *smithy.Schema
-
-var WorkflowExecutionStartedEventAttributes_workflowType *smithy.Schema
-
-var WorkflowExecutionStartedEventAttributes_tagList *smithy.Schema
-
-var WorkflowExecutionStartedEventAttributes_continuedExecutionRunId *smithy.Schema
-
-var WorkflowExecutionStartedEventAttributes_parentWorkflowExecution *smithy.Schema
-
-var WorkflowExecutionStartedEventAttributes_parentInitiatedEventId *smithy.Schema
-
-var WorkflowExecutionStartedEventAttributes_lambdaRole *smithy.Schema
-
-var WorkflowExecutionTerminatedCause = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "WorkflowExecutionTerminatedCause",
-}, smithy.ShapeTypeEnum, 3)
-var WorkflowExecutionTerminatedCause_CHILD_POLICY_APPLIED *smithy.Schema
-
-var WorkflowExecutionTerminatedCause_EVENT_LIMIT_EXCEEDED *smithy.Schema
-
-var WorkflowExecutionTerminatedCause_OPERATOR_INITIATED *smithy.Schema
-
-var WorkflowExecutionTerminatedEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "WorkflowExecutionTerminatedEventAttributes",
-}, smithy.ShapeTypeStructure, 4)
-var WorkflowExecutionTerminatedEventAttributes_reason *smithy.Schema
-
-var WorkflowExecutionTerminatedEventAttributes_details *smithy.Schema
-
-var WorkflowExecutionTerminatedEventAttributes_childPolicy *smithy.Schema
-
-var WorkflowExecutionTerminatedEventAttributes_cause *smithy.Schema
-
-var WorkflowExecutionTimedOutEventAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "WorkflowExecutionTimedOutEventAttributes",
-}, smithy.ShapeTypeStructure, 2)
-var WorkflowExecutionTimedOutEventAttributes_timeoutType *smithy.Schema
-
-var WorkflowExecutionTimedOutEventAttributes_childPolicy *smithy.Schema
-
-var WorkflowExecutionTimeoutType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "WorkflowExecutionTimeoutType",
-}, smithy.ShapeTypeEnum, 1)
-var WorkflowExecutionTimeoutType_START_TO_CLOSE *smithy.Schema
-
-var _WorkflowId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "WorkflowId",
-}, smithy.ShapeTypeString, 0)
-
-var _WorkflowRunId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "WorkflowRunId",
-}, smithy.ShapeTypeString, 0)
-
-var _WorkflowRunIdOptional = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "WorkflowRunIdOptional",
-}, smithy.ShapeTypeString, 0)
-
-var WorkflowType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "WorkflowType",
-}, smithy.ShapeTypeStructure, 2)
-var WorkflowType_name *smithy.Schema
-
-var WorkflowType_version *smithy.Schema
-
-var WorkflowTypeConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "WorkflowTypeConfiguration",
-}, smithy.ShapeTypeStructure, 6)
-var WorkflowTypeConfiguration_defaultTaskStartToCloseTimeout *smithy.Schema
-
-var WorkflowTypeConfiguration_defaultExecutionStartToCloseTimeout *smithy.Schema
-
-var WorkflowTypeConfiguration_defaultTaskList *smithy.Schema
-
-var WorkflowTypeConfiguration_defaultTaskPriority *smithy.Schema
-
-var WorkflowTypeConfiguration_defaultChildPolicy *smithy.Schema
-
-var WorkflowTypeConfiguration_defaultLambdaRole *smithy.Schema
-
-var WorkflowTypeFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "WorkflowTypeFilter",
-}, smithy.ShapeTypeStructure, 2)
-var WorkflowTypeFilter_name *smithy.Schema
-
-var WorkflowTypeFilter_version *smithy.Schema
-
-var WorkflowTypeInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "WorkflowTypeInfo",
-}, smithy.ShapeTypeStructure, 5)
-var WorkflowTypeInfo_workflowType *smithy.Schema
-
-var WorkflowTypeInfo_status *smithy.Schema
-
-var WorkflowTypeInfo_description *smithy.Schema
-
-var WorkflowTypeInfo_creationDate *smithy.Schema
-
-var WorkflowTypeInfo_deprecationDate *smithy.Schema
-
-var _WorkflowTypeInfoList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "WorkflowTypeInfoList",
-}, smithy.ShapeTypeList, 1)
-var _WorkflowTypeInfoList_member *smithy.Schema
-
-var CountClosedWorkflowExecutionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "CountClosedWorkflowExecutionsInput",
-}, smithy.ShapeTypeStructure, 7)
-var CountClosedWorkflowExecutionsInput_domain *smithy.Schema
-
-var CountClosedWorkflowExecutionsInput_startTimeFilter *smithy.Schema
-
-var CountClosedWorkflowExecutionsInput_closeTimeFilter *smithy.Schema
-
-var CountClosedWorkflowExecutionsInput_executionFilter *smithy.Schema
-
-var CountClosedWorkflowExecutionsInput_typeFilter *smithy.Schema
-
-var CountClosedWorkflowExecutionsInput_tagFilter *smithy.Schema
-
-var CountClosedWorkflowExecutionsInput_closeStatusFilter *smithy.Schema
-
-var WorkflowExecutionCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "WorkflowExecutionCount",
-}, smithy.ShapeTypeStructure, 2)
-var WorkflowExecutionCount_count *smithy.Schema
-
-var WorkflowExecutionCount_truncated *smithy.Schema
-
-var CountOpenWorkflowExecutionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "CountOpenWorkflowExecutionsInput",
-}, smithy.ShapeTypeStructure, 5)
-var CountOpenWorkflowExecutionsInput_domain *smithy.Schema
-
-var CountOpenWorkflowExecutionsInput_startTimeFilter *smithy.Schema
-
-var CountOpenWorkflowExecutionsInput_typeFilter *smithy.Schema
-
-var CountOpenWorkflowExecutionsInput_tagFilter *smithy.Schema
-
-var CountOpenWorkflowExecutionsInput_executionFilter *smithy.Schema
-
-var CountPendingActivityTasksInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "CountPendingActivityTasksInput",
-}, smithy.ShapeTypeStructure, 2)
-var CountPendingActivityTasksInput_domain *smithy.Schema
-
-var CountPendingActivityTasksInput_taskList *smithy.Schema
-
-var PendingTaskCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "PendingTaskCount",
-}, smithy.ShapeTypeStructure, 2)
-var PendingTaskCount_count *smithy.Schema
-
-var PendingTaskCount_truncated *smithy.Schema
-
-var CountPendingDecisionTasksInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "CountPendingDecisionTasksInput",
-}, smithy.ShapeTypeStructure, 2)
-var CountPendingDecisionTasksInput_domain *smithy.Schema
-
-var CountPendingDecisionTasksInput_taskList *smithy.Schema
-
-var DeleteActivityTypeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "DeleteActivityTypeInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteActivityTypeInput_domain *smithy.Schema
-
-var DeleteActivityTypeInput_activityType *smithy.Schema
-
-var DeleteWorkflowTypeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "DeleteWorkflowTypeInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteWorkflowTypeInput_domain *smithy.Schema
-
-var DeleteWorkflowTypeInput_workflowType *smithy.Schema
-
-var DeprecateActivityTypeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "DeprecateActivityTypeInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeprecateActivityTypeInput_domain *smithy.Schema
-
-var DeprecateActivityTypeInput_activityType *smithy.Schema
-
-var DeprecateDomainInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "DeprecateDomainInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeprecateDomainInput_name *smithy.Schema
-
-var DeprecateWorkflowTypeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "DeprecateWorkflowTypeInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeprecateWorkflowTypeInput_domain *smithy.Schema
-
-var DeprecateWorkflowTypeInput_workflowType *smithy.Schema
-
-var DescribeActivityTypeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "DescribeActivityTypeInput",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeActivityTypeInput_domain *smithy.Schema
-
-var DescribeActivityTypeInput_activityType *smithy.Schema
-
-var ActivityTypeDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ActivityTypeDetail",
-}, smithy.ShapeTypeStructure, 2)
-var ActivityTypeDetail_typeInfo *smithy.Schema
-
-var ActivityTypeDetail_configuration *smithy.Schema
-
-var DescribeDomainInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "DescribeDomainInput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeDomainInput_name *smithy.Schema
-
-var DomainDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "DomainDetail",
-}, smithy.ShapeTypeStructure, 2)
-var DomainDetail_domainInfo *smithy.Schema
-
-var DomainDetail_configuration *smithy.Schema
-
-var DescribeWorkflowExecutionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "DescribeWorkflowExecutionInput",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeWorkflowExecutionInput_domain *smithy.Schema
-
-var DescribeWorkflowExecutionInput_execution *smithy.Schema
-
-var WorkflowExecutionDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "WorkflowExecutionDetail",
-}, smithy.ShapeTypeStructure, 5)
-var WorkflowExecutionDetail_executionInfo *smithy.Schema
-
-var WorkflowExecutionDetail_executionConfiguration *smithy.Schema
-
-var WorkflowExecutionDetail_openCounts *smithy.Schema
-
-var WorkflowExecutionDetail_latestActivityTaskTimestamp *smithy.Schema
-
-var WorkflowExecutionDetail_latestExecutionContext *smithy.Schema
-
-var DescribeWorkflowTypeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "DescribeWorkflowTypeInput",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeWorkflowTypeInput_domain *smithy.Schema
-
-var DescribeWorkflowTypeInput_workflowType *smithy.Schema
-
-var WorkflowTypeDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "WorkflowTypeDetail",
-}, smithy.ShapeTypeStructure, 2)
-var WorkflowTypeDetail_typeInfo *smithy.Schema
-
-var WorkflowTypeDetail_configuration *smithy.Schema
-
-var GetWorkflowExecutionHistoryInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "GetWorkflowExecutionHistoryInput",
-}, smithy.ShapeTypeStructure, 5)
-var GetWorkflowExecutionHistoryInput_domain *smithy.Schema
-
-var GetWorkflowExecutionHistoryInput_execution *smithy.Schema
-
-var GetWorkflowExecutionHistoryInput_nextPageToken *smithy.Schema
-
-var GetWorkflowExecutionHistoryInput_maximumPageSize *smithy.Schema
-
-var GetWorkflowExecutionHistoryInput_reverseOrder *smithy.Schema
-
-var History = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "History",
-}, smithy.ShapeTypeStructure, 2)
-var History_events *smithy.Schema
-
-var History_nextPageToken *smithy.Schema
-
-var ListActivityTypesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ListActivityTypesInput",
-}, smithy.ShapeTypeStructure, 6)
-var ListActivityTypesInput_domain *smithy.Schema
-
-var ListActivityTypesInput_name *smithy.Schema
-
-var ListActivityTypesInput_registrationStatus *smithy.Schema
-
-var ListActivityTypesInput_nextPageToken *smithy.Schema
-
-var ListActivityTypesInput_maximumPageSize *smithy.Schema
-
-var ListActivityTypesInput_reverseOrder *smithy.Schema
-
-var ActivityTypeInfos = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ActivityTypeInfos",
-}, smithy.ShapeTypeStructure, 2)
-var ActivityTypeInfos_typeInfos *smithy.Schema
-
-var ActivityTypeInfos_nextPageToken *smithy.Schema
-
-var ListClosedWorkflowExecutionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ListClosedWorkflowExecutionsInput",
-}, smithy.ShapeTypeStructure, 10)
-var ListClosedWorkflowExecutionsInput_domain *smithy.Schema
-
-var ListClosedWorkflowExecutionsInput_startTimeFilter *smithy.Schema
-
-var ListClosedWorkflowExecutionsInput_closeTimeFilter *smithy.Schema
-
-var ListClosedWorkflowExecutionsInput_executionFilter *smithy.Schema
-
-var ListClosedWorkflowExecutionsInput_closeStatusFilter *smithy.Schema
-
-var ListClosedWorkflowExecutionsInput_typeFilter *smithy.Schema
-
-var ListClosedWorkflowExecutionsInput_tagFilter *smithy.Schema
-
-var ListClosedWorkflowExecutionsInput_nextPageToken *smithy.Schema
-
-var ListClosedWorkflowExecutionsInput_maximumPageSize *smithy.Schema
-
-var ListClosedWorkflowExecutionsInput_reverseOrder *smithy.Schema
-
-var WorkflowExecutionInfos = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "WorkflowExecutionInfos",
-}, smithy.ShapeTypeStructure, 2)
-var WorkflowExecutionInfos_executionInfos *smithy.Schema
-
-var WorkflowExecutionInfos_nextPageToken *smithy.Schema
-
-var ListDomainsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ListDomainsInput",
-}, smithy.ShapeTypeStructure, 4)
-var ListDomainsInput_nextPageToken *smithy.Schema
-
-var ListDomainsInput_registrationStatus *smithy.Schema
-
-var ListDomainsInput_maximumPageSize *smithy.Schema
-
-var ListDomainsInput_reverseOrder *smithy.Schema
-
-var DomainInfos = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "DomainInfos",
-}, smithy.ShapeTypeStructure, 2)
-var DomainInfos_domainInfos *smithy.Schema
-
-var DomainInfos_nextPageToken *smithy.Schema
-
-var ListOpenWorkflowExecutionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ListOpenWorkflowExecutionsInput",
-}, smithy.ShapeTypeStructure, 8)
-var ListOpenWorkflowExecutionsInput_domain *smithy.Schema
-
-var ListOpenWorkflowExecutionsInput_startTimeFilter *smithy.Schema
-
-var ListOpenWorkflowExecutionsInput_typeFilter *smithy.Schema
-
-var ListOpenWorkflowExecutionsInput_tagFilter *smithy.Schema
-
-var ListOpenWorkflowExecutionsInput_nextPageToken *smithy.Schema
-
-var ListOpenWorkflowExecutionsInput_maximumPageSize *smithy.Schema
-
-var ListOpenWorkflowExecutionsInput_reverseOrder *smithy.Schema
-
-var ListOpenWorkflowExecutionsInput_executionFilter *smithy.Schema
-
-var ListTagsForResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ListTagsForResourceInput",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceInput_resourceArn *smithy.Schema
-
-var ListTagsForResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ListTagsForResourceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceOutput_tags *smithy.Schema
-
-var ListWorkflowTypesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ListWorkflowTypesInput",
-}, smithy.ShapeTypeStructure, 6)
-var ListWorkflowTypesInput_domain *smithy.Schema
-
-var ListWorkflowTypesInput_name *smithy.Schema
-
-var ListWorkflowTypesInput_registrationStatus *smithy.Schema
-
-var ListWorkflowTypesInput_nextPageToken *smithy.Schema
-
-var ListWorkflowTypesInput_maximumPageSize *smithy.Schema
-
-var ListWorkflowTypesInput_reverseOrder *smithy.Schema
-
-var WorkflowTypeInfos = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "WorkflowTypeInfos",
-}, smithy.ShapeTypeStructure, 2)
-var WorkflowTypeInfos_typeInfos *smithy.Schema
-
-var WorkflowTypeInfos_nextPageToken *smithy.Schema
-
-var PollForActivityTaskInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "PollForActivityTaskInput",
-}, smithy.ShapeTypeStructure, 3)
-var PollForActivityTaskInput_domain *smithy.Schema
-
-var PollForActivityTaskInput_taskList *smithy.Schema
-
-var PollForActivityTaskInput_identity *smithy.Schema
-
-var ActivityTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ActivityTask",
-}, smithy.ShapeTypeStructure, 6)
-var ActivityTask_taskToken *smithy.Schema
-
-var ActivityTask_activityId *smithy.Schema
-
-var ActivityTask_startedEventId *smithy.Schema
-
-var ActivityTask_workflowExecution *smithy.Schema
-
-var ActivityTask_activityType *smithy.Schema
-
-var ActivityTask_input *smithy.Schema
-
-var PollForDecisionTaskInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "PollForDecisionTaskInput",
-}, smithy.ShapeTypeStructure, 7)
-var PollForDecisionTaskInput_domain *smithy.Schema
-
-var PollForDecisionTaskInput_taskList *smithy.Schema
-
-var PollForDecisionTaskInput_identity *smithy.Schema
-
-var PollForDecisionTaskInput_nextPageToken *smithy.Schema
-
-var PollForDecisionTaskInput_maximumPageSize *smithy.Schema
-
-var PollForDecisionTaskInput_reverseOrder *smithy.Schema
-
-var PollForDecisionTaskInput_startAtPreviousStartedEvent *smithy.Schema
-
-var DecisionTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "DecisionTask",
-}, smithy.ShapeTypeStructure, 7)
-var DecisionTask_taskToken *smithy.Schema
-
-var DecisionTask_startedEventId *smithy.Schema
-
-var DecisionTask_workflowExecution *smithy.Schema
-
-var DecisionTask_workflowType *smithy.Schema
-
-var DecisionTask_events *smithy.Schema
-
-var DecisionTask_nextPageToken *smithy.Schema
-
-var DecisionTask_previousStartedEventId *smithy.Schema
-
-var RecordActivityTaskHeartbeatInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "RecordActivityTaskHeartbeatInput",
-}, smithy.ShapeTypeStructure, 2)
-var RecordActivityTaskHeartbeatInput_taskToken *smithy.Schema
-
-var RecordActivityTaskHeartbeatInput_details *smithy.Schema
-
-var ActivityTaskStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "ActivityTaskStatus",
-}, smithy.ShapeTypeStructure, 1)
-var ActivityTaskStatus_cancelRequested *smithy.Schema
-
-var RegisterActivityTypeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "RegisterActivityTypeInput",
-}, smithy.ShapeTypeStructure, 10)
-var RegisterActivityTypeInput_domain *smithy.Schema
-
-var RegisterActivityTypeInput_name *smithy.Schema
-
-var RegisterActivityTypeInput_version *smithy.Schema
-
-var RegisterActivityTypeInput_description *smithy.Schema
-
-var RegisterActivityTypeInput_defaultTaskStartToCloseTimeout *smithy.Schema
-
-var RegisterActivityTypeInput_defaultTaskHeartbeatTimeout *smithy.Schema
-
-var RegisterActivityTypeInput_defaultTaskList *smithy.Schema
-
-var RegisterActivityTypeInput_defaultTaskPriority *smithy.Schema
-
-var RegisterActivityTypeInput_defaultTaskScheduleToStartTimeout *smithy.Schema
-
-var RegisterActivityTypeInput_defaultTaskScheduleToCloseTimeout *smithy.Schema
-
-var RegisterDomainInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "RegisterDomainInput",
-}, smithy.ShapeTypeStructure, 4)
-var RegisterDomainInput_name *smithy.Schema
-
-var RegisterDomainInput_description *smithy.Schema
-
-var RegisterDomainInput_workflowExecutionRetentionPeriodInDays *smithy.Schema
-
-var RegisterDomainInput_tags *smithy.Schema
-
-var RegisterWorkflowTypeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "RegisterWorkflowTypeInput",
-}, smithy.ShapeTypeStructure, 10)
-var RegisterWorkflowTypeInput_domain *smithy.Schema
-
-var RegisterWorkflowTypeInput_name *smithy.Schema
-
-var RegisterWorkflowTypeInput_version *smithy.Schema
-
-var RegisterWorkflowTypeInput_description *smithy.Schema
-
-var RegisterWorkflowTypeInput_defaultTaskStartToCloseTimeout *smithy.Schema
-
-var RegisterWorkflowTypeInput_defaultExecutionStartToCloseTimeout *smithy.Schema
-
-var RegisterWorkflowTypeInput_defaultTaskList *smithy.Schema
-
-var RegisterWorkflowTypeInput_defaultTaskPriority *smithy.Schema
-
-var RegisterWorkflowTypeInput_defaultChildPolicy *smithy.Schema
-
-var RegisterWorkflowTypeInput_defaultLambdaRole *smithy.Schema
-
-var RequestCancelWorkflowExecutionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "RequestCancelWorkflowExecutionInput",
-}, smithy.ShapeTypeStructure, 3)
-var RequestCancelWorkflowExecutionInput_domain *smithy.Schema
-
-var RequestCancelWorkflowExecutionInput_workflowId *smithy.Schema
-
-var RequestCancelWorkflowExecutionInput_runId *smithy.Schema
-
-var RespondActivityTaskCanceledInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "RespondActivityTaskCanceledInput",
-}, smithy.ShapeTypeStructure, 2)
-var RespondActivityTaskCanceledInput_taskToken *smithy.Schema
-
-var RespondActivityTaskCanceledInput_details *smithy.Schema
-
-var RespondActivityTaskCompletedInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "RespondActivityTaskCompletedInput",
-}, smithy.ShapeTypeStructure, 2)
-var RespondActivityTaskCompletedInput_taskToken *smithy.Schema
-
-var RespondActivityTaskCompletedInput_result *smithy.Schema
-
-var RespondActivityTaskFailedInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "RespondActivityTaskFailedInput",
-}, smithy.ShapeTypeStructure, 3)
-var RespondActivityTaskFailedInput_taskToken *smithy.Schema
-
-var RespondActivityTaskFailedInput_reason *smithy.Schema
-
-var RespondActivityTaskFailedInput_details *smithy.Schema
-
-var RespondDecisionTaskCompletedInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "RespondDecisionTaskCompletedInput",
-}, smithy.ShapeTypeStructure, 5)
-var RespondDecisionTaskCompletedInput_taskToken *smithy.Schema
-
-var RespondDecisionTaskCompletedInput_decisions *smithy.Schema
-
-var RespondDecisionTaskCompletedInput_executionContext *smithy.Schema
-
-var RespondDecisionTaskCompletedInput_taskList *smithy.Schema
-
-var RespondDecisionTaskCompletedInput_taskListScheduleToStartTimeout *smithy.Schema
-
-var SignalWorkflowExecutionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "SignalWorkflowExecutionInput",
-}, smithy.ShapeTypeStructure, 5)
-var SignalWorkflowExecutionInput_domain *smithy.Schema
-
-var SignalWorkflowExecutionInput_workflowId *smithy.Schema
-
-var SignalWorkflowExecutionInput_runId *smithy.Schema
-
-var SignalWorkflowExecutionInput_signalName *smithy.Schema
-
-var SignalWorkflowExecutionInput_input *smithy.Schema
-
-var StartWorkflowExecutionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "StartWorkflowExecutionInput",
-}, smithy.ShapeTypeStructure, 11)
-var StartWorkflowExecutionInput_domain *smithy.Schema
-
-var StartWorkflowExecutionInput_workflowId *smithy.Schema
-
-var StartWorkflowExecutionInput_workflowType *smithy.Schema
-
-var StartWorkflowExecutionInput_taskList *smithy.Schema
-
-var StartWorkflowExecutionInput_taskPriority *smithy.Schema
-
-var StartWorkflowExecutionInput_input *smithy.Schema
-
-var StartWorkflowExecutionInput_executionStartToCloseTimeout *smithy.Schema
-
-var StartWorkflowExecutionInput_tagList *smithy.Schema
-
-var StartWorkflowExecutionInput_taskStartToCloseTimeout *smithy.Schema
-
-var StartWorkflowExecutionInput_childPolicy *smithy.Schema
-
-var StartWorkflowExecutionInput_lambdaRole *smithy.Schema
-
-var Run = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "Run",
-}, smithy.ShapeTypeStructure, 1)
-var Run_runId *smithy.Schema
-
-var TagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "TagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceInput_resourceArn *smithy.Schema
-
-var TagResourceInput_tags *smithy.Schema
-
-var TerminateWorkflowExecutionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "TerminateWorkflowExecutionInput",
-}, smithy.ShapeTypeStructure, 6)
-var TerminateWorkflowExecutionInput_domain *smithy.Schema
-
-var TerminateWorkflowExecutionInput_workflowId *smithy.Schema
-
-var TerminateWorkflowExecutionInput_runId *smithy.Schema
-
-var TerminateWorkflowExecutionInput_reason *smithy.Schema
-
-var TerminateWorkflowExecutionInput_details *smithy.Schema
-
-var TerminateWorkflowExecutionInput_childPolicy *smithy.Schema
-
-var UndeprecateActivityTypeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "UndeprecateActivityTypeInput",
-}, smithy.ShapeTypeStructure, 2)
-var UndeprecateActivityTypeInput_domain *smithy.Schema
-
-var UndeprecateActivityTypeInput_activityType *smithy.Schema
-
-var UndeprecateDomainInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "UndeprecateDomainInput",
-}, smithy.ShapeTypeStructure, 1)
-var UndeprecateDomainInput_name *smithy.Schema
-
-var UndeprecateWorkflowTypeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "UndeprecateWorkflowTypeInput",
-}, smithy.ShapeTypeStructure, 2)
-var UndeprecateWorkflowTypeInput_domain *smithy.Schema
-
-var UndeprecateWorkflowTypeInput_workflowType *smithy.Schema
-
-var UntagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.swf",
-	Name:      "UntagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceInput_resourceArn *smithy.Schema
-
-var UntagResourceInput_tagKeys *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	ActivityTaskCanceledEventAttributes_details = ActivityTaskCanceledEventAttributes.AddMember("details", _Data)
-
-	ActivityTaskCanceledEventAttributes_scheduledEventId = ActivityTaskCanceledEventAttributes.AddMember("scheduledEventId", _EventId)
-
-	ActivityTaskCanceledEventAttributes_startedEventId = ActivityTaskCanceledEventAttributes.AddMember("startedEventId", _EventId)
-
-	ActivityTaskCanceledEventAttributes_latestCancelRequestedEventId = ActivityTaskCanceledEventAttributes.AddMember("latestCancelRequestedEventId", _EventId)
-
-	ActivityTaskCancelRequestedEventAttributes_decisionTaskCompletedEventId = ActivityTaskCancelRequestedEventAttributes.AddMember("decisionTaskCompletedEventId", _EventId)
-
-	ActivityTaskCancelRequestedEventAttributes_activityId = ActivityTaskCancelRequestedEventAttributes.AddMember("activityId", _ActivityId)
-
-	ActivityTaskCompletedEventAttributes_result = ActivityTaskCompletedEventAttributes.AddMember("result", _Data)
-
-	ActivityTaskCompletedEventAttributes_scheduledEventId = ActivityTaskCompletedEventAttributes.AddMember("scheduledEventId", _EventId)
-
-	ActivityTaskCompletedEventAttributes_startedEventId = ActivityTaskCompletedEventAttributes.AddMember("startedEventId", _EventId)
-
-	ActivityTaskFailedEventAttributes_reason = ActivityTaskFailedEventAttributes.AddMember("reason", _FailureReason)
-
-	ActivityTaskFailedEventAttributes_details = ActivityTaskFailedEventAttributes.AddMember("details", _Data)
-
-	ActivityTaskFailedEventAttributes_scheduledEventId = ActivityTaskFailedEventAttributes.AddMember("scheduledEventId", _EventId)
-
-	ActivityTaskFailedEventAttributes_startedEventId = ActivityTaskFailedEventAttributes.AddMember("startedEventId", _EventId)
-
-	ActivityType_name = ActivityType.AddMember("name", _Name)
-
-	ActivityType_version = ActivityType.AddMember("version", _Version)
-
-	TaskList_name = TaskList.AddMember("name", _Name)
-
-	ActivityTaskScheduledEventAttributes_activityType = ActivityTaskScheduledEventAttributes.AddMember("activityType", ActivityType)
-
-	ActivityTaskScheduledEventAttributes_activityId = ActivityTaskScheduledEventAttributes.AddMember("activityId", _ActivityId)
-
-	ActivityTaskScheduledEventAttributes_input = ActivityTaskScheduledEventAttributes.AddMember("input", _Data)
-
-	ActivityTaskScheduledEventAttributes_control = ActivityTaskScheduledEventAttributes.AddMember("control", _Data)
-
-	ActivityTaskScheduledEventAttributes_scheduleToStartTimeout = ActivityTaskScheduledEventAttributes.AddMember("scheduleToStartTimeout", _DurationInSecondsOptional)
-
-	ActivityTaskScheduledEventAttributes_scheduleToCloseTimeout = ActivityTaskScheduledEventAttributes.AddMember("scheduleToCloseTimeout", _DurationInSecondsOptional)
-
-	ActivityTaskScheduledEventAttributes_startToCloseTimeout = ActivityTaskScheduledEventAttributes.AddMember("startToCloseTimeout", _DurationInSecondsOptional)
-
-	ActivityTaskScheduledEventAttributes_taskList = ActivityTaskScheduledEventAttributes.AddMember("taskList", TaskList)
-
-	ActivityTaskScheduledEventAttributes_taskPriority = ActivityTaskScheduledEventAttributes.AddMember("taskPriority", _TaskPriority)
-
-	ActivityTaskScheduledEventAttributes_decisionTaskCompletedEventId = ActivityTaskScheduledEventAttributes.AddMember("decisionTaskCompletedEventId", _EventId)
-
-	ActivityTaskScheduledEventAttributes_heartbeatTimeout = ActivityTaskScheduledEventAttributes.AddMember("heartbeatTimeout", _DurationInSecondsOptional)
-
-	ActivityTaskStartedEventAttributes_identity = ActivityTaskStartedEventAttributes.AddMember("identity", _Identity)
-
-	ActivityTaskStartedEventAttributes_scheduledEventId = ActivityTaskStartedEventAttributes.AddMember("scheduledEventId", _EventId)
-
-	ActivityTaskTimeoutType_START_TO_CLOSE = ActivityTaskTimeoutType.AddMember("START_TO_CLOSE", smithyprelude.Unit)
-
-	ActivityTaskTimeoutType_SCHEDULE_TO_START = ActivityTaskTimeoutType.AddMember("SCHEDULE_TO_START", smithyprelude.Unit)
-
-	ActivityTaskTimeoutType_SCHEDULE_TO_CLOSE = ActivityTaskTimeoutType.AddMember("SCHEDULE_TO_CLOSE", smithyprelude.Unit)
-
-	ActivityTaskTimeoutType_HEARTBEAT = ActivityTaskTimeoutType.AddMember("HEARTBEAT", smithyprelude.Unit)
-
-	ActivityTaskTimedOutEventAttributes_timeoutType = ActivityTaskTimedOutEventAttributes.AddMember("timeoutType", ActivityTaskTimeoutType)
-
-	ActivityTaskTimedOutEventAttributes_scheduledEventId = ActivityTaskTimedOutEventAttributes.AddMember("scheduledEventId", _EventId)
-
-	ActivityTaskTimedOutEventAttributes_startedEventId = ActivityTaskTimedOutEventAttributes.AddMember("startedEventId", _EventId)
-
-	ActivityTaskTimedOutEventAttributes_details = ActivityTaskTimedOutEventAttributes.AddMember("details", _LimitedData)
-
-	ActivityTypeConfiguration_defaultTaskStartToCloseTimeout = ActivityTypeConfiguration.AddMember("defaultTaskStartToCloseTimeout", _DurationInSecondsOptional)
-
-	ActivityTypeConfiguration_defaultTaskHeartbeatTimeout = ActivityTypeConfiguration.AddMember("defaultTaskHeartbeatTimeout", _DurationInSecondsOptional)
-
-	ActivityTypeConfiguration_defaultTaskList = ActivityTypeConfiguration.AddMember("defaultTaskList", TaskList)
-
-	ActivityTypeConfiguration_defaultTaskPriority = ActivityTypeConfiguration.AddMember("defaultTaskPriority", _TaskPriority)
-
-	ActivityTypeConfiguration_defaultTaskScheduleToStartTimeout = ActivityTypeConfiguration.AddMember("defaultTaskScheduleToStartTimeout", _DurationInSecondsOptional)
-
-	ActivityTypeConfiguration_defaultTaskScheduleToCloseTimeout = ActivityTypeConfiguration.AddMember("defaultTaskScheduleToCloseTimeout", _DurationInSecondsOptional)
-
-	RegistrationStatus_REGISTERED = RegistrationStatus.AddMember("REGISTERED", smithyprelude.Unit)
-
-	RegistrationStatus_DEPRECATED = RegistrationStatus.AddMember("DEPRECATED", smithyprelude.Unit)
-
-	ActivityTypeInfo_activityType = ActivityTypeInfo.AddMember("activityType", ActivityType)
-
-	ActivityTypeInfo_status = ActivityTypeInfo.AddMember("status", RegistrationStatus)
-
-	ActivityTypeInfo_description = ActivityTypeInfo.AddMember("description", _Description)
-
-	ActivityTypeInfo_creationDate = ActivityTypeInfo.AddMember("creationDate", _Timestamp)
-
-	ActivityTypeInfo_deprecationDate = ActivityTypeInfo.AddMember("deprecationDate", _Timestamp)
-
-	_ActivityTypeInfoList_member = _ActivityTypeInfoList.AddMember("member", ActivityTypeInfo)
-
-	CancelTimerDecisionAttributes_timerId = CancelTimerDecisionAttributes.AddMember("timerId", _TimerId)
-
-	CancelTimerFailedCause_TIMER_ID_UNKNOWN = CancelTimerFailedCause.AddMember("TIMER_ID_UNKNOWN", smithyprelude.Unit)
-
-	CancelTimerFailedCause_OPERATION_NOT_PERMITTED = CancelTimerFailedCause.AddMember("OPERATION_NOT_PERMITTED", smithyprelude.Unit)
-
-	CancelTimerFailedEventAttributes_timerId = CancelTimerFailedEventAttributes.AddMember("timerId", _TimerId)
-
-	CancelTimerFailedEventAttributes_cause = CancelTimerFailedEventAttributes.AddMember("cause", CancelTimerFailedCause)
-
-	CancelTimerFailedEventAttributes_decisionTaskCompletedEventId = CancelTimerFailedEventAttributes.AddMember("decisionTaskCompletedEventId", _EventId)
-
-	CancelWorkflowExecutionDecisionAttributes_details = CancelWorkflowExecutionDecisionAttributes.AddMember("details", _Data)
-
-	CancelWorkflowExecutionFailedCause_UNHANDLED_DECISION = CancelWorkflowExecutionFailedCause.AddMember("UNHANDLED_DECISION", smithyprelude.Unit)
-
-	CancelWorkflowExecutionFailedCause_OPERATION_NOT_PERMITTED = CancelWorkflowExecutionFailedCause.AddMember("OPERATION_NOT_PERMITTED", smithyprelude.Unit)
-
-	CancelWorkflowExecutionFailedEventAttributes_cause = CancelWorkflowExecutionFailedEventAttributes.AddMember("cause", CancelWorkflowExecutionFailedCause)
-
-	CancelWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId = CancelWorkflowExecutionFailedEventAttributes.AddMember("decisionTaskCompletedEventId", _EventId)
-
-	ChildPolicy_TERMINATE = ChildPolicy.AddMember("TERMINATE", smithyprelude.Unit)
-
-	ChildPolicy_REQUEST_CANCEL = ChildPolicy.AddMember("REQUEST_CANCEL", smithyprelude.Unit)
-
-	ChildPolicy_ABANDON = ChildPolicy.AddMember("ABANDON", smithyprelude.Unit)
-
-	WorkflowExecution_workflowId = WorkflowExecution.AddMember("workflowId", _WorkflowId)
-
-	WorkflowExecution_runId = WorkflowExecution.AddMember("runId", _WorkflowRunId)
-
-	WorkflowType_name = WorkflowType.AddMember("name", _Name)
-
-	WorkflowType_version = WorkflowType.AddMember("version", _Version)
-
-	ChildWorkflowExecutionCanceledEventAttributes_workflowExecution = ChildWorkflowExecutionCanceledEventAttributes.AddMember("workflowExecution", WorkflowExecution)
-
-	ChildWorkflowExecutionCanceledEventAttributes_workflowType = ChildWorkflowExecutionCanceledEventAttributes.AddMember("workflowType", WorkflowType)
-
-	ChildWorkflowExecutionCanceledEventAttributes_details = ChildWorkflowExecutionCanceledEventAttributes.AddMember("details", _Data)
-
-	ChildWorkflowExecutionCanceledEventAttributes_initiatedEventId = ChildWorkflowExecutionCanceledEventAttributes.AddMember("initiatedEventId", _EventId)
-
-	ChildWorkflowExecutionCanceledEventAttributes_startedEventId = ChildWorkflowExecutionCanceledEventAttributes.AddMember("startedEventId", _EventId)
-
-	ChildWorkflowExecutionCompletedEventAttributes_workflowExecution = ChildWorkflowExecutionCompletedEventAttributes.AddMember("workflowExecution", WorkflowExecution)
-
-	ChildWorkflowExecutionCompletedEventAttributes_workflowType = ChildWorkflowExecutionCompletedEventAttributes.AddMember("workflowType", WorkflowType)
-
-	ChildWorkflowExecutionCompletedEventAttributes_result = ChildWorkflowExecutionCompletedEventAttributes.AddMember("result", _Data)
-
-	ChildWorkflowExecutionCompletedEventAttributes_initiatedEventId = ChildWorkflowExecutionCompletedEventAttributes.AddMember("initiatedEventId", _EventId)
-
-	ChildWorkflowExecutionCompletedEventAttributes_startedEventId = ChildWorkflowExecutionCompletedEventAttributes.AddMember("startedEventId", _EventId)
-
-	ChildWorkflowExecutionFailedEventAttributes_workflowExecution = ChildWorkflowExecutionFailedEventAttributes.AddMember("workflowExecution", WorkflowExecution)
-
-	ChildWorkflowExecutionFailedEventAttributes_workflowType = ChildWorkflowExecutionFailedEventAttributes.AddMember("workflowType", WorkflowType)
-
-	ChildWorkflowExecutionFailedEventAttributes_reason = ChildWorkflowExecutionFailedEventAttributes.AddMember("reason", _FailureReason)
-
-	ChildWorkflowExecutionFailedEventAttributes_details = ChildWorkflowExecutionFailedEventAttributes.AddMember("details", _Data)
-
-	ChildWorkflowExecutionFailedEventAttributes_initiatedEventId = ChildWorkflowExecutionFailedEventAttributes.AddMember("initiatedEventId", _EventId)
-
-	ChildWorkflowExecutionFailedEventAttributes_startedEventId = ChildWorkflowExecutionFailedEventAttributes.AddMember("startedEventId", _EventId)
-
-	ChildWorkflowExecutionStartedEventAttributes_workflowExecution = ChildWorkflowExecutionStartedEventAttributes.AddMember("workflowExecution", WorkflowExecution)
-
-	ChildWorkflowExecutionStartedEventAttributes_workflowType = ChildWorkflowExecutionStartedEventAttributes.AddMember("workflowType", WorkflowType)
-
-	ChildWorkflowExecutionStartedEventAttributes_initiatedEventId = ChildWorkflowExecutionStartedEventAttributes.AddMember("initiatedEventId", _EventId)
-
-	ChildWorkflowExecutionTerminatedEventAttributes_workflowExecution = ChildWorkflowExecutionTerminatedEventAttributes.AddMember("workflowExecution", WorkflowExecution)
-
-	ChildWorkflowExecutionTerminatedEventAttributes_workflowType = ChildWorkflowExecutionTerminatedEventAttributes.AddMember("workflowType", WorkflowType)
-
-	ChildWorkflowExecutionTerminatedEventAttributes_initiatedEventId = ChildWorkflowExecutionTerminatedEventAttributes.AddMember("initiatedEventId", _EventId)
-
-	ChildWorkflowExecutionTerminatedEventAttributes_startedEventId = ChildWorkflowExecutionTerminatedEventAttributes.AddMember("startedEventId", _EventId)
-
-	WorkflowExecutionTimeoutType_START_TO_CLOSE = WorkflowExecutionTimeoutType.AddMember("START_TO_CLOSE", smithyprelude.Unit)
-
-	ChildWorkflowExecutionTimedOutEventAttributes_workflowExecution = ChildWorkflowExecutionTimedOutEventAttributes.AddMember("workflowExecution", WorkflowExecution)
-
-	ChildWorkflowExecutionTimedOutEventAttributes_workflowType = ChildWorkflowExecutionTimedOutEventAttributes.AddMember("workflowType", WorkflowType)
-
-	ChildWorkflowExecutionTimedOutEventAttributes_timeoutType = ChildWorkflowExecutionTimedOutEventAttributes.AddMember("timeoutType", WorkflowExecutionTimeoutType)
-
-	ChildWorkflowExecutionTimedOutEventAttributes_initiatedEventId = ChildWorkflowExecutionTimedOutEventAttributes.AddMember("initiatedEventId", _EventId)
-
-	ChildWorkflowExecutionTimedOutEventAttributes_startedEventId = ChildWorkflowExecutionTimedOutEventAttributes.AddMember("startedEventId", _EventId)
-
-	CloseStatus_COMPLETED = CloseStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	CloseStatus_FAILED = CloseStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	CloseStatus_CANCELED = CloseStatus.AddMember("CANCELED", smithyprelude.Unit)
-
-	CloseStatus_TERMINATED = CloseStatus.AddMember("TERMINATED", smithyprelude.Unit)
-
-	CloseStatus_CONTINUED_AS_NEW = CloseStatus.AddMember("CONTINUED_AS_NEW", smithyprelude.Unit)
-
-	CloseStatus_TIMED_OUT = CloseStatus.AddMember("TIMED_OUT", smithyprelude.Unit)
-
-	CloseStatusFilter_status = CloseStatusFilter.AddMember("status", CloseStatus)
-
-	CompleteWorkflowExecutionDecisionAttributes_result = CompleteWorkflowExecutionDecisionAttributes.AddMember("result", _Data)
-
-	CompleteWorkflowExecutionFailedCause_UNHANDLED_DECISION = CompleteWorkflowExecutionFailedCause.AddMember("UNHANDLED_DECISION", smithyprelude.Unit)
-
-	CompleteWorkflowExecutionFailedCause_OPERATION_NOT_PERMITTED = CompleteWorkflowExecutionFailedCause.AddMember("OPERATION_NOT_PERMITTED", smithyprelude.Unit)
-
-	CompleteWorkflowExecutionFailedEventAttributes_cause = CompleteWorkflowExecutionFailedEventAttributes.AddMember("cause", CompleteWorkflowExecutionFailedCause)
-
-	CompleteWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId = CompleteWorkflowExecutionFailedEventAttributes.AddMember("decisionTaskCompletedEventId", _EventId)
-
-	_TagList_member = _TagList.AddMember("member", _Tag)
-
-	ContinueAsNewWorkflowExecutionDecisionAttributes_input = ContinueAsNewWorkflowExecutionDecisionAttributes.AddMember("input", _Data)
-
-	ContinueAsNewWorkflowExecutionDecisionAttributes_executionStartToCloseTimeout = ContinueAsNewWorkflowExecutionDecisionAttributes.AddMember("executionStartToCloseTimeout", _DurationInSecondsOptional)
-
-	ContinueAsNewWorkflowExecutionDecisionAttributes_taskList = ContinueAsNewWorkflowExecutionDecisionAttributes.AddMember("taskList", TaskList)
-
-	ContinueAsNewWorkflowExecutionDecisionAttributes_taskPriority = ContinueAsNewWorkflowExecutionDecisionAttributes.AddMember("taskPriority", _TaskPriority)
-
-	ContinueAsNewWorkflowExecutionDecisionAttributes_taskStartToCloseTimeout = ContinueAsNewWorkflowExecutionDecisionAttributes.AddMember("taskStartToCloseTimeout", _DurationInSecondsOptional)
-
-	ContinueAsNewWorkflowExecutionDecisionAttributes_childPolicy = ContinueAsNewWorkflowExecutionDecisionAttributes.AddMember("childPolicy", ChildPolicy)
-
-	ContinueAsNewWorkflowExecutionDecisionAttributes_tagList = ContinueAsNewWorkflowExecutionDecisionAttributes.AddMember("tagList", _TagList)
-
-	ContinueAsNewWorkflowExecutionDecisionAttributes_workflowTypeVersion = ContinueAsNewWorkflowExecutionDecisionAttributes.AddMember("workflowTypeVersion", _Version)
-
-	ContinueAsNewWorkflowExecutionDecisionAttributes_lambdaRole = ContinueAsNewWorkflowExecutionDecisionAttributes.AddMember("lambdaRole", _Arn)
-
-	ContinueAsNewWorkflowExecutionFailedCause_UNHANDLED_DECISION = ContinueAsNewWorkflowExecutionFailedCause.AddMember("UNHANDLED_DECISION", smithyprelude.Unit)
-
-	ContinueAsNewWorkflowExecutionFailedCause_WORKFLOW_TYPE_DEPRECATED = ContinueAsNewWorkflowExecutionFailedCause.AddMember("WORKFLOW_TYPE_DEPRECATED", smithyprelude.Unit)
-
-	ContinueAsNewWorkflowExecutionFailedCause_WORKFLOW_TYPE_DOES_NOT_EXIST = ContinueAsNewWorkflowExecutionFailedCause.AddMember("WORKFLOW_TYPE_DOES_NOT_EXIST", smithyprelude.Unit)
-
-	ContinueAsNewWorkflowExecutionFailedCause_DEFAULT_EXECUTION_START_TO_CLOSE_TIMEOUT_UNDEFINED = ContinueAsNewWorkflowExecutionFailedCause.AddMember("DEFAULT_EXECUTION_START_TO_CLOSE_TIMEOUT_UNDEFINED", smithyprelude.Unit)
-
-	ContinueAsNewWorkflowExecutionFailedCause_DEFAULT_TASK_START_TO_CLOSE_TIMEOUT_UNDEFINED = ContinueAsNewWorkflowExecutionFailedCause.AddMember("DEFAULT_TASK_START_TO_CLOSE_TIMEOUT_UNDEFINED", smithyprelude.Unit)
-
-	ContinueAsNewWorkflowExecutionFailedCause_DEFAULT_TASK_LIST_UNDEFINED = ContinueAsNewWorkflowExecutionFailedCause.AddMember("DEFAULT_TASK_LIST_UNDEFINED", smithyprelude.Unit)
-
-	ContinueAsNewWorkflowExecutionFailedCause_DEFAULT_CHILD_POLICY_UNDEFINED = ContinueAsNewWorkflowExecutionFailedCause.AddMember("DEFAULT_CHILD_POLICY_UNDEFINED", smithyprelude.Unit)
-
-	ContinueAsNewWorkflowExecutionFailedCause_CONTINUE_AS_NEW_WORKFLOW_EXECUTION_RATE_EXCEEDED = ContinueAsNewWorkflowExecutionFailedCause.AddMember("CONTINUE_AS_NEW_WORKFLOW_EXECUTION_RATE_EXCEEDED", smithyprelude.Unit)
-
-	ContinueAsNewWorkflowExecutionFailedCause_OPERATION_NOT_PERMITTED = ContinueAsNewWorkflowExecutionFailedCause.AddMember("OPERATION_NOT_PERMITTED", smithyprelude.Unit)
-
-	ContinueAsNewWorkflowExecutionFailedEventAttributes_cause = ContinueAsNewWorkflowExecutionFailedEventAttributes.AddMember("cause", ContinueAsNewWorkflowExecutionFailedCause)
-
-	ContinueAsNewWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId = ContinueAsNewWorkflowExecutionFailedEventAttributes.AddMember("decisionTaskCompletedEventId", _EventId)
-
-	DecisionType_ScheduleActivityTask = DecisionType.AddMember("ScheduleActivityTask", smithyprelude.Unit)
-
-	DecisionType_RequestCancelActivityTask = DecisionType.AddMember("RequestCancelActivityTask", smithyprelude.Unit)
-
-	DecisionType_CompleteWorkflowExecution = DecisionType.AddMember("CompleteWorkflowExecution", smithyprelude.Unit)
-
-	DecisionType_FailWorkflowExecution = DecisionType.AddMember("FailWorkflowExecution", smithyprelude.Unit)
-
-	DecisionType_CancelWorkflowExecution = DecisionType.AddMember("CancelWorkflowExecution", smithyprelude.Unit)
-
-	DecisionType_ContinueAsNewWorkflowExecution = DecisionType.AddMember("ContinueAsNewWorkflowExecution", smithyprelude.Unit)
-
-	DecisionType_RecordMarker = DecisionType.AddMember("RecordMarker", smithyprelude.Unit)
-
-	DecisionType_StartTimer = DecisionType.AddMember("StartTimer", smithyprelude.Unit)
-
-	DecisionType_CancelTimer = DecisionType.AddMember("CancelTimer", smithyprelude.Unit)
-
-	DecisionType_SignalExternalWorkflowExecution = DecisionType.AddMember("SignalExternalWorkflowExecution", smithyprelude.Unit)
-
-	DecisionType_RequestCancelExternalWorkflowExecution = DecisionType.AddMember("RequestCancelExternalWorkflowExecution", smithyprelude.Unit)
-
-	DecisionType_StartChildWorkflowExecution = DecisionType.AddMember("StartChildWorkflowExecution", smithyprelude.Unit)
-
-	DecisionType_ScheduleLambdaFunction = DecisionType.AddMember("ScheduleLambdaFunction", smithyprelude.Unit)
-
-	ScheduleActivityTaskDecisionAttributes_activityType = ScheduleActivityTaskDecisionAttributes.AddMember("activityType", ActivityType)
-
-	ScheduleActivityTaskDecisionAttributes_activityId = ScheduleActivityTaskDecisionAttributes.AddMember("activityId", _ActivityId)
-
-	ScheduleActivityTaskDecisionAttributes_control = ScheduleActivityTaskDecisionAttributes.AddMember("control", _Data)
-
-	ScheduleActivityTaskDecisionAttributes_input = ScheduleActivityTaskDecisionAttributes.AddMember("input", _Data)
-
-	ScheduleActivityTaskDecisionAttributes_scheduleToCloseTimeout = ScheduleActivityTaskDecisionAttributes.AddMember("scheduleToCloseTimeout", _DurationInSecondsOptional)
-
-	ScheduleActivityTaskDecisionAttributes_taskList = ScheduleActivityTaskDecisionAttributes.AddMember("taskList", TaskList)
-
-	ScheduleActivityTaskDecisionAttributes_taskPriority = ScheduleActivityTaskDecisionAttributes.AddMember("taskPriority", _TaskPriority)
-
-	ScheduleActivityTaskDecisionAttributes_scheduleToStartTimeout = ScheduleActivityTaskDecisionAttributes.AddMember("scheduleToStartTimeout", _DurationInSecondsOptional)
-
-	ScheduleActivityTaskDecisionAttributes_startToCloseTimeout = ScheduleActivityTaskDecisionAttributes.AddMember("startToCloseTimeout", _DurationInSecondsOptional)
-
-	ScheduleActivityTaskDecisionAttributes_heartbeatTimeout = ScheduleActivityTaskDecisionAttributes.AddMember("heartbeatTimeout", _DurationInSecondsOptional)
-
-	RequestCancelActivityTaskDecisionAttributes_activityId = RequestCancelActivityTaskDecisionAttributes.AddMember("activityId", _ActivityId)
-
-	FailWorkflowExecutionDecisionAttributes_reason = FailWorkflowExecutionDecisionAttributes.AddMember("reason", _FailureReason)
-
-	FailWorkflowExecutionDecisionAttributes_details = FailWorkflowExecutionDecisionAttributes.AddMember("details", _Data)
-
-	RecordMarkerDecisionAttributes_markerName = RecordMarkerDecisionAttributes.AddMember("markerName", _MarkerName)
-
-	RecordMarkerDecisionAttributes_details = RecordMarkerDecisionAttributes.AddMember("details", _Data)
-
-	StartTimerDecisionAttributes_timerId = StartTimerDecisionAttributes.AddMember("timerId", _TimerId)
-
-	StartTimerDecisionAttributes_control = StartTimerDecisionAttributes.AddMember("control", _Data)
-
-	StartTimerDecisionAttributes_startToFireTimeout = StartTimerDecisionAttributes.AddMember("startToFireTimeout", _DurationInSeconds)
-
-	SignalExternalWorkflowExecutionDecisionAttributes_workflowId = SignalExternalWorkflowExecutionDecisionAttributes.AddMember("workflowId", _WorkflowId)
-
-	SignalExternalWorkflowExecutionDecisionAttributes_runId = SignalExternalWorkflowExecutionDecisionAttributes.AddMember("runId", _WorkflowRunIdOptional)
-
-	SignalExternalWorkflowExecutionDecisionAttributes_signalName = SignalExternalWorkflowExecutionDecisionAttributes.AddMember("signalName", _SignalName)
-
-	SignalExternalWorkflowExecutionDecisionAttributes_input = SignalExternalWorkflowExecutionDecisionAttributes.AddMember("input", _Data)
-
-	SignalExternalWorkflowExecutionDecisionAttributes_control = SignalExternalWorkflowExecutionDecisionAttributes.AddMember("control", _Data)
-
-	RequestCancelExternalWorkflowExecutionDecisionAttributes_workflowId = RequestCancelExternalWorkflowExecutionDecisionAttributes.AddMember("workflowId", _WorkflowId)
-
-	RequestCancelExternalWorkflowExecutionDecisionAttributes_runId = RequestCancelExternalWorkflowExecutionDecisionAttributes.AddMember("runId", _WorkflowRunIdOptional)
-
-	RequestCancelExternalWorkflowExecutionDecisionAttributes_control = RequestCancelExternalWorkflowExecutionDecisionAttributes.AddMember("control", _Data)
-
-	StartChildWorkflowExecutionDecisionAttributes_workflowType = StartChildWorkflowExecutionDecisionAttributes.AddMember("workflowType", WorkflowType)
-
-	StartChildWorkflowExecutionDecisionAttributes_workflowId = StartChildWorkflowExecutionDecisionAttributes.AddMember("workflowId", _WorkflowId)
-
-	StartChildWorkflowExecutionDecisionAttributes_control = StartChildWorkflowExecutionDecisionAttributes.AddMember("control", _Data)
-
-	StartChildWorkflowExecutionDecisionAttributes_input = StartChildWorkflowExecutionDecisionAttributes.AddMember("input", _Data)
-
-	StartChildWorkflowExecutionDecisionAttributes_executionStartToCloseTimeout = StartChildWorkflowExecutionDecisionAttributes.AddMember("executionStartToCloseTimeout", _DurationInSecondsOptional)
-
-	StartChildWorkflowExecutionDecisionAttributes_taskList = StartChildWorkflowExecutionDecisionAttributes.AddMember("taskList", TaskList)
-
-	StartChildWorkflowExecutionDecisionAttributes_taskPriority = StartChildWorkflowExecutionDecisionAttributes.AddMember("taskPriority", _TaskPriority)
-
-	StartChildWorkflowExecutionDecisionAttributes_taskStartToCloseTimeout = StartChildWorkflowExecutionDecisionAttributes.AddMember("taskStartToCloseTimeout", _DurationInSecondsOptional)
-
-	StartChildWorkflowExecutionDecisionAttributes_childPolicy = StartChildWorkflowExecutionDecisionAttributes.AddMember("childPolicy", ChildPolicy)
-
-	StartChildWorkflowExecutionDecisionAttributes_tagList = StartChildWorkflowExecutionDecisionAttributes.AddMember("tagList", _TagList)
-
-	StartChildWorkflowExecutionDecisionAttributes_lambdaRole = StartChildWorkflowExecutionDecisionAttributes.AddMember("lambdaRole", _Arn)
-
-	ScheduleLambdaFunctionDecisionAttributes_id = ScheduleLambdaFunctionDecisionAttributes.AddMember("id", _FunctionId)
-
-	ScheduleLambdaFunctionDecisionAttributes_name = ScheduleLambdaFunctionDecisionAttributes.AddMember("name", _FunctionName)
-
-	ScheduleLambdaFunctionDecisionAttributes_control = ScheduleLambdaFunctionDecisionAttributes.AddMember("control", _Data)
-
-	ScheduleLambdaFunctionDecisionAttributes_input = ScheduleLambdaFunctionDecisionAttributes.AddMember("input", _FunctionInput)
-
-	ScheduleLambdaFunctionDecisionAttributes_startToCloseTimeout = ScheduleLambdaFunctionDecisionAttributes.AddMember("startToCloseTimeout", _DurationInSecondsOptional)
-
-	Decision_decisionType = Decision.AddMember("decisionType", DecisionType)
-
-	Decision_scheduleActivityTaskDecisionAttributes = Decision.AddMember("scheduleActivityTaskDecisionAttributes", ScheduleActivityTaskDecisionAttributes)
-
-	Decision_requestCancelActivityTaskDecisionAttributes = Decision.AddMember("requestCancelActivityTaskDecisionAttributes", RequestCancelActivityTaskDecisionAttributes)
-
-	Decision_completeWorkflowExecutionDecisionAttributes = Decision.AddMember("completeWorkflowExecutionDecisionAttributes", CompleteWorkflowExecutionDecisionAttributes)
-
-	Decision_failWorkflowExecutionDecisionAttributes = Decision.AddMember("failWorkflowExecutionDecisionAttributes", FailWorkflowExecutionDecisionAttributes)
-
-	Decision_cancelWorkflowExecutionDecisionAttributes = Decision.AddMember("cancelWorkflowExecutionDecisionAttributes", CancelWorkflowExecutionDecisionAttributes)
-
-	Decision_continueAsNewWorkflowExecutionDecisionAttributes = Decision.AddMember("continueAsNewWorkflowExecutionDecisionAttributes", ContinueAsNewWorkflowExecutionDecisionAttributes)
-
-	Decision_recordMarkerDecisionAttributes = Decision.AddMember("recordMarkerDecisionAttributes", RecordMarkerDecisionAttributes)
-
-	Decision_startTimerDecisionAttributes = Decision.AddMember("startTimerDecisionAttributes", StartTimerDecisionAttributes)
-
-	Decision_cancelTimerDecisionAttributes = Decision.AddMember("cancelTimerDecisionAttributes", CancelTimerDecisionAttributes)
-
-	Decision_signalExternalWorkflowExecutionDecisionAttributes = Decision.AddMember("signalExternalWorkflowExecutionDecisionAttributes", SignalExternalWorkflowExecutionDecisionAttributes)
-
-	Decision_requestCancelExternalWorkflowExecutionDecisionAttributes = Decision.AddMember("requestCancelExternalWorkflowExecutionDecisionAttributes", RequestCancelExternalWorkflowExecutionDecisionAttributes)
-
-	Decision_startChildWorkflowExecutionDecisionAttributes = Decision.AddMember("startChildWorkflowExecutionDecisionAttributes", StartChildWorkflowExecutionDecisionAttributes)
-
-	Decision_scheduleLambdaFunctionDecisionAttributes = Decision.AddMember("scheduleLambdaFunctionDecisionAttributes", ScheduleLambdaFunctionDecisionAttributes)
-
-	_DecisionList_member = _DecisionList.AddMember("member", Decision)
-
-	DecisionTaskCompletedEventAttributes_executionContext = DecisionTaskCompletedEventAttributes.AddMember("executionContext", _Data)
-
-	DecisionTaskCompletedEventAttributes_scheduledEventId = DecisionTaskCompletedEventAttributes.AddMember("scheduledEventId", _EventId)
-
-	DecisionTaskCompletedEventAttributes_startedEventId = DecisionTaskCompletedEventAttributes.AddMember("startedEventId", _EventId)
-
-	DecisionTaskCompletedEventAttributes_taskList = DecisionTaskCompletedEventAttributes.AddMember("taskList", TaskList)
-
-	DecisionTaskCompletedEventAttributes_taskListScheduleToStartTimeout = DecisionTaskCompletedEventAttributes.AddMember("taskListScheduleToStartTimeout", _DurationInSecondsOptional)
-
-	DecisionTaskScheduledEventAttributes_taskList = DecisionTaskScheduledEventAttributes.AddMember("taskList", TaskList)
-
-	DecisionTaskScheduledEventAttributes_taskPriority = DecisionTaskScheduledEventAttributes.AddMember("taskPriority", _TaskPriority)
-
-	DecisionTaskScheduledEventAttributes_startToCloseTimeout = DecisionTaskScheduledEventAttributes.AddMember("startToCloseTimeout", _DurationInSecondsOptional)
-
-	DecisionTaskScheduledEventAttributes_scheduleToStartTimeout = DecisionTaskScheduledEventAttributes.AddMember("scheduleToStartTimeout", _DurationInSecondsOptional)
-
-	DecisionTaskStartedEventAttributes_identity = DecisionTaskStartedEventAttributes.AddMember("identity", _Identity)
-
-	DecisionTaskStartedEventAttributes_scheduledEventId = DecisionTaskStartedEventAttributes.AddMember("scheduledEventId", _EventId)
-
-	DecisionTaskTimeoutType_START_TO_CLOSE = DecisionTaskTimeoutType.AddMember("START_TO_CLOSE", smithyprelude.Unit)
-
-	DecisionTaskTimeoutType_SCHEDULE_TO_START = DecisionTaskTimeoutType.AddMember("SCHEDULE_TO_START", smithyprelude.Unit)
-
-	DecisionTaskTimedOutEventAttributes_timeoutType = DecisionTaskTimedOutEventAttributes.AddMember("timeoutType", DecisionTaskTimeoutType)
-
-	DecisionTaskTimedOutEventAttributes_scheduledEventId = DecisionTaskTimedOutEventAttributes.AddMember("scheduledEventId", _EventId)
-
-	DecisionTaskTimedOutEventAttributes_startedEventId = DecisionTaskTimedOutEventAttributes.AddMember("startedEventId", _EventId)
-
-	DefaultUndefinedFault_message = DefaultUndefinedFault.AddMember("message", _ErrorMessage)
-
-	DomainAlreadyExistsFault_message = DomainAlreadyExistsFault.AddMember("message", _ErrorMessage)
-
-	DomainConfiguration_workflowExecutionRetentionPeriodInDays = DomainConfiguration.AddMember("workflowExecutionRetentionPeriodInDays", _DurationInDays)
-
-	DomainDeprecatedFault_message = DomainDeprecatedFault.AddMember("message", _ErrorMessage)
-
-	DomainInfo_name = DomainInfo.AddMember("name", _DomainName)
-
-	DomainInfo_status = DomainInfo.AddMember("status", RegistrationStatus)
-
-	DomainInfo_description = DomainInfo.AddMember("description", _Description)
-
-	DomainInfo_arn = DomainInfo.AddMember("arn", _Arn)
-
-	_DomainInfoList_member = _DomainInfoList.AddMember("member", DomainInfo)
-
-	EventType_WorkflowExecutionStarted = EventType.AddMember("WorkflowExecutionStarted", smithyprelude.Unit)
-
-	EventType_WorkflowExecutionCancelRequested = EventType.AddMember("WorkflowExecutionCancelRequested", smithyprelude.Unit)
-
-	EventType_WorkflowExecutionCompleted = EventType.AddMember("WorkflowExecutionCompleted", smithyprelude.Unit)
-
-	EventType_CompleteWorkflowExecutionFailed = EventType.AddMember("CompleteWorkflowExecutionFailed", smithyprelude.Unit)
-
-	EventType_WorkflowExecutionFailed = EventType.AddMember("WorkflowExecutionFailed", smithyprelude.Unit)
-
-	EventType_FailWorkflowExecutionFailed = EventType.AddMember("FailWorkflowExecutionFailed", smithyprelude.Unit)
-
-	EventType_WorkflowExecutionTimedOut = EventType.AddMember("WorkflowExecutionTimedOut", smithyprelude.Unit)
-
-	EventType_WorkflowExecutionCanceled = EventType.AddMember("WorkflowExecutionCanceled", smithyprelude.Unit)
-
-	EventType_CancelWorkflowExecutionFailed = EventType.AddMember("CancelWorkflowExecutionFailed", smithyprelude.Unit)
-
-	EventType_WorkflowExecutionContinuedAsNew = EventType.AddMember("WorkflowExecutionContinuedAsNew", smithyprelude.Unit)
-
-	EventType_ContinueAsNewWorkflowExecutionFailed = EventType.AddMember("ContinueAsNewWorkflowExecutionFailed", smithyprelude.Unit)
-
-	EventType_WorkflowExecutionTerminated = EventType.AddMember("WorkflowExecutionTerminated", smithyprelude.Unit)
-
-	EventType_DecisionTaskScheduled = EventType.AddMember("DecisionTaskScheduled", smithyprelude.Unit)
-
-	EventType_DecisionTaskStarted = EventType.AddMember("DecisionTaskStarted", smithyprelude.Unit)
-
-	EventType_DecisionTaskCompleted = EventType.AddMember("DecisionTaskCompleted", smithyprelude.Unit)
-
-	EventType_DecisionTaskTimedOut = EventType.AddMember("DecisionTaskTimedOut", smithyprelude.Unit)
-
-	EventType_ActivityTaskScheduled = EventType.AddMember("ActivityTaskScheduled", smithyprelude.Unit)
-
-	EventType_ScheduleActivityTaskFailed = EventType.AddMember("ScheduleActivityTaskFailed", smithyprelude.Unit)
-
-	EventType_ActivityTaskStarted = EventType.AddMember("ActivityTaskStarted", smithyprelude.Unit)
-
-	EventType_ActivityTaskCompleted = EventType.AddMember("ActivityTaskCompleted", smithyprelude.Unit)
-
-	EventType_ActivityTaskFailed = EventType.AddMember("ActivityTaskFailed", smithyprelude.Unit)
-
-	EventType_ActivityTaskTimedOut = EventType.AddMember("ActivityTaskTimedOut", smithyprelude.Unit)
-
-	EventType_ActivityTaskCanceled = EventType.AddMember("ActivityTaskCanceled", smithyprelude.Unit)
-
-	EventType_ActivityTaskCancelRequested = EventType.AddMember("ActivityTaskCancelRequested", smithyprelude.Unit)
-
-	EventType_RequestCancelActivityTaskFailed = EventType.AddMember("RequestCancelActivityTaskFailed", smithyprelude.Unit)
-
-	EventType_WorkflowExecutionSignaled = EventType.AddMember("WorkflowExecutionSignaled", smithyprelude.Unit)
-
-	EventType_MarkerRecorded = EventType.AddMember("MarkerRecorded", smithyprelude.Unit)
-
-	EventType_RecordMarkerFailed = EventType.AddMember("RecordMarkerFailed", smithyprelude.Unit)
-
-	EventType_TimerStarted = EventType.AddMember("TimerStarted", smithyprelude.Unit)
-
-	EventType_StartTimerFailed = EventType.AddMember("StartTimerFailed", smithyprelude.Unit)
-
-	EventType_TimerFired = EventType.AddMember("TimerFired", smithyprelude.Unit)
-
-	EventType_TimerCanceled = EventType.AddMember("TimerCanceled", smithyprelude.Unit)
-
-	EventType_CancelTimerFailed = EventType.AddMember("CancelTimerFailed", smithyprelude.Unit)
-
-	EventType_StartChildWorkflowExecutionInitiated = EventType.AddMember("StartChildWorkflowExecutionInitiated", smithyprelude.Unit)
-
-	EventType_StartChildWorkflowExecutionFailed = EventType.AddMember("StartChildWorkflowExecutionFailed", smithyprelude.Unit)
-
-	EventType_ChildWorkflowExecutionStarted = EventType.AddMember("ChildWorkflowExecutionStarted", smithyprelude.Unit)
-
-	EventType_ChildWorkflowExecutionCompleted = EventType.AddMember("ChildWorkflowExecutionCompleted", smithyprelude.Unit)
-
-	EventType_ChildWorkflowExecutionFailed = EventType.AddMember("ChildWorkflowExecutionFailed", smithyprelude.Unit)
-
-	EventType_ChildWorkflowExecutionTimedOut = EventType.AddMember("ChildWorkflowExecutionTimedOut", smithyprelude.Unit)
-
-	EventType_ChildWorkflowExecutionCanceled = EventType.AddMember("ChildWorkflowExecutionCanceled", smithyprelude.Unit)
-
-	EventType_ChildWorkflowExecutionTerminated = EventType.AddMember("ChildWorkflowExecutionTerminated", smithyprelude.Unit)
-
-	EventType_SignalExternalWorkflowExecutionInitiated = EventType.AddMember("SignalExternalWorkflowExecutionInitiated", smithyprelude.Unit)
-
-	EventType_SignalExternalWorkflowExecutionFailed = EventType.AddMember("SignalExternalWorkflowExecutionFailed", smithyprelude.Unit)
-
-	EventType_ExternalWorkflowExecutionSignaled = EventType.AddMember("ExternalWorkflowExecutionSignaled", smithyprelude.Unit)
-
-	EventType_RequestCancelExternalWorkflowExecutionInitiated = EventType.AddMember("RequestCancelExternalWorkflowExecutionInitiated", smithyprelude.Unit)
-
-	EventType_RequestCancelExternalWorkflowExecutionFailed = EventType.AddMember("RequestCancelExternalWorkflowExecutionFailed", smithyprelude.Unit)
-
-	EventType_ExternalWorkflowExecutionCancelRequested = EventType.AddMember("ExternalWorkflowExecutionCancelRequested", smithyprelude.Unit)
-
-	EventType_LambdaFunctionScheduled = EventType.AddMember("LambdaFunctionScheduled", smithyprelude.Unit)
-
-	EventType_LambdaFunctionStarted = EventType.AddMember("LambdaFunctionStarted", smithyprelude.Unit)
-
-	EventType_LambdaFunctionCompleted = EventType.AddMember("LambdaFunctionCompleted", smithyprelude.Unit)
-
-	EventType_LambdaFunctionFailed = EventType.AddMember("LambdaFunctionFailed", smithyprelude.Unit)
-
-	EventType_LambdaFunctionTimedOut = EventType.AddMember("LambdaFunctionTimedOut", smithyprelude.Unit)
-
-	EventType_ScheduleLambdaFunctionFailed = EventType.AddMember("ScheduleLambdaFunctionFailed", smithyprelude.Unit)
-
-	EventType_StartLambdaFunctionFailed = EventType.AddMember("StartLambdaFunctionFailed", smithyprelude.Unit)
-
-	ExecutionStatus_OPEN = ExecutionStatus.AddMember("OPEN", smithyprelude.Unit)
-
-	ExecutionStatus_CLOSED = ExecutionStatus.AddMember("CLOSED", smithyprelude.Unit)
-
-	ExecutionTimeFilter_oldestDate = ExecutionTimeFilter.AddMember("oldestDate", _Timestamp)
-
-	ExecutionTimeFilter_latestDate = ExecutionTimeFilter.AddMember("latestDate", _Timestamp)
-
-	ExternalWorkflowExecutionCancelRequestedEventAttributes_workflowExecution = ExternalWorkflowExecutionCancelRequestedEventAttributes.AddMember("workflowExecution", WorkflowExecution)
-
-	ExternalWorkflowExecutionCancelRequestedEventAttributes_initiatedEventId = ExternalWorkflowExecutionCancelRequestedEventAttributes.AddMember("initiatedEventId", _EventId)
-
-	ExternalWorkflowExecutionSignaledEventAttributes_workflowExecution = ExternalWorkflowExecutionSignaledEventAttributes.AddMember("workflowExecution", WorkflowExecution)
-
-	ExternalWorkflowExecutionSignaledEventAttributes_initiatedEventId = ExternalWorkflowExecutionSignaledEventAttributes.AddMember("initiatedEventId", _EventId)
-
-	FailWorkflowExecutionFailedCause_UNHANDLED_DECISION = FailWorkflowExecutionFailedCause.AddMember("UNHANDLED_DECISION", smithyprelude.Unit)
-
-	FailWorkflowExecutionFailedCause_OPERATION_NOT_PERMITTED = FailWorkflowExecutionFailedCause.AddMember("OPERATION_NOT_PERMITTED", smithyprelude.Unit)
-
-	FailWorkflowExecutionFailedEventAttributes_cause = FailWorkflowExecutionFailedEventAttributes.AddMember("cause", FailWorkflowExecutionFailedCause)
-
-	FailWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId = FailWorkflowExecutionFailedEventAttributes.AddMember("decisionTaskCompletedEventId", _EventId)
-
-	WorkflowExecutionStartedEventAttributes_input = WorkflowExecutionStartedEventAttributes.AddMember("input", _Data)
-
-	WorkflowExecutionStartedEventAttributes_executionStartToCloseTimeout = WorkflowExecutionStartedEventAttributes.AddMember("executionStartToCloseTimeout", _DurationInSecondsOptional)
-
-	WorkflowExecutionStartedEventAttributes_taskStartToCloseTimeout = WorkflowExecutionStartedEventAttributes.AddMember("taskStartToCloseTimeout", _DurationInSecondsOptional)
-
-	WorkflowExecutionStartedEventAttributes_childPolicy = WorkflowExecutionStartedEventAttributes.AddMember("childPolicy", ChildPolicy)
-
-	WorkflowExecutionStartedEventAttributes_taskList = WorkflowExecutionStartedEventAttributes.AddMember("taskList", TaskList)
-
-	WorkflowExecutionStartedEventAttributes_taskPriority = WorkflowExecutionStartedEventAttributes.AddMember("taskPriority", _TaskPriority)
-
-	WorkflowExecutionStartedEventAttributes_workflowType = WorkflowExecutionStartedEventAttributes.AddMember("workflowType", WorkflowType)
-
-	WorkflowExecutionStartedEventAttributes_tagList = WorkflowExecutionStartedEventAttributes.AddMember("tagList", _TagList)
-
-	WorkflowExecutionStartedEventAttributes_continuedExecutionRunId = WorkflowExecutionStartedEventAttributes.AddMember("continuedExecutionRunId", _WorkflowRunIdOptional)
-
-	WorkflowExecutionStartedEventAttributes_parentWorkflowExecution = WorkflowExecutionStartedEventAttributes.AddMember("parentWorkflowExecution", WorkflowExecution)
-
-	WorkflowExecutionStartedEventAttributes_parentInitiatedEventId = WorkflowExecutionStartedEventAttributes.AddMember("parentInitiatedEventId", _EventId)
-
-	WorkflowExecutionStartedEventAttributes_lambdaRole = WorkflowExecutionStartedEventAttributes.AddMember("lambdaRole", _Arn)
-
-	WorkflowExecutionCompletedEventAttributes_result = WorkflowExecutionCompletedEventAttributes.AddMember("result", _Data)
-
-	WorkflowExecutionCompletedEventAttributes_decisionTaskCompletedEventId = WorkflowExecutionCompletedEventAttributes.AddMember("decisionTaskCompletedEventId", _EventId)
-
-	WorkflowExecutionFailedEventAttributes_reason = WorkflowExecutionFailedEventAttributes.AddMember("reason", _FailureReason)
-
-	WorkflowExecutionFailedEventAttributes_details = WorkflowExecutionFailedEventAttributes.AddMember("details", _Data)
-
-	WorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId = WorkflowExecutionFailedEventAttributes.AddMember("decisionTaskCompletedEventId", _EventId)
-
-	WorkflowExecutionTimedOutEventAttributes_timeoutType = WorkflowExecutionTimedOutEventAttributes.AddMember("timeoutType", WorkflowExecutionTimeoutType)
-
-	WorkflowExecutionTimedOutEventAttributes_childPolicy = WorkflowExecutionTimedOutEventAttributes.AddMember("childPolicy", ChildPolicy)
-
-	WorkflowExecutionCanceledEventAttributes_details = WorkflowExecutionCanceledEventAttributes.AddMember("details", _Data)
-
-	WorkflowExecutionCanceledEventAttributes_decisionTaskCompletedEventId = WorkflowExecutionCanceledEventAttributes.AddMember("decisionTaskCompletedEventId", _EventId)
-
-	WorkflowExecutionContinuedAsNewEventAttributes_input = WorkflowExecutionContinuedAsNewEventAttributes.AddMember("input", _Data)
-
-	WorkflowExecutionContinuedAsNewEventAttributes_decisionTaskCompletedEventId = WorkflowExecutionContinuedAsNewEventAttributes.AddMember("decisionTaskCompletedEventId", _EventId)
-
-	WorkflowExecutionContinuedAsNewEventAttributes_newExecutionRunId = WorkflowExecutionContinuedAsNewEventAttributes.AddMember("newExecutionRunId", _WorkflowRunId)
-
-	WorkflowExecutionContinuedAsNewEventAttributes_executionStartToCloseTimeout = WorkflowExecutionContinuedAsNewEventAttributes.AddMember("executionStartToCloseTimeout", _DurationInSecondsOptional)
-
-	WorkflowExecutionContinuedAsNewEventAttributes_taskList = WorkflowExecutionContinuedAsNewEventAttributes.AddMember("taskList", TaskList)
-
-	WorkflowExecutionContinuedAsNewEventAttributes_taskPriority = WorkflowExecutionContinuedAsNewEventAttributes.AddMember("taskPriority", _TaskPriority)
-
-	WorkflowExecutionContinuedAsNewEventAttributes_taskStartToCloseTimeout = WorkflowExecutionContinuedAsNewEventAttributes.AddMember("taskStartToCloseTimeout", _DurationInSecondsOptional)
-
-	WorkflowExecutionContinuedAsNewEventAttributes_childPolicy = WorkflowExecutionContinuedAsNewEventAttributes.AddMember("childPolicy", ChildPolicy)
-
-	WorkflowExecutionContinuedAsNewEventAttributes_tagList = WorkflowExecutionContinuedAsNewEventAttributes.AddMember("tagList", _TagList)
-
-	WorkflowExecutionContinuedAsNewEventAttributes_workflowType = WorkflowExecutionContinuedAsNewEventAttributes.AddMember("workflowType", WorkflowType)
-
-	WorkflowExecutionContinuedAsNewEventAttributes_lambdaRole = WorkflowExecutionContinuedAsNewEventAttributes.AddMember("lambdaRole", _Arn)
-
-	WorkflowExecutionTerminatedCause_CHILD_POLICY_APPLIED = WorkflowExecutionTerminatedCause.AddMember("CHILD_POLICY_APPLIED", smithyprelude.Unit)
-
-	WorkflowExecutionTerminatedCause_EVENT_LIMIT_EXCEEDED = WorkflowExecutionTerminatedCause.AddMember("EVENT_LIMIT_EXCEEDED", smithyprelude.Unit)
-
-	WorkflowExecutionTerminatedCause_OPERATOR_INITIATED = WorkflowExecutionTerminatedCause.AddMember("OPERATOR_INITIATED", smithyprelude.Unit)
-
-	WorkflowExecutionTerminatedEventAttributes_reason = WorkflowExecutionTerminatedEventAttributes.AddMember("reason", _TerminateReason)
-
-	WorkflowExecutionTerminatedEventAttributes_details = WorkflowExecutionTerminatedEventAttributes.AddMember("details", _Data)
-
-	WorkflowExecutionTerminatedEventAttributes_childPolicy = WorkflowExecutionTerminatedEventAttributes.AddMember("childPolicy", ChildPolicy)
-
-	WorkflowExecutionTerminatedEventAttributes_cause = WorkflowExecutionTerminatedEventAttributes.AddMember("cause", WorkflowExecutionTerminatedCause)
-
-	WorkflowExecutionCancelRequestedCause_CHILD_POLICY_APPLIED = WorkflowExecutionCancelRequestedCause.AddMember("CHILD_POLICY_APPLIED", smithyprelude.Unit)
-
-	WorkflowExecutionCancelRequestedEventAttributes_externalWorkflowExecution = WorkflowExecutionCancelRequestedEventAttributes.AddMember("externalWorkflowExecution", WorkflowExecution)
-
-	WorkflowExecutionCancelRequestedEventAttributes_externalInitiatedEventId = WorkflowExecutionCancelRequestedEventAttributes.AddMember("externalInitiatedEventId", _EventId)
-
-	WorkflowExecutionCancelRequestedEventAttributes_cause = WorkflowExecutionCancelRequestedEventAttributes.AddMember("cause", WorkflowExecutionCancelRequestedCause)
-
-	WorkflowExecutionSignaledEventAttributes_signalName = WorkflowExecutionSignaledEventAttributes.AddMember("signalName", _SignalName)
-
-	WorkflowExecutionSignaledEventAttributes_input = WorkflowExecutionSignaledEventAttributes.AddMember("input", _Data)
-
-	WorkflowExecutionSignaledEventAttributes_externalWorkflowExecution = WorkflowExecutionSignaledEventAttributes.AddMember("externalWorkflowExecution", WorkflowExecution)
-
-	WorkflowExecutionSignaledEventAttributes_externalInitiatedEventId = WorkflowExecutionSignaledEventAttributes.AddMember("externalInitiatedEventId", _EventId)
-
-	MarkerRecordedEventAttributes_markerName = MarkerRecordedEventAttributes.AddMember("markerName", _MarkerName)
-
-	MarkerRecordedEventAttributes_details = MarkerRecordedEventAttributes.AddMember("details", _Data)
-
-	MarkerRecordedEventAttributes_decisionTaskCompletedEventId = MarkerRecordedEventAttributes.AddMember("decisionTaskCompletedEventId", _EventId)
-
-	RecordMarkerFailedCause_OPERATION_NOT_PERMITTED = RecordMarkerFailedCause.AddMember("OPERATION_NOT_PERMITTED", smithyprelude.Unit)
-
-	RecordMarkerFailedEventAttributes_markerName = RecordMarkerFailedEventAttributes.AddMember("markerName", _MarkerName)
-
-	RecordMarkerFailedEventAttributes_cause = RecordMarkerFailedEventAttributes.AddMember("cause", RecordMarkerFailedCause)
-
-	RecordMarkerFailedEventAttributes_decisionTaskCompletedEventId = RecordMarkerFailedEventAttributes.AddMember("decisionTaskCompletedEventId", _EventId)
-
-	TimerStartedEventAttributes_timerId = TimerStartedEventAttributes.AddMember("timerId", _TimerId)
-
-	TimerStartedEventAttributes_control = TimerStartedEventAttributes.AddMember("control", _Data)
-
-	TimerStartedEventAttributes_startToFireTimeout = TimerStartedEventAttributes.AddMember("startToFireTimeout", _DurationInSeconds)
-
-	TimerStartedEventAttributes_decisionTaskCompletedEventId = TimerStartedEventAttributes.AddMember("decisionTaskCompletedEventId", _EventId)
-
-	TimerFiredEventAttributes_timerId = TimerFiredEventAttributes.AddMember("timerId", _TimerId)
-
-	TimerFiredEventAttributes_startedEventId = TimerFiredEventAttributes.AddMember("startedEventId", _EventId)
-
-	TimerCanceledEventAttributes_timerId = TimerCanceledEventAttributes.AddMember("timerId", _TimerId)
-
-	TimerCanceledEventAttributes_startedEventId = TimerCanceledEventAttributes.AddMember("startedEventId", _EventId)
-
-	TimerCanceledEventAttributes_decisionTaskCompletedEventId = TimerCanceledEventAttributes.AddMember("decisionTaskCompletedEventId", _EventId)
-
-	StartChildWorkflowExecutionInitiatedEventAttributes_workflowId = StartChildWorkflowExecutionInitiatedEventAttributes.AddMember("workflowId", _WorkflowId)
-
-	StartChildWorkflowExecutionInitiatedEventAttributes_workflowType = StartChildWorkflowExecutionInitiatedEventAttributes.AddMember("workflowType", WorkflowType)
-
-	StartChildWorkflowExecutionInitiatedEventAttributes_control = StartChildWorkflowExecutionInitiatedEventAttributes.AddMember("control", _Data)
-
-	StartChildWorkflowExecutionInitiatedEventAttributes_input = StartChildWorkflowExecutionInitiatedEventAttributes.AddMember("input", _Data)
-
-	StartChildWorkflowExecutionInitiatedEventAttributes_executionStartToCloseTimeout = StartChildWorkflowExecutionInitiatedEventAttributes.AddMember("executionStartToCloseTimeout", _DurationInSecondsOptional)
-
-	StartChildWorkflowExecutionInitiatedEventAttributes_taskList = StartChildWorkflowExecutionInitiatedEventAttributes.AddMember("taskList", TaskList)
-
-	StartChildWorkflowExecutionInitiatedEventAttributes_taskPriority = StartChildWorkflowExecutionInitiatedEventAttributes.AddMember("taskPriority", _TaskPriority)
-
-	StartChildWorkflowExecutionInitiatedEventAttributes_decisionTaskCompletedEventId = StartChildWorkflowExecutionInitiatedEventAttributes.AddMember("decisionTaskCompletedEventId", _EventId)
-
-	StartChildWorkflowExecutionInitiatedEventAttributes_childPolicy = StartChildWorkflowExecutionInitiatedEventAttributes.AddMember("childPolicy", ChildPolicy)
-
-	StartChildWorkflowExecutionInitiatedEventAttributes_taskStartToCloseTimeout = StartChildWorkflowExecutionInitiatedEventAttributes.AddMember("taskStartToCloseTimeout", _DurationInSecondsOptional)
-
-	StartChildWorkflowExecutionInitiatedEventAttributes_tagList = StartChildWorkflowExecutionInitiatedEventAttributes.AddMember("tagList", _TagList)
-
-	StartChildWorkflowExecutionInitiatedEventAttributes_lambdaRole = StartChildWorkflowExecutionInitiatedEventAttributes.AddMember("lambdaRole", _Arn)
-
-	SignalExternalWorkflowExecutionInitiatedEventAttributes_workflowId = SignalExternalWorkflowExecutionInitiatedEventAttributes.AddMember("workflowId", _WorkflowId)
-
-	SignalExternalWorkflowExecutionInitiatedEventAttributes_runId = SignalExternalWorkflowExecutionInitiatedEventAttributes.AddMember("runId", _WorkflowRunIdOptional)
-
-	SignalExternalWorkflowExecutionInitiatedEventAttributes_signalName = SignalExternalWorkflowExecutionInitiatedEventAttributes.AddMember("signalName", _SignalName)
-
-	SignalExternalWorkflowExecutionInitiatedEventAttributes_input = SignalExternalWorkflowExecutionInitiatedEventAttributes.AddMember("input", _Data)
-
-	SignalExternalWorkflowExecutionInitiatedEventAttributes_decisionTaskCompletedEventId = SignalExternalWorkflowExecutionInitiatedEventAttributes.AddMember("decisionTaskCompletedEventId", _EventId)
-
-	SignalExternalWorkflowExecutionInitiatedEventAttributes_control = SignalExternalWorkflowExecutionInitiatedEventAttributes.AddMember("control", _Data)
-
-	SignalExternalWorkflowExecutionFailedCause_UNKNOWN_EXTERNAL_WORKFLOW_EXECUTION = SignalExternalWorkflowExecutionFailedCause.AddMember("UNKNOWN_EXTERNAL_WORKFLOW_EXECUTION", smithyprelude.Unit)
-
-	SignalExternalWorkflowExecutionFailedCause_SIGNAL_EXTERNAL_WORKFLOW_EXECUTION_RATE_EXCEEDED = SignalExternalWorkflowExecutionFailedCause.AddMember("SIGNAL_EXTERNAL_WORKFLOW_EXECUTION_RATE_EXCEEDED", smithyprelude.Unit)
-
-	SignalExternalWorkflowExecutionFailedCause_OPERATION_NOT_PERMITTED = SignalExternalWorkflowExecutionFailedCause.AddMember("OPERATION_NOT_PERMITTED", smithyprelude.Unit)
-
-	SignalExternalWorkflowExecutionFailedEventAttributes_workflowId = SignalExternalWorkflowExecutionFailedEventAttributes.AddMember("workflowId", _WorkflowId)
-
-	SignalExternalWorkflowExecutionFailedEventAttributes_runId = SignalExternalWorkflowExecutionFailedEventAttributes.AddMember("runId", _WorkflowRunIdOptional)
-
-	SignalExternalWorkflowExecutionFailedEventAttributes_cause = SignalExternalWorkflowExecutionFailedEventAttributes.AddMember("cause", SignalExternalWorkflowExecutionFailedCause)
-
-	SignalExternalWorkflowExecutionFailedEventAttributes_initiatedEventId = SignalExternalWorkflowExecutionFailedEventAttributes.AddMember("initiatedEventId", _EventId)
-
-	SignalExternalWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId = SignalExternalWorkflowExecutionFailedEventAttributes.AddMember("decisionTaskCompletedEventId", _EventId)
-
-	SignalExternalWorkflowExecutionFailedEventAttributes_control = SignalExternalWorkflowExecutionFailedEventAttributes.AddMember("control", _Data)
-
-	RequestCancelExternalWorkflowExecutionInitiatedEventAttributes_workflowId = RequestCancelExternalWorkflowExecutionInitiatedEventAttributes.AddMember("workflowId", _WorkflowId)
-
-	RequestCancelExternalWorkflowExecutionInitiatedEventAttributes_runId = RequestCancelExternalWorkflowExecutionInitiatedEventAttributes.AddMember("runId", _WorkflowRunIdOptional)
-
-	RequestCancelExternalWorkflowExecutionInitiatedEventAttributes_decisionTaskCompletedEventId = RequestCancelExternalWorkflowExecutionInitiatedEventAttributes.AddMember("decisionTaskCompletedEventId", _EventId)
-
-	RequestCancelExternalWorkflowExecutionInitiatedEventAttributes_control = RequestCancelExternalWorkflowExecutionInitiatedEventAttributes.AddMember("control", _Data)
-
-	RequestCancelExternalWorkflowExecutionFailedCause_UNKNOWN_EXTERNAL_WORKFLOW_EXECUTION = RequestCancelExternalWorkflowExecutionFailedCause.AddMember("UNKNOWN_EXTERNAL_WORKFLOW_EXECUTION", smithyprelude.Unit)
-
-	RequestCancelExternalWorkflowExecutionFailedCause_REQUEST_CANCEL_EXTERNAL_WORKFLOW_EXECUTION_RATE_EXCEEDED = RequestCancelExternalWorkflowExecutionFailedCause.AddMember("REQUEST_CANCEL_EXTERNAL_WORKFLOW_EXECUTION_RATE_EXCEEDED", smithyprelude.Unit)
-
-	RequestCancelExternalWorkflowExecutionFailedCause_OPERATION_NOT_PERMITTED = RequestCancelExternalWorkflowExecutionFailedCause.AddMember("OPERATION_NOT_PERMITTED", smithyprelude.Unit)
-
-	RequestCancelExternalWorkflowExecutionFailedEventAttributes_workflowId = RequestCancelExternalWorkflowExecutionFailedEventAttributes.AddMember("workflowId", _WorkflowId)
-
-	RequestCancelExternalWorkflowExecutionFailedEventAttributes_runId = RequestCancelExternalWorkflowExecutionFailedEventAttributes.AddMember("runId", _WorkflowRunIdOptional)
-
-	RequestCancelExternalWorkflowExecutionFailedEventAttributes_cause = RequestCancelExternalWorkflowExecutionFailedEventAttributes.AddMember("cause", RequestCancelExternalWorkflowExecutionFailedCause)
-
-	RequestCancelExternalWorkflowExecutionFailedEventAttributes_initiatedEventId = RequestCancelExternalWorkflowExecutionFailedEventAttributes.AddMember("initiatedEventId", _EventId)
-
-	RequestCancelExternalWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId = RequestCancelExternalWorkflowExecutionFailedEventAttributes.AddMember("decisionTaskCompletedEventId", _EventId)
-
-	RequestCancelExternalWorkflowExecutionFailedEventAttributes_control = RequestCancelExternalWorkflowExecutionFailedEventAttributes.AddMember("control", _Data)
-
-	ScheduleActivityTaskFailedCause_ACTIVITY_TYPE_DEPRECATED = ScheduleActivityTaskFailedCause.AddMember("ACTIVITY_TYPE_DEPRECATED", smithyprelude.Unit)
-
-	ScheduleActivityTaskFailedCause_ACTIVITY_TYPE_DOES_NOT_EXIST = ScheduleActivityTaskFailedCause.AddMember("ACTIVITY_TYPE_DOES_NOT_EXIST", smithyprelude.Unit)
-
-	ScheduleActivityTaskFailedCause_ACTIVITY_ID_ALREADY_IN_USE = ScheduleActivityTaskFailedCause.AddMember("ACTIVITY_ID_ALREADY_IN_USE", smithyprelude.Unit)
-
-	ScheduleActivityTaskFailedCause_OPEN_ACTIVITIES_LIMIT_EXCEEDED = ScheduleActivityTaskFailedCause.AddMember("OPEN_ACTIVITIES_LIMIT_EXCEEDED", smithyprelude.Unit)
-
-	ScheduleActivityTaskFailedCause_ACTIVITY_CREATION_RATE_EXCEEDED = ScheduleActivityTaskFailedCause.AddMember("ACTIVITY_CREATION_RATE_EXCEEDED", smithyprelude.Unit)
-
-	ScheduleActivityTaskFailedCause_DEFAULT_SCHEDULE_TO_CLOSE_TIMEOUT_UNDEFINED = ScheduleActivityTaskFailedCause.AddMember("DEFAULT_SCHEDULE_TO_CLOSE_TIMEOUT_UNDEFINED", smithyprelude.Unit)
-
-	ScheduleActivityTaskFailedCause_DEFAULT_TASK_LIST_UNDEFINED = ScheduleActivityTaskFailedCause.AddMember("DEFAULT_TASK_LIST_UNDEFINED", smithyprelude.Unit)
-
-	ScheduleActivityTaskFailedCause_DEFAULT_SCHEDULE_TO_START_TIMEOUT_UNDEFINED = ScheduleActivityTaskFailedCause.AddMember("DEFAULT_SCHEDULE_TO_START_TIMEOUT_UNDEFINED", smithyprelude.Unit)
-
-	ScheduleActivityTaskFailedCause_DEFAULT_START_TO_CLOSE_TIMEOUT_UNDEFINED = ScheduleActivityTaskFailedCause.AddMember("DEFAULT_START_TO_CLOSE_TIMEOUT_UNDEFINED", smithyprelude.Unit)
-
-	ScheduleActivityTaskFailedCause_DEFAULT_HEARTBEAT_TIMEOUT_UNDEFINED = ScheduleActivityTaskFailedCause.AddMember("DEFAULT_HEARTBEAT_TIMEOUT_UNDEFINED", smithyprelude.Unit)
-
-	ScheduleActivityTaskFailedCause_OPERATION_NOT_PERMITTED = ScheduleActivityTaskFailedCause.AddMember("OPERATION_NOT_PERMITTED", smithyprelude.Unit)
-
-	ScheduleActivityTaskFailedEventAttributes_activityType = ScheduleActivityTaskFailedEventAttributes.AddMember("activityType", ActivityType)
-
-	ScheduleActivityTaskFailedEventAttributes_activityId = ScheduleActivityTaskFailedEventAttributes.AddMember("activityId", _ActivityId)
-
-	ScheduleActivityTaskFailedEventAttributes_cause = ScheduleActivityTaskFailedEventAttributes.AddMember("cause", ScheduleActivityTaskFailedCause)
-
-	ScheduleActivityTaskFailedEventAttributes_decisionTaskCompletedEventId = ScheduleActivityTaskFailedEventAttributes.AddMember("decisionTaskCompletedEventId", _EventId)
-
-	RequestCancelActivityTaskFailedCause_ACTIVITY_ID_UNKNOWN = RequestCancelActivityTaskFailedCause.AddMember("ACTIVITY_ID_UNKNOWN", smithyprelude.Unit)
-
-	RequestCancelActivityTaskFailedCause_OPERATION_NOT_PERMITTED = RequestCancelActivityTaskFailedCause.AddMember("OPERATION_NOT_PERMITTED", smithyprelude.Unit)
-
-	RequestCancelActivityTaskFailedEventAttributes_activityId = RequestCancelActivityTaskFailedEventAttributes.AddMember("activityId", _ActivityId)
-
-	RequestCancelActivityTaskFailedEventAttributes_cause = RequestCancelActivityTaskFailedEventAttributes.AddMember("cause", RequestCancelActivityTaskFailedCause)
-
-	RequestCancelActivityTaskFailedEventAttributes_decisionTaskCompletedEventId = RequestCancelActivityTaskFailedEventAttributes.AddMember("decisionTaskCompletedEventId", _EventId)
-
-	StartTimerFailedCause_TIMER_ID_ALREADY_IN_USE = StartTimerFailedCause.AddMember("TIMER_ID_ALREADY_IN_USE", smithyprelude.Unit)
-
-	StartTimerFailedCause_OPEN_TIMERS_LIMIT_EXCEEDED = StartTimerFailedCause.AddMember("OPEN_TIMERS_LIMIT_EXCEEDED", smithyprelude.Unit)
-
-	StartTimerFailedCause_TIMER_CREATION_RATE_EXCEEDED = StartTimerFailedCause.AddMember("TIMER_CREATION_RATE_EXCEEDED", smithyprelude.Unit)
-
-	StartTimerFailedCause_OPERATION_NOT_PERMITTED = StartTimerFailedCause.AddMember("OPERATION_NOT_PERMITTED", smithyprelude.Unit)
-
-	StartTimerFailedEventAttributes_timerId = StartTimerFailedEventAttributes.AddMember("timerId", _TimerId)
-
-	StartTimerFailedEventAttributes_cause = StartTimerFailedEventAttributes.AddMember("cause", StartTimerFailedCause)
-
-	StartTimerFailedEventAttributes_decisionTaskCompletedEventId = StartTimerFailedEventAttributes.AddMember("decisionTaskCompletedEventId", _EventId)
-
-	StartChildWorkflowExecutionFailedCause_WORKFLOW_TYPE_DOES_NOT_EXIST = StartChildWorkflowExecutionFailedCause.AddMember("WORKFLOW_TYPE_DOES_NOT_EXIST", smithyprelude.Unit)
-
-	StartChildWorkflowExecutionFailedCause_WORKFLOW_TYPE_DEPRECATED = StartChildWorkflowExecutionFailedCause.AddMember("WORKFLOW_TYPE_DEPRECATED", smithyprelude.Unit)
-
-	StartChildWorkflowExecutionFailedCause_OPEN_CHILDREN_LIMIT_EXCEEDED = StartChildWorkflowExecutionFailedCause.AddMember("OPEN_CHILDREN_LIMIT_EXCEEDED", smithyprelude.Unit)
-
-	StartChildWorkflowExecutionFailedCause_OPEN_WORKFLOWS_LIMIT_EXCEEDED = StartChildWorkflowExecutionFailedCause.AddMember("OPEN_WORKFLOWS_LIMIT_EXCEEDED", smithyprelude.Unit)
-
-	StartChildWorkflowExecutionFailedCause_CHILD_CREATION_RATE_EXCEEDED = StartChildWorkflowExecutionFailedCause.AddMember("CHILD_CREATION_RATE_EXCEEDED", smithyprelude.Unit)
-
-	StartChildWorkflowExecutionFailedCause_WORKFLOW_ALREADY_RUNNING = StartChildWorkflowExecutionFailedCause.AddMember("WORKFLOW_ALREADY_RUNNING", smithyprelude.Unit)
-
-	StartChildWorkflowExecutionFailedCause_DEFAULT_EXECUTION_START_TO_CLOSE_TIMEOUT_UNDEFINED = StartChildWorkflowExecutionFailedCause.AddMember("DEFAULT_EXECUTION_START_TO_CLOSE_TIMEOUT_UNDEFINED", smithyprelude.Unit)
-
-	StartChildWorkflowExecutionFailedCause_DEFAULT_TASK_LIST_UNDEFINED = StartChildWorkflowExecutionFailedCause.AddMember("DEFAULT_TASK_LIST_UNDEFINED", smithyprelude.Unit)
-
-	StartChildWorkflowExecutionFailedCause_DEFAULT_TASK_START_TO_CLOSE_TIMEOUT_UNDEFINED = StartChildWorkflowExecutionFailedCause.AddMember("DEFAULT_TASK_START_TO_CLOSE_TIMEOUT_UNDEFINED", smithyprelude.Unit)
-
-	StartChildWorkflowExecutionFailedCause_DEFAULT_CHILD_POLICY_UNDEFINED = StartChildWorkflowExecutionFailedCause.AddMember("DEFAULT_CHILD_POLICY_UNDEFINED", smithyprelude.Unit)
-
-	StartChildWorkflowExecutionFailedCause_OPERATION_NOT_PERMITTED = StartChildWorkflowExecutionFailedCause.AddMember("OPERATION_NOT_PERMITTED", smithyprelude.Unit)
-
-	StartChildWorkflowExecutionFailedEventAttributes_workflowType = StartChildWorkflowExecutionFailedEventAttributes.AddMember("workflowType", WorkflowType)
-
-	StartChildWorkflowExecutionFailedEventAttributes_cause = StartChildWorkflowExecutionFailedEventAttributes.AddMember("cause", StartChildWorkflowExecutionFailedCause)
-
-	StartChildWorkflowExecutionFailedEventAttributes_workflowId = StartChildWorkflowExecutionFailedEventAttributes.AddMember("workflowId", _WorkflowId)
-
-	StartChildWorkflowExecutionFailedEventAttributes_initiatedEventId = StartChildWorkflowExecutionFailedEventAttributes.AddMember("initiatedEventId", _EventId)
-
-	StartChildWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId = StartChildWorkflowExecutionFailedEventAttributes.AddMember("decisionTaskCompletedEventId", _EventId)
-
-	StartChildWorkflowExecutionFailedEventAttributes_control = StartChildWorkflowExecutionFailedEventAttributes.AddMember("control", _Data)
-
-	LambdaFunctionScheduledEventAttributes_id = LambdaFunctionScheduledEventAttributes.AddMember("id", _FunctionId)
-
-	LambdaFunctionScheduledEventAttributes_name = LambdaFunctionScheduledEventAttributes.AddMember("name", _FunctionName)
-
-	LambdaFunctionScheduledEventAttributes_control = LambdaFunctionScheduledEventAttributes.AddMember("control", _Data)
-
-	LambdaFunctionScheduledEventAttributes_input = LambdaFunctionScheduledEventAttributes.AddMember("input", _FunctionInput)
-
-	LambdaFunctionScheduledEventAttributes_startToCloseTimeout = LambdaFunctionScheduledEventAttributes.AddMember("startToCloseTimeout", _DurationInSecondsOptional)
-
-	LambdaFunctionScheduledEventAttributes_decisionTaskCompletedEventId = LambdaFunctionScheduledEventAttributes.AddMember("decisionTaskCompletedEventId", _EventId)
-
-	LambdaFunctionStartedEventAttributes_scheduledEventId = LambdaFunctionStartedEventAttributes.AddMember("scheduledEventId", _EventId)
-
-	LambdaFunctionCompletedEventAttributes_scheduledEventId = LambdaFunctionCompletedEventAttributes.AddMember("scheduledEventId", _EventId)
-
-	LambdaFunctionCompletedEventAttributes_startedEventId = LambdaFunctionCompletedEventAttributes.AddMember("startedEventId", _EventId)
-
-	LambdaFunctionCompletedEventAttributes_result = LambdaFunctionCompletedEventAttributes.AddMember("result", _Data)
-
-	LambdaFunctionFailedEventAttributes_scheduledEventId = LambdaFunctionFailedEventAttributes.AddMember("scheduledEventId", _EventId)
-
-	LambdaFunctionFailedEventAttributes_startedEventId = LambdaFunctionFailedEventAttributes.AddMember("startedEventId", _EventId)
-
-	LambdaFunctionFailedEventAttributes_reason = LambdaFunctionFailedEventAttributes.AddMember("reason", _FailureReason)
-
-	LambdaFunctionFailedEventAttributes_details = LambdaFunctionFailedEventAttributes.AddMember("details", _Data)
-
-	LambdaFunctionTimeoutType_START_TO_CLOSE = LambdaFunctionTimeoutType.AddMember("START_TO_CLOSE", smithyprelude.Unit)
-
-	LambdaFunctionTimedOutEventAttributes_scheduledEventId = LambdaFunctionTimedOutEventAttributes.AddMember("scheduledEventId", _EventId)
-
-	LambdaFunctionTimedOutEventAttributes_startedEventId = LambdaFunctionTimedOutEventAttributes.AddMember("startedEventId", _EventId)
-
-	LambdaFunctionTimedOutEventAttributes_timeoutType = LambdaFunctionTimedOutEventAttributes.AddMember("timeoutType", LambdaFunctionTimeoutType)
-
-	ScheduleLambdaFunctionFailedCause_ID_ALREADY_IN_USE = ScheduleLambdaFunctionFailedCause.AddMember("ID_ALREADY_IN_USE", smithyprelude.Unit)
-
-	ScheduleLambdaFunctionFailedCause_OPEN_LAMBDA_FUNCTIONS_LIMIT_EXCEEDED = ScheduleLambdaFunctionFailedCause.AddMember("OPEN_LAMBDA_FUNCTIONS_LIMIT_EXCEEDED", smithyprelude.Unit)
-
-	ScheduleLambdaFunctionFailedCause_LAMBDA_FUNCTION_CREATION_RATE_EXCEEDED = ScheduleLambdaFunctionFailedCause.AddMember("LAMBDA_FUNCTION_CREATION_RATE_EXCEEDED", smithyprelude.Unit)
-
-	ScheduleLambdaFunctionFailedCause_LAMBDA_SERVICE_NOT_AVAILABLE_IN_REGION = ScheduleLambdaFunctionFailedCause.AddMember("LAMBDA_SERVICE_NOT_AVAILABLE_IN_REGION", smithyprelude.Unit)
-
-	ScheduleLambdaFunctionFailedEventAttributes_id = ScheduleLambdaFunctionFailedEventAttributes.AddMember("id", _FunctionId)
-
-	ScheduleLambdaFunctionFailedEventAttributes_name = ScheduleLambdaFunctionFailedEventAttributes.AddMember("name", _FunctionName)
-
-	ScheduleLambdaFunctionFailedEventAttributes_cause = ScheduleLambdaFunctionFailedEventAttributes.AddMember("cause", ScheduleLambdaFunctionFailedCause)
-
-	ScheduleLambdaFunctionFailedEventAttributes_decisionTaskCompletedEventId = ScheduleLambdaFunctionFailedEventAttributes.AddMember("decisionTaskCompletedEventId", _EventId)
-
-	StartLambdaFunctionFailedCause_ASSUME_ROLE_FAILED = StartLambdaFunctionFailedCause.AddMember("ASSUME_ROLE_FAILED", smithyprelude.Unit)
-
-	StartLambdaFunctionFailedEventAttributes_scheduledEventId = StartLambdaFunctionFailedEventAttributes.AddMember("scheduledEventId", _EventId)
-
-	StartLambdaFunctionFailedEventAttributes_cause = StartLambdaFunctionFailedEventAttributes.AddMember("cause", StartLambdaFunctionFailedCause)
-
-	StartLambdaFunctionFailedEventAttributes_message = StartLambdaFunctionFailedEventAttributes.AddMember("message", _CauseMessage)
-
-	HistoryEvent_eventTimestamp = HistoryEvent.AddMember("eventTimestamp", _Timestamp)
-
-	HistoryEvent_eventType = HistoryEvent.AddMember("eventType", EventType)
-
-	HistoryEvent_eventId = HistoryEvent.AddMember("eventId", _EventId)
-
-	HistoryEvent_workflowExecutionStartedEventAttributes = HistoryEvent.AddMember("workflowExecutionStartedEventAttributes", WorkflowExecutionStartedEventAttributes)
-
-	HistoryEvent_workflowExecutionCompletedEventAttributes = HistoryEvent.AddMember("workflowExecutionCompletedEventAttributes", WorkflowExecutionCompletedEventAttributes)
-
-	HistoryEvent_completeWorkflowExecutionFailedEventAttributes = HistoryEvent.AddMember("completeWorkflowExecutionFailedEventAttributes", CompleteWorkflowExecutionFailedEventAttributes)
-
-	HistoryEvent_workflowExecutionFailedEventAttributes = HistoryEvent.AddMember("workflowExecutionFailedEventAttributes", WorkflowExecutionFailedEventAttributes)
-
-	HistoryEvent_failWorkflowExecutionFailedEventAttributes = HistoryEvent.AddMember("failWorkflowExecutionFailedEventAttributes", FailWorkflowExecutionFailedEventAttributes)
-
-	HistoryEvent_workflowExecutionTimedOutEventAttributes = HistoryEvent.AddMember("workflowExecutionTimedOutEventAttributes", WorkflowExecutionTimedOutEventAttributes)
-
-	HistoryEvent_workflowExecutionCanceledEventAttributes = HistoryEvent.AddMember("workflowExecutionCanceledEventAttributes", WorkflowExecutionCanceledEventAttributes)
-
-	HistoryEvent_cancelWorkflowExecutionFailedEventAttributes = HistoryEvent.AddMember("cancelWorkflowExecutionFailedEventAttributes", CancelWorkflowExecutionFailedEventAttributes)
-
-	HistoryEvent_workflowExecutionContinuedAsNewEventAttributes = HistoryEvent.AddMember("workflowExecutionContinuedAsNewEventAttributes", WorkflowExecutionContinuedAsNewEventAttributes)
-
-	HistoryEvent_continueAsNewWorkflowExecutionFailedEventAttributes = HistoryEvent.AddMember("continueAsNewWorkflowExecutionFailedEventAttributes", ContinueAsNewWorkflowExecutionFailedEventAttributes)
-
-	HistoryEvent_workflowExecutionTerminatedEventAttributes = HistoryEvent.AddMember("workflowExecutionTerminatedEventAttributes", WorkflowExecutionTerminatedEventAttributes)
-
-	HistoryEvent_workflowExecutionCancelRequestedEventAttributes = HistoryEvent.AddMember("workflowExecutionCancelRequestedEventAttributes", WorkflowExecutionCancelRequestedEventAttributes)
-
-	HistoryEvent_decisionTaskScheduledEventAttributes = HistoryEvent.AddMember("decisionTaskScheduledEventAttributes", DecisionTaskScheduledEventAttributes)
-
-	HistoryEvent_decisionTaskStartedEventAttributes = HistoryEvent.AddMember("decisionTaskStartedEventAttributes", DecisionTaskStartedEventAttributes)
-
-	HistoryEvent_decisionTaskCompletedEventAttributes = HistoryEvent.AddMember("decisionTaskCompletedEventAttributes", DecisionTaskCompletedEventAttributes)
-
-	HistoryEvent_decisionTaskTimedOutEventAttributes = HistoryEvent.AddMember("decisionTaskTimedOutEventAttributes", DecisionTaskTimedOutEventAttributes)
-
-	HistoryEvent_activityTaskScheduledEventAttributes = HistoryEvent.AddMember("activityTaskScheduledEventAttributes", ActivityTaskScheduledEventAttributes)
-
-	HistoryEvent_activityTaskStartedEventAttributes = HistoryEvent.AddMember("activityTaskStartedEventAttributes", ActivityTaskStartedEventAttributes)
-
-	HistoryEvent_activityTaskCompletedEventAttributes = HistoryEvent.AddMember("activityTaskCompletedEventAttributes", ActivityTaskCompletedEventAttributes)
-
-	HistoryEvent_activityTaskFailedEventAttributes = HistoryEvent.AddMember("activityTaskFailedEventAttributes", ActivityTaskFailedEventAttributes)
-
-	HistoryEvent_activityTaskTimedOutEventAttributes = HistoryEvent.AddMember("activityTaskTimedOutEventAttributes", ActivityTaskTimedOutEventAttributes)
-
-	HistoryEvent_activityTaskCanceledEventAttributes = HistoryEvent.AddMember("activityTaskCanceledEventAttributes", ActivityTaskCanceledEventAttributes)
-
-	HistoryEvent_activityTaskCancelRequestedEventAttributes = HistoryEvent.AddMember("activityTaskCancelRequestedEventAttributes", ActivityTaskCancelRequestedEventAttributes)
-
-	HistoryEvent_workflowExecutionSignaledEventAttributes = HistoryEvent.AddMember("workflowExecutionSignaledEventAttributes", WorkflowExecutionSignaledEventAttributes)
-
-	HistoryEvent_markerRecordedEventAttributes = HistoryEvent.AddMember("markerRecordedEventAttributes", MarkerRecordedEventAttributes)
-
-	HistoryEvent_recordMarkerFailedEventAttributes = HistoryEvent.AddMember("recordMarkerFailedEventAttributes", RecordMarkerFailedEventAttributes)
-
-	HistoryEvent_timerStartedEventAttributes = HistoryEvent.AddMember("timerStartedEventAttributes", TimerStartedEventAttributes)
-
-	HistoryEvent_timerFiredEventAttributes = HistoryEvent.AddMember("timerFiredEventAttributes", TimerFiredEventAttributes)
-
-	HistoryEvent_timerCanceledEventAttributes = HistoryEvent.AddMember("timerCanceledEventAttributes", TimerCanceledEventAttributes)
-
-	HistoryEvent_startChildWorkflowExecutionInitiatedEventAttributes = HistoryEvent.AddMember("startChildWorkflowExecutionInitiatedEventAttributes", StartChildWorkflowExecutionInitiatedEventAttributes)
-
-	HistoryEvent_childWorkflowExecutionStartedEventAttributes = HistoryEvent.AddMember("childWorkflowExecutionStartedEventAttributes", ChildWorkflowExecutionStartedEventAttributes)
-
-	HistoryEvent_childWorkflowExecutionCompletedEventAttributes = HistoryEvent.AddMember("childWorkflowExecutionCompletedEventAttributes", ChildWorkflowExecutionCompletedEventAttributes)
-
-	HistoryEvent_childWorkflowExecutionFailedEventAttributes = HistoryEvent.AddMember("childWorkflowExecutionFailedEventAttributes", ChildWorkflowExecutionFailedEventAttributes)
-
-	HistoryEvent_childWorkflowExecutionTimedOutEventAttributes = HistoryEvent.AddMember("childWorkflowExecutionTimedOutEventAttributes", ChildWorkflowExecutionTimedOutEventAttributes)
-
-	HistoryEvent_childWorkflowExecutionCanceledEventAttributes = HistoryEvent.AddMember("childWorkflowExecutionCanceledEventAttributes", ChildWorkflowExecutionCanceledEventAttributes)
-
-	HistoryEvent_childWorkflowExecutionTerminatedEventAttributes = HistoryEvent.AddMember("childWorkflowExecutionTerminatedEventAttributes", ChildWorkflowExecutionTerminatedEventAttributes)
-
-	HistoryEvent_signalExternalWorkflowExecutionInitiatedEventAttributes = HistoryEvent.AddMember("signalExternalWorkflowExecutionInitiatedEventAttributes", SignalExternalWorkflowExecutionInitiatedEventAttributes)
-
-	HistoryEvent_externalWorkflowExecutionSignaledEventAttributes = HistoryEvent.AddMember("externalWorkflowExecutionSignaledEventAttributes", ExternalWorkflowExecutionSignaledEventAttributes)
-
-	HistoryEvent_signalExternalWorkflowExecutionFailedEventAttributes = HistoryEvent.AddMember("signalExternalWorkflowExecutionFailedEventAttributes", SignalExternalWorkflowExecutionFailedEventAttributes)
-
-	HistoryEvent_externalWorkflowExecutionCancelRequestedEventAttributes = HistoryEvent.AddMember("externalWorkflowExecutionCancelRequestedEventAttributes", ExternalWorkflowExecutionCancelRequestedEventAttributes)
-
-	HistoryEvent_requestCancelExternalWorkflowExecutionInitiatedEventAttributes = HistoryEvent.AddMember("requestCancelExternalWorkflowExecutionInitiatedEventAttributes", RequestCancelExternalWorkflowExecutionInitiatedEventAttributes)
-
-	HistoryEvent_requestCancelExternalWorkflowExecutionFailedEventAttributes = HistoryEvent.AddMember("requestCancelExternalWorkflowExecutionFailedEventAttributes", RequestCancelExternalWorkflowExecutionFailedEventAttributes)
-
-	HistoryEvent_scheduleActivityTaskFailedEventAttributes = HistoryEvent.AddMember("scheduleActivityTaskFailedEventAttributes", ScheduleActivityTaskFailedEventAttributes)
-
-	HistoryEvent_requestCancelActivityTaskFailedEventAttributes = HistoryEvent.AddMember("requestCancelActivityTaskFailedEventAttributes", RequestCancelActivityTaskFailedEventAttributes)
-
-	HistoryEvent_startTimerFailedEventAttributes = HistoryEvent.AddMember("startTimerFailedEventAttributes", StartTimerFailedEventAttributes)
-
-	HistoryEvent_cancelTimerFailedEventAttributes = HistoryEvent.AddMember("cancelTimerFailedEventAttributes", CancelTimerFailedEventAttributes)
-
-	HistoryEvent_startChildWorkflowExecutionFailedEventAttributes = HistoryEvent.AddMember("startChildWorkflowExecutionFailedEventAttributes", StartChildWorkflowExecutionFailedEventAttributes)
-
-	HistoryEvent_lambdaFunctionScheduledEventAttributes = HistoryEvent.AddMember("lambdaFunctionScheduledEventAttributes", LambdaFunctionScheduledEventAttributes)
-
-	HistoryEvent_lambdaFunctionStartedEventAttributes = HistoryEvent.AddMember("lambdaFunctionStartedEventAttributes", LambdaFunctionStartedEventAttributes)
-
-	HistoryEvent_lambdaFunctionCompletedEventAttributes = HistoryEvent.AddMember("lambdaFunctionCompletedEventAttributes", LambdaFunctionCompletedEventAttributes)
-
-	HistoryEvent_lambdaFunctionFailedEventAttributes = HistoryEvent.AddMember("lambdaFunctionFailedEventAttributes", LambdaFunctionFailedEventAttributes)
-
-	HistoryEvent_lambdaFunctionTimedOutEventAttributes = HistoryEvent.AddMember("lambdaFunctionTimedOutEventAttributes", LambdaFunctionTimedOutEventAttributes)
-
-	HistoryEvent_scheduleLambdaFunctionFailedEventAttributes = HistoryEvent.AddMember("scheduleLambdaFunctionFailedEventAttributes", ScheduleLambdaFunctionFailedEventAttributes)
-
-	HistoryEvent_startLambdaFunctionFailedEventAttributes = HistoryEvent.AddMember("startLambdaFunctionFailedEventAttributes", StartLambdaFunctionFailedEventAttributes)
-
-	_HistoryEventList_member = _HistoryEventList.AddMember("member", HistoryEvent)
-
-	LimitExceededFault_message = LimitExceededFault.AddMember("message", _ErrorMessage)
-
-	OperationNotPermittedFault_message = OperationNotPermittedFault.AddMember("message", _ErrorMessage)
-
-	ResourceTag_key = ResourceTag.AddMember("key", _ResourceTagKey)
-
-	ResourceTag_value = ResourceTag.AddMember("value", _ResourceTagValue)
-
-	_ResourceTagKeyList_member = _ResourceTagKeyList.AddMember("member", _ResourceTagKey)
-
-	_ResourceTagList_member = _ResourceTagList.AddMember("member", ResourceTag)
-
-	TagFilter_tag = TagFilter.AddMember("tag", _Tag)
-
-	TooManyTagsFault_message = TooManyTagsFault.AddMember("message", _ErrorMessage)
-
-	TypeAlreadyExistsFault_message = TypeAlreadyExistsFault.AddMember("message", _ErrorMessage)
-
-	TypeDeprecatedFault_message = TypeDeprecatedFault.AddMember("message", _ErrorMessage)
-
-	TypeNotDeprecatedFault_message = TypeNotDeprecatedFault.AddMember("message", _ErrorMessage)
-
-	UnknownResourceFault_message = UnknownResourceFault.AddMember("message", _ErrorMessage)
-
-	WorkflowExecutionAlreadyStartedFault_message = WorkflowExecutionAlreadyStartedFault.AddMember("message", _ErrorMessage)
-
-	WorkflowExecutionConfiguration_taskStartToCloseTimeout = WorkflowExecutionConfiguration.AddMember("taskStartToCloseTimeout", _DurationInSeconds)
-
-	WorkflowExecutionConfiguration_executionStartToCloseTimeout = WorkflowExecutionConfiguration.AddMember("executionStartToCloseTimeout", _DurationInSeconds)
-
-	WorkflowExecutionConfiguration_taskList = WorkflowExecutionConfiguration.AddMember("taskList", TaskList)
-
-	WorkflowExecutionConfiguration_taskPriority = WorkflowExecutionConfiguration.AddMember("taskPriority", _TaskPriority)
-
-	WorkflowExecutionConfiguration_childPolicy = WorkflowExecutionConfiguration.AddMember("childPolicy", ChildPolicy)
-
-	WorkflowExecutionConfiguration_lambdaRole = WorkflowExecutionConfiguration.AddMember("lambdaRole", _Arn)
-
-	WorkflowExecutionFilter_workflowId = WorkflowExecutionFilter.AddMember("workflowId", _WorkflowId)
-
-	WorkflowExecutionInfo_execution = WorkflowExecutionInfo.AddMember("execution", WorkflowExecution)
-
-	WorkflowExecutionInfo_workflowType = WorkflowExecutionInfo.AddMember("workflowType", WorkflowType)
-
-	WorkflowExecutionInfo_startTimestamp = WorkflowExecutionInfo.AddMember("startTimestamp", _Timestamp)
-
-	WorkflowExecutionInfo_closeTimestamp = WorkflowExecutionInfo.AddMember("closeTimestamp", _Timestamp)
-
-	WorkflowExecutionInfo_executionStatus = WorkflowExecutionInfo.AddMember("executionStatus", ExecutionStatus)
-
-	WorkflowExecutionInfo_closeStatus = WorkflowExecutionInfo.AddMember("closeStatus", CloseStatus)
-
-	WorkflowExecutionInfo_parent = WorkflowExecutionInfo.AddMember("parent", WorkflowExecution)
-
-	WorkflowExecutionInfo_tagList = WorkflowExecutionInfo.AddMember("tagList", _TagList)
-
-	WorkflowExecutionInfo_cancelRequested = WorkflowExecutionInfo.AddMember("cancelRequested", _Canceled)
-
-	_WorkflowExecutionInfoList_member = _WorkflowExecutionInfoList.AddMember("member", WorkflowExecutionInfo)
-
-	WorkflowExecutionOpenCounts_openActivityTasks = WorkflowExecutionOpenCounts.AddMember("openActivityTasks", _Count)
-
-	WorkflowExecutionOpenCounts_openDecisionTasks = WorkflowExecutionOpenCounts.AddMember("openDecisionTasks", _OpenDecisionTasksCount)
-
-	WorkflowExecutionOpenCounts_openTimers = WorkflowExecutionOpenCounts.AddMember("openTimers", _Count)
-
-	WorkflowExecutionOpenCounts_openChildWorkflowExecutions = WorkflowExecutionOpenCounts.AddMember("openChildWorkflowExecutions", _Count)
-
-	WorkflowExecutionOpenCounts_openLambdaFunctions = WorkflowExecutionOpenCounts.AddMember("openLambdaFunctions", _Count)
-
-	WorkflowTypeConfiguration_defaultTaskStartToCloseTimeout = WorkflowTypeConfiguration.AddMember("defaultTaskStartToCloseTimeout", _DurationInSecondsOptional)
-
-	WorkflowTypeConfiguration_defaultExecutionStartToCloseTimeout = WorkflowTypeConfiguration.AddMember("defaultExecutionStartToCloseTimeout", _DurationInSecondsOptional)
-
-	WorkflowTypeConfiguration_defaultTaskList = WorkflowTypeConfiguration.AddMember("defaultTaskList", TaskList)
-
-	WorkflowTypeConfiguration_defaultTaskPriority = WorkflowTypeConfiguration.AddMember("defaultTaskPriority", _TaskPriority)
-
-	WorkflowTypeConfiguration_defaultChildPolicy = WorkflowTypeConfiguration.AddMember("defaultChildPolicy", ChildPolicy)
-
-	WorkflowTypeConfiguration_defaultLambdaRole = WorkflowTypeConfiguration.AddMember("defaultLambdaRole", _Arn)
-
-	WorkflowTypeFilter_name = WorkflowTypeFilter.AddMember("name", _Name)
-
-	WorkflowTypeFilter_version = WorkflowTypeFilter.AddMember("version", _VersionOptional)
-
-	WorkflowTypeInfo_workflowType = WorkflowTypeInfo.AddMember("workflowType", WorkflowType)
-
-	WorkflowTypeInfo_status = WorkflowTypeInfo.AddMember("status", RegistrationStatus)
-
-	WorkflowTypeInfo_description = WorkflowTypeInfo.AddMember("description", _Description)
-
-	WorkflowTypeInfo_creationDate = WorkflowTypeInfo.AddMember("creationDate", _Timestamp)
-
-	WorkflowTypeInfo_deprecationDate = WorkflowTypeInfo.AddMember("deprecationDate", _Timestamp)
-
-	_WorkflowTypeInfoList_member = _WorkflowTypeInfoList.AddMember("member", WorkflowTypeInfo)
-
-	CountClosedWorkflowExecutionsInput_domain = CountClosedWorkflowExecutionsInput.AddMember("domain", _DomainName)
-
-	CountClosedWorkflowExecutionsInput_startTimeFilter = CountClosedWorkflowExecutionsInput.AddMember("startTimeFilter", ExecutionTimeFilter)
-
-	CountClosedWorkflowExecutionsInput_closeTimeFilter = CountClosedWorkflowExecutionsInput.AddMember("closeTimeFilter", ExecutionTimeFilter)
-
-	CountClosedWorkflowExecutionsInput_executionFilter = CountClosedWorkflowExecutionsInput.AddMember("executionFilter", WorkflowExecutionFilter)
-
-	CountClosedWorkflowExecutionsInput_typeFilter = CountClosedWorkflowExecutionsInput.AddMember("typeFilter", WorkflowTypeFilter)
-
-	CountClosedWorkflowExecutionsInput_tagFilter = CountClosedWorkflowExecutionsInput.AddMember("tagFilter", TagFilter)
-
-	CountClosedWorkflowExecutionsInput_closeStatusFilter = CountClosedWorkflowExecutionsInput.AddMember("closeStatusFilter", CloseStatusFilter)
-
-	WorkflowExecutionCount_count = WorkflowExecutionCount.AddMember("count", _Count)
-
-	WorkflowExecutionCount_truncated = WorkflowExecutionCount.AddMember("truncated", _Truncated)
-
-	CountOpenWorkflowExecutionsInput_domain = CountOpenWorkflowExecutionsInput.AddMember("domain", _DomainName)
-
-	CountOpenWorkflowExecutionsInput_startTimeFilter = CountOpenWorkflowExecutionsInput.AddMember("startTimeFilter", ExecutionTimeFilter)
-
-	CountOpenWorkflowExecutionsInput_typeFilter = CountOpenWorkflowExecutionsInput.AddMember("typeFilter", WorkflowTypeFilter)
-
-	CountOpenWorkflowExecutionsInput_tagFilter = CountOpenWorkflowExecutionsInput.AddMember("tagFilter", TagFilter)
-
-	CountOpenWorkflowExecutionsInput_executionFilter = CountOpenWorkflowExecutionsInput.AddMember("executionFilter", WorkflowExecutionFilter)
-
-	CountPendingActivityTasksInput_domain = CountPendingActivityTasksInput.AddMember("domain", _DomainName)
-
-	CountPendingActivityTasksInput_taskList = CountPendingActivityTasksInput.AddMember("taskList", TaskList)
-
-	PendingTaskCount_count = PendingTaskCount.AddMember("count", _Count)
-
-	PendingTaskCount_truncated = PendingTaskCount.AddMember("truncated", _Truncated)
-
-	CountPendingDecisionTasksInput_domain = CountPendingDecisionTasksInput.AddMember("domain", _DomainName)
-
-	CountPendingDecisionTasksInput_taskList = CountPendingDecisionTasksInput.AddMember("taskList", TaskList)
-
-	DeleteActivityTypeInput_domain = DeleteActivityTypeInput.AddMember("domain", _DomainName)
-
-	DeleteActivityTypeInput_activityType = DeleteActivityTypeInput.AddMember("activityType", ActivityType)
-
-	DeleteWorkflowTypeInput_domain = DeleteWorkflowTypeInput.AddMember("domain", _DomainName)
-
-	DeleteWorkflowTypeInput_workflowType = DeleteWorkflowTypeInput.AddMember("workflowType", WorkflowType)
-
-	DeprecateActivityTypeInput_domain = DeprecateActivityTypeInput.AddMember("domain", _DomainName)
-
-	DeprecateActivityTypeInput_activityType = DeprecateActivityTypeInput.AddMember("activityType", ActivityType)
-
-	DeprecateDomainInput_name = DeprecateDomainInput.AddMember("name", _DomainName)
-
-	DeprecateWorkflowTypeInput_domain = DeprecateWorkflowTypeInput.AddMember("domain", _DomainName)
-
-	DeprecateWorkflowTypeInput_workflowType = DeprecateWorkflowTypeInput.AddMember("workflowType", WorkflowType)
-
-	DescribeActivityTypeInput_domain = DescribeActivityTypeInput.AddMember("domain", _DomainName)
-
-	DescribeActivityTypeInput_activityType = DescribeActivityTypeInput.AddMember("activityType", ActivityType)
-
-	ActivityTypeDetail_typeInfo = ActivityTypeDetail.AddMember("typeInfo", ActivityTypeInfo)
-
-	ActivityTypeDetail_configuration = ActivityTypeDetail.AddMember("configuration", ActivityTypeConfiguration)
-
-	DescribeDomainInput_name = DescribeDomainInput.AddMember("name", _DomainName)
-
-	DomainDetail_domainInfo = DomainDetail.AddMember("domainInfo", DomainInfo)
-
-	DomainDetail_configuration = DomainDetail.AddMember("configuration", DomainConfiguration)
-
-	DescribeWorkflowExecutionInput_domain = DescribeWorkflowExecutionInput.AddMember("domain", _DomainName)
-
-	DescribeWorkflowExecutionInput_execution = DescribeWorkflowExecutionInput.AddMember("execution", WorkflowExecution)
-
-	WorkflowExecutionDetail_executionInfo = WorkflowExecutionDetail.AddMember("executionInfo", WorkflowExecutionInfo)
-
-	WorkflowExecutionDetail_executionConfiguration = WorkflowExecutionDetail.AddMember("executionConfiguration", WorkflowExecutionConfiguration)
-
-	WorkflowExecutionDetail_openCounts = WorkflowExecutionDetail.AddMember("openCounts", WorkflowExecutionOpenCounts)
-
-	WorkflowExecutionDetail_latestActivityTaskTimestamp = WorkflowExecutionDetail.AddMember("latestActivityTaskTimestamp", _Timestamp)
-
-	WorkflowExecutionDetail_latestExecutionContext = WorkflowExecutionDetail.AddMember("latestExecutionContext", _Data)
-
-	DescribeWorkflowTypeInput_domain = DescribeWorkflowTypeInput.AddMember("domain", _DomainName)
-
-	DescribeWorkflowTypeInput_workflowType = DescribeWorkflowTypeInput.AddMember("workflowType", WorkflowType)
-
-	WorkflowTypeDetail_typeInfo = WorkflowTypeDetail.AddMember("typeInfo", WorkflowTypeInfo)
-
-	WorkflowTypeDetail_configuration = WorkflowTypeDetail.AddMember("configuration", WorkflowTypeConfiguration)
-
-	GetWorkflowExecutionHistoryInput_domain = GetWorkflowExecutionHistoryInput.AddMember("domain", _DomainName)
-
-	GetWorkflowExecutionHistoryInput_execution = GetWorkflowExecutionHistoryInput.AddMember("execution", WorkflowExecution)
-
-	GetWorkflowExecutionHistoryInput_nextPageToken = GetWorkflowExecutionHistoryInput.AddMember("nextPageToken", _PageToken)
-
-	GetWorkflowExecutionHistoryInput_maximumPageSize = GetWorkflowExecutionHistoryInput.AddMember("maximumPageSize", _PageSize)
-
-	GetWorkflowExecutionHistoryInput_reverseOrder = GetWorkflowExecutionHistoryInput.AddMember("reverseOrder", _ReverseOrder)
-
-	History_events = History.AddMember("events", _HistoryEventList)
-
-	History_nextPageToken = History.AddMember("nextPageToken", _PageToken)
-
-	ListActivityTypesInput_domain = ListActivityTypesInput.AddMember("domain", _DomainName)
-
-	ListActivityTypesInput_name = ListActivityTypesInput.AddMember("name", _Name)
-
-	ListActivityTypesInput_registrationStatus = ListActivityTypesInput.AddMember("registrationStatus", RegistrationStatus)
-
-	ListActivityTypesInput_nextPageToken = ListActivityTypesInput.AddMember("nextPageToken", _PageToken)
-
-	ListActivityTypesInput_maximumPageSize = ListActivityTypesInput.AddMember("maximumPageSize", _PageSize)
-
-	ListActivityTypesInput_reverseOrder = ListActivityTypesInput.AddMember("reverseOrder", _ReverseOrder)
-
-	ActivityTypeInfos_typeInfos = ActivityTypeInfos.AddMember("typeInfos", _ActivityTypeInfoList)
-
-	ActivityTypeInfos_nextPageToken = ActivityTypeInfos.AddMember("nextPageToken", _PageToken)
-
-	ListClosedWorkflowExecutionsInput_domain = ListClosedWorkflowExecutionsInput.AddMember("domain", _DomainName)
-
-	ListClosedWorkflowExecutionsInput_startTimeFilter = ListClosedWorkflowExecutionsInput.AddMember("startTimeFilter", ExecutionTimeFilter)
-
-	ListClosedWorkflowExecutionsInput_closeTimeFilter = ListClosedWorkflowExecutionsInput.AddMember("closeTimeFilter", ExecutionTimeFilter)
-
-	ListClosedWorkflowExecutionsInput_executionFilter = ListClosedWorkflowExecutionsInput.AddMember("executionFilter", WorkflowExecutionFilter)
-
-	ListClosedWorkflowExecutionsInput_closeStatusFilter = ListClosedWorkflowExecutionsInput.AddMember("closeStatusFilter", CloseStatusFilter)
-
-	ListClosedWorkflowExecutionsInput_typeFilter = ListClosedWorkflowExecutionsInput.AddMember("typeFilter", WorkflowTypeFilter)
-
-	ListClosedWorkflowExecutionsInput_tagFilter = ListClosedWorkflowExecutionsInput.AddMember("tagFilter", TagFilter)
-
-	ListClosedWorkflowExecutionsInput_nextPageToken = ListClosedWorkflowExecutionsInput.AddMember("nextPageToken", _PageToken)
-
-	ListClosedWorkflowExecutionsInput_maximumPageSize = ListClosedWorkflowExecutionsInput.AddMember("maximumPageSize", _PageSize)
-
-	ListClosedWorkflowExecutionsInput_reverseOrder = ListClosedWorkflowExecutionsInput.AddMember("reverseOrder", _ReverseOrder)
-
-	WorkflowExecutionInfos_executionInfos = WorkflowExecutionInfos.AddMember("executionInfos", _WorkflowExecutionInfoList)
-
-	WorkflowExecutionInfos_nextPageToken = WorkflowExecutionInfos.AddMember("nextPageToken", _PageToken)
-
-	ListDomainsInput_nextPageToken = ListDomainsInput.AddMember("nextPageToken", _PageToken)
-
-	ListDomainsInput_registrationStatus = ListDomainsInput.AddMember("registrationStatus", RegistrationStatus)
-
-	ListDomainsInput_maximumPageSize = ListDomainsInput.AddMember("maximumPageSize", _PageSize)
-
-	ListDomainsInput_reverseOrder = ListDomainsInput.AddMember("reverseOrder", _ReverseOrder)
-
-	DomainInfos_domainInfos = DomainInfos.AddMember("domainInfos", _DomainInfoList)
-
-	DomainInfos_nextPageToken = DomainInfos.AddMember("nextPageToken", _PageToken)
-
-	ListOpenWorkflowExecutionsInput_domain = ListOpenWorkflowExecutionsInput.AddMember("domain", _DomainName)
-
-	ListOpenWorkflowExecutionsInput_startTimeFilter = ListOpenWorkflowExecutionsInput.AddMember("startTimeFilter", ExecutionTimeFilter)
-
-	ListOpenWorkflowExecutionsInput_typeFilter = ListOpenWorkflowExecutionsInput.AddMember("typeFilter", WorkflowTypeFilter)
-
-	ListOpenWorkflowExecutionsInput_tagFilter = ListOpenWorkflowExecutionsInput.AddMember("tagFilter", TagFilter)
-
-	ListOpenWorkflowExecutionsInput_nextPageToken = ListOpenWorkflowExecutionsInput.AddMember("nextPageToken", _PageToken)
-
-	ListOpenWorkflowExecutionsInput_maximumPageSize = ListOpenWorkflowExecutionsInput.AddMember("maximumPageSize", _PageSize)
-
-	ListOpenWorkflowExecutionsInput_reverseOrder = ListOpenWorkflowExecutionsInput.AddMember("reverseOrder", _ReverseOrder)
-
-	ListOpenWorkflowExecutionsInput_executionFilter = ListOpenWorkflowExecutionsInput.AddMember("executionFilter", WorkflowExecutionFilter)
-
-	ListTagsForResourceInput_resourceArn = ListTagsForResourceInput.AddMember("resourceArn", _Arn)
-
-	ListTagsForResourceOutput_tags = ListTagsForResourceOutput.AddMember("tags", _ResourceTagList)
-
-	ListWorkflowTypesInput_domain = ListWorkflowTypesInput.AddMember("domain", _DomainName)
-
-	ListWorkflowTypesInput_name = ListWorkflowTypesInput.AddMember("name", _Name)
-
-	ListWorkflowTypesInput_registrationStatus = ListWorkflowTypesInput.AddMember("registrationStatus", RegistrationStatus)
-
-	ListWorkflowTypesInput_nextPageToken = ListWorkflowTypesInput.AddMember("nextPageToken", _PageToken)
-
-	ListWorkflowTypesInput_maximumPageSize = ListWorkflowTypesInput.AddMember("maximumPageSize", _PageSize)
-
-	ListWorkflowTypesInput_reverseOrder = ListWorkflowTypesInput.AddMember("reverseOrder", _ReverseOrder)
-
-	WorkflowTypeInfos_typeInfos = WorkflowTypeInfos.AddMember("typeInfos", _WorkflowTypeInfoList)
-
-	WorkflowTypeInfos_nextPageToken = WorkflowTypeInfos.AddMember("nextPageToken", _PageToken)
-
-	PollForActivityTaskInput_domain = PollForActivityTaskInput.AddMember("domain", _DomainName)
-
-	PollForActivityTaskInput_taskList = PollForActivityTaskInput.AddMember("taskList", TaskList)
-
-	PollForActivityTaskInput_identity = PollForActivityTaskInput.AddMember("identity", _Identity)
-
-	ActivityTask_taskToken = ActivityTask.AddMember("taskToken", _TaskToken)
-
-	ActivityTask_activityId = ActivityTask.AddMember("activityId", _ActivityId)
-
-	ActivityTask_startedEventId = ActivityTask.AddMember("startedEventId", _EventId)
-
-	ActivityTask_workflowExecution = ActivityTask.AddMember("workflowExecution", WorkflowExecution)
-
-	ActivityTask_activityType = ActivityTask.AddMember("activityType", ActivityType)
-
-	ActivityTask_input = ActivityTask.AddMember("input", _Data)
-
-	PollForDecisionTaskInput_domain = PollForDecisionTaskInput.AddMember("domain", _DomainName)
-
-	PollForDecisionTaskInput_taskList = PollForDecisionTaskInput.AddMember("taskList", TaskList)
-
-	PollForDecisionTaskInput_identity = PollForDecisionTaskInput.AddMember("identity", _Identity)
-
-	PollForDecisionTaskInput_nextPageToken = PollForDecisionTaskInput.AddMember("nextPageToken", _PageToken)
-
-	PollForDecisionTaskInput_maximumPageSize = PollForDecisionTaskInput.AddMember("maximumPageSize", _PageSize)
-
-	PollForDecisionTaskInput_reverseOrder = PollForDecisionTaskInput.AddMember("reverseOrder", _ReverseOrder)
-
-	PollForDecisionTaskInput_startAtPreviousStartedEvent = PollForDecisionTaskInput.AddMember("startAtPreviousStartedEvent", _StartAtPreviousStartedEvent)
-
-	DecisionTask_taskToken = DecisionTask.AddMember("taskToken", _TaskToken)
-
-	DecisionTask_startedEventId = DecisionTask.AddMember("startedEventId", _EventId)
-
-	DecisionTask_workflowExecution = DecisionTask.AddMember("workflowExecution", WorkflowExecution)
-
-	DecisionTask_workflowType = DecisionTask.AddMember("workflowType", WorkflowType)
-
-	DecisionTask_events = DecisionTask.AddMember("events", _HistoryEventList)
-
-	DecisionTask_nextPageToken = DecisionTask.AddMember("nextPageToken", _PageToken)
-
-	DecisionTask_previousStartedEventId = DecisionTask.AddMember("previousStartedEventId", _EventId)
-
-	RecordActivityTaskHeartbeatInput_taskToken = RecordActivityTaskHeartbeatInput.AddMember("taskToken", _TaskToken)
-
-	RecordActivityTaskHeartbeatInput_details = RecordActivityTaskHeartbeatInput.AddMember("details", _LimitedData)
-
-	ActivityTaskStatus_cancelRequested = ActivityTaskStatus.AddMember("cancelRequested", _Canceled)
-
-	RegisterActivityTypeInput_domain = RegisterActivityTypeInput.AddMember("domain", _DomainName)
-
-	RegisterActivityTypeInput_name = RegisterActivityTypeInput.AddMember("name", _Name)
-
-	RegisterActivityTypeInput_version = RegisterActivityTypeInput.AddMember("version", _Version)
-
-	RegisterActivityTypeInput_description = RegisterActivityTypeInput.AddMember("description", _Description)
-
-	RegisterActivityTypeInput_defaultTaskStartToCloseTimeout = RegisterActivityTypeInput.AddMember("defaultTaskStartToCloseTimeout", _DurationInSecondsOptional)
-
-	RegisterActivityTypeInput_defaultTaskHeartbeatTimeout = RegisterActivityTypeInput.AddMember("defaultTaskHeartbeatTimeout", _DurationInSecondsOptional)
-
-	RegisterActivityTypeInput_defaultTaskList = RegisterActivityTypeInput.AddMember("defaultTaskList", TaskList)
-
-	RegisterActivityTypeInput_defaultTaskPriority = RegisterActivityTypeInput.AddMember("defaultTaskPriority", _TaskPriority)
-
-	RegisterActivityTypeInput_defaultTaskScheduleToStartTimeout = RegisterActivityTypeInput.AddMember("defaultTaskScheduleToStartTimeout", _DurationInSecondsOptional)
-
-	RegisterActivityTypeInput_defaultTaskScheduleToCloseTimeout = RegisterActivityTypeInput.AddMember("defaultTaskScheduleToCloseTimeout", _DurationInSecondsOptional)
-
-	RegisterDomainInput_name = RegisterDomainInput.AddMember("name", _DomainName)
-
-	RegisterDomainInput_description = RegisterDomainInput.AddMember("description", _Description)
-
-	RegisterDomainInput_workflowExecutionRetentionPeriodInDays = RegisterDomainInput.AddMember("workflowExecutionRetentionPeriodInDays", _DurationInDays)
-
-	RegisterDomainInput_tags = RegisterDomainInput.AddMember("tags", _ResourceTagList)
-
-	RegisterWorkflowTypeInput_domain = RegisterWorkflowTypeInput.AddMember("domain", _DomainName)
-
-	RegisterWorkflowTypeInput_name = RegisterWorkflowTypeInput.AddMember("name", _Name)
-
-	RegisterWorkflowTypeInput_version = RegisterWorkflowTypeInput.AddMember("version", _Version)
-
-	RegisterWorkflowTypeInput_description = RegisterWorkflowTypeInput.AddMember("description", _Description)
-
-	RegisterWorkflowTypeInput_defaultTaskStartToCloseTimeout = RegisterWorkflowTypeInput.AddMember("defaultTaskStartToCloseTimeout", _DurationInSecondsOptional)
-
-	RegisterWorkflowTypeInput_defaultExecutionStartToCloseTimeout = RegisterWorkflowTypeInput.AddMember("defaultExecutionStartToCloseTimeout", _DurationInSecondsOptional)
-
-	RegisterWorkflowTypeInput_defaultTaskList = RegisterWorkflowTypeInput.AddMember("defaultTaskList", TaskList)
-
-	RegisterWorkflowTypeInput_defaultTaskPriority = RegisterWorkflowTypeInput.AddMember("defaultTaskPriority", _TaskPriority)
-
-	RegisterWorkflowTypeInput_defaultChildPolicy = RegisterWorkflowTypeInput.AddMember("defaultChildPolicy", ChildPolicy)
-
-	RegisterWorkflowTypeInput_defaultLambdaRole = RegisterWorkflowTypeInput.AddMember("defaultLambdaRole", _Arn)
-
-	RequestCancelWorkflowExecutionInput_domain = RequestCancelWorkflowExecutionInput.AddMember("domain", _DomainName)
-
-	RequestCancelWorkflowExecutionInput_workflowId = RequestCancelWorkflowExecutionInput.AddMember("workflowId", _WorkflowId)
-
-	RequestCancelWorkflowExecutionInput_runId = RequestCancelWorkflowExecutionInput.AddMember("runId", _WorkflowRunIdOptional)
-
-	RespondActivityTaskCanceledInput_taskToken = RespondActivityTaskCanceledInput.AddMember("taskToken", _TaskToken)
-
-	RespondActivityTaskCanceledInput_details = RespondActivityTaskCanceledInput.AddMember("details", _Data)
-
-	RespondActivityTaskCompletedInput_taskToken = RespondActivityTaskCompletedInput.AddMember("taskToken", _TaskToken)
-
-	RespondActivityTaskCompletedInput_result = RespondActivityTaskCompletedInput.AddMember("result", _Data)
-
-	RespondActivityTaskFailedInput_taskToken = RespondActivityTaskFailedInput.AddMember("taskToken", _TaskToken)
-
-	RespondActivityTaskFailedInput_reason = RespondActivityTaskFailedInput.AddMember("reason", _FailureReason)
-
-	RespondActivityTaskFailedInput_details = RespondActivityTaskFailedInput.AddMember("details", _Data)
-
-	RespondDecisionTaskCompletedInput_taskToken = RespondDecisionTaskCompletedInput.AddMember("taskToken", _TaskToken)
-
-	RespondDecisionTaskCompletedInput_decisions = RespondDecisionTaskCompletedInput.AddMember("decisions", _DecisionList)
-
-	RespondDecisionTaskCompletedInput_executionContext = RespondDecisionTaskCompletedInput.AddMember("executionContext", _Data)
-
-	RespondDecisionTaskCompletedInput_taskList = RespondDecisionTaskCompletedInput.AddMember("taskList", TaskList)
-
-	RespondDecisionTaskCompletedInput_taskListScheduleToStartTimeout = RespondDecisionTaskCompletedInput.AddMember("taskListScheduleToStartTimeout", _DurationInSecondsOptional)
-
-	SignalWorkflowExecutionInput_domain = SignalWorkflowExecutionInput.AddMember("domain", _DomainName)
-
-	SignalWorkflowExecutionInput_workflowId = SignalWorkflowExecutionInput.AddMember("workflowId", _WorkflowId)
-
-	SignalWorkflowExecutionInput_runId = SignalWorkflowExecutionInput.AddMember("runId", _WorkflowRunIdOptional)
-
-	SignalWorkflowExecutionInput_signalName = SignalWorkflowExecutionInput.AddMember("signalName", _SignalName)
-
-	SignalWorkflowExecutionInput_input = SignalWorkflowExecutionInput.AddMember("input", _Data)
-
-	StartWorkflowExecutionInput_domain = StartWorkflowExecutionInput.AddMember("domain", _DomainName)
-
-	StartWorkflowExecutionInput_workflowId = StartWorkflowExecutionInput.AddMember("workflowId", _WorkflowId)
-
-	StartWorkflowExecutionInput_workflowType = StartWorkflowExecutionInput.AddMember("workflowType", WorkflowType)
-
-	StartWorkflowExecutionInput_taskList = StartWorkflowExecutionInput.AddMember("taskList", TaskList)
-
-	StartWorkflowExecutionInput_taskPriority = StartWorkflowExecutionInput.AddMember("taskPriority", _TaskPriority)
-
-	StartWorkflowExecutionInput_input = StartWorkflowExecutionInput.AddMember("input", _Data)
-
-	StartWorkflowExecutionInput_executionStartToCloseTimeout = StartWorkflowExecutionInput.AddMember("executionStartToCloseTimeout", _DurationInSecondsOptional)
-
-	StartWorkflowExecutionInput_tagList = StartWorkflowExecutionInput.AddMember("tagList", _TagList)
-
-	StartWorkflowExecutionInput_taskStartToCloseTimeout = StartWorkflowExecutionInput.AddMember("taskStartToCloseTimeout", _DurationInSecondsOptional)
-
-	StartWorkflowExecutionInput_childPolicy = StartWorkflowExecutionInput.AddMember("childPolicy", ChildPolicy)
-
-	StartWorkflowExecutionInput_lambdaRole = StartWorkflowExecutionInput.AddMember("lambdaRole", _Arn)
-
-	Run_runId = Run.AddMember("runId", _WorkflowRunId)
-
-	TagResourceInput_resourceArn = TagResourceInput.AddMember("resourceArn", _Arn)
-
-	TagResourceInput_tags = TagResourceInput.AddMember("tags", _ResourceTagList)
-
-	TerminateWorkflowExecutionInput_domain = TerminateWorkflowExecutionInput.AddMember("domain", _DomainName)
-
-	TerminateWorkflowExecutionInput_workflowId = TerminateWorkflowExecutionInput.AddMember("workflowId", _WorkflowId)
-
-	TerminateWorkflowExecutionInput_runId = TerminateWorkflowExecutionInput.AddMember("runId", _WorkflowRunIdOptional)
-
-	TerminateWorkflowExecutionInput_reason = TerminateWorkflowExecutionInput.AddMember("reason", _TerminateReason)
-
-	TerminateWorkflowExecutionInput_details = TerminateWorkflowExecutionInput.AddMember("details", _Data)
-
-	TerminateWorkflowExecutionInput_childPolicy = TerminateWorkflowExecutionInput.AddMember("childPolicy", ChildPolicy)
-
-	UndeprecateActivityTypeInput_domain = UndeprecateActivityTypeInput.AddMember("domain", _DomainName)
-
-	UndeprecateActivityTypeInput_activityType = UndeprecateActivityTypeInput.AddMember("activityType", ActivityType)
-
-	UndeprecateDomainInput_name = UndeprecateDomainInput.AddMember("name", _DomainName)
-
-	UndeprecateWorkflowTypeInput_domain = UndeprecateWorkflowTypeInput.AddMember("domain", _DomainName)
-
-	UndeprecateWorkflowTypeInput_workflowType = UndeprecateWorkflowTypeInput.AddMember("workflowType", WorkflowType)
-
-	UntagResourceInput_resourceArn = UntagResourceInput.AddMember("resourceArn", _Arn)
-
-	UntagResourceInput_tagKeys = UntagResourceInput.AddMember("tagKeys", _ResourceTagKeyList)
-
-}
+var (
+	iCountClosedWorkflowExecutions                                  = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "CountClosedWorkflowExecutions"}
+	iCountOpenWorkflowExecutions                                    = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "CountOpenWorkflowExecutions"}
+	iCountPendingActivityTasks                                      = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "CountPendingActivityTasks"}
+	iCountPendingDecisionTasks                                      = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "CountPendingDecisionTasks"}
+	iDeleteActivityType                                             = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "DeleteActivityType"}
+	iDeleteWorkflowType                                             = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "DeleteWorkflowType"}
+	iDeprecateActivityType                                          = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "DeprecateActivityType"}
+	iDeprecateDomain                                                = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "DeprecateDomain"}
+	iDeprecateWorkflowType                                          = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "DeprecateWorkflowType"}
+	iDescribeActivityType                                           = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "DescribeActivityType"}
+	iDescribeDomain                                                 = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "DescribeDomain"}
+	iDescribeWorkflowExecution                                      = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "DescribeWorkflowExecution"}
+	iDescribeWorkflowType                                           = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "DescribeWorkflowType"}
+	iGetWorkflowExecutionHistory                                    = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "GetWorkflowExecutionHistory"}
+	iListActivityTypes                                              = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ListActivityTypes"}
+	iListClosedWorkflowExecutions                                   = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ListClosedWorkflowExecutions"}
+	iListDomains                                                    = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ListDomains"}
+	iListOpenWorkflowExecutions                                     = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ListOpenWorkflowExecutions"}
+	iListTagsForResource                                            = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ListTagsForResource"}
+	iListWorkflowTypes                                              = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ListWorkflowTypes"}
+	iPollForActivityTask                                            = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "PollForActivityTask"}
+	iPollForDecisionTask                                            = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "PollForDecisionTask"}
+	iRecordActivityTaskHeartbeat                                    = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "RecordActivityTaskHeartbeat"}
+	iRegisterActivityType                                           = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "RegisterActivityType"}
+	iRegisterDomain                                                 = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "RegisterDomain"}
+	iRegisterWorkflowType                                           = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "RegisterWorkflowType"}
+	iRequestCancelWorkflowExecution                                 = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "RequestCancelWorkflowExecution"}
+	iRespondActivityTaskCanceled                                    = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "RespondActivityTaskCanceled"}
+	iRespondActivityTaskCompleted                                   = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "RespondActivityTaskCompleted"}
+	iRespondActivityTaskFailed                                      = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "RespondActivityTaskFailed"}
+	iRespondDecisionTaskCompleted                                   = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "RespondDecisionTaskCompleted"}
+	iSignalWorkflowExecution                                        = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "SignalWorkflowExecution"}
+	iStartWorkflowExecution                                         = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "StartWorkflowExecution"}
+	iTagResource                                                    = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "TagResource"}
+	iTerminateWorkflowExecution                                     = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "TerminateWorkflowExecution"}
+	iUndeprecateActivityType                                        = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "UndeprecateActivityType"}
+	iUndeprecateDomain                                              = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "UndeprecateDomain"}
+	iUndeprecateWorkflowType                                        = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "UndeprecateWorkflowType"}
+	iUntagResource                                                  = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "UntagResource"}
+	i_SimpleWorkflowService                                         = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "SimpleWorkflowService"}
+	i_ActivityId                                                    = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ActivityId"}
+	iActivityTaskCanceledEventAttributes                            = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ActivityTaskCanceledEventAttributes"}
+	iActivityTaskCancelRequestedEventAttributes                     = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ActivityTaskCancelRequestedEventAttributes"}
+	iActivityTaskCompletedEventAttributes                           = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ActivityTaskCompletedEventAttributes"}
+	iActivityTaskFailedEventAttributes                              = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ActivityTaskFailedEventAttributes"}
+	iActivityTaskScheduledEventAttributes                           = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ActivityTaskScheduledEventAttributes"}
+	iActivityTaskStartedEventAttributes                             = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ActivityTaskStartedEventAttributes"}
+	iActivityTaskTimedOutEventAttributes                            = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ActivityTaskTimedOutEventAttributes"}
+	iActivityTaskTimeoutType                                        = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ActivityTaskTimeoutType"}
+	iActivityType                                                   = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ActivityType"}
+	iActivityTypeConfiguration                                      = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ActivityTypeConfiguration"}
+	iActivityTypeInfo                                               = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ActivityTypeInfo"}
+	i_ActivityTypeInfoList                                          = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ActivityTypeInfoList"}
+	i_Arn                                                           = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "Arn"}
+	i_Canceled                                                      = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "Canceled"}
+	iCancelTimerDecisionAttributes                                  = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "CancelTimerDecisionAttributes"}
+	iCancelTimerFailedCause                                         = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "CancelTimerFailedCause"}
+	iCancelTimerFailedEventAttributes                               = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "CancelTimerFailedEventAttributes"}
+	iCancelWorkflowExecutionDecisionAttributes                      = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "CancelWorkflowExecutionDecisionAttributes"}
+	iCancelWorkflowExecutionFailedCause                             = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "CancelWorkflowExecutionFailedCause"}
+	iCancelWorkflowExecutionFailedEventAttributes                   = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "CancelWorkflowExecutionFailedEventAttributes"}
+	i_CauseMessage                                                  = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "CauseMessage"}
+	iChildPolicy                                                    = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ChildPolicy"}
+	iChildWorkflowExecutionCanceledEventAttributes                  = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ChildWorkflowExecutionCanceledEventAttributes"}
+	iChildWorkflowExecutionCompletedEventAttributes                 = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ChildWorkflowExecutionCompletedEventAttributes"}
+	iChildWorkflowExecutionFailedEventAttributes                    = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ChildWorkflowExecutionFailedEventAttributes"}
+	iChildWorkflowExecutionStartedEventAttributes                   = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ChildWorkflowExecutionStartedEventAttributes"}
+	iChildWorkflowExecutionTerminatedEventAttributes                = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ChildWorkflowExecutionTerminatedEventAttributes"}
+	iChildWorkflowExecutionTimedOutEventAttributes                  = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ChildWorkflowExecutionTimedOutEventAttributes"}
+	iCloseStatus                                                    = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "CloseStatus"}
+	iCloseStatusFilter                                              = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "CloseStatusFilter"}
+	iCompleteWorkflowExecutionDecisionAttributes                    = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "CompleteWorkflowExecutionDecisionAttributes"}
+	iCompleteWorkflowExecutionFailedCause                           = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "CompleteWorkflowExecutionFailedCause"}
+	iCompleteWorkflowExecutionFailedEventAttributes                 = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "CompleteWorkflowExecutionFailedEventAttributes"}
+	iContinueAsNewWorkflowExecutionDecisionAttributes               = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ContinueAsNewWorkflowExecutionDecisionAttributes"}
+	iContinueAsNewWorkflowExecutionFailedCause                      = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ContinueAsNewWorkflowExecutionFailedCause"}
+	iContinueAsNewWorkflowExecutionFailedEventAttributes            = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ContinueAsNewWorkflowExecutionFailedEventAttributes"}
+	i_Count                                                         = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "Count"}
+	i_Data                                                          = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "Data"}
+	iDecision                                                       = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "Decision"}
+	i_DecisionList                                                  = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "DecisionList"}
+	iDecisionTaskCompletedEventAttributes                           = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "DecisionTaskCompletedEventAttributes"}
+	iDecisionTaskScheduledEventAttributes                           = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "DecisionTaskScheduledEventAttributes"}
+	iDecisionTaskStartedEventAttributes                             = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "DecisionTaskStartedEventAttributes"}
+	iDecisionTaskTimedOutEventAttributes                            = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "DecisionTaskTimedOutEventAttributes"}
+	iDecisionTaskTimeoutType                                        = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "DecisionTaskTimeoutType"}
+	iDecisionType                                                   = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "DecisionType"}
+	iDefaultUndefinedFault                                          = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "DefaultUndefinedFault"}
+	i_Description                                                   = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "Description"}
+	iDomainAlreadyExistsFault                                       = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "DomainAlreadyExistsFault"}
+	iDomainConfiguration                                            = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "DomainConfiguration"}
+	iDomainDeprecatedFault                                          = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "DomainDeprecatedFault"}
+	iDomainInfo                                                     = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "DomainInfo"}
+	i_DomainInfoList                                                = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "DomainInfoList"}
+	i_DomainName                                                    = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "DomainName"}
+	i_DurationInDays                                                = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "DurationInDays"}
+	i_DurationInSeconds                                             = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "DurationInSeconds"}
+	i_DurationInSecondsOptional                                     = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "DurationInSecondsOptional"}
+	i_ErrorMessage                                                  = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ErrorMessage"}
+	i_EventId                                                       = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "EventId"}
+	iEventType                                                      = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "EventType"}
+	iExecutionStatus                                                = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ExecutionStatus"}
+	iExecutionTimeFilter                                            = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ExecutionTimeFilter"}
+	iExternalWorkflowExecutionCancelRequestedEventAttributes        = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ExternalWorkflowExecutionCancelRequestedEventAttributes"}
+	iExternalWorkflowExecutionSignaledEventAttributes               = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ExternalWorkflowExecutionSignaledEventAttributes"}
+	i_FailureReason                                                 = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "FailureReason"}
+	iFailWorkflowExecutionDecisionAttributes                        = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "FailWorkflowExecutionDecisionAttributes"}
+	iFailWorkflowExecutionFailedCause                               = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "FailWorkflowExecutionFailedCause"}
+	iFailWorkflowExecutionFailedEventAttributes                     = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "FailWorkflowExecutionFailedEventAttributes"}
+	i_FunctionId                                                    = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "FunctionId"}
+	i_FunctionInput                                                 = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "FunctionInput"}
+	i_FunctionName                                                  = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "FunctionName"}
+	iHistoryEvent                                                   = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "HistoryEvent"}
+	i_HistoryEventList                                              = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "HistoryEventList"}
+	i_Identity                                                      = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "Identity"}
+	iLambdaFunctionCompletedEventAttributes                         = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "LambdaFunctionCompletedEventAttributes"}
+	iLambdaFunctionFailedEventAttributes                            = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "LambdaFunctionFailedEventAttributes"}
+	iLambdaFunctionScheduledEventAttributes                         = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "LambdaFunctionScheduledEventAttributes"}
+	iLambdaFunctionStartedEventAttributes                           = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "LambdaFunctionStartedEventAttributes"}
+	iLambdaFunctionTimedOutEventAttributes                          = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "LambdaFunctionTimedOutEventAttributes"}
+	iLambdaFunctionTimeoutType                                      = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "LambdaFunctionTimeoutType"}
+	i_LimitedData                                                   = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "LimitedData"}
+	iLimitExceededFault                                             = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "LimitExceededFault"}
+	i_MarkerName                                                    = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "MarkerName"}
+	iMarkerRecordedEventAttributes                                  = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "MarkerRecordedEventAttributes"}
+	i_Name                                                          = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "Name"}
+	i_OpenDecisionTasksCount                                        = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "OpenDecisionTasksCount"}
+	iOperationNotPermittedFault                                     = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "OperationNotPermittedFault"}
+	i_PageSize                                                      = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "PageSize"}
+	i_PageToken                                                     = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "PageToken"}
+	iRecordMarkerDecisionAttributes                                 = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "RecordMarkerDecisionAttributes"}
+	iRecordMarkerFailedCause                                        = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "RecordMarkerFailedCause"}
+	iRecordMarkerFailedEventAttributes                              = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "RecordMarkerFailedEventAttributes"}
+	iRegistrationStatus                                             = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "RegistrationStatus"}
+	iRequestCancelActivityTaskDecisionAttributes                    = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "RequestCancelActivityTaskDecisionAttributes"}
+	iRequestCancelActivityTaskFailedCause                           = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "RequestCancelActivityTaskFailedCause"}
+	iRequestCancelActivityTaskFailedEventAttributes                 = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "RequestCancelActivityTaskFailedEventAttributes"}
+	iRequestCancelExternalWorkflowExecutionDecisionAttributes       = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "RequestCancelExternalWorkflowExecutionDecisionAttributes"}
+	iRequestCancelExternalWorkflowExecutionFailedCause              = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "RequestCancelExternalWorkflowExecutionFailedCause"}
+	iRequestCancelExternalWorkflowExecutionFailedEventAttributes    = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "RequestCancelExternalWorkflowExecutionFailedEventAttributes"}
+	iRequestCancelExternalWorkflowExecutionInitiatedEventAttributes = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "RequestCancelExternalWorkflowExecutionInitiatedEventAttributes"}
+	iResourceTag                                                    = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ResourceTag"}
+	i_ResourceTagKey                                                = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ResourceTagKey"}
+	i_ResourceTagKeyList                                            = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ResourceTagKeyList"}
+	i_ResourceTagList                                               = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ResourceTagList"}
+	i_ResourceTagValue                                              = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ResourceTagValue"}
+	i_ReverseOrder                                                  = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ReverseOrder"}
+	iScheduleActivityTaskDecisionAttributes                         = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ScheduleActivityTaskDecisionAttributes"}
+	iScheduleActivityTaskFailedCause                                = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ScheduleActivityTaskFailedCause"}
+	iScheduleActivityTaskFailedEventAttributes                      = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ScheduleActivityTaskFailedEventAttributes"}
+	iScheduleLambdaFunctionDecisionAttributes                       = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ScheduleLambdaFunctionDecisionAttributes"}
+	iScheduleLambdaFunctionFailedCause                              = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ScheduleLambdaFunctionFailedCause"}
+	iScheduleLambdaFunctionFailedEventAttributes                    = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ScheduleLambdaFunctionFailedEventAttributes"}
+	iSignalExternalWorkflowExecutionDecisionAttributes              = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "SignalExternalWorkflowExecutionDecisionAttributes"}
+	iSignalExternalWorkflowExecutionFailedCause                     = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "SignalExternalWorkflowExecutionFailedCause"}
+	iSignalExternalWorkflowExecutionFailedEventAttributes           = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "SignalExternalWorkflowExecutionFailedEventAttributes"}
+	iSignalExternalWorkflowExecutionInitiatedEventAttributes        = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "SignalExternalWorkflowExecutionInitiatedEventAttributes"}
+	i_SignalName                                                    = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "SignalName"}
+	i_StartAtPreviousStartedEvent                                   = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "StartAtPreviousStartedEvent"}
+	iStartChildWorkflowExecutionDecisionAttributes                  = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "StartChildWorkflowExecutionDecisionAttributes"}
+	iStartChildWorkflowExecutionFailedCause                         = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "StartChildWorkflowExecutionFailedCause"}
+	iStartChildWorkflowExecutionFailedEventAttributes               = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "StartChildWorkflowExecutionFailedEventAttributes"}
+	iStartChildWorkflowExecutionInitiatedEventAttributes            = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "StartChildWorkflowExecutionInitiatedEventAttributes"}
+	iStartLambdaFunctionFailedCause                                 = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "StartLambdaFunctionFailedCause"}
+	iStartLambdaFunctionFailedEventAttributes                       = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "StartLambdaFunctionFailedEventAttributes"}
+	iStartTimerDecisionAttributes                                   = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "StartTimerDecisionAttributes"}
+	iStartTimerFailedCause                                          = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "StartTimerFailedCause"}
+	iStartTimerFailedEventAttributes                                = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "StartTimerFailedEventAttributes"}
+	i_Tag                                                           = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "Tag"}
+	iTagFilter                                                      = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "TagFilter"}
+	i_TagList                                                       = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "TagList"}
+	iTaskList                                                       = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "TaskList"}
+	i_TaskPriority                                                  = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "TaskPriority"}
+	i_TaskToken                                                     = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "TaskToken"}
+	i_TerminateReason                                               = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "TerminateReason"}
+	iTimerCanceledEventAttributes                                   = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "TimerCanceledEventAttributes"}
+	iTimerFiredEventAttributes                                      = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "TimerFiredEventAttributes"}
+	i_TimerId                                                       = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "TimerId"}
+	iTimerStartedEventAttributes                                    = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "TimerStartedEventAttributes"}
+	i_Timestamp                                                     = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "Timestamp"}
+	iTooManyTagsFault                                               = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "TooManyTagsFault"}
+	i_Truncated                                                     = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "Truncated"}
+	iTypeAlreadyExistsFault                                         = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "TypeAlreadyExistsFault"}
+	iTypeDeprecatedFault                                            = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "TypeDeprecatedFault"}
+	iTypeNotDeprecatedFault                                         = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "TypeNotDeprecatedFault"}
+	iUnknownResourceFault                                           = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "UnknownResourceFault"}
+	i_Version                                                       = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "Version"}
+	i_VersionOptional                                               = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "VersionOptional"}
+	iWorkflowExecution                                              = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "WorkflowExecution"}
+	iWorkflowExecutionAlreadyStartedFault                           = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "WorkflowExecutionAlreadyStartedFault"}
+	iWorkflowExecutionCanceledEventAttributes                       = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "WorkflowExecutionCanceledEventAttributes"}
+	iWorkflowExecutionCancelRequestedCause                          = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "WorkflowExecutionCancelRequestedCause"}
+	iWorkflowExecutionCancelRequestedEventAttributes                = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "WorkflowExecutionCancelRequestedEventAttributes"}
+	iWorkflowExecutionCompletedEventAttributes                      = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "WorkflowExecutionCompletedEventAttributes"}
+	iWorkflowExecutionConfiguration                                 = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "WorkflowExecutionConfiguration"}
+	iWorkflowExecutionContinuedAsNewEventAttributes                 = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "WorkflowExecutionContinuedAsNewEventAttributes"}
+	iWorkflowExecutionFailedEventAttributes                         = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "WorkflowExecutionFailedEventAttributes"}
+	iWorkflowExecutionFilter                                        = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "WorkflowExecutionFilter"}
+	iWorkflowExecutionInfo                                          = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "WorkflowExecutionInfo"}
+	i_WorkflowExecutionInfoList                                     = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "WorkflowExecutionInfoList"}
+	iWorkflowExecutionOpenCounts                                    = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "WorkflowExecutionOpenCounts"}
+	iWorkflowExecutionSignaledEventAttributes                       = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "WorkflowExecutionSignaledEventAttributes"}
+	iWorkflowExecutionStartedEventAttributes                        = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "WorkflowExecutionStartedEventAttributes"}
+	iWorkflowExecutionTerminatedCause                               = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "WorkflowExecutionTerminatedCause"}
+	iWorkflowExecutionTerminatedEventAttributes                     = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "WorkflowExecutionTerminatedEventAttributes"}
+	iWorkflowExecutionTimedOutEventAttributes                       = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "WorkflowExecutionTimedOutEventAttributes"}
+	iWorkflowExecutionTimeoutType                                   = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "WorkflowExecutionTimeoutType"}
+	i_WorkflowId                                                    = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "WorkflowId"}
+	i_WorkflowRunId                                                 = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "WorkflowRunId"}
+	i_WorkflowRunIdOptional                                         = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "WorkflowRunIdOptional"}
+	iWorkflowType                                                   = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "WorkflowType"}
+	iWorkflowTypeConfiguration                                      = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "WorkflowTypeConfiguration"}
+	iWorkflowTypeFilter                                             = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "WorkflowTypeFilter"}
+	iWorkflowTypeInfo                                               = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "WorkflowTypeInfo"}
+	i_WorkflowTypeInfoList                                          = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "WorkflowTypeInfoList"}
+	iCountClosedWorkflowExecutionsInput                             = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "CountClosedWorkflowExecutionsInput"}
+	iWorkflowExecutionCount                                         = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "WorkflowExecutionCount"}
+	iCountOpenWorkflowExecutionsInput                               = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "CountOpenWorkflowExecutionsInput"}
+	iCountPendingActivityTasksInput                                 = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "CountPendingActivityTasksInput"}
+	iPendingTaskCount                                               = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "PendingTaskCount"}
+	iCountPendingDecisionTasksInput                                 = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "CountPendingDecisionTasksInput"}
+	iDeleteActivityTypeInput                                        = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "DeleteActivityTypeInput"}
+	iDeleteWorkflowTypeInput                                        = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "DeleteWorkflowTypeInput"}
+	iDeprecateActivityTypeInput                                     = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "DeprecateActivityTypeInput"}
+	iDeprecateDomainInput                                           = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "DeprecateDomainInput"}
+	iDeprecateWorkflowTypeInput                                     = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "DeprecateWorkflowTypeInput"}
+	iDescribeActivityTypeInput                                      = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "DescribeActivityTypeInput"}
+	iActivityTypeDetail                                             = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ActivityTypeDetail"}
+	iDescribeDomainInput                                            = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "DescribeDomainInput"}
+	iDomainDetail                                                   = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "DomainDetail"}
+	iDescribeWorkflowExecutionInput                                 = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "DescribeWorkflowExecutionInput"}
+	iWorkflowExecutionDetail                                        = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "WorkflowExecutionDetail"}
+	iDescribeWorkflowTypeInput                                      = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "DescribeWorkflowTypeInput"}
+	iWorkflowTypeDetail                                             = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "WorkflowTypeDetail"}
+	iGetWorkflowExecutionHistoryInput                               = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "GetWorkflowExecutionHistoryInput"}
+	iHistory                                                        = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "History"}
+	iListActivityTypesInput                                         = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ListActivityTypesInput"}
+	iActivityTypeInfos                                              = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ActivityTypeInfos"}
+	iListClosedWorkflowExecutionsInput                              = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ListClosedWorkflowExecutionsInput"}
+	iWorkflowExecutionInfos                                         = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "WorkflowExecutionInfos"}
+	iListDomainsInput                                               = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ListDomainsInput"}
+	iDomainInfos                                                    = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "DomainInfos"}
+	iListOpenWorkflowExecutionsInput                                = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ListOpenWorkflowExecutionsInput"}
+	iListTagsForResourceInput                                       = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ListTagsForResourceInput"}
+	iListTagsForResourceOutput                                      = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ListTagsForResourceOutput"}
+	iListWorkflowTypesInput                                         = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ListWorkflowTypesInput"}
+	iWorkflowTypeInfos                                              = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "WorkflowTypeInfos"}
+	iPollForActivityTaskInput                                       = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "PollForActivityTaskInput"}
+	iActivityTask                                                   = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ActivityTask"}
+	iPollForDecisionTaskInput                                       = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "PollForDecisionTaskInput"}
+	iDecisionTask                                                   = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "DecisionTask"}
+	iRecordActivityTaskHeartbeatInput                               = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "RecordActivityTaskHeartbeatInput"}
+	iActivityTaskStatus                                             = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "ActivityTaskStatus"}
+	iRegisterActivityTypeInput                                      = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "RegisterActivityTypeInput"}
+	iRegisterDomainInput                                            = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "RegisterDomainInput"}
+	iRegisterWorkflowTypeInput                                      = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "RegisterWorkflowTypeInput"}
+	iRequestCancelWorkflowExecutionInput                            = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "RequestCancelWorkflowExecutionInput"}
+	iRespondActivityTaskCanceledInput                               = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "RespondActivityTaskCanceledInput"}
+	iRespondActivityTaskCompletedInput                              = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "RespondActivityTaskCompletedInput"}
+	iRespondActivityTaskFailedInput                                 = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "RespondActivityTaskFailedInput"}
+	iRespondDecisionTaskCompletedInput                              = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "RespondDecisionTaskCompletedInput"}
+	iSignalWorkflowExecutionInput                                   = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "SignalWorkflowExecutionInput"}
+	iStartWorkflowExecutionInput                                    = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "StartWorkflowExecutionInput"}
+	iRun                                                            = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "Run"}
+	iTagResourceInput                                               = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "TagResourceInput"}
+	iTerminateWorkflowExecutionInput                                = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "TerminateWorkflowExecutionInput"}
+	iUndeprecateActivityTypeInput                                   = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "UndeprecateActivityTypeInput"}
+	iUndeprecateDomainInput                                         = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "UndeprecateDomainInput"}
+	iUndeprecateWorkflowTypeInput                                   = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "UndeprecateWorkflowTypeInput"}
+	iUntagResourceInput                                             = smithy.ShapeID{Namespace: "com.amazonaws.swf", Name: "UntagResourceInput"}
+	pUnit                                                           = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLNamespace{URI: "http://swf.amazonaws.com/doc/2012-01-25"}}, DirectMask: 0x8000}
+var t1 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+
+var mActivityTaskCanceledEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sActivityTaskCanceledEventAttributes_details, &sActivityTaskCanceledEventAttributes_scheduledEventId, &sActivityTaskCanceledEventAttributes_startedEventId, &sActivityTaskCanceledEventAttributes_latestCancelRequestedEventId}}
+var mActivityTaskCancelRequestedEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sActivityTaskCancelRequestedEventAttributes_decisionTaskCompletedEventId, &sActivityTaskCancelRequestedEventAttributes_activityId}}
+var mActivityTaskCompletedEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sActivityTaskCompletedEventAttributes_result, &sActivityTaskCompletedEventAttributes_scheduledEventId, &sActivityTaskCompletedEventAttributes_startedEventId}}
+var mActivityTaskFailedEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sActivityTaskFailedEventAttributes_reason, &sActivityTaskFailedEventAttributes_details, &sActivityTaskFailedEventAttributes_scheduledEventId, &sActivityTaskFailedEventAttributes_startedEventId}}
+var mActivityTaskScheduledEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sActivityTaskScheduledEventAttributes_activityType, &sActivityTaskScheduledEventAttributes_activityId, &sActivityTaskScheduledEventAttributes_input, &sActivityTaskScheduledEventAttributes_control, &sActivityTaskScheduledEventAttributes_scheduleToStartTimeout, &sActivityTaskScheduledEventAttributes_scheduleToCloseTimeout, &sActivityTaskScheduledEventAttributes_startToCloseTimeout, &sActivityTaskScheduledEventAttributes_taskList, &sActivityTaskScheduledEventAttributes_taskPriority, &sActivityTaskScheduledEventAttributes_decisionTaskCompletedEventId, &sActivityTaskScheduledEventAttributes_heartbeatTimeout}, Seed: 19, Slots: []uint16{
+	4, 10, 0, 0, 2, 7, 11, 1, 0, 9, 0, 0, 0, 0, 6, 0, 0, 0, 3, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 5, 0, 8,
+}}
+var mActivityTaskStartedEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sActivityTaskStartedEventAttributes_identity, &sActivityTaskStartedEventAttributes_scheduledEventId}}
+var mActivityTaskTimedOutEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sActivityTaskTimedOutEventAttributes_timeoutType, &sActivityTaskTimedOutEventAttributes_scheduledEventId, &sActivityTaskTimedOutEventAttributes_startedEventId, &sActivityTaskTimedOutEventAttributes_details}}
+var mActivityTaskTimeoutType = smithy.SchemaMembers{List: []*smithy.Schema{&sActivityTaskTimeoutType_START_TO_CLOSE, &sActivityTaskTimeoutType_SCHEDULE_TO_START, &sActivityTaskTimeoutType_SCHEDULE_TO_CLOSE, &sActivityTaskTimeoutType_HEARTBEAT}}
+var mActivityType = smithy.SchemaMembers{List: []*smithy.Schema{&sActivityType_name, &sActivityType_version}}
+var mActivityTypeConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sActivityTypeConfiguration_defaultTaskStartToCloseTimeout, &sActivityTypeConfiguration_defaultTaskHeartbeatTimeout, &sActivityTypeConfiguration_defaultTaskList, &sActivityTypeConfiguration_defaultTaskPriority, &sActivityTypeConfiguration_defaultTaskScheduleToStartTimeout, &sActivityTypeConfiguration_defaultTaskScheduleToCloseTimeout}}
+var mActivityTypeInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sActivityTypeInfo_activityType, &sActivityTypeInfo_status, &sActivityTypeInfo_description, &sActivityTypeInfo_creationDate, &sActivityTypeInfo_deprecationDate}}
+var m_ActivityTypeInfoList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ActivityTypeInfoList_member}}
+var mCancelTimerDecisionAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelTimerDecisionAttributes_timerId}}
+var mCancelTimerFailedCause = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelTimerFailedCause_TIMER_ID_UNKNOWN, &sCancelTimerFailedCause_OPERATION_NOT_PERMITTED}}
+var mCancelTimerFailedEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelTimerFailedEventAttributes_timerId, &sCancelTimerFailedEventAttributes_cause, &sCancelTimerFailedEventAttributes_decisionTaskCompletedEventId}}
+var mCancelWorkflowExecutionDecisionAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelWorkflowExecutionDecisionAttributes_details}}
+var mCancelWorkflowExecutionFailedCause = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelWorkflowExecutionFailedCause_UNHANDLED_DECISION, &sCancelWorkflowExecutionFailedCause_OPERATION_NOT_PERMITTED}}
+var mCancelWorkflowExecutionFailedEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelWorkflowExecutionFailedEventAttributes_cause, &sCancelWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId}}
+var mChildPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sChildPolicy_TERMINATE, &sChildPolicy_REQUEST_CANCEL, &sChildPolicy_ABANDON}}
+var mChildWorkflowExecutionCanceledEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sChildWorkflowExecutionCanceledEventAttributes_workflowExecution, &sChildWorkflowExecutionCanceledEventAttributes_workflowType, &sChildWorkflowExecutionCanceledEventAttributes_details, &sChildWorkflowExecutionCanceledEventAttributes_initiatedEventId, &sChildWorkflowExecutionCanceledEventAttributes_startedEventId}}
+var mChildWorkflowExecutionCompletedEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sChildWorkflowExecutionCompletedEventAttributes_workflowExecution, &sChildWorkflowExecutionCompletedEventAttributes_workflowType, &sChildWorkflowExecutionCompletedEventAttributes_result, &sChildWorkflowExecutionCompletedEventAttributes_initiatedEventId, &sChildWorkflowExecutionCompletedEventAttributes_startedEventId}}
+var mChildWorkflowExecutionFailedEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sChildWorkflowExecutionFailedEventAttributes_workflowExecution, &sChildWorkflowExecutionFailedEventAttributes_workflowType, &sChildWorkflowExecutionFailedEventAttributes_reason, &sChildWorkflowExecutionFailedEventAttributes_details, &sChildWorkflowExecutionFailedEventAttributes_initiatedEventId, &sChildWorkflowExecutionFailedEventAttributes_startedEventId}}
+var mChildWorkflowExecutionStartedEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sChildWorkflowExecutionStartedEventAttributes_workflowExecution, &sChildWorkflowExecutionStartedEventAttributes_workflowType, &sChildWorkflowExecutionStartedEventAttributes_initiatedEventId}}
+var mChildWorkflowExecutionTerminatedEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sChildWorkflowExecutionTerminatedEventAttributes_workflowExecution, &sChildWorkflowExecutionTerminatedEventAttributes_workflowType, &sChildWorkflowExecutionTerminatedEventAttributes_initiatedEventId, &sChildWorkflowExecutionTerminatedEventAttributes_startedEventId}}
+var mChildWorkflowExecutionTimedOutEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sChildWorkflowExecutionTimedOutEventAttributes_workflowExecution, &sChildWorkflowExecutionTimedOutEventAttributes_workflowType, &sChildWorkflowExecutionTimedOutEventAttributes_timeoutType, &sChildWorkflowExecutionTimedOutEventAttributes_initiatedEventId, &sChildWorkflowExecutionTimedOutEventAttributes_startedEventId}}
+var mCloseStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sCloseStatus_COMPLETED, &sCloseStatus_FAILED, &sCloseStatus_CANCELED, &sCloseStatus_TERMINATED, &sCloseStatus_CONTINUED_AS_NEW, &sCloseStatus_TIMED_OUT}}
+var mCloseStatusFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sCloseStatusFilter_status}}
+var mCompleteWorkflowExecutionDecisionAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sCompleteWorkflowExecutionDecisionAttributes_result}}
+var mCompleteWorkflowExecutionFailedCause = smithy.SchemaMembers{List: []*smithy.Schema{&sCompleteWorkflowExecutionFailedCause_UNHANDLED_DECISION, &sCompleteWorkflowExecutionFailedCause_OPERATION_NOT_PERMITTED}}
+var mCompleteWorkflowExecutionFailedEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sCompleteWorkflowExecutionFailedEventAttributes_cause, &sCompleteWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId}}
+var mContinueAsNewWorkflowExecutionDecisionAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sContinueAsNewWorkflowExecutionDecisionAttributes_input, &sContinueAsNewWorkflowExecutionDecisionAttributes_executionStartToCloseTimeout, &sContinueAsNewWorkflowExecutionDecisionAttributes_taskList, &sContinueAsNewWorkflowExecutionDecisionAttributes_taskPriority, &sContinueAsNewWorkflowExecutionDecisionAttributes_taskStartToCloseTimeout, &sContinueAsNewWorkflowExecutionDecisionAttributes_childPolicy, &sContinueAsNewWorkflowExecutionDecisionAttributes_tagList, &sContinueAsNewWorkflowExecutionDecisionAttributes_workflowTypeVersion, &sContinueAsNewWorkflowExecutionDecisionAttributes_lambdaRole}, Seed: 2, Slots: []uint16{
+	2, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 5, 0, 9, 8, 0, 0, 0, 7, 0, 6, 0, 0, 0,
+	0, 0, 0, 0, 3, 0, 1, 0,
+}}
+var mContinueAsNewWorkflowExecutionFailedCause = smithy.SchemaMembers{List: []*smithy.Schema{&sContinueAsNewWorkflowExecutionFailedCause_UNHANDLED_DECISION, &sContinueAsNewWorkflowExecutionFailedCause_WORKFLOW_TYPE_DEPRECATED, &sContinueAsNewWorkflowExecutionFailedCause_WORKFLOW_TYPE_DOES_NOT_EXIST, &sContinueAsNewWorkflowExecutionFailedCause_DEFAULT_EXECUTION_START_TO_CLOSE_TIMEOUT_UNDEFINED, &sContinueAsNewWorkflowExecutionFailedCause_DEFAULT_TASK_START_TO_CLOSE_TIMEOUT_UNDEFINED, &sContinueAsNewWorkflowExecutionFailedCause_DEFAULT_TASK_LIST_UNDEFINED, &sContinueAsNewWorkflowExecutionFailedCause_DEFAULT_CHILD_POLICY_UNDEFINED, &sContinueAsNewWorkflowExecutionFailedCause_CONTINUE_AS_NEW_WORKFLOW_EXECUTION_RATE_EXCEEDED, &sContinueAsNewWorkflowExecutionFailedCause_OPERATION_NOT_PERMITTED}, Seed: 4, Slots: []uint16{
+	0, 4, 0, 0, 2, 5, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 7, 0, 3, 0, 0, 0, 0,
+	0, 8, 6, 0, 0, 0, 1, 0,
+}}
+var mContinueAsNewWorkflowExecutionFailedEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sContinueAsNewWorkflowExecutionFailedEventAttributes_cause, &sContinueAsNewWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId}}
+var mDecision = smithy.SchemaMembers{List: []*smithy.Schema{&sDecision_decisionType, &sDecision_scheduleActivityTaskDecisionAttributes, &sDecision_requestCancelActivityTaskDecisionAttributes, &sDecision_completeWorkflowExecutionDecisionAttributes, &sDecision_failWorkflowExecutionDecisionAttributes, &sDecision_cancelWorkflowExecutionDecisionAttributes, &sDecision_continueAsNewWorkflowExecutionDecisionAttributes, &sDecision_recordMarkerDecisionAttributes, &sDecision_startTimerDecisionAttributes, &sDecision_cancelTimerDecisionAttributes, &sDecision_signalExternalWorkflowExecutionDecisionAttributes, &sDecision_requestCancelExternalWorkflowExecutionDecisionAttributes, &sDecision_startChildWorkflowExecutionDecisionAttributes, &sDecision_scheduleLambdaFunctionDecisionAttributes}, Seed: 34, Slots: []uint16{
+	7, 0, 6, 13, 0, 8, 0, 14, 0, 0, 0, 0, 2, 0, 12, 3, 0, 9, 0, 0, 1, 0, 0, 0,
+	4, 0, 5, 0, 0, 10, 11, 0,
+}}
+var m_DecisionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DecisionList_member}}
+var mDecisionTaskCompletedEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sDecisionTaskCompletedEventAttributes_executionContext, &sDecisionTaskCompletedEventAttributes_scheduledEventId, &sDecisionTaskCompletedEventAttributes_startedEventId, &sDecisionTaskCompletedEventAttributes_taskList, &sDecisionTaskCompletedEventAttributes_taskListScheduleToStartTimeout}}
+var mDecisionTaskScheduledEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sDecisionTaskScheduledEventAttributes_taskList, &sDecisionTaskScheduledEventAttributes_taskPriority, &sDecisionTaskScheduledEventAttributes_startToCloseTimeout, &sDecisionTaskScheduledEventAttributes_scheduleToStartTimeout}}
+var mDecisionTaskStartedEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sDecisionTaskStartedEventAttributes_identity, &sDecisionTaskStartedEventAttributes_scheduledEventId}}
+var mDecisionTaskTimedOutEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sDecisionTaskTimedOutEventAttributes_timeoutType, &sDecisionTaskTimedOutEventAttributes_scheduledEventId, &sDecisionTaskTimedOutEventAttributes_startedEventId}}
+var mDecisionTaskTimeoutType = smithy.SchemaMembers{List: []*smithy.Schema{&sDecisionTaskTimeoutType_START_TO_CLOSE, &sDecisionTaskTimeoutType_SCHEDULE_TO_START}}
+var mDecisionType = smithy.SchemaMembers{List: []*smithy.Schema{&sDecisionType_ScheduleActivityTask, &sDecisionType_RequestCancelActivityTask, &sDecisionType_CompleteWorkflowExecution, &sDecisionType_FailWorkflowExecution, &sDecisionType_CancelWorkflowExecution, &sDecisionType_ContinueAsNewWorkflowExecution, &sDecisionType_RecordMarker, &sDecisionType_StartTimer, &sDecisionType_CancelTimer, &sDecisionType_SignalExternalWorkflowExecution, &sDecisionType_RequestCancelExternalWorkflowExecution, &sDecisionType_StartChildWorkflowExecution, &sDecisionType_ScheduleLambdaFunction}, Seed: 11, Slots: []uint16{
+	1, 0, 0, 10, 0, 0, 8, 0, 0, 0, 3, 0, 0, 11, 4, 0, 9, 12, 0, 13, 2, 0, 7, 0,
+	0, 6, 0, 5, 0, 0, 0, 0,
+}}
+var mDefaultUndefinedFault = smithy.SchemaMembers{List: []*smithy.Schema{&sDefaultUndefinedFault_message}}
+var mDomainAlreadyExistsFault = smithy.SchemaMembers{List: []*smithy.Schema{&sDomainAlreadyExistsFault_message}}
+var mDomainConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sDomainConfiguration_workflowExecutionRetentionPeriodInDays}}
+var mDomainDeprecatedFault = smithy.SchemaMembers{List: []*smithy.Schema{&sDomainDeprecatedFault_message}}
+var mDomainInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sDomainInfo_name, &sDomainInfo_status, &sDomainInfo_description, &sDomainInfo_arn}}
+var m_DomainInfoList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DomainInfoList_member}}
+var mEventType = smithy.SchemaMembers{List: []*smithy.Schema{&sEventType_WorkflowExecutionStarted, &sEventType_WorkflowExecutionCancelRequested, &sEventType_WorkflowExecutionCompleted, &sEventType_CompleteWorkflowExecutionFailed, &sEventType_WorkflowExecutionFailed, &sEventType_FailWorkflowExecutionFailed, &sEventType_WorkflowExecutionTimedOut, &sEventType_WorkflowExecutionCanceled, &sEventType_CancelWorkflowExecutionFailed, &sEventType_WorkflowExecutionContinuedAsNew, &sEventType_ContinueAsNewWorkflowExecutionFailed, &sEventType_WorkflowExecutionTerminated, &sEventType_DecisionTaskScheduled, &sEventType_DecisionTaskStarted, &sEventType_DecisionTaskCompleted, &sEventType_DecisionTaskTimedOut, &sEventType_ActivityTaskScheduled, &sEventType_ScheduleActivityTaskFailed, &sEventType_ActivityTaskStarted, &sEventType_ActivityTaskCompleted, &sEventType_ActivityTaskFailed, &sEventType_ActivityTaskTimedOut, &sEventType_ActivityTaskCanceled, &sEventType_ActivityTaskCancelRequested, &sEventType_RequestCancelActivityTaskFailed, &sEventType_WorkflowExecutionSignaled, &sEventType_MarkerRecorded, &sEventType_RecordMarkerFailed, &sEventType_TimerStarted, &sEventType_StartTimerFailed, &sEventType_TimerFired, &sEventType_TimerCanceled, &sEventType_CancelTimerFailed, &sEventType_StartChildWorkflowExecutionInitiated, &sEventType_StartChildWorkflowExecutionFailed, &sEventType_ChildWorkflowExecutionStarted, &sEventType_ChildWorkflowExecutionCompleted, &sEventType_ChildWorkflowExecutionFailed, &sEventType_ChildWorkflowExecutionTimedOut, &sEventType_ChildWorkflowExecutionCanceled, &sEventType_ChildWorkflowExecutionTerminated, &sEventType_SignalExternalWorkflowExecutionInitiated, &sEventType_SignalExternalWorkflowExecutionFailed, &sEventType_ExternalWorkflowExecutionSignaled, &sEventType_RequestCancelExternalWorkflowExecutionInitiated, &sEventType_RequestCancelExternalWorkflowExecutionFailed, &sEventType_ExternalWorkflowExecutionCancelRequested, &sEventType_LambdaFunctionScheduled, &sEventType_LambdaFunctionStarted, &sEventType_LambdaFunctionCompleted, &sEventType_LambdaFunctionFailed, &sEventType_LambdaFunctionTimedOut, &sEventType_ScheduleLambdaFunctionFailed, &sEventType_StartLambdaFunctionFailed}, Seed: 139, Slots: []uint16{
+	13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 45, 0, 0, 0, 54, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 11, 35, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 36, 0, 0, 2, 29, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8,
+	0, 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 33, 21, 0, 0, 0, 0, 0, 0, 0, 0, 41, 0, 0, 0, 53, 0, 0, 6, 0,
+	0, 0, 0, 0, 0, 28, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 50, 0, 0, 0, 0, 0, 0,
+	0, 0, 30, 0, 27, 0, 0, 0, 0, 0, 0, 32, 0, 0, 0, 0, 0, 0, 0, 0, 0, 51, 0, 0,
+	43, 38, 0, 18, 0, 0, 46, 26, 9, 0, 0, 17, 0, 0, 0, 0, 0, 12, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 31, 0, 37, 0, 52, 0, 0, 0, 0, 0, 0, 25, 0, 0, 0, 0, 0, 0, 0,
+	48, 14, 0, 0, 0, 24, 44, 47, 0, 42, 0, 0, 39, 23, 40, 34, 22, 0, 0, 0, 0, 0, 0, 0,
+	0, 20, 4, 10, 0, 49, 3, 0, 0, 19, 0, 0, 0, 0, 0, 0,
+}}
+var mExecutionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sExecutionStatus_OPEN, &sExecutionStatus_CLOSED}}
+var mExecutionTimeFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sExecutionTimeFilter_oldestDate, &sExecutionTimeFilter_latestDate}}
+var mExternalWorkflowExecutionCancelRequestedEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sExternalWorkflowExecutionCancelRequestedEventAttributes_workflowExecution, &sExternalWorkflowExecutionCancelRequestedEventAttributes_initiatedEventId}}
+var mExternalWorkflowExecutionSignaledEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sExternalWorkflowExecutionSignaledEventAttributes_workflowExecution, &sExternalWorkflowExecutionSignaledEventAttributes_initiatedEventId}}
+var mFailWorkflowExecutionDecisionAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sFailWorkflowExecutionDecisionAttributes_reason, &sFailWorkflowExecutionDecisionAttributes_details}}
+var mFailWorkflowExecutionFailedCause = smithy.SchemaMembers{List: []*smithy.Schema{&sFailWorkflowExecutionFailedCause_UNHANDLED_DECISION, &sFailWorkflowExecutionFailedCause_OPERATION_NOT_PERMITTED}}
+var mFailWorkflowExecutionFailedEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sFailWorkflowExecutionFailedEventAttributes_cause, &sFailWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId}}
+var mHistoryEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sHistoryEvent_eventTimestamp, &sHistoryEvent_eventType, &sHistoryEvent_eventId, &sHistoryEvent_workflowExecutionStartedEventAttributes, &sHistoryEvent_workflowExecutionCompletedEventAttributes, &sHistoryEvent_completeWorkflowExecutionFailedEventAttributes, &sHistoryEvent_workflowExecutionFailedEventAttributes, &sHistoryEvent_failWorkflowExecutionFailedEventAttributes, &sHistoryEvent_workflowExecutionTimedOutEventAttributes, &sHistoryEvent_workflowExecutionCanceledEventAttributes, &sHistoryEvent_cancelWorkflowExecutionFailedEventAttributes, &sHistoryEvent_workflowExecutionContinuedAsNewEventAttributes, &sHistoryEvent_continueAsNewWorkflowExecutionFailedEventAttributes, &sHistoryEvent_workflowExecutionTerminatedEventAttributes, &sHistoryEvent_workflowExecutionCancelRequestedEventAttributes, &sHistoryEvent_decisionTaskScheduledEventAttributes, &sHistoryEvent_decisionTaskStartedEventAttributes, &sHistoryEvent_decisionTaskCompletedEventAttributes, &sHistoryEvent_decisionTaskTimedOutEventAttributes, &sHistoryEvent_activityTaskScheduledEventAttributes, &sHistoryEvent_activityTaskStartedEventAttributes, &sHistoryEvent_activityTaskCompletedEventAttributes, &sHistoryEvent_activityTaskFailedEventAttributes, &sHistoryEvent_activityTaskTimedOutEventAttributes, &sHistoryEvent_activityTaskCanceledEventAttributes, &sHistoryEvent_activityTaskCancelRequestedEventAttributes, &sHistoryEvent_workflowExecutionSignaledEventAttributes, &sHistoryEvent_markerRecordedEventAttributes, &sHistoryEvent_recordMarkerFailedEventAttributes, &sHistoryEvent_timerStartedEventAttributes, &sHistoryEvent_timerFiredEventAttributes, &sHistoryEvent_timerCanceledEventAttributes, &sHistoryEvent_startChildWorkflowExecutionInitiatedEventAttributes, &sHistoryEvent_childWorkflowExecutionStartedEventAttributes, &sHistoryEvent_childWorkflowExecutionCompletedEventAttributes, &sHistoryEvent_childWorkflowExecutionFailedEventAttributes, &sHistoryEvent_childWorkflowExecutionTimedOutEventAttributes, &sHistoryEvent_childWorkflowExecutionCanceledEventAttributes, &sHistoryEvent_childWorkflowExecutionTerminatedEventAttributes, &sHistoryEvent_signalExternalWorkflowExecutionInitiatedEventAttributes, &sHistoryEvent_externalWorkflowExecutionSignaledEventAttributes, &sHistoryEvent_signalExternalWorkflowExecutionFailedEventAttributes, &sHistoryEvent_externalWorkflowExecutionCancelRequestedEventAttributes, &sHistoryEvent_requestCancelExternalWorkflowExecutionInitiatedEventAttributes, &sHistoryEvent_requestCancelExternalWorkflowExecutionFailedEventAttributes, &sHistoryEvent_scheduleActivityTaskFailedEventAttributes, &sHistoryEvent_requestCancelActivityTaskFailedEventAttributes, &sHistoryEvent_startTimerFailedEventAttributes, &sHistoryEvent_cancelTimerFailedEventAttributes, &sHistoryEvent_startChildWorkflowExecutionFailedEventAttributes, &sHistoryEvent_lambdaFunctionScheduledEventAttributes, &sHistoryEvent_lambdaFunctionStartedEventAttributes, &sHistoryEvent_lambdaFunctionCompletedEventAttributes, &sHistoryEvent_lambdaFunctionFailedEventAttributes, &sHistoryEvent_lambdaFunctionTimedOutEventAttributes, &sHistoryEvent_scheduleLambdaFunctionFailedEventAttributes, &sHistoryEvent_startLambdaFunctionFailedEventAttributes}, Seed: 827, Slots: []uint16{
+	0, 20, 0, 0, 0, 0, 0, 0, 0, 0, 32, 0, 0, 0, 0, 0, 0, 0, 0, 0, 41, 7, 39, 0,
+	0, 25, 0, 23, 53, 0, 55, 0, 0, 0, 0, 0, 0, 44, 0, 0, 33, 0, 0, 56, 5, 0, 0, 47,
+	0, 0, 0, 19, 0, 0, 0, 0, 0, 48, 0, 0, 0, 0, 0, 0, 0, 54, 0, 0, 0, 21, 4, 0,
+	0, 0, 0, 0, 0, 50, 0, 0, 0, 0, 37, 0, 29, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 49, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 0, 0, 0,
+	0, 13, 0, 0, 14, 0, 0, 0, 0, 0, 31, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 36, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 45, 46, 0, 0, 0, 0, 0, 57, 9, 51, 0,
+	0, 0, 17, 27, 0, 0, 0, 15, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 22, 0, 8, 0,
+	0, 0, 0, 0, 0, 0, 6, 11, 38, 0, 0, 0, 0, 0, 0, 26, 0, 0, 0, 40, 0, 18, 0, 28,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 35, 30, 42, 0, 24, 43, 0, 0, 0, 0, 0, 16, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 52, 0, 0, 0, 0, 34, 0, 0,
+}}
+var m_HistoryEventList = smithy.SchemaMembers{List: []*smithy.Schema{&s_HistoryEventList_member}}
+var mLambdaFunctionCompletedEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sLambdaFunctionCompletedEventAttributes_scheduledEventId, &sLambdaFunctionCompletedEventAttributes_startedEventId, &sLambdaFunctionCompletedEventAttributes_result}}
+var mLambdaFunctionFailedEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sLambdaFunctionFailedEventAttributes_scheduledEventId, &sLambdaFunctionFailedEventAttributes_startedEventId, &sLambdaFunctionFailedEventAttributes_reason, &sLambdaFunctionFailedEventAttributes_details}}
+var mLambdaFunctionScheduledEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sLambdaFunctionScheduledEventAttributes_id, &sLambdaFunctionScheduledEventAttributes_name, &sLambdaFunctionScheduledEventAttributes_control, &sLambdaFunctionScheduledEventAttributes_input, &sLambdaFunctionScheduledEventAttributes_startToCloseTimeout, &sLambdaFunctionScheduledEventAttributes_decisionTaskCompletedEventId}}
+var mLambdaFunctionStartedEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sLambdaFunctionStartedEventAttributes_scheduledEventId}}
+var mLambdaFunctionTimedOutEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sLambdaFunctionTimedOutEventAttributes_scheduledEventId, &sLambdaFunctionTimedOutEventAttributes_startedEventId, &sLambdaFunctionTimedOutEventAttributes_timeoutType}}
+var mLambdaFunctionTimeoutType = smithy.SchemaMembers{List: []*smithy.Schema{&sLambdaFunctionTimeoutType_START_TO_CLOSE}}
+var mLimitExceededFault = smithy.SchemaMembers{List: []*smithy.Schema{&sLimitExceededFault_message}}
+var mMarkerRecordedEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sMarkerRecordedEventAttributes_markerName, &sMarkerRecordedEventAttributes_details, &sMarkerRecordedEventAttributes_decisionTaskCompletedEventId}}
+var mOperationNotPermittedFault = smithy.SchemaMembers{List: []*smithy.Schema{&sOperationNotPermittedFault_message}}
+var mRecordMarkerDecisionAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sRecordMarkerDecisionAttributes_markerName, &sRecordMarkerDecisionAttributes_details}}
+var mRecordMarkerFailedCause = smithy.SchemaMembers{List: []*smithy.Schema{&sRecordMarkerFailedCause_OPERATION_NOT_PERMITTED}}
+var mRecordMarkerFailedEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sRecordMarkerFailedEventAttributes_markerName, &sRecordMarkerFailedEventAttributes_cause, &sRecordMarkerFailedEventAttributes_decisionTaskCompletedEventId}}
+var mRegistrationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sRegistrationStatus_REGISTERED, &sRegistrationStatus_DEPRECATED}}
+var mRequestCancelActivityTaskDecisionAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sRequestCancelActivityTaskDecisionAttributes_activityId}}
+var mRequestCancelActivityTaskFailedCause = smithy.SchemaMembers{List: []*smithy.Schema{&sRequestCancelActivityTaskFailedCause_ACTIVITY_ID_UNKNOWN, &sRequestCancelActivityTaskFailedCause_OPERATION_NOT_PERMITTED}}
+var mRequestCancelActivityTaskFailedEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sRequestCancelActivityTaskFailedEventAttributes_activityId, &sRequestCancelActivityTaskFailedEventAttributes_cause, &sRequestCancelActivityTaskFailedEventAttributes_decisionTaskCompletedEventId}}
+var mRequestCancelExternalWorkflowExecutionDecisionAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sRequestCancelExternalWorkflowExecutionDecisionAttributes_workflowId, &sRequestCancelExternalWorkflowExecutionDecisionAttributes_runId, &sRequestCancelExternalWorkflowExecutionDecisionAttributes_control}}
+var mRequestCancelExternalWorkflowExecutionFailedCause = smithy.SchemaMembers{List: []*smithy.Schema{&sRequestCancelExternalWorkflowExecutionFailedCause_UNKNOWN_EXTERNAL_WORKFLOW_EXECUTION, &sRequestCancelExternalWorkflowExecutionFailedCause_REQUEST_CANCEL_EXTERNAL_WORKFLOW_EXECUTION_RATE_EXCEEDED, &sRequestCancelExternalWorkflowExecutionFailedCause_OPERATION_NOT_PERMITTED}}
+var mRequestCancelExternalWorkflowExecutionFailedEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sRequestCancelExternalWorkflowExecutionFailedEventAttributes_workflowId, &sRequestCancelExternalWorkflowExecutionFailedEventAttributes_runId, &sRequestCancelExternalWorkflowExecutionFailedEventAttributes_cause, &sRequestCancelExternalWorkflowExecutionFailedEventAttributes_initiatedEventId, &sRequestCancelExternalWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId, &sRequestCancelExternalWorkflowExecutionFailedEventAttributes_control}}
+var mRequestCancelExternalWorkflowExecutionInitiatedEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sRequestCancelExternalWorkflowExecutionInitiatedEventAttributes_workflowId, &sRequestCancelExternalWorkflowExecutionInitiatedEventAttributes_runId, &sRequestCancelExternalWorkflowExecutionInitiatedEventAttributes_decisionTaskCompletedEventId, &sRequestCancelExternalWorkflowExecutionInitiatedEventAttributes_control}}
+var mResourceTag = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceTag_key, &sResourceTag_value}}
+var m_ResourceTagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceTagKeyList_member}}
+var m_ResourceTagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceTagList_member}}
+var mScheduleActivityTaskDecisionAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sScheduleActivityTaskDecisionAttributes_activityType, &sScheduleActivityTaskDecisionAttributes_activityId, &sScheduleActivityTaskDecisionAttributes_control, &sScheduleActivityTaskDecisionAttributes_input, &sScheduleActivityTaskDecisionAttributes_scheduleToCloseTimeout, &sScheduleActivityTaskDecisionAttributes_taskList, &sScheduleActivityTaskDecisionAttributes_taskPriority, &sScheduleActivityTaskDecisionAttributes_scheduleToStartTimeout, &sScheduleActivityTaskDecisionAttributes_startToCloseTimeout, &sScheduleActivityTaskDecisionAttributes_heartbeatTimeout}, Seed: 19, Slots: []uint16{
+	3, 0, 0, 0, 2, 9, 10, 1, 0, 7, 0, 0, 0, 0, 5, 0, 0, 0, 4, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 8, 0, 6,
+}}
+var mScheduleActivityTaskFailedCause = smithy.SchemaMembers{List: []*smithy.Schema{&sScheduleActivityTaskFailedCause_ACTIVITY_TYPE_DEPRECATED, &sScheduleActivityTaskFailedCause_ACTIVITY_TYPE_DOES_NOT_EXIST, &sScheduleActivityTaskFailedCause_ACTIVITY_ID_ALREADY_IN_USE, &sScheduleActivityTaskFailedCause_OPEN_ACTIVITIES_LIMIT_EXCEEDED, &sScheduleActivityTaskFailedCause_ACTIVITY_CREATION_RATE_EXCEEDED, &sScheduleActivityTaskFailedCause_DEFAULT_SCHEDULE_TO_CLOSE_TIMEOUT_UNDEFINED, &sScheduleActivityTaskFailedCause_DEFAULT_TASK_LIST_UNDEFINED, &sScheduleActivityTaskFailedCause_DEFAULT_SCHEDULE_TO_START_TIMEOUT_UNDEFINED, &sScheduleActivityTaskFailedCause_DEFAULT_START_TO_CLOSE_TIMEOUT_UNDEFINED, &sScheduleActivityTaskFailedCause_DEFAULT_HEARTBEAT_TIMEOUT_UNDEFINED, &sScheduleActivityTaskFailedCause_OPERATION_NOT_PERMITTED}, Seed: 1, Slots: []uint16{
+	0, 0, 4, 8, 0, 0, 0, 0, 6, 0, 0, 1, 10, 0, 5, 0, 0, 0, 0, 11, 0, 0, 9, 0,
+	0, 3, 2, 7, 0, 0, 0, 0,
+}}
+var mScheduleActivityTaskFailedEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sScheduleActivityTaskFailedEventAttributes_activityType, &sScheduleActivityTaskFailedEventAttributes_activityId, &sScheduleActivityTaskFailedEventAttributes_cause, &sScheduleActivityTaskFailedEventAttributes_decisionTaskCompletedEventId}}
+var mScheduleLambdaFunctionDecisionAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sScheduleLambdaFunctionDecisionAttributes_id, &sScheduleLambdaFunctionDecisionAttributes_name, &sScheduleLambdaFunctionDecisionAttributes_control, &sScheduleLambdaFunctionDecisionAttributes_input, &sScheduleLambdaFunctionDecisionAttributes_startToCloseTimeout}}
+var mScheduleLambdaFunctionFailedCause = smithy.SchemaMembers{List: []*smithy.Schema{&sScheduleLambdaFunctionFailedCause_ID_ALREADY_IN_USE, &sScheduleLambdaFunctionFailedCause_OPEN_LAMBDA_FUNCTIONS_LIMIT_EXCEEDED, &sScheduleLambdaFunctionFailedCause_LAMBDA_FUNCTION_CREATION_RATE_EXCEEDED, &sScheduleLambdaFunctionFailedCause_LAMBDA_SERVICE_NOT_AVAILABLE_IN_REGION}}
+var mScheduleLambdaFunctionFailedEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sScheduleLambdaFunctionFailedEventAttributes_id, &sScheduleLambdaFunctionFailedEventAttributes_name, &sScheduleLambdaFunctionFailedEventAttributes_cause, &sScheduleLambdaFunctionFailedEventAttributes_decisionTaskCompletedEventId}}
+var mSignalExternalWorkflowExecutionDecisionAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sSignalExternalWorkflowExecutionDecisionAttributes_workflowId, &sSignalExternalWorkflowExecutionDecisionAttributes_runId, &sSignalExternalWorkflowExecutionDecisionAttributes_signalName, &sSignalExternalWorkflowExecutionDecisionAttributes_input, &sSignalExternalWorkflowExecutionDecisionAttributes_control}}
+var mSignalExternalWorkflowExecutionFailedCause = smithy.SchemaMembers{List: []*smithy.Schema{&sSignalExternalWorkflowExecutionFailedCause_UNKNOWN_EXTERNAL_WORKFLOW_EXECUTION, &sSignalExternalWorkflowExecutionFailedCause_SIGNAL_EXTERNAL_WORKFLOW_EXECUTION_RATE_EXCEEDED, &sSignalExternalWorkflowExecutionFailedCause_OPERATION_NOT_PERMITTED}}
+var mSignalExternalWorkflowExecutionFailedEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sSignalExternalWorkflowExecutionFailedEventAttributes_workflowId, &sSignalExternalWorkflowExecutionFailedEventAttributes_runId, &sSignalExternalWorkflowExecutionFailedEventAttributes_cause, &sSignalExternalWorkflowExecutionFailedEventAttributes_initiatedEventId, &sSignalExternalWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId, &sSignalExternalWorkflowExecutionFailedEventAttributes_control}}
+var mSignalExternalWorkflowExecutionInitiatedEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sSignalExternalWorkflowExecutionInitiatedEventAttributes_workflowId, &sSignalExternalWorkflowExecutionInitiatedEventAttributes_runId, &sSignalExternalWorkflowExecutionInitiatedEventAttributes_signalName, &sSignalExternalWorkflowExecutionInitiatedEventAttributes_input, &sSignalExternalWorkflowExecutionInitiatedEventAttributes_decisionTaskCompletedEventId, &sSignalExternalWorkflowExecutionInitiatedEventAttributes_control}}
+var mStartChildWorkflowExecutionDecisionAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sStartChildWorkflowExecutionDecisionAttributes_workflowType, &sStartChildWorkflowExecutionDecisionAttributes_workflowId, &sStartChildWorkflowExecutionDecisionAttributes_control, &sStartChildWorkflowExecutionDecisionAttributes_input, &sStartChildWorkflowExecutionDecisionAttributes_executionStartToCloseTimeout, &sStartChildWorkflowExecutionDecisionAttributes_taskList, &sStartChildWorkflowExecutionDecisionAttributes_taskPriority, &sStartChildWorkflowExecutionDecisionAttributes_taskStartToCloseTimeout, &sStartChildWorkflowExecutionDecisionAttributes_childPolicy, &sStartChildWorkflowExecutionDecisionAttributes_tagList, &sStartChildWorkflowExecutionDecisionAttributes_lambdaRole}, Seed: 2, Slots: []uint16{
+	5, 0, 0, 0, 7, 0, 0, 2, 0, 0, 0, 8, 0, 11, 0, 0, 0, 0, 10, 0, 9, 1, 0, 0,
+	0, 0, 0, 3, 6, 0, 4, 0,
+}}
+var mStartChildWorkflowExecutionFailedCause = smithy.SchemaMembers{List: []*smithy.Schema{&sStartChildWorkflowExecutionFailedCause_WORKFLOW_TYPE_DOES_NOT_EXIST, &sStartChildWorkflowExecutionFailedCause_WORKFLOW_TYPE_DEPRECATED, &sStartChildWorkflowExecutionFailedCause_OPEN_CHILDREN_LIMIT_EXCEEDED, &sStartChildWorkflowExecutionFailedCause_OPEN_WORKFLOWS_LIMIT_EXCEEDED, &sStartChildWorkflowExecutionFailedCause_CHILD_CREATION_RATE_EXCEEDED, &sStartChildWorkflowExecutionFailedCause_WORKFLOW_ALREADY_RUNNING, &sStartChildWorkflowExecutionFailedCause_DEFAULT_EXECUTION_START_TO_CLOSE_TIMEOUT_UNDEFINED, &sStartChildWorkflowExecutionFailedCause_DEFAULT_TASK_LIST_UNDEFINED, &sStartChildWorkflowExecutionFailedCause_DEFAULT_TASK_START_TO_CLOSE_TIMEOUT_UNDEFINED, &sStartChildWorkflowExecutionFailedCause_DEFAULT_CHILD_POLICY_UNDEFINED, &sStartChildWorkflowExecutionFailedCause_OPERATION_NOT_PERMITTED}, Seed: 11, Slots: []uint16{
+	10, 0, 1, 0, 0, 0, 7, 0, 11, 4, 0, 9, 0, 6, 0, 5, 8, 0, 0, 0, 0, 0, 0, 3,
+	0, 0, 0, 0, 0, 0, 0, 2,
+}}
+var mStartChildWorkflowExecutionFailedEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sStartChildWorkflowExecutionFailedEventAttributes_workflowType, &sStartChildWorkflowExecutionFailedEventAttributes_cause, &sStartChildWorkflowExecutionFailedEventAttributes_workflowId, &sStartChildWorkflowExecutionFailedEventAttributes_initiatedEventId, &sStartChildWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId, &sStartChildWorkflowExecutionFailedEventAttributes_control}}
+var mStartChildWorkflowExecutionInitiatedEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sStartChildWorkflowExecutionInitiatedEventAttributes_workflowId, &sStartChildWorkflowExecutionInitiatedEventAttributes_workflowType, &sStartChildWorkflowExecutionInitiatedEventAttributes_control, &sStartChildWorkflowExecutionInitiatedEventAttributes_input, &sStartChildWorkflowExecutionInitiatedEventAttributes_executionStartToCloseTimeout, &sStartChildWorkflowExecutionInitiatedEventAttributes_taskList, &sStartChildWorkflowExecutionInitiatedEventAttributes_taskPriority, &sStartChildWorkflowExecutionInitiatedEventAttributes_decisionTaskCompletedEventId, &sStartChildWorkflowExecutionInitiatedEventAttributes_childPolicy, &sStartChildWorkflowExecutionInitiatedEventAttributes_taskStartToCloseTimeout, &sStartChildWorkflowExecutionInitiatedEventAttributes_tagList, &sStartChildWorkflowExecutionInitiatedEventAttributes_lambdaRole}, Seed: 10, Slots: []uint16{
+	0, 0, 6, 5, 0, 0, 0, 8, 0, 0, 0, 4, 12, 1, 2, 11, 3, 0, 0, 0, 0, 0, 0, 0,
+	0, 10, 7, 0, 0, 9, 0, 0,
+}}
+var mStartLambdaFunctionFailedCause = smithy.SchemaMembers{List: []*smithy.Schema{&sStartLambdaFunctionFailedCause_ASSUME_ROLE_FAILED}}
+var mStartLambdaFunctionFailedEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sStartLambdaFunctionFailedEventAttributes_scheduledEventId, &sStartLambdaFunctionFailedEventAttributes_cause, &sStartLambdaFunctionFailedEventAttributes_message}}
+var mStartTimerDecisionAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sStartTimerDecisionAttributes_timerId, &sStartTimerDecisionAttributes_control, &sStartTimerDecisionAttributes_startToFireTimeout}}
+var mStartTimerFailedCause = smithy.SchemaMembers{List: []*smithy.Schema{&sStartTimerFailedCause_TIMER_ID_ALREADY_IN_USE, &sStartTimerFailedCause_OPEN_TIMERS_LIMIT_EXCEEDED, &sStartTimerFailedCause_TIMER_CREATION_RATE_EXCEEDED, &sStartTimerFailedCause_OPERATION_NOT_PERMITTED}}
+var mStartTimerFailedEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sStartTimerFailedEventAttributes_timerId, &sStartTimerFailedEventAttributes_cause, &sStartTimerFailedEventAttributes_decisionTaskCompletedEventId}}
+var mTagFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sTagFilter_tag}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var mTaskList = smithy.SchemaMembers{List: []*smithy.Schema{&sTaskList_name}}
+var mTimerCanceledEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sTimerCanceledEventAttributes_timerId, &sTimerCanceledEventAttributes_startedEventId, &sTimerCanceledEventAttributes_decisionTaskCompletedEventId}}
+var mTimerFiredEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sTimerFiredEventAttributes_timerId, &sTimerFiredEventAttributes_startedEventId}}
+var mTimerStartedEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sTimerStartedEventAttributes_timerId, &sTimerStartedEventAttributes_control, &sTimerStartedEventAttributes_startToFireTimeout, &sTimerStartedEventAttributes_decisionTaskCompletedEventId}}
+var mTooManyTagsFault = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyTagsFault_message}}
+var mTypeAlreadyExistsFault = smithy.SchemaMembers{List: []*smithy.Schema{&sTypeAlreadyExistsFault_message}}
+var mTypeDeprecatedFault = smithy.SchemaMembers{List: []*smithy.Schema{&sTypeDeprecatedFault_message}}
+var mTypeNotDeprecatedFault = smithy.SchemaMembers{List: []*smithy.Schema{&sTypeNotDeprecatedFault_message}}
+var mUnknownResourceFault = smithy.SchemaMembers{List: []*smithy.Schema{&sUnknownResourceFault_message}}
+var mWorkflowExecution = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkflowExecution_workflowId, &sWorkflowExecution_runId}}
+var mWorkflowExecutionAlreadyStartedFault = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkflowExecutionAlreadyStartedFault_message}}
+var mWorkflowExecutionCanceledEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkflowExecutionCanceledEventAttributes_details, &sWorkflowExecutionCanceledEventAttributes_decisionTaskCompletedEventId}}
+var mWorkflowExecutionCancelRequestedCause = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkflowExecutionCancelRequestedCause_CHILD_POLICY_APPLIED}}
+var mWorkflowExecutionCancelRequestedEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkflowExecutionCancelRequestedEventAttributes_externalWorkflowExecution, &sWorkflowExecutionCancelRequestedEventAttributes_externalInitiatedEventId, &sWorkflowExecutionCancelRequestedEventAttributes_cause}}
+var mWorkflowExecutionCompletedEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkflowExecutionCompletedEventAttributes_result, &sWorkflowExecutionCompletedEventAttributes_decisionTaskCompletedEventId}}
+var mWorkflowExecutionConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkflowExecutionConfiguration_taskStartToCloseTimeout, &sWorkflowExecutionConfiguration_executionStartToCloseTimeout, &sWorkflowExecutionConfiguration_taskList, &sWorkflowExecutionConfiguration_taskPriority, &sWorkflowExecutionConfiguration_childPolicy, &sWorkflowExecutionConfiguration_lambdaRole}}
+var mWorkflowExecutionContinuedAsNewEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkflowExecutionContinuedAsNewEventAttributes_input, &sWorkflowExecutionContinuedAsNewEventAttributes_decisionTaskCompletedEventId, &sWorkflowExecutionContinuedAsNewEventAttributes_newExecutionRunId, &sWorkflowExecutionContinuedAsNewEventAttributes_executionStartToCloseTimeout, &sWorkflowExecutionContinuedAsNewEventAttributes_taskList, &sWorkflowExecutionContinuedAsNewEventAttributes_taskPriority, &sWorkflowExecutionContinuedAsNewEventAttributes_taskStartToCloseTimeout, &sWorkflowExecutionContinuedAsNewEventAttributes_childPolicy, &sWorkflowExecutionContinuedAsNewEventAttributes_tagList, &sWorkflowExecutionContinuedAsNewEventAttributes_workflowType, &sWorkflowExecutionContinuedAsNewEventAttributes_lambdaRole}, Seed: 3, Slots: []uint16{
+	0, 0, 4, 2, 0, 0, 0, 0, 0, 9, 6, 0, 3, 11, 10, 0, 0, 0, 5, 0, 0, 0, 7, 8,
+	1, 0, 0, 0, 0, 0, 0, 0,
+}}
+var mWorkflowExecutionFailedEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkflowExecutionFailedEventAttributes_reason, &sWorkflowExecutionFailedEventAttributes_details, &sWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId}}
+var mWorkflowExecutionFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkflowExecutionFilter_workflowId}}
+var mWorkflowExecutionInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkflowExecutionInfo_execution, &sWorkflowExecutionInfo_workflowType, &sWorkflowExecutionInfo_startTimestamp, &sWorkflowExecutionInfo_closeTimestamp, &sWorkflowExecutionInfo_executionStatus, &sWorkflowExecutionInfo_closeStatus, &sWorkflowExecutionInfo_parent, &sWorkflowExecutionInfo_tagList, &sWorkflowExecutionInfo_cancelRequested}, Seed: 5, Slots: []uint16{
+	7, 6, 8, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 2, 4, 0, 0, 0,
+	0, 0, 9, 1, 0, 0, 0, 0,
+}}
+var m_WorkflowExecutionInfoList = smithy.SchemaMembers{List: []*smithy.Schema{&s_WorkflowExecutionInfoList_member}}
+var mWorkflowExecutionOpenCounts = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkflowExecutionOpenCounts_openActivityTasks, &sWorkflowExecutionOpenCounts_openDecisionTasks, &sWorkflowExecutionOpenCounts_openTimers, &sWorkflowExecutionOpenCounts_openChildWorkflowExecutions, &sWorkflowExecutionOpenCounts_openLambdaFunctions}}
+var mWorkflowExecutionSignaledEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkflowExecutionSignaledEventAttributes_signalName, &sWorkflowExecutionSignaledEventAttributes_input, &sWorkflowExecutionSignaledEventAttributes_externalWorkflowExecution, &sWorkflowExecutionSignaledEventAttributes_externalInitiatedEventId}}
+var mWorkflowExecutionStartedEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkflowExecutionStartedEventAttributes_input, &sWorkflowExecutionStartedEventAttributes_executionStartToCloseTimeout, &sWorkflowExecutionStartedEventAttributes_taskStartToCloseTimeout, &sWorkflowExecutionStartedEventAttributes_childPolicy, &sWorkflowExecutionStartedEventAttributes_taskList, &sWorkflowExecutionStartedEventAttributes_taskPriority, &sWorkflowExecutionStartedEventAttributes_workflowType, &sWorkflowExecutionStartedEventAttributes_tagList, &sWorkflowExecutionStartedEventAttributes_continuedExecutionRunId, &sWorkflowExecutionStartedEventAttributes_parentWorkflowExecution, &sWorkflowExecutionStartedEventAttributes_parentInitiatedEventId, &sWorkflowExecutionStartedEventAttributes_lambdaRole}, Seed: 23, Slots: []uint16{
+	0, 0, 0, 0, 0, 11, 0, 1, 8, 0, 10, 0, 0, 0, 0, 5, 6, 12, 0, 3, 7, 0, 9, 4,
+	0, 0, 2, 0, 0, 0, 0, 0,
+}}
+var mWorkflowExecutionTerminatedCause = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkflowExecutionTerminatedCause_CHILD_POLICY_APPLIED, &sWorkflowExecutionTerminatedCause_EVENT_LIMIT_EXCEEDED, &sWorkflowExecutionTerminatedCause_OPERATOR_INITIATED}}
+var mWorkflowExecutionTerminatedEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkflowExecutionTerminatedEventAttributes_reason, &sWorkflowExecutionTerminatedEventAttributes_details, &sWorkflowExecutionTerminatedEventAttributes_childPolicy, &sWorkflowExecutionTerminatedEventAttributes_cause}}
+var mWorkflowExecutionTimedOutEventAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkflowExecutionTimedOutEventAttributes_timeoutType, &sWorkflowExecutionTimedOutEventAttributes_childPolicy}}
+var mWorkflowExecutionTimeoutType = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkflowExecutionTimeoutType_START_TO_CLOSE}}
+var mWorkflowType = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkflowType_name, &sWorkflowType_version}}
+var mWorkflowTypeConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkflowTypeConfiguration_defaultTaskStartToCloseTimeout, &sWorkflowTypeConfiguration_defaultExecutionStartToCloseTimeout, &sWorkflowTypeConfiguration_defaultTaskList, &sWorkflowTypeConfiguration_defaultTaskPriority, &sWorkflowTypeConfiguration_defaultChildPolicy, &sWorkflowTypeConfiguration_defaultLambdaRole}}
+var mWorkflowTypeFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkflowTypeFilter_name, &sWorkflowTypeFilter_version}}
+var mWorkflowTypeInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkflowTypeInfo_workflowType, &sWorkflowTypeInfo_status, &sWorkflowTypeInfo_description, &sWorkflowTypeInfo_creationDate, &sWorkflowTypeInfo_deprecationDate}}
+var m_WorkflowTypeInfoList = smithy.SchemaMembers{List: []*smithy.Schema{&s_WorkflowTypeInfoList_member}}
+var mCountClosedWorkflowExecutionsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCountClosedWorkflowExecutionsInput_domain, &sCountClosedWorkflowExecutionsInput_startTimeFilter, &sCountClosedWorkflowExecutionsInput_closeTimeFilter, &sCountClosedWorkflowExecutionsInput_executionFilter, &sCountClosedWorkflowExecutionsInput_typeFilter, &sCountClosedWorkflowExecutionsInput_tagFilter, &sCountClosedWorkflowExecutionsInput_closeStatusFilter}}
+var mWorkflowExecutionCount = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkflowExecutionCount_count, &sWorkflowExecutionCount_truncated}}
+var mCountOpenWorkflowExecutionsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCountOpenWorkflowExecutionsInput_domain, &sCountOpenWorkflowExecutionsInput_startTimeFilter, &sCountOpenWorkflowExecutionsInput_typeFilter, &sCountOpenWorkflowExecutionsInput_tagFilter, &sCountOpenWorkflowExecutionsInput_executionFilter}}
+var mCountPendingActivityTasksInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCountPendingActivityTasksInput_domain, &sCountPendingActivityTasksInput_taskList}}
+var mPendingTaskCount = smithy.SchemaMembers{List: []*smithy.Schema{&sPendingTaskCount_count, &sPendingTaskCount_truncated}}
+var mCountPendingDecisionTasksInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCountPendingDecisionTasksInput_domain, &sCountPendingDecisionTasksInput_taskList}}
+var mDeleteActivityTypeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteActivityTypeInput_domain, &sDeleteActivityTypeInput_activityType}}
+var mDeleteWorkflowTypeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteWorkflowTypeInput_domain, &sDeleteWorkflowTypeInput_workflowType}}
+var mDeprecateActivityTypeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeprecateActivityTypeInput_domain, &sDeprecateActivityTypeInput_activityType}}
+var mDeprecateDomainInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeprecateDomainInput_name}}
+var mDeprecateWorkflowTypeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeprecateWorkflowTypeInput_domain, &sDeprecateWorkflowTypeInput_workflowType}}
+var mDescribeActivityTypeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeActivityTypeInput_domain, &sDescribeActivityTypeInput_activityType}}
+var mActivityTypeDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sActivityTypeDetail_typeInfo, &sActivityTypeDetail_configuration}}
+var mDescribeDomainInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDomainInput_name}}
+var mDomainDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sDomainDetail_domainInfo, &sDomainDetail_configuration}}
+var mDescribeWorkflowExecutionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeWorkflowExecutionInput_domain, &sDescribeWorkflowExecutionInput_execution}}
+var mWorkflowExecutionDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkflowExecutionDetail_executionInfo, &sWorkflowExecutionDetail_executionConfiguration, &sWorkflowExecutionDetail_openCounts, &sWorkflowExecutionDetail_latestActivityTaskTimestamp, &sWorkflowExecutionDetail_latestExecutionContext}}
+var mDescribeWorkflowTypeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeWorkflowTypeInput_domain, &sDescribeWorkflowTypeInput_workflowType}}
+var mWorkflowTypeDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkflowTypeDetail_typeInfo, &sWorkflowTypeDetail_configuration}}
+var mGetWorkflowExecutionHistoryInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetWorkflowExecutionHistoryInput_domain, &sGetWorkflowExecutionHistoryInput_execution, &sGetWorkflowExecutionHistoryInput_nextPageToken, &sGetWorkflowExecutionHistoryInput_maximumPageSize, &sGetWorkflowExecutionHistoryInput_reverseOrder}}
+var mHistory = smithy.SchemaMembers{List: []*smithy.Schema{&sHistory_events, &sHistory_nextPageToken}}
+var mListActivityTypesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListActivityTypesInput_domain, &sListActivityTypesInput_name, &sListActivityTypesInput_registrationStatus, &sListActivityTypesInput_nextPageToken, &sListActivityTypesInput_maximumPageSize, &sListActivityTypesInput_reverseOrder}}
+var mActivityTypeInfos = smithy.SchemaMembers{List: []*smithy.Schema{&sActivityTypeInfos_typeInfos, &sActivityTypeInfos_nextPageToken}}
+var mListClosedWorkflowExecutionsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListClosedWorkflowExecutionsInput_domain, &sListClosedWorkflowExecutionsInput_startTimeFilter, &sListClosedWorkflowExecutionsInput_closeTimeFilter, &sListClosedWorkflowExecutionsInput_executionFilter, &sListClosedWorkflowExecutionsInput_closeStatusFilter, &sListClosedWorkflowExecutionsInput_typeFilter, &sListClosedWorkflowExecutionsInput_tagFilter, &sListClosedWorkflowExecutionsInput_nextPageToken, &sListClosedWorkflowExecutionsInput_maximumPageSize, &sListClosedWorkflowExecutionsInput_reverseOrder}, Seed: 21, Slots: []uint16{
+	0, 0, 0, 0, 6, 9, 0, 0, 3, 0, 4, 0, 2, 0, 0, 10, 0, 0, 5, 7, 0, 0, 1, 0,
+	0, 0, 0, 0, 0, 8, 0, 0,
+}}
+var mWorkflowExecutionInfos = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkflowExecutionInfos_executionInfos, &sWorkflowExecutionInfos_nextPageToken}}
+var mListDomainsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListDomainsInput_nextPageToken, &sListDomainsInput_registrationStatus, &sListDomainsInput_maximumPageSize, &sListDomainsInput_reverseOrder}}
+var mDomainInfos = smithy.SchemaMembers{List: []*smithy.Schema{&sDomainInfos_domainInfos, &sDomainInfos_nextPageToken}}
+var mListOpenWorkflowExecutionsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListOpenWorkflowExecutionsInput_domain, &sListOpenWorkflowExecutionsInput_startTimeFilter, &sListOpenWorkflowExecutionsInput_typeFilter, &sListOpenWorkflowExecutionsInput_tagFilter, &sListOpenWorkflowExecutionsInput_nextPageToken, &sListOpenWorkflowExecutionsInput_maximumPageSize, &sListOpenWorkflowExecutionsInput_reverseOrder, &sListOpenWorkflowExecutionsInput_executionFilter}}
+var mListTagsForResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceInput_resourceArn}}
+var mListTagsForResourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceOutput_tags}}
+var mListWorkflowTypesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListWorkflowTypesInput_domain, &sListWorkflowTypesInput_name, &sListWorkflowTypesInput_registrationStatus, &sListWorkflowTypesInput_nextPageToken, &sListWorkflowTypesInput_maximumPageSize, &sListWorkflowTypesInput_reverseOrder}}
+var mWorkflowTypeInfos = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkflowTypeInfos_typeInfos, &sWorkflowTypeInfos_nextPageToken}}
+var mPollForActivityTaskInput = smithy.SchemaMembers{List: []*smithy.Schema{&sPollForActivityTaskInput_domain, &sPollForActivityTaskInput_taskList, &sPollForActivityTaskInput_identity}}
+var mActivityTask = smithy.SchemaMembers{List: []*smithy.Schema{&sActivityTask_taskToken, &sActivityTask_activityId, &sActivityTask_startedEventId, &sActivityTask_workflowExecution, &sActivityTask_activityType, &sActivityTask_input}}
+var mPollForDecisionTaskInput = smithy.SchemaMembers{List: []*smithy.Schema{&sPollForDecisionTaskInput_domain, &sPollForDecisionTaskInput_taskList, &sPollForDecisionTaskInput_identity, &sPollForDecisionTaskInput_nextPageToken, &sPollForDecisionTaskInput_maximumPageSize, &sPollForDecisionTaskInput_reverseOrder, &sPollForDecisionTaskInput_startAtPreviousStartedEvent}}
+var mDecisionTask = smithy.SchemaMembers{List: []*smithy.Schema{&sDecisionTask_taskToken, &sDecisionTask_startedEventId, &sDecisionTask_workflowExecution, &sDecisionTask_workflowType, &sDecisionTask_events, &sDecisionTask_nextPageToken, &sDecisionTask_previousStartedEventId}}
+var mRecordActivityTaskHeartbeatInput = smithy.SchemaMembers{List: []*smithy.Schema{&sRecordActivityTaskHeartbeatInput_taskToken, &sRecordActivityTaskHeartbeatInput_details}}
+var mActivityTaskStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sActivityTaskStatus_cancelRequested}}
+var mRegisterActivityTypeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisterActivityTypeInput_domain, &sRegisterActivityTypeInput_name, &sRegisterActivityTypeInput_version, &sRegisterActivityTypeInput_description, &sRegisterActivityTypeInput_defaultTaskStartToCloseTimeout, &sRegisterActivityTypeInput_defaultTaskHeartbeatTimeout, &sRegisterActivityTypeInput_defaultTaskList, &sRegisterActivityTypeInput_defaultTaskPriority, &sRegisterActivityTypeInput_defaultTaskScheduleToStartTimeout, &sRegisterActivityTypeInput_defaultTaskScheduleToCloseTimeout}, Seed: 8, Slots: []uint16{
+	0, 0, 0, 0, 7, 0, 0, 0, 1, 0, 2, 0, 8, 3, 10, 0, 4, 0, 0, 0, 6, 0, 0, 0,
+	0, 0, 0, 0, 9, 0, 0, 5,
+}}
+var mRegisterDomainInput = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisterDomainInput_name, &sRegisterDomainInput_description, &sRegisterDomainInput_workflowExecutionRetentionPeriodInDays, &sRegisterDomainInput_tags}}
+var mRegisterWorkflowTypeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisterWorkflowTypeInput_domain, &sRegisterWorkflowTypeInput_name, &sRegisterWorkflowTypeInput_version, &sRegisterWorkflowTypeInput_description, &sRegisterWorkflowTypeInput_defaultTaskStartToCloseTimeout, &sRegisterWorkflowTypeInput_defaultExecutionStartToCloseTimeout, &sRegisterWorkflowTypeInput_defaultTaskList, &sRegisterWorkflowTypeInput_defaultTaskPriority, &sRegisterWorkflowTypeInput_defaultChildPolicy, &sRegisterWorkflowTypeInput_defaultLambdaRole}, Seed: 4, Slots: []uint16{
+	6, 2, 0, 1, 0, 0, 0, 3, 0, 0, 4, 0, 8, 0, 0, 0, 0, 0, 0, 5, 7, 0, 0, 0,
+	0, 0, 0, 0, 10, 9, 0, 0,
+}}
+var mRequestCancelWorkflowExecutionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sRequestCancelWorkflowExecutionInput_domain, &sRequestCancelWorkflowExecutionInput_workflowId, &sRequestCancelWorkflowExecutionInput_runId}}
+var mRespondActivityTaskCanceledInput = smithy.SchemaMembers{List: []*smithy.Schema{&sRespondActivityTaskCanceledInput_taskToken, &sRespondActivityTaskCanceledInput_details}}
+var mRespondActivityTaskCompletedInput = smithy.SchemaMembers{List: []*smithy.Schema{&sRespondActivityTaskCompletedInput_taskToken, &sRespondActivityTaskCompletedInput_result}}
+var mRespondActivityTaskFailedInput = smithy.SchemaMembers{List: []*smithy.Schema{&sRespondActivityTaskFailedInput_taskToken, &sRespondActivityTaskFailedInput_reason, &sRespondActivityTaskFailedInput_details}}
+var mRespondDecisionTaskCompletedInput = smithy.SchemaMembers{List: []*smithy.Schema{&sRespondDecisionTaskCompletedInput_taskToken, &sRespondDecisionTaskCompletedInput_decisions, &sRespondDecisionTaskCompletedInput_executionContext, &sRespondDecisionTaskCompletedInput_taskList, &sRespondDecisionTaskCompletedInput_taskListScheduleToStartTimeout}}
+var mSignalWorkflowExecutionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sSignalWorkflowExecutionInput_domain, &sSignalWorkflowExecutionInput_workflowId, &sSignalWorkflowExecutionInput_runId, &sSignalWorkflowExecutionInput_signalName, &sSignalWorkflowExecutionInput_input}}
+var mStartWorkflowExecutionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartWorkflowExecutionInput_domain, &sStartWorkflowExecutionInput_workflowId, &sStartWorkflowExecutionInput_workflowType, &sStartWorkflowExecutionInput_taskList, &sStartWorkflowExecutionInput_taskPriority, &sStartWorkflowExecutionInput_input, &sStartWorkflowExecutionInput_executionStartToCloseTimeout, &sStartWorkflowExecutionInput_tagList, &sStartWorkflowExecutionInput_taskStartToCloseTimeout, &sStartWorkflowExecutionInput_childPolicy, &sStartWorkflowExecutionInput_lambdaRole}, Seed: 10, Slots: []uint16{
+	0, 0, 4, 7, 0, 0, 0, 0, 0, 0, 0, 6, 11, 2, 3, 8, 0, 0, 0, 1, 0, 0, 0, 0,
+	0, 9, 5, 0, 0, 10, 0, 0,
+}}
+var mRun = smithy.SchemaMembers{List: []*smithy.Schema{&sRun_runId}}
+var mTagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceInput_resourceArn, &sTagResourceInput_tags}}
+var mTerminateWorkflowExecutionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sTerminateWorkflowExecutionInput_domain, &sTerminateWorkflowExecutionInput_workflowId, &sTerminateWorkflowExecutionInput_runId, &sTerminateWorkflowExecutionInput_reason, &sTerminateWorkflowExecutionInput_details, &sTerminateWorkflowExecutionInput_childPolicy}}
+var mUndeprecateActivityTypeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUndeprecateActivityTypeInput_domain, &sUndeprecateActivityTypeInput_activityType}}
+var mUndeprecateDomainInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUndeprecateDomainInput_name}}
+var mUndeprecateWorkflowTypeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUndeprecateWorkflowTypeInput_domain, &sUndeprecateWorkflowTypeInput_workflowType}}
+var mUntagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceInput_resourceArn, &sUntagResourceInput_tagKeys}}
+
+var sCountClosedWorkflowExecutions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCountClosedWorkflowExecutions, Type: smithy.ShapeTypeOperation})
+var sCountOpenWorkflowExecutions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCountOpenWorkflowExecutions, Type: smithy.ShapeTypeOperation})
+var sCountPendingActivityTasks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCountPendingActivityTasks, Type: smithy.ShapeTypeOperation})
+var sCountPendingDecisionTasks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCountPendingDecisionTasks, Type: smithy.ShapeTypeOperation})
+var sDeleteActivityType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteActivityType, Type: smithy.ShapeTypeOperation})
+var sDeleteWorkflowType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWorkflowType, Type: smithy.ShapeTypeOperation})
+var sDeprecateActivityType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeprecateActivityType, Type: smithy.ShapeTypeOperation})
+var sDeprecateDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeprecateDomain, Type: smithy.ShapeTypeOperation})
+var sDeprecateWorkflowType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeprecateWorkflowType, Type: smithy.ShapeTypeOperation})
+var sDescribeActivityType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeActivityType, Type: smithy.ShapeTypeOperation})
+var sDescribeDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDomain, Type: smithy.ShapeTypeOperation})
+var sDescribeWorkflowExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeWorkflowExecution, Type: smithy.ShapeTypeOperation})
+var sDescribeWorkflowType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeWorkflowType, Type: smithy.ShapeTypeOperation})
+var sGetWorkflowExecutionHistory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWorkflowExecutionHistory, Type: smithy.ShapeTypeOperation})
+var sListActivityTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListActivityTypes, Type: smithy.ShapeTypeOperation})
+var sListClosedWorkflowExecutions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListClosedWorkflowExecutions, Type: smithy.ShapeTypeOperation})
+var sListDomains = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDomains, Type: smithy.ShapeTypeOperation})
+var sListOpenWorkflowExecutions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOpenWorkflowExecutions, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation})
+var sListWorkflowTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkflowTypes, Type: smithy.ShapeTypeOperation})
+var sPollForActivityTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPollForActivityTask, Type: smithy.ShapeTypeOperation})
+var sPollForDecisionTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPollForDecisionTask, Type: smithy.ShapeTypeOperation})
+var sRecordActivityTaskHeartbeat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecordActivityTaskHeartbeat, Type: smithy.ShapeTypeOperation})
+var sRegisterActivityType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterActivityType, Type: smithy.ShapeTypeOperation})
+var sRegisterDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterDomain, Type: smithy.ShapeTypeOperation})
+var sRegisterWorkflowType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterWorkflowType, Type: smithy.ShapeTypeOperation})
+var sRequestCancelWorkflowExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestCancelWorkflowExecution, Type: smithy.ShapeTypeOperation})
+var sRespondActivityTaskCanceled = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRespondActivityTaskCanceled, Type: smithy.ShapeTypeOperation})
+var sRespondActivityTaskCompleted = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRespondActivityTaskCompleted, Type: smithy.ShapeTypeOperation})
+var sRespondActivityTaskFailed = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRespondActivityTaskFailed, Type: smithy.ShapeTypeOperation})
+var sRespondDecisionTaskCompleted = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRespondDecisionTaskCompleted, Type: smithy.ShapeTypeOperation})
+var sSignalWorkflowExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSignalWorkflowExecution, Type: smithy.ShapeTypeOperation})
+var sStartWorkflowExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartWorkflowExecution, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation})
+var sTerminateWorkflowExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTerminateWorkflowExecution, Type: smithy.ShapeTypeOperation})
+var sUndeprecateActivityType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUndeprecateActivityType, Type: smithy.ShapeTypeOperation})
+var sUndeprecateDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUndeprecateDomain, Type: smithy.ShapeTypeOperation})
+var sUndeprecateWorkflowType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUndeprecateWorkflowType, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation})
+var s_SimpleWorkflowService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SimpleWorkflowService, Traits: &t0, Type: smithy.ShapeTypeService})
+var s_ActivityId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActivityId, Type: smithy.ShapeTypeString})
+var sActivityTaskCanceledEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActivityTaskCanceledEventAttributes, Members: &mActivityTaskCanceledEventAttributes, Type: smithy.ShapeTypeStructure})
+var sActivityTaskCancelRequestedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActivityTaskCancelRequestedEventAttributes, Members: &mActivityTaskCancelRequestedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sActivityTaskCompletedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActivityTaskCompletedEventAttributes, Members: &mActivityTaskCompletedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sActivityTaskFailedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActivityTaskFailedEventAttributes, Members: &mActivityTaskFailedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sActivityTaskScheduledEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActivityTaskScheduledEventAttributes, Members: &mActivityTaskScheduledEventAttributes, Type: smithy.ShapeTypeStructure})
+var sActivityTaskStartedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActivityTaskStartedEventAttributes, Members: &mActivityTaskStartedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sActivityTaskTimedOutEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActivityTaskTimedOutEventAttributes, Members: &mActivityTaskTimedOutEventAttributes, Type: smithy.ShapeTypeStructure})
+var sActivityTaskTimeoutType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActivityTaskTimeoutType, Members: &mActivityTaskTimeoutType, Type: smithy.ShapeTypeEnum})
+var sActivityType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActivityType, Members: &mActivityType, Type: smithy.ShapeTypeStructure})
+var sActivityTypeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActivityTypeConfiguration, Members: &mActivityTypeConfiguration, Type: smithy.ShapeTypeStructure})
+var sActivityTypeInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActivityTypeInfo, Members: &mActivityTypeInfo, Type: smithy.ShapeTypeStructure})
+var s_ActivityTypeInfoList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActivityTypeInfoList, Members: &m_ActivityTypeInfoList, Type: smithy.ShapeTypeList})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString})
+var s_Canceled = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Canceled, Type: smithy.ShapeTypeBoolean})
+var sCancelTimerDecisionAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelTimerDecisionAttributes, Members: &mCancelTimerDecisionAttributes, Type: smithy.ShapeTypeStructure})
+var sCancelTimerFailedCause = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelTimerFailedCause, Members: &mCancelTimerFailedCause, Type: smithy.ShapeTypeEnum})
+var sCancelTimerFailedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelTimerFailedEventAttributes, Members: &mCancelTimerFailedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sCancelWorkflowExecutionDecisionAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelWorkflowExecutionDecisionAttributes, Members: &mCancelWorkflowExecutionDecisionAttributes, Type: smithy.ShapeTypeStructure})
+var sCancelWorkflowExecutionFailedCause = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelWorkflowExecutionFailedCause, Members: &mCancelWorkflowExecutionFailedCause, Type: smithy.ShapeTypeEnum})
+var sCancelWorkflowExecutionFailedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelWorkflowExecutionFailedEventAttributes, Members: &mCancelWorkflowExecutionFailedEventAttributes, Type: smithy.ShapeTypeStructure})
+var s_CauseMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CauseMessage, Type: smithy.ShapeTypeString})
+var sChildPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChildPolicy, Members: &mChildPolicy, Type: smithy.ShapeTypeEnum})
+var sChildWorkflowExecutionCanceledEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChildWorkflowExecutionCanceledEventAttributes, Members: &mChildWorkflowExecutionCanceledEventAttributes, Type: smithy.ShapeTypeStructure})
+var sChildWorkflowExecutionCompletedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChildWorkflowExecutionCompletedEventAttributes, Members: &mChildWorkflowExecutionCompletedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sChildWorkflowExecutionFailedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChildWorkflowExecutionFailedEventAttributes, Members: &mChildWorkflowExecutionFailedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sChildWorkflowExecutionStartedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChildWorkflowExecutionStartedEventAttributes, Members: &mChildWorkflowExecutionStartedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sChildWorkflowExecutionTerminatedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChildWorkflowExecutionTerminatedEventAttributes, Members: &mChildWorkflowExecutionTerminatedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sChildWorkflowExecutionTimedOutEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChildWorkflowExecutionTimedOutEventAttributes, Members: &mChildWorkflowExecutionTimedOutEventAttributes, Type: smithy.ShapeTypeStructure})
+var sCloseStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloseStatus, Members: &mCloseStatus, Type: smithy.ShapeTypeEnum})
+var sCloseStatusFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloseStatusFilter, Members: &mCloseStatusFilter, Type: smithy.ShapeTypeStructure})
+var sCompleteWorkflowExecutionDecisionAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCompleteWorkflowExecutionDecisionAttributes, Members: &mCompleteWorkflowExecutionDecisionAttributes, Type: smithy.ShapeTypeStructure})
+var sCompleteWorkflowExecutionFailedCause = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCompleteWorkflowExecutionFailedCause, Members: &mCompleteWorkflowExecutionFailedCause, Type: smithy.ShapeTypeEnum})
+var sCompleteWorkflowExecutionFailedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCompleteWorkflowExecutionFailedEventAttributes, Members: &mCompleteWorkflowExecutionFailedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sContinueAsNewWorkflowExecutionDecisionAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContinueAsNewWorkflowExecutionDecisionAttributes, Members: &mContinueAsNewWorkflowExecutionDecisionAttributes, Type: smithy.ShapeTypeStructure})
+var sContinueAsNewWorkflowExecutionFailedCause = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContinueAsNewWorkflowExecutionFailedCause, Members: &mContinueAsNewWorkflowExecutionFailedCause, Type: smithy.ShapeTypeEnum})
+var sContinueAsNewWorkflowExecutionFailedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContinueAsNewWorkflowExecutionFailedEventAttributes, Members: &mContinueAsNewWorkflowExecutionFailedEventAttributes, Type: smithy.ShapeTypeStructure})
+var s_Count = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Count, Type: smithy.ShapeTypeInteger})
+var s_Data = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Data, Type: smithy.ShapeTypeString})
+var sDecision = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDecision, Members: &mDecision, Type: smithy.ShapeTypeStructure})
+var s_DecisionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DecisionList, Members: &m_DecisionList, Type: smithy.ShapeTypeList})
+var sDecisionTaskCompletedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDecisionTaskCompletedEventAttributes, Members: &mDecisionTaskCompletedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sDecisionTaskScheduledEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDecisionTaskScheduledEventAttributes, Members: &mDecisionTaskScheduledEventAttributes, Type: smithy.ShapeTypeStructure})
+var sDecisionTaskStartedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDecisionTaskStartedEventAttributes, Members: &mDecisionTaskStartedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sDecisionTaskTimedOutEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDecisionTaskTimedOutEventAttributes, Members: &mDecisionTaskTimedOutEventAttributes, Type: smithy.ShapeTypeStructure})
+var sDecisionTaskTimeoutType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDecisionTaskTimeoutType, Members: &mDecisionTaskTimeoutType, Type: smithy.ShapeTypeEnum})
+var sDecisionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDecisionType, Members: &mDecisionType, Type: smithy.ShapeTypeEnum})
+var sDefaultUndefinedFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDefaultUndefinedFault, Members: &mDefaultUndefinedFault, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Type: smithy.ShapeTypeString})
+var sDomainAlreadyExistsFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainAlreadyExistsFault, Members: &mDomainAlreadyExistsFault, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sDomainConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainConfiguration, Members: &mDomainConfiguration, Type: smithy.ShapeTypeStructure})
+var sDomainDeprecatedFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainDeprecatedFault, Members: &mDomainDeprecatedFault, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sDomainInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainInfo, Members: &mDomainInfo, Type: smithy.ShapeTypeStructure})
+var s_DomainInfoList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainInfoList, Members: &m_DomainInfoList, Type: smithy.ShapeTypeList})
+var s_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var s_DurationInDays = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DurationInDays, Type: smithy.ShapeTypeString})
+var s_DurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DurationInSeconds, Type: smithy.ShapeTypeString})
+var s_DurationInSecondsOptional = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DurationInSecondsOptional, Type: smithy.ShapeTypeString})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_EventId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sEventType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventType, Members: &mEventType, Type: smithy.ShapeTypeEnum})
+var sExecutionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecutionStatus, Members: &mExecutionStatus, Type: smithy.ShapeTypeEnum})
+var sExecutionTimeFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecutionTimeFilter, Members: &mExecutionTimeFilter, Type: smithy.ShapeTypeStructure})
+var sExternalWorkflowExecutionCancelRequestedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExternalWorkflowExecutionCancelRequestedEventAttributes, Members: &mExternalWorkflowExecutionCancelRequestedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sExternalWorkflowExecutionSignaledEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExternalWorkflowExecutionSignaledEventAttributes, Members: &mExternalWorkflowExecutionSignaledEventAttributes, Type: smithy.ShapeTypeStructure})
+var s_FailureReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FailureReason, Type: smithy.ShapeTypeString})
+var sFailWorkflowExecutionDecisionAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFailWorkflowExecutionDecisionAttributes, Members: &mFailWorkflowExecutionDecisionAttributes, Type: smithy.ShapeTypeStructure})
+var sFailWorkflowExecutionFailedCause = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFailWorkflowExecutionFailedCause, Members: &mFailWorkflowExecutionFailedCause, Type: smithy.ShapeTypeEnum})
+var sFailWorkflowExecutionFailedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFailWorkflowExecutionFailedEventAttributes, Members: &mFailWorkflowExecutionFailedEventAttributes, Type: smithy.ShapeTypeStructure})
+var s_FunctionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FunctionId, Type: smithy.ShapeTypeString})
+var s_FunctionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FunctionInput, Type: smithy.ShapeTypeString})
+var s_FunctionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FunctionName, Type: smithy.ShapeTypeString})
+var sHistoryEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHistoryEvent, Members: &mHistoryEvent, Type: smithy.ShapeTypeStructure})
+var s_HistoryEventList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HistoryEventList, Members: &m_HistoryEventList, Type: smithy.ShapeTypeList})
+var s_Identity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Identity, Type: smithy.ShapeTypeString})
+var sLambdaFunctionCompletedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLambdaFunctionCompletedEventAttributes, Members: &mLambdaFunctionCompletedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sLambdaFunctionFailedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLambdaFunctionFailedEventAttributes, Members: &mLambdaFunctionFailedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sLambdaFunctionScheduledEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLambdaFunctionScheduledEventAttributes, Members: &mLambdaFunctionScheduledEventAttributes, Type: smithy.ShapeTypeStructure})
+var sLambdaFunctionStartedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLambdaFunctionStartedEventAttributes, Members: &mLambdaFunctionStartedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sLambdaFunctionTimedOutEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLambdaFunctionTimedOutEventAttributes, Members: &mLambdaFunctionTimedOutEventAttributes, Type: smithy.ShapeTypeStructure})
+var sLambdaFunctionTimeoutType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLambdaFunctionTimeoutType, Members: &mLambdaFunctionTimeoutType, Type: smithy.ShapeTypeEnum})
+var s_LimitedData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LimitedData, Type: smithy.ShapeTypeString})
+var sLimitExceededFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededFault, Members: &mLimitExceededFault, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_MarkerName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MarkerName, Type: smithy.ShapeTypeString})
+var sMarkerRecordedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMarkerRecordedEventAttributes, Members: &mMarkerRecordedEventAttributes, Type: smithy.ShapeTypeStructure})
+var s_Name = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Name, Type: smithy.ShapeTypeString})
+var s_OpenDecisionTasksCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OpenDecisionTasksCount, Type: smithy.ShapeTypeInteger})
+var sOperationNotPermittedFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperationNotPermittedFault, Members: &mOperationNotPermittedFault, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PageSize, Type: smithy.ShapeTypeInteger})
+var s_PageToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PageToken, Type: smithy.ShapeTypeString})
+var sRecordMarkerDecisionAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecordMarkerDecisionAttributes, Members: &mRecordMarkerDecisionAttributes, Type: smithy.ShapeTypeStructure})
+var sRecordMarkerFailedCause = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecordMarkerFailedCause, Members: &mRecordMarkerFailedCause, Type: smithy.ShapeTypeEnum})
+var sRecordMarkerFailedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecordMarkerFailedEventAttributes, Members: &mRecordMarkerFailedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sRegistrationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegistrationStatus, Members: &mRegistrationStatus, Type: smithy.ShapeTypeEnum})
+var sRequestCancelActivityTaskDecisionAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestCancelActivityTaskDecisionAttributes, Members: &mRequestCancelActivityTaskDecisionAttributes, Type: smithy.ShapeTypeStructure})
+var sRequestCancelActivityTaskFailedCause = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestCancelActivityTaskFailedCause, Members: &mRequestCancelActivityTaskFailedCause, Type: smithy.ShapeTypeEnum})
+var sRequestCancelActivityTaskFailedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestCancelActivityTaskFailedEventAttributes, Members: &mRequestCancelActivityTaskFailedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sRequestCancelExternalWorkflowExecutionDecisionAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestCancelExternalWorkflowExecutionDecisionAttributes, Members: &mRequestCancelExternalWorkflowExecutionDecisionAttributes, Type: smithy.ShapeTypeStructure})
+var sRequestCancelExternalWorkflowExecutionFailedCause = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestCancelExternalWorkflowExecutionFailedCause, Members: &mRequestCancelExternalWorkflowExecutionFailedCause, Type: smithy.ShapeTypeEnum})
+var sRequestCancelExternalWorkflowExecutionFailedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestCancelExternalWorkflowExecutionFailedEventAttributes, Members: &mRequestCancelExternalWorkflowExecutionFailedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sRequestCancelExternalWorkflowExecutionInitiatedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestCancelExternalWorkflowExecutionInitiatedEventAttributes, Members: &mRequestCancelExternalWorkflowExecutionInitiatedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sResourceTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceTag, Members: &mResourceTag, Type: smithy.ShapeTypeStructure})
+var s_ResourceTagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceTagKey, Type: smithy.ShapeTypeString})
+var s_ResourceTagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceTagKeyList, Members: &m_ResourceTagKeyList, Type: smithy.ShapeTypeList})
+var s_ResourceTagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceTagList, Members: &m_ResourceTagList, Type: smithy.ShapeTypeList})
+var s_ResourceTagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceTagValue, Type: smithy.ShapeTypeString})
+var s_ReverseOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReverseOrder, Type: smithy.ShapeTypeBoolean})
+var sScheduleActivityTaskDecisionAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScheduleActivityTaskDecisionAttributes, Members: &mScheduleActivityTaskDecisionAttributes, Type: smithy.ShapeTypeStructure})
+var sScheduleActivityTaskFailedCause = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScheduleActivityTaskFailedCause, Members: &mScheduleActivityTaskFailedCause, Type: smithy.ShapeTypeEnum})
+var sScheduleActivityTaskFailedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScheduleActivityTaskFailedEventAttributes, Members: &mScheduleActivityTaskFailedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sScheduleLambdaFunctionDecisionAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScheduleLambdaFunctionDecisionAttributes, Members: &mScheduleLambdaFunctionDecisionAttributes, Type: smithy.ShapeTypeStructure})
+var sScheduleLambdaFunctionFailedCause = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScheduleLambdaFunctionFailedCause, Members: &mScheduleLambdaFunctionFailedCause, Type: smithy.ShapeTypeEnum})
+var sScheduleLambdaFunctionFailedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScheduleLambdaFunctionFailedEventAttributes, Members: &mScheduleLambdaFunctionFailedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sSignalExternalWorkflowExecutionDecisionAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSignalExternalWorkflowExecutionDecisionAttributes, Members: &mSignalExternalWorkflowExecutionDecisionAttributes, Type: smithy.ShapeTypeStructure})
+var sSignalExternalWorkflowExecutionFailedCause = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSignalExternalWorkflowExecutionFailedCause, Members: &mSignalExternalWorkflowExecutionFailedCause, Type: smithy.ShapeTypeEnum})
+var sSignalExternalWorkflowExecutionFailedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSignalExternalWorkflowExecutionFailedEventAttributes, Members: &mSignalExternalWorkflowExecutionFailedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sSignalExternalWorkflowExecutionInitiatedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSignalExternalWorkflowExecutionInitiatedEventAttributes, Members: &mSignalExternalWorkflowExecutionInitiatedEventAttributes, Type: smithy.ShapeTypeStructure})
+var s_SignalName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SignalName, Type: smithy.ShapeTypeString})
+var s_StartAtPreviousStartedEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StartAtPreviousStartedEvent, Type: smithy.ShapeTypeBoolean})
+var sStartChildWorkflowExecutionDecisionAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartChildWorkflowExecutionDecisionAttributes, Members: &mStartChildWorkflowExecutionDecisionAttributes, Type: smithy.ShapeTypeStructure})
+var sStartChildWorkflowExecutionFailedCause = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartChildWorkflowExecutionFailedCause, Members: &mStartChildWorkflowExecutionFailedCause, Type: smithy.ShapeTypeEnum})
+var sStartChildWorkflowExecutionFailedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartChildWorkflowExecutionFailedEventAttributes, Members: &mStartChildWorkflowExecutionFailedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sStartChildWorkflowExecutionInitiatedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartChildWorkflowExecutionInitiatedEventAttributes, Members: &mStartChildWorkflowExecutionInitiatedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sStartLambdaFunctionFailedCause = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartLambdaFunctionFailedCause, Members: &mStartLambdaFunctionFailedCause, Type: smithy.ShapeTypeEnum})
+var sStartLambdaFunctionFailedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartLambdaFunctionFailedEventAttributes, Members: &mStartLambdaFunctionFailedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sStartTimerDecisionAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartTimerDecisionAttributes, Members: &mStartTimerDecisionAttributes, Type: smithy.ShapeTypeStructure})
+var sStartTimerFailedCause = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartTimerFailedCause, Members: &mStartTimerFailedCause, Type: smithy.ShapeTypeEnum})
+var sStartTimerFailedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartTimerFailedEventAttributes, Members: &mStartTimerFailedEventAttributes, Type: smithy.ShapeTypeStructure})
+var s_Tag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tag, Type: smithy.ShapeTypeString})
+var sTagFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagFilter, Members: &mTagFilter, Type: smithy.ShapeTypeStructure})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sTaskList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaskList, Members: &mTaskList, Type: smithy.ShapeTypeStructure})
+var s_TaskPriority = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaskPriority, Type: smithy.ShapeTypeString})
+var s_TaskToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaskToken, Type: smithy.ShapeTypeString})
+var s_TerminateReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TerminateReason, Type: smithy.ShapeTypeString})
+var sTimerCanceledEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimerCanceledEventAttributes, Members: &mTimerCanceledEventAttributes, Type: smithy.ShapeTypeStructure})
+var sTimerFiredEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimerFiredEventAttributes, Members: &mTimerFiredEventAttributes, Type: smithy.ShapeTypeStructure})
+var s_TimerId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimerId, Type: smithy.ShapeTypeString})
+var sTimerStartedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimerStartedEventAttributes, Members: &mTimerStartedEventAttributes, Type: smithy.ShapeTypeStructure})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sTooManyTagsFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyTagsFault, Members: &mTooManyTagsFault, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var s_Truncated = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Truncated, Type: smithy.ShapeTypeBoolean})
+var sTypeAlreadyExistsFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTypeAlreadyExistsFault, Members: &mTypeAlreadyExistsFault, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sTypeDeprecatedFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTypeDeprecatedFault, Members: &mTypeDeprecatedFault, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sTypeNotDeprecatedFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTypeNotDeprecatedFault, Members: &mTypeNotDeprecatedFault, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sUnknownResourceFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnknownResourceFault, Members: &mUnknownResourceFault, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_Version = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Version, Type: smithy.ShapeTypeString})
+var s_VersionOptional = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VersionOptional, Type: smithy.ShapeTypeString})
+var sWorkflowExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowExecution, Members: &mWorkflowExecution, Type: smithy.ShapeTypeStructure})
+var sWorkflowExecutionAlreadyStartedFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowExecutionAlreadyStartedFault, Members: &mWorkflowExecutionAlreadyStartedFault, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sWorkflowExecutionCanceledEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowExecutionCanceledEventAttributes, Members: &mWorkflowExecutionCanceledEventAttributes, Type: smithy.ShapeTypeStructure})
+var sWorkflowExecutionCancelRequestedCause = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowExecutionCancelRequestedCause, Members: &mWorkflowExecutionCancelRequestedCause, Type: smithy.ShapeTypeEnum})
+var sWorkflowExecutionCancelRequestedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowExecutionCancelRequestedEventAttributes, Members: &mWorkflowExecutionCancelRequestedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sWorkflowExecutionCompletedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowExecutionCompletedEventAttributes, Members: &mWorkflowExecutionCompletedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sWorkflowExecutionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowExecutionConfiguration, Members: &mWorkflowExecutionConfiguration, Type: smithy.ShapeTypeStructure})
+var sWorkflowExecutionContinuedAsNewEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowExecutionContinuedAsNewEventAttributes, Members: &mWorkflowExecutionContinuedAsNewEventAttributes, Type: smithy.ShapeTypeStructure})
+var sWorkflowExecutionFailedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowExecutionFailedEventAttributes, Members: &mWorkflowExecutionFailedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sWorkflowExecutionFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowExecutionFilter, Members: &mWorkflowExecutionFilter, Type: smithy.ShapeTypeStructure})
+var sWorkflowExecutionInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowExecutionInfo, Members: &mWorkflowExecutionInfo, Type: smithy.ShapeTypeStructure})
+var s_WorkflowExecutionInfoList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkflowExecutionInfoList, Members: &m_WorkflowExecutionInfoList, Type: smithy.ShapeTypeList})
+var sWorkflowExecutionOpenCounts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowExecutionOpenCounts, Members: &mWorkflowExecutionOpenCounts, Type: smithy.ShapeTypeStructure})
+var sWorkflowExecutionSignaledEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowExecutionSignaledEventAttributes, Members: &mWorkflowExecutionSignaledEventAttributes, Type: smithy.ShapeTypeStructure})
+var sWorkflowExecutionStartedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowExecutionStartedEventAttributes, Members: &mWorkflowExecutionStartedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sWorkflowExecutionTerminatedCause = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowExecutionTerminatedCause, Members: &mWorkflowExecutionTerminatedCause, Type: smithy.ShapeTypeEnum})
+var sWorkflowExecutionTerminatedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowExecutionTerminatedEventAttributes, Members: &mWorkflowExecutionTerminatedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sWorkflowExecutionTimedOutEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowExecutionTimedOutEventAttributes, Members: &mWorkflowExecutionTimedOutEventAttributes, Type: smithy.ShapeTypeStructure})
+var sWorkflowExecutionTimeoutType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowExecutionTimeoutType, Members: &mWorkflowExecutionTimeoutType, Type: smithy.ShapeTypeEnum})
+var s_WorkflowId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkflowId, Type: smithy.ShapeTypeString})
+var s_WorkflowRunId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkflowRunId, Type: smithy.ShapeTypeString})
+var s_WorkflowRunIdOptional = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkflowRunIdOptional, Type: smithy.ShapeTypeString})
+var sWorkflowType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowType, Members: &mWorkflowType, Type: smithy.ShapeTypeStructure})
+var sWorkflowTypeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowTypeConfiguration, Members: &mWorkflowTypeConfiguration, Type: smithy.ShapeTypeStructure})
+var sWorkflowTypeFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowTypeFilter, Members: &mWorkflowTypeFilter, Type: smithy.ShapeTypeStructure})
+var sWorkflowTypeInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowTypeInfo, Members: &mWorkflowTypeInfo, Type: smithy.ShapeTypeStructure})
+var s_WorkflowTypeInfoList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkflowTypeInfoList, Members: &m_WorkflowTypeInfoList, Type: smithy.ShapeTypeList})
+var sCountClosedWorkflowExecutionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCountClosedWorkflowExecutionsInput, Members: &mCountClosedWorkflowExecutionsInput, Type: smithy.ShapeTypeStructure})
+var sWorkflowExecutionCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowExecutionCount, Members: &mWorkflowExecutionCount, Type: smithy.ShapeTypeStructure})
+var sCountOpenWorkflowExecutionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCountOpenWorkflowExecutionsInput, Members: &mCountOpenWorkflowExecutionsInput, Type: smithy.ShapeTypeStructure})
+var sCountPendingActivityTasksInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCountPendingActivityTasksInput, Members: &mCountPendingActivityTasksInput, Type: smithy.ShapeTypeStructure})
+var sPendingTaskCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPendingTaskCount, Members: &mPendingTaskCount, Type: smithy.ShapeTypeStructure})
+var sCountPendingDecisionTasksInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCountPendingDecisionTasksInput, Members: &mCountPendingDecisionTasksInput, Type: smithy.ShapeTypeStructure})
+var sDeleteActivityTypeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteActivityTypeInput, Members: &mDeleteActivityTypeInput, Type: smithy.ShapeTypeStructure})
+var sDeleteWorkflowTypeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWorkflowTypeInput, Members: &mDeleteWorkflowTypeInput, Type: smithy.ShapeTypeStructure})
+var sDeprecateActivityTypeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeprecateActivityTypeInput, Members: &mDeprecateActivityTypeInput, Type: smithy.ShapeTypeStructure})
+var sDeprecateDomainInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeprecateDomainInput, Members: &mDeprecateDomainInput, Type: smithy.ShapeTypeStructure})
+var sDeprecateWorkflowTypeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeprecateWorkflowTypeInput, Members: &mDeprecateWorkflowTypeInput, Type: smithy.ShapeTypeStructure})
+var sDescribeActivityTypeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeActivityTypeInput, Members: &mDescribeActivityTypeInput, Type: smithy.ShapeTypeStructure})
+var sActivityTypeDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActivityTypeDetail, Members: &mActivityTypeDetail, Type: smithy.ShapeTypeStructure})
+var sDescribeDomainInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDomainInput, Members: &mDescribeDomainInput, Type: smithy.ShapeTypeStructure})
+var sDomainDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainDetail, Members: &mDomainDetail, Type: smithy.ShapeTypeStructure})
+var sDescribeWorkflowExecutionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeWorkflowExecutionInput, Members: &mDescribeWorkflowExecutionInput, Type: smithy.ShapeTypeStructure})
+var sWorkflowExecutionDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowExecutionDetail, Members: &mWorkflowExecutionDetail, Type: smithy.ShapeTypeStructure})
+var sDescribeWorkflowTypeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeWorkflowTypeInput, Members: &mDescribeWorkflowTypeInput, Type: smithy.ShapeTypeStructure})
+var sWorkflowTypeDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowTypeDetail, Members: &mWorkflowTypeDetail, Type: smithy.ShapeTypeStructure})
+var sGetWorkflowExecutionHistoryInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWorkflowExecutionHistoryInput, Members: &mGetWorkflowExecutionHistoryInput, Type: smithy.ShapeTypeStructure})
+var sHistory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHistory, Members: &mHistory, Type: smithy.ShapeTypeStructure})
+var sListActivityTypesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListActivityTypesInput, Members: &mListActivityTypesInput, Type: smithy.ShapeTypeStructure})
+var sActivityTypeInfos = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActivityTypeInfos, Members: &mActivityTypeInfos, Type: smithy.ShapeTypeStructure})
+var sListClosedWorkflowExecutionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListClosedWorkflowExecutionsInput, Members: &mListClosedWorkflowExecutionsInput, Type: smithy.ShapeTypeStructure})
+var sWorkflowExecutionInfos = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowExecutionInfos, Members: &mWorkflowExecutionInfos, Type: smithy.ShapeTypeStructure})
+var sListDomainsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDomainsInput, Members: &mListDomainsInput, Type: smithy.ShapeTypeStructure})
+var sDomainInfos = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainInfos, Members: &mDomainInfos, Type: smithy.ShapeTypeStructure})
+var sListOpenWorkflowExecutionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOpenWorkflowExecutionsInput, Members: &mListOpenWorkflowExecutionsInput, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceInput, Members: &mListTagsForResourceInput, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceOutput, Members: &mListTagsForResourceOutput, Type: smithy.ShapeTypeStructure})
+var sListWorkflowTypesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkflowTypesInput, Members: &mListWorkflowTypesInput, Type: smithy.ShapeTypeStructure})
+var sWorkflowTypeInfos = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowTypeInfos, Members: &mWorkflowTypeInfos, Type: smithy.ShapeTypeStructure})
+var sPollForActivityTaskInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPollForActivityTaskInput, Members: &mPollForActivityTaskInput, Type: smithy.ShapeTypeStructure})
+var sActivityTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActivityTask, Members: &mActivityTask, Type: smithy.ShapeTypeStructure})
+var sPollForDecisionTaskInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPollForDecisionTaskInput, Members: &mPollForDecisionTaskInput, Type: smithy.ShapeTypeStructure})
+var sDecisionTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDecisionTask, Members: &mDecisionTask, Type: smithy.ShapeTypeStructure})
+var sRecordActivityTaskHeartbeatInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecordActivityTaskHeartbeatInput, Members: &mRecordActivityTaskHeartbeatInput, Type: smithy.ShapeTypeStructure})
+var sActivityTaskStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActivityTaskStatus, Members: &mActivityTaskStatus, Type: smithy.ShapeTypeStructure})
+var sRegisterActivityTypeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterActivityTypeInput, Members: &mRegisterActivityTypeInput, Type: smithy.ShapeTypeStructure})
+var sRegisterDomainInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterDomainInput, Members: &mRegisterDomainInput, Type: smithy.ShapeTypeStructure})
+var sRegisterWorkflowTypeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterWorkflowTypeInput, Members: &mRegisterWorkflowTypeInput, Type: smithy.ShapeTypeStructure})
+var sRequestCancelWorkflowExecutionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestCancelWorkflowExecutionInput, Members: &mRequestCancelWorkflowExecutionInput, Type: smithy.ShapeTypeStructure})
+var sRespondActivityTaskCanceledInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRespondActivityTaskCanceledInput, Members: &mRespondActivityTaskCanceledInput, Type: smithy.ShapeTypeStructure})
+var sRespondActivityTaskCompletedInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRespondActivityTaskCompletedInput, Members: &mRespondActivityTaskCompletedInput, Type: smithy.ShapeTypeStructure})
+var sRespondActivityTaskFailedInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRespondActivityTaskFailedInput, Members: &mRespondActivityTaskFailedInput, Type: smithy.ShapeTypeStructure})
+var sRespondDecisionTaskCompletedInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRespondDecisionTaskCompletedInput, Members: &mRespondDecisionTaskCompletedInput, Type: smithy.ShapeTypeStructure})
+var sSignalWorkflowExecutionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSignalWorkflowExecutionInput, Members: &mSignalWorkflowExecutionInput, Type: smithy.ShapeTypeStructure})
+var sStartWorkflowExecutionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartWorkflowExecutionInput, Members: &mStartWorkflowExecutionInput, Type: smithy.ShapeTypeStructure})
+var sRun = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRun, Members: &mRun, Type: smithy.ShapeTypeStructure})
+var sTagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceInput, Members: &mTagResourceInput, Type: smithy.ShapeTypeStructure})
+var sTerminateWorkflowExecutionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTerminateWorkflowExecutionInput, Members: &mTerminateWorkflowExecutionInput, Type: smithy.ShapeTypeStructure})
+var sUndeprecateActivityTypeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUndeprecateActivityTypeInput, Members: &mUndeprecateActivityTypeInput, Type: smithy.ShapeTypeStructure})
+var sUndeprecateDomainInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUndeprecateDomainInput, Members: &mUndeprecateDomainInput, Type: smithy.ShapeTypeStructure})
+var sUndeprecateWorkflowTypeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUndeprecateWorkflowTypeInput, Members: &mUndeprecateWorkflowTypeInput, Type: smithy.ShapeTypeStructure})
+var sUntagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceInput, Members: &mUntagResourceInput, Type: smithy.ShapeTypeStructure})
+
+var sActivityTaskCanceledEventAttributes_details = smithy.NewStaticSchema(smithy.StaticSchema{Member: "details", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sActivityTaskCanceledEventAttributes_scheduledEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduledEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sActivityTaskCanceledEventAttributes_startedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sActivityTaskCanceledEventAttributes_latestCancelRequestedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestCancelRequestedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sActivityTaskCancelRequestedEventAttributes_decisionTaskCompletedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decisionTaskCompletedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sActivityTaskCancelRequestedEventAttributes_activityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activityId", ID: &i_ActivityId, Type: smithy.ShapeTypeString})
+var sActivityTaskCompletedEventAttributes_result = smithy.NewStaticSchema(smithy.StaticSchema{Member: "result", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sActivityTaskCompletedEventAttributes_scheduledEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduledEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sActivityTaskCompletedEventAttributes_startedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sActivityTaskFailedEventAttributes_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_FailureReason, Type: smithy.ShapeTypeString})
+var sActivityTaskFailedEventAttributes_details = smithy.NewStaticSchema(smithy.StaticSchema{Member: "details", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sActivityTaskFailedEventAttributes_scheduledEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduledEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sActivityTaskFailedEventAttributes_startedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sActivityTaskScheduledEventAttributes_activityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activityType", ID: &iActivityType, Members: &mActivityType, Type: smithy.ShapeTypeStructure})
+var sActivityTaskScheduledEventAttributes_activityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activityId", ID: &i_ActivityId, Type: smithy.ShapeTypeString})
+var sActivityTaskScheduledEventAttributes_input = smithy.NewStaticSchema(smithy.StaticSchema{Member: "input", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sActivityTaskScheduledEventAttributes_control = smithy.NewStaticSchema(smithy.StaticSchema{Member: "control", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sActivityTaskScheduledEventAttributes_scheduleToStartTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduleToStartTimeout", ID: &i_DurationInSecondsOptional, Type: smithy.ShapeTypeString})
+var sActivityTaskScheduledEventAttributes_scheduleToCloseTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduleToCloseTimeout", ID: &i_DurationInSecondsOptional, Type: smithy.ShapeTypeString})
+var sActivityTaskScheduledEventAttributes_startToCloseTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startToCloseTimeout", ID: &i_DurationInSecondsOptional, Type: smithy.ShapeTypeString})
+var sActivityTaskScheduledEventAttributes_taskList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskList", ID: &iTaskList, Members: &mTaskList, Type: smithy.ShapeTypeStructure})
+var sActivityTaskScheduledEventAttributes_taskPriority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskPriority", ID: &i_TaskPriority, Type: smithy.ShapeTypeString})
+var sActivityTaskScheduledEventAttributes_decisionTaskCompletedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decisionTaskCompletedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sActivityTaskScheduledEventAttributes_heartbeatTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "heartbeatTimeout", ID: &i_DurationInSecondsOptional, Type: smithy.ShapeTypeString})
+var sActivityTaskStartedEventAttributes_identity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identity", ID: &i_Identity, Type: smithy.ShapeTypeString})
+var sActivityTaskStartedEventAttributes_scheduledEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduledEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sActivityTaskTimedOutEventAttributes_timeoutType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeoutType", ID: &iActivityTaskTimeoutType, Members: &mActivityTaskTimeoutType, Type: smithy.ShapeTypeEnum})
+var sActivityTaskTimedOutEventAttributes_scheduledEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduledEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sActivityTaskTimedOutEventAttributes_startedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sActivityTaskTimedOutEventAttributes_details = smithy.NewStaticSchema(smithy.StaticSchema{Member: "details", ID: &i_LimitedData, Type: smithy.ShapeTypeString})
+var sActivityTaskTimeoutType_START_TO_CLOSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "START_TO_CLOSE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sActivityTaskTimeoutType_SCHEDULE_TO_START = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SCHEDULE_TO_START", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sActivityTaskTimeoutType_SCHEDULE_TO_CLOSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SCHEDULE_TO_CLOSE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sActivityTaskTimeoutType_HEARTBEAT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HEARTBEAT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sActivityType_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_Name, Type: smithy.ShapeTypeString})
+var sActivityType_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_Version, Type: smithy.ShapeTypeString})
+var sActivityTypeConfiguration_defaultTaskStartToCloseTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultTaskStartToCloseTimeout", ID: &i_DurationInSecondsOptional, Type: smithy.ShapeTypeString})
+var sActivityTypeConfiguration_defaultTaskHeartbeatTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultTaskHeartbeatTimeout", ID: &i_DurationInSecondsOptional, Type: smithy.ShapeTypeString})
+var sActivityTypeConfiguration_defaultTaskList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultTaskList", ID: &iTaskList, Members: &mTaskList, Type: smithy.ShapeTypeStructure})
+var sActivityTypeConfiguration_defaultTaskPriority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultTaskPriority", ID: &i_TaskPriority, Type: smithy.ShapeTypeString})
+var sActivityTypeConfiguration_defaultTaskScheduleToStartTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultTaskScheduleToStartTimeout", ID: &i_DurationInSecondsOptional, Type: smithy.ShapeTypeString})
+var sActivityTypeConfiguration_defaultTaskScheduleToCloseTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultTaskScheduleToCloseTimeout", ID: &i_DurationInSecondsOptional, Type: smithy.ShapeTypeString})
+var sActivityTypeInfo_activityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activityType", ID: &iActivityType, Members: &mActivityType, Type: smithy.ShapeTypeStructure})
+var sActivityTypeInfo_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iRegistrationStatus, Members: &mRegistrationStatus, Type: smithy.ShapeTypeEnum})
+var sActivityTypeInfo_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sActivityTypeInfo_creationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sActivityTypeInfo_deprecationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deprecationDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var s_ActivityTypeInfoList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iActivityTypeInfo, Members: &mActivityTypeInfo, Type: smithy.ShapeTypeStructure})
+var sCancelTimerDecisionAttributes_timerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timerId", ID: &i_TimerId, Type: smithy.ShapeTypeString})
+var sCancelTimerFailedCause_TIMER_ID_UNKNOWN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIMER_ID_UNKNOWN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCancelTimerFailedCause_OPERATION_NOT_PERMITTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPERATION_NOT_PERMITTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCancelTimerFailedEventAttributes_timerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timerId", ID: &i_TimerId, Type: smithy.ShapeTypeString})
+var sCancelTimerFailedEventAttributes_cause = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cause", ID: &iCancelTimerFailedCause, Members: &mCancelTimerFailedCause, Type: smithy.ShapeTypeEnum})
+var sCancelTimerFailedEventAttributes_decisionTaskCompletedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decisionTaskCompletedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sCancelWorkflowExecutionDecisionAttributes_details = smithy.NewStaticSchema(smithy.StaticSchema{Member: "details", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sCancelWorkflowExecutionFailedCause_UNHANDLED_DECISION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNHANDLED_DECISION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCancelWorkflowExecutionFailedCause_OPERATION_NOT_PERMITTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPERATION_NOT_PERMITTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCancelWorkflowExecutionFailedEventAttributes_cause = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cause", ID: &iCancelWorkflowExecutionFailedCause, Members: &mCancelWorkflowExecutionFailedCause, Type: smithy.ShapeTypeEnum})
+var sCancelWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decisionTaskCompletedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sChildPolicy_TERMINATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TERMINATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChildPolicy_REQUEST_CANCEL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REQUEST_CANCEL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChildPolicy_ABANDON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ABANDON", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChildWorkflowExecutionCanceledEventAttributes_workflowExecution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowExecution", ID: &iWorkflowExecution, Members: &mWorkflowExecution, Type: smithy.ShapeTypeStructure})
+var sChildWorkflowExecutionCanceledEventAttributes_workflowType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowType", ID: &iWorkflowType, Members: &mWorkflowType, Type: smithy.ShapeTypeStructure})
+var sChildWorkflowExecutionCanceledEventAttributes_details = smithy.NewStaticSchema(smithy.StaticSchema{Member: "details", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sChildWorkflowExecutionCanceledEventAttributes_initiatedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "initiatedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sChildWorkflowExecutionCanceledEventAttributes_startedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sChildWorkflowExecutionCompletedEventAttributes_workflowExecution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowExecution", ID: &iWorkflowExecution, Members: &mWorkflowExecution, Type: smithy.ShapeTypeStructure})
+var sChildWorkflowExecutionCompletedEventAttributes_workflowType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowType", ID: &iWorkflowType, Members: &mWorkflowType, Type: smithy.ShapeTypeStructure})
+var sChildWorkflowExecutionCompletedEventAttributes_result = smithy.NewStaticSchema(smithy.StaticSchema{Member: "result", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sChildWorkflowExecutionCompletedEventAttributes_initiatedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "initiatedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sChildWorkflowExecutionCompletedEventAttributes_startedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sChildWorkflowExecutionFailedEventAttributes_workflowExecution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowExecution", ID: &iWorkflowExecution, Members: &mWorkflowExecution, Type: smithy.ShapeTypeStructure})
+var sChildWorkflowExecutionFailedEventAttributes_workflowType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowType", ID: &iWorkflowType, Members: &mWorkflowType, Type: smithy.ShapeTypeStructure})
+var sChildWorkflowExecutionFailedEventAttributes_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_FailureReason, Type: smithy.ShapeTypeString})
+var sChildWorkflowExecutionFailedEventAttributes_details = smithy.NewStaticSchema(smithy.StaticSchema{Member: "details", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sChildWorkflowExecutionFailedEventAttributes_initiatedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "initiatedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sChildWorkflowExecutionFailedEventAttributes_startedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sChildWorkflowExecutionStartedEventAttributes_workflowExecution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowExecution", ID: &iWorkflowExecution, Members: &mWorkflowExecution, Type: smithy.ShapeTypeStructure})
+var sChildWorkflowExecutionStartedEventAttributes_workflowType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowType", ID: &iWorkflowType, Members: &mWorkflowType, Type: smithy.ShapeTypeStructure})
+var sChildWorkflowExecutionStartedEventAttributes_initiatedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "initiatedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sChildWorkflowExecutionTerminatedEventAttributes_workflowExecution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowExecution", ID: &iWorkflowExecution, Members: &mWorkflowExecution, Type: smithy.ShapeTypeStructure})
+var sChildWorkflowExecutionTerminatedEventAttributes_workflowType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowType", ID: &iWorkflowType, Members: &mWorkflowType, Type: smithy.ShapeTypeStructure})
+var sChildWorkflowExecutionTerminatedEventAttributes_initiatedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "initiatedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sChildWorkflowExecutionTerminatedEventAttributes_startedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sChildWorkflowExecutionTimedOutEventAttributes_workflowExecution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowExecution", ID: &iWorkflowExecution, Members: &mWorkflowExecution, Type: smithy.ShapeTypeStructure})
+var sChildWorkflowExecutionTimedOutEventAttributes_workflowType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowType", ID: &iWorkflowType, Members: &mWorkflowType, Type: smithy.ShapeTypeStructure})
+var sChildWorkflowExecutionTimedOutEventAttributes_timeoutType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeoutType", ID: &iWorkflowExecutionTimeoutType, Members: &mWorkflowExecutionTimeoutType, Type: smithy.ShapeTypeEnum})
+var sChildWorkflowExecutionTimedOutEventAttributes_initiatedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "initiatedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sChildWorkflowExecutionTimedOutEventAttributes_startedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sCloseStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCloseStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCloseStatus_CANCELED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCloseStatus_TERMINATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TERMINATED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCloseStatus_CONTINUED_AS_NEW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTINUED_AS_NEW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCloseStatus_TIMED_OUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIMED_OUT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCloseStatusFilter_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iCloseStatus, Members: &mCloseStatus, Type: smithy.ShapeTypeEnum})
+var sCompleteWorkflowExecutionDecisionAttributes_result = smithy.NewStaticSchema(smithy.StaticSchema{Member: "result", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sCompleteWorkflowExecutionFailedCause_UNHANDLED_DECISION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNHANDLED_DECISION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCompleteWorkflowExecutionFailedCause_OPERATION_NOT_PERMITTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPERATION_NOT_PERMITTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCompleteWorkflowExecutionFailedEventAttributes_cause = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cause", ID: &iCompleteWorkflowExecutionFailedCause, Members: &mCompleteWorkflowExecutionFailedCause, Type: smithy.ShapeTypeEnum})
+var sCompleteWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decisionTaskCompletedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sContinueAsNewWorkflowExecutionDecisionAttributes_input = smithy.NewStaticSchema(smithy.StaticSchema{Member: "input", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sContinueAsNewWorkflowExecutionDecisionAttributes_executionStartToCloseTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionStartToCloseTimeout", ID: &i_DurationInSecondsOptional, Type: smithy.ShapeTypeString})
+var sContinueAsNewWorkflowExecutionDecisionAttributes_taskList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskList", ID: &iTaskList, Members: &mTaskList, Type: smithy.ShapeTypeStructure})
+var sContinueAsNewWorkflowExecutionDecisionAttributes_taskPriority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskPriority", ID: &i_TaskPriority, Type: smithy.ShapeTypeString})
+var sContinueAsNewWorkflowExecutionDecisionAttributes_taskStartToCloseTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskStartToCloseTimeout", ID: &i_DurationInSecondsOptional, Type: smithy.ShapeTypeString})
+var sContinueAsNewWorkflowExecutionDecisionAttributes_childPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "childPolicy", ID: &iChildPolicy, Members: &mChildPolicy, Type: smithy.ShapeTypeEnum})
+var sContinueAsNewWorkflowExecutionDecisionAttributes_tagList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagList", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sContinueAsNewWorkflowExecutionDecisionAttributes_workflowTypeVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowTypeVersion", ID: &i_Version, Type: smithy.ShapeTypeString})
+var sContinueAsNewWorkflowExecutionDecisionAttributes_lambdaRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lambdaRole", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sContinueAsNewWorkflowExecutionFailedCause_UNHANDLED_DECISION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNHANDLED_DECISION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sContinueAsNewWorkflowExecutionFailedCause_WORKFLOW_TYPE_DEPRECATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WORKFLOW_TYPE_DEPRECATED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sContinueAsNewWorkflowExecutionFailedCause_WORKFLOW_TYPE_DOES_NOT_EXIST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WORKFLOW_TYPE_DOES_NOT_EXIST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sContinueAsNewWorkflowExecutionFailedCause_DEFAULT_EXECUTION_START_TO_CLOSE_TIMEOUT_UNDEFINED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEFAULT_EXECUTION_START_TO_CLOSE_TIMEOUT_UNDEFINED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sContinueAsNewWorkflowExecutionFailedCause_DEFAULT_TASK_START_TO_CLOSE_TIMEOUT_UNDEFINED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEFAULT_TASK_START_TO_CLOSE_TIMEOUT_UNDEFINED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sContinueAsNewWorkflowExecutionFailedCause_DEFAULT_TASK_LIST_UNDEFINED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEFAULT_TASK_LIST_UNDEFINED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sContinueAsNewWorkflowExecutionFailedCause_DEFAULT_CHILD_POLICY_UNDEFINED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEFAULT_CHILD_POLICY_UNDEFINED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sContinueAsNewWorkflowExecutionFailedCause_CONTINUE_AS_NEW_WORKFLOW_EXECUTION_RATE_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTINUE_AS_NEW_WORKFLOW_EXECUTION_RATE_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sContinueAsNewWorkflowExecutionFailedCause_OPERATION_NOT_PERMITTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPERATION_NOT_PERMITTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sContinueAsNewWorkflowExecutionFailedEventAttributes_cause = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cause", ID: &iContinueAsNewWorkflowExecutionFailedCause, Members: &mContinueAsNewWorkflowExecutionFailedCause, Type: smithy.ShapeTypeEnum})
+var sContinueAsNewWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decisionTaskCompletedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sDecision_decisionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decisionType", ID: &iDecisionType, Members: &mDecisionType, Type: smithy.ShapeTypeEnum})
+var sDecision_scheduleActivityTaskDecisionAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduleActivityTaskDecisionAttributes", ID: &iScheduleActivityTaskDecisionAttributes, Members: &mScheduleActivityTaskDecisionAttributes, Type: smithy.ShapeTypeStructure})
+var sDecision_requestCancelActivityTaskDecisionAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestCancelActivityTaskDecisionAttributes", ID: &iRequestCancelActivityTaskDecisionAttributes, Members: &mRequestCancelActivityTaskDecisionAttributes, Type: smithy.ShapeTypeStructure})
+var sDecision_completeWorkflowExecutionDecisionAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "completeWorkflowExecutionDecisionAttributes", ID: &iCompleteWorkflowExecutionDecisionAttributes, Members: &mCompleteWorkflowExecutionDecisionAttributes, Type: smithy.ShapeTypeStructure})
+var sDecision_failWorkflowExecutionDecisionAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failWorkflowExecutionDecisionAttributes", ID: &iFailWorkflowExecutionDecisionAttributes, Members: &mFailWorkflowExecutionDecisionAttributes, Type: smithy.ShapeTypeStructure})
+var sDecision_cancelWorkflowExecutionDecisionAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cancelWorkflowExecutionDecisionAttributes", ID: &iCancelWorkflowExecutionDecisionAttributes, Members: &mCancelWorkflowExecutionDecisionAttributes, Type: smithy.ShapeTypeStructure})
+var sDecision_continueAsNewWorkflowExecutionDecisionAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "continueAsNewWorkflowExecutionDecisionAttributes", ID: &iContinueAsNewWorkflowExecutionDecisionAttributes, Members: &mContinueAsNewWorkflowExecutionDecisionAttributes, Type: smithy.ShapeTypeStructure})
+var sDecision_recordMarkerDecisionAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recordMarkerDecisionAttributes", ID: &iRecordMarkerDecisionAttributes, Members: &mRecordMarkerDecisionAttributes, Type: smithy.ShapeTypeStructure})
+var sDecision_startTimerDecisionAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTimerDecisionAttributes", ID: &iStartTimerDecisionAttributes, Members: &mStartTimerDecisionAttributes, Type: smithy.ShapeTypeStructure})
+var sDecision_cancelTimerDecisionAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cancelTimerDecisionAttributes", ID: &iCancelTimerDecisionAttributes, Members: &mCancelTimerDecisionAttributes, Type: smithy.ShapeTypeStructure})
+var sDecision_signalExternalWorkflowExecutionDecisionAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signalExternalWorkflowExecutionDecisionAttributes", ID: &iSignalExternalWorkflowExecutionDecisionAttributes, Members: &mSignalExternalWorkflowExecutionDecisionAttributes, Type: smithy.ShapeTypeStructure})
+var sDecision_requestCancelExternalWorkflowExecutionDecisionAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestCancelExternalWorkflowExecutionDecisionAttributes", ID: &iRequestCancelExternalWorkflowExecutionDecisionAttributes, Members: &mRequestCancelExternalWorkflowExecutionDecisionAttributes, Type: smithy.ShapeTypeStructure})
+var sDecision_startChildWorkflowExecutionDecisionAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startChildWorkflowExecutionDecisionAttributes", ID: &iStartChildWorkflowExecutionDecisionAttributes, Members: &mStartChildWorkflowExecutionDecisionAttributes, Type: smithy.ShapeTypeStructure})
+var sDecision_scheduleLambdaFunctionDecisionAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduleLambdaFunctionDecisionAttributes", ID: &iScheduleLambdaFunctionDecisionAttributes, Members: &mScheduleLambdaFunctionDecisionAttributes, Type: smithy.ShapeTypeStructure})
+var s_DecisionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDecision, Members: &mDecision, Type: smithy.ShapeTypeStructure})
+var sDecisionTaskCompletedEventAttributes_executionContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionContext", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sDecisionTaskCompletedEventAttributes_scheduledEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduledEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sDecisionTaskCompletedEventAttributes_startedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sDecisionTaskCompletedEventAttributes_taskList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskList", ID: &iTaskList, Members: &mTaskList, Type: smithy.ShapeTypeStructure})
+var sDecisionTaskCompletedEventAttributes_taskListScheduleToStartTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskListScheduleToStartTimeout", ID: &i_DurationInSecondsOptional, Type: smithy.ShapeTypeString})
+var sDecisionTaskScheduledEventAttributes_taskList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskList", ID: &iTaskList, Members: &mTaskList, Type: smithy.ShapeTypeStructure})
+var sDecisionTaskScheduledEventAttributes_taskPriority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskPriority", ID: &i_TaskPriority, Type: smithy.ShapeTypeString})
+var sDecisionTaskScheduledEventAttributes_startToCloseTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startToCloseTimeout", ID: &i_DurationInSecondsOptional, Type: smithy.ShapeTypeString})
+var sDecisionTaskScheduledEventAttributes_scheduleToStartTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduleToStartTimeout", ID: &i_DurationInSecondsOptional, Type: smithy.ShapeTypeString})
+var sDecisionTaskStartedEventAttributes_identity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identity", ID: &i_Identity, Type: smithy.ShapeTypeString})
+var sDecisionTaskStartedEventAttributes_scheduledEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduledEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sDecisionTaskTimedOutEventAttributes_timeoutType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeoutType", ID: &iDecisionTaskTimeoutType, Members: &mDecisionTaskTimeoutType, Type: smithy.ShapeTypeEnum})
+var sDecisionTaskTimedOutEventAttributes_scheduledEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduledEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sDecisionTaskTimedOutEventAttributes_startedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sDecisionTaskTimeoutType_START_TO_CLOSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "START_TO_CLOSE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDecisionTaskTimeoutType_SCHEDULE_TO_START = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SCHEDULE_TO_START", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDecisionType_ScheduleActivityTask = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduleActivityTask", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDecisionType_RequestCancelActivityTask = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestCancelActivityTask", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDecisionType_CompleteWorkflowExecution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompleteWorkflowExecution", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDecisionType_FailWorkflowExecution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailWorkflowExecution", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDecisionType_CancelWorkflowExecution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CancelWorkflowExecution", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDecisionType_ContinueAsNewWorkflowExecution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContinueAsNewWorkflowExecution", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDecisionType_RecordMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecordMarker", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDecisionType_StartTimer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTimer", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDecisionType_CancelTimer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CancelTimer", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDecisionType_SignalExternalWorkflowExecution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SignalExternalWorkflowExecution", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDecisionType_RequestCancelExternalWorkflowExecution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestCancelExternalWorkflowExecution", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDecisionType_StartChildWorkflowExecution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartChildWorkflowExecution", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDecisionType_ScheduleLambdaFunction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduleLambdaFunction", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDefaultUndefinedFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sDomainAlreadyExistsFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sDomainConfiguration_workflowExecutionRetentionPeriodInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowExecutionRetentionPeriodInDays", ID: &i_DurationInDays, Type: smithy.ShapeTypeString})
+var sDomainDeprecatedFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sDomainInfo_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sDomainInfo_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iRegistrationStatus, Members: &mRegistrationStatus, Type: smithy.ShapeTypeEnum})
+var sDomainInfo_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sDomainInfo_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var s_DomainInfoList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDomainInfo, Members: &mDomainInfo, Type: smithy.ShapeTypeStructure})
+var sEventType_WorkflowExecutionStarted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkflowExecutionStarted", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_WorkflowExecutionCancelRequested = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkflowExecutionCancelRequested", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_WorkflowExecutionCompleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkflowExecutionCompleted", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_CompleteWorkflowExecutionFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompleteWorkflowExecutionFailed", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_WorkflowExecutionFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkflowExecutionFailed", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_FailWorkflowExecutionFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailWorkflowExecutionFailed", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_WorkflowExecutionTimedOut = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkflowExecutionTimedOut", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_WorkflowExecutionCanceled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkflowExecutionCanceled", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_CancelWorkflowExecutionFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CancelWorkflowExecutionFailed", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_WorkflowExecutionContinuedAsNew = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkflowExecutionContinuedAsNew", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_ContinueAsNewWorkflowExecutionFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContinueAsNewWorkflowExecutionFailed", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_WorkflowExecutionTerminated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkflowExecutionTerminated", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_DecisionTaskScheduled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DecisionTaskScheduled", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_DecisionTaskStarted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DecisionTaskStarted", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_DecisionTaskCompleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DecisionTaskCompleted", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_DecisionTaskTimedOut = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DecisionTaskTimedOut", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_ActivityTaskScheduled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActivityTaskScheduled", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_ScheduleActivityTaskFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduleActivityTaskFailed", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_ActivityTaskStarted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActivityTaskStarted", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_ActivityTaskCompleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActivityTaskCompleted", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_ActivityTaskFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActivityTaskFailed", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_ActivityTaskTimedOut = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActivityTaskTimedOut", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_ActivityTaskCanceled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActivityTaskCanceled", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_ActivityTaskCancelRequested = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActivityTaskCancelRequested", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_RequestCancelActivityTaskFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestCancelActivityTaskFailed", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_WorkflowExecutionSignaled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkflowExecutionSignaled", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_MarkerRecorded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarkerRecorded", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_RecordMarkerFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecordMarkerFailed", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_TimerStarted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimerStarted", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_StartTimerFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTimerFailed", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_TimerFired = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimerFired", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_TimerCanceled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimerCanceled", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_CancelTimerFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CancelTimerFailed", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_StartChildWorkflowExecutionInitiated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartChildWorkflowExecutionInitiated", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_StartChildWorkflowExecutionFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartChildWorkflowExecutionFailed", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_ChildWorkflowExecutionStarted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChildWorkflowExecutionStarted", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_ChildWorkflowExecutionCompleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChildWorkflowExecutionCompleted", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_ChildWorkflowExecutionFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChildWorkflowExecutionFailed", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_ChildWorkflowExecutionTimedOut = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChildWorkflowExecutionTimedOut", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_ChildWorkflowExecutionCanceled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChildWorkflowExecutionCanceled", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_ChildWorkflowExecutionTerminated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChildWorkflowExecutionTerminated", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_SignalExternalWorkflowExecutionInitiated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SignalExternalWorkflowExecutionInitiated", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_SignalExternalWorkflowExecutionFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SignalExternalWorkflowExecutionFailed", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_ExternalWorkflowExecutionSignaled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExternalWorkflowExecutionSignaled", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_RequestCancelExternalWorkflowExecutionInitiated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestCancelExternalWorkflowExecutionInitiated", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_RequestCancelExternalWorkflowExecutionFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestCancelExternalWorkflowExecutionFailed", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_ExternalWorkflowExecutionCancelRequested = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExternalWorkflowExecutionCancelRequested", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_LambdaFunctionScheduled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LambdaFunctionScheduled", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_LambdaFunctionStarted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LambdaFunctionStarted", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_LambdaFunctionCompleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LambdaFunctionCompleted", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_LambdaFunctionFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LambdaFunctionFailed", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_LambdaFunctionTimedOut = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LambdaFunctionTimedOut", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_ScheduleLambdaFunctionFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduleLambdaFunctionFailed", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_StartLambdaFunctionFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartLambdaFunctionFailed", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sExecutionStatus_OPEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPEN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sExecutionStatus_CLOSED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLOSED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sExecutionTimeFilter_oldestDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "oldestDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sExecutionTimeFilter_latestDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sExternalWorkflowExecutionCancelRequestedEventAttributes_workflowExecution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowExecution", ID: &iWorkflowExecution, Members: &mWorkflowExecution, Type: smithy.ShapeTypeStructure})
+var sExternalWorkflowExecutionCancelRequestedEventAttributes_initiatedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "initiatedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sExternalWorkflowExecutionSignaledEventAttributes_workflowExecution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowExecution", ID: &iWorkflowExecution, Members: &mWorkflowExecution, Type: smithy.ShapeTypeStructure})
+var sExternalWorkflowExecutionSignaledEventAttributes_initiatedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "initiatedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sFailWorkflowExecutionDecisionAttributes_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_FailureReason, Type: smithy.ShapeTypeString})
+var sFailWorkflowExecutionDecisionAttributes_details = smithy.NewStaticSchema(smithy.StaticSchema{Member: "details", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sFailWorkflowExecutionFailedCause_UNHANDLED_DECISION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNHANDLED_DECISION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFailWorkflowExecutionFailedCause_OPERATION_NOT_PERMITTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPERATION_NOT_PERMITTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFailWorkflowExecutionFailedEventAttributes_cause = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cause", ID: &iFailWorkflowExecutionFailedCause, Members: &mFailWorkflowExecutionFailedCause, Type: smithy.ShapeTypeEnum})
+var sFailWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decisionTaskCompletedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sHistoryEvent_eventTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sHistoryEvent_eventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventType", ID: &iEventType, Members: &mEventType, Type: smithy.ShapeTypeEnum})
+var sHistoryEvent_eventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sHistoryEvent_workflowExecutionStartedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowExecutionStartedEventAttributes", ID: &iWorkflowExecutionStartedEventAttributes, Members: &mWorkflowExecutionStartedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_workflowExecutionCompletedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowExecutionCompletedEventAttributes", ID: &iWorkflowExecutionCompletedEventAttributes, Members: &mWorkflowExecutionCompletedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_completeWorkflowExecutionFailedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "completeWorkflowExecutionFailedEventAttributes", ID: &iCompleteWorkflowExecutionFailedEventAttributes, Members: &mCompleteWorkflowExecutionFailedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_workflowExecutionFailedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowExecutionFailedEventAttributes", ID: &iWorkflowExecutionFailedEventAttributes, Members: &mWorkflowExecutionFailedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_failWorkflowExecutionFailedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failWorkflowExecutionFailedEventAttributes", ID: &iFailWorkflowExecutionFailedEventAttributes, Members: &mFailWorkflowExecutionFailedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_workflowExecutionTimedOutEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowExecutionTimedOutEventAttributes", ID: &iWorkflowExecutionTimedOutEventAttributes, Members: &mWorkflowExecutionTimedOutEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_workflowExecutionCanceledEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowExecutionCanceledEventAttributes", ID: &iWorkflowExecutionCanceledEventAttributes, Members: &mWorkflowExecutionCanceledEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_cancelWorkflowExecutionFailedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cancelWorkflowExecutionFailedEventAttributes", ID: &iCancelWorkflowExecutionFailedEventAttributes, Members: &mCancelWorkflowExecutionFailedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_workflowExecutionContinuedAsNewEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowExecutionContinuedAsNewEventAttributes", ID: &iWorkflowExecutionContinuedAsNewEventAttributes, Members: &mWorkflowExecutionContinuedAsNewEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_continueAsNewWorkflowExecutionFailedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "continueAsNewWorkflowExecutionFailedEventAttributes", ID: &iContinueAsNewWorkflowExecutionFailedEventAttributes, Members: &mContinueAsNewWorkflowExecutionFailedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_workflowExecutionTerminatedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowExecutionTerminatedEventAttributes", ID: &iWorkflowExecutionTerminatedEventAttributes, Members: &mWorkflowExecutionTerminatedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_workflowExecutionCancelRequestedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowExecutionCancelRequestedEventAttributes", ID: &iWorkflowExecutionCancelRequestedEventAttributes, Members: &mWorkflowExecutionCancelRequestedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_decisionTaskScheduledEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decisionTaskScheduledEventAttributes", ID: &iDecisionTaskScheduledEventAttributes, Members: &mDecisionTaskScheduledEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_decisionTaskStartedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decisionTaskStartedEventAttributes", ID: &iDecisionTaskStartedEventAttributes, Members: &mDecisionTaskStartedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_decisionTaskCompletedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decisionTaskCompletedEventAttributes", ID: &iDecisionTaskCompletedEventAttributes, Members: &mDecisionTaskCompletedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_decisionTaskTimedOutEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decisionTaskTimedOutEventAttributes", ID: &iDecisionTaskTimedOutEventAttributes, Members: &mDecisionTaskTimedOutEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_activityTaskScheduledEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activityTaskScheduledEventAttributes", ID: &iActivityTaskScheduledEventAttributes, Members: &mActivityTaskScheduledEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_activityTaskStartedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activityTaskStartedEventAttributes", ID: &iActivityTaskStartedEventAttributes, Members: &mActivityTaskStartedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_activityTaskCompletedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activityTaskCompletedEventAttributes", ID: &iActivityTaskCompletedEventAttributes, Members: &mActivityTaskCompletedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_activityTaskFailedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activityTaskFailedEventAttributes", ID: &iActivityTaskFailedEventAttributes, Members: &mActivityTaskFailedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_activityTaskTimedOutEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activityTaskTimedOutEventAttributes", ID: &iActivityTaskTimedOutEventAttributes, Members: &mActivityTaskTimedOutEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_activityTaskCanceledEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activityTaskCanceledEventAttributes", ID: &iActivityTaskCanceledEventAttributes, Members: &mActivityTaskCanceledEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_activityTaskCancelRequestedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activityTaskCancelRequestedEventAttributes", ID: &iActivityTaskCancelRequestedEventAttributes, Members: &mActivityTaskCancelRequestedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_workflowExecutionSignaledEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowExecutionSignaledEventAttributes", ID: &iWorkflowExecutionSignaledEventAttributes, Members: &mWorkflowExecutionSignaledEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_markerRecordedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "markerRecordedEventAttributes", ID: &iMarkerRecordedEventAttributes, Members: &mMarkerRecordedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_recordMarkerFailedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recordMarkerFailedEventAttributes", ID: &iRecordMarkerFailedEventAttributes, Members: &mRecordMarkerFailedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_timerStartedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timerStartedEventAttributes", ID: &iTimerStartedEventAttributes, Members: &mTimerStartedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_timerFiredEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timerFiredEventAttributes", ID: &iTimerFiredEventAttributes, Members: &mTimerFiredEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_timerCanceledEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timerCanceledEventAttributes", ID: &iTimerCanceledEventAttributes, Members: &mTimerCanceledEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_startChildWorkflowExecutionInitiatedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startChildWorkflowExecutionInitiatedEventAttributes", ID: &iStartChildWorkflowExecutionInitiatedEventAttributes, Members: &mStartChildWorkflowExecutionInitiatedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_childWorkflowExecutionStartedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "childWorkflowExecutionStartedEventAttributes", ID: &iChildWorkflowExecutionStartedEventAttributes, Members: &mChildWorkflowExecutionStartedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_childWorkflowExecutionCompletedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "childWorkflowExecutionCompletedEventAttributes", ID: &iChildWorkflowExecutionCompletedEventAttributes, Members: &mChildWorkflowExecutionCompletedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_childWorkflowExecutionFailedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "childWorkflowExecutionFailedEventAttributes", ID: &iChildWorkflowExecutionFailedEventAttributes, Members: &mChildWorkflowExecutionFailedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_childWorkflowExecutionTimedOutEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "childWorkflowExecutionTimedOutEventAttributes", ID: &iChildWorkflowExecutionTimedOutEventAttributes, Members: &mChildWorkflowExecutionTimedOutEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_childWorkflowExecutionCanceledEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "childWorkflowExecutionCanceledEventAttributes", ID: &iChildWorkflowExecutionCanceledEventAttributes, Members: &mChildWorkflowExecutionCanceledEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_childWorkflowExecutionTerminatedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "childWorkflowExecutionTerminatedEventAttributes", ID: &iChildWorkflowExecutionTerminatedEventAttributes, Members: &mChildWorkflowExecutionTerminatedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_signalExternalWorkflowExecutionInitiatedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signalExternalWorkflowExecutionInitiatedEventAttributes", ID: &iSignalExternalWorkflowExecutionInitiatedEventAttributes, Members: &mSignalExternalWorkflowExecutionInitiatedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_externalWorkflowExecutionSignaledEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalWorkflowExecutionSignaledEventAttributes", ID: &iExternalWorkflowExecutionSignaledEventAttributes, Members: &mExternalWorkflowExecutionSignaledEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_signalExternalWorkflowExecutionFailedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signalExternalWorkflowExecutionFailedEventAttributes", ID: &iSignalExternalWorkflowExecutionFailedEventAttributes, Members: &mSignalExternalWorkflowExecutionFailedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_externalWorkflowExecutionCancelRequestedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalWorkflowExecutionCancelRequestedEventAttributes", ID: &iExternalWorkflowExecutionCancelRequestedEventAttributes, Members: &mExternalWorkflowExecutionCancelRequestedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_requestCancelExternalWorkflowExecutionInitiatedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestCancelExternalWorkflowExecutionInitiatedEventAttributes", ID: &iRequestCancelExternalWorkflowExecutionInitiatedEventAttributes, Members: &mRequestCancelExternalWorkflowExecutionInitiatedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_requestCancelExternalWorkflowExecutionFailedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestCancelExternalWorkflowExecutionFailedEventAttributes", ID: &iRequestCancelExternalWorkflowExecutionFailedEventAttributes, Members: &mRequestCancelExternalWorkflowExecutionFailedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_scheduleActivityTaskFailedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduleActivityTaskFailedEventAttributes", ID: &iScheduleActivityTaskFailedEventAttributes, Members: &mScheduleActivityTaskFailedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_requestCancelActivityTaskFailedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestCancelActivityTaskFailedEventAttributes", ID: &iRequestCancelActivityTaskFailedEventAttributes, Members: &mRequestCancelActivityTaskFailedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_startTimerFailedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTimerFailedEventAttributes", ID: &iStartTimerFailedEventAttributes, Members: &mStartTimerFailedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_cancelTimerFailedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cancelTimerFailedEventAttributes", ID: &iCancelTimerFailedEventAttributes, Members: &mCancelTimerFailedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_startChildWorkflowExecutionFailedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startChildWorkflowExecutionFailedEventAttributes", ID: &iStartChildWorkflowExecutionFailedEventAttributes, Members: &mStartChildWorkflowExecutionFailedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_lambdaFunctionScheduledEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lambdaFunctionScheduledEventAttributes", ID: &iLambdaFunctionScheduledEventAttributes, Members: &mLambdaFunctionScheduledEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_lambdaFunctionStartedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lambdaFunctionStartedEventAttributes", ID: &iLambdaFunctionStartedEventAttributes, Members: &mLambdaFunctionStartedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_lambdaFunctionCompletedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lambdaFunctionCompletedEventAttributes", ID: &iLambdaFunctionCompletedEventAttributes, Members: &mLambdaFunctionCompletedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_lambdaFunctionFailedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lambdaFunctionFailedEventAttributes", ID: &iLambdaFunctionFailedEventAttributes, Members: &mLambdaFunctionFailedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_lambdaFunctionTimedOutEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lambdaFunctionTimedOutEventAttributes", ID: &iLambdaFunctionTimedOutEventAttributes, Members: &mLambdaFunctionTimedOutEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_scheduleLambdaFunctionFailedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduleLambdaFunctionFailedEventAttributes", ID: &iScheduleLambdaFunctionFailedEventAttributes, Members: &mScheduleLambdaFunctionFailedEventAttributes, Type: smithy.ShapeTypeStructure})
+var sHistoryEvent_startLambdaFunctionFailedEventAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startLambdaFunctionFailedEventAttributes", ID: &iStartLambdaFunctionFailedEventAttributes, Members: &mStartLambdaFunctionFailedEventAttributes, Type: smithy.ShapeTypeStructure})
+var s_HistoryEventList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iHistoryEvent, Members: &mHistoryEvent, Type: smithy.ShapeTypeStructure})
+var sLambdaFunctionCompletedEventAttributes_scheduledEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduledEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sLambdaFunctionCompletedEventAttributes_startedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sLambdaFunctionCompletedEventAttributes_result = smithy.NewStaticSchema(smithy.StaticSchema{Member: "result", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sLambdaFunctionFailedEventAttributes_scheduledEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduledEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sLambdaFunctionFailedEventAttributes_startedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sLambdaFunctionFailedEventAttributes_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_FailureReason, Type: smithy.ShapeTypeString})
+var sLambdaFunctionFailedEventAttributes_details = smithy.NewStaticSchema(smithy.StaticSchema{Member: "details", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sLambdaFunctionScheduledEventAttributes_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_FunctionId, Type: smithy.ShapeTypeString})
+var sLambdaFunctionScheduledEventAttributes_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_FunctionName, Type: smithy.ShapeTypeString})
+var sLambdaFunctionScheduledEventAttributes_control = smithy.NewStaticSchema(smithy.StaticSchema{Member: "control", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sLambdaFunctionScheduledEventAttributes_input = smithy.NewStaticSchema(smithy.StaticSchema{Member: "input", ID: &i_FunctionInput, Type: smithy.ShapeTypeString})
+var sLambdaFunctionScheduledEventAttributes_startToCloseTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startToCloseTimeout", ID: &i_DurationInSecondsOptional, Type: smithy.ShapeTypeString})
+var sLambdaFunctionScheduledEventAttributes_decisionTaskCompletedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decisionTaskCompletedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sLambdaFunctionStartedEventAttributes_scheduledEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduledEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sLambdaFunctionTimedOutEventAttributes_scheduledEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduledEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sLambdaFunctionTimedOutEventAttributes_startedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sLambdaFunctionTimedOutEventAttributes_timeoutType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeoutType", ID: &iLambdaFunctionTimeoutType, Members: &mLambdaFunctionTimeoutType, Type: smithy.ShapeTypeEnum})
+var sLambdaFunctionTimeoutType_START_TO_CLOSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "START_TO_CLOSE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLimitExceededFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sMarkerRecordedEventAttributes_markerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "markerName", ID: &i_MarkerName, Type: smithy.ShapeTypeString})
+var sMarkerRecordedEventAttributes_details = smithy.NewStaticSchema(smithy.StaticSchema{Member: "details", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sMarkerRecordedEventAttributes_decisionTaskCompletedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decisionTaskCompletedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sOperationNotPermittedFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sRecordMarkerDecisionAttributes_markerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "markerName", ID: &i_MarkerName, Type: smithy.ShapeTypeString})
+var sRecordMarkerDecisionAttributes_details = smithy.NewStaticSchema(smithy.StaticSchema{Member: "details", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sRecordMarkerFailedCause_OPERATION_NOT_PERMITTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPERATION_NOT_PERMITTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRecordMarkerFailedEventAttributes_markerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "markerName", ID: &i_MarkerName, Type: smithy.ShapeTypeString})
+var sRecordMarkerFailedEventAttributes_cause = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cause", ID: &iRecordMarkerFailedCause, Members: &mRecordMarkerFailedCause, Type: smithy.ShapeTypeEnum})
+var sRecordMarkerFailedEventAttributes_decisionTaskCompletedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decisionTaskCompletedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sRegistrationStatus_REGISTERED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REGISTERED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRegistrationStatus_DEPRECATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPRECATED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRequestCancelActivityTaskDecisionAttributes_activityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activityId", ID: &i_ActivityId, Type: smithy.ShapeTypeString})
+var sRequestCancelActivityTaskFailedCause_ACTIVITY_ID_UNKNOWN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVITY_ID_UNKNOWN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRequestCancelActivityTaskFailedCause_OPERATION_NOT_PERMITTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPERATION_NOT_PERMITTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRequestCancelActivityTaskFailedEventAttributes_activityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activityId", ID: &i_ActivityId, Type: smithy.ShapeTypeString})
+var sRequestCancelActivityTaskFailedEventAttributes_cause = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cause", ID: &iRequestCancelActivityTaskFailedCause, Members: &mRequestCancelActivityTaskFailedCause, Type: smithy.ShapeTypeEnum})
+var sRequestCancelActivityTaskFailedEventAttributes_decisionTaskCompletedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decisionTaskCompletedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sRequestCancelExternalWorkflowExecutionDecisionAttributes_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &i_WorkflowId, Type: smithy.ShapeTypeString})
+var sRequestCancelExternalWorkflowExecutionDecisionAttributes_runId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runId", ID: &i_WorkflowRunIdOptional, Type: smithy.ShapeTypeString})
+var sRequestCancelExternalWorkflowExecutionDecisionAttributes_control = smithy.NewStaticSchema(smithy.StaticSchema{Member: "control", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sRequestCancelExternalWorkflowExecutionFailedCause_UNKNOWN_EXTERNAL_WORKFLOW_EXECUTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN_EXTERNAL_WORKFLOW_EXECUTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRequestCancelExternalWorkflowExecutionFailedCause_REQUEST_CANCEL_EXTERNAL_WORKFLOW_EXECUTION_RATE_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REQUEST_CANCEL_EXTERNAL_WORKFLOW_EXECUTION_RATE_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRequestCancelExternalWorkflowExecutionFailedCause_OPERATION_NOT_PERMITTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPERATION_NOT_PERMITTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRequestCancelExternalWorkflowExecutionFailedEventAttributes_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &i_WorkflowId, Type: smithy.ShapeTypeString})
+var sRequestCancelExternalWorkflowExecutionFailedEventAttributes_runId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runId", ID: &i_WorkflowRunIdOptional, Type: smithy.ShapeTypeString})
+var sRequestCancelExternalWorkflowExecutionFailedEventAttributes_cause = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cause", ID: &iRequestCancelExternalWorkflowExecutionFailedCause, Members: &mRequestCancelExternalWorkflowExecutionFailedCause, Type: smithy.ShapeTypeEnum})
+var sRequestCancelExternalWorkflowExecutionFailedEventAttributes_initiatedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "initiatedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sRequestCancelExternalWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decisionTaskCompletedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sRequestCancelExternalWorkflowExecutionFailedEventAttributes_control = smithy.NewStaticSchema(smithy.StaticSchema{Member: "control", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sRequestCancelExternalWorkflowExecutionInitiatedEventAttributes_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &i_WorkflowId, Type: smithy.ShapeTypeString})
+var sRequestCancelExternalWorkflowExecutionInitiatedEventAttributes_runId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runId", ID: &i_WorkflowRunIdOptional, Type: smithy.ShapeTypeString})
+var sRequestCancelExternalWorkflowExecutionInitiatedEventAttributes_decisionTaskCompletedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decisionTaskCompletedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sRequestCancelExternalWorkflowExecutionInitiatedEventAttributes_control = smithy.NewStaticSchema(smithy.StaticSchema{Member: "control", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sResourceTag_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ResourceTagKey, Type: smithy.ShapeTypeString})
+var sResourceTag_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ResourceTagValue, Type: smithy.ShapeTypeString})
+var s_ResourceTagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ResourceTagKey, Type: smithy.ShapeTypeString})
+var s_ResourceTagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourceTag, Members: &mResourceTag, Type: smithy.ShapeTypeStructure})
+var sScheduleActivityTaskDecisionAttributes_activityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activityType", ID: &iActivityType, Members: &mActivityType, Type: smithy.ShapeTypeStructure})
+var sScheduleActivityTaskDecisionAttributes_activityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activityId", ID: &i_ActivityId, Type: smithy.ShapeTypeString})
+var sScheduleActivityTaskDecisionAttributes_control = smithy.NewStaticSchema(smithy.StaticSchema{Member: "control", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sScheduleActivityTaskDecisionAttributes_input = smithy.NewStaticSchema(smithy.StaticSchema{Member: "input", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sScheduleActivityTaskDecisionAttributes_scheduleToCloseTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduleToCloseTimeout", ID: &i_DurationInSecondsOptional, Type: smithy.ShapeTypeString})
+var sScheduleActivityTaskDecisionAttributes_taskList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskList", ID: &iTaskList, Members: &mTaskList, Type: smithy.ShapeTypeStructure})
+var sScheduleActivityTaskDecisionAttributes_taskPriority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskPriority", ID: &i_TaskPriority, Type: smithy.ShapeTypeString})
+var sScheduleActivityTaskDecisionAttributes_scheduleToStartTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduleToStartTimeout", ID: &i_DurationInSecondsOptional, Type: smithy.ShapeTypeString})
+var sScheduleActivityTaskDecisionAttributes_startToCloseTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startToCloseTimeout", ID: &i_DurationInSecondsOptional, Type: smithy.ShapeTypeString})
+var sScheduleActivityTaskDecisionAttributes_heartbeatTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "heartbeatTimeout", ID: &i_DurationInSecondsOptional, Type: smithy.ShapeTypeString})
+var sScheduleActivityTaskFailedCause_ACTIVITY_TYPE_DEPRECATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVITY_TYPE_DEPRECATED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScheduleActivityTaskFailedCause_ACTIVITY_TYPE_DOES_NOT_EXIST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVITY_TYPE_DOES_NOT_EXIST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScheduleActivityTaskFailedCause_ACTIVITY_ID_ALREADY_IN_USE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVITY_ID_ALREADY_IN_USE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScheduleActivityTaskFailedCause_OPEN_ACTIVITIES_LIMIT_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPEN_ACTIVITIES_LIMIT_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScheduleActivityTaskFailedCause_ACTIVITY_CREATION_RATE_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVITY_CREATION_RATE_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScheduleActivityTaskFailedCause_DEFAULT_SCHEDULE_TO_CLOSE_TIMEOUT_UNDEFINED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEFAULT_SCHEDULE_TO_CLOSE_TIMEOUT_UNDEFINED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScheduleActivityTaskFailedCause_DEFAULT_TASK_LIST_UNDEFINED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEFAULT_TASK_LIST_UNDEFINED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScheduleActivityTaskFailedCause_DEFAULT_SCHEDULE_TO_START_TIMEOUT_UNDEFINED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEFAULT_SCHEDULE_TO_START_TIMEOUT_UNDEFINED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScheduleActivityTaskFailedCause_DEFAULT_START_TO_CLOSE_TIMEOUT_UNDEFINED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEFAULT_START_TO_CLOSE_TIMEOUT_UNDEFINED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScheduleActivityTaskFailedCause_DEFAULT_HEARTBEAT_TIMEOUT_UNDEFINED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEFAULT_HEARTBEAT_TIMEOUT_UNDEFINED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScheduleActivityTaskFailedCause_OPERATION_NOT_PERMITTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPERATION_NOT_PERMITTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScheduleActivityTaskFailedEventAttributes_activityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activityType", ID: &iActivityType, Members: &mActivityType, Type: smithy.ShapeTypeStructure})
+var sScheduleActivityTaskFailedEventAttributes_activityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activityId", ID: &i_ActivityId, Type: smithy.ShapeTypeString})
+var sScheduleActivityTaskFailedEventAttributes_cause = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cause", ID: &iScheduleActivityTaskFailedCause, Members: &mScheduleActivityTaskFailedCause, Type: smithy.ShapeTypeEnum})
+var sScheduleActivityTaskFailedEventAttributes_decisionTaskCompletedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decisionTaskCompletedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sScheduleLambdaFunctionDecisionAttributes_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_FunctionId, Type: smithy.ShapeTypeString})
+var sScheduleLambdaFunctionDecisionAttributes_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_FunctionName, Type: smithy.ShapeTypeString})
+var sScheduleLambdaFunctionDecisionAttributes_control = smithy.NewStaticSchema(smithy.StaticSchema{Member: "control", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sScheduleLambdaFunctionDecisionAttributes_input = smithy.NewStaticSchema(smithy.StaticSchema{Member: "input", ID: &i_FunctionInput, Type: smithy.ShapeTypeString})
+var sScheduleLambdaFunctionDecisionAttributes_startToCloseTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startToCloseTimeout", ID: &i_DurationInSecondsOptional, Type: smithy.ShapeTypeString})
+var sScheduleLambdaFunctionFailedCause_ID_ALREADY_IN_USE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ID_ALREADY_IN_USE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScheduleLambdaFunctionFailedCause_OPEN_LAMBDA_FUNCTIONS_LIMIT_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPEN_LAMBDA_FUNCTIONS_LIMIT_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScheduleLambdaFunctionFailedCause_LAMBDA_FUNCTION_CREATION_RATE_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAMBDA_FUNCTION_CREATION_RATE_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScheduleLambdaFunctionFailedCause_LAMBDA_SERVICE_NOT_AVAILABLE_IN_REGION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAMBDA_SERVICE_NOT_AVAILABLE_IN_REGION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScheduleLambdaFunctionFailedEventAttributes_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_FunctionId, Type: smithy.ShapeTypeString})
+var sScheduleLambdaFunctionFailedEventAttributes_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_FunctionName, Type: smithy.ShapeTypeString})
+var sScheduleLambdaFunctionFailedEventAttributes_cause = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cause", ID: &iScheduleLambdaFunctionFailedCause, Members: &mScheduleLambdaFunctionFailedCause, Type: smithy.ShapeTypeEnum})
+var sScheduleLambdaFunctionFailedEventAttributes_decisionTaskCompletedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decisionTaskCompletedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sSignalExternalWorkflowExecutionDecisionAttributes_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &i_WorkflowId, Type: smithy.ShapeTypeString})
+var sSignalExternalWorkflowExecutionDecisionAttributes_runId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runId", ID: &i_WorkflowRunIdOptional, Type: smithy.ShapeTypeString})
+var sSignalExternalWorkflowExecutionDecisionAttributes_signalName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signalName", ID: &i_SignalName, Type: smithy.ShapeTypeString})
+var sSignalExternalWorkflowExecutionDecisionAttributes_input = smithy.NewStaticSchema(smithy.StaticSchema{Member: "input", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sSignalExternalWorkflowExecutionDecisionAttributes_control = smithy.NewStaticSchema(smithy.StaticSchema{Member: "control", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sSignalExternalWorkflowExecutionFailedCause_UNKNOWN_EXTERNAL_WORKFLOW_EXECUTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN_EXTERNAL_WORKFLOW_EXECUTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSignalExternalWorkflowExecutionFailedCause_SIGNAL_EXTERNAL_WORKFLOW_EXECUTION_RATE_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SIGNAL_EXTERNAL_WORKFLOW_EXECUTION_RATE_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSignalExternalWorkflowExecutionFailedCause_OPERATION_NOT_PERMITTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPERATION_NOT_PERMITTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSignalExternalWorkflowExecutionFailedEventAttributes_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &i_WorkflowId, Type: smithy.ShapeTypeString})
+var sSignalExternalWorkflowExecutionFailedEventAttributes_runId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runId", ID: &i_WorkflowRunIdOptional, Type: smithy.ShapeTypeString})
+var sSignalExternalWorkflowExecutionFailedEventAttributes_cause = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cause", ID: &iSignalExternalWorkflowExecutionFailedCause, Members: &mSignalExternalWorkflowExecutionFailedCause, Type: smithy.ShapeTypeEnum})
+var sSignalExternalWorkflowExecutionFailedEventAttributes_initiatedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "initiatedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sSignalExternalWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decisionTaskCompletedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sSignalExternalWorkflowExecutionFailedEventAttributes_control = smithy.NewStaticSchema(smithy.StaticSchema{Member: "control", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sSignalExternalWorkflowExecutionInitiatedEventAttributes_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &i_WorkflowId, Type: smithy.ShapeTypeString})
+var sSignalExternalWorkflowExecutionInitiatedEventAttributes_runId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runId", ID: &i_WorkflowRunIdOptional, Type: smithy.ShapeTypeString})
+var sSignalExternalWorkflowExecutionInitiatedEventAttributes_signalName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signalName", ID: &i_SignalName, Type: smithy.ShapeTypeString})
+var sSignalExternalWorkflowExecutionInitiatedEventAttributes_input = smithy.NewStaticSchema(smithy.StaticSchema{Member: "input", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sSignalExternalWorkflowExecutionInitiatedEventAttributes_decisionTaskCompletedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decisionTaskCompletedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sSignalExternalWorkflowExecutionInitiatedEventAttributes_control = smithy.NewStaticSchema(smithy.StaticSchema{Member: "control", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sStartChildWorkflowExecutionDecisionAttributes_workflowType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowType", ID: &iWorkflowType, Members: &mWorkflowType, Type: smithy.ShapeTypeStructure})
+var sStartChildWorkflowExecutionDecisionAttributes_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &i_WorkflowId, Type: smithy.ShapeTypeString})
+var sStartChildWorkflowExecutionDecisionAttributes_control = smithy.NewStaticSchema(smithy.StaticSchema{Member: "control", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sStartChildWorkflowExecutionDecisionAttributes_input = smithy.NewStaticSchema(smithy.StaticSchema{Member: "input", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sStartChildWorkflowExecutionDecisionAttributes_executionStartToCloseTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionStartToCloseTimeout", ID: &i_DurationInSecondsOptional, Type: smithy.ShapeTypeString})
+var sStartChildWorkflowExecutionDecisionAttributes_taskList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskList", ID: &iTaskList, Members: &mTaskList, Type: smithy.ShapeTypeStructure})
+var sStartChildWorkflowExecutionDecisionAttributes_taskPriority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskPriority", ID: &i_TaskPriority, Type: smithy.ShapeTypeString})
+var sStartChildWorkflowExecutionDecisionAttributes_taskStartToCloseTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskStartToCloseTimeout", ID: &i_DurationInSecondsOptional, Type: smithy.ShapeTypeString})
+var sStartChildWorkflowExecutionDecisionAttributes_childPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "childPolicy", ID: &iChildPolicy, Members: &mChildPolicy, Type: smithy.ShapeTypeEnum})
+var sStartChildWorkflowExecutionDecisionAttributes_tagList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagList", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sStartChildWorkflowExecutionDecisionAttributes_lambdaRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lambdaRole", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sStartChildWorkflowExecutionFailedCause_WORKFLOW_TYPE_DOES_NOT_EXIST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WORKFLOW_TYPE_DOES_NOT_EXIST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStartChildWorkflowExecutionFailedCause_WORKFLOW_TYPE_DEPRECATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WORKFLOW_TYPE_DEPRECATED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStartChildWorkflowExecutionFailedCause_OPEN_CHILDREN_LIMIT_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPEN_CHILDREN_LIMIT_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStartChildWorkflowExecutionFailedCause_OPEN_WORKFLOWS_LIMIT_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPEN_WORKFLOWS_LIMIT_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStartChildWorkflowExecutionFailedCause_CHILD_CREATION_RATE_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CHILD_CREATION_RATE_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStartChildWorkflowExecutionFailedCause_WORKFLOW_ALREADY_RUNNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WORKFLOW_ALREADY_RUNNING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStartChildWorkflowExecutionFailedCause_DEFAULT_EXECUTION_START_TO_CLOSE_TIMEOUT_UNDEFINED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEFAULT_EXECUTION_START_TO_CLOSE_TIMEOUT_UNDEFINED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStartChildWorkflowExecutionFailedCause_DEFAULT_TASK_LIST_UNDEFINED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEFAULT_TASK_LIST_UNDEFINED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStartChildWorkflowExecutionFailedCause_DEFAULT_TASK_START_TO_CLOSE_TIMEOUT_UNDEFINED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEFAULT_TASK_START_TO_CLOSE_TIMEOUT_UNDEFINED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStartChildWorkflowExecutionFailedCause_DEFAULT_CHILD_POLICY_UNDEFINED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEFAULT_CHILD_POLICY_UNDEFINED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStartChildWorkflowExecutionFailedCause_OPERATION_NOT_PERMITTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPERATION_NOT_PERMITTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStartChildWorkflowExecutionFailedEventAttributes_workflowType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowType", ID: &iWorkflowType, Members: &mWorkflowType, Type: smithy.ShapeTypeStructure})
+var sStartChildWorkflowExecutionFailedEventAttributes_cause = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cause", ID: &iStartChildWorkflowExecutionFailedCause, Members: &mStartChildWorkflowExecutionFailedCause, Type: smithy.ShapeTypeEnum})
+var sStartChildWorkflowExecutionFailedEventAttributes_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &i_WorkflowId, Type: smithy.ShapeTypeString})
+var sStartChildWorkflowExecutionFailedEventAttributes_initiatedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "initiatedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sStartChildWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decisionTaskCompletedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sStartChildWorkflowExecutionFailedEventAttributes_control = smithy.NewStaticSchema(smithy.StaticSchema{Member: "control", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sStartChildWorkflowExecutionInitiatedEventAttributes_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &i_WorkflowId, Type: smithy.ShapeTypeString})
+var sStartChildWorkflowExecutionInitiatedEventAttributes_workflowType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowType", ID: &iWorkflowType, Members: &mWorkflowType, Type: smithy.ShapeTypeStructure})
+var sStartChildWorkflowExecutionInitiatedEventAttributes_control = smithy.NewStaticSchema(smithy.StaticSchema{Member: "control", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sStartChildWorkflowExecutionInitiatedEventAttributes_input = smithy.NewStaticSchema(smithy.StaticSchema{Member: "input", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sStartChildWorkflowExecutionInitiatedEventAttributes_executionStartToCloseTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionStartToCloseTimeout", ID: &i_DurationInSecondsOptional, Type: smithy.ShapeTypeString})
+var sStartChildWorkflowExecutionInitiatedEventAttributes_taskList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskList", ID: &iTaskList, Members: &mTaskList, Type: smithy.ShapeTypeStructure})
+var sStartChildWorkflowExecutionInitiatedEventAttributes_taskPriority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskPriority", ID: &i_TaskPriority, Type: smithy.ShapeTypeString})
+var sStartChildWorkflowExecutionInitiatedEventAttributes_decisionTaskCompletedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decisionTaskCompletedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sStartChildWorkflowExecutionInitiatedEventAttributes_childPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "childPolicy", ID: &iChildPolicy, Members: &mChildPolicy, Type: smithy.ShapeTypeEnum})
+var sStartChildWorkflowExecutionInitiatedEventAttributes_taskStartToCloseTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskStartToCloseTimeout", ID: &i_DurationInSecondsOptional, Type: smithy.ShapeTypeString})
+var sStartChildWorkflowExecutionInitiatedEventAttributes_tagList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagList", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sStartChildWorkflowExecutionInitiatedEventAttributes_lambdaRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lambdaRole", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sStartLambdaFunctionFailedCause_ASSUME_ROLE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASSUME_ROLE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStartLambdaFunctionFailedEventAttributes_scheduledEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduledEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sStartLambdaFunctionFailedEventAttributes_cause = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cause", ID: &iStartLambdaFunctionFailedCause, Members: &mStartLambdaFunctionFailedCause, Type: smithy.ShapeTypeEnum})
+var sStartLambdaFunctionFailedEventAttributes_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_CauseMessage, Type: smithy.ShapeTypeString})
+var sStartTimerDecisionAttributes_timerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timerId", ID: &i_TimerId, Type: smithy.ShapeTypeString})
+var sStartTimerDecisionAttributes_control = smithy.NewStaticSchema(smithy.StaticSchema{Member: "control", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sStartTimerDecisionAttributes_startToFireTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startToFireTimeout", ID: &i_DurationInSeconds, Type: smithy.ShapeTypeString})
+var sStartTimerFailedCause_TIMER_ID_ALREADY_IN_USE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIMER_ID_ALREADY_IN_USE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStartTimerFailedCause_OPEN_TIMERS_LIMIT_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPEN_TIMERS_LIMIT_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStartTimerFailedCause_TIMER_CREATION_RATE_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIMER_CREATION_RATE_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStartTimerFailedCause_OPERATION_NOT_PERMITTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPERATION_NOT_PERMITTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStartTimerFailedEventAttributes_timerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timerId", ID: &i_TimerId, Type: smithy.ShapeTypeString})
+var sStartTimerFailedEventAttributes_cause = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cause", ID: &iStartTimerFailedCause, Members: &mStartTimerFailedCause, Type: smithy.ShapeTypeEnum})
+var sStartTimerFailedEventAttributes_decisionTaskCompletedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decisionTaskCompletedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sTagFilter_tag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tag", ID: &i_Tag, Type: smithy.ShapeTypeString})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Tag, Type: smithy.ShapeTypeString})
+var sTaskList_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_Name, Type: smithy.ShapeTypeString})
+var sTimerCanceledEventAttributes_timerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timerId", ID: &i_TimerId, Type: smithy.ShapeTypeString})
+var sTimerCanceledEventAttributes_startedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sTimerCanceledEventAttributes_decisionTaskCompletedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decisionTaskCompletedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sTimerFiredEventAttributes_timerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timerId", ID: &i_TimerId, Type: smithy.ShapeTypeString})
+var sTimerFiredEventAttributes_startedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sTimerStartedEventAttributes_timerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timerId", ID: &i_TimerId, Type: smithy.ShapeTypeString})
+var sTimerStartedEventAttributes_control = smithy.NewStaticSchema(smithy.StaticSchema{Member: "control", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sTimerStartedEventAttributes_startToFireTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startToFireTimeout", ID: &i_DurationInSeconds, Type: smithy.ShapeTypeString})
+var sTimerStartedEventAttributes_decisionTaskCompletedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decisionTaskCompletedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sTooManyTagsFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sTypeAlreadyExistsFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sTypeDeprecatedFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sTypeNotDeprecatedFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sUnknownResourceFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sWorkflowExecution_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &i_WorkflowId, Type: smithy.ShapeTypeString})
+var sWorkflowExecution_runId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runId", ID: &i_WorkflowRunId, Type: smithy.ShapeTypeString})
+var sWorkflowExecutionAlreadyStartedFault_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sWorkflowExecutionCanceledEventAttributes_details = smithy.NewStaticSchema(smithy.StaticSchema{Member: "details", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sWorkflowExecutionCanceledEventAttributes_decisionTaskCompletedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decisionTaskCompletedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sWorkflowExecutionCancelRequestedCause_CHILD_POLICY_APPLIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CHILD_POLICY_APPLIED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sWorkflowExecutionCancelRequestedEventAttributes_externalWorkflowExecution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalWorkflowExecution", ID: &iWorkflowExecution, Members: &mWorkflowExecution, Type: smithy.ShapeTypeStructure})
+var sWorkflowExecutionCancelRequestedEventAttributes_externalInitiatedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalInitiatedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sWorkflowExecutionCancelRequestedEventAttributes_cause = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cause", ID: &iWorkflowExecutionCancelRequestedCause, Members: &mWorkflowExecutionCancelRequestedCause, Type: smithy.ShapeTypeEnum})
+var sWorkflowExecutionCompletedEventAttributes_result = smithy.NewStaticSchema(smithy.StaticSchema{Member: "result", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sWorkflowExecutionCompletedEventAttributes_decisionTaskCompletedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decisionTaskCompletedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sWorkflowExecutionConfiguration_taskStartToCloseTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskStartToCloseTimeout", ID: &i_DurationInSeconds, Type: smithy.ShapeTypeString})
+var sWorkflowExecutionConfiguration_executionStartToCloseTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionStartToCloseTimeout", ID: &i_DurationInSeconds, Type: smithy.ShapeTypeString})
+var sWorkflowExecutionConfiguration_taskList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskList", ID: &iTaskList, Members: &mTaskList, Type: smithy.ShapeTypeStructure})
+var sWorkflowExecutionConfiguration_taskPriority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskPriority", ID: &i_TaskPriority, Type: smithy.ShapeTypeString})
+var sWorkflowExecutionConfiguration_childPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "childPolicy", ID: &iChildPolicy, Members: &mChildPolicy, Type: smithy.ShapeTypeEnum})
+var sWorkflowExecutionConfiguration_lambdaRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lambdaRole", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sWorkflowExecutionContinuedAsNewEventAttributes_input = smithy.NewStaticSchema(smithy.StaticSchema{Member: "input", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sWorkflowExecutionContinuedAsNewEventAttributes_decisionTaskCompletedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decisionTaskCompletedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sWorkflowExecutionContinuedAsNewEventAttributes_newExecutionRunId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "newExecutionRunId", ID: &i_WorkflowRunId, Type: smithy.ShapeTypeString})
+var sWorkflowExecutionContinuedAsNewEventAttributes_executionStartToCloseTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionStartToCloseTimeout", ID: &i_DurationInSecondsOptional, Type: smithy.ShapeTypeString})
+var sWorkflowExecutionContinuedAsNewEventAttributes_taskList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskList", ID: &iTaskList, Members: &mTaskList, Type: smithy.ShapeTypeStructure})
+var sWorkflowExecutionContinuedAsNewEventAttributes_taskPriority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskPriority", ID: &i_TaskPriority, Type: smithy.ShapeTypeString})
+var sWorkflowExecutionContinuedAsNewEventAttributes_taskStartToCloseTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskStartToCloseTimeout", ID: &i_DurationInSecondsOptional, Type: smithy.ShapeTypeString})
+var sWorkflowExecutionContinuedAsNewEventAttributes_childPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "childPolicy", ID: &iChildPolicy, Members: &mChildPolicy, Type: smithy.ShapeTypeEnum})
+var sWorkflowExecutionContinuedAsNewEventAttributes_tagList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagList", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sWorkflowExecutionContinuedAsNewEventAttributes_workflowType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowType", ID: &iWorkflowType, Members: &mWorkflowType, Type: smithy.ShapeTypeStructure})
+var sWorkflowExecutionContinuedAsNewEventAttributes_lambdaRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lambdaRole", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sWorkflowExecutionFailedEventAttributes_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_FailureReason, Type: smithy.ShapeTypeString})
+var sWorkflowExecutionFailedEventAttributes_details = smithy.NewStaticSchema(smithy.StaticSchema{Member: "details", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decisionTaskCompletedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sWorkflowExecutionFilter_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &i_WorkflowId, Type: smithy.ShapeTypeString})
+var sWorkflowExecutionInfo_execution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "execution", ID: &iWorkflowExecution, Members: &mWorkflowExecution, Type: smithy.ShapeTypeStructure})
+var sWorkflowExecutionInfo_workflowType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowType", ID: &iWorkflowType, Members: &mWorkflowType, Type: smithy.ShapeTypeStructure})
+var sWorkflowExecutionInfo_startTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sWorkflowExecutionInfo_closeTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "closeTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sWorkflowExecutionInfo_executionStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionStatus", ID: &iExecutionStatus, Members: &mExecutionStatus, Type: smithy.ShapeTypeEnum})
+var sWorkflowExecutionInfo_closeStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "closeStatus", ID: &iCloseStatus, Members: &mCloseStatus, Type: smithy.ShapeTypeEnum})
+var sWorkflowExecutionInfo_parent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parent", ID: &iWorkflowExecution, Members: &mWorkflowExecution, Type: smithy.ShapeTypeStructure})
+var sWorkflowExecutionInfo_tagList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagList", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sWorkflowExecutionInfo_cancelRequested = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cancelRequested", ID: &i_Canceled, Type: smithy.ShapeTypeBoolean})
+var s_WorkflowExecutionInfoList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWorkflowExecutionInfo, Members: &mWorkflowExecutionInfo, Type: smithy.ShapeTypeStructure})
+var sWorkflowExecutionOpenCounts_openActivityTasks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "openActivityTasks", ID: &i_Count, Type: smithy.ShapeTypeInteger})
+var sWorkflowExecutionOpenCounts_openDecisionTasks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "openDecisionTasks", ID: &i_OpenDecisionTasksCount, Type: smithy.ShapeTypeInteger})
+var sWorkflowExecutionOpenCounts_openTimers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "openTimers", ID: &i_Count, Type: smithy.ShapeTypeInteger})
+var sWorkflowExecutionOpenCounts_openChildWorkflowExecutions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "openChildWorkflowExecutions", ID: &i_Count, Type: smithy.ShapeTypeInteger})
+var sWorkflowExecutionOpenCounts_openLambdaFunctions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "openLambdaFunctions", ID: &i_Count, Type: smithy.ShapeTypeInteger})
+var sWorkflowExecutionSignaledEventAttributes_signalName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signalName", ID: &i_SignalName, Type: smithy.ShapeTypeString})
+var sWorkflowExecutionSignaledEventAttributes_input = smithy.NewStaticSchema(smithy.StaticSchema{Member: "input", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sWorkflowExecutionSignaledEventAttributes_externalWorkflowExecution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalWorkflowExecution", ID: &iWorkflowExecution, Members: &mWorkflowExecution, Type: smithy.ShapeTypeStructure})
+var sWorkflowExecutionSignaledEventAttributes_externalInitiatedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalInitiatedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sWorkflowExecutionStartedEventAttributes_input = smithy.NewStaticSchema(smithy.StaticSchema{Member: "input", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sWorkflowExecutionStartedEventAttributes_executionStartToCloseTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionStartToCloseTimeout", ID: &i_DurationInSecondsOptional, Type: smithy.ShapeTypeString})
+var sWorkflowExecutionStartedEventAttributes_taskStartToCloseTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskStartToCloseTimeout", ID: &i_DurationInSecondsOptional, Type: smithy.ShapeTypeString})
+var sWorkflowExecutionStartedEventAttributes_childPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "childPolicy", ID: &iChildPolicy, Members: &mChildPolicy, Type: smithy.ShapeTypeEnum})
+var sWorkflowExecutionStartedEventAttributes_taskList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskList", ID: &iTaskList, Members: &mTaskList, Type: smithy.ShapeTypeStructure})
+var sWorkflowExecutionStartedEventAttributes_taskPriority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskPriority", ID: &i_TaskPriority, Type: smithy.ShapeTypeString})
+var sWorkflowExecutionStartedEventAttributes_workflowType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowType", ID: &iWorkflowType, Members: &mWorkflowType, Type: smithy.ShapeTypeStructure})
+var sWorkflowExecutionStartedEventAttributes_tagList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagList", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sWorkflowExecutionStartedEventAttributes_continuedExecutionRunId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "continuedExecutionRunId", ID: &i_WorkflowRunIdOptional, Type: smithy.ShapeTypeString})
+var sWorkflowExecutionStartedEventAttributes_parentWorkflowExecution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentWorkflowExecution", ID: &iWorkflowExecution, Members: &mWorkflowExecution, Type: smithy.ShapeTypeStructure})
+var sWorkflowExecutionStartedEventAttributes_parentInitiatedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentInitiatedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sWorkflowExecutionStartedEventAttributes_lambdaRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lambdaRole", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sWorkflowExecutionTerminatedCause_CHILD_POLICY_APPLIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CHILD_POLICY_APPLIED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sWorkflowExecutionTerminatedCause_EVENT_LIMIT_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EVENT_LIMIT_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sWorkflowExecutionTerminatedCause_OPERATOR_INITIATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPERATOR_INITIATED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sWorkflowExecutionTerminatedEventAttributes_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_TerminateReason, Type: smithy.ShapeTypeString})
+var sWorkflowExecutionTerminatedEventAttributes_details = smithy.NewStaticSchema(smithy.StaticSchema{Member: "details", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sWorkflowExecutionTerminatedEventAttributes_childPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "childPolicy", ID: &iChildPolicy, Members: &mChildPolicy, Type: smithy.ShapeTypeEnum})
+var sWorkflowExecutionTerminatedEventAttributes_cause = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cause", ID: &iWorkflowExecutionTerminatedCause, Members: &mWorkflowExecutionTerminatedCause, Type: smithy.ShapeTypeEnum})
+var sWorkflowExecutionTimedOutEventAttributes_timeoutType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeoutType", ID: &iWorkflowExecutionTimeoutType, Members: &mWorkflowExecutionTimeoutType, Type: smithy.ShapeTypeEnum})
+var sWorkflowExecutionTimedOutEventAttributes_childPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "childPolicy", ID: &iChildPolicy, Members: &mChildPolicy, Type: smithy.ShapeTypeEnum})
+var sWorkflowExecutionTimeoutType_START_TO_CLOSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "START_TO_CLOSE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sWorkflowType_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_Name, Type: smithy.ShapeTypeString})
+var sWorkflowType_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_Version, Type: smithy.ShapeTypeString})
+var sWorkflowTypeConfiguration_defaultTaskStartToCloseTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultTaskStartToCloseTimeout", ID: &i_DurationInSecondsOptional, Type: smithy.ShapeTypeString})
+var sWorkflowTypeConfiguration_defaultExecutionStartToCloseTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultExecutionStartToCloseTimeout", ID: &i_DurationInSecondsOptional, Type: smithy.ShapeTypeString})
+var sWorkflowTypeConfiguration_defaultTaskList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultTaskList", ID: &iTaskList, Members: &mTaskList, Type: smithy.ShapeTypeStructure})
+var sWorkflowTypeConfiguration_defaultTaskPriority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultTaskPriority", ID: &i_TaskPriority, Type: smithy.ShapeTypeString})
+var sWorkflowTypeConfiguration_defaultChildPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultChildPolicy", ID: &iChildPolicy, Members: &mChildPolicy, Type: smithy.ShapeTypeEnum})
+var sWorkflowTypeConfiguration_defaultLambdaRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultLambdaRole", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sWorkflowTypeFilter_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_Name, Type: smithy.ShapeTypeString})
+var sWorkflowTypeFilter_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_VersionOptional, Type: smithy.ShapeTypeString})
+var sWorkflowTypeInfo_workflowType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowType", ID: &iWorkflowType, Members: &mWorkflowType, Type: smithy.ShapeTypeStructure})
+var sWorkflowTypeInfo_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iRegistrationStatus, Members: &mRegistrationStatus, Type: smithy.ShapeTypeEnum})
+var sWorkflowTypeInfo_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sWorkflowTypeInfo_creationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sWorkflowTypeInfo_deprecationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deprecationDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var s_WorkflowTypeInfoList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWorkflowTypeInfo, Members: &mWorkflowTypeInfo, Type: smithy.ShapeTypeStructure})
+var sCountClosedWorkflowExecutionsInput_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sCountClosedWorkflowExecutionsInput_startTimeFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTimeFilter", ID: &iExecutionTimeFilter, Members: &mExecutionTimeFilter, Type: smithy.ShapeTypeStructure})
+var sCountClosedWorkflowExecutionsInput_closeTimeFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "closeTimeFilter", ID: &iExecutionTimeFilter, Members: &mExecutionTimeFilter, Type: smithy.ShapeTypeStructure})
+var sCountClosedWorkflowExecutionsInput_executionFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionFilter", ID: &iWorkflowExecutionFilter, Members: &mWorkflowExecutionFilter, Type: smithy.ShapeTypeStructure})
+var sCountClosedWorkflowExecutionsInput_typeFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "typeFilter", ID: &iWorkflowTypeFilter, Members: &mWorkflowTypeFilter, Type: smithy.ShapeTypeStructure})
+var sCountClosedWorkflowExecutionsInput_tagFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagFilter", ID: &iTagFilter, Members: &mTagFilter, Type: smithy.ShapeTypeStructure})
+var sCountClosedWorkflowExecutionsInput_closeStatusFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "closeStatusFilter", ID: &iCloseStatusFilter, Members: &mCloseStatusFilter, Type: smithy.ShapeTypeStructure})
+var sWorkflowExecutionCount_count = smithy.NewStaticSchema(smithy.StaticSchema{Member: "count", ID: &i_Count, Type: smithy.ShapeTypeInteger})
+var sWorkflowExecutionCount_truncated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "truncated", ID: &i_Truncated, Type: smithy.ShapeTypeBoolean})
+var sCountOpenWorkflowExecutionsInput_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sCountOpenWorkflowExecutionsInput_startTimeFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTimeFilter", ID: &iExecutionTimeFilter, Members: &mExecutionTimeFilter, Type: smithy.ShapeTypeStructure})
+var sCountOpenWorkflowExecutionsInput_typeFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "typeFilter", ID: &iWorkflowTypeFilter, Members: &mWorkflowTypeFilter, Type: smithy.ShapeTypeStructure})
+var sCountOpenWorkflowExecutionsInput_tagFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagFilter", ID: &iTagFilter, Members: &mTagFilter, Type: smithy.ShapeTypeStructure})
+var sCountOpenWorkflowExecutionsInput_executionFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionFilter", ID: &iWorkflowExecutionFilter, Members: &mWorkflowExecutionFilter, Type: smithy.ShapeTypeStructure})
+var sCountPendingActivityTasksInput_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sCountPendingActivityTasksInput_taskList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskList", ID: &iTaskList, Members: &mTaskList, Type: smithy.ShapeTypeStructure})
+var sPendingTaskCount_count = smithy.NewStaticSchema(smithy.StaticSchema{Member: "count", ID: &i_Count, Type: smithy.ShapeTypeInteger})
+var sPendingTaskCount_truncated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "truncated", ID: &i_Truncated, Type: smithy.ShapeTypeBoolean})
+var sCountPendingDecisionTasksInput_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sCountPendingDecisionTasksInput_taskList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskList", ID: &iTaskList, Members: &mTaskList, Type: smithy.ShapeTypeStructure})
+var sDeleteActivityTypeInput_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sDeleteActivityTypeInput_activityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activityType", ID: &iActivityType, Members: &mActivityType, Type: smithy.ShapeTypeStructure})
+var sDeleteWorkflowTypeInput_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sDeleteWorkflowTypeInput_workflowType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowType", ID: &iWorkflowType, Members: &mWorkflowType, Type: smithy.ShapeTypeStructure})
+var sDeprecateActivityTypeInput_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sDeprecateActivityTypeInput_activityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activityType", ID: &iActivityType, Members: &mActivityType, Type: smithy.ShapeTypeStructure})
+var sDeprecateDomainInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sDeprecateWorkflowTypeInput_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sDeprecateWorkflowTypeInput_workflowType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowType", ID: &iWorkflowType, Members: &mWorkflowType, Type: smithy.ShapeTypeStructure})
+var sDescribeActivityTypeInput_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sDescribeActivityTypeInput_activityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activityType", ID: &iActivityType, Members: &mActivityType, Type: smithy.ShapeTypeStructure})
+var sActivityTypeDetail_typeInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "typeInfo", ID: &iActivityTypeInfo, Members: &mActivityTypeInfo, Type: smithy.ShapeTypeStructure})
+var sActivityTypeDetail_configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuration", ID: &iActivityTypeConfiguration, Members: &mActivityTypeConfiguration, Type: smithy.ShapeTypeStructure})
+var sDescribeDomainInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sDomainDetail_domainInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainInfo", ID: &iDomainInfo, Members: &mDomainInfo, Type: smithy.ShapeTypeStructure})
+var sDomainDetail_configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuration", ID: &iDomainConfiguration, Members: &mDomainConfiguration, Type: smithy.ShapeTypeStructure})
+var sDescribeWorkflowExecutionInput_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sDescribeWorkflowExecutionInput_execution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "execution", ID: &iWorkflowExecution, Members: &mWorkflowExecution, Type: smithy.ShapeTypeStructure})
+var sWorkflowExecutionDetail_executionInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionInfo", ID: &iWorkflowExecutionInfo, Members: &mWorkflowExecutionInfo, Type: smithy.ShapeTypeStructure})
+var sWorkflowExecutionDetail_executionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionConfiguration", ID: &iWorkflowExecutionConfiguration, Members: &mWorkflowExecutionConfiguration, Type: smithy.ShapeTypeStructure})
+var sWorkflowExecutionDetail_openCounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "openCounts", ID: &iWorkflowExecutionOpenCounts, Members: &mWorkflowExecutionOpenCounts, Type: smithy.ShapeTypeStructure})
+var sWorkflowExecutionDetail_latestActivityTaskTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestActivityTaskTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sWorkflowExecutionDetail_latestExecutionContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestExecutionContext", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sDescribeWorkflowTypeInput_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sDescribeWorkflowTypeInput_workflowType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowType", ID: &iWorkflowType, Members: &mWorkflowType, Type: smithy.ShapeTypeStructure})
+var sWorkflowTypeDetail_typeInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "typeInfo", ID: &iWorkflowTypeInfo, Members: &mWorkflowTypeInfo, Type: smithy.ShapeTypeStructure})
+var sWorkflowTypeDetail_configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuration", ID: &iWorkflowTypeConfiguration, Members: &mWorkflowTypeConfiguration, Type: smithy.ShapeTypeStructure})
+var sGetWorkflowExecutionHistoryInput_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sGetWorkflowExecutionHistoryInput_execution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "execution", ID: &iWorkflowExecution, Members: &mWorkflowExecution, Type: smithy.ShapeTypeStructure})
+var sGetWorkflowExecutionHistoryInput_nextPageToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextPageToken", ID: &i_PageToken, Type: smithy.ShapeTypeString})
+var sGetWorkflowExecutionHistoryInput_maximumPageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maximumPageSize", ID: &i_PageSize, Type: smithy.ShapeTypeInteger})
+var sGetWorkflowExecutionHistoryInput_reverseOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reverseOrder", ID: &i_ReverseOrder, Type: smithy.ShapeTypeBoolean})
+var sHistory_events = smithy.NewStaticSchema(smithy.StaticSchema{Member: "events", ID: &i_HistoryEventList, Members: &m_HistoryEventList, Type: smithy.ShapeTypeList})
+var sHistory_nextPageToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextPageToken", ID: &i_PageToken, Type: smithy.ShapeTypeString})
+var sListActivityTypesInput_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sListActivityTypesInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_Name, Type: smithy.ShapeTypeString})
+var sListActivityTypesInput_registrationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registrationStatus", ID: &iRegistrationStatus, Members: &mRegistrationStatus, Type: smithy.ShapeTypeEnum})
+var sListActivityTypesInput_nextPageToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextPageToken", ID: &i_PageToken, Type: smithy.ShapeTypeString})
+var sListActivityTypesInput_maximumPageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maximumPageSize", ID: &i_PageSize, Type: smithy.ShapeTypeInteger})
+var sListActivityTypesInput_reverseOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reverseOrder", ID: &i_ReverseOrder, Type: smithy.ShapeTypeBoolean})
+var sActivityTypeInfos_typeInfos = smithy.NewStaticSchema(smithy.StaticSchema{Member: "typeInfos", ID: &i_ActivityTypeInfoList, Members: &m_ActivityTypeInfoList, Type: smithy.ShapeTypeList})
+var sActivityTypeInfos_nextPageToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextPageToken", ID: &i_PageToken, Type: smithy.ShapeTypeString})
+var sListClosedWorkflowExecutionsInput_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sListClosedWorkflowExecutionsInput_startTimeFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTimeFilter", ID: &iExecutionTimeFilter, Members: &mExecutionTimeFilter, Type: smithy.ShapeTypeStructure})
+var sListClosedWorkflowExecutionsInput_closeTimeFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "closeTimeFilter", ID: &iExecutionTimeFilter, Members: &mExecutionTimeFilter, Type: smithy.ShapeTypeStructure})
+var sListClosedWorkflowExecutionsInput_executionFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionFilter", ID: &iWorkflowExecutionFilter, Members: &mWorkflowExecutionFilter, Type: smithy.ShapeTypeStructure})
+var sListClosedWorkflowExecutionsInput_closeStatusFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "closeStatusFilter", ID: &iCloseStatusFilter, Members: &mCloseStatusFilter, Type: smithy.ShapeTypeStructure})
+var sListClosedWorkflowExecutionsInput_typeFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "typeFilter", ID: &iWorkflowTypeFilter, Members: &mWorkflowTypeFilter, Type: smithy.ShapeTypeStructure})
+var sListClosedWorkflowExecutionsInput_tagFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagFilter", ID: &iTagFilter, Members: &mTagFilter, Type: smithy.ShapeTypeStructure})
+var sListClosedWorkflowExecutionsInput_nextPageToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextPageToken", ID: &i_PageToken, Type: smithy.ShapeTypeString})
+var sListClosedWorkflowExecutionsInput_maximumPageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maximumPageSize", ID: &i_PageSize, Type: smithy.ShapeTypeInteger})
+var sListClosedWorkflowExecutionsInput_reverseOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reverseOrder", ID: &i_ReverseOrder, Type: smithy.ShapeTypeBoolean})
+var sWorkflowExecutionInfos_executionInfos = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionInfos", ID: &i_WorkflowExecutionInfoList, Members: &m_WorkflowExecutionInfoList, Type: smithy.ShapeTypeList})
+var sWorkflowExecutionInfos_nextPageToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextPageToken", ID: &i_PageToken, Type: smithy.ShapeTypeString})
+var sListDomainsInput_nextPageToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextPageToken", ID: &i_PageToken, Type: smithy.ShapeTypeString})
+var sListDomainsInput_registrationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registrationStatus", ID: &iRegistrationStatus, Members: &mRegistrationStatus, Type: smithy.ShapeTypeEnum})
+var sListDomainsInput_maximumPageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maximumPageSize", ID: &i_PageSize, Type: smithy.ShapeTypeInteger})
+var sListDomainsInput_reverseOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reverseOrder", ID: &i_ReverseOrder, Type: smithy.ShapeTypeBoolean})
+var sDomainInfos_domainInfos = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainInfos", ID: &i_DomainInfoList, Members: &m_DomainInfoList, Type: smithy.ShapeTypeList})
+var sDomainInfos_nextPageToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextPageToken", ID: &i_PageToken, Type: smithy.ShapeTypeString})
+var sListOpenWorkflowExecutionsInput_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sListOpenWorkflowExecutionsInput_startTimeFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTimeFilter", ID: &iExecutionTimeFilter, Members: &mExecutionTimeFilter, Type: smithy.ShapeTypeStructure})
+var sListOpenWorkflowExecutionsInput_typeFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "typeFilter", ID: &iWorkflowTypeFilter, Members: &mWorkflowTypeFilter, Type: smithy.ShapeTypeStructure})
+var sListOpenWorkflowExecutionsInput_tagFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagFilter", ID: &iTagFilter, Members: &mTagFilter, Type: smithy.ShapeTypeStructure})
+var sListOpenWorkflowExecutionsInput_nextPageToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextPageToken", ID: &i_PageToken, Type: smithy.ShapeTypeString})
+var sListOpenWorkflowExecutionsInput_maximumPageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maximumPageSize", ID: &i_PageSize, Type: smithy.ShapeTypeInteger})
+var sListOpenWorkflowExecutionsInput_reverseOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reverseOrder", ID: &i_ReverseOrder, Type: smithy.ShapeTypeBoolean})
+var sListOpenWorkflowExecutionsInput_executionFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionFilter", ID: &iWorkflowExecutionFilter, Members: &mWorkflowExecutionFilter, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sListTagsForResourceOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_ResourceTagList, Members: &m_ResourceTagList, Type: smithy.ShapeTypeList})
+var sListWorkflowTypesInput_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sListWorkflowTypesInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_Name, Type: smithy.ShapeTypeString})
+var sListWorkflowTypesInput_registrationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registrationStatus", ID: &iRegistrationStatus, Members: &mRegistrationStatus, Type: smithy.ShapeTypeEnum})
+var sListWorkflowTypesInput_nextPageToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextPageToken", ID: &i_PageToken, Type: smithy.ShapeTypeString})
+var sListWorkflowTypesInput_maximumPageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maximumPageSize", ID: &i_PageSize, Type: smithy.ShapeTypeInteger})
+var sListWorkflowTypesInput_reverseOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reverseOrder", ID: &i_ReverseOrder, Type: smithy.ShapeTypeBoolean})
+var sWorkflowTypeInfos_typeInfos = smithy.NewStaticSchema(smithy.StaticSchema{Member: "typeInfos", ID: &i_WorkflowTypeInfoList, Members: &m_WorkflowTypeInfoList, Type: smithy.ShapeTypeList})
+var sWorkflowTypeInfos_nextPageToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextPageToken", ID: &i_PageToken, Type: smithy.ShapeTypeString})
+var sPollForActivityTaskInput_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sPollForActivityTaskInput_taskList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskList", ID: &iTaskList, Members: &mTaskList, Type: smithy.ShapeTypeStructure})
+var sPollForActivityTaskInput_identity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identity", ID: &i_Identity, Type: smithy.ShapeTypeString})
+var sActivityTask_taskToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskToken", ID: &i_TaskToken, Type: smithy.ShapeTypeString})
+var sActivityTask_activityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activityId", ID: &i_ActivityId, Type: smithy.ShapeTypeString})
+var sActivityTask_startedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sActivityTask_workflowExecution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowExecution", ID: &iWorkflowExecution, Members: &mWorkflowExecution, Type: smithy.ShapeTypeStructure})
+var sActivityTask_activityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activityType", ID: &iActivityType, Members: &mActivityType, Type: smithy.ShapeTypeStructure})
+var sActivityTask_input = smithy.NewStaticSchema(smithy.StaticSchema{Member: "input", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sPollForDecisionTaskInput_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sPollForDecisionTaskInput_taskList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskList", ID: &iTaskList, Members: &mTaskList, Type: smithy.ShapeTypeStructure})
+var sPollForDecisionTaskInput_identity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identity", ID: &i_Identity, Type: smithy.ShapeTypeString})
+var sPollForDecisionTaskInput_nextPageToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextPageToken", ID: &i_PageToken, Type: smithy.ShapeTypeString})
+var sPollForDecisionTaskInput_maximumPageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maximumPageSize", ID: &i_PageSize, Type: smithy.ShapeTypeInteger})
+var sPollForDecisionTaskInput_reverseOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reverseOrder", ID: &i_ReverseOrder, Type: smithy.ShapeTypeBoolean})
+var sPollForDecisionTaskInput_startAtPreviousStartedEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startAtPreviousStartedEvent", ID: &i_StartAtPreviousStartedEvent, Type: smithy.ShapeTypeBoolean})
+var sDecisionTask_taskToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskToken", ID: &i_TaskToken, Type: smithy.ShapeTypeString})
+var sDecisionTask_startedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sDecisionTask_workflowExecution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowExecution", ID: &iWorkflowExecution, Members: &mWorkflowExecution, Type: smithy.ShapeTypeStructure})
+var sDecisionTask_workflowType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowType", ID: &iWorkflowType, Members: &mWorkflowType, Type: smithy.ShapeTypeStructure})
+var sDecisionTask_events = smithy.NewStaticSchema(smithy.StaticSchema{Member: "events", ID: &i_HistoryEventList, Members: &m_HistoryEventList, Type: smithy.ShapeTypeList})
+var sDecisionTask_nextPageToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextPageToken", ID: &i_PageToken, Type: smithy.ShapeTypeString})
+var sDecisionTask_previousStartedEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "previousStartedEventId", ID: &i_EventId, Type: smithy.ShapeTypeLong})
+var sRecordActivityTaskHeartbeatInput_taskToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskToken", ID: &i_TaskToken, Type: smithy.ShapeTypeString})
+var sRecordActivityTaskHeartbeatInput_details = smithy.NewStaticSchema(smithy.StaticSchema{Member: "details", ID: &i_LimitedData, Type: smithy.ShapeTypeString})
+var sActivityTaskStatus_cancelRequested = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cancelRequested", ID: &i_Canceled, Type: smithy.ShapeTypeBoolean})
+var sRegisterActivityTypeInput_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sRegisterActivityTypeInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_Name, Type: smithy.ShapeTypeString})
+var sRegisterActivityTypeInput_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_Version, Type: smithy.ShapeTypeString})
+var sRegisterActivityTypeInput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sRegisterActivityTypeInput_defaultTaskStartToCloseTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultTaskStartToCloseTimeout", ID: &i_DurationInSecondsOptional, Type: smithy.ShapeTypeString})
+var sRegisterActivityTypeInput_defaultTaskHeartbeatTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultTaskHeartbeatTimeout", ID: &i_DurationInSecondsOptional, Type: smithy.ShapeTypeString})
+var sRegisterActivityTypeInput_defaultTaskList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultTaskList", ID: &iTaskList, Members: &mTaskList, Type: smithy.ShapeTypeStructure})
+var sRegisterActivityTypeInput_defaultTaskPriority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultTaskPriority", ID: &i_TaskPriority, Type: smithy.ShapeTypeString})
+var sRegisterActivityTypeInput_defaultTaskScheduleToStartTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultTaskScheduleToStartTimeout", ID: &i_DurationInSecondsOptional, Type: smithy.ShapeTypeString})
+var sRegisterActivityTypeInput_defaultTaskScheduleToCloseTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultTaskScheduleToCloseTimeout", ID: &i_DurationInSecondsOptional, Type: smithy.ShapeTypeString})
+var sRegisterDomainInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sRegisterDomainInput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sRegisterDomainInput_workflowExecutionRetentionPeriodInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowExecutionRetentionPeriodInDays", ID: &i_DurationInDays, Type: smithy.ShapeTypeString})
+var sRegisterDomainInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_ResourceTagList, Members: &m_ResourceTagList, Type: smithy.ShapeTypeList})
+var sRegisterWorkflowTypeInput_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sRegisterWorkflowTypeInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_Name, Type: smithy.ShapeTypeString})
+var sRegisterWorkflowTypeInput_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_Version, Type: smithy.ShapeTypeString})
+var sRegisterWorkflowTypeInput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sRegisterWorkflowTypeInput_defaultTaskStartToCloseTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultTaskStartToCloseTimeout", ID: &i_DurationInSecondsOptional, Type: smithy.ShapeTypeString})
+var sRegisterWorkflowTypeInput_defaultExecutionStartToCloseTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultExecutionStartToCloseTimeout", ID: &i_DurationInSecondsOptional, Type: smithy.ShapeTypeString})
+var sRegisterWorkflowTypeInput_defaultTaskList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultTaskList", ID: &iTaskList, Members: &mTaskList, Type: smithy.ShapeTypeStructure})
+var sRegisterWorkflowTypeInput_defaultTaskPriority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultTaskPriority", ID: &i_TaskPriority, Type: smithy.ShapeTypeString})
+var sRegisterWorkflowTypeInput_defaultChildPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultChildPolicy", ID: &iChildPolicy, Members: &mChildPolicy, Type: smithy.ShapeTypeEnum})
+var sRegisterWorkflowTypeInput_defaultLambdaRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultLambdaRole", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sRequestCancelWorkflowExecutionInput_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sRequestCancelWorkflowExecutionInput_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &i_WorkflowId, Type: smithy.ShapeTypeString})
+var sRequestCancelWorkflowExecutionInput_runId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runId", ID: &i_WorkflowRunIdOptional, Type: smithy.ShapeTypeString})
+var sRespondActivityTaskCanceledInput_taskToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskToken", ID: &i_TaskToken, Type: smithy.ShapeTypeString})
+var sRespondActivityTaskCanceledInput_details = smithy.NewStaticSchema(smithy.StaticSchema{Member: "details", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sRespondActivityTaskCompletedInput_taskToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskToken", ID: &i_TaskToken, Type: smithy.ShapeTypeString})
+var sRespondActivityTaskCompletedInput_result = smithy.NewStaticSchema(smithy.StaticSchema{Member: "result", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sRespondActivityTaskFailedInput_taskToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskToken", ID: &i_TaskToken, Type: smithy.ShapeTypeString})
+var sRespondActivityTaskFailedInput_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_FailureReason, Type: smithy.ShapeTypeString})
+var sRespondActivityTaskFailedInput_details = smithy.NewStaticSchema(smithy.StaticSchema{Member: "details", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sRespondDecisionTaskCompletedInput_taskToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskToken", ID: &i_TaskToken, Type: smithy.ShapeTypeString})
+var sRespondDecisionTaskCompletedInput_decisions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decisions", ID: &i_DecisionList, Members: &m_DecisionList, Type: smithy.ShapeTypeList})
+var sRespondDecisionTaskCompletedInput_executionContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionContext", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sRespondDecisionTaskCompletedInput_taskList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskList", ID: &iTaskList, Members: &mTaskList, Type: smithy.ShapeTypeStructure})
+var sRespondDecisionTaskCompletedInput_taskListScheduleToStartTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskListScheduleToStartTimeout", ID: &i_DurationInSecondsOptional, Type: smithy.ShapeTypeString})
+var sSignalWorkflowExecutionInput_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sSignalWorkflowExecutionInput_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &i_WorkflowId, Type: smithy.ShapeTypeString})
+var sSignalWorkflowExecutionInput_runId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runId", ID: &i_WorkflowRunIdOptional, Type: smithy.ShapeTypeString})
+var sSignalWorkflowExecutionInput_signalName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signalName", ID: &i_SignalName, Type: smithy.ShapeTypeString})
+var sSignalWorkflowExecutionInput_input = smithy.NewStaticSchema(smithy.StaticSchema{Member: "input", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sStartWorkflowExecutionInput_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sStartWorkflowExecutionInput_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &i_WorkflowId, Type: smithy.ShapeTypeString})
+var sStartWorkflowExecutionInput_workflowType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowType", ID: &iWorkflowType, Members: &mWorkflowType, Type: smithy.ShapeTypeStructure})
+var sStartWorkflowExecutionInput_taskList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskList", ID: &iTaskList, Members: &mTaskList, Type: smithy.ShapeTypeStructure})
+var sStartWorkflowExecutionInput_taskPriority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskPriority", ID: &i_TaskPriority, Type: smithy.ShapeTypeString})
+var sStartWorkflowExecutionInput_input = smithy.NewStaticSchema(smithy.StaticSchema{Member: "input", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sStartWorkflowExecutionInput_executionStartToCloseTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionStartToCloseTimeout", ID: &i_DurationInSecondsOptional, Type: smithy.ShapeTypeString})
+var sStartWorkflowExecutionInput_tagList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagList", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sStartWorkflowExecutionInput_taskStartToCloseTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskStartToCloseTimeout", ID: &i_DurationInSecondsOptional, Type: smithy.ShapeTypeString})
+var sStartWorkflowExecutionInput_childPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "childPolicy", ID: &iChildPolicy, Members: &mChildPolicy, Type: smithy.ShapeTypeEnum})
+var sStartWorkflowExecutionInput_lambdaRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lambdaRole", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sRun_runId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runId", ID: &i_WorkflowRunId, Type: smithy.ShapeTypeString})
+var sTagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sTagResourceInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_ResourceTagList, Members: &m_ResourceTagList, Type: smithy.ShapeTypeList})
+var sTerminateWorkflowExecutionInput_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sTerminateWorkflowExecutionInput_workflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowId", ID: &i_WorkflowId, Type: smithy.ShapeTypeString})
+var sTerminateWorkflowExecutionInput_runId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runId", ID: &i_WorkflowRunIdOptional, Type: smithy.ShapeTypeString})
+var sTerminateWorkflowExecutionInput_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_TerminateReason, Type: smithy.ShapeTypeString})
+var sTerminateWorkflowExecutionInput_details = smithy.NewStaticSchema(smithy.StaticSchema{Member: "details", ID: &i_Data, Type: smithy.ShapeTypeString})
+var sTerminateWorkflowExecutionInput_childPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "childPolicy", ID: &iChildPolicy, Members: &mChildPolicy, Type: smithy.ShapeTypeEnum})
+var sUndeprecateActivityTypeInput_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sUndeprecateActivityTypeInput_activityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activityType", ID: &iActivityType, Members: &mActivityType, Type: smithy.ShapeTypeStructure})
+var sUndeprecateDomainInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sUndeprecateWorkflowTypeInput_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sUndeprecateWorkflowTypeInput_workflowType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowType", ID: &iWorkflowType, Members: &mWorkflowType, Type: smithy.ShapeTypeStructure})
+var sUntagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sUntagResourceInput_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_ResourceTagKeyList, Members: &m_ResourceTagKeyList, Type: smithy.ShapeTypeList})
+
+var CountClosedWorkflowExecutions = &sCountClosedWorkflowExecutions
+
+var CountOpenWorkflowExecutions = &sCountOpenWorkflowExecutions
+
+var CountPendingActivityTasks = &sCountPendingActivityTasks
+
+var CountPendingDecisionTasks = &sCountPendingDecisionTasks
+
+var DeleteActivityType = &sDeleteActivityType
+
+var DeleteWorkflowType = &sDeleteWorkflowType
+
+var DeprecateActivityType = &sDeprecateActivityType
+
+var DeprecateDomain = &sDeprecateDomain
+
+var DeprecateWorkflowType = &sDeprecateWorkflowType
+
+var DescribeActivityType = &sDescribeActivityType
+
+var DescribeDomain = &sDescribeDomain
+
+var DescribeWorkflowExecution = &sDescribeWorkflowExecution
+
+var DescribeWorkflowType = &sDescribeWorkflowType
+
+var GetWorkflowExecutionHistory = &sGetWorkflowExecutionHistory
+
+var ListActivityTypes = &sListActivityTypes
+
+var ListClosedWorkflowExecutions = &sListClosedWorkflowExecutions
+
+var ListDomains = &sListDomains
+
+var ListOpenWorkflowExecutions = &sListOpenWorkflowExecutions
+
+var ListTagsForResource = &sListTagsForResource
+
+var ListWorkflowTypes = &sListWorkflowTypes
+
+var PollForActivityTask = &sPollForActivityTask
+
+var PollForDecisionTask = &sPollForDecisionTask
+
+var RecordActivityTaskHeartbeat = &sRecordActivityTaskHeartbeat
+
+var RegisterActivityType = &sRegisterActivityType
+
+var RegisterDomain = &sRegisterDomain
+
+var RegisterWorkflowType = &sRegisterWorkflowType
+
+var RequestCancelWorkflowExecution = &sRequestCancelWorkflowExecution
+
+var RespondActivityTaskCanceled = &sRespondActivityTaskCanceled
+
+var RespondActivityTaskCompleted = &sRespondActivityTaskCompleted
+
+var RespondActivityTaskFailed = &sRespondActivityTaskFailed
+
+var RespondDecisionTaskCompleted = &sRespondDecisionTaskCompleted
+
+var SignalWorkflowExecution = &sSignalWorkflowExecution
+
+var StartWorkflowExecution = &sStartWorkflowExecution
+
+var TagResource = &sTagResource
+
+var TerminateWorkflowExecution = &sTerminateWorkflowExecution
+
+var UndeprecateActivityType = &sUndeprecateActivityType
+
+var UndeprecateDomain = &sUndeprecateDomain
+
+var UndeprecateWorkflowType = &sUndeprecateWorkflowType
+
+var UntagResource = &sUntagResource
+
+var _SimpleWorkflowService = &s_SimpleWorkflowService
+
+var _ActivityId = &s_ActivityId
+
+var ActivityTaskCanceledEventAttributes = &sActivityTaskCanceledEventAttributes
+var ActivityTaskCanceledEventAttributes_details = &sActivityTaskCanceledEventAttributes_details
+var ActivityTaskCanceledEventAttributes_scheduledEventId = &sActivityTaskCanceledEventAttributes_scheduledEventId
+var ActivityTaskCanceledEventAttributes_startedEventId = &sActivityTaskCanceledEventAttributes_startedEventId
+var ActivityTaskCanceledEventAttributes_latestCancelRequestedEventId = &sActivityTaskCanceledEventAttributes_latestCancelRequestedEventId
+
+var ActivityTaskCancelRequestedEventAttributes = &sActivityTaskCancelRequestedEventAttributes
+var ActivityTaskCancelRequestedEventAttributes_decisionTaskCompletedEventId = &sActivityTaskCancelRequestedEventAttributes_decisionTaskCompletedEventId
+var ActivityTaskCancelRequestedEventAttributes_activityId = &sActivityTaskCancelRequestedEventAttributes_activityId
+
+var ActivityTaskCompletedEventAttributes = &sActivityTaskCompletedEventAttributes
+var ActivityTaskCompletedEventAttributes_result = &sActivityTaskCompletedEventAttributes_result
+var ActivityTaskCompletedEventAttributes_scheduledEventId = &sActivityTaskCompletedEventAttributes_scheduledEventId
+var ActivityTaskCompletedEventAttributes_startedEventId = &sActivityTaskCompletedEventAttributes_startedEventId
+
+var ActivityTaskFailedEventAttributes = &sActivityTaskFailedEventAttributes
+var ActivityTaskFailedEventAttributes_reason = &sActivityTaskFailedEventAttributes_reason
+var ActivityTaskFailedEventAttributes_details = &sActivityTaskFailedEventAttributes_details
+var ActivityTaskFailedEventAttributes_scheduledEventId = &sActivityTaskFailedEventAttributes_scheduledEventId
+var ActivityTaskFailedEventAttributes_startedEventId = &sActivityTaskFailedEventAttributes_startedEventId
+
+var ActivityTaskScheduledEventAttributes = &sActivityTaskScheduledEventAttributes
+var ActivityTaskScheduledEventAttributes_activityType = &sActivityTaskScheduledEventAttributes_activityType
+var ActivityTaskScheduledEventAttributes_activityId = &sActivityTaskScheduledEventAttributes_activityId
+var ActivityTaskScheduledEventAttributes_input = &sActivityTaskScheduledEventAttributes_input
+var ActivityTaskScheduledEventAttributes_control = &sActivityTaskScheduledEventAttributes_control
+var ActivityTaskScheduledEventAttributes_scheduleToStartTimeout = &sActivityTaskScheduledEventAttributes_scheduleToStartTimeout
+var ActivityTaskScheduledEventAttributes_scheduleToCloseTimeout = &sActivityTaskScheduledEventAttributes_scheduleToCloseTimeout
+var ActivityTaskScheduledEventAttributes_startToCloseTimeout = &sActivityTaskScheduledEventAttributes_startToCloseTimeout
+var ActivityTaskScheduledEventAttributes_taskList = &sActivityTaskScheduledEventAttributes_taskList
+var ActivityTaskScheduledEventAttributes_taskPriority = &sActivityTaskScheduledEventAttributes_taskPriority
+var ActivityTaskScheduledEventAttributes_decisionTaskCompletedEventId = &sActivityTaskScheduledEventAttributes_decisionTaskCompletedEventId
+var ActivityTaskScheduledEventAttributes_heartbeatTimeout = &sActivityTaskScheduledEventAttributes_heartbeatTimeout
+
+var ActivityTaskStartedEventAttributes = &sActivityTaskStartedEventAttributes
+var ActivityTaskStartedEventAttributes_identity = &sActivityTaskStartedEventAttributes_identity
+var ActivityTaskStartedEventAttributes_scheduledEventId = &sActivityTaskStartedEventAttributes_scheduledEventId
+
+var ActivityTaskTimedOutEventAttributes = &sActivityTaskTimedOutEventAttributes
+var ActivityTaskTimedOutEventAttributes_timeoutType = &sActivityTaskTimedOutEventAttributes_timeoutType
+var ActivityTaskTimedOutEventAttributes_scheduledEventId = &sActivityTaskTimedOutEventAttributes_scheduledEventId
+var ActivityTaskTimedOutEventAttributes_startedEventId = &sActivityTaskTimedOutEventAttributes_startedEventId
+var ActivityTaskTimedOutEventAttributes_details = &sActivityTaskTimedOutEventAttributes_details
+
+var ActivityTaskTimeoutType = &sActivityTaskTimeoutType
+var ActivityTaskTimeoutType_START_TO_CLOSE = &sActivityTaskTimeoutType_START_TO_CLOSE
+var ActivityTaskTimeoutType_SCHEDULE_TO_START = &sActivityTaskTimeoutType_SCHEDULE_TO_START
+var ActivityTaskTimeoutType_SCHEDULE_TO_CLOSE = &sActivityTaskTimeoutType_SCHEDULE_TO_CLOSE
+var ActivityTaskTimeoutType_HEARTBEAT = &sActivityTaskTimeoutType_HEARTBEAT
+
+var ActivityType = &sActivityType
+var ActivityType_name = &sActivityType_name
+var ActivityType_version = &sActivityType_version
+
+var ActivityTypeConfiguration = &sActivityTypeConfiguration
+var ActivityTypeConfiguration_defaultTaskStartToCloseTimeout = &sActivityTypeConfiguration_defaultTaskStartToCloseTimeout
+var ActivityTypeConfiguration_defaultTaskHeartbeatTimeout = &sActivityTypeConfiguration_defaultTaskHeartbeatTimeout
+var ActivityTypeConfiguration_defaultTaskList = &sActivityTypeConfiguration_defaultTaskList
+var ActivityTypeConfiguration_defaultTaskPriority = &sActivityTypeConfiguration_defaultTaskPriority
+var ActivityTypeConfiguration_defaultTaskScheduleToStartTimeout = &sActivityTypeConfiguration_defaultTaskScheduleToStartTimeout
+var ActivityTypeConfiguration_defaultTaskScheduleToCloseTimeout = &sActivityTypeConfiguration_defaultTaskScheduleToCloseTimeout
+
+var ActivityTypeInfo = &sActivityTypeInfo
+var ActivityTypeInfo_activityType = &sActivityTypeInfo_activityType
+var ActivityTypeInfo_status = &sActivityTypeInfo_status
+var ActivityTypeInfo_description = &sActivityTypeInfo_description
+var ActivityTypeInfo_creationDate = &sActivityTypeInfo_creationDate
+var ActivityTypeInfo_deprecationDate = &sActivityTypeInfo_deprecationDate
+
+var _ActivityTypeInfoList = &s_ActivityTypeInfoList
+var _ActivityTypeInfoList_member = &s_ActivityTypeInfoList_member
+
+var _Arn = &s_Arn
+
+var _Canceled = &s_Canceled
+
+var CancelTimerDecisionAttributes = &sCancelTimerDecisionAttributes
+var CancelTimerDecisionAttributes_timerId = &sCancelTimerDecisionAttributes_timerId
+
+var CancelTimerFailedCause = &sCancelTimerFailedCause
+var CancelTimerFailedCause_TIMER_ID_UNKNOWN = &sCancelTimerFailedCause_TIMER_ID_UNKNOWN
+var CancelTimerFailedCause_OPERATION_NOT_PERMITTED = &sCancelTimerFailedCause_OPERATION_NOT_PERMITTED
+
+var CancelTimerFailedEventAttributes = &sCancelTimerFailedEventAttributes
+var CancelTimerFailedEventAttributes_timerId = &sCancelTimerFailedEventAttributes_timerId
+var CancelTimerFailedEventAttributes_cause = &sCancelTimerFailedEventAttributes_cause
+var CancelTimerFailedEventAttributes_decisionTaskCompletedEventId = &sCancelTimerFailedEventAttributes_decisionTaskCompletedEventId
+
+var CancelWorkflowExecutionDecisionAttributes = &sCancelWorkflowExecutionDecisionAttributes
+var CancelWorkflowExecutionDecisionAttributes_details = &sCancelWorkflowExecutionDecisionAttributes_details
+
+var CancelWorkflowExecutionFailedCause = &sCancelWorkflowExecutionFailedCause
+var CancelWorkflowExecutionFailedCause_UNHANDLED_DECISION = &sCancelWorkflowExecutionFailedCause_UNHANDLED_DECISION
+var CancelWorkflowExecutionFailedCause_OPERATION_NOT_PERMITTED = &sCancelWorkflowExecutionFailedCause_OPERATION_NOT_PERMITTED
+
+var CancelWorkflowExecutionFailedEventAttributes = &sCancelWorkflowExecutionFailedEventAttributes
+var CancelWorkflowExecutionFailedEventAttributes_cause = &sCancelWorkflowExecutionFailedEventAttributes_cause
+var CancelWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId = &sCancelWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId
+
+var _CauseMessage = &s_CauseMessage
+
+var ChildPolicy = &sChildPolicy
+var ChildPolicy_TERMINATE = &sChildPolicy_TERMINATE
+var ChildPolicy_REQUEST_CANCEL = &sChildPolicy_REQUEST_CANCEL
+var ChildPolicy_ABANDON = &sChildPolicy_ABANDON
+
+var ChildWorkflowExecutionCanceledEventAttributes = &sChildWorkflowExecutionCanceledEventAttributes
+var ChildWorkflowExecutionCanceledEventAttributes_workflowExecution = &sChildWorkflowExecutionCanceledEventAttributes_workflowExecution
+var ChildWorkflowExecutionCanceledEventAttributes_workflowType = &sChildWorkflowExecutionCanceledEventAttributes_workflowType
+var ChildWorkflowExecutionCanceledEventAttributes_details = &sChildWorkflowExecutionCanceledEventAttributes_details
+var ChildWorkflowExecutionCanceledEventAttributes_initiatedEventId = &sChildWorkflowExecutionCanceledEventAttributes_initiatedEventId
+var ChildWorkflowExecutionCanceledEventAttributes_startedEventId = &sChildWorkflowExecutionCanceledEventAttributes_startedEventId
+
+var ChildWorkflowExecutionCompletedEventAttributes = &sChildWorkflowExecutionCompletedEventAttributes
+var ChildWorkflowExecutionCompletedEventAttributes_workflowExecution = &sChildWorkflowExecutionCompletedEventAttributes_workflowExecution
+var ChildWorkflowExecutionCompletedEventAttributes_workflowType = &sChildWorkflowExecutionCompletedEventAttributes_workflowType
+var ChildWorkflowExecutionCompletedEventAttributes_result = &sChildWorkflowExecutionCompletedEventAttributes_result
+var ChildWorkflowExecutionCompletedEventAttributes_initiatedEventId = &sChildWorkflowExecutionCompletedEventAttributes_initiatedEventId
+var ChildWorkflowExecutionCompletedEventAttributes_startedEventId = &sChildWorkflowExecutionCompletedEventAttributes_startedEventId
+
+var ChildWorkflowExecutionFailedEventAttributes = &sChildWorkflowExecutionFailedEventAttributes
+var ChildWorkflowExecutionFailedEventAttributes_workflowExecution = &sChildWorkflowExecutionFailedEventAttributes_workflowExecution
+var ChildWorkflowExecutionFailedEventAttributes_workflowType = &sChildWorkflowExecutionFailedEventAttributes_workflowType
+var ChildWorkflowExecutionFailedEventAttributes_reason = &sChildWorkflowExecutionFailedEventAttributes_reason
+var ChildWorkflowExecutionFailedEventAttributes_details = &sChildWorkflowExecutionFailedEventAttributes_details
+var ChildWorkflowExecutionFailedEventAttributes_initiatedEventId = &sChildWorkflowExecutionFailedEventAttributes_initiatedEventId
+var ChildWorkflowExecutionFailedEventAttributes_startedEventId = &sChildWorkflowExecutionFailedEventAttributes_startedEventId
+
+var ChildWorkflowExecutionStartedEventAttributes = &sChildWorkflowExecutionStartedEventAttributes
+var ChildWorkflowExecutionStartedEventAttributes_workflowExecution = &sChildWorkflowExecutionStartedEventAttributes_workflowExecution
+var ChildWorkflowExecutionStartedEventAttributes_workflowType = &sChildWorkflowExecutionStartedEventAttributes_workflowType
+var ChildWorkflowExecutionStartedEventAttributes_initiatedEventId = &sChildWorkflowExecutionStartedEventAttributes_initiatedEventId
+
+var ChildWorkflowExecutionTerminatedEventAttributes = &sChildWorkflowExecutionTerminatedEventAttributes
+var ChildWorkflowExecutionTerminatedEventAttributes_workflowExecution = &sChildWorkflowExecutionTerminatedEventAttributes_workflowExecution
+var ChildWorkflowExecutionTerminatedEventAttributes_workflowType = &sChildWorkflowExecutionTerminatedEventAttributes_workflowType
+var ChildWorkflowExecutionTerminatedEventAttributes_initiatedEventId = &sChildWorkflowExecutionTerminatedEventAttributes_initiatedEventId
+var ChildWorkflowExecutionTerminatedEventAttributes_startedEventId = &sChildWorkflowExecutionTerminatedEventAttributes_startedEventId
+
+var ChildWorkflowExecutionTimedOutEventAttributes = &sChildWorkflowExecutionTimedOutEventAttributes
+var ChildWorkflowExecutionTimedOutEventAttributes_workflowExecution = &sChildWorkflowExecutionTimedOutEventAttributes_workflowExecution
+var ChildWorkflowExecutionTimedOutEventAttributes_workflowType = &sChildWorkflowExecutionTimedOutEventAttributes_workflowType
+var ChildWorkflowExecutionTimedOutEventAttributes_timeoutType = &sChildWorkflowExecutionTimedOutEventAttributes_timeoutType
+var ChildWorkflowExecutionTimedOutEventAttributes_initiatedEventId = &sChildWorkflowExecutionTimedOutEventAttributes_initiatedEventId
+var ChildWorkflowExecutionTimedOutEventAttributes_startedEventId = &sChildWorkflowExecutionTimedOutEventAttributes_startedEventId
+
+var CloseStatus = &sCloseStatus
+var CloseStatus_COMPLETED = &sCloseStatus_COMPLETED
+var CloseStatus_FAILED = &sCloseStatus_FAILED
+var CloseStatus_CANCELED = &sCloseStatus_CANCELED
+var CloseStatus_TERMINATED = &sCloseStatus_TERMINATED
+var CloseStatus_CONTINUED_AS_NEW = &sCloseStatus_CONTINUED_AS_NEW
+var CloseStatus_TIMED_OUT = &sCloseStatus_TIMED_OUT
+
+var CloseStatusFilter = &sCloseStatusFilter
+var CloseStatusFilter_status = &sCloseStatusFilter_status
+
+var CompleteWorkflowExecutionDecisionAttributes = &sCompleteWorkflowExecutionDecisionAttributes
+var CompleteWorkflowExecutionDecisionAttributes_result = &sCompleteWorkflowExecutionDecisionAttributes_result
+
+var CompleteWorkflowExecutionFailedCause = &sCompleteWorkflowExecutionFailedCause
+var CompleteWorkflowExecutionFailedCause_UNHANDLED_DECISION = &sCompleteWorkflowExecutionFailedCause_UNHANDLED_DECISION
+var CompleteWorkflowExecutionFailedCause_OPERATION_NOT_PERMITTED = &sCompleteWorkflowExecutionFailedCause_OPERATION_NOT_PERMITTED
+
+var CompleteWorkflowExecutionFailedEventAttributes = &sCompleteWorkflowExecutionFailedEventAttributes
+var CompleteWorkflowExecutionFailedEventAttributes_cause = &sCompleteWorkflowExecutionFailedEventAttributes_cause
+var CompleteWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId = &sCompleteWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId
+
+var ContinueAsNewWorkflowExecutionDecisionAttributes = &sContinueAsNewWorkflowExecutionDecisionAttributes
+var ContinueAsNewWorkflowExecutionDecisionAttributes_input = &sContinueAsNewWorkflowExecutionDecisionAttributes_input
+var ContinueAsNewWorkflowExecutionDecisionAttributes_executionStartToCloseTimeout = &sContinueAsNewWorkflowExecutionDecisionAttributes_executionStartToCloseTimeout
+var ContinueAsNewWorkflowExecutionDecisionAttributes_taskList = &sContinueAsNewWorkflowExecutionDecisionAttributes_taskList
+var ContinueAsNewWorkflowExecutionDecisionAttributes_taskPriority = &sContinueAsNewWorkflowExecutionDecisionAttributes_taskPriority
+var ContinueAsNewWorkflowExecutionDecisionAttributes_taskStartToCloseTimeout = &sContinueAsNewWorkflowExecutionDecisionAttributes_taskStartToCloseTimeout
+var ContinueAsNewWorkflowExecutionDecisionAttributes_childPolicy = &sContinueAsNewWorkflowExecutionDecisionAttributes_childPolicy
+var ContinueAsNewWorkflowExecutionDecisionAttributes_tagList = &sContinueAsNewWorkflowExecutionDecisionAttributes_tagList
+var ContinueAsNewWorkflowExecutionDecisionAttributes_workflowTypeVersion = &sContinueAsNewWorkflowExecutionDecisionAttributes_workflowTypeVersion
+var ContinueAsNewWorkflowExecutionDecisionAttributes_lambdaRole = &sContinueAsNewWorkflowExecutionDecisionAttributes_lambdaRole
+
+var ContinueAsNewWorkflowExecutionFailedCause = &sContinueAsNewWorkflowExecutionFailedCause
+var ContinueAsNewWorkflowExecutionFailedCause_UNHANDLED_DECISION = &sContinueAsNewWorkflowExecutionFailedCause_UNHANDLED_DECISION
+var ContinueAsNewWorkflowExecutionFailedCause_WORKFLOW_TYPE_DEPRECATED = &sContinueAsNewWorkflowExecutionFailedCause_WORKFLOW_TYPE_DEPRECATED
+var ContinueAsNewWorkflowExecutionFailedCause_WORKFLOW_TYPE_DOES_NOT_EXIST = &sContinueAsNewWorkflowExecutionFailedCause_WORKFLOW_TYPE_DOES_NOT_EXIST
+var ContinueAsNewWorkflowExecutionFailedCause_DEFAULT_EXECUTION_START_TO_CLOSE_TIMEOUT_UNDEFINED = &sContinueAsNewWorkflowExecutionFailedCause_DEFAULT_EXECUTION_START_TO_CLOSE_TIMEOUT_UNDEFINED
+var ContinueAsNewWorkflowExecutionFailedCause_DEFAULT_TASK_START_TO_CLOSE_TIMEOUT_UNDEFINED = &sContinueAsNewWorkflowExecutionFailedCause_DEFAULT_TASK_START_TO_CLOSE_TIMEOUT_UNDEFINED
+var ContinueAsNewWorkflowExecutionFailedCause_DEFAULT_TASK_LIST_UNDEFINED = &sContinueAsNewWorkflowExecutionFailedCause_DEFAULT_TASK_LIST_UNDEFINED
+var ContinueAsNewWorkflowExecutionFailedCause_DEFAULT_CHILD_POLICY_UNDEFINED = &sContinueAsNewWorkflowExecutionFailedCause_DEFAULT_CHILD_POLICY_UNDEFINED
+var ContinueAsNewWorkflowExecutionFailedCause_CONTINUE_AS_NEW_WORKFLOW_EXECUTION_RATE_EXCEEDED = &sContinueAsNewWorkflowExecutionFailedCause_CONTINUE_AS_NEW_WORKFLOW_EXECUTION_RATE_EXCEEDED
+var ContinueAsNewWorkflowExecutionFailedCause_OPERATION_NOT_PERMITTED = &sContinueAsNewWorkflowExecutionFailedCause_OPERATION_NOT_PERMITTED
+
+var ContinueAsNewWorkflowExecutionFailedEventAttributes = &sContinueAsNewWorkflowExecutionFailedEventAttributes
+var ContinueAsNewWorkflowExecutionFailedEventAttributes_cause = &sContinueAsNewWorkflowExecutionFailedEventAttributes_cause
+var ContinueAsNewWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId = &sContinueAsNewWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId
+
+var _Count = &s_Count
+
+var _Data = &s_Data
+
+var Decision = &sDecision
+var Decision_decisionType = &sDecision_decisionType
+var Decision_scheduleActivityTaskDecisionAttributes = &sDecision_scheduleActivityTaskDecisionAttributes
+var Decision_requestCancelActivityTaskDecisionAttributes = &sDecision_requestCancelActivityTaskDecisionAttributes
+var Decision_completeWorkflowExecutionDecisionAttributes = &sDecision_completeWorkflowExecutionDecisionAttributes
+var Decision_failWorkflowExecutionDecisionAttributes = &sDecision_failWorkflowExecutionDecisionAttributes
+var Decision_cancelWorkflowExecutionDecisionAttributes = &sDecision_cancelWorkflowExecutionDecisionAttributes
+var Decision_continueAsNewWorkflowExecutionDecisionAttributes = &sDecision_continueAsNewWorkflowExecutionDecisionAttributes
+var Decision_recordMarkerDecisionAttributes = &sDecision_recordMarkerDecisionAttributes
+var Decision_startTimerDecisionAttributes = &sDecision_startTimerDecisionAttributes
+var Decision_cancelTimerDecisionAttributes = &sDecision_cancelTimerDecisionAttributes
+var Decision_signalExternalWorkflowExecutionDecisionAttributes = &sDecision_signalExternalWorkflowExecutionDecisionAttributes
+var Decision_requestCancelExternalWorkflowExecutionDecisionAttributes = &sDecision_requestCancelExternalWorkflowExecutionDecisionAttributes
+var Decision_startChildWorkflowExecutionDecisionAttributes = &sDecision_startChildWorkflowExecutionDecisionAttributes
+var Decision_scheduleLambdaFunctionDecisionAttributes = &sDecision_scheduleLambdaFunctionDecisionAttributes
+
+var _DecisionList = &s_DecisionList
+var _DecisionList_member = &s_DecisionList_member
+
+var DecisionTaskCompletedEventAttributes = &sDecisionTaskCompletedEventAttributes
+var DecisionTaskCompletedEventAttributes_executionContext = &sDecisionTaskCompletedEventAttributes_executionContext
+var DecisionTaskCompletedEventAttributes_scheduledEventId = &sDecisionTaskCompletedEventAttributes_scheduledEventId
+var DecisionTaskCompletedEventAttributes_startedEventId = &sDecisionTaskCompletedEventAttributes_startedEventId
+var DecisionTaskCompletedEventAttributes_taskList = &sDecisionTaskCompletedEventAttributes_taskList
+var DecisionTaskCompletedEventAttributes_taskListScheduleToStartTimeout = &sDecisionTaskCompletedEventAttributes_taskListScheduleToStartTimeout
+
+var DecisionTaskScheduledEventAttributes = &sDecisionTaskScheduledEventAttributes
+var DecisionTaskScheduledEventAttributes_taskList = &sDecisionTaskScheduledEventAttributes_taskList
+var DecisionTaskScheduledEventAttributes_taskPriority = &sDecisionTaskScheduledEventAttributes_taskPriority
+var DecisionTaskScheduledEventAttributes_startToCloseTimeout = &sDecisionTaskScheduledEventAttributes_startToCloseTimeout
+var DecisionTaskScheduledEventAttributes_scheduleToStartTimeout = &sDecisionTaskScheduledEventAttributes_scheduleToStartTimeout
+
+var DecisionTaskStartedEventAttributes = &sDecisionTaskStartedEventAttributes
+var DecisionTaskStartedEventAttributes_identity = &sDecisionTaskStartedEventAttributes_identity
+var DecisionTaskStartedEventAttributes_scheduledEventId = &sDecisionTaskStartedEventAttributes_scheduledEventId
+
+var DecisionTaskTimedOutEventAttributes = &sDecisionTaskTimedOutEventAttributes
+var DecisionTaskTimedOutEventAttributes_timeoutType = &sDecisionTaskTimedOutEventAttributes_timeoutType
+var DecisionTaskTimedOutEventAttributes_scheduledEventId = &sDecisionTaskTimedOutEventAttributes_scheduledEventId
+var DecisionTaskTimedOutEventAttributes_startedEventId = &sDecisionTaskTimedOutEventAttributes_startedEventId
+
+var DecisionTaskTimeoutType = &sDecisionTaskTimeoutType
+var DecisionTaskTimeoutType_START_TO_CLOSE = &sDecisionTaskTimeoutType_START_TO_CLOSE
+var DecisionTaskTimeoutType_SCHEDULE_TO_START = &sDecisionTaskTimeoutType_SCHEDULE_TO_START
+
+var DecisionType = &sDecisionType
+var DecisionType_ScheduleActivityTask = &sDecisionType_ScheduleActivityTask
+var DecisionType_RequestCancelActivityTask = &sDecisionType_RequestCancelActivityTask
+var DecisionType_CompleteWorkflowExecution = &sDecisionType_CompleteWorkflowExecution
+var DecisionType_FailWorkflowExecution = &sDecisionType_FailWorkflowExecution
+var DecisionType_CancelWorkflowExecution = &sDecisionType_CancelWorkflowExecution
+var DecisionType_ContinueAsNewWorkflowExecution = &sDecisionType_ContinueAsNewWorkflowExecution
+var DecisionType_RecordMarker = &sDecisionType_RecordMarker
+var DecisionType_StartTimer = &sDecisionType_StartTimer
+var DecisionType_CancelTimer = &sDecisionType_CancelTimer
+var DecisionType_SignalExternalWorkflowExecution = &sDecisionType_SignalExternalWorkflowExecution
+var DecisionType_RequestCancelExternalWorkflowExecution = &sDecisionType_RequestCancelExternalWorkflowExecution
+var DecisionType_StartChildWorkflowExecution = &sDecisionType_StartChildWorkflowExecution
+var DecisionType_ScheduleLambdaFunction = &sDecisionType_ScheduleLambdaFunction
+
+var DefaultUndefinedFault = &sDefaultUndefinedFault
+var DefaultUndefinedFault_message = &sDefaultUndefinedFault_message
+
+var _Description = &s_Description
+
+var DomainAlreadyExistsFault = &sDomainAlreadyExistsFault
+var DomainAlreadyExistsFault_message = &sDomainAlreadyExistsFault_message
+
+var DomainConfiguration = &sDomainConfiguration
+var DomainConfiguration_workflowExecutionRetentionPeriodInDays = &sDomainConfiguration_workflowExecutionRetentionPeriodInDays
+
+var DomainDeprecatedFault = &sDomainDeprecatedFault
+var DomainDeprecatedFault_message = &sDomainDeprecatedFault_message
+
+var DomainInfo = &sDomainInfo
+var DomainInfo_name = &sDomainInfo_name
+var DomainInfo_status = &sDomainInfo_status
+var DomainInfo_description = &sDomainInfo_description
+var DomainInfo_arn = &sDomainInfo_arn
+
+var _DomainInfoList = &s_DomainInfoList
+var _DomainInfoList_member = &s_DomainInfoList_member
+
+var _DomainName = &s_DomainName
+
+var _DurationInDays = &s_DurationInDays
+
+var _DurationInSeconds = &s_DurationInSeconds
+
+var _DurationInSecondsOptional = &s_DurationInSecondsOptional
+
+var _ErrorMessage = &s_ErrorMessage
+
+var _EventId = &s_EventId
+
+var EventType = &sEventType
+var EventType_WorkflowExecutionStarted = &sEventType_WorkflowExecutionStarted
+var EventType_WorkflowExecutionCancelRequested = &sEventType_WorkflowExecutionCancelRequested
+var EventType_WorkflowExecutionCompleted = &sEventType_WorkflowExecutionCompleted
+var EventType_CompleteWorkflowExecutionFailed = &sEventType_CompleteWorkflowExecutionFailed
+var EventType_WorkflowExecutionFailed = &sEventType_WorkflowExecutionFailed
+var EventType_FailWorkflowExecutionFailed = &sEventType_FailWorkflowExecutionFailed
+var EventType_WorkflowExecutionTimedOut = &sEventType_WorkflowExecutionTimedOut
+var EventType_WorkflowExecutionCanceled = &sEventType_WorkflowExecutionCanceled
+var EventType_CancelWorkflowExecutionFailed = &sEventType_CancelWorkflowExecutionFailed
+var EventType_WorkflowExecutionContinuedAsNew = &sEventType_WorkflowExecutionContinuedAsNew
+var EventType_ContinueAsNewWorkflowExecutionFailed = &sEventType_ContinueAsNewWorkflowExecutionFailed
+var EventType_WorkflowExecutionTerminated = &sEventType_WorkflowExecutionTerminated
+var EventType_DecisionTaskScheduled = &sEventType_DecisionTaskScheduled
+var EventType_DecisionTaskStarted = &sEventType_DecisionTaskStarted
+var EventType_DecisionTaskCompleted = &sEventType_DecisionTaskCompleted
+var EventType_DecisionTaskTimedOut = &sEventType_DecisionTaskTimedOut
+var EventType_ActivityTaskScheduled = &sEventType_ActivityTaskScheduled
+var EventType_ScheduleActivityTaskFailed = &sEventType_ScheduleActivityTaskFailed
+var EventType_ActivityTaskStarted = &sEventType_ActivityTaskStarted
+var EventType_ActivityTaskCompleted = &sEventType_ActivityTaskCompleted
+var EventType_ActivityTaskFailed = &sEventType_ActivityTaskFailed
+var EventType_ActivityTaskTimedOut = &sEventType_ActivityTaskTimedOut
+var EventType_ActivityTaskCanceled = &sEventType_ActivityTaskCanceled
+var EventType_ActivityTaskCancelRequested = &sEventType_ActivityTaskCancelRequested
+var EventType_RequestCancelActivityTaskFailed = &sEventType_RequestCancelActivityTaskFailed
+var EventType_WorkflowExecutionSignaled = &sEventType_WorkflowExecutionSignaled
+var EventType_MarkerRecorded = &sEventType_MarkerRecorded
+var EventType_RecordMarkerFailed = &sEventType_RecordMarkerFailed
+var EventType_TimerStarted = &sEventType_TimerStarted
+var EventType_StartTimerFailed = &sEventType_StartTimerFailed
+var EventType_TimerFired = &sEventType_TimerFired
+var EventType_TimerCanceled = &sEventType_TimerCanceled
+var EventType_CancelTimerFailed = &sEventType_CancelTimerFailed
+var EventType_StartChildWorkflowExecutionInitiated = &sEventType_StartChildWorkflowExecutionInitiated
+var EventType_StartChildWorkflowExecutionFailed = &sEventType_StartChildWorkflowExecutionFailed
+var EventType_ChildWorkflowExecutionStarted = &sEventType_ChildWorkflowExecutionStarted
+var EventType_ChildWorkflowExecutionCompleted = &sEventType_ChildWorkflowExecutionCompleted
+var EventType_ChildWorkflowExecutionFailed = &sEventType_ChildWorkflowExecutionFailed
+var EventType_ChildWorkflowExecutionTimedOut = &sEventType_ChildWorkflowExecutionTimedOut
+var EventType_ChildWorkflowExecutionCanceled = &sEventType_ChildWorkflowExecutionCanceled
+var EventType_ChildWorkflowExecutionTerminated = &sEventType_ChildWorkflowExecutionTerminated
+var EventType_SignalExternalWorkflowExecutionInitiated = &sEventType_SignalExternalWorkflowExecutionInitiated
+var EventType_SignalExternalWorkflowExecutionFailed = &sEventType_SignalExternalWorkflowExecutionFailed
+var EventType_ExternalWorkflowExecutionSignaled = &sEventType_ExternalWorkflowExecutionSignaled
+var EventType_RequestCancelExternalWorkflowExecutionInitiated = &sEventType_RequestCancelExternalWorkflowExecutionInitiated
+var EventType_RequestCancelExternalWorkflowExecutionFailed = &sEventType_RequestCancelExternalWorkflowExecutionFailed
+var EventType_ExternalWorkflowExecutionCancelRequested = &sEventType_ExternalWorkflowExecutionCancelRequested
+var EventType_LambdaFunctionScheduled = &sEventType_LambdaFunctionScheduled
+var EventType_LambdaFunctionStarted = &sEventType_LambdaFunctionStarted
+var EventType_LambdaFunctionCompleted = &sEventType_LambdaFunctionCompleted
+var EventType_LambdaFunctionFailed = &sEventType_LambdaFunctionFailed
+var EventType_LambdaFunctionTimedOut = &sEventType_LambdaFunctionTimedOut
+var EventType_ScheduleLambdaFunctionFailed = &sEventType_ScheduleLambdaFunctionFailed
+var EventType_StartLambdaFunctionFailed = &sEventType_StartLambdaFunctionFailed
+
+var ExecutionStatus = &sExecutionStatus
+var ExecutionStatus_OPEN = &sExecutionStatus_OPEN
+var ExecutionStatus_CLOSED = &sExecutionStatus_CLOSED
+
+var ExecutionTimeFilter = &sExecutionTimeFilter
+var ExecutionTimeFilter_oldestDate = &sExecutionTimeFilter_oldestDate
+var ExecutionTimeFilter_latestDate = &sExecutionTimeFilter_latestDate
+
+var ExternalWorkflowExecutionCancelRequestedEventAttributes = &sExternalWorkflowExecutionCancelRequestedEventAttributes
+var ExternalWorkflowExecutionCancelRequestedEventAttributes_workflowExecution = &sExternalWorkflowExecutionCancelRequestedEventAttributes_workflowExecution
+var ExternalWorkflowExecutionCancelRequestedEventAttributes_initiatedEventId = &sExternalWorkflowExecutionCancelRequestedEventAttributes_initiatedEventId
+
+var ExternalWorkflowExecutionSignaledEventAttributes = &sExternalWorkflowExecutionSignaledEventAttributes
+var ExternalWorkflowExecutionSignaledEventAttributes_workflowExecution = &sExternalWorkflowExecutionSignaledEventAttributes_workflowExecution
+var ExternalWorkflowExecutionSignaledEventAttributes_initiatedEventId = &sExternalWorkflowExecutionSignaledEventAttributes_initiatedEventId
+
+var _FailureReason = &s_FailureReason
+
+var FailWorkflowExecutionDecisionAttributes = &sFailWorkflowExecutionDecisionAttributes
+var FailWorkflowExecutionDecisionAttributes_reason = &sFailWorkflowExecutionDecisionAttributes_reason
+var FailWorkflowExecutionDecisionAttributes_details = &sFailWorkflowExecutionDecisionAttributes_details
+
+var FailWorkflowExecutionFailedCause = &sFailWorkflowExecutionFailedCause
+var FailWorkflowExecutionFailedCause_UNHANDLED_DECISION = &sFailWorkflowExecutionFailedCause_UNHANDLED_DECISION
+var FailWorkflowExecutionFailedCause_OPERATION_NOT_PERMITTED = &sFailWorkflowExecutionFailedCause_OPERATION_NOT_PERMITTED
+
+var FailWorkflowExecutionFailedEventAttributes = &sFailWorkflowExecutionFailedEventAttributes
+var FailWorkflowExecutionFailedEventAttributes_cause = &sFailWorkflowExecutionFailedEventAttributes_cause
+var FailWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId = &sFailWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId
+
+var _FunctionId = &s_FunctionId
+
+var _FunctionInput = &s_FunctionInput
+
+var _FunctionName = &s_FunctionName
+
+var HistoryEvent = &sHistoryEvent
+var HistoryEvent_eventTimestamp = &sHistoryEvent_eventTimestamp
+var HistoryEvent_eventType = &sHistoryEvent_eventType
+var HistoryEvent_eventId = &sHistoryEvent_eventId
+var HistoryEvent_workflowExecutionStartedEventAttributes = &sHistoryEvent_workflowExecutionStartedEventAttributes
+var HistoryEvent_workflowExecutionCompletedEventAttributes = &sHistoryEvent_workflowExecutionCompletedEventAttributes
+var HistoryEvent_completeWorkflowExecutionFailedEventAttributes = &sHistoryEvent_completeWorkflowExecutionFailedEventAttributes
+var HistoryEvent_workflowExecutionFailedEventAttributes = &sHistoryEvent_workflowExecutionFailedEventAttributes
+var HistoryEvent_failWorkflowExecutionFailedEventAttributes = &sHistoryEvent_failWorkflowExecutionFailedEventAttributes
+var HistoryEvent_workflowExecutionTimedOutEventAttributes = &sHistoryEvent_workflowExecutionTimedOutEventAttributes
+var HistoryEvent_workflowExecutionCanceledEventAttributes = &sHistoryEvent_workflowExecutionCanceledEventAttributes
+var HistoryEvent_cancelWorkflowExecutionFailedEventAttributes = &sHistoryEvent_cancelWorkflowExecutionFailedEventAttributes
+var HistoryEvent_workflowExecutionContinuedAsNewEventAttributes = &sHistoryEvent_workflowExecutionContinuedAsNewEventAttributes
+var HistoryEvent_continueAsNewWorkflowExecutionFailedEventAttributes = &sHistoryEvent_continueAsNewWorkflowExecutionFailedEventAttributes
+var HistoryEvent_workflowExecutionTerminatedEventAttributes = &sHistoryEvent_workflowExecutionTerminatedEventAttributes
+var HistoryEvent_workflowExecutionCancelRequestedEventAttributes = &sHistoryEvent_workflowExecutionCancelRequestedEventAttributes
+var HistoryEvent_decisionTaskScheduledEventAttributes = &sHistoryEvent_decisionTaskScheduledEventAttributes
+var HistoryEvent_decisionTaskStartedEventAttributes = &sHistoryEvent_decisionTaskStartedEventAttributes
+var HistoryEvent_decisionTaskCompletedEventAttributes = &sHistoryEvent_decisionTaskCompletedEventAttributes
+var HistoryEvent_decisionTaskTimedOutEventAttributes = &sHistoryEvent_decisionTaskTimedOutEventAttributes
+var HistoryEvent_activityTaskScheduledEventAttributes = &sHistoryEvent_activityTaskScheduledEventAttributes
+var HistoryEvent_activityTaskStartedEventAttributes = &sHistoryEvent_activityTaskStartedEventAttributes
+var HistoryEvent_activityTaskCompletedEventAttributes = &sHistoryEvent_activityTaskCompletedEventAttributes
+var HistoryEvent_activityTaskFailedEventAttributes = &sHistoryEvent_activityTaskFailedEventAttributes
+var HistoryEvent_activityTaskTimedOutEventAttributes = &sHistoryEvent_activityTaskTimedOutEventAttributes
+var HistoryEvent_activityTaskCanceledEventAttributes = &sHistoryEvent_activityTaskCanceledEventAttributes
+var HistoryEvent_activityTaskCancelRequestedEventAttributes = &sHistoryEvent_activityTaskCancelRequestedEventAttributes
+var HistoryEvent_workflowExecutionSignaledEventAttributes = &sHistoryEvent_workflowExecutionSignaledEventAttributes
+var HistoryEvent_markerRecordedEventAttributes = &sHistoryEvent_markerRecordedEventAttributes
+var HistoryEvent_recordMarkerFailedEventAttributes = &sHistoryEvent_recordMarkerFailedEventAttributes
+var HistoryEvent_timerStartedEventAttributes = &sHistoryEvent_timerStartedEventAttributes
+var HistoryEvent_timerFiredEventAttributes = &sHistoryEvent_timerFiredEventAttributes
+var HistoryEvent_timerCanceledEventAttributes = &sHistoryEvent_timerCanceledEventAttributes
+var HistoryEvent_startChildWorkflowExecutionInitiatedEventAttributes = &sHistoryEvent_startChildWorkflowExecutionInitiatedEventAttributes
+var HistoryEvent_childWorkflowExecutionStartedEventAttributes = &sHistoryEvent_childWorkflowExecutionStartedEventAttributes
+var HistoryEvent_childWorkflowExecutionCompletedEventAttributes = &sHistoryEvent_childWorkflowExecutionCompletedEventAttributes
+var HistoryEvent_childWorkflowExecutionFailedEventAttributes = &sHistoryEvent_childWorkflowExecutionFailedEventAttributes
+var HistoryEvent_childWorkflowExecutionTimedOutEventAttributes = &sHistoryEvent_childWorkflowExecutionTimedOutEventAttributes
+var HistoryEvent_childWorkflowExecutionCanceledEventAttributes = &sHistoryEvent_childWorkflowExecutionCanceledEventAttributes
+var HistoryEvent_childWorkflowExecutionTerminatedEventAttributes = &sHistoryEvent_childWorkflowExecutionTerminatedEventAttributes
+var HistoryEvent_signalExternalWorkflowExecutionInitiatedEventAttributes = &sHistoryEvent_signalExternalWorkflowExecutionInitiatedEventAttributes
+var HistoryEvent_externalWorkflowExecutionSignaledEventAttributes = &sHistoryEvent_externalWorkflowExecutionSignaledEventAttributes
+var HistoryEvent_signalExternalWorkflowExecutionFailedEventAttributes = &sHistoryEvent_signalExternalWorkflowExecutionFailedEventAttributes
+var HistoryEvent_externalWorkflowExecutionCancelRequestedEventAttributes = &sHistoryEvent_externalWorkflowExecutionCancelRequestedEventAttributes
+var HistoryEvent_requestCancelExternalWorkflowExecutionInitiatedEventAttributes = &sHistoryEvent_requestCancelExternalWorkflowExecutionInitiatedEventAttributes
+var HistoryEvent_requestCancelExternalWorkflowExecutionFailedEventAttributes = &sHistoryEvent_requestCancelExternalWorkflowExecutionFailedEventAttributes
+var HistoryEvent_scheduleActivityTaskFailedEventAttributes = &sHistoryEvent_scheduleActivityTaskFailedEventAttributes
+var HistoryEvent_requestCancelActivityTaskFailedEventAttributes = &sHistoryEvent_requestCancelActivityTaskFailedEventAttributes
+var HistoryEvent_startTimerFailedEventAttributes = &sHistoryEvent_startTimerFailedEventAttributes
+var HistoryEvent_cancelTimerFailedEventAttributes = &sHistoryEvent_cancelTimerFailedEventAttributes
+var HistoryEvent_startChildWorkflowExecutionFailedEventAttributes = &sHistoryEvent_startChildWorkflowExecutionFailedEventAttributes
+var HistoryEvent_lambdaFunctionScheduledEventAttributes = &sHistoryEvent_lambdaFunctionScheduledEventAttributes
+var HistoryEvent_lambdaFunctionStartedEventAttributes = &sHistoryEvent_lambdaFunctionStartedEventAttributes
+var HistoryEvent_lambdaFunctionCompletedEventAttributes = &sHistoryEvent_lambdaFunctionCompletedEventAttributes
+var HistoryEvent_lambdaFunctionFailedEventAttributes = &sHistoryEvent_lambdaFunctionFailedEventAttributes
+var HistoryEvent_lambdaFunctionTimedOutEventAttributes = &sHistoryEvent_lambdaFunctionTimedOutEventAttributes
+var HistoryEvent_scheduleLambdaFunctionFailedEventAttributes = &sHistoryEvent_scheduleLambdaFunctionFailedEventAttributes
+var HistoryEvent_startLambdaFunctionFailedEventAttributes = &sHistoryEvent_startLambdaFunctionFailedEventAttributes
+
+var _HistoryEventList = &s_HistoryEventList
+var _HistoryEventList_member = &s_HistoryEventList_member
+
+var _Identity = &s_Identity
+
+var LambdaFunctionCompletedEventAttributes = &sLambdaFunctionCompletedEventAttributes
+var LambdaFunctionCompletedEventAttributes_scheduledEventId = &sLambdaFunctionCompletedEventAttributes_scheduledEventId
+var LambdaFunctionCompletedEventAttributes_startedEventId = &sLambdaFunctionCompletedEventAttributes_startedEventId
+var LambdaFunctionCompletedEventAttributes_result = &sLambdaFunctionCompletedEventAttributes_result
+
+var LambdaFunctionFailedEventAttributes = &sLambdaFunctionFailedEventAttributes
+var LambdaFunctionFailedEventAttributes_scheduledEventId = &sLambdaFunctionFailedEventAttributes_scheduledEventId
+var LambdaFunctionFailedEventAttributes_startedEventId = &sLambdaFunctionFailedEventAttributes_startedEventId
+var LambdaFunctionFailedEventAttributes_reason = &sLambdaFunctionFailedEventAttributes_reason
+var LambdaFunctionFailedEventAttributes_details = &sLambdaFunctionFailedEventAttributes_details
+
+var LambdaFunctionScheduledEventAttributes = &sLambdaFunctionScheduledEventAttributes
+var LambdaFunctionScheduledEventAttributes_id = &sLambdaFunctionScheduledEventAttributes_id
+var LambdaFunctionScheduledEventAttributes_name = &sLambdaFunctionScheduledEventAttributes_name
+var LambdaFunctionScheduledEventAttributes_control = &sLambdaFunctionScheduledEventAttributes_control
+var LambdaFunctionScheduledEventAttributes_input = &sLambdaFunctionScheduledEventAttributes_input
+var LambdaFunctionScheduledEventAttributes_startToCloseTimeout = &sLambdaFunctionScheduledEventAttributes_startToCloseTimeout
+var LambdaFunctionScheduledEventAttributes_decisionTaskCompletedEventId = &sLambdaFunctionScheduledEventAttributes_decisionTaskCompletedEventId
+
+var LambdaFunctionStartedEventAttributes = &sLambdaFunctionStartedEventAttributes
+var LambdaFunctionStartedEventAttributes_scheduledEventId = &sLambdaFunctionStartedEventAttributes_scheduledEventId
+
+var LambdaFunctionTimedOutEventAttributes = &sLambdaFunctionTimedOutEventAttributes
+var LambdaFunctionTimedOutEventAttributes_scheduledEventId = &sLambdaFunctionTimedOutEventAttributes_scheduledEventId
+var LambdaFunctionTimedOutEventAttributes_startedEventId = &sLambdaFunctionTimedOutEventAttributes_startedEventId
+var LambdaFunctionTimedOutEventAttributes_timeoutType = &sLambdaFunctionTimedOutEventAttributes_timeoutType
+
+var LambdaFunctionTimeoutType = &sLambdaFunctionTimeoutType
+var LambdaFunctionTimeoutType_START_TO_CLOSE = &sLambdaFunctionTimeoutType_START_TO_CLOSE
+
+var _LimitedData = &s_LimitedData
+
+var LimitExceededFault = &sLimitExceededFault
+var LimitExceededFault_message = &sLimitExceededFault_message
+
+var _MarkerName = &s_MarkerName
+
+var MarkerRecordedEventAttributes = &sMarkerRecordedEventAttributes
+var MarkerRecordedEventAttributes_markerName = &sMarkerRecordedEventAttributes_markerName
+var MarkerRecordedEventAttributes_details = &sMarkerRecordedEventAttributes_details
+var MarkerRecordedEventAttributes_decisionTaskCompletedEventId = &sMarkerRecordedEventAttributes_decisionTaskCompletedEventId
+
+var _Name = &s_Name
+
+var _OpenDecisionTasksCount = &s_OpenDecisionTasksCount
+
+var OperationNotPermittedFault = &sOperationNotPermittedFault
+var OperationNotPermittedFault_message = &sOperationNotPermittedFault_message
+
+var _PageSize = &s_PageSize
+
+var _PageToken = &s_PageToken
+
+var RecordMarkerDecisionAttributes = &sRecordMarkerDecisionAttributes
+var RecordMarkerDecisionAttributes_markerName = &sRecordMarkerDecisionAttributes_markerName
+var RecordMarkerDecisionAttributes_details = &sRecordMarkerDecisionAttributes_details
+
+var RecordMarkerFailedCause = &sRecordMarkerFailedCause
+var RecordMarkerFailedCause_OPERATION_NOT_PERMITTED = &sRecordMarkerFailedCause_OPERATION_NOT_PERMITTED
+
+var RecordMarkerFailedEventAttributes = &sRecordMarkerFailedEventAttributes
+var RecordMarkerFailedEventAttributes_markerName = &sRecordMarkerFailedEventAttributes_markerName
+var RecordMarkerFailedEventAttributes_cause = &sRecordMarkerFailedEventAttributes_cause
+var RecordMarkerFailedEventAttributes_decisionTaskCompletedEventId = &sRecordMarkerFailedEventAttributes_decisionTaskCompletedEventId
+
+var RegistrationStatus = &sRegistrationStatus
+var RegistrationStatus_REGISTERED = &sRegistrationStatus_REGISTERED
+var RegistrationStatus_DEPRECATED = &sRegistrationStatus_DEPRECATED
+
+var RequestCancelActivityTaskDecisionAttributes = &sRequestCancelActivityTaskDecisionAttributes
+var RequestCancelActivityTaskDecisionAttributes_activityId = &sRequestCancelActivityTaskDecisionAttributes_activityId
+
+var RequestCancelActivityTaskFailedCause = &sRequestCancelActivityTaskFailedCause
+var RequestCancelActivityTaskFailedCause_ACTIVITY_ID_UNKNOWN = &sRequestCancelActivityTaskFailedCause_ACTIVITY_ID_UNKNOWN
+var RequestCancelActivityTaskFailedCause_OPERATION_NOT_PERMITTED = &sRequestCancelActivityTaskFailedCause_OPERATION_NOT_PERMITTED
+
+var RequestCancelActivityTaskFailedEventAttributes = &sRequestCancelActivityTaskFailedEventAttributes
+var RequestCancelActivityTaskFailedEventAttributes_activityId = &sRequestCancelActivityTaskFailedEventAttributes_activityId
+var RequestCancelActivityTaskFailedEventAttributes_cause = &sRequestCancelActivityTaskFailedEventAttributes_cause
+var RequestCancelActivityTaskFailedEventAttributes_decisionTaskCompletedEventId = &sRequestCancelActivityTaskFailedEventAttributes_decisionTaskCompletedEventId
+
+var RequestCancelExternalWorkflowExecutionDecisionAttributes = &sRequestCancelExternalWorkflowExecutionDecisionAttributes
+var RequestCancelExternalWorkflowExecutionDecisionAttributes_workflowId = &sRequestCancelExternalWorkflowExecutionDecisionAttributes_workflowId
+var RequestCancelExternalWorkflowExecutionDecisionAttributes_runId = &sRequestCancelExternalWorkflowExecutionDecisionAttributes_runId
+var RequestCancelExternalWorkflowExecutionDecisionAttributes_control = &sRequestCancelExternalWorkflowExecutionDecisionAttributes_control
+
+var RequestCancelExternalWorkflowExecutionFailedCause = &sRequestCancelExternalWorkflowExecutionFailedCause
+var RequestCancelExternalWorkflowExecutionFailedCause_UNKNOWN_EXTERNAL_WORKFLOW_EXECUTION = &sRequestCancelExternalWorkflowExecutionFailedCause_UNKNOWN_EXTERNAL_WORKFLOW_EXECUTION
+var RequestCancelExternalWorkflowExecutionFailedCause_REQUEST_CANCEL_EXTERNAL_WORKFLOW_EXECUTION_RATE_EXCEEDED = &sRequestCancelExternalWorkflowExecutionFailedCause_REQUEST_CANCEL_EXTERNAL_WORKFLOW_EXECUTION_RATE_EXCEEDED
+var RequestCancelExternalWorkflowExecutionFailedCause_OPERATION_NOT_PERMITTED = &sRequestCancelExternalWorkflowExecutionFailedCause_OPERATION_NOT_PERMITTED
+
+var RequestCancelExternalWorkflowExecutionFailedEventAttributes = &sRequestCancelExternalWorkflowExecutionFailedEventAttributes
+var RequestCancelExternalWorkflowExecutionFailedEventAttributes_workflowId = &sRequestCancelExternalWorkflowExecutionFailedEventAttributes_workflowId
+var RequestCancelExternalWorkflowExecutionFailedEventAttributes_runId = &sRequestCancelExternalWorkflowExecutionFailedEventAttributes_runId
+var RequestCancelExternalWorkflowExecutionFailedEventAttributes_cause = &sRequestCancelExternalWorkflowExecutionFailedEventAttributes_cause
+var RequestCancelExternalWorkflowExecutionFailedEventAttributes_initiatedEventId = &sRequestCancelExternalWorkflowExecutionFailedEventAttributes_initiatedEventId
+var RequestCancelExternalWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId = &sRequestCancelExternalWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId
+var RequestCancelExternalWorkflowExecutionFailedEventAttributes_control = &sRequestCancelExternalWorkflowExecutionFailedEventAttributes_control
+
+var RequestCancelExternalWorkflowExecutionInitiatedEventAttributes = &sRequestCancelExternalWorkflowExecutionInitiatedEventAttributes
+var RequestCancelExternalWorkflowExecutionInitiatedEventAttributes_workflowId = &sRequestCancelExternalWorkflowExecutionInitiatedEventAttributes_workflowId
+var RequestCancelExternalWorkflowExecutionInitiatedEventAttributes_runId = &sRequestCancelExternalWorkflowExecutionInitiatedEventAttributes_runId
+var RequestCancelExternalWorkflowExecutionInitiatedEventAttributes_decisionTaskCompletedEventId = &sRequestCancelExternalWorkflowExecutionInitiatedEventAttributes_decisionTaskCompletedEventId
+var RequestCancelExternalWorkflowExecutionInitiatedEventAttributes_control = &sRequestCancelExternalWorkflowExecutionInitiatedEventAttributes_control
+
+var ResourceTag = &sResourceTag
+var ResourceTag_key = &sResourceTag_key
+var ResourceTag_value = &sResourceTag_value
+
+var _ResourceTagKey = &s_ResourceTagKey
+
+var _ResourceTagKeyList = &s_ResourceTagKeyList
+var _ResourceTagKeyList_member = &s_ResourceTagKeyList_member
+
+var _ResourceTagList = &s_ResourceTagList
+var _ResourceTagList_member = &s_ResourceTagList_member
+
+var _ResourceTagValue = &s_ResourceTagValue
+
+var _ReverseOrder = &s_ReverseOrder
+
+var ScheduleActivityTaskDecisionAttributes = &sScheduleActivityTaskDecisionAttributes
+var ScheduleActivityTaskDecisionAttributes_activityType = &sScheduleActivityTaskDecisionAttributes_activityType
+var ScheduleActivityTaskDecisionAttributes_activityId = &sScheduleActivityTaskDecisionAttributes_activityId
+var ScheduleActivityTaskDecisionAttributes_control = &sScheduleActivityTaskDecisionAttributes_control
+var ScheduleActivityTaskDecisionAttributes_input = &sScheduleActivityTaskDecisionAttributes_input
+var ScheduleActivityTaskDecisionAttributes_scheduleToCloseTimeout = &sScheduleActivityTaskDecisionAttributes_scheduleToCloseTimeout
+var ScheduleActivityTaskDecisionAttributes_taskList = &sScheduleActivityTaskDecisionAttributes_taskList
+var ScheduleActivityTaskDecisionAttributes_taskPriority = &sScheduleActivityTaskDecisionAttributes_taskPriority
+var ScheduleActivityTaskDecisionAttributes_scheduleToStartTimeout = &sScheduleActivityTaskDecisionAttributes_scheduleToStartTimeout
+var ScheduleActivityTaskDecisionAttributes_startToCloseTimeout = &sScheduleActivityTaskDecisionAttributes_startToCloseTimeout
+var ScheduleActivityTaskDecisionAttributes_heartbeatTimeout = &sScheduleActivityTaskDecisionAttributes_heartbeatTimeout
+
+var ScheduleActivityTaskFailedCause = &sScheduleActivityTaskFailedCause
+var ScheduleActivityTaskFailedCause_ACTIVITY_TYPE_DEPRECATED = &sScheduleActivityTaskFailedCause_ACTIVITY_TYPE_DEPRECATED
+var ScheduleActivityTaskFailedCause_ACTIVITY_TYPE_DOES_NOT_EXIST = &sScheduleActivityTaskFailedCause_ACTIVITY_TYPE_DOES_NOT_EXIST
+var ScheduleActivityTaskFailedCause_ACTIVITY_ID_ALREADY_IN_USE = &sScheduleActivityTaskFailedCause_ACTIVITY_ID_ALREADY_IN_USE
+var ScheduleActivityTaskFailedCause_OPEN_ACTIVITIES_LIMIT_EXCEEDED = &sScheduleActivityTaskFailedCause_OPEN_ACTIVITIES_LIMIT_EXCEEDED
+var ScheduleActivityTaskFailedCause_ACTIVITY_CREATION_RATE_EXCEEDED = &sScheduleActivityTaskFailedCause_ACTIVITY_CREATION_RATE_EXCEEDED
+var ScheduleActivityTaskFailedCause_DEFAULT_SCHEDULE_TO_CLOSE_TIMEOUT_UNDEFINED = &sScheduleActivityTaskFailedCause_DEFAULT_SCHEDULE_TO_CLOSE_TIMEOUT_UNDEFINED
+var ScheduleActivityTaskFailedCause_DEFAULT_TASK_LIST_UNDEFINED = &sScheduleActivityTaskFailedCause_DEFAULT_TASK_LIST_UNDEFINED
+var ScheduleActivityTaskFailedCause_DEFAULT_SCHEDULE_TO_START_TIMEOUT_UNDEFINED = &sScheduleActivityTaskFailedCause_DEFAULT_SCHEDULE_TO_START_TIMEOUT_UNDEFINED
+var ScheduleActivityTaskFailedCause_DEFAULT_START_TO_CLOSE_TIMEOUT_UNDEFINED = &sScheduleActivityTaskFailedCause_DEFAULT_START_TO_CLOSE_TIMEOUT_UNDEFINED
+var ScheduleActivityTaskFailedCause_DEFAULT_HEARTBEAT_TIMEOUT_UNDEFINED = &sScheduleActivityTaskFailedCause_DEFAULT_HEARTBEAT_TIMEOUT_UNDEFINED
+var ScheduleActivityTaskFailedCause_OPERATION_NOT_PERMITTED = &sScheduleActivityTaskFailedCause_OPERATION_NOT_PERMITTED
+
+var ScheduleActivityTaskFailedEventAttributes = &sScheduleActivityTaskFailedEventAttributes
+var ScheduleActivityTaskFailedEventAttributes_activityType = &sScheduleActivityTaskFailedEventAttributes_activityType
+var ScheduleActivityTaskFailedEventAttributes_activityId = &sScheduleActivityTaskFailedEventAttributes_activityId
+var ScheduleActivityTaskFailedEventAttributes_cause = &sScheduleActivityTaskFailedEventAttributes_cause
+var ScheduleActivityTaskFailedEventAttributes_decisionTaskCompletedEventId = &sScheduleActivityTaskFailedEventAttributes_decisionTaskCompletedEventId
+
+var ScheduleLambdaFunctionDecisionAttributes = &sScheduleLambdaFunctionDecisionAttributes
+var ScheduleLambdaFunctionDecisionAttributes_id = &sScheduleLambdaFunctionDecisionAttributes_id
+var ScheduleLambdaFunctionDecisionAttributes_name = &sScheduleLambdaFunctionDecisionAttributes_name
+var ScheduleLambdaFunctionDecisionAttributes_control = &sScheduleLambdaFunctionDecisionAttributes_control
+var ScheduleLambdaFunctionDecisionAttributes_input = &sScheduleLambdaFunctionDecisionAttributes_input
+var ScheduleLambdaFunctionDecisionAttributes_startToCloseTimeout = &sScheduleLambdaFunctionDecisionAttributes_startToCloseTimeout
+
+var ScheduleLambdaFunctionFailedCause = &sScheduleLambdaFunctionFailedCause
+var ScheduleLambdaFunctionFailedCause_ID_ALREADY_IN_USE = &sScheduleLambdaFunctionFailedCause_ID_ALREADY_IN_USE
+var ScheduleLambdaFunctionFailedCause_OPEN_LAMBDA_FUNCTIONS_LIMIT_EXCEEDED = &sScheduleLambdaFunctionFailedCause_OPEN_LAMBDA_FUNCTIONS_LIMIT_EXCEEDED
+var ScheduleLambdaFunctionFailedCause_LAMBDA_FUNCTION_CREATION_RATE_EXCEEDED = &sScheduleLambdaFunctionFailedCause_LAMBDA_FUNCTION_CREATION_RATE_EXCEEDED
+var ScheduleLambdaFunctionFailedCause_LAMBDA_SERVICE_NOT_AVAILABLE_IN_REGION = &sScheduleLambdaFunctionFailedCause_LAMBDA_SERVICE_NOT_AVAILABLE_IN_REGION
+
+var ScheduleLambdaFunctionFailedEventAttributes = &sScheduleLambdaFunctionFailedEventAttributes
+var ScheduleLambdaFunctionFailedEventAttributes_id = &sScheduleLambdaFunctionFailedEventAttributes_id
+var ScheduleLambdaFunctionFailedEventAttributes_name = &sScheduleLambdaFunctionFailedEventAttributes_name
+var ScheduleLambdaFunctionFailedEventAttributes_cause = &sScheduleLambdaFunctionFailedEventAttributes_cause
+var ScheduleLambdaFunctionFailedEventAttributes_decisionTaskCompletedEventId = &sScheduleLambdaFunctionFailedEventAttributes_decisionTaskCompletedEventId
+
+var SignalExternalWorkflowExecutionDecisionAttributes = &sSignalExternalWorkflowExecutionDecisionAttributes
+var SignalExternalWorkflowExecutionDecisionAttributes_workflowId = &sSignalExternalWorkflowExecutionDecisionAttributes_workflowId
+var SignalExternalWorkflowExecutionDecisionAttributes_runId = &sSignalExternalWorkflowExecutionDecisionAttributes_runId
+var SignalExternalWorkflowExecutionDecisionAttributes_signalName = &sSignalExternalWorkflowExecutionDecisionAttributes_signalName
+var SignalExternalWorkflowExecutionDecisionAttributes_input = &sSignalExternalWorkflowExecutionDecisionAttributes_input
+var SignalExternalWorkflowExecutionDecisionAttributes_control = &sSignalExternalWorkflowExecutionDecisionAttributes_control
+
+var SignalExternalWorkflowExecutionFailedCause = &sSignalExternalWorkflowExecutionFailedCause
+var SignalExternalWorkflowExecutionFailedCause_UNKNOWN_EXTERNAL_WORKFLOW_EXECUTION = &sSignalExternalWorkflowExecutionFailedCause_UNKNOWN_EXTERNAL_WORKFLOW_EXECUTION
+var SignalExternalWorkflowExecutionFailedCause_SIGNAL_EXTERNAL_WORKFLOW_EXECUTION_RATE_EXCEEDED = &sSignalExternalWorkflowExecutionFailedCause_SIGNAL_EXTERNAL_WORKFLOW_EXECUTION_RATE_EXCEEDED
+var SignalExternalWorkflowExecutionFailedCause_OPERATION_NOT_PERMITTED = &sSignalExternalWorkflowExecutionFailedCause_OPERATION_NOT_PERMITTED
+
+var SignalExternalWorkflowExecutionFailedEventAttributes = &sSignalExternalWorkflowExecutionFailedEventAttributes
+var SignalExternalWorkflowExecutionFailedEventAttributes_workflowId = &sSignalExternalWorkflowExecutionFailedEventAttributes_workflowId
+var SignalExternalWorkflowExecutionFailedEventAttributes_runId = &sSignalExternalWorkflowExecutionFailedEventAttributes_runId
+var SignalExternalWorkflowExecutionFailedEventAttributes_cause = &sSignalExternalWorkflowExecutionFailedEventAttributes_cause
+var SignalExternalWorkflowExecutionFailedEventAttributes_initiatedEventId = &sSignalExternalWorkflowExecutionFailedEventAttributes_initiatedEventId
+var SignalExternalWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId = &sSignalExternalWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId
+var SignalExternalWorkflowExecutionFailedEventAttributes_control = &sSignalExternalWorkflowExecutionFailedEventAttributes_control
+
+var SignalExternalWorkflowExecutionInitiatedEventAttributes = &sSignalExternalWorkflowExecutionInitiatedEventAttributes
+var SignalExternalWorkflowExecutionInitiatedEventAttributes_workflowId = &sSignalExternalWorkflowExecutionInitiatedEventAttributes_workflowId
+var SignalExternalWorkflowExecutionInitiatedEventAttributes_runId = &sSignalExternalWorkflowExecutionInitiatedEventAttributes_runId
+var SignalExternalWorkflowExecutionInitiatedEventAttributes_signalName = &sSignalExternalWorkflowExecutionInitiatedEventAttributes_signalName
+var SignalExternalWorkflowExecutionInitiatedEventAttributes_input = &sSignalExternalWorkflowExecutionInitiatedEventAttributes_input
+var SignalExternalWorkflowExecutionInitiatedEventAttributes_decisionTaskCompletedEventId = &sSignalExternalWorkflowExecutionInitiatedEventAttributes_decisionTaskCompletedEventId
+var SignalExternalWorkflowExecutionInitiatedEventAttributes_control = &sSignalExternalWorkflowExecutionInitiatedEventAttributes_control
+
+var _SignalName = &s_SignalName
+
+var _StartAtPreviousStartedEvent = &s_StartAtPreviousStartedEvent
+
+var StartChildWorkflowExecutionDecisionAttributes = &sStartChildWorkflowExecutionDecisionAttributes
+var StartChildWorkflowExecutionDecisionAttributes_workflowType = &sStartChildWorkflowExecutionDecisionAttributes_workflowType
+var StartChildWorkflowExecutionDecisionAttributes_workflowId = &sStartChildWorkflowExecutionDecisionAttributes_workflowId
+var StartChildWorkflowExecutionDecisionAttributes_control = &sStartChildWorkflowExecutionDecisionAttributes_control
+var StartChildWorkflowExecutionDecisionAttributes_input = &sStartChildWorkflowExecutionDecisionAttributes_input
+var StartChildWorkflowExecutionDecisionAttributes_executionStartToCloseTimeout = &sStartChildWorkflowExecutionDecisionAttributes_executionStartToCloseTimeout
+var StartChildWorkflowExecutionDecisionAttributes_taskList = &sStartChildWorkflowExecutionDecisionAttributes_taskList
+var StartChildWorkflowExecutionDecisionAttributes_taskPriority = &sStartChildWorkflowExecutionDecisionAttributes_taskPriority
+var StartChildWorkflowExecutionDecisionAttributes_taskStartToCloseTimeout = &sStartChildWorkflowExecutionDecisionAttributes_taskStartToCloseTimeout
+var StartChildWorkflowExecutionDecisionAttributes_childPolicy = &sStartChildWorkflowExecutionDecisionAttributes_childPolicy
+var StartChildWorkflowExecutionDecisionAttributes_tagList = &sStartChildWorkflowExecutionDecisionAttributes_tagList
+var StartChildWorkflowExecutionDecisionAttributes_lambdaRole = &sStartChildWorkflowExecutionDecisionAttributes_lambdaRole
+
+var StartChildWorkflowExecutionFailedCause = &sStartChildWorkflowExecutionFailedCause
+var StartChildWorkflowExecutionFailedCause_WORKFLOW_TYPE_DOES_NOT_EXIST = &sStartChildWorkflowExecutionFailedCause_WORKFLOW_TYPE_DOES_NOT_EXIST
+var StartChildWorkflowExecutionFailedCause_WORKFLOW_TYPE_DEPRECATED = &sStartChildWorkflowExecutionFailedCause_WORKFLOW_TYPE_DEPRECATED
+var StartChildWorkflowExecutionFailedCause_OPEN_CHILDREN_LIMIT_EXCEEDED = &sStartChildWorkflowExecutionFailedCause_OPEN_CHILDREN_LIMIT_EXCEEDED
+var StartChildWorkflowExecutionFailedCause_OPEN_WORKFLOWS_LIMIT_EXCEEDED = &sStartChildWorkflowExecutionFailedCause_OPEN_WORKFLOWS_LIMIT_EXCEEDED
+var StartChildWorkflowExecutionFailedCause_CHILD_CREATION_RATE_EXCEEDED = &sStartChildWorkflowExecutionFailedCause_CHILD_CREATION_RATE_EXCEEDED
+var StartChildWorkflowExecutionFailedCause_WORKFLOW_ALREADY_RUNNING = &sStartChildWorkflowExecutionFailedCause_WORKFLOW_ALREADY_RUNNING
+var StartChildWorkflowExecutionFailedCause_DEFAULT_EXECUTION_START_TO_CLOSE_TIMEOUT_UNDEFINED = &sStartChildWorkflowExecutionFailedCause_DEFAULT_EXECUTION_START_TO_CLOSE_TIMEOUT_UNDEFINED
+var StartChildWorkflowExecutionFailedCause_DEFAULT_TASK_LIST_UNDEFINED = &sStartChildWorkflowExecutionFailedCause_DEFAULT_TASK_LIST_UNDEFINED
+var StartChildWorkflowExecutionFailedCause_DEFAULT_TASK_START_TO_CLOSE_TIMEOUT_UNDEFINED = &sStartChildWorkflowExecutionFailedCause_DEFAULT_TASK_START_TO_CLOSE_TIMEOUT_UNDEFINED
+var StartChildWorkflowExecutionFailedCause_DEFAULT_CHILD_POLICY_UNDEFINED = &sStartChildWorkflowExecutionFailedCause_DEFAULT_CHILD_POLICY_UNDEFINED
+var StartChildWorkflowExecutionFailedCause_OPERATION_NOT_PERMITTED = &sStartChildWorkflowExecutionFailedCause_OPERATION_NOT_PERMITTED
+
+var StartChildWorkflowExecutionFailedEventAttributes = &sStartChildWorkflowExecutionFailedEventAttributes
+var StartChildWorkflowExecutionFailedEventAttributes_workflowType = &sStartChildWorkflowExecutionFailedEventAttributes_workflowType
+var StartChildWorkflowExecutionFailedEventAttributes_cause = &sStartChildWorkflowExecutionFailedEventAttributes_cause
+var StartChildWorkflowExecutionFailedEventAttributes_workflowId = &sStartChildWorkflowExecutionFailedEventAttributes_workflowId
+var StartChildWorkflowExecutionFailedEventAttributes_initiatedEventId = &sStartChildWorkflowExecutionFailedEventAttributes_initiatedEventId
+var StartChildWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId = &sStartChildWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId
+var StartChildWorkflowExecutionFailedEventAttributes_control = &sStartChildWorkflowExecutionFailedEventAttributes_control
+
+var StartChildWorkflowExecutionInitiatedEventAttributes = &sStartChildWorkflowExecutionInitiatedEventAttributes
+var StartChildWorkflowExecutionInitiatedEventAttributes_workflowId = &sStartChildWorkflowExecutionInitiatedEventAttributes_workflowId
+var StartChildWorkflowExecutionInitiatedEventAttributes_workflowType = &sStartChildWorkflowExecutionInitiatedEventAttributes_workflowType
+var StartChildWorkflowExecutionInitiatedEventAttributes_control = &sStartChildWorkflowExecutionInitiatedEventAttributes_control
+var StartChildWorkflowExecutionInitiatedEventAttributes_input = &sStartChildWorkflowExecutionInitiatedEventAttributes_input
+var StartChildWorkflowExecutionInitiatedEventAttributes_executionStartToCloseTimeout = &sStartChildWorkflowExecutionInitiatedEventAttributes_executionStartToCloseTimeout
+var StartChildWorkflowExecutionInitiatedEventAttributes_taskList = &sStartChildWorkflowExecutionInitiatedEventAttributes_taskList
+var StartChildWorkflowExecutionInitiatedEventAttributes_taskPriority = &sStartChildWorkflowExecutionInitiatedEventAttributes_taskPriority
+var StartChildWorkflowExecutionInitiatedEventAttributes_decisionTaskCompletedEventId = &sStartChildWorkflowExecutionInitiatedEventAttributes_decisionTaskCompletedEventId
+var StartChildWorkflowExecutionInitiatedEventAttributes_childPolicy = &sStartChildWorkflowExecutionInitiatedEventAttributes_childPolicy
+var StartChildWorkflowExecutionInitiatedEventAttributes_taskStartToCloseTimeout = &sStartChildWorkflowExecutionInitiatedEventAttributes_taskStartToCloseTimeout
+var StartChildWorkflowExecutionInitiatedEventAttributes_tagList = &sStartChildWorkflowExecutionInitiatedEventAttributes_tagList
+var StartChildWorkflowExecutionInitiatedEventAttributes_lambdaRole = &sStartChildWorkflowExecutionInitiatedEventAttributes_lambdaRole
+
+var StartLambdaFunctionFailedCause = &sStartLambdaFunctionFailedCause
+var StartLambdaFunctionFailedCause_ASSUME_ROLE_FAILED = &sStartLambdaFunctionFailedCause_ASSUME_ROLE_FAILED
+
+var StartLambdaFunctionFailedEventAttributes = &sStartLambdaFunctionFailedEventAttributes
+var StartLambdaFunctionFailedEventAttributes_scheduledEventId = &sStartLambdaFunctionFailedEventAttributes_scheduledEventId
+var StartLambdaFunctionFailedEventAttributes_cause = &sStartLambdaFunctionFailedEventAttributes_cause
+var StartLambdaFunctionFailedEventAttributes_message = &sStartLambdaFunctionFailedEventAttributes_message
+
+var StartTimerDecisionAttributes = &sStartTimerDecisionAttributes
+var StartTimerDecisionAttributes_timerId = &sStartTimerDecisionAttributes_timerId
+var StartTimerDecisionAttributes_control = &sStartTimerDecisionAttributes_control
+var StartTimerDecisionAttributes_startToFireTimeout = &sStartTimerDecisionAttributes_startToFireTimeout
+
+var StartTimerFailedCause = &sStartTimerFailedCause
+var StartTimerFailedCause_TIMER_ID_ALREADY_IN_USE = &sStartTimerFailedCause_TIMER_ID_ALREADY_IN_USE
+var StartTimerFailedCause_OPEN_TIMERS_LIMIT_EXCEEDED = &sStartTimerFailedCause_OPEN_TIMERS_LIMIT_EXCEEDED
+var StartTimerFailedCause_TIMER_CREATION_RATE_EXCEEDED = &sStartTimerFailedCause_TIMER_CREATION_RATE_EXCEEDED
+var StartTimerFailedCause_OPERATION_NOT_PERMITTED = &sStartTimerFailedCause_OPERATION_NOT_PERMITTED
+
+var StartTimerFailedEventAttributes = &sStartTimerFailedEventAttributes
+var StartTimerFailedEventAttributes_timerId = &sStartTimerFailedEventAttributes_timerId
+var StartTimerFailedEventAttributes_cause = &sStartTimerFailedEventAttributes_cause
+var StartTimerFailedEventAttributes_decisionTaskCompletedEventId = &sStartTimerFailedEventAttributes_decisionTaskCompletedEventId
+
+var _Tag = &s_Tag
+
+var TagFilter = &sTagFilter
+var TagFilter_tag = &sTagFilter_tag
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var TaskList = &sTaskList
+var TaskList_name = &sTaskList_name
+
+var _TaskPriority = &s_TaskPriority
+
+var _TaskToken = &s_TaskToken
+
+var _TerminateReason = &s_TerminateReason
+
+var TimerCanceledEventAttributes = &sTimerCanceledEventAttributes
+var TimerCanceledEventAttributes_timerId = &sTimerCanceledEventAttributes_timerId
+var TimerCanceledEventAttributes_startedEventId = &sTimerCanceledEventAttributes_startedEventId
+var TimerCanceledEventAttributes_decisionTaskCompletedEventId = &sTimerCanceledEventAttributes_decisionTaskCompletedEventId
+
+var TimerFiredEventAttributes = &sTimerFiredEventAttributes
+var TimerFiredEventAttributes_timerId = &sTimerFiredEventAttributes_timerId
+var TimerFiredEventAttributes_startedEventId = &sTimerFiredEventAttributes_startedEventId
+
+var _TimerId = &s_TimerId
+
+var TimerStartedEventAttributes = &sTimerStartedEventAttributes
+var TimerStartedEventAttributes_timerId = &sTimerStartedEventAttributes_timerId
+var TimerStartedEventAttributes_control = &sTimerStartedEventAttributes_control
+var TimerStartedEventAttributes_startToFireTimeout = &sTimerStartedEventAttributes_startToFireTimeout
+var TimerStartedEventAttributes_decisionTaskCompletedEventId = &sTimerStartedEventAttributes_decisionTaskCompletedEventId
+
+var _Timestamp = &s_Timestamp
+
+var TooManyTagsFault = &sTooManyTagsFault
+var TooManyTagsFault_message = &sTooManyTagsFault_message
+
+var _Truncated = &s_Truncated
+
+var TypeAlreadyExistsFault = &sTypeAlreadyExistsFault
+var TypeAlreadyExistsFault_message = &sTypeAlreadyExistsFault_message
+
+var TypeDeprecatedFault = &sTypeDeprecatedFault
+var TypeDeprecatedFault_message = &sTypeDeprecatedFault_message
+
+var TypeNotDeprecatedFault = &sTypeNotDeprecatedFault
+var TypeNotDeprecatedFault_message = &sTypeNotDeprecatedFault_message
+
+var UnknownResourceFault = &sUnknownResourceFault
+var UnknownResourceFault_message = &sUnknownResourceFault_message
+
+var _Version = &s_Version
+
+var _VersionOptional = &s_VersionOptional
+
+var WorkflowExecution = &sWorkflowExecution
+var WorkflowExecution_workflowId = &sWorkflowExecution_workflowId
+var WorkflowExecution_runId = &sWorkflowExecution_runId
+
+var WorkflowExecutionAlreadyStartedFault = &sWorkflowExecutionAlreadyStartedFault
+var WorkflowExecutionAlreadyStartedFault_message = &sWorkflowExecutionAlreadyStartedFault_message
+
+var WorkflowExecutionCanceledEventAttributes = &sWorkflowExecutionCanceledEventAttributes
+var WorkflowExecutionCanceledEventAttributes_details = &sWorkflowExecutionCanceledEventAttributes_details
+var WorkflowExecutionCanceledEventAttributes_decisionTaskCompletedEventId = &sWorkflowExecutionCanceledEventAttributes_decisionTaskCompletedEventId
+
+var WorkflowExecutionCancelRequestedCause = &sWorkflowExecutionCancelRequestedCause
+var WorkflowExecutionCancelRequestedCause_CHILD_POLICY_APPLIED = &sWorkflowExecutionCancelRequestedCause_CHILD_POLICY_APPLIED
+
+var WorkflowExecutionCancelRequestedEventAttributes = &sWorkflowExecutionCancelRequestedEventAttributes
+var WorkflowExecutionCancelRequestedEventAttributes_externalWorkflowExecution = &sWorkflowExecutionCancelRequestedEventAttributes_externalWorkflowExecution
+var WorkflowExecutionCancelRequestedEventAttributes_externalInitiatedEventId = &sWorkflowExecutionCancelRequestedEventAttributes_externalInitiatedEventId
+var WorkflowExecutionCancelRequestedEventAttributes_cause = &sWorkflowExecutionCancelRequestedEventAttributes_cause
+
+var WorkflowExecutionCompletedEventAttributes = &sWorkflowExecutionCompletedEventAttributes
+var WorkflowExecutionCompletedEventAttributes_result = &sWorkflowExecutionCompletedEventAttributes_result
+var WorkflowExecutionCompletedEventAttributes_decisionTaskCompletedEventId = &sWorkflowExecutionCompletedEventAttributes_decisionTaskCompletedEventId
+
+var WorkflowExecutionConfiguration = &sWorkflowExecutionConfiguration
+var WorkflowExecutionConfiguration_taskStartToCloseTimeout = &sWorkflowExecutionConfiguration_taskStartToCloseTimeout
+var WorkflowExecutionConfiguration_executionStartToCloseTimeout = &sWorkflowExecutionConfiguration_executionStartToCloseTimeout
+var WorkflowExecutionConfiguration_taskList = &sWorkflowExecutionConfiguration_taskList
+var WorkflowExecutionConfiguration_taskPriority = &sWorkflowExecutionConfiguration_taskPriority
+var WorkflowExecutionConfiguration_childPolicy = &sWorkflowExecutionConfiguration_childPolicy
+var WorkflowExecutionConfiguration_lambdaRole = &sWorkflowExecutionConfiguration_lambdaRole
+
+var WorkflowExecutionContinuedAsNewEventAttributes = &sWorkflowExecutionContinuedAsNewEventAttributes
+var WorkflowExecutionContinuedAsNewEventAttributes_input = &sWorkflowExecutionContinuedAsNewEventAttributes_input
+var WorkflowExecutionContinuedAsNewEventAttributes_decisionTaskCompletedEventId = &sWorkflowExecutionContinuedAsNewEventAttributes_decisionTaskCompletedEventId
+var WorkflowExecutionContinuedAsNewEventAttributes_newExecutionRunId = &sWorkflowExecutionContinuedAsNewEventAttributes_newExecutionRunId
+var WorkflowExecutionContinuedAsNewEventAttributes_executionStartToCloseTimeout = &sWorkflowExecutionContinuedAsNewEventAttributes_executionStartToCloseTimeout
+var WorkflowExecutionContinuedAsNewEventAttributes_taskList = &sWorkflowExecutionContinuedAsNewEventAttributes_taskList
+var WorkflowExecutionContinuedAsNewEventAttributes_taskPriority = &sWorkflowExecutionContinuedAsNewEventAttributes_taskPriority
+var WorkflowExecutionContinuedAsNewEventAttributes_taskStartToCloseTimeout = &sWorkflowExecutionContinuedAsNewEventAttributes_taskStartToCloseTimeout
+var WorkflowExecutionContinuedAsNewEventAttributes_childPolicy = &sWorkflowExecutionContinuedAsNewEventAttributes_childPolicy
+var WorkflowExecutionContinuedAsNewEventAttributes_tagList = &sWorkflowExecutionContinuedAsNewEventAttributes_tagList
+var WorkflowExecutionContinuedAsNewEventAttributes_workflowType = &sWorkflowExecutionContinuedAsNewEventAttributes_workflowType
+var WorkflowExecutionContinuedAsNewEventAttributes_lambdaRole = &sWorkflowExecutionContinuedAsNewEventAttributes_lambdaRole
+
+var WorkflowExecutionFailedEventAttributes = &sWorkflowExecutionFailedEventAttributes
+var WorkflowExecutionFailedEventAttributes_reason = &sWorkflowExecutionFailedEventAttributes_reason
+var WorkflowExecutionFailedEventAttributes_details = &sWorkflowExecutionFailedEventAttributes_details
+var WorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId = &sWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId
+
+var WorkflowExecutionFilter = &sWorkflowExecutionFilter
+var WorkflowExecutionFilter_workflowId = &sWorkflowExecutionFilter_workflowId
+
+var WorkflowExecutionInfo = &sWorkflowExecutionInfo
+var WorkflowExecutionInfo_execution = &sWorkflowExecutionInfo_execution
+var WorkflowExecutionInfo_workflowType = &sWorkflowExecutionInfo_workflowType
+var WorkflowExecutionInfo_startTimestamp = &sWorkflowExecutionInfo_startTimestamp
+var WorkflowExecutionInfo_closeTimestamp = &sWorkflowExecutionInfo_closeTimestamp
+var WorkflowExecutionInfo_executionStatus = &sWorkflowExecutionInfo_executionStatus
+var WorkflowExecutionInfo_closeStatus = &sWorkflowExecutionInfo_closeStatus
+var WorkflowExecutionInfo_parent = &sWorkflowExecutionInfo_parent
+var WorkflowExecutionInfo_tagList = &sWorkflowExecutionInfo_tagList
+var WorkflowExecutionInfo_cancelRequested = &sWorkflowExecutionInfo_cancelRequested
+
+var _WorkflowExecutionInfoList = &s_WorkflowExecutionInfoList
+var _WorkflowExecutionInfoList_member = &s_WorkflowExecutionInfoList_member
+
+var WorkflowExecutionOpenCounts = &sWorkflowExecutionOpenCounts
+var WorkflowExecutionOpenCounts_openActivityTasks = &sWorkflowExecutionOpenCounts_openActivityTasks
+var WorkflowExecutionOpenCounts_openDecisionTasks = &sWorkflowExecutionOpenCounts_openDecisionTasks
+var WorkflowExecutionOpenCounts_openTimers = &sWorkflowExecutionOpenCounts_openTimers
+var WorkflowExecutionOpenCounts_openChildWorkflowExecutions = &sWorkflowExecutionOpenCounts_openChildWorkflowExecutions
+var WorkflowExecutionOpenCounts_openLambdaFunctions = &sWorkflowExecutionOpenCounts_openLambdaFunctions
+
+var WorkflowExecutionSignaledEventAttributes = &sWorkflowExecutionSignaledEventAttributes
+var WorkflowExecutionSignaledEventAttributes_signalName = &sWorkflowExecutionSignaledEventAttributes_signalName
+var WorkflowExecutionSignaledEventAttributes_input = &sWorkflowExecutionSignaledEventAttributes_input
+var WorkflowExecutionSignaledEventAttributes_externalWorkflowExecution = &sWorkflowExecutionSignaledEventAttributes_externalWorkflowExecution
+var WorkflowExecutionSignaledEventAttributes_externalInitiatedEventId = &sWorkflowExecutionSignaledEventAttributes_externalInitiatedEventId
+
+var WorkflowExecutionStartedEventAttributes = &sWorkflowExecutionStartedEventAttributes
+var WorkflowExecutionStartedEventAttributes_input = &sWorkflowExecutionStartedEventAttributes_input
+var WorkflowExecutionStartedEventAttributes_executionStartToCloseTimeout = &sWorkflowExecutionStartedEventAttributes_executionStartToCloseTimeout
+var WorkflowExecutionStartedEventAttributes_taskStartToCloseTimeout = &sWorkflowExecutionStartedEventAttributes_taskStartToCloseTimeout
+var WorkflowExecutionStartedEventAttributes_childPolicy = &sWorkflowExecutionStartedEventAttributes_childPolicy
+var WorkflowExecutionStartedEventAttributes_taskList = &sWorkflowExecutionStartedEventAttributes_taskList
+var WorkflowExecutionStartedEventAttributes_taskPriority = &sWorkflowExecutionStartedEventAttributes_taskPriority
+var WorkflowExecutionStartedEventAttributes_workflowType = &sWorkflowExecutionStartedEventAttributes_workflowType
+var WorkflowExecutionStartedEventAttributes_tagList = &sWorkflowExecutionStartedEventAttributes_tagList
+var WorkflowExecutionStartedEventAttributes_continuedExecutionRunId = &sWorkflowExecutionStartedEventAttributes_continuedExecutionRunId
+var WorkflowExecutionStartedEventAttributes_parentWorkflowExecution = &sWorkflowExecutionStartedEventAttributes_parentWorkflowExecution
+var WorkflowExecutionStartedEventAttributes_parentInitiatedEventId = &sWorkflowExecutionStartedEventAttributes_parentInitiatedEventId
+var WorkflowExecutionStartedEventAttributes_lambdaRole = &sWorkflowExecutionStartedEventAttributes_lambdaRole
+
+var WorkflowExecutionTerminatedCause = &sWorkflowExecutionTerminatedCause
+var WorkflowExecutionTerminatedCause_CHILD_POLICY_APPLIED = &sWorkflowExecutionTerminatedCause_CHILD_POLICY_APPLIED
+var WorkflowExecutionTerminatedCause_EVENT_LIMIT_EXCEEDED = &sWorkflowExecutionTerminatedCause_EVENT_LIMIT_EXCEEDED
+var WorkflowExecutionTerminatedCause_OPERATOR_INITIATED = &sWorkflowExecutionTerminatedCause_OPERATOR_INITIATED
+
+var WorkflowExecutionTerminatedEventAttributes = &sWorkflowExecutionTerminatedEventAttributes
+var WorkflowExecutionTerminatedEventAttributes_reason = &sWorkflowExecutionTerminatedEventAttributes_reason
+var WorkflowExecutionTerminatedEventAttributes_details = &sWorkflowExecutionTerminatedEventAttributes_details
+var WorkflowExecutionTerminatedEventAttributes_childPolicy = &sWorkflowExecutionTerminatedEventAttributes_childPolicy
+var WorkflowExecutionTerminatedEventAttributes_cause = &sWorkflowExecutionTerminatedEventAttributes_cause
+
+var WorkflowExecutionTimedOutEventAttributes = &sWorkflowExecutionTimedOutEventAttributes
+var WorkflowExecutionTimedOutEventAttributes_timeoutType = &sWorkflowExecutionTimedOutEventAttributes_timeoutType
+var WorkflowExecutionTimedOutEventAttributes_childPolicy = &sWorkflowExecutionTimedOutEventAttributes_childPolicy
+
+var WorkflowExecutionTimeoutType = &sWorkflowExecutionTimeoutType
+var WorkflowExecutionTimeoutType_START_TO_CLOSE = &sWorkflowExecutionTimeoutType_START_TO_CLOSE
+
+var _WorkflowId = &s_WorkflowId
+
+var _WorkflowRunId = &s_WorkflowRunId
+
+var _WorkflowRunIdOptional = &s_WorkflowRunIdOptional
+
+var WorkflowType = &sWorkflowType
+var WorkflowType_name = &sWorkflowType_name
+var WorkflowType_version = &sWorkflowType_version
+
+var WorkflowTypeConfiguration = &sWorkflowTypeConfiguration
+var WorkflowTypeConfiguration_defaultTaskStartToCloseTimeout = &sWorkflowTypeConfiguration_defaultTaskStartToCloseTimeout
+var WorkflowTypeConfiguration_defaultExecutionStartToCloseTimeout = &sWorkflowTypeConfiguration_defaultExecutionStartToCloseTimeout
+var WorkflowTypeConfiguration_defaultTaskList = &sWorkflowTypeConfiguration_defaultTaskList
+var WorkflowTypeConfiguration_defaultTaskPriority = &sWorkflowTypeConfiguration_defaultTaskPriority
+var WorkflowTypeConfiguration_defaultChildPolicy = &sWorkflowTypeConfiguration_defaultChildPolicy
+var WorkflowTypeConfiguration_defaultLambdaRole = &sWorkflowTypeConfiguration_defaultLambdaRole
+
+var WorkflowTypeFilter = &sWorkflowTypeFilter
+var WorkflowTypeFilter_name = &sWorkflowTypeFilter_name
+var WorkflowTypeFilter_version = &sWorkflowTypeFilter_version
+
+var WorkflowTypeInfo = &sWorkflowTypeInfo
+var WorkflowTypeInfo_workflowType = &sWorkflowTypeInfo_workflowType
+var WorkflowTypeInfo_status = &sWorkflowTypeInfo_status
+var WorkflowTypeInfo_description = &sWorkflowTypeInfo_description
+var WorkflowTypeInfo_creationDate = &sWorkflowTypeInfo_creationDate
+var WorkflowTypeInfo_deprecationDate = &sWorkflowTypeInfo_deprecationDate
+
+var _WorkflowTypeInfoList = &s_WorkflowTypeInfoList
+var _WorkflowTypeInfoList_member = &s_WorkflowTypeInfoList_member
+
+var CountClosedWorkflowExecutionsInput = &sCountClosedWorkflowExecutionsInput
+var CountClosedWorkflowExecutionsInput_domain = &sCountClosedWorkflowExecutionsInput_domain
+var CountClosedWorkflowExecutionsInput_startTimeFilter = &sCountClosedWorkflowExecutionsInput_startTimeFilter
+var CountClosedWorkflowExecutionsInput_closeTimeFilter = &sCountClosedWorkflowExecutionsInput_closeTimeFilter
+var CountClosedWorkflowExecutionsInput_executionFilter = &sCountClosedWorkflowExecutionsInput_executionFilter
+var CountClosedWorkflowExecutionsInput_typeFilter = &sCountClosedWorkflowExecutionsInput_typeFilter
+var CountClosedWorkflowExecutionsInput_tagFilter = &sCountClosedWorkflowExecutionsInput_tagFilter
+var CountClosedWorkflowExecutionsInput_closeStatusFilter = &sCountClosedWorkflowExecutionsInput_closeStatusFilter
+
+var WorkflowExecutionCount = &sWorkflowExecutionCount
+var WorkflowExecutionCount_count = &sWorkflowExecutionCount_count
+var WorkflowExecutionCount_truncated = &sWorkflowExecutionCount_truncated
+
+var CountOpenWorkflowExecutionsInput = &sCountOpenWorkflowExecutionsInput
+var CountOpenWorkflowExecutionsInput_domain = &sCountOpenWorkflowExecutionsInput_domain
+var CountOpenWorkflowExecutionsInput_startTimeFilter = &sCountOpenWorkflowExecutionsInput_startTimeFilter
+var CountOpenWorkflowExecutionsInput_typeFilter = &sCountOpenWorkflowExecutionsInput_typeFilter
+var CountOpenWorkflowExecutionsInput_tagFilter = &sCountOpenWorkflowExecutionsInput_tagFilter
+var CountOpenWorkflowExecutionsInput_executionFilter = &sCountOpenWorkflowExecutionsInput_executionFilter
+
+var CountPendingActivityTasksInput = &sCountPendingActivityTasksInput
+var CountPendingActivityTasksInput_domain = &sCountPendingActivityTasksInput_domain
+var CountPendingActivityTasksInput_taskList = &sCountPendingActivityTasksInput_taskList
+
+var PendingTaskCount = &sPendingTaskCount
+var PendingTaskCount_count = &sPendingTaskCount_count
+var PendingTaskCount_truncated = &sPendingTaskCount_truncated
+
+var CountPendingDecisionTasksInput = &sCountPendingDecisionTasksInput
+var CountPendingDecisionTasksInput_domain = &sCountPendingDecisionTasksInput_domain
+var CountPendingDecisionTasksInput_taskList = &sCountPendingDecisionTasksInput_taskList
+
+var DeleteActivityTypeInput = &sDeleteActivityTypeInput
+var DeleteActivityTypeInput_domain = &sDeleteActivityTypeInput_domain
+var DeleteActivityTypeInput_activityType = &sDeleteActivityTypeInput_activityType
+
+var DeleteWorkflowTypeInput = &sDeleteWorkflowTypeInput
+var DeleteWorkflowTypeInput_domain = &sDeleteWorkflowTypeInput_domain
+var DeleteWorkflowTypeInput_workflowType = &sDeleteWorkflowTypeInput_workflowType
+
+var DeprecateActivityTypeInput = &sDeprecateActivityTypeInput
+var DeprecateActivityTypeInput_domain = &sDeprecateActivityTypeInput_domain
+var DeprecateActivityTypeInput_activityType = &sDeprecateActivityTypeInput_activityType
+
+var DeprecateDomainInput = &sDeprecateDomainInput
+var DeprecateDomainInput_name = &sDeprecateDomainInput_name
+
+var DeprecateWorkflowTypeInput = &sDeprecateWorkflowTypeInput
+var DeprecateWorkflowTypeInput_domain = &sDeprecateWorkflowTypeInput_domain
+var DeprecateWorkflowTypeInput_workflowType = &sDeprecateWorkflowTypeInput_workflowType
+
+var DescribeActivityTypeInput = &sDescribeActivityTypeInput
+var DescribeActivityTypeInput_domain = &sDescribeActivityTypeInput_domain
+var DescribeActivityTypeInput_activityType = &sDescribeActivityTypeInput_activityType
+
+var ActivityTypeDetail = &sActivityTypeDetail
+var ActivityTypeDetail_typeInfo = &sActivityTypeDetail_typeInfo
+var ActivityTypeDetail_configuration = &sActivityTypeDetail_configuration
+
+var DescribeDomainInput = &sDescribeDomainInput
+var DescribeDomainInput_name = &sDescribeDomainInput_name
+
+var DomainDetail = &sDomainDetail
+var DomainDetail_domainInfo = &sDomainDetail_domainInfo
+var DomainDetail_configuration = &sDomainDetail_configuration
+
+var DescribeWorkflowExecutionInput = &sDescribeWorkflowExecutionInput
+var DescribeWorkflowExecutionInput_domain = &sDescribeWorkflowExecutionInput_domain
+var DescribeWorkflowExecutionInput_execution = &sDescribeWorkflowExecutionInput_execution
+
+var WorkflowExecutionDetail = &sWorkflowExecutionDetail
+var WorkflowExecutionDetail_executionInfo = &sWorkflowExecutionDetail_executionInfo
+var WorkflowExecutionDetail_executionConfiguration = &sWorkflowExecutionDetail_executionConfiguration
+var WorkflowExecutionDetail_openCounts = &sWorkflowExecutionDetail_openCounts
+var WorkflowExecutionDetail_latestActivityTaskTimestamp = &sWorkflowExecutionDetail_latestActivityTaskTimestamp
+var WorkflowExecutionDetail_latestExecutionContext = &sWorkflowExecutionDetail_latestExecutionContext
+
+var DescribeWorkflowTypeInput = &sDescribeWorkflowTypeInput
+var DescribeWorkflowTypeInput_domain = &sDescribeWorkflowTypeInput_domain
+var DescribeWorkflowTypeInput_workflowType = &sDescribeWorkflowTypeInput_workflowType
+
+var WorkflowTypeDetail = &sWorkflowTypeDetail
+var WorkflowTypeDetail_typeInfo = &sWorkflowTypeDetail_typeInfo
+var WorkflowTypeDetail_configuration = &sWorkflowTypeDetail_configuration
+
+var GetWorkflowExecutionHistoryInput = &sGetWorkflowExecutionHistoryInput
+var GetWorkflowExecutionHistoryInput_domain = &sGetWorkflowExecutionHistoryInput_domain
+var GetWorkflowExecutionHistoryInput_execution = &sGetWorkflowExecutionHistoryInput_execution
+var GetWorkflowExecutionHistoryInput_nextPageToken = &sGetWorkflowExecutionHistoryInput_nextPageToken
+var GetWorkflowExecutionHistoryInput_maximumPageSize = &sGetWorkflowExecutionHistoryInput_maximumPageSize
+var GetWorkflowExecutionHistoryInput_reverseOrder = &sGetWorkflowExecutionHistoryInput_reverseOrder
+
+var History = &sHistory
+var History_events = &sHistory_events
+var History_nextPageToken = &sHistory_nextPageToken
+
+var ListActivityTypesInput = &sListActivityTypesInput
+var ListActivityTypesInput_domain = &sListActivityTypesInput_domain
+var ListActivityTypesInput_name = &sListActivityTypesInput_name
+var ListActivityTypesInput_registrationStatus = &sListActivityTypesInput_registrationStatus
+var ListActivityTypesInput_nextPageToken = &sListActivityTypesInput_nextPageToken
+var ListActivityTypesInput_maximumPageSize = &sListActivityTypesInput_maximumPageSize
+var ListActivityTypesInput_reverseOrder = &sListActivityTypesInput_reverseOrder
+
+var ActivityTypeInfos = &sActivityTypeInfos
+var ActivityTypeInfos_typeInfos = &sActivityTypeInfos_typeInfos
+var ActivityTypeInfos_nextPageToken = &sActivityTypeInfos_nextPageToken
+
+var ListClosedWorkflowExecutionsInput = &sListClosedWorkflowExecutionsInput
+var ListClosedWorkflowExecutionsInput_domain = &sListClosedWorkflowExecutionsInput_domain
+var ListClosedWorkflowExecutionsInput_startTimeFilter = &sListClosedWorkflowExecutionsInput_startTimeFilter
+var ListClosedWorkflowExecutionsInput_closeTimeFilter = &sListClosedWorkflowExecutionsInput_closeTimeFilter
+var ListClosedWorkflowExecutionsInput_executionFilter = &sListClosedWorkflowExecutionsInput_executionFilter
+var ListClosedWorkflowExecutionsInput_closeStatusFilter = &sListClosedWorkflowExecutionsInput_closeStatusFilter
+var ListClosedWorkflowExecutionsInput_typeFilter = &sListClosedWorkflowExecutionsInput_typeFilter
+var ListClosedWorkflowExecutionsInput_tagFilter = &sListClosedWorkflowExecutionsInput_tagFilter
+var ListClosedWorkflowExecutionsInput_nextPageToken = &sListClosedWorkflowExecutionsInput_nextPageToken
+var ListClosedWorkflowExecutionsInput_maximumPageSize = &sListClosedWorkflowExecutionsInput_maximumPageSize
+var ListClosedWorkflowExecutionsInput_reverseOrder = &sListClosedWorkflowExecutionsInput_reverseOrder
+
+var WorkflowExecutionInfos = &sWorkflowExecutionInfos
+var WorkflowExecutionInfos_executionInfos = &sWorkflowExecutionInfos_executionInfos
+var WorkflowExecutionInfos_nextPageToken = &sWorkflowExecutionInfos_nextPageToken
+
+var ListDomainsInput = &sListDomainsInput
+var ListDomainsInput_nextPageToken = &sListDomainsInput_nextPageToken
+var ListDomainsInput_registrationStatus = &sListDomainsInput_registrationStatus
+var ListDomainsInput_maximumPageSize = &sListDomainsInput_maximumPageSize
+var ListDomainsInput_reverseOrder = &sListDomainsInput_reverseOrder
+
+var DomainInfos = &sDomainInfos
+var DomainInfos_domainInfos = &sDomainInfos_domainInfos
+var DomainInfos_nextPageToken = &sDomainInfos_nextPageToken
+
+var ListOpenWorkflowExecutionsInput = &sListOpenWorkflowExecutionsInput
+var ListOpenWorkflowExecutionsInput_domain = &sListOpenWorkflowExecutionsInput_domain
+var ListOpenWorkflowExecutionsInput_startTimeFilter = &sListOpenWorkflowExecutionsInput_startTimeFilter
+var ListOpenWorkflowExecutionsInput_typeFilter = &sListOpenWorkflowExecutionsInput_typeFilter
+var ListOpenWorkflowExecutionsInput_tagFilter = &sListOpenWorkflowExecutionsInput_tagFilter
+var ListOpenWorkflowExecutionsInput_nextPageToken = &sListOpenWorkflowExecutionsInput_nextPageToken
+var ListOpenWorkflowExecutionsInput_maximumPageSize = &sListOpenWorkflowExecutionsInput_maximumPageSize
+var ListOpenWorkflowExecutionsInput_reverseOrder = &sListOpenWorkflowExecutionsInput_reverseOrder
+var ListOpenWorkflowExecutionsInput_executionFilter = &sListOpenWorkflowExecutionsInput_executionFilter
+
+var ListTagsForResourceInput = &sListTagsForResourceInput
+var ListTagsForResourceInput_resourceArn = &sListTagsForResourceInput_resourceArn
+
+var ListTagsForResourceOutput = &sListTagsForResourceOutput
+var ListTagsForResourceOutput_tags = &sListTagsForResourceOutput_tags
+
+var ListWorkflowTypesInput = &sListWorkflowTypesInput
+var ListWorkflowTypesInput_domain = &sListWorkflowTypesInput_domain
+var ListWorkflowTypesInput_name = &sListWorkflowTypesInput_name
+var ListWorkflowTypesInput_registrationStatus = &sListWorkflowTypesInput_registrationStatus
+var ListWorkflowTypesInput_nextPageToken = &sListWorkflowTypesInput_nextPageToken
+var ListWorkflowTypesInput_maximumPageSize = &sListWorkflowTypesInput_maximumPageSize
+var ListWorkflowTypesInput_reverseOrder = &sListWorkflowTypesInput_reverseOrder
+
+var WorkflowTypeInfos = &sWorkflowTypeInfos
+var WorkflowTypeInfos_typeInfos = &sWorkflowTypeInfos_typeInfos
+var WorkflowTypeInfos_nextPageToken = &sWorkflowTypeInfos_nextPageToken
+
+var PollForActivityTaskInput = &sPollForActivityTaskInput
+var PollForActivityTaskInput_domain = &sPollForActivityTaskInput_domain
+var PollForActivityTaskInput_taskList = &sPollForActivityTaskInput_taskList
+var PollForActivityTaskInput_identity = &sPollForActivityTaskInput_identity
+
+var ActivityTask = &sActivityTask
+var ActivityTask_taskToken = &sActivityTask_taskToken
+var ActivityTask_activityId = &sActivityTask_activityId
+var ActivityTask_startedEventId = &sActivityTask_startedEventId
+var ActivityTask_workflowExecution = &sActivityTask_workflowExecution
+var ActivityTask_activityType = &sActivityTask_activityType
+var ActivityTask_input = &sActivityTask_input
+
+var PollForDecisionTaskInput = &sPollForDecisionTaskInput
+var PollForDecisionTaskInput_domain = &sPollForDecisionTaskInput_domain
+var PollForDecisionTaskInput_taskList = &sPollForDecisionTaskInput_taskList
+var PollForDecisionTaskInput_identity = &sPollForDecisionTaskInput_identity
+var PollForDecisionTaskInput_nextPageToken = &sPollForDecisionTaskInput_nextPageToken
+var PollForDecisionTaskInput_maximumPageSize = &sPollForDecisionTaskInput_maximumPageSize
+var PollForDecisionTaskInput_reverseOrder = &sPollForDecisionTaskInput_reverseOrder
+var PollForDecisionTaskInput_startAtPreviousStartedEvent = &sPollForDecisionTaskInput_startAtPreviousStartedEvent
+
+var DecisionTask = &sDecisionTask
+var DecisionTask_taskToken = &sDecisionTask_taskToken
+var DecisionTask_startedEventId = &sDecisionTask_startedEventId
+var DecisionTask_workflowExecution = &sDecisionTask_workflowExecution
+var DecisionTask_workflowType = &sDecisionTask_workflowType
+var DecisionTask_events = &sDecisionTask_events
+var DecisionTask_nextPageToken = &sDecisionTask_nextPageToken
+var DecisionTask_previousStartedEventId = &sDecisionTask_previousStartedEventId
+
+var RecordActivityTaskHeartbeatInput = &sRecordActivityTaskHeartbeatInput
+var RecordActivityTaskHeartbeatInput_taskToken = &sRecordActivityTaskHeartbeatInput_taskToken
+var RecordActivityTaskHeartbeatInput_details = &sRecordActivityTaskHeartbeatInput_details
+
+var ActivityTaskStatus = &sActivityTaskStatus
+var ActivityTaskStatus_cancelRequested = &sActivityTaskStatus_cancelRequested
+
+var RegisterActivityTypeInput = &sRegisterActivityTypeInput
+var RegisterActivityTypeInput_domain = &sRegisterActivityTypeInput_domain
+var RegisterActivityTypeInput_name = &sRegisterActivityTypeInput_name
+var RegisterActivityTypeInput_version = &sRegisterActivityTypeInput_version
+var RegisterActivityTypeInput_description = &sRegisterActivityTypeInput_description
+var RegisterActivityTypeInput_defaultTaskStartToCloseTimeout = &sRegisterActivityTypeInput_defaultTaskStartToCloseTimeout
+var RegisterActivityTypeInput_defaultTaskHeartbeatTimeout = &sRegisterActivityTypeInput_defaultTaskHeartbeatTimeout
+var RegisterActivityTypeInput_defaultTaskList = &sRegisterActivityTypeInput_defaultTaskList
+var RegisterActivityTypeInput_defaultTaskPriority = &sRegisterActivityTypeInput_defaultTaskPriority
+var RegisterActivityTypeInput_defaultTaskScheduleToStartTimeout = &sRegisterActivityTypeInput_defaultTaskScheduleToStartTimeout
+var RegisterActivityTypeInput_defaultTaskScheduleToCloseTimeout = &sRegisterActivityTypeInput_defaultTaskScheduleToCloseTimeout
+
+var RegisterDomainInput = &sRegisterDomainInput
+var RegisterDomainInput_name = &sRegisterDomainInput_name
+var RegisterDomainInput_description = &sRegisterDomainInput_description
+var RegisterDomainInput_workflowExecutionRetentionPeriodInDays = &sRegisterDomainInput_workflowExecutionRetentionPeriodInDays
+var RegisterDomainInput_tags = &sRegisterDomainInput_tags
+
+var RegisterWorkflowTypeInput = &sRegisterWorkflowTypeInput
+var RegisterWorkflowTypeInput_domain = &sRegisterWorkflowTypeInput_domain
+var RegisterWorkflowTypeInput_name = &sRegisterWorkflowTypeInput_name
+var RegisterWorkflowTypeInput_version = &sRegisterWorkflowTypeInput_version
+var RegisterWorkflowTypeInput_description = &sRegisterWorkflowTypeInput_description
+var RegisterWorkflowTypeInput_defaultTaskStartToCloseTimeout = &sRegisterWorkflowTypeInput_defaultTaskStartToCloseTimeout
+var RegisterWorkflowTypeInput_defaultExecutionStartToCloseTimeout = &sRegisterWorkflowTypeInput_defaultExecutionStartToCloseTimeout
+var RegisterWorkflowTypeInput_defaultTaskList = &sRegisterWorkflowTypeInput_defaultTaskList
+var RegisterWorkflowTypeInput_defaultTaskPriority = &sRegisterWorkflowTypeInput_defaultTaskPriority
+var RegisterWorkflowTypeInput_defaultChildPolicy = &sRegisterWorkflowTypeInput_defaultChildPolicy
+var RegisterWorkflowTypeInput_defaultLambdaRole = &sRegisterWorkflowTypeInput_defaultLambdaRole
+
+var RequestCancelWorkflowExecutionInput = &sRequestCancelWorkflowExecutionInput
+var RequestCancelWorkflowExecutionInput_domain = &sRequestCancelWorkflowExecutionInput_domain
+var RequestCancelWorkflowExecutionInput_workflowId = &sRequestCancelWorkflowExecutionInput_workflowId
+var RequestCancelWorkflowExecutionInput_runId = &sRequestCancelWorkflowExecutionInput_runId
+
+var RespondActivityTaskCanceledInput = &sRespondActivityTaskCanceledInput
+var RespondActivityTaskCanceledInput_taskToken = &sRespondActivityTaskCanceledInput_taskToken
+var RespondActivityTaskCanceledInput_details = &sRespondActivityTaskCanceledInput_details
+
+var RespondActivityTaskCompletedInput = &sRespondActivityTaskCompletedInput
+var RespondActivityTaskCompletedInput_taskToken = &sRespondActivityTaskCompletedInput_taskToken
+var RespondActivityTaskCompletedInput_result = &sRespondActivityTaskCompletedInput_result
+
+var RespondActivityTaskFailedInput = &sRespondActivityTaskFailedInput
+var RespondActivityTaskFailedInput_taskToken = &sRespondActivityTaskFailedInput_taskToken
+var RespondActivityTaskFailedInput_reason = &sRespondActivityTaskFailedInput_reason
+var RespondActivityTaskFailedInput_details = &sRespondActivityTaskFailedInput_details
+
+var RespondDecisionTaskCompletedInput = &sRespondDecisionTaskCompletedInput
+var RespondDecisionTaskCompletedInput_taskToken = &sRespondDecisionTaskCompletedInput_taskToken
+var RespondDecisionTaskCompletedInput_decisions = &sRespondDecisionTaskCompletedInput_decisions
+var RespondDecisionTaskCompletedInput_executionContext = &sRespondDecisionTaskCompletedInput_executionContext
+var RespondDecisionTaskCompletedInput_taskList = &sRespondDecisionTaskCompletedInput_taskList
+var RespondDecisionTaskCompletedInput_taskListScheduleToStartTimeout = &sRespondDecisionTaskCompletedInput_taskListScheduleToStartTimeout
+
+var SignalWorkflowExecutionInput = &sSignalWorkflowExecutionInput
+var SignalWorkflowExecutionInput_domain = &sSignalWorkflowExecutionInput_domain
+var SignalWorkflowExecutionInput_workflowId = &sSignalWorkflowExecutionInput_workflowId
+var SignalWorkflowExecutionInput_runId = &sSignalWorkflowExecutionInput_runId
+var SignalWorkflowExecutionInput_signalName = &sSignalWorkflowExecutionInput_signalName
+var SignalWorkflowExecutionInput_input = &sSignalWorkflowExecutionInput_input
+
+var StartWorkflowExecutionInput = &sStartWorkflowExecutionInput
+var StartWorkflowExecutionInput_domain = &sStartWorkflowExecutionInput_domain
+var StartWorkflowExecutionInput_workflowId = &sStartWorkflowExecutionInput_workflowId
+var StartWorkflowExecutionInput_workflowType = &sStartWorkflowExecutionInput_workflowType
+var StartWorkflowExecutionInput_taskList = &sStartWorkflowExecutionInput_taskList
+var StartWorkflowExecutionInput_taskPriority = &sStartWorkflowExecutionInput_taskPriority
+var StartWorkflowExecutionInput_input = &sStartWorkflowExecutionInput_input
+var StartWorkflowExecutionInput_executionStartToCloseTimeout = &sStartWorkflowExecutionInput_executionStartToCloseTimeout
+var StartWorkflowExecutionInput_tagList = &sStartWorkflowExecutionInput_tagList
+var StartWorkflowExecutionInput_taskStartToCloseTimeout = &sStartWorkflowExecutionInput_taskStartToCloseTimeout
+var StartWorkflowExecutionInput_childPolicy = &sStartWorkflowExecutionInput_childPolicy
+var StartWorkflowExecutionInput_lambdaRole = &sStartWorkflowExecutionInput_lambdaRole
+
+var Run = &sRun
+var Run_runId = &sRun_runId
+
+var TagResourceInput = &sTagResourceInput
+var TagResourceInput_resourceArn = &sTagResourceInput_resourceArn
+var TagResourceInput_tags = &sTagResourceInput_tags
+
+var TerminateWorkflowExecutionInput = &sTerminateWorkflowExecutionInput
+var TerminateWorkflowExecutionInput_domain = &sTerminateWorkflowExecutionInput_domain
+var TerminateWorkflowExecutionInput_workflowId = &sTerminateWorkflowExecutionInput_workflowId
+var TerminateWorkflowExecutionInput_runId = &sTerminateWorkflowExecutionInput_runId
+var TerminateWorkflowExecutionInput_reason = &sTerminateWorkflowExecutionInput_reason
+var TerminateWorkflowExecutionInput_details = &sTerminateWorkflowExecutionInput_details
+var TerminateWorkflowExecutionInput_childPolicy = &sTerminateWorkflowExecutionInput_childPolicy
+
+var UndeprecateActivityTypeInput = &sUndeprecateActivityTypeInput
+var UndeprecateActivityTypeInput_domain = &sUndeprecateActivityTypeInput_domain
+var UndeprecateActivityTypeInput_activityType = &sUndeprecateActivityTypeInput_activityType
+
+var UndeprecateDomainInput = &sUndeprecateDomainInput
+var UndeprecateDomainInput_name = &sUndeprecateDomainInput_name
+
+var UndeprecateWorkflowTypeInput = &sUndeprecateWorkflowTypeInput
+var UndeprecateWorkflowTypeInput_domain = &sUndeprecateWorkflowTypeInput_domain
+var UndeprecateWorkflowTypeInput_workflowType = &sUndeprecateWorkflowTypeInput_workflowType
+
+var UntagResourceInput = &sUntagResourceInput
+var UntagResourceInput_resourceArn = &sUntagResourceInput_resourceArn
+var UntagResourceInput_tagKeys = &sUntagResourceInput_tagKeys
+
+var SimpleWorkflowService = &smithy.ServiceSchema{Schema: &s_SimpleWorkflowService, Version: "2012-01-25"}

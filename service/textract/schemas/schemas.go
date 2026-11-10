@@ -4,2785 +4,2017 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AnalyzeDocument = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "AnalyzeDocument",
-}, smithy.ShapeTypeOperation, 0)
-
-var AnalyzeExpense = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "AnalyzeExpense",
-}, smithy.ShapeTypeOperation, 0)
-
-var AnalyzeID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "AnalyzeID",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateAdapter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "CreateAdapter",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateAdapterVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "CreateAdapterVersion",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteAdapter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "DeleteAdapter",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteAdapterVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "DeleteAdapterVersion",
-}, smithy.ShapeTypeOperation, 0)
-
-var DetectDocumentText = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "DetectDocumentText",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetAdapter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "GetAdapter",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetAdapterVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "GetAdapterVersion",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetDocumentAnalysis = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "GetDocumentAnalysis",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetDocumentTextDetection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "GetDocumentTextDetection",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetExpenseAnalysis = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "GetExpenseAnalysis",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetLendingAnalysis = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "GetLendingAnalysis",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetLendingAnalysisSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "GetLendingAnalysisSummary",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListAdapters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "ListAdapters",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListAdapterVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "ListAdapterVersions",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartDocumentAnalysis = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "StartDocumentAnalysis",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartDocumentTextDetection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "StartDocumentTextDetection",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartExpenseAnalysis = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "StartExpenseAnalysis",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartLendingAnalysis = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "StartLendingAnalysis",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateAdapter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "UpdateAdapter",
-}, smithy.ShapeTypeOperation, 0)
-
-var _Textract = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "Textract",
-}, smithy.ShapeTypeService, 0)
-
-var Textract = smithy.NewServiceSchema(_Textract, "2018-06-27")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var AccessDeniedException_Message *smithy.Schema
-
-var AccessDeniedException_Code *smithy.Schema
-
-var Adapter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "Adapter",
-}, smithy.ShapeTypeStructure, 3)
-var Adapter_AdapterId *smithy.Schema
-
-var Adapter_Pages *smithy.Schema
-
-var Adapter_Version *smithy.Schema
-
-var _AdapterDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "AdapterDescription",
-}, smithy.ShapeTypeString, 0)
-
-var _AdapterId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "AdapterId",
-}, smithy.ShapeTypeString, 0)
-
-var _AdapterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "AdapterList",
-}, smithy.ShapeTypeList, 1)
-var _AdapterList_member *smithy.Schema
-
-var _AdapterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "AdapterName",
-}, smithy.ShapeTypeString, 0)
-
-var AdapterOverview = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "AdapterOverview",
-}, smithy.ShapeTypeStructure, 4)
-var AdapterOverview_AdapterId *smithy.Schema
-
-var AdapterOverview_AdapterName *smithy.Schema
-
-var AdapterOverview_CreationTime *smithy.Schema
-
-var AdapterOverview_FeatureTypes *smithy.Schema
-
-var _AdapterPage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "AdapterPage",
-}, smithy.ShapeTypeString, 0)
-
-var _AdapterPages = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "AdapterPages",
-}, smithy.ShapeTypeList, 1)
-var _AdapterPages_member *smithy.Schema
-
-var _Adapters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "Adapters",
-}, smithy.ShapeTypeList, 1)
-var _Adapters_member *smithy.Schema
-
-var AdaptersConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "AdaptersConfig",
-}, smithy.ShapeTypeStructure, 1)
-var AdaptersConfig_Adapters *smithy.Schema
-
-var _AdapterVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "AdapterVersion",
-}, smithy.ShapeTypeString, 0)
-
-var AdapterVersionDatasetConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "AdapterVersionDatasetConfig",
-}, smithy.ShapeTypeStructure, 1)
-var AdapterVersionDatasetConfig_ManifestS3Object *smithy.Schema
-
-var AdapterVersionEvaluationMetric = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "AdapterVersionEvaluationMetric",
-}, smithy.ShapeTypeStructure, 3)
-var AdapterVersionEvaluationMetric_Baseline *smithy.Schema
-
-var AdapterVersionEvaluationMetric_AdapterVersion *smithy.Schema
-
-var AdapterVersionEvaluationMetric_FeatureType *smithy.Schema
-
-var _AdapterVersionEvaluationMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "AdapterVersionEvaluationMetrics",
-}, smithy.ShapeTypeList, 1)
-var _AdapterVersionEvaluationMetrics_member *smithy.Schema
-
-var _AdapterVersionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "AdapterVersionList",
-}, smithy.ShapeTypeList, 1)
-var _AdapterVersionList_member *smithy.Schema
-
-var AdapterVersionOverview = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "AdapterVersionOverview",
-}, smithy.ShapeTypeStructure, 6)
-var AdapterVersionOverview_AdapterId *smithy.Schema
-
-var AdapterVersionOverview_AdapterVersion *smithy.Schema
-
-var AdapterVersionOverview_CreationTime *smithy.Schema
-
-var AdapterVersionOverview_FeatureTypes *smithy.Schema
-
-var AdapterVersionOverview_Status *smithy.Schema
-
-var AdapterVersionOverview_StatusMessage *smithy.Schema
-
-var AdapterVersionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "AdapterVersionStatus",
-}, smithy.ShapeTypeEnum, 5)
-var AdapterVersionStatus_ACTIVE *smithy.Schema
-
-var AdapterVersionStatus_AT_RISK *smithy.Schema
-
-var AdapterVersionStatus_DEPRECATED *smithy.Schema
-
-var AdapterVersionStatus_CREATION_ERROR *smithy.Schema
-
-var AdapterVersionStatus_CREATION_IN_PROGRESS *smithy.Schema
-
-var _AdapterVersionStatusMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "AdapterVersionStatusMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _AmazonResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "AmazonResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var AnalyzeIDDetections = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "AnalyzeIDDetections",
-}, smithy.ShapeTypeStructure, 3)
-var AnalyzeIDDetections_Text *smithy.Schema
-
-var AnalyzeIDDetections_NormalizedValue *smithy.Schema
-
-var AnalyzeIDDetections_Confidence *smithy.Schema
-
-var _Angle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "Angle",
-}, smithy.ShapeTypeFloat, 0)
-
-var AutoUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "AutoUpdate",
-}, smithy.ShapeTypeEnum, 2)
-var AutoUpdate_ENABLED *smithy.Schema
-
-var AutoUpdate_DISABLED *smithy.Schema
-
-var BadDocumentException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "BadDocumentException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var BadDocumentException_Message *smithy.Schema
-
-var BadDocumentException_Code *smithy.Schema
-
-var Block = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "Block",
-}, smithy.ShapeTypeStructure, 15)
-var Block_BlockType *smithy.Schema
-
-var Block_Confidence *smithy.Schema
-
-var Block_Text *smithy.Schema
-
-var Block_TextType *smithy.Schema
-
-var Block_RowIndex *smithy.Schema
-
-var Block_ColumnIndex *smithy.Schema
-
-var Block_RowSpan *smithy.Schema
-
-var Block_ColumnSpan *smithy.Schema
-
-var Block_Geometry *smithy.Schema
-
-var Block_Id *smithy.Schema
-
-var Block_Relationships *smithy.Schema
-
-var Block_EntityTypes *smithy.Schema
-
-var Block_SelectionStatus *smithy.Schema
-
-var Block_Page *smithy.Schema
-
-var Block_Query *smithy.Schema
-
-var _BlockList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "BlockList",
-}, smithy.ShapeTypeList, 1)
-var _BlockList_member *smithy.Schema
-
-var BlockType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "BlockType",
-}, smithy.ShapeTypeEnum, 24)
-var BlockType_KEY_VALUE_SET *smithy.Schema
-
-var BlockType_PAGE *smithy.Schema
-
-var BlockType_LINE *smithy.Schema
-
-var BlockType_WORD *smithy.Schema
-
-var BlockType_TABLE *smithy.Schema
-
-var BlockType_CELL *smithy.Schema
-
-var BlockType_SELECTION_ELEMENT *smithy.Schema
-
-var BlockType_MERGED_CELL *smithy.Schema
-
-var BlockType_TITLE *smithy.Schema
-
-var BlockType_QUERY *smithy.Schema
-
-var BlockType_QUERY_RESULT *smithy.Schema
-
-var BlockType_SIGNATURE *smithy.Schema
-
-var BlockType_TABLE_TITLE *smithy.Schema
-
-var BlockType_TABLE_FOOTER *smithy.Schema
-
-var BlockType_LAYOUT_TEXT *smithy.Schema
-
-var BlockType_LAYOUT_TITLE *smithy.Schema
-
-var BlockType_LAYOUT_HEADER *smithy.Schema
-
-var BlockType_LAYOUT_FOOTER *smithy.Schema
-
-var BlockType_LAYOUT_SECTION_HEADER *smithy.Schema
-
-var BlockType_LAYOUT_PAGE_NUMBER *smithy.Schema
-
-var BlockType_LAYOUT_LIST *smithy.Schema
-
-var BlockType_LAYOUT_FIGURE *smithy.Schema
-
-var BlockType_LAYOUT_TABLE *smithy.Schema
-
-var BlockType_LAYOUT_KEY_VALUE *smithy.Schema
-
-var BoundingBox = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "BoundingBox",
-}, smithy.ShapeTypeStructure, 4)
-var BoundingBox_Width *smithy.Schema
-
-var BoundingBox_Height *smithy.Schema
-
-var BoundingBox_Left *smithy.Schema
-
-var BoundingBox_Top *smithy.Schema
-
-var _ClientRequestToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "ClientRequestToken",
-}, smithy.ShapeTypeString, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var ConflictException_Message *smithy.Schema
-
-var ConflictException_Code *smithy.Schema
-
-var ContentClassifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "ContentClassifier",
-}, smithy.ShapeTypeEnum, 2)
-var ContentClassifier_FREE_OF_PERSONALLY_IDENTIFIABLE_INFORMATION *smithy.Schema
-
-var ContentClassifier_FREE_OF_ADULT_CONTENT *smithy.Schema
-
-var _ContentClassifiers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "ContentClassifiers",
-}, smithy.ShapeTypeList, 1)
-var _ContentClassifiers_member *smithy.Schema
-
-var _DateTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "DateTime",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var DetectedSignature = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "DetectedSignature",
-}, smithy.ShapeTypeStructure, 1)
-var DetectedSignature_Page *smithy.Schema
-
-var _DetectedSignatureList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "DetectedSignatureList",
-}, smithy.ShapeTypeList, 1)
-var _DetectedSignatureList_member *smithy.Schema
-
-var Document = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "Document",
-}, smithy.ShapeTypeStructure, 2)
-var Document_Bytes *smithy.Schema
-
-var Document_S3Object *smithy.Schema
-
-var DocumentGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "DocumentGroup",
-}, smithy.ShapeTypeStructure, 4)
-var DocumentGroup_Type *smithy.Schema
-
-var DocumentGroup_SplitDocuments *smithy.Schema
-
-var DocumentGroup_DetectedSignatures *smithy.Schema
-
-var DocumentGroup_UndetectedSignatures *smithy.Schema
-
-var _DocumentGroupList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "DocumentGroupList",
-}, smithy.ShapeTypeList, 1)
-var _DocumentGroupList_member *smithy.Schema
-
-var DocumentLocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "DocumentLocation",
-}, smithy.ShapeTypeStructure, 1)
-var DocumentLocation_S3Object *smithy.Schema
-
-var DocumentMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "DocumentMetadata",
-}, smithy.ShapeTypeStructure, 1)
-var DocumentMetadata_Pages *smithy.Schema
-
-var _DocumentPages = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "DocumentPages",
-}, smithy.ShapeTypeList, 1)
-var _DocumentPages_member *smithy.Schema
-
-var DocumentTooLargeException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "DocumentTooLargeException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var DocumentTooLargeException_Message *smithy.Schema
-
-var DocumentTooLargeException_Code *smithy.Schema
-
-var EntityType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "EntityType",
-}, smithy.ShapeTypeEnum, 9)
-var EntityType_KEY *smithy.Schema
-
-var EntityType_VALUE *smithy.Schema
-
-var EntityType_COLUMN_HEADER *smithy.Schema
-
-var EntityType_TABLE_TITLE *smithy.Schema
-
-var EntityType_TABLE_FOOTER *smithy.Schema
-
-var EntityType_TABLE_SECTION_TITLE *smithy.Schema
-
-var EntityType_TABLE_SUMMARY *smithy.Schema
-
-var EntityType_STRUCTURED_TABLE *smithy.Schema
-
-var EntityType_SEMI_STRUCTURED_TABLE *smithy.Schema
-
-var _EntityTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "EntityTypes",
-}, smithy.ShapeTypeList, 1)
-var _EntityTypes_member *smithy.Schema
-
-var _ErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "ErrorCode",
-}, smithy.ShapeTypeString, 0)
-
-var EvaluationMetric = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "EvaluationMetric",
-}, smithy.ShapeTypeStructure, 3)
-var EvaluationMetric_F1Score *smithy.Schema
-
-var EvaluationMetric_Precision *smithy.Schema
-
-var EvaluationMetric_Recall *smithy.Schema
-
-var ExpenseCurrency = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "ExpenseCurrency",
-}, smithy.ShapeTypeStructure, 2)
-var ExpenseCurrency_Code *smithy.Schema
-
-var ExpenseCurrency_Confidence *smithy.Schema
-
-var ExpenseDetection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "ExpenseDetection",
-}, smithy.ShapeTypeStructure, 3)
-var ExpenseDetection_Text *smithy.Schema
-
-var ExpenseDetection_Geometry *smithy.Schema
-
-var ExpenseDetection_Confidence *smithy.Schema
-
-var ExpenseDocument = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "ExpenseDocument",
-}, smithy.ShapeTypeStructure, 4)
-var ExpenseDocument_ExpenseIndex *smithy.Schema
-
-var ExpenseDocument_SummaryFields *smithy.Schema
-
-var ExpenseDocument_LineItemGroups *smithy.Schema
-
-var ExpenseDocument_Blocks *smithy.Schema
-
-var _ExpenseDocumentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "ExpenseDocumentList",
-}, smithy.ShapeTypeList, 1)
-var _ExpenseDocumentList_member *smithy.Schema
-
-var ExpenseField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "ExpenseField",
-}, smithy.ShapeTypeStructure, 6)
-var ExpenseField_Type *smithy.Schema
-
-var ExpenseField_LabelDetection *smithy.Schema
-
-var ExpenseField_ValueDetection *smithy.Schema
-
-var ExpenseField_PageNumber *smithy.Schema
-
-var ExpenseField_Currency *smithy.Schema
-
-var ExpenseField_GroupProperties *smithy.Schema
-
-var _ExpenseFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "ExpenseFieldList",
-}, smithy.ShapeTypeList, 1)
-var _ExpenseFieldList_member *smithy.Schema
-
-var ExpenseGroupProperty = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "ExpenseGroupProperty",
-}, smithy.ShapeTypeStructure, 2)
-var ExpenseGroupProperty_Types *smithy.Schema
-
-var ExpenseGroupProperty_Id *smithy.Schema
-
-var _ExpenseGroupPropertyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "ExpenseGroupPropertyList",
-}, smithy.ShapeTypeList, 1)
-var _ExpenseGroupPropertyList_member *smithy.Schema
-
-var ExpenseType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "ExpenseType",
-}, smithy.ShapeTypeStructure, 2)
-var ExpenseType_Text *smithy.Schema
-
-var ExpenseType_Confidence *smithy.Schema
-
-var Extraction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "Extraction",
-}, smithy.ShapeTypeStructure, 3)
-var Extraction_LendingDocument *smithy.Schema
-
-var Extraction_ExpenseDocument *smithy.Schema
-
-var Extraction_IdentityDocument *smithy.Schema
-
-var _ExtractionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "ExtractionList",
-}, smithy.ShapeTypeList, 1)
-var _ExtractionList_member *smithy.Schema
-
-var FeatureType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "FeatureType",
-}, smithy.ShapeTypeEnum, 5)
-var FeatureType_TABLES *smithy.Schema
-
-var FeatureType_FORMS *smithy.Schema
-
-var FeatureType_QUERIES *smithy.Schema
-
-var FeatureType_SIGNATURES *smithy.Schema
-
-var FeatureType_LAYOUT *smithy.Schema
-
-var _FeatureTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "FeatureTypes",
-}, smithy.ShapeTypeList, 1)
-var _FeatureTypes_member *smithy.Schema
-
-var _Float = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "Float",
-}, smithy.ShapeTypeFloat, 0)
-
-var _FlowDefinitionArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "FlowDefinitionArn",
-}, smithy.ShapeTypeString, 0)
-
-var Geometry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "Geometry",
-}, smithy.ShapeTypeStructure, 3)
-var Geometry_BoundingBox *smithy.Schema
-
-var Geometry_Polygon *smithy.Schema
-
-var Geometry_RotationAngle *smithy.Schema
-
-var HumanLoopActivationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "HumanLoopActivationOutput",
-}, smithy.ShapeTypeStructure, 3)
-var HumanLoopActivationOutput_HumanLoopArn *smithy.Schema
-
-var HumanLoopActivationOutput_HumanLoopActivationReasons *smithy.Schema
-
-var HumanLoopActivationOutput_HumanLoopActivationConditionsEvaluationResults *smithy.Schema
-
-var _HumanLoopActivationReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "HumanLoopActivationReason",
-}, smithy.ShapeTypeString, 0)
-
-var _HumanLoopActivationReasons = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "HumanLoopActivationReasons",
-}, smithy.ShapeTypeList, 1)
-var _HumanLoopActivationReasons_member *smithy.Schema
-
-var _HumanLoopArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "HumanLoopArn",
-}, smithy.ShapeTypeString, 0)
-
-var HumanLoopConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "HumanLoopConfig",
-}, smithy.ShapeTypeStructure, 3)
-var HumanLoopConfig_HumanLoopName *smithy.Schema
-
-var HumanLoopConfig_FlowDefinitionArn *smithy.Schema
-
-var HumanLoopConfig_DataAttributes *smithy.Schema
-
-var HumanLoopDataAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "HumanLoopDataAttributes",
-}, smithy.ShapeTypeStructure, 1)
-var HumanLoopDataAttributes_ContentClassifiers *smithy.Schema
-
-var _HumanLoopName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "HumanLoopName",
-}, smithy.ShapeTypeString, 0)
-
-var HumanLoopQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "HumanLoopQuotaExceededException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var HumanLoopQuotaExceededException_ResourceType *smithy.Schema
-
-var HumanLoopQuotaExceededException_QuotaCode *smithy.Schema
-
-var HumanLoopQuotaExceededException_ServiceCode *smithy.Schema
-
-var HumanLoopQuotaExceededException_Message *smithy.Schema
-
-var HumanLoopQuotaExceededException_Code *smithy.Schema
-
-var IdempotentParameterMismatchException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "IdempotentParameterMismatchException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var IdempotentParameterMismatchException_Message *smithy.Schema
-
-var IdempotentParameterMismatchException_Code *smithy.Schema
-
-var IdentityDocument = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "IdentityDocument",
-}, smithy.ShapeTypeStructure, 3)
-var IdentityDocument_DocumentIndex *smithy.Schema
-
-var IdentityDocument_IdentityDocumentFields *smithy.Schema
-
-var IdentityDocument_Blocks *smithy.Schema
-
-var IdentityDocumentField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "IdentityDocumentField",
-}, smithy.ShapeTypeStructure, 2)
-var IdentityDocumentField_Type *smithy.Schema
-
-var IdentityDocumentField_ValueDetection *smithy.Schema
-
-var _IdentityDocumentFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "IdentityDocumentFieldList",
-}, smithy.ShapeTypeList, 1)
-var _IdentityDocumentFieldList_member *smithy.Schema
-
-var _IdentityDocumentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "IdentityDocumentList",
-}, smithy.ShapeTypeList, 1)
-var _IdentityDocumentList_member *smithy.Schema
-
-var _IdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "IdList",
-}, smithy.ShapeTypeList, 1)
-var _IdList_member *smithy.Schema
-
-var _ImageBlob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "ImageBlob",
-}, smithy.ShapeTypeBlob, 0)
-
-var InternalServerError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "InternalServerError",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"})
-var InternalServerError_Message *smithy.Schema
-
-var InternalServerError_Code *smithy.Schema
-
-var InvalidJobIdException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "InvalidJobIdException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var InvalidJobIdException_Message *smithy.Schema
-
-var InvalidJobIdException_Code *smithy.Schema
-
-var InvalidKMSKeyException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "InvalidKMSKeyException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var InvalidKMSKeyException_Message *smithy.Schema
-
-var InvalidKMSKeyException_Code *smithy.Schema
-
-var InvalidParameterException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "InvalidParameterException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var InvalidParameterException_Message *smithy.Schema
-
-var InvalidParameterException_Code *smithy.Schema
-
-var InvalidS3ObjectException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "InvalidS3ObjectException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var InvalidS3ObjectException_Message *smithy.Schema
-
-var InvalidS3ObjectException_Code *smithy.Schema
-
-var _JobId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "JobId",
-}, smithy.ShapeTypeString, 0)
-
-var JobStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "JobStatus",
-}, smithy.ShapeTypeEnum, 4)
-var JobStatus_IN_PROGRESS *smithy.Schema
-
-var JobStatus_SUCCEEDED *smithy.Schema
-
-var JobStatus_FAILED *smithy.Schema
-
-var JobStatus_PARTIAL_SUCCESS *smithy.Schema
-
-var _JobTag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "JobTag",
-}, smithy.ShapeTypeString, 0)
-
-var _KMSKeyId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "KMSKeyId",
-}, smithy.ShapeTypeString, 0)
-
-var LendingDetection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "LendingDetection",
-}, smithy.ShapeTypeStructure, 4)
-var LendingDetection_Text *smithy.Schema
-
-var LendingDetection_SelectionStatus *smithy.Schema
-
-var LendingDetection_Geometry *smithy.Schema
-
-var LendingDetection_Confidence *smithy.Schema
-
-var _LendingDetectionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "LendingDetectionList",
-}, smithy.ShapeTypeList, 1)
-var _LendingDetectionList_member *smithy.Schema
-
-var LendingDocument = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "LendingDocument",
-}, smithy.ShapeTypeStructure, 2)
-var LendingDocument_LendingFields *smithy.Schema
-
-var LendingDocument_SignatureDetections *smithy.Schema
-
-var LendingField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "LendingField",
-}, smithy.ShapeTypeStructure, 3)
-var LendingField_Type *smithy.Schema
-
-var LendingField_KeyDetection *smithy.Schema
-
-var LendingField_ValueDetections *smithy.Schema
-
-var _LendingFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "LendingFieldList",
-}, smithy.ShapeTypeList, 1)
-var _LendingFieldList_member *smithy.Schema
-
-var LendingResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "LendingResult",
-}, smithy.ShapeTypeStructure, 3)
-var LendingResult_Page *smithy.Schema
-
-var LendingResult_PageClassification *smithy.Schema
-
-var LendingResult_Extractions *smithy.Schema
-
-var _LendingResultList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "LendingResultList",
-}, smithy.ShapeTypeList, 1)
-var _LendingResultList_member *smithy.Schema
-
-var LendingSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "LendingSummary",
-}, smithy.ShapeTypeStructure, 2)
-var LendingSummary_DocumentGroups *smithy.Schema
-
-var LendingSummary_UndetectedDocumentTypes *smithy.Schema
-
-var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var LimitExceededException_Message *smithy.Schema
-
-var LimitExceededException_Code *smithy.Schema
-
-var LineItemFields = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "LineItemFields",
-}, smithy.ShapeTypeStructure, 1)
-var LineItemFields_LineItemExpenseFields *smithy.Schema
-
-var LineItemGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "LineItemGroup",
-}, smithy.ShapeTypeStructure, 2)
-var LineItemGroup_LineItemGroupIndex *smithy.Schema
-
-var LineItemGroup_LineItems *smithy.Schema
-
-var _LineItemGroupList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "LineItemGroupList",
-}, smithy.ShapeTypeList, 1)
-var _LineItemGroupList_member *smithy.Schema
-
-var _LineItemList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "LineItemList",
-}, smithy.ShapeTypeList, 1)
-var _LineItemList_member *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _NonEmptyString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "NonEmptyString",
-}, smithy.ShapeTypeString, 0)
-
-var NormalizedValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "NormalizedValue",
-}, smithy.ShapeTypeStructure, 2)
-var NormalizedValue_Value *smithy.Schema
-
-var NormalizedValue_ValueType *smithy.Schema
-
-var NotificationChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "NotificationChannel",
-}, smithy.ShapeTypeStructure, 2)
-var NotificationChannel_SNSTopicArn *smithy.Schema
-
-var NotificationChannel_RoleArn *smithy.Schema
-
-var OutputConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "OutputConfig",
-}, smithy.ShapeTypeStructure, 2)
-var OutputConfig_S3Bucket *smithy.Schema
-
-var OutputConfig_S3Prefix *smithy.Schema
-
-var PageClassification = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "PageClassification",
-}, smithy.ShapeTypeStructure, 2)
-var PageClassification_PageType *smithy.Schema
-
-var PageClassification_PageNumber *smithy.Schema
-
-var _PageList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "PageList",
-}, smithy.ShapeTypeList, 1)
-var _PageList_member *smithy.Schema
-
-var _Pages = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "Pages",
-}, smithy.ShapeTypeList, 1)
-var _Pages_member *smithy.Schema
-
-var _PaginationToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "PaginationToken",
-}, smithy.ShapeTypeString, 0)
-
-var _Percent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "Percent",
-}, smithy.ShapeTypeFloat, 0)
-
-var Point = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "Point",
-}, smithy.ShapeTypeStructure, 2)
-var Point_X *smithy.Schema
-
-var Point_Y *smithy.Schema
-
-var _Polygon = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "Polygon",
-}, smithy.ShapeTypeList, 1)
-var _Polygon_member *smithy.Schema
-
-var Prediction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "Prediction",
-}, smithy.ShapeTypeStructure, 2)
-var Prediction_Value *smithy.Schema
-
-var Prediction_Confidence *smithy.Schema
-
-var _PredictionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "PredictionList",
-}, smithy.ShapeTypeList, 1)
-var _PredictionList_member *smithy.Schema
-
-var ProvisionedThroughputExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "ProvisionedThroughputExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var ProvisionedThroughputExceededException_Message *smithy.Schema
-
-var ProvisionedThroughputExceededException_Code *smithy.Schema
-
-var _Queries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "Queries",
-}, smithy.ShapeTypeList, 1)
-var _Queries_member *smithy.Schema
-
-var QueriesConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "QueriesConfig",
-}, smithy.ShapeTypeStructure, 1)
-var QueriesConfig_Queries *smithy.Schema
-
-var Query = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "Query",
-}, smithy.ShapeTypeStructure, 3)
-var Query_Text *smithy.Schema
-
-var Query_Alias *smithy.Schema
-
-var Query_Pages *smithy.Schema
-
-var _QueryInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "QueryInput",
-}, smithy.ShapeTypeString, 0)
-
-var _QueryPage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "QueryPage",
-}, smithy.ShapeTypeString, 0)
-
-var _QueryPages = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "QueryPages",
-}, smithy.ShapeTypeList, 1)
-var _QueryPages_member *smithy.Schema
-
-var Relationship = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "Relationship",
-}, smithy.ShapeTypeStructure, 2)
-var Relationship_Type *smithy.Schema
-
-var Relationship_Ids *smithy.Schema
-
-var _RelationshipList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "RelationshipList",
-}, smithy.ShapeTypeList, 1)
-var _RelationshipList_member *smithy.Schema
-
-var RelationshipType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "RelationshipType",
-}, smithy.ShapeTypeEnum, 9)
-var RelationshipType_VALUE *smithy.Schema
-
-var RelationshipType_CHILD *smithy.Schema
-
-var RelationshipType_COMPLEX_FEATURES *smithy.Schema
-
-var RelationshipType_MERGED_CELL *smithy.Schema
-
-var RelationshipType_TITLE *smithy.Schema
-
-var RelationshipType_ANSWER *smithy.Schema
-
-var RelationshipType_TABLE *smithy.Schema
-
-var RelationshipType_TABLE_TITLE *smithy.Schema
-
-var RelationshipType_TABLE_FOOTER *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var ResourceNotFoundException_Code *smithy.Schema
-
-var _RoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "RoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var _S3Bucket = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "S3Bucket",
-}, smithy.ShapeTypeString, 0)
-
-var S3Object = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "S3Object",
-}, smithy.ShapeTypeStructure, 3)
-var S3Object_Bucket *smithy.Schema
-
-var S3Object_Name *smithy.Schema
-
-var S3Object_Version *smithy.Schema
-
-var _S3ObjectName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "S3ObjectName",
-}, smithy.ShapeTypeString, 0)
-
-var _S3ObjectVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "S3ObjectVersion",
-}, smithy.ShapeTypeString, 0)
-
-var SelectionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "SelectionStatus",
-}, smithy.ShapeTypeEnum, 2)
-var SelectionStatus_SELECTED *smithy.Schema
-
-var SelectionStatus_NOT_SELECTED *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var ServiceQuotaExceededException_Message *smithy.Schema
-
-var ServiceQuotaExceededException_Code *smithy.Schema
-
-var SignatureDetection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "SignatureDetection",
-}, smithy.ShapeTypeStructure, 2)
-var SignatureDetection_Confidence *smithy.Schema
-
-var SignatureDetection_Geometry *smithy.Schema
-
-var _SignatureDetectionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "SignatureDetectionList",
-}, smithy.ShapeTypeList, 1)
-var _SignatureDetectionList_member *smithy.Schema
-
-var _SNSTopicArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "SNSTopicArn",
-}, smithy.ShapeTypeString, 0)
-
-var SplitDocument = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "SplitDocument",
-}, smithy.ShapeTypeStructure, 2)
-var SplitDocument_Index *smithy.Schema
-
-var SplitDocument_Pages *smithy.Schema
-
-var _SplitDocumentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "SplitDocumentList",
-}, smithy.ShapeTypeList, 1)
-var _SplitDocumentList_member *smithy.Schema
-
-var _StatusMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "StatusMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var _StringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "StringList",
-}, smithy.ShapeTypeList, 1)
-var _StringList_member *smithy.Schema
-
-var _SynthesizedJsonHumanLoopActivationConditionsEvaluationResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "SynthesizedJsonHumanLoopActivationConditionsEvaluationResults",
-}, smithy.ShapeTypeString, 0, &smithytraits.MediaType{Type: "application/json"})
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "TagMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagMap_key *smithy.Schema
-
-var _TagMap_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var TextType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "TextType",
-}, smithy.ShapeTypeEnum, 2)
-var TextType_HANDWRITING *smithy.Schema
-
-var TextType_PRINTED *smithy.Schema
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"})
-var ThrottlingException_Message *smithy.Schema
-
-var ThrottlingException_Code *smithy.Schema
-
-var _UInteger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "UInteger",
-}, smithy.ShapeTypeInteger, 0)
-
-var _UndetectedDocumentTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "UndetectedDocumentTypeList",
-}, smithy.ShapeTypeList, 1)
-var _UndetectedDocumentTypeList_member *smithy.Schema
-
-var UndetectedSignature = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "UndetectedSignature",
-}, smithy.ShapeTypeStructure, 1)
-var UndetectedSignature_Page *smithy.Schema
-
-var _UndetectedSignatureList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "UndetectedSignatureList",
-}, smithy.ShapeTypeList, 1)
-var _UndetectedSignatureList_member *smithy.Schema
-
-var UnsupportedDocumentException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "UnsupportedDocumentException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var UnsupportedDocumentException_Message *smithy.Schema
-
-var UnsupportedDocumentException_Code *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var ValidationException_Message *smithy.Schema
-
-var ValidationException_Code *smithy.Schema
-
-var ValueType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "ValueType",
-}, smithy.ShapeTypeEnum, 1)
-var ValueType_DATE *smithy.Schema
-
-var Warning = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "Warning",
-}, smithy.ShapeTypeStructure, 2)
-var Warning_ErrorCode *smithy.Schema
-
-var Warning_Pages *smithy.Schema
-
-var _Warnings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "Warnings",
-}, smithy.ShapeTypeList, 1)
-var _Warnings_member *smithy.Schema
-
-var AnalyzeDocumentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "AnalyzeDocumentRequest",
-}, smithy.ShapeTypeStructure, 5)
-var AnalyzeDocumentRequest_Document *smithy.Schema
-
-var AnalyzeDocumentRequest_FeatureTypes *smithy.Schema
-
-var AnalyzeDocumentRequest_HumanLoopConfig *smithy.Schema
-
-var AnalyzeDocumentRequest_QueriesConfig *smithy.Schema
-
-var AnalyzeDocumentRequest_AdaptersConfig *smithy.Schema
-
-var AnalyzeDocumentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "AnalyzeDocumentResponse",
-}, smithy.ShapeTypeStructure, 4)
-var AnalyzeDocumentResponse_DocumentMetadata *smithy.Schema
-
-var AnalyzeDocumentResponse_Blocks *smithy.Schema
-
-var AnalyzeDocumentResponse_HumanLoopActivationOutput *smithy.Schema
-
-var AnalyzeDocumentResponse_AnalyzeDocumentModelVersion *smithy.Schema
-
-var AnalyzeExpenseRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "AnalyzeExpenseRequest",
-}, smithy.ShapeTypeStructure, 1)
-var AnalyzeExpenseRequest_Document *smithy.Schema
-
-var AnalyzeExpenseResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "AnalyzeExpenseResponse",
-}, smithy.ShapeTypeStructure, 2)
-var AnalyzeExpenseResponse_DocumentMetadata *smithy.Schema
-
-var AnalyzeExpenseResponse_ExpenseDocuments *smithy.Schema
-
-var AnalyzeIDRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "AnalyzeIDRequest",
-}, smithy.ShapeTypeStructure, 1)
-var AnalyzeIDRequest_DocumentPages *smithy.Schema
-
-var AnalyzeIDResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "AnalyzeIDResponse",
-}, smithy.ShapeTypeStructure, 3)
-var AnalyzeIDResponse_IdentityDocuments *smithy.Schema
-
-var AnalyzeIDResponse_DocumentMetadata *smithy.Schema
-
-var AnalyzeIDResponse_AnalyzeIDModelVersion *smithy.Schema
-
-var CreateAdapterRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "CreateAdapterRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateAdapterRequest_AdapterName *smithy.Schema
-
-var CreateAdapterRequest_ClientRequestToken *smithy.Schema
-
-var CreateAdapterRequest_Description *smithy.Schema
-
-var CreateAdapterRequest_FeatureTypes *smithy.Schema
-
-var CreateAdapterRequest_AutoUpdate *smithy.Schema
-
-var CreateAdapterRequest_Tags *smithy.Schema
-
-var CreateAdapterResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "CreateAdapterResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateAdapterResponse_AdapterId *smithy.Schema
-
-var CreateAdapterVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "CreateAdapterVersionRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateAdapterVersionRequest_AdapterId *smithy.Schema
-
-var CreateAdapterVersionRequest_ClientRequestToken *smithy.Schema
-
-var CreateAdapterVersionRequest_DatasetConfig *smithy.Schema
-
-var CreateAdapterVersionRequest_KMSKeyId *smithy.Schema
-
-var CreateAdapterVersionRequest_OutputConfig *smithy.Schema
-
-var CreateAdapterVersionRequest_Tags *smithy.Schema
-
-var CreateAdapterVersionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "CreateAdapterVersionResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateAdapterVersionResponse_AdapterId *smithy.Schema
-
-var CreateAdapterVersionResponse_AdapterVersion *smithy.Schema
-
-var DeleteAdapterRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "DeleteAdapterRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteAdapterRequest_AdapterId *smithy.Schema
-
-var DeleteAdapterResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "DeleteAdapterResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteAdapterVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "DeleteAdapterVersionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteAdapterVersionRequest_AdapterId *smithy.Schema
-
-var DeleteAdapterVersionRequest_AdapterVersion *smithy.Schema
-
-var DeleteAdapterVersionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "DeleteAdapterVersionResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DetectDocumentTextRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "DetectDocumentTextRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DetectDocumentTextRequest_Document *smithy.Schema
-
-var DetectDocumentTextResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "DetectDocumentTextResponse",
-}, smithy.ShapeTypeStructure, 3)
-var DetectDocumentTextResponse_DocumentMetadata *smithy.Schema
-
-var DetectDocumentTextResponse_Blocks *smithy.Schema
-
-var DetectDocumentTextResponse_DetectDocumentTextModelVersion *smithy.Schema
-
-var GetAdapterRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "GetAdapterRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetAdapterRequest_AdapterId *smithy.Schema
-
-var GetAdapterResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "GetAdapterResponse",
-}, smithy.ShapeTypeStructure, 7)
-var GetAdapterResponse_AdapterId *smithy.Schema
-
-var GetAdapterResponse_AdapterName *smithy.Schema
-
-var GetAdapterResponse_CreationTime *smithy.Schema
-
-var GetAdapterResponse_Description *smithy.Schema
-
-var GetAdapterResponse_FeatureTypes *smithy.Schema
-
-var GetAdapterResponse_AutoUpdate *smithy.Schema
-
-var GetAdapterResponse_Tags *smithy.Schema
-
-var GetAdapterVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "GetAdapterVersionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetAdapterVersionRequest_AdapterId *smithy.Schema
-
-var GetAdapterVersionRequest_AdapterVersion *smithy.Schema
-
-var GetAdapterVersionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "GetAdapterVersionResponse",
-}, smithy.ShapeTypeStructure, 11)
-var GetAdapterVersionResponse_AdapterId *smithy.Schema
-
-var GetAdapterVersionResponse_AdapterVersion *smithy.Schema
-
-var GetAdapterVersionResponse_CreationTime *smithy.Schema
-
-var GetAdapterVersionResponse_FeatureTypes *smithy.Schema
-
-var GetAdapterVersionResponse_Status *smithy.Schema
-
-var GetAdapterVersionResponse_StatusMessage *smithy.Schema
-
-var GetAdapterVersionResponse_DatasetConfig *smithy.Schema
-
-var GetAdapterVersionResponse_KMSKeyId *smithy.Schema
-
-var GetAdapterVersionResponse_OutputConfig *smithy.Schema
-
-var GetAdapterVersionResponse_EvaluationMetrics *smithy.Schema
-
-var GetAdapterVersionResponse_Tags *smithy.Schema
-
-var GetDocumentAnalysisRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "GetDocumentAnalysisRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetDocumentAnalysisRequest_JobId *smithy.Schema
-
-var GetDocumentAnalysisRequest_MaxResults *smithy.Schema
-
-var GetDocumentAnalysisRequest_NextToken *smithy.Schema
-
-var GetDocumentAnalysisResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "GetDocumentAnalysisResponse",
-}, smithy.ShapeTypeStructure, 7)
-var GetDocumentAnalysisResponse_DocumentMetadata *smithy.Schema
-
-var GetDocumentAnalysisResponse_JobStatus *smithy.Schema
-
-var GetDocumentAnalysisResponse_NextToken *smithy.Schema
-
-var GetDocumentAnalysisResponse_Blocks *smithy.Schema
-
-var GetDocumentAnalysisResponse_Warnings *smithy.Schema
-
-var GetDocumentAnalysisResponse_StatusMessage *smithy.Schema
-
-var GetDocumentAnalysisResponse_AnalyzeDocumentModelVersion *smithy.Schema
-
-var GetDocumentTextDetectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "GetDocumentTextDetectionRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetDocumentTextDetectionRequest_JobId *smithy.Schema
-
-var GetDocumentTextDetectionRequest_MaxResults *smithy.Schema
-
-var GetDocumentTextDetectionRequest_NextToken *smithy.Schema
-
-var GetDocumentTextDetectionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "GetDocumentTextDetectionResponse",
-}, smithy.ShapeTypeStructure, 7)
-var GetDocumentTextDetectionResponse_DocumentMetadata *smithy.Schema
-
-var GetDocumentTextDetectionResponse_JobStatus *smithy.Schema
-
-var GetDocumentTextDetectionResponse_NextToken *smithy.Schema
-
-var GetDocumentTextDetectionResponse_Blocks *smithy.Schema
-
-var GetDocumentTextDetectionResponse_Warnings *smithy.Schema
-
-var GetDocumentTextDetectionResponse_StatusMessage *smithy.Schema
-
-var GetDocumentTextDetectionResponse_DetectDocumentTextModelVersion *smithy.Schema
-
-var GetExpenseAnalysisRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "GetExpenseAnalysisRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetExpenseAnalysisRequest_JobId *smithy.Schema
-
-var GetExpenseAnalysisRequest_MaxResults *smithy.Schema
-
-var GetExpenseAnalysisRequest_NextToken *smithy.Schema
-
-var GetExpenseAnalysisResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "GetExpenseAnalysisResponse",
-}, smithy.ShapeTypeStructure, 7)
-var GetExpenseAnalysisResponse_DocumentMetadata *smithy.Schema
-
-var GetExpenseAnalysisResponse_JobStatus *smithy.Schema
-
-var GetExpenseAnalysisResponse_NextToken *smithy.Schema
-
-var GetExpenseAnalysisResponse_ExpenseDocuments *smithy.Schema
-
-var GetExpenseAnalysisResponse_Warnings *smithy.Schema
-
-var GetExpenseAnalysisResponse_StatusMessage *smithy.Schema
-
-var GetExpenseAnalysisResponse_AnalyzeExpenseModelVersion *smithy.Schema
-
-var GetLendingAnalysisRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "GetLendingAnalysisRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetLendingAnalysisRequest_JobId *smithy.Schema
-
-var GetLendingAnalysisRequest_MaxResults *smithy.Schema
-
-var GetLendingAnalysisRequest_NextToken *smithy.Schema
-
-var GetLendingAnalysisResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "GetLendingAnalysisResponse",
-}, smithy.ShapeTypeStructure, 7)
-var GetLendingAnalysisResponse_DocumentMetadata *smithy.Schema
-
-var GetLendingAnalysisResponse_JobStatus *smithy.Schema
-
-var GetLendingAnalysisResponse_NextToken *smithy.Schema
-
-var GetLendingAnalysisResponse_Results *smithy.Schema
-
-var GetLendingAnalysisResponse_Warnings *smithy.Schema
-
-var GetLendingAnalysisResponse_StatusMessage *smithy.Schema
-
-var GetLendingAnalysisResponse_AnalyzeLendingModelVersion *smithy.Schema
-
-var GetLendingAnalysisSummaryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "GetLendingAnalysisSummaryRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetLendingAnalysisSummaryRequest_JobId *smithy.Schema
-
-var GetLendingAnalysisSummaryResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "GetLendingAnalysisSummaryResponse",
-}, smithy.ShapeTypeStructure, 6)
-var GetLendingAnalysisSummaryResponse_DocumentMetadata *smithy.Schema
-
-var GetLendingAnalysisSummaryResponse_JobStatus *smithy.Schema
-
-var GetLendingAnalysisSummaryResponse_Summary *smithy.Schema
-
-var GetLendingAnalysisSummaryResponse_Warnings *smithy.Schema
-
-var GetLendingAnalysisSummaryResponse_StatusMessage *smithy.Schema
-
-var GetLendingAnalysisSummaryResponse_AnalyzeLendingModelVersion *smithy.Schema
-
-var ListAdaptersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "ListAdaptersRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListAdaptersRequest_AfterCreationTime *smithy.Schema
-
-var ListAdaptersRequest_BeforeCreationTime *smithy.Schema
-
-var ListAdaptersRequest_MaxResults *smithy.Schema
-
-var ListAdaptersRequest_NextToken *smithy.Schema
-
-var ListAdaptersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "ListAdaptersResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAdaptersResponse_Adapters *smithy.Schema
-
-var ListAdaptersResponse_NextToken *smithy.Schema
-
-var ListAdapterVersionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "ListAdapterVersionsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListAdapterVersionsRequest_AdapterId *smithy.Schema
-
-var ListAdapterVersionsRequest_AfterCreationTime *smithy.Schema
-
-var ListAdapterVersionsRequest_BeforeCreationTime *smithy.Schema
-
-var ListAdapterVersionsRequest_MaxResults *smithy.Schema
-
-var ListAdapterVersionsRequest_NextToken *smithy.Schema
-
-var ListAdapterVersionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "ListAdapterVersionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAdapterVersionsResponse_AdapterVersions *smithy.Schema
-
-var ListAdapterVersionsResponse_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceARN *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var StartDocumentAnalysisRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "StartDocumentAnalysisRequest",
-}, smithy.ShapeTypeStructure, 9)
-var StartDocumentAnalysisRequest_DocumentLocation *smithy.Schema
-
-var StartDocumentAnalysisRequest_FeatureTypes *smithy.Schema
-
-var StartDocumentAnalysisRequest_ClientRequestToken *smithy.Schema
-
-var StartDocumentAnalysisRequest_JobTag *smithy.Schema
-
-var StartDocumentAnalysisRequest_NotificationChannel *smithy.Schema
-
-var StartDocumentAnalysisRequest_OutputConfig *smithy.Schema
-
-var StartDocumentAnalysisRequest_KMSKeyId *smithy.Schema
-
-var StartDocumentAnalysisRequest_QueriesConfig *smithy.Schema
-
-var StartDocumentAnalysisRequest_AdaptersConfig *smithy.Schema
-
-var StartDocumentAnalysisResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "StartDocumentAnalysisResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartDocumentAnalysisResponse_JobId *smithy.Schema
-
-var StartDocumentTextDetectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "StartDocumentTextDetectionRequest",
-}, smithy.ShapeTypeStructure, 6)
-var StartDocumentTextDetectionRequest_DocumentLocation *smithy.Schema
-
-var StartDocumentTextDetectionRequest_ClientRequestToken *smithy.Schema
-
-var StartDocumentTextDetectionRequest_JobTag *smithy.Schema
-
-var StartDocumentTextDetectionRequest_NotificationChannel *smithy.Schema
-
-var StartDocumentTextDetectionRequest_OutputConfig *smithy.Schema
-
-var StartDocumentTextDetectionRequest_KMSKeyId *smithy.Schema
-
-var StartDocumentTextDetectionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "StartDocumentTextDetectionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartDocumentTextDetectionResponse_JobId *smithy.Schema
-
-var StartExpenseAnalysisRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "StartExpenseAnalysisRequest",
-}, smithy.ShapeTypeStructure, 6)
-var StartExpenseAnalysisRequest_DocumentLocation *smithy.Schema
-
-var StartExpenseAnalysisRequest_ClientRequestToken *smithy.Schema
-
-var StartExpenseAnalysisRequest_JobTag *smithy.Schema
-
-var StartExpenseAnalysisRequest_NotificationChannel *smithy.Schema
-
-var StartExpenseAnalysisRequest_OutputConfig *smithy.Schema
-
-var StartExpenseAnalysisRequest_KMSKeyId *smithy.Schema
-
-var StartExpenseAnalysisResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "StartExpenseAnalysisResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartExpenseAnalysisResponse_JobId *smithy.Schema
-
-var StartLendingAnalysisRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "StartLendingAnalysisRequest",
-}, smithy.ShapeTypeStructure, 6)
-var StartLendingAnalysisRequest_DocumentLocation *smithy.Schema
-
-var StartLendingAnalysisRequest_ClientRequestToken *smithy.Schema
-
-var StartLendingAnalysisRequest_JobTag *smithy.Schema
-
-var StartLendingAnalysisRequest_NotificationChannel *smithy.Schema
-
-var StartLendingAnalysisRequest_OutputConfig *smithy.Schema
-
-var StartLendingAnalysisRequest_KMSKeyId *smithy.Schema
-
-var StartLendingAnalysisResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "StartLendingAnalysisResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartLendingAnalysisResponse_JobId *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceARN *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceARN *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateAdapterRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "UpdateAdapterRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateAdapterRequest_AdapterId *smithy.Schema
-
-var UpdateAdapterRequest_Description *smithy.Schema
-
-var UpdateAdapterRequest_AdapterName *smithy.Schema
-
-var UpdateAdapterRequest_AutoUpdate *smithy.Schema
-
-var UpdateAdapterResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.textract",
-	Name:      "UpdateAdapterResponse",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateAdapterResponse_AdapterId *smithy.Schema
-
-var UpdateAdapterResponse_AdapterName *smithy.Schema
-
-var UpdateAdapterResponse_CreationTime *smithy.Schema
-
-var UpdateAdapterResponse_Description *smithy.Schema
-
-var UpdateAdapterResponse_FeatureTypes *smithy.Schema
-
-var UpdateAdapterResponse_AutoUpdate *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _String)
-
-	AccessDeniedException_Code = AccessDeniedException.AddMember("Code", _String)
-
-	_AdapterPages_member = _AdapterPages.AddMember("member", _AdapterPage)
-
-	Adapter_AdapterId = Adapter.AddMember("AdapterId", _AdapterId)
-
-	Adapter_Pages = Adapter.AddMember("Pages", _AdapterPages)
-
-	Adapter_Version = Adapter.AddMember("Version", _AdapterVersion)
-
-	FeatureType_TABLES = FeatureType.AddMember("TABLES", smithyprelude.Unit)
-
-	FeatureType_FORMS = FeatureType.AddMember("FORMS", smithyprelude.Unit)
-
-	FeatureType_QUERIES = FeatureType.AddMember("QUERIES", smithyprelude.Unit)
-
-	FeatureType_SIGNATURES = FeatureType.AddMember("SIGNATURES", smithyprelude.Unit)
-
-	FeatureType_LAYOUT = FeatureType.AddMember("LAYOUT", smithyprelude.Unit)
-
-	_FeatureTypes_member = _FeatureTypes.AddMember("member", FeatureType)
-
-	AdapterOverview_AdapterId = AdapterOverview.AddMember("AdapterId", _AdapterId)
-
-	AdapterOverview_AdapterName = AdapterOverview.AddMember("AdapterName", _AdapterName)
-
-	AdapterOverview_CreationTime = AdapterOverview.AddMember("CreationTime", _DateTime)
-
-	AdapterOverview_FeatureTypes = AdapterOverview.AddMember("FeatureTypes", _FeatureTypes)
-
-	_AdapterList_member = _AdapterList.AddMember("member", AdapterOverview)
-
-	_Adapters_member = _Adapters.AddMember("member", Adapter)
-
-	AdaptersConfig_Adapters = AdaptersConfig.AddMember("Adapters", _Adapters)
-
-	S3Object_Bucket = S3Object.AddMember("Bucket", _S3Bucket)
-
-	S3Object_Name = S3Object.AddMember("Name", _S3ObjectName)
-
-	S3Object_Version = S3Object.AddMember("Version", _S3ObjectVersion)
-
-	AdapterVersionDatasetConfig_ManifestS3Object = AdapterVersionDatasetConfig.AddMember("ManifestS3Object", S3Object)
-
-	EvaluationMetric_F1Score = EvaluationMetric.AddMember("F1Score", _Float)
-
-	EvaluationMetric_Precision = EvaluationMetric.AddMember("Precision", _Float)
-
-	EvaluationMetric_Recall = EvaluationMetric.AddMember("Recall", _Float)
-
-	AdapterVersionEvaluationMetric_Baseline = AdapterVersionEvaluationMetric.AddMember("Baseline", EvaluationMetric)
-
-	AdapterVersionEvaluationMetric_AdapterVersion = AdapterVersionEvaluationMetric.AddMember("AdapterVersion", EvaluationMetric)
-
-	AdapterVersionEvaluationMetric_FeatureType = AdapterVersionEvaluationMetric.AddMember("FeatureType", FeatureType)
-
-	_AdapterVersionEvaluationMetrics_member = _AdapterVersionEvaluationMetrics.AddMember("member", AdapterVersionEvaluationMetric)
-
-	AdapterVersionStatus_ACTIVE = AdapterVersionStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	AdapterVersionStatus_AT_RISK = AdapterVersionStatus.AddMember("AT_RISK", smithyprelude.Unit)
-
-	AdapterVersionStatus_DEPRECATED = AdapterVersionStatus.AddMember("DEPRECATED", smithyprelude.Unit)
-
-	AdapterVersionStatus_CREATION_ERROR = AdapterVersionStatus.AddMember("CREATION_ERROR", smithyprelude.Unit)
-
-	AdapterVersionStatus_CREATION_IN_PROGRESS = AdapterVersionStatus.AddMember("CREATION_IN_PROGRESS", smithyprelude.Unit)
-
-	AdapterVersionOverview_AdapterId = AdapterVersionOverview.AddMember("AdapterId", _AdapterId)
-
-	AdapterVersionOverview_AdapterVersion = AdapterVersionOverview.AddMember("AdapterVersion", _AdapterVersion)
-
-	AdapterVersionOverview_CreationTime = AdapterVersionOverview.AddMember("CreationTime", _DateTime)
-
-	AdapterVersionOverview_FeatureTypes = AdapterVersionOverview.AddMember("FeatureTypes", _FeatureTypes)
-
-	AdapterVersionOverview_Status = AdapterVersionOverview.AddMember("Status", AdapterVersionStatus)
-
-	AdapterVersionOverview_StatusMessage = AdapterVersionOverview.AddMember("StatusMessage", _AdapterVersionStatusMessage)
-
-	_AdapterVersionList_member = _AdapterVersionList.AddMember("member", AdapterVersionOverview)
-
-	ValueType_DATE = ValueType.AddMember("DATE", smithyprelude.Unit)
-
-	NormalizedValue_Value = NormalizedValue.AddMember("Value", _String)
-
-	NormalizedValue_ValueType = NormalizedValue.AddMember("ValueType", ValueType)
-
-	AnalyzeIDDetections_Text = AnalyzeIDDetections.AddMember("Text", _String)
-
-	AnalyzeIDDetections_NormalizedValue = AnalyzeIDDetections.AddMember("NormalizedValue", NormalizedValue)
-
-	AnalyzeIDDetections_Confidence = AnalyzeIDDetections.AddMember("Confidence", _Percent)
-
-	AutoUpdate_ENABLED = AutoUpdate.AddMember("ENABLED", smithyprelude.Unit)
-
-	AutoUpdate_DISABLED = AutoUpdate.AddMember("DISABLED", smithyprelude.Unit)
-
-	BadDocumentException_Message = BadDocumentException.AddMember("Message", _String)
-
-	BadDocumentException_Code = BadDocumentException.AddMember("Code", _String)
-
-	BlockType_KEY_VALUE_SET = BlockType.AddMember("KEY_VALUE_SET", smithyprelude.Unit)
-
-	BlockType_PAGE = BlockType.AddMember("PAGE", smithyprelude.Unit)
-
-	BlockType_LINE = BlockType.AddMember("LINE", smithyprelude.Unit)
-
-	BlockType_WORD = BlockType.AddMember("WORD", smithyprelude.Unit)
-
-	BlockType_TABLE = BlockType.AddMember("TABLE", smithyprelude.Unit)
-
-	BlockType_CELL = BlockType.AddMember("CELL", smithyprelude.Unit)
-
-	BlockType_SELECTION_ELEMENT = BlockType.AddMember("SELECTION_ELEMENT", smithyprelude.Unit)
-
-	BlockType_MERGED_CELL = BlockType.AddMember("MERGED_CELL", smithyprelude.Unit)
-
-	BlockType_TITLE = BlockType.AddMember("TITLE", smithyprelude.Unit)
-
-	BlockType_QUERY = BlockType.AddMember("QUERY", smithyprelude.Unit)
-
-	BlockType_QUERY_RESULT = BlockType.AddMember("QUERY_RESULT", smithyprelude.Unit)
-
-	BlockType_SIGNATURE = BlockType.AddMember("SIGNATURE", smithyprelude.Unit)
-
-	BlockType_TABLE_TITLE = BlockType.AddMember("TABLE_TITLE", smithyprelude.Unit)
-
-	BlockType_TABLE_FOOTER = BlockType.AddMember("TABLE_FOOTER", smithyprelude.Unit)
-
-	BlockType_LAYOUT_TEXT = BlockType.AddMember("LAYOUT_TEXT", smithyprelude.Unit)
-
-	BlockType_LAYOUT_TITLE = BlockType.AddMember("LAYOUT_TITLE", smithyprelude.Unit)
-
-	BlockType_LAYOUT_HEADER = BlockType.AddMember("LAYOUT_HEADER", smithyprelude.Unit)
-
-	BlockType_LAYOUT_FOOTER = BlockType.AddMember("LAYOUT_FOOTER", smithyprelude.Unit)
-
-	BlockType_LAYOUT_SECTION_HEADER = BlockType.AddMember("LAYOUT_SECTION_HEADER", smithyprelude.Unit)
-
-	BlockType_LAYOUT_PAGE_NUMBER = BlockType.AddMember("LAYOUT_PAGE_NUMBER", smithyprelude.Unit)
-
-	BlockType_LAYOUT_LIST = BlockType.AddMember("LAYOUT_LIST", smithyprelude.Unit)
-
-	BlockType_LAYOUT_FIGURE = BlockType.AddMember("LAYOUT_FIGURE", smithyprelude.Unit)
-
-	BlockType_LAYOUT_TABLE = BlockType.AddMember("LAYOUT_TABLE", smithyprelude.Unit)
-
-	BlockType_LAYOUT_KEY_VALUE = BlockType.AddMember("LAYOUT_KEY_VALUE", smithyprelude.Unit)
-
-	TextType_HANDWRITING = TextType.AddMember("HANDWRITING", smithyprelude.Unit)
-
-	TextType_PRINTED = TextType.AddMember("PRINTED", smithyprelude.Unit)
-
-	BoundingBox_Width = BoundingBox.AddMember("Width", _Float)
-
-	BoundingBox_Height = BoundingBox.AddMember("Height", _Float)
-
-	BoundingBox_Left = BoundingBox.AddMember("Left", _Float)
-
-	BoundingBox_Top = BoundingBox.AddMember("Top", _Float)
-
-	Point_X = Point.AddMember("X", _Float)
-
-	Point_Y = Point.AddMember("Y", _Float)
-
-	_Polygon_member = _Polygon.AddMember("member", Point)
-
-	Geometry_BoundingBox = Geometry.AddMember("BoundingBox", BoundingBox)
-
-	Geometry_Polygon = Geometry.AddMember("Polygon", _Polygon)
-
-	Geometry_RotationAngle = Geometry.AddMember("RotationAngle", _Angle)
-
-	RelationshipType_VALUE = RelationshipType.AddMember("VALUE", smithyprelude.Unit)
-
-	RelationshipType_CHILD = RelationshipType.AddMember("CHILD", smithyprelude.Unit)
-
-	RelationshipType_COMPLEX_FEATURES = RelationshipType.AddMember("COMPLEX_FEATURES", smithyprelude.Unit)
-
-	RelationshipType_MERGED_CELL = RelationshipType.AddMember("MERGED_CELL", smithyprelude.Unit)
-
-	RelationshipType_TITLE = RelationshipType.AddMember("TITLE", smithyprelude.Unit)
-
-	RelationshipType_ANSWER = RelationshipType.AddMember("ANSWER", smithyprelude.Unit)
-
-	RelationshipType_TABLE = RelationshipType.AddMember("TABLE", smithyprelude.Unit)
-
-	RelationshipType_TABLE_TITLE = RelationshipType.AddMember("TABLE_TITLE", smithyprelude.Unit)
-
-	RelationshipType_TABLE_FOOTER = RelationshipType.AddMember("TABLE_FOOTER", smithyprelude.Unit)
-
-	_IdList_member = _IdList.AddMember("member", _NonEmptyString)
-
-	Relationship_Type = Relationship.AddMember("Type", RelationshipType)
-
-	Relationship_Ids = Relationship.AddMember("Ids", _IdList)
-
-	_RelationshipList_member = _RelationshipList.AddMember("member", Relationship)
-
-	EntityType_KEY = EntityType.AddMember("KEY", smithyprelude.Unit)
-
-	EntityType_VALUE = EntityType.AddMember("VALUE", smithyprelude.Unit)
-
-	EntityType_COLUMN_HEADER = EntityType.AddMember("COLUMN_HEADER", smithyprelude.Unit)
-
-	EntityType_TABLE_TITLE = EntityType.AddMember("TABLE_TITLE", smithyprelude.Unit)
-
-	EntityType_TABLE_FOOTER = EntityType.AddMember("TABLE_FOOTER", smithyprelude.Unit)
-
-	EntityType_TABLE_SECTION_TITLE = EntityType.AddMember("TABLE_SECTION_TITLE", smithyprelude.Unit)
-
-	EntityType_TABLE_SUMMARY = EntityType.AddMember("TABLE_SUMMARY", smithyprelude.Unit)
-
-	EntityType_STRUCTURED_TABLE = EntityType.AddMember("STRUCTURED_TABLE", smithyprelude.Unit)
-
-	EntityType_SEMI_STRUCTURED_TABLE = EntityType.AddMember("SEMI_STRUCTURED_TABLE", smithyprelude.Unit)
-
-	_EntityTypes_member = _EntityTypes.AddMember("member", EntityType)
-
-	SelectionStatus_SELECTED = SelectionStatus.AddMember("SELECTED", smithyprelude.Unit)
-
-	SelectionStatus_NOT_SELECTED = SelectionStatus.AddMember("NOT_SELECTED", smithyprelude.Unit)
-
-	_QueryPages_member = _QueryPages.AddMember("member", _QueryPage)
-
-	Query_Text = Query.AddMember("Text", _QueryInput)
-
-	Query_Alias = Query.AddMember("Alias", _QueryInput)
-
-	Query_Pages = Query.AddMember("Pages", _QueryPages)
-
-	Block_BlockType = Block.AddMember("BlockType", BlockType)
-
-	Block_Confidence = Block.AddMember("Confidence", _Percent)
-
-	Block_Text = Block.AddMember("Text", _String)
-
-	Block_TextType = Block.AddMember("TextType", TextType)
-
-	Block_RowIndex = Block.AddMember("RowIndex", _UInteger)
-
-	Block_ColumnIndex = Block.AddMember("ColumnIndex", _UInteger)
-
-	Block_RowSpan = Block.AddMember("RowSpan", _UInteger)
-
-	Block_ColumnSpan = Block.AddMember("ColumnSpan", _UInteger)
-
-	Block_Geometry = Block.AddMember("Geometry", Geometry)
-
-	Block_Id = Block.AddMember("Id", _NonEmptyString)
-
-	Block_Relationships = Block.AddMember("Relationships", _RelationshipList)
-
-	Block_EntityTypes = Block.AddMember("EntityTypes", _EntityTypes)
-
-	Block_SelectionStatus = Block.AddMember("SelectionStatus", SelectionStatus)
-
-	Block_Page = Block.AddMember("Page", _UInteger)
-
-	Block_Query = Block.AddMember("Query", Query)
-
-	_BlockList_member = _BlockList.AddMember("member", Block)
-
-	ConflictException_Message = ConflictException.AddMember("Message", _String)
-
-	ConflictException_Code = ConflictException.AddMember("Code", _String)
-
-	ContentClassifier_FREE_OF_PERSONALLY_IDENTIFIABLE_INFORMATION = ContentClassifier.AddMember("FREE_OF_PERSONALLY_IDENTIFIABLE_INFORMATION", smithyprelude.Unit)
-
-	ContentClassifier_FREE_OF_ADULT_CONTENT = ContentClassifier.AddMember("FREE_OF_ADULT_CONTENT", smithyprelude.Unit)
-
-	_ContentClassifiers_member = _ContentClassifiers.AddMember("member", ContentClassifier)
-
-	DetectedSignature_Page = DetectedSignature.AddMember("Page", _UInteger)
-
-	_DetectedSignatureList_member = _DetectedSignatureList.AddMember("member", DetectedSignature)
-
-	Document_Bytes = Document.AddMember("Bytes", _ImageBlob)
-
-	Document_S3Object = Document.AddMember("S3Object", S3Object)
-
-	_PageList_member = _PageList.AddMember("member", _UInteger)
-
-	SplitDocument_Index = SplitDocument.AddMember("Index", _UInteger)
-
-	SplitDocument_Pages = SplitDocument.AddMember("Pages", _PageList)
-
-	_SplitDocumentList_member = _SplitDocumentList.AddMember("member", SplitDocument)
-
-	UndetectedSignature_Page = UndetectedSignature.AddMember("Page", _UInteger)
-
-	_UndetectedSignatureList_member = _UndetectedSignatureList.AddMember("member", UndetectedSignature)
-
-	DocumentGroup_Type = DocumentGroup.AddMember("Type", _NonEmptyString)
-
-	DocumentGroup_SplitDocuments = DocumentGroup.AddMember("SplitDocuments", _SplitDocumentList)
-
-	DocumentGroup_DetectedSignatures = DocumentGroup.AddMember("DetectedSignatures", _DetectedSignatureList)
-
-	DocumentGroup_UndetectedSignatures = DocumentGroup.AddMember("UndetectedSignatures", _UndetectedSignatureList)
-
-	_DocumentGroupList_member = _DocumentGroupList.AddMember("member", DocumentGroup)
-
-	DocumentLocation_S3Object = DocumentLocation.AddMember("S3Object", S3Object)
-
-	DocumentMetadata_Pages = DocumentMetadata.AddMember("Pages", _UInteger)
-
-	_DocumentPages_member = _DocumentPages.AddMember("member", Document)
-
-	DocumentTooLargeException_Message = DocumentTooLargeException.AddMember("Message", _String)
-
-	DocumentTooLargeException_Code = DocumentTooLargeException.AddMember("Code", _String)
-
-	ExpenseCurrency_Code = ExpenseCurrency.AddMember("Code", _String)
-
-	ExpenseCurrency_Confidence = ExpenseCurrency.AddMember("Confidence", _Percent)
-
-	ExpenseDetection_Text = ExpenseDetection.AddMember("Text", _String)
-
-	ExpenseDetection_Geometry = ExpenseDetection.AddMember("Geometry", Geometry)
-
-	ExpenseDetection_Confidence = ExpenseDetection.AddMember("Confidence", _Percent)
-
-	ExpenseType_Text = ExpenseType.AddMember("Text", _String)
-
-	ExpenseType_Confidence = ExpenseType.AddMember("Confidence", _Percent)
-
-	_StringList_member = _StringList.AddMember("member", _String)
-
-	ExpenseGroupProperty_Types = ExpenseGroupProperty.AddMember("Types", _StringList)
-
-	ExpenseGroupProperty_Id = ExpenseGroupProperty.AddMember("Id", _String)
-
-	_ExpenseGroupPropertyList_member = _ExpenseGroupPropertyList.AddMember("member", ExpenseGroupProperty)
-
-	ExpenseField_Type = ExpenseField.AddMember("Type", ExpenseType)
-
-	ExpenseField_LabelDetection = ExpenseField.AddMember("LabelDetection", ExpenseDetection)
-
-	ExpenseField_ValueDetection = ExpenseField.AddMember("ValueDetection", ExpenseDetection)
-
-	ExpenseField_PageNumber = ExpenseField.AddMember("PageNumber", _UInteger)
-
-	ExpenseField_Currency = ExpenseField.AddMember("Currency", ExpenseCurrency)
-
-	ExpenseField_GroupProperties = ExpenseField.AddMember("GroupProperties", _ExpenseGroupPropertyList)
-
-	_ExpenseFieldList_member = _ExpenseFieldList.AddMember("member", ExpenseField)
-
-	LineItemFields_LineItemExpenseFields = LineItemFields.AddMember("LineItemExpenseFields", _ExpenseFieldList)
-
-	_LineItemList_member = _LineItemList.AddMember("member", LineItemFields)
-
-	LineItemGroup_LineItemGroupIndex = LineItemGroup.AddMember("LineItemGroupIndex", _UInteger)
-
-	LineItemGroup_LineItems = LineItemGroup.AddMember("LineItems", _LineItemList)
-
-	_LineItemGroupList_member = _LineItemGroupList.AddMember("member", LineItemGroup)
-
-	ExpenseDocument_ExpenseIndex = ExpenseDocument.AddMember("ExpenseIndex", _UInteger)
-
-	ExpenseDocument_SummaryFields = ExpenseDocument.AddMember("SummaryFields", _ExpenseFieldList)
-
-	ExpenseDocument_LineItemGroups = ExpenseDocument.AddMember("LineItemGroups", _LineItemGroupList)
-
-	ExpenseDocument_Blocks = ExpenseDocument.AddMember("Blocks", _BlockList)
-
-	_ExpenseDocumentList_member = _ExpenseDocumentList.AddMember("member", ExpenseDocument)
-
-	LendingDetection_Text = LendingDetection.AddMember("Text", _String)
-
-	LendingDetection_SelectionStatus = LendingDetection.AddMember("SelectionStatus", SelectionStatus)
-
-	LendingDetection_Geometry = LendingDetection.AddMember("Geometry", Geometry)
-
-	LendingDetection_Confidence = LendingDetection.AddMember("Confidence", _Percent)
-
-	_LendingDetectionList_member = _LendingDetectionList.AddMember("member", LendingDetection)
-
-	LendingField_Type = LendingField.AddMember("Type", _String)
-
-	LendingField_KeyDetection = LendingField.AddMember("KeyDetection", LendingDetection)
-
-	LendingField_ValueDetections = LendingField.AddMember("ValueDetections", _LendingDetectionList)
-
-	_LendingFieldList_member = _LendingFieldList.AddMember("member", LendingField)
-
-	SignatureDetection_Confidence = SignatureDetection.AddMember("Confidence", _Percent)
-
-	SignatureDetection_Geometry = SignatureDetection.AddMember("Geometry", Geometry)
-
-	_SignatureDetectionList_member = _SignatureDetectionList.AddMember("member", SignatureDetection)
-
-	LendingDocument_LendingFields = LendingDocument.AddMember("LendingFields", _LendingFieldList)
-
-	LendingDocument_SignatureDetections = LendingDocument.AddMember("SignatureDetections", _SignatureDetectionList)
-
-	IdentityDocumentField_Type = IdentityDocumentField.AddMember("Type", AnalyzeIDDetections)
-
-	IdentityDocumentField_ValueDetection = IdentityDocumentField.AddMember("ValueDetection", AnalyzeIDDetections)
-
-	_IdentityDocumentFieldList_member = _IdentityDocumentFieldList.AddMember("member", IdentityDocumentField)
-
-	IdentityDocument_DocumentIndex = IdentityDocument.AddMember("DocumentIndex", _UInteger)
-
-	IdentityDocument_IdentityDocumentFields = IdentityDocument.AddMember("IdentityDocumentFields", _IdentityDocumentFieldList)
-
-	IdentityDocument_Blocks = IdentityDocument.AddMember("Blocks", _BlockList)
-
-	Extraction_LendingDocument = Extraction.AddMember("LendingDocument", LendingDocument)
-
-	Extraction_ExpenseDocument = Extraction.AddMember("ExpenseDocument", ExpenseDocument)
-
-	Extraction_IdentityDocument = Extraction.AddMember("IdentityDocument", IdentityDocument)
-
-	_ExtractionList_member = _ExtractionList.AddMember("member", Extraction)
-
-	_HumanLoopActivationReasons_member = _HumanLoopActivationReasons.AddMember("member", _HumanLoopActivationReason)
-
-	HumanLoopActivationOutput_HumanLoopArn = HumanLoopActivationOutput.AddMember("HumanLoopArn", _HumanLoopArn)
-
-	HumanLoopActivationOutput_HumanLoopActivationReasons = HumanLoopActivationOutput.AddMember("HumanLoopActivationReasons", _HumanLoopActivationReasons)
-
-	HumanLoopActivationOutput_HumanLoopActivationConditionsEvaluationResults = HumanLoopActivationOutput.AddMember("HumanLoopActivationConditionsEvaluationResults", _SynthesizedJsonHumanLoopActivationConditionsEvaluationResults)
-
-	HumanLoopDataAttributes_ContentClassifiers = HumanLoopDataAttributes.AddMember("ContentClassifiers", _ContentClassifiers)
-
-	HumanLoopConfig_HumanLoopName = HumanLoopConfig.AddMember("HumanLoopName", _HumanLoopName)
-
-	HumanLoopConfig_FlowDefinitionArn = HumanLoopConfig.AddMember("FlowDefinitionArn", _FlowDefinitionArn)
-
-	HumanLoopConfig_DataAttributes = HumanLoopConfig.AddMember("DataAttributes", HumanLoopDataAttributes)
-
-	HumanLoopQuotaExceededException_ResourceType = HumanLoopQuotaExceededException.AddMember("ResourceType", _String)
-
-	HumanLoopQuotaExceededException_QuotaCode = HumanLoopQuotaExceededException.AddMember("QuotaCode", _String)
-
-	HumanLoopQuotaExceededException_ServiceCode = HumanLoopQuotaExceededException.AddMember("ServiceCode", _String)
-
-	HumanLoopQuotaExceededException_Message = HumanLoopQuotaExceededException.AddMember("Message", _String)
-
-	HumanLoopQuotaExceededException_Code = HumanLoopQuotaExceededException.AddMember("Code", _String)
-
-	IdempotentParameterMismatchException_Message = IdempotentParameterMismatchException.AddMember("Message", _String)
-
-	IdempotentParameterMismatchException_Code = IdempotentParameterMismatchException.AddMember("Code", _String)
-
-	_IdentityDocumentList_member = _IdentityDocumentList.AddMember("member", IdentityDocument)
-
-	InternalServerError_Message = InternalServerError.AddMember("Message", _String)
-
-	InternalServerError_Code = InternalServerError.AddMember("Code", _String)
-
-	InvalidJobIdException_Message = InvalidJobIdException.AddMember("Message", _String)
-
-	InvalidJobIdException_Code = InvalidJobIdException.AddMember("Code", _String)
-
-	InvalidKMSKeyException_Message = InvalidKMSKeyException.AddMember("Message", _String)
-
-	InvalidKMSKeyException_Code = InvalidKMSKeyException.AddMember("Code", _String)
-
-	InvalidParameterException_Message = InvalidParameterException.AddMember("Message", _String)
-
-	InvalidParameterException_Code = InvalidParameterException.AddMember("Code", _String)
-
-	InvalidS3ObjectException_Message = InvalidS3ObjectException.AddMember("Message", _String)
-
-	InvalidS3ObjectException_Code = InvalidS3ObjectException.AddMember("Code", _String)
-
-	JobStatus_IN_PROGRESS = JobStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	JobStatus_SUCCEEDED = JobStatus.AddMember("SUCCEEDED", smithyprelude.Unit)
-
-	JobStatus_FAILED = JobStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	JobStatus_PARTIAL_SUCCESS = JobStatus.AddMember("PARTIAL_SUCCESS", smithyprelude.Unit)
-
-	Prediction_Value = Prediction.AddMember("Value", _NonEmptyString)
-
-	Prediction_Confidence = Prediction.AddMember("Confidence", _Percent)
-
-	_PredictionList_member = _PredictionList.AddMember("member", Prediction)
-
-	PageClassification_PageType = PageClassification.AddMember("PageType", _PredictionList)
-
-	PageClassification_PageNumber = PageClassification.AddMember("PageNumber", _PredictionList)
-
-	LendingResult_Page = LendingResult.AddMember("Page", _UInteger)
-
-	LendingResult_PageClassification = LendingResult.AddMember("PageClassification", PageClassification)
-
-	LendingResult_Extractions = LendingResult.AddMember("Extractions", _ExtractionList)
-
-	_LendingResultList_member = _LendingResultList.AddMember("member", LendingResult)
-
-	_UndetectedDocumentTypeList_member = _UndetectedDocumentTypeList.AddMember("member", _NonEmptyString)
-
-	LendingSummary_DocumentGroups = LendingSummary.AddMember("DocumentGroups", _DocumentGroupList)
-
-	LendingSummary_UndetectedDocumentTypes = LendingSummary.AddMember("UndetectedDocumentTypes", _UndetectedDocumentTypeList)
-
-	LimitExceededException_Message = LimitExceededException.AddMember("Message", _String)
-
-	LimitExceededException_Code = LimitExceededException.AddMember("Code", _String)
-
-	NotificationChannel_SNSTopicArn = NotificationChannel.AddMember("SNSTopicArn", _SNSTopicArn)
-
-	NotificationChannel_RoleArn = NotificationChannel.AddMember("RoleArn", _RoleArn)
-
-	OutputConfig_S3Bucket = OutputConfig.AddMember("S3Bucket", _S3Bucket)
-
-	OutputConfig_S3Prefix = OutputConfig.AddMember("S3Prefix", _S3ObjectName)
-
-	_Pages_member = _Pages.AddMember("member", _UInteger)
-
-	ProvisionedThroughputExceededException_Message = ProvisionedThroughputExceededException.AddMember("Message", _String)
-
-	ProvisionedThroughputExceededException_Code = ProvisionedThroughputExceededException.AddMember("Code", _String)
-
-	_Queries_member = _Queries.AddMember("member", Query)
-
-	QueriesConfig_Queries = QueriesConfig.AddMember("Queries", _Queries)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _String)
-
-	ResourceNotFoundException_Code = ResourceNotFoundException.AddMember("Code", _String)
-
-	ServiceQuotaExceededException_Message = ServiceQuotaExceededException.AddMember("Message", _String)
-
-	ServiceQuotaExceededException_Code = ServiceQuotaExceededException.AddMember("Code", _String)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagMap_key = _TagMap.AddMember("key", _TagKey)
-
-	_TagMap_value = _TagMap.AddMember("value", _TagValue)
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", _String)
-
-	ThrottlingException_Code = ThrottlingException.AddMember("Code", _String)
-
-	UnsupportedDocumentException_Message = UnsupportedDocumentException.AddMember("Message", _String)
-
-	UnsupportedDocumentException_Code = UnsupportedDocumentException.AddMember("Code", _String)
-
-	ValidationException_Message = ValidationException.AddMember("Message", _String)
-
-	ValidationException_Code = ValidationException.AddMember("Code", _String)
-
-	Warning_ErrorCode = Warning.AddMember("ErrorCode", _ErrorCode)
-
-	Warning_Pages = Warning.AddMember("Pages", _Pages)
-
-	_Warnings_member = _Warnings.AddMember("member", Warning)
-
-	AnalyzeDocumentRequest_Document = AnalyzeDocumentRequest.AddMember("Document", Document)
-
-	AnalyzeDocumentRequest_FeatureTypes = AnalyzeDocumentRequest.AddMember("FeatureTypes", _FeatureTypes)
-
-	AnalyzeDocumentRequest_HumanLoopConfig = AnalyzeDocumentRequest.AddMember("HumanLoopConfig", HumanLoopConfig)
-
-	AnalyzeDocumentRequest_QueriesConfig = AnalyzeDocumentRequest.AddMember("QueriesConfig", QueriesConfig)
-
-	AnalyzeDocumentRequest_AdaptersConfig = AnalyzeDocumentRequest.AddMember("AdaptersConfig", AdaptersConfig)
-
-	AnalyzeDocumentResponse_DocumentMetadata = AnalyzeDocumentResponse.AddMember("DocumentMetadata", DocumentMetadata)
-
-	AnalyzeDocumentResponse_Blocks = AnalyzeDocumentResponse.AddMember("Blocks", _BlockList)
-
-	AnalyzeDocumentResponse_HumanLoopActivationOutput = AnalyzeDocumentResponse.AddMember("HumanLoopActivationOutput", HumanLoopActivationOutput)
-
-	AnalyzeDocumentResponse_AnalyzeDocumentModelVersion = AnalyzeDocumentResponse.AddMember("AnalyzeDocumentModelVersion", _String)
-
-	AnalyzeExpenseRequest_Document = AnalyzeExpenseRequest.AddMember("Document", Document)
-
-	AnalyzeExpenseResponse_DocumentMetadata = AnalyzeExpenseResponse.AddMember("DocumentMetadata", DocumentMetadata)
-
-	AnalyzeExpenseResponse_ExpenseDocuments = AnalyzeExpenseResponse.AddMember("ExpenseDocuments", _ExpenseDocumentList)
-
-	AnalyzeIDRequest_DocumentPages = AnalyzeIDRequest.AddMember("DocumentPages", _DocumentPages)
-
-	AnalyzeIDResponse_IdentityDocuments = AnalyzeIDResponse.AddMember("IdentityDocuments", _IdentityDocumentList)
-
-	AnalyzeIDResponse_DocumentMetadata = AnalyzeIDResponse.AddMember("DocumentMetadata", DocumentMetadata)
-
-	AnalyzeIDResponse_AnalyzeIDModelVersion = AnalyzeIDResponse.AddMember("AnalyzeIDModelVersion", _String)
-
-	CreateAdapterRequest_AdapterName = CreateAdapterRequest.AddMember("AdapterName", _AdapterName)
-
-	CreateAdapterRequest_ClientRequestToken = CreateAdapterRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	CreateAdapterRequest_Description = CreateAdapterRequest.AddMember("Description", _AdapterDescription)
-
-	CreateAdapterRequest_FeatureTypes = CreateAdapterRequest.AddMember("FeatureTypes", _FeatureTypes)
-
-	CreateAdapterRequest_AutoUpdate = CreateAdapterRequest.AddMember("AutoUpdate", AutoUpdate)
-
-	CreateAdapterRequest_Tags = CreateAdapterRequest.AddMember("Tags", _TagMap)
-
-	CreateAdapterResponse_AdapterId = CreateAdapterResponse.AddMember("AdapterId", _AdapterId)
-
-	CreateAdapterVersionRequest_AdapterId = CreateAdapterVersionRequest.AddMember("AdapterId", _AdapterId)
-
-	CreateAdapterVersionRequest_ClientRequestToken = CreateAdapterVersionRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	CreateAdapterVersionRequest_DatasetConfig = CreateAdapterVersionRequest.AddMember("DatasetConfig", AdapterVersionDatasetConfig)
-
-	CreateAdapterVersionRequest_KMSKeyId = CreateAdapterVersionRequest.AddMember("KMSKeyId", _KMSKeyId)
-
-	CreateAdapterVersionRequest_OutputConfig = CreateAdapterVersionRequest.AddMember("OutputConfig", OutputConfig)
-
-	CreateAdapterVersionRequest_Tags = CreateAdapterVersionRequest.AddMember("Tags", _TagMap)
-
-	CreateAdapterVersionResponse_AdapterId = CreateAdapterVersionResponse.AddMember("AdapterId", _AdapterId)
-
-	CreateAdapterVersionResponse_AdapterVersion = CreateAdapterVersionResponse.AddMember("AdapterVersion", _AdapterVersion)
-
-	DeleteAdapterRequest_AdapterId = DeleteAdapterRequest.AddMember("AdapterId", _AdapterId)
-
-	DeleteAdapterVersionRequest_AdapterId = DeleteAdapterVersionRequest.AddMember("AdapterId", _AdapterId)
-
-	DeleteAdapterVersionRequest_AdapterVersion = DeleteAdapterVersionRequest.AddMember("AdapterVersion", _AdapterVersion)
-
-	DetectDocumentTextRequest_Document = DetectDocumentTextRequest.AddMember("Document", Document)
-
-	DetectDocumentTextResponse_DocumentMetadata = DetectDocumentTextResponse.AddMember("DocumentMetadata", DocumentMetadata)
-
-	DetectDocumentTextResponse_Blocks = DetectDocumentTextResponse.AddMember("Blocks", _BlockList)
-
-	DetectDocumentTextResponse_DetectDocumentTextModelVersion = DetectDocumentTextResponse.AddMember("DetectDocumentTextModelVersion", _String)
-
-	GetAdapterRequest_AdapterId = GetAdapterRequest.AddMember("AdapterId", _AdapterId)
-
-	GetAdapterResponse_AdapterId = GetAdapterResponse.AddMember("AdapterId", _AdapterId)
-
-	GetAdapterResponse_AdapterName = GetAdapterResponse.AddMember("AdapterName", _AdapterName)
-
-	GetAdapterResponse_CreationTime = GetAdapterResponse.AddMember("CreationTime", _DateTime)
-
-	GetAdapterResponse_Description = GetAdapterResponse.AddMember("Description", _AdapterDescription)
-
-	GetAdapterResponse_FeatureTypes = GetAdapterResponse.AddMember("FeatureTypes", _FeatureTypes)
-
-	GetAdapterResponse_AutoUpdate = GetAdapterResponse.AddMember("AutoUpdate", AutoUpdate)
-
-	GetAdapterResponse_Tags = GetAdapterResponse.AddMember("Tags", _TagMap)
-
-	GetAdapterVersionRequest_AdapterId = GetAdapterVersionRequest.AddMember("AdapterId", _AdapterId)
-
-	GetAdapterVersionRequest_AdapterVersion = GetAdapterVersionRequest.AddMember("AdapterVersion", _AdapterVersion)
-
-	GetAdapterVersionResponse_AdapterId = GetAdapterVersionResponse.AddMember("AdapterId", _AdapterId)
-
-	GetAdapterVersionResponse_AdapterVersion = GetAdapterVersionResponse.AddMember("AdapterVersion", _AdapterVersion)
-
-	GetAdapterVersionResponse_CreationTime = GetAdapterVersionResponse.AddMember("CreationTime", _DateTime)
-
-	GetAdapterVersionResponse_FeatureTypes = GetAdapterVersionResponse.AddMember("FeatureTypes", _FeatureTypes)
-
-	GetAdapterVersionResponse_Status = GetAdapterVersionResponse.AddMember("Status", AdapterVersionStatus)
-
-	GetAdapterVersionResponse_StatusMessage = GetAdapterVersionResponse.AddMember("StatusMessage", _AdapterVersionStatusMessage)
-
-	GetAdapterVersionResponse_DatasetConfig = GetAdapterVersionResponse.AddMember("DatasetConfig", AdapterVersionDatasetConfig)
-
-	GetAdapterVersionResponse_KMSKeyId = GetAdapterVersionResponse.AddMember("KMSKeyId", _KMSKeyId)
-
-	GetAdapterVersionResponse_OutputConfig = GetAdapterVersionResponse.AddMember("OutputConfig", OutputConfig)
-
-	GetAdapterVersionResponse_EvaluationMetrics = GetAdapterVersionResponse.AddMember("EvaluationMetrics", _AdapterVersionEvaluationMetrics)
-
-	GetAdapterVersionResponse_Tags = GetAdapterVersionResponse.AddMember("Tags", _TagMap)
-
-	GetDocumentAnalysisRequest_JobId = GetDocumentAnalysisRequest.AddMember("JobId", _JobId)
-
-	GetDocumentAnalysisRequest_MaxResults = GetDocumentAnalysisRequest.AddMember("MaxResults", _MaxResults)
-
-	GetDocumentAnalysisRequest_NextToken = GetDocumentAnalysisRequest.AddMember("NextToken", _PaginationToken)
-
-	GetDocumentAnalysisResponse_DocumentMetadata = GetDocumentAnalysisResponse.AddMember("DocumentMetadata", DocumentMetadata)
-
-	GetDocumentAnalysisResponse_JobStatus = GetDocumentAnalysisResponse.AddMember("JobStatus", JobStatus)
-
-	GetDocumentAnalysisResponse_NextToken = GetDocumentAnalysisResponse.AddMember("NextToken", _PaginationToken)
-
-	GetDocumentAnalysisResponse_Blocks = GetDocumentAnalysisResponse.AddMember("Blocks", _BlockList)
-
-	GetDocumentAnalysisResponse_Warnings = GetDocumentAnalysisResponse.AddMember("Warnings", _Warnings)
-
-	GetDocumentAnalysisResponse_StatusMessage = GetDocumentAnalysisResponse.AddMember("StatusMessage", _StatusMessage)
-
-	GetDocumentAnalysisResponse_AnalyzeDocumentModelVersion = GetDocumentAnalysisResponse.AddMember("AnalyzeDocumentModelVersion", _String)
-
-	GetDocumentTextDetectionRequest_JobId = GetDocumentTextDetectionRequest.AddMember("JobId", _JobId)
-
-	GetDocumentTextDetectionRequest_MaxResults = GetDocumentTextDetectionRequest.AddMember("MaxResults", _MaxResults)
-
-	GetDocumentTextDetectionRequest_NextToken = GetDocumentTextDetectionRequest.AddMember("NextToken", _PaginationToken)
-
-	GetDocumentTextDetectionResponse_DocumentMetadata = GetDocumentTextDetectionResponse.AddMember("DocumentMetadata", DocumentMetadata)
-
-	GetDocumentTextDetectionResponse_JobStatus = GetDocumentTextDetectionResponse.AddMember("JobStatus", JobStatus)
-
-	GetDocumentTextDetectionResponse_NextToken = GetDocumentTextDetectionResponse.AddMember("NextToken", _PaginationToken)
-
-	GetDocumentTextDetectionResponse_Blocks = GetDocumentTextDetectionResponse.AddMember("Blocks", _BlockList)
-
-	GetDocumentTextDetectionResponse_Warnings = GetDocumentTextDetectionResponse.AddMember("Warnings", _Warnings)
-
-	GetDocumentTextDetectionResponse_StatusMessage = GetDocumentTextDetectionResponse.AddMember("StatusMessage", _StatusMessage)
-
-	GetDocumentTextDetectionResponse_DetectDocumentTextModelVersion = GetDocumentTextDetectionResponse.AddMember("DetectDocumentTextModelVersion", _String)
-
-	GetExpenseAnalysisRequest_JobId = GetExpenseAnalysisRequest.AddMember("JobId", _JobId)
-
-	GetExpenseAnalysisRequest_MaxResults = GetExpenseAnalysisRequest.AddMember("MaxResults", _MaxResults)
-
-	GetExpenseAnalysisRequest_NextToken = GetExpenseAnalysisRequest.AddMember("NextToken", _PaginationToken)
-
-	GetExpenseAnalysisResponse_DocumentMetadata = GetExpenseAnalysisResponse.AddMember("DocumentMetadata", DocumentMetadata)
-
-	GetExpenseAnalysisResponse_JobStatus = GetExpenseAnalysisResponse.AddMember("JobStatus", JobStatus)
-
-	GetExpenseAnalysisResponse_NextToken = GetExpenseAnalysisResponse.AddMember("NextToken", _PaginationToken)
-
-	GetExpenseAnalysisResponse_ExpenseDocuments = GetExpenseAnalysisResponse.AddMember("ExpenseDocuments", _ExpenseDocumentList)
-
-	GetExpenseAnalysisResponse_Warnings = GetExpenseAnalysisResponse.AddMember("Warnings", _Warnings)
-
-	GetExpenseAnalysisResponse_StatusMessage = GetExpenseAnalysisResponse.AddMember("StatusMessage", _StatusMessage)
-
-	GetExpenseAnalysisResponse_AnalyzeExpenseModelVersion = GetExpenseAnalysisResponse.AddMember("AnalyzeExpenseModelVersion", _String)
-
-	GetLendingAnalysisRequest_JobId = GetLendingAnalysisRequest.AddMember("JobId", _JobId)
-
-	GetLendingAnalysisRequest_MaxResults = GetLendingAnalysisRequest.AddMember("MaxResults", _MaxResults)
-
-	GetLendingAnalysisRequest_NextToken = GetLendingAnalysisRequest.AddMember("NextToken", _PaginationToken)
-
-	GetLendingAnalysisResponse_DocumentMetadata = GetLendingAnalysisResponse.AddMember("DocumentMetadata", DocumentMetadata)
-
-	GetLendingAnalysisResponse_JobStatus = GetLendingAnalysisResponse.AddMember("JobStatus", JobStatus)
-
-	GetLendingAnalysisResponse_NextToken = GetLendingAnalysisResponse.AddMember("NextToken", _PaginationToken)
-
-	GetLendingAnalysisResponse_Results = GetLendingAnalysisResponse.AddMember("Results", _LendingResultList)
-
-	GetLendingAnalysisResponse_Warnings = GetLendingAnalysisResponse.AddMember("Warnings", _Warnings)
-
-	GetLendingAnalysisResponse_StatusMessage = GetLendingAnalysisResponse.AddMember("StatusMessage", _StatusMessage)
-
-	GetLendingAnalysisResponse_AnalyzeLendingModelVersion = GetLendingAnalysisResponse.AddMember("AnalyzeLendingModelVersion", _String)
-
-	GetLendingAnalysisSummaryRequest_JobId = GetLendingAnalysisSummaryRequest.AddMember("JobId", _JobId)
-
-	GetLendingAnalysisSummaryResponse_DocumentMetadata = GetLendingAnalysisSummaryResponse.AddMember("DocumentMetadata", DocumentMetadata)
-
-	GetLendingAnalysisSummaryResponse_JobStatus = GetLendingAnalysisSummaryResponse.AddMember("JobStatus", JobStatus)
-
-	GetLendingAnalysisSummaryResponse_Summary = GetLendingAnalysisSummaryResponse.AddMember("Summary", LendingSummary)
-
-	GetLendingAnalysisSummaryResponse_Warnings = GetLendingAnalysisSummaryResponse.AddMember("Warnings", _Warnings)
-
-	GetLendingAnalysisSummaryResponse_StatusMessage = GetLendingAnalysisSummaryResponse.AddMember("StatusMessage", _StatusMessage)
-
-	GetLendingAnalysisSummaryResponse_AnalyzeLendingModelVersion = GetLendingAnalysisSummaryResponse.AddMember("AnalyzeLendingModelVersion", _String)
-
-	ListAdaptersRequest_AfterCreationTime = ListAdaptersRequest.AddMember("AfterCreationTime", _DateTime)
-
-	ListAdaptersRequest_BeforeCreationTime = ListAdaptersRequest.AddMember("BeforeCreationTime", _DateTime)
-
-	ListAdaptersRequest_MaxResults = ListAdaptersRequest.AddMember("MaxResults", _MaxResults)
-
-	ListAdaptersRequest_NextToken = ListAdaptersRequest.AddMember("NextToken", _PaginationToken)
-
-	ListAdaptersResponse_Adapters = ListAdaptersResponse.AddMember("Adapters", _AdapterList)
-
-	ListAdaptersResponse_NextToken = ListAdaptersResponse.AddMember("NextToken", _PaginationToken)
-
-	ListAdapterVersionsRequest_AdapterId = ListAdapterVersionsRequest.AddMember("AdapterId", _AdapterId)
-
-	ListAdapterVersionsRequest_AfterCreationTime = ListAdapterVersionsRequest.AddMember("AfterCreationTime", _DateTime)
-
-	ListAdapterVersionsRequest_BeforeCreationTime = ListAdapterVersionsRequest.AddMember("BeforeCreationTime", _DateTime)
-
-	ListAdapterVersionsRequest_MaxResults = ListAdapterVersionsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListAdapterVersionsRequest_NextToken = ListAdapterVersionsRequest.AddMember("NextToken", _PaginationToken)
-
-	ListAdapterVersionsResponse_AdapterVersions = ListAdapterVersionsResponse.AddMember("AdapterVersions", _AdapterVersionList)
-
-	ListAdapterVersionsResponse_NextToken = ListAdapterVersionsResponse.AddMember("NextToken", _PaginationToken)
-
-	ListTagsForResourceRequest_ResourceARN = ListTagsForResourceRequest.AddMember("ResourceARN", _AmazonResourceName)
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _TagMap)
-
-	StartDocumentAnalysisRequest_DocumentLocation = StartDocumentAnalysisRequest.AddMember("DocumentLocation", DocumentLocation)
-
-	StartDocumentAnalysisRequest_FeatureTypes = StartDocumentAnalysisRequest.AddMember("FeatureTypes", _FeatureTypes)
-
-	StartDocumentAnalysisRequest_ClientRequestToken = StartDocumentAnalysisRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	StartDocumentAnalysisRequest_JobTag = StartDocumentAnalysisRequest.AddMember("JobTag", _JobTag)
-
-	StartDocumentAnalysisRequest_NotificationChannel = StartDocumentAnalysisRequest.AddMember("NotificationChannel", NotificationChannel)
-
-	StartDocumentAnalysisRequest_OutputConfig = StartDocumentAnalysisRequest.AddMember("OutputConfig", OutputConfig)
-
-	StartDocumentAnalysisRequest_KMSKeyId = StartDocumentAnalysisRequest.AddMember("KMSKeyId", _KMSKeyId)
-
-	StartDocumentAnalysisRequest_QueriesConfig = StartDocumentAnalysisRequest.AddMember("QueriesConfig", QueriesConfig)
-
-	StartDocumentAnalysisRequest_AdaptersConfig = StartDocumentAnalysisRequest.AddMember("AdaptersConfig", AdaptersConfig)
-
-	StartDocumentAnalysisResponse_JobId = StartDocumentAnalysisResponse.AddMember("JobId", _JobId)
-
-	StartDocumentTextDetectionRequest_DocumentLocation = StartDocumentTextDetectionRequest.AddMember("DocumentLocation", DocumentLocation)
-
-	StartDocumentTextDetectionRequest_ClientRequestToken = StartDocumentTextDetectionRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	StartDocumentTextDetectionRequest_JobTag = StartDocumentTextDetectionRequest.AddMember("JobTag", _JobTag)
-
-	StartDocumentTextDetectionRequest_NotificationChannel = StartDocumentTextDetectionRequest.AddMember("NotificationChannel", NotificationChannel)
-
-	StartDocumentTextDetectionRequest_OutputConfig = StartDocumentTextDetectionRequest.AddMember("OutputConfig", OutputConfig)
-
-	StartDocumentTextDetectionRequest_KMSKeyId = StartDocumentTextDetectionRequest.AddMember("KMSKeyId", _KMSKeyId)
-
-	StartDocumentTextDetectionResponse_JobId = StartDocumentTextDetectionResponse.AddMember("JobId", _JobId)
-
-	StartExpenseAnalysisRequest_DocumentLocation = StartExpenseAnalysisRequest.AddMember("DocumentLocation", DocumentLocation)
-
-	StartExpenseAnalysisRequest_ClientRequestToken = StartExpenseAnalysisRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	StartExpenseAnalysisRequest_JobTag = StartExpenseAnalysisRequest.AddMember("JobTag", _JobTag)
-
-	StartExpenseAnalysisRequest_NotificationChannel = StartExpenseAnalysisRequest.AddMember("NotificationChannel", NotificationChannel)
-
-	StartExpenseAnalysisRequest_OutputConfig = StartExpenseAnalysisRequest.AddMember("OutputConfig", OutputConfig)
-
-	StartExpenseAnalysisRequest_KMSKeyId = StartExpenseAnalysisRequest.AddMember("KMSKeyId", _KMSKeyId)
-
-	StartExpenseAnalysisResponse_JobId = StartExpenseAnalysisResponse.AddMember("JobId", _JobId)
-
-	StartLendingAnalysisRequest_DocumentLocation = StartLendingAnalysisRequest.AddMember("DocumentLocation", DocumentLocation)
-
-	StartLendingAnalysisRequest_ClientRequestToken = StartLendingAnalysisRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	StartLendingAnalysisRequest_JobTag = StartLendingAnalysisRequest.AddMember("JobTag", _JobTag)
-
-	StartLendingAnalysisRequest_NotificationChannel = StartLendingAnalysisRequest.AddMember("NotificationChannel", NotificationChannel)
-
-	StartLendingAnalysisRequest_OutputConfig = StartLendingAnalysisRequest.AddMember("OutputConfig", OutputConfig)
-
-	StartLendingAnalysisRequest_KMSKeyId = StartLendingAnalysisRequest.AddMember("KMSKeyId", _KMSKeyId)
-
-	StartLendingAnalysisResponse_JobId = StartLendingAnalysisResponse.AddMember("JobId", _JobId)
-
-	TagResourceRequest_ResourceARN = TagResourceRequest.AddMember("ResourceARN", _AmazonResourceName)
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _TagMap)
-
-	UntagResourceRequest_ResourceARN = UntagResourceRequest.AddMember("ResourceARN", _AmazonResourceName)
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList)
-
-	UpdateAdapterRequest_AdapterId = UpdateAdapterRequest.AddMember("AdapterId", _AdapterId)
-
-	UpdateAdapterRequest_Description = UpdateAdapterRequest.AddMember("Description", _AdapterDescription)
-
-	UpdateAdapterRequest_AdapterName = UpdateAdapterRequest.AddMember("AdapterName", _AdapterName)
-
-	UpdateAdapterRequest_AutoUpdate = UpdateAdapterRequest.AddMember("AutoUpdate", AutoUpdate)
-
-	UpdateAdapterResponse_AdapterId = UpdateAdapterResponse.AddMember("AdapterId", _AdapterId)
-
-	UpdateAdapterResponse_AdapterName = UpdateAdapterResponse.AddMember("AdapterName", _AdapterName)
-
-	UpdateAdapterResponse_CreationTime = UpdateAdapterResponse.AddMember("CreationTime", _DateTime)
-
-	UpdateAdapterResponse_Description = UpdateAdapterResponse.AddMember("Description", _AdapterDescription)
-
-	UpdateAdapterResponse_FeatureTypes = UpdateAdapterResponse.AddMember("FeatureTypes", _FeatureTypes)
-
-	UpdateAdapterResponse_AutoUpdate = UpdateAdapterResponse.AddMember("AutoUpdate", AutoUpdate)
-
-}
+var (
+	iAnalyzeDocument                                                = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "AnalyzeDocument"}
+	iAnalyzeExpense                                                 = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "AnalyzeExpense"}
+	iAnalyzeID                                                      = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "AnalyzeID"}
+	iCreateAdapter                                                  = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "CreateAdapter"}
+	iCreateAdapterVersion                                           = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "CreateAdapterVersion"}
+	iDeleteAdapter                                                  = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "DeleteAdapter"}
+	iDeleteAdapterVersion                                           = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "DeleteAdapterVersion"}
+	iDetectDocumentText                                             = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "DetectDocumentText"}
+	iGetAdapter                                                     = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "GetAdapter"}
+	iGetAdapterVersion                                              = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "GetAdapterVersion"}
+	iGetDocumentAnalysis                                            = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "GetDocumentAnalysis"}
+	iGetDocumentTextDetection                                       = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "GetDocumentTextDetection"}
+	iGetExpenseAnalysis                                             = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "GetExpenseAnalysis"}
+	iGetLendingAnalysis                                             = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "GetLendingAnalysis"}
+	iGetLendingAnalysisSummary                                      = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "GetLendingAnalysisSummary"}
+	iListAdapters                                                   = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "ListAdapters"}
+	iListAdapterVersions                                            = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "ListAdapterVersions"}
+	iListTagsForResource                                            = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "ListTagsForResource"}
+	iStartDocumentAnalysis                                          = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "StartDocumentAnalysis"}
+	iStartDocumentTextDetection                                     = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "StartDocumentTextDetection"}
+	iStartExpenseAnalysis                                           = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "StartExpenseAnalysis"}
+	iStartLendingAnalysis                                           = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "StartLendingAnalysis"}
+	iTagResource                                                    = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "TagResource"}
+	iUntagResource                                                  = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "UntagResource"}
+	iUpdateAdapter                                                  = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "UpdateAdapter"}
+	i_Textract                                                      = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "Textract"}
+	iAccessDeniedException                                          = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "AccessDeniedException"}
+	iAdapter                                                        = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "Adapter"}
+	i_AdapterDescription                                            = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "AdapterDescription"}
+	i_AdapterId                                                     = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "AdapterId"}
+	i_AdapterList                                                   = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "AdapterList"}
+	i_AdapterName                                                   = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "AdapterName"}
+	iAdapterOverview                                                = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "AdapterOverview"}
+	i_AdapterPage                                                   = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "AdapterPage"}
+	i_AdapterPages                                                  = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "AdapterPages"}
+	i_Adapters                                                      = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "Adapters"}
+	iAdaptersConfig                                                 = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "AdaptersConfig"}
+	i_AdapterVersion                                                = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "AdapterVersion"}
+	iAdapterVersionDatasetConfig                                    = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "AdapterVersionDatasetConfig"}
+	iAdapterVersionEvaluationMetric                                 = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "AdapterVersionEvaluationMetric"}
+	i_AdapterVersionEvaluationMetrics                               = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "AdapterVersionEvaluationMetrics"}
+	i_AdapterVersionList                                            = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "AdapterVersionList"}
+	iAdapterVersionOverview                                         = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "AdapterVersionOverview"}
+	iAdapterVersionStatus                                           = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "AdapterVersionStatus"}
+	i_AdapterVersionStatusMessage                                   = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "AdapterVersionStatusMessage"}
+	i_AmazonResourceName                                            = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "AmazonResourceName"}
+	iAnalyzeIDDetections                                            = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "AnalyzeIDDetections"}
+	i_Angle                                                         = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "Angle"}
+	iAutoUpdate                                                     = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "AutoUpdate"}
+	iBadDocumentException                                           = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "BadDocumentException"}
+	iBlock                                                          = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "Block"}
+	i_BlockList                                                     = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "BlockList"}
+	iBlockType                                                      = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "BlockType"}
+	iBoundingBox                                                    = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "BoundingBox"}
+	i_ClientRequestToken                                            = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "ClientRequestToken"}
+	iConflictException                                              = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "ConflictException"}
+	iContentClassifier                                              = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "ContentClassifier"}
+	i_ContentClassifiers                                            = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "ContentClassifiers"}
+	i_DateTime                                                      = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "DateTime"}
+	iDetectedSignature                                              = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "DetectedSignature"}
+	i_DetectedSignatureList                                         = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "DetectedSignatureList"}
+	iDocument                                                       = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "Document"}
+	iDocumentGroup                                                  = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "DocumentGroup"}
+	i_DocumentGroupList                                             = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "DocumentGroupList"}
+	iDocumentLocation                                               = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "DocumentLocation"}
+	iDocumentMetadata                                               = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "DocumentMetadata"}
+	i_DocumentPages                                                 = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "DocumentPages"}
+	iDocumentTooLargeException                                      = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "DocumentTooLargeException"}
+	iEntityType                                                     = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "EntityType"}
+	i_EntityTypes                                                   = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "EntityTypes"}
+	i_ErrorCode                                                     = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "ErrorCode"}
+	iEvaluationMetric                                               = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "EvaluationMetric"}
+	iExpenseCurrency                                                = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "ExpenseCurrency"}
+	iExpenseDetection                                               = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "ExpenseDetection"}
+	iExpenseDocument                                                = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "ExpenseDocument"}
+	i_ExpenseDocumentList                                           = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "ExpenseDocumentList"}
+	iExpenseField                                                   = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "ExpenseField"}
+	i_ExpenseFieldList                                              = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "ExpenseFieldList"}
+	iExpenseGroupProperty                                           = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "ExpenseGroupProperty"}
+	i_ExpenseGroupPropertyList                                      = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "ExpenseGroupPropertyList"}
+	iExpenseType                                                    = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "ExpenseType"}
+	iExtraction                                                     = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "Extraction"}
+	i_ExtractionList                                                = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "ExtractionList"}
+	iFeatureType                                                    = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "FeatureType"}
+	i_FeatureTypes                                                  = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "FeatureTypes"}
+	i_Float                                                         = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "Float"}
+	i_FlowDefinitionArn                                             = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "FlowDefinitionArn"}
+	iGeometry                                                       = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "Geometry"}
+	iHumanLoopActivationOutput                                      = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "HumanLoopActivationOutput"}
+	i_HumanLoopActivationReason                                     = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "HumanLoopActivationReason"}
+	i_HumanLoopActivationReasons                                    = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "HumanLoopActivationReasons"}
+	i_HumanLoopArn                                                  = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "HumanLoopArn"}
+	iHumanLoopConfig                                                = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "HumanLoopConfig"}
+	iHumanLoopDataAttributes                                        = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "HumanLoopDataAttributes"}
+	i_HumanLoopName                                                 = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "HumanLoopName"}
+	iHumanLoopQuotaExceededException                                = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "HumanLoopQuotaExceededException"}
+	iIdempotentParameterMismatchException                           = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "IdempotentParameterMismatchException"}
+	iIdentityDocument                                               = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "IdentityDocument"}
+	iIdentityDocumentField                                          = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "IdentityDocumentField"}
+	i_IdentityDocumentFieldList                                     = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "IdentityDocumentFieldList"}
+	i_IdentityDocumentList                                          = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "IdentityDocumentList"}
+	i_IdList                                                        = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "IdList"}
+	i_ImageBlob                                                     = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "ImageBlob"}
+	iInternalServerError                                            = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "InternalServerError"}
+	iInvalidJobIdException                                          = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "InvalidJobIdException"}
+	iInvalidKMSKeyException                                         = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "InvalidKMSKeyException"}
+	iInvalidParameterException                                      = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "InvalidParameterException"}
+	iInvalidS3ObjectException                                       = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "InvalidS3ObjectException"}
+	i_JobId                                                         = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "JobId"}
+	iJobStatus                                                      = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "JobStatus"}
+	i_JobTag                                                        = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "JobTag"}
+	i_KMSKeyId                                                      = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "KMSKeyId"}
+	iLendingDetection                                               = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "LendingDetection"}
+	i_LendingDetectionList                                          = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "LendingDetectionList"}
+	iLendingDocument                                                = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "LendingDocument"}
+	iLendingField                                                   = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "LendingField"}
+	i_LendingFieldList                                              = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "LendingFieldList"}
+	iLendingResult                                                  = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "LendingResult"}
+	i_LendingResultList                                             = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "LendingResultList"}
+	iLendingSummary                                                 = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "LendingSummary"}
+	iLimitExceededException                                         = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "LimitExceededException"}
+	iLineItemFields                                                 = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "LineItemFields"}
+	iLineItemGroup                                                  = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "LineItemGroup"}
+	i_LineItemGroupList                                             = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "LineItemGroupList"}
+	i_LineItemList                                                  = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "LineItemList"}
+	i_MaxResults                                                    = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "MaxResults"}
+	i_NonEmptyString                                                = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "NonEmptyString"}
+	iNormalizedValue                                                = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "NormalizedValue"}
+	iNotificationChannel                                            = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "NotificationChannel"}
+	iOutputConfig                                                   = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "OutputConfig"}
+	iPageClassification                                             = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "PageClassification"}
+	i_PageList                                                      = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "PageList"}
+	i_Pages                                                         = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "Pages"}
+	i_PaginationToken                                               = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "PaginationToken"}
+	i_Percent                                                       = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "Percent"}
+	iPoint                                                          = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "Point"}
+	i_Polygon                                                       = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "Polygon"}
+	iPrediction                                                     = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "Prediction"}
+	i_PredictionList                                                = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "PredictionList"}
+	iProvisionedThroughputExceededException                         = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "ProvisionedThroughputExceededException"}
+	i_Queries                                                       = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "Queries"}
+	iQueriesConfig                                                  = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "QueriesConfig"}
+	iQuery                                                          = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "Query"}
+	i_QueryInput                                                    = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "QueryInput"}
+	i_QueryPage                                                     = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "QueryPage"}
+	i_QueryPages                                                    = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "QueryPages"}
+	iRelationship                                                   = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "Relationship"}
+	i_RelationshipList                                              = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "RelationshipList"}
+	iRelationshipType                                               = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "RelationshipType"}
+	iResourceNotFoundException                                      = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "ResourceNotFoundException"}
+	i_RoleArn                                                       = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "RoleArn"}
+	i_S3Bucket                                                      = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "S3Bucket"}
+	iS3Object                                                       = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "S3Object"}
+	i_S3ObjectName                                                  = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "S3ObjectName"}
+	i_S3ObjectVersion                                               = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "S3ObjectVersion"}
+	iSelectionStatus                                                = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "SelectionStatus"}
+	iServiceQuotaExceededException                                  = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "ServiceQuotaExceededException"}
+	iSignatureDetection                                             = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "SignatureDetection"}
+	i_SignatureDetectionList                                        = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "SignatureDetectionList"}
+	i_SNSTopicArn                                                   = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "SNSTopicArn"}
+	iSplitDocument                                                  = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "SplitDocument"}
+	i_SplitDocumentList                                             = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "SplitDocumentList"}
+	i_StatusMessage                                                 = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "StatusMessage"}
+	i_String                                                        = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "String"}
+	i_StringList                                                    = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "StringList"}
+	i_SynthesizedJsonHumanLoopActivationConditionsEvaluationResults = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "SynthesizedJsonHumanLoopActivationConditionsEvaluationResults"}
+	i_TagKey                                                        = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "TagKey"}
+	i_TagKeyList                                                    = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "TagKeyList"}
+	i_TagMap                                                        = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "TagMap"}
+	i_TagValue                                                      = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "TagValue"}
+	iTextType                                                       = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "TextType"}
+	iThrottlingException                                            = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "ThrottlingException"}
+	i_UInteger                                                      = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "UInteger"}
+	i_UndetectedDocumentTypeList                                    = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "UndetectedDocumentTypeList"}
+	iUndetectedSignature                                            = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "UndetectedSignature"}
+	i_UndetectedSignatureList                                       = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "UndetectedSignatureList"}
+	iUnsupportedDocumentException                                   = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "UnsupportedDocumentException"}
+	iValidationException                                            = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "ValidationException"}
+	iValueType                                                      = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "ValueType"}
+	iWarning                                                        = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "Warning"}
+	i_Warnings                                                      = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "Warnings"}
+	iAnalyzeDocumentRequest                                         = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "AnalyzeDocumentRequest"}
+	iAnalyzeDocumentResponse                                        = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "AnalyzeDocumentResponse"}
+	iAnalyzeExpenseRequest                                          = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "AnalyzeExpenseRequest"}
+	iAnalyzeExpenseResponse                                         = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "AnalyzeExpenseResponse"}
+	iAnalyzeIDRequest                                               = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "AnalyzeIDRequest"}
+	iAnalyzeIDResponse                                              = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "AnalyzeIDResponse"}
+	iCreateAdapterRequest                                           = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "CreateAdapterRequest"}
+	iCreateAdapterResponse                                          = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "CreateAdapterResponse"}
+	iCreateAdapterVersionRequest                                    = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "CreateAdapterVersionRequest"}
+	iCreateAdapterVersionResponse                                   = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "CreateAdapterVersionResponse"}
+	iDeleteAdapterRequest                                           = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "DeleteAdapterRequest"}
+	iDeleteAdapterResponse                                          = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "DeleteAdapterResponse"}
+	iDeleteAdapterVersionRequest                                    = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "DeleteAdapterVersionRequest"}
+	iDeleteAdapterVersionResponse                                   = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "DeleteAdapterVersionResponse"}
+	iDetectDocumentTextRequest                                      = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "DetectDocumentTextRequest"}
+	iDetectDocumentTextResponse                                     = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "DetectDocumentTextResponse"}
+	iGetAdapterRequest                                              = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "GetAdapterRequest"}
+	iGetAdapterResponse                                             = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "GetAdapterResponse"}
+	iGetAdapterVersionRequest                                       = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "GetAdapterVersionRequest"}
+	iGetAdapterVersionResponse                                      = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "GetAdapterVersionResponse"}
+	iGetDocumentAnalysisRequest                                     = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "GetDocumentAnalysisRequest"}
+	iGetDocumentAnalysisResponse                                    = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "GetDocumentAnalysisResponse"}
+	iGetDocumentTextDetectionRequest                                = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "GetDocumentTextDetectionRequest"}
+	iGetDocumentTextDetectionResponse                               = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "GetDocumentTextDetectionResponse"}
+	iGetExpenseAnalysisRequest                                      = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "GetExpenseAnalysisRequest"}
+	iGetExpenseAnalysisResponse                                     = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "GetExpenseAnalysisResponse"}
+	iGetLendingAnalysisRequest                                      = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "GetLendingAnalysisRequest"}
+	iGetLendingAnalysisResponse                                     = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "GetLendingAnalysisResponse"}
+	iGetLendingAnalysisSummaryRequest                               = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "GetLendingAnalysisSummaryRequest"}
+	iGetLendingAnalysisSummaryResponse                              = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "GetLendingAnalysisSummaryResponse"}
+	iListAdaptersRequest                                            = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "ListAdaptersRequest"}
+	iListAdaptersResponse                                           = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "ListAdaptersResponse"}
+	iListAdapterVersionsRequest                                     = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "ListAdapterVersionsRequest"}
+	iListAdapterVersionsResponse                                    = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "ListAdapterVersionsResponse"}
+	iListTagsForResourceRequest                                     = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse                                    = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "ListTagsForResourceResponse"}
+	iStartDocumentAnalysisRequest                                   = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "StartDocumentAnalysisRequest"}
+	iStartDocumentAnalysisResponse                                  = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "StartDocumentAnalysisResponse"}
+	iStartDocumentTextDetectionRequest                              = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "StartDocumentTextDetectionRequest"}
+	iStartDocumentTextDetectionResponse                             = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "StartDocumentTextDetectionResponse"}
+	iStartExpenseAnalysisRequest                                    = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "StartExpenseAnalysisRequest"}
+	iStartExpenseAnalysisResponse                                   = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "StartExpenseAnalysisResponse"}
+	iStartLendingAnalysisRequest                                    = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "StartLendingAnalysisRequest"}
+	iStartLendingAnalysisResponse                                   = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "StartLendingAnalysisResponse"}
+	iTagResourceRequest                                             = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "TagResourceRequest"}
+	iTagResourceResponse                                            = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "TagResourceResponse"}
+	iUntagResourceRequest                                           = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                                          = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "UntagResourceResponse"}
+	iUpdateAdapterRequest                                           = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "UpdateAdapterRequest"}
+	iUpdateAdapterResponse                                          = smithy.ShapeID{Namespace: "com.amazonaws.textract", Name: "UpdateAdapterResponse"}
+	pUnit                                                           = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.MediaType{Type: "application/json"}}}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t3 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.MediaType{Type: "application/json"}}, DirectMask: 0x40000}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_Message, &sAccessDeniedException_Code}}
+var mAdapter = smithy.SchemaMembers{List: []*smithy.Schema{&sAdapter_AdapterId, &sAdapter_Pages, &sAdapter_Version}}
+var m_AdapterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AdapterList_member}}
+var mAdapterOverview = smithy.SchemaMembers{List: []*smithy.Schema{&sAdapterOverview_AdapterId, &sAdapterOverview_AdapterName, &sAdapterOverview_CreationTime, &sAdapterOverview_FeatureTypes}}
+var m_AdapterPages = smithy.SchemaMembers{List: []*smithy.Schema{&s_AdapterPages_member}}
+var m_Adapters = smithy.SchemaMembers{List: []*smithy.Schema{&s_Adapters_member}}
+var mAdaptersConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sAdaptersConfig_Adapters}}
+var mAdapterVersionDatasetConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sAdapterVersionDatasetConfig_ManifestS3Object}}
+var mAdapterVersionEvaluationMetric = smithy.SchemaMembers{List: []*smithy.Schema{&sAdapterVersionEvaluationMetric_Baseline, &sAdapterVersionEvaluationMetric_AdapterVersion, &sAdapterVersionEvaluationMetric_FeatureType}}
+var m_AdapterVersionEvaluationMetrics = smithy.SchemaMembers{List: []*smithy.Schema{&s_AdapterVersionEvaluationMetrics_member}}
+var m_AdapterVersionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AdapterVersionList_member}}
+var mAdapterVersionOverview = smithy.SchemaMembers{List: []*smithy.Schema{&sAdapterVersionOverview_AdapterId, &sAdapterVersionOverview_AdapterVersion, &sAdapterVersionOverview_CreationTime, &sAdapterVersionOverview_FeatureTypes, &sAdapterVersionOverview_Status, &sAdapterVersionOverview_StatusMessage}}
+var mAdapterVersionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sAdapterVersionStatus_ACTIVE, &sAdapterVersionStatus_AT_RISK, &sAdapterVersionStatus_DEPRECATED, &sAdapterVersionStatus_CREATION_ERROR, &sAdapterVersionStatus_CREATION_IN_PROGRESS}}
+var mAnalyzeIDDetections = smithy.SchemaMembers{List: []*smithy.Schema{&sAnalyzeIDDetections_Text, &sAnalyzeIDDetections_NormalizedValue, &sAnalyzeIDDetections_Confidence}}
+var mAutoUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sAutoUpdate_ENABLED, &sAutoUpdate_DISABLED}}
+var mBadDocumentException = smithy.SchemaMembers{List: []*smithy.Schema{&sBadDocumentException_Message, &sBadDocumentException_Code}}
+var mBlock = smithy.SchemaMembers{List: []*smithy.Schema{&sBlock_BlockType, &sBlock_Confidence, &sBlock_Text, &sBlock_TextType, &sBlock_RowIndex, &sBlock_ColumnIndex, &sBlock_RowSpan, &sBlock_ColumnSpan, &sBlock_Geometry, &sBlock_Id, &sBlock_Relationships, &sBlock_EntityTypes, &sBlock_SelectionStatus, &sBlock_Page, &sBlock_Query}, Seed: 96, Slots: []uint16{
+	14, 15, 11, 7, 10, 0, 0, 0, 0, 0, 2, 4, 9, 0, 0, 0, 13, 0, 5, 8, 0, 0, 0, 3,
+	6, 0, 0, 0, 1, 0, 0, 12,
+}}
+var m_BlockList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BlockList_member}}
+var mBlockType = smithy.SchemaMembers{List: []*smithy.Schema{&sBlockType_KEY_VALUE_SET, &sBlockType_PAGE, &sBlockType_LINE, &sBlockType_WORD, &sBlockType_TABLE, &sBlockType_CELL, &sBlockType_SELECTION_ELEMENT, &sBlockType_MERGED_CELL, &sBlockType_TITLE, &sBlockType_QUERY, &sBlockType_QUERY_RESULT, &sBlockType_SIGNATURE, &sBlockType_TABLE_TITLE, &sBlockType_TABLE_FOOTER, &sBlockType_LAYOUT_TEXT, &sBlockType_LAYOUT_TITLE, &sBlockType_LAYOUT_HEADER, &sBlockType_LAYOUT_FOOTER, &sBlockType_LAYOUT_SECTION_HEADER, &sBlockType_LAYOUT_PAGE_NUMBER, &sBlockType_LAYOUT_LIST, &sBlockType_LAYOUT_FIGURE, &sBlockType_LAYOUT_TABLE, &sBlockType_LAYOUT_KEY_VALUE}, Seed: 183, Slots: []uint16{
+	0, 0, 18, 24, 16, 0, 0, 0, 4, 0, 0, 0, 6, 0, 7, 0, 0, 0, 0, 0, 0, 0, 22, 0,
+	0, 0, 12, 11, 0, 21, 10, 0, 0, 20, 0, 14, 19, 0, 5, 0, 9, 0, 0, 0, 0, 0, 8, 2,
+	0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 23, 3, 13, 15, 17,
+}}
+var mBoundingBox = smithy.SchemaMembers{List: []*smithy.Schema{&sBoundingBox_Width, &sBoundingBox_Height, &sBoundingBox_Left, &sBoundingBox_Top}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_Message, &sConflictException_Code}}
+var mContentClassifier = smithy.SchemaMembers{List: []*smithy.Schema{&sContentClassifier_FREE_OF_PERSONALLY_IDENTIFIABLE_INFORMATION, &sContentClassifier_FREE_OF_ADULT_CONTENT}}
+var m_ContentClassifiers = smithy.SchemaMembers{List: []*smithy.Schema{&s_ContentClassifiers_member}}
+var mDetectedSignature = smithy.SchemaMembers{List: []*smithy.Schema{&sDetectedSignature_Page}}
+var m_DetectedSignatureList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DetectedSignatureList_member}}
+var mDocument = smithy.SchemaMembers{List: []*smithy.Schema{&sDocument_Bytes, &sDocument_S3Object}}
+var mDocumentGroup = smithy.SchemaMembers{List: []*smithy.Schema{&sDocumentGroup_Type, &sDocumentGroup_SplitDocuments, &sDocumentGroup_DetectedSignatures, &sDocumentGroup_UndetectedSignatures}}
+var m_DocumentGroupList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DocumentGroupList_member}}
+var mDocumentLocation = smithy.SchemaMembers{List: []*smithy.Schema{&sDocumentLocation_S3Object}}
+var mDocumentMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sDocumentMetadata_Pages}}
+var m_DocumentPages = smithy.SchemaMembers{List: []*smithy.Schema{&s_DocumentPages_member}}
+var mDocumentTooLargeException = smithy.SchemaMembers{List: []*smithy.Schema{&sDocumentTooLargeException_Message, &sDocumentTooLargeException_Code}}
+var mEntityType = smithy.SchemaMembers{List: []*smithy.Schema{&sEntityType_KEY, &sEntityType_VALUE, &sEntityType_COLUMN_HEADER, &sEntityType_TABLE_TITLE, &sEntityType_TABLE_FOOTER, &sEntityType_TABLE_SECTION_TITLE, &sEntityType_TABLE_SUMMARY, &sEntityType_STRUCTURED_TABLE, &sEntityType_SEMI_STRUCTURED_TABLE}, Seed: 2, Slots: []uint16{
+	0, 0, 0, 5, 0, 6, 3, 0, 0, 1, 7, 0, 0, 9, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 4, 0, 0, 2, 0, 0,
+}}
+var m_EntityTypes = smithy.SchemaMembers{List: []*smithy.Schema{&s_EntityTypes_member}}
+var mEvaluationMetric = smithy.SchemaMembers{List: []*smithy.Schema{&sEvaluationMetric_F1Score, &sEvaluationMetric_Precision, &sEvaluationMetric_Recall}}
+var mExpenseCurrency = smithy.SchemaMembers{List: []*smithy.Schema{&sExpenseCurrency_Code, &sExpenseCurrency_Confidence}}
+var mExpenseDetection = smithy.SchemaMembers{List: []*smithy.Schema{&sExpenseDetection_Text, &sExpenseDetection_Geometry, &sExpenseDetection_Confidence}}
+var mExpenseDocument = smithy.SchemaMembers{List: []*smithy.Schema{&sExpenseDocument_ExpenseIndex, &sExpenseDocument_SummaryFields, &sExpenseDocument_LineItemGroups, &sExpenseDocument_Blocks}}
+var m_ExpenseDocumentList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ExpenseDocumentList_member}}
+var mExpenseField = smithy.SchemaMembers{List: []*smithy.Schema{&sExpenseField_Type, &sExpenseField_LabelDetection, &sExpenseField_ValueDetection, &sExpenseField_PageNumber, &sExpenseField_Currency, &sExpenseField_GroupProperties}}
+var m_ExpenseFieldList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ExpenseFieldList_member}}
+var mExpenseGroupProperty = smithy.SchemaMembers{List: []*smithy.Schema{&sExpenseGroupProperty_Types, &sExpenseGroupProperty_Id}}
+var m_ExpenseGroupPropertyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ExpenseGroupPropertyList_member}}
+var mExpenseType = smithy.SchemaMembers{List: []*smithy.Schema{&sExpenseType_Text, &sExpenseType_Confidence}}
+var mExtraction = smithy.SchemaMembers{List: []*smithy.Schema{&sExtraction_LendingDocument, &sExtraction_ExpenseDocument, &sExtraction_IdentityDocument}}
+var m_ExtractionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ExtractionList_member}}
+var mFeatureType = smithy.SchemaMembers{List: []*smithy.Schema{&sFeatureType_TABLES, &sFeatureType_FORMS, &sFeatureType_QUERIES, &sFeatureType_SIGNATURES, &sFeatureType_LAYOUT}}
+var m_FeatureTypes = smithy.SchemaMembers{List: []*smithy.Schema{&s_FeatureTypes_member}}
+var mGeometry = smithy.SchemaMembers{List: []*smithy.Schema{&sGeometry_BoundingBox, &sGeometry_Polygon, &sGeometry_RotationAngle}}
+var mHumanLoopActivationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sHumanLoopActivationOutput_HumanLoopArn, &sHumanLoopActivationOutput_HumanLoopActivationReasons, &sHumanLoopActivationOutput_HumanLoopActivationConditionsEvaluationResults}}
+var m_HumanLoopActivationReasons = smithy.SchemaMembers{List: []*smithy.Schema{&s_HumanLoopActivationReasons_member}}
+var mHumanLoopConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sHumanLoopConfig_HumanLoopName, &sHumanLoopConfig_FlowDefinitionArn, &sHumanLoopConfig_DataAttributes}}
+var mHumanLoopDataAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sHumanLoopDataAttributes_ContentClassifiers}}
+var mHumanLoopQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sHumanLoopQuotaExceededException_ResourceType, &sHumanLoopQuotaExceededException_QuotaCode, &sHumanLoopQuotaExceededException_ServiceCode, &sHumanLoopQuotaExceededException_Message, &sHumanLoopQuotaExceededException_Code}}
+var mIdempotentParameterMismatchException = smithy.SchemaMembers{List: []*smithy.Schema{&sIdempotentParameterMismatchException_Message, &sIdempotentParameterMismatchException_Code}}
+var mIdentityDocument = smithy.SchemaMembers{List: []*smithy.Schema{&sIdentityDocument_DocumentIndex, &sIdentityDocument_IdentityDocumentFields, &sIdentityDocument_Blocks}}
+var mIdentityDocumentField = smithy.SchemaMembers{List: []*smithy.Schema{&sIdentityDocumentField_Type, &sIdentityDocumentField_ValueDetection}}
+var m_IdentityDocumentFieldList = smithy.SchemaMembers{List: []*smithy.Schema{&s_IdentityDocumentFieldList_member}}
+var m_IdentityDocumentList = smithy.SchemaMembers{List: []*smithy.Schema{&s_IdentityDocumentList_member}}
+var m_IdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_IdList_member}}
+var mInternalServerError = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerError_Message, &sInternalServerError_Code}}
+var mInvalidJobIdException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidJobIdException_Message, &sInvalidJobIdException_Code}}
+var mInvalidKMSKeyException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidKMSKeyException_Message, &sInvalidKMSKeyException_Code}}
+var mInvalidParameterException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidParameterException_Message, &sInvalidParameterException_Code}}
+var mInvalidS3ObjectException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidS3ObjectException_Message, &sInvalidS3ObjectException_Code}}
+var mJobStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sJobStatus_IN_PROGRESS, &sJobStatus_SUCCEEDED, &sJobStatus_FAILED, &sJobStatus_PARTIAL_SUCCESS}}
+var mLendingDetection = smithy.SchemaMembers{List: []*smithy.Schema{&sLendingDetection_Text, &sLendingDetection_SelectionStatus, &sLendingDetection_Geometry, &sLendingDetection_Confidence}}
+var m_LendingDetectionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LendingDetectionList_member}}
+var mLendingDocument = smithy.SchemaMembers{List: []*smithy.Schema{&sLendingDocument_LendingFields, &sLendingDocument_SignatureDetections}}
+var mLendingField = smithy.SchemaMembers{List: []*smithy.Schema{&sLendingField_Type, &sLendingField_KeyDetection, &sLendingField_ValueDetections}}
+var m_LendingFieldList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LendingFieldList_member}}
+var mLendingResult = smithy.SchemaMembers{List: []*smithy.Schema{&sLendingResult_Page, &sLendingResult_PageClassification, &sLendingResult_Extractions}}
+var m_LendingResultList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LendingResultList_member}}
+var mLendingSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sLendingSummary_DocumentGroups, &sLendingSummary_UndetectedDocumentTypes}}
+var mLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sLimitExceededException_Message, &sLimitExceededException_Code}}
+var mLineItemFields = smithy.SchemaMembers{List: []*smithy.Schema{&sLineItemFields_LineItemExpenseFields}}
+var mLineItemGroup = smithy.SchemaMembers{List: []*smithy.Schema{&sLineItemGroup_LineItemGroupIndex, &sLineItemGroup_LineItems}}
+var m_LineItemGroupList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LineItemGroupList_member}}
+var m_LineItemList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LineItemList_member}}
+var mNormalizedValue = smithy.SchemaMembers{List: []*smithy.Schema{&sNormalizedValue_Value, &sNormalizedValue_ValueType}}
+var mNotificationChannel = smithy.SchemaMembers{List: []*smithy.Schema{&sNotificationChannel_SNSTopicArn, &sNotificationChannel_RoleArn}}
+var mOutputConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sOutputConfig_S3Bucket, &sOutputConfig_S3Prefix}}
+var mPageClassification = smithy.SchemaMembers{List: []*smithy.Schema{&sPageClassification_PageType, &sPageClassification_PageNumber}}
+var m_PageList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PageList_member}}
+var m_Pages = smithy.SchemaMembers{List: []*smithy.Schema{&s_Pages_member}}
+var mPoint = smithy.SchemaMembers{List: []*smithy.Schema{&sPoint_X, &sPoint_Y}}
+var m_Polygon = smithy.SchemaMembers{List: []*smithy.Schema{&s_Polygon_member}}
+var mPrediction = smithy.SchemaMembers{List: []*smithy.Schema{&sPrediction_Value, &sPrediction_Confidence}}
+var m_PredictionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PredictionList_member}}
+var mProvisionedThroughputExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sProvisionedThroughputExceededException_Message, &sProvisionedThroughputExceededException_Code}}
+var m_Queries = smithy.SchemaMembers{List: []*smithy.Schema{&s_Queries_member}}
+var mQueriesConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sQueriesConfig_Queries}}
+var mQuery = smithy.SchemaMembers{List: []*smithy.Schema{&sQuery_Text, &sQuery_Alias, &sQuery_Pages}}
+var m_QueryPages = smithy.SchemaMembers{List: []*smithy.Schema{&s_QueryPages_member}}
+var mRelationship = smithy.SchemaMembers{List: []*smithy.Schema{&sRelationship_Type, &sRelationship_Ids}}
+var m_RelationshipList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RelationshipList_member}}
+var mRelationshipType = smithy.SchemaMembers{List: []*smithy.Schema{&sRelationshipType_VALUE, &sRelationshipType_CHILD, &sRelationshipType_COMPLEX_FEATURES, &sRelationshipType_MERGED_CELL, &sRelationshipType_TITLE, &sRelationshipType_ANSWER, &sRelationshipType_TABLE, &sRelationshipType_TABLE_TITLE, &sRelationshipType_TABLE_FOOTER}, Seed: 6, Slots: []uint16{
+	0, 0, 0, 0, 6, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 4, 0, 0, 3, 1,
+	0, 0, 0, 9, 5, 0, 0, 2,
+}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message, &sResourceNotFoundException_Code}}
+var mS3Object = smithy.SchemaMembers{List: []*smithy.Schema{&sS3Object_Bucket, &sS3Object_Name, &sS3Object_Version}}
+var mSelectionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sSelectionStatus_SELECTED, &sSelectionStatus_NOT_SELECTED}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_Message, &sServiceQuotaExceededException_Code}}
+var mSignatureDetection = smithy.SchemaMembers{List: []*smithy.Schema{&sSignatureDetection_Confidence, &sSignatureDetection_Geometry}}
+var m_SignatureDetectionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SignatureDetectionList_member}}
+var mSplitDocument = smithy.SchemaMembers{List: []*smithy.Schema{&sSplitDocument_Index, &sSplitDocument_Pages}}
+var m_SplitDocumentList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SplitDocumentList_member}}
+var m_StringList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StringList_member}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagMap_key, &s_TagMap_value}}
+var mTextType = smithy.SchemaMembers{List: []*smithy.Schema{&sTextType_HANDWRITING, &sTextType_PRINTED}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_Message, &sThrottlingException_Code}}
+var m_UndetectedDocumentTypeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_UndetectedDocumentTypeList_member}}
+var mUndetectedSignature = smithy.SchemaMembers{List: []*smithy.Schema{&sUndetectedSignature_Page}}
+var m_UndetectedSignatureList = smithy.SchemaMembers{List: []*smithy.Schema{&s_UndetectedSignatureList_member}}
+var mUnsupportedDocumentException = smithy.SchemaMembers{List: []*smithy.Schema{&sUnsupportedDocumentException_Message, &sUnsupportedDocumentException_Code}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_Message, &sValidationException_Code}}
+var mValueType = smithy.SchemaMembers{List: []*smithy.Schema{&sValueType_DATE}}
+var mWarning = smithy.SchemaMembers{List: []*smithy.Schema{&sWarning_ErrorCode, &sWarning_Pages}}
+var m_Warnings = smithy.SchemaMembers{List: []*smithy.Schema{&s_Warnings_member}}
+var mAnalyzeDocumentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAnalyzeDocumentRequest_Document, &sAnalyzeDocumentRequest_FeatureTypes, &sAnalyzeDocumentRequest_HumanLoopConfig, &sAnalyzeDocumentRequest_QueriesConfig, &sAnalyzeDocumentRequest_AdaptersConfig}}
+var mAnalyzeDocumentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAnalyzeDocumentResponse_DocumentMetadata, &sAnalyzeDocumentResponse_Blocks, &sAnalyzeDocumentResponse_HumanLoopActivationOutput, &sAnalyzeDocumentResponse_AnalyzeDocumentModelVersion}}
+var mAnalyzeExpenseRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAnalyzeExpenseRequest_Document}}
+var mAnalyzeExpenseResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAnalyzeExpenseResponse_DocumentMetadata, &sAnalyzeExpenseResponse_ExpenseDocuments}}
+var mAnalyzeIDRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAnalyzeIDRequest_DocumentPages}}
+var mAnalyzeIDResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAnalyzeIDResponse_IdentityDocuments, &sAnalyzeIDResponse_DocumentMetadata, &sAnalyzeIDResponse_AnalyzeIDModelVersion}}
+var mCreateAdapterRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAdapterRequest_AdapterName, &sCreateAdapterRequest_ClientRequestToken, &sCreateAdapterRequest_Description, &sCreateAdapterRequest_FeatureTypes, &sCreateAdapterRequest_AutoUpdate, &sCreateAdapterRequest_Tags}}
+var mCreateAdapterResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAdapterResponse_AdapterId}}
+var mCreateAdapterVersionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAdapterVersionRequest_AdapterId, &sCreateAdapterVersionRequest_ClientRequestToken, &sCreateAdapterVersionRequest_DatasetConfig, &sCreateAdapterVersionRequest_KMSKeyId, &sCreateAdapterVersionRequest_OutputConfig, &sCreateAdapterVersionRequest_Tags}}
+var mCreateAdapterVersionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAdapterVersionResponse_AdapterId, &sCreateAdapterVersionResponse_AdapterVersion}}
+var mDeleteAdapterRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAdapterRequest_AdapterId}}
+var mDeleteAdapterVersionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAdapterVersionRequest_AdapterId, &sDeleteAdapterVersionRequest_AdapterVersion}}
+var mDetectDocumentTextRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDetectDocumentTextRequest_Document}}
+var mDetectDocumentTextResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDetectDocumentTextResponse_DocumentMetadata, &sDetectDocumentTextResponse_Blocks, &sDetectDocumentTextResponse_DetectDocumentTextModelVersion}}
+var mGetAdapterRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAdapterRequest_AdapterId}}
+var mGetAdapterResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAdapterResponse_AdapterId, &sGetAdapterResponse_AdapterName, &sGetAdapterResponse_CreationTime, &sGetAdapterResponse_Description, &sGetAdapterResponse_FeatureTypes, &sGetAdapterResponse_AutoUpdate, &sGetAdapterResponse_Tags}}
+var mGetAdapterVersionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAdapterVersionRequest_AdapterId, &sGetAdapterVersionRequest_AdapterVersion}}
+var mGetAdapterVersionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAdapterVersionResponse_AdapterId, &sGetAdapterVersionResponse_AdapterVersion, &sGetAdapterVersionResponse_CreationTime, &sGetAdapterVersionResponse_FeatureTypes, &sGetAdapterVersionResponse_Status, &sGetAdapterVersionResponse_StatusMessage, &sGetAdapterVersionResponse_DatasetConfig, &sGetAdapterVersionResponse_KMSKeyId, &sGetAdapterVersionResponse_OutputConfig, &sGetAdapterVersionResponse_EvaluationMetrics, &sGetAdapterVersionResponse_Tags}, Seed: 1, Slots: []uint16{
+	0, 11, 10, 0, 0, 0, 0, 0, 8, 7, 0, 9, 0, 0, 3, 0, 0, 6, 0, 2, 0, 1, 0, 4,
+	0, 0, 0, 0, 0, 5, 0, 0,
+}}
+var mGetDocumentAnalysisRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDocumentAnalysisRequest_JobId, &sGetDocumentAnalysisRequest_MaxResults, &sGetDocumentAnalysisRequest_NextToken}}
+var mGetDocumentAnalysisResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDocumentAnalysisResponse_DocumentMetadata, &sGetDocumentAnalysisResponse_JobStatus, &sGetDocumentAnalysisResponse_NextToken, &sGetDocumentAnalysisResponse_Blocks, &sGetDocumentAnalysisResponse_Warnings, &sGetDocumentAnalysisResponse_StatusMessage, &sGetDocumentAnalysisResponse_AnalyzeDocumentModelVersion}}
+var mGetDocumentTextDetectionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDocumentTextDetectionRequest_JobId, &sGetDocumentTextDetectionRequest_MaxResults, &sGetDocumentTextDetectionRequest_NextToken}}
+var mGetDocumentTextDetectionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDocumentTextDetectionResponse_DocumentMetadata, &sGetDocumentTextDetectionResponse_JobStatus, &sGetDocumentTextDetectionResponse_NextToken, &sGetDocumentTextDetectionResponse_Blocks, &sGetDocumentTextDetectionResponse_Warnings, &sGetDocumentTextDetectionResponse_StatusMessage, &sGetDocumentTextDetectionResponse_DetectDocumentTextModelVersion}}
+var mGetExpenseAnalysisRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetExpenseAnalysisRequest_JobId, &sGetExpenseAnalysisRequest_MaxResults, &sGetExpenseAnalysisRequest_NextToken}}
+var mGetExpenseAnalysisResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetExpenseAnalysisResponse_DocumentMetadata, &sGetExpenseAnalysisResponse_JobStatus, &sGetExpenseAnalysisResponse_NextToken, &sGetExpenseAnalysisResponse_ExpenseDocuments, &sGetExpenseAnalysisResponse_Warnings, &sGetExpenseAnalysisResponse_StatusMessage, &sGetExpenseAnalysisResponse_AnalyzeExpenseModelVersion}}
+var mGetLendingAnalysisRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetLendingAnalysisRequest_JobId, &sGetLendingAnalysisRequest_MaxResults, &sGetLendingAnalysisRequest_NextToken}}
+var mGetLendingAnalysisResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetLendingAnalysisResponse_DocumentMetadata, &sGetLendingAnalysisResponse_JobStatus, &sGetLendingAnalysisResponse_NextToken, &sGetLendingAnalysisResponse_Results, &sGetLendingAnalysisResponse_Warnings, &sGetLendingAnalysisResponse_StatusMessage, &sGetLendingAnalysisResponse_AnalyzeLendingModelVersion}}
+var mGetLendingAnalysisSummaryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetLendingAnalysisSummaryRequest_JobId}}
+var mGetLendingAnalysisSummaryResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetLendingAnalysisSummaryResponse_DocumentMetadata, &sGetLendingAnalysisSummaryResponse_JobStatus, &sGetLendingAnalysisSummaryResponse_Summary, &sGetLendingAnalysisSummaryResponse_Warnings, &sGetLendingAnalysisSummaryResponse_StatusMessage, &sGetLendingAnalysisSummaryResponse_AnalyzeLendingModelVersion}}
+var mListAdaptersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAdaptersRequest_AfterCreationTime, &sListAdaptersRequest_BeforeCreationTime, &sListAdaptersRequest_MaxResults, &sListAdaptersRequest_NextToken}}
+var mListAdaptersResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAdaptersResponse_Adapters, &sListAdaptersResponse_NextToken}}
+var mListAdapterVersionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAdapterVersionsRequest_AdapterId, &sListAdapterVersionsRequest_AfterCreationTime, &sListAdapterVersionsRequest_BeforeCreationTime, &sListAdapterVersionsRequest_MaxResults, &sListAdapterVersionsRequest_NextToken}}
+var mListAdapterVersionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAdapterVersionsResponse_AdapterVersions, &sListAdapterVersionsResponse_NextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceARN}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_Tags}}
+var mStartDocumentAnalysisRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartDocumentAnalysisRequest_DocumentLocation, &sStartDocumentAnalysisRequest_FeatureTypes, &sStartDocumentAnalysisRequest_ClientRequestToken, &sStartDocumentAnalysisRequest_JobTag, &sStartDocumentAnalysisRequest_NotificationChannel, &sStartDocumentAnalysisRequest_OutputConfig, &sStartDocumentAnalysisRequest_KMSKeyId, &sStartDocumentAnalysisRequest_QueriesConfig, &sStartDocumentAnalysisRequest_AdaptersConfig}, Seed: 8, Slots: []uint16{
+	0, 0, 8, 0, 0, 6, 0, 5, 0, 0, 7, 0, 1, 0, 0, 0, 0, 2, 9, 0, 0, 0, 0, 0,
+	0, 0, 0, 3, 0, 0, 0, 4,
+}}
+var mStartDocumentAnalysisResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartDocumentAnalysisResponse_JobId}}
+var mStartDocumentTextDetectionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartDocumentTextDetectionRequest_DocumentLocation, &sStartDocumentTextDetectionRequest_ClientRequestToken, &sStartDocumentTextDetectionRequest_JobTag, &sStartDocumentTextDetectionRequest_NotificationChannel, &sStartDocumentTextDetectionRequest_OutputConfig, &sStartDocumentTextDetectionRequest_KMSKeyId}}
+var mStartDocumentTextDetectionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartDocumentTextDetectionResponse_JobId}}
+var mStartExpenseAnalysisRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartExpenseAnalysisRequest_DocumentLocation, &sStartExpenseAnalysisRequest_ClientRequestToken, &sStartExpenseAnalysisRequest_JobTag, &sStartExpenseAnalysisRequest_NotificationChannel, &sStartExpenseAnalysisRequest_OutputConfig, &sStartExpenseAnalysisRequest_KMSKeyId}}
+var mStartExpenseAnalysisResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartExpenseAnalysisResponse_JobId}}
+var mStartLendingAnalysisRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartLendingAnalysisRequest_DocumentLocation, &sStartLendingAnalysisRequest_ClientRequestToken, &sStartLendingAnalysisRequest_JobTag, &sStartLendingAnalysisRequest_NotificationChannel, &sStartLendingAnalysisRequest_OutputConfig, &sStartLendingAnalysisRequest_KMSKeyId}}
+var mStartLendingAnalysisResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartLendingAnalysisResponse_JobId}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceARN, &sTagResourceRequest_Tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceARN, &sUntagResourceRequest_TagKeys}}
+var mUpdateAdapterRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAdapterRequest_AdapterId, &sUpdateAdapterRequest_Description, &sUpdateAdapterRequest_AdapterName, &sUpdateAdapterRequest_AutoUpdate}}
+var mUpdateAdapterResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAdapterResponse_AdapterId, &sUpdateAdapterResponse_AdapterName, &sUpdateAdapterResponse_CreationTime, &sUpdateAdapterResponse_Description, &sUpdateAdapterResponse_FeatureTypes, &sUpdateAdapterResponse_AutoUpdate}}
+
+var sAnalyzeDocument = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAnalyzeDocument, Type: smithy.ShapeTypeOperation})
+var sAnalyzeExpense = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAnalyzeExpense, Type: smithy.ShapeTypeOperation})
+var sAnalyzeID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAnalyzeID, Type: smithy.ShapeTypeOperation})
+var sCreateAdapter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAdapter, Type: smithy.ShapeTypeOperation})
+var sCreateAdapterVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAdapterVersion, Type: smithy.ShapeTypeOperation})
+var sDeleteAdapter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAdapter, Type: smithy.ShapeTypeOperation})
+var sDeleteAdapterVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAdapterVersion, Type: smithy.ShapeTypeOperation})
+var sDetectDocumentText = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDetectDocumentText, Type: smithy.ShapeTypeOperation})
+var sGetAdapter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAdapter, Type: smithy.ShapeTypeOperation})
+var sGetAdapterVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAdapterVersion, Type: smithy.ShapeTypeOperation})
+var sGetDocumentAnalysis = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDocumentAnalysis, Type: smithy.ShapeTypeOperation})
+var sGetDocumentTextDetection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDocumentTextDetection, Type: smithy.ShapeTypeOperation})
+var sGetExpenseAnalysis = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetExpenseAnalysis, Type: smithy.ShapeTypeOperation})
+var sGetLendingAnalysis = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLendingAnalysis, Type: smithy.ShapeTypeOperation})
+var sGetLendingAnalysisSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLendingAnalysisSummary, Type: smithy.ShapeTypeOperation})
+var sListAdapters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAdapters, Type: smithy.ShapeTypeOperation})
+var sListAdapterVersions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAdapterVersions, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation})
+var sStartDocumentAnalysis = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartDocumentAnalysis, Type: smithy.ShapeTypeOperation})
+var sStartDocumentTextDetection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartDocumentTextDetection, Type: smithy.ShapeTypeOperation})
+var sStartExpenseAnalysis = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartExpenseAnalysis, Type: smithy.ShapeTypeOperation})
+var sStartLendingAnalysis = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartLendingAnalysis, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation})
+var sUpdateAdapter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAdapter, Type: smithy.ShapeTypeOperation})
+var s_Textract = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Textract, Type: smithy.ShapeTypeService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var sAdapter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdapter, Members: &mAdapter, Type: smithy.ShapeTypeStructure})
+var s_AdapterDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AdapterDescription, Type: smithy.ShapeTypeString})
+var s_AdapterId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AdapterId, Type: smithy.ShapeTypeString})
+var s_AdapterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AdapterList, Members: &m_AdapterList, Type: smithy.ShapeTypeList})
+var s_AdapterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AdapterName, Type: smithy.ShapeTypeString})
+var sAdapterOverview = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdapterOverview, Members: &mAdapterOverview, Type: smithy.ShapeTypeStructure})
+var s_AdapterPage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AdapterPage, Type: smithy.ShapeTypeString})
+var s_AdapterPages = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AdapterPages, Members: &m_AdapterPages, Type: smithy.ShapeTypeList})
+var s_Adapters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Adapters, Members: &m_Adapters, Type: smithy.ShapeTypeList})
+var sAdaptersConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdaptersConfig, Members: &mAdaptersConfig, Type: smithy.ShapeTypeStructure})
+var s_AdapterVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AdapterVersion, Type: smithy.ShapeTypeString})
+var sAdapterVersionDatasetConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdapterVersionDatasetConfig, Members: &mAdapterVersionDatasetConfig, Type: smithy.ShapeTypeStructure})
+var sAdapterVersionEvaluationMetric = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdapterVersionEvaluationMetric, Members: &mAdapterVersionEvaluationMetric, Type: smithy.ShapeTypeStructure})
+var s_AdapterVersionEvaluationMetrics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AdapterVersionEvaluationMetrics, Members: &m_AdapterVersionEvaluationMetrics, Type: smithy.ShapeTypeList})
+var s_AdapterVersionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AdapterVersionList, Members: &m_AdapterVersionList, Type: smithy.ShapeTypeList})
+var sAdapterVersionOverview = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdapterVersionOverview, Members: &mAdapterVersionOverview, Type: smithy.ShapeTypeStructure})
+var sAdapterVersionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdapterVersionStatus, Members: &mAdapterVersionStatus, Type: smithy.ShapeTypeEnum})
+var s_AdapterVersionStatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AdapterVersionStatusMessage, Type: smithy.ShapeTypeString})
+var s_AmazonResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString})
+var sAnalyzeIDDetections = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAnalyzeIDDetections, Members: &mAnalyzeIDDetections, Type: smithy.ShapeTypeStructure})
+var s_Angle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Angle, Type: smithy.ShapeTypeFloat})
+var sAutoUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutoUpdate, Members: &mAutoUpdate, Type: smithy.ShapeTypeEnum})
+var sBadDocumentException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBadDocumentException, Members: &mBadDocumentException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var sBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBlock, Members: &mBlock, Type: smithy.ShapeTypeStructure})
+var s_BlockList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlockList, Members: &m_BlockList, Type: smithy.ShapeTypeList})
+var sBlockType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBlockType, Members: &mBlockType, Type: smithy.ShapeTypeEnum})
+var sBoundingBox = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBoundingBox, Members: &mBoundingBox, Type: smithy.ShapeTypeStructure})
+var s_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var sContentClassifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContentClassifier, Members: &mContentClassifier, Type: smithy.ShapeTypeEnum})
+var s_ContentClassifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContentClassifiers, Members: &m_ContentClassifiers, Type: smithy.ShapeTypeList})
+var s_DateTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp})
+var sDetectedSignature = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDetectedSignature, Members: &mDetectedSignature, Type: smithy.ShapeTypeStructure})
+var s_DetectedSignatureList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DetectedSignatureList, Members: &m_DetectedSignatureList, Type: smithy.ShapeTypeList})
+var sDocument = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDocument, Members: &mDocument, Type: smithy.ShapeTypeStructure})
+var sDocumentGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDocumentGroup, Members: &mDocumentGroup, Type: smithy.ShapeTypeStructure})
+var s_DocumentGroupList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DocumentGroupList, Members: &m_DocumentGroupList, Type: smithy.ShapeTypeList})
+var sDocumentLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDocumentLocation, Members: &mDocumentLocation, Type: smithy.ShapeTypeStructure})
+var sDocumentMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDocumentMetadata, Members: &mDocumentMetadata, Type: smithy.ShapeTypeStructure})
+var s_DocumentPages = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DocumentPages, Members: &m_DocumentPages, Type: smithy.ShapeTypeList})
+var sDocumentTooLargeException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDocumentTooLargeException, Members: &mDocumentTooLargeException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var sEntityType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntityType, Members: &mEntityType, Type: smithy.ShapeTypeEnum})
+var s_EntityTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntityTypes, Members: &m_EntityTypes, Type: smithy.ShapeTypeList})
+var s_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorCode, Type: smithy.ShapeTypeString})
+var sEvaluationMetric = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvaluationMetric, Members: &mEvaluationMetric, Type: smithy.ShapeTypeStructure})
+var sExpenseCurrency = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpenseCurrency, Members: &mExpenseCurrency, Type: smithy.ShapeTypeStructure})
+var sExpenseDetection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpenseDetection, Members: &mExpenseDetection, Type: smithy.ShapeTypeStructure})
+var sExpenseDocument = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpenseDocument, Members: &mExpenseDocument, Type: smithy.ShapeTypeStructure})
+var s_ExpenseDocumentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExpenseDocumentList, Members: &m_ExpenseDocumentList, Type: smithy.ShapeTypeList})
+var sExpenseField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpenseField, Members: &mExpenseField, Type: smithy.ShapeTypeStructure})
+var s_ExpenseFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExpenseFieldList, Members: &m_ExpenseFieldList, Type: smithy.ShapeTypeList})
+var sExpenseGroupProperty = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpenseGroupProperty, Members: &mExpenseGroupProperty, Type: smithy.ShapeTypeStructure})
+var s_ExpenseGroupPropertyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExpenseGroupPropertyList, Members: &m_ExpenseGroupPropertyList, Type: smithy.ShapeTypeList})
+var sExpenseType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpenseType, Members: &mExpenseType, Type: smithy.ShapeTypeStructure})
+var sExtraction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExtraction, Members: &mExtraction, Type: smithy.ShapeTypeStructure})
+var s_ExtractionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExtractionList, Members: &m_ExtractionList, Type: smithy.ShapeTypeList})
+var sFeatureType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFeatureType, Members: &mFeatureType, Type: smithy.ShapeTypeEnum})
+var s_FeatureTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FeatureTypes, Members: &m_FeatureTypes, Type: smithy.ShapeTypeList})
+var s_Float = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Float, Type: smithy.ShapeTypeFloat})
+var s_FlowDefinitionArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FlowDefinitionArn, Type: smithy.ShapeTypeString})
+var sGeometry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGeometry, Members: &mGeometry, Type: smithy.ShapeTypeStructure})
+var sHumanLoopActivationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHumanLoopActivationOutput, Members: &mHumanLoopActivationOutput, Type: smithy.ShapeTypeStructure})
+var s_HumanLoopActivationReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HumanLoopActivationReason, Type: smithy.ShapeTypeString})
+var s_HumanLoopActivationReasons = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HumanLoopActivationReasons, Members: &m_HumanLoopActivationReasons, Type: smithy.ShapeTypeList})
+var s_HumanLoopArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HumanLoopArn, Type: smithy.ShapeTypeString})
+var sHumanLoopConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHumanLoopConfig, Members: &mHumanLoopConfig, Type: smithy.ShapeTypeStructure})
+var sHumanLoopDataAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHumanLoopDataAttributes, Members: &mHumanLoopDataAttributes, Type: smithy.ShapeTypeStructure})
+var s_HumanLoopName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HumanLoopName, Type: smithy.ShapeTypeString})
+var sHumanLoopQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHumanLoopQuotaExceededException, Members: &mHumanLoopQuotaExceededException, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var sIdempotentParameterMismatchException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdempotentParameterMismatchException, Members: &mIdempotentParameterMismatchException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var sIdentityDocument = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdentityDocument, Members: &mIdentityDocument, Type: smithy.ShapeTypeStructure})
+var sIdentityDocumentField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdentityDocumentField, Members: &mIdentityDocumentField, Type: smithy.ShapeTypeStructure})
+var s_IdentityDocumentFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdentityDocumentFieldList, Members: &m_IdentityDocumentFieldList, Type: smithy.ShapeTypeList})
+var s_IdentityDocumentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdentityDocumentList, Members: &m_IdentityDocumentList, Type: smithy.ShapeTypeList})
+var s_IdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdList, Members: &m_IdList, Type: smithy.ShapeTypeList})
+var s_ImageBlob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImageBlob, Type: smithy.ShapeTypeBlob})
+var sInternalServerError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerError, Members: &mInternalServerError, Traits: &t3, Type: smithy.ShapeTypeStructure})
+var sInvalidJobIdException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidJobIdException, Members: &mInvalidJobIdException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var sInvalidKMSKeyException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidKMSKeyException, Members: &mInvalidKMSKeyException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var sInvalidParameterException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidParameterException, Members: &mInvalidParameterException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var sInvalidS3ObjectException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidS3ObjectException, Members: &mInvalidS3ObjectException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var s_JobId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobId, Type: smithy.ShapeTypeString})
+var sJobStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobStatus, Members: &mJobStatus, Type: smithy.ShapeTypeEnum})
+var s_JobTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobTag, Type: smithy.ShapeTypeString})
+var s_KMSKeyId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KMSKeyId, Type: smithy.ShapeTypeString})
+var sLendingDetection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLendingDetection, Members: &mLendingDetection, Type: smithy.ShapeTypeStructure})
+var s_LendingDetectionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LendingDetectionList, Members: &m_LendingDetectionList, Type: smithy.ShapeTypeList})
+var sLendingDocument = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLendingDocument, Members: &mLendingDocument, Type: smithy.ShapeTypeStructure})
+var sLendingField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLendingField, Members: &mLendingField, Type: smithy.ShapeTypeStructure})
+var s_LendingFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LendingFieldList, Members: &m_LendingFieldList, Type: smithy.ShapeTypeList})
+var sLendingResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLendingResult, Members: &mLendingResult, Type: smithy.ShapeTypeStructure})
+var s_LendingResultList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LendingResultList, Members: &m_LendingResultList, Type: smithy.ShapeTypeList})
+var sLendingSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLendingSummary, Members: &mLendingSummary, Type: smithy.ShapeTypeStructure})
+var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var sLineItemFields = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLineItemFields, Members: &mLineItemFields, Type: smithy.ShapeTypeStructure})
+var sLineItemGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLineItemGroup, Members: &mLineItemGroup, Type: smithy.ShapeTypeStructure})
+var s_LineItemGroupList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LineItemGroupList, Members: &m_LineItemGroupList, Type: smithy.ShapeTypeList})
+var s_LineItemList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LineItemList, Members: &m_LineItemList, Type: smithy.ShapeTypeList})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var s_NonEmptyString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sNormalizedValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNormalizedValue, Members: &mNormalizedValue, Type: smithy.ShapeTypeStructure})
+var sNotificationChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotificationChannel, Members: &mNotificationChannel, Type: smithy.ShapeTypeStructure})
+var sOutputConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutputConfig, Members: &mOutputConfig, Type: smithy.ShapeTypeStructure})
+var sPageClassification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPageClassification, Members: &mPageClassification, Type: smithy.ShapeTypeStructure})
+var s_PageList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PageList, Members: &m_PageList, Type: smithy.ShapeTypeList})
+var s_Pages = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Pages, Members: &m_Pages, Type: smithy.ShapeTypeList})
+var s_PaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var s_Percent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Percent, Type: smithy.ShapeTypeFloat})
+var sPoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPoint, Members: &mPoint, Type: smithy.ShapeTypeStructure})
+var s_Polygon = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Polygon, Members: &m_Polygon, Type: smithy.ShapeTypeList})
+var sPrediction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPrediction, Members: &mPrediction, Type: smithy.ShapeTypeStructure})
+var s_PredictionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PredictionList, Members: &m_PredictionList, Type: smithy.ShapeTypeList})
+var sProvisionedThroughputExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProvisionedThroughputExceededException, Members: &mProvisionedThroughputExceededException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var s_Queries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Queries, Members: &m_Queries, Type: smithy.ShapeTypeList})
+var sQueriesConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueriesConfig, Members: &mQueriesConfig, Type: smithy.ShapeTypeStructure})
+var sQuery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQuery, Members: &mQuery, Type: smithy.ShapeTypeStructure})
+var s_QueryInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryInput, Type: smithy.ShapeTypeString})
+var s_QueryPage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryPage, Type: smithy.ShapeTypeString})
+var s_QueryPages = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryPages, Members: &m_QueryPages, Type: smithy.ShapeTypeList})
+var sRelationship = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRelationship, Members: &mRelationship, Type: smithy.ShapeTypeStructure})
+var s_RelationshipList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RelationshipList, Members: &m_RelationshipList, Type: smithy.ShapeTypeList})
+var sRelationshipType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRelationshipType, Members: &mRelationshipType, Type: smithy.ShapeTypeEnum})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var s_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var s_S3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Bucket, Type: smithy.ShapeTypeString})
+var sS3Object = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3Object, Members: &mS3Object, Type: smithy.ShapeTypeStructure})
+var s_S3ObjectName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3ObjectName, Type: smithy.ShapeTypeString})
+var s_S3ObjectVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3ObjectVersion, Type: smithy.ShapeTypeString})
+var sSelectionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSelectionStatus, Members: &mSelectionStatus, Type: smithy.ShapeTypeEnum})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var sSignatureDetection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSignatureDetection, Members: &mSignatureDetection, Type: smithy.ShapeTypeStructure})
+var s_SignatureDetectionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SignatureDetectionList, Members: &m_SignatureDetectionList, Type: smithy.ShapeTypeList})
+var s_SNSTopicArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SNSTopicArn, Type: smithy.ShapeTypeString})
+var sSplitDocument = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSplitDocument, Members: &mSplitDocument, Type: smithy.ShapeTypeStructure})
+var s_SplitDocumentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SplitDocumentList, Members: &m_SplitDocumentList, Type: smithy.ShapeTypeList})
+var s_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatusMessage, Type: smithy.ShapeTypeString})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString})
+var s_StringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var s_SynthesizedJsonHumanLoopActivationConditionsEvaluationResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SynthesizedJsonHumanLoopActivationConditionsEvaluationResults, Traits: &t4, Type: smithy.ShapeTypeString})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sTextType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTextType, Members: &mTextType, Type: smithy.ShapeTypeEnum})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t3, Type: smithy.ShapeTypeStructure})
+var s_UInteger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UInteger, Type: smithy.ShapeTypeInteger})
+var s_UndetectedDocumentTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UndetectedDocumentTypeList, Members: &m_UndetectedDocumentTypeList, Type: smithy.ShapeTypeList})
+var sUndetectedSignature = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUndetectedSignature, Members: &mUndetectedSignature, Type: smithy.ShapeTypeStructure})
+var s_UndetectedSignatureList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UndetectedSignatureList, Members: &m_UndetectedSignatureList, Type: smithy.ShapeTypeList})
+var sUnsupportedDocumentException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnsupportedDocumentException, Members: &mUnsupportedDocumentException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var sValueType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValueType, Members: &mValueType, Type: smithy.ShapeTypeEnum})
+var sWarning = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWarning, Members: &mWarning, Type: smithy.ShapeTypeStructure})
+var s_Warnings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Warnings, Members: &m_Warnings, Type: smithy.ShapeTypeList})
+var sAnalyzeDocumentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAnalyzeDocumentRequest, Members: &mAnalyzeDocumentRequest, Type: smithy.ShapeTypeStructure})
+var sAnalyzeDocumentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAnalyzeDocumentResponse, Members: &mAnalyzeDocumentResponse, Type: smithy.ShapeTypeStructure})
+var sAnalyzeExpenseRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAnalyzeExpenseRequest, Members: &mAnalyzeExpenseRequest, Type: smithy.ShapeTypeStructure})
+var sAnalyzeExpenseResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAnalyzeExpenseResponse, Members: &mAnalyzeExpenseResponse, Type: smithy.ShapeTypeStructure})
+var sAnalyzeIDRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAnalyzeIDRequest, Members: &mAnalyzeIDRequest, Type: smithy.ShapeTypeStructure})
+var sAnalyzeIDResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAnalyzeIDResponse, Members: &mAnalyzeIDResponse, Type: smithy.ShapeTypeStructure})
+var sCreateAdapterRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAdapterRequest, Members: &mCreateAdapterRequest, Type: smithy.ShapeTypeStructure})
+var sCreateAdapterResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAdapterResponse, Members: &mCreateAdapterResponse, Type: smithy.ShapeTypeStructure})
+var sCreateAdapterVersionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAdapterVersionRequest, Members: &mCreateAdapterVersionRequest, Type: smithy.ShapeTypeStructure})
+var sCreateAdapterVersionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAdapterVersionResponse, Members: &mCreateAdapterVersionResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteAdapterRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAdapterRequest, Members: &mDeleteAdapterRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteAdapterResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAdapterResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteAdapterVersionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAdapterVersionRequest, Members: &mDeleteAdapterVersionRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteAdapterVersionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAdapterVersionResponse, Type: smithy.ShapeTypeStructure})
+var sDetectDocumentTextRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDetectDocumentTextRequest, Members: &mDetectDocumentTextRequest, Type: smithy.ShapeTypeStructure})
+var sDetectDocumentTextResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDetectDocumentTextResponse, Members: &mDetectDocumentTextResponse, Type: smithy.ShapeTypeStructure})
+var sGetAdapterRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAdapterRequest, Members: &mGetAdapterRequest, Type: smithy.ShapeTypeStructure})
+var sGetAdapterResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAdapterResponse, Members: &mGetAdapterResponse, Type: smithy.ShapeTypeStructure})
+var sGetAdapterVersionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAdapterVersionRequest, Members: &mGetAdapterVersionRequest, Type: smithy.ShapeTypeStructure})
+var sGetAdapterVersionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAdapterVersionResponse, Members: &mGetAdapterVersionResponse, Type: smithy.ShapeTypeStructure})
+var sGetDocumentAnalysisRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDocumentAnalysisRequest, Members: &mGetDocumentAnalysisRequest, Type: smithy.ShapeTypeStructure})
+var sGetDocumentAnalysisResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDocumentAnalysisResponse, Members: &mGetDocumentAnalysisResponse, Type: smithy.ShapeTypeStructure})
+var sGetDocumentTextDetectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDocumentTextDetectionRequest, Members: &mGetDocumentTextDetectionRequest, Type: smithy.ShapeTypeStructure})
+var sGetDocumentTextDetectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDocumentTextDetectionResponse, Members: &mGetDocumentTextDetectionResponse, Type: smithy.ShapeTypeStructure})
+var sGetExpenseAnalysisRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetExpenseAnalysisRequest, Members: &mGetExpenseAnalysisRequest, Type: smithy.ShapeTypeStructure})
+var sGetExpenseAnalysisResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetExpenseAnalysisResponse, Members: &mGetExpenseAnalysisResponse, Type: smithy.ShapeTypeStructure})
+var sGetLendingAnalysisRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLendingAnalysisRequest, Members: &mGetLendingAnalysisRequest, Type: smithy.ShapeTypeStructure})
+var sGetLendingAnalysisResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLendingAnalysisResponse, Members: &mGetLendingAnalysisResponse, Type: smithy.ShapeTypeStructure})
+var sGetLendingAnalysisSummaryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLendingAnalysisSummaryRequest, Members: &mGetLendingAnalysisSummaryRequest, Type: smithy.ShapeTypeStructure})
+var sGetLendingAnalysisSummaryResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLendingAnalysisSummaryResponse, Members: &mGetLendingAnalysisSummaryResponse, Type: smithy.ShapeTypeStructure})
+var sListAdaptersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAdaptersRequest, Members: &mListAdaptersRequest, Type: smithy.ShapeTypeStructure})
+var sListAdaptersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAdaptersResponse, Members: &mListAdaptersResponse, Type: smithy.ShapeTypeStructure})
+var sListAdapterVersionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAdapterVersionsRequest, Members: &mListAdapterVersionsRequest, Type: smithy.ShapeTypeStructure})
+var sListAdapterVersionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAdapterVersionsResponse, Members: &mListAdapterVersionsResponse, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure})
+var sStartDocumentAnalysisRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartDocumentAnalysisRequest, Members: &mStartDocumentAnalysisRequest, Type: smithy.ShapeTypeStructure})
+var sStartDocumentAnalysisResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartDocumentAnalysisResponse, Members: &mStartDocumentAnalysisResponse, Type: smithy.ShapeTypeStructure})
+var sStartDocumentTextDetectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartDocumentTextDetectionRequest, Members: &mStartDocumentTextDetectionRequest, Type: smithy.ShapeTypeStructure})
+var sStartDocumentTextDetectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartDocumentTextDetectionResponse, Members: &mStartDocumentTextDetectionResponse, Type: smithy.ShapeTypeStructure})
+var sStartExpenseAnalysisRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartExpenseAnalysisRequest, Members: &mStartExpenseAnalysisRequest, Type: smithy.ShapeTypeStructure})
+var sStartExpenseAnalysisResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartExpenseAnalysisResponse, Members: &mStartExpenseAnalysisResponse, Type: smithy.ShapeTypeStructure})
+var sStartLendingAnalysisRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartLendingAnalysisRequest, Members: &mStartLendingAnalysisRequest, Type: smithy.ShapeTypeStructure})
+var sStartLendingAnalysisResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartLendingAnalysisResponse, Members: &mStartLendingAnalysisResponse, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateAdapterRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAdapterRequest, Members: &mUpdateAdapterRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateAdapterResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAdapterResponse, Members: &mUpdateAdapterResponse, Type: smithy.ShapeTypeStructure})
+
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sAccessDeniedException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_String, Type: smithy.ShapeTypeString})
+var sAdapter_AdapterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdapterId", ID: &i_AdapterId, Type: smithy.ShapeTypeString})
+var sAdapter_Pages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pages", ID: &i_AdapterPages, Members: &m_AdapterPages, Type: smithy.ShapeTypeList})
+var sAdapter_Version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Version", ID: &i_AdapterVersion, Type: smithy.ShapeTypeString})
+var s_AdapterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAdapterOverview, Members: &mAdapterOverview, Type: smithy.ShapeTypeStructure})
+var sAdapterOverview_AdapterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdapterId", ID: &i_AdapterId, Type: smithy.ShapeTypeString})
+var sAdapterOverview_AdapterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdapterName", ID: &i_AdapterName, Type: smithy.ShapeTypeString})
+var sAdapterOverview_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp})
+var sAdapterOverview_FeatureTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeatureTypes", ID: &i_FeatureTypes, Members: &m_FeatureTypes, Type: smithy.ShapeTypeList})
+var s_AdapterPages_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AdapterPage, Type: smithy.ShapeTypeString})
+var s_Adapters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAdapter, Members: &mAdapter, Type: smithy.ShapeTypeStructure})
+var sAdaptersConfig_Adapters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Adapters", ID: &i_Adapters, Members: &m_Adapters, Type: smithy.ShapeTypeList})
+var sAdapterVersionDatasetConfig_ManifestS3Object = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestS3Object", ID: &iS3Object, Members: &mS3Object, Type: smithy.ShapeTypeStructure})
+var sAdapterVersionEvaluationMetric_Baseline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Baseline", ID: &iEvaluationMetric, Members: &mEvaluationMetric, Type: smithy.ShapeTypeStructure})
+var sAdapterVersionEvaluationMetric_AdapterVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdapterVersion", ID: &iEvaluationMetric, Members: &mEvaluationMetric, Type: smithy.ShapeTypeStructure})
+var sAdapterVersionEvaluationMetric_FeatureType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeatureType", ID: &iFeatureType, Members: &mFeatureType, Type: smithy.ShapeTypeEnum})
+var s_AdapterVersionEvaluationMetrics_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAdapterVersionEvaluationMetric, Members: &mAdapterVersionEvaluationMetric, Type: smithy.ShapeTypeStructure})
+var s_AdapterVersionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAdapterVersionOverview, Members: &mAdapterVersionOverview, Type: smithy.ShapeTypeStructure})
+var sAdapterVersionOverview_AdapterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdapterId", ID: &i_AdapterId, Type: smithy.ShapeTypeString})
+var sAdapterVersionOverview_AdapterVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdapterVersion", ID: &i_AdapterVersion, Type: smithy.ShapeTypeString})
+var sAdapterVersionOverview_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp})
+var sAdapterVersionOverview_FeatureTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeatureTypes", ID: &i_FeatureTypes, Members: &m_FeatureTypes, Type: smithy.ShapeTypeList})
+var sAdapterVersionOverview_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iAdapterVersionStatus, Members: &mAdapterVersionStatus, Type: smithy.ShapeTypeEnum})
+var sAdapterVersionOverview_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &i_AdapterVersionStatusMessage, Type: smithy.ShapeTypeString})
+var sAdapterVersionStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAdapterVersionStatus_AT_RISK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AT_RISK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAdapterVersionStatus_DEPRECATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPRECATED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAdapterVersionStatus_CREATION_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATION_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAdapterVersionStatus_CREATION_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATION_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAnalyzeIDDetections_Text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Text", ID: &i_String, Type: smithy.ShapeTypeString})
+var sAnalyzeIDDetections_NormalizedValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NormalizedValue", ID: &iNormalizedValue, Members: &mNormalizedValue, Type: smithy.ShapeTypeStructure})
+var sAnalyzeIDDetections_Confidence = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Confidence", ID: &i_Percent, Type: smithy.ShapeTypeFloat})
+var sAutoUpdate_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAutoUpdate_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBadDocumentException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sBadDocumentException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_String, Type: smithy.ShapeTypeString})
+var sBlock_BlockType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlockType", ID: &iBlockType, Members: &mBlockType, Type: smithy.ShapeTypeEnum})
+var sBlock_Confidence = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Confidence", ID: &i_Percent, Type: smithy.ShapeTypeFloat})
+var sBlock_Text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Text", ID: &i_String, Type: smithy.ShapeTypeString})
+var sBlock_TextType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TextType", ID: &iTextType, Members: &mTextType, Type: smithy.ShapeTypeEnum})
+var sBlock_RowIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RowIndex", ID: &i_UInteger, Type: smithy.ShapeTypeInteger})
+var sBlock_ColumnIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ColumnIndex", ID: &i_UInteger, Type: smithy.ShapeTypeInteger})
+var sBlock_RowSpan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RowSpan", ID: &i_UInteger, Type: smithy.ShapeTypeInteger})
+var sBlock_ColumnSpan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ColumnSpan", ID: &i_UInteger, Type: smithy.ShapeTypeInteger})
+var sBlock_Geometry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Geometry", ID: &iGeometry, Members: &mGeometry, Type: smithy.ShapeTypeStructure})
+var sBlock_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sBlock_Relationships = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Relationships", ID: &i_RelationshipList, Members: &m_RelationshipList, Type: smithy.ShapeTypeList})
+var sBlock_EntityTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityTypes", ID: &i_EntityTypes, Members: &m_EntityTypes, Type: smithy.ShapeTypeList})
+var sBlock_SelectionStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SelectionStatus", ID: &iSelectionStatus, Members: &mSelectionStatus, Type: smithy.ShapeTypeEnum})
+var sBlock_Page = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Page", ID: &i_UInteger, Type: smithy.ShapeTypeInteger})
+var sBlock_Query = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Query", ID: &iQuery, Members: &mQuery, Type: smithy.ShapeTypeStructure})
+var s_BlockList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBlock, Members: &mBlock, Type: smithy.ShapeTypeStructure})
+var sBlockType_KEY_VALUE_SET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KEY_VALUE_SET", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBlockType_PAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBlockType_LINE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LINE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBlockType_WORD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WORD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBlockType_TABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBlockType_CELL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CELL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBlockType_SELECTION_ELEMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SELECTION_ELEMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBlockType_MERGED_CELL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MERGED_CELL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBlockType_TITLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TITLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBlockType_QUERY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUERY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBlockType_QUERY_RESULT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUERY_RESULT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBlockType_SIGNATURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SIGNATURE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBlockType_TABLE_TITLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TABLE_TITLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBlockType_TABLE_FOOTER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TABLE_FOOTER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBlockType_LAYOUT_TEXT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAYOUT_TEXT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBlockType_LAYOUT_TITLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAYOUT_TITLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBlockType_LAYOUT_HEADER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAYOUT_HEADER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBlockType_LAYOUT_FOOTER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAYOUT_FOOTER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBlockType_LAYOUT_SECTION_HEADER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAYOUT_SECTION_HEADER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBlockType_LAYOUT_PAGE_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAYOUT_PAGE_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBlockType_LAYOUT_LIST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAYOUT_LIST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBlockType_LAYOUT_FIGURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAYOUT_FIGURE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBlockType_LAYOUT_TABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAYOUT_TABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBlockType_LAYOUT_KEY_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAYOUT_KEY_VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBoundingBox_Width = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Width", ID: &i_Float, Type: smithy.ShapeTypeFloat})
+var sBoundingBox_Height = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Height", ID: &i_Float, Type: smithy.ShapeTypeFloat})
+var sBoundingBox_Left = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Left", ID: &i_Float, Type: smithy.ShapeTypeFloat})
+var sBoundingBox_Top = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Top", ID: &i_Float, Type: smithy.ShapeTypeFloat})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sConflictException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_String, Type: smithy.ShapeTypeString})
+var sContentClassifier_FREE_OF_PERSONALLY_IDENTIFIABLE_INFORMATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FREE_OF_PERSONALLY_IDENTIFIABLE_INFORMATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sContentClassifier_FREE_OF_ADULT_CONTENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FREE_OF_ADULT_CONTENT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_ContentClassifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iContentClassifier, Members: &mContentClassifier, Type: smithy.ShapeTypeEnum})
+var sDetectedSignature_Page = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Page", ID: &i_UInteger, Type: smithy.ShapeTypeInteger})
+var s_DetectedSignatureList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDetectedSignature, Members: &mDetectedSignature, Type: smithy.ShapeTypeStructure})
+var sDocument_Bytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Bytes", ID: &i_ImageBlob, Type: smithy.ShapeTypeBlob})
+var sDocument_S3Object = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Object", ID: &iS3Object, Members: &mS3Object, Type: smithy.ShapeTypeStructure})
+var sDocumentGroup_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sDocumentGroup_SplitDocuments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SplitDocuments", ID: &i_SplitDocumentList, Members: &m_SplitDocumentList, Type: smithy.ShapeTypeList})
+var sDocumentGroup_DetectedSignatures = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DetectedSignatures", ID: &i_DetectedSignatureList, Members: &m_DetectedSignatureList, Type: smithy.ShapeTypeList})
+var sDocumentGroup_UndetectedSignatures = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UndetectedSignatures", ID: &i_UndetectedSignatureList, Members: &m_UndetectedSignatureList, Type: smithy.ShapeTypeList})
+var s_DocumentGroupList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDocumentGroup, Members: &mDocumentGroup, Type: smithy.ShapeTypeStructure})
+var sDocumentLocation_S3Object = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Object", ID: &iS3Object, Members: &mS3Object, Type: smithy.ShapeTypeStructure})
+var sDocumentMetadata_Pages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pages", ID: &i_UInteger, Type: smithy.ShapeTypeInteger})
+var s_DocumentPages_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDocument, Members: &mDocument, Type: smithy.ShapeTypeStructure})
+var sDocumentTooLargeException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDocumentTooLargeException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEntityType_KEY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KEY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntityType_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntityType_COLUMN_HEADER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COLUMN_HEADER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntityType_TABLE_TITLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TABLE_TITLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntityType_TABLE_FOOTER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TABLE_FOOTER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntityType_TABLE_SECTION_TITLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TABLE_SECTION_TITLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntityType_TABLE_SUMMARY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TABLE_SUMMARY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntityType_STRUCTURED_TABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STRUCTURED_TABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntityType_SEMI_STRUCTURED_TABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SEMI_STRUCTURED_TABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_EntityTypes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEntityType, Members: &mEntityType, Type: smithy.ShapeTypeEnum})
+var sEvaluationMetric_F1Score = smithy.NewStaticSchema(smithy.StaticSchema{Member: "F1Score", ID: &i_Float, Type: smithy.ShapeTypeFloat})
+var sEvaluationMetric_Precision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Precision", ID: &i_Float, Type: smithy.ShapeTypeFloat})
+var sEvaluationMetric_Recall = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Recall", ID: &i_Float, Type: smithy.ShapeTypeFloat})
+var sExpenseCurrency_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_String, Type: smithy.ShapeTypeString})
+var sExpenseCurrency_Confidence = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Confidence", ID: &i_Percent, Type: smithy.ShapeTypeFloat})
+var sExpenseDetection_Text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Text", ID: &i_String, Type: smithy.ShapeTypeString})
+var sExpenseDetection_Geometry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Geometry", ID: &iGeometry, Members: &mGeometry, Type: smithy.ShapeTypeStructure})
+var sExpenseDetection_Confidence = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Confidence", ID: &i_Percent, Type: smithy.ShapeTypeFloat})
+var sExpenseDocument_ExpenseIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpenseIndex", ID: &i_UInteger, Type: smithy.ShapeTypeInteger})
+var sExpenseDocument_SummaryFields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SummaryFields", ID: &i_ExpenseFieldList, Members: &m_ExpenseFieldList, Type: smithy.ShapeTypeList})
+var sExpenseDocument_LineItemGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LineItemGroups", ID: &i_LineItemGroupList, Members: &m_LineItemGroupList, Type: smithy.ShapeTypeList})
+var sExpenseDocument_Blocks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Blocks", ID: &i_BlockList, Members: &m_BlockList, Type: smithy.ShapeTypeList})
+var s_ExpenseDocumentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExpenseDocument, Members: &mExpenseDocument, Type: smithy.ShapeTypeStructure})
+var sExpenseField_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iExpenseType, Members: &mExpenseType, Type: smithy.ShapeTypeStructure})
+var sExpenseField_LabelDetection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LabelDetection", ID: &iExpenseDetection, Members: &mExpenseDetection, Type: smithy.ShapeTypeStructure})
+var sExpenseField_ValueDetection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueDetection", ID: &iExpenseDetection, Members: &mExpenseDetection, Type: smithy.ShapeTypeStructure})
+var sExpenseField_PageNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageNumber", ID: &i_UInteger, Type: smithy.ShapeTypeInteger})
+var sExpenseField_Currency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Currency", ID: &iExpenseCurrency, Members: &mExpenseCurrency, Type: smithy.ShapeTypeStructure})
+var sExpenseField_GroupProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupProperties", ID: &i_ExpenseGroupPropertyList, Members: &m_ExpenseGroupPropertyList, Type: smithy.ShapeTypeList})
+var s_ExpenseFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExpenseField, Members: &mExpenseField, Type: smithy.ShapeTypeStructure})
+var sExpenseGroupProperty_Types = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Types", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sExpenseGroupProperty_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_ExpenseGroupPropertyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExpenseGroupProperty, Members: &mExpenseGroupProperty, Type: smithy.ShapeTypeStructure})
+var sExpenseType_Text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Text", ID: &i_String, Type: smithy.ShapeTypeString})
+var sExpenseType_Confidence = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Confidence", ID: &i_Percent, Type: smithy.ShapeTypeFloat})
+var sExtraction_LendingDocument = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LendingDocument", ID: &iLendingDocument, Members: &mLendingDocument, Type: smithy.ShapeTypeStructure})
+var sExtraction_ExpenseDocument = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpenseDocument", ID: &iExpenseDocument, Members: &mExpenseDocument, Type: smithy.ShapeTypeStructure})
+var sExtraction_IdentityDocument = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityDocument", ID: &iIdentityDocument, Members: &mIdentityDocument, Type: smithy.ShapeTypeStructure})
+var s_ExtractionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExtraction, Members: &mExtraction, Type: smithy.ShapeTypeStructure})
+var sFeatureType_TABLES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TABLES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFeatureType_FORMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FORMS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFeatureType_QUERIES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUERIES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFeatureType_SIGNATURES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SIGNATURES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFeatureType_LAYOUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAYOUT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_FeatureTypes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFeatureType, Members: &mFeatureType, Type: smithy.ShapeTypeEnum})
+var sGeometry_BoundingBox = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BoundingBox", ID: &iBoundingBox, Members: &mBoundingBox, Type: smithy.ShapeTypeStructure})
+var sGeometry_Polygon = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Polygon", ID: &i_Polygon, Members: &m_Polygon, Type: smithy.ShapeTypeList})
+var sGeometry_RotationAngle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RotationAngle", ID: &i_Angle, Type: smithy.ShapeTypeFloat})
+var sHumanLoopActivationOutput_HumanLoopArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HumanLoopArn", ID: &i_HumanLoopArn, Type: smithy.ShapeTypeString})
+var sHumanLoopActivationOutput_HumanLoopActivationReasons = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HumanLoopActivationReasons", ID: &i_HumanLoopActivationReasons, Members: &m_HumanLoopActivationReasons, Type: smithy.ShapeTypeList})
+var sHumanLoopActivationOutput_HumanLoopActivationConditionsEvaluationResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HumanLoopActivationConditionsEvaluationResults", ID: &i_SynthesizedJsonHumanLoopActivationConditionsEvaluationResults, Traits: &t1, Type: smithy.ShapeTypeString})
+var s_HumanLoopActivationReasons_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_HumanLoopActivationReason, Type: smithy.ShapeTypeString})
+var sHumanLoopConfig_HumanLoopName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HumanLoopName", ID: &i_HumanLoopName, Type: smithy.ShapeTypeString})
+var sHumanLoopConfig_FlowDefinitionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowDefinitionArn", ID: &i_FlowDefinitionArn, Type: smithy.ShapeTypeString})
+var sHumanLoopConfig_DataAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataAttributes", ID: &iHumanLoopDataAttributes, Members: &mHumanLoopDataAttributes, Type: smithy.ShapeTypeStructure})
+var sHumanLoopDataAttributes_ContentClassifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentClassifiers", ID: &i_ContentClassifiers, Members: &m_ContentClassifiers, Type: smithy.ShapeTypeList})
+var sHumanLoopQuotaExceededException_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i_String, Type: smithy.ShapeTypeString})
+var sHumanLoopQuotaExceededException_QuotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaCode", ID: &i_String, Type: smithy.ShapeTypeString})
+var sHumanLoopQuotaExceededException_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCode", ID: &i_String, Type: smithy.ShapeTypeString})
+var sHumanLoopQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sHumanLoopQuotaExceededException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_String, Type: smithy.ShapeTypeString})
+var sIdempotentParameterMismatchException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sIdempotentParameterMismatchException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_String, Type: smithy.ShapeTypeString})
+var sIdentityDocument_DocumentIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DocumentIndex", ID: &i_UInteger, Type: smithy.ShapeTypeInteger})
+var sIdentityDocument_IdentityDocumentFields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityDocumentFields", ID: &i_IdentityDocumentFieldList, Members: &m_IdentityDocumentFieldList, Type: smithy.ShapeTypeList})
+var sIdentityDocument_Blocks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Blocks", ID: &i_BlockList, Members: &m_BlockList, Type: smithy.ShapeTypeList})
+var sIdentityDocumentField_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iAnalyzeIDDetections, Members: &mAnalyzeIDDetections, Type: smithy.ShapeTypeStructure})
+var sIdentityDocumentField_ValueDetection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueDetection", ID: &iAnalyzeIDDetections, Members: &mAnalyzeIDDetections, Type: smithy.ShapeTypeStructure})
+var s_IdentityDocumentFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIdentityDocumentField, Members: &mIdentityDocumentField, Type: smithy.ShapeTypeStructure})
+var s_IdentityDocumentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIdentityDocument, Members: &mIdentityDocument, Type: smithy.ShapeTypeStructure})
+var s_IdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sInternalServerError_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sInternalServerError_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_String, Type: smithy.ShapeTypeString})
+var sInvalidJobIdException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sInvalidJobIdException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_String, Type: smithy.ShapeTypeString})
+var sInvalidKMSKeyException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sInvalidKMSKeyException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_String, Type: smithy.ShapeTypeString})
+var sInvalidParameterException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sInvalidParameterException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_String, Type: smithy.ShapeTypeString})
+var sInvalidS3ObjectException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sInvalidS3ObjectException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_String, Type: smithy.ShapeTypeString})
+var sJobStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sJobStatus_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sJobStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sJobStatus_PARTIAL_SUCCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PARTIAL_SUCCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLendingDetection_Text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Text", ID: &i_String, Type: smithy.ShapeTypeString})
+var sLendingDetection_SelectionStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SelectionStatus", ID: &iSelectionStatus, Members: &mSelectionStatus, Type: smithy.ShapeTypeEnum})
+var sLendingDetection_Geometry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Geometry", ID: &iGeometry, Members: &mGeometry, Type: smithy.ShapeTypeStructure})
+var sLendingDetection_Confidence = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Confidence", ID: &i_Percent, Type: smithy.ShapeTypeFloat})
+var s_LendingDetectionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLendingDetection, Members: &mLendingDetection, Type: smithy.ShapeTypeStructure})
+var sLendingDocument_LendingFields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LendingFields", ID: &i_LendingFieldList, Members: &m_LendingFieldList, Type: smithy.ShapeTypeList})
+var sLendingDocument_SignatureDetections = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SignatureDetections", ID: &i_SignatureDetectionList, Members: &m_SignatureDetectionList, Type: smithy.ShapeTypeList})
+var sLendingField_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_String, Type: smithy.ShapeTypeString})
+var sLendingField_KeyDetection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyDetection", ID: &iLendingDetection, Members: &mLendingDetection, Type: smithy.ShapeTypeStructure})
+var sLendingField_ValueDetections = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueDetections", ID: &i_LendingDetectionList, Members: &m_LendingDetectionList, Type: smithy.ShapeTypeList})
+var s_LendingFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLendingField, Members: &mLendingField, Type: smithy.ShapeTypeStructure})
+var sLendingResult_Page = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Page", ID: &i_UInteger, Type: smithy.ShapeTypeInteger})
+var sLendingResult_PageClassification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageClassification", ID: &iPageClassification, Members: &mPageClassification, Type: smithy.ShapeTypeStructure})
+var sLendingResult_Extractions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Extractions", ID: &i_ExtractionList, Members: &m_ExtractionList, Type: smithy.ShapeTypeList})
+var s_LendingResultList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLendingResult, Members: &mLendingResult, Type: smithy.ShapeTypeStructure})
+var sLendingSummary_DocumentGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DocumentGroups", ID: &i_DocumentGroupList, Members: &m_DocumentGroupList, Type: smithy.ShapeTypeList})
+var sLendingSummary_UndetectedDocumentTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UndetectedDocumentTypes", ID: &i_UndetectedDocumentTypeList, Members: &m_UndetectedDocumentTypeList, Type: smithy.ShapeTypeList})
+var sLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sLimitExceededException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_String, Type: smithy.ShapeTypeString})
+var sLineItemFields_LineItemExpenseFields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LineItemExpenseFields", ID: &i_ExpenseFieldList, Members: &m_ExpenseFieldList, Type: smithy.ShapeTypeList})
+var sLineItemGroup_LineItemGroupIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LineItemGroupIndex", ID: &i_UInteger, Type: smithy.ShapeTypeInteger})
+var sLineItemGroup_LineItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LineItems", ID: &i_LineItemList, Members: &m_LineItemList, Type: smithy.ShapeTypeList})
+var s_LineItemGroupList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLineItemGroup, Members: &mLineItemGroup, Type: smithy.ShapeTypeStructure})
+var s_LineItemList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLineItemFields, Members: &mLineItemFields, Type: smithy.ShapeTypeStructure})
+var sNormalizedValue_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_String, Type: smithy.ShapeTypeString})
+var sNormalizedValue_ValueType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueType", ID: &iValueType, Members: &mValueType, Type: smithy.ShapeTypeEnum})
+var sNotificationChannel_SNSTopicArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SNSTopicArn", ID: &i_SNSTopicArn, Type: smithy.ShapeTypeString})
+var sNotificationChannel_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sOutputConfig_S3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Bucket", ID: &i_S3Bucket, Type: smithy.ShapeTypeString})
+var sOutputConfig_S3Prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Prefix", ID: &i_S3ObjectName, Type: smithy.ShapeTypeString})
+var sPageClassification_PageType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageType", ID: &i_PredictionList, Members: &m_PredictionList, Type: smithy.ShapeTypeList})
+var sPageClassification_PageNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageNumber", ID: &i_PredictionList, Members: &m_PredictionList, Type: smithy.ShapeTypeList})
+var s_PageList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_UInteger, Type: smithy.ShapeTypeInteger})
+var s_Pages_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_UInteger, Type: smithy.ShapeTypeInteger})
+var sPoint_X = smithy.NewStaticSchema(smithy.StaticSchema{Member: "X", ID: &i_Float, Type: smithy.ShapeTypeFloat})
+var sPoint_Y = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Y", ID: &i_Float, Type: smithy.ShapeTypeFloat})
+var s_Polygon_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPoint, Members: &mPoint, Type: smithy.ShapeTypeStructure})
+var sPrediction_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sPrediction_Confidence = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Confidence", ID: &i_Percent, Type: smithy.ShapeTypeFloat})
+var s_PredictionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPrediction, Members: &mPrediction, Type: smithy.ShapeTypeStructure})
+var sProvisionedThroughputExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sProvisionedThroughputExceededException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_Queries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iQuery, Members: &mQuery, Type: smithy.ShapeTypeStructure})
+var sQueriesConfig_Queries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Queries", ID: &i_Queries, Members: &m_Queries, Type: smithy.ShapeTypeList})
+var sQuery_Text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Text", ID: &i_QueryInput, Type: smithy.ShapeTypeString})
+var sQuery_Alias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Alias", ID: &i_QueryInput, Type: smithy.ShapeTypeString})
+var sQuery_Pages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pages", ID: &i_QueryPages, Members: &m_QueryPages, Type: smithy.ShapeTypeList})
+var s_QueryPages_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_QueryPage, Type: smithy.ShapeTypeString})
+var sRelationship_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iRelationshipType, Members: &mRelationshipType, Type: smithy.ShapeTypeEnum})
+var sRelationship_Ids = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ids", ID: &i_IdList, Members: &m_IdList, Type: smithy.ShapeTypeList})
+var s_RelationshipList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRelationship, Members: &mRelationship, Type: smithy.ShapeTypeStructure})
+var sRelationshipType_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRelationshipType_CHILD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CHILD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRelationshipType_COMPLEX_FEATURES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLEX_FEATURES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRelationshipType_MERGED_CELL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MERGED_CELL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRelationshipType_TITLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TITLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRelationshipType_ANSWER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ANSWER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRelationshipType_TABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRelationshipType_TABLE_TITLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TABLE_TITLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRelationshipType_TABLE_FOOTER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TABLE_FOOTER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_String, Type: smithy.ShapeTypeString})
+var sS3Object_Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Bucket", ID: &i_S3Bucket, Type: smithy.ShapeTypeString})
+var sS3Object_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_S3ObjectName, Type: smithy.ShapeTypeString})
+var sS3Object_Version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Version", ID: &i_S3ObjectVersion, Type: smithy.ShapeTypeString})
+var sSelectionStatus_SELECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SELECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSelectionStatus_NOT_SELECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_SELECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSignatureDetection_Confidence = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Confidence", ID: &i_Percent, Type: smithy.ShapeTypeFloat})
+var sSignatureDetection_Geometry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Geometry", ID: &iGeometry, Members: &mGeometry, Type: smithy.ShapeTypeStructure})
+var s_SignatureDetectionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSignatureDetection, Members: &mSignatureDetection, Type: smithy.ShapeTypeStructure})
+var sSplitDocument_Index = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Index", ID: &i_UInteger, Type: smithy.ShapeTypeInteger})
+var sSplitDocument_Pages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pages", ID: &i_PageList, Members: &m_PageList, Type: smithy.ShapeTypeList})
+var s_SplitDocumentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSplitDocument, Members: &mSplitDocument, Type: smithy.ShapeTypeStructure})
+var s_StringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sTextType_HANDWRITING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HANDWRITING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTextType_PRINTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRINTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sThrottlingException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_UndetectedDocumentTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sUndetectedSignature_Page = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Page", ID: &i_UInteger, Type: smithy.ShapeTypeInteger})
+var s_UndetectedSignatureList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUndetectedSignature, Members: &mUndetectedSignature, Type: smithy.ShapeTypeStructure})
+var sUnsupportedDocumentException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUnsupportedDocumentException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_String, Type: smithy.ShapeTypeString})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sValidationException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_String, Type: smithy.ShapeTypeString})
+var sValueType_DATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sWarning_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_ErrorCode, Type: smithy.ShapeTypeString})
+var sWarning_Pages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pages", ID: &i_Pages, Members: &m_Pages, Type: smithy.ShapeTypeList})
+var s_Warnings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWarning, Members: &mWarning, Type: smithy.ShapeTypeStructure})
+var sAnalyzeDocumentRequest_Document = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Document", ID: &iDocument, Members: &mDocument, Type: smithy.ShapeTypeStructure})
+var sAnalyzeDocumentRequest_FeatureTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeatureTypes", ID: &i_FeatureTypes, Members: &m_FeatureTypes, Type: smithy.ShapeTypeList})
+var sAnalyzeDocumentRequest_HumanLoopConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HumanLoopConfig", ID: &iHumanLoopConfig, Members: &mHumanLoopConfig, Type: smithy.ShapeTypeStructure})
+var sAnalyzeDocumentRequest_QueriesConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueriesConfig", ID: &iQueriesConfig, Members: &mQueriesConfig, Type: smithy.ShapeTypeStructure})
+var sAnalyzeDocumentRequest_AdaptersConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdaptersConfig", ID: &iAdaptersConfig, Members: &mAdaptersConfig, Type: smithy.ShapeTypeStructure})
+var sAnalyzeDocumentResponse_DocumentMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DocumentMetadata", ID: &iDocumentMetadata, Members: &mDocumentMetadata, Type: smithy.ShapeTypeStructure})
+var sAnalyzeDocumentResponse_Blocks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Blocks", ID: &i_BlockList, Members: &m_BlockList, Type: smithy.ShapeTypeList})
+var sAnalyzeDocumentResponse_HumanLoopActivationOutput = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HumanLoopActivationOutput", ID: &iHumanLoopActivationOutput, Members: &mHumanLoopActivationOutput, Type: smithy.ShapeTypeStructure})
+var sAnalyzeDocumentResponse_AnalyzeDocumentModelVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnalyzeDocumentModelVersion", ID: &i_String, Type: smithy.ShapeTypeString})
+var sAnalyzeExpenseRequest_Document = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Document", ID: &iDocument, Members: &mDocument, Type: smithy.ShapeTypeStructure})
+var sAnalyzeExpenseResponse_DocumentMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DocumentMetadata", ID: &iDocumentMetadata, Members: &mDocumentMetadata, Type: smithy.ShapeTypeStructure})
+var sAnalyzeExpenseResponse_ExpenseDocuments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpenseDocuments", ID: &i_ExpenseDocumentList, Members: &m_ExpenseDocumentList, Type: smithy.ShapeTypeList})
+var sAnalyzeIDRequest_DocumentPages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DocumentPages", ID: &i_DocumentPages, Members: &m_DocumentPages, Type: smithy.ShapeTypeList})
+var sAnalyzeIDResponse_IdentityDocuments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityDocuments", ID: &i_IdentityDocumentList, Members: &m_IdentityDocumentList, Type: smithy.ShapeTypeList})
+var sAnalyzeIDResponse_DocumentMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DocumentMetadata", ID: &iDocumentMetadata, Members: &mDocumentMetadata, Type: smithy.ShapeTypeStructure})
+var sAnalyzeIDResponse_AnalyzeIDModelVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnalyzeIDModelVersion", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCreateAdapterRequest_AdapterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdapterName", ID: &i_AdapterName, Type: smithy.ShapeTypeString})
+var sCreateAdapterRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sCreateAdapterRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_AdapterDescription, Type: smithy.ShapeTypeString})
+var sCreateAdapterRequest_FeatureTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeatureTypes", ID: &i_FeatureTypes, Members: &m_FeatureTypes, Type: smithy.ShapeTypeList})
+var sCreateAdapterRequest_AutoUpdate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoUpdate", ID: &iAutoUpdate, Members: &mAutoUpdate, Type: smithy.ShapeTypeEnum})
+var sCreateAdapterRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sCreateAdapterResponse_AdapterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdapterId", ID: &i_AdapterId, Type: smithy.ShapeTypeString})
+var sCreateAdapterVersionRequest_AdapterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdapterId", ID: &i_AdapterId, Type: smithy.ShapeTypeString})
+var sCreateAdapterVersionRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sCreateAdapterVersionRequest_DatasetConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetConfig", ID: &iAdapterVersionDatasetConfig, Members: &mAdapterVersionDatasetConfig, Type: smithy.ShapeTypeStructure})
+var sCreateAdapterVersionRequest_KMSKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMSKeyId", ID: &i_KMSKeyId, Type: smithy.ShapeTypeString})
+var sCreateAdapterVersionRequest_OutputConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputConfig", ID: &iOutputConfig, Members: &mOutputConfig, Type: smithy.ShapeTypeStructure})
+var sCreateAdapterVersionRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sCreateAdapterVersionResponse_AdapterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdapterId", ID: &i_AdapterId, Type: smithy.ShapeTypeString})
+var sCreateAdapterVersionResponse_AdapterVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdapterVersion", ID: &i_AdapterVersion, Type: smithy.ShapeTypeString})
+var sDeleteAdapterRequest_AdapterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdapterId", ID: &i_AdapterId, Type: smithy.ShapeTypeString})
+var sDeleteAdapterVersionRequest_AdapterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdapterId", ID: &i_AdapterId, Type: smithy.ShapeTypeString})
+var sDeleteAdapterVersionRequest_AdapterVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdapterVersion", ID: &i_AdapterVersion, Type: smithy.ShapeTypeString})
+var sDetectDocumentTextRequest_Document = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Document", ID: &iDocument, Members: &mDocument, Type: smithy.ShapeTypeStructure})
+var sDetectDocumentTextResponse_DocumentMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DocumentMetadata", ID: &iDocumentMetadata, Members: &mDocumentMetadata, Type: smithy.ShapeTypeStructure})
+var sDetectDocumentTextResponse_Blocks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Blocks", ID: &i_BlockList, Members: &m_BlockList, Type: smithy.ShapeTypeList})
+var sDetectDocumentTextResponse_DetectDocumentTextModelVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DetectDocumentTextModelVersion", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetAdapterRequest_AdapterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdapterId", ID: &i_AdapterId, Type: smithy.ShapeTypeString})
+var sGetAdapterResponse_AdapterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdapterId", ID: &i_AdapterId, Type: smithy.ShapeTypeString})
+var sGetAdapterResponse_AdapterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdapterName", ID: &i_AdapterName, Type: smithy.ShapeTypeString})
+var sGetAdapterResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp})
+var sGetAdapterResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_AdapterDescription, Type: smithy.ShapeTypeString})
+var sGetAdapterResponse_FeatureTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeatureTypes", ID: &i_FeatureTypes, Members: &m_FeatureTypes, Type: smithy.ShapeTypeList})
+var sGetAdapterResponse_AutoUpdate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoUpdate", ID: &iAutoUpdate, Members: &mAutoUpdate, Type: smithy.ShapeTypeEnum})
+var sGetAdapterResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sGetAdapterVersionRequest_AdapterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdapterId", ID: &i_AdapterId, Type: smithy.ShapeTypeString})
+var sGetAdapterVersionRequest_AdapterVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdapterVersion", ID: &i_AdapterVersion, Type: smithy.ShapeTypeString})
+var sGetAdapterVersionResponse_AdapterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdapterId", ID: &i_AdapterId, Type: smithy.ShapeTypeString})
+var sGetAdapterVersionResponse_AdapterVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdapterVersion", ID: &i_AdapterVersion, Type: smithy.ShapeTypeString})
+var sGetAdapterVersionResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp})
+var sGetAdapterVersionResponse_FeatureTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeatureTypes", ID: &i_FeatureTypes, Members: &m_FeatureTypes, Type: smithy.ShapeTypeList})
+var sGetAdapterVersionResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iAdapterVersionStatus, Members: &mAdapterVersionStatus, Type: smithy.ShapeTypeEnum})
+var sGetAdapterVersionResponse_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &i_AdapterVersionStatusMessage, Type: smithy.ShapeTypeString})
+var sGetAdapterVersionResponse_DatasetConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetConfig", ID: &iAdapterVersionDatasetConfig, Members: &mAdapterVersionDatasetConfig, Type: smithy.ShapeTypeStructure})
+var sGetAdapterVersionResponse_KMSKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMSKeyId", ID: &i_KMSKeyId, Type: smithy.ShapeTypeString})
+var sGetAdapterVersionResponse_OutputConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputConfig", ID: &iOutputConfig, Members: &mOutputConfig, Type: smithy.ShapeTypeStructure})
+var sGetAdapterVersionResponse_EvaluationMetrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EvaluationMetrics", ID: &i_AdapterVersionEvaluationMetrics, Members: &m_AdapterVersionEvaluationMetrics, Type: smithy.ShapeTypeList})
+var sGetAdapterVersionResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sGetDocumentAnalysisRequest_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString})
+var sGetDocumentAnalysisRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sGetDocumentAnalysisRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sGetDocumentAnalysisResponse_DocumentMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DocumentMetadata", ID: &iDocumentMetadata, Members: &mDocumentMetadata, Type: smithy.ShapeTypeStructure})
+var sGetDocumentAnalysisResponse_JobStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobStatus", ID: &iJobStatus, Members: &mJobStatus, Type: smithy.ShapeTypeEnum})
+var sGetDocumentAnalysisResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sGetDocumentAnalysisResponse_Blocks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Blocks", ID: &i_BlockList, Members: &m_BlockList, Type: smithy.ShapeTypeList})
+var sGetDocumentAnalysisResponse_Warnings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Warnings", ID: &i_Warnings, Members: &m_Warnings, Type: smithy.ShapeTypeList})
+var sGetDocumentAnalysisResponse_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &i_StatusMessage, Type: smithy.ShapeTypeString})
+var sGetDocumentAnalysisResponse_AnalyzeDocumentModelVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnalyzeDocumentModelVersion", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetDocumentTextDetectionRequest_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString})
+var sGetDocumentTextDetectionRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sGetDocumentTextDetectionRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sGetDocumentTextDetectionResponse_DocumentMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DocumentMetadata", ID: &iDocumentMetadata, Members: &mDocumentMetadata, Type: smithy.ShapeTypeStructure})
+var sGetDocumentTextDetectionResponse_JobStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobStatus", ID: &iJobStatus, Members: &mJobStatus, Type: smithy.ShapeTypeEnum})
+var sGetDocumentTextDetectionResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sGetDocumentTextDetectionResponse_Blocks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Blocks", ID: &i_BlockList, Members: &m_BlockList, Type: smithy.ShapeTypeList})
+var sGetDocumentTextDetectionResponse_Warnings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Warnings", ID: &i_Warnings, Members: &m_Warnings, Type: smithy.ShapeTypeList})
+var sGetDocumentTextDetectionResponse_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &i_StatusMessage, Type: smithy.ShapeTypeString})
+var sGetDocumentTextDetectionResponse_DetectDocumentTextModelVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DetectDocumentTextModelVersion", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetExpenseAnalysisRequest_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString})
+var sGetExpenseAnalysisRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sGetExpenseAnalysisRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sGetExpenseAnalysisResponse_DocumentMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DocumentMetadata", ID: &iDocumentMetadata, Members: &mDocumentMetadata, Type: smithy.ShapeTypeStructure})
+var sGetExpenseAnalysisResponse_JobStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobStatus", ID: &iJobStatus, Members: &mJobStatus, Type: smithy.ShapeTypeEnum})
+var sGetExpenseAnalysisResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sGetExpenseAnalysisResponse_ExpenseDocuments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpenseDocuments", ID: &i_ExpenseDocumentList, Members: &m_ExpenseDocumentList, Type: smithy.ShapeTypeList})
+var sGetExpenseAnalysisResponse_Warnings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Warnings", ID: &i_Warnings, Members: &m_Warnings, Type: smithy.ShapeTypeList})
+var sGetExpenseAnalysisResponse_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &i_StatusMessage, Type: smithy.ShapeTypeString})
+var sGetExpenseAnalysisResponse_AnalyzeExpenseModelVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnalyzeExpenseModelVersion", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetLendingAnalysisRequest_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString})
+var sGetLendingAnalysisRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sGetLendingAnalysisRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sGetLendingAnalysisResponse_DocumentMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DocumentMetadata", ID: &iDocumentMetadata, Members: &mDocumentMetadata, Type: smithy.ShapeTypeStructure})
+var sGetLendingAnalysisResponse_JobStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobStatus", ID: &iJobStatus, Members: &mJobStatus, Type: smithy.ShapeTypeEnum})
+var sGetLendingAnalysisResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sGetLendingAnalysisResponse_Results = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Results", ID: &i_LendingResultList, Members: &m_LendingResultList, Type: smithy.ShapeTypeList})
+var sGetLendingAnalysisResponse_Warnings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Warnings", ID: &i_Warnings, Members: &m_Warnings, Type: smithy.ShapeTypeList})
+var sGetLendingAnalysisResponse_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &i_StatusMessage, Type: smithy.ShapeTypeString})
+var sGetLendingAnalysisResponse_AnalyzeLendingModelVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnalyzeLendingModelVersion", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetLendingAnalysisSummaryRequest_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString})
+var sGetLendingAnalysisSummaryResponse_DocumentMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DocumentMetadata", ID: &iDocumentMetadata, Members: &mDocumentMetadata, Type: smithy.ShapeTypeStructure})
+var sGetLendingAnalysisSummaryResponse_JobStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobStatus", ID: &iJobStatus, Members: &mJobStatus, Type: smithy.ShapeTypeEnum})
+var sGetLendingAnalysisSummaryResponse_Summary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Summary", ID: &iLendingSummary, Members: &mLendingSummary, Type: smithy.ShapeTypeStructure})
+var sGetLendingAnalysisSummaryResponse_Warnings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Warnings", ID: &i_Warnings, Members: &m_Warnings, Type: smithy.ShapeTypeList})
+var sGetLendingAnalysisSummaryResponse_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &i_StatusMessage, Type: smithy.ShapeTypeString})
+var sGetLendingAnalysisSummaryResponse_AnalyzeLendingModelVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnalyzeLendingModelVersion", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListAdaptersRequest_AfterCreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AfterCreationTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp})
+var sListAdaptersRequest_BeforeCreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BeforeCreationTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp})
+var sListAdaptersRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListAdaptersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListAdaptersResponse_Adapters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Adapters", ID: &i_AdapterList, Members: &m_AdapterList, Type: smithy.ShapeTypeList})
+var sListAdaptersResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListAdapterVersionsRequest_AdapterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdapterId", ID: &i_AdapterId, Type: smithy.ShapeTypeString})
+var sListAdapterVersionsRequest_AfterCreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AfterCreationTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp})
+var sListAdapterVersionsRequest_BeforeCreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BeforeCreationTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp})
+var sListAdapterVersionsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListAdapterVersionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListAdapterVersionsResponse_AdapterVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdapterVersions", ID: &i_AdapterVersionList, Members: &m_AdapterVersionList, Type: smithy.ShapeTypeList})
+var sListAdapterVersionsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListTagsForResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sStartDocumentAnalysisRequest_DocumentLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DocumentLocation", ID: &iDocumentLocation, Members: &mDocumentLocation, Type: smithy.ShapeTypeStructure})
+var sStartDocumentAnalysisRequest_FeatureTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeatureTypes", ID: &i_FeatureTypes, Members: &m_FeatureTypes, Type: smithy.ShapeTypeList})
+var sStartDocumentAnalysisRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sStartDocumentAnalysisRequest_JobTag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobTag", ID: &i_JobTag, Type: smithy.ShapeTypeString})
+var sStartDocumentAnalysisRequest_NotificationChannel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotificationChannel", ID: &iNotificationChannel, Members: &mNotificationChannel, Type: smithy.ShapeTypeStructure})
+var sStartDocumentAnalysisRequest_OutputConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputConfig", ID: &iOutputConfig, Members: &mOutputConfig, Type: smithy.ShapeTypeStructure})
+var sStartDocumentAnalysisRequest_KMSKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMSKeyId", ID: &i_KMSKeyId, Type: smithy.ShapeTypeString})
+var sStartDocumentAnalysisRequest_QueriesConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueriesConfig", ID: &iQueriesConfig, Members: &mQueriesConfig, Type: smithy.ShapeTypeStructure})
+var sStartDocumentAnalysisRequest_AdaptersConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdaptersConfig", ID: &iAdaptersConfig, Members: &mAdaptersConfig, Type: smithy.ShapeTypeStructure})
+var sStartDocumentAnalysisResponse_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString})
+var sStartDocumentTextDetectionRequest_DocumentLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DocumentLocation", ID: &iDocumentLocation, Members: &mDocumentLocation, Type: smithy.ShapeTypeStructure})
+var sStartDocumentTextDetectionRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sStartDocumentTextDetectionRequest_JobTag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobTag", ID: &i_JobTag, Type: smithy.ShapeTypeString})
+var sStartDocumentTextDetectionRequest_NotificationChannel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotificationChannel", ID: &iNotificationChannel, Members: &mNotificationChannel, Type: smithy.ShapeTypeStructure})
+var sStartDocumentTextDetectionRequest_OutputConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputConfig", ID: &iOutputConfig, Members: &mOutputConfig, Type: smithy.ShapeTypeStructure})
+var sStartDocumentTextDetectionRequest_KMSKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMSKeyId", ID: &i_KMSKeyId, Type: smithy.ShapeTypeString})
+var sStartDocumentTextDetectionResponse_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString})
+var sStartExpenseAnalysisRequest_DocumentLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DocumentLocation", ID: &iDocumentLocation, Members: &mDocumentLocation, Type: smithy.ShapeTypeStructure})
+var sStartExpenseAnalysisRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sStartExpenseAnalysisRequest_JobTag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobTag", ID: &i_JobTag, Type: smithy.ShapeTypeString})
+var sStartExpenseAnalysisRequest_NotificationChannel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotificationChannel", ID: &iNotificationChannel, Members: &mNotificationChannel, Type: smithy.ShapeTypeStructure})
+var sStartExpenseAnalysisRequest_OutputConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputConfig", ID: &iOutputConfig, Members: &mOutputConfig, Type: smithy.ShapeTypeStructure})
+var sStartExpenseAnalysisRequest_KMSKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMSKeyId", ID: &i_KMSKeyId, Type: smithy.ShapeTypeString})
+var sStartExpenseAnalysisResponse_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString})
+var sStartLendingAnalysisRequest_DocumentLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DocumentLocation", ID: &iDocumentLocation, Members: &mDocumentLocation, Type: smithy.ShapeTypeStructure})
+var sStartLendingAnalysisRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sStartLendingAnalysisRequest_JobTag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobTag", ID: &i_JobTag, Type: smithy.ShapeTypeString})
+var sStartLendingAnalysisRequest_NotificationChannel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotificationChannel", ID: &iNotificationChannel, Members: &mNotificationChannel, Type: smithy.ShapeTypeStructure})
+var sStartLendingAnalysisRequest_OutputConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputConfig", ID: &iOutputConfig, Members: &mOutputConfig, Type: smithy.ShapeTypeStructure})
+var sStartLendingAnalysisRequest_KMSKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMSKeyId", ID: &i_KMSKeyId, Type: smithy.ShapeTypeString})
+var sStartLendingAnalysisResponse_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sUntagResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var sUpdateAdapterRequest_AdapterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdapterId", ID: &i_AdapterId, Type: smithy.ShapeTypeString})
+var sUpdateAdapterRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_AdapterDescription, Type: smithy.ShapeTypeString})
+var sUpdateAdapterRequest_AdapterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdapterName", ID: &i_AdapterName, Type: smithy.ShapeTypeString})
+var sUpdateAdapterRequest_AutoUpdate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoUpdate", ID: &iAutoUpdate, Members: &mAutoUpdate, Type: smithy.ShapeTypeEnum})
+var sUpdateAdapterResponse_AdapterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdapterId", ID: &i_AdapterId, Type: smithy.ShapeTypeString})
+var sUpdateAdapterResponse_AdapterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdapterName", ID: &i_AdapterName, Type: smithy.ShapeTypeString})
+var sUpdateAdapterResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp})
+var sUpdateAdapterResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_AdapterDescription, Type: smithy.ShapeTypeString})
+var sUpdateAdapterResponse_FeatureTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeatureTypes", ID: &i_FeatureTypes, Members: &m_FeatureTypes, Type: smithy.ShapeTypeList})
+var sUpdateAdapterResponse_AutoUpdate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoUpdate", ID: &iAutoUpdate, Members: &mAutoUpdate, Type: smithy.ShapeTypeEnum})
+
+var AnalyzeDocument = &sAnalyzeDocument
+
+var AnalyzeExpense = &sAnalyzeExpense
+
+var AnalyzeID = &sAnalyzeID
+
+var CreateAdapter = &sCreateAdapter
+
+var CreateAdapterVersion = &sCreateAdapterVersion
+
+var DeleteAdapter = &sDeleteAdapter
+
+var DeleteAdapterVersion = &sDeleteAdapterVersion
+
+var DetectDocumentText = &sDetectDocumentText
+
+var GetAdapter = &sGetAdapter
+
+var GetAdapterVersion = &sGetAdapterVersion
+
+var GetDocumentAnalysis = &sGetDocumentAnalysis
+
+var GetDocumentTextDetection = &sGetDocumentTextDetection
+
+var GetExpenseAnalysis = &sGetExpenseAnalysis
+
+var GetLendingAnalysis = &sGetLendingAnalysis
+
+var GetLendingAnalysisSummary = &sGetLendingAnalysisSummary
+
+var ListAdapters = &sListAdapters
+
+var ListAdapterVersions = &sListAdapterVersions
+
+var ListTagsForResource = &sListTagsForResource
+
+var StartDocumentAnalysis = &sStartDocumentAnalysis
+
+var StartDocumentTextDetection = &sStartDocumentTextDetection
+
+var StartExpenseAnalysis = &sStartExpenseAnalysis
+
+var StartLendingAnalysis = &sStartLendingAnalysis
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateAdapter = &sUpdateAdapter
+
+var _Textract = &s_Textract
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_Message = &sAccessDeniedException_Message
+var AccessDeniedException_Code = &sAccessDeniedException_Code
+
+var Adapter = &sAdapter
+var Adapter_AdapterId = &sAdapter_AdapterId
+var Adapter_Pages = &sAdapter_Pages
+var Adapter_Version = &sAdapter_Version
+
+var _AdapterDescription = &s_AdapterDescription
+
+var _AdapterId = &s_AdapterId
+
+var _AdapterList = &s_AdapterList
+var _AdapterList_member = &s_AdapterList_member
+
+var _AdapterName = &s_AdapterName
+
+var AdapterOverview = &sAdapterOverview
+var AdapterOverview_AdapterId = &sAdapterOverview_AdapterId
+var AdapterOverview_AdapterName = &sAdapterOverview_AdapterName
+var AdapterOverview_CreationTime = &sAdapterOverview_CreationTime
+var AdapterOverview_FeatureTypes = &sAdapterOverview_FeatureTypes
+
+var _AdapterPage = &s_AdapterPage
+
+var _AdapterPages = &s_AdapterPages
+var _AdapterPages_member = &s_AdapterPages_member
+
+var _Adapters = &s_Adapters
+var _Adapters_member = &s_Adapters_member
+
+var AdaptersConfig = &sAdaptersConfig
+var AdaptersConfig_Adapters = &sAdaptersConfig_Adapters
+
+var _AdapterVersion = &s_AdapterVersion
+
+var AdapterVersionDatasetConfig = &sAdapterVersionDatasetConfig
+var AdapterVersionDatasetConfig_ManifestS3Object = &sAdapterVersionDatasetConfig_ManifestS3Object
+
+var AdapterVersionEvaluationMetric = &sAdapterVersionEvaluationMetric
+var AdapterVersionEvaluationMetric_Baseline = &sAdapterVersionEvaluationMetric_Baseline
+var AdapterVersionEvaluationMetric_AdapterVersion = &sAdapterVersionEvaluationMetric_AdapterVersion
+var AdapterVersionEvaluationMetric_FeatureType = &sAdapterVersionEvaluationMetric_FeatureType
+
+var _AdapterVersionEvaluationMetrics = &s_AdapterVersionEvaluationMetrics
+var _AdapterVersionEvaluationMetrics_member = &s_AdapterVersionEvaluationMetrics_member
+
+var _AdapterVersionList = &s_AdapterVersionList
+var _AdapterVersionList_member = &s_AdapterVersionList_member
+
+var AdapterVersionOverview = &sAdapterVersionOverview
+var AdapterVersionOverview_AdapterId = &sAdapterVersionOverview_AdapterId
+var AdapterVersionOverview_AdapterVersion = &sAdapterVersionOverview_AdapterVersion
+var AdapterVersionOverview_CreationTime = &sAdapterVersionOverview_CreationTime
+var AdapterVersionOverview_FeatureTypes = &sAdapterVersionOverview_FeatureTypes
+var AdapterVersionOverview_Status = &sAdapterVersionOverview_Status
+var AdapterVersionOverview_StatusMessage = &sAdapterVersionOverview_StatusMessage
+
+var AdapterVersionStatus = &sAdapterVersionStatus
+var AdapterVersionStatus_ACTIVE = &sAdapterVersionStatus_ACTIVE
+var AdapterVersionStatus_AT_RISK = &sAdapterVersionStatus_AT_RISK
+var AdapterVersionStatus_DEPRECATED = &sAdapterVersionStatus_DEPRECATED
+var AdapterVersionStatus_CREATION_ERROR = &sAdapterVersionStatus_CREATION_ERROR
+var AdapterVersionStatus_CREATION_IN_PROGRESS = &sAdapterVersionStatus_CREATION_IN_PROGRESS
+
+var _AdapterVersionStatusMessage = &s_AdapterVersionStatusMessage
+
+var _AmazonResourceName = &s_AmazonResourceName
+
+var AnalyzeIDDetections = &sAnalyzeIDDetections
+var AnalyzeIDDetections_Text = &sAnalyzeIDDetections_Text
+var AnalyzeIDDetections_NormalizedValue = &sAnalyzeIDDetections_NormalizedValue
+var AnalyzeIDDetections_Confidence = &sAnalyzeIDDetections_Confidence
+
+var _Angle = &s_Angle
+
+var AutoUpdate = &sAutoUpdate
+var AutoUpdate_ENABLED = &sAutoUpdate_ENABLED
+var AutoUpdate_DISABLED = &sAutoUpdate_DISABLED
+
+var BadDocumentException = &sBadDocumentException
+var BadDocumentException_Message = &sBadDocumentException_Message
+var BadDocumentException_Code = &sBadDocumentException_Code
+
+var Block = &sBlock
+var Block_BlockType = &sBlock_BlockType
+var Block_Confidence = &sBlock_Confidence
+var Block_Text = &sBlock_Text
+var Block_TextType = &sBlock_TextType
+var Block_RowIndex = &sBlock_RowIndex
+var Block_ColumnIndex = &sBlock_ColumnIndex
+var Block_RowSpan = &sBlock_RowSpan
+var Block_ColumnSpan = &sBlock_ColumnSpan
+var Block_Geometry = &sBlock_Geometry
+var Block_Id = &sBlock_Id
+var Block_Relationships = &sBlock_Relationships
+var Block_EntityTypes = &sBlock_EntityTypes
+var Block_SelectionStatus = &sBlock_SelectionStatus
+var Block_Page = &sBlock_Page
+var Block_Query = &sBlock_Query
+
+var _BlockList = &s_BlockList
+var _BlockList_member = &s_BlockList_member
+
+var BlockType = &sBlockType
+var BlockType_KEY_VALUE_SET = &sBlockType_KEY_VALUE_SET
+var BlockType_PAGE = &sBlockType_PAGE
+var BlockType_LINE = &sBlockType_LINE
+var BlockType_WORD = &sBlockType_WORD
+var BlockType_TABLE = &sBlockType_TABLE
+var BlockType_CELL = &sBlockType_CELL
+var BlockType_SELECTION_ELEMENT = &sBlockType_SELECTION_ELEMENT
+var BlockType_MERGED_CELL = &sBlockType_MERGED_CELL
+var BlockType_TITLE = &sBlockType_TITLE
+var BlockType_QUERY = &sBlockType_QUERY
+var BlockType_QUERY_RESULT = &sBlockType_QUERY_RESULT
+var BlockType_SIGNATURE = &sBlockType_SIGNATURE
+var BlockType_TABLE_TITLE = &sBlockType_TABLE_TITLE
+var BlockType_TABLE_FOOTER = &sBlockType_TABLE_FOOTER
+var BlockType_LAYOUT_TEXT = &sBlockType_LAYOUT_TEXT
+var BlockType_LAYOUT_TITLE = &sBlockType_LAYOUT_TITLE
+var BlockType_LAYOUT_HEADER = &sBlockType_LAYOUT_HEADER
+var BlockType_LAYOUT_FOOTER = &sBlockType_LAYOUT_FOOTER
+var BlockType_LAYOUT_SECTION_HEADER = &sBlockType_LAYOUT_SECTION_HEADER
+var BlockType_LAYOUT_PAGE_NUMBER = &sBlockType_LAYOUT_PAGE_NUMBER
+var BlockType_LAYOUT_LIST = &sBlockType_LAYOUT_LIST
+var BlockType_LAYOUT_FIGURE = &sBlockType_LAYOUT_FIGURE
+var BlockType_LAYOUT_TABLE = &sBlockType_LAYOUT_TABLE
+var BlockType_LAYOUT_KEY_VALUE = &sBlockType_LAYOUT_KEY_VALUE
+
+var BoundingBox = &sBoundingBox
+var BoundingBox_Width = &sBoundingBox_Width
+var BoundingBox_Height = &sBoundingBox_Height
+var BoundingBox_Left = &sBoundingBox_Left
+var BoundingBox_Top = &sBoundingBox_Top
+
+var _ClientRequestToken = &s_ClientRequestToken
+
+var ConflictException = &sConflictException
+var ConflictException_Message = &sConflictException_Message
+var ConflictException_Code = &sConflictException_Code
+
+var ContentClassifier = &sContentClassifier
+var ContentClassifier_FREE_OF_PERSONALLY_IDENTIFIABLE_INFORMATION = &sContentClassifier_FREE_OF_PERSONALLY_IDENTIFIABLE_INFORMATION
+var ContentClassifier_FREE_OF_ADULT_CONTENT = &sContentClassifier_FREE_OF_ADULT_CONTENT
+
+var _ContentClassifiers = &s_ContentClassifiers
+var _ContentClassifiers_member = &s_ContentClassifiers_member
+
+var _DateTime = &s_DateTime
+
+var DetectedSignature = &sDetectedSignature
+var DetectedSignature_Page = &sDetectedSignature_Page
+
+var _DetectedSignatureList = &s_DetectedSignatureList
+var _DetectedSignatureList_member = &s_DetectedSignatureList_member
+
+var Document = &sDocument
+var Document_Bytes = &sDocument_Bytes
+var Document_S3Object = &sDocument_S3Object
+
+var DocumentGroup = &sDocumentGroup
+var DocumentGroup_Type = &sDocumentGroup_Type
+var DocumentGroup_SplitDocuments = &sDocumentGroup_SplitDocuments
+var DocumentGroup_DetectedSignatures = &sDocumentGroup_DetectedSignatures
+var DocumentGroup_UndetectedSignatures = &sDocumentGroup_UndetectedSignatures
+
+var _DocumentGroupList = &s_DocumentGroupList
+var _DocumentGroupList_member = &s_DocumentGroupList_member
+
+var DocumentLocation = &sDocumentLocation
+var DocumentLocation_S3Object = &sDocumentLocation_S3Object
+
+var DocumentMetadata = &sDocumentMetadata
+var DocumentMetadata_Pages = &sDocumentMetadata_Pages
+
+var _DocumentPages = &s_DocumentPages
+var _DocumentPages_member = &s_DocumentPages_member
+
+var DocumentTooLargeException = &sDocumentTooLargeException
+var DocumentTooLargeException_Message = &sDocumentTooLargeException_Message
+var DocumentTooLargeException_Code = &sDocumentTooLargeException_Code
+
+var EntityType = &sEntityType
+var EntityType_KEY = &sEntityType_KEY
+var EntityType_VALUE = &sEntityType_VALUE
+var EntityType_COLUMN_HEADER = &sEntityType_COLUMN_HEADER
+var EntityType_TABLE_TITLE = &sEntityType_TABLE_TITLE
+var EntityType_TABLE_FOOTER = &sEntityType_TABLE_FOOTER
+var EntityType_TABLE_SECTION_TITLE = &sEntityType_TABLE_SECTION_TITLE
+var EntityType_TABLE_SUMMARY = &sEntityType_TABLE_SUMMARY
+var EntityType_STRUCTURED_TABLE = &sEntityType_STRUCTURED_TABLE
+var EntityType_SEMI_STRUCTURED_TABLE = &sEntityType_SEMI_STRUCTURED_TABLE
+
+var _EntityTypes = &s_EntityTypes
+var _EntityTypes_member = &s_EntityTypes_member
+
+var _ErrorCode = &s_ErrorCode
+
+var EvaluationMetric = &sEvaluationMetric
+var EvaluationMetric_F1Score = &sEvaluationMetric_F1Score
+var EvaluationMetric_Precision = &sEvaluationMetric_Precision
+var EvaluationMetric_Recall = &sEvaluationMetric_Recall
+
+var ExpenseCurrency = &sExpenseCurrency
+var ExpenseCurrency_Code = &sExpenseCurrency_Code
+var ExpenseCurrency_Confidence = &sExpenseCurrency_Confidence
+
+var ExpenseDetection = &sExpenseDetection
+var ExpenseDetection_Text = &sExpenseDetection_Text
+var ExpenseDetection_Geometry = &sExpenseDetection_Geometry
+var ExpenseDetection_Confidence = &sExpenseDetection_Confidence
+
+var ExpenseDocument = &sExpenseDocument
+var ExpenseDocument_ExpenseIndex = &sExpenseDocument_ExpenseIndex
+var ExpenseDocument_SummaryFields = &sExpenseDocument_SummaryFields
+var ExpenseDocument_LineItemGroups = &sExpenseDocument_LineItemGroups
+var ExpenseDocument_Blocks = &sExpenseDocument_Blocks
+
+var _ExpenseDocumentList = &s_ExpenseDocumentList
+var _ExpenseDocumentList_member = &s_ExpenseDocumentList_member
+
+var ExpenseField = &sExpenseField
+var ExpenseField_Type = &sExpenseField_Type
+var ExpenseField_LabelDetection = &sExpenseField_LabelDetection
+var ExpenseField_ValueDetection = &sExpenseField_ValueDetection
+var ExpenseField_PageNumber = &sExpenseField_PageNumber
+var ExpenseField_Currency = &sExpenseField_Currency
+var ExpenseField_GroupProperties = &sExpenseField_GroupProperties
+
+var _ExpenseFieldList = &s_ExpenseFieldList
+var _ExpenseFieldList_member = &s_ExpenseFieldList_member
+
+var ExpenseGroupProperty = &sExpenseGroupProperty
+var ExpenseGroupProperty_Types = &sExpenseGroupProperty_Types
+var ExpenseGroupProperty_Id = &sExpenseGroupProperty_Id
+
+var _ExpenseGroupPropertyList = &s_ExpenseGroupPropertyList
+var _ExpenseGroupPropertyList_member = &s_ExpenseGroupPropertyList_member
+
+var ExpenseType = &sExpenseType
+var ExpenseType_Text = &sExpenseType_Text
+var ExpenseType_Confidence = &sExpenseType_Confidence
+
+var Extraction = &sExtraction
+var Extraction_LendingDocument = &sExtraction_LendingDocument
+var Extraction_ExpenseDocument = &sExtraction_ExpenseDocument
+var Extraction_IdentityDocument = &sExtraction_IdentityDocument
+
+var _ExtractionList = &s_ExtractionList
+var _ExtractionList_member = &s_ExtractionList_member
+
+var FeatureType = &sFeatureType
+var FeatureType_TABLES = &sFeatureType_TABLES
+var FeatureType_FORMS = &sFeatureType_FORMS
+var FeatureType_QUERIES = &sFeatureType_QUERIES
+var FeatureType_SIGNATURES = &sFeatureType_SIGNATURES
+var FeatureType_LAYOUT = &sFeatureType_LAYOUT
+
+var _FeatureTypes = &s_FeatureTypes
+var _FeatureTypes_member = &s_FeatureTypes_member
+
+var _Float = &s_Float
+
+var _FlowDefinitionArn = &s_FlowDefinitionArn
+
+var Geometry = &sGeometry
+var Geometry_BoundingBox = &sGeometry_BoundingBox
+var Geometry_Polygon = &sGeometry_Polygon
+var Geometry_RotationAngle = &sGeometry_RotationAngle
+
+var HumanLoopActivationOutput = &sHumanLoopActivationOutput
+var HumanLoopActivationOutput_HumanLoopArn = &sHumanLoopActivationOutput_HumanLoopArn
+var HumanLoopActivationOutput_HumanLoopActivationReasons = &sHumanLoopActivationOutput_HumanLoopActivationReasons
+var HumanLoopActivationOutput_HumanLoopActivationConditionsEvaluationResults = &sHumanLoopActivationOutput_HumanLoopActivationConditionsEvaluationResults
+
+var _HumanLoopActivationReason = &s_HumanLoopActivationReason
+
+var _HumanLoopActivationReasons = &s_HumanLoopActivationReasons
+var _HumanLoopActivationReasons_member = &s_HumanLoopActivationReasons_member
+
+var _HumanLoopArn = &s_HumanLoopArn
+
+var HumanLoopConfig = &sHumanLoopConfig
+var HumanLoopConfig_HumanLoopName = &sHumanLoopConfig_HumanLoopName
+var HumanLoopConfig_FlowDefinitionArn = &sHumanLoopConfig_FlowDefinitionArn
+var HumanLoopConfig_DataAttributes = &sHumanLoopConfig_DataAttributes
+
+var HumanLoopDataAttributes = &sHumanLoopDataAttributes
+var HumanLoopDataAttributes_ContentClassifiers = &sHumanLoopDataAttributes_ContentClassifiers
+
+var _HumanLoopName = &s_HumanLoopName
+
+var HumanLoopQuotaExceededException = &sHumanLoopQuotaExceededException
+var HumanLoopQuotaExceededException_ResourceType = &sHumanLoopQuotaExceededException_ResourceType
+var HumanLoopQuotaExceededException_QuotaCode = &sHumanLoopQuotaExceededException_QuotaCode
+var HumanLoopQuotaExceededException_ServiceCode = &sHumanLoopQuotaExceededException_ServiceCode
+var HumanLoopQuotaExceededException_Message = &sHumanLoopQuotaExceededException_Message
+var HumanLoopQuotaExceededException_Code = &sHumanLoopQuotaExceededException_Code
+
+var IdempotentParameterMismatchException = &sIdempotentParameterMismatchException
+var IdempotentParameterMismatchException_Message = &sIdempotentParameterMismatchException_Message
+var IdempotentParameterMismatchException_Code = &sIdempotentParameterMismatchException_Code
+
+var IdentityDocument = &sIdentityDocument
+var IdentityDocument_DocumentIndex = &sIdentityDocument_DocumentIndex
+var IdentityDocument_IdentityDocumentFields = &sIdentityDocument_IdentityDocumentFields
+var IdentityDocument_Blocks = &sIdentityDocument_Blocks
+
+var IdentityDocumentField = &sIdentityDocumentField
+var IdentityDocumentField_Type = &sIdentityDocumentField_Type
+var IdentityDocumentField_ValueDetection = &sIdentityDocumentField_ValueDetection
+
+var _IdentityDocumentFieldList = &s_IdentityDocumentFieldList
+var _IdentityDocumentFieldList_member = &s_IdentityDocumentFieldList_member
+
+var _IdentityDocumentList = &s_IdentityDocumentList
+var _IdentityDocumentList_member = &s_IdentityDocumentList_member
+
+var _IdList = &s_IdList
+var _IdList_member = &s_IdList_member
+
+var _ImageBlob = &s_ImageBlob
+
+var InternalServerError = &sInternalServerError
+var InternalServerError_Message = &sInternalServerError_Message
+var InternalServerError_Code = &sInternalServerError_Code
+
+var InvalidJobIdException = &sInvalidJobIdException
+var InvalidJobIdException_Message = &sInvalidJobIdException_Message
+var InvalidJobIdException_Code = &sInvalidJobIdException_Code
+
+var InvalidKMSKeyException = &sInvalidKMSKeyException
+var InvalidKMSKeyException_Message = &sInvalidKMSKeyException_Message
+var InvalidKMSKeyException_Code = &sInvalidKMSKeyException_Code
+
+var InvalidParameterException = &sInvalidParameterException
+var InvalidParameterException_Message = &sInvalidParameterException_Message
+var InvalidParameterException_Code = &sInvalidParameterException_Code
+
+var InvalidS3ObjectException = &sInvalidS3ObjectException
+var InvalidS3ObjectException_Message = &sInvalidS3ObjectException_Message
+var InvalidS3ObjectException_Code = &sInvalidS3ObjectException_Code
+
+var _JobId = &s_JobId
+
+var JobStatus = &sJobStatus
+var JobStatus_IN_PROGRESS = &sJobStatus_IN_PROGRESS
+var JobStatus_SUCCEEDED = &sJobStatus_SUCCEEDED
+var JobStatus_FAILED = &sJobStatus_FAILED
+var JobStatus_PARTIAL_SUCCESS = &sJobStatus_PARTIAL_SUCCESS
+
+var _JobTag = &s_JobTag
+
+var _KMSKeyId = &s_KMSKeyId
+
+var LendingDetection = &sLendingDetection
+var LendingDetection_Text = &sLendingDetection_Text
+var LendingDetection_SelectionStatus = &sLendingDetection_SelectionStatus
+var LendingDetection_Geometry = &sLendingDetection_Geometry
+var LendingDetection_Confidence = &sLendingDetection_Confidence
+
+var _LendingDetectionList = &s_LendingDetectionList
+var _LendingDetectionList_member = &s_LendingDetectionList_member
+
+var LendingDocument = &sLendingDocument
+var LendingDocument_LendingFields = &sLendingDocument_LendingFields
+var LendingDocument_SignatureDetections = &sLendingDocument_SignatureDetections
+
+var LendingField = &sLendingField
+var LendingField_Type = &sLendingField_Type
+var LendingField_KeyDetection = &sLendingField_KeyDetection
+var LendingField_ValueDetections = &sLendingField_ValueDetections
+
+var _LendingFieldList = &s_LendingFieldList
+var _LendingFieldList_member = &s_LendingFieldList_member
+
+var LendingResult = &sLendingResult
+var LendingResult_Page = &sLendingResult_Page
+var LendingResult_PageClassification = &sLendingResult_PageClassification
+var LendingResult_Extractions = &sLendingResult_Extractions
+
+var _LendingResultList = &s_LendingResultList
+var _LendingResultList_member = &s_LendingResultList_member
+
+var LendingSummary = &sLendingSummary
+var LendingSummary_DocumentGroups = &sLendingSummary_DocumentGroups
+var LendingSummary_UndetectedDocumentTypes = &sLendingSummary_UndetectedDocumentTypes
+
+var LimitExceededException = &sLimitExceededException
+var LimitExceededException_Message = &sLimitExceededException_Message
+var LimitExceededException_Code = &sLimitExceededException_Code
+
+var LineItemFields = &sLineItemFields
+var LineItemFields_LineItemExpenseFields = &sLineItemFields_LineItemExpenseFields
+
+var LineItemGroup = &sLineItemGroup
+var LineItemGroup_LineItemGroupIndex = &sLineItemGroup_LineItemGroupIndex
+var LineItemGroup_LineItems = &sLineItemGroup_LineItems
+
+var _LineItemGroupList = &s_LineItemGroupList
+var _LineItemGroupList_member = &s_LineItemGroupList_member
+
+var _LineItemList = &s_LineItemList
+var _LineItemList_member = &s_LineItemList_member
+
+var _MaxResults = &s_MaxResults
+
+var _NonEmptyString = &s_NonEmptyString
+
+var NormalizedValue = &sNormalizedValue
+var NormalizedValue_Value = &sNormalizedValue_Value
+var NormalizedValue_ValueType = &sNormalizedValue_ValueType
+
+var NotificationChannel = &sNotificationChannel
+var NotificationChannel_SNSTopicArn = &sNotificationChannel_SNSTopicArn
+var NotificationChannel_RoleArn = &sNotificationChannel_RoleArn
+
+var OutputConfig = &sOutputConfig
+var OutputConfig_S3Bucket = &sOutputConfig_S3Bucket
+var OutputConfig_S3Prefix = &sOutputConfig_S3Prefix
+
+var PageClassification = &sPageClassification
+var PageClassification_PageType = &sPageClassification_PageType
+var PageClassification_PageNumber = &sPageClassification_PageNumber
+
+var _PageList = &s_PageList
+var _PageList_member = &s_PageList_member
+
+var _Pages = &s_Pages
+var _Pages_member = &s_Pages_member
+
+var _PaginationToken = &s_PaginationToken
+
+var _Percent = &s_Percent
+
+var Point = &sPoint
+var Point_X = &sPoint_X
+var Point_Y = &sPoint_Y
+
+var _Polygon = &s_Polygon
+var _Polygon_member = &s_Polygon_member
+
+var Prediction = &sPrediction
+var Prediction_Value = &sPrediction_Value
+var Prediction_Confidence = &sPrediction_Confidence
+
+var _PredictionList = &s_PredictionList
+var _PredictionList_member = &s_PredictionList_member
+
+var ProvisionedThroughputExceededException = &sProvisionedThroughputExceededException
+var ProvisionedThroughputExceededException_Message = &sProvisionedThroughputExceededException_Message
+var ProvisionedThroughputExceededException_Code = &sProvisionedThroughputExceededException_Code
+
+var _Queries = &s_Queries
+var _Queries_member = &s_Queries_member
+
+var QueriesConfig = &sQueriesConfig
+var QueriesConfig_Queries = &sQueriesConfig_Queries
+
+var Query = &sQuery
+var Query_Text = &sQuery_Text
+var Query_Alias = &sQuery_Alias
+var Query_Pages = &sQuery_Pages
+
+var _QueryInput = &s_QueryInput
+
+var _QueryPage = &s_QueryPage
+
+var _QueryPages = &s_QueryPages
+var _QueryPages_member = &s_QueryPages_member
+
+var Relationship = &sRelationship
+var Relationship_Type = &sRelationship_Type
+var Relationship_Ids = &sRelationship_Ids
+
+var _RelationshipList = &s_RelationshipList
+var _RelationshipList_member = &s_RelationshipList_member
+
+var RelationshipType = &sRelationshipType
+var RelationshipType_VALUE = &sRelationshipType_VALUE
+var RelationshipType_CHILD = &sRelationshipType_CHILD
+var RelationshipType_COMPLEX_FEATURES = &sRelationshipType_COMPLEX_FEATURES
+var RelationshipType_MERGED_CELL = &sRelationshipType_MERGED_CELL
+var RelationshipType_TITLE = &sRelationshipType_TITLE
+var RelationshipType_ANSWER = &sRelationshipType_ANSWER
+var RelationshipType_TABLE = &sRelationshipType_TABLE
+var RelationshipType_TABLE_TITLE = &sRelationshipType_TABLE_TITLE
+var RelationshipType_TABLE_FOOTER = &sRelationshipType_TABLE_FOOTER
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+var ResourceNotFoundException_Code = &sResourceNotFoundException_Code
+
+var _RoleArn = &s_RoleArn
+
+var _S3Bucket = &s_S3Bucket
+
+var S3Object = &sS3Object
+var S3Object_Bucket = &sS3Object_Bucket
+var S3Object_Name = &sS3Object_Name
+var S3Object_Version = &sS3Object_Version
+
+var _S3ObjectName = &s_S3ObjectName
+
+var _S3ObjectVersion = &s_S3ObjectVersion
+
+var SelectionStatus = &sSelectionStatus
+var SelectionStatus_SELECTED = &sSelectionStatus_SELECTED
+var SelectionStatus_NOT_SELECTED = &sSelectionStatus_NOT_SELECTED
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_Message = &sServiceQuotaExceededException_Message
+var ServiceQuotaExceededException_Code = &sServiceQuotaExceededException_Code
+
+var SignatureDetection = &sSignatureDetection
+var SignatureDetection_Confidence = &sSignatureDetection_Confidence
+var SignatureDetection_Geometry = &sSignatureDetection_Geometry
+
+var _SignatureDetectionList = &s_SignatureDetectionList
+var _SignatureDetectionList_member = &s_SignatureDetectionList_member
+
+var _SNSTopicArn = &s_SNSTopicArn
+
+var SplitDocument = &sSplitDocument
+var SplitDocument_Index = &sSplitDocument_Index
+var SplitDocument_Pages = &sSplitDocument_Pages
+
+var _SplitDocumentList = &s_SplitDocumentList
+var _SplitDocumentList_member = &s_SplitDocumentList_member
+
+var _StatusMessage = &s_StatusMessage
+
+var _String = &s_String
+
+var _StringList = &s_StringList
+var _StringList_member = &s_StringList_member
+
+var _SynthesizedJsonHumanLoopActivationConditionsEvaluationResults = &s_SynthesizedJsonHumanLoopActivationConditionsEvaluationResults
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagMap = &s_TagMap
+var _TagMap_key = &s_TagMap_key
+var _TagMap_value = &s_TagMap_value
+
+var _TagValue = &s_TagValue
+
+var TextType = &sTextType
+var TextType_HANDWRITING = &sTextType_HANDWRITING
+var TextType_PRINTED = &sTextType_PRINTED
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_Message = &sThrottlingException_Message
+var ThrottlingException_Code = &sThrottlingException_Code
+
+var _UInteger = &s_UInteger
+
+var _UndetectedDocumentTypeList = &s_UndetectedDocumentTypeList
+var _UndetectedDocumentTypeList_member = &s_UndetectedDocumentTypeList_member
+
+var UndetectedSignature = &sUndetectedSignature
+var UndetectedSignature_Page = &sUndetectedSignature_Page
+
+var _UndetectedSignatureList = &s_UndetectedSignatureList
+var _UndetectedSignatureList_member = &s_UndetectedSignatureList_member
+
+var UnsupportedDocumentException = &sUnsupportedDocumentException
+var UnsupportedDocumentException_Message = &sUnsupportedDocumentException_Message
+var UnsupportedDocumentException_Code = &sUnsupportedDocumentException_Code
+
+var ValidationException = &sValidationException
+var ValidationException_Message = &sValidationException_Message
+var ValidationException_Code = &sValidationException_Code
+
+var ValueType = &sValueType
+var ValueType_DATE = &sValueType_DATE
+
+var Warning = &sWarning
+var Warning_ErrorCode = &sWarning_ErrorCode
+var Warning_Pages = &sWarning_Pages
+
+var _Warnings = &s_Warnings
+var _Warnings_member = &s_Warnings_member
+
+var AnalyzeDocumentRequest = &sAnalyzeDocumentRequest
+var AnalyzeDocumentRequest_Document = &sAnalyzeDocumentRequest_Document
+var AnalyzeDocumentRequest_FeatureTypes = &sAnalyzeDocumentRequest_FeatureTypes
+var AnalyzeDocumentRequest_HumanLoopConfig = &sAnalyzeDocumentRequest_HumanLoopConfig
+var AnalyzeDocumentRequest_QueriesConfig = &sAnalyzeDocumentRequest_QueriesConfig
+var AnalyzeDocumentRequest_AdaptersConfig = &sAnalyzeDocumentRequest_AdaptersConfig
+
+var AnalyzeDocumentResponse = &sAnalyzeDocumentResponse
+var AnalyzeDocumentResponse_DocumentMetadata = &sAnalyzeDocumentResponse_DocumentMetadata
+var AnalyzeDocumentResponse_Blocks = &sAnalyzeDocumentResponse_Blocks
+var AnalyzeDocumentResponse_HumanLoopActivationOutput = &sAnalyzeDocumentResponse_HumanLoopActivationOutput
+var AnalyzeDocumentResponse_AnalyzeDocumentModelVersion = &sAnalyzeDocumentResponse_AnalyzeDocumentModelVersion
+
+var AnalyzeExpenseRequest = &sAnalyzeExpenseRequest
+var AnalyzeExpenseRequest_Document = &sAnalyzeExpenseRequest_Document
+
+var AnalyzeExpenseResponse = &sAnalyzeExpenseResponse
+var AnalyzeExpenseResponse_DocumentMetadata = &sAnalyzeExpenseResponse_DocumentMetadata
+var AnalyzeExpenseResponse_ExpenseDocuments = &sAnalyzeExpenseResponse_ExpenseDocuments
+
+var AnalyzeIDRequest = &sAnalyzeIDRequest
+var AnalyzeIDRequest_DocumentPages = &sAnalyzeIDRequest_DocumentPages
+
+var AnalyzeIDResponse = &sAnalyzeIDResponse
+var AnalyzeIDResponse_IdentityDocuments = &sAnalyzeIDResponse_IdentityDocuments
+var AnalyzeIDResponse_DocumentMetadata = &sAnalyzeIDResponse_DocumentMetadata
+var AnalyzeIDResponse_AnalyzeIDModelVersion = &sAnalyzeIDResponse_AnalyzeIDModelVersion
+
+var CreateAdapterRequest = &sCreateAdapterRequest
+var CreateAdapterRequest_AdapterName = &sCreateAdapterRequest_AdapterName
+var CreateAdapterRequest_ClientRequestToken = &sCreateAdapterRequest_ClientRequestToken
+var CreateAdapterRequest_Description = &sCreateAdapterRequest_Description
+var CreateAdapterRequest_FeatureTypes = &sCreateAdapterRequest_FeatureTypes
+var CreateAdapterRequest_AutoUpdate = &sCreateAdapterRequest_AutoUpdate
+var CreateAdapterRequest_Tags = &sCreateAdapterRequest_Tags
+
+var CreateAdapterResponse = &sCreateAdapterResponse
+var CreateAdapterResponse_AdapterId = &sCreateAdapterResponse_AdapterId
+
+var CreateAdapterVersionRequest = &sCreateAdapterVersionRequest
+var CreateAdapterVersionRequest_AdapterId = &sCreateAdapterVersionRequest_AdapterId
+var CreateAdapterVersionRequest_ClientRequestToken = &sCreateAdapterVersionRequest_ClientRequestToken
+var CreateAdapterVersionRequest_DatasetConfig = &sCreateAdapterVersionRequest_DatasetConfig
+var CreateAdapterVersionRequest_KMSKeyId = &sCreateAdapterVersionRequest_KMSKeyId
+var CreateAdapterVersionRequest_OutputConfig = &sCreateAdapterVersionRequest_OutputConfig
+var CreateAdapterVersionRequest_Tags = &sCreateAdapterVersionRequest_Tags
+
+var CreateAdapterVersionResponse = &sCreateAdapterVersionResponse
+var CreateAdapterVersionResponse_AdapterId = &sCreateAdapterVersionResponse_AdapterId
+var CreateAdapterVersionResponse_AdapterVersion = &sCreateAdapterVersionResponse_AdapterVersion
+
+var DeleteAdapterRequest = &sDeleteAdapterRequest
+var DeleteAdapterRequest_AdapterId = &sDeleteAdapterRequest_AdapterId
+
+var DeleteAdapterResponse = &sDeleteAdapterResponse
+
+var DeleteAdapterVersionRequest = &sDeleteAdapterVersionRequest
+var DeleteAdapterVersionRequest_AdapterId = &sDeleteAdapterVersionRequest_AdapterId
+var DeleteAdapterVersionRequest_AdapterVersion = &sDeleteAdapterVersionRequest_AdapterVersion
+
+var DeleteAdapterVersionResponse = &sDeleteAdapterVersionResponse
+
+var DetectDocumentTextRequest = &sDetectDocumentTextRequest
+var DetectDocumentTextRequest_Document = &sDetectDocumentTextRequest_Document
+
+var DetectDocumentTextResponse = &sDetectDocumentTextResponse
+var DetectDocumentTextResponse_DocumentMetadata = &sDetectDocumentTextResponse_DocumentMetadata
+var DetectDocumentTextResponse_Blocks = &sDetectDocumentTextResponse_Blocks
+var DetectDocumentTextResponse_DetectDocumentTextModelVersion = &sDetectDocumentTextResponse_DetectDocumentTextModelVersion
+
+var GetAdapterRequest = &sGetAdapterRequest
+var GetAdapterRequest_AdapterId = &sGetAdapterRequest_AdapterId
+
+var GetAdapterResponse = &sGetAdapterResponse
+var GetAdapterResponse_AdapterId = &sGetAdapterResponse_AdapterId
+var GetAdapterResponse_AdapterName = &sGetAdapterResponse_AdapterName
+var GetAdapterResponse_CreationTime = &sGetAdapterResponse_CreationTime
+var GetAdapterResponse_Description = &sGetAdapterResponse_Description
+var GetAdapterResponse_FeatureTypes = &sGetAdapterResponse_FeatureTypes
+var GetAdapterResponse_AutoUpdate = &sGetAdapterResponse_AutoUpdate
+var GetAdapterResponse_Tags = &sGetAdapterResponse_Tags
+
+var GetAdapterVersionRequest = &sGetAdapterVersionRequest
+var GetAdapterVersionRequest_AdapterId = &sGetAdapterVersionRequest_AdapterId
+var GetAdapterVersionRequest_AdapterVersion = &sGetAdapterVersionRequest_AdapterVersion
+
+var GetAdapterVersionResponse = &sGetAdapterVersionResponse
+var GetAdapterVersionResponse_AdapterId = &sGetAdapterVersionResponse_AdapterId
+var GetAdapterVersionResponse_AdapterVersion = &sGetAdapterVersionResponse_AdapterVersion
+var GetAdapterVersionResponse_CreationTime = &sGetAdapterVersionResponse_CreationTime
+var GetAdapterVersionResponse_FeatureTypes = &sGetAdapterVersionResponse_FeatureTypes
+var GetAdapterVersionResponse_Status = &sGetAdapterVersionResponse_Status
+var GetAdapterVersionResponse_StatusMessage = &sGetAdapterVersionResponse_StatusMessage
+var GetAdapterVersionResponse_DatasetConfig = &sGetAdapterVersionResponse_DatasetConfig
+var GetAdapterVersionResponse_KMSKeyId = &sGetAdapterVersionResponse_KMSKeyId
+var GetAdapterVersionResponse_OutputConfig = &sGetAdapterVersionResponse_OutputConfig
+var GetAdapterVersionResponse_EvaluationMetrics = &sGetAdapterVersionResponse_EvaluationMetrics
+var GetAdapterVersionResponse_Tags = &sGetAdapterVersionResponse_Tags
+
+var GetDocumentAnalysisRequest = &sGetDocumentAnalysisRequest
+var GetDocumentAnalysisRequest_JobId = &sGetDocumentAnalysisRequest_JobId
+var GetDocumentAnalysisRequest_MaxResults = &sGetDocumentAnalysisRequest_MaxResults
+var GetDocumentAnalysisRequest_NextToken = &sGetDocumentAnalysisRequest_NextToken
+
+var GetDocumentAnalysisResponse = &sGetDocumentAnalysisResponse
+var GetDocumentAnalysisResponse_DocumentMetadata = &sGetDocumentAnalysisResponse_DocumentMetadata
+var GetDocumentAnalysisResponse_JobStatus = &sGetDocumentAnalysisResponse_JobStatus
+var GetDocumentAnalysisResponse_NextToken = &sGetDocumentAnalysisResponse_NextToken
+var GetDocumentAnalysisResponse_Blocks = &sGetDocumentAnalysisResponse_Blocks
+var GetDocumentAnalysisResponse_Warnings = &sGetDocumentAnalysisResponse_Warnings
+var GetDocumentAnalysisResponse_StatusMessage = &sGetDocumentAnalysisResponse_StatusMessage
+var GetDocumentAnalysisResponse_AnalyzeDocumentModelVersion = &sGetDocumentAnalysisResponse_AnalyzeDocumentModelVersion
+
+var GetDocumentTextDetectionRequest = &sGetDocumentTextDetectionRequest
+var GetDocumentTextDetectionRequest_JobId = &sGetDocumentTextDetectionRequest_JobId
+var GetDocumentTextDetectionRequest_MaxResults = &sGetDocumentTextDetectionRequest_MaxResults
+var GetDocumentTextDetectionRequest_NextToken = &sGetDocumentTextDetectionRequest_NextToken
+
+var GetDocumentTextDetectionResponse = &sGetDocumentTextDetectionResponse
+var GetDocumentTextDetectionResponse_DocumentMetadata = &sGetDocumentTextDetectionResponse_DocumentMetadata
+var GetDocumentTextDetectionResponse_JobStatus = &sGetDocumentTextDetectionResponse_JobStatus
+var GetDocumentTextDetectionResponse_NextToken = &sGetDocumentTextDetectionResponse_NextToken
+var GetDocumentTextDetectionResponse_Blocks = &sGetDocumentTextDetectionResponse_Blocks
+var GetDocumentTextDetectionResponse_Warnings = &sGetDocumentTextDetectionResponse_Warnings
+var GetDocumentTextDetectionResponse_StatusMessage = &sGetDocumentTextDetectionResponse_StatusMessage
+var GetDocumentTextDetectionResponse_DetectDocumentTextModelVersion = &sGetDocumentTextDetectionResponse_DetectDocumentTextModelVersion
+
+var GetExpenseAnalysisRequest = &sGetExpenseAnalysisRequest
+var GetExpenseAnalysisRequest_JobId = &sGetExpenseAnalysisRequest_JobId
+var GetExpenseAnalysisRequest_MaxResults = &sGetExpenseAnalysisRequest_MaxResults
+var GetExpenseAnalysisRequest_NextToken = &sGetExpenseAnalysisRequest_NextToken
+
+var GetExpenseAnalysisResponse = &sGetExpenseAnalysisResponse
+var GetExpenseAnalysisResponse_DocumentMetadata = &sGetExpenseAnalysisResponse_DocumentMetadata
+var GetExpenseAnalysisResponse_JobStatus = &sGetExpenseAnalysisResponse_JobStatus
+var GetExpenseAnalysisResponse_NextToken = &sGetExpenseAnalysisResponse_NextToken
+var GetExpenseAnalysisResponse_ExpenseDocuments = &sGetExpenseAnalysisResponse_ExpenseDocuments
+var GetExpenseAnalysisResponse_Warnings = &sGetExpenseAnalysisResponse_Warnings
+var GetExpenseAnalysisResponse_StatusMessage = &sGetExpenseAnalysisResponse_StatusMessage
+var GetExpenseAnalysisResponse_AnalyzeExpenseModelVersion = &sGetExpenseAnalysisResponse_AnalyzeExpenseModelVersion
+
+var GetLendingAnalysisRequest = &sGetLendingAnalysisRequest
+var GetLendingAnalysisRequest_JobId = &sGetLendingAnalysisRequest_JobId
+var GetLendingAnalysisRequest_MaxResults = &sGetLendingAnalysisRequest_MaxResults
+var GetLendingAnalysisRequest_NextToken = &sGetLendingAnalysisRequest_NextToken
+
+var GetLendingAnalysisResponse = &sGetLendingAnalysisResponse
+var GetLendingAnalysisResponse_DocumentMetadata = &sGetLendingAnalysisResponse_DocumentMetadata
+var GetLendingAnalysisResponse_JobStatus = &sGetLendingAnalysisResponse_JobStatus
+var GetLendingAnalysisResponse_NextToken = &sGetLendingAnalysisResponse_NextToken
+var GetLendingAnalysisResponse_Results = &sGetLendingAnalysisResponse_Results
+var GetLendingAnalysisResponse_Warnings = &sGetLendingAnalysisResponse_Warnings
+var GetLendingAnalysisResponse_StatusMessage = &sGetLendingAnalysisResponse_StatusMessage
+var GetLendingAnalysisResponse_AnalyzeLendingModelVersion = &sGetLendingAnalysisResponse_AnalyzeLendingModelVersion
+
+var GetLendingAnalysisSummaryRequest = &sGetLendingAnalysisSummaryRequest
+var GetLendingAnalysisSummaryRequest_JobId = &sGetLendingAnalysisSummaryRequest_JobId
+
+var GetLendingAnalysisSummaryResponse = &sGetLendingAnalysisSummaryResponse
+var GetLendingAnalysisSummaryResponse_DocumentMetadata = &sGetLendingAnalysisSummaryResponse_DocumentMetadata
+var GetLendingAnalysisSummaryResponse_JobStatus = &sGetLendingAnalysisSummaryResponse_JobStatus
+var GetLendingAnalysisSummaryResponse_Summary = &sGetLendingAnalysisSummaryResponse_Summary
+var GetLendingAnalysisSummaryResponse_Warnings = &sGetLendingAnalysisSummaryResponse_Warnings
+var GetLendingAnalysisSummaryResponse_StatusMessage = &sGetLendingAnalysisSummaryResponse_StatusMessage
+var GetLendingAnalysisSummaryResponse_AnalyzeLendingModelVersion = &sGetLendingAnalysisSummaryResponse_AnalyzeLendingModelVersion
+
+var ListAdaptersRequest = &sListAdaptersRequest
+var ListAdaptersRequest_AfterCreationTime = &sListAdaptersRequest_AfterCreationTime
+var ListAdaptersRequest_BeforeCreationTime = &sListAdaptersRequest_BeforeCreationTime
+var ListAdaptersRequest_MaxResults = &sListAdaptersRequest_MaxResults
+var ListAdaptersRequest_NextToken = &sListAdaptersRequest_NextToken
+
+var ListAdaptersResponse = &sListAdaptersResponse
+var ListAdaptersResponse_Adapters = &sListAdaptersResponse_Adapters
+var ListAdaptersResponse_NextToken = &sListAdaptersResponse_NextToken
+
+var ListAdapterVersionsRequest = &sListAdapterVersionsRequest
+var ListAdapterVersionsRequest_AdapterId = &sListAdapterVersionsRequest_AdapterId
+var ListAdapterVersionsRequest_AfterCreationTime = &sListAdapterVersionsRequest_AfterCreationTime
+var ListAdapterVersionsRequest_BeforeCreationTime = &sListAdapterVersionsRequest_BeforeCreationTime
+var ListAdapterVersionsRequest_MaxResults = &sListAdapterVersionsRequest_MaxResults
+var ListAdapterVersionsRequest_NextToken = &sListAdapterVersionsRequest_NextToken
+
+var ListAdapterVersionsResponse = &sListAdapterVersionsResponse
+var ListAdapterVersionsResponse_AdapterVersions = &sListAdapterVersionsResponse_AdapterVersions
+var ListAdapterVersionsResponse_NextToken = &sListAdapterVersionsResponse_NextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceARN = &sListTagsForResourceRequest_ResourceARN
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_Tags = &sListTagsForResourceResponse_Tags
+
+var StartDocumentAnalysisRequest = &sStartDocumentAnalysisRequest
+var StartDocumentAnalysisRequest_DocumentLocation = &sStartDocumentAnalysisRequest_DocumentLocation
+var StartDocumentAnalysisRequest_FeatureTypes = &sStartDocumentAnalysisRequest_FeatureTypes
+var StartDocumentAnalysisRequest_ClientRequestToken = &sStartDocumentAnalysisRequest_ClientRequestToken
+var StartDocumentAnalysisRequest_JobTag = &sStartDocumentAnalysisRequest_JobTag
+var StartDocumentAnalysisRequest_NotificationChannel = &sStartDocumentAnalysisRequest_NotificationChannel
+var StartDocumentAnalysisRequest_OutputConfig = &sStartDocumentAnalysisRequest_OutputConfig
+var StartDocumentAnalysisRequest_KMSKeyId = &sStartDocumentAnalysisRequest_KMSKeyId
+var StartDocumentAnalysisRequest_QueriesConfig = &sStartDocumentAnalysisRequest_QueriesConfig
+var StartDocumentAnalysisRequest_AdaptersConfig = &sStartDocumentAnalysisRequest_AdaptersConfig
+
+var StartDocumentAnalysisResponse = &sStartDocumentAnalysisResponse
+var StartDocumentAnalysisResponse_JobId = &sStartDocumentAnalysisResponse_JobId
+
+var StartDocumentTextDetectionRequest = &sStartDocumentTextDetectionRequest
+var StartDocumentTextDetectionRequest_DocumentLocation = &sStartDocumentTextDetectionRequest_DocumentLocation
+var StartDocumentTextDetectionRequest_ClientRequestToken = &sStartDocumentTextDetectionRequest_ClientRequestToken
+var StartDocumentTextDetectionRequest_JobTag = &sStartDocumentTextDetectionRequest_JobTag
+var StartDocumentTextDetectionRequest_NotificationChannel = &sStartDocumentTextDetectionRequest_NotificationChannel
+var StartDocumentTextDetectionRequest_OutputConfig = &sStartDocumentTextDetectionRequest_OutputConfig
+var StartDocumentTextDetectionRequest_KMSKeyId = &sStartDocumentTextDetectionRequest_KMSKeyId
+
+var StartDocumentTextDetectionResponse = &sStartDocumentTextDetectionResponse
+var StartDocumentTextDetectionResponse_JobId = &sStartDocumentTextDetectionResponse_JobId
+
+var StartExpenseAnalysisRequest = &sStartExpenseAnalysisRequest
+var StartExpenseAnalysisRequest_DocumentLocation = &sStartExpenseAnalysisRequest_DocumentLocation
+var StartExpenseAnalysisRequest_ClientRequestToken = &sStartExpenseAnalysisRequest_ClientRequestToken
+var StartExpenseAnalysisRequest_JobTag = &sStartExpenseAnalysisRequest_JobTag
+var StartExpenseAnalysisRequest_NotificationChannel = &sStartExpenseAnalysisRequest_NotificationChannel
+var StartExpenseAnalysisRequest_OutputConfig = &sStartExpenseAnalysisRequest_OutputConfig
+var StartExpenseAnalysisRequest_KMSKeyId = &sStartExpenseAnalysisRequest_KMSKeyId
+
+var StartExpenseAnalysisResponse = &sStartExpenseAnalysisResponse
+var StartExpenseAnalysisResponse_JobId = &sStartExpenseAnalysisResponse_JobId
+
+var StartLendingAnalysisRequest = &sStartLendingAnalysisRequest
+var StartLendingAnalysisRequest_DocumentLocation = &sStartLendingAnalysisRequest_DocumentLocation
+var StartLendingAnalysisRequest_ClientRequestToken = &sStartLendingAnalysisRequest_ClientRequestToken
+var StartLendingAnalysisRequest_JobTag = &sStartLendingAnalysisRequest_JobTag
+var StartLendingAnalysisRequest_NotificationChannel = &sStartLendingAnalysisRequest_NotificationChannel
+var StartLendingAnalysisRequest_OutputConfig = &sStartLendingAnalysisRequest_OutputConfig
+var StartLendingAnalysisRequest_KMSKeyId = &sStartLendingAnalysisRequest_KMSKeyId
+
+var StartLendingAnalysisResponse = &sStartLendingAnalysisResponse
+var StartLendingAnalysisResponse_JobId = &sStartLendingAnalysisResponse_JobId
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceARN = &sTagResourceRequest_ResourceARN
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceARN = &sUntagResourceRequest_ResourceARN
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateAdapterRequest = &sUpdateAdapterRequest
+var UpdateAdapterRequest_AdapterId = &sUpdateAdapterRequest_AdapterId
+var UpdateAdapterRequest_Description = &sUpdateAdapterRequest_Description
+var UpdateAdapterRequest_AdapterName = &sUpdateAdapterRequest_AdapterName
+var UpdateAdapterRequest_AutoUpdate = &sUpdateAdapterRequest_AutoUpdate
+
+var UpdateAdapterResponse = &sUpdateAdapterResponse
+var UpdateAdapterResponse_AdapterId = &sUpdateAdapterResponse_AdapterId
+var UpdateAdapterResponse_AdapterName = &sUpdateAdapterResponse_AdapterName
+var UpdateAdapterResponse_CreationTime = &sUpdateAdapterResponse_CreationTime
+var UpdateAdapterResponse_Description = &sUpdateAdapterResponse_Description
+var UpdateAdapterResponse_FeatureTypes = &sUpdateAdapterResponse_FeatureTypes
+var UpdateAdapterResponse_AutoUpdate = &sUpdateAdapterResponse_AutoUpdate
+
+var Textract = &smithy.ServiceSchema{Schema: &s_Textract, Version: "2018-06-27"}

@@ -4,795 +4,602 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var BatchGetDiscoverableRegistryRecord = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "BatchGetDiscoverableRegistryRecord",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	iBatchGetDiscoverableRegistryRecord           = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "BatchGetDiscoverableRegistryRecord"}
+	iListDiscoverableRegistryRecords              = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "ListDiscoverableRegistryRecords"}
+	iSearchDiscoverableRegistryRecords            = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "SearchDiscoverableRegistryRecords"}
+	i_AgentRegistry                               = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "AgentRegistry"}
+	iA2aAgentCardDescriptor                       = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "A2aAgentCardDescriptor"}
+	iAccessDeniedException                        = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "AccessDeniedException"}
+	iAgentSkillsAdditionalData                    = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "AgentSkillsAdditionalData"}
+	iAgentSkillsDefinitionDescriptor              = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "AgentSkillsDefinitionDescriptor"}
+	iAgentSkillsMdDescriptor                      = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "AgentSkillsMdDescriptor"}
+	iAgUiDescriptor                               = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "AgUiDescriptor"}
+	iBatchGetDiscoverableRegistryRecordError      = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "BatchGetDiscoverableRegistryRecordError"}
+	iBatchGetDiscoverableRegistryRecordErrorCode  = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "BatchGetDiscoverableRegistryRecordErrorCode"}
+	i_BatchGetDiscoverableRegistryRecordErrorList = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "BatchGetDiscoverableRegistryRecordErrorList"}
+	iCustomDescriptor                             = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "CustomDescriptor"}
+	i_CustomMetadataDocument                      = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "CustomMetadataDocument"}
+	i_DataSchemaVersion                           = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "DataSchemaVersion"}
+	i_DateTimestamp                               = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "DateTimestamp"}
+	i_Description                                 = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "Description"}
+	i_DescriptorData                              = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "DescriptorData"}
+	iDescriptors                                  = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "Descriptors"}
+	iDescriptorSource                             = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "DescriptorSource"}
+	iDescriptorSourceFromUrl                      = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "DescriptorSourceFromUrl"}
+	i_DescriptorSourceUrl                         = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "DescriptorSourceUrl"}
+	i_DescriptorTypeList                          = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "DescriptorTypeList"}
+	i_DiscoverableFilterValues                    = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "DiscoverableFilterValues"}
+	iDiscoverableRegistryRecordSummary            = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "DiscoverableRegistryRecordSummary"}
+	i_DiscoverableRegistryRecordSummaryList       = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "DiscoverableRegistryRecordSummaryList"}
+	i_FilterValue                                 = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "FilterValue"}
+	iHttpDescriptor                               = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "HttpDescriptor"}
+	iInternalServerException                      = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "InternalServerException"}
+	iMcpServerAdditionalData                      = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "McpServerAdditionalData"}
+	iMcpServerDescriptor                          = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "McpServerDescriptor"}
+	iMcpToolsDescriptor                           = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "McpToolsDescriptor"}
+	i_MetadataFilterExpression                    = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "MetadataFilterExpression"}
+	i_NonBlankString                              = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "NonBlankString"}
+	i_RecordIdentifier                            = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "RecordIdentifier"}
+	iRecordType                                   = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "RecordType"}
+	i_RegistryArn                                 = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "RegistryArn"}
+	i_RegistryIdentifier                          = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "RegistryIdentifier"}
+	i_RegistryIdList                              = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "RegistryIdList"}
+	i_RegistryRecordArn                           = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "RegistryRecordArn"}
+	i_RegistryRecordDisplayName                   = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "RegistryRecordDisplayName"}
+	iRegistryRecordFilter                         = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "RegistryRecordFilter"}
+	i_RegistryRecordFilterList                    = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "RegistryRecordFilterList"}
+	iRegistryRecordFilterName                     = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "RegistryRecordFilterName"}
+	i_RegistryRecordId                            = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "RegistryRecordId"}
+	i_RegistryRecordIdList                        = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "RegistryRecordIdList"}
+	i_RegistryRecordName                          = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "RegistryRecordName"}
+	iRegistryRecordsEntry                         = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "RegistryRecordsEntry"}
+	i_RegistryRecordsEntryList                    = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "RegistryRecordsEntryList"}
+	iRegistryRecordStatus                         = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "RegistryRecordStatus"}
+	iRegistryRecordSummary                        = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "RegistryRecordSummary"}
+	i_RegistryRecordSummaryList                   = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "RegistryRecordSummaryList"}
+	i_RegistryRecordVersion                       = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "RegistryRecordVersion"}
+	iResourceNotFoundException                    = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "ResourceNotFoundException"}
+	i_SearchQuery                                 = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "SearchQuery"}
+	iThrottlingException                          = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "ThrottlingException"}
+	iUnauthorizedException                        = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "UnauthorizedException"}
+	iValidationException                          = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "ValidationException"}
+	iValidationExceptionField                     = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "ValidationExceptionField"}
+	i_ValidationExceptionFieldList                = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "ValidationExceptionFieldList"}
+	iValidationExceptionReason                    = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "ValidationExceptionReason"}
+	iBatchGetDiscoverableRegistryRecordRequest    = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "BatchGetDiscoverableRegistryRecordRequest"}
+	iBatchGetDiscoverableRegistryRecordResponse   = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "BatchGetDiscoverableRegistryRecordResponse"}
+	iListDiscoverableRegistryRecordsRequest       = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "ListDiscoverableRegistryRecordsRequest"}
+	iListDiscoverableRegistryRecordsResponse      = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "ListDiscoverableRegistryRecordsResponse"}
+	iSearchDiscoverableRegistryRecordsRequest     = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "SearchDiscoverableRegistryRecordsRequest"}
+	iSearchDiscoverableRegistryRecordsResponse    = smithy.ShapeID{Namespace: "com.amazonaws.agentregistry", Name: "SearchDiscoverableRegistryRecordsResponse"}
+	pString                                       = smithy.ShapeID{Namespace: "smithy.api", Name: "String"}
+	pUnit                                         = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+	pInteger                                      = smithy.ShapeID{Namespace: "smithy.api", Name: "Integer"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/discoverable-records-batch",
-	Code: 200})
-
-var ListDiscoverableRegistryRecords = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "ListDiscoverableRegistryRecords",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/registries/{registryId}/discoverable-records-list",
-	Code: 200})
-
-var SearchDiscoverableRegistryRecords = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "SearchDiscoverableRegistryRecords",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/discoverable-records-search",
-	Code: 200})
-
-var _AgentRegistry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "AgentRegistry",
-}, smithy.ShapeTypeService, 0)
-
-var AgentRegistry = smithy.NewServiceSchema(_AgentRegistry, "2025-12-01")
-
-var A2aAgentCardDescriptor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "A2aAgentCardDescriptor",
-}, smithy.ShapeTypeStructure, 3)
-var A2aAgentCardDescriptor_data *smithy.Schema
-
-var A2aAgentCardDescriptor_dataSchemaVersion *smithy.Schema
-
-var A2aAgentCardDescriptor_source *smithy.Schema
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var AgentSkillsAdditionalData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "AgentSkillsAdditionalData",
-}, smithy.ShapeTypeStructure, 1)
-var AgentSkillsAdditionalData_skillMd *smithy.Schema
-
-var AgentSkillsDefinitionDescriptor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "AgentSkillsDefinitionDescriptor",
-}, smithy.ShapeTypeStructure, 3)
-var AgentSkillsDefinitionDescriptor_data *smithy.Schema
-
-var AgentSkillsDefinitionDescriptor_dataSchemaVersion *smithy.Schema
-
-var AgentSkillsDefinitionDescriptor_additionalData *smithy.Schema
-
-var AgentSkillsMdDescriptor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "AgentSkillsMdDescriptor",
-}, smithy.ShapeTypeStructure, 3)
-var AgentSkillsMdDescriptor_data *smithy.Schema
-
-var AgentSkillsMdDescriptor_dataSchemaVersion *smithy.Schema
-
-var AgentSkillsMdDescriptor_source *smithy.Schema
-
-var AgUiDescriptor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "AgUiDescriptor",
-}, smithy.ShapeTypeStructure, 1)
-var AgUiDescriptor_source *smithy.Schema
-
-var BatchGetDiscoverableRegistryRecordError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "BatchGetDiscoverableRegistryRecordError",
-}, smithy.ShapeTypeStructure, 4)
-var BatchGetDiscoverableRegistryRecordError_registryId *smithy.Schema
-
-var BatchGetDiscoverableRegistryRecordError_recordId *smithy.Schema
-
-var BatchGetDiscoverableRegistryRecordError_errorCode *smithy.Schema
-
-var BatchGetDiscoverableRegistryRecordError_message *smithy.Schema
-
-var BatchGetDiscoverableRegistryRecordErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "BatchGetDiscoverableRegistryRecordErrorCode",
-}, smithy.ShapeTypeEnum, 3)
-var BatchGetDiscoverableRegistryRecordErrorCode_RESOURCE_NOT_FOUND *smithy.Schema
-
-var BatchGetDiscoverableRegistryRecordErrorCode_ACCESS_DENIED *smithy.Schema
-
-var BatchGetDiscoverableRegistryRecordErrorCode_INTERNAL_ERROR *smithy.Schema
-
-var _BatchGetDiscoverableRegistryRecordErrorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "BatchGetDiscoverableRegistryRecordErrorList",
-}, smithy.ShapeTypeList, 1)
-var _BatchGetDiscoverableRegistryRecordErrorList_member *smithy.Schema
-
-var CustomDescriptor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "CustomDescriptor",
-}, smithy.ShapeTypeStructure, 1)
-var CustomDescriptor_data *smithy.Schema
-
-var _CustomMetadataDocument = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "CustomMetadataDocument",
-}, smithy.ShapeTypeDocument, 0, &smithytraits.Sensitive{})
-
-var _DataSchemaVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "DataSchemaVersion",
-}, smithy.ShapeTypeString, 0)
-
-var _DateTimestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "DateTimestamp",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
-
-var _Description = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "Description",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _DescriptorData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "DescriptorData",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var Descriptors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "Descriptors",
-}, smithy.ShapeTypeStructure, 6)
-var Descriptors_mcpServer *smithy.Schema
-
-var Descriptors_a2aAgentCard *smithy.Schema
-
-var Descriptors_agentSkillsDefinition *smithy.Schema
-
-var Descriptors_custom *smithy.Schema
-
-var Descriptors_http *smithy.Schema
-
-var Descriptors_agui *smithy.Schema
-
-var DescriptorSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "DescriptorSource",
-}, smithy.ShapeTypeStructure, 1)
-var DescriptorSource_fromUrl *smithy.Schema
-
-var DescriptorSourceFromUrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "DescriptorSourceFromUrl",
-}, smithy.ShapeTypeStructure, 1)
-var DescriptorSourceFromUrl_url *smithy.Schema
-
-var _DescriptorSourceUrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "DescriptorSourceUrl",
-}, smithy.ShapeTypeString, 0)
-
-var _DescriptorTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "DescriptorTypeList",
-}, smithy.ShapeTypeList, 1)
-var _DescriptorTypeList_member *smithy.Schema
-
-var _DiscoverableFilterValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "DiscoverableFilterValues",
-}, smithy.ShapeTypeList, 1)
-var _DiscoverableFilterValues_member *smithy.Schema
-
-var DiscoverableRegistryRecordSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "DiscoverableRegistryRecordSummary",
-}, smithy.ShapeTypeStructure, 12)
-var DiscoverableRegistryRecordSummary_registryArn *smithy.Schema
-
-var DiscoverableRegistryRecordSummary_recordArn *smithy.Schema
-
-var DiscoverableRegistryRecordSummary_recordId *smithy.Schema
-
-var DiscoverableRegistryRecordSummary_name *smithy.Schema
-
-var DiscoverableRegistryRecordSummary_description *smithy.Schema
-
-var DiscoverableRegistryRecordSummary_displayName *smithy.Schema
-
-var DiscoverableRegistryRecordSummary_recordType *smithy.Schema
-
-var DiscoverableRegistryRecordSummary_recordVersion *smithy.Schema
-
-var DiscoverableRegistryRecordSummary_status *smithy.Schema
-
-var DiscoverableRegistryRecordSummary_createdAt *smithy.Schema
-
-var DiscoverableRegistryRecordSummary_updatedAt *smithy.Schema
-
-var DiscoverableRegistryRecordSummary_descriptorTypes *smithy.Schema
-
-var _DiscoverableRegistryRecordSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "DiscoverableRegistryRecordSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _DiscoverableRegistryRecordSummaryList_member *smithy.Schema
-
-var _FilterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "FilterValue",
-}, smithy.ShapeTypeString, 0)
-
-var HttpDescriptor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "HttpDescriptor",
-}, smithy.ShapeTypeStructure, 1)
-var HttpDescriptor_source *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var McpServerAdditionalData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "McpServerAdditionalData",
-}, smithy.ShapeTypeStructure, 1)
-var McpServerAdditionalData_tools *smithy.Schema
-
-var McpServerDescriptor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "McpServerDescriptor",
-}, smithy.ShapeTypeStructure, 4)
-var McpServerDescriptor_data *smithy.Schema
-
-var McpServerDescriptor_dataSchemaVersion *smithy.Schema
-
-var McpServerDescriptor_additionalData *smithy.Schema
-
-var McpServerDescriptor_source *smithy.Schema
-
-var McpToolsDescriptor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "McpToolsDescriptor",
-}, smithy.ShapeTypeStructure, 2)
-var McpToolsDescriptor_data *smithy.Schema
-
-var McpToolsDescriptor_dataSchemaVersion *smithy.Schema
-
-var _MetadataFilterExpression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "MetadataFilterExpression",
-}, smithy.ShapeTypeDocument, 0, &smithytraits.Sensitive{})
-
-var _NonBlankString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "NonBlankString",
-}, smithy.ShapeTypeString, 0)
-
-var _RecordIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "RecordIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var RecordType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "RecordType",
-}, smithy.ShapeTypeEnum, 5)
-var RecordType_MCP *smithy.Schema
-
-var RecordType_AGENT *smithy.Schema
-
-var RecordType_CUSTOM *smithy.Schema
-
-var RecordType_SKILL *smithy.Schema
-
-var RecordType_GATEWAY *smithy.Schema
-
-var _RegistryArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "RegistryArn",
-}, smithy.ShapeTypeString, 0)
-
-var _RegistryIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "RegistryIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _RegistryIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "RegistryIdList",
-}, smithy.ShapeTypeList, 1)
-var _RegistryIdList_member *smithy.Schema
-
-var _RegistryRecordArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "RegistryRecordArn",
-}, smithy.ShapeTypeString, 0)
-
-var _RegistryRecordDisplayName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "RegistryRecordDisplayName",
-}, smithy.ShapeTypeString, 0)
-
-var RegistryRecordFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "RegistryRecordFilter",
-}, smithy.ShapeTypeStructure, 2)
-var RegistryRecordFilter_name *smithy.Schema
-
-var RegistryRecordFilter_values *smithy.Schema
-
-var _RegistryRecordFilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "RegistryRecordFilterList",
-}, smithy.ShapeTypeList, 1)
-var _RegistryRecordFilterList_member *smithy.Schema
-
-var RegistryRecordFilterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "RegistryRecordFilterName",
-}, smithy.ShapeTypeEnum, 2)
-var RegistryRecordFilterName_RECORD_TYPE *smithy.Schema
-
-var RegistryRecordFilterName_DESCRIPTOR_TYPE *smithy.Schema
-
-var _RegistryRecordId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "RegistryRecordId",
-}, smithy.ShapeTypeString, 0)
-
-var _RegistryRecordIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "RegistryRecordIdList",
-}, smithy.ShapeTypeList, 1)
-var _RegistryRecordIdList_member *smithy.Schema
-
-var _RegistryRecordName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "RegistryRecordName",
-}, smithy.ShapeTypeString, 0)
-
-var RegistryRecordsEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "RegistryRecordsEntry",
-}, smithy.ShapeTypeStructure, 2)
-var RegistryRecordsEntry_registryId *smithy.Schema
-
-var RegistryRecordsEntry_recordIds *smithy.Schema
-
-var _RegistryRecordsEntryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "RegistryRecordsEntryList",
-}, smithy.ShapeTypeList, 1)
-var _RegistryRecordsEntryList_member *smithy.Schema
-
-var RegistryRecordStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "RegistryRecordStatus",
-}, smithy.ShapeTypeEnum, 9)
-var RegistryRecordStatus_DRAFT *smithy.Schema
-
-var RegistryRecordStatus_PENDING_APPROVAL *smithy.Schema
-
-var RegistryRecordStatus_APPROVED *smithy.Schema
-
-var RegistryRecordStatus_REJECTED *smithy.Schema
-
-var RegistryRecordStatus_DEPRECATED *smithy.Schema
-
-var RegistryRecordStatus_CREATING *smithy.Schema
-
-var RegistryRecordStatus_UPDATING *smithy.Schema
-
-var RegistryRecordStatus_CREATE_FAILED *smithy.Schema
-
-var RegistryRecordStatus_UPDATE_FAILED *smithy.Schema
-
-var RegistryRecordSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "RegistryRecordSummary",
-}, smithy.ShapeTypeStructure, 13)
-var RegistryRecordSummary_registryArn *smithy.Schema
-
-var RegistryRecordSummary_recordArn *smithy.Schema
-
-var RegistryRecordSummary_recordId *smithy.Schema
-
-var RegistryRecordSummary_name *smithy.Schema
-
-var RegistryRecordSummary_description *smithy.Schema
-
-var RegistryRecordSummary_displayName *smithy.Schema
-
-var RegistryRecordSummary_recordType *smithy.Schema
-
-var RegistryRecordSummary_descriptors *smithy.Schema
-
-var RegistryRecordSummary_recordVersion *smithy.Schema
-
-var RegistryRecordSummary_status *smithy.Schema
-
-var RegistryRecordSummary_createdAt *smithy.Schema
-
-var RegistryRecordSummary_updatedAt *smithy.Schema
-
-var RegistryRecordSummary_customMetadata *smithy.Schema
-
-var _RegistryRecordSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "RegistryRecordSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _RegistryRecordSummaryList_member *smithy.Schema
-
-var _RegistryRecordVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "RegistryRecordVersion",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var _SearchQuery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "SearchQuery",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var UnauthorizedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "UnauthorizedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 401})
-var UnauthorizedException_message *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var ValidationException_reason *smithy.Schema
-
-var ValidationException_fieldList *smithy.Schema
-
-var ValidationExceptionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "ValidationExceptionField",
-}, smithy.ShapeTypeStructure, 2)
-var ValidationExceptionField_name *smithy.Schema
-
-var ValidationExceptionField_message *smithy.Schema
-
-var _ValidationExceptionFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "ValidationExceptionFieldList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationExceptionFieldList_member *smithy.Schema
-
-var ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeEnum, 5)
-var ValidationExceptionReason_CANNOT_PARSE *smithy.Schema
-
-var ValidationExceptionReason_FIELD_VALIDATION_FAILED *smithy.Schema
-
-var ValidationExceptionReason_IDEMPOTENT_PARAMETER_MISMATCH_EXCEPTION *smithy.Schema
-
-var ValidationExceptionReason_ROOT_EVENT_IN_OTHER_SESSION *smithy.Schema
-
-var ValidationExceptionReason_RESOURCE_CONFLICT *smithy.Schema
-
-var BatchGetDiscoverableRegistryRecordRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "BatchGetDiscoverableRegistryRecordRequest",
-}, smithy.ShapeTypeStructure, 1)
-var BatchGetDiscoverableRegistryRecordRequest_entries *smithy.Schema
-
-var BatchGetDiscoverableRegistryRecordResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "BatchGetDiscoverableRegistryRecordResponse",
-}, smithy.ShapeTypeStructure, 2)
-var BatchGetDiscoverableRegistryRecordResponse_registryRecords *smithy.Schema
-
-var BatchGetDiscoverableRegistryRecordResponse_errors *smithy.Schema
-
-var ListDiscoverableRegistryRecordsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "ListDiscoverableRegistryRecordsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListDiscoverableRegistryRecordsRequest_registryId *smithy.Schema
-
-var ListDiscoverableRegistryRecordsRequest_maxResults *smithy.Schema
-
-var ListDiscoverableRegistryRecordsRequest_nextToken *smithy.Schema
-
-var ListDiscoverableRegistryRecordsRequest_filters *smithy.Schema
-
-var ListDiscoverableRegistryRecordsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "ListDiscoverableRegistryRecordsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListDiscoverableRegistryRecordsResponse_registryRecords *smithy.Schema
-
-var ListDiscoverableRegistryRecordsResponse_nextToken *smithy.Schema
-
-var SearchDiscoverableRegistryRecordsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "SearchDiscoverableRegistryRecordsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var SearchDiscoverableRegistryRecordsRequest_searchQuery *smithy.Schema
-
-var SearchDiscoverableRegistryRecordsRequest_registryIds *smithy.Schema
-
-var SearchDiscoverableRegistryRecordsRequest_maxResults *smithy.Schema
-
-var SearchDiscoverableRegistryRecordsRequest_filters *smithy.Schema
-
-var SearchDiscoverableRegistryRecordsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.agentregistry",
-	Name:      "SearchDiscoverableRegistryRecordsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var SearchDiscoverableRegistryRecordsResponse_registryRecords *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	DescriptorSourceFromUrl_url = DescriptorSourceFromUrl.AddMember("url", _DescriptorSourceUrl)
-
-	DescriptorSource_fromUrl = DescriptorSource.AddMember("fromUrl", DescriptorSourceFromUrl)
-
-	A2aAgentCardDescriptor_data = A2aAgentCardDescriptor.AddMember("data", _DescriptorData)
-
-	A2aAgentCardDescriptor_dataSchemaVersion = A2aAgentCardDescriptor.AddMember("dataSchemaVersion", _DataSchemaVersion)
-
-	A2aAgentCardDescriptor_source = A2aAgentCardDescriptor.AddMember("source", DescriptorSource)
-
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", _NonBlankString)
-
-	AgentSkillsMdDescriptor_data = AgentSkillsMdDescriptor.AddMember("data", _DescriptorData)
-
-	AgentSkillsMdDescriptor_dataSchemaVersion = AgentSkillsMdDescriptor.AddMember("dataSchemaVersion", _DataSchemaVersion)
-
-	AgentSkillsMdDescriptor_source = AgentSkillsMdDescriptor.AddMember("source", DescriptorSource)
-
-	AgentSkillsAdditionalData_skillMd = AgentSkillsAdditionalData.AddMember("skillMd", AgentSkillsMdDescriptor)
-
-	AgentSkillsDefinitionDescriptor_data = AgentSkillsDefinitionDescriptor.AddMember("data", _DescriptorData)
-
-	AgentSkillsDefinitionDescriptor_dataSchemaVersion = AgentSkillsDefinitionDescriptor.AddMember("dataSchemaVersion", _DataSchemaVersion)
-
-	AgentSkillsDefinitionDescriptor_additionalData = AgentSkillsDefinitionDescriptor.AddMember("additionalData", AgentSkillsAdditionalData)
-
-	AgUiDescriptor_source = AgUiDescriptor.AddMember("source", DescriptorSource)
-
-	BatchGetDiscoverableRegistryRecordErrorCode_RESOURCE_NOT_FOUND = BatchGetDiscoverableRegistryRecordErrorCode.AddMember("RESOURCE_NOT_FOUND", smithyprelude.Unit)
-
-	BatchGetDiscoverableRegistryRecordErrorCode_ACCESS_DENIED = BatchGetDiscoverableRegistryRecordErrorCode.AddMember("ACCESS_DENIED", smithyprelude.Unit)
-
-	BatchGetDiscoverableRegistryRecordErrorCode_INTERNAL_ERROR = BatchGetDiscoverableRegistryRecordErrorCode.AddMember("INTERNAL_ERROR", smithyprelude.Unit)
-
-	BatchGetDiscoverableRegistryRecordError_registryId = BatchGetDiscoverableRegistryRecordError.AddMember("registryId", _RegistryIdentifier)
-
-	BatchGetDiscoverableRegistryRecordError_recordId = BatchGetDiscoverableRegistryRecordError.AddMember("recordId", _RecordIdentifier)
-
-	BatchGetDiscoverableRegistryRecordError_errorCode = BatchGetDiscoverableRegistryRecordError.AddMember("errorCode", BatchGetDiscoverableRegistryRecordErrorCode)
-
-	BatchGetDiscoverableRegistryRecordError_message = BatchGetDiscoverableRegistryRecordError.AddMember("message", smithyprelude.String)
-
-	_BatchGetDiscoverableRegistryRecordErrorList_member = _BatchGetDiscoverableRegistryRecordErrorList.AddMember("member", BatchGetDiscoverableRegistryRecordError)
-
-	CustomDescriptor_data = CustomDescriptor.AddMember("data", _DescriptorData)
-
-	McpToolsDescriptor_data = McpToolsDescriptor.AddMember("data", _DescriptorData)
-
-	McpToolsDescriptor_dataSchemaVersion = McpToolsDescriptor.AddMember("dataSchemaVersion", _DataSchemaVersion)
-
-	McpServerAdditionalData_tools = McpServerAdditionalData.AddMember("tools", McpToolsDescriptor)
-
-	McpServerDescriptor_data = McpServerDescriptor.AddMember("data", _DescriptorData)
-
-	McpServerDescriptor_dataSchemaVersion = McpServerDescriptor.AddMember("dataSchemaVersion", _DataSchemaVersion)
-
-	McpServerDescriptor_additionalData = McpServerDescriptor.AddMember("additionalData", McpServerAdditionalData)
-
-	McpServerDescriptor_source = McpServerDescriptor.AddMember("source", DescriptorSource)
-
-	HttpDescriptor_source = HttpDescriptor.AddMember("source", DescriptorSource)
-
-	Descriptors_mcpServer = Descriptors.AddMember("mcpServer", McpServerDescriptor)
-
-	Descriptors_a2aAgentCard = Descriptors.AddMember("a2aAgentCard", A2aAgentCardDescriptor)
-
-	Descriptors_agentSkillsDefinition = Descriptors.AddMember("agentSkillsDefinition", AgentSkillsDefinitionDescriptor)
-
-	Descriptors_custom = Descriptors.AddMember("custom", CustomDescriptor)
-
-	Descriptors_http = Descriptors.AddMember("http", HttpDescriptor)
-
-	Descriptors_agui = Descriptors.AddMember("agui", AgUiDescriptor)
-
-	_DescriptorTypeList_member = _DescriptorTypeList.AddMember("member", smithyprelude.String)
-
-	_DiscoverableFilterValues_member = _DiscoverableFilterValues.AddMember("member", _FilterValue)
-
-	RecordType_MCP = RecordType.AddMember("MCP", smithyprelude.Unit)
-
-	RecordType_AGENT = RecordType.AddMember("AGENT", smithyprelude.Unit)
-
-	RecordType_CUSTOM = RecordType.AddMember("CUSTOM", smithyprelude.Unit)
-
-	RecordType_SKILL = RecordType.AddMember("SKILL", smithyprelude.Unit)
-
-	RecordType_GATEWAY = RecordType.AddMember("GATEWAY", smithyprelude.Unit)
-
-	RegistryRecordStatus_DRAFT = RegistryRecordStatus.AddMember("DRAFT", smithyprelude.Unit)
-
-	RegistryRecordStatus_PENDING_APPROVAL = RegistryRecordStatus.AddMember("PENDING_APPROVAL", smithyprelude.Unit)
-
-	RegistryRecordStatus_APPROVED = RegistryRecordStatus.AddMember("APPROVED", smithyprelude.Unit)
-
-	RegistryRecordStatus_REJECTED = RegistryRecordStatus.AddMember("REJECTED", smithyprelude.Unit)
-
-	RegistryRecordStatus_DEPRECATED = RegistryRecordStatus.AddMember("DEPRECATED", smithyprelude.Unit)
-
-	RegistryRecordStatus_CREATING = RegistryRecordStatus.AddMember("CREATING", smithyprelude.Unit)
-
-	RegistryRecordStatus_UPDATING = RegistryRecordStatus.AddMember("UPDATING", smithyprelude.Unit)
-
-	RegistryRecordStatus_CREATE_FAILED = RegistryRecordStatus.AddMember("CREATE_FAILED", smithyprelude.Unit)
-
-	RegistryRecordStatus_UPDATE_FAILED = RegistryRecordStatus.AddMember("UPDATE_FAILED", smithyprelude.Unit)
-
-	DiscoverableRegistryRecordSummary_registryArn = DiscoverableRegistryRecordSummary.AddMember("registryArn", _RegistryArn)
-
-	DiscoverableRegistryRecordSummary_recordArn = DiscoverableRegistryRecordSummary.AddMember("recordArn", _RegistryRecordArn)
-
-	DiscoverableRegistryRecordSummary_recordId = DiscoverableRegistryRecordSummary.AddMember("recordId", _RegistryRecordId)
-
-	DiscoverableRegistryRecordSummary_name = DiscoverableRegistryRecordSummary.AddMember("name", _RegistryRecordName)
-
-	DiscoverableRegistryRecordSummary_description = DiscoverableRegistryRecordSummary.AddMember("description", _Description)
-
-	DiscoverableRegistryRecordSummary_displayName = DiscoverableRegistryRecordSummary.AddMember("displayName", _RegistryRecordDisplayName)
-
-	DiscoverableRegistryRecordSummary_recordType = DiscoverableRegistryRecordSummary.AddMember("recordType", RecordType)
-
-	DiscoverableRegistryRecordSummary_recordVersion = DiscoverableRegistryRecordSummary.AddMember("recordVersion", _RegistryRecordVersion)
-
-	DiscoverableRegistryRecordSummary_status = DiscoverableRegistryRecordSummary.AddMember("status", RegistryRecordStatus)
-
-	DiscoverableRegistryRecordSummary_createdAt = DiscoverableRegistryRecordSummary.AddMember("createdAt", _DateTimestamp)
-
-	DiscoverableRegistryRecordSummary_updatedAt = DiscoverableRegistryRecordSummary.AddMember("updatedAt", _DateTimestamp)
-
-	DiscoverableRegistryRecordSummary_descriptorTypes = DiscoverableRegistryRecordSummary.AddMember("descriptorTypes", _DescriptorTypeList)
-
-	_DiscoverableRegistryRecordSummaryList_member = _DiscoverableRegistryRecordSummaryList.AddMember("member", DiscoverableRegistryRecordSummary)
-
-	InternalServerException_message = InternalServerException.AddMember("message", _NonBlankString)
-
-	_RegistryIdList_member = _RegistryIdList.AddMember("member", _RegistryIdentifier)
-
-	RegistryRecordFilterName_RECORD_TYPE = RegistryRecordFilterName.AddMember("RECORD_TYPE", smithyprelude.Unit)
-
-	RegistryRecordFilterName_DESCRIPTOR_TYPE = RegistryRecordFilterName.AddMember("DESCRIPTOR_TYPE", smithyprelude.Unit)
-
-	RegistryRecordFilter_name = RegistryRecordFilter.AddMember("name", RegistryRecordFilterName)
-
-	RegistryRecordFilter_values = RegistryRecordFilter.AddMember("values", _DiscoverableFilterValues)
-
-	_RegistryRecordFilterList_member = _RegistryRecordFilterList.AddMember("member", RegistryRecordFilter)
-
-	_RegistryRecordIdList_member = _RegistryRecordIdList.AddMember("member", _RecordIdentifier)
-
-	RegistryRecordsEntry_registryId = RegistryRecordsEntry.AddMember("registryId", _RegistryIdentifier)
-
-	RegistryRecordsEntry_recordIds = RegistryRecordsEntry.AddMember("recordIds", _RegistryRecordIdList)
-
-	_RegistryRecordsEntryList_member = _RegistryRecordsEntryList.AddMember("member", RegistryRecordsEntry)
-
-	RegistryRecordSummary_registryArn = RegistryRecordSummary.AddMember("registryArn", _RegistryArn)
-
-	RegistryRecordSummary_recordArn = RegistryRecordSummary.AddMember("recordArn", _RegistryRecordArn)
-
-	RegistryRecordSummary_recordId = RegistryRecordSummary.AddMember("recordId", _RegistryRecordId)
-
-	RegistryRecordSummary_name = RegistryRecordSummary.AddMember("name", _RegistryRecordName)
-
-	RegistryRecordSummary_description = RegistryRecordSummary.AddMember("description", _Description)
-
-	RegistryRecordSummary_displayName = RegistryRecordSummary.AddMember("displayName", _RegistryRecordDisplayName)
-
-	RegistryRecordSummary_recordType = RegistryRecordSummary.AddMember("recordType", RecordType)
-
-	RegistryRecordSummary_descriptors = RegistryRecordSummary.AddMember("descriptors", Descriptors)
-
-	RegistryRecordSummary_recordVersion = RegistryRecordSummary.AddMember("recordVersion", _RegistryRecordVersion)
-
-	RegistryRecordSummary_status = RegistryRecordSummary.AddMember("status", RegistryRecordStatus)
-
-	RegistryRecordSummary_createdAt = RegistryRecordSummary.AddMember("createdAt", _DateTimestamp)
-
-	RegistryRecordSummary_updatedAt = RegistryRecordSummary.AddMember("updatedAt", _DateTimestamp)
-
-	RegistryRecordSummary_customMetadata = RegistryRecordSummary.AddMember("customMetadata", _CustomMetadataDocument)
-
-	_RegistryRecordSummaryList_member = _RegistryRecordSummaryList.AddMember("member", RegistryRecordSummary)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _NonBlankString)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", _NonBlankString)
-
-	UnauthorizedException_message = UnauthorizedException.AddMember("message", _NonBlankString)
-
-	ValidationExceptionReason_CANNOT_PARSE = ValidationExceptionReason.AddMember("CANNOT_PARSE", smithyprelude.Unit)
-
-	ValidationExceptionReason_FIELD_VALIDATION_FAILED = ValidationExceptionReason.AddMember("FIELD_VALIDATION_FAILED", smithyprelude.Unit)
-
-	ValidationExceptionReason_IDEMPOTENT_PARAMETER_MISMATCH_EXCEPTION = ValidationExceptionReason.AddMember("IDEMPOTENT_PARAMETER_MISMATCH_EXCEPTION", smithyprelude.Unit)
-
-	ValidationExceptionReason_ROOT_EVENT_IN_OTHER_SESSION = ValidationExceptionReason.AddMember("ROOT_EVENT_IN_OTHER_SESSION", smithyprelude.Unit)
-
-	ValidationExceptionReason_RESOURCE_CONFLICT = ValidationExceptionReason.AddMember("RESOURCE_CONFLICT", smithyprelude.Unit)
-
-	ValidationExceptionField_name = ValidationExceptionField.AddMember("name", smithyprelude.String)
-
-	ValidationExceptionField_message = ValidationExceptionField.AddMember("message", smithyprelude.String)
-
-	_ValidationExceptionFieldList_member = _ValidationExceptionFieldList.AddMember("member", ValidationExceptionField)
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	ValidationException_reason = ValidationException.AddMember("reason", ValidationExceptionReason)
-
-	ValidationException_fieldList = ValidationException.AddMember("fieldList", _ValidationExceptionFieldList)
-
-	BatchGetDiscoverableRegistryRecordRequest_entries = BatchGetDiscoverableRegistryRecordRequest.AddMember("entries", _RegistryRecordsEntryList)
-
-	BatchGetDiscoverableRegistryRecordResponse_registryRecords = BatchGetDiscoverableRegistryRecordResponse.AddMember("registryRecords", _RegistryRecordSummaryList)
-
-	BatchGetDiscoverableRegistryRecordResponse_errors = BatchGetDiscoverableRegistryRecordResponse.AddMember("errors", _BatchGetDiscoverableRegistryRecordErrorList)
-
-	ListDiscoverableRegistryRecordsRequest_registryId = ListDiscoverableRegistryRecordsRequest.AddMember("registryId", _RegistryIdentifier, &smithytraits.HTTPLabel{})
-
-	ListDiscoverableRegistryRecordsRequest_maxResults = ListDiscoverableRegistryRecordsRequest.AddMember("maxResults", smithyprelude.Integer)
-
-	ListDiscoverableRegistryRecordsRequest_nextToken = ListDiscoverableRegistryRecordsRequest.AddMember("nextToken", smithyprelude.String)
-
-	ListDiscoverableRegistryRecordsRequest_filters = ListDiscoverableRegistryRecordsRequest.AddMember("filters", _RegistryRecordFilterList)
-
-	ListDiscoverableRegistryRecordsResponse_registryRecords = ListDiscoverableRegistryRecordsResponse.AddMember("registryRecords", _DiscoverableRegistryRecordSummaryList)
-
-	ListDiscoverableRegistryRecordsResponse_nextToken = ListDiscoverableRegistryRecordsResponse.AddMember("nextToken", smithyprelude.String)
-
-	SearchDiscoverableRegistryRecordsRequest_searchQuery = SearchDiscoverableRegistryRecordsRequest.AddMember("searchQuery", _SearchQuery)
-
-	SearchDiscoverableRegistryRecordsRequest_registryIds = SearchDiscoverableRegistryRecordsRequest.AddMember("registryIds", _RegistryIdList)
-
-	SearchDiscoverableRegistryRecordsRequest_maxResults = SearchDiscoverableRegistryRecordsRequest.AddMember("maxResults", smithyprelude.Integer)
-
-	SearchDiscoverableRegistryRecordsRequest_filters = SearchDiscoverableRegistryRecordsRequest.AddMember("filters", _MetadataFilterExpression)
-
-	SearchDiscoverableRegistryRecordsResponse_registryRecords = SearchDiscoverableRegistryRecordsResponse.AddMember("registryRecords", _RegistryRecordSummaryList)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 401}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+
+var mA2aAgentCardDescriptor = smithy.SchemaMembers{List: []*smithy.Schema{&sA2aAgentCardDescriptor_data, &sA2aAgentCardDescriptor_dataSchemaVersion, &sA2aAgentCardDescriptor_source}}
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mAgentSkillsAdditionalData = smithy.SchemaMembers{List: []*smithy.Schema{&sAgentSkillsAdditionalData_skillMd}}
+var mAgentSkillsDefinitionDescriptor = smithy.SchemaMembers{List: []*smithy.Schema{&sAgentSkillsDefinitionDescriptor_data, &sAgentSkillsDefinitionDescriptor_dataSchemaVersion, &sAgentSkillsDefinitionDescriptor_additionalData}}
+var mAgentSkillsMdDescriptor = smithy.SchemaMembers{List: []*smithy.Schema{&sAgentSkillsMdDescriptor_data, &sAgentSkillsMdDescriptor_dataSchemaVersion, &sAgentSkillsMdDescriptor_source}}
+var mAgUiDescriptor = smithy.SchemaMembers{List: []*smithy.Schema{&sAgUiDescriptor_source}}
+var mBatchGetDiscoverableRegistryRecordError = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetDiscoverableRegistryRecordError_registryId, &sBatchGetDiscoverableRegistryRecordError_recordId, &sBatchGetDiscoverableRegistryRecordError_errorCode, &sBatchGetDiscoverableRegistryRecordError_message}}
+var mBatchGetDiscoverableRegistryRecordErrorCode = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetDiscoverableRegistryRecordErrorCode_RESOURCE_NOT_FOUND, &sBatchGetDiscoverableRegistryRecordErrorCode_ACCESS_DENIED, &sBatchGetDiscoverableRegistryRecordErrorCode_INTERNAL_ERROR}}
+var m_BatchGetDiscoverableRegistryRecordErrorList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchGetDiscoverableRegistryRecordErrorList_member}}
+var mCustomDescriptor = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomDescriptor_data}}
+var mDescriptors = smithy.SchemaMembers{List: []*smithy.Schema{&sDescriptors_mcpServer, &sDescriptors_a2aAgentCard, &sDescriptors_agentSkillsDefinition, &sDescriptors_custom, &sDescriptors_http, &sDescriptors_agui}}
+var mDescriptorSource = smithy.SchemaMembers{List: []*smithy.Schema{&sDescriptorSource_fromUrl}}
+var mDescriptorSourceFromUrl = smithy.SchemaMembers{List: []*smithy.Schema{&sDescriptorSourceFromUrl_url}}
+var m_DescriptorTypeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DescriptorTypeList_member}}
+var m_DiscoverableFilterValues = smithy.SchemaMembers{List: []*smithy.Schema{&s_DiscoverableFilterValues_member}}
+var mDiscoverableRegistryRecordSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sDiscoverableRegistryRecordSummary_registryArn, &sDiscoverableRegistryRecordSummary_recordArn, &sDiscoverableRegistryRecordSummary_recordId, &sDiscoverableRegistryRecordSummary_name, &sDiscoverableRegistryRecordSummary_description, &sDiscoverableRegistryRecordSummary_displayName, &sDiscoverableRegistryRecordSummary_recordType, &sDiscoverableRegistryRecordSummary_recordVersion, &sDiscoverableRegistryRecordSummary_status, &sDiscoverableRegistryRecordSummary_createdAt, &sDiscoverableRegistryRecordSummary_updatedAt, &sDiscoverableRegistryRecordSummary_descriptorTypes}, Seed: 38, Slots: []uint16{
+	0, 6, 2, 0, 0, 7, 8, 0, 0, 12, 1, 0, 0, 0, 0, 10, 0, 5, 11, 9, 0, 0, 4, 0,
+	0, 0, 0, 3, 0, 0, 0, 0,
+}}
+var m_DiscoverableRegistryRecordSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DiscoverableRegistryRecordSummaryList_member}}
+var mHttpDescriptor = smithy.SchemaMembers{List: []*smithy.Schema{&sHttpDescriptor_source}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message}}
+var mMcpServerAdditionalData = smithy.SchemaMembers{List: []*smithy.Schema{&sMcpServerAdditionalData_tools}}
+var mMcpServerDescriptor = smithy.SchemaMembers{List: []*smithy.Schema{&sMcpServerDescriptor_data, &sMcpServerDescriptor_dataSchemaVersion, &sMcpServerDescriptor_additionalData, &sMcpServerDescriptor_source}}
+var mMcpToolsDescriptor = smithy.SchemaMembers{List: []*smithy.Schema{&sMcpToolsDescriptor_data, &sMcpToolsDescriptor_dataSchemaVersion}}
+var mRecordType = smithy.SchemaMembers{List: []*smithy.Schema{&sRecordType_MCP, &sRecordType_AGENT, &sRecordType_CUSTOM, &sRecordType_SKILL, &sRecordType_GATEWAY}}
+var m_RegistryIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RegistryIdList_member}}
+var mRegistryRecordFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sRegistryRecordFilter_name, &sRegistryRecordFilter_values}}
+var m_RegistryRecordFilterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RegistryRecordFilterList_member}}
+var mRegistryRecordFilterName = smithy.SchemaMembers{List: []*smithy.Schema{&sRegistryRecordFilterName_RECORD_TYPE, &sRegistryRecordFilterName_DESCRIPTOR_TYPE}}
+var m_RegistryRecordIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RegistryRecordIdList_member}}
+var mRegistryRecordsEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sRegistryRecordsEntry_registryId, &sRegistryRecordsEntry_recordIds}}
+var m_RegistryRecordsEntryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RegistryRecordsEntryList_member}}
+var mRegistryRecordStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sRegistryRecordStatus_DRAFT, &sRegistryRecordStatus_PENDING_APPROVAL, &sRegistryRecordStatus_APPROVED, &sRegistryRecordStatus_REJECTED, &sRegistryRecordStatus_DEPRECATED, &sRegistryRecordStatus_CREATING, &sRegistryRecordStatus_UPDATING, &sRegistryRecordStatus_CREATE_FAILED, &sRegistryRecordStatus_UPDATE_FAILED}, Seed: 10, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 0, 9, 1, 0, 0, 8, 3, 0, 0, 2, 0, 0, 4, 5, 0, 0, 6,
+	0, 0, 0, 0, 0, 7, 0, 0,
+}}
+var mRegistryRecordSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sRegistryRecordSummary_registryArn, &sRegistryRecordSummary_recordArn, &sRegistryRecordSummary_recordId, &sRegistryRecordSummary_name, &sRegistryRecordSummary_description, &sRegistryRecordSummary_displayName, &sRegistryRecordSummary_recordType, &sRegistryRecordSummary_descriptors, &sRegistryRecordSummary_recordVersion, &sRegistryRecordSummary_status, &sRegistryRecordSummary_createdAt, &sRegistryRecordSummary_updatedAt, &sRegistryRecordSummary_customMetadata}, Seed: 38, Slots: []uint16{
+	0, 6, 2, 0, 0, 7, 9, 0, 0, 0, 1, 0, 0, 0, 0, 11, 0, 5, 12, 10, 0, 0, 4, 0,
+	8, 0, 13, 3, 0, 0, 0, 0,
+}}
+var m_RegistryRecordSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RegistryRecordSummaryList_member}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message}}
+var mUnauthorizedException = smithy.SchemaMembers{List: []*smithy.Schema{&sUnauthorizedException_message}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message, &sValidationException_reason, &sValidationException_fieldList}}
+var mValidationExceptionField = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionField_name, &sValidationExceptionField_message}}
+var m_ValidationExceptionFieldList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ValidationExceptionFieldList_member}}
+var mValidationExceptionReason = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionReason_CANNOT_PARSE, &sValidationExceptionReason_FIELD_VALIDATION_FAILED, &sValidationExceptionReason_IDEMPOTENT_PARAMETER_MISMATCH_EXCEPTION, &sValidationExceptionReason_ROOT_EVENT_IN_OTHER_SESSION, &sValidationExceptionReason_RESOURCE_CONFLICT}}
+var mBatchGetDiscoverableRegistryRecordRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetDiscoverableRegistryRecordRequest_entries}}
+var mBatchGetDiscoverableRegistryRecordResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetDiscoverableRegistryRecordResponse_registryRecords, &sBatchGetDiscoverableRegistryRecordResponse_errors}}
+var mListDiscoverableRegistryRecordsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListDiscoverableRegistryRecordsRequest_registryId, &sListDiscoverableRegistryRecordsRequest_maxResults, &sListDiscoverableRegistryRecordsRequest_nextToken, &sListDiscoverableRegistryRecordsRequest_filters}}
+var mListDiscoverableRegistryRecordsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListDiscoverableRegistryRecordsResponse_registryRecords, &sListDiscoverableRegistryRecordsResponse_nextToken}}
+var mSearchDiscoverableRegistryRecordsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchDiscoverableRegistryRecordsRequest_searchQuery, &sSearchDiscoverableRegistryRecordsRequest_registryIds, &sSearchDiscoverableRegistryRecordsRequest_maxResults, &sSearchDiscoverableRegistryRecordsRequest_filters}}
+var mSearchDiscoverableRegistryRecordsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchDiscoverableRegistryRecordsResponse_registryRecords}}
+
+var sBatchGetDiscoverableRegistryRecord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetDiscoverableRegistryRecord, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sListDiscoverableRegistryRecords = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDiscoverableRegistryRecords, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sSearchDiscoverableRegistryRecords = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchDiscoverableRegistryRecords, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var s_AgentRegistry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AgentRegistry, Type: smithy.ShapeTypeService})
+var sA2aAgentCardDescriptor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iA2aAgentCardDescriptor, Members: &mA2aAgentCardDescriptor, Type: smithy.ShapeTypeStructure})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t4, Type: smithy.ShapeTypeStructure})
+var sAgentSkillsAdditionalData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAgentSkillsAdditionalData, Members: &mAgentSkillsAdditionalData, Type: smithy.ShapeTypeStructure})
+var sAgentSkillsDefinitionDescriptor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAgentSkillsDefinitionDescriptor, Members: &mAgentSkillsDefinitionDescriptor, Type: smithy.ShapeTypeStructure})
+var sAgentSkillsMdDescriptor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAgentSkillsMdDescriptor, Members: &mAgentSkillsMdDescriptor, Type: smithy.ShapeTypeStructure})
+var sAgUiDescriptor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAgUiDescriptor, Members: &mAgUiDescriptor, Type: smithy.ShapeTypeStructure})
+var sBatchGetDiscoverableRegistryRecordError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetDiscoverableRegistryRecordError, Members: &mBatchGetDiscoverableRegistryRecordError, Type: smithy.ShapeTypeStructure})
+var sBatchGetDiscoverableRegistryRecordErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetDiscoverableRegistryRecordErrorCode, Members: &mBatchGetDiscoverableRegistryRecordErrorCode, Type: smithy.ShapeTypeEnum})
+var s_BatchGetDiscoverableRegistryRecordErrorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchGetDiscoverableRegistryRecordErrorList, Members: &m_BatchGetDiscoverableRegistryRecordErrorList, Type: smithy.ShapeTypeList})
+var sCustomDescriptor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomDescriptor, Members: &mCustomDescriptor, Type: smithy.ShapeTypeStructure})
+var s_CustomMetadataDocument = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomMetadataDocument, Traits: &t5, Type: smithy.ShapeTypeDocument})
+var s_DataSchemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataSchemaVersion, Type: smithy.ShapeTypeString})
+var s_DateTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DateTimestamp, Traits: &t6, Type: smithy.ShapeTypeTimestamp})
+var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Traits: &t5, Type: smithy.ShapeTypeString})
+var s_DescriptorData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescriptorData, Traits: &t5, Type: smithy.ShapeTypeString})
+var sDescriptors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescriptors, Members: &mDescriptors, Type: smithy.ShapeTypeStructure})
+var sDescriptorSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescriptorSource, Members: &mDescriptorSource, Type: smithy.ShapeTypeStructure})
+var sDescriptorSourceFromUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescriptorSourceFromUrl, Members: &mDescriptorSourceFromUrl, Type: smithy.ShapeTypeStructure})
+var s_DescriptorSourceUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescriptorSourceUrl, Type: smithy.ShapeTypeString})
+var s_DescriptorTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescriptorTypeList, Members: &m_DescriptorTypeList, Type: smithy.ShapeTypeList})
+var s_DiscoverableFilterValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DiscoverableFilterValues, Members: &m_DiscoverableFilterValues, Type: smithy.ShapeTypeList})
+var sDiscoverableRegistryRecordSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDiscoverableRegistryRecordSummary, Members: &mDiscoverableRegistryRecordSummary, Type: smithy.ShapeTypeStructure})
+var s_DiscoverableRegistryRecordSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DiscoverableRegistryRecordSummaryList, Members: &m_DiscoverableRegistryRecordSummaryList, Type: smithy.ShapeTypeList})
+var s_FilterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterValue, Type: smithy.ShapeTypeString})
+var sHttpDescriptor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpDescriptor, Members: &mHttpDescriptor, Type: smithy.ShapeTypeStructure})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t8, Type: smithy.ShapeTypeStructure})
+var sMcpServerAdditionalData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMcpServerAdditionalData, Members: &mMcpServerAdditionalData, Type: smithy.ShapeTypeStructure})
+var sMcpServerDescriptor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMcpServerDescriptor, Members: &mMcpServerDescriptor, Type: smithy.ShapeTypeStructure})
+var sMcpToolsDescriptor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMcpToolsDescriptor, Members: &mMcpToolsDescriptor, Type: smithy.ShapeTypeStructure})
+var s_MetadataFilterExpression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetadataFilterExpression, Traits: &t5, Type: smithy.ShapeTypeDocument})
+var s_NonBlankString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonBlankString, Type: smithy.ShapeTypeString})
+var s_RecordIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecordIdentifier, Type: smithy.ShapeTypeString})
+var sRecordType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecordType, Members: &mRecordType, Type: smithy.ShapeTypeEnum})
+var s_RegistryArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistryArn, Type: smithy.ShapeTypeString})
+var s_RegistryIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistryIdentifier, Type: smithy.ShapeTypeString})
+var s_RegistryIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistryIdList, Members: &m_RegistryIdList, Type: smithy.ShapeTypeList})
+var s_RegistryRecordArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistryRecordArn, Type: smithy.ShapeTypeString})
+var s_RegistryRecordDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistryRecordDisplayName, Type: smithy.ShapeTypeString})
+var sRegistryRecordFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegistryRecordFilter, Members: &mRegistryRecordFilter, Type: smithy.ShapeTypeStructure})
+var s_RegistryRecordFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistryRecordFilterList, Members: &m_RegistryRecordFilterList, Type: smithy.ShapeTypeList})
+var sRegistryRecordFilterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegistryRecordFilterName, Members: &mRegistryRecordFilterName, Type: smithy.ShapeTypeEnum})
+var s_RegistryRecordId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistryRecordId, Type: smithy.ShapeTypeString})
+var s_RegistryRecordIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistryRecordIdList, Members: &m_RegistryRecordIdList, Type: smithy.ShapeTypeList})
+var s_RegistryRecordName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistryRecordName, Type: smithy.ShapeTypeString})
+var sRegistryRecordsEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegistryRecordsEntry, Members: &mRegistryRecordsEntry, Type: smithy.ShapeTypeStructure})
+var s_RegistryRecordsEntryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistryRecordsEntryList, Members: &m_RegistryRecordsEntryList, Type: smithy.ShapeTypeList})
+var sRegistryRecordStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegistryRecordStatus, Members: &mRegistryRecordStatus, Type: smithy.ShapeTypeEnum})
+var sRegistryRecordSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegistryRecordSummary, Members: &mRegistryRecordSummary, Type: smithy.ShapeTypeStructure})
+var s_RegistryRecordSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistryRecordSummaryList, Members: &m_RegistryRecordSummaryList, Type: smithy.ShapeTypeList})
+var s_RegistryRecordVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegistryRecordVersion, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t9, Type: smithy.ShapeTypeStructure})
+var s_SearchQuery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchQuery, Traits: &t5, Type: smithy.ShapeTypeString})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t10, Type: smithy.ShapeTypeStructure})
+var sUnauthorizedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnauthorizedException, Members: &mUnauthorizedException, Traits: &t11, Type: smithy.ShapeTypeStructure})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t12, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure})
+var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList})
+var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum})
+var sBatchGetDiscoverableRegistryRecordRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetDiscoverableRegistryRecordRequest, Members: &mBatchGetDiscoverableRegistryRecordRequest, Type: smithy.ShapeTypeStructure})
+var sBatchGetDiscoverableRegistryRecordResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetDiscoverableRegistryRecordResponse, Members: &mBatchGetDiscoverableRegistryRecordResponse, Type: smithy.ShapeTypeStructure})
+var sListDiscoverableRegistryRecordsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDiscoverableRegistryRecordsRequest, Members: &mListDiscoverableRegistryRecordsRequest, Type: smithy.ShapeTypeStructure})
+var sListDiscoverableRegistryRecordsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDiscoverableRegistryRecordsResponse, Members: &mListDiscoverableRegistryRecordsResponse, Type: smithy.ShapeTypeStructure})
+var sSearchDiscoverableRegistryRecordsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchDiscoverableRegistryRecordsRequest, Members: &mSearchDiscoverableRegistryRecordsRequest, Type: smithy.ShapeTypeStructure})
+var sSearchDiscoverableRegistryRecordsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchDiscoverableRegistryRecordsResponse, Members: &mSearchDiscoverableRegistryRecordsResponse, Type: smithy.ShapeTypeStructure})
+
+var sA2aAgentCardDescriptor_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &i_DescriptorData, Traits: &t3, Type: smithy.ShapeTypeString})
+var sA2aAgentCardDescriptor_dataSchemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSchemaVersion", ID: &i_DataSchemaVersion, Type: smithy.ShapeTypeString})
+var sA2aAgentCardDescriptor_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iDescriptorSource, Members: &mDescriptorSource, Type: smithy.ShapeTypeStructure})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString})
+var sAgentSkillsAdditionalData_skillMd = smithy.NewStaticSchema(smithy.StaticSchema{Member: "skillMd", ID: &iAgentSkillsMdDescriptor, Members: &mAgentSkillsMdDescriptor, Type: smithy.ShapeTypeStructure})
+var sAgentSkillsDefinitionDescriptor_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &i_DescriptorData, Traits: &t3, Type: smithy.ShapeTypeString})
+var sAgentSkillsDefinitionDescriptor_dataSchemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSchemaVersion", ID: &i_DataSchemaVersion, Type: smithy.ShapeTypeString})
+var sAgentSkillsDefinitionDescriptor_additionalData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalData", ID: &iAgentSkillsAdditionalData, Members: &mAgentSkillsAdditionalData, Type: smithy.ShapeTypeStructure})
+var sAgentSkillsMdDescriptor_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &i_DescriptorData, Traits: &t3, Type: smithy.ShapeTypeString})
+var sAgentSkillsMdDescriptor_dataSchemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSchemaVersion", ID: &i_DataSchemaVersion, Type: smithy.ShapeTypeString})
+var sAgentSkillsMdDescriptor_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iDescriptorSource, Members: &mDescriptorSource, Type: smithy.ShapeTypeStructure})
+var sAgUiDescriptor_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iDescriptorSource, Members: &mDescriptorSource, Type: smithy.ShapeTypeStructure})
+var sBatchGetDiscoverableRegistryRecordError_registryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registryId", ID: &i_RegistryIdentifier, Type: smithy.ShapeTypeString})
+var sBatchGetDiscoverableRegistryRecordError_recordId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recordId", ID: &i_RecordIdentifier, Type: smithy.ShapeTypeString})
+var sBatchGetDiscoverableRegistryRecordError_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &iBatchGetDiscoverableRegistryRecordErrorCode, Members: &mBatchGetDiscoverableRegistryRecordErrorCode, Type: smithy.ShapeTypeEnum})
+var sBatchGetDiscoverableRegistryRecordError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sBatchGetDiscoverableRegistryRecordErrorCode_RESOURCE_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBatchGetDiscoverableRegistryRecordErrorCode_ACCESS_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCESS_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBatchGetDiscoverableRegistryRecordErrorCode_INTERNAL_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_BatchGetDiscoverableRegistryRecordErrorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchGetDiscoverableRegistryRecordError, Members: &mBatchGetDiscoverableRegistryRecordError, Type: smithy.ShapeTypeStructure})
+var sCustomDescriptor_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &i_DescriptorData, Traits: &t3, Type: smithy.ShapeTypeString})
+var sDescriptors_mcpServer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mcpServer", ID: &iMcpServerDescriptor, Members: &mMcpServerDescriptor, Type: smithy.ShapeTypeStructure})
+var sDescriptors_a2aAgentCard = smithy.NewStaticSchema(smithy.StaticSchema{Member: "a2aAgentCard", ID: &iA2aAgentCardDescriptor, Members: &mA2aAgentCardDescriptor, Type: smithy.ShapeTypeStructure})
+var sDescriptors_agentSkillsDefinition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "agentSkillsDefinition", ID: &iAgentSkillsDefinitionDescriptor, Members: &mAgentSkillsDefinitionDescriptor, Type: smithy.ShapeTypeStructure})
+var sDescriptors_custom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "custom", ID: &iCustomDescriptor, Members: &mCustomDescriptor, Type: smithy.ShapeTypeStructure})
+var sDescriptors_http = smithy.NewStaticSchema(smithy.StaticSchema{Member: "http", ID: &iHttpDescriptor, Members: &mHttpDescriptor, Type: smithy.ShapeTypeStructure})
+var sDescriptors_agui = smithy.NewStaticSchema(smithy.StaticSchema{Member: "agui", ID: &iAgUiDescriptor, Members: &mAgUiDescriptor, Type: smithy.ShapeTypeStructure})
+var sDescriptorSource_fromUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fromUrl", ID: &iDescriptorSourceFromUrl, Members: &mDescriptorSourceFromUrl, Type: smithy.ShapeTypeStructure})
+var sDescriptorSourceFromUrl_url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "url", ID: &i_DescriptorSourceUrl, Type: smithy.ShapeTypeString})
+var s_DescriptorTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString})
+var s_DiscoverableFilterValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_FilterValue, Type: smithy.ShapeTypeString})
+var sDiscoverableRegistryRecordSummary_registryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registryArn", ID: &i_RegistryArn, Type: smithy.ShapeTypeString})
+var sDiscoverableRegistryRecordSummary_recordArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recordArn", ID: &i_RegistryRecordArn, Type: smithy.ShapeTypeString})
+var sDiscoverableRegistryRecordSummary_recordId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recordId", ID: &i_RegistryRecordId, Type: smithy.ShapeTypeString})
+var sDiscoverableRegistryRecordSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RegistryRecordName, Type: smithy.ShapeTypeString})
+var sDiscoverableRegistryRecordSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Traits: &t3, Type: smithy.ShapeTypeString})
+var sDiscoverableRegistryRecordSummary_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_RegistryRecordDisplayName, Type: smithy.ShapeTypeString})
+var sDiscoverableRegistryRecordSummary_recordType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recordType", ID: &iRecordType, Members: &mRecordType, Type: smithy.ShapeTypeEnum})
+var sDiscoverableRegistryRecordSummary_recordVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recordVersion", ID: &i_RegistryRecordVersion, Type: smithy.ShapeTypeString})
+var sDiscoverableRegistryRecordSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iRegistryRecordStatus, Members: &mRegistryRecordStatus, Type: smithy.ShapeTypeEnum})
+var sDiscoverableRegistryRecordSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_DateTimestamp, Traits: &t7, Type: smithy.ShapeTypeTimestamp})
+var sDiscoverableRegistryRecordSummary_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_DateTimestamp, Traits: &t7, Type: smithy.ShapeTypeTimestamp})
+var sDiscoverableRegistryRecordSummary_descriptorTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "descriptorTypes", ID: &i_DescriptorTypeList, Members: &m_DescriptorTypeList, Type: smithy.ShapeTypeList})
+var s_DiscoverableRegistryRecordSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDiscoverableRegistryRecordSummary, Members: &mDiscoverableRegistryRecordSummary, Type: smithy.ShapeTypeStructure})
+var sHttpDescriptor_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iDescriptorSource, Members: &mDescriptorSource, Type: smithy.ShapeTypeStructure})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString})
+var sMcpServerAdditionalData_tools = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tools", ID: &iMcpToolsDescriptor, Members: &mMcpToolsDescriptor, Type: smithy.ShapeTypeStructure})
+var sMcpServerDescriptor_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &i_DescriptorData, Traits: &t3, Type: smithy.ShapeTypeString})
+var sMcpServerDescriptor_dataSchemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSchemaVersion", ID: &i_DataSchemaVersion, Type: smithy.ShapeTypeString})
+var sMcpServerDescriptor_additionalData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalData", ID: &iMcpServerAdditionalData, Members: &mMcpServerAdditionalData, Type: smithy.ShapeTypeStructure})
+var sMcpServerDescriptor_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iDescriptorSource, Members: &mDescriptorSource, Type: smithy.ShapeTypeStructure})
+var sMcpToolsDescriptor_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &i_DescriptorData, Traits: &t3, Type: smithy.ShapeTypeString})
+var sMcpToolsDescriptor_dataSchemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSchemaVersion", ID: &i_DataSchemaVersion, Type: smithy.ShapeTypeString})
+var sRecordType_MCP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MCP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRecordType_AGENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AGENT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRecordType_CUSTOM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRecordType_SKILL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SKILL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRecordType_GATEWAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GATEWAY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_RegistryIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_RegistryIdentifier, Type: smithy.ShapeTypeString})
+var sRegistryRecordFilter_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &iRegistryRecordFilterName, Members: &mRegistryRecordFilterName, Type: smithy.ShapeTypeEnum})
+var sRegistryRecordFilter_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_DiscoverableFilterValues, Members: &m_DiscoverableFilterValues, Type: smithy.ShapeTypeList})
+var s_RegistryRecordFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRegistryRecordFilter, Members: &mRegistryRecordFilter, Type: smithy.ShapeTypeStructure})
+var sRegistryRecordFilterName_RECORD_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RECORD_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRegistryRecordFilterName_DESCRIPTOR_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DESCRIPTOR_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_RegistryRecordIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_RecordIdentifier, Type: smithy.ShapeTypeString})
+var sRegistryRecordsEntry_registryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registryId", ID: &i_RegistryIdentifier, Type: smithy.ShapeTypeString})
+var sRegistryRecordsEntry_recordIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recordIds", ID: &i_RegistryRecordIdList, Members: &m_RegistryRecordIdList, Type: smithy.ShapeTypeList})
+var s_RegistryRecordsEntryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRegistryRecordsEntry, Members: &mRegistryRecordsEntry, Type: smithy.ShapeTypeStructure})
+var sRegistryRecordStatus_DRAFT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DRAFT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRegistryRecordStatus_PENDING_APPROVAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_APPROVAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRegistryRecordStatus_APPROVED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APPROVED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRegistryRecordStatus_REJECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRegistryRecordStatus_DEPRECATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPRECATED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRegistryRecordStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRegistryRecordStatus_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRegistryRecordStatus_CREATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRegistryRecordStatus_UPDATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRegistryRecordSummary_registryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registryArn", ID: &i_RegistryArn, Type: smithy.ShapeTypeString})
+var sRegistryRecordSummary_recordArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recordArn", ID: &i_RegistryRecordArn, Type: smithy.ShapeTypeString})
+var sRegistryRecordSummary_recordId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recordId", ID: &i_RegistryRecordId, Type: smithy.ShapeTypeString})
+var sRegistryRecordSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RegistryRecordName, Type: smithy.ShapeTypeString})
+var sRegistryRecordSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Traits: &t3, Type: smithy.ShapeTypeString})
+var sRegistryRecordSummary_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_RegistryRecordDisplayName, Type: smithy.ShapeTypeString})
+var sRegistryRecordSummary_recordType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recordType", ID: &iRecordType, Members: &mRecordType, Type: smithy.ShapeTypeEnum})
+var sRegistryRecordSummary_descriptors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "descriptors", ID: &iDescriptors, Members: &mDescriptors, Type: smithy.ShapeTypeStructure})
+var sRegistryRecordSummary_recordVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recordVersion", ID: &i_RegistryRecordVersion, Type: smithy.ShapeTypeString})
+var sRegistryRecordSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iRegistryRecordStatus, Members: &mRegistryRecordStatus, Type: smithy.ShapeTypeEnum})
+var sRegistryRecordSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_DateTimestamp, Traits: &t7, Type: smithy.ShapeTypeTimestamp})
+var sRegistryRecordSummary_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_DateTimestamp, Traits: &t7, Type: smithy.ShapeTypeTimestamp})
+var sRegistryRecordSummary_customMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customMetadata", ID: &i_CustomMetadataDocument, Traits: &t3, Type: smithy.ShapeTypeDocument})
+var s_RegistryRecordSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRegistryRecordSummary, Members: &mRegistryRecordSummary, Type: smithy.ShapeTypeStructure})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString})
+var sUnauthorizedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sValidationException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum})
+var sValidationException_fieldList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldList", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList})
+var sValidationExceptionField_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString})
+var sValidationExceptionField_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionReason_CANNOT_PARSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANNOT_PARSE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionReason_FIELD_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIELD_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionReason_IDEMPOTENT_PARAMETER_MISMATCH_EXCEPTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IDEMPOTENT_PARAMETER_MISMATCH_EXCEPTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionReason_ROOT_EVENT_IN_OTHER_SESSION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROOT_EVENT_IN_OTHER_SESSION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionReason_RESOURCE_CONFLICT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_CONFLICT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBatchGetDiscoverableRegistryRecordRequest_entries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entries", ID: &i_RegistryRecordsEntryList, Members: &m_RegistryRecordsEntryList, Type: smithy.ShapeTypeList})
+var sBatchGetDiscoverableRegistryRecordResponse_registryRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registryRecords", ID: &i_RegistryRecordSummaryList, Members: &m_RegistryRecordSummaryList, Type: smithy.ShapeTypeList})
+var sBatchGetDiscoverableRegistryRecordResponse_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_BatchGetDiscoverableRegistryRecordErrorList, Members: &m_BatchGetDiscoverableRegistryRecordErrorList, Type: smithy.ShapeTypeList})
+var sListDiscoverableRegistryRecordsRequest_registryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registryId", ID: &i_RegistryIdentifier, Traits: &t13, Type: smithy.ShapeTypeString})
+var sListDiscoverableRegistryRecordsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sListDiscoverableRegistryRecordsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListDiscoverableRegistryRecordsRequest_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_RegistryRecordFilterList, Members: &m_RegistryRecordFilterList, Type: smithy.ShapeTypeList})
+var sListDiscoverableRegistryRecordsResponse_registryRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registryRecords", ID: &i_DiscoverableRegistryRecordSummaryList, Members: &m_DiscoverableRegistryRecordSummaryList, Type: smithy.ShapeTypeList})
+var sListDiscoverableRegistryRecordsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sSearchDiscoverableRegistryRecordsRequest_searchQuery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "searchQuery", ID: &i_SearchQuery, Traits: &t3, Type: smithy.ShapeTypeString})
+var sSearchDiscoverableRegistryRecordsRequest_registryIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registryIds", ID: &i_RegistryIdList, Members: &m_RegistryIdList, Type: smithy.ShapeTypeList})
+var sSearchDiscoverableRegistryRecordsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sSearchDiscoverableRegistryRecordsRequest_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_MetadataFilterExpression, Traits: &t3, Type: smithy.ShapeTypeDocument})
+var sSearchDiscoverableRegistryRecordsResponse_registryRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registryRecords", ID: &i_RegistryRecordSummaryList, Members: &m_RegistryRecordSummaryList, Type: smithy.ShapeTypeList})
+
+var BatchGetDiscoverableRegistryRecord = &sBatchGetDiscoverableRegistryRecord
+
+var ListDiscoverableRegistryRecords = &sListDiscoverableRegistryRecords
+
+var SearchDiscoverableRegistryRecords = &sSearchDiscoverableRegistryRecords
+
+var _AgentRegistry = &s_AgentRegistry
+
+var A2aAgentCardDescriptor = &sA2aAgentCardDescriptor
+var A2aAgentCardDescriptor_data = &sA2aAgentCardDescriptor_data
+var A2aAgentCardDescriptor_dataSchemaVersion = &sA2aAgentCardDescriptor_dataSchemaVersion
+var A2aAgentCardDescriptor_source = &sA2aAgentCardDescriptor_source
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var AgentSkillsAdditionalData = &sAgentSkillsAdditionalData
+var AgentSkillsAdditionalData_skillMd = &sAgentSkillsAdditionalData_skillMd
+
+var AgentSkillsDefinitionDescriptor = &sAgentSkillsDefinitionDescriptor
+var AgentSkillsDefinitionDescriptor_data = &sAgentSkillsDefinitionDescriptor_data
+var AgentSkillsDefinitionDescriptor_dataSchemaVersion = &sAgentSkillsDefinitionDescriptor_dataSchemaVersion
+var AgentSkillsDefinitionDescriptor_additionalData = &sAgentSkillsDefinitionDescriptor_additionalData
+
+var AgentSkillsMdDescriptor = &sAgentSkillsMdDescriptor
+var AgentSkillsMdDescriptor_data = &sAgentSkillsMdDescriptor_data
+var AgentSkillsMdDescriptor_dataSchemaVersion = &sAgentSkillsMdDescriptor_dataSchemaVersion
+var AgentSkillsMdDescriptor_source = &sAgentSkillsMdDescriptor_source
+
+var AgUiDescriptor = &sAgUiDescriptor
+var AgUiDescriptor_source = &sAgUiDescriptor_source
+
+var BatchGetDiscoverableRegistryRecordError = &sBatchGetDiscoverableRegistryRecordError
+var BatchGetDiscoverableRegistryRecordError_registryId = &sBatchGetDiscoverableRegistryRecordError_registryId
+var BatchGetDiscoverableRegistryRecordError_recordId = &sBatchGetDiscoverableRegistryRecordError_recordId
+var BatchGetDiscoverableRegistryRecordError_errorCode = &sBatchGetDiscoverableRegistryRecordError_errorCode
+var BatchGetDiscoverableRegistryRecordError_message = &sBatchGetDiscoverableRegistryRecordError_message
+
+var BatchGetDiscoverableRegistryRecordErrorCode = &sBatchGetDiscoverableRegistryRecordErrorCode
+var BatchGetDiscoverableRegistryRecordErrorCode_RESOURCE_NOT_FOUND = &sBatchGetDiscoverableRegistryRecordErrorCode_RESOURCE_NOT_FOUND
+var BatchGetDiscoverableRegistryRecordErrorCode_ACCESS_DENIED = &sBatchGetDiscoverableRegistryRecordErrorCode_ACCESS_DENIED
+var BatchGetDiscoverableRegistryRecordErrorCode_INTERNAL_ERROR = &sBatchGetDiscoverableRegistryRecordErrorCode_INTERNAL_ERROR
+
+var _BatchGetDiscoverableRegistryRecordErrorList = &s_BatchGetDiscoverableRegistryRecordErrorList
+var _BatchGetDiscoverableRegistryRecordErrorList_member = &s_BatchGetDiscoverableRegistryRecordErrorList_member
+
+var CustomDescriptor = &sCustomDescriptor
+var CustomDescriptor_data = &sCustomDescriptor_data
+
+var _CustomMetadataDocument = &s_CustomMetadataDocument
+
+var _DataSchemaVersion = &s_DataSchemaVersion
+
+var _DateTimestamp = &s_DateTimestamp
+
+var _Description = &s_Description
+
+var _DescriptorData = &s_DescriptorData
+
+var Descriptors = &sDescriptors
+var Descriptors_mcpServer = &sDescriptors_mcpServer
+var Descriptors_a2aAgentCard = &sDescriptors_a2aAgentCard
+var Descriptors_agentSkillsDefinition = &sDescriptors_agentSkillsDefinition
+var Descriptors_custom = &sDescriptors_custom
+var Descriptors_http = &sDescriptors_http
+var Descriptors_agui = &sDescriptors_agui
+
+var DescriptorSource = &sDescriptorSource
+var DescriptorSource_fromUrl = &sDescriptorSource_fromUrl
+
+var DescriptorSourceFromUrl = &sDescriptorSourceFromUrl
+var DescriptorSourceFromUrl_url = &sDescriptorSourceFromUrl_url
+
+var _DescriptorSourceUrl = &s_DescriptorSourceUrl
+
+var _DescriptorTypeList = &s_DescriptorTypeList
+var _DescriptorTypeList_member = &s_DescriptorTypeList_member
+
+var _DiscoverableFilterValues = &s_DiscoverableFilterValues
+var _DiscoverableFilterValues_member = &s_DiscoverableFilterValues_member
+
+var DiscoverableRegistryRecordSummary = &sDiscoverableRegistryRecordSummary
+var DiscoverableRegistryRecordSummary_registryArn = &sDiscoverableRegistryRecordSummary_registryArn
+var DiscoverableRegistryRecordSummary_recordArn = &sDiscoverableRegistryRecordSummary_recordArn
+var DiscoverableRegistryRecordSummary_recordId = &sDiscoverableRegistryRecordSummary_recordId
+var DiscoverableRegistryRecordSummary_name = &sDiscoverableRegistryRecordSummary_name
+var DiscoverableRegistryRecordSummary_description = &sDiscoverableRegistryRecordSummary_description
+var DiscoverableRegistryRecordSummary_displayName = &sDiscoverableRegistryRecordSummary_displayName
+var DiscoverableRegistryRecordSummary_recordType = &sDiscoverableRegistryRecordSummary_recordType
+var DiscoverableRegistryRecordSummary_recordVersion = &sDiscoverableRegistryRecordSummary_recordVersion
+var DiscoverableRegistryRecordSummary_status = &sDiscoverableRegistryRecordSummary_status
+var DiscoverableRegistryRecordSummary_createdAt = &sDiscoverableRegistryRecordSummary_createdAt
+var DiscoverableRegistryRecordSummary_updatedAt = &sDiscoverableRegistryRecordSummary_updatedAt
+var DiscoverableRegistryRecordSummary_descriptorTypes = &sDiscoverableRegistryRecordSummary_descriptorTypes
+
+var _DiscoverableRegistryRecordSummaryList = &s_DiscoverableRegistryRecordSummaryList
+var _DiscoverableRegistryRecordSummaryList_member = &s_DiscoverableRegistryRecordSummaryList_member
+
+var _FilterValue = &s_FilterValue
+
+var HttpDescriptor = &sHttpDescriptor
+var HttpDescriptor_source = &sHttpDescriptor_source
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+
+var McpServerAdditionalData = &sMcpServerAdditionalData
+var McpServerAdditionalData_tools = &sMcpServerAdditionalData_tools
+
+var McpServerDescriptor = &sMcpServerDescriptor
+var McpServerDescriptor_data = &sMcpServerDescriptor_data
+var McpServerDescriptor_dataSchemaVersion = &sMcpServerDescriptor_dataSchemaVersion
+var McpServerDescriptor_additionalData = &sMcpServerDescriptor_additionalData
+var McpServerDescriptor_source = &sMcpServerDescriptor_source
+
+var McpToolsDescriptor = &sMcpToolsDescriptor
+var McpToolsDescriptor_data = &sMcpToolsDescriptor_data
+var McpToolsDescriptor_dataSchemaVersion = &sMcpToolsDescriptor_dataSchemaVersion
+
+var _MetadataFilterExpression = &s_MetadataFilterExpression
+
+var _NonBlankString = &s_NonBlankString
+
+var _RecordIdentifier = &s_RecordIdentifier
+
+var RecordType = &sRecordType
+var RecordType_MCP = &sRecordType_MCP
+var RecordType_AGENT = &sRecordType_AGENT
+var RecordType_CUSTOM = &sRecordType_CUSTOM
+var RecordType_SKILL = &sRecordType_SKILL
+var RecordType_GATEWAY = &sRecordType_GATEWAY
+
+var _RegistryArn = &s_RegistryArn
+
+var _RegistryIdentifier = &s_RegistryIdentifier
+
+var _RegistryIdList = &s_RegistryIdList
+var _RegistryIdList_member = &s_RegistryIdList_member
+
+var _RegistryRecordArn = &s_RegistryRecordArn
+
+var _RegistryRecordDisplayName = &s_RegistryRecordDisplayName
+
+var RegistryRecordFilter = &sRegistryRecordFilter
+var RegistryRecordFilter_name = &sRegistryRecordFilter_name
+var RegistryRecordFilter_values = &sRegistryRecordFilter_values
+
+var _RegistryRecordFilterList = &s_RegistryRecordFilterList
+var _RegistryRecordFilterList_member = &s_RegistryRecordFilterList_member
+
+var RegistryRecordFilterName = &sRegistryRecordFilterName
+var RegistryRecordFilterName_RECORD_TYPE = &sRegistryRecordFilterName_RECORD_TYPE
+var RegistryRecordFilterName_DESCRIPTOR_TYPE = &sRegistryRecordFilterName_DESCRIPTOR_TYPE
+
+var _RegistryRecordId = &s_RegistryRecordId
+
+var _RegistryRecordIdList = &s_RegistryRecordIdList
+var _RegistryRecordIdList_member = &s_RegistryRecordIdList_member
+
+var _RegistryRecordName = &s_RegistryRecordName
+
+var RegistryRecordsEntry = &sRegistryRecordsEntry
+var RegistryRecordsEntry_registryId = &sRegistryRecordsEntry_registryId
+var RegistryRecordsEntry_recordIds = &sRegistryRecordsEntry_recordIds
+
+var _RegistryRecordsEntryList = &s_RegistryRecordsEntryList
+var _RegistryRecordsEntryList_member = &s_RegistryRecordsEntryList_member
+
+var RegistryRecordStatus = &sRegistryRecordStatus
+var RegistryRecordStatus_DRAFT = &sRegistryRecordStatus_DRAFT
+var RegistryRecordStatus_PENDING_APPROVAL = &sRegistryRecordStatus_PENDING_APPROVAL
+var RegistryRecordStatus_APPROVED = &sRegistryRecordStatus_APPROVED
+var RegistryRecordStatus_REJECTED = &sRegistryRecordStatus_REJECTED
+var RegistryRecordStatus_DEPRECATED = &sRegistryRecordStatus_DEPRECATED
+var RegistryRecordStatus_CREATING = &sRegistryRecordStatus_CREATING
+var RegistryRecordStatus_UPDATING = &sRegistryRecordStatus_UPDATING
+var RegistryRecordStatus_CREATE_FAILED = &sRegistryRecordStatus_CREATE_FAILED
+var RegistryRecordStatus_UPDATE_FAILED = &sRegistryRecordStatus_UPDATE_FAILED
+
+var RegistryRecordSummary = &sRegistryRecordSummary
+var RegistryRecordSummary_registryArn = &sRegistryRecordSummary_registryArn
+var RegistryRecordSummary_recordArn = &sRegistryRecordSummary_recordArn
+var RegistryRecordSummary_recordId = &sRegistryRecordSummary_recordId
+var RegistryRecordSummary_name = &sRegistryRecordSummary_name
+var RegistryRecordSummary_description = &sRegistryRecordSummary_description
+var RegistryRecordSummary_displayName = &sRegistryRecordSummary_displayName
+var RegistryRecordSummary_recordType = &sRegistryRecordSummary_recordType
+var RegistryRecordSummary_descriptors = &sRegistryRecordSummary_descriptors
+var RegistryRecordSummary_recordVersion = &sRegistryRecordSummary_recordVersion
+var RegistryRecordSummary_status = &sRegistryRecordSummary_status
+var RegistryRecordSummary_createdAt = &sRegistryRecordSummary_createdAt
+var RegistryRecordSummary_updatedAt = &sRegistryRecordSummary_updatedAt
+var RegistryRecordSummary_customMetadata = &sRegistryRecordSummary_customMetadata
+
+var _RegistryRecordSummaryList = &s_RegistryRecordSummaryList
+var _RegistryRecordSummaryList_member = &s_RegistryRecordSummaryList_member
+
+var _RegistryRecordVersion = &s_RegistryRecordVersion
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+
+var _SearchQuery = &s_SearchQuery
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+
+var UnauthorizedException = &sUnauthorizedException
+var UnauthorizedException_message = &sUnauthorizedException_message
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+var ValidationException_reason = &sValidationException_reason
+var ValidationException_fieldList = &sValidationException_fieldList
+
+var ValidationExceptionField = &sValidationExceptionField
+var ValidationExceptionField_name = &sValidationExceptionField_name
+var ValidationExceptionField_message = &sValidationExceptionField_message
+
+var _ValidationExceptionFieldList = &s_ValidationExceptionFieldList
+var _ValidationExceptionFieldList_member = &s_ValidationExceptionFieldList_member
+
+var ValidationExceptionReason = &sValidationExceptionReason
+var ValidationExceptionReason_CANNOT_PARSE = &sValidationExceptionReason_CANNOT_PARSE
+var ValidationExceptionReason_FIELD_VALIDATION_FAILED = &sValidationExceptionReason_FIELD_VALIDATION_FAILED
+var ValidationExceptionReason_IDEMPOTENT_PARAMETER_MISMATCH_EXCEPTION = &sValidationExceptionReason_IDEMPOTENT_PARAMETER_MISMATCH_EXCEPTION
+var ValidationExceptionReason_ROOT_EVENT_IN_OTHER_SESSION = &sValidationExceptionReason_ROOT_EVENT_IN_OTHER_SESSION
+var ValidationExceptionReason_RESOURCE_CONFLICT = &sValidationExceptionReason_RESOURCE_CONFLICT
+
+var BatchGetDiscoverableRegistryRecordRequest = &sBatchGetDiscoverableRegistryRecordRequest
+var BatchGetDiscoverableRegistryRecordRequest_entries = &sBatchGetDiscoverableRegistryRecordRequest_entries
+
+var BatchGetDiscoverableRegistryRecordResponse = &sBatchGetDiscoverableRegistryRecordResponse
+var BatchGetDiscoverableRegistryRecordResponse_registryRecords = &sBatchGetDiscoverableRegistryRecordResponse_registryRecords
+var BatchGetDiscoverableRegistryRecordResponse_errors = &sBatchGetDiscoverableRegistryRecordResponse_errors
+
+var ListDiscoverableRegistryRecordsRequest = &sListDiscoverableRegistryRecordsRequest
+var ListDiscoverableRegistryRecordsRequest_registryId = &sListDiscoverableRegistryRecordsRequest_registryId
+var ListDiscoverableRegistryRecordsRequest_maxResults = &sListDiscoverableRegistryRecordsRequest_maxResults
+var ListDiscoverableRegistryRecordsRequest_nextToken = &sListDiscoverableRegistryRecordsRequest_nextToken
+var ListDiscoverableRegistryRecordsRequest_filters = &sListDiscoverableRegistryRecordsRequest_filters
+
+var ListDiscoverableRegistryRecordsResponse = &sListDiscoverableRegistryRecordsResponse
+var ListDiscoverableRegistryRecordsResponse_registryRecords = &sListDiscoverableRegistryRecordsResponse_registryRecords
+var ListDiscoverableRegistryRecordsResponse_nextToken = &sListDiscoverableRegistryRecordsResponse_nextToken
+
+var SearchDiscoverableRegistryRecordsRequest = &sSearchDiscoverableRegistryRecordsRequest
+var SearchDiscoverableRegistryRecordsRequest_searchQuery = &sSearchDiscoverableRegistryRecordsRequest_searchQuery
+var SearchDiscoverableRegistryRecordsRequest_registryIds = &sSearchDiscoverableRegistryRecordsRequest_registryIds
+var SearchDiscoverableRegistryRecordsRequest_maxResults = &sSearchDiscoverableRegistryRecordsRequest_maxResults
+var SearchDiscoverableRegistryRecordsRequest_filters = &sSearchDiscoverableRegistryRecordsRequest_filters
+
+var SearchDiscoverableRegistryRecordsResponse = &sSearchDiscoverableRegistryRecordsResponse
+var SearchDiscoverableRegistryRecordsResponse_registryRecords = &sSearchDiscoverableRegistryRecordsResponse_registryRecords
+
+var AgentRegistry = &smithy.ServiceSchema{Schema: &s_AgentRegistry, Version: "2025-12-01"}

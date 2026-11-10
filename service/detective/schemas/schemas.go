@@ -4,1949 +4,1493 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AcceptInvitation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "AcceptInvitation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+var (
+	iAcceptInvitation                          = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "AcceptInvitation"}
+	iBatchGetGraphMemberDatasources            = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "BatchGetGraphMemberDatasources"}
+	iBatchGetMembershipDatasources             = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "BatchGetMembershipDatasources"}
+	iCreateGraph                               = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "CreateGraph"}
+	iCreateMembers                             = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "CreateMembers"}
+	iDeleteGraph                               = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "DeleteGraph"}
+	iDeleteMembers                             = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "DeleteMembers"}
+	iDescribeOrganizationConfiguration         = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "DescribeOrganizationConfiguration"}
+	iDisableOrganizationAdminAccount           = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "DisableOrganizationAdminAccount"}
+	iDisassociateMembership                    = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "DisassociateMembership"}
+	iEnableOrganizationAdminAccount            = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "EnableOrganizationAdminAccount"}
+	iGetInvestigation                          = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "GetInvestigation"}
+	iGetMembers                                = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "GetMembers"}
+	iListDatasourcePackages                    = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "ListDatasourcePackages"}
+	iListGraphs                                = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "ListGraphs"}
+	iListIndicators                            = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "ListIndicators"}
+	iListInvestigations                        = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "ListInvestigations"}
+	iListInvitations                           = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "ListInvitations"}
+	iListMembers                               = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "ListMembers"}
+	iListOrganizationAdminAccounts             = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "ListOrganizationAdminAccounts"}
+	iListTagsForResource                       = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "ListTagsForResource"}
+	iRejectInvitation                          = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "RejectInvitation"}
+	iStartInvestigation                        = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "StartInvestigation"}
+	iStartMonitoringMember                     = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "StartMonitoringMember"}
+	iTagResource                               = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "TagResource"}
+	iUntagResource                             = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "UntagResource"}
+	iUpdateDatasourcePackages                  = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "UpdateDatasourcePackages"}
+	iUpdateInvestigationState                  = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "UpdateInvestigationState"}
+	iUpdateOrganizationConfiguration           = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "UpdateOrganizationConfiguration"}
+	i_AmazonDetective                          = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "AmazonDetective"}
+	iAccessDeniedException                     = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "AccessDeniedException"}
+	iAccount                                   = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "Account"}
+	i_AccountId                                = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "AccountId"}
+	i_AccountIdExtendedList                    = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "AccountIdExtendedList"}
+	i_AccountIdList                            = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "AccountIdList"}
+	i_AccountList                              = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "AccountList"}
+	iAdministrator                             = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "Administrator"}
+	i_AdministratorList                        = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "AdministratorList"}
+	i_AiPaginationToken                        = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "AiPaginationToken"}
+	i_APIFailureCount                          = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "APIFailureCount"}
+	i_APIName                                  = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "APIName"}
+	i_APISuccessCount                          = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "APISuccessCount"}
+	i_Aso                                      = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "Aso"}
+	i_Boolean                                  = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "Boolean"}
+	i_ByteValue                                = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "ByteValue"}
+	iConflictException                         = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "ConflictException"}
+	iDatasourcePackage                         = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "DatasourcePackage"}
+	iDatasourcePackageIngestDetail             = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "DatasourcePackageIngestDetail"}
+	i_DatasourcePackageIngestDetails           = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "DatasourcePackageIngestDetails"}
+	i_DatasourcePackageIngestHistory           = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "DatasourcePackageIngestHistory"}
+	iDatasourcePackageIngestState              = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "DatasourcePackageIngestState"}
+	i_DatasourcePackageIngestStates            = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "DatasourcePackageIngestStates"}
+	i_DatasourcePackageList                    = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "DatasourcePackageList"}
+	iDatasourcePackageUsageInfo                = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "DatasourcePackageUsageInfo"}
+	iDateFilter                                = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "DateFilter"}
+	i_EmailAddress                             = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "EmailAddress"}
+	i_EmailMessage                             = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "EmailMessage"}
+	i_EntityArn                                = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "EntityArn"}
+	iEntityType                                = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "EntityType"}
+	iErrorCode                                 = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "ErrorCode"}
+	i_ErrorCodeReason                          = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "ErrorCodeReason"}
+	i_ErrorMessage                             = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "ErrorMessage"}
+	iField                                     = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "Field"}
+	iFilterCriteria                            = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "FilterCriteria"}
+	iFlaggedIpAddressDetail                    = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "FlaggedIpAddressDetail"}
+	iGraph                                     = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "Graph"}
+	i_GraphArn                                 = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "GraphArn"}
+	i_GraphArnList                             = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "GraphArnList"}
+	i_GraphList                                = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "GraphList"}
+	i_HourlyTimeDelta                          = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "HourlyTimeDelta"}
+	i_Id                                       = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "Id"}
+	iImpossibleTravelDetail                    = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "ImpossibleTravelDetail"}
+	iIndicator                                 = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "Indicator"}
+	iIndicatorDetail                           = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "IndicatorDetail"}
+	i_Indicators                               = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "Indicators"}
+	iIndicatorType                             = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "IndicatorType"}
+	iInternalServerException                   = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "InternalServerException"}
+	iInvestigationDetail                       = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "InvestigationDetail"}
+	i_InvestigationDetails                     = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "InvestigationDetails"}
+	i_InvestigationId                          = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "InvestigationId"}
+	iInvitationType                            = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "InvitationType"}
+	i_IpAddress                                = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "IpAddress"}
+	i_IsNewForEntireAccount                    = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "IsNewForEntireAccount"}
+	i_LastIngestStateChangeDates               = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "LastIngestStateChangeDates"}
+	i_Location                                 = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "Location"}
+	i_MaxResults                               = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "MaxResults"}
+	iMemberDetail                              = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "MemberDetail"}
+	i_MemberDetailList                         = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "MemberDetailList"}
+	iMemberDisabledReason                      = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "MemberDisabledReason"}
+	i_MemberResultsLimit                       = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "MemberResultsLimit"}
+	iMembershipDatasources                     = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "MembershipDatasources"}
+	i_MembershipDatasourcesList                = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "MembershipDatasourcesList"}
+	iMemberStatus                              = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "MemberStatus"}
+	iNewAsoDetail                              = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "NewAsoDetail"}
+	iNewGeolocationDetail                      = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "NewGeolocationDetail"}
+	iNewUserAgentDetail                        = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "NewUserAgentDetail"}
+	i_PaginationToken                          = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "PaginationToken"}
+	i_Percentage                               = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "Percentage"}
+	i_Procedure                                = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "Procedure"}
+	iReason                                    = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "Reason"}
+	iRelatedFindingDetail                      = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "RelatedFindingDetail"}
+	iRelatedFindingGroupDetail                 = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "RelatedFindingGroupDetail"}
+	i_Resource                                 = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "Resource"}
+	i_ResourceList                             = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "ResourceList"}
+	iResourceNotFoundException                 = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "ResourceNotFoundException"}
+	iServiceQuotaExceededException             = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "ServiceQuotaExceededException"}
+	iSeverity                                  = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "Severity"}
+	iSortCriteria                              = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "SortCriteria"}
+	iSortOrder                                 = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "SortOrder"}
+	iState                                     = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "State"}
+	iStatus                                    = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "Status"}
+	iStringFilter                              = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "StringFilter"}
+	i_Tactic                                   = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "Tactic"}
+	i_TagKey                                   = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "TagKey"}
+	i_TagKeyList                               = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "TagKeyList"}
+	i_TagMap                                   = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "TagMap"}
+	i_TagValue                                 = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "TagValue"}
+	i_Technique                                = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "Technique"}
+	i_Timestamp                                = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "Timestamp"}
+	iTimestampForCollection                    = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "TimestampForCollection"}
+	iTooManyRequestsException                  = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "TooManyRequestsException"}
+	iTTPsObservedDetail                        = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "TTPsObservedDetail"}
+	i_Type                                     = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "Type"}
+	iUnprocessedAccount                        = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "UnprocessedAccount"}
+	i_UnprocessedAccountList                   = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "UnprocessedAccountList"}
+	iUnprocessedGraph                          = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "UnprocessedGraph"}
+	i_UnprocessedGraphList                     = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "UnprocessedGraphList"}
+	i_UnprocessedReason                        = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "UnprocessedReason"}
+	i_UserAgent                                = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "UserAgent"}
+	iValidationException                       = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "ValidationException"}
+	i_Value                                    = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "Value"}
+	i_VolumeUsageByDatasourcePackage           = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "VolumeUsageByDatasourcePackage"}
+	iAcceptInvitationRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "AcceptInvitationRequest"}
+	iBatchGetGraphMemberDatasourcesRequest     = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "BatchGetGraphMemberDatasourcesRequest"}
+	iBatchGetGraphMemberDatasourcesResponse    = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "BatchGetGraphMemberDatasourcesResponse"}
+	iBatchGetMembershipDatasourcesRequest      = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "BatchGetMembershipDatasourcesRequest"}
+	iBatchGetMembershipDatasourcesResponse     = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "BatchGetMembershipDatasourcesResponse"}
+	iCreateGraphRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "CreateGraphRequest"}
+	iCreateGraphResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "CreateGraphResponse"}
+	iCreateMembersRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "CreateMembersRequest"}
+	iCreateMembersResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "CreateMembersResponse"}
+	iDeleteGraphRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "DeleteGraphRequest"}
+	iDeleteMembersRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "DeleteMembersRequest"}
+	iDeleteMembersResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "DeleteMembersResponse"}
+	iDescribeOrganizationConfigurationRequest  = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "DescribeOrganizationConfigurationRequest"}
+	iDescribeOrganizationConfigurationResponse = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "DescribeOrganizationConfigurationResponse"}
+	iDisassociateMembershipRequest             = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "DisassociateMembershipRequest"}
+	iEnableOrganizationAdminAccountRequest     = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "EnableOrganizationAdminAccountRequest"}
+	iGetInvestigationRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "GetInvestigationRequest"}
+	iGetInvestigationResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "GetInvestigationResponse"}
+	iGetMembersRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "GetMembersRequest"}
+	iGetMembersResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "GetMembersResponse"}
+	iListDatasourcePackagesRequest             = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "ListDatasourcePackagesRequest"}
+	iListDatasourcePackagesResponse            = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "ListDatasourcePackagesResponse"}
+	iListGraphsRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "ListGraphsRequest"}
+	iListGraphsResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "ListGraphsResponse"}
+	iListIndicatorsRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "ListIndicatorsRequest"}
+	iListIndicatorsResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "ListIndicatorsResponse"}
+	iListInvestigationsRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "ListInvestigationsRequest"}
+	iListInvestigationsResponse                = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "ListInvestigationsResponse"}
+	iListInvitationsRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "ListInvitationsRequest"}
+	iListInvitationsResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "ListInvitationsResponse"}
+	iListMembersRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "ListMembersRequest"}
+	iListMembersResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "ListMembersResponse"}
+	iListOrganizationAdminAccountsRequest      = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "ListOrganizationAdminAccountsRequest"}
+	iListOrganizationAdminAccountsResponse     = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "ListOrganizationAdminAccountsResponse"}
+	iListTagsForResourceRequest                = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse               = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "ListTagsForResourceResponse"}
+	iRejectInvitationRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "RejectInvitationRequest"}
+	iStartInvestigationRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "StartInvestigationRequest"}
+	iStartInvestigationResponse                = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "StartInvestigationResponse"}
+	iStartMonitoringMemberRequest              = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "StartMonitoringMemberRequest"}
+	iTagResourceRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "TagResourceRequest"}
+	iTagResourceResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "TagResourceResponse"}
+	iUntagResourceRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "UntagResourceResponse"}
+	iUpdateDatasourcePackagesRequest           = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "UpdateDatasourcePackagesRequest"}
+	iUpdateInvestigationStateRequest           = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "UpdateInvestigationStateRequest"}
+	iUpdateOrganizationConfigurationRequest    = smithy.ShapeID{Namespace: "com.amazonaws.detective", Name: "UpdateOrganizationConfigurationRequest"}
+	pUnit                                      = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/invitation",
-	Code: 200})
-
-var BatchGetGraphMemberDatasources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "BatchGetGraphMemberDatasources",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/graph/datasources/get",
-	Code: 200})
-
-var BatchGetMembershipDatasources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "BatchGetMembershipDatasources",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/membership/datasources/get",
-	Code: 200})
-
-var CreateGraph = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "CreateGraph",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/graph",
-	Code: 200})
-
-var CreateMembers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "CreateMembers",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/graph/members",
-	Code: 200})
-
-var DeleteGraph = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "DeleteGraph",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/graph/removal",
-	Code: 200})
-
-var DeleteMembers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "DeleteMembers",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/graph/members/removal",
-	Code: 200})
-
-var DescribeOrganizationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "DescribeOrganizationConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/orgs/describeOrganizationConfiguration",
-	Code: 200})
-
-var DisableOrganizationAdminAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "DisableOrganizationAdminAccount",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/orgs/disableAdminAccount",
-	Code: 200})
-
-var DisassociateMembership = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "DisassociateMembership",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/membership/removal",
-	Code: 200})
-
-var EnableOrganizationAdminAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "EnableOrganizationAdminAccount",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/orgs/enableAdminAccount",
-	Code: 200})
-
-var GetInvestigation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "GetInvestigation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/investigations/getInvestigation",
-	Code: 200})
-
-var GetMembers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "GetMembers",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/graph/members/get",
-	Code: 200})
-
-var ListDatasourcePackages = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "ListDatasourcePackages",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/graph/datasources/list",
-	Code: 200})
-
-var ListGraphs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "ListGraphs",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/graphs/list",
-	Code: 200})
-
-var ListIndicators = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "ListIndicators",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/investigations/listIndicators",
-	Code: 200})
-
-var ListInvestigations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "ListInvestigations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/investigations/listInvestigations",
-	Code: 200})
-
-var ListInvitations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "ListInvitations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/invitations/list",
-	Code: 200})
-
-var ListMembers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "ListMembers",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/graph/members/list",
-	Code: 200})
-
-var ListOrganizationAdminAccounts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "ListOrganizationAdminAccounts",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/orgs/adminAccountslist",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var RejectInvitation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "RejectInvitation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/invitation/removal",
-	Code: 200})
-
-var StartInvestigation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "StartInvestigation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/investigations/startInvestigation",
-	Code: 200})
-
-var StartMonitoringMember = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "StartMonitoringMember",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/graph/member/monitoringstate",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags/{ResourceArn}",
-	Code: 204})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{ResourceArn}",
-	Code: 204})
-
-var UpdateDatasourcePackages = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "UpdateDatasourcePackages",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/graph/datasources/update",
-	Code: 200})
-
-var UpdateInvestigationState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "UpdateInvestigationState",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/investigations/updateInvestigationState",
-	Code: 200})
-
-var UpdateOrganizationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "UpdateOrganizationConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/orgs/updateOrganizationConfiguration",
-	Code: 200})
-
-var _AmazonDetective = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "AmazonDetective",
-}, smithy.ShapeTypeService, 0)
-
-var AmazonDetective = smithy.NewServiceSchema(_AmazonDetective, "2018-10-26")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var AccessDeniedException_ErrorCode *smithy.Schema
-
-var AccessDeniedException_ErrorCodeReason *smithy.Schema
-
-var AccessDeniedException_SubErrorCode *smithy.Schema
-
-var AccessDeniedException_SubErrorCodeReason *smithy.Schema
-
-var Account = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "Account",
-}, smithy.ShapeTypeStructure, 2)
-var Account_AccountId *smithy.Schema
-
-var Account_EmailAddress *smithy.Schema
-
-var _AccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "AccountId",
-}, smithy.ShapeTypeString, 0)
-
-var _AccountIdExtendedList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "AccountIdExtendedList",
-}, smithy.ShapeTypeList, 1)
-var _AccountIdExtendedList_member *smithy.Schema
-
-var _AccountIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "AccountIdList",
-}, smithy.ShapeTypeList, 1)
-var _AccountIdList_member *smithy.Schema
-
-var _AccountList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "AccountList",
-}, smithy.ShapeTypeList, 1)
-var _AccountList_member *smithy.Schema
-
-var Administrator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "Administrator",
-}, smithy.ShapeTypeStructure, 3)
-var Administrator_AccountId *smithy.Schema
-
-var Administrator_GraphArn *smithy.Schema
-
-var Administrator_DelegationTime *smithy.Schema
-
-var _AdministratorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "AdministratorList",
-}, smithy.ShapeTypeList, 1)
-var _AdministratorList_member *smithy.Schema
-
-var _AiPaginationToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "AiPaginationToken",
-}, smithy.ShapeTypeString, 0)
-
-var _APIFailureCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "APIFailureCount",
-}, smithy.ShapeTypeLong, 0)
-
-var _APIName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "APIName",
-}, smithy.ShapeTypeString, 0)
-
-var _APISuccessCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "APISuccessCount",
-}, smithy.ShapeTypeLong, 0)
-
-var _Aso = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "Aso",
-}, smithy.ShapeTypeString, 0)
-
-var _Boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "Boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _ByteValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "ByteValue",
-}, smithy.ShapeTypeLong, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_Message *smithy.Schema
-
-var DatasourcePackage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "DatasourcePackage",
-}, smithy.ShapeTypeEnum, 3)
-var DatasourcePackage_DETECTIVE_CORE *smithy.Schema
-
-var DatasourcePackage_EKS_AUDIT *smithy.Schema
-
-var DatasourcePackage_ASFF_SECURITYHUB_FINDING *smithy.Schema
-
-var DatasourcePackageIngestDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "DatasourcePackageIngestDetail",
-}, smithy.ShapeTypeStructure, 2)
-var DatasourcePackageIngestDetail_DatasourcePackageIngestState *smithy.Schema
-
-var DatasourcePackageIngestDetail_LastIngestStateChange *smithy.Schema
-
-var _DatasourcePackageIngestDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "DatasourcePackageIngestDetails",
-}, smithy.ShapeTypeMap, 2)
-var _DatasourcePackageIngestDetails_key *smithy.Schema
-
-var _DatasourcePackageIngestDetails_value *smithy.Schema
-
-var _DatasourcePackageIngestHistory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "DatasourcePackageIngestHistory",
-}, smithy.ShapeTypeMap, 2)
-var _DatasourcePackageIngestHistory_key *smithy.Schema
-
-var _DatasourcePackageIngestHistory_value *smithy.Schema
-
-var DatasourcePackageIngestState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "DatasourcePackageIngestState",
-}, smithy.ShapeTypeEnum, 3)
-var DatasourcePackageIngestState_STARTED *smithy.Schema
-
-var DatasourcePackageIngestState_STOPPED *smithy.Schema
-
-var DatasourcePackageIngestState_DISABLED *smithy.Schema
-
-var _DatasourcePackageIngestStates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "DatasourcePackageIngestStates",
-}, smithy.ShapeTypeMap, 2)
-var _DatasourcePackageIngestStates_key *smithy.Schema
-
-var _DatasourcePackageIngestStates_value *smithy.Schema
-
-var _DatasourcePackageList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "DatasourcePackageList",
-}, smithy.ShapeTypeList, 1)
-var _DatasourcePackageList_member *smithy.Schema
-
-var DatasourcePackageUsageInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "DatasourcePackageUsageInfo",
-}, smithy.ShapeTypeStructure, 2)
-var DatasourcePackageUsageInfo_VolumeUsageInBytes *smithy.Schema
-
-var DatasourcePackageUsageInfo_VolumeUsageUpdateTime *smithy.Schema
-
-var DateFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "DateFilter",
-}, smithy.ShapeTypeStructure, 2)
-var DateFilter_StartInclusive *smithy.Schema
-
-var DateFilter_EndInclusive *smithy.Schema
-
-var _EmailAddress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "EmailAddress",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _EmailMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "EmailMessage",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _EntityArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "EntityArn",
-}, smithy.ShapeTypeString, 0)
-
-var EntityType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "EntityType",
-}, smithy.ShapeTypeEnum, 2)
-var EntityType_IAM_ROLE *smithy.Schema
-
-var EntityType_IAM_USER *smithy.Schema
-
-var ErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "ErrorCode",
-}, smithy.ShapeTypeEnum, 3)
-var ErrorCode_InvalidGraphArn *smithy.Schema
-
-var ErrorCode_InvalidRequestBody *smithy.Schema
-
-var ErrorCode_InternalError *smithy.Schema
-
-var _ErrorCodeReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "ErrorCodeReason",
-}, smithy.ShapeTypeString, 0)
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var Field = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "Field",
-}, smithy.ShapeTypeEnum, 3)
-var Field_SEVERITY *smithy.Schema
-
-var Field_STATUS *smithy.Schema
-
-var Field_CREATED_TIME *smithy.Schema
-
-var FilterCriteria = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "FilterCriteria",
-}, smithy.ShapeTypeStructure, 5)
-var FilterCriteria_Severity *smithy.Schema
-
-var FilterCriteria_Status *smithy.Schema
-
-var FilterCriteria_State *smithy.Schema
-
-var FilterCriteria_EntityArn *smithy.Schema
-
-var FilterCriteria_CreatedTime *smithy.Schema
-
-var FlaggedIpAddressDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "FlaggedIpAddressDetail",
-}, smithy.ShapeTypeStructure, 2)
-var FlaggedIpAddressDetail_IpAddress *smithy.Schema
-
-var FlaggedIpAddressDetail_Reason *smithy.Schema
-
-var Graph = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "Graph",
-}, smithy.ShapeTypeStructure, 2)
-var Graph_Arn *smithy.Schema
-
-var Graph_CreatedTime *smithy.Schema
-
-var _GraphArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "GraphArn",
-}, smithy.ShapeTypeString, 0)
-
-var _GraphArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "GraphArnList",
-}, smithy.ShapeTypeList, 1)
-var _GraphArnList_member *smithy.Schema
-
-var _GraphList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "GraphList",
-}, smithy.ShapeTypeList, 1)
-var _GraphList_member *smithy.Schema
-
-var _HourlyTimeDelta = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "HourlyTimeDelta",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Id = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "Id",
-}, smithy.ShapeTypeString, 0)
-
-var ImpossibleTravelDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "ImpossibleTravelDetail",
-}, smithy.ShapeTypeStructure, 5)
-var ImpossibleTravelDetail_StartingIpAddress *smithy.Schema
-
-var ImpossibleTravelDetail_EndingIpAddress *smithy.Schema
-
-var ImpossibleTravelDetail_StartingLocation *smithy.Schema
-
-var ImpossibleTravelDetail_EndingLocation *smithy.Schema
-
-var ImpossibleTravelDetail_HourlyTimeDelta *smithy.Schema
-
-var Indicator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "Indicator",
-}, smithy.ShapeTypeStructure, 2)
-var Indicator_IndicatorType *smithy.Schema
-
-var Indicator_IndicatorDetail *smithy.Schema
-
-var IndicatorDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "IndicatorDetail",
-}, smithy.ShapeTypeStructure, 8)
-var IndicatorDetail_TTPsObservedDetail *smithy.Schema
-
-var IndicatorDetail_ImpossibleTravelDetail *smithy.Schema
-
-var IndicatorDetail_FlaggedIpAddressDetail *smithy.Schema
-
-var IndicatorDetail_NewGeolocationDetail *smithy.Schema
-
-var IndicatorDetail_NewAsoDetail *smithy.Schema
-
-var IndicatorDetail_NewUserAgentDetail *smithy.Schema
-
-var IndicatorDetail_RelatedFindingDetail *smithy.Schema
-
-var IndicatorDetail_RelatedFindingGroupDetail *smithy.Schema
-
-var _Indicators = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "Indicators",
-}, smithy.ShapeTypeList, 1)
-var _Indicators_member *smithy.Schema
-
-var IndicatorType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "IndicatorType",
-}, smithy.ShapeTypeEnum, 8)
-var IndicatorType_TTP_OBSERVED *smithy.Schema
-
-var IndicatorType_IMPOSSIBLE_TRAVEL *smithy.Schema
-
-var IndicatorType_FLAGGED_IP_ADDRESS *smithy.Schema
-
-var IndicatorType_NEW_GEOLOCATION *smithy.Schema
-
-var IndicatorType_NEW_ASO *smithy.Schema
-
-var IndicatorType_NEW_USER_AGENT *smithy.Schema
-
-var IndicatorType_RELATED_FINDING *smithy.Schema
-
-var IndicatorType_RELATED_FINDING_GROUP *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_Message *smithy.Schema
-
-var InvestigationDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "InvestigationDetail",
-}, smithy.ShapeTypeStructure, 7)
-var InvestigationDetail_InvestigationId *smithy.Schema
-
-var InvestigationDetail_Severity *smithy.Schema
-
-var InvestigationDetail_Status *smithy.Schema
-
-var InvestigationDetail_State *smithy.Schema
-
-var InvestigationDetail_CreatedTime *smithy.Schema
-
-var InvestigationDetail_EntityArn *smithy.Schema
-
-var InvestigationDetail_EntityType *smithy.Schema
-
-var _InvestigationDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "InvestigationDetails",
-}, smithy.ShapeTypeList, 1)
-var _InvestigationDetails_member *smithy.Schema
-
-var _InvestigationId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "InvestigationId",
-}, smithy.ShapeTypeString, 0)
-
-var InvitationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "InvitationType",
-}, smithy.ShapeTypeEnum, 2)
-var InvitationType_INVITATION *smithy.Schema
-
-var InvitationType_ORGANIZATION *smithy.Schema
-
-var _IpAddress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "IpAddress",
-}, smithy.ShapeTypeString, 0)
-
-var _IsNewForEntireAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "IsNewForEntireAccount",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _LastIngestStateChangeDates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "LastIngestStateChangeDates",
-}, smithy.ShapeTypeMap, 2)
-var _LastIngestStateChangeDates_key *smithy.Schema
-
-var _LastIngestStateChangeDates_value *smithy.Schema
-
-var _Location = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "Location",
-}, smithy.ShapeTypeString, 0)
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var MemberDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "MemberDetail",
-}, smithy.ShapeTypeStructure, 16)
-var MemberDetail_AccountId *smithy.Schema
-
-var MemberDetail_EmailAddress *smithy.Schema
-
-var MemberDetail_GraphArn *smithy.Schema
-
-var MemberDetail_MasterId *smithy.Schema
-
-var MemberDetail_AdministratorId *smithy.Schema
-
-var MemberDetail_Status *smithy.Schema
-
-var MemberDetail_DisabledReason *smithy.Schema
-
-var MemberDetail_InvitedTime *smithy.Schema
-
-var MemberDetail_UpdatedTime *smithy.Schema
-
-var MemberDetail_VolumeUsageInBytes *smithy.Schema
-
-var MemberDetail_VolumeUsageUpdatedTime *smithy.Schema
-
-var MemberDetail_PercentOfGraphUtilization *smithy.Schema
-
-var MemberDetail_PercentOfGraphUtilizationUpdatedTime *smithy.Schema
-
-var MemberDetail_InvitationType *smithy.Schema
-
-var MemberDetail_VolumeUsageByDatasourcePackage *smithy.Schema
-
-var MemberDetail_DatasourcePackageIngestStates *smithy.Schema
-
-var _MemberDetailList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "MemberDetailList",
-}, smithy.ShapeTypeList, 1)
-var _MemberDetailList_member *smithy.Schema
-
-var MemberDisabledReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "MemberDisabledReason",
-}, smithy.ShapeTypeEnum, 2)
-var MemberDisabledReason_VOLUME_TOO_HIGH *smithy.Schema
-
-var MemberDisabledReason_VOLUME_UNKNOWN *smithy.Schema
-
-var _MemberResultsLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "MemberResultsLimit",
-}, smithy.ShapeTypeInteger, 0)
-
-var MembershipDatasources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "MembershipDatasources",
-}, smithy.ShapeTypeStructure, 3)
-var MembershipDatasources_AccountId *smithy.Schema
-
-var MembershipDatasources_GraphArn *smithy.Schema
-
-var MembershipDatasources_DatasourcePackageIngestHistory *smithy.Schema
-
-var _MembershipDatasourcesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "MembershipDatasourcesList",
-}, smithy.ShapeTypeList, 1)
-var _MembershipDatasourcesList_member *smithy.Schema
-
-var MemberStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "MemberStatus",
-}, smithy.ShapeTypeEnum, 5)
-var MemberStatus_INVITED *smithy.Schema
-
-var MemberStatus_VERIFICATION_IN_PROGRESS *smithy.Schema
-
-var MemberStatus_VERIFICATION_FAILED *smithy.Schema
-
-var MemberStatus_ENABLED *smithy.Schema
-
-var MemberStatus_ACCEPTED_BUT_DISABLED *smithy.Schema
-
-var NewAsoDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "NewAsoDetail",
-}, smithy.ShapeTypeStructure, 2)
-var NewAsoDetail_Aso *smithy.Schema
-
-var NewAsoDetail_IsNewForEntireAccount *smithy.Schema
-
-var NewGeolocationDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "NewGeolocationDetail",
-}, smithy.ShapeTypeStructure, 3)
-var NewGeolocationDetail_Location *smithy.Schema
-
-var NewGeolocationDetail_IpAddress *smithy.Schema
-
-var NewGeolocationDetail_IsNewForEntireAccount *smithy.Schema
-
-var NewUserAgentDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "NewUserAgentDetail",
-}, smithy.ShapeTypeStructure, 2)
-var NewUserAgentDetail_UserAgent *smithy.Schema
-
-var NewUserAgentDetail_IsNewForEntireAccount *smithy.Schema
-
-var _PaginationToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "PaginationToken",
-}, smithy.ShapeTypeString, 0)
-
-var _Percentage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "Percentage",
-}, smithy.ShapeTypeDouble, 0)
-
-var _Procedure = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "Procedure",
-}, smithy.ShapeTypeString, 0)
-
-var Reason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "Reason",
-}, smithy.ShapeTypeEnum, 1)
-var Reason_AWS_THREAT_INTELLIGENCE *smithy.Schema
-
-var RelatedFindingDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "RelatedFindingDetail",
-}, smithy.ShapeTypeStructure, 3)
-var RelatedFindingDetail_Arn *smithy.Schema
-
-var RelatedFindingDetail_Type *smithy.Schema
-
-var RelatedFindingDetail_IpAddress *smithy.Schema
-
-var RelatedFindingGroupDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "RelatedFindingGroupDetail",
-}, smithy.ShapeTypeStructure, 1)
-var RelatedFindingGroupDetail_Id *smithy.Schema
-
-var _Resource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "Resource",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "ResourceList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceList_member *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_Message *smithy.Schema
-
-var ServiceQuotaExceededException_Resources *smithy.Schema
-
-var Severity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "Severity",
-}, smithy.ShapeTypeEnum, 5)
-var Severity_INFORMATIONAL *smithy.Schema
-
-var Severity_LOW *smithy.Schema
-
-var Severity_MEDIUM *smithy.Schema
-
-var Severity_HIGH *smithy.Schema
-
-var Severity_CRITICAL *smithy.Schema
-
-var SortCriteria = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "SortCriteria",
-}, smithy.ShapeTypeStructure, 2)
-var SortCriteria_Field *smithy.Schema
-
-var SortCriteria_SortOrder *smithy.Schema
-
-var SortOrder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "SortOrder",
-}, smithy.ShapeTypeEnum, 2)
-var SortOrder_ASC *smithy.Schema
-
-var SortOrder_DESC *smithy.Schema
-
-var State = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "State",
-}, smithy.ShapeTypeEnum, 2)
-var State_ACTIVE *smithy.Schema
-
-var State_ARCHIVED *smithy.Schema
-
-var Status = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "Status",
-}, smithy.ShapeTypeEnum, 3)
-var Status_RUNNING *smithy.Schema
-
-var Status_FAILED *smithy.Schema
-
-var Status_SUCCESSFUL *smithy.Schema
-
-var StringFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "StringFilter",
-}, smithy.ShapeTypeStructure, 1)
-var StringFilter_Value *smithy.Schema
-
-var _Tactic = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "Tactic",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "TagMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagMap_key *smithy.Schema
-
-var _TagMap_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _Technique = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "Technique",
-}, smithy.ShapeTypeString, 0)
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
-
-var TimestampForCollection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "TimestampForCollection",
-}, smithy.ShapeTypeStructure, 1)
-var TimestampForCollection_Timestamp *smithy.Schema
-
-var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var TooManyRequestsException_Message *smithy.Schema
-
-var TTPsObservedDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "TTPsObservedDetail",
-}, smithy.ShapeTypeStructure, 7)
-var TTPsObservedDetail_Tactic *smithy.Schema
-
-var TTPsObservedDetail_Technique *smithy.Schema
-
-var TTPsObservedDetail_Procedure *smithy.Schema
-
-var TTPsObservedDetail_IpAddress *smithy.Schema
-
-var TTPsObservedDetail_APIName *smithy.Schema
-
-var TTPsObservedDetail_APISuccessCount *smithy.Schema
-
-var TTPsObservedDetail_APIFailureCount *smithy.Schema
-
-var _Type = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "Type",
-}, smithy.ShapeTypeString, 0)
-
-var UnprocessedAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "UnprocessedAccount",
-}, smithy.ShapeTypeStructure, 2)
-var UnprocessedAccount_AccountId *smithy.Schema
-
-var UnprocessedAccount_Reason *smithy.Schema
-
-var _UnprocessedAccountList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "UnprocessedAccountList",
-}, smithy.ShapeTypeList, 1)
-var _UnprocessedAccountList_member *smithy.Schema
-
-var UnprocessedGraph = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "UnprocessedGraph",
-}, smithy.ShapeTypeStructure, 2)
-var UnprocessedGraph_GraphArn *smithy.Schema
-
-var UnprocessedGraph_Reason *smithy.Schema
-
-var _UnprocessedGraphList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "UnprocessedGraphList",
-}, smithy.ShapeTypeList, 1)
-var _UnprocessedGraphList_member *smithy.Schema
-
-var _UnprocessedReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "UnprocessedReason",
-}, smithy.ShapeTypeString, 0)
-
-var _UserAgent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "UserAgent",
-}, smithy.ShapeTypeString, 0)
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_Message *smithy.Schema
-
-var ValidationException_ErrorCode *smithy.Schema
-
-var ValidationException_ErrorCodeReason *smithy.Schema
-
-var _Value = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "Value",
-}, smithy.ShapeTypeString, 0)
-
-var _VolumeUsageByDatasourcePackage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "VolumeUsageByDatasourcePackage",
-}, smithy.ShapeTypeMap, 2)
-var _VolumeUsageByDatasourcePackage_key *smithy.Schema
-
-var _VolumeUsageByDatasourcePackage_value *smithy.Schema
-
-var AcceptInvitationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "AcceptInvitationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var AcceptInvitationRequest_GraphArn *smithy.Schema
-
-var BatchGetGraphMemberDatasourcesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "BatchGetGraphMemberDatasourcesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var BatchGetGraphMemberDatasourcesRequest_GraphArn *smithy.Schema
-
-var BatchGetGraphMemberDatasourcesRequest_AccountIds *smithy.Schema
-
-var BatchGetGraphMemberDatasourcesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "BatchGetGraphMemberDatasourcesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var BatchGetGraphMemberDatasourcesResponse_MemberDatasources *smithy.Schema
-
-var BatchGetGraphMemberDatasourcesResponse_UnprocessedAccounts *smithy.Schema
-
-var BatchGetMembershipDatasourcesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "BatchGetMembershipDatasourcesRequest",
-}, smithy.ShapeTypeStructure, 1)
-var BatchGetMembershipDatasourcesRequest_GraphArns *smithy.Schema
-
-var BatchGetMembershipDatasourcesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "BatchGetMembershipDatasourcesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var BatchGetMembershipDatasourcesResponse_MembershipDatasources *smithy.Schema
-
-var BatchGetMembershipDatasourcesResponse_UnprocessedGraphs *smithy.Schema
-
-var CreateGraphRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "CreateGraphRequest",
-}, smithy.ShapeTypeStructure, 1)
-var CreateGraphRequest_Tags *smithy.Schema
-
-var CreateGraphResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "CreateGraphResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateGraphResponse_GraphArn *smithy.Schema
-
-var CreateMembersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "CreateMembersRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateMembersRequest_GraphArn *smithy.Schema
-
-var CreateMembersRequest_Message *smithy.Schema
-
-var CreateMembersRequest_DisableEmailNotification *smithy.Schema
-
-var CreateMembersRequest_Accounts *smithy.Schema
-
-var CreateMembersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "CreateMembersResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateMembersResponse_Members *smithy.Schema
-
-var CreateMembersResponse_UnprocessedAccounts *smithy.Schema
-
-var DeleteGraphRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "DeleteGraphRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteGraphRequest_GraphArn *smithy.Schema
-
-var DeleteMembersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "DeleteMembersRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteMembersRequest_GraphArn *smithy.Schema
-
-var DeleteMembersRequest_AccountIds *smithy.Schema
-
-var DeleteMembersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "DeleteMembersResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteMembersResponse_AccountIds *smithy.Schema
-
-var DeleteMembersResponse_UnprocessedAccounts *smithy.Schema
-
-var DescribeOrganizationConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "DescribeOrganizationConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeOrganizationConfigurationRequest_GraphArn *smithy.Schema
-
-var DescribeOrganizationConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "DescribeOrganizationConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeOrganizationConfigurationResponse_AutoEnable *smithy.Schema
-
-var DisassociateMembershipRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "DisassociateMembershipRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DisassociateMembershipRequest_GraphArn *smithy.Schema
-
-var EnableOrganizationAdminAccountRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "EnableOrganizationAdminAccountRequest",
-}, smithy.ShapeTypeStructure, 1)
-var EnableOrganizationAdminAccountRequest_AccountId *smithy.Schema
-
-var GetInvestigationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "GetInvestigationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetInvestigationRequest_GraphArn *smithy.Schema
-
-var GetInvestigationRequest_InvestigationId *smithy.Schema
-
-var GetInvestigationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "GetInvestigationResponse",
-}, smithy.ShapeTypeStructure, 10)
-var GetInvestigationResponse_GraphArn *smithy.Schema
-
-var GetInvestigationResponse_InvestigationId *smithy.Schema
-
-var GetInvestigationResponse_EntityArn *smithy.Schema
-
-var GetInvestigationResponse_EntityType *smithy.Schema
-
-var GetInvestigationResponse_CreatedTime *smithy.Schema
-
-var GetInvestigationResponse_ScopeStartTime *smithy.Schema
-
-var GetInvestigationResponse_ScopeEndTime *smithy.Schema
-
-var GetInvestigationResponse_Status *smithy.Schema
-
-var GetInvestigationResponse_Severity *smithy.Schema
-
-var GetInvestigationResponse_State *smithy.Schema
-
-var GetMembersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "GetMembersRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetMembersRequest_GraphArn *smithy.Schema
-
-var GetMembersRequest_AccountIds *smithy.Schema
-
-var GetMembersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "GetMembersResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetMembersResponse_MemberDetails *smithy.Schema
-
-var GetMembersResponse_UnprocessedAccounts *smithy.Schema
-
-var ListDatasourcePackagesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "ListDatasourcePackagesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListDatasourcePackagesRequest_GraphArn *smithy.Schema
-
-var ListDatasourcePackagesRequest_NextToken *smithy.Schema
-
-var ListDatasourcePackagesRequest_MaxResults *smithy.Schema
-
-var ListDatasourcePackagesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "ListDatasourcePackagesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListDatasourcePackagesResponse_DatasourcePackages *smithy.Schema
-
-var ListDatasourcePackagesResponse_NextToken *smithy.Schema
-
-var ListGraphsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "ListGraphsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListGraphsRequest_NextToken *smithy.Schema
-
-var ListGraphsRequest_MaxResults *smithy.Schema
-
-var ListGraphsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "ListGraphsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListGraphsResponse_GraphList *smithy.Schema
-
-var ListGraphsResponse_NextToken *smithy.Schema
-
-var ListIndicatorsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "ListIndicatorsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListIndicatorsRequest_GraphArn *smithy.Schema
-
-var ListIndicatorsRequest_InvestigationId *smithy.Schema
-
-var ListIndicatorsRequest_IndicatorType *smithy.Schema
-
-var ListIndicatorsRequest_NextToken *smithy.Schema
-
-var ListIndicatorsRequest_MaxResults *smithy.Schema
-
-var ListIndicatorsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "ListIndicatorsResponse",
-}, smithy.ShapeTypeStructure, 4)
-var ListIndicatorsResponse_GraphArn *smithy.Schema
-
-var ListIndicatorsResponse_InvestigationId *smithy.Schema
-
-var ListIndicatorsResponse_NextToken *smithy.Schema
-
-var ListIndicatorsResponse_Indicators *smithy.Schema
-
-var ListInvestigationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "ListInvestigationsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListInvestigationsRequest_GraphArn *smithy.Schema
-
-var ListInvestigationsRequest_NextToken *smithy.Schema
-
-var ListInvestigationsRequest_MaxResults *smithy.Schema
-
-var ListInvestigationsRequest_FilterCriteria *smithy.Schema
-
-var ListInvestigationsRequest_SortCriteria *smithy.Schema
-
-var ListInvestigationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "ListInvestigationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListInvestigationsResponse_InvestigationDetails *smithy.Schema
-
-var ListInvestigationsResponse_NextToken *smithy.Schema
-
-var ListInvitationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "ListInvitationsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListInvitationsRequest_NextToken *smithy.Schema
-
-var ListInvitationsRequest_MaxResults *smithy.Schema
-
-var ListInvitationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "ListInvitationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListInvitationsResponse_Invitations *smithy.Schema
-
-var ListInvitationsResponse_NextToken *smithy.Schema
-
-var ListMembersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "ListMembersRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListMembersRequest_GraphArn *smithy.Schema
-
-var ListMembersRequest_NextToken *smithy.Schema
-
-var ListMembersRequest_MaxResults *smithy.Schema
-
-var ListMembersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "ListMembersResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListMembersResponse_MemberDetails *smithy.Schema
-
-var ListMembersResponse_NextToken *smithy.Schema
-
-var ListOrganizationAdminAccountsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "ListOrganizationAdminAccountsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListOrganizationAdminAccountsRequest_NextToken *smithy.Schema
-
-var ListOrganizationAdminAccountsRequest_MaxResults *smithy.Schema
-
-var ListOrganizationAdminAccountsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "ListOrganizationAdminAccountsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListOrganizationAdminAccountsResponse_Administrators *smithy.Schema
-
-var ListOrganizationAdminAccountsResponse_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var RejectInvitationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "RejectInvitationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var RejectInvitationRequest_GraphArn *smithy.Schema
-
-var StartInvestigationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "StartInvestigationRequest",
-}, smithy.ShapeTypeStructure, 4)
-var StartInvestigationRequest_GraphArn *smithy.Schema
-
-var StartInvestigationRequest_EntityArn *smithy.Schema
-
-var StartInvestigationRequest_ScopeStartTime *smithy.Schema
-
-var StartInvestigationRequest_ScopeEndTime *smithy.Schema
-
-var StartInvestigationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "StartInvestigationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartInvestigationResponse_InvestigationId *smithy.Schema
-
-var StartMonitoringMemberRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "StartMonitoringMemberRequest",
-}, smithy.ShapeTypeStructure, 2)
-var StartMonitoringMemberRequest_GraphArn *smithy.Schema
-
-var StartMonitoringMemberRequest_AccountId *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceArn *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceArn *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateDatasourcePackagesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "UpdateDatasourcePackagesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateDatasourcePackagesRequest_GraphArn *smithy.Schema
-
-var UpdateDatasourcePackagesRequest_DatasourcePackages *smithy.Schema
-
-var UpdateInvestigationStateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "UpdateInvestigationStateRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateInvestigationStateRequest_GraphArn *smithy.Schema
-
-var UpdateInvestigationStateRequest_InvestigationId *smithy.Schema
-
-var UpdateInvestigationStateRequest_State *smithy.Schema
-
-var UpdateOrganizationConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.detective",
-	Name:      "UpdateOrganizationConfigurationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateOrganizationConfigurationRequest_GraphArn *smithy.Schema
-
-var UpdateOrganizationConfigurationRequest_AutoEnable *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	ErrorCode_InvalidGraphArn = ErrorCode.AddMember("InvalidGraphArn", smithyprelude.Unit)
-
-	ErrorCode_InvalidRequestBody = ErrorCode.AddMember("InvalidRequestBody", smithyprelude.Unit)
-
-	ErrorCode_InternalError = ErrorCode.AddMember("InternalError", smithyprelude.Unit)
-
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _ErrorMessage)
-
-	AccessDeniedException_ErrorCode = AccessDeniedException.AddMember("ErrorCode", ErrorCode)
-
-	AccessDeniedException_ErrorCodeReason = AccessDeniedException.AddMember("ErrorCodeReason", _ErrorCodeReason)
-
-	AccessDeniedException_SubErrorCode = AccessDeniedException.AddMember("SubErrorCode", ErrorCode)
-
-	AccessDeniedException_SubErrorCodeReason = AccessDeniedException.AddMember("SubErrorCodeReason", _ErrorCodeReason)
-
-	Account_AccountId = Account.AddMember("AccountId", _AccountId)
-
-	Account_EmailAddress = Account.AddMember("EmailAddress", _EmailAddress)
-
-	_AccountIdExtendedList_member = _AccountIdExtendedList.AddMember("member", _AccountId)
-
-	_AccountIdList_member = _AccountIdList.AddMember("member", _AccountId)
-
-	_AccountList_member = _AccountList.AddMember("member", Account)
-
-	Administrator_AccountId = Administrator.AddMember("AccountId", _AccountId)
-
-	Administrator_GraphArn = Administrator.AddMember("GraphArn", _GraphArn)
-
-	Administrator_DelegationTime = Administrator.AddMember("DelegationTime", _Timestamp)
-
-	_AdministratorList_member = _AdministratorList.AddMember("member", Administrator)
-
-	ConflictException_Message = ConflictException.AddMember("Message", _ErrorMessage)
-
-	DatasourcePackage_DETECTIVE_CORE = DatasourcePackage.AddMember("DETECTIVE_CORE", smithyprelude.Unit)
-
-	DatasourcePackage_EKS_AUDIT = DatasourcePackage.AddMember("EKS_AUDIT", smithyprelude.Unit)
-
-	DatasourcePackage_ASFF_SECURITYHUB_FINDING = DatasourcePackage.AddMember("ASFF_SECURITYHUB_FINDING", smithyprelude.Unit)
-
-	DatasourcePackageIngestState_STARTED = DatasourcePackageIngestState.AddMember("STARTED", smithyprelude.Unit)
-
-	DatasourcePackageIngestState_STOPPED = DatasourcePackageIngestState.AddMember("STOPPED", smithyprelude.Unit)
-
-	DatasourcePackageIngestState_DISABLED = DatasourcePackageIngestState.AddMember("DISABLED", smithyprelude.Unit)
-
-	TimestampForCollection_Timestamp = TimestampForCollection.AddMember("Timestamp", _Timestamp)
-
-	_LastIngestStateChangeDates_key = _LastIngestStateChangeDates.AddMember("key", DatasourcePackageIngestState)
-
-	_LastIngestStateChangeDates_value = _LastIngestStateChangeDates.AddMember("value", TimestampForCollection)
-
-	DatasourcePackageIngestDetail_DatasourcePackageIngestState = DatasourcePackageIngestDetail.AddMember("DatasourcePackageIngestState", DatasourcePackageIngestState)
-
-	DatasourcePackageIngestDetail_LastIngestStateChange = DatasourcePackageIngestDetail.AddMember("LastIngestStateChange", _LastIngestStateChangeDates)
-
-	_DatasourcePackageIngestDetails_key = _DatasourcePackageIngestDetails.AddMember("key", DatasourcePackage)
-
-	_DatasourcePackageIngestDetails_value = _DatasourcePackageIngestDetails.AddMember("value", DatasourcePackageIngestDetail)
-
-	_DatasourcePackageIngestHistory_key = _DatasourcePackageIngestHistory.AddMember("key", DatasourcePackage)
-
-	_DatasourcePackageIngestHistory_value = _DatasourcePackageIngestHistory.AddMember("value", _LastIngestStateChangeDates)
-
-	_DatasourcePackageIngestStates_key = _DatasourcePackageIngestStates.AddMember("key", DatasourcePackage)
-
-	_DatasourcePackageIngestStates_value = _DatasourcePackageIngestStates.AddMember("value", DatasourcePackageIngestState)
-
-	_DatasourcePackageList_member = _DatasourcePackageList.AddMember("member", DatasourcePackage)
-
-	DatasourcePackageUsageInfo_VolumeUsageInBytes = DatasourcePackageUsageInfo.AddMember("VolumeUsageInBytes", _ByteValue)
-
-	DatasourcePackageUsageInfo_VolumeUsageUpdateTime = DatasourcePackageUsageInfo.AddMember("VolumeUsageUpdateTime", _Timestamp)
-
-	DateFilter_StartInclusive = DateFilter.AddMember("StartInclusive", _Timestamp)
-
-	DateFilter_EndInclusive = DateFilter.AddMember("EndInclusive", _Timestamp)
-
-	EntityType_IAM_ROLE = EntityType.AddMember("IAM_ROLE", smithyprelude.Unit)
-
-	EntityType_IAM_USER = EntityType.AddMember("IAM_USER", smithyprelude.Unit)
-
-	Field_SEVERITY = Field.AddMember("SEVERITY", smithyprelude.Unit)
-
-	Field_STATUS = Field.AddMember("STATUS", smithyprelude.Unit)
-
-	Field_CREATED_TIME = Field.AddMember("CREATED_TIME", smithyprelude.Unit)
-
-	StringFilter_Value = StringFilter.AddMember("Value", _Value)
-
-	FilterCriteria_Severity = FilterCriteria.AddMember("Severity", StringFilter)
-
-	FilterCriteria_Status = FilterCriteria.AddMember("Status", StringFilter)
-
-	FilterCriteria_State = FilterCriteria.AddMember("State", StringFilter)
-
-	FilterCriteria_EntityArn = FilterCriteria.AddMember("EntityArn", StringFilter)
-
-	FilterCriteria_CreatedTime = FilterCriteria.AddMember("CreatedTime", DateFilter)
-
-	Reason_AWS_THREAT_INTELLIGENCE = Reason.AddMember("AWS_THREAT_INTELLIGENCE", smithyprelude.Unit)
-
-	FlaggedIpAddressDetail_IpAddress = FlaggedIpAddressDetail.AddMember("IpAddress", _IpAddress)
-
-	FlaggedIpAddressDetail_Reason = FlaggedIpAddressDetail.AddMember("Reason", Reason)
-
-	Graph_Arn = Graph.AddMember("Arn", _GraphArn)
-
-	Graph_CreatedTime = Graph.AddMember("CreatedTime", _Timestamp)
-
-	_GraphArnList_member = _GraphArnList.AddMember("member", _GraphArn)
-
-	_GraphList_member = _GraphList.AddMember("member", Graph)
-
-	ImpossibleTravelDetail_StartingIpAddress = ImpossibleTravelDetail.AddMember("StartingIpAddress", _IpAddress)
-
-	ImpossibleTravelDetail_EndingIpAddress = ImpossibleTravelDetail.AddMember("EndingIpAddress", _IpAddress)
-
-	ImpossibleTravelDetail_StartingLocation = ImpossibleTravelDetail.AddMember("StartingLocation", _Location)
-
-	ImpossibleTravelDetail_EndingLocation = ImpossibleTravelDetail.AddMember("EndingLocation", _Location)
-
-	ImpossibleTravelDetail_HourlyTimeDelta = ImpossibleTravelDetail.AddMember("HourlyTimeDelta", _HourlyTimeDelta)
-
-	IndicatorType_TTP_OBSERVED = IndicatorType.AddMember("TTP_OBSERVED", smithyprelude.Unit)
-
-	IndicatorType_IMPOSSIBLE_TRAVEL = IndicatorType.AddMember("IMPOSSIBLE_TRAVEL", smithyprelude.Unit)
-
-	IndicatorType_FLAGGED_IP_ADDRESS = IndicatorType.AddMember("FLAGGED_IP_ADDRESS", smithyprelude.Unit)
-
-	IndicatorType_NEW_GEOLOCATION = IndicatorType.AddMember("NEW_GEOLOCATION", smithyprelude.Unit)
-
-	IndicatorType_NEW_ASO = IndicatorType.AddMember("NEW_ASO", smithyprelude.Unit)
-
-	IndicatorType_NEW_USER_AGENT = IndicatorType.AddMember("NEW_USER_AGENT", smithyprelude.Unit)
-
-	IndicatorType_RELATED_FINDING = IndicatorType.AddMember("RELATED_FINDING", smithyprelude.Unit)
-
-	IndicatorType_RELATED_FINDING_GROUP = IndicatorType.AddMember("RELATED_FINDING_GROUP", smithyprelude.Unit)
-
-	TTPsObservedDetail_Tactic = TTPsObservedDetail.AddMember("Tactic", _Tactic)
-
-	TTPsObservedDetail_Technique = TTPsObservedDetail.AddMember("Technique", _Technique)
-
-	TTPsObservedDetail_Procedure = TTPsObservedDetail.AddMember("Procedure", _Procedure)
-
-	TTPsObservedDetail_IpAddress = TTPsObservedDetail.AddMember("IpAddress", _IpAddress)
-
-	TTPsObservedDetail_APIName = TTPsObservedDetail.AddMember("APIName", _APIName)
-
-	TTPsObservedDetail_APISuccessCount = TTPsObservedDetail.AddMember("APISuccessCount", _APISuccessCount)
-
-	TTPsObservedDetail_APIFailureCount = TTPsObservedDetail.AddMember("APIFailureCount", _APIFailureCount)
-
-	NewGeolocationDetail_Location = NewGeolocationDetail.AddMember("Location", _Location)
-
-	NewGeolocationDetail_IpAddress = NewGeolocationDetail.AddMember("IpAddress", _IpAddress)
-
-	NewGeolocationDetail_IsNewForEntireAccount = NewGeolocationDetail.AddMember("IsNewForEntireAccount", _IsNewForEntireAccount)
-
-	NewAsoDetail_Aso = NewAsoDetail.AddMember("Aso", _Aso)
-
-	NewAsoDetail_IsNewForEntireAccount = NewAsoDetail.AddMember("IsNewForEntireAccount", _IsNewForEntireAccount)
-
-	NewUserAgentDetail_UserAgent = NewUserAgentDetail.AddMember("UserAgent", _UserAgent)
-
-	NewUserAgentDetail_IsNewForEntireAccount = NewUserAgentDetail.AddMember("IsNewForEntireAccount", _IsNewForEntireAccount)
-
-	RelatedFindingDetail_Arn = RelatedFindingDetail.AddMember("Arn", _EntityArn)
-
-	RelatedFindingDetail_Type = RelatedFindingDetail.AddMember("Type", _Type)
-
-	RelatedFindingDetail_IpAddress = RelatedFindingDetail.AddMember("IpAddress", _IpAddress)
-
-	RelatedFindingGroupDetail_Id = RelatedFindingGroupDetail.AddMember("Id", _Id)
-
-	IndicatorDetail_TTPsObservedDetail = IndicatorDetail.AddMember("TTPsObservedDetail", TTPsObservedDetail)
-
-	IndicatorDetail_ImpossibleTravelDetail = IndicatorDetail.AddMember("ImpossibleTravelDetail", ImpossibleTravelDetail)
-
-	IndicatorDetail_FlaggedIpAddressDetail = IndicatorDetail.AddMember("FlaggedIpAddressDetail", FlaggedIpAddressDetail)
-
-	IndicatorDetail_NewGeolocationDetail = IndicatorDetail.AddMember("NewGeolocationDetail", NewGeolocationDetail)
-
-	IndicatorDetail_NewAsoDetail = IndicatorDetail.AddMember("NewAsoDetail", NewAsoDetail)
-
-	IndicatorDetail_NewUserAgentDetail = IndicatorDetail.AddMember("NewUserAgentDetail", NewUserAgentDetail)
-
-	IndicatorDetail_RelatedFindingDetail = IndicatorDetail.AddMember("RelatedFindingDetail", RelatedFindingDetail)
-
-	IndicatorDetail_RelatedFindingGroupDetail = IndicatorDetail.AddMember("RelatedFindingGroupDetail", RelatedFindingGroupDetail)
-
-	Indicator_IndicatorType = Indicator.AddMember("IndicatorType", IndicatorType)
-
-	Indicator_IndicatorDetail = Indicator.AddMember("IndicatorDetail", IndicatorDetail)
-
-	_Indicators_member = _Indicators.AddMember("member", Indicator)
-
-	InternalServerException_Message = InternalServerException.AddMember("Message", _ErrorMessage)
-
-	Severity_INFORMATIONAL = Severity.AddMember("INFORMATIONAL", smithyprelude.Unit)
-
-	Severity_LOW = Severity.AddMember("LOW", smithyprelude.Unit)
-
-	Severity_MEDIUM = Severity.AddMember("MEDIUM", smithyprelude.Unit)
-
-	Severity_HIGH = Severity.AddMember("HIGH", smithyprelude.Unit)
-
-	Severity_CRITICAL = Severity.AddMember("CRITICAL", smithyprelude.Unit)
-
-	Status_RUNNING = Status.AddMember("RUNNING", smithyprelude.Unit)
-
-	Status_FAILED = Status.AddMember("FAILED", smithyprelude.Unit)
-
-	Status_SUCCESSFUL = Status.AddMember("SUCCESSFUL", smithyprelude.Unit)
-
-	State_ACTIVE = State.AddMember("ACTIVE", smithyprelude.Unit)
-
-	State_ARCHIVED = State.AddMember("ARCHIVED", smithyprelude.Unit)
-
-	InvestigationDetail_InvestigationId = InvestigationDetail.AddMember("InvestigationId", _InvestigationId)
-
-	InvestigationDetail_Severity = InvestigationDetail.AddMember("Severity", Severity)
-
-	InvestigationDetail_Status = InvestigationDetail.AddMember("Status", Status)
-
-	InvestigationDetail_State = InvestigationDetail.AddMember("State", State)
-
-	InvestigationDetail_CreatedTime = InvestigationDetail.AddMember("CreatedTime", _Timestamp)
-
-	InvestigationDetail_EntityArn = InvestigationDetail.AddMember("EntityArn", _EntityArn)
-
-	InvestigationDetail_EntityType = InvestigationDetail.AddMember("EntityType", EntityType)
-
-	_InvestigationDetails_member = _InvestigationDetails.AddMember("member", InvestigationDetail)
-
-	InvitationType_INVITATION = InvitationType.AddMember("INVITATION", smithyprelude.Unit)
-
-	InvitationType_ORGANIZATION = InvitationType.AddMember("ORGANIZATION", smithyprelude.Unit)
-
-	MemberStatus_INVITED = MemberStatus.AddMember("INVITED", smithyprelude.Unit)
-
-	MemberStatus_VERIFICATION_IN_PROGRESS = MemberStatus.AddMember("VERIFICATION_IN_PROGRESS", smithyprelude.Unit)
-
-	MemberStatus_VERIFICATION_FAILED = MemberStatus.AddMember("VERIFICATION_FAILED", smithyprelude.Unit)
-
-	MemberStatus_ENABLED = MemberStatus.AddMember("ENABLED", smithyprelude.Unit)
-
-	MemberStatus_ACCEPTED_BUT_DISABLED = MemberStatus.AddMember("ACCEPTED_BUT_DISABLED", smithyprelude.Unit)
-
-	MemberDisabledReason_VOLUME_TOO_HIGH = MemberDisabledReason.AddMember("VOLUME_TOO_HIGH", smithyprelude.Unit)
-
-	MemberDisabledReason_VOLUME_UNKNOWN = MemberDisabledReason.AddMember("VOLUME_UNKNOWN", smithyprelude.Unit)
-
-	_VolumeUsageByDatasourcePackage_key = _VolumeUsageByDatasourcePackage.AddMember("key", DatasourcePackage)
-
-	_VolumeUsageByDatasourcePackage_value = _VolumeUsageByDatasourcePackage.AddMember("value", DatasourcePackageUsageInfo)
-
-	MemberDetail_AccountId = MemberDetail.AddMember("AccountId", _AccountId)
-
-	MemberDetail_EmailAddress = MemberDetail.AddMember("EmailAddress", _EmailAddress)
-
-	MemberDetail_GraphArn = MemberDetail.AddMember("GraphArn", _GraphArn)
-
-	MemberDetail_MasterId = MemberDetail.AddMember("MasterId", _AccountId)
-
-	MemberDetail_AdministratorId = MemberDetail.AddMember("AdministratorId", _AccountId)
-
-	MemberDetail_Status = MemberDetail.AddMember("Status", MemberStatus)
-
-	MemberDetail_DisabledReason = MemberDetail.AddMember("DisabledReason", MemberDisabledReason)
-
-	MemberDetail_InvitedTime = MemberDetail.AddMember("InvitedTime", _Timestamp)
-
-	MemberDetail_UpdatedTime = MemberDetail.AddMember("UpdatedTime", _Timestamp)
-
-	MemberDetail_VolumeUsageInBytes = MemberDetail.AddMember("VolumeUsageInBytes", _ByteValue)
-
-	MemberDetail_VolumeUsageUpdatedTime = MemberDetail.AddMember("VolumeUsageUpdatedTime", _Timestamp)
-
-	MemberDetail_PercentOfGraphUtilization = MemberDetail.AddMember("PercentOfGraphUtilization", _Percentage)
-
-	MemberDetail_PercentOfGraphUtilizationUpdatedTime = MemberDetail.AddMember("PercentOfGraphUtilizationUpdatedTime", _Timestamp)
-
-	MemberDetail_InvitationType = MemberDetail.AddMember("InvitationType", InvitationType)
-
-	MemberDetail_VolumeUsageByDatasourcePackage = MemberDetail.AddMember("VolumeUsageByDatasourcePackage", _VolumeUsageByDatasourcePackage)
-
-	MemberDetail_DatasourcePackageIngestStates = MemberDetail.AddMember("DatasourcePackageIngestStates", _DatasourcePackageIngestStates)
-
-	_MemberDetailList_member = _MemberDetailList.AddMember("member", MemberDetail)
-
-	MembershipDatasources_AccountId = MembershipDatasources.AddMember("AccountId", _AccountId)
-
-	MembershipDatasources_GraphArn = MembershipDatasources.AddMember("GraphArn", _GraphArn)
-
-	MembershipDatasources_DatasourcePackageIngestHistory = MembershipDatasources.AddMember("DatasourcePackageIngestHistory", _DatasourcePackageIngestHistory)
-
-	_MembershipDatasourcesList_member = _MembershipDatasourcesList.AddMember("member", MembershipDatasources)
-
-	_ResourceList_member = _ResourceList.AddMember("member", _Resource)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _ErrorMessage)
-
-	ServiceQuotaExceededException_Message = ServiceQuotaExceededException.AddMember("Message", _ErrorMessage)
-
-	ServiceQuotaExceededException_Resources = ServiceQuotaExceededException.AddMember("Resources", _ResourceList)
-
-	SortOrder_ASC = SortOrder.AddMember("ASC", smithyprelude.Unit)
-
-	SortOrder_DESC = SortOrder.AddMember("DESC", smithyprelude.Unit)
-
-	SortCriteria_Field = SortCriteria.AddMember("Field", Field)
-
-	SortCriteria_SortOrder = SortCriteria.AddMember("SortOrder", SortOrder)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagMap_key = _TagMap.AddMember("key", _TagKey)
-
-	_TagMap_value = _TagMap.AddMember("value", _TagValue)
-
-	TooManyRequestsException_Message = TooManyRequestsException.AddMember("Message", _ErrorMessage)
-
-	UnprocessedAccount_AccountId = UnprocessedAccount.AddMember("AccountId", _AccountId)
-
-	UnprocessedAccount_Reason = UnprocessedAccount.AddMember("Reason", _UnprocessedReason)
-
-	_UnprocessedAccountList_member = _UnprocessedAccountList.AddMember("member", UnprocessedAccount)
-
-	UnprocessedGraph_GraphArn = UnprocessedGraph.AddMember("GraphArn", _GraphArn)
-
-	UnprocessedGraph_Reason = UnprocessedGraph.AddMember("Reason", _UnprocessedReason)
-
-	_UnprocessedGraphList_member = _UnprocessedGraphList.AddMember("member", UnprocessedGraph)
-
-	ValidationException_Message = ValidationException.AddMember("Message", _ErrorMessage)
-
-	ValidationException_ErrorCode = ValidationException.AddMember("ErrorCode", ErrorCode)
-
-	ValidationException_ErrorCodeReason = ValidationException.AddMember("ErrorCodeReason", _ErrorCodeReason)
-
-	AcceptInvitationRequest_GraphArn = AcceptInvitationRequest.AddMember("GraphArn", _GraphArn)
-
-	BatchGetGraphMemberDatasourcesRequest_GraphArn = BatchGetGraphMemberDatasourcesRequest.AddMember("GraphArn", _GraphArn)
-
-	BatchGetGraphMemberDatasourcesRequest_AccountIds = BatchGetGraphMemberDatasourcesRequest.AddMember("AccountIds", _AccountIdExtendedList)
-
-	BatchGetGraphMemberDatasourcesResponse_MemberDatasources = BatchGetGraphMemberDatasourcesResponse.AddMember("MemberDatasources", _MembershipDatasourcesList)
-
-	BatchGetGraphMemberDatasourcesResponse_UnprocessedAccounts = BatchGetGraphMemberDatasourcesResponse.AddMember("UnprocessedAccounts", _UnprocessedAccountList)
-
-	BatchGetMembershipDatasourcesRequest_GraphArns = BatchGetMembershipDatasourcesRequest.AddMember("GraphArns", _GraphArnList)
-
-	BatchGetMembershipDatasourcesResponse_MembershipDatasources = BatchGetMembershipDatasourcesResponse.AddMember("MembershipDatasources", _MembershipDatasourcesList)
-
-	BatchGetMembershipDatasourcesResponse_UnprocessedGraphs = BatchGetMembershipDatasourcesResponse.AddMember("UnprocessedGraphs", _UnprocessedGraphList)
-
-	CreateGraphRequest_Tags = CreateGraphRequest.AddMember("Tags", _TagMap)
-
-	CreateGraphResponse_GraphArn = CreateGraphResponse.AddMember("GraphArn", _GraphArn)
-
-	CreateMembersRequest_GraphArn = CreateMembersRequest.AddMember("GraphArn", _GraphArn)
-
-	CreateMembersRequest_Message = CreateMembersRequest.AddMember("Message", _EmailMessage)
-
-	CreateMembersRequest_DisableEmailNotification = CreateMembersRequest.AddMember("DisableEmailNotification", _Boolean)
-
-	CreateMembersRequest_Accounts = CreateMembersRequest.AddMember("Accounts", _AccountList)
-
-	CreateMembersResponse_Members = CreateMembersResponse.AddMember("Members", _MemberDetailList)
-
-	CreateMembersResponse_UnprocessedAccounts = CreateMembersResponse.AddMember("UnprocessedAccounts", _UnprocessedAccountList)
-
-	DeleteGraphRequest_GraphArn = DeleteGraphRequest.AddMember("GraphArn", _GraphArn)
-
-	DeleteMembersRequest_GraphArn = DeleteMembersRequest.AddMember("GraphArn", _GraphArn)
-
-	DeleteMembersRequest_AccountIds = DeleteMembersRequest.AddMember("AccountIds", _AccountIdList)
-
-	DeleteMembersResponse_AccountIds = DeleteMembersResponse.AddMember("AccountIds", _AccountIdList)
-
-	DeleteMembersResponse_UnprocessedAccounts = DeleteMembersResponse.AddMember("UnprocessedAccounts", _UnprocessedAccountList)
-
-	DescribeOrganizationConfigurationRequest_GraphArn = DescribeOrganizationConfigurationRequest.AddMember("GraphArn", _GraphArn)
-
-	DescribeOrganizationConfigurationResponse_AutoEnable = DescribeOrganizationConfigurationResponse.AddMember("AutoEnable", _Boolean)
-
-	DisassociateMembershipRequest_GraphArn = DisassociateMembershipRequest.AddMember("GraphArn", _GraphArn)
-
-	EnableOrganizationAdminAccountRequest_AccountId = EnableOrganizationAdminAccountRequest.AddMember("AccountId", _AccountId)
-
-	GetInvestigationRequest_GraphArn = GetInvestigationRequest.AddMember("GraphArn", _GraphArn)
-
-	GetInvestigationRequest_InvestigationId = GetInvestigationRequest.AddMember("InvestigationId", _InvestigationId)
-
-	GetInvestigationResponse_GraphArn = GetInvestigationResponse.AddMember("GraphArn", _GraphArn)
-
-	GetInvestigationResponse_InvestigationId = GetInvestigationResponse.AddMember("InvestigationId", _InvestigationId)
-
-	GetInvestigationResponse_EntityArn = GetInvestigationResponse.AddMember("EntityArn", _EntityArn)
-
-	GetInvestigationResponse_EntityType = GetInvestigationResponse.AddMember("EntityType", EntityType)
-
-	GetInvestigationResponse_CreatedTime = GetInvestigationResponse.AddMember("CreatedTime", _Timestamp)
-
-	GetInvestigationResponse_ScopeStartTime = GetInvestigationResponse.AddMember("ScopeStartTime", _Timestamp)
-
-	GetInvestigationResponse_ScopeEndTime = GetInvestigationResponse.AddMember("ScopeEndTime", _Timestamp)
-
-	GetInvestigationResponse_Status = GetInvestigationResponse.AddMember("Status", Status)
-
-	GetInvestigationResponse_Severity = GetInvestigationResponse.AddMember("Severity", Severity)
-
-	GetInvestigationResponse_State = GetInvestigationResponse.AddMember("State", State)
-
-	GetMembersRequest_GraphArn = GetMembersRequest.AddMember("GraphArn", _GraphArn)
-
-	GetMembersRequest_AccountIds = GetMembersRequest.AddMember("AccountIds", _AccountIdList)
-
-	GetMembersResponse_MemberDetails = GetMembersResponse.AddMember("MemberDetails", _MemberDetailList)
-
-	GetMembersResponse_UnprocessedAccounts = GetMembersResponse.AddMember("UnprocessedAccounts", _UnprocessedAccountList)
-
-	ListDatasourcePackagesRequest_GraphArn = ListDatasourcePackagesRequest.AddMember("GraphArn", _GraphArn)
-
-	ListDatasourcePackagesRequest_NextToken = ListDatasourcePackagesRequest.AddMember("NextToken", _PaginationToken)
-
-	ListDatasourcePackagesRequest_MaxResults = ListDatasourcePackagesRequest.AddMember("MaxResults", _MemberResultsLimit)
-
-	ListDatasourcePackagesResponse_DatasourcePackages = ListDatasourcePackagesResponse.AddMember("DatasourcePackages", _DatasourcePackageIngestDetails)
-
-	ListDatasourcePackagesResponse_NextToken = ListDatasourcePackagesResponse.AddMember("NextToken", _PaginationToken)
-
-	ListGraphsRequest_NextToken = ListGraphsRequest.AddMember("NextToken", _PaginationToken)
-
-	ListGraphsRequest_MaxResults = ListGraphsRequest.AddMember("MaxResults", _MemberResultsLimit)
-
-	ListGraphsResponse_GraphList = ListGraphsResponse.AddMember("GraphList", _GraphList)
-
-	ListGraphsResponse_NextToken = ListGraphsResponse.AddMember("NextToken", _PaginationToken)
-
-	ListIndicatorsRequest_GraphArn = ListIndicatorsRequest.AddMember("GraphArn", _GraphArn)
-
-	ListIndicatorsRequest_InvestigationId = ListIndicatorsRequest.AddMember("InvestigationId", _InvestigationId)
-
-	ListIndicatorsRequest_IndicatorType = ListIndicatorsRequest.AddMember("IndicatorType", IndicatorType)
-
-	ListIndicatorsRequest_NextToken = ListIndicatorsRequest.AddMember("NextToken", _AiPaginationToken)
-
-	ListIndicatorsRequest_MaxResults = ListIndicatorsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListIndicatorsResponse_GraphArn = ListIndicatorsResponse.AddMember("GraphArn", _GraphArn)
-
-	ListIndicatorsResponse_InvestigationId = ListIndicatorsResponse.AddMember("InvestigationId", _InvestigationId)
-
-	ListIndicatorsResponse_NextToken = ListIndicatorsResponse.AddMember("NextToken", _AiPaginationToken)
-
-	ListIndicatorsResponse_Indicators = ListIndicatorsResponse.AddMember("Indicators", _Indicators)
-
-	ListInvestigationsRequest_GraphArn = ListInvestigationsRequest.AddMember("GraphArn", _GraphArn)
-
-	ListInvestigationsRequest_NextToken = ListInvestigationsRequest.AddMember("NextToken", _AiPaginationToken)
-
-	ListInvestigationsRequest_MaxResults = ListInvestigationsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListInvestigationsRequest_FilterCriteria = ListInvestigationsRequest.AddMember("FilterCriteria", FilterCriteria)
-
-	ListInvestigationsRequest_SortCriteria = ListInvestigationsRequest.AddMember("SortCriteria", SortCriteria)
-
-	ListInvestigationsResponse_InvestigationDetails = ListInvestigationsResponse.AddMember("InvestigationDetails", _InvestigationDetails)
-
-	ListInvestigationsResponse_NextToken = ListInvestigationsResponse.AddMember("NextToken", _AiPaginationToken)
-
-	ListInvitationsRequest_NextToken = ListInvitationsRequest.AddMember("NextToken", _PaginationToken)
-
-	ListInvitationsRequest_MaxResults = ListInvitationsRequest.AddMember("MaxResults", _MemberResultsLimit)
-
-	ListInvitationsResponse_Invitations = ListInvitationsResponse.AddMember("Invitations", _MemberDetailList)
-
-	ListInvitationsResponse_NextToken = ListInvitationsResponse.AddMember("NextToken", _PaginationToken)
-
-	ListMembersRequest_GraphArn = ListMembersRequest.AddMember("GraphArn", _GraphArn)
-
-	ListMembersRequest_NextToken = ListMembersRequest.AddMember("NextToken", _PaginationToken)
-
-	ListMembersRequest_MaxResults = ListMembersRequest.AddMember("MaxResults", _MemberResultsLimit)
-
-	ListMembersResponse_MemberDetails = ListMembersResponse.AddMember("MemberDetails", _MemberDetailList)
-
-	ListMembersResponse_NextToken = ListMembersResponse.AddMember("NextToken", _PaginationToken)
-
-	ListOrganizationAdminAccountsRequest_NextToken = ListOrganizationAdminAccountsRequest.AddMember("NextToken", _PaginationToken)
-
-	ListOrganizationAdminAccountsRequest_MaxResults = ListOrganizationAdminAccountsRequest.AddMember("MaxResults", _MemberResultsLimit)
-
-	ListOrganizationAdminAccountsResponse_Administrators = ListOrganizationAdminAccountsResponse.AddMember("Administrators", _AdministratorList)
-
-	ListOrganizationAdminAccountsResponse_NextToken = ListOrganizationAdminAccountsResponse.AddMember("NextToken", _PaginationToken)
-
-	ListTagsForResourceRequest_ResourceArn = ListTagsForResourceRequest.AddMember("ResourceArn", _GraphArn, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _TagMap)
-
-	RejectInvitationRequest_GraphArn = RejectInvitationRequest.AddMember("GraphArn", _GraphArn)
-
-	StartInvestigationRequest_GraphArn = StartInvestigationRequest.AddMember("GraphArn", _GraphArn)
-
-	StartInvestigationRequest_EntityArn = StartInvestigationRequest.AddMember("EntityArn", _EntityArn)
-
-	StartInvestigationRequest_ScopeStartTime = StartInvestigationRequest.AddMember("ScopeStartTime", _Timestamp)
-
-	StartInvestigationRequest_ScopeEndTime = StartInvestigationRequest.AddMember("ScopeEndTime", _Timestamp)
-
-	StartInvestigationResponse_InvestigationId = StartInvestigationResponse.AddMember("InvestigationId", _InvestigationId)
-
-	StartMonitoringMemberRequest_GraphArn = StartMonitoringMemberRequest.AddMember("GraphArn", _GraphArn)
-
-	StartMonitoringMemberRequest_AccountId = StartMonitoringMemberRequest.AddMember("AccountId", _AccountId)
-
-	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", _GraphArn, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _TagMap)
-
-	UntagResourceRequest_ResourceArn = UntagResourceRequest.AddMember("ResourceArn", _GraphArn, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateDatasourcePackagesRequest_GraphArn = UpdateDatasourcePackagesRequest.AddMember("GraphArn", _GraphArn)
-
-	UpdateDatasourcePackagesRequest_DatasourcePackages = UpdateDatasourcePackagesRequest.AddMember("DatasourcePackages", _DatasourcePackageList)
-
-	UpdateInvestigationStateRequest_GraphArn = UpdateInvestigationStateRequest.AddMember("GraphArn", _GraphArn)
-
-	UpdateInvestigationStateRequest_InvestigationId = UpdateInvestigationStateRequest.AddMember("InvestigationId", _InvestigationId)
-
-	UpdateInvestigationStateRequest_State = UpdateInvestigationStateRequest.AddMember("State", State)
-
-	UpdateOrganizationConfigurationRequest_GraphArn = UpdateOrganizationConfigurationRequest.AddMember("GraphArn", _GraphArn)
-
-	UpdateOrganizationConfigurationRequest_AutoEnable = UpdateOrganizationConfigurationRequest.AddMember("AutoEnable", _Boolean)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_Message, &sAccessDeniedException_ErrorCode, &sAccessDeniedException_ErrorCodeReason, &sAccessDeniedException_SubErrorCode, &sAccessDeniedException_SubErrorCodeReason}}
+var mAccount = smithy.SchemaMembers{List: []*smithy.Schema{&sAccount_AccountId, &sAccount_EmailAddress}}
+var m_AccountIdExtendedList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AccountIdExtendedList_member}}
+var m_AccountIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AccountIdList_member}}
+var m_AccountList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AccountList_member}}
+var mAdministrator = smithy.SchemaMembers{List: []*smithy.Schema{&sAdministrator_AccountId, &sAdministrator_GraphArn, &sAdministrator_DelegationTime}}
+var m_AdministratorList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AdministratorList_member}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_Message}}
+var mDatasourcePackage = smithy.SchemaMembers{List: []*smithy.Schema{&sDatasourcePackage_DETECTIVE_CORE, &sDatasourcePackage_EKS_AUDIT, &sDatasourcePackage_ASFF_SECURITYHUB_FINDING}}
+var mDatasourcePackageIngestDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sDatasourcePackageIngestDetail_DatasourcePackageIngestState, &sDatasourcePackageIngestDetail_LastIngestStateChange}}
+var m_DatasourcePackageIngestDetails = smithy.SchemaMembers{List: []*smithy.Schema{&s_DatasourcePackageIngestDetails_key, &s_DatasourcePackageIngestDetails_value}}
+var m_DatasourcePackageIngestHistory = smithy.SchemaMembers{List: []*smithy.Schema{&s_DatasourcePackageIngestHistory_key, &s_DatasourcePackageIngestHistory_value}}
+var mDatasourcePackageIngestState = smithy.SchemaMembers{List: []*smithy.Schema{&sDatasourcePackageIngestState_STARTED, &sDatasourcePackageIngestState_STOPPED, &sDatasourcePackageIngestState_DISABLED}}
+var m_DatasourcePackageIngestStates = smithy.SchemaMembers{List: []*smithy.Schema{&s_DatasourcePackageIngestStates_key, &s_DatasourcePackageIngestStates_value}}
+var m_DatasourcePackageList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DatasourcePackageList_member}}
+var mDatasourcePackageUsageInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sDatasourcePackageUsageInfo_VolumeUsageInBytes, &sDatasourcePackageUsageInfo_VolumeUsageUpdateTime}}
+var mDateFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sDateFilter_StartInclusive, &sDateFilter_EndInclusive}}
+var mEntityType = smithy.SchemaMembers{List: []*smithy.Schema{&sEntityType_IAM_ROLE, &sEntityType_IAM_USER}}
+var mErrorCode = smithy.SchemaMembers{List: []*smithy.Schema{&sErrorCode_InvalidGraphArn, &sErrorCode_InvalidRequestBody, &sErrorCode_InternalError}}
+var mField = smithy.SchemaMembers{List: []*smithy.Schema{&sField_SEVERITY, &sField_STATUS, &sField_CREATED_TIME}}
+var mFilterCriteria = smithy.SchemaMembers{List: []*smithy.Schema{&sFilterCriteria_Severity, &sFilterCriteria_Status, &sFilterCriteria_State, &sFilterCriteria_EntityArn, &sFilterCriteria_CreatedTime}}
+var mFlaggedIpAddressDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sFlaggedIpAddressDetail_IpAddress, &sFlaggedIpAddressDetail_Reason}}
+var mGraph = smithy.SchemaMembers{List: []*smithy.Schema{&sGraph_Arn, &sGraph_CreatedTime}}
+var m_GraphArnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_GraphArnList_member}}
+var m_GraphList = smithy.SchemaMembers{List: []*smithy.Schema{&s_GraphList_member}}
+var mImpossibleTravelDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sImpossibleTravelDetail_StartingIpAddress, &sImpossibleTravelDetail_EndingIpAddress, &sImpossibleTravelDetail_StartingLocation, &sImpossibleTravelDetail_EndingLocation, &sImpossibleTravelDetail_HourlyTimeDelta}}
+var mIndicator = smithy.SchemaMembers{List: []*smithy.Schema{&sIndicator_IndicatorType, &sIndicator_IndicatorDetail}}
+var mIndicatorDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sIndicatorDetail_TTPsObservedDetail, &sIndicatorDetail_ImpossibleTravelDetail, &sIndicatorDetail_FlaggedIpAddressDetail, &sIndicatorDetail_NewGeolocationDetail, &sIndicatorDetail_NewAsoDetail, &sIndicatorDetail_NewUserAgentDetail, &sIndicatorDetail_RelatedFindingDetail, &sIndicatorDetail_RelatedFindingGroupDetail}}
+var m_Indicators = smithy.SchemaMembers{List: []*smithy.Schema{&s_Indicators_member}}
+var mIndicatorType = smithy.SchemaMembers{List: []*smithy.Schema{&sIndicatorType_TTP_OBSERVED, &sIndicatorType_IMPOSSIBLE_TRAVEL, &sIndicatorType_FLAGGED_IP_ADDRESS, &sIndicatorType_NEW_GEOLOCATION, &sIndicatorType_NEW_ASO, &sIndicatorType_NEW_USER_AGENT, &sIndicatorType_RELATED_FINDING, &sIndicatorType_RELATED_FINDING_GROUP}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_Message}}
+var mInvestigationDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sInvestigationDetail_InvestigationId, &sInvestigationDetail_Severity, &sInvestigationDetail_Status, &sInvestigationDetail_State, &sInvestigationDetail_CreatedTime, &sInvestigationDetail_EntityArn, &sInvestigationDetail_EntityType}}
+var m_InvestigationDetails = smithy.SchemaMembers{List: []*smithy.Schema{&s_InvestigationDetails_member}}
+var mInvitationType = smithy.SchemaMembers{List: []*smithy.Schema{&sInvitationType_INVITATION, &sInvitationType_ORGANIZATION}}
+var m_LastIngestStateChangeDates = smithy.SchemaMembers{List: []*smithy.Schema{&s_LastIngestStateChangeDates_key, &s_LastIngestStateChangeDates_value}}
+var mMemberDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sMemberDetail_AccountId, &sMemberDetail_EmailAddress, &sMemberDetail_GraphArn, &sMemberDetail_MasterId, &sMemberDetail_AdministratorId, &sMemberDetail_Status, &sMemberDetail_DisabledReason, &sMemberDetail_InvitedTime, &sMemberDetail_UpdatedTime, &sMemberDetail_VolumeUsageInBytes, &sMemberDetail_VolumeUsageUpdatedTime, &sMemberDetail_PercentOfGraphUtilization, &sMemberDetail_PercentOfGraphUtilizationUpdatedTime, &sMemberDetail_InvitationType, &sMemberDetail_VolumeUsageByDatasourcePackage, &sMemberDetail_DatasourcePackageIngestStates}, Seed: 167, Slots: []uint16{
+	14, 0, 0, 0, 2, 8, 11, 0, 12, 0, 0, 3, 0, 0, 13, 0, 1, 0, 0, 5, 16, 0, 6, 7,
+	0, 15, 4, 10, 0, 9, 0, 0,
+}}
+var m_MemberDetailList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MemberDetailList_member}}
+var mMemberDisabledReason = smithy.SchemaMembers{List: []*smithy.Schema{&sMemberDisabledReason_VOLUME_TOO_HIGH, &sMemberDisabledReason_VOLUME_UNKNOWN}}
+var mMembershipDatasources = smithy.SchemaMembers{List: []*smithy.Schema{&sMembershipDatasources_AccountId, &sMembershipDatasources_GraphArn, &sMembershipDatasources_DatasourcePackageIngestHistory}}
+var m_MembershipDatasourcesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MembershipDatasourcesList_member}}
+var mMemberStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sMemberStatus_INVITED, &sMemberStatus_VERIFICATION_IN_PROGRESS, &sMemberStatus_VERIFICATION_FAILED, &sMemberStatus_ENABLED, &sMemberStatus_ACCEPTED_BUT_DISABLED}}
+var mNewAsoDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sNewAsoDetail_Aso, &sNewAsoDetail_IsNewForEntireAccount}}
+var mNewGeolocationDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sNewGeolocationDetail_Location, &sNewGeolocationDetail_IpAddress, &sNewGeolocationDetail_IsNewForEntireAccount}}
+var mNewUserAgentDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sNewUserAgentDetail_UserAgent, &sNewUserAgentDetail_IsNewForEntireAccount}}
+var mReason = smithy.SchemaMembers{List: []*smithy.Schema{&sReason_AWS_THREAT_INTELLIGENCE}}
+var mRelatedFindingDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sRelatedFindingDetail_Arn, &sRelatedFindingDetail_Type, &sRelatedFindingDetail_IpAddress}}
+var mRelatedFindingGroupDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sRelatedFindingGroupDetail_Id}}
+var m_ResourceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceList_member}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_Message, &sServiceQuotaExceededException_Resources}}
+var mSeverity = smithy.SchemaMembers{List: []*smithy.Schema{&sSeverity_INFORMATIONAL, &sSeverity_LOW, &sSeverity_MEDIUM, &sSeverity_HIGH, &sSeverity_CRITICAL}}
+var mSortCriteria = smithy.SchemaMembers{List: []*smithy.Schema{&sSortCriteria_Field, &sSortCriteria_SortOrder}}
+var mSortOrder = smithy.SchemaMembers{List: []*smithy.Schema{&sSortOrder_ASC, &sSortOrder_DESC}}
+var mState = smithy.SchemaMembers{List: []*smithy.Schema{&sState_ACTIVE, &sState_ARCHIVED}}
+var mStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sStatus_RUNNING, &sStatus_FAILED, &sStatus_SUCCESSFUL}}
+var mStringFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sStringFilter_Value}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagMap_key, &s_TagMap_value}}
+var mTimestampForCollection = smithy.SchemaMembers{List: []*smithy.Schema{&sTimestampForCollection_Timestamp}}
+var mTooManyRequestsException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyRequestsException_Message}}
+var mTTPsObservedDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sTTPsObservedDetail_Tactic, &sTTPsObservedDetail_Technique, &sTTPsObservedDetail_Procedure, &sTTPsObservedDetail_IpAddress, &sTTPsObservedDetail_APIName, &sTTPsObservedDetail_APISuccessCount, &sTTPsObservedDetail_APIFailureCount}}
+var mUnprocessedAccount = smithy.SchemaMembers{List: []*smithy.Schema{&sUnprocessedAccount_AccountId, &sUnprocessedAccount_Reason}}
+var m_UnprocessedAccountList = smithy.SchemaMembers{List: []*smithy.Schema{&s_UnprocessedAccountList_member}}
+var mUnprocessedGraph = smithy.SchemaMembers{List: []*smithy.Schema{&sUnprocessedGraph_GraphArn, &sUnprocessedGraph_Reason}}
+var m_UnprocessedGraphList = smithy.SchemaMembers{List: []*smithy.Schema{&s_UnprocessedGraphList_member}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_Message, &sValidationException_ErrorCode, &sValidationException_ErrorCodeReason}}
+var m_VolumeUsageByDatasourcePackage = smithy.SchemaMembers{List: []*smithy.Schema{&s_VolumeUsageByDatasourcePackage_key, &s_VolumeUsageByDatasourcePackage_value}}
+var mAcceptInvitationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAcceptInvitationRequest_GraphArn}}
+var mBatchGetGraphMemberDatasourcesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetGraphMemberDatasourcesRequest_GraphArn, &sBatchGetGraphMemberDatasourcesRequest_AccountIds}}
+var mBatchGetGraphMemberDatasourcesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetGraphMemberDatasourcesResponse_MemberDatasources, &sBatchGetGraphMemberDatasourcesResponse_UnprocessedAccounts}}
+var mBatchGetMembershipDatasourcesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetMembershipDatasourcesRequest_GraphArns}}
+var mBatchGetMembershipDatasourcesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetMembershipDatasourcesResponse_MembershipDatasources, &sBatchGetMembershipDatasourcesResponse_UnprocessedGraphs}}
+var mCreateGraphRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateGraphRequest_Tags}}
+var mCreateGraphResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateGraphResponse_GraphArn}}
+var mCreateMembersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateMembersRequest_GraphArn, &sCreateMembersRequest_Message, &sCreateMembersRequest_DisableEmailNotification, &sCreateMembersRequest_Accounts}}
+var mCreateMembersResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateMembersResponse_Members, &sCreateMembersResponse_UnprocessedAccounts}}
+var mDeleteGraphRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteGraphRequest_GraphArn}}
+var mDeleteMembersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteMembersRequest_GraphArn, &sDeleteMembersRequest_AccountIds}}
+var mDeleteMembersResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteMembersResponse_AccountIds, &sDeleteMembersResponse_UnprocessedAccounts}}
+var mDescribeOrganizationConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeOrganizationConfigurationRequest_GraphArn}}
+var mDescribeOrganizationConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeOrganizationConfigurationResponse_AutoEnable}}
+var mDisassociateMembershipRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateMembershipRequest_GraphArn}}
+var mEnableOrganizationAdminAccountRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sEnableOrganizationAdminAccountRequest_AccountId}}
+var mGetInvestigationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetInvestigationRequest_GraphArn, &sGetInvestigationRequest_InvestigationId}}
+var mGetInvestigationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetInvestigationResponse_GraphArn, &sGetInvestigationResponse_InvestigationId, &sGetInvestigationResponse_EntityArn, &sGetInvestigationResponse_EntityType, &sGetInvestigationResponse_CreatedTime, &sGetInvestigationResponse_ScopeStartTime, &sGetInvestigationResponse_ScopeEndTime, &sGetInvestigationResponse_Status, &sGetInvestigationResponse_Severity, &sGetInvestigationResponse_State}, Seed: 2, Slots: []uint16{
+	0, 0, 6, 2, 0, 0, 0, 1, 0, 0, 0, 0, 0, 7, 0, 5, 0, 0, 0, 10, 0, 0, 3, 0,
+	8, 0, 0, 9, 0, 0, 0, 4,
+}}
+var mGetMembersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMembersRequest_GraphArn, &sGetMembersRequest_AccountIds}}
+var mGetMembersResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMembersResponse_MemberDetails, &sGetMembersResponse_UnprocessedAccounts}}
+var mListDatasourcePackagesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListDatasourcePackagesRequest_GraphArn, &sListDatasourcePackagesRequest_NextToken, &sListDatasourcePackagesRequest_MaxResults}}
+var mListDatasourcePackagesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListDatasourcePackagesResponse_DatasourcePackages, &sListDatasourcePackagesResponse_NextToken}}
+var mListGraphsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListGraphsRequest_NextToken, &sListGraphsRequest_MaxResults}}
+var mListGraphsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListGraphsResponse_GraphList, &sListGraphsResponse_NextToken}}
+var mListIndicatorsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListIndicatorsRequest_GraphArn, &sListIndicatorsRequest_InvestigationId, &sListIndicatorsRequest_IndicatorType, &sListIndicatorsRequest_NextToken, &sListIndicatorsRequest_MaxResults}}
+var mListIndicatorsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListIndicatorsResponse_GraphArn, &sListIndicatorsResponse_InvestigationId, &sListIndicatorsResponse_NextToken, &sListIndicatorsResponse_Indicators}}
+var mListInvestigationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListInvestigationsRequest_GraphArn, &sListInvestigationsRequest_NextToken, &sListInvestigationsRequest_MaxResults, &sListInvestigationsRequest_FilterCriteria, &sListInvestigationsRequest_SortCriteria}}
+var mListInvestigationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListInvestigationsResponse_InvestigationDetails, &sListInvestigationsResponse_NextToken}}
+var mListInvitationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListInvitationsRequest_NextToken, &sListInvitationsRequest_MaxResults}}
+var mListInvitationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListInvitationsResponse_Invitations, &sListInvitationsResponse_NextToken}}
+var mListMembersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListMembersRequest_GraphArn, &sListMembersRequest_NextToken, &sListMembersRequest_MaxResults}}
+var mListMembersResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListMembersResponse_MemberDetails, &sListMembersResponse_NextToken}}
+var mListOrganizationAdminAccountsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListOrganizationAdminAccountsRequest_NextToken, &sListOrganizationAdminAccountsRequest_MaxResults}}
+var mListOrganizationAdminAccountsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListOrganizationAdminAccountsResponse_Administrators, &sListOrganizationAdminAccountsResponse_NextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_Tags}}
+var mRejectInvitationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRejectInvitationRequest_GraphArn}}
+var mStartInvestigationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartInvestigationRequest_GraphArn, &sStartInvestigationRequest_EntityArn, &sStartInvestigationRequest_ScopeStartTime, &sStartInvestigationRequest_ScopeEndTime}}
+var mStartInvestigationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartInvestigationResponse_InvestigationId}}
+var mStartMonitoringMemberRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartMonitoringMemberRequest_GraphArn, &sStartMonitoringMemberRequest_AccountId}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceArn, &sTagResourceRequest_Tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceArn, &sUntagResourceRequest_TagKeys}}
+var mUpdateDatasourcePackagesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDatasourcePackagesRequest_GraphArn, &sUpdateDatasourcePackagesRequest_DatasourcePackages}}
+var mUpdateInvestigationStateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateInvestigationStateRequest_GraphArn, &sUpdateInvestigationStateRequest_InvestigationId, &sUpdateInvestigationStateRequest_State}}
+var mUpdateOrganizationConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateOrganizationConfigurationRequest_GraphArn, &sUpdateOrganizationConfigurationRequest_AutoEnable}}
+
+var sAcceptInvitation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptInvitation, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sBatchGetGraphMemberDatasources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetGraphMemberDatasources, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sBatchGetMembershipDatasources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetMembershipDatasources, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sCreateGraph = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateGraph, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sCreateMembers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMembers, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sDeleteGraph = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteGraph, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var sDeleteMembers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMembers, Traits: &t6, Type: smithy.ShapeTypeOperation})
+var sDescribeOrganizationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeOrganizationConfiguration, Traits: &t7, Type: smithy.ShapeTypeOperation})
+var sDisableOrganizationAdminAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableOrganizationAdminAccount, Traits: &t8, Type: smithy.ShapeTypeOperation})
+var sDisassociateMembership = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateMembership, Traits: &t9, Type: smithy.ShapeTypeOperation})
+var sEnableOrganizationAdminAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableOrganizationAdminAccount, Traits: &t10, Type: smithy.ShapeTypeOperation})
+var sGetInvestigation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInvestigation, Traits: &t11, Type: smithy.ShapeTypeOperation})
+var sGetMembers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMembers, Traits: &t12, Type: smithy.ShapeTypeOperation})
+var sListDatasourcePackages = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDatasourcePackages, Traits: &t13, Type: smithy.ShapeTypeOperation})
+var sListGraphs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGraphs, Traits: &t14, Type: smithy.ShapeTypeOperation})
+var sListIndicators = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIndicators, Traits: &t15, Type: smithy.ShapeTypeOperation})
+var sListInvestigations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInvestigations, Traits: &t16, Type: smithy.ShapeTypeOperation})
+var sListInvitations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInvitations, Traits: &t17, Type: smithy.ShapeTypeOperation})
+var sListMembers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMembers, Traits: &t18, Type: smithy.ShapeTypeOperation})
+var sListOrganizationAdminAccounts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOrganizationAdminAccounts, Traits: &t19, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t20, Type: smithy.ShapeTypeOperation})
+var sRejectInvitation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectInvitation, Traits: &t21, Type: smithy.ShapeTypeOperation})
+var sStartInvestigation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartInvestigation, Traits: &t22, Type: smithy.ShapeTypeOperation})
+var sStartMonitoringMember = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartMonitoringMember, Traits: &t23, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t24, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t25, Type: smithy.ShapeTypeOperation})
+var sUpdateDatasourcePackages = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDatasourcePackages, Traits: &t26, Type: smithy.ShapeTypeOperation})
+var sUpdateInvestigationState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateInvestigationState, Traits: &t27, Type: smithy.ShapeTypeOperation})
+var sUpdateOrganizationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateOrganizationConfiguration, Traits: &t28, Type: smithy.ShapeTypeOperation})
+var s_AmazonDetective = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonDetective, Type: smithy.ShapeTypeService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t29, Type: smithy.ShapeTypeStructure})
+var sAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccount, Members: &mAccount, Type: smithy.ShapeTypeStructure})
+var s_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var s_AccountIdExtendedList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountIdExtendedList, Members: &m_AccountIdExtendedList, Type: smithy.ShapeTypeList})
+var s_AccountIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountIdList, Members: &m_AccountIdList, Type: smithy.ShapeTypeList})
+var s_AccountList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountList, Members: &m_AccountList, Type: smithy.ShapeTypeList})
+var sAdministrator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdministrator, Members: &mAdministrator, Type: smithy.ShapeTypeStructure})
+var s_AdministratorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AdministratorList, Members: &m_AdministratorList, Type: smithy.ShapeTypeList})
+var s_AiPaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AiPaginationToken, Type: smithy.ShapeTypeString})
+var s_APIFailureCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_APIFailureCount, Type: smithy.ShapeTypeLong})
+var s_APIName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_APIName, Type: smithy.ShapeTypeString})
+var s_APISuccessCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_APISuccessCount, Type: smithy.ShapeTypeLong})
+var s_Aso = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Aso, Type: smithy.ShapeTypeString})
+var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var s_ByteValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ByteValue, Type: smithy.ShapeTypeLong})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t32, Type: smithy.ShapeTypeStructure})
+var sDatasourcePackage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatasourcePackage, Members: &mDatasourcePackage, Type: smithy.ShapeTypeEnum})
+var sDatasourcePackageIngestDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatasourcePackageIngestDetail, Members: &mDatasourcePackageIngestDetail, Type: smithy.ShapeTypeStructure})
+var s_DatasourcePackageIngestDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatasourcePackageIngestDetails, Members: &m_DatasourcePackageIngestDetails, Type: smithy.ShapeTypeMap})
+var s_DatasourcePackageIngestHistory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatasourcePackageIngestHistory, Members: &m_DatasourcePackageIngestHistory, Type: smithy.ShapeTypeMap})
+var sDatasourcePackageIngestState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatasourcePackageIngestState, Members: &mDatasourcePackageIngestState, Type: smithy.ShapeTypeEnum})
+var s_DatasourcePackageIngestStates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatasourcePackageIngestStates, Members: &m_DatasourcePackageIngestStates, Type: smithy.ShapeTypeMap})
+var s_DatasourcePackageList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatasourcePackageList, Members: &m_DatasourcePackageList, Type: smithy.ShapeTypeList})
+var sDatasourcePackageUsageInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatasourcePackageUsageInfo, Members: &mDatasourcePackageUsageInfo, Type: smithy.ShapeTypeStructure})
+var sDateFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDateFilter, Members: &mDateFilter, Type: smithy.ShapeTypeStructure})
+var s_EmailAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EmailAddress, Traits: &t33, Type: smithy.ShapeTypeString})
+var s_EmailMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EmailMessage, Traits: &t33, Type: smithy.ShapeTypeString})
+var s_EntityArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntityArn, Type: smithy.ShapeTypeString})
+var sEntityType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntityType, Members: &mEntityType, Type: smithy.ShapeTypeEnum})
+var sErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum})
+var s_ErrorCodeReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorCodeReason, Type: smithy.ShapeTypeString})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iField, Members: &mField, Type: smithy.ShapeTypeEnum})
+var sFilterCriteria = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilterCriteria, Members: &mFilterCriteria, Type: smithy.ShapeTypeStructure})
+var sFlaggedIpAddressDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFlaggedIpAddressDetail, Members: &mFlaggedIpAddressDetail, Type: smithy.ShapeTypeStructure})
+var sGraph = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGraph, Members: &mGraph, Type: smithy.ShapeTypeStructure})
+var s_GraphArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GraphArn, Type: smithy.ShapeTypeString})
+var s_GraphArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GraphArnList, Members: &m_GraphArnList, Type: smithy.ShapeTypeList})
+var s_GraphList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GraphList, Members: &m_GraphList, Type: smithy.ShapeTypeList})
+var s_HourlyTimeDelta = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HourlyTimeDelta, Type: smithy.ShapeTypeInteger})
+var s_Id = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Id, Type: smithy.ShapeTypeString})
+var sImpossibleTravelDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImpossibleTravelDetail, Members: &mImpossibleTravelDetail, Type: smithy.ShapeTypeStructure})
+var sIndicator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIndicator, Members: &mIndicator, Type: smithy.ShapeTypeStructure})
+var sIndicatorDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIndicatorDetail, Members: &mIndicatorDetail, Type: smithy.ShapeTypeStructure})
+var s_Indicators = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Indicators, Members: &m_Indicators, Type: smithy.ShapeTypeList})
+var sIndicatorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIndicatorType, Members: &mIndicatorType, Type: smithy.ShapeTypeEnum})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t34, Type: smithy.ShapeTypeStructure})
+var sInvestigationDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvestigationDetail, Members: &mInvestigationDetail, Type: smithy.ShapeTypeStructure})
+var s_InvestigationDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InvestigationDetails, Members: &m_InvestigationDetails, Type: smithy.ShapeTypeList})
+var s_InvestigationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InvestigationId, Type: smithy.ShapeTypeString})
+var sInvitationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvitationType, Members: &mInvitationType, Type: smithy.ShapeTypeEnum})
+var s_IpAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IpAddress, Type: smithy.ShapeTypeString})
+var s_IsNewForEntireAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IsNewForEntireAccount, Type: smithy.ShapeTypeBoolean})
+var s_LastIngestStateChangeDates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastIngestStateChangeDates, Members: &m_LastIngestStateChangeDates, Type: smithy.ShapeTypeMap})
+var s_Location = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Location, Type: smithy.ShapeTypeString})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sMemberDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMemberDetail, Members: &mMemberDetail, Type: smithy.ShapeTypeStructure})
+var s_MemberDetailList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MemberDetailList, Members: &m_MemberDetailList, Type: smithy.ShapeTypeList})
+var sMemberDisabledReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMemberDisabledReason, Members: &mMemberDisabledReason, Type: smithy.ShapeTypeEnum})
+var s_MemberResultsLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MemberResultsLimit, Type: smithy.ShapeTypeInteger})
+var sMembershipDatasources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMembershipDatasources, Members: &mMembershipDatasources, Type: smithy.ShapeTypeStructure})
+var s_MembershipDatasourcesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MembershipDatasourcesList, Members: &m_MembershipDatasourcesList, Type: smithy.ShapeTypeList})
+var sMemberStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMemberStatus, Members: &mMemberStatus, Type: smithy.ShapeTypeEnum})
+var sNewAsoDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNewAsoDetail, Members: &mNewAsoDetail, Type: smithy.ShapeTypeStructure})
+var sNewGeolocationDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNewGeolocationDetail, Members: &mNewGeolocationDetail, Type: smithy.ShapeTypeStructure})
+var sNewUserAgentDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNewUserAgentDetail, Members: &mNewUserAgentDetail, Type: smithy.ShapeTypeStructure})
+var s_PaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var s_Percentage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Percentage, Type: smithy.ShapeTypeDouble})
+var s_Procedure = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Procedure, Type: smithy.ShapeTypeString})
+var sReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReason, Members: &mReason, Type: smithy.ShapeTypeEnum})
+var sRelatedFindingDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRelatedFindingDetail, Members: &mRelatedFindingDetail, Type: smithy.ShapeTypeStructure})
+var sRelatedFindingGroupDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRelatedFindingGroupDetail, Members: &mRelatedFindingGroupDetail, Type: smithy.ShapeTypeStructure})
+var s_Resource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Resource, Type: smithy.ShapeTypeString})
+var s_ResourceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceList, Members: &m_ResourceList, Type: smithy.ShapeTypeList})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t35, Type: smithy.ShapeTypeStructure})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t36, Type: smithy.ShapeTypeStructure})
+var sSeverity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSeverity, Members: &mSeverity, Type: smithy.ShapeTypeEnum})
+var sSortCriteria = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSortCriteria, Members: &mSortCriteria, Type: smithy.ShapeTypeStructure})
+var sSortOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum})
+var sState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iState, Members: &mState, Type: smithy.ShapeTypeEnum})
+var sStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum})
+var sStringFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStringFilter, Members: &mStringFilter, Type: smithy.ShapeTypeStructure})
+var s_Tactic = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tactic, Type: smithy.ShapeTypeString})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_Technique = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Technique, Type: smithy.ShapeTypeString})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Traits: &t37, Type: smithy.ShapeTypeTimestamp})
+var sTimestampForCollection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimestampForCollection, Members: &mTimestampForCollection, Type: smithy.ShapeTypeStructure})
+var sTooManyRequestsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyRequestsException, Members: &mTooManyRequestsException, Traits: &t38, Type: smithy.ShapeTypeStructure})
+var sTTPsObservedDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTTPsObservedDetail, Members: &mTTPsObservedDetail, Type: smithy.ShapeTypeStructure})
+var s_Type = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Type, Type: smithy.ShapeTypeString})
+var sUnprocessedAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnprocessedAccount, Members: &mUnprocessedAccount, Type: smithy.ShapeTypeStructure})
+var s_UnprocessedAccountList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UnprocessedAccountList, Members: &m_UnprocessedAccountList, Type: smithy.ShapeTypeList})
+var sUnprocessedGraph = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnprocessedGraph, Members: &mUnprocessedGraph, Type: smithy.ShapeTypeStructure})
+var s_UnprocessedGraphList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UnprocessedGraphList, Members: &m_UnprocessedGraphList, Type: smithy.ShapeTypeList})
+var s_UnprocessedReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UnprocessedReason, Type: smithy.ShapeTypeString})
+var s_UserAgent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserAgent, Type: smithy.ShapeTypeString})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t39, Type: smithy.ShapeTypeStructure})
+var s_Value = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Value, Type: smithy.ShapeTypeString})
+var s_VolumeUsageByDatasourcePackage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VolumeUsageByDatasourcePackage, Members: &m_VolumeUsageByDatasourcePackage, Type: smithy.ShapeTypeMap})
+var sAcceptInvitationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptInvitationRequest, Members: &mAcceptInvitationRequest, Type: smithy.ShapeTypeStructure})
+var sBatchGetGraphMemberDatasourcesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetGraphMemberDatasourcesRequest, Members: &mBatchGetGraphMemberDatasourcesRequest, Type: smithy.ShapeTypeStructure})
+var sBatchGetGraphMemberDatasourcesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetGraphMemberDatasourcesResponse, Members: &mBatchGetGraphMemberDatasourcesResponse, Type: smithy.ShapeTypeStructure})
+var sBatchGetMembershipDatasourcesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetMembershipDatasourcesRequest, Members: &mBatchGetMembershipDatasourcesRequest, Type: smithy.ShapeTypeStructure})
+var sBatchGetMembershipDatasourcesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetMembershipDatasourcesResponse, Members: &mBatchGetMembershipDatasourcesResponse, Type: smithy.ShapeTypeStructure})
+var sCreateGraphRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateGraphRequest, Members: &mCreateGraphRequest, Type: smithy.ShapeTypeStructure})
+var sCreateGraphResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateGraphResponse, Members: &mCreateGraphResponse, Type: smithy.ShapeTypeStructure})
+var sCreateMembersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMembersRequest, Members: &mCreateMembersRequest, Type: smithy.ShapeTypeStructure})
+var sCreateMembersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMembersResponse, Members: &mCreateMembersResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteGraphRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteGraphRequest, Members: &mDeleteGraphRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteMembersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMembersRequest, Members: &mDeleteMembersRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteMembersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMembersResponse, Members: &mDeleteMembersResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeOrganizationConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeOrganizationConfigurationRequest, Members: &mDescribeOrganizationConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeOrganizationConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeOrganizationConfigurationResponse, Members: &mDescribeOrganizationConfigurationResponse, Type: smithy.ShapeTypeStructure})
+var sDisassociateMembershipRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateMembershipRequest, Members: &mDisassociateMembershipRequest, Type: smithy.ShapeTypeStructure})
+var sEnableOrganizationAdminAccountRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableOrganizationAdminAccountRequest, Members: &mEnableOrganizationAdminAccountRequest, Type: smithy.ShapeTypeStructure})
+var sGetInvestigationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInvestigationRequest, Members: &mGetInvestigationRequest, Type: smithy.ShapeTypeStructure})
+var sGetInvestigationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInvestigationResponse, Members: &mGetInvestigationResponse, Type: smithy.ShapeTypeStructure})
+var sGetMembersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMembersRequest, Members: &mGetMembersRequest, Type: smithy.ShapeTypeStructure})
+var sGetMembersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMembersResponse, Members: &mGetMembersResponse, Type: smithy.ShapeTypeStructure})
+var sListDatasourcePackagesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDatasourcePackagesRequest, Members: &mListDatasourcePackagesRequest, Type: smithy.ShapeTypeStructure})
+var sListDatasourcePackagesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDatasourcePackagesResponse, Members: &mListDatasourcePackagesResponse, Type: smithy.ShapeTypeStructure})
+var sListGraphsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGraphsRequest, Members: &mListGraphsRequest, Type: smithy.ShapeTypeStructure})
+var sListGraphsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGraphsResponse, Members: &mListGraphsResponse, Type: smithy.ShapeTypeStructure})
+var sListIndicatorsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIndicatorsRequest, Members: &mListIndicatorsRequest, Type: smithy.ShapeTypeStructure})
+var sListIndicatorsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIndicatorsResponse, Members: &mListIndicatorsResponse, Type: smithy.ShapeTypeStructure})
+var sListInvestigationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInvestigationsRequest, Members: &mListInvestigationsRequest, Type: smithy.ShapeTypeStructure})
+var sListInvestigationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInvestigationsResponse, Members: &mListInvestigationsResponse, Type: smithy.ShapeTypeStructure})
+var sListInvitationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInvitationsRequest, Members: &mListInvitationsRequest, Type: smithy.ShapeTypeStructure})
+var sListInvitationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInvitationsResponse, Members: &mListInvitationsResponse, Type: smithy.ShapeTypeStructure})
+var sListMembersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMembersRequest, Members: &mListMembersRequest, Type: smithy.ShapeTypeStructure})
+var sListMembersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMembersResponse, Members: &mListMembersResponse, Type: smithy.ShapeTypeStructure})
+var sListOrganizationAdminAccountsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOrganizationAdminAccountsRequest, Members: &mListOrganizationAdminAccountsRequest, Type: smithy.ShapeTypeStructure})
+var sListOrganizationAdminAccountsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOrganizationAdminAccountsResponse, Members: &mListOrganizationAdminAccountsResponse, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure})
+var sRejectInvitationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectInvitationRequest, Members: &mRejectInvitationRequest, Type: smithy.ShapeTypeStructure})
+var sStartInvestigationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartInvestigationRequest, Members: &mStartInvestigationRequest, Type: smithy.ShapeTypeStructure})
+var sStartInvestigationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartInvestigationResponse, Members: &mStartInvestigationResponse, Type: smithy.ShapeTypeStructure})
+var sStartMonitoringMemberRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartMonitoringMemberRequest, Members: &mStartMonitoringMemberRequest, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateDatasourcePackagesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDatasourcePackagesRequest, Members: &mUpdateDatasourcePackagesRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateInvestigationStateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateInvestigationStateRequest, Members: &mUpdateInvestigationStateRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateOrganizationConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateOrganizationConfigurationRequest, Members: &mUpdateOrganizationConfigurationRequest, Type: smithy.ShapeTypeStructure})
+
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sAccessDeniedException_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum})
+var sAccessDeniedException_ErrorCodeReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCodeReason", ID: &i_ErrorCodeReason, Type: smithy.ShapeTypeString})
+var sAccessDeniedException_SubErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubErrorCode", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum})
+var sAccessDeniedException_SubErrorCodeReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubErrorCodeReason", ID: &i_ErrorCodeReason, Type: smithy.ShapeTypeString})
+var sAccount_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sAccount_EmailAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailAddress", ID: &i_EmailAddress, Traits: &t30, Type: smithy.ShapeTypeString})
+var s_AccountIdExtendedList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var s_AccountIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var s_AccountList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAccount, Members: &mAccount, Type: smithy.ShapeTypeStructure})
+var sAdministrator_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sAdministrator_GraphArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GraphArn", ID: &i_GraphArn, Type: smithy.ShapeTypeString})
+var sAdministrator_DelegationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DelegationTime", ID: &i_Timestamp, Traits: &t31, Type: smithy.ShapeTypeTimestamp})
+var s_AdministratorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAdministrator, Members: &mAdministrator, Type: smithy.ShapeTypeStructure})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sDatasourcePackage_DETECTIVE_CORE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DETECTIVE_CORE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDatasourcePackage_EKS_AUDIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EKS_AUDIT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDatasourcePackage_ASFF_SECURITYHUB_FINDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASFF_SECURITYHUB_FINDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDatasourcePackageIngestDetail_DatasourcePackageIngestState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasourcePackageIngestState", ID: &iDatasourcePackageIngestState, Members: &mDatasourcePackageIngestState, Type: smithy.ShapeTypeEnum})
+var sDatasourcePackageIngestDetail_LastIngestStateChange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastIngestStateChange", ID: &i_LastIngestStateChangeDates, Members: &m_LastIngestStateChangeDates, Type: smithy.ShapeTypeMap})
+var s_DatasourcePackageIngestDetails_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &iDatasourcePackage, Members: &mDatasourcePackage, Type: smithy.ShapeTypeEnum})
+var s_DatasourcePackageIngestDetails_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iDatasourcePackageIngestDetail, Members: &mDatasourcePackageIngestDetail, Type: smithy.ShapeTypeStructure})
+var s_DatasourcePackageIngestHistory_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &iDatasourcePackage, Members: &mDatasourcePackage, Type: smithy.ShapeTypeEnum})
+var s_DatasourcePackageIngestHistory_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_LastIngestStateChangeDates, Members: &m_LastIngestStateChangeDates, Type: smithy.ShapeTypeMap})
+var sDatasourcePackageIngestState_STARTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STARTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDatasourcePackageIngestState_STOPPED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOPPED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDatasourcePackageIngestState_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_DatasourcePackageIngestStates_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &iDatasourcePackage, Members: &mDatasourcePackage, Type: smithy.ShapeTypeEnum})
+var s_DatasourcePackageIngestStates_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iDatasourcePackageIngestState, Members: &mDatasourcePackageIngestState, Type: smithy.ShapeTypeEnum})
+var s_DatasourcePackageList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDatasourcePackage, Members: &mDatasourcePackage, Type: smithy.ShapeTypeEnum})
+var sDatasourcePackageUsageInfo_VolumeUsageInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeUsageInBytes", ID: &i_ByteValue, Type: smithy.ShapeTypeLong})
+var sDatasourcePackageUsageInfo_VolumeUsageUpdateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeUsageUpdateTime", ID: &i_Timestamp, Traits: &t31, Type: smithy.ShapeTypeTimestamp})
+var sDateFilter_StartInclusive = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartInclusive", ID: &i_Timestamp, Traits: &t31, Type: smithy.ShapeTypeTimestamp})
+var sDateFilter_EndInclusive = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndInclusive", ID: &i_Timestamp, Traits: &t31, Type: smithy.ShapeTypeTimestamp})
+var sEntityType_IAM_ROLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IAM_ROLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntityType_IAM_USER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IAM_USER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_InvalidGraphArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvalidGraphArn", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_InvalidRequestBody = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvalidRequestBody", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_InternalError = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InternalError", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sField_SEVERITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SEVERITY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sField_STATUS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STATUS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sField_CREATED_TIME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATED_TIME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFilterCriteria_Severity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Severity", ID: &iStringFilter, Members: &mStringFilter, Type: smithy.ShapeTypeStructure})
+var sFilterCriteria_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStringFilter, Members: &mStringFilter, Type: smithy.ShapeTypeStructure})
+var sFilterCriteria_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iStringFilter, Members: &mStringFilter, Type: smithy.ShapeTypeStructure})
+var sFilterCriteria_EntityArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityArn", ID: &iStringFilter, Members: &mStringFilter, Type: smithy.ShapeTypeStructure})
+var sFilterCriteria_CreatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTime", ID: &iDateFilter, Members: &mDateFilter, Type: smithy.ShapeTypeStructure})
+var sFlaggedIpAddressDetail_IpAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddress", ID: &i_IpAddress, Type: smithy.ShapeTypeString})
+var sFlaggedIpAddressDetail_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iReason, Members: &mReason, Type: smithy.ShapeTypeEnum})
+var sGraph_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_GraphArn, Type: smithy.ShapeTypeString})
+var sGraph_CreatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTime", ID: &i_Timestamp, Traits: &t31, Type: smithy.ShapeTypeTimestamp})
+var s_GraphArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_GraphArn, Type: smithy.ShapeTypeString})
+var s_GraphList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGraph, Members: &mGraph, Type: smithy.ShapeTypeStructure})
+var sImpossibleTravelDetail_StartingIpAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartingIpAddress", ID: &i_IpAddress, Type: smithy.ShapeTypeString})
+var sImpossibleTravelDetail_EndingIpAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndingIpAddress", ID: &i_IpAddress, Type: smithy.ShapeTypeString})
+var sImpossibleTravelDetail_StartingLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartingLocation", ID: &i_Location, Type: smithy.ShapeTypeString})
+var sImpossibleTravelDetail_EndingLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndingLocation", ID: &i_Location, Type: smithy.ShapeTypeString})
+var sImpossibleTravelDetail_HourlyTimeDelta = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HourlyTimeDelta", ID: &i_HourlyTimeDelta, Type: smithy.ShapeTypeInteger})
+var sIndicator_IndicatorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IndicatorType", ID: &iIndicatorType, Members: &mIndicatorType, Type: smithy.ShapeTypeEnum})
+var sIndicator_IndicatorDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IndicatorDetail", ID: &iIndicatorDetail, Members: &mIndicatorDetail, Type: smithy.ShapeTypeStructure})
+var sIndicatorDetail_TTPsObservedDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TTPsObservedDetail", ID: &iTTPsObservedDetail, Members: &mTTPsObservedDetail, Type: smithy.ShapeTypeStructure})
+var sIndicatorDetail_ImpossibleTravelDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImpossibleTravelDetail", ID: &iImpossibleTravelDetail, Members: &mImpossibleTravelDetail, Type: smithy.ShapeTypeStructure})
+var sIndicatorDetail_FlaggedIpAddressDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlaggedIpAddressDetail", ID: &iFlaggedIpAddressDetail, Members: &mFlaggedIpAddressDetail, Type: smithy.ShapeTypeStructure})
+var sIndicatorDetail_NewGeolocationDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NewGeolocationDetail", ID: &iNewGeolocationDetail, Members: &mNewGeolocationDetail, Type: smithy.ShapeTypeStructure})
+var sIndicatorDetail_NewAsoDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NewAsoDetail", ID: &iNewAsoDetail, Members: &mNewAsoDetail, Type: smithy.ShapeTypeStructure})
+var sIndicatorDetail_NewUserAgentDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NewUserAgentDetail", ID: &iNewUserAgentDetail, Members: &mNewUserAgentDetail, Type: smithy.ShapeTypeStructure})
+var sIndicatorDetail_RelatedFindingDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RelatedFindingDetail", ID: &iRelatedFindingDetail, Members: &mRelatedFindingDetail, Type: smithy.ShapeTypeStructure})
+var sIndicatorDetail_RelatedFindingGroupDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RelatedFindingGroupDetail", ID: &iRelatedFindingGroupDetail, Members: &mRelatedFindingGroupDetail, Type: smithy.ShapeTypeStructure})
+var s_Indicators_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIndicator, Members: &mIndicator, Type: smithy.ShapeTypeStructure})
+var sIndicatorType_TTP_OBSERVED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TTP_OBSERVED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIndicatorType_IMPOSSIBLE_TRAVEL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMPOSSIBLE_TRAVEL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIndicatorType_FLAGGED_IP_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FLAGGED_IP_ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIndicatorType_NEW_GEOLOCATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NEW_GEOLOCATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIndicatorType_NEW_ASO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NEW_ASO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIndicatorType_NEW_USER_AGENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NEW_USER_AGENT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIndicatorType_RELATED_FINDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RELATED_FINDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIndicatorType_RELATED_FINDING_GROUP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RELATED_FINDING_GROUP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvestigationDetail_InvestigationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvestigationId", ID: &i_InvestigationId, Type: smithy.ShapeTypeString})
+var sInvestigationDetail_Severity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Severity", ID: &iSeverity, Members: &mSeverity, Type: smithy.ShapeTypeEnum})
+var sInvestigationDetail_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum})
+var sInvestigationDetail_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iState, Members: &mState, Type: smithy.ShapeTypeEnum})
+var sInvestigationDetail_CreatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTime", ID: &i_Timestamp, Traits: &t31, Type: smithy.ShapeTypeTimestamp})
+var sInvestigationDetail_EntityArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityArn", ID: &i_EntityArn, Type: smithy.ShapeTypeString})
+var sInvestigationDetail_EntityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityType", ID: &iEntityType, Members: &mEntityType, Type: smithy.ShapeTypeEnum})
+var s_InvestigationDetails_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInvestigationDetail, Members: &mInvestigationDetail, Type: smithy.ShapeTypeStructure})
+var sInvitationType_INVITATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVITATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInvitationType_ORGANIZATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ORGANIZATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_LastIngestStateChangeDates_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &iDatasourcePackageIngestState, Members: &mDatasourcePackageIngestState, Type: smithy.ShapeTypeEnum})
+var s_LastIngestStateChangeDates_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iTimestampForCollection, Members: &mTimestampForCollection, Type: smithy.ShapeTypeStructure})
+var sMemberDetail_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sMemberDetail_EmailAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailAddress", ID: &i_EmailAddress, Traits: &t30, Type: smithy.ShapeTypeString})
+var sMemberDetail_GraphArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GraphArn", ID: &i_GraphArn, Type: smithy.ShapeTypeString})
+var sMemberDetail_MasterId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MasterId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sMemberDetail_AdministratorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdministratorId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sMemberDetail_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iMemberStatus, Members: &mMemberStatus, Type: smithy.ShapeTypeEnum})
+var sMemberDetail_DisabledReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisabledReason", ID: &iMemberDisabledReason, Members: &mMemberDisabledReason, Type: smithy.ShapeTypeEnum})
+var sMemberDetail_InvitedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvitedTime", ID: &i_Timestamp, Traits: &t31, Type: smithy.ShapeTypeTimestamp})
+var sMemberDetail_UpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTime", ID: &i_Timestamp, Traits: &t31, Type: smithy.ShapeTypeTimestamp})
+var sMemberDetail_VolumeUsageInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeUsageInBytes", ID: &i_ByteValue, Type: smithy.ShapeTypeLong})
+var sMemberDetail_VolumeUsageUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeUsageUpdatedTime", ID: &i_Timestamp, Traits: &t31, Type: smithy.ShapeTypeTimestamp})
+var sMemberDetail_PercentOfGraphUtilization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PercentOfGraphUtilization", ID: &i_Percentage, Type: smithy.ShapeTypeDouble})
+var sMemberDetail_PercentOfGraphUtilizationUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PercentOfGraphUtilizationUpdatedTime", ID: &i_Timestamp, Traits: &t31, Type: smithy.ShapeTypeTimestamp})
+var sMemberDetail_InvitationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvitationType", ID: &iInvitationType, Members: &mInvitationType, Type: smithy.ShapeTypeEnum})
+var sMemberDetail_VolumeUsageByDatasourcePackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeUsageByDatasourcePackage", ID: &i_VolumeUsageByDatasourcePackage, Members: &m_VolumeUsageByDatasourcePackage, Type: smithy.ShapeTypeMap})
+var sMemberDetail_DatasourcePackageIngestStates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasourcePackageIngestStates", ID: &i_DatasourcePackageIngestStates, Members: &m_DatasourcePackageIngestStates, Type: smithy.ShapeTypeMap})
+var s_MemberDetailList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMemberDetail, Members: &mMemberDetail, Type: smithy.ShapeTypeStructure})
+var sMemberDisabledReason_VOLUME_TOO_HIGH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VOLUME_TOO_HIGH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMemberDisabledReason_VOLUME_UNKNOWN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VOLUME_UNKNOWN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMembershipDatasources_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sMembershipDatasources_GraphArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GraphArn", ID: &i_GraphArn, Type: smithy.ShapeTypeString})
+var sMembershipDatasources_DatasourcePackageIngestHistory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasourcePackageIngestHistory", ID: &i_DatasourcePackageIngestHistory, Members: &m_DatasourcePackageIngestHistory, Type: smithy.ShapeTypeMap})
+var s_MembershipDatasourcesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMembershipDatasources, Members: &mMembershipDatasources, Type: smithy.ShapeTypeStructure})
+var sMemberStatus_INVITED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVITED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMemberStatus_VERIFICATION_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VERIFICATION_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMemberStatus_VERIFICATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VERIFICATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMemberStatus_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMemberStatus_ACCEPTED_BUT_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCEPTED_BUT_DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNewAsoDetail_Aso = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Aso", ID: &i_Aso, Type: smithy.ShapeTypeString})
+var sNewAsoDetail_IsNewForEntireAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsNewForEntireAccount", ID: &i_IsNewForEntireAccount, Type: smithy.ShapeTypeBoolean})
+var sNewGeolocationDetail_Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Location", ID: &i_Location, Type: smithy.ShapeTypeString})
+var sNewGeolocationDetail_IpAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddress", ID: &i_IpAddress, Type: smithy.ShapeTypeString})
+var sNewGeolocationDetail_IsNewForEntireAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsNewForEntireAccount", ID: &i_IsNewForEntireAccount, Type: smithy.ShapeTypeBoolean})
+var sNewUserAgentDetail_UserAgent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserAgent", ID: &i_UserAgent, Type: smithy.ShapeTypeString})
+var sNewUserAgentDetail_IsNewForEntireAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsNewForEntireAccount", ID: &i_IsNewForEntireAccount, Type: smithy.ShapeTypeBoolean})
+var sReason_AWS_THREAT_INTELLIGENCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_THREAT_INTELLIGENCE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRelatedFindingDetail_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_EntityArn, Type: smithy.ShapeTypeString})
+var sRelatedFindingDetail_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_Type, Type: smithy.ShapeTypeString})
+var sRelatedFindingDetail_IpAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddress", ID: &i_IpAddress, Type: smithy.ShapeTypeString})
+var sRelatedFindingGroupDetail_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Id, Type: smithy.ShapeTypeString})
+var s_ResourceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Resource, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_Resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resources", ID: &i_ResourceList, Members: &m_ResourceList, Type: smithy.ShapeTypeList})
+var sSeverity_INFORMATIONAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INFORMATIONAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSeverity_LOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSeverity_MEDIUM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEDIUM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSeverity_HIGH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HIGH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSeverity_CRITICAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CRITICAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSortCriteria_Field = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Field", ID: &iField, Members: &mField, Type: smithy.ShapeTypeEnum})
+var sSortCriteria_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum})
+var sSortOrder_ASC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSortOrder_DESC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DESC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sState_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sState_ARCHIVED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARCHIVED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatus_RUNNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUNNING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatus_SUCCESSFUL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCESSFUL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStringFilter_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_Value, Type: smithy.ShapeTypeString})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sTimestampForCollection_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timestamp", ID: &i_Timestamp, Traits: &t31, Type: smithy.ShapeTypeTimestamp})
+var sTooManyRequestsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sTTPsObservedDetail_Tactic = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tactic", ID: &i_Tactic, Type: smithy.ShapeTypeString})
+var sTTPsObservedDetail_Technique = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Technique", ID: &i_Technique, Type: smithy.ShapeTypeString})
+var sTTPsObservedDetail_Procedure = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Procedure", ID: &i_Procedure, Type: smithy.ShapeTypeString})
+var sTTPsObservedDetail_IpAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddress", ID: &i_IpAddress, Type: smithy.ShapeTypeString})
+var sTTPsObservedDetail_APIName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APIName", ID: &i_APIName, Type: smithy.ShapeTypeString})
+var sTTPsObservedDetail_APISuccessCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APISuccessCount", ID: &i_APISuccessCount, Type: smithy.ShapeTypeLong})
+var sTTPsObservedDetail_APIFailureCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APIFailureCount", ID: &i_APIFailureCount, Type: smithy.ShapeTypeLong})
+var sUnprocessedAccount_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sUnprocessedAccount_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &i_UnprocessedReason, Type: smithy.ShapeTypeString})
+var s_UnprocessedAccountList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUnprocessedAccount, Members: &mUnprocessedAccount, Type: smithy.ShapeTypeStructure})
+var sUnprocessedGraph_GraphArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GraphArn", ID: &i_GraphArn, Type: smithy.ShapeTypeString})
+var sUnprocessedGraph_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &i_UnprocessedReason, Type: smithy.ShapeTypeString})
+var s_UnprocessedGraphList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUnprocessedGraph, Members: &mUnprocessedGraph, Type: smithy.ShapeTypeStructure})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sValidationException_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum})
+var sValidationException_ErrorCodeReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCodeReason", ID: &i_ErrorCodeReason, Type: smithy.ShapeTypeString})
+var s_VolumeUsageByDatasourcePackage_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &iDatasourcePackage, Members: &mDatasourcePackage, Type: smithy.ShapeTypeEnum})
+var s_VolumeUsageByDatasourcePackage_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iDatasourcePackageUsageInfo, Members: &mDatasourcePackageUsageInfo, Type: smithy.ShapeTypeStructure})
+var sAcceptInvitationRequest_GraphArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GraphArn", ID: &i_GraphArn, Type: smithy.ShapeTypeString})
+var sBatchGetGraphMemberDatasourcesRequest_GraphArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GraphArn", ID: &i_GraphArn, Type: smithy.ShapeTypeString})
+var sBatchGetGraphMemberDatasourcesRequest_AccountIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountIds", ID: &i_AccountIdExtendedList, Members: &m_AccountIdExtendedList, Type: smithy.ShapeTypeList})
+var sBatchGetGraphMemberDatasourcesResponse_MemberDatasources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberDatasources", ID: &i_MembershipDatasourcesList, Members: &m_MembershipDatasourcesList, Type: smithy.ShapeTypeList})
+var sBatchGetGraphMemberDatasourcesResponse_UnprocessedAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UnprocessedAccounts", ID: &i_UnprocessedAccountList, Members: &m_UnprocessedAccountList, Type: smithy.ShapeTypeList})
+var sBatchGetMembershipDatasourcesRequest_GraphArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GraphArns", ID: &i_GraphArnList, Members: &m_GraphArnList, Type: smithy.ShapeTypeList})
+var sBatchGetMembershipDatasourcesResponse_MembershipDatasources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MembershipDatasources", ID: &i_MembershipDatasourcesList, Members: &m_MembershipDatasourcesList, Type: smithy.ShapeTypeList})
+var sBatchGetMembershipDatasourcesResponse_UnprocessedGraphs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UnprocessedGraphs", ID: &i_UnprocessedGraphList, Members: &m_UnprocessedGraphList, Type: smithy.ShapeTypeList})
+var sCreateGraphRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sCreateGraphResponse_GraphArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GraphArn", ID: &i_GraphArn, Type: smithy.ShapeTypeString})
+var sCreateMembersRequest_GraphArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GraphArn", ID: &i_GraphArn, Type: smithy.ShapeTypeString})
+var sCreateMembersRequest_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_EmailMessage, Traits: &t30, Type: smithy.ShapeTypeString})
+var sCreateMembersRequest_DisableEmailNotification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisableEmailNotification", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sCreateMembersRequest_Accounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Accounts", ID: &i_AccountList, Members: &m_AccountList, Type: smithy.ShapeTypeList})
+var sCreateMembersResponse_Members = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Members", ID: &i_MemberDetailList, Members: &m_MemberDetailList, Type: smithy.ShapeTypeList})
+var sCreateMembersResponse_UnprocessedAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UnprocessedAccounts", ID: &i_UnprocessedAccountList, Members: &m_UnprocessedAccountList, Type: smithy.ShapeTypeList})
+var sDeleteGraphRequest_GraphArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GraphArn", ID: &i_GraphArn, Type: smithy.ShapeTypeString})
+var sDeleteMembersRequest_GraphArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GraphArn", ID: &i_GraphArn, Type: smithy.ShapeTypeString})
+var sDeleteMembersRequest_AccountIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountIds", ID: &i_AccountIdList, Members: &m_AccountIdList, Type: smithy.ShapeTypeList})
+var sDeleteMembersResponse_AccountIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountIds", ID: &i_AccountIdList, Members: &m_AccountIdList, Type: smithy.ShapeTypeList})
+var sDeleteMembersResponse_UnprocessedAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UnprocessedAccounts", ID: &i_UnprocessedAccountList, Members: &m_UnprocessedAccountList, Type: smithy.ShapeTypeList})
+var sDescribeOrganizationConfigurationRequest_GraphArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GraphArn", ID: &i_GraphArn, Type: smithy.ShapeTypeString})
+var sDescribeOrganizationConfigurationResponse_AutoEnable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoEnable", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sDisassociateMembershipRequest_GraphArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GraphArn", ID: &i_GraphArn, Type: smithy.ShapeTypeString})
+var sEnableOrganizationAdminAccountRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sGetInvestigationRequest_GraphArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GraphArn", ID: &i_GraphArn, Type: smithy.ShapeTypeString})
+var sGetInvestigationRequest_InvestigationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvestigationId", ID: &i_InvestigationId, Type: smithy.ShapeTypeString})
+var sGetInvestigationResponse_GraphArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GraphArn", ID: &i_GraphArn, Type: smithy.ShapeTypeString})
+var sGetInvestigationResponse_InvestigationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvestigationId", ID: &i_InvestigationId, Type: smithy.ShapeTypeString})
+var sGetInvestigationResponse_EntityArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityArn", ID: &i_EntityArn, Type: smithy.ShapeTypeString})
+var sGetInvestigationResponse_EntityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityType", ID: &iEntityType, Members: &mEntityType, Type: smithy.ShapeTypeEnum})
+var sGetInvestigationResponse_CreatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTime", ID: &i_Timestamp, Traits: &t31, Type: smithy.ShapeTypeTimestamp})
+var sGetInvestigationResponse_ScopeStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScopeStartTime", ID: &i_Timestamp, Traits: &t31, Type: smithy.ShapeTypeTimestamp})
+var sGetInvestigationResponse_ScopeEndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScopeEndTime", ID: &i_Timestamp, Traits: &t31, Type: smithy.ShapeTypeTimestamp})
+var sGetInvestigationResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum})
+var sGetInvestigationResponse_Severity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Severity", ID: &iSeverity, Members: &mSeverity, Type: smithy.ShapeTypeEnum})
+var sGetInvestigationResponse_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iState, Members: &mState, Type: smithy.ShapeTypeEnum})
+var sGetMembersRequest_GraphArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GraphArn", ID: &i_GraphArn, Type: smithy.ShapeTypeString})
+var sGetMembersRequest_AccountIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountIds", ID: &i_AccountIdList, Members: &m_AccountIdList, Type: smithy.ShapeTypeList})
+var sGetMembersResponse_MemberDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberDetails", ID: &i_MemberDetailList, Members: &m_MemberDetailList, Type: smithy.ShapeTypeList})
+var sGetMembersResponse_UnprocessedAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UnprocessedAccounts", ID: &i_UnprocessedAccountList, Members: &m_UnprocessedAccountList, Type: smithy.ShapeTypeList})
+var sListDatasourcePackagesRequest_GraphArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GraphArn", ID: &i_GraphArn, Type: smithy.ShapeTypeString})
+var sListDatasourcePackagesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListDatasourcePackagesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MemberResultsLimit, Type: smithy.ShapeTypeInteger})
+var sListDatasourcePackagesResponse_DatasourcePackages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasourcePackages", ID: &i_DatasourcePackageIngestDetails, Members: &m_DatasourcePackageIngestDetails, Type: smithy.ShapeTypeMap})
+var sListDatasourcePackagesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListGraphsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListGraphsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MemberResultsLimit, Type: smithy.ShapeTypeInteger})
+var sListGraphsResponse_GraphList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GraphList", ID: &i_GraphList, Members: &m_GraphList, Type: smithy.ShapeTypeList})
+var sListGraphsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListIndicatorsRequest_GraphArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GraphArn", ID: &i_GraphArn, Type: smithy.ShapeTypeString})
+var sListIndicatorsRequest_InvestigationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvestigationId", ID: &i_InvestigationId, Type: smithy.ShapeTypeString})
+var sListIndicatorsRequest_IndicatorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IndicatorType", ID: &iIndicatorType, Members: &mIndicatorType, Type: smithy.ShapeTypeEnum})
+var sListIndicatorsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_AiPaginationToken, Type: smithy.ShapeTypeString})
+var sListIndicatorsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListIndicatorsResponse_GraphArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GraphArn", ID: &i_GraphArn, Type: smithy.ShapeTypeString})
+var sListIndicatorsResponse_InvestigationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvestigationId", ID: &i_InvestigationId, Type: smithy.ShapeTypeString})
+var sListIndicatorsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_AiPaginationToken, Type: smithy.ShapeTypeString})
+var sListIndicatorsResponse_Indicators = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Indicators", ID: &i_Indicators, Members: &m_Indicators, Type: smithy.ShapeTypeList})
+var sListInvestigationsRequest_GraphArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GraphArn", ID: &i_GraphArn, Type: smithy.ShapeTypeString})
+var sListInvestigationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_AiPaginationToken, Type: smithy.ShapeTypeString})
+var sListInvestigationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListInvestigationsRequest_FilterCriteria = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterCriteria", ID: &iFilterCriteria, Members: &mFilterCriteria, Type: smithy.ShapeTypeStructure})
+var sListInvestigationsRequest_SortCriteria = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortCriteria", ID: &iSortCriteria, Members: &mSortCriteria, Type: smithy.ShapeTypeStructure})
+var sListInvestigationsResponse_InvestigationDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvestigationDetails", ID: &i_InvestigationDetails, Members: &m_InvestigationDetails, Type: smithy.ShapeTypeList})
+var sListInvestigationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_AiPaginationToken, Type: smithy.ShapeTypeString})
+var sListInvitationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListInvitationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MemberResultsLimit, Type: smithy.ShapeTypeInteger})
+var sListInvitationsResponse_Invitations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Invitations", ID: &i_MemberDetailList, Members: &m_MemberDetailList, Type: smithy.ShapeTypeList})
+var sListInvitationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListMembersRequest_GraphArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GraphArn", ID: &i_GraphArn, Type: smithy.ShapeTypeString})
+var sListMembersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListMembersRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MemberResultsLimit, Type: smithy.ShapeTypeInteger})
+var sListMembersResponse_MemberDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberDetails", ID: &i_MemberDetailList, Members: &m_MemberDetailList, Type: smithy.ShapeTypeList})
+var sListMembersResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListOrganizationAdminAccountsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListOrganizationAdminAccountsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MemberResultsLimit, Type: smithy.ShapeTypeInteger})
+var sListOrganizationAdminAccountsResponse_Administrators = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Administrators", ID: &i_AdministratorList, Members: &m_AdministratorList, Type: smithy.ShapeTypeList})
+var sListOrganizationAdminAccountsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_GraphArn, Traits: &t40, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sRejectInvitationRequest_GraphArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GraphArn", ID: &i_GraphArn, Type: smithy.ShapeTypeString})
+var sStartInvestigationRequest_GraphArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GraphArn", ID: &i_GraphArn, Type: smithy.ShapeTypeString})
+var sStartInvestigationRequest_EntityArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityArn", ID: &i_EntityArn, Type: smithy.ShapeTypeString})
+var sStartInvestigationRequest_ScopeStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScopeStartTime", ID: &i_Timestamp, Traits: &t31, Type: smithy.ShapeTypeTimestamp})
+var sStartInvestigationRequest_ScopeEndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScopeEndTime", ID: &i_Timestamp, Traits: &t31, Type: smithy.ShapeTypeTimestamp})
+var sStartInvestigationResponse_InvestigationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvestigationId", ID: &i_InvestigationId, Type: smithy.ShapeTypeString})
+var sStartMonitoringMemberRequest_GraphArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GraphArn", ID: &i_GraphArn, Type: smithy.ShapeTypeString})
+var sStartMonitoringMemberRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_GraphArn, Traits: &t40, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_GraphArn, Traits: &t40, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t41, Type: smithy.ShapeTypeList})
+var sUpdateDatasourcePackagesRequest_GraphArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GraphArn", ID: &i_GraphArn, Type: smithy.ShapeTypeString})
+var sUpdateDatasourcePackagesRequest_DatasourcePackages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasourcePackages", ID: &i_DatasourcePackageList, Members: &m_DatasourcePackageList, Type: smithy.ShapeTypeList})
+var sUpdateInvestigationStateRequest_GraphArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GraphArn", ID: &i_GraphArn, Type: smithy.ShapeTypeString})
+var sUpdateInvestigationStateRequest_InvestigationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvestigationId", ID: &i_InvestigationId, Type: smithy.ShapeTypeString})
+var sUpdateInvestigationStateRequest_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iState, Members: &mState, Type: smithy.ShapeTypeEnum})
+var sUpdateOrganizationConfigurationRequest_GraphArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GraphArn", ID: &i_GraphArn, Type: smithy.ShapeTypeString})
+var sUpdateOrganizationConfigurationRequest_AutoEnable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoEnable", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+
+var AcceptInvitation = &sAcceptInvitation
+
+var BatchGetGraphMemberDatasources = &sBatchGetGraphMemberDatasources
+
+var BatchGetMembershipDatasources = &sBatchGetMembershipDatasources
+
+var CreateGraph = &sCreateGraph
+
+var CreateMembers = &sCreateMembers
+
+var DeleteGraph = &sDeleteGraph
+
+var DeleteMembers = &sDeleteMembers
+
+var DescribeOrganizationConfiguration = &sDescribeOrganizationConfiguration
+
+var DisableOrganizationAdminAccount = &sDisableOrganizationAdminAccount
+
+var DisassociateMembership = &sDisassociateMembership
+
+var EnableOrganizationAdminAccount = &sEnableOrganizationAdminAccount
+
+var GetInvestigation = &sGetInvestigation
+
+var GetMembers = &sGetMembers
+
+var ListDatasourcePackages = &sListDatasourcePackages
+
+var ListGraphs = &sListGraphs
+
+var ListIndicators = &sListIndicators
+
+var ListInvestigations = &sListInvestigations
+
+var ListInvitations = &sListInvitations
+
+var ListMembers = &sListMembers
+
+var ListOrganizationAdminAccounts = &sListOrganizationAdminAccounts
+
+var ListTagsForResource = &sListTagsForResource
+
+var RejectInvitation = &sRejectInvitation
+
+var StartInvestigation = &sStartInvestigation
+
+var StartMonitoringMember = &sStartMonitoringMember
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateDatasourcePackages = &sUpdateDatasourcePackages
+
+var UpdateInvestigationState = &sUpdateInvestigationState
+
+var UpdateOrganizationConfiguration = &sUpdateOrganizationConfiguration
+
+var _AmazonDetective = &s_AmazonDetective
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_Message = &sAccessDeniedException_Message
+var AccessDeniedException_ErrorCode = &sAccessDeniedException_ErrorCode
+var AccessDeniedException_ErrorCodeReason = &sAccessDeniedException_ErrorCodeReason
+var AccessDeniedException_SubErrorCode = &sAccessDeniedException_SubErrorCode
+var AccessDeniedException_SubErrorCodeReason = &sAccessDeniedException_SubErrorCodeReason
+
+var Account = &sAccount
+var Account_AccountId = &sAccount_AccountId
+var Account_EmailAddress = &sAccount_EmailAddress
+
+var _AccountId = &s_AccountId
+
+var _AccountIdExtendedList = &s_AccountIdExtendedList
+var _AccountIdExtendedList_member = &s_AccountIdExtendedList_member
+
+var _AccountIdList = &s_AccountIdList
+var _AccountIdList_member = &s_AccountIdList_member
+
+var _AccountList = &s_AccountList
+var _AccountList_member = &s_AccountList_member
+
+var Administrator = &sAdministrator
+var Administrator_AccountId = &sAdministrator_AccountId
+var Administrator_GraphArn = &sAdministrator_GraphArn
+var Administrator_DelegationTime = &sAdministrator_DelegationTime
+
+var _AdministratorList = &s_AdministratorList
+var _AdministratorList_member = &s_AdministratorList_member
+
+var _AiPaginationToken = &s_AiPaginationToken
+
+var _APIFailureCount = &s_APIFailureCount
+
+var _APIName = &s_APIName
+
+var _APISuccessCount = &s_APISuccessCount
+
+var _Aso = &s_Aso
+
+var _Boolean = &s_Boolean
+
+var _ByteValue = &s_ByteValue
+
+var ConflictException = &sConflictException
+var ConflictException_Message = &sConflictException_Message
+
+var DatasourcePackage = &sDatasourcePackage
+var DatasourcePackage_DETECTIVE_CORE = &sDatasourcePackage_DETECTIVE_CORE
+var DatasourcePackage_EKS_AUDIT = &sDatasourcePackage_EKS_AUDIT
+var DatasourcePackage_ASFF_SECURITYHUB_FINDING = &sDatasourcePackage_ASFF_SECURITYHUB_FINDING
+
+var DatasourcePackageIngestDetail = &sDatasourcePackageIngestDetail
+var DatasourcePackageIngestDetail_DatasourcePackageIngestState = &sDatasourcePackageIngestDetail_DatasourcePackageIngestState
+var DatasourcePackageIngestDetail_LastIngestStateChange = &sDatasourcePackageIngestDetail_LastIngestStateChange
+
+var _DatasourcePackageIngestDetails = &s_DatasourcePackageIngestDetails
+var _DatasourcePackageIngestDetails_key = &s_DatasourcePackageIngestDetails_key
+var _DatasourcePackageIngestDetails_value = &s_DatasourcePackageIngestDetails_value
+
+var _DatasourcePackageIngestHistory = &s_DatasourcePackageIngestHistory
+var _DatasourcePackageIngestHistory_key = &s_DatasourcePackageIngestHistory_key
+var _DatasourcePackageIngestHistory_value = &s_DatasourcePackageIngestHistory_value
+
+var DatasourcePackageIngestState = &sDatasourcePackageIngestState
+var DatasourcePackageIngestState_STARTED = &sDatasourcePackageIngestState_STARTED
+var DatasourcePackageIngestState_STOPPED = &sDatasourcePackageIngestState_STOPPED
+var DatasourcePackageIngestState_DISABLED = &sDatasourcePackageIngestState_DISABLED
+
+var _DatasourcePackageIngestStates = &s_DatasourcePackageIngestStates
+var _DatasourcePackageIngestStates_key = &s_DatasourcePackageIngestStates_key
+var _DatasourcePackageIngestStates_value = &s_DatasourcePackageIngestStates_value
+
+var _DatasourcePackageList = &s_DatasourcePackageList
+var _DatasourcePackageList_member = &s_DatasourcePackageList_member
+
+var DatasourcePackageUsageInfo = &sDatasourcePackageUsageInfo
+var DatasourcePackageUsageInfo_VolumeUsageInBytes = &sDatasourcePackageUsageInfo_VolumeUsageInBytes
+var DatasourcePackageUsageInfo_VolumeUsageUpdateTime = &sDatasourcePackageUsageInfo_VolumeUsageUpdateTime
+
+var DateFilter = &sDateFilter
+var DateFilter_StartInclusive = &sDateFilter_StartInclusive
+var DateFilter_EndInclusive = &sDateFilter_EndInclusive
+
+var _EmailAddress = &s_EmailAddress
+
+var _EmailMessage = &s_EmailMessage
+
+var _EntityArn = &s_EntityArn
+
+var EntityType = &sEntityType
+var EntityType_IAM_ROLE = &sEntityType_IAM_ROLE
+var EntityType_IAM_USER = &sEntityType_IAM_USER
+
+var ErrorCode = &sErrorCode
+var ErrorCode_InvalidGraphArn = &sErrorCode_InvalidGraphArn
+var ErrorCode_InvalidRequestBody = &sErrorCode_InvalidRequestBody
+var ErrorCode_InternalError = &sErrorCode_InternalError
+
+var _ErrorCodeReason = &s_ErrorCodeReason
+
+var _ErrorMessage = &s_ErrorMessage
+
+var Field = &sField
+var Field_SEVERITY = &sField_SEVERITY
+var Field_STATUS = &sField_STATUS
+var Field_CREATED_TIME = &sField_CREATED_TIME
+
+var FilterCriteria = &sFilterCriteria
+var FilterCriteria_Severity = &sFilterCriteria_Severity
+var FilterCriteria_Status = &sFilterCriteria_Status
+var FilterCriteria_State = &sFilterCriteria_State
+var FilterCriteria_EntityArn = &sFilterCriteria_EntityArn
+var FilterCriteria_CreatedTime = &sFilterCriteria_CreatedTime
+
+var FlaggedIpAddressDetail = &sFlaggedIpAddressDetail
+var FlaggedIpAddressDetail_IpAddress = &sFlaggedIpAddressDetail_IpAddress
+var FlaggedIpAddressDetail_Reason = &sFlaggedIpAddressDetail_Reason
+
+var Graph = &sGraph
+var Graph_Arn = &sGraph_Arn
+var Graph_CreatedTime = &sGraph_CreatedTime
+
+var _GraphArn = &s_GraphArn
+
+var _GraphArnList = &s_GraphArnList
+var _GraphArnList_member = &s_GraphArnList_member
+
+var _GraphList = &s_GraphList
+var _GraphList_member = &s_GraphList_member
+
+var _HourlyTimeDelta = &s_HourlyTimeDelta
+
+var _Id = &s_Id
+
+var ImpossibleTravelDetail = &sImpossibleTravelDetail
+var ImpossibleTravelDetail_StartingIpAddress = &sImpossibleTravelDetail_StartingIpAddress
+var ImpossibleTravelDetail_EndingIpAddress = &sImpossibleTravelDetail_EndingIpAddress
+var ImpossibleTravelDetail_StartingLocation = &sImpossibleTravelDetail_StartingLocation
+var ImpossibleTravelDetail_EndingLocation = &sImpossibleTravelDetail_EndingLocation
+var ImpossibleTravelDetail_HourlyTimeDelta = &sImpossibleTravelDetail_HourlyTimeDelta
+
+var Indicator = &sIndicator
+var Indicator_IndicatorType = &sIndicator_IndicatorType
+var Indicator_IndicatorDetail = &sIndicator_IndicatorDetail
+
+var IndicatorDetail = &sIndicatorDetail
+var IndicatorDetail_TTPsObservedDetail = &sIndicatorDetail_TTPsObservedDetail
+var IndicatorDetail_ImpossibleTravelDetail = &sIndicatorDetail_ImpossibleTravelDetail
+var IndicatorDetail_FlaggedIpAddressDetail = &sIndicatorDetail_FlaggedIpAddressDetail
+var IndicatorDetail_NewGeolocationDetail = &sIndicatorDetail_NewGeolocationDetail
+var IndicatorDetail_NewAsoDetail = &sIndicatorDetail_NewAsoDetail
+var IndicatorDetail_NewUserAgentDetail = &sIndicatorDetail_NewUserAgentDetail
+var IndicatorDetail_RelatedFindingDetail = &sIndicatorDetail_RelatedFindingDetail
+var IndicatorDetail_RelatedFindingGroupDetail = &sIndicatorDetail_RelatedFindingGroupDetail
+
+var _Indicators = &s_Indicators
+var _Indicators_member = &s_Indicators_member
+
+var IndicatorType = &sIndicatorType
+var IndicatorType_TTP_OBSERVED = &sIndicatorType_TTP_OBSERVED
+var IndicatorType_IMPOSSIBLE_TRAVEL = &sIndicatorType_IMPOSSIBLE_TRAVEL
+var IndicatorType_FLAGGED_IP_ADDRESS = &sIndicatorType_FLAGGED_IP_ADDRESS
+var IndicatorType_NEW_GEOLOCATION = &sIndicatorType_NEW_GEOLOCATION
+var IndicatorType_NEW_ASO = &sIndicatorType_NEW_ASO
+var IndicatorType_NEW_USER_AGENT = &sIndicatorType_NEW_USER_AGENT
+var IndicatorType_RELATED_FINDING = &sIndicatorType_RELATED_FINDING
+var IndicatorType_RELATED_FINDING_GROUP = &sIndicatorType_RELATED_FINDING_GROUP
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_Message = &sInternalServerException_Message
+
+var InvestigationDetail = &sInvestigationDetail
+var InvestigationDetail_InvestigationId = &sInvestigationDetail_InvestigationId
+var InvestigationDetail_Severity = &sInvestigationDetail_Severity
+var InvestigationDetail_Status = &sInvestigationDetail_Status
+var InvestigationDetail_State = &sInvestigationDetail_State
+var InvestigationDetail_CreatedTime = &sInvestigationDetail_CreatedTime
+var InvestigationDetail_EntityArn = &sInvestigationDetail_EntityArn
+var InvestigationDetail_EntityType = &sInvestigationDetail_EntityType
+
+var _InvestigationDetails = &s_InvestigationDetails
+var _InvestigationDetails_member = &s_InvestigationDetails_member
+
+var _InvestigationId = &s_InvestigationId
+
+var InvitationType = &sInvitationType
+var InvitationType_INVITATION = &sInvitationType_INVITATION
+var InvitationType_ORGANIZATION = &sInvitationType_ORGANIZATION
+
+var _IpAddress = &s_IpAddress
+
+var _IsNewForEntireAccount = &s_IsNewForEntireAccount
+
+var _LastIngestStateChangeDates = &s_LastIngestStateChangeDates
+var _LastIngestStateChangeDates_key = &s_LastIngestStateChangeDates_key
+var _LastIngestStateChangeDates_value = &s_LastIngestStateChangeDates_value
+
+var _Location = &s_Location
+
+var _MaxResults = &s_MaxResults
+
+var MemberDetail = &sMemberDetail
+var MemberDetail_AccountId = &sMemberDetail_AccountId
+var MemberDetail_EmailAddress = &sMemberDetail_EmailAddress
+var MemberDetail_GraphArn = &sMemberDetail_GraphArn
+var MemberDetail_MasterId = &sMemberDetail_MasterId
+var MemberDetail_AdministratorId = &sMemberDetail_AdministratorId
+var MemberDetail_Status = &sMemberDetail_Status
+var MemberDetail_DisabledReason = &sMemberDetail_DisabledReason
+var MemberDetail_InvitedTime = &sMemberDetail_InvitedTime
+var MemberDetail_UpdatedTime = &sMemberDetail_UpdatedTime
+var MemberDetail_VolumeUsageInBytes = &sMemberDetail_VolumeUsageInBytes
+var MemberDetail_VolumeUsageUpdatedTime = &sMemberDetail_VolumeUsageUpdatedTime
+var MemberDetail_PercentOfGraphUtilization = &sMemberDetail_PercentOfGraphUtilization
+var MemberDetail_PercentOfGraphUtilizationUpdatedTime = &sMemberDetail_PercentOfGraphUtilizationUpdatedTime
+var MemberDetail_InvitationType = &sMemberDetail_InvitationType
+var MemberDetail_VolumeUsageByDatasourcePackage = &sMemberDetail_VolumeUsageByDatasourcePackage
+var MemberDetail_DatasourcePackageIngestStates = &sMemberDetail_DatasourcePackageIngestStates
+
+var _MemberDetailList = &s_MemberDetailList
+var _MemberDetailList_member = &s_MemberDetailList_member
+
+var MemberDisabledReason = &sMemberDisabledReason
+var MemberDisabledReason_VOLUME_TOO_HIGH = &sMemberDisabledReason_VOLUME_TOO_HIGH
+var MemberDisabledReason_VOLUME_UNKNOWN = &sMemberDisabledReason_VOLUME_UNKNOWN
+
+var _MemberResultsLimit = &s_MemberResultsLimit
+
+var MembershipDatasources = &sMembershipDatasources
+var MembershipDatasources_AccountId = &sMembershipDatasources_AccountId
+var MembershipDatasources_GraphArn = &sMembershipDatasources_GraphArn
+var MembershipDatasources_DatasourcePackageIngestHistory = &sMembershipDatasources_DatasourcePackageIngestHistory
+
+var _MembershipDatasourcesList = &s_MembershipDatasourcesList
+var _MembershipDatasourcesList_member = &s_MembershipDatasourcesList_member
+
+var MemberStatus = &sMemberStatus
+var MemberStatus_INVITED = &sMemberStatus_INVITED
+var MemberStatus_VERIFICATION_IN_PROGRESS = &sMemberStatus_VERIFICATION_IN_PROGRESS
+var MemberStatus_VERIFICATION_FAILED = &sMemberStatus_VERIFICATION_FAILED
+var MemberStatus_ENABLED = &sMemberStatus_ENABLED
+var MemberStatus_ACCEPTED_BUT_DISABLED = &sMemberStatus_ACCEPTED_BUT_DISABLED
+
+var NewAsoDetail = &sNewAsoDetail
+var NewAsoDetail_Aso = &sNewAsoDetail_Aso
+var NewAsoDetail_IsNewForEntireAccount = &sNewAsoDetail_IsNewForEntireAccount
+
+var NewGeolocationDetail = &sNewGeolocationDetail
+var NewGeolocationDetail_Location = &sNewGeolocationDetail_Location
+var NewGeolocationDetail_IpAddress = &sNewGeolocationDetail_IpAddress
+var NewGeolocationDetail_IsNewForEntireAccount = &sNewGeolocationDetail_IsNewForEntireAccount
+
+var NewUserAgentDetail = &sNewUserAgentDetail
+var NewUserAgentDetail_UserAgent = &sNewUserAgentDetail_UserAgent
+var NewUserAgentDetail_IsNewForEntireAccount = &sNewUserAgentDetail_IsNewForEntireAccount
+
+var _PaginationToken = &s_PaginationToken
+
+var _Percentage = &s_Percentage
+
+var _Procedure = &s_Procedure
+
+var Reason = &sReason
+var Reason_AWS_THREAT_INTELLIGENCE = &sReason_AWS_THREAT_INTELLIGENCE
+
+var RelatedFindingDetail = &sRelatedFindingDetail
+var RelatedFindingDetail_Arn = &sRelatedFindingDetail_Arn
+var RelatedFindingDetail_Type = &sRelatedFindingDetail_Type
+var RelatedFindingDetail_IpAddress = &sRelatedFindingDetail_IpAddress
+
+var RelatedFindingGroupDetail = &sRelatedFindingGroupDetail
+var RelatedFindingGroupDetail_Id = &sRelatedFindingGroupDetail_Id
+
+var _Resource = &s_Resource
+
+var _ResourceList = &s_ResourceList
+var _ResourceList_member = &s_ResourceList_member
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_Message = &sServiceQuotaExceededException_Message
+var ServiceQuotaExceededException_Resources = &sServiceQuotaExceededException_Resources
+
+var Severity = &sSeverity
+var Severity_INFORMATIONAL = &sSeverity_INFORMATIONAL
+var Severity_LOW = &sSeverity_LOW
+var Severity_MEDIUM = &sSeverity_MEDIUM
+var Severity_HIGH = &sSeverity_HIGH
+var Severity_CRITICAL = &sSeverity_CRITICAL
+
+var SortCriteria = &sSortCriteria
+var SortCriteria_Field = &sSortCriteria_Field
+var SortCriteria_SortOrder = &sSortCriteria_SortOrder
+
+var SortOrder = &sSortOrder
+var SortOrder_ASC = &sSortOrder_ASC
+var SortOrder_DESC = &sSortOrder_DESC
+
+var State = &sState
+var State_ACTIVE = &sState_ACTIVE
+var State_ARCHIVED = &sState_ARCHIVED
+
+var Status = &sStatus
+var Status_RUNNING = &sStatus_RUNNING
+var Status_FAILED = &sStatus_FAILED
+var Status_SUCCESSFUL = &sStatus_SUCCESSFUL
+
+var StringFilter = &sStringFilter
+var StringFilter_Value = &sStringFilter_Value
+
+var _Tactic = &s_Tactic
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagMap = &s_TagMap
+var _TagMap_key = &s_TagMap_key
+var _TagMap_value = &s_TagMap_value
+
+var _TagValue = &s_TagValue
+
+var _Technique = &s_Technique
+
+var _Timestamp = &s_Timestamp
+
+var TimestampForCollection = &sTimestampForCollection
+var TimestampForCollection_Timestamp = &sTimestampForCollection_Timestamp
+
+var TooManyRequestsException = &sTooManyRequestsException
+var TooManyRequestsException_Message = &sTooManyRequestsException_Message
+
+var TTPsObservedDetail = &sTTPsObservedDetail
+var TTPsObservedDetail_Tactic = &sTTPsObservedDetail_Tactic
+var TTPsObservedDetail_Technique = &sTTPsObservedDetail_Technique
+var TTPsObservedDetail_Procedure = &sTTPsObservedDetail_Procedure
+var TTPsObservedDetail_IpAddress = &sTTPsObservedDetail_IpAddress
+var TTPsObservedDetail_APIName = &sTTPsObservedDetail_APIName
+var TTPsObservedDetail_APISuccessCount = &sTTPsObservedDetail_APISuccessCount
+var TTPsObservedDetail_APIFailureCount = &sTTPsObservedDetail_APIFailureCount
+
+var _Type = &s_Type
+
+var UnprocessedAccount = &sUnprocessedAccount
+var UnprocessedAccount_AccountId = &sUnprocessedAccount_AccountId
+var UnprocessedAccount_Reason = &sUnprocessedAccount_Reason
+
+var _UnprocessedAccountList = &s_UnprocessedAccountList
+var _UnprocessedAccountList_member = &s_UnprocessedAccountList_member
+
+var UnprocessedGraph = &sUnprocessedGraph
+var UnprocessedGraph_GraphArn = &sUnprocessedGraph_GraphArn
+var UnprocessedGraph_Reason = &sUnprocessedGraph_Reason
+
+var _UnprocessedGraphList = &s_UnprocessedGraphList
+var _UnprocessedGraphList_member = &s_UnprocessedGraphList_member
+
+var _UnprocessedReason = &s_UnprocessedReason
+
+var _UserAgent = &s_UserAgent
+
+var ValidationException = &sValidationException
+var ValidationException_Message = &sValidationException_Message
+var ValidationException_ErrorCode = &sValidationException_ErrorCode
+var ValidationException_ErrorCodeReason = &sValidationException_ErrorCodeReason
+
+var _Value = &s_Value
+
+var _VolumeUsageByDatasourcePackage = &s_VolumeUsageByDatasourcePackage
+var _VolumeUsageByDatasourcePackage_key = &s_VolumeUsageByDatasourcePackage_key
+var _VolumeUsageByDatasourcePackage_value = &s_VolumeUsageByDatasourcePackage_value
+
+var AcceptInvitationRequest = &sAcceptInvitationRequest
+var AcceptInvitationRequest_GraphArn = &sAcceptInvitationRequest_GraphArn
+
+var BatchGetGraphMemberDatasourcesRequest = &sBatchGetGraphMemberDatasourcesRequest
+var BatchGetGraphMemberDatasourcesRequest_GraphArn = &sBatchGetGraphMemberDatasourcesRequest_GraphArn
+var BatchGetGraphMemberDatasourcesRequest_AccountIds = &sBatchGetGraphMemberDatasourcesRequest_AccountIds
+
+var BatchGetGraphMemberDatasourcesResponse = &sBatchGetGraphMemberDatasourcesResponse
+var BatchGetGraphMemberDatasourcesResponse_MemberDatasources = &sBatchGetGraphMemberDatasourcesResponse_MemberDatasources
+var BatchGetGraphMemberDatasourcesResponse_UnprocessedAccounts = &sBatchGetGraphMemberDatasourcesResponse_UnprocessedAccounts
+
+var BatchGetMembershipDatasourcesRequest = &sBatchGetMembershipDatasourcesRequest
+var BatchGetMembershipDatasourcesRequest_GraphArns = &sBatchGetMembershipDatasourcesRequest_GraphArns
+
+var BatchGetMembershipDatasourcesResponse = &sBatchGetMembershipDatasourcesResponse
+var BatchGetMembershipDatasourcesResponse_MembershipDatasources = &sBatchGetMembershipDatasourcesResponse_MembershipDatasources
+var BatchGetMembershipDatasourcesResponse_UnprocessedGraphs = &sBatchGetMembershipDatasourcesResponse_UnprocessedGraphs
+
+var CreateGraphRequest = &sCreateGraphRequest
+var CreateGraphRequest_Tags = &sCreateGraphRequest_Tags
+
+var CreateGraphResponse = &sCreateGraphResponse
+var CreateGraphResponse_GraphArn = &sCreateGraphResponse_GraphArn
+
+var CreateMembersRequest = &sCreateMembersRequest
+var CreateMembersRequest_GraphArn = &sCreateMembersRequest_GraphArn
+var CreateMembersRequest_Message = &sCreateMembersRequest_Message
+var CreateMembersRequest_DisableEmailNotification = &sCreateMembersRequest_DisableEmailNotification
+var CreateMembersRequest_Accounts = &sCreateMembersRequest_Accounts
+
+var CreateMembersResponse = &sCreateMembersResponse
+var CreateMembersResponse_Members = &sCreateMembersResponse_Members
+var CreateMembersResponse_UnprocessedAccounts = &sCreateMembersResponse_UnprocessedAccounts
+
+var DeleteGraphRequest = &sDeleteGraphRequest
+var DeleteGraphRequest_GraphArn = &sDeleteGraphRequest_GraphArn
+
+var DeleteMembersRequest = &sDeleteMembersRequest
+var DeleteMembersRequest_GraphArn = &sDeleteMembersRequest_GraphArn
+var DeleteMembersRequest_AccountIds = &sDeleteMembersRequest_AccountIds
+
+var DeleteMembersResponse = &sDeleteMembersResponse
+var DeleteMembersResponse_AccountIds = &sDeleteMembersResponse_AccountIds
+var DeleteMembersResponse_UnprocessedAccounts = &sDeleteMembersResponse_UnprocessedAccounts
+
+var DescribeOrganizationConfigurationRequest = &sDescribeOrganizationConfigurationRequest
+var DescribeOrganizationConfigurationRequest_GraphArn = &sDescribeOrganizationConfigurationRequest_GraphArn
+
+var DescribeOrganizationConfigurationResponse = &sDescribeOrganizationConfigurationResponse
+var DescribeOrganizationConfigurationResponse_AutoEnable = &sDescribeOrganizationConfigurationResponse_AutoEnable
+
+var DisassociateMembershipRequest = &sDisassociateMembershipRequest
+var DisassociateMembershipRequest_GraphArn = &sDisassociateMembershipRequest_GraphArn
+
+var EnableOrganizationAdminAccountRequest = &sEnableOrganizationAdminAccountRequest
+var EnableOrganizationAdminAccountRequest_AccountId = &sEnableOrganizationAdminAccountRequest_AccountId
+
+var GetInvestigationRequest = &sGetInvestigationRequest
+var GetInvestigationRequest_GraphArn = &sGetInvestigationRequest_GraphArn
+var GetInvestigationRequest_InvestigationId = &sGetInvestigationRequest_InvestigationId
+
+var GetInvestigationResponse = &sGetInvestigationResponse
+var GetInvestigationResponse_GraphArn = &sGetInvestigationResponse_GraphArn
+var GetInvestigationResponse_InvestigationId = &sGetInvestigationResponse_InvestigationId
+var GetInvestigationResponse_EntityArn = &sGetInvestigationResponse_EntityArn
+var GetInvestigationResponse_EntityType = &sGetInvestigationResponse_EntityType
+var GetInvestigationResponse_CreatedTime = &sGetInvestigationResponse_CreatedTime
+var GetInvestigationResponse_ScopeStartTime = &sGetInvestigationResponse_ScopeStartTime
+var GetInvestigationResponse_ScopeEndTime = &sGetInvestigationResponse_ScopeEndTime
+var GetInvestigationResponse_Status = &sGetInvestigationResponse_Status
+var GetInvestigationResponse_Severity = &sGetInvestigationResponse_Severity
+var GetInvestigationResponse_State = &sGetInvestigationResponse_State
+
+var GetMembersRequest = &sGetMembersRequest
+var GetMembersRequest_GraphArn = &sGetMembersRequest_GraphArn
+var GetMembersRequest_AccountIds = &sGetMembersRequest_AccountIds
+
+var GetMembersResponse = &sGetMembersResponse
+var GetMembersResponse_MemberDetails = &sGetMembersResponse_MemberDetails
+var GetMembersResponse_UnprocessedAccounts = &sGetMembersResponse_UnprocessedAccounts
+
+var ListDatasourcePackagesRequest = &sListDatasourcePackagesRequest
+var ListDatasourcePackagesRequest_GraphArn = &sListDatasourcePackagesRequest_GraphArn
+var ListDatasourcePackagesRequest_NextToken = &sListDatasourcePackagesRequest_NextToken
+var ListDatasourcePackagesRequest_MaxResults = &sListDatasourcePackagesRequest_MaxResults
+
+var ListDatasourcePackagesResponse = &sListDatasourcePackagesResponse
+var ListDatasourcePackagesResponse_DatasourcePackages = &sListDatasourcePackagesResponse_DatasourcePackages
+var ListDatasourcePackagesResponse_NextToken = &sListDatasourcePackagesResponse_NextToken
+
+var ListGraphsRequest = &sListGraphsRequest
+var ListGraphsRequest_NextToken = &sListGraphsRequest_NextToken
+var ListGraphsRequest_MaxResults = &sListGraphsRequest_MaxResults
+
+var ListGraphsResponse = &sListGraphsResponse
+var ListGraphsResponse_GraphList = &sListGraphsResponse_GraphList
+var ListGraphsResponse_NextToken = &sListGraphsResponse_NextToken
+
+var ListIndicatorsRequest = &sListIndicatorsRequest
+var ListIndicatorsRequest_GraphArn = &sListIndicatorsRequest_GraphArn
+var ListIndicatorsRequest_InvestigationId = &sListIndicatorsRequest_InvestigationId
+var ListIndicatorsRequest_IndicatorType = &sListIndicatorsRequest_IndicatorType
+var ListIndicatorsRequest_NextToken = &sListIndicatorsRequest_NextToken
+var ListIndicatorsRequest_MaxResults = &sListIndicatorsRequest_MaxResults
+
+var ListIndicatorsResponse = &sListIndicatorsResponse
+var ListIndicatorsResponse_GraphArn = &sListIndicatorsResponse_GraphArn
+var ListIndicatorsResponse_InvestigationId = &sListIndicatorsResponse_InvestigationId
+var ListIndicatorsResponse_NextToken = &sListIndicatorsResponse_NextToken
+var ListIndicatorsResponse_Indicators = &sListIndicatorsResponse_Indicators
+
+var ListInvestigationsRequest = &sListInvestigationsRequest
+var ListInvestigationsRequest_GraphArn = &sListInvestigationsRequest_GraphArn
+var ListInvestigationsRequest_NextToken = &sListInvestigationsRequest_NextToken
+var ListInvestigationsRequest_MaxResults = &sListInvestigationsRequest_MaxResults
+var ListInvestigationsRequest_FilterCriteria = &sListInvestigationsRequest_FilterCriteria
+var ListInvestigationsRequest_SortCriteria = &sListInvestigationsRequest_SortCriteria
+
+var ListInvestigationsResponse = &sListInvestigationsResponse
+var ListInvestigationsResponse_InvestigationDetails = &sListInvestigationsResponse_InvestigationDetails
+var ListInvestigationsResponse_NextToken = &sListInvestigationsResponse_NextToken
+
+var ListInvitationsRequest = &sListInvitationsRequest
+var ListInvitationsRequest_NextToken = &sListInvitationsRequest_NextToken
+var ListInvitationsRequest_MaxResults = &sListInvitationsRequest_MaxResults
+
+var ListInvitationsResponse = &sListInvitationsResponse
+var ListInvitationsResponse_Invitations = &sListInvitationsResponse_Invitations
+var ListInvitationsResponse_NextToken = &sListInvitationsResponse_NextToken
+
+var ListMembersRequest = &sListMembersRequest
+var ListMembersRequest_GraphArn = &sListMembersRequest_GraphArn
+var ListMembersRequest_NextToken = &sListMembersRequest_NextToken
+var ListMembersRequest_MaxResults = &sListMembersRequest_MaxResults
+
+var ListMembersResponse = &sListMembersResponse
+var ListMembersResponse_MemberDetails = &sListMembersResponse_MemberDetails
+var ListMembersResponse_NextToken = &sListMembersResponse_NextToken
+
+var ListOrganizationAdminAccountsRequest = &sListOrganizationAdminAccountsRequest
+var ListOrganizationAdminAccountsRequest_NextToken = &sListOrganizationAdminAccountsRequest_NextToken
+var ListOrganizationAdminAccountsRequest_MaxResults = &sListOrganizationAdminAccountsRequest_MaxResults
+
+var ListOrganizationAdminAccountsResponse = &sListOrganizationAdminAccountsResponse
+var ListOrganizationAdminAccountsResponse_Administrators = &sListOrganizationAdminAccountsResponse_Administrators
+var ListOrganizationAdminAccountsResponse_NextToken = &sListOrganizationAdminAccountsResponse_NextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceArn = &sListTagsForResourceRequest_ResourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_Tags = &sListTagsForResourceResponse_Tags
+
+var RejectInvitationRequest = &sRejectInvitationRequest
+var RejectInvitationRequest_GraphArn = &sRejectInvitationRequest_GraphArn
+
+var StartInvestigationRequest = &sStartInvestigationRequest
+var StartInvestigationRequest_GraphArn = &sStartInvestigationRequest_GraphArn
+var StartInvestigationRequest_EntityArn = &sStartInvestigationRequest_EntityArn
+var StartInvestigationRequest_ScopeStartTime = &sStartInvestigationRequest_ScopeStartTime
+var StartInvestigationRequest_ScopeEndTime = &sStartInvestigationRequest_ScopeEndTime
+
+var StartInvestigationResponse = &sStartInvestigationResponse
+var StartInvestigationResponse_InvestigationId = &sStartInvestigationResponse_InvestigationId
+
+var StartMonitoringMemberRequest = &sStartMonitoringMemberRequest
+var StartMonitoringMemberRequest_GraphArn = &sStartMonitoringMemberRequest_GraphArn
+var StartMonitoringMemberRequest_AccountId = &sStartMonitoringMemberRequest_AccountId
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceArn = &sTagResourceRequest_ResourceArn
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceArn = &sUntagResourceRequest_ResourceArn
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateDatasourcePackagesRequest = &sUpdateDatasourcePackagesRequest
+var UpdateDatasourcePackagesRequest_GraphArn = &sUpdateDatasourcePackagesRequest_GraphArn
+var UpdateDatasourcePackagesRequest_DatasourcePackages = &sUpdateDatasourcePackagesRequest_DatasourcePackages
+
+var UpdateInvestigationStateRequest = &sUpdateInvestigationStateRequest
+var UpdateInvestigationStateRequest_GraphArn = &sUpdateInvestigationStateRequest_GraphArn
+var UpdateInvestigationStateRequest_InvestigationId = &sUpdateInvestigationStateRequest_InvestigationId
+var UpdateInvestigationStateRequest_State = &sUpdateInvestigationStateRequest_State
+
+var UpdateOrganizationConfigurationRequest = &sUpdateOrganizationConfigurationRequest
+var UpdateOrganizationConfigurationRequest_GraphArn = &sUpdateOrganizationConfigurationRequest_GraphArn
+var UpdateOrganizationConfigurationRequest_AutoEnable = &sUpdateOrganizationConfigurationRequest_AutoEnable
+
+var AmazonDetective = &smithy.ServiceSchema{Schema: &s_AmazonDetective, Version: "2018-10-26"}

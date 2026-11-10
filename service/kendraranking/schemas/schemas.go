@@ -4,634 +4,501 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateRescoreExecutionPlan = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "CreateRescoreExecutionPlan",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	iCreateRescoreExecutionPlan                            = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "CreateRescoreExecutionPlan"}
+	iDeleteRescoreExecutionPlan                            = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "DeleteRescoreExecutionPlan"}
+	iDescribeRescoreExecutionPlan                          = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "DescribeRescoreExecutionPlan"}
+	iListRescoreExecutionPlans                             = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "ListRescoreExecutionPlans"}
+	iListTagsForResource                                   = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "ListTagsForResource"}
+	iRescore                                               = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "Rescore"}
+	iTagResource                                           = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "TagResource"}
+	iUntagResource                                         = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "UntagResource"}
+	iUpdateRescoreExecutionPlan                            = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "UpdateRescoreExecutionPlan"}
+	i_AWSKendraRerankingFrontendService                    = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "AWSKendraRerankingFrontendService"}
+	iAccessDeniedException                                 = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "AccessDeniedException"}
+	i_AmazonResourceName                                   = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "AmazonResourceName"}
+	i_BodyTokensList                                       = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "BodyTokensList"}
+	iCapacityUnitsConfiguration                            = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "CapacityUnitsConfiguration"}
+	i_ClientTokenName                                      = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "ClientTokenName"}
+	iConflictException                                     = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "ConflictException"}
+	i_Description                                          = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "Description"}
+	iDocument                                              = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "Document"}
+	i_DocumentBody                                         = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "DocumentBody"}
+	i_DocumentId                                           = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "DocumentId"}
+	i_DocumentList                                         = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "DocumentList"}
+	i_DocumentTitle                                        = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "DocumentTitle"}
+	i_ErrorMessage                                         = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "ErrorMessage"}
+	i_Float                                                = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "Float"}
+	i_GroupId                                              = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "GroupId"}
+	iInternalServerException                               = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "InternalServerException"}
+	i_MaxResultsIntegerForListRescoreExecutionPlansRequest = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "MaxResultsIntegerForListRescoreExecutionPlansRequest"}
+	i_NextToken                                            = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "NextToken"}
+	i_RescoreCapacityUnit                                  = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "RescoreCapacityUnit"}
+	i_RescoreExecutionPlanArn                              = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "RescoreExecutionPlanArn"}
+	i_RescoreExecutionPlanId                               = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "RescoreExecutionPlanId"}
+	i_RescoreExecutionPlanName                             = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "RescoreExecutionPlanName"}
+	iRescoreExecutionPlanStatus                            = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "RescoreExecutionPlanStatus"}
+	iRescoreExecutionPlanSummary                           = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "RescoreExecutionPlanSummary"}
+	i_RescoreExecutionPlanSummaryList                      = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "RescoreExecutionPlanSummaryList"}
+	i_RescoreId                                            = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "RescoreId"}
+	iRescoreResultItem                                     = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "RescoreResultItem"}
+	i_RescoreResultItemList                                = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "RescoreResultItemList"}
+	iResourceNotFoundException                             = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "ResourceNotFoundException"}
+	iResourceUnavailableException                          = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "ResourceUnavailableException"}
+	i_SearchQuery                                          = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "SearchQuery"}
+	iServiceQuotaExceededException                         = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "ServiceQuotaExceededException"}
+	iTag                                                   = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "Tag"}
+	i_TagKey                                               = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "TagKey"}
+	i_TagKeyList                                           = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "TagKeyList"}
+	i_TagList                                              = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "TagList"}
+	i_TagValue                                             = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "TagValue"}
+	iThrottlingException                                   = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "ThrottlingException"}
+	i_Timestamp                                            = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "Timestamp"}
+	i_TitleTokensList                                      = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "TitleTokensList"}
+	i_Tokens                                               = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "Tokens"}
+	iValidationException                                   = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "ValidationException"}
+	iCreateRescoreExecutionPlanRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "CreateRescoreExecutionPlanRequest"}
+	iCreateRescoreExecutionPlanResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "CreateRescoreExecutionPlanResponse"}
+	iDeleteRescoreExecutionPlanRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "DeleteRescoreExecutionPlanRequest"}
+	iDescribeRescoreExecutionPlanRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "DescribeRescoreExecutionPlanRequest"}
+	iDescribeRescoreExecutionPlanResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "DescribeRescoreExecutionPlanResponse"}
+	iListRescoreExecutionPlansRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "ListRescoreExecutionPlansRequest"}
+	iListRescoreExecutionPlansResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "ListRescoreExecutionPlansResponse"}
+	iListTagsForResourceRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "ListTagsForResourceResponse"}
+	iRescoreRequest                                        = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "RescoreRequest"}
+	iRescoreResult                                         = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "RescoreResult"}
+	iTagResourceRequest                                    = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "TagResourceRequest"}
+	iTagResourceResponse                                   = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "TagResourceResponse"}
+	iUntagResourceRequest                                  = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                                 = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "UntagResourceResponse"}
+	iUpdateRescoreExecutionPlanRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.kendraranking", Name: "UpdateRescoreExecutionPlanRequest"}
+	pUnit                                                  = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/rescore-execution-plans",
-	Code: 200})
-
-var DeleteRescoreExecutionPlan = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "DeleteRescoreExecutionPlan",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/rescore-execution-plans/{Id}",
-	Code: 200})
-
-var DescribeRescoreExecutionPlan = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "DescribeRescoreExecutionPlan",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/rescore-execution-plans/{Id}",
-	Code: 200})
-
-var ListRescoreExecutionPlans = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "ListRescoreExecutionPlans",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/rescore-execution-plans",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var Rescore = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "Rescore",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/rescore-execution-plans/{RescoreExecutionPlanId}/rescore",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateRescoreExecutionPlan = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "UpdateRescoreExecutionPlan",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/rescore-execution-plans/{Id}",
-	Code: 200})
-
-var _AWSKendraRerankingFrontendService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "AWSKendraRerankingFrontendService",
-}, smithy.ShapeTypeService, 0)
-
-var AWSKendraRerankingFrontendService = smithy.NewServiceSchema(_AWSKendraRerankingFrontendService, "2022-10-19")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var _AmazonResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "AmazonResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var _BodyTokensList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "BodyTokensList",
-}, smithy.ShapeTypeList, 1)
-var _BodyTokensList_member *smithy.Schema
-
-var CapacityUnitsConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "CapacityUnitsConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var CapacityUnitsConfiguration_RescoreCapacityUnits *smithy.Schema
-
-var _ClientTokenName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "ClientTokenName",
-}, smithy.ShapeTypeString, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_Message *smithy.Schema
-
-var _Description = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "Description",
-}, smithy.ShapeTypeString, 0)
-
-var Document = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "Document",
-}, smithy.ShapeTypeStructure, 7)
-var Document_Id *smithy.Schema
-
-var Document_GroupId *smithy.Schema
-
-var Document_Title *smithy.Schema
-
-var Document_Body *smithy.Schema
-
-var Document_TokenizedTitle *smithy.Schema
-
-var Document_TokenizedBody *smithy.Schema
-
-var Document_OriginalScore *smithy.Schema
-
-var _DocumentBody = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "DocumentBody",
-}, smithy.ShapeTypeString, 0)
-
-var _DocumentId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "DocumentId",
-}, smithy.ShapeTypeString, 0)
-
-var _DocumentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "DocumentList",
-}, smithy.ShapeTypeList, 1)
-var _DocumentList_member *smithy.Schema
-
-var _DocumentTitle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "DocumentTitle",
-}, smithy.ShapeTypeString, 0)
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _Float = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "Float",
-}, smithy.ShapeTypeFloat, 0)
-
-var _GroupId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "GroupId",
-}, smithy.ShapeTypeString, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_Message *smithy.Schema
-
-var _MaxResultsIntegerForListRescoreExecutionPlansRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "MaxResultsIntegerForListRescoreExecutionPlansRequest",
-}, smithy.ShapeTypeInteger, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _RescoreCapacityUnit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "RescoreCapacityUnit",
-}, smithy.ShapeTypeInteger, 0)
-
-var _RescoreExecutionPlanArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "RescoreExecutionPlanArn",
-}, smithy.ShapeTypeString, 0)
-
-var _RescoreExecutionPlanId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "RescoreExecutionPlanId",
-}, smithy.ShapeTypeString, 0)
-
-var _RescoreExecutionPlanName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "RescoreExecutionPlanName",
-}, smithy.ShapeTypeString, 0)
-
-var RescoreExecutionPlanStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "RescoreExecutionPlanStatus",
-}, smithy.ShapeTypeEnum, 5)
-var RescoreExecutionPlanStatus_CREATING *smithy.Schema
-
-var RescoreExecutionPlanStatus_UPDATING *smithy.Schema
-
-var RescoreExecutionPlanStatus_ACTIVE *smithy.Schema
-
-var RescoreExecutionPlanStatus_DELETING *smithy.Schema
-
-var RescoreExecutionPlanStatus_FAILED *smithy.Schema
-
-var RescoreExecutionPlanSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "RescoreExecutionPlanSummary",
-}, smithy.ShapeTypeStructure, 5)
-var RescoreExecutionPlanSummary_Name *smithy.Schema
-
-var RescoreExecutionPlanSummary_Id *smithy.Schema
-
-var RescoreExecutionPlanSummary_CreatedAt *smithy.Schema
-
-var RescoreExecutionPlanSummary_UpdatedAt *smithy.Schema
-
-var RescoreExecutionPlanSummary_Status *smithy.Schema
-
-var _RescoreExecutionPlanSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "RescoreExecutionPlanSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _RescoreExecutionPlanSummaryList_member *smithy.Schema
-
-var _RescoreId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "RescoreId",
-}, smithy.ShapeTypeString, 0)
-
-var RescoreResultItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "RescoreResultItem",
-}, smithy.ShapeTypeStructure, 2)
-var RescoreResultItem_DocumentId *smithy.Schema
-
-var RescoreResultItem_Score *smithy.Schema
-
-var _RescoreResultItemList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "RescoreResultItemList",
-}, smithy.ShapeTypeList, 1)
-var _RescoreResultItemList_member *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var ResourceUnavailableException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "ResourceUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceUnavailableException_Message *smithy.Schema
-
-var _SearchQuery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "SearchQuery",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_Message *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_Message *smithy.Schema
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _TitleTokensList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "TitleTokensList",
-}, smithy.ShapeTypeList, 1)
-var _TitleTokensList_member *smithy.Schema
-
-var _Tokens = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "Tokens",
-}, smithy.ShapeTypeString, 0)
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_Message *smithy.Schema
-
-var CreateRescoreExecutionPlanRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "CreateRescoreExecutionPlanRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateRescoreExecutionPlanRequest_Name *smithy.Schema
-
-var CreateRescoreExecutionPlanRequest_Description *smithy.Schema
-
-var CreateRescoreExecutionPlanRequest_CapacityUnits *smithy.Schema
-
-var CreateRescoreExecutionPlanRequest_Tags *smithy.Schema
-
-var CreateRescoreExecutionPlanRequest_ClientToken *smithy.Schema
-
-var CreateRescoreExecutionPlanResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "CreateRescoreExecutionPlanResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateRescoreExecutionPlanResponse_Id *smithy.Schema
-
-var CreateRescoreExecutionPlanResponse_Arn *smithy.Schema
-
-var DeleteRescoreExecutionPlanRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "DeleteRescoreExecutionPlanRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteRescoreExecutionPlanRequest_Id *smithy.Schema
-
-var DescribeRescoreExecutionPlanRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "DescribeRescoreExecutionPlanRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeRescoreExecutionPlanRequest_Id *smithy.Schema
-
-var DescribeRescoreExecutionPlanResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "DescribeRescoreExecutionPlanResponse",
-}, smithy.ShapeTypeStructure, 9)
-var DescribeRescoreExecutionPlanResponse_Id *smithy.Schema
-
-var DescribeRescoreExecutionPlanResponse_Arn *smithy.Schema
-
-var DescribeRescoreExecutionPlanResponse_Name *smithy.Schema
-
-var DescribeRescoreExecutionPlanResponse_Description *smithy.Schema
-
-var DescribeRescoreExecutionPlanResponse_CapacityUnits *smithy.Schema
-
-var DescribeRescoreExecutionPlanResponse_CreatedAt *smithy.Schema
-
-var DescribeRescoreExecutionPlanResponse_UpdatedAt *smithy.Schema
-
-var DescribeRescoreExecutionPlanResponse_Status *smithy.Schema
-
-var DescribeRescoreExecutionPlanResponse_ErrorMessage *smithy.Schema
-
-var ListRescoreExecutionPlansRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "ListRescoreExecutionPlansRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListRescoreExecutionPlansRequest_NextToken *smithy.Schema
-
-var ListRescoreExecutionPlansRequest_MaxResults *smithy.Schema
-
-var ListRescoreExecutionPlansResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "ListRescoreExecutionPlansResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListRescoreExecutionPlansResponse_SummaryItems *smithy.Schema
-
-var ListRescoreExecutionPlansResponse_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceARN *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var RescoreRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "RescoreRequest",
-}, smithy.ShapeTypeStructure, 3)
-var RescoreRequest_RescoreExecutionPlanId *smithy.Schema
-
-var RescoreRequest_SearchQuery *smithy.Schema
-
-var RescoreRequest_Documents *smithy.Schema
-
-var RescoreResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "RescoreResult",
-}, smithy.ShapeTypeStructure, 2)
-var RescoreResult_RescoreId *smithy.Schema
-
-var RescoreResult_ResultItems *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceARN *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceARN *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateRescoreExecutionPlanRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kendraranking",
-	Name:      "UpdateRescoreExecutionPlanRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateRescoreExecutionPlanRequest_Id *smithy.Schema
-
-var UpdateRescoreExecutionPlanRequest_Name *smithy.Schema
-
-var UpdateRescoreExecutionPlanRequest_Description *smithy.Schema
-
-var UpdateRescoreExecutionPlanRequest_CapacityUnits *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _ErrorMessage)
-
-	_BodyTokensList_member = _BodyTokensList.AddMember("member", _Tokens)
-
-	CapacityUnitsConfiguration_RescoreCapacityUnits = CapacityUnitsConfiguration.AddMember("RescoreCapacityUnits", _RescoreCapacityUnit)
-
-	ConflictException_Message = ConflictException.AddMember("Message", _ErrorMessage)
-
-	_TitleTokensList_member = _TitleTokensList.AddMember("member", _Tokens)
-
-	Document_Id = Document.AddMember("Id", _DocumentId)
-
-	Document_GroupId = Document.AddMember("GroupId", _GroupId)
-
-	Document_Title = Document.AddMember("Title", _DocumentTitle)
-
-	Document_Body = Document.AddMember("Body", _DocumentBody)
-
-	Document_TokenizedTitle = Document.AddMember("TokenizedTitle", _TitleTokensList)
-
-	Document_TokenizedBody = Document.AddMember("TokenizedBody", _BodyTokensList)
-
-	Document_OriginalScore = Document.AddMember("OriginalScore", _Float)
-
-	_DocumentList_member = _DocumentList.AddMember("member", Document)
-
-	InternalServerException_Message = InternalServerException.AddMember("Message", _ErrorMessage)
-
-	RescoreExecutionPlanStatus_CREATING = RescoreExecutionPlanStatus.AddMember("CREATING", smithyprelude.Unit)
-
-	RescoreExecutionPlanStatus_UPDATING = RescoreExecutionPlanStatus.AddMember("UPDATING", smithyprelude.Unit)
-
-	RescoreExecutionPlanStatus_ACTIVE = RescoreExecutionPlanStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	RescoreExecutionPlanStatus_DELETING = RescoreExecutionPlanStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	RescoreExecutionPlanStatus_FAILED = RescoreExecutionPlanStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	RescoreExecutionPlanSummary_Name = RescoreExecutionPlanSummary.AddMember("Name", _RescoreExecutionPlanName)
-
-	RescoreExecutionPlanSummary_Id = RescoreExecutionPlanSummary.AddMember("Id", _RescoreExecutionPlanId)
-
-	RescoreExecutionPlanSummary_CreatedAt = RescoreExecutionPlanSummary.AddMember("CreatedAt", _Timestamp)
-
-	RescoreExecutionPlanSummary_UpdatedAt = RescoreExecutionPlanSummary.AddMember("UpdatedAt", _Timestamp)
-
-	RescoreExecutionPlanSummary_Status = RescoreExecutionPlanSummary.AddMember("Status", RescoreExecutionPlanStatus)
-
-	_RescoreExecutionPlanSummaryList_member = _RescoreExecutionPlanSummaryList.AddMember("member", RescoreExecutionPlanSummary)
-
-	RescoreResultItem_DocumentId = RescoreResultItem.AddMember("DocumentId", _DocumentId)
-
-	RescoreResultItem_Score = RescoreResultItem.AddMember("Score", _Float)
-
-	_RescoreResultItemList_member = _RescoreResultItemList.AddMember("member", RescoreResultItem)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _ErrorMessage)
-
-	ResourceUnavailableException_Message = ResourceUnavailableException.AddMember("Message", _ErrorMessage)
-
-	ServiceQuotaExceededException_Message = ServiceQuotaExceededException.AddMember("Message", _ErrorMessage)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", _ErrorMessage)
-
-	ValidationException_Message = ValidationException.AddMember("Message", _ErrorMessage)
-
-	CreateRescoreExecutionPlanRequest_Name = CreateRescoreExecutionPlanRequest.AddMember("Name", _RescoreExecutionPlanName)
-
-	CreateRescoreExecutionPlanRequest_Description = CreateRescoreExecutionPlanRequest.AddMember("Description", _Description)
-
-	CreateRescoreExecutionPlanRequest_CapacityUnits = CreateRescoreExecutionPlanRequest.AddMember("CapacityUnits", CapacityUnitsConfiguration)
-
-	CreateRescoreExecutionPlanRequest_Tags = CreateRescoreExecutionPlanRequest.AddMember("Tags", _TagList)
-
-	CreateRescoreExecutionPlanRequest_ClientToken = CreateRescoreExecutionPlanRequest.AddMember("ClientToken", _ClientTokenName)
-
-	CreateRescoreExecutionPlanResponse_Id = CreateRescoreExecutionPlanResponse.AddMember("Id", _RescoreExecutionPlanId)
-
-	CreateRescoreExecutionPlanResponse_Arn = CreateRescoreExecutionPlanResponse.AddMember("Arn", _RescoreExecutionPlanArn)
-
-	DeleteRescoreExecutionPlanRequest_Id = DeleteRescoreExecutionPlanRequest.AddMember("Id", _RescoreExecutionPlanId, &smithytraits.HTTPLabel{})
-
-	DescribeRescoreExecutionPlanRequest_Id = DescribeRescoreExecutionPlanRequest.AddMember("Id", _RescoreExecutionPlanId, &smithytraits.HTTPLabel{})
-
-	DescribeRescoreExecutionPlanResponse_Id = DescribeRescoreExecutionPlanResponse.AddMember("Id", _RescoreExecutionPlanId)
-
-	DescribeRescoreExecutionPlanResponse_Arn = DescribeRescoreExecutionPlanResponse.AddMember("Arn", _RescoreExecutionPlanArn)
-
-	DescribeRescoreExecutionPlanResponse_Name = DescribeRescoreExecutionPlanResponse.AddMember("Name", _RescoreExecutionPlanName)
-
-	DescribeRescoreExecutionPlanResponse_Description = DescribeRescoreExecutionPlanResponse.AddMember("Description", _Description)
-
-	DescribeRescoreExecutionPlanResponse_CapacityUnits = DescribeRescoreExecutionPlanResponse.AddMember("CapacityUnits", CapacityUnitsConfiguration)
-
-	DescribeRescoreExecutionPlanResponse_CreatedAt = DescribeRescoreExecutionPlanResponse.AddMember("CreatedAt", _Timestamp)
-
-	DescribeRescoreExecutionPlanResponse_UpdatedAt = DescribeRescoreExecutionPlanResponse.AddMember("UpdatedAt", _Timestamp)
-
-	DescribeRescoreExecutionPlanResponse_Status = DescribeRescoreExecutionPlanResponse.AddMember("Status", RescoreExecutionPlanStatus)
-
-	DescribeRescoreExecutionPlanResponse_ErrorMessage = DescribeRescoreExecutionPlanResponse.AddMember("ErrorMessage", _ErrorMessage)
-
-	ListRescoreExecutionPlansRequest_NextToken = ListRescoreExecutionPlansRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListRescoreExecutionPlansRequest_MaxResults = ListRescoreExecutionPlansRequest.AddMember("MaxResults", _MaxResultsIntegerForListRescoreExecutionPlansRequest, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListRescoreExecutionPlansResponse_SummaryItems = ListRescoreExecutionPlansResponse.AddMember("SummaryItems", _RescoreExecutionPlanSummaryList)
-
-	ListRescoreExecutionPlansResponse_NextToken = ListRescoreExecutionPlansResponse.AddMember("NextToken", _NextToken)
-
-	ListTagsForResourceRequest_ResourceARN = ListTagsForResourceRequest.AddMember("ResourceARN", _AmazonResourceName)
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _TagList)
-
-	RescoreRequest_RescoreExecutionPlanId = RescoreRequest.AddMember("RescoreExecutionPlanId", _RescoreExecutionPlanId, &smithytraits.HTTPLabel{})
-
-	RescoreRequest_SearchQuery = RescoreRequest.AddMember("SearchQuery", _SearchQuery)
-
-	RescoreRequest_Documents = RescoreRequest.AddMember("Documents", _DocumentList)
-
-	RescoreResult_RescoreId = RescoreResult.AddMember("RescoreId", _RescoreId)
-
-	RescoreResult_ResultItems = RescoreResult.AddMember("ResultItems", _RescoreResultItemList)
-
-	TagResourceRequest_ResourceARN = TagResourceRequest.AddMember("ResourceARN", _AmazonResourceName)
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _TagList)
-
-	UntagResourceRequest_ResourceARN = UntagResourceRequest.AddMember("ResourceARN", _AmazonResourceName)
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList)
-
-	UpdateRescoreExecutionPlanRequest_Id = UpdateRescoreExecutionPlanRequest.AddMember("Id", _RescoreExecutionPlanId, &smithytraits.HTTPLabel{})
-
-	UpdateRescoreExecutionPlanRequest_Name = UpdateRescoreExecutionPlanRequest.AddMember("Name", _RescoreExecutionPlanName)
-
-	UpdateRescoreExecutionPlanRequest_Description = UpdateRescoreExecutionPlanRequest.AddMember("Description", _Description)
-
-	UpdateRescoreExecutionPlanRequest_CapacityUnits = UpdateRescoreExecutionPlanRequest.AddMember("CapacityUnits", CapacityUnitsConfiguration)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_Message}}
+var m_BodyTokensList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BodyTokensList_member}}
+var mCapacityUnitsConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sCapacityUnitsConfiguration_RescoreCapacityUnits}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_Message}}
+var mDocument = smithy.SchemaMembers{List: []*smithy.Schema{&sDocument_Id, &sDocument_GroupId, &sDocument_Title, &sDocument_Body, &sDocument_TokenizedTitle, &sDocument_TokenizedBody, &sDocument_OriginalScore}}
+var m_DocumentList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DocumentList_member}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_Message}}
+var mRescoreExecutionPlanStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sRescoreExecutionPlanStatus_CREATING, &sRescoreExecutionPlanStatus_UPDATING, &sRescoreExecutionPlanStatus_ACTIVE, &sRescoreExecutionPlanStatus_DELETING, &sRescoreExecutionPlanStatus_FAILED}}
+var mRescoreExecutionPlanSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sRescoreExecutionPlanSummary_Name, &sRescoreExecutionPlanSummary_Id, &sRescoreExecutionPlanSummary_CreatedAt, &sRescoreExecutionPlanSummary_UpdatedAt, &sRescoreExecutionPlanSummary_Status}}
+var m_RescoreExecutionPlanSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RescoreExecutionPlanSummaryList_member}}
+var mRescoreResultItem = smithy.SchemaMembers{List: []*smithy.Schema{&sRescoreResultItem_DocumentId, &sRescoreResultItem_Score}}
+var m_RescoreResultItemList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RescoreResultItemList_member}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message}}
+var mResourceUnavailableException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceUnavailableException_Message}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_Message}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_Message}}
+var m_TitleTokensList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TitleTokensList_member}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_Message}}
+var mCreateRescoreExecutionPlanRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRescoreExecutionPlanRequest_Name, &sCreateRescoreExecutionPlanRequest_Description, &sCreateRescoreExecutionPlanRequest_CapacityUnits, &sCreateRescoreExecutionPlanRequest_Tags, &sCreateRescoreExecutionPlanRequest_ClientToken}}
+var mCreateRescoreExecutionPlanResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRescoreExecutionPlanResponse_Id, &sCreateRescoreExecutionPlanResponse_Arn}}
+var mDeleteRescoreExecutionPlanRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRescoreExecutionPlanRequest_Id}}
+var mDescribeRescoreExecutionPlanRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeRescoreExecutionPlanRequest_Id}}
+var mDescribeRescoreExecutionPlanResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeRescoreExecutionPlanResponse_Id, &sDescribeRescoreExecutionPlanResponse_Arn, &sDescribeRescoreExecutionPlanResponse_Name, &sDescribeRescoreExecutionPlanResponse_Description, &sDescribeRescoreExecutionPlanResponse_CapacityUnits, &sDescribeRescoreExecutionPlanResponse_CreatedAt, &sDescribeRescoreExecutionPlanResponse_UpdatedAt, &sDescribeRescoreExecutionPlanResponse_Status, &sDescribeRescoreExecutionPlanResponse_ErrorMessage}, Seed: 7, Slots: []uint16{
+	4, 0, 0, 5, 0, 6, 0, 3, 0, 0, 0, 7, 0, 0, 9, 0, 2, 8, 0, 0, 0, 0, 0, 1,
+	0, 0, 0, 0, 0, 0, 0, 0,
+}}
+var mListRescoreExecutionPlansRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListRescoreExecutionPlansRequest_NextToken, &sListRescoreExecutionPlansRequest_MaxResults}}
+var mListRescoreExecutionPlansResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListRescoreExecutionPlansResponse_SummaryItems, &sListRescoreExecutionPlansResponse_NextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceARN}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_Tags}}
+var mRescoreRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRescoreRequest_RescoreExecutionPlanId, &sRescoreRequest_SearchQuery, &sRescoreRequest_Documents}}
+var mRescoreResult = smithy.SchemaMembers{List: []*smithy.Schema{&sRescoreResult_RescoreId, &sRescoreResult_ResultItems}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceARN, &sTagResourceRequest_Tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceARN, &sUntagResourceRequest_TagKeys}}
+var mUpdateRescoreExecutionPlanRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRescoreExecutionPlanRequest_Id, &sUpdateRescoreExecutionPlanRequest_Name, &sUpdateRescoreExecutionPlanRequest_Description, &sUpdateRescoreExecutionPlanRequest_CapacityUnits}}
+
+var sCreateRescoreExecutionPlan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRescoreExecutionPlan, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sDeleteRescoreExecutionPlan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRescoreExecutionPlan, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sDescribeRescoreExecutionPlan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRescoreExecutionPlan, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sListRescoreExecutionPlans = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRescoreExecutionPlans, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation})
+var sRescore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRescore, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation})
+var sUpdateRescoreExecutionPlan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRescoreExecutionPlan, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var s_AWSKendraRerankingFrontendService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSKendraRerankingFrontendService, Type: smithy.ShapeTypeService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t6, Type: smithy.ShapeTypeStructure})
+var s_AmazonResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString})
+var s_BodyTokensList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BodyTokensList, Members: &m_BodyTokensList, Type: smithy.ShapeTypeList})
+var sCapacityUnitsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCapacityUnitsConfiguration, Members: &mCapacityUnitsConfiguration, Type: smithy.ShapeTypeStructure})
+var s_ClientTokenName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientTokenName, Type: smithy.ShapeTypeString})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t7, Type: smithy.ShapeTypeStructure})
+var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Type: smithy.ShapeTypeString})
+var sDocument = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDocument, Members: &mDocument, Type: smithy.ShapeTypeStructure})
+var s_DocumentBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DocumentBody, Type: smithy.ShapeTypeString})
+var s_DocumentId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DocumentId, Type: smithy.ShapeTypeString})
+var s_DocumentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DocumentList, Members: &m_DocumentList, Type: smithy.ShapeTypeList})
+var s_DocumentTitle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DocumentTitle, Type: smithy.ShapeTypeString})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_Float = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Float, Type: smithy.ShapeTypeFloat})
+var s_GroupId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GroupId, Type: smithy.ShapeTypeString})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t8, Type: smithy.ShapeTypeStructure})
+var s_MaxResultsIntegerForListRescoreExecutionPlansRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResultsIntegerForListRescoreExecutionPlansRequest, Type: smithy.ShapeTypeInteger})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var s_RescoreCapacityUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RescoreCapacityUnit, Type: smithy.ShapeTypeInteger})
+var s_RescoreExecutionPlanArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RescoreExecutionPlanArn, Type: smithy.ShapeTypeString})
+var s_RescoreExecutionPlanId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RescoreExecutionPlanId, Type: smithy.ShapeTypeString})
+var s_RescoreExecutionPlanName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RescoreExecutionPlanName, Type: smithy.ShapeTypeString})
+var sRescoreExecutionPlanStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRescoreExecutionPlanStatus, Members: &mRescoreExecutionPlanStatus, Type: smithy.ShapeTypeEnum})
+var sRescoreExecutionPlanSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRescoreExecutionPlanSummary, Members: &mRescoreExecutionPlanSummary, Type: smithy.ShapeTypeStructure})
+var s_RescoreExecutionPlanSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RescoreExecutionPlanSummaryList, Members: &m_RescoreExecutionPlanSummaryList, Type: smithy.ShapeTypeList})
+var s_RescoreId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RescoreId, Type: smithy.ShapeTypeString})
+var sRescoreResultItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRescoreResultItem, Members: &mRescoreResultItem, Type: smithy.ShapeTypeStructure})
+var s_RescoreResultItemList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RescoreResultItemList, Members: &m_RescoreResultItemList, Type: smithy.ShapeTypeList})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t9, Type: smithy.ShapeTypeStructure})
+var sResourceUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceUnavailableException, Members: &mResourceUnavailableException, Traits: &t9, Type: smithy.ShapeTypeStructure})
+var s_SearchQuery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchQuery, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t10, Type: smithy.ShapeTypeStructure})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t11, Type: smithy.ShapeTypeStructure})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var s_TitleTokensList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TitleTokensList, Members: &m_TitleTokensList, Type: smithy.ShapeTypeList})
+var s_Tokens = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tokens, Type: smithy.ShapeTypeString})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t12, Type: smithy.ShapeTypeStructure})
+var sCreateRescoreExecutionPlanRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRescoreExecutionPlanRequest, Members: &mCreateRescoreExecutionPlanRequest, Type: smithy.ShapeTypeStructure})
+var sCreateRescoreExecutionPlanResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRescoreExecutionPlanResponse, Members: &mCreateRescoreExecutionPlanResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteRescoreExecutionPlanRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRescoreExecutionPlanRequest, Members: &mDeleteRescoreExecutionPlanRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeRescoreExecutionPlanRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRescoreExecutionPlanRequest, Members: &mDescribeRescoreExecutionPlanRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeRescoreExecutionPlanResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRescoreExecutionPlanResponse, Members: &mDescribeRescoreExecutionPlanResponse, Type: smithy.ShapeTypeStructure})
+var sListRescoreExecutionPlansRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRescoreExecutionPlansRequest, Members: &mListRescoreExecutionPlansRequest, Type: smithy.ShapeTypeStructure})
+var sListRescoreExecutionPlansResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRescoreExecutionPlansResponse, Members: &mListRescoreExecutionPlansResponse, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure})
+var sRescoreRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRescoreRequest, Members: &mRescoreRequest, Type: smithy.ShapeTypeStructure})
+var sRescoreResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRescoreResult, Members: &mRescoreResult, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateRescoreExecutionPlanRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRescoreExecutionPlanRequest, Members: &mUpdateRescoreExecutionPlanRequest, Type: smithy.ShapeTypeStructure})
+
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_BodyTokensList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Tokens, Type: smithy.ShapeTypeString})
+var sCapacityUnitsConfiguration_RescoreCapacityUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RescoreCapacityUnits", ID: &i_RescoreCapacityUnit, Type: smithy.ShapeTypeInteger})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sDocument_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_DocumentId, Type: smithy.ShapeTypeString})
+var sDocument_GroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupId", ID: &i_GroupId, Type: smithy.ShapeTypeString})
+var sDocument_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_DocumentTitle, Type: smithy.ShapeTypeString})
+var sDocument_Body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Body", ID: &i_DocumentBody, Type: smithy.ShapeTypeString})
+var sDocument_TokenizedTitle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TokenizedTitle", ID: &i_TitleTokensList, Members: &m_TitleTokensList, Type: smithy.ShapeTypeList})
+var sDocument_TokenizedBody = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TokenizedBody", ID: &i_BodyTokensList, Members: &m_BodyTokensList, Type: smithy.ShapeTypeList})
+var sDocument_OriginalScore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OriginalScore", ID: &i_Float, Type: smithy.ShapeTypeFloat})
+var s_DocumentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDocument, Members: &mDocument, Type: smithy.ShapeTypeStructure})
+var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sRescoreExecutionPlanStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRescoreExecutionPlanStatus_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRescoreExecutionPlanStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRescoreExecutionPlanStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRescoreExecutionPlanStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRescoreExecutionPlanSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_RescoreExecutionPlanName, Type: smithy.ShapeTypeString})
+var sRescoreExecutionPlanSummary_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_RescoreExecutionPlanId, Type: smithy.ShapeTypeString})
+var sRescoreExecutionPlanSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sRescoreExecutionPlanSummary_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sRescoreExecutionPlanSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iRescoreExecutionPlanStatus, Members: &mRescoreExecutionPlanStatus, Type: smithy.ShapeTypeEnum})
+var s_RescoreExecutionPlanSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRescoreExecutionPlanSummary, Members: &mRescoreExecutionPlanSummary, Type: smithy.ShapeTypeStructure})
+var sRescoreResultItem_DocumentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DocumentId", ID: &i_DocumentId, Type: smithy.ShapeTypeString})
+var sRescoreResultItem_Score = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Score", ID: &i_Float, Type: smithy.ShapeTypeFloat})
+var s_RescoreResultItemList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRescoreResultItem, Members: &mRescoreResultItem, Type: smithy.ShapeTypeStructure})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sResourceUnavailableException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_TitleTokensList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Tokens, Type: smithy.ShapeTypeString})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sCreateRescoreExecutionPlanRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_RescoreExecutionPlanName, Type: smithy.ShapeTypeString})
+var sCreateRescoreExecutionPlanRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sCreateRescoreExecutionPlanRequest_CapacityUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CapacityUnits", ID: &iCapacityUnitsConfiguration, Members: &mCapacityUnitsConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateRescoreExecutionPlanRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateRescoreExecutionPlanRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientTokenName, Type: smithy.ShapeTypeString})
+var sCreateRescoreExecutionPlanResponse_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_RescoreExecutionPlanId, Type: smithy.ShapeTypeString})
+var sCreateRescoreExecutionPlanResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_RescoreExecutionPlanArn, Type: smithy.ShapeTypeString})
+var sDeleteRescoreExecutionPlanRequest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_RescoreExecutionPlanId, Traits: &t13, Type: smithy.ShapeTypeString})
+var sDescribeRescoreExecutionPlanRequest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_RescoreExecutionPlanId, Traits: &t13, Type: smithy.ShapeTypeString})
+var sDescribeRescoreExecutionPlanResponse_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_RescoreExecutionPlanId, Type: smithy.ShapeTypeString})
+var sDescribeRescoreExecutionPlanResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_RescoreExecutionPlanArn, Type: smithy.ShapeTypeString})
+var sDescribeRescoreExecutionPlanResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_RescoreExecutionPlanName, Type: smithy.ShapeTypeString})
+var sDescribeRescoreExecutionPlanResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sDescribeRescoreExecutionPlanResponse_CapacityUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CapacityUnits", ID: &iCapacityUnitsConfiguration, Members: &mCapacityUnitsConfiguration, Type: smithy.ShapeTypeStructure})
+var sDescribeRescoreExecutionPlanResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeRescoreExecutionPlanResponse_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeRescoreExecutionPlanResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iRescoreExecutionPlanStatus, Members: &mRescoreExecutionPlanStatus, Type: smithy.ShapeTypeEnum})
+var sDescribeRescoreExecutionPlanResponse_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sListRescoreExecutionPlansRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t14, Type: smithy.ShapeTypeString})
+var sListRescoreExecutionPlansRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResultsIntegerForListRescoreExecutionPlansRequest, Traits: &t15, Type: smithy.ShapeTypeInteger})
+var sListRescoreExecutionPlansResponse_SummaryItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SummaryItems", ID: &i_RescoreExecutionPlanSummaryList, Members: &m_RescoreExecutionPlanSummaryList, Type: smithy.ShapeTypeList})
+var sListRescoreExecutionPlansResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListTagsForResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sRescoreRequest_RescoreExecutionPlanId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RescoreExecutionPlanId", ID: &i_RescoreExecutionPlanId, Traits: &t13, Type: smithy.ShapeTypeString})
+var sRescoreRequest_SearchQuery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchQuery", ID: &i_SearchQuery, Type: smithy.ShapeTypeString})
+var sRescoreRequest_Documents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Documents", ID: &i_DocumentList, Members: &m_DocumentList, Type: smithy.ShapeTypeList})
+var sRescoreResult_RescoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RescoreId", ID: &i_RescoreId, Type: smithy.ShapeTypeString})
+var sRescoreResult_ResultItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResultItems", ID: &i_RescoreResultItemList, Members: &m_RescoreResultItemList, Type: smithy.ShapeTypeList})
+var sTagResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sUntagResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var sUpdateRescoreExecutionPlanRequest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_RescoreExecutionPlanId, Traits: &t13, Type: smithy.ShapeTypeString})
+var sUpdateRescoreExecutionPlanRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_RescoreExecutionPlanName, Type: smithy.ShapeTypeString})
+var sUpdateRescoreExecutionPlanRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sUpdateRescoreExecutionPlanRequest_CapacityUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CapacityUnits", ID: &iCapacityUnitsConfiguration, Members: &mCapacityUnitsConfiguration, Type: smithy.ShapeTypeStructure})
+
+var CreateRescoreExecutionPlan = &sCreateRescoreExecutionPlan
+
+var DeleteRescoreExecutionPlan = &sDeleteRescoreExecutionPlan
+
+var DescribeRescoreExecutionPlan = &sDescribeRescoreExecutionPlan
+
+var ListRescoreExecutionPlans = &sListRescoreExecutionPlans
+
+var ListTagsForResource = &sListTagsForResource
+
+var Rescore = &sRescore
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateRescoreExecutionPlan = &sUpdateRescoreExecutionPlan
+
+var _AWSKendraRerankingFrontendService = &s_AWSKendraRerankingFrontendService
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_Message = &sAccessDeniedException_Message
+
+var _AmazonResourceName = &s_AmazonResourceName
+
+var _BodyTokensList = &s_BodyTokensList
+var _BodyTokensList_member = &s_BodyTokensList_member
+
+var CapacityUnitsConfiguration = &sCapacityUnitsConfiguration
+var CapacityUnitsConfiguration_RescoreCapacityUnits = &sCapacityUnitsConfiguration_RescoreCapacityUnits
+
+var _ClientTokenName = &s_ClientTokenName
+
+var ConflictException = &sConflictException
+var ConflictException_Message = &sConflictException_Message
+
+var _Description = &s_Description
+
+var Document = &sDocument
+var Document_Id = &sDocument_Id
+var Document_GroupId = &sDocument_GroupId
+var Document_Title = &sDocument_Title
+var Document_Body = &sDocument_Body
+var Document_TokenizedTitle = &sDocument_TokenizedTitle
+var Document_TokenizedBody = &sDocument_TokenizedBody
+var Document_OriginalScore = &sDocument_OriginalScore
+
+var _DocumentBody = &s_DocumentBody
+
+var _DocumentId = &s_DocumentId
+
+var _DocumentList = &s_DocumentList
+var _DocumentList_member = &s_DocumentList_member
+
+var _DocumentTitle = &s_DocumentTitle
+
+var _ErrorMessage = &s_ErrorMessage
+
+var _Float = &s_Float
+
+var _GroupId = &s_GroupId
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_Message = &sInternalServerException_Message
+
+var _MaxResultsIntegerForListRescoreExecutionPlansRequest = &s_MaxResultsIntegerForListRescoreExecutionPlansRequest
+
+var _NextToken = &s_NextToken
+
+var _RescoreCapacityUnit = &s_RescoreCapacityUnit
+
+var _RescoreExecutionPlanArn = &s_RescoreExecutionPlanArn
+
+var _RescoreExecutionPlanId = &s_RescoreExecutionPlanId
+
+var _RescoreExecutionPlanName = &s_RescoreExecutionPlanName
+
+var RescoreExecutionPlanStatus = &sRescoreExecutionPlanStatus
+var RescoreExecutionPlanStatus_CREATING = &sRescoreExecutionPlanStatus_CREATING
+var RescoreExecutionPlanStatus_UPDATING = &sRescoreExecutionPlanStatus_UPDATING
+var RescoreExecutionPlanStatus_ACTIVE = &sRescoreExecutionPlanStatus_ACTIVE
+var RescoreExecutionPlanStatus_DELETING = &sRescoreExecutionPlanStatus_DELETING
+var RescoreExecutionPlanStatus_FAILED = &sRescoreExecutionPlanStatus_FAILED
+
+var RescoreExecutionPlanSummary = &sRescoreExecutionPlanSummary
+var RescoreExecutionPlanSummary_Name = &sRescoreExecutionPlanSummary_Name
+var RescoreExecutionPlanSummary_Id = &sRescoreExecutionPlanSummary_Id
+var RescoreExecutionPlanSummary_CreatedAt = &sRescoreExecutionPlanSummary_CreatedAt
+var RescoreExecutionPlanSummary_UpdatedAt = &sRescoreExecutionPlanSummary_UpdatedAt
+var RescoreExecutionPlanSummary_Status = &sRescoreExecutionPlanSummary_Status
+
+var _RescoreExecutionPlanSummaryList = &s_RescoreExecutionPlanSummaryList
+var _RescoreExecutionPlanSummaryList_member = &s_RescoreExecutionPlanSummaryList_member
+
+var _RescoreId = &s_RescoreId
+
+var RescoreResultItem = &sRescoreResultItem
+var RescoreResultItem_DocumentId = &sRescoreResultItem_DocumentId
+var RescoreResultItem_Score = &sRescoreResultItem_Score
+
+var _RescoreResultItemList = &s_RescoreResultItemList
+var _RescoreResultItemList_member = &s_RescoreResultItemList_member
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+
+var ResourceUnavailableException = &sResourceUnavailableException
+var ResourceUnavailableException_Message = &sResourceUnavailableException_Message
+
+var _SearchQuery = &s_SearchQuery
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_Message = &sServiceQuotaExceededException_Message
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _TagValue = &s_TagValue
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_Message = &sThrottlingException_Message
+
+var _Timestamp = &s_Timestamp
+
+var _TitleTokensList = &s_TitleTokensList
+var _TitleTokensList_member = &s_TitleTokensList_member
+
+var _Tokens = &s_Tokens
+
+var ValidationException = &sValidationException
+var ValidationException_Message = &sValidationException_Message
+
+var CreateRescoreExecutionPlanRequest = &sCreateRescoreExecutionPlanRequest
+var CreateRescoreExecutionPlanRequest_Name = &sCreateRescoreExecutionPlanRequest_Name
+var CreateRescoreExecutionPlanRequest_Description = &sCreateRescoreExecutionPlanRequest_Description
+var CreateRescoreExecutionPlanRequest_CapacityUnits = &sCreateRescoreExecutionPlanRequest_CapacityUnits
+var CreateRescoreExecutionPlanRequest_Tags = &sCreateRescoreExecutionPlanRequest_Tags
+var CreateRescoreExecutionPlanRequest_ClientToken = &sCreateRescoreExecutionPlanRequest_ClientToken
+
+var CreateRescoreExecutionPlanResponse = &sCreateRescoreExecutionPlanResponse
+var CreateRescoreExecutionPlanResponse_Id = &sCreateRescoreExecutionPlanResponse_Id
+var CreateRescoreExecutionPlanResponse_Arn = &sCreateRescoreExecutionPlanResponse_Arn
+
+var DeleteRescoreExecutionPlanRequest = &sDeleteRescoreExecutionPlanRequest
+var DeleteRescoreExecutionPlanRequest_Id = &sDeleteRescoreExecutionPlanRequest_Id
+
+var DescribeRescoreExecutionPlanRequest = &sDescribeRescoreExecutionPlanRequest
+var DescribeRescoreExecutionPlanRequest_Id = &sDescribeRescoreExecutionPlanRequest_Id
+
+var DescribeRescoreExecutionPlanResponse = &sDescribeRescoreExecutionPlanResponse
+var DescribeRescoreExecutionPlanResponse_Id = &sDescribeRescoreExecutionPlanResponse_Id
+var DescribeRescoreExecutionPlanResponse_Arn = &sDescribeRescoreExecutionPlanResponse_Arn
+var DescribeRescoreExecutionPlanResponse_Name = &sDescribeRescoreExecutionPlanResponse_Name
+var DescribeRescoreExecutionPlanResponse_Description = &sDescribeRescoreExecutionPlanResponse_Description
+var DescribeRescoreExecutionPlanResponse_CapacityUnits = &sDescribeRescoreExecutionPlanResponse_CapacityUnits
+var DescribeRescoreExecutionPlanResponse_CreatedAt = &sDescribeRescoreExecutionPlanResponse_CreatedAt
+var DescribeRescoreExecutionPlanResponse_UpdatedAt = &sDescribeRescoreExecutionPlanResponse_UpdatedAt
+var DescribeRescoreExecutionPlanResponse_Status = &sDescribeRescoreExecutionPlanResponse_Status
+var DescribeRescoreExecutionPlanResponse_ErrorMessage = &sDescribeRescoreExecutionPlanResponse_ErrorMessage
+
+var ListRescoreExecutionPlansRequest = &sListRescoreExecutionPlansRequest
+var ListRescoreExecutionPlansRequest_NextToken = &sListRescoreExecutionPlansRequest_NextToken
+var ListRescoreExecutionPlansRequest_MaxResults = &sListRescoreExecutionPlansRequest_MaxResults
+
+var ListRescoreExecutionPlansResponse = &sListRescoreExecutionPlansResponse
+var ListRescoreExecutionPlansResponse_SummaryItems = &sListRescoreExecutionPlansResponse_SummaryItems
+var ListRescoreExecutionPlansResponse_NextToken = &sListRescoreExecutionPlansResponse_NextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceARN = &sListTagsForResourceRequest_ResourceARN
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_Tags = &sListTagsForResourceResponse_Tags
+
+var RescoreRequest = &sRescoreRequest
+var RescoreRequest_RescoreExecutionPlanId = &sRescoreRequest_RescoreExecutionPlanId
+var RescoreRequest_SearchQuery = &sRescoreRequest_SearchQuery
+var RescoreRequest_Documents = &sRescoreRequest_Documents
+
+var RescoreResult = &sRescoreResult
+var RescoreResult_RescoreId = &sRescoreResult_RescoreId
+var RescoreResult_ResultItems = &sRescoreResult_ResultItems
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceARN = &sTagResourceRequest_ResourceARN
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceARN = &sUntagResourceRequest_ResourceARN
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateRescoreExecutionPlanRequest = &sUpdateRescoreExecutionPlanRequest
+var UpdateRescoreExecutionPlanRequest_Id = &sUpdateRescoreExecutionPlanRequest_Id
+var UpdateRescoreExecutionPlanRequest_Name = &sUpdateRescoreExecutionPlanRequest_Name
+var UpdateRescoreExecutionPlanRequest_Description = &sUpdateRescoreExecutionPlanRequest_Description
+var UpdateRescoreExecutionPlanRequest_CapacityUnits = &sUpdateRescoreExecutionPlanRequest_CapacityUnits
+
+var AWSKendraRerankingFrontendService = &smithy.ServiceSchema{Schema: &s_AWSKendraRerankingFrontendService, Version: "2022-10-19"}

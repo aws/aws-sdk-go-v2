@@ -4,3189 +4,2325 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var BatchCreateUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "BatchCreateUser",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/networks/{networkId}/users",
-	Code: 200})
+var (
+	iBatchCreateUser                         = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "BatchCreateUser"}
+	iBatchDeleteUser                         = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "BatchDeleteUser"}
+	iBatchLookupUserUname                    = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "BatchLookupUserUname"}
+	iBatchReinviteUser                       = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "BatchReinviteUser"}
+	iBatchResetDevicesForUser                = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "BatchResetDevicesForUser"}
+	iBatchToggleUserSuspendStatus            = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "BatchToggleUserSuspendStatus"}
+	iCreateBot                               = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "CreateBot"}
+	iCreateDataRetentionBot                  = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "CreateDataRetentionBot"}
+	iCreateDataRetentionBotChallenge         = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "CreateDataRetentionBotChallenge"}
+	iCreateNetwork                           = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "CreateNetwork"}
+	iCreateSecurityGroup                     = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "CreateSecurityGroup"}
+	iDeleteBot                               = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "DeleteBot"}
+	iDeleteDataRetentionBot                  = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "DeleteDataRetentionBot"}
+	iDeleteNetwork                           = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "DeleteNetwork"}
+	iDeleteSecurityGroup                     = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "DeleteSecurityGroup"}
+	iGetBot                                  = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "GetBot"}
+	iGetBotsCount                            = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "GetBotsCount"}
+	iGetDataRetentionBot                     = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "GetDataRetentionBot"}
+	iGetGuestUserHistoryCount                = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "GetGuestUserHistoryCount"}
+	iGetNetwork                              = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "GetNetwork"}
+	iGetNetworkSettings                      = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "GetNetworkSettings"}
+	iGetOidcInfo                             = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "GetOidcInfo"}
+	iGetOpentdfConfig                        = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "GetOpentdfConfig"}
+	iGetSecurityGroup                        = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "GetSecurityGroup"}
+	iGetUser                                 = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "GetUser"}
+	iGetUsersCount                           = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "GetUsersCount"}
+	iListBlockedGuestUsers                   = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "ListBlockedGuestUsers"}
+	iListBots                                = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "ListBots"}
+	iListDevicesForUser                      = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "ListDevicesForUser"}
+	iListGuestUsers                          = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "ListGuestUsers"}
+	iListNetworks                            = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "ListNetworks"}
+	iListSecurityGroups                      = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "ListSecurityGroups"}
+	iListSecurityGroupUsers                  = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "ListSecurityGroupUsers"}
+	iListUsers                               = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "ListUsers"}
+	iRegisterOidcConfig                      = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "RegisterOidcConfig"}
+	iRegisterOidcConfigTest                  = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "RegisterOidcConfigTest"}
+	iRegisterOpentdfConfig                   = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "RegisterOpentdfConfig"}
+	iUpdateBot                               = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "UpdateBot"}
+	iUpdateDataRetention                     = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "UpdateDataRetention"}
+	iUpdateGuestUser                         = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "UpdateGuestUser"}
+	iUpdateNetwork                           = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "UpdateNetwork"}
+	iUpdateNetworkSettings                   = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "UpdateNetworkSettings"}
+	iUpdateSecurityGroup                     = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "UpdateSecurityGroup"}
+	iUpdateUser                              = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "UpdateUser"}
+	i_WickrAdminApi                          = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "WickrAdminApi"}
+	iAccessLevel                             = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "AccessLevel"}
+	i_AppIds                                 = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "AppIds"}
+	iBadRequestError                         = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "BadRequestError"}
+	iBasicDeviceObject                       = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "BasicDeviceObject"}
+	iBatchCreateUserRequestItem              = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "BatchCreateUserRequestItem"}
+	i_BatchCreateUserRequestItems            = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "BatchCreateUserRequestItems"}
+	iBatchDeviceErrorResponseItem            = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "BatchDeviceErrorResponseItem"}
+	i_BatchDeviceErrorResponseItems          = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "BatchDeviceErrorResponseItems"}
+	iBatchDeviceSuccessResponseItem          = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "BatchDeviceSuccessResponseItem"}
+	i_BatchDeviceSuccessResponseItems        = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "BatchDeviceSuccessResponseItems"}
+	iBatchUnameErrorResponseItem             = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "BatchUnameErrorResponseItem"}
+	i_BatchUnameErrorResponseItems           = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "BatchUnameErrorResponseItems"}
+	iBatchUnameSuccessResponseItem           = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "BatchUnameSuccessResponseItem"}
+	i_BatchUnameSuccessResponseItems         = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "BatchUnameSuccessResponseItems"}
+	iBatchUserErrorResponseItem              = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "BatchUserErrorResponseItem"}
+	i_BatchUserErrorResponseItems            = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "BatchUserErrorResponseItems"}
+	iBatchUserSuccessResponseItem            = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "BatchUserSuccessResponseItem"}
+	i_BatchUserSuccessResponseItems          = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "BatchUserSuccessResponseItems"}
+	iBlockedGuestUser                        = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "BlockedGuestUser"}
+	i_BlockedGuestUserList                   = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "BlockedGuestUserList"}
+	iBot                                     = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "Bot"}
+	i_BotId                                  = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "BotId"}
+	i_Bots                                   = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "Bots"}
+	i_BotStatus                              = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "BotStatus"}
+	iCallingSettings                         = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "CallingSettings"}
+	i_ClientToken                            = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "ClientToken"}
+	iConsentPopupConfig                      = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "ConsentPopupConfig"}
+	iDataRetentionActionType                 = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "DataRetentionActionType"}
+	i_Devices                                = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "Devices"}
+	iErrorDetail                             = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "ErrorDetail"}
+	i_ErrorDetailList                        = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "ErrorDetailList"}
+	iForbiddenError                          = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "ForbiddenError"}
+	i_GenericString                          = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "GenericString"}
+	iGuestUser                               = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "GuestUser"}
+	iGuestUserHistoryCount                   = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "GuestUserHistoryCount"}
+	i_GuestUserHistoryCountList              = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "GuestUserHistoryCountList"}
+	i_GuestUserList                          = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "GuestUserList"}
+	iInternalServerError                     = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "InternalServerError"}
+	iNetwork                                 = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "Network"}
+	i_NetworkId                              = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "NetworkId"}
+	i_NetworkList                            = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "NetworkList"}
+	iNetworkSettings                         = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "NetworkSettings"}
+	iOidcConfigInfo                          = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "OidcConfigInfo"}
+	iOidcTokenInfo                           = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "OidcTokenInfo"}
+	iPasswordRequirements                    = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "PasswordRequirements"}
+	i_PermittedNetworksList                  = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "PermittedNetworksList"}
+	iPermittedWickrEnterpriseNetwork         = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "PermittedWickrEnterpriseNetwork"}
+	i_PermittedWickrEnterpriseNetworksList   = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "PermittedWickrEnterpriseNetworksList"}
+	iRateLimitError                          = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "RateLimitError"}
+	iReadReceiptConfig                       = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "ReadReceiptConfig"}
+	iResourceNotFoundError                   = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "ResourceNotFoundError"}
+	iSecurityGroup                           = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "SecurityGroup"}
+	i_SecurityGroupId                        = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "SecurityGroupId"}
+	i_SecurityGroupIdList                    = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "SecurityGroupIdList"}
+	i_SecurityGroupList                      = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "SecurityGroupList"}
+	iSecurityGroupSettings                   = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "SecurityGroupSettings"}
+	iSecurityGroupSettingsRequest            = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "SecurityGroupSettingsRequest"}
+	i_SecurityGroupStringList                = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "SecurityGroupStringList"}
+	i_SensitiveString                        = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "SensitiveString"}
+	iSetting                                 = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "Setting"}
+	i_SettingsList                           = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "SettingsList"}
+	iShredderSettings                        = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "ShredderSettings"}
+	iSortDirection                           = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "SortDirection"}
+	iStatus                                  = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "Status"}
+	i_StringList                             = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "StringList"}
+	i_Uname                                  = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "Uname"}
+	i_Unames                                 = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "Unames"}
+	iUnauthorizedError                       = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "UnauthorizedError"}
+	iUpdateUserDetails                       = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "UpdateUserDetails"}
+	iUser                                    = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "User"}
+	i_UserId                                 = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "UserId"}
+	i_UserIds                                = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "UserIds"}
+	i_Users                                  = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "Users"}
+	i_UserStatus                             = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "UserStatus"}
+	iValidationError                         = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "ValidationError"}
+	iWickrAwsNetworks                        = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "WickrAwsNetworks"}
+	i_WickrAwsNetworksList                   = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "WickrAwsNetworksList"}
+	iBatchCreateUserRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "BatchCreateUserRequest"}
+	iBatchCreateUserResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "BatchCreateUserResponse"}
+	iBatchDeleteUserRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "BatchDeleteUserRequest"}
+	iBatchDeleteUserResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "BatchDeleteUserResponse"}
+	iBatchLookupUserUnameRequest             = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "BatchLookupUserUnameRequest"}
+	iBatchLookupUserUnameResponse            = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "BatchLookupUserUnameResponse"}
+	iBatchReinviteUserRequest                = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "BatchReinviteUserRequest"}
+	iBatchReinviteUserResponse               = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "BatchReinviteUserResponse"}
+	iBatchResetDevicesForUserRequest         = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "BatchResetDevicesForUserRequest"}
+	iBatchResetDevicesForUserResponse        = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "BatchResetDevicesForUserResponse"}
+	iBatchToggleUserSuspendStatusRequest     = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "BatchToggleUserSuspendStatusRequest"}
+	iBatchToggleUserSuspendStatusResponse    = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "BatchToggleUserSuspendStatusResponse"}
+	iCreateBotRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "CreateBotRequest"}
+	iCreateBotResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "CreateBotResponse"}
+	iCreateDataRetentionBotChallengeRequest  = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "CreateDataRetentionBotChallengeRequest"}
+	iCreateDataRetentionBotChallengeResponse = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "CreateDataRetentionBotChallengeResponse"}
+	iCreateDataRetentionBotRequest           = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "CreateDataRetentionBotRequest"}
+	iCreateDataRetentionBotResponse          = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "CreateDataRetentionBotResponse"}
+	iCreateNetworkRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "CreateNetworkRequest"}
+	iCreateNetworkResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "CreateNetworkResponse"}
+	iCreateSecurityGroupRequest              = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "CreateSecurityGroupRequest"}
+	iCreateSecurityGroupResponse             = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "CreateSecurityGroupResponse"}
+	iDeleteBotRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "DeleteBotRequest"}
+	iDeleteBotResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "DeleteBotResponse"}
+	iDeleteDataRetentionBotRequest           = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "DeleteDataRetentionBotRequest"}
+	iDeleteDataRetentionBotResponse          = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "DeleteDataRetentionBotResponse"}
+	iDeleteNetworkRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "DeleteNetworkRequest"}
+	iDeleteNetworkResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "DeleteNetworkResponse"}
+	iDeleteSecurityGroupRequest              = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "DeleteSecurityGroupRequest"}
+	iDeleteSecurityGroupResponse             = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "DeleteSecurityGroupResponse"}
+	iGetBotRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "GetBotRequest"}
+	iGetBotResponse                          = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "GetBotResponse"}
+	iGetBotsCountRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "GetBotsCountRequest"}
+	iGetBotsCountResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "GetBotsCountResponse"}
+	iGetDataRetentionBotRequest              = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "GetDataRetentionBotRequest"}
+	iGetDataRetentionBotResponse             = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "GetDataRetentionBotResponse"}
+	iGetGuestUserHistoryCountRequest         = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "GetGuestUserHistoryCountRequest"}
+	iGetGuestUserHistoryCountResponse        = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "GetGuestUserHistoryCountResponse"}
+	iGetNetworkRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "GetNetworkRequest"}
+	iGetNetworkResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "GetNetworkResponse"}
+	iGetNetworkSettingsRequest               = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "GetNetworkSettingsRequest"}
+	iGetNetworkSettingsResponse              = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "GetNetworkSettingsResponse"}
+	iGetOidcInfoRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "GetOidcInfoRequest"}
+	iGetOidcInfoResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "GetOidcInfoResponse"}
+	iGetOpentdfConfigRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "GetOpentdfConfigRequest"}
+	iGetOpentdfConfigResponse                = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "GetOpentdfConfigResponse"}
+	iGetSecurityGroupRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "GetSecurityGroupRequest"}
+	iGetSecurityGroupResponse                = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "GetSecurityGroupResponse"}
+	iGetUserRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "GetUserRequest"}
+	iGetUserResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "GetUserResponse"}
+	iGetUsersCountRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "GetUsersCountRequest"}
+	iGetUsersCountResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "GetUsersCountResponse"}
+	iListBlockedGuestUsersRequest            = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "ListBlockedGuestUsersRequest"}
+	iListBlockedGuestUsersResponse           = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "ListBlockedGuestUsersResponse"}
+	iListBotsRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "ListBotsRequest"}
+	iListBotsResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "ListBotsResponse"}
+	iListDevicesForUserRequest               = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "ListDevicesForUserRequest"}
+	iListDevicesForUserResponse              = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "ListDevicesForUserResponse"}
+	iListGuestUsersRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "ListGuestUsersRequest"}
+	iListGuestUsersResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "ListGuestUsersResponse"}
+	iListNetworksRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "ListNetworksRequest"}
+	iListNetworksResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "ListNetworksResponse"}
+	iListSecurityGroupsRequest               = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "ListSecurityGroupsRequest"}
+	iListSecurityGroupsResponse              = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "ListSecurityGroupsResponse"}
+	iListSecurityGroupUsersRequest           = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "ListSecurityGroupUsersRequest"}
+	iListSecurityGroupUsersResponse          = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "ListSecurityGroupUsersResponse"}
+	iListUsersRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "ListUsersRequest"}
+	iListUsersResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "ListUsersResponse"}
+	iRegisterOidcConfigRequest               = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "RegisterOidcConfigRequest"}
+	iRegisterOidcConfigResponse              = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "RegisterOidcConfigResponse"}
+	iRegisterOidcConfigTestRequest           = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "RegisterOidcConfigTestRequest"}
+	iRegisterOidcConfigTestResponse          = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "RegisterOidcConfigTestResponse"}
+	iRegisterOpentdfConfigRequest            = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "RegisterOpentdfConfigRequest"}
+	iRegisterOpentdfConfigResponse           = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "RegisterOpentdfConfigResponse"}
+	iUpdateBotRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "UpdateBotRequest"}
+	iUpdateBotResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "UpdateBotResponse"}
+	iUpdateDataRetentionRequest              = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "UpdateDataRetentionRequest"}
+	iUpdateDataRetentionResponse             = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "UpdateDataRetentionResponse"}
+	iUpdateGuestUserRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "UpdateGuestUserRequest"}
+	iUpdateGuestUserResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "UpdateGuestUserResponse"}
+	iUpdateNetworkRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "UpdateNetworkRequest"}
+	iUpdateNetworkResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "UpdateNetworkResponse"}
+	iUpdateNetworkSettingsRequest            = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "UpdateNetworkSettingsRequest"}
+	iUpdateNetworkSettingsResponse           = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "UpdateNetworkSettingsResponse"}
+	iUpdateSecurityGroupRequest              = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "UpdateSecurityGroupRequest"}
+	iUpdateSecurityGroupResponse             = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "UpdateSecurityGroupResponse"}
+	iUpdateUserRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "UpdateUserRequest"}
+	iUpdateUserResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.wickr", Name: "UpdateUserResponse"}
+	pUnit                                    = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+	pBoolean                                 = smithy.ShapeID{Namespace: "smithy.api", Name: "Boolean"}
+	pInteger                                 = smithy.ShapeID{Namespace: "smithy.api", Name: "Integer"}
+	pLong                                    = smithy.ShapeID{Namespace: "smithy.api", Name: "Long"}
+	pTimestamp                               = smithy.ShapeID{Namespace: "smithy.api", Name: "Timestamp"}
+)
 
-var BatchDeleteUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "BatchDeleteUser",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+	URI:  "/networks/{networkId}/users",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/networks/{networkId}/users/batch-delete",
-	Code: 200})
-
-var BatchLookupUserUname = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "BatchLookupUserUname",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/networks/{networkId}/users/uname-lookup",
-	Code: 200})
-
-var BatchReinviteUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "BatchReinviteUser",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/networks/{networkId}/users/re-invite",
-	Code: 200})
-
-var BatchResetDevicesForUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "BatchResetDevicesForUser",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/networks/{networkId}/users/{userId}/devices",
-	Code: 200})
-
-var BatchToggleUserSuspendStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "BatchToggleUserSuspendStatus",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/networks/{networkId}/users/toggleSuspend",
-	Code: 200})
-
-var CreateBot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "CreateBot",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/networks/{networkId}/bots",
-	Code: 200})
-
-var CreateDataRetentionBot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "CreateDataRetentionBot",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/networks/{networkId}/data-retention-bots",
-	Code: 200})
-
-var CreateDataRetentionBotChallenge = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "CreateDataRetentionBotChallenge",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/networks/{networkId}/data-retention-bots/challenge",
-	Code: 200})
-
-var CreateNetwork = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "CreateNetwork",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/networks",
-	Code: 200})
-
-var CreateSecurityGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "CreateSecurityGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/networks/{networkId}/security-groups",
-	Code: 200})
-
-var DeleteBot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "DeleteBot",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/networks/{networkId}/bots/{botId}",
-	Code: 200})
-
-var DeleteDataRetentionBot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "DeleteDataRetentionBot",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/networks/{networkId}/data-retention-bots",
-	Code: 200})
-
-var DeleteNetwork = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "DeleteNetwork",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/networks/{networkId}",
-	Code: 200})
-
-var DeleteSecurityGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "DeleteSecurityGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/networks/{networkId}/security-groups/{groupId}",
-	Code: 200})
-
-var GetBot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "GetBot",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/networks/{networkId}/bots/{botId}",
-	Code: 200})
-
-var GetBotsCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "GetBotsCount",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/networks/{networkId}/bots/count",
-	Code: 200})
-
-var GetDataRetentionBot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "GetDataRetentionBot",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/networks/{networkId}/data-retention-bots",
-	Code: 200})
-
-var GetGuestUserHistoryCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "GetGuestUserHistoryCount",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/networks/{networkId}/guest-users/count",
-	Code: 200})
-
-var GetNetwork = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "GetNetwork",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/networks/{networkId}",
-	Code: 200})
-
-var GetNetworkSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "GetNetworkSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/networks/{networkId}/settings",
-	Code: 200})
-
-var GetOidcInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "GetOidcInfo",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/networks/{networkId}/oidc",
-	Code: 200})
-
-var GetOpentdfConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "GetOpentdfConfig",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/networks/{networkId}/tdf",
-	Code: 200})
-
-var GetSecurityGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "GetSecurityGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/networks/{networkId}/security-groups/{groupId}",
-	Code: 200})
-
-var GetUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "GetUser",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/networks/{networkId}/users/{userId}",
-	Code: 200})
-
-var GetUsersCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "GetUsersCount",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/networks/{networkId}/users/count",
-	Code: 200})
-
-var ListBlockedGuestUsers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "ListBlockedGuestUsers",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/networks/{networkId}/guest-users/blocklist",
-	Code: 200})
-
-var ListBots = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "ListBots",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/networks/{networkId}/bots",
-	Code: 200})
-
-var ListDevicesForUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "ListDevicesForUser",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/networks/{networkId}/users/{userId}/devices",
-	Code: 200})
-
-var ListGuestUsers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "ListGuestUsers",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/networks/{networkId}/guest-users",
-	Code: 200})
-
-var ListNetworks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "ListNetworks",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/networks",
-	Code: 200})
-
-var ListSecurityGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "ListSecurityGroups",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/networks/{networkId}/security-groups",
-	Code: 200})
-
-var ListSecurityGroupUsers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "ListSecurityGroupUsers",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/networks/{networkId}/security-groups/{groupId}/users",
-	Code: 200})
-
-var ListUsers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "ListUsers",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/networks/{networkId}/users",
-	Code: 200})
-
-var RegisterOidcConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "RegisterOidcConfig",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/networks/{networkId}/oidc/save",
-	Code: 200})
-
-var RegisterOidcConfigTest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "RegisterOidcConfigTest",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/networks/{networkId}/oidc/test",
-	Code: 200})
-
-var RegisterOpentdfConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "RegisterOpentdfConfig",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/networks/{networkId}/tdf",
-	Code: 200})
-
-var UpdateBot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "UpdateBot",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/networks/{networkId}/bots/{botId}",
-	Code: 200})
-
-var UpdateDataRetention = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "UpdateDataRetention",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/networks/{networkId}/data-retention-bots",
-	Code: 200})
-
-var UpdateGuestUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "UpdateGuestUser",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/networks/{networkId}/guest-users/{usernameHash}",
-	Code: 200})
-
-var UpdateNetwork = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "UpdateNetwork",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/networks/{networkId}",
-	Code: 200})
-
-var UpdateNetworkSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "UpdateNetworkSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/networks/{networkId}/settings",
-	Code: 200})
-
-var UpdateSecurityGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "UpdateSecurityGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/networks/{networkId}/security-groups/{groupId}",
-	Code: 200})
-
-var UpdateUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "UpdateUser",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/networks/{networkId}/users",
-	Code: 200})
-
-var _WickrAdminApi = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "WickrAdminApi",
-}, smithy.ShapeTypeService, 0)
-
-var WickrAdminApi = smithy.NewServiceSchema(_WickrAdminApi, "2024-02-01")
-
-var AccessLevel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "AccessLevel",
-}, smithy.ShapeTypeEnum, 2)
-var AccessLevel_STANDARD *smithy.Schema
-
-var AccessLevel_PREMIUM *smithy.Schema
-
-var _AppIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "AppIds",
-}, smithy.ShapeTypeList, 1)
-var _AppIds_member *smithy.Schema
-
-var BadRequestError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "BadRequestError",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var BadRequestError_message *smithy.Schema
-
-var BasicDeviceObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "BasicDeviceObject",
-}, smithy.ShapeTypeStructure, 6)
-var BasicDeviceObject_appId *smithy.Schema
-
-var BasicDeviceObject_created *smithy.Schema
-
-var BasicDeviceObject_lastLogin *smithy.Schema
-
-var BasicDeviceObject_statusText *smithy.Schema
-
-var BasicDeviceObject_suspend *smithy.Schema
-
-var BasicDeviceObject_type *smithy.Schema
-
-var BatchCreateUserRequestItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "BatchCreateUserRequestItem",
-}, smithy.ShapeTypeStructure, 7)
-var BatchCreateUserRequestItem_firstName *smithy.Schema
-
-var BatchCreateUserRequestItem_lastName *smithy.Schema
-
-var BatchCreateUserRequestItem_securityGroupIds *smithy.Schema
-
-var BatchCreateUserRequestItem_username *smithy.Schema
-
-var BatchCreateUserRequestItem_inviteCode *smithy.Schema
-
-var BatchCreateUserRequestItem_inviteCodeTtl *smithy.Schema
-
-var BatchCreateUserRequestItem_codeValidation *smithy.Schema
-
-var _BatchCreateUserRequestItems = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "BatchCreateUserRequestItems",
-}, smithy.ShapeTypeList, 1)
-var _BatchCreateUserRequestItems_member *smithy.Schema
-
-var BatchDeviceErrorResponseItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "BatchDeviceErrorResponseItem",
-}, smithy.ShapeTypeStructure, 3)
-var BatchDeviceErrorResponseItem_field *smithy.Schema
-
-var BatchDeviceErrorResponseItem_reason *smithy.Schema
-
-var BatchDeviceErrorResponseItem_appId *smithy.Schema
-
-var _BatchDeviceErrorResponseItems = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "BatchDeviceErrorResponseItems",
-}, smithy.ShapeTypeList, 1)
-var _BatchDeviceErrorResponseItems_member *smithy.Schema
-
-var BatchDeviceSuccessResponseItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "BatchDeviceSuccessResponseItem",
-}, smithy.ShapeTypeStructure, 1)
-var BatchDeviceSuccessResponseItem_appId *smithy.Schema
-
-var _BatchDeviceSuccessResponseItems = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "BatchDeviceSuccessResponseItems",
-}, smithy.ShapeTypeList, 1)
-var _BatchDeviceSuccessResponseItems_member *smithy.Schema
-
-var BatchUnameErrorResponseItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "BatchUnameErrorResponseItem",
-}, smithy.ShapeTypeStructure, 3)
-var BatchUnameErrorResponseItem_field *smithy.Schema
-
-var BatchUnameErrorResponseItem_reason *smithy.Schema
-
-var BatchUnameErrorResponseItem_uname *smithy.Schema
-
-var _BatchUnameErrorResponseItems = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "BatchUnameErrorResponseItems",
-}, smithy.ShapeTypeList, 1)
-var _BatchUnameErrorResponseItems_member *smithy.Schema
-
-var BatchUnameSuccessResponseItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "BatchUnameSuccessResponseItem",
-}, smithy.ShapeTypeStructure, 2)
-var BatchUnameSuccessResponseItem_uname *smithy.Schema
-
-var BatchUnameSuccessResponseItem_username *smithy.Schema
-
-var _BatchUnameSuccessResponseItems = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "BatchUnameSuccessResponseItems",
-}, smithy.ShapeTypeList, 1)
-var _BatchUnameSuccessResponseItems_member *smithy.Schema
-
-var BatchUserErrorResponseItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "BatchUserErrorResponseItem",
-}, smithy.ShapeTypeStructure, 3)
-var BatchUserErrorResponseItem_field *smithy.Schema
-
-var BatchUserErrorResponseItem_reason *smithy.Schema
-
-var BatchUserErrorResponseItem_userId *smithy.Schema
-
-var _BatchUserErrorResponseItems = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "BatchUserErrorResponseItems",
-}, smithy.ShapeTypeList, 1)
-var _BatchUserErrorResponseItems_member *smithy.Schema
-
-var BatchUserSuccessResponseItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "BatchUserSuccessResponseItem",
-}, smithy.ShapeTypeStructure, 1)
-var BatchUserSuccessResponseItem_userId *smithy.Schema
-
-var _BatchUserSuccessResponseItems = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "BatchUserSuccessResponseItems",
-}, smithy.ShapeTypeList, 1)
-var _BatchUserSuccessResponseItems_member *smithy.Schema
-
-var BlockedGuestUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "BlockedGuestUser",
-}, smithy.ShapeTypeStructure, 4)
-var BlockedGuestUser_username *smithy.Schema
-
-var BlockedGuestUser_admin *smithy.Schema
-
-var BlockedGuestUser_modified *smithy.Schema
-
-var BlockedGuestUser_usernameHash *smithy.Schema
-
-var _BlockedGuestUserList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "BlockedGuestUserList",
-}, smithy.ShapeTypeList, 1)
-var _BlockedGuestUserList_member *smithy.Schema
-
-var Bot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "Bot",
-}, smithy.ShapeTypeStructure, 10)
-var Bot_botId *smithy.Schema
-
-var Bot_displayName *smithy.Schema
-
-var Bot_username *smithy.Schema
-
-var Bot_uname *smithy.Schema
-
-var Bot_pubkey *smithy.Schema
-
-var Bot_status *smithy.Schema
-
-var Bot_groupId *smithy.Schema
-
-var Bot_hasChallenge *smithy.Schema
-
-var Bot_suspended *smithy.Schema
-
-var Bot_lastLogin *smithy.Schema
-
-var _BotId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "BotId",
-}, smithy.ShapeTypeString, 0)
-
-var _Bots = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "Bots",
-}, smithy.ShapeTypeList, 1)
-var _Bots_member *smithy.Schema
-
-var _BotStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "BotStatus",
-}, smithy.ShapeTypeIntEnum, 2)
-var _BotStatus_PENDING *smithy.Schema
-
-var _BotStatus_ACTIVE *smithy.Schema
-
-var CallingSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "CallingSettings",
-}, smithy.ShapeTypeStructure, 3)
-var CallingSettings_canStart11Call *smithy.Schema
-
-var CallingSettings_canVideoCall *smithy.Schema
-
-var CallingSettings_forceTcpCall *smithy.Schema
-
-var _ClientToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "ClientToken",
-}, smithy.ShapeTypeString, 0)
-
-var ConsentPopupConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "ConsentPopupConfig",
-}, smithy.ShapeTypeStructure, 4)
-var ConsentPopupConfig_enabled *smithy.Schema
-
-var ConsentPopupConfig_header *smithy.Schema
-
-var ConsentPopupConfig_content *smithy.Schema
-
-var ConsentPopupConfig_closeButtonLabel *smithy.Schema
-
-var DataRetentionActionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "DataRetentionActionType",
-}, smithy.ShapeTypeEnum, 3)
-var DataRetentionActionType_ENABLE *smithy.Schema
-
-var DataRetentionActionType_DISABLE *smithy.Schema
-
-var DataRetentionActionType_PUBKEY_MSG_ACK *smithy.Schema
-
-var _Devices = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "Devices",
-}, smithy.ShapeTypeList, 1)
-var _Devices_member *smithy.Schema
-
-var ErrorDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "ErrorDetail",
-}, smithy.ShapeTypeStructure, 2)
-var ErrorDetail_field *smithy.Schema
-
-var ErrorDetail_reason *smithy.Schema
-
-var _ErrorDetailList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "ErrorDetailList",
-}, smithy.ShapeTypeList, 1)
-var _ErrorDetailList_member *smithy.Schema
-
-var ForbiddenError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "ForbiddenError",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var ForbiddenError_message *smithy.Schema
-
-var _GenericString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "GenericString",
-}, smithy.ShapeTypeString, 0)
-
-var GuestUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "GuestUser",
-}, smithy.ShapeTypeStructure, 3)
-var GuestUser_billingPeriod *smithy.Schema
-
-var GuestUser_username *smithy.Schema
-
-var GuestUser_usernameHash *smithy.Schema
-
-var GuestUserHistoryCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "GuestUserHistoryCount",
-}, smithy.ShapeTypeStructure, 2)
-var GuestUserHistoryCount_month *smithy.Schema
-
-var GuestUserHistoryCount_count *smithy.Schema
-
-var _GuestUserHistoryCountList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "GuestUserHistoryCountList",
-}, smithy.ShapeTypeList, 1)
-var _GuestUserHistoryCountList_member *smithy.Schema
-
-var _GuestUserList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "GuestUserList",
-}, smithy.ShapeTypeList, 1)
-var _GuestUserList_member *smithy.Schema
-
-var InternalServerError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "InternalServerError",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerError_message *smithy.Schema
-
-var Network = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "Network",
-}, smithy.ShapeTypeStructure, 9)
-var Network_networkId *smithy.Schema
-
-var Network_networkName *smithy.Schema
-
-var Network_accessLevel *smithy.Schema
-
-var Network_awsAccountId *smithy.Schema
-
-var Network_networkArn *smithy.Schema
-
-var Network_standing *smithy.Schema
-
-var Network_freeTrialExpiration *smithy.Schema
-
-var Network_migrationState *smithy.Schema
-
-var Network_encryptionKeyArn *smithy.Schema
-
-var _NetworkId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "NetworkId",
-}, smithy.ShapeTypeString, 0)
-
-var _NetworkList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "NetworkList",
-}, smithy.ShapeTypeList, 1)
-var _NetworkList_member *smithy.Schema
-
-var NetworkSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "NetworkSettings",
-}, smithy.ShapeTypeStructure, 5)
-var NetworkSettings_enableClientMetrics *smithy.Schema
-
-var NetworkSettings_readReceiptConfig *smithy.Schema
-
-var NetworkSettings_dataRetention *smithy.Schema
-
-var NetworkSettings_enableTrustedDataFormat *smithy.Schema
-
-var NetworkSettings_consentPopup *smithy.Schema
-
-var OidcConfigInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "OidcConfigInfo",
-}, smithy.ShapeTypeStructure, 14)
-var OidcConfigInfo_applicationName *smithy.Schema
-
-var OidcConfigInfo_clientId *smithy.Schema
-
-var OidcConfigInfo_companyId *smithy.Schema
-
-var OidcConfigInfo_scopes *smithy.Schema
-
-var OidcConfigInfo_issuer *smithy.Schema
-
-var OidcConfigInfo_clientSecret *smithy.Schema
-
-var OidcConfigInfo_secret *smithy.Schema
-
-var OidcConfigInfo_redirectUrl *smithy.Schema
-
-var OidcConfigInfo_userId *smithy.Schema
-
-var OidcConfigInfo_customUsername *smithy.Schema
-
-var OidcConfigInfo_caCertificate *smithy.Schema
-
-var OidcConfigInfo_applicationId *smithy.Schema
-
-var OidcConfigInfo_ssoTokenBufferMinutes *smithy.Schema
-
-var OidcConfigInfo_extraAuthParams *smithy.Schema
-
-var OidcTokenInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "OidcTokenInfo",
-}, smithy.ShapeTypeStructure, 7)
-var OidcTokenInfo_codeVerifier *smithy.Schema
-
-var OidcTokenInfo_codeChallenge *smithy.Schema
-
-var OidcTokenInfo_accessToken *smithy.Schema
-
-var OidcTokenInfo_idToken *smithy.Schema
-
-var OidcTokenInfo_refreshToken *smithy.Schema
-
-var OidcTokenInfo_tokenType *smithy.Schema
-
-var OidcTokenInfo_expiresIn *smithy.Schema
-
-var PasswordRequirements = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "PasswordRequirements",
-}, smithy.ShapeTypeStructure, 5)
-var PasswordRequirements_lowercase *smithy.Schema
-
-var PasswordRequirements_minLength *smithy.Schema
-
-var PasswordRequirements_numbers *smithy.Schema
-
-var PasswordRequirements_symbols *smithy.Schema
-
-var PasswordRequirements_uppercase *smithy.Schema
-
-var _PermittedNetworksList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "PermittedNetworksList",
-}, smithy.ShapeTypeList, 1)
-var _PermittedNetworksList_member *smithy.Schema
-
-var PermittedWickrEnterpriseNetwork = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "PermittedWickrEnterpriseNetwork",
-}, smithy.ShapeTypeStructure, 2)
-var PermittedWickrEnterpriseNetwork_domain *smithy.Schema
-
-var PermittedWickrEnterpriseNetwork_networkId *smithy.Schema
-
-var _PermittedWickrEnterpriseNetworksList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "PermittedWickrEnterpriseNetworksList",
-}, smithy.ShapeTypeList, 1)
-var _PermittedWickrEnterpriseNetworksList_member *smithy.Schema
-
-var RateLimitError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "RateLimitError",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var RateLimitError_message *smithy.Schema
-
-var ReadReceiptConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "ReadReceiptConfig",
-}, smithy.ShapeTypeStructure, 1)
-var ReadReceiptConfig_status *smithy.Schema
-
-var ResourceNotFoundError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "ResourceNotFoundError",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundError_message *smithy.Schema
-
-var SecurityGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "SecurityGroup",
-}, smithy.ShapeTypeStructure, 8)
-var SecurityGroup_activeMembers *smithy.Schema
-
-var SecurityGroup_botMembers *smithy.Schema
-
-var SecurityGroup_activeDirectoryGuid *smithy.Schema
-
-var SecurityGroup_id *smithy.Schema
-
-var SecurityGroup_isDefault *smithy.Schema
-
-var SecurityGroup_name *smithy.Schema
-
-var SecurityGroup_modified *smithy.Schema
-
-var SecurityGroup_securityGroupSettings *smithy.Schema
-
-var _SecurityGroupId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "SecurityGroupId",
-}, smithy.ShapeTypeString, 0)
-
-var _SecurityGroupIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "SecurityGroupIdList",
-}, smithy.ShapeTypeList, 1)
-var _SecurityGroupIdList_member *smithy.Schema
-
-var _SecurityGroupList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "SecurityGroupList",
-}, smithy.ShapeTypeList, 1)
-var _SecurityGroupList_member *smithy.Schema
-
-var SecurityGroupSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "SecurityGroupSettings",
-}, smithy.ShapeTypeStructure, 36)
-var SecurityGroupSettings_alwaysReauthenticate *smithy.Schema
-
-var SecurityGroupSettings_atakPackageValues *smithy.Schema
-
-var SecurityGroupSettings_calling *smithy.Schema
-
-var SecurityGroupSettings_checkForUpdates *smithy.Schema
-
-var SecurityGroupSettings_enableAtak *smithy.Schema
-
-var SecurityGroupSettings_enableCrashReports *smithy.Schema
-
-var SecurityGroupSettings_enableFileDownload *smithy.Schema
-
-var SecurityGroupSettings_enableGuestFederation *smithy.Schema
-
-var SecurityGroupSettings_enableNotificationPreview *smithy.Schema
-
-var SecurityGroupSettings_enableOpenAccessOption *smithy.Schema
-
-var SecurityGroupSettings_enableRestrictedGlobalFederation *smithy.Schema
-
-var SecurityGroupSettings_filesEnabled *smithy.Schema
-
-var SecurityGroupSettings_forceDeviceLockout *smithy.Schema
-
-var SecurityGroupSettings_forceOpenAccess *smithy.Schema
-
-var SecurityGroupSettings_forceReadReceipts *smithy.Schema
-
-var SecurityGroupSettings_globalFederation *smithy.Schema
-
-var SecurityGroupSettings_isAtoEnabled *smithy.Schema
-
-var SecurityGroupSettings_isLinkPreviewEnabled *smithy.Schema
-
-var SecurityGroupSettings_locationAllowMaps *smithy.Schema
-
-var SecurityGroupSettings_locationEnabled *smithy.Schema
-
-var SecurityGroupSettings_maxAutoDownloadSize *smithy.Schema
-
-var SecurityGroupSettings_maxBor *smithy.Schema
-
-var SecurityGroupSettings_maxTtl *smithy.Schema
-
-var SecurityGroupSettings_messageForwardingEnabled *smithy.Schema
-
-var SecurityGroupSettings_passwordRequirements *smithy.Schema
-
-var SecurityGroupSettings_presenceEnabled *smithy.Schema
-
-var SecurityGroupSettings_quickResponses *smithy.Schema
-
-var SecurityGroupSettings_showMasterRecoveryKey *smithy.Schema
-
-var SecurityGroupSettings_shredder *smithy.Schema
-
-var SecurityGroupSettings_ssoMaxIdleMinutes *smithy.Schema
-
-var SecurityGroupSettings_maxNonSsoSessionMinutes *smithy.Schema
-
-var SecurityGroupSettings_federationMode *smithy.Schema
-
-var SecurityGroupSettings_lockoutThreshold *smithy.Schema
-
-var SecurityGroupSettings_permittedNetworks *smithy.Schema
-
-var SecurityGroupSettings_permittedWickrAwsNetworks *smithy.Schema
-
-var SecurityGroupSettings_permittedWickrEnterpriseNetworks *smithy.Schema
-
-var SecurityGroupSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "SecurityGroupSettingsRequest",
-}, smithy.ShapeTypeStructure, 8)
-var SecurityGroupSettingsRequest_lockoutThreshold *smithy.Schema
-
-var SecurityGroupSettingsRequest_permittedNetworks *smithy.Schema
-
-var SecurityGroupSettingsRequest_enableGuestFederation *smithy.Schema
-
-var SecurityGroupSettingsRequest_globalFederation *smithy.Schema
-
-var SecurityGroupSettingsRequest_federationMode *smithy.Schema
-
-var SecurityGroupSettingsRequest_enableRestrictedGlobalFederation *smithy.Schema
-
-var SecurityGroupSettingsRequest_permittedWickrAwsNetworks *smithy.Schema
-
-var SecurityGroupSettingsRequest_permittedWickrEnterpriseNetworks *smithy.Schema
-
-var _SecurityGroupStringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "SecurityGroupStringList",
-}, smithy.ShapeTypeList, 1)
-var _SecurityGroupStringList_member *smithy.Schema
-
-var _SensitiveString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "SensitiveString",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var Setting = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "Setting",
-}, smithy.ShapeTypeStructure, 3)
-var Setting_optionName *smithy.Schema
-
-var Setting_value *smithy.Schema
-
-var Setting_type *smithy.Schema
-
-var _SettingsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "SettingsList",
-}, smithy.ShapeTypeList, 1)
-var _SettingsList_member *smithy.Schema
-
-var ShredderSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "ShredderSettings",
-}, smithy.ShapeTypeStructure, 2)
-var ShredderSettings_canProcessManually *smithy.Schema
-
-var ShredderSettings_intensity *smithy.Schema
-
-var SortDirection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "SortDirection",
-}, smithy.ShapeTypeEnum, 2)
-var SortDirection_ASC *smithy.Schema
-
-var SortDirection_DESC *smithy.Schema
-
-var Status = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "Status",
-}, smithy.ShapeTypeEnum, 3)
-var Status_DISABLED *smithy.Schema
-
-var Status_ENABLED *smithy.Schema
-
-var Status_FORCE_ENABLED *smithy.Schema
-
-var _StringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "StringList",
-}, smithy.ShapeTypeList, 1)
-var _StringList_member *smithy.Schema
-
-var _Uname = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "Uname",
-}, smithy.ShapeTypeString, 0)
-
-var _Unames = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "Unames",
-}, smithy.ShapeTypeList, 1)
-var _Unames_member *smithy.Schema
-
-var UnauthorizedError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "UnauthorizedError",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 401})
-var UnauthorizedError_message *smithy.Schema
-
-var UpdateUserDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "UpdateUserDetails",
-}, smithy.ShapeTypeStructure, 7)
-var UpdateUserDetails_firstName *smithy.Schema
-
-var UpdateUserDetails_lastName *smithy.Schema
-
-var UpdateUserDetails_username *smithy.Schema
-
-var UpdateUserDetails_securityGroupIds *smithy.Schema
-
-var UpdateUserDetails_inviteCode *smithy.Schema
-
-var UpdateUserDetails_inviteCodeTtl *smithy.Schema
-
-var UpdateUserDetails_codeValidation *smithy.Schema
-
-var User = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "User",
-}, smithy.ShapeTypeStructure, 19)
-var User_userId *smithy.Schema
-
-var User_firstName *smithy.Schema
-
-var User_lastName *smithy.Schema
-
-var User_username *smithy.Schema
-
-var User_securityGroups *smithy.Schema
-
-var User_isAdmin *smithy.Schema
-
-var User_suspended *smithy.Schema
-
-var User_status *smithy.Schema
-
-var User_otpEnabled *smithy.Schema
-
-var User_scimId *smithy.Schema
-
-var User_type *smithy.Schema
-
-var User_cell *smithy.Schema
-
-var User_countryCode *smithy.Schema
-
-var User_challengeFailures *smithy.Schema
-
-var User_isInviteExpired *smithy.Schema
-
-var User_isUser *smithy.Schema
-
-var User_inviteCode *smithy.Schema
-
-var User_codeValidation *smithy.Schema
-
-var User_uname *smithy.Schema
-
-var _UserId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "UserId",
-}, smithy.ShapeTypeString, 0)
-
-var _UserIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "UserIds",
-}, smithy.ShapeTypeList, 1)
-var _UserIds_member *smithy.Schema
-
-var _Users = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "Users",
-}, smithy.ShapeTypeList, 1)
-var _Users_member *smithy.Schema
-
-var _UserStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "UserStatus",
-}, smithy.ShapeTypeIntEnum, 2)
-var _UserStatus_PENDING *smithy.Schema
-
-var _UserStatus_ACTIVE *smithy.Schema
-
-var ValidationError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "ValidationError",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 422})
-var ValidationError_reasons *smithy.Schema
-
-var ValidationError_message *smithy.Schema
-
-var WickrAwsNetworks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "WickrAwsNetworks",
-}, smithy.ShapeTypeStructure, 2)
-var WickrAwsNetworks_region *smithy.Schema
-
-var WickrAwsNetworks_networkId *smithy.Schema
-
-var _WickrAwsNetworksList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "WickrAwsNetworksList",
-}, smithy.ShapeTypeList, 1)
-var _WickrAwsNetworksList_member *smithy.Schema
-
-var BatchCreateUserRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "BatchCreateUserRequest",
-}, smithy.ShapeTypeStructure, 3)
-var BatchCreateUserRequest_networkId *smithy.Schema
-
-var BatchCreateUserRequest_users *smithy.Schema
-
-var BatchCreateUserRequest_clientToken *smithy.Schema
-
-var BatchCreateUserResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "BatchCreateUserResponse",
-}, smithy.ShapeTypeStructure, 3)
-var BatchCreateUserResponse_message *smithy.Schema
-
-var BatchCreateUserResponse_successful *smithy.Schema
-
-var BatchCreateUserResponse_failed *smithy.Schema
-
-var BatchDeleteUserRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "BatchDeleteUserRequest",
-}, smithy.ShapeTypeStructure, 3)
-var BatchDeleteUserRequest_networkId *smithy.Schema
-
-var BatchDeleteUserRequest_userIds *smithy.Schema
-
-var BatchDeleteUserRequest_clientToken *smithy.Schema
-
-var BatchDeleteUserResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "BatchDeleteUserResponse",
-}, smithy.ShapeTypeStructure, 3)
-var BatchDeleteUserResponse_message *smithy.Schema
-
-var BatchDeleteUserResponse_successful *smithy.Schema
-
-var BatchDeleteUserResponse_failed *smithy.Schema
-
-var BatchLookupUserUnameRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "BatchLookupUserUnameRequest",
-}, smithy.ShapeTypeStructure, 3)
-var BatchLookupUserUnameRequest_networkId *smithy.Schema
-
-var BatchLookupUserUnameRequest_unames *smithy.Schema
-
-var BatchLookupUserUnameRequest_clientToken *smithy.Schema
-
-var BatchLookupUserUnameResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "BatchLookupUserUnameResponse",
-}, smithy.ShapeTypeStructure, 3)
-var BatchLookupUserUnameResponse_message *smithy.Schema
-
-var BatchLookupUserUnameResponse_successful *smithy.Schema
-
-var BatchLookupUserUnameResponse_failed *smithy.Schema
-
-var BatchReinviteUserRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "BatchReinviteUserRequest",
-}, smithy.ShapeTypeStructure, 3)
-var BatchReinviteUserRequest_networkId *smithy.Schema
-
-var BatchReinviteUserRequest_userIds *smithy.Schema
-
-var BatchReinviteUserRequest_clientToken *smithy.Schema
-
-var BatchReinviteUserResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "BatchReinviteUserResponse",
-}, smithy.ShapeTypeStructure, 3)
-var BatchReinviteUserResponse_message *smithy.Schema
-
-var BatchReinviteUserResponse_successful *smithy.Schema
-
-var BatchReinviteUserResponse_failed *smithy.Schema
-
-var BatchResetDevicesForUserRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "BatchResetDevicesForUserRequest",
-}, smithy.ShapeTypeStructure, 4)
-var BatchResetDevicesForUserRequest_networkId *smithy.Schema
-
-var BatchResetDevicesForUserRequest_userId *smithy.Schema
-
-var BatchResetDevicesForUserRequest_appIds *smithy.Schema
-
-var BatchResetDevicesForUserRequest_clientToken *smithy.Schema
-
-var BatchResetDevicesForUserResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "BatchResetDevicesForUserResponse",
-}, smithy.ShapeTypeStructure, 3)
-var BatchResetDevicesForUserResponse_message *smithy.Schema
-
-var BatchResetDevicesForUserResponse_successful *smithy.Schema
-
-var BatchResetDevicesForUserResponse_failed *smithy.Schema
-
-var BatchToggleUserSuspendStatusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "BatchToggleUserSuspendStatusRequest",
-}, smithy.ShapeTypeStructure, 4)
-var BatchToggleUserSuspendStatusRequest_networkId *smithy.Schema
-
-var BatchToggleUserSuspendStatusRequest_suspend *smithy.Schema
-
-var BatchToggleUserSuspendStatusRequest_userIds *smithy.Schema
-
-var BatchToggleUserSuspendStatusRequest_clientToken *smithy.Schema
-
-var BatchToggleUserSuspendStatusResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "BatchToggleUserSuspendStatusResponse",
-}, smithy.ShapeTypeStructure, 3)
-var BatchToggleUserSuspendStatusResponse_message *smithy.Schema
-
-var BatchToggleUserSuspendStatusResponse_successful *smithy.Schema
-
-var BatchToggleUserSuspendStatusResponse_failed *smithy.Schema
-
-var CreateBotRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "CreateBotRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateBotRequest_networkId *smithy.Schema
-
-var CreateBotRequest_username *smithy.Schema
-
-var CreateBotRequest_displayName *smithy.Schema
-
-var CreateBotRequest_groupId *smithy.Schema
-
-var CreateBotRequest_challenge *smithy.Schema
-
-var CreateBotResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "CreateBotResponse",
-}, smithy.ShapeTypeStructure, 6)
-var CreateBotResponse_message *smithy.Schema
-
-var CreateBotResponse_botId *smithy.Schema
-
-var CreateBotResponse_networkId *smithy.Schema
-
-var CreateBotResponse_username *smithy.Schema
-
-var CreateBotResponse_displayName *smithy.Schema
-
-var CreateBotResponse_groupId *smithy.Schema
-
-var CreateDataRetentionBotChallengeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "CreateDataRetentionBotChallengeRequest",
-}, smithy.ShapeTypeStructure, 1)
-var CreateDataRetentionBotChallengeRequest_networkId *smithy.Schema
-
-var CreateDataRetentionBotChallengeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "CreateDataRetentionBotChallengeResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateDataRetentionBotChallengeResponse_challenge *smithy.Schema
-
-var CreateDataRetentionBotRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "CreateDataRetentionBotRequest",
-}, smithy.ShapeTypeStructure, 1)
-var CreateDataRetentionBotRequest_networkId *smithy.Schema
-
-var CreateDataRetentionBotResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "CreateDataRetentionBotResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateDataRetentionBotResponse_message *smithy.Schema
-
-var CreateNetworkRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "CreateNetworkRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateNetworkRequest_networkName *smithy.Schema
-
-var CreateNetworkRequest_accessLevel *smithy.Schema
-
-var CreateNetworkRequest_enablePremiumFreeTrial *smithy.Schema
-
-var CreateNetworkRequest_encryptionKeyArn *smithy.Schema
-
-var CreateNetworkResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "CreateNetworkResponse",
-}, smithy.ShapeTypeStructure, 3)
-var CreateNetworkResponse_networkId *smithy.Schema
-
-var CreateNetworkResponse_networkName *smithy.Schema
-
-var CreateNetworkResponse_encryptionKeyArn *smithy.Schema
-
-var CreateSecurityGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "CreateSecurityGroupRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateSecurityGroupRequest_networkId *smithy.Schema
-
-var CreateSecurityGroupRequest_name *smithy.Schema
-
-var CreateSecurityGroupRequest_securityGroupSettings *smithy.Schema
-
-var CreateSecurityGroupRequest_clientToken *smithy.Schema
-
-var CreateSecurityGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "CreateSecurityGroupResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateSecurityGroupResponse_securityGroup *smithy.Schema
-
-var DeleteBotRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "DeleteBotRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteBotRequest_networkId *smithy.Schema
-
-var DeleteBotRequest_botId *smithy.Schema
-
-var DeleteBotResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "DeleteBotResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteBotResponse_message *smithy.Schema
-
-var DeleteDataRetentionBotRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "DeleteDataRetentionBotRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDataRetentionBotRequest_networkId *smithy.Schema
-
-var DeleteDataRetentionBotResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "DeleteDataRetentionBotResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDataRetentionBotResponse_message *smithy.Schema
-
-var DeleteNetworkRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "DeleteNetworkRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteNetworkRequest_networkId *smithy.Schema
-
-var DeleteNetworkRequest_clientToken *smithy.Schema
-
-var DeleteNetworkResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "DeleteNetworkResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteNetworkResponse_message *smithy.Schema
-
-var DeleteSecurityGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "DeleteSecurityGroupRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteSecurityGroupRequest_networkId *smithy.Schema
-
-var DeleteSecurityGroupRequest_groupId *smithy.Schema
-
-var DeleteSecurityGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "DeleteSecurityGroupResponse",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteSecurityGroupResponse_message *smithy.Schema
-
-var DeleteSecurityGroupResponse_networkId *smithy.Schema
-
-var DeleteSecurityGroupResponse_groupId *smithy.Schema
-
-var GetBotRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "GetBotRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetBotRequest_networkId *smithy.Schema
-
-var GetBotRequest_botId *smithy.Schema
-
-var GetBotResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "GetBotResponse",
-}, smithy.ShapeTypeStructure, 10)
-var GetBotResponse_botId *smithy.Schema
-
-var GetBotResponse_displayName *smithy.Schema
-
-var GetBotResponse_username *smithy.Schema
-
-var GetBotResponse_uname *smithy.Schema
-
-var GetBotResponse_pubkey *smithy.Schema
-
-var GetBotResponse_status *smithy.Schema
-
-var GetBotResponse_groupId *smithy.Schema
-
-var GetBotResponse_hasChallenge *smithy.Schema
-
-var GetBotResponse_suspended *smithy.Schema
-
-var GetBotResponse_lastLogin *smithy.Schema
-
-var GetBotsCountRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "GetBotsCountRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetBotsCountRequest_networkId *smithy.Schema
-
-var GetBotsCountResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "GetBotsCountResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetBotsCountResponse_pending *smithy.Schema
-
-var GetBotsCountResponse_active *smithy.Schema
-
-var GetBotsCountResponse_total *smithy.Schema
-
-var GetDataRetentionBotRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "GetDataRetentionBotRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetDataRetentionBotRequest_networkId *smithy.Schema
-
-var GetDataRetentionBotResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "GetDataRetentionBotResponse",
-}, smithy.ShapeTypeStructure, 6)
-var GetDataRetentionBotResponse_botName *smithy.Schema
-
-var GetDataRetentionBotResponse_botExists *smithy.Schema
-
-var GetDataRetentionBotResponse_isBotActive *smithy.Schema
-
-var GetDataRetentionBotResponse_isDataRetentionBotRegistered *smithy.Schema
-
-var GetDataRetentionBotResponse_isDataRetentionServiceEnabled *smithy.Schema
-
-var GetDataRetentionBotResponse_isPubkeyMsgAcked *smithy.Schema
-
-var GetGuestUserHistoryCountRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "GetGuestUserHistoryCountRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetGuestUserHistoryCountRequest_networkId *smithy.Schema
-
-var GetGuestUserHistoryCountResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "GetGuestUserHistoryCountResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetGuestUserHistoryCountResponse_history *smithy.Schema
-
-var GetNetworkRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "GetNetworkRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetNetworkRequest_networkId *smithy.Schema
-
-var GetNetworkResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "GetNetworkResponse",
-}, smithy.ShapeTypeStructure, 9)
-var GetNetworkResponse_networkId *smithy.Schema
-
-var GetNetworkResponse_networkName *smithy.Schema
-
-var GetNetworkResponse_accessLevel *smithy.Schema
-
-var GetNetworkResponse_awsAccountId *smithy.Schema
-
-var GetNetworkResponse_networkArn *smithy.Schema
-
-var GetNetworkResponse_standing *smithy.Schema
-
-var GetNetworkResponse_freeTrialExpiration *smithy.Schema
-
-var GetNetworkResponse_migrationState *smithy.Schema
-
-var GetNetworkResponse_encryptionKeyArn *smithy.Schema
-
-var GetNetworkSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "GetNetworkSettingsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetNetworkSettingsRequest_networkId *smithy.Schema
-
-var GetNetworkSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "GetNetworkSettingsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetNetworkSettingsResponse_settings *smithy.Schema
-
-var GetOidcInfoRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "GetOidcInfoRequest",
-}, smithy.ShapeTypeStructure, 9)
-var GetOidcInfoRequest_networkId *smithy.Schema
-
-var GetOidcInfoRequest_clientId *smithy.Schema
-
-var GetOidcInfoRequest_code *smithy.Schema
-
-var GetOidcInfoRequest_grantType *smithy.Schema
-
-var GetOidcInfoRequest_redirectUri *smithy.Schema
-
-var GetOidcInfoRequest_url *smithy.Schema
-
-var GetOidcInfoRequest_clientSecret *smithy.Schema
-
-var GetOidcInfoRequest_codeVerifier *smithy.Schema
-
-var GetOidcInfoRequest_certificate *smithy.Schema
-
-var GetOidcInfoResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "GetOidcInfoResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetOidcInfoResponse_openidConnectInfo *smithy.Schema
-
-var GetOidcInfoResponse_tokenInfo *smithy.Schema
-
-var GetOpentdfConfigRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "GetOpentdfConfigRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetOpentdfConfigRequest_networkId *smithy.Schema
-
-var GetOpentdfConfigResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "GetOpentdfConfigResponse",
-}, smithy.ShapeTypeStructure, 4)
-var GetOpentdfConfigResponse_clientId *smithy.Schema
-
-var GetOpentdfConfigResponse_domain *smithy.Schema
-
-var GetOpentdfConfigResponse_clientSecret *smithy.Schema
-
-var GetOpentdfConfigResponse_provider *smithy.Schema
-
-var GetSecurityGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "GetSecurityGroupRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetSecurityGroupRequest_networkId *smithy.Schema
-
-var GetSecurityGroupRequest_groupId *smithy.Schema
-
-var GetSecurityGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "GetSecurityGroupResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetSecurityGroupResponse_securityGroup *smithy.Schema
-
-var GetUserRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "GetUserRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetUserRequest_networkId *smithy.Schema
-
-var GetUserRequest_userId *smithy.Schema
-
-var GetUserRequest_startTime *smithy.Schema
-
-var GetUserRequest_endTime *smithy.Schema
-
-var GetUserResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "GetUserResponse",
-}, smithy.ShapeTypeStructure, 10)
-var GetUserResponse_userId *smithy.Schema
-
-var GetUserResponse_firstName *smithy.Schema
-
-var GetUserResponse_lastName *smithy.Schema
-
-var GetUserResponse_username *smithy.Schema
-
-var GetUserResponse_isAdmin *smithy.Schema
-
-var GetUserResponse_suspended *smithy.Schema
-
-var GetUserResponse_status *smithy.Schema
-
-var GetUserResponse_lastActivity *smithy.Schema
-
-var GetUserResponse_lastLogin *smithy.Schema
-
-var GetUserResponse_securityGroupIds *smithy.Schema
-
-var GetUsersCountRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "GetUsersCountRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetUsersCountRequest_networkId *smithy.Schema
-
-var GetUsersCountResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "GetUsersCountResponse",
-}, smithy.ShapeTypeStructure, 5)
-var GetUsersCountResponse_pending *smithy.Schema
-
-var GetUsersCountResponse_active *smithy.Schema
-
-var GetUsersCountResponse_rejected *smithy.Schema
-
-var GetUsersCountResponse_remaining *smithy.Schema
-
-var GetUsersCountResponse_total *smithy.Schema
-
-var ListBlockedGuestUsersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "ListBlockedGuestUsersRequest",
-}, smithy.ShapeTypeStructure, 7)
-var ListBlockedGuestUsersRequest_networkId *smithy.Schema
-
-var ListBlockedGuestUsersRequest_maxResults *smithy.Schema
-
-var ListBlockedGuestUsersRequest_sortDirection *smithy.Schema
-
-var ListBlockedGuestUsersRequest_sortFields *smithy.Schema
-
-var ListBlockedGuestUsersRequest_username *smithy.Schema
-
-var ListBlockedGuestUsersRequest_admin *smithy.Schema
-
-var ListBlockedGuestUsersRequest_nextToken *smithy.Schema
-
-var ListBlockedGuestUsersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "ListBlockedGuestUsersResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListBlockedGuestUsersResponse_nextToken *smithy.Schema
-
-var ListBlockedGuestUsersResponse_blocklist *smithy.Schema
-
-var ListBotsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "ListBotsRequest",
-}, smithy.ShapeTypeStructure, 9)
-var ListBotsRequest_networkId *smithy.Schema
-
-var ListBotsRequest_nextToken *smithy.Schema
-
-var ListBotsRequest_maxResults *smithy.Schema
-
-var ListBotsRequest_sortFields *smithy.Schema
-
-var ListBotsRequest_sortDirection *smithy.Schema
-
-var ListBotsRequest_displayName *smithy.Schema
-
-var ListBotsRequest_username *smithy.Schema
-
-var ListBotsRequest_status *smithy.Schema
-
-var ListBotsRequest_groupId *smithy.Schema
-
-var ListBotsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "ListBotsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListBotsResponse_bots *smithy.Schema
-
-var ListBotsResponse_nextToken *smithy.Schema
-
-var ListDevicesForUserRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "ListDevicesForUserRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ListDevicesForUserRequest_networkId *smithy.Schema
-
-var ListDevicesForUserRequest_userId *smithy.Schema
-
-var ListDevicesForUserRequest_nextToken *smithy.Schema
-
-var ListDevicesForUserRequest_maxResults *smithy.Schema
-
-var ListDevicesForUserRequest_sortFields *smithy.Schema
-
-var ListDevicesForUserRequest_sortDirection *smithy.Schema
-
-var ListDevicesForUserResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "ListDevicesForUserResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListDevicesForUserResponse_nextToken *smithy.Schema
-
-var ListDevicesForUserResponse_devices *smithy.Schema
-
-var ListGuestUsersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "ListGuestUsersRequest",
-}, smithy.ShapeTypeStructure, 7)
-var ListGuestUsersRequest_networkId *smithy.Schema
-
-var ListGuestUsersRequest_maxResults *smithy.Schema
-
-var ListGuestUsersRequest_sortDirection *smithy.Schema
-
-var ListGuestUsersRequest_sortFields *smithy.Schema
-
-var ListGuestUsersRequest_username *smithy.Schema
-
-var ListGuestUsersRequest_billingPeriod *smithy.Schema
-
-var ListGuestUsersRequest_nextToken *smithy.Schema
-
-var ListGuestUsersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "ListGuestUsersResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListGuestUsersResponse_nextToken *smithy.Schema
-
-var ListGuestUsersResponse_guestlist *smithy.Schema
-
-var ListNetworksRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "ListNetworksRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListNetworksRequest_maxResults *smithy.Schema
-
-var ListNetworksRequest_sortFields *smithy.Schema
-
-var ListNetworksRequest_sortDirection *smithy.Schema
-
-var ListNetworksRequest_nextToken *smithy.Schema
-
-var ListNetworksResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "ListNetworksResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListNetworksResponse_networks *smithy.Schema
-
-var ListNetworksResponse_nextToken *smithy.Schema
-
-var ListSecurityGroupsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "ListSecurityGroupsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListSecurityGroupsRequest_networkId *smithy.Schema
-
-var ListSecurityGroupsRequest_nextToken *smithy.Schema
-
-var ListSecurityGroupsRequest_maxResults *smithy.Schema
-
-var ListSecurityGroupsRequest_sortFields *smithy.Schema
-
-var ListSecurityGroupsRequest_sortDirection *smithy.Schema
-
-var ListSecurityGroupsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "ListSecurityGroupsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSecurityGroupsResponse_securityGroups *smithy.Schema
-
-var ListSecurityGroupsResponse_nextToken *smithy.Schema
-
-var ListSecurityGroupUsersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "ListSecurityGroupUsersRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ListSecurityGroupUsersRequest_networkId *smithy.Schema
-
-var ListSecurityGroupUsersRequest_groupId *smithy.Schema
-
-var ListSecurityGroupUsersRequest_nextToken *smithy.Schema
-
-var ListSecurityGroupUsersRequest_maxResults *smithy.Schema
-
-var ListSecurityGroupUsersRequest_sortFields *smithy.Schema
-
-var ListSecurityGroupUsersRequest_sortDirection *smithy.Schema
-
-var ListSecurityGroupUsersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "ListSecurityGroupUsersResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSecurityGroupUsersResponse_users *smithy.Schema
-
-var ListSecurityGroupUsersResponse_nextToken *smithy.Schema
-
-var ListUsersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "ListUsersRequest",
-}, smithy.ShapeTypeStructure, 10)
-var ListUsersRequest_networkId *smithy.Schema
-
-var ListUsersRequest_nextToken *smithy.Schema
-
-var ListUsersRequest_maxResults *smithy.Schema
-
-var ListUsersRequest_sortFields *smithy.Schema
-
-var ListUsersRequest_sortDirection *smithy.Schema
-
-var ListUsersRequest_firstName *smithy.Schema
-
-var ListUsersRequest_lastName *smithy.Schema
-
-var ListUsersRequest_username *smithy.Schema
-
-var ListUsersRequest_status *smithy.Schema
-
-var ListUsersRequest_groupId *smithy.Schema
-
-var ListUsersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "ListUsersResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListUsersResponse_nextToken *smithy.Schema
-
-var ListUsersResponse_users *smithy.Schema
-
-var RegisterOidcConfigRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "RegisterOidcConfigRequest",
-}, smithy.ShapeTypeStructure, 9)
-var RegisterOidcConfigRequest_networkId *smithy.Schema
-
-var RegisterOidcConfigRequest_companyId *smithy.Schema
-
-var RegisterOidcConfigRequest_customUsername *smithy.Schema
-
-var RegisterOidcConfigRequest_extraAuthParams *smithy.Schema
-
-var RegisterOidcConfigRequest_issuer *smithy.Schema
-
-var RegisterOidcConfigRequest_scopes *smithy.Schema
-
-var RegisterOidcConfigRequest_secret *smithy.Schema
-
-var RegisterOidcConfigRequest_ssoTokenBufferMinutes *smithy.Schema
-
-var RegisterOidcConfigRequest_userId *smithy.Schema
-
-var RegisterOidcConfigResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "RegisterOidcConfigResponse",
-}, smithy.ShapeTypeStructure, 14)
-var RegisterOidcConfigResponse_applicationName *smithy.Schema
-
-var RegisterOidcConfigResponse_clientId *smithy.Schema
-
-var RegisterOidcConfigResponse_companyId *smithy.Schema
-
-var RegisterOidcConfigResponse_scopes *smithy.Schema
-
-var RegisterOidcConfigResponse_issuer *smithy.Schema
-
-var RegisterOidcConfigResponse_clientSecret *smithy.Schema
-
-var RegisterOidcConfigResponse_secret *smithy.Schema
-
-var RegisterOidcConfigResponse_redirectUrl *smithy.Schema
-
-var RegisterOidcConfigResponse_userId *smithy.Schema
-
-var RegisterOidcConfigResponse_customUsername *smithy.Schema
-
-var RegisterOidcConfigResponse_caCertificate *smithy.Schema
-
-var RegisterOidcConfigResponse_applicationId *smithy.Schema
-
-var RegisterOidcConfigResponse_ssoTokenBufferMinutes *smithy.Schema
-
-var RegisterOidcConfigResponse_extraAuthParams *smithy.Schema
-
-var RegisterOidcConfigTestRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "RegisterOidcConfigTestRequest",
-}, smithy.ShapeTypeStructure, 5)
-var RegisterOidcConfigTestRequest_networkId *smithy.Schema
-
-var RegisterOidcConfigTestRequest_extraAuthParams *smithy.Schema
-
-var RegisterOidcConfigTestRequest_issuer *smithy.Schema
-
-var RegisterOidcConfigTestRequest_scopes *smithy.Schema
-
-var RegisterOidcConfigTestRequest_certificate *smithy.Schema
-
-var RegisterOidcConfigTestResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "RegisterOidcConfigTestResponse",
-}, smithy.ShapeTypeStructure, 12)
-var RegisterOidcConfigTestResponse_tokenEndpoint *smithy.Schema
-
-var RegisterOidcConfigTestResponse_userinfoEndpoint *smithy.Schema
-
-var RegisterOidcConfigTestResponse_responseTypesSupported *smithy.Schema
-
-var RegisterOidcConfigTestResponse_scopesSupported *smithy.Schema
-
-var RegisterOidcConfigTestResponse_issuer *smithy.Schema
-
-var RegisterOidcConfigTestResponse_authorizationEndpoint *smithy.Schema
-
-var RegisterOidcConfigTestResponse_endSessionEndpoint *smithy.Schema
-
-var RegisterOidcConfigTestResponse_logoutEndpoint *smithy.Schema
-
-var RegisterOidcConfigTestResponse_grantTypesSupported *smithy.Schema
-
-var RegisterOidcConfigTestResponse_revocationEndpoint *smithy.Schema
-
-var RegisterOidcConfigTestResponse_tokenEndpointAuthMethodsSupported *smithy.Schema
-
-var RegisterOidcConfigTestResponse_microsoftMultiRefreshToken *smithy.Schema
-
-var RegisterOpentdfConfigRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "RegisterOpentdfConfigRequest",
-}, smithy.ShapeTypeStructure, 6)
-var RegisterOpentdfConfigRequest_networkId *smithy.Schema
-
-var RegisterOpentdfConfigRequest_clientId *smithy.Schema
-
-var RegisterOpentdfConfigRequest_clientSecret *smithy.Schema
-
-var RegisterOpentdfConfigRequest_domain *smithy.Schema
-
-var RegisterOpentdfConfigRequest_provider *smithy.Schema
-
-var RegisterOpentdfConfigRequest_dryRun *smithy.Schema
-
-var RegisterOpentdfConfigResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "RegisterOpentdfConfigResponse",
-}, smithy.ShapeTypeStructure, 4)
-var RegisterOpentdfConfigResponse_clientId *smithy.Schema
-
-var RegisterOpentdfConfigResponse_domain *smithy.Schema
-
-var RegisterOpentdfConfigResponse_clientSecret *smithy.Schema
-
-var RegisterOpentdfConfigResponse_provider *smithy.Schema
-
-var UpdateBotRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "UpdateBotRequest",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateBotRequest_networkId *smithy.Schema
-
-var UpdateBotRequest_botId *smithy.Schema
-
-var UpdateBotRequest_displayName *smithy.Schema
-
-var UpdateBotRequest_groupId *smithy.Schema
-
-var UpdateBotRequest_challenge *smithy.Schema
-
-var UpdateBotRequest_suspend *smithy.Schema
-
-var UpdateBotResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "UpdateBotResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateBotResponse_message *smithy.Schema
-
-var UpdateDataRetentionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "UpdateDataRetentionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateDataRetentionRequest_networkId *smithy.Schema
-
-var UpdateDataRetentionRequest_actionType *smithy.Schema
-
-var UpdateDataRetentionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "UpdateDataRetentionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateDataRetentionResponse_message *smithy.Schema
-
-var UpdateGuestUserRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "UpdateGuestUserRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateGuestUserRequest_networkId *smithy.Schema
-
-var UpdateGuestUserRequest_usernameHash *smithy.Schema
-
-var UpdateGuestUserRequest_block *smithy.Schema
-
-var UpdateGuestUserResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "UpdateGuestUserResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateGuestUserResponse_message *smithy.Schema
-
-var UpdateNetworkRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "UpdateNetworkRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateNetworkRequest_networkId *smithy.Schema
-
-var UpdateNetworkRequest_networkName *smithy.Schema
-
-var UpdateNetworkRequest_clientToken *smithy.Schema
-
-var UpdateNetworkRequest_encryptionKeyArn *smithy.Schema
-
-var UpdateNetworkResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "UpdateNetworkResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateNetworkResponse_message *smithy.Schema
-
-var UpdateNetworkSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "UpdateNetworkSettingsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateNetworkSettingsRequest_networkId *smithy.Schema
-
-var UpdateNetworkSettingsRequest_settings *smithy.Schema
-
-var UpdateNetworkSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "UpdateNetworkSettingsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateNetworkSettingsResponse_settings *smithy.Schema
-
-var UpdateSecurityGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "UpdateSecurityGroupRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateSecurityGroupRequest_networkId *smithy.Schema
-
-var UpdateSecurityGroupRequest_groupId *smithy.Schema
-
-var UpdateSecurityGroupRequest_name *smithy.Schema
-
-var UpdateSecurityGroupRequest_securityGroupSettings *smithy.Schema
-
-var UpdateSecurityGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "UpdateSecurityGroupResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateSecurityGroupResponse_securityGroup *smithy.Schema
-
-var UpdateUserRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "UpdateUserRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateUserRequest_networkId *smithy.Schema
-
-var UpdateUserRequest_userId *smithy.Schema
-
-var UpdateUserRequest_userDetails *smithy.Schema
-
-var UpdateUserResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.wickr",
-	Name:      "UpdateUserResponse",
-}, smithy.ShapeTypeStructure, 12)
-var UpdateUserResponse_userId *smithy.Schema
-
-var UpdateUserResponse_networkId *smithy.Schema
-
-var UpdateUserResponse_securityGroupIds *smithy.Schema
-
-var UpdateUserResponse_firstName *smithy.Schema
-
-var UpdateUserResponse_lastName *smithy.Schema
-
-var UpdateUserResponse_middleName *smithy.Schema
-
-var UpdateUserResponse_suspended *smithy.Schema
-
-var UpdateUserResponse_modified *smithy.Schema
-
-var UpdateUserResponse_status *smithy.Schema
-
-var UpdateUserResponse_inviteCode *smithy.Schema
-
-var UpdateUserResponse_inviteExpiration *smithy.Schema
-
-var UpdateUserResponse_codeValidation *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessLevel_STANDARD = AccessLevel.AddMember("STANDARD", smithyprelude.Unit)
-
-	AccessLevel_PREMIUM = AccessLevel.AddMember("PREMIUM", smithyprelude.Unit)
-
-	_AppIds_member = _AppIds.AddMember("member", _GenericString)
-
-	BadRequestError_message = BadRequestError.AddMember("message", _GenericString)
-
-	BasicDeviceObject_appId = BasicDeviceObject.AddMember("appId", _GenericString)
-
-	BasicDeviceObject_created = BasicDeviceObject.AddMember("created", _GenericString)
-
-	BasicDeviceObject_lastLogin = BasicDeviceObject.AddMember("lastLogin", _GenericString)
-
-	BasicDeviceObject_statusText = BasicDeviceObject.AddMember("statusText", _GenericString)
-
-	BasicDeviceObject_suspend = BasicDeviceObject.AddMember("suspend", smithyprelude.Boolean)
-
-	BasicDeviceObject_type = BasicDeviceObject.AddMember("type", _GenericString)
-
-	_SecurityGroupIdList_member = _SecurityGroupIdList.AddMember("member", _SecurityGroupId)
-
-	BatchCreateUserRequestItem_firstName = BatchCreateUserRequestItem.AddMember("firstName", _SensitiveString)
-
-	BatchCreateUserRequestItem_lastName = BatchCreateUserRequestItem.AddMember("lastName", _SensitiveString)
-
-	BatchCreateUserRequestItem_securityGroupIds = BatchCreateUserRequestItem.AddMember("securityGroupIds", _SecurityGroupIdList)
-
-	BatchCreateUserRequestItem_username = BatchCreateUserRequestItem.AddMember("username", _GenericString)
-
-	BatchCreateUserRequestItem_inviteCode = BatchCreateUserRequestItem.AddMember("inviteCode", _GenericString)
-
-	BatchCreateUserRequestItem_inviteCodeTtl = BatchCreateUserRequestItem.AddMember("inviteCodeTtl", smithyprelude.Integer)
-
-	BatchCreateUserRequestItem_codeValidation = BatchCreateUserRequestItem.AddMember("codeValidation", smithyprelude.Boolean)
-
-	_BatchCreateUserRequestItems_member = _BatchCreateUserRequestItems.AddMember("member", BatchCreateUserRequestItem)
-
-	BatchDeviceErrorResponseItem_field = BatchDeviceErrorResponseItem.AddMember("field", _GenericString)
-
-	BatchDeviceErrorResponseItem_reason = BatchDeviceErrorResponseItem.AddMember("reason", _GenericString)
-
-	BatchDeviceErrorResponseItem_appId = BatchDeviceErrorResponseItem.AddMember("appId", _GenericString)
-
-	_BatchDeviceErrorResponseItems_member = _BatchDeviceErrorResponseItems.AddMember("member", BatchDeviceErrorResponseItem)
-
-	BatchDeviceSuccessResponseItem_appId = BatchDeviceSuccessResponseItem.AddMember("appId", _GenericString)
-
-	_BatchDeviceSuccessResponseItems_member = _BatchDeviceSuccessResponseItems.AddMember("member", BatchDeviceSuccessResponseItem)
-
-	BatchUnameErrorResponseItem_field = BatchUnameErrorResponseItem.AddMember("field", _GenericString)
-
-	BatchUnameErrorResponseItem_reason = BatchUnameErrorResponseItem.AddMember("reason", _GenericString)
-
-	BatchUnameErrorResponseItem_uname = BatchUnameErrorResponseItem.AddMember("uname", _Uname)
-
-	_BatchUnameErrorResponseItems_member = _BatchUnameErrorResponseItems.AddMember("member", BatchUnameErrorResponseItem)
-
-	BatchUnameSuccessResponseItem_uname = BatchUnameSuccessResponseItem.AddMember("uname", _Uname)
-
-	BatchUnameSuccessResponseItem_username = BatchUnameSuccessResponseItem.AddMember("username", _GenericString)
-
-	_BatchUnameSuccessResponseItems_member = _BatchUnameSuccessResponseItems.AddMember("member", BatchUnameSuccessResponseItem)
-
-	BatchUserErrorResponseItem_field = BatchUserErrorResponseItem.AddMember("field", _GenericString)
-
-	BatchUserErrorResponseItem_reason = BatchUserErrorResponseItem.AddMember("reason", _GenericString)
-
-	BatchUserErrorResponseItem_userId = BatchUserErrorResponseItem.AddMember("userId", _UserId)
-
-	_BatchUserErrorResponseItems_member = _BatchUserErrorResponseItems.AddMember("member", BatchUserErrorResponseItem)
-
-	BatchUserSuccessResponseItem_userId = BatchUserSuccessResponseItem.AddMember("userId", _UserId)
-
-	_BatchUserSuccessResponseItems_member = _BatchUserSuccessResponseItems.AddMember("member", BatchUserSuccessResponseItem)
-
-	BlockedGuestUser_username = BlockedGuestUser.AddMember("username", _GenericString)
-
-	BlockedGuestUser_admin = BlockedGuestUser.AddMember("admin", _GenericString)
-
-	BlockedGuestUser_modified = BlockedGuestUser.AddMember("modified", _GenericString)
-
-	BlockedGuestUser_usernameHash = BlockedGuestUser.AddMember("usernameHash", _GenericString)
-
-	_BlockedGuestUserList_member = _BlockedGuestUserList.AddMember("member", BlockedGuestUser)
-
-	_BotStatus_PENDING = _BotStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	_BotStatus_ACTIVE = _BotStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	Bot_botId = Bot.AddMember("botId", _GenericString)
-
-	Bot_displayName = Bot.AddMember("displayName", _GenericString)
-
-	Bot_username = Bot.AddMember("username", _GenericString)
-
-	Bot_uname = Bot.AddMember("uname", _GenericString)
-
-	Bot_pubkey = Bot.AddMember("pubkey", _GenericString)
-
-	Bot_status = Bot.AddMember("status", _BotStatus)
-
-	Bot_groupId = Bot.AddMember("groupId", _GenericString)
-
-	Bot_hasChallenge = Bot.AddMember("hasChallenge", smithyprelude.Boolean)
-
-	Bot_suspended = Bot.AddMember("suspended", smithyprelude.Boolean)
-
-	Bot_lastLogin = Bot.AddMember("lastLogin", _GenericString)
-
-	_Bots_member = _Bots.AddMember("member", Bot)
-
-	CallingSettings_canStart11Call = CallingSettings.AddMember("canStart11Call", smithyprelude.Boolean)
-
-	CallingSettings_canVideoCall = CallingSettings.AddMember("canVideoCall", smithyprelude.Boolean)
-
-	CallingSettings_forceTcpCall = CallingSettings.AddMember("forceTcpCall", smithyprelude.Boolean)
-
-	ConsentPopupConfig_enabled = ConsentPopupConfig.AddMember("enabled", smithyprelude.Boolean)
-
-	ConsentPopupConfig_header = ConsentPopupConfig.AddMember("header", _GenericString)
-
-	ConsentPopupConfig_content = ConsentPopupConfig.AddMember("content", _GenericString)
-
-	ConsentPopupConfig_closeButtonLabel = ConsentPopupConfig.AddMember("closeButtonLabel", _GenericString)
-
-	DataRetentionActionType_ENABLE = DataRetentionActionType.AddMember("ENABLE", smithyprelude.Unit)
-
-	DataRetentionActionType_DISABLE = DataRetentionActionType.AddMember("DISABLE", smithyprelude.Unit)
-
-	DataRetentionActionType_PUBKEY_MSG_ACK = DataRetentionActionType.AddMember("PUBKEY_MSG_ACK", smithyprelude.Unit)
-
-	_Devices_member = _Devices.AddMember("member", BasicDeviceObject)
-
-	ErrorDetail_field = ErrorDetail.AddMember("field", _GenericString)
-
-	ErrorDetail_reason = ErrorDetail.AddMember("reason", _GenericString)
-
-	_ErrorDetailList_member = _ErrorDetailList.AddMember("member", ErrorDetail)
-
-	ForbiddenError_message = ForbiddenError.AddMember("message", _GenericString)
-
-	GuestUser_billingPeriod = GuestUser.AddMember("billingPeriod", _GenericString)
-
-	GuestUser_username = GuestUser.AddMember("username", _GenericString)
-
-	GuestUser_usernameHash = GuestUser.AddMember("usernameHash", _GenericString)
-
-	GuestUserHistoryCount_month = GuestUserHistoryCount.AddMember("month", _GenericString)
-
-	GuestUserHistoryCount_count = GuestUserHistoryCount.AddMember("count", _GenericString)
-
-	_GuestUserHistoryCountList_member = _GuestUserHistoryCountList.AddMember("member", GuestUserHistoryCount)
-
-	_GuestUserList_member = _GuestUserList.AddMember("member", GuestUser)
-
-	InternalServerError_message = InternalServerError.AddMember("message", _GenericString)
-
-	Network_networkId = Network.AddMember("networkId", _NetworkId)
-
-	Network_networkName = Network.AddMember("networkName", _GenericString)
-
-	Network_accessLevel = Network.AddMember("accessLevel", AccessLevel)
-
-	Network_awsAccountId = Network.AddMember("awsAccountId", _GenericString)
-
-	Network_networkArn = Network.AddMember("networkArn", _GenericString)
-
-	Network_standing = Network.AddMember("standing", smithyprelude.Integer)
-
-	Network_freeTrialExpiration = Network.AddMember("freeTrialExpiration", _GenericString)
-
-	Network_migrationState = Network.AddMember("migrationState", smithyprelude.Integer)
-
-	Network_encryptionKeyArn = Network.AddMember("encryptionKeyArn", _GenericString)
-
-	_NetworkList_member = _NetworkList.AddMember("member", Network)
-
-	Status_DISABLED = Status.AddMember("DISABLED", smithyprelude.Unit)
-
-	Status_ENABLED = Status.AddMember("ENABLED", smithyprelude.Unit)
-
-	Status_FORCE_ENABLED = Status.AddMember("FORCE_ENABLED", smithyprelude.Unit)
-
-	ReadReceiptConfig_status = ReadReceiptConfig.AddMember("status", Status)
-
-	NetworkSettings_enableClientMetrics = NetworkSettings.AddMember("enableClientMetrics", smithyprelude.Boolean)
-
-	NetworkSettings_readReceiptConfig = NetworkSettings.AddMember("readReceiptConfig", ReadReceiptConfig)
-
-	NetworkSettings_dataRetention = NetworkSettings.AddMember("dataRetention", smithyprelude.Boolean)
-
-	NetworkSettings_enableTrustedDataFormat = NetworkSettings.AddMember("enableTrustedDataFormat", smithyprelude.Boolean)
-
-	NetworkSettings_consentPopup = NetworkSettings.AddMember("consentPopup", ConsentPopupConfig)
-
-	OidcConfigInfo_applicationName = OidcConfigInfo.AddMember("applicationName", _GenericString)
-
-	OidcConfigInfo_clientId = OidcConfigInfo.AddMember("clientId", _GenericString)
-
-	OidcConfigInfo_companyId = OidcConfigInfo.AddMember("companyId", _GenericString)
-
-	OidcConfigInfo_scopes = OidcConfigInfo.AddMember("scopes", _GenericString)
-
-	OidcConfigInfo_issuer = OidcConfigInfo.AddMember("issuer", _GenericString)
-
-	OidcConfigInfo_clientSecret = OidcConfigInfo.AddMember("clientSecret", _SensitiveString)
-
-	OidcConfigInfo_secret = OidcConfigInfo.AddMember("secret", _SensitiveString)
-
-	OidcConfigInfo_redirectUrl = OidcConfigInfo.AddMember("redirectUrl", _GenericString)
-
-	OidcConfigInfo_userId = OidcConfigInfo.AddMember("userId", _GenericString)
-
-	OidcConfigInfo_customUsername = OidcConfigInfo.AddMember("customUsername", _GenericString)
-
-	OidcConfigInfo_caCertificate = OidcConfigInfo.AddMember("caCertificate", _GenericString)
-
-	OidcConfigInfo_applicationId = OidcConfigInfo.AddMember("applicationId", smithyprelude.Integer)
-
-	OidcConfigInfo_ssoTokenBufferMinutes = OidcConfigInfo.AddMember("ssoTokenBufferMinutes", smithyprelude.Integer)
-
-	OidcConfigInfo_extraAuthParams = OidcConfigInfo.AddMember("extraAuthParams", _GenericString)
-
-	OidcTokenInfo_codeVerifier = OidcTokenInfo.AddMember("codeVerifier", _GenericString)
-
-	OidcTokenInfo_codeChallenge = OidcTokenInfo.AddMember("codeChallenge", _GenericString)
-
-	OidcTokenInfo_accessToken = OidcTokenInfo.AddMember("accessToken", _GenericString)
-
-	OidcTokenInfo_idToken = OidcTokenInfo.AddMember("idToken", _GenericString)
-
-	OidcTokenInfo_refreshToken = OidcTokenInfo.AddMember("refreshToken", _GenericString)
-
-	OidcTokenInfo_tokenType = OidcTokenInfo.AddMember("tokenType", _GenericString)
-
-	OidcTokenInfo_expiresIn = OidcTokenInfo.AddMember("expiresIn", smithyprelude.Long)
-
-	PasswordRequirements_lowercase = PasswordRequirements.AddMember("lowercase", smithyprelude.Integer)
-
-	PasswordRequirements_minLength = PasswordRequirements.AddMember("minLength", smithyprelude.Integer)
-
-	PasswordRequirements_numbers = PasswordRequirements.AddMember("numbers", smithyprelude.Integer)
-
-	PasswordRequirements_symbols = PasswordRequirements.AddMember("symbols", smithyprelude.Integer)
-
-	PasswordRequirements_uppercase = PasswordRequirements.AddMember("uppercase", smithyprelude.Integer)
-
-	_PermittedNetworksList_member = _PermittedNetworksList.AddMember("member", _NetworkId)
-
-	PermittedWickrEnterpriseNetwork_domain = PermittedWickrEnterpriseNetwork.AddMember("domain", _GenericString)
-
-	PermittedWickrEnterpriseNetwork_networkId = PermittedWickrEnterpriseNetwork.AddMember("networkId", _NetworkId)
-
-	_PermittedWickrEnterpriseNetworksList_member = _PermittedWickrEnterpriseNetworksList.AddMember("member", PermittedWickrEnterpriseNetwork)
-
-	RateLimitError_message = RateLimitError.AddMember("message", _GenericString)
-
-	ResourceNotFoundError_message = ResourceNotFoundError.AddMember("message", _GenericString)
-
-	_SecurityGroupStringList_member = _SecurityGroupStringList.AddMember("member", _GenericString)
-
-	ShredderSettings_canProcessManually = ShredderSettings.AddMember("canProcessManually", smithyprelude.Boolean)
-
-	ShredderSettings_intensity = ShredderSettings.AddMember("intensity", smithyprelude.Integer)
-
-	WickrAwsNetworks_region = WickrAwsNetworks.AddMember("region", _GenericString)
-
-	WickrAwsNetworks_networkId = WickrAwsNetworks.AddMember("networkId", _NetworkId)
-
-	_WickrAwsNetworksList_member = _WickrAwsNetworksList.AddMember("member", WickrAwsNetworks)
-
-	SecurityGroupSettings_alwaysReauthenticate = SecurityGroupSettings.AddMember("alwaysReauthenticate", smithyprelude.Boolean)
-
-	SecurityGroupSettings_atakPackageValues = SecurityGroupSettings.AddMember("atakPackageValues", _SecurityGroupStringList)
-
-	SecurityGroupSettings_calling = SecurityGroupSettings.AddMember("calling", CallingSettings)
-
-	SecurityGroupSettings_checkForUpdates = SecurityGroupSettings.AddMember("checkForUpdates", smithyprelude.Boolean)
-
-	SecurityGroupSettings_enableAtak = SecurityGroupSettings.AddMember("enableAtak", smithyprelude.Boolean)
-
-	SecurityGroupSettings_enableCrashReports = SecurityGroupSettings.AddMember("enableCrashReports", smithyprelude.Boolean)
-
-	SecurityGroupSettings_enableFileDownload = SecurityGroupSettings.AddMember("enableFileDownload", smithyprelude.Boolean)
-
-	SecurityGroupSettings_enableGuestFederation = SecurityGroupSettings.AddMember("enableGuestFederation", smithyprelude.Boolean)
-
-	SecurityGroupSettings_enableNotificationPreview = SecurityGroupSettings.AddMember("enableNotificationPreview", smithyprelude.Boolean)
-
-	SecurityGroupSettings_enableOpenAccessOption = SecurityGroupSettings.AddMember("enableOpenAccessOption", smithyprelude.Boolean)
-
-	SecurityGroupSettings_enableRestrictedGlobalFederation = SecurityGroupSettings.AddMember("enableRestrictedGlobalFederation", smithyprelude.Boolean)
-
-	SecurityGroupSettings_filesEnabled = SecurityGroupSettings.AddMember("filesEnabled", smithyprelude.Boolean)
-
-	SecurityGroupSettings_forceDeviceLockout = SecurityGroupSettings.AddMember("forceDeviceLockout", smithyprelude.Integer)
-
-	SecurityGroupSettings_forceOpenAccess = SecurityGroupSettings.AddMember("forceOpenAccess", smithyprelude.Boolean)
-
-	SecurityGroupSettings_forceReadReceipts = SecurityGroupSettings.AddMember("forceReadReceipts", smithyprelude.Boolean)
-
-	SecurityGroupSettings_globalFederation = SecurityGroupSettings.AddMember("globalFederation", smithyprelude.Boolean)
-
-	SecurityGroupSettings_isAtoEnabled = SecurityGroupSettings.AddMember("isAtoEnabled", smithyprelude.Boolean)
-
-	SecurityGroupSettings_isLinkPreviewEnabled = SecurityGroupSettings.AddMember("isLinkPreviewEnabled", smithyprelude.Boolean)
-
-	SecurityGroupSettings_locationAllowMaps = SecurityGroupSettings.AddMember("locationAllowMaps", smithyprelude.Boolean)
-
-	SecurityGroupSettings_locationEnabled = SecurityGroupSettings.AddMember("locationEnabled", smithyprelude.Boolean)
-
-	SecurityGroupSettings_maxAutoDownloadSize = SecurityGroupSettings.AddMember("maxAutoDownloadSize", smithyprelude.Long)
-
-	SecurityGroupSettings_maxBor = SecurityGroupSettings.AddMember("maxBor", smithyprelude.Integer)
-
-	SecurityGroupSettings_maxTtl = SecurityGroupSettings.AddMember("maxTtl", smithyprelude.Long)
-
-	SecurityGroupSettings_messageForwardingEnabled = SecurityGroupSettings.AddMember("messageForwardingEnabled", smithyprelude.Boolean)
-
-	SecurityGroupSettings_passwordRequirements = SecurityGroupSettings.AddMember("passwordRequirements", PasswordRequirements)
-
-	SecurityGroupSettings_presenceEnabled = SecurityGroupSettings.AddMember("presenceEnabled", smithyprelude.Boolean)
-
-	SecurityGroupSettings_quickResponses = SecurityGroupSettings.AddMember("quickResponses", _SecurityGroupStringList)
-
-	SecurityGroupSettings_showMasterRecoveryKey = SecurityGroupSettings.AddMember("showMasterRecoveryKey", smithyprelude.Boolean)
-
-	SecurityGroupSettings_shredder = SecurityGroupSettings.AddMember("shredder", ShredderSettings)
-
-	SecurityGroupSettings_ssoMaxIdleMinutes = SecurityGroupSettings.AddMember("ssoMaxIdleMinutes", smithyprelude.Integer)
-
-	SecurityGroupSettings_maxNonSsoSessionMinutes = SecurityGroupSettings.AddMember("maxNonSsoSessionMinutes", smithyprelude.Integer)
-
-	SecurityGroupSettings_federationMode = SecurityGroupSettings.AddMember("federationMode", smithyprelude.Integer)
-
-	SecurityGroupSettings_lockoutThreshold = SecurityGroupSettings.AddMember("lockoutThreshold", smithyprelude.Integer)
-
-	SecurityGroupSettings_permittedNetworks = SecurityGroupSettings.AddMember("permittedNetworks", _PermittedNetworksList)
-
-	SecurityGroupSettings_permittedWickrAwsNetworks = SecurityGroupSettings.AddMember("permittedWickrAwsNetworks", _WickrAwsNetworksList)
-
-	SecurityGroupSettings_permittedWickrEnterpriseNetworks = SecurityGroupSettings.AddMember("permittedWickrEnterpriseNetworks", _PermittedWickrEnterpriseNetworksList)
-
-	SecurityGroup_activeMembers = SecurityGroup.AddMember("activeMembers", smithyprelude.Integer)
-
-	SecurityGroup_botMembers = SecurityGroup.AddMember("botMembers", smithyprelude.Integer)
-
-	SecurityGroup_activeDirectoryGuid = SecurityGroup.AddMember("activeDirectoryGuid", _GenericString)
-
-	SecurityGroup_id = SecurityGroup.AddMember("id", _GenericString)
-
-	SecurityGroup_isDefault = SecurityGroup.AddMember("isDefault", smithyprelude.Boolean)
-
-	SecurityGroup_name = SecurityGroup.AddMember("name", _GenericString)
-
-	SecurityGroup_modified = SecurityGroup.AddMember("modified", smithyprelude.Integer)
-
-	SecurityGroup_securityGroupSettings = SecurityGroup.AddMember("securityGroupSettings", SecurityGroupSettings)
-
-	_SecurityGroupList_member = _SecurityGroupList.AddMember("member", SecurityGroup)
-
-	SecurityGroupSettingsRequest_lockoutThreshold = SecurityGroupSettingsRequest.AddMember("lockoutThreshold", smithyprelude.Integer)
-
-	SecurityGroupSettingsRequest_permittedNetworks = SecurityGroupSettingsRequest.AddMember("permittedNetworks", _PermittedNetworksList)
-
-	SecurityGroupSettingsRequest_enableGuestFederation = SecurityGroupSettingsRequest.AddMember("enableGuestFederation", smithyprelude.Boolean)
-
-	SecurityGroupSettingsRequest_globalFederation = SecurityGroupSettingsRequest.AddMember("globalFederation", smithyprelude.Boolean)
-
-	SecurityGroupSettingsRequest_federationMode = SecurityGroupSettingsRequest.AddMember("federationMode", smithyprelude.Integer)
-
-	SecurityGroupSettingsRequest_enableRestrictedGlobalFederation = SecurityGroupSettingsRequest.AddMember("enableRestrictedGlobalFederation", smithyprelude.Boolean)
-
-	SecurityGroupSettingsRequest_permittedWickrAwsNetworks = SecurityGroupSettingsRequest.AddMember("permittedWickrAwsNetworks", _WickrAwsNetworksList)
-
-	SecurityGroupSettingsRequest_permittedWickrEnterpriseNetworks = SecurityGroupSettingsRequest.AddMember("permittedWickrEnterpriseNetworks", _PermittedWickrEnterpriseNetworksList)
-
-	Setting_optionName = Setting.AddMember("optionName", _GenericString)
-
-	Setting_value = Setting.AddMember("value", _GenericString)
-
-	Setting_type = Setting.AddMember("type", _GenericString)
-
-	_SettingsList_member = _SettingsList.AddMember("member", Setting)
-
-	SortDirection_ASC = SortDirection.AddMember("ASC", smithyprelude.Unit)
-
-	SortDirection_DESC = SortDirection.AddMember("DESC", smithyprelude.Unit)
-
-	_StringList_member = _StringList.AddMember("member", _GenericString)
-
-	_Unames_member = _Unames.AddMember("member", _GenericString)
-
-	UnauthorizedError_message = UnauthorizedError.AddMember("message", _GenericString)
-
-	UpdateUserDetails_firstName = UpdateUserDetails.AddMember("firstName", _SensitiveString)
-
-	UpdateUserDetails_lastName = UpdateUserDetails.AddMember("lastName", _SensitiveString)
-
-	UpdateUserDetails_username = UpdateUserDetails.AddMember("username", _GenericString)
-
-	UpdateUserDetails_securityGroupIds = UpdateUserDetails.AddMember("securityGroupIds", _SecurityGroupIdList)
-
-	UpdateUserDetails_inviteCode = UpdateUserDetails.AddMember("inviteCode", _GenericString)
-
-	UpdateUserDetails_inviteCodeTtl = UpdateUserDetails.AddMember("inviteCodeTtl", smithyprelude.Integer)
-
-	UpdateUserDetails_codeValidation = UpdateUserDetails.AddMember("codeValidation", smithyprelude.Boolean)
-
-	User_userId = User.AddMember("userId", _UserId)
-
-	User_firstName = User.AddMember("firstName", _SensitiveString)
-
-	User_lastName = User.AddMember("lastName", _SensitiveString)
-
-	User_username = User.AddMember("username", _GenericString)
-
-	User_securityGroups = User.AddMember("securityGroups", _SecurityGroupIdList)
-
-	User_isAdmin = User.AddMember("isAdmin", smithyprelude.Boolean)
-
-	User_suspended = User.AddMember("suspended", smithyprelude.Boolean)
-
-	User_status = User.AddMember("status", smithyprelude.Integer)
-
-	User_otpEnabled = User.AddMember("otpEnabled", smithyprelude.Boolean)
-
-	User_scimId = User.AddMember("scimId", _GenericString)
-
-	User_type = User.AddMember("type", _GenericString)
-
-	User_cell = User.AddMember("cell", _GenericString)
-
-	User_countryCode = User.AddMember("countryCode", _GenericString)
-
-	User_challengeFailures = User.AddMember("challengeFailures", smithyprelude.Integer)
-
-	User_isInviteExpired = User.AddMember("isInviteExpired", smithyprelude.Boolean)
-
-	User_isUser = User.AddMember("isUser", smithyprelude.Boolean)
-
-	User_inviteCode = User.AddMember("inviteCode", _GenericString)
-
-	User_codeValidation = User.AddMember("codeValidation", smithyprelude.Boolean)
-
-	User_uname = User.AddMember("uname", _GenericString)
-
-	_UserIds_member = _UserIds.AddMember("member", _UserId)
-
-	_Users_member = _Users.AddMember("member", User)
-
-	_UserStatus_PENDING = _UserStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	_UserStatus_ACTIVE = _UserStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	ValidationError_reasons = ValidationError.AddMember("reasons", _ErrorDetailList)
-
-	ValidationError_message = ValidationError.AddMember("message", _GenericString)
-
-	BatchCreateUserRequest_networkId = BatchCreateUserRequest.AddMember("networkId", _NetworkId, &smithytraits.HTTPLabel{})
-
-	BatchCreateUserRequest_users = BatchCreateUserRequest.AddMember("users", _BatchCreateUserRequestItems)
-
-	BatchCreateUserRequest_clientToken = BatchCreateUserRequest.AddMember("clientToken", _ClientToken, &smithytraits.HTTPHeader{Name: "X-Client-Token"})
-
-	BatchCreateUserResponse_message = BatchCreateUserResponse.AddMember("message", _GenericString)
-
-	BatchCreateUserResponse_successful = BatchCreateUserResponse.AddMember("successful", _Users)
-
-	BatchCreateUserResponse_failed = BatchCreateUserResponse.AddMember("failed", _BatchUserErrorResponseItems)
-
-	BatchDeleteUserRequest_networkId = BatchDeleteUserRequest.AddMember("networkId", _NetworkId, &smithytraits.HTTPLabel{})
-
-	BatchDeleteUserRequest_userIds = BatchDeleteUserRequest.AddMember("userIds", _UserIds)
-
-	BatchDeleteUserRequest_clientToken = BatchDeleteUserRequest.AddMember("clientToken", _ClientToken, &smithytraits.HTTPHeader{Name: "X-Client-Token"})
-
-	BatchDeleteUserResponse_message = BatchDeleteUserResponse.AddMember("message", _GenericString)
-
-	BatchDeleteUserResponse_successful = BatchDeleteUserResponse.AddMember("successful", _BatchUserSuccessResponseItems)
-
-	BatchDeleteUserResponse_failed = BatchDeleteUserResponse.AddMember("failed", _BatchUserErrorResponseItems)
-
-	BatchLookupUserUnameRequest_networkId = BatchLookupUserUnameRequest.AddMember("networkId", _NetworkId, &smithytraits.HTTPLabel{})
-
-	BatchLookupUserUnameRequest_unames = BatchLookupUserUnameRequest.AddMember("unames", _Unames)
-
-	BatchLookupUserUnameRequest_clientToken = BatchLookupUserUnameRequest.AddMember("clientToken", _ClientToken, &smithytraits.HTTPHeader{Name: "X-Client-Token"})
-
-	BatchLookupUserUnameResponse_message = BatchLookupUserUnameResponse.AddMember("message", _GenericString)
-
-	BatchLookupUserUnameResponse_successful = BatchLookupUserUnameResponse.AddMember("successful", _BatchUnameSuccessResponseItems)
-
-	BatchLookupUserUnameResponse_failed = BatchLookupUserUnameResponse.AddMember("failed", _BatchUnameErrorResponseItems)
-
-	BatchReinviteUserRequest_networkId = BatchReinviteUserRequest.AddMember("networkId", _NetworkId, &smithytraits.HTTPLabel{})
-
-	BatchReinviteUserRequest_userIds = BatchReinviteUserRequest.AddMember("userIds", _UserIds)
-
-	BatchReinviteUserRequest_clientToken = BatchReinviteUserRequest.AddMember("clientToken", _ClientToken, &smithytraits.HTTPHeader{Name: "X-Client-Token"})
-
-	BatchReinviteUserResponse_message = BatchReinviteUserResponse.AddMember("message", _GenericString)
-
-	BatchReinviteUserResponse_successful = BatchReinviteUserResponse.AddMember("successful", _BatchUserSuccessResponseItems)
-
-	BatchReinviteUserResponse_failed = BatchReinviteUserResponse.AddMember("failed", _BatchUserErrorResponseItems)
-
-	BatchResetDevicesForUserRequest_networkId = BatchResetDevicesForUserRequest.AddMember("networkId", _NetworkId, &smithytraits.HTTPLabel{})
-
-	BatchResetDevicesForUserRequest_userId = BatchResetDevicesForUserRequest.AddMember("userId", _UserId, &smithytraits.HTTPLabel{})
-
-	BatchResetDevicesForUserRequest_appIds = BatchResetDevicesForUserRequest.AddMember("appIds", _AppIds)
-
-	BatchResetDevicesForUserRequest_clientToken = BatchResetDevicesForUserRequest.AddMember("clientToken", _ClientToken, &smithytraits.HTTPHeader{Name: "X-Client-Token"})
-
-	BatchResetDevicesForUserResponse_message = BatchResetDevicesForUserResponse.AddMember("message", _GenericString)
-
-	BatchResetDevicesForUserResponse_successful = BatchResetDevicesForUserResponse.AddMember("successful", _BatchDeviceSuccessResponseItems)
-
-	BatchResetDevicesForUserResponse_failed = BatchResetDevicesForUserResponse.AddMember("failed", _BatchDeviceErrorResponseItems)
-
-	BatchToggleUserSuspendStatusRequest_networkId = BatchToggleUserSuspendStatusRequest.AddMember("networkId", _NetworkId, &smithytraits.HTTPLabel{})
-
-	BatchToggleUserSuspendStatusRequest_suspend = BatchToggleUserSuspendStatusRequest.AddMember("suspend", smithyprelude.Boolean, &smithytraits.HTTPQuery{Name: "suspend"})
-
-	BatchToggleUserSuspendStatusRequest_userIds = BatchToggleUserSuspendStatusRequest.AddMember("userIds", _UserIds)
-
-	BatchToggleUserSuspendStatusRequest_clientToken = BatchToggleUserSuspendStatusRequest.AddMember("clientToken", _ClientToken, &smithytraits.HTTPHeader{Name: "X-Client-Token"})
-
-	BatchToggleUserSuspendStatusResponse_message = BatchToggleUserSuspendStatusResponse.AddMember("message", _GenericString)
-
-	BatchToggleUserSuspendStatusResponse_successful = BatchToggleUserSuspendStatusResponse.AddMember("successful", _BatchUserSuccessResponseItems)
-
-	BatchToggleUserSuspendStatusResponse_failed = BatchToggleUserSuspendStatusResponse.AddMember("failed", _BatchUserErrorResponseItems)
-
-	CreateBotRequest_networkId = CreateBotRequest.AddMember("networkId", _NetworkId, &smithytraits.HTTPLabel{})
-
-	CreateBotRequest_username = CreateBotRequest.AddMember("username", _GenericString)
-
-	CreateBotRequest_displayName = CreateBotRequest.AddMember("displayName", _GenericString)
-
-	CreateBotRequest_groupId = CreateBotRequest.AddMember("groupId", _GenericString)
-
-	CreateBotRequest_challenge = CreateBotRequest.AddMember("challenge", _SensitiveString)
-
-	CreateBotResponse_message = CreateBotResponse.AddMember("message", _GenericString)
-
-	CreateBotResponse_botId = CreateBotResponse.AddMember("botId", _BotId)
-
-	CreateBotResponse_networkId = CreateBotResponse.AddMember("networkId", _NetworkId)
-
-	CreateBotResponse_username = CreateBotResponse.AddMember("username", _GenericString)
-
-	CreateBotResponse_displayName = CreateBotResponse.AddMember("displayName", _GenericString)
-
-	CreateBotResponse_groupId = CreateBotResponse.AddMember("groupId", _GenericString)
-
-	CreateDataRetentionBotChallengeRequest_networkId = CreateDataRetentionBotChallengeRequest.AddMember("networkId", _NetworkId, &smithytraits.HTTPLabel{})
-
-	CreateDataRetentionBotChallengeResponse_challenge = CreateDataRetentionBotChallengeResponse.AddMember("challenge", _SensitiveString)
-
-	CreateDataRetentionBotRequest_networkId = CreateDataRetentionBotRequest.AddMember("networkId", _NetworkId, &smithytraits.HTTPLabel{})
-
-	CreateDataRetentionBotResponse_message = CreateDataRetentionBotResponse.AddMember("message", _GenericString)
-
-	CreateNetworkRequest_networkName = CreateNetworkRequest.AddMember("networkName", _GenericString)
-
-	CreateNetworkRequest_accessLevel = CreateNetworkRequest.AddMember("accessLevel", AccessLevel)
-
-	CreateNetworkRequest_enablePremiumFreeTrial = CreateNetworkRequest.AddMember("enablePremiumFreeTrial", smithyprelude.Boolean)
-
-	CreateNetworkRequest_encryptionKeyArn = CreateNetworkRequest.AddMember("encryptionKeyArn", _GenericString)
-
-	CreateNetworkResponse_networkId = CreateNetworkResponse.AddMember("networkId", _NetworkId)
-
-	CreateNetworkResponse_networkName = CreateNetworkResponse.AddMember("networkName", _GenericString)
-
-	CreateNetworkResponse_encryptionKeyArn = CreateNetworkResponse.AddMember("encryptionKeyArn", _GenericString)
-
-	CreateSecurityGroupRequest_networkId = CreateSecurityGroupRequest.AddMember("networkId", _NetworkId, &smithytraits.HTTPLabel{})
-
-	CreateSecurityGroupRequest_name = CreateSecurityGroupRequest.AddMember("name", _GenericString)
-
-	CreateSecurityGroupRequest_securityGroupSettings = CreateSecurityGroupRequest.AddMember("securityGroupSettings", SecurityGroupSettingsRequest)
-
-	CreateSecurityGroupRequest_clientToken = CreateSecurityGroupRequest.AddMember("clientToken", _ClientToken, &smithytraits.HTTPHeader{Name: "X-Client-Token"})
-
-	CreateSecurityGroupResponse_securityGroup = CreateSecurityGroupResponse.AddMember("securityGroup", SecurityGroup)
-
-	DeleteBotRequest_networkId = DeleteBotRequest.AddMember("networkId", _NetworkId, &smithytraits.HTTPLabel{})
-
-	DeleteBotRequest_botId = DeleteBotRequest.AddMember("botId", _BotId, &smithytraits.HTTPLabel{})
-
-	DeleteBotResponse_message = DeleteBotResponse.AddMember("message", _GenericString)
-
-	DeleteDataRetentionBotRequest_networkId = DeleteDataRetentionBotRequest.AddMember("networkId", _NetworkId, &smithytraits.HTTPLabel{})
-
-	DeleteDataRetentionBotResponse_message = DeleteDataRetentionBotResponse.AddMember("message", _GenericString)
-
-	DeleteNetworkRequest_networkId = DeleteNetworkRequest.AddMember("networkId", _NetworkId, &smithytraits.HTTPLabel{})
-
-	DeleteNetworkRequest_clientToken = DeleteNetworkRequest.AddMember("clientToken", _ClientToken, &smithytraits.HTTPHeader{Name: "X-Client-Token"})
-
-	DeleteNetworkResponse_message = DeleteNetworkResponse.AddMember("message", _GenericString)
-
-	DeleteSecurityGroupRequest_networkId = DeleteSecurityGroupRequest.AddMember("networkId", _NetworkId, &smithytraits.HTTPLabel{})
-
-	DeleteSecurityGroupRequest_groupId = DeleteSecurityGroupRequest.AddMember("groupId", _GenericString, &smithytraits.HTTPLabel{})
-
-	DeleteSecurityGroupResponse_message = DeleteSecurityGroupResponse.AddMember("message", _GenericString)
-
-	DeleteSecurityGroupResponse_networkId = DeleteSecurityGroupResponse.AddMember("networkId", _NetworkId)
-
-	DeleteSecurityGroupResponse_groupId = DeleteSecurityGroupResponse.AddMember("groupId", _GenericString)
-
-	GetBotRequest_networkId = GetBotRequest.AddMember("networkId", _NetworkId, &smithytraits.HTTPLabel{})
-
-	GetBotRequest_botId = GetBotRequest.AddMember("botId", _BotId, &smithytraits.HTTPLabel{})
-
-	GetBotResponse_botId = GetBotResponse.AddMember("botId", _GenericString)
-
-	GetBotResponse_displayName = GetBotResponse.AddMember("displayName", _GenericString)
-
-	GetBotResponse_username = GetBotResponse.AddMember("username", _GenericString)
-
-	GetBotResponse_uname = GetBotResponse.AddMember("uname", _GenericString)
-
-	GetBotResponse_pubkey = GetBotResponse.AddMember("pubkey", _GenericString)
-
-	GetBotResponse_status = GetBotResponse.AddMember("status", _BotStatus)
-
-	GetBotResponse_groupId = GetBotResponse.AddMember("groupId", _GenericString)
-
-	GetBotResponse_hasChallenge = GetBotResponse.AddMember("hasChallenge", smithyprelude.Boolean)
-
-	GetBotResponse_suspended = GetBotResponse.AddMember("suspended", smithyprelude.Boolean)
-
-	GetBotResponse_lastLogin = GetBotResponse.AddMember("lastLogin", _GenericString)
-
-	GetBotsCountRequest_networkId = GetBotsCountRequest.AddMember("networkId", _NetworkId, &smithytraits.HTTPLabel{})
-
-	GetBotsCountResponse_pending = GetBotsCountResponse.AddMember("pending", smithyprelude.Integer)
-
-	GetBotsCountResponse_active = GetBotsCountResponse.AddMember("active", smithyprelude.Integer)
-
-	GetBotsCountResponse_total = GetBotsCountResponse.AddMember("total", smithyprelude.Integer)
-
-	GetDataRetentionBotRequest_networkId = GetDataRetentionBotRequest.AddMember("networkId", _NetworkId, &smithytraits.HTTPLabel{})
-
-	GetDataRetentionBotResponse_botName = GetDataRetentionBotResponse.AddMember("botName", _GenericString)
-
-	GetDataRetentionBotResponse_botExists = GetDataRetentionBotResponse.AddMember("botExists", smithyprelude.Boolean)
-
-	GetDataRetentionBotResponse_isBotActive = GetDataRetentionBotResponse.AddMember("isBotActive", smithyprelude.Boolean)
-
-	GetDataRetentionBotResponse_isDataRetentionBotRegistered = GetDataRetentionBotResponse.AddMember("isDataRetentionBotRegistered", smithyprelude.Boolean)
-
-	GetDataRetentionBotResponse_isDataRetentionServiceEnabled = GetDataRetentionBotResponse.AddMember("isDataRetentionServiceEnabled", smithyprelude.Boolean)
-
-	GetDataRetentionBotResponse_isPubkeyMsgAcked = GetDataRetentionBotResponse.AddMember("isPubkeyMsgAcked", smithyprelude.Boolean)
-
-	GetGuestUserHistoryCountRequest_networkId = GetGuestUserHistoryCountRequest.AddMember("networkId", _NetworkId, &smithytraits.HTTPLabel{})
-
-	GetGuestUserHistoryCountResponse_history = GetGuestUserHistoryCountResponse.AddMember("history", _GuestUserHistoryCountList)
-
-	GetNetworkRequest_networkId = GetNetworkRequest.AddMember("networkId", _NetworkId, &smithytraits.HTTPLabel{})
-
-	GetNetworkResponse_networkId = GetNetworkResponse.AddMember("networkId", _NetworkId)
-
-	GetNetworkResponse_networkName = GetNetworkResponse.AddMember("networkName", _GenericString)
-
-	GetNetworkResponse_accessLevel = GetNetworkResponse.AddMember("accessLevel", AccessLevel)
-
-	GetNetworkResponse_awsAccountId = GetNetworkResponse.AddMember("awsAccountId", _GenericString)
-
-	GetNetworkResponse_networkArn = GetNetworkResponse.AddMember("networkArn", _GenericString)
-
-	GetNetworkResponse_standing = GetNetworkResponse.AddMember("standing", smithyprelude.Integer)
-
-	GetNetworkResponse_freeTrialExpiration = GetNetworkResponse.AddMember("freeTrialExpiration", _GenericString)
-
-	GetNetworkResponse_migrationState = GetNetworkResponse.AddMember("migrationState", smithyprelude.Integer)
-
-	GetNetworkResponse_encryptionKeyArn = GetNetworkResponse.AddMember("encryptionKeyArn", _GenericString)
-
-	GetNetworkSettingsRequest_networkId = GetNetworkSettingsRequest.AddMember("networkId", _NetworkId, &smithytraits.HTTPLabel{})
-
-	GetNetworkSettingsResponse_settings = GetNetworkSettingsResponse.AddMember("settings", _SettingsList)
-
-	GetOidcInfoRequest_networkId = GetOidcInfoRequest.AddMember("networkId", _NetworkId, &smithytraits.HTTPLabel{})
-
-	GetOidcInfoRequest_clientId = GetOidcInfoRequest.AddMember("clientId", _GenericString, &smithytraits.HTTPQuery{Name: "clientId"})
-
-	GetOidcInfoRequest_code = GetOidcInfoRequest.AddMember("code", _GenericString, &smithytraits.HTTPQuery{Name: "code"})
-
-	GetOidcInfoRequest_grantType = GetOidcInfoRequest.AddMember("grantType", _GenericString, &smithytraits.HTTPQuery{Name: "grantType"})
-
-	GetOidcInfoRequest_redirectUri = GetOidcInfoRequest.AddMember("redirectUri", _GenericString, &smithytraits.HTTPQuery{Name: "redirectUri"})
-
-	GetOidcInfoRequest_url = GetOidcInfoRequest.AddMember("url", _GenericString, &smithytraits.HTTPQuery{Name: "url"})
-
-	GetOidcInfoRequest_clientSecret = GetOidcInfoRequest.AddMember("clientSecret", _SensitiveString, &smithytraits.HTTPQuery{Name: "clientSecret"})
-
-	GetOidcInfoRequest_codeVerifier = GetOidcInfoRequest.AddMember("codeVerifier", _GenericString, &smithytraits.HTTPQuery{Name: "codeVerifier"})
-
-	GetOidcInfoRequest_certificate = GetOidcInfoRequest.AddMember("certificate", _GenericString, &smithytraits.HTTPQuery{Name: "certificate"})
-
-	GetOidcInfoResponse_openidConnectInfo = GetOidcInfoResponse.AddMember("openidConnectInfo", OidcConfigInfo)
-
-	GetOidcInfoResponse_tokenInfo = GetOidcInfoResponse.AddMember("tokenInfo", OidcTokenInfo)
-
-	GetOpentdfConfigRequest_networkId = GetOpentdfConfigRequest.AddMember("networkId", _NetworkId, &smithytraits.HTTPLabel{})
-
-	GetOpentdfConfigResponse_clientId = GetOpentdfConfigResponse.AddMember("clientId", _GenericString)
-
-	GetOpentdfConfigResponse_domain = GetOpentdfConfigResponse.AddMember("domain", _GenericString)
-
-	GetOpentdfConfigResponse_clientSecret = GetOpentdfConfigResponse.AddMember("clientSecret", _SensitiveString)
-
-	GetOpentdfConfigResponse_provider = GetOpentdfConfigResponse.AddMember("provider", _GenericString)
-
-	GetSecurityGroupRequest_networkId = GetSecurityGroupRequest.AddMember("networkId", _NetworkId, &smithytraits.HTTPLabel{})
-
-	GetSecurityGroupRequest_groupId = GetSecurityGroupRequest.AddMember("groupId", _GenericString, &smithytraits.HTTPLabel{})
-
-	GetSecurityGroupResponse_securityGroup = GetSecurityGroupResponse.AddMember("securityGroup", SecurityGroup)
-
-	GetUserRequest_networkId = GetUserRequest.AddMember("networkId", _NetworkId, &smithytraits.HTTPLabel{})
-
-	GetUserRequest_userId = GetUserRequest.AddMember("userId", _UserId, &smithytraits.HTTPLabel{})
-
-	GetUserRequest_startTime = GetUserRequest.AddMember("startTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "epoch-seconds"},
-
-		&smithytraits.HTTPQuery{Name: "startTime"})
-
-	GetUserRequest_endTime = GetUserRequest.AddMember("endTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "epoch-seconds"},
-
-		&smithytraits.HTTPQuery{Name: "endTime"})
-
-	GetUserResponse_userId = GetUserResponse.AddMember("userId", _UserId)
-
-	GetUserResponse_firstName = GetUserResponse.AddMember("firstName", _SensitiveString)
-
-	GetUserResponse_lastName = GetUserResponse.AddMember("lastName", _SensitiveString)
-
-	GetUserResponse_username = GetUserResponse.AddMember("username", _GenericString)
-
-	GetUserResponse_isAdmin = GetUserResponse.AddMember("isAdmin", smithyprelude.Boolean)
-
-	GetUserResponse_suspended = GetUserResponse.AddMember("suspended", smithyprelude.Boolean)
-
-	GetUserResponse_status = GetUserResponse.AddMember("status", smithyprelude.Integer)
-
-	GetUserResponse_lastActivity = GetUserResponse.AddMember("lastActivity", smithyprelude.Integer)
-
-	GetUserResponse_lastLogin = GetUserResponse.AddMember("lastLogin", smithyprelude.Integer)
-
-	GetUserResponse_securityGroupIds = GetUserResponse.AddMember("securityGroupIds", _SecurityGroupIdList)
-
-	GetUsersCountRequest_networkId = GetUsersCountRequest.AddMember("networkId", _NetworkId, &smithytraits.HTTPLabel{})
-
-	GetUsersCountResponse_pending = GetUsersCountResponse.AddMember("pending", smithyprelude.Integer)
-
-	GetUsersCountResponse_active = GetUsersCountResponse.AddMember("active", smithyprelude.Integer)
-
-	GetUsersCountResponse_rejected = GetUsersCountResponse.AddMember("rejected", smithyprelude.Integer)
-
-	GetUsersCountResponse_remaining = GetUsersCountResponse.AddMember("remaining", smithyprelude.Integer)
-
-	GetUsersCountResponse_total = GetUsersCountResponse.AddMember("total", smithyprelude.Integer)
-
-	ListBlockedGuestUsersRequest_networkId = ListBlockedGuestUsersRequest.AddMember("networkId", _NetworkId, &smithytraits.HTTPLabel{})
-
-	ListBlockedGuestUsersRequest_maxResults = ListBlockedGuestUsersRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListBlockedGuestUsersRequest_sortDirection = ListBlockedGuestUsersRequest.AddMember("sortDirection", SortDirection, &smithytraits.HTTPQuery{Name: "sortDirection"})
-
-	ListBlockedGuestUsersRequest_sortFields = ListBlockedGuestUsersRequest.AddMember("sortFields", _GenericString, &smithytraits.HTTPQuery{Name: "sortFields"})
-
-	ListBlockedGuestUsersRequest_username = ListBlockedGuestUsersRequest.AddMember("username", _GenericString, &smithytraits.HTTPQuery{Name: "username"})
-
-	ListBlockedGuestUsersRequest_admin = ListBlockedGuestUsersRequest.AddMember("admin", _GenericString, &smithytraits.HTTPQuery{Name: "admin"})
-
-	ListBlockedGuestUsersRequest_nextToken = ListBlockedGuestUsersRequest.AddMember("nextToken", _GenericString, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListBlockedGuestUsersResponse_nextToken = ListBlockedGuestUsersResponse.AddMember("nextToken", _GenericString)
-
-	ListBlockedGuestUsersResponse_blocklist = ListBlockedGuestUsersResponse.AddMember("blocklist", _BlockedGuestUserList)
-
-	ListBotsRequest_networkId = ListBotsRequest.AddMember("networkId", _NetworkId, &smithytraits.HTTPLabel{})
-
-	ListBotsRequest_nextToken = ListBotsRequest.AddMember("nextToken", _GenericString, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListBotsRequest_maxResults = ListBotsRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListBotsRequest_sortFields = ListBotsRequest.AddMember("sortFields", _GenericString, &smithytraits.HTTPQuery{Name: "sortFields"})
-
-	ListBotsRequest_sortDirection = ListBotsRequest.AddMember("sortDirection", SortDirection, &smithytraits.HTTPQuery{Name: "sortDirection"})
-
-	ListBotsRequest_displayName = ListBotsRequest.AddMember("displayName", _GenericString, &smithytraits.HTTPQuery{Name: "displayName"})
-
-	ListBotsRequest_username = ListBotsRequest.AddMember("username", _GenericString, &smithytraits.HTTPQuery{Name: "username"})
-
-	ListBotsRequest_status = ListBotsRequest.AddMember("status", _BotStatus, &smithytraits.HTTPQuery{Name: "status"})
-
-	ListBotsRequest_groupId = ListBotsRequest.AddMember("groupId", _GenericString, &smithytraits.HTTPQuery{Name: "groupId"})
-
-	ListBotsResponse_bots = ListBotsResponse.AddMember("bots", _Bots)
-
-	ListBotsResponse_nextToken = ListBotsResponse.AddMember("nextToken", _GenericString)
-
-	ListDevicesForUserRequest_networkId = ListDevicesForUserRequest.AddMember("networkId", _NetworkId, &smithytraits.HTTPLabel{})
-
-	ListDevicesForUserRequest_userId = ListDevicesForUserRequest.AddMember("userId", _UserId, &smithytraits.HTTPLabel{})
-
-	ListDevicesForUserRequest_nextToken = ListDevicesForUserRequest.AddMember("nextToken", _GenericString, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListDevicesForUserRequest_maxResults = ListDevicesForUserRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListDevicesForUserRequest_sortFields = ListDevicesForUserRequest.AddMember("sortFields", _GenericString, &smithytraits.HTTPQuery{Name: "sortFields"})
-
-	ListDevicesForUserRequest_sortDirection = ListDevicesForUserRequest.AddMember("sortDirection", SortDirection, &smithytraits.HTTPQuery{Name: "sortDirection"})
-
-	ListDevicesForUserResponse_nextToken = ListDevicesForUserResponse.AddMember("nextToken", _GenericString)
-
-	ListDevicesForUserResponse_devices = ListDevicesForUserResponse.AddMember("devices", _Devices)
-
-	ListGuestUsersRequest_networkId = ListGuestUsersRequest.AddMember("networkId", _NetworkId, &smithytraits.HTTPLabel{})
-
-	ListGuestUsersRequest_maxResults = ListGuestUsersRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListGuestUsersRequest_sortDirection = ListGuestUsersRequest.AddMember("sortDirection", SortDirection, &smithytraits.HTTPQuery{Name: "sortDirection"})
-
-	ListGuestUsersRequest_sortFields = ListGuestUsersRequest.AddMember("sortFields", _GenericString, &smithytraits.HTTPQuery{Name: "sortFields"})
-
-	ListGuestUsersRequest_username = ListGuestUsersRequest.AddMember("username", _GenericString, &smithytraits.HTTPQuery{Name: "username"})
-
-	ListGuestUsersRequest_billingPeriod = ListGuestUsersRequest.AddMember("billingPeriod", _GenericString, &smithytraits.HTTPQuery{Name: "billingPeriod"})
-
-	ListGuestUsersRequest_nextToken = ListGuestUsersRequest.AddMember("nextToken", _GenericString, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListGuestUsersResponse_nextToken = ListGuestUsersResponse.AddMember("nextToken", _GenericString)
-
-	ListGuestUsersResponse_guestlist = ListGuestUsersResponse.AddMember("guestlist", _GuestUserList)
-
-	ListNetworksRequest_maxResults = ListNetworksRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListNetworksRequest_sortFields = ListNetworksRequest.AddMember("sortFields", _GenericString, &smithytraits.HTTPQuery{Name: "sortFields"})
-
-	ListNetworksRequest_sortDirection = ListNetworksRequest.AddMember("sortDirection", SortDirection, &smithytraits.HTTPQuery{Name: "sortDirection"})
-
-	ListNetworksRequest_nextToken = ListNetworksRequest.AddMember("nextToken", _GenericString, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListNetworksResponse_networks = ListNetworksResponse.AddMember("networks", _NetworkList)
-
-	ListNetworksResponse_nextToken = ListNetworksResponse.AddMember("nextToken", _GenericString)
-
-	ListSecurityGroupsRequest_networkId = ListSecurityGroupsRequest.AddMember("networkId", _NetworkId, &smithytraits.HTTPLabel{})
-
-	ListSecurityGroupsRequest_nextToken = ListSecurityGroupsRequest.AddMember("nextToken", _GenericString, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListSecurityGroupsRequest_maxResults = ListSecurityGroupsRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListSecurityGroupsRequest_sortFields = ListSecurityGroupsRequest.AddMember("sortFields", _GenericString, &smithytraits.HTTPQuery{Name: "sortFields"})
-
-	ListSecurityGroupsRequest_sortDirection = ListSecurityGroupsRequest.AddMember("sortDirection", SortDirection, &smithytraits.HTTPQuery{Name: "sortDirection"})
-
-	ListSecurityGroupsResponse_securityGroups = ListSecurityGroupsResponse.AddMember("securityGroups", _SecurityGroupList)
-
-	ListSecurityGroupsResponse_nextToken = ListSecurityGroupsResponse.AddMember("nextToken", _GenericString)
-
-	ListSecurityGroupUsersRequest_networkId = ListSecurityGroupUsersRequest.AddMember("networkId", _NetworkId, &smithytraits.HTTPLabel{})
-
-	ListSecurityGroupUsersRequest_groupId = ListSecurityGroupUsersRequest.AddMember("groupId", _GenericString, &smithytraits.HTTPLabel{})
-
-	ListSecurityGroupUsersRequest_nextToken = ListSecurityGroupUsersRequest.AddMember("nextToken", _GenericString, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListSecurityGroupUsersRequest_maxResults = ListSecurityGroupUsersRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListSecurityGroupUsersRequest_sortFields = ListSecurityGroupUsersRequest.AddMember("sortFields", _GenericString, &smithytraits.HTTPQuery{Name: "sortFields"})
-
-	ListSecurityGroupUsersRequest_sortDirection = ListSecurityGroupUsersRequest.AddMember("sortDirection", SortDirection, &smithytraits.HTTPQuery{Name: "sortDirection"})
-
-	ListSecurityGroupUsersResponse_users = ListSecurityGroupUsersResponse.AddMember("users", _Users)
-
-	ListSecurityGroupUsersResponse_nextToken = ListSecurityGroupUsersResponse.AddMember("nextToken", _GenericString)
-
-	ListUsersRequest_networkId = ListUsersRequest.AddMember("networkId", _NetworkId, &smithytraits.HTTPLabel{})
-
-	ListUsersRequest_nextToken = ListUsersRequest.AddMember("nextToken", _GenericString, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListUsersRequest_maxResults = ListUsersRequest.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListUsersRequest_sortFields = ListUsersRequest.AddMember("sortFields", _GenericString, &smithytraits.HTTPQuery{Name: "sortFields"})
-
-	ListUsersRequest_sortDirection = ListUsersRequest.AddMember("sortDirection", SortDirection, &smithytraits.HTTPQuery{Name: "sortDirection"})
-
-	ListUsersRequest_firstName = ListUsersRequest.AddMember("firstName", _SensitiveString, &smithytraits.HTTPQuery{Name: "firstName"})
-
-	ListUsersRequest_lastName = ListUsersRequest.AddMember("lastName", _SensitiveString, &smithytraits.HTTPQuery{Name: "lastName"})
-
-	ListUsersRequest_username = ListUsersRequest.AddMember("username", _GenericString, &smithytraits.HTTPQuery{Name: "username"})
-
-	ListUsersRequest_status = ListUsersRequest.AddMember("status", _UserStatus, &smithytraits.HTTPQuery{Name: "status"})
-
-	ListUsersRequest_groupId = ListUsersRequest.AddMember("groupId", _GenericString, &smithytraits.HTTPQuery{Name: "groupId"})
-
-	ListUsersResponse_nextToken = ListUsersResponse.AddMember("nextToken", _GenericString)
-
-	ListUsersResponse_users = ListUsersResponse.AddMember("users", _Users)
-
-	RegisterOidcConfigRequest_networkId = RegisterOidcConfigRequest.AddMember("networkId", _NetworkId, &smithytraits.HTTPLabel{})
-
-	RegisterOidcConfigRequest_companyId = RegisterOidcConfigRequest.AddMember("companyId", _GenericString)
-
-	RegisterOidcConfigRequest_customUsername = RegisterOidcConfigRequest.AddMember("customUsername", _GenericString)
-
-	RegisterOidcConfigRequest_extraAuthParams = RegisterOidcConfigRequest.AddMember("extraAuthParams", _GenericString)
-
-	RegisterOidcConfigRequest_issuer = RegisterOidcConfigRequest.AddMember("issuer", _GenericString)
-
-	RegisterOidcConfigRequest_scopes = RegisterOidcConfigRequest.AddMember("scopes", _GenericString)
-
-	RegisterOidcConfigRequest_secret = RegisterOidcConfigRequest.AddMember("secret", _SensitiveString)
-
-	RegisterOidcConfigRequest_ssoTokenBufferMinutes = RegisterOidcConfigRequest.AddMember("ssoTokenBufferMinutes", smithyprelude.Integer)
-
-	RegisterOidcConfigRequest_userId = RegisterOidcConfigRequest.AddMember("userId", _GenericString)
-
-	RegisterOidcConfigResponse_applicationName = RegisterOidcConfigResponse.AddMember("applicationName", _GenericString)
-
-	RegisterOidcConfigResponse_clientId = RegisterOidcConfigResponse.AddMember("clientId", _GenericString)
-
-	RegisterOidcConfigResponse_companyId = RegisterOidcConfigResponse.AddMember("companyId", _GenericString)
-
-	RegisterOidcConfigResponse_scopes = RegisterOidcConfigResponse.AddMember("scopes", _GenericString)
-
-	RegisterOidcConfigResponse_issuer = RegisterOidcConfigResponse.AddMember("issuer", _GenericString)
-
-	RegisterOidcConfigResponse_clientSecret = RegisterOidcConfigResponse.AddMember("clientSecret", _SensitiveString)
-
-	RegisterOidcConfigResponse_secret = RegisterOidcConfigResponse.AddMember("secret", _SensitiveString)
-
-	RegisterOidcConfigResponse_redirectUrl = RegisterOidcConfigResponse.AddMember("redirectUrl", _GenericString)
-
-	RegisterOidcConfigResponse_userId = RegisterOidcConfigResponse.AddMember("userId", _GenericString)
-
-	RegisterOidcConfigResponse_customUsername = RegisterOidcConfigResponse.AddMember("customUsername", _GenericString)
-
-	RegisterOidcConfigResponse_caCertificate = RegisterOidcConfigResponse.AddMember("caCertificate", _GenericString)
-
-	RegisterOidcConfigResponse_applicationId = RegisterOidcConfigResponse.AddMember("applicationId", smithyprelude.Integer)
-
-	RegisterOidcConfigResponse_ssoTokenBufferMinutes = RegisterOidcConfigResponse.AddMember("ssoTokenBufferMinutes", smithyprelude.Integer)
-
-	RegisterOidcConfigResponse_extraAuthParams = RegisterOidcConfigResponse.AddMember("extraAuthParams", _GenericString)
-
-	RegisterOidcConfigTestRequest_networkId = RegisterOidcConfigTestRequest.AddMember("networkId", _NetworkId, &smithytraits.HTTPLabel{})
-
-	RegisterOidcConfigTestRequest_extraAuthParams = RegisterOidcConfigTestRequest.AddMember("extraAuthParams", _GenericString)
-
-	RegisterOidcConfigTestRequest_issuer = RegisterOidcConfigTestRequest.AddMember("issuer", _GenericString)
-
-	RegisterOidcConfigTestRequest_scopes = RegisterOidcConfigTestRequest.AddMember("scopes", _GenericString)
-
-	RegisterOidcConfigTestRequest_certificate = RegisterOidcConfigTestRequest.AddMember("certificate", _GenericString)
-
-	RegisterOidcConfigTestResponse_tokenEndpoint = RegisterOidcConfigTestResponse.AddMember("tokenEndpoint", _GenericString)
-
-	RegisterOidcConfigTestResponse_userinfoEndpoint = RegisterOidcConfigTestResponse.AddMember("userinfoEndpoint", _GenericString)
-
-	RegisterOidcConfigTestResponse_responseTypesSupported = RegisterOidcConfigTestResponse.AddMember("responseTypesSupported", _StringList)
-
-	RegisterOidcConfigTestResponse_scopesSupported = RegisterOidcConfigTestResponse.AddMember("scopesSupported", _StringList)
-
-	RegisterOidcConfigTestResponse_issuer = RegisterOidcConfigTestResponse.AddMember("issuer", _GenericString)
-
-	RegisterOidcConfigTestResponse_authorizationEndpoint = RegisterOidcConfigTestResponse.AddMember("authorizationEndpoint", _GenericString)
-
-	RegisterOidcConfigTestResponse_endSessionEndpoint = RegisterOidcConfigTestResponse.AddMember("endSessionEndpoint", _GenericString)
-
-	RegisterOidcConfigTestResponse_logoutEndpoint = RegisterOidcConfigTestResponse.AddMember("logoutEndpoint", _GenericString)
-
-	RegisterOidcConfigTestResponse_grantTypesSupported = RegisterOidcConfigTestResponse.AddMember("grantTypesSupported", _StringList)
-
-	RegisterOidcConfigTestResponse_revocationEndpoint = RegisterOidcConfigTestResponse.AddMember("revocationEndpoint", _GenericString)
-
-	RegisterOidcConfigTestResponse_tokenEndpointAuthMethodsSupported = RegisterOidcConfigTestResponse.AddMember("tokenEndpointAuthMethodsSupported", _StringList)
-
-	RegisterOidcConfigTestResponse_microsoftMultiRefreshToken = RegisterOidcConfigTestResponse.AddMember("microsoftMultiRefreshToken", smithyprelude.Boolean)
-
-	RegisterOpentdfConfigRequest_networkId = RegisterOpentdfConfigRequest.AddMember("networkId", _NetworkId, &smithytraits.HTTPLabel{})
-
-	RegisterOpentdfConfigRequest_clientId = RegisterOpentdfConfigRequest.AddMember("clientId", _GenericString)
-
-	RegisterOpentdfConfigRequest_clientSecret = RegisterOpentdfConfigRequest.AddMember("clientSecret", _SensitiveString)
-
-	RegisterOpentdfConfigRequest_domain = RegisterOpentdfConfigRequest.AddMember("domain", _GenericString)
-
-	RegisterOpentdfConfigRequest_provider = RegisterOpentdfConfigRequest.AddMember("provider", _GenericString)
-
-	RegisterOpentdfConfigRequest_dryRun = RegisterOpentdfConfigRequest.AddMember("dryRun", smithyprelude.Boolean, &smithytraits.HTTPQuery{Name: "dryRun"})
-
-	RegisterOpentdfConfigResponse_clientId = RegisterOpentdfConfigResponse.AddMember("clientId", _GenericString)
-
-	RegisterOpentdfConfigResponse_domain = RegisterOpentdfConfigResponse.AddMember("domain", _GenericString)
-
-	RegisterOpentdfConfigResponse_clientSecret = RegisterOpentdfConfigResponse.AddMember("clientSecret", _SensitiveString)
-
-	RegisterOpentdfConfigResponse_provider = RegisterOpentdfConfigResponse.AddMember("provider", _GenericString)
-
-	UpdateBotRequest_networkId = UpdateBotRequest.AddMember("networkId", _NetworkId, &smithytraits.HTTPLabel{})
-
-	UpdateBotRequest_botId = UpdateBotRequest.AddMember("botId", _BotId, &smithytraits.HTTPLabel{})
-
-	UpdateBotRequest_displayName = UpdateBotRequest.AddMember("displayName", _GenericString)
-
-	UpdateBotRequest_groupId = UpdateBotRequest.AddMember("groupId", _GenericString)
-
-	UpdateBotRequest_challenge = UpdateBotRequest.AddMember("challenge", _SensitiveString)
-
-	UpdateBotRequest_suspend = UpdateBotRequest.AddMember("suspend", smithyprelude.Boolean)
-
-	UpdateBotResponse_message = UpdateBotResponse.AddMember("message", _GenericString)
-
-	UpdateDataRetentionRequest_networkId = UpdateDataRetentionRequest.AddMember("networkId", _NetworkId, &smithytraits.HTTPLabel{})
-
-	UpdateDataRetentionRequest_actionType = UpdateDataRetentionRequest.AddMember("actionType", DataRetentionActionType)
-
-	UpdateDataRetentionResponse_message = UpdateDataRetentionResponse.AddMember("message", _GenericString)
-
-	UpdateGuestUserRequest_networkId = UpdateGuestUserRequest.AddMember("networkId", _NetworkId, &smithytraits.HTTPLabel{})
-
-	UpdateGuestUserRequest_usernameHash = UpdateGuestUserRequest.AddMember("usernameHash", _GenericString, &smithytraits.HTTPLabel{})
-
-	UpdateGuestUserRequest_block = UpdateGuestUserRequest.AddMember("block", smithyprelude.Boolean)
-
-	UpdateGuestUserResponse_message = UpdateGuestUserResponse.AddMember("message", _GenericString)
-
-	UpdateNetworkRequest_networkId = UpdateNetworkRequest.AddMember("networkId", _NetworkId, &smithytraits.HTTPLabel{})
-
-	UpdateNetworkRequest_networkName = UpdateNetworkRequest.AddMember("networkName", _GenericString)
-
-	UpdateNetworkRequest_clientToken = UpdateNetworkRequest.AddMember("clientToken", _ClientToken, &smithytraits.HTTPHeader{Name: "X-Client-Token"})
-
-	UpdateNetworkRequest_encryptionKeyArn = UpdateNetworkRequest.AddMember("encryptionKeyArn", _GenericString)
-
-	UpdateNetworkResponse_message = UpdateNetworkResponse.AddMember("message", _GenericString)
-
-	UpdateNetworkSettingsRequest_networkId = UpdateNetworkSettingsRequest.AddMember("networkId", _NetworkId, &smithytraits.HTTPLabel{})
-
-	UpdateNetworkSettingsRequest_settings = UpdateNetworkSettingsRequest.AddMember("settings", NetworkSettings)
-
-	UpdateNetworkSettingsResponse_settings = UpdateNetworkSettingsResponse.AddMember("settings", _SettingsList)
-
-	UpdateSecurityGroupRequest_networkId = UpdateSecurityGroupRequest.AddMember("networkId", _NetworkId, &smithytraits.HTTPLabel{})
-
-	UpdateSecurityGroupRequest_groupId = UpdateSecurityGroupRequest.AddMember("groupId", _GenericString, &smithytraits.HTTPLabel{})
-
-	UpdateSecurityGroupRequest_name = UpdateSecurityGroupRequest.AddMember("name", _GenericString)
-
-	UpdateSecurityGroupRequest_securityGroupSettings = UpdateSecurityGroupRequest.AddMember("securityGroupSettings", SecurityGroupSettings)
-
-	UpdateSecurityGroupResponse_securityGroup = UpdateSecurityGroupResponse.AddMember("securityGroup", SecurityGroup)
-
-	UpdateUserRequest_networkId = UpdateUserRequest.AddMember("networkId", _NetworkId, &smithytraits.HTTPLabel{})
-
-	UpdateUserRequest_userId = UpdateUserRequest.AddMember("userId", _UserId)
-
-	UpdateUserRequest_userDetails = UpdateUserRequest.AddMember("userDetails", UpdateUserDetails)
-
-	UpdateUserResponse_userId = UpdateUserResponse.AddMember("userId", _UserId)
-
-	UpdateUserResponse_networkId = UpdateUserResponse.AddMember("networkId", _NetworkId)
-
-	UpdateUserResponse_securityGroupIds = UpdateUserResponse.AddMember("securityGroupIds", _SecurityGroupIdList)
-
-	UpdateUserResponse_firstName = UpdateUserResponse.AddMember("firstName", _SensitiveString)
-
-	UpdateUserResponse_lastName = UpdateUserResponse.AddMember("lastName", _SensitiveString)
-
-	UpdateUserResponse_middleName = UpdateUserResponse.AddMember("middleName", _GenericString)
-
-	UpdateUserResponse_suspended = UpdateUserResponse.AddMember("suspended", smithyprelude.Boolean)
-
-	UpdateUserResponse_modified = UpdateUserResponse.AddMember("modified", smithyprelude.Integer)
-
-	UpdateUserResponse_status = UpdateUserResponse.AddMember("status", smithyprelude.Integer)
-
-	UpdateUserResponse_inviteCode = UpdateUserResponse.AddMember("inviteCode", _GenericString)
-
-	UpdateUserResponse_inviteExpiration = UpdateUserResponse.AddMember("inviteExpiration", smithyprelude.Integer)
-
-	UpdateUserResponse_codeValidation = UpdateUserResponse.AddMember("codeValidation", smithyprelude.Boolean)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t47 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t48 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t49 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t50 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t51 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 401}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t52 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 422}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t53 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t54 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "X-Client-Token"}}, DirectMask: 0x80}
+var t55 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "suspend"}}, DirectMask: 0x10}
+var t56 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "clientId"}}, DirectMask: 0x10}
+var t57 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "code"}}, DirectMask: 0x10}
+var t58 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "grantType"}}, DirectMask: 0x10}
+var t59 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "redirectUri"}}, DirectMask: 0x10}
+var t60 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "url"}}, DirectMask: 0x10}
+var t61 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "clientSecret"}, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x10}
+var t62 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "codeVerifier"}}, DirectMask: 0x10}
+var t63 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "certificate"}}, DirectMask: 0x10}
+var t64 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "startTime"}, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "epoch-seconds"}}, DirectMask: 0x410}
+var t65 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "endTime"}, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "epoch-seconds"}}, DirectMask: 0x410}
+var t66 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+var t67 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "sortDirection"}}, DirectMask: 0x10}
+var t68 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "sortFields"}}, DirectMask: 0x10}
+var t69 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "username"}}, DirectMask: 0x10}
+var t70 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "admin"}}, DirectMask: 0x10}
+var t71 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t72 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "displayName"}}, DirectMask: 0x10}
+var t73 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "status"}}, DirectMask: 0x10}
+var t74 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "groupId"}}, DirectMask: 0x10}
+var t75 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "billingPeriod"}}, DirectMask: 0x10}
+var t76 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "firstName"}, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x10}
+var t77 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "lastName"}, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x10}
+var t78 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "dryRun"}}, DirectMask: 0x10}
+
+var mAccessLevel = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessLevel_STANDARD, &sAccessLevel_PREMIUM}}
+var m_AppIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_AppIds_member}}
+var mBadRequestError = smithy.SchemaMembers{List: []*smithy.Schema{&sBadRequestError_message}}
+var mBasicDeviceObject = smithy.SchemaMembers{List: []*smithy.Schema{&sBasicDeviceObject_appId, &sBasicDeviceObject_created, &sBasicDeviceObject_lastLogin, &sBasicDeviceObject_statusText, &sBasicDeviceObject_suspend, &sBasicDeviceObject_type}}
+var mBatchCreateUserRequestItem = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchCreateUserRequestItem_firstName, &sBatchCreateUserRequestItem_lastName, &sBatchCreateUserRequestItem_securityGroupIds, &sBatchCreateUserRequestItem_username, &sBatchCreateUserRequestItem_inviteCode, &sBatchCreateUserRequestItem_inviteCodeTtl, &sBatchCreateUserRequestItem_codeValidation}}
+var m_BatchCreateUserRequestItems = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchCreateUserRequestItems_member}}
+var mBatchDeviceErrorResponseItem = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDeviceErrorResponseItem_field, &sBatchDeviceErrorResponseItem_reason, &sBatchDeviceErrorResponseItem_appId}}
+var m_BatchDeviceErrorResponseItems = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchDeviceErrorResponseItems_member}}
+var mBatchDeviceSuccessResponseItem = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDeviceSuccessResponseItem_appId}}
+var m_BatchDeviceSuccessResponseItems = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchDeviceSuccessResponseItems_member}}
+var mBatchUnameErrorResponseItem = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchUnameErrorResponseItem_field, &sBatchUnameErrorResponseItem_reason, &sBatchUnameErrorResponseItem_uname}}
+var m_BatchUnameErrorResponseItems = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchUnameErrorResponseItems_member}}
+var mBatchUnameSuccessResponseItem = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchUnameSuccessResponseItem_uname, &sBatchUnameSuccessResponseItem_username}}
+var m_BatchUnameSuccessResponseItems = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchUnameSuccessResponseItems_member}}
+var mBatchUserErrorResponseItem = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchUserErrorResponseItem_field, &sBatchUserErrorResponseItem_reason, &sBatchUserErrorResponseItem_userId}}
+var m_BatchUserErrorResponseItems = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchUserErrorResponseItems_member}}
+var mBatchUserSuccessResponseItem = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchUserSuccessResponseItem_userId}}
+var m_BatchUserSuccessResponseItems = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchUserSuccessResponseItems_member}}
+var mBlockedGuestUser = smithy.SchemaMembers{List: []*smithy.Schema{&sBlockedGuestUser_username, &sBlockedGuestUser_admin, &sBlockedGuestUser_modified, &sBlockedGuestUser_usernameHash}}
+var m_BlockedGuestUserList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BlockedGuestUserList_member}}
+var mBot = smithy.SchemaMembers{List: []*smithy.Schema{&sBot_botId, &sBot_displayName, &sBot_username, &sBot_uname, &sBot_pubkey, &sBot_status, &sBot_groupId, &sBot_hasChallenge, &sBot_suspended, &sBot_lastLogin}, Seed: 2, Slots: []uint16{
+	8, 9, 0, 0, 0, 4, 0, 2, 1, 0, 0, 10, 0, 7, 0, 0, 0, 0, 6, 0, 0, 0, 0, 3,
+	0, 5, 0, 0, 0, 0, 0, 0,
+}}
+var m_Bots = smithy.SchemaMembers{List: []*smithy.Schema{&s_Bots_member}}
+var m_BotStatus = smithy.SchemaMembers{List: []*smithy.Schema{&s_BotStatus_PENDING, &s_BotStatus_ACTIVE}}
+var mCallingSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sCallingSettings_canStart11Call, &sCallingSettings_canVideoCall, &sCallingSettings_forceTcpCall}}
+var mConsentPopupConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sConsentPopupConfig_enabled, &sConsentPopupConfig_header, &sConsentPopupConfig_content, &sConsentPopupConfig_closeButtonLabel}}
+var mDataRetentionActionType = smithy.SchemaMembers{List: []*smithy.Schema{&sDataRetentionActionType_ENABLE, &sDataRetentionActionType_DISABLE, &sDataRetentionActionType_PUBKEY_MSG_ACK}}
+var m_Devices = smithy.SchemaMembers{List: []*smithy.Schema{&s_Devices_member}}
+var mErrorDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sErrorDetail_field, &sErrorDetail_reason}}
+var m_ErrorDetailList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ErrorDetailList_member}}
+var mForbiddenError = smithy.SchemaMembers{List: []*smithy.Schema{&sForbiddenError_message}}
+var mGuestUser = smithy.SchemaMembers{List: []*smithy.Schema{&sGuestUser_billingPeriod, &sGuestUser_username, &sGuestUser_usernameHash}}
+var mGuestUserHistoryCount = smithy.SchemaMembers{List: []*smithy.Schema{&sGuestUserHistoryCount_month, &sGuestUserHistoryCount_count}}
+var m_GuestUserHistoryCountList = smithy.SchemaMembers{List: []*smithy.Schema{&s_GuestUserHistoryCountList_member}}
+var m_GuestUserList = smithy.SchemaMembers{List: []*smithy.Schema{&s_GuestUserList_member}}
+var mInternalServerError = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerError_message}}
+var mNetwork = smithy.SchemaMembers{List: []*smithy.Schema{&sNetwork_networkId, &sNetwork_networkName, &sNetwork_accessLevel, &sNetwork_awsAccountId, &sNetwork_networkArn, &sNetwork_standing, &sNetwork_freeTrialExpiration, &sNetwork_migrationState, &sNetwork_encryptionKeyArn}, Seed: 8, Slots: []uint16{
+	0, 2, 0, 1, 0, 0, 9, 0, 0, 0, 0, 0, 0, 6, 4, 0, 3, 7, 0, 0, 0, 0, 0, 0,
+	0, 5, 0, 0, 0, 0, 0, 8,
+}}
+var m_NetworkList = smithy.SchemaMembers{List: []*smithy.Schema{&s_NetworkList_member}}
+var mNetworkSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkSettings_enableClientMetrics, &sNetworkSettings_readReceiptConfig, &sNetworkSettings_dataRetention, &sNetworkSettings_enableTrustedDataFormat, &sNetworkSettings_consentPopup}}
+var mOidcConfigInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sOidcConfigInfo_applicationName, &sOidcConfigInfo_clientId, &sOidcConfigInfo_companyId, &sOidcConfigInfo_scopes, &sOidcConfigInfo_issuer, &sOidcConfigInfo_clientSecret, &sOidcConfigInfo_secret, &sOidcConfigInfo_redirectUrl, &sOidcConfigInfo_userId, &sOidcConfigInfo_customUsername, &sOidcConfigInfo_caCertificate, &sOidcConfigInfo_applicationId, &sOidcConfigInfo_ssoTokenBufferMinutes, &sOidcConfigInfo_extraAuthParams}, Seed: 5, Slots: []uint16{
+	0, 14, 0, 0, 6, 0, 11, 10, 0, 0, 0, 2, 5, 0, 0, 7, 0, 0, 0, 0, 1, 12, 9, 8,
+	0, 3, 0, 13, 0, 0, 0, 4,
+}}
+var mOidcTokenInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sOidcTokenInfo_codeVerifier, &sOidcTokenInfo_codeChallenge, &sOidcTokenInfo_accessToken, &sOidcTokenInfo_idToken, &sOidcTokenInfo_refreshToken, &sOidcTokenInfo_tokenType, &sOidcTokenInfo_expiresIn}}
+var mPasswordRequirements = smithy.SchemaMembers{List: []*smithy.Schema{&sPasswordRequirements_lowercase, &sPasswordRequirements_minLength, &sPasswordRequirements_numbers, &sPasswordRequirements_symbols, &sPasswordRequirements_uppercase}}
+var m_PermittedNetworksList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PermittedNetworksList_member}}
+var mPermittedWickrEnterpriseNetwork = smithy.SchemaMembers{List: []*smithy.Schema{&sPermittedWickrEnterpriseNetwork_domain, &sPermittedWickrEnterpriseNetwork_networkId}}
+var m_PermittedWickrEnterpriseNetworksList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PermittedWickrEnterpriseNetworksList_member}}
+var mRateLimitError = smithy.SchemaMembers{List: []*smithy.Schema{&sRateLimitError_message}}
+var mReadReceiptConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sReadReceiptConfig_status}}
+var mResourceNotFoundError = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundError_message}}
+var mSecurityGroup = smithy.SchemaMembers{List: []*smithy.Schema{&sSecurityGroup_activeMembers, &sSecurityGroup_botMembers, &sSecurityGroup_activeDirectoryGuid, &sSecurityGroup_id, &sSecurityGroup_isDefault, &sSecurityGroup_name, &sSecurityGroup_modified, &sSecurityGroup_securityGroupSettings}}
+var m_SecurityGroupIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SecurityGroupIdList_member}}
+var m_SecurityGroupList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SecurityGroupList_member}}
+var mSecurityGroupSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sSecurityGroupSettings_alwaysReauthenticate, &sSecurityGroupSettings_atakPackageValues, &sSecurityGroupSettings_calling, &sSecurityGroupSettings_checkForUpdates, &sSecurityGroupSettings_enableAtak, &sSecurityGroupSettings_enableCrashReports, &sSecurityGroupSettings_enableFileDownload, &sSecurityGroupSettings_enableGuestFederation, &sSecurityGroupSettings_enableNotificationPreview, &sSecurityGroupSettings_enableOpenAccessOption, &sSecurityGroupSettings_enableRestrictedGlobalFederation, &sSecurityGroupSettings_filesEnabled, &sSecurityGroupSettings_forceDeviceLockout, &sSecurityGroupSettings_forceOpenAccess, &sSecurityGroupSettings_forceReadReceipts, &sSecurityGroupSettings_globalFederation, &sSecurityGroupSettings_isAtoEnabled, &sSecurityGroupSettings_isLinkPreviewEnabled, &sSecurityGroupSettings_locationAllowMaps, &sSecurityGroupSettings_locationEnabled, &sSecurityGroupSettings_maxAutoDownloadSize, &sSecurityGroupSettings_maxBor, &sSecurityGroupSettings_maxTtl, &sSecurityGroupSettings_messageForwardingEnabled, &sSecurityGroupSettings_passwordRequirements, &sSecurityGroupSettings_presenceEnabled, &sSecurityGroupSettings_quickResponses, &sSecurityGroupSettings_showMasterRecoveryKey, &sSecurityGroupSettings_shredder, &sSecurityGroupSettings_ssoMaxIdleMinutes, &sSecurityGroupSettings_maxNonSsoSessionMinutes, &sSecurityGroupSettings_federationMode, &sSecurityGroupSettings_lockoutThreshold, &sSecurityGroupSettings_permittedNetworks, &sSecurityGroupSettings_permittedWickrAwsNetworks, &sSecurityGroupSettings_permittedWickrEnterpriseNetworks}, Seed: 65, Slots: []uint16{
+	18, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 28, 0, 17, 0, 0, 24, 6, 0, 14, 15, 0,
+	0, 0, 34, 5, 0, 12, 23, 4, 30, 0, 1, 0, 0, 35, 0, 0, 0, 13, 0, 0, 0, 31, 0, 0,
+	0, 0, 0, 10, 32, 0, 0, 0, 0, 0, 0, 0, 29, 0, 33, 0, 0, 19, 0, 0, 0, 0, 0, 0,
+	0, 0, 36, 0, 0, 26, 21, 7, 0, 9, 0, 0, 0, 0, 22, 0, 0, 0, 0, 0, 0, 0, 3, 11,
+	0, 0, 0, 0, 25, 20, 0, 27, 2, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0,
+}}
+var mSecurityGroupSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sSecurityGroupSettingsRequest_lockoutThreshold, &sSecurityGroupSettingsRequest_permittedNetworks, &sSecurityGroupSettingsRequest_enableGuestFederation, &sSecurityGroupSettingsRequest_globalFederation, &sSecurityGroupSettingsRequest_federationMode, &sSecurityGroupSettingsRequest_enableRestrictedGlobalFederation, &sSecurityGroupSettingsRequest_permittedWickrAwsNetworks, &sSecurityGroupSettingsRequest_permittedWickrEnterpriseNetworks}}
+var m_SecurityGroupStringList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SecurityGroupStringList_member}}
+var mSetting = smithy.SchemaMembers{List: []*smithy.Schema{&sSetting_optionName, &sSetting_value, &sSetting_type}}
+var m_SettingsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SettingsList_member}}
+var mShredderSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sShredderSettings_canProcessManually, &sShredderSettings_intensity}}
+var mSortDirection = smithy.SchemaMembers{List: []*smithy.Schema{&sSortDirection_ASC, &sSortDirection_DESC}}
+var mStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sStatus_DISABLED, &sStatus_ENABLED, &sStatus_FORCE_ENABLED}}
+var m_StringList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StringList_member}}
+var m_Unames = smithy.SchemaMembers{List: []*smithy.Schema{&s_Unames_member}}
+var mUnauthorizedError = smithy.SchemaMembers{List: []*smithy.Schema{&sUnauthorizedError_message}}
+var mUpdateUserDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateUserDetails_firstName, &sUpdateUserDetails_lastName, &sUpdateUserDetails_username, &sUpdateUserDetails_securityGroupIds, &sUpdateUserDetails_inviteCode, &sUpdateUserDetails_inviteCodeTtl, &sUpdateUserDetails_codeValidation}}
+var mUser = smithy.SchemaMembers{List: []*smithy.Schema{&sUser_userId, &sUser_firstName, &sUser_lastName, &sUser_username, &sUser_securityGroups, &sUser_isAdmin, &sUser_suspended, &sUser_status, &sUser_otpEnabled, &sUser_scimId, &sUser_type, &sUser_cell, &sUser_countryCode, &sUser_challengeFailures, &sUser_isInviteExpired, &sUser_isUser, &sUser_inviteCode, &sUser_codeValidation, &sUser_uname}, Seed: 35, Slots: []uint16{
+	5, 12, 0, 0, 0, 4, 0, 7, 15, 6, 0, 0, 0, 0, 0, 0, 0, 0, 17, 19, 0, 0, 9, 14,
+	0, 0, 1, 0, 0, 0, 0, 11, 0, 8, 0, 0, 0, 16, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0,
+	0, 13, 0, 0, 0, 0, 0, 2, 0, 0, 18, 0, 3, 0, 0, 0,
+}}
+var m_UserIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_UserIds_member}}
+var m_Users = smithy.SchemaMembers{List: []*smithy.Schema{&s_Users_member}}
+var m_UserStatus = smithy.SchemaMembers{List: []*smithy.Schema{&s_UserStatus_PENDING, &s_UserStatus_ACTIVE}}
+var mValidationError = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationError_reasons, &sValidationError_message}}
+var mWickrAwsNetworks = smithy.SchemaMembers{List: []*smithy.Schema{&sWickrAwsNetworks_region, &sWickrAwsNetworks_networkId}}
+var m_WickrAwsNetworksList = smithy.SchemaMembers{List: []*smithy.Schema{&s_WickrAwsNetworksList_member}}
+var mBatchCreateUserRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchCreateUserRequest_networkId, &sBatchCreateUserRequest_users, &sBatchCreateUserRequest_clientToken}}
+var mBatchCreateUserResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchCreateUserResponse_message, &sBatchCreateUserResponse_successful, &sBatchCreateUserResponse_failed}}
+var mBatchDeleteUserRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDeleteUserRequest_networkId, &sBatchDeleteUserRequest_userIds, &sBatchDeleteUserRequest_clientToken}}
+var mBatchDeleteUserResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDeleteUserResponse_message, &sBatchDeleteUserResponse_successful, &sBatchDeleteUserResponse_failed}}
+var mBatchLookupUserUnameRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchLookupUserUnameRequest_networkId, &sBatchLookupUserUnameRequest_unames, &sBatchLookupUserUnameRequest_clientToken}}
+var mBatchLookupUserUnameResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchLookupUserUnameResponse_message, &sBatchLookupUserUnameResponse_successful, &sBatchLookupUserUnameResponse_failed}}
+var mBatchReinviteUserRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchReinviteUserRequest_networkId, &sBatchReinviteUserRequest_userIds, &sBatchReinviteUserRequest_clientToken}}
+var mBatchReinviteUserResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchReinviteUserResponse_message, &sBatchReinviteUserResponse_successful, &sBatchReinviteUserResponse_failed}}
+var mBatchResetDevicesForUserRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchResetDevicesForUserRequest_networkId, &sBatchResetDevicesForUserRequest_userId, &sBatchResetDevicesForUserRequest_appIds, &sBatchResetDevicesForUserRequest_clientToken}}
+var mBatchResetDevicesForUserResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchResetDevicesForUserResponse_message, &sBatchResetDevicesForUserResponse_successful, &sBatchResetDevicesForUserResponse_failed}}
+var mBatchToggleUserSuspendStatusRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchToggleUserSuspendStatusRequest_networkId, &sBatchToggleUserSuspendStatusRequest_suspend, &sBatchToggleUserSuspendStatusRequest_userIds, &sBatchToggleUserSuspendStatusRequest_clientToken}}
+var mBatchToggleUserSuspendStatusResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchToggleUserSuspendStatusResponse_message, &sBatchToggleUserSuspendStatusResponse_successful, &sBatchToggleUserSuspendStatusResponse_failed}}
+var mCreateBotRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateBotRequest_networkId, &sCreateBotRequest_username, &sCreateBotRequest_displayName, &sCreateBotRequest_groupId, &sCreateBotRequest_challenge}}
+var mCreateBotResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateBotResponse_message, &sCreateBotResponse_botId, &sCreateBotResponse_networkId, &sCreateBotResponse_username, &sCreateBotResponse_displayName, &sCreateBotResponse_groupId}}
+var mCreateDataRetentionBotChallengeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDataRetentionBotChallengeRequest_networkId}}
+var mCreateDataRetentionBotChallengeResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDataRetentionBotChallengeResponse_challenge}}
+var mCreateDataRetentionBotRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDataRetentionBotRequest_networkId}}
+var mCreateDataRetentionBotResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDataRetentionBotResponse_message}}
+var mCreateNetworkRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateNetworkRequest_networkName, &sCreateNetworkRequest_accessLevel, &sCreateNetworkRequest_enablePremiumFreeTrial, &sCreateNetworkRequest_encryptionKeyArn}}
+var mCreateNetworkResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateNetworkResponse_networkId, &sCreateNetworkResponse_networkName, &sCreateNetworkResponse_encryptionKeyArn}}
+var mCreateSecurityGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSecurityGroupRequest_networkId, &sCreateSecurityGroupRequest_name, &sCreateSecurityGroupRequest_securityGroupSettings, &sCreateSecurityGroupRequest_clientToken}}
+var mCreateSecurityGroupResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSecurityGroupResponse_securityGroup}}
+var mDeleteBotRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteBotRequest_networkId, &sDeleteBotRequest_botId}}
+var mDeleteBotResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteBotResponse_message}}
+var mDeleteDataRetentionBotRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDataRetentionBotRequest_networkId}}
+var mDeleteDataRetentionBotResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDataRetentionBotResponse_message}}
+var mDeleteNetworkRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteNetworkRequest_networkId, &sDeleteNetworkRequest_clientToken}}
+var mDeleteNetworkResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteNetworkResponse_message}}
+var mDeleteSecurityGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSecurityGroupRequest_networkId, &sDeleteSecurityGroupRequest_groupId}}
+var mDeleteSecurityGroupResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSecurityGroupResponse_message, &sDeleteSecurityGroupResponse_networkId, &sDeleteSecurityGroupResponse_groupId}}
+var mGetBotRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBotRequest_networkId, &sGetBotRequest_botId}}
+var mGetBotResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBotResponse_botId, &sGetBotResponse_displayName, &sGetBotResponse_username, &sGetBotResponse_uname, &sGetBotResponse_pubkey, &sGetBotResponse_status, &sGetBotResponse_groupId, &sGetBotResponse_hasChallenge, &sGetBotResponse_suspended, &sGetBotResponse_lastLogin}, Seed: 2, Slots: []uint16{
+	8, 9, 0, 0, 0, 4, 0, 2, 1, 0, 0, 10, 0, 7, 0, 0, 0, 0, 6, 0, 0, 0, 0, 3,
+	0, 5, 0, 0, 0, 0, 0, 0,
+}}
+var mGetBotsCountRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBotsCountRequest_networkId}}
+var mGetBotsCountResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBotsCountResponse_pending, &sGetBotsCountResponse_active, &sGetBotsCountResponse_total}}
+var mGetDataRetentionBotRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDataRetentionBotRequest_networkId}}
+var mGetDataRetentionBotResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDataRetentionBotResponse_botName, &sGetDataRetentionBotResponse_botExists, &sGetDataRetentionBotResponse_isBotActive, &sGetDataRetentionBotResponse_isDataRetentionBotRegistered, &sGetDataRetentionBotResponse_isDataRetentionServiceEnabled, &sGetDataRetentionBotResponse_isPubkeyMsgAcked}}
+var mGetGuestUserHistoryCountRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetGuestUserHistoryCountRequest_networkId}}
+var mGetGuestUserHistoryCountResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetGuestUserHistoryCountResponse_history}}
+var mGetNetworkRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetNetworkRequest_networkId}}
+var mGetNetworkResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetNetworkResponse_networkId, &sGetNetworkResponse_networkName, &sGetNetworkResponse_accessLevel, &sGetNetworkResponse_awsAccountId, &sGetNetworkResponse_networkArn, &sGetNetworkResponse_standing, &sGetNetworkResponse_freeTrialExpiration, &sGetNetworkResponse_migrationState, &sGetNetworkResponse_encryptionKeyArn}, Seed: 8, Slots: []uint16{
+	0, 2, 0, 1, 0, 0, 9, 0, 0, 0, 0, 0, 0, 6, 4, 0, 3, 7, 0, 0, 0, 0, 0, 0,
+	0, 5, 0, 0, 0, 0, 0, 8,
+}}
+var mGetNetworkSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetNetworkSettingsRequest_networkId}}
+var mGetNetworkSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetNetworkSettingsResponse_settings}}
+var mGetOidcInfoRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetOidcInfoRequest_networkId, &sGetOidcInfoRequest_clientId, &sGetOidcInfoRequest_code, &sGetOidcInfoRequest_grantType, &sGetOidcInfoRequest_redirectUri, &sGetOidcInfoRequest_url, &sGetOidcInfoRequest_clientSecret, &sGetOidcInfoRequest_codeVerifier, &sGetOidcInfoRequest_certificate}, Seed: 1, Slots: []uint16{
+	0, 5, 1, 0, 0, 6, 0, 3, 0, 7, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	2, 0, 0, 0, 0, 0, 4, 9,
+}}
+var mGetOidcInfoResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetOidcInfoResponse_openidConnectInfo, &sGetOidcInfoResponse_tokenInfo}}
+var mGetOpentdfConfigRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetOpentdfConfigRequest_networkId}}
+var mGetOpentdfConfigResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetOpentdfConfigResponse_clientId, &sGetOpentdfConfigResponse_domain, &sGetOpentdfConfigResponse_clientSecret, &sGetOpentdfConfigResponse_provider}}
+var mGetSecurityGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSecurityGroupRequest_networkId, &sGetSecurityGroupRequest_groupId}}
+var mGetSecurityGroupResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSecurityGroupResponse_securityGroup}}
+var mGetUserRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetUserRequest_networkId, &sGetUserRequest_userId, &sGetUserRequest_startTime, &sGetUserRequest_endTime}}
+var mGetUserResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetUserResponse_userId, &sGetUserResponse_firstName, &sGetUserResponse_lastName, &sGetUserResponse_username, &sGetUserResponse_isAdmin, &sGetUserResponse_suspended, &sGetUserResponse_status, &sGetUserResponse_lastActivity, &sGetUserResponse_lastLogin, &sGetUserResponse_securityGroupIds}, Seed: 3, Slots: []uint16{
+	0, 0, 0, 0, 3, 0, 1, 0, 0, 0, 0, 10, 0, 7, 6, 9, 2, 0, 0, 0, 0, 0, 8, 0,
+	0, 0, 0, 0, 4, 5, 0, 0,
+}}
+var mGetUsersCountRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetUsersCountRequest_networkId}}
+var mGetUsersCountResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetUsersCountResponse_pending, &sGetUsersCountResponse_active, &sGetUsersCountResponse_rejected, &sGetUsersCountResponse_remaining, &sGetUsersCountResponse_total}}
+var mListBlockedGuestUsersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListBlockedGuestUsersRequest_networkId, &sListBlockedGuestUsersRequest_maxResults, &sListBlockedGuestUsersRequest_sortDirection, &sListBlockedGuestUsersRequest_sortFields, &sListBlockedGuestUsersRequest_username, &sListBlockedGuestUsersRequest_admin, &sListBlockedGuestUsersRequest_nextToken}}
+var mListBlockedGuestUsersResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListBlockedGuestUsersResponse_nextToken, &sListBlockedGuestUsersResponse_blocklist}}
+var mListBotsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListBotsRequest_networkId, &sListBotsRequest_nextToken, &sListBotsRequest_maxResults, &sListBotsRequest_sortFields, &sListBotsRequest_sortDirection, &sListBotsRequest_displayName, &sListBotsRequest_username, &sListBotsRequest_status, &sListBotsRequest_groupId}, Seed: 4, Slots: []uint16{
+	0, 0, 1, 0, 0, 0, 0, 7, 4, 8, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 5, 0, 0, 0,
+	2, 0, 0, 0, 9, 0, 3, 0,
+}}
+var mListBotsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListBotsResponse_bots, &sListBotsResponse_nextToken}}
+var mListDevicesForUserRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListDevicesForUserRequest_networkId, &sListDevicesForUserRequest_userId, &sListDevicesForUserRequest_nextToken, &sListDevicesForUserRequest_maxResults, &sListDevicesForUserRequest_sortFields, &sListDevicesForUserRequest_sortDirection}}
+var mListDevicesForUserResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListDevicesForUserResponse_nextToken, &sListDevicesForUserResponse_devices}}
+var mListGuestUsersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListGuestUsersRequest_networkId, &sListGuestUsersRequest_maxResults, &sListGuestUsersRequest_sortDirection, &sListGuestUsersRequest_sortFields, &sListGuestUsersRequest_username, &sListGuestUsersRequest_billingPeriod, &sListGuestUsersRequest_nextToken}}
+var mListGuestUsersResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListGuestUsersResponse_nextToken, &sListGuestUsersResponse_guestlist}}
+var mListNetworksRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListNetworksRequest_maxResults, &sListNetworksRequest_sortFields, &sListNetworksRequest_sortDirection, &sListNetworksRequest_nextToken}}
+var mListNetworksResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListNetworksResponse_networks, &sListNetworksResponse_nextToken}}
+var mListSecurityGroupsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListSecurityGroupsRequest_networkId, &sListSecurityGroupsRequest_nextToken, &sListSecurityGroupsRequest_maxResults, &sListSecurityGroupsRequest_sortFields, &sListSecurityGroupsRequest_sortDirection}}
+var mListSecurityGroupsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListSecurityGroupsResponse_securityGroups, &sListSecurityGroupsResponse_nextToken}}
+var mListSecurityGroupUsersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListSecurityGroupUsersRequest_networkId, &sListSecurityGroupUsersRequest_groupId, &sListSecurityGroupUsersRequest_nextToken, &sListSecurityGroupUsersRequest_maxResults, &sListSecurityGroupUsersRequest_sortFields, &sListSecurityGroupUsersRequest_sortDirection}}
+var mListSecurityGroupUsersResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListSecurityGroupUsersResponse_users, &sListSecurityGroupUsersResponse_nextToken}}
+var mListUsersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListUsersRequest_networkId, &sListUsersRequest_nextToken, &sListUsersRequest_maxResults, &sListUsersRequest_sortFields, &sListUsersRequest_sortDirection, &sListUsersRequest_firstName, &sListUsersRequest_lastName, &sListUsersRequest_username, &sListUsersRequest_status, &sListUsersRequest_groupId}, Seed: 3, Slots: []uint16{
+	0, 0, 0, 4, 7, 10, 1, 0, 0, 0, 0, 0, 3, 9, 0, 0, 6, 0, 0, 0, 0, 0, 0, 5,
+	2, 0, 0, 0, 8, 0, 0, 0,
+}}
+var mListUsersResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListUsersResponse_nextToken, &sListUsersResponse_users}}
+var mRegisterOidcConfigRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisterOidcConfigRequest_networkId, &sRegisterOidcConfigRequest_companyId, &sRegisterOidcConfigRequest_customUsername, &sRegisterOidcConfigRequest_extraAuthParams, &sRegisterOidcConfigRequest_issuer, &sRegisterOidcConfigRequest_scopes, &sRegisterOidcConfigRequest_secret, &sRegisterOidcConfigRequest_ssoTokenBufferMinutes, &sRegisterOidcConfigRequest_userId}, Seed: 1, Slots: []uint16{
+	0, 7, 1, 0, 4, 0, 0, 0, 0, 0, 0, 0, 6, 2, 0, 0, 0, 0, 0, 0, 3, 0, 0, 5,
+	0, 0, 8, 0, 9, 0, 0, 0,
+}}
+var mRegisterOidcConfigResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisterOidcConfigResponse_applicationName, &sRegisterOidcConfigResponse_clientId, &sRegisterOidcConfigResponse_companyId, &sRegisterOidcConfigResponse_scopes, &sRegisterOidcConfigResponse_issuer, &sRegisterOidcConfigResponse_clientSecret, &sRegisterOidcConfigResponse_secret, &sRegisterOidcConfigResponse_redirectUrl, &sRegisterOidcConfigResponse_userId, &sRegisterOidcConfigResponse_customUsername, &sRegisterOidcConfigResponse_caCertificate, &sRegisterOidcConfigResponse_applicationId, &sRegisterOidcConfigResponse_ssoTokenBufferMinutes, &sRegisterOidcConfigResponse_extraAuthParams}, Seed: 5, Slots: []uint16{
+	0, 14, 0, 0, 6, 0, 11, 10, 0, 0, 0, 2, 5, 0, 0, 7, 0, 0, 0, 0, 1, 12, 9, 8,
+	0, 3, 0, 13, 0, 0, 0, 4,
+}}
+var mRegisterOidcConfigTestRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisterOidcConfigTestRequest_networkId, &sRegisterOidcConfigTestRequest_extraAuthParams, &sRegisterOidcConfigTestRequest_issuer, &sRegisterOidcConfigTestRequest_scopes, &sRegisterOidcConfigTestRequest_certificate}}
+var mRegisterOidcConfigTestResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisterOidcConfigTestResponse_tokenEndpoint, &sRegisterOidcConfigTestResponse_userinfoEndpoint, &sRegisterOidcConfigTestResponse_responseTypesSupported, &sRegisterOidcConfigTestResponse_scopesSupported, &sRegisterOidcConfigTestResponse_issuer, &sRegisterOidcConfigTestResponse_authorizationEndpoint, &sRegisterOidcConfigTestResponse_endSessionEndpoint, &sRegisterOidcConfigTestResponse_logoutEndpoint, &sRegisterOidcConfigTestResponse_grantTypesSupported, &sRegisterOidcConfigTestResponse_revocationEndpoint, &sRegisterOidcConfigTestResponse_tokenEndpointAuthMethodsSupported, &sRegisterOidcConfigTestResponse_microsoftMultiRefreshToken}, Seed: 11, Slots: []uint16{
+	0, 1, 7, 0, 4, 0, 0, 10, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 6, 9, 0, 12, 8, 0,
+	0, 11, 3, 0, 0, 0, 0, 5,
+}}
+var mRegisterOpentdfConfigRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisterOpentdfConfigRequest_networkId, &sRegisterOpentdfConfigRequest_clientId, &sRegisterOpentdfConfigRequest_clientSecret, &sRegisterOpentdfConfigRequest_domain, &sRegisterOpentdfConfigRequest_provider, &sRegisterOpentdfConfigRequest_dryRun}}
+var mRegisterOpentdfConfigResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisterOpentdfConfigResponse_clientId, &sRegisterOpentdfConfigResponse_domain, &sRegisterOpentdfConfigResponse_clientSecret, &sRegisterOpentdfConfigResponse_provider}}
+var mUpdateBotRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateBotRequest_networkId, &sUpdateBotRequest_botId, &sUpdateBotRequest_displayName, &sUpdateBotRequest_groupId, &sUpdateBotRequest_challenge, &sUpdateBotRequest_suspend}}
+var mUpdateBotResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateBotResponse_message}}
+var mUpdateDataRetentionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDataRetentionRequest_networkId, &sUpdateDataRetentionRequest_actionType}}
+var mUpdateDataRetentionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDataRetentionResponse_message}}
+var mUpdateGuestUserRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateGuestUserRequest_networkId, &sUpdateGuestUserRequest_usernameHash, &sUpdateGuestUserRequest_block}}
+var mUpdateGuestUserResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateGuestUserResponse_message}}
+var mUpdateNetworkRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateNetworkRequest_networkId, &sUpdateNetworkRequest_networkName, &sUpdateNetworkRequest_clientToken, &sUpdateNetworkRequest_encryptionKeyArn}}
+var mUpdateNetworkResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateNetworkResponse_message}}
+var mUpdateNetworkSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateNetworkSettingsRequest_networkId, &sUpdateNetworkSettingsRequest_settings}}
+var mUpdateNetworkSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateNetworkSettingsResponse_settings}}
+var mUpdateSecurityGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSecurityGroupRequest_networkId, &sUpdateSecurityGroupRequest_groupId, &sUpdateSecurityGroupRequest_name, &sUpdateSecurityGroupRequest_securityGroupSettings}}
+var mUpdateSecurityGroupResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSecurityGroupResponse_securityGroup}}
+var mUpdateUserRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateUserRequest_networkId, &sUpdateUserRequest_userId, &sUpdateUserRequest_userDetails}}
+var mUpdateUserResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateUserResponse_userId, &sUpdateUserResponse_networkId, &sUpdateUserResponse_securityGroupIds, &sUpdateUserResponse_firstName, &sUpdateUserResponse_lastName, &sUpdateUserResponse_middleName, &sUpdateUserResponse_suspended, &sUpdateUserResponse_modified, &sUpdateUserResponse_status, &sUpdateUserResponse_inviteCode, &sUpdateUserResponse_inviteExpiration, &sUpdateUserResponse_codeValidation}, Seed: 15, Slots: []uint16{
+	0, 0, 0, 0, 0, 12, 0, 6, 0, 0, 0, 0, 0, 0, 2, 0, 0, 4, 8, 7, 0, 5, 9, 10,
+	0, 0, 11, 0, 1, 0, 0, 3,
+}}
+
+var sBatchCreateUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchCreateUser, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sBatchDeleteUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeleteUser, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sBatchLookupUserUname = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchLookupUserUname, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sBatchReinviteUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchReinviteUser, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sBatchResetDevicesForUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchResetDevicesForUser, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sBatchToggleUserSuspendStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchToggleUserSuspendStatus, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var sCreateBot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBot, Traits: &t6, Type: smithy.ShapeTypeOperation})
+var sCreateDataRetentionBot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDataRetentionBot, Traits: &t7, Type: smithy.ShapeTypeOperation})
+var sCreateDataRetentionBotChallenge = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDataRetentionBotChallenge, Traits: &t8, Type: smithy.ShapeTypeOperation})
+var sCreateNetwork = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateNetwork, Traits: &t9, Type: smithy.ShapeTypeOperation})
+var sCreateSecurityGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSecurityGroup, Traits: &t10, Type: smithy.ShapeTypeOperation})
+var sDeleteBot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBot, Traits: &t11, Type: smithy.ShapeTypeOperation})
+var sDeleteDataRetentionBot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDataRetentionBot, Traits: &t12, Type: smithy.ShapeTypeOperation})
+var sDeleteNetwork = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteNetwork, Traits: &t13, Type: smithy.ShapeTypeOperation})
+var sDeleteSecurityGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSecurityGroup, Traits: &t14, Type: smithy.ShapeTypeOperation})
+var sGetBot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBot, Traits: &t15, Type: smithy.ShapeTypeOperation})
+var sGetBotsCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBotsCount, Traits: &t16, Type: smithy.ShapeTypeOperation})
+var sGetDataRetentionBot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDataRetentionBot, Traits: &t17, Type: smithy.ShapeTypeOperation})
+var sGetGuestUserHistoryCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetGuestUserHistoryCount, Traits: &t18, Type: smithy.ShapeTypeOperation})
+var sGetNetwork = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNetwork, Traits: &t19, Type: smithy.ShapeTypeOperation})
+var sGetNetworkSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNetworkSettings, Traits: &t20, Type: smithy.ShapeTypeOperation})
+var sGetOidcInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetOidcInfo, Traits: &t21, Type: smithy.ShapeTypeOperation})
+var sGetOpentdfConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetOpentdfConfig, Traits: &t22, Type: smithy.ShapeTypeOperation})
+var sGetSecurityGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSecurityGroup, Traits: &t23, Type: smithy.ShapeTypeOperation})
+var sGetUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetUser, Traits: &t24, Type: smithy.ShapeTypeOperation})
+var sGetUsersCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetUsersCount, Traits: &t25, Type: smithy.ShapeTypeOperation})
+var sListBlockedGuestUsers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBlockedGuestUsers, Traits: &t26, Type: smithy.ShapeTypeOperation})
+var sListBots = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBots, Traits: &t27, Type: smithy.ShapeTypeOperation})
+var sListDevicesForUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDevicesForUser, Traits: &t28, Type: smithy.ShapeTypeOperation})
+var sListGuestUsers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGuestUsers, Traits: &t29, Type: smithy.ShapeTypeOperation})
+var sListNetworks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNetworks, Traits: &t30, Type: smithy.ShapeTypeOperation})
+var sListSecurityGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSecurityGroups, Traits: &t31, Type: smithy.ShapeTypeOperation})
+var sListSecurityGroupUsers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSecurityGroupUsers, Traits: &t32, Type: smithy.ShapeTypeOperation})
+var sListUsers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListUsers, Traits: &t33, Type: smithy.ShapeTypeOperation})
+var sRegisterOidcConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterOidcConfig, Traits: &t34, Type: smithy.ShapeTypeOperation})
+var sRegisterOidcConfigTest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterOidcConfigTest, Traits: &t35, Type: smithy.ShapeTypeOperation})
+var sRegisterOpentdfConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterOpentdfConfig, Traits: &t36, Type: smithy.ShapeTypeOperation})
+var sUpdateBot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBot, Traits: &t37, Type: smithy.ShapeTypeOperation})
+var sUpdateDataRetention = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDataRetention, Traits: &t38, Type: smithy.ShapeTypeOperation})
+var sUpdateGuestUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateGuestUser, Traits: &t39, Type: smithy.ShapeTypeOperation})
+var sUpdateNetwork = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNetwork, Traits: &t40, Type: smithy.ShapeTypeOperation})
+var sUpdateNetworkSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNetworkSettings, Traits: &t41, Type: smithy.ShapeTypeOperation})
+var sUpdateSecurityGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSecurityGroup, Traits: &t42, Type: smithy.ShapeTypeOperation})
+var sUpdateUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateUser, Traits: &t43, Type: smithy.ShapeTypeOperation})
+var s_WickrAdminApi = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WickrAdminApi, Type: smithy.ShapeTypeService})
+var sAccessLevel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessLevel, Members: &mAccessLevel, Type: smithy.ShapeTypeEnum})
+var s_AppIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AppIds, Members: &m_AppIds, Type: smithy.ShapeTypeList})
+var sBadRequestError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBadRequestError, Members: &mBadRequestError, Traits: &t44, Type: smithy.ShapeTypeStructure})
+var sBasicDeviceObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBasicDeviceObject, Members: &mBasicDeviceObject, Type: smithy.ShapeTypeStructure})
+var sBatchCreateUserRequestItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchCreateUserRequestItem, Members: &mBatchCreateUserRequestItem, Type: smithy.ShapeTypeStructure})
+var s_BatchCreateUserRequestItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchCreateUserRequestItems, Members: &m_BatchCreateUserRequestItems, Type: smithy.ShapeTypeList})
+var sBatchDeviceErrorResponseItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeviceErrorResponseItem, Members: &mBatchDeviceErrorResponseItem, Type: smithy.ShapeTypeStructure})
+var s_BatchDeviceErrorResponseItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchDeviceErrorResponseItems, Members: &m_BatchDeviceErrorResponseItems, Type: smithy.ShapeTypeList})
+var sBatchDeviceSuccessResponseItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeviceSuccessResponseItem, Members: &mBatchDeviceSuccessResponseItem, Type: smithy.ShapeTypeStructure})
+var s_BatchDeviceSuccessResponseItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchDeviceSuccessResponseItems, Members: &m_BatchDeviceSuccessResponseItems, Type: smithy.ShapeTypeList})
+var sBatchUnameErrorResponseItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchUnameErrorResponseItem, Members: &mBatchUnameErrorResponseItem, Type: smithy.ShapeTypeStructure})
+var s_BatchUnameErrorResponseItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchUnameErrorResponseItems, Members: &m_BatchUnameErrorResponseItems, Type: smithy.ShapeTypeList})
+var sBatchUnameSuccessResponseItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchUnameSuccessResponseItem, Members: &mBatchUnameSuccessResponseItem, Type: smithy.ShapeTypeStructure})
+var s_BatchUnameSuccessResponseItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchUnameSuccessResponseItems, Members: &m_BatchUnameSuccessResponseItems, Type: smithy.ShapeTypeList})
+var sBatchUserErrorResponseItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchUserErrorResponseItem, Members: &mBatchUserErrorResponseItem, Type: smithy.ShapeTypeStructure})
+var s_BatchUserErrorResponseItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchUserErrorResponseItems, Members: &m_BatchUserErrorResponseItems, Type: smithy.ShapeTypeList})
+var sBatchUserSuccessResponseItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchUserSuccessResponseItem, Members: &mBatchUserSuccessResponseItem, Type: smithy.ShapeTypeStructure})
+var s_BatchUserSuccessResponseItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchUserSuccessResponseItems, Members: &m_BatchUserSuccessResponseItems, Type: smithy.ShapeTypeList})
+var sBlockedGuestUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBlockedGuestUser, Members: &mBlockedGuestUser, Type: smithy.ShapeTypeStructure})
+var s_BlockedGuestUserList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlockedGuestUserList, Members: &m_BlockedGuestUserList, Type: smithy.ShapeTypeList})
+var sBot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBot, Members: &mBot, Type: smithy.ShapeTypeStructure})
+var s_BotId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BotId, Type: smithy.ShapeTypeString})
+var s_Bots = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Bots, Members: &m_Bots, Type: smithy.ShapeTypeList})
+var s_BotStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BotStatus, Members: &m_BotStatus, Type: smithy.ShapeTypeIntEnum})
+var sCallingSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCallingSettings, Members: &mCallingSettings, Type: smithy.ShapeTypeStructure})
+var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sConsentPopupConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConsentPopupConfig, Members: &mConsentPopupConfig, Type: smithy.ShapeTypeStructure})
+var sDataRetentionActionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataRetentionActionType, Members: &mDataRetentionActionType, Type: smithy.ShapeTypeEnum})
+var s_Devices = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Devices, Members: &m_Devices, Type: smithy.ShapeTypeList})
+var sErrorDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iErrorDetail, Members: &mErrorDetail, Type: smithy.ShapeTypeStructure})
+var s_ErrorDetailList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorDetailList, Members: &m_ErrorDetailList, Type: smithy.ShapeTypeList})
+var sForbiddenError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iForbiddenError, Members: &mForbiddenError, Traits: &t46, Type: smithy.ShapeTypeStructure})
+var s_GenericString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sGuestUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuestUser, Members: &mGuestUser, Type: smithy.ShapeTypeStructure})
+var sGuestUserHistoryCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGuestUserHistoryCount, Members: &mGuestUserHistoryCount, Type: smithy.ShapeTypeStructure})
+var s_GuestUserHistoryCountList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuestUserHistoryCountList, Members: &m_GuestUserHistoryCountList, Type: smithy.ShapeTypeList})
+var s_GuestUserList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuestUserList, Members: &m_GuestUserList, Type: smithy.ShapeTypeList})
+var sInternalServerError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerError, Members: &mInternalServerError, Traits: &t47, Type: smithy.ShapeTypeStructure})
+var sNetwork = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetwork, Members: &mNetwork, Type: smithy.ShapeTypeStructure})
+var s_NetworkId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkId, Type: smithy.ShapeTypeString})
+var s_NetworkList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkList, Members: &m_NetworkList, Type: smithy.ShapeTypeList})
+var sNetworkSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkSettings, Members: &mNetworkSettings, Type: smithy.ShapeTypeStructure})
+var sOidcConfigInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOidcConfigInfo, Members: &mOidcConfigInfo, Type: smithy.ShapeTypeStructure})
+var sOidcTokenInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOidcTokenInfo, Members: &mOidcTokenInfo, Type: smithy.ShapeTypeStructure})
+var sPasswordRequirements = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPasswordRequirements, Members: &mPasswordRequirements, Type: smithy.ShapeTypeStructure})
+var s_PermittedNetworksList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PermittedNetworksList, Members: &m_PermittedNetworksList, Type: smithy.ShapeTypeList})
+var sPermittedWickrEnterpriseNetwork = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPermittedWickrEnterpriseNetwork, Members: &mPermittedWickrEnterpriseNetwork, Type: smithy.ShapeTypeStructure})
+var s_PermittedWickrEnterpriseNetworksList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PermittedWickrEnterpriseNetworksList, Members: &m_PermittedWickrEnterpriseNetworksList, Type: smithy.ShapeTypeList})
+var sRateLimitError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRateLimitError, Members: &mRateLimitError, Traits: &t48, Type: smithy.ShapeTypeStructure})
+var sReadReceiptConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReadReceiptConfig, Members: &mReadReceiptConfig, Type: smithy.ShapeTypeStructure})
+var sResourceNotFoundError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundError, Members: &mResourceNotFoundError, Traits: &t49, Type: smithy.ShapeTypeStructure})
+var sSecurityGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSecurityGroup, Members: &mSecurityGroup, Type: smithy.ShapeTypeStructure})
+var s_SecurityGroupId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroupId, Type: smithy.ShapeTypeString})
+var s_SecurityGroupIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroupIdList, Members: &m_SecurityGroupIdList, Type: smithy.ShapeTypeList})
+var s_SecurityGroupList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroupList, Members: &m_SecurityGroupList, Type: smithy.ShapeTypeList})
+var sSecurityGroupSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSecurityGroupSettings, Members: &mSecurityGroupSettings, Type: smithy.ShapeTypeStructure})
+var sSecurityGroupSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSecurityGroupSettingsRequest, Members: &mSecurityGroupSettingsRequest, Type: smithy.ShapeTypeStructure})
+var s_SecurityGroupStringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroupStringList, Members: &m_SecurityGroupStringList, Type: smithy.ShapeTypeList})
+var s_SensitiveString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensitiveString, Traits: &t50, Type: smithy.ShapeTypeString})
+var sSetting = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetting, Members: &mSetting, Type: smithy.ShapeTypeStructure})
+var s_SettingsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SettingsList, Members: &m_SettingsList, Type: smithy.ShapeTypeList})
+var sShredderSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShredderSettings, Members: &mShredderSettings, Type: smithy.ShapeTypeStructure})
+var sSortDirection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSortDirection, Members: &mSortDirection, Type: smithy.ShapeTypeEnum})
+var sStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum})
+var s_StringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var s_Uname = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Uname, Type: smithy.ShapeTypeString})
+var s_Unames = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Unames, Members: &m_Unames, Type: smithy.ShapeTypeList})
+var sUnauthorizedError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnauthorizedError, Members: &mUnauthorizedError, Traits: &t51, Type: smithy.ShapeTypeStructure})
+var sUpdateUserDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateUserDetails, Members: &mUpdateUserDetails, Type: smithy.ShapeTypeStructure})
+var sUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUser, Members: &mUser, Type: smithy.ShapeTypeStructure})
+var s_UserId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserId, Type: smithy.ShapeTypeString})
+var s_UserIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserIds, Members: &m_UserIds, Type: smithy.ShapeTypeList})
+var s_Users = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Users, Members: &m_Users, Type: smithy.ShapeTypeList})
+var s_UserStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserStatus, Members: &m_UserStatus, Type: smithy.ShapeTypeIntEnum})
+var sValidationError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationError, Members: &mValidationError, Traits: &t52, Type: smithy.ShapeTypeStructure})
+var sWickrAwsNetworks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWickrAwsNetworks, Members: &mWickrAwsNetworks, Type: smithy.ShapeTypeStructure})
+var s_WickrAwsNetworksList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WickrAwsNetworksList, Members: &m_WickrAwsNetworksList, Type: smithy.ShapeTypeList})
+var sBatchCreateUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchCreateUserRequest, Members: &mBatchCreateUserRequest, Type: smithy.ShapeTypeStructure})
+var sBatchCreateUserResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchCreateUserResponse, Members: &mBatchCreateUserResponse, Type: smithy.ShapeTypeStructure})
+var sBatchDeleteUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeleteUserRequest, Members: &mBatchDeleteUserRequest, Type: smithy.ShapeTypeStructure})
+var sBatchDeleteUserResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeleteUserResponse, Members: &mBatchDeleteUserResponse, Type: smithy.ShapeTypeStructure})
+var sBatchLookupUserUnameRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchLookupUserUnameRequest, Members: &mBatchLookupUserUnameRequest, Type: smithy.ShapeTypeStructure})
+var sBatchLookupUserUnameResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchLookupUserUnameResponse, Members: &mBatchLookupUserUnameResponse, Type: smithy.ShapeTypeStructure})
+var sBatchReinviteUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchReinviteUserRequest, Members: &mBatchReinviteUserRequest, Type: smithy.ShapeTypeStructure})
+var sBatchReinviteUserResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchReinviteUserResponse, Members: &mBatchReinviteUserResponse, Type: smithy.ShapeTypeStructure})
+var sBatchResetDevicesForUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchResetDevicesForUserRequest, Members: &mBatchResetDevicesForUserRequest, Type: smithy.ShapeTypeStructure})
+var sBatchResetDevicesForUserResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchResetDevicesForUserResponse, Members: &mBatchResetDevicesForUserResponse, Type: smithy.ShapeTypeStructure})
+var sBatchToggleUserSuspendStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchToggleUserSuspendStatusRequest, Members: &mBatchToggleUserSuspendStatusRequest, Type: smithy.ShapeTypeStructure})
+var sBatchToggleUserSuspendStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchToggleUserSuspendStatusResponse, Members: &mBatchToggleUserSuspendStatusResponse, Type: smithy.ShapeTypeStructure})
+var sCreateBotRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBotRequest, Members: &mCreateBotRequest, Type: smithy.ShapeTypeStructure})
+var sCreateBotResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBotResponse, Members: &mCreateBotResponse, Type: smithy.ShapeTypeStructure})
+var sCreateDataRetentionBotChallengeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDataRetentionBotChallengeRequest, Members: &mCreateDataRetentionBotChallengeRequest, Type: smithy.ShapeTypeStructure})
+var sCreateDataRetentionBotChallengeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDataRetentionBotChallengeResponse, Members: &mCreateDataRetentionBotChallengeResponse, Type: smithy.ShapeTypeStructure})
+var sCreateDataRetentionBotRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDataRetentionBotRequest, Members: &mCreateDataRetentionBotRequest, Type: smithy.ShapeTypeStructure})
+var sCreateDataRetentionBotResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDataRetentionBotResponse, Members: &mCreateDataRetentionBotResponse, Type: smithy.ShapeTypeStructure})
+var sCreateNetworkRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateNetworkRequest, Members: &mCreateNetworkRequest, Type: smithy.ShapeTypeStructure})
+var sCreateNetworkResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateNetworkResponse, Members: &mCreateNetworkResponse, Type: smithy.ShapeTypeStructure})
+var sCreateSecurityGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSecurityGroupRequest, Members: &mCreateSecurityGroupRequest, Type: smithy.ShapeTypeStructure})
+var sCreateSecurityGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSecurityGroupResponse, Members: &mCreateSecurityGroupResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteBotRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBotRequest, Members: &mDeleteBotRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteBotResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBotResponse, Members: &mDeleteBotResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteDataRetentionBotRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDataRetentionBotRequest, Members: &mDeleteDataRetentionBotRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteDataRetentionBotResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDataRetentionBotResponse, Members: &mDeleteDataRetentionBotResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteNetworkRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteNetworkRequest, Members: &mDeleteNetworkRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteNetworkResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteNetworkResponse, Members: &mDeleteNetworkResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteSecurityGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSecurityGroupRequest, Members: &mDeleteSecurityGroupRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteSecurityGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSecurityGroupResponse, Members: &mDeleteSecurityGroupResponse, Type: smithy.ShapeTypeStructure})
+var sGetBotRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBotRequest, Members: &mGetBotRequest, Type: smithy.ShapeTypeStructure})
+var sGetBotResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBotResponse, Members: &mGetBotResponse, Type: smithy.ShapeTypeStructure})
+var sGetBotsCountRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBotsCountRequest, Members: &mGetBotsCountRequest, Type: smithy.ShapeTypeStructure})
+var sGetBotsCountResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBotsCountResponse, Members: &mGetBotsCountResponse, Type: smithy.ShapeTypeStructure})
+var sGetDataRetentionBotRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDataRetentionBotRequest, Members: &mGetDataRetentionBotRequest, Type: smithy.ShapeTypeStructure})
+var sGetDataRetentionBotResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDataRetentionBotResponse, Members: &mGetDataRetentionBotResponse, Type: smithy.ShapeTypeStructure})
+var sGetGuestUserHistoryCountRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetGuestUserHistoryCountRequest, Members: &mGetGuestUserHistoryCountRequest, Type: smithy.ShapeTypeStructure})
+var sGetGuestUserHistoryCountResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetGuestUserHistoryCountResponse, Members: &mGetGuestUserHistoryCountResponse, Type: smithy.ShapeTypeStructure})
+var sGetNetworkRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNetworkRequest, Members: &mGetNetworkRequest, Type: smithy.ShapeTypeStructure})
+var sGetNetworkResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNetworkResponse, Members: &mGetNetworkResponse, Type: smithy.ShapeTypeStructure})
+var sGetNetworkSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNetworkSettingsRequest, Members: &mGetNetworkSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sGetNetworkSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNetworkSettingsResponse, Members: &mGetNetworkSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sGetOidcInfoRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetOidcInfoRequest, Members: &mGetOidcInfoRequest, Type: smithy.ShapeTypeStructure})
+var sGetOidcInfoResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetOidcInfoResponse, Members: &mGetOidcInfoResponse, Type: smithy.ShapeTypeStructure})
+var sGetOpentdfConfigRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetOpentdfConfigRequest, Members: &mGetOpentdfConfigRequest, Type: smithy.ShapeTypeStructure})
+var sGetOpentdfConfigResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetOpentdfConfigResponse, Members: &mGetOpentdfConfigResponse, Type: smithy.ShapeTypeStructure})
+var sGetSecurityGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSecurityGroupRequest, Members: &mGetSecurityGroupRequest, Type: smithy.ShapeTypeStructure})
+var sGetSecurityGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSecurityGroupResponse, Members: &mGetSecurityGroupResponse, Type: smithy.ShapeTypeStructure})
+var sGetUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetUserRequest, Members: &mGetUserRequest, Type: smithy.ShapeTypeStructure})
+var sGetUserResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetUserResponse, Members: &mGetUserResponse, Type: smithy.ShapeTypeStructure})
+var sGetUsersCountRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetUsersCountRequest, Members: &mGetUsersCountRequest, Type: smithy.ShapeTypeStructure})
+var sGetUsersCountResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetUsersCountResponse, Members: &mGetUsersCountResponse, Type: smithy.ShapeTypeStructure})
+var sListBlockedGuestUsersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBlockedGuestUsersRequest, Members: &mListBlockedGuestUsersRequest, Type: smithy.ShapeTypeStructure})
+var sListBlockedGuestUsersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBlockedGuestUsersResponse, Members: &mListBlockedGuestUsersResponse, Type: smithy.ShapeTypeStructure})
+var sListBotsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBotsRequest, Members: &mListBotsRequest, Type: smithy.ShapeTypeStructure})
+var sListBotsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBotsResponse, Members: &mListBotsResponse, Type: smithy.ShapeTypeStructure})
+var sListDevicesForUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDevicesForUserRequest, Members: &mListDevicesForUserRequest, Type: smithy.ShapeTypeStructure})
+var sListDevicesForUserResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDevicesForUserResponse, Members: &mListDevicesForUserResponse, Type: smithy.ShapeTypeStructure})
+var sListGuestUsersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGuestUsersRequest, Members: &mListGuestUsersRequest, Type: smithy.ShapeTypeStructure})
+var sListGuestUsersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGuestUsersResponse, Members: &mListGuestUsersResponse, Type: smithy.ShapeTypeStructure})
+var sListNetworksRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNetworksRequest, Members: &mListNetworksRequest, Type: smithy.ShapeTypeStructure})
+var sListNetworksResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNetworksResponse, Members: &mListNetworksResponse, Type: smithy.ShapeTypeStructure})
+var sListSecurityGroupsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSecurityGroupsRequest, Members: &mListSecurityGroupsRequest, Type: smithy.ShapeTypeStructure})
+var sListSecurityGroupsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSecurityGroupsResponse, Members: &mListSecurityGroupsResponse, Type: smithy.ShapeTypeStructure})
+var sListSecurityGroupUsersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSecurityGroupUsersRequest, Members: &mListSecurityGroupUsersRequest, Type: smithy.ShapeTypeStructure})
+var sListSecurityGroupUsersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSecurityGroupUsersResponse, Members: &mListSecurityGroupUsersResponse, Type: smithy.ShapeTypeStructure})
+var sListUsersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListUsersRequest, Members: &mListUsersRequest, Type: smithy.ShapeTypeStructure})
+var sListUsersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListUsersResponse, Members: &mListUsersResponse, Type: smithy.ShapeTypeStructure})
+var sRegisterOidcConfigRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterOidcConfigRequest, Members: &mRegisterOidcConfigRequest, Type: smithy.ShapeTypeStructure})
+var sRegisterOidcConfigResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterOidcConfigResponse, Members: &mRegisterOidcConfigResponse, Type: smithy.ShapeTypeStructure})
+var sRegisterOidcConfigTestRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterOidcConfigTestRequest, Members: &mRegisterOidcConfigTestRequest, Type: smithy.ShapeTypeStructure})
+var sRegisterOidcConfigTestResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterOidcConfigTestResponse, Members: &mRegisterOidcConfigTestResponse, Type: smithy.ShapeTypeStructure})
+var sRegisterOpentdfConfigRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterOpentdfConfigRequest, Members: &mRegisterOpentdfConfigRequest, Type: smithy.ShapeTypeStructure})
+var sRegisterOpentdfConfigResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterOpentdfConfigResponse, Members: &mRegisterOpentdfConfigResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateBotRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBotRequest, Members: &mUpdateBotRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateBotResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBotResponse, Members: &mUpdateBotResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateDataRetentionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDataRetentionRequest, Members: &mUpdateDataRetentionRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateDataRetentionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDataRetentionResponse, Members: &mUpdateDataRetentionResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateGuestUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateGuestUserRequest, Members: &mUpdateGuestUserRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateGuestUserResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateGuestUserResponse, Members: &mUpdateGuestUserResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateNetworkRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNetworkRequest, Members: &mUpdateNetworkRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateNetworkResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNetworkResponse, Members: &mUpdateNetworkResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateNetworkSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNetworkSettingsRequest, Members: &mUpdateNetworkSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateNetworkSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNetworkSettingsResponse, Members: &mUpdateNetworkSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateSecurityGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSecurityGroupRequest, Members: &mUpdateSecurityGroupRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateSecurityGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSecurityGroupResponse, Members: &mUpdateSecurityGroupResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateUserRequest, Members: &mUpdateUserRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateUserResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateUserResponse, Members: &mUpdateUserResponse, Type: smithy.ShapeTypeStructure})
+
+var sAccessLevel_STANDARD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STANDARD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAccessLevel_PREMIUM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PREMIUM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_AppIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sBadRequestError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sBasicDeviceObject_appId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appId", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sBasicDeviceObject_created = smithy.NewStaticSchema(smithy.StaticSchema{Member: "created", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sBasicDeviceObject_lastLogin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastLogin", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sBasicDeviceObject_statusText = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusText", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sBasicDeviceObject_suspend = smithy.NewStaticSchema(smithy.StaticSchema{Member: "suspend", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sBasicDeviceObject_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sBatchCreateUserRequestItem_firstName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "firstName", ID: &i_SensitiveString, Traits: &t45, Type: smithy.ShapeTypeString})
+var sBatchCreateUserRequestItem_lastName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastName", ID: &i_SensitiveString, Traits: &t45, Type: smithy.ShapeTypeString})
+var sBatchCreateUserRequestItem_securityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityGroupIds", ID: &i_SecurityGroupIdList, Members: &m_SecurityGroupIdList, Type: smithy.ShapeTypeList})
+var sBatchCreateUserRequestItem_username = smithy.NewStaticSchema(smithy.StaticSchema{Member: "username", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sBatchCreateUserRequestItem_inviteCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inviteCode", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sBatchCreateUserRequestItem_inviteCodeTtl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inviteCodeTtl", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sBatchCreateUserRequestItem_codeValidation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeValidation", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var s_BatchCreateUserRequestItems_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchCreateUserRequestItem, Members: &mBatchCreateUserRequestItem, Type: smithy.ShapeTypeStructure})
+var sBatchDeviceErrorResponseItem_field = smithy.NewStaticSchema(smithy.StaticSchema{Member: "field", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sBatchDeviceErrorResponseItem_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sBatchDeviceErrorResponseItem_appId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appId", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var s_BatchDeviceErrorResponseItems_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchDeviceErrorResponseItem, Members: &mBatchDeviceErrorResponseItem, Type: smithy.ShapeTypeStructure})
+var sBatchDeviceSuccessResponseItem_appId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appId", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var s_BatchDeviceSuccessResponseItems_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchDeviceSuccessResponseItem, Members: &mBatchDeviceSuccessResponseItem, Type: smithy.ShapeTypeStructure})
+var sBatchUnameErrorResponseItem_field = smithy.NewStaticSchema(smithy.StaticSchema{Member: "field", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sBatchUnameErrorResponseItem_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sBatchUnameErrorResponseItem_uname = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uname", ID: &i_Uname, Type: smithy.ShapeTypeString})
+var s_BatchUnameErrorResponseItems_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchUnameErrorResponseItem, Members: &mBatchUnameErrorResponseItem, Type: smithy.ShapeTypeStructure})
+var sBatchUnameSuccessResponseItem_uname = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uname", ID: &i_Uname, Type: smithy.ShapeTypeString})
+var sBatchUnameSuccessResponseItem_username = smithy.NewStaticSchema(smithy.StaticSchema{Member: "username", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var s_BatchUnameSuccessResponseItems_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchUnameSuccessResponseItem, Members: &mBatchUnameSuccessResponseItem, Type: smithy.ShapeTypeStructure})
+var sBatchUserErrorResponseItem_field = smithy.NewStaticSchema(smithy.StaticSchema{Member: "field", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sBatchUserErrorResponseItem_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sBatchUserErrorResponseItem_userId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userId", ID: &i_UserId, Type: smithy.ShapeTypeString})
+var s_BatchUserErrorResponseItems_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchUserErrorResponseItem, Members: &mBatchUserErrorResponseItem, Type: smithy.ShapeTypeStructure})
+var sBatchUserSuccessResponseItem_userId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userId", ID: &i_UserId, Type: smithy.ShapeTypeString})
+var s_BatchUserSuccessResponseItems_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchUserSuccessResponseItem, Members: &mBatchUserSuccessResponseItem, Type: smithy.ShapeTypeStructure})
+var sBlockedGuestUser_username = smithy.NewStaticSchema(smithy.StaticSchema{Member: "username", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sBlockedGuestUser_admin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "admin", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sBlockedGuestUser_modified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modified", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sBlockedGuestUser_usernameHash = smithy.NewStaticSchema(smithy.StaticSchema{Member: "usernameHash", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var s_BlockedGuestUserList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBlockedGuestUser, Members: &mBlockedGuestUser, Type: smithy.ShapeTypeStructure})
+var sBot_botId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botId", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sBot_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sBot_username = smithy.NewStaticSchema(smithy.StaticSchema{Member: "username", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sBot_uname = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uname", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sBot_pubkey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pubkey", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sBot_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_BotStatus, Members: &m_BotStatus, Type: smithy.ShapeTypeIntEnum})
+var sBot_groupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupId", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sBot_hasChallenge = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hasChallenge", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sBot_suspended = smithy.NewStaticSchema(smithy.StaticSchema{Member: "suspended", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sBot_lastLogin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastLogin", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var s_Bots_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBot, Members: &mBot, Type: smithy.ShapeTypeStructure})
+var s_BotStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_BotStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCallingSettings_canStart11Call = smithy.NewStaticSchema(smithy.StaticSchema{Member: "canStart11Call", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sCallingSettings_canVideoCall = smithy.NewStaticSchema(smithy.StaticSchema{Member: "canVideoCall", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sCallingSettings_forceTcpCall = smithy.NewStaticSchema(smithy.StaticSchema{Member: "forceTcpCall", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sConsentPopupConfig_enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sConsentPopupConfig_header = smithy.NewStaticSchema(smithy.StaticSchema{Member: "header", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sConsentPopupConfig_content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "content", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sConsentPopupConfig_closeButtonLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "closeButtonLabel", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sDataRetentionActionType_ENABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataRetentionActionType_DISABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataRetentionActionType_PUBKEY_MSG_ACK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PUBKEY_MSG_ACK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_Devices_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBasicDeviceObject, Members: &mBasicDeviceObject, Type: smithy.ShapeTypeStructure})
+var sErrorDetail_field = smithy.NewStaticSchema(smithy.StaticSchema{Member: "field", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sErrorDetail_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var s_ErrorDetailList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iErrorDetail, Members: &mErrorDetail, Type: smithy.ShapeTypeStructure})
+var sForbiddenError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sGuestUser_billingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "billingPeriod", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sGuestUser_username = smithy.NewStaticSchema(smithy.StaticSchema{Member: "username", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sGuestUser_usernameHash = smithy.NewStaticSchema(smithy.StaticSchema{Member: "usernameHash", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sGuestUserHistoryCount_month = smithy.NewStaticSchema(smithy.StaticSchema{Member: "month", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sGuestUserHistoryCount_count = smithy.NewStaticSchema(smithy.StaticSchema{Member: "count", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var s_GuestUserHistoryCountList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGuestUserHistoryCount, Members: &mGuestUserHistoryCount, Type: smithy.ShapeTypeStructure})
+var s_GuestUserList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGuestUser, Members: &mGuestUser, Type: smithy.ShapeTypeStructure})
+var sInternalServerError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sNetwork_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Type: smithy.ShapeTypeString})
+var sNetwork_networkName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkName", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sNetwork_accessLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessLevel", ID: &iAccessLevel, Members: &mAccessLevel, Type: smithy.ShapeTypeEnum})
+var sNetwork_awsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsAccountId", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sNetwork_networkArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sNetwork_standing = smithy.NewStaticSchema(smithy.StaticSchema{Member: "standing", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sNetwork_freeTrialExpiration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "freeTrialExpiration", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sNetwork_migrationState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "migrationState", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sNetwork_encryptionKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionKeyArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var s_NetworkList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNetwork, Members: &mNetwork, Type: smithy.ShapeTypeStructure})
+var sNetworkSettings_enableClientMetrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enableClientMetrics", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sNetworkSettings_readReceiptConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "readReceiptConfig", ID: &iReadReceiptConfig, Members: &mReadReceiptConfig, Type: smithy.ShapeTypeStructure})
+var sNetworkSettings_dataRetention = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataRetention", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sNetworkSettings_enableTrustedDataFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enableTrustedDataFormat", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sNetworkSettings_consentPopup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "consentPopup", ID: &iConsentPopupConfig, Members: &mConsentPopupConfig, Type: smithy.ShapeTypeStructure})
+var sOidcConfigInfo_applicationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "applicationName", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sOidcConfigInfo_clientId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientId", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sOidcConfigInfo_companyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "companyId", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sOidcConfigInfo_scopes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopes", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sOidcConfigInfo_issuer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "issuer", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sOidcConfigInfo_clientSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientSecret", ID: &i_SensitiveString, Traits: &t45, Type: smithy.ShapeTypeString})
+var sOidcConfigInfo_secret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secret", ID: &i_SensitiveString, Traits: &t45, Type: smithy.ShapeTypeString})
+var sOidcConfigInfo_redirectUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "redirectUrl", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sOidcConfigInfo_userId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userId", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sOidcConfigInfo_customUsername = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customUsername", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sOidcConfigInfo_caCertificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "caCertificate", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sOidcConfigInfo_applicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "applicationId", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sOidcConfigInfo_ssoTokenBufferMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ssoTokenBufferMinutes", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sOidcConfigInfo_extraAuthParams = smithy.NewStaticSchema(smithy.StaticSchema{Member: "extraAuthParams", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sOidcTokenInfo_codeVerifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeVerifier", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sOidcTokenInfo_codeChallenge = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeChallenge", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sOidcTokenInfo_accessToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessToken", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sOidcTokenInfo_idToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "idToken", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sOidcTokenInfo_refreshToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "refreshToken", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sOidcTokenInfo_tokenType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenType", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sOidcTokenInfo_expiresIn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expiresIn", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sPasswordRequirements_lowercase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lowercase", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sPasswordRequirements_minLength = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minLength", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sPasswordRequirements_numbers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "numbers", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sPasswordRequirements_symbols = smithy.NewStaticSchema(smithy.StaticSchema{Member: "symbols", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sPasswordRequirements_uppercase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uppercase", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var s_PermittedNetworksList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NetworkId, Type: smithy.ShapeTypeString})
+var sPermittedWickrEnterpriseNetwork_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sPermittedWickrEnterpriseNetwork_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Type: smithy.ShapeTypeString})
+var s_PermittedWickrEnterpriseNetworksList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPermittedWickrEnterpriseNetwork, Members: &mPermittedWickrEnterpriseNetwork, Type: smithy.ShapeTypeStructure})
+var sRateLimitError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sReadReceiptConfig_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum})
+var sResourceNotFoundError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sSecurityGroup_activeMembers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activeMembers", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sSecurityGroup_botMembers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botMembers", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sSecurityGroup_activeDirectoryGuid = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activeDirectoryGuid", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sSecurityGroup_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sSecurityGroup_isDefault = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isDefault", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSecurityGroup_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sSecurityGroup_modified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modified", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sSecurityGroup_securityGroupSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityGroupSettings", ID: &iSecurityGroupSettings, Members: &mSecurityGroupSettings, Type: smithy.ShapeTypeStructure})
+var s_SecurityGroupIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SecurityGroupId, Type: smithy.ShapeTypeString})
+var s_SecurityGroupList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSecurityGroup, Members: &mSecurityGroup, Type: smithy.ShapeTypeStructure})
+var sSecurityGroupSettings_alwaysReauthenticate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "alwaysReauthenticate", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSecurityGroupSettings_atakPackageValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "atakPackageValues", ID: &i_SecurityGroupStringList, Members: &m_SecurityGroupStringList, Type: smithy.ShapeTypeList})
+var sSecurityGroupSettings_calling = smithy.NewStaticSchema(smithy.StaticSchema{Member: "calling", ID: &iCallingSettings, Members: &mCallingSettings, Type: smithy.ShapeTypeStructure})
+var sSecurityGroupSettings_checkForUpdates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "checkForUpdates", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSecurityGroupSettings_enableAtak = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enableAtak", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSecurityGroupSettings_enableCrashReports = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enableCrashReports", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSecurityGroupSettings_enableFileDownload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enableFileDownload", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSecurityGroupSettings_enableGuestFederation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enableGuestFederation", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSecurityGroupSettings_enableNotificationPreview = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enableNotificationPreview", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSecurityGroupSettings_enableOpenAccessOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enableOpenAccessOption", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSecurityGroupSettings_enableRestrictedGlobalFederation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enableRestrictedGlobalFederation", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSecurityGroupSettings_filesEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filesEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSecurityGroupSettings_forceDeviceLockout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "forceDeviceLockout", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sSecurityGroupSettings_forceOpenAccess = smithy.NewStaticSchema(smithy.StaticSchema{Member: "forceOpenAccess", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSecurityGroupSettings_forceReadReceipts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "forceReadReceipts", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSecurityGroupSettings_globalFederation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "globalFederation", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSecurityGroupSettings_isAtoEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isAtoEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSecurityGroupSettings_isLinkPreviewEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isLinkPreviewEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSecurityGroupSettings_locationAllowMaps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locationAllowMaps", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSecurityGroupSettings_locationEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locationEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSecurityGroupSettings_maxAutoDownloadSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxAutoDownloadSize", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sSecurityGroupSettings_maxBor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxBor", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sSecurityGroupSettings_maxTtl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxTtl", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sSecurityGroupSettings_messageForwardingEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messageForwardingEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSecurityGroupSettings_passwordRequirements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "passwordRequirements", ID: &iPasswordRequirements, Members: &mPasswordRequirements, Type: smithy.ShapeTypeStructure})
+var sSecurityGroupSettings_presenceEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "presenceEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSecurityGroupSettings_quickResponses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quickResponses", ID: &i_SecurityGroupStringList, Members: &m_SecurityGroupStringList, Type: smithy.ShapeTypeList})
+var sSecurityGroupSettings_showMasterRecoveryKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "showMasterRecoveryKey", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSecurityGroupSettings_shredder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shredder", ID: &iShredderSettings, Members: &mShredderSettings, Type: smithy.ShapeTypeStructure})
+var sSecurityGroupSettings_ssoMaxIdleMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ssoMaxIdleMinutes", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sSecurityGroupSettings_maxNonSsoSessionMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxNonSsoSessionMinutes", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sSecurityGroupSettings_federationMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "federationMode", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sSecurityGroupSettings_lockoutThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lockoutThreshold", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sSecurityGroupSettings_permittedNetworks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permittedNetworks", ID: &i_PermittedNetworksList, Members: &m_PermittedNetworksList, Type: smithy.ShapeTypeList})
+var sSecurityGroupSettings_permittedWickrAwsNetworks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permittedWickrAwsNetworks", ID: &i_WickrAwsNetworksList, Members: &m_WickrAwsNetworksList, Type: smithy.ShapeTypeList})
+var sSecurityGroupSettings_permittedWickrEnterpriseNetworks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permittedWickrEnterpriseNetworks", ID: &i_PermittedWickrEnterpriseNetworksList, Members: &m_PermittedWickrEnterpriseNetworksList, Type: smithy.ShapeTypeList})
+var sSecurityGroupSettingsRequest_lockoutThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lockoutThreshold", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sSecurityGroupSettingsRequest_permittedNetworks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permittedNetworks", ID: &i_PermittedNetworksList, Members: &m_PermittedNetworksList, Type: smithy.ShapeTypeList})
+var sSecurityGroupSettingsRequest_enableGuestFederation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enableGuestFederation", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSecurityGroupSettingsRequest_globalFederation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "globalFederation", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSecurityGroupSettingsRequest_federationMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "federationMode", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sSecurityGroupSettingsRequest_enableRestrictedGlobalFederation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enableRestrictedGlobalFederation", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSecurityGroupSettingsRequest_permittedWickrAwsNetworks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permittedWickrAwsNetworks", ID: &i_WickrAwsNetworksList, Members: &m_WickrAwsNetworksList, Type: smithy.ShapeTypeList})
+var sSecurityGroupSettingsRequest_permittedWickrEnterpriseNetworks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permittedWickrEnterpriseNetworks", ID: &i_PermittedWickrEnterpriseNetworksList, Members: &m_PermittedWickrEnterpriseNetworksList, Type: smithy.ShapeTypeList})
+var s_SecurityGroupStringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sSetting_optionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "optionName", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sSetting_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sSetting_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var s_SettingsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSetting, Members: &mSetting, Type: smithy.ShapeTypeStructure})
+var sShredderSettings_canProcessManually = smithy.NewStaticSchema(smithy.StaticSchema{Member: "canProcessManually", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sShredderSettings_intensity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "intensity", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sSortDirection_ASC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSortDirection_DESC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DESC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatus_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatus_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatus_FORCE_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FORCE_ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_StringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var s_Unames_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sUnauthorizedError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sUpdateUserDetails_firstName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "firstName", ID: &i_SensitiveString, Traits: &t45, Type: smithy.ShapeTypeString})
+var sUpdateUserDetails_lastName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastName", ID: &i_SensitiveString, Traits: &t45, Type: smithy.ShapeTypeString})
+var sUpdateUserDetails_username = smithy.NewStaticSchema(smithy.StaticSchema{Member: "username", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sUpdateUserDetails_securityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityGroupIds", ID: &i_SecurityGroupIdList, Members: &m_SecurityGroupIdList, Type: smithy.ShapeTypeList})
+var sUpdateUserDetails_inviteCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inviteCode", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sUpdateUserDetails_inviteCodeTtl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inviteCodeTtl", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sUpdateUserDetails_codeValidation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeValidation", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sUser_userId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userId", ID: &i_UserId, Type: smithy.ShapeTypeString})
+var sUser_firstName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "firstName", ID: &i_SensitiveString, Traits: &t45, Type: smithy.ShapeTypeString})
+var sUser_lastName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastName", ID: &i_SensitiveString, Traits: &t45, Type: smithy.ShapeTypeString})
+var sUser_username = smithy.NewStaticSchema(smithy.StaticSchema{Member: "username", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sUser_securityGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityGroups", ID: &i_SecurityGroupIdList, Members: &m_SecurityGroupIdList, Type: smithy.ShapeTypeList})
+var sUser_isAdmin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isAdmin", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sUser_suspended = smithy.NewStaticSchema(smithy.StaticSchema{Member: "suspended", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sUser_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sUser_otpEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "otpEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sUser_scimId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scimId", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sUser_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sUser_cell = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cell", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sUser_countryCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "countryCode", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sUser_challengeFailures = smithy.NewStaticSchema(smithy.StaticSchema{Member: "challengeFailures", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sUser_isInviteExpired = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isInviteExpired", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sUser_isUser = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isUser", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sUser_inviteCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inviteCode", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sUser_codeValidation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeValidation", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sUser_uname = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uname", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var s_UserIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_UserId, Type: smithy.ShapeTypeString})
+var s_Users_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUser, Members: &mUser, Type: smithy.ShapeTypeStructure})
+var s_UserStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_UserStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationError_reasons = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reasons", ID: &i_ErrorDetailList, Members: &m_ErrorDetailList, Type: smithy.ShapeTypeList})
+var sValidationError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sWickrAwsNetworks_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sWickrAwsNetworks_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Type: smithy.ShapeTypeString})
+var s_WickrAwsNetworksList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWickrAwsNetworks, Members: &mWickrAwsNetworks, Type: smithy.ShapeTypeStructure})
+var sBatchCreateUserRequest_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Traits: &t53, Type: smithy.ShapeTypeString})
+var sBatchCreateUserRequest_users = smithy.NewStaticSchema(smithy.StaticSchema{Member: "users", ID: &i_BatchCreateUserRequestItems, Members: &m_BatchCreateUserRequestItems, Type: smithy.ShapeTypeList})
+var sBatchCreateUserRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Traits: &t54, Type: smithy.ShapeTypeString})
+var sBatchCreateUserResponse_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sBatchCreateUserResponse_successful = smithy.NewStaticSchema(smithy.StaticSchema{Member: "successful", ID: &i_Users, Members: &m_Users, Type: smithy.ShapeTypeList})
+var sBatchCreateUserResponse_failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failed", ID: &i_BatchUserErrorResponseItems, Members: &m_BatchUserErrorResponseItems, Type: smithy.ShapeTypeList})
+var sBatchDeleteUserRequest_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Traits: &t53, Type: smithy.ShapeTypeString})
+var sBatchDeleteUserRequest_userIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userIds", ID: &i_UserIds, Members: &m_UserIds, Type: smithy.ShapeTypeList})
+var sBatchDeleteUserRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Traits: &t54, Type: smithy.ShapeTypeString})
+var sBatchDeleteUserResponse_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sBatchDeleteUserResponse_successful = smithy.NewStaticSchema(smithy.StaticSchema{Member: "successful", ID: &i_BatchUserSuccessResponseItems, Members: &m_BatchUserSuccessResponseItems, Type: smithy.ShapeTypeList})
+var sBatchDeleteUserResponse_failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failed", ID: &i_BatchUserErrorResponseItems, Members: &m_BatchUserErrorResponseItems, Type: smithy.ShapeTypeList})
+var sBatchLookupUserUnameRequest_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Traits: &t53, Type: smithy.ShapeTypeString})
+var sBatchLookupUserUnameRequest_unames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unames", ID: &i_Unames, Members: &m_Unames, Type: smithy.ShapeTypeList})
+var sBatchLookupUserUnameRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Traits: &t54, Type: smithy.ShapeTypeString})
+var sBatchLookupUserUnameResponse_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sBatchLookupUserUnameResponse_successful = smithy.NewStaticSchema(smithy.StaticSchema{Member: "successful", ID: &i_BatchUnameSuccessResponseItems, Members: &m_BatchUnameSuccessResponseItems, Type: smithy.ShapeTypeList})
+var sBatchLookupUserUnameResponse_failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failed", ID: &i_BatchUnameErrorResponseItems, Members: &m_BatchUnameErrorResponseItems, Type: smithy.ShapeTypeList})
+var sBatchReinviteUserRequest_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Traits: &t53, Type: smithy.ShapeTypeString})
+var sBatchReinviteUserRequest_userIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userIds", ID: &i_UserIds, Members: &m_UserIds, Type: smithy.ShapeTypeList})
+var sBatchReinviteUserRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Traits: &t54, Type: smithy.ShapeTypeString})
+var sBatchReinviteUserResponse_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sBatchReinviteUserResponse_successful = smithy.NewStaticSchema(smithy.StaticSchema{Member: "successful", ID: &i_BatchUserSuccessResponseItems, Members: &m_BatchUserSuccessResponseItems, Type: smithy.ShapeTypeList})
+var sBatchReinviteUserResponse_failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failed", ID: &i_BatchUserErrorResponseItems, Members: &m_BatchUserErrorResponseItems, Type: smithy.ShapeTypeList})
+var sBatchResetDevicesForUserRequest_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Traits: &t53, Type: smithy.ShapeTypeString})
+var sBatchResetDevicesForUserRequest_userId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userId", ID: &i_UserId, Traits: &t53, Type: smithy.ShapeTypeString})
+var sBatchResetDevicesForUserRequest_appIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appIds", ID: &i_AppIds, Members: &m_AppIds, Type: smithy.ShapeTypeList})
+var sBatchResetDevicesForUserRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Traits: &t54, Type: smithy.ShapeTypeString})
+var sBatchResetDevicesForUserResponse_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sBatchResetDevicesForUserResponse_successful = smithy.NewStaticSchema(smithy.StaticSchema{Member: "successful", ID: &i_BatchDeviceSuccessResponseItems, Members: &m_BatchDeviceSuccessResponseItems, Type: smithy.ShapeTypeList})
+var sBatchResetDevicesForUserResponse_failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failed", ID: &i_BatchDeviceErrorResponseItems, Members: &m_BatchDeviceErrorResponseItems, Type: smithy.ShapeTypeList})
+var sBatchToggleUserSuspendStatusRequest_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Traits: &t53, Type: smithy.ShapeTypeString})
+var sBatchToggleUserSuspendStatusRequest_suspend = smithy.NewStaticSchema(smithy.StaticSchema{Member: "suspend", ID: &pBoolean, Traits: &t55, Type: smithy.ShapeTypeBoolean})
+var sBatchToggleUserSuspendStatusRequest_userIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userIds", ID: &i_UserIds, Members: &m_UserIds, Type: smithy.ShapeTypeList})
+var sBatchToggleUserSuspendStatusRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Traits: &t54, Type: smithy.ShapeTypeString})
+var sBatchToggleUserSuspendStatusResponse_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sBatchToggleUserSuspendStatusResponse_successful = smithy.NewStaticSchema(smithy.StaticSchema{Member: "successful", ID: &i_BatchUserSuccessResponseItems, Members: &m_BatchUserSuccessResponseItems, Type: smithy.ShapeTypeList})
+var sBatchToggleUserSuspendStatusResponse_failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failed", ID: &i_BatchUserErrorResponseItems, Members: &m_BatchUserErrorResponseItems, Type: smithy.ShapeTypeList})
+var sCreateBotRequest_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Traits: &t53, Type: smithy.ShapeTypeString})
+var sCreateBotRequest_username = smithy.NewStaticSchema(smithy.StaticSchema{Member: "username", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sCreateBotRequest_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sCreateBotRequest_groupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupId", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sCreateBotRequest_challenge = smithy.NewStaticSchema(smithy.StaticSchema{Member: "challenge", ID: &i_SensitiveString, Traits: &t45, Type: smithy.ShapeTypeString})
+var sCreateBotResponse_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sCreateBotResponse_botId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botId", ID: &i_BotId, Type: smithy.ShapeTypeString})
+var sCreateBotResponse_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Type: smithy.ShapeTypeString})
+var sCreateBotResponse_username = smithy.NewStaticSchema(smithy.StaticSchema{Member: "username", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sCreateBotResponse_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sCreateBotResponse_groupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupId", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sCreateDataRetentionBotChallengeRequest_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Traits: &t53, Type: smithy.ShapeTypeString})
+var sCreateDataRetentionBotChallengeResponse_challenge = smithy.NewStaticSchema(smithy.StaticSchema{Member: "challenge", ID: &i_SensitiveString, Traits: &t45, Type: smithy.ShapeTypeString})
+var sCreateDataRetentionBotRequest_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Traits: &t53, Type: smithy.ShapeTypeString})
+var sCreateDataRetentionBotResponse_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sCreateNetworkRequest_networkName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkName", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sCreateNetworkRequest_accessLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessLevel", ID: &iAccessLevel, Members: &mAccessLevel, Type: smithy.ShapeTypeEnum})
+var sCreateNetworkRequest_enablePremiumFreeTrial = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enablePremiumFreeTrial", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sCreateNetworkRequest_encryptionKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionKeyArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sCreateNetworkResponse_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Type: smithy.ShapeTypeString})
+var sCreateNetworkResponse_networkName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkName", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sCreateNetworkResponse_encryptionKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionKeyArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sCreateSecurityGroupRequest_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Traits: &t53, Type: smithy.ShapeTypeString})
+var sCreateSecurityGroupRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sCreateSecurityGroupRequest_securityGroupSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityGroupSettings", ID: &iSecurityGroupSettingsRequest, Members: &mSecurityGroupSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sCreateSecurityGroupRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Traits: &t54, Type: smithy.ShapeTypeString})
+var sCreateSecurityGroupResponse_securityGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityGroup", ID: &iSecurityGroup, Members: &mSecurityGroup, Type: smithy.ShapeTypeStructure})
+var sDeleteBotRequest_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Traits: &t53, Type: smithy.ShapeTypeString})
+var sDeleteBotRequest_botId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botId", ID: &i_BotId, Traits: &t53, Type: smithy.ShapeTypeString})
+var sDeleteBotResponse_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sDeleteDataRetentionBotRequest_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Traits: &t53, Type: smithy.ShapeTypeString})
+var sDeleteDataRetentionBotResponse_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sDeleteNetworkRequest_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Traits: &t53, Type: smithy.ShapeTypeString})
+var sDeleteNetworkRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Traits: &t54, Type: smithy.ShapeTypeString})
+var sDeleteNetworkResponse_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sDeleteSecurityGroupRequest_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Traits: &t53, Type: smithy.ShapeTypeString})
+var sDeleteSecurityGroupRequest_groupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupId", ID: &i_GenericString, Traits: &t53, Type: smithy.ShapeTypeString})
+var sDeleteSecurityGroupResponse_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sDeleteSecurityGroupResponse_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Type: smithy.ShapeTypeString})
+var sDeleteSecurityGroupResponse_groupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupId", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sGetBotRequest_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Traits: &t53, Type: smithy.ShapeTypeString})
+var sGetBotRequest_botId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botId", ID: &i_BotId, Traits: &t53, Type: smithy.ShapeTypeString})
+var sGetBotResponse_botId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botId", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sGetBotResponse_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sGetBotResponse_username = smithy.NewStaticSchema(smithy.StaticSchema{Member: "username", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sGetBotResponse_uname = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uname", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sGetBotResponse_pubkey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pubkey", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sGetBotResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_BotStatus, Members: &m_BotStatus, Type: smithy.ShapeTypeIntEnum})
+var sGetBotResponse_groupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupId", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sGetBotResponse_hasChallenge = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hasChallenge", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sGetBotResponse_suspended = smithy.NewStaticSchema(smithy.StaticSchema{Member: "suspended", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sGetBotResponse_lastLogin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastLogin", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sGetBotsCountRequest_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Traits: &t53, Type: smithy.ShapeTypeString})
+var sGetBotsCountResponse_pending = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pending", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sGetBotsCountResponse_active = smithy.NewStaticSchema(smithy.StaticSchema{Member: "active", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sGetBotsCountResponse_total = smithy.NewStaticSchema(smithy.StaticSchema{Member: "total", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sGetDataRetentionBotRequest_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Traits: &t53, Type: smithy.ShapeTypeString})
+var sGetDataRetentionBotResponse_botName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botName", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sGetDataRetentionBotResponse_botExists = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botExists", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sGetDataRetentionBotResponse_isBotActive = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isBotActive", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sGetDataRetentionBotResponse_isDataRetentionBotRegistered = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isDataRetentionBotRegistered", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sGetDataRetentionBotResponse_isDataRetentionServiceEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isDataRetentionServiceEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sGetDataRetentionBotResponse_isPubkeyMsgAcked = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isPubkeyMsgAcked", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sGetGuestUserHistoryCountRequest_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Traits: &t53, Type: smithy.ShapeTypeString})
+var sGetGuestUserHistoryCountResponse_history = smithy.NewStaticSchema(smithy.StaticSchema{Member: "history", ID: &i_GuestUserHistoryCountList, Members: &m_GuestUserHistoryCountList, Type: smithy.ShapeTypeList})
+var sGetNetworkRequest_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Traits: &t53, Type: smithy.ShapeTypeString})
+var sGetNetworkResponse_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Type: smithy.ShapeTypeString})
+var sGetNetworkResponse_networkName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkName", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sGetNetworkResponse_accessLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessLevel", ID: &iAccessLevel, Members: &mAccessLevel, Type: smithy.ShapeTypeEnum})
+var sGetNetworkResponse_awsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsAccountId", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sGetNetworkResponse_networkArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sGetNetworkResponse_standing = smithy.NewStaticSchema(smithy.StaticSchema{Member: "standing", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sGetNetworkResponse_freeTrialExpiration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "freeTrialExpiration", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sGetNetworkResponse_migrationState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "migrationState", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sGetNetworkResponse_encryptionKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionKeyArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sGetNetworkSettingsRequest_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Traits: &t53, Type: smithy.ShapeTypeString})
+var sGetNetworkSettingsResponse_settings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "settings", ID: &i_SettingsList, Members: &m_SettingsList, Type: smithy.ShapeTypeList})
+var sGetOidcInfoRequest_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Traits: &t53, Type: smithy.ShapeTypeString})
+var sGetOidcInfoRequest_clientId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientId", ID: &i_GenericString, Traits: &t56, Type: smithy.ShapeTypeString})
+var sGetOidcInfoRequest_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_GenericString, Traits: &t57, Type: smithy.ShapeTypeString})
+var sGetOidcInfoRequest_grantType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "grantType", ID: &i_GenericString, Traits: &t58, Type: smithy.ShapeTypeString})
+var sGetOidcInfoRequest_redirectUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "redirectUri", ID: &i_GenericString, Traits: &t59, Type: smithy.ShapeTypeString})
+var sGetOidcInfoRequest_url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "url", ID: &i_GenericString, Traits: &t60, Type: smithy.ShapeTypeString})
+var sGetOidcInfoRequest_clientSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientSecret", ID: &i_SensitiveString, Traits: &t61, Type: smithy.ShapeTypeString})
+var sGetOidcInfoRequest_codeVerifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeVerifier", ID: &i_GenericString, Traits: &t62, Type: smithy.ShapeTypeString})
+var sGetOidcInfoRequest_certificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "certificate", ID: &i_GenericString, Traits: &t63, Type: smithy.ShapeTypeString})
+var sGetOidcInfoResponse_openidConnectInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "openidConnectInfo", ID: &iOidcConfigInfo, Members: &mOidcConfigInfo, Type: smithy.ShapeTypeStructure})
+var sGetOidcInfoResponse_tokenInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenInfo", ID: &iOidcTokenInfo, Members: &mOidcTokenInfo, Type: smithy.ShapeTypeStructure})
+var sGetOpentdfConfigRequest_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Traits: &t53, Type: smithy.ShapeTypeString})
+var sGetOpentdfConfigResponse_clientId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientId", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sGetOpentdfConfigResponse_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sGetOpentdfConfigResponse_clientSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientSecret", ID: &i_SensitiveString, Traits: &t45, Type: smithy.ShapeTypeString})
+var sGetOpentdfConfigResponse_provider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provider", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sGetSecurityGroupRequest_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Traits: &t53, Type: smithy.ShapeTypeString})
+var sGetSecurityGroupRequest_groupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupId", ID: &i_GenericString, Traits: &t53, Type: smithy.ShapeTypeString})
+var sGetSecurityGroupResponse_securityGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityGroup", ID: &iSecurityGroup, Members: &mSecurityGroup, Type: smithy.ShapeTypeStructure})
+var sGetUserRequest_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Traits: &t53, Type: smithy.ShapeTypeString})
+var sGetUserRequest_userId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userId", ID: &i_UserId, Traits: &t53, Type: smithy.ShapeTypeString})
+var sGetUserRequest_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &pTimestamp, Traits: &t64, Type: smithy.ShapeTypeTimestamp})
+var sGetUserRequest_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &pTimestamp, Traits: &t65, Type: smithy.ShapeTypeTimestamp})
+var sGetUserResponse_userId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userId", ID: &i_UserId, Type: smithy.ShapeTypeString})
+var sGetUserResponse_firstName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "firstName", ID: &i_SensitiveString, Traits: &t45, Type: smithy.ShapeTypeString})
+var sGetUserResponse_lastName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastName", ID: &i_SensitiveString, Traits: &t45, Type: smithy.ShapeTypeString})
+var sGetUserResponse_username = smithy.NewStaticSchema(smithy.StaticSchema{Member: "username", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sGetUserResponse_isAdmin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isAdmin", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sGetUserResponse_suspended = smithy.NewStaticSchema(smithy.StaticSchema{Member: "suspended", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sGetUserResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sGetUserResponse_lastActivity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastActivity", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sGetUserResponse_lastLogin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastLogin", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sGetUserResponse_securityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityGroupIds", ID: &i_SecurityGroupIdList, Members: &m_SecurityGroupIdList, Type: smithy.ShapeTypeList})
+var sGetUsersCountRequest_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Traits: &t53, Type: smithy.ShapeTypeString})
+var sGetUsersCountResponse_pending = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pending", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sGetUsersCountResponse_active = smithy.NewStaticSchema(smithy.StaticSchema{Member: "active", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sGetUsersCountResponse_rejected = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rejected", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sGetUsersCountResponse_remaining = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remaining", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sGetUsersCountResponse_total = smithy.NewStaticSchema(smithy.StaticSchema{Member: "total", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sListBlockedGuestUsersRequest_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Traits: &t53, Type: smithy.ShapeTypeString})
+var sListBlockedGuestUsersRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t66, Type: smithy.ShapeTypeInteger})
+var sListBlockedGuestUsersRequest_sortDirection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortDirection", ID: &iSortDirection, Members: &mSortDirection, Traits: &t67, Type: smithy.ShapeTypeEnum})
+var sListBlockedGuestUsersRequest_sortFields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortFields", ID: &i_GenericString, Traits: &t68, Type: smithy.ShapeTypeString})
+var sListBlockedGuestUsersRequest_username = smithy.NewStaticSchema(smithy.StaticSchema{Member: "username", ID: &i_GenericString, Traits: &t69, Type: smithy.ShapeTypeString})
+var sListBlockedGuestUsersRequest_admin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "admin", ID: &i_GenericString, Traits: &t70, Type: smithy.ShapeTypeString})
+var sListBlockedGuestUsersRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_GenericString, Traits: &t71, Type: smithy.ShapeTypeString})
+var sListBlockedGuestUsersResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sListBlockedGuestUsersResponse_blocklist = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blocklist", ID: &i_BlockedGuestUserList, Members: &m_BlockedGuestUserList, Type: smithy.ShapeTypeList})
+var sListBotsRequest_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Traits: &t53, Type: smithy.ShapeTypeString})
+var sListBotsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_GenericString, Traits: &t71, Type: smithy.ShapeTypeString})
+var sListBotsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t66, Type: smithy.ShapeTypeInteger})
+var sListBotsRequest_sortFields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortFields", ID: &i_GenericString, Traits: &t68, Type: smithy.ShapeTypeString})
+var sListBotsRequest_sortDirection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortDirection", ID: &iSortDirection, Members: &mSortDirection, Traits: &t67, Type: smithy.ShapeTypeEnum})
+var sListBotsRequest_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_GenericString, Traits: &t72, Type: smithy.ShapeTypeString})
+var sListBotsRequest_username = smithy.NewStaticSchema(smithy.StaticSchema{Member: "username", ID: &i_GenericString, Traits: &t69, Type: smithy.ShapeTypeString})
+var sListBotsRequest_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_BotStatus, Members: &m_BotStatus, Traits: &t73, Type: smithy.ShapeTypeIntEnum})
+var sListBotsRequest_groupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupId", ID: &i_GenericString, Traits: &t74, Type: smithy.ShapeTypeString})
+var sListBotsResponse_bots = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bots", ID: &i_Bots, Members: &m_Bots, Type: smithy.ShapeTypeList})
+var sListBotsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sListDevicesForUserRequest_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Traits: &t53, Type: smithy.ShapeTypeString})
+var sListDevicesForUserRequest_userId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userId", ID: &i_UserId, Traits: &t53, Type: smithy.ShapeTypeString})
+var sListDevicesForUserRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_GenericString, Traits: &t71, Type: smithy.ShapeTypeString})
+var sListDevicesForUserRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t66, Type: smithy.ShapeTypeInteger})
+var sListDevicesForUserRequest_sortFields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortFields", ID: &i_GenericString, Traits: &t68, Type: smithy.ShapeTypeString})
+var sListDevicesForUserRequest_sortDirection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortDirection", ID: &iSortDirection, Members: &mSortDirection, Traits: &t67, Type: smithy.ShapeTypeEnum})
+var sListDevicesForUserResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sListDevicesForUserResponse_devices = smithy.NewStaticSchema(smithy.StaticSchema{Member: "devices", ID: &i_Devices, Members: &m_Devices, Type: smithy.ShapeTypeList})
+var sListGuestUsersRequest_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Traits: &t53, Type: smithy.ShapeTypeString})
+var sListGuestUsersRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t66, Type: smithy.ShapeTypeInteger})
+var sListGuestUsersRequest_sortDirection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortDirection", ID: &iSortDirection, Members: &mSortDirection, Traits: &t67, Type: smithy.ShapeTypeEnum})
+var sListGuestUsersRequest_sortFields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortFields", ID: &i_GenericString, Traits: &t68, Type: smithy.ShapeTypeString})
+var sListGuestUsersRequest_username = smithy.NewStaticSchema(smithy.StaticSchema{Member: "username", ID: &i_GenericString, Traits: &t69, Type: smithy.ShapeTypeString})
+var sListGuestUsersRequest_billingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "billingPeriod", ID: &i_GenericString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sListGuestUsersRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_GenericString, Traits: &t71, Type: smithy.ShapeTypeString})
+var sListGuestUsersResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sListGuestUsersResponse_guestlist = smithy.NewStaticSchema(smithy.StaticSchema{Member: "guestlist", ID: &i_GuestUserList, Members: &m_GuestUserList, Type: smithy.ShapeTypeList})
+var sListNetworksRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t66, Type: smithy.ShapeTypeInteger})
+var sListNetworksRequest_sortFields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortFields", ID: &i_GenericString, Traits: &t68, Type: smithy.ShapeTypeString})
+var sListNetworksRequest_sortDirection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortDirection", ID: &iSortDirection, Members: &mSortDirection, Traits: &t67, Type: smithy.ShapeTypeEnum})
+var sListNetworksRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_GenericString, Traits: &t71, Type: smithy.ShapeTypeString})
+var sListNetworksResponse_networks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networks", ID: &i_NetworkList, Members: &m_NetworkList, Type: smithy.ShapeTypeList})
+var sListNetworksResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sListSecurityGroupsRequest_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Traits: &t53, Type: smithy.ShapeTypeString})
+var sListSecurityGroupsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_GenericString, Traits: &t71, Type: smithy.ShapeTypeString})
+var sListSecurityGroupsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t66, Type: smithy.ShapeTypeInteger})
+var sListSecurityGroupsRequest_sortFields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortFields", ID: &i_GenericString, Traits: &t68, Type: smithy.ShapeTypeString})
+var sListSecurityGroupsRequest_sortDirection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortDirection", ID: &iSortDirection, Members: &mSortDirection, Traits: &t67, Type: smithy.ShapeTypeEnum})
+var sListSecurityGroupsResponse_securityGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityGroups", ID: &i_SecurityGroupList, Members: &m_SecurityGroupList, Type: smithy.ShapeTypeList})
+var sListSecurityGroupsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sListSecurityGroupUsersRequest_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Traits: &t53, Type: smithy.ShapeTypeString})
+var sListSecurityGroupUsersRequest_groupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupId", ID: &i_GenericString, Traits: &t53, Type: smithy.ShapeTypeString})
+var sListSecurityGroupUsersRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_GenericString, Traits: &t71, Type: smithy.ShapeTypeString})
+var sListSecurityGroupUsersRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t66, Type: smithy.ShapeTypeInteger})
+var sListSecurityGroupUsersRequest_sortFields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortFields", ID: &i_GenericString, Traits: &t68, Type: smithy.ShapeTypeString})
+var sListSecurityGroupUsersRequest_sortDirection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortDirection", ID: &iSortDirection, Members: &mSortDirection, Traits: &t67, Type: smithy.ShapeTypeEnum})
+var sListSecurityGroupUsersResponse_users = smithy.NewStaticSchema(smithy.StaticSchema{Member: "users", ID: &i_Users, Members: &m_Users, Type: smithy.ShapeTypeList})
+var sListSecurityGroupUsersResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sListUsersRequest_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Traits: &t53, Type: smithy.ShapeTypeString})
+var sListUsersRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_GenericString, Traits: &t71, Type: smithy.ShapeTypeString})
+var sListUsersRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t66, Type: smithy.ShapeTypeInteger})
+var sListUsersRequest_sortFields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortFields", ID: &i_GenericString, Traits: &t68, Type: smithy.ShapeTypeString})
+var sListUsersRequest_sortDirection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortDirection", ID: &iSortDirection, Members: &mSortDirection, Traits: &t67, Type: smithy.ShapeTypeEnum})
+var sListUsersRequest_firstName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "firstName", ID: &i_SensitiveString, Traits: &t76, Type: smithy.ShapeTypeString})
+var sListUsersRequest_lastName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastName", ID: &i_SensitiveString, Traits: &t77, Type: smithy.ShapeTypeString})
+var sListUsersRequest_username = smithy.NewStaticSchema(smithy.StaticSchema{Member: "username", ID: &i_GenericString, Traits: &t69, Type: smithy.ShapeTypeString})
+var sListUsersRequest_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_UserStatus, Members: &m_UserStatus, Traits: &t73, Type: smithy.ShapeTypeIntEnum})
+var sListUsersRequest_groupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupId", ID: &i_GenericString, Traits: &t74, Type: smithy.ShapeTypeString})
+var sListUsersResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sListUsersResponse_users = smithy.NewStaticSchema(smithy.StaticSchema{Member: "users", ID: &i_Users, Members: &m_Users, Type: smithy.ShapeTypeList})
+var sRegisterOidcConfigRequest_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Traits: &t53, Type: smithy.ShapeTypeString})
+var sRegisterOidcConfigRequest_companyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "companyId", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sRegisterOidcConfigRequest_customUsername = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customUsername", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sRegisterOidcConfigRequest_extraAuthParams = smithy.NewStaticSchema(smithy.StaticSchema{Member: "extraAuthParams", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sRegisterOidcConfigRequest_issuer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "issuer", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sRegisterOidcConfigRequest_scopes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopes", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sRegisterOidcConfigRequest_secret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secret", ID: &i_SensitiveString, Traits: &t45, Type: smithy.ShapeTypeString})
+var sRegisterOidcConfigRequest_ssoTokenBufferMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ssoTokenBufferMinutes", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sRegisterOidcConfigRequest_userId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userId", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sRegisterOidcConfigResponse_applicationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "applicationName", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sRegisterOidcConfigResponse_clientId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientId", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sRegisterOidcConfigResponse_companyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "companyId", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sRegisterOidcConfigResponse_scopes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopes", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sRegisterOidcConfigResponse_issuer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "issuer", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sRegisterOidcConfigResponse_clientSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientSecret", ID: &i_SensitiveString, Traits: &t45, Type: smithy.ShapeTypeString})
+var sRegisterOidcConfigResponse_secret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secret", ID: &i_SensitiveString, Traits: &t45, Type: smithy.ShapeTypeString})
+var sRegisterOidcConfigResponse_redirectUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "redirectUrl", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sRegisterOidcConfigResponse_userId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userId", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sRegisterOidcConfigResponse_customUsername = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customUsername", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sRegisterOidcConfigResponse_caCertificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "caCertificate", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sRegisterOidcConfigResponse_applicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "applicationId", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sRegisterOidcConfigResponse_ssoTokenBufferMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ssoTokenBufferMinutes", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sRegisterOidcConfigResponse_extraAuthParams = smithy.NewStaticSchema(smithy.StaticSchema{Member: "extraAuthParams", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sRegisterOidcConfigTestRequest_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Traits: &t53, Type: smithy.ShapeTypeString})
+var sRegisterOidcConfigTestRequest_extraAuthParams = smithy.NewStaticSchema(smithy.StaticSchema{Member: "extraAuthParams", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sRegisterOidcConfigTestRequest_issuer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "issuer", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sRegisterOidcConfigTestRequest_scopes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopes", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sRegisterOidcConfigTestRequest_certificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "certificate", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sRegisterOidcConfigTestResponse_tokenEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenEndpoint", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sRegisterOidcConfigTestResponse_userinfoEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userinfoEndpoint", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sRegisterOidcConfigTestResponse_responseTypesSupported = smithy.NewStaticSchema(smithy.StaticSchema{Member: "responseTypesSupported", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sRegisterOidcConfigTestResponse_scopesSupported = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scopesSupported", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sRegisterOidcConfigTestResponse_issuer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "issuer", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sRegisterOidcConfigTestResponse_authorizationEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authorizationEndpoint", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sRegisterOidcConfigTestResponse_endSessionEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endSessionEndpoint", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sRegisterOidcConfigTestResponse_logoutEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logoutEndpoint", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sRegisterOidcConfigTestResponse_grantTypesSupported = smithy.NewStaticSchema(smithy.StaticSchema{Member: "grantTypesSupported", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sRegisterOidcConfigTestResponse_revocationEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revocationEndpoint", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sRegisterOidcConfigTestResponse_tokenEndpointAuthMethodsSupported = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenEndpointAuthMethodsSupported", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sRegisterOidcConfigTestResponse_microsoftMultiRefreshToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "microsoftMultiRefreshToken", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sRegisterOpentdfConfigRequest_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Traits: &t53, Type: smithy.ShapeTypeString})
+var sRegisterOpentdfConfigRequest_clientId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientId", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sRegisterOpentdfConfigRequest_clientSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientSecret", ID: &i_SensitiveString, Traits: &t45, Type: smithy.ShapeTypeString})
+var sRegisterOpentdfConfigRequest_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sRegisterOpentdfConfigRequest_provider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provider", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sRegisterOpentdfConfigRequest_dryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dryRun", ID: &pBoolean, Traits: &t78, Type: smithy.ShapeTypeBoolean})
+var sRegisterOpentdfConfigResponse_clientId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientId", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sRegisterOpentdfConfigResponse_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sRegisterOpentdfConfigResponse_clientSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientSecret", ID: &i_SensitiveString, Traits: &t45, Type: smithy.ShapeTypeString})
+var sRegisterOpentdfConfigResponse_provider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provider", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sUpdateBotRequest_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Traits: &t53, Type: smithy.ShapeTypeString})
+var sUpdateBotRequest_botId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botId", ID: &i_BotId, Traits: &t53, Type: smithy.ShapeTypeString})
+var sUpdateBotRequest_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sUpdateBotRequest_groupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupId", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sUpdateBotRequest_challenge = smithy.NewStaticSchema(smithy.StaticSchema{Member: "challenge", ID: &i_SensitiveString, Traits: &t45, Type: smithy.ShapeTypeString})
+var sUpdateBotRequest_suspend = smithy.NewStaticSchema(smithy.StaticSchema{Member: "suspend", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sUpdateBotResponse_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sUpdateDataRetentionRequest_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Traits: &t53, Type: smithy.ShapeTypeString})
+var sUpdateDataRetentionRequest_actionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionType", ID: &iDataRetentionActionType, Members: &mDataRetentionActionType, Type: smithy.ShapeTypeEnum})
+var sUpdateDataRetentionResponse_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sUpdateGuestUserRequest_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Traits: &t53, Type: smithy.ShapeTypeString})
+var sUpdateGuestUserRequest_usernameHash = smithy.NewStaticSchema(smithy.StaticSchema{Member: "usernameHash", ID: &i_GenericString, Traits: &t53, Type: smithy.ShapeTypeString})
+var sUpdateGuestUserRequest_block = smithy.NewStaticSchema(smithy.StaticSchema{Member: "block", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sUpdateGuestUserResponse_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sUpdateNetworkRequest_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Traits: &t53, Type: smithy.ShapeTypeString})
+var sUpdateNetworkRequest_networkName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkName", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sUpdateNetworkRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Traits: &t54, Type: smithy.ShapeTypeString})
+var sUpdateNetworkRequest_encryptionKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionKeyArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sUpdateNetworkResponse_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sUpdateNetworkSettingsRequest_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Traits: &t53, Type: smithy.ShapeTypeString})
+var sUpdateNetworkSettingsRequest_settings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "settings", ID: &iNetworkSettings, Members: &mNetworkSettings, Type: smithy.ShapeTypeStructure})
+var sUpdateNetworkSettingsResponse_settings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "settings", ID: &i_SettingsList, Members: &m_SettingsList, Type: smithy.ShapeTypeList})
+var sUpdateSecurityGroupRequest_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Traits: &t53, Type: smithy.ShapeTypeString})
+var sUpdateSecurityGroupRequest_groupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupId", ID: &i_GenericString, Traits: &t53, Type: smithy.ShapeTypeString})
+var sUpdateSecurityGroupRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sUpdateSecurityGroupRequest_securityGroupSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityGroupSettings", ID: &iSecurityGroupSettings, Members: &mSecurityGroupSettings, Type: smithy.ShapeTypeStructure})
+var sUpdateSecurityGroupResponse_securityGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityGroup", ID: &iSecurityGroup, Members: &mSecurityGroup, Type: smithy.ShapeTypeStructure})
+var sUpdateUserRequest_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Traits: &t53, Type: smithy.ShapeTypeString})
+var sUpdateUserRequest_userId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userId", ID: &i_UserId, Type: smithy.ShapeTypeString})
+var sUpdateUserRequest_userDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userDetails", ID: &iUpdateUserDetails, Members: &mUpdateUserDetails, Type: smithy.ShapeTypeStructure})
+var sUpdateUserResponse_userId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userId", ID: &i_UserId, Type: smithy.ShapeTypeString})
+var sUpdateUserResponse_networkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkId", ID: &i_NetworkId, Type: smithy.ShapeTypeString})
+var sUpdateUserResponse_securityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityGroupIds", ID: &i_SecurityGroupIdList, Members: &m_SecurityGroupIdList, Type: smithy.ShapeTypeList})
+var sUpdateUserResponse_firstName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "firstName", ID: &i_SensitiveString, Traits: &t45, Type: smithy.ShapeTypeString})
+var sUpdateUserResponse_lastName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastName", ID: &i_SensitiveString, Traits: &t45, Type: smithy.ShapeTypeString})
+var sUpdateUserResponse_middleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "middleName", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sUpdateUserResponse_suspended = smithy.NewStaticSchema(smithy.StaticSchema{Member: "suspended", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sUpdateUserResponse_modified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modified", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sUpdateUserResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sUpdateUserResponse_inviteCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inviteCode", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sUpdateUserResponse_inviteExpiration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inviteExpiration", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sUpdateUserResponse_codeValidation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeValidation", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+
+var BatchCreateUser = &sBatchCreateUser
+
+var BatchDeleteUser = &sBatchDeleteUser
+
+var BatchLookupUserUname = &sBatchLookupUserUname
+
+var BatchReinviteUser = &sBatchReinviteUser
+
+var BatchResetDevicesForUser = &sBatchResetDevicesForUser
+
+var BatchToggleUserSuspendStatus = &sBatchToggleUserSuspendStatus
+
+var CreateBot = &sCreateBot
+
+var CreateDataRetentionBot = &sCreateDataRetentionBot
+
+var CreateDataRetentionBotChallenge = &sCreateDataRetentionBotChallenge
+
+var CreateNetwork = &sCreateNetwork
+
+var CreateSecurityGroup = &sCreateSecurityGroup
+
+var DeleteBot = &sDeleteBot
+
+var DeleteDataRetentionBot = &sDeleteDataRetentionBot
+
+var DeleteNetwork = &sDeleteNetwork
+
+var DeleteSecurityGroup = &sDeleteSecurityGroup
+
+var GetBot = &sGetBot
+
+var GetBotsCount = &sGetBotsCount
+
+var GetDataRetentionBot = &sGetDataRetentionBot
+
+var GetGuestUserHistoryCount = &sGetGuestUserHistoryCount
+
+var GetNetwork = &sGetNetwork
+
+var GetNetworkSettings = &sGetNetworkSettings
+
+var GetOidcInfo = &sGetOidcInfo
+
+var GetOpentdfConfig = &sGetOpentdfConfig
+
+var GetSecurityGroup = &sGetSecurityGroup
+
+var GetUser = &sGetUser
+
+var GetUsersCount = &sGetUsersCount
+
+var ListBlockedGuestUsers = &sListBlockedGuestUsers
+
+var ListBots = &sListBots
+
+var ListDevicesForUser = &sListDevicesForUser
+
+var ListGuestUsers = &sListGuestUsers
+
+var ListNetworks = &sListNetworks
+
+var ListSecurityGroups = &sListSecurityGroups
+
+var ListSecurityGroupUsers = &sListSecurityGroupUsers
+
+var ListUsers = &sListUsers
+
+var RegisterOidcConfig = &sRegisterOidcConfig
+
+var RegisterOidcConfigTest = &sRegisterOidcConfigTest
+
+var RegisterOpentdfConfig = &sRegisterOpentdfConfig
+
+var UpdateBot = &sUpdateBot
+
+var UpdateDataRetention = &sUpdateDataRetention
+
+var UpdateGuestUser = &sUpdateGuestUser
+
+var UpdateNetwork = &sUpdateNetwork
+
+var UpdateNetworkSettings = &sUpdateNetworkSettings
+
+var UpdateSecurityGroup = &sUpdateSecurityGroup
+
+var UpdateUser = &sUpdateUser
+
+var _WickrAdminApi = &s_WickrAdminApi
+
+var AccessLevel = &sAccessLevel
+var AccessLevel_STANDARD = &sAccessLevel_STANDARD
+var AccessLevel_PREMIUM = &sAccessLevel_PREMIUM
+
+var _AppIds = &s_AppIds
+var _AppIds_member = &s_AppIds_member
+
+var BadRequestError = &sBadRequestError
+var BadRequestError_message = &sBadRequestError_message
+
+var BasicDeviceObject = &sBasicDeviceObject
+var BasicDeviceObject_appId = &sBasicDeviceObject_appId
+var BasicDeviceObject_created = &sBasicDeviceObject_created
+var BasicDeviceObject_lastLogin = &sBasicDeviceObject_lastLogin
+var BasicDeviceObject_statusText = &sBasicDeviceObject_statusText
+var BasicDeviceObject_suspend = &sBasicDeviceObject_suspend
+var BasicDeviceObject_type = &sBasicDeviceObject_type
+
+var BatchCreateUserRequestItem = &sBatchCreateUserRequestItem
+var BatchCreateUserRequestItem_firstName = &sBatchCreateUserRequestItem_firstName
+var BatchCreateUserRequestItem_lastName = &sBatchCreateUserRequestItem_lastName
+var BatchCreateUserRequestItem_securityGroupIds = &sBatchCreateUserRequestItem_securityGroupIds
+var BatchCreateUserRequestItem_username = &sBatchCreateUserRequestItem_username
+var BatchCreateUserRequestItem_inviteCode = &sBatchCreateUserRequestItem_inviteCode
+var BatchCreateUserRequestItem_inviteCodeTtl = &sBatchCreateUserRequestItem_inviteCodeTtl
+var BatchCreateUserRequestItem_codeValidation = &sBatchCreateUserRequestItem_codeValidation
+
+var _BatchCreateUserRequestItems = &s_BatchCreateUserRequestItems
+var _BatchCreateUserRequestItems_member = &s_BatchCreateUserRequestItems_member
+
+var BatchDeviceErrorResponseItem = &sBatchDeviceErrorResponseItem
+var BatchDeviceErrorResponseItem_field = &sBatchDeviceErrorResponseItem_field
+var BatchDeviceErrorResponseItem_reason = &sBatchDeviceErrorResponseItem_reason
+var BatchDeviceErrorResponseItem_appId = &sBatchDeviceErrorResponseItem_appId
+
+var _BatchDeviceErrorResponseItems = &s_BatchDeviceErrorResponseItems
+var _BatchDeviceErrorResponseItems_member = &s_BatchDeviceErrorResponseItems_member
+
+var BatchDeviceSuccessResponseItem = &sBatchDeviceSuccessResponseItem
+var BatchDeviceSuccessResponseItem_appId = &sBatchDeviceSuccessResponseItem_appId
+
+var _BatchDeviceSuccessResponseItems = &s_BatchDeviceSuccessResponseItems
+var _BatchDeviceSuccessResponseItems_member = &s_BatchDeviceSuccessResponseItems_member
+
+var BatchUnameErrorResponseItem = &sBatchUnameErrorResponseItem
+var BatchUnameErrorResponseItem_field = &sBatchUnameErrorResponseItem_field
+var BatchUnameErrorResponseItem_reason = &sBatchUnameErrorResponseItem_reason
+var BatchUnameErrorResponseItem_uname = &sBatchUnameErrorResponseItem_uname
+
+var _BatchUnameErrorResponseItems = &s_BatchUnameErrorResponseItems
+var _BatchUnameErrorResponseItems_member = &s_BatchUnameErrorResponseItems_member
+
+var BatchUnameSuccessResponseItem = &sBatchUnameSuccessResponseItem
+var BatchUnameSuccessResponseItem_uname = &sBatchUnameSuccessResponseItem_uname
+var BatchUnameSuccessResponseItem_username = &sBatchUnameSuccessResponseItem_username
+
+var _BatchUnameSuccessResponseItems = &s_BatchUnameSuccessResponseItems
+var _BatchUnameSuccessResponseItems_member = &s_BatchUnameSuccessResponseItems_member
+
+var BatchUserErrorResponseItem = &sBatchUserErrorResponseItem
+var BatchUserErrorResponseItem_field = &sBatchUserErrorResponseItem_field
+var BatchUserErrorResponseItem_reason = &sBatchUserErrorResponseItem_reason
+var BatchUserErrorResponseItem_userId = &sBatchUserErrorResponseItem_userId
+
+var _BatchUserErrorResponseItems = &s_BatchUserErrorResponseItems
+var _BatchUserErrorResponseItems_member = &s_BatchUserErrorResponseItems_member
+
+var BatchUserSuccessResponseItem = &sBatchUserSuccessResponseItem
+var BatchUserSuccessResponseItem_userId = &sBatchUserSuccessResponseItem_userId
+
+var _BatchUserSuccessResponseItems = &s_BatchUserSuccessResponseItems
+var _BatchUserSuccessResponseItems_member = &s_BatchUserSuccessResponseItems_member
+
+var BlockedGuestUser = &sBlockedGuestUser
+var BlockedGuestUser_username = &sBlockedGuestUser_username
+var BlockedGuestUser_admin = &sBlockedGuestUser_admin
+var BlockedGuestUser_modified = &sBlockedGuestUser_modified
+var BlockedGuestUser_usernameHash = &sBlockedGuestUser_usernameHash
+
+var _BlockedGuestUserList = &s_BlockedGuestUserList
+var _BlockedGuestUserList_member = &s_BlockedGuestUserList_member
+
+var Bot = &sBot
+var Bot_botId = &sBot_botId
+var Bot_displayName = &sBot_displayName
+var Bot_username = &sBot_username
+var Bot_uname = &sBot_uname
+var Bot_pubkey = &sBot_pubkey
+var Bot_status = &sBot_status
+var Bot_groupId = &sBot_groupId
+var Bot_hasChallenge = &sBot_hasChallenge
+var Bot_suspended = &sBot_suspended
+var Bot_lastLogin = &sBot_lastLogin
+
+var _BotId = &s_BotId
+
+var _Bots = &s_Bots
+var _Bots_member = &s_Bots_member
+
+var _BotStatus = &s_BotStatus
+var _BotStatus_PENDING = &s_BotStatus_PENDING
+var _BotStatus_ACTIVE = &s_BotStatus_ACTIVE
+
+var CallingSettings = &sCallingSettings
+var CallingSettings_canStart11Call = &sCallingSettings_canStart11Call
+var CallingSettings_canVideoCall = &sCallingSettings_canVideoCall
+var CallingSettings_forceTcpCall = &sCallingSettings_forceTcpCall
+
+var _ClientToken = &s_ClientToken
+
+var ConsentPopupConfig = &sConsentPopupConfig
+var ConsentPopupConfig_enabled = &sConsentPopupConfig_enabled
+var ConsentPopupConfig_header = &sConsentPopupConfig_header
+var ConsentPopupConfig_content = &sConsentPopupConfig_content
+var ConsentPopupConfig_closeButtonLabel = &sConsentPopupConfig_closeButtonLabel
+
+var DataRetentionActionType = &sDataRetentionActionType
+var DataRetentionActionType_ENABLE = &sDataRetentionActionType_ENABLE
+var DataRetentionActionType_DISABLE = &sDataRetentionActionType_DISABLE
+var DataRetentionActionType_PUBKEY_MSG_ACK = &sDataRetentionActionType_PUBKEY_MSG_ACK
+
+var _Devices = &s_Devices
+var _Devices_member = &s_Devices_member
+
+var ErrorDetail = &sErrorDetail
+var ErrorDetail_field = &sErrorDetail_field
+var ErrorDetail_reason = &sErrorDetail_reason
+
+var _ErrorDetailList = &s_ErrorDetailList
+var _ErrorDetailList_member = &s_ErrorDetailList_member
+
+var ForbiddenError = &sForbiddenError
+var ForbiddenError_message = &sForbiddenError_message
+
+var _GenericString = &s_GenericString
+
+var GuestUser = &sGuestUser
+var GuestUser_billingPeriod = &sGuestUser_billingPeriod
+var GuestUser_username = &sGuestUser_username
+var GuestUser_usernameHash = &sGuestUser_usernameHash
+
+var GuestUserHistoryCount = &sGuestUserHistoryCount
+var GuestUserHistoryCount_month = &sGuestUserHistoryCount_month
+var GuestUserHistoryCount_count = &sGuestUserHistoryCount_count
+
+var _GuestUserHistoryCountList = &s_GuestUserHistoryCountList
+var _GuestUserHistoryCountList_member = &s_GuestUserHistoryCountList_member
+
+var _GuestUserList = &s_GuestUserList
+var _GuestUserList_member = &s_GuestUserList_member
+
+var InternalServerError = &sInternalServerError
+var InternalServerError_message = &sInternalServerError_message
+
+var Network = &sNetwork
+var Network_networkId = &sNetwork_networkId
+var Network_networkName = &sNetwork_networkName
+var Network_accessLevel = &sNetwork_accessLevel
+var Network_awsAccountId = &sNetwork_awsAccountId
+var Network_networkArn = &sNetwork_networkArn
+var Network_standing = &sNetwork_standing
+var Network_freeTrialExpiration = &sNetwork_freeTrialExpiration
+var Network_migrationState = &sNetwork_migrationState
+var Network_encryptionKeyArn = &sNetwork_encryptionKeyArn
+
+var _NetworkId = &s_NetworkId
+
+var _NetworkList = &s_NetworkList
+var _NetworkList_member = &s_NetworkList_member
+
+var NetworkSettings = &sNetworkSettings
+var NetworkSettings_enableClientMetrics = &sNetworkSettings_enableClientMetrics
+var NetworkSettings_readReceiptConfig = &sNetworkSettings_readReceiptConfig
+var NetworkSettings_dataRetention = &sNetworkSettings_dataRetention
+var NetworkSettings_enableTrustedDataFormat = &sNetworkSettings_enableTrustedDataFormat
+var NetworkSettings_consentPopup = &sNetworkSettings_consentPopup
+
+var OidcConfigInfo = &sOidcConfigInfo
+var OidcConfigInfo_applicationName = &sOidcConfigInfo_applicationName
+var OidcConfigInfo_clientId = &sOidcConfigInfo_clientId
+var OidcConfigInfo_companyId = &sOidcConfigInfo_companyId
+var OidcConfigInfo_scopes = &sOidcConfigInfo_scopes
+var OidcConfigInfo_issuer = &sOidcConfigInfo_issuer
+var OidcConfigInfo_clientSecret = &sOidcConfigInfo_clientSecret
+var OidcConfigInfo_secret = &sOidcConfigInfo_secret
+var OidcConfigInfo_redirectUrl = &sOidcConfigInfo_redirectUrl
+var OidcConfigInfo_userId = &sOidcConfigInfo_userId
+var OidcConfigInfo_customUsername = &sOidcConfigInfo_customUsername
+var OidcConfigInfo_caCertificate = &sOidcConfigInfo_caCertificate
+var OidcConfigInfo_applicationId = &sOidcConfigInfo_applicationId
+var OidcConfigInfo_ssoTokenBufferMinutes = &sOidcConfigInfo_ssoTokenBufferMinutes
+var OidcConfigInfo_extraAuthParams = &sOidcConfigInfo_extraAuthParams
+
+var OidcTokenInfo = &sOidcTokenInfo
+var OidcTokenInfo_codeVerifier = &sOidcTokenInfo_codeVerifier
+var OidcTokenInfo_codeChallenge = &sOidcTokenInfo_codeChallenge
+var OidcTokenInfo_accessToken = &sOidcTokenInfo_accessToken
+var OidcTokenInfo_idToken = &sOidcTokenInfo_idToken
+var OidcTokenInfo_refreshToken = &sOidcTokenInfo_refreshToken
+var OidcTokenInfo_tokenType = &sOidcTokenInfo_tokenType
+var OidcTokenInfo_expiresIn = &sOidcTokenInfo_expiresIn
+
+var PasswordRequirements = &sPasswordRequirements
+var PasswordRequirements_lowercase = &sPasswordRequirements_lowercase
+var PasswordRequirements_minLength = &sPasswordRequirements_minLength
+var PasswordRequirements_numbers = &sPasswordRequirements_numbers
+var PasswordRequirements_symbols = &sPasswordRequirements_symbols
+var PasswordRequirements_uppercase = &sPasswordRequirements_uppercase
+
+var _PermittedNetworksList = &s_PermittedNetworksList
+var _PermittedNetworksList_member = &s_PermittedNetworksList_member
+
+var PermittedWickrEnterpriseNetwork = &sPermittedWickrEnterpriseNetwork
+var PermittedWickrEnterpriseNetwork_domain = &sPermittedWickrEnterpriseNetwork_domain
+var PermittedWickrEnterpriseNetwork_networkId = &sPermittedWickrEnterpriseNetwork_networkId
+
+var _PermittedWickrEnterpriseNetworksList = &s_PermittedWickrEnterpriseNetworksList
+var _PermittedWickrEnterpriseNetworksList_member = &s_PermittedWickrEnterpriseNetworksList_member
+
+var RateLimitError = &sRateLimitError
+var RateLimitError_message = &sRateLimitError_message
+
+var ReadReceiptConfig = &sReadReceiptConfig
+var ReadReceiptConfig_status = &sReadReceiptConfig_status
+
+var ResourceNotFoundError = &sResourceNotFoundError
+var ResourceNotFoundError_message = &sResourceNotFoundError_message
+
+var SecurityGroup = &sSecurityGroup
+var SecurityGroup_activeMembers = &sSecurityGroup_activeMembers
+var SecurityGroup_botMembers = &sSecurityGroup_botMembers
+var SecurityGroup_activeDirectoryGuid = &sSecurityGroup_activeDirectoryGuid
+var SecurityGroup_id = &sSecurityGroup_id
+var SecurityGroup_isDefault = &sSecurityGroup_isDefault
+var SecurityGroup_name = &sSecurityGroup_name
+var SecurityGroup_modified = &sSecurityGroup_modified
+var SecurityGroup_securityGroupSettings = &sSecurityGroup_securityGroupSettings
+
+var _SecurityGroupId = &s_SecurityGroupId
+
+var _SecurityGroupIdList = &s_SecurityGroupIdList
+var _SecurityGroupIdList_member = &s_SecurityGroupIdList_member
+
+var _SecurityGroupList = &s_SecurityGroupList
+var _SecurityGroupList_member = &s_SecurityGroupList_member
+
+var SecurityGroupSettings = &sSecurityGroupSettings
+var SecurityGroupSettings_alwaysReauthenticate = &sSecurityGroupSettings_alwaysReauthenticate
+var SecurityGroupSettings_atakPackageValues = &sSecurityGroupSettings_atakPackageValues
+var SecurityGroupSettings_calling = &sSecurityGroupSettings_calling
+var SecurityGroupSettings_checkForUpdates = &sSecurityGroupSettings_checkForUpdates
+var SecurityGroupSettings_enableAtak = &sSecurityGroupSettings_enableAtak
+var SecurityGroupSettings_enableCrashReports = &sSecurityGroupSettings_enableCrashReports
+var SecurityGroupSettings_enableFileDownload = &sSecurityGroupSettings_enableFileDownload
+var SecurityGroupSettings_enableGuestFederation = &sSecurityGroupSettings_enableGuestFederation
+var SecurityGroupSettings_enableNotificationPreview = &sSecurityGroupSettings_enableNotificationPreview
+var SecurityGroupSettings_enableOpenAccessOption = &sSecurityGroupSettings_enableOpenAccessOption
+var SecurityGroupSettings_enableRestrictedGlobalFederation = &sSecurityGroupSettings_enableRestrictedGlobalFederation
+var SecurityGroupSettings_filesEnabled = &sSecurityGroupSettings_filesEnabled
+var SecurityGroupSettings_forceDeviceLockout = &sSecurityGroupSettings_forceDeviceLockout
+var SecurityGroupSettings_forceOpenAccess = &sSecurityGroupSettings_forceOpenAccess
+var SecurityGroupSettings_forceReadReceipts = &sSecurityGroupSettings_forceReadReceipts
+var SecurityGroupSettings_globalFederation = &sSecurityGroupSettings_globalFederation
+var SecurityGroupSettings_isAtoEnabled = &sSecurityGroupSettings_isAtoEnabled
+var SecurityGroupSettings_isLinkPreviewEnabled = &sSecurityGroupSettings_isLinkPreviewEnabled
+var SecurityGroupSettings_locationAllowMaps = &sSecurityGroupSettings_locationAllowMaps
+var SecurityGroupSettings_locationEnabled = &sSecurityGroupSettings_locationEnabled
+var SecurityGroupSettings_maxAutoDownloadSize = &sSecurityGroupSettings_maxAutoDownloadSize
+var SecurityGroupSettings_maxBor = &sSecurityGroupSettings_maxBor
+var SecurityGroupSettings_maxTtl = &sSecurityGroupSettings_maxTtl
+var SecurityGroupSettings_messageForwardingEnabled = &sSecurityGroupSettings_messageForwardingEnabled
+var SecurityGroupSettings_passwordRequirements = &sSecurityGroupSettings_passwordRequirements
+var SecurityGroupSettings_presenceEnabled = &sSecurityGroupSettings_presenceEnabled
+var SecurityGroupSettings_quickResponses = &sSecurityGroupSettings_quickResponses
+var SecurityGroupSettings_showMasterRecoveryKey = &sSecurityGroupSettings_showMasterRecoveryKey
+var SecurityGroupSettings_shredder = &sSecurityGroupSettings_shredder
+var SecurityGroupSettings_ssoMaxIdleMinutes = &sSecurityGroupSettings_ssoMaxIdleMinutes
+var SecurityGroupSettings_maxNonSsoSessionMinutes = &sSecurityGroupSettings_maxNonSsoSessionMinutes
+var SecurityGroupSettings_federationMode = &sSecurityGroupSettings_federationMode
+var SecurityGroupSettings_lockoutThreshold = &sSecurityGroupSettings_lockoutThreshold
+var SecurityGroupSettings_permittedNetworks = &sSecurityGroupSettings_permittedNetworks
+var SecurityGroupSettings_permittedWickrAwsNetworks = &sSecurityGroupSettings_permittedWickrAwsNetworks
+var SecurityGroupSettings_permittedWickrEnterpriseNetworks = &sSecurityGroupSettings_permittedWickrEnterpriseNetworks
+
+var SecurityGroupSettingsRequest = &sSecurityGroupSettingsRequest
+var SecurityGroupSettingsRequest_lockoutThreshold = &sSecurityGroupSettingsRequest_lockoutThreshold
+var SecurityGroupSettingsRequest_permittedNetworks = &sSecurityGroupSettingsRequest_permittedNetworks
+var SecurityGroupSettingsRequest_enableGuestFederation = &sSecurityGroupSettingsRequest_enableGuestFederation
+var SecurityGroupSettingsRequest_globalFederation = &sSecurityGroupSettingsRequest_globalFederation
+var SecurityGroupSettingsRequest_federationMode = &sSecurityGroupSettingsRequest_federationMode
+var SecurityGroupSettingsRequest_enableRestrictedGlobalFederation = &sSecurityGroupSettingsRequest_enableRestrictedGlobalFederation
+var SecurityGroupSettingsRequest_permittedWickrAwsNetworks = &sSecurityGroupSettingsRequest_permittedWickrAwsNetworks
+var SecurityGroupSettingsRequest_permittedWickrEnterpriseNetworks = &sSecurityGroupSettingsRequest_permittedWickrEnterpriseNetworks
+
+var _SecurityGroupStringList = &s_SecurityGroupStringList
+var _SecurityGroupStringList_member = &s_SecurityGroupStringList_member
+
+var _SensitiveString = &s_SensitiveString
+
+var Setting = &sSetting
+var Setting_optionName = &sSetting_optionName
+var Setting_value = &sSetting_value
+var Setting_type = &sSetting_type
+
+var _SettingsList = &s_SettingsList
+var _SettingsList_member = &s_SettingsList_member
+
+var ShredderSettings = &sShredderSettings
+var ShredderSettings_canProcessManually = &sShredderSettings_canProcessManually
+var ShredderSettings_intensity = &sShredderSettings_intensity
+
+var SortDirection = &sSortDirection
+var SortDirection_ASC = &sSortDirection_ASC
+var SortDirection_DESC = &sSortDirection_DESC
+
+var Status = &sStatus
+var Status_DISABLED = &sStatus_DISABLED
+var Status_ENABLED = &sStatus_ENABLED
+var Status_FORCE_ENABLED = &sStatus_FORCE_ENABLED
+
+var _StringList = &s_StringList
+var _StringList_member = &s_StringList_member
+
+var _Uname = &s_Uname
+
+var _Unames = &s_Unames
+var _Unames_member = &s_Unames_member
+
+var UnauthorizedError = &sUnauthorizedError
+var UnauthorizedError_message = &sUnauthorizedError_message
+
+var UpdateUserDetails = &sUpdateUserDetails
+var UpdateUserDetails_firstName = &sUpdateUserDetails_firstName
+var UpdateUserDetails_lastName = &sUpdateUserDetails_lastName
+var UpdateUserDetails_username = &sUpdateUserDetails_username
+var UpdateUserDetails_securityGroupIds = &sUpdateUserDetails_securityGroupIds
+var UpdateUserDetails_inviteCode = &sUpdateUserDetails_inviteCode
+var UpdateUserDetails_inviteCodeTtl = &sUpdateUserDetails_inviteCodeTtl
+var UpdateUserDetails_codeValidation = &sUpdateUserDetails_codeValidation
+
+var User = &sUser
+var User_userId = &sUser_userId
+var User_firstName = &sUser_firstName
+var User_lastName = &sUser_lastName
+var User_username = &sUser_username
+var User_securityGroups = &sUser_securityGroups
+var User_isAdmin = &sUser_isAdmin
+var User_suspended = &sUser_suspended
+var User_status = &sUser_status
+var User_otpEnabled = &sUser_otpEnabled
+var User_scimId = &sUser_scimId
+var User_type = &sUser_type
+var User_cell = &sUser_cell
+var User_countryCode = &sUser_countryCode
+var User_challengeFailures = &sUser_challengeFailures
+var User_isInviteExpired = &sUser_isInviteExpired
+var User_isUser = &sUser_isUser
+var User_inviteCode = &sUser_inviteCode
+var User_codeValidation = &sUser_codeValidation
+var User_uname = &sUser_uname
+
+var _UserId = &s_UserId
+
+var _UserIds = &s_UserIds
+var _UserIds_member = &s_UserIds_member
+
+var _Users = &s_Users
+var _Users_member = &s_Users_member
+
+var _UserStatus = &s_UserStatus
+var _UserStatus_PENDING = &s_UserStatus_PENDING
+var _UserStatus_ACTIVE = &s_UserStatus_ACTIVE
+
+var ValidationError = &sValidationError
+var ValidationError_reasons = &sValidationError_reasons
+var ValidationError_message = &sValidationError_message
+
+var WickrAwsNetworks = &sWickrAwsNetworks
+var WickrAwsNetworks_region = &sWickrAwsNetworks_region
+var WickrAwsNetworks_networkId = &sWickrAwsNetworks_networkId
+
+var _WickrAwsNetworksList = &s_WickrAwsNetworksList
+var _WickrAwsNetworksList_member = &s_WickrAwsNetworksList_member
+
+var BatchCreateUserRequest = &sBatchCreateUserRequest
+var BatchCreateUserRequest_networkId = &sBatchCreateUserRequest_networkId
+var BatchCreateUserRequest_users = &sBatchCreateUserRequest_users
+var BatchCreateUserRequest_clientToken = &sBatchCreateUserRequest_clientToken
+
+var BatchCreateUserResponse = &sBatchCreateUserResponse
+var BatchCreateUserResponse_message = &sBatchCreateUserResponse_message
+var BatchCreateUserResponse_successful = &sBatchCreateUserResponse_successful
+var BatchCreateUserResponse_failed = &sBatchCreateUserResponse_failed
+
+var BatchDeleteUserRequest = &sBatchDeleteUserRequest
+var BatchDeleteUserRequest_networkId = &sBatchDeleteUserRequest_networkId
+var BatchDeleteUserRequest_userIds = &sBatchDeleteUserRequest_userIds
+var BatchDeleteUserRequest_clientToken = &sBatchDeleteUserRequest_clientToken
+
+var BatchDeleteUserResponse = &sBatchDeleteUserResponse
+var BatchDeleteUserResponse_message = &sBatchDeleteUserResponse_message
+var BatchDeleteUserResponse_successful = &sBatchDeleteUserResponse_successful
+var BatchDeleteUserResponse_failed = &sBatchDeleteUserResponse_failed
+
+var BatchLookupUserUnameRequest = &sBatchLookupUserUnameRequest
+var BatchLookupUserUnameRequest_networkId = &sBatchLookupUserUnameRequest_networkId
+var BatchLookupUserUnameRequest_unames = &sBatchLookupUserUnameRequest_unames
+var BatchLookupUserUnameRequest_clientToken = &sBatchLookupUserUnameRequest_clientToken
+
+var BatchLookupUserUnameResponse = &sBatchLookupUserUnameResponse
+var BatchLookupUserUnameResponse_message = &sBatchLookupUserUnameResponse_message
+var BatchLookupUserUnameResponse_successful = &sBatchLookupUserUnameResponse_successful
+var BatchLookupUserUnameResponse_failed = &sBatchLookupUserUnameResponse_failed
+
+var BatchReinviteUserRequest = &sBatchReinviteUserRequest
+var BatchReinviteUserRequest_networkId = &sBatchReinviteUserRequest_networkId
+var BatchReinviteUserRequest_userIds = &sBatchReinviteUserRequest_userIds
+var BatchReinviteUserRequest_clientToken = &sBatchReinviteUserRequest_clientToken
+
+var BatchReinviteUserResponse = &sBatchReinviteUserResponse
+var BatchReinviteUserResponse_message = &sBatchReinviteUserResponse_message
+var BatchReinviteUserResponse_successful = &sBatchReinviteUserResponse_successful
+var BatchReinviteUserResponse_failed = &sBatchReinviteUserResponse_failed
+
+var BatchResetDevicesForUserRequest = &sBatchResetDevicesForUserRequest
+var BatchResetDevicesForUserRequest_networkId = &sBatchResetDevicesForUserRequest_networkId
+var BatchResetDevicesForUserRequest_userId = &sBatchResetDevicesForUserRequest_userId
+var BatchResetDevicesForUserRequest_appIds = &sBatchResetDevicesForUserRequest_appIds
+var BatchResetDevicesForUserRequest_clientToken = &sBatchResetDevicesForUserRequest_clientToken
+
+var BatchResetDevicesForUserResponse = &sBatchResetDevicesForUserResponse
+var BatchResetDevicesForUserResponse_message = &sBatchResetDevicesForUserResponse_message
+var BatchResetDevicesForUserResponse_successful = &sBatchResetDevicesForUserResponse_successful
+var BatchResetDevicesForUserResponse_failed = &sBatchResetDevicesForUserResponse_failed
+
+var BatchToggleUserSuspendStatusRequest = &sBatchToggleUserSuspendStatusRequest
+var BatchToggleUserSuspendStatusRequest_networkId = &sBatchToggleUserSuspendStatusRequest_networkId
+var BatchToggleUserSuspendStatusRequest_suspend = &sBatchToggleUserSuspendStatusRequest_suspend
+var BatchToggleUserSuspendStatusRequest_userIds = &sBatchToggleUserSuspendStatusRequest_userIds
+var BatchToggleUserSuspendStatusRequest_clientToken = &sBatchToggleUserSuspendStatusRequest_clientToken
+
+var BatchToggleUserSuspendStatusResponse = &sBatchToggleUserSuspendStatusResponse
+var BatchToggleUserSuspendStatusResponse_message = &sBatchToggleUserSuspendStatusResponse_message
+var BatchToggleUserSuspendStatusResponse_successful = &sBatchToggleUserSuspendStatusResponse_successful
+var BatchToggleUserSuspendStatusResponse_failed = &sBatchToggleUserSuspendStatusResponse_failed
+
+var CreateBotRequest = &sCreateBotRequest
+var CreateBotRequest_networkId = &sCreateBotRequest_networkId
+var CreateBotRequest_username = &sCreateBotRequest_username
+var CreateBotRequest_displayName = &sCreateBotRequest_displayName
+var CreateBotRequest_groupId = &sCreateBotRequest_groupId
+var CreateBotRequest_challenge = &sCreateBotRequest_challenge
+
+var CreateBotResponse = &sCreateBotResponse
+var CreateBotResponse_message = &sCreateBotResponse_message
+var CreateBotResponse_botId = &sCreateBotResponse_botId
+var CreateBotResponse_networkId = &sCreateBotResponse_networkId
+var CreateBotResponse_username = &sCreateBotResponse_username
+var CreateBotResponse_displayName = &sCreateBotResponse_displayName
+var CreateBotResponse_groupId = &sCreateBotResponse_groupId
+
+var CreateDataRetentionBotChallengeRequest = &sCreateDataRetentionBotChallengeRequest
+var CreateDataRetentionBotChallengeRequest_networkId = &sCreateDataRetentionBotChallengeRequest_networkId
+
+var CreateDataRetentionBotChallengeResponse = &sCreateDataRetentionBotChallengeResponse
+var CreateDataRetentionBotChallengeResponse_challenge = &sCreateDataRetentionBotChallengeResponse_challenge
+
+var CreateDataRetentionBotRequest = &sCreateDataRetentionBotRequest
+var CreateDataRetentionBotRequest_networkId = &sCreateDataRetentionBotRequest_networkId
+
+var CreateDataRetentionBotResponse = &sCreateDataRetentionBotResponse
+var CreateDataRetentionBotResponse_message = &sCreateDataRetentionBotResponse_message
+
+var CreateNetworkRequest = &sCreateNetworkRequest
+var CreateNetworkRequest_networkName = &sCreateNetworkRequest_networkName
+var CreateNetworkRequest_accessLevel = &sCreateNetworkRequest_accessLevel
+var CreateNetworkRequest_enablePremiumFreeTrial = &sCreateNetworkRequest_enablePremiumFreeTrial
+var CreateNetworkRequest_encryptionKeyArn = &sCreateNetworkRequest_encryptionKeyArn
+
+var CreateNetworkResponse = &sCreateNetworkResponse
+var CreateNetworkResponse_networkId = &sCreateNetworkResponse_networkId
+var CreateNetworkResponse_networkName = &sCreateNetworkResponse_networkName
+var CreateNetworkResponse_encryptionKeyArn = &sCreateNetworkResponse_encryptionKeyArn
+
+var CreateSecurityGroupRequest = &sCreateSecurityGroupRequest
+var CreateSecurityGroupRequest_networkId = &sCreateSecurityGroupRequest_networkId
+var CreateSecurityGroupRequest_name = &sCreateSecurityGroupRequest_name
+var CreateSecurityGroupRequest_securityGroupSettings = &sCreateSecurityGroupRequest_securityGroupSettings
+var CreateSecurityGroupRequest_clientToken = &sCreateSecurityGroupRequest_clientToken
+
+var CreateSecurityGroupResponse = &sCreateSecurityGroupResponse
+var CreateSecurityGroupResponse_securityGroup = &sCreateSecurityGroupResponse_securityGroup
+
+var DeleteBotRequest = &sDeleteBotRequest
+var DeleteBotRequest_networkId = &sDeleteBotRequest_networkId
+var DeleteBotRequest_botId = &sDeleteBotRequest_botId
+
+var DeleteBotResponse = &sDeleteBotResponse
+var DeleteBotResponse_message = &sDeleteBotResponse_message
+
+var DeleteDataRetentionBotRequest = &sDeleteDataRetentionBotRequest
+var DeleteDataRetentionBotRequest_networkId = &sDeleteDataRetentionBotRequest_networkId
+
+var DeleteDataRetentionBotResponse = &sDeleteDataRetentionBotResponse
+var DeleteDataRetentionBotResponse_message = &sDeleteDataRetentionBotResponse_message
+
+var DeleteNetworkRequest = &sDeleteNetworkRequest
+var DeleteNetworkRequest_networkId = &sDeleteNetworkRequest_networkId
+var DeleteNetworkRequest_clientToken = &sDeleteNetworkRequest_clientToken
+
+var DeleteNetworkResponse = &sDeleteNetworkResponse
+var DeleteNetworkResponse_message = &sDeleteNetworkResponse_message
+
+var DeleteSecurityGroupRequest = &sDeleteSecurityGroupRequest
+var DeleteSecurityGroupRequest_networkId = &sDeleteSecurityGroupRequest_networkId
+var DeleteSecurityGroupRequest_groupId = &sDeleteSecurityGroupRequest_groupId
+
+var DeleteSecurityGroupResponse = &sDeleteSecurityGroupResponse
+var DeleteSecurityGroupResponse_message = &sDeleteSecurityGroupResponse_message
+var DeleteSecurityGroupResponse_networkId = &sDeleteSecurityGroupResponse_networkId
+var DeleteSecurityGroupResponse_groupId = &sDeleteSecurityGroupResponse_groupId
+
+var GetBotRequest = &sGetBotRequest
+var GetBotRequest_networkId = &sGetBotRequest_networkId
+var GetBotRequest_botId = &sGetBotRequest_botId
+
+var GetBotResponse = &sGetBotResponse
+var GetBotResponse_botId = &sGetBotResponse_botId
+var GetBotResponse_displayName = &sGetBotResponse_displayName
+var GetBotResponse_username = &sGetBotResponse_username
+var GetBotResponse_uname = &sGetBotResponse_uname
+var GetBotResponse_pubkey = &sGetBotResponse_pubkey
+var GetBotResponse_status = &sGetBotResponse_status
+var GetBotResponse_groupId = &sGetBotResponse_groupId
+var GetBotResponse_hasChallenge = &sGetBotResponse_hasChallenge
+var GetBotResponse_suspended = &sGetBotResponse_suspended
+var GetBotResponse_lastLogin = &sGetBotResponse_lastLogin
+
+var GetBotsCountRequest = &sGetBotsCountRequest
+var GetBotsCountRequest_networkId = &sGetBotsCountRequest_networkId
+
+var GetBotsCountResponse = &sGetBotsCountResponse
+var GetBotsCountResponse_pending = &sGetBotsCountResponse_pending
+var GetBotsCountResponse_active = &sGetBotsCountResponse_active
+var GetBotsCountResponse_total = &sGetBotsCountResponse_total
+
+var GetDataRetentionBotRequest = &sGetDataRetentionBotRequest
+var GetDataRetentionBotRequest_networkId = &sGetDataRetentionBotRequest_networkId
+
+var GetDataRetentionBotResponse = &sGetDataRetentionBotResponse
+var GetDataRetentionBotResponse_botName = &sGetDataRetentionBotResponse_botName
+var GetDataRetentionBotResponse_botExists = &sGetDataRetentionBotResponse_botExists
+var GetDataRetentionBotResponse_isBotActive = &sGetDataRetentionBotResponse_isBotActive
+var GetDataRetentionBotResponse_isDataRetentionBotRegistered = &sGetDataRetentionBotResponse_isDataRetentionBotRegistered
+var GetDataRetentionBotResponse_isDataRetentionServiceEnabled = &sGetDataRetentionBotResponse_isDataRetentionServiceEnabled
+var GetDataRetentionBotResponse_isPubkeyMsgAcked = &sGetDataRetentionBotResponse_isPubkeyMsgAcked
+
+var GetGuestUserHistoryCountRequest = &sGetGuestUserHistoryCountRequest
+var GetGuestUserHistoryCountRequest_networkId = &sGetGuestUserHistoryCountRequest_networkId
+
+var GetGuestUserHistoryCountResponse = &sGetGuestUserHistoryCountResponse
+var GetGuestUserHistoryCountResponse_history = &sGetGuestUserHistoryCountResponse_history
+
+var GetNetworkRequest = &sGetNetworkRequest
+var GetNetworkRequest_networkId = &sGetNetworkRequest_networkId
+
+var GetNetworkResponse = &sGetNetworkResponse
+var GetNetworkResponse_networkId = &sGetNetworkResponse_networkId
+var GetNetworkResponse_networkName = &sGetNetworkResponse_networkName
+var GetNetworkResponse_accessLevel = &sGetNetworkResponse_accessLevel
+var GetNetworkResponse_awsAccountId = &sGetNetworkResponse_awsAccountId
+var GetNetworkResponse_networkArn = &sGetNetworkResponse_networkArn
+var GetNetworkResponse_standing = &sGetNetworkResponse_standing
+var GetNetworkResponse_freeTrialExpiration = &sGetNetworkResponse_freeTrialExpiration
+var GetNetworkResponse_migrationState = &sGetNetworkResponse_migrationState
+var GetNetworkResponse_encryptionKeyArn = &sGetNetworkResponse_encryptionKeyArn
+
+var GetNetworkSettingsRequest = &sGetNetworkSettingsRequest
+var GetNetworkSettingsRequest_networkId = &sGetNetworkSettingsRequest_networkId
+
+var GetNetworkSettingsResponse = &sGetNetworkSettingsResponse
+var GetNetworkSettingsResponse_settings = &sGetNetworkSettingsResponse_settings
+
+var GetOidcInfoRequest = &sGetOidcInfoRequest
+var GetOidcInfoRequest_networkId = &sGetOidcInfoRequest_networkId
+var GetOidcInfoRequest_clientId = &sGetOidcInfoRequest_clientId
+var GetOidcInfoRequest_code = &sGetOidcInfoRequest_code
+var GetOidcInfoRequest_grantType = &sGetOidcInfoRequest_grantType
+var GetOidcInfoRequest_redirectUri = &sGetOidcInfoRequest_redirectUri
+var GetOidcInfoRequest_url = &sGetOidcInfoRequest_url
+var GetOidcInfoRequest_clientSecret = &sGetOidcInfoRequest_clientSecret
+var GetOidcInfoRequest_codeVerifier = &sGetOidcInfoRequest_codeVerifier
+var GetOidcInfoRequest_certificate = &sGetOidcInfoRequest_certificate
+
+var GetOidcInfoResponse = &sGetOidcInfoResponse
+var GetOidcInfoResponse_openidConnectInfo = &sGetOidcInfoResponse_openidConnectInfo
+var GetOidcInfoResponse_tokenInfo = &sGetOidcInfoResponse_tokenInfo
+
+var GetOpentdfConfigRequest = &sGetOpentdfConfigRequest
+var GetOpentdfConfigRequest_networkId = &sGetOpentdfConfigRequest_networkId
+
+var GetOpentdfConfigResponse = &sGetOpentdfConfigResponse
+var GetOpentdfConfigResponse_clientId = &sGetOpentdfConfigResponse_clientId
+var GetOpentdfConfigResponse_domain = &sGetOpentdfConfigResponse_domain
+var GetOpentdfConfigResponse_clientSecret = &sGetOpentdfConfigResponse_clientSecret
+var GetOpentdfConfigResponse_provider = &sGetOpentdfConfigResponse_provider
+
+var GetSecurityGroupRequest = &sGetSecurityGroupRequest
+var GetSecurityGroupRequest_networkId = &sGetSecurityGroupRequest_networkId
+var GetSecurityGroupRequest_groupId = &sGetSecurityGroupRequest_groupId
+
+var GetSecurityGroupResponse = &sGetSecurityGroupResponse
+var GetSecurityGroupResponse_securityGroup = &sGetSecurityGroupResponse_securityGroup
+
+var GetUserRequest = &sGetUserRequest
+var GetUserRequest_networkId = &sGetUserRequest_networkId
+var GetUserRequest_userId = &sGetUserRequest_userId
+var GetUserRequest_startTime = &sGetUserRequest_startTime
+var GetUserRequest_endTime = &sGetUserRequest_endTime
+
+var GetUserResponse = &sGetUserResponse
+var GetUserResponse_userId = &sGetUserResponse_userId
+var GetUserResponse_firstName = &sGetUserResponse_firstName
+var GetUserResponse_lastName = &sGetUserResponse_lastName
+var GetUserResponse_username = &sGetUserResponse_username
+var GetUserResponse_isAdmin = &sGetUserResponse_isAdmin
+var GetUserResponse_suspended = &sGetUserResponse_suspended
+var GetUserResponse_status = &sGetUserResponse_status
+var GetUserResponse_lastActivity = &sGetUserResponse_lastActivity
+var GetUserResponse_lastLogin = &sGetUserResponse_lastLogin
+var GetUserResponse_securityGroupIds = &sGetUserResponse_securityGroupIds
+
+var GetUsersCountRequest = &sGetUsersCountRequest
+var GetUsersCountRequest_networkId = &sGetUsersCountRequest_networkId
+
+var GetUsersCountResponse = &sGetUsersCountResponse
+var GetUsersCountResponse_pending = &sGetUsersCountResponse_pending
+var GetUsersCountResponse_active = &sGetUsersCountResponse_active
+var GetUsersCountResponse_rejected = &sGetUsersCountResponse_rejected
+var GetUsersCountResponse_remaining = &sGetUsersCountResponse_remaining
+var GetUsersCountResponse_total = &sGetUsersCountResponse_total
+
+var ListBlockedGuestUsersRequest = &sListBlockedGuestUsersRequest
+var ListBlockedGuestUsersRequest_networkId = &sListBlockedGuestUsersRequest_networkId
+var ListBlockedGuestUsersRequest_maxResults = &sListBlockedGuestUsersRequest_maxResults
+var ListBlockedGuestUsersRequest_sortDirection = &sListBlockedGuestUsersRequest_sortDirection
+var ListBlockedGuestUsersRequest_sortFields = &sListBlockedGuestUsersRequest_sortFields
+var ListBlockedGuestUsersRequest_username = &sListBlockedGuestUsersRequest_username
+var ListBlockedGuestUsersRequest_admin = &sListBlockedGuestUsersRequest_admin
+var ListBlockedGuestUsersRequest_nextToken = &sListBlockedGuestUsersRequest_nextToken
+
+var ListBlockedGuestUsersResponse = &sListBlockedGuestUsersResponse
+var ListBlockedGuestUsersResponse_nextToken = &sListBlockedGuestUsersResponse_nextToken
+var ListBlockedGuestUsersResponse_blocklist = &sListBlockedGuestUsersResponse_blocklist
+
+var ListBotsRequest = &sListBotsRequest
+var ListBotsRequest_networkId = &sListBotsRequest_networkId
+var ListBotsRequest_nextToken = &sListBotsRequest_nextToken
+var ListBotsRequest_maxResults = &sListBotsRequest_maxResults
+var ListBotsRequest_sortFields = &sListBotsRequest_sortFields
+var ListBotsRequest_sortDirection = &sListBotsRequest_sortDirection
+var ListBotsRequest_displayName = &sListBotsRequest_displayName
+var ListBotsRequest_username = &sListBotsRequest_username
+var ListBotsRequest_status = &sListBotsRequest_status
+var ListBotsRequest_groupId = &sListBotsRequest_groupId
+
+var ListBotsResponse = &sListBotsResponse
+var ListBotsResponse_bots = &sListBotsResponse_bots
+var ListBotsResponse_nextToken = &sListBotsResponse_nextToken
+
+var ListDevicesForUserRequest = &sListDevicesForUserRequest
+var ListDevicesForUserRequest_networkId = &sListDevicesForUserRequest_networkId
+var ListDevicesForUserRequest_userId = &sListDevicesForUserRequest_userId
+var ListDevicesForUserRequest_nextToken = &sListDevicesForUserRequest_nextToken
+var ListDevicesForUserRequest_maxResults = &sListDevicesForUserRequest_maxResults
+var ListDevicesForUserRequest_sortFields = &sListDevicesForUserRequest_sortFields
+var ListDevicesForUserRequest_sortDirection = &sListDevicesForUserRequest_sortDirection
+
+var ListDevicesForUserResponse = &sListDevicesForUserResponse
+var ListDevicesForUserResponse_nextToken = &sListDevicesForUserResponse_nextToken
+var ListDevicesForUserResponse_devices = &sListDevicesForUserResponse_devices
+
+var ListGuestUsersRequest = &sListGuestUsersRequest
+var ListGuestUsersRequest_networkId = &sListGuestUsersRequest_networkId
+var ListGuestUsersRequest_maxResults = &sListGuestUsersRequest_maxResults
+var ListGuestUsersRequest_sortDirection = &sListGuestUsersRequest_sortDirection
+var ListGuestUsersRequest_sortFields = &sListGuestUsersRequest_sortFields
+var ListGuestUsersRequest_username = &sListGuestUsersRequest_username
+var ListGuestUsersRequest_billingPeriod = &sListGuestUsersRequest_billingPeriod
+var ListGuestUsersRequest_nextToken = &sListGuestUsersRequest_nextToken
+
+var ListGuestUsersResponse = &sListGuestUsersResponse
+var ListGuestUsersResponse_nextToken = &sListGuestUsersResponse_nextToken
+var ListGuestUsersResponse_guestlist = &sListGuestUsersResponse_guestlist
+
+var ListNetworksRequest = &sListNetworksRequest
+var ListNetworksRequest_maxResults = &sListNetworksRequest_maxResults
+var ListNetworksRequest_sortFields = &sListNetworksRequest_sortFields
+var ListNetworksRequest_sortDirection = &sListNetworksRequest_sortDirection
+var ListNetworksRequest_nextToken = &sListNetworksRequest_nextToken
+
+var ListNetworksResponse = &sListNetworksResponse
+var ListNetworksResponse_networks = &sListNetworksResponse_networks
+var ListNetworksResponse_nextToken = &sListNetworksResponse_nextToken
+
+var ListSecurityGroupsRequest = &sListSecurityGroupsRequest
+var ListSecurityGroupsRequest_networkId = &sListSecurityGroupsRequest_networkId
+var ListSecurityGroupsRequest_nextToken = &sListSecurityGroupsRequest_nextToken
+var ListSecurityGroupsRequest_maxResults = &sListSecurityGroupsRequest_maxResults
+var ListSecurityGroupsRequest_sortFields = &sListSecurityGroupsRequest_sortFields
+var ListSecurityGroupsRequest_sortDirection = &sListSecurityGroupsRequest_sortDirection
+
+var ListSecurityGroupsResponse = &sListSecurityGroupsResponse
+var ListSecurityGroupsResponse_securityGroups = &sListSecurityGroupsResponse_securityGroups
+var ListSecurityGroupsResponse_nextToken = &sListSecurityGroupsResponse_nextToken
+
+var ListSecurityGroupUsersRequest = &sListSecurityGroupUsersRequest
+var ListSecurityGroupUsersRequest_networkId = &sListSecurityGroupUsersRequest_networkId
+var ListSecurityGroupUsersRequest_groupId = &sListSecurityGroupUsersRequest_groupId
+var ListSecurityGroupUsersRequest_nextToken = &sListSecurityGroupUsersRequest_nextToken
+var ListSecurityGroupUsersRequest_maxResults = &sListSecurityGroupUsersRequest_maxResults
+var ListSecurityGroupUsersRequest_sortFields = &sListSecurityGroupUsersRequest_sortFields
+var ListSecurityGroupUsersRequest_sortDirection = &sListSecurityGroupUsersRequest_sortDirection
+
+var ListSecurityGroupUsersResponse = &sListSecurityGroupUsersResponse
+var ListSecurityGroupUsersResponse_users = &sListSecurityGroupUsersResponse_users
+var ListSecurityGroupUsersResponse_nextToken = &sListSecurityGroupUsersResponse_nextToken
+
+var ListUsersRequest = &sListUsersRequest
+var ListUsersRequest_networkId = &sListUsersRequest_networkId
+var ListUsersRequest_nextToken = &sListUsersRequest_nextToken
+var ListUsersRequest_maxResults = &sListUsersRequest_maxResults
+var ListUsersRequest_sortFields = &sListUsersRequest_sortFields
+var ListUsersRequest_sortDirection = &sListUsersRequest_sortDirection
+var ListUsersRequest_firstName = &sListUsersRequest_firstName
+var ListUsersRequest_lastName = &sListUsersRequest_lastName
+var ListUsersRequest_username = &sListUsersRequest_username
+var ListUsersRequest_status = &sListUsersRequest_status
+var ListUsersRequest_groupId = &sListUsersRequest_groupId
+
+var ListUsersResponse = &sListUsersResponse
+var ListUsersResponse_nextToken = &sListUsersResponse_nextToken
+var ListUsersResponse_users = &sListUsersResponse_users
+
+var RegisterOidcConfigRequest = &sRegisterOidcConfigRequest
+var RegisterOidcConfigRequest_networkId = &sRegisterOidcConfigRequest_networkId
+var RegisterOidcConfigRequest_companyId = &sRegisterOidcConfigRequest_companyId
+var RegisterOidcConfigRequest_customUsername = &sRegisterOidcConfigRequest_customUsername
+var RegisterOidcConfigRequest_extraAuthParams = &sRegisterOidcConfigRequest_extraAuthParams
+var RegisterOidcConfigRequest_issuer = &sRegisterOidcConfigRequest_issuer
+var RegisterOidcConfigRequest_scopes = &sRegisterOidcConfigRequest_scopes
+var RegisterOidcConfigRequest_secret = &sRegisterOidcConfigRequest_secret
+var RegisterOidcConfigRequest_ssoTokenBufferMinutes = &sRegisterOidcConfigRequest_ssoTokenBufferMinutes
+var RegisterOidcConfigRequest_userId = &sRegisterOidcConfigRequest_userId
+
+var RegisterOidcConfigResponse = &sRegisterOidcConfigResponse
+var RegisterOidcConfigResponse_applicationName = &sRegisterOidcConfigResponse_applicationName
+var RegisterOidcConfigResponse_clientId = &sRegisterOidcConfigResponse_clientId
+var RegisterOidcConfigResponse_companyId = &sRegisterOidcConfigResponse_companyId
+var RegisterOidcConfigResponse_scopes = &sRegisterOidcConfigResponse_scopes
+var RegisterOidcConfigResponse_issuer = &sRegisterOidcConfigResponse_issuer
+var RegisterOidcConfigResponse_clientSecret = &sRegisterOidcConfigResponse_clientSecret
+var RegisterOidcConfigResponse_secret = &sRegisterOidcConfigResponse_secret
+var RegisterOidcConfigResponse_redirectUrl = &sRegisterOidcConfigResponse_redirectUrl
+var RegisterOidcConfigResponse_userId = &sRegisterOidcConfigResponse_userId
+var RegisterOidcConfigResponse_customUsername = &sRegisterOidcConfigResponse_customUsername
+var RegisterOidcConfigResponse_caCertificate = &sRegisterOidcConfigResponse_caCertificate
+var RegisterOidcConfigResponse_applicationId = &sRegisterOidcConfigResponse_applicationId
+var RegisterOidcConfigResponse_ssoTokenBufferMinutes = &sRegisterOidcConfigResponse_ssoTokenBufferMinutes
+var RegisterOidcConfigResponse_extraAuthParams = &sRegisterOidcConfigResponse_extraAuthParams
+
+var RegisterOidcConfigTestRequest = &sRegisterOidcConfigTestRequest
+var RegisterOidcConfigTestRequest_networkId = &sRegisterOidcConfigTestRequest_networkId
+var RegisterOidcConfigTestRequest_extraAuthParams = &sRegisterOidcConfigTestRequest_extraAuthParams
+var RegisterOidcConfigTestRequest_issuer = &sRegisterOidcConfigTestRequest_issuer
+var RegisterOidcConfigTestRequest_scopes = &sRegisterOidcConfigTestRequest_scopes
+var RegisterOidcConfigTestRequest_certificate = &sRegisterOidcConfigTestRequest_certificate
+
+var RegisterOidcConfigTestResponse = &sRegisterOidcConfigTestResponse
+var RegisterOidcConfigTestResponse_tokenEndpoint = &sRegisterOidcConfigTestResponse_tokenEndpoint
+var RegisterOidcConfigTestResponse_userinfoEndpoint = &sRegisterOidcConfigTestResponse_userinfoEndpoint
+var RegisterOidcConfigTestResponse_responseTypesSupported = &sRegisterOidcConfigTestResponse_responseTypesSupported
+var RegisterOidcConfigTestResponse_scopesSupported = &sRegisterOidcConfigTestResponse_scopesSupported
+var RegisterOidcConfigTestResponse_issuer = &sRegisterOidcConfigTestResponse_issuer
+var RegisterOidcConfigTestResponse_authorizationEndpoint = &sRegisterOidcConfigTestResponse_authorizationEndpoint
+var RegisterOidcConfigTestResponse_endSessionEndpoint = &sRegisterOidcConfigTestResponse_endSessionEndpoint
+var RegisterOidcConfigTestResponse_logoutEndpoint = &sRegisterOidcConfigTestResponse_logoutEndpoint
+var RegisterOidcConfigTestResponse_grantTypesSupported = &sRegisterOidcConfigTestResponse_grantTypesSupported
+var RegisterOidcConfigTestResponse_revocationEndpoint = &sRegisterOidcConfigTestResponse_revocationEndpoint
+var RegisterOidcConfigTestResponse_tokenEndpointAuthMethodsSupported = &sRegisterOidcConfigTestResponse_tokenEndpointAuthMethodsSupported
+var RegisterOidcConfigTestResponse_microsoftMultiRefreshToken = &sRegisterOidcConfigTestResponse_microsoftMultiRefreshToken
+
+var RegisterOpentdfConfigRequest = &sRegisterOpentdfConfigRequest
+var RegisterOpentdfConfigRequest_networkId = &sRegisterOpentdfConfigRequest_networkId
+var RegisterOpentdfConfigRequest_clientId = &sRegisterOpentdfConfigRequest_clientId
+var RegisterOpentdfConfigRequest_clientSecret = &sRegisterOpentdfConfigRequest_clientSecret
+var RegisterOpentdfConfigRequest_domain = &sRegisterOpentdfConfigRequest_domain
+var RegisterOpentdfConfigRequest_provider = &sRegisterOpentdfConfigRequest_provider
+var RegisterOpentdfConfigRequest_dryRun = &sRegisterOpentdfConfigRequest_dryRun
+
+var RegisterOpentdfConfigResponse = &sRegisterOpentdfConfigResponse
+var RegisterOpentdfConfigResponse_clientId = &sRegisterOpentdfConfigResponse_clientId
+var RegisterOpentdfConfigResponse_domain = &sRegisterOpentdfConfigResponse_domain
+var RegisterOpentdfConfigResponse_clientSecret = &sRegisterOpentdfConfigResponse_clientSecret
+var RegisterOpentdfConfigResponse_provider = &sRegisterOpentdfConfigResponse_provider
+
+var UpdateBotRequest = &sUpdateBotRequest
+var UpdateBotRequest_networkId = &sUpdateBotRequest_networkId
+var UpdateBotRequest_botId = &sUpdateBotRequest_botId
+var UpdateBotRequest_displayName = &sUpdateBotRequest_displayName
+var UpdateBotRequest_groupId = &sUpdateBotRequest_groupId
+var UpdateBotRequest_challenge = &sUpdateBotRequest_challenge
+var UpdateBotRequest_suspend = &sUpdateBotRequest_suspend
+
+var UpdateBotResponse = &sUpdateBotResponse
+var UpdateBotResponse_message = &sUpdateBotResponse_message
+
+var UpdateDataRetentionRequest = &sUpdateDataRetentionRequest
+var UpdateDataRetentionRequest_networkId = &sUpdateDataRetentionRequest_networkId
+var UpdateDataRetentionRequest_actionType = &sUpdateDataRetentionRequest_actionType
+
+var UpdateDataRetentionResponse = &sUpdateDataRetentionResponse
+var UpdateDataRetentionResponse_message = &sUpdateDataRetentionResponse_message
+
+var UpdateGuestUserRequest = &sUpdateGuestUserRequest
+var UpdateGuestUserRequest_networkId = &sUpdateGuestUserRequest_networkId
+var UpdateGuestUserRequest_usernameHash = &sUpdateGuestUserRequest_usernameHash
+var UpdateGuestUserRequest_block = &sUpdateGuestUserRequest_block
+
+var UpdateGuestUserResponse = &sUpdateGuestUserResponse
+var UpdateGuestUserResponse_message = &sUpdateGuestUserResponse_message
+
+var UpdateNetworkRequest = &sUpdateNetworkRequest
+var UpdateNetworkRequest_networkId = &sUpdateNetworkRequest_networkId
+var UpdateNetworkRequest_networkName = &sUpdateNetworkRequest_networkName
+var UpdateNetworkRequest_clientToken = &sUpdateNetworkRequest_clientToken
+var UpdateNetworkRequest_encryptionKeyArn = &sUpdateNetworkRequest_encryptionKeyArn
+
+var UpdateNetworkResponse = &sUpdateNetworkResponse
+var UpdateNetworkResponse_message = &sUpdateNetworkResponse_message
+
+var UpdateNetworkSettingsRequest = &sUpdateNetworkSettingsRequest
+var UpdateNetworkSettingsRequest_networkId = &sUpdateNetworkSettingsRequest_networkId
+var UpdateNetworkSettingsRequest_settings = &sUpdateNetworkSettingsRequest_settings
+
+var UpdateNetworkSettingsResponse = &sUpdateNetworkSettingsResponse
+var UpdateNetworkSettingsResponse_settings = &sUpdateNetworkSettingsResponse_settings
+
+var UpdateSecurityGroupRequest = &sUpdateSecurityGroupRequest
+var UpdateSecurityGroupRequest_networkId = &sUpdateSecurityGroupRequest_networkId
+var UpdateSecurityGroupRequest_groupId = &sUpdateSecurityGroupRequest_groupId
+var UpdateSecurityGroupRequest_name = &sUpdateSecurityGroupRequest_name
+var UpdateSecurityGroupRequest_securityGroupSettings = &sUpdateSecurityGroupRequest_securityGroupSettings
+
+var UpdateSecurityGroupResponse = &sUpdateSecurityGroupResponse
+var UpdateSecurityGroupResponse_securityGroup = &sUpdateSecurityGroupResponse_securityGroup
+
+var UpdateUserRequest = &sUpdateUserRequest
+var UpdateUserRequest_networkId = &sUpdateUserRequest_networkId
+var UpdateUserRequest_userId = &sUpdateUserRequest_userId
+var UpdateUserRequest_userDetails = &sUpdateUserRequest_userDetails
+
+var UpdateUserResponse = &sUpdateUserResponse
+var UpdateUserResponse_userId = &sUpdateUserResponse_userId
+var UpdateUserResponse_networkId = &sUpdateUserResponse_networkId
+var UpdateUserResponse_securityGroupIds = &sUpdateUserResponse_securityGroupIds
+var UpdateUserResponse_firstName = &sUpdateUserResponse_firstName
+var UpdateUserResponse_lastName = &sUpdateUserResponse_lastName
+var UpdateUserResponse_middleName = &sUpdateUserResponse_middleName
+var UpdateUserResponse_suspended = &sUpdateUserResponse_suspended
+var UpdateUserResponse_modified = &sUpdateUserResponse_modified
+var UpdateUserResponse_status = &sUpdateUserResponse_status
+var UpdateUserResponse_inviteCode = &sUpdateUserResponse_inviteCode
+var UpdateUserResponse_inviteExpiration = &sUpdateUserResponse_inviteExpiration
+var UpdateUserResponse_codeValidation = &sUpdateUserResponse_codeValidation
+
+var WickrAdminApi = &smithy.ServiceSchema{Schema: &s_WickrAdminApi, Version: "2024-02-01"}

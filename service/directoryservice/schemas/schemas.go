@@ -4,5610 +4,4090 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AcceptSharedDirectory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "AcceptSharedDirectory",
-}, smithy.ShapeTypeOperation, 0)
-
-var AddIpRoutes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "AddIpRoutes",
-}, smithy.ShapeTypeOperation, 0)
-
-var AddRegion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "AddRegion",
-}, smithy.ShapeTypeOperation, 0)
-
-var AddTagsToResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "AddTagsToResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var CancelSchemaExtension = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CancelSchemaExtension",
-}, smithy.ShapeTypeOperation, 0)
-
-var ConnectDirectory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "ConnectDirectory",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateAlias = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CreateAlias",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateComputer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CreateComputer",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateConditionalForwarder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CreateConditionalForwarder",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateDirectory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CreateDirectory",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateHybridAD = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CreateHybridAD",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateLogSubscription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CreateLogSubscription",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateMicrosoftAD = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CreateMicrosoftAD",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateSnapshot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CreateSnapshot",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateTrust = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CreateTrust",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteADAssessment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DeleteADAssessment",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteConditionalForwarder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DeleteConditionalForwarder",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteDirectory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DeleteDirectory",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteLogSubscription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DeleteLogSubscription",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteSnapshot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DeleteSnapshot",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteTrust = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DeleteTrust",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeregisterCertificate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DeregisterCertificate",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeregisterEventTopic = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DeregisterEventTopic",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeADAssessment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeADAssessment",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeCAEnrollmentPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeCAEnrollmentPolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeCertificate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeCertificate",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeClientAuthenticationSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeClientAuthenticationSettings",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeConditionalForwarders = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeConditionalForwarders",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeDirectories = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeDirectories",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeDirectoryDataAccess = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeDirectoryDataAccess",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeDomainControllers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeDomainControllers",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeEventTopics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeEventTopics",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeHybridADUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeHybridADUpdate",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeLDAPSSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeLDAPSSettings",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeRegions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeRegions",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeSettings",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeSharedDirectories = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeSharedDirectories",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeSnapshots = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeSnapshots",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeTrusts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeTrusts",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeUpdateDirectory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeUpdateDirectory",
-}, smithy.ShapeTypeOperation, 0)
-
-var DisableCAEnrollmentPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DisableCAEnrollmentPolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var DisableClientAuthentication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DisableClientAuthentication",
-}, smithy.ShapeTypeOperation, 0)
-
-var DisableDirectoryDataAccess = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DisableDirectoryDataAccess",
-}, smithy.ShapeTypeOperation, 0)
-
-var DisableLDAPS = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DisableLDAPS",
-}, smithy.ShapeTypeOperation, 0)
-
-var DisableRadius = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DisableRadius",
-}, smithy.ShapeTypeOperation, 0)
-
-var DisableSso = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DisableSso",
-}, smithy.ShapeTypeOperation, 0)
-
-var EnableCAEnrollmentPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "EnableCAEnrollmentPolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var EnableClientAuthentication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "EnableClientAuthentication",
-}, smithy.ShapeTypeOperation, 0)
-
-var EnableDirectoryDataAccess = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "EnableDirectoryDataAccess",
-}, smithy.ShapeTypeOperation, 0)
-
-var EnableLDAPS = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "EnableLDAPS",
-}, smithy.ShapeTypeOperation, 0)
-
-var EnableRadius = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "EnableRadius",
-}, smithy.ShapeTypeOperation, 0)
-
-var EnableSso = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "EnableSso",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetDirectoryLimits = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "GetDirectoryLimits",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetSnapshotLimits = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "GetSnapshotLimits",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListADAssessments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "ListADAssessments",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListCertificates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "ListCertificates",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListIpRoutes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "ListIpRoutes",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListLogSubscriptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "ListLogSubscriptions",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListSchemaExtensions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "ListSchemaExtensions",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var RegisterCertificate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "RegisterCertificate",
-}, smithy.ShapeTypeOperation, 0)
-
-var RegisterEventTopic = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "RegisterEventTopic",
-}, smithy.ShapeTypeOperation, 0)
-
-var RejectSharedDirectory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "RejectSharedDirectory",
-}, smithy.ShapeTypeOperation, 0)
-
-var RemoveIpRoutes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "RemoveIpRoutes",
-}, smithy.ShapeTypeOperation, 0)
-
-var RemoveRegion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "RemoveRegion",
-}, smithy.ShapeTypeOperation, 0)
-
-var RemoveTagsFromResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "RemoveTagsFromResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var ResetUserPassword = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "ResetUserPassword",
-}, smithy.ShapeTypeOperation, 0)
-
-var RestoreFromSnapshot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "RestoreFromSnapshot",
-}, smithy.ShapeTypeOperation, 0)
-
-var ShareDirectory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "ShareDirectory",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartADAssessment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "StartADAssessment",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartSchemaExtension = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "StartSchemaExtension",
-}, smithy.ShapeTypeOperation, 0)
-
-var UnshareDirectory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "UnshareDirectory",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateConditionalForwarder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "UpdateConditionalForwarder",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateDirectorySetup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "UpdateDirectorySetup",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateHybridAD = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "UpdateHybridAD",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateNumberOfDomainControllers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "UpdateNumberOfDomainControllers",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateRadius = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "UpdateRadius",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "UpdateSettings",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateTrust = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "UpdateTrust",
-}, smithy.ShapeTypeOperation, 0)
-
-var VerifyTrust = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "VerifyTrust",
-}, smithy.ShapeTypeOperation, 0)
-
-var _DirectoryService_20150416 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DirectoryService_20150416",
-}, smithy.ShapeTypeService, 0, &smithytraits.XMLNamespace{URI: "http://directoryservice.amazonaws.com/doc/2015-04-16/"})
-
-var DirectoryService_20150416 = smithy.NewServiceSchema(_DirectoryService_20150416, "2015-04-16")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var AccessDeniedException_Message *smithy.Schema
-
-var AccessDeniedException_RequestId *smithy.Schema
-
-var _AccessUrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "AccessUrl",
-}, smithy.ShapeTypeString, 0)
-
-var ADAssessmentLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "ADAssessmentLimitExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var ADAssessmentLimitExceededException_Message *smithy.Schema
-
-var ADAssessmentLimitExceededException_RequestId *smithy.Schema
-
-var _AddedDateTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "AddedDateTime",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _AdditionalRegions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "AdditionalRegions",
-}, smithy.ShapeTypeList, 1)
-var _AdditionalRegions_member *smithy.Schema
-
-var _AliasName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "AliasName",
-}, smithy.ShapeTypeString, 0)
-
-var Assessment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "Assessment",
-}, smithy.ShapeTypeStructure, 15)
-var Assessment_AssessmentId *smithy.Schema
-
-var Assessment_DirectoryId *smithy.Schema
-
-var Assessment_DnsName *smithy.Schema
-
-var Assessment_StartTime *smithy.Schema
-
-var Assessment_LastUpdateDateTime *smithy.Schema
-
-var Assessment_Status *smithy.Schema
-
-var Assessment_StatusCode *smithy.Schema
-
-var Assessment_StatusReason *smithy.Schema
-
-var Assessment_CustomerDnsIps *smithy.Schema
-
-var Assessment_VpcId *smithy.Schema
-
-var Assessment_SubnetIds *smithy.Schema
-
-var Assessment_SecurityGroupIds *smithy.Schema
-
-var Assessment_SelfManagedInstanceIds *smithy.Schema
-
-var Assessment_ReportType *smithy.Schema
-
-var Assessment_Version *smithy.Schema
-
-var AssessmentConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "AssessmentConfiguration",
-}, smithy.ShapeTypeStructure, 5)
-var AssessmentConfiguration_CustomerDnsIps *smithy.Schema
-
-var AssessmentConfiguration_DnsName *smithy.Schema
-
-var AssessmentConfiguration_VpcSettings *smithy.Schema
-
-var AssessmentConfiguration_InstanceIds *smithy.Schema
-
-var AssessmentConfiguration_SecurityGroupIds *smithy.Schema
-
-var _AssessmentId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "AssessmentId",
-}, smithy.ShapeTypeString, 0)
-
-var _AssessmentInstanceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "AssessmentInstanceId",
-}, smithy.ShapeTypeString, 0)
-
-var _AssessmentInstanceIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "AssessmentInstanceIds",
-}, smithy.ShapeTypeList, 1)
-var _AssessmentInstanceIds_member *smithy.Schema
-
-var _AssessmentLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "AssessmentLimit",
-}, smithy.ShapeTypeInteger, 0)
-
-var AssessmentReport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "AssessmentReport",
-}, smithy.ShapeTypeStructure, 2)
-var AssessmentReport_DomainControllerIp *smithy.Schema
-
-var AssessmentReport_Validations *smithy.Schema
-
-var _AssessmentReports = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "AssessmentReports",
-}, smithy.ShapeTypeList, 1)
-var _AssessmentReports_member *smithy.Schema
-
-var _AssessmentReportType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "AssessmentReportType",
-}, smithy.ShapeTypeString, 0)
-
-var _Assessments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "Assessments",
-}, smithy.ShapeTypeList, 1)
-var _Assessments_member *smithy.Schema
-
-var _AssessmentStartTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "AssessmentStartTime",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _AssessmentStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "AssessmentStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _AssessmentStatusCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "AssessmentStatusCode",
-}, smithy.ShapeTypeString, 0)
-
-var _AssessmentStatusReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "AssessmentStatusReason",
-}, smithy.ShapeTypeString, 0)
-
-var AssessmentSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "AssessmentSummary",
-}, smithy.ShapeTypeStructure, 8)
-var AssessmentSummary_AssessmentId *smithy.Schema
-
-var AssessmentSummary_DirectoryId *smithy.Schema
-
-var AssessmentSummary_DnsName *smithy.Schema
-
-var AssessmentSummary_StartTime *smithy.Schema
-
-var AssessmentSummary_LastUpdateDateTime *smithy.Schema
-
-var AssessmentSummary_Status *smithy.Schema
-
-var AssessmentSummary_CustomerDnsIps *smithy.Schema
-
-var AssessmentSummary_ReportType *smithy.Schema
-
-var AssessmentValidation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "AssessmentValidation",
-}, smithy.ShapeTypeStructure, 7)
-var AssessmentValidation_Category *smithy.Schema
-
-var AssessmentValidation_Name *smithy.Schema
-
-var AssessmentValidation_Status *smithy.Schema
-
-var AssessmentValidation_StatusCode *smithy.Schema
-
-var AssessmentValidation_StatusReason *smithy.Schema
-
-var AssessmentValidation_StartTime *smithy.Schema
-
-var AssessmentValidation_LastUpdateDateTime *smithy.Schema
-
-var _AssessmentValidationCategory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "AssessmentValidationCategory",
-}, smithy.ShapeTypeString, 0)
-
-var _AssessmentValidationName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "AssessmentValidationName",
-}, smithy.ShapeTypeString, 0)
-
-var _AssessmentValidations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "AssessmentValidations",
-}, smithy.ShapeTypeList, 1)
-var _AssessmentValidations_member *smithy.Schema
-
-var _AssessmentValidationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "AssessmentValidationStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _AssessmentValidationStatusCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "AssessmentValidationStatusCode",
-}, smithy.ShapeTypeString, 0)
-
-var _AssessmentValidationStatusReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "AssessmentValidationStatusReason",
-}, smithy.ShapeTypeString, 0)
-
-var _AssessmentValidationTimeStamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "AssessmentValidationTimeStamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _AssessmentVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "AssessmentVersion",
-}, smithy.ShapeTypeString, 0)
-
-var Attribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "Attribute",
-}, smithy.ShapeTypeStructure, 2)
-var Attribute_Name *smithy.Schema
-
-var Attribute_Value *smithy.Schema
-
-var _AttributeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "AttributeName",
-}, smithy.ShapeTypeString, 0)
-
-var _Attributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "Attributes",
-}, smithy.ShapeTypeList, 1)
-var _Attributes_member *smithy.Schema
-
-var _AttributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "AttributeValue",
-}, smithy.ShapeTypeString, 0)
-
-var AuthenticationFailedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "AuthenticationFailedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var AuthenticationFailedException_Message *smithy.Schema
-
-var AuthenticationFailedException_RequestId *smithy.Schema
-
-var _AvailabilityZone = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "AvailabilityZone",
-}, smithy.ShapeTypeString, 0)
-
-var _AvailabilityZones = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "AvailabilityZones",
-}, smithy.ShapeTypeList, 1)
-var _AvailabilityZones_member *smithy.Schema
-
-var CaEnrollmentPolicyStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CaEnrollmentPolicyStatus",
-}, smithy.ShapeTypeEnum, 6)
-var CaEnrollmentPolicyStatus_IN_PROGRESS *smithy.Schema
-
-var CaEnrollmentPolicyStatus_SUCCESS *smithy.Schema
-
-var CaEnrollmentPolicyStatus_FAILED *smithy.Schema
-
-var CaEnrollmentPolicyStatus_DISABLING *smithy.Schema
-
-var CaEnrollmentPolicyStatus_DISABLED *smithy.Schema
-
-var CaEnrollmentPolicyStatus_IMPAIRED *smithy.Schema
-
-var _CaEnrollmentPolicyStatusReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CaEnrollmentPolicyStatusReason",
-}, smithy.ShapeTypeString, 0)
-
-var Certificate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "Certificate",
-}, smithy.ShapeTypeStructure, 8)
-var Certificate_CertificateId *smithy.Schema
-
-var Certificate_State *smithy.Schema
-
-var Certificate_StateReason *smithy.Schema
-
-var Certificate_CommonName *smithy.Schema
-
-var Certificate_RegisteredDateTime *smithy.Schema
-
-var Certificate_ExpiryDateTime *smithy.Schema
-
-var Certificate_Type *smithy.Schema
-
-var Certificate_ClientCertAuthSettings *smithy.Schema
-
-var CertificateAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CertificateAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var CertificateAlreadyExistsException_Message *smithy.Schema
-
-var CertificateAlreadyExistsException_RequestId *smithy.Schema
-
-var _CertificateCN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CertificateCN",
-}, smithy.ShapeTypeString, 0)
-
-var _CertificateData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CertificateData",
-}, smithy.ShapeTypeString, 0)
-
-var CertificateDoesNotExistException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CertificateDoesNotExistException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var CertificateDoesNotExistException_Message *smithy.Schema
-
-var CertificateDoesNotExistException_RequestId *smithy.Schema
-
-var _CertificateExpiryDateTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CertificateExpiryDateTime",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _CertificateId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CertificateId",
-}, smithy.ShapeTypeString, 0)
-
-var CertificateInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CertificateInfo",
-}, smithy.ShapeTypeStructure, 5)
-var CertificateInfo_CertificateId *smithy.Schema
-
-var CertificateInfo_CommonName *smithy.Schema
-
-var CertificateInfo_State *smithy.Schema
-
-var CertificateInfo_ExpiryDateTime *smithy.Schema
-
-var CertificateInfo_Type *smithy.Schema
-
-var CertificateInUseException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CertificateInUseException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var CertificateInUseException_Message *smithy.Schema
-
-var CertificateInUseException_RequestId *smithy.Schema
-
-var CertificateLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CertificateLimitExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var CertificateLimitExceededException_Message *smithy.Schema
-
-var CertificateLimitExceededException_RequestId *smithy.Schema
-
-var _CertificateRegisteredDateTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CertificateRegisteredDateTime",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _CertificatesInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CertificatesInfo",
-}, smithy.ShapeTypeList, 1)
-var _CertificatesInfo_member *smithy.Schema
-
-var CertificateState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CertificateState",
-}, smithy.ShapeTypeEnum, 6)
-var CertificateState_REGISTERING *smithy.Schema
-
-var CertificateState_REGISTERED *smithy.Schema
-
-var CertificateState_REGISTER_FAILED *smithy.Schema
-
-var CertificateState_DEREGISTERING *smithy.Schema
-
-var CertificateState_DEREGISTERED *smithy.Schema
-
-var CertificateState_DEREGISTER_FAILED *smithy.Schema
-
-var _CertificateStateReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CertificateStateReason",
-}, smithy.ShapeTypeString, 0)
-
-var CertificateType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CertificateType",
-}, smithy.ShapeTypeEnum, 2)
-var CertificateType_CLIENT_CERT_AUTH *smithy.Schema
-
-var CertificateType_CLIENT_LDAPS *smithy.Schema
-
-var _CidrIp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CidrIp",
-}, smithy.ShapeTypeString, 0)
-
-var _CidrIps = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CidrIps",
-}, smithy.ShapeTypeList, 1)
-var _CidrIps_member *smithy.Schema
-
-var _CidrIpv6 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CidrIpv6",
-}, smithy.ShapeTypeString, 0)
-
-var _CidrIpv6s = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CidrIpv6s",
-}, smithy.ShapeTypeList, 1)
-var _CidrIpv6s_member *smithy.Schema
-
-var ClientAuthenticationSettingInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "ClientAuthenticationSettingInfo",
-}, smithy.ShapeTypeStructure, 3)
-var ClientAuthenticationSettingInfo_Type *smithy.Schema
-
-var ClientAuthenticationSettingInfo_Status *smithy.Schema
-
-var ClientAuthenticationSettingInfo_LastUpdatedDateTime *smithy.Schema
-
-var _ClientAuthenticationSettingsInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "ClientAuthenticationSettingsInfo",
-}, smithy.ShapeTypeList, 1)
-var _ClientAuthenticationSettingsInfo_member *smithy.Schema
-
-var ClientAuthenticationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "ClientAuthenticationStatus",
-}, smithy.ShapeTypeEnum, 2)
-var ClientAuthenticationStatus_ENABLED *smithy.Schema
-
-var ClientAuthenticationStatus_DISABLED *smithy.Schema
-
-var ClientAuthenticationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "ClientAuthenticationType",
-}, smithy.ShapeTypeEnum, 2)
-var ClientAuthenticationType_SMART_CARD *smithy.Schema
-
-var ClientAuthenticationType_SMART_CARD_OR_PASSWORD *smithy.Schema
-
-var ClientCertAuthSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "ClientCertAuthSettings",
-}, smithy.ShapeTypeStructure, 1)
-var ClientCertAuthSettings_OCSPUrl *smithy.Schema
-
-var ClientException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "ClientException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var ClientException_Message *smithy.Schema
-
-var ClientException_RequestId *smithy.Schema
-
-var _CloudOnlyDirectoriesLimitReached = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CloudOnlyDirectoriesLimitReached",
-}, smithy.ShapeTypeBoolean, 0)
-
-var Computer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "Computer",
-}, smithy.ShapeTypeStructure, 3)
-var Computer_ComputerId *smithy.Schema
-
-var Computer_ComputerName *smithy.Schema
-
-var Computer_ComputerAttributes *smithy.Schema
-
-var _ComputerName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "ComputerName",
-}, smithy.ShapeTypeString, 0)
-
-var _ComputerPassword = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "ComputerPassword",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ConditionalForwarder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "ConditionalForwarder",
-}, smithy.ShapeTypeStructure, 4)
-var ConditionalForwarder_RemoteDomainName *smithy.Schema
-
-var ConditionalForwarder_DnsIpAddrs *smithy.Schema
-
-var ConditionalForwarder_DnsIpv6Addrs *smithy.Schema
-
-var ConditionalForwarder_ReplicationScope *smithy.Schema
-
-var _ConditionalForwarders = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "ConditionalForwarders",
-}, smithy.ShapeTypeList, 1)
-var _ConditionalForwarders_member *smithy.Schema
-
-var _ConnectedDirectoriesLimitReached = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "ConnectedDirectoriesLimitReached",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _ConnectPassword = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "ConnectPassword",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _CreatedDateTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CreatedDateTime",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _CreateSnapshotBeforeSchemaExtension = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CreateSnapshotBeforeSchemaExtension",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _CreateSnapshotBeforeUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CreateSnapshotBeforeUpdate",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _CustomerDnsIps = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CustomerDnsIps",
-}, smithy.ShapeTypeList, 1)
-var _CustomerDnsIps_member *smithy.Schema
-
-var _CustomerId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CustomerId",
-}, smithy.ShapeTypeString, 0)
-
-var _CustomerUserName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CustomerUserName",
-}, smithy.ShapeTypeString, 0)
-
-var DataAccessStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DataAccessStatus",
-}, smithy.ShapeTypeEnum, 5)
-var DataAccessStatus_DISABLED *smithy.Schema
-
-var DataAccessStatus_DISABLING *smithy.Schema
-
-var DataAccessStatus_ENABLED *smithy.Schema
-
-var DataAccessStatus_ENABLING *smithy.Schema
-
-var DataAccessStatus_FAILED *smithy.Schema
-
-var _DeleteAssociatedConditionalForwarder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DeleteAssociatedConditionalForwarder",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _Description = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "Description",
-}, smithy.ShapeTypeString, 0)
-
-var _DesiredNumberOfDomainControllers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DesiredNumberOfDomainControllers",
-}, smithy.ShapeTypeInteger, 0)
-
-var DirectoryAlreadyInRegionException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DirectoryAlreadyInRegionException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var DirectoryAlreadyInRegionException_Message *smithy.Schema
-
-var DirectoryAlreadyInRegionException_RequestId *smithy.Schema
-
-var DirectoryAlreadySharedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DirectoryAlreadySharedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var DirectoryAlreadySharedException_Message *smithy.Schema
-
-var DirectoryAlreadySharedException_RequestId *smithy.Schema
-
-var _DirectoryConfigurationSettingAllowedValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DirectoryConfigurationSettingAllowedValues",
-}, smithy.ShapeTypeString, 0)
-
-var _DirectoryConfigurationSettingDataType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DirectoryConfigurationSettingDataType",
-}, smithy.ShapeTypeString, 0)
-
-var _DirectoryConfigurationSettingLastRequestedDateTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DirectoryConfigurationSettingLastRequestedDateTime",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _DirectoryConfigurationSettingLastUpdatedDateTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DirectoryConfigurationSettingLastUpdatedDateTime",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _DirectoryConfigurationSettingName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DirectoryConfigurationSettingName",
-}, smithy.ShapeTypeString, 0)
-
-var _DirectoryConfigurationSettingRequestDetailedStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DirectoryConfigurationSettingRequestDetailedStatus",
-}, smithy.ShapeTypeMap, 2)
-var _DirectoryConfigurationSettingRequestDetailedStatus_key *smithy.Schema
-
-var _DirectoryConfigurationSettingRequestDetailedStatus_value *smithy.Schema
-
-var _DirectoryConfigurationSettingRequestStatusMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DirectoryConfigurationSettingRequestStatusMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _DirectoryConfigurationSettingType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DirectoryConfigurationSettingType",
-}, smithy.ShapeTypeString, 0)
-
-var _DirectoryConfigurationSettingValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DirectoryConfigurationSettingValue",
-}, smithy.ShapeTypeString, 0)
-
-var DirectoryConfigurationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DirectoryConfigurationStatus",
-}, smithy.ShapeTypeEnum, 5)
-var DirectoryConfigurationStatus_REQUESTED *smithy.Schema
-
-var DirectoryConfigurationStatus_UPDATING *smithy.Schema
-
-var DirectoryConfigurationStatus_UPDATED *smithy.Schema
-
-var DirectoryConfigurationStatus_FAILED *smithy.Schema
-
-var DirectoryConfigurationStatus_DEFAULT *smithy.Schema
-
-var DirectoryConnectSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DirectoryConnectSettings",
-}, smithy.ShapeTypeStructure, 5)
-var DirectoryConnectSettings_VpcId *smithy.Schema
-
-var DirectoryConnectSettings_SubnetIds *smithy.Schema
-
-var DirectoryConnectSettings_CustomerDnsIps *smithy.Schema
-
-var DirectoryConnectSettings_CustomerDnsIpsV6 *smithy.Schema
-
-var DirectoryConnectSettings_CustomerUserName *smithy.Schema
-
-var DirectoryConnectSettingsDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DirectoryConnectSettingsDescription",
-}, smithy.ShapeTypeStructure, 7)
-var DirectoryConnectSettingsDescription_VpcId *smithy.Schema
-
-var DirectoryConnectSettingsDescription_SubnetIds *smithy.Schema
-
-var DirectoryConnectSettingsDescription_CustomerUserName *smithy.Schema
-
-var DirectoryConnectSettingsDescription_SecurityGroupId *smithy.Schema
-
-var DirectoryConnectSettingsDescription_AvailabilityZones *smithy.Schema
-
-var DirectoryConnectSettingsDescription_ConnectIps *smithy.Schema
-
-var DirectoryConnectSettingsDescription_ConnectIpsV6 *smithy.Schema
-
-var DirectoryDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DirectoryDescription",
-}, smithy.ShapeTypeStructure, 29)
-var DirectoryDescription_DirectoryId *smithy.Schema
-
-var DirectoryDescription_Name *smithy.Schema
-
-var DirectoryDescription_ShortName *smithy.Schema
-
-var DirectoryDescription_Size *smithy.Schema
-
-var DirectoryDescription_Edition *smithy.Schema
-
-var DirectoryDescription_Alias *smithy.Schema
-
-var DirectoryDescription_AccessUrl *smithy.Schema
-
-var DirectoryDescription_Description *smithy.Schema
-
-var DirectoryDescription_DnsIpAddrs *smithy.Schema
-
-var DirectoryDescription_DnsIpv6Addrs *smithy.Schema
-
-var DirectoryDescription_Stage *smithy.Schema
-
-var DirectoryDescription_ShareStatus *smithy.Schema
-
-var DirectoryDescription_ShareMethod *smithy.Schema
-
-var DirectoryDescription_ShareNotes *smithy.Schema
-
-var DirectoryDescription_LaunchTime *smithy.Schema
-
-var DirectoryDescription_StageLastUpdatedDateTime *smithy.Schema
-
-var DirectoryDescription_Type *smithy.Schema
-
-var DirectoryDescription_VpcSettings *smithy.Schema
-
-var DirectoryDescription_ConnectSettings *smithy.Schema
-
-var DirectoryDescription_RadiusSettings *smithy.Schema
-
-var DirectoryDescription_RadiusStatus *smithy.Schema
-
-var DirectoryDescription_StageReason *smithy.Schema
-
-var DirectoryDescription_SsoEnabled *smithy.Schema
-
-var DirectoryDescription_DesiredNumberOfDomainControllers *smithy.Schema
-
-var DirectoryDescription_OwnerDirectoryDescription *smithy.Schema
-
-var DirectoryDescription_RegionsInfo *smithy.Schema
-
-var DirectoryDescription_OsVersion *smithy.Schema
-
-var DirectoryDescription_HybridSettings *smithy.Schema
-
-var DirectoryDescription_NetworkType *smithy.Schema
-
-var _DirectoryDescriptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DirectoryDescriptions",
-}, smithy.ShapeTypeList, 1)
-var _DirectoryDescriptions_member *smithy.Schema
-
-var DirectoryDoesNotExistException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DirectoryDoesNotExistException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var DirectoryDoesNotExistException_Message *smithy.Schema
-
-var DirectoryDoesNotExistException_RequestId *smithy.Schema
-
-var DirectoryEdition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DirectoryEdition",
-}, smithy.ShapeTypeEnum, 3)
-var DirectoryEdition_ENTERPRISE *smithy.Schema
-
-var DirectoryEdition_STANDARD *smithy.Schema
-
-var DirectoryEdition_HYBRID *smithy.Schema
-
-var _DirectoryId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DirectoryId",
-}, smithy.ShapeTypeString, 0)
-
-var _DirectoryIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DirectoryIds",
-}, smithy.ShapeTypeList, 1)
-var _DirectoryIds_member *smithy.Schema
-
-var DirectoryInDesiredStateException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DirectoryInDesiredStateException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var DirectoryInDesiredStateException_Message *smithy.Schema
-
-var DirectoryInDesiredStateException_RequestId *smithy.Schema
-
-var DirectoryLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DirectoryLimitExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var DirectoryLimitExceededException_Message *smithy.Schema
-
-var DirectoryLimitExceededException_RequestId *smithy.Schema
-
-var DirectoryLimits = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DirectoryLimits",
-}, smithy.ShapeTypeStructure, 9)
-var DirectoryLimits_CloudOnlyDirectoriesLimit *smithy.Schema
-
-var DirectoryLimits_CloudOnlyDirectoriesCurrentCount *smithy.Schema
-
-var DirectoryLimits_CloudOnlyDirectoriesLimitReached *smithy.Schema
-
-var DirectoryLimits_CloudOnlyMicrosoftADLimit *smithy.Schema
-
-var DirectoryLimits_CloudOnlyMicrosoftADCurrentCount *smithy.Schema
-
-var DirectoryLimits_CloudOnlyMicrosoftADLimitReached *smithy.Schema
-
-var DirectoryLimits_ConnectedDirectoriesLimit *smithy.Schema
-
-var DirectoryLimits_ConnectedDirectoriesCurrentCount *smithy.Schema
-
-var DirectoryLimits_ConnectedDirectoriesLimitReached *smithy.Schema
-
-var _DirectoryName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DirectoryName",
-}, smithy.ShapeTypeString, 0)
-
-var DirectoryNotSharedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DirectoryNotSharedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var DirectoryNotSharedException_Message *smithy.Schema
-
-var DirectoryNotSharedException_RequestId *smithy.Schema
-
-var _DirectoryShortName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DirectoryShortName",
-}, smithy.ShapeTypeString, 0)
-
-var DirectorySize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DirectorySize",
-}, smithy.ShapeTypeEnum, 2)
-var DirectorySize_SMALL *smithy.Schema
-
-var DirectorySize_LARGE *smithy.Schema
-
-var DirectorySizeUpdateSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DirectorySizeUpdateSettings",
-}, smithy.ShapeTypeStructure, 1)
-var DirectorySizeUpdateSettings_DirectorySize *smithy.Schema
-
-var DirectoryStage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DirectoryStage",
-}, smithy.ShapeTypeEnum, 12)
-var DirectoryStage_REQUESTED *smithy.Schema
-
-var DirectoryStage_CREATING *smithy.Schema
-
-var DirectoryStage_CREATED *smithy.Schema
-
-var DirectoryStage_ACTIVE *smithy.Schema
-
-var DirectoryStage_INOPERABLE *smithy.Schema
-
-var DirectoryStage_IMPAIRED *smithy.Schema
-
-var DirectoryStage_RESTORING *smithy.Schema
-
-var DirectoryStage_RESTOREFAILED *smithy.Schema
-
-var DirectoryStage_DELETING *smithy.Schema
-
-var DirectoryStage_DELETED *smithy.Schema
-
-var DirectoryStage_FAILED *smithy.Schema
-
-var DirectoryStage_UPDATING *smithy.Schema
-
-var DirectoryType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DirectoryType",
-}, smithy.ShapeTypeEnum, 4)
-var DirectoryType_SIMPLE_AD *smithy.Schema
-
-var DirectoryType_AD_CONNECTOR *smithy.Schema
-
-var DirectoryType_MICROSOFT_AD *smithy.Schema
-
-var DirectoryType_SHARED_MICROSOFT_AD *smithy.Schema
-
-var DirectoryUnavailableException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DirectoryUnavailableException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var DirectoryUnavailableException_Message *smithy.Schema
-
-var DirectoryUnavailableException_RequestId *smithy.Schema
-
-var DirectoryVpcSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DirectoryVpcSettings",
-}, smithy.ShapeTypeStructure, 2)
-var DirectoryVpcSettings_VpcId *smithy.Schema
-
-var DirectoryVpcSettings_SubnetIds *smithy.Schema
-
-var DirectoryVpcSettingsDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DirectoryVpcSettingsDescription",
-}, smithy.ShapeTypeStructure, 4)
-var DirectoryVpcSettingsDescription_VpcId *smithy.Schema
-
-var DirectoryVpcSettingsDescription_SubnetIds *smithy.Schema
-
-var DirectoryVpcSettingsDescription_SecurityGroupId *smithy.Schema
-
-var DirectoryVpcSettingsDescription_AvailabilityZones *smithy.Schema
-
-var DisableAlreadyInProgressException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DisableAlreadyInProgressException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var DisableAlreadyInProgressException_Message *smithy.Schema
-
-var DisableAlreadyInProgressException_RequestId *smithy.Schema
-
-var _DnsIpAddrs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DnsIpAddrs",
-}, smithy.ShapeTypeList, 1)
-var _DnsIpAddrs_member *smithy.Schema
-
-var _DnsIpv6Addrs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DnsIpv6Addrs",
-}, smithy.ShapeTypeList, 1)
-var _DnsIpv6Addrs_member *smithy.Schema
-
-var DomainController = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DomainController",
-}, smithy.ShapeTypeStructure, 11)
-var DomainController_DirectoryId *smithy.Schema
-
-var DomainController_DomainControllerId *smithy.Schema
-
-var DomainController_DnsIpAddr *smithy.Schema
-
-var DomainController_DnsIpv6Addr *smithy.Schema
-
-var DomainController_VpcId *smithy.Schema
-
-var DomainController_SubnetId *smithy.Schema
-
-var DomainController_AvailabilityZone *smithy.Schema
-
-var DomainController_Status *smithy.Schema
-
-var DomainController_StatusReason *smithy.Schema
-
-var DomainController_LaunchTime *smithy.Schema
-
-var DomainController_StatusLastUpdatedDateTime *smithy.Schema
-
-var _DomainControllerId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DomainControllerId",
-}, smithy.ShapeTypeString, 0)
-
-var _DomainControllerIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DomainControllerIds",
-}, smithy.ShapeTypeList, 1)
-var _DomainControllerIds_member *smithy.Schema
-
-var DomainControllerLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DomainControllerLimitExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var DomainControllerLimitExceededException_Message *smithy.Schema
-
-var DomainControllerLimitExceededException_RequestId *smithy.Schema
-
-var _DomainControllers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DomainControllers",
-}, smithy.ShapeTypeList, 1)
-var _DomainControllers_member *smithy.Schema
-
-var DomainControllerStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DomainControllerStatus",
-}, smithy.ShapeTypeEnum, 8)
-var DomainControllerStatus_CREATING *smithy.Schema
-
-var DomainControllerStatus_ACTIVE *smithy.Schema
-
-var DomainControllerStatus_IMPAIRED *smithy.Schema
-
-var DomainControllerStatus_RESTORING *smithy.Schema
-
-var DomainControllerStatus_DELETING *smithy.Schema
-
-var DomainControllerStatus_DELETED *smithy.Schema
-
-var DomainControllerStatus_FAILED *smithy.Schema
-
-var DomainControllerStatus_UPDATING *smithy.Schema
-
-var _DomainControllerStatusReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DomainControllerStatusReason",
-}, smithy.ShapeTypeString, 0)
-
-var EnableAlreadyInProgressException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "EnableAlreadyInProgressException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var EnableAlreadyInProgressException_Message *smithy.Schema
-
-var EnableAlreadyInProgressException_RequestId *smithy.Schema
-
-var _EndDateTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "EndDateTime",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var EntityAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "EntityAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var EntityAlreadyExistsException_Message *smithy.Schema
-
-var EntityAlreadyExistsException_RequestId *smithy.Schema
-
-var EntityDoesNotExistException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "EntityDoesNotExistException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var EntityDoesNotExistException_Message *smithy.Schema
-
-var EntityDoesNotExistException_RequestId *smithy.Schema
-
-var EventTopic = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "EventTopic",
-}, smithy.ShapeTypeStructure, 5)
-var EventTopic_DirectoryId *smithy.Schema
-
-var EventTopic_TopicName *smithy.Schema
-
-var EventTopic_TopicArn *smithy.Schema
-
-var EventTopic_CreatedDateTime *smithy.Schema
-
-var EventTopic_Status *smithy.Schema
-
-var _EventTopics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "EventTopics",
-}, smithy.ShapeTypeList, 1)
-var _EventTopics_member *smithy.Schema
-
-var _ExceptionMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "ExceptionMessage",
-}, smithy.ShapeTypeString, 0)
-
-var HybridAdministratorAccountUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "HybridAdministratorAccountUpdate",
-}, smithy.ShapeTypeStructure, 1)
-var HybridAdministratorAccountUpdate_SecretArn *smithy.Schema
-
-var HybridCustomerInstancesSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "HybridCustomerInstancesSettings",
-}, smithy.ShapeTypeStructure, 2)
-var HybridCustomerInstancesSettings_CustomerDnsIps *smithy.Schema
-
-var HybridCustomerInstancesSettings_InstanceIds *smithy.Schema
-
-var HybridSettingsDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "HybridSettingsDescription",
-}, smithy.ShapeTypeStructure, 2)
-var HybridSettingsDescription_SelfManagedDnsIpAddrs *smithy.Schema
-
-var HybridSettingsDescription_SelfManagedInstanceIds *smithy.Schema
-
-var HybridUpdateActivities = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "HybridUpdateActivities",
-}, smithy.ShapeTypeStructure, 2)
-var HybridUpdateActivities_SelfManagedInstances *smithy.Schema
-
-var HybridUpdateActivities_HybridAdministratorAccount *smithy.Schema
-
-var _HybridUpdateInfoEntries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "HybridUpdateInfoEntries",
-}, smithy.ShapeTypeList, 1)
-var _HybridUpdateInfoEntries_member *smithy.Schema
-
-var HybridUpdateInfoEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "HybridUpdateInfoEntry",
-}, smithy.ShapeTypeStructure, 8)
-var HybridUpdateInfoEntry_Status *smithy.Schema
-
-var HybridUpdateInfoEntry_StatusReason *smithy.Schema
-
-var HybridUpdateInfoEntry_InitiatedBy *smithy.Schema
-
-var HybridUpdateInfoEntry_NewValue *smithy.Schema
-
-var HybridUpdateInfoEntry_PreviousValue *smithy.Schema
-
-var HybridUpdateInfoEntry_StartTime *smithy.Schema
-
-var HybridUpdateInfoEntry_LastUpdatedDateTime *smithy.Schema
-
-var HybridUpdateInfoEntry_AssessmentId *smithy.Schema
-
-var HybridUpdateType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "HybridUpdateType",
-}, smithy.ShapeTypeEnum, 2)
-var HybridUpdateType_SELF_MANAGED_INSTANCES *smithy.Schema
-
-var HybridUpdateType_HYBRID_ADMINISTRATOR_ACCOUNT *smithy.Schema
-
-var HybridUpdateValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "HybridUpdateValue",
-}, smithy.ShapeTypeStructure, 2)
-var HybridUpdateValue_InstanceIds *smithy.Schema
-
-var HybridUpdateValue_DnsIps *smithy.Schema
-
-var IncompatibleSettingsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "IncompatibleSettingsException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var IncompatibleSettingsException_Message *smithy.Schema
-
-var IncompatibleSettingsException_RequestId *smithy.Schema
-
-var _InitiatedBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "InitiatedBy",
-}, smithy.ShapeTypeString, 0)
-
-var InsufficientPermissionsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "InsufficientPermissionsException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var InsufficientPermissionsException_Message *smithy.Schema
-
-var InsufficientPermissionsException_RequestId *smithy.Schema
-
-var InvalidCertificateException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "InvalidCertificateException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var InvalidCertificateException_Message *smithy.Schema
-
-var InvalidCertificateException_RequestId *smithy.Schema
-
-var InvalidClientAuthStatusException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "InvalidClientAuthStatusException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var InvalidClientAuthStatusException_Message *smithy.Schema
-
-var InvalidClientAuthStatusException_RequestId *smithy.Schema
-
-var InvalidLDAPSStatusException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "InvalidLDAPSStatusException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var InvalidLDAPSStatusException_Message *smithy.Schema
-
-var InvalidLDAPSStatusException_RequestId *smithy.Schema
-
-var InvalidNextTokenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "InvalidNextTokenException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var InvalidNextTokenException_Message *smithy.Schema
-
-var InvalidNextTokenException_RequestId *smithy.Schema
-
-var InvalidParameterException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "InvalidParameterException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var InvalidParameterException_Message *smithy.Schema
-
-var InvalidParameterException_RequestId *smithy.Schema
-
-var InvalidPasswordException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "InvalidPasswordException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var InvalidPasswordException_Message *smithy.Schema
-
-var InvalidPasswordException_RequestId *smithy.Schema
-
-var InvalidTargetException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "InvalidTargetException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var InvalidTargetException_Message *smithy.Schema
-
-var InvalidTargetException_RequestId *smithy.Schema
-
-var _IpAddr = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "IpAddr",
-}, smithy.ShapeTypeString, 0)
-
-var _IpAddrs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "IpAddrs",
-}, smithy.ShapeTypeList, 1)
-var _IpAddrs_member *smithy.Schema
-
-var IpRoute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "IpRoute",
-}, smithy.ShapeTypeStructure, 3)
-var IpRoute_CidrIp *smithy.Schema
-
-var IpRoute_CidrIpv6 *smithy.Schema
-
-var IpRoute_Description *smithy.Schema
-
-var IpRouteInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "IpRouteInfo",
-}, smithy.ShapeTypeStructure, 7)
-var IpRouteInfo_DirectoryId *smithy.Schema
-
-var IpRouteInfo_CidrIp *smithy.Schema
-
-var IpRouteInfo_CidrIpv6 *smithy.Schema
-
-var IpRouteInfo_IpRouteStatusMsg *smithy.Schema
-
-var IpRouteInfo_AddedDateTime *smithy.Schema
-
-var IpRouteInfo_IpRouteStatusReason *smithy.Schema
-
-var IpRouteInfo_Description *smithy.Schema
-
-var IpRouteLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "IpRouteLimitExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var IpRouteLimitExceededException_Message *smithy.Schema
-
-var IpRouteLimitExceededException_RequestId *smithy.Schema
-
-var _IpRoutes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "IpRoutes",
-}, smithy.ShapeTypeList, 1)
-var _IpRoutes_member *smithy.Schema
-
-var _IpRoutesInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "IpRoutesInfo",
-}, smithy.ShapeTypeList, 1)
-var _IpRoutesInfo_member *smithy.Schema
-
-var IpRouteStatusMsg = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "IpRouteStatusMsg",
-}, smithy.ShapeTypeEnum, 6)
-var IpRouteStatusMsg_ADDING *smithy.Schema
-
-var IpRouteStatusMsg_ADDED *smithy.Schema
-
-var IpRouteStatusMsg_REMOVING *smithy.Schema
-
-var IpRouteStatusMsg_REMOVED *smithy.Schema
-
-var IpRouteStatusMsg_ADD_FAILED *smithy.Schema
-
-var IpRouteStatusMsg_REMOVE_FAILED *smithy.Schema
-
-var _IpRouteStatusReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "IpRouteStatusReason",
-}, smithy.ShapeTypeString, 0)
-
-var _Ipv6Addr = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "Ipv6Addr",
-}, smithy.ShapeTypeString, 0)
-
-var _IpV6Addrs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "IpV6Addrs",
-}, smithy.ShapeTypeList, 1)
-var _IpV6Addrs_member *smithy.Schema
-
-var _LastUpdateDateTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "LastUpdateDateTime",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _LastUpdatedDateTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "LastUpdatedDateTime",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _LaunchTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "LaunchTime",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var LDAPSSettingInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "LDAPSSettingInfo",
-}, smithy.ShapeTypeStructure, 3)
-var LDAPSSettingInfo_LDAPSStatus *smithy.Schema
-
-var LDAPSSettingInfo_LDAPSStatusReason *smithy.Schema
-
-var LDAPSSettingInfo_LastUpdatedDateTime *smithy.Schema
-
-var _LDAPSSettingsInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "LDAPSSettingsInfo",
-}, smithy.ShapeTypeList, 1)
-var _LDAPSSettingsInfo_member *smithy.Schema
-
-var LDAPSStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "LDAPSStatus",
-}, smithy.ShapeTypeEnum, 4)
-var LDAPSStatus_ENABLING *smithy.Schema
-
-var LDAPSStatus_ENABLED *smithy.Schema
-
-var LDAPSStatus_ENABLE_FAILED *smithy.Schema
-
-var LDAPSStatus_DISABLED *smithy.Schema
-
-var _LDAPSStatusReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "LDAPSStatusReason",
-}, smithy.ShapeTypeString, 0)
-
-var LDAPSType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "LDAPSType",
-}, smithy.ShapeTypeEnum, 1)
-var LDAPSType_CLIENT *smithy.Schema
-
-var _LdifContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "LdifContent",
-}, smithy.ShapeTypeString, 0)
-
-var _Limit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "Limit",
-}, smithy.ShapeTypeInteger, 0)
-
-var _LogGroupName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "LogGroupName",
-}, smithy.ShapeTypeString, 0)
-
-var LogSubscription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "LogSubscription",
-}, smithy.ShapeTypeStructure, 3)
-var LogSubscription_DirectoryId *smithy.Schema
-
-var LogSubscription_LogGroupName *smithy.Schema
-
-var LogSubscription_SubscriptionCreatedDateTime *smithy.Schema
-
-var _LogSubscriptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "LogSubscriptions",
-}, smithy.ShapeTypeList, 1)
-var _LogSubscriptions_member *smithy.Schema
-
-var _ManualSnapshotsLimitReached = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "ManualSnapshotsLimitReached",
-}, smithy.ShapeTypeBoolean, 0)
-
-var NetworkType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "NetworkType",
-}, smithy.ShapeTypeEnum, 3)
-var NetworkType_DUAL_STACK *smithy.Schema
-
-var NetworkType_IPV4_ONLY *smithy.Schema
-
-var NetworkType_IPV6_ONLY *smithy.Schema
-
-var NetworkUpdateSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "NetworkUpdateSettings",
-}, smithy.ShapeTypeStructure, 2)
-var NetworkUpdateSettings_NetworkType *smithy.Schema
-
-var NetworkUpdateSettings_CustomerDnsIpsV6 *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var NoAvailableCertificateException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "NoAvailableCertificateException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var NoAvailableCertificateException_Message *smithy.Schema
-
-var NoAvailableCertificateException_RequestId *smithy.Schema
-
-var _Notes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "Notes",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _OCSPUrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "OCSPUrl",
-}, smithy.ShapeTypeString, 0)
-
-var _OrganizationalUnitDN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "OrganizationalUnitDN",
-}, smithy.ShapeTypeString, 0)
-
-var OrganizationsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "OrganizationsException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var OrganizationsException_Message *smithy.Schema
-
-var OrganizationsException_RequestId *smithy.Schema
-
-var OSUpdateSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "OSUpdateSettings",
-}, smithy.ShapeTypeStructure, 1)
-var OSUpdateSettings_OSVersion *smithy.Schema
-
-var OSVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "OSVersion",
-}, smithy.ShapeTypeEnum, 2)
-var OSVersion_VERSION_2012 *smithy.Schema
-
-var OSVersion_VERSION_2019 *smithy.Schema
-
-var OwnerDirectoryDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "OwnerDirectoryDescription",
-}, smithy.ShapeTypeStructure, 8)
-var OwnerDirectoryDescription_DirectoryId *smithy.Schema
-
-var OwnerDirectoryDescription_AccountId *smithy.Schema
-
-var OwnerDirectoryDescription_DnsIpAddrs *smithy.Schema
-
-var OwnerDirectoryDescription_DnsIpv6Addrs *smithy.Schema
-
-var OwnerDirectoryDescription_VpcSettings *smithy.Schema
-
-var OwnerDirectoryDescription_RadiusSettings *smithy.Schema
-
-var OwnerDirectoryDescription_RadiusStatus *smithy.Schema
-
-var OwnerDirectoryDescription_NetworkType *smithy.Schema
-
-var _PageLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "PageLimit",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Password = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "Password",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _PcaConnectorArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "PcaConnectorArn",
-}, smithy.ShapeTypeString, 0)
-
-var _PortNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "PortNumber",
-}, smithy.ShapeTypeInteger, 0)
-
-var RadiusAuthenticationProtocol = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "RadiusAuthenticationProtocol",
-}, smithy.ShapeTypeEnum, 4)
-var RadiusAuthenticationProtocol_PAP *smithy.Schema
-
-var RadiusAuthenticationProtocol_CHAP *smithy.Schema
-
-var RadiusAuthenticationProtocol_MSCHAPV1 *smithy.Schema
-
-var RadiusAuthenticationProtocol_MSCHAPV2 *smithy.Schema
-
-var _RadiusDisplayLabel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "RadiusDisplayLabel",
-}, smithy.ShapeTypeString, 0)
-
-var _RadiusRetries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "RadiusRetries",
-}, smithy.ShapeTypeInteger, 0)
-
-var RadiusSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "RadiusSettings",
-}, smithy.ShapeTypeStructure, 9)
-var RadiusSettings_RadiusServers *smithy.Schema
-
-var RadiusSettings_RadiusServersIpv6 *smithy.Schema
-
-var RadiusSettings_RadiusPort *smithy.Schema
-
-var RadiusSettings_RadiusTimeout *smithy.Schema
-
-var RadiusSettings_RadiusRetries *smithy.Schema
-
-var RadiusSettings_SharedSecret *smithy.Schema
-
-var RadiusSettings_AuthenticationProtocol *smithy.Schema
-
-var RadiusSettings_DisplayLabel *smithy.Schema
-
-var RadiusSettings_UseSameUsername *smithy.Schema
-
-var _RadiusSharedSecret = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "RadiusSharedSecret",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var RadiusStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "RadiusStatus",
-}, smithy.ShapeTypeEnum, 3)
-var RadiusStatus_CREATING *smithy.Schema
-
-var RadiusStatus_COMPLETED *smithy.Schema
-
-var RadiusStatus_FAILED *smithy.Schema
-
-var _RadiusTimeout = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "RadiusTimeout",
-}, smithy.ShapeTypeInteger, 0)
-
-var RegionDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "RegionDescription",
-}, smithy.ShapeTypeStructure, 9)
-var RegionDescription_DirectoryId *smithy.Schema
-
-var RegionDescription_RegionName *smithy.Schema
-
-var RegionDescription_RegionType *smithy.Schema
-
-var RegionDescription_Status *smithy.Schema
-
-var RegionDescription_VpcSettings *smithy.Schema
-
-var RegionDescription_DesiredNumberOfDomainControllers *smithy.Schema
-
-var RegionDescription_LaunchTime *smithy.Schema
-
-var RegionDescription_StatusLastUpdatedDateTime *smithy.Schema
-
-var RegionDescription_LastUpdatedDateTime *smithy.Schema
-
-var RegionLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "RegionLimitExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var RegionLimitExceededException_Message *smithy.Schema
-
-var RegionLimitExceededException_RequestId *smithy.Schema
-
-var _RegionName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "RegionName",
-}, smithy.ShapeTypeString, 0)
-
-var _RegionsDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "RegionsDescription",
-}, smithy.ShapeTypeList, 1)
-var _RegionsDescription_member *smithy.Schema
-
-var RegionsInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "RegionsInfo",
-}, smithy.ShapeTypeStructure, 2)
-var RegionsInfo_PrimaryRegion *smithy.Schema
-
-var RegionsInfo_AdditionalRegions *smithy.Schema
-
-var RegionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "RegionType",
-}, smithy.ShapeTypeEnum, 2)
-var RegionType_PRIMARY *smithy.Schema
-
-var RegionType_ADDITIONAL *smithy.Schema
-
-var _RemoteDomainName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "RemoteDomainName",
-}, smithy.ShapeTypeString, 0)
-
-var _RemoteDomainNames = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "RemoteDomainNames",
-}, smithy.ShapeTypeList, 1)
-var _RemoteDomainNames_member *smithy.Schema
-
-var ReplicationScope = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "ReplicationScope",
-}, smithy.ShapeTypeEnum, 1)
-var ReplicationScope_Domain *smithy.Schema
-
-var _RequestId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "RequestId",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "ResourceId",
-}, smithy.ShapeTypeString, 0)
-
-var _SchemaExtensionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "SchemaExtensionId",
-}, smithy.ShapeTypeString, 0)
-
-var SchemaExtensionInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "SchemaExtensionInfo",
-}, smithy.ShapeTypeStructure, 7)
-var SchemaExtensionInfo_DirectoryId *smithy.Schema
-
-var SchemaExtensionInfo_SchemaExtensionId *smithy.Schema
-
-var SchemaExtensionInfo_Description *smithy.Schema
-
-var SchemaExtensionInfo_SchemaExtensionStatus *smithy.Schema
-
-var SchemaExtensionInfo_SchemaExtensionStatusReason *smithy.Schema
-
-var SchemaExtensionInfo_StartDateTime *smithy.Schema
-
-var SchemaExtensionInfo_EndDateTime *smithy.Schema
-
-var _SchemaExtensionsInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "SchemaExtensionsInfo",
-}, smithy.ShapeTypeList, 1)
-var _SchemaExtensionsInfo_member *smithy.Schema
-
-var SchemaExtensionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "SchemaExtensionStatus",
-}, smithy.ShapeTypeEnum, 9)
-var SchemaExtensionStatus_INITIALIZING *smithy.Schema
-
-var SchemaExtensionStatus_CREATING_SNAPSHOT *smithy.Schema
-
-var SchemaExtensionStatus_UPDATING_SCHEMA *smithy.Schema
-
-var SchemaExtensionStatus_REPLICATING *smithy.Schema
-
-var SchemaExtensionStatus_CANCEL_IN_PROGRESS *smithy.Schema
-
-var SchemaExtensionStatus_ROLLBACK_IN_PROGRESS *smithy.Schema
-
-var SchemaExtensionStatus_CANCELLED *smithy.Schema
-
-var SchemaExtensionStatus_FAILED *smithy.Schema
-
-var SchemaExtensionStatus_COMPLETED *smithy.Schema
-
-var _SchemaExtensionStatusReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "SchemaExtensionStatusReason",
-}, smithy.ShapeTypeString, 0)
-
-var _SecretArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "SecretArn",
-}, smithy.ShapeTypeString, 0)
-
-var _SecurityGroupId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "SecurityGroupId",
-}, smithy.ShapeTypeString, 0)
-
-var _SecurityGroupIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "SecurityGroupIds",
-}, smithy.ShapeTypeList, 1)
-var _SecurityGroupIds_member *smithy.Schema
-
-var SelectiveAuth = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "SelectiveAuth",
-}, smithy.ShapeTypeEnum, 2)
-var SelectiveAuth_ENABLED *smithy.Schema
-
-var SelectiveAuth_DISABLED *smithy.Schema
-
-var _Server = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "Server",
-}, smithy.ShapeTypeString, 0)
-
-var _Servers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "Servers",
-}, smithy.ShapeTypeList, 1)
-var _Servers_member *smithy.Schema
-
-var ServiceException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "ServiceException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"})
-var ServiceException_Message *smithy.Schema
-
-var ServiceException_RequestId *smithy.Schema
-
-var Setting = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "Setting",
-}, smithy.ShapeTypeStructure, 2)
-var Setting_Name *smithy.Schema
-
-var Setting_Value *smithy.Schema
-
-var _SettingEntries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "SettingEntries",
-}, smithy.ShapeTypeList, 1)
-var _SettingEntries_member *smithy.Schema
-
-var SettingEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "SettingEntry",
-}, smithy.ShapeTypeStructure, 11)
-var SettingEntry_Type *smithy.Schema
-
-var SettingEntry_Name *smithy.Schema
-
-var SettingEntry_AllowedValues *smithy.Schema
-
-var SettingEntry_AppliedValue *smithy.Schema
-
-var SettingEntry_RequestedValue *smithy.Schema
-
-var SettingEntry_RequestStatus *smithy.Schema
-
-var SettingEntry_RequestDetailedStatus *smithy.Schema
-
-var SettingEntry_RequestStatusMessage *smithy.Schema
-
-var SettingEntry_LastUpdatedDateTime *smithy.Schema
-
-var SettingEntry_LastRequestedDateTime *smithy.Schema
-
-var SettingEntry_DataType *smithy.Schema
-
-var _Settings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "Settings",
-}, smithy.ShapeTypeList, 1)
-var _Settings_member *smithy.Schema
-
-var _SharedDirectories = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "SharedDirectories",
-}, smithy.ShapeTypeList, 1)
-var _SharedDirectories_member *smithy.Schema
-
-var SharedDirectory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "SharedDirectory",
-}, smithy.ShapeTypeStructure, 9)
-var SharedDirectory_OwnerAccountId *smithy.Schema
-
-var SharedDirectory_OwnerDirectoryId *smithy.Schema
-
-var SharedDirectory_ShareMethod *smithy.Schema
-
-var SharedDirectory_SharedAccountId *smithy.Schema
-
-var SharedDirectory_SharedDirectoryId *smithy.Schema
-
-var SharedDirectory_ShareStatus *smithy.Schema
-
-var SharedDirectory_ShareNotes *smithy.Schema
-
-var SharedDirectory_CreatedDateTime *smithy.Schema
-
-var SharedDirectory_LastUpdatedDateTime *smithy.Schema
-
-var ShareLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "ShareLimitExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var ShareLimitExceededException_Message *smithy.Schema
-
-var ShareLimitExceededException_RequestId *smithy.Schema
-
-var ShareMethod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "ShareMethod",
-}, smithy.ShapeTypeEnum, 2)
-var ShareMethod_ORGANIZATIONS *smithy.Schema
-
-var ShareMethod_HANDSHAKE *smithy.Schema
-
-var ShareStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "ShareStatus",
-}, smithy.ShapeTypeEnum, 9)
-var ShareStatus_SHARED *smithy.Schema
-
-var ShareStatus_PENDING_ACCEPTANCE *smithy.Schema
-
-var ShareStatus_REJECTED *smithy.Schema
-
-var ShareStatus_REJECTING *smithy.Schema
-
-var ShareStatus_REJECT_FAILED *smithy.Schema
-
-var ShareStatus_SHARING *smithy.Schema
-
-var ShareStatus_SHARE_FAILED *smithy.Schema
-
-var ShareStatus_DELETED *smithy.Schema
-
-var ShareStatus_DELETING *smithy.Schema
-
-var ShareTarget = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "ShareTarget",
-}, smithy.ShapeTypeStructure, 2)
-var ShareTarget_Id *smithy.Schema
-
-var ShareTarget_Type *smithy.Schema
-
-var _SID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "SID",
-}, smithy.ShapeTypeString, 0)
-
-var Snapshot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "Snapshot",
-}, smithy.ShapeTypeStructure, 6)
-var Snapshot_DirectoryId *smithy.Schema
-
-var Snapshot_SnapshotId *smithy.Schema
-
-var Snapshot_Type *smithy.Schema
-
-var Snapshot_Name *smithy.Schema
-
-var Snapshot_Status *smithy.Schema
-
-var Snapshot_StartTime *smithy.Schema
-
-var _SnapshotId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "SnapshotId",
-}, smithy.ShapeTypeString, 0)
-
-var _SnapshotIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "SnapshotIds",
-}, smithy.ShapeTypeList, 1)
-var _SnapshotIds_member *smithy.Schema
-
-var SnapshotLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "SnapshotLimitExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var SnapshotLimitExceededException_Message *smithy.Schema
-
-var SnapshotLimitExceededException_RequestId *smithy.Schema
-
-var SnapshotLimits = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "SnapshotLimits",
-}, smithy.ShapeTypeStructure, 3)
-var SnapshotLimits_ManualSnapshotsLimit *smithy.Schema
-
-var SnapshotLimits_ManualSnapshotsCurrentCount *smithy.Schema
-
-var SnapshotLimits_ManualSnapshotsLimitReached *smithy.Schema
-
-var _SnapshotName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "SnapshotName",
-}, smithy.ShapeTypeString, 0)
-
-var _Snapshots = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "Snapshots",
-}, smithy.ShapeTypeList, 1)
-var _Snapshots_member *smithy.Schema
-
-var SnapshotStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "SnapshotStatus",
-}, smithy.ShapeTypeEnum, 3)
-var SnapshotStatus_CREATING *smithy.Schema
-
-var SnapshotStatus_COMPLETED *smithy.Schema
-
-var SnapshotStatus_FAILED *smithy.Schema
-
-var SnapshotType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "SnapshotType",
-}, smithy.ShapeTypeEnum, 2)
-var SnapshotType_AUTO *smithy.Schema
-
-var SnapshotType_MANUAL *smithy.Schema
-
-var _SsoEnabled = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "SsoEnabled",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _StageReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "StageReason",
-}, smithy.ShapeTypeString, 0)
-
-var _StartDateTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "StartDateTime",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _StartTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "StartTime",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _StateLastUpdatedDateTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "StateLastUpdatedDateTime",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _SubnetId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "SubnetId",
-}, smithy.ShapeTypeString, 0)
-
-var _SubnetIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "SubnetIds",
-}, smithy.ShapeTypeList, 1)
-var _SubnetIds_member *smithy.Schema
-
-var _SubscriptionCreatedDateTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "SubscriptionCreatedDateTime",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "TagKeys",
-}, smithy.ShapeTypeList, 1)
-var _TagKeys_member *smithy.Schema
-
-var TagLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "TagLimitExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var TagLimitExceededException_Message *smithy.Schema
-
-var TagLimitExceededException_RequestId *smithy.Schema
-
-var _Tags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "Tags",
-}, smithy.ShapeTypeList, 1)
-var _Tags_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _TargetId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "TargetId",
-}, smithy.ShapeTypeString, 0)
-
-var TargetType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "TargetType",
-}, smithy.ShapeTypeEnum, 1)
-var TargetType_ACCOUNT *smithy.Schema
-
-var _TopicArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "TopicArn",
-}, smithy.ShapeTypeString, 0)
-
-var _TopicName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "TopicName",
-}, smithy.ShapeTypeString, 0)
-
-var _TopicNames = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "TopicNames",
-}, smithy.ShapeTypeList, 1)
-var _TopicNames_member *smithy.Schema
-
-var TopicStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "TopicStatus",
-}, smithy.ShapeTypeEnum, 4)
-var TopicStatus_REGISTERED *smithy.Schema
-
-var TopicStatus_TOPIC_NOT_FOUND *smithy.Schema
-
-var TopicStatus_FAILED *smithy.Schema
-
-var TopicStatus_DELETED *smithy.Schema
-
-var Trust = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "Trust",
-}, smithy.ShapeTypeStructure, 11)
-var Trust_DirectoryId *smithy.Schema
-
-var Trust_TrustId *smithy.Schema
-
-var Trust_RemoteDomainName *smithy.Schema
-
-var Trust_TrustType *smithy.Schema
-
-var Trust_TrustDirection *smithy.Schema
-
-var Trust_TrustState *smithy.Schema
-
-var Trust_CreatedDateTime *smithy.Schema
-
-var Trust_LastUpdatedDateTime *smithy.Schema
-
-var Trust_StateLastUpdatedDateTime *smithy.Schema
-
-var Trust_TrustStateReason *smithy.Schema
-
-var Trust_SelectiveAuth *smithy.Schema
-
-var TrustDirection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "TrustDirection",
-}, smithy.ShapeTypeEnum, 3)
-var TrustDirection_ONE_WAY_OUTGOING *smithy.Schema
-
-var TrustDirection_ONE_WAY_INCOMING *smithy.Schema
-
-var TrustDirection_TWO_WAY *smithy.Schema
-
-var _TrustId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "TrustId",
-}, smithy.ShapeTypeString, 0)
-
-var _TrustIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "TrustIds",
-}, smithy.ShapeTypeList, 1)
-var _TrustIds_member *smithy.Schema
-
-var _TrustPassword = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "TrustPassword",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _Trusts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "Trusts",
-}, smithy.ShapeTypeList, 1)
-var _Trusts_member *smithy.Schema
-
-var TrustState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "TrustState",
-}, smithy.ShapeTypeEnum, 11)
-var TrustState_CREATING *smithy.Schema
-
-var TrustState_CREATED *smithy.Schema
-
-var TrustState_VERIFYING *smithy.Schema
-
-var TrustState_VERIFY_FAILED *smithy.Schema
-
-var TrustState_VERIFIED *smithy.Schema
-
-var TrustState_UPDATING *smithy.Schema
-
-var TrustState_UPDATE_FAILED *smithy.Schema
-
-var TrustState_UPDATED *smithy.Schema
-
-var TrustState_DELETING *smithy.Schema
-
-var TrustState_DELETED *smithy.Schema
-
-var TrustState_FAILED *smithy.Schema
-
-var _TrustStateReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "TrustStateReason",
-}, smithy.ShapeTypeString, 0)
-
-var TrustType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "TrustType",
-}, smithy.ShapeTypeEnum, 2)
-var TrustType_FOREST *smithy.Schema
-
-var TrustType_EXTERNAL *smithy.Schema
-
-var UnshareTarget = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "UnshareTarget",
-}, smithy.ShapeTypeStructure, 2)
-var UnshareTarget_Id *smithy.Schema
-
-var UnshareTarget_Type *smithy.Schema
-
-var UnsupportedOperationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "UnsupportedOperationException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var UnsupportedOperationException_Message *smithy.Schema
-
-var UnsupportedOperationException_RequestId *smithy.Schema
-
-var UnsupportedSettingsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "UnsupportedSettingsException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var UnsupportedSettingsException_Message *smithy.Schema
-
-var UnsupportedSettingsException_RequestId *smithy.Schema
-
-var _UpdateActivities = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "UpdateActivities",
-}, smithy.ShapeTypeList, 1)
-var _UpdateActivities_member *smithy.Schema
-
-var UpdateInfoEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "UpdateInfoEntry",
-}, smithy.ShapeTypeStructure, 8)
-var UpdateInfoEntry_Region *smithy.Schema
-
-var UpdateInfoEntry_Status *smithy.Schema
-
-var UpdateInfoEntry_StatusReason *smithy.Schema
-
-var UpdateInfoEntry_InitiatedBy *smithy.Schema
-
-var UpdateInfoEntry_NewValue *smithy.Schema
-
-var UpdateInfoEntry_PreviousValue *smithy.Schema
-
-var UpdateInfoEntry_StartTime *smithy.Schema
-
-var UpdateInfoEntry_LastUpdatedDateTime *smithy.Schema
-
-var _UpdateSecurityGroupForDirectoryControllers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "UpdateSecurityGroupForDirectoryControllers",
-}, smithy.ShapeTypeBoolean, 0)
-
-var UpdateStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "UpdateStatus",
-}, smithy.ShapeTypeEnum, 3)
-var UpdateStatus_UPDATED *smithy.Schema
-
-var UpdateStatus_UPDATING *smithy.Schema
-
-var UpdateStatus_UPDATE_FAILED *smithy.Schema
-
-var _UpdateStatusReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "UpdateStatusReason",
-}, smithy.ShapeTypeString, 0)
-
-var UpdateType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "UpdateType",
-}, smithy.ShapeTypeEnum, 3)
-var UpdateType_OS *smithy.Schema
-
-var UpdateType_NETWORK *smithy.Schema
-
-var UpdateType_SIZE *smithy.Schema
-
-var UpdateValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "UpdateValue",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateValue_OSUpdateSettings *smithy.Schema
-
-var UserDoesNotExistException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "UserDoesNotExistException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var UserDoesNotExistException_Message *smithy.Schema
-
-var UserDoesNotExistException_RequestId *smithy.Schema
-
-var _UserName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "UserName",
-}, smithy.ShapeTypeString, 0)
-
-var _UserPassword = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "UserPassword",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _UseSameUsername = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "UseSameUsername",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _VpcId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "VpcId",
-}, smithy.ShapeTypeString, 0)
-
-var AcceptSharedDirectoryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "AcceptSharedDirectoryRequest",
-}, smithy.ShapeTypeStructure, 1)
-var AcceptSharedDirectoryRequest_SharedDirectoryId *smithy.Schema
-
-var AcceptSharedDirectoryResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "AcceptSharedDirectoryResult",
-}, smithy.ShapeTypeStructure, 1)
-var AcceptSharedDirectoryResult_SharedDirectory *smithy.Schema
-
-var AddIpRoutesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "AddIpRoutesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var AddIpRoutesRequest_DirectoryId *smithy.Schema
-
-var AddIpRoutesRequest_IpRoutes *smithy.Schema
-
-var AddIpRoutesRequest_UpdateSecurityGroupForDirectoryControllers *smithy.Schema
-
-var AddIpRoutesResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "AddIpRoutesResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var AddRegionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "AddRegionRequest",
-}, smithy.ShapeTypeStructure, 3)
-var AddRegionRequest_DirectoryId *smithy.Schema
-
-var AddRegionRequest_RegionName *smithy.Schema
-
-var AddRegionRequest_VPCSettings *smithy.Schema
-
-var AddRegionResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "AddRegionResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var AddTagsToResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "AddTagsToResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var AddTagsToResourceRequest_ResourceId *smithy.Schema
-
-var AddTagsToResourceRequest_Tags *smithy.Schema
-
-var AddTagsToResourceResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "AddTagsToResourceResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var CancelSchemaExtensionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CancelSchemaExtensionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CancelSchemaExtensionRequest_DirectoryId *smithy.Schema
-
-var CancelSchemaExtensionRequest_SchemaExtensionId *smithy.Schema
-
-var CancelSchemaExtensionResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CancelSchemaExtensionResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var ConnectDirectoryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "ConnectDirectoryRequest",
-}, smithy.ShapeTypeStructure, 8)
-var ConnectDirectoryRequest_Name *smithy.Schema
-
-var ConnectDirectoryRequest_ShortName *smithy.Schema
-
-var ConnectDirectoryRequest_Password *smithy.Schema
-
-var ConnectDirectoryRequest_Description *smithy.Schema
-
-var ConnectDirectoryRequest_Size *smithy.Schema
-
-var ConnectDirectoryRequest_ConnectSettings *smithy.Schema
-
-var ConnectDirectoryRequest_Tags *smithy.Schema
-
-var ConnectDirectoryRequest_NetworkType *smithy.Schema
-
-var ConnectDirectoryResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "ConnectDirectoryResult",
-}, smithy.ShapeTypeStructure, 1)
-var ConnectDirectoryResult_DirectoryId *smithy.Schema
-
-var CreateAliasRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CreateAliasRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CreateAliasRequest_DirectoryId *smithy.Schema
-
-var CreateAliasRequest_Alias *smithy.Schema
-
-var CreateAliasResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CreateAliasResult",
-}, smithy.ShapeTypeStructure, 2)
-var CreateAliasResult_DirectoryId *smithy.Schema
-
-var CreateAliasResult_Alias *smithy.Schema
-
-var CreateComputerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CreateComputerRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateComputerRequest_DirectoryId *smithy.Schema
-
-var CreateComputerRequest_ComputerName *smithy.Schema
-
-var CreateComputerRequest_Password *smithy.Schema
-
-var CreateComputerRequest_OrganizationalUnitDistinguishedName *smithy.Schema
-
-var CreateComputerRequest_ComputerAttributes *smithy.Schema
-
-var CreateComputerResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CreateComputerResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreateComputerResult_Computer *smithy.Schema
-
-var CreateConditionalForwarderRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CreateConditionalForwarderRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateConditionalForwarderRequest_DirectoryId *smithy.Schema
-
-var CreateConditionalForwarderRequest_RemoteDomainName *smithy.Schema
-
-var CreateConditionalForwarderRequest_DnsIpAddrs *smithy.Schema
-
-var CreateConditionalForwarderRequest_DnsIpv6Addrs *smithy.Schema
-
-var CreateConditionalForwarderResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CreateConditionalForwarderResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var CreateDirectoryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CreateDirectoryRequest",
-}, smithy.ShapeTypeStructure, 8)
-var CreateDirectoryRequest_Name *smithy.Schema
-
-var CreateDirectoryRequest_ShortName *smithy.Schema
-
-var CreateDirectoryRequest_Password *smithy.Schema
-
-var CreateDirectoryRequest_Description *smithy.Schema
-
-var CreateDirectoryRequest_Size *smithy.Schema
-
-var CreateDirectoryRequest_VpcSettings *smithy.Schema
-
-var CreateDirectoryRequest_Tags *smithy.Schema
-
-var CreateDirectoryRequest_NetworkType *smithy.Schema
-
-var CreateDirectoryResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CreateDirectoryResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreateDirectoryResult_DirectoryId *smithy.Schema
-
-var CreateHybridADRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CreateHybridADRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateHybridADRequest_SecretArn *smithy.Schema
-
-var CreateHybridADRequest_AssessmentId *smithy.Schema
-
-var CreateHybridADRequest_Tags *smithy.Schema
-
-var CreateHybridADResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CreateHybridADResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreateHybridADResult_DirectoryId *smithy.Schema
-
-var CreateLogSubscriptionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CreateLogSubscriptionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CreateLogSubscriptionRequest_DirectoryId *smithy.Schema
-
-var CreateLogSubscriptionRequest_LogGroupName *smithy.Schema
-
-var CreateLogSubscriptionResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CreateLogSubscriptionResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var CreateMicrosoftADRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CreateMicrosoftADRequest",
-}, smithy.ShapeTypeStructure, 8)
-var CreateMicrosoftADRequest_Name *smithy.Schema
-
-var CreateMicrosoftADRequest_ShortName *smithy.Schema
-
-var CreateMicrosoftADRequest_Password *smithy.Schema
-
-var CreateMicrosoftADRequest_Description *smithy.Schema
-
-var CreateMicrosoftADRequest_VpcSettings *smithy.Schema
-
-var CreateMicrosoftADRequest_Edition *smithy.Schema
-
-var CreateMicrosoftADRequest_Tags *smithy.Schema
-
-var CreateMicrosoftADRequest_NetworkType *smithy.Schema
-
-var CreateMicrosoftADResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CreateMicrosoftADResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreateMicrosoftADResult_DirectoryId *smithy.Schema
-
-var CreateSnapshotRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CreateSnapshotRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CreateSnapshotRequest_DirectoryId *smithy.Schema
-
-var CreateSnapshotRequest_Name *smithy.Schema
-
-var CreateSnapshotResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CreateSnapshotResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreateSnapshotResult_SnapshotId *smithy.Schema
-
-var CreateTrustRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CreateTrustRequest",
-}, smithy.ShapeTypeStructure, 8)
-var CreateTrustRequest_DirectoryId *smithy.Schema
-
-var CreateTrustRequest_RemoteDomainName *smithy.Schema
-
-var CreateTrustRequest_TrustPassword *smithy.Schema
-
-var CreateTrustRequest_TrustDirection *smithy.Schema
-
-var CreateTrustRequest_TrustType *smithy.Schema
-
-var CreateTrustRequest_ConditionalForwarderIpAddrs *smithy.Schema
-
-var CreateTrustRequest_ConditionalForwarderIpv6Addrs *smithy.Schema
-
-var CreateTrustRequest_SelectiveAuth *smithy.Schema
-
-var CreateTrustResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "CreateTrustResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreateTrustResult_TrustId *smithy.Schema
-
-var DeleteADAssessmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DeleteADAssessmentRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteADAssessmentRequest_AssessmentId *smithy.Schema
-
-var DeleteADAssessmentResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DeleteADAssessmentResult",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteADAssessmentResult_AssessmentId *smithy.Schema
-
-var DeleteConditionalForwarderRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DeleteConditionalForwarderRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteConditionalForwarderRequest_DirectoryId *smithy.Schema
-
-var DeleteConditionalForwarderRequest_RemoteDomainName *smithy.Schema
-
-var DeleteConditionalForwarderResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DeleteConditionalForwarderResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteDirectoryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DeleteDirectoryRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDirectoryRequest_DirectoryId *smithy.Schema
-
-var DeleteDirectoryResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DeleteDirectoryResult",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDirectoryResult_DirectoryId *smithy.Schema
-
-var DeleteLogSubscriptionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DeleteLogSubscriptionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteLogSubscriptionRequest_DirectoryId *smithy.Schema
-
-var DeleteLogSubscriptionResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DeleteLogSubscriptionResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteSnapshotRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DeleteSnapshotRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteSnapshotRequest_SnapshotId *smithy.Schema
-
-var DeleteSnapshotResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DeleteSnapshotResult",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteSnapshotResult_SnapshotId *smithy.Schema
-
-var DeleteTrustRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DeleteTrustRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteTrustRequest_TrustId *smithy.Schema
-
-var DeleteTrustRequest_DeleteAssociatedConditionalForwarder *smithy.Schema
-
-var DeleteTrustResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DeleteTrustResult",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteTrustResult_TrustId *smithy.Schema
-
-var DeregisterCertificateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DeregisterCertificateRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeregisterCertificateRequest_DirectoryId *smithy.Schema
-
-var DeregisterCertificateRequest_CertificateId *smithy.Schema
-
-var DeregisterCertificateResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DeregisterCertificateResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeregisterEventTopicRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DeregisterEventTopicRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeregisterEventTopicRequest_DirectoryId *smithy.Schema
-
-var DeregisterEventTopicRequest_TopicName *smithy.Schema
-
-var DeregisterEventTopicResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DeregisterEventTopicResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DescribeADAssessmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeADAssessmentRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeADAssessmentRequest_AssessmentId *smithy.Schema
-
-var DescribeADAssessmentResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeADAssessmentResult",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeADAssessmentResult_Assessment *smithy.Schema
-
-var DescribeADAssessmentResult_AssessmentReports *smithy.Schema
-
-var DescribeCAEnrollmentPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeCAEnrollmentPolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeCAEnrollmentPolicyRequest_DirectoryId *smithy.Schema
-
-var DescribeCAEnrollmentPolicyResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeCAEnrollmentPolicyResult",
-}, smithy.ShapeTypeStructure, 5)
-var DescribeCAEnrollmentPolicyResult_DirectoryId *smithy.Schema
-
-var DescribeCAEnrollmentPolicyResult_PcaConnectorArn *smithy.Schema
-
-var DescribeCAEnrollmentPolicyResult_CaEnrollmentPolicyStatus *smithy.Schema
-
-var DescribeCAEnrollmentPolicyResult_LastUpdatedDateTime *smithy.Schema
-
-var DescribeCAEnrollmentPolicyResult_CaEnrollmentPolicyStatusReason *smithy.Schema
-
-var DescribeCertificateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeCertificateRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeCertificateRequest_DirectoryId *smithy.Schema
-
-var DescribeCertificateRequest_CertificateId *smithy.Schema
-
-var DescribeCertificateResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeCertificateResult",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeCertificateResult_Certificate *smithy.Schema
-
-var DescribeClientAuthenticationSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeClientAuthenticationSettingsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeClientAuthenticationSettingsRequest_DirectoryId *smithy.Schema
-
-var DescribeClientAuthenticationSettingsRequest_Type *smithy.Schema
-
-var DescribeClientAuthenticationSettingsRequest_NextToken *smithy.Schema
-
-var DescribeClientAuthenticationSettingsRequest_Limit *smithy.Schema
-
-var DescribeClientAuthenticationSettingsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeClientAuthenticationSettingsResult",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeClientAuthenticationSettingsResult_ClientAuthenticationSettingsInfo *smithy.Schema
-
-var DescribeClientAuthenticationSettingsResult_NextToken *smithy.Schema
-
-var DescribeConditionalForwardersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeConditionalForwardersRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeConditionalForwardersRequest_DirectoryId *smithy.Schema
-
-var DescribeConditionalForwardersRequest_RemoteDomainNames *smithy.Schema
-
-var DescribeConditionalForwardersResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeConditionalForwardersResult",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeConditionalForwardersResult_ConditionalForwarders *smithy.Schema
-
-var DescribeDirectoriesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeDirectoriesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeDirectoriesRequest_DirectoryIds *smithy.Schema
-
-var DescribeDirectoriesRequest_NextToken *smithy.Schema
-
-var DescribeDirectoriesRequest_Limit *smithy.Schema
-
-var DescribeDirectoriesResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeDirectoriesResult",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeDirectoriesResult_DirectoryDescriptions *smithy.Schema
-
-var DescribeDirectoriesResult_NextToken *smithy.Schema
-
-var DescribeDirectoryDataAccessRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeDirectoryDataAccessRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeDirectoryDataAccessRequest_DirectoryId *smithy.Schema
-
-var DescribeDirectoryDataAccessResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeDirectoryDataAccessResult",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeDirectoryDataAccessResult_DataAccessStatus *smithy.Schema
-
-var DescribeDomainControllersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeDomainControllersRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeDomainControllersRequest_DirectoryId *smithy.Schema
-
-var DescribeDomainControllersRequest_DomainControllerIds *smithy.Schema
-
-var DescribeDomainControllersRequest_NextToken *smithy.Schema
-
-var DescribeDomainControllersRequest_Limit *smithy.Schema
-
-var DescribeDomainControllersResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeDomainControllersResult",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeDomainControllersResult_DomainControllers *smithy.Schema
-
-var DescribeDomainControllersResult_NextToken *smithy.Schema
-
-var DescribeEventTopicsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeEventTopicsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeEventTopicsRequest_DirectoryId *smithy.Schema
-
-var DescribeEventTopicsRequest_TopicNames *smithy.Schema
-
-var DescribeEventTopicsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeEventTopicsResult",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeEventTopicsResult_EventTopics *smithy.Schema
-
-var DescribeHybridADUpdateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeHybridADUpdateRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeHybridADUpdateRequest_DirectoryId *smithy.Schema
-
-var DescribeHybridADUpdateRequest_UpdateType *smithy.Schema
-
-var DescribeHybridADUpdateRequest_NextToken *smithy.Schema
-
-var DescribeHybridADUpdateResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeHybridADUpdateResult",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeHybridADUpdateResult_UpdateActivities *smithy.Schema
-
-var DescribeHybridADUpdateResult_NextToken *smithy.Schema
-
-var DescribeLDAPSSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeLDAPSSettingsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeLDAPSSettingsRequest_DirectoryId *smithy.Schema
-
-var DescribeLDAPSSettingsRequest_Type *smithy.Schema
-
-var DescribeLDAPSSettingsRequest_NextToken *smithy.Schema
-
-var DescribeLDAPSSettingsRequest_Limit *smithy.Schema
-
-var DescribeLDAPSSettingsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeLDAPSSettingsResult",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeLDAPSSettingsResult_LDAPSSettingsInfo *smithy.Schema
-
-var DescribeLDAPSSettingsResult_NextToken *smithy.Schema
-
-var DescribeRegionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeRegionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeRegionsRequest_DirectoryId *smithy.Schema
-
-var DescribeRegionsRequest_RegionName *smithy.Schema
-
-var DescribeRegionsRequest_NextToken *smithy.Schema
-
-var DescribeRegionsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeRegionsResult",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeRegionsResult_RegionsDescription *smithy.Schema
-
-var DescribeRegionsResult_NextToken *smithy.Schema
-
-var DescribeSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeSettingsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeSettingsRequest_DirectoryId *smithy.Schema
-
-var DescribeSettingsRequest_Status *smithy.Schema
-
-var DescribeSettingsRequest_NextToken *smithy.Schema
-
-var DescribeSettingsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeSettingsResult",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeSettingsResult_DirectoryId *smithy.Schema
-
-var DescribeSettingsResult_SettingEntries *smithy.Schema
-
-var DescribeSettingsResult_NextToken *smithy.Schema
-
-var DescribeSharedDirectoriesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeSharedDirectoriesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeSharedDirectoriesRequest_OwnerDirectoryId *smithy.Schema
-
-var DescribeSharedDirectoriesRequest_SharedDirectoryIds *smithy.Schema
-
-var DescribeSharedDirectoriesRequest_NextToken *smithy.Schema
-
-var DescribeSharedDirectoriesRequest_Limit *smithy.Schema
-
-var DescribeSharedDirectoriesResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeSharedDirectoriesResult",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeSharedDirectoriesResult_SharedDirectories *smithy.Schema
-
-var DescribeSharedDirectoriesResult_NextToken *smithy.Schema
-
-var DescribeSnapshotsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeSnapshotsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeSnapshotsRequest_DirectoryId *smithy.Schema
-
-var DescribeSnapshotsRequest_SnapshotIds *smithy.Schema
-
-var DescribeSnapshotsRequest_NextToken *smithy.Schema
-
-var DescribeSnapshotsRequest_Limit *smithy.Schema
-
-var DescribeSnapshotsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeSnapshotsResult",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeSnapshotsResult_Snapshots *smithy.Schema
-
-var DescribeSnapshotsResult_NextToken *smithy.Schema
-
-var DescribeTrustsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeTrustsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeTrustsRequest_DirectoryId *smithy.Schema
-
-var DescribeTrustsRequest_TrustIds *smithy.Schema
-
-var DescribeTrustsRequest_NextToken *smithy.Schema
-
-var DescribeTrustsRequest_Limit *smithy.Schema
-
-var DescribeTrustsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeTrustsResult",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeTrustsResult_Trusts *smithy.Schema
-
-var DescribeTrustsResult_NextToken *smithy.Schema
-
-var DescribeUpdateDirectoryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeUpdateDirectoryRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeUpdateDirectoryRequest_DirectoryId *smithy.Schema
-
-var DescribeUpdateDirectoryRequest_UpdateType *smithy.Schema
-
-var DescribeUpdateDirectoryRequest_RegionName *smithy.Schema
-
-var DescribeUpdateDirectoryRequest_NextToken *smithy.Schema
-
-var DescribeUpdateDirectoryResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DescribeUpdateDirectoryResult",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeUpdateDirectoryResult_UpdateActivities *smithy.Schema
-
-var DescribeUpdateDirectoryResult_NextToken *smithy.Schema
-
-var DisableCAEnrollmentPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DisableCAEnrollmentPolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DisableCAEnrollmentPolicyRequest_DirectoryId *smithy.Schema
-
-var DisableCAEnrollmentPolicyResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DisableCAEnrollmentPolicyResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DisableClientAuthenticationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DisableClientAuthenticationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DisableClientAuthenticationRequest_DirectoryId *smithy.Schema
-
-var DisableClientAuthenticationRequest_Type *smithy.Schema
-
-var DisableClientAuthenticationResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DisableClientAuthenticationResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DisableDirectoryDataAccessRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DisableDirectoryDataAccessRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DisableDirectoryDataAccessRequest_DirectoryId *smithy.Schema
-
-var DisableDirectoryDataAccessResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DisableDirectoryDataAccessResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DisableLDAPSRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DisableLDAPSRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DisableLDAPSRequest_DirectoryId *smithy.Schema
-
-var DisableLDAPSRequest_Type *smithy.Schema
-
-var DisableLDAPSResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DisableLDAPSResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DisableRadiusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DisableRadiusRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DisableRadiusRequest_DirectoryId *smithy.Schema
-
-var DisableRadiusResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DisableRadiusResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DisableSsoRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DisableSsoRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DisableSsoRequest_DirectoryId *smithy.Schema
-
-var DisableSsoRequest_UserName *smithy.Schema
-
-var DisableSsoRequest_Password *smithy.Schema
-
-var DisableSsoResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "DisableSsoResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var EnableCAEnrollmentPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "EnableCAEnrollmentPolicyRequest",
-}, smithy.ShapeTypeStructure, 2)
-var EnableCAEnrollmentPolicyRequest_DirectoryId *smithy.Schema
-
-var EnableCAEnrollmentPolicyRequest_PcaConnectorArn *smithy.Schema
-
-var EnableCAEnrollmentPolicyResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "EnableCAEnrollmentPolicyResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var EnableClientAuthenticationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "EnableClientAuthenticationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var EnableClientAuthenticationRequest_DirectoryId *smithy.Schema
-
-var EnableClientAuthenticationRequest_Type *smithy.Schema
-
-var EnableClientAuthenticationResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "EnableClientAuthenticationResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var EnableDirectoryDataAccessRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "EnableDirectoryDataAccessRequest",
-}, smithy.ShapeTypeStructure, 1)
-var EnableDirectoryDataAccessRequest_DirectoryId *smithy.Schema
-
-var EnableDirectoryDataAccessResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "EnableDirectoryDataAccessResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var EnableLDAPSRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "EnableLDAPSRequest",
-}, smithy.ShapeTypeStructure, 2)
-var EnableLDAPSRequest_DirectoryId *smithy.Schema
-
-var EnableLDAPSRequest_Type *smithy.Schema
-
-var EnableLDAPSResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "EnableLDAPSResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var EnableRadiusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "EnableRadiusRequest",
-}, smithy.ShapeTypeStructure, 2)
-var EnableRadiusRequest_DirectoryId *smithy.Schema
-
-var EnableRadiusRequest_RadiusSettings *smithy.Schema
-
-var EnableRadiusResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "EnableRadiusResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var EnableSsoRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "EnableSsoRequest",
-}, smithy.ShapeTypeStructure, 3)
-var EnableSsoRequest_DirectoryId *smithy.Schema
-
-var EnableSsoRequest_UserName *smithy.Schema
-
-var EnableSsoRequest_Password *smithy.Schema
-
-var EnableSsoResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "EnableSsoResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetDirectoryLimitsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "GetDirectoryLimitsRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetDirectoryLimitsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "GetDirectoryLimitsResult",
-}, smithy.ShapeTypeStructure, 1)
-var GetDirectoryLimitsResult_DirectoryLimits *smithy.Schema
-
-var GetSnapshotLimitsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "GetSnapshotLimitsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetSnapshotLimitsRequest_DirectoryId *smithy.Schema
-
-var GetSnapshotLimitsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "GetSnapshotLimitsResult",
-}, smithy.ShapeTypeStructure, 1)
-var GetSnapshotLimitsResult_SnapshotLimits *smithy.Schema
-
-var ListADAssessmentsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "ListADAssessmentsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListADAssessmentsRequest_DirectoryId *smithy.Schema
-
-var ListADAssessmentsRequest_NextToken *smithy.Schema
-
-var ListADAssessmentsRequest_Limit *smithy.Schema
-
-var ListADAssessmentsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "ListADAssessmentsResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListADAssessmentsResult_Assessments *smithy.Schema
-
-var ListADAssessmentsResult_NextToken *smithy.Schema
-
-var ListCertificatesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "ListCertificatesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListCertificatesRequest_DirectoryId *smithy.Schema
-
-var ListCertificatesRequest_NextToken *smithy.Schema
-
-var ListCertificatesRequest_Limit *smithy.Schema
-
-var ListCertificatesResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "ListCertificatesResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListCertificatesResult_NextToken *smithy.Schema
-
-var ListCertificatesResult_CertificatesInfo *smithy.Schema
-
-var ListIpRoutesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "ListIpRoutesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListIpRoutesRequest_DirectoryId *smithy.Schema
-
-var ListIpRoutesRequest_NextToken *smithy.Schema
-
-var ListIpRoutesRequest_Limit *smithy.Schema
-
-var ListIpRoutesResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "ListIpRoutesResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListIpRoutesResult_IpRoutesInfo *smithy.Schema
-
-var ListIpRoutesResult_NextToken *smithy.Schema
-
-var ListLogSubscriptionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "ListLogSubscriptionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListLogSubscriptionsRequest_DirectoryId *smithy.Schema
-
-var ListLogSubscriptionsRequest_NextToken *smithy.Schema
-
-var ListLogSubscriptionsRequest_Limit *smithy.Schema
-
-var ListLogSubscriptionsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "ListLogSubscriptionsResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListLogSubscriptionsResult_LogSubscriptions *smithy.Schema
-
-var ListLogSubscriptionsResult_NextToken *smithy.Schema
-
-var ListSchemaExtensionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "ListSchemaExtensionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListSchemaExtensionsRequest_DirectoryId *smithy.Schema
-
-var ListSchemaExtensionsRequest_NextToken *smithy.Schema
-
-var ListSchemaExtensionsRequest_Limit *smithy.Schema
-
-var ListSchemaExtensionsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "ListSchemaExtensionsResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListSchemaExtensionsResult_SchemaExtensionsInfo *smithy.Schema
-
-var ListSchemaExtensionsResult_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListTagsForResourceRequest_ResourceId *smithy.Schema
-
-var ListTagsForResourceRequest_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest_Limit *smithy.Schema
-
-var ListTagsForResourceResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "ListTagsForResourceResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListTagsForResourceResult_Tags *smithy.Schema
-
-var ListTagsForResourceResult_NextToken *smithy.Schema
-
-var RegisterCertificateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "RegisterCertificateRequest",
-}, smithy.ShapeTypeStructure, 4)
-var RegisterCertificateRequest_DirectoryId *smithy.Schema
-
-var RegisterCertificateRequest_CertificateData *smithy.Schema
-
-var RegisterCertificateRequest_Type *smithy.Schema
-
-var RegisterCertificateRequest_ClientCertAuthSettings *smithy.Schema
-
-var RegisterCertificateResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "RegisterCertificateResult",
-}, smithy.ShapeTypeStructure, 1)
-var RegisterCertificateResult_CertificateId *smithy.Schema
-
-var RegisterEventTopicRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "RegisterEventTopicRequest",
-}, smithy.ShapeTypeStructure, 2)
-var RegisterEventTopicRequest_DirectoryId *smithy.Schema
-
-var RegisterEventTopicRequest_TopicName *smithy.Schema
-
-var RegisterEventTopicResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "RegisterEventTopicResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var RejectSharedDirectoryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "RejectSharedDirectoryRequest",
-}, smithy.ShapeTypeStructure, 1)
-var RejectSharedDirectoryRequest_SharedDirectoryId *smithy.Schema
-
-var RejectSharedDirectoryResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "RejectSharedDirectoryResult",
-}, smithy.ShapeTypeStructure, 1)
-var RejectSharedDirectoryResult_SharedDirectoryId *smithy.Schema
-
-var RemoveIpRoutesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "RemoveIpRoutesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var RemoveIpRoutesRequest_DirectoryId *smithy.Schema
-
-var RemoveIpRoutesRequest_CidrIps *smithy.Schema
-
-var RemoveIpRoutesRequest_CidrIpv6s *smithy.Schema
-
-var RemoveIpRoutesResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "RemoveIpRoutesResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var RemoveRegionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "RemoveRegionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var RemoveRegionRequest_DirectoryId *smithy.Schema
-
-var RemoveRegionResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "RemoveRegionResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var RemoveTagsFromResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "RemoveTagsFromResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var RemoveTagsFromResourceRequest_ResourceId *smithy.Schema
-
-var RemoveTagsFromResourceRequest_TagKeys *smithy.Schema
-
-var RemoveTagsFromResourceResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "RemoveTagsFromResourceResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var ResetUserPasswordRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "ResetUserPasswordRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ResetUserPasswordRequest_DirectoryId *smithy.Schema
-
-var ResetUserPasswordRequest_UserName *smithy.Schema
-
-var ResetUserPasswordRequest_NewPassword *smithy.Schema
-
-var ResetUserPasswordResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "ResetUserPasswordResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var RestoreFromSnapshotRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "RestoreFromSnapshotRequest",
-}, smithy.ShapeTypeStructure, 1)
-var RestoreFromSnapshotRequest_SnapshotId *smithy.Schema
-
-var RestoreFromSnapshotResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "RestoreFromSnapshotResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var ShareDirectoryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "ShareDirectoryRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ShareDirectoryRequest_DirectoryId *smithy.Schema
-
-var ShareDirectoryRequest_ShareNotes *smithy.Schema
-
-var ShareDirectoryRequest_ShareTarget *smithy.Schema
-
-var ShareDirectoryRequest_ShareMethod *smithy.Schema
-
-var ShareDirectoryResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "ShareDirectoryResult",
-}, smithy.ShapeTypeStructure, 1)
-var ShareDirectoryResult_SharedDirectoryId *smithy.Schema
-
-var StartADAssessmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "StartADAssessmentRequest",
-}, smithy.ShapeTypeStructure, 2)
-var StartADAssessmentRequest_AssessmentConfiguration *smithy.Schema
-
-var StartADAssessmentRequest_DirectoryId *smithy.Schema
-
-var StartADAssessmentResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "StartADAssessmentResult",
-}, smithy.ShapeTypeStructure, 1)
-var StartADAssessmentResult_AssessmentId *smithy.Schema
-
-var StartSchemaExtensionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "StartSchemaExtensionRequest",
-}, smithy.ShapeTypeStructure, 4)
-var StartSchemaExtensionRequest_DirectoryId *smithy.Schema
-
-var StartSchemaExtensionRequest_CreateSnapshotBeforeSchemaExtension *smithy.Schema
-
-var StartSchemaExtensionRequest_LdifContent *smithy.Schema
-
-var StartSchemaExtensionRequest_Description *smithy.Schema
-
-var StartSchemaExtensionResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "StartSchemaExtensionResult",
-}, smithy.ShapeTypeStructure, 1)
-var StartSchemaExtensionResult_SchemaExtensionId *smithy.Schema
-
-var UnshareDirectoryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "UnshareDirectoryRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UnshareDirectoryRequest_DirectoryId *smithy.Schema
-
-var UnshareDirectoryRequest_UnshareTarget *smithy.Schema
-
-var UnshareDirectoryResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "UnshareDirectoryResult",
-}, smithy.ShapeTypeStructure, 1)
-var UnshareDirectoryResult_SharedDirectoryId *smithy.Schema
-
-var UpdateConditionalForwarderRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "UpdateConditionalForwarderRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateConditionalForwarderRequest_DirectoryId *smithy.Schema
-
-var UpdateConditionalForwarderRequest_RemoteDomainName *smithy.Schema
-
-var UpdateConditionalForwarderRequest_DnsIpAddrs *smithy.Schema
-
-var UpdateConditionalForwarderRequest_DnsIpv6Addrs *smithy.Schema
-
-var UpdateConditionalForwarderResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "UpdateConditionalForwarderResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateDirectorySetupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "UpdateDirectorySetupRequest",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateDirectorySetupRequest_DirectoryId *smithy.Schema
-
-var UpdateDirectorySetupRequest_UpdateType *smithy.Schema
-
-var UpdateDirectorySetupRequest_OSUpdateSettings *smithy.Schema
-
-var UpdateDirectorySetupRequest_DirectorySizeUpdateSettings *smithy.Schema
-
-var UpdateDirectorySetupRequest_NetworkUpdateSettings *smithy.Schema
-
-var UpdateDirectorySetupRequest_CreateSnapshotBeforeUpdate *smithy.Schema
-
-var UpdateDirectorySetupResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "UpdateDirectorySetupResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateHybridADRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "UpdateHybridADRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateHybridADRequest_DirectoryId *smithy.Schema
-
-var UpdateHybridADRequest_HybridAdministratorAccountUpdate *smithy.Schema
-
-var UpdateHybridADRequest_SelfManagedInstancesSettings *smithy.Schema
-
-var UpdateHybridADResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "UpdateHybridADResult",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateHybridADResult_DirectoryId *smithy.Schema
-
-var UpdateHybridADResult_AssessmentId *smithy.Schema
-
-var UpdateNumberOfDomainControllersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "UpdateNumberOfDomainControllersRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateNumberOfDomainControllersRequest_DirectoryId *smithy.Schema
-
-var UpdateNumberOfDomainControllersRequest_DesiredNumber *smithy.Schema
-
-var UpdateNumberOfDomainControllersResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "UpdateNumberOfDomainControllersResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateRadiusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "UpdateRadiusRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateRadiusRequest_DirectoryId *smithy.Schema
-
-var UpdateRadiusRequest_RadiusSettings *smithy.Schema
-
-var UpdateRadiusResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "UpdateRadiusResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "UpdateSettingsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateSettingsRequest_DirectoryId *smithy.Schema
-
-var UpdateSettingsRequest_Settings *smithy.Schema
-
-var UpdateSettingsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "UpdateSettingsResult",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateSettingsResult_DirectoryId *smithy.Schema
-
-var UpdateTrustRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "UpdateTrustRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateTrustRequest_TrustId *smithy.Schema
-
-var UpdateTrustRequest_SelectiveAuth *smithy.Schema
-
-var UpdateTrustResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "UpdateTrustResult",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateTrustResult_RequestId *smithy.Schema
-
-var UpdateTrustResult_TrustId *smithy.Schema
-
-var VerifyTrustRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "VerifyTrustRequest",
-}, smithy.ShapeTypeStructure, 1)
-var VerifyTrustRequest_TrustId *smithy.Schema
-
-var VerifyTrustResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directoryservice",
-	Name:      "VerifyTrustResult",
-}, smithy.ShapeTypeStructure, 1)
-var VerifyTrustResult_TrustId *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _ExceptionMessage)
-
-	AccessDeniedException_RequestId = AccessDeniedException.AddMember("RequestId", _RequestId)
-
-	ADAssessmentLimitExceededException_Message = ADAssessmentLimitExceededException.AddMember("Message", _ExceptionMessage)
-
-	ADAssessmentLimitExceededException_RequestId = ADAssessmentLimitExceededException.AddMember("RequestId", _RequestId)
-
-	_AdditionalRegions_member = _AdditionalRegions.AddMember("member", _RegionName)
-
-	_CustomerDnsIps_member = _CustomerDnsIps.AddMember("member", _IpAddr)
-
-	_SubnetIds_member = _SubnetIds.AddMember("member", _SubnetId)
-
-	_SecurityGroupIds_member = _SecurityGroupIds.AddMember("member", _SecurityGroupId)
-
-	_AssessmentInstanceIds_member = _AssessmentInstanceIds.AddMember("member", _AssessmentInstanceId)
-
-	Assessment_AssessmentId = Assessment.AddMember("AssessmentId", _AssessmentId)
-
-	Assessment_DirectoryId = Assessment.AddMember("DirectoryId", _DirectoryId)
-
-	Assessment_DnsName = Assessment.AddMember("DnsName", _DirectoryName)
-
-	Assessment_StartTime = Assessment.AddMember("StartTime", _AssessmentStartTime)
-
-	Assessment_LastUpdateDateTime = Assessment.AddMember("LastUpdateDateTime", _LastUpdateDateTime)
-
-	Assessment_Status = Assessment.AddMember("Status", _AssessmentStatus)
-
-	Assessment_StatusCode = Assessment.AddMember("StatusCode", _AssessmentStatusCode)
-
-	Assessment_StatusReason = Assessment.AddMember("StatusReason", _AssessmentStatusReason)
-
-	Assessment_CustomerDnsIps = Assessment.AddMember("CustomerDnsIps", _CustomerDnsIps)
-
-	Assessment_VpcId = Assessment.AddMember("VpcId", _VpcId)
-
-	Assessment_SubnetIds = Assessment.AddMember("SubnetIds", _SubnetIds)
-
-	Assessment_SecurityGroupIds = Assessment.AddMember("SecurityGroupIds", _SecurityGroupIds)
-
-	Assessment_SelfManagedInstanceIds = Assessment.AddMember("SelfManagedInstanceIds", _AssessmentInstanceIds)
-
-	Assessment_ReportType = Assessment.AddMember("ReportType", _AssessmentReportType)
-
-	Assessment_Version = Assessment.AddMember("Version", _AssessmentVersion)
-
-	DirectoryVpcSettings_VpcId = DirectoryVpcSettings.AddMember("VpcId", _VpcId)
-
-	DirectoryVpcSettings_SubnetIds = DirectoryVpcSettings.AddMember("SubnetIds", _SubnetIds)
-
-	AssessmentConfiguration_CustomerDnsIps = AssessmentConfiguration.AddMember("CustomerDnsIps", _CustomerDnsIps)
-
-	AssessmentConfiguration_DnsName = AssessmentConfiguration.AddMember("DnsName", _DirectoryName)
-
-	AssessmentConfiguration_VpcSettings = AssessmentConfiguration.AddMember("VpcSettings", DirectoryVpcSettings)
-
-	AssessmentConfiguration_InstanceIds = AssessmentConfiguration.AddMember("InstanceIds", _AssessmentInstanceIds)
-
-	AssessmentConfiguration_SecurityGroupIds = AssessmentConfiguration.AddMember("SecurityGroupIds", _SecurityGroupIds)
-
-	AssessmentValidation_Category = AssessmentValidation.AddMember("Category", _AssessmentValidationCategory)
-
-	AssessmentValidation_Name = AssessmentValidation.AddMember("Name", _AssessmentValidationName)
-
-	AssessmentValidation_Status = AssessmentValidation.AddMember("Status", _AssessmentValidationStatus)
-
-	AssessmentValidation_StatusCode = AssessmentValidation.AddMember("StatusCode", _AssessmentValidationStatusCode)
-
-	AssessmentValidation_StatusReason = AssessmentValidation.AddMember("StatusReason", _AssessmentValidationStatusReason)
-
-	AssessmentValidation_StartTime = AssessmentValidation.AddMember("StartTime", _AssessmentValidationTimeStamp)
-
-	AssessmentValidation_LastUpdateDateTime = AssessmentValidation.AddMember("LastUpdateDateTime", _AssessmentValidationTimeStamp)
-
-	_AssessmentValidations_member = _AssessmentValidations.AddMember("member", AssessmentValidation)
-
-	AssessmentReport_DomainControllerIp = AssessmentReport.AddMember("DomainControllerIp", _IpAddr)
-
-	AssessmentReport_Validations = AssessmentReport.AddMember("Validations", _AssessmentValidations)
-
-	_AssessmentReports_member = _AssessmentReports.AddMember("member", AssessmentReport)
-
-	AssessmentSummary_AssessmentId = AssessmentSummary.AddMember("AssessmentId", _AssessmentId)
-
-	AssessmentSummary_DirectoryId = AssessmentSummary.AddMember("DirectoryId", _DirectoryId)
-
-	AssessmentSummary_DnsName = AssessmentSummary.AddMember("DnsName", _DirectoryName)
-
-	AssessmentSummary_StartTime = AssessmentSummary.AddMember("StartTime", _AssessmentStartTime)
-
-	AssessmentSummary_LastUpdateDateTime = AssessmentSummary.AddMember("LastUpdateDateTime", _LastUpdateDateTime)
-
-	AssessmentSummary_Status = AssessmentSummary.AddMember("Status", _AssessmentStatus)
-
-	AssessmentSummary_CustomerDnsIps = AssessmentSummary.AddMember("CustomerDnsIps", _CustomerDnsIps)
-
-	AssessmentSummary_ReportType = AssessmentSummary.AddMember("ReportType", _AssessmentReportType)
-
-	_Assessments_member = _Assessments.AddMember("member", AssessmentSummary)
-
-	Attribute_Name = Attribute.AddMember("Name", _AttributeName)
-
-	Attribute_Value = Attribute.AddMember("Value", _AttributeValue)
-
-	_Attributes_member = _Attributes.AddMember("member", Attribute)
-
-	AuthenticationFailedException_Message = AuthenticationFailedException.AddMember("Message", _ExceptionMessage)
-
-	AuthenticationFailedException_RequestId = AuthenticationFailedException.AddMember("RequestId", _RequestId)
-
-	_AvailabilityZones_member = _AvailabilityZones.AddMember("member", _AvailabilityZone)
-
-	CaEnrollmentPolicyStatus_IN_PROGRESS = CaEnrollmentPolicyStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	CaEnrollmentPolicyStatus_SUCCESS = CaEnrollmentPolicyStatus.AddMember("SUCCESS", smithyprelude.Unit)
-
-	CaEnrollmentPolicyStatus_FAILED = CaEnrollmentPolicyStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	CaEnrollmentPolicyStatus_DISABLING = CaEnrollmentPolicyStatus.AddMember("DISABLING", smithyprelude.Unit)
-
-	CaEnrollmentPolicyStatus_DISABLED = CaEnrollmentPolicyStatus.AddMember("DISABLED", smithyprelude.Unit)
-
-	CaEnrollmentPolicyStatus_IMPAIRED = CaEnrollmentPolicyStatus.AddMember("IMPAIRED", smithyprelude.Unit)
-
-	CertificateState_REGISTERING = CertificateState.AddMember("REGISTERING", smithyprelude.Unit)
-
-	CertificateState_REGISTERED = CertificateState.AddMember("REGISTERED", smithyprelude.Unit)
-
-	CertificateState_REGISTER_FAILED = CertificateState.AddMember("REGISTER_FAILED", smithyprelude.Unit)
-
-	CertificateState_DEREGISTERING = CertificateState.AddMember("DEREGISTERING", smithyprelude.Unit)
-
-	CertificateState_DEREGISTERED = CertificateState.AddMember("DEREGISTERED", smithyprelude.Unit)
-
-	CertificateState_DEREGISTER_FAILED = CertificateState.AddMember("DEREGISTER_FAILED", smithyprelude.Unit)
-
-	CertificateType_CLIENT_CERT_AUTH = CertificateType.AddMember("CLIENT_CERT_AUTH", smithyprelude.Unit)
-
-	CertificateType_CLIENT_LDAPS = CertificateType.AddMember("CLIENT_LDAPS", smithyprelude.Unit)
-
-	ClientCertAuthSettings_OCSPUrl = ClientCertAuthSettings.AddMember("OCSPUrl", _OCSPUrl)
-
-	Certificate_CertificateId = Certificate.AddMember("CertificateId", _CertificateId)
-
-	Certificate_State = Certificate.AddMember("State", CertificateState)
-
-	Certificate_StateReason = Certificate.AddMember("StateReason", _CertificateStateReason)
-
-	Certificate_CommonName = Certificate.AddMember("CommonName", _CertificateCN)
-
-	Certificate_RegisteredDateTime = Certificate.AddMember("RegisteredDateTime", _CertificateRegisteredDateTime)
-
-	Certificate_ExpiryDateTime = Certificate.AddMember("ExpiryDateTime", _CertificateExpiryDateTime)
-
-	Certificate_Type = Certificate.AddMember("Type", CertificateType)
-
-	Certificate_ClientCertAuthSettings = Certificate.AddMember("ClientCertAuthSettings", ClientCertAuthSettings)
-
-	CertificateAlreadyExistsException_Message = CertificateAlreadyExistsException.AddMember("Message", _ExceptionMessage)
-
-	CertificateAlreadyExistsException_RequestId = CertificateAlreadyExistsException.AddMember("RequestId", _RequestId)
-
-	CertificateDoesNotExistException_Message = CertificateDoesNotExistException.AddMember("Message", _ExceptionMessage)
-
-	CertificateDoesNotExistException_RequestId = CertificateDoesNotExistException.AddMember("RequestId", _RequestId)
-
-	CertificateInfo_CertificateId = CertificateInfo.AddMember("CertificateId", _CertificateId)
-
-	CertificateInfo_CommonName = CertificateInfo.AddMember("CommonName", _CertificateCN)
-
-	CertificateInfo_State = CertificateInfo.AddMember("State", CertificateState)
-
-	CertificateInfo_ExpiryDateTime = CertificateInfo.AddMember("ExpiryDateTime", _CertificateExpiryDateTime)
-
-	CertificateInfo_Type = CertificateInfo.AddMember("Type", CertificateType)
-
-	CertificateInUseException_Message = CertificateInUseException.AddMember("Message", _ExceptionMessage)
-
-	CertificateInUseException_RequestId = CertificateInUseException.AddMember("RequestId", _RequestId)
-
-	CertificateLimitExceededException_Message = CertificateLimitExceededException.AddMember("Message", _ExceptionMessage)
-
-	CertificateLimitExceededException_RequestId = CertificateLimitExceededException.AddMember("RequestId", _RequestId)
-
-	_CertificatesInfo_member = _CertificatesInfo.AddMember("member", CertificateInfo)
-
-	_CidrIps_member = _CidrIps.AddMember("member", _CidrIp)
-
-	_CidrIpv6s_member = _CidrIpv6s.AddMember("member", _CidrIpv6)
-
-	ClientAuthenticationType_SMART_CARD = ClientAuthenticationType.AddMember("SMART_CARD", smithyprelude.Unit)
-
-	ClientAuthenticationType_SMART_CARD_OR_PASSWORD = ClientAuthenticationType.AddMember("SMART_CARD_OR_PASSWORD", smithyprelude.Unit)
-
-	ClientAuthenticationStatus_ENABLED = ClientAuthenticationStatus.AddMember("ENABLED", smithyprelude.Unit)
-
-	ClientAuthenticationStatus_DISABLED = ClientAuthenticationStatus.AddMember("DISABLED", smithyprelude.Unit)
-
-	ClientAuthenticationSettingInfo_Type = ClientAuthenticationSettingInfo.AddMember("Type", ClientAuthenticationType)
-
-	ClientAuthenticationSettingInfo_Status = ClientAuthenticationSettingInfo.AddMember("Status", ClientAuthenticationStatus)
-
-	ClientAuthenticationSettingInfo_LastUpdatedDateTime = ClientAuthenticationSettingInfo.AddMember("LastUpdatedDateTime", _LastUpdatedDateTime)
-
-	_ClientAuthenticationSettingsInfo_member = _ClientAuthenticationSettingsInfo.AddMember("member", ClientAuthenticationSettingInfo)
-
-	ClientException_Message = ClientException.AddMember("Message", _ExceptionMessage)
-
-	ClientException_RequestId = ClientException.AddMember("RequestId", _RequestId)
-
-	Computer_ComputerId = Computer.AddMember("ComputerId", _SID)
-
-	Computer_ComputerName = Computer.AddMember("ComputerName", _ComputerName)
-
-	Computer_ComputerAttributes = Computer.AddMember("ComputerAttributes", _Attributes)
-
-	_DnsIpAddrs_member = _DnsIpAddrs.AddMember("member", _IpAddr)
-
-	_DnsIpv6Addrs_member = _DnsIpv6Addrs.AddMember("member", _Ipv6Addr)
-
-	ReplicationScope_Domain = ReplicationScope.AddMember("Domain", smithyprelude.Unit)
-
-	ConditionalForwarder_RemoteDomainName = ConditionalForwarder.AddMember("RemoteDomainName", _RemoteDomainName)
-
-	ConditionalForwarder_DnsIpAddrs = ConditionalForwarder.AddMember("DnsIpAddrs", _DnsIpAddrs)
-
-	ConditionalForwarder_DnsIpv6Addrs = ConditionalForwarder.AddMember("DnsIpv6Addrs", _DnsIpv6Addrs)
-
-	ConditionalForwarder_ReplicationScope = ConditionalForwarder.AddMember("ReplicationScope", ReplicationScope)
-
-	_ConditionalForwarders_member = _ConditionalForwarders.AddMember("member", ConditionalForwarder)
-
-	DataAccessStatus_DISABLED = DataAccessStatus.AddMember("DISABLED", smithyprelude.Unit)
-
-	DataAccessStatus_DISABLING = DataAccessStatus.AddMember("DISABLING", smithyprelude.Unit)
-
-	DataAccessStatus_ENABLED = DataAccessStatus.AddMember("ENABLED", smithyprelude.Unit)
-
-	DataAccessStatus_ENABLING = DataAccessStatus.AddMember("ENABLING", smithyprelude.Unit)
-
-	DataAccessStatus_FAILED = DataAccessStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	DirectoryAlreadyInRegionException_Message = DirectoryAlreadyInRegionException.AddMember("Message", _ExceptionMessage)
-
-	DirectoryAlreadyInRegionException_RequestId = DirectoryAlreadyInRegionException.AddMember("RequestId", _RequestId)
-
-	DirectoryAlreadySharedException_Message = DirectoryAlreadySharedException.AddMember("Message", _ExceptionMessage)
-
-	DirectoryAlreadySharedException_RequestId = DirectoryAlreadySharedException.AddMember("RequestId", _RequestId)
-
-	DirectoryConfigurationStatus_REQUESTED = DirectoryConfigurationStatus.AddMember("REQUESTED", smithyprelude.Unit)
-
-	DirectoryConfigurationStatus_UPDATING = DirectoryConfigurationStatus.AddMember("UPDATING", smithyprelude.Unit)
-
-	DirectoryConfigurationStatus_UPDATED = DirectoryConfigurationStatus.AddMember("UPDATED", smithyprelude.Unit)
-
-	DirectoryConfigurationStatus_FAILED = DirectoryConfigurationStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	DirectoryConfigurationStatus_DEFAULT = DirectoryConfigurationStatus.AddMember("DEFAULT", smithyprelude.Unit)
-
-	_DirectoryConfigurationSettingRequestDetailedStatus_key = _DirectoryConfigurationSettingRequestDetailedStatus.AddMember("key", _RegionName)
-
-	_DirectoryConfigurationSettingRequestDetailedStatus_value = _DirectoryConfigurationSettingRequestDetailedStatus.AddMember("value", DirectoryConfigurationStatus)
-
-	DirectoryConnectSettings_VpcId = DirectoryConnectSettings.AddMember("VpcId", _VpcId)
-
-	DirectoryConnectSettings_SubnetIds = DirectoryConnectSettings.AddMember("SubnetIds", _SubnetIds)
-
-	DirectoryConnectSettings_CustomerDnsIps = DirectoryConnectSettings.AddMember("CustomerDnsIps", _DnsIpAddrs)
-
-	DirectoryConnectSettings_CustomerDnsIpsV6 = DirectoryConnectSettings.AddMember("CustomerDnsIpsV6", _DnsIpv6Addrs)
-
-	DirectoryConnectSettings_CustomerUserName = DirectoryConnectSettings.AddMember("CustomerUserName", _UserName)
-
-	_IpAddrs_member = _IpAddrs.AddMember("member", _IpAddr)
-
-	_IpV6Addrs_member = _IpV6Addrs.AddMember("member", _Ipv6Addr)
-
-	DirectoryConnectSettingsDescription_VpcId = DirectoryConnectSettingsDescription.AddMember("VpcId", _VpcId)
-
-	DirectoryConnectSettingsDescription_SubnetIds = DirectoryConnectSettingsDescription.AddMember("SubnetIds", _SubnetIds)
-
-	DirectoryConnectSettingsDescription_CustomerUserName = DirectoryConnectSettingsDescription.AddMember("CustomerUserName", _UserName)
-
-	DirectoryConnectSettingsDescription_SecurityGroupId = DirectoryConnectSettingsDescription.AddMember("SecurityGroupId", _SecurityGroupId)
-
-	DirectoryConnectSettingsDescription_AvailabilityZones = DirectoryConnectSettingsDescription.AddMember("AvailabilityZones", _AvailabilityZones)
-
-	DirectoryConnectSettingsDescription_ConnectIps = DirectoryConnectSettingsDescription.AddMember("ConnectIps", _IpAddrs)
-
-	DirectoryConnectSettingsDescription_ConnectIpsV6 = DirectoryConnectSettingsDescription.AddMember("ConnectIpsV6", _IpV6Addrs)
-
-	DirectorySize_SMALL = DirectorySize.AddMember("SMALL", smithyprelude.Unit)
-
-	DirectorySize_LARGE = DirectorySize.AddMember("LARGE", smithyprelude.Unit)
-
-	DirectoryEdition_ENTERPRISE = DirectoryEdition.AddMember("ENTERPRISE", smithyprelude.Unit)
-
-	DirectoryEdition_STANDARD = DirectoryEdition.AddMember("STANDARD", smithyprelude.Unit)
-
-	DirectoryEdition_HYBRID = DirectoryEdition.AddMember("HYBRID", smithyprelude.Unit)
-
-	DirectoryStage_REQUESTED = DirectoryStage.AddMember("REQUESTED", smithyprelude.Unit)
-
-	DirectoryStage_CREATING = DirectoryStage.AddMember("CREATING", smithyprelude.Unit)
-
-	DirectoryStage_CREATED = DirectoryStage.AddMember("CREATED", smithyprelude.Unit)
-
-	DirectoryStage_ACTIVE = DirectoryStage.AddMember("ACTIVE", smithyprelude.Unit)
-
-	DirectoryStage_INOPERABLE = DirectoryStage.AddMember("INOPERABLE", smithyprelude.Unit)
-
-	DirectoryStage_IMPAIRED = DirectoryStage.AddMember("IMPAIRED", smithyprelude.Unit)
-
-	DirectoryStage_RESTORING = DirectoryStage.AddMember("RESTORING", smithyprelude.Unit)
-
-	DirectoryStage_RESTOREFAILED = DirectoryStage.AddMember("RESTOREFAILED", smithyprelude.Unit)
-
-	DirectoryStage_DELETING = DirectoryStage.AddMember("DELETING", smithyprelude.Unit)
-
-	DirectoryStage_DELETED = DirectoryStage.AddMember("DELETED", smithyprelude.Unit)
-
-	DirectoryStage_FAILED = DirectoryStage.AddMember("FAILED", smithyprelude.Unit)
-
-	DirectoryStage_UPDATING = DirectoryStage.AddMember("UPDATING", smithyprelude.Unit)
-
-	ShareStatus_SHARED = ShareStatus.AddMember("SHARED", smithyprelude.Unit)
-
-	ShareStatus_PENDING_ACCEPTANCE = ShareStatus.AddMember("PENDING_ACCEPTANCE", smithyprelude.Unit)
-
-	ShareStatus_REJECTED = ShareStatus.AddMember("REJECTED", smithyprelude.Unit)
-
-	ShareStatus_REJECTING = ShareStatus.AddMember("REJECTING", smithyprelude.Unit)
-
-	ShareStatus_REJECT_FAILED = ShareStatus.AddMember("REJECT_FAILED", smithyprelude.Unit)
-
-	ShareStatus_SHARING = ShareStatus.AddMember("SHARING", smithyprelude.Unit)
-
-	ShareStatus_SHARE_FAILED = ShareStatus.AddMember("SHARE_FAILED", smithyprelude.Unit)
-
-	ShareStatus_DELETED = ShareStatus.AddMember("DELETED", smithyprelude.Unit)
-
-	ShareStatus_DELETING = ShareStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	ShareMethod_ORGANIZATIONS = ShareMethod.AddMember("ORGANIZATIONS", smithyprelude.Unit)
-
-	ShareMethod_HANDSHAKE = ShareMethod.AddMember("HANDSHAKE", smithyprelude.Unit)
-
-	DirectoryType_SIMPLE_AD = DirectoryType.AddMember("SIMPLE_AD", smithyprelude.Unit)
-
-	DirectoryType_AD_CONNECTOR = DirectoryType.AddMember("AD_CONNECTOR", smithyprelude.Unit)
-
-	DirectoryType_MICROSOFT_AD = DirectoryType.AddMember("MICROSOFT_AD", smithyprelude.Unit)
-
-	DirectoryType_SHARED_MICROSOFT_AD = DirectoryType.AddMember("SHARED_MICROSOFT_AD", smithyprelude.Unit)
-
-	DirectoryVpcSettingsDescription_VpcId = DirectoryVpcSettingsDescription.AddMember("VpcId", _VpcId)
-
-	DirectoryVpcSettingsDescription_SubnetIds = DirectoryVpcSettingsDescription.AddMember("SubnetIds", _SubnetIds)
-
-	DirectoryVpcSettingsDescription_SecurityGroupId = DirectoryVpcSettingsDescription.AddMember("SecurityGroupId", _SecurityGroupId)
-
-	DirectoryVpcSettingsDescription_AvailabilityZones = DirectoryVpcSettingsDescription.AddMember("AvailabilityZones", _AvailabilityZones)
-
-	_Servers_member = _Servers.AddMember("member", _Server)
-
-	RadiusAuthenticationProtocol_PAP = RadiusAuthenticationProtocol.AddMember("PAP", smithyprelude.Unit)
-
-	RadiusAuthenticationProtocol_CHAP = RadiusAuthenticationProtocol.AddMember("CHAP", smithyprelude.Unit)
-
-	RadiusAuthenticationProtocol_MSCHAPV1 = RadiusAuthenticationProtocol.AddMember("MSCHAPV1", smithyprelude.Unit)
-
-	RadiusAuthenticationProtocol_MSCHAPV2 = RadiusAuthenticationProtocol.AddMember("MSCHAPV2", smithyprelude.Unit)
-
-	RadiusSettings_RadiusServers = RadiusSettings.AddMember("RadiusServers", _Servers)
-
-	RadiusSettings_RadiusServersIpv6 = RadiusSettings.AddMember("RadiusServersIpv6", _Servers)
-
-	RadiusSettings_RadiusPort = RadiusSettings.AddMember("RadiusPort", _PortNumber)
-
-	RadiusSettings_RadiusTimeout = RadiusSettings.AddMember("RadiusTimeout", _RadiusTimeout)
-
-	RadiusSettings_RadiusRetries = RadiusSettings.AddMember("RadiusRetries", _RadiusRetries)
-
-	RadiusSettings_SharedSecret = RadiusSettings.AddMember("SharedSecret", _RadiusSharedSecret)
-
-	RadiusSettings_AuthenticationProtocol = RadiusSettings.AddMember("AuthenticationProtocol", RadiusAuthenticationProtocol)
-
-	RadiusSettings_DisplayLabel = RadiusSettings.AddMember("DisplayLabel", _RadiusDisplayLabel)
-
-	RadiusSettings_UseSameUsername = RadiusSettings.AddMember("UseSameUsername", _UseSameUsername)
-
-	RadiusStatus_CREATING = RadiusStatus.AddMember("CREATING", smithyprelude.Unit)
-
-	RadiusStatus_COMPLETED = RadiusStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	RadiusStatus_FAILED = RadiusStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	NetworkType_DUAL_STACK = NetworkType.AddMember("DUAL_STACK", smithyprelude.Unit)
-
-	NetworkType_IPV4_ONLY = NetworkType.AddMember("IPV4_ONLY", smithyprelude.Unit)
-
-	NetworkType_IPV6_ONLY = NetworkType.AddMember("IPV6_ONLY", smithyprelude.Unit)
-
-	OwnerDirectoryDescription_DirectoryId = OwnerDirectoryDescription.AddMember("DirectoryId", _DirectoryId)
-
-	OwnerDirectoryDescription_AccountId = OwnerDirectoryDescription.AddMember("AccountId", _CustomerId)
-
-	OwnerDirectoryDescription_DnsIpAddrs = OwnerDirectoryDescription.AddMember("DnsIpAddrs", _DnsIpAddrs)
-
-	OwnerDirectoryDescription_DnsIpv6Addrs = OwnerDirectoryDescription.AddMember("DnsIpv6Addrs", _DnsIpv6Addrs)
-
-	OwnerDirectoryDescription_VpcSettings = OwnerDirectoryDescription.AddMember("VpcSettings", DirectoryVpcSettingsDescription)
-
-	OwnerDirectoryDescription_RadiusSettings = OwnerDirectoryDescription.AddMember("RadiusSettings", RadiusSettings)
-
-	OwnerDirectoryDescription_RadiusStatus = OwnerDirectoryDescription.AddMember("RadiusStatus", RadiusStatus)
-
-	OwnerDirectoryDescription_NetworkType = OwnerDirectoryDescription.AddMember("NetworkType", NetworkType)
-
-	RegionsInfo_PrimaryRegion = RegionsInfo.AddMember("PrimaryRegion", _RegionName)
-
-	RegionsInfo_AdditionalRegions = RegionsInfo.AddMember("AdditionalRegions", _AdditionalRegions)
-
-	OSVersion_VERSION_2012 = OSVersion.AddMember("VERSION_2012", smithyprelude.Unit)
-
-	OSVersion_VERSION_2019 = OSVersion.AddMember("VERSION_2019", smithyprelude.Unit)
-
-	HybridSettingsDescription_SelfManagedDnsIpAddrs = HybridSettingsDescription.AddMember("SelfManagedDnsIpAddrs", _IpAddrs)
-
-	HybridSettingsDescription_SelfManagedInstanceIds = HybridSettingsDescription.AddMember("SelfManagedInstanceIds", _AssessmentInstanceIds)
-
-	DirectoryDescription_DirectoryId = DirectoryDescription.AddMember("DirectoryId", _DirectoryId)
-
-	DirectoryDescription_Name = DirectoryDescription.AddMember("Name", _DirectoryName)
-
-	DirectoryDescription_ShortName = DirectoryDescription.AddMember("ShortName", _DirectoryShortName)
-
-	DirectoryDescription_Size = DirectoryDescription.AddMember("Size", DirectorySize)
-
-	DirectoryDescription_Edition = DirectoryDescription.AddMember("Edition", DirectoryEdition)
-
-	DirectoryDescription_Alias = DirectoryDescription.AddMember("Alias", _AliasName)
-
-	DirectoryDescription_AccessUrl = DirectoryDescription.AddMember("AccessUrl", _AccessUrl)
-
-	DirectoryDescription_Description = DirectoryDescription.AddMember("Description", _Description)
-
-	DirectoryDescription_DnsIpAddrs = DirectoryDescription.AddMember("DnsIpAddrs", _DnsIpAddrs)
-
-	DirectoryDescription_DnsIpv6Addrs = DirectoryDescription.AddMember("DnsIpv6Addrs", _DnsIpv6Addrs)
-
-	DirectoryDescription_Stage = DirectoryDescription.AddMember("Stage", DirectoryStage)
-
-	DirectoryDescription_ShareStatus = DirectoryDescription.AddMember("ShareStatus", ShareStatus)
-
-	DirectoryDescription_ShareMethod = DirectoryDescription.AddMember("ShareMethod", ShareMethod)
-
-	DirectoryDescription_ShareNotes = DirectoryDescription.AddMember("ShareNotes", _Notes)
-
-	DirectoryDescription_LaunchTime = DirectoryDescription.AddMember("LaunchTime", _LaunchTime)
-
-	DirectoryDescription_StageLastUpdatedDateTime = DirectoryDescription.AddMember("StageLastUpdatedDateTime", _LastUpdatedDateTime)
-
-	DirectoryDescription_Type = DirectoryDescription.AddMember("Type", DirectoryType)
-
-	DirectoryDescription_VpcSettings = DirectoryDescription.AddMember("VpcSettings", DirectoryVpcSettingsDescription)
-
-	DirectoryDescription_ConnectSettings = DirectoryDescription.AddMember("ConnectSettings", DirectoryConnectSettingsDescription)
-
-	DirectoryDescription_RadiusSettings = DirectoryDescription.AddMember("RadiusSettings", RadiusSettings)
-
-	DirectoryDescription_RadiusStatus = DirectoryDescription.AddMember("RadiusStatus", RadiusStatus)
-
-	DirectoryDescription_StageReason = DirectoryDescription.AddMember("StageReason", _StageReason)
-
-	DirectoryDescription_SsoEnabled = DirectoryDescription.AddMember("SsoEnabled", _SsoEnabled)
-
-	DirectoryDescription_DesiredNumberOfDomainControllers = DirectoryDescription.AddMember("DesiredNumberOfDomainControllers", _DesiredNumberOfDomainControllers)
-
-	DirectoryDescription_OwnerDirectoryDescription = DirectoryDescription.AddMember("OwnerDirectoryDescription", OwnerDirectoryDescription)
-
-	DirectoryDescription_RegionsInfo = DirectoryDescription.AddMember("RegionsInfo", RegionsInfo)
-
-	DirectoryDescription_OsVersion = DirectoryDescription.AddMember("OsVersion", OSVersion)
-
-	DirectoryDescription_HybridSettings = DirectoryDescription.AddMember("HybridSettings", HybridSettingsDescription)
-
-	DirectoryDescription_NetworkType = DirectoryDescription.AddMember("NetworkType", NetworkType)
-
-	_DirectoryDescriptions_member = _DirectoryDescriptions.AddMember("member", DirectoryDescription)
-
-	DirectoryDoesNotExistException_Message = DirectoryDoesNotExistException.AddMember("Message", _ExceptionMessage)
-
-	DirectoryDoesNotExistException_RequestId = DirectoryDoesNotExistException.AddMember("RequestId", _RequestId)
-
-	_DirectoryIds_member = _DirectoryIds.AddMember("member", _DirectoryId)
-
-	DirectoryInDesiredStateException_Message = DirectoryInDesiredStateException.AddMember("Message", _ExceptionMessage)
-
-	DirectoryInDesiredStateException_RequestId = DirectoryInDesiredStateException.AddMember("RequestId", _RequestId)
-
-	DirectoryLimitExceededException_Message = DirectoryLimitExceededException.AddMember("Message", _ExceptionMessage)
-
-	DirectoryLimitExceededException_RequestId = DirectoryLimitExceededException.AddMember("RequestId", _RequestId)
-
-	DirectoryLimits_CloudOnlyDirectoriesLimit = DirectoryLimits.AddMember("CloudOnlyDirectoriesLimit", _Limit)
-
-	DirectoryLimits_CloudOnlyDirectoriesCurrentCount = DirectoryLimits.AddMember("CloudOnlyDirectoriesCurrentCount", _Limit)
-
-	DirectoryLimits_CloudOnlyDirectoriesLimitReached = DirectoryLimits.AddMember("CloudOnlyDirectoriesLimitReached", _CloudOnlyDirectoriesLimitReached)
-
-	DirectoryLimits_CloudOnlyMicrosoftADLimit = DirectoryLimits.AddMember("CloudOnlyMicrosoftADLimit", _Limit)
-
-	DirectoryLimits_CloudOnlyMicrosoftADCurrentCount = DirectoryLimits.AddMember("CloudOnlyMicrosoftADCurrentCount", _Limit)
-
-	DirectoryLimits_CloudOnlyMicrosoftADLimitReached = DirectoryLimits.AddMember("CloudOnlyMicrosoftADLimitReached", _CloudOnlyDirectoriesLimitReached)
-
-	DirectoryLimits_ConnectedDirectoriesLimit = DirectoryLimits.AddMember("ConnectedDirectoriesLimit", _Limit)
-
-	DirectoryLimits_ConnectedDirectoriesCurrentCount = DirectoryLimits.AddMember("ConnectedDirectoriesCurrentCount", _Limit)
-
-	DirectoryLimits_ConnectedDirectoriesLimitReached = DirectoryLimits.AddMember("ConnectedDirectoriesLimitReached", _ConnectedDirectoriesLimitReached)
-
-	DirectoryNotSharedException_Message = DirectoryNotSharedException.AddMember("Message", _ExceptionMessage)
-
-	DirectoryNotSharedException_RequestId = DirectoryNotSharedException.AddMember("RequestId", _RequestId)
-
-	DirectorySizeUpdateSettings_DirectorySize = DirectorySizeUpdateSettings.AddMember("DirectorySize", DirectorySize)
-
-	DirectoryUnavailableException_Message = DirectoryUnavailableException.AddMember("Message", _ExceptionMessage)
-
-	DirectoryUnavailableException_RequestId = DirectoryUnavailableException.AddMember("RequestId", _RequestId)
-
-	DisableAlreadyInProgressException_Message = DisableAlreadyInProgressException.AddMember("Message", _ExceptionMessage)
-
-	DisableAlreadyInProgressException_RequestId = DisableAlreadyInProgressException.AddMember("RequestId", _RequestId)
-
-	DomainControllerStatus_CREATING = DomainControllerStatus.AddMember("CREATING", smithyprelude.Unit)
-
-	DomainControllerStatus_ACTIVE = DomainControllerStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	DomainControllerStatus_IMPAIRED = DomainControllerStatus.AddMember("IMPAIRED", smithyprelude.Unit)
-
-	DomainControllerStatus_RESTORING = DomainControllerStatus.AddMember("RESTORING", smithyprelude.Unit)
-
-	DomainControllerStatus_DELETING = DomainControllerStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	DomainControllerStatus_DELETED = DomainControllerStatus.AddMember("DELETED", smithyprelude.Unit)
-
-	DomainControllerStatus_FAILED = DomainControllerStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	DomainControllerStatus_UPDATING = DomainControllerStatus.AddMember("UPDATING", smithyprelude.Unit)
-
-	DomainController_DirectoryId = DomainController.AddMember("DirectoryId", _DirectoryId)
-
-	DomainController_DomainControllerId = DomainController.AddMember("DomainControllerId", _DomainControllerId)
-
-	DomainController_DnsIpAddr = DomainController.AddMember("DnsIpAddr", _IpAddr)
-
-	DomainController_DnsIpv6Addr = DomainController.AddMember("DnsIpv6Addr", _Ipv6Addr)
-
-	DomainController_VpcId = DomainController.AddMember("VpcId", _VpcId)
-
-	DomainController_SubnetId = DomainController.AddMember("SubnetId", _SubnetId)
-
-	DomainController_AvailabilityZone = DomainController.AddMember("AvailabilityZone", _AvailabilityZone)
-
-	DomainController_Status = DomainController.AddMember("Status", DomainControllerStatus)
-
-	DomainController_StatusReason = DomainController.AddMember("StatusReason", _DomainControllerStatusReason)
-
-	DomainController_LaunchTime = DomainController.AddMember("LaunchTime", _LaunchTime)
-
-	DomainController_StatusLastUpdatedDateTime = DomainController.AddMember("StatusLastUpdatedDateTime", _LastUpdatedDateTime)
-
-	_DomainControllerIds_member = _DomainControllerIds.AddMember("member", _DomainControllerId)
-
-	DomainControllerLimitExceededException_Message = DomainControllerLimitExceededException.AddMember("Message", _ExceptionMessage)
-
-	DomainControllerLimitExceededException_RequestId = DomainControllerLimitExceededException.AddMember("RequestId", _RequestId)
-
-	_DomainControllers_member = _DomainControllers.AddMember("member", DomainController)
-
-	EnableAlreadyInProgressException_Message = EnableAlreadyInProgressException.AddMember("Message", _ExceptionMessage)
-
-	EnableAlreadyInProgressException_RequestId = EnableAlreadyInProgressException.AddMember("RequestId", _RequestId)
-
-	EntityAlreadyExistsException_Message = EntityAlreadyExistsException.AddMember("Message", _ExceptionMessage)
-
-	EntityAlreadyExistsException_RequestId = EntityAlreadyExistsException.AddMember("RequestId", _RequestId)
-
-	EntityDoesNotExistException_Message = EntityDoesNotExistException.AddMember("Message", _ExceptionMessage)
-
-	EntityDoesNotExistException_RequestId = EntityDoesNotExistException.AddMember("RequestId", _RequestId)
-
-	TopicStatus_REGISTERED = TopicStatus.AddMember("REGISTERED", smithyprelude.Unit)
-
-	TopicStatus_TOPIC_NOT_FOUND = TopicStatus.AddMember("TOPIC_NOT_FOUND", smithyprelude.Unit)
-
-	TopicStatus_FAILED = TopicStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	TopicStatus_DELETED = TopicStatus.AddMember("DELETED", smithyprelude.Unit)
-
-	EventTopic_DirectoryId = EventTopic.AddMember("DirectoryId", _DirectoryId)
-
-	EventTopic_TopicName = EventTopic.AddMember("TopicName", _TopicName)
-
-	EventTopic_TopicArn = EventTopic.AddMember("TopicArn", _TopicArn)
-
-	EventTopic_CreatedDateTime = EventTopic.AddMember("CreatedDateTime", _CreatedDateTime)
-
-	EventTopic_Status = EventTopic.AddMember("Status", TopicStatus)
-
-	_EventTopics_member = _EventTopics.AddMember("member", EventTopic)
-
-	HybridAdministratorAccountUpdate_SecretArn = HybridAdministratorAccountUpdate.AddMember("SecretArn", _SecretArn)
-
-	HybridCustomerInstancesSettings_CustomerDnsIps = HybridCustomerInstancesSettings.AddMember("CustomerDnsIps", _CustomerDnsIps)
-
-	HybridCustomerInstancesSettings_InstanceIds = HybridCustomerInstancesSettings.AddMember("InstanceIds", _AssessmentInstanceIds)
-
-	UpdateStatus_UPDATED = UpdateStatus.AddMember("UPDATED", smithyprelude.Unit)
-
-	UpdateStatus_UPDATING = UpdateStatus.AddMember("UPDATING", smithyprelude.Unit)
-
-	UpdateStatus_UPDATE_FAILED = UpdateStatus.AddMember("UPDATE_FAILED", smithyprelude.Unit)
-
-	HybridUpdateValue_InstanceIds = HybridUpdateValue.AddMember("InstanceIds", _AssessmentInstanceIds)
-
-	HybridUpdateValue_DnsIps = HybridUpdateValue.AddMember("DnsIps", _CustomerDnsIps)
-
-	HybridUpdateInfoEntry_Status = HybridUpdateInfoEntry.AddMember("Status", UpdateStatus)
-
-	HybridUpdateInfoEntry_StatusReason = HybridUpdateInfoEntry.AddMember("StatusReason", _UpdateStatusReason)
-
-	HybridUpdateInfoEntry_InitiatedBy = HybridUpdateInfoEntry.AddMember("InitiatedBy", _InitiatedBy)
-
-	HybridUpdateInfoEntry_NewValue = HybridUpdateInfoEntry.AddMember("NewValue", HybridUpdateValue)
-
-	HybridUpdateInfoEntry_PreviousValue = HybridUpdateInfoEntry.AddMember("PreviousValue", HybridUpdateValue)
-
-	HybridUpdateInfoEntry_StartTime = HybridUpdateInfoEntry.AddMember("StartTime", _StartDateTime)
-
-	HybridUpdateInfoEntry_LastUpdatedDateTime = HybridUpdateInfoEntry.AddMember("LastUpdatedDateTime", _LastUpdatedDateTime)
-
-	HybridUpdateInfoEntry_AssessmentId = HybridUpdateInfoEntry.AddMember("AssessmentId", _AssessmentId)
-
-	_HybridUpdateInfoEntries_member = _HybridUpdateInfoEntries.AddMember("member", HybridUpdateInfoEntry)
-
-	HybridUpdateActivities_SelfManagedInstances = HybridUpdateActivities.AddMember("SelfManagedInstances", _HybridUpdateInfoEntries)
-
-	HybridUpdateActivities_HybridAdministratorAccount = HybridUpdateActivities.AddMember("HybridAdministratorAccount", _HybridUpdateInfoEntries)
-
-	HybridUpdateType_SELF_MANAGED_INSTANCES = HybridUpdateType.AddMember("SELF_MANAGED_INSTANCES", smithyprelude.Unit)
-
-	HybridUpdateType_HYBRID_ADMINISTRATOR_ACCOUNT = HybridUpdateType.AddMember("HYBRID_ADMINISTRATOR_ACCOUNT", smithyprelude.Unit)
-
-	IncompatibleSettingsException_Message = IncompatibleSettingsException.AddMember("Message", _ExceptionMessage)
-
-	IncompatibleSettingsException_RequestId = IncompatibleSettingsException.AddMember("RequestId", _RequestId)
-
-	InsufficientPermissionsException_Message = InsufficientPermissionsException.AddMember("Message", _ExceptionMessage)
-
-	InsufficientPermissionsException_RequestId = InsufficientPermissionsException.AddMember("RequestId", _RequestId)
-
-	InvalidCertificateException_Message = InvalidCertificateException.AddMember("Message", _ExceptionMessage)
-
-	InvalidCertificateException_RequestId = InvalidCertificateException.AddMember("RequestId", _RequestId)
-
-	InvalidClientAuthStatusException_Message = InvalidClientAuthStatusException.AddMember("Message", _ExceptionMessage)
-
-	InvalidClientAuthStatusException_RequestId = InvalidClientAuthStatusException.AddMember("RequestId", _RequestId)
-
-	InvalidLDAPSStatusException_Message = InvalidLDAPSStatusException.AddMember("Message", _ExceptionMessage)
-
-	InvalidLDAPSStatusException_RequestId = InvalidLDAPSStatusException.AddMember("RequestId", _RequestId)
-
-	InvalidNextTokenException_Message = InvalidNextTokenException.AddMember("Message", _ExceptionMessage)
-
-	InvalidNextTokenException_RequestId = InvalidNextTokenException.AddMember("RequestId", _RequestId)
-
-	InvalidParameterException_Message = InvalidParameterException.AddMember("Message", _ExceptionMessage)
-
-	InvalidParameterException_RequestId = InvalidParameterException.AddMember("RequestId", _RequestId)
-
-	InvalidPasswordException_Message = InvalidPasswordException.AddMember("Message", _ExceptionMessage)
-
-	InvalidPasswordException_RequestId = InvalidPasswordException.AddMember("RequestId", _RequestId)
-
-	InvalidTargetException_Message = InvalidTargetException.AddMember("Message", _ExceptionMessage)
-
-	InvalidTargetException_RequestId = InvalidTargetException.AddMember("RequestId", _RequestId)
-
-	IpRoute_CidrIp = IpRoute.AddMember("CidrIp", _CidrIp)
-
-	IpRoute_CidrIpv6 = IpRoute.AddMember("CidrIpv6", _CidrIpv6)
-
-	IpRoute_Description = IpRoute.AddMember("Description", _Description)
-
-	IpRouteStatusMsg_ADDING = IpRouteStatusMsg.AddMember("ADDING", smithyprelude.Unit)
-
-	IpRouteStatusMsg_ADDED = IpRouteStatusMsg.AddMember("ADDED", smithyprelude.Unit)
-
-	IpRouteStatusMsg_REMOVING = IpRouteStatusMsg.AddMember("REMOVING", smithyprelude.Unit)
-
-	IpRouteStatusMsg_REMOVED = IpRouteStatusMsg.AddMember("REMOVED", smithyprelude.Unit)
-
-	IpRouteStatusMsg_ADD_FAILED = IpRouteStatusMsg.AddMember("ADD_FAILED", smithyprelude.Unit)
-
-	IpRouteStatusMsg_REMOVE_FAILED = IpRouteStatusMsg.AddMember("REMOVE_FAILED", smithyprelude.Unit)
-
-	IpRouteInfo_DirectoryId = IpRouteInfo.AddMember("DirectoryId", _DirectoryId)
-
-	IpRouteInfo_CidrIp = IpRouteInfo.AddMember("CidrIp", _CidrIp)
-
-	IpRouteInfo_CidrIpv6 = IpRouteInfo.AddMember("CidrIpv6", _CidrIpv6)
-
-	IpRouteInfo_IpRouteStatusMsg = IpRouteInfo.AddMember("IpRouteStatusMsg", IpRouteStatusMsg)
-
-	IpRouteInfo_AddedDateTime = IpRouteInfo.AddMember("AddedDateTime", _AddedDateTime)
-
-	IpRouteInfo_IpRouteStatusReason = IpRouteInfo.AddMember("IpRouteStatusReason", _IpRouteStatusReason)
-
-	IpRouteInfo_Description = IpRouteInfo.AddMember("Description", _Description)
-
-	IpRouteLimitExceededException_Message = IpRouteLimitExceededException.AddMember("Message", _ExceptionMessage)
-
-	IpRouteLimitExceededException_RequestId = IpRouteLimitExceededException.AddMember("RequestId", _RequestId)
-
-	_IpRoutes_member = _IpRoutes.AddMember("member", IpRoute)
-
-	_IpRoutesInfo_member = _IpRoutesInfo.AddMember("member", IpRouteInfo)
-
-	LDAPSStatus_ENABLING = LDAPSStatus.AddMember("ENABLING", smithyprelude.Unit)
-
-	LDAPSStatus_ENABLED = LDAPSStatus.AddMember("ENABLED", smithyprelude.Unit)
-
-	LDAPSStatus_ENABLE_FAILED = LDAPSStatus.AddMember("ENABLE_FAILED", smithyprelude.Unit)
-
-	LDAPSStatus_DISABLED = LDAPSStatus.AddMember("DISABLED", smithyprelude.Unit)
-
-	LDAPSSettingInfo_LDAPSStatus = LDAPSSettingInfo.AddMember("LDAPSStatus", LDAPSStatus)
-
-	LDAPSSettingInfo_LDAPSStatusReason = LDAPSSettingInfo.AddMember("LDAPSStatusReason", _LDAPSStatusReason)
-
-	LDAPSSettingInfo_LastUpdatedDateTime = LDAPSSettingInfo.AddMember("LastUpdatedDateTime", _LastUpdatedDateTime)
-
-	_LDAPSSettingsInfo_member = _LDAPSSettingsInfo.AddMember("member", LDAPSSettingInfo)
-
-	LDAPSType_CLIENT = LDAPSType.AddMember("CLIENT", smithyprelude.Unit)
-
-	LogSubscription_DirectoryId = LogSubscription.AddMember("DirectoryId", _DirectoryId)
-
-	LogSubscription_LogGroupName = LogSubscription.AddMember("LogGroupName", _LogGroupName)
-
-	LogSubscription_SubscriptionCreatedDateTime = LogSubscription.AddMember("SubscriptionCreatedDateTime", _SubscriptionCreatedDateTime)
-
-	_LogSubscriptions_member = _LogSubscriptions.AddMember("member", LogSubscription)
-
-	NetworkUpdateSettings_NetworkType = NetworkUpdateSettings.AddMember("NetworkType", NetworkType)
-
-	NetworkUpdateSettings_CustomerDnsIpsV6 = NetworkUpdateSettings.AddMember("CustomerDnsIpsV6", _DnsIpv6Addrs)
-
-	NoAvailableCertificateException_Message = NoAvailableCertificateException.AddMember("Message", _ExceptionMessage)
-
-	NoAvailableCertificateException_RequestId = NoAvailableCertificateException.AddMember("RequestId", _RequestId)
-
-	OrganizationsException_Message = OrganizationsException.AddMember("Message", _ExceptionMessage)
-
-	OrganizationsException_RequestId = OrganizationsException.AddMember("RequestId", _RequestId)
-
-	OSUpdateSettings_OSVersion = OSUpdateSettings.AddMember("OSVersion", OSVersion)
-
-	RegionType_PRIMARY = RegionType.AddMember("PRIMARY", smithyprelude.Unit)
-
-	RegionType_ADDITIONAL = RegionType.AddMember("ADDITIONAL", smithyprelude.Unit)
-
-	RegionDescription_DirectoryId = RegionDescription.AddMember("DirectoryId", _DirectoryId)
-
-	RegionDescription_RegionName = RegionDescription.AddMember("RegionName", _RegionName)
-
-	RegionDescription_RegionType = RegionDescription.AddMember("RegionType", RegionType)
-
-	RegionDescription_Status = RegionDescription.AddMember("Status", DirectoryStage)
-
-	RegionDescription_VpcSettings = RegionDescription.AddMember("VpcSettings", DirectoryVpcSettings)
-
-	RegionDescription_DesiredNumberOfDomainControllers = RegionDescription.AddMember("DesiredNumberOfDomainControllers", _DesiredNumberOfDomainControllers)
-
-	RegionDescription_LaunchTime = RegionDescription.AddMember("LaunchTime", _LaunchTime)
-
-	RegionDescription_StatusLastUpdatedDateTime = RegionDescription.AddMember("StatusLastUpdatedDateTime", _StateLastUpdatedDateTime)
-
-	RegionDescription_LastUpdatedDateTime = RegionDescription.AddMember("LastUpdatedDateTime", _LastUpdatedDateTime)
-
-	RegionLimitExceededException_Message = RegionLimitExceededException.AddMember("Message", _ExceptionMessage)
-
-	RegionLimitExceededException_RequestId = RegionLimitExceededException.AddMember("RequestId", _RequestId)
-
-	_RegionsDescription_member = _RegionsDescription.AddMember("member", RegionDescription)
-
-	_RemoteDomainNames_member = _RemoteDomainNames.AddMember("member", _RemoteDomainName)
-
-	SchemaExtensionStatus_INITIALIZING = SchemaExtensionStatus.AddMember("INITIALIZING", smithyprelude.Unit)
-
-	SchemaExtensionStatus_CREATING_SNAPSHOT = SchemaExtensionStatus.AddMember("CREATING_SNAPSHOT", smithyprelude.Unit)
-
-	SchemaExtensionStatus_UPDATING_SCHEMA = SchemaExtensionStatus.AddMember("UPDATING_SCHEMA", smithyprelude.Unit)
-
-	SchemaExtensionStatus_REPLICATING = SchemaExtensionStatus.AddMember("REPLICATING", smithyprelude.Unit)
-
-	SchemaExtensionStatus_CANCEL_IN_PROGRESS = SchemaExtensionStatus.AddMember("CANCEL_IN_PROGRESS", smithyprelude.Unit)
-
-	SchemaExtensionStatus_ROLLBACK_IN_PROGRESS = SchemaExtensionStatus.AddMember("ROLLBACK_IN_PROGRESS", smithyprelude.Unit)
-
-	SchemaExtensionStatus_CANCELLED = SchemaExtensionStatus.AddMember("CANCELLED", smithyprelude.Unit)
-
-	SchemaExtensionStatus_FAILED = SchemaExtensionStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	SchemaExtensionStatus_COMPLETED = SchemaExtensionStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	SchemaExtensionInfo_DirectoryId = SchemaExtensionInfo.AddMember("DirectoryId", _DirectoryId)
-
-	SchemaExtensionInfo_SchemaExtensionId = SchemaExtensionInfo.AddMember("SchemaExtensionId", _SchemaExtensionId)
-
-	SchemaExtensionInfo_Description = SchemaExtensionInfo.AddMember("Description", _Description)
-
-	SchemaExtensionInfo_SchemaExtensionStatus = SchemaExtensionInfo.AddMember("SchemaExtensionStatus", SchemaExtensionStatus)
-
-	SchemaExtensionInfo_SchemaExtensionStatusReason = SchemaExtensionInfo.AddMember("SchemaExtensionStatusReason", _SchemaExtensionStatusReason)
-
-	SchemaExtensionInfo_StartDateTime = SchemaExtensionInfo.AddMember("StartDateTime", _StartDateTime)
-
-	SchemaExtensionInfo_EndDateTime = SchemaExtensionInfo.AddMember("EndDateTime", _EndDateTime)
-
-	_SchemaExtensionsInfo_member = _SchemaExtensionsInfo.AddMember("member", SchemaExtensionInfo)
-
-	SelectiveAuth_ENABLED = SelectiveAuth.AddMember("ENABLED", smithyprelude.Unit)
-
-	SelectiveAuth_DISABLED = SelectiveAuth.AddMember("DISABLED", smithyprelude.Unit)
-
-	ServiceException_Message = ServiceException.AddMember("Message", _ExceptionMessage)
-
-	ServiceException_RequestId = ServiceException.AddMember("RequestId", _RequestId)
-
-	Setting_Name = Setting.AddMember("Name", _DirectoryConfigurationSettingName)
-
-	Setting_Value = Setting.AddMember("Value", _DirectoryConfigurationSettingValue)
-
-	SettingEntry_Type = SettingEntry.AddMember("Type", _DirectoryConfigurationSettingType)
-
-	SettingEntry_Name = SettingEntry.AddMember("Name", _DirectoryConfigurationSettingName)
-
-	SettingEntry_AllowedValues = SettingEntry.AddMember("AllowedValues", _DirectoryConfigurationSettingAllowedValues)
-
-	SettingEntry_AppliedValue = SettingEntry.AddMember("AppliedValue", _DirectoryConfigurationSettingValue)
-
-	SettingEntry_RequestedValue = SettingEntry.AddMember("RequestedValue", _DirectoryConfigurationSettingValue)
-
-	SettingEntry_RequestStatus = SettingEntry.AddMember("RequestStatus", DirectoryConfigurationStatus)
-
-	SettingEntry_RequestDetailedStatus = SettingEntry.AddMember("RequestDetailedStatus", _DirectoryConfigurationSettingRequestDetailedStatus)
-
-	SettingEntry_RequestStatusMessage = SettingEntry.AddMember("RequestStatusMessage", _DirectoryConfigurationSettingRequestStatusMessage)
-
-	SettingEntry_LastUpdatedDateTime = SettingEntry.AddMember("LastUpdatedDateTime", _DirectoryConfigurationSettingLastUpdatedDateTime)
-
-	SettingEntry_LastRequestedDateTime = SettingEntry.AddMember("LastRequestedDateTime", _DirectoryConfigurationSettingLastRequestedDateTime)
-
-	SettingEntry_DataType = SettingEntry.AddMember("DataType", _DirectoryConfigurationSettingDataType)
-
-	_SettingEntries_member = _SettingEntries.AddMember("member", SettingEntry)
-
-	_Settings_member = _Settings.AddMember("member", Setting)
-
-	SharedDirectory_OwnerAccountId = SharedDirectory.AddMember("OwnerAccountId", _CustomerId)
-
-	SharedDirectory_OwnerDirectoryId = SharedDirectory.AddMember("OwnerDirectoryId", _DirectoryId)
-
-	SharedDirectory_ShareMethod = SharedDirectory.AddMember("ShareMethod", ShareMethod)
-
-	SharedDirectory_SharedAccountId = SharedDirectory.AddMember("SharedAccountId", _CustomerId)
-
-	SharedDirectory_SharedDirectoryId = SharedDirectory.AddMember("SharedDirectoryId", _DirectoryId)
-
-	SharedDirectory_ShareStatus = SharedDirectory.AddMember("ShareStatus", ShareStatus)
-
-	SharedDirectory_ShareNotes = SharedDirectory.AddMember("ShareNotes", _Notes)
-
-	SharedDirectory_CreatedDateTime = SharedDirectory.AddMember("CreatedDateTime", _CreatedDateTime)
-
-	SharedDirectory_LastUpdatedDateTime = SharedDirectory.AddMember("LastUpdatedDateTime", _LastUpdatedDateTime)
-
-	_SharedDirectories_member = _SharedDirectories.AddMember("member", SharedDirectory)
-
-	ShareLimitExceededException_Message = ShareLimitExceededException.AddMember("Message", _ExceptionMessage)
-
-	ShareLimitExceededException_RequestId = ShareLimitExceededException.AddMember("RequestId", _RequestId)
-
-	TargetType_ACCOUNT = TargetType.AddMember("ACCOUNT", smithyprelude.Unit)
-
-	ShareTarget_Id = ShareTarget.AddMember("Id", _TargetId)
-
-	ShareTarget_Type = ShareTarget.AddMember("Type", TargetType)
-
-	SnapshotType_AUTO = SnapshotType.AddMember("AUTO", smithyprelude.Unit)
-
-	SnapshotType_MANUAL = SnapshotType.AddMember("MANUAL", smithyprelude.Unit)
-
-	SnapshotStatus_CREATING = SnapshotStatus.AddMember("CREATING", smithyprelude.Unit)
-
-	SnapshotStatus_COMPLETED = SnapshotStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	SnapshotStatus_FAILED = SnapshotStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	Snapshot_DirectoryId = Snapshot.AddMember("DirectoryId", _DirectoryId)
-
-	Snapshot_SnapshotId = Snapshot.AddMember("SnapshotId", _SnapshotId)
-
-	Snapshot_Type = Snapshot.AddMember("Type", SnapshotType)
-
-	Snapshot_Name = Snapshot.AddMember("Name", _SnapshotName)
-
-	Snapshot_Status = Snapshot.AddMember("Status", SnapshotStatus)
-
-	Snapshot_StartTime = Snapshot.AddMember("StartTime", _StartTime)
-
-	_SnapshotIds_member = _SnapshotIds.AddMember("member", _SnapshotId)
-
-	SnapshotLimitExceededException_Message = SnapshotLimitExceededException.AddMember("Message", _ExceptionMessage)
-
-	SnapshotLimitExceededException_RequestId = SnapshotLimitExceededException.AddMember("RequestId", _RequestId)
-
-	SnapshotLimits_ManualSnapshotsLimit = SnapshotLimits.AddMember("ManualSnapshotsLimit", _Limit)
-
-	SnapshotLimits_ManualSnapshotsCurrentCount = SnapshotLimits.AddMember("ManualSnapshotsCurrentCount", _Limit)
-
-	SnapshotLimits_ManualSnapshotsLimitReached = SnapshotLimits.AddMember("ManualSnapshotsLimitReached", _ManualSnapshotsLimitReached)
-
-	_Snapshots_member = _Snapshots.AddMember("member", Snapshot)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagKeys_member = _TagKeys.AddMember("member", _TagKey)
-
-	TagLimitExceededException_Message = TagLimitExceededException.AddMember("Message", _ExceptionMessage)
-
-	TagLimitExceededException_RequestId = TagLimitExceededException.AddMember("RequestId", _RequestId)
-
-	_Tags_member = _Tags.AddMember("member", Tag)
-
-	_TopicNames_member = _TopicNames.AddMember("member", _TopicName)
-
-	TrustType_FOREST = TrustType.AddMember("FOREST", smithyprelude.Unit)
-
-	TrustType_EXTERNAL = TrustType.AddMember("EXTERNAL", smithyprelude.Unit)
-
-	TrustDirection_ONE_WAY_OUTGOING = TrustDirection.AddMember("ONE_WAY_OUTGOING", smithyprelude.Unit)
-
-	TrustDirection_ONE_WAY_INCOMING = TrustDirection.AddMember("ONE_WAY_INCOMING", smithyprelude.Unit)
-
-	TrustDirection_TWO_WAY = TrustDirection.AddMember("TWO_WAY", smithyprelude.Unit)
-
-	TrustState_CREATING = TrustState.AddMember("CREATING", smithyprelude.Unit)
-
-	TrustState_CREATED = TrustState.AddMember("CREATED", smithyprelude.Unit)
-
-	TrustState_VERIFYING = TrustState.AddMember("VERIFYING", smithyprelude.Unit)
-
-	TrustState_VERIFY_FAILED = TrustState.AddMember("VERIFY_FAILED", smithyprelude.Unit)
-
-	TrustState_VERIFIED = TrustState.AddMember("VERIFIED", smithyprelude.Unit)
-
-	TrustState_UPDATING = TrustState.AddMember("UPDATING", smithyprelude.Unit)
-
-	TrustState_UPDATE_FAILED = TrustState.AddMember("UPDATE_FAILED", smithyprelude.Unit)
-
-	TrustState_UPDATED = TrustState.AddMember("UPDATED", smithyprelude.Unit)
-
-	TrustState_DELETING = TrustState.AddMember("DELETING", smithyprelude.Unit)
-
-	TrustState_DELETED = TrustState.AddMember("DELETED", smithyprelude.Unit)
-
-	TrustState_FAILED = TrustState.AddMember("FAILED", smithyprelude.Unit)
-
-	Trust_DirectoryId = Trust.AddMember("DirectoryId", _DirectoryId)
-
-	Trust_TrustId = Trust.AddMember("TrustId", _TrustId)
-
-	Trust_RemoteDomainName = Trust.AddMember("RemoteDomainName", _RemoteDomainName)
-
-	Trust_TrustType = Trust.AddMember("TrustType", TrustType)
-
-	Trust_TrustDirection = Trust.AddMember("TrustDirection", TrustDirection)
-
-	Trust_TrustState = Trust.AddMember("TrustState", TrustState)
-
-	Trust_CreatedDateTime = Trust.AddMember("CreatedDateTime", _CreatedDateTime)
-
-	Trust_LastUpdatedDateTime = Trust.AddMember("LastUpdatedDateTime", _LastUpdatedDateTime)
-
-	Trust_StateLastUpdatedDateTime = Trust.AddMember("StateLastUpdatedDateTime", _StateLastUpdatedDateTime)
-
-	Trust_TrustStateReason = Trust.AddMember("TrustStateReason", _TrustStateReason)
-
-	Trust_SelectiveAuth = Trust.AddMember("SelectiveAuth", SelectiveAuth)
-
-	_TrustIds_member = _TrustIds.AddMember("member", _TrustId)
-
-	_Trusts_member = _Trusts.AddMember("member", Trust)
-
-	UnshareTarget_Id = UnshareTarget.AddMember("Id", _TargetId)
-
-	UnshareTarget_Type = UnshareTarget.AddMember("Type", TargetType)
-
-	UnsupportedOperationException_Message = UnsupportedOperationException.AddMember("Message", _ExceptionMessage)
-
-	UnsupportedOperationException_RequestId = UnsupportedOperationException.AddMember("RequestId", _RequestId)
-
-	UnsupportedSettingsException_Message = UnsupportedSettingsException.AddMember("Message", _ExceptionMessage)
-
-	UnsupportedSettingsException_RequestId = UnsupportedSettingsException.AddMember("RequestId", _RequestId)
-
-	UpdateValue_OSUpdateSettings = UpdateValue.AddMember("OSUpdateSettings", OSUpdateSettings)
-
-	UpdateInfoEntry_Region = UpdateInfoEntry.AddMember("Region", _RegionName)
-
-	UpdateInfoEntry_Status = UpdateInfoEntry.AddMember("Status", UpdateStatus)
-
-	UpdateInfoEntry_StatusReason = UpdateInfoEntry.AddMember("StatusReason", _UpdateStatusReason)
-
-	UpdateInfoEntry_InitiatedBy = UpdateInfoEntry.AddMember("InitiatedBy", _InitiatedBy)
-
-	UpdateInfoEntry_NewValue = UpdateInfoEntry.AddMember("NewValue", UpdateValue)
-
-	UpdateInfoEntry_PreviousValue = UpdateInfoEntry.AddMember("PreviousValue", UpdateValue)
-
-	UpdateInfoEntry_StartTime = UpdateInfoEntry.AddMember("StartTime", _StartDateTime)
-
-	UpdateInfoEntry_LastUpdatedDateTime = UpdateInfoEntry.AddMember("LastUpdatedDateTime", _LastUpdatedDateTime)
-
-	_UpdateActivities_member = _UpdateActivities.AddMember("member", UpdateInfoEntry)
-
-	UpdateType_OS = UpdateType.AddMember("OS", smithyprelude.Unit)
-
-	UpdateType_NETWORK = UpdateType.AddMember("NETWORK", smithyprelude.Unit)
-
-	UpdateType_SIZE = UpdateType.AddMember("SIZE", smithyprelude.Unit)
-
-	UserDoesNotExistException_Message = UserDoesNotExistException.AddMember("Message", _ExceptionMessage)
-
-	UserDoesNotExistException_RequestId = UserDoesNotExistException.AddMember("RequestId", _RequestId)
-
-	AcceptSharedDirectoryRequest_SharedDirectoryId = AcceptSharedDirectoryRequest.AddMember("SharedDirectoryId", _DirectoryId)
-
-	AcceptSharedDirectoryResult_SharedDirectory = AcceptSharedDirectoryResult.AddMember("SharedDirectory", SharedDirectory)
-
-	AddIpRoutesRequest_DirectoryId = AddIpRoutesRequest.AddMember("DirectoryId", _DirectoryId)
-
-	AddIpRoutesRequest_IpRoutes = AddIpRoutesRequest.AddMember("IpRoutes", _IpRoutes)
-
-	AddIpRoutesRequest_UpdateSecurityGroupForDirectoryControllers = AddIpRoutesRequest.AddMember("UpdateSecurityGroupForDirectoryControllers", _UpdateSecurityGroupForDirectoryControllers)
-
-	AddRegionRequest_DirectoryId = AddRegionRequest.AddMember("DirectoryId", _DirectoryId)
-
-	AddRegionRequest_RegionName = AddRegionRequest.AddMember("RegionName", _RegionName)
-
-	AddRegionRequest_VPCSettings = AddRegionRequest.AddMember("VPCSettings", DirectoryVpcSettings)
-
-	AddTagsToResourceRequest_ResourceId = AddTagsToResourceRequest.AddMember("ResourceId", _ResourceId)
-
-	AddTagsToResourceRequest_Tags = AddTagsToResourceRequest.AddMember("Tags", _Tags)
-
-	CancelSchemaExtensionRequest_DirectoryId = CancelSchemaExtensionRequest.AddMember("DirectoryId", _DirectoryId)
-
-	CancelSchemaExtensionRequest_SchemaExtensionId = CancelSchemaExtensionRequest.AddMember("SchemaExtensionId", _SchemaExtensionId)
-
-	ConnectDirectoryRequest_Name = ConnectDirectoryRequest.AddMember("Name", _DirectoryName)
-
-	ConnectDirectoryRequest_ShortName = ConnectDirectoryRequest.AddMember("ShortName", _DirectoryShortName)
-
-	ConnectDirectoryRequest_Password = ConnectDirectoryRequest.AddMember("Password", _ConnectPassword)
-
-	ConnectDirectoryRequest_Description = ConnectDirectoryRequest.AddMember("Description", _Description)
-
-	ConnectDirectoryRequest_Size = ConnectDirectoryRequest.AddMember("Size", DirectorySize)
-
-	ConnectDirectoryRequest_ConnectSettings = ConnectDirectoryRequest.AddMember("ConnectSettings", DirectoryConnectSettings)
-
-	ConnectDirectoryRequest_Tags = ConnectDirectoryRequest.AddMember("Tags", _Tags)
-
-	ConnectDirectoryRequest_NetworkType = ConnectDirectoryRequest.AddMember("NetworkType", NetworkType)
-
-	ConnectDirectoryResult_DirectoryId = ConnectDirectoryResult.AddMember("DirectoryId", _DirectoryId)
-
-	CreateAliasRequest_DirectoryId = CreateAliasRequest.AddMember("DirectoryId", _DirectoryId)
-
-	CreateAliasRequest_Alias = CreateAliasRequest.AddMember("Alias", _AliasName)
-
-	CreateAliasResult_DirectoryId = CreateAliasResult.AddMember("DirectoryId", _DirectoryId)
-
-	CreateAliasResult_Alias = CreateAliasResult.AddMember("Alias", _AliasName)
-
-	CreateComputerRequest_DirectoryId = CreateComputerRequest.AddMember("DirectoryId", _DirectoryId)
-
-	CreateComputerRequest_ComputerName = CreateComputerRequest.AddMember("ComputerName", _ComputerName)
-
-	CreateComputerRequest_Password = CreateComputerRequest.AddMember("Password", _ComputerPassword)
-
-	CreateComputerRequest_OrganizationalUnitDistinguishedName = CreateComputerRequest.AddMember("OrganizationalUnitDistinguishedName", _OrganizationalUnitDN)
-
-	CreateComputerRequest_ComputerAttributes = CreateComputerRequest.AddMember("ComputerAttributes", _Attributes)
-
-	CreateComputerResult_Computer = CreateComputerResult.AddMember("Computer", Computer)
-
-	CreateConditionalForwarderRequest_DirectoryId = CreateConditionalForwarderRequest.AddMember("DirectoryId", _DirectoryId)
-
-	CreateConditionalForwarderRequest_RemoteDomainName = CreateConditionalForwarderRequest.AddMember("RemoteDomainName", _RemoteDomainName)
-
-	CreateConditionalForwarderRequest_DnsIpAddrs = CreateConditionalForwarderRequest.AddMember("DnsIpAddrs", _DnsIpAddrs)
-
-	CreateConditionalForwarderRequest_DnsIpv6Addrs = CreateConditionalForwarderRequest.AddMember("DnsIpv6Addrs", _DnsIpv6Addrs)
-
-	CreateDirectoryRequest_Name = CreateDirectoryRequest.AddMember("Name", _DirectoryName)
-
-	CreateDirectoryRequest_ShortName = CreateDirectoryRequest.AddMember("ShortName", _DirectoryShortName)
-
-	CreateDirectoryRequest_Password = CreateDirectoryRequest.AddMember("Password", _Password)
-
-	CreateDirectoryRequest_Description = CreateDirectoryRequest.AddMember("Description", _Description)
-
-	CreateDirectoryRequest_Size = CreateDirectoryRequest.AddMember("Size", DirectorySize)
-
-	CreateDirectoryRequest_VpcSettings = CreateDirectoryRequest.AddMember("VpcSettings", DirectoryVpcSettings)
-
-	CreateDirectoryRequest_Tags = CreateDirectoryRequest.AddMember("Tags", _Tags)
-
-	CreateDirectoryRequest_NetworkType = CreateDirectoryRequest.AddMember("NetworkType", NetworkType)
-
-	CreateDirectoryResult_DirectoryId = CreateDirectoryResult.AddMember("DirectoryId", _DirectoryId)
-
-	CreateHybridADRequest_SecretArn = CreateHybridADRequest.AddMember("SecretArn", _SecretArn)
-
-	CreateHybridADRequest_AssessmentId = CreateHybridADRequest.AddMember("AssessmentId", _AssessmentId)
-
-	CreateHybridADRequest_Tags = CreateHybridADRequest.AddMember("Tags", _Tags)
-
-	CreateHybridADResult_DirectoryId = CreateHybridADResult.AddMember("DirectoryId", _DirectoryId)
-
-	CreateLogSubscriptionRequest_DirectoryId = CreateLogSubscriptionRequest.AddMember("DirectoryId", _DirectoryId)
-
-	CreateLogSubscriptionRequest_LogGroupName = CreateLogSubscriptionRequest.AddMember("LogGroupName", _LogGroupName)
-
-	CreateMicrosoftADRequest_Name = CreateMicrosoftADRequest.AddMember("Name", _DirectoryName)
-
-	CreateMicrosoftADRequest_ShortName = CreateMicrosoftADRequest.AddMember("ShortName", _DirectoryShortName)
-
-	CreateMicrosoftADRequest_Password = CreateMicrosoftADRequest.AddMember("Password", _Password)
-
-	CreateMicrosoftADRequest_Description = CreateMicrosoftADRequest.AddMember("Description", _Description)
-
-	CreateMicrosoftADRequest_VpcSettings = CreateMicrosoftADRequest.AddMember("VpcSettings", DirectoryVpcSettings)
-
-	CreateMicrosoftADRequest_Edition = CreateMicrosoftADRequest.AddMember("Edition", DirectoryEdition)
-
-	CreateMicrosoftADRequest_Tags = CreateMicrosoftADRequest.AddMember("Tags", _Tags)
-
-	CreateMicrosoftADRequest_NetworkType = CreateMicrosoftADRequest.AddMember("NetworkType", NetworkType)
-
-	CreateMicrosoftADResult_DirectoryId = CreateMicrosoftADResult.AddMember("DirectoryId", _DirectoryId)
-
-	CreateSnapshotRequest_DirectoryId = CreateSnapshotRequest.AddMember("DirectoryId", _DirectoryId)
-
-	CreateSnapshotRequest_Name = CreateSnapshotRequest.AddMember("Name", _SnapshotName)
-
-	CreateSnapshotResult_SnapshotId = CreateSnapshotResult.AddMember("SnapshotId", _SnapshotId)
-
-	CreateTrustRequest_DirectoryId = CreateTrustRequest.AddMember("DirectoryId", _DirectoryId)
-
-	CreateTrustRequest_RemoteDomainName = CreateTrustRequest.AddMember("RemoteDomainName", _RemoteDomainName)
-
-	CreateTrustRequest_TrustPassword = CreateTrustRequest.AddMember("TrustPassword", _TrustPassword)
-
-	CreateTrustRequest_TrustDirection = CreateTrustRequest.AddMember("TrustDirection", TrustDirection)
-
-	CreateTrustRequest_TrustType = CreateTrustRequest.AddMember("TrustType", TrustType)
-
-	CreateTrustRequest_ConditionalForwarderIpAddrs = CreateTrustRequest.AddMember("ConditionalForwarderIpAddrs", _DnsIpAddrs)
-
-	CreateTrustRequest_ConditionalForwarderIpv6Addrs = CreateTrustRequest.AddMember("ConditionalForwarderIpv6Addrs", _DnsIpv6Addrs)
-
-	CreateTrustRequest_SelectiveAuth = CreateTrustRequest.AddMember("SelectiveAuth", SelectiveAuth)
-
-	CreateTrustResult_TrustId = CreateTrustResult.AddMember("TrustId", _TrustId)
-
-	DeleteADAssessmentRequest_AssessmentId = DeleteADAssessmentRequest.AddMember("AssessmentId", _AssessmentId)
-
-	DeleteADAssessmentResult_AssessmentId = DeleteADAssessmentResult.AddMember("AssessmentId", _AssessmentId)
-
-	DeleteConditionalForwarderRequest_DirectoryId = DeleteConditionalForwarderRequest.AddMember("DirectoryId", _DirectoryId)
-
-	DeleteConditionalForwarderRequest_RemoteDomainName = DeleteConditionalForwarderRequest.AddMember("RemoteDomainName", _RemoteDomainName)
-
-	DeleteDirectoryRequest_DirectoryId = DeleteDirectoryRequest.AddMember("DirectoryId", _DirectoryId)
-
-	DeleteDirectoryResult_DirectoryId = DeleteDirectoryResult.AddMember("DirectoryId", _DirectoryId)
-
-	DeleteLogSubscriptionRequest_DirectoryId = DeleteLogSubscriptionRequest.AddMember("DirectoryId", _DirectoryId)
-
-	DeleteSnapshotRequest_SnapshotId = DeleteSnapshotRequest.AddMember("SnapshotId", _SnapshotId)
-
-	DeleteSnapshotResult_SnapshotId = DeleteSnapshotResult.AddMember("SnapshotId", _SnapshotId)
-
-	DeleteTrustRequest_TrustId = DeleteTrustRequest.AddMember("TrustId", _TrustId)
-
-	DeleteTrustRequest_DeleteAssociatedConditionalForwarder = DeleteTrustRequest.AddMember("DeleteAssociatedConditionalForwarder", _DeleteAssociatedConditionalForwarder)
-
-	DeleteTrustResult_TrustId = DeleteTrustResult.AddMember("TrustId", _TrustId)
-
-	DeregisterCertificateRequest_DirectoryId = DeregisterCertificateRequest.AddMember("DirectoryId", _DirectoryId)
-
-	DeregisterCertificateRequest_CertificateId = DeregisterCertificateRequest.AddMember("CertificateId", _CertificateId)
-
-	DeregisterEventTopicRequest_DirectoryId = DeregisterEventTopicRequest.AddMember("DirectoryId", _DirectoryId)
-
-	DeregisterEventTopicRequest_TopicName = DeregisterEventTopicRequest.AddMember("TopicName", _TopicName)
-
-	DescribeADAssessmentRequest_AssessmentId = DescribeADAssessmentRequest.AddMember("AssessmentId", _AssessmentId)
-
-	DescribeADAssessmentResult_Assessment = DescribeADAssessmentResult.AddMember("Assessment", Assessment)
-
-	DescribeADAssessmentResult_AssessmentReports = DescribeADAssessmentResult.AddMember("AssessmentReports", _AssessmentReports)
-
-	DescribeCAEnrollmentPolicyRequest_DirectoryId = DescribeCAEnrollmentPolicyRequest.AddMember("DirectoryId", _DirectoryId)
-
-	DescribeCAEnrollmentPolicyResult_DirectoryId = DescribeCAEnrollmentPolicyResult.AddMember("DirectoryId", _DirectoryId)
-
-	DescribeCAEnrollmentPolicyResult_PcaConnectorArn = DescribeCAEnrollmentPolicyResult.AddMember("PcaConnectorArn", _PcaConnectorArn)
-
-	DescribeCAEnrollmentPolicyResult_CaEnrollmentPolicyStatus = DescribeCAEnrollmentPolicyResult.AddMember("CaEnrollmentPolicyStatus", CaEnrollmentPolicyStatus)
-
-	DescribeCAEnrollmentPolicyResult_LastUpdatedDateTime = DescribeCAEnrollmentPolicyResult.AddMember("LastUpdatedDateTime", _LastUpdatedDateTime)
-
-	DescribeCAEnrollmentPolicyResult_CaEnrollmentPolicyStatusReason = DescribeCAEnrollmentPolicyResult.AddMember("CaEnrollmentPolicyStatusReason", _CaEnrollmentPolicyStatusReason)
-
-	DescribeCertificateRequest_DirectoryId = DescribeCertificateRequest.AddMember("DirectoryId", _DirectoryId)
-
-	DescribeCertificateRequest_CertificateId = DescribeCertificateRequest.AddMember("CertificateId", _CertificateId)
-
-	DescribeCertificateResult_Certificate = DescribeCertificateResult.AddMember("Certificate", Certificate)
-
-	DescribeClientAuthenticationSettingsRequest_DirectoryId = DescribeClientAuthenticationSettingsRequest.AddMember("DirectoryId", _DirectoryId)
-
-	DescribeClientAuthenticationSettingsRequest_Type = DescribeClientAuthenticationSettingsRequest.AddMember("Type", ClientAuthenticationType)
-
-	DescribeClientAuthenticationSettingsRequest_NextToken = DescribeClientAuthenticationSettingsRequest.AddMember("NextToken", _NextToken)
-
-	DescribeClientAuthenticationSettingsRequest_Limit = DescribeClientAuthenticationSettingsRequest.AddMember("Limit", _PageLimit)
-
-	DescribeClientAuthenticationSettingsResult_ClientAuthenticationSettingsInfo = DescribeClientAuthenticationSettingsResult.AddMember("ClientAuthenticationSettingsInfo", _ClientAuthenticationSettingsInfo)
-
-	DescribeClientAuthenticationSettingsResult_NextToken = DescribeClientAuthenticationSettingsResult.AddMember("NextToken", _NextToken)
-
-	DescribeConditionalForwardersRequest_DirectoryId = DescribeConditionalForwardersRequest.AddMember("DirectoryId", _DirectoryId)
-
-	DescribeConditionalForwardersRequest_RemoteDomainNames = DescribeConditionalForwardersRequest.AddMember("RemoteDomainNames", _RemoteDomainNames)
-
-	DescribeConditionalForwardersResult_ConditionalForwarders = DescribeConditionalForwardersResult.AddMember("ConditionalForwarders", _ConditionalForwarders)
-
-	DescribeDirectoriesRequest_DirectoryIds = DescribeDirectoriesRequest.AddMember("DirectoryIds", _DirectoryIds)
-
-	DescribeDirectoriesRequest_NextToken = DescribeDirectoriesRequest.AddMember("NextToken", _NextToken)
-
-	DescribeDirectoriesRequest_Limit = DescribeDirectoriesRequest.AddMember("Limit", _Limit)
-
-	DescribeDirectoriesResult_DirectoryDescriptions = DescribeDirectoriesResult.AddMember("DirectoryDescriptions", _DirectoryDescriptions)
-
-	DescribeDirectoriesResult_NextToken = DescribeDirectoriesResult.AddMember("NextToken", _NextToken)
-
-	DescribeDirectoryDataAccessRequest_DirectoryId = DescribeDirectoryDataAccessRequest.AddMember("DirectoryId", _DirectoryId)
-
-	DescribeDirectoryDataAccessResult_DataAccessStatus = DescribeDirectoryDataAccessResult.AddMember("DataAccessStatus", DataAccessStatus)
-
-	DescribeDomainControllersRequest_DirectoryId = DescribeDomainControllersRequest.AddMember("DirectoryId", _DirectoryId)
-
-	DescribeDomainControllersRequest_DomainControllerIds = DescribeDomainControllersRequest.AddMember("DomainControllerIds", _DomainControllerIds)
-
-	DescribeDomainControllersRequest_NextToken = DescribeDomainControllersRequest.AddMember("NextToken", _NextToken)
-
-	DescribeDomainControllersRequest_Limit = DescribeDomainControllersRequest.AddMember("Limit", _Limit)
-
-	DescribeDomainControllersResult_DomainControllers = DescribeDomainControllersResult.AddMember("DomainControllers", _DomainControllers)
-
-	DescribeDomainControllersResult_NextToken = DescribeDomainControllersResult.AddMember("NextToken", _NextToken)
-
-	DescribeEventTopicsRequest_DirectoryId = DescribeEventTopicsRequest.AddMember("DirectoryId", _DirectoryId)
-
-	DescribeEventTopicsRequest_TopicNames = DescribeEventTopicsRequest.AddMember("TopicNames", _TopicNames)
-
-	DescribeEventTopicsResult_EventTopics = DescribeEventTopicsResult.AddMember("EventTopics", _EventTopics)
-
-	DescribeHybridADUpdateRequest_DirectoryId = DescribeHybridADUpdateRequest.AddMember("DirectoryId", _DirectoryId)
-
-	DescribeHybridADUpdateRequest_UpdateType = DescribeHybridADUpdateRequest.AddMember("UpdateType", HybridUpdateType)
-
-	DescribeHybridADUpdateRequest_NextToken = DescribeHybridADUpdateRequest.AddMember("NextToken", _NextToken)
-
-	DescribeHybridADUpdateResult_UpdateActivities = DescribeHybridADUpdateResult.AddMember("UpdateActivities", HybridUpdateActivities)
-
-	DescribeHybridADUpdateResult_NextToken = DescribeHybridADUpdateResult.AddMember("NextToken", _NextToken)
-
-	DescribeLDAPSSettingsRequest_DirectoryId = DescribeLDAPSSettingsRequest.AddMember("DirectoryId", _DirectoryId)
-
-	DescribeLDAPSSettingsRequest_Type = DescribeLDAPSSettingsRequest.AddMember("Type", LDAPSType)
-
-	DescribeLDAPSSettingsRequest_NextToken = DescribeLDAPSSettingsRequest.AddMember("NextToken", _NextToken)
-
-	DescribeLDAPSSettingsRequest_Limit = DescribeLDAPSSettingsRequest.AddMember("Limit", _PageLimit)
-
-	DescribeLDAPSSettingsResult_LDAPSSettingsInfo = DescribeLDAPSSettingsResult.AddMember("LDAPSSettingsInfo", _LDAPSSettingsInfo)
-
-	DescribeLDAPSSettingsResult_NextToken = DescribeLDAPSSettingsResult.AddMember("NextToken", _NextToken)
-
-	DescribeRegionsRequest_DirectoryId = DescribeRegionsRequest.AddMember("DirectoryId", _DirectoryId)
-
-	DescribeRegionsRequest_RegionName = DescribeRegionsRequest.AddMember("RegionName", _RegionName)
-
-	DescribeRegionsRequest_NextToken = DescribeRegionsRequest.AddMember("NextToken", _NextToken)
-
-	DescribeRegionsResult_RegionsDescription = DescribeRegionsResult.AddMember("RegionsDescription", _RegionsDescription)
-
-	DescribeRegionsResult_NextToken = DescribeRegionsResult.AddMember("NextToken", _NextToken)
-
-	DescribeSettingsRequest_DirectoryId = DescribeSettingsRequest.AddMember("DirectoryId", _DirectoryId)
-
-	DescribeSettingsRequest_Status = DescribeSettingsRequest.AddMember("Status", DirectoryConfigurationStatus)
-
-	DescribeSettingsRequest_NextToken = DescribeSettingsRequest.AddMember("NextToken", _NextToken)
-
-	DescribeSettingsResult_DirectoryId = DescribeSettingsResult.AddMember("DirectoryId", _DirectoryId)
-
-	DescribeSettingsResult_SettingEntries = DescribeSettingsResult.AddMember("SettingEntries", _SettingEntries)
-
-	DescribeSettingsResult_NextToken = DescribeSettingsResult.AddMember("NextToken", _NextToken)
-
-	DescribeSharedDirectoriesRequest_OwnerDirectoryId = DescribeSharedDirectoriesRequest.AddMember("OwnerDirectoryId", _DirectoryId)
-
-	DescribeSharedDirectoriesRequest_SharedDirectoryIds = DescribeSharedDirectoriesRequest.AddMember("SharedDirectoryIds", _DirectoryIds)
-
-	DescribeSharedDirectoriesRequest_NextToken = DescribeSharedDirectoriesRequest.AddMember("NextToken", _NextToken)
-
-	DescribeSharedDirectoriesRequest_Limit = DescribeSharedDirectoriesRequest.AddMember("Limit", _Limit)
-
-	DescribeSharedDirectoriesResult_SharedDirectories = DescribeSharedDirectoriesResult.AddMember("SharedDirectories", _SharedDirectories)
-
-	DescribeSharedDirectoriesResult_NextToken = DescribeSharedDirectoriesResult.AddMember("NextToken", _NextToken)
-
-	DescribeSnapshotsRequest_DirectoryId = DescribeSnapshotsRequest.AddMember("DirectoryId", _DirectoryId)
-
-	DescribeSnapshotsRequest_SnapshotIds = DescribeSnapshotsRequest.AddMember("SnapshotIds", _SnapshotIds)
-
-	DescribeSnapshotsRequest_NextToken = DescribeSnapshotsRequest.AddMember("NextToken", _NextToken)
-
-	DescribeSnapshotsRequest_Limit = DescribeSnapshotsRequest.AddMember("Limit", _Limit)
-
-	DescribeSnapshotsResult_Snapshots = DescribeSnapshotsResult.AddMember("Snapshots", _Snapshots)
-
-	DescribeSnapshotsResult_NextToken = DescribeSnapshotsResult.AddMember("NextToken", _NextToken)
-
-	DescribeTrustsRequest_DirectoryId = DescribeTrustsRequest.AddMember("DirectoryId", _DirectoryId)
-
-	DescribeTrustsRequest_TrustIds = DescribeTrustsRequest.AddMember("TrustIds", _TrustIds)
-
-	DescribeTrustsRequest_NextToken = DescribeTrustsRequest.AddMember("NextToken", _NextToken)
-
-	DescribeTrustsRequest_Limit = DescribeTrustsRequest.AddMember("Limit", _Limit)
-
-	DescribeTrustsResult_Trusts = DescribeTrustsResult.AddMember("Trusts", _Trusts)
-
-	DescribeTrustsResult_NextToken = DescribeTrustsResult.AddMember("NextToken", _NextToken)
-
-	DescribeUpdateDirectoryRequest_DirectoryId = DescribeUpdateDirectoryRequest.AddMember("DirectoryId", _DirectoryId)
-
-	DescribeUpdateDirectoryRequest_UpdateType = DescribeUpdateDirectoryRequest.AddMember("UpdateType", UpdateType)
-
-	DescribeUpdateDirectoryRequest_RegionName = DescribeUpdateDirectoryRequest.AddMember("RegionName", _RegionName)
-
-	DescribeUpdateDirectoryRequest_NextToken = DescribeUpdateDirectoryRequest.AddMember("NextToken", _NextToken)
-
-	DescribeUpdateDirectoryResult_UpdateActivities = DescribeUpdateDirectoryResult.AddMember("UpdateActivities", _UpdateActivities)
-
-	DescribeUpdateDirectoryResult_NextToken = DescribeUpdateDirectoryResult.AddMember("NextToken", _NextToken)
-
-	DisableCAEnrollmentPolicyRequest_DirectoryId = DisableCAEnrollmentPolicyRequest.AddMember("DirectoryId", _DirectoryId)
-
-	DisableClientAuthenticationRequest_DirectoryId = DisableClientAuthenticationRequest.AddMember("DirectoryId", _DirectoryId)
-
-	DisableClientAuthenticationRequest_Type = DisableClientAuthenticationRequest.AddMember("Type", ClientAuthenticationType)
-
-	DisableDirectoryDataAccessRequest_DirectoryId = DisableDirectoryDataAccessRequest.AddMember("DirectoryId", _DirectoryId)
-
-	DisableLDAPSRequest_DirectoryId = DisableLDAPSRequest.AddMember("DirectoryId", _DirectoryId)
-
-	DisableLDAPSRequest_Type = DisableLDAPSRequest.AddMember("Type", LDAPSType)
-
-	DisableRadiusRequest_DirectoryId = DisableRadiusRequest.AddMember("DirectoryId", _DirectoryId)
-
-	DisableSsoRequest_DirectoryId = DisableSsoRequest.AddMember("DirectoryId", _DirectoryId)
-
-	DisableSsoRequest_UserName = DisableSsoRequest.AddMember("UserName", _UserName)
-
-	DisableSsoRequest_Password = DisableSsoRequest.AddMember("Password", _ConnectPassword)
-
-	EnableCAEnrollmentPolicyRequest_DirectoryId = EnableCAEnrollmentPolicyRequest.AddMember("DirectoryId", _DirectoryId)
-
-	EnableCAEnrollmentPolicyRequest_PcaConnectorArn = EnableCAEnrollmentPolicyRequest.AddMember("PcaConnectorArn", _PcaConnectorArn)
-
-	EnableClientAuthenticationRequest_DirectoryId = EnableClientAuthenticationRequest.AddMember("DirectoryId", _DirectoryId)
-
-	EnableClientAuthenticationRequest_Type = EnableClientAuthenticationRequest.AddMember("Type", ClientAuthenticationType)
-
-	EnableDirectoryDataAccessRequest_DirectoryId = EnableDirectoryDataAccessRequest.AddMember("DirectoryId", _DirectoryId)
-
-	EnableLDAPSRequest_DirectoryId = EnableLDAPSRequest.AddMember("DirectoryId", _DirectoryId)
-
-	EnableLDAPSRequest_Type = EnableLDAPSRequest.AddMember("Type", LDAPSType)
-
-	EnableRadiusRequest_DirectoryId = EnableRadiusRequest.AddMember("DirectoryId", _DirectoryId)
-
-	EnableRadiusRequest_RadiusSettings = EnableRadiusRequest.AddMember("RadiusSettings", RadiusSettings)
-
-	EnableSsoRequest_DirectoryId = EnableSsoRequest.AddMember("DirectoryId", _DirectoryId)
-
-	EnableSsoRequest_UserName = EnableSsoRequest.AddMember("UserName", _UserName)
-
-	EnableSsoRequest_Password = EnableSsoRequest.AddMember("Password", _ConnectPassword)
-
-	GetDirectoryLimitsResult_DirectoryLimits = GetDirectoryLimitsResult.AddMember("DirectoryLimits", DirectoryLimits)
-
-	GetSnapshotLimitsRequest_DirectoryId = GetSnapshotLimitsRequest.AddMember("DirectoryId", _DirectoryId)
-
-	GetSnapshotLimitsResult_SnapshotLimits = GetSnapshotLimitsResult.AddMember("SnapshotLimits", SnapshotLimits)
-
-	ListADAssessmentsRequest_DirectoryId = ListADAssessmentsRequest.AddMember("DirectoryId", _DirectoryId)
-
-	ListADAssessmentsRequest_NextToken = ListADAssessmentsRequest.AddMember("NextToken", _NextToken)
-
-	ListADAssessmentsRequest_Limit = ListADAssessmentsRequest.AddMember("Limit", _AssessmentLimit)
-
-	ListADAssessmentsResult_Assessments = ListADAssessmentsResult.AddMember("Assessments", _Assessments)
-
-	ListADAssessmentsResult_NextToken = ListADAssessmentsResult.AddMember("NextToken", _NextToken)
-
-	ListCertificatesRequest_DirectoryId = ListCertificatesRequest.AddMember("DirectoryId", _DirectoryId)
-
-	ListCertificatesRequest_NextToken = ListCertificatesRequest.AddMember("NextToken", _NextToken)
-
-	ListCertificatesRequest_Limit = ListCertificatesRequest.AddMember("Limit", _PageLimit)
-
-	ListCertificatesResult_NextToken = ListCertificatesResult.AddMember("NextToken", _NextToken)
-
-	ListCertificatesResult_CertificatesInfo = ListCertificatesResult.AddMember("CertificatesInfo", _CertificatesInfo)
-
-	ListIpRoutesRequest_DirectoryId = ListIpRoutesRequest.AddMember("DirectoryId", _DirectoryId)
-
-	ListIpRoutesRequest_NextToken = ListIpRoutesRequest.AddMember("NextToken", _NextToken)
-
-	ListIpRoutesRequest_Limit = ListIpRoutesRequest.AddMember("Limit", _Limit)
-
-	ListIpRoutesResult_IpRoutesInfo = ListIpRoutesResult.AddMember("IpRoutesInfo", _IpRoutesInfo)
-
-	ListIpRoutesResult_NextToken = ListIpRoutesResult.AddMember("NextToken", _NextToken)
-
-	ListLogSubscriptionsRequest_DirectoryId = ListLogSubscriptionsRequest.AddMember("DirectoryId", _DirectoryId)
-
-	ListLogSubscriptionsRequest_NextToken = ListLogSubscriptionsRequest.AddMember("NextToken", _NextToken)
-
-	ListLogSubscriptionsRequest_Limit = ListLogSubscriptionsRequest.AddMember("Limit", _Limit)
-
-	ListLogSubscriptionsResult_LogSubscriptions = ListLogSubscriptionsResult.AddMember("LogSubscriptions", _LogSubscriptions)
-
-	ListLogSubscriptionsResult_NextToken = ListLogSubscriptionsResult.AddMember("NextToken", _NextToken)
-
-	ListSchemaExtensionsRequest_DirectoryId = ListSchemaExtensionsRequest.AddMember("DirectoryId", _DirectoryId)
-
-	ListSchemaExtensionsRequest_NextToken = ListSchemaExtensionsRequest.AddMember("NextToken", _NextToken)
-
-	ListSchemaExtensionsRequest_Limit = ListSchemaExtensionsRequest.AddMember("Limit", _Limit)
-
-	ListSchemaExtensionsResult_SchemaExtensionsInfo = ListSchemaExtensionsResult.AddMember("SchemaExtensionsInfo", _SchemaExtensionsInfo)
-
-	ListSchemaExtensionsResult_NextToken = ListSchemaExtensionsResult.AddMember("NextToken", _NextToken)
-
-	ListTagsForResourceRequest_ResourceId = ListTagsForResourceRequest.AddMember("ResourceId", _ResourceId)
-
-	ListTagsForResourceRequest_NextToken = ListTagsForResourceRequest.AddMember("NextToken", _NextToken)
-
-	ListTagsForResourceRequest_Limit = ListTagsForResourceRequest.AddMember("Limit", _Limit)
-
-	ListTagsForResourceResult_Tags = ListTagsForResourceResult.AddMember("Tags", _Tags)
-
-	ListTagsForResourceResult_NextToken = ListTagsForResourceResult.AddMember("NextToken", _NextToken)
-
-	RegisterCertificateRequest_DirectoryId = RegisterCertificateRequest.AddMember("DirectoryId", _DirectoryId)
-
-	RegisterCertificateRequest_CertificateData = RegisterCertificateRequest.AddMember("CertificateData", _CertificateData)
-
-	RegisterCertificateRequest_Type = RegisterCertificateRequest.AddMember("Type", CertificateType)
-
-	RegisterCertificateRequest_ClientCertAuthSettings = RegisterCertificateRequest.AddMember("ClientCertAuthSettings", ClientCertAuthSettings)
-
-	RegisterCertificateResult_CertificateId = RegisterCertificateResult.AddMember("CertificateId", _CertificateId)
-
-	RegisterEventTopicRequest_DirectoryId = RegisterEventTopicRequest.AddMember("DirectoryId", _DirectoryId)
-
-	RegisterEventTopicRequest_TopicName = RegisterEventTopicRequest.AddMember("TopicName", _TopicName)
-
-	RejectSharedDirectoryRequest_SharedDirectoryId = RejectSharedDirectoryRequest.AddMember("SharedDirectoryId", _DirectoryId)
-
-	RejectSharedDirectoryResult_SharedDirectoryId = RejectSharedDirectoryResult.AddMember("SharedDirectoryId", _DirectoryId)
-
-	RemoveIpRoutesRequest_DirectoryId = RemoveIpRoutesRequest.AddMember("DirectoryId", _DirectoryId)
-
-	RemoveIpRoutesRequest_CidrIps = RemoveIpRoutesRequest.AddMember("CidrIps", _CidrIps)
-
-	RemoveIpRoutesRequest_CidrIpv6s = RemoveIpRoutesRequest.AddMember("CidrIpv6s", _CidrIpv6s)
-
-	RemoveRegionRequest_DirectoryId = RemoveRegionRequest.AddMember("DirectoryId", _DirectoryId)
-
-	RemoveTagsFromResourceRequest_ResourceId = RemoveTagsFromResourceRequest.AddMember("ResourceId", _ResourceId)
-
-	RemoveTagsFromResourceRequest_TagKeys = RemoveTagsFromResourceRequest.AddMember("TagKeys", _TagKeys)
-
-	ResetUserPasswordRequest_DirectoryId = ResetUserPasswordRequest.AddMember("DirectoryId", _DirectoryId)
-
-	ResetUserPasswordRequest_UserName = ResetUserPasswordRequest.AddMember("UserName", _CustomerUserName)
-
-	ResetUserPasswordRequest_NewPassword = ResetUserPasswordRequest.AddMember("NewPassword", _UserPassword)
-
-	RestoreFromSnapshotRequest_SnapshotId = RestoreFromSnapshotRequest.AddMember("SnapshotId", _SnapshotId)
-
-	ShareDirectoryRequest_DirectoryId = ShareDirectoryRequest.AddMember("DirectoryId", _DirectoryId)
-
-	ShareDirectoryRequest_ShareNotes = ShareDirectoryRequest.AddMember("ShareNotes", _Notes)
-
-	ShareDirectoryRequest_ShareTarget = ShareDirectoryRequest.AddMember("ShareTarget", ShareTarget)
-
-	ShareDirectoryRequest_ShareMethod = ShareDirectoryRequest.AddMember("ShareMethod", ShareMethod)
-
-	ShareDirectoryResult_SharedDirectoryId = ShareDirectoryResult.AddMember("SharedDirectoryId", _DirectoryId)
-
-	StartADAssessmentRequest_AssessmentConfiguration = StartADAssessmentRequest.AddMember("AssessmentConfiguration", AssessmentConfiguration)
-
-	StartADAssessmentRequest_DirectoryId = StartADAssessmentRequest.AddMember("DirectoryId", _DirectoryId)
-
-	StartADAssessmentResult_AssessmentId = StartADAssessmentResult.AddMember("AssessmentId", _AssessmentId)
-
-	StartSchemaExtensionRequest_DirectoryId = StartSchemaExtensionRequest.AddMember("DirectoryId", _DirectoryId)
-
-	StartSchemaExtensionRequest_CreateSnapshotBeforeSchemaExtension = StartSchemaExtensionRequest.AddMember("CreateSnapshotBeforeSchemaExtension", _CreateSnapshotBeforeSchemaExtension)
-
-	StartSchemaExtensionRequest_LdifContent = StartSchemaExtensionRequest.AddMember("LdifContent", _LdifContent)
-
-	StartSchemaExtensionRequest_Description = StartSchemaExtensionRequest.AddMember("Description", _Description)
-
-	StartSchemaExtensionResult_SchemaExtensionId = StartSchemaExtensionResult.AddMember("SchemaExtensionId", _SchemaExtensionId)
-
-	UnshareDirectoryRequest_DirectoryId = UnshareDirectoryRequest.AddMember("DirectoryId", _DirectoryId)
-
-	UnshareDirectoryRequest_UnshareTarget = UnshareDirectoryRequest.AddMember("UnshareTarget", UnshareTarget)
-
-	UnshareDirectoryResult_SharedDirectoryId = UnshareDirectoryResult.AddMember("SharedDirectoryId", _DirectoryId)
-
-	UpdateConditionalForwarderRequest_DirectoryId = UpdateConditionalForwarderRequest.AddMember("DirectoryId", _DirectoryId)
-
-	UpdateConditionalForwarderRequest_RemoteDomainName = UpdateConditionalForwarderRequest.AddMember("RemoteDomainName", _RemoteDomainName)
-
-	UpdateConditionalForwarderRequest_DnsIpAddrs = UpdateConditionalForwarderRequest.AddMember("DnsIpAddrs", _DnsIpAddrs)
-
-	UpdateConditionalForwarderRequest_DnsIpv6Addrs = UpdateConditionalForwarderRequest.AddMember("DnsIpv6Addrs", _DnsIpv6Addrs)
-
-	UpdateDirectorySetupRequest_DirectoryId = UpdateDirectorySetupRequest.AddMember("DirectoryId", _DirectoryId)
-
-	UpdateDirectorySetupRequest_UpdateType = UpdateDirectorySetupRequest.AddMember("UpdateType", UpdateType)
-
-	UpdateDirectorySetupRequest_OSUpdateSettings = UpdateDirectorySetupRequest.AddMember("OSUpdateSettings", OSUpdateSettings)
-
-	UpdateDirectorySetupRequest_DirectorySizeUpdateSettings = UpdateDirectorySetupRequest.AddMember("DirectorySizeUpdateSettings", DirectorySizeUpdateSettings)
-
-	UpdateDirectorySetupRequest_NetworkUpdateSettings = UpdateDirectorySetupRequest.AddMember("NetworkUpdateSettings", NetworkUpdateSettings)
-
-	UpdateDirectorySetupRequest_CreateSnapshotBeforeUpdate = UpdateDirectorySetupRequest.AddMember("CreateSnapshotBeforeUpdate", _CreateSnapshotBeforeUpdate)
-
-	UpdateHybridADRequest_DirectoryId = UpdateHybridADRequest.AddMember("DirectoryId", _DirectoryId)
-
-	UpdateHybridADRequest_HybridAdministratorAccountUpdate = UpdateHybridADRequest.AddMember("HybridAdministratorAccountUpdate", HybridAdministratorAccountUpdate)
-
-	UpdateHybridADRequest_SelfManagedInstancesSettings = UpdateHybridADRequest.AddMember("SelfManagedInstancesSettings", HybridCustomerInstancesSettings)
-
-	UpdateHybridADResult_DirectoryId = UpdateHybridADResult.AddMember("DirectoryId", _DirectoryId)
-
-	UpdateHybridADResult_AssessmentId = UpdateHybridADResult.AddMember("AssessmentId", _AssessmentId)
-
-	UpdateNumberOfDomainControllersRequest_DirectoryId = UpdateNumberOfDomainControllersRequest.AddMember("DirectoryId", _DirectoryId)
-
-	UpdateNumberOfDomainControllersRequest_DesiredNumber = UpdateNumberOfDomainControllersRequest.AddMember("DesiredNumber", _DesiredNumberOfDomainControllers)
-
-	UpdateRadiusRequest_DirectoryId = UpdateRadiusRequest.AddMember("DirectoryId", _DirectoryId)
-
-	UpdateRadiusRequest_RadiusSettings = UpdateRadiusRequest.AddMember("RadiusSettings", RadiusSettings)
-
-	UpdateSettingsRequest_DirectoryId = UpdateSettingsRequest.AddMember("DirectoryId", _DirectoryId)
-
-	UpdateSettingsRequest_Settings = UpdateSettingsRequest.AddMember("Settings", _Settings)
-
-	UpdateSettingsResult_DirectoryId = UpdateSettingsResult.AddMember("DirectoryId", _DirectoryId)
-
-	UpdateTrustRequest_TrustId = UpdateTrustRequest.AddMember("TrustId", _TrustId)
-
-	UpdateTrustRequest_SelectiveAuth = UpdateTrustRequest.AddMember("SelectiveAuth", SelectiveAuth)
-
-	UpdateTrustResult_RequestId = UpdateTrustResult.AddMember("RequestId", _RequestId)
-
-	UpdateTrustResult_TrustId = UpdateTrustResult.AddMember("TrustId", _TrustId)
-
-	VerifyTrustRequest_TrustId = VerifyTrustRequest.AddMember("TrustId", _TrustId)
-
-	VerifyTrustResult_TrustId = VerifyTrustResult.AddMember("TrustId", _TrustId)
-
-}
+var (
+	iAcceptSharedDirectory                               = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "AcceptSharedDirectory"}
+	iAddIpRoutes                                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "AddIpRoutes"}
+	iAddRegion                                           = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "AddRegion"}
+	iAddTagsToResource                                   = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "AddTagsToResource"}
+	iCancelSchemaExtension                               = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CancelSchemaExtension"}
+	iConnectDirectory                                    = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "ConnectDirectory"}
+	iCreateAlias                                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CreateAlias"}
+	iCreateComputer                                      = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CreateComputer"}
+	iCreateConditionalForwarder                          = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CreateConditionalForwarder"}
+	iCreateDirectory                                     = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CreateDirectory"}
+	iCreateHybridAD                                      = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CreateHybridAD"}
+	iCreateLogSubscription                               = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CreateLogSubscription"}
+	iCreateMicrosoftAD                                   = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CreateMicrosoftAD"}
+	iCreateSnapshot                                      = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CreateSnapshot"}
+	iCreateTrust                                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CreateTrust"}
+	iDeleteADAssessment                                  = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DeleteADAssessment"}
+	iDeleteConditionalForwarder                          = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DeleteConditionalForwarder"}
+	iDeleteDirectory                                     = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DeleteDirectory"}
+	iDeleteLogSubscription                               = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DeleteLogSubscription"}
+	iDeleteSnapshot                                      = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DeleteSnapshot"}
+	iDeleteTrust                                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DeleteTrust"}
+	iDeregisterCertificate                               = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DeregisterCertificate"}
+	iDeregisterEventTopic                                = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DeregisterEventTopic"}
+	iDescribeADAssessment                                = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeADAssessment"}
+	iDescribeCAEnrollmentPolicy                          = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeCAEnrollmentPolicy"}
+	iDescribeCertificate                                 = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeCertificate"}
+	iDescribeClientAuthenticationSettings                = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeClientAuthenticationSettings"}
+	iDescribeConditionalForwarders                       = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeConditionalForwarders"}
+	iDescribeDirectories                                 = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeDirectories"}
+	iDescribeDirectoryDataAccess                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeDirectoryDataAccess"}
+	iDescribeDomainControllers                           = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeDomainControllers"}
+	iDescribeEventTopics                                 = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeEventTopics"}
+	iDescribeHybridADUpdate                              = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeHybridADUpdate"}
+	iDescribeLDAPSSettings                               = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeLDAPSSettings"}
+	iDescribeRegions                                     = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeRegions"}
+	iDescribeSettings                                    = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeSettings"}
+	iDescribeSharedDirectories                           = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeSharedDirectories"}
+	iDescribeSnapshots                                   = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeSnapshots"}
+	iDescribeTrusts                                      = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeTrusts"}
+	iDescribeUpdateDirectory                             = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeUpdateDirectory"}
+	iDisableCAEnrollmentPolicy                           = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DisableCAEnrollmentPolicy"}
+	iDisableClientAuthentication                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DisableClientAuthentication"}
+	iDisableDirectoryDataAccess                          = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DisableDirectoryDataAccess"}
+	iDisableLDAPS                                        = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DisableLDAPS"}
+	iDisableRadius                                       = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DisableRadius"}
+	iDisableSso                                          = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DisableSso"}
+	iEnableCAEnrollmentPolicy                            = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "EnableCAEnrollmentPolicy"}
+	iEnableClientAuthentication                          = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "EnableClientAuthentication"}
+	iEnableDirectoryDataAccess                           = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "EnableDirectoryDataAccess"}
+	iEnableLDAPS                                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "EnableLDAPS"}
+	iEnableRadius                                        = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "EnableRadius"}
+	iEnableSso                                           = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "EnableSso"}
+	iGetDirectoryLimits                                  = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "GetDirectoryLimits"}
+	iGetSnapshotLimits                                   = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "GetSnapshotLimits"}
+	iListADAssessments                                   = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "ListADAssessments"}
+	iListCertificates                                    = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "ListCertificates"}
+	iListIpRoutes                                        = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "ListIpRoutes"}
+	iListLogSubscriptions                                = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "ListLogSubscriptions"}
+	iListSchemaExtensions                                = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "ListSchemaExtensions"}
+	iListTagsForResource                                 = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "ListTagsForResource"}
+	iRegisterCertificate                                 = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "RegisterCertificate"}
+	iRegisterEventTopic                                  = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "RegisterEventTopic"}
+	iRejectSharedDirectory                               = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "RejectSharedDirectory"}
+	iRemoveIpRoutes                                      = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "RemoveIpRoutes"}
+	iRemoveRegion                                        = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "RemoveRegion"}
+	iRemoveTagsFromResource                              = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "RemoveTagsFromResource"}
+	iResetUserPassword                                   = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "ResetUserPassword"}
+	iRestoreFromSnapshot                                 = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "RestoreFromSnapshot"}
+	iShareDirectory                                      = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "ShareDirectory"}
+	iStartADAssessment                                   = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "StartADAssessment"}
+	iStartSchemaExtension                                = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "StartSchemaExtension"}
+	iUnshareDirectory                                    = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "UnshareDirectory"}
+	iUpdateConditionalForwarder                          = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "UpdateConditionalForwarder"}
+	iUpdateDirectorySetup                                = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "UpdateDirectorySetup"}
+	iUpdateHybridAD                                      = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "UpdateHybridAD"}
+	iUpdateNumberOfDomainControllers                     = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "UpdateNumberOfDomainControllers"}
+	iUpdateRadius                                        = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "UpdateRadius"}
+	iUpdateSettings                                      = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "UpdateSettings"}
+	iUpdateTrust                                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "UpdateTrust"}
+	iVerifyTrust                                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "VerifyTrust"}
+	i_DirectoryService_20150416                          = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DirectoryService_20150416"}
+	iAccessDeniedException                               = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "AccessDeniedException"}
+	i_AccessUrl                                          = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "AccessUrl"}
+	iADAssessmentLimitExceededException                  = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "ADAssessmentLimitExceededException"}
+	i_AddedDateTime                                      = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "AddedDateTime"}
+	i_AdditionalRegions                                  = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "AdditionalRegions"}
+	i_AliasName                                          = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "AliasName"}
+	iAssessment                                          = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "Assessment"}
+	iAssessmentConfiguration                             = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "AssessmentConfiguration"}
+	i_AssessmentId                                       = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "AssessmentId"}
+	i_AssessmentInstanceId                               = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "AssessmentInstanceId"}
+	i_AssessmentInstanceIds                              = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "AssessmentInstanceIds"}
+	i_AssessmentLimit                                    = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "AssessmentLimit"}
+	iAssessmentReport                                    = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "AssessmentReport"}
+	i_AssessmentReports                                  = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "AssessmentReports"}
+	i_AssessmentReportType                               = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "AssessmentReportType"}
+	i_Assessments                                        = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "Assessments"}
+	i_AssessmentStartTime                                = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "AssessmentStartTime"}
+	i_AssessmentStatus                                   = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "AssessmentStatus"}
+	i_AssessmentStatusCode                               = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "AssessmentStatusCode"}
+	i_AssessmentStatusReason                             = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "AssessmentStatusReason"}
+	iAssessmentSummary                                   = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "AssessmentSummary"}
+	iAssessmentValidation                                = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "AssessmentValidation"}
+	i_AssessmentValidationCategory                       = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "AssessmentValidationCategory"}
+	i_AssessmentValidationName                           = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "AssessmentValidationName"}
+	i_AssessmentValidations                              = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "AssessmentValidations"}
+	i_AssessmentValidationStatus                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "AssessmentValidationStatus"}
+	i_AssessmentValidationStatusCode                     = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "AssessmentValidationStatusCode"}
+	i_AssessmentValidationStatusReason                   = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "AssessmentValidationStatusReason"}
+	i_AssessmentValidationTimeStamp                      = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "AssessmentValidationTimeStamp"}
+	i_AssessmentVersion                                  = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "AssessmentVersion"}
+	iAttribute                                           = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "Attribute"}
+	i_AttributeName                                      = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "AttributeName"}
+	i_Attributes                                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "Attributes"}
+	i_AttributeValue                                     = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "AttributeValue"}
+	iAuthenticationFailedException                       = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "AuthenticationFailedException"}
+	i_AvailabilityZone                                   = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "AvailabilityZone"}
+	i_AvailabilityZones                                  = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "AvailabilityZones"}
+	iCaEnrollmentPolicyStatus                            = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CaEnrollmentPolicyStatus"}
+	i_CaEnrollmentPolicyStatusReason                     = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CaEnrollmentPolicyStatusReason"}
+	iCertificate                                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "Certificate"}
+	iCertificateAlreadyExistsException                   = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CertificateAlreadyExistsException"}
+	i_CertificateCN                                      = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CertificateCN"}
+	i_CertificateData                                    = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CertificateData"}
+	iCertificateDoesNotExistException                    = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CertificateDoesNotExistException"}
+	i_CertificateExpiryDateTime                          = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CertificateExpiryDateTime"}
+	i_CertificateId                                      = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CertificateId"}
+	iCertificateInfo                                     = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CertificateInfo"}
+	iCertificateInUseException                           = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CertificateInUseException"}
+	iCertificateLimitExceededException                   = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CertificateLimitExceededException"}
+	i_CertificateRegisteredDateTime                      = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CertificateRegisteredDateTime"}
+	i_CertificatesInfo                                   = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CertificatesInfo"}
+	iCertificateState                                    = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CertificateState"}
+	i_CertificateStateReason                             = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CertificateStateReason"}
+	iCertificateType                                     = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CertificateType"}
+	i_CidrIp                                             = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CidrIp"}
+	i_CidrIps                                            = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CidrIps"}
+	i_CidrIpv6                                           = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CidrIpv6"}
+	i_CidrIpv6s                                          = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CidrIpv6s"}
+	iClientAuthenticationSettingInfo                     = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "ClientAuthenticationSettingInfo"}
+	i_ClientAuthenticationSettingsInfo                   = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "ClientAuthenticationSettingsInfo"}
+	iClientAuthenticationStatus                          = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "ClientAuthenticationStatus"}
+	iClientAuthenticationType                            = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "ClientAuthenticationType"}
+	iClientCertAuthSettings                              = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "ClientCertAuthSettings"}
+	iClientException                                     = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "ClientException"}
+	i_CloudOnlyDirectoriesLimitReached                   = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CloudOnlyDirectoriesLimitReached"}
+	iComputer                                            = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "Computer"}
+	i_ComputerName                                       = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "ComputerName"}
+	i_ComputerPassword                                   = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "ComputerPassword"}
+	iConditionalForwarder                                = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "ConditionalForwarder"}
+	i_ConditionalForwarders                              = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "ConditionalForwarders"}
+	i_ConnectedDirectoriesLimitReached                   = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "ConnectedDirectoriesLimitReached"}
+	i_ConnectPassword                                    = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "ConnectPassword"}
+	i_CreatedDateTime                                    = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CreatedDateTime"}
+	i_CreateSnapshotBeforeSchemaExtension                = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CreateSnapshotBeforeSchemaExtension"}
+	i_CreateSnapshotBeforeUpdate                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CreateSnapshotBeforeUpdate"}
+	i_CustomerDnsIps                                     = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CustomerDnsIps"}
+	i_CustomerId                                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CustomerId"}
+	i_CustomerUserName                                   = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CustomerUserName"}
+	iDataAccessStatus                                    = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DataAccessStatus"}
+	i_DeleteAssociatedConditionalForwarder               = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DeleteAssociatedConditionalForwarder"}
+	i_Description                                        = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "Description"}
+	i_DesiredNumberOfDomainControllers                   = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DesiredNumberOfDomainControllers"}
+	iDirectoryAlreadyInRegionException                   = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DirectoryAlreadyInRegionException"}
+	iDirectoryAlreadySharedException                     = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DirectoryAlreadySharedException"}
+	i_DirectoryConfigurationSettingAllowedValues         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DirectoryConfigurationSettingAllowedValues"}
+	i_DirectoryConfigurationSettingDataType              = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DirectoryConfigurationSettingDataType"}
+	i_DirectoryConfigurationSettingLastRequestedDateTime = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DirectoryConfigurationSettingLastRequestedDateTime"}
+	i_DirectoryConfigurationSettingLastUpdatedDateTime   = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DirectoryConfigurationSettingLastUpdatedDateTime"}
+	i_DirectoryConfigurationSettingName                  = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DirectoryConfigurationSettingName"}
+	i_DirectoryConfigurationSettingRequestDetailedStatus = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DirectoryConfigurationSettingRequestDetailedStatus"}
+	i_DirectoryConfigurationSettingRequestStatusMessage  = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DirectoryConfigurationSettingRequestStatusMessage"}
+	i_DirectoryConfigurationSettingType                  = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DirectoryConfigurationSettingType"}
+	i_DirectoryConfigurationSettingValue                 = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DirectoryConfigurationSettingValue"}
+	iDirectoryConfigurationStatus                        = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DirectoryConfigurationStatus"}
+	iDirectoryConnectSettings                            = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DirectoryConnectSettings"}
+	iDirectoryConnectSettingsDescription                 = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DirectoryConnectSettingsDescription"}
+	iDirectoryDescription                                = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DirectoryDescription"}
+	i_DirectoryDescriptions                              = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DirectoryDescriptions"}
+	iDirectoryDoesNotExistException                      = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DirectoryDoesNotExistException"}
+	iDirectoryEdition                                    = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DirectoryEdition"}
+	i_DirectoryId                                        = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DirectoryId"}
+	i_DirectoryIds                                       = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DirectoryIds"}
+	iDirectoryInDesiredStateException                    = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DirectoryInDesiredStateException"}
+	iDirectoryLimitExceededException                     = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DirectoryLimitExceededException"}
+	iDirectoryLimits                                     = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DirectoryLimits"}
+	i_DirectoryName                                      = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DirectoryName"}
+	iDirectoryNotSharedException                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DirectoryNotSharedException"}
+	i_DirectoryShortName                                 = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DirectoryShortName"}
+	iDirectorySize                                       = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DirectorySize"}
+	iDirectorySizeUpdateSettings                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DirectorySizeUpdateSettings"}
+	iDirectoryStage                                      = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DirectoryStage"}
+	iDirectoryType                                       = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DirectoryType"}
+	iDirectoryUnavailableException                       = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DirectoryUnavailableException"}
+	iDirectoryVpcSettings                                = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DirectoryVpcSettings"}
+	iDirectoryVpcSettingsDescription                     = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DirectoryVpcSettingsDescription"}
+	iDisableAlreadyInProgressException                   = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DisableAlreadyInProgressException"}
+	i_DnsIpAddrs                                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DnsIpAddrs"}
+	i_DnsIpv6Addrs                                       = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DnsIpv6Addrs"}
+	iDomainController                                    = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DomainController"}
+	i_DomainControllerId                                 = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DomainControllerId"}
+	i_DomainControllerIds                                = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DomainControllerIds"}
+	iDomainControllerLimitExceededException              = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DomainControllerLimitExceededException"}
+	i_DomainControllers                                  = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DomainControllers"}
+	iDomainControllerStatus                              = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DomainControllerStatus"}
+	i_DomainControllerStatusReason                       = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DomainControllerStatusReason"}
+	iEnableAlreadyInProgressException                    = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "EnableAlreadyInProgressException"}
+	i_EndDateTime                                        = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "EndDateTime"}
+	iEntityAlreadyExistsException                        = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "EntityAlreadyExistsException"}
+	iEntityDoesNotExistException                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "EntityDoesNotExistException"}
+	iEventTopic                                          = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "EventTopic"}
+	i_EventTopics                                        = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "EventTopics"}
+	i_ExceptionMessage                                   = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "ExceptionMessage"}
+	iHybridAdministratorAccountUpdate                    = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "HybridAdministratorAccountUpdate"}
+	iHybridCustomerInstancesSettings                     = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "HybridCustomerInstancesSettings"}
+	iHybridSettingsDescription                           = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "HybridSettingsDescription"}
+	iHybridUpdateActivities                              = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "HybridUpdateActivities"}
+	i_HybridUpdateInfoEntries                            = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "HybridUpdateInfoEntries"}
+	iHybridUpdateInfoEntry                               = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "HybridUpdateInfoEntry"}
+	iHybridUpdateType                                    = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "HybridUpdateType"}
+	iHybridUpdateValue                                   = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "HybridUpdateValue"}
+	iIncompatibleSettingsException                       = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "IncompatibleSettingsException"}
+	i_InitiatedBy                                        = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "InitiatedBy"}
+	iInsufficientPermissionsException                    = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "InsufficientPermissionsException"}
+	iInvalidCertificateException                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "InvalidCertificateException"}
+	iInvalidClientAuthStatusException                    = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "InvalidClientAuthStatusException"}
+	iInvalidLDAPSStatusException                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "InvalidLDAPSStatusException"}
+	iInvalidNextTokenException                           = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "InvalidNextTokenException"}
+	iInvalidParameterException                           = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "InvalidParameterException"}
+	iInvalidPasswordException                            = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "InvalidPasswordException"}
+	iInvalidTargetException                              = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "InvalidTargetException"}
+	i_IpAddr                                             = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "IpAddr"}
+	i_IpAddrs                                            = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "IpAddrs"}
+	iIpRoute                                             = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "IpRoute"}
+	iIpRouteInfo                                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "IpRouteInfo"}
+	iIpRouteLimitExceededException                       = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "IpRouteLimitExceededException"}
+	i_IpRoutes                                           = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "IpRoutes"}
+	i_IpRoutesInfo                                       = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "IpRoutesInfo"}
+	iIpRouteStatusMsg                                    = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "IpRouteStatusMsg"}
+	i_IpRouteStatusReason                                = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "IpRouteStatusReason"}
+	i_Ipv6Addr                                           = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "Ipv6Addr"}
+	i_IpV6Addrs                                          = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "IpV6Addrs"}
+	i_LastUpdateDateTime                                 = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "LastUpdateDateTime"}
+	i_LastUpdatedDateTime                                = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "LastUpdatedDateTime"}
+	i_LaunchTime                                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "LaunchTime"}
+	iLDAPSSettingInfo                                    = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "LDAPSSettingInfo"}
+	i_LDAPSSettingsInfo                                  = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "LDAPSSettingsInfo"}
+	iLDAPSStatus                                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "LDAPSStatus"}
+	i_LDAPSStatusReason                                  = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "LDAPSStatusReason"}
+	iLDAPSType                                           = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "LDAPSType"}
+	i_LdifContent                                        = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "LdifContent"}
+	i_Limit                                              = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "Limit"}
+	i_LogGroupName                                       = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "LogGroupName"}
+	iLogSubscription                                     = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "LogSubscription"}
+	i_LogSubscriptions                                   = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "LogSubscriptions"}
+	i_ManualSnapshotsLimitReached                        = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "ManualSnapshotsLimitReached"}
+	iNetworkType                                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "NetworkType"}
+	iNetworkUpdateSettings                               = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "NetworkUpdateSettings"}
+	i_NextToken                                          = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "NextToken"}
+	iNoAvailableCertificateException                     = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "NoAvailableCertificateException"}
+	i_Notes                                              = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "Notes"}
+	i_OCSPUrl                                            = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "OCSPUrl"}
+	i_OrganizationalUnitDN                               = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "OrganizationalUnitDN"}
+	iOrganizationsException                              = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "OrganizationsException"}
+	iOSUpdateSettings                                    = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "OSUpdateSettings"}
+	iOSVersion                                           = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "OSVersion"}
+	iOwnerDirectoryDescription                           = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "OwnerDirectoryDescription"}
+	i_PageLimit                                          = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "PageLimit"}
+	i_Password                                           = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "Password"}
+	i_PcaConnectorArn                                    = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "PcaConnectorArn"}
+	i_PortNumber                                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "PortNumber"}
+	iRadiusAuthenticationProtocol                        = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "RadiusAuthenticationProtocol"}
+	i_RadiusDisplayLabel                                 = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "RadiusDisplayLabel"}
+	i_RadiusRetries                                      = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "RadiusRetries"}
+	iRadiusSettings                                      = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "RadiusSettings"}
+	i_RadiusSharedSecret                                 = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "RadiusSharedSecret"}
+	iRadiusStatus                                        = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "RadiusStatus"}
+	i_RadiusTimeout                                      = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "RadiusTimeout"}
+	iRegionDescription                                   = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "RegionDescription"}
+	iRegionLimitExceededException                        = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "RegionLimitExceededException"}
+	i_RegionName                                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "RegionName"}
+	i_RegionsDescription                                 = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "RegionsDescription"}
+	iRegionsInfo                                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "RegionsInfo"}
+	iRegionType                                          = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "RegionType"}
+	i_RemoteDomainName                                   = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "RemoteDomainName"}
+	i_RemoteDomainNames                                  = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "RemoteDomainNames"}
+	iReplicationScope                                    = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "ReplicationScope"}
+	i_RequestId                                          = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "RequestId"}
+	i_ResourceId                                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "ResourceId"}
+	i_SchemaExtensionId                                  = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "SchemaExtensionId"}
+	iSchemaExtensionInfo                                 = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "SchemaExtensionInfo"}
+	i_SchemaExtensionsInfo                               = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "SchemaExtensionsInfo"}
+	iSchemaExtensionStatus                               = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "SchemaExtensionStatus"}
+	i_SchemaExtensionStatusReason                        = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "SchemaExtensionStatusReason"}
+	i_SecretArn                                          = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "SecretArn"}
+	i_SecurityGroupId                                    = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "SecurityGroupId"}
+	i_SecurityGroupIds                                   = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "SecurityGroupIds"}
+	iSelectiveAuth                                       = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "SelectiveAuth"}
+	i_Server                                             = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "Server"}
+	i_Servers                                            = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "Servers"}
+	iServiceException                                    = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "ServiceException"}
+	iSetting                                             = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "Setting"}
+	i_SettingEntries                                     = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "SettingEntries"}
+	iSettingEntry                                        = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "SettingEntry"}
+	i_Settings                                           = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "Settings"}
+	i_SharedDirectories                                  = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "SharedDirectories"}
+	iSharedDirectory                                     = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "SharedDirectory"}
+	iShareLimitExceededException                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "ShareLimitExceededException"}
+	iShareMethod                                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "ShareMethod"}
+	iShareStatus                                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "ShareStatus"}
+	iShareTarget                                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "ShareTarget"}
+	i_SID                                                = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "SID"}
+	iSnapshot                                            = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "Snapshot"}
+	i_SnapshotId                                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "SnapshotId"}
+	i_SnapshotIds                                        = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "SnapshotIds"}
+	iSnapshotLimitExceededException                      = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "SnapshotLimitExceededException"}
+	iSnapshotLimits                                      = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "SnapshotLimits"}
+	i_SnapshotName                                       = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "SnapshotName"}
+	i_Snapshots                                          = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "Snapshots"}
+	iSnapshotStatus                                      = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "SnapshotStatus"}
+	iSnapshotType                                        = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "SnapshotType"}
+	i_SsoEnabled                                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "SsoEnabled"}
+	i_StageReason                                        = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "StageReason"}
+	i_StartDateTime                                      = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "StartDateTime"}
+	i_StartTime                                          = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "StartTime"}
+	i_StateLastUpdatedDateTime                           = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "StateLastUpdatedDateTime"}
+	i_SubnetId                                           = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "SubnetId"}
+	i_SubnetIds                                          = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "SubnetIds"}
+	i_SubscriptionCreatedDateTime                        = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "SubscriptionCreatedDateTime"}
+	iTag                                                 = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "Tag"}
+	i_TagKey                                             = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "TagKey"}
+	i_TagKeys                                            = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "TagKeys"}
+	iTagLimitExceededException                           = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "TagLimitExceededException"}
+	i_Tags                                               = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "Tags"}
+	i_TagValue                                           = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "TagValue"}
+	i_TargetId                                           = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "TargetId"}
+	iTargetType                                          = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "TargetType"}
+	i_TopicArn                                           = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "TopicArn"}
+	i_TopicName                                          = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "TopicName"}
+	i_TopicNames                                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "TopicNames"}
+	iTopicStatus                                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "TopicStatus"}
+	iTrust                                               = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "Trust"}
+	iTrustDirection                                      = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "TrustDirection"}
+	i_TrustId                                            = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "TrustId"}
+	i_TrustIds                                           = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "TrustIds"}
+	i_TrustPassword                                      = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "TrustPassword"}
+	i_Trusts                                             = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "Trusts"}
+	iTrustState                                          = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "TrustState"}
+	i_TrustStateReason                                   = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "TrustStateReason"}
+	iTrustType                                           = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "TrustType"}
+	iUnshareTarget                                       = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "UnshareTarget"}
+	iUnsupportedOperationException                       = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "UnsupportedOperationException"}
+	iUnsupportedSettingsException                        = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "UnsupportedSettingsException"}
+	i_UpdateActivities                                   = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "UpdateActivities"}
+	iUpdateInfoEntry                                     = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "UpdateInfoEntry"}
+	i_UpdateSecurityGroupForDirectoryControllers         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "UpdateSecurityGroupForDirectoryControllers"}
+	iUpdateStatus                                        = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "UpdateStatus"}
+	i_UpdateStatusReason                                 = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "UpdateStatusReason"}
+	iUpdateType                                          = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "UpdateType"}
+	iUpdateValue                                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "UpdateValue"}
+	iUserDoesNotExistException                           = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "UserDoesNotExistException"}
+	i_UserName                                           = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "UserName"}
+	i_UserPassword                                       = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "UserPassword"}
+	i_UseSameUsername                                    = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "UseSameUsername"}
+	i_VpcId                                              = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "VpcId"}
+	iAcceptSharedDirectoryRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "AcceptSharedDirectoryRequest"}
+	iAcceptSharedDirectoryResult                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "AcceptSharedDirectoryResult"}
+	iAddIpRoutesRequest                                  = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "AddIpRoutesRequest"}
+	iAddIpRoutesResult                                   = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "AddIpRoutesResult"}
+	iAddRegionRequest                                    = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "AddRegionRequest"}
+	iAddRegionResult                                     = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "AddRegionResult"}
+	iAddTagsToResourceRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "AddTagsToResourceRequest"}
+	iAddTagsToResourceResult                             = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "AddTagsToResourceResult"}
+	iCancelSchemaExtensionRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CancelSchemaExtensionRequest"}
+	iCancelSchemaExtensionResult                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CancelSchemaExtensionResult"}
+	iConnectDirectoryRequest                             = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "ConnectDirectoryRequest"}
+	iConnectDirectoryResult                              = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "ConnectDirectoryResult"}
+	iCreateAliasRequest                                  = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CreateAliasRequest"}
+	iCreateAliasResult                                   = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CreateAliasResult"}
+	iCreateComputerRequest                               = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CreateComputerRequest"}
+	iCreateComputerResult                                = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CreateComputerResult"}
+	iCreateConditionalForwarderRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CreateConditionalForwarderRequest"}
+	iCreateConditionalForwarderResult                    = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CreateConditionalForwarderResult"}
+	iCreateDirectoryRequest                              = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CreateDirectoryRequest"}
+	iCreateDirectoryResult                               = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CreateDirectoryResult"}
+	iCreateHybridADRequest                               = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CreateHybridADRequest"}
+	iCreateHybridADResult                                = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CreateHybridADResult"}
+	iCreateLogSubscriptionRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CreateLogSubscriptionRequest"}
+	iCreateLogSubscriptionResult                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CreateLogSubscriptionResult"}
+	iCreateMicrosoftADRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CreateMicrosoftADRequest"}
+	iCreateMicrosoftADResult                             = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CreateMicrosoftADResult"}
+	iCreateSnapshotRequest                               = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CreateSnapshotRequest"}
+	iCreateSnapshotResult                                = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CreateSnapshotResult"}
+	iCreateTrustRequest                                  = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CreateTrustRequest"}
+	iCreateTrustResult                                   = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "CreateTrustResult"}
+	iDeleteADAssessmentRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DeleteADAssessmentRequest"}
+	iDeleteADAssessmentResult                            = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DeleteADAssessmentResult"}
+	iDeleteConditionalForwarderRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DeleteConditionalForwarderRequest"}
+	iDeleteConditionalForwarderResult                    = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DeleteConditionalForwarderResult"}
+	iDeleteDirectoryRequest                              = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DeleteDirectoryRequest"}
+	iDeleteDirectoryResult                               = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DeleteDirectoryResult"}
+	iDeleteLogSubscriptionRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DeleteLogSubscriptionRequest"}
+	iDeleteLogSubscriptionResult                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DeleteLogSubscriptionResult"}
+	iDeleteSnapshotRequest                               = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DeleteSnapshotRequest"}
+	iDeleteSnapshotResult                                = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DeleteSnapshotResult"}
+	iDeleteTrustRequest                                  = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DeleteTrustRequest"}
+	iDeleteTrustResult                                   = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DeleteTrustResult"}
+	iDeregisterCertificateRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DeregisterCertificateRequest"}
+	iDeregisterCertificateResult                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DeregisterCertificateResult"}
+	iDeregisterEventTopicRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DeregisterEventTopicRequest"}
+	iDeregisterEventTopicResult                          = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DeregisterEventTopicResult"}
+	iDescribeADAssessmentRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeADAssessmentRequest"}
+	iDescribeADAssessmentResult                          = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeADAssessmentResult"}
+	iDescribeCAEnrollmentPolicyRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeCAEnrollmentPolicyRequest"}
+	iDescribeCAEnrollmentPolicyResult                    = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeCAEnrollmentPolicyResult"}
+	iDescribeCertificateRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeCertificateRequest"}
+	iDescribeCertificateResult                           = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeCertificateResult"}
+	iDescribeClientAuthenticationSettingsRequest         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeClientAuthenticationSettingsRequest"}
+	iDescribeClientAuthenticationSettingsResult          = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeClientAuthenticationSettingsResult"}
+	iDescribeConditionalForwardersRequest                = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeConditionalForwardersRequest"}
+	iDescribeConditionalForwardersResult                 = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeConditionalForwardersResult"}
+	iDescribeDirectoriesRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeDirectoriesRequest"}
+	iDescribeDirectoriesResult                           = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeDirectoriesResult"}
+	iDescribeDirectoryDataAccessRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeDirectoryDataAccessRequest"}
+	iDescribeDirectoryDataAccessResult                   = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeDirectoryDataAccessResult"}
+	iDescribeDomainControllersRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeDomainControllersRequest"}
+	iDescribeDomainControllersResult                     = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeDomainControllersResult"}
+	iDescribeEventTopicsRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeEventTopicsRequest"}
+	iDescribeEventTopicsResult                           = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeEventTopicsResult"}
+	iDescribeHybridADUpdateRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeHybridADUpdateRequest"}
+	iDescribeHybridADUpdateResult                        = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeHybridADUpdateResult"}
+	iDescribeLDAPSSettingsRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeLDAPSSettingsRequest"}
+	iDescribeLDAPSSettingsResult                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeLDAPSSettingsResult"}
+	iDescribeRegionsRequest                              = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeRegionsRequest"}
+	iDescribeRegionsResult                               = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeRegionsResult"}
+	iDescribeSettingsRequest                             = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeSettingsRequest"}
+	iDescribeSettingsResult                              = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeSettingsResult"}
+	iDescribeSharedDirectoriesRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeSharedDirectoriesRequest"}
+	iDescribeSharedDirectoriesResult                     = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeSharedDirectoriesResult"}
+	iDescribeSnapshotsRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeSnapshotsRequest"}
+	iDescribeSnapshotsResult                             = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeSnapshotsResult"}
+	iDescribeTrustsRequest                               = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeTrustsRequest"}
+	iDescribeTrustsResult                                = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeTrustsResult"}
+	iDescribeUpdateDirectoryRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeUpdateDirectoryRequest"}
+	iDescribeUpdateDirectoryResult                       = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DescribeUpdateDirectoryResult"}
+	iDisableCAEnrollmentPolicyRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DisableCAEnrollmentPolicyRequest"}
+	iDisableCAEnrollmentPolicyResult                     = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DisableCAEnrollmentPolicyResult"}
+	iDisableClientAuthenticationRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DisableClientAuthenticationRequest"}
+	iDisableClientAuthenticationResult                   = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DisableClientAuthenticationResult"}
+	iDisableDirectoryDataAccessRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DisableDirectoryDataAccessRequest"}
+	iDisableDirectoryDataAccessResult                    = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DisableDirectoryDataAccessResult"}
+	iDisableLDAPSRequest                                 = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DisableLDAPSRequest"}
+	iDisableLDAPSResult                                  = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DisableLDAPSResult"}
+	iDisableRadiusRequest                                = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DisableRadiusRequest"}
+	iDisableRadiusResult                                 = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DisableRadiusResult"}
+	iDisableSsoRequest                                   = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DisableSsoRequest"}
+	iDisableSsoResult                                    = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "DisableSsoResult"}
+	iEnableCAEnrollmentPolicyRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "EnableCAEnrollmentPolicyRequest"}
+	iEnableCAEnrollmentPolicyResult                      = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "EnableCAEnrollmentPolicyResult"}
+	iEnableClientAuthenticationRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "EnableClientAuthenticationRequest"}
+	iEnableClientAuthenticationResult                    = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "EnableClientAuthenticationResult"}
+	iEnableDirectoryDataAccessRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "EnableDirectoryDataAccessRequest"}
+	iEnableDirectoryDataAccessResult                     = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "EnableDirectoryDataAccessResult"}
+	iEnableLDAPSRequest                                  = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "EnableLDAPSRequest"}
+	iEnableLDAPSResult                                   = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "EnableLDAPSResult"}
+	iEnableRadiusRequest                                 = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "EnableRadiusRequest"}
+	iEnableRadiusResult                                  = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "EnableRadiusResult"}
+	iEnableSsoRequest                                    = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "EnableSsoRequest"}
+	iEnableSsoResult                                     = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "EnableSsoResult"}
+	iGetDirectoryLimitsRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "GetDirectoryLimitsRequest"}
+	iGetDirectoryLimitsResult                            = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "GetDirectoryLimitsResult"}
+	iGetSnapshotLimitsRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "GetSnapshotLimitsRequest"}
+	iGetSnapshotLimitsResult                             = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "GetSnapshotLimitsResult"}
+	iListADAssessmentsRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "ListADAssessmentsRequest"}
+	iListADAssessmentsResult                             = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "ListADAssessmentsResult"}
+	iListCertificatesRequest                             = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "ListCertificatesRequest"}
+	iListCertificatesResult                              = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "ListCertificatesResult"}
+	iListIpRoutesRequest                                 = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "ListIpRoutesRequest"}
+	iListIpRoutesResult                                  = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "ListIpRoutesResult"}
+	iListLogSubscriptionsRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "ListLogSubscriptionsRequest"}
+	iListLogSubscriptionsResult                          = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "ListLogSubscriptionsResult"}
+	iListSchemaExtensionsRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "ListSchemaExtensionsRequest"}
+	iListSchemaExtensionsResult                          = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "ListSchemaExtensionsResult"}
+	iListTagsForResourceRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResult                           = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "ListTagsForResourceResult"}
+	iRegisterCertificateRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "RegisterCertificateRequest"}
+	iRegisterCertificateResult                           = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "RegisterCertificateResult"}
+	iRegisterEventTopicRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "RegisterEventTopicRequest"}
+	iRegisterEventTopicResult                            = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "RegisterEventTopicResult"}
+	iRejectSharedDirectoryRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "RejectSharedDirectoryRequest"}
+	iRejectSharedDirectoryResult                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "RejectSharedDirectoryResult"}
+	iRemoveIpRoutesRequest                               = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "RemoveIpRoutesRequest"}
+	iRemoveIpRoutesResult                                = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "RemoveIpRoutesResult"}
+	iRemoveRegionRequest                                 = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "RemoveRegionRequest"}
+	iRemoveRegionResult                                  = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "RemoveRegionResult"}
+	iRemoveTagsFromResourceRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "RemoveTagsFromResourceRequest"}
+	iRemoveTagsFromResourceResult                        = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "RemoveTagsFromResourceResult"}
+	iResetUserPasswordRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "ResetUserPasswordRequest"}
+	iResetUserPasswordResult                             = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "ResetUserPasswordResult"}
+	iRestoreFromSnapshotRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "RestoreFromSnapshotRequest"}
+	iRestoreFromSnapshotResult                           = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "RestoreFromSnapshotResult"}
+	iShareDirectoryRequest                               = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "ShareDirectoryRequest"}
+	iShareDirectoryResult                                = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "ShareDirectoryResult"}
+	iStartADAssessmentRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "StartADAssessmentRequest"}
+	iStartADAssessmentResult                             = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "StartADAssessmentResult"}
+	iStartSchemaExtensionRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "StartSchemaExtensionRequest"}
+	iStartSchemaExtensionResult                          = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "StartSchemaExtensionResult"}
+	iUnshareDirectoryRequest                             = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "UnshareDirectoryRequest"}
+	iUnshareDirectoryResult                              = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "UnshareDirectoryResult"}
+	iUpdateConditionalForwarderRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "UpdateConditionalForwarderRequest"}
+	iUpdateConditionalForwarderResult                    = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "UpdateConditionalForwarderResult"}
+	iUpdateDirectorySetupRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "UpdateDirectorySetupRequest"}
+	iUpdateDirectorySetupResult                          = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "UpdateDirectorySetupResult"}
+	iUpdateHybridADRequest                               = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "UpdateHybridADRequest"}
+	iUpdateHybridADResult                                = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "UpdateHybridADResult"}
+	iUpdateNumberOfDomainControllersRequest              = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "UpdateNumberOfDomainControllersRequest"}
+	iUpdateNumberOfDomainControllersResult               = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "UpdateNumberOfDomainControllersResult"}
+	iUpdateRadiusRequest                                 = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "UpdateRadiusRequest"}
+	iUpdateRadiusResult                                  = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "UpdateRadiusResult"}
+	iUpdateSettingsRequest                               = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "UpdateSettingsRequest"}
+	iUpdateSettingsResult                                = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "UpdateSettingsResult"}
+	iUpdateTrustRequest                                  = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "UpdateTrustRequest"}
+	iUpdateTrustResult                                   = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "UpdateTrustResult"}
+	iVerifyTrustRequest                                  = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "VerifyTrustRequest"}
+	iVerifyTrustResult                                   = smithy.ShapeID{Namespace: "com.amazonaws.directoryservice", Name: "VerifyTrustResult"}
+	pUnit                                                = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLNamespace{URI: "http://directoryservice.amazonaws.com/doc/2015-04-16/"}}, DirectMask: 0x8000}
+var t1 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t4 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_Message, &sAccessDeniedException_RequestId}}
+var mADAssessmentLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sADAssessmentLimitExceededException_Message, &sADAssessmentLimitExceededException_RequestId}}
+var m_AdditionalRegions = smithy.SchemaMembers{List: []*smithy.Schema{&s_AdditionalRegions_member}}
+var mAssessment = smithy.SchemaMembers{List: []*smithy.Schema{&sAssessment_AssessmentId, &sAssessment_DirectoryId, &sAssessment_DnsName, &sAssessment_StartTime, &sAssessment_LastUpdateDateTime, &sAssessment_Status, &sAssessment_StatusCode, &sAssessment_StatusReason, &sAssessment_CustomerDnsIps, &sAssessment_VpcId, &sAssessment_SubnetIds, &sAssessment_SecurityGroupIds, &sAssessment_SelfManagedInstanceIds, &sAssessment_ReportType, &sAssessment_Version}, Seed: 237, Slots: []uint16{
+	0, 0, 6, 15, 0, 13, 0, 0, 12, 0, 4, 3, 8, 0, 11, 0, 0, 9, 0, 5, 0, 7, 2, 10,
+	1, 0, 14, 0, 0, 0, 0, 0,
+}}
+var mAssessmentConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sAssessmentConfiguration_CustomerDnsIps, &sAssessmentConfiguration_DnsName, &sAssessmentConfiguration_VpcSettings, &sAssessmentConfiguration_InstanceIds, &sAssessmentConfiguration_SecurityGroupIds}}
+var m_AssessmentInstanceIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_AssessmentInstanceIds_member}}
+var mAssessmentReport = smithy.SchemaMembers{List: []*smithy.Schema{&sAssessmentReport_DomainControllerIp, &sAssessmentReport_Validations}}
+var m_AssessmentReports = smithy.SchemaMembers{List: []*smithy.Schema{&s_AssessmentReports_member}}
+var m_Assessments = smithy.SchemaMembers{List: []*smithy.Schema{&s_Assessments_member}}
+var mAssessmentSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sAssessmentSummary_AssessmentId, &sAssessmentSummary_DirectoryId, &sAssessmentSummary_DnsName, &sAssessmentSummary_StartTime, &sAssessmentSummary_LastUpdateDateTime, &sAssessmentSummary_Status, &sAssessmentSummary_CustomerDnsIps, &sAssessmentSummary_ReportType}}
+var mAssessmentValidation = smithy.SchemaMembers{List: []*smithy.Schema{&sAssessmentValidation_Category, &sAssessmentValidation_Name, &sAssessmentValidation_Status, &sAssessmentValidation_StatusCode, &sAssessmentValidation_StatusReason, &sAssessmentValidation_StartTime, &sAssessmentValidation_LastUpdateDateTime}}
+var m_AssessmentValidations = smithy.SchemaMembers{List: []*smithy.Schema{&s_AssessmentValidations_member}}
+var mAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&sAttribute_Name, &sAttribute_Value}}
+var m_Attributes = smithy.SchemaMembers{List: []*smithy.Schema{&s_Attributes_member}}
+var mAuthenticationFailedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAuthenticationFailedException_Message, &sAuthenticationFailedException_RequestId}}
+var m_AvailabilityZones = smithy.SchemaMembers{List: []*smithy.Schema{&s_AvailabilityZones_member}}
+var mCaEnrollmentPolicyStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sCaEnrollmentPolicyStatus_IN_PROGRESS, &sCaEnrollmentPolicyStatus_SUCCESS, &sCaEnrollmentPolicyStatus_FAILED, &sCaEnrollmentPolicyStatus_DISABLING, &sCaEnrollmentPolicyStatus_DISABLED, &sCaEnrollmentPolicyStatus_IMPAIRED}}
+var mCertificate = smithy.SchemaMembers{List: []*smithy.Schema{&sCertificate_CertificateId, &sCertificate_State, &sCertificate_StateReason, &sCertificate_CommonName, &sCertificate_RegisteredDateTime, &sCertificate_ExpiryDateTime, &sCertificate_Type, &sCertificate_ClientCertAuthSettings}}
+var mCertificateAlreadyExistsException = smithy.SchemaMembers{List: []*smithy.Schema{&sCertificateAlreadyExistsException_Message, &sCertificateAlreadyExistsException_RequestId}}
+var mCertificateDoesNotExistException = smithy.SchemaMembers{List: []*smithy.Schema{&sCertificateDoesNotExistException_Message, &sCertificateDoesNotExistException_RequestId}}
+var mCertificateInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sCertificateInfo_CertificateId, &sCertificateInfo_CommonName, &sCertificateInfo_State, &sCertificateInfo_ExpiryDateTime, &sCertificateInfo_Type}}
+var mCertificateInUseException = smithy.SchemaMembers{List: []*smithy.Schema{&sCertificateInUseException_Message, &sCertificateInUseException_RequestId}}
+var mCertificateLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sCertificateLimitExceededException_Message, &sCertificateLimitExceededException_RequestId}}
+var m_CertificatesInfo = smithy.SchemaMembers{List: []*smithy.Schema{&s_CertificatesInfo_member}}
+var mCertificateState = smithy.SchemaMembers{List: []*smithy.Schema{&sCertificateState_REGISTERING, &sCertificateState_REGISTERED, &sCertificateState_REGISTER_FAILED, &sCertificateState_DEREGISTERING, &sCertificateState_DEREGISTERED, &sCertificateState_DEREGISTER_FAILED}}
+var mCertificateType = smithy.SchemaMembers{List: []*smithy.Schema{&sCertificateType_CLIENT_CERT_AUTH, &sCertificateType_CLIENT_LDAPS}}
+var m_CidrIps = smithy.SchemaMembers{List: []*smithy.Schema{&s_CidrIps_member}}
+var m_CidrIpv6s = smithy.SchemaMembers{List: []*smithy.Schema{&s_CidrIpv6s_member}}
+var mClientAuthenticationSettingInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sClientAuthenticationSettingInfo_Type, &sClientAuthenticationSettingInfo_Status, &sClientAuthenticationSettingInfo_LastUpdatedDateTime}}
+var m_ClientAuthenticationSettingsInfo = smithy.SchemaMembers{List: []*smithy.Schema{&s_ClientAuthenticationSettingsInfo_member}}
+var mClientAuthenticationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sClientAuthenticationStatus_ENABLED, &sClientAuthenticationStatus_DISABLED}}
+var mClientAuthenticationType = smithy.SchemaMembers{List: []*smithy.Schema{&sClientAuthenticationType_SMART_CARD, &sClientAuthenticationType_SMART_CARD_OR_PASSWORD}}
+var mClientCertAuthSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sClientCertAuthSettings_OCSPUrl}}
+var mClientException = smithy.SchemaMembers{List: []*smithy.Schema{&sClientException_Message, &sClientException_RequestId}}
+var mComputer = smithy.SchemaMembers{List: []*smithy.Schema{&sComputer_ComputerId, &sComputer_ComputerName, &sComputer_ComputerAttributes}}
+var mConditionalForwarder = smithy.SchemaMembers{List: []*smithy.Schema{&sConditionalForwarder_RemoteDomainName, &sConditionalForwarder_DnsIpAddrs, &sConditionalForwarder_DnsIpv6Addrs, &sConditionalForwarder_ReplicationScope}}
+var m_ConditionalForwarders = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConditionalForwarders_member}}
+var m_CustomerDnsIps = smithy.SchemaMembers{List: []*smithy.Schema{&s_CustomerDnsIps_member}}
+var mDataAccessStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sDataAccessStatus_DISABLED, &sDataAccessStatus_DISABLING, &sDataAccessStatus_ENABLED, &sDataAccessStatus_ENABLING, &sDataAccessStatus_FAILED}}
+var mDirectoryAlreadyInRegionException = smithy.SchemaMembers{List: []*smithy.Schema{&sDirectoryAlreadyInRegionException_Message, &sDirectoryAlreadyInRegionException_RequestId}}
+var mDirectoryAlreadySharedException = smithy.SchemaMembers{List: []*smithy.Schema{&sDirectoryAlreadySharedException_Message, &sDirectoryAlreadySharedException_RequestId}}
+var m_DirectoryConfigurationSettingRequestDetailedStatus = smithy.SchemaMembers{List: []*smithy.Schema{&s_DirectoryConfigurationSettingRequestDetailedStatus_key, &s_DirectoryConfigurationSettingRequestDetailedStatus_value}}
+var mDirectoryConfigurationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sDirectoryConfigurationStatus_REQUESTED, &sDirectoryConfigurationStatus_UPDATING, &sDirectoryConfigurationStatus_UPDATED, &sDirectoryConfigurationStatus_FAILED, &sDirectoryConfigurationStatus_DEFAULT}}
+var mDirectoryConnectSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sDirectoryConnectSettings_VpcId, &sDirectoryConnectSettings_SubnetIds, &sDirectoryConnectSettings_CustomerDnsIps, &sDirectoryConnectSettings_CustomerDnsIpsV6, &sDirectoryConnectSettings_CustomerUserName}}
+var mDirectoryConnectSettingsDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sDirectoryConnectSettingsDescription_VpcId, &sDirectoryConnectSettingsDescription_SubnetIds, &sDirectoryConnectSettingsDescription_CustomerUserName, &sDirectoryConnectSettingsDescription_SecurityGroupId, &sDirectoryConnectSettingsDescription_AvailabilityZones, &sDirectoryConnectSettingsDescription_ConnectIps, &sDirectoryConnectSettingsDescription_ConnectIpsV6}}
+var mDirectoryDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sDirectoryDescription_DirectoryId, &sDirectoryDescription_Name, &sDirectoryDescription_ShortName, &sDirectoryDescription_Size, &sDirectoryDescription_Edition, &sDirectoryDescription_Alias, &sDirectoryDescription_AccessUrl, &sDirectoryDescription_Description, &sDirectoryDescription_DnsIpAddrs, &sDirectoryDescription_DnsIpv6Addrs, &sDirectoryDescription_Stage, &sDirectoryDescription_ShareStatus, &sDirectoryDescription_ShareMethod, &sDirectoryDescription_ShareNotes, &sDirectoryDescription_LaunchTime, &sDirectoryDescription_StageLastUpdatedDateTime, &sDirectoryDescription_Type, &sDirectoryDescription_VpcSettings, &sDirectoryDescription_ConnectSettings, &sDirectoryDescription_RadiusSettings, &sDirectoryDescription_RadiusStatus, &sDirectoryDescription_StageReason, &sDirectoryDescription_SsoEnabled, &sDirectoryDescription_DesiredNumberOfDomainControllers, &sDirectoryDescription_OwnerDirectoryDescription, &sDirectoryDescription_RegionsInfo, &sDirectoryDescription_OsVersion, &sDirectoryDescription_HybridSettings, &sDirectoryDescription_NetworkType}, Seed: 1056, Slots: []uint16{
+	8, 3, 0, 0, 20, 6, 0, 28, 15, 0, 0, 25, 0, 0, 27, 16, 24, 17, 22, 0, 11, 13, 19, 0,
+	0, 0, 0, 0, 4, 21, 0, 0, 18, 0, 1, 0, 0, 0, 0, 0, 23, 9, 10, 12, 5, 0, 0, 0,
+	0, 0, 0, 0, 2, 7, 26, 0, 0, 0, 0, 0, 0, 29, 0, 14,
+}}
+var m_DirectoryDescriptions = smithy.SchemaMembers{List: []*smithy.Schema{&s_DirectoryDescriptions_member}}
+var mDirectoryDoesNotExistException = smithy.SchemaMembers{List: []*smithy.Schema{&sDirectoryDoesNotExistException_Message, &sDirectoryDoesNotExistException_RequestId}}
+var mDirectoryEdition = smithy.SchemaMembers{List: []*smithy.Schema{&sDirectoryEdition_ENTERPRISE, &sDirectoryEdition_STANDARD, &sDirectoryEdition_HYBRID}}
+var m_DirectoryIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_DirectoryIds_member}}
+var mDirectoryInDesiredStateException = smithy.SchemaMembers{List: []*smithy.Schema{&sDirectoryInDesiredStateException_Message, &sDirectoryInDesiredStateException_RequestId}}
+var mDirectoryLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sDirectoryLimitExceededException_Message, &sDirectoryLimitExceededException_RequestId}}
+var mDirectoryLimits = smithy.SchemaMembers{List: []*smithy.Schema{&sDirectoryLimits_CloudOnlyDirectoriesLimit, &sDirectoryLimits_CloudOnlyDirectoriesCurrentCount, &sDirectoryLimits_CloudOnlyDirectoriesLimitReached, &sDirectoryLimits_CloudOnlyMicrosoftADLimit, &sDirectoryLimits_CloudOnlyMicrosoftADCurrentCount, &sDirectoryLimits_CloudOnlyMicrosoftADLimitReached, &sDirectoryLimits_ConnectedDirectoriesLimit, &sDirectoryLimits_ConnectedDirectoriesCurrentCount, &sDirectoryLimits_ConnectedDirectoriesLimitReached}, Seed: 1, Slots: []uint16{
+	0, 0, 0, 7, 0, 9, 0, 0, 0, 0, 2, 0, 0, 0, 8, 3, 0, 4, 0, 6, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 1, 5,
+}}
+var mDirectoryNotSharedException = smithy.SchemaMembers{List: []*smithy.Schema{&sDirectoryNotSharedException_Message, &sDirectoryNotSharedException_RequestId}}
+var mDirectorySize = smithy.SchemaMembers{List: []*smithy.Schema{&sDirectorySize_SMALL, &sDirectorySize_LARGE}}
+var mDirectorySizeUpdateSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sDirectorySizeUpdateSettings_DirectorySize}}
+var mDirectoryStage = smithy.SchemaMembers{List: []*smithy.Schema{&sDirectoryStage_REQUESTED, &sDirectoryStage_CREATING, &sDirectoryStage_CREATED, &sDirectoryStage_ACTIVE, &sDirectoryStage_INOPERABLE, &sDirectoryStage_IMPAIRED, &sDirectoryStage_RESTORING, &sDirectoryStage_RESTOREFAILED, &sDirectoryStage_DELETING, &sDirectoryStage_DELETED, &sDirectoryStage_FAILED, &sDirectoryStage_UPDATING}, Seed: 1, Slots: []uint16{
+	7, 0, 9, 0, 11, 0, 0, 0, 5, 0, 8, 0, 0, 1, 10, 0, 4, 0, 0, 0, 6, 0, 0, 12,
+	0, 0, 0, 2, 0, 3, 0, 0,
+}}
+var mDirectoryType = smithy.SchemaMembers{List: []*smithy.Schema{&sDirectoryType_SIMPLE_AD, &sDirectoryType_AD_CONNECTOR, &sDirectoryType_MICROSOFT_AD, &sDirectoryType_SHARED_MICROSOFT_AD}}
+var mDirectoryUnavailableException = smithy.SchemaMembers{List: []*smithy.Schema{&sDirectoryUnavailableException_Message, &sDirectoryUnavailableException_RequestId}}
+var mDirectoryVpcSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sDirectoryVpcSettings_VpcId, &sDirectoryVpcSettings_SubnetIds}}
+var mDirectoryVpcSettingsDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sDirectoryVpcSettingsDescription_VpcId, &sDirectoryVpcSettingsDescription_SubnetIds, &sDirectoryVpcSettingsDescription_SecurityGroupId, &sDirectoryVpcSettingsDescription_AvailabilityZones}}
+var mDisableAlreadyInProgressException = smithy.SchemaMembers{List: []*smithy.Schema{&sDisableAlreadyInProgressException_Message, &sDisableAlreadyInProgressException_RequestId}}
+var m_DnsIpAddrs = smithy.SchemaMembers{List: []*smithy.Schema{&s_DnsIpAddrs_member}}
+var m_DnsIpv6Addrs = smithy.SchemaMembers{List: []*smithy.Schema{&s_DnsIpv6Addrs_member}}
+var mDomainController = smithy.SchemaMembers{List: []*smithy.Schema{&sDomainController_DirectoryId, &sDomainController_DomainControllerId, &sDomainController_DnsIpAddr, &sDomainController_DnsIpv6Addr, &sDomainController_VpcId, &sDomainController_SubnetId, &sDomainController_AvailabilityZone, &sDomainController_Status, &sDomainController_StatusReason, &sDomainController_LaunchTime, &sDomainController_StatusLastUpdatedDateTime}, Seed: 3, Slots: []uint16{
+	0, 9, 0, 0, 8, 0, 0, 0, 0, 11, 1, 7, 0, 0, 0, 3, 5, 0, 0, 0, 0, 10, 0, 0,
+	0, 2, 0, 0, 4, 0, 0, 6,
+}}
+var m_DomainControllerIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_DomainControllerIds_member}}
+var mDomainControllerLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sDomainControllerLimitExceededException_Message, &sDomainControllerLimitExceededException_RequestId}}
+var m_DomainControllers = smithy.SchemaMembers{List: []*smithy.Schema{&s_DomainControllers_member}}
+var mDomainControllerStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sDomainControllerStatus_CREATING, &sDomainControllerStatus_ACTIVE, &sDomainControllerStatus_IMPAIRED, &sDomainControllerStatus_RESTORING, &sDomainControllerStatus_DELETING, &sDomainControllerStatus_DELETED, &sDomainControllerStatus_FAILED, &sDomainControllerStatus_UPDATING}}
+var mEnableAlreadyInProgressException = smithy.SchemaMembers{List: []*smithy.Schema{&sEnableAlreadyInProgressException_Message, &sEnableAlreadyInProgressException_RequestId}}
+var mEntityAlreadyExistsException = smithy.SchemaMembers{List: []*smithy.Schema{&sEntityAlreadyExistsException_Message, &sEntityAlreadyExistsException_RequestId}}
+var mEntityDoesNotExistException = smithy.SchemaMembers{List: []*smithy.Schema{&sEntityDoesNotExistException_Message, &sEntityDoesNotExistException_RequestId}}
+var mEventTopic = smithy.SchemaMembers{List: []*smithy.Schema{&sEventTopic_DirectoryId, &sEventTopic_TopicName, &sEventTopic_TopicArn, &sEventTopic_CreatedDateTime, &sEventTopic_Status}}
+var m_EventTopics = smithy.SchemaMembers{List: []*smithy.Schema{&s_EventTopics_member}}
+var mHybridAdministratorAccountUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sHybridAdministratorAccountUpdate_SecretArn}}
+var mHybridCustomerInstancesSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sHybridCustomerInstancesSettings_CustomerDnsIps, &sHybridCustomerInstancesSettings_InstanceIds}}
+var mHybridSettingsDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sHybridSettingsDescription_SelfManagedDnsIpAddrs, &sHybridSettingsDescription_SelfManagedInstanceIds}}
+var mHybridUpdateActivities = smithy.SchemaMembers{List: []*smithy.Schema{&sHybridUpdateActivities_SelfManagedInstances, &sHybridUpdateActivities_HybridAdministratorAccount}}
+var m_HybridUpdateInfoEntries = smithy.SchemaMembers{List: []*smithy.Schema{&s_HybridUpdateInfoEntries_member}}
+var mHybridUpdateInfoEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sHybridUpdateInfoEntry_Status, &sHybridUpdateInfoEntry_StatusReason, &sHybridUpdateInfoEntry_InitiatedBy, &sHybridUpdateInfoEntry_NewValue, &sHybridUpdateInfoEntry_PreviousValue, &sHybridUpdateInfoEntry_StartTime, &sHybridUpdateInfoEntry_LastUpdatedDateTime, &sHybridUpdateInfoEntry_AssessmentId}}
+var mHybridUpdateType = smithy.SchemaMembers{List: []*smithy.Schema{&sHybridUpdateType_SELF_MANAGED_INSTANCES, &sHybridUpdateType_HYBRID_ADMINISTRATOR_ACCOUNT}}
+var mHybridUpdateValue = smithy.SchemaMembers{List: []*smithy.Schema{&sHybridUpdateValue_InstanceIds, &sHybridUpdateValue_DnsIps}}
+var mIncompatibleSettingsException = smithy.SchemaMembers{List: []*smithy.Schema{&sIncompatibleSettingsException_Message, &sIncompatibleSettingsException_RequestId}}
+var mInsufficientPermissionsException = smithy.SchemaMembers{List: []*smithy.Schema{&sInsufficientPermissionsException_Message, &sInsufficientPermissionsException_RequestId}}
+var mInvalidCertificateException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidCertificateException_Message, &sInvalidCertificateException_RequestId}}
+var mInvalidClientAuthStatusException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidClientAuthStatusException_Message, &sInvalidClientAuthStatusException_RequestId}}
+var mInvalidLDAPSStatusException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidLDAPSStatusException_Message, &sInvalidLDAPSStatusException_RequestId}}
+var mInvalidNextTokenException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidNextTokenException_Message, &sInvalidNextTokenException_RequestId}}
+var mInvalidParameterException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidParameterException_Message, &sInvalidParameterException_RequestId}}
+var mInvalidPasswordException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidPasswordException_Message, &sInvalidPasswordException_RequestId}}
+var mInvalidTargetException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidTargetException_Message, &sInvalidTargetException_RequestId}}
+var m_IpAddrs = smithy.SchemaMembers{List: []*smithy.Schema{&s_IpAddrs_member}}
+var mIpRoute = smithy.SchemaMembers{List: []*smithy.Schema{&sIpRoute_CidrIp, &sIpRoute_CidrIpv6, &sIpRoute_Description}}
+var mIpRouteInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sIpRouteInfo_DirectoryId, &sIpRouteInfo_CidrIp, &sIpRouteInfo_CidrIpv6, &sIpRouteInfo_IpRouteStatusMsg, &sIpRouteInfo_AddedDateTime, &sIpRouteInfo_IpRouteStatusReason, &sIpRouteInfo_Description}}
+var mIpRouteLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sIpRouteLimitExceededException_Message, &sIpRouteLimitExceededException_RequestId}}
+var m_IpRoutes = smithy.SchemaMembers{List: []*smithy.Schema{&s_IpRoutes_member}}
+var m_IpRoutesInfo = smithy.SchemaMembers{List: []*smithy.Schema{&s_IpRoutesInfo_member}}
+var mIpRouteStatusMsg = smithy.SchemaMembers{List: []*smithy.Schema{&sIpRouteStatusMsg_ADDING, &sIpRouteStatusMsg_ADDED, &sIpRouteStatusMsg_REMOVING, &sIpRouteStatusMsg_REMOVED, &sIpRouteStatusMsg_ADD_FAILED, &sIpRouteStatusMsg_REMOVE_FAILED}}
+var m_IpV6Addrs = smithy.SchemaMembers{List: []*smithy.Schema{&s_IpV6Addrs_member}}
+var mLDAPSSettingInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sLDAPSSettingInfo_LDAPSStatus, &sLDAPSSettingInfo_LDAPSStatusReason, &sLDAPSSettingInfo_LastUpdatedDateTime}}
+var m_LDAPSSettingsInfo = smithy.SchemaMembers{List: []*smithy.Schema{&s_LDAPSSettingsInfo_member}}
+var mLDAPSStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sLDAPSStatus_ENABLING, &sLDAPSStatus_ENABLED, &sLDAPSStatus_ENABLE_FAILED, &sLDAPSStatus_DISABLED}}
+var mLDAPSType = smithy.SchemaMembers{List: []*smithy.Schema{&sLDAPSType_CLIENT}}
+var mLogSubscription = smithy.SchemaMembers{List: []*smithy.Schema{&sLogSubscription_DirectoryId, &sLogSubscription_LogGroupName, &sLogSubscription_SubscriptionCreatedDateTime}}
+var m_LogSubscriptions = smithy.SchemaMembers{List: []*smithy.Schema{&s_LogSubscriptions_member}}
+var mNetworkType = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkType_DUAL_STACK, &sNetworkType_IPV4_ONLY, &sNetworkType_IPV6_ONLY}}
+var mNetworkUpdateSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkUpdateSettings_NetworkType, &sNetworkUpdateSettings_CustomerDnsIpsV6}}
+var mNoAvailableCertificateException = smithy.SchemaMembers{List: []*smithy.Schema{&sNoAvailableCertificateException_Message, &sNoAvailableCertificateException_RequestId}}
+var mOrganizationsException = smithy.SchemaMembers{List: []*smithy.Schema{&sOrganizationsException_Message, &sOrganizationsException_RequestId}}
+var mOSUpdateSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sOSUpdateSettings_OSVersion}}
+var mOSVersion = smithy.SchemaMembers{List: []*smithy.Schema{&sOSVersion_VERSION_2012, &sOSVersion_VERSION_2019}}
+var mOwnerDirectoryDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sOwnerDirectoryDescription_DirectoryId, &sOwnerDirectoryDescription_AccountId, &sOwnerDirectoryDescription_DnsIpAddrs, &sOwnerDirectoryDescription_DnsIpv6Addrs, &sOwnerDirectoryDescription_VpcSettings, &sOwnerDirectoryDescription_RadiusSettings, &sOwnerDirectoryDescription_RadiusStatus, &sOwnerDirectoryDescription_NetworkType}}
+var mRadiusAuthenticationProtocol = smithy.SchemaMembers{List: []*smithy.Schema{&sRadiusAuthenticationProtocol_PAP, &sRadiusAuthenticationProtocol_CHAP, &sRadiusAuthenticationProtocol_MSCHAPV1, &sRadiusAuthenticationProtocol_MSCHAPV2}}
+var mRadiusSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sRadiusSettings_RadiusServers, &sRadiusSettings_RadiusServersIpv6, &sRadiusSettings_RadiusPort, &sRadiusSettings_RadiusTimeout, &sRadiusSettings_RadiusRetries, &sRadiusSettings_SharedSecret, &sRadiusSettings_AuthenticationProtocol, &sRadiusSettings_DisplayLabel, &sRadiusSettings_UseSameUsername}, Seed: 4, Slots: []uint16{
+	0, 0, 7, 0, 0, 6, 0, 0, 0, 1, 0, 0, 0, 0, 0, 5, 4, 0, 0, 9, 0, 0, 0, 3,
+	0, 0, 2, 0, 8, 0, 0, 0,
+}}
+var mRadiusStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sRadiusStatus_CREATING, &sRadiusStatus_COMPLETED, &sRadiusStatus_FAILED}}
+var mRegionDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sRegionDescription_DirectoryId, &sRegionDescription_RegionName, &sRegionDescription_RegionType, &sRegionDescription_Status, &sRegionDescription_VpcSettings, &sRegionDescription_DesiredNumberOfDomainControllers, &sRegionDescription_LaunchTime, &sRegionDescription_StatusLastUpdatedDateTime, &sRegionDescription_LastUpdatedDateTime}, Seed: 1, Slots: []uint16{
+	0, 0, 1, 0, 0, 0, 0, 5, 7, 0, 8, 0, 0, 9, 3, 0, 0, 0, 0, 0, 0, 0, 0, 2,
+	0, 0, 0, 0, 0, 4, 6, 0,
+}}
+var mRegionLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sRegionLimitExceededException_Message, &sRegionLimitExceededException_RequestId}}
+var m_RegionsDescription = smithy.SchemaMembers{List: []*smithy.Schema{&s_RegionsDescription_member}}
+var mRegionsInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sRegionsInfo_PrimaryRegion, &sRegionsInfo_AdditionalRegions}}
+var mRegionType = smithy.SchemaMembers{List: []*smithy.Schema{&sRegionType_PRIMARY, &sRegionType_ADDITIONAL}}
+var m_RemoteDomainNames = smithy.SchemaMembers{List: []*smithy.Schema{&s_RemoteDomainNames_member}}
+var mReplicationScope = smithy.SchemaMembers{List: []*smithy.Schema{&sReplicationScope_Domain}}
+var mSchemaExtensionInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sSchemaExtensionInfo_DirectoryId, &sSchemaExtensionInfo_SchemaExtensionId, &sSchemaExtensionInfo_Description, &sSchemaExtensionInfo_SchemaExtensionStatus, &sSchemaExtensionInfo_SchemaExtensionStatusReason, &sSchemaExtensionInfo_StartDateTime, &sSchemaExtensionInfo_EndDateTime}}
+var m_SchemaExtensionsInfo = smithy.SchemaMembers{List: []*smithy.Schema{&s_SchemaExtensionsInfo_member}}
+var mSchemaExtensionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sSchemaExtensionStatus_INITIALIZING, &sSchemaExtensionStatus_CREATING_SNAPSHOT, &sSchemaExtensionStatus_UPDATING_SCHEMA, &sSchemaExtensionStatus_REPLICATING, &sSchemaExtensionStatus_CANCEL_IN_PROGRESS, &sSchemaExtensionStatus_ROLLBACK_IN_PROGRESS, &sSchemaExtensionStatus_CANCELLED, &sSchemaExtensionStatus_FAILED, &sSchemaExtensionStatus_COMPLETED}, Seed: 5, Slots: []uint16{
+	2, 7, 8, 0, 5, 0, 0, 0, 0, 0, 3, 6, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	1, 9, 0, 0, 0, 0, 0, 0,
+}}
+var m_SecurityGroupIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_SecurityGroupIds_member}}
+var mSelectiveAuth = smithy.SchemaMembers{List: []*smithy.Schema{&sSelectiveAuth_ENABLED, &sSelectiveAuth_DISABLED}}
+var m_Servers = smithy.SchemaMembers{List: []*smithy.Schema{&s_Servers_member}}
+var mServiceException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceException_Message, &sServiceException_RequestId}}
+var mSetting = smithy.SchemaMembers{List: []*smithy.Schema{&sSetting_Name, &sSetting_Value}}
+var m_SettingEntries = smithy.SchemaMembers{List: []*smithy.Schema{&s_SettingEntries_member}}
+var mSettingEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sSettingEntry_Type, &sSettingEntry_Name, &sSettingEntry_AllowedValues, &sSettingEntry_AppliedValue, &sSettingEntry_RequestedValue, &sSettingEntry_RequestStatus, &sSettingEntry_RequestDetailedStatus, &sSettingEntry_RequestStatusMessage, &sSettingEntry_LastUpdatedDateTime, &sSettingEntry_LastRequestedDateTime, &sSettingEntry_DataType}, Seed: 7, Slots: []uint16{
+	0, 3, 0, 0, 0, 9, 0, 2, 0, 0, 0, 0, 0, 6, 0, 0, 11, 8, 0, 0, 7, 5, 0, 0,
+	4, 0, 0, 0, 10, 1, 0, 0,
+}}
+var m_Settings = smithy.SchemaMembers{List: []*smithy.Schema{&s_Settings_member}}
+var m_SharedDirectories = smithy.SchemaMembers{List: []*smithy.Schema{&s_SharedDirectories_member}}
+var mSharedDirectory = smithy.SchemaMembers{List: []*smithy.Schema{&sSharedDirectory_OwnerAccountId, &sSharedDirectory_OwnerDirectoryId, &sSharedDirectory_ShareMethod, &sSharedDirectory_SharedAccountId, &sSharedDirectory_SharedDirectoryId, &sSharedDirectory_ShareStatus, &sSharedDirectory_ShareNotes, &sSharedDirectory_CreatedDateTime, &sSharedDirectory_LastUpdatedDateTime}, Seed: 7, Slots: []uint16{
+	0, 0, 0, 0, 0, 9, 7, 4, 0, 0, 0, 1, 0, 0, 0, 8, 6, 0, 0, 0, 3, 5, 0, 0,
+	0, 0, 0, 2, 0, 0, 0, 0,
+}}
+var mShareLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sShareLimitExceededException_Message, &sShareLimitExceededException_RequestId}}
+var mShareMethod = smithy.SchemaMembers{List: []*smithy.Schema{&sShareMethod_ORGANIZATIONS, &sShareMethod_HANDSHAKE}}
+var mShareStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sShareStatus_SHARED, &sShareStatus_PENDING_ACCEPTANCE, &sShareStatus_REJECTED, &sShareStatus_REJECTING, &sShareStatus_REJECT_FAILED, &sShareStatus_SHARING, &sShareStatus_SHARE_FAILED, &sShareStatus_DELETED, &sShareStatus_DELETING}, Seed: 5, Slots: []uint16{
+	8, 0, 0, 0, 0, 5, 0, 0, 0, 1, 9, 0, 4, 0, 0, 0, 0, 0, 3, 0, 2, 0, 0, 0,
+	0, 0, 0, 0, 7, 0, 6, 0,
+}}
+var mShareTarget = smithy.SchemaMembers{List: []*smithy.Schema{&sShareTarget_Id, &sShareTarget_Type}}
+var mSnapshot = smithy.SchemaMembers{List: []*smithy.Schema{&sSnapshot_DirectoryId, &sSnapshot_SnapshotId, &sSnapshot_Type, &sSnapshot_Name, &sSnapshot_Status, &sSnapshot_StartTime}}
+var m_SnapshotIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_SnapshotIds_member}}
+var mSnapshotLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sSnapshotLimitExceededException_Message, &sSnapshotLimitExceededException_RequestId}}
+var mSnapshotLimits = smithy.SchemaMembers{List: []*smithy.Schema{&sSnapshotLimits_ManualSnapshotsLimit, &sSnapshotLimits_ManualSnapshotsCurrentCount, &sSnapshotLimits_ManualSnapshotsLimitReached}}
+var m_Snapshots = smithy.SchemaMembers{List: []*smithy.Schema{&s_Snapshots_member}}
+var mSnapshotStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sSnapshotStatus_CREATING, &sSnapshotStatus_COMPLETED, &sSnapshotStatus_FAILED}}
+var mSnapshotType = smithy.SchemaMembers{List: []*smithy.Schema{&sSnapshotType_AUTO, &sSnapshotType_MANUAL}}
+var m_SubnetIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_SubnetIds_member}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var m_TagKeys = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeys_member}}
+var mTagLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sTagLimitExceededException_Message, &sTagLimitExceededException_RequestId}}
+var m_Tags = smithy.SchemaMembers{List: []*smithy.Schema{&s_Tags_member}}
+var mTargetType = smithy.SchemaMembers{List: []*smithy.Schema{&sTargetType_ACCOUNT}}
+var m_TopicNames = smithy.SchemaMembers{List: []*smithy.Schema{&s_TopicNames_member}}
+var mTopicStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sTopicStatus_REGISTERED, &sTopicStatus_TOPIC_NOT_FOUND, &sTopicStatus_FAILED, &sTopicStatus_DELETED}}
+var mTrust = smithy.SchemaMembers{List: []*smithy.Schema{&sTrust_DirectoryId, &sTrust_TrustId, &sTrust_RemoteDomainName, &sTrust_TrustType, &sTrust_TrustDirection, &sTrust_TrustState, &sTrust_CreatedDateTime, &sTrust_LastUpdatedDateTime, &sTrust_StateLastUpdatedDateTime, &sTrust_TrustStateReason, &sTrust_SelectiveAuth}, Seed: 3, Slots: []uint16{
+	0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 6, 0, 0, 3, 0, 0, 5, 10, 0,
+	0, 2, 0, 0, 4, 11, 9, 8,
+}}
+var mTrustDirection = smithy.SchemaMembers{List: []*smithy.Schema{&sTrustDirection_ONE_WAY_OUTGOING, &sTrustDirection_ONE_WAY_INCOMING, &sTrustDirection_TWO_WAY}}
+var m_TrustIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_TrustIds_member}}
+var m_Trusts = smithy.SchemaMembers{List: []*smithy.Schema{&s_Trusts_member}}
+var mTrustState = smithy.SchemaMembers{List: []*smithy.Schema{&sTrustState_CREATING, &sTrustState_CREATED, &sTrustState_VERIFYING, &sTrustState_VERIFY_FAILED, &sTrustState_VERIFIED, &sTrustState_UPDATING, &sTrustState_UPDATE_FAILED, &sTrustState_UPDATED, &sTrustState_DELETING, &sTrustState_DELETED, &sTrustState_FAILED}, Seed: 8, Slots: []uint16{
+	0, 0, 0, 0, 0, 2, 0, 4, 0, 9, 0, 6, 0, 3, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0,
+	0, 1, 7, 8, 5, 0, 0, 11,
+}}
+var mTrustType = smithy.SchemaMembers{List: []*smithy.Schema{&sTrustType_FOREST, &sTrustType_EXTERNAL}}
+var mUnshareTarget = smithy.SchemaMembers{List: []*smithy.Schema{&sUnshareTarget_Id, &sUnshareTarget_Type}}
+var mUnsupportedOperationException = smithy.SchemaMembers{List: []*smithy.Schema{&sUnsupportedOperationException_Message, &sUnsupportedOperationException_RequestId}}
+var mUnsupportedSettingsException = smithy.SchemaMembers{List: []*smithy.Schema{&sUnsupportedSettingsException_Message, &sUnsupportedSettingsException_RequestId}}
+var m_UpdateActivities = smithy.SchemaMembers{List: []*smithy.Schema{&s_UpdateActivities_member}}
+var mUpdateInfoEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateInfoEntry_Region, &sUpdateInfoEntry_Status, &sUpdateInfoEntry_StatusReason, &sUpdateInfoEntry_InitiatedBy, &sUpdateInfoEntry_NewValue, &sUpdateInfoEntry_PreviousValue, &sUpdateInfoEntry_StartTime, &sUpdateInfoEntry_LastUpdatedDateTime}}
+var mUpdateStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateStatus_UPDATED, &sUpdateStatus_UPDATING, &sUpdateStatus_UPDATE_FAILED}}
+var mUpdateType = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateType_OS, &sUpdateType_NETWORK, &sUpdateType_SIZE}}
+var mUpdateValue = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateValue_OSUpdateSettings}}
+var mUserDoesNotExistException = smithy.SchemaMembers{List: []*smithy.Schema{&sUserDoesNotExistException_Message, &sUserDoesNotExistException_RequestId}}
+var mAcceptSharedDirectoryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAcceptSharedDirectoryRequest_SharedDirectoryId}}
+var mAcceptSharedDirectoryResult = smithy.SchemaMembers{List: []*smithy.Schema{&sAcceptSharedDirectoryResult_SharedDirectory}}
+var mAddIpRoutesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAddIpRoutesRequest_DirectoryId, &sAddIpRoutesRequest_IpRoutes, &sAddIpRoutesRequest_UpdateSecurityGroupForDirectoryControllers}}
+var mAddRegionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAddRegionRequest_DirectoryId, &sAddRegionRequest_RegionName, &sAddRegionRequest_VPCSettings}}
+var mAddTagsToResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAddTagsToResourceRequest_ResourceId, &sAddTagsToResourceRequest_Tags}}
+var mCancelSchemaExtensionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelSchemaExtensionRequest_DirectoryId, &sCancelSchemaExtensionRequest_SchemaExtensionId}}
+var mConnectDirectoryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectDirectoryRequest_Name, &sConnectDirectoryRequest_ShortName, &sConnectDirectoryRequest_Password, &sConnectDirectoryRequest_Description, &sConnectDirectoryRequest_Size, &sConnectDirectoryRequest_ConnectSettings, &sConnectDirectoryRequest_Tags, &sConnectDirectoryRequest_NetworkType}}
+var mConnectDirectoryResult = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectDirectoryResult_DirectoryId}}
+var mCreateAliasRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAliasRequest_DirectoryId, &sCreateAliasRequest_Alias}}
+var mCreateAliasResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAliasResult_DirectoryId, &sCreateAliasResult_Alias}}
+var mCreateComputerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateComputerRequest_DirectoryId, &sCreateComputerRequest_ComputerName, &sCreateComputerRequest_Password, &sCreateComputerRequest_OrganizationalUnitDistinguishedName, &sCreateComputerRequest_ComputerAttributes}}
+var mCreateComputerResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateComputerResult_Computer}}
+var mCreateConditionalForwarderRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateConditionalForwarderRequest_DirectoryId, &sCreateConditionalForwarderRequest_RemoteDomainName, &sCreateConditionalForwarderRequest_DnsIpAddrs, &sCreateConditionalForwarderRequest_DnsIpv6Addrs}}
+var mCreateDirectoryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDirectoryRequest_Name, &sCreateDirectoryRequest_ShortName, &sCreateDirectoryRequest_Password, &sCreateDirectoryRequest_Description, &sCreateDirectoryRequest_Size, &sCreateDirectoryRequest_VpcSettings, &sCreateDirectoryRequest_Tags, &sCreateDirectoryRequest_NetworkType}}
+var mCreateDirectoryResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDirectoryResult_DirectoryId}}
+var mCreateHybridADRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateHybridADRequest_SecretArn, &sCreateHybridADRequest_AssessmentId, &sCreateHybridADRequest_Tags}}
+var mCreateHybridADResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateHybridADResult_DirectoryId}}
+var mCreateLogSubscriptionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLogSubscriptionRequest_DirectoryId, &sCreateLogSubscriptionRequest_LogGroupName}}
+var mCreateMicrosoftADRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateMicrosoftADRequest_Name, &sCreateMicrosoftADRequest_ShortName, &sCreateMicrosoftADRequest_Password, &sCreateMicrosoftADRequest_Description, &sCreateMicrosoftADRequest_VpcSettings, &sCreateMicrosoftADRequest_Edition, &sCreateMicrosoftADRequest_Tags, &sCreateMicrosoftADRequest_NetworkType}}
+var mCreateMicrosoftADResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateMicrosoftADResult_DirectoryId}}
+var mCreateSnapshotRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSnapshotRequest_DirectoryId, &sCreateSnapshotRequest_Name}}
+var mCreateSnapshotResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSnapshotResult_SnapshotId}}
+var mCreateTrustRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTrustRequest_DirectoryId, &sCreateTrustRequest_RemoteDomainName, &sCreateTrustRequest_TrustPassword, &sCreateTrustRequest_TrustDirection, &sCreateTrustRequest_TrustType, &sCreateTrustRequest_ConditionalForwarderIpAddrs, &sCreateTrustRequest_ConditionalForwarderIpv6Addrs, &sCreateTrustRequest_SelectiveAuth}}
+var mCreateTrustResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTrustResult_TrustId}}
+var mDeleteADAssessmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteADAssessmentRequest_AssessmentId}}
+var mDeleteADAssessmentResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteADAssessmentResult_AssessmentId}}
+var mDeleteConditionalForwarderRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteConditionalForwarderRequest_DirectoryId, &sDeleteConditionalForwarderRequest_RemoteDomainName}}
+var mDeleteDirectoryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDirectoryRequest_DirectoryId}}
+var mDeleteDirectoryResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDirectoryResult_DirectoryId}}
+var mDeleteLogSubscriptionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteLogSubscriptionRequest_DirectoryId}}
+var mDeleteSnapshotRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSnapshotRequest_SnapshotId}}
+var mDeleteSnapshotResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSnapshotResult_SnapshotId}}
+var mDeleteTrustRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTrustRequest_TrustId, &sDeleteTrustRequest_DeleteAssociatedConditionalForwarder}}
+var mDeleteTrustResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTrustResult_TrustId}}
+var mDeregisterCertificateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeregisterCertificateRequest_DirectoryId, &sDeregisterCertificateRequest_CertificateId}}
+var mDeregisterEventTopicRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeregisterEventTopicRequest_DirectoryId, &sDeregisterEventTopicRequest_TopicName}}
+var mDescribeADAssessmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeADAssessmentRequest_AssessmentId}}
+var mDescribeADAssessmentResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeADAssessmentResult_Assessment, &sDescribeADAssessmentResult_AssessmentReports}}
+var mDescribeCAEnrollmentPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeCAEnrollmentPolicyRequest_DirectoryId}}
+var mDescribeCAEnrollmentPolicyResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeCAEnrollmentPolicyResult_DirectoryId, &sDescribeCAEnrollmentPolicyResult_PcaConnectorArn, &sDescribeCAEnrollmentPolicyResult_CaEnrollmentPolicyStatus, &sDescribeCAEnrollmentPolicyResult_LastUpdatedDateTime, &sDescribeCAEnrollmentPolicyResult_CaEnrollmentPolicyStatusReason}}
+var mDescribeCertificateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeCertificateRequest_DirectoryId, &sDescribeCertificateRequest_CertificateId}}
+var mDescribeCertificateResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeCertificateResult_Certificate}}
+var mDescribeClientAuthenticationSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeClientAuthenticationSettingsRequest_DirectoryId, &sDescribeClientAuthenticationSettingsRequest_Type, &sDescribeClientAuthenticationSettingsRequest_NextToken, &sDescribeClientAuthenticationSettingsRequest_Limit}}
+var mDescribeClientAuthenticationSettingsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeClientAuthenticationSettingsResult_ClientAuthenticationSettingsInfo, &sDescribeClientAuthenticationSettingsResult_NextToken}}
+var mDescribeConditionalForwardersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeConditionalForwardersRequest_DirectoryId, &sDescribeConditionalForwardersRequest_RemoteDomainNames}}
+var mDescribeConditionalForwardersResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeConditionalForwardersResult_ConditionalForwarders}}
+var mDescribeDirectoriesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDirectoriesRequest_DirectoryIds, &sDescribeDirectoriesRequest_NextToken, &sDescribeDirectoriesRequest_Limit}}
+var mDescribeDirectoriesResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDirectoriesResult_DirectoryDescriptions, &sDescribeDirectoriesResult_NextToken}}
+var mDescribeDirectoryDataAccessRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDirectoryDataAccessRequest_DirectoryId}}
+var mDescribeDirectoryDataAccessResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDirectoryDataAccessResult_DataAccessStatus}}
+var mDescribeDomainControllersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDomainControllersRequest_DirectoryId, &sDescribeDomainControllersRequest_DomainControllerIds, &sDescribeDomainControllersRequest_NextToken, &sDescribeDomainControllersRequest_Limit}}
+var mDescribeDomainControllersResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDomainControllersResult_DomainControllers, &sDescribeDomainControllersResult_NextToken}}
+var mDescribeEventTopicsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEventTopicsRequest_DirectoryId, &sDescribeEventTopicsRequest_TopicNames}}
+var mDescribeEventTopicsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEventTopicsResult_EventTopics}}
+var mDescribeHybridADUpdateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeHybridADUpdateRequest_DirectoryId, &sDescribeHybridADUpdateRequest_UpdateType, &sDescribeHybridADUpdateRequest_NextToken}}
+var mDescribeHybridADUpdateResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeHybridADUpdateResult_UpdateActivities, &sDescribeHybridADUpdateResult_NextToken}}
+var mDescribeLDAPSSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLDAPSSettingsRequest_DirectoryId, &sDescribeLDAPSSettingsRequest_Type, &sDescribeLDAPSSettingsRequest_NextToken, &sDescribeLDAPSSettingsRequest_Limit}}
+var mDescribeLDAPSSettingsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLDAPSSettingsResult_LDAPSSettingsInfo, &sDescribeLDAPSSettingsResult_NextToken}}
+var mDescribeRegionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeRegionsRequest_DirectoryId, &sDescribeRegionsRequest_RegionName, &sDescribeRegionsRequest_NextToken}}
+var mDescribeRegionsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeRegionsResult_RegionsDescription, &sDescribeRegionsResult_NextToken}}
+var mDescribeSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSettingsRequest_DirectoryId, &sDescribeSettingsRequest_Status, &sDescribeSettingsRequest_NextToken}}
+var mDescribeSettingsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSettingsResult_DirectoryId, &sDescribeSettingsResult_SettingEntries, &sDescribeSettingsResult_NextToken}}
+var mDescribeSharedDirectoriesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSharedDirectoriesRequest_OwnerDirectoryId, &sDescribeSharedDirectoriesRequest_SharedDirectoryIds, &sDescribeSharedDirectoriesRequest_NextToken, &sDescribeSharedDirectoriesRequest_Limit}}
+var mDescribeSharedDirectoriesResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSharedDirectoriesResult_SharedDirectories, &sDescribeSharedDirectoriesResult_NextToken}}
+var mDescribeSnapshotsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSnapshotsRequest_DirectoryId, &sDescribeSnapshotsRequest_SnapshotIds, &sDescribeSnapshotsRequest_NextToken, &sDescribeSnapshotsRequest_Limit}}
+var mDescribeSnapshotsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSnapshotsResult_Snapshots, &sDescribeSnapshotsResult_NextToken}}
+var mDescribeTrustsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeTrustsRequest_DirectoryId, &sDescribeTrustsRequest_TrustIds, &sDescribeTrustsRequest_NextToken, &sDescribeTrustsRequest_Limit}}
+var mDescribeTrustsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeTrustsResult_Trusts, &sDescribeTrustsResult_NextToken}}
+var mDescribeUpdateDirectoryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeUpdateDirectoryRequest_DirectoryId, &sDescribeUpdateDirectoryRequest_UpdateType, &sDescribeUpdateDirectoryRequest_RegionName, &sDescribeUpdateDirectoryRequest_NextToken}}
+var mDescribeUpdateDirectoryResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeUpdateDirectoryResult_UpdateActivities, &sDescribeUpdateDirectoryResult_NextToken}}
+var mDisableCAEnrollmentPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisableCAEnrollmentPolicyRequest_DirectoryId}}
+var mDisableClientAuthenticationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisableClientAuthenticationRequest_DirectoryId, &sDisableClientAuthenticationRequest_Type}}
+var mDisableDirectoryDataAccessRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisableDirectoryDataAccessRequest_DirectoryId}}
+var mDisableLDAPSRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisableLDAPSRequest_DirectoryId, &sDisableLDAPSRequest_Type}}
+var mDisableRadiusRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisableRadiusRequest_DirectoryId}}
+var mDisableSsoRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisableSsoRequest_DirectoryId, &sDisableSsoRequest_UserName, &sDisableSsoRequest_Password}}
+var mEnableCAEnrollmentPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sEnableCAEnrollmentPolicyRequest_DirectoryId, &sEnableCAEnrollmentPolicyRequest_PcaConnectorArn}}
+var mEnableClientAuthenticationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sEnableClientAuthenticationRequest_DirectoryId, &sEnableClientAuthenticationRequest_Type}}
+var mEnableDirectoryDataAccessRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sEnableDirectoryDataAccessRequest_DirectoryId}}
+var mEnableLDAPSRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sEnableLDAPSRequest_DirectoryId, &sEnableLDAPSRequest_Type}}
+var mEnableRadiusRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sEnableRadiusRequest_DirectoryId, &sEnableRadiusRequest_RadiusSettings}}
+var mEnableSsoRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sEnableSsoRequest_DirectoryId, &sEnableSsoRequest_UserName, &sEnableSsoRequest_Password}}
+var mGetDirectoryLimitsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDirectoryLimitsResult_DirectoryLimits}}
+var mGetSnapshotLimitsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSnapshotLimitsRequest_DirectoryId}}
+var mGetSnapshotLimitsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSnapshotLimitsResult_SnapshotLimits}}
+var mListADAssessmentsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListADAssessmentsRequest_DirectoryId, &sListADAssessmentsRequest_NextToken, &sListADAssessmentsRequest_Limit}}
+var mListADAssessmentsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListADAssessmentsResult_Assessments, &sListADAssessmentsResult_NextToken}}
+var mListCertificatesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListCertificatesRequest_DirectoryId, &sListCertificatesRequest_NextToken, &sListCertificatesRequest_Limit}}
+var mListCertificatesResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListCertificatesResult_NextToken, &sListCertificatesResult_CertificatesInfo}}
+var mListIpRoutesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListIpRoutesRequest_DirectoryId, &sListIpRoutesRequest_NextToken, &sListIpRoutesRequest_Limit}}
+var mListIpRoutesResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListIpRoutesResult_IpRoutesInfo, &sListIpRoutesResult_NextToken}}
+var mListLogSubscriptionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListLogSubscriptionsRequest_DirectoryId, &sListLogSubscriptionsRequest_NextToken, &sListLogSubscriptionsRequest_Limit}}
+var mListLogSubscriptionsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListLogSubscriptionsResult_LogSubscriptions, &sListLogSubscriptionsResult_NextToken}}
+var mListSchemaExtensionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListSchemaExtensionsRequest_DirectoryId, &sListSchemaExtensionsRequest_NextToken, &sListSchemaExtensionsRequest_Limit}}
+var mListSchemaExtensionsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListSchemaExtensionsResult_SchemaExtensionsInfo, &sListSchemaExtensionsResult_NextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceId, &sListTagsForResourceRequest_NextToken, &sListTagsForResourceRequest_Limit}}
+var mListTagsForResourceResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResult_Tags, &sListTagsForResourceResult_NextToken}}
+var mRegisterCertificateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisterCertificateRequest_DirectoryId, &sRegisterCertificateRequest_CertificateData, &sRegisterCertificateRequest_Type, &sRegisterCertificateRequest_ClientCertAuthSettings}}
+var mRegisterCertificateResult = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisterCertificateResult_CertificateId}}
+var mRegisterEventTopicRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisterEventTopicRequest_DirectoryId, &sRegisterEventTopicRequest_TopicName}}
+var mRejectSharedDirectoryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRejectSharedDirectoryRequest_SharedDirectoryId}}
+var mRejectSharedDirectoryResult = smithy.SchemaMembers{List: []*smithy.Schema{&sRejectSharedDirectoryResult_SharedDirectoryId}}
+var mRemoveIpRoutesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRemoveIpRoutesRequest_DirectoryId, &sRemoveIpRoutesRequest_CidrIps, &sRemoveIpRoutesRequest_CidrIpv6s}}
+var mRemoveRegionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRemoveRegionRequest_DirectoryId}}
+var mRemoveTagsFromResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRemoveTagsFromResourceRequest_ResourceId, &sRemoveTagsFromResourceRequest_TagKeys}}
+var mResetUserPasswordRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sResetUserPasswordRequest_DirectoryId, &sResetUserPasswordRequest_UserName, &sResetUserPasswordRequest_NewPassword}}
+var mRestoreFromSnapshotRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRestoreFromSnapshotRequest_SnapshotId}}
+var mShareDirectoryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sShareDirectoryRequest_DirectoryId, &sShareDirectoryRequest_ShareNotes, &sShareDirectoryRequest_ShareTarget, &sShareDirectoryRequest_ShareMethod}}
+var mShareDirectoryResult = smithy.SchemaMembers{List: []*smithy.Schema{&sShareDirectoryResult_SharedDirectoryId}}
+var mStartADAssessmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartADAssessmentRequest_AssessmentConfiguration, &sStartADAssessmentRequest_DirectoryId}}
+var mStartADAssessmentResult = smithy.SchemaMembers{List: []*smithy.Schema{&sStartADAssessmentResult_AssessmentId}}
+var mStartSchemaExtensionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartSchemaExtensionRequest_DirectoryId, &sStartSchemaExtensionRequest_CreateSnapshotBeforeSchemaExtension, &sStartSchemaExtensionRequest_LdifContent, &sStartSchemaExtensionRequest_Description}}
+var mStartSchemaExtensionResult = smithy.SchemaMembers{List: []*smithy.Schema{&sStartSchemaExtensionResult_SchemaExtensionId}}
+var mUnshareDirectoryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUnshareDirectoryRequest_DirectoryId, &sUnshareDirectoryRequest_UnshareTarget}}
+var mUnshareDirectoryResult = smithy.SchemaMembers{List: []*smithy.Schema{&sUnshareDirectoryResult_SharedDirectoryId}}
+var mUpdateConditionalForwarderRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateConditionalForwarderRequest_DirectoryId, &sUpdateConditionalForwarderRequest_RemoteDomainName, &sUpdateConditionalForwarderRequest_DnsIpAddrs, &sUpdateConditionalForwarderRequest_DnsIpv6Addrs}}
+var mUpdateDirectorySetupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDirectorySetupRequest_DirectoryId, &sUpdateDirectorySetupRequest_UpdateType, &sUpdateDirectorySetupRequest_OSUpdateSettings, &sUpdateDirectorySetupRequest_DirectorySizeUpdateSettings, &sUpdateDirectorySetupRequest_NetworkUpdateSettings, &sUpdateDirectorySetupRequest_CreateSnapshotBeforeUpdate}}
+var mUpdateHybridADRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateHybridADRequest_DirectoryId, &sUpdateHybridADRequest_HybridAdministratorAccountUpdate, &sUpdateHybridADRequest_SelfManagedInstancesSettings}}
+var mUpdateHybridADResult = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateHybridADResult_DirectoryId, &sUpdateHybridADResult_AssessmentId}}
+var mUpdateNumberOfDomainControllersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateNumberOfDomainControllersRequest_DirectoryId, &sUpdateNumberOfDomainControllersRequest_DesiredNumber}}
+var mUpdateRadiusRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRadiusRequest_DirectoryId, &sUpdateRadiusRequest_RadiusSettings}}
+var mUpdateSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSettingsRequest_DirectoryId, &sUpdateSettingsRequest_Settings}}
+var mUpdateSettingsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSettingsResult_DirectoryId}}
+var mUpdateTrustRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateTrustRequest_TrustId, &sUpdateTrustRequest_SelectiveAuth}}
+var mUpdateTrustResult = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateTrustResult_RequestId, &sUpdateTrustResult_TrustId}}
+var mVerifyTrustRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sVerifyTrustRequest_TrustId}}
+var mVerifyTrustResult = smithy.SchemaMembers{List: []*smithy.Schema{&sVerifyTrustResult_TrustId}}
+
+var sAcceptSharedDirectory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptSharedDirectory, Type: smithy.ShapeTypeOperation})
+var sAddIpRoutes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddIpRoutes, Type: smithy.ShapeTypeOperation})
+var sAddRegion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddRegion, Type: smithy.ShapeTypeOperation})
+var sAddTagsToResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddTagsToResource, Type: smithy.ShapeTypeOperation})
+var sCancelSchemaExtension = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelSchemaExtension, Type: smithy.ShapeTypeOperation})
+var sConnectDirectory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectDirectory, Type: smithy.ShapeTypeOperation})
+var sCreateAlias = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAlias, Type: smithy.ShapeTypeOperation})
+var sCreateComputer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateComputer, Type: smithy.ShapeTypeOperation})
+var sCreateConditionalForwarder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConditionalForwarder, Type: smithy.ShapeTypeOperation})
+var sCreateDirectory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDirectory, Type: smithy.ShapeTypeOperation})
+var sCreateHybridAD = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHybridAD, Type: smithy.ShapeTypeOperation})
+var sCreateLogSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLogSubscription, Type: smithy.ShapeTypeOperation})
+var sCreateMicrosoftAD = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMicrosoftAD, Type: smithy.ShapeTypeOperation})
+var sCreateSnapshot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSnapshot, Type: smithy.ShapeTypeOperation})
+var sCreateTrust = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTrust, Type: smithy.ShapeTypeOperation})
+var sDeleteADAssessment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteADAssessment, Type: smithy.ShapeTypeOperation})
+var sDeleteConditionalForwarder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConditionalForwarder, Type: smithy.ShapeTypeOperation})
+var sDeleteDirectory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDirectory, Type: smithy.ShapeTypeOperation})
+var sDeleteLogSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLogSubscription, Type: smithy.ShapeTypeOperation})
+var sDeleteSnapshot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSnapshot, Type: smithy.ShapeTypeOperation})
+var sDeleteTrust = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTrust, Type: smithy.ShapeTypeOperation})
+var sDeregisterCertificate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterCertificate, Type: smithy.ShapeTypeOperation})
+var sDeregisterEventTopic = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterEventTopic, Type: smithy.ShapeTypeOperation})
+var sDescribeADAssessment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeADAssessment, Type: smithy.ShapeTypeOperation})
+var sDescribeCAEnrollmentPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCAEnrollmentPolicy, Type: smithy.ShapeTypeOperation})
+var sDescribeCertificate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCertificate, Type: smithy.ShapeTypeOperation})
+var sDescribeClientAuthenticationSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeClientAuthenticationSettings, Type: smithy.ShapeTypeOperation})
+var sDescribeConditionalForwarders = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConditionalForwarders, Type: smithy.ShapeTypeOperation})
+var sDescribeDirectories = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDirectories, Type: smithy.ShapeTypeOperation})
+var sDescribeDirectoryDataAccess = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDirectoryDataAccess, Type: smithy.ShapeTypeOperation})
+var sDescribeDomainControllers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDomainControllers, Type: smithy.ShapeTypeOperation})
+var sDescribeEventTopics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventTopics, Type: smithy.ShapeTypeOperation})
+var sDescribeHybridADUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeHybridADUpdate, Type: smithy.ShapeTypeOperation})
+var sDescribeLDAPSSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLDAPSSettings, Type: smithy.ShapeTypeOperation})
+var sDescribeRegions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRegions, Type: smithy.ShapeTypeOperation})
+var sDescribeSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSettings, Type: smithy.ShapeTypeOperation})
+var sDescribeSharedDirectories = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSharedDirectories, Type: smithy.ShapeTypeOperation})
+var sDescribeSnapshots = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSnapshots, Type: smithy.ShapeTypeOperation})
+var sDescribeTrusts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTrusts, Type: smithy.ShapeTypeOperation})
+var sDescribeUpdateDirectory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeUpdateDirectory, Type: smithy.ShapeTypeOperation})
+var sDisableCAEnrollmentPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableCAEnrollmentPolicy, Type: smithy.ShapeTypeOperation})
+var sDisableClientAuthentication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableClientAuthentication, Type: smithy.ShapeTypeOperation})
+var sDisableDirectoryDataAccess = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableDirectoryDataAccess, Type: smithy.ShapeTypeOperation})
+var sDisableLDAPS = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableLDAPS, Type: smithy.ShapeTypeOperation})
+var sDisableRadius = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableRadius, Type: smithy.ShapeTypeOperation})
+var sDisableSso = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableSso, Type: smithy.ShapeTypeOperation})
+var sEnableCAEnrollmentPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableCAEnrollmentPolicy, Type: smithy.ShapeTypeOperation})
+var sEnableClientAuthentication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableClientAuthentication, Type: smithy.ShapeTypeOperation})
+var sEnableDirectoryDataAccess = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableDirectoryDataAccess, Type: smithy.ShapeTypeOperation})
+var sEnableLDAPS = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableLDAPS, Type: smithy.ShapeTypeOperation})
+var sEnableRadius = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableRadius, Type: smithy.ShapeTypeOperation})
+var sEnableSso = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableSso, Type: smithy.ShapeTypeOperation})
+var sGetDirectoryLimits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDirectoryLimits, Type: smithy.ShapeTypeOperation})
+var sGetSnapshotLimits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSnapshotLimits, Type: smithy.ShapeTypeOperation})
+var sListADAssessments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListADAssessments, Type: smithy.ShapeTypeOperation})
+var sListCertificates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCertificates, Type: smithy.ShapeTypeOperation})
+var sListIpRoutes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIpRoutes, Type: smithy.ShapeTypeOperation})
+var sListLogSubscriptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLogSubscriptions, Type: smithy.ShapeTypeOperation})
+var sListSchemaExtensions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSchemaExtensions, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation})
+var sRegisterCertificate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterCertificate, Type: smithy.ShapeTypeOperation})
+var sRegisterEventTopic = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterEventTopic, Type: smithy.ShapeTypeOperation})
+var sRejectSharedDirectory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectSharedDirectory, Type: smithy.ShapeTypeOperation})
+var sRemoveIpRoutes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveIpRoutes, Type: smithy.ShapeTypeOperation})
+var sRemoveRegion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveRegion, Type: smithy.ShapeTypeOperation})
+var sRemoveTagsFromResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveTagsFromResource, Type: smithy.ShapeTypeOperation})
+var sResetUserPassword = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetUserPassword, Type: smithy.ShapeTypeOperation})
+var sRestoreFromSnapshot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestoreFromSnapshot, Type: smithy.ShapeTypeOperation})
+var sShareDirectory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShareDirectory, Type: smithy.ShapeTypeOperation})
+var sStartADAssessment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartADAssessment, Type: smithy.ShapeTypeOperation})
+var sStartSchemaExtension = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSchemaExtension, Type: smithy.ShapeTypeOperation})
+var sUnshareDirectory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnshareDirectory, Type: smithy.ShapeTypeOperation})
+var sUpdateConditionalForwarder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConditionalForwarder, Type: smithy.ShapeTypeOperation})
+var sUpdateDirectorySetup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDirectorySetup, Type: smithy.ShapeTypeOperation})
+var sUpdateHybridAD = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateHybridAD, Type: smithy.ShapeTypeOperation})
+var sUpdateNumberOfDomainControllers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNumberOfDomainControllers, Type: smithy.ShapeTypeOperation})
+var sUpdateRadius = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRadius, Type: smithy.ShapeTypeOperation})
+var sUpdateSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSettings, Type: smithy.ShapeTypeOperation})
+var sUpdateTrust = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTrust, Type: smithy.ShapeTypeOperation})
+var sVerifyTrust = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVerifyTrust, Type: smithy.ShapeTypeOperation})
+var s_DirectoryService_20150416 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DirectoryService_20150416, Traits: &t0, Type: smithy.ShapeTypeService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_AccessUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessUrl, Type: smithy.ShapeTypeString})
+var sADAssessmentLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iADAssessmentLimitExceededException, Members: &mADAssessmentLimitExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_AddedDateTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AddedDateTime, Type: smithy.ShapeTypeTimestamp})
+var s_AdditionalRegions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AdditionalRegions, Members: &m_AdditionalRegions, Type: smithy.ShapeTypeList})
+var s_AliasName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AliasName, Type: smithy.ShapeTypeString})
+var sAssessment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssessment, Members: &mAssessment, Type: smithy.ShapeTypeStructure})
+var sAssessmentConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssessmentConfiguration, Members: &mAssessmentConfiguration, Type: smithy.ShapeTypeStructure})
+var s_AssessmentId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssessmentId, Type: smithy.ShapeTypeString})
+var s_AssessmentInstanceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssessmentInstanceId, Type: smithy.ShapeTypeString})
+var s_AssessmentInstanceIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssessmentInstanceIds, Members: &m_AssessmentInstanceIds, Type: smithy.ShapeTypeList})
+var s_AssessmentLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssessmentLimit, Type: smithy.ShapeTypeInteger})
+var sAssessmentReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssessmentReport, Members: &mAssessmentReport, Type: smithy.ShapeTypeStructure})
+var s_AssessmentReports = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssessmentReports, Members: &m_AssessmentReports, Type: smithy.ShapeTypeList})
+var s_AssessmentReportType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssessmentReportType, Type: smithy.ShapeTypeString})
+var s_Assessments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Assessments, Members: &m_Assessments, Type: smithy.ShapeTypeList})
+var s_AssessmentStartTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssessmentStartTime, Type: smithy.ShapeTypeTimestamp})
+var s_AssessmentStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssessmentStatus, Type: smithy.ShapeTypeString})
+var s_AssessmentStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssessmentStatusCode, Type: smithy.ShapeTypeString})
+var s_AssessmentStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssessmentStatusReason, Type: smithy.ShapeTypeString})
+var sAssessmentSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssessmentSummary, Members: &mAssessmentSummary, Type: smithy.ShapeTypeStructure})
+var sAssessmentValidation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssessmentValidation, Members: &mAssessmentValidation, Type: smithy.ShapeTypeStructure})
+var s_AssessmentValidationCategory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssessmentValidationCategory, Type: smithy.ShapeTypeString})
+var s_AssessmentValidationName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssessmentValidationName, Type: smithy.ShapeTypeString})
+var s_AssessmentValidations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssessmentValidations, Members: &m_AssessmentValidations, Type: smithy.ShapeTypeList})
+var s_AssessmentValidationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssessmentValidationStatus, Type: smithy.ShapeTypeString})
+var s_AssessmentValidationStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssessmentValidationStatusCode, Type: smithy.ShapeTypeString})
+var s_AssessmentValidationStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssessmentValidationStatusReason, Type: smithy.ShapeTypeString})
+var s_AssessmentValidationTimeStamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssessmentValidationTimeStamp, Type: smithy.ShapeTypeTimestamp})
+var s_AssessmentVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssessmentVersion, Type: smithy.ShapeTypeString})
+var sAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttribute, Members: &mAttribute, Type: smithy.ShapeTypeStructure})
+var s_AttributeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeName, Type: smithy.ShapeTypeString})
+var s_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeList})
+var s_AttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeValue, Type: smithy.ShapeTypeString})
+var sAuthenticationFailedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuthenticationFailedException, Members: &mAuthenticationFailedException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_AvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString})
+var s_AvailabilityZones = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AvailabilityZones, Members: &m_AvailabilityZones, Type: smithy.ShapeTypeList})
+var sCaEnrollmentPolicyStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCaEnrollmentPolicyStatus, Members: &mCaEnrollmentPolicyStatus, Type: smithy.ShapeTypeEnum})
+var s_CaEnrollmentPolicyStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CaEnrollmentPolicyStatusReason, Type: smithy.ShapeTypeString})
+var sCertificate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCertificate, Members: &mCertificate, Type: smithy.ShapeTypeStructure})
+var sCertificateAlreadyExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCertificateAlreadyExistsException, Members: &mCertificateAlreadyExistsException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_CertificateCN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertificateCN, Type: smithy.ShapeTypeString})
+var s_CertificateData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertificateData, Type: smithy.ShapeTypeString})
+var sCertificateDoesNotExistException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCertificateDoesNotExistException, Members: &mCertificateDoesNotExistException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_CertificateExpiryDateTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertificateExpiryDateTime, Type: smithy.ShapeTypeTimestamp})
+var s_CertificateId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertificateId, Type: smithy.ShapeTypeString})
+var sCertificateInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCertificateInfo, Members: &mCertificateInfo, Type: smithy.ShapeTypeStructure})
+var sCertificateInUseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCertificateInUseException, Members: &mCertificateInUseException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sCertificateLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCertificateLimitExceededException, Members: &mCertificateLimitExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_CertificateRegisteredDateTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertificateRegisteredDateTime, Type: smithy.ShapeTypeTimestamp})
+var s_CertificatesInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertificatesInfo, Members: &m_CertificatesInfo, Type: smithy.ShapeTypeList})
+var sCertificateState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCertificateState, Members: &mCertificateState, Type: smithy.ShapeTypeEnum})
+var s_CertificateStateReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertificateStateReason, Type: smithy.ShapeTypeString})
+var sCertificateType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCertificateType, Members: &mCertificateType, Type: smithy.ShapeTypeEnum})
+var s_CidrIp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CidrIp, Type: smithy.ShapeTypeString})
+var s_CidrIps = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CidrIps, Members: &m_CidrIps, Type: smithy.ShapeTypeList})
+var s_CidrIpv6 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CidrIpv6, Type: smithy.ShapeTypeString})
+var s_CidrIpv6s = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CidrIpv6s, Members: &m_CidrIpv6s, Type: smithy.ShapeTypeList})
+var sClientAuthenticationSettingInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClientAuthenticationSettingInfo, Members: &mClientAuthenticationSettingInfo, Type: smithy.ShapeTypeStructure})
+var s_ClientAuthenticationSettingsInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientAuthenticationSettingsInfo, Members: &m_ClientAuthenticationSettingsInfo, Type: smithy.ShapeTypeList})
+var sClientAuthenticationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClientAuthenticationStatus, Members: &mClientAuthenticationStatus, Type: smithy.ShapeTypeEnum})
+var sClientAuthenticationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClientAuthenticationType, Members: &mClientAuthenticationType, Type: smithy.ShapeTypeEnum})
+var sClientCertAuthSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClientCertAuthSettings, Members: &mClientCertAuthSettings, Type: smithy.ShapeTypeStructure})
+var sClientException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClientException, Members: &mClientException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_CloudOnlyDirectoriesLimitReached = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CloudOnlyDirectoriesLimitReached, Type: smithy.ShapeTypeBoolean})
+var sComputer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComputer, Members: &mComputer, Type: smithy.ShapeTypeStructure})
+var s_ComputerName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComputerName, Type: smithy.ShapeTypeString})
+var s_ComputerPassword = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComputerPassword, Traits: &t2, Type: smithy.ShapeTypeString})
+var sConditionalForwarder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConditionalForwarder, Members: &mConditionalForwarder, Type: smithy.ShapeTypeStructure})
+var s_ConditionalForwarders = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConditionalForwarders, Members: &m_ConditionalForwarders, Type: smithy.ShapeTypeList})
+var s_ConnectedDirectoriesLimitReached = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectedDirectoriesLimitReached, Type: smithy.ShapeTypeBoolean})
+var s_ConnectPassword = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectPassword, Traits: &t2, Type: smithy.ShapeTypeString})
+var s_CreatedDateTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreatedDateTime, Type: smithy.ShapeTypeTimestamp})
+var s_CreateSnapshotBeforeSchemaExtension = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreateSnapshotBeforeSchemaExtension, Type: smithy.ShapeTypeBoolean})
+var s_CreateSnapshotBeforeUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreateSnapshotBeforeUpdate, Type: smithy.ShapeTypeBoolean})
+var s_CustomerDnsIps = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomerDnsIps, Members: &m_CustomerDnsIps, Type: smithy.ShapeTypeList})
+var s_CustomerId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomerId, Type: smithy.ShapeTypeString})
+var s_CustomerUserName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomerUserName, Type: smithy.ShapeTypeString})
+var sDataAccessStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataAccessStatus, Members: &mDataAccessStatus, Type: smithy.ShapeTypeEnum})
+var s_DeleteAssociatedConditionalForwarder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeleteAssociatedConditionalForwarder, Type: smithy.ShapeTypeBoolean})
+var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Type: smithy.ShapeTypeString})
+var s_DesiredNumberOfDomainControllers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DesiredNumberOfDomainControllers, Type: smithy.ShapeTypeInteger})
+var sDirectoryAlreadyInRegionException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectoryAlreadyInRegionException, Members: &mDirectoryAlreadyInRegionException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sDirectoryAlreadySharedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectoryAlreadySharedException, Members: &mDirectoryAlreadySharedException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_DirectoryConfigurationSettingAllowedValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DirectoryConfigurationSettingAllowedValues, Type: smithy.ShapeTypeString})
+var s_DirectoryConfigurationSettingDataType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DirectoryConfigurationSettingDataType, Type: smithy.ShapeTypeString})
+var s_DirectoryConfigurationSettingLastRequestedDateTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DirectoryConfigurationSettingLastRequestedDateTime, Type: smithy.ShapeTypeTimestamp})
+var s_DirectoryConfigurationSettingLastUpdatedDateTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DirectoryConfigurationSettingLastUpdatedDateTime, Type: smithy.ShapeTypeTimestamp})
+var s_DirectoryConfigurationSettingName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DirectoryConfigurationSettingName, Type: smithy.ShapeTypeString})
+var s_DirectoryConfigurationSettingRequestDetailedStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DirectoryConfigurationSettingRequestDetailedStatus, Members: &m_DirectoryConfigurationSettingRequestDetailedStatus, Type: smithy.ShapeTypeMap})
+var s_DirectoryConfigurationSettingRequestStatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DirectoryConfigurationSettingRequestStatusMessage, Type: smithy.ShapeTypeString})
+var s_DirectoryConfigurationSettingType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DirectoryConfigurationSettingType, Type: smithy.ShapeTypeString})
+var s_DirectoryConfigurationSettingValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DirectoryConfigurationSettingValue, Type: smithy.ShapeTypeString})
+var sDirectoryConfigurationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectoryConfigurationStatus, Members: &mDirectoryConfigurationStatus, Type: smithy.ShapeTypeEnum})
+var sDirectoryConnectSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectoryConnectSettings, Members: &mDirectoryConnectSettings, Type: smithy.ShapeTypeStructure})
+var sDirectoryConnectSettingsDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectoryConnectSettingsDescription, Members: &mDirectoryConnectSettingsDescription, Type: smithy.ShapeTypeStructure})
+var sDirectoryDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectoryDescription, Members: &mDirectoryDescription, Type: smithy.ShapeTypeStructure})
+var s_DirectoryDescriptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DirectoryDescriptions, Members: &m_DirectoryDescriptions, Type: smithy.ShapeTypeList})
+var sDirectoryDoesNotExistException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectoryDoesNotExistException, Members: &mDirectoryDoesNotExistException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sDirectoryEdition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectoryEdition, Members: &mDirectoryEdition, Type: smithy.ShapeTypeEnum})
+var s_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var s_DirectoryIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DirectoryIds, Members: &m_DirectoryIds, Type: smithy.ShapeTypeList})
+var sDirectoryInDesiredStateException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectoryInDesiredStateException, Members: &mDirectoryInDesiredStateException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sDirectoryLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectoryLimitExceededException, Members: &mDirectoryLimitExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sDirectoryLimits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectoryLimits, Members: &mDirectoryLimits, Type: smithy.ShapeTypeStructure})
+var s_DirectoryName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DirectoryName, Type: smithy.ShapeTypeString})
+var sDirectoryNotSharedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectoryNotSharedException, Members: &mDirectoryNotSharedException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_DirectoryShortName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DirectoryShortName, Type: smithy.ShapeTypeString})
+var sDirectorySize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectorySize, Members: &mDirectorySize, Type: smithy.ShapeTypeEnum})
+var sDirectorySizeUpdateSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectorySizeUpdateSettings, Members: &mDirectorySizeUpdateSettings, Type: smithy.ShapeTypeStructure})
+var sDirectoryStage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectoryStage, Members: &mDirectoryStage, Type: smithy.ShapeTypeEnum})
+var sDirectoryType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectoryType, Members: &mDirectoryType, Type: smithy.ShapeTypeEnum})
+var sDirectoryUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectoryUnavailableException, Members: &mDirectoryUnavailableException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sDirectoryVpcSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectoryVpcSettings, Members: &mDirectoryVpcSettings, Type: smithy.ShapeTypeStructure})
+var sDirectoryVpcSettingsDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectoryVpcSettingsDescription, Members: &mDirectoryVpcSettingsDescription, Type: smithy.ShapeTypeStructure})
+var sDisableAlreadyInProgressException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableAlreadyInProgressException, Members: &mDisableAlreadyInProgressException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_DnsIpAddrs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DnsIpAddrs, Members: &m_DnsIpAddrs, Type: smithy.ShapeTypeList})
+var s_DnsIpv6Addrs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DnsIpv6Addrs, Members: &m_DnsIpv6Addrs, Type: smithy.ShapeTypeList})
+var sDomainController = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainController, Members: &mDomainController, Type: smithy.ShapeTypeStructure})
+var s_DomainControllerId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainControllerId, Type: smithy.ShapeTypeString})
+var s_DomainControllerIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainControllerIds, Members: &m_DomainControllerIds, Type: smithy.ShapeTypeList})
+var sDomainControllerLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainControllerLimitExceededException, Members: &mDomainControllerLimitExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_DomainControllers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainControllers, Members: &m_DomainControllers, Type: smithy.ShapeTypeList})
+var sDomainControllerStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainControllerStatus, Members: &mDomainControllerStatus, Type: smithy.ShapeTypeEnum})
+var s_DomainControllerStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainControllerStatusReason, Type: smithy.ShapeTypeString})
+var sEnableAlreadyInProgressException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableAlreadyInProgressException, Members: &mEnableAlreadyInProgressException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_EndDateTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EndDateTime, Type: smithy.ShapeTypeTimestamp})
+var sEntityAlreadyExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntityAlreadyExistsException, Members: &mEntityAlreadyExistsException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sEntityDoesNotExistException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntityDoesNotExistException, Members: &mEntityDoesNotExistException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sEventTopic = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventTopic, Members: &mEventTopic, Type: smithy.ShapeTypeStructure})
+var s_EventTopics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventTopics, Members: &m_EventTopics, Type: smithy.ShapeTypeList})
+var s_ExceptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sHybridAdministratorAccountUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHybridAdministratorAccountUpdate, Members: &mHybridAdministratorAccountUpdate, Type: smithy.ShapeTypeStructure})
+var sHybridCustomerInstancesSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHybridCustomerInstancesSettings, Members: &mHybridCustomerInstancesSettings, Type: smithy.ShapeTypeStructure})
+var sHybridSettingsDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHybridSettingsDescription, Members: &mHybridSettingsDescription, Type: smithy.ShapeTypeStructure})
+var sHybridUpdateActivities = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHybridUpdateActivities, Members: &mHybridUpdateActivities, Type: smithy.ShapeTypeStructure})
+var s_HybridUpdateInfoEntries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HybridUpdateInfoEntries, Members: &m_HybridUpdateInfoEntries, Type: smithy.ShapeTypeList})
+var sHybridUpdateInfoEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHybridUpdateInfoEntry, Members: &mHybridUpdateInfoEntry, Type: smithy.ShapeTypeStructure})
+var sHybridUpdateType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHybridUpdateType, Members: &mHybridUpdateType, Type: smithy.ShapeTypeEnum})
+var sHybridUpdateValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHybridUpdateValue, Members: &mHybridUpdateValue, Type: smithy.ShapeTypeStructure})
+var sIncompatibleSettingsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIncompatibleSettingsException, Members: &mIncompatibleSettingsException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_InitiatedBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InitiatedBy, Type: smithy.ShapeTypeString})
+var sInsufficientPermissionsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInsufficientPermissionsException, Members: &mInsufficientPermissionsException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sInvalidCertificateException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidCertificateException, Members: &mInvalidCertificateException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sInvalidClientAuthStatusException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidClientAuthStatusException, Members: &mInvalidClientAuthStatusException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sInvalidLDAPSStatusException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidLDAPSStatusException, Members: &mInvalidLDAPSStatusException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sInvalidNextTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidNextTokenException, Members: &mInvalidNextTokenException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sInvalidParameterException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidParameterException, Members: &mInvalidParameterException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sInvalidPasswordException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidPasswordException, Members: &mInvalidPasswordException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sInvalidTargetException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidTargetException, Members: &mInvalidTargetException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_IpAddr = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IpAddr, Type: smithy.ShapeTypeString})
+var s_IpAddrs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IpAddrs, Members: &m_IpAddrs, Type: smithy.ShapeTypeList})
+var sIpRoute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIpRoute, Members: &mIpRoute, Type: smithy.ShapeTypeStructure})
+var sIpRouteInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIpRouteInfo, Members: &mIpRouteInfo, Type: smithy.ShapeTypeStructure})
+var sIpRouteLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIpRouteLimitExceededException, Members: &mIpRouteLimitExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_IpRoutes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IpRoutes, Members: &m_IpRoutes, Type: smithy.ShapeTypeList})
+var s_IpRoutesInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IpRoutesInfo, Members: &m_IpRoutesInfo, Type: smithy.ShapeTypeList})
+var sIpRouteStatusMsg = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIpRouteStatusMsg, Members: &mIpRouteStatusMsg, Type: smithy.ShapeTypeEnum})
+var s_IpRouteStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IpRouteStatusReason, Type: smithy.ShapeTypeString})
+var s_Ipv6Addr = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Ipv6Addr, Type: smithy.ShapeTypeString})
+var s_IpV6Addrs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IpV6Addrs, Members: &m_IpV6Addrs, Type: smithy.ShapeTypeList})
+var s_LastUpdateDateTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastUpdateDateTime, Type: smithy.ShapeTypeTimestamp})
+var s_LastUpdatedDateTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastUpdatedDateTime, Type: smithy.ShapeTypeTimestamp})
+var s_LaunchTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LaunchTime, Type: smithy.ShapeTypeTimestamp})
+var sLDAPSSettingInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLDAPSSettingInfo, Members: &mLDAPSSettingInfo, Type: smithy.ShapeTypeStructure})
+var s_LDAPSSettingsInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LDAPSSettingsInfo, Members: &m_LDAPSSettingsInfo, Type: smithy.ShapeTypeList})
+var sLDAPSStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLDAPSStatus, Members: &mLDAPSStatus, Type: smithy.ShapeTypeEnum})
+var s_LDAPSStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LDAPSStatusReason, Type: smithy.ShapeTypeString})
+var sLDAPSType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLDAPSType, Members: &mLDAPSType, Type: smithy.ShapeTypeEnum})
+var s_LdifContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LdifContent, Type: smithy.ShapeTypeString})
+var s_Limit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Limit, Type: smithy.ShapeTypeInteger})
+var s_LogGroupName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogGroupName, Type: smithy.ShapeTypeString})
+var sLogSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogSubscription, Members: &mLogSubscription, Type: smithy.ShapeTypeStructure})
+var s_LogSubscriptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogSubscriptions, Members: &m_LogSubscriptions, Type: smithy.ShapeTypeList})
+var s_ManualSnapshotsLimitReached = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ManualSnapshotsLimitReached, Type: smithy.ShapeTypeBoolean})
+var sNetworkType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkType, Members: &mNetworkType, Type: smithy.ShapeTypeEnum})
+var sNetworkUpdateSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkUpdateSettings, Members: &mNetworkUpdateSettings, Type: smithy.ShapeTypeStructure})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sNoAvailableCertificateException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNoAvailableCertificateException, Members: &mNoAvailableCertificateException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_Notes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Notes, Traits: &t2, Type: smithy.ShapeTypeString})
+var s_OCSPUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OCSPUrl, Type: smithy.ShapeTypeString})
+var s_OrganizationalUnitDN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrganizationalUnitDN, Type: smithy.ShapeTypeString})
+var sOrganizationsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrganizationsException, Members: &mOrganizationsException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sOSUpdateSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOSUpdateSettings, Members: &mOSUpdateSettings, Type: smithy.ShapeTypeStructure})
+var sOSVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOSVersion, Members: &mOSVersion, Type: smithy.ShapeTypeEnum})
+var sOwnerDirectoryDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOwnerDirectoryDescription, Members: &mOwnerDirectoryDescription, Type: smithy.ShapeTypeStructure})
+var s_PageLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PageLimit, Type: smithy.ShapeTypeInteger})
+var s_Password = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Password, Traits: &t2, Type: smithy.ShapeTypeString})
+var s_PcaConnectorArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PcaConnectorArn, Type: smithy.ShapeTypeString})
+var s_PortNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PortNumber, Type: smithy.ShapeTypeInteger})
+var sRadiusAuthenticationProtocol = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRadiusAuthenticationProtocol, Members: &mRadiusAuthenticationProtocol, Type: smithy.ShapeTypeEnum})
+var s_RadiusDisplayLabel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RadiusDisplayLabel, Type: smithy.ShapeTypeString})
+var s_RadiusRetries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RadiusRetries, Type: smithy.ShapeTypeInteger})
+var sRadiusSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRadiusSettings, Members: &mRadiusSettings, Type: smithy.ShapeTypeStructure})
+var s_RadiusSharedSecret = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RadiusSharedSecret, Traits: &t2, Type: smithy.ShapeTypeString})
+var sRadiusStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRadiusStatus, Members: &mRadiusStatus, Type: smithy.ShapeTypeEnum})
+var s_RadiusTimeout = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RadiusTimeout, Type: smithy.ShapeTypeInteger})
+var sRegionDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegionDescription, Members: &mRegionDescription, Type: smithy.ShapeTypeStructure})
+var sRegionLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegionLimitExceededException, Members: &mRegionLimitExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_RegionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegionName, Type: smithy.ShapeTypeString})
+var s_RegionsDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegionsDescription, Members: &m_RegionsDescription, Type: smithy.ShapeTypeList})
+var sRegionsInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegionsInfo, Members: &mRegionsInfo, Type: smithy.ShapeTypeStructure})
+var sRegionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegionType, Members: &mRegionType, Type: smithy.ShapeTypeEnum})
+var s_RemoteDomainName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RemoteDomainName, Type: smithy.ShapeTypeString})
+var s_RemoteDomainNames = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RemoteDomainNames, Members: &m_RemoteDomainNames, Type: smithy.ShapeTypeList})
+var sReplicationScope = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicationScope, Members: &mReplicationScope, Type: smithy.ShapeTypeEnum})
+var s_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RequestId, Type: smithy.ShapeTypeString})
+var s_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var s_SchemaExtensionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SchemaExtensionId, Type: smithy.ShapeTypeString})
+var sSchemaExtensionInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSchemaExtensionInfo, Members: &mSchemaExtensionInfo, Type: smithy.ShapeTypeStructure})
+var s_SchemaExtensionsInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SchemaExtensionsInfo, Members: &m_SchemaExtensionsInfo, Type: smithy.ShapeTypeList})
+var sSchemaExtensionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSchemaExtensionStatus, Members: &mSchemaExtensionStatus, Type: smithy.ShapeTypeEnum})
+var s_SchemaExtensionStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SchemaExtensionStatusReason, Type: smithy.ShapeTypeString})
+var s_SecretArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecretArn, Type: smithy.ShapeTypeString})
+var s_SecurityGroupId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroupId, Type: smithy.ShapeTypeString})
+var s_SecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroupIds, Members: &m_SecurityGroupIds, Type: smithy.ShapeTypeList})
+var sSelectiveAuth = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSelectiveAuth, Members: &mSelectiveAuth, Type: smithy.ShapeTypeEnum})
+var s_Server = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Server, Type: smithy.ShapeTypeString})
+var s_Servers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Servers, Members: &m_Servers, Type: smithy.ShapeTypeList})
+var sServiceException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceException, Members: &mServiceException, Traits: &t4, Type: smithy.ShapeTypeStructure})
+var sSetting = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetting, Members: &mSetting, Type: smithy.ShapeTypeStructure})
+var s_SettingEntries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SettingEntries, Members: &m_SettingEntries, Type: smithy.ShapeTypeList})
+var sSettingEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSettingEntry, Members: &mSettingEntry, Type: smithy.ShapeTypeStructure})
+var s_Settings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Settings, Members: &m_Settings, Type: smithy.ShapeTypeList})
+var s_SharedDirectories = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SharedDirectories, Members: &m_SharedDirectories, Type: smithy.ShapeTypeList})
+var sSharedDirectory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSharedDirectory, Members: &mSharedDirectory, Type: smithy.ShapeTypeStructure})
+var sShareLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShareLimitExceededException, Members: &mShareLimitExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sShareMethod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShareMethod, Members: &mShareMethod, Type: smithy.ShapeTypeEnum})
+var sShareStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShareStatus, Members: &mShareStatus, Type: smithy.ShapeTypeEnum})
+var sShareTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShareTarget, Members: &mShareTarget, Type: smithy.ShapeTypeStructure})
+var s_SID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SID, Type: smithy.ShapeTypeString})
+var sSnapshot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnapshot, Members: &mSnapshot, Type: smithy.ShapeTypeStructure})
+var s_SnapshotId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnapshotId, Type: smithy.ShapeTypeString})
+var s_SnapshotIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnapshotIds, Members: &m_SnapshotIds, Type: smithy.ShapeTypeList})
+var sSnapshotLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnapshotLimitExceededException, Members: &mSnapshotLimitExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sSnapshotLimits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnapshotLimits, Members: &mSnapshotLimits, Type: smithy.ShapeTypeStructure})
+var s_SnapshotName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnapshotName, Type: smithy.ShapeTypeString})
+var s_Snapshots = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Snapshots, Members: &m_Snapshots, Type: smithy.ShapeTypeList})
+var sSnapshotStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnapshotStatus, Members: &mSnapshotStatus, Type: smithy.ShapeTypeEnum})
+var sSnapshotType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnapshotType, Members: &mSnapshotType, Type: smithy.ShapeTypeEnum})
+var s_SsoEnabled = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SsoEnabled, Type: smithy.ShapeTypeBoolean})
+var s_StageReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StageReason, Type: smithy.ShapeTypeString})
+var s_StartDateTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StartDateTime, Type: smithy.ShapeTypeTimestamp})
+var s_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StartTime, Type: smithy.ShapeTypeTimestamp})
+var s_StateLastUpdatedDateTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StateLastUpdatedDateTime, Type: smithy.ShapeTypeTimestamp})
+var s_SubnetId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetId, Type: smithy.ShapeTypeString})
+var s_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetIds, Members: &m_SubnetIds, Type: smithy.ShapeTypeList})
+var s_SubscriptionCreatedDateTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubscriptionCreatedDateTime, Type: smithy.ShapeTypeTimestamp})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeys, Members: &m_TagKeys, Type: smithy.ShapeTypeList})
+var sTagLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagLimitExceededException, Members: &mTagLimitExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_TargetId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetId, Type: smithy.ShapeTypeString})
+var sTargetType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetType, Members: &mTargetType, Type: smithy.ShapeTypeEnum})
+var s_TopicArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TopicArn, Type: smithy.ShapeTypeString})
+var s_TopicName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TopicName, Type: smithy.ShapeTypeString})
+var s_TopicNames = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TopicNames, Members: &m_TopicNames, Type: smithy.ShapeTypeList})
+var sTopicStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTopicStatus, Members: &mTopicStatus, Type: smithy.ShapeTypeEnum})
+var sTrust = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrust, Members: &mTrust, Type: smithy.ShapeTypeStructure})
+var sTrustDirection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrustDirection, Members: &mTrustDirection, Type: smithy.ShapeTypeEnum})
+var s_TrustId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrustId, Type: smithy.ShapeTypeString})
+var s_TrustIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrustIds, Members: &m_TrustIds, Type: smithy.ShapeTypeList})
+var s_TrustPassword = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrustPassword, Traits: &t2, Type: smithy.ShapeTypeString})
+var s_Trusts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Trusts, Members: &m_Trusts, Type: smithy.ShapeTypeList})
+var sTrustState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrustState, Members: &mTrustState, Type: smithy.ShapeTypeEnum})
+var s_TrustStateReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrustStateReason, Type: smithy.ShapeTypeString})
+var sTrustType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrustType, Members: &mTrustType, Type: smithy.ShapeTypeEnum})
+var sUnshareTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnshareTarget, Members: &mUnshareTarget, Type: smithy.ShapeTypeStructure})
+var sUnsupportedOperationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnsupportedOperationException, Members: &mUnsupportedOperationException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sUnsupportedSettingsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnsupportedSettingsException, Members: &mUnsupportedSettingsException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_UpdateActivities = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpdateActivities, Members: &m_UpdateActivities, Type: smithy.ShapeTypeList})
+var sUpdateInfoEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateInfoEntry, Members: &mUpdateInfoEntry, Type: smithy.ShapeTypeStructure})
+var s_UpdateSecurityGroupForDirectoryControllers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpdateSecurityGroupForDirectoryControllers, Type: smithy.ShapeTypeBoolean})
+var sUpdateStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateStatus, Members: &mUpdateStatus, Type: smithy.ShapeTypeEnum})
+var s_UpdateStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpdateStatusReason, Type: smithy.ShapeTypeString})
+var sUpdateType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateType, Members: &mUpdateType, Type: smithy.ShapeTypeEnum})
+var sUpdateValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateValue, Members: &mUpdateValue, Type: smithy.ShapeTypeStructure})
+var sUserDoesNotExistException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUserDoesNotExistException, Members: &mUserDoesNotExistException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_UserName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserName, Type: smithy.ShapeTypeString})
+var s_UserPassword = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserPassword, Traits: &t2, Type: smithy.ShapeTypeString})
+var s_UseSameUsername = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UseSameUsername, Type: smithy.ShapeTypeBoolean})
+var s_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcId, Type: smithy.ShapeTypeString})
+var sAcceptSharedDirectoryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptSharedDirectoryRequest, Members: &mAcceptSharedDirectoryRequest, Type: smithy.ShapeTypeStructure})
+var sAcceptSharedDirectoryResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptSharedDirectoryResult, Members: &mAcceptSharedDirectoryResult, Type: smithy.ShapeTypeStructure})
+var sAddIpRoutesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddIpRoutesRequest, Members: &mAddIpRoutesRequest, Type: smithy.ShapeTypeStructure})
+var sAddIpRoutesResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddIpRoutesResult, Type: smithy.ShapeTypeStructure})
+var sAddRegionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddRegionRequest, Members: &mAddRegionRequest, Type: smithy.ShapeTypeStructure})
+var sAddRegionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddRegionResult, Type: smithy.ShapeTypeStructure})
+var sAddTagsToResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddTagsToResourceRequest, Members: &mAddTagsToResourceRequest, Type: smithy.ShapeTypeStructure})
+var sAddTagsToResourceResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddTagsToResourceResult, Type: smithy.ShapeTypeStructure})
+var sCancelSchemaExtensionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelSchemaExtensionRequest, Members: &mCancelSchemaExtensionRequest, Type: smithy.ShapeTypeStructure})
+var sCancelSchemaExtensionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelSchemaExtensionResult, Type: smithy.ShapeTypeStructure})
+var sConnectDirectoryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectDirectoryRequest, Members: &mConnectDirectoryRequest, Type: smithy.ShapeTypeStructure})
+var sConnectDirectoryResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectDirectoryResult, Members: &mConnectDirectoryResult, Type: smithy.ShapeTypeStructure})
+var sCreateAliasRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAliasRequest, Members: &mCreateAliasRequest, Type: smithy.ShapeTypeStructure})
+var sCreateAliasResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAliasResult, Members: &mCreateAliasResult, Type: smithy.ShapeTypeStructure})
+var sCreateComputerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateComputerRequest, Members: &mCreateComputerRequest, Type: smithy.ShapeTypeStructure})
+var sCreateComputerResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateComputerResult, Members: &mCreateComputerResult, Type: smithy.ShapeTypeStructure})
+var sCreateConditionalForwarderRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConditionalForwarderRequest, Members: &mCreateConditionalForwarderRequest, Type: smithy.ShapeTypeStructure})
+var sCreateConditionalForwarderResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConditionalForwarderResult, Type: smithy.ShapeTypeStructure})
+var sCreateDirectoryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDirectoryRequest, Members: &mCreateDirectoryRequest, Type: smithy.ShapeTypeStructure})
+var sCreateDirectoryResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDirectoryResult, Members: &mCreateDirectoryResult, Type: smithy.ShapeTypeStructure})
+var sCreateHybridADRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHybridADRequest, Members: &mCreateHybridADRequest, Type: smithy.ShapeTypeStructure})
+var sCreateHybridADResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHybridADResult, Members: &mCreateHybridADResult, Type: smithy.ShapeTypeStructure})
+var sCreateLogSubscriptionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLogSubscriptionRequest, Members: &mCreateLogSubscriptionRequest, Type: smithy.ShapeTypeStructure})
+var sCreateLogSubscriptionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLogSubscriptionResult, Type: smithy.ShapeTypeStructure})
+var sCreateMicrosoftADRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMicrosoftADRequest, Members: &mCreateMicrosoftADRequest, Type: smithy.ShapeTypeStructure})
+var sCreateMicrosoftADResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMicrosoftADResult, Members: &mCreateMicrosoftADResult, Type: smithy.ShapeTypeStructure})
+var sCreateSnapshotRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSnapshotRequest, Members: &mCreateSnapshotRequest, Type: smithy.ShapeTypeStructure})
+var sCreateSnapshotResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSnapshotResult, Members: &mCreateSnapshotResult, Type: smithy.ShapeTypeStructure})
+var sCreateTrustRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTrustRequest, Members: &mCreateTrustRequest, Type: smithy.ShapeTypeStructure})
+var sCreateTrustResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTrustResult, Members: &mCreateTrustResult, Type: smithy.ShapeTypeStructure})
+var sDeleteADAssessmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteADAssessmentRequest, Members: &mDeleteADAssessmentRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteADAssessmentResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteADAssessmentResult, Members: &mDeleteADAssessmentResult, Type: smithy.ShapeTypeStructure})
+var sDeleteConditionalForwarderRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConditionalForwarderRequest, Members: &mDeleteConditionalForwarderRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteConditionalForwarderResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConditionalForwarderResult, Type: smithy.ShapeTypeStructure})
+var sDeleteDirectoryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDirectoryRequest, Members: &mDeleteDirectoryRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteDirectoryResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDirectoryResult, Members: &mDeleteDirectoryResult, Type: smithy.ShapeTypeStructure})
+var sDeleteLogSubscriptionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLogSubscriptionRequest, Members: &mDeleteLogSubscriptionRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteLogSubscriptionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLogSubscriptionResult, Type: smithy.ShapeTypeStructure})
+var sDeleteSnapshotRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSnapshotRequest, Members: &mDeleteSnapshotRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteSnapshotResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSnapshotResult, Members: &mDeleteSnapshotResult, Type: smithy.ShapeTypeStructure})
+var sDeleteTrustRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTrustRequest, Members: &mDeleteTrustRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteTrustResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTrustResult, Members: &mDeleteTrustResult, Type: smithy.ShapeTypeStructure})
+var sDeregisterCertificateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterCertificateRequest, Members: &mDeregisterCertificateRequest, Type: smithy.ShapeTypeStructure})
+var sDeregisterCertificateResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterCertificateResult, Type: smithy.ShapeTypeStructure})
+var sDeregisterEventTopicRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterEventTopicRequest, Members: &mDeregisterEventTopicRequest, Type: smithy.ShapeTypeStructure})
+var sDeregisterEventTopicResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterEventTopicResult, Type: smithy.ShapeTypeStructure})
+var sDescribeADAssessmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeADAssessmentRequest, Members: &mDescribeADAssessmentRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeADAssessmentResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeADAssessmentResult, Members: &mDescribeADAssessmentResult, Type: smithy.ShapeTypeStructure})
+var sDescribeCAEnrollmentPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCAEnrollmentPolicyRequest, Members: &mDescribeCAEnrollmentPolicyRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeCAEnrollmentPolicyResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCAEnrollmentPolicyResult, Members: &mDescribeCAEnrollmentPolicyResult, Type: smithy.ShapeTypeStructure})
+var sDescribeCertificateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCertificateRequest, Members: &mDescribeCertificateRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeCertificateResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCertificateResult, Members: &mDescribeCertificateResult, Type: smithy.ShapeTypeStructure})
+var sDescribeClientAuthenticationSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeClientAuthenticationSettingsRequest, Members: &mDescribeClientAuthenticationSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeClientAuthenticationSettingsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeClientAuthenticationSettingsResult, Members: &mDescribeClientAuthenticationSettingsResult, Type: smithy.ShapeTypeStructure})
+var sDescribeConditionalForwardersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConditionalForwardersRequest, Members: &mDescribeConditionalForwardersRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeConditionalForwardersResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConditionalForwardersResult, Members: &mDescribeConditionalForwardersResult, Type: smithy.ShapeTypeStructure})
+var sDescribeDirectoriesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDirectoriesRequest, Members: &mDescribeDirectoriesRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeDirectoriesResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDirectoriesResult, Members: &mDescribeDirectoriesResult, Type: smithy.ShapeTypeStructure})
+var sDescribeDirectoryDataAccessRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDirectoryDataAccessRequest, Members: &mDescribeDirectoryDataAccessRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeDirectoryDataAccessResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDirectoryDataAccessResult, Members: &mDescribeDirectoryDataAccessResult, Type: smithy.ShapeTypeStructure})
+var sDescribeDomainControllersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDomainControllersRequest, Members: &mDescribeDomainControllersRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeDomainControllersResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDomainControllersResult, Members: &mDescribeDomainControllersResult, Type: smithy.ShapeTypeStructure})
+var sDescribeEventTopicsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventTopicsRequest, Members: &mDescribeEventTopicsRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeEventTopicsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventTopicsResult, Members: &mDescribeEventTopicsResult, Type: smithy.ShapeTypeStructure})
+var sDescribeHybridADUpdateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeHybridADUpdateRequest, Members: &mDescribeHybridADUpdateRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeHybridADUpdateResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeHybridADUpdateResult, Members: &mDescribeHybridADUpdateResult, Type: smithy.ShapeTypeStructure})
+var sDescribeLDAPSSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLDAPSSettingsRequest, Members: &mDescribeLDAPSSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeLDAPSSettingsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLDAPSSettingsResult, Members: &mDescribeLDAPSSettingsResult, Type: smithy.ShapeTypeStructure})
+var sDescribeRegionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRegionsRequest, Members: &mDescribeRegionsRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeRegionsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRegionsResult, Members: &mDescribeRegionsResult, Type: smithy.ShapeTypeStructure})
+var sDescribeSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSettingsRequest, Members: &mDescribeSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeSettingsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSettingsResult, Members: &mDescribeSettingsResult, Type: smithy.ShapeTypeStructure})
+var sDescribeSharedDirectoriesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSharedDirectoriesRequest, Members: &mDescribeSharedDirectoriesRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeSharedDirectoriesResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSharedDirectoriesResult, Members: &mDescribeSharedDirectoriesResult, Type: smithy.ShapeTypeStructure})
+var sDescribeSnapshotsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSnapshotsRequest, Members: &mDescribeSnapshotsRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeSnapshotsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSnapshotsResult, Members: &mDescribeSnapshotsResult, Type: smithy.ShapeTypeStructure})
+var sDescribeTrustsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTrustsRequest, Members: &mDescribeTrustsRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeTrustsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTrustsResult, Members: &mDescribeTrustsResult, Type: smithy.ShapeTypeStructure})
+var sDescribeUpdateDirectoryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeUpdateDirectoryRequest, Members: &mDescribeUpdateDirectoryRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeUpdateDirectoryResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeUpdateDirectoryResult, Members: &mDescribeUpdateDirectoryResult, Type: smithy.ShapeTypeStructure})
+var sDisableCAEnrollmentPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableCAEnrollmentPolicyRequest, Members: &mDisableCAEnrollmentPolicyRequest, Type: smithy.ShapeTypeStructure})
+var sDisableCAEnrollmentPolicyResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableCAEnrollmentPolicyResult, Type: smithy.ShapeTypeStructure})
+var sDisableClientAuthenticationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableClientAuthenticationRequest, Members: &mDisableClientAuthenticationRequest, Type: smithy.ShapeTypeStructure})
+var sDisableClientAuthenticationResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableClientAuthenticationResult, Type: smithy.ShapeTypeStructure})
+var sDisableDirectoryDataAccessRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableDirectoryDataAccessRequest, Members: &mDisableDirectoryDataAccessRequest, Type: smithy.ShapeTypeStructure})
+var sDisableDirectoryDataAccessResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableDirectoryDataAccessResult, Type: smithy.ShapeTypeStructure})
+var sDisableLDAPSRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableLDAPSRequest, Members: &mDisableLDAPSRequest, Type: smithy.ShapeTypeStructure})
+var sDisableLDAPSResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableLDAPSResult, Type: smithy.ShapeTypeStructure})
+var sDisableRadiusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableRadiusRequest, Members: &mDisableRadiusRequest, Type: smithy.ShapeTypeStructure})
+var sDisableRadiusResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableRadiusResult, Type: smithy.ShapeTypeStructure})
+var sDisableSsoRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableSsoRequest, Members: &mDisableSsoRequest, Type: smithy.ShapeTypeStructure})
+var sDisableSsoResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableSsoResult, Type: smithy.ShapeTypeStructure})
+var sEnableCAEnrollmentPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableCAEnrollmentPolicyRequest, Members: &mEnableCAEnrollmentPolicyRequest, Type: smithy.ShapeTypeStructure})
+var sEnableCAEnrollmentPolicyResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableCAEnrollmentPolicyResult, Type: smithy.ShapeTypeStructure})
+var sEnableClientAuthenticationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableClientAuthenticationRequest, Members: &mEnableClientAuthenticationRequest, Type: smithy.ShapeTypeStructure})
+var sEnableClientAuthenticationResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableClientAuthenticationResult, Type: smithy.ShapeTypeStructure})
+var sEnableDirectoryDataAccessRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableDirectoryDataAccessRequest, Members: &mEnableDirectoryDataAccessRequest, Type: smithy.ShapeTypeStructure})
+var sEnableDirectoryDataAccessResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableDirectoryDataAccessResult, Type: smithy.ShapeTypeStructure})
+var sEnableLDAPSRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableLDAPSRequest, Members: &mEnableLDAPSRequest, Type: smithy.ShapeTypeStructure})
+var sEnableLDAPSResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableLDAPSResult, Type: smithy.ShapeTypeStructure})
+var sEnableRadiusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableRadiusRequest, Members: &mEnableRadiusRequest, Type: smithy.ShapeTypeStructure})
+var sEnableRadiusResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableRadiusResult, Type: smithy.ShapeTypeStructure})
+var sEnableSsoRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableSsoRequest, Members: &mEnableSsoRequest, Type: smithy.ShapeTypeStructure})
+var sEnableSsoResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableSsoResult, Type: smithy.ShapeTypeStructure})
+var sGetDirectoryLimitsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDirectoryLimitsRequest, Type: smithy.ShapeTypeStructure})
+var sGetDirectoryLimitsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDirectoryLimitsResult, Members: &mGetDirectoryLimitsResult, Type: smithy.ShapeTypeStructure})
+var sGetSnapshotLimitsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSnapshotLimitsRequest, Members: &mGetSnapshotLimitsRequest, Type: smithy.ShapeTypeStructure})
+var sGetSnapshotLimitsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSnapshotLimitsResult, Members: &mGetSnapshotLimitsResult, Type: smithy.ShapeTypeStructure})
+var sListADAssessmentsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListADAssessmentsRequest, Members: &mListADAssessmentsRequest, Type: smithy.ShapeTypeStructure})
+var sListADAssessmentsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListADAssessmentsResult, Members: &mListADAssessmentsResult, Type: smithy.ShapeTypeStructure})
+var sListCertificatesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCertificatesRequest, Members: &mListCertificatesRequest, Type: smithy.ShapeTypeStructure})
+var sListCertificatesResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCertificatesResult, Members: &mListCertificatesResult, Type: smithy.ShapeTypeStructure})
+var sListIpRoutesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIpRoutesRequest, Members: &mListIpRoutesRequest, Type: smithy.ShapeTypeStructure})
+var sListIpRoutesResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIpRoutesResult, Members: &mListIpRoutesResult, Type: smithy.ShapeTypeStructure})
+var sListLogSubscriptionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLogSubscriptionsRequest, Members: &mListLogSubscriptionsRequest, Type: smithy.ShapeTypeStructure})
+var sListLogSubscriptionsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLogSubscriptionsResult, Members: &mListLogSubscriptionsResult, Type: smithy.ShapeTypeStructure})
+var sListSchemaExtensionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSchemaExtensionsRequest, Members: &mListSchemaExtensionsRequest, Type: smithy.ShapeTypeStructure})
+var sListSchemaExtensionsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSchemaExtensionsResult, Members: &mListSchemaExtensionsResult, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResult, Members: &mListTagsForResourceResult, Type: smithy.ShapeTypeStructure})
+var sRegisterCertificateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterCertificateRequest, Members: &mRegisterCertificateRequest, Type: smithy.ShapeTypeStructure})
+var sRegisterCertificateResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterCertificateResult, Members: &mRegisterCertificateResult, Type: smithy.ShapeTypeStructure})
+var sRegisterEventTopicRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterEventTopicRequest, Members: &mRegisterEventTopicRequest, Type: smithy.ShapeTypeStructure})
+var sRegisterEventTopicResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterEventTopicResult, Type: smithy.ShapeTypeStructure})
+var sRejectSharedDirectoryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectSharedDirectoryRequest, Members: &mRejectSharedDirectoryRequest, Type: smithy.ShapeTypeStructure})
+var sRejectSharedDirectoryResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectSharedDirectoryResult, Members: &mRejectSharedDirectoryResult, Type: smithy.ShapeTypeStructure})
+var sRemoveIpRoutesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveIpRoutesRequest, Members: &mRemoveIpRoutesRequest, Type: smithy.ShapeTypeStructure})
+var sRemoveIpRoutesResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveIpRoutesResult, Type: smithy.ShapeTypeStructure})
+var sRemoveRegionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveRegionRequest, Members: &mRemoveRegionRequest, Type: smithy.ShapeTypeStructure})
+var sRemoveRegionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveRegionResult, Type: smithy.ShapeTypeStructure})
+var sRemoveTagsFromResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveTagsFromResourceRequest, Members: &mRemoveTagsFromResourceRequest, Type: smithy.ShapeTypeStructure})
+var sRemoveTagsFromResourceResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveTagsFromResourceResult, Type: smithy.ShapeTypeStructure})
+var sResetUserPasswordRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetUserPasswordRequest, Members: &mResetUserPasswordRequest, Type: smithy.ShapeTypeStructure})
+var sResetUserPasswordResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetUserPasswordResult, Type: smithy.ShapeTypeStructure})
+var sRestoreFromSnapshotRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestoreFromSnapshotRequest, Members: &mRestoreFromSnapshotRequest, Type: smithy.ShapeTypeStructure})
+var sRestoreFromSnapshotResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestoreFromSnapshotResult, Type: smithy.ShapeTypeStructure})
+var sShareDirectoryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShareDirectoryRequest, Members: &mShareDirectoryRequest, Type: smithy.ShapeTypeStructure})
+var sShareDirectoryResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShareDirectoryResult, Members: &mShareDirectoryResult, Type: smithy.ShapeTypeStructure})
+var sStartADAssessmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartADAssessmentRequest, Members: &mStartADAssessmentRequest, Type: smithy.ShapeTypeStructure})
+var sStartADAssessmentResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartADAssessmentResult, Members: &mStartADAssessmentResult, Type: smithy.ShapeTypeStructure})
+var sStartSchemaExtensionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSchemaExtensionRequest, Members: &mStartSchemaExtensionRequest, Type: smithy.ShapeTypeStructure})
+var sStartSchemaExtensionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSchemaExtensionResult, Members: &mStartSchemaExtensionResult, Type: smithy.ShapeTypeStructure})
+var sUnshareDirectoryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnshareDirectoryRequest, Members: &mUnshareDirectoryRequest, Type: smithy.ShapeTypeStructure})
+var sUnshareDirectoryResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnshareDirectoryResult, Members: &mUnshareDirectoryResult, Type: smithy.ShapeTypeStructure})
+var sUpdateConditionalForwarderRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConditionalForwarderRequest, Members: &mUpdateConditionalForwarderRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateConditionalForwarderResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConditionalForwarderResult, Type: smithy.ShapeTypeStructure})
+var sUpdateDirectorySetupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDirectorySetupRequest, Members: &mUpdateDirectorySetupRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateDirectorySetupResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDirectorySetupResult, Type: smithy.ShapeTypeStructure})
+var sUpdateHybridADRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateHybridADRequest, Members: &mUpdateHybridADRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateHybridADResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateHybridADResult, Members: &mUpdateHybridADResult, Type: smithy.ShapeTypeStructure})
+var sUpdateNumberOfDomainControllersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNumberOfDomainControllersRequest, Members: &mUpdateNumberOfDomainControllersRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateNumberOfDomainControllersResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNumberOfDomainControllersResult, Type: smithy.ShapeTypeStructure})
+var sUpdateRadiusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRadiusRequest, Members: &mUpdateRadiusRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateRadiusResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRadiusResult, Type: smithy.ShapeTypeStructure})
+var sUpdateSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSettingsRequest, Members: &mUpdateSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateSettingsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSettingsResult, Members: &mUpdateSettingsResult, Type: smithy.ShapeTypeStructure})
+var sUpdateTrustRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTrustRequest, Members: &mUpdateTrustRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateTrustResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTrustResult, Members: &mUpdateTrustResult, Type: smithy.ShapeTypeStructure})
+var sVerifyTrustRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVerifyTrustRequest, Members: &mVerifyTrustRequest, Type: smithy.ShapeTypeStructure})
+var sVerifyTrustResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVerifyTrustResult, Members: &mVerifyTrustResult, Type: smithy.ShapeTypeStructure})
+
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sAccessDeniedException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString})
+var sADAssessmentLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sADAssessmentLimitExceededException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString})
+var s_AdditionalRegions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_RegionName, Type: smithy.ShapeTypeString})
+var sAssessment_AssessmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssessmentId", ID: &i_AssessmentId, Type: smithy.ShapeTypeString})
+var sAssessment_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sAssessment_DnsName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsName", ID: &i_DirectoryName, Type: smithy.ShapeTypeString})
+var sAssessment_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_AssessmentStartTime, Type: smithy.ShapeTypeTimestamp})
+var sAssessment_LastUpdateDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdateDateTime", ID: &i_LastUpdateDateTime, Type: smithy.ShapeTypeTimestamp})
+var sAssessment_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_AssessmentStatus, Type: smithy.ShapeTypeString})
+var sAssessment_StatusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusCode", ID: &i_AssessmentStatusCode, Type: smithy.ShapeTypeString})
+var sAssessment_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &i_AssessmentStatusReason, Type: smithy.ShapeTypeString})
+var sAssessment_CustomerDnsIps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerDnsIps", ID: &i_CustomerDnsIps, Members: &m_CustomerDnsIps, Type: smithy.ShapeTypeList})
+var sAssessment_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString})
+var sAssessment_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetIds", ID: &i_SubnetIds, Members: &m_SubnetIds, Type: smithy.ShapeTypeList})
+var sAssessment_SecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupIds", ID: &i_SecurityGroupIds, Members: &m_SecurityGroupIds, Type: smithy.ShapeTypeList})
+var sAssessment_SelfManagedInstanceIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SelfManagedInstanceIds", ID: &i_AssessmentInstanceIds, Members: &m_AssessmentInstanceIds, Type: smithy.ShapeTypeList})
+var sAssessment_ReportType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReportType", ID: &i_AssessmentReportType, Type: smithy.ShapeTypeString})
+var sAssessment_Version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Version", ID: &i_AssessmentVersion, Type: smithy.ShapeTypeString})
+var sAssessmentConfiguration_CustomerDnsIps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerDnsIps", ID: &i_CustomerDnsIps, Members: &m_CustomerDnsIps, Type: smithy.ShapeTypeList})
+var sAssessmentConfiguration_DnsName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsName", ID: &i_DirectoryName, Type: smithy.ShapeTypeString})
+var sAssessmentConfiguration_VpcSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcSettings", ID: &iDirectoryVpcSettings, Members: &mDirectoryVpcSettings, Type: smithy.ShapeTypeStructure})
+var sAssessmentConfiguration_InstanceIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceIds", ID: &i_AssessmentInstanceIds, Members: &m_AssessmentInstanceIds, Type: smithy.ShapeTypeList})
+var sAssessmentConfiguration_SecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupIds", ID: &i_SecurityGroupIds, Members: &m_SecurityGroupIds, Type: smithy.ShapeTypeList})
+var s_AssessmentInstanceIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AssessmentInstanceId, Type: smithy.ShapeTypeString})
+var sAssessmentReport_DomainControllerIp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainControllerIp", ID: &i_IpAddr, Type: smithy.ShapeTypeString})
+var sAssessmentReport_Validations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Validations", ID: &i_AssessmentValidations, Members: &m_AssessmentValidations, Type: smithy.ShapeTypeList})
+var s_AssessmentReports_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAssessmentReport, Members: &mAssessmentReport, Type: smithy.ShapeTypeStructure})
+var s_Assessments_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAssessmentSummary, Members: &mAssessmentSummary, Type: smithy.ShapeTypeStructure})
+var sAssessmentSummary_AssessmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssessmentId", ID: &i_AssessmentId, Type: smithy.ShapeTypeString})
+var sAssessmentSummary_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sAssessmentSummary_DnsName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsName", ID: &i_DirectoryName, Type: smithy.ShapeTypeString})
+var sAssessmentSummary_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_AssessmentStartTime, Type: smithy.ShapeTypeTimestamp})
+var sAssessmentSummary_LastUpdateDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdateDateTime", ID: &i_LastUpdateDateTime, Type: smithy.ShapeTypeTimestamp})
+var sAssessmentSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_AssessmentStatus, Type: smithy.ShapeTypeString})
+var sAssessmentSummary_CustomerDnsIps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerDnsIps", ID: &i_CustomerDnsIps, Members: &m_CustomerDnsIps, Type: smithy.ShapeTypeList})
+var sAssessmentSummary_ReportType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReportType", ID: &i_AssessmentReportType, Type: smithy.ShapeTypeString})
+var sAssessmentValidation_Category = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Category", ID: &i_AssessmentValidationCategory, Type: smithy.ShapeTypeString})
+var sAssessmentValidation_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_AssessmentValidationName, Type: smithy.ShapeTypeString})
+var sAssessmentValidation_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_AssessmentValidationStatus, Type: smithy.ShapeTypeString})
+var sAssessmentValidation_StatusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusCode", ID: &i_AssessmentValidationStatusCode, Type: smithy.ShapeTypeString})
+var sAssessmentValidation_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &i_AssessmentValidationStatusReason, Type: smithy.ShapeTypeString})
+var sAssessmentValidation_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_AssessmentValidationTimeStamp, Type: smithy.ShapeTypeTimestamp})
+var sAssessmentValidation_LastUpdateDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdateDateTime", ID: &i_AssessmentValidationTimeStamp, Type: smithy.ShapeTypeTimestamp})
+var s_AssessmentValidations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAssessmentValidation, Members: &mAssessmentValidation, Type: smithy.ShapeTypeStructure})
+var sAttribute_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_AttributeName, Type: smithy.ShapeTypeString})
+var sAttribute_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_AttributeValue, Type: smithy.ShapeTypeString})
+var s_Attributes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAttribute, Members: &mAttribute, Type: smithy.ShapeTypeStructure})
+var sAuthenticationFailedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sAuthenticationFailedException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString})
+var s_AvailabilityZones_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString})
+var sCaEnrollmentPolicyStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCaEnrollmentPolicyStatus_SUCCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCaEnrollmentPolicyStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCaEnrollmentPolicyStatus_DISABLING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCaEnrollmentPolicyStatus_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCaEnrollmentPolicyStatus_IMPAIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMPAIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCertificate_CertificateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateId", ID: &i_CertificateId, Type: smithy.ShapeTypeString})
+var sCertificate_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iCertificateState, Members: &mCertificateState, Type: smithy.ShapeTypeEnum})
+var sCertificate_StateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateReason", ID: &i_CertificateStateReason, Type: smithy.ShapeTypeString})
+var sCertificate_CommonName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CommonName", ID: &i_CertificateCN, Type: smithy.ShapeTypeString})
+var sCertificate_RegisteredDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegisteredDateTime", ID: &i_CertificateRegisteredDateTime, Type: smithy.ShapeTypeTimestamp})
+var sCertificate_ExpiryDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiryDateTime", ID: &i_CertificateExpiryDateTime, Type: smithy.ShapeTypeTimestamp})
+var sCertificate_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iCertificateType, Members: &mCertificateType, Type: smithy.ShapeTypeEnum})
+var sCertificate_ClientCertAuthSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientCertAuthSettings", ID: &iClientCertAuthSettings, Members: &mClientCertAuthSettings, Type: smithy.ShapeTypeStructure})
+var sCertificateAlreadyExistsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sCertificateAlreadyExistsException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString})
+var sCertificateDoesNotExistException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sCertificateDoesNotExistException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString})
+var sCertificateInfo_CertificateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateId", ID: &i_CertificateId, Type: smithy.ShapeTypeString})
+var sCertificateInfo_CommonName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CommonName", ID: &i_CertificateCN, Type: smithy.ShapeTypeString})
+var sCertificateInfo_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iCertificateState, Members: &mCertificateState, Type: smithy.ShapeTypeEnum})
+var sCertificateInfo_ExpiryDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiryDateTime", ID: &i_CertificateExpiryDateTime, Type: smithy.ShapeTypeTimestamp})
+var sCertificateInfo_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iCertificateType, Members: &mCertificateType, Type: smithy.ShapeTypeEnum})
+var sCertificateInUseException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sCertificateInUseException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString})
+var sCertificateLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sCertificateLimitExceededException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString})
+var s_CertificatesInfo_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCertificateInfo, Members: &mCertificateInfo, Type: smithy.ShapeTypeStructure})
+var sCertificateState_REGISTERING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REGISTERING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCertificateState_REGISTERED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REGISTERED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCertificateState_REGISTER_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REGISTER_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCertificateState_DEREGISTERING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEREGISTERING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCertificateState_DEREGISTERED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEREGISTERED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCertificateState_DEREGISTER_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEREGISTER_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCertificateType_CLIENT_CERT_AUTH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLIENT_CERT_AUTH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCertificateType_CLIENT_LDAPS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLIENT_LDAPS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_CidrIps_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CidrIp, Type: smithy.ShapeTypeString})
+var s_CidrIpv6s_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CidrIpv6, Type: smithy.ShapeTypeString})
+var sClientAuthenticationSettingInfo_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iClientAuthenticationType, Members: &mClientAuthenticationType, Type: smithy.ShapeTypeEnum})
+var sClientAuthenticationSettingInfo_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iClientAuthenticationStatus, Members: &mClientAuthenticationStatus, Type: smithy.ShapeTypeEnum})
+var sClientAuthenticationSettingInfo_LastUpdatedDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedDateTime", ID: &i_LastUpdatedDateTime, Type: smithy.ShapeTypeTimestamp})
+var s_ClientAuthenticationSettingsInfo_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iClientAuthenticationSettingInfo, Members: &mClientAuthenticationSettingInfo, Type: smithy.ShapeTypeStructure})
+var sClientAuthenticationStatus_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sClientAuthenticationStatus_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sClientAuthenticationType_SMART_CARD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SMART_CARD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sClientAuthenticationType_SMART_CARD_OR_PASSWORD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SMART_CARD_OR_PASSWORD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sClientCertAuthSettings_OCSPUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OCSPUrl", ID: &i_OCSPUrl, Type: smithy.ShapeTypeString})
+var sClientException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sClientException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString})
+var sComputer_ComputerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComputerId", ID: &i_SID, Type: smithy.ShapeTypeString})
+var sComputer_ComputerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComputerName", ID: &i_ComputerName, Type: smithy.ShapeTypeString})
+var sComputer_ComputerAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComputerAttributes", ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeList})
+var sConditionalForwarder_RemoteDomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemoteDomainName", ID: &i_RemoteDomainName, Type: smithy.ShapeTypeString})
+var sConditionalForwarder_DnsIpAddrs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsIpAddrs", ID: &i_DnsIpAddrs, Members: &m_DnsIpAddrs, Type: smithy.ShapeTypeList})
+var sConditionalForwarder_DnsIpv6Addrs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsIpv6Addrs", ID: &i_DnsIpv6Addrs, Members: &m_DnsIpv6Addrs, Type: smithy.ShapeTypeList})
+var sConditionalForwarder_ReplicationScope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicationScope", ID: &iReplicationScope, Members: &mReplicationScope, Type: smithy.ShapeTypeEnum})
+var s_ConditionalForwarders_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConditionalForwarder, Members: &mConditionalForwarder, Type: smithy.ShapeTypeStructure})
+var s_CustomerDnsIps_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_IpAddr, Type: smithy.ShapeTypeString})
+var sDataAccessStatus_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataAccessStatus_DISABLING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataAccessStatus_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataAccessStatus_ENABLING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataAccessStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectoryAlreadyInRegionException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sDirectoryAlreadyInRegionException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString})
+var sDirectoryAlreadySharedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sDirectoryAlreadySharedException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString})
+var s_DirectoryConfigurationSettingRequestDetailedStatus_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_RegionName, Type: smithy.ShapeTypeString})
+var s_DirectoryConfigurationSettingRequestDetailedStatus_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iDirectoryConfigurationStatus, Members: &mDirectoryConfigurationStatus, Type: smithy.ShapeTypeEnum})
+var sDirectoryConfigurationStatus_REQUESTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REQUESTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectoryConfigurationStatus_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectoryConfigurationStatus_UPDATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectoryConfigurationStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectoryConfigurationStatus_DEFAULT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEFAULT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectoryConnectSettings_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString})
+var sDirectoryConnectSettings_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetIds", ID: &i_SubnetIds, Members: &m_SubnetIds, Type: smithy.ShapeTypeList})
+var sDirectoryConnectSettings_CustomerDnsIps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerDnsIps", ID: &i_DnsIpAddrs, Members: &m_DnsIpAddrs, Type: smithy.ShapeTypeList})
+var sDirectoryConnectSettings_CustomerDnsIpsV6 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerDnsIpsV6", ID: &i_DnsIpv6Addrs, Members: &m_DnsIpv6Addrs, Type: smithy.ShapeTypeList})
+var sDirectoryConnectSettings_CustomerUserName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerUserName", ID: &i_UserName, Type: smithy.ShapeTypeString})
+var sDirectoryConnectSettingsDescription_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString})
+var sDirectoryConnectSettingsDescription_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetIds", ID: &i_SubnetIds, Members: &m_SubnetIds, Type: smithy.ShapeTypeList})
+var sDirectoryConnectSettingsDescription_CustomerUserName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerUserName", ID: &i_UserName, Type: smithy.ShapeTypeString})
+var sDirectoryConnectSettingsDescription_SecurityGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupId", ID: &i_SecurityGroupId, Type: smithy.ShapeTypeString})
+var sDirectoryConnectSettingsDescription_AvailabilityZones = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZones", ID: &i_AvailabilityZones, Members: &m_AvailabilityZones, Type: smithy.ShapeTypeList})
+var sDirectoryConnectSettingsDescription_ConnectIps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectIps", ID: &i_IpAddrs, Members: &m_IpAddrs, Type: smithy.ShapeTypeList})
+var sDirectoryConnectSettingsDescription_ConnectIpsV6 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectIpsV6", ID: &i_IpV6Addrs, Members: &m_IpV6Addrs, Type: smithy.ShapeTypeList})
+var sDirectoryDescription_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sDirectoryDescription_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_DirectoryName, Type: smithy.ShapeTypeString})
+var sDirectoryDescription_ShortName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShortName", ID: &i_DirectoryShortName, Type: smithy.ShapeTypeString})
+var sDirectoryDescription_Size = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Size", ID: &iDirectorySize, Members: &mDirectorySize, Type: smithy.ShapeTypeEnum})
+var sDirectoryDescription_Edition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Edition", ID: &iDirectoryEdition, Members: &mDirectoryEdition, Type: smithy.ShapeTypeEnum})
+var sDirectoryDescription_Alias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Alias", ID: &i_AliasName, Type: smithy.ShapeTypeString})
+var sDirectoryDescription_AccessUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessUrl", ID: &i_AccessUrl, Type: smithy.ShapeTypeString})
+var sDirectoryDescription_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sDirectoryDescription_DnsIpAddrs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsIpAddrs", ID: &i_DnsIpAddrs, Members: &m_DnsIpAddrs, Type: smithy.ShapeTypeList})
+var sDirectoryDescription_DnsIpv6Addrs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsIpv6Addrs", ID: &i_DnsIpv6Addrs, Members: &m_DnsIpv6Addrs, Type: smithy.ShapeTypeList})
+var sDirectoryDescription_Stage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stage", ID: &iDirectoryStage, Members: &mDirectoryStage, Type: smithy.ShapeTypeEnum})
+var sDirectoryDescription_ShareStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShareStatus", ID: &iShareStatus, Members: &mShareStatus, Type: smithy.ShapeTypeEnum})
+var sDirectoryDescription_ShareMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShareMethod", ID: &iShareMethod, Members: &mShareMethod, Type: smithy.ShapeTypeEnum})
+var sDirectoryDescription_ShareNotes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShareNotes", ID: &i_Notes, Traits: &t3, Type: smithy.ShapeTypeString})
+var sDirectoryDescription_LaunchTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LaunchTime", ID: &i_LaunchTime, Type: smithy.ShapeTypeTimestamp})
+var sDirectoryDescription_StageLastUpdatedDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StageLastUpdatedDateTime", ID: &i_LastUpdatedDateTime, Type: smithy.ShapeTypeTimestamp})
+var sDirectoryDescription_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iDirectoryType, Members: &mDirectoryType, Type: smithy.ShapeTypeEnum})
+var sDirectoryDescription_VpcSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcSettings", ID: &iDirectoryVpcSettingsDescription, Members: &mDirectoryVpcSettingsDescription, Type: smithy.ShapeTypeStructure})
+var sDirectoryDescription_ConnectSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectSettings", ID: &iDirectoryConnectSettingsDescription, Members: &mDirectoryConnectSettingsDescription, Type: smithy.ShapeTypeStructure})
+var sDirectoryDescription_RadiusSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RadiusSettings", ID: &iRadiusSettings, Members: &mRadiusSettings, Type: smithy.ShapeTypeStructure})
+var sDirectoryDescription_RadiusStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RadiusStatus", ID: &iRadiusStatus, Members: &mRadiusStatus, Type: smithy.ShapeTypeEnum})
+var sDirectoryDescription_StageReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StageReason", ID: &i_StageReason, Type: smithy.ShapeTypeString})
+var sDirectoryDescription_SsoEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SsoEnabled", ID: &i_SsoEnabled, Type: smithy.ShapeTypeBoolean})
+var sDirectoryDescription_DesiredNumberOfDomainControllers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DesiredNumberOfDomainControllers", ID: &i_DesiredNumberOfDomainControllers, Type: smithy.ShapeTypeInteger})
+var sDirectoryDescription_OwnerDirectoryDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OwnerDirectoryDescription", ID: &iOwnerDirectoryDescription, Members: &mOwnerDirectoryDescription, Type: smithy.ShapeTypeStructure})
+var sDirectoryDescription_RegionsInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegionsInfo", ID: &iRegionsInfo, Members: &mRegionsInfo, Type: smithy.ShapeTypeStructure})
+var sDirectoryDescription_OsVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OsVersion", ID: &iOSVersion, Members: &mOSVersion, Type: smithy.ShapeTypeEnum})
+var sDirectoryDescription_HybridSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HybridSettings", ID: &iHybridSettingsDescription, Members: &mHybridSettingsDescription, Type: smithy.ShapeTypeStructure})
+var sDirectoryDescription_NetworkType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkType", ID: &iNetworkType, Members: &mNetworkType, Type: smithy.ShapeTypeEnum})
+var s_DirectoryDescriptions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDirectoryDescription, Members: &mDirectoryDescription, Type: smithy.ShapeTypeStructure})
+var sDirectoryDoesNotExistException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sDirectoryDoesNotExistException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString})
+var sDirectoryEdition_ENTERPRISE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENTERPRISE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectoryEdition_STANDARD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STANDARD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectoryEdition_HYBRID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HYBRID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_DirectoryIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sDirectoryInDesiredStateException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sDirectoryInDesiredStateException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString})
+var sDirectoryLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sDirectoryLimitExceededException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString})
+var sDirectoryLimits_CloudOnlyDirectoriesLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudOnlyDirectoriesLimit", ID: &i_Limit, Type: smithy.ShapeTypeInteger})
+var sDirectoryLimits_CloudOnlyDirectoriesCurrentCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudOnlyDirectoriesCurrentCount", ID: &i_Limit, Type: smithy.ShapeTypeInteger})
+var sDirectoryLimits_CloudOnlyDirectoriesLimitReached = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudOnlyDirectoriesLimitReached", ID: &i_CloudOnlyDirectoriesLimitReached, Type: smithy.ShapeTypeBoolean})
+var sDirectoryLimits_CloudOnlyMicrosoftADLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudOnlyMicrosoftADLimit", ID: &i_Limit, Type: smithy.ShapeTypeInteger})
+var sDirectoryLimits_CloudOnlyMicrosoftADCurrentCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudOnlyMicrosoftADCurrentCount", ID: &i_Limit, Type: smithy.ShapeTypeInteger})
+var sDirectoryLimits_CloudOnlyMicrosoftADLimitReached = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudOnlyMicrosoftADLimitReached", ID: &i_CloudOnlyDirectoriesLimitReached, Type: smithy.ShapeTypeBoolean})
+var sDirectoryLimits_ConnectedDirectoriesLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectedDirectoriesLimit", ID: &i_Limit, Type: smithy.ShapeTypeInteger})
+var sDirectoryLimits_ConnectedDirectoriesCurrentCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectedDirectoriesCurrentCount", ID: &i_Limit, Type: smithy.ShapeTypeInteger})
+var sDirectoryLimits_ConnectedDirectoriesLimitReached = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectedDirectoriesLimitReached", ID: &i_ConnectedDirectoriesLimitReached, Type: smithy.ShapeTypeBoolean})
+var sDirectoryNotSharedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sDirectoryNotSharedException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString})
+var sDirectorySize_SMALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SMALL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectorySize_LARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectorySizeUpdateSettings_DirectorySize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectorySize", ID: &iDirectorySize, Members: &mDirectorySize, Type: smithy.ShapeTypeEnum})
+var sDirectoryStage_REQUESTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REQUESTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectoryStage_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectoryStage_CREATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectoryStage_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectoryStage_INOPERABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INOPERABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectoryStage_IMPAIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMPAIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectoryStage_RESTORING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESTORING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectoryStage_RESTOREFAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESTOREFAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectoryStage_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectoryStage_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectoryStage_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectoryStage_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectoryType_SIMPLE_AD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SIMPLE_AD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectoryType_AD_CONNECTOR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AD_CONNECTOR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectoryType_MICROSOFT_AD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MICROSOFT_AD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectoryType_SHARED_MICROSOFT_AD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHARED_MICROSOFT_AD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectoryUnavailableException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sDirectoryUnavailableException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString})
+var sDirectoryVpcSettings_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString})
+var sDirectoryVpcSettings_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetIds", ID: &i_SubnetIds, Members: &m_SubnetIds, Type: smithy.ShapeTypeList})
+var sDirectoryVpcSettingsDescription_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString})
+var sDirectoryVpcSettingsDescription_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetIds", ID: &i_SubnetIds, Members: &m_SubnetIds, Type: smithy.ShapeTypeList})
+var sDirectoryVpcSettingsDescription_SecurityGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupId", ID: &i_SecurityGroupId, Type: smithy.ShapeTypeString})
+var sDirectoryVpcSettingsDescription_AvailabilityZones = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZones", ID: &i_AvailabilityZones, Members: &m_AvailabilityZones, Type: smithy.ShapeTypeList})
+var sDisableAlreadyInProgressException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sDisableAlreadyInProgressException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString})
+var s_DnsIpAddrs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_IpAddr, Type: smithy.ShapeTypeString})
+var s_DnsIpv6Addrs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Ipv6Addr, Type: smithy.ShapeTypeString})
+var sDomainController_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sDomainController_DomainControllerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainControllerId", ID: &i_DomainControllerId, Type: smithy.ShapeTypeString})
+var sDomainController_DnsIpAddr = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsIpAddr", ID: &i_IpAddr, Type: smithy.ShapeTypeString})
+var sDomainController_DnsIpv6Addr = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsIpv6Addr", ID: &i_Ipv6Addr, Type: smithy.ShapeTypeString})
+var sDomainController_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString})
+var sDomainController_SubnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetId", ID: &i_SubnetId, Type: smithy.ShapeTypeString})
+var sDomainController_AvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZone", ID: &i_AvailabilityZone, Type: smithy.ShapeTypeString})
+var sDomainController_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iDomainControllerStatus, Members: &mDomainControllerStatus, Type: smithy.ShapeTypeEnum})
+var sDomainController_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &i_DomainControllerStatusReason, Type: smithy.ShapeTypeString})
+var sDomainController_LaunchTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LaunchTime", ID: &i_LaunchTime, Type: smithy.ShapeTypeTimestamp})
+var sDomainController_StatusLastUpdatedDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusLastUpdatedDateTime", ID: &i_LastUpdatedDateTime, Type: smithy.ShapeTypeTimestamp})
+var s_DomainControllerIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_DomainControllerId, Type: smithy.ShapeTypeString})
+var sDomainControllerLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sDomainControllerLimitExceededException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString})
+var s_DomainControllers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDomainController, Members: &mDomainController, Type: smithy.ShapeTypeStructure})
+var sDomainControllerStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDomainControllerStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDomainControllerStatus_IMPAIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMPAIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDomainControllerStatus_RESTORING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESTORING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDomainControllerStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDomainControllerStatus_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDomainControllerStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDomainControllerStatus_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEnableAlreadyInProgressException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sEnableAlreadyInProgressException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString})
+var sEntityAlreadyExistsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sEntityAlreadyExistsException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString})
+var sEntityDoesNotExistException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sEntityDoesNotExistException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString})
+var sEventTopic_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sEventTopic_TopicName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicName", ID: &i_TopicName, Type: smithy.ShapeTypeString})
+var sEventTopic_TopicArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicArn", ID: &i_TopicArn, Type: smithy.ShapeTypeString})
+var sEventTopic_CreatedDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDateTime", ID: &i_CreatedDateTime, Type: smithy.ShapeTypeTimestamp})
+var sEventTopic_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iTopicStatus, Members: &mTopicStatus, Type: smithy.ShapeTypeEnum})
+var s_EventTopics_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventTopic, Members: &mEventTopic, Type: smithy.ShapeTypeStructure})
+var sHybridAdministratorAccountUpdate_SecretArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretArn", ID: &i_SecretArn, Type: smithy.ShapeTypeString})
+var sHybridCustomerInstancesSettings_CustomerDnsIps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerDnsIps", ID: &i_CustomerDnsIps, Members: &m_CustomerDnsIps, Type: smithy.ShapeTypeList})
+var sHybridCustomerInstancesSettings_InstanceIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceIds", ID: &i_AssessmentInstanceIds, Members: &m_AssessmentInstanceIds, Type: smithy.ShapeTypeList})
+var sHybridSettingsDescription_SelfManagedDnsIpAddrs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SelfManagedDnsIpAddrs", ID: &i_IpAddrs, Members: &m_IpAddrs, Type: smithy.ShapeTypeList})
+var sHybridSettingsDescription_SelfManagedInstanceIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SelfManagedInstanceIds", ID: &i_AssessmentInstanceIds, Members: &m_AssessmentInstanceIds, Type: smithy.ShapeTypeList})
+var sHybridUpdateActivities_SelfManagedInstances = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SelfManagedInstances", ID: &i_HybridUpdateInfoEntries, Members: &m_HybridUpdateInfoEntries, Type: smithy.ShapeTypeList})
+var sHybridUpdateActivities_HybridAdministratorAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HybridAdministratorAccount", ID: &i_HybridUpdateInfoEntries, Members: &m_HybridUpdateInfoEntries, Type: smithy.ShapeTypeList})
+var s_HybridUpdateInfoEntries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iHybridUpdateInfoEntry, Members: &mHybridUpdateInfoEntry, Type: smithy.ShapeTypeStructure})
+var sHybridUpdateInfoEntry_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iUpdateStatus, Members: &mUpdateStatus, Type: smithy.ShapeTypeEnum})
+var sHybridUpdateInfoEntry_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &i_UpdateStatusReason, Type: smithy.ShapeTypeString})
+var sHybridUpdateInfoEntry_InitiatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InitiatedBy", ID: &i_InitiatedBy, Type: smithy.ShapeTypeString})
+var sHybridUpdateInfoEntry_NewValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NewValue", ID: &iHybridUpdateValue, Members: &mHybridUpdateValue, Type: smithy.ShapeTypeStructure})
+var sHybridUpdateInfoEntry_PreviousValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreviousValue", ID: &iHybridUpdateValue, Members: &mHybridUpdateValue, Type: smithy.ShapeTypeStructure})
+var sHybridUpdateInfoEntry_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_StartDateTime, Type: smithy.ShapeTypeTimestamp})
+var sHybridUpdateInfoEntry_LastUpdatedDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedDateTime", ID: &i_LastUpdatedDateTime, Type: smithy.ShapeTypeTimestamp})
+var sHybridUpdateInfoEntry_AssessmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssessmentId", ID: &i_AssessmentId, Type: smithy.ShapeTypeString})
+var sHybridUpdateType_SELF_MANAGED_INSTANCES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SELF_MANAGED_INSTANCES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHybridUpdateType_HYBRID_ADMINISTRATOR_ACCOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HYBRID_ADMINISTRATOR_ACCOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHybridUpdateValue_InstanceIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceIds", ID: &i_AssessmentInstanceIds, Members: &m_AssessmentInstanceIds, Type: smithy.ShapeTypeList})
+var sHybridUpdateValue_DnsIps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsIps", ID: &i_CustomerDnsIps, Members: &m_CustomerDnsIps, Type: smithy.ShapeTypeList})
+var sIncompatibleSettingsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sIncompatibleSettingsException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString})
+var sInsufficientPermissionsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sInsufficientPermissionsException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString})
+var sInvalidCertificateException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sInvalidCertificateException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString})
+var sInvalidClientAuthStatusException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sInvalidClientAuthStatusException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString})
+var sInvalidLDAPSStatusException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sInvalidLDAPSStatusException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString})
+var sInvalidNextTokenException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sInvalidNextTokenException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString})
+var sInvalidParameterException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sInvalidParameterException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString})
+var sInvalidPasswordException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sInvalidPasswordException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString})
+var sInvalidTargetException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sInvalidTargetException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString})
+var s_IpAddrs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_IpAddr, Type: smithy.ShapeTypeString})
+var sIpRoute_CidrIp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CidrIp", ID: &i_CidrIp, Type: smithy.ShapeTypeString})
+var sIpRoute_CidrIpv6 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CidrIpv6", ID: &i_CidrIpv6, Type: smithy.ShapeTypeString})
+var sIpRoute_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sIpRouteInfo_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sIpRouteInfo_CidrIp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CidrIp", ID: &i_CidrIp, Type: smithy.ShapeTypeString})
+var sIpRouteInfo_CidrIpv6 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CidrIpv6", ID: &i_CidrIpv6, Type: smithy.ShapeTypeString})
+var sIpRouteInfo_IpRouteStatusMsg = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpRouteStatusMsg", ID: &iIpRouteStatusMsg, Members: &mIpRouteStatusMsg, Type: smithy.ShapeTypeEnum})
+var sIpRouteInfo_AddedDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddedDateTime", ID: &i_AddedDateTime, Type: smithy.ShapeTypeTimestamp})
+var sIpRouteInfo_IpRouteStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpRouteStatusReason", ID: &i_IpRouteStatusReason, Type: smithy.ShapeTypeString})
+var sIpRouteInfo_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sIpRouteLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sIpRouteLimitExceededException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString})
+var s_IpRoutes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIpRoute, Members: &mIpRoute, Type: smithy.ShapeTypeStructure})
+var s_IpRoutesInfo_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIpRouteInfo, Members: &mIpRouteInfo, Type: smithy.ShapeTypeStructure})
+var sIpRouteStatusMsg_ADDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIpRouteStatusMsg_ADDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIpRouteStatusMsg_REMOVING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REMOVING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIpRouteStatusMsg_REMOVED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REMOVED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIpRouteStatusMsg_ADD_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADD_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIpRouteStatusMsg_REMOVE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REMOVE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_IpV6Addrs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Ipv6Addr, Type: smithy.ShapeTypeString})
+var sLDAPSSettingInfo_LDAPSStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LDAPSStatus", ID: &iLDAPSStatus, Members: &mLDAPSStatus, Type: smithy.ShapeTypeEnum})
+var sLDAPSSettingInfo_LDAPSStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LDAPSStatusReason", ID: &i_LDAPSStatusReason, Type: smithy.ShapeTypeString})
+var sLDAPSSettingInfo_LastUpdatedDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedDateTime", ID: &i_LastUpdatedDateTime, Type: smithy.ShapeTypeTimestamp})
+var s_LDAPSSettingsInfo_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLDAPSSettingInfo, Members: &mLDAPSSettingInfo, Type: smithy.ShapeTypeStructure})
+var sLDAPSStatus_ENABLING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLDAPSStatus_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLDAPSStatus_ENABLE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLDAPSStatus_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLDAPSType_CLIENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLIENT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLogSubscription_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sLogSubscription_LogGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogGroupName", ID: &i_LogGroupName, Type: smithy.ShapeTypeString})
+var sLogSubscription_SubscriptionCreatedDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionCreatedDateTime", ID: &i_SubscriptionCreatedDateTime, Type: smithy.ShapeTypeTimestamp})
+var s_LogSubscriptions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLogSubscription, Members: &mLogSubscription, Type: smithy.ShapeTypeStructure})
+var sNetworkType_DUAL_STACK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUAL_STACK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNetworkType_IPV4_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPV4_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNetworkType_IPV6_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPV6_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNetworkUpdateSettings_NetworkType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkType", ID: &iNetworkType, Members: &mNetworkType, Type: smithy.ShapeTypeEnum})
+var sNetworkUpdateSettings_CustomerDnsIpsV6 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerDnsIpsV6", ID: &i_DnsIpv6Addrs, Members: &m_DnsIpv6Addrs, Type: smithy.ShapeTypeList})
+var sNoAvailableCertificateException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sNoAvailableCertificateException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString})
+var sOrganizationsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sOrganizationsException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString})
+var sOSUpdateSettings_OSVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OSVersion", ID: &iOSVersion, Members: &mOSVersion, Type: smithy.ShapeTypeEnum})
+var sOSVersion_VERSION_2012 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VERSION_2012", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOSVersion_VERSION_2019 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VERSION_2019", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOwnerDirectoryDescription_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sOwnerDirectoryDescription_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_CustomerId, Type: smithy.ShapeTypeString})
+var sOwnerDirectoryDescription_DnsIpAddrs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsIpAddrs", ID: &i_DnsIpAddrs, Members: &m_DnsIpAddrs, Type: smithy.ShapeTypeList})
+var sOwnerDirectoryDescription_DnsIpv6Addrs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsIpv6Addrs", ID: &i_DnsIpv6Addrs, Members: &m_DnsIpv6Addrs, Type: smithy.ShapeTypeList})
+var sOwnerDirectoryDescription_VpcSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcSettings", ID: &iDirectoryVpcSettingsDescription, Members: &mDirectoryVpcSettingsDescription, Type: smithy.ShapeTypeStructure})
+var sOwnerDirectoryDescription_RadiusSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RadiusSettings", ID: &iRadiusSettings, Members: &mRadiusSettings, Type: smithy.ShapeTypeStructure})
+var sOwnerDirectoryDescription_RadiusStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RadiusStatus", ID: &iRadiusStatus, Members: &mRadiusStatus, Type: smithy.ShapeTypeEnum})
+var sOwnerDirectoryDescription_NetworkType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkType", ID: &iNetworkType, Members: &mNetworkType, Type: smithy.ShapeTypeEnum})
+var sRadiusAuthenticationProtocol_PAP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PAP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRadiusAuthenticationProtocol_CHAP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CHAP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRadiusAuthenticationProtocol_MSCHAPV1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MSCHAPV1", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRadiusAuthenticationProtocol_MSCHAPV2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MSCHAPV2", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRadiusSettings_RadiusServers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RadiusServers", ID: &i_Servers, Members: &m_Servers, Type: smithy.ShapeTypeList})
+var sRadiusSettings_RadiusServersIpv6 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RadiusServersIpv6", ID: &i_Servers, Members: &m_Servers, Type: smithy.ShapeTypeList})
+var sRadiusSettings_RadiusPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RadiusPort", ID: &i_PortNumber, Type: smithy.ShapeTypeInteger})
+var sRadiusSettings_RadiusTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RadiusTimeout", ID: &i_RadiusTimeout, Type: smithy.ShapeTypeInteger})
+var sRadiusSettings_RadiusRetries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RadiusRetries", ID: &i_RadiusRetries, Type: smithy.ShapeTypeInteger})
+var sRadiusSettings_SharedSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SharedSecret", ID: &i_RadiusSharedSecret, Traits: &t3, Type: smithy.ShapeTypeString})
+var sRadiusSettings_AuthenticationProtocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthenticationProtocol", ID: &iRadiusAuthenticationProtocol, Members: &mRadiusAuthenticationProtocol, Type: smithy.ShapeTypeEnum})
+var sRadiusSettings_DisplayLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayLabel", ID: &i_RadiusDisplayLabel, Type: smithy.ShapeTypeString})
+var sRadiusSettings_UseSameUsername = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UseSameUsername", ID: &i_UseSameUsername, Type: smithy.ShapeTypeBoolean})
+var sRadiusStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRadiusStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRadiusStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRegionDescription_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sRegionDescription_RegionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegionName", ID: &i_RegionName, Type: smithy.ShapeTypeString})
+var sRegionDescription_RegionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegionType", ID: &iRegionType, Members: &mRegionType, Type: smithy.ShapeTypeEnum})
+var sRegionDescription_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iDirectoryStage, Members: &mDirectoryStage, Type: smithy.ShapeTypeEnum})
+var sRegionDescription_VpcSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcSettings", ID: &iDirectoryVpcSettings, Members: &mDirectoryVpcSettings, Type: smithy.ShapeTypeStructure})
+var sRegionDescription_DesiredNumberOfDomainControllers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DesiredNumberOfDomainControllers", ID: &i_DesiredNumberOfDomainControllers, Type: smithy.ShapeTypeInteger})
+var sRegionDescription_LaunchTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LaunchTime", ID: &i_LaunchTime, Type: smithy.ShapeTypeTimestamp})
+var sRegionDescription_StatusLastUpdatedDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusLastUpdatedDateTime", ID: &i_StateLastUpdatedDateTime, Type: smithy.ShapeTypeTimestamp})
+var sRegionDescription_LastUpdatedDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedDateTime", ID: &i_LastUpdatedDateTime, Type: smithy.ShapeTypeTimestamp})
+var sRegionLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sRegionLimitExceededException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString})
+var s_RegionsDescription_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRegionDescription, Members: &mRegionDescription, Type: smithy.ShapeTypeStructure})
+var sRegionsInfo_PrimaryRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrimaryRegion", ID: &i_RegionName, Type: smithy.ShapeTypeString})
+var sRegionsInfo_AdditionalRegions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalRegions", ID: &i_AdditionalRegions, Members: &m_AdditionalRegions, Type: smithy.ShapeTypeList})
+var sRegionType_PRIMARY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRIMARY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRegionType_ADDITIONAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADDITIONAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_RemoteDomainNames_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_RemoteDomainName, Type: smithy.ShapeTypeString})
+var sReplicationScope_Domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Domain", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSchemaExtensionInfo_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sSchemaExtensionInfo_SchemaExtensionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaExtensionId", ID: &i_SchemaExtensionId, Type: smithy.ShapeTypeString})
+var sSchemaExtensionInfo_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sSchemaExtensionInfo_SchemaExtensionStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaExtensionStatus", ID: &iSchemaExtensionStatus, Members: &mSchemaExtensionStatus, Type: smithy.ShapeTypeEnum})
+var sSchemaExtensionInfo_SchemaExtensionStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaExtensionStatusReason", ID: &i_SchemaExtensionStatusReason, Type: smithy.ShapeTypeString})
+var sSchemaExtensionInfo_StartDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartDateTime", ID: &i_StartDateTime, Type: smithy.ShapeTypeTimestamp})
+var sSchemaExtensionInfo_EndDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndDateTime", ID: &i_EndDateTime, Type: smithy.ShapeTypeTimestamp})
+var s_SchemaExtensionsInfo_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSchemaExtensionInfo, Members: &mSchemaExtensionInfo, Type: smithy.ShapeTypeStructure})
+var sSchemaExtensionStatus_INITIALIZING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INITIALIZING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSchemaExtensionStatus_CREATING_SNAPSHOT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING_SNAPSHOT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSchemaExtensionStatus_UPDATING_SCHEMA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING_SCHEMA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSchemaExtensionStatus_REPLICATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REPLICATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSchemaExtensionStatus_CANCEL_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCEL_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSchemaExtensionStatus_ROLLBACK_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROLLBACK_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSchemaExtensionStatus_CANCELLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSchemaExtensionStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSchemaExtensionStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_SecurityGroupIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SecurityGroupId, Type: smithy.ShapeTypeString})
+var sSelectiveAuth_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSelectiveAuth_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_Servers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Server, Type: smithy.ShapeTypeString})
+var sServiceException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sServiceException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString})
+var sSetting_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_DirectoryConfigurationSettingName, Type: smithy.ShapeTypeString})
+var sSetting_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_DirectoryConfigurationSettingValue, Type: smithy.ShapeTypeString})
+var s_SettingEntries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSettingEntry, Members: &mSettingEntry, Type: smithy.ShapeTypeStructure})
+var sSettingEntry_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_DirectoryConfigurationSettingType, Type: smithy.ShapeTypeString})
+var sSettingEntry_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_DirectoryConfigurationSettingName, Type: smithy.ShapeTypeString})
+var sSettingEntry_AllowedValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllowedValues", ID: &i_DirectoryConfigurationSettingAllowedValues, Type: smithy.ShapeTypeString})
+var sSettingEntry_AppliedValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppliedValue", ID: &i_DirectoryConfigurationSettingValue, Type: smithy.ShapeTypeString})
+var sSettingEntry_RequestedValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestedValue", ID: &i_DirectoryConfigurationSettingValue, Type: smithy.ShapeTypeString})
+var sSettingEntry_RequestStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestStatus", ID: &iDirectoryConfigurationStatus, Members: &mDirectoryConfigurationStatus, Type: smithy.ShapeTypeEnum})
+var sSettingEntry_RequestDetailedStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestDetailedStatus", ID: &i_DirectoryConfigurationSettingRequestDetailedStatus, Members: &m_DirectoryConfigurationSettingRequestDetailedStatus, Type: smithy.ShapeTypeMap})
+var sSettingEntry_RequestStatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestStatusMessage", ID: &i_DirectoryConfigurationSettingRequestStatusMessage, Type: smithy.ShapeTypeString})
+var sSettingEntry_LastUpdatedDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedDateTime", ID: &i_DirectoryConfigurationSettingLastUpdatedDateTime, Type: smithy.ShapeTypeTimestamp})
+var sSettingEntry_LastRequestedDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastRequestedDateTime", ID: &i_DirectoryConfigurationSettingLastRequestedDateTime, Type: smithy.ShapeTypeTimestamp})
+var sSettingEntry_DataType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataType", ID: &i_DirectoryConfigurationSettingDataType, Type: smithy.ShapeTypeString})
+var s_Settings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSetting, Members: &mSetting, Type: smithy.ShapeTypeStructure})
+var s_SharedDirectories_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSharedDirectory, Members: &mSharedDirectory, Type: smithy.ShapeTypeStructure})
+var sSharedDirectory_OwnerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OwnerAccountId", ID: &i_CustomerId, Type: smithy.ShapeTypeString})
+var sSharedDirectory_OwnerDirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OwnerDirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sSharedDirectory_ShareMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShareMethod", ID: &iShareMethod, Members: &mShareMethod, Type: smithy.ShapeTypeEnum})
+var sSharedDirectory_SharedAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SharedAccountId", ID: &i_CustomerId, Type: smithy.ShapeTypeString})
+var sSharedDirectory_SharedDirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SharedDirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sSharedDirectory_ShareStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShareStatus", ID: &iShareStatus, Members: &mShareStatus, Type: smithy.ShapeTypeEnum})
+var sSharedDirectory_ShareNotes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShareNotes", ID: &i_Notes, Traits: &t3, Type: smithy.ShapeTypeString})
+var sSharedDirectory_CreatedDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDateTime", ID: &i_CreatedDateTime, Type: smithy.ShapeTypeTimestamp})
+var sSharedDirectory_LastUpdatedDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedDateTime", ID: &i_LastUpdatedDateTime, Type: smithy.ShapeTypeTimestamp})
+var sShareLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sShareLimitExceededException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString})
+var sShareMethod_ORGANIZATIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ORGANIZATIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sShareMethod_HANDSHAKE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HANDSHAKE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sShareStatus_SHARED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHARED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sShareStatus_PENDING_ACCEPTANCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_ACCEPTANCE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sShareStatus_REJECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sShareStatus_REJECTING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECTING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sShareStatus_REJECT_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECT_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sShareStatus_SHARING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHARING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sShareStatus_SHARE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHARE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sShareStatus_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sShareStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sShareTarget_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_TargetId, Type: smithy.ShapeTypeString})
+var sShareTarget_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iTargetType, Members: &mTargetType, Type: smithy.ShapeTypeEnum})
+var sSnapshot_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sSnapshot_SnapshotId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotId", ID: &i_SnapshotId, Type: smithy.ShapeTypeString})
+var sSnapshot_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iSnapshotType, Members: &mSnapshotType, Type: smithy.ShapeTypeEnum})
+var sSnapshot_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SnapshotName, Type: smithy.ShapeTypeString})
+var sSnapshot_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iSnapshotStatus, Members: &mSnapshotStatus, Type: smithy.ShapeTypeEnum})
+var sSnapshot_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_StartTime, Type: smithy.ShapeTypeTimestamp})
+var s_SnapshotIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SnapshotId, Type: smithy.ShapeTypeString})
+var sSnapshotLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sSnapshotLimitExceededException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString})
+var sSnapshotLimits_ManualSnapshotsLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManualSnapshotsLimit", ID: &i_Limit, Type: smithy.ShapeTypeInteger})
+var sSnapshotLimits_ManualSnapshotsCurrentCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManualSnapshotsCurrentCount", ID: &i_Limit, Type: smithy.ShapeTypeInteger})
+var sSnapshotLimits_ManualSnapshotsLimitReached = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManualSnapshotsLimitReached", ID: &i_ManualSnapshotsLimitReached, Type: smithy.ShapeTypeBoolean})
+var s_Snapshots_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSnapshot, Members: &mSnapshot, Type: smithy.ShapeTypeStructure})
+var sSnapshotStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSnapshotStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSnapshotStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSnapshotType_AUTO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSnapshotType_MANUAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MANUAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_SubnetIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SubnetId, Type: smithy.ShapeTypeString})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_TagKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var sTagLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sTagLimitExceededException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString})
+var s_Tags_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var sTargetType_ACCOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_TopicNames_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TopicName, Type: smithy.ShapeTypeString})
+var sTopicStatus_REGISTERED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REGISTERED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTopicStatus_TOPIC_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOPIC_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTopicStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTopicStatus_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrust_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sTrust_TrustId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrustId", ID: &i_TrustId, Type: smithy.ShapeTypeString})
+var sTrust_RemoteDomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemoteDomainName", ID: &i_RemoteDomainName, Type: smithy.ShapeTypeString})
+var sTrust_TrustType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrustType", ID: &iTrustType, Members: &mTrustType, Type: smithy.ShapeTypeEnum})
+var sTrust_TrustDirection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrustDirection", ID: &iTrustDirection, Members: &mTrustDirection, Type: smithy.ShapeTypeEnum})
+var sTrust_TrustState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrustState", ID: &iTrustState, Members: &mTrustState, Type: smithy.ShapeTypeEnum})
+var sTrust_CreatedDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDateTime", ID: &i_CreatedDateTime, Type: smithy.ShapeTypeTimestamp})
+var sTrust_LastUpdatedDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedDateTime", ID: &i_LastUpdatedDateTime, Type: smithy.ShapeTypeTimestamp})
+var sTrust_StateLastUpdatedDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateLastUpdatedDateTime", ID: &i_StateLastUpdatedDateTime, Type: smithy.ShapeTypeTimestamp})
+var sTrust_TrustStateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrustStateReason", ID: &i_TrustStateReason, Type: smithy.ShapeTypeString})
+var sTrust_SelectiveAuth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SelectiveAuth", ID: &iSelectiveAuth, Members: &mSelectiveAuth, Type: smithy.ShapeTypeEnum})
+var sTrustDirection_ONE_WAY_OUTGOING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ONE_WAY_OUTGOING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrustDirection_ONE_WAY_INCOMING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ONE_WAY_INCOMING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrustDirection_TWO_WAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TWO_WAY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_TrustIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TrustId, Type: smithy.ShapeTypeString})
+var s_Trusts_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTrust, Members: &mTrust, Type: smithy.ShapeTypeStructure})
+var sTrustState_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrustState_CREATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrustState_VERIFYING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VERIFYING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrustState_VERIFY_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VERIFY_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrustState_VERIFIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VERIFIED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrustState_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrustState_UPDATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrustState_UPDATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrustState_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrustState_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrustState_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrustType_FOREST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FOREST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrustType_EXTERNAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXTERNAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sUnshareTarget_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_TargetId, Type: smithy.ShapeTypeString})
+var sUnshareTarget_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iTargetType, Members: &mTargetType, Type: smithy.ShapeTypeEnum})
+var sUnsupportedOperationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sUnsupportedOperationException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString})
+var sUnsupportedSettingsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sUnsupportedSettingsException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString})
+var s_UpdateActivities_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUpdateInfoEntry, Members: &mUpdateInfoEntry, Type: smithy.ShapeTypeStructure})
+var sUpdateInfoEntry_Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Region", ID: &i_RegionName, Type: smithy.ShapeTypeString})
+var sUpdateInfoEntry_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iUpdateStatus, Members: &mUpdateStatus, Type: smithy.ShapeTypeEnum})
+var sUpdateInfoEntry_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &i_UpdateStatusReason, Type: smithy.ShapeTypeString})
+var sUpdateInfoEntry_InitiatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InitiatedBy", ID: &i_InitiatedBy, Type: smithy.ShapeTypeString})
+var sUpdateInfoEntry_NewValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NewValue", ID: &iUpdateValue, Members: &mUpdateValue, Type: smithy.ShapeTypeStructure})
+var sUpdateInfoEntry_PreviousValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreviousValue", ID: &iUpdateValue, Members: &mUpdateValue, Type: smithy.ShapeTypeStructure})
+var sUpdateInfoEntry_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_StartDateTime, Type: smithy.ShapeTypeTimestamp})
+var sUpdateInfoEntry_LastUpdatedDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedDateTime", ID: &i_LastUpdatedDateTime, Type: smithy.ShapeTypeTimestamp})
+var sUpdateStatus_UPDATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sUpdateStatus_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sUpdateStatus_UPDATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sUpdateType_OS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sUpdateType_NETWORK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NETWORK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sUpdateType_SIZE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SIZE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sUpdateValue_OSUpdateSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OSUpdateSettings", ID: &iOSUpdateSettings, Members: &mOSUpdateSettings, Type: smithy.ShapeTypeStructure})
+var sUserDoesNotExistException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sUserDoesNotExistException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString})
+var sAcceptSharedDirectoryRequest_SharedDirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SharedDirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sAcceptSharedDirectoryResult_SharedDirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SharedDirectory", ID: &iSharedDirectory, Members: &mSharedDirectory, Type: smithy.ShapeTypeStructure})
+var sAddIpRoutesRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sAddIpRoutesRequest_IpRoutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpRoutes", ID: &i_IpRoutes, Members: &m_IpRoutes, Type: smithy.ShapeTypeList})
+var sAddIpRoutesRequest_UpdateSecurityGroupForDirectoryControllers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateSecurityGroupForDirectoryControllers", ID: &i_UpdateSecurityGroupForDirectoryControllers, Type: smithy.ShapeTypeBoolean})
+var sAddRegionRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sAddRegionRequest_RegionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegionName", ID: &i_RegionName, Type: smithy.ShapeTypeString})
+var sAddRegionRequest_VPCSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPCSettings", ID: &iDirectoryVpcSettings, Members: &mDirectoryVpcSettings, Type: smithy.ShapeTypeStructure})
+var sAddTagsToResourceRequest_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sAddTagsToResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sCancelSchemaExtensionRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sCancelSchemaExtensionRequest_SchemaExtensionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaExtensionId", ID: &i_SchemaExtensionId, Type: smithy.ShapeTypeString})
+var sConnectDirectoryRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_DirectoryName, Type: smithy.ShapeTypeString})
+var sConnectDirectoryRequest_ShortName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShortName", ID: &i_DirectoryShortName, Type: smithy.ShapeTypeString})
+var sConnectDirectoryRequest_Password = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Password", ID: &i_ConnectPassword, Traits: &t3, Type: smithy.ShapeTypeString})
+var sConnectDirectoryRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sConnectDirectoryRequest_Size = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Size", ID: &iDirectorySize, Members: &mDirectorySize, Type: smithy.ShapeTypeEnum})
+var sConnectDirectoryRequest_ConnectSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectSettings", ID: &iDirectoryConnectSettings, Members: &mDirectoryConnectSettings, Type: smithy.ShapeTypeStructure})
+var sConnectDirectoryRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sConnectDirectoryRequest_NetworkType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkType", ID: &iNetworkType, Members: &mNetworkType, Type: smithy.ShapeTypeEnum})
+var sConnectDirectoryResult_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sCreateAliasRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sCreateAliasRequest_Alias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Alias", ID: &i_AliasName, Type: smithy.ShapeTypeString})
+var sCreateAliasResult_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sCreateAliasResult_Alias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Alias", ID: &i_AliasName, Type: smithy.ShapeTypeString})
+var sCreateComputerRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sCreateComputerRequest_ComputerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComputerName", ID: &i_ComputerName, Type: smithy.ShapeTypeString})
+var sCreateComputerRequest_Password = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Password", ID: &i_ComputerPassword, Traits: &t3, Type: smithy.ShapeTypeString})
+var sCreateComputerRequest_OrganizationalUnitDistinguishedName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationalUnitDistinguishedName", ID: &i_OrganizationalUnitDN, Type: smithy.ShapeTypeString})
+var sCreateComputerRequest_ComputerAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComputerAttributes", ID: &i_Attributes, Members: &m_Attributes, Type: smithy.ShapeTypeList})
+var sCreateComputerResult_Computer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Computer", ID: &iComputer, Members: &mComputer, Type: smithy.ShapeTypeStructure})
+var sCreateConditionalForwarderRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sCreateConditionalForwarderRequest_RemoteDomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemoteDomainName", ID: &i_RemoteDomainName, Type: smithy.ShapeTypeString})
+var sCreateConditionalForwarderRequest_DnsIpAddrs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsIpAddrs", ID: &i_DnsIpAddrs, Members: &m_DnsIpAddrs, Type: smithy.ShapeTypeList})
+var sCreateConditionalForwarderRequest_DnsIpv6Addrs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsIpv6Addrs", ID: &i_DnsIpv6Addrs, Members: &m_DnsIpv6Addrs, Type: smithy.ShapeTypeList})
+var sCreateDirectoryRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_DirectoryName, Type: smithy.ShapeTypeString})
+var sCreateDirectoryRequest_ShortName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShortName", ID: &i_DirectoryShortName, Type: smithy.ShapeTypeString})
+var sCreateDirectoryRequest_Password = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Password", ID: &i_Password, Traits: &t3, Type: smithy.ShapeTypeString})
+var sCreateDirectoryRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sCreateDirectoryRequest_Size = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Size", ID: &iDirectorySize, Members: &mDirectorySize, Type: smithy.ShapeTypeEnum})
+var sCreateDirectoryRequest_VpcSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcSettings", ID: &iDirectoryVpcSettings, Members: &mDirectoryVpcSettings, Type: smithy.ShapeTypeStructure})
+var sCreateDirectoryRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sCreateDirectoryRequest_NetworkType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkType", ID: &iNetworkType, Members: &mNetworkType, Type: smithy.ShapeTypeEnum})
+var sCreateDirectoryResult_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sCreateHybridADRequest_SecretArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretArn", ID: &i_SecretArn, Type: smithy.ShapeTypeString})
+var sCreateHybridADRequest_AssessmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssessmentId", ID: &i_AssessmentId, Type: smithy.ShapeTypeString})
+var sCreateHybridADRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sCreateHybridADResult_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sCreateLogSubscriptionRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sCreateLogSubscriptionRequest_LogGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogGroupName", ID: &i_LogGroupName, Type: smithy.ShapeTypeString})
+var sCreateMicrosoftADRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_DirectoryName, Type: smithy.ShapeTypeString})
+var sCreateMicrosoftADRequest_ShortName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShortName", ID: &i_DirectoryShortName, Type: smithy.ShapeTypeString})
+var sCreateMicrosoftADRequest_Password = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Password", ID: &i_Password, Traits: &t3, Type: smithy.ShapeTypeString})
+var sCreateMicrosoftADRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sCreateMicrosoftADRequest_VpcSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcSettings", ID: &iDirectoryVpcSettings, Members: &mDirectoryVpcSettings, Type: smithy.ShapeTypeStructure})
+var sCreateMicrosoftADRequest_Edition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Edition", ID: &iDirectoryEdition, Members: &mDirectoryEdition, Type: smithy.ShapeTypeEnum})
+var sCreateMicrosoftADRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sCreateMicrosoftADRequest_NetworkType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkType", ID: &iNetworkType, Members: &mNetworkType, Type: smithy.ShapeTypeEnum})
+var sCreateMicrosoftADResult_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sCreateSnapshotRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sCreateSnapshotRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SnapshotName, Type: smithy.ShapeTypeString})
+var sCreateSnapshotResult_SnapshotId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotId", ID: &i_SnapshotId, Type: smithy.ShapeTypeString})
+var sCreateTrustRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sCreateTrustRequest_RemoteDomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemoteDomainName", ID: &i_RemoteDomainName, Type: smithy.ShapeTypeString})
+var sCreateTrustRequest_TrustPassword = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrustPassword", ID: &i_TrustPassword, Traits: &t3, Type: smithy.ShapeTypeString})
+var sCreateTrustRequest_TrustDirection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrustDirection", ID: &iTrustDirection, Members: &mTrustDirection, Type: smithy.ShapeTypeEnum})
+var sCreateTrustRequest_TrustType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrustType", ID: &iTrustType, Members: &mTrustType, Type: smithy.ShapeTypeEnum})
+var sCreateTrustRequest_ConditionalForwarderIpAddrs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConditionalForwarderIpAddrs", ID: &i_DnsIpAddrs, Members: &m_DnsIpAddrs, Type: smithy.ShapeTypeList})
+var sCreateTrustRequest_ConditionalForwarderIpv6Addrs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConditionalForwarderIpv6Addrs", ID: &i_DnsIpv6Addrs, Members: &m_DnsIpv6Addrs, Type: smithy.ShapeTypeList})
+var sCreateTrustRequest_SelectiveAuth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SelectiveAuth", ID: &iSelectiveAuth, Members: &mSelectiveAuth, Type: smithy.ShapeTypeEnum})
+var sCreateTrustResult_TrustId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrustId", ID: &i_TrustId, Type: smithy.ShapeTypeString})
+var sDeleteADAssessmentRequest_AssessmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssessmentId", ID: &i_AssessmentId, Type: smithy.ShapeTypeString})
+var sDeleteADAssessmentResult_AssessmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssessmentId", ID: &i_AssessmentId, Type: smithy.ShapeTypeString})
+var sDeleteConditionalForwarderRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sDeleteConditionalForwarderRequest_RemoteDomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemoteDomainName", ID: &i_RemoteDomainName, Type: smithy.ShapeTypeString})
+var sDeleteDirectoryRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sDeleteDirectoryResult_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sDeleteLogSubscriptionRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sDeleteSnapshotRequest_SnapshotId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotId", ID: &i_SnapshotId, Type: smithy.ShapeTypeString})
+var sDeleteSnapshotResult_SnapshotId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotId", ID: &i_SnapshotId, Type: smithy.ShapeTypeString})
+var sDeleteTrustRequest_TrustId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrustId", ID: &i_TrustId, Type: smithy.ShapeTypeString})
+var sDeleteTrustRequest_DeleteAssociatedConditionalForwarder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteAssociatedConditionalForwarder", ID: &i_DeleteAssociatedConditionalForwarder, Type: smithy.ShapeTypeBoolean})
+var sDeleteTrustResult_TrustId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrustId", ID: &i_TrustId, Type: smithy.ShapeTypeString})
+var sDeregisterCertificateRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sDeregisterCertificateRequest_CertificateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateId", ID: &i_CertificateId, Type: smithy.ShapeTypeString})
+var sDeregisterEventTopicRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sDeregisterEventTopicRequest_TopicName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicName", ID: &i_TopicName, Type: smithy.ShapeTypeString})
+var sDescribeADAssessmentRequest_AssessmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssessmentId", ID: &i_AssessmentId, Type: smithy.ShapeTypeString})
+var sDescribeADAssessmentResult_Assessment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Assessment", ID: &iAssessment, Members: &mAssessment, Type: smithy.ShapeTypeStructure})
+var sDescribeADAssessmentResult_AssessmentReports = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssessmentReports", ID: &i_AssessmentReports, Members: &m_AssessmentReports, Type: smithy.ShapeTypeList})
+var sDescribeCAEnrollmentPolicyRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sDescribeCAEnrollmentPolicyResult_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sDescribeCAEnrollmentPolicyResult_PcaConnectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PcaConnectorArn", ID: &i_PcaConnectorArn, Type: smithy.ShapeTypeString})
+var sDescribeCAEnrollmentPolicyResult_CaEnrollmentPolicyStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CaEnrollmentPolicyStatus", ID: &iCaEnrollmentPolicyStatus, Members: &mCaEnrollmentPolicyStatus, Type: smithy.ShapeTypeEnum})
+var sDescribeCAEnrollmentPolicyResult_LastUpdatedDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedDateTime", ID: &i_LastUpdatedDateTime, Type: smithy.ShapeTypeTimestamp})
+var sDescribeCAEnrollmentPolicyResult_CaEnrollmentPolicyStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CaEnrollmentPolicyStatusReason", ID: &i_CaEnrollmentPolicyStatusReason, Type: smithy.ShapeTypeString})
+var sDescribeCertificateRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sDescribeCertificateRequest_CertificateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateId", ID: &i_CertificateId, Type: smithy.ShapeTypeString})
+var sDescribeCertificateResult_Certificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Certificate", ID: &iCertificate, Members: &mCertificate, Type: smithy.ShapeTypeStructure})
+var sDescribeClientAuthenticationSettingsRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sDescribeClientAuthenticationSettingsRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iClientAuthenticationType, Members: &mClientAuthenticationType, Type: smithy.ShapeTypeEnum})
+var sDescribeClientAuthenticationSettingsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeClientAuthenticationSettingsRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_PageLimit, Type: smithy.ShapeTypeInteger})
+var sDescribeClientAuthenticationSettingsResult_ClientAuthenticationSettingsInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientAuthenticationSettingsInfo", ID: &i_ClientAuthenticationSettingsInfo, Members: &m_ClientAuthenticationSettingsInfo, Type: smithy.ShapeTypeList})
+var sDescribeClientAuthenticationSettingsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeConditionalForwardersRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sDescribeConditionalForwardersRequest_RemoteDomainNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemoteDomainNames", ID: &i_RemoteDomainNames, Members: &m_RemoteDomainNames, Type: smithy.ShapeTypeList})
+var sDescribeConditionalForwardersResult_ConditionalForwarders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConditionalForwarders", ID: &i_ConditionalForwarders, Members: &m_ConditionalForwarders, Type: smithy.ShapeTypeList})
+var sDescribeDirectoriesRequest_DirectoryIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryIds", ID: &i_DirectoryIds, Members: &m_DirectoryIds, Type: smithy.ShapeTypeList})
+var sDescribeDirectoriesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeDirectoriesRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_Limit, Type: smithy.ShapeTypeInteger})
+var sDescribeDirectoriesResult_DirectoryDescriptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryDescriptions", ID: &i_DirectoryDescriptions, Members: &m_DirectoryDescriptions, Type: smithy.ShapeTypeList})
+var sDescribeDirectoriesResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeDirectoryDataAccessRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sDescribeDirectoryDataAccessResult_DataAccessStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataAccessStatus", ID: &iDataAccessStatus, Members: &mDataAccessStatus, Type: smithy.ShapeTypeEnum})
+var sDescribeDomainControllersRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sDescribeDomainControllersRequest_DomainControllerIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainControllerIds", ID: &i_DomainControllerIds, Members: &m_DomainControllerIds, Type: smithy.ShapeTypeList})
+var sDescribeDomainControllersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeDomainControllersRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_Limit, Type: smithy.ShapeTypeInteger})
+var sDescribeDomainControllersResult_DomainControllers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainControllers", ID: &i_DomainControllers, Members: &m_DomainControllers, Type: smithy.ShapeTypeList})
+var sDescribeDomainControllersResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeEventTopicsRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sDescribeEventTopicsRequest_TopicNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicNames", ID: &i_TopicNames, Members: &m_TopicNames, Type: smithy.ShapeTypeList})
+var sDescribeEventTopicsResult_EventTopics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventTopics", ID: &i_EventTopics, Members: &m_EventTopics, Type: smithy.ShapeTypeList})
+var sDescribeHybridADUpdateRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sDescribeHybridADUpdateRequest_UpdateType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateType", ID: &iHybridUpdateType, Members: &mHybridUpdateType, Type: smithy.ShapeTypeEnum})
+var sDescribeHybridADUpdateRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeHybridADUpdateResult_UpdateActivities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateActivities", ID: &iHybridUpdateActivities, Members: &mHybridUpdateActivities, Type: smithy.ShapeTypeStructure})
+var sDescribeHybridADUpdateResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeLDAPSSettingsRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sDescribeLDAPSSettingsRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iLDAPSType, Members: &mLDAPSType, Type: smithy.ShapeTypeEnum})
+var sDescribeLDAPSSettingsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeLDAPSSettingsRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_PageLimit, Type: smithy.ShapeTypeInteger})
+var sDescribeLDAPSSettingsResult_LDAPSSettingsInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LDAPSSettingsInfo", ID: &i_LDAPSSettingsInfo, Members: &m_LDAPSSettingsInfo, Type: smithy.ShapeTypeList})
+var sDescribeLDAPSSettingsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeRegionsRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sDescribeRegionsRequest_RegionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegionName", ID: &i_RegionName, Type: smithy.ShapeTypeString})
+var sDescribeRegionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeRegionsResult_RegionsDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegionsDescription", ID: &i_RegionsDescription, Members: &m_RegionsDescription, Type: smithy.ShapeTypeList})
+var sDescribeRegionsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeSettingsRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sDescribeSettingsRequest_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iDirectoryConfigurationStatus, Members: &mDirectoryConfigurationStatus, Type: smithy.ShapeTypeEnum})
+var sDescribeSettingsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeSettingsResult_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sDescribeSettingsResult_SettingEntries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SettingEntries", ID: &i_SettingEntries, Members: &m_SettingEntries, Type: smithy.ShapeTypeList})
+var sDescribeSettingsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeSharedDirectoriesRequest_OwnerDirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OwnerDirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sDescribeSharedDirectoriesRequest_SharedDirectoryIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SharedDirectoryIds", ID: &i_DirectoryIds, Members: &m_DirectoryIds, Type: smithy.ShapeTypeList})
+var sDescribeSharedDirectoriesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeSharedDirectoriesRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_Limit, Type: smithy.ShapeTypeInteger})
+var sDescribeSharedDirectoriesResult_SharedDirectories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SharedDirectories", ID: &i_SharedDirectories, Members: &m_SharedDirectories, Type: smithy.ShapeTypeList})
+var sDescribeSharedDirectoriesResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeSnapshotsRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sDescribeSnapshotsRequest_SnapshotIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotIds", ID: &i_SnapshotIds, Members: &m_SnapshotIds, Type: smithy.ShapeTypeList})
+var sDescribeSnapshotsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeSnapshotsRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_Limit, Type: smithy.ShapeTypeInteger})
+var sDescribeSnapshotsResult_Snapshots = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Snapshots", ID: &i_Snapshots, Members: &m_Snapshots, Type: smithy.ShapeTypeList})
+var sDescribeSnapshotsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeTrustsRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sDescribeTrustsRequest_TrustIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrustIds", ID: &i_TrustIds, Members: &m_TrustIds, Type: smithy.ShapeTypeList})
+var sDescribeTrustsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeTrustsRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_Limit, Type: smithy.ShapeTypeInteger})
+var sDescribeTrustsResult_Trusts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Trusts", ID: &i_Trusts, Members: &m_Trusts, Type: smithy.ShapeTypeList})
+var sDescribeTrustsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeUpdateDirectoryRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sDescribeUpdateDirectoryRequest_UpdateType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateType", ID: &iUpdateType, Members: &mUpdateType, Type: smithy.ShapeTypeEnum})
+var sDescribeUpdateDirectoryRequest_RegionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegionName", ID: &i_RegionName, Type: smithy.ShapeTypeString})
+var sDescribeUpdateDirectoryRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeUpdateDirectoryResult_UpdateActivities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateActivities", ID: &i_UpdateActivities, Members: &m_UpdateActivities, Type: smithy.ShapeTypeList})
+var sDescribeUpdateDirectoryResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDisableCAEnrollmentPolicyRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sDisableClientAuthenticationRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sDisableClientAuthenticationRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iClientAuthenticationType, Members: &mClientAuthenticationType, Type: smithy.ShapeTypeEnum})
+var sDisableDirectoryDataAccessRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sDisableLDAPSRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sDisableLDAPSRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iLDAPSType, Members: &mLDAPSType, Type: smithy.ShapeTypeEnum})
+var sDisableRadiusRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sDisableSsoRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sDisableSsoRequest_UserName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserName", ID: &i_UserName, Type: smithy.ShapeTypeString})
+var sDisableSsoRequest_Password = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Password", ID: &i_ConnectPassword, Traits: &t3, Type: smithy.ShapeTypeString})
+var sEnableCAEnrollmentPolicyRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sEnableCAEnrollmentPolicyRequest_PcaConnectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PcaConnectorArn", ID: &i_PcaConnectorArn, Type: smithy.ShapeTypeString})
+var sEnableClientAuthenticationRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sEnableClientAuthenticationRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iClientAuthenticationType, Members: &mClientAuthenticationType, Type: smithy.ShapeTypeEnum})
+var sEnableDirectoryDataAccessRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sEnableLDAPSRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sEnableLDAPSRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iLDAPSType, Members: &mLDAPSType, Type: smithy.ShapeTypeEnum})
+var sEnableRadiusRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sEnableRadiusRequest_RadiusSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RadiusSettings", ID: &iRadiusSettings, Members: &mRadiusSettings, Type: smithy.ShapeTypeStructure})
+var sEnableSsoRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sEnableSsoRequest_UserName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserName", ID: &i_UserName, Type: smithy.ShapeTypeString})
+var sEnableSsoRequest_Password = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Password", ID: &i_ConnectPassword, Traits: &t3, Type: smithy.ShapeTypeString})
+var sGetDirectoryLimitsResult_DirectoryLimits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryLimits", ID: &iDirectoryLimits, Members: &mDirectoryLimits, Type: smithy.ShapeTypeStructure})
+var sGetSnapshotLimitsRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sGetSnapshotLimitsResult_SnapshotLimits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotLimits", ID: &iSnapshotLimits, Members: &mSnapshotLimits, Type: smithy.ShapeTypeStructure})
+var sListADAssessmentsRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sListADAssessmentsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListADAssessmentsRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_AssessmentLimit, Type: smithy.ShapeTypeInteger})
+var sListADAssessmentsResult_Assessments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Assessments", ID: &i_Assessments, Members: &m_Assessments, Type: smithy.ShapeTypeList})
+var sListADAssessmentsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListCertificatesRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sListCertificatesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListCertificatesRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_PageLimit, Type: smithy.ShapeTypeInteger})
+var sListCertificatesResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListCertificatesResult_CertificatesInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificatesInfo", ID: &i_CertificatesInfo, Members: &m_CertificatesInfo, Type: smithy.ShapeTypeList})
+var sListIpRoutesRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sListIpRoutesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListIpRoutesRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_Limit, Type: smithy.ShapeTypeInteger})
+var sListIpRoutesResult_IpRoutesInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpRoutesInfo", ID: &i_IpRoutesInfo, Members: &m_IpRoutesInfo, Type: smithy.ShapeTypeList})
+var sListIpRoutesResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListLogSubscriptionsRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sListLogSubscriptionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListLogSubscriptionsRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_Limit, Type: smithy.ShapeTypeInteger})
+var sListLogSubscriptionsResult_LogSubscriptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogSubscriptions", ID: &i_LogSubscriptions, Members: &m_LogSubscriptions, Type: smithy.ShapeTypeList})
+var sListLogSubscriptionsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListSchemaExtensionsRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sListSchemaExtensionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListSchemaExtensionsRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_Limit, Type: smithy.ShapeTypeInteger})
+var sListSchemaExtensionsResult_SchemaExtensionsInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaExtensionsInfo", ID: &i_SchemaExtensionsInfo, Members: &m_SchemaExtensionsInfo, Type: smithy.ShapeTypeList})
+var sListSchemaExtensionsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListTagsForResourceRequest_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sListTagsForResourceRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListTagsForResourceRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_Limit, Type: smithy.ShapeTypeInteger})
+var sListTagsForResourceResult_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sListTagsForResourceResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sRegisterCertificateRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sRegisterCertificateRequest_CertificateData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateData", ID: &i_CertificateData, Type: smithy.ShapeTypeString})
+var sRegisterCertificateRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iCertificateType, Members: &mCertificateType, Type: smithy.ShapeTypeEnum})
+var sRegisterCertificateRequest_ClientCertAuthSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientCertAuthSettings", ID: &iClientCertAuthSettings, Members: &mClientCertAuthSettings, Type: smithy.ShapeTypeStructure})
+var sRegisterCertificateResult_CertificateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateId", ID: &i_CertificateId, Type: smithy.ShapeTypeString})
+var sRegisterEventTopicRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sRegisterEventTopicRequest_TopicName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicName", ID: &i_TopicName, Type: smithy.ShapeTypeString})
+var sRejectSharedDirectoryRequest_SharedDirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SharedDirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sRejectSharedDirectoryResult_SharedDirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SharedDirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sRemoveIpRoutesRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sRemoveIpRoutesRequest_CidrIps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CidrIps", ID: &i_CidrIps, Members: &m_CidrIps, Type: smithy.ShapeTypeList})
+var sRemoveIpRoutesRequest_CidrIpv6s = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CidrIpv6s", ID: &i_CidrIpv6s, Members: &m_CidrIpv6s, Type: smithy.ShapeTypeList})
+var sRemoveRegionRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sRemoveTagsFromResourceRequest_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sRemoveTagsFromResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeys, Members: &m_TagKeys, Type: smithy.ShapeTypeList})
+var sResetUserPasswordRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sResetUserPasswordRequest_UserName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserName", ID: &i_CustomerUserName, Type: smithy.ShapeTypeString})
+var sResetUserPasswordRequest_NewPassword = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NewPassword", ID: &i_UserPassword, Traits: &t3, Type: smithy.ShapeTypeString})
+var sRestoreFromSnapshotRequest_SnapshotId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotId", ID: &i_SnapshotId, Type: smithy.ShapeTypeString})
+var sShareDirectoryRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sShareDirectoryRequest_ShareNotes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShareNotes", ID: &i_Notes, Traits: &t3, Type: smithy.ShapeTypeString})
+var sShareDirectoryRequest_ShareTarget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShareTarget", ID: &iShareTarget, Members: &mShareTarget, Type: smithy.ShapeTypeStructure})
+var sShareDirectoryRequest_ShareMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShareMethod", ID: &iShareMethod, Members: &mShareMethod, Type: smithy.ShapeTypeEnum})
+var sShareDirectoryResult_SharedDirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SharedDirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sStartADAssessmentRequest_AssessmentConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssessmentConfiguration", ID: &iAssessmentConfiguration, Members: &mAssessmentConfiguration, Type: smithy.ShapeTypeStructure})
+var sStartADAssessmentRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sStartADAssessmentResult_AssessmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssessmentId", ID: &i_AssessmentId, Type: smithy.ShapeTypeString})
+var sStartSchemaExtensionRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sStartSchemaExtensionRequest_CreateSnapshotBeforeSchemaExtension = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateSnapshotBeforeSchemaExtension", ID: &i_CreateSnapshotBeforeSchemaExtension, Type: smithy.ShapeTypeBoolean})
+var sStartSchemaExtensionRequest_LdifContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LdifContent", ID: &i_LdifContent, Type: smithy.ShapeTypeString})
+var sStartSchemaExtensionRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sStartSchemaExtensionResult_SchemaExtensionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaExtensionId", ID: &i_SchemaExtensionId, Type: smithy.ShapeTypeString})
+var sUnshareDirectoryRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sUnshareDirectoryRequest_UnshareTarget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UnshareTarget", ID: &iUnshareTarget, Members: &mUnshareTarget, Type: smithy.ShapeTypeStructure})
+var sUnshareDirectoryResult_SharedDirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SharedDirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sUpdateConditionalForwarderRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sUpdateConditionalForwarderRequest_RemoteDomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemoteDomainName", ID: &i_RemoteDomainName, Type: smithy.ShapeTypeString})
+var sUpdateConditionalForwarderRequest_DnsIpAddrs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsIpAddrs", ID: &i_DnsIpAddrs, Members: &m_DnsIpAddrs, Type: smithy.ShapeTypeList})
+var sUpdateConditionalForwarderRequest_DnsIpv6Addrs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsIpv6Addrs", ID: &i_DnsIpv6Addrs, Members: &m_DnsIpv6Addrs, Type: smithy.ShapeTypeList})
+var sUpdateDirectorySetupRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sUpdateDirectorySetupRequest_UpdateType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateType", ID: &iUpdateType, Members: &mUpdateType, Type: smithy.ShapeTypeEnum})
+var sUpdateDirectorySetupRequest_OSUpdateSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OSUpdateSettings", ID: &iOSUpdateSettings, Members: &mOSUpdateSettings, Type: smithy.ShapeTypeStructure})
+var sUpdateDirectorySetupRequest_DirectorySizeUpdateSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectorySizeUpdateSettings", ID: &iDirectorySizeUpdateSettings, Members: &mDirectorySizeUpdateSettings, Type: smithy.ShapeTypeStructure})
+var sUpdateDirectorySetupRequest_NetworkUpdateSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkUpdateSettings", ID: &iNetworkUpdateSettings, Members: &mNetworkUpdateSettings, Type: smithy.ShapeTypeStructure})
+var sUpdateDirectorySetupRequest_CreateSnapshotBeforeUpdate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateSnapshotBeforeUpdate", ID: &i_CreateSnapshotBeforeUpdate, Type: smithy.ShapeTypeBoolean})
+var sUpdateHybridADRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sUpdateHybridADRequest_HybridAdministratorAccountUpdate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HybridAdministratorAccountUpdate", ID: &iHybridAdministratorAccountUpdate, Members: &mHybridAdministratorAccountUpdate, Type: smithy.ShapeTypeStructure})
+var sUpdateHybridADRequest_SelfManagedInstancesSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SelfManagedInstancesSettings", ID: &iHybridCustomerInstancesSettings, Members: &mHybridCustomerInstancesSettings, Type: smithy.ShapeTypeStructure})
+var sUpdateHybridADResult_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sUpdateHybridADResult_AssessmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssessmentId", ID: &i_AssessmentId, Type: smithy.ShapeTypeString})
+var sUpdateNumberOfDomainControllersRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sUpdateNumberOfDomainControllersRequest_DesiredNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DesiredNumber", ID: &i_DesiredNumberOfDomainControllers, Type: smithy.ShapeTypeInteger})
+var sUpdateRadiusRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sUpdateRadiusRequest_RadiusSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RadiusSettings", ID: &iRadiusSettings, Members: &mRadiusSettings, Type: smithy.ShapeTypeStructure})
+var sUpdateSettingsRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sUpdateSettingsRequest_Settings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Settings", ID: &i_Settings, Members: &m_Settings, Type: smithy.ShapeTypeList})
+var sUpdateSettingsResult_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sUpdateTrustRequest_TrustId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrustId", ID: &i_TrustId, Type: smithy.ShapeTypeString})
+var sUpdateTrustRequest_SelectiveAuth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SelectiveAuth", ID: &iSelectiveAuth, Members: &mSelectiveAuth, Type: smithy.ShapeTypeEnum})
+var sUpdateTrustResult_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_RequestId, Type: smithy.ShapeTypeString})
+var sUpdateTrustResult_TrustId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrustId", ID: &i_TrustId, Type: smithy.ShapeTypeString})
+var sVerifyTrustRequest_TrustId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrustId", ID: &i_TrustId, Type: smithy.ShapeTypeString})
+var sVerifyTrustResult_TrustId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrustId", ID: &i_TrustId, Type: smithy.ShapeTypeString})
+
+var AcceptSharedDirectory = &sAcceptSharedDirectory
+
+var AddIpRoutes = &sAddIpRoutes
+
+var AddRegion = &sAddRegion
+
+var AddTagsToResource = &sAddTagsToResource
+
+var CancelSchemaExtension = &sCancelSchemaExtension
+
+var ConnectDirectory = &sConnectDirectory
+
+var CreateAlias = &sCreateAlias
+
+var CreateComputer = &sCreateComputer
+
+var CreateConditionalForwarder = &sCreateConditionalForwarder
+
+var CreateDirectory = &sCreateDirectory
+
+var CreateHybridAD = &sCreateHybridAD
+
+var CreateLogSubscription = &sCreateLogSubscription
+
+var CreateMicrosoftAD = &sCreateMicrosoftAD
+
+var CreateSnapshot = &sCreateSnapshot
+
+var CreateTrust = &sCreateTrust
+
+var DeleteADAssessment = &sDeleteADAssessment
+
+var DeleteConditionalForwarder = &sDeleteConditionalForwarder
+
+var DeleteDirectory = &sDeleteDirectory
+
+var DeleteLogSubscription = &sDeleteLogSubscription
+
+var DeleteSnapshot = &sDeleteSnapshot
+
+var DeleteTrust = &sDeleteTrust
+
+var DeregisterCertificate = &sDeregisterCertificate
+
+var DeregisterEventTopic = &sDeregisterEventTopic
+
+var DescribeADAssessment = &sDescribeADAssessment
+
+var DescribeCAEnrollmentPolicy = &sDescribeCAEnrollmentPolicy
+
+var DescribeCertificate = &sDescribeCertificate
+
+var DescribeClientAuthenticationSettings = &sDescribeClientAuthenticationSettings
+
+var DescribeConditionalForwarders = &sDescribeConditionalForwarders
+
+var DescribeDirectories = &sDescribeDirectories
+
+var DescribeDirectoryDataAccess = &sDescribeDirectoryDataAccess
+
+var DescribeDomainControllers = &sDescribeDomainControllers
+
+var DescribeEventTopics = &sDescribeEventTopics
+
+var DescribeHybridADUpdate = &sDescribeHybridADUpdate
+
+var DescribeLDAPSSettings = &sDescribeLDAPSSettings
+
+var DescribeRegions = &sDescribeRegions
+
+var DescribeSettings = &sDescribeSettings
+
+var DescribeSharedDirectories = &sDescribeSharedDirectories
+
+var DescribeSnapshots = &sDescribeSnapshots
+
+var DescribeTrusts = &sDescribeTrusts
+
+var DescribeUpdateDirectory = &sDescribeUpdateDirectory
+
+var DisableCAEnrollmentPolicy = &sDisableCAEnrollmentPolicy
+
+var DisableClientAuthentication = &sDisableClientAuthentication
+
+var DisableDirectoryDataAccess = &sDisableDirectoryDataAccess
+
+var DisableLDAPS = &sDisableLDAPS
+
+var DisableRadius = &sDisableRadius
+
+var DisableSso = &sDisableSso
+
+var EnableCAEnrollmentPolicy = &sEnableCAEnrollmentPolicy
+
+var EnableClientAuthentication = &sEnableClientAuthentication
+
+var EnableDirectoryDataAccess = &sEnableDirectoryDataAccess
+
+var EnableLDAPS = &sEnableLDAPS
+
+var EnableRadius = &sEnableRadius
+
+var EnableSso = &sEnableSso
+
+var GetDirectoryLimits = &sGetDirectoryLimits
+
+var GetSnapshotLimits = &sGetSnapshotLimits
+
+var ListADAssessments = &sListADAssessments
+
+var ListCertificates = &sListCertificates
+
+var ListIpRoutes = &sListIpRoutes
+
+var ListLogSubscriptions = &sListLogSubscriptions
+
+var ListSchemaExtensions = &sListSchemaExtensions
+
+var ListTagsForResource = &sListTagsForResource
+
+var RegisterCertificate = &sRegisterCertificate
+
+var RegisterEventTopic = &sRegisterEventTopic
+
+var RejectSharedDirectory = &sRejectSharedDirectory
+
+var RemoveIpRoutes = &sRemoveIpRoutes
+
+var RemoveRegion = &sRemoveRegion
+
+var RemoveTagsFromResource = &sRemoveTagsFromResource
+
+var ResetUserPassword = &sResetUserPassword
+
+var RestoreFromSnapshot = &sRestoreFromSnapshot
+
+var ShareDirectory = &sShareDirectory
+
+var StartADAssessment = &sStartADAssessment
+
+var StartSchemaExtension = &sStartSchemaExtension
+
+var UnshareDirectory = &sUnshareDirectory
+
+var UpdateConditionalForwarder = &sUpdateConditionalForwarder
+
+var UpdateDirectorySetup = &sUpdateDirectorySetup
+
+var UpdateHybridAD = &sUpdateHybridAD
+
+var UpdateNumberOfDomainControllers = &sUpdateNumberOfDomainControllers
+
+var UpdateRadius = &sUpdateRadius
+
+var UpdateSettings = &sUpdateSettings
+
+var UpdateTrust = &sUpdateTrust
+
+var VerifyTrust = &sVerifyTrust
+
+var _DirectoryService_20150416 = &s_DirectoryService_20150416
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_Message = &sAccessDeniedException_Message
+var AccessDeniedException_RequestId = &sAccessDeniedException_RequestId
+
+var _AccessUrl = &s_AccessUrl
+
+var ADAssessmentLimitExceededException = &sADAssessmentLimitExceededException
+var ADAssessmentLimitExceededException_Message = &sADAssessmentLimitExceededException_Message
+var ADAssessmentLimitExceededException_RequestId = &sADAssessmentLimitExceededException_RequestId
+
+var _AddedDateTime = &s_AddedDateTime
+
+var _AdditionalRegions = &s_AdditionalRegions
+var _AdditionalRegions_member = &s_AdditionalRegions_member
+
+var _AliasName = &s_AliasName
+
+var Assessment = &sAssessment
+var Assessment_AssessmentId = &sAssessment_AssessmentId
+var Assessment_DirectoryId = &sAssessment_DirectoryId
+var Assessment_DnsName = &sAssessment_DnsName
+var Assessment_StartTime = &sAssessment_StartTime
+var Assessment_LastUpdateDateTime = &sAssessment_LastUpdateDateTime
+var Assessment_Status = &sAssessment_Status
+var Assessment_StatusCode = &sAssessment_StatusCode
+var Assessment_StatusReason = &sAssessment_StatusReason
+var Assessment_CustomerDnsIps = &sAssessment_CustomerDnsIps
+var Assessment_VpcId = &sAssessment_VpcId
+var Assessment_SubnetIds = &sAssessment_SubnetIds
+var Assessment_SecurityGroupIds = &sAssessment_SecurityGroupIds
+var Assessment_SelfManagedInstanceIds = &sAssessment_SelfManagedInstanceIds
+var Assessment_ReportType = &sAssessment_ReportType
+var Assessment_Version = &sAssessment_Version
+
+var AssessmentConfiguration = &sAssessmentConfiguration
+var AssessmentConfiguration_CustomerDnsIps = &sAssessmentConfiguration_CustomerDnsIps
+var AssessmentConfiguration_DnsName = &sAssessmentConfiguration_DnsName
+var AssessmentConfiguration_VpcSettings = &sAssessmentConfiguration_VpcSettings
+var AssessmentConfiguration_InstanceIds = &sAssessmentConfiguration_InstanceIds
+var AssessmentConfiguration_SecurityGroupIds = &sAssessmentConfiguration_SecurityGroupIds
+
+var _AssessmentId = &s_AssessmentId
+
+var _AssessmentInstanceId = &s_AssessmentInstanceId
+
+var _AssessmentInstanceIds = &s_AssessmentInstanceIds
+var _AssessmentInstanceIds_member = &s_AssessmentInstanceIds_member
+
+var _AssessmentLimit = &s_AssessmentLimit
+
+var AssessmentReport = &sAssessmentReport
+var AssessmentReport_DomainControllerIp = &sAssessmentReport_DomainControllerIp
+var AssessmentReport_Validations = &sAssessmentReport_Validations
+
+var _AssessmentReports = &s_AssessmentReports
+var _AssessmentReports_member = &s_AssessmentReports_member
+
+var _AssessmentReportType = &s_AssessmentReportType
+
+var _Assessments = &s_Assessments
+var _Assessments_member = &s_Assessments_member
+
+var _AssessmentStartTime = &s_AssessmentStartTime
+
+var _AssessmentStatus = &s_AssessmentStatus
+
+var _AssessmentStatusCode = &s_AssessmentStatusCode
+
+var _AssessmentStatusReason = &s_AssessmentStatusReason
+
+var AssessmentSummary = &sAssessmentSummary
+var AssessmentSummary_AssessmentId = &sAssessmentSummary_AssessmentId
+var AssessmentSummary_DirectoryId = &sAssessmentSummary_DirectoryId
+var AssessmentSummary_DnsName = &sAssessmentSummary_DnsName
+var AssessmentSummary_StartTime = &sAssessmentSummary_StartTime
+var AssessmentSummary_LastUpdateDateTime = &sAssessmentSummary_LastUpdateDateTime
+var AssessmentSummary_Status = &sAssessmentSummary_Status
+var AssessmentSummary_CustomerDnsIps = &sAssessmentSummary_CustomerDnsIps
+var AssessmentSummary_ReportType = &sAssessmentSummary_ReportType
+
+var AssessmentValidation = &sAssessmentValidation
+var AssessmentValidation_Category = &sAssessmentValidation_Category
+var AssessmentValidation_Name = &sAssessmentValidation_Name
+var AssessmentValidation_Status = &sAssessmentValidation_Status
+var AssessmentValidation_StatusCode = &sAssessmentValidation_StatusCode
+var AssessmentValidation_StatusReason = &sAssessmentValidation_StatusReason
+var AssessmentValidation_StartTime = &sAssessmentValidation_StartTime
+var AssessmentValidation_LastUpdateDateTime = &sAssessmentValidation_LastUpdateDateTime
+
+var _AssessmentValidationCategory = &s_AssessmentValidationCategory
+
+var _AssessmentValidationName = &s_AssessmentValidationName
+
+var _AssessmentValidations = &s_AssessmentValidations
+var _AssessmentValidations_member = &s_AssessmentValidations_member
+
+var _AssessmentValidationStatus = &s_AssessmentValidationStatus
+
+var _AssessmentValidationStatusCode = &s_AssessmentValidationStatusCode
+
+var _AssessmentValidationStatusReason = &s_AssessmentValidationStatusReason
+
+var _AssessmentValidationTimeStamp = &s_AssessmentValidationTimeStamp
+
+var _AssessmentVersion = &s_AssessmentVersion
+
+var Attribute = &sAttribute
+var Attribute_Name = &sAttribute_Name
+var Attribute_Value = &sAttribute_Value
+
+var _AttributeName = &s_AttributeName
+
+var _Attributes = &s_Attributes
+var _Attributes_member = &s_Attributes_member
+
+var _AttributeValue = &s_AttributeValue
+
+var AuthenticationFailedException = &sAuthenticationFailedException
+var AuthenticationFailedException_Message = &sAuthenticationFailedException_Message
+var AuthenticationFailedException_RequestId = &sAuthenticationFailedException_RequestId
+
+var _AvailabilityZone = &s_AvailabilityZone
+
+var _AvailabilityZones = &s_AvailabilityZones
+var _AvailabilityZones_member = &s_AvailabilityZones_member
+
+var CaEnrollmentPolicyStatus = &sCaEnrollmentPolicyStatus
+var CaEnrollmentPolicyStatus_IN_PROGRESS = &sCaEnrollmentPolicyStatus_IN_PROGRESS
+var CaEnrollmentPolicyStatus_SUCCESS = &sCaEnrollmentPolicyStatus_SUCCESS
+var CaEnrollmentPolicyStatus_FAILED = &sCaEnrollmentPolicyStatus_FAILED
+var CaEnrollmentPolicyStatus_DISABLING = &sCaEnrollmentPolicyStatus_DISABLING
+var CaEnrollmentPolicyStatus_DISABLED = &sCaEnrollmentPolicyStatus_DISABLED
+var CaEnrollmentPolicyStatus_IMPAIRED = &sCaEnrollmentPolicyStatus_IMPAIRED
+
+var _CaEnrollmentPolicyStatusReason = &s_CaEnrollmentPolicyStatusReason
+
+var Certificate = &sCertificate
+var Certificate_CertificateId = &sCertificate_CertificateId
+var Certificate_State = &sCertificate_State
+var Certificate_StateReason = &sCertificate_StateReason
+var Certificate_CommonName = &sCertificate_CommonName
+var Certificate_RegisteredDateTime = &sCertificate_RegisteredDateTime
+var Certificate_ExpiryDateTime = &sCertificate_ExpiryDateTime
+var Certificate_Type = &sCertificate_Type
+var Certificate_ClientCertAuthSettings = &sCertificate_ClientCertAuthSettings
+
+var CertificateAlreadyExistsException = &sCertificateAlreadyExistsException
+var CertificateAlreadyExistsException_Message = &sCertificateAlreadyExistsException_Message
+var CertificateAlreadyExistsException_RequestId = &sCertificateAlreadyExistsException_RequestId
+
+var _CertificateCN = &s_CertificateCN
+
+var _CertificateData = &s_CertificateData
+
+var CertificateDoesNotExistException = &sCertificateDoesNotExistException
+var CertificateDoesNotExistException_Message = &sCertificateDoesNotExistException_Message
+var CertificateDoesNotExistException_RequestId = &sCertificateDoesNotExistException_RequestId
+
+var _CertificateExpiryDateTime = &s_CertificateExpiryDateTime
+
+var _CertificateId = &s_CertificateId
+
+var CertificateInfo = &sCertificateInfo
+var CertificateInfo_CertificateId = &sCertificateInfo_CertificateId
+var CertificateInfo_CommonName = &sCertificateInfo_CommonName
+var CertificateInfo_State = &sCertificateInfo_State
+var CertificateInfo_ExpiryDateTime = &sCertificateInfo_ExpiryDateTime
+var CertificateInfo_Type = &sCertificateInfo_Type
+
+var CertificateInUseException = &sCertificateInUseException
+var CertificateInUseException_Message = &sCertificateInUseException_Message
+var CertificateInUseException_RequestId = &sCertificateInUseException_RequestId
+
+var CertificateLimitExceededException = &sCertificateLimitExceededException
+var CertificateLimitExceededException_Message = &sCertificateLimitExceededException_Message
+var CertificateLimitExceededException_RequestId = &sCertificateLimitExceededException_RequestId
+
+var _CertificateRegisteredDateTime = &s_CertificateRegisteredDateTime
+
+var _CertificatesInfo = &s_CertificatesInfo
+var _CertificatesInfo_member = &s_CertificatesInfo_member
+
+var CertificateState = &sCertificateState
+var CertificateState_REGISTERING = &sCertificateState_REGISTERING
+var CertificateState_REGISTERED = &sCertificateState_REGISTERED
+var CertificateState_REGISTER_FAILED = &sCertificateState_REGISTER_FAILED
+var CertificateState_DEREGISTERING = &sCertificateState_DEREGISTERING
+var CertificateState_DEREGISTERED = &sCertificateState_DEREGISTERED
+var CertificateState_DEREGISTER_FAILED = &sCertificateState_DEREGISTER_FAILED
+
+var _CertificateStateReason = &s_CertificateStateReason
+
+var CertificateType = &sCertificateType
+var CertificateType_CLIENT_CERT_AUTH = &sCertificateType_CLIENT_CERT_AUTH
+var CertificateType_CLIENT_LDAPS = &sCertificateType_CLIENT_LDAPS
+
+var _CidrIp = &s_CidrIp
+
+var _CidrIps = &s_CidrIps
+var _CidrIps_member = &s_CidrIps_member
+
+var _CidrIpv6 = &s_CidrIpv6
+
+var _CidrIpv6s = &s_CidrIpv6s
+var _CidrIpv6s_member = &s_CidrIpv6s_member
+
+var ClientAuthenticationSettingInfo = &sClientAuthenticationSettingInfo
+var ClientAuthenticationSettingInfo_Type = &sClientAuthenticationSettingInfo_Type
+var ClientAuthenticationSettingInfo_Status = &sClientAuthenticationSettingInfo_Status
+var ClientAuthenticationSettingInfo_LastUpdatedDateTime = &sClientAuthenticationSettingInfo_LastUpdatedDateTime
+
+var _ClientAuthenticationSettingsInfo = &s_ClientAuthenticationSettingsInfo
+var _ClientAuthenticationSettingsInfo_member = &s_ClientAuthenticationSettingsInfo_member
+
+var ClientAuthenticationStatus = &sClientAuthenticationStatus
+var ClientAuthenticationStatus_ENABLED = &sClientAuthenticationStatus_ENABLED
+var ClientAuthenticationStatus_DISABLED = &sClientAuthenticationStatus_DISABLED
+
+var ClientAuthenticationType = &sClientAuthenticationType
+var ClientAuthenticationType_SMART_CARD = &sClientAuthenticationType_SMART_CARD
+var ClientAuthenticationType_SMART_CARD_OR_PASSWORD = &sClientAuthenticationType_SMART_CARD_OR_PASSWORD
+
+var ClientCertAuthSettings = &sClientCertAuthSettings
+var ClientCertAuthSettings_OCSPUrl = &sClientCertAuthSettings_OCSPUrl
+
+var ClientException = &sClientException
+var ClientException_Message = &sClientException_Message
+var ClientException_RequestId = &sClientException_RequestId
+
+var _CloudOnlyDirectoriesLimitReached = &s_CloudOnlyDirectoriesLimitReached
+
+var Computer = &sComputer
+var Computer_ComputerId = &sComputer_ComputerId
+var Computer_ComputerName = &sComputer_ComputerName
+var Computer_ComputerAttributes = &sComputer_ComputerAttributes
+
+var _ComputerName = &s_ComputerName
+
+var _ComputerPassword = &s_ComputerPassword
+
+var ConditionalForwarder = &sConditionalForwarder
+var ConditionalForwarder_RemoteDomainName = &sConditionalForwarder_RemoteDomainName
+var ConditionalForwarder_DnsIpAddrs = &sConditionalForwarder_DnsIpAddrs
+var ConditionalForwarder_DnsIpv6Addrs = &sConditionalForwarder_DnsIpv6Addrs
+var ConditionalForwarder_ReplicationScope = &sConditionalForwarder_ReplicationScope
+
+var _ConditionalForwarders = &s_ConditionalForwarders
+var _ConditionalForwarders_member = &s_ConditionalForwarders_member
+
+var _ConnectedDirectoriesLimitReached = &s_ConnectedDirectoriesLimitReached
+
+var _ConnectPassword = &s_ConnectPassword
+
+var _CreatedDateTime = &s_CreatedDateTime
+
+var _CreateSnapshotBeforeSchemaExtension = &s_CreateSnapshotBeforeSchemaExtension
+
+var _CreateSnapshotBeforeUpdate = &s_CreateSnapshotBeforeUpdate
+
+var _CustomerDnsIps = &s_CustomerDnsIps
+var _CustomerDnsIps_member = &s_CustomerDnsIps_member
+
+var _CustomerId = &s_CustomerId
+
+var _CustomerUserName = &s_CustomerUserName
+
+var DataAccessStatus = &sDataAccessStatus
+var DataAccessStatus_DISABLED = &sDataAccessStatus_DISABLED
+var DataAccessStatus_DISABLING = &sDataAccessStatus_DISABLING
+var DataAccessStatus_ENABLED = &sDataAccessStatus_ENABLED
+var DataAccessStatus_ENABLING = &sDataAccessStatus_ENABLING
+var DataAccessStatus_FAILED = &sDataAccessStatus_FAILED
+
+var _DeleteAssociatedConditionalForwarder = &s_DeleteAssociatedConditionalForwarder
+
+var _Description = &s_Description
+
+var _DesiredNumberOfDomainControllers = &s_DesiredNumberOfDomainControllers
+
+var DirectoryAlreadyInRegionException = &sDirectoryAlreadyInRegionException
+var DirectoryAlreadyInRegionException_Message = &sDirectoryAlreadyInRegionException_Message
+var DirectoryAlreadyInRegionException_RequestId = &sDirectoryAlreadyInRegionException_RequestId
+
+var DirectoryAlreadySharedException = &sDirectoryAlreadySharedException
+var DirectoryAlreadySharedException_Message = &sDirectoryAlreadySharedException_Message
+var DirectoryAlreadySharedException_RequestId = &sDirectoryAlreadySharedException_RequestId
+
+var _DirectoryConfigurationSettingAllowedValues = &s_DirectoryConfigurationSettingAllowedValues
+
+var _DirectoryConfigurationSettingDataType = &s_DirectoryConfigurationSettingDataType
+
+var _DirectoryConfigurationSettingLastRequestedDateTime = &s_DirectoryConfigurationSettingLastRequestedDateTime
+
+var _DirectoryConfigurationSettingLastUpdatedDateTime = &s_DirectoryConfigurationSettingLastUpdatedDateTime
+
+var _DirectoryConfigurationSettingName = &s_DirectoryConfigurationSettingName
+
+var _DirectoryConfigurationSettingRequestDetailedStatus = &s_DirectoryConfigurationSettingRequestDetailedStatus
+var _DirectoryConfigurationSettingRequestDetailedStatus_key = &s_DirectoryConfigurationSettingRequestDetailedStatus_key
+var _DirectoryConfigurationSettingRequestDetailedStatus_value = &s_DirectoryConfigurationSettingRequestDetailedStatus_value
+
+var _DirectoryConfigurationSettingRequestStatusMessage = &s_DirectoryConfigurationSettingRequestStatusMessage
+
+var _DirectoryConfigurationSettingType = &s_DirectoryConfigurationSettingType
+
+var _DirectoryConfigurationSettingValue = &s_DirectoryConfigurationSettingValue
+
+var DirectoryConfigurationStatus = &sDirectoryConfigurationStatus
+var DirectoryConfigurationStatus_REQUESTED = &sDirectoryConfigurationStatus_REQUESTED
+var DirectoryConfigurationStatus_UPDATING = &sDirectoryConfigurationStatus_UPDATING
+var DirectoryConfigurationStatus_UPDATED = &sDirectoryConfigurationStatus_UPDATED
+var DirectoryConfigurationStatus_FAILED = &sDirectoryConfigurationStatus_FAILED
+var DirectoryConfigurationStatus_DEFAULT = &sDirectoryConfigurationStatus_DEFAULT
+
+var DirectoryConnectSettings = &sDirectoryConnectSettings
+var DirectoryConnectSettings_VpcId = &sDirectoryConnectSettings_VpcId
+var DirectoryConnectSettings_SubnetIds = &sDirectoryConnectSettings_SubnetIds
+var DirectoryConnectSettings_CustomerDnsIps = &sDirectoryConnectSettings_CustomerDnsIps
+var DirectoryConnectSettings_CustomerDnsIpsV6 = &sDirectoryConnectSettings_CustomerDnsIpsV6
+var DirectoryConnectSettings_CustomerUserName = &sDirectoryConnectSettings_CustomerUserName
+
+var DirectoryConnectSettingsDescription = &sDirectoryConnectSettingsDescription
+var DirectoryConnectSettingsDescription_VpcId = &sDirectoryConnectSettingsDescription_VpcId
+var DirectoryConnectSettingsDescription_SubnetIds = &sDirectoryConnectSettingsDescription_SubnetIds
+var DirectoryConnectSettingsDescription_CustomerUserName = &sDirectoryConnectSettingsDescription_CustomerUserName
+var DirectoryConnectSettingsDescription_SecurityGroupId = &sDirectoryConnectSettingsDescription_SecurityGroupId
+var DirectoryConnectSettingsDescription_AvailabilityZones = &sDirectoryConnectSettingsDescription_AvailabilityZones
+var DirectoryConnectSettingsDescription_ConnectIps = &sDirectoryConnectSettingsDescription_ConnectIps
+var DirectoryConnectSettingsDescription_ConnectIpsV6 = &sDirectoryConnectSettingsDescription_ConnectIpsV6
+
+var DirectoryDescription = &sDirectoryDescription
+var DirectoryDescription_DirectoryId = &sDirectoryDescription_DirectoryId
+var DirectoryDescription_Name = &sDirectoryDescription_Name
+var DirectoryDescription_ShortName = &sDirectoryDescription_ShortName
+var DirectoryDescription_Size = &sDirectoryDescription_Size
+var DirectoryDescription_Edition = &sDirectoryDescription_Edition
+var DirectoryDescription_Alias = &sDirectoryDescription_Alias
+var DirectoryDescription_AccessUrl = &sDirectoryDescription_AccessUrl
+var DirectoryDescription_Description = &sDirectoryDescription_Description
+var DirectoryDescription_DnsIpAddrs = &sDirectoryDescription_DnsIpAddrs
+var DirectoryDescription_DnsIpv6Addrs = &sDirectoryDescription_DnsIpv6Addrs
+var DirectoryDescription_Stage = &sDirectoryDescription_Stage
+var DirectoryDescription_ShareStatus = &sDirectoryDescription_ShareStatus
+var DirectoryDescription_ShareMethod = &sDirectoryDescription_ShareMethod
+var DirectoryDescription_ShareNotes = &sDirectoryDescription_ShareNotes
+var DirectoryDescription_LaunchTime = &sDirectoryDescription_LaunchTime
+var DirectoryDescription_StageLastUpdatedDateTime = &sDirectoryDescription_StageLastUpdatedDateTime
+var DirectoryDescription_Type = &sDirectoryDescription_Type
+var DirectoryDescription_VpcSettings = &sDirectoryDescription_VpcSettings
+var DirectoryDescription_ConnectSettings = &sDirectoryDescription_ConnectSettings
+var DirectoryDescription_RadiusSettings = &sDirectoryDescription_RadiusSettings
+var DirectoryDescription_RadiusStatus = &sDirectoryDescription_RadiusStatus
+var DirectoryDescription_StageReason = &sDirectoryDescription_StageReason
+var DirectoryDescription_SsoEnabled = &sDirectoryDescription_SsoEnabled
+var DirectoryDescription_DesiredNumberOfDomainControllers = &sDirectoryDescription_DesiredNumberOfDomainControllers
+var DirectoryDescription_OwnerDirectoryDescription = &sDirectoryDescription_OwnerDirectoryDescription
+var DirectoryDescription_RegionsInfo = &sDirectoryDescription_RegionsInfo
+var DirectoryDescription_OsVersion = &sDirectoryDescription_OsVersion
+var DirectoryDescription_HybridSettings = &sDirectoryDescription_HybridSettings
+var DirectoryDescription_NetworkType = &sDirectoryDescription_NetworkType
+
+var _DirectoryDescriptions = &s_DirectoryDescriptions
+var _DirectoryDescriptions_member = &s_DirectoryDescriptions_member
+
+var DirectoryDoesNotExistException = &sDirectoryDoesNotExistException
+var DirectoryDoesNotExistException_Message = &sDirectoryDoesNotExistException_Message
+var DirectoryDoesNotExistException_RequestId = &sDirectoryDoesNotExistException_RequestId
+
+var DirectoryEdition = &sDirectoryEdition
+var DirectoryEdition_ENTERPRISE = &sDirectoryEdition_ENTERPRISE
+var DirectoryEdition_STANDARD = &sDirectoryEdition_STANDARD
+var DirectoryEdition_HYBRID = &sDirectoryEdition_HYBRID
+
+var _DirectoryId = &s_DirectoryId
+
+var _DirectoryIds = &s_DirectoryIds
+var _DirectoryIds_member = &s_DirectoryIds_member
+
+var DirectoryInDesiredStateException = &sDirectoryInDesiredStateException
+var DirectoryInDesiredStateException_Message = &sDirectoryInDesiredStateException_Message
+var DirectoryInDesiredStateException_RequestId = &sDirectoryInDesiredStateException_RequestId
+
+var DirectoryLimitExceededException = &sDirectoryLimitExceededException
+var DirectoryLimitExceededException_Message = &sDirectoryLimitExceededException_Message
+var DirectoryLimitExceededException_RequestId = &sDirectoryLimitExceededException_RequestId
+
+var DirectoryLimits = &sDirectoryLimits
+var DirectoryLimits_CloudOnlyDirectoriesLimit = &sDirectoryLimits_CloudOnlyDirectoriesLimit
+var DirectoryLimits_CloudOnlyDirectoriesCurrentCount = &sDirectoryLimits_CloudOnlyDirectoriesCurrentCount
+var DirectoryLimits_CloudOnlyDirectoriesLimitReached = &sDirectoryLimits_CloudOnlyDirectoriesLimitReached
+var DirectoryLimits_CloudOnlyMicrosoftADLimit = &sDirectoryLimits_CloudOnlyMicrosoftADLimit
+var DirectoryLimits_CloudOnlyMicrosoftADCurrentCount = &sDirectoryLimits_CloudOnlyMicrosoftADCurrentCount
+var DirectoryLimits_CloudOnlyMicrosoftADLimitReached = &sDirectoryLimits_CloudOnlyMicrosoftADLimitReached
+var DirectoryLimits_ConnectedDirectoriesLimit = &sDirectoryLimits_ConnectedDirectoriesLimit
+var DirectoryLimits_ConnectedDirectoriesCurrentCount = &sDirectoryLimits_ConnectedDirectoriesCurrentCount
+var DirectoryLimits_ConnectedDirectoriesLimitReached = &sDirectoryLimits_ConnectedDirectoriesLimitReached
+
+var _DirectoryName = &s_DirectoryName
+
+var DirectoryNotSharedException = &sDirectoryNotSharedException
+var DirectoryNotSharedException_Message = &sDirectoryNotSharedException_Message
+var DirectoryNotSharedException_RequestId = &sDirectoryNotSharedException_RequestId
+
+var _DirectoryShortName = &s_DirectoryShortName
+
+var DirectorySize = &sDirectorySize
+var DirectorySize_SMALL = &sDirectorySize_SMALL
+var DirectorySize_LARGE = &sDirectorySize_LARGE
+
+var DirectorySizeUpdateSettings = &sDirectorySizeUpdateSettings
+var DirectorySizeUpdateSettings_DirectorySize = &sDirectorySizeUpdateSettings_DirectorySize
+
+var DirectoryStage = &sDirectoryStage
+var DirectoryStage_REQUESTED = &sDirectoryStage_REQUESTED
+var DirectoryStage_CREATING = &sDirectoryStage_CREATING
+var DirectoryStage_CREATED = &sDirectoryStage_CREATED
+var DirectoryStage_ACTIVE = &sDirectoryStage_ACTIVE
+var DirectoryStage_INOPERABLE = &sDirectoryStage_INOPERABLE
+var DirectoryStage_IMPAIRED = &sDirectoryStage_IMPAIRED
+var DirectoryStage_RESTORING = &sDirectoryStage_RESTORING
+var DirectoryStage_RESTOREFAILED = &sDirectoryStage_RESTOREFAILED
+var DirectoryStage_DELETING = &sDirectoryStage_DELETING
+var DirectoryStage_DELETED = &sDirectoryStage_DELETED
+var DirectoryStage_FAILED = &sDirectoryStage_FAILED
+var DirectoryStage_UPDATING = &sDirectoryStage_UPDATING
+
+var DirectoryType = &sDirectoryType
+var DirectoryType_SIMPLE_AD = &sDirectoryType_SIMPLE_AD
+var DirectoryType_AD_CONNECTOR = &sDirectoryType_AD_CONNECTOR
+var DirectoryType_MICROSOFT_AD = &sDirectoryType_MICROSOFT_AD
+var DirectoryType_SHARED_MICROSOFT_AD = &sDirectoryType_SHARED_MICROSOFT_AD
+
+var DirectoryUnavailableException = &sDirectoryUnavailableException
+var DirectoryUnavailableException_Message = &sDirectoryUnavailableException_Message
+var DirectoryUnavailableException_RequestId = &sDirectoryUnavailableException_RequestId
+
+var DirectoryVpcSettings = &sDirectoryVpcSettings
+var DirectoryVpcSettings_VpcId = &sDirectoryVpcSettings_VpcId
+var DirectoryVpcSettings_SubnetIds = &sDirectoryVpcSettings_SubnetIds
+
+var DirectoryVpcSettingsDescription = &sDirectoryVpcSettingsDescription
+var DirectoryVpcSettingsDescription_VpcId = &sDirectoryVpcSettingsDescription_VpcId
+var DirectoryVpcSettingsDescription_SubnetIds = &sDirectoryVpcSettingsDescription_SubnetIds
+var DirectoryVpcSettingsDescription_SecurityGroupId = &sDirectoryVpcSettingsDescription_SecurityGroupId
+var DirectoryVpcSettingsDescription_AvailabilityZones = &sDirectoryVpcSettingsDescription_AvailabilityZones
+
+var DisableAlreadyInProgressException = &sDisableAlreadyInProgressException
+var DisableAlreadyInProgressException_Message = &sDisableAlreadyInProgressException_Message
+var DisableAlreadyInProgressException_RequestId = &sDisableAlreadyInProgressException_RequestId
+
+var _DnsIpAddrs = &s_DnsIpAddrs
+var _DnsIpAddrs_member = &s_DnsIpAddrs_member
+
+var _DnsIpv6Addrs = &s_DnsIpv6Addrs
+var _DnsIpv6Addrs_member = &s_DnsIpv6Addrs_member
+
+var DomainController = &sDomainController
+var DomainController_DirectoryId = &sDomainController_DirectoryId
+var DomainController_DomainControllerId = &sDomainController_DomainControllerId
+var DomainController_DnsIpAddr = &sDomainController_DnsIpAddr
+var DomainController_DnsIpv6Addr = &sDomainController_DnsIpv6Addr
+var DomainController_VpcId = &sDomainController_VpcId
+var DomainController_SubnetId = &sDomainController_SubnetId
+var DomainController_AvailabilityZone = &sDomainController_AvailabilityZone
+var DomainController_Status = &sDomainController_Status
+var DomainController_StatusReason = &sDomainController_StatusReason
+var DomainController_LaunchTime = &sDomainController_LaunchTime
+var DomainController_StatusLastUpdatedDateTime = &sDomainController_StatusLastUpdatedDateTime
+
+var _DomainControllerId = &s_DomainControllerId
+
+var _DomainControllerIds = &s_DomainControllerIds
+var _DomainControllerIds_member = &s_DomainControllerIds_member
+
+var DomainControllerLimitExceededException = &sDomainControllerLimitExceededException
+var DomainControllerLimitExceededException_Message = &sDomainControllerLimitExceededException_Message
+var DomainControllerLimitExceededException_RequestId = &sDomainControllerLimitExceededException_RequestId
+
+var _DomainControllers = &s_DomainControllers
+var _DomainControllers_member = &s_DomainControllers_member
+
+var DomainControllerStatus = &sDomainControllerStatus
+var DomainControllerStatus_CREATING = &sDomainControllerStatus_CREATING
+var DomainControllerStatus_ACTIVE = &sDomainControllerStatus_ACTIVE
+var DomainControllerStatus_IMPAIRED = &sDomainControllerStatus_IMPAIRED
+var DomainControllerStatus_RESTORING = &sDomainControllerStatus_RESTORING
+var DomainControllerStatus_DELETING = &sDomainControllerStatus_DELETING
+var DomainControllerStatus_DELETED = &sDomainControllerStatus_DELETED
+var DomainControllerStatus_FAILED = &sDomainControllerStatus_FAILED
+var DomainControllerStatus_UPDATING = &sDomainControllerStatus_UPDATING
+
+var _DomainControllerStatusReason = &s_DomainControllerStatusReason
+
+var EnableAlreadyInProgressException = &sEnableAlreadyInProgressException
+var EnableAlreadyInProgressException_Message = &sEnableAlreadyInProgressException_Message
+var EnableAlreadyInProgressException_RequestId = &sEnableAlreadyInProgressException_RequestId
+
+var _EndDateTime = &s_EndDateTime
+
+var EntityAlreadyExistsException = &sEntityAlreadyExistsException
+var EntityAlreadyExistsException_Message = &sEntityAlreadyExistsException_Message
+var EntityAlreadyExistsException_RequestId = &sEntityAlreadyExistsException_RequestId
+
+var EntityDoesNotExistException = &sEntityDoesNotExistException
+var EntityDoesNotExistException_Message = &sEntityDoesNotExistException_Message
+var EntityDoesNotExistException_RequestId = &sEntityDoesNotExistException_RequestId
+
+var EventTopic = &sEventTopic
+var EventTopic_DirectoryId = &sEventTopic_DirectoryId
+var EventTopic_TopicName = &sEventTopic_TopicName
+var EventTopic_TopicArn = &sEventTopic_TopicArn
+var EventTopic_CreatedDateTime = &sEventTopic_CreatedDateTime
+var EventTopic_Status = &sEventTopic_Status
+
+var _EventTopics = &s_EventTopics
+var _EventTopics_member = &s_EventTopics_member
+
+var _ExceptionMessage = &s_ExceptionMessage
+
+var HybridAdministratorAccountUpdate = &sHybridAdministratorAccountUpdate
+var HybridAdministratorAccountUpdate_SecretArn = &sHybridAdministratorAccountUpdate_SecretArn
+
+var HybridCustomerInstancesSettings = &sHybridCustomerInstancesSettings
+var HybridCustomerInstancesSettings_CustomerDnsIps = &sHybridCustomerInstancesSettings_CustomerDnsIps
+var HybridCustomerInstancesSettings_InstanceIds = &sHybridCustomerInstancesSettings_InstanceIds
+
+var HybridSettingsDescription = &sHybridSettingsDescription
+var HybridSettingsDescription_SelfManagedDnsIpAddrs = &sHybridSettingsDescription_SelfManagedDnsIpAddrs
+var HybridSettingsDescription_SelfManagedInstanceIds = &sHybridSettingsDescription_SelfManagedInstanceIds
+
+var HybridUpdateActivities = &sHybridUpdateActivities
+var HybridUpdateActivities_SelfManagedInstances = &sHybridUpdateActivities_SelfManagedInstances
+var HybridUpdateActivities_HybridAdministratorAccount = &sHybridUpdateActivities_HybridAdministratorAccount
+
+var _HybridUpdateInfoEntries = &s_HybridUpdateInfoEntries
+var _HybridUpdateInfoEntries_member = &s_HybridUpdateInfoEntries_member
+
+var HybridUpdateInfoEntry = &sHybridUpdateInfoEntry
+var HybridUpdateInfoEntry_Status = &sHybridUpdateInfoEntry_Status
+var HybridUpdateInfoEntry_StatusReason = &sHybridUpdateInfoEntry_StatusReason
+var HybridUpdateInfoEntry_InitiatedBy = &sHybridUpdateInfoEntry_InitiatedBy
+var HybridUpdateInfoEntry_NewValue = &sHybridUpdateInfoEntry_NewValue
+var HybridUpdateInfoEntry_PreviousValue = &sHybridUpdateInfoEntry_PreviousValue
+var HybridUpdateInfoEntry_StartTime = &sHybridUpdateInfoEntry_StartTime
+var HybridUpdateInfoEntry_LastUpdatedDateTime = &sHybridUpdateInfoEntry_LastUpdatedDateTime
+var HybridUpdateInfoEntry_AssessmentId = &sHybridUpdateInfoEntry_AssessmentId
+
+var HybridUpdateType = &sHybridUpdateType
+var HybridUpdateType_SELF_MANAGED_INSTANCES = &sHybridUpdateType_SELF_MANAGED_INSTANCES
+var HybridUpdateType_HYBRID_ADMINISTRATOR_ACCOUNT = &sHybridUpdateType_HYBRID_ADMINISTRATOR_ACCOUNT
+
+var HybridUpdateValue = &sHybridUpdateValue
+var HybridUpdateValue_InstanceIds = &sHybridUpdateValue_InstanceIds
+var HybridUpdateValue_DnsIps = &sHybridUpdateValue_DnsIps
+
+var IncompatibleSettingsException = &sIncompatibleSettingsException
+var IncompatibleSettingsException_Message = &sIncompatibleSettingsException_Message
+var IncompatibleSettingsException_RequestId = &sIncompatibleSettingsException_RequestId
+
+var _InitiatedBy = &s_InitiatedBy
+
+var InsufficientPermissionsException = &sInsufficientPermissionsException
+var InsufficientPermissionsException_Message = &sInsufficientPermissionsException_Message
+var InsufficientPermissionsException_RequestId = &sInsufficientPermissionsException_RequestId
+
+var InvalidCertificateException = &sInvalidCertificateException
+var InvalidCertificateException_Message = &sInvalidCertificateException_Message
+var InvalidCertificateException_RequestId = &sInvalidCertificateException_RequestId
+
+var InvalidClientAuthStatusException = &sInvalidClientAuthStatusException
+var InvalidClientAuthStatusException_Message = &sInvalidClientAuthStatusException_Message
+var InvalidClientAuthStatusException_RequestId = &sInvalidClientAuthStatusException_RequestId
+
+var InvalidLDAPSStatusException = &sInvalidLDAPSStatusException
+var InvalidLDAPSStatusException_Message = &sInvalidLDAPSStatusException_Message
+var InvalidLDAPSStatusException_RequestId = &sInvalidLDAPSStatusException_RequestId
+
+var InvalidNextTokenException = &sInvalidNextTokenException
+var InvalidNextTokenException_Message = &sInvalidNextTokenException_Message
+var InvalidNextTokenException_RequestId = &sInvalidNextTokenException_RequestId
+
+var InvalidParameterException = &sInvalidParameterException
+var InvalidParameterException_Message = &sInvalidParameterException_Message
+var InvalidParameterException_RequestId = &sInvalidParameterException_RequestId
+
+var InvalidPasswordException = &sInvalidPasswordException
+var InvalidPasswordException_Message = &sInvalidPasswordException_Message
+var InvalidPasswordException_RequestId = &sInvalidPasswordException_RequestId
+
+var InvalidTargetException = &sInvalidTargetException
+var InvalidTargetException_Message = &sInvalidTargetException_Message
+var InvalidTargetException_RequestId = &sInvalidTargetException_RequestId
+
+var _IpAddr = &s_IpAddr
+
+var _IpAddrs = &s_IpAddrs
+var _IpAddrs_member = &s_IpAddrs_member
+
+var IpRoute = &sIpRoute
+var IpRoute_CidrIp = &sIpRoute_CidrIp
+var IpRoute_CidrIpv6 = &sIpRoute_CidrIpv6
+var IpRoute_Description = &sIpRoute_Description
+
+var IpRouteInfo = &sIpRouteInfo
+var IpRouteInfo_DirectoryId = &sIpRouteInfo_DirectoryId
+var IpRouteInfo_CidrIp = &sIpRouteInfo_CidrIp
+var IpRouteInfo_CidrIpv6 = &sIpRouteInfo_CidrIpv6
+var IpRouteInfo_IpRouteStatusMsg = &sIpRouteInfo_IpRouteStatusMsg
+var IpRouteInfo_AddedDateTime = &sIpRouteInfo_AddedDateTime
+var IpRouteInfo_IpRouteStatusReason = &sIpRouteInfo_IpRouteStatusReason
+var IpRouteInfo_Description = &sIpRouteInfo_Description
+
+var IpRouteLimitExceededException = &sIpRouteLimitExceededException
+var IpRouteLimitExceededException_Message = &sIpRouteLimitExceededException_Message
+var IpRouteLimitExceededException_RequestId = &sIpRouteLimitExceededException_RequestId
+
+var _IpRoutes = &s_IpRoutes
+var _IpRoutes_member = &s_IpRoutes_member
+
+var _IpRoutesInfo = &s_IpRoutesInfo
+var _IpRoutesInfo_member = &s_IpRoutesInfo_member
+
+var IpRouteStatusMsg = &sIpRouteStatusMsg
+var IpRouteStatusMsg_ADDING = &sIpRouteStatusMsg_ADDING
+var IpRouteStatusMsg_ADDED = &sIpRouteStatusMsg_ADDED
+var IpRouteStatusMsg_REMOVING = &sIpRouteStatusMsg_REMOVING
+var IpRouteStatusMsg_REMOVED = &sIpRouteStatusMsg_REMOVED
+var IpRouteStatusMsg_ADD_FAILED = &sIpRouteStatusMsg_ADD_FAILED
+var IpRouteStatusMsg_REMOVE_FAILED = &sIpRouteStatusMsg_REMOVE_FAILED
+
+var _IpRouteStatusReason = &s_IpRouteStatusReason
+
+var _Ipv6Addr = &s_Ipv6Addr
+
+var _IpV6Addrs = &s_IpV6Addrs
+var _IpV6Addrs_member = &s_IpV6Addrs_member
+
+var _LastUpdateDateTime = &s_LastUpdateDateTime
+
+var _LastUpdatedDateTime = &s_LastUpdatedDateTime
+
+var _LaunchTime = &s_LaunchTime
+
+var LDAPSSettingInfo = &sLDAPSSettingInfo
+var LDAPSSettingInfo_LDAPSStatus = &sLDAPSSettingInfo_LDAPSStatus
+var LDAPSSettingInfo_LDAPSStatusReason = &sLDAPSSettingInfo_LDAPSStatusReason
+var LDAPSSettingInfo_LastUpdatedDateTime = &sLDAPSSettingInfo_LastUpdatedDateTime
+
+var _LDAPSSettingsInfo = &s_LDAPSSettingsInfo
+var _LDAPSSettingsInfo_member = &s_LDAPSSettingsInfo_member
+
+var LDAPSStatus = &sLDAPSStatus
+var LDAPSStatus_ENABLING = &sLDAPSStatus_ENABLING
+var LDAPSStatus_ENABLED = &sLDAPSStatus_ENABLED
+var LDAPSStatus_ENABLE_FAILED = &sLDAPSStatus_ENABLE_FAILED
+var LDAPSStatus_DISABLED = &sLDAPSStatus_DISABLED
+
+var _LDAPSStatusReason = &s_LDAPSStatusReason
+
+var LDAPSType = &sLDAPSType
+var LDAPSType_CLIENT = &sLDAPSType_CLIENT
+
+var _LdifContent = &s_LdifContent
+
+var _Limit = &s_Limit
+
+var _LogGroupName = &s_LogGroupName
+
+var LogSubscription = &sLogSubscription
+var LogSubscription_DirectoryId = &sLogSubscription_DirectoryId
+var LogSubscription_LogGroupName = &sLogSubscription_LogGroupName
+var LogSubscription_SubscriptionCreatedDateTime = &sLogSubscription_SubscriptionCreatedDateTime
+
+var _LogSubscriptions = &s_LogSubscriptions
+var _LogSubscriptions_member = &s_LogSubscriptions_member
+
+var _ManualSnapshotsLimitReached = &s_ManualSnapshotsLimitReached
+
+var NetworkType = &sNetworkType
+var NetworkType_DUAL_STACK = &sNetworkType_DUAL_STACK
+var NetworkType_IPV4_ONLY = &sNetworkType_IPV4_ONLY
+var NetworkType_IPV6_ONLY = &sNetworkType_IPV6_ONLY
+
+var NetworkUpdateSettings = &sNetworkUpdateSettings
+var NetworkUpdateSettings_NetworkType = &sNetworkUpdateSettings_NetworkType
+var NetworkUpdateSettings_CustomerDnsIpsV6 = &sNetworkUpdateSettings_CustomerDnsIpsV6
+
+var _NextToken = &s_NextToken
+
+var NoAvailableCertificateException = &sNoAvailableCertificateException
+var NoAvailableCertificateException_Message = &sNoAvailableCertificateException_Message
+var NoAvailableCertificateException_RequestId = &sNoAvailableCertificateException_RequestId
+
+var _Notes = &s_Notes
+
+var _OCSPUrl = &s_OCSPUrl
+
+var _OrganizationalUnitDN = &s_OrganizationalUnitDN
+
+var OrganizationsException = &sOrganizationsException
+var OrganizationsException_Message = &sOrganizationsException_Message
+var OrganizationsException_RequestId = &sOrganizationsException_RequestId
+
+var OSUpdateSettings = &sOSUpdateSettings
+var OSUpdateSettings_OSVersion = &sOSUpdateSettings_OSVersion
+
+var OSVersion = &sOSVersion
+var OSVersion_VERSION_2012 = &sOSVersion_VERSION_2012
+var OSVersion_VERSION_2019 = &sOSVersion_VERSION_2019
+
+var OwnerDirectoryDescription = &sOwnerDirectoryDescription
+var OwnerDirectoryDescription_DirectoryId = &sOwnerDirectoryDescription_DirectoryId
+var OwnerDirectoryDescription_AccountId = &sOwnerDirectoryDescription_AccountId
+var OwnerDirectoryDescription_DnsIpAddrs = &sOwnerDirectoryDescription_DnsIpAddrs
+var OwnerDirectoryDescription_DnsIpv6Addrs = &sOwnerDirectoryDescription_DnsIpv6Addrs
+var OwnerDirectoryDescription_VpcSettings = &sOwnerDirectoryDescription_VpcSettings
+var OwnerDirectoryDescription_RadiusSettings = &sOwnerDirectoryDescription_RadiusSettings
+var OwnerDirectoryDescription_RadiusStatus = &sOwnerDirectoryDescription_RadiusStatus
+var OwnerDirectoryDescription_NetworkType = &sOwnerDirectoryDescription_NetworkType
+
+var _PageLimit = &s_PageLimit
+
+var _Password = &s_Password
+
+var _PcaConnectorArn = &s_PcaConnectorArn
+
+var _PortNumber = &s_PortNumber
+
+var RadiusAuthenticationProtocol = &sRadiusAuthenticationProtocol
+var RadiusAuthenticationProtocol_PAP = &sRadiusAuthenticationProtocol_PAP
+var RadiusAuthenticationProtocol_CHAP = &sRadiusAuthenticationProtocol_CHAP
+var RadiusAuthenticationProtocol_MSCHAPV1 = &sRadiusAuthenticationProtocol_MSCHAPV1
+var RadiusAuthenticationProtocol_MSCHAPV2 = &sRadiusAuthenticationProtocol_MSCHAPV2
+
+var _RadiusDisplayLabel = &s_RadiusDisplayLabel
+
+var _RadiusRetries = &s_RadiusRetries
+
+var RadiusSettings = &sRadiusSettings
+var RadiusSettings_RadiusServers = &sRadiusSettings_RadiusServers
+var RadiusSettings_RadiusServersIpv6 = &sRadiusSettings_RadiusServersIpv6
+var RadiusSettings_RadiusPort = &sRadiusSettings_RadiusPort
+var RadiusSettings_RadiusTimeout = &sRadiusSettings_RadiusTimeout
+var RadiusSettings_RadiusRetries = &sRadiusSettings_RadiusRetries
+var RadiusSettings_SharedSecret = &sRadiusSettings_SharedSecret
+var RadiusSettings_AuthenticationProtocol = &sRadiusSettings_AuthenticationProtocol
+var RadiusSettings_DisplayLabel = &sRadiusSettings_DisplayLabel
+var RadiusSettings_UseSameUsername = &sRadiusSettings_UseSameUsername
+
+var _RadiusSharedSecret = &s_RadiusSharedSecret
+
+var RadiusStatus = &sRadiusStatus
+var RadiusStatus_CREATING = &sRadiusStatus_CREATING
+var RadiusStatus_COMPLETED = &sRadiusStatus_COMPLETED
+var RadiusStatus_FAILED = &sRadiusStatus_FAILED
+
+var _RadiusTimeout = &s_RadiusTimeout
+
+var RegionDescription = &sRegionDescription
+var RegionDescription_DirectoryId = &sRegionDescription_DirectoryId
+var RegionDescription_RegionName = &sRegionDescription_RegionName
+var RegionDescription_RegionType = &sRegionDescription_RegionType
+var RegionDescription_Status = &sRegionDescription_Status
+var RegionDescription_VpcSettings = &sRegionDescription_VpcSettings
+var RegionDescription_DesiredNumberOfDomainControllers = &sRegionDescription_DesiredNumberOfDomainControllers
+var RegionDescription_LaunchTime = &sRegionDescription_LaunchTime
+var RegionDescription_StatusLastUpdatedDateTime = &sRegionDescription_StatusLastUpdatedDateTime
+var RegionDescription_LastUpdatedDateTime = &sRegionDescription_LastUpdatedDateTime
+
+var RegionLimitExceededException = &sRegionLimitExceededException
+var RegionLimitExceededException_Message = &sRegionLimitExceededException_Message
+var RegionLimitExceededException_RequestId = &sRegionLimitExceededException_RequestId
+
+var _RegionName = &s_RegionName
+
+var _RegionsDescription = &s_RegionsDescription
+var _RegionsDescription_member = &s_RegionsDescription_member
+
+var RegionsInfo = &sRegionsInfo
+var RegionsInfo_PrimaryRegion = &sRegionsInfo_PrimaryRegion
+var RegionsInfo_AdditionalRegions = &sRegionsInfo_AdditionalRegions
+
+var RegionType = &sRegionType
+var RegionType_PRIMARY = &sRegionType_PRIMARY
+var RegionType_ADDITIONAL = &sRegionType_ADDITIONAL
+
+var _RemoteDomainName = &s_RemoteDomainName
+
+var _RemoteDomainNames = &s_RemoteDomainNames
+var _RemoteDomainNames_member = &s_RemoteDomainNames_member
+
+var ReplicationScope = &sReplicationScope
+var ReplicationScope_Domain = &sReplicationScope_Domain
+
+var _RequestId = &s_RequestId
+
+var _ResourceId = &s_ResourceId
+
+var _SchemaExtensionId = &s_SchemaExtensionId
+
+var SchemaExtensionInfo = &sSchemaExtensionInfo
+var SchemaExtensionInfo_DirectoryId = &sSchemaExtensionInfo_DirectoryId
+var SchemaExtensionInfo_SchemaExtensionId = &sSchemaExtensionInfo_SchemaExtensionId
+var SchemaExtensionInfo_Description = &sSchemaExtensionInfo_Description
+var SchemaExtensionInfo_SchemaExtensionStatus = &sSchemaExtensionInfo_SchemaExtensionStatus
+var SchemaExtensionInfo_SchemaExtensionStatusReason = &sSchemaExtensionInfo_SchemaExtensionStatusReason
+var SchemaExtensionInfo_StartDateTime = &sSchemaExtensionInfo_StartDateTime
+var SchemaExtensionInfo_EndDateTime = &sSchemaExtensionInfo_EndDateTime
+
+var _SchemaExtensionsInfo = &s_SchemaExtensionsInfo
+var _SchemaExtensionsInfo_member = &s_SchemaExtensionsInfo_member
+
+var SchemaExtensionStatus = &sSchemaExtensionStatus
+var SchemaExtensionStatus_INITIALIZING = &sSchemaExtensionStatus_INITIALIZING
+var SchemaExtensionStatus_CREATING_SNAPSHOT = &sSchemaExtensionStatus_CREATING_SNAPSHOT
+var SchemaExtensionStatus_UPDATING_SCHEMA = &sSchemaExtensionStatus_UPDATING_SCHEMA
+var SchemaExtensionStatus_REPLICATING = &sSchemaExtensionStatus_REPLICATING
+var SchemaExtensionStatus_CANCEL_IN_PROGRESS = &sSchemaExtensionStatus_CANCEL_IN_PROGRESS
+var SchemaExtensionStatus_ROLLBACK_IN_PROGRESS = &sSchemaExtensionStatus_ROLLBACK_IN_PROGRESS
+var SchemaExtensionStatus_CANCELLED = &sSchemaExtensionStatus_CANCELLED
+var SchemaExtensionStatus_FAILED = &sSchemaExtensionStatus_FAILED
+var SchemaExtensionStatus_COMPLETED = &sSchemaExtensionStatus_COMPLETED
+
+var _SchemaExtensionStatusReason = &s_SchemaExtensionStatusReason
+
+var _SecretArn = &s_SecretArn
+
+var _SecurityGroupId = &s_SecurityGroupId
+
+var _SecurityGroupIds = &s_SecurityGroupIds
+var _SecurityGroupIds_member = &s_SecurityGroupIds_member
+
+var SelectiveAuth = &sSelectiveAuth
+var SelectiveAuth_ENABLED = &sSelectiveAuth_ENABLED
+var SelectiveAuth_DISABLED = &sSelectiveAuth_DISABLED
+
+var _Server = &s_Server
+
+var _Servers = &s_Servers
+var _Servers_member = &s_Servers_member
+
+var ServiceException = &sServiceException
+var ServiceException_Message = &sServiceException_Message
+var ServiceException_RequestId = &sServiceException_RequestId
+
+var Setting = &sSetting
+var Setting_Name = &sSetting_Name
+var Setting_Value = &sSetting_Value
+
+var _SettingEntries = &s_SettingEntries
+var _SettingEntries_member = &s_SettingEntries_member
+
+var SettingEntry = &sSettingEntry
+var SettingEntry_Type = &sSettingEntry_Type
+var SettingEntry_Name = &sSettingEntry_Name
+var SettingEntry_AllowedValues = &sSettingEntry_AllowedValues
+var SettingEntry_AppliedValue = &sSettingEntry_AppliedValue
+var SettingEntry_RequestedValue = &sSettingEntry_RequestedValue
+var SettingEntry_RequestStatus = &sSettingEntry_RequestStatus
+var SettingEntry_RequestDetailedStatus = &sSettingEntry_RequestDetailedStatus
+var SettingEntry_RequestStatusMessage = &sSettingEntry_RequestStatusMessage
+var SettingEntry_LastUpdatedDateTime = &sSettingEntry_LastUpdatedDateTime
+var SettingEntry_LastRequestedDateTime = &sSettingEntry_LastRequestedDateTime
+var SettingEntry_DataType = &sSettingEntry_DataType
+
+var _Settings = &s_Settings
+var _Settings_member = &s_Settings_member
+
+var _SharedDirectories = &s_SharedDirectories
+var _SharedDirectories_member = &s_SharedDirectories_member
+
+var SharedDirectory = &sSharedDirectory
+var SharedDirectory_OwnerAccountId = &sSharedDirectory_OwnerAccountId
+var SharedDirectory_OwnerDirectoryId = &sSharedDirectory_OwnerDirectoryId
+var SharedDirectory_ShareMethod = &sSharedDirectory_ShareMethod
+var SharedDirectory_SharedAccountId = &sSharedDirectory_SharedAccountId
+var SharedDirectory_SharedDirectoryId = &sSharedDirectory_SharedDirectoryId
+var SharedDirectory_ShareStatus = &sSharedDirectory_ShareStatus
+var SharedDirectory_ShareNotes = &sSharedDirectory_ShareNotes
+var SharedDirectory_CreatedDateTime = &sSharedDirectory_CreatedDateTime
+var SharedDirectory_LastUpdatedDateTime = &sSharedDirectory_LastUpdatedDateTime
+
+var ShareLimitExceededException = &sShareLimitExceededException
+var ShareLimitExceededException_Message = &sShareLimitExceededException_Message
+var ShareLimitExceededException_RequestId = &sShareLimitExceededException_RequestId
+
+var ShareMethod = &sShareMethod
+var ShareMethod_ORGANIZATIONS = &sShareMethod_ORGANIZATIONS
+var ShareMethod_HANDSHAKE = &sShareMethod_HANDSHAKE
+
+var ShareStatus = &sShareStatus
+var ShareStatus_SHARED = &sShareStatus_SHARED
+var ShareStatus_PENDING_ACCEPTANCE = &sShareStatus_PENDING_ACCEPTANCE
+var ShareStatus_REJECTED = &sShareStatus_REJECTED
+var ShareStatus_REJECTING = &sShareStatus_REJECTING
+var ShareStatus_REJECT_FAILED = &sShareStatus_REJECT_FAILED
+var ShareStatus_SHARING = &sShareStatus_SHARING
+var ShareStatus_SHARE_FAILED = &sShareStatus_SHARE_FAILED
+var ShareStatus_DELETED = &sShareStatus_DELETED
+var ShareStatus_DELETING = &sShareStatus_DELETING
+
+var ShareTarget = &sShareTarget
+var ShareTarget_Id = &sShareTarget_Id
+var ShareTarget_Type = &sShareTarget_Type
+
+var _SID = &s_SID
+
+var Snapshot = &sSnapshot
+var Snapshot_DirectoryId = &sSnapshot_DirectoryId
+var Snapshot_SnapshotId = &sSnapshot_SnapshotId
+var Snapshot_Type = &sSnapshot_Type
+var Snapshot_Name = &sSnapshot_Name
+var Snapshot_Status = &sSnapshot_Status
+var Snapshot_StartTime = &sSnapshot_StartTime
+
+var _SnapshotId = &s_SnapshotId
+
+var _SnapshotIds = &s_SnapshotIds
+var _SnapshotIds_member = &s_SnapshotIds_member
+
+var SnapshotLimitExceededException = &sSnapshotLimitExceededException
+var SnapshotLimitExceededException_Message = &sSnapshotLimitExceededException_Message
+var SnapshotLimitExceededException_RequestId = &sSnapshotLimitExceededException_RequestId
+
+var SnapshotLimits = &sSnapshotLimits
+var SnapshotLimits_ManualSnapshotsLimit = &sSnapshotLimits_ManualSnapshotsLimit
+var SnapshotLimits_ManualSnapshotsCurrentCount = &sSnapshotLimits_ManualSnapshotsCurrentCount
+var SnapshotLimits_ManualSnapshotsLimitReached = &sSnapshotLimits_ManualSnapshotsLimitReached
+
+var _SnapshotName = &s_SnapshotName
+
+var _Snapshots = &s_Snapshots
+var _Snapshots_member = &s_Snapshots_member
+
+var SnapshotStatus = &sSnapshotStatus
+var SnapshotStatus_CREATING = &sSnapshotStatus_CREATING
+var SnapshotStatus_COMPLETED = &sSnapshotStatus_COMPLETED
+var SnapshotStatus_FAILED = &sSnapshotStatus_FAILED
+
+var SnapshotType = &sSnapshotType
+var SnapshotType_AUTO = &sSnapshotType_AUTO
+var SnapshotType_MANUAL = &sSnapshotType_MANUAL
+
+var _SsoEnabled = &s_SsoEnabled
+
+var _StageReason = &s_StageReason
+
+var _StartDateTime = &s_StartDateTime
+
+var _StartTime = &s_StartTime
+
+var _StateLastUpdatedDateTime = &s_StateLastUpdatedDateTime
+
+var _SubnetId = &s_SubnetId
+
+var _SubnetIds = &s_SubnetIds
+var _SubnetIds_member = &s_SubnetIds_member
+
+var _SubscriptionCreatedDateTime = &s_SubscriptionCreatedDateTime
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var _TagKey = &s_TagKey
+
+var _TagKeys = &s_TagKeys
+var _TagKeys_member = &s_TagKeys_member
+
+var TagLimitExceededException = &sTagLimitExceededException
+var TagLimitExceededException_Message = &sTagLimitExceededException_Message
+var TagLimitExceededException_RequestId = &sTagLimitExceededException_RequestId
+
+var _Tags = &s_Tags
+var _Tags_member = &s_Tags_member
+
+var _TagValue = &s_TagValue
+
+var _TargetId = &s_TargetId
+
+var TargetType = &sTargetType
+var TargetType_ACCOUNT = &sTargetType_ACCOUNT
+
+var _TopicArn = &s_TopicArn
+
+var _TopicName = &s_TopicName
+
+var _TopicNames = &s_TopicNames
+var _TopicNames_member = &s_TopicNames_member
+
+var TopicStatus = &sTopicStatus
+var TopicStatus_REGISTERED = &sTopicStatus_REGISTERED
+var TopicStatus_TOPIC_NOT_FOUND = &sTopicStatus_TOPIC_NOT_FOUND
+var TopicStatus_FAILED = &sTopicStatus_FAILED
+var TopicStatus_DELETED = &sTopicStatus_DELETED
+
+var Trust = &sTrust
+var Trust_DirectoryId = &sTrust_DirectoryId
+var Trust_TrustId = &sTrust_TrustId
+var Trust_RemoteDomainName = &sTrust_RemoteDomainName
+var Trust_TrustType = &sTrust_TrustType
+var Trust_TrustDirection = &sTrust_TrustDirection
+var Trust_TrustState = &sTrust_TrustState
+var Trust_CreatedDateTime = &sTrust_CreatedDateTime
+var Trust_LastUpdatedDateTime = &sTrust_LastUpdatedDateTime
+var Trust_StateLastUpdatedDateTime = &sTrust_StateLastUpdatedDateTime
+var Trust_TrustStateReason = &sTrust_TrustStateReason
+var Trust_SelectiveAuth = &sTrust_SelectiveAuth
+
+var TrustDirection = &sTrustDirection
+var TrustDirection_ONE_WAY_OUTGOING = &sTrustDirection_ONE_WAY_OUTGOING
+var TrustDirection_ONE_WAY_INCOMING = &sTrustDirection_ONE_WAY_INCOMING
+var TrustDirection_TWO_WAY = &sTrustDirection_TWO_WAY
+
+var _TrustId = &s_TrustId
+
+var _TrustIds = &s_TrustIds
+var _TrustIds_member = &s_TrustIds_member
+
+var _TrustPassword = &s_TrustPassword
+
+var _Trusts = &s_Trusts
+var _Trusts_member = &s_Trusts_member
+
+var TrustState = &sTrustState
+var TrustState_CREATING = &sTrustState_CREATING
+var TrustState_CREATED = &sTrustState_CREATED
+var TrustState_VERIFYING = &sTrustState_VERIFYING
+var TrustState_VERIFY_FAILED = &sTrustState_VERIFY_FAILED
+var TrustState_VERIFIED = &sTrustState_VERIFIED
+var TrustState_UPDATING = &sTrustState_UPDATING
+var TrustState_UPDATE_FAILED = &sTrustState_UPDATE_FAILED
+var TrustState_UPDATED = &sTrustState_UPDATED
+var TrustState_DELETING = &sTrustState_DELETING
+var TrustState_DELETED = &sTrustState_DELETED
+var TrustState_FAILED = &sTrustState_FAILED
+
+var _TrustStateReason = &s_TrustStateReason
+
+var TrustType = &sTrustType
+var TrustType_FOREST = &sTrustType_FOREST
+var TrustType_EXTERNAL = &sTrustType_EXTERNAL
+
+var UnshareTarget = &sUnshareTarget
+var UnshareTarget_Id = &sUnshareTarget_Id
+var UnshareTarget_Type = &sUnshareTarget_Type
+
+var UnsupportedOperationException = &sUnsupportedOperationException
+var UnsupportedOperationException_Message = &sUnsupportedOperationException_Message
+var UnsupportedOperationException_RequestId = &sUnsupportedOperationException_RequestId
+
+var UnsupportedSettingsException = &sUnsupportedSettingsException
+var UnsupportedSettingsException_Message = &sUnsupportedSettingsException_Message
+var UnsupportedSettingsException_RequestId = &sUnsupportedSettingsException_RequestId
+
+var _UpdateActivities = &s_UpdateActivities
+var _UpdateActivities_member = &s_UpdateActivities_member
+
+var UpdateInfoEntry = &sUpdateInfoEntry
+var UpdateInfoEntry_Region = &sUpdateInfoEntry_Region
+var UpdateInfoEntry_Status = &sUpdateInfoEntry_Status
+var UpdateInfoEntry_StatusReason = &sUpdateInfoEntry_StatusReason
+var UpdateInfoEntry_InitiatedBy = &sUpdateInfoEntry_InitiatedBy
+var UpdateInfoEntry_NewValue = &sUpdateInfoEntry_NewValue
+var UpdateInfoEntry_PreviousValue = &sUpdateInfoEntry_PreviousValue
+var UpdateInfoEntry_StartTime = &sUpdateInfoEntry_StartTime
+var UpdateInfoEntry_LastUpdatedDateTime = &sUpdateInfoEntry_LastUpdatedDateTime
+
+var _UpdateSecurityGroupForDirectoryControllers = &s_UpdateSecurityGroupForDirectoryControllers
+
+var UpdateStatus = &sUpdateStatus
+var UpdateStatus_UPDATED = &sUpdateStatus_UPDATED
+var UpdateStatus_UPDATING = &sUpdateStatus_UPDATING
+var UpdateStatus_UPDATE_FAILED = &sUpdateStatus_UPDATE_FAILED
+
+var _UpdateStatusReason = &s_UpdateStatusReason
+
+var UpdateType = &sUpdateType
+var UpdateType_OS = &sUpdateType_OS
+var UpdateType_NETWORK = &sUpdateType_NETWORK
+var UpdateType_SIZE = &sUpdateType_SIZE
+
+var UpdateValue = &sUpdateValue
+var UpdateValue_OSUpdateSettings = &sUpdateValue_OSUpdateSettings
+
+var UserDoesNotExistException = &sUserDoesNotExistException
+var UserDoesNotExistException_Message = &sUserDoesNotExistException_Message
+var UserDoesNotExistException_RequestId = &sUserDoesNotExistException_RequestId
+
+var _UserName = &s_UserName
+
+var _UserPassword = &s_UserPassword
+
+var _UseSameUsername = &s_UseSameUsername
+
+var _VpcId = &s_VpcId
+
+var AcceptSharedDirectoryRequest = &sAcceptSharedDirectoryRequest
+var AcceptSharedDirectoryRequest_SharedDirectoryId = &sAcceptSharedDirectoryRequest_SharedDirectoryId
+
+var AcceptSharedDirectoryResult = &sAcceptSharedDirectoryResult
+var AcceptSharedDirectoryResult_SharedDirectory = &sAcceptSharedDirectoryResult_SharedDirectory
+
+var AddIpRoutesRequest = &sAddIpRoutesRequest
+var AddIpRoutesRequest_DirectoryId = &sAddIpRoutesRequest_DirectoryId
+var AddIpRoutesRequest_IpRoutes = &sAddIpRoutesRequest_IpRoutes
+var AddIpRoutesRequest_UpdateSecurityGroupForDirectoryControllers = &sAddIpRoutesRequest_UpdateSecurityGroupForDirectoryControllers
+
+var AddIpRoutesResult = &sAddIpRoutesResult
+
+var AddRegionRequest = &sAddRegionRequest
+var AddRegionRequest_DirectoryId = &sAddRegionRequest_DirectoryId
+var AddRegionRequest_RegionName = &sAddRegionRequest_RegionName
+var AddRegionRequest_VPCSettings = &sAddRegionRequest_VPCSettings
+
+var AddRegionResult = &sAddRegionResult
+
+var AddTagsToResourceRequest = &sAddTagsToResourceRequest
+var AddTagsToResourceRequest_ResourceId = &sAddTagsToResourceRequest_ResourceId
+var AddTagsToResourceRequest_Tags = &sAddTagsToResourceRequest_Tags
+
+var AddTagsToResourceResult = &sAddTagsToResourceResult
+
+var CancelSchemaExtensionRequest = &sCancelSchemaExtensionRequest
+var CancelSchemaExtensionRequest_DirectoryId = &sCancelSchemaExtensionRequest_DirectoryId
+var CancelSchemaExtensionRequest_SchemaExtensionId = &sCancelSchemaExtensionRequest_SchemaExtensionId
+
+var CancelSchemaExtensionResult = &sCancelSchemaExtensionResult
+
+var ConnectDirectoryRequest = &sConnectDirectoryRequest
+var ConnectDirectoryRequest_Name = &sConnectDirectoryRequest_Name
+var ConnectDirectoryRequest_ShortName = &sConnectDirectoryRequest_ShortName
+var ConnectDirectoryRequest_Password = &sConnectDirectoryRequest_Password
+var ConnectDirectoryRequest_Description = &sConnectDirectoryRequest_Description
+var ConnectDirectoryRequest_Size = &sConnectDirectoryRequest_Size
+var ConnectDirectoryRequest_ConnectSettings = &sConnectDirectoryRequest_ConnectSettings
+var ConnectDirectoryRequest_Tags = &sConnectDirectoryRequest_Tags
+var ConnectDirectoryRequest_NetworkType = &sConnectDirectoryRequest_NetworkType
+
+var ConnectDirectoryResult = &sConnectDirectoryResult
+var ConnectDirectoryResult_DirectoryId = &sConnectDirectoryResult_DirectoryId
+
+var CreateAliasRequest = &sCreateAliasRequest
+var CreateAliasRequest_DirectoryId = &sCreateAliasRequest_DirectoryId
+var CreateAliasRequest_Alias = &sCreateAliasRequest_Alias
+
+var CreateAliasResult = &sCreateAliasResult
+var CreateAliasResult_DirectoryId = &sCreateAliasResult_DirectoryId
+var CreateAliasResult_Alias = &sCreateAliasResult_Alias
+
+var CreateComputerRequest = &sCreateComputerRequest
+var CreateComputerRequest_DirectoryId = &sCreateComputerRequest_DirectoryId
+var CreateComputerRequest_ComputerName = &sCreateComputerRequest_ComputerName
+var CreateComputerRequest_Password = &sCreateComputerRequest_Password
+var CreateComputerRequest_OrganizationalUnitDistinguishedName = &sCreateComputerRequest_OrganizationalUnitDistinguishedName
+var CreateComputerRequest_ComputerAttributes = &sCreateComputerRequest_ComputerAttributes
+
+var CreateComputerResult = &sCreateComputerResult
+var CreateComputerResult_Computer = &sCreateComputerResult_Computer
+
+var CreateConditionalForwarderRequest = &sCreateConditionalForwarderRequest
+var CreateConditionalForwarderRequest_DirectoryId = &sCreateConditionalForwarderRequest_DirectoryId
+var CreateConditionalForwarderRequest_RemoteDomainName = &sCreateConditionalForwarderRequest_RemoteDomainName
+var CreateConditionalForwarderRequest_DnsIpAddrs = &sCreateConditionalForwarderRequest_DnsIpAddrs
+var CreateConditionalForwarderRequest_DnsIpv6Addrs = &sCreateConditionalForwarderRequest_DnsIpv6Addrs
+
+var CreateConditionalForwarderResult = &sCreateConditionalForwarderResult
+
+var CreateDirectoryRequest = &sCreateDirectoryRequest
+var CreateDirectoryRequest_Name = &sCreateDirectoryRequest_Name
+var CreateDirectoryRequest_ShortName = &sCreateDirectoryRequest_ShortName
+var CreateDirectoryRequest_Password = &sCreateDirectoryRequest_Password
+var CreateDirectoryRequest_Description = &sCreateDirectoryRequest_Description
+var CreateDirectoryRequest_Size = &sCreateDirectoryRequest_Size
+var CreateDirectoryRequest_VpcSettings = &sCreateDirectoryRequest_VpcSettings
+var CreateDirectoryRequest_Tags = &sCreateDirectoryRequest_Tags
+var CreateDirectoryRequest_NetworkType = &sCreateDirectoryRequest_NetworkType
+
+var CreateDirectoryResult = &sCreateDirectoryResult
+var CreateDirectoryResult_DirectoryId = &sCreateDirectoryResult_DirectoryId
+
+var CreateHybridADRequest = &sCreateHybridADRequest
+var CreateHybridADRequest_SecretArn = &sCreateHybridADRequest_SecretArn
+var CreateHybridADRequest_AssessmentId = &sCreateHybridADRequest_AssessmentId
+var CreateHybridADRequest_Tags = &sCreateHybridADRequest_Tags
+
+var CreateHybridADResult = &sCreateHybridADResult
+var CreateHybridADResult_DirectoryId = &sCreateHybridADResult_DirectoryId
+
+var CreateLogSubscriptionRequest = &sCreateLogSubscriptionRequest
+var CreateLogSubscriptionRequest_DirectoryId = &sCreateLogSubscriptionRequest_DirectoryId
+var CreateLogSubscriptionRequest_LogGroupName = &sCreateLogSubscriptionRequest_LogGroupName
+
+var CreateLogSubscriptionResult = &sCreateLogSubscriptionResult
+
+var CreateMicrosoftADRequest = &sCreateMicrosoftADRequest
+var CreateMicrosoftADRequest_Name = &sCreateMicrosoftADRequest_Name
+var CreateMicrosoftADRequest_ShortName = &sCreateMicrosoftADRequest_ShortName
+var CreateMicrosoftADRequest_Password = &sCreateMicrosoftADRequest_Password
+var CreateMicrosoftADRequest_Description = &sCreateMicrosoftADRequest_Description
+var CreateMicrosoftADRequest_VpcSettings = &sCreateMicrosoftADRequest_VpcSettings
+var CreateMicrosoftADRequest_Edition = &sCreateMicrosoftADRequest_Edition
+var CreateMicrosoftADRequest_Tags = &sCreateMicrosoftADRequest_Tags
+var CreateMicrosoftADRequest_NetworkType = &sCreateMicrosoftADRequest_NetworkType
+
+var CreateMicrosoftADResult = &sCreateMicrosoftADResult
+var CreateMicrosoftADResult_DirectoryId = &sCreateMicrosoftADResult_DirectoryId
+
+var CreateSnapshotRequest = &sCreateSnapshotRequest
+var CreateSnapshotRequest_DirectoryId = &sCreateSnapshotRequest_DirectoryId
+var CreateSnapshotRequest_Name = &sCreateSnapshotRequest_Name
+
+var CreateSnapshotResult = &sCreateSnapshotResult
+var CreateSnapshotResult_SnapshotId = &sCreateSnapshotResult_SnapshotId
+
+var CreateTrustRequest = &sCreateTrustRequest
+var CreateTrustRequest_DirectoryId = &sCreateTrustRequest_DirectoryId
+var CreateTrustRequest_RemoteDomainName = &sCreateTrustRequest_RemoteDomainName
+var CreateTrustRequest_TrustPassword = &sCreateTrustRequest_TrustPassword
+var CreateTrustRequest_TrustDirection = &sCreateTrustRequest_TrustDirection
+var CreateTrustRequest_TrustType = &sCreateTrustRequest_TrustType
+var CreateTrustRequest_ConditionalForwarderIpAddrs = &sCreateTrustRequest_ConditionalForwarderIpAddrs
+var CreateTrustRequest_ConditionalForwarderIpv6Addrs = &sCreateTrustRequest_ConditionalForwarderIpv6Addrs
+var CreateTrustRequest_SelectiveAuth = &sCreateTrustRequest_SelectiveAuth
+
+var CreateTrustResult = &sCreateTrustResult
+var CreateTrustResult_TrustId = &sCreateTrustResult_TrustId
+
+var DeleteADAssessmentRequest = &sDeleteADAssessmentRequest
+var DeleteADAssessmentRequest_AssessmentId = &sDeleteADAssessmentRequest_AssessmentId
+
+var DeleteADAssessmentResult = &sDeleteADAssessmentResult
+var DeleteADAssessmentResult_AssessmentId = &sDeleteADAssessmentResult_AssessmentId
+
+var DeleteConditionalForwarderRequest = &sDeleteConditionalForwarderRequest
+var DeleteConditionalForwarderRequest_DirectoryId = &sDeleteConditionalForwarderRequest_DirectoryId
+var DeleteConditionalForwarderRequest_RemoteDomainName = &sDeleteConditionalForwarderRequest_RemoteDomainName
+
+var DeleteConditionalForwarderResult = &sDeleteConditionalForwarderResult
+
+var DeleteDirectoryRequest = &sDeleteDirectoryRequest
+var DeleteDirectoryRequest_DirectoryId = &sDeleteDirectoryRequest_DirectoryId
+
+var DeleteDirectoryResult = &sDeleteDirectoryResult
+var DeleteDirectoryResult_DirectoryId = &sDeleteDirectoryResult_DirectoryId
+
+var DeleteLogSubscriptionRequest = &sDeleteLogSubscriptionRequest
+var DeleteLogSubscriptionRequest_DirectoryId = &sDeleteLogSubscriptionRequest_DirectoryId
+
+var DeleteLogSubscriptionResult = &sDeleteLogSubscriptionResult
+
+var DeleteSnapshotRequest = &sDeleteSnapshotRequest
+var DeleteSnapshotRequest_SnapshotId = &sDeleteSnapshotRequest_SnapshotId
+
+var DeleteSnapshotResult = &sDeleteSnapshotResult
+var DeleteSnapshotResult_SnapshotId = &sDeleteSnapshotResult_SnapshotId
+
+var DeleteTrustRequest = &sDeleteTrustRequest
+var DeleteTrustRequest_TrustId = &sDeleteTrustRequest_TrustId
+var DeleteTrustRequest_DeleteAssociatedConditionalForwarder = &sDeleteTrustRequest_DeleteAssociatedConditionalForwarder
+
+var DeleteTrustResult = &sDeleteTrustResult
+var DeleteTrustResult_TrustId = &sDeleteTrustResult_TrustId
+
+var DeregisterCertificateRequest = &sDeregisterCertificateRequest
+var DeregisterCertificateRequest_DirectoryId = &sDeregisterCertificateRequest_DirectoryId
+var DeregisterCertificateRequest_CertificateId = &sDeregisterCertificateRequest_CertificateId
+
+var DeregisterCertificateResult = &sDeregisterCertificateResult
+
+var DeregisterEventTopicRequest = &sDeregisterEventTopicRequest
+var DeregisterEventTopicRequest_DirectoryId = &sDeregisterEventTopicRequest_DirectoryId
+var DeregisterEventTopicRequest_TopicName = &sDeregisterEventTopicRequest_TopicName
+
+var DeregisterEventTopicResult = &sDeregisterEventTopicResult
+
+var DescribeADAssessmentRequest = &sDescribeADAssessmentRequest
+var DescribeADAssessmentRequest_AssessmentId = &sDescribeADAssessmentRequest_AssessmentId
+
+var DescribeADAssessmentResult = &sDescribeADAssessmentResult
+var DescribeADAssessmentResult_Assessment = &sDescribeADAssessmentResult_Assessment
+var DescribeADAssessmentResult_AssessmentReports = &sDescribeADAssessmentResult_AssessmentReports
+
+var DescribeCAEnrollmentPolicyRequest = &sDescribeCAEnrollmentPolicyRequest
+var DescribeCAEnrollmentPolicyRequest_DirectoryId = &sDescribeCAEnrollmentPolicyRequest_DirectoryId
+
+var DescribeCAEnrollmentPolicyResult = &sDescribeCAEnrollmentPolicyResult
+var DescribeCAEnrollmentPolicyResult_DirectoryId = &sDescribeCAEnrollmentPolicyResult_DirectoryId
+var DescribeCAEnrollmentPolicyResult_PcaConnectorArn = &sDescribeCAEnrollmentPolicyResult_PcaConnectorArn
+var DescribeCAEnrollmentPolicyResult_CaEnrollmentPolicyStatus = &sDescribeCAEnrollmentPolicyResult_CaEnrollmentPolicyStatus
+var DescribeCAEnrollmentPolicyResult_LastUpdatedDateTime = &sDescribeCAEnrollmentPolicyResult_LastUpdatedDateTime
+var DescribeCAEnrollmentPolicyResult_CaEnrollmentPolicyStatusReason = &sDescribeCAEnrollmentPolicyResult_CaEnrollmentPolicyStatusReason
+
+var DescribeCertificateRequest = &sDescribeCertificateRequest
+var DescribeCertificateRequest_DirectoryId = &sDescribeCertificateRequest_DirectoryId
+var DescribeCertificateRequest_CertificateId = &sDescribeCertificateRequest_CertificateId
+
+var DescribeCertificateResult = &sDescribeCertificateResult
+var DescribeCertificateResult_Certificate = &sDescribeCertificateResult_Certificate
+
+var DescribeClientAuthenticationSettingsRequest = &sDescribeClientAuthenticationSettingsRequest
+var DescribeClientAuthenticationSettingsRequest_DirectoryId = &sDescribeClientAuthenticationSettingsRequest_DirectoryId
+var DescribeClientAuthenticationSettingsRequest_Type = &sDescribeClientAuthenticationSettingsRequest_Type
+var DescribeClientAuthenticationSettingsRequest_NextToken = &sDescribeClientAuthenticationSettingsRequest_NextToken
+var DescribeClientAuthenticationSettingsRequest_Limit = &sDescribeClientAuthenticationSettingsRequest_Limit
+
+var DescribeClientAuthenticationSettingsResult = &sDescribeClientAuthenticationSettingsResult
+var DescribeClientAuthenticationSettingsResult_ClientAuthenticationSettingsInfo = &sDescribeClientAuthenticationSettingsResult_ClientAuthenticationSettingsInfo
+var DescribeClientAuthenticationSettingsResult_NextToken = &sDescribeClientAuthenticationSettingsResult_NextToken
+
+var DescribeConditionalForwardersRequest = &sDescribeConditionalForwardersRequest
+var DescribeConditionalForwardersRequest_DirectoryId = &sDescribeConditionalForwardersRequest_DirectoryId
+var DescribeConditionalForwardersRequest_RemoteDomainNames = &sDescribeConditionalForwardersRequest_RemoteDomainNames
+
+var DescribeConditionalForwardersResult = &sDescribeConditionalForwardersResult
+var DescribeConditionalForwardersResult_ConditionalForwarders = &sDescribeConditionalForwardersResult_ConditionalForwarders
+
+var DescribeDirectoriesRequest = &sDescribeDirectoriesRequest
+var DescribeDirectoriesRequest_DirectoryIds = &sDescribeDirectoriesRequest_DirectoryIds
+var DescribeDirectoriesRequest_NextToken = &sDescribeDirectoriesRequest_NextToken
+var DescribeDirectoriesRequest_Limit = &sDescribeDirectoriesRequest_Limit
+
+var DescribeDirectoriesResult = &sDescribeDirectoriesResult
+var DescribeDirectoriesResult_DirectoryDescriptions = &sDescribeDirectoriesResult_DirectoryDescriptions
+var DescribeDirectoriesResult_NextToken = &sDescribeDirectoriesResult_NextToken
+
+var DescribeDirectoryDataAccessRequest = &sDescribeDirectoryDataAccessRequest
+var DescribeDirectoryDataAccessRequest_DirectoryId = &sDescribeDirectoryDataAccessRequest_DirectoryId
+
+var DescribeDirectoryDataAccessResult = &sDescribeDirectoryDataAccessResult
+var DescribeDirectoryDataAccessResult_DataAccessStatus = &sDescribeDirectoryDataAccessResult_DataAccessStatus
+
+var DescribeDomainControllersRequest = &sDescribeDomainControllersRequest
+var DescribeDomainControllersRequest_DirectoryId = &sDescribeDomainControllersRequest_DirectoryId
+var DescribeDomainControllersRequest_DomainControllerIds = &sDescribeDomainControllersRequest_DomainControllerIds
+var DescribeDomainControllersRequest_NextToken = &sDescribeDomainControllersRequest_NextToken
+var DescribeDomainControllersRequest_Limit = &sDescribeDomainControllersRequest_Limit
+
+var DescribeDomainControllersResult = &sDescribeDomainControllersResult
+var DescribeDomainControllersResult_DomainControllers = &sDescribeDomainControllersResult_DomainControllers
+var DescribeDomainControllersResult_NextToken = &sDescribeDomainControllersResult_NextToken
+
+var DescribeEventTopicsRequest = &sDescribeEventTopicsRequest
+var DescribeEventTopicsRequest_DirectoryId = &sDescribeEventTopicsRequest_DirectoryId
+var DescribeEventTopicsRequest_TopicNames = &sDescribeEventTopicsRequest_TopicNames
+
+var DescribeEventTopicsResult = &sDescribeEventTopicsResult
+var DescribeEventTopicsResult_EventTopics = &sDescribeEventTopicsResult_EventTopics
+
+var DescribeHybridADUpdateRequest = &sDescribeHybridADUpdateRequest
+var DescribeHybridADUpdateRequest_DirectoryId = &sDescribeHybridADUpdateRequest_DirectoryId
+var DescribeHybridADUpdateRequest_UpdateType = &sDescribeHybridADUpdateRequest_UpdateType
+var DescribeHybridADUpdateRequest_NextToken = &sDescribeHybridADUpdateRequest_NextToken
+
+var DescribeHybridADUpdateResult = &sDescribeHybridADUpdateResult
+var DescribeHybridADUpdateResult_UpdateActivities = &sDescribeHybridADUpdateResult_UpdateActivities
+var DescribeHybridADUpdateResult_NextToken = &sDescribeHybridADUpdateResult_NextToken
+
+var DescribeLDAPSSettingsRequest = &sDescribeLDAPSSettingsRequest
+var DescribeLDAPSSettingsRequest_DirectoryId = &sDescribeLDAPSSettingsRequest_DirectoryId
+var DescribeLDAPSSettingsRequest_Type = &sDescribeLDAPSSettingsRequest_Type
+var DescribeLDAPSSettingsRequest_NextToken = &sDescribeLDAPSSettingsRequest_NextToken
+var DescribeLDAPSSettingsRequest_Limit = &sDescribeLDAPSSettingsRequest_Limit
+
+var DescribeLDAPSSettingsResult = &sDescribeLDAPSSettingsResult
+var DescribeLDAPSSettingsResult_LDAPSSettingsInfo = &sDescribeLDAPSSettingsResult_LDAPSSettingsInfo
+var DescribeLDAPSSettingsResult_NextToken = &sDescribeLDAPSSettingsResult_NextToken
+
+var DescribeRegionsRequest = &sDescribeRegionsRequest
+var DescribeRegionsRequest_DirectoryId = &sDescribeRegionsRequest_DirectoryId
+var DescribeRegionsRequest_RegionName = &sDescribeRegionsRequest_RegionName
+var DescribeRegionsRequest_NextToken = &sDescribeRegionsRequest_NextToken
+
+var DescribeRegionsResult = &sDescribeRegionsResult
+var DescribeRegionsResult_RegionsDescription = &sDescribeRegionsResult_RegionsDescription
+var DescribeRegionsResult_NextToken = &sDescribeRegionsResult_NextToken
+
+var DescribeSettingsRequest = &sDescribeSettingsRequest
+var DescribeSettingsRequest_DirectoryId = &sDescribeSettingsRequest_DirectoryId
+var DescribeSettingsRequest_Status = &sDescribeSettingsRequest_Status
+var DescribeSettingsRequest_NextToken = &sDescribeSettingsRequest_NextToken
+
+var DescribeSettingsResult = &sDescribeSettingsResult
+var DescribeSettingsResult_DirectoryId = &sDescribeSettingsResult_DirectoryId
+var DescribeSettingsResult_SettingEntries = &sDescribeSettingsResult_SettingEntries
+var DescribeSettingsResult_NextToken = &sDescribeSettingsResult_NextToken
+
+var DescribeSharedDirectoriesRequest = &sDescribeSharedDirectoriesRequest
+var DescribeSharedDirectoriesRequest_OwnerDirectoryId = &sDescribeSharedDirectoriesRequest_OwnerDirectoryId
+var DescribeSharedDirectoriesRequest_SharedDirectoryIds = &sDescribeSharedDirectoriesRequest_SharedDirectoryIds
+var DescribeSharedDirectoriesRequest_NextToken = &sDescribeSharedDirectoriesRequest_NextToken
+var DescribeSharedDirectoriesRequest_Limit = &sDescribeSharedDirectoriesRequest_Limit
+
+var DescribeSharedDirectoriesResult = &sDescribeSharedDirectoriesResult
+var DescribeSharedDirectoriesResult_SharedDirectories = &sDescribeSharedDirectoriesResult_SharedDirectories
+var DescribeSharedDirectoriesResult_NextToken = &sDescribeSharedDirectoriesResult_NextToken
+
+var DescribeSnapshotsRequest = &sDescribeSnapshotsRequest
+var DescribeSnapshotsRequest_DirectoryId = &sDescribeSnapshotsRequest_DirectoryId
+var DescribeSnapshotsRequest_SnapshotIds = &sDescribeSnapshotsRequest_SnapshotIds
+var DescribeSnapshotsRequest_NextToken = &sDescribeSnapshotsRequest_NextToken
+var DescribeSnapshotsRequest_Limit = &sDescribeSnapshotsRequest_Limit
+
+var DescribeSnapshotsResult = &sDescribeSnapshotsResult
+var DescribeSnapshotsResult_Snapshots = &sDescribeSnapshotsResult_Snapshots
+var DescribeSnapshotsResult_NextToken = &sDescribeSnapshotsResult_NextToken
+
+var DescribeTrustsRequest = &sDescribeTrustsRequest
+var DescribeTrustsRequest_DirectoryId = &sDescribeTrustsRequest_DirectoryId
+var DescribeTrustsRequest_TrustIds = &sDescribeTrustsRequest_TrustIds
+var DescribeTrustsRequest_NextToken = &sDescribeTrustsRequest_NextToken
+var DescribeTrustsRequest_Limit = &sDescribeTrustsRequest_Limit
+
+var DescribeTrustsResult = &sDescribeTrustsResult
+var DescribeTrustsResult_Trusts = &sDescribeTrustsResult_Trusts
+var DescribeTrustsResult_NextToken = &sDescribeTrustsResult_NextToken
+
+var DescribeUpdateDirectoryRequest = &sDescribeUpdateDirectoryRequest
+var DescribeUpdateDirectoryRequest_DirectoryId = &sDescribeUpdateDirectoryRequest_DirectoryId
+var DescribeUpdateDirectoryRequest_UpdateType = &sDescribeUpdateDirectoryRequest_UpdateType
+var DescribeUpdateDirectoryRequest_RegionName = &sDescribeUpdateDirectoryRequest_RegionName
+var DescribeUpdateDirectoryRequest_NextToken = &sDescribeUpdateDirectoryRequest_NextToken
+
+var DescribeUpdateDirectoryResult = &sDescribeUpdateDirectoryResult
+var DescribeUpdateDirectoryResult_UpdateActivities = &sDescribeUpdateDirectoryResult_UpdateActivities
+var DescribeUpdateDirectoryResult_NextToken = &sDescribeUpdateDirectoryResult_NextToken
+
+var DisableCAEnrollmentPolicyRequest = &sDisableCAEnrollmentPolicyRequest
+var DisableCAEnrollmentPolicyRequest_DirectoryId = &sDisableCAEnrollmentPolicyRequest_DirectoryId
+
+var DisableCAEnrollmentPolicyResult = &sDisableCAEnrollmentPolicyResult
+
+var DisableClientAuthenticationRequest = &sDisableClientAuthenticationRequest
+var DisableClientAuthenticationRequest_DirectoryId = &sDisableClientAuthenticationRequest_DirectoryId
+var DisableClientAuthenticationRequest_Type = &sDisableClientAuthenticationRequest_Type
+
+var DisableClientAuthenticationResult = &sDisableClientAuthenticationResult
+
+var DisableDirectoryDataAccessRequest = &sDisableDirectoryDataAccessRequest
+var DisableDirectoryDataAccessRequest_DirectoryId = &sDisableDirectoryDataAccessRequest_DirectoryId
+
+var DisableDirectoryDataAccessResult = &sDisableDirectoryDataAccessResult
+
+var DisableLDAPSRequest = &sDisableLDAPSRequest
+var DisableLDAPSRequest_DirectoryId = &sDisableLDAPSRequest_DirectoryId
+var DisableLDAPSRequest_Type = &sDisableLDAPSRequest_Type
+
+var DisableLDAPSResult = &sDisableLDAPSResult
+
+var DisableRadiusRequest = &sDisableRadiusRequest
+var DisableRadiusRequest_DirectoryId = &sDisableRadiusRequest_DirectoryId
+
+var DisableRadiusResult = &sDisableRadiusResult
+
+var DisableSsoRequest = &sDisableSsoRequest
+var DisableSsoRequest_DirectoryId = &sDisableSsoRequest_DirectoryId
+var DisableSsoRequest_UserName = &sDisableSsoRequest_UserName
+var DisableSsoRequest_Password = &sDisableSsoRequest_Password
+
+var DisableSsoResult = &sDisableSsoResult
+
+var EnableCAEnrollmentPolicyRequest = &sEnableCAEnrollmentPolicyRequest
+var EnableCAEnrollmentPolicyRequest_DirectoryId = &sEnableCAEnrollmentPolicyRequest_DirectoryId
+var EnableCAEnrollmentPolicyRequest_PcaConnectorArn = &sEnableCAEnrollmentPolicyRequest_PcaConnectorArn
+
+var EnableCAEnrollmentPolicyResult = &sEnableCAEnrollmentPolicyResult
+
+var EnableClientAuthenticationRequest = &sEnableClientAuthenticationRequest
+var EnableClientAuthenticationRequest_DirectoryId = &sEnableClientAuthenticationRequest_DirectoryId
+var EnableClientAuthenticationRequest_Type = &sEnableClientAuthenticationRequest_Type
+
+var EnableClientAuthenticationResult = &sEnableClientAuthenticationResult
+
+var EnableDirectoryDataAccessRequest = &sEnableDirectoryDataAccessRequest
+var EnableDirectoryDataAccessRequest_DirectoryId = &sEnableDirectoryDataAccessRequest_DirectoryId
+
+var EnableDirectoryDataAccessResult = &sEnableDirectoryDataAccessResult
+
+var EnableLDAPSRequest = &sEnableLDAPSRequest
+var EnableLDAPSRequest_DirectoryId = &sEnableLDAPSRequest_DirectoryId
+var EnableLDAPSRequest_Type = &sEnableLDAPSRequest_Type
+
+var EnableLDAPSResult = &sEnableLDAPSResult
+
+var EnableRadiusRequest = &sEnableRadiusRequest
+var EnableRadiusRequest_DirectoryId = &sEnableRadiusRequest_DirectoryId
+var EnableRadiusRequest_RadiusSettings = &sEnableRadiusRequest_RadiusSettings
+
+var EnableRadiusResult = &sEnableRadiusResult
+
+var EnableSsoRequest = &sEnableSsoRequest
+var EnableSsoRequest_DirectoryId = &sEnableSsoRequest_DirectoryId
+var EnableSsoRequest_UserName = &sEnableSsoRequest_UserName
+var EnableSsoRequest_Password = &sEnableSsoRequest_Password
+
+var EnableSsoResult = &sEnableSsoResult
+
+var GetDirectoryLimitsRequest = &sGetDirectoryLimitsRequest
+
+var GetDirectoryLimitsResult = &sGetDirectoryLimitsResult
+var GetDirectoryLimitsResult_DirectoryLimits = &sGetDirectoryLimitsResult_DirectoryLimits
+
+var GetSnapshotLimitsRequest = &sGetSnapshotLimitsRequest
+var GetSnapshotLimitsRequest_DirectoryId = &sGetSnapshotLimitsRequest_DirectoryId
+
+var GetSnapshotLimitsResult = &sGetSnapshotLimitsResult
+var GetSnapshotLimitsResult_SnapshotLimits = &sGetSnapshotLimitsResult_SnapshotLimits
+
+var ListADAssessmentsRequest = &sListADAssessmentsRequest
+var ListADAssessmentsRequest_DirectoryId = &sListADAssessmentsRequest_DirectoryId
+var ListADAssessmentsRequest_NextToken = &sListADAssessmentsRequest_NextToken
+var ListADAssessmentsRequest_Limit = &sListADAssessmentsRequest_Limit
+
+var ListADAssessmentsResult = &sListADAssessmentsResult
+var ListADAssessmentsResult_Assessments = &sListADAssessmentsResult_Assessments
+var ListADAssessmentsResult_NextToken = &sListADAssessmentsResult_NextToken
+
+var ListCertificatesRequest = &sListCertificatesRequest
+var ListCertificatesRequest_DirectoryId = &sListCertificatesRequest_DirectoryId
+var ListCertificatesRequest_NextToken = &sListCertificatesRequest_NextToken
+var ListCertificatesRequest_Limit = &sListCertificatesRequest_Limit
+
+var ListCertificatesResult = &sListCertificatesResult
+var ListCertificatesResult_NextToken = &sListCertificatesResult_NextToken
+var ListCertificatesResult_CertificatesInfo = &sListCertificatesResult_CertificatesInfo
+
+var ListIpRoutesRequest = &sListIpRoutesRequest
+var ListIpRoutesRequest_DirectoryId = &sListIpRoutesRequest_DirectoryId
+var ListIpRoutesRequest_NextToken = &sListIpRoutesRequest_NextToken
+var ListIpRoutesRequest_Limit = &sListIpRoutesRequest_Limit
+
+var ListIpRoutesResult = &sListIpRoutesResult
+var ListIpRoutesResult_IpRoutesInfo = &sListIpRoutesResult_IpRoutesInfo
+var ListIpRoutesResult_NextToken = &sListIpRoutesResult_NextToken
+
+var ListLogSubscriptionsRequest = &sListLogSubscriptionsRequest
+var ListLogSubscriptionsRequest_DirectoryId = &sListLogSubscriptionsRequest_DirectoryId
+var ListLogSubscriptionsRequest_NextToken = &sListLogSubscriptionsRequest_NextToken
+var ListLogSubscriptionsRequest_Limit = &sListLogSubscriptionsRequest_Limit
+
+var ListLogSubscriptionsResult = &sListLogSubscriptionsResult
+var ListLogSubscriptionsResult_LogSubscriptions = &sListLogSubscriptionsResult_LogSubscriptions
+var ListLogSubscriptionsResult_NextToken = &sListLogSubscriptionsResult_NextToken
+
+var ListSchemaExtensionsRequest = &sListSchemaExtensionsRequest
+var ListSchemaExtensionsRequest_DirectoryId = &sListSchemaExtensionsRequest_DirectoryId
+var ListSchemaExtensionsRequest_NextToken = &sListSchemaExtensionsRequest_NextToken
+var ListSchemaExtensionsRequest_Limit = &sListSchemaExtensionsRequest_Limit
+
+var ListSchemaExtensionsResult = &sListSchemaExtensionsResult
+var ListSchemaExtensionsResult_SchemaExtensionsInfo = &sListSchemaExtensionsResult_SchemaExtensionsInfo
+var ListSchemaExtensionsResult_NextToken = &sListSchemaExtensionsResult_NextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceId = &sListTagsForResourceRequest_ResourceId
+var ListTagsForResourceRequest_NextToken = &sListTagsForResourceRequest_NextToken
+var ListTagsForResourceRequest_Limit = &sListTagsForResourceRequest_Limit
+
+var ListTagsForResourceResult = &sListTagsForResourceResult
+var ListTagsForResourceResult_Tags = &sListTagsForResourceResult_Tags
+var ListTagsForResourceResult_NextToken = &sListTagsForResourceResult_NextToken
+
+var RegisterCertificateRequest = &sRegisterCertificateRequest
+var RegisterCertificateRequest_DirectoryId = &sRegisterCertificateRequest_DirectoryId
+var RegisterCertificateRequest_CertificateData = &sRegisterCertificateRequest_CertificateData
+var RegisterCertificateRequest_Type = &sRegisterCertificateRequest_Type
+var RegisterCertificateRequest_ClientCertAuthSettings = &sRegisterCertificateRequest_ClientCertAuthSettings
+
+var RegisterCertificateResult = &sRegisterCertificateResult
+var RegisterCertificateResult_CertificateId = &sRegisterCertificateResult_CertificateId
+
+var RegisterEventTopicRequest = &sRegisterEventTopicRequest
+var RegisterEventTopicRequest_DirectoryId = &sRegisterEventTopicRequest_DirectoryId
+var RegisterEventTopicRequest_TopicName = &sRegisterEventTopicRequest_TopicName
+
+var RegisterEventTopicResult = &sRegisterEventTopicResult
+
+var RejectSharedDirectoryRequest = &sRejectSharedDirectoryRequest
+var RejectSharedDirectoryRequest_SharedDirectoryId = &sRejectSharedDirectoryRequest_SharedDirectoryId
+
+var RejectSharedDirectoryResult = &sRejectSharedDirectoryResult
+var RejectSharedDirectoryResult_SharedDirectoryId = &sRejectSharedDirectoryResult_SharedDirectoryId
+
+var RemoveIpRoutesRequest = &sRemoveIpRoutesRequest
+var RemoveIpRoutesRequest_DirectoryId = &sRemoveIpRoutesRequest_DirectoryId
+var RemoveIpRoutesRequest_CidrIps = &sRemoveIpRoutesRequest_CidrIps
+var RemoveIpRoutesRequest_CidrIpv6s = &sRemoveIpRoutesRequest_CidrIpv6s
+
+var RemoveIpRoutesResult = &sRemoveIpRoutesResult
+
+var RemoveRegionRequest = &sRemoveRegionRequest
+var RemoveRegionRequest_DirectoryId = &sRemoveRegionRequest_DirectoryId
+
+var RemoveRegionResult = &sRemoveRegionResult
+
+var RemoveTagsFromResourceRequest = &sRemoveTagsFromResourceRequest
+var RemoveTagsFromResourceRequest_ResourceId = &sRemoveTagsFromResourceRequest_ResourceId
+var RemoveTagsFromResourceRequest_TagKeys = &sRemoveTagsFromResourceRequest_TagKeys
+
+var RemoveTagsFromResourceResult = &sRemoveTagsFromResourceResult
+
+var ResetUserPasswordRequest = &sResetUserPasswordRequest
+var ResetUserPasswordRequest_DirectoryId = &sResetUserPasswordRequest_DirectoryId
+var ResetUserPasswordRequest_UserName = &sResetUserPasswordRequest_UserName
+var ResetUserPasswordRequest_NewPassword = &sResetUserPasswordRequest_NewPassword
+
+var ResetUserPasswordResult = &sResetUserPasswordResult
+
+var RestoreFromSnapshotRequest = &sRestoreFromSnapshotRequest
+var RestoreFromSnapshotRequest_SnapshotId = &sRestoreFromSnapshotRequest_SnapshotId
+
+var RestoreFromSnapshotResult = &sRestoreFromSnapshotResult
+
+var ShareDirectoryRequest = &sShareDirectoryRequest
+var ShareDirectoryRequest_DirectoryId = &sShareDirectoryRequest_DirectoryId
+var ShareDirectoryRequest_ShareNotes = &sShareDirectoryRequest_ShareNotes
+var ShareDirectoryRequest_ShareTarget = &sShareDirectoryRequest_ShareTarget
+var ShareDirectoryRequest_ShareMethod = &sShareDirectoryRequest_ShareMethod
+
+var ShareDirectoryResult = &sShareDirectoryResult
+var ShareDirectoryResult_SharedDirectoryId = &sShareDirectoryResult_SharedDirectoryId
+
+var StartADAssessmentRequest = &sStartADAssessmentRequest
+var StartADAssessmentRequest_AssessmentConfiguration = &sStartADAssessmentRequest_AssessmentConfiguration
+var StartADAssessmentRequest_DirectoryId = &sStartADAssessmentRequest_DirectoryId
+
+var StartADAssessmentResult = &sStartADAssessmentResult
+var StartADAssessmentResult_AssessmentId = &sStartADAssessmentResult_AssessmentId
+
+var StartSchemaExtensionRequest = &sStartSchemaExtensionRequest
+var StartSchemaExtensionRequest_DirectoryId = &sStartSchemaExtensionRequest_DirectoryId
+var StartSchemaExtensionRequest_CreateSnapshotBeforeSchemaExtension = &sStartSchemaExtensionRequest_CreateSnapshotBeforeSchemaExtension
+var StartSchemaExtensionRequest_LdifContent = &sStartSchemaExtensionRequest_LdifContent
+var StartSchemaExtensionRequest_Description = &sStartSchemaExtensionRequest_Description
+
+var StartSchemaExtensionResult = &sStartSchemaExtensionResult
+var StartSchemaExtensionResult_SchemaExtensionId = &sStartSchemaExtensionResult_SchemaExtensionId
+
+var UnshareDirectoryRequest = &sUnshareDirectoryRequest
+var UnshareDirectoryRequest_DirectoryId = &sUnshareDirectoryRequest_DirectoryId
+var UnshareDirectoryRequest_UnshareTarget = &sUnshareDirectoryRequest_UnshareTarget
+
+var UnshareDirectoryResult = &sUnshareDirectoryResult
+var UnshareDirectoryResult_SharedDirectoryId = &sUnshareDirectoryResult_SharedDirectoryId
+
+var UpdateConditionalForwarderRequest = &sUpdateConditionalForwarderRequest
+var UpdateConditionalForwarderRequest_DirectoryId = &sUpdateConditionalForwarderRequest_DirectoryId
+var UpdateConditionalForwarderRequest_RemoteDomainName = &sUpdateConditionalForwarderRequest_RemoteDomainName
+var UpdateConditionalForwarderRequest_DnsIpAddrs = &sUpdateConditionalForwarderRequest_DnsIpAddrs
+var UpdateConditionalForwarderRequest_DnsIpv6Addrs = &sUpdateConditionalForwarderRequest_DnsIpv6Addrs
+
+var UpdateConditionalForwarderResult = &sUpdateConditionalForwarderResult
+
+var UpdateDirectorySetupRequest = &sUpdateDirectorySetupRequest
+var UpdateDirectorySetupRequest_DirectoryId = &sUpdateDirectorySetupRequest_DirectoryId
+var UpdateDirectorySetupRequest_UpdateType = &sUpdateDirectorySetupRequest_UpdateType
+var UpdateDirectorySetupRequest_OSUpdateSettings = &sUpdateDirectorySetupRequest_OSUpdateSettings
+var UpdateDirectorySetupRequest_DirectorySizeUpdateSettings = &sUpdateDirectorySetupRequest_DirectorySizeUpdateSettings
+var UpdateDirectorySetupRequest_NetworkUpdateSettings = &sUpdateDirectorySetupRequest_NetworkUpdateSettings
+var UpdateDirectorySetupRequest_CreateSnapshotBeforeUpdate = &sUpdateDirectorySetupRequest_CreateSnapshotBeforeUpdate
+
+var UpdateDirectorySetupResult = &sUpdateDirectorySetupResult
+
+var UpdateHybridADRequest = &sUpdateHybridADRequest
+var UpdateHybridADRequest_DirectoryId = &sUpdateHybridADRequest_DirectoryId
+var UpdateHybridADRequest_HybridAdministratorAccountUpdate = &sUpdateHybridADRequest_HybridAdministratorAccountUpdate
+var UpdateHybridADRequest_SelfManagedInstancesSettings = &sUpdateHybridADRequest_SelfManagedInstancesSettings
+
+var UpdateHybridADResult = &sUpdateHybridADResult
+var UpdateHybridADResult_DirectoryId = &sUpdateHybridADResult_DirectoryId
+var UpdateHybridADResult_AssessmentId = &sUpdateHybridADResult_AssessmentId
+
+var UpdateNumberOfDomainControllersRequest = &sUpdateNumberOfDomainControllersRequest
+var UpdateNumberOfDomainControllersRequest_DirectoryId = &sUpdateNumberOfDomainControllersRequest_DirectoryId
+var UpdateNumberOfDomainControllersRequest_DesiredNumber = &sUpdateNumberOfDomainControllersRequest_DesiredNumber
+
+var UpdateNumberOfDomainControllersResult = &sUpdateNumberOfDomainControllersResult
+
+var UpdateRadiusRequest = &sUpdateRadiusRequest
+var UpdateRadiusRequest_DirectoryId = &sUpdateRadiusRequest_DirectoryId
+var UpdateRadiusRequest_RadiusSettings = &sUpdateRadiusRequest_RadiusSettings
+
+var UpdateRadiusResult = &sUpdateRadiusResult
+
+var UpdateSettingsRequest = &sUpdateSettingsRequest
+var UpdateSettingsRequest_DirectoryId = &sUpdateSettingsRequest_DirectoryId
+var UpdateSettingsRequest_Settings = &sUpdateSettingsRequest_Settings
+
+var UpdateSettingsResult = &sUpdateSettingsResult
+var UpdateSettingsResult_DirectoryId = &sUpdateSettingsResult_DirectoryId
+
+var UpdateTrustRequest = &sUpdateTrustRequest
+var UpdateTrustRequest_TrustId = &sUpdateTrustRequest_TrustId
+var UpdateTrustRequest_SelectiveAuth = &sUpdateTrustRequest_SelectiveAuth
+
+var UpdateTrustResult = &sUpdateTrustResult
+var UpdateTrustResult_RequestId = &sUpdateTrustResult_RequestId
+var UpdateTrustResult_TrustId = &sUpdateTrustResult_TrustId
+
+var VerifyTrustRequest = &sVerifyTrustRequest
+var VerifyTrustRequest_TrustId = &sVerifyTrustRequest_TrustId
+
+var VerifyTrustResult = &sVerifyTrustResult
+var VerifyTrustResult_TrustId = &sVerifyTrustResult_TrustId
+
+var DirectoryService_20150416 = &smithy.ServiceSchema{Schema: &s_DirectoryService_20150416, Version: "2015-04-16"}

@@ -4,1580 +4,1136 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateSavingsPlan = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "CreateSavingsPlan",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	iCreateSavingsPlan                         = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "CreateSavingsPlan"}
+	iDeleteQueuedSavingsPlan                   = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "DeleteQueuedSavingsPlan"}
+	iDescribeSavingsPlanRates                  = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "DescribeSavingsPlanRates"}
+	iDescribeSavingsPlans                      = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "DescribeSavingsPlans"}
+	iDescribeSavingsPlansOfferingRates         = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "DescribeSavingsPlansOfferingRates"}
+	iDescribeSavingsPlansOfferings             = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "DescribeSavingsPlansOfferings"}
+	iListTagsForResource                       = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "ListTagsForResource"}
+	iReturnSavingsPlan                         = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "ReturnSavingsPlan"}
+	iTagResource                               = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "TagResource"}
+	iUntagResource                             = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "UntagResource"}
+	i_AWSSavingsPlan                           = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "AWSSavingsPlan"}
+	i_Amount                                   = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "Amount"}
+	i_ClientToken                              = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "ClientToken"}
+	iCurrencyCode                              = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "CurrencyCode"}
+	i_CurrencyList                             = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "CurrencyList"}
+	i_DateTime                                 = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "DateTime"}
+	i_DurationsList                            = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "DurationsList"}
+	i_EC2InstanceFamily                        = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "EC2InstanceFamily"}
+	i_FilterValuesList                         = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "FilterValuesList"}
+	iInternalServerException                   = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "InternalServerException"}
+	i_JsonSafeFilterValueString                = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "JsonSafeFilterValueString"}
+	i_ListOfStrings                            = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "ListOfStrings"}
+	i_MaxResults                               = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "MaxResults"}
+	i_PageSize                                 = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "PageSize"}
+	i_PaginationToken                          = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "PaginationToken"}
+	iParentSavingsPlanOffering                 = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "ParentSavingsPlanOffering"}
+	i_Region                                   = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "Region"}
+	iResourceNotFoundException                 = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "ResourceNotFoundException"}
+	iSavingsPlan                               = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlan"}
+	i_SavingsPlanArn                           = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanArn"}
+	i_SavingsPlanArnList                       = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanArnList"}
+	i_SavingsPlanDescription                   = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanDescription"}
+	i_SavingsPlanDescriptionsList              = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanDescriptionsList"}
+	iSavingsPlanFilter                         = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanFilter"}
+	i_SavingsPlanFilterList                    = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanFilterList"}
+	i_SavingsPlanId                            = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanId"}
+	i_SavingsPlanIdList                        = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanIdList"}
+	i_SavingsPlanList                          = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanList"}
+	iSavingsPlanOffering                       = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanOffering"}
+	iSavingsPlanOfferingFilterAttribute        = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanOfferingFilterAttribute"}
+	iSavingsPlanOfferingFilterElement          = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanOfferingFilterElement"}
+	i_SavingsPlanOfferingFiltersList           = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanOfferingFiltersList"}
+	i_SavingsPlanOfferingId                    = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanOfferingId"}
+	iSavingsPlanOfferingProperty               = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanOfferingProperty"}
+	iSavingsPlanOfferingPropertyKey            = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanOfferingPropertyKey"}
+	i_SavingsPlanOfferingPropertyList          = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanOfferingPropertyList"}
+	iSavingsPlanOfferingRate                   = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanOfferingRate"}
+	iSavingsPlanOfferingRateFilterElement      = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanOfferingRateFilterElement"}
+	i_SavingsPlanOfferingRateFiltersList       = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanOfferingRateFiltersList"}
+	iSavingsPlanOfferingRateProperty           = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanOfferingRateProperty"}
+	i_SavingsPlanOfferingRatePropertyList      = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanOfferingRatePropertyList"}
+	i_SavingsPlanOfferingRatesList             = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanOfferingRatesList"}
+	i_SavingsPlanOfferingsList                 = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanOfferingsList"}
+	i_SavingsPlanOperation                     = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanOperation"}
+	i_SavingsPlanOperationList                 = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanOperationList"}
+	iSavingsPlanPaymentOption                  = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanPaymentOption"}
+	i_SavingsPlanPaymentOptionList             = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanPaymentOptionList"}
+	iSavingsPlanProductType                    = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanProductType"}
+	i_SavingsPlanProductTypeList               = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanProductTypeList"}
+	iSavingsPlanRate                           = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanRate"}
+	iSavingsPlanRateFilter                     = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanRateFilter"}
+	iSavingsPlanRateFilterAttribute            = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanRateFilterAttribute"}
+	i_SavingsPlanRateFilterList                = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanRateFilterList"}
+	iSavingsPlanRateFilterName                 = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanRateFilterName"}
+	i_SavingsPlanRateList                      = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanRateList"}
+	i_SavingsPlanRateOperation                 = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanRateOperation"}
+	i_SavingsPlanRateOperationList             = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanRateOperationList"}
+	i_SavingsPlanRatePricePerUnit              = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanRatePricePerUnit"}
+	iSavingsPlanRateProperty                   = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanRateProperty"}
+	iSavingsPlanRatePropertyKey                = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanRatePropertyKey"}
+	i_SavingsPlanRatePropertyList              = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanRatePropertyList"}
+	iSavingsPlanRateServiceCode                = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanRateServiceCode"}
+	i_SavingsPlanRateServiceCodeList           = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanRateServiceCodeList"}
+	iSavingsPlanRateUnit                       = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanRateUnit"}
+	i_SavingsPlanRateUsageType                 = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanRateUsageType"}
+	i_SavingsPlanRateUsageTypeList             = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanRateUsageTypeList"}
+	i_SavingsPlansDuration                     = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlansDuration"}
+	i_SavingsPlanServiceCode                   = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanServiceCode"}
+	i_SavingsPlanServiceCodeList               = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanServiceCodeList"}
+	iSavingsPlansFilterName                    = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlansFilterName"}
+	iSavingsPlanState                          = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanState"}
+	i_SavingsPlanStateList                     = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanStateList"}
+	iSavingsPlanType                           = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanType"}
+	i_SavingsPlanTypeList                      = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanTypeList"}
+	i_SavingsPlanUsageType                     = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanUsageType"}
+	i_SavingsPlanUsageTypeList                 = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "SavingsPlanUsageTypeList"}
+	iServiceQuotaExceededException             = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "ServiceQuotaExceededException"}
+	i_String                                   = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "String"}
+	i_TagKey                                   = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "TagKey"}
+	i_TagKeyList                               = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "TagKeyList"}
+	i_TagMap                                   = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "TagMap"}
+	i_TagValue                                 = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "TagValue"}
+	i_TermDurationInSeconds                    = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "TermDurationInSeconds"}
+	i_UUID                                     = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "UUID"}
+	i_UUIDs                                    = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "UUIDs"}
+	iValidationException                       = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "ValidationException"}
+	iCreateSavingsPlanRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "CreateSavingsPlanRequest"}
+	iCreateSavingsPlanResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "CreateSavingsPlanResponse"}
+	iDeleteQueuedSavingsPlanRequest            = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "DeleteQueuedSavingsPlanRequest"}
+	iDeleteQueuedSavingsPlanResponse           = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "DeleteQueuedSavingsPlanResponse"}
+	iDescribeSavingsPlanRatesRequest           = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "DescribeSavingsPlanRatesRequest"}
+	iDescribeSavingsPlanRatesResponse          = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "DescribeSavingsPlanRatesResponse"}
+	iDescribeSavingsPlansRequest               = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "DescribeSavingsPlansRequest"}
+	iDescribeSavingsPlansOfferingRatesRequest  = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "DescribeSavingsPlansOfferingRatesRequest"}
+	iDescribeSavingsPlansOfferingRatesResponse = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "DescribeSavingsPlansOfferingRatesResponse"}
+	iDescribeSavingsPlansOfferingsRequest      = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "DescribeSavingsPlansOfferingsRequest"}
+	iDescribeSavingsPlansOfferingsResponse     = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "DescribeSavingsPlansOfferingsResponse"}
+	iDescribeSavingsPlansResponse              = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "DescribeSavingsPlansResponse"}
+	iListTagsForResourceRequest                = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse               = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "ListTagsForResourceResponse"}
+	iReturnSavingsPlanRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "ReturnSavingsPlanRequest"}
+	iReturnSavingsPlanResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "ReturnSavingsPlanResponse"}
+	iTagResourceRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "TagResourceRequest"}
+	iTagResourceResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "TagResourceResponse"}
+	iUntagResourceRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.savingsplans", Name: "UntagResourceResponse"}
+	pUnit                                      = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/CreateSavingsPlan",
-	Code: 200})
-
-var DeleteQueuedSavingsPlan = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "DeleteQueuedSavingsPlan",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DeleteQueuedSavingsPlan",
-	Code: 200})
-
-var DescribeSavingsPlanRates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "DescribeSavingsPlanRates",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DescribeSavingsPlanRates",
-	Code: 200})
-
-var DescribeSavingsPlans = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "DescribeSavingsPlans",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DescribeSavingsPlans",
-	Code: 200})
-
-var DescribeSavingsPlansOfferingRates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "DescribeSavingsPlansOfferingRates",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DescribeSavingsPlansOfferingRates",
-	Code: 200})
-
-var DescribeSavingsPlansOfferings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "DescribeSavingsPlansOfferings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DescribeSavingsPlansOfferings",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListTagsForResource",
-	Code: 200})
-
-var ReturnSavingsPlan = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "ReturnSavingsPlan",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ReturnSavingsPlan",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/TagResource",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/UntagResource",
-	Code: 200})
-
-var _AWSSavingsPlan = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "AWSSavingsPlan",
-}, smithy.ShapeTypeService, 0)
-
-var AWSSavingsPlan = smithy.NewServiceSchema(_AWSSavingsPlan, "2019-06-28")
-
-var _Amount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "Amount",
-}, smithy.ShapeTypeString, 0)
-
-var _ClientToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "ClientToken",
-}, smithy.ShapeTypeString, 0)
-
-var CurrencyCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "CurrencyCode",
-}, smithy.ShapeTypeEnum, 3)
-var CurrencyCode_CNY *smithy.Schema
-
-var CurrencyCode_USD *smithy.Schema
-
-var CurrencyCode_EUR *smithy.Schema
-
-var _CurrencyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "CurrencyList",
-}, smithy.ShapeTypeList, 1)
-var _CurrencyList_member *smithy.Schema
-
-var _DateTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "DateTime",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _DurationsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "DurationsList",
-}, smithy.ShapeTypeList, 1)
-var _DurationsList_member *smithy.Schema
-
-var _EC2InstanceFamily = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "EC2InstanceFamily",
-}, smithy.ShapeTypeString, 0)
-
-var _FilterValuesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "FilterValuesList",
-}, smithy.ShapeTypeList, 1)
-var _FilterValuesList_member *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500},
-	&smithytraits.AWSQueryError{ErrorCode: "InternalServerException",
-		StatusCode: 500})
-var InternalServerException_message *smithy.Schema
-
-var _JsonSafeFilterValueString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "JsonSafeFilterValueString",
-}, smithy.ShapeTypeString, 0)
-
-var _ListOfStrings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "ListOfStrings",
-}, smithy.ShapeTypeList, 1)
-var _ListOfStrings_member *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _PageSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "PageSize",
-}, smithy.ShapeTypeInteger, 0)
-
-var _PaginationToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "PaginationToken",
-}, smithy.ShapeTypeString, 0)
-
-var ParentSavingsPlanOffering = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "ParentSavingsPlanOffering",
-}, smithy.ShapeTypeStructure, 6)
-var ParentSavingsPlanOffering_offeringId *smithy.Schema
-
-var ParentSavingsPlanOffering_paymentOption *smithy.Schema
-
-var ParentSavingsPlanOffering_planType *smithy.Schema
-
-var ParentSavingsPlanOffering_durationSeconds *smithy.Schema
-
-var ParentSavingsPlanOffering_currency *smithy.Schema
-
-var ParentSavingsPlanOffering_planDescription *smithy.Schema
-
-var _Region = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "Region",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404},
-	&smithytraits.AWSQueryError{ErrorCode: "ResourceNotFoundException",
-		StatusCode: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var SavingsPlan = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlan",
-}, smithy.ShapeTypeStructure, 19)
-var SavingsPlan_offeringId *smithy.Schema
-
-var SavingsPlan_savingsPlanId *smithy.Schema
-
-var SavingsPlan_savingsPlanArn *smithy.Schema
-
-var SavingsPlan_description *smithy.Schema
-
-var SavingsPlan_start *smithy.Schema
-
-var SavingsPlan_end *smithy.Schema
-
-var SavingsPlan_state *smithy.Schema
-
-var SavingsPlan_region *smithy.Schema
-
-var SavingsPlan_ec2InstanceFamily *smithy.Schema
-
-var SavingsPlan_savingsPlanType *smithy.Schema
-
-var SavingsPlan_paymentOption *smithy.Schema
-
-var SavingsPlan_productTypes *smithy.Schema
-
-var SavingsPlan_currency *smithy.Schema
-
-var SavingsPlan_commitment *smithy.Schema
-
-var SavingsPlan_upfrontPaymentAmount *smithy.Schema
-
-var SavingsPlan_recurringPaymentAmount *smithy.Schema
-
-var SavingsPlan_termDurationInSeconds *smithy.Schema
-
-var SavingsPlan_tags *smithy.Schema
-
-var SavingsPlan_returnableUntil *smithy.Schema
-
-var _SavingsPlanArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanArn",
-}, smithy.ShapeTypeString, 0)
-
-var _SavingsPlanArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanArnList",
-}, smithy.ShapeTypeList, 1)
-var _SavingsPlanArnList_member *smithy.Schema
-
-var _SavingsPlanDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanDescription",
-}, smithy.ShapeTypeString, 0)
-
-var _SavingsPlanDescriptionsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanDescriptionsList",
-}, smithy.ShapeTypeList, 1)
-var _SavingsPlanDescriptionsList_member *smithy.Schema
-
-var SavingsPlanFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanFilter",
-}, smithy.ShapeTypeStructure, 2)
-var SavingsPlanFilter_name *smithy.Schema
-
-var SavingsPlanFilter_values *smithy.Schema
-
-var _SavingsPlanFilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanFilterList",
-}, smithy.ShapeTypeList, 1)
-var _SavingsPlanFilterList_member *smithy.Schema
-
-var _SavingsPlanId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanId",
-}, smithy.ShapeTypeString, 0)
-
-var _SavingsPlanIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanIdList",
-}, smithy.ShapeTypeList, 1)
-var _SavingsPlanIdList_member *smithy.Schema
-
-var _SavingsPlanList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanList",
-}, smithy.ShapeTypeList, 1)
-var _SavingsPlanList_member *smithy.Schema
-
-var SavingsPlanOffering = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanOffering",
-}, smithy.ShapeTypeStructure, 11)
-var SavingsPlanOffering_offeringId *smithy.Schema
-
-var SavingsPlanOffering_productTypes *smithy.Schema
-
-var SavingsPlanOffering_planType *smithy.Schema
-
-var SavingsPlanOffering_description *smithy.Schema
-
-var SavingsPlanOffering_paymentOption *smithy.Schema
-
-var SavingsPlanOffering_durationSeconds *smithy.Schema
-
-var SavingsPlanOffering_currency *smithy.Schema
-
-var SavingsPlanOffering_serviceCode *smithy.Schema
-
-var SavingsPlanOffering_usageType *smithy.Schema
-
-var SavingsPlanOffering_operation *smithy.Schema
-
-var SavingsPlanOffering_properties *smithy.Schema
-
-var SavingsPlanOfferingFilterAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanOfferingFilterAttribute",
-}, smithy.ShapeTypeEnum, 2)
-var SavingsPlanOfferingFilterAttribute_region *smithy.Schema
-
-var SavingsPlanOfferingFilterAttribute_instanceFamily *smithy.Schema
-
-var SavingsPlanOfferingFilterElement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanOfferingFilterElement",
-}, smithy.ShapeTypeStructure, 2)
-var SavingsPlanOfferingFilterElement_name *smithy.Schema
-
-var SavingsPlanOfferingFilterElement_values *smithy.Schema
-
-var _SavingsPlanOfferingFiltersList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanOfferingFiltersList",
-}, smithy.ShapeTypeList, 1)
-var _SavingsPlanOfferingFiltersList_member *smithy.Schema
-
-var _SavingsPlanOfferingId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanOfferingId",
-}, smithy.ShapeTypeString, 0)
-
-var SavingsPlanOfferingProperty = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanOfferingProperty",
-}, smithy.ShapeTypeStructure, 2)
-var SavingsPlanOfferingProperty_name *smithy.Schema
-
-var SavingsPlanOfferingProperty_value *smithy.Schema
-
-var SavingsPlanOfferingPropertyKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanOfferingPropertyKey",
-}, smithy.ShapeTypeEnum, 2)
-var SavingsPlanOfferingPropertyKey_REGION *smithy.Schema
-
-var SavingsPlanOfferingPropertyKey_INSTANCE_FAMILY *smithy.Schema
-
-var _SavingsPlanOfferingPropertyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanOfferingPropertyList",
-}, smithy.ShapeTypeList, 1)
-var _SavingsPlanOfferingPropertyList_member *smithy.Schema
-
-var SavingsPlanOfferingRate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanOfferingRate",
-}, smithy.ShapeTypeStructure, 8)
-var SavingsPlanOfferingRate_savingsPlanOffering *smithy.Schema
-
-var SavingsPlanOfferingRate_rate *smithy.Schema
-
-var SavingsPlanOfferingRate_unit *smithy.Schema
-
-var SavingsPlanOfferingRate_productType *smithy.Schema
-
-var SavingsPlanOfferingRate_serviceCode *smithy.Schema
-
-var SavingsPlanOfferingRate_usageType *smithy.Schema
-
-var SavingsPlanOfferingRate_operation *smithy.Schema
-
-var SavingsPlanOfferingRate_properties *smithy.Schema
-
-var SavingsPlanOfferingRateFilterElement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanOfferingRateFilterElement",
-}, smithy.ShapeTypeStructure, 2)
-var SavingsPlanOfferingRateFilterElement_name *smithy.Schema
-
-var SavingsPlanOfferingRateFilterElement_values *smithy.Schema
-
-var _SavingsPlanOfferingRateFiltersList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanOfferingRateFiltersList",
-}, smithy.ShapeTypeList, 1)
-var _SavingsPlanOfferingRateFiltersList_member *smithy.Schema
-
-var SavingsPlanOfferingRateProperty = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanOfferingRateProperty",
-}, smithy.ShapeTypeStructure, 2)
-var SavingsPlanOfferingRateProperty_name *smithy.Schema
-
-var SavingsPlanOfferingRateProperty_value *smithy.Schema
-
-var _SavingsPlanOfferingRatePropertyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanOfferingRatePropertyList",
-}, smithy.ShapeTypeList, 1)
-var _SavingsPlanOfferingRatePropertyList_member *smithy.Schema
-
-var _SavingsPlanOfferingRatesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanOfferingRatesList",
-}, smithy.ShapeTypeList, 1)
-var _SavingsPlanOfferingRatesList_member *smithy.Schema
-
-var _SavingsPlanOfferingsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanOfferingsList",
-}, smithy.ShapeTypeList, 1)
-var _SavingsPlanOfferingsList_member *smithy.Schema
-
-var _SavingsPlanOperation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanOperation",
-}, smithy.ShapeTypeString, 0)
-
-var _SavingsPlanOperationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanOperationList",
-}, smithy.ShapeTypeList, 1)
-var _SavingsPlanOperationList_member *smithy.Schema
-
-var SavingsPlanPaymentOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanPaymentOption",
-}, smithy.ShapeTypeEnum, 3)
-var SavingsPlanPaymentOption_ALL_UPFRONT *smithy.Schema
-
-var SavingsPlanPaymentOption_PARTIAL_UPFRONT *smithy.Schema
-
-var SavingsPlanPaymentOption_NO_UPFRONT *smithy.Schema
-
-var _SavingsPlanPaymentOptionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanPaymentOptionList",
-}, smithy.ShapeTypeList, 1)
-var _SavingsPlanPaymentOptionList_member *smithy.Schema
-
-var SavingsPlanProductType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanProductType",
-}, smithy.ShapeTypeEnum, 14)
-var SavingsPlanProductType_EC2 *smithy.Schema
-
-var SavingsPlanProductType_FARGATE *smithy.Schema
-
-var SavingsPlanProductType_LAMBDA *smithy.Schema
-
-var SavingsPlanProductType_SAGEMAKER *smithy.Schema
-
-var SavingsPlanProductType_RDS *smithy.Schema
-
-var SavingsPlanProductType_DSQL *smithy.Schema
-
-var SavingsPlanProductType_DYNAMODB *smithy.Schema
-
-var SavingsPlanProductType_ELASTICACHE *smithy.Schema
-
-var SavingsPlanProductType_DOCDB *smithy.Schema
-
-var SavingsPlanProductType_NEPTUNE *smithy.Schema
-
-var SavingsPlanProductType_TIMESTREAM *smithy.Schema
-
-var SavingsPlanProductType_KEYSPACES *smithy.Schema
-
-var SavingsPlanProductType_DMS *smithy.Schema
-
-var SavingsPlanProductType_OPENSEARCH *smithy.Schema
-
-var _SavingsPlanProductTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanProductTypeList",
-}, smithy.ShapeTypeList, 1)
-var _SavingsPlanProductTypeList_member *smithy.Schema
-
-var SavingsPlanRate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanRate",
-}, smithy.ShapeTypeStructure, 8)
-var SavingsPlanRate_rate *smithy.Schema
-
-var SavingsPlanRate_currency *smithy.Schema
-
-var SavingsPlanRate_unit *smithy.Schema
-
-var SavingsPlanRate_productType *smithy.Schema
-
-var SavingsPlanRate_serviceCode *smithy.Schema
-
-var SavingsPlanRate_usageType *smithy.Schema
-
-var SavingsPlanRate_operation *smithy.Schema
-
-var SavingsPlanRate_properties *smithy.Schema
-
-var SavingsPlanRateFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanRateFilter",
-}, smithy.ShapeTypeStructure, 2)
-var SavingsPlanRateFilter_name *smithy.Schema
-
-var SavingsPlanRateFilter_values *smithy.Schema
-
-var SavingsPlanRateFilterAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanRateFilterAttribute",
-}, smithy.ShapeTypeEnum, 6)
-var SavingsPlanRateFilterAttribute_REGION *smithy.Schema
-
-var SavingsPlanRateFilterAttribute_INSTANCE_FAMILY *smithy.Schema
-
-var SavingsPlanRateFilterAttribute_INSTANCE_TYPE *smithy.Schema
-
-var SavingsPlanRateFilterAttribute_PRODUCT_DESCRIPTION *smithy.Schema
-
-var SavingsPlanRateFilterAttribute_TENANCY *smithy.Schema
-
-var SavingsPlanRateFilterAttribute_PRODUCT_ID *smithy.Schema
-
-var _SavingsPlanRateFilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanRateFilterList",
-}, smithy.ShapeTypeList, 1)
-var _SavingsPlanRateFilterList_member *smithy.Schema
-
-var SavingsPlanRateFilterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanRateFilterName",
-}, smithy.ShapeTypeEnum, 8)
-var SavingsPlanRateFilterName_REGION *smithy.Schema
-
-var SavingsPlanRateFilterName_INSTANCE_TYPE *smithy.Schema
-
-var SavingsPlanRateFilterName_PRODUCT_DESCRIPTION *smithy.Schema
-
-var SavingsPlanRateFilterName_TENANCY *smithy.Schema
-
-var SavingsPlanRateFilterName_PRODUCT_TYPE *smithy.Schema
-
-var SavingsPlanRateFilterName_SERVICE_CODE *smithy.Schema
-
-var SavingsPlanRateFilterName_USAGE_TYPE *smithy.Schema
-
-var SavingsPlanRateFilterName_OPERATION *smithy.Schema
-
-var _SavingsPlanRateList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanRateList",
-}, smithy.ShapeTypeList, 1)
-var _SavingsPlanRateList_member *smithy.Schema
-
-var _SavingsPlanRateOperation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanRateOperation",
-}, smithy.ShapeTypeString, 0)
-
-var _SavingsPlanRateOperationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanRateOperationList",
-}, smithy.ShapeTypeList, 1)
-var _SavingsPlanRateOperationList_member *smithy.Schema
-
-var _SavingsPlanRatePricePerUnit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanRatePricePerUnit",
-}, smithy.ShapeTypeString, 0)
-
-var SavingsPlanRateProperty = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanRateProperty",
-}, smithy.ShapeTypeStructure, 2)
-var SavingsPlanRateProperty_name *smithy.Schema
-
-var SavingsPlanRateProperty_value *smithy.Schema
-
-var SavingsPlanRatePropertyKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanRatePropertyKey",
-}, smithy.ShapeTypeEnum, 5)
-var SavingsPlanRatePropertyKey_REGION *smithy.Schema
-
-var SavingsPlanRatePropertyKey_INSTANCE_TYPE *smithy.Schema
-
-var SavingsPlanRatePropertyKey_INSTANCE_FAMILY *smithy.Schema
-
-var SavingsPlanRatePropertyKey_PRODUCT_DESCRIPTION *smithy.Schema
-
-var SavingsPlanRatePropertyKey_TENANCY *smithy.Schema
-
-var _SavingsPlanRatePropertyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanRatePropertyList",
-}, smithy.ShapeTypeList, 1)
-var _SavingsPlanRatePropertyList_member *smithy.Schema
-
-var SavingsPlanRateServiceCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanRateServiceCode",
-}, smithy.ShapeTypeEnum, 15)
-var SavingsPlanRateServiceCode_EC2 *smithy.Schema
-
-var SavingsPlanRateServiceCode_FARGATE *smithy.Schema
-
-var SavingsPlanRateServiceCode_FARGATE_EKS *smithy.Schema
-
-var SavingsPlanRateServiceCode_LAMBDA *smithy.Schema
-
-var SavingsPlanRateServiceCode_SAGEMAKER *smithy.Schema
-
-var SavingsPlanRateServiceCode_RDS *smithy.Schema
-
-var SavingsPlanRateServiceCode_AURORA *smithy.Schema
-
-var SavingsPlanRateServiceCode_DYNAMODB *smithy.Schema
-
-var SavingsPlanRateServiceCode_ELASTICACHE *smithy.Schema
-
-var SavingsPlanRateServiceCode_DOCDB *smithy.Schema
-
-var SavingsPlanRateServiceCode_NEPTUNE *smithy.Schema
-
-var SavingsPlanRateServiceCode_TIMESTREAM *smithy.Schema
-
-var SavingsPlanRateServiceCode_MCS *smithy.Schema
-
-var SavingsPlanRateServiceCode_DMS *smithy.Schema
-
-var SavingsPlanRateServiceCode_ES *smithy.Schema
-
-var _SavingsPlanRateServiceCodeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanRateServiceCodeList",
-}, smithy.ShapeTypeList, 1)
-var _SavingsPlanRateServiceCodeList_member *smithy.Schema
-
-var SavingsPlanRateUnit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanRateUnit",
-}, smithy.ShapeTypeEnum, 17)
-var SavingsPlanRateUnit_HOURS *smithy.Schema
-
-var SavingsPlanRateUnit_LAMBDA_GB_SECOND *smithy.Schema
-
-var SavingsPlanRateUnit_REQUEST *smithy.Schema
-
-var SavingsPlanRateUnit_ACU_HR *smithy.Schema
-
-var SavingsPlanRateUnit_READ_REQUEST_UNITS *smithy.Schema
-
-var SavingsPlanRateUnit_WRITE_REQUEST_UNITS *smithy.Schema
-
-var SavingsPlanRateUnit_READ_CAPACITY_UNIT_HRS *smithy.Schema
-
-var SavingsPlanRateUnit_WRITE_CAPACITY_UNIT_HRS *smithy.Schema
-
-var SavingsPlanRateUnit_REPLICATED_WRITE_REQUEST_UNITS *smithy.Schema
-
-var SavingsPlanRateUnit_REPLICATED_WRITE_CAPACITY_UNIT_HRS *smithy.Schema
-
-var SavingsPlanRateUnit_GB_HOURS *smithy.Schema
-
-var SavingsPlanRateUnit_DPU *smithy.Schema
-
-var SavingsPlanRateUnit_ELASTI_CACHE_PROCESSING_UNIT *smithy.Schema
-
-var SavingsPlanRateUnit_DCU_HR *smithy.Schema
-
-var SavingsPlanRateUnit_NCU_HR *smithy.Schema
-
-var SavingsPlanRateUnit_OCU_HRS *smithy.Schema
-
-var SavingsPlanRateUnit_JOBS *smithy.Schema
-
-var _SavingsPlanRateUsageType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanRateUsageType",
-}, smithy.ShapeTypeString, 0)
-
-var _SavingsPlanRateUsageTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanRateUsageTypeList",
-}, smithy.ShapeTypeList, 1)
-var _SavingsPlanRateUsageTypeList_member *smithy.Schema
-
-var _SavingsPlansDuration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlansDuration",
-}, smithy.ShapeTypeLong, 0)
-
-var _SavingsPlanServiceCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanServiceCode",
-}, smithy.ShapeTypeString, 0)
-
-var _SavingsPlanServiceCodeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanServiceCodeList",
-}, smithy.ShapeTypeList, 1)
-var _SavingsPlanServiceCodeList_member *smithy.Schema
-
-var SavingsPlansFilterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlansFilterName",
-}, smithy.ShapeTypeEnum, 10)
-var SavingsPlansFilterName_REGION *smithy.Schema
-
-var SavingsPlansFilterName_EC2_INSTANCE_FAMILY *smithy.Schema
-
-var SavingsPlansFilterName_COMMITMENT *smithy.Schema
-
-var SavingsPlansFilterName_UPFRONT *smithy.Schema
-
-var SavingsPlansFilterName_TERM *smithy.Schema
-
-var SavingsPlansFilterName_SAVINGS_PLAN_TYPE *smithy.Schema
-
-var SavingsPlansFilterName_PAYMENT_OPTION *smithy.Schema
-
-var SavingsPlansFilterName_START *smithy.Schema
-
-var SavingsPlansFilterName_END *smithy.Schema
-
-var SavingsPlansFilterName_INSTANCE_FAMILY *smithy.Schema
-
-var SavingsPlanState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanState",
-}, smithy.ShapeTypeEnum, 8)
-var SavingsPlanState_PAYMENT_PENDING *smithy.Schema
-
-var SavingsPlanState_PAYMENT_FAILED *smithy.Schema
-
-var SavingsPlanState_ACTIVE *smithy.Schema
-
-var SavingsPlanState_RETIRED *smithy.Schema
-
-var SavingsPlanState_QUEUED *smithy.Schema
-
-var SavingsPlanState_QUEUED_DELETED *smithy.Schema
-
-var SavingsPlanState_PENDING_RETURN *smithy.Schema
-
-var SavingsPlanState_RETURNED *smithy.Schema
-
-var _SavingsPlanStateList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanStateList",
-}, smithy.ShapeTypeList, 1)
-var _SavingsPlanStateList_member *smithy.Schema
-
-var SavingsPlanType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanType",
-}, smithy.ShapeTypeEnum, 4)
-var SavingsPlanType_COMPUTE *smithy.Schema
-
-var SavingsPlanType_EC2_INSTANCE *smithy.Schema
-
-var SavingsPlanType_SAGEMAKER *smithy.Schema
-
-var SavingsPlanType_DATABASE *smithy.Schema
-
-var _SavingsPlanTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanTypeList",
-}, smithy.ShapeTypeList, 1)
-var _SavingsPlanTypeList_member *smithy.Schema
-
-var _SavingsPlanUsageType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanUsageType",
-}, smithy.ShapeTypeString, 0)
-
-var _SavingsPlanUsageTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "SavingsPlanUsageTypeList",
-}, smithy.ShapeTypeList, 1)
-var _SavingsPlanUsageTypeList_member *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402},
-	&smithytraits.AWSQueryError{ErrorCode: "ServiceQuotaExceededException",
-		StatusCode: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "TagMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagMap_key *smithy.Schema
-
-var _TagMap_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _TermDurationInSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "TermDurationInSeconds",
-}, smithy.ShapeTypeLong, 0)
-
-var _UUID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "UUID",
-}, smithy.ShapeTypeString, 0)
-
-var _UUIDs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "UUIDs",
-}, smithy.ShapeTypeList, 1)
-var _UUIDs_member *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "ValidationException",
-		StatusCode: 400})
-var ValidationException_message *smithy.Schema
-
-var CreateSavingsPlanRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "CreateSavingsPlanRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateSavingsPlanRequest_savingsPlanOfferingId *smithy.Schema
-
-var CreateSavingsPlanRequest_commitment *smithy.Schema
-
-var CreateSavingsPlanRequest_upfrontPaymentAmount *smithy.Schema
-
-var CreateSavingsPlanRequest_purchaseTime *smithy.Schema
-
-var CreateSavingsPlanRequest_clientToken *smithy.Schema
-
-var CreateSavingsPlanRequest_tags *smithy.Schema
-
-var CreateSavingsPlanResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "CreateSavingsPlanResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateSavingsPlanResponse_savingsPlanId *smithy.Schema
-
-var DeleteQueuedSavingsPlanRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "DeleteQueuedSavingsPlanRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteQueuedSavingsPlanRequest_savingsPlanId *smithy.Schema
-
-var DeleteQueuedSavingsPlanResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "DeleteQueuedSavingsPlanResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DescribeSavingsPlanRatesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "DescribeSavingsPlanRatesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeSavingsPlanRatesRequest_savingsPlanId *smithy.Schema
-
-var DescribeSavingsPlanRatesRequest_filters *smithy.Schema
-
-var DescribeSavingsPlanRatesRequest_nextToken *smithy.Schema
-
-var DescribeSavingsPlanRatesRequest_maxResults *smithy.Schema
-
-var DescribeSavingsPlanRatesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "DescribeSavingsPlanRatesResponse",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeSavingsPlanRatesResponse_savingsPlanId *smithy.Schema
-
-var DescribeSavingsPlanRatesResponse_searchResults *smithy.Schema
-
-var DescribeSavingsPlanRatesResponse_nextToken *smithy.Schema
-
-var DescribeSavingsPlansRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "DescribeSavingsPlansRequest",
-}, smithy.ShapeTypeStructure, 6)
-var DescribeSavingsPlansRequest_savingsPlanArns *smithy.Schema
-
-var DescribeSavingsPlansRequest_savingsPlanIds *smithy.Schema
-
-var DescribeSavingsPlansRequest_nextToken *smithy.Schema
-
-var DescribeSavingsPlansRequest_maxResults *smithy.Schema
-
-var DescribeSavingsPlansRequest_states *smithy.Schema
-
-var DescribeSavingsPlansRequest_filters *smithy.Schema
-
-var DescribeSavingsPlansOfferingRatesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "DescribeSavingsPlansOfferingRatesRequest",
-}, smithy.ShapeTypeStructure, 10)
-var DescribeSavingsPlansOfferingRatesRequest_savingsPlanOfferingIds *smithy.Schema
-
-var DescribeSavingsPlansOfferingRatesRequest_savingsPlanPaymentOptions *smithy.Schema
-
-var DescribeSavingsPlansOfferingRatesRequest_savingsPlanTypes *smithy.Schema
-
-var DescribeSavingsPlansOfferingRatesRequest_products *smithy.Schema
-
-var DescribeSavingsPlansOfferingRatesRequest_serviceCodes *smithy.Schema
-
-var DescribeSavingsPlansOfferingRatesRequest_usageTypes *smithy.Schema
-
-var DescribeSavingsPlansOfferingRatesRequest_operations *smithy.Schema
-
-var DescribeSavingsPlansOfferingRatesRequest_filters *smithy.Schema
-
-var DescribeSavingsPlansOfferingRatesRequest_nextToken *smithy.Schema
-
-var DescribeSavingsPlansOfferingRatesRequest_maxResults *smithy.Schema
-
-var DescribeSavingsPlansOfferingRatesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "DescribeSavingsPlansOfferingRatesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeSavingsPlansOfferingRatesResponse_searchResults *smithy.Schema
-
-var DescribeSavingsPlansOfferingRatesResponse_nextToken *smithy.Schema
-
-var DescribeSavingsPlansOfferingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "DescribeSavingsPlansOfferingsRequest",
-}, smithy.ShapeTypeStructure, 13)
-var DescribeSavingsPlansOfferingsRequest_offeringIds *smithy.Schema
-
-var DescribeSavingsPlansOfferingsRequest_paymentOptions *smithy.Schema
-
-var DescribeSavingsPlansOfferingsRequest_productType *smithy.Schema
-
-var DescribeSavingsPlansOfferingsRequest_planTypes *smithy.Schema
-
-var DescribeSavingsPlansOfferingsRequest_durations *smithy.Schema
-
-var DescribeSavingsPlansOfferingsRequest_currencies *smithy.Schema
-
-var DescribeSavingsPlansOfferingsRequest_descriptions *smithy.Schema
-
-var DescribeSavingsPlansOfferingsRequest_serviceCodes *smithy.Schema
-
-var DescribeSavingsPlansOfferingsRequest_usageTypes *smithy.Schema
-
-var DescribeSavingsPlansOfferingsRequest_operations *smithy.Schema
-
-var DescribeSavingsPlansOfferingsRequest_filters *smithy.Schema
-
-var DescribeSavingsPlansOfferingsRequest_nextToken *smithy.Schema
-
-var DescribeSavingsPlansOfferingsRequest_maxResults *smithy.Schema
-
-var DescribeSavingsPlansOfferingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "DescribeSavingsPlansOfferingsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeSavingsPlansOfferingsResponse_searchResults *smithy.Schema
-
-var DescribeSavingsPlansOfferingsResponse_nextToken *smithy.Schema
-
-var DescribeSavingsPlansResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "DescribeSavingsPlansResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeSavingsPlansResponse_savingsPlans *smithy.Schema
-
-var DescribeSavingsPlansResponse_nextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_resourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var ReturnSavingsPlanRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "ReturnSavingsPlanRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ReturnSavingsPlanRequest_savingsPlanId *smithy.Schema
-
-var ReturnSavingsPlanRequest_clientToken *smithy.Schema
-
-var ReturnSavingsPlanResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "ReturnSavingsPlanResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ReturnSavingsPlanResponse_savingsPlanId *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.savingsplans",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	CurrencyCode_CNY = CurrencyCode.AddMember("CNY", smithyprelude.Unit)
-
-	CurrencyCode_USD = CurrencyCode.AddMember("USD", smithyprelude.Unit)
-
-	CurrencyCode_EUR = CurrencyCode.AddMember("EUR", smithyprelude.Unit)
-
-	_CurrencyList_member = _CurrencyList.AddMember("member", CurrencyCode)
-
-	_DurationsList_member = _DurationsList.AddMember("member", _SavingsPlansDuration)
-
-	_FilterValuesList_member = _FilterValuesList.AddMember("member", _JsonSafeFilterValueString)
-
-	InternalServerException_message = InternalServerException.AddMember("message", _String)
-
-	_ListOfStrings_member = _ListOfStrings.AddMember("member", _String)
-
-	SavingsPlanPaymentOption_ALL_UPFRONT = SavingsPlanPaymentOption.AddMember("ALL_UPFRONT", smithyprelude.Unit)
-
-	SavingsPlanPaymentOption_PARTIAL_UPFRONT = SavingsPlanPaymentOption.AddMember("PARTIAL_UPFRONT", smithyprelude.Unit)
-
-	SavingsPlanPaymentOption_NO_UPFRONT = SavingsPlanPaymentOption.AddMember("NO_UPFRONT", smithyprelude.Unit)
-
-	SavingsPlanType_COMPUTE = SavingsPlanType.AddMember("COMPUTE", smithyprelude.Unit)
-
-	SavingsPlanType_EC2_INSTANCE = SavingsPlanType.AddMember("EC2_INSTANCE", smithyprelude.Unit)
-
-	SavingsPlanType_SAGEMAKER = SavingsPlanType.AddMember("SAGEMAKER", smithyprelude.Unit)
-
-	SavingsPlanType_DATABASE = SavingsPlanType.AddMember("DATABASE", smithyprelude.Unit)
-
-	ParentSavingsPlanOffering_offeringId = ParentSavingsPlanOffering.AddMember("offeringId", _UUID)
-
-	ParentSavingsPlanOffering_paymentOption = ParentSavingsPlanOffering.AddMember("paymentOption", SavingsPlanPaymentOption)
-
-	ParentSavingsPlanOffering_planType = ParentSavingsPlanOffering.AddMember("planType", SavingsPlanType)
-
-	ParentSavingsPlanOffering_durationSeconds = ParentSavingsPlanOffering.AddMember("durationSeconds", _SavingsPlansDuration)
-
-	ParentSavingsPlanOffering_currency = ParentSavingsPlanOffering.AddMember("currency", CurrencyCode)
-
-	ParentSavingsPlanOffering_planDescription = ParentSavingsPlanOffering.AddMember("planDescription", _SavingsPlanDescription)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _String)
-
-	SavingsPlanState_PAYMENT_PENDING = SavingsPlanState.AddMember("PAYMENT_PENDING", smithyprelude.Unit)
-
-	SavingsPlanState_PAYMENT_FAILED = SavingsPlanState.AddMember("PAYMENT_FAILED", smithyprelude.Unit)
-
-	SavingsPlanState_ACTIVE = SavingsPlanState.AddMember("ACTIVE", smithyprelude.Unit)
-
-	SavingsPlanState_RETIRED = SavingsPlanState.AddMember("RETIRED", smithyprelude.Unit)
-
-	SavingsPlanState_QUEUED = SavingsPlanState.AddMember("QUEUED", smithyprelude.Unit)
-
-	SavingsPlanState_QUEUED_DELETED = SavingsPlanState.AddMember("QUEUED_DELETED", smithyprelude.Unit)
-
-	SavingsPlanState_PENDING_RETURN = SavingsPlanState.AddMember("PENDING_RETURN", smithyprelude.Unit)
-
-	SavingsPlanState_RETURNED = SavingsPlanState.AddMember("RETURNED", smithyprelude.Unit)
-
-	SavingsPlanProductType_EC2 = SavingsPlanProductType.AddMember("EC2", smithyprelude.Unit)
-
-	SavingsPlanProductType_FARGATE = SavingsPlanProductType.AddMember("FARGATE", smithyprelude.Unit)
-
-	SavingsPlanProductType_LAMBDA = SavingsPlanProductType.AddMember("LAMBDA", smithyprelude.Unit)
-
-	SavingsPlanProductType_SAGEMAKER = SavingsPlanProductType.AddMember("SAGEMAKER", smithyprelude.Unit)
-
-	SavingsPlanProductType_RDS = SavingsPlanProductType.AddMember("RDS", smithyprelude.Unit)
-
-	SavingsPlanProductType_DSQL = SavingsPlanProductType.AddMember("DSQL", smithyprelude.Unit)
-
-	SavingsPlanProductType_DYNAMODB = SavingsPlanProductType.AddMember("DYNAMODB", smithyprelude.Unit)
-
-	SavingsPlanProductType_ELASTICACHE = SavingsPlanProductType.AddMember("ELASTICACHE", smithyprelude.Unit)
-
-	SavingsPlanProductType_DOCDB = SavingsPlanProductType.AddMember("DOCDB", smithyprelude.Unit)
-
-	SavingsPlanProductType_NEPTUNE = SavingsPlanProductType.AddMember("NEPTUNE", smithyprelude.Unit)
-
-	SavingsPlanProductType_TIMESTREAM = SavingsPlanProductType.AddMember("TIMESTREAM", smithyprelude.Unit)
-
-	SavingsPlanProductType_KEYSPACES = SavingsPlanProductType.AddMember("KEYSPACES", smithyprelude.Unit)
-
-	SavingsPlanProductType_DMS = SavingsPlanProductType.AddMember("DMS", smithyprelude.Unit)
-
-	SavingsPlanProductType_OPENSEARCH = SavingsPlanProductType.AddMember("OPENSEARCH", smithyprelude.Unit)
-
-	_SavingsPlanProductTypeList_member = _SavingsPlanProductTypeList.AddMember("member", SavingsPlanProductType)
-
-	_TagMap_key = _TagMap.AddMember("key", _TagKey)
-
-	_TagMap_value = _TagMap.AddMember("value", _TagValue)
-
-	SavingsPlan_offeringId = SavingsPlan.AddMember("offeringId", _SavingsPlanOfferingId)
-
-	SavingsPlan_savingsPlanId = SavingsPlan.AddMember("savingsPlanId", _SavingsPlanId)
-
-	SavingsPlan_savingsPlanArn = SavingsPlan.AddMember("savingsPlanArn", _SavingsPlanArn)
-
-	SavingsPlan_description = SavingsPlan.AddMember("description", _String)
-
-	SavingsPlan_start = SavingsPlan.AddMember("start", _String)
-
-	SavingsPlan_end = SavingsPlan.AddMember("end", _String)
-
-	SavingsPlan_state = SavingsPlan.AddMember("state", SavingsPlanState)
-
-	SavingsPlan_region = SavingsPlan.AddMember("region", _Region)
-
-	SavingsPlan_ec2InstanceFamily = SavingsPlan.AddMember("ec2InstanceFamily", _EC2InstanceFamily)
-
-	SavingsPlan_savingsPlanType = SavingsPlan.AddMember("savingsPlanType", SavingsPlanType)
-
-	SavingsPlan_paymentOption = SavingsPlan.AddMember("paymentOption", SavingsPlanPaymentOption)
-
-	SavingsPlan_productTypes = SavingsPlan.AddMember("productTypes", _SavingsPlanProductTypeList)
-
-	SavingsPlan_currency = SavingsPlan.AddMember("currency", CurrencyCode)
-
-	SavingsPlan_commitment = SavingsPlan.AddMember("commitment", _Amount)
-
-	SavingsPlan_upfrontPaymentAmount = SavingsPlan.AddMember("upfrontPaymentAmount", _Amount)
-
-	SavingsPlan_recurringPaymentAmount = SavingsPlan.AddMember("recurringPaymentAmount", _Amount)
-
-	SavingsPlan_termDurationInSeconds = SavingsPlan.AddMember("termDurationInSeconds", _TermDurationInSeconds)
-
-	SavingsPlan_tags = SavingsPlan.AddMember("tags", _TagMap)
-
-	SavingsPlan_returnableUntil = SavingsPlan.AddMember("returnableUntil", _String)
-
-	_SavingsPlanArnList_member = _SavingsPlanArnList.AddMember("member", _SavingsPlanArn)
-
-	_SavingsPlanDescriptionsList_member = _SavingsPlanDescriptionsList.AddMember("member", _SavingsPlanDescription)
-
-	SavingsPlansFilterName_REGION = SavingsPlansFilterName.AddMember("REGION", smithyprelude.Unit)
-
-	SavingsPlansFilterName_EC2_INSTANCE_FAMILY = SavingsPlansFilterName.AddMember("EC2_INSTANCE_FAMILY", smithyprelude.Unit)
-
-	SavingsPlansFilterName_COMMITMENT = SavingsPlansFilterName.AddMember("COMMITMENT", smithyprelude.Unit)
-
-	SavingsPlansFilterName_UPFRONT = SavingsPlansFilterName.AddMember("UPFRONT", smithyprelude.Unit)
-
-	SavingsPlansFilterName_TERM = SavingsPlansFilterName.AddMember("TERM", smithyprelude.Unit)
-
-	SavingsPlansFilterName_SAVINGS_PLAN_TYPE = SavingsPlansFilterName.AddMember("SAVINGS_PLAN_TYPE", smithyprelude.Unit)
-
-	SavingsPlansFilterName_PAYMENT_OPTION = SavingsPlansFilterName.AddMember("PAYMENT_OPTION", smithyprelude.Unit)
-
-	SavingsPlansFilterName_START = SavingsPlansFilterName.AddMember("START", smithyprelude.Unit)
-
-	SavingsPlansFilterName_END = SavingsPlansFilterName.AddMember("END", smithyprelude.Unit)
-
-	SavingsPlansFilterName_INSTANCE_FAMILY = SavingsPlansFilterName.AddMember("INSTANCE_FAMILY", smithyprelude.Unit)
-
-	SavingsPlanFilter_name = SavingsPlanFilter.AddMember("name", SavingsPlansFilterName)
-
-	SavingsPlanFilter_values = SavingsPlanFilter.AddMember("values", _ListOfStrings)
-
-	_SavingsPlanFilterList_member = _SavingsPlanFilterList.AddMember("member", SavingsPlanFilter)
-
-	_SavingsPlanIdList_member = _SavingsPlanIdList.AddMember("member", _SavingsPlanId)
-
-	_SavingsPlanList_member = _SavingsPlanList.AddMember("member", SavingsPlan)
-
-	SavingsPlanOfferingPropertyKey_REGION = SavingsPlanOfferingPropertyKey.AddMember("REGION", smithyprelude.Unit)
-
-	SavingsPlanOfferingPropertyKey_INSTANCE_FAMILY = SavingsPlanOfferingPropertyKey.AddMember("INSTANCE_FAMILY", smithyprelude.Unit)
-
-	SavingsPlanOfferingProperty_name = SavingsPlanOfferingProperty.AddMember("name", SavingsPlanOfferingPropertyKey)
-
-	SavingsPlanOfferingProperty_value = SavingsPlanOfferingProperty.AddMember("value", _JsonSafeFilterValueString)
-
-	_SavingsPlanOfferingPropertyList_member = _SavingsPlanOfferingPropertyList.AddMember("member", SavingsPlanOfferingProperty)
-
-	SavingsPlanOffering_offeringId = SavingsPlanOffering.AddMember("offeringId", _UUID)
-
-	SavingsPlanOffering_productTypes = SavingsPlanOffering.AddMember("productTypes", _SavingsPlanProductTypeList)
-
-	SavingsPlanOffering_planType = SavingsPlanOffering.AddMember("planType", SavingsPlanType)
-
-	SavingsPlanOffering_description = SavingsPlanOffering.AddMember("description", _SavingsPlanDescription)
-
-	SavingsPlanOffering_paymentOption = SavingsPlanOffering.AddMember("paymentOption", SavingsPlanPaymentOption)
-
-	SavingsPlanOffering_durationSeconds = SavingsPlanOffering.AddMember("durationSeconds", _SavingsPlansDuration)
-
-	SavingsPlanOffering_currency = SavingsPlanOffering.AddMember("currency", CurrencyCode)
-
-	SavingsPlanOffering_serviceCode = SavingsPlanOffering.AddMember("serviceCode", _SavingsPlanServiceCode)
-
-	SavingsPlanOffering_usageType = SavingsPlanOffering.AddMember("usageType", _SavingsPlanUsageType)
-
-	SavingsPlanOffering_operation = SavingsPlanOffering.AddMember("operation", _SavingsPlanOperation)
-
-	SavingsPlanOffering_properties = SavingsPlanOffering.AddMember("properties", _SavingsPlanOfferingPropertyList)
-
-	SavingsPlanOfferingFilterAttribute_region = SavingsPlanOfferingFilterAttribute.AddMember("region", smithyprelude.Unit)
-
-	SavingsPlanOfferingFilterAttribute_instanceFamily = SavingsPlanOfferingFilterAttribute.AddMember("instanceFamily", smithyprelude.Unit)
-
-	SavingsPlanOfferingFilterElement_name = SavingsPlanOfferingFilterElement.AddMember("name", SavingsPlanOfferingFilterAttribute)
-
-	SavingsPlanOfferingFilterElement_values = SavingsPlanOfferingFilterElement.AddMember("values", _FilterValuesList)
-
-	_SavingsPlanOfferingFiltersList_member = _SavingsPlanOfferingFiltersList.AddMember("member", SavingsPlanOfferingFilterElement)
-
-	SavingsPlanRateUnit_HOURS = SavingsPlanRateUnit.AddMember("HOURS", smithyprelude.Unit)
-
-	SavingsPlanRateUnit_LAMBDA_GB_SECOND = SavingsPlanRateUnit.AddMember("LAMBDA_GB_SECOND", smithyprelude.Unit)
-
-	SavingsPlanRateUnit_REQUEST = SavingsPlanRateUnit.AddMember("REQUEST", smithyprelude.Unit)
-
-	SavingsPlanRateUnit_ACU_HR = SavingsPlanRateUnit.AddMember("ACU_HR", smithyprelude.Unit)
-
-	SavingsPlanRateUnit_READ_REQUEST_UNITS = SavingsPlanRateUnit.AddMember("READ_REQUEST_UNITS", smithyprelude.Unit)
-
-	SavingsPlanRateUnit_WRITE_REQUEST_UNITS = SavingsPlanRateUnit.AddMember("WRITE_REQUEST_UNITS", smithyprelude.Unit)
-
-	SavingsPlanRateUnit_READ_CAPACITY_UNIT_HRS = SavingsPlanRateUnit.AddMember("READ_CAPACITY_UNIT_HRS", smithyprelude.Unit)
-
-	SavingsPlanRateUnit_WRITE_CAPACITY_UNIT_HRS = SavingsPlanRateUnit.AddMember("WRITE_CAPACITY_UNIT_HRS", smithyprelude.Unit)
-
-	SavingsPlanRateUnit_REPLICATED_WRITE_REQUEST_UNITS = SavingsPlanRateUnit.AddMember("REPLICATED_WRITE_REQUEST_UNITS", smithyprelude.Unit)
-
-	SavingsPlanRateUnit_REPLICATED_WRITE_CAPACITY_UNIT_HRS = SavingsPlanRateUnit.AddMember("REPLICATED_WRITE_CAPACITY_UNIT_HRS", smithyprelude.Unit)
-
-	SavingsPlanRateUnit_GB_HOURS = SavingsPlanRateUnit.AddMember("GB_HOURS", smithyprelude.Unit)
-
-	SavingsPlanRateUnit_DPU = SavingsPlanRateUnit.AddMember("DPU", smithyprelude.Unit)
-
-	SavingsPlanRateUnit_ELASTI_CACHE_PROCESSING_UNIT = SavingsPlanRateUnit.AddMember("ELASTI_CACHE_PROCESSING_UNIT", smithyprelude.Unit)
-
-	SavingsPlanRateUnit_DCU_HR = SavingsPlanRateUnit.AddMember("DCU_HR", smithyprelude.Unit)
-
-	SavingsPlanRateUnit_NCU_HR = SavingsPlanRateUnit.AddMember("NCU_HR", smithyprelude.Unit)
-
-	SavingsPlanRateUnit_OCU_HRS = SavingsPlanRateUnit.AddMember("OCU_HRS", smithyprelude.Unit)
-
-	SavingsPlanRateUnit_JOBS = SavingsPlanRateUnit.AddMember("JOBS", smithyprelude.Unit)
-
-	SavingsPlanRateServiceCode_EC2 = SavingsPlanRateServiceCode.AddMember("EC2", smithyprelude.Unit)
-
-	SavingsPlanRateServiceCode_FARGATE = SavingsPlanRateServiceCode.AddMember("FARGATE", smithyprelude.Unit)
-
-	SavingsPlanRateServiceCode_FARGATE_EKS = SavingsPlanRateServiceCode.AddMember("FARGATE_EKS", smithyprelude.Unit)
-
-	SavingsPlanRateServiceCode_LAMBDA = SavingsPlanRateServiceCode.AddMember("LAMBDA", smithyprelude.Unit)
-
-	SavingsPlanRateServiceCode_SAGEMAKER = SavingsPlanRateServiceCode.AddMember("SAGEMAKER", smithyprelude.Unit)
-
-	SavingsPlanRateServiceCode_RDS = SavingsPlanRateServiceCode.AddMember("RDS", smithyprelude.Unit)
-
-	SavingsPlanRateServiceCode_AURORA = SavingsPlanRateServiceCode.AddMember("AURORA", smithyprelude.Unit)
-
-	SavingsPlanRateServiceCode_DYNAMODB = SavingsPlanRateServiceCode.AddMember("DYNAMODB", smithyprelude.Unit)
-
-	SavingsPlanRateServiceCode_ELASTICACHE = SavingsPlanRateServiceCode.AddMember("ELASTICACHE", smithyprelude.Unit)
-
-	SavingsPlanRateServiceCode_DOCDB = SavingsPlanRateServiceCode.AddMember("DOCDB", smithyprelude.Unit)
-
-	SavingsPlanRateServiceCode_NEPTUNE = SavingsPlanRateServiceCode.AddMember("NEPTUNE", smithyprelude.Unit)
-
-	SavingsPlanRateServiceCode_TIMESTREAM = SavingsPlanRateServiceCode.AddMember("TIMESTREAM", smithyprelude.Unit)
-
-	SavingsPlanRateServiceCode_MCS = SavingsPlanRateServiceCode.AddMember("MCS", smithyprelude.Unit)
-
-	SavingsPlanRateServiceCode_DMS = SavingsPlanRateServiceCode.AddMember("DMS", smithyprelude.Unit)
-
-	SavingsPlanRateServiceCode_ES = SavingsPlanRateServiceCode.AddMember("ES", smithyprelude.Unit)
-
-	SavingsPlanOfferingRateProperty_name = SavingsPlanOfferingRateProperty.AddMember("name", _JsonSafeFilterValueString)
-
-	SavingsPlanOfferingRateProperty_value = SavingsPlanOfferingRateProperty.AddMember("value", _JsonSafeFilterValueString)
-
-	_SavingsPlanOfferingRatePropertyList_member = _SavingsPlanOfferingRatePropertyList.AddMember("member", SavingsPlanOfferingRateProperty)
-
-	SavingsPlanOfferingRate_savingsPlanOffering = SavingsPlanOfferingRate.AddMember("savingsPlanOffering", ParentSavingsPlanOffering)
-
-	SavingsPlanOfferingRate_rate = SavingsPlanOfferingRate.AddMember("rate", _SavingsPlanRatePricePerUnit)
-
-	SavingsPlanOfferingRate_unit = SavingsPlanOfferingRate.AddMember("unit", SavingsPlanRateUnit)
-
-	SavingsPlanOfferingRate_productType = SavingsPlanOfferingRate.AddMember("productType", SavingsPlanProductType)
-
-	SavingsPlanOfferingRate_serviceCode = SavingsPlanOfferingRate.AddMember("serviceCode", SavingsPlanRateServiceCode)
-
-	SavingsPlanOfferingRate_usageType = SavingsPlanOfferingRate.AddMember("usageType", _SavingsPlanRateUsageType)
-
-	SavingsPlanOfferingRate_operation = SavingsPlanOfferingRate.AddMember("operation", _SavingsPlanRateOperation)
-
-	SavingsPlanOfferingRate_properties = SavingsPlanOfferingRate.AddMember("properties", _SavingsPlanOfferingRatePropertyList)
-
-	SavingsPlanRateFilterAttribute_REGION = SavingsPlanRateFilterAttribute.AddMember("REGION", smithyprelude.Unit)
-
-	SavingsPlanRateFilterAttribute_INSTANCE_FAMILY = SavingsPlanRateFilterAttribute.AddMember("INSTANCE_FAMILY", smithyprelude.Unit)
-
-	SavingsPlanRateFilterAttribute_INSTANCE_TYPE = SavingsPlanRateFilterAttribute.AddMember("INSTANCE_TYPE", smithyprelude.Unit)
-
-	SavingsPlanRateFilterAttribute_PRODUCT_DESCRIPTION = SavingsPlanRateFilterAttribute.AddMember("PRODUCT_DESCRIPTION", smithyprelude.Unit)
-
-	SavingsPlanRateFilterAttribute_TENANCY = SavingsPlanRateFilterAttribute.AddMember("TENANCY", smithyprelude.Unit)
-
-	SavingsPlanRateFilterAttribute_PRODUCT_ID = SavingsPlanRateFilterAttribute.AddMember("PRODUCT_ID", smithyprelude.Unit)
-
-	SavingsPlanOfferingRateFilterElement_name = SavingsPlanOfferingRateFilterElement.AddMember("name", SavingsPlanRateFilterAttribute)
-
-	SavingsPlanOfferingRateFilterElement_values = SavingsPlanOfferingRateFilterElement.AddMember("values", _FilterValuesList)
-
-	_SavingsPlanOfferingRateFiltersList_member = _SavingsPlanOfferingRateFiltersList.AddMember("member", SavingsPlanOfferingRateFilterElement)
-
-	_SavingsPlanOfferingRatesList_member = _SavingsPlanOfferingRatesList.AddMember("member", SavingsPlanOfferingRate)
-
-	_SavingsPlanOfferingsList_member = _SavingsPlanOfferingsList.AddMember("member", SavingsPlanOffering)
-
-	_SavingsPlanOperationList_member = _SavingsPlanOperationList.AddMember("member", _SavingsPlanOperation)
-
-	_SavingsPlanPaymentOptionList_member = _SavingsPlanPaymentOptionList.AddMember("member", SavingsPlanPaymentOption)
-
-	SavingsPlanRatePropertyKey_REGION = SavingsPlanRatePropertyKey.AddMember("REGION", smithyprelude.Unit)
-
-	SavingsPlanRatePropertyKey_INSTANCE_TYPE = SavingsPlanRatePropertyKey.AddMember("INSTANCE_TYPE", smithyprelude.Unit)
-
-	SavingsPlanRatePropertyKey_INSTANCE_FAMILY = SavingsPlanRatePropertyKey.AddMember("INSTANCE_FAMILY", smithyprelude.Unit)
-
-	SavingsPlanRatePropertyKey_PRODUCT_DESCRIPTION = SavingsPlanRatePropertyKey.AddMember("PRODUCT_DESCRIPTION", smithyprelude.Unit)
-
-	SavingsPlanRatePropertyKey_TENANCY = SavingsPlanRatePropertyKey.AddMember("TENANCY", smithyprelude.Unit)
-
-	SavingsPlanRateProperty_name = SavingsPlanRateProperty.AddMember("name", SavingsPlanRatePropertyKey)
-
-	SavingsPlanRateProperty_value = SavingsPlanRateProperty.AddMember("value", _JsonSafeFilterValueString)
-
-	_SavingsPlanRatePropertyList_member = _SavingsPlanRatePropertyList.AddMember("member", SavingsPlanRateProperty)
-
-	SavingsPlanRate_rate = SavingsPlanRate.AddMember("rate", _Amount)
-
-	SavingsPlanRate_currency = SavingsPlanRate.AddMember("currency", CurrencyCode)
-
-	SavingsPlanRate_unit = SavingsPlanRate.AddMember("unit", SavingsPlanRateUnit)
-
-	SavingsPlanRate_productType = SavingsPlanRate.AddMember("productType", SavingsPlanProductType)
-
-	SavingsPlanRate_serviceCode = SavingsPlanRate.AddMember("serviceCode", SavingsPlanRateServiceCode)
-
-	SavingsPlanRate_usageType = SavingsPlanRate.AddMember("usageType", _SavingsPlanRateUsageType)
-
-	SavingsPlanRate_operation = SavingsPlanRate.AddMember("operation", _SavingsPlanRateOperation)
-
-	SavingsPlanRate_properties = SavingsPlanRate.AddMember("properties", _SavingsPlanRatePropertyList)
-
-	SavingsPlanRateFilterName_REGION = SavingsPlanRateFilterName.AddMember("REGION", smithyprelude.Unit)
-
-	SavingsPlanRateFilterName_INSTANCE_TYPE = SavingsPlanRateFilterName.AddMember("INSTANCE_TYPE", smithyprelude.Unit)
-
-	SavingsPlanRateFilterName_PRODUCT_DESCRIPTION = SavingsPlanRateFilterName.AddMember("PRODUCT_DESCRIPTION", smithyprelude.Unit)
-
-	SavingsPlanRateFilterName_TENANCY = SavingsPlanRateFilterName.AddMember("TENANCY", smithyprelude.Unit)
-
-	SavingsPlanRateFilterName_PRODUCT_TYPE = SavingsPlanRateFilterName.AddMember("PRODUCT_TYPE", smithyprelude.Unit)
-
-	SavingsPlanRateFilterName_SERVICE_CODE = SavingsPlanRateFilterName.AddMember("SERVICE_CODE", smithyprelude.Unit)
-
-	SavingsPlanRateFilterName_USAGE_TYPE = SavingsPlanRateFilterName.AddMember("USAGE_TYPE", smithyprelude.Unit)
-
-	SavingsPlanRateFilterName_OPERATION = SavingsPlanRateFilterName.AddMember("OPERATION", smithyprelude.Unit)
-
-	SavingsPlanRateFilter_name = SavingsPlanRateFilter.AddMember("name", SavingsPlanRateFilterName)
-
-	SavingsPlanRateFilter_values = SavingsPlanRateFilter.AddMember("values", _ListOfStrings)
-
-	_SavingsPlanRateFilterList_member = _SavingsPlanRateFilterList.AddMember("member", SavingsPlanRateFilter)
-
-	_SavingsPlanRateList_member = _SavingsPlanRateList.AddMember("member", SavingsPlanRate)
-
-	_SavingsPlanRateOperationList_member = _SavingsPlanRateOperationList.AddMember("member", _SavingsPlanRateOperation)
-
-	_SavingsPlanRateServiceCodeList_member = _SavingsPlanRateServiceCodeList.AddMember("member", SavingsPlanRateServiceCode)
-
-	_SavingsPlanRateUsageTypeList_member = _SavingsPlanRateUsageTypeList.AddMember("member", _SavingsPlanRateUsageType)
-
-	_SavingsPlanServiceCodeList_member = _SavingsPlanServiceCodeList.AddMember("member", _SavingsPlanServiceCode)
-
-	_SavingsPlanStateList_member = _SavingsPlanStateList.AddMember("member", SavingsPlanState)
-
-	_SavingsPlanTypeList_member = _SavingsPlanTypeList.AddMember("member", SavingsPlanType)
-
-	_SavingsPlanUsageTypeList_member = _SavingsPlanUsageTypeList.AddMember("member", _SavingsPlanUsageType)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", _String)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_UUIDs_member = _UUIDs.AddMember("member", _UUID)
-
-	ValidationException_message = ValidationException.AddMember("message", _String)
-
-	CreateSavingsPlanRequest_savingsPlanOfferingId = CreateSavingsPlanRequest.AddMember("savingsPlanOfferingId", _SavingsPlanOfferingId)
-
-	CreateSavingsPlanRequest_commitment = CreateSavingsPlanRequest.AddMember("commitment", _Amount)
-
-	CreateSavingsPlanRequest_upfrontPaymentAmount = CreateSavingsPlanRequest.AddMember("upfrontPaymentAmount", _Amount)
-
-	CreateSavingsPlanRequest_purchaseTime = CreateSavingsPlanRequest.AddMember("purchaseTime", _DateTime)
-
-	CreateSavingsPlanRequest_clientToken = CreateSavingsPlanRequest.AddMember("clientToken", _ClientToken)
-
-	CreateSavingsPlanRequest_tags = CreateSavingsPlanRequest.AddMember("tags", _TagMap)
-
-	CreateSavingsPlanResponse_savingsPlanId = CreateSavingsPlanResponse.AddMember("savingsPlanId", _SavingsPlanId)
-
-	DeleteQueuedSavingsPlanRequest_savingsPlanId = DeleteQueuedSavingsPlanRequest.AddMember("savingsPlanId", _SavingsPlanId)
-
-	DescribeSavingsPlanRatesRequest_savingsPlanId = DescribeSavingsPlanRatesRequest.AddMember("savingsPlanId", _SavingsPlanId)
-
-	DescribeSavingsPlanRatesRequest_filters = DescribeSavingsPlanRatesRequest.AddMember("filters", _SavingsPlanRateFilterList)
-
-	DescribeSavingsPlanRatesRequest_nextToken = DescribeSavingsPlanRatesRequest.AddMember("nextToken", _PaginationToken)
-
-	DescribeSavingsPlanRatesRequest_maxResults = DescribeSavingsPlanRatesRequest.AddMember("maxResults", _MaxResults)
-
-	DescribeSavingsPlanRatesResponse_savingsPlanId = DescribeSavingsPlanRatesResponse.AddMember("savingsPlanId", _SavingsPlanId)
-
-	DescribeSavingsPlanRatesResponse_searchResults = DescribeSavingsPlanRatesResponse.AddMember("searchResults", _SavingsPlanRateList)
-
-	DescribeSavingsPlanRatesResponse_nextToken = DescribeSavingsPlanRatesResponse.AddMember("nextToken", _PaginationToken)
-
-	DescribeSavingsPlansRequest_savingsPlanArns = DescribeSavingsPlansRequest.AddMember("savingsPlanArns", _SavingsPlanArnList)
-
-	DescribeSavingsPlansRequest_savingsPlanIds = DescribeSavingsPlansRequest.AddMember("savingsPlanIds", _SavingsPlanIdList)
-
-	DescribeSavingsPlansRequest_nextToken = DescribeSavingsPlansRequest.AddMember("nextToken", _PaginationToken)
-
-	DescribeSavingsPlansRequest_maxResults = DescribeSavingsPlansRequest.AddMember("maxResults", _MaxResults)
-
-	DescribeSavingsPlansRequest_states = DescribeSavingsPlansRequest.AddMember("states", _SavingsPlanStateList)
-
-	DescribeSavingsPlansRequest_filters = DescribeSavingsPlansRequest.AddMember("filters", _SavingsPlanFilterList)
-
-	DescribeSavingsPlansOfferingRatesRequest_savingsPlanOfferingIds = DescribeSavingsPlansOfferingRatesRequest.AddMember("savingsPlanOfferingIds", _UUIDs)
-
-	DescribeSavingsPlansOfferingRatesRequest_savingsPlanPaymentOptions = DescribeSavingsPlansOfferingRatesRequest.AddMember("savingsPlanPaymentOptions", _SavingsPlanPaymentOptionList)
-
-	DescribeSavingsPlansOfferingRatesRequest_savingsPlanTypes = DescribeSavingsPlansOfferingRatesRequest.AddMember("savingsPlanTypes", _SavingsPlanTypeList)
-
-	DescribeSavingsPlansOfferingRatesRequest_products = DescribeSavingsPlansOfferingRatesRequest.AddMember("products", _SavingsPlanProductTypeList)
-
-	DescribeSavingsPlansOfferingRatesRequest_serviceCodes = DescribeSavingsPlansOfferingRatesRequest.AddMember("serviceCodes", _SavingsPlanRateServiceCodeList)
-
-	DescribeSavingsPlansOfferingRatesRequest_usageTypes = DescribeSavingsPlansOfferingRatesRequest.AddMember("usageTypes", _SavingsPlanRateUsageTypeList)
-
-	DescribeSavingsPlansOfferingRatesRequest_operations = DescribeSavingsPlansOfferingRatesRequest.AddMember("operations", _SavingsPlanRateOperationList)
-
-	DescribeSavingsPlansOfferingRatesRequest_filters = DescribeSavingsPlansOfferingRatesRequest.AddMember("filters", _SavingsPlanOfferingRateFiltersList)
-
-	DescribeSavingsPlansOfferingRatesRequest_nextToken = DescribeSavingsPlansOfferingRatesRequest.AddMember("nextToken", _PaginationToken)
-
-	DescribeSavingsPlansOfferingRatesRequest_maxResults = DescribeSavingsPlansOfferingRatesRequest.AddMember("maxResults", _PageSize)
-
-	DescribeSavingsPlansOfferingRatesResponse_searchResults = DescribeSavingsPlansOfferingRatesResponse.AddMember("searchResults", _SavingsPlanOfferingRatesList)
-
-	DescribeSavingsPlansOfferingRatesResponse_nextToken = DescribeSavingsPlansOfferingRatesResponse.AddMember("nextToken", _PaginationToken)
-
-	DescribeSavingsPlansOfferingsRequest_offeringIds = DescribeSavingsPlansOfferingsRequest.AddMember("offeringIds", _UUIDs)
-
-	DescribeSavingsPlansOfferingsRequest_paymentOptions = DescribeSavingsPlansOfferingsRequest.AddMember("paymentOptions", _SavingsPlanPaymentOptionList)
-
-	DescribeSavingsPlansOfferingsRequest_productType = DescribeSavingsPlansOfferingsRequest.AddMember("productType", SavingsPlanProductType)
-
-	DescribeSavingsPlansOfferingsRequest_planTypes = DescribeSavingsPlansOfferingsRequest.AddMember("planTypes", _SavingsPlanTypeList)
-
-	DescribeSavingsPlansOfferingsRequest_durations = DescribeSavingsPlansOfferingsRequest.AddMember("durations", _DurationsList)
-
-	DescribeSavingsPlansOfferingsRequest_currencies = DescribeSavingsPlansOfferingsRequest.AddMember("currencies", _CurrencyList)
-
-	DescribeSavingsPlansOfferingsRequest_descriptions = DescribeSavingsPlansOfferingsRequest.AddMember("descriptions", _SavingsPlanDescriptionsList)
-
-	DescribeSavingsPlansOfferingsRequest_serviceCodes = DescribeSavingsPlansOfferingsRequest.AddMember("serviceCodes", _SavingsPlanServiceCodeList)
-
-	DescribeSavingsPlansOfferingsRequest_usageTypes = DescribeSavingsPlansOfferingsRequest.AddMember("usageTypes", _SavingsPlanUsageTypeList)
-
-	DescribeSavingsPlansOfferingsRequest_operations = DescribeSavingsPlansOfferingsRequest.AddMember("operations", _SavingsPlanOperationList)
-
-	DescribeSavingsPlansOfferingsRequest_filters = DescribeSavingsPlansOfferingsRequest.AddMember("filters", _SavingsPlanOfferingFiltersList)
-
-	DescribeSavingsPlansOfferingsRequest_nextToken = DescribeSavingsPlansOfferingsRequest.AddMember("nextToken", _PaginationToken)
-
-	DescribeSavingsPlansOfferingsRequest_maxResults = DescribeSavingsPlansOfferingsRequest.AddMember("maxResults", _PageSize)
-
-	DescribeSavingsPlansOfferingsResponse_searchResults = DescribeSavingsPlansOfferingsResponse.AddMember("searchResults", _SavingsPlanOfferingsList)
-
-	DescribeSavingsPlansOfferingsResponse_nextToken = DescribeSavingsPlansOfferingsResponse.AddMember("nextToken", _PaginationToken)
-
-	DescribeSavingsPlansResponse_savingsPlans = DescribeSavingsPlansResponse.AddMember("savingsPlans", _SavingsPlanList)
-
-	DescribeSavingsPlansResponse_nextToken = DescribeSavingsPlansResponse.AddMember("nextToken", _PaginationToken)
-
-	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", _SavingsPlanArn)
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _TagMap)
-
-	ReturnSavingsPlanRequest_savingsPlanId = ReturnSavingsPlanRequest.AddMember("savingsPlanId", _SavingsPlanId)
-
-	ReturnSavingsPlanRequest_clientToken = ReturnSavingsPlanRequest.AddMember("clientToken", _ClientToken)
-
-	ReturnSavingsPlanResponse_savingsPlanId = ReturnSavingsPlanResponse.AddMember("savingsPlanId", _SavingsPlanId)
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _SavingsPlanArn)
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _TagMap)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", _SavingsPlanArn)
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeyList)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InternalServerException",
+	StatusCode: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x240}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ResourceNotFoundException",
+	StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ServiceQuotaExceededException",
+	StatusCode: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ValidationException",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+
+var mCurrencyCode = smithy.SchemaMembers{List: []*smithy.Schema{&sCurrencyCode_CNY, &sCurrencyCode_USD, &sCurrencyCode_EUR}}
+var m_CurrencyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CurrencyList_member}}
+var m_DurationsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DurationsList_member}}
+var m_FilterValuesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FilterValuesList_member}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message}}
+var m_ListOfStrings = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListOfStrings_member}}
+var mParentSavingsPlanOffering = smithy.SchemaMembers{List: []*smithy.Schema{&sParentSavingsPlanOffering_offeringId, &sParentSavingsPlanOffering_paymentOption, &sParentSavingsPlanOffering_planType, &sParentSavingsPlanOffering_durationSeconds, &sParentSavingsPlanOffering_currency, &sParentSavingsPlanOffering_planDescription}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message}}
+var mSavingsPlan = smithy.SchemaMembers{List: []*smithy.Schema{&sSavingsPlan_offeringId, &sSavingsPlan_savingsPlanId, &sSavingsPlan_savingsPlanArn, &sSavingsPlan_description, &sSavingsPlan_start, &sSavingsPlan_end, &sSavingsPlan_state, &sSavingsPlan_region, &sSavingsPlan_ec2InstanceFamily, &sSavingsPlan_savingsPlanType, &sSavingsPlan_paymentOption, &sSavingsPlan_productTypes, &sSavingsPlan_currency, &sSavingsPlan_commitment, &sSavingsPlan_upfrontPaymentAmount, &sSavingsPlan_recurringPaymentAmount, &sSavingsPlan_termDurationInSeconds, &sSavingsPlan_tags, &sSavingsPlan_returnableUntil}, Seed: 7, Slots: []uint16{
+	14, 6, 0, 0, 0, 0, 3, 0, 0, 7, 2, 0, 4, 9, 17, 15, 0, 16, 0, 0, 0, 10, 0, 0,
+	0, 0, 0, 0, 1, 0, 0, 12, 0, 19, 0, 0, 0, 0, 8, 11, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 13, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 18, 0,
+}}
+var m_SavingsPlanArnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SavingsPlanArnList_member}}
+var m_SavingsPlanDescriptionsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SavingsPlanDescriptionsList_member}}
+var mSavingsPlanFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sSavingsPlanFilter_name, &sSavingsPlanFilter_values}}
+var m_SavingsPlanFilterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SavingsPlanFilterList_member}}
+var m_SavingsPlanIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SavingsPlanIdList_member}}
+var m_SavingsPlanList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SavingsPlanList_member}}
+var mSavingsPlanOffering = smithy.SchemaMembers{List: []*smithy.Schema{&sSavingsPlanOffering_offeringId, &sSavingsPlanOffering_productTypes, &sSavingsPlanOffering_planType, &sSavingsPlanOffering_description, &sSavingsPlanOffering_paymentOption, &sSavingsPlanOffering_durationSeconds, &sSavingsPlanOffering_currency, &sSavingsPlanOffering_serviceCode, &sSavingsPlanOffering_usageType, &sSavingsPlanOffering_operation, &sSavingsPlanOffering_properties}, Seed: 4, Slots: []uint16{
+	0, 0, 0, 0, 6, 0, 0, 0, 9, 0, 4, 0, 0, 0, 0, 0, 0, 0, 3, 11, 5, 0, 0, 7,
+	10, 0, 1, 0, 0, 0, 8, 2,
+}}
+var mSavingsPlanOfferingFilterAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&sSavingsPlanOfferingFilterAttribute_region, &sSavingsPlanOfferingFilterAttribute_instanceFamily}}
+var mSavingsPlanOfferingFilterElement = smithy.SchemaMembers{List: []*smithy.Schema{&sSavingsPlanOfferingFilterElement_name, &sSavingsPlanOfferingFilterElement_values}}
+var m_SavingsPlanOfferingFiltersList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SavingsPlanOfferingFiltersList_member}}
+var mSavingsPlanOfferingProperty = smithy.SchemaMembers{List: []*smithy.Schema{&sSavingsPlanOfferingProperty_name, &sSavingsPlanOfferingProperty_value}}
+var mSavingsPlanOfferingPropertyKey = smithy.SchemaMembers{List: []*smithy.Schema{&sSavingsPlanOfferingPropertyKey_REGION, &sSavingsPlanOfferingPropertyKey_INSTANCE_FAMILY}}
+var m_SavingsPlanOfferingPropertyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SavingsPlanOfferingPropertyList_member}}
+var mSavingsPlanOfferingRate = smithy.SchemaMembers{List: []*smithy.Schema{&sSavingsPlanOfferingRate_savingsPlanOffering, &sSavingsPlanOfferingRate_rate, &sSavingsPlanOfferingRate_unit, &sSavingsPlanOfferingRate_productType, &sSavingsPlanOfferingRate_serviceCode, &sSavingsPlanOfferingRate_usageType, &sSavingsPlanOfferingRate_operation, &sSavingsPlanOfferingRate_properties}}
+var mSavingsPlanOfferingRateFilterElement = smithy.SchemaMembers{List: []*smithy.Schema{&sSavingsPlanOfferingRateFilterElement_name, &sSavingsPlanOfferingRateFilterElement_values}}
+var m_SavingsPlanOfferingRateFiltersList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SavingsPlanOfferingRateFiltersList_member}}
+var mSavingsPlanOfferingRateProperty = smithy.SchemaMembers{List: []*smithy.Schema{&sSavingsPlanOfferingRateProperty_name, &sSavingsPlanOfferingRateProperty_value}}
+var m_SavingsPlanOfferingRatePropertyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SavingsPlanOfferingRatePropertyList_member}}
+var m_SavingsPlanOfferingRatesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SavingsPlanOfferingRatesList_member}}
+var m_SavingsPlanOfferingsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SavingsPlanOfferingsList_member}}
+var m_SavingsPlanOperationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SavingsPlanOperationList_member}}
+var mSavingsPlanPaymentOption = smithy.SchemaMembers{List: []*smithy.Schema{&sSavingsPlanPaymentOption_ALL_UPFRONT, &sSavingsPlanPaymentOption_PARTIAL_UPFRONT, &sSavingsPlanPaymentOption_NO_UPFRONT}}
+var m_SavingsPlanPaymentOptionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SavingsPlanPaymentOptionList_member}}
+var mSavingsPlanProductType = smithy.SchemaMembers{List: []*smithy.Schema{&sSavingsPlanProductType_EC2, &sSavingsPlanProductType_FARGATE, &sSavingsPlanProductType_LAMBDA, &sSavingsPlanProductType_SAGEMAKER, &sSavingsPlanProductType_RDS, &sSavingsPlanProductType_DSQL, &sSavingsPlanProductType_DYNAMODB, &sSavingsPlanProductType_ELASTICACHE, &sSavingsPlanProductType_DOCDB, &sSavingsPlanProductType_NEPTUNE, &sSavingsPlanProductType_TIMESTREAM, &sSavingsPlanProductType_KEYSPACES, &sSavingsPlanProductType_DMS, &sSavingsPlanProductType_OPENSEARCH}, Seed: 9, Slots: []uint16{
+	4, 0, 7, 0, 0, 11, 0, 0, 13, 0, 0, 3, 0, 1, 0, 0, 14, 0, 8, 6, 0, 0, 10, 12,
+	5, 0, 0, 0, 2, 9, 0, 0,
+}}
+var m_SavingsPlanProductTypeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SavingsPlanProductTypeList_member}}
+var mSavingsPlanRate = smithy.SchemaMembers{List: []*smithy.Schema{&sSavingsPlanRate_rate, &sSavingsPlanRate_currency, &sSavingsPlanRate_unit, &sSavingsPlanRate_productType, &sSavingsPlanRate_serviceCode, &sSavingsPlanRate_usageType, &sSavingsPlanRate_operation, &sSavingsPlanRate_properties}}
+var mSavingsPlanRateFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sSavingsPlanRateFilter_name, &sSavingsPlanRateFilter_values}}
+var mSavingsPlanRateFilterAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&sSavingsPlanRateFilterAttribute_REGION, &sSavingsPlanRateFilterAttribute_INSTANCE_FAMILY, &sSavingsPlanRateFilterAttribute_INSTANCE_TYPE, &sSavingsPlanRateFilterAttribute_PRODUCT_DESCRIPTION, &sSavingsPlanRateFilterAttribute_TENANCY, &sSavingsPlanRateFilterAttribute_PRODUCT_ID}}
+var m_SavingsPlanRateFilterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SavingsPlanRateFilterList_member}}
+var mSavingsPlanRateFilterName = smithy.SchemaMembers{List: []*smithy.Schema{&sSavingsPlanRateFilterName_REGION, &sSavingsPlanRateFilterName_INSTANCE_TYPE, &sSavingsPlanRateFilterName_PRODUCT_DESCRIPTION, &sSavingsPlanRateFilterName_TENANCY, &sSavingsPlanRateFilterName_PRODUCT_TYPE, &sSavingsPlanRateFilterName_SERVICE_CODE, &sSavingsPlanRateFilterName_USAGE_TYPE, &sSavingsPlanRateFilterName_OPERATION}}
+var m_SavingsPlanRateList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SavingsPlanRateList_member}}
+var m_SavingsPlanRateOperationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SavingsPlanRateOperationList_member}}
+var mSavingsPlanRateProperty = smithy.SchemaMembers{List: []*smithy.Schema{&sSavingsPlanRateProperty_name, &sSavingsPlanRateProperty_value}}
+var mSavingsPlanRatePropertyKey = smithy.SchemaMembers{List: []*smithy.Schema{&sSavingsPlanRatePropertyKey_REGION, &sSavingsPlanRatePropertyKey_INSTANCE_TYPE, &sSavingsPlanRatePropertyKey_INSTANCE_FAMILY, &sSavingsPlanRatePropertyKey_PRODUCT_DESCRIPTION, &sSavingsPlanRatePropertyKey_TENANCY}}
+var m_SavingsPlanRatePropertyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SavingsPlanRatePropertyList_member}}
+var mSavingsPlanRateServiceCode = smithy.SchemaMembers{List: []*smithy.Schema{&sSavingsPlanRateServiceCode_EC2, &sSavingsPlanRateServiceCode_FARGATE, &sSavingsPlanRateServiceCode_FARGATE_EKS, &sSavingsPlanRateServiceCode_LAMBDA, &sSavingsPlanRateServiceCode_SAGEMAKER, &sSavingsPlanRateServiceCode_RDS, &sSavingsPlanRateServiceCode_AURORA, &sSavingsPlanRateServiceCode_DYNAMODB, &sSavingsPlanRateServiceCode_ELASTICACHE, &sSavingsPlanRateServiceCode_DOCDB, &sSavingsPlanRateServiceCode_NEPTUNE, &sSavingsPlanRateServiceCode_TIMESTREAM, &sSavingsPlanRateServiceCode_MCS, &sSavingsPlanRateServiceCode_DMS, &sSavingsPlanRateServiceCode_ES}, Seed: 9, Slots: []uint16{
+	5, 15, 8, 0, 3, 12, 0, 0, 14, 0, 7, 4, 0, 1, 0, 0, 0, 0, 9, 0, 0, 0, 11, 0,
+	6, 13, 0, 0, 2, 10, 0, 0,
+}}
+var m_SavingsPlanRateServiceCodeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SavingsPlanRateServiceCodeList_member}}
+var mSavingsPlanRateUnit = smithy.SchemaMembers{List: []*smithy.Schema{&sSavingsPlanRateUnit_HOURS, &sSavingsPlanRateUnit_LAMBDA_GB_SECOND, &sSavingsPlanRateUnit_REQUEST, &sSavingsPlanRateUnit_ACU_HR, &sSavingsPlanRateUnit_READ_REQUEST_UNITS, &sSavingsPlanRateUnit_WRITE_REQUEST_UNITS, &sSavingsPlanRateUnit_READ_CAPACITY_UNIT_HRS, &sSavingsPlanRateUnit_WRITE_CAPACITY_UNIT_HRS, &sSavingsPlanRateUnit_REPLICATED_WRITE_REQUEST_UNITS, &sSavingsPlanRateUnit_REPLICATED_WRITE_CAPACITY_UNIT_HRS, &sSavingsPlanRateUnit_GB_HOURS, &sSavingsPlanRateUnit_DPU, &sSavingsPlanRateUnit_ELASTI_CACHE_PROCESSING_UNIT, &sSavingsPlanRateUnit_DCU_HR, &sSavingsPlanRateUnit_NCU_HR, &sSavingsPlanRateUnit_OCU_HRS, &sSavingsPlanRateUnit_JOBS}, Seed: 8, Slots: []uint16{
+	0, 6, 0, 3, 14, 0, 1, 7, 0, 0, 0, 0, 0, 0, 17, 0, 11, 0, 12, 0, 0, 8, 0, 5,
+	0, 0, 0, 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0,
+	0, 0, 2, 0, 0, 0, 0, 9, 0, 13, 0, 0, 0, 0, 16, 0,
+}}
+var m_SavingsPlanRateUsageTypeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SavingsPlanRateUsageTypeList_member}}
+var m_SavingsPlanServiceCodeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SavingsPlanServiceCodeList_member}}
+var mSavingsPlansFilterName = smithy.SchemaMembers{List: []*smithy.Schema{&sSavingsPlansFilterName_REGION, &sSavingsPlansFilterName_EC2_INSTANCE_FAMILY, &sSavingsPlansFilterName_COMMITMENT, &sSavingsPlansFilterName_UPFRONT, &sSavingsPlansFilterName_TERM, &sSavingsPlansFilterName_SAVINGS_PLAN_TYPE, &sSavingsPlansFilterName_PAYMENT_OPTION, &sSavingsPlansFilterName_START, &sSavingsPlansFilterName_END, &sSavingsPlansFilterName_INSTANCE_FAMILY}, Seed: 1, Slots: []uint16{
+	0, 9, 0, 4, 0, 3, 0, 0, 0, 0, 8, 6, 0, 0, 1, 2, 0, 7, 0, 0, 0, 0, 0, 0,
+	5, 10, 0, 0, 0, 0, 0, 0,
+}}
+var mSavingsPlanState = smithy.SchemaMembers{List: []*smithy.Schema{&sSavingsPlanState_PAYMENT_PENDING, &sSavingsPlanState_PAYMENT_FAILED, &sSavingsPlanState_ACTIVE, &sSavingsPlanState_RETIRED, &sSavingsPlanState_QUEUED, &sSavingsPlanState_QUEUED_DELETED, &sSavingsPlanState_PENDING_RETURN, &sSavingsPlanState_RETURNED}}
+var m_SavingsPlanStateList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SavingsPlanStateList_member}}
+var mSavingsPlanType = smithy.SchemaMembers{List: []*smithy.Schema{&sSavingsPlanType_COMPUTE, &sSavingsPlanType_EC2_INSTANCE, &sSavingsPlanType_SAGEMAKER, &sSavingsPlanType_DATABASE}}
+var m_SavingsPlanTypeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SavingsPlanTypeList_member}}
+var m_SavingsPlanUsageTypeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SavingsPlanUsageTypeList_member}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagMap_key, &s_TagMap_value}}
+var m_UUIDs = smithy.SchemaMembers{List: []*smithy.Schema{&s_UUIDs_member}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message}}
+var mCreateSavingsPlanRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSavingsPlanRequest_savingsPlanOfferingId, &sCreateSavingsPlanRequest_commitment, &sCreateSavingsPlanRequest_upfrontPaymentAmount, &sCreateSavingsPlanRequest_purchaseTime, &sCreateSavingsPlanRequest_clientToken, &sCreateSavingsPlanRequest_tags}}
+var mCreateSavingsPlanResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSavingsPlanResponse_savingsPlanId}}
+var mDeleteQueuedSavingsPlanRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteQueuedSavingsPlanRequest_savingsPlanId}}
+var mDescribeSavingsPlanRatesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSavingsPlanRatesRequest_savingsPlanId, &sDescribeSavingsPlanRatesRequest_filters, &sDescribeSavingsPlanRatesRequest_nextToken, &sDescribeSavingsPlanRatesRequest_maxResults}}
+var mDescribeSavingsPlanRatesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSavingsPlanRatesResponse_savingsPlanId, &sDescribeSavingsPlanRatesResponse_searchResults, &sDescribeSavingsPlanRatesResponse_nextToken}}
+var mDescribeSavingsPlansRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSavingsPlansRequest_savingsPlanArns, &sDescribeSavingsPlansRequest_savingsPlanIds, &sDescribeSavingsPlansRequest_nextToken, &sDescribeSavingsPlansRequest_maxResults, &sDescribeSavingsPlansRequest_states, &sDescribeSavingsPlansRequest_filters}}
+var mDescribeSavingsPlansOfferingRatesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSavingsPlansOfferingRatesRequest_savingsPlanOfferingIds, &sDescribeSavingsPlansOfferingRatesRequest_savingsPlanPaymentOptions, &sDescribeSavingsPlansOfferingRatesRequest_savingsPlanTypes, &sDescribeSavingsPlansOfferingRatesRequest_products, &sDescribeSavingsPlansOfferingRatesRequest_serviceCodes, &sDescribeSavingsPlansOfferingRatesRequest_usageTypes, &sDescribeSavingsPlansOfferingRatesRequest_operations, &sDescribeSavingsPlansOfferingRatesRequest_filters, &sDescribeSavingsPlansOfferingRatesRequest_nextToken, &sDescribeSavingsPlansOfferingRatesRequest_maxResults}, Seed: 1, Slots: []uint16{
+	0, 0, 0, 0, 8, 0, 0, 3, 0, 10, 2, 0, 0, 0, 0, 0, 0, 5, 7, 4, 1, 6, 0, 0,
+	0, 0, 0, 9, 0, 0, 0, 0,
+}}
+var mDescribeSavingsPlansOfferingRatesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSavingsPlansOfferingRatesResponse_searchResults, &sDescribeSavingsPlansOfferingRatesResponse_nextToken}}
+var mDescribeSavingsPlansOfferingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSavingsPlansOfferingsRequest_offeringIds, &sDescribeSavingsPlansOfferingsRequest_paymentOptions, &sDescribeSavingsPlansOfferingsRequest_productType, &sDescribeSavingsPlansOfferingsRequest_planTypes, &sDescribeSavingsPlansOfferingsRequest_durations, &sDescribeSavingsPlansOfferingsRequest_currencies, &sDescribeSavingsPlansOfferingsRequest_descriptions, &sDescribeSavingsPlansOfferingsRequest_serviceCodes, &sDescribeSavingsPlansOfferingsRequest_usageTypes, &sDescribeSavingsPlansOfferingsRequest_operations, &sDescribeSavingsPlansOfferingsRequest_filters, &sDescribeSavingsPlansOfferingsRequest_nextToken, &sDescribeSavingsPlansOfferingsRequest_maxResults}, Seed: 18, Slots: []uint16{
+	0, 11, 0, 0, 10, 5, 1, 0, 0, 0, 0, 0, 3, 0, 9, 0, 4, 8, 0, 0, 0, 0, 6, 0,
+	0, 2, 13, 0, 12, 7, 0, 0,
+}}
+var mDescribeSavingsPlansOfferingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSavingsPlansOfferingsResponse_searchResults, &sDescribeSavingsPlansOfferingsResponse_nextToken}}
+var mDescribeSavingsPlansResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSavingsPlansResponse_savingsPlans, &sDescribeSavingsPlansResponse_nextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_resourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_tags}}
+var mReturnSavingsPlanRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sReturnSavingsPlanRequest_savingsPlanId, &sReturnSavingsPlanRequest_clientToken}}
+var mReturnSavingsPlanResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sReturnSavingsPlanResponse_savingsPlanId}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_resourceArn, &sTagResourceRequest_tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_resourceArn, &sUntagResourceRequest_tagKeys}}
+
+var sCreateSavingsPlan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSavingsPlan, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sDeleteQueuedSavingsPlan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteQueuedSavingsPlan, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sDescribeSavingsPlanRates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSavingsPlanRates, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sDescribeSavingsPlans = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSavingsPlans, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sDescribeSavingsPlansOfferingRates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSavingsPlansOfferingRates, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sDescribeSavingsPlansOfferings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSavingsPlansOfferings, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t6, Type: smithy.ShapeTypeOperation})
+var sReturnSavingsPlan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReturnSavingsPlan, Traits: &t7, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t8, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t9, Type: smithy.ShapeTypeOperation})
+var s_AWSSavingsPlan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSSavingsPlan, Type: smithy.ShapeTypeService})
+var s_Amount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Amount, Type: smithy.ShapeTypeString})
+var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCurrencyCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCurrencyCode, Members: &mCurrencyCode, Type: smithy.ShapeTypeEnum})
+var s_CurrencyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CurrencyList, Members: &m_CurrencyList, Type: smithy.ShapeTypeList})
+var s_DateTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp})
+var s_DurationsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DurationsList, Members: &m_DurationsList, Type: smithy.ShapeTypeList})
+var s_EC2InstanceFamily = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EC2InstanceFamily, Type: smithy.ShapeTypeString})
+var s_FilterValuesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterValuesList, Members: &m_FilterValuesList, Type: smithy.ShapeTypeList})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t10, Type: smithy.ShapeTypeStructure})
+var s_JsonSafeFilterValueString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JsonSafeFilterValueString, Type: smithy.ShapeTypeString})
+var s_ListOfStrings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListOfStrings, Members: &m_ListOfStrings, Type: smithy.ShapeTypeList})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var s_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PageSize, Type: smithy.ShapeTypeInteger})
+var s_PaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sParentSavingsPlanOffering = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iParentSavingsPlanOffering, Members: &mParentSavingsPlanOffering, Type: smithy.ShapeTypeStructure})
+var s_Region = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Region, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t11, Type: smithy.ShapeTypeStructure})
+var sSavingsPlan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSavingsPlan, Members: &mSavingsPlan, Type: smithy.ShapeTypeStructure})
+var s_SavingsPlanArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SavingsPlanArn, Type: smithy.ShapeTypeString})
+var s_SavingsPlanArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SavingsPlanArnList, Members: &m_SavingsPlanArnList, Type: smithy.ShapeTypeList})
+var s_SavingsPlanDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SavingsPlanDescription, Type: smithy.ShapeTypeString})
+var s_SavingsPlanDescriptionsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SavingsPlanDescriptionsList, Members: &m_SavingsPlanDescriptionsList, Type: smithy.ShapeTypeList})
+var sSavingsPlanFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSavingsPlanFilter, Members: &mSavingsPlanFilter, Type: smithy.ShapeTypeStructure})
+var s_SavingsPlanFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SavingsPlanFilterList, Members: &m_SavingsPlanFilterList, Type: smithy.ShapeTypeList})
+var s_SavingsPlanId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SavingsPlanId, Type: smithy.ShapeTypeString})
+var s_SavingsPlanIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SavingsPlanIdList, Members: &m_SavingsPlanIdList, Type: smithy.ShapeTypeList})
+var s_SavingsPlanList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SavingsPlanList, Members: &m_SavingsPlanList, Type: smithy.ShapeTypeList})
+var sSavingsPlanOffering = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSavingsPlanOffering, Members: &mSavingsPlanOffering, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanOfferingFilterAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSavingsPlanOfferingFilterAttribute, Members: &mSavingsPlanOfferingFilterAttribute, Type: smithy.ShapeTypeEnum})
+var sSavingsPlanOfferingFilterElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSavingsPlanOfferingFilterElement, Members: &mSavingsPlanOfferingFilterElement, Type: smithy.ShapeTypeStructure})
+var s_SavingsPlanOfferingFiltersList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SavingsPlanOfferingFiltersList, Members: &m_SavingsPlanOfferingFiltersList, Type: smithy.ShapeTypeList})
+var s_SavingsPlanOfferingId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SavingsPlanOfferingId, Type: smithy.ShapeTypeString})
+var sSavingsPlanOfferingProperty = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSavingsPlanOfferingProperty, Members: &mSavingsPlanOfferingProperty, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanOfferingPropertyKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSavingsPlanOfferingPropertyKey, Members: &mSavingsPlanOfferingPropertyKey, Type: smithy.ShapeTypeEnum})
+var s_SavingsPlanOfferingPropertyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SavingsPlanOfferingPropertyList, Members: &m_SavingsPlanOfferingPropertyList, Type: smithy.ShapeTypeList})
+var sSavingsPlanOfferingRate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSavingsPlanOfferingRate, Members: &mSavingsPlanOfferingRate, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanOfferingRateFilterElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSavingsPlanOfferingRateFilterElement, Members: &mSavingsPlanOfferingRateFilterElement, Type: smithy.ShapeTypeStructure})
+var s_SavingsPlanOfferingRateFiltersList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SavingsPlanOfferingRateFiltersList, Members: &m_SavingsPlanOfferingRateFiltersList, Type: smithy.ShapeTypeList})
+var sSavingsPlanOfferingRateProperty = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSavingsPlanOfferingRateProperty, Members: &mSavingsPlanOfferingRateProperty, Type: smithy.ShapeTypeStructure})
+var s_SavingsPlanOfferingRatePropertyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SavingsPlanOfferingRatePropertyList, Members: &m_SavingsPlanOfferingRatePropertyList, Type: smithy.ShapeTypeList})
+var s_SavingsPlanOfferingRatesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SavingsPlanOfferingRatesList, Members: &m_SavingsPlanOfferingRatesList, Type: smithy.ShapeTypeList})
+var s_SavingsPlanOfferingsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SavingsPlanOfferingsList, Members: &m_SavingsPlanOfferingsList, Type: smithy.ShapeTypeList})
+var s_SavingsPlanOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SavingsPlanOperation, Type: smithy.ShapeTypeString})
+var s_SavingsPlanOperationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SavingsPlanOperationList, Members: &m_SavingsPlanOperationList, Type: smithy.ShapeTypeList})
+var sSavingsPlanPaymentOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSavingsPlanPaymentOption, Members: &mSavingsPlanPaymentOption, Type: smithy.ShapeTypeEnum})
+var s_SavingsPlanPaymentOptionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SavingsPlanPaymentOptionList, Members: &m_SavingsPlanPaymentOptionList, Type: smithy.ShapeTypeList})
+var sSavingsPlanProductType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSavingsPlanProductType, Members: &mSavingsPlanProductType, Type: smithy.ShapeTypeEnum})
+var s_SavingsPlanProductTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SavingsPlanProductTypeList, Members: &m_SavingsPlanProductTypeList, Type: smithy.ShapeTypeList})
+var sSavingsPlanRate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSavingsPlanRate, Members: &mSavingsPlanRate, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRateFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSavingsPlanRateFilter, Members: &mSavingsPlanRateFilter, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRateFilterAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSavingsPlanRateFilterAttribute, Members: &mSavingsPlanRateFilterAttribute, Type: smithy.ShapeTypeEnum})
+var s_SavingsPlanRateFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SavingsPlanRateFilterList, Members: &m_SavingsPlanRateFilterList, Type: smithy.ShapeTypeList})
+var sSavingsPlanRateFilterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSavingsPlanRateFilterName, Members: &mSavingsPlanRateFilterName, Type: smithy.ShapeTypeEnum})
+var s_SavingsPlanRateList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SavingsPlanRateList, Members: &m_SavingsPlanRateList, Type: smithy.ShapeTypeList})
+var s_SavingsPlanRateOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SavingsPlanRateOperation, Type: smithy.ShapeTypeString})
+var s_SavingsPlanRateOperationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SavingsPlanRateOperationList, Members: &m_SavingsPlanRateOperationList, Type: smithy.ShapeTypeList})
+var s_SavingsPlanRatePricePerUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SavingsPlanRatePricePerUnit, Type: smithy.ShapeTypeString})
+var sSavingsPlanRateProperty = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSavingsPlanRateProperty, Members: &mSavingsPlanRateProperty, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRatePropertyKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSavingsPlanRatePropertyKey, Members: &mSavingsPlanRatePropertyKey, Type: smithy.ShapeTypeEnum})
+var s_SavingsPlanRatePropertyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SavingsPlanRatePropertyList, Members: &m_SavingsPlanRatePropertyList, Type: smithy.ShapeTypeList})
+var sSavingsPlanRateServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSavingsPlanRateServiceCode, Members: &mSavingsPlanRateServiceCode, Type: smithy.ShapeTypeEnum})
+var s_SavingsPlanRateServiceCodeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SavingsPlanRateServiceCodeList, Members: &m_SavingsPlanRateServiceCodeList, Type: smithy.ShapeTypeList})
+var sSavingsPlanRateUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSavingsPlanRateUnit, Members: &mSavingsPlanRateUnit, Type: smithy.ShapeTypeEnum})
+var s_SavingsPlanRateUsageType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SavingsPlanRateUsageType, Type: smithy.ShapeTypeString})
+var s_SavingsPlanRateUsageTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SavingsPlanRateUsageTypeList, Members: &m_SavingsPlanRateUsageTypeList, Type: smithy.ShapeTypeList})
+var s_SavingsPlansDuration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SavingsPlansDuration, Type: smithy.ShapeTypeLong})
+var s_SavingsPlanServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SavingsPlanServiceCode, Type: smithy.ShapeTypeString})
+var s_SavingsPlanServiceCodeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SavingsPlanServiceCodeList, Members: &m_SavingsPlanServiceCodeList, Type: smithy.ShapeTypeList})
+var sSavingsPlansFilterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSavingsPlansFilterName, Members: &mSavingsPlansFilterName, Type: smithy.ShapeTypeEnum})
+var sSavingsPlanState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSavingsPlanState, Members: &mSavingsPlanState, Type: smithy.ShapeTypeEnum})
+var s_SavingsPlanStateList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SavingsPlanStateList, Members: &m_SavingsPlanStateList, Type: smithy.ShapeTypeList})
+var sSavingsPlanType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSavingsPlanType, Members: &mSavingsPlanType, Type: smithy.ShapeTypeEnum})
+var s_SavingsPlanTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SavingsPlanTypeList, Members: &m_SavingsPlanTypeList, Type: smithy.ShapeTypeList})
+var s_SavingsPlanUsageType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SavingsPlanUsageType, Type: smithy.ShapeTypeString})
+var s_SavingsPlanUsageTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SavingsPlanUsageTypeList, Members: &m_SavingsPlanUsageTypeList, Type: smithy.ShapeTypeList})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t12, Type: smithy.ShapeTypeStructure})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_TermDurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TermDurationInSeconds, Type: smithy.ShapeTypeLong})
+var s_UUID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UUID, Type: smithy.ShapeTypeString})
+var s_UUIDs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UUIDs, Members: &m_UUIDs, Type: smithy.ShapeTypeList})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t13, Type: smithy.ShapeTypeStructure})
+var sCreateSavingsPlanRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSavingsPlanRequest, Members: &mCreateSavingsPlanRequest, Type: smithy.ShapeTypeStructure})
+var sCreateSavingsPlanResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSavingsPlanResponse, Members: &mCreateSavingsPlanResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteQueuedSavingsPlanRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteQueuedSavingsPlanRequest, Members: &mDeleteQueuedSavingsPlanRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteQueuedSavingsPlanResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteQueuedSavingsPlanResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeSavingsPlanRatesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSavingsPlanRatesRequest, Members: &mDescribeSavingsPlanRatesRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeSavingsPlanRatesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSavingsPlanRatesResponse, Members: &mDescribeSavingsPlanRatesResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeSavingsPlansRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSavingsPlansRequest, Members: &mDescribeSavingsPlansRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeSavingsPlansOfferingRatesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSavingsPlansOfferingRatesRequest, Members: &mDescribeSavingsPlansOfferingRatesRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeSavingsPlansOfferingRatesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSavingsPlansOfferingRatesResponse, Members: &mDescribeSavingsPlansOfferingRatesResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeSavingsPlansOfferingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSavingsPlansOfferingsRequest, Members: &mDescribeSavingsPlansOfferingsRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeSavingsPlansOfferingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSavingsPlansOfferingsResponse, Members: &mDescribeSavingsPlansOfferingsResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeSavingsPlansResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSavingsPlansResponse, Members: &mDescribeSavingsPlansResponse, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure})
+var sReturnSavingsPlanRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReturnSavingsPlanRequest, Members: &mReturnSavingsPlanRequest, Type: smithy.ShapeTypeStructure})
+var sReturnSavingsPlanResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReturnSavingsPlanResponse, Members: &mReturnSavingsPlanResponse, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure})
+
+var sCurrencyCode_CNY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CNY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_USD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_EUR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EUR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_CurrencyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCurrencyCode, Members: &mCurrencyCode, Type: smithy.ShapeTypeEnum})
+var s_DurationsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SavingsPlansDuration, Type: smithy.ShapeTypeLong})
+var s_FilterValuesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_JsonSafeFilterValueString, Type: smithy.ShapeTypeString})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_ListOfStrings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString})
+var sParentSavingsPlanOffering_offeringId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "offeringId", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sParentSavingsPlanOffering_paymentOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "paymentOption", ID: &iSavingsPlanPaymentOption, Members: &mSavingsPlanPaymentOption, Type: smithy.ShapeTypeEnum})
+var sParentSavingsPlanOffering_planType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "planType", ID: &iSavingsPlanType, Members: &mSavingsPlanType, Type: smithy.ShapeTypeEnum})
+var sParentSavingsPlanOffering_durationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "durationSeconds", ID: &i_SavingsPlansDuration, Type: smithy.ShapeTypeLong})
+var sParentSavingsPlanOffering_currency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "currency", ID: &iCurrencyCode, Members: &mCurrencyCode, Type: smithy.ShapeTypeEnum})
+var sParentSavingsPlanOffering_planDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "planDescription", ID: &i_SavingsPlanDescription, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSavingsPlan_offeringId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "offeringId", ID: &i_SavingsPlanOfferingId, Type: smithy.ShapeTypeString})
+var sSavingsPlan_savingsPlanId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "savingsPlanId", ID: &i_SavingsPlanId, Type: smithy.ShapeTypeString})
+var sSavingsPlan_savingsPlanArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "savingsPlanArn", ID: &i_SavingsPlanArn, Type: smithy.ShapeTypeString})
+var sSavingsPlan_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSavingsPlan_start = smithy.NewStaticSchema(smithy.StaticSchema{Member: "start", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSavingsPlan_end = smithy.NewStaticSchema(smithy.StaticSchema{Member: "end", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSavingsPlan_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iSavingsPlanState, Members: &mSavingsPlanState, Type: smithy.ShapeTypeEnum})
+var sSavingsPlan_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &i_Region, Type: smithy.ShapeTypeString})
+var sSavingsPlan_ec2InstanceFamily = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ec2InstanceFamily", ID: &i_EC2InstanceFamily, Type: smithy.ShapeTypeString})
+var sSavingsPlan_savingsPlanType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "savingsPlanType", ID: &iSavingsPlanType, Members: &mSavingsPlanType, Type: smithy.ShapeTypeEnum})
+var sSavingsPlan_paymentOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "paymentOption", ID: &iSavingsPlanPaymentOption, Members: &mSavingsPlanPaymentOption, Type: smithy.ShapeTypeEnum})
+var sSavingsPlan_productTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "productTypes", ID: &i_SavingsPlanProductTypeList, Members: &m_SavingsPlanProductTypeList, Type: smithy.ShapeTypeList})
+var sSavingsPlan_currency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "currency", ID: &iCurrencyCode, Members: &mCurrencyCode, Type: smithy.ShapeTypeEnum})
+var sSavingsPlan_commitment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitment", ID: &i_Amount, Type: smithy.ShapeTypeString})
+var sSavingsPlan_upfrontPaymentAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "upfrontPaymentAmount", ID: &i_Amount, Type: smithy.ShapeTypeString})
+var sSavingsPlan_recurringPaymentAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recurringPaymentAmount", ID: &i_Amount, Type: smithy.ShapeTypeString})
+var sSavingsPlan_termDurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "termDurationInSeconds", ID: &i_TermDurationInSeconds, Type: smithy.ShapeTypeLong})
+var sSavingsPlan_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sSavingsPlan_returnableUntil = smithy.NewStaticSchema(smithy.StaticSchema{Member: "returnableUntil", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_SavingsPlanArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SavingsPlanArn, Type: smithy.ShapeTypeString})
+var s_SavingsPlanDescriptionsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SavingsPlanDescription, Type: smithy.ShapeTypeString})
+var sSavingsPlanFilter_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &iSavingsPlansFilterName, Members: &mSavingsPlansFilterName, Type: smithy.ShapeTypeEnum})
+var sSavingsPlanFilter_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_ListOfStrings, Members: &m_ListOfStrings, Type: smithy.ShapeTypeList})
+var s_SavingsPlanFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSavingsPlanFilter, Members: &mSavingsPlanFilter, Type: smithy.ShapeTypeStructure})
+var s_SavingsPlanIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SavingsPlanId, Type: smithy.ShapeTypeString})
+var s_SavingsPlanList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSavingsPlan, Members: &mSavingsPlan, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanOffering_offeringId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "offeringId", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sSavingsPlanOffering_productTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "productTypes", ID: &i_SavingsPlanProductTypeList, Members: &m_SavingsPlanProductTypeList, Type: smithy.ShapeTypeList})
+var sSavingsPlanOffering_planType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "planType", ID: &iSavingsPlanType, Members: &mSavingsPlanType, Type: smithy.ShapeTypeEnum})
+var sSavingsPlanOffering_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_SavingsPlanDescription, Type: smithy.ShapeTypeString})
+var sSavingsPlanOffering_paymentOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "paymentOption", ID: &iSavingsPlanPaymentOption, Members: &mSavingsPlanPaymentOption, Type: smithy.ShapeTypeEnum})
+var sSavingsPlanOffering_durationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "durationSeconds", ID: &i_SavingsPlansDuration, Type: smithy.ShapeTypeLong})
+var sSavingsPlanOffering_currency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "currency", ID: &iCurrencyCode, Members: &mCurrencyCode, Type: smithy.ShapeTypeEnum})
+var sSavingsPlanOffering_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &i_SavingsPlanServiceCode, Type: smithy.ShapeTypeString})
+var sSavingsPlanOffering_usageType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "usageType", ID: &i_SavingsPlanUsageType, Type: smithy.ShapeTypeString})
+var sSavingsPlanOffering_operation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operation", ID: &i_SavingsPlanOperation, Type: smithy.ShapeTypeString})
+var sSavingsPlanOffering_properties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "properties", ID: &i_SavingsPlanOfferingPropertyList, Members: &m_SavingsPlanOfferingPropertyList, Type: smithy.ShapeTypeList})
+var sSavingsPlanOfferingFilterAttribute_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanOfferingFilterAttribute_instanceFamily = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceFamily", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanOfferingFilterElement_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &iSavingsPlanOfferingFilterAttribute, Members: &mSavingsPlanOfferingFilterAttribute, Type: smithy.ShapeTypeEnum})
+var sSavingsPlanOfferingFilterElement_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_FilterValuesList, Members: &m_FilterValuesList, Type: smithy.ShapeTypeList})
+var s_SavingsPlanOfferingFiltersList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSavingsPlanOfferingFilterElement, Members: &mSavingsPlanOfferingFilterElement, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanOfferingProperty_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &iSavingsPlanOfferingPropertyKey, Members: &mSavingsPlanOfferingPropertyKey, Type: smithy.ShapeTypeEnum})
+var sSavingsPlanOfferingProperty_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_JsonSafeFilterValueString, Type: smithy.ShapeTypeString})
+var sSavingsPlanOfferingPropertyKey_REGION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REGION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanOfferingPropertyKey_INSTANCE_FAMILY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSTANCE_FAMILY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_SavingsPlanOfferingPropertyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSavingsPlanOfferingProperty, Members: &mSavingsPlanOfferingProperty, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanOfferingRate_savingsPlanOffering = smithy.NewStaticSchema(smithy.StaticSchema{Member: "savingsPlanOffering", ID: &iParentSavingsPlanOffering, Members: &mParentSavingsPlanOffering, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanOfferingRate_rate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rate", ID: &i_SavingsPlanRatePricePerUnit, Type: smithy.ShapeTypeString})
+var sSavingsPlanOfferingRate_unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unit", ID: &iSavingsPlanRateUnit, Members: &mSavingsPlanRateUnit, Type: smithy.ShapeTypeEnum})
+var sSavingsPlanOfferingRate_productType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "productType", ID: &iSavingsPlanProductType, Members: &mSavingsPlanProductType, Type: smithy.ShapeTypeEnum})
+var sSavingsPlanOfferingRate_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &iSavingsPlanRateServiceCode, Members: &mSavingsPlanRateServiceCode, Type: smithy.ShapeTypeEnum})
+var sSavingsPlanOfferingRate_usageType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "usageType", ID: &i_SavingsPlanRateUsageType, Type: smithy.ShapeTypeString})
+var sSavingsPlanOfferingRate_operation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operation", ID: &i_SavingsPlanRateOperation, Type: smithy.ShapeTypeString})
+var sSavingsPlanOfferingRate_properties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "properties", ID: &i_SavingsPlanOfferingRatePropertyList, Members: &m_SavingsPlanOfferingRatePropertyList, Type: smithy.ShapeTypeList})
+var sSavingsPlanOfferingRateFilterElement_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &iSavingsPlanRateFilterAttribute, Members: &mSavingsPlanRateFilterAttribute, Type: smithy.ShapeTypeEnum})
+var sSavingsPlanOfferingRateFilterElement_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_FilterValuesList, Members: &m_FilterValuesList, Type: smithy.ShapeTypeList})
+var s_SavingsPlanOfferingRateFiltersList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSavingsPlanOfferingRateFilterElement, Members: &mSavingsPlanOfferingRateFilterElement, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanOfferingRateProperty_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_JsonSafeFilterValueString, Type: smithy.ShapeTypeString})
+var sSavingsPlanOfferingRateProperty_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_JsonSafeFilterValueString, Type: smithy.ShapeTypeString})
+var s_SavingsPlanOfferingRatePropertyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSavingsPlanOfferingRateProperty, Members: &mSavingsPlanOfferingRateProperty, Type: smithy.ShapeTypeStructure})
+var s_SavingsPlanOfferingRatesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSavingsPlanOfferingRate, Members: &mSavingsPlanOfferingRate, Type: smithy.ShapeTypeStructure})
+var s_SavingsPlanOfferingsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSavingsPlanOffering, Members: &mSavingsPlanOffering, Type: smithy.ShapeTypeStructure})
+var s_SavingsPlanOperationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SavingsPlanOperation, Type: smithy.ShapeTypeString})
+var sSavingsPlanPaymentOption_ALL_UPFRONT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL_UPFRONT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanPaymentOption_PARTIAL_UPFRONT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PARTIAL_UPFRONT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanPaymentOption_NO_UPFRONT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_UPFRONT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_SavingsPlanPaymentOptionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSavingsPlanPaymentOption, Members: &mSavingsPlanPaymentOption, Type: smithy.ShapeTypeEnum})
+var sSavingsPlanProductType_EC2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EC2", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanProductType_FARGATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FARGATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanProductType_LAMBDA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAMBDA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanProductType_SAGEMAKER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAGEMAKER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanProductType_RDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RDS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanProductType_DSQL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DSQL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanProductType_DYNAMODB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DYNAMODB", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanProductType_ELASTICACHE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ELASTICACHE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanProductType_DOCDB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOCDB", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanProductType_NEPTUNE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NEPTUNE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanProductType_TIMESTREAM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIMESTREAM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanProductType_KEYSPACES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KEYSPACES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanProductType_DMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DMS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanProductType_OPENSEARCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPENSEARCH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_SavingsPlanProductTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSavingsPlanProductType, Members: &mSavingsPlanProductType, Type: smithy.ShapeTypeEnum})
+var sSavingsPlanRate_rate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rate", ID: &i_Amount, Type: smithy.ShapeTypeString})
+var sSavingsPlanRate_currency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "currency", ID: &iCurrencyCode, Members: &mCurrencyCode, Type: smithy.ShapeTypeEnum})
+var sSavingsPlanRate_unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unit", ID: &iSavingsPlanRateUnit, Members: &mSavingsPlanRateUnit, Type: smithy.ShapeTypeEnum})
+var sSavingsPlanRate_productType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "productType", ID: &iSavingsPlanProductType, Members: &mSavingsPlanProductType, Type: smithy.ShapeTypeEnum})
+var sSavingsPlanRate_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &iSavingsPlanRateServiceCode, Members: &mSavingsPlanRateServiceCode, Type: smithy.ShapeTypeEnum})
+var sSavingsPlanRate_usageType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "usageType", ID: &i_SavingsPlanRateUsageType, Type: smithy.ShapeTypeString})
+var sSavingsPlanRate_operation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operation", ID: &i_SavingsPlanRateOperation, Type: smithy.ShapeTypeString})
+var sSavingsPlanRate_properties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "properties", ID: &i_SavingsPlanRatePropertyList, Members: &m_SavingsPlanRatePropertyList, Type: smithy.ShapeTypeList})
+var sSavingsPlanRateFilter_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &iSavingsPlanRateFilterName, Members: &mSavingsPlanRateFilterName, Type: smithy.ShapeTypeEnum})
+var sSavingsPlanRateFilter_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_ListOfStrings, Members: &m_ListOfStrings, Type: smithy.ShapeTypeList})
+var sSavingsPlanRateFilterAttribute_REGION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REGION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRateFilterAttribute_INSTANCE_FAMILY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSTANCE_FAMILY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRateFilterAttribute_INSTANCE_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSTANCE_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRateFilterAttribute_PRODUCT_DESCRIPTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRODUCT_DESCRIPTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRateFilterAttribute_TENANCY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TENANCY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRateFilterAttribute_PRODUCT_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRODUCT_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_SavingsPlanRateFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSavingsPlanRateFilter, Members: &mSavingsPlanRateFilter, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRateFilterName_REGION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REGION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRateFilterName_INSTANCE_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSTANCE_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRateFilterName_PRODUCT_DESCRIPTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRODUCT_DESCRIPTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRateFilterName_TENANCY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TENANCY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRateFilterName_PRODUCT_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRODUCT_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRateFilterName_SERVICE_CODE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVICE_CODE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRateFilterName_USAGE_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USAGE_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRateFilterName_OPERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_SavingsPlanRateList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSavingsPlanRate, Members: &mSavingsPlanRate, Type: smithy.ShapeTypeStructure})
+var s_SavingsPlanRateOperationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SavingsPlanRateOperation, Type: smithy.ShapeTypeString})
+var sSavingsPlanRateProperty_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &iSavingsPlanRatePropertyKey, Members: &mSavingsPlanRatePropertyKey, Type: smithy.ShapeTypeEnum})
+var sSavingsPlanRateProperty_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_JsonSafeFilterValueString, Type: smithy.ShapeTypeString})
+var sSavingsPlanRatePropertyKey_REGION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REGION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRatePropertyKey_INSTANCE_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSTANCE_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRatePropertyKey_INSTANCE_FAMILY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSTANCE_FAMILY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRatePropertyKey_PRODUCT_DESCRIPTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRODUCT_DESCRIPTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRatePropertyKey_TENANCY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TENANCY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_SavingsPlanRatePropertyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSavingsPlanRateProperty, Members: &mSavingsPlanRateProperty, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRateServiceCode_EC2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EC2", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRateServiceCode_FARGATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FARGATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRateServiceCode_FARGATE_EKS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FARGATE_EKS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRateServiceCode_LAMBDA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAMBDA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRateServiceCode_SAGEMAKER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAGEMAKER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRateServiceCode_RDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RDS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRateServiceCode_AURORA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AURORA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRateServiceCode_DYNAMODB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DYNAMODB", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRateServiceCode_ELASTICACHE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ELASTICACHE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRateServiceCode_DOCDB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOCDB", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRateServiceCode_NEPTUNE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NEPTUNE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRateServiceCode_TIMESTREAM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIMESTREAM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRateServiceCode_MCS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MCS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRateServiceCode_DMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DMS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRateServiceCode_ES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_SavingsPlanRateServiceCodeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSavingsPlanRateServiceCode, Members: &mSavingsPlanRateServiceCode, Type: smithy.ShapeTypeEnum})
+var sSavingsPlanRateUnit_HOURS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HOURS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRateUnit_LAMBDA_GB_SECOND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAMBDA_GB_SECOND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRateUnit_REQUEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REQUEST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRateUnit_ACU_HR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACU_HR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRateUnit_READ_REQUEST_UNITS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "READ_REQUEST_UNITS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRateUnit_WRITE_REQUEST_UNITS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WRITE_REQUEST_UNITS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRateUnit_READ_CAPACITY_UNIT_HRS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "READ_CAPACITY_UNIT_HRS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRateUnit_WRITE_CAPACITY_UNIT_HRS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WRITE_CAPACITY_UNIT_HRS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRateUnit_REPLICATED_WRITE_REQUEST_UNITS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REPLICATED_WRITE_REQUEST_UNITS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRateUnit_REPLICATED_WRITE_CAPACITY_UNIT_HRS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REPLICATED_WRITE_CAPACITY_UNIT_HRS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRateUnit_GB_HOURS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GB_HOURS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRateUnit_DPU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DPU", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRateUnit_ELASTI_CACHE_PROCESSING_UNIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ELASTI_CACHE_PROCESSING_UNIT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRateUnit_DCU_HR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DCU_HR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRateUnit_NCU_HR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NCU_HR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRateUnit_OCU_HRS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OCU_HRS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanRateUnit_JOBS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JOBS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_SavingsPlanRateUsageTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SavingsPlanRateUsageType, Type: smithy.ShapeTypeString})
+var s_SavingsPlanServiceCodeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SavingsPlanServiceCode, Type: smithy.ShapeTypeString})
+var sSavingsPlansFilterName_REGION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REGION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlansFilterName_EC2_INSTANCE_FAMILY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EC2_INSTANCE_FAMILY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlansFilterName_COMMITMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMMITMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlansFilterName_UPFRONT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPFRONT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlansFilterName_TERM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TERM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlansFilterName_SAVINGS_PLAN_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAVINGS_PLAN_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlansFilterName_PAYMENT_OPTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PAYMENT_OPTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlansFilterName_START = smithy.NewStaticSchema(smithy.StaticSchema{Member: "START", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlansFilterName_END = smithy.NewStaticSchema(smithy.StaticSchema{Member: "END", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlansFilterName_INSTANCE_FAMILY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSTANCE_FAMILY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanState_PAYMENT_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PAYMENT_PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanState_PAYMENT_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PAYMENT_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanState_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanState_RETIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RETIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanState_QUEUED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUEUED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanState_QUEUED_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUEUED_DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanState_PENDING_RETURN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_RETURN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanState_RETURNED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RETURNED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_SavingsPlanStateList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSavingsPlanState, Members: &mSavingsPlanState, Type: smithy.ShapeTypeEnum})
+var sSavingsPlanType_COMPUTE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPUTE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanType_EC2_INSTANCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EC2_INSTANCE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanType_SAGEMAKER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAGEMAKER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsPlanType_DATABASE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DATABASE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_SavingsPlanTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSavingsPlanType, Members: &mSavingsPlanType, Type: smithy.ShapeTypeEnum})
+var s_SavingsPlanUsageTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SavingsPlanUsageType, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_UUIDs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCreateSavingsPlanRequest_savingsPlanOfferingId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "savingsPlanOfferingId", ID: &i_SavingsPlanOfferingId, Type: smithy.ShapeTypeString})
+var sCreateSavingsPlanRequest_commitment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "commitment", ID: &i_Amount, Type: smithy.ShapeTypeString})
+var sCreateSavingsPlanRequest_upfrontPaymentAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "upfrontPaymentAmount", ID: &i_Amount, Type: smithy.ShapeTypeString})
+var sCreateSavingsPlanRequest_purchaseTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "purchaseTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp})
+var sCreateSavingsPlanRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateSavingsPlanRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sCreateSavingsPlanResponse_savingsPlanId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "savingsPlanId", ID: &i_SavingsPlanId, Type: smithy.ShapeTypeString})
+var sDeleteQueuedSavingsPlanRequest_savingsPlanId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "savingsPlanId", ID: &i_SavingsPlanId, Type: smithy.ShapeTypeString})
+var sDescribeSavingsPlanRatesRequest_savingsPlanId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "savingsPlanId", ID: &i_SavingsPlanId, Type: smithy.ShapeTypeString})
+var sDescribeSavingsPlanRatesRequest_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_SavingsPlanRateFilterList, Members: &m_SavingsPlanRateFilterList, Type: smithy.ShapeTypeList})
+var sDescribeSavingsPlanRatesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sDescribeSavingsPlanRatesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sDescribeSavingsPlanRatesResponse_savingsPlanId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "savingsPlanId", ID: &i_SavingsPlanId, Type: smithy.ShapeTypeString})
+var sDescribeSavingsPlanRatesResponse_searchResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "searchResults", ID: &i_SavingsPlanRateList, Members: &m_SavingsPlanRateList, Type: smithy.ShapeTypeList})
+var sDescribeSavingsPlanRatesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sDescribeSavingsPlansRequest_savingsPlanArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "savingsPlanArns", ID: &i_SavingsPlanArnList, Members: &m_SavingsPlanArnList, Type: smithy.ShapeTypeList})
+var sDescribeSavingsPlansRequest_savingsPlanIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "savingsPlanIds", ID: &i_SavingsPlanIdList, Members: &m_SavingsPlanIdList, Type: smithy.ShapeTypeList})
+var sDescribeSavingsPlansRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sDescribeSavingsPlansRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sDescribeSavingsPlansRequest_states = smithy.NewStaticSchema(smithy.StaticSchema{Member: "states", ID: &i_SavingsPlanStateList, Members: &m_SavingsPlanStateList, Type: smithy.ShapeTypeList})
+var sDescribeSavingsPlansRequest_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_SavingsPlanFilterList, Members: &m_SavingsPlanFilterList, Type: smithy.ShapeTypeList})
+var sDescribeSavingsPlansOfferingRatesRequest_savingsPlanOfferingIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "savingsPlanOfferingIds", ID: &i_UUIDs, Members: &m_UUIDs, Type: smithy.ShapeTypeList})
+var sDescribeSavingsPlansOfferingRatesRequest_savingsPlanPaymentOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "savingsPlanPaymentOptions", ID: &i_SavingsPlanPaymentOptionList, Members: &m_SavingsPlanPaymentOptionList, Type: smithy.ShapeTypeList})
+var sDescribeSavingsPlansOfferingRatesRequest_savingsPlanTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "savingsPlanTypes", ID: &i_SavingsPlanTypeList, Members: &m_SavingsPlanTypeList, Type: smithy.ShapeTypeList})
+var sDescribeSavingsPlansOfferingRatesRequest_products = smithy.NewStaticSchema(smithy.StaticSchema{Member: "products", ID: &i_SavingsPlanProductTypeList, Members: &m_SavingsPlanProductTypeList, Type: smithy.ShapeTypeList})
+var sDescribeSavingsPlansOfferingRatesRequest_serviceCodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCodes", ID: &i_SavingsPlanRateServiceCodeList, Members: &m_SavingsPlanRateServiceCodeList, Type: smithy.ShapeTypeList})
+var sDescribeSavingsPlansOfferingRatesRequest_usageTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "usageTypes", ID: &i_SavingsPlanRateUsageTypeList, Members: &m_SavingsPlanRateUsageTypeList, Type: smithy.ShapeTypeList})
+var sDescribeSavingsPlansOfferingRatesRequest_operations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operations", ID: &i_SavingsPlanRateOperationList, Members: &m_SavingsPlanRateOperationList, Type: smithy.ShapeTypeList})
+var sDescribeSavingsPlansOfferingRatesRequest_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_SavingsPlanOfferingRateFiltersList, Members: &m_SavingsPlanOfferingRateFiltersList, Type: smithy.ShapeTypeList})
+var sDescribeSavingsPlansOfferingRatesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sDescribeSavingsPlansOfferingRatesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_PageSize, Type: smithy.ShapeTypeInteger})
+var sDescribeSavingsPlansOfferingRatesResponse_searchResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "searchResults", ID: &i_SavingsPlanOfferingRatesList, Members: &m_SavingsPlanOfferingRatesList, Type: smithy.ShapeTypeList})
+var sDescribeSavingsPlansOfferingRatesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sDescribeSavingsPlansOfferingsRequest_offeringIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "offeringIds", ID: &i_UUIDs, Members: &m_UUIDs, Type: smithy.ShapeTypeList})
+var sDescribeSavingsPlansOfferingsRequest_paymentOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "paymentOptions", ID: &i_SavingsPlanPaymentOptionList, Members: &m_SavingsPlanPaymentOptionList, Type: smithy.ShapeTypeList})
+var sDescribeSavingsPlansOfferingsRequest_productType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "productType", ID: &iSavingsPlanProductType, Members: &mSavingsPlanProductType, Type: smithy.ShapeTypeEnum})
+var sDescribeSavingsPlansOfferingsRequest_planTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "planTypes", ID: &i_SavingsPlanTypeList, Members: &m_SavingsPlanTypeList, Type: smithy.ShapeTypeList})
+var sDescribeSavingsPlansOfferingsRequest_durations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "durations", ID: &i_DurationsList, Members: &m_DurationsList, Type: smithy.ShapeTypeList})
+var sDescribeSavingsPlansOfferingsRequest_currencies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "currencies", ID: &i_CurrencyList, Members: &m_CurrencyList, Type: smithy.ShapeTypeList})
+var sDescribeSavingsPlansOfferingsRequest_descriptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "descriptions", ID: &i_SavingsPlanDescriptionsList, Members: &m_SavingsPlanDescriptionsList, Type: smithy.ShapeTypeList})
+var sDescribeSavingsPlansOfferingsRequest_serviceCodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCodes", ID: &i_SavingsPlanServiceCodeList, Members: &m_SavingsPlanServiceCodeList, Type: smithy.ShapeTypeList})
+var sDescribeSavingsPlansOfferingsRequest_usageTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "usageTypes", ID: &i_SavingsPlanUsageTypeList, Members: &m_SavingsPlanUsageTypeList, Type: smithy.ShapeTypeList})
+var sDescribeSavingsPlansOfferingsRequest_operations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operations", ID: &i_SavingsPlanOperationList, Members: &m_SavingsPlanOperationList, Type: smithy.ShapeTypeList})
+var sDescribeSavingsPlansOfferingsRequest_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_SavingsPlanOfferingFiltersList, Members: &m_SavingsPlanOfferingFiltersList, Type: smithy.ShapeTypeList})
+var sDescribeSavingsPlansOfferingsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sDescribeSavingsPlansOfferingsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_PageSize, Type: smithy.ShapeTypeInteger})
+var sDescribeSavingsPlansOfferingsResponse_searchResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "searchResults", ID: &i_SavingsPlanOfferingsList, Members: &m_SavingsPlanOfferingsList, Type: smithy.ShapeTypeList})
+var sDescribeSavingsPlansOfferingsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sDescribeSavingsPlansResponse_savingsPlans = smithy.NewStaticSchema(smithy.StaticSchema{Member: "savingsPlans", ID: &i_SavingsPlanList, Members: &m_SavingsPlanList, Type: smithy.ShapeTypeList})
+var sDescribeSavingsPlansResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_SavingsPlanArn, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sReturnSavingsPlanRequest_savingsPlanId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "savingsPlanId", ID: &i_SavingsPlanId, Type: smithy.ShapeTypeString})
+var sReturnSavingsPlanRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sReturnSavingsPlanResponse_savingsPlanId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "savingsPlanId", ID: &i_SavingsPlanId, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_SavingsPlanArn, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_SavingsPlanArn, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+
+var CreateSavingsPlan = &sCreateSavingsPlan
+
+var DeleteQueuedSavingsPlan = &sDeleteQueuedSavingsPlan
+
+var DescribeSavingsPlanRates = &sDescribeSavingsPlanRates
+
+var DescribeSavingsPlans = &sDescribeSavingsPlans
+
+var DescribeSavingsPlansOfferingRates = &sDescribeSavingsPlansOfferingRates
+
+var DescribeSavingsPlansOfferings = &sDescribeSavingsPlansOfferings
+
+var ListTagsForResource = &sListTagsForResource
+
+var ReturnSavingsPlan = &sReturnSavingsPlan
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var _AWSSavingsPlan = &s_AWSSavingsPlan
+
+var _Amount = &s_Amount
+
+var _ClientToken = &s_ClientToken
+
+var CurrencyCode = &sCurrencyCode
+var CurrencyCode_CNY = &sCurrencyCode_CNY
+var CurrencyCode_USD = &sCurrencyCode_USD
+var CurrencyCode_EUR = &sCurrencyCode_EUR
+
+var _CurrencyList = &s_CurrencyList
+var _CurrencyList_member = &s_CurrencyList_member
+
+var _DateTime = &s_DateTime
+
+var _DurationsList = &s_DurationsList
+var _DurationsList_member = &s_DurationsList_member
+
+var _EC2InstanceFamily = &s_EC2InstanceFamily
+
+var _FilterValuesList = &s_FilterValuesList
+var _FilterValuesList_member = &s_FilterValuesList_member
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+
+var _JsonSafeFilterValueString = &s_JsonSafeFilterValueString
+
+var _ListOfStrings = &s_ListOfStrings
+var _ListOfStrings_member = &s_ListOfStrings_member
+
+var _MaxResults = &s_MaxResults
+
+var _PageSize = &s_PageSize
+
+var _PaginationToken = &s_PaginationToken
+
+var ParentSavingsPlanOffering = &sParentSavingsPlanOffering
+var ParentSavingsPlanOffering_offeringId = &sParentSavingsPlanOffering_offeringId
+var ParentSavingsPlanOffering_paymentOption = &sParentSavingsPlanOffering_paymentOption
+var ParentSavingsPlanOffering_planType = &sParentSavingsPlanOffering_planType
+var ParentSavingsPlanOffering_durationSeconds = &sParentSavingsPlanOffering_durationSeconds
+var ParentSavingsPlanOffering_currency = &sParentSavingsPlanOffering_currency
+var ParentSavingsPlanOffering_planDescription = &sParentSavingsPlanOffering_planDescription
+
+var _Region = &s_Region
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+
+var SavingsPlan = &sSavingsPlan
+var SavingsPlan_offeringId = &sSavingsPlan_offeringId
+var SavingsPlan_savingsPlanId = &sSavingsPlan_savingsPlanId
+var SavingsPlan_savingsPlanArn = &sSavingsPlan_savingsPlanArn
+var SavingsPlan_description = &sSavingsPlan_description
+var SavingsPlan_start = &sSavingsPlan_start
+var SavingsPlan_end = &sSavingsPlan_end
+var SavingsPlan_state = &sSavingsPlan_state
+var SavingsPlan_region = &sSavingsPlan_region
+var SavingsPlan_ec2InstanceFamily = &sSavingsPlan_ec2InstanceFamily
+var SavingsPlan_savingsPlanType = &sSavingsPlan_savingsPlanType
+var SavingsPlan_paymentOption = &sSavingsPlan_paymentOption
+var SavingsPlan_productTypes = &sSavingsPlan_productTypes
+var SavingsPlan_currency = &sSavingsPlan_currency
+var SavingsPlan_commitment = &sSavingsPlan_commitment
+var SavingsPlan_upfrontPaymentAmount = &sSavingsPlan_upfrontPaymentAmount
+var SavingsPlan_recurringPaymentAmount = &sSavingsPlan_recurringPaymentAmount
+var SavingsPlan_termDurationInSeconds = &sSavingsPlan_termDurationInSeconds
+var SavingsPlan_tags = &sSavingsPlan_tags
+var SavingsPlan_returnableUntil = &sSavingsPlan_returnableUntil
+
+var _SavingsPlanArn = &s_SavingsPlanArn
+
+var _SavingsPlanArnList = &s_SavingsPlanArnList
+var _SavingsPlanArnList_member = &s_SavingsPlanArnList_member
+
+var _SavingsPlanDescription = &s_SavingsPlanDescription
+
+var _SavingsPlanDescriptionsList = &s_SavingsPlanDescriptionsList
+var _SavingsPlanDescriptionsList_member = &s_SavingsPlanDescriptionsList_member
+
+var SavingsPlanFilter = &sSavingsPlanFilter
+var SavingsPlanFilter_name = &sSavingsPlanFilter_name
+var SavingsPlanFilter_values = &sSavingsPlanFilter_values
+
+var _SavingsPlanFilterList = &s_SavingsPlanFilterList
+var _SavingsPlanFilterList_member = &s_SavingsPlanFilterList_member
+
+var _SavingsPlanId = &s_SavingsPlanId
+
+var _SavingsPlanIdList = &s_SavingsPlanIdList
+var _SavingsPlanIdList_member = &s_SavingsPlanIdList_member
+
+var _SavingsPlanList = &s_SavingsPlanList
+var _SavingsPlanList_member = &s_SavingsPlanList_member
+
+var SavingsPlanOffering = &sSavingsPlanOffering
+var SavingsPlanOffering_offeringId = &sSavingsPlanOffering_offeringId
+var SavingsPlanOffering_productTypes = &sSavingsPlanOffering_productTypes
+var SavingsPlanOffering_planType = &sSavingsPlanOffering_planType
+var SavingsPlanOffering_description = &sSavingsPlanOffering_description
+var SavingsPlanOffering_paymentOption = &sSavingsPlanOffering_paymentOption
+var SavingsPlanOffering_durationSeconds = &sSavingsPlanOffering_durationSeconds
+var SavingsPlanOffering_currency = &sSavingsPlanOffering_currency
+var SavingsPlanOffering_serviceCode = &sSavingsPlanOffering_serviceCode
+var SavingsPlanOffering_usageType = &sSavingsPlanOffering_usageType
+var SavingsPlanOffering_operation = &sSavingsPlanOffering_operation
+var SavingsPlanOffering_properties = &sSavingsPlanOffering_properties
+
+var SavingsPlanOfferingFilterAttribute = &sSavingsPlanOfferingFilterAttribute
+var SavingsPlanOfferingFilterAttribute_region = &sSavingsPlanOfferingFilterAttribute_region
+var SavingsPlanOfferingFilterAttribute_instanceFamily = &sSavingsPlanOfferingFilterAttribute_instanceFamily
+
+var SavingsPlanOfferingFilterElement = &sSavingsPlanOfferingFilterElement
+var SavingsPlanOfferingFilterElement_name = &sSavingsPlanOfferingFilterElement_name
+var SavingsPlanOfferingFilterElement_values = &sSavingsPlanOfferingFilterElement_values
+
+var _SavingsPlanOfferingFiltersList = &s_SavingsPlanOfferingFiltersList
+var _SavingsPlanOfferingFiltersList_member = &s_SavingsPlanOfferingFiltersList_member
+
+var _SavingsPlanOfferingId = &s_SavingsPlanOfferingId
+
+var SavingsPlanOfferingProperty = &sSavingsPlanOfferingProperty
+var SavingsPlanOfferingProperty_name = &sSavingsPlanOfferingProperty_name
+var SavingsPlanOfferingProperty_value = &sSavingsPlanOfferingProperty_value
+
+var SavingsPlanOfferingPropertyKey = &sSavingsPlanOfferingPropertyKey
+var SavingsPlanOfferingPropertyKey_REGION = &sSavingsPlanOfferingPropertyKey_REGION
+var SavingsPlanOfferingPropertyKey_INSTANCE_FAMILY = &sSavingsPlanOfferingPropertyKey_INSTANCE_FAMILY
+
+var _SavingsPlanOfferingPropertyList = &s_SavingsPlanOfferingPropertyList
+var _SavingsPlanOfferingPropertyList_member = &s_SavingsPlanOfferingPropertyList_member
+
+var SavingsPlanOfferingRate = &sSavingsPlanOfferingRate
+var SavingsPlanOfferingRate_savingsPlanOffering = &sSavingsPlanOfferingRate_savingsPlanOffering
+var SavingsPlanOfferingRate_rate = &sSavingsPlanOfferingRate_rate
+var SavingsPlanOfferingRate_unit = &sSavingsPlanOfferingRate_unit
+var SavingsPlanOfferingRate_productType = &sSavingsPlanOfferingRate_productType
+var SavingsPlanOfferingRate_serviceCode = &sSavingsPlanOfferingRate_serviceCode
+var SavingsPlanOfferingRate_usageType = &sSavingsPlanOfferingRate_usageType
+var SavingsPlanOfferingRate_operation = &sSavingsPlanOfferingRate_operation
+var SavingsPlanOfferingRate_properties = &sSavingsPlanOfferingRate_properties
+
+var SavingsPlanOfferingRateFilterElement = &sSavingsPlanOfferingRateFilterElement
+var SavingsPlanOfferingRateFilterElement_name = &sSavingsPlanOfferingRateFilterElement_name
+var SavingsPlanOfferingRateFilterElement_values = &sSavingsPlanOfferingRateFilterElement_values
+
+var _SavingsPlanOfferingRateFiltersList = &s_SavingsPlanOfferingRateFiltersList
+var _SavingsPlanOfferingRateFiltersList_member = &s_SavingsPlanOfferingRateFiltersList_member
+
+var SavingsPlanOfferingRateProperty = &sSavingsPlanOfferingRateProperty
+var SavingsPlanOfferingRateProperty_name = &sSavingsPlanOfferingRateProperty_name
+var SavingsPlanOfferingRateProperty_value = &sSavingsPlanOfferingRateProperty_value
+
+var _SavingsPlanOfferingRatePropertyList = &s_SavingsPlanOfferingRatePropertyList
+var _SavingsPlanOfferingRatePropertyList_member = &s_SavingsPlanOfferingRatePropertyList_member
+
+var _SavingsPlanOfferingRatesList = &s_SavingsPlanOfferingRatesList
+var _SavingsPlanOfferingRatesList_member = &s_SavingsPlanOfferingRatesList_member
+
+var _SavingsPlanOfferingsList = &s_SavingsPlanOfferingsList
+var _SavingsPlanOfferingsList_member = &s_SavingsPlanOfferingsList_member
+
+var _SavingsPlanOperation = &s_SavingsPlanOperation
+
+var _SavingsPlanOperationList = &s_SavingsPlanOperationList
+var _SavingsPlanOperationList_member = &s_SavingsPlanOperationList_member
+
+var SavingsPlanPaymentOption = &sSavingsPlanPaymentOption
+var SavingsPlanPaymentOption_ALL_UPFRONT = &sSavingsPlanPaymentOption_ALL_UPFRONT
+var SavingsPlanPaymentOption_PARTIAL_UPFRONT = &sSavingsPlanPaymentOption_PARTIAL_UPFRONT
+var SavingsPlanPaymentOption_NO_UPFRONT = &sSavingsPlanPaymentOption_NO_UPFRONT
+
+var _SavingsPlanPaymentOptionList = &s_SavingsPlanPaymentOptionList
+var _SavingsPlanPaymentOptionList_member = &s_SavingsPlanPaymentOptionList_member
+
+var SavingsPlanProductType = &sSavingsPlanProductType
+var SavingsPlanProductType_EC2 = &sSavingsPlanProductType_EC2
+var SavingsPlanProductType_FARGATE = &sSavingsPlanProductType_FARGATE
+var SavingsPlanProductType_LAMBDA = &sSavingsPlanProductType_LAMBDA
+var SavingsPlanProductType_SAGEMAKER = &sSavingsPlanProductType_SAGEMAKER
+var SavingsPlanProductType_RDS = &sSavingsPlanProductType_RDS
+var SavingsPlanProductType_DSQL = &sSavingsPlanProductType_DSQL
+var SavingsPlanProductType_DYNAMODB = &sSavingsPlanProductType_DYNAMODB
+var SavingsPlanProductType_ELASTICACHE = &sSavingsPlanProductType_ELASTICACHE
+var SavingsPlanProductType_DOCDB = &sSavingsPlanProductType_DOCDB
+var SavingsPlanProductType_NEPTUNE = &sSavingsPlanProductType_NEPTUNE
+var SavingsPlanProductType_TIMESTREAM = &sSavingsPlanProductType_TIMESTREAM
+var SavingsPlanProductType_KEYSPACES = &sSavingsPlanProductType_KEYSPACES
+var SavingsPlanProductType_DMS = &sSavingsPlanProductType_DMS
+var SavingsPlanProductType_OPENSEARCH = &sSavingsPlanProductType_OPENSEARCH
+
+var _SavingsPlanProductTypeList = &s_SavingsPlanProductTypeList
+var _SavingsPlanProductTypeList_member = &s_SavingsPlanProductTypeList_member
+
+var SavingsPlanRate = &sSavingsPlanRate
+var SavingsPlanRate_rate = &sSavingsPlanRate_rate
+var SavingsPlanRate_currency = &sSavingsPlanRate_currency
+var SavingsPlanRate_unit = &sSavingsPlanRate_unit
+var SavingsPlanRate_productType = &sSavingsPlanRate_productType
+var SavingsPlanRate_serviceCode = &sSavingsPlanRate_serviceCode
+var SavingsPlanRate_usageType = &sSavingsPlanRate_usageType
+var SavingsPlanRate_operation = &sSavingsPlanRate_operation
+var SavingsPlanRate_properties = &sSavingsPlanRate_properties
+
+var SavingsPlanRateFilter = &sSavingsPlanRateFilter
+var SavingsPlanRateFilter_name = &sSavingsPlanRateFilter_name
+var SavingsPlanRateFilter_values = &sSavingsPlanRateFilter_values
+
+var SavingsPlanRateFilterAttribute = &sSavingsPlanRateFilterAttribute
+var SavingsPlanRateFilterAttribute_REGION = &sSavingsPlanRateFilterAttribute_REGION
+var SavingsPlanRateFilterAttribute_INSTANCE_FAMILY = &sSavingsPlanRateFilterAttribute_INSTANCE_FAMILY
+var SavingsPlanRateFilterAttribute_INSTANCE_TYPE = &sSavingsPlanRateFilterAttribute_INSTANCE_TYPE
+var SavingsPlanRateFilterAttribute_PRODUCT_DESCRIPTION = &sSavingsPlanRateFilterAttribute_PRODUCT_DESCRIPTION
+var SavingsPlanRateFilterAttribute_TENANCY = &sSavingsPlanRateFilterAttribute_TENANCY
+var SavingsPlanRateFilterAttribute_PRODUCT_ID = &sSavingsPlanRateFilterAttribute_PRODUCT_ID
+
+var _SavingsPlanRateFilterList = &s_SavingsPlanRateFilterList
+var _SavingsPlanRateFilterList_member = &s_SavingsPlanRateFilterList_member
+
+var SavingsPlanRateFilterName = &sSavingsPlanRateFilterName
+var SavingsPlanRateFilterName_REGION = &sSavingsPlanRateFilterName_REGION
+var SavingsPlanRateFilterName_INSTANCE_TYPE = &sSavingsPlanRateFilterName_INSTANCE_TYPE
+var SavingsPlanRateFilterName_PRODUCT_DESCRIPTION = &sSavingsPlanRateFilterName_PRODUCT_DESCRIPTION
+var SavingsPlanRateFilterName_TENANCY = &sSavingsPlanRateFilterName_TENANCY
+var SavingsPlanRateFilterName_PRODUCT_TYPE = &sSavingsPlanRateFilterName_PRODUCT_TYPE
+var SavingsPlanRateFilterName_SERVICE_CODE = &sSavingsPlanRateFilterName_SERVICE_CODE
+var SavingsPlanRateFilterName_USAGE_TYPE = &sSavingsPlanRateFilterName_USAGE_TYPE
+var SavingsPlanRateFilterName_OPERATION = &sSavingsPlanRateFilterName_OPERATION
+
+var _SavingsPlanRateList = &s_SavingsPlanRateList
+var _SavingsPlanRateList_member = &s_SavingsPlanRateList_member
+
+var _SavingsPlanRateOperation = &s_SavingsPlanRateOperation
+
+var _SavingsPlanRateOperationList = &s_SavingsPlanRateOperationList
+var _SavingsPlanRateOperationList_member = &s_SavingsPlanRateOperationList_member
+
+var _SavingsPlanRatePricePerUnit = &s_SavingsPlanRatePricePerUnit
+
+var SavingsPlanRateProperty = &sSavingsPlanRateProperty
+var SavingsPlanRateProperty_name = &sSavingsPlanRateProperty_name
+var SavingsPlanRateProperty_value = &sSavingsPlanRateProperty_value
+
+var SavingsPlanRatePropertyKey = &sSavingsPlanRatePropertyKey
+var SavingsPlanRatePropertyKey_REGION = &sSavingsPlanRatePropertyKey_REGION
+var SavingsPlanRatePropertyKey_INSTANCE_TYPE = &sSavingsPlanRatePropertyKey_INSTANCE_TYPE
+var SavingsPlanRatePropertyKey_INSTANCE_FAMILY = &sSavingsPlanRatePropertyKey_INSTANCE_FAMILY
+var SavingsPlanRatePropertyKey_PRODUCT_DESCRIPTION = &sSavingsPlanRatePropertyKey_PRODUCT_DESCRIPTION
+var SavingsPlanRatePropertyKey_TENANCY = &sSavingsPlanRatePropertyKey_TENANCY
+
+var _SavingsPlanRatePropertyList = &s_SavingsPlanRatePropertyList
+var _SavingsPlanRatePropertyList_member = &s_SavingsPlanRatePropertyList_member
+
+var SavingsPlanRateServiceCode = &sSavingsPlanRateServiceCode
+var SavingsPlanRateServiceCode_EC2 = &sSavingsPlanRateServiceCode_EC2
+var SavingsPlanRateServiceCode_FARGATE = &sSavingsPlanRateServiceCode_FARGATE
+var SavingsPlanRateServiceCode_FARGATE_EKS = &sSavingsPlanRateServiceCode_FARGATE_EKS
+var SavingsPlanRateServiceCode_LAMBDA = &sSavingsPlanRateServiceCode_LAMBDA
+var SavingsPlanRateServiceCode_SAGEMAKER = &sSavingsPlanRateServiceCode_SAGEMAKER
+var SavingsPlanRateServiceCode_RDS = &sSavingsPlanRateServiceCode_RDS
+var SavingsPlanRateServiceCode_AURORA = &sSavingsPlanRateServiceCode_AURORA
+var SavingsPlanRateServiceCode_DYNAMODB = &sSavingsPlanRateServiceCode_DYNAMODB
+var SavingsPlanRateServiceCode_ELASTICACHE = &sSavingsPlanRateServiceCode_ELASTICACHE
+var SavingsPlanRateServiceCode_DOCDB = &sSavingsPlanRateServiceCode_DOCDB
+var SavingsPlanRateServiceCode_NEPTUNE = &sSavingsPlanRateServiceCode_NEPTUNE
+var SavingsPlanRateServiceCode_TIMESTREAM = &sSavingsPlanRateServiceCode_TIMESTREAM
+var SavingsPlanRateServiceCode_MCS = &sSavingsPlanRateServiceCode_MCS
+var SavingsPlanRateServiceCode_DMS = &sSavingsPlanRateServiceCode_DMS
+var SavingsPlanRateServiceCode_ES = &sSavingsPlanRateServiceCode_ES
+
+var _SavingsPlanRateServiceCodeList = &s_SavingsPlanRateServiceCodeList
+var _SavingsPlanRateServiceCodeList_member = &s_SavingsPlanRateServiceCodeList_member
+
+var SavingsPlanRateUnit = &sSavingsPlanRateUnit
+var SavingsPlanRateUnit_HOURS = &sSavingsPlanRateUnit_HOURS
+var SavingsPlanRateUnit_LAMBDA_GB_SECOND = &sSavingsPlanRateUnit_LAMBDA_GB_SECOND
+var SavingsPlanRateUnit_REQUEST = &sSavingsPlanRateUnit_REQUEST
+var SavingsPlanRateUnit_ACU_HR = &sSavingsPlanRateUnit_ACU_HR
+var SavingsPlanRateUnit_READ_REQUEST_UNITS = &sSavingsPlanRateUnit_READ_REQUEST_UNITS
+var SavingsPlanRateUnit_WRITE_REQUEST_UNITS = &sSavingsPlanRateUnit_WRITE_REQUEST_UNITS
+var SavingsPlanRateUnit_READ_CAPACITY_UNIT_HRS = &sSavingsPlanRateUnit_READ_CAPACITY_UNIT_HRS
+var SavingsPlanRateUnit_WRITE_CAPACITY_UNIT_HRS = &sSavingsPlanRateUnit_WRITE_CAPACITY_UNIT_HRS
+var SavingsPlanRateUnit_REPLICATED_WRITE_REQUEST_UNITS = &sSavingsPlanRateUnit_REPLICATED_WRITE_REQUEST_UNITS
+var SavingsPlanRateUnit_REPLICATED_WRITE_CAPACITY_UNIT_HRS = &sSavingsPlanRateUnit_REPLICATED_WRITE_CAPACITY_UNIT_HRS
+var SavingsPlanRateUnit_GB_HOURS = &sSavingsPlanRateUnit_GB_HOURS
+var SavingsPlanRateUnit_DPU = &sSavingsPlanRateUnit_DPU
+var SavingsPlanRateUnit_ELASTI_CACHE_PROCESSING_UNIT = &sSavingsPlanRateUnit_ELASTI_CACHE_PROCESSING_UNIT
+var SavingsPlanRateUnit_DCU_HR = &sSavingsPlanRateUnit_DCU_HR
+var SavingsPlanRateUnit_NCU_HR = &sSavingsPlanRateUnit_NCU_HR
+var SavingsPlanRateUnit_OCU_HRS = &sSavingsPlanRateUnit_OCU_HRS
+var SavingsPlanRateUnit_JOBS = &sSavingsPlanRateUnit_JOBS
+
+var _SavingsPlanRateUsageType = &s_SavingsPlanRateUsageType
+
+var _SavingsPlanRateUsageTypeList = &s_SavingsPlanRateUsageTypeList
+var _SavingsPlanRateUsageTypeList_member = &s_SavingsPlanRateUsageTypeList_member
+
+var _SavingsPlansDuration = &s_SavingsPlansDuration
+
+var _SavingsPlanServiceCode = &s_SavingsPlanServiceCode
+
+var _SavingsPlanServiceCodeList = &s_SavingsPlanServiceCodeList
+var _SavingsPlanServiceCodeList_member = &s_SavingsPlanServiceCodeList_member
+
+var SavingsPlansFilterName = &sSavingsPlansFilterName
+var SavingsPlansFilterName_REGION = &sSavingsPlansFilterName_REGION
+var SavingsPlansFilterName_EC2_INSTANCE_FAMILY = &sSavingsPlansFilterName_EC2_INSTANCE_FAMILY
+var SavingsPlansFilterName_COMMITMENT = &sSavingsPlansFilterName_COMMITMENT
+var SavingsPlansFilterName_UPFRONT = &sSavingsPlansFilterName_UPFRONT
+var SavingsPlansFilterName_TERM = &sSavingsPlansFilterName_TERM
+var SavingsPlansFilterName_SAVINGS_PLAN_TYPE = &sSavingsPlansFilterName_SAVINGS_PLAN_TYPE
+var SavingsPlansFilterName_PAYMENT_OPTION = &sSavingsPlansFilterName_PAYMENT_OPTION
+var SavingsPlansFilterName_START = &sSavingsPlansFilterName_START
+var SavingsPlansFilterName_END = &sSavingsPlansFilterName_END
+var SavingsPlansFilterName_INSTANCE_FAMILY = &sSavingsPlansFilterName_INSTANCE_FAMILY
+
+var SavingsPlanState = &sSavingsPlanState
+var SavingsPlanState_PAYMENT_PENDING = &sSavingsPlanState_PAYMENT_PENDING
+var SavingsPlanState_PAYMENT_FAILED = &sSavingsPlanState_PAYMENT_FAILED
+var SavingsPlanState_ACTIVE = &sSavingsPlanState_ACTIVE
+var SavingsPlanState_RETIRED = &sSavingsPlanState_RETIRED
+var SavingsPlanState_QUEUED = &sSavingsPlanState_QUEUED
+var SavingsPlanState_QUEUED_DELETED = &sSavingsPlanState_QUEUED_DELETED
+var SavingsPlanState_PENDING_RETURN = &sSavingsPlanState_PENDING_RETURN
+var SavingsPlanState_RETURNED = &sSavingsPlanState_RETURNED
+
+var _SavingsPlanStateList = &s_SavingsPlanStateList
+var _SavingsPlanStateList_member = &s_SavingsPlanStateList_member
+
+var SavingsPlanType = &sSavingsPlanType
+var SavingsPlanType_COMPUTE = &sSavingsPlanType_COMPUTE
+var SavingsPlanType_EC2_INSTANCE = &sSavingsPlanType_EC2_INSTANCE
+var SavingsPlanType_SAGEMAKER = &sSavingsPlanType_SAGEMAKER
+var SavingsPlanType_DATABASE = &sSavingsPlanType_DATABASE
+
+var _SavingsPlanTypeList = &s_SavingsPlanTypeList
+var _SavingsPlanTypeList_member = &s_SavingsPlanTypeList_member
+
+var _SavingsPlanUsageType = &s_SavingsPlanUsageType
+
+var _SavingsPlanUsageTypeList = &s_SavingsPlanUsageTypeList
+var _SavingsPlanUsageTypeList_member = &s_SavingsPlanUsageTypeList_member
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+
+var _String = &s_String
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagMap = &s_TagMap
+var _TagMap_key = &s_TagMap_key
+var _TagMap_value = &s_TagMap_value
+
+var _TagValue = &s_TagValue
+
+var _TermDurationInSeconds = &s_TermDurationInSeconds
+
+var _UUID = &s_UUID
+
+var _UUIDs = &s_UUIDs
+var _UUIDs_member = &s_UUIDs_member
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+
+var CreateSavingsPlanRequest = &sCreateSavingsPlanRequest
+var CreateSavingsPlanRequest_savingsPlanOfferingId = &sCreateSavingsPlanRequest_savingsPlanOfferingId
+var CreateSavingsPlanRequest_commitment = &sCreateSavingsPlanRequest_commitment
+var CreateSavingsPlanRequest_upfrontPaymentAmount = &sCreateSavingsPlanRequest_upfrontPaymentAmount
+var CreateSavingsPlanRequest_purchaseTime = &sCreateSavingsPlanRequest_purchaseTime
+var CreateSavingsPlanRequest_clientToken = &sCreateSavingsPlanRequest_clientToken
+var CreateSavingsPlanRequest_tags = &sCreateSavingsPlanRequest_tags
+
+var CreateSavingsPlanResponse = &sCreateSavingsPlanResponse
+var CreateSavingsPlanResponse_savingsPlanId = &sCreateSavingsPlanResponse_savingsPlanId
+
+var DeleteQueuedSavingsPlanRequest = &sDeleteQueuedSavingsPlanRequest
+var DeleteQueuedSavingsPlanRequest_savingsPlanId = &sDeleteQueuedSavingsPlanRequest_savingsPlanId
+
+var DeleteQueuedSavingsPlanResponse = &sDeleteQueuedSavingsPlanResponse
+
+var DescribeSavingsPlanRatesRequest = &sDescribeSavingsPlanRatesRequest
+var DescribeSavingsPlanRatesRequest_savingsPlanId = &sDescribeSavingsPlanRatesRequest_savingsPlanId
+var DescribeSavingsPlanRatesRequest_filters = &sDescribeSavingsPlanRatesRequest_filters
+var DescribeSavingsPlanRatesRequest_nextToken = &sDescribeSavingsPlanRatesRequest_nextToken
+var DescribeSavingsPlanRatesRequest_maxResults = &sDescribeSavingsPlanRatesRequest_maxResults
+
+var DescribeSavingsPlanRatesResponse = &sDescribeSavingsPlanRatesResponse
+var DescribeSavingsPlanRatesResponse_savingsPlanId = &sDescribeSavingsPlanRatesResponse_savingsPlanId
+var DescribeSavingsPlanRatesResponse_searchResults = &sDescribeSavingsPlanRatesResponse_searchResults
+var DescribeSavingsPlanRatesResponse_nextToken = &sDescribeSavingsPlanRatesResponse_nextToken
+
+var DescribeSavingsPlansRequest = &sDescribeSavingsPlansRequest
+var DescribeSavingsPlansRequest_savingsPlanArns = &sDescribeSavingsPlansRequest_savingsPlanArns
+var DescribeSavingsPlansRequest_savingsPlanIds = &sDescribeSavingsPlansRequest_savingsPlanIds
+var DescribeSavingsPlansRequest_nextToken = &sDescribeSavingsPlansRequest_nextToken
+var DescribeSavingsPlansRequest_maxResults = &sDescribeSavingsPlansRequest_maxResults
+var DescribeSavingsPlansRequest_states = &sDescribeSavingsPlansRequest_states
+var DescribeSavingsPlansRequest_filters = &sDescribeSavingsPlansRequest_filters
+
+var DescribeSavingsPlansOfferingRatesRequest = &sDescribeSavingsPlansOfferingRatesRequest
+var DescribeSavingsPlansOfferingRatesRequest_savingsPlanOfferingIds = &sDescribeSavingsPlansOfferingRatesRequest_savingsPlanOfferingIds
+var DescribeSavingsPlansOfferingRatesRequest_savingsPlanPaymentOptions = &sDescribeSavingsPlansOfferingRatesRequest_savingsPlanPaymentOptions
+var DescribeSavingsPlansOfferingRatesRequest_savingsPlanTypes = &sDescribeSavingsPlansOfferingRatesRequest_savingsPlanTypes
+var DescribeSavingsPlansOfferingRatesRequest_products = &sDescribeSavingsPlansOfferingRatesRequest_products
+var DescribeSavingsPlansOfferingRatesRequest_serviceCodes = &sDescribeSavingsPlansOfferingRatesRequest_serviceCodes
+var DescribeSavingsPlansOfferingRatesRequest_usageTypes = &sDescribeSavingsPlansOfferingRatesRequest_usageTypes
+var DescribeSavingsPlansOfferingRatesRequest_operations = &sDescribeSavingsPlansOfferingRatesRequest_operations
+var DescribeSavingsPlansOfferingRatesRequest_filters = &sDescribeSavingsPlansOfferingRatesRequest_filters
+var DescribeSavingsPlansOfferingRatesRequest_nextToken = &sDescribeSavingsPlansOfferingRatesRequest_nextToken
+var DescribeSavingsPlansOfferingRatesRequest_maxResults = &sDescribeSavingsPlansOfferingRatesRequest_maxResults
+
+var DescribeSavingsPlansOfferingRatesResponse = &sDescribeSavingsPlansOfferingRatesResponse
+var DescribeSavingsPlansOfferingRatesResponse_searchResults = &sDescribeSavingsPlansOfferingRatesResponse_searchResults
+var DescribeSavingsPlansOfferingRatesResponse_nextToken = &sDescribeSavingsPlansOfferingRatesResponse_nextToken
+
+var DescribeSavingsPlansOfferingsRequest = &sDescribeSavingsPlansOfferingsRequest
+var DescribeSavingsPlansOfferingsRequest_offeringIds = &sDescribeSavingsPlansOfferingsRequest_offeringIds
+var DescribeSavingsPlansOfferingsRequest_paymentOptions = &sDescribeSavingsPlansOfferingsRequest_paymentOptions
+var DescribeSavingsPlansOfferingsRequest_productType = &sDescribeSavingsPlansOfferingsRequest_productType
+var DescribeSavingsPlansOfferingsRequest_planTypes = &sDescribeSavingsPlansOfferingsRequest_planTypes
+var DescribeSavingsPlansOfferingsRequest_durations = &sDescribeSavingsPlansOfferingsRequest_durations
+var DescribeSavingsPlansOfferingsRequest_currencies = &sDescribeSavingsPlansOfferingsRequest_currencies
+var DescribeSavingsPlansOfferingsRequest_descriptions = &sDescribeSavingsPlansOfferingsRequest_descriptions
+var DescribeSavingsPlansOfferingsRequest_serviceCodes = &sDescribeSavingsPlansOfferingsRequest_serviceCodes
+var DescribeSavingsPlansOfferingsRequest_usageTypes = &sDescribeSavingsPlansOfferingsRequest_usageTypes
+var DescribeSavingsPlansOfferingsRequest_operations = &sDescribeSavingsPlansOfferingsRequest_operations
+var DescribeSavingsPlansOfferingsRequest_filters = &sDescribeSavingsPlansOfferingsRequest_filters
+var DescribeSavingsPlansOfferingsRequest_nextToken = &sDescribeSavingsPlansOfferingsRequest_nextToken
+var DescribeSavingsPlansOfferingsRequest_maxResults = &sDescribeSavingsPlansOfferingsRequest_maxResults
+
+var DescribeSavingsPlansOfferingsResponse = &sDescribeSavingsPlansOfferingsResponse
+var DescribeSavingsPlansOfferingsResponse_searchResults = &sDescribeSavingsPlansOfferingsResponse_searchResults
+var DescribeSavingsPlansOfferingsResponse_nextToken = &sDescribeSavingsPlansOfferingsResponse_nextToken
+
+var DescribeSavingsPlansResponse = &sDescribeSavingsPlansResponse
+var DescribeSavingsPlansResponse_savingsPlans = &sDescribeSavingsPlansResponse_savingsPlans
+var DescribeSavingsPlansResponse_nextToken = &sDescribeSavingsPlansResponse_nextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_resourceArn = &sListTagsForResourceRequest_resourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_tags = &sListTagsForResourceResponse_tags
+
+var ReturnSavingsPlanRequest = &sReturnSavingsPlanRequest
+var ReturnSavingsPlanRequest_savingsPlanId = &sReturnSavingsPlanRequest_savingsPlanId
+var ReturnSavingsPlanRequest_clientToken = &sReturnSavingsPlanRequest_clientToken
+
+var ReturnSavingsPlanResponse = &sReturnSavingsPlanResponse
+var ReturnSavingsPlanResponse_savingsPlanId = &sReturnSavingsPlanResponse_savingsPlanId
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_resourceArn = &sTagResourceRequest_resourceArn
+var TagResourceRequest_tags = &sTagResourceRequest_tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_resourceArn = &sUntagResourceRequest_resourceArn
+var UntagResourceRequest_tagKeys = &sUntagResourceRequest_tagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var AWSSavingsPlan = &smithy.ServiceSchema{Schema: &s_AWSSavingsPlan, Version: "2019-06-28"}

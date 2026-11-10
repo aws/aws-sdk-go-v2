@@ -4,1691 +4,1271 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AddProfilePermission = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "AddProfilePermission",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	iAddProfilePermission            = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "AddProfilePermission"}
+	iCancelSigningProfile            = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "CancelSigningProfile"}
+	iDescribeSigningJob              = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "DescribeSigningJob"}
+	iGetRevocationStatus             = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "GetRevocationStatus"}
+	iGetSigningPlatform              = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "GetSigningPlatform"}
+	iGetSigningProfile               = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "GetSigningProfile"}
+	iListProfilePermissions          = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "ListProfilePermissions"}
+	iListSigningJobs                 = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "ListSigningJobs"}
+	iListSigningPlatforms            = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "ListSigningPlatforms"}
+	iListSigningProfiles             = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "ListSigningProfiles"}
+	iListTagsForResource             = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "ListTagsForResource"}
+	iPutSigningProfile               = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "PutSigningProfile"}
+	iRemoveProfilePermission         = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "RemoveProfilePermission"}
+	iRevokeSignature                 = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "RevokeSignature"}
+	iRevokeSigningProfile            = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "RevokeSigningProfile"}
+	iSignPayload                     = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "SignPayload"}
+	iStartSigningJob                 = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "StartSigningJob"}
+	iTagResource                     = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "TagResource"}
+	iUntagResource                   = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "UntagResource"}
+	i_WallabyService                 = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "WallabyService"}
+	iAccessDeniedException           = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "AccessDeniedException"}
+	i_AccountId                      = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "AccountId"}
+	i_Arn                            = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "Arn"}
+	iBadRequestException             = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "BadRequestException"}
+	i_Blob                           = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "Blob"}
+	i_bool                           = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "bool"}
+	i_BucketName                     = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "BucketName"}
+	iCategory                        = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "Category"}
+	i_CertificateArn                 = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "CertificateArn"}
+	i_CertificateHashes              = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "CertificateHashes"}
+	i_ClientRequestToken             = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "ClientRequestToken"}
+	iConflictException               = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "ConflictException"}
+	iDestination                     = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "Destination"}
+	i_DisplayName                    = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "DisplayName"}
+	iEncryptionAlgorithm             = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "EncryptionAlgorithm"}
+	iEncryptionAlgorithmOptions      = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "EncryptionAlgorithmOptions"}
+	i_EncryptionAlgorithms           = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "EncryptionAlgorithms"}
+	i_ErrorCode                      = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "ErrorCode"}
+	i_ErrorMessage                   = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "ErrorMessage"}
+	iHashAlgorithm                   = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "HashAlgorithm"}
+	iHashAlgorithmOptions            = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "HashAlgorithmOptions"}
+	i_HashAlgorithms                 = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "HashAlgorithms"}
+	iImageFormat                     = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "ImageFormat"}
+	i_ImageFormats                   = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "ImageFormats"}
+	i_Integer                        = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "Integer"}
+	iInternalServiceErrorException   = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "InternalServiceErrorException"}
+	i_JobId                          = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "JobId"}
+	i_Key                            = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "Key"}
+	i_MaxResults                     = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "MaxResults"}
+	i_MaxSizeInMB                    = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "MaxSizeInMB"}
+	i_Metadata                       = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "Metadata"}
+	i_NextToken                      = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "NextToken"}
+	iNotFoundException               = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "NotFoundException"}
+	i_Payload                        = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "Payload"}
+	iPermission                      = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "Permission"}
+	i_Permissions                    = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "Permissions"}
+	i_PlatformId                     = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "PlatformId"}
+	i_PolicySizeBytes                = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "PolicySizeBytes"}
+	i_Prefix                         = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "Prefix"}
+	i_ProfileName                    = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "ProfileName"}
+	i_ProfileVersion                 = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "ProfileVersion"}
+	i_RequestedBy                    = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "RequestedBy"}
+	iResourceNotFoundException       = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "ResourceNotFoundException"}
+	i_RevocationReasonString         = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "RevocationReasonString"}
+	i_RevokedEntities                = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "RevokedEntities"}
+	iS3Destination                   = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "S3Destination"}
+	iS3SignedObject                  = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "S3SignedObject"}
+	iS3Source                        = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "S3Source"}
+	iServiceLimitExceededException   = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "ServiceLimitExceededException"}
+	iSignatureValidityPeriod         = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "SignatureValidityPeriod"}
+	iSignedObject                    = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "SignedObject"}
+	iSigningConfiguration            = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "SigningConfiguration"}
+	iSigningConfigurationOverrides   = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "SigningConfigurationOverrides"}
+	iSigningImageFormat              = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "SigningImageFormat"}
+	iSigningJob                      = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "SigningJob"}
+	iSigningJobRevocationRecord      = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "SigningJobRevocationRecord"}
+	i_SigningJobs                    = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "SigningJobs"}
+	iSigningMaterial                 = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "SigningMaterial"}
+	i_SigningParameterKey            = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "SigningParameterKey"}
+	i_SigningParameters              = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "SigningParameters"}
+	i_SigningParameterValue          = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "SigningParameterValue"}
+	iSigningPlatform                 = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "SigningPlatform"}
+	iSigningPlatformOverrides        = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "SigningPlatformOverrides"}
+	i_SigningPlatforms               = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "SigningPlatforms"}
+	iSigningProfile                  = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "SigningProfile"}
+	iSigningProfileRevocationRecord  = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "SigningProfileRevocationRecord"}
+	i_SigningProfiles                = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "SigningProfiles"}
+	iSigningProfileStatus            = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "SigningProfileStatus"}
+	iSigningStatus                   = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "SigningStatus"}
+	iSource                          = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "Source"}
+	i_Statuses                       = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "Statuses"}
+	i_StatusReason                   = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "StatusReason"}
+	i_String                         = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "String"}
+	i_TagKey                         = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "TagKey"}
+	i_TagKeyList                     = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "TagKeyList"}
+	i_TagMap                         = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "TagMap"}
+	i_TagValue                       = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "TagValue"}
+	iThrottlingException             = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "ThrottlingException"}
+	i_Timestamp                      = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "Timestamp"}
+	iTooManyRequestsException        = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "TooManyRequestsException"}
+	iValidationException             = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "ValidationException"}
+	iValidityType                    = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "ValidityType"}
+	i_Version                        = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "Version"}
+	iAddProfilePermissionRequest     = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "AddProfilePermissionRequest"}
+	iAddProfilePermissionResponse    = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "AddProfilePermissionResponse"}
+	iCancelSigningProfileRequest     = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "CancelSigningProfileRequest"}
+	iDescribeSigningJobRequest       = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "DescribeSigningJobRequest"}
+	iDescribeSigningJobResponse      = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "DescribeSigningJobResponse"}
+	iGetRevocationStatusRequest      = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "GetRevocationStatusRequest"}
+	iGetRevocationStatusResponse     = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "GetRevocationStatusResponse"}
+	iGetSigningPlatformRequest       = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "GetSigningPlatformRequest"}
+	iGetSigningPlatformResponse      = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "GetSigningPlatformResponse"}
+	iGetSigningProfileRequest        = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "GetSigningProfileRequest"}
+	iGetSigningProfileResponse       = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "GetSigningProfileResponse"}
+	iListProfilePermissionsRequest   = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "ListProfilePermissionsRequest"}
+	iListProfilePermissionsResponse  = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "ListProfilePermissionsResponse"}
+	iListSigningJobsRequest          = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "ListSigningJobsRequest"}
+	iListSigningJobsResponse         = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "ListSigningJobsResponse"}
+	iListSigningPlatformsRequest     = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "ListSigningPlatformsRequest"}
+	iListSigningPlatformsResponse    = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "ListSigningPlatformsResponse"}
+	iListSigningProfilesRequest      = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "ListSigningProfilesRequest"}
+	iListSigningProfilesResponse     = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "ListSigningProfilesResponse"}
+	iListTagsForResourceRequest      = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse     = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "ListTagsForResourceResponse"}
+	iPutSigningProfileRequest        = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "PutSigningProfileRequest"}
+	iPutSigningProfileResponse       = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "PutSigningProfileResponse"}
+	iRemoveProfilePermissionRequest  = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "RemoveProfilePermissionRequest"}
+	iRemoveProfilePermissionResponse = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "RemoveProfilePermissionResponse"}
+	iRevokeSignatureRequest          = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "RevokeSignatureRequest"}
+	iRevokeSigningProfileRequest     = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "RevokeSigningProfileRequest"}
+	iSignPayloadRequest              = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "SignPayloadRequest"}
+	iSignPayloadResponse             = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "SignPayloadResponse"}
+	iStartSigningJobRequest          = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "StartSigningJobRequest"}
+	iStartSigningJobResponse         = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "StartSigningJobResponse"}
+	iTagResourceRequest              = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "TagResourceRequest"}
+	iTagResourceResponse             = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "TagResourceResponse"}
+	iUntagResourceRequest            = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "UntagResourceRequest"}
+	iUntagResourceResponse           = smithy.ShapeID{Namespace: "com.amazonaws.signer", Name: "UntagResourceResponse"}
+	pUnit                            = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/signing-profiles/{profileName}/permissions",
-	Code: 200})
-
-var CancelSigningProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "CancelSigningProfile",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/signing-profiles/{profileName}",
-	Code: 200})
-
-var DescribeSigningJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "DescribeSigningJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/signing-jobs/{jobId}",
-	Code: 200})
-
-var GetRevocationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "GetRevocationStatus",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/revocations",
-	Code: 200})
-
-var GetSigningPlatform = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "GetSigningPlatform",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/signing-platforms/{platformId}",
-	Code: 200})
-
-var GetSigningProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "GetSigningProfile",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/signing-profiles/{profileName}",
-	Code: 200})
-
-var ListProfilePermissions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ListProfilePermissions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/signing-profiles/{profileName}/permissions",
-	Code: 200})
-
-var ListSigningJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ListSigningJobs",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/signing-jobs",
-	Code: 200})
-
-var ListSigningPlatforms = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ListSigningPlatforms",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/signing-platforms",
-	Code: 200})
-
-var ListSigningProfiles = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ListSigningProfiles",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/signing-profiles",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var PutSigningProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "PutSigningProfile",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/signing-profiles/{profileName}",
-	Code: 200})
-
-var RemoveProfilePermission = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "RemoveProfilePermission",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/signing-profiles/{profileName}/permissions/{statementId}",
-	Code: 200})
-
-var RevokeSignature = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "RevokeSignature",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/signing-jobs/{jobId}/revoke",
-	Code: 200})
-
-var RevokeSigningProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "RevokeSigningProfile",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/signing-profiles/{profileName}/revoke",
-	Code: 200})
-
-var SignPayload = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "SignPayload",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/signing-jobs/with-payload",
-	Code: 200})
-
-var StartSigningJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "StartSigningJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/signing-jobs",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var _WallabyService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "WallabyService",
-}, smithy.ShapeTypeService, 0)
-
-var WallabyService = smithy.NewServiceSchema(_WallabyService, "2017-08-25")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var AccessDeniedException_code *smithy.Schema
-
-var _AccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "AccountId",
-}, smithy.ShapeTypeString, 0)
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var BadRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var BadRequestException_message *smithy.Schema
-
-var BadRequestException_code *smithy.Schema
-
-var _Blob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "Blob",
-}, smithy.ShapeTypeBlob, 0)
-
-var _bool = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "bool",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _BucketName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "BucketName",
-}, smithy.ShapeTypeString, 0)
-
-var Category = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "Category",
-}, smithy.ShapeTypeEnum, 1)
-var Category_AWSIoT *smithy.Schema
-
-var _CertificateArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "CertificateArn",
-}, smithy.ShapeTypeString, 0)
-
-var _CertificateHashes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "CertificateHashes",
-}, smithy.ShapeTypeList, 1)
-var _CertificateHashes_member *smithy.Schema
-
-var _ClientRequestToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ClientRequestToken",
-}, smithy.ShapeTypeString, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var ConflictException_code *smithy.Schema
-
-var Destination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "Destination",
-}, smithy.ShapeTypeStructure, 1)
-var Destination_s3 *smithy.Schema
-
-var _DisplayName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "DisplayName",
-}, smithy.ShapeTypeString, 0)
-
-var EncryptionAlgorithm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "EncryptionAlgorithm",
-}, smithy.ShapeTypeEnum, 2)
-var EncryptionAlgorithm_RSA *smithy.Schema
-
-var EncryptionAlgorithm_ECDSA *smithy.Schema
-
-var EncryptionAlgorithmOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "EncryptionAlgorithmOptions",
-}, smithy.ShapeTypeStructure, 2)
-var EncryptionAlgorithmOptions_allowedValues *smithy.Schema
-
-var EncryptionAlgorithmOptions_defaultValue *smithy.Schema
-
-var _EncryptionAlgorithms = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "EncryptionAlgorithms",
-}, smithy.ShapeTypeList, 1)
-var _EncryptionAlgorithms_member *smithy.Schema
-
-var _ErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ErrorCode",
-}, smithy.ShapeTypeString, 0)
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var HashAlgorithm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "HashAlgorithm",
-}, smithy.ShapeTypeEnum, 2)
-var HashAlgorithm_SHA1 *smithy.Schema
-
-var HashAlgorithm_SHA256 *smithy.Schema
-
-var HashAlgorithmOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "HashAlgorithmOptions",
-}, smithy.ShapeTypeStructure, 2)
-var HashAlgorithmOptions_allowedValues *smithy.Schema
-
-var HashAlgorithmOptions_defaultValue *smithy.Schema
-
-var _HashAlgorithms = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "HashAlgorithms",
-}, smithy.ShapeTypeList, 1)
-var _HashAlgorithms_member *smithy.Schema
-
-var ImageFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ImageFormat",
-}, smithy.ShapeTypeEnum, 3)
-var ImageFormat_JSON *smithy.Schema
-
-var ImageFormat_JSONEmbedded *smithy.Schema
-
-var ImageFormat_JSONDetached *smithy.Schema
-
-var _ImageFormats = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ImageFormats",
-}, smithy.ShapeTypeList, 1)
-var _ImageFormats_member *smithy.Schema
-
-var _Integer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "Integer",
-}, smithy.ShapeTypeInteger, 0)
-
-var InternalServiceErrorException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "InternalServiceErrorException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServiceErrorException_message *smithy.Schema
-
-var InternalServiceErrorException_code *smithy.Schema
-
-var _JobId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "JobId",
-}, smithy.ShapeTypeString, 0)
-
-var _Key = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "Key",
-}, smithy.ShapeTypeString, 0)
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxSizeInMB = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "MaxSizeInMB",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Metadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "Metadata",
-}, smithy.ShapeTypeMap, 2)
-var _Metadata_key *smithy.Schema
-
-var _Metadata_value *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var NotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var NotFoundException_message *smithy.Schema
-
-var NotFoundException_code *smithy.Schema
-
-var _Payload = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "Payload",
-}, smithy.ShapeTypeBlob, 0)
-
-var Permission = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "Permission",
-}, smithy.ShapeTypeStructure, 4)
-var Permission_action *smithy.Schema
-
-var Permission_principal *smithy.Schema
-
-var Permission_statementId *smithy.Schema
-
-var Permission_profileVersion *smithy.Schema
-
-var _Permissions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "Permissions",
-}, smithy.ShapeTypeList, 1)
-var _Permissions_member *smithy.Schema
-
-var _PlatformId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "PlatformId",
-}, smithy.ShapeTypeString, 0)
-
-var _PolicySizeBytes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "PolicySizeBytes",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Prefix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "Prefix",
-}, smithy.ShapeTypeString, 0)
-
-var _ProfileName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ProfileName",
-}, smithy.ShapeTypeString, 0)
-
-var _ProfileVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ProfileVersion",
-}, smithy.ShapeTypeString, 0)
-
-var _RequestedBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "RequestedBy",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceNotFoundException_code *smithy.Schema
-
-var _RevocationReasonString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "RevocationReasonString",
-}, smithy.ShapeTypeString, 0)
-
-var _RevokedEntities = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "RevokedEntities",
-}, smithy.ShapeTypeList, 1)
-var _RevokedEntities_member *smithy.Schema
-
-var S3Destination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "S3Destination",
-}, smithy.ShapeTypeStructure, 2)
-var S3Destination_bucketName *smithy.Schema
-
-var S3Destination_prefix *smithy.Schema
-
-var S3SignedObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "S3SignedObject",
-}, smithy.ShapeTypeStructure, 2)
-var S3SignedObject_bucketName *smithy.Schema
-
-var S3SignedObject_key *smithy.Schema
-
-var S3Source = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "S3Source",
-}, smithy.ShapeTypeStructure, 3)
-var S3Source_bucketName *smithy.Schema
-
-var S3Source_key *smithy.Schema
-
-var S3Source_version *smithy.Schema
-
-var ServiceLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ServiceLimitExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceLimitExceededException_message *smithy.Schema
-
-var ServiceLimitExceededException_code *smithy.Schema
-
-var SignatureValidityPeriod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "SignatureValidityPeriod",
-}, smithy.ShapeTypeStructure, 2)
-var SignatureValidityPeriod_value *smithy.Schema
-
-var SignatureValidityPeriod_type *smithy.Schema
-
-var SignedObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "SignedObject",
-}, smithy.ShapeTypeStructure, 1)
-var SignedObject_s3 *smithy.Schema
-
-var SigningConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "SigningConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var SigningConfiguration_encryptionAlgorithmOptions *smithy.Schema
-
-var SigningConfiguration_hashAlgorithmOptions *smithy.Schema
-
-var SigningConfigurationOverrides = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "SigningConfigurationOverrides",
-}, smithy.ShapeTypeStructure, 2)
-var SigningConfigurationOverrides_encryptionAlgorithm *smithy.Schema
-
-var SigningConfigurationOverrides_hashAlgorithm *smithy.Schema
-
-var SigningImageFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "SigningImageFormat",
-}, smithy.ShapeTypeStructure, 2)
-var SigningImageFormat_supportedFormats *smithy.Schema
-
-var SigningImageFormat_defaultFormat *smithy.Schema
-
-var SigningJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "SigningJob",
-}, smithy.ShapeTypeStructure, 14)
-var SigningJob_jobId *smithy.Schema
-
-var SigningJob_source *smithy.Schema
-
-var SigningJob_signedObject *smithy.Schema
-
-var SigningJob_signingMaterial *smithy.Schema
-
-var SigningJob_createdAt *smithy.Schema
-
-var SigningJob_status *smithy.Schema
-
-var SigningJob_isRevoked *smithy.Schema
-
-var SigningJob_profileName *smithy.Schema
-
-var SigningJob_profileVersion *smithy.Schema
-
-var SigningJob_platformId *smithy.Schema
-
-var SigningJob_platformDisplayName *smithy.Schema
-
-var SigningJob_signatureExpiresAt *smithy.Schema
-
-var SigningJob_jobOwner *smithy.Schema
-
-var SigningJob_jobInvoker *smithy.Schema
-
-var SigningJobRevocationRecord = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "SigningJobRevocationRecord",
-}, smithy.ShapeTypeStructure, 3)
-var SigningJobRevocationRecord_reason *smithy.Schema
-
-var SigningJobRevocationRecord_revokedAt *smithy.Schema
-
-var SigningJobRevocationRecord_revokedBy *smithy.Schema
-
-var _SigningJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "SigningJobs",
-}, smithy.ShapeTypeList, 1)
-var _SigningJobs_member *smithy.Schema
-
-var SigningMaterial = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "SigningMaterial",
-}, smithy.ShapeTypeStructure, 1)
-var SigningMaterial_certificateArn *smithy.Schema
-
-var _SigningParameterKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "SigningParameterKey",
-}, smithy.ShapeTypeString, 0)
-
-var _SigningParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "SigningParameters",
-}, smithy.ShapeTypeMap, 2)
-var _SigningParameters_key *smithy.Schema
-
-var _SigningParameters_value *smithy.Schema
-
-var _SigningParameterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "SigningParameterValue",
-}, smithy.ShapeTypeString, 0)
-
-var SigningPlatform = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "SigningPlatform",
-}, smithy.ShapeTypeStructure, 9)
-var SigningPlatform_platformId *smithy.Schema
-
-var SigningPlatform_displayName *smithy.Schema
-
-var SigningPlatform_partner *smithy.Schema
-
-var SigningPlatform_target *smithy.Schema
-
-var SigningPlatform_category *smithy.Schema
-
-var SigningPlatform_signingConfiguration *smithy.Schema
-
-var SigningPlatform_signingImageFormat *smithy.Schema
-
-var SigningPlatform_maxSizeInMB *smithy.Schema
-
-var SigningPlatform_revocationSupported *smithy.Schema
-
-var SigningPlatformOverrides = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "SigningPlatformOverrides",
-}, smithy.ShapeTypeStructure, 2)
-var SigningPlatformOverrides_signingConfiguration *smithy.Schema
-
-var SigningPlatformOverrides_signingImageFormat *smithy.Schema
-
-var _SigningPlatforms = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "SigningPlatforms",
-}, smithy.ShapeTypeList, 1)
-var _SigningPlatforms_member *smithy.Schema
-
-var SigningProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "SigningProfile",
-}, smithy.ShapeTypeStructure, 11)
-var SigningProfile_profileName *smithy.Schema
-
-var SigningProfile_profileVersion *smithy.Schema
-
-var SigningProfile_profileVersionArn *smithy.Schema
-
-var SigningProfile_signingMaterial *smithy.Schema
-
-var SigningProfile_signatureValidityPeriod *smithy.Schema
-
-var SigningProfile_platformId *smithy.Schema
-
-var SigningProfile_platformDisplayName *smithy.Schema
-
-var SigningProfile_signingParameters *smithy.Schema
-
-var SigningProfile_status *smithy.Schema
-
-var SigningProfile_arn *smithy.Schema
-
-var SigningProfile_tags *smithy.Schema
-
-var SigningProfileRevocationRecord = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "SigningProfileRevocationRecord",
-}, smithy.ShapeTypeStructure, 3)
-var SigningProfileRevocationRecord_revocationEffectiveFrom *smithy.Schema
-
-var SigningProfileRevocationRecord_revokedAt *smithy.Schema
-
-var SigningProfileRevocationRecord_revokedBy *smithy.Schema
-
-var _SigningProfiles = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "SigningProfiles",
-}, smithy.ShapeTypeList, 1)
-var _SigningProfiles_member *smithy.Schema
-
-var SigningProfileStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "SigningProfileStatus",
-}, smithy.ShapeTypeEnum, 3)
-var SigningProfileStatus_Active *smithy.Schema
-
-var SigningProfileStatus_Canceled *smithy.Schema
-
-var SigningProfileStatus_Revoked *smithy.Schema
-
-var SigningStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "SigningStatus",
-}, smithy.ShapeTypeEnum, 3)
-var SigningStatus_InProgress *smithy.Schema
-
-var SigningStatus_Failed *smithy.Schema
-
-var SigningStatus_Succeeded *smithy.Schema
-
-var Source = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "Source",
-}, smithy.ShapeTypeStructure, 1)
-var Source_s3 *smithy.Schema
-
-var _Statuses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "Statuses",
-}, smithy.ShapeTypeList, 1)
-var _Statuses_member *smithy.Schema
-
-var _StatusReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "StatusReason",
-}, smithy.ShapeTypeString, 0)
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "TagMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagMap_key *smithy.Schema
-
-var _TagMap_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ThrottlingException_code *smithy.Schema
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var TooManyRequestsException_message *smithy.Schema
-
-var TooManyRequestsException_code *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var ValidationException_code *smithy.Schema
-
-var ValidityType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ValidityType",
-}, smithy.ShapeTypeEnum, 3)
-var ValidityType_DAYS *smithy.Schema
-
-var ValidityType_MONTHS *smithy.Schema
-
-var ValidityType_YEARS *smithy.Schema
-
-var _Version = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "Version",
-}, smithy.ShapeTypeString, 0)
-
-var AddProfilePermissionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "AddProfilePermissionRequest",
-}, smithy.ShapeTypeStructure, 6)
-var AddProfilePermissionRequest_profileName *smithy.Schema
-
-var AddProfilePermissionRequest_profileVersion *smithy.Schema
-
-var AddProfilePermissionRequest_action *smithy.Schema
-
-var AddProfilePermissionRequest_principal *smithy.Schema
-
-var AddProfilePermissionRequest_revisionId *smithy.Schema
-
-var AddProfilePermissionRequest_statementId *smithy.Schema
-
-var AddProfilePermissionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "AddProfilePermissionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var AddProfilePermissionResponse_revisionId *smithy.Schema
-
-var CancelSigningProfileRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "CancelSigningProfileRequest",
-}, smithy.ShapeTypeStructure, 1)
-var CancelSigningProfileRequest_profileName *smithy.Schema
-
-var DescribeSigningJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "DescribeSigningJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeSigningJobRequest_jobId *smithy.Schema
-
-var DescribeSigningJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "DescribeSigningJobResponse",
-}, smithy.ShapeTypeStructure, 19)
-var DescribeSigningJobResponse_jobId *smithy.Schema
-
-var DescribeSigningJobResponse_source *smithy.Schema
-
-var DescribeSigningJobResponse_signingMaterial *smithy.Schema
-
-var DescribeSigningJobResponse_platformId *smithy.Schema
-
-var DescribeSigningJobResponse_platformDisplayName *smithy.Schema
-
-var DescribeSigningJobResponse_profileName *smithy.Schema
-
-var DescribeSigningJobResponse_profileVersion *smithy.Schema
-
-var DescribeSigningJobResponse_overrides *smithy.Schema
-
-var DescribeSigningJobResponse_signingParameters *smithy.Schema
-
-var DescribeSigningJobResponse_createdAt *smithy.Schema
-
-var DescribeSigningJobResponse_completedAt *smithy.Schema
-
-var DescribeSigningJobResponse_signatureExpiresAt *smithy.Schema
-
-var DescribeSigningJobResponse_requestedBy *smithy.Schema
-
-var DescribeSigningJobResponse_status *smithy.Schema
-
-var DescribeSigningJobResponse_statusReason *smithy.Schema
-
-var DescribeSigningJobResponse_revocationRecord *smithy.Schema
-
-var DescribeSigningJobResponse_signedObject *smithy.Schema
-
-var DescribeSigningJobResponse_jobOwner *smithy.Schema
-
-var DescribeSigningJobResponse_jobInvoker *smithy.Schema
-
-var GetRevocationStatusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "GetRevocationStatusRequest",
-}, smithy.ShapeTypeStructure, 5)
-var GetRevocationStatusRequest_signatureTimestamp *smithy.Schema
-
-var GetRevocationStatusRequest_platformId *smithy.Schema
-
-var GetRevocationStatusRequest_profileVersionArn *smithy.Schema
-
-var GetRevocationStatusRequest_jobArn *smithy.Schema
-
-var GetRevocationStatusRequest_certificateHashes *smithy.Schema
-
-var GetRevocationStatusResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "GetRevocationStatusResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetRevocationStatusResponse_revokedEntities *smithy.Schema
-
-var GetSigningPlatformRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "GetSigningPlatformRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetSigningPlatformRequest_platformId *smithy.Schema
-
-var GetSigningPlatformResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "GetSigningPlatformResponse",
-}, smithy.ShapeTypeStructure, 9)
-var GetSigningPlatformResponse_platformId *smithy.Schema
-
-var GetSigningPlatformResponse_displayName *smithy.Schema
-
-var GetSigningPlatformResponse_partner *smithy.Schema
-
-var GetSigningPlatformResponse_target *smithy.Schema
-
-var GetSigningPlatformResponse_category *smithy.Schema
-
-var GetSigningPlatformResponse_signingConfiguration *smithy.Schema
-
-var GetSigningPlatformResponse_signingImageFormat *smithy.Schema
-
-var GetSigningPlatformResponse_maxSizeInMB *smithy.Schema
-
-var GetSigningPlatformResponse_revocationSupported *smithy.Schema
-
-var GetSigningProfileRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "GetSigningProfileRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetSigningProfileRequest_profileName *smithy.Schema
-
-var GetSigningProfileRequest_profileOwner *smithy.Schema
-
-var GetSigningProfileResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "GetSigningProfileResponse",
-}, smithy.ShapeTypeStructure, 14)
-var GetSigningProfileResponse_profileName *smithy.Schema
-
-var GetSigningProfileResponse_profileVersion *smithy.Schema
-
-var GetSigningProfileResponse_profileVersionArn *smithy.Schema
-
-var GetSigningProfileResponse_revocationRecord *smithy.Schema
-
-var GetSigningProfileResponse_signingMaterial *smithy.Schema
-
-var GetSigningProfileResponse_platformId *smithy.Schema
-
-var GetSigningProfileResponse_platformDisplayName *smithy.Schema
-
-var GetSigningProfileResponse_signatureValidityPeriod *smithy.Schema
-
-var GetSigningProfileResponse_overrides *smithy.Schema
-
-var GetSigningProfileResponse_signingParameters *smithy.Schema
-
-var GetSigningProfileResponse_status *smithy.Schema
-
-var GetSigningProfileResponse_statusReason *smithy.Schema
-
-var GetSigningProfileResponse_arn *smithy.Schema
-
-var GetSigningProfileResponse_tags *smithy.Schema
-
-var ListProfilePermissionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ListProfilePermissionsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListProfilePermissionsRequest_profileName *smithy.Schema
-
-var ListProfilePermissionsRequest_nextToken *smithy.Schema
-
-var ListProfilePermissionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ListProfilePermissionsResponse",
-}, smithy.ShapeTypeStructure, 4)
-var ListProfilePermissionsResponse_revisionId *smithy.Schema
-
-var ListProfilePermissionsResponse_policySizeBytes *smithy.Schema
-
-var ListProfilePermissionsResponse_permissions *smithy.Schema
-
-var ListProfilePermissionsResponse_nextToken *smithy.Schema
-
-var ListSigningJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ListSigningJobsRequest",
-}, smithy.ShapeTypeStructure, 9)
-var ListSigningJobsRequest_status *smithy.Schema
-
-var ListSigningJobsRequest_platformId *smithy.Schema
-
-var ListSigningJobsRequest_requestedBy *smithy.Schema
-
-var ListSigningJobsRequest_maxResults *smithy.Schema
-
-var ListSigningJobsRequest_nextToken *smithy.Schema
-
-var ListSigningJobsRequest_isRevoked *smithy.Schema
-
-var ListSigningJobsRequest_signatureExpiresBefore *smithy.Schema
-
-var ListSigningJobsRequest_signatureExpiresAfter *smithy.Schema
-
-var ListSigningJobsRequest_jobInvoker *smithy.Schema
-
-var ListSigningJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ListSigningJobsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSigningJobsResponse_jobs *smithy.Schema
-
-var ListSigningJobsResponse_nextToken *smithy.Schema
-
-var ListSigningPlatformsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ListSigningPlatformsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListSigningPlatformsRequest_category *smithy.Schema
-
-var ListSigningPlatformsRequest_partner *smithy.Schema
-
-var ListSigningPlatformsRequest_target *smithy.Schema
-
-var ListSigningPlatformsRequest_maxResults *smithy.Schema
-
-var ListSigningPlatformsRequest_nextToken *smithy.Schema
-
-var ListSigningPlatformsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ListSigningPlatformsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSigningPlatformsResponse_platforms *smithy.Schema
-
-var ListSigningPlatformsResponse_nextToken *smithy.Schema
-
-var ListSigningProfilesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ListSigningProfilesRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListSigningProfilesRequest_includeCanceled *smithy.Schema
-
-var ListSigningProfilesRequest_maxResults *smithy.Schema
-
-var ListSigningProfilesRequest_nextToken *smithy.Schema
-
-var ListSigningProfilesRequest_platformId *smithy.Schema
-
-var ListSigningProfilesRequest_statuses *smithy.Schema
-
-var ListSigningProfilesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ListSigningProfilesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSigningProfilesResponse_profiles *smithy.Schema
-
-var ListSigningProfilesResponse_nextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_resourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var PutSigningProfileRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "PutSigningProfileRequest",
-}, smithy.ShapeTypeStructure, 7)
-var PutSigningProfileRequest_profileName *smithy.Schema
-
-var PutSigningProfileRequest_signingMaterial *smithy.Schema
-
-var PutSigningProfileRequest_signatureValidityPeriod *smithy.Schema
-
-var PutSigningProfileRequest_platformId *smithy.Schema
-
-var PutSigningProfileRequest_overrides *smithy.Schema
-
-var PutSigningProfileRequest_signingParameters *smithy.Schema
-
-var PutSigningProfileRequest_tags *smithy.Schema
-
-var PutSigningProfileResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "PutSigningProfileResponse",
-}, smithy.ShapeTypeStructure, 3)
-var PutSigningProfileResponse_arn *smithy.Schema
-
-var PutSigningProfileResponse_profileVersion *smithy.Schema
-
-var PutSigningProfileResponse_profileVersionArn *smithy.Schema
-
-var RemoveProfilePermissionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "RemoveProfilePermissionRequest",
-}, smithy.ShapeTypeStructure, 3)
-var RemoveProfilePermissionRequest_profileName *smithy.Schema
-
-var RemoveProfilePermissionRequest_revisionId *smithy.Schema
-
-var RemoveProfilePermissionRequest_statementId *smithy.Schema
-
-var RemoveProfilePermissionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "RemoveProfilePermissionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var RemoveProfilePermissionResponse_revisionId *smithy.Schema
-
-var RevokeSignatureRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "RevokeSignatureRequest",
-}, smithy.ShapeTypeStructure, 3)
-var RevokeSignatureRequest_jobId *smithy.Schema
-
-var RevokeSignatureRequest_jobOwner *smithy.Schema
-
-var RevokeSignatureRequest_reason *smithy.Schema
-
-var RevokeSigningProfileRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "RevokeSigningProfileRequest",
-}, smithy.ShapeTypeStructure, 4)
-var RevokeSigningProfileRequest_profileName *smithy.Schema
-
-var RevokeSigningProfileRequest_profileVersion *smithy.Schema
-
-var RevokeSigningProfileRequest_reason *smithy.Schema
-
-var RevokeSigningProfileRequest_effectiveTime *smithy.Schema
-
-var SignPayloadRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "SignPayloadRequest",
-}, smithy.ShapeTypeStructure, 4)
-var SignPayloadRequest_profileName *smithy.Schema
-
-var SignPayloadRequest_profileOwner *smithy.Schema
-
-var SignPayloadRequest_payload *smithy.Schema
-
-var SignPayloadRequest_payloadFormat *smithy.Schema
-
-var SignPayloadResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "SignPayloadResponse",
-}, smithy.ShapeTypeStructure, 4)
-var SignPayloadResponse_jobId *smithy.Schema
-
-var SignPayloadResponse_jobOwner *smithy.Schema
-
-var SignPayloadResponse_metadata *smithy.Schema
-
-var SignPayloadResponse_signature *smithy.Schema
-
-var StartSigningJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "StartSigningJobRequest",
-}, smithy.ShapeTypeStructure, 5)
-var StartSigningJobRequest_source *smithy.Schema
-
-var StartSigningJobRequest_destination *smithy.Schema
-
-var StartSigningJobRequest_profileName *smithy.Schema
-
-var StartSigningJobRequest_clientRequestToken *smithy.Schema
-
-var StartSigningJobRequest_profileOwner *smithy.Schema
-
-var StartSigningJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "StartSigningJobResponse",
-}, smithy.ShapeTypeStructure, 2)
-var StartSigningJobResponse_jobId *smithy.Schema
-
-var StartSigningJobResponse_jobOwner *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.signer",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", _ErrorMessage)
-
-	AccessDeniedException_code = AccessDeniedException.AddMember("code", _ErrorCode)
-
-	BadRequestException_message = BadRequestException.AddMember("message", _ErrorMessage)
-
-	BadRequestException_code = BadRequestException.AddMember("code", _ErrorCode)
-
-	Category_AWSIoT = Category.AddMember("AWSIoT", smithyprelude.Unit)
-
-	_CertificateHashes_member = _CertificateHashes.AddMember("member", _String)
-
-	ConflictException_message = ConflictException.AddMember("message", _ErrorMessage)
-
-	ConflictException_code = ConflictException.AddMember("code", _ErrorCode)
-
-	S3Destination_bucketName = S3Destination.AddMember("bucketName", _BucketName)
-
-	S3Destination_prefix = S3Destination.AddMember("prefix", _Prefix)
-
-	Destination_s3 = Destination.AddMember("s3", S3Destination)
-
-	EncryptionAlgorithm_RSA = EncryptionAlgorithm.AddMember("RSA", smithyprelude.Unit)
-
-	EncryptionAlgorithm_ECDSA = EncryptionAlgorithm.AddMember("ECDSA", smithyprelude.Unit)
-
-	_EncryptionAlgorithms_member = _EncryptionAlgorithms.AddMember("member", EncryptionAlgorithm)
-
-	EncryptionAlgorithmOptions_allowedValues = EncryptionAlgorithmOptions.AddMember("allowedValues", _EncryptionAlgorithms)
-
-	EncryptionAlgorithmOptions_defaultValue = EncryptionAlgorithmOptions.AddMember("defaultValue", EncryptionAlgorithm)
-
-	HashAlgorithm_SHA1 = HashAlgorithm.AddMember("SHA1", smithyprelude.Unit)
-
-	HashAlgorithm_SHA256 = HashAlgorithm.AddMember("SHA256", smithyprelude.Unit)
-
-	_HashAlgorithms_member = _HashAlgorithms.AddMember("member", HashAlgorithm)
-
-	HashAlgorithmOptions_allowedValues = HashAlgorithmOptions.AddMember("allowedValues", _HashAlgorithms)
-
-	HashAlgorithmOptions_defaultValue = HashAlgorithmOptions.AddMember("defaultValue", HashAlgorithm)
-
-	ImageFormat_JSON = ImageFormat.AddMember("JSON", smithyprelude.Unit)
-
-	ImageFormat_JSONEmbedded = ImageFormat.AddMember("JSONEmbedded", smithyprelude.Unit)
-
-	ImageFormat_JSONDetached = ImageFormat.AddMember("JSONDetached", smithyprelude.Unit)
-
-	_ImageFormats_member = _ImageFormats.AddMember("member", ImageFormat)
-
-	InternalServiceErrorException_message = InternalServiceErrorException.AddMember("message", _ErrorMessage)
-
-	InternalServiceErrorException_code = InternalServiceErrorException.AddMember("code", _ErrorCode)
-
-	_Metadata_key = _Metadata.AddMember("key", _String)
-
-	_Metadata_value = _Metadata.AddMember("value", _String)
-
-	NotFoundException_message = NotFoundException.AddMember("message", _ErrorMessage)
-
-	NotFoundException_code = NotFoundException.AddMember("code", _ErrorCode)
-
-	Permission_action = Permission.AddMember("action", _String)
-
-	Permission_principal = Permission.AddMember("principal", _String)
-
-	Permission_statementId = Permission.AddMember("statementId", _String)
-
-	Permission_profileVersion = Permission.AddMember("profileVersion", _ProfileVersion)
-
-	_Permissions_member = _Permissions.AddMember("member", Permission)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _ErrorMessage)
-
-	ResourceNotFoundException_code = ResourceNotFoundException.AddMember("code", _ErrorCode)
-
-	_RevokedEntities_member = _RevokedEntities.AddMember("member", _String)
-
-	S3SignedObject_bucketName = S3SignedObject.AddMember("bucketName", _BucketName)
-
-	S3SignedObject_key = S3SignedObject.AddMember("key", _Key)
-
-	S3Source_bucketName = S3Source.AddMember("bucketName", _BucketName)
-
-	S3Source_key = S3Source.AddMember("key", _Key)
-
-	S3Source_version = S3Source.AddMember("version", _Version)
-
-	ServiceLimitExceededException_message = ServiceLimitExceededException.AddMember("message", _ErrorMessage)
-
-	ServiceLimitExceededException_code = ServiceLimitExceededException.AddMember("code", _ErrorCode)
-
-	ValidityType_DAYS = ValidityType.AddMember("DAYS", smithyprelude.Unit)
-
-	ValidityType_MONTHS = ValidityType.AddMember("MONTHS", smithyprelude.Unit)
-
-	ValidityType_YEARS = ValidityType.AddMember("YEARS", smithyprelude.Unit)
-
-	SignatureValidityPeriod_value = SignatureValidityPeriod.AddMember("value", _Integer)
-
-	SignatureValidityPeriod_type = SignatureValidityPeriod.AddMember("type", ValidityType)
-
-	SignedObject_s3 = SignedObject.AddMember("s3", S3SignedObject)
-
-	SigningConfiguration_encryptionAlgorithmOptions = SigningConfiguration.AddMember("encryptionAlgorithmOptions", EncryptionAlgorithmOptions)
-
-	SigningConfiguration_hashAlgorithmOptions = SigningConfiguration.AddMember("hashAlgorithmOptions", HashAlgorithmOptions)
-
-	SigningConfigurationOverrides_encryptionAlgorithm = SigningConfigurationOverrides.AddMember("encryptionAlgorithm", EncryptionAlgorithm)
-
-	SigningConfigurationOverrides_hashAlgorithm = SigningConfigurationOverrides.AddMember("hashAlgorithm", HashAlgorithm)
-
-	SigningImageFormat_supportedFormats = SigningImageFormat.AddMember("supportedFormats", _ImageFormats)
-
-	SigningImageFormat_defaultFormat = SigningImageFormat.AddMember("defaultFormat", ImageFormat)
-
-	Source_s3 = Source.AddMember("s3", S3Source)
-
-	SigningMaterial_certificateArn = SigningMaterial.AddMember("certificateArn", _CertificateArn)
-
-	SigningStatus_InProgress = SigningStatus.AddMember("InProgress", smithyprelude.Unit)
-
-	SigningStatus_Failed = SigningStatus.AddMember("Failed", smithyprelude.Unit)
-
-	SigningStatus_Succeeded = SigningStatus.AddMember("Succeeded", smithyprelude.Unit)
-
-	SigningJob_jobId = SigningJob.AddMember("jobId", _JobId)
-
-	SigningJob_source = SigningJob.AddMember("source", Source)
-
-	SigningJob_signedObject = SigningJob.AddMember("signedObject", SignedObject)
-
-	SigningJob_signingMaterial = SigningJob.AddMember("signingMaterial", SigningMaterial)
-
-	SigningJob_createdAt = SigningJob.AddMember("createdAt", _Timestamp)
-
-	SigningJob_status = SigningJob.AddMember("status", SigningStatus)
-
-	SigningJob_isRevoked = SigningJob.AddMember("isRevoked", _bool)
-
-	SigningJob_profileName = SigningJob.AddMember("profileName", _ProfileName)
-
-	SigningJob_profileVersion = SigningJob.AddMember("profileVersion", _ProfileVersion)
-
-	SigningJob_platformId = SigningJob.AddMember("platformId", _PlatformId)
-
-	SigningJob_platformDisplayName = SigningJob.AddMember("platformDisplayName", _DisplayName)
-
-	SigningJob_signatureExpiresAt = SigningJob.AddMember("signatureExpiresAt", _Timestamp)
-
-	SigningJob_jobOwner = SigningJob.AddMember("jobOwner", _AccountId)
-
-	SigningJob_jobInvoker = SigningJob.AddMember("jobInvoker", _AccountId)
-
-	SigningJobRevocationRecord_reason = SigningJobRevocationRecord.AddMember("reason", _String)
-
-	SigningJobRevocationRecord_revokedAt = SigningJobRevocationRecord.AddMember("revokedAt", _Timestamp)
-
-	SigningJobRevocationRecord_revokedBy = SigningJobRevocationRecord.AddMember("revokedBy", _String)
-
-	_SigningJobs_member = _SigningJobs.AddMember("member", SigningJob)
-
-	_SigningParameters_key = _SigningParameters.AddMember("key", _SigningParameterKey)
-
-	_SigningParameters_value = _SigningParameters.AddMember("value", _SigningParameterValue)
-
-	SigningPlatform_platformId = SigningPlatform.AddMember("platformId", _String)
-
-	SigningPlatform_displayName = SigningPlatform.AddMember("displayName", _String)
-
-	SigningPlatform_partner = SigningPlatform.AddMember("partner", _String)
-
-	SigningPlatform_target = SigningPlatform.AddMember("target", _String)
-
-	SigningPlatform_category = SigningPlatform.AddMember("category", Category)
-
-	SigningPlatform_signingConfiguration = SigningPlatform.AddMember("signingConfiguration", SigningConfiguration)
-
-	SigningPlatform_signingImageFormat = SigningPlatform.AddMember("signingImageFormat", SigningImageFormat)
-
-	SigningPlatform_maxSizeInMB = SigningPlatform.AddMember("maxSizeInMB", _MaxSizeInMB)
-
-	SigningPlatform_revocationSupported = SigningPlatform.AddMember("revocationSupported", _bool)
-
-	SigningPlatformOverrides_signingConfiguration = SigningPlatformOverrides.AddMember("signingConfiguration", SigningConfigurationOverrides)
-
-	SigningPlatformOverrides_signingImageFormat = SigningPlatformOverrides.AddMember("signingImageFormat", ImageFormat)
-
-	_SigningPlatforms_member = _SigningPlatforms.AddMember("member", SigningPlatform)
-
-	SigningProfileStatus_Active = SigningProfileStatus.AddMember("Active", smithyprelude.Unit)
-
-	SigningProfileStatus_Canceled = SigningProfileStatus.AddMember("Canceled", smithyprelude.Unit)
-
-	SigningProfileStatus_Revoked = SigningProfileStatus.AddMember("Revoked", smithyprelude.Unit)
-
-	_TagMap_key = _TagMap.AddMember("key", _TagKey)
-
-	_TagMap_value = _TagMap.AddMember("value", _TagValue)
-
-	SigningProfile_profileName = SigningProfile.AddMember("profileName", _ProfileName)
-
-	SigningProfile_profileVersion = SigningProfile.AddMember("profileVersion", _ProfileVersion)
-
-	SigningProfile_profileVersionArn = SigningProfile.AddMember("profileVersionArn", _Arn)
-
-	SigningProfile_signingMaterial = SigningProfile.AddMember("signingMaterial", SigningMaterial)
-
-	SigningProfile_signatureValidityPeriod = SigningProfile.AddMember("signatureValidityPeriod", SignatureValidityPeriod)
-
-	SigningProfile_platformId = SigningProfile.AddMember("platformId", _PlatformId)
-
-	SigningProfile_platformDisplayName = SigningProfile.AddMember("platformDisplayName", _DisplayName)
-
-	SigningProfile_signingParameters = SigningProfile.AddMember("signingParameters", _SigningParameters)
-
-	SigningProfile_status = SigningProfile.AddMember("status", SigningProfileStatus)
-
-	SigningProfile_arn = SigningProfile.AddMember("arn", _String)
-
-	SigningProfile_tags = SigningProfile.AddMember("tags", _TagMap)
-
-	SigningProfileRevocationRecord_revocationEffectiveFrom = SigningProfileRevocationRecord.AddMember("revocationEffectiveFrom", _Timestamp)
-
-	SigningProfileRevocationRecord_revokedAt = SigningProfileRevocationRecord.AddMember("revokedAt", _Timestamp)
-
-	SigningProfileRevocationRecord_revokedBy = SigningProfileRevocationRecord.AddMember("revokedBy", _String)
-
-	_SigningProfiles_member = _SigningProfiles.AddMember("member", SigningProfile)
-
-	_Statuses_member = _Statuses.AddMember("member", SigningProfileStatus)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", _ErrorMessage)
-
-	ThrottlingException_code = ThrottlingException.AddMember("code", _ErrorCode)
-
-	TooManyRequestsException_message = TooManyRequestsException.AddMember("message", _ErrorMessage)
-
-	TooManyRequestsException_code = TooManyRequestsException.AddMember("code", _ErrorCode)
-
-	ValidationException_message = ValidationException.AddMember("message", _ErrorMessage)
-
-	ValidationException_code = ValidationException.AddMember("code", _ErrorCode)
-
-	AddProfilePermissionRequest_profileName = AddProfilePermissionRequest.AddMember("profileName", _ProfileName, &smithytraits.HTTPLabel{})
-
-	AddProfilePermissionRequest_profileVersion = AddProfilePermissionRequest.AddMember("profileVersion", _ProfileVersion)
-
-	AddProfilePermissionRequest_action = AddProfilePermissionRequest.AddMember("action", _String)
-
-	AddProfilePermissionRequest_principal = AddProfilePermissionRequest.AddMember("principal", _String)
-
-	AddProfilePermissionRequest_revisionId = AddProfilePermissionRequest.AddMember("revisionId", _String)
-
-	AddProfilePermissionRequest_statementId = AddProfilePermissionRequest.AddMember("statementId", _String)
-
-	AddProfilePermissionResponse_revisionId = AddProfilePermissionResponse.AddMember("revisionId", _String)
-
-	CancelSigningProfileRequest_profileName = CancelSigningProfileRequest.AddMember("profileName", _ProfileName, &smithytraits.HTTPLabel{})
-
-	DescribeSigningJobRequest_jobId = DescribeSigningJobRequest.AddMember("jobId", _JobId, &smithytraits.HTTPLabel{})
-
-	DescribeSigningJobResponse_jobId = DescribeSigningJobResponse.AddMember("jobId", _JobId)
-
-	DescribeSigningJobResponse_source = DescribeSigningJobResponse.AddMember("source", Source)
-
-	DescribeSigningJobResponse_signingMaterial = DescribeSigningJobResponse.AddMember("signingMaterial", SigningMaterial)
-
-	DescribeSigningJobResponse_platformId = DescribeSigningJobResponse.AddMember("platformId", _PlatformId)
-
-	DescribeSigningJobResponse_platformDisplayName = DescribeSigningJobResponse.AddMember("platformDisplayName", _DisplayName)
-
-	DescribeSigningJobResponse_profileName = DescribeSigningJobResponse.AddMember("profileName", _ProfileName)
-
-	DescribeSigningJobResponse_profileVersion = DescribeSigningJobResponse.AddMember("profileVersion", _ProfileVersion)
-
-	DescribeSigningJobResponse_overrides = DescribeSigningJobResponse.AddMember("overrides", SigningPlatformOverrides)
-
-	DescribeSigningJobResponse_signingParameters = DescribeSigningJobResponse.AddMember("signingParameters", _SigningParameters)
-
-	DescribeSigningJobResponse_createdAt = DescribeSigningJobResponse.AddMember("createdAt", _Timestamp)
-
-	DescribeSigningJobResponse_completedAt = DescribeSigningJobResponse.AddMember("completedAt", _Timestamp)
-
-	DescribeSigningJobResponse_signatureExpiresAt = DescribeSigningJobResponse.AddMember("signatureExpiresAt", _Timestamp)
-
-	DescribeSigningJobResponse_requestedBy = DescribeSigningJobResponse.AddMember("requestedBy", _RequestedBy)
-
-	DescribeSigningJobResponse_status = DescribeSigningJobResponse.AddMember("status", SigningStatus)
-
-	DescribeSigningJobResponse_statusReason = DescribeSigningJobResponse.AddMember("statusReason", _StatusReason)
-
-	DescribeSigningJobResponse_revocationRecord = DescribeSigningJobResponse.AddMember("revocationRecord", SigningJobRevocationRecord)
-
-	DescribeSigningJobResponse_signedObject = DescribeSigningJobResponse.AddMember("signedObject", SignedObject)
-
-	DescribeSigningJobResponse_jobOwner = DescribeSigningJobResponse.AddMember("jobOwner", _AccountId)
-
-	DescribeSigningJobResponse_jobInvoker = DescribeSigningJobResponse.AddMember("jobInvoker", _AccountId)
-
-	GetRevocationStatusRequest_signatureTimestamp = GetRevocationStatusRequest.AddMember("signatureTimestamp", _Timestamp, &smithytraits.HTTPQuery{Name: "signatureTimestamp"})
-
-	GetRevocationStatusRequest_platformId = GetRevocationStatusRequest.AddMember("platformId", _PlatformId, &smithytraits.HTTPQuery{Name: "platformId"})
-
-	GetRevocationStatusRequest_profileVersionArn = GetRevocationStatusRequest.AddMember("profileVersionArn", _Arn, &smithytraits.HTTPQuery{Name: "profileVersionArn"})
-
-	GetRevocationStatusRequest_jobArn = GetRevocationStatusRequest.AddMember("jobArn", _Arn, &smithytraits.HTTPQuery{Name: "jobArn"})
-
-	GetRevocationStatusRequest_certificateHashes = GetRevocationStatusRequest.AddMember("certificateHashes", _CertificateHashes, &smithytraits.HTTPQuery{Name: "certificateHashes"})
-
-	GetRevocationStatusResponse_revokedEntities = GetRevocationStatusResponse.AddMember("revokedEntities", _RevokedEntities)
-
-	GetSigningPlatformRequest_platformId = GetSigningPlatformRequest.AddMember("platformId", _PlatformId, &smithytraits.HTTPLabel{})
-
-	GetSigningPlatformResponse_platformId = GetSigningPlatformResponse.AddMember("platformId", _PlatformId)
-
-	GetSigningPlatformResponse_displayName = GetSigningPlatformResponse.AddMember("displayName", _DisplayName)
-
-	GetSigningPlatformResponse_partner = GetSigningPlatformResponse.AddMember("partner", _String)
-
-	GetSigningPlatformResponse_target = GetSigningPlatformResponse.AddMember("target", _String)
-
-	GetSigningPlatformResponse_category = GetSigningPlatformResponse.AddMember("category", Category)
-
-	GetSigningPlatformResponse_signingConfiguration = GetSigningPlatformResponse.AddMember("signingConfiguration", SigningConfiguration)
-
-	GetSigningPlatformResponse_signingImageFormat = GetSigningPlatformResponse.AddMember("signingImageFormat", SigningImageFormat)
-
-	GetSigningPlatformResponse_maxSizeInMB = GetSigningPlatformResponse.AddMember("maxSizeInMB", _MaxSizeInMB)
-
-	GetSigningPlatformResponse_revocationSupported = GetSigningPlatformResponse.AddMember("revocationSupported", _bool)
-
-	GetSigningProfileRequest_profileName = GetSigningProfileRequest.AddMember("profileName", _ProfileName, &smithytraits.HTTPLabel{})
-
-	GetSigningProfileRequest_profileOwner = GetSigningProfileRequest.AddMember("profileOwner", _AccountId, &smithytraits.HTTPQuery{Name: "profileOwner"})
-
-	GetSigningProfileResponse_profileName = GetSigningProfileResponse.AddMember("profileName", _ProfileName)
-
-	GetSigningProfileResponse_profileVersion = GetSigningProfileResponse.AddMember("profileVersion", _ProfileVersion)
-
-	GetSigningProfileResponse_profileVersionArn = GetSigningProfileResponse.AddMember("profileVersionArn", _Arn)
-
-	GetSigningProfileResponse_revocationRecord = GetSigningProfileResponse.AddMember("revocationRecord", SigningProfileRevocationRecord)
-
-	GetSigningProfileResponse_signingMaterial = GetSigningProfileResponse.AddMember("signingMaterial", SigningMaterial)
-
-	GetSigningProfileResponse_platformId = GetSigningProfileResponse.AddMember("platformId", _PlatformId)
-
-	GetSigningProfileResponse_platformDisplayName = GetSigningProfileResponse.AddMember("platformDisplayName", _DisplayName)
-
-	GetSigningProfileResponse_signatureValidityPeriod = GetSigningProfileResponse.AddMember("signatureValidityPeriod", SignatureValidityPeriod)
-
-	GetSigningProfileResponse_overrides = GetSigningProfileResponse.AddMember("overrides", SigningPlatformOverrides)
-
-	GetSigningProfileResponse_signingParameters = GetSigningProfileResponse.AddMember("signingParameters", _SigningParameters)
-
-	GetSigningProfileResponse_status = GetSigningProfileResponse.AddMember("status", SigningProfileStatus)
-
-	GetSigningProfileResponse_statusReason = GetSigningProfileResponse.AddMember("statusReason", _String)
-
-	GetSigningProfileResponse_arn = GetSigningProfileResponse.AddMember("arn", _String)
-
-	GetSigningProfileResponse_tags = GetSigningProfileResponse.AddMember("tags", _TagMap)
-
-	ListProfilePermissionsRequest_profileName = ListProfilePermissionsRequest.AddMember("profileName", _ProfileName, &smithytraits.HTTPLabel{})
-
-	ListProfilePermissionsRequest_nextToken = ListProfilePermissionsRequest.AddMember("nextToken", _String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListProfilePermissionsResponse_revisionId = ListProfilePermissionsResponse.AddMember("revisionId", _String)
-
-	ListProfilePermissionsResponse_policySizeBytes = ListProfilePermissionsResponse.AddMember("policySizeBytes", _PolicySizeBytes)
-
-	ListProfilePermissionsResponse_permissions = ListProfilePermissionsResponse.AddMember("permissions", _Permissions)
-
-	ListProfilePermissionsResponse_nextToken = ListProfilePermissionsResponse.AddMember("nextToken", _String)
-
-	ListSigningJobsRequest_status = ListSigningJobsRequest.AddMember("status", SigningStatus, &smithytraits.HTTPQuery{Name: "status"})
-
-	ListSigningJobsRequest_platformId = ListSigningJobsRequest.AddMember("platformId", _PlatformId, &smithytraits.HTTPQuery{Name: "platformId"})
-
-	ListSigningJobsRequest_requestedBy = ListSigningJobsRequest.AddMember("requestedBy", _RequestedBy, &smithytraits.HTTPQuery{Name: "requestedBy"})
-
-	ListSigningJobsRequest_maxResults = ListSigningJobsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListSigningJobsRequest_nextToken = ListSigningJobsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListSigningJobsRequest_isRevoked = ListSigningJobsRequest.AddMember("isRevoked", _bool, &smithytraits.HTTPQuery{Name: "isRevoked"})
-
-	ListSigningJobsRequest_signatureExpiresBefore = ListSigningJobsRequest.AddMember("signatureExpiresBefore", _Timestamp, &smithytraits.HTTPQuery{Name: "signatureExpiresBefore"})
-
-	ListSigningJobsRequest_signatureExpiresAfter = ListSigningJobsRequest.AddMember("signatureExpiresAfter", _Timestamp, &smithytraits.HTTPQuery{Name: "signatureExpiresAfter"})
-
-	ListSigningJobsRequest_jobInvoker = ListSigningJobsRequest.AddMember("jobInvoker", _AccountId, &smithytraits.HTTPQuery{Name: "jobInvoker"})
-
-	ListSigningJobsResponse_jobs = ListSigningJobsResponse.AddMember("jobs", _SigningJobs)
-
-	ListSigningJobsResponse_nextToken = ListSigningJobsResponse.AddMember("nextToken", _NextToken)
-
-	ListSigningPlatformsRequest_category = ListSigningPlatformsRequest.AddMember("category", _String, &smithytraits.HTTPQuery{Name: "category"})
-
-	ListSigningPlatformsRequest_partner = ListSigningPlatformsRequest.AddMember("partner", _String, &smithytraits.HTTPQuery{Name: "partner"})
-
-	ListSigningPlatformsRequest_target = ListSigningPlatformsRequest.AddMember("target", _String, &smithytraits.HTTPQuery{Name: "target"})
-
-	ListSigningPlatformsRequest_maxResults = ListSigningPlatformsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListSigningPlatformsRequest_nextToken = ListSigningPlatformsRequest.AddMember("nextToken", _String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListSigningPlatformsResponse_platforms = ListSigningPlatformsResponse.AddMember("platforms", _SigningPlatforms)
-
-	ListSigningPlatformsResponse_nextToken = ListSigningPlatformsResponse.AddMember("nextToken", _String)
-
-	ListSigningProfilesRequest_includeCanceled = ListSigningProfilesRequest.AddMember("includeCanceled", _bool, &smithytraits.HTTPQuery{Name: "includeCanceled"})
-
-	ListSigningProfilesRequest_maxResults = ListSigningProfilesRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListSigningProfilesRequest_nextToken = ListSigningProfilesRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListSigningProfilesRequest_platformId = ListSigningProfilesRequest.AddMember("platformId", _PlatformId, &smithytraits.HTTPQuery{Name: "platformId"})
-
-	ListSigningProfilesRequest_statuses = ListSigningProfilesRequest.AddMember("statuses", _Statuses, &smithytraits.HTTPQuery{Name: "statuses"})
-
-	ListSigningProfilesResponse_profiles = ListSigningProfilesResponse.AddMember("profiles", _SigningProfiles)
-
-	ListSigningProfilesResponse_nextToken = ListSigningProfilesResponse.AddMember("nextToken", _NextToken)
-
-	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", _String, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _TagMap)
-
-	PutSigningProfileRequest_profileName = PutSigningProfileRequest.AddMember("profileName", _ProfileName, &smithytraits.HTTPLabel{})
-
-	PutSigningProfileRequest_signingMaterial = PutSigningProfileRequest.AddMember("signingMaterial", SigningMaterial)
-
-	PutSigningProfileRequest_signatureValidityPeriod = PutSigningProfileRequest.AddMember("signatureValidityPeriod", SignatureValidityPeriod)
-
-	PutSigningProfileRequest_platformId = PutSigningProfileRequest.AddMember("platformId", _PlatformId)
-
-	PutSigningProfileRequest_overrides = PutSigningProfileRequest.AddMember("overrides", SigningPlatformOverrides)
-
-	PutSigningProfileRequest_signingParameters = PutSigningProfileRequest.AddMember("signingParameters", _SigningParameters)
-
-	PutSigningProfileRequest_tags = PutSigningProfileRequest.AddMember("tags", _TagMap)
-
-	PutSigningProfileResponse_arn = PutSigningProfileResponse.AddMember("arn", _String)
-
-	PutSigningProfileResponse_profileVersion = PutSigningProfileResponse.AddMember("profileVersion", _ProfileVersion)
-
-	PutSigningProfileResponse_profileVersionArn = PutSigningProfileResponse.AddMember("profileVersionArn", _Arn)
-
-	RemoveProfilePermissionRequest_profileName = RemoveProfilePermissionRequest.AddMember("profileName", _ProfileName, &smithytraits.HTTPLabel{})
-
-	RemoveProfilePermissionRequest_revisionId = RemoveProfilePermissionRequest.AddMember("revisionId", _String, &smithytraits.HTTPQuery{Name: "revisionId"})
-
-	RemoveProfilePermissionRequest_statementId = RemoveProfilePermissionRequest.AddMember("statementId", _String, &smithytraits.HTTPLabel{})
-
-	RemoveProfilePermissionResponse_revisionId = RemoveProfilePermissionResponse.AddMember("revisionId", _String)
-
-	RevokeSignatureRequest_jobId = RevokeSignatureRequest.AddMember("jobId", _JobId, &smithytraits.HTTPLabel{})
-
-	RevokeSignatureRequest_jobOwner = RevokeSignatureRequest.AddMember("jobOwner", _AccountId)
-
-	RevokeSignatureRequest_reason = RevokeSignatureRequest.AddMember("reason", _RevocationReasonString)
-
-	RevokeSigningProfileRequest_profileName = RevokeSigningProfileRequest.AddMember("profileName", _ProfileName, &smithytraits.HTTPLabel{})
-
-	RevokeSigningProfileRequest_profileVersion = RevokeSigningProfileRequest.AddMember("profileVersion", _ProfileVersion)
-
-	RevokeSigningProfileRequest_reason = RevokeSigningProfileRequest.AddMember("reason", _RevocationReasonString)
-
-	RevokeSigningProfileRequest_effectiveTime = RevokeSigningProfileRequest.AddMember("effectiveTime", _Timestamp)
-
-	SignPayloadRequest_profileName = SignPayloadRequest.AddMember("profileName", _ProfileName)
-
-	SignPayloadRequest_profileOwner = SignPayloadRequest.AddMember("profileOwner", _AccountId)
-
-	SignPayloadRequest_payload = SignPayloadRequest.AddMember("payload", _Payload)
-
-	SignPayloadRequest_payloadFormat = SignPayloadRequest.AddMember("payloadFormat", _String)
-
-	SignPayloadResponse_jobId = SignPayloadResponse.AddMember("jobId", _JobId)
-
-	SignPayloadResponse_jobOwner = SignPayloadResponse.AddMember("jobOwner", _AccountId)
-
-	SignPayloadResponse_metadata = SignPayloadResponse.AddMember("metadata", _Metadata)
-
-	SignPayloadResponse_signature = SignPayloadResponse.AddMember("signature", _Blob)
-
-	StartSigningJobRequest_source = StartSigningJobRequest.AddMember("source", Source)
-
-	StartSigningJobRequest_destination = StartSigningJobRequest.AddMember("destination", Destination)
-
-	StartSigningJobRequest_profileName = StartSigningJobRequest.AddMember("profileName", _ProfileName)
-
-	StartSigningJobRequest_clientRequestToken = StartSigningJobRequest.AddMember("clientRequestToken", _ClientRequestToken)
-
-	StartSigningJobRequest_profileOwner = StartSigningJobRequest.AddMember("profileOwner", _AccountId)
-
-	StartSigningJobResponse_jobId = StartSigningJobResponse.AddMember("jobId", _JobId)
-
-	StartSigningJobResponse_jobOwner = StartSigningJobResponse.AddMember("jobOwner", _AccountId)
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _String, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _TagMap)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", _String, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "signatureTimestamp"}}, DirectMask: 0x10}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "platformId"}}, DirectMask: 0x10}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "profileVersionArn"}}, DirectMask: 0x10}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "jobArn"}}, DirectMask: 0x10}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "certificateHashes"}}, DirectMask: 0x10}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "profileOwner"}}, DirectMask: 0x10}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "status"}}, DirectMask: 0x10}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "requestedBy"}}, DirectMask: 0x10}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "isRevoked"}}, DirectMask: 0x10}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "signatureExpiresBefore"}}, DirectMask: 0x10}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "signatureExpiresAfter"}}, DirectMask: 0x10}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "jobInvoker"}}, DirectMask: 0x10}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "category"}}, DirectMask: 0x10}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "partner"}}, DirectMask: 0x10}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "target"}}, DirectMask: 0x10}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "includeCanceled"}}, DirectMask: 0x10}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "statuses"}}, DirectMask: 0x10}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "revisionId"}}, DirectMask: 0x10}
+var t47 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message, &sAccessDeniedException_code}}
+var mBadRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sBadRequestException_message, &sBadRequestException_code}}
+var mCategory = smithy.SchemaMembers{List: []*smithy.Schema{&sCategory_AWSIoT}}
+var m_CertificateHashes = smithy.SchemaMembers{List: []*smithy.Schema{&s_CertificateHashes_member}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message, &sConflictException_code}}
+var mDestination = smithy.SchemaMembers{List: []*smithy.Schema{&sDestination_s3}}
+var mEncryptionAlgorithm = smithy.SchemaMembers{List: []*smithy.Schema{&sEncryptionAlgorithm_RSA, &sEncryptionAlgorithm_ECDSA}}
+var mEncryptionAlgorithmOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sEncryptionAlgorithmOptions_allowedValues, &sEncryptionAlgorithmOptions_defaultValue}}
+var m_EncryptionAlgorithms = smithy.SchemaMembers{List: []*smithy.Schema{&s_EncryptionAlgorithms_member}}
+var mHashAlgorithm = smithy.SchemaMembers{List: []*smithy.Schema{&sHashAlgorithm_SHA1, &sHashAlgorithm_SHA256}}
+var mHashAlgorithmOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sHashAlgorithmOptions_allowedValues, &sHashAlgorithmOptions_defaultValue}}
+var m_HashAlgorithms = smithy.SchemaMembers{List: []*smithy.Schema{&s_HashAlgorithms_member}}
+var mImageFormat = smithy.SchemaMembers{List: []*smithy.Schema{&sImageFormat_JSON, &sImageFormat_JSONEmbedded, &sImageFormat_JSONDetached}}
+var m_ImageFormats = smithy.SchemaMembers{List: []*smithy.Schema{&s_ImageFormats_member}}
+var mInternalServiceErrorException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServiceErrorException_message, &sInternalServiceErrorException_code}}
+var m_Metadata = smithy.SchemaMembers{List: []*smithy.Schema{&s_Metadata_key, &s_Metadata_value}}
+var mNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sNotFoundException_message, &sNotFoundException_code}}
+var mPermission = smithy.SchemaMembers{List: []*smithy.Schema{&sPermission_action, &sPermission_principal, &sPermission_statementId, &sPermission_profileVersion}}
+var m_Permissions = smithy.SchemaMembers{List: []*smithy.Schema{&s_Permissions_member}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message, &sResourceNotFoundException_code}}
+var m_RevokedEntities = smithy.SchemaMembers{List: []*smithy.Schema{&s_RevokedEntities_member}}
+var mS3Destination = smithy.SchemaMembers{List: []*smithy.Schema{&sS3Destination_bucketName, &sS3Destination_prefix}}
+var mS3SignedObject = smithy.SchemaMembers{List: []*smithy.Schema{&sS3SignedObject_bucketName, &sS3SignedObject_key}}
+var mS3Source = smithy.SchemaMembers{List: []*smithy.Schema{&sS3Source_bucketName, &sS3Source_key, &sS3Source_version}}
+var mServiceLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceLimitExceededException_message, &sServiceLimitExceededException_code}}
+var mSignatureValidityPeriod = smithy.SchemaMembers{List: []*smithy.Schema{&sSignatureValidityPeriod_value, &sSignatureValidityPeriod_type}}
+var mSignedObject = smithy.SchemaMembers{List: []*smithy.Schema{&sSignedObject_s3}}
+var mSigningConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sSigningConfiguration_encryptionAlgorithmOptions, &sSigningConfiguration_hashAlgorithmOptions}}
+var mSigningConfigurationOverrides = smithy.SchemaMembers{List: []*smithy.Schema{&sSigningConfigurationOverrides_encryptionAlgorithm, &sSigningConfigurationOverrides_hashAlgorithm}}
+var mSigningImageFormat = smithy.SchemaMembers{List: []*smithy.Schema{&sSigningImageFormat_supportedFormats, &sSigningImageFormat_defaultFormat}}
+var mSigningJob = smithy.SchemaMembers{List: []*smithy.Schema{&sSigningJob_jobId, &sSigningJob_source, &sSigningJob_signedObject, &sSigningJob_signingMaterial, &sSigningJob_createdAt, &sSigningJob_status, &sSigningJob_isRevoked, &sSigningJob_profileName, &sSigningJob_profileVersion, &sSigningJob_platformId, &sSigningJob_platformDisplayName, &sSigningJob_signatureExpiresAt, &sSigningJob_jobOwner, &sSigningJob_jobInvoker}, Seed: 13, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 1, 7, 4, 0, 8, 2, 9, 10, 0, 6, 3, 0, 0, 13, 0, 0, 0, 14,
+	0, 5, 0, 0, 11, 12, 0, 0,
+}}
+var mSigningJobRevocationRecord = smithy.SchemaMembers{List: []*smithy.Schema{&sSigningJobRevocationRecord_reason, &sSigningJobRevocationRecord_revokedAt, &sSigningJobRevocationRecord_revokedBy}}
+var m_SigningJobs = smithy.SchemaMembers{List: []*smithy.Schema{&s_SigningJobs_member}}
+var mSigningMaterial = smithy.SchemaMembers{List: []*smithy.Schema{&sSigningMaterial_certificateArn}}
+var m_SigningParameters = smithy.SchemaMembers{List: []*smithy.Schema{&s_SigningParameters_key, &s_SigningParameters_value}}
+var mSigningPlatform = smithy.SchemaMembers{List: []*smithy.Schema{&sSigningPlatform_platformId, &sSigningPlatform_displayName, &sSigningPlatform_partner, &sSigningPlatform_target, &sSigningPlatform_category, &sSigningPlatform_signingConfiguration, &sSigningPlatform_signingImageFormat, &sSigningPlatform_maxSizeInMB, &sSigningPlatform_revocationSupported}, Seed: 1, Slots: []uint16{
+	0, 0, 5, 0, 7, 0, 0, 0, 1, 0, 0, 0, 0, 0, 6, 9, 0, 3, 0, 2, 0, 0, 0, 0,
+	0, 0, 0, 8, 0, 0, 0, 4,
+}}
+var mSigningPlatformOverrides = smithy.SchemaMembers{List: []*smithy.Schema{&sSigningPlatformOverrides_signingConfiguration, &sSigningPlatformOverrides_signingImageFormat}}
+var m_SigningPlatforms = smithy.SchemaMembers{List: []*smithy.Schema{&s_SigningPlatforms_member}}
+var mSigningProfile = smithy.SchemaMembers{List: []*smithy.Schema{&sSigningProfile_profileName, &sSigningProfile_profileVersion, &sSigningProfile_profileVersionArn, &sSigningProfile_signingMaterial, &sSigningProfile_signatureValidityPeriod, &sSigningProfile_platformId, &sSigningProfile_platformDisplayName, &sSigningProfile_signingParameters, &sSigningProfile_status, &sSigningProfile_arn, &sSigningProfile_tags}, Seed: 15, Slots: []uint16{
+	0, 0, 0, 0, 3, 10, 4, 0, 2, 0, 6, 7, 0, 0, 0, 0, 8, 0, 1, 0, 0, 0, 9, 5,
+	0, 0, 0, 0, 0, 11, 0, 0,
+}}
+var mSigningProfileRevocationRecord = smithy.SchemaMembers{List: []*smithy.Schema{&sSigningProfileRevocationRecord_revocationEffectiveFrom, &sSigningProfileRevocationRecord_revokedAt, &sSigningProfileRevocationRecord_revokedBy}}
+var m_SigningProfiles = smithy.SchemaMembers{List: []*smithy.Schema{&s_SigningProfiles_member}}
+var mSigningProfileStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sSigningProfileStatus_Active, &sSigningProfileStatus_Canceled, &sSigningProfileStatus_Revoked}}
+var mSigningStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sSigningStatus_InProgress, &sSigningStatus_Failed, &sSigningStatus_Succeeded}}
+var mSource = smithy.SchemaMembers{List: []*smithy.Schema{&sSource_s3}}
+var m_Statuses = smithy.SchemaMembers{List: []*smithy.Schema{&s_Statuses_member}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagMap_key, &s_TagMap_value}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message, &sThrottlingException_code}}
+var mTooManyRequestsException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyRequestsException_message, &sTooManyRequestsException_code}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message, &sValidationException_code}}
+var mValidityType = smithy.SchemaMembers{List: []*smithy.Schema{&sValidityType_DAYS, &sValidityType_MONTHS, &sValidityType_YEARS}}
+var mAddProfilePermissionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAddProfilePermissionRequest_profileName, &sAddProfilePermissionRequest_profileVersion, &sAddProfilePermissionRequest_action, &sAddProfilePermissionRequest_principal, &sAddProfilePermissionRequest_revisionId, &sAddProfilePermissionRequest_statementId}}
+var mAddProfilePermissionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAddProfilePermissionResponse_revisionId}}
+var mCancelSigningProfileRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelSigningProfileRequest_profileName}}
+var mDescribeSigningJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSigningJobRequest_jobId}}
+var mDescribeSigningJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSigningJobResponse_jobId, &sDescribeSigningJobResponse_source, &sDescribeSigningJobResponse_signingMaterial, &sDescribeSigningJobResponse_platformId, &sDescribeSigningJobResponse_platformDisplayName, &sDescribeSigningJobResponse_profileName, &sDescribeSigningJobResponse_profileVersion, &sDescribeSigningJobResponse_overrides, &sDescribeSigningJobResponse_signingParameters, &sDescribeSigningJobResponse_createdAt, &sDescribeSigningJobResponse_completedAt, &sDescribeSigningJobResponse_signatureExpiresAt, &sDescribeSigningJobResponse_requestedBy, &sDescribeSigningJobResponse_status, &sDescribeSigningJobResponse_statusReason, &sDescribeSigningJobResponse_revocationRecord, &sDescribeSigningJobResponse_signedObject, &sDescribeSigningJobResponse_jobOwner, &sDescribeSigningJobResponse_jobInvoker}, Seed: 13, Slots: []uint16{
+	0, 0, 0, 0, 15, 11, 1, 0, 3, 0, 0, 2, 7, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	8, 10, 0, 0, 5, 0, 0, 0, 0, 0, 0, 13, 0, 16, 0, 0, 0, 0, 6, 0, 0, 9, 0, 14,
+	17, 0, 0, 18, 0, 0, 0, 19, 0, 0, 0, 0, 0, 12, 0, 0,
+}}
+var mGetRevocationStatusRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRevocationStatusRequest_signatureTimestamp, &sGetRevocationStatusRequest_platformId, &sGetRevocationStatusRequest_profileVersionArn, &sGetRevocationStatusRequest_jobArn, &sGetRevocationStatusRequest_certificateHashes}}
+var mGetRevocationStatusResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRevocationStatusResponse_revokedEntities}}
+var mGetSigningPlatformRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSigningPlatformRequest_platformId}}
+var mGetSigningPlatformResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSigningPlatformResponse_platformId, &sGetSigningPlatformResponse_displayName, &sGetSigningPlatformResponse_partner, &sGetSigningPlatformResponse_target, &sGetSigningPlatformResponse_category, &sGetSigningPlatformResponse_signingConfiguration, &sGetSigningPlatformResponse_signingImageFormat, &sGetSigningPlatformResponse_maxSizeInMB, &sGetSigningPlatformResponse_revocationSupported}, Seed: 1, Slots: []uint16{
+	0, 0, 5, 0, 7, 0, 0, 0, 1, 0, 0, 0, 0, 0, 6, 9, 0, 3, 0, 2, 0, 0, 0, 0,
+	0, 0, 0, 8, 0, 0, 0, 4,
+}}
+var mGetSigningProfileRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSigningProfileRequest_profileName, &sGetSigningProfileRequest_profileOwner}}
+var mGetSigningProfileResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSigningProfileResponse_profileName, &sGetSigningProfileResponse_profileVersion, &sGetSigningProfileResponse_profileVersionArn, &sGetSigningProfileResponse_revocationRecord, &sGetSigningProfileResponse_signingMaterial, &sGetSigningProfileResponse_platformId, &sGetSigningProfileResponse_platformDisplayName, &sGetSigningProfileResponse_signatureValidityPeriod, &sGetSigningProfileResponse_overrides, &sGetSigningProfileResponse_signingParameters, &sGetSigningProfileResponse_status, &sGetSigningProfileResponse_statusReason, &sGetSigningProfileResponse_arn, &sGetSigningProfileResponse_tags}, Seed: 38, Slots: []uint16{
+	0, 0, 0, 0, 6, 0, 0, 0, 0, 4, 0, 3, 14, 0, 1, 2, 0, 12, 0, 11, 5, 0, 9, 0,
+	8, 10, 7, 0, 0, 0, 13, 0,
+}}
+var mListProfilePermissionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListProfilePermissionsRequest_profileName, &sListProfilePermissionsRequest_nextToken}}
+var mListProfilePermissionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListProfilePermissionsResponse_revisionId, &sListProfilePermissionsResponse_policySizeBytes, &sListProfilePermissionsResponse_permissions, &sListProfilePermissionsResponse_nextToken}}
+var mListSigningJobsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListSigningJobsRequest_status, &sListSigningJobsRequest_platformId, &sListSigningJobsRequest_requestedBy, &sListSigningJobsRequest_maxResults, &sListSigningJobsRequest_nextToken, &sListSigningJobsRequest_isRevoked, &sListSigningJobsRequest_signatureExpiresBefore, &sListSigningJobsRequest_signatureExpiresAfter, &sListSigningJobsRequest_jobInvoker}, Seed: 2, Slots: []uint16{
+	0, 7, 0, 0, 0, 3, 0, 9, 0, 0, 2, 0, 0, 4, 0, 0, 0, 0, 1, 6, 8, 0, 0, 0,
+	0, 5, 0, 0, 0, 0, 0, 0,
+}}
+var mListSigningJobsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListSigningJobsResponse_jobs, &sListSigningJobsResponse_nextToken}}
+var mListSigningPlatformsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListSigningPlatformsRequest_category, &sListSigningPlatformsRequest_partner, &sListSigningPlatformsRequest_target, &sListSigningPlatformsRequest_maxResults, &sListSigningPlatformsRequest_nextToken}}
+var mListSigningPlatformsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListSigningPlatformsResponse_platforms, &sListSigningPlatformsResponse_nextToken}}
+var mListSigningProfilesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListSigningProfilesRequest_includeCanceled, &sListSigningProfilesRequest_maxResults, &sListSigningProfilesRequest_nextToken, &sListSigningProfilesRequest_platformId, &sListSigningProfilesRequest_statuses}}
+var mListSigningProfilesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListSigningProfilesResponse_profiles, &sListSigningProfilesResponse_nextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_resourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_tags}}
+var mPutSigningProfileRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutSigningProfileRequest_profileName, &sPutSigningProfileRequest_signingMaterial, &sPutSigningProfileRequest_signatureValidityPeriod, &sPutSigningProfileRequest_platformId, &sPutSigningProfileRequest_overrides, &sPutSigningProfileRequest_signingParameters, &sPutSigningProfileRequest_tags}}
+var mPutSigningProfileResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutSigningProfileResponse_arn, &sPutSigningProfileResponse_profileVersion, &sPutSigningProfileResponse_profileVersionArn}}
+var mRemoveProfilePermissionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRemoveProfilePermissionRequest_profileName, &sRemoveProfilePermissionRequest_revisionId, &sRemoveProfilePermissionRequest_statementId}}
+var mRemoveProfilePermissionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sRemoveProfilePermissionResponse_revisionId}}
+var mRevokeSignatureRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRevokeSignatureRequest_jobId, &sRevokeSignatureRequest_jobOwner, &sRevokeSignatureRequest_reason}}
+var mRevokeSigningProfileRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRevokeSigningProfileRequest_profileName, &sRevokeSigningProfileRequest_profileVersion, &sRevokeSigningProfileRequest_reason, &sRevokeSigningProfileRequest_effectiveTime}}
+var mSignPayloadRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sSignPayloadRequest_profileName, &sSignPayloadRequest_profileOwner, &sSignPayloadRequest_payload, &sSignPayloadRequest_payloadFormat}}
+var mSignPayloadResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sSignPayloadResponse_jobId, &sSignPayloadResponse_jobOwner, &sSignPayloadResponse_metadata, &sSignPayloadResponse_signature}}
+var mStartSigningJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartSigningJobRequest_source, &sStartSigningJobRequest_destination, &sStartSigningJobRequest_profileName, &sStartSigningJobRequest_clientRequestToken, &sStartSigningJobRequest_profileOwner}}
+var mStartSigningJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartSigningJobResponse_jobId, &sStartSigningJobResponse_jobOwner}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_resourceArn, &sTagResourceRequest_tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_resourceArn, &sUntagResourceRequest_tagKeys}}
+
+var sAddProfilePermission = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddProfilePermission, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sCancelSigningProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelSigningProfile, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sDescribeSigningJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSigningJob, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sGetRevocationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRevocationStatus, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sGetSigningPlatform = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSigningPlatform, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sGetSigningProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSigningProfile, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var sListProfilePermissions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProfilePermissions, Traits: &t6, Type: smithy.ShapeTypeOperation})
+var sListSigningJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSigningJobs, Traits: &t7, Type: smithy.ShapeTypeOperation})
+var sListSigningPlatforms = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSigningPlatforms, Traits: &t8, Type: smithy.ShapeTypeOperation})
+var sListSigningProfiles = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSigningProfiles, Traits: &t9, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t10, Type: smithy.ShapeTypeOperation})
+var sPutSigningProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSigningProfile, Traits: &t11, Type: smithy.ShapeTypeOperation})
+var sRemoveProfilePermission = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveProfilePermission, Traits: &t12, Type: smithy.ShapeTypeOperation})
+var sRevokeSignature = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevokeSignature, Traits: &t13, Type: smithy.ShapeTypeOperation})
+var sRevokeSigningProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevokeSigningProfile, Traits: &t14, Type: smithy.ShapeTypeOperation})
+var sSignPayload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSignPayload, Traits: &t15, Type: smithy.ShapeTypeOperation})
+var sStartSigningJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSigningJob, Traits: &t16, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t17, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t18, Type: smithy.ShapeTypeOperation})
+var s_WallabyService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WallabyService, Type: smithy.ShapeTypeService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t19, Type: smithy.ShapeTypeStructure})
+var s_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sBadRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBadRequestException, Members: &mBadRequestException, Traits: &t20, Type: smithy.ShapeTypeStructure})
+var s_Blob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Blob, Type: smithy.ShapeTypeBlob})
+var s_bool = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_bool, Type: smithy.ShapeTypeBoolean})
+var s_BucketName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BucketName, Type: smithy.ShapeTypeString})
+var sCategory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCategory, Members: &mCategory, Type: smithy.ShapeTypeEnum})
+var s_CertificateArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertificateArn, Type: smithy.ShapeTypeString})
+var s_CertificateHashes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertificateHashes, Members: &m_CertificateHashes, Type: smithy.ShapeTypeList})
+var s_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t21, Type: smithy.ShapeTypeStructure})
+var sDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDestination, Members: &mDestination, Type: smithy.ShapeTypeStructure})
+var s_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DisplayName, Type: smithy.ShapeTypeString})
+var sEncryptionAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionAlgorithm, Members: &mEncryptionAlgorithm, Type: smithy.ShapeTypeEnum})
+var sEncryptionAlgorithmOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionAlgorithmOptions, Members: &mEncryptionAlgorithmOptions, Type: smithy.ShapeTypeStructure})
+var s_EncryptionAlgorithms = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EncryptionAlgorithms, Members: &m_EncryptionAlgorithms, Type: smithy.ShapeTypeList})
+var s_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorCode, Type: smithy.ShapeTypeString})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sHashAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHashAlgorithm, Members: &mHashAlgorithm, Type: smithy.ShapeTypeEnum})
+var sHashAlgorithmOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHashAlgorithmOptions, Members: &mHashAlgorithmOptions, Type: smithy.ShapeTypeStructure})
+var s_HashAlgorithms = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HashAlgorithms, Members: &m_HashAlgorithms, Type: smithy.ShapeTypeList})
+var sImageFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImageFormat, Members: &mImageFormat, Type: smithy.ShapeTypeEnum})
+var s_ImageFormats = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImageFormats, Members: &m_ImageFormats, Type: smithy.ShapeTypeList})
+var s_Integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sInternalServiceErrorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServiceErrorException, Members: &mInternalServiceErrorException, Traits: &t22, Type: smithy.ShapeTypeStructure})
+var s_JobId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobId, Type: smithy.ShapeTypeString})
+var s_Key = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Key, Type: smithy.ShapeTypeString})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var s_MaxSizeInMB = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxSizeInMB, Type: smithy.ShapeTypeInteger})
+var s_Metadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Metadata, Members: &m_Metadata, Type: smithy.ShapeTypeMap})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotFoundException, Members: &mNotFoundException, Traits: &t23, Type: smithy.ShapeTypeStructure})
+var s_Payload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Payload, Type: smithy.ShapeTypeBlob})
+var sPermission = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPermission, Members: &mPermission, Type: smithy.ShapeTypeStructure})
+var s_Permissions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Permissions, Members: &m_Permissions, Type: smithy.ShapeTypeList})
+var s_PlatformId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlatformId, Type: smithy.ShapeTypeString})
+var s_PolicySizeBytes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicySizeBytes, Type: smithy.ShapeTypeInteger})
+var s_Prefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Prefix, Type: smithy.ShapeTypeString})
+var s_ProfileName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProfileName, Type: smithy.ShapeTypeString})
+var s_ProfileVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProfileVersion, Type: smithy.ShapeTypeString})
+var s_RequestedBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RequestedBy, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t23, Type: smithy.ShapeTypeStructure})
+var s_RevocationReasonString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RevocationReasonString, Type: smithy.ShapeTypeString})
+var s_RevokedEntities = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RevokedEntities, Members: &m_RevokedEntities, Type: smithy.ShapeTypeList})
+var sS3Destination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3Destination, Members: &mS3Destination, Type: smithy.ShapeTypeStructure})
+var sS3SignedObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3SignedObject, Members: &mS3SignedObject, Type: smithy.ShapeTypeStructure})
+var sS3Source = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3Source, Members: &mS3Source, Type: smithy.ShapeTypeStructure})
+var sServiceLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceLimitExceededException, Members: &mServiceLimitExceededException, Traits: &t24, Type: smithy.ShapeTypeStructure})
+var sSignatureValidityPeriod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSignatureValidityPeriod, Members: &mSignatureValidityPeriod, Type: smithy.ShapeTypeStructure})
+var sSignedObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSignedObject, Members: &mSignedObject, Type: smithy.ShapeTypeStructure})
+var sSigningConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSigningConfiguration, Members: &mSigningConfiguration, Type: smithy.ShapeTypeStructure})
+var sSigningConfigurationOverrides = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSigningConfigurationOverrides, Members: &mSigningConfigurationOverrides, Type: smithy.ShapeTypeStructure})
+var sSigningImageFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSigningImageFormat, Members: &mSigningImageFormat, Type: smithy.ShapeTypeStructure})
+var sSigningJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSigningJob, Members: &mSigningJob, Type: smithy.ShapeTypeStructure})
+var sSigningJobRevocationRecord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSigningJobRevocationRecord, Members: &mSigningJobRevocationRecord, Type: smithy.ShapeTypeStructure})
+var s_SigningJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SigningJobs, Members: &m_SigningJobs, Type: smithy.ShapeTypeList})
+var sSigningMaterial = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSigningMaterial, Members: &mSigningMaterial, Type: smithy.ShapeTypeStructure})
+var s_SigningParameterKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SigningParameterKey, Type: smithy.ShapeTypeString})
+var s_SigningParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SigningParameters, Members: &m_SigningParameters, Type: smithy.ShapeTypeMap})
+var s_SigningParameterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SigningParameterValue, Type: smithy.ShapeTypeString})
+var sSigningPlatform = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSigningPlatform, Members: &mSigningPlatform, Type: smithy.ShapeTypeStructure})
+var sSigningPlatformOverrides = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSigningPlatformOverrides, Members: &mSigningPlatformOverrides, Type: smithy.ShapeTypeStructure})
+var s_SigningPlatforms = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SigningPlatforms, Members: &m_SigningPlatforms, Type: smithy.ShapeTypeList})
+var sSigningProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSigningProfile, Members: &mSigningProfile, Type: smithy.ShapeTypeStructure})
+var sSigningProfileRevocationRecord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSigningProfileRevocationRecord, Members: &mSigningProfileRevocationRecord, Type: smithy.ShapeTypeStructure})
+var s_SigningProfiles = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SigningProfiles, Members: &m_SigningProfiles, Type: smithy.ShapeTypeList})
+var sSigningProfileStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSigningProfileStatus, Members: &mSigningProfileStatus, Type: smithy.ShapeTypeEnum})
+var sSigningStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSigningStatus, Members: &mSigningStatus, Type: smithy.ShapeTypeEnum})
+var sSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSource, Members: &mSource, Type: smithy.ShapeTypeStructure})
+var s_Statuses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Statuses, Members: &m_Statuses, Type: smithy.ShapeTypeList})
+var s_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatusReason, Type: smithy.ShapeTypeString})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t25, Type: smithy.ShapeTypeStructure})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sTooManyRequestsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyRequestsException, Members: &mTooManyRequestsException, Traits: &t25, Type: smithy.ShapeTypeStructure})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t20, Type: smithy.ShapeTypeStructure})
+var sValidityType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidityType, Members: &mValidityType, Type: smithy.ShapeTypeEnum})
+var s_Version = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Version, Type: smithy.ShapeTypeString})
+var sAddProfilePermissionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddProfilePermissionRequest, Members: &mAddProfilePermissionRequest, Type: smithy.ShapeTypeStructure})
+var sAddProfilePermissionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddProfilePermissionResponse, Members: &mAddProfilePermissionResponse, Type: smithy.ShapeTypeStructure})
+var sCancelSigningProfileRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelSigningProfileRequest, Members: &mCancelSigningProfileRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeSigningJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSigningJobRequest, Members: &mDescribeSigningJobRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeSigningJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSigningJobResponse, Members: &mDescribeSigningJobResponse, Type: smithy.ShapeTypeStructure})
+var sGetRevocationStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRevocationStatusRequest, Members: &mGetRevocationStatusRequest, Type: smithy.ShapeTypeStructure})
+var sGetRevocationStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRevocationStatusResponse, Members: &mGetRevocationStatusResponse, Type: smithy.ShapeTypeStructure})
+var sGetSigningPlatformRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSigningPlatformRequest, Members: &mGetSigningPlatformRequest, Type: smithy.ShapeTypeStructure})
+var sGetSigningPlatformResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSigningPlatformResponse, Members: &mGetSigningPlatformResponse, Type: smithy.ShapeTypeStructure})
+var sGetSigningProfileRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSigningProfileRequest, Members: &mGetSigningProfileRequest, Type: smithy.ShapeTypeStructure})
+var sGetSigningProfileResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSigningProfileResponse, Members: &mGetSigningProfileResponse, Type: smithy.ShapeTypeStructure})
+var sListProfilePermissionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProfilePermissionsRequest, Members: &mListProfilePermissionsRequest, Type: smithy.ShapeTypeStructure})
+var sListProfilePermissionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProfilePermissionsResponse, Members: &mListProfilePermissionsResponse, Type: smithy.ShapeTypeStructure})
+var sListSigningJobsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSigningJobsRequest, Members: &mListSigningJobsRequest, Type: smithy.ShapeTypeStructure})
+var sListSigningJobsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSigningJobsResponse, Members: &mListSigningJobsResponse, Type: smithy.ShapeTypeStructure})
+var sListSigningPlatformsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSigningPlatformsRequest, Members: &mListSigningPlatformsRequest, Type: smithy.ShapeTypeStructure})
+var sListSigningPlatformsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSigningPlatformsResponse, Members: &mListSigningPlatformsResponse, Type: smithy.ShapeTypeStructure})
+var sListSigningProfilesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSigningProfilesRequest, Members: &mListSigningProfilesRequest, Type: smithy.ShapeTypeStructure})
+var sListSigningProfilesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSigningProfilesResponse, Members: &mListSigningProfilesResponse, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure})
+var sPutSigningProfileRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSigningProfileRequest, Members: &mPutSigningProfileRequest, Type: smithy.ShapeTypeStructure})
+var sPutSigningProfileResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSigningProfileResponse, Members: &mPutSigningProfileResponse, Type: smithy.ShapeTypeStructure})
+var sRemoveProfilePermissionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveProfilePermissionRequest, Members: &mRemoveProfilePermissionRequest, Type: smithy.ShapeTypeStructure})
+var sRemoveProfilePermissionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveProfilePermissionResponse, Members: &mRemoveProfilePermissionResponse, Type: smithy.ShapeTypeStructure})
+var sRevokeSignatureRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevokeSignatureRequest, Members: &mRevokeSignatureRequest, Type: smithy.ShapeTypeStructure})
+var sRevokeSigningProfileRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevokeSigningProfileRequest, Members: &mRevokeSigningProfileRequest, Type: smithy.ShapeTypeStructure})
+var sSignPayloadRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSignPayloadRequest, Members: &mSignPayloadRequest, Type: smithy.ShapeTypeStructure})
+var sSignPayloadResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSignPayloadResponse, Members: &mSignPayloadResponse, Type: smithy.ShapeTypeStructure})
+var sStartSigningJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSigningJobRequest, Members: &mStartSigningJobRequest, Type: smithy.ShapeTypeStructure})
+var sStartSigningJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSigningJobResponse, Members: &mStartSigningJobResponse, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure})
+
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sAccessDeniedException_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_ErrorCode, Type: smithy.ShapeTypeString})
+var sBadRequestException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sBadRequestException_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_ErrorCode, Type: smithy.ShapeTypeString})
+var sCategory_AWSIoT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWSIoT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_CertificateHashes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sConflictException_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_ErrorCode, Type: smithy.ShapeTypeString})
+var sDestination_s3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3", ID: &iS3Destination, Members: &mS3Destination, Type: smithy.ShapeTypeStructure})
+var sEncryptionAlgorithm_RSA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEncryptionAlgorithm_ECDSA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECDSA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEncryptionAlgorithmOptions_allowedValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allowedValues", ID: &i_EncryptionAlgorithms, Members: &m_EncryptionAlgorithms, Type: smithy.ShapeTypeList})
+var sEncryptionAlgorithmOptions_defaultValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultValue", ID: &iEncryptionAlgorithm, Members: &mEncryptionAlgorithm, Type: smithy.ShapeTypeEnum})
+var s_EncryptionAlgorithms_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEncryptionAlgorithm, Members: &mEncryptionAlgorithm, Type: smithy.ShapeTypeEnum})
+var sHashAlgorithm_SHA1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHA1", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHashAlgorithm_SHA256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHA256", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHashAlgorithmOptions_allowedValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allowedValues", ID: &i_HashAlgorithms, Members: &m_HashAlgorithms, Type: smithy.ShapeTypeList})
+var sHashAlgorithmOptions_defaultValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultValue", ID: &iHashAlgorithm, Members: &mHashAlgorithm, Type: smithy.ShapeTypeEnum})
+var s_HashAlgorithms_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iHashAlgorithm, Members: &mHashAlgorithm, Type: smithy.ShapeTypeEnum})
+var sImageFormat_JSON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JSON", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sImageFormat_JSONEmbedded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JSONEmbedded", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sImageFormat_JSONDetached = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JSONDetached", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_ImageFormats_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iImageFormat, Members: &mImageFormat, Type: smithy.ShapeTypeEnum})
+var sInternalServiceErrorException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInternalServiceErrorException_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_ErrorCode, Type: smithy.ShapeTypeString})
+var s_Metadata_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_Metadata_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_String, Type: smithy.ShapeTypeString})
+var sNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sNotFoundException_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_ErrorCode, Type: smithy.ShapeTypeString})
+var sPermission_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &i_String, Type: smithy.ShapeTypeString})
+var sPermission_principal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "principal", ID: &i_String, Type: smithy.ShapeTypeString})
+var sPermission_statementId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statementId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sPermission_profileVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "profileVersion", ID: &i_ProfileVersion, Type: smithy.ShapeTypeString})
+var s_Permissions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPermission, Members: &mPermission, Type: smithy.ShapeTypeStructure})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_ErrorCode, Type: smithy.ShapeTypeString})
+var s_RevokedEntities_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString})
+var sS3Destination_bucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketName", ID: &i_BucketName, Type: smithy.ShapeTypeString})
+var sS3Destination_prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefix", ID: &i_Prefix, Type: smithy.ShapeTypeString})
+var sS3SignedObject_bucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketName", ID: &i_BucketName, Type: smithy.ShapeTypeString})
+var sS3SignedObject_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_Key, Type: smithy.ShapeTypeString})
+var sS3Source_bucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketName", ID: &i_BucketName, Type: smithy.ShapeTypeString})
+var sS3Source_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_Key, Type: smithy.ShapeTypeString})
+var sS3Source_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_Version, Type: smithy.ShapeTypeString})
+var sServiceLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sServiceLimitExceededException_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_ErrorCode, Type: smithy.ShapeTypeString})
+var sSignatureValidityPeriod_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sSignatureValidityPeriod_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iValidityType, Members: &mValidityType, Type: smithy.ShapeTypeEnum})
+var sSignedObject_s3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3", ID: &iS3SignedObject, Members: &mS3SignedObject, Type: smithy.ShapeTypeStructure})
+var sSigningConfiguration_encryptionAlgorithmOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionAlgorithmOptions", ID: &iEncryptionAlgorithmOptions, Members: &mEncryptionAlgorithmOptions, Type: smithy.ShapeTypeStructure})
+var sSigningConfiguration_hashAlgorithmOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hashAlgorithmOptions", ID: &iHashAlgorithmOptions, Members: &mHashAlgorithmOptions, Type: smithy.ShapeTypeStructure})
+var sSigningConfigurationOverrides_encryptionAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionAlgorithm", ID: &iEncryptionAlgorithm, Members: &mEncryptionAlgorithm, Type: smithy.ShapeTypeEnum})
+var sSigningConfigurationOverrides_hashAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hashAlgorithm", ID: &iHashAlgorithm, Members: &mHashAlgorithm, Type: smithy.ShapeTypeEnum})
+var sSigningImageFormat_supportedFormats = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportedFormats", ID: &i_ImageFormats, Members: &m_ImageFormats, Type: smithy.ShapeTypeList})
+var sSigningImageFormat_defaultFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultFormat", ID: &iImageFormat, Members: &mImageFormat, Type: smithy.ShapeTypeEnum})
+var sSigningJob_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_JobId, Type: smithy.ShapeTypeString})
+var sSigningJob_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iSource, Members: &mSource, Type: smithy.ShapeTypeStructure})
+var sSigningJob_signedObject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signedObject", ID: &iSignedObject, Members: &mSignedObject, Type: smithy.ShapeTypeStructure})
+var sSigningJob_signingMaterial = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signingMaterial", ID: &iSigningMaterial, Members: &mSigningMaterial, Type: smithy.ShapeTypeStructure})
+var sSigningJob_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sSigningJob_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iSigningStatus, Members: &mSigningStatus, Type: smithy.ShapeTypeEnum})
+var sSigningJob_isRevoked = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isRevoked", ID: &i_bool, Type: smithy.ShapeTypeBoolean})
+var sSigningJob_profileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "profileName", ID: &i_ProfileName, Type: smithy.ShapeTypeString})
+var sSigningJob_profileVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "profileVersion", ID: &i_ProfileVersion, Type: smithy.ShapeTypeString})
+var sSigningJob_platformId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "platformId", ID: &i_PlatformId, Type: smithy.ShapeTypeString})
+var sSigningJob_platformDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "platformDisplayName", ID: &i_DisplayName, Type: smithy.ShapeTypeString})
+var sSigningJob_signatureExpiresAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signatureExpiresAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sSigningJob_jobOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobOwner", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sSigningJob_jobInvoker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobInvoker", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sSigningJobRevocationRecord_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSigningJobRevocationRecord_revokedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revokedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sSigningJobRevocationRecord_revokedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revokedBy", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_SigningJobs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSigningJob, Members: &mSigningJob, Type: smithy.ShapeTypeStructure})
+var sSigningMaterial_certificateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "certificateArn", ID: &i_CertificateArn, Type: smithy.ShapeTypeString})
+var s_SigningParameters_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_SigningParameterKey, Type: smithy.ShapeTypeString})
+var s_SigningParameters_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_SigningParameterValue, Type: smithy.ShapeTypeString})
+var sSigningPlatform_platformId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "platformId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSigningPlatform_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSigningPlatform_partner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "partner", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSigningPlatform_target = smithy.NewStaticSchema(smithy.StaticSchema{Member: "target", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSigningPlatform_category = smithy.NewStaticSchema(smithy.StaticSchema{Member: "category", ID: &iCategory, Members: &mCategory, Type: smithy.ShapeTypeEnum})
+var sSigningPlatform_signingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signingConfiguration", ID: &iSigningConfiguration, Members: &mSigningConfiguration, Type: smithy.ShapeTypeStructure})
+var sSigningPlatform_signingImageFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signingImageFormat", ID: &iSigningImageFormat, Members: &mSigningImageFormat, Type: smithy.ShapeTypeStructure})
+var sSigningPlatform_maxSizeInMB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxSizeInMB", ID: &i_MaxSizeInMB, Type: smithy.ShapeTypeInteger})
+var sSigningPlatform_revocationSupported = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revocationSupported", ID: &i_bool, Type: smithy.ShapeTypeBoolean})
+var sSigningPlatformOverrides_signingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signingConfiguration", ID: &iSigningConfigurationOverrides, Members: &mSigningConfigurationOverrides, Type: smithy.ShapeTypeStructure})
+var sSigningPlatformOverrides_signingImageFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signingImageFormat", ID: &iImageFormat, Members: &mImageFormat, Type: smithy.ShapeTypeEnum})
+var s_SigningPlatforms_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSigningPlatform, Members: &mSigningPlatform, Type: smithy.ShapeTypeStructure})
+var sSigningProfile_profileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "profileName", ID: &i_ProfileName, Type: smithy.ShapeTypeString})
+var sSigningProfile_profileVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "profileVersion", ID: &i_ProfileVersion, Type: smithy.ShapeTypeString})
+var sSigningProfile_profileVersionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "profileVersionArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sSigningProfile_signingMaterial = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signingMaterial", ID: &iSigningMaterial, Members: &mSigningMaterial, Type: smithy.ShapeTypeStructure})
+var sSigningProfile_signatureValidityPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signatureValidityPeriod", ID: &iSignatureValidityPeriod, Members: &mSignatureValidityPeriod, Type: smithy.ShapeTypeStructure})
+var sSigningProfile_platformId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "platformId", ID: &i_PlatformId, Type: smithy.ShapeTypeString})
+var sSigningProfile_platformDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "platformDisplayName", ID: &i_DisplayName, Type: smithy.ShapeTypeString})
+var sSigningProfile_signingParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signingParameters", ID: &i_SigningParameters, Members: &m_SigningParameters, Type: smithy.ShapeTypeMap})
+var sSigningProfile_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iSigningProfileStatus, Members: &mSigningProfileStatus, Type: smithy.ShapeTypeEnum})
+var sSigningProfile_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSigningProfile_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sSigningProfileRevocationRecord_revocationEffectiveFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revocationEffectiveFrom", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sSigningProfileRevocationRecord_revokedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revokedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sSigningProfileRevocationRecord_revokedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revokedBy", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_SigningProfiles_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSigningProfile, Members: &mSigningProfile, Type: smithy.ShapeTypeStructure})
+var sSigningProfileStatus_Active = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Active", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSigningProfileStatus_Canceled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Canceled", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSigningProfileStatus_Revoked = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revoked", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSigningStatus_InProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InProgress", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSigningStatus_Failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Failed", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSigningStatus_Succeeded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Succeeded", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSource_s3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3", ID: &iS3Source, Members: &mS3Source, Type: smithy.ShapeTypeStructure})
+var s_Statuses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSigningProfileStatus, Members: &mSigningProfileStatus, Type: smithy.ShapeTypeEnum})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sThrottlingException_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_ErrorCode, Type: smithy.ShapeTypeString})
+var sTooManyRequestsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sTooManyRequestsException_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_ErrorCode, Type: smithy.ShapeTypeString})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sValidationException_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_ErrorCode, Type: smithy.ShapeTypeString})
+var sValidityType_DAYS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DAYS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidityType_MONTHS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MONTHS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidityType_YEARS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "YEARS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAddProfilePermissionRequest_profileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "profileName", ID: &i_ProfileName, Traits: &t26, Type: smithy.ShapeTypeString})
+var sAddProfilePermissionRequest_profileVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "profileVersion", ID: &i_ProfileVersion, Type: smithy.ShapeTypeString})
+var sAddProfilePermissionRequest_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &i_String, Type: smithy.ShapeTypeString})
+var sAddProfilePermissionRequest_principal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "principal", ID: &i_String, Type: smithy.ShapeTypeString})
+var sAddProfilePermissionRequest_revisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sAddProfilePermissionRequest_statementId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statementId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sAddProfilePermissionResponse_revisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCancelSigningProfileRequest_profileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "profileName", ID: &i_ProfileName, Traits: &t26, Type: smithy.ShapeTypeString})
+var sDescribeSigningJobRequest_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_JobId, Traits: &t26, Type: smithy.ShapeTypeString})
+var sDescribeSigningJobResponse_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_JobId, Type: smithy.ShapeTypeString})
+var sDescribeSigningJobResponse_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iSource, Members: &mSource, Type: smithy.ShapeTypeStructure})
+var sDescribeSigningJobResponse_signingMaterial = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signingMaterial", ID: &iSigningMaterial, Members: &mSigningMaterial, Type: smithy.ShapeTypeStructure})
+var sDescribeSigningJobResponse_platformId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "platformId", ID: &i_PlatformId, Type: smithy.ShapeTypeString})
+var sDescribeSigningJobResponse_platformDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "platformDisplayName", ID: &i_DisplayName, Type: smithy.ShapeTypeString})
+var sDescribeSigningJobResponse_profileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "profileName", ID: &i_ProfileName, Type: smithy.ShapeTypeString})
+var sDescribeSigningJobResponse_profileVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "profileVersion", ID: &i_ProfileVersion, Type: smithy.ShapeTypeString})
+var sDescribeSigningJobResponse_overrides = smithy.NewStaticSchema(smithy.StaticSchema{Member: "overrides", ID: &iSigningPlatformOverrides, Members: &mSigningPlatformOverrides, Type: smithy.ShapeTypeStructure})
+var sDescribeSigningJobResponse_signingParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signingParameters", ID: &i_SigningParameters, Members: &m_SigningParameters, Type: smithy.ShapeTypeMap})
+var sDescribeSigningJobResponse_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeSigningJobResponse_completedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "completedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeSigningJobResponse_signatureExpiresAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signatureExpiresAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeSigningJobResponse_requestedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestedBy", ID: &i_RequestedBy, Type: smithy.ShapeTypeString})
+var sDescribeSigningJobResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iSigningStatus, Members: &mSigningStatus, Type: smithy.ShapeTypeEnum})
+var sDescribeSigningJobResponse_statusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusReason", ID: &i_StatusReason, Type: smithy.ShapeTypeString})
+var sDescribeSigningJobResponse_revocationRecord = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revocationRecord", ID: &iSigningJobRevocationRecord, Members: &mSigningJobRevocationRecord, Type: smithy.ShapeTypeStructure})
+var sDescribeSigningJobResponse_signedObject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signedObject", ID: &iSignedObject, Members: &mSignedObject, Type: smithy.ShapeTypeStructure})
+var sDescribeSigningJobResponse_jobOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobOwner", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sDescribeSigningJobResponse_jobInvoker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobInvoker", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sGetRevocationStatusRequest_signatureTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signatureTimestamp", ID: &i_Timestamp, Traits: &t27, Type: smithy.ShapeTypeTimestamp})
+var sGetRevocationStatusRequest_platformId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "platformId", ID: &i_PlatformId, Traits: &t28, Type: smithy.ShapeTypeString})
+var sGetRevocationStatusRequest_profileVersionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "profileVersionArn", ID: &i_Arn, Traits: &t29, Type: smithy.ShapeTypeString})
+var sGetRevocationStatusRequest_jobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobArn", ID: &i_Arn, Traits: &t30, Type: smithy.ShapeTypeString})
+var sGetRevocationStatusRequest_certificateHashes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "certificateHashes", ID: &i_CertificateHashes, Members: &m_CertificateHashes, Traits: &t31, Type: smithy.ShapeTypeList})
+var sGetRevocationStatusResponse_revokedEntities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revokedEntities", ID: &i_RevokedEntities, Members: &m_RevokedEntities, Type: smithy.ShapeTypeList})
+var sGetSigningPlatformRequest_platformId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "platformId", ID: &i_PlatformId, Traits: &t26, Type: smithy.ShapeTypeString})
+var sGetSigningPlatformResponse_platformId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "platformId", ID: &i_PlatformId, Type: smithy.ShapeTypeString})
+var sGetSigningPlatformResponse_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_DisplayName, Type: smithy.ShapeTypeString})
+var sGetSigningPlatformResponse_partner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "partner", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetSigningPlatformResponse_target = smithy.NewStaticSchema(smithy.StaticSchema{Member: "target", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetSigningPlatformResponse_category = smithy.NewStaticSchema(smithy.StaticSchema{Member: "category", ID: &iCategory, Members: &mCategory, Type: smithy.ShapeTypeEnum})
+var sGetSigningPlatformResponse_signingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signingConfiguration", ID: &iSigningConfiguration, Members: &mSigningConfiguration, Type: smithy.ShapeTypeStructure})
+var sGetSigningPlatformResponse_signingImageFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signingImageFormat", ID: &iSigningImageFormat, Members: &mSigningImageFormat, Type: smithy.ShapeTypeStructure})
+var sGetSigningPlatformResponse_maxSizeInMB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxSizeInMB", ID: &i_MaxSizeInMB, Type: smithy.ShapeTypeInteger})
+var sGetSigningPlatformResponse_revocationSupported = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revocationSupported", ID: &i_bool, Type: smithy.ShapeTypeBoolean})
+var sGetSigningProfileRequest_profileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "profileName", ID: &i_ProfileName, Traits: &t26, Type: smithy.ShapeTypeString})
+var sGetSigningProfileRequest_profileOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "profileOwner", ID: &i_AccountId, Traits: &t32, Type: smithy.ShapeTypeString})
+var sGetSigningProfileResponse_profileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "profileName", ID: &i_ProfileName, Type: smithy.ShapeTypeString})
+var sGetSigningProfileResponse_profileVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "profileVersion", ID: &i_ProfileVersion, Type: smithy.ShapeTypeString})
+var sGetSigningProfileResponse_profileVersionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "profileVersionArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sGetSigningProfileResponse_revocationRecord = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revocationRecord", ID: &iSigningProfileRevocationRecord, Members: &mSigningProfileRevocationRecord, Type: smithy.ShapeTypeStructure})
+var sGetSigningProfileResponse_signingMaterial = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signingMaterial", ID: &iSigningMaterial, Members: &mSigningMaterial, Type: smithy.ShapeTypeStructure})
+var sGetSigningProfileResponse_platformId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "platformId", ID: &i_PlatformId, Type: smithy.ShapeTypeString})
+var sGetSigningProfileResponse_platformDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "platformDisplayName", ID: &i_DisplayName, Type: smithy.ShapeTypeString})
+var sGetSigningProfileResponse_signatureValidityPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signatureValidityPeriod", ID: &iSignatureValidityPeriod, Members: &mSignatureValidityPeriod, Type: smithy.ShapeTypeStructure})
+var sGetSigningProfileResponse_overrides = smithy.NewStaticSchema(smithy.StaticSchema{Member: "overrides", ID: &iSigningPlatformOverrides, Members: &mSigningPlatformOverrides, Type: smithy.ShapeTypeStructure})
+var sGetSigningProfileResponse_signingParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signingParameters", ID: &i_SigningParameters, Members: &m_SigningParameters, Type: smithy.ShapeTypeMap})
+var sGetSigningProfileResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iSigningProfileStatus, Members: &mSigningProfileStatus, Type: smithy.ShapeTypeEnum})
+var sGetSigningProfileResponse_statusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusReason", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetSigningProfileResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetSigningProfileResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sListProfilePermissionsRequest_profileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "profileName", ID: &i_ProfileName, Traits: &t26, Type: smithy.ShapeTypeString})
+var sListProfilePermissionsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Traits: &t33, Type: smithy.ShapeTypeString})
+var sListProfilePermissionsResponse_revisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListProfilePermissionsResponse_policySizeBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policySizeBytes", ID: &i_PolicySizeBytes, Type: smithy.ShapeTypeInteger})
+var sListProfilePermissionsResponse_permissions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissions", ID: &i_Permissions, Members: &m_Permissions, Type: smithy.ShapeTypeList})
+var sListProfilePermissionsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListSigningJobsRequest_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iSigningStatus, Members: &mSigningStatus, Traits: &t34, Type: smithy.ShapeTypeEnum})
+var sListSigningJobsRequest_platformId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "platformId", ID: &i_PlatformId, Traits: &t28, Type: smithy.ShapeTypeString})
+var sListSigningJobsRequest_requestedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestedBy", ID: &i_RequestedBy, Traits: &t35, Type: smithy.ShapeTypeString})
+var sListSigningJobsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t36, Type: smithy.ShapeTypeInteger})
+var sListSigningJobsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t33, Type: smithy.ShapeTypeString})
+var sListSigningJobsRequest_isRevoked = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isRevoked", ID: &i_bool, Traits: &t37, Type: smithy.ShapeTypeBoolean})
+var sListSigningJobsRequest_signatureExpiresBefore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signatureExpiresBefore", ID: &i_Timestamp, Traits: &t38, Type: smithy.ShapeTypeTimestamp})
+var sListSigningJobsRequest_signatureExpiresAfter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signatureExpiresAfter", ID: &i_Timestamp, Traits: &t39, Type: smithy.ShapeTypeTimestamp})
+var sListSigningJobsRequest_jobInvoker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobInvoker", ID: &i_AccountId, Traits: &t40, Type: smithy.ShapeTypeString})
+var sListSigningJobsResponse_jobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobs", ID: &i_SigningJobs, Members: &m_SigningJobs, Type: smithy.ShapeTypeList})
+var sListSigningJobsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListSigningPlatformsRequest_category = smithy.NewStaticSchema(smithy.StaticSchema{Member: "category", ID: &i_String, Traits: &t41, Type: smithy.ShapeTypeString})
+var sListSigningPlatformsRequest_partner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "partner", ID: &i_String, Traits: &t42, Type: smithy.ShapeTypeString})
+var sListSigningPlatformsRequest_target = smithy.NewStaticSchema(smithy.StaticSchema{Member: "target", ID: &i_String, Traits: &t43, Type: smithy.ShapeTypeString})
+var sListSigningPlatformsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t36, Type: smithy.ShapeTypeInteger})
+var sListSigningPlatformsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Traits: &t33, Type: smithy.ShapeTypeString})
+var sListSigningPlatformsResponse_platforms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "platforms", ID: &i_SigningPlatforms, Members: &m_SigningPlatforms, Type: smithy.ShapeTypeList})
+var sListSigningPlatformsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListSigningProfilesRequest_includeCanceled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "includeCanceled", ID: &i_bool, Traits: &t44, Type: smithy.ShapeTypeBoolean})
+var sListSigningProfilesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t36, Type: smithy.ShapeTypeInteger})
+var sListSigningProfilesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t33, Type: smithy.ShapeTypeString})
+var sListSigningProfilesRequest_platformId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "platformId", ID: &i_PlatformId, Traits: &t28, Type: smithy.ShapeTypeString})
+var sListSigningProfilesRequest_statuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statuses", ID: &i_Statuses, Members: &m_Statuses, Traits: &t45, Type: smithy.ShapeTypeList})
+var sListSigningProfilesResponse_profiles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "profiles", ID: &i_SigningProfiles, Members: &m_SigningProfiles, Type: smithy.ShapeTypeList})
+var sListSigningProfilesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_String, Traits: &t26, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sPutSigningProfileRequest_profileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "profileName", ID: &i_ProfileName, Traits: &t26, Type: smithy.ShapeTypeString})
+var sPutSigningProfileRequest_signingMaterial = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signingMaterial", ID: &iSigningMaterial, Members: &mSigningMaterial, Type: smithy.ShapeTypeStructure})
+var sPutSigningProfileRequest_signatureValidityPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signatureValidityPeriod", ID: &iSignatureValidityPeriod, Members: &mSignatureValidityPeriod, Type: smithy.ShapeTypeStructure})
+var sPutSigningProfileRequest_platformId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "platformId", ID: &i_PlatformId, Type: smithy.ShapeTypeString})
+var sPutSigningProfileRequest_overrides = smithy.NewStaticSchema(smithy.StaticSchema{Member: "overrides", ID: &iSigningPlatformOverrides, Members: &mSigningPlatformOverrides, Type: smithy.ShapeTypeStructure})
+var sPutSigningProfileRequest_signingParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signingParameters", ID: &i_SigningParameters, Members: &m_SigningParameters, Type: smithy.ShapeTypeMap})
+var sPutSigningProfileRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sPutSigningProfileResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sPutSigningProfileResponse_profileVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "profileVersion", ID: &i_ProfileVersion, Type: smithy.ShapeTypeString})
+var sPutSigningProfileResponse_profileVersionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "profileVersionArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sRemoveProfilePermissionRequest_profileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "profileName", ID: &i_ProfileName, Traits: &t26, Type: smithy.ShapeTypeString})
+var sRemoveProfilePermissionRequest_revisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionId", ID: &i_String, Traits: &t46, Type: smithy.ShapeTypeString})
+var sRemoveProfilePermissionRequest_statementId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statementId", ID: &i_String, Traits: &t26, Type: smithy.ShapeTypeString})
+var sRemoveProfilePermissionResponse_revisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sRevokeSignatureRequest_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_JobId, Traits: &t26, Type: smithy.ShapeTypeString})
+var sRevokeSignatureRequest_jobOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobOwner", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sRevokeSignatureRequest_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_RevocationReasonString, Type: smithy.ShapeTypeString})
+var sRevokeSigningProfileRequest_profileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "profileName", ID: &i_ProfileName, Traits: &t26, Type: smithy.ShapeTypeString})
+var sRevokeSigningProfileRequest_profileVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "profileVersion", ID: &i_ProfileVersion, Type: smithy.ShapeTypeString})
+var sRevokeSigningProfileRequest_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_RevocationReasonString, Type: smithy.ShapeTypeString})
+var sRevokeSigningProfileRequest_effectiveTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "effectiveTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sSignPayloadRequest_profileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "profileName", ID: &i_ProfileName, Type: smithy.ShapeTypeString})
+var sSignPayloadRequest_profileOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "profileOwner", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sSignPayloadRequest_payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "payload", ID: &i_Payload, Type: smithy.ShapeTypeBlob})
+var sSignPayloadRequest_payloadFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "payloadFormat", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSignPayloadResponse_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_JobId, Type: smithy.ShapeTypeString})
+var sSignPayloadResponse_jobOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobOwner", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sSignPayloadResponse_metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadata", ID: &i_Metadata, Members: &m_Metadata, Type: smithy.ShapeTypeMap})
+var sSignPayloadResponse_signature = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signature", ID: &i_Blob, Type: smithy.ShapeTypeBlob})
+var sStartSigningJobRequest_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iSource, Members: &mSource, Type: smithy.ShapeTypeStructure})
+var sStartSigningJobRequest_destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destination", ID: &iDestination, Members: &mDestination, Type: smithy.ShapeTypeStructure})
+var sStartSigningJobRequest_profileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "profileName", ID: &i_ProfileName, Type: smithy.ShapeTypeString})
+var sStartSigningJobRequest_clientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sStartSigningJobRequest_profileOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "profileOwner", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sStartSigningJobResponse_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_JobId, Type: smithy.ShapeTypeString})
+var sStartSigningJobResponse_jobOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobOwner", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_String, Traits: &t26, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_String, Traits: &t26, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t47, Type: smithy.ShapeTypeList})
+
+var AddProfilePermission = &sAddProfilePermission
+
+var CancelSigningProfile = &sCancelSigningProfile
+
+var DescribeSigningJob = &sDescribeSigningJob
+
+var GetRevocationStatus = &sGetRevocationStatus
+
+var GetSigningPlatform = &sGetSigningPlatform
+
+var GetSigningProfile = &sGetSigningProfile
+
+var ListProfilePermissions = &sListProfilePermissions
+
+var ListSigningJobs = &sListSigningJobs
+
+var ListSigningPlatforms = &sListSigningPlatforms
+
+var ListSigningProfiles = &sListSigningProfiles
+
+var ListTagsForResource = &sListTagsForResource
+
+var PutSigningProfile = &sPutSigningProfile
+
+var RemoveProfilePermission = &sRemoveProfilePermission
+
+var RevokeSignature = &sRevokeSignature
+
+var RevokeSigningProfile = &sRevokeSigningProfile
+
+var SignPayload = &sSignPayload
+
+var StartSigningJob = &sStartSigningJob
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var _WallabyService = &s_WallabyService
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+var AccessDeniedException_code = &sAccessDeniedException_code
+
+var _AccountId = &s_AccountId
+
+var _Arn = &s_Arn
+
+var BadRequestException = &sBadRequestException
+var BadRequestException_message = &sBadRequestException_message
+var BadRequestException_code = &sBadRequestException_code
+
+var _Blob = &s_Blob
+
+var _bool = &s_bool
+
+var _BucketName = &s_BucketName
+
+var Category = &sCategory
+var Category_AWSIoT = &sCategory_AWSIoT
+
+var _CertificateArn = &s_CertificateArn
+
+var _CertificateHashes = &s_CertificateHashes
+var _CertificateHashes_member = &s_CertificateHashes_member
+
+var _ClientRequestToken = &s_ClientRequestToken
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+var ConflictException_code = &sConflictException_code
+
+var Destination = &sDestination
+var Destination_s3 = &sDestination_s3
+
+var _DisplayName = &s_DisplayName
+
+var EncryptionAlgorithm = &sEncryptionAlgorithm
+var EncryptionAlgorithm_RSA = &sEncryptionAlgorithm_RSA
+var EncryptionAlgorithm_ECDSA = &sEncryptionAlgorithm_ECDSA
+
+var EncryptionAlgorithmOptions = &sEncryptionAlgorithmOptions
+var EncryptionAlgorithmOptions_allowedValues = &sEncryptionAlgorithmOptions_allowedValues
+var EncryptionAlgorithmOptions_defaultValue = &sEncryptionAlgorithmOptions_defaultValue
+
+var _EncryptionAlgorithms = &s_EncryptionAlgorithms
+var _EncryptionAlgorithms_member = &s_EncryptionAlgorithms_member
+
+var _ErrorCode = &s_ErrorCode
+
+var _ErrorMessage = &s_ErrorMessage
+
+var HashAlgorithm = &sHashAlgorithm
+var HashAlgorithm_SHA1 = &sHashAlgorithm_SHA1
+var HashAlgorithm_SHA256 = &sHashAlgorithm_SHA256
+
+var HashAlgorithmOptions = &sHashAlgorithmOptions
+var HashAlgorithmOptions_allowedValues = &sHashAlgorithmOptions_allowedValues
+var HashAlgorithmOptions_defaultValue = &sHashAlgorithmOptions_defaultValue
+
+var _HashAlgorithms = &s_HashAlgorithms
+var _HashAlgorithms_member = &s_HashAlgorithms_member
+
+var ImageFormat = &sImageFormat
+var ImageFormat_JSON = &sImageFormat_JSON
+var ImageFormat_JSONEmbedded = &sImageFormat_JSONEmbedded
+var ImageFormat_JSONDetached = &sImageFormat_JSONDetached
+
+var _ImageFormats = &s_ImageFormats
+var _ImageFormats_member = &s_ImageFormats_member
+
+var _Integer = &s_Integer
+
+var InternalServiceErrorException = &sInternalServiceErrorException
+var InternalServiceErrorException_message = &sInternalServiceErrorException_message
+var InternalServiceErrorException_code = &sInternalServiceErrorException_code
+
+var _JobId = &s_JobId
+
+var _Key = &s_Key
+
+var _MaxResults = &s_MaxResults
+
+var _MaxSizeInMB = &s_MaxSizeInMB
+
+var _Metadata = &s_Metadata
+var _Metadata_key = &s_Metadata_key
+var _Metadata_value = &s_Metadata_value
+
+var _NextToken = &s_NextToken
+
+var NotFoundException = &sNotFoundException
+var NotFoundException_message = &sNotFoundException_message
+var NotFoundException_code = &sNotFoundException_code
+
+var _Payload = &s_Payload
+
+var Permission = &sPermission
+var Permission_action = &sPermission_action
+var Permission_principal = &sPermission_principal
+var Permission_statementId = &sPermission_statementId
+var Permission_profileVersion = &sPermission_profileVersion
+
+var _Permissions = &s_Permissions
+var _Permissions_member = &s_Permissions_member
+
+var _PlatformId = &s_PlatformId
+
+var _PolicySizeBytes = &s_PolicySizeBytes
+
+var _Prefix = &s_Prefix
+
+var _ProfileName = &s_ProfileName
+
+var _ProfileVersion = &s_ProfileVersion
+
+var _RequestedBy = &s_RequestedBy
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+var ResourceNotFoundException_code = &sResourceNotFoundException_code
+
+var _RevocationReasonString = &s_RevocationReasonString
+
+var _RevokedEntities = &s_RevokedEntities
+var _RevokedEntities_member = &s_RevokedEntities_member
+
+var S3Destination = &sS3Destination
+var S3Destination_bucketName = &sS3Destination_bucketName
+var S3Destination_prefix = &sS3Destination_prefix
+
+var S3SignedObject = &sS3SignedObject
+var S3SignedObject_bucketName = &sS3SignedObject_bucketName
+var S3SignedObject_key = &sS3SignedObject_key
+
+var S3Source = &sS3Source
+var S3Source_bucketName = &sS3Source_bucketName
+var S3Source_key = &sS3Source_key
+var S3Source_version = &sS3Source_version
+
+var ServiceLimitExceededException = &sServiceLimitExceededException
+var ServiceLimitExceededException_message = &sServiceLimitExceededException_message
+var ServiceLimitExceededException_code = &sServiceLimitExceededException_code
+
+var SignatureValidityPeriod = &sSignatureValidityPeriod
+var SignatureValidityPeriod_value = &sSignatureValidityPeriod_value
+var SignatureValidityPeriod_type = &sSignatureValidityPeriod_type
+
+var SignedObject = &sSignedObject
+var SignedObject_s3 = &sSignedObject_s3
+
+var SigningConfiguration = &sSigningConfiguration
+var SigningConfiguration_encryptionAlgorithmOptions = &sSigningConfiguration_encryptionAlgorithmOptions
+var SigningConfiguration_hashAlgorithmOptions = &sSigningConfiguration_hashAlgorithmOptions
+
+var SigningConfigurationOverrides = &sSigningConfigurationOverrides
+var SigningConfigurationOverrides_encryptionAlgorithm = &sSigningConfigurationOverrides_encryptionAlgorithm
+var SigningConfigurationOverrides_hashAlgorithm = &sSigningConfigurationOverrides_hashAlgorithm
+
+var SigningImageFormat = &sSigningImageFormat
+var SigningImageFormat_supportedFormats = &sSigningImageFormat_supportedFormats
+var SigningImageFormat_defaultFormat = &sSigningImageFormat_defaultFormat
+
+var SigningJob = &sSigningJob
+var SigningJob_jobId = &sSigningJob_jobId
+var SigningJob_source = &sSigningJob_source
+var SigningJob_signedObject = &sSigningJob_signedObject
+var SigningJob_signingMaterial = &sSigningJob_signingMaterial
+var SigningJob_createdAt = &sSigningJob_createdAt
+var SigningJob_status = &sSigningJob_status
+var SigningJob_isRevoked = &sSigningJob_isRevoked
+var SigningJob_profileName = &sSigningJob_profileName
+var SigningJob_profileVersion = &sSigningJob_profileVersion
+var SigningJob_platformId = &sSigningJob_platformId
+var SigningJob_platformDisplayName = &sSigningJob_platformDisplayName
+var SigningJob_signatureExpiresAt = &sSigningJob_signatureExpiresAt
+var SigningJob_jobOwner = &sSigningJob_jobOwner
+var SigningJob_jobInvoker = &sSigningJob_jobInvoker
+
+var SigningJobRevocationRecord = &sSigningJobRevocationRecord
+var SigningJobRevocationRecord_reason = &sSigningJobRevocationRecord_reason
+var SigningJobRevocationRecord_revokedAt = &sSigningJobRevocationRecord_revokedAt
+var SigningJobRevocationRecord_revokedBy = &sSigningJobRevocationRecord_revokedBy
+
+var _SigningJobs = &s_SigningJobs
+var _SigningJobs_member = &s_SigningJobs_member
+
+var SigningMaterial = &sSigningMaterial
+var SigningMaterial_certificateArn = &sSigningMaterial_certificateArn
+
+var _SigningParameterKey = &s_SigningParameterKey
+
+var _SigningParameters = &s_SigningParameters
+var _SigningParameters_key = &s_SigningParameters_key
+var _SigningParameters_value = &s_SigningParameters_value
+
+var _SigningParameterValue = &s_SigningParameterValue
+
+var SigningPlatform = &sSigningPlatform
+var SigningPlatform_platformId = &sSigningPlatform_platformId
+var SigningPlatform_displayName = &sSigningPlatform_displayName
+var SigningPlatform_partner = &sSigningPlatform_partner
+var SigningPlatform_target = &sSigningPlatform_target
+var SigningPlatform_category = &sSigningPlatform_category
+var SigningPlatform_signingConfiguration = &sSigningPlatform_signingConfiguration
+var SigningPlatform_signingImageFormat = &sSigningPlatform_signingImageFormat
+var SigningPlatform_maxSizeInMB = &sSigningPlatform_maxSizeInMB
+var SigningPlatform_revocationSupported = &sSigningPlatform_revocationSupported
+
+var SigningPlatformOverrides = &sSigningPlatformOverrides
+var SigningPlatformOverrides_signingConfiguration = &sSigningPlatformOverrides_signingConfiguration
+var SigningPlatformOverrides_signingImageFormat = &sSigningPlatformOverrides_signingImageFormat
+
+var _SigningPlatforms = &s_SigningPlatforms
+var _SigningPlatforms_member = &s_SigningPlatforms_member
+
+var SigningProfile = &sSigningProfile
+var SigningProfile_profileName = &sSigningProfile_profileName
+var SigningProfile_profileVersion = &sSigningProfile_profileVersion
+var SigningProfile_profileVersionArn = &sSigningProfile_profileVersionArn
+var SigningProfile_signingMaterial = &sSigningProfile_signingMaterial
+var SigningProfile_signatureValidityPeriod = &sSigningProfile_signatureValidityPeriod
+var SigningProfile_platformId = &sSigningProfile_platformId
+var SigningProfile_platformDisplayName = &sSigningProfile_platformDisplayName
+var SigningProfile_signingParameters = &sSigningProfile_signingParameters
+var SigningProfile_status = &sSigningProfile_status
+var SigningProfile_arn = &sSigningProfile_arn
+var SigningProfile_tags = &sSigningProfile_tags
+
+var SigningProfileRevocationRecord = &sSigningProfileRevocationRecord
+var SigningProfileRevocationRecord_revocationEffectiveFrom = &sSigningProfileRevocationRecord_revocationEffectiveFrom
+var SigningProfileRevocationRecord_revokedAt = &sSigningProfileRevocationRecord_revokedAt
+var SigningProfileRevocationRecord_revokedBy = &sSigningProfileRevocationRecord_revokedBy
+
+var _SigningProfiles = &s_SigningProfiles
+var _SigningProfiles_member = &s_SigningProfiles_member
+
+var SigningProfileStatus = &sSigningProfileStatus
+var SigningProfileStatus_Active = &sSigningProfileStatus_Active
+var SigningProfileStatus_Canceled = &sSigningProfileStatus_Canceled
+var SigningProfileStatus_Revoked = &sSigningProfileStatus_Revoked
+
+var SigningStatus = &sSigningStatus
+var SigningStatus_InProgress = &sSigningStatus_InProgress
+var SigningStatus_Failed = &sSigningStatus_Failed
+var SigningStatus_Succeeded = &sSigningStatus_Succeeded
+
+var Source = &sSource
+var Source_s3 = &sSource_s3
+
+var _Statuses = &s_Statuses
+var _Statuses_member = &s_Statuses_member
+
+var _StatusReason = &s_StatusReason
+
+var _String = &s_String
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagMap = &s_TagMap
+var _TagMap_key = &s_TagMap_key
+var _TagMap_value = &s_TagMap_value
+
+var _TagValue = &s_TagValue
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+var ThrottlingException_code = &sThrottlingException_code
+
+var _Timestamp = &s_Timestamp
+
+var TooManyRequestsException = &sTooManyRequestsException
+var TooManyRequestsException_message = &sTooManyRequestsException_message
+var TooManyRequestsException_code = &sTooManyRequestsException_code
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+var ValidationException_code = &sValidationException_code
+
+var ValidityType = &sValidityType
+var ValidityType_DAYS = &sValidityType_DAYS
+var ValidityType_MONTHS = &sValidityType_MONTHS
+var ValidityType_YEARS = &sValidityType_YEARS
+
+var _Version = &s_Version
+
+var AddProfilePermissionRequest = &sAddProfilePermissionRequest
+var AddProfilePermissionRequest_profileName = &sAddProfilePermissionRequest_profileName
+var AddProfilePermissionRequest_profileVersion = &sAddProfilePermissionRequest_profileVersion
+var AddProfilePermissionRequest_action = &sAddProfilePermissionRequest_action
+var AddProfilePermissionRequest_principal = &sAddProfilePermissionRequest_principal
+var AddProfilePermissionRequest_revisionId = &sAddProfilePermissionRequest_revisionId
+var AddProfilePermissionRequest_statementId = &sAddProfilePermissionRequest_statementId
+
+var AddProfilePermissionResponse = &sAddProfilePermissionResponse
+var AddProfilePermissionResponse_revisionId = &sAddProfilePermissionResponse_revisionId
+
+var CancelSigningProfileRequest = &sCancelSigningProfileRequest
+var CancelSigningProfileRequest_profileName = &sCancelSigningProfileRequest_profileName
+
+var DescribeSigningJobRequest = &sDescribeSigningJobRequest
+var DescribeSigningJobRequest_jobId = &sDescribeSigningJobRequest_jobId
+
+var DescribeSigningJobResponse = &sDescribeSigningJobResponse
+var DescribeSigningJobResponse_jobId = &sDescribeSigningJobResponse_jobId
+var DescribeSigningJobResponse_source = &sDescribeSigningJobResponse_source
+var DescribeSigningJobResponse_signingMaterial = &sDescribeSigningJobResponse_signingMaterial
+var DescribeSigningJobResponse_platformId = &sDescribeSigningJobResponse_platformId
+var DescribeSigningJobResponse_platformDisplayName = &sDescribeSigningJobResponse_platformDisplayName
+var DescribeSigningJobResponse_profileName = &sDescribeSigningJobResponse_profileName
+var DescribeSigningJobResponse_profileVersion = &sDescribeSigningJobResponse_profileVersion
+var DescribeSigningJobResponse_overrides = &sDescribeSigningJobResponse_overrides
+var DescribeSigningJobResponse_signingParameters = &sDescribeSigningJobResponse_signingParameters
+var DescribeSigningJobResponse_createdAt = &sDescribeSigningJobResponse_createdAt
+var DescribeSigningJobResponse_completedAt = &sDescribeSigningJobResponse_completedAt
+var DescribeSigningJobResponse_signatureExpiresAt = &sDescribeSigningJobResponse_signatureExpiresAt
+var DescribeSigningJobResponse_requestedBy = &sDescribeSigningJobResponse_requestedBy
+var DescribeSigningJobResponse_status = &sDescribeSigningJobResponse_status
+var DescribeSigningJobResponse_statusReason = &sDescribeSigningJobResponse_statusReason
+var DescribeSigningJobResponse_revocationRecord = &sDescribeSigningJobResponse_revocationRecord
+var DescribeSigningJobResponse_signedObject = &sDescribeSigningJobResponse_signedObject
+var DescribeSigningJobResponse_jobOwner = &sDescribeSigningJobResponse_jobOwner
+var DescribeSigningJobResponse_jobInvoker = &sDescribeSigningJobResponse_jobInvoker
+
+var GetRevocationStatusRequest = &sGetRevocationStatusRequest
+var GetRevocationStatusRequest_signatureTimestamp = &sGetRevocationStatusRequest_signatureTimestamp
+var GetRevocationStatusRequest_platformId = &sGetRevocationStatusRequest_platformId
+var GetRevocationStatusRequest_profileVersionArn = &sGetRevocationStatusRequest_profileVersionArn
+var GetRevocationStatusRequest_jobArn = &sGetRevocationStatusRequest_jobArn
+var GetRevocationStatusRequest_certificateHashes = &sGetRevocationStatusRequest_certificateHashes
+
+var GetRevocationStatusResponse = &sGetRevocationStatusResponse
+var GetRevocationStatusResponse_revokedEntities = &sGetRevocationStatusResponse_revokedEntities
+
+var GetSigningPlatformRequest = &sGetSigningPlatformRequest
+var GetSigningPlatformRequest_platformId = &sGetSigningPlatformRequest_platformId
+
+var GetSigningPlatformResponse = &sGetSigningPlatformResponse
+var GetSigningPlatformResponse_platformId = &sGetSigningPlatformResponse_platformId
+var GetSigningPlatformResponse_displayName = &sGetSigningPlatformResponse_displayName
+var GetSigningPlatformResponse_partner = &sGetSigningPlatformResponse_partner
+var GetSigningPlatformResponse_target = &sGetSigningPlatformResponse_target
+var GetSigningPlatformResponse_category = &sGetSigningPlatformResponse_category
+var GetSigningPlatformResponse_signingConfiguration = &sGetSigningPlatformResponse_signingConfiguration
+var GetSigningPlatformResponse_signingImageFormat = &sGetSigningPlatformResponse_signingImageFormat
+var GetSigningPlatformResponse_maxSizeInMB = &sGetSigningPlatformResponse_maxSizeInMB
+var GetSigningPlatformResponse_revocationSupported = &sGetSigningPlatformResponse_revocationSupported
+
+var GetSigningProfileRequest = &sGetSigningProfileRequest
+var GetSigningProfileRequest_profileName = &sGetSigningProfileRequest_profileName
+var GetSigningProfileRequest_profileOwner = &sGetSigningProfileRequest_profileOwner
+
+var GetSigningProfileResponse = &sGetSigningProfileResponse
+var GetSigningProfileResponse_profileName = &sGetSigningProfileResponse_profileName
+var GetSigningProfileResponse_profileVersion = &sGetSigningProfileResponse_profileVersion
+var GetSigningProfileResponse_profileVersionArn = &sGetSigningProfileResponse_profileVersionArn
+var GetSigningProfileResponse_revocationRecord = &sGetSigningProfileResponse_revocationRecord
+var GetSigningProfileResponse_signingMaterial = &sGetSigningProfileResponse_signingMaterial
+var GetSigningProfileResponse_platformId = &sGetSigningProfileResponse_platformId
+var GetSigningProfileResponse_platformDisplayName = &sGetSigningProfileResponse_platformDisplayName
+var GetSigningProfileResponse_signatureValidityPeriod = &sGetSigningProfileResponse_signatureValidityPeriod
+var GetSigningProfileResponse_overrides = &sGetSigningProfileResponse_overrides
+var GetSigningProfileResponse_signingParameters = &sGetSigningProfileResponse_signingParameters
+var GetSigningProfileResponse_status = &sGetSigningProfileResponse_status
+var GetSigningProfileResponse_statusReason = &sGetSigningProfileResponse_statusReason
+var GetSigningProfileResponse_arn = &sGetSigningProfileResponse_arn
+var GetSigningProfileResponse_tags = &sGetSigningProfileResponse_tags
+
+var ListProfilePermissionsRequest = &sListProfilePermissionsRequest
+var ListProfilePermissionsRequest_profileName = &sListProfilePermissionsRequest_profileName
+var ListProfilePermissionsRequest_nextToken = &sListProfilePermissionsRequest_nextToken
+
+var ListProfilePermissionsResponse = &sListProfilePermissionsResponse
+var ListProfilePermissionsResponse_revisionId = &sListProfilePermissionsResponse_revisionId
+var ListProfilePermissionsResponse_policySizeBytes = &sListProfilePermissionsResponse_policySizeBytes
+var ListProfilePermissionsResponse_permissions = &sListProfilePermissionsResponse_permissions
+var ListProfilePermissionsResponse_nextToken = &sListProfilePermissionsResponse_nextToken
+
+var ListSigningJobsRequest = &sListSigningJobsRequest
+var ListSigningJobsRequest_status = &sListSigningJobsRequest_status
+var ListSigningJobsRequest_platformId = &sListSigningJobsRequest_platformId
+var ListSigningJobsRequest_requestedBy = &sListSigningJobsRequest_requestedBy
+var ListSigningJobsRequest_maxResults = &sListSigningJobsRequest_maxResults
+var ListSigningJobsRequest_nextToken = &sListSigningJobsRequest_nextToken
+var ListSigningJobsRequest_isRevoked = &sListSigningJobsRequest_isRevoked
+var ListSigningJobsRequest_signatureExpiresBefore = &sListSigningJobsRequest_signatureExpiresBefore
+var ListSigningJobsRequest_signatureExpiresAfter = &sListSigningJobsRequest_signatureExpiresAfter
+var ListSigningJobsRequest_jobInvoker = &sListSigningJobsRequest_jobInvoker
+
+var ListSigningJobsResponse = &sListSigningJobsResponse
+var ListSigningJobsResponse_jobs = &sListSigningJobsResponse_jobs
+var ListSigningJobsResponse_nextToken = &sListSigningJobsResponse_nextToken
+
+var ListSigningPlatformsRequest = &sListSigningPlatformsRequest
+var ListSigningPlatformsRequest_category = &sListSigningPlatformsRequest_category
+var ListSigningPlatformsRequest_partner = &sListSigningPlatformsRequest_partner
+var ListSigningPlatformsRequest_target = &sListSigningPlatformsRequest_target
+var ListSigningPlatformsRequest_maxResults = &sListSigningPlatformsRequest_maxResults
+var ListSigningPlatformsRequest_nextToken = &sListSigningPlatformsRequest_nextToken
+
+var ListSigningPlatformsResponse = &sListSigningPlatformsResponse
+var ListSigningPlatformsResponse_platforms = &sListSigningPlatformsResponse_platforms
+var ListSigningPlatformsResponse_nextToken = &sListSigningPlatformsResponse_nextToken
+
+var ListSigningProfilesRequest = &sListSigningProfilesRequest
+var ListSigningProfilesRequest_includeCanceled = &sListSigningProfilesRequest_includeCanceled
+var ListSigningProfilesRequest_maxResults = &sListSigningProfilesRequest_maxResults
+var ListSigningProfilesRequest_nextToken = &sListSigningProfilesRequest_nextToken
+var ListSigningProfilesRequest_platformId = &sListSigningProfilesRequest_platformId
+var ListSigningProfilesRequest_statuses = &sListSigningProfilesRequest_statuses
+
+var ListSigningProfilesResponse = &sListSigningProfilesResponse
+var ListSigningProfilesResponse_profiles = &sListSigningProfilesResponse_profiles
+var ListSigningProfilesResponse_nextToken = &sListSigningProfilesResponse_nextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_resourceArn = &sListTagsForResourceRequest_resourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_tags = &sListTagsForResourceResponse_tags
+
+var PutSigningProfileRequest = &sPutSigningProfileRequest
+var PutSigningProfileRequest_profileName = &sPutSigningProfileRequest_profileName
+var PutSigningProfileRequest_signingMaterial = &sPutSigningProfileRequest_signingMaterial
+var PutSigningProfileRequest_signatureValidityPeriod = &sPutSigningProfileRequest_signatureValidityPeriod
+var PutSigningProfileRequest_platformId = &sPutSigningProfileRequest_platformId
+var PutSigningProfileRequest_overrides = &sPutSigningProfileRequest_overrides
+var PutSigningProfileRequest_signingParameters = &sPutSigningProfileRequest_signingParameters
+var PutSigningProfileRequest_tags = &sPutSigningProfileRequest_tags
+
+var PutSigningProfileResponse = &sPutSigningProfileResponse
+var PutSigningProfileResponse_arn = &sPutSigningProfileResponse_arn
+var PutSigningProfileResponse_profileVersion = &sPutSigningProfileResponse_profileVersion
+var PutSigningProfileResponse_profileVersionArn = &sPutSigningProfileResponse_profileVersionArn
+
+var RemoveProfilePermissionRequest = &sRemoveProfilePermissionRequest
+var RemoveProfilePermissionRequest_profileName = &sRemoveProfilePermissionRequest_profileName
+var RemoveProfilePermissionRequest_revisionId = &sRemoveProfilePermissionRequest_revisionId
+var RemoveProfilePermissionRequest_statementId = &sRemoveProfilePermissionRequest_statementId
+
+var RemoveProfilePermissionResponse = &sRemoveProfilePermissionResponse
+var RemoveProfilePermissionResponse_revisionId = &sRemoveProfilePermissionResponse_revisionId
+
+var RevokeSignatureRequest = &sRevokeSignatureRequest
+var RevokeSignatureRequest_jobId = &sRevokeSignatureRequest_jobId
+var RevokeSignatureRequest_jobOwner = &sRevokeSignatureRequest_jobOwner
+var RevokeSignatureRequest_reason = &sRevokeSignatureRequest_reason
+
+var RevokeSigningProfileRequest = &sRevokeSigningProfileRequest
+var RevokeSigningProfileRequest_profileName = &sRevokeSigningProfileRequest_profileName
+var RevokeSigningProfileRequest_profileVersion = &sRevokeSigningProfileRequest_profileVersion
+var RevokeSigningProfileRequest_reason = &sRevokeSigningProfileRequest_reason
+var RevokeSigningProfileRequest_effectiveTime = &sRevokeSigningProfileRequest_effectiveTime
+
+var SignPayloadRequest = &sSignPayloadRequest
+var SignPayloadRequest_profileName = &sSignPayloadRequest_profileName
+var SignPayloadRequest_profileOwner = &sSignPayloadRequest_profileOwner
+var SignPayloadRequest_payload = &sSignPayloadRequest_payload
+var SignPayloadRequest_payloadFormat = &sSignPayloadRequest_payloadFormat
+
+var SignPayloadResponse = &sSignPayloadResponse
+var SignPayloadResponse_jobId = &sSignPayloadResponse_jobId
+var SignPayloadResponse_jobOwner = &sSignPayloadResponse_jobOwner
+var SignPayloadResponse_metadata = &sSignPayloadResponse_metadata
+var SignPayloadResponse_signature = &sSignPayloadResponse_signature
+
+var StartSigningJobRequest = &sStartSigningJobRequest
+var StartSigningJobRequest_source = &sStartSigningJobRequest_source
+var StartSigningJobRequest_destination = &sStartSigningJobRequest_destination
+var StartSigningJobRequest_profileName = &sStartSigningJobRequest_profileName
+var StartSigningJobRequest_clientRequestToken = &sStartSigningJobRequest_clientRequestToken
+var StartSigningJobRequest_profileOwner = &sStartSigningJobRequest_profileOwner
+
+var StartSigningJobResponse = &sStartSigningJobResponse
+var StartSigningJobResponse_jobId = &sStartSigningJobResponse_jobId
+var StartSigningJobResponse_jobOwner = &sStartSigningJobResponse_jobOwner
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_resourceArn = &sTagResourceRequest_resourceArn
+var TagResourceRequest_tags = &sTagResourceRequest_tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_resourceArn = &sUntagResourceRequest_resourceArn
+var UntagResourceRequest_tagKeys = &sUntagResourceRequest_tagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var WallabyService = &smithy.ServiceSchema{Schema: &s_WallabyService, Version: "2017-08-25"}

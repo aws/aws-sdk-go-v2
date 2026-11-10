@@ -4,6178 +4,4347 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CancelTrainedModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "CancelTrainedModel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
-	URI:  "/memberships/{membershipIdentifier}/trained-models/{trainedModelArn}",
-	Code: 200})
+var (
+	iCancelTrainedModel                                            = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "CancelTrainedModel"}
+	iCancelTrainedModelInferenceJob                                = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "CancelTrainedModelInferenceJob"}
+	iCreateAudienceModel                                           = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "CreateAudienceModel"}
+	iCreateConfiguredAudienceModel                                 = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "CreateConfiguredAudienceModel"}
+	iCreateConfiguredModelAlgorithm                                = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "CreateConfiguredModelAlgorithm"}
+	iCreateConfiguredModelAlgorithmAssociation                     = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "CreateConfiguredModelAlgorithmAssociation"}
+	iCreateMLInputChannel                                          = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "CreateMLInputChannel"}
+	iCreateTrainedModel                                            = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "CreateTrainedModel"}
+	iCreateTrainingDataset                                         = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "CreateTrainingDataset"}
+	iDeleteAudienceGenerationJob                                   = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "DeleteAudienceGenerationJob"}
+	iDeleteAudienceModel                                           = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "DeleteAudienceModel"}
+	iDeleteConfiguredAudienceModel                                 = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "DeleteConfiguredAudienceModel"}
+	iDeleteConfiguredAudienceModelPolicy                           = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "DeleteConfiguredAudienceModelPolicy"}
+	iDeleteConfiguredModelAlgorithm                                = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "DeleteConfiguredModelAlgorithm"}
+	iDeleteConfiguredModelAlgorithmAssociation                     = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "DeleteConfiguredModelAlgorithmAssociation"}
+	iDeleteMLConfiguration                                         = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "DeleteMLConfiguration"}
+	iDeleteMLInputChannelData                                      = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "DeleteMLInputChannelData"}
+	iDeleteTrainedModelOutput                                      = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "DeleteTrainedModelOutput"}
+	iDeleteTrainingDataset                                         = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "DeleteTrainingDataset"}
+	iGetAudienceGenerationJob                                      = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "GetAudienceGenerationJob"}
+	iGetAudienceModel                                              = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "GetAudienceModel"}
+	iGetCollaborationConfiguredModelAlgorithmAssociation           = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "GetCollaborationConfiguredModelAlgorithmAssociation"}
+	iGetCollaborationMLInputChannel                                = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "GetCollaborationMLInputChannel"}
+	iGetCollaborationTrainedModel                                  = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "GetCollaborationTrainedModel"}
+	iGetConfiguredAudienceModel                                    = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "GetConfiguredAudienceModel"}
+	iGetConfiguredAudienceModelPolicy                              = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "GetConfiguredAudienceModelPolicy"}
+	iGetConfiguredModelAlgorithm                                   = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "GetConfiguredModelAlgorithm"}
+	iGetConfiguredModelAlgorithmAssociation                        = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "GetConfiguredModelAlgorithmAssociation"}
+	iGetMLConfiguration                                            = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "GetMLConfiguration"}
+	iGetMLInputChannel                                             = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "GetMLInputChannel"}
+	iGetTrainedModel                                               = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "GetTrainedModel"}
+	iGetTrainedModelInferenceJob                                   = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "GetTrainedModelInferenceJob"}
+	iGetTrainingDataset                                            = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "GetTrainingDataset"}
+	iListAudienceExportJobs                                        = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListAudienceExportJobs"}
+	iListAudienceGenerationJobs                                    = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListAudienceGenerationJobs"}
+	iListAudienceModels                                            = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListAudienceModels"}
+	iListCollaborationConfiguredModelAlgorithmAssociations         = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListCollaborationConfiguredModelAlgorithmAssociations"}
+	iListCollaborationMLInputChannels                              = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListCollaborationMLInputChannels"}
+	iListCollaborationTrainedModelExportJobs                       = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListCollaborationTrainedModelExportJobs"}
+	iListCollaborationTrainedModelInferenceJobs                    = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListCollaborationTrainedModelInferenceJobs"}
+	iListCollaborationTrainedModels                                = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListCollaborationTrainedModels"}
+	iListConfiguredAudienceModels                                  = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListConfiguredAudienceModels"}
+	iListConfiguredModelAlgorithmAssociations                      = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListConfiguredModelAlgorithmAssociations"}
+	iListConfiguredModelAlgorithms                                 = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListConfiguredModelAlgorithms"}
+	iListMLInputChannels                                           = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListMLInputChannels"}
+	iListTagsForResource                                           = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListTagsForResource"}
+	iListTrainedModelInferenceJobs                                 = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListTrainedModelInferenceJobs"}
+	iListTrainedModels                                             = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListTrainedModels"}
+	iListTrainedModelVersions                                      = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListTrainedModelVersions"}
+	iListTrainingDatasets                                          = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListTrainingDatasets"}
+	iPutConfiguredAudienceModelPolicy                              = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "PutConfiguredAudienceModelPolicy"}
+	iPutMLConfiguration                                            = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "PutMLConfiguration"}
+	iStartAudienceExportJob                                        = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "StartAudienceExportJob"}
+	iStartAudienceGenerationJob                                    = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "StartAudienceGenerationJob"}
+	iStartTrainedModelExportJob                                    = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "StartTrainedModelExportJob"}
+	iStartTrainedModelInferenceJob                                 = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "StartTrainedModelInferenceJob"}
+	iTagResource                                                   = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "TagResource"}
+	iUntagResource                                                 = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "UntagResource"}
+	iUpdateConfiguredAudienceModel                                 = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "UpdateConfiguredAudienceModel"}
+	i_AWSStarkControlService                                       = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "AWSStarkControlService"}
+	iAccessBudget                                                  = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "AccessBudget"}
+	iAccessBudgetDetails                                           = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "AccessBudgetDetails"}
+	i_AccessBudgetDetailsList                                      = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "AccessBudgetDetailsList"}
+	i_AccessBudgets                                                = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "AccessBudgets"}
+	iAccessBudgetType                                              = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "AccessBudgetType"}
+	iAccessDeniedException                                         = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "AccessDeniedException"}
+	i_AccountId                                                    = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "AccountId"}
+	i_AccountIdList                                                = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "AccountIdList"}
+	i_AlgorithmImage                                               = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "AlgorithmImage"}
+	i_AnalysisTemplateArn                                          = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "AnalysisTemplateArn"}
+	iAudienceDestination                                           = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "AudienceDestination"}
+	i_AudienceExportJobList                                        = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "AudienceExportJobList"}
+	iAudienceExportJobStatus                                       = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "AudienceExportJobStatus"}
+	iAudienceExportJobSummary                                      = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "AudienceExportJobSummary"}
+	i_AudienceGenerationJobArn                                     = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "AudienceGenerationJobArn"}
+	iAudienceGenerationJobDataSource                               = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "AudienceGenerationJobDataSource"}
+	i_AudienceGenerationJobList                                    = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "AudienceGenerationJobList"}
+	iAudienceGenerationJobStatus                                   = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "AudienceGenerationJobStatus"}
+	iAudienceGenerationJobSummary                                  = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "AudienceGenerationJobSummary"}
+	i_AudienceModelArn                                             = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "AudienceModelArn"}
+	i_AudienceModelList                                            = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "AudienceModelList"}
+	iAudienceModelStatus                                           = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "AudienceModelStatus"}
+	iAudienceModelSummary                                          = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "AudienceModelSummary"}
+	iAudienceQualityMetrics                                        = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "AudienceQualityMetrics"}
+	iAudienceSize                                                  = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "AudienceSize"}
+	i_AudienceSizeBins                                             = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "AudienceSizeBins"}
+	iAudienceSizeConfig                                            = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "AudienceSizeConfig"}
+	iAudienceSizeType                                              = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "AudienceSizeType"}
+	i_AudienceSizeValue                                            = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "AudienceSizeValue"}
+	iAutoRefreshMode                                               = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "AutoRefreshMode"}
+	i_Budget                                                       = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "Budget"}
+	i_BudgetedResourceArn                                          = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "BudgetedResourceArn"}
+	i_CollaborationConfiguredModelAlgorithmAssociationList         = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "CollaborationConfiguredModelAlgorithmAssociationList"}
+	iCollaborationConfiguredModelAlgorithmAssociationSummary       = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "CollaborationConfiguredModelAlgorithmAssociationSummary"}
+	i_CollaborationMLInputChannelsList                             = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "CollaborationMLInputChannelsList"}
+	iCollaborationMLInputChannelSummary                            = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "CollaborationMLInputChannelSummary"}
+	i_CollaborationTrainedModelExportJobList                       = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "CollaborationTrainedModelExportJobList"}
+	iCollaborationTrainedModelExportJobSummary                     = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "CollaborationTrainedModelExportJobSummary"}
+	i_CollaborationTrainedModelInferenceJobList                    = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "CollaborationTrainedModelInferenceJobList"}
+	iCollaborationTrainedModelInferenceJobSummary                  = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "CollaborationTrainedModelInferenceJobSummary"}
+	i_CollaborationTrainedModelList                                = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "CollaborationTrainedModelList"}
+	iCollaborationTrainedModelSummary                              = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "CollaborationTrainedModelSummary"}
+	iColumnClassificationDetails                                   = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ColumnClassificationDetails"}
+	i_ColumnMappingList                                            = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ColumnMappingList"}
+	i_ColumnName                                                   = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ColumnName"}
+	iColumnSchema                                                  = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ColumnSchema"}
+	iColumnType                                                    = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ColumnType"}
+	i_ColumnTypeList                                               = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ColumnTypeList"}
+	iComputeConfiguration                                          = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ComputeConfiguration"}
+	i_ConfiguredAudienceModelArn                                   = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ConfiguredAudienceModelArn"}
+	i_ConfiguredAudienceModelList                                  = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ConfiguredAudienceModelList"}
+	iConfiguredAudienceModelOutputConfig                           = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ConfiguredAudienceModelOutputConfig"}
+	iConfiguredAudienceModelStatus                                 = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ConfiguredAudienceModelStatus"}
+	iConfiguredAudienceModelSummary                                = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ConfiguredAudienceModelSummary"}
+	i_ConfiguredModelAlgorithmArn                                  = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ConfiguredModelAlgorithmArn"}
+	i_ConfiguredModelAlgorithmAssociationArn                       = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ConfiguredModelAlgorithmAssociationArn"}
+	i_ConfiguredModelAlgorithmAssociationArnList                   = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ConfiguredModelAlgorithmAssociationArnList"}
+	i_ConfiguredModelAlgorithmAssociationList                      = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ConfiguredModelAlgorithmAssociationList"}
+	iConfiguredModelAlgorithmAssociationSummary                    = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ConfiguredModelAlgorithmAssociationSummary"}
+	i_ConfiguredModelAlgorithmList                                 = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ConfiguredModelAlgorithmList"}
+	iConfiguredModelAlgorithmSummary                               = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ConfiguredModelAlgorithmSummary"}
+	iConflictException                                             = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ConflictException"}
+	i_ContainerArgument                                            = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ContainerArgument"}
+	i_ContainerArguments                                           = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ContainerArguments"}
+	iContainerConfig                                               = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ContainerConfig"}
+	i_ContainerEntrypoint                                          = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ContainerEntrypoint"}
+	i_ContainerEntrypointString                                    = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ContainerEntrypointString"}
+	i_CustomDataIdentifier                                         = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "CustomDataIdentifier"}
+	i_CustomDataIdentifierList                                     = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "CustomDataIdentifierList"}
+	iCustomEntityConfig                                            = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "CustomEntityConfig"}
+	iDataPrivacyScores                                             = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "DataPrivacyScores"}
+	iDataset                                                       = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "Dataset"}
+	iDatasetInputConfig                                            = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "DatasetInputConfig"}
+	i_DatasetList                                                  = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "DatasetList"}
+	i_DatasetSchemaList                                            = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "DatasetSchemaList"}
+	iDatasetType                                                   = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "DatasetType"}
+	iDataSource                                                    = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "DataSource"}
+	iDestination                                                   = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "Destination"}
+	iEntityType                                                    = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "EntityType"}
+	i_EntityTypeList                                               = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "EntityTypeList"}
+	i_Environment                                                  = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "Environment"}
+	i_GlueDatabaseName                                             = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "GlueDatabaseName"}
+	iGlueDataSource                                                = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "GlueDataSource"}
+	i_GlueTableName                                                = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "GlueTableName"}
+	i_Hash                                                         = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "Hash"}
+	i_HyperParameters                                              = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "HyperParameters"}
+	i_IamRoleArn                                                   = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "IamRoleArn"}
+	iIncrementalTrainingDataChannel                                = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "IncrementalTrainingDataChannel"}
+	iIncrementalTrainingDataChannelOutput                          = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "IncrementalTrainingDataChannelOutput"}
+	i_IncrementalTrainingDataChannels                              = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "IncrementalTrainingDataChannels"}
+	i_IncrementalTrainingDataChannelsOutput                        = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "IncrementalTrainingDataChannelsOutput"}
+	iInferenceContainerConfig                                      = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "InferenceContainerConfig"}
+	iInferenceContainerExecutionParameters                         = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "InferenceContainerExecutionParameters"}
+	i_InferenceEnvironmentMap                                      = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "InferenceEnvironmentMap"}
+	iInferenceInstanceType                                         = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "InferenceInstanceType"}
+	iInferenceOutputConfiguration                                  = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "InferenceOutputConfiguration"}
+	iInferenceReceiverMember                                       = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "InferenceReceiverMember"}
+	i_InferenceReceiverMembers                                     = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "InferenceReceiverMembers"}
+	iInferenceResourceConfig                                       = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "InferenceResourceConfig"}
+	iInputChannel                                                  = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "InputChannel"}
+	iInputChannelDataSource                                        = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "InputChannelDataSource"}
+	iInstanceType                                                  = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "InstanceType"}
+	iInternalServiceException                                      = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "InternalServiceException"}
+	i_KmsKeyArn                                                    = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "KmsKeyArn"}
+	iLogRedactionConfiguration                                     = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "LogRedactionConfiguration"}
+	iLogsConfigurationPolicy                                       = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "LogsConfigurationPolicy"}
+	i_LogsConfigurationPolicyList                                  = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "LogsConfigurationPolicyList"}
+	iLogsStatus                                                    = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "LogsStatus"}
+	iLogType                                                       = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "LogType"}
+	i_MaxResults                                                   = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "MaxResults"}
+	iMembershipInferenceAttackScore                                = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "MembershipInferenceAttackScore"}
+	i_MembershipInferenceAttackScoreList                           = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "MembershipInferenceAttackScoreList"}
+	iMembershipInferenceAttackVersion                              = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "MembershipInferenceAttackVersion"}
+	iMetricDefinition                                              = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "MetricDefinition"}
+	i_MetricDefinitionList                                         = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "MetricDefinitionList"}
+	i_MetricName                                                   = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "MetricName"}
+	i_MetricRegex                                                  = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "MetricRegex"}
+	iMetricsConfigurationPolicy                                    = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "MetricsConfigurationPolicy"}
+	i_MetricsList                                                  = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "MetricsList"}
+	iMetricsStatus                                                 = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "MetricsStatus"}
+	i_MinMatchingSeedSize                                          = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "MinMatchingSeedSize"}
+	i_MLInputChannelArn                                            = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "MLInputChannelArn"}
+	i_MLInputChannelsList                                          = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "MLInputChannelsList"}
+	iMLInputChannelStatus                                          = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "MLInputChannelStatus"}
+	iMLInputChannelSummary                                         = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "MLInputChannelSummary"}
+	iMLOutputConfiguration                                         = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "MLOutputConfiguration"}
+	iMLSyntheticDataParameters                                     = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "MLSyntheticDataParameters"}
+	iModelInferenceDataSource                                      = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ModelInferenceDataSource"}
+	iModelTrainingDataChannel                                      = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ModelTrainingDataChannel"}
+	i_ModelTrainingDataChannelName                                 = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ModelTrainingDataChannelName"}
+	i_ModelTrainingDataChannels                                    = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ModelTrainingDataChannels"}
+	i_NameString                                                   = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "NameString"}
+	i_NextToken                                                    = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "NextToken"}
+	iNoiseLevelType                                                = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "NoiseLevelType"}
+	i_ParameterMap                                                 = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ParameterMap"}
+	i_ParameterName                                                = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ParameterName"}
+	i_ParameterValue                                               = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ParameterValue"}
+	iPayerConfiguration                                            = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "PayerConfiguration"}
+	iPolicyExistenceCondition                                      = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "PolicyExistenceCondition"}
+	iPrivacyBudgets                                                = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "PrivacyBudgets"}
+	iPrivacyConfiguration                                          = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "PrivacyConfiguration"}
+	iPrivacyConfigurationPolicies                                  = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "PrivacyConfigurationPolicies"}
+	iProtectedQueryInputParameters                                 = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ProtectedQueryInputParameters"}
+	iProtectedQuerySQLParameters                                   = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ProtectedQuerySQLParameters"}
+	iRelevanceMetric                                               = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "RelevanceMetric"}
+	i_RelevanceMetrics                                             = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "RelevanceMetrics"}
+	iResourceConfig                                                = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ResourceConfig"}
+	i_ResourceDescription                                          = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ResourceDescription"}
+	iResourceNotFoundException                                     = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ResourceNotFoundException"}
+	i_ResourcePolicy                                               = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ResourcePolicy"}
+	iResultFormat                                                  = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ResultFormat"}
+	iS3ConfigMap                                                   = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "S3ConfigMap"}
+	iS3DataDistributionType                                        = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "S3DataDistributionType"}
+	i_S3Path                                                       = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "S3Path"}
+	iServiceQuotaExceededException                                 = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ServiceQuotaExceededException"}
+	iSharedAudienceMetrics                                         = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "SharedAudienceMetrics"}
+	i_SparkProperties                                              = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "SparkProperties"}
+	i_SparkPropertyKey                                             = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "SparkPropertyKey"}
+	i_SparkPropertyValue                                           = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "SparkPropertyValue"}
+	iStatusDetails                                                 = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "StatusDetails"}
+	iStoppingCondition                                             = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "StoppingCondition"}
+	i_SyntheticDataColumnName                                      = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "SyntheticDataColumnName"}
+	iSyntheticDataColumnProperties                                 = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "SyntheticDataColumnProperties"}
+	iSyntheticDataColumnType                                       = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "SyntheticDataColumnType"}
+	iSyntheticDataConfiguration                                    = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "SyntheticDataConfiguration"}
+	iSyntheticDataEvaluationScores                                 = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "SyntheticDataEvaluationScores"}
+	i_TaggableArn                                                  = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "TaggableArn"}
+	i_TagKey                                                       = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "TagKey"}
+	i_TagKeys                                                      = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "TagKeys"}
+	i_TagMap                                                       = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "TagMap"}
+	iTagOnCreatePolicy                                             = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "TagOnCreatePolicy"}
+	i_TagValue                                                     = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "TagValue"}
+	iThrottlingException                                           = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ThrottlingException"}
+	i_TrainedModelArn                                              = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "TrainedModelArn"}
+	iTrainedModelArtifactMaxSize                                   = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "TrainedModelArtifactMaxSize"}
+	iTrainedModelArtifactMaxSizeUnitType                           = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "TrainedModelArtifactMaxSizeUnitType"}
+	i_TrainedModelArtifactMaxSizeValue                             = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "TrainedModelArtifactMaxSizeValue"}
+	iTrainedModelExportFileType                                    = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "TrainedModelExportFileType"}
+	i_TrainedModelExportFileTypeList                               = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "TrainedModelExportFileTypeList"}
+	iTrainedModelExportJobStatus                                   = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "TrainedModelExportJobStatus"}
+	iTrainedModelExportOutputConfiguration                         = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "TrainedModelExportOutputConfiguration"}
+	iTrainedModelExportReceiverMember                              = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "TrainedModelExportReceiverMember"}
+	i_TrainedModelExportReceiverMembers                            = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "TrainedModelExportReceiverMembers"}
+	iTrainedModelExportsConfigurationPolicy                        = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "TrainedModelExportsConfigurationPolicy"}
+	iTrainedModelExportsMaxSize                                    = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "TrainedModelExportsMaxSize"}
+	iTrainedModelExportsMaxSizeUnitType                            = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "TrainedModelExportsMaxSizeUnitType"}
+	i_TrainedModelExportsMaxSizeValue                              = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "TrainedModelExportsMaxSizeValue"}
+	i_TrainedModelInferenceJobArn                                  = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "TrainedModelInferenceJobArn"}
+	i_TrainedModelInferenceJobList                                 = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "TrainedModelInferenceJobList"}
+	iTrainedModelInferenceJobsConfigurationPolicy                  = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "TrainedModelInferenceJobsConfigurationPolicy"}
+	iTrainedModelInferenceJobStatus                                = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "TrainedModelInferenceJobStatus"}
+	iTrainedModelInferenceJobSummary                               = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "TrainedModelInferenceJobSummary"}
+	iTrainedModelInferenceMaxOutputSize                            = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "TrainedModelInferenceMaxOutputSize"}
+	iTrainedModelInferenceMaxOutputSizeUnitType                    = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "TrainedModelInferenceMaxOutputSizeUnitType"}
+	i_TrainedModelInferenceMaxOutputSizeValue                      = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "TrainedModelInferenceMaxOutputSizeValue"}
+	i_TrainedModelList                                             = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "TrainedModelList"}
+	iTrainedModelsConfigurationPolicy                              = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "TrainedModelsConfigurationPolicy"}
+	iTrainedModelStatus                                            = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "TrainedModelStatus"}
+	iTrainedModelSummary                                           = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "TrainedModelSummary"}
+	i_TrainingDatasetArn                                           = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "TrainingDatasetArn"}
+	i_TrainingDatasetList                                          = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "TrainingDatasetList"}
+	iTrainingDatasetStatus                                         = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "TrainingDatasetStatus"}
+	iTrainingDatasetSummary                                        = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "TrainingDatasetSummary"}
+	iTrainingInputMode                                             = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "TrainingInputMode"}
+	i_UUID                                                         = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "UUID"}
+	iValidationException                                           = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ValidationException"}
+	iWorkerComputeConfiguration                                    = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "WorkerComputeConfiguration"}
+	iWorkerComputeConfigurationProperties                          = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "WorkerComputeConfigurationProperties"}
+	iWorkerComputeType                                             = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "WorkerComputeType"}
+	iCancelTrainedModelInferenceJobRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "CancelTrainedModelInferenceJobRequest"}
+	iCancelTrainedModelRequest                                     = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "CancelTrainedModelRequest"}
+	iCreateAudienceModelRequest                                    = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "CreateAudienceModelRequest"}
+	iCreateAudienceModelResponse                                   = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "CreateAudienceModelResponse"}
+	iCreateConfiguredAudienceModelRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "CreateConfiguredAudienceModelRequest"}
+	iCreateConfiguredAudienceModelResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "CreateConfiguredAudienceModelResponse"}
+	iCreateConfiguredModelAlgorithmAssociationRequest              = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "CreateConfiguredModelAlgorithmAssociationRequest"}
+	iCreateConfiguredModelAlgorithmAssociationResponse             = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "CreateConfiguredModelAlgorithmAssociationResponse"}
+	iCreateConfiguredModelAlgorithmRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "CreateConfiguredModelAlgorithmRequest"}
+	iCreateConfiguredModelAlgorithmResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "CreateConfiguredModelAlgorithmResponse"}
+	iCreateMLInputChannelRequest                                   = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "CreateMLInputChannelRequest"}
+	iCreateMLInputChannelResponse                                  = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "CreateMLInputChannelResponse"}
+	iCreateTrainedModelRequest                                     = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "CreateTrainedModelRequest"}
+	iCreateTrainedModelResponse                                    = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "CreateTrainedModelResponse"}
+	iCreateTrainingDatasetRequest                                  = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "CreateTrainingDatasetRequest"}
+	iCreateTrainingDatasetResponse                                 = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "CreateTrainingDatasetResponse"}
+	iDeleteAudienceGenerationJobRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "DeleteAudienceGenerationJobRequest"}
+	iDeleteAudienceModelRequest                                    = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "DeleteAudienceModelRequest"}
+	iDeleteConfiguredAudienceModelRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "DeleteConfiguredAudienceModelRequest"}
+	iDeleteConfiguredAudienceModelPolicyRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "DeleteConfiguredAudienceModelPolicyRequest"}
+	iDeleteConfiguredModelAlgorithmAssociationRequest              = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "DeleteConfiguredModelAlgorithmAssociationRequest"}
+	iDeleteConfiguredModelAlgorithmRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "DeleteConfiguredModelAlgorithmRequest"}
+	iDeleteMLConfigurationRequest                                  = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "DeleteMLConfigurationRequest"}
+	iDeleteMLInputChannelDataRequest                               = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "DeleteMLInputChannelDataRequest"}
+	iDeleteTrainedModelOutputRequest                               = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "DeleteTrainedModelOutputRequest"}
+	iDeleteTrainingDatasetRequest                                  = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "DeleteTrainingDatasetRequest"}
+	iGetAudienceGenerationJobRequest                               = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "GetAudienceGenerationJobRequest"}
+	iGetAudienceGenerationJobResponse                              = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "GetAudienceGenerationJobResponse"}
+	iGetAudienceModelRequest                                       = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "GetAudienceModelRequest"}
+	iGetAudienceModelResponse                                      = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "GetAudienceModelResponse"}
+	iGetCollaborationConfiguredModelAlgorithmAssociationRequest    = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "GetCollaborationConfiguredModelAlgorithmAssociationRequest"}
+	iGetCollaborationConfiguredModelAlgorithmAssociationResponse   = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "GetCollaborationConfiguredModelAlgorithmAssociationResponse"}
+	iGetCollaborationMLInputChannelRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "GetCollaborationMLInputChannelRequest"}
+	iGetCollaborationMLInputChannelResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "GetCollaborationMLInputChannelResponse"}
+	iGetCollaborationTrainedModelRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "GetCollaborationTrainedModelRequest"}
+	iGetCollaborationTrainedModelResponse                          = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "GetCollaborationTrainedModelResponse"}
+	iGetConfiguredAudienceModelRequest                             = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "GetConfiguredAudienceModelRequest"}
+	iGetConfiguredAudienceModelResponse                            = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "GetConfiguredAudienceModelResponse"}
+	iGetConfiguredAudienceModelPolicyRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "GetConfiguredAudienceModelPolicyRequest"}
+	iGetConfiguredAudienceModelPolicyResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "GetConfiguredAudienceModelPolicyResponse"}
+	iGetConfiguredModelAlgorithmAssociationRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "GetConfiguredModelAlgorithmAssociationRequest"}
+	iGetConfiguredModelAlgorithmAssociationResponse                = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "GetConfiguredModelAlgorithmAssociationResponse"}
+	iGetConfiguredModelAlgorithmRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "GetConfiguredModelAlgorithmRequest"}
+	iGetConfiguredModelAlgorithmResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "GetConfiguredModelAlgorithmResponse"}
+	iGetMLConfigurationRequest                                     = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "GetMLConfigurationRequest"}
+	iGetMLConfigurationResponse                                    = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "GetMLConfigurationResponse"}
+	iGetMLInputChannelRequest                                      = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "GetMLInputChannelRequest"}
+	iGetMLInputChannelResponse                                     = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "GetMLInputChannelResponse"}
+	iGetTrainedModelInferenceJobRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "GetTrainedModelInferenceJobRequest"}
+	iGetTrainedModelInferenceJobResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "GetTrainedModelInferenceJobResponse"}
+	iGetTrainedModelRequest                                        = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "GetTrainedModelRequest"}
+	iGetTrainedModelResponse                                       = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "GetTrainedModelResponse"}
+	iGetTrainingDatasetRequest                                     = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "GetTrainingDatasetRequest"}
+	iGetTrainingDatasetResponse                                    = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "GetTrainingDatasetResponse"}
+	iListAudienceExportJobsRequest                                 = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListAudienceExportJobsRequest"}
+	iListAudienceExportJobsResponse                                = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListAudienceExportJobsResponse"}
+	iListAudienceGenerationJobsRequest                             = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListAudienceGenerationJobsRequest"}
+	iListAudienceGenerationJobsResponse                            = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListAudienceGenerationJobsResponse"}
+	iListAudienceModelsRequest                                     = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListAudienceModelsRequest"}
+	iListAudienceModelsResponse                                    = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListAudienceModelsResponse"}
+	iListCollaborationConfiguredModelAlgorithmAssociationsRequest  = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListCollaborationConfiguredModelAlgorithmAssociationsRequest"}
+	iListCollaborationConfiguredModelAlgorithmAssociationsResponse = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListCollaborationConfiguredModelAlgorithmAssociationsResponse"}
+	iListCollaborationMLInputChannelsRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListCollaborationMLInputChannelsRequest"}
+	iListCollaborationMLInputChannelsResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListCollaborationMLInputChannelsResponse"}
+	iListCollaborationTrainedModelExportJobsRequest                = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListCollaborationTrainedModelExportJobsRequest"}
+	iListCollaborationTrainedModelExportJobsResponse               = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListCollaborationTrainedModelExportJobsResponse"}
+	iListCollaborationTrainedModelInferenceJobsRequest             = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListCollaborationTrainedModelInferenceJobsRequest"}
+	iListCollaborationTrainedModelInferenceJobsResponse            = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListCollaborationTrainedModelInferenceJobsResponse"}
+	iListCollaborationTrainedModelsRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListCollaborationTrainedModelsRequest"}
+	iListCollaborationTrainedModelsResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListCollaborationTrainedModelsResponse"}
+	iListConfiguredAudienceModelsRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListConfiguredAudienceModelsRequest"}
+	iListConfiguredAudienceModelsResponse                          = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListConfiguredAudienceModelsResponse"}
+	iListConfiguredModelAlgorithmAssociationsRequest               = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListConfiguredModelAlgorithmAssociationsRequest"}
+	iListConfiguredModelAlgorithmAssociationsResponse              = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListConfiguredModelAlgorithmAssociationsResponse"}
+	iListConfiguredModelAlgorithmsRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListConfiguredModelAlgorithmsRequest"}
+	iListConfiguredModelAlgorithmsResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListConfiguredModelAlgorithmsResponse"}
+	iListMLInputChannelsRequest                                    = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListMLInputChannelsRequest"}
+	iListMLInputChannelsResponse                                   = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListMLInputChannelsResponse"}
+	iListTagsForResourceRequest                                    = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse                                   = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListTagsForResourceResponse"}
+	iListTrainedModelInferenceJobsRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListTrainedModelInferenceJobsRequest"}
+	iListTrainedModelInferenceJobsResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListTrainedModelInferenceJobsResponse"}
+	iListTrainedModelsRequest                                      = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListTrainedModelsRequest"}
+	iListTrainedModelsResponse                                     = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListTrainedModelsResponse"}
+	iListTrainedModelVersionsRequest                               = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListTrainedModelVersionsRequest"}
+	iListTrainedModelVersionsResponse                              = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListTrainedModelVersionsResponse"}
+	iListTrainingDatasetsRequest                                   = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListTrainingDatasetsRequest"}
+	iListTrainingDatasetsResponse                                  = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "ListTrainingDatasetsResponse"}
+	iPutConfiguredAudienceModelPolicyRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "PutConfiguredAudienceModelPolicyRequest"}
+	iPutConfiguredAudienceModelPolicyResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "PutConfiguredAudienceModelPolicyResponse"}
+	iPutMLConfigurationRequest                                     = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "PutMLConfigurationRequest"}
+	iStartAudienceExportJobRequest                                 = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "StartAudienceExportJobRequest"}
+	iStartAudienceGenerationJobRequest                             = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "StartAudienceGenerationJobRequest"}
+	iStartAudienceGenerationJobResponse                            = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "StartAudienceGenerationJobResponse"}
+	iStartTrainedModelExportJobRequest                             = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "StartTrainedModelExportJobRequest"}
+	iStartTrainedModelInferenceJobRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "StartTrainedModelInferenceJobRequest"}
+	iStartTrainedModelInferenceJobResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "StartTrainedModelInferenceJobResponse"}
+	iTagResourceRequest                                            = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "TagResourceRequest"}
+	iTagResourceResponse                                           = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "TagResourceResponse"}
+	iUntagResourceRequest                                          = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                                         = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "UntagResourceResponse"}
+	iUpdateConfiguredAudienceModelRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "UpdateConfiguredAudienceModelRequest"}
+	iUpdateConfiguredAudienceModelResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.cleanroomsml", Name: "UpdateConfiguredAudienceModelResponse"}
+	pTimestamp                                                     = smithy.ShapeID{Namespace: "smithy.api", Name: "Timestamp"}
+	pUnit                                                          = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+	pString                                                        = smithy.ShapeID{Namespace: "smithy.api", Name: "String"}
+	pDouble                                                        = smithy.ShapeID{Namespace: "smithy.api", Name: "Double"}
+	pInteger                                                       = smithy.ShapeID{Namespace: "smithy.api", Name: "Integer"}
+	pBoolean                                                       = smithy.ShapeID{Namespace: "smithy.api", Name: "Boolean"}
+	pLong                                                          = smithy.ShapeID{Namespace: "smithy.api", Name: "Long"}
+)
 
-var CancelTrainedModelInferenceJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "CancelTrainedModelInferenceJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
+	URI:  "/memberships/{membershipIdentifier}/trained-models/{trainedModelArn}",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/memberships/{membershipIdentifier}/trained-model-inference-jobs/{trainedModelInferenceJobArn}",
-	Code: 200})
-
-var CreateAudienceModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "CreateAudienceModel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/audience-model",
-	Code: 200})
-
-var CreateConfiguredAudienceModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "CreateConfiguredAudienceModel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/configured-audience-model",
-	Code: 200})
-
-var CreateConfiguredModelAlgorithm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "CreateConfiguredModelAlgorithm",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/configured-model-algorithms",
-	Code: 200})
-
-var CreateConfiguredModelAlgorithmAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "CreateConfiguredModelAlgorithmAssociation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/memberships/{membershipIdentifier}/configured-model-algorithm-associations",
-	Code: 200})
-
-var CreateMLInputChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "CreateMLInputChannel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/memberships/{membershipIdentifier}/ml-input-channels",
-	Code: 200})
-
-var CreateTrainedModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "CreateTrainedModel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/memberships/{membershipIdentifier}/trained-models",
-	Code: 200})
-
-var CreateTrainingDataset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "CreateTrainingDataset",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/training-dataset",
-	Code: 200})
-
-var DeleteAudienceGenerationJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "DeleteAudienceGenerationJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/audience-generation-job/{audienceGenerationJobArn}",
-	Code: 200})
-
-var DeleteAudienceModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "DeleteAudienceModel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/audience-model/{audienceModelArn}",
-	Code: 200})
-
-var DeleteConfiguredAudienceModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "DeleteConfiguredAudienceModel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/configured-audience-model/{configuredAudienceModelArn}",
-	Code: 200})
-
-var DeleteConfiguredAudienceModelPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "DeleteConfiguredAudienceModelPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/configured-audience-model/{configuredAudienceModelArn}/policy",
-	Code: 200})
-
-var DeleteConfiguredModelAlgorithm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "DeleteConfiguredModelAlgorithm",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/configured-model-algorithms/{configuredModelAlgorithmArn}",
-	Code: 200})
-
-var DeleteConfiguredModelAlgorithmAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "DeleteConfiguredModelAlgorithmAssociation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/memberships/{membershipIdentifier}/configured-model-algorithm-associations/{configuredModelAlgorithmAssociationArn}",
-	Code: 200})
-
-var DeleteMLConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "DeleteMLConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/memberships/{membershipIdentifier}/ml-configurations",
-	Code: 200})
-
-var DeleteMLInputChannelData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "DeleteMLInputChannelData",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/memberships/{membershipIdentifier}/ml-input-channels/{mlInputChannelArn}",
-	Code: 200})
-
-var DeleteTrainedModelOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "DeleteTrainedModelOutput",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/memberships/{membershipIdentifier}/trained-models/{trainedModelArn}",
-	Code: 200})
-
-var DeleteTrainingDataset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "DeleteTrainingDataset",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/training-dataset/{trainingDatasetArn}",
-	Code: 200})
-
-var GetAudienceGenerationJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "GetAudienceGenerationJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/audience-generation-job/{audienceGenerationJobArn}",
-	Code: 200})
-
-var GetAudienceModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "GetAudienceModel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/audience-model/{audienceModelArn}",
-	Code: 200})
-
-var GetCollaborationConfiguredModelAlgorithmAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "GetCollaborationConfiguredModelAlgorithmAssociation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/collaborations/{collaborationIdentifier}/configured-model-algorithm-associations/{configuredModelAlgorithmAssociationArn}",
-	Code: 200})
-
-var GetCollaborationMLInputChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "GetCollaborationMLInputChannel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/collaborations/{collaborationIdentifier}/ml-input-channels/{mlInputChannelArn}",
-	Code: 200})
-
-var GetCollaborationTrainedModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "GetCollaborationTrainedModel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/collaborations/{collaborationIdentifier}/trained-models/{trainedModelArn}",
-	Code: 200})
-
-var GetConfiguredAudienceModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "GetConfiguredAudienceModel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/configured-audience-model/{configuredAudienceModelArn}",
-	Code: 200})
-
-var GetConfiguredAudienceModelPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "GetConfiguredAudienceModelPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/configured-audience-model/{configuredAudienceModelArn}/policy",
-	Code: 200})
-
-var GetConfiguredModelAlgorithm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "GetConfiguredModelAlgorithm",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/configured-model-algorithms/{configuredModelAlgorithmArn}",
-	Code: 200})
-
-var GetConfiguredModelAlgorithmAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "GetConfiguredModelAlgorithmAssociation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/memberships/{membershipIdentifier}/configured-model-algorithm-associations/{configuredModelAlgorithmAssociationArn}",
-	Code: 200})
-
-var GetMLConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "GetMLConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/memberships/{membershipIdentifier}/ml-configurations",
-	Code: 200})
-
-var GetMLInputChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "GetMLInputChannel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/memberships/{membershipIdentifier}/ml-input-channels/{mlInputChannelArn}",
-	Code: 200})
-
-var GetTrainedModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "GetTrainedModel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/memberships/{membershipIdentifier}/trained-models/{trainedModelArn}",
-	Code: 200})
-
-var GetTrainedModelInferenceJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "GetTrainedModelInferenceJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/memberships/{membershipIdentifier}/trained-model-inference-jobs/{trainedModelInferenceJobArn}",
-	Code: 200})
-
-var GetTrainingDataset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "GetTrainingDataset",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/training-dataset/{trainingDatasetArn}",
-	Code: 200})
-
-var ListAudienceExportJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListAudienceExportJobs",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/audience-export-job",
-	Code: 200})
-
-var ListAudienceGenerationJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListAudienceGenerationJobs",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/audience-generation-job",
-	Code: 200})
-
-var ListAudienceModels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListAudienceModels",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/audience-model",
-	Code: 200})
-
-var ListCollaborationConfiguredModelAlgorithmAssociations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListCollaborationConfiguredModelAlgorithmAssociations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/collaborations/{collaborationIdentifier}/configured-model-algorithm-associations",
-	Code: 200})
-
-var ListCollaborationMLInputChannels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListCollaborationMLInputChannels",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/collaborations/{collaborationIdentifier}/ml-input-channels",
-	Code: 200})
-
-var ListCollaborationTrainedModelExportJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListCollaborationTrainedModelExportJobs",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/collaborations/{collaborationIdentifier}/trained-models/{trainedModelArn}/export-jobs",
-	Code: 200})
-
-var ListCollaborationTrainedModelInferenceJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListCollaborationTrainedModelInferenceJobs",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/collaborations/{collaborationIdentifier}/trained-model-inference-jobs",
-	Code: 200})
-
-var ListCollaborationTrainedModels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListCollaborationTrainedModels",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/collaborations/{collaborationIdentifier}/trained-models",
-	Code: 200})
-
-var ListConfiguredAudienceModels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListConfiguredAudienceModels",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/configured-audience-model",
-	Code: 200})
-
-var ListConfiguredModelAlgorithmAssociations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListConfiguredModelAlgorithmAssociations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/memberships/{membershipIdentifier}/configured-model-algorithm-associations",
-	Code: 200})
-
-var ListConfiguredModelAlgorithms = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListConfiguredModelAlgorithms",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/configured-model-algorithms",
-	Code: 200})
-
-var ListMLInputChannels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListMLInputChannels",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/memberships/{membershipIdentifier}/ml-input-channels",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var ListTrainedModelInferenceJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListTrainedModelInferenceJobs",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/memberships/{membershipIdentifier}/trained-model-inference-jobs",
-	Code: 200})
-
-var ListTrainedModels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListTrainedModels",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t47 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/memberships/{membershipIdentifier}/trained-models",
-	Code: 200})
-
-var ListTrainedModelVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListTrainedModelVersions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t48 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/memberships/{membershipIdentifier}/trained-models/{trainedModelArn}/versions",
-	Code: 200})
-
-var ListTrainingDatasets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListTrainingDatasets",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t49 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/training-dataset",
-	Code: 200})
-
-var PutConfiguredAudienceModelPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "PutConfiguredAudienceModelPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t50 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/configured-audience-model/{configuredAudienceModelArn}/policy",
-	Code: 200})
-
-var PutMLConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "PutMLConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t51 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/memberships/{membershipIdentifier}/ml-configurations",
-	Code: 200})
-
-var StartAudienceExportJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "StartAudienceExportJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t52 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/audience-export-job",
-	Code: 200})
-
-var StartAudienceGenerationJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "StartAudienceGenerationJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t53 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/audience-generation-job",
-	Code: 200})
-
-var StartTrainedModelExportJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "StartTrainedModelExportJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t54 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/memberships/{membershipIdentifier}/trained-models/{trainedModelArn}/export-jobs",
-	Code: 200})
-
-var StartTrainedModelInferenceJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "StartTrainedModelInferenceJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t55 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/memberships/{membershipIdentifier}/trained-model-inference-jobs",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t56 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t57 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UpdateConfiguredAudienceModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "UpdateConfiguredAudienceModel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t58 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/configured-audience-model/{configuredAudienceModelArn}",
-	Code: 200})
-
-var _AWSStarkControlService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "AWSStarkControlService",
-}, smithy.ShapeTypeService, 0)
-
-var AWSStarkControlService = smithy.NewServiceSchema(_AWSStarkControlService, "2023-09-06")
-
-var AccessBudget = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "AccessBudget",
-}, smithy.ShapeTypeStructure, 3)
-var AccessBudget_resourceArn *smithy.Schema
-
-var AccessBudget_details *smithy.Schema
-
-var AccessBudget_aggregateRemainingBudget *smithy.Schema
-
-var AccessBudgetDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "AccessBudgetDetails",
-}, smithy.ShapeTypeStructure, 6)
-var AccessBudgetDetails_startTime *smithy.Schema
-
-var AccessBudgetDetails_endTime *smithy.Schema
-
-var AccessBudgetDetails_remainingBudget *smithy.Schema
-
-var AccessBudgetDetails_budget *smithy.Schema
-
-var AccessBudgetDetails_budgetType *smithy.Schema
-
-var AccessBudgetDetails_autoRefresh *smithy.Schema
-
-var _AccessBudgetDetailsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "AccessBudgetDetailsList",
-}, smithy.ShapeTypeList, 1)
-var _AccessBudgetDetailsList_member *smithy.Schema
-
-var _AccessBudgets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "AccessBudgets",
-}, smithy.ShapeTypeList, 1)
-var _AccessBudgets_member *smithy.Schema
-
-var AccessBudgetType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "AccessBudgetType",
-}, smithy.ShapeTypeEnum, 4)
-var AccessBudgetType_CALENDAR_DAY *smithy.Schema
-
-var AccessBudgetType_CALENDAR_MONTH *smithy.Schema
-
-var AccessBudgetType_CALENDAR_WEEK *smithy.Schema
-
-var AccessBudgetType_LIFETIME *smithy.Schema
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var _AccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "AccountId",
-}, smithy.ShapeTypeString, 0)
-
-var _AccountIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "AccountIdList",
-}, smithy.ShapeTypeList, 1)
-var _AccountIdList_member *smithy.Schema
-
-var _AlgorithmImage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "AlgorithmImage",
-}, smithy.ShapeTypeString, 0)
-
-var _AnalysisTemplateArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "AnalysisTemplateArn",
-}, smithy.ShapeTypeString, 0)
-
-var AudienceDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "AudienceDestination",
-}, smithy.ShapeTypeStructure, 1)
-var AudienceDestination_s3Destination *smithy.Schema
-
-var _AudienceExportJobList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "AudienceExportJobList",
-}, smithy.ShapeTypeList, 1)
-var _AudienceExportJobList_member *smithy.Schema
-
-var AudienceExportJobStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "AudienceExportJobStatus",
-}, smithy.ShapeTypeEnum, 4)
-var AudienceExportJobStatus_CREATE_PENDING *smithy.Schema
-
-var AudienceExportJobStatus_CREATE_IN_PROGRESS *smithy.Schema
-
-var AudienceExportJobStatus_CREATE_FAILED *smithy.Schema
-
-var AudienceExportJobStatus_ACTIVE *smithy.Schema
-
-var AudienceExportJobSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "AudienceExportJobSummary",
-}, smithy.ShapeTypeStructure, 9)
-var AudienceExportJobSummary_createTime *smithy.Schema
-
-var AudienceExportJobSummary_updateTime *smithy.Schema
-
-var AudienceExportJobSummary_name *smithy.Schema
-
-var AudienceExportJobSummary_audienceGenerationJobArn *smithy.Schema
-
-var AudienceExportJobSummary_audienceSize *smithy.Schema
-
-var AudienceExportJobSummary_description *smithy.Schema
-
-var AudienceExportJobSummary_status *smithy.Schema
-
-var AudienceExportJobSummary_statusDetails *smithy.Schema
-
-var AudienceExportJobSummary_outputLocation *smithy.Schema
-
-var _AudienceGenerationJobArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "AudienceGenerationJobArn",
-}, smithy.ShapeTypeString, 0)
-
-var AudienceGenerationJobDataSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "AudienceGenerationJobDataSource",
-}, smithy.ShapeTypeStructure, 4)
-var AudienceGenerationJobDataSource_dataSource *smithy.Schema
-
-var AudienceGenerationJobDataSource_roleArn *smithy.Schema
-
-var AudienceGenerationJobDataSource_sqlParameters *smithy.Schema
-
-var AudienceGenerationJobDataSource_sqlComputeConfiguration *smithy.Schema
-
-var _AudienceGenerationJobList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "AudienceGenerationJobList",
-}, smithy.ShapeTypeList, 1)
-var _AudienceGenerationJobList_member *smithy.Schema
-
-var AudienceGenerationJobStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "AudienceGenerationJobStatus",
-}, smithy.ShapeTypeEnum, 7)
-var AudienceGenerationJobStatus_CREATE_PENDING *smithy.Schema
-
-var AudienceGenerationJobStatus_CREATE_IN_PROGRESS *smithy.Schema
-
-var AudienceGenerationJobStatus_CREATE_FAILED *smithy.Schema
-
-var AudienceGenerationJobStatus_ACTIVE *smithy.Schema
-
-var AudienceGenerationJobStatus_DELETE_PENDING *smithy.Schema
-
-var AudienceGenerationJobStatus_DELETE_IN_PROGRESS *smithy.Schema
-
-var AudienceGenerationJobStatus_DELETE_FAILED *smithy.Schema
-
-var AudienceGenerationJobSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "AudienceGenerationJobSummary",
-}, smithy.ShapeTypeStructure, 9)
-var AudienceGenerationJobSummary_createTime *smithy.Schema
-
-var AudienceGenerationJobSummary_updateTime *smithy.Schema
-
-var AudienceGenerationJobSummary_audienceGenerationJobArn *smithy.Schema
-
-var AudienceGenerationJobSummary_name *smithy.Schema
-
-var AudienceGenerationJobSummary_description *smithy.Schema
-
-var AudienceGenerationJobSummary_status *smithy.Schema
-
-var AudienceGenerationJobSummary_configuredAudienceModelArn *smithy.Schema
-
-var AudienceGenerationJobSummary_collaborationId *smithy.Schema
-
-var AudienceGenerationJobSummary_startedBy *smithy.Schema
-
-var _AudienceModelArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "AudienceModelArn",
-}, smithy.ShapeTypeString, 0)
-
-var _AudienceModelList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "AudienceModelList",
-}, smithy.ShapeTypeList, 1)
-var _AudienceModelList_member *smithy.Schema
-
-var AudienceModelStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "AudienceModelStatus",
-}, smithy.ShapeTypeEnum, 7)
-var AudienceModelStatus_CREATE_PENDING *smithy.Schema
-
-var AudienceModelStatus_CREATE_IN_PROGRESS *smithy.Schema
-
-var AudienceModelStatus_CREATE_FAILED *smithy.Schema
-
-var AudienceModelStatus_ACTIVE *smithy.Schema
-
-var AudienceModelStatus_DELETE_PENDING *smithy.Schema
-
-var AudienceModelStatus_DELETE_IN_PROGRESS *smithy.Schema
-
-var AudienceModelStatus_DELETE_FAILED *smithy.Schema
-
-var AudienceModelSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "AudienceModelSummary",
-}, smithy.ShapeTypeStructure, 7)
-var AudienceModelSummary_createTime *smithy.Schema
-
-var AudienceModelSummary_updateTime *smithy.Schema
-
-var AudienceModelSummary_audienceModelArn *smithy.Schema
-
-var AudienceModelSummary_name *smithy.Schema
-
-var AudienceModelSummary_trainingDatasetArn *smithy.Schema
-
-var AudienceModelSummary_status *smithy.Schema
-
-var AudienceModelSummary_description *smithy.Schema
-
-var AudienceQualityMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "AudienceQualityMetrics",
-}, smithy.ShapeTypeStructure, 2)
-var AudienceQualityMetrics_relevanceMetrics *smithy.Schema
-
-var AudienceQualityMetrics_recallMetric *smithy.Schema
-
-var AudienceSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "AudienceSize",
-}, smithy.ShapeTypeStructure, 2)
-var AudienceSize_type *smithy.Schema
-
-var AudienceSize_value *smithy.Schema
-
-var _AudienceSizeBins = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "AudienceSizeBins",
-}, smithy.ShapeTypeList, 1)
-var _AudienceSizeBins_member *smithy.Schema
-
-var AudienceSizeConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "AudienceSizeConfig",
-}, smithy.ShapeTypeStructure, 2)
-var AudienceSizeConfig_audienceSizeType *smithy.Schema
-
-var AudienceSizeConfig_audienceSizeBins *smithy.Schema
-
-var AudienceSizeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "AudienceSizeType",
-}, smithy.ShapeTypeEnum, 2)
-var AudienceSizeType_ABSOLUTE *smithy.Schema
-
-var AudienceSizeType_PERCENTAGE *smithy.Schema
-
-var _AudienceSizeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "AudienceSizeValue",
-}, smithy.ShapeTypeInteger, 0)
-
-var AutoRefreshMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "AutoRefreshMode",
-}, smithy.ShapeTypeEnum, 2)
-var AutoRefreshMode_ENABLED *smithy.Schema
-
-var AutoRefreshMode_DISABLED *smithy.Schema
-
-var _Budget = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "Budget",
-}, smithy.ShapeTypeInteger, 0)
-
-var _BudgetedResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "BudgetedResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var _CollaborationConfiguredModelAlgorithmAssociationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "CollaborationConfiguredModelAlgorithmAssociationList",
-}, smithy.ShapeTypeList, 1)
-var _CollaborationConfiguredModelAlgorithmAssociationList_member *smithy.Schema
-
-var CollaborationConfiguredModelAlgorithmAssociationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "CollaborationConfiguredModelAlgorithmAssociationSummary",
-}, smithy.ShapeTypeStructure, 9)
-var CollaborationConfiguredModelAlgorithmAssociationSummary_createTime *smithy.Schema
-
-var CollaborationConfiguredModelAlgorithmAssociationSummary_updateTime *smithy.Schema
-
-var CollaborationConfiguredModelAlgorithmAssociationSummary_configuredModelAlgorithmAssociationArn *smithy.Schema
-
-var CollaborationConfiguredModelAlgorithmAssociationSummary_name *smithy.Schema
-
-var CollaborationConfiguredModelAlgorithmAssociationSummary_description *smithy.Schema
-
-var CollaborationConfiguredModelAlgorithmAssociationSummary_membershipIdentifier *smithy.Schema
-
-var CollaborationConfiguredModelAlgorithmAssociationSummary_collaborationIdentifier *smithy.Schema
-
-var CollaborationConfiguredModelAlgorithmAssociationSummary_configuredModelAlgorithmArn *smithy.Schema
-
-var CollaborationConfiguredModelAlgorithmAssociationSummary_creatorAccountId *smithy.Schema
-
-var _CollaborationMLInputChannelsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "CollaborationMLInputChannelsList",
-}, smithy.ShapeTypeList, 1)
-var _CollaborationMLInputChannelsList_member *smithy.Schema
-
-var CollaborationMLInputChannelSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "CollaborationMLInputChannelSummary",
-}, smithy.ShapeTypeStructure, 11)
-var CollaborationMLInputChannelSummary_createTime *smithy.Schema
-
-var CollaborationMLInputChannelSummary_updateTime *smithy.Schema
-
-var CollaborationMLInputChannelSummary_membershipIdentifier *smithy.Schema
-
-var CollaborationMLInputChannelSummary_collaborationIdentifier *smithy.Schema
-
-var CollaborationMLInputChannelSummary_name *smithy.Schema
-
-var CollaborationMLInputChannelSummary_configuredModelAlgorithmAssociations *smithy.Schema
-
-var CollaborationMLInputChannelSummary_mlInputChannelArn *smithy.Schema
-
-var CollaborationMLInputChannelSummary_status *smithy.Schema
-
-var CollaborationMLInputChannelSummary_creatorAccountId *smithy.Schema
-
-var CollaborationMLInputChannelSummary_description *smithy.Schema
-
-var CollaborationMLInputChannelSummary_payerConfiguration *smithy.Schema
-
-var _CollaborationTrainedModelExportJobList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "CollaborationTrainedModelExportJobList",
-}, smithy.ShapeTypeList, 1)
-var _CollaborationTrainedModelExportJobList_member *smithy.Schema
-
-var CollaborationTrainedModelExportJobSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "CollaborationTrainedModelExportJobSummary",
-}, smithy.ShapeTypeStructure, 12)
-var CollaborationTrainedModelExportJobSummary_createTime *smithy.Schema
-
-var CollaborationTrainedModelExportJobSummary_updateTime *smithy.Schema
-
-var CollaborationTrainedModelExportJobSummary_name *smithy.Schema
-
-var CollaborationTrainedModelExportJobSummary_outputConfiguration *smithy.Schema
-
-var CollaborationTrainedModelExportJobSummary_status *smithy.Schema
-
-var CollaborationTrainedModelExportJobSummary_statusDetails *smithy.Schema
-
-var CollaborationTrainedModelExportJobSummary_description *smithy.Schema
-
-var CollaborationTrainedModelExportJobSummary_creatorAccountId *smithy.Schema
-
-var CollaborationTrainedModelExportJobSummary_trainedModelArn *smithy.Schema
-
-var CollaborationTrainedModelExportJobSummary_trainedModelVersionIdentifier *smithy.Schema
-
-var CollaborationTrainedModelExportJobSummary_membershipIdentifier *smithy.Schema
-
-var CollaborationTrainedModelExportJobSummary_collaborationIdentifier *smithy.Schema
-
-var _CollaborationTrainedModelInferenceJobList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "CollaborationTrainedModelInferenceJobList",
-}, smithy.ShapeTypeList, 1)
-var _CollaborationTrainedModelInferenceJobList_member *smithy.Schema
-
-var CollaborationTrainedModelInferenceJobSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "CollaborationTrainedModelInferenceJobSummary",
-}, smithy.ShapeTypeStructure, 18)
-var CollaborationTrainedModelInferenceJobSummary_trainedModelInferenceJobArn *smithy.Schema
-
-var CollaborationTrainedModelInferenceJobSummary_configuredModelAlgorithmAssociationArn *smithy.Schema
-
-var CollaborationTrainedModelInferenceJobSummary_membershipIdentifier *smithy.Schema
-
-var CollaborationTrainedModelInferenceJobSummary_trainedModelArn *smithy.Schema
-
-var CollaborationTrainedModelInferenceJobSummary_trainedModelVersionIdentifier *smithy.Schema
-
-var CollaborationTrainedModelInferenceJobSummary_collaborationIdentifier *smithy.Schema
-
-var CollaborationTrainedModelInferenceJobSummary_status *smithy.Schema
-
-var CollaborationTrainedModelInferenceJobSummary_outputConfiguration *smithy.Schema
-
-var CollaborationTrainedModelInferenceJobSummary_name *smithy.Schema
-
-var CollaborationTrainedModelInferenceJobSummary_description *smithy.Schema
-
-var CollaborationTrainedModelInferenceJobSummary_metricsStatus *smithy.Schema
-
-var CollaborationTrainedModelInferenceJobSummary_metricsStatusDetails *smithy.Schema
-
-var CollaborationTrainedModelInferenceJobSummary_logsStatus *smithy.Schema
-
-var CollaborationTrainedModelInferenceJobSummary_logsStatusDetails *smithy.Schema
-
-var CollaborationTrainedModelInferenceJobSummary_mlModelInferencePayerAccountId *smithy.Schema
-
-var CollaborationTrainedModelInferenceJobSummary_createTime *smithy.Schema
-
-var CollaborationTrainedModelInferenceJobSummary_updateTime *smithy.Schema
-
-var CollaborationTrainedModelInferenceJobSummary_creatorAccountId *smithy.Schema
-
-var _CollaborationTrainedModelList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "CollaborationTrainedModelList",
-}, smithy.ShapeTypeList, 1)
-var _CollaborationTrainedModelList_member *smithy.Schema
-
-var CollaborationTrainedModelSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "CollaborationTrainedModelSummary",
-}, smithy.ShapeTypeStructure, 13)
-var CollaborationTrainedModelSummary_createTime *smithy.Schema
-
-var CollaborationTrainedModelSummary_updateTime *smithy.Schema
-
-var CollaborationTrainedModelSummary_trainedModelArn *smithy.Schema
-
-var CollaborationTrainedModelSummary_name *smithy.Schema
-
-var CollaborationTrainedModelSummary_versionIdentifier *smithy.Schema
-
-var CollaborationTrainedModelSummary_incrementalTrainingDataChannels *smithy.Schema
-
-var CollaborationTrainedModelSummary_description *smithy.Schema
-
-var CollaborationTrainedModelSummary_membershipIdentifier *smithy.Schema
-
-var CollaborationTrainedModelSummary_collaborationIdentifier *smithy.Schema
-
-var CollaborationTrainedModelSummary_status *smithy.Schema
-
-var CollaborationTrainedModelSummary_configuredModelAlgorithmAssociationArn *smithy.Schema
-
-var CollaborationTrainedModelSummary_creatorAccountId *smithy.Schema
-
-var CollaborationTrainedModelSummary_mlModelTrainingPayerAccountId *smithy.Schema
-
-var ColumnClassificationDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ColumnClassificationDetails",
-}, smithy.ShapeTypeStructure, 1)
-var ColumnClassificationDetails_columnMapping *smithy.Schema
-
-var _ColumnMappingList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ColumnMappingList",
-}, smithy.ShapeTypeList, 1)
-var _ColumnMappingList_member *smithy.Schema
-
-var _ColumnName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ColumnName",
-}, smithy.ShapeTypeString, 0)
-
-var ColumnSchema = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ColumnSchema",
-}, smithy.ShapeTypeStructure, 2)
-var ColumnSchema_columnName *smithy.Schema
-
-var ColumnSchema_columnTypes *smithy.Schema
-
-var ColumnType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ColumnType",
-}, smithy.ShapeTypeEnum, 5)
-var ColumnType_USER_ID *smithy.Schema
-
-var ColumnType_ITEM_ID *smithy.Schema
-
-var ColumnType_TIMESTAMP *smithy.Schema
-
-var ColumnType_CATEGORICAL_FEATURE *smithy.Schema
-
-var ColumnType_NUMERICAL_FEATURE *smithy.Schema
-
-var _ColumnTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ColumnTypeList",
-}, smithy.ShapeTypeList, 1)
-var _ColumnTypeList_member *smithy.Schema
-
-var ComputeConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ComputeConfiguration",
-}, smithy.ShapeTypeUnion, 1)
-var ComputeConfiguration_worker *smithy.Schema
-
-var _ConfiguredAudienceModelArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ConfiguredAudienceModelArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ConfiguredAudienceModelList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ConfiguredAudienceModelList",
-}, smithy.ShapeTypeList, 1)
-var _ConfiguredAudienceModelList_member *smithy.Schema
-
-var ConfiguredAudienceModelOutputConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ConfiguredAudienceModelOutputConfig",
-}, smithy.ShapeTypeStructure, 2)
-var ConfiguredAudienceModelOutputConfig_destination *smithy.Schema
-
-var ConfiguredAudienceModelOutputConfig_roleArn *smithy.Schema
-
-var ConfiguredAudienceModelStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ConfiguredAudienceModelStatus",
-}, smithy.ShapeTypeEnum, 1)
-var ConfiguredAudienceModelStatus_ACTIVE *smithy.Schema
-
-var ConfiguredAudienceModelSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ConfiguredAudienceModelSummary",
-}, smithy.ShapeTypeStructure, 8)
-var ConfiguredAudienceModelSummary_createTime *smithy.Schema
-
-var ConfiguredAudienceModelSummary_updateTime *smithy.Schema
-
-var ConfiguredAudienceModelSummary_name *smithy.Schema
-
-var ConfiguredAudienceModelSummary_audienceModelArn *smithy.Schema
-
-var ConfiguredAudienceModelSummary_outputConfig *smithy.Schema
-
-var ConfiguredAudienceModelSummary_description *smithy.Schema
-
-var ConfiguredAudienceModelSummary_configuredAudienceModelArn *smithy.Schema
-
-var ConfiguredAudienceModelSummary_status *smithy.Schema
-
-var _ConfiguredModelAlgorithmArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ConfiguredModelAlgorithmArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ConfiguredModelAlgorithmAssociationArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ConfiguredModelAlgorithmAssociationArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ConfiguredModelAlgorithmAssociationArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ConfiguredModelAlgorithmAssociationArnList",
-}, smithy.ShapeTypeList, 1)
-var _ConfiguredModelAlgorithmAssociationArnList_member *smithy.Schema
-
-var _ConfiguredModelAlgorithmAssociationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ConfiguredModelAlgorithmAssociationList",
-}, smithy.ShapeTypeList, 1)
-var _ConfiguredModelAlgorithmAssociationList_member *smithy.Schema
-
-var ConfiguredModelAlgorithmAssociationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ConfiguredModelAlgorithmAssociationSummary",
-}, smithy.ShapeTypeStructure, 8)
-var ConfiguredModelAlgorithmAssociationSummary_createTime *smithy.Schema
-
-var ConfiguredModelAlgorithmAssociationSummary_updateTime *smithy.Schema
-
-var ConfiguredModelAlgorithmAssociationSummary_configuredModelAlgorithmAssociationArn *smithy.Schema
-
-var ConfiguredModelAlgorithmAssociationSummary_configuredModelAlgorithmArn *smithy.Schema
-
-var ConfiguredModelAlgorithmAssociationSummary_name *smithy.Schema
-
-var ConfiguredModelAlgorithmAssociationSummary_description *smithy.Schema
-
-var ConfiguredModelAlgorithmAssociationSummary_membershipIdentifier *smithy.Schema
-
-var ConfiguredModelAlgorithmAssociationSummary_collaborationIdentifier *smithy.Schema
-
-var _ConfiguredModelAlgorithmList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ConfiguredModelAlgorithmList",
-}, smithy.ShapeTypeList, 1)
-var _ConfiguredModelAlgorithmList_member *smithy.Schema
-
-var ConfiguredModelAlgorithmSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ConfiguredModelAlgorithmSummary",
-}, smithy.ShapeTypeStructure, 5)
-var ConfiguredModelAlgorithmSummary_createTime *smithy.Schema
-
-var ConfiguredModelAlgorithmSummary_updateTime *smithy.Schema
-
-var ConfiguredModelAlgorithmSummary_configuredModelAlgorithmArn *smithy.Schema
-
-var ConfiguredModelAlgorithmSummary_name *smithy.Schema
-
-var ConfiguredModelAlgorithmSummary_description *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var _ContainerArgument = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ContainerArgument",
-}, smithy.ShapeTypeString, 0)
-
-var _ContainerArguments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ContainerArguments",
-}, smithy.ShapeTypeList, 1)
-var _ContainerArguments_member *smithy.Schema
-
-var ContainerConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ContainerConfig",
-}, smithy.ShapeTypeStructure, 4)
-var ContainerConfig_imageUri *smithy.Schema
-
-var ContainerConfig_entrypoint *smithy.Schema
-
-var ContainerConfig_arguments *smithy.Schema
-
-var ContainerConfig_metricDefinitions *smithy.Schema
-
-var _ContainerEntrypoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ContainerEntrypoint",
-}, smithy.ShapeTypeList, 1)
-var _ContainerEntrypoint_member *smithy.Schema
-
-var _ContainerEntrypointString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ContainerEntrypointString",
-}, smithy.ShapeTypeString, 0)
-
-var _CustomDataIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "CustomDataIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _CustomDataIdentifierList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "CustomDataIdentifierList",
-}, smithy.ShapeTypeList, 1)
-var _CustomDataIdentifierList_member *smithy.Schema
-
-var CustomEntityConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "CustomEntityConfig",
-}, smithy.ShapeTypeStructure, 1)
-var CustomEntityConfig_customDataIdentifiers *smithy.Schema
-
-var DataPrivacyScores = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "DataPrivacyScores",
-}, smithy.ShapeTypeStructure, 1)
-var DataPrivacyScores_membershipInferenceAttackScores *smithy.Schema
-
-var Dataset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "Dataset",
-}, smithy.ShapeTypeStructure, 2)
-var Dataset_type *smithy.Schema
-
-var Dataset_inputConfig *smithy.Schema
-
-var DatasetInputConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "DatasetInputConfig",
-}, smithy.ShapeTypeStructure, 2)
-var DatasetInputConfig_schema *smithy.Schema
-
-var DatasetInputConfig_dataSource *smithy.Schema
-
-var _DatasetList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "DatasetList",
-}, smithy.ShapeTypeList, 1)
-var _DatasetList_member *smithy.Schema
-
-var _DatasetSchemaList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "DatasetSchemaList",
-}, smithy.ShapeTypeList, 1)
-var _DatasetSchemaList_member *smithy.Schema
-
-var DatasetType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "DatasetType",
-}, smithy.ShapeTypeEnum, 1)
-var DatasetType_INTERACTIONS *smithy.Schema
-
-var DataSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "DataSource",
-}, smithy.ShapeTypeStructure, 1)
-var DataSource_glueDataSource *smithy.Schema
-
-var Destination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "Destination",
-}, smithy.ShapeTypeStructure, 1)
-var Destination_s3Destination *smithy.Schema
-
-var EntityType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "EntityType",
-}, smithy.ShapeTypeEnum, 3)
-var EntityType_ALL_PERSONALLY_IDENTIFIABLE_INFORMATION *smithy.Schema
-
-var EntityType_NUMBERS *smithy.Schema
-
-var EntityType_CUSTOM *smithy.Schema
-
-var _EntityTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "EntityTypeList",
-}, smithy.ShapeTypeList, 1)
-var _EntityTypeList_member *smithy.Schema
-
-var _Environment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "Environment",
-}, smithy.ShapeTypeMap, 2)
-var _Environment_key *smithy.Schema
-
-var _Environment_value *smithy.Schema
-
-var _GlueDatabaseName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "GlueDatabaseName",
-}, smithy.ShapeTypeString, 0)
-
-var GlueDataSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "GlueDataSource",
-}, smithy.ShapeTypeStructure, 3)
-var GlueDataSource_tableName *smithy.Schema
-
-var GlueDataSource_databaseName *smithy.Schema
-
-var GlueDataSource_catalogId *smithy.Schema
-
-var _GlueTableName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "GlueTableName",
-}, smithy.ShapeTypeString, 0)
-
-var _Hash = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "Hash",
-}, smithy.ShapeTypeString, 0)
-
-var _HyperParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "HyperParameters",
-}, smithy.ShapeTypeMap, 2)
-var _HyperParameters_key *smithy.Schema
-
-var _HyperParameters_value *smithy.Schema
-
-var _IamRoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "IamRoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var IncrementalTrainingDataChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "IncrementalTrainingDataChannel",
-}, smithy.ShapeTypeStructure, 3)
-var IncrementalTrainingDataChannel_trainedModelArn *smithy.Schema
-
-var IncrementalTrainingDataChannel_versionIdentifier *smithy.Schema
-
-var IncrementalTrainingDataChannel_channelName *smithy.Schema
-
-var IncrementalTrainingDataChannelOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "IncrementalTrainingDataChannelOutput",
-}, smithy.ShapeTypeStructure, 3)
-var IncrementalTrainingDataChannelOutput_channelName *smithy.Schema
-
-var IncrementalTrainingDataChannelOutput_versionIdentifier *smithy.Schema
-
-var IncrementalTrainingDataChannelOutput_modelName *smithy.Schema
-
-var _IncrementalTrainingDataChannels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "IncrementalTrainingDataChannels",
-}, smithy.ShapeTypeList, 1)
-var _IncrementalTrainingDataChannels_member *smithy.Schema
-
-var _IncrementalTrainingDataChannelsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "IncrementalTrainingDataChannelsOutput",
-}, smithy.ShapeTypeList, 1)
-var _IncrementalTrainingDataChannelsOutput_member *smithy.Schema
-
-var InferenceContainerConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "InferenceContainerConfig",
-}, smithy.ShapeTypeStructure, 1)
-var InferenceContainerConfig_imageUri *smithy.Schema
-
-var InferenceContainerExecutionParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "InferenceContainerExecutionParameters",
-}, smithy.ShapeTypeStructure, 1)
-var InferenceContainerExecutionParameters_maxPayloadInMB *smithy.Schema
-
-var _InferenceEnvironmentMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "InferenceEnvironmentMap",
-}, smithy.ShapeTypeMap, 2)
-var _InferenceEnvironmentMap_key *smithy.Schema
-
-var _InferenceEnvironmentMap_value *smithy.Schema
-
-var InferenceInstanceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "InferenceInstanceType",
-}, smithy.ShapeTypeEnum, 94)
-var InferenceInstanceType_ML_R7I_48XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_R6I_16XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_M6I_XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_M5_4XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_P2_XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_M4_16XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_R7I_16XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_M7I_XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_M6I_12XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_R7I_8XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_R7I_LARGE *smithy.Schema
-
-var InferenceInstanceType_ML_M7I_12XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_M6I_24XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_M7I_24XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_R6I_8XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_R6I_LARGE *smithy.Schema
-
-var InferenceInstanceType_ML_G5_2XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_M5_LARGE *smithy.Schema
-
-var InferenceInstanceType_ML_M7I_48XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_M6I_16XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_P2_16XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_G5_4XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_M7I_16XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_C4_2XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_C5_2XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_C6I_32XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_C4_4XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_G5_8XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_C6I_XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_C5_4XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_G4DN_XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_C7I_XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_C6I_12XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_G4DN_12XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_C7I_12XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_C6I_24XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_G4DN_2XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_C7I_24XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_C7I_2XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_C4_8XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_C6I_2XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_G4DN_4XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_C7I_48XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_C7I_4XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_C6I_16XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_C5_9XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_G4DN_16XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_C7I_16XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_C6I_4XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_C5_XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_C4_XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_G4DN_8XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_C7I_8XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_C7I_LARGE *smithy.Schema
-
-var InferenceInstanceType_ML_G5_XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_C6I_8XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_C6I_LARGE *smithy.Schema
-
-var InferenceInstanceType_ML_G5_12XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_G5_24XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_M7I_2XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_C5_18XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_G5_48XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_M6I_2XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_G5_16XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_M7I_4XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_R6I_32XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_M6I_4XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_M5_XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_M4_10XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_R6I_XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_M5_12XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_M4_XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_R7I_2XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_R7I_XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_R6I_12XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_M5_24XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_R7I_12XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_M7I_8XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_M7I_LARGE *smithy.Schema
-
-var InferenceInstanceType_ML_R6I_24XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_R6I_2XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_M4_2XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_R7I_24XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_R7I_4XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_M6I_8XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_M6I_LARGE *smithy.Schema
-
-var InferenceInstanceType_ML_M5_2XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_P2_8XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_R6I_4XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_M6I_32XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_M4_4XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_P3_16XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_P3_2XLARGE *smithy.Schema
-
-var InferenceInstanceType_ML_P3_8XLARGE *smithy.Schema
-
-var InferenceOutputConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "InferenceOutputConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var InferenceOutputConfiguration_accept *smithy.Schema
-
-var InferenceOutputConfiguration_members *smithy.Schema
-
-var InferenceReceiverMember = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "InferenceReceiverMember",
-}, smithy.ShapeTypeStructure, 1)
-var InferenceReceiverMember_accountId *smithy.Schema
-
-var _InferenceReceiverMembers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "InferenceReceiverMembers",
-}, smithy.ShapeTypeList, 1)
-var _InferenceReceiverMembers_member *smithy.Schema
-
-var InferenceResourceConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "InferenceResourceConfig",
-}, smithy.ShapeTypeStructure, 2)
-var InferenceResourceConfig_instanceType *smithy.Schema
-
-var InferenceResourceConfig_instanceCount *smithy.Schema
-
-var InputChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "InputChannel",
-}, smithy.ShapeTypeStructure, 2)
-var InputChannel_dataSource *smithy.Schema
-
-var InputChannel_roleArn *smithy.Schema
-
-var InputChannelDataSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "InputChannelDataSource",
-}, smithy.ShapeTypeUnion, 1)
-var InputChannelDataSource_protectedQueryInputParameters *smithy.Schema
-
-var InstanceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "InstanceType",
-}, smithy.ShapeTypeEnum, 133)
-var InstanceType_ML_M4_XLARGE *smithy.Schema
-
-var InstanceType_ML_M4_2XLARGE *smithy.Schema
-
-var InstanceType_ML_M4_4XLARGE *smithy.Schema
-
-var InstanceType_ML_M4_10XLARGE *smithy.Schema
-
-var InstanceType_ML_M4_16XLARGE *smithy.Schema
-
-var InstanceType_ML_G4DN_XLARGE *smithy.Schema
-
-var InstanceType_ML_G4DN_2XLARGE *smithy.Schema
-
-var InstanceType_ML_G4DN_4XLARGE *smithy.Schema
-
-var InstanceType_ML_G4DN_8XLARGE *smithy.Schema
-
-var InstanceType_ML_G4DN_12XLARGE *smithy.Schema
-
-var InstanceType_ML_G4DN_16XLARGE *smithy.Schema
-
-var InstanceType_ML_M5_LARGE *smithy.Schema
-
-var InstanceType_ML_M5_XLARGE *smithy.Schema
-
-var InstanceType_ML_M5_2XLARGE *smithy.Schema
-
-var InstanceType_ML_M5_4XLARGE *smithy.Schema
-
-var InstanceType_ML_M5_12XLARGE *smithy.Schema
-
-var InstanceType_ML_M5_24XLARGE *smithy.Schema
-
-var InstanceType_ML_C4_XLARGE *smithy.Schema
-
-var InstanceType_ML_C4_2XLARGE *smithy.Schema
-
-var InstanceType_ML_C4_4XLARGE *smithy.Schema
-
-var InstanceType_ML_C4_8XLARGE *smithy.Schema
-
-var InstanceType_ML_P2_XLARGE *smithy.Schema
-
-var InstanceType_ML_P2_8XLARGE *smithy.Schema
-
-var InstanceType_ML_P2_16XLARGE *smithy.Schema
-
-var InstanceType_ML_P4D_24XLARGE *smithy.Schema
-
-var InstanceType_ML_P4DE_24XLARGE *smithy.Schema
-
-var InstanceType_ML_P5_48XLARGE *smithy.Schema
-
-var InstanceType_ML_C5_XLARGE *smithy.Schema
-
-var InstanceType_ML_C5_2XLARGE *smithy.Schema
-
-var InstanceType_ML_C5_4XLARGE *smithy.Schema
-
-var InstanceType_ML_C5_9XLARGE *smithy.Schema
-
-var InstanceType_ML_C5_18XLARGE *smithy.Schema
-
-var InstanceType_ML_C5N_XLARGE *smithy.Schema
-
-var InstanceType_ML_C5N_2XLARGE *smithy.Schema
-
-var InstanceType_ML_C5N_4XLARGE *smithy.Schema
-
-var InstanceType_ML_C5N_9XLARGE *smithy.Schema
-
-var InstanceType_ML_C5N_18XLARGE *smithy.Schema
-
-var InstanceType_ML_G5_XLARGE *smithy.Schema
-
-var InstanceType_ML_G5_2XLARGE *smithy.Schema
-
-var InstanceType_ML_G5_4XLARGE *smithy.Schema
-
-var InstanceType_ML_G5_8XLARGE *smithy.Schema
-
-var InstanceType_ML_G5_16XLARGE *smithy.Schema
-
-var InstanceType_ML_G5_12XLARGE *smithy.Schema
-
-var InstanceType_ML_G5_24XLARGE *smithy.Schema
-
-var InstanceType_ML_G5_48XLARGE *smithy.Schema
-
-var InstanceType_ML_TRN1_2XLARGE *smithy.Schema
-
-var InstanceType_ML_TRN1_32XLARGE *smithy.Schema
-
-var InstanceType_ML_TRN1N_32XLARGE *smithy.Schema
-
-var InstanceType_ML_M6I_LARGE *smithy.Schema
-
-var InstanceType_ML_M6I_XLARGE *smithy.Schema
-
-var InstanceType_ML_M6I_2XLARGE *smithy.Schema
-
-var InstanceType_ML_M6I_4XLARGE *smithy.Schema
-
-var InstanceType_ML_M6I_8XLARGE *smithy.Schema
-
-var InstanceType_ML_M6I_12XLARGE *smithy.Schema
-
-var InstanceType_ML_M6I_16XLARGE *smithy.Schema
-
-var InstanceType_ML_M6I_24XLARGE *smithy.Schema
-
-var InstanceType_ML_M6I_32XLARGE *smithy.Schema
-
-var InstanceType_ML_C6I_XLARGE *smithy.Schema
-
-var InstanceType_ML_C6I_2XLARGE *smithy.Schema
-
-var InstanceType_ML_C6I_8XLARGE *smithy.Schema
-
-var InstanceType_ML_C6I_4XLARGE *smithy.Schema
-
-var InstanceType_ML_C6I_12XLARGE *smithy.Schema
-
-var InstanceType_ML_C6I_16XLARGE *smithy.Schema
-
-var InstanceType_ML_C6I_24XLARGE *smithy.Schema
-
-var InstanceType_ML_C6I_32XLARGE *smithy.Schema
-
-var InstanceType_ML_R5D_LARGE *smithy.Schema
-
-var InstanceType_ML_R5D_XLARGE *smithy.Schema
-
-var InstanceType_ML_R5D_2XLARGE *smithy.Schema
-
-var InstanceType_ML_R5D_4XLARGE *smithy.Schema
-
-var InstanceType_ML_R5D_8XLARGE *smithy.Schema
-
-var InstanceType_ML_R5D_12XLARGE *smithy.Schema
-
-var InstanceType_ML_R5D_16XLARGE *smithy.Schema
-
-var InstanceType_ML_R5D_24XLARGE *smithy.Schema
-
-var InstanceType_ML_T3_MEDIUM *smithy.Schema
-
-var InstanceType_ML_T3_LARGE *smithy.Schema
-
-var InstanceType_ML_T3_XLARGE *smithy.Schema
-
-var InstanceType_ML_T3_2XLARGE *smithy.Schema
-
-var InstanceType_ML_R5_LARGE *smithy.Schema
-
-var InstanceType_ML_R5_XLARGE *smithy.Schema
-
-var InstanceType_ML_R5_2XLARGE *smithy.Schema
-
-var InstanceType_ML_R5_4XLARGE *smithy.Schema
-
-var InstanceType_ML_R5_8XLARGE *smithy.Schema
-
-var InstanceType_ML_R5_12XLARGE *smithy.Schema
-
-var InstanceType_ML_R5_16XLARGE *smithy.Schema
-
-var InstanceType_ML_R5_24XLARGE *smithy.Schema
-
-var InstanceType_ML_C7I_LARGE *smithy.Schema
-
-var InstanceType_ML_C7I_XLARGE *smithy.Schema
-
-var InstanceType_ML_C7I_2XLARGE *smithy.Schema
-
-var InstanceType_ML_C7I_4XLARGE *smithy.Schema
-
-var InstanceType_ML_C7I_8XLARGE *smithy.Schema
-
-var InstanceType_ML_C7I_12XLARGE *smithy.Schema
-
-var InstanceType_ML_C7I_16XLARGE *smithy.Schema
-
-var InstanceType_ML_C7I_24XLARGE *smithy.Schema
-
-var InstanceType_ML_C7I_48XLARGE *smithy.Schema
-
-var InstanceType_ML_M7I_LARGE *smithy.Schema
-
-var InstanceType_ML_M7I_XLARGE *smithy.Schema
-
-var InstanceType_ML_M7I_2XLARGE *smithy.Schema
-
-var InstanceType_ML_M7I_4XLARGE *smithy.Schema
-
-var InstanceType_ML_M7I_8XLARGE *smithy.Schema
-
-var InstanceType_ML_M7I_12XLARGE *smithy.Schema
-
-var InstanceType_ML_M7I_16XLARGE *smithy.Schema
-
-var InstanceType_ML_M7I_24XLARGE *smithy.Schema
-
-var InstanceType_ML_M7I_48XLARGE *smithy.Schema
-
-var InstanceType_ML_R7I_LARGE *smithy.Schema
-
-var InstanceType_ML_R7I_XLARGE *smithy.Schema
-
-var InstanceType_ML_R7I_2XLARGE *smithy.Schema
-
-var InstanceType_ML_R7I_4XLARGE *smithy.Schema
-
-var InstanceType_ML_R7I_8XLARGE *smithy.Schema
-
-var InstanceType_ML_R7I_12XLARGE *smithy.Schema
-
-var InstanceType_ML_R7I_16XLARGE *smithy.Schema
-
-var InstanceType_ML_R7I_24XLARGE *smithy.Schema
-
-var InstanceType_ML_R7I_48XLARGE *smithy.Schema
-
-var InstanceType_ML_G6_XLARGE *smithy.Schema
-
-var InstanceType_ML_G6_2XLARGE *smithy.Schema
-
-var InstanceType_ML_G6_4XLARGE *smithy.Schema
-
-var InstanceType_ML_G6_8XLARGE *smithy.Schema
-
-var InstanceType_ML_G6_12XLARGE *smithy.Schema
-
-var InstanceType_ML_G6_16XLARGE *smithy.Schema
-
-var InstanceType_ML_G6_24XLARGE *smithy.Schema
-
-var InstanceType_ML_G6_48XLARGE *smithy.Schema
-
-var InstanceType_ML_G6E_XLARGE *smithy.Schema
-
-var InstanceType_ML_G6E_2XLARGE *smithy.Schema
-
-var InstanceType_ML_G6E_4XLARGE *smithy.Schema
-
-var InstanceType_ML_G6E_8XLARGE *smithy.Schema
-
-var InstanceType_ML_G6E_12XLARGE *smithy.Schema
-
-var InstanceType_ML_G6E_16XLARGE *smithy.Schema
-
-var InstanceType_ML_G6E_24XLARGE *smithy.Schema
-
-var InstanceType_ML_G6E_48XLARGE *smithy.Schema
-
-var InstanceType_ML_P5EN_48XLARGE *smithy.Schema
-
-var InstanceType_ML_P3_2XLARGE *smithy.Schema
-
-var InstanceType_ML_P3_8XLARGE *smithy.Schema
-
-var InstanceType_ML_P3_16XLARGE *smithy.Schema
-
-var InstanceType_ML_P3DN_24XLARGE *smithy.Schema
-
-var InternalServiceException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "InternalServiceException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServiceException_message *smithy.Schema
-
-var _KmsKeyArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "KmsKeyArn",
-}, smithy.ShapeTypeString, 0)
-
-var LogRedactionConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "LogRedactionConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var LogRedactionConfiguration_entitiesToRedact *smithy.Schema
-
-var LogRedactionConfiguration_customEntityConfig *smithy.Schema
-
-var LogsConfigurationPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "LogsConfigurationPolicy",
-}, smithy.ShapeTypeStructure, 4)
-var LogsConfigurationPolicy_allowedAccountIds *smithy.Schema
-
-var LogsConfigurationPolicy_filterPattern *smithy.Schema
-
-var LogsConfigurationPolicy_logType *smithy.Schema
-
-var LogsConfigurationPolicy_logRedactionConfiguration *smithy.Schema
-
-var _LogsConfigurationPolicyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "LogsConfigurationPolicyList",
-}, smithy.ShapeTypeList, 1)
-var _LogsConfigurationPolicyList_member *smithy.Schema
-
-var LogsStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "LogsStatus",
-}, smithy.ShapeTypeEnum, 2)
-var LogsStatus_PUBLISH_SUCCEEDED *smithy.Schema
-
-var LogsStatus_PUBLISH_FAILED *smithy.Schema
-
-var LogType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "LogType",
-}, smithy.ShapeTypeEnum, 2)
-var LogType_ALL *smithy.Schema
-
-var LogType_ERROR_SUMMARY *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var MembershipInferenceAttackScore = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "MembershipInferenceAttackScore",
-}, smithy.ShapeTypeStructure, 2)
-var MembershipInferenceAttackScore_attackVersion *smithy.Schema
-
-var MembershipInferenceAttackScore_score *smithy.Schema
-
-var _MembershipInferenceAttackScoreList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "MembershipInferenceAttackScoreList",
-}, smithy.ShapeTypeList, 1)
-var _MembershipInferenceAttackScoreList_member *smithy.Schema
-
-var MembershipInferenceAttackVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "MembershipInferenceAttackVersion",
-}, smithy.ShapeTypeEnum, 1)
-var MembershipInferenceAttackVersion_DISTANCE_TO_CLOSEST_RECORD_V1 *smithy.Schema
-
-var MetricDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "MetricDefinition",
-}, smithy.ShapeTypeStructure, 2)
-var MetricDefinition_name *smithy.Schema
-
-var MetricDefinition_regex *smithy.Schema
-
-var _MetricDefinitionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "MetricDefinitionList",
-}, smithy.ShapeTypeList, 1)
-var _MetricDefinitionList_member *smithy.Schema
-
-var _MetricName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "MetricName",
-}, smithy.ShapeTypeString, 0)
-
-var _MetricRegex = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "MetricRegex",
-}, smithy.ShapeTypeString, 0)
-
-var MetricsConfigurationPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "MetricsConfigurationPolicy",
-}, smithy.ShapeTypeStructure, 1)
-var MetricsConfigurationPolicy_noiseLevel *smithy.Schema
-
-var _MetricsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "MetricsList",
-}, smithy.ShapeTypeList, 1)
-var _MetricsList_member *smithy.Schema
-
-var MetricsStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "MetricsStatus",
-}, smithy.ShapeTypeEnum, 2)
-var MetricsStatus_PUBLISH_SUCCEEDED *smithy.Schema
-
-var MetricsStatus_PUBLISH_FAILED *smithy.Schema
-
-var _MinMatchingSeedSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "MinMatchingSeedSize",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MLInputChannelArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "MLInputChannelArn",
-}, smithy.ShapeTypeString, 0)
-
-var _MLInputChannelsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "MLInputChannelsList",
-}, smithy.ShapeTypeList, 1)
-var _MLInputChannelsList_member *smithy.Schema
-
-var MLInputChannelStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "MLInputChannelStatus",
-}, smithy.ShapeTypeEnum, 8)
-var MLInputChannelStatus_CREATE_PENDING *smithy.Schema
-
-var MLInputChannelStatus_CREATE_IN_PROGRESS *smithy.Schema
-
-var MLInputChannelStatus_CREATE_FAILED *smithy.Schema
-
-var MLInputChannelStatus_ACTIVE *smithy.Schema
-
-var MLInputChannelStatus_DELETE_PENDING *smithy.Schema
-
-var MLInputChannelStatus_DELETE_IN_PROGRESS *smithy.Schema
-
-var MLInputChannelStatus_DELETE_FAILED *smithy.Schema
-
-var MLInputChannelStatus_INACTIVE *smithy.Schema
-
-var MLInputChannelSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "MLInputChannelSummary",
-}, smithy.ShapeTypeStructure, 11)
-var MLInputChannelSummary_createTime *smithy.Schema
-
-var MLInputChannelSummary_updateTime *smithy.Schema
-
-var MLInputChannelSummary_membershipIdentifier *smithy.Schema
-
-var MLInputChannelSummary_collaborationIdentifier *smithy.Schema
-
-var MLInputChannelSummary_name *smithy.Schema
-
-var MLInputChannelSummary_configuredModelAlgorithmAssociations *smithy.Schema
-
-var MLInputChannelSummary_protectedQueryIdentifier *smithy.Schema
-
-var MLInputChannelSummary_mlInputChannelArn *smithy.Schema
-
-var MLInputChannelSummary_status *smithy.Schema
-
-var MLInputChannelSummary_description *smithy.Schema
-
-var MLInputChannelSummary_payerConfiguration *smithy.Schema
-
-var MLOutputConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "MLOutputConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var MLOutputConfiguration_destination *smithy.Schema
-
-var MLOutputConfiguration_roleArn *smithy.Schema
-
-var MLSyntheticDataParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "MLSyntheticDataParameters",
-}, smithy.ShapeTypeStructure, 3)
-var MLSyntheticDataParameters_epsilon *smithy.Schema
-
-var MLSyntheticDataParameters_maxMembershipInferenceAttackScore *smithy.Schema
-
-var MLSyntheticDataParameters_columnClassification *smithy.Schema
-
-var ModelInferenceDataSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ModelInferenceDataSource",
-}, smithy.ShapeTypeStructure, 1)
-var ModelInferenceDataSource_mlInputChannelArn *smithy.Schema
-
-var ModelTrainingDataChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ModelTrainingDataChannel",
-}, smithy.ShapeTypeStructure, 3)
-var ModelTrainingDataChannel_mlInputChannelArn *smithy.Schema
-
-var ModelTrainingDataChannel_channelName *smithy.Schema
-
-var ModelTrainingDataChannel_s3DataDistributionType *smithy.Schema
-
-var _ModelTrainingDataChannelName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ModelTrainingDataChannelName",
-}, smithy.ShapeTypeString, 0)
-
-var _ModelTrainingDataChannels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ModelTrainingDataChannels",
-}, smithy.ShapeTypeList, 1)
-var _ModelTrainingDataChannels_member *smithy.Schema
-
-var _NameString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "NameString",
-}, smithy.ShapeTypeString, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var NoiseLevelType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "NoiseLevelType",
-}, smithy.ShapeTypeEnum, 4)
-var NoiseLevelType_HIGH *smithy.Schema
-
-var NoiseLevelType_MEDIUM *smithy.Schema
-
-var NoiseLevelType_LOW *smithy.Schema
-
-var NoiseLevelType_NONE *smithy.Schema
-
-var _ParameterMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ParameterMap",
-}, smithy.ShapeTypeMap, 2, &smithytraits.Sensitive{})
-var _ParameterMap_key *smithy.Schema
-
-var _ParameterMap_value *smithy.Schema
-
-var _ParameterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ParameterName",
-}, smithy.ShapeTypeString, 0)
-
-var _ParameterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ParameterValue",
-}, smithy.ShapeTypeString, 0)
-
-var PayerConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "PayerConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var PayerConfiguration_computePayerAccountId *smithy.Schema
-
-var PayerConfiguration_syntheticDataPayerAccountId *smithy.Schema
-
-var PolicyExistenceCondition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "PolicyExistenceCondition",
-}, smithy.ShapeTypeEnum, 2)
-var PolicyExistenceCondition_POLICY_MUST_EXIST *smithy.Schema
-
-var PolicyExistenceCondition_POLICY_MUST_NOT_EXIST *smithy.Schema
-
-var PrivacyBudgets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "PrivacyBudgets",
-}, smithy.ShapeTypeUnion, 1)
-var PrivacyBudgets_accessBudgets *smithy.Schema
-
-var PrivacyConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "PrivacyConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var PrivacyConfiguration_policies *smithy.Schema
-
-var PrivacyConfigurationPolicies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "PrivacyConfigurationPolicies",
-}, smithy.ShapeTypeStructure, 3)
-var PrivacyConfigurationPolicies_trainedModels *smithy.Schema
-
-var PrivacyConfigurationPolicies_trainedModelExports *smithy.Schema
-
-var PrivacyConfigurationPolicies_trainedModelInferenceJobs *smithy.Schema
-
-var ProtectedQueryInputParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ProtectedQueryInputParameters",
-}, smithy.ShapeTypeStructure, 3)
-var ProtectedQueryInputParameters_sqlParameters *smithy.Schema
-
-var ProtectedQueryInputParameters_computeConfiguration *smithy.Schema
-
-var ProtectedQueryInputParameters_resultFormat *smithy.Schema
-
-var ProtectedQuerySQLParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ProtectedQuerySQLParameters",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Sensitive{})
-var ProtectedQuerySQLParameters_queryString *smithy.Schema
-
-var ProtectedQuerySQLParameters_analysisTemplateArn *smithy.Schema
-
-var ProtectedQuerySQLParameters_parameters *smithy.Schema
-
-var RelevanceMetric = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "RelevanceMetric",
-}, smithy.ShapeTypeStructure, 2)
-var RelevanceMetric_audienceSize *smithy.Schema
-
-var RelevanceMetric_score *smithy.Schema
-
-var _RelevanceMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "RelevanceMetrics",
-}, smithy.ShapeTypeList, 1)
-var _RelevanceMetrics_member *smithy.Schema
-
-var ResourceConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ResourceConfig",
-}, smithy.ShapeTypeStructure, 3)
-var ResourceConfig_instanceCount *smithy.Schema
-
-var ResourceConfig_instanceType *smithy.Schema
-
-var ResourceConfig_volumeSizeInGB *smithy.Schema
-
-var _ResourceDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ResourceDescription",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var _ResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ResourcePolicy",
-}, smithy.ShapeTypeString, 0)
-
-var ResultFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ResultFormat",
-}, smithy.ShapeTypeEnum, 2)
-var ResultFormat_CSV *smithy.Schema
-
-var ResultFormat_PARQUET *smithy.Schema
-
-var S3ConfigMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "S3ConfigMap",
-}, smithy.ShapeTypeStructure, 1)
-var S3ConfigMap_s3Uri *smithy.Schema
-
-var S3DataDistributionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "S3DataDistributionType",
-}, smithy.ShapeTypeEnum, 2)
-var S3DataDistributionType_FULLY_REPLICATED *smithy.Schema
-
-var S3DataDistributionType_SHARDED_BY_S3_KEY *smithy.Schema
-
-var _S3Path = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "S3Path",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var ServiceQuotaExceededException_quotaName *smithy.Schema
-
-var ServiceQuotaExceededException_quotaValue *smithy.Schema
-
-var SharedAudienceMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "SharedAudienceMetrics",
-}, smithy.ShapeTypeEnum, 2)
-var SharedAudienceMetrics_ALL *smithy.Schema
-
-var SharedAudienceMetrics_NONE *smithy.Schema
-
-var _SparkProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "SparkProperties",
-}, smithy.ShapeTypeMap, 2)
-var _SparkProperties_key *smithy.Schema
-
-var _SparkProperties_value *smithy.Schema
-
-var _SparkPropertyKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "SparkPropertyKey",
-}, smithy.ShapeTypeString, 0)
-
-var _SparkPropertyValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "SparkPropertyValue",
-}, smithy.ShapeTypeString, 0)
-
-var StatusDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "StatusDetails",
-}, smithy.ShapeTypeStructure, 2)
-var StatusDetails_statusCode *smithy.Schema
-
-var StatusDetails_message *smithy.Schema
-
-var StoppingCondition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "StoppingCondition",
-}, smithy.ShapeTypeStructure, 1)
-var StoppingCondition_maxRuntimeInSeconds *smithy.Schema
-
-var _SyntheticDataColumnName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "SyntheticDataColumnName",
-}, smithy.ShapeTypeString, 0)
-
-var SyntheticDataColumnProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "SyntheticDataColumnProperties",
-}, smithy.ShapeTypeStructure, 3)
-var SyntheticDataColumnProperties_columnName *smithy.Schema
-
-var SyntheticDataColumnProperties_columnType *smithy.Schema
-
-var SyntheticDataColumnProperties_isPredictiveValue *smithy.Schema
-
-var SyntheticDataColumnType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "SyntheticDataColumnType",
-}, smithy.ShapeTypeEnum, 2)
-var SyntheticDataColumnType_CATEGORICAL *smithy.Schema
-
-var SyntheticDataColumnType_NUMERICAL *smithy.Schema
-
-var SyntheticDataConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "SyntheticDataConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var SyntheticDataConfiguration_syntheticDataParameters *smithy.Schema
-
-var SyntheticDataConfiguration_syntheticDataEvaluationScores *smithy.Schema
-
-var SyntheticDataEvaluationScores = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "SyntheticDataEvaluationScores",
-}, smithy.ShapeTypeStructure, 1)
-var SyntheticDataEvaluationScores_dataPrivacyScores *smithy.Schema
-
-var _TaggableArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "TaggableArn",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "TagKeys",
-}, smithy.ShapeTypeList, 1)
-var _TagKeys_member *smithy.Schema
-
-var _TagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "TagMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagMap_key *smithy.Schema
-
-var _TagMap_value *smithy.Schema
-
-var TagOnCreatePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "TagOnCreatePolicy",
-}, smithy.ShapeTypeEnum, 2)
-var TagOnCreatePolicy_FROM_PARENT_RESOURCE *smithy.Schema
-
-var TagOnCreatePolicy_NONE *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var _TrainedModelArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "TrainedModelArn",
-}, smithy.ShapeTypeString, 0)
-
-var TrainedModelArtifactMaxSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "TrainedModelArtifactMaxSize",
-}, smithy.ShapeTypeStructure, 2)
-var TrainedModelArtifactMaxSize_unit *smithy.Schema
-
-var TrainedModelArtifactMaxSize_value *smithy.Schema
-
-var TrainedModelArtifactMaxSizeUnitType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "TrainedModelArtifactMaxSizeUnitType",
-}, smithy.ShapeTypeEnum, 1)
-var TrainedModelArtifactMaxSizeUnitType_GB *smithy.Schema
-
-var _TrainedModelArtifactMaxSizeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "TrainedModelArtifactMaxSizeValue",
-}, smithy.ShapeTypeDouble, 0)
-
-var TrainedModelExportFileType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "TrainedModelExportFileType",
-}, smithy.ShapeTypeEnum, 2)
-var TrainedModelExportFileType_MODEL *smithy.Schema
-
-var TrainedModelExportFileType_OUTPUT *smithy.Schema
-
-var _TrainedModelExportFileTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "TrainedModelExportFileTypeList",
-}, smithy.ShapeTypeList, 1)
-var _TrainedModelExportFileTypeList_member *smithy.Schema
-
-var TrainedModelExportJobStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "TrainedModelExportJobStatus",
-}, smithy.ShapeTypeEnum, 4)
-var TrainedModelExportJobStatus_CREATE_PENDING *smithy.Schema
-
-var TrainedModelExportJobStatus_CREATE_IN_PROGRESS *smithy.Schema
-
-var TrainedModelExportJobStatus_CREATE_FAILED *smithy.Schema
-
-var TrainedModelExportJobStatus_ACTIVE *smithy.Schema
-
-var TrainedModelExportOutputConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "TrainedModelExportOutputConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var TrainedModelExportOutputConfiguration_members *smithy.Schema
-
-var TrainedModelExportReceiverMember = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "TrainedModelExportReceiverMember",
-}, smithy.ShapeTypeStructure, 1)
-var TrainedModelExportReceiverMember_accountId *smithy.Schema
-
-var _TrainedModelExportReceiverMembers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "TrainedModelExportReceiverMembers",
-}, smithy.ShapeTypeList, 1)
-var _TrainedModelExportReceiverMembers_member *smithy.Schema
-
-var TrainedModelExportsConfigurationPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "TrainedModelExportsConfigurationPolicy",
-}, smithy.ShapeTypeStructure, 2)
-var TrainedModelExportsConfigurationPolicy_maxSize *smithy.Schema
-
-var TrainedModelExportsConfigurationPolicy_filesToExport *smithy.Schema
-
-var TrainedModelExportsMaxSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "TrainedModelExportsMaxSize",
-}, smithy.ShapeTypeStructure, 2)
-var TrainedModelExportsMaxSize_unit *smithy.Schema
-
-var TrainedModelExportsMaxSize_value *smithy.Schema
-
-var TrainedModelExportsMaxSizeUnitType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "TrainedModelExportsMaxSizeUnitType",
-}, smithy.ShapeTypeEnum, 1)
-var TrainedModelExportsMaxSizeUnitType_GB *smithy.Schema
-
-var _TrainedModelExportsMaxSizeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "TrainedModelExportsMaxSizeValue",
-}, smithy.ShapeTypeDouble, 0)
-
-var _TrainedModelInferenceJobArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "TrainedModelInferenceJobArn",
-}, smithy.ShapeTypeString, 0)
-
-var _TrainedModelInferenceJobList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "TrainedModelInferenceJobList",
-}, smithy.ShapeTypeList, 1)
-var _TrainedModelInferenceJobList_member *smithy.Schema
-
-var TrainedModelInferenceJobsConfigurationPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "TrainedModelInferenceJobsConfigurationPolicy",
-}, smithy.ShapeTypeStructure, 2)
-var TrainedModelInferenceJobsConfigurationPolicy_containerLogs *smithy.Schema
-
-var TrainedModelInferenceJobsConfigurationPolicy_maxOutputSize *smithy.Schema
-
-var TrainedModelInferenceJobStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "TrainedModelInferenceJobStatus",
-}, smithy.ShapeTypeEnum, 8)
-var TrainedModelInferenceJobStatus_CREATE_PENDING *smithy.Schema
-
-var TrainedModelInferenceJobStatus_CREATE_IN_PROGRESS *smithy.Schema
-
-var TrainedModelInferenceJobStatus_CREATE_FAILED *smithy.Schema
-
-var TrainedModelInferenceJobStatus_ACTIVE *smithy.Schema
-
-var TrainedModelInferenceJobStatus_CANCEL_PENDING *smithy.Schema
-
-var TrainedModelInferenceJobStatus_CANCEL_IN_PROGRESS *smithy.Schema
-
-var TrainedModelInferenceJobStatus_CANCEL_FAILED *smithy.Schema
-
-var TrainedModelInferenceJobStatus_INACTIVE *smithy.Schema
-
-var TrainedModelInferenceJobSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "TrainedModelInferenceJobSummary",
-}, smithy.ShapeTypeStructure, 17)
-var TrainedModelInferenceJobSummary_trainedModelInferenceJobArn *smithy.Schema
-
-var TrainedModelInferenceJobSummary_configuredModelAlgorithmAssociationArn *smithy.Schema
-
-var TrainedModelInferenceJobSummary_membershipIdentifier *smithy.Schema
-
-var TrainedModelInferenceJobSummary_trainedModelArn *smithy.Schema
-
-var TrainedModelInferenceJobSummary_trainedModelVersionIdentifier *smithy.Schema
-
-var TrainedModelInferenceJobSummary_collaborationIdentifier *smithy.Schema
-
-var TrainedModelInferenceJobSummary_status *smithy.Schema
-
-var TrainedModelInferenceJobSummary_outputConfiguration *smithy.Schema
-
-var TrainedModelInferenceJobSummary_name *smithy.Schema
-
-var TrainedModelInferenceJobSummary_description *smithy.Schema
-
-var TrainedModelInferenceJobSummary_metricsStatus *smithy.Schema
-
-var TrainedModelInferenceJobSummary_metricsStatusDetails *smithy.Schema
-
-var TrainedModelInferenceJobSummary_logsStatus *smithy.Schema
-
-var TrainedModelInferenceJobSummary_logsStatusDetails *smithy.Schema
-
-var TrainedModelInferenceJobSummary_mlModelInferencePayerAccountId *smithy.Schema
-
-var TrainedModelInferenceJobSummary_createTime *smithy.Schema
-
-var TrainedModelInferenceJobSummary_updateTime *smithy.Schema
-
-var TrainedModelInferenceMaxOutputSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "TrainedModelInferenceMaxOutputSize",
-}, smithy.ShapeTypeStructure, 2)
-var TrainedModelInferenceMaxOutputSize_unit *smithy.Schema
-
-var TrainedModelInferenceMaxOutputSize_value *smithy.Schema
-
-var TrainedModelInferenceMaxOutputSizeUnitType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "TrainedModelInferenceMaxOutputSizeUnitType",
-}, smithy.ShapeTypeEnum, 1)
-var TrainedModelInferenceMaxOutputSizeUnitType_GB *smithy.Schema
-
-var _TrainedModelInferenceMaxOutputSizeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "TrainedModelInferenceMaxOutputSizeValue",
-}, smithy.ShapeTypeDouble, 0)
-
-var _TrainedModelList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "TrainedModelList",
-}, smithy.ShapeTypeList, 1)
-var _TrainedModelList_member *smithy.Schema
-
-var TrainedModelsConfigurationPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "TrainedModelsConfigurationPolicy",
-}, smithy.ShapeTypeStructure, 3)
-var TrainedModelsConfigurationPolicy_containerLogs *smithy.Schema
-
-var TrainedModelsConfigurationPolicy_containerMetrics *smithy.Schema
-
-var TrainedModelsConfigurationPolicy_maxArtifactSize *smithy.Schema
-
-var TrainedModelStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "TrainedModelStatus",
-}, smithy.ShapeTypeEnum, 11)
-var TrainedModelStatus_CREATE_PENDING *smithy.Schema
-
-var TrainedModelStatus_CREATE_IN_PROGRESS *smithy.Schema
-
-var TrainedModelStatus_CREATE_FAILED *smithy.Schema
-
-var TrainedModelStatus_ACTIVE *smithy.Schema
-
-var TrainedModelStatus_DELETE_PENDING *smithy.Schema
-
-var TrainedModelStatus_DELETE_IN_PROGRESS *smithy.Schema
-
-var TrainedModelStatus_DELETE_FAILED *smithy.Schema
-
-var TrainedModelStatus_INACTIVE *smithy.Schema
-
-var TrainedModelStatus_CANCEL_PENDING *smithy.Schema
-
-var TrainedModelStatus_CANCEL_IN_PROGRESS *smithy.Schema
-
-var TrainedModelStatus_CANCEL_FAILED *smithy.Schema
-
-var TrainedModelSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "TrainedModelSummary",
-}, smithy.ShapeTypeStructure, 12)
-var TrainedModelSummary_createTime *smithy.Schema
-
-var TrainedModelSummary_updateTime *smithy.Schema
-
-var TrainedModelSummary_trainedModelArn *smithy.Schema
-
-var TrainedModelSummary_versionIdentifier *smithy.Schema
-
-var TrainedModelSummary_incrementalTrainingDataChannels *smithy.Schema
-
-var TrainedModelSummary_name *smithy.Schema
-
-var TrainedModelSummary_description *smithy.Schema
-
-var TrainedModelSummary_membershipIdentifier *smithy.Schema
-
-var TrainedModelSummary_collaborationIdentifier *smithy.Schema
-
-var TrainedModelSummary_status *smithy.Schema
-
-var TrainedModelSummary_configuredModelAlgorithmAssociationArn *smithy.Schema
-
-var TrainedModelSummary_mlModelTrainingPayerAccountId *smithy.Schema
-
-var _TrainingDatasetArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "TrainingDatasetArn",
-}, smithy.ShapeTypeString, 0)
-
-var _TrainingDatasetList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "TrainingDatasetList",
-}, smithy.ShapeTypeList, 1)
-var _TrainingDatasetList_member *smithy.Schema
-
-var TrainingDatasetStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "TrainingDatasetStatus",
-}, smithy.ShapeTypeEnum, 1)
-var TrainingDatasetStatus_ACTIVE *smithy.Schema
-
-var TrainingDatasetSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "TrainingDatasetSummary",
-}, smithy.ShapeTypeStructure, 6)
-var TrainingDatasetSummary_createTime *smithy.Schema
-
-var TrainingDatasetSummary_updateTime *smithy.Schema
-
-var TrainingDatasetSummary_trainingDatasetArn *smithy.Schema
-
-var TrainingDatasetSummary_name *smithy.Schema
-
-var TrainingDatasetSummary_status *smithy.Schema
-
-var TrainingDatasetSummary_description *smithy.Schema
-
-var TrainingInputMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "TrainingInputMode",
-}, smithy.ShapeTypeEnum, 3)
-var TrainingInputMode_FILE *smithy.Schema
-
-var TrainingInputMode_FAST_FILE *smithy.Schema
-
-var TrainingInputMode_PIPE *smithy.Schema
-
-var _UUID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "UUID",
-}, smithy.ShapeTypeString, 0)
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var WorkerComputeConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "WorkerComputeConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var WorkerComputeConfiguration_type *smithy.Schema
-
-var WorkerComputeConfiguration_number *smithy.Schema
-
-var WorkerComputeConfiguration_properties *smithy.Schema
-
-var WorkerComputeConfigurationProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "WorkerComputeConfigurationProperties",
-}, smithy.ShapeTypeUnion, 1)
-var WorkerComputeConfigurationProperties_spark *smithy.Schema
-
-var WorkerComputeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "WorkerComputeType",
-}, smithy.ShapeTypeEnum, 3)
-var WorkerComputeType_CR1X *smithy.Schema
-
-var WorkerComputeType_CR4X *smithy.Schema
-
-var WorkerComputeType_CR8X *smithy.Schema
-
-var CancelTrainedModelInferenceJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "CancelTrainedModelInferenceJobRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CancelTrainedModelInferenceJobRequest_membershipIdentifier *smithy.Schema
-
-var CancelTrainedModelInferenceJobRequest_trainedModelInferenceJobArn *smithy.Schema
-
-var CancelTrainedModelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "CancelTrainedModelRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CancelTrainedModelRequest_membershipIdentifier *smithy.Schema
-
-var CancelTrainedModelRequest_trainedModelArn *smithy.Schema
-
-var CancelTrainedModelRequest_versionIdentifier *smithy.Schema
-
-var CreateAudienceModelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "CreateAudienceModelRequest",
-}, smithy.ShapeTypeStructure, 7)
-var CreateAudienceModelRequest_trainingDataStartTime *smithy.Schema
-
-var CreateAudienceModelRequest_trainingDataEndTime *smithy.Schema
-
-var CreateAudienceModelRequest_name *smithy.Schema
-
-var CreateAudienceModelRequest_trainingDatasetArn *smithy.Schema
-
-var CreateAudienceModelRequest_kmsKeyArn *smithy.Schema
-
-var CreateAudienceModelRequest_tags *smithy.Schema
-
-var CreateAudienceModelRequest_description *smithy.Schema
-
-var CreateAudienceModelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "CreateAudienceModelResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateAudienceModelResponse_audienceModelArn *smithy.Schema
-
-var CreateConfiguredAudienceModelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "CreateConfiguredAudienceModelRequest",
-}, smithy.ShapeTypeStructure, 9)
-var CreateConfiguredAudienceModelRequest_name *smithy.Schema
-
-var CreateConfiguredAudienceModelRequest_audienceModelArn *smithy.Schema
-
-var CreateConfiguredAudienceModelRequest_outputConfig *smithy.Schema
-
-var CreateConfiguredAudienceModelRequest_description *smithy.Schema
-
-var CreateConfiguredAudienceModelRequest_sharedAudienceMetrics *smithy.Schema
-
-var CreateConfiguredAudienceModelRequest_minMatchingSeedSize *smithy.Schema
-
-var CreateConfiguredAudienceModelRequest_audienceSizeConfig *smithy.Schema
-
-var CreateConfiguredAudienceModelRequest_tags *smithy.Schema
-
-var CreateConfiguredAudienceModelRequest_childResourceTagOnCreatePolicy *smithy.Schema
-
-var CreateConfiguredAudienceModelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "CreateConfiguredAudienceModelResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateConfiguredAudienceModelResponse_configuredAudienceModelArn *smithy.Schema
-
-var CreateConfiguredModelAlgorithmAssociationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "CreateConfiguredModelAlgorithmAssociationRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateConfiguredModelAlgorithmAssociationRequest_membershipIdentifier *smithy.Schema
-
-var CreateConfiguredModelAlgorithmAssociationRequest_configuredModelAlgorithmArn *smithy.Schema
-
-var CreateConfiguredModelAlgorithmAssociationRequest_name *smithy.Schema
-
-var CreateConfiguredModelAlgorithmAssociationRequest_description *smithy.Schema
-
-var CreateConfiguredModelAlgorithmAssociationRequest_privacyConfiguration *smithy.Schema
-
-var CreateConfiguredModelAlgorithmAssociationRequest_tags *smithy.Schema
-
-var CreateConfiguredModelAlgorithmAssociationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "CreateConfiguredModelAlgorithmAssociationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateConfiguredModelAlgorithmAssociationResponse_configuredModelAlgorithmAssociationArn *smithy.Schema
-
-var CreateConfiguredModelAlgorithmRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "CreateConfiguredModelAlgorithmRequest",
-}, smithy.ShapeTypeStructure, 7)
-var CreateConfiguredModelAlgorithmRequest_name *smithy.Schema
-
-var CreateConfiguredModelAlgorithmRequest_description *smithy.Schema
-
-var CreateConfiguredModelAlgorithmRequest_roleArn *smithy.Schema
-
-var CreateConfiguredModelAlgorithmRequest_trainingContainerConfig *smithy.Schema
-
-var CreateConfiguredModelAlgorithmRequest_inferenceContainerConfig *smithy.Schema
-
-var CreateConfiguredModelAlgorithmRequest_tags *smithy.Schema
-
-var CreateConfiguredModelAlgorithmRequest_kmsKeyArn *smithy.Schema
-
-var CreateConfiguredModelAlgorithmResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "CreateConfiguredModelAlgorithmResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateConfiguredModelAlgorithmResponse_configuredModelAlgorithmArn *smithy.Schema
-
-var CreateMLInputChannelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "CreateMLInputChannelRequest",
-}, smithy.ShapeTypeStructure, 9)
-var CreateMLInputChannelRequest_membershipIdentifier *smithy.Schema
-
-var CreateMLInputChannelRequest_configuredModelAlgorithmAssociations *smithy.Schema
-
-var CreateMLInputChannelRequest_inputChannel *smithy.Schema
-
-var CreateMLInputChannelRequest_name *smithy.Schema
-
-var CreateMLInputChannelRequest_retentionInDays *smithy.Schema
-
-var CreateMLInputChannelRequest_description *smithy.Schema
-
-var CreateMLInputChannelRequest_kmsKeyArn *smithy.Schema
-
-var CreateMLInputChannelRequest_tags *smithy.Schema
-
-var CreateMLInputChannelRequest_payerConfiguration *smithy.Schema
-
-var CreateMLInputChannelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "CreateMLInputChannelResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateMLInputChannelResponse_mlInputChannelArn *smithy.Schema
-
-var CreateTrainedModelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "CreateTrainedModelRequest",
-}, smithy.ShapeTypeStructure, 14)
-var CreateTrainedModelRequest_membershipIdentifier *smithy.Schema
-
-var CreateTrainedModelRequest_name *smithy.Schema
-
-var CreateTrainedModelRequest_configuredModelAlgorithmAssociationArn *smithy.Schema
-
-var CreateTrainedModelRequest_hyperparameters *smithy.Schema
-
-var CreateTrainedModelRequest_environment *smithy.Schema
-
-var CreateTrainedModelRequest_resourceConfig *smithy.Schema
-
-var CreateTrainedModelRequest_stoppingCondition *smithy.Schema
-
-var CreateTrainedModelRequest_incrementalTrainingDataChannels *smithy.Schema
-
-var CreateTrainedModelRequest_dataChannels *smithy.Schema
-
-var CreateTrainedModelRequest_trainingInputMode *smithy.Schema
-
-var CreateTrainedModelRequest_description *smithy.Schema
-
-var CreateTrainedModelRequest_kmsKeyArn *smithy.Schema
-
-var CreateTrainedModelRequest_tags *smithy.Schema
-
-var CreateTrainedModelRequest_mlModelTrainingPayerAccountId *smithy.Schema
-
-var CreateTrainedModelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "CreateTrainedModelResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateTrainedModelResponse_trainedModelArn *smithy.Schema
-
-var CreateTrainedModelResponse_versionIdentifier *smithy.Schema
-
-var CreateTrainingDatasetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "CreateTrainingDatasetRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateTrainingDatasetRequest_name *smithy.Schema
-
-var CreateTrainingDatasetRequest_roleArn *smithy.Schema
-
-var CreateTrainingDatasetRequest_trainingData *smithy.Schema
-
-var CreateTrainingDatasetRequest_tags *smithy.Schema
-
-var CreateTrainingDatasetRequest_description *smithy.Schema
-
-var CreateTrainingDatasetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "CreateTrainingDatasetResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateTrainingDatasetResponse_trainingDatasetArn *smithy.Schema
-
-var DeleteAudienceGenerationJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "DeleteAudienceGenerationJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteAudienceGenerationJobRequest_audienceGenerationJobArn *smithy.Schema
-
-var DeleteAudienceModelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "DeleteAudienceModelRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteAudienceModelRequest_audienceModelArn *smithy.Schema
-
-var DeleteConfiguredAudienceModelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "DeleteConfiguredAudienceModelRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteConfiguredAudienceModelRequest_configuredAudienceModelArn *smithy.Schema
-
-var DeleteConfiguredAudienceModelPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "DeleteConfiguredAudienceModelPolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteConfiguredAudienceModelPolicyRequest_configuredAudienceModelArn *smithy.Schema
-
-var DeleteConfiguredModelAlgorithmAssociationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "DeleteConfiguredModelAlgorithmAssociationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteConfiguredModelAlgorithmAssociationRequest_configuredModelAlgorithmAssociationArn *smithy.Schema
-
-var DeleteConfiguredModelAlgorithmAssociationRequest_membershipIdentifier *smithy.Schema
-
-var DeleteConfiguredModelAlgorithmRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "DeleteConfiguredModelAlgorithmRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteConfiguredModelAlgorithmRequest_configuredModelAlgorithmArn *smithy.Schema
-
-var DeleteMLConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "DeleteMLConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteMLConfigurationRequest_membershipIdentifier *smithy.Schema
-
-var DeleteMLInputChannelDataRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "DeleteMLInputChannelDataRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteMLInputChannelDataRequest_mlInputChannelArn *smithy.Schema
-
-var DeleteMLInputChannelDataRequest_membershipIdentifier *smithy.Schema
-
-var DeleteTrainedModelOutputRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "DeleteTrainedModelOutputRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteTrainedModelOutputRequest_trainedModelArn *smithy.Schema
-
-var DeleteTrainedModelOutputRequest_membershipIdentifier *smithy.Schema
-
-var DeleteTrainedModelOutputRequest_versionIdentifier *smithy.Schema
-
-var DeleteTrainingDatasetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "DeleteTrainingDatasetRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteTrainingDatasetRequest_trainingDatasetArn *smithy.Schema
-
-var GetAudienceGenerationJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "GetAudienceGenerationJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetAudienceGenerationJobRequest_audienceGenerationJobArn *smithy.Schema
-
-var GetAudienceGenerationJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "GetAudienceGenerationJobResponse",
-}, smithy.ShapeTypeStructure, 15)
-var GetAudienceGenerationJobResponse_createTime *smithy.Schema
-
-var GetAudienceGenerationJobResponse_updateTime *smithy.Schema
-
-var GetAudienceGenerationJobResponse_audienceGenerationJobArn *smithy.Schema
-
-var GetAudienceGenerationJobResponse_name *smithy.Schema
-
-var GetAudienceGenerationJobResponse_description *smithy.Schema
-
-var GetAudienceGenerationJobResponse_status *smithy.Schema
-
-var GetAudienceGenerationJobResponse_statusDetails *smithy.Schema
-
-var GetAudienceGenerationJobResponse_configuredAudienceModelArn *smithy.Schema
-
-var GetAudienceGenerationJobResponse_seedAudience *smithy.Schema
-
-var GetAudienceGenerationJobResponse_includeSeedInOutput *smithy.Schema
-
-var GetAudienceGenerationJobResponse_collaborationId *smithy.Schema
-
-var GetAudienceGenerationJobResponse_metrics *smithy.Schema
-
-var GetAudienceGenerationJobResponse_startedBy *smithy.Schema
-
-var GetAudienceGenerationJobResponse_tags *smithy.Schema
-
-var GetAudienceGenerationJobResponse_protectedQueryIdentifier *smithy.Schema
-
-var GetAudienceModelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "GetAudienceModelRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetAudienceModelRequest_audienceModelArn *smithy.Schema
-
-var GetAudienceModelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "GetAudienceModelResponse",
-}, smithy.ShapeTypeStructure, 12)
-var GetAudienceModelResponse_createTime *smithy.Schema
-
-var GetAudienceModelResponse_updateTime *smithy.Schema
-
-var GetAudienceModelResponse_trainingDataStartTime *smithy.Schema
-
-var GetAudienceModelResponse_trainingDataEndTime *smithy.Schema
-
-var GetAudienceModelResponse_audienceModelArn *smithy.Schema
-
-var GetAudienceModelResponse_name *smithy.Schema
-
-var GetAudienceModelResponse_trainingDatasetArn *smithy.Schema
-
-var GetAudienceModelResponse_status *smithy.Schema
-
-var GetAudienceModelResponse_statusDetails *smithy.Schema
-
-var GetAudienceModelResponse_kmsKeyArn *smithy.Schema
-
-var GetAudienceModelResponse_tags *smithy.Schema
-
-var GetAudienceModelResponse_description *smithy.Schema
-
-var GetCollaborationConfiguredModelAlgorithmAssociationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "GetCollaborationConfiguredModelAlgorithmAssociationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetCollaborationConfiguredModelAlgorithmAssociationRequest_configuredModelAlgorithmAssociationArn *smithy.Schema
-
-var GetCollaborationConfiguredModelAlgorithmAssociationRequest_collaborationIdentifier *smithy.Schema
-
-var GetCollaborationConfiguredModelAlgorithmAssociationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "GetCollaborationConfiguredModelAlgorithmAssociationResponse",
-}, smithy.ShapeTypeStructure, 10)
-var GetCollaborationConfiguredModelAlgorithmAssociationResponse_createTime *smithy.Schema
-
-var GetCollaborationConfiguredModelAlgorithmAssociationResponse_updateTime *smithy.Schema
-
-var GetCollaborationConfiguredModelAlgorithmAssociationResponse_configuredModelAlgorithmAssociationArn *smithy.Schema
-
-var GetCollaborationConfiguredModelAlgorithmAssociationResponse_membershipIdentifier *smithy.Schema
-
-var GetCollaborationConfiguredModelAlgorithmAssociationResponse_collaborationIdentifier *smithy.Schema
-
-var GetCollaborationConfiguredModelAlgorithmAssociationResponse_configuredModelAlgorithmArn *smithy.Schema
-
-var GetCollaborationConfiguredModelAlgorithmAssociationResponse_name *smithy.Schema
-
-var GetCollaborationConfiguredModelAlgorithmAssociationResponse_description *smithy.Schema
-
-var GetCollaborationConfiguredModelAlgorithmAssociationResponse_creatorAccountId *smithy.Schema
-
-var GetCollaborationConfiguredModelAlgorithmAssociationResponse_privacyConfiguration *smithy.Schema
-
-var GetCollaborationMLInputChannelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "GetCollaborationMLInputChannelRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetCollaborationMLInputChannelRequest_mlInputChannelArn *smithy.Schema
-
-var GetCollaborationMLInputChannelRequest_collaborationIdentifier *smithy.Schema
-
-var GetCollaborationMLInputChannelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "GetCollaborationMLInputChannelResponse",
-}, smithy.ShapeTypeStructure, 16)
-var GetCollaborationMLInputChannelResponse_membershipIdentifier *smithy.Schema
-
-var GetCollaborationMLInputChannelResponse_collaborationIdentifier *smithy.Schema
-
-var GetCollaborationMLInputChannelResponse_mlInputChannelArn *smithy.Schema
-
-var GetCollaborationMLInputChannelResponse_name *smithy.Schema
-
-var GetCollaborationMLInputChannelResponse_configuredModelAlgorithmAssociations *smithy.Schema
-
-var GetCollaborationMLInputChannelResponse_status *smithy.Schema
-
-var GetCollaborationMLInputChannelResponse_statusDetails *smithy.Schema
-
-var GetCollaborationMLInputChannelResponse_retentionInDays *smithy.Schema
-
-var GetCollaborationMLInputChannelResponse_numberOfRecords *smithy.Schema
-
-var GetCollaborationMLInputChannelResponse_privacyBudgets *smithy.Schema
-
-var GetCollaborationMLInputChannelResponse_description *smithy.Schema
-
-var GetCollaborationMLInputChannelResponse_syntheticDataConfiguration *smithy.Schema
-
-var GetCollaborationMLInputChannelResponse_payerConfiguration *smithy.Schema
-
-var GetCollaborationMLInputChannelResponse_createTime *smithy.Schema
-
-var GetCollaborationMLInputChannelResponse_updateTime *smithy.Schema
-
-var GetCollaborationMLInputChannelResponse_creatorAccountId *smithy.Schema
-
-var GetCollaborationTrainedModelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "GetCollaborationTrainedModelRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetCollaborationTrainedModelRequest_trainedModelArn *smithy.Schema
-
-var GetCollaborationTrainedModelRequest_collaborationIdentifier *smithy.Schema
-
-var GetCollaborationTrainedModelRequest_versionIdentifier *smithy.Schema
-
-var GetCollaborationTrainedModelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "GetCollaborationTrainedModelResponse",
-}, smithy.ShapeTypeStructure, 22)
-var GetCollaborationTrainedModelResponse_membershipIdentifier *smithy.Schema
-
-var GetCollaborationTrainedModelResponse_collaborationIdentifier *smithy.Schema
-
-var GetCollaborationTrainedModelResponse_trainedModelArn *smithy.Schema
-
-var GetCollaborationTrainedModelResponse_versionIdentifier *smithy.Schema
-
-var GetCollaborationTrainedModelResponse_incrementalTrainingDataChannels *smithy.Schema
-
-var GetCollaborationTrainedModelResponse_name *smithy.Schema
-
-var GetCollaborationTrainedModelResponse_description *smithy.Schema
-
-var GetCollaborationTrainedModelResponse_status *smithy.Schema
-
-var GetCollaborationTrainedModelResponse_statusDetails *smithy.Schema
-
-var GetCollaborationTrainedModelResponse_configuredModelAlgorithmAssociationArn *smithy.Schema
-
-var GetCollaborationTrainedModelResponse_resourceConfig *smithy.Schema
-
-var GetCollaborationTrainedModelResponse_trainingInputMode *smithy.Schema
-
-var GetCollaborationTrainedModelResponse_stoppingCondition *smithy.Schema
-
-var GetCollaborationTrainedModelResponse_metricsStatus *smithy.Schema
-
-var GetCollaborationTrainedModelResponse_metricsStatusDetails *smithy.Schema
-
-var GetCollaborationTrainedModelResponse_logsStatus *smithy.Schema
-
-var GetCollaborationTrainedModelResponse_logsStatusDetails *smithy.Schema
-
-var GetCollaborationTrainedModelResponse_trainingContainerImageDigest *smithy.Schema
-
-var GetCollaborationTrainedModelResponse_mlModelTrainingPayerAccountId *smithy.Schema
-
-var GetCollaborationTrainedModelResponse_createTime *smithy.Schema
-
-var GetCollaborationTrainedModelResponse_updateTime *smithy.Schema
-
-var GetCollaborationTrainedModelResponse_creatorAccountId *smithy.Schema
-
-var GetConfiguredAudienceModelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "GetConfiguredAudienceModelRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetConfiguredAudienceModelRequest_configuredAudienceModelArn *smithy.Schema
-
-var GetConfiguredAudienceModelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "GetConfiguredAudienceModelResponse",
-}, smithy.ShapeTypeStructure, 13)
-var GetConfiguredAudienceModelResponse_createTime *smithy.Schema
-
-var GetConfiguredAudienceModelResponse_updateTime *smithy.Schema
-
-var GetConfiguredAudienceModelResponse_configuredAudienceModelArn *smithy.Schema
-
-var GetConfiguredAudienceModelResponse_name *smithy.Schema
-
-var GetConfiguredAudienceModelResponse_audienceModelArn *smithy.Schema
-
-var GetConfiguredAudienceModelResponse_outputConfig *smithy.Schema
-
-var GetConfiguredAudienceModelResponse_description *smithy.Schema
-
-var GetConfiguredAudienceModelResponse_status *smithy.Schema
-
-var GetConfiguredAudienceModelResponse_sharedAudienceMetrics *smithy.Schema
-
-var GetConfiguredAudienceModelResponse_minMatchingSeedSize *smithy.Schema
-
-var GetConfiguredAudienceModelResponse_audienceSizeConfig *smithy.Schema
-
-var GetConfiguredAudienceModelResponse_tags *smithy.Schema
-
-var GetConfiguredAudienceModelResponse_childResourceTagOnCreatePolicy *smithy.Schema
-
-var GetConfiguredAudienceModelPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "GetConfiguredAudienceModelPolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetConfiguredAudienceModelPolicyRequest_configuredAudienceModelArn *smithy.Schema
-
-var GetConfiguredAudienceModelPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "GetConfiguredAudienceModelPolicyResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetConfiguredAudienceModelPolicyResponse_configuredAudienceModelArn *smithy.Schema
-
-var GetConfiguredAudienceModelPolicyResponse_configuredAudienceModelPolicy *smithy.Schema
-
-var GetConfiguredAudienceModelPolicyResponse_policyHash *smithy.Schema
-
-var GetConfiguredModelAlgorithmAssociationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "GetConfiguredModelAlgorithmAssociationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetConfiguredModelAlgorithmAssociationRequest_configuredModelAlgorithmAssociationArn *smithy.Schema
-
-var GetConfiguredModelAlgorithmAssociationRequest_membershipIdentifier *smithy.Schema
-
-var GetConfiguredModelAlgorithmAssociationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "GetConfiguredModelAlgorithmAssociationResponse",
-}, smithy.ShapeTypeStructure, 10)
-var GetConfiguredModelAlgorithmAssociationResponse_createTime *smithy.Schema
-
-var GetConfiguredModelAlgorithmAssociationResponse_updateTime *smithy.Schema
-
-var GetConfiguredModelAlgorithmAssociationResponse_configuredModelAlgorithmAssociationArn *smithy.Schema
-
-var GetConfiguredModelAlgorithmAssociationResponse_membershipIdentifier *smithy.Schema
-
-var GetConfiguredModelAlgorithmAssociationResponse_collaborationIdentifier *smithy.Schema
-
-var GetConfiguredModelAlgorithmAssociationResponse_configuredModelAlgorithmArn *smithy.Schema
-
-var GetConfiguredModelAlgorithmAssociationResponse_name *smithy.Schema
-
-var GetConfiguredModelAlgorithmAssociationResponse_privacyConfiguration *smithy.Schema
-
-var GetConfiguredModelAlgorithmAssociationResponse_description *smithy.Schema
-
-var GetConfiguredModelAlgorithmAssociationResponse_tags *smithy.Schema
-
-var GetConfiguredModelAlgorithmRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "GetConfiguredModelAlgorithmRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetConfiguredModelAlgorithmRequest_configuredModelAlgorithmArn *smithy.Schema
-
-var GetConfiguredModelAlgorithmResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "GetConfiguredModelAlgorithmResponse",
-}, smithy.ShapeTypeStructure, 10)
-var GetConfiguredModelAlgorithmResponse_createTime *smithy.Schema
-
-var GetConfiguredModelAlgorithmResponse_updateTime *smithy.Schema
-
-var GetConfiguredModelAlgorithmResponse_configuredModelAlgorithmArn *smithy.Schema
-
-var GetConfiguredModelAlgorithmResponse_name *smithy.Schema
-
-var GetConfiguredModelAlgorithmResponse_trainingContainerConfig *smithy.Schema
-
-var GetConfiguredModelAlgorithmResponse_inferenceContainerConfig *smithy.Schema
-
-var GetConfiguredModelAlgorithmResponse_roleArn *smithy.Schema
-
-var GetConfiguredModelAlgorithmResponse_description *smithy.Schema
-
-var GetConfiguredModelAlgorithmResponse_tags *smithy.Schema
-
-var GetConfiguredModelAlgorithmResponse_kmsKeyArn *smithy.Schema
-
-var GetMLConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "GetMLConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetMLConfigurationRequest_membershipIdentifier *smithy.Schema
-
-var GetMLConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "GetMLConfigurationResponse",
-}, smithy.ShapeTypeStructure, 4)
-var GetMLConfigurationResponse_membershipIdentifier *smithy.Schema
-
-var GetMLConfigurationResponse_defaultOutputLocation *smithy.Schema
-
-var GetMLConfigurationResponse_createTime *smithy.Schema
-
-var GetMLConfigurationResponse_updateTime *smithy.Schema
-
-var GetMLInputChannelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "GetMLInputChannelRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetMLInputChannelRequest_mlInputChannelArn *smithy.Schema
-
-var GetMLInputChannelRequest_membershipIdentifier *smithy.Schema
-
-var GetMLInputChannelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "GetMLInputChannelResponse",
-}, smithy.ShapeTypeStructure, 21)
-var GetMLInputChannelResponse_membershipIdentifier *smithy.Schema
-
-var GetMLInputChannelResponse_collaborationIdentifier *smithy.Schema
-
-var GetMLInputChannelResponse_mlInputChannelArn *smithy.Schema
-
-var GetMLInputChannelResponse_name *smithy.Schema
-
-var GetMLInputChannelResponse_configuredModelAlgorithmAssociations *smithy.Schema
-
-var GetMLInputChannelResponse_status *smithy.Schema
-
-var GetMLInputChannelResponse_statusDetails *smithy.Schema
-
-var GetMLInputChannelResponse_retentionInDays *smithy.Schema
-
-var GetMLInputChannelResponse_numberOfRecords *smithy.Schema
-
-var GetMLInputChannelResponse_privacyBudgets *smithy.Schema
-
-var GetMLInputChannelResponse_description *smithy.Schema
-
-var GetMLInputChannelResponse_syntheticDataConfiguration *smithy.Schema
-
-var GetMLInputChannelResponse_payerConfiguration *smithy.Schema
-
-var GetMLInputChannelResponse_createTime *smithy.Schema
-
-var GetMLInputChannelResponse_updateTime *smithy.Schema
-
-var GetMLInputChannelResponse_inputChannel *smithy.Schema
-
-var GetMLInputChannelResponse_protectedQueryIdentifier *smithy.Schema
-
-var GetMLInputChannelResponse_numberOfFiles *smithy.Schema
-
-var GetMLInputChannelResponse_sizeInGb *smithy.Schema
-
-var GetMLInputChannelResponse_kmsKeyArn *smithy.Schema
-
-var GetMLInputChannelResponse_tags *smithy.Schema
-
-var GetTrainedModelInferenceJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "GetTrainedModelInferenceJobRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetTrainedModelInferenceJobRequest_membershipIdentifier *smithy.Schema
-
-var GetTrainedModelInferenceJobRequest_trainedModelInferenceJobArn *smithy.Schema
-
-var GetTrainedModelInferenceJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "GetTrainedModelInferenceJobResponse",
-}, smithy.ShapeTypeStructure, 24)
-var GetTrainedModelInferenceJobResponse_createTime *smithy.Schema
-
-var GetTrainedModelInferenceJobResponse_updateTime *smithy.Schema
-
-var GetTrainedModelInferenceJobResponse_trainedModelInferenceJobArn *smithy.Schema
-
-var GetTrainedModelInferenceJobResponse_configuredModelAlgorithmAssociationArn *smithy.Schema
-
-var GetTrainedModelInferenceJobResponse_name *smithy.Schema
-
-var GetTrainedModelInferenceJobResponse_status *smithy.Schema
-
-var GetTrainedModelInferenceJobResponse_trainedModelArn *smithy.Schema
-
-var GetTrainedModelInferenceJobResponse_trainedModelVersionIdentifier *smithy.Schema
-
-var GetTrainedModelInferenceJobResponse_resourceConfig *smithy.Schema
-
-var GetTrainedModelInferenceJobResponse_outputConfiguration *smithy.Schema
-
-var GetTrainedModelInferenceJobResponse_membershipIdentifier *smithy.Schema
-
-var GetTrainedModelInferenceJobResponse_dataSource *smithy.Schema
-
-var GetTrainedModelInferenceJobResponse_containerExecutionParameters *smithy.Schema
-
-var GetTrainedModelInferenceJobResponse_statusDetails *smithy.Schema
-
-var GetTrainedModelInferenceJobResponse_description *smithy.Schema
-
-var GetTrainedModelInferenceJobResponse_inferenceContainerImageDigest *smithy.Schema
-
-var GetTrainedModelInferenceJobResponse_environment *smithy.Schema
-
-var GetTrainedModelInferenceJobResponse_kmsKeyArn *smithy.Schema
-
-var GetTrainedModelInferenceJobResponse_metricsStatus *smithy.Schema
-
-var GetTrainedModelInferenceJobResponse_metricsStatusDetails *smithy.Schema
-
-var GetTrainedModelInferenceJobResponse_logsStatus *smithy.Schema
-
-var GetTrainedModelInferenceJobResponse_logsStatusDetails *smithy.Schema
-
-var GetTrainedModelInferenceJobResponse_tags *smithy.Schema
-
-var GetTrainedModelInferenceJobResponse_mlModelInferencePayerAccountId *smithy.Schema
-
-var GetTrainedModelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "GetTrainedModelRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetTrainedModelRequest_trainedModelArn *smithy.Schema
-
-var GetTrainedModelRequest_membershipIdentifier *smithy.Schema
-
-var GetTrainedModelRequest_versionIdentifier *smithy.Schema
-
-var GetTrainedModelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "GetTrainedModelResponse",
-}, smithy.ShapeTypeStructure, 26)
-var GetTrainedModelResponse_membershipIdentifier *smithy.Schema
-
-var GetTrainedModelResponse_collaborationIdentifier *smithy.Schema
-
-var GetTrainedModelResponse_trainedModelArn *smithy.Schema
-
-var GetTrainedModelResponse_versionIdentifier *smithy.Schema
-
-var GetTrainedModelResponse_incrementalTrainingDataChannels *smithy.Schema
-
-var GetTrainedModelResponse_name *smithy.Schema
-
-var GetTrainedModelResponse_description *smithy.Schema
-
-var GetTrainedModelResponse_status *smithy.Schema
-
-var GetTrainedModelResponse_statusDetails *smithy.Schema
-
-var GetTrainedModelResponse_configuredModelAlgorithmAssociationArn *smithy.Schema
-
-var GetTrainedModelResponse_resourceConfig *smithy.Schema
-
-var GetTrainedModelResponse_trainingInputMode *smithy.Schema
-
-var GetTrainedModelResponse_stoppingCondition *smithy.Schema
-
-var GetTrainedModelResponse_metricsStatus *smithy.Schema
-
-var GetTrainedModelResponse_metricsStatusDetails *smithy.Schema
-
-var GetTrainedModelResponse_logsStatus *smithy.Schema
-
-var GetTrainedModelResponse_logsStatusDetails *smithy.Schema
-
-var GetTrainedModelResponse_trainingContainerImageDigest *smithy.Schema
-
-var GetTrainedModelResponse_mlModelTrainingPayerAccountId *smithy.Schema
-
-var GetTrainedModelResponse_createTime *smithy.Schema
-
-var GetTrainedModelResponse_updateTime *smithy.Schema
-
-var GetTrainedModelResponse_hyperparameters *smithy.Schema
-
-var GetTrainedModelResponse_environment *smithy.Schema
-
-var GetTrainedModelResponse_kmsKeyArn *smithy.Schema
-
-var GetTrainedModelResponse_tags *smithy.Schema
-
-var GetTrainedModelResponse_dataChannels *smithy.Schema
-
-var GetTrainingDatasetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "GetTrainingDatasetRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetTrainingDatasetRequest_trainingDatasetArn *smithy.Schema
-
-var GetTrainingDatasetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "GetTrainingDatasetResponse",
-}, smithy.ShapeTypeStructure, 9)
-var GetTrainingDatasetResponse_createTime *smithy.Schema
-
-var GetTrainingDatasetResponse_updateTime *smithy.Schema
-
-var GetTrainingDatasetResponse_trainingDatasetArn *smithy.Schema
-
-var GetTrainingDatasetResponse_name *smithy.Schema
-
-var GetTrainingDatasetResponse_trainingData *smithy.Schema
-
-var GetTrainingDatasetResponse_status *smithy.Schema
-
-var GetTrainingDatasetResponse_roleArn *smithy.Schema
-
-var GetTrainingDatasetResponse_tags *smithy.Schema
-
-var GetTrainingDatasetResponse_description *smithy.Schema
-
-var ListAudienceExportJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListAudienceExportJobsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListAudienceExportJobsRequest_nextToken *smithy.Schema
-
-var ListAudienceExportJobsRequest_maxResults *smithy.Schema
-
-var ListAudienceExportJobsRequest_audienceGenerationJobArn *smithy.Schema
-
-var ListAudienceExportJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListAudienceExportJobsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAudienceExportJobsResponse_nextToken *smithy.Schema
-
-var ListAudienceExportJobsResponse_audienceExportJobs *smithy.Schema
-
-var ListAudienceGenerationJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListAudienceGenerationJobsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListAudienceGenerationJobsRequest_nextToken *smithy.Schema
-
-var ListAudienceGenerationJobsRequest_maxResults *smithy.Schema
-
-var ListAudienceGenerationJobsRequest_configuredAudienceModelArn *smithy.Schema
-
-var ListAudienceGenerationJobsRequest_collaborationId *smithy.Schema
-
-var ListAudienceGenerationJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListAudienceGenerationJobsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAudienceGenerationJobsResponse_nextToken *smithy.Schema
-
-var ListAudienceGenerationJobsResponse_audienceGenerationJobs *smithy.Schema
-
-var ListAudienceModelsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListAudienceModelsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListAudienceModelsRequest_nextToken *smithy.Schema
-
-var ListAudienceModelsRequest_maxResults *smithy.Schema
-
-var ListAudienceModelsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListAudienceModelsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAudienceModelsResponse_nextToken *smithy.Schema
-
-var ListAudienceModelsResponse_audienceModels *smithy.Schema
-
-var ListCollaborationConfiguredModelAlgorithmAssociationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListCollaborationConfiguredModelAlgorithmAssociationsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListCollaborationConfiguredModelAlgorithmAssociationsRequest_nextToken *smithy.Schema
-
-var ListCollaborationConfiguredModelAlgorithmAssociationsRequest_maxResults *smithy.Schema
-
-var ListCollaborationConfiguredModelAlgorithmAssociationsRequest_collaborationIdentifier *smithy.Schema
-
-var ListCollaborationConfiguredModelAlgorithmAssociationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListCollaborationConfiguredModelAlgorithmAssociationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListCollaborationConfiguredModelAlgorithmAssociationsResponse_nextToken *smithy.Schema
-
-var ListCollaborationConfiguredModelAlgorithmAssociationsResponse_collaborationConfiguredModelAlgorithmAssociations *smithy.Schema
-
-var ListCollaborationMLInputChannelsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListCollaborationMLInputChannelsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListCollaborationMLInputChannelsRequest_nextToken *smithy.Schema
-
-var ListCollaborationMLInputChannelsRequest_maxResults *smithy.Schema
-
-var ListCollaborationMLInputChannelsRequest_collaborationIdentifier *smithy.Schema
-
-var ListCollaborationMLInputChannelsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListCollaborationMLInputChannelsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListCollaborationMLInputChannelsResponse_nextToken *smithy.Schema
-
-var ListCollaborationMLInputChannelsResponse_collaborationMLInputChannelsList *smithy.Schema
-
-var ListCollaborationTrainedModelExportJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListCollaborationTrainedModelExportJobsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListCollaborationTrainedModelExportJobsRequest_nextToken *smithy.Schema
-
-var ListCollaborationTrainedModelExportJobsRequest_maxResults *smithy.Schema
-
-var ListCollaborationTrainedModelExportJobsRequest_collaborationIdentifier *smithy.Schema
-
-var ListCollaborationTrainedModelExportJobsRequest_trainedModelArn *smithy.Schema
-
-var ListCollaborationTrainedModelExportJobsRequest_trainedModelVersionIdentifier *smithy.Schema
-
-var ListCollaborationTrainedModelExportJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListCollaborationTrainedModelExportJobsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListCollaborationTrainedModelExportJobsResponse_nextToken *smithy.Schema
-
-var ListCollaborationTrainedModelExportJobsResponse_collaborationTrainedModelExportJobs *smithy.Schema
-
-var ListCollaborationTrainedModelInferenceJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListCollaborationTrainedModelInferenceJobsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListCollaborationTrainedModelInferenceJobsRequest_nextToken *smithy.Schema
-
-var ListCollaborationTrainedModelInferenceJobsRequest_maxResults *smithy.Schema
-
-var ListCollaborationTrainedModelInferenceJobsRequest_collaborationIdentifier *smithy.Schema
-
-var ListCollaborationTrainedModelInferenceJobsRequest_trainedModelArn *smithy.Schema
-
-var ListCollaborationTrainedModelInferenceJobsRequest_trainedModelVersionIdentifier *smithy.Schema
-
-var ListCollaborationTrainedModelInferenceJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListCollaborationTrainedModelInferenceJobsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListCollaborationTrainedModelInferenceJobsResponse_nextToken *smithy.Schema
-
-var ListCollaborationTrainedModelInferenceJobsResponse_collaborationTrainedModelInferenceJobs *smithy.Schema
-
-var ListCollaborationTrainedModelsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListCollaborationTrainedModelsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListCollaborationTrainedModelsRequest_nextToken *smithy.Schema
-
-var ListCollaborationTrainedModelsRequest_maxResults *smithy.Schema
-
-var ListCollaborationTrainedModelsRequest_collaborationIdentifier *smithy.Schema
-
-var ListCollaborationTrainedModelsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListCollaborationTrainedModelsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListCollaborationTrainedModelsResponse_nextToken *smithy.Schema
-
-var ListCollaborationTrainedModelsResponse_collaborationTrainedModels *smithy.Schema
-
-var ListConfiguredAudienceModelsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListConfiguredAudienceModelsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListConfiguredAudienceModelsRequest_nextToken *smithy.Schema
-
-var ListConfiguredAudienceModelsRequest_maxResults *smithy.Schema
-
-var ListConfiguredAudienceModelsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListConfiguredAudienceModelsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListConfiguredAudienceModelsResponse_nextToken *smithy.Schema
-
-var ListConfiguredAudienceModelsResponse_configuredAudienceModels *smithy.Schema
-
-var ListConfiguredModelAlgorithmAssociationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListConfiguredModelAlgorithmAssociationsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListConfiguredModelAlgorithmAssociationsRequest_nextToken *smithy.Schema
-
-var ListConfiguredModelAlgorithmAssociationsRequest_maxResults *smithy.Schema
-
-var ListConfiguredModelAlgorithmAssociationsRequest_membershipIdentifier *smithy.Schema
-
-var ListConfiguredModelAlgorithmAssociationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListConfiguredModelAlgorithmAssociationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListConfiguredModelAlgorithmAssociationsResponse_nextToken *smithy.Schema
-
-var ListConfiguredModelAlgorithmAssociationsResponse_configuredModelAlgorithmAssociations *smithy.Schema
-
-var ListConfiguredModelAlgorithmsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListConfiguredModelAlgorithmsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListConfiguredModelAlgorithmsRequest_nextToken *smithy.Schema
-
-var ListConfiguredModelAlgorithmsRequest_maxResults *smithy.Schema
-
-var ListConfiguredModelAlgorithmsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListConfiguredModelAlgorithmsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListConfiguredModelAlgorithmsResponse_nextToken *smithy.Schema
-
-var ListConfiguredModelAlgorithmsResponse_configuredModelAlgorithms *smithy.Schema
-
-var ListMLInputChannelsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListMLInputChannelsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListMLInputChannelsRequest_nextToken *smithy.Schema
-
-var ListMLInputChannelsRequest_maxResults *smithy.Schema
-
-var ListMLInputChannelsRequest_membershipIdentifier *smithy.Schema
-
-var ListMLInputChannelsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListMLInputChannelsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListMLInputChannelsResponse_nextToken *smithy.Schema
-
-var ListMLInputChannelsResponse_mlInputChannelsList *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_resourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var ListTrainedModelInferenceJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListTrainedModelInferenceJobsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListTrainedModelInferenceJobsRequest_nextToken *smithy.Schema
-
-var ListTrainedModelInferenceJobsRequest_maxResults *smithy.Schema
-
-var ListTrainedModelInferenceJobsRequest_membershipIdentifier *smithy.Schema
-
-var ListTrainedModelInferenceJobsRequest_trainedModelArn *smithy.Schema
-
-var ListTrainedModelInferenceJobsRequest_trainedModelVersionIdentifier *smithy.Schema
-
-var ListTrainedModelInferenceJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListTrainedModelInferenceJobsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTrainedModelInferenceJobsResponse_nextToken *smithy.Schema
-
-var ListTrainedModelInferenceJobsResponse_trainedModelInferenceJobs *smithy.Schema
-
-var ListTrainedModelsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListTrainedModelsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListTrainedModelsRequest_nextToken *smithy.Schema
-
-var ListTrainedModelsRequest_maxResults *smithy.Schema
-
-var ListTrainedModelsRequest_membershipIdentifier *smithy.Schema
-
-var ListTrainedModelsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListTrainedModelsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTrainedModelsResponse_nextToken *smithy.Schema
-
-var ListTrainedModelsResponse_trainedModels *smithy.Schema
-
-var ListTrainedModelVersionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListTrainedModelVersionsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListTrainedModelVersionsRequest_nextToken *smithy.Schema
-
-var ListTrainedModelVersionsRequest_maxResults *smithy.Schema
-
-var ListTrainedModelVersionsRequest_membershipIdentifier *smithy.Schema
-
-var ListTrainedModelVersionsRequest_trainedModelArn *smithy.Schema
-
-var ListTrainedModelVersionsRequest_status *smithy.Schema
-
-var ListTrainedModelVersionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListTrainedModelVersionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTrainedModelVersionsResponse_nextToken *smithy.Schema
-
-var ListTrainedModelVersionsResponse_trainedModels *smithy.Schema
-
-var ListTrainingDatasetsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListTrainingDatasetsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListTrainingDatasetsRequest_nextToken *smithy.Schema
-
-var ListTrainingDatasetsRequest_maxResults *smithy.Schema
-
-var ListTrainingDatasetsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "ListTrainingDatasetsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTrainingDatasetsResponse_nextToken *smithy.Schema
-
-var ListTrainingDatasetsResponse_trainingDatasets *smithy.Schema
-
-var PutConfiguredAudienceModelPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "PutConfiguredAudienceModelPolicyRequest",
-}, smithy.ShapeTypeStructure, 4)
-var PutConfiguredAudienceModelPolicyRequest_configuredAudienceModelArn *smithy.Schema
-
-var PutConfiguredAudienceModelPolicyRequest_configuredAudienceModelPolicy *smithy.Schema
-
-var PutConfiguredAudienceModelPolicyRequest_previousPolicyHash *smithy.Schema
-
-var PutConfiguredAudienceModelPolicyRequest_policyExistenceCondition *smithy.Schema
-
-var PutConfiguredAudienceModelPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "PutConfiguredAudienceModelPolicyResponse",
-}, smithy.ShapeTypeStructure, 2)
-var PutConfiguredAudienceModelPolicyResponse_configuredAudienceModelPolicy *smithy.Schema
-
-var PutConfiguredAudienceModelPolicyResponse_policyHash *smithy.Schema
-
-var PutMLConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "PutMLConfigurationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutMLConfigurationRequest_membershipIdentifier *smithy.Schema
-
-var PutMLConfigurationRequest_defaultOutputLocation *smithy.Schema
-
-var StartAudienceExportJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "StartAudienceExportJobRequest",
-}, smithy.ShapeTypeStructure, 4)
-var StartAudienceExportJobRequest_name *smithy.Schema
-
-var StartAudienceExportJobRequest_audienceGenerationJobArn *smithy.Schema
-
-var StartAudienceExportJobRequest_audienceSize *smithy.Schema
-
-var StartAudienceExportJobRequest_description *smithy.Schema
-
-var StartAudienceGenerationJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "StartAudienceGenerationJobRequest",
-}, smithy.ShapeTypeStructure, 7)
-var StartAudienceGenerationJobRequest_name *smithy.Schema
-
-var StartAudienceGenerationJobRequest_configuredAudienceModelArn *smithy.Schema
-
-var StartAudienceGenerationJobRequest_seedAudience *smithy.Schema
-
-var StartAudienceGenerationJobRequest_includeSeedInOutput *smithy.Schema
-
-var StartAudienceGenerationJobRequest_collaborationId *smithy.Schema
-
-var StartAudienceGenerationJobRequest_description *smithy.Schema
-
-var StartAudienceGenerationJobRequest_tags *smithy.Schema
-
-var StartAudienceGenerationJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "StartAudienceGenerationJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartAudienceGenerationJobResponse_audienceGenerationJobArn *smithy.Schema
-
-var StartTrainedModelExportJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "StartTrainedModelExportJobRequest",
-}, smithy.ShapeTypeStructure, 6)
-var StartTrainedModelExportJobRequest_name *smithy.Schema
-
-var StartTrainedModelExportJobRequest_trainedModelArn *smithy.Schema
-
-var StartTrainedModelExportJobRequest_trainedModelVersionIdentifier *smithy.Schema
-
-var StartTrainedModelExportJobRequest_membershipIdentifier *smithy.Schema
-
-var StartTrainedModelExportJobRequest_outputConfiguration *smithy.Schema
-
-var StartTrainedModelExportJobRequest_description *smithy.Schema
-
-var StartTrainedModelInferenceJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "StartTrainedModelInferenceJobRequest",
-}, smithy.ShapeTypeStructure, 14)
-var StartTrainedModelInferenceJobRequest_membershipIdentifier *smithy.Schema
-
-var StartTrainedModelInferenceJobRequest_name *smithy.Schema
-
-var StartTrainedModelInferenceJobRequest_trainedModelArn *smithy.Schema
-
-var StartTrainedModelInferenceJobRequest_trainedModelVersionIdentifier *smithy.Schema
-
-var StartTrainedModelInferenceJobRequest_configuredModelAlgorithmAssociationArn *smithy.Schema
-
-var StartTrainedModelInferenceJobRequest_resourceConfig *smithy.Schema
-
-var StartTrainedModelInferenceJobRequest_outputConfiguration *smithy.Schema
-
-var StartTrainedModelInferenceJobRequest_dataSource *smithy.Schema
-
-var StartTrainedModelInferenceJobRequest_description *smithy.Schema
-
-var StartTrainedModelInferenceJobRequest_containerExecutionParameters *smithy.Schema
-
-var StartTrainedModelInferenceJobRequest_environment *smithy.Schema
-
-var StartTrainedModelInferenceJobRequest_kmsKeyArn *smithy.Schema
-
-var StartTrainedModelInferenceJobRequest_tags *smithy.Schema
-
-var StartTrainedModelInferenceJobRequest_mlModelInferencePayerAccountId *smithy.Schema
-
-var StartTrainedModelInferenceJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "StartTrainedModelInferenceJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartTrainedModelInferenceJobResponse_trainedModelInferenceJobArn *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateConfiguredAudienceModelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "UpdateConfiguredAudienceModelRequest",
-}, smithy.ShapeTypeStructure, 7)
-var UpdateConfiguredAudienceModelRequest_configuredAudienceModelArn *smithy.Schema
-
-var UpdateConfiguredAudienceModelRequest_outputConfig *smithy.Schema
-
-var UpdateConfiguredAudienceModelRequest_audienceModelArn *smithy.Schema
-
-var UpdateConfiguredAudienceModelRequest_sharedAudienceMetrics *smithy.Schema
-
-var UpdateConfiguredAudienceModelRequest_minMatchingSeedSize *smithy.Schema
-
-var UpdateConfiguredAudienceModelRequest_audienceSizeConfig *smithy.Schema
-
-var UpdateConfiguredAudienceModelRequest_description *smithy.Schema
-
-var UpdateConfiguredAudienceModelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cleanroomsml",
-	Name:      "UpdateConfiguredAudienceModelResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateConfiguredAudienceModelResponse_configuredAudienceModelArn *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessBudgetType_CALENDAR_DAY = AccessBudgetType.AddMember("CALENDAR_DAY", smithyprelude.Unit)
-
-	AccessBudgetType_CALENDAR_MONTH = AccessBudgetType.AddMember("CALENDAR_MONTH", smithyprelude.Unit)
-
-	AccessBudgetType_CALENDAR_WEEK = AccessBudgetType.AddMember("CALENDAR_WEEK", smithyprelude.Unit)
-
-	AccessBudgetType_LIFETIME = AccessBudgetType.AddMember("LIFETIME", smithyprelude.Unit)
-
-	AutoRefreshMode_ENABLED = AutoRefreshMode.AddMember("ENABLED", smithyprelude.Unit)
-
-	AutoRefreshMode_DISABLED = AutoRefreshMode.AddMember("DISABLED", smithyprelude.Unit)
-
-	AccessBudgetDetails_startTime = AccessBudgetDetails.AddMember("startTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AccessBudgetDetails_endTime = AccessBudgetDetails.AddMember("endTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AccessBudgetDetails_remainingBudget = AccessBudgetDetails.AddMember("remainingBudget", _Budget)
-
-	AccessBudgetDetails_budget = AccessBudgetDetails.AddMember("budget", _Budget)
-
-	AccessBudgetDetails_budgetType = AccessBudgetDetails.AddMember("budgetType", AccessBudgetType)
-
-	AccessBudgetDetails_autoRefresh = AccessBudgetDetails.AddMember("autoRefresh", AutoRefreshMode)
-
-	_AccessBudgetDetailsList_member = _AccessBudgetDetailsList.AddMember("member", AccessBudgetDetails)
-
-	AccessBudget_resourceArn = AccessBudget.AddMember("resourceArn", _BudgetedResourceArn)
-
-	AccessBudget_details = AccessBudget.AddMember("details", _AccessBudgetDetailsList)
-
-	AccessBudget_aggregateRemainingBudget = AccessBudget.AddMember("aggregateRemainingBudget", _Budget)
-
-	_AccessBudgets_member = _AccessBudgets.AddMember("member", AccessBudget)
-
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	_AccountIdList_member = _AccountIdList.AddMember("member", smithyprelude.String)
-
-	S3ConfigMap_s3Uri = S3ConfigMap.AddMember("s3Uri", _S3Path)
-
-	AudienceDestination_s3Destination = AudienceDestination.AddMember("s3Destination", S3ConfigMap)
-
-	AudienceSizeType_ABSOLUTE = AudienceSizeType.AddMember("ABSOLUTE", smithyprelude.Unit)
-
-	AudienceSizeType_PERCENTAGE = AudienceSizeType.AddMember("PERCENTAGE", smithyprelude.Unit)
-
-	AudienceSize_type = AudienceSize.AddMember("type", AudienceSizeType)
-
-	AudienceSize_value = AudienceSize.AddMember("value", _AudienceSizeValue)
-
-	AudienceExportJobStatus_CREATE_PENDING = AudienceExportJobStatus.AddMember("CREATE_PENDING", smithyprelude.Unit)
-
-	AudienceExportJobStatus_CREATE_IN_PROGRESS = AudienceExportJobStatus.AddMember("CREATE_IN_PROGRESS", smithyprelude.Unit)
-
-	AudienceExportJobStatus_CREATE_FAILED = AudienceExportJobStatus.AddMember("CREATE_FAILED", smithyprelude.Unit)
-
-	AudienceExportJobStatus_ACTIVE = AudienceExportJobStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	StatusDetails_statusCode = StatusDetails.AddMember("statusCode", smithyprelude.String)
-
-	StatusDetails_message = StatusDetails.AddMember("message", smithyprelude.String)
-
-	AudienceExportJobSummary_createTime = AudienceExportJobSummary.AddMember("createTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AudienceExportJobSummary_updateTime = AudienceExportJobSummary.AddMember("updateTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AudienceExportJobSummary_name = AudienceExportJobSummary.AddMember("name", _NameString)
-
-	AudienceExportJobSummary_audienceGenerationJobArn = AudienceExportJobSummary.AddMember("audienceGenerationJobArn", _AudienceGenerationJobArn)
-
-	AudienceExportJobSummary_audienceSize = AudienceExportJobSummary.AddMember("audienceSize", AudienceSize)
-
-	AudienceExportJobSummary_description = AudienceExportJobSummary.AddMember("description", _ResourceDescription)
-
-	AudienceExportJobSummary_status = AudienceExportJobSummary.AddMember("status", AudienceExportJobStatus)
-
-	AudienceExportJobSummary_statusDetails = AudienceExportJobSummary.AddMember("statusDetails", StatusDetails)
-
-	AudienceExportJobSummary_outputLocation = AudienceExportJobSummary.AddMember("outputLocation", _S3Path)
-
-	_AudienceExportJobList_member = _AudienceExportJobList.AddMember("member", AudienceExportJobSummary)
-
-	_ParameterMap_key = _ParameterMap.AddMember("key", _ParameterName)
-
-	_ParameterMap_value = _ParameterMap.AddMember("value", _ParameterValue)
-
-	ProtectedQuerySQLParameters_queryString = ProtectedQuerySQLParameters.AddMember("queryString", smithyprelude.String)
-
-	ProtectedQuerySQLParameters_analysisTemplateArn = ProtectedQuerySQLParameters.AddMember("analysisTemplateArn", _AnalysisTemplateArn)
-
-	ProtectedQuerySQLParameters_parameters = ProtectedQuerySQLParameters.AddMember("parameters", _ParameterMap)
-
-	WorkerComputeType_CR1X = WorkerComputeType.AddMember("CR1X", smithyprelude.Unit)
-
-	WorkerComputeType_CR4X = WorkerComputeType.AddMember("CR4X", smithyprelude.Unit)
-
-	WorkerComputeType_CR8X = WorkerComputeType.AddMember("CR8X", smithyprelude.Unit)
-
-	_SparkProperties_key = _SparkProperties.AddMember("key", _SparkPropertyKey)
-
-	_SparkProperties_value = _SparkProperties.AddMember("value", _SparkPropertyValue)
-
-	WorkerComputeConfigurationProperties_spark = WorkerComputeConfigurationProperties.AddMember("spark", _SparkProperties)
-
-	WorkerComputeConfiguration_type = WorkerComputeConfiguration.AddMember("type", WorkerComputeType)
-
-	WorkerComputeConfiguration_number = WorkerComputeConfiguration.AddMember("number", smithyprelude.Integer)
-
-	WorkerComputeConfiguration_properties = WorkerComputeConfiguration.AddMember("properties", WorkerComputeConfigurationProperties)
-
-	ComputeConfiguration_worker = ComputeConfiguration.AddMember("worker", WorkerComputeConfiguration)
-
-	AudienceGenerationJobDataSource_dataSource = AudienceGenerationJobDataSource.AddMember("dataSource", S3ConfigMap)
-
-	AudienceGenerationJobDataSource_roleArn = AudienceGenerationJobDataSource.AddMember("roleArn", _IamRoleArn)
-
-	AudienceGenerationJobDataSource_sqlParameters = AudienceGenerationJobDataSource.AddMember("sqlParameters", ProtectedQuerySQLParameters)
-
-	AudienceGenerationJobDataSource_sqlComputeConfiguration = AudienceGenerationJobDataSource.AddMember("sqlComputeConfiguration", ComputeConfiguration)
-
-	AudienceGenerationJobStatus_CREATE_PENDING = AudienceGenerationJobStatus.AddMember("CREATE_PENDING", smithyprelude.Unit)
-
-	AudienceGenerationJobStatus_CREATE_IN_PROGRESS = AudienceGenerationJobStatus.AddMember("CREATE_IN_PROGRESS", smithyprelude.Unit)
-
-	AudienceGenerationJobStatus_CREATE_FAILED = AudienceGenerationJobStatus.AddMember("CREATE_FAILED", smithyprelude.Unit)
-
-	AudienceGenerationJobStatus_ACTIVE = AudienceGenerationJobStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	AudienceGenerationJobStatus_DELETE_PENDING = AudienceGenerationJobStatus.AddMember("DELETE_PENDING", smithyprelude.Unit)
-
-	AudienceGenerationJobStatus_DELETE_IN_PROGRESS = AudienceGenerationJobStatus.AddMember("DELETE_IN_PROGRESS", smithyprelude.Unit)
-
-	AudienceGenerationJobStatus_DELETE_FAILED = AudienceGenerationJobStatus.AddMember("DELETE_FAILED", smithyprelude.Unit)
-
-	AudienceGenerationJobSummary_createTime = AudienceGenerationJobSummary.AddMember("createTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AudienceGenerationJobSummary_updateTime = AudienceGenerationJobSummary.AddMember("updateTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AudienceGenerationJobSummary_audienceGenerationJobArn = AudienceGenerationJobSummary.AddMember("audienceGenerationJobArn", _AudienceGenerationJobArn)
-
-	AudienceGenerationJobSummary_name = AudienceGenerationJobSummary.AddMember("name", _NameString)
-
-	AudienceGenerationJobSummary_description = AudienceGenerationJobSummary.AddMember("description", _ResourceDescription)
-
-	AudienceGenerationJobSummary_status = AudienceGenerationJobSummary.AddMember("status", AudienceGenerationJobStatus)
-
-	AudienceGenerationJobSummary_configuredAudienceModelArn = AudienceGenerationJobSummary.AddMember("configuredAudienceModelArn", _ConfiguredAudienceModelArn)
-
-	AudienceGenerationJobSummary_collaborationId = AudienceGenerationJobSummary.AddMember("collaborationId", _UUID)
-
-	AudienceGenerationJobSummary_startedBy = AudienceGenerationJobSummary.AddMember("startedBy", _AccountId)
-
-	_AudienceGenerationJobList_member = _AudienceGenerationJobList.AddMember("member", AudienceGenerationJobSummary)
-
-	AudienceModelStatus_CREATE_PENDING = AudienceModelStatus.AddMember("CREATE_PENDING", smithyprelude.Unit)
-
-	AudienceModelStatus_CREATE_IN_PROGRESS = AudienceModelStatus.AddMember("CREATE_IN_PROGRESS", smithyprelude.Unit)
-
-	AudienceModelStatus_CREATE_FAILED = AudienceModelStatus.AddMember("CREATE_FAILED", smithyprelude.Unit)
-
-	AudienceModelStatus_ACTIVE = AudienceModelStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	AudienceModelStatus_DELETE_PENDING = AudienceModelStatus.AddMember("DELETE_PENDING", smithyprelude.Unit)
-
-	AudienceModelStatus_DELETE_IN_PROGRESS = AudienceModelStatus.AddMember("DELETE_IN_PROGRESS", smithyprelude.Unit)
-
-	AudienceModelStatus_DELETE_FAILED = AudienceModelStatus.AddMember("DELETE_FAILED", smithyprelude.Unit)
-
-	AudienceModelSummary_createTime = AudienceModelSummary.AddMember("createTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AudienceModelSummary_updateTime = AudienceModelSummary.AddMember("updateTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	AudienceModelSummary_audienceModelArn = AudienceModelSummary.AddMember("audienceModelArn", _AudienceModelArn)
-
-	AudienceModelSummary_name = AudienceModelSummary.AddMember("name", _NameString)
-
-	AudienceModelSummary_trainingDatasetArn = AudienceModelSummary.AddMember("trainingDatasetArn", _TrainingDatasetArn)
-
-	AudienceModelSummary_status = AudienceModelSummary.AddMember("status", AudienceModelStatus)
-
-	AudienceModelSummary_description = AudienceModelSummary.AddMember("description", _ResourceDescription)
-
-	_AudienceModelList_member = _AudienceModelList.AddMember("member", AudienceModelSummary)
-
-	RelevanceMetric_audienceSize = RelevanceMetric.AddMember("audienceSize", AudienceSize)
-
-	RelevanceMetric_score = RelevanceMetric.AddMember("score", smithyprelude.Double)
-
-	_RelevanceMetrics_member = _RelevanceMetrics.AddMember("member", RelevanceMetric)
-
-	AudienceQualityMetrics_relevanceMetrics = AudienceQualityMetrics.AddMember("relevanceMetrics", _RelevanceMetrics)
-
-	AudienceQualityMetrics_recallMetric = AudienceQualityMetrics.AddMember("recallMetric", smithyprelude.Double)
-
-	_AudienceSizeBins_member = _AudienceSizeBins.AddMember("member", _AudienceSizeValue)
-
-	AudienceSizeConfig_audienceSizeType = AudienceSizeConfig.AddMember("audienceSizeType", AudienceSizeType)
-
-	AudienceSizeConfig_audienceSizeBins = AudienceSizeConfig.AddMember("audienceSizeBins", _AudienceSizeBins)
-
-	CollaborationConfiguredModelAlgorithmAssociationSummary_createTime = CollaborationConfiguredModelAlgorithmAssociationSummary.AddMember("createTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	CollaborationConfiguredModelAlgorithmAssociationSummary_updateTime = CollaborationConfiguredModelAlgorithmAssociationSummary.AddMember("updateTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	CollaborationConfiguredModelAlgorithmAssociationSummary_configuredModelAlgorithmAssociationArn = CollaborationConfiguredModelAlgorithmAssociationSummary.AddMember("configuredModelAlgorithmAssociationArn", _ConfiguredModelAlgorithmAssociationArn)
-
-	CollaborationConfiguredModelAlgorithmAssociationSummary_name = CollaborationConfiguredModelAlgorithmAssociationSummary.AddMember("name", _NameString)
-
-	CollaborationConfiguredModelAlgorithmAssociationSummary_description = CollaborationConfiguredModelAlgorithmAssociationSummary.AddMember("description", _ResourceDescription)
-
-	CollaborationConfiguredModelAlgorithmAssociationSummary_membershipIdentifier = CollaborationConfiguredModelAlgorithmAssociationSummary.AddMember("membershipIdentifier", _UUID)
-
-	CollaborationConfiguredModelAlgorithmAssociationSummary_collaborationIdentifier = CollaborationConfiguredModelAlgorithmAssociationSummary.AddMember("collaborationIdentifier", _UUID)
-
-	CollaborationConfiguredModelAlgorithmAssociationSummary_configuredModelAlgorithmArn = CollaborationConfiguredModelAlgorithmAssociationSummary.AddMember("configuredModelAlgorithmArn", _ConfiguredModelAlgorithmArn)
-
-	CollaborationConfiguredModelAlgorithmAssociationSummary_creatorAccountId = CollaborationConfiguredModelAlgorithmAssociationSummary.AddMember("creatorAccountId", _AccountId)
-
-	_CollaborationConfiguredModelAlgorithmAssociationList_member = _CollaborationConfiguredModelAlgorithmAssociationList.AddMember("member", CollaborationConfiguredModelAlgorithmAssociationSummary)
-
-	_ConfiguredModelAlgorithmAssociationArnList_member = _ConfiguredModelAlgorithmAssociationArnList.AddMember("member", _ConfiguredModelAlgorithmAssociationArn)
-
-	MLInputChannelStatus_CREATE_PENDING = MLInputChannelStatus.AddMember("CREATE_PENDING", smithyprelude.Unit)
-
-	MLInputChannelStatus_CREATE_IN_PROGRESS = MLInputChannelStatus.AddMember("CREATE_IN_PROGRESS", smithyprelude.Unit)
-
-	MLInputChannelStatus_CREATE_FAILED = MLInputChannelStatus.AddMember("CREATE_FAILED", smithyprelude.Unit)
-
-	MLInputChannelStatus_ACTIVE = MLInputChannelStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	MLInputChannelStatus_DELETE_PENDING = MLInputChannelStatus.AddMember("DELETE_PENDING", smithyprelude.Unit)
-
-	MLInputChannelStatus_DELETE_IN_PROGRESS = MLInputChannelStatus.AddMember("DELETE_IN_PROGRESS", smithyprelude.Unit)
-
-	MLInputChannelStatus_DELETE_FAILED = MLInputChannelStatus.AddMember("DELETE_FAILED", smithyprelude.Unit)
-
-	MLInputChannelStatus_INACTIVE = MLInputChannelStatus.AddMember("INACTIVE", smithyprelude.Unit)
-
-	PayerConfiguration_computePayerAccountId = PayerConfiguration.AddMember("computePayerAccountId", _AccountId)
-
-	PayerConfiguration_syntheticDataPayerAccountId = PayerConfiguration.AddMember("syntheticDataPayerAccountId", _AccountId)
-
-	CollaborationMLInputChannelSummary_createTime = CollaborationMLInputChannelSummary.AddMember("createTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	CollaborationMLInputChannelSummary_updateTime = CollaborationMLInputChannelSummary.AddMember("updateTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	CollaborationMLInputChannelSummary_membershipIdentifier = CollaborationMLInputChannelSummary.AddMember("membershipIdentifier", _UUID)
-
-	CollaborationMLInputChannelSummary_collaborationIdentifier = CollaborationMLInputChannelSummary.AddMember("collaborationIdentifier", _UUID)
-
-	CollaborationMLInputChannelSummary_name = CollaborationMLInputChannelSummary.AddMember("name", _NameString)
-
-	CollaborationMLInputChannelSummary_configuredModelAlgorithmAssociations = CollaborationMLInputChannelSummary.AddMember("configuredModelAlgorithmAssociations", _ConfiguredModelAlgorithmAssociationArnList)
-
-	CollaborationMLInputChannelSummary_mlInputChannelArn = CollaborationMLInputChannelSummary.AddMember("mlInputChannelArn", _MLInputChannelArn)
-
-	CollaborationMLInputChannelSummary_status = CollaborationMLInputChannelSummary.AddMember("status", MLInputChannelStatus)
-
-	CollaborationMLInputChannelSummary_creatorAccountId = CollaborationMLInputChannelSummary.AddMember("creatorAccountId", _AccountId)
-
-	CollaborationMLInputChannelSummary_description = CollaborationMLInputChannelSummary.AddMember("description", _ResourceDescription)
-
-	CollaborationMLInputChannelSummary_payerConfiguration = CollaborationMLInputChannelSummary.AddMember("payerConfiguration", PayerConfiguration)
-
-	_CollaborationMLInputChannelsList_member = _CollaborationMLInputChannelsList.AddMember("member", CollaborationMLInputChannelSummary)
-
-	TrainedModelExportReceiverMember_accountId = TrainedModelExportReceiverMember.AddMember("accountId", _AccountId)
-
-	_TrainedModelExportReceiverMembers_member = _TrainedModelExportReceiverMembers.AddMember("member", TrainedModelExportReceiverMember)
-
-	TrainedModelExportOutputConfiguration_members = TrainedModelExportOutputConfiguration.AddMember("members", _TrainedModelExportReceiverMembers)
-
-	TrainedModelExportJobStatus_CREATE_PENDING = TrainedModelExportJobStatus.AddMember("CREATE_PENDING", smithyprelude.Unit)
-
-	TrainedModelExportJobStatus_CREATE_IN_PROGRESS = TrainedModelExportJobStatus.AddMember("CREATE_IN_PROGRESS", smithyprelude.Unit)
-
-	TrainedModelExportJobStatus_CREATE_FAILED = TrainedModelExportJobStatus.AddMember("CREATE_FAILED", smithyprelude.Unit)
-
-	TrainedModelExportJobStatus_ACTIVE = TrainedModelExportJobStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	CollaborationTrainedModelExportJobSummary_createTime = CollaborationTrainedModelExportJobSummary.AddMember("createTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	CollaborationTrainedModelExportJobSummary_updateTime = CollaborationTrainedModelExportJobSummary.AddMember("updateTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	CollaborationTrainedModelExportJobSummary_name = CollaborationTrainedModelExportJobSummary.AddMember("name", _NameString)
-
-	CollaborationTrainedModelExportJobSummary_outputConfiguration = CollaborationTrainedModelExportJobSummary.AddMember("outputConfiguration", TrainedModelExportOutputConfiguration)
-
-	CollaborationTrainedModelExportJobSummary_status = CollaborationTrainedModelExportJobSummary.AddMember("status", TrainedModelExportJobStatus)
-
-	CollaborationTrainedModelExportJobSummary_statusDetails = CollaborationTrainedModelExportJobSummary.AddMember("statusDetails", StatusDetails)
-
-	CollaborationTrainedModelExportJobSummary_description = CollaborationTrainedModelExportJobSummary.AddMember("description", _ResourceDescription)
-
-	CollaborationTrainedModelExportJobSummary_creatorAccountId = CollaborationTrainedModelExportJobSummary.AddMember("creatorAccountId", _AccountId)
-
-	CollaborationTrainedModelExportJobSummary_trainedModelArn = CollaborationTrainedModelExportJobSummary.AddMember("trainedModelArn", _TrainedModelArn)
-
-	CollaborationTrainedModelExportJobSummary_trainedModelVersionIdentifier = CollaborationTrainedModelExportJobSummary.AddMember("trainedModelVersionIdentifier", _UUID)
-
-	CollaborationTrainedModelExportJobSummary_membershipIdentifier = CollaborationTrainedModelExportJobSummary.AddMember("membershipIdentifier", _UUID)
-
-	CollaborationTrainedModelExportJobSummary_collaborationIdentifier = CollaborationTrainedModelExportJobSummary.AddMember("collaborationIdentifier", _UUID)
-
-	_CollaborationTrainedModelExportJobList_member = _CollaborationTrainedModelExportJobList.AddMember("member", CollaborationTrainedModelExportJobSummary)
-
-	TrainedModelInferenceJobStatus_CREATE_PENDING = TrainedModelInferenceJobStatus.AddMember("CREATE_PENDING", smithyprelude.Unit)
-
-	TrainedModelInferenceJobStatus_CREATE_IN_PROGRESS = TrainedModelInferenceJobStatus.AddMember("CREATE_IN_PROGRESS", smithyprelude.Unit)
-
-	TrainedModelInferenceJobStatus_CREATE_FAILED = TrainedModelInferenceJobStatus.AddMember("CREATE_FAILED", smithyprelude.Unit)
-
-	TrainedModelInferenceJobStatus_ACTIVE = TrainedModelInferenceJobStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	TrainedModelInferenceJobStatus_CANCEL_PENDING = TrainedModelInferenceJobStatus.AddMember("CANCEL_PENDING", smithyprelude.Unit)
-
-	TrainedModelInferenceJobStatus_CANCEL_IN_PROGRESS = TrainedModelInferenceJobStatus.AddMember("CANCEL_IN_PROGRESS", smithyprelude.Unit)
-
-	TrainedModelInferenceJobStatus_CANCEL_FAILED = TrainedModelInferenceJobStatus.AddMember("CANCEL_FAILED", smithyprelude.Unit)
-
-	TrainedModelInferenceJobStatus_INACTIVE = TrainedModelInferenceJobStatus.AddMember("INACTIVE", smithyprelude.Unit)
-
-	InferenceReceiverMember_accountId = InferenceReceiverMember.AddMember("accountId", _AccountId)
-
-	_InferenceReceiverMembers_member = _InferenceReceiverMembers.AddMember("member", InferenceReceiverMember)
-
-	InferenceOutputConfiguration_accept = InferenceOutputConfiguration.AddMember("accept", smithyprelude.String)
-
-	InferenceOutputConfiguration_members = InferenceOutputConfiguration.AddMember("members", _InferenceReceiverMembers)
-
-	MetricsStatus_PUBLISH_SUCCEEDED = MetricsStatus.AddMember("PUBLISH_SUCCEEDED", smithyprelude.Unit)
-
-	MetricsStatus_PUBLISH_FAILED = MetricsStatus.AddMember("PUBLISH_FAILED", smithyprelude.Unit)
-
-	LogsStatus_PUBLISH_SUCCEEDED = LogsStatus.AddMember("PUBLISH_SUCCEEDED", smithyprelude.Unit)
-
-	LogsStatus_PUBLISH_FAILED = LogsStatus.AddMember("PUBLISH_FAILED", smithyprelude.Unit)
-
-	CollaborationTrainedModelInferenceJobSummary_trainedModelInferenceJobArn = CollaborationTrainedModelInferenceJobSummary.AddMember("trainedModelInferenceJobArn", _TrainedModelInferenceJobArn)
-
-	CollaborationTrainedModelInferenceJobSummary_configuredModelAlgorithmAssociationArn = CollaborationTrainedModelInferenceJobSummary.AddMember("configuredModelAlgorithmAssociationArn", _ConfiguredModelAlgorithmAssociationArn)
-
-	CollaborationTrainedModelInferenceJobSummary_membershipIdentifier = CollaborationTrainedModelInferenceJobSummary.AddMember("membershipIdentifier", _UUID)
-
-	CollaborationTrainedModelInferenceJobSummary_trainedModelArn = CollaborationTrainedModelInferenceJobSummary.AddMember("trainedModelArn", _TrainedModelArn)
-
-	CollaborationTrainedModelInferenceJobSummary_trainedModelVersionIdentifier = CollaborationTrainedModelInferenceJobSummary.AddMember("trainedModelVersionIdentifier", _UUID)
-
-	CollaborationTrainedModelInferenceJobSummary_collaborationIdentifier = CollaborationTrainedModelInferenceJobSummary.AddMember("collaborationIdentifier", _UUID)
-
-	CollaborationTrainedModelInferenceJobSummary_status = CollaborationTrainedModelInferenceJobSummary.AddMember("status", TrainedModelInferenceJobStatus)
-
-	CollaborationTrainedModelInferenceJobSummary_outputConfiguration = CollaborationTrainedModelInferenceJobSummary.AddMember("outputConfiguration", InferenceOutputConfiguration)
-
-	CollaborationTrainedModelInferenceJobSummary_name = CollaborationTrainedModelInferenceJobSummary.AddMember("name", _NameString)
-
-	CollaborationTrainedModelInferenceJobSummary_description = CollaborationTrainedModelInferenceJobSummary.AddMember("description", _ResourceDescription)
-
-	CollaborationTrainedModelInferenceJobSummary_metricsStatus = CollaborationTrainedModelInferenceJobSummary.AddMember("metricsStatus", MetricsStatus)
-
-	CollaborationTrainedModelInferenceJobSummary_metricsStatusDetails = CollaborationTrainedModelInferenceJobSummary.AddMember("metricsStatusDetails", smithyprelude.String)
-
-	CollaborationTrainedModelInferenceJobSummary_logsStatus = CollaborationTrainedModelInferenceJobSummary.AddMember("logsStatus", LogsStatus)
-
-	CollaborationTrainedModelInferenceJobSummary_logsStatusDetails = CollaborationTrainedModelInferenceJobSummary.AddMember("logsStatusDetails", smithyprelude.String)
-
-	CollaborationTrainedModelInferenceJobSummary_mlModelInferencePayerAccountId = CollaborationTrainedModelInferenceJobSummary.AddMember("mlModelInferencePayerAccountId", _AccountId)
-
-	CollaborationTrainedModelInferenceJobSummary_createTime = CollaborationTrainedModelInferenceJobSummary.AddMember("createTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	CollaborationTrainedModelInferenceJobSummary_updateTime = CollaborationTrainedModelInferenceJobSummary.AddMember("updateTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	CollaborationTrainedModelInferenceJobSummary_creatorAccountId = CollaborationTrainedModelInferenceJobSummary.AddMember("creatorAccountId", _AccountId)
-
-	_CollaborationTrainedModelInferenceJobList_member = _CollaborationTrainedModelInferenceJobList.AddMember("member", CollaborationTrainedModelInferenceJobSummary)
-
-	IncrementalTrainingDataChannelOutput_channelName = IncrementalTrainingDataChannelOutput.AddMember("channelName", _ModelTrainingDataChannelName)
-
-	IncrementalTrainingDataChannelOutput_versionIdentifier = IncrementalTrainingDataChannelOutput.AddMember("versionIdentifier", _UUID)
-
-	IncrementalTrainingDataChannelOutput_modelName = IncrementalTrainingDataChannelOutput.AddMember("modelName", _NameString)
-
-	_IncrementalTrainingDataChannelsOutput_member = _IncrementalTrainingDataChannelsOutput.AddMember("member", IncrementalTrainingDataChannelOutput)
-
-	TrainedModelStatus_CREATE_PENDING = TrainedModelStatus.AddMember("CREATE_PENDING", smithyprelude.Unit)
-
-	TrainedModelStatus_CREATE_IN_PROGRESS = TrainedModelStatus.AddMember("CREATE_IN_PROGRESS", smithyprelude.Unit)
-
-	TrainedModelStatus_CREATE_FAILED = TrainedModelStatus.AddMember("CREATE_FAILED", smithyprelude.Unit)
-
-	TrainedModelStatus_ACTIVE = TrainedModelStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	TrainedModelStatus_DELETE_PENDING = TrainedModelStatus.AddMember("DELETE_PENDING", smithyprelude.Unit)
-
-	TrainedModelStatus_DELETE_IN_PROGRESS = TrainedModelStatus.AddMember("DELETE_IN_PROGRESS", smithyprelude.Unit)
-
-	TrainedModelStatus_DELETE_FAILED = TrainedModelStatus.AddMember("DELETE_FAILED", smithyprelude.Unit)
-
-	TrainedModelStatus_INACTIVE = TrainedModelStatus.AddMember("INACTIVE", smithyprelude.Unit)
-
-	TrainedModelStatus_CANCEL_PENDING = TrainedModelStatus.AddMember("CANCEL_PENDING", smithyprelude.Unit)
-
-	TrainedModelStatus_CANCEL_IN_PROGRESS = TrainedModelStatus.AddMember("CANCEL_IN_PROGRESS", smithyprelude.Unit)
-
-	TrainedModelStatus_CANCEL_FAILED = TrainedModelStatus.AddMember("CANCEL_FAILED", smithyprelude.Unit)
-
-	CollaborationTrainedModelSummary_createTime = CollaborationTrainedModelSummary.AddMember("createTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	CollaborationTrainedModelSummary_updateTime = CollaborationTrainedModelSummary.AddMember("updateTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	CollaborationTrainedModelSummary_trainedModelArn = CollaborationTrainedModelSummary.AddMember("trainedModelArn", _TrainedModelArn)
-
-	CollaborationTrainedModelSummary_name = CollaborationTrainedModelSummary.AddMember("name", _NameString)
-
-	CollaborationTrainedModelSummary_versionIdentifier = CollaborationTrainedModelSummary.AddMember("versionIdentifier", _UUID)
-
-	CollaborationTrainedModelSummary_incrementalTrainingDataChannels = CollaborationTrainedModelSummary.AddMember("incrementalTrainingDataChannels", _IncrementalTrainingDataChannelsOutput)
-
-	CollaborationTrainedModelSummary_description = CollaborationTrainedModelSummary.AddMember("description", _ResourceDescription)
-
-	CollaborationTrainedModelSummary_membershipIdentifier = CollaborationTrainedModelSummary.AddMember("membershipIdentifier", _UUID)
-
-	CollaborationTrainedModelSummary_collaborationIdentifier = CollaborationTrainedModelSummary.AddMember("collaborationIdentifier", _UUID)
-
-	CollaborationTrainedModelSummary_status = CollaborationTrainedModelSummary.AddMember("status", TrainedModelStatus)
-
-	CollaborationTrainedModelSummary_configuredModelAlgorithmAssociationArn = CollaborationTrainedModelSummary.AddMember("configuredModelAlgorithmAssociationArn", _ConfiguredModelAlgorithmAssociationArn)
-
-	CollaborationTrainedModelSummary_creatorAccountId = CollaborationTrainedModelSummary.AddMember("creatorAccountId", _AccountId)
-
-	CollaborationTrainedModelSummary_mlModelTrainingPayerAccountId = CollaborationTrainedModelSummary.AddMember("mlModelTrainingPayerAccountId", _AccountId)
-
-	_CollaborationTrainedModelList_member = _CollaborationTrainedModelList.AddMember("member", CollaborationTrainedModelSummary)
-
-	SyntheticDataColumnType_CATEGORICAL = SyntheticDataColumnType.AddMember("CATEGORICAL", smithyprelude.Unit)
-
-	SyntheticDataColumnType_NUMERICAL = SyntheticDataColumnType.AddMember("NUMERICAL", smithyprelude.Unit)
-
-	SyntheticDataColumnProperties_columnName = SyntheticDataColumnProperties.AddMember("columnName", _SyntheticDataColumnName)
-
-	SyntheticDataColumnProperties_columnType = SyntheticDataColumnProperties.AddMember("columnType", SyntheticDataColumnType)
-
-	SyntheticDataColumnProperties_isPredictiveValue = SyntheticDataColumnProperties.AddMember("isPredictiveValue", smithyprelude.Boolean)
-
-	_ColumnMappingList_member = _ColumnMappingList.AddMember("member", SyntheticDataColumnProperties)
-
-	ColumnClassificationDetails_columnMapping = ColumnClassificationDetails.AddMember("columnMapping", _ColumnMappingList)
-
-	ColumnType_USER_ID = ColumnType.AddMember("USER_ID", smithyprelude.Unit)
-
-	ColumnType_ITEM_ID = ColumnType.AddMember("ITEM_ID", smithyprelude.Unit)
-
-	ColumnType_TIMESTAMP = ColumnType.AddMember("TIMESTAMP", smithyprelude.Unit)
-
-	ColumnType_CATEGORICAL_FEATURE = ColumnType.AddMember("CATEGORICAL_FEATURE", smithyprelude.Unit)
-
-	ColumnType_NUMERICAL_FEATURE = ColumnType.AddMember("NUMERICAL_FEATURE", smithyprelude.Unit)
-
-	_ColumnTypeList_member = _ColumnTypeList.AddMember("member", ColumnType)
-
-	ColumnSchema_columnName = ColumnSchema.AddMember("columnName", _ColumnName)
-
-	ColumnSchema_columnTypes = ColumnSchema.AddMember("columnTypes", _ColumnTypeList)
-
-	ConfiguredAudienceModelOutputConfig_destination = ConfiguredAudienceModelOutputConfig.AddMember("destination", AudienceDestination)
-
-	ConfiguredAudienceModelOutputConfig_roleArn = ConfiguredAudienceModelOutputConfig.AddMember("roleArn", _IamRoleArn)
-
-	ConfiguredAudienceModelStatus_ACTIVE = ConfiguredAudienceModelStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	ConfiguredAudienceModelSummary_createTime = ConfiguredAudienceModelSummary.AddMember("createTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	ConfiguredAudienceModelSummary_updateTime = ConfiguredAudienceModelSummary.AddMember("updateTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	ConfiguredAudienceModelSummary_name = ConfiguredAudienceModelSummary.AddMember("name", _NameString)
-
-	ConfiguredAudienceModelSummary_audienceModelArn = ConfiguredAudienceModelSummary.AddMember("audienceModelArn", _AudienceModelArn)
-
-	ConfiguredAudienceModelSummary_outputConfig = ConfiguredAudienceModelSummary.AddMember("outputConfig", ConfiguredAudienceModelOutputConfig)
-
-	ConfiguredAudienceModelSummary_description = ConfiguredAudienceModelSummary.AddMember("description", _ResourceDescription)
-
-	ConfiguredAudienceModelSummary_configuredAudienceModelArn = ConfiguredAudienceModelSummary.AddMember("configuredAudienceModelArn", _ConfiguredAudienceModelArn)
-
-	ConfiguredAudienceModelSummary_status = ConfiguredAudienceModelSummary.AddMember("status", ConfiguredAudienceModelStatus)
-
-	_ConfiguredAudienceModelList_member = _ConfiguredAudienceModelList.AddMember("member", ConfiguredAudienceModelSummary)
-
-	ConfiguredModelAlgorithmAssociationSummary_createTime = ConfiguredModelAlgorithmAssociationSummary.AddMember("createTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	ConfiguredModelAlgorithmAssociationSummary_updateTime = ConfiguredModelAlgorithmAssociationSummary.AddMember("updateTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	ConfiguredModelAlgorithmAssociationSummary_configuredModelAlgorithmAssociationArn = ConfiguredModelAlgorithmAssociationSummary.AddMember("configuredModelAlgorithmAssociationArn", _ConfiguredModelAlgorithmAssociationArn)
-
-	ConfiguredModelAlgorithmAssociationSummary_configuredModelAlgorithmArn = ConfiguredModelAlgorithmAssociationSummary.AddMember("configuredModelAlgorithmArn", _ConfiguredModelAlgorithmArn)
-
-	ConfiguredModelAlgorithmAssociationSummary_name = ConfiguredModelAlgorithmAssociationSummary.AddMember("name", _NameString)
-
-	ConfiguredModelAlgorithmAssociationSummary_description = ConfiguredModelAlgorithmAssociationSummary.AddMember("description", _ResourceDescription)
-
-	ConfiguredModelAlgorithmAssociationSummary_membershipIdentifier = ConfiguredModelAlgorithmAssociationSummary.AddMember("membershipIdentifier", _UUID)
-
-	ConfiguredModelAlgorithmAssociationSummary_collaborationIdentifier = ConfiguredModelAlgorithmAssociationSummary.AddMember("collaborationIdentifier", _UUID)
-
-	_ConfiguredModelAlgorithmAssociationList_member = _ConfiguredModelAlgorithmAssociationList.AddMember("member", ConfiguredModelAlgorithmAssociationSummary)
-
-	ConfiguredModelAlgorithmSummary_createTime = ConfiguredModelAlgorithmSummary.AddMember("createTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	ConfiguredModelAlgorithmSummary_updateTime = ConfiguredModelAlgorithmSummary.AddMember("updateTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	ConfiguredModelAlgorithmSummary_configuredModelAlgorithmArn = ConfiguredModelAlgorithmSummary.AddMember("configuredModelAlgorithmArn", _ConfiguredModelAlgorithmArn)
-
-	ConfiguredModelAlgorithmSummary_name = ConfiguredModelAlgorithmSummary.AddMember("name", _NameString)
-
-	ConfiguredModelAlgorithmSummary_description = ConfiguredModelAlgorithmSummary.AddMember("description", _ResourceDescription)
-
-	_ConfiguredModelAlgorithmList_member = _ConfiguredModelAlgorithmList.AddMember("member", ConfiguredModelAlgorithmSummary)
-
-	ConflictException_message = ConflictException.AddMember("message", smithyprelude.String)
-
-	_ContainerArguments_member = _ContainerArguments.AddMember("member", _ContainerArgument)
-
-	_ContainerEntrypoint_member = _ContainerEntrypoint.AddMember("member", _ContainerEntrypointString)
-
-	MetricDefinition_name = MetricDefinition.AddMember("name", _MetricName)
-
-	MetricDefinition_regex = MetricDefinition.AddMember("regex", _MetricRegex)
-
-	_MetricDefinitionList_member = _MetricDefinitionList.AddMember("member", MetricDefinition)
-
-	ContainerConfig_imageUri = ContainerConfig.AddMember("imageUri", _AlgorithmImage)
-
-	ContainerConfig_entrypoint = ContainerConfig.AddMember("entrypoint", _ContainerEntrypoint)
-
-	ContainerConfig_arguments = ContainerConfig.AddMember("arguments", _ContainerArguments)
-
-	ContainerConfig_metricDefinitions = ContainerConfig.AddMember("metricDefinitions", _MetricDefinitionList)
-
-	_CustomDataIdentifierList_member = _CustomDataIdentifierList.AddMember("member", _CustomDataIdentifier)
-
-	CustomEntityConfig_customDataIdentifiers = CustomEntityConfig.AddMember("customDataIdentifiers", _CustomDataIdentifierList)
-
-	MembershipInferenceAttackVersion_DISTANCE_TO_CLOSEST_RECORD_V1 = MembershipInferenceAttackVersion.AddMember("DISTANCE_TO_CLOSEST_RECORD_V1", smithyprelude.Unit)
-
-	MembershipInferenceAttackScore_attackVersion = MembershipInferenceAttackScore.AddMember("attackVersion", MembershipInferenceAttackVersion)
-
-	MembershipInferenceAttackScore_score = MembershipInferenceAttackScore.AddMember("score", smithyprelude.Double)
-
-	_MembershipInferenceAttackScoreList_member = _MembershipInferenceAttackScoreList.AddMember("member", MembershipInferenceAttackScore)
-
-	DataPrivacyScores_membershipInferenceAttackScores = DataPrivacyScores.AddMember("membershipInferenceAttackScores", _MembershipInferenceAttackScoreList)
-
-	DatasetType_INTERACTIONS = DatasetType.AddMember("INTERACTIONS", smithyprelude.Unit)
-
-	_DatasetSchemaList_member = _DatasetSchemaList.AddMember("member", ColumnSchema)
-
-	GlueDataSource_tableName = GlueDataSource.AddMember("tableName", _GlueTableName)
-
-	GlueDataSource_databaseName = GlueDataSource.AddMember("databaseName", _GlueDatabaseName)
-
-	GlueDataSource_catalogId = GlueDataSource.AddMember("catalogId", _AccountId)
-
-	DataSource_glueDataSource = DataSource.AddMember("glueDataSource", GlueDataSource)
-
-	DatasetInputConfig_schema = DatasetInputConfig.AddMember("schema", _DatasetSchemaList)
-
-	DatasetInputConfig_dataSource = DatasetInputConfig.AddMember("dataSource", DataSource)
-
-	Dataset_type = Dataset.AddMember("type", DatasetType)
-
-	Dataset_inputConfig = Dataset.AddMember("inputConfig", DatasetInputConfig)
-
-	_DatasetList_member = _DatasetList.AddMember("member", Dataset)
-
-	Destination_s3Destination = Destination.AddMember("s3Destination", S3ConfigMap)
-
-	EntityType_ALL_PERSONALLY_IDENTIFIABLE_INFORMATION = EntityType.AddMember("ALL_PERSONALLY_IDENTIFIABLE_INFORMATION", smithyprelude.Unit)
-
-	EntityType_NUMBERS = EntityType.AddMember("NUMBERS", smithyprelude.Unit)
-
-	EntityType_CUSTOM = EntityType.AddMember("CUSTOM", smithyprelude.Unit)
-
-	_EntityTypeList_member = _EntityTypeList.AddMember("member", EntityType)
-
-	_Environment_key = _Environment.AddMember("key", smithyprelude.String)
-
-	_Environment_value = _Environment.AddMember("value", smithyprelude.String)
-
-	_HyperParameters_key = _HyperParameters.AddMember("key", smithyprelude.String)
-
-	_HyperParameters_value = _HyperParameters.AddMember("value", smithyprelude.String)
-
-	IncrementalTrainingDataChannel_trainedModelArn = IncrementalTrainingDataChannel.AddMember("trainedModelArn", _TrainedModelArn)
-
-	IncrementalTrainingDataChannel_versionIdentifier = IncrementalTrainingDataChannel.AddMember("versionIdentifier", _UUID)
-
-	IncrementalTrainingDataChannel_channelName = IncrementalTrainingDataChannel.AddMember("channelName", _ModelTrainingDataChannelName)
-
-	_IncrementalTrainingDataChannels_member = _IncrementalTrainingDataChannels.AddMember("member", IncrementalTrainingDataChannel)
-
-	InferenceContainerConfig_imageUri = InferenceContainerConfig.AddMember("imageUri", _AlgorithmImage)
-
-	InferenceContainerExecutionParameters_maxPayloadInMB = InferenceContainerExecutionParameters.AddMember("maxPayloadInMB", smithyprelude.Integer)
-
-	_InferenceEnvironmentMap_key = _InferenceEnvironmentMap.AddMember("key", smithyprelude.String)
-
-	_InferenceEnvironmentMap_value = _InferenceEnvironmentMap.AddMember("value", smithyprelude.String)
-
-	InferenceInstanceType_ML_R7I_48XLARGE = InferenceInstanceType.AddMember("ML_R7I_48XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_R6I_16XLARGE = InferenceInstanceType.AddMember("ML_R6I_16XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_M6I_XLARGE = InferenceInstanceType.AddMember("ML_M6I_XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_M5_4XLARGE = InferenceInstanceType.AddMember("ML_M5_4XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_P2_XLARGE = InferenceInstanceType.AddMember("ML_P2_XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_M4_16XLARGE = InferenceInstanceType.AddMember("ML_M4_16XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_R7I_16XLARGE = InferenceInstanceType.AddMember("ML_R7I_16XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_M7I_XLARGE = InferenceInstanceType.AddMember("ML_M7I_XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_M6I_12XLARGE = InferenceInstanceType.AddMember("ML_M6I_12XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_R7I_8XLARGE = InferenceInstanceType.AddMember("ML_R7I_8XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_R7I_LARGE = InferenceInstanceType.AddMember("ML_R7I_LARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_M7I_12XLARGE = InferenceInstanceType.AddMember("ML_M7I_12XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_M6I_24XLARGE = InferenceInstanceType.AddMember("ML_M6I_24XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_M7I_24XLARGE = InferenceInstanceType.AddMember("ML_M7I_24XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_R6I_8XLARGE = InferenceInstanceType.AddMember("ML_R6I_8XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_R6I_LARGE = InferenceInstanceType.AddMember("ML_R6I_LARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_G5_2XLARGE = InferenceInstanceType.AddMember("ML_G5_2XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_M5_LARGE = InferenceInstanceType.AddMember("ML_M5_LARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_M7I_48XLARGE = InferenceInstanceType.AddMember("ML_M7I_48XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_M6I_16XLARGE = InferenceInstanceType.AddMember("ML_M6I_16XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_P2_16XLARGE = InferenceInstanceType.AddMember("ML_P2_16XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_G5_4XLARGE = InferenceInstanceType.AddMember("ML_G5_4XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_M7I_16XLARGE = InferenceInstanceType.AddMember("ML_M7I_16XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_C4_2XLARGE = InferenceInstanceType.AddMember("ML_C4_2XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_C5_2XLARGE = InferenceInstanceType.AddMember("ML_C5_2XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_C6I_32XLARGE = InferenceInstanceType.AddMember("ML_C6I_32XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_C4_4XLARGE = InferenceInstanceType.AddMember("ML_C4_4XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_G5_8XLARGE = InferenceInstanceType.AddMember("ML_G5_8XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_C6I_XLARGE = InferenceInstanceType.AddMember("ML_C6I_XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_C5_4XLARGE = InferenceInstanceType.AddMember("ML_C5_4XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_G4DN_XLARGE = InferenceInstanceType.AddMember("ML_G4DN_XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_C7I_XLARGE = InferenceInstanceType.AddMember("ML_C7I_XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_C6I_12XLARGE = InferenceInstanceType.AddMember("ML_C6I_12XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_G4DN_12XLARGE = InferenceInstanceType.AddMember("ML_G4DN_12XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_C7I_12XLARGE = InferenceInstanceType.AddMember("ML_C7I_12XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_C6I_24XLARGE = InferenceInstanceType.AddMember("ML_C6I_24XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_G4DN_2XLARGE = InferenceInstanceType.AddMember("ML_G4DN_2XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_C7I_24XLARGE = InferenceInstanceType.AddMember("ML_C7I_24XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_C7I_2XLARGE = InferenceInstanceType.AddMember("ML_C7I_2XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_C4_8XLARGE = InferenceInstanceType.AddMember("ML_C4_8XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_C6I_2XLARGE = InferenceInstanceType.AddMember("ML_C6I_2XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_G4DN_4XLARGE = InferenceInstanceType.AddMember("ML_G4DN_4XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_C7I_48XLARGE = InferenceInstanceType.AddMember("ML_C7I_48XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_C7I_4XLARGE = InferenceInstanceType.AddMember("ML_C7I_4XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_C6I_16XLARGE = InferenceInstanceType.AddMember("ML_C6I_16XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_C5_9XLARGE = InferenceInstanceType.AddMember("ML_C5_9XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_G4DN_16XLARGE = InferenceInstanceType.AddMember("ML_G4DN_16XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_C7I_16XLARGE = InferenceInstanceType.AddMember("ML_C7I_16XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_C6I_4XLARGE = InferenceInstanceType.AddMember("ML_C6I_4XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_C5_XLARGE = InferenceInstanceType.AddMember("ML_C5_XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_C4_XLARGE = InferenceInstanceType.AddMember("ML_C4_XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_G4DN_8XLARGE = InferenceInstanceType.AddMember("ML_G4DN_8XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_C7I_8XLARGE = InferenceInstanceType.AddMember("ML_C7I_8XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_C7I_LARGE = InferenceInstanceType.AddMember("ML_C7I_LARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_G5_XLARGE = InferenceInstanceType.AddMember("ML_G5_XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_C6I_8XLARGE = InferenceInstanceType.AddMember("ML_C6I_8XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_C6I_LARGE = InferenceInstanceType.AddMember("ML_C6I_LARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_G5_12XLARGE = InferenceInstanceType.AddMember("ML_G5_12XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_G5_24XLARGE = InferenceInstanceType.AddMember("ML_G5_24XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_M7I_2XLARGE = InferenceInstanceType.AddMember("ML_M7I_2XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_C5_18XLARGE = InferenceInstanceType.AddMember("ML_C5_18XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_G5_48XLARGE = InferenceInstanceType.AddMember("ML_G5_48XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_M6I_2XLARGE = InferenceInstanceType.AddMember("ML_M6I_2XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_G5_16XLARGE = InferenceInstanceType.AddMember("ML_G5_16XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_M7I_4XLARGE = InferenceInstanceType.AddMember("ML_M7I_4XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_R6I_32XLARGE = InferenceInstanceType.AddMember("ML_R6I_32XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_M6I_4XLARGE = InferenceInstanceType.AddMember("ML_M6I_4XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_M5_XLARGE = InferenceInstanceType.AddMember("ML_M5_XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_M4_10XLARGE = InferenceInstanceType.AddMember("ML_M4_10XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_R6I_XLARGE = InferenceInstanceType.AddMember("ML_R6I_XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_M5_12XLARGE = InferenceInstanceType.AddMember("ML_M5_12XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_M4_XLARGE = InferenceInstanceType.AddMember("ML_M4_XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_R7I_2XLARGE = InferenceInstanceType.AddMember("ML_R7I_2XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_R7I_XLARGE = InferenceInstanceType.AddMember("ML_R7I_XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_R6I_12XLARGE = InferenceInstanceType.AddMember("ML_R6I_12XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_M5_24XLARGE = InferenceInstanceType.AddMember("ML_M5_24XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_R7I_12XLARGE = InferenceInstanceType.AddMember("ML_R7I_12XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_M7I_8XLARGE = InferenceInstanceType.AddMember("ML_M7I_8XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_M7I_LARGE = InferenceInstanceType.AddMember("ML_M7I_LARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_R6I_24XLARGE = InferenceInstanceType.AddMember("ML_R6I_24XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_R6I_2XLARGE = InferenceInstanceType.AddMember("ML_R6I_2XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_M4_2XLARGE = InferenceInstanceType.AddMember("ML_M4_2XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_R7I_24XLARGE = InferenceInstanceType.AddMember("ML_R7I_24XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_R7I_4XLARGE = InferenceInstanceType.AddMember("ML_R7I_4XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_M6I_8XLARGE = InferenceInstanceType.AddMember("ML_M6I_8XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_M6I_LARGE = InferenceInstanceType.AddMember("ML_M6I_LARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_M5_2XLARGE = InferenceInstanceType.AddMember("ML_M5_2XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_P2_8XLARGE = InferenceInstanceType.AddMember("ML_P2_8XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_R6I_4XLARGE = InferenceInstanceType.AddMember("ML_R6I_4XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_M6I_32XLARGE = InferenceInstanceType.AddMember("ML_M6I_32XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_M4_4XLARGE = InferenceInstanceType.AddMember("ML_M4_4XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_P3_16XLARGE = InferenceInstanceType.AddMember("ML_P3_16XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_P3_2XLARGE = InferenceInstanceType.AddMember("ML_P3_2XLARGE", smithyprelude.Unit)
-
-	InferenceInstanceType_ML_P3_8XLARGE = InferenceInstanceType.AddMember("ML_P3_8XLARGE", smithyprelude.Unit)
-
-	InferenceResourceConfig_instanceType = InferenceResourceConfig.AddMember("instanceType", InferenceInstanceType)
-
-	InferenceResourceConfig_instanceCount = InferenceResourceConfig.AddMember("instanceCount", smithyprelude.Integer)
-
-	ResultFormat_CSV = ResultFormat.AddMember("CSV", smithyprelude.Unit)
-
-	ResultFormat_PARQUET = ResultFormat.AddMember("PARQUET", smithyprelude.Unit)
-
-	ProtectedQueryInputParameters_sqlParameters = ProtectedQueryInputParameters.AddMember("sqlParameters", ProtectedQuerySQLParameters)
-
-	ProtectedQueryInputParameters_computeConfiguration = ProtectedQueryInputParameters.AddMember("computeConfiguration", ComputeConfiguration)
-
-	ProtectedQueryInputParameters_resultFormat = ProtectedQueryInputParameters.AddMember("resultFormat", ResultFormat)
-
-	InputChannelDataSource_protectedQueryInputParameters = InputChannelDataSource.AddMember("protectedQueryInputParameters", ProtectedQueryInputParameters)
-
-	InputChannel_dataSource = InputChannel.AddMember("dataSource", InputChannelDataSource)
-
-	InputChannel_roleArn = InputChannel.AddMember("roleArn", _IamRoleArn)
-
-	InstanceType_ML_M4_XLARGE = InstanceType.AddMember("ML_M4_XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_M4_2XLARGE = InstanceType.AddMember("ML_M4_2XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_M4_4XLARGE = InstanceType.AddMember("ML_M4_4XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_M4_10XLARGE = InstanceType.AddMember("ML_M4_10XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_M4_16XLARGE = InstanceType.AddMember("ML_M4_16XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_G4DN_XLARGE = InstanceType.AddMember("ML_G4DN_XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_G4DN_2XLARGE = InstanceType.AddMember("ML_G4DN_2XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_G4DN_4XLARGE = InstanceType.AddMember("ML_G4DN_4XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_G4DN_8XLARGE = InstanceType.AddMember("ML_G4DN_8XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_G4DN_12XLARGE = InstanceType.AddMember("ML_G4DN_12XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_G4DN_16XLARGE = InstanceType.AddMember("ML_G4DN_16XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_M5_LARGE = InstanceType.AddMember("ML_M5_LARGE", smithyprelude.Unit)
-
-	InstanceType_ML_M5_XLARGE = InstanceType.AddMember("ML_M5_XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_M5_2XLARGE = InstanceType.AddMember("ML_M5_2XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_M5_4XLARGE = InstanceType.AddMember("ML_M5_4XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_M5_12XLARGE = InstanceType.AddMember("ML_M5_12XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_M5_24XLARGE = InstanceType.AddMember("ML_M5_24XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_C4_XLARGE = InstanceType.AddMember("ML_C4_XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_C4_2XLARGE = InstanceType.AddMember("ML_C4_2XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_C4_4XLARGE = InstanceType.AddMember("ML_C4_4XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_C4_8XLARGE = InstanceType.AddMember("ML_C4_8XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_P2_XLARGE = InstanceType.AddMember("ML_P2_XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_P2_8XLARGE = InstanceType.AddMember("ML_P2_8XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_P2_16XLARGE = InstanceType.AddMember("ML_P2_16XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_P4D_24XLARGE = InstanceType.AddMember("ML_P4D_24XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_P4DE_24XLARGE = InstanceType.AddMember("ML_P4DE_24XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_P5_48XLARGE = InstanceType.AddMember("ML_P5_48XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_C5_XLARGE = InstanceType.AddMember("ML_C5_XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_C5_2XLARGE = InstanceType.AddMember("ML_C5_2XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_C5_4XLARGE = InstanceType.AddMember("ML_C5_4XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_C5_9XLARGE = InstanceType.AddMember("ML_C5_9XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_C5_18XLARGE = InstanceType.AddMember("ML_C5_18XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_C5N_XLARGE = InstanceType.AddMember("ML_C5N_XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_C5N_2XLARGE = InstanceType.AddMember("ML_C5N_2XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_C5N_4XLARGE = InstanceType.AddMember("ML_C5N_4XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_C5N_9XLARGE = InstanceType.AddMember("ML_C5N_9XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_C5N_18XLARGE = InstanceType.AddMember("ML_C5N_18XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_G5_XLARGE = InstanceType.AddMember("ML_G5_XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_G5_2XLARGE = InstanceType.AddMember("ML_G5_2XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_G5_4XLARGE = InstanceType.AddMember("ML_G5_4XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_G5_8XLARGE = InstanceType.AddMember("ML_G5_8XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_G5_16XLARGE = InstanceType.AddMember("ML_G5_16XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_G5_12XLARGE = InstanceType.AddMember("ML_G5_12XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_G5_24XLARGE = InstanceType.AddMember("ML_G5_24XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_G5_48XLARGE = InstanceType.AddMember("ML_G5_48XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_TRN1_2XLARGE = InstanceType.AddMember("ML_TRN1_2XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_TRN1_32XLARGE = InstanceType.AddMember("ML_TRN1_32XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_TRN1N_32XLARGE = InstanceType.AddMember("ML_TRN1N_32XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_M6I_LARGE = InstanceType.AddMember("ML_M6I_LARGE", smithyprelude.Unit)
-
-	InstanceType_ML_M6I_XLARGE = InstanceType.AddMember("ML_M6I_XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_M6I_2XLARGE = InstanceType.AddMember("ML_M6I_2XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_M6I_4XLARGE = InstanceType.AddMember("ML_M6I_4XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_M6I_8XLARGE = InstanceType.AddMember("ML_M6I_8XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_M6I_12XLARGE = InstanceType.AddMember("ML_M6I_12XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_M6I_16XLARGE = InstanceType.AddMember("ML_M6I_16XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_M6I_24XLARGE = InstanceType.AddMember("ML_M6I_24XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_M6I_32XLARGE = InstanceType.AddMember("ML_M6I_32XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_C6I_XLARGE = InstanceType.AddMember("ML_C6I_XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_C6I_2XLARGE = InstanceType.AddMember("ML_C6I_2XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_C6I_8XLARGE = InstanceType.AddMember("ML_C6I_8XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_C6I_4XLARGE = InstanceType.AddMember("ML_C6I_4XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_C6I_12XLARGE = InstanceType.AddMember("ML_C6I_12XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_C6I_16XLARGE = InstanceType.AddMember("ML_C6I_16XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_C6I_24XLARGE = InstanceType.AddMember("ML_C6I_24XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_C6I_32XLARGE = InstanceType.AddMember("ML_C6I_32XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_R5D_LARGE = InstanceType.AddMember("ML_R5D_LARGE", smithyprelude.Unit)
-
-	InstanceType_ML_R5D_XLARGE = InstanceType.AddMember("ML_R5D_XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_R5D_2XLARGE = InstanceType.AddMember("ML_R5D_2XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_R5D_4XLARGE = InstanceType.AddMember("ML_R5D_4XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_R5D_8XLARGE = InstanceType.AddMember("ML_R5D_8XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_R5D_12XLARGE = InstanceType.AddMember("ML_R5D_12XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_R5D_16XLARGE = InstanceType.AddMember("ML_R5D_16XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_R5D_24XLARGE = InstanceType.AddMember("ML_R5D_24XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_T3_MEDIUM = InstanceType.AddMember("ML_T3_MEDIUM", smithyprelude.Unit)
-
-	InstanceType_ML_T3_LARGE = InstanceType.AddMember("ML_T3_LARGE", smithyprelude.Unit)
-
-	InstanceType_ML_T3_XLARGE = InstanceType.AddMember("ML_T3_XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_T3_2XLARGE = InstanceType.AddMember("ML_T3_2XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_R5_LARGE = InstanceType.AddMember("ML_R5_LARGE", smithyprelude.Unit)
-
-	InstanceType_ML_R5_XLARGE = InstanceType.AddMember("ML_R5_XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_R5_2XLARGE = InstanceType.AddMember("ML_R5_2XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_R5_4XLARGE = InstanceType.AddMember("ML_R5_4XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_R5_8XLARGE = InstanceType.AddMember("ML_R5_8XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_R5_12XLARGE = InstanceType.AddMember("ML_R5_12XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_R5_16XLARGE = InstanceType.AddMember("ML_R5_16XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_R5_24XLARGE = InstanceType.AddMember("ML_R5_24XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_C7I_LARGE = InstanceType.AddMember("ML_C7I_LARGE", smithyprelude.Unit)
-
-	InstanceType_ML_C7I_XLARGE = InstanceType.AddMember("ML_C7I_XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_C7I_2XLARGE = InstanceType.AddMember("ML_C7I_2XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_C7I_4XLARGE = InstanceType.AddMember("ML_C7I_4XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_C7I_8XLARGE = InstanceType.AddMember("ML_C7I_8XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_C7I_12XLARGE = InstanceType.AddMember("ML_C7I_12XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_C7I_16XLARGE = InstanceType.AddMember("ML_C7I_16XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_C7I_24XLARGE = InstanceType.AddMember("ML_C7I_24XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_C7I_48XLARGE = InstanceType.AddMember("ML_C7I_48XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_M7I_LARGE = InstanceType.AddMember("ML_M7I_LARGE", smithyprelude.Unit)
-
-	InstanceType_ML_M7I_XLARGE = InstanceType.AddMember("ML_M7I_XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_M7I_2XLARGE = InstanceType.AddMember("ML_M7I_2XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_M7I_4XLARGE = InstanceType.AddMember("ML_M7I_4XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_M7I_8XLARGE = InstanceType.AddMember("ML_M7I_8XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_M7I_12XLARGE = InstanceType.AddMember("ML_M7I_12XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_M7I_16XLARGE = InstanceType.AddMember("ML_M7I_16XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_M7I_24XLARGE = InstanceType.AddMember("ML_M7I_24XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_M7I_48XLARGE = InstanceType.AddMember("ML_M7I_48XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_R7I_LARGE = InstanceType.AddMember("ML_R7I_LARGE", smithyprelude.Unit)
-
-	InstanceType_ML_R7I_XLARGE = InstanceType.AddMember("ML_R7I_XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_R7I_2XLARGE = InstanceType.AddMember("ML_R7I_2XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_R7I_4XLARGE = InstanceType.AddMember("ML_R7I_4XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_R7I_8XLARGE = InstanceType.AddMember("ML_R7I_8XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_R7I_12XLARGE = InstanceType.AddMember("ML_R7I_12XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_R7I_16XLARGE = InstanceType.AddMember("ML_R7I_16XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_R7I_24XLARGE = InstanceType.AddMember("ML_R7I_24XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_R7I_48XLARGE = InstanceType.AddMember("ML_R7I_48XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_G6_XLARGE = InstanceType.AddMember("ML_G6_XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_G6_2XLARGE = InstanceType.AddMember("ML_G6_2XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_G6_4XLARGE = InstanceType.AddMember("ML_G6_4XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_G6_8XLARGE = InstanceType.AddMember("ML_G6_8XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_G6_12XLARGE = InstanceType.AddMember("ML_G6_12XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_G6_16XLARGE = InstanceType.AddMember("ML_G6_16XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_G6_24XLARGE = InstanceType.AddMember("ML_G6_24XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_G6_48XLARGE = InstanceType.AddMember("ML_G6_48XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_G6E_XLARGE = InstanceType.AddMember("ML_G6E_XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_G6E_2XLARGE = InstanceType.AddMember("ML_G6E_2XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_G6E_4XLARGE = InstanceType.AddMember("ML_G6E_4XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_G6E_8XLARGE = InstanceType.AddMember("ML_G6E_8XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_G6E_12XLARGE = InstanceType.AddMember("ML_G6E_12XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_G6E_16XLARGE = InstanceType.AddMember("ML_G6E_16XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_G6E_24XLARGE = InstanceType.AddMember("ML_G6E_24XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_G6E_48XLARGE = InstanceType.AddMember("ML_G6E_48XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_P5EN_48XLARGE = InstanceType.AddMember("ML_P5EN_48XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_P3_2XLARGE = InstanceType.AddMember("ML_P3_2XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_P3_8XLARGE = InstanceType.AddMember("ML_P3_8XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_P3_16XLARGE = InstanceType.AddMember("ML_P3_16XLARGE", smithyprelude.Unit)
-
-	InstanceType_ML_P3DN_24XLARGE = InstanceType.AddMember("ML_P3DN_24XLARGE", smithyprelude.Unit)
-
-	InternalServiceException_message = InternalServiceException.AddMember("message", smithyprelude.String)
-
-	LogRedactionConfiguration_entitiesToRedact = LogRedactionConfiguration.AddMember("entitiesToRedact", _EntityTypeList)
-
-	LogRedactionConfiguration_customEntityConfig = LogRedactionConfiguration.AddMember("customEntityConfig", CustomEntityConfig)
-
-	LogType_ALL = LogType.AddMember("ALL", smithyprelude.Unit)
-
-	LogType_ERROR_SUMMARY = LogType.AddMember("ERROR_SUMMARY", smithyprelude.Unit)
-
-	LogsConfigurationPolicy_allowedAccountIds = LogsConfigurationPolicy.AddMember("allowedAccountIds", _AccountIdList)
-
-	LogsConfigurationPolicy_filterPattern = LogsConfigurationPolicy.AddMember("filterPattern", smithyprelude.String)
-
-	LogsConfigurationPolicy_logType = LogsConfigurationPolicy.AddMember("logType", LogType)
-
-	LogsConfigurationPolicy_logRedactionConfiguration = LogsConfigurationPolicy.AddMember("logRedactionConfiguration", LogRedactionConfiguration)
-
-	_LogsConfigurationPolicyList_member = _LogsConfigurationPolicyList.AddMember("member", LogsConfigurationPolicy)
-
-	NoiseLevelType_HIGH = NoiseLevelType.AddMember("HIGH", smithyprelude.Unit)
-
-	NoiseLevelType_MEDIUM = NoiseLevelType.AddMember("MEDIUM", smithyprelude.Unit)
-
-	NoiseLevelType_LOW = NoiseLevelType.AddMember("LOW", smithyprelude.Unit)
-
-	NoiseLevelType_NONE = NoiseLevelType.AddMember("NONE", smithyprelude.Unit)
-
-	MetricsConfigurationPolicy_noiseLevel = MetricsConfigurationPolicy.AddMember("noiseLevel", NoiseLevelType)
-
-	SharedAudienceMetrics_ALL = SharedAudienceMetrics.AddMember("ALL", smithyprelude.Unit)
-
-	SharedAudienceMetrics_NONE = SharedAudienceMetrics.AddMember("NONE", smithyprelude.Unit)
-
-	_MetricsList_member = _MetricsList.AddMember("member", SharedAudienceMetrics)
-
-	MLInputChannelSummary_createTime = MLInputChannelSummary.AddMember("createTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	MLInputChannelSummary_updateTime = MLInputChannelSummary.AddMember("updateTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	MLInputChannelSummary_membershipIdentifier = MLInputChannelSummary.AddMember("membershipIdentifier", _UUID)
-
-	MLInputChannelSummary_collaborationIdentifier = MLInputChannelSummary.AddMember("collaborationIdentifier", _UUID)
-
-	MLInputChannelSummary_name = MLInputChannelSummary.AddMember("name", _NameString)
-
-	MLInputChannelSummary_configuredModelAlgorithmAssociations = MLInputChannelSummary.AddMember("configuredModelAlgorithmAssociations", _ConfiguredModelAlgorithmAssociationArnList)
-
-	MLInputChannelSummary_protectedQueryIdentifier = MLInputChannelSummary.AddMember("protectedQueryIdentifier", _UUID)
-
-	MLInputChannelSummary_mlInputChannelArn = MLInputChannelSummary.AddMember("mlInputChannelArn", _MLInputChannelArn)
-
-	MLInputChannelSummary_status = MLInputChannelSummary.AddMember("status", MLInputChannelStatus)
-
-	MLInputChannelSummary_description = MLInputChannelSummary.AddMember("description", _ResourceDescription)
-
-	MLInputChannelSummary_payerConfiguration = MLInputChannelSummary.AddMember("payerConfiguration", PayerConfiguration)
-
-	_MLInputChannelsList_member = _MLInputChannelsList.AddMember("member", MLInputChannelSummary)
-
-	MLOutputConfiguration_destination = MLOutputConfiguration.AddMember("destination", Destination)
-
-	MLOutputConfiguration_roleArn = MLOutputConfiguration.AddMember("roleArn", _IamRoleArn)
-
-	MLSyntheticDataParameters_epsilon = MLSyntheticDataParameters.AddMember("epsilon", smithyprelude.Double)
-
-	MLSyntheticDataParameters_maxMembershipInferenceAttackScore = MLSyntheticDataParameters.AddMember("maxMembershipInferenceAttackScore", smithyprelude.Double)
-
-	MLSyntheticDataParameters_columnClassification = MLSyntheticDataParameters.AddMember("columnClassification", ColumnClassificationDetails)
-
-	ModelInferenceDataSource_mlInputChannelArn = ModelInferenceDataSource.AddMember("mlInputChannelArn", _MLInputChannelArn)
-
-	S3DataDistributionType_FULLY_REPLICATED = S3DataDistributionType.AddMember("FULLY_REPLICATED", smithyprelude.Unit)
-
-	S3DataDistributionType_SHARDED_BY_S3_KEY = S3DataDistributionType.AddMember("SHARDED_BY_S3_KEY", smithyprelude.Unit)
-
-	ModelTrainingDataChannel_mlInputChannelArn = ModelTrainingDataChannel.AddMember("mlInputChannelArn", _MLInputChannelArn)
-
-	ModelTrainingDataChannel_channelName = ModelTrainingDataChannel.AddMember("channelName", _ModelTrainingDataChannelName)
-
-	ModelTrainingDataChannel_s3DataDistributionType = ModelTrainingDataChannel.AddMember("s3DataDistributionType", S3DataDistributionType)
-
-	_ModelTrainingDataChannels_member = _ModelTrainingDataChannels.AddMember("member", ModelTrainingDataChannel)
-
-	PolicyExistenceCondition_POLICY_MUST_EXIST = PolicyExistenceCondition.AddMember("POLICY_MUST_EXIST", smithyprelude.Unit)
-
-	PolicyExistenceCondition_POLICY_MUST_NOT_EXIST = PolicyExistenceCondition.AddMember("POLICY_MUST_NOT_EXIST", smithyprelude.Unit)
-
-	PrivacyBudgets_accessBudgets = PrivacyBudgets.AddMember("accessBudgets", _AccessBudgets)
-
-	TrainedModelArtifactMaxSizeUnitType_GB = TrainedModelArtifactMaxSizeUnitType.AddMember("GB", smithyprelude.Unit)
-
-	TrainedModelArtifactMaxSize_unit = TrainedModelArtifactMaxSize.AddMember("unit", TrainedModelArtifactMaxSizeUnitType)
-
-	TrainedModelArtifactMaxSize_value = TrainedModelArtifactMaxSize.AddMember("value", _TrainedModelArtifactMaxSizeValue)
-
-	TrainedModelsConfigurationPolicy_containerLogs = TrainedModelsConfigurationPolicy.AddMember("containerLogs", _LogsConfigurationPolicyList)
-
-	TrainedModelsConfigurationPolicy_containerMetrics = TrainedModelsConfigurationPolicy.AddMember("containerMetrics", MetricsConfigurationPolicy)
-
-	TrainedModelsConfigurationPolicy_maxArtifactSize = TrainedModelsConfigurationPolicy.AddMember("maxArtifactSize", TrainedModelArtifactMaxSize)
-
-	TrainedModelExportsMaxSizeUnitType_GB = TrainedModelExportsMaxSizeUnitType.AddMember("GB", smithyprelude.Unit)
-
-	TrainedModelExportsMaxSize_unit = TrainedModelExportsMaxSize.AddMember("unit", TrainedModelExportsMaxSizeUnitType)
-
-	TrainedModelExportsMaxSize_value = TrainedModelExportsMaxSize.AddMember("value", _TrainedModelExportsMaxSizeValue)
-
-	TrainedModelExportFileType_MODEL = TrainedModelExportFileType.AddMember("MODEL", smithyprelude.Unit)
-
-	TrainedModelExportFileType_OUTPUT = TrainedModelExportFileType.AddMember("OUTPUT", smithyprelude.Unit)
-
-	_TrainedModelExportFileTypeList_member = _TrainedModelExportFileTypeList.AddMember("member", TrainedModelExportFileType)
-
-	TrainedModelExportsConfigurationPolicy_maxSize = TrainedModelExportsConfigurationPolicy.AddMember("maxSize", TrainedModelExportsMaxSize)
-
-	TrainedModelExportsConfigurationPolicy_filesToExport = TrainedModelExportsConfigurationPolicy.AddMember("filesToExport", _TrainedModelExportFileTypeList)
-
-	TrainedModelInferenceMaxOutputSizeUnitType_GB = TrainedModelInferenceMaxOutputSizeUnitType.AddMember("GB", smithyprelude.Unit)
-
-	TrainedModelInferenceMaxOutputSize_unit = TrainedModelInferenceMaxOutputSize.AddMember("unit", TrainedModelInferenceMaxOutputSizeUnitType)
-
-	TrainedModelInferenceMaxOutputSize_value = TrainedModelInferenceMaxOutputSize.AddMember("value", _TrainedModelInferenceMaxOutputSizeValue)
-
-	TrainedModelInferenceJobsConfigurationPolicy_containerLogs = TrainedModelInferenceJobsConfigurationPolicy.AddMember("containerLogs", _LogsConfigurationPolicyList)
-
-	TrainedModelInferenceJobsConfigurationPolicy_maxOutputSize = TrainedModelInferenceJobsConfigurationPolicy.AddMember("maxOutputSize", TrainedModelInferenceMaxOutputSize)
-
-	PrivacyConfigurationPolicies_trainedModels = PrivacyConfigurationPolicies.AddMember("trainedModels", TrainedModelsConfigurationPolicy)
-
-	PrivacyConfigurationPolicies_trainedModelExports = PrivacyConfigurationPolicies.AddMember("trainedModelExports", TrainedModelExportsConfigurationPolicy)
-
-	PrivacyConfigurationPolicies_trainedModelInferenceJobs = PrivacyConfigurationPolicies.AddMember("trainedModelInferenceJobs", TrainedModelInferenceJobsConfigurationPolicy)
-
-	PrivacyConfiguration_policies = PrivacyConfiguration.AddMember("policies", PrivacyConfigurationPolicies)
-
-	ResourceConfig_instanceCount = ResourceConfig.AddMember("instanceCount", smithyprelude.Integer)
-
-	ResourceConfig_instanceType = ResourceConfig.AddMember("instanceType", InstanceType)
-
-	ResourceConfig_volumeSizeInGB = ResourceConfig.AddMember("volumeSizeInGB", smithyprelude.Integer)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", smithyprelude.String)
-
-	ServiceQuotaExceededException_quotaName = ServiceQuotaExceededException.AddMember("quotaName", smithyprelude.String)
-
-	ServiceQuotaExceededException_quotaValue = ServiceQuotaExceededException.AddMember("quotaValue", smithyprelude.Double)
-
-	StoppingCondition_maxRuntimeInSeconds = StoppingCondition.AddMember("maxRuntimeInSeconds", smithyprelude.Integer)
-
-	SyntheticDataEvaluationScores_dataPrivacyScores = SyntheticDataEvaluationScores.AddMember("dataPrivacyScores", DataPrivacyScores)
-
-	SyntheticDataConfiguration_syntheticDataParameters = SyntheticDataConfiguration.AddMember("syntheticDataParameters", MLSyntheticDataParameters)
-
-	SyntheticDataConfiguration_syntheticDataEvaluationScores = SyntheticDataConfiguration.AddMember("syntheticDataEvaluationScores", SyntheticDataEvaluationScores)
-
-	_TagKeys_member = _TagKeys.AddMember("member", _TagKey)
-
-	_TagMap_key = _TagMap.AddMember("key", _TagKey)
-
-	_TagMap_value = _TagMap.AddMember("value", _TagValue)
-
-	TagOnCreatePolicy_FROM_PARENT_RESOURCE = TagOnCreatePolicy.AddMember("FROM_PARENT_RESOURCE", smithyprelude.Unit)
-
-	TagOnCreatePolicy_NONE = TagOnCreatePolicy.AddMember("NONE", smithyprelude.Unit)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
-
-	TrainedModelInferenceJobSummary_trainedModelInferenceJobArn = TrainedModelInferenceJobSummary.AddMember("trainedModelInferenceJobArn", _TrainedModelInferenceJobArn)
-
-	TrainedModelInferenceJobSummary_configuredModelAlgorithmAssociationArn = TrainedModelInferenceJobSummary.AddMember("configuredModelAlgorithmAssociationArn", _ConfiguredModelAlgorithmAssociationArn)
-
-	TrainedModelInferenceJobSummary_membershipIdentifier = TrainedModelInferenceJobSummary.AddMember("membershipIdentifier", _UUID)
-
-	TrainedModelInferenceJobSummary_trainedModelArn = TrainedModelInferenceJobSummary.AddMember("trainedModelArn", _TrainedModelArn)
-
-	TrainedModelInferenceJobSummary_trainedModelVersionIdentifier = TrainedModelInferenceJobSummary.AddMember("trainedModelVersionIdentifier", _UUID)
-
-	TrainedModelInferenceJobSummary_collaborationIdentifier = TrainedModelInferenceJobSummary.AddMember("collaborationIdentifier", _UUID)
-
-	TrainedModelInferenceJobSummary_status = TrainedModelInferenceJobSummary.AddMember("status", TrainedModelInferenceJobStatus)
-
-	TrainedModelInferenceJobSummary_outputConfiguration = TrainedModelInferenceJobSummary.AddMember("outputConfiguration", InferenceOutputConfiguration)
-
-	TrainedModelInferenceJobSummary_name = TrainedModelInferenceJobSummary.AddMember("name", _NameString)
-
-	TrainedModelInferenceJobSummary_description = TrainedModelInferenceJobSummary.AddMember("description", _ResourceDescription)
-
-	TrainedModelInferenceJobSummary_metricsStatus = TrainedModelInferenceJobSummary.AddMember("metricsStatus", MetricsStatus)
-
-	TrainedModelInferenceJobSummary_metricsStatusDetails = TrainedModelInferenceJobSummary.AddMember("metricsStatusDetails", smithyprelude.String)
-
-	TrainedModelInferenceJobSummary_logsStatus = TrainedModelInferenceJobSummary.AddMember("logsStatus", LogsStatus)
-
-	TrainedModelInferenceJobSummary_logsStatusDetails = TrainedModelInferenceJobSummary.AddMember("logsStatusDetails", smithyprelude.String)
-
-	TrainedModelInferenceJobSummary_mlModelInferencePayerAccountId = TrainedModelInferenceJobSummary.AddMember("mlModelInferencePayerAccountId", _AccountId)
-
-	TrainedModelInferenceJobSummary_createTime = TrainedModelInferenceJobSummary.AddMember("createTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	TrainedModelInferenceJobSummary_updateTime = TrainedModelInferenceJobSummary.AddMember("updateTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	_TrainedModelInferenceJobList_member = _TrainedModelInferenceJobList.AddMember("member", TrainedModelInferenceJobSummary)
-
-	TrainedModelSummary_createTime = TrainedModelSummary.AddMember("createTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	TrainedModelSummary_updateTime = TrainedModelSummary.AddMember("updateTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	TrainedModelSummary_trainedModelArn = TrainedModelSummary.AddMember("trainedModelArn", _TrainedModelArn)
-
-	TrainedModelSummary_versionIdentifier = TrainedModelSummary.AddMember("versionIdentifier", _UUID)
-
-	TrainedModelSummary_incrementalTrainingDataChannels = TrainedModelSummary.AddMember("incrementalTrainingDataChannels", _IncrementalTrainingDataChannelsOutput)
-
-	TrainedModelSummary_name = TrainedModelSummary.AddMember("name", _NameString)
-
-	TrainedModelSummary_description = TrainedModelSummary.AddMember("description", _ResourceDescription)
-
-	TrainedModelSummary_membershipIdentifier = TrainedModelSummary.AddMember("membershipIdentifier", _UUID)
-
-	TrainedModelSummary_collaborationIdentifier = TrainedModelSummary.AddMember("collaborationIdentifier", _UUID)
-
-	TrainedModelSummary_status = TrainedModelSummary.AddMember("status", TrainedModelStatus)
-
-	TrainedModelSummary_configuredModelAlgorithmAssociationArn = TrainedModelSummary.AddMember("configuredModelAlgorithmAssociationArn", _ConfiguredModelAlgorithmAssociationArn)
-
-	TrainedModelSummary_mlModelTrainingPayerAccountId = TrainedModelSummary.AddMember("mlModelTrainingPayerAccountId", _AccountId)
-
-	_TrainedModelList_member = _TrainedModelList.AddMember("member", TrainedModelSummary)
-
-	TrainingDatasetStatus_ACTIVE = TrainingDatasetStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	TrainingDatasetSummary_createTime = TrainingDatasetSummary.AddMember("createTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	TrainingDatasetSummary_updateTime = TrainingDatasetSummary.AddMember("updateTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	TrainingDatasetSummary_trainingDatasetArn = TrainingDatasetSummary.AddMember("trainingDatasetArn", _TrainingDatasetArn)
-
-	TrainingDatasetSummary_name = TrainingDatasetSummary.AddMember("name", _NameString)
-
-	TrainingDatasetSummary_status = TrainingDatasetSummary.AddMember("status", TrainingDatasetStatus)
-
-	TrainingDatasetSummary_description = TrainingDatasetSummary.AddMember("description", _ResourceDescription)
-
-	_TrainingDatasetList_member = _TrainingDatasetList.AddMember("member", TrainingDatasetSummary)
-
-	TrainingInputMode_FILE = TrainingInputMode.AddMember("FILE", smithyprelude.Unit)
-
-	TrainingInputMode_FAST_FILE = TrainingInputMode.AddMember("FAST_FILE", smithyprelude.Unit)
-
-	TrainingInputMode_PIPE = TrainingInputMode.AddMember("PIPE", smithyprelude.Unit)
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	CancelTrainedModelInferenceJobRequest_membershipIdentifier = CancelTrainedModelInferenceJobRequest.AddMember("membershipIdentifier", _UUID, &smithytraits.HTTPLabel{})
-
-	CancelTrainedModelInferenceJobRequest_trainedModelInferenceJobArn = CancelTrainedModelInferenceJobRequest.AddMember("trainedModelInferenceJobArn", _TrainedModelInferenceJobArn, &smithytraits.HTTPLabel{})
-
-	CancelTrainedModelRequest_membershipIdentifier = CancelTrainedModelRequest.AddMember("membershipIdentifier", _UUID, &smithytraits.HTTPLabel{})
-
-	CancelTrainedModelRequest_trainedModelArn = CancelTrainedModelRequest.AddMember("trainedModelArn", _TrainedModelArn, &smithytraits.HTTPLabel{})
-
-	CancelTrainedModelRequest_versionIdentifier = CancelTrainedModelRequest.AddMember("versionIdentifier", _UUID, &smithytraits.HTTPQuery{Name: "versionIdentifier"})
-
-	CreateAudienceModelRequest_trainingDataStartTime = CreateAudienceModelRequest.AddMember("trainingDataStartTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	CreateAudienceModelRequest_trainingDataEndTime = CreateAudienceModelRequest.AddMember("trainingDataEndTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	CreateAudienceModelRequest_name = CreateAudienceModelRequest.AddMember("name", _NameString)
-
-	CreateAudienceModelRequest_trainingDatasetArn = CreateAudienceModelRequest.AddMember("trainingDatasetArn", _TrainingDatasetArn)
-
-	CreateAudienceModelRequest_kmsKeyArn = CreateAudienceModelRequest.AddMember("kmsKeyArn", _KmsKeyArn)
-
-	CreateAudienceModelRequest_tags = CreateAudienceModelRequest.AddMember("tags", _TagMap)
-
-	CreateAudienceModelRequest_description = CreateAudienceModelRequest.AddMember("description", _ResourceDescription)
-
-	CreateAudienceModelResponse_audienceModelArn = CreateAudienceModelResponse.AddMember("audienceModelArn", _AudienceModelArn)
-
-	CreateConfiguredAudienceModelRequest_name = CreateConfiguredAudienceModelRequest.AddMember("name", _NameString)
-
-	CreateConfiguredAudienceModelRequest_audienceModelArn = CreateConfiguredAudienceModelRequest.AddMember("audienceModelArn", _AudienceModelArn)
-
-	CreateConfiguredAudienceModelRequest_outputConfig = CreateConfiguredAudienceModelRequest.AddMember("outputConfig", ConfiguredAudienceModelOutputConfig)
-
-	CreateConfiguredAudienceModelRequest_description = CreateConfiguredAudienceModelRequest.AddMember("description", _ResourceDescription)
-
-	CreateConfiguredAudienceModelRequest_sharedAudienceMetrics = CreateConfiguredAudienceModelRequest.AddMember("sharedAudienceMetrics", _MetricsList)
-
-	CreateConfiguredAudienceModelRequest_minMatchingSeedSize = CreateConfiguredAudienceModelRequest.AddMember("minMatchingSeedSize", _MinMatchingSeedSize)
-
-	CreateConfiguredAudienceModelRequest_audienceSizeConfig = CreateConfiguredAudienceModelRequest.AddMember("audienceSizeConfig", AudienceSizeConfig)
-
-	CreateConfiguredAudienceModelRequest_tags = CreateConfiguredAudienceModelRequest.AddMember("tags", _TagMap)
-
-	CreateConfiguredAudienceModelRequest_childResourceTagOnCreatePolicy = CreateConfiguredAudienceModelRequest.AddMember("childResourceTagOnCreatePolicy", TagOnCreatePolicy)
-
-	CreateConfiguredAudienceModelResponse_configuredAudienceModelArn = CreateConfiguredAudienceModelResponse.AddMember("configuredAudienceModelArn", _ConfiguredAudienceModelArn)
-
-	CreateConfiguredModelAlgorithmAssociationRequest_membershipIdentifier = CreateConfiguredModelAlgorithmAssociationRequest.AddMember("membershipIdentifier", _UUID, &smithytraits.HTTPLabel{})
-
-	CreateConfiguredModelAlgorithmAssociationRequest_configuredModelAlgorithmArn = CreateConfiguredModelAlgorithmAssociationRequest.AddMember("configuredModelAlgorithmArn", _ConfiguredModelAlgorithmArn)
-
-	CreateConfiguredModelAlgorithmAssociationRequest_name = CreateConfiguredModelAlgorithmAssociationRequest.AddMember("name", _NameString)
-
-	CreateConfiguredModelAlgorithmAssociationRequest_description = CreateConfiguredModelAlgorithmAssociationRequest.AddMember("description", _ResourceDescription)
-
-	CreateConfiguredModelAlgorithmAssociationRequest_privacyConfiguration = CreateConfiguredModelAlgorithmAssociationRequest.AddMember("privacyConfiguration", PrivacyConfiguration)
-
-	CreateConfiguredModelAlgorithmAssociationRequest_tags = CreateConfiguredModelAlgorithmAssociationRequest.AddMember("tags", _TagMap)
-
-	CreateConfiguredModelAlgorithmAssociationResponse_configuredModelAlgorithmAssociationArn = CreateConfiguredModelAlgorithmAssociationResponse.AddMember("configuredModelAlgorithmAssociationArn", _ConfiguredModelAlgorithmAssociationArn)
-
-	CreateConfiguredModelAlgorithmRequest_name = CreateConfiguredModelAlgorithmRequest.AddMember("name", _NameString)
-
-	CreateConfiguredModelAlgorithmRequest_description = CreateConfiguredModelAlgorithmRequest.AddMember("description", _ResourceDescription)
-
-	CreateConfiguredModelAlgorithmRequest_roleArn = CreateConfiguredModelAlgorithmRequest.AddMember("roleArn", _IamRoleArn)
-
-	CreateConfiguredModelAlgorithmRequest_trainingContainerConfig = CreateConfiguredModelAlgorithmRequest.AddMember("trainingContainerConfig", ContainerConfig)
-
-	CreateConfiguredModelAlgorithmRequest_inferenceContainerConfig = CreateConfiguredModelAlgorithmRequest.AddMember("inferenceContainerConfig", InferenceContainerConfig)
-
-	CreateConfiguredModelAlgorithmRequest_tags = CreateConfiguredModelAlgorithmRequest.AddMember("tags", _TagMap)
-
-	CreateConfiguredModelAlgorithmRequest_kmsKeyArn = CreateConfiguredModelAlgorithmRequest.AddMember("kmsKeyArn", _KmsKeyArn)
-
-	CreateConfiguredModelAlgorithmResponse_configuredModelAlgorithmArn = CreateConfiguredModelAlgorithmResponse.AddMember("configuredModelAlgorithmArn", _ConfiguredModelAlgorithmArn)
-
-	CreateMLInputChannelRequest_membershipIdentifier = CreateMLInputChannelRequest.AddMember("membershipIdentifier", _UUID, &smithytraits.HTTPLabel{})
-
-	CreateMLInputChannelRequest_configuredModelAlgorithmAssociations = CreateMLInputChannelRequest.AddMember("configuredModelAlgorithmAssociations", _ConfiguredModelAlgorithmAssociationArnList)
-
-	CreateMLInputChannelRequest_inputChannel = CreateMLInputChannelRequest.AddMember("inputChannel", InputChannel)
-
-	CreateMLInputChannelRequest_name = CreateMLInputChannelRequest.AddMember("name", _NameString)
-
-	CreateMLInputChannelRequest_retentionInDays = CreateMLInputChannelRequest.AddMember("retentionInDays", smithyprelude.Integer)
-
-	CreateMLInputChannelRequest_description = CreateMLInputChannelRequest.AddMember("description", _ResourceDescription)
-
-	CreateMLInputChannelRequest_kmsKeyArn = CreateMLInputChannelRequest.AddMember("kmsKeyArn", _KmsKeyArn)
-
-	CreateMLInputChannelRequest_tags = CreateMLInputChannelRequest.AddMember("tags", _TagMap)
-
-	CreateMLInputChannelRequest_payerConfiguration = CreateMLInputChannelRequest.AddMember("payerConfiguration", PayerConfiguration)
-
-	CreateMLInputChannelResponse_mlInputChannelArn = CreateMLInputChannelResponse.AddMember("mlInputChannelArn", _MLInputChannelArn)
-
-	CreateTrainedModelRequest_membershipIdentifier = CreateTrainedModelRequest.AddMember("membershipIdentifier", _UUID, &smithytraits.HTTPLabel{})
-
-	CreateTrainedModelRequest_name = CreateTrainedModelRequest.AddMember("name", _NameString)
-
-	CreateTrainedModelRequest_configuredModelAlgorithmAssociationArn = CreateTrainedModelRequest.AddMember("configuredModelAlgorithmAssociationArn", _ConfiguredModelAlgorithmAssociationArn)
-
-	CreateTrainedModelRequest_hyperparameters = CreateTrainedModelRequest.AddMember("hyperparameters", _HyperParameters)
-
-	CreateTrainedModelRequest_environment = CreateTrainedModelRequest.AddMember("environment", _Environment)
-
-	CreateTrainedModelRequest_resourceConfig = CreateTrainedModelRequest.AddMember("resourceConfig", ResourceConfig)
-
-	CreateTrainedModelRequest_stoppingCondition = CreateTrainedModelRequest.AddMember("stoppingCondition", StoppingCondition)
-
-	CreateTrainedModelRequest_incrementalTrainingDataChannels = CreateTrainedModelRequest.AddMember("incrementalTrainingDataChannels", _IncrementalTrainingDataChannels)
-
-	CreateTrainedModelRequest_dataChannels = CreateTrainedModelRequest.AddMember("dataChannels", _ModelTrainingDataChannels)
-
-	CreateTrainedModelRequest_trainingInputMode = CreateTrainedModelRequest.AddMember("trainingInputMode", TrainingInputMode)
-
-	CreateTrainedModelRequest_description = CreateTrainedModelRequest.AddMember("description", _ResourceDescription)
-
-	CreateTrainedModelRequest_kmsKeyArn = CreateTrainedModelRequest.AddMember("kmsKeyArn", _KmsKeyArn)
-
-	CreateTrainedModelRequest_tags = CreateTrainedModelRequest.AddMember("tags", _TagMap)
-
-	CreateTrainedModelRequest_mlModelTrainingPayerAccountId = CreateTrainedModelRequest.AddMember("mlModelTrainingPayerAccountId", _AccountId)
-
-	CreateTrainedModelResponse_trainedModelArn = CreateTrainedModelResponse.AddMember("trainedModelArn", _TrainedModelArn)
-
-	CreateTrainedModelResponse_versionIdentifier = CreateTrainedModelResponse.AddMember("versionIdentifier", _UUID)
-
-	CreateTrainingDatasetRequest_name = CreateTrainingDatasetRequest.AddMember("name", _NameString)
-
-	CreateTrainingDatasetRequest_roleArn = CreateTrainingDatasetRequest.AddMember("roleArn", _IamRoleArn)
-
-	CreateTrainingDatasetRequest_trainingData = CreateTrainingDatasetRequest.AddMember("trainingData", _DatasetList)
-
-	CreateTrainingDatasetRequest_tags = CreateTrainingDatasetRequest.AddMember("tags", _TagMap)
-
-	CreateTrainingDatasetRequest_description = CreateTrainingDatasetRequest.AddMember("description", _ResourceDescription)
-
-	CreateTrainingDatasetResponse_trainingDatasetArn = CreateTrainingDatasetResponse.AddMember("trainingDatasetArn", _TrainingDatasetArn)
-
-	DeleteAudienceGenerationJobRequest_audienceGenerationJobArn = DeleteAudienceGenerationJobRequest.AddMember("audienceGenerationJobArn", _AudienceGenerationJobArn, &smithytraits.HTTPLabel{})
-
-	DeleteAudienceModelRequest_audienceModelArn = DeleteAudienceModelRequest.AddMember("audienceModelArn", _AudienceModelArn, &smithytraits.HTTPLabel{})
-
-	DeleteConfiguredAudienceModelRequest_configuredAudienceModelArn = DeleteConfiguredAudienceModelRequest.AddMember("configuredAudienceModelArn", _ConfiguredAudienceModelArn, &smithytraits.HTTPLabel{})
-
-	DeleteConfiguredAudienceModelPolicyRequest_configuredAudienceModelArn = DeleteConfiguredAudienceModelPolicyRequest.AddMember("configuredAudienceModelArn", _ConfiguredAudienceModelArn, &smithytraits.HTTPLabel{})
-
-	DeleteConfiguredModelAlgorithmAssociationRequest_configuredModelAlgorithmAssociationArn = DeleteConfiguredModelAlgorithmAssociationRequest.AddMember("configuredModelAlgorithmAssociationArn", _ConfiguredModelAlgorithmAssociationArn, &smithytraits.HTTPLabel{})
-
-	DeleteConfiguredModelAlgorithmAssociationRequest_membershipIdentifier = DeleteConfiguredModelAlgorithmAssociationRequest.AddMember("membershipIdentifier", _UUID, &smithytraits.HTTPLabel{})
-
-	DeleteConfiguredModelAlgorithmRequest_configuredModelAlgorithmArn = DeleteConfiguredModelAlgorithmRequest.AddMember("configuredModelAlgorithmArn", _ConfiguredModelAlgorithmArn, &smithytraits.HTTPLabel{})
-
-	DeleteMLConfigurationRequest_membershipIdentifier = DeleteMLConfigurationRequest.AddMember("membershipIdentifier", _UUID, &smithytraits.HTTPLabel{})
-
-	DeleteMLInputChannelDataRequest_mlInputChannelArn = DeleteMLInputChannelDataRequest.AddMember("mlInputChannelArn", _MLInputChannelArn, &smithytraits.HTTPLabel{})
-
-	DeleteMLInputChannelDataRequest_membershipIdentifier = DeleteMLInputChannelDataRequest.AddMember("membershipIdentifier", _UUID, &smithytraits.HTTPLabel{})
-
-	DeleteTrainedModelOutputRequest_trainedModelArn = DeleteTrainedModelOutputRequest.AddMember("trainedModelArn", _TrainedModelArn, &smithytraits.HTTPLabel{})
-
-	DeleteTrainedModelOutputRequest_membershipIdentifier = DeleteTrainedModelOutputRequest.AddMember("membershipIdentifier", _UUID, &smithytraits.HTTPLabel{})
-
-	DeleteTrainedModelOutputRequest_versionIdentifier = DeleteTrainedModelOutputRequest.AddMember("versionIdentifier", _UUID, &smithytraits.HTTPQuery{Name: "versionIdentifier"})
-
-	DeleteTrainingDatasetRequest_trainingDatasetArn = DeleteTrainingDatasetRequest.AddMember("trainingDatasetArn", _TrainingDatasetArn, &smithytraits.HTTPLabel{})
-
-	GetAudienceGenerationJobRequest_audienceGenerationJobArn = GetAudienceGenerationJobRequest.AddMember("audienceGenerationJobArn", _AudienceGenerationJobArn, &smithytraits.HTTPLabel{})
-
-	GetAudienceGenerationJobResponse_createTime = GetAudienceGenerationJobResponse.AddMember("createTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetAudienceGenerationJobResponse_updateTime = GetAudienceGenerationJobResponse.AddMember("updateTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetAudienceGenerationJobResponse_audienceGenerationJobArn = GetAudienceGenerationJobResponse.AddMember("audienceGenerationJobArn", _AudienceGenerationJobArn)
-
-	GetAudienceGenerationJobResponse_name = GetAudienceGenerationJobResponse.AddMember("name", _NameString)
-
-	GetAudienceGenerationJobResponse_description = GetAudienceGenerationJobResponse.AddMember("description", _ResourceDescription)
-
-	GetAudienceGenerationJobResponse_status = GetAudienceGenerationJobResponse.AddMember("status", AudienceGenerationJobStatus)
-
-	GetAudienceGenerationJobResponse_statusDetails = GetAudienceGenerationJobResponse.AddMember("statusDetails", StatusDetails)
-
-	GetAudienceGenerationJobResponse_configuredAudienceModelArn = GetAudienceGenerationJobResponse.AddMember("configuredAudienceModelArn", _ConfiguredAudienceModelArn)
-
-	GetAudienceGenerationJobResponse_seedAudience = GetAudienceGenerationJobResponse.AddMember("seedAudience", AudienceGenerationJobDataSource)
-
-	GetAudienceGenerationJobResponse_includeSeedInOutput = GetAudienceGenerationJobResponse.AddMember("includeSeedInOutput", smithyprelude.Boolean)
-
-	GetAudienceGenerationJobResponse_collaborationId = GetAudienceGenerationJobResponse.AddMember("collaborationId", _UUID)
-
-	GetAudienceGenerationJobResponse_metrics = GetAudienceGenerationJobResponse.AddMember("metrics", AudienceQualityMetrics)
-
-	GetAudienceGenerationJobResponse_startedBy = GetAudienceGenerationJobResponse.AddMember("startedBy", _AccountId)
-
-	GetAudienceGenerationJobResponse_tags = GetAudienceGenerationJobResponse.AddMember("tags", _TagMap)
-
-	GetAudienceGenerationJobResponse_protectedQueryIdentifier = GetAudienceGenerationJobResponse.AddMember("protectedQueryIdentifier", smithyprelude.String)
-
-	GetAudienceModelRequest_audienceModelArn = GetAudienceModelRequest.AddMember("audienceModelArn", _AudienceModelArn, &smithytraits.HTTPLabel{})
-
-	GetAudienceModelResponse_createTime = GetAudienceModelResponse.AddMember("createTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetAudienceModelResponse_updateTime = GetAudienceModelResponse.AddMember("updateTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetAudienceModelResponse_trainingDataStartTime = GetAudienceModelResponse.AddMember("trainingDataStartTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetAudienceModelResponse_trainingDataEndTime = GetAudienceModelResponse.AddMember("trainingDataEndTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetAudienceModelResponse_audienceModelArn = GetAudienceModelResponse.AddMember("audienceModelArn", _AudienceModelArn)
-
-	GetAudienceModelResponse_name = GetAudienceModelResponse.AddMember("name", _NameString)
-
-	GetAudienceModelResponse_trainingDatasetArn = GetAudienceModelResponse.AddMember("trainingDatasetArn", _TrainingDatasetArn)
-
-	GetAudienceModelResponse_status = GetAudienceModelResponse.AddMember("status", AudienceModelStatus)
-
-	GetAudienceModelResponse_statusDetails = GetAudienceModelResponse.AddMember("statusDetails", StatusDetails)
-
-	GetAudienceModelResponse_kmsKeyArn = GetAudienceModelResponse.AddMember("kmsKeyArn", _KmsKeyArn)
-
-	GetAudienceModelResponse_tags = GetAudienceModelResponse.AddMember("tags", _TagMap)
-
-	GetAudienceModelResponse_description = GetAudienceModelResponse.AddMember("description", _ResourceDescription)
-
-	GetCollaborationConfiguredModelAlgorithmAssociationRequest_configuredModelAlgorithmAssociationArn = GetCollaborationConfiguredModelAlgorithmAssociationRequest.AddMember("configuredModelAlgorithmAssociationArn", _ConfiguredModelAlgorithmAssociationArn, &smithytraits.HTTPLabel{})
-
-	GetCollaborationConfiguredModelAlgorithmAssociationRequest_collaborationIdentifier = GetCollaborationConfiguredModelAlgorithmAssociationRequest.AddMember("collaborationIdentifier", _UUID, &smithytraits.HTTPLabel{})
-
-	GetCollaborationConfiguredModelAlgorithmAssociationResponse_createTime = GetCollaborationConfiguredModelAlgorithmAssociationResponse.AddMember("createTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetCollaborationConfiguredModelAlgorithmAssociationResponse_updateTime = GetCollaborationConfiguredModelAlgorithmAssociationResponse.AddMember("updateTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetCollaborationConfiguredModelAlgorithmAssociationResponse_configuredModelAlgorithmAssociationArn = GetCollaborationConfiguredModelAlgorithmAssociationResponse.AddMember("configuredModelAlgorithmAssociationArn", _ConfiguredModelAlgorithmAssociationArn)
-
-	GetCollaborationConfiguredModelAlgorithmAssociationResponse_membershipIdentifier = GetCollaborationConfiguredModelAlgorithmAssociationResponse.AddMember("membershipIdentifier", _UUID)
-
-	GetCollaborationConfiguredModelAlgorithmAssociationResponse_collaborationIdentifier = GetCollaborationConfiguredModelAlgorithmAssociationResponse.AddMember("collaborationIdentifier", _UUID)
-
-	GetCollaborationConfiguredModelAlgorithmAssociationResponse_configuredModelAlgorithmArn = GetCollaborationConfiguredModelAlgorithmAssociationResponse.AddMember("configuredModelAlgorithmArn", _ConfiguredModelAlgorithmArn)
-
-	GetCollaborationConfiguredModelAlgorithmAssociationResponse_name = GetCollaborationConfiguredModelAlgorithmAssociationResponse.AddMember("name", _NameString)
-
-	GetCollaborationConfiguredModelAlgorithmAssociationResponse_description = GetCollaborationConfiguredModelAlgorithmAssociationResponse.AddMember("description", _ResourceDescription)
-
-	GetCollaborationConfiguredModelAlgorithmAssociationResponse_creatorAccountId = GetCollaborationConfiguredModelAlgorithmAssociationResponse.AddMember("creatorAccountId", _AccountId)
-
-	GetCollaborationConfiguredModelAlgorithmAssociationResponse_privacyConfiguration = GetCollaborationConfiguredModelAlgorithmAssociationResponse.AddMember("privacyConfiguration", PrivacyConfiguration)
-
-	GetCollaborationMLInputChannelRequest_mlInputChannelArn = GetCollaborationMLInputChannelRequest.AddMember("mlInputChannelArn", _MLInputChannelArn, &smithytraits.HTTPLabel{})
-
-	GetCollaborationMLInputChannelRequest_collaborationIdentifier = GetCollaborationMLInputChannelRequest.AddMember("collaborationIdentifier", _UUID, &smithytraits.HTTPLabel{})
-
-	GetCollaborationMLInputChannelResponse_membershipIdentifier = GetCollaborationMLInputChannelResponse.AddMember("membershipIdentifier", _UUID)
-
-	GetCollaborationMLInputChannelResponse_collaborationIdentifier = GetCollaborationMLInputChannelResponse.AddMember("collaborationIdentifier", _UUID)
-
-	GetCollaborationMLInputChannelResponse_mlInputChannelArn = GetCollaborationMLInputChannelResponse.AddMember("mlInputChannelArn", _MLInputChannelArn)
-
-	GetCollaborationMLInputChannelResponse_name = GetCollaborationMLInputChannelResponse.AddMember("name", _NameString)
-
-	GetCollaborationMLInputChannelResponse_configuredModelAlgorithmAssociations = GetCollaborationMLInputChannelResponse.AddMember("configuredModelAlgorithmAssociations", _ConfiguredModelAlgorithmAssociationArnList)
-
-	GetCollaborationMLInputChannelResponse_status = GetCollaborationMLInputChannelResponse.AddMember("status", MLInputChannelStatus)
-
-	GetCollaborationMLInputChannelResponse_statusDetails = GetCollaborationMLInputChannelResponse.AddMember("statusDetails", StatusDetails)
-
-	GetCollaborationMLInputChannelResponse_retentionInDays = GetCollaborationMLInputChannelResponse.AddMember("retentionInDays", smithyprelude.Integer)
-
-	GetCollaborationMLInputChannelResponse_numberOfRecords = GetCollaborationMLInputChannelResponse.AddMember("numberOfRecords", smithyprelude.Long)
-
-	GetCollaborationMLInputChannelResponse_privacyBudgets = GetCollaborationMLInputChannelResponse.AddMember("privacyBudgets", PrivacyBudgets)
-
-	GetCollaborationMLInputChannelResponse_description = GetCollaborationMLInputChannelResponse.AddMember("description", _ResourceDescription)
-
-	GetCollaborationMLInputChannelResponse_syntheticDataConfiguration = GetCollaborationMLInputChannelResponse.AddMember("syntheticDataConfiguration", SyntheticDataConfiguration)
-
-	GetCollaborationMLInputChannelResponse_payerConfiguration = GetCollaborationMLInputChannelResponse.AddMember("payerConfiguration", PayerConfiguration)
-
-	GetCollaborationMLInputChannelResponse_createTime = GetCollaborationMLInputChannelResponse.AddMember("createTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetCollaborationMLInputChannelResponse_updateTime = GetCollaborationMLInputChannelResponse.AddMember("updateTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetCollaborationMLInputChannelResponse_creatorAccountId = GetCollaborationMLInputChannelResponse.AddMember("creatorAccountId", _AccountId)
-
-	GetCollaborationTrainedModelRequest_trainedModelArn = GetCollaborationTrainedModelRequest.AddMember("trainedModelArn", _TrainedModelArn, &smithytraits.HTTPLabel{})
-
-	GetCollaborationTrainedModelRequest_collaborationIdentifier = GetCollaborationTrainedModelRequest.AddMember("collaborationIdentifier", _UUID, &smithytraits.HTTPLabel{})
-
-	GetCollaborationTrainedModelRequest_versionIdentifier = GetCollaborationTrainedModelRequest.AddMember("versionIdentifier", _UUID, &smithytraits.HTTPQuery{Name: "versionIdentifier"})
-
-	GetCollaborationTrainedModelResponse_membershipIdentifier = GetCollaborationTrainedModelResponse.AddMember("membershipIdentifier", _UUID)
-
-	GetCollaborationTrainedModelResponse_collaborationIdentifier = GetCollaborationTrainedModelResponse.AddMember("collaborationIdentifier", _UUID)
-
-	GetCollaborationTrainedModelResponse_trainedModelArn = GetCollaborationTrainedModelResponse.AddMember("trainedModelArn", _TrainedModelArn)
-
-	GetCollaborationTrainedModelResponse_versionIdentifier = GetCollaborationTrainedModelResponse.AddMember("versionIdentifier", _UUID)
-
-	GetCollaborationTrainedModelResponse_incrementalTrainingDataChannels = GetCollaborationTrainedModelResponse.AddMember("incrementalTrainingDataChannels", _IncrementalTrainingDataChannelsOutput)
-
-	GetCollaborationTrainedModelResponse_name = GetCollaborationTrainedModelResponse.AddMember("name", _NameString)
-
-	GetCollaborationTrainedModelResponse_description = GetCollaborationTrainedModelResponse.AddMember("description", _ResourceDescription)
-
-	GetCollaborationTrainedModelResponse_status = GetCollaborationTrainedModelResponse.AddMember("status", TrainedModelStatus)
-
-	GetCollaborationTrainedModelResponse_statusDetails = GetCollaborationTrainedModelResponse.AddMember("statusDetails", StatusDetails)
-
-	GetCollaborationTrainedModelResponse_configuredModelAlgorithmAssociationArn = GetCollaborationTrainedModelResponse.AddMember("configuredModelAlgorithmAssociationArn", _ConfiguredModelAlgorithmAssociationArn)
-
-	GetCollaborationTrainedModelResponse_resourceConfig = GetCollaborationTrainedModelResponse.AddMember("resourceConfig", ResourceConfig)
-
-	GetCollaborationTrainedModelResponse_trainingInputMode = GetCollaborationTrainedModelResponse.AddMember("trainingInputMode", TrainingInputMode)
-
-	GetCollaborationTrainedModelResponse_stoppingCondition = GetCollaborationTrainedModelResponse.AddMember("stoppingCondition", StoppingCondition)
-
-	GetCollaborationTrainedModelResponse_metricsStatus = GetCollaborationTrainedModelResponse.AddMember("metricsStatus", MetricsStatus)
-
-	GetCollaborationTrainedModelResponse_metricsStatusDetails = GetCollaborationTrainedModelResponse.AddMember("metricsStatusDetails", smithyprelude.String)
-
-	GetCollaborationTrainedModelResponse_logsStatus = GetCollaborationTrainedModelResponse.AddMember("logsStatus", LogsStatus)
-
-	GetCollaborationTrainedModelResponse_logsStatusDetails = GetCollaborationTrainedModelResponse.AddMember("logsStatusDetails", smithyprelude.String)
-
-	GetCollaborationTrainedModelResponse_trainingContainerImageDigest = GetCollaborationTrainedModelResponse.AddMember("trainingContainerImageDigest", smithyprelude.String)
-
-	GetCollaborationTrainedModelResponse_mlModelTrainingPayerAccountId = GetCollaborationTrainedModelResponse.AddMember("mlModelTrainingPayerAccountId", _AccountId)
-
-	GetCollaborationTrainedModelResponse_createTime = GetCollaborationTrainedModelResponse.AddMember("createTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetCollaborationTrainedModelResponse_updateTime = GetCollaborationTrainedModelResponse.AddMember("updateTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetCollaborationTrainedModelResponse_creatorAccountId = GetCollaborationTrainedModelResponse.AddMember("creatorAccountId", _AccountId)
-
-	GetConfiguredAudienceModelRequest_configuredAudienceModelArn = GetConfiguredAudienceModelRequest.AddMember("configuredAudienceModelArn", _ConfiguredAudienceModelArn, &smithytraits.HTTPLabel{})
-
-	GetConfiguredAudienceModelResponse_createTime = GetConfiguredAudienceModelResponse.AddMember("createTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetConfiguredAudienceModelResponse_updateTime = GetConfiguredAudienceModelResponse.AddMember("updateTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetConfiguredAudienceModelResponse_configuredAudienceModelArn = GetConfiguredAudienceModelResponse.AddMember("configuredAudienceModelArn", _ConfiguredAudienceModelArn)
-
-	GetConfiguredAudienceModelResponse_name = GetConfiguredAudienceModelResponse.AddMember("name", _NameString)
-
-	GetConfiguredAudienceModelResponse_audienceModelArn = GetConfiguredAudienceModelResponse.AddMember("audienceModelArn", _AudienceModelArn)
-
-	GetConfiguredAudienceModelResponse_outputConfig = GetConfiguredAudienceModelResponse.AddMember("outputConfig", ConfiguredAudienceModelOutputConfig)
-
-	GetConfiguredAudienceModelResponse_description = GetConfiguredAudienceModelResponse.AddMember("description", _ResourceDescription)
-
-	GetConfiguredAudienceModelResponse_status = GetConfiguredAudienceModelResponse.AddMember("status", ConfiguredAudienceModelStatus)
-
-	GetConfiguredAudienceModelResponse_sharedAudienceMetrics = GetConfiguredAudienceModelResponse.AddMember("sharedAudienceMetrics", _MetricsList)
-
-	GetConfiguredAudienceModelResponse_minMatchingSeedSize = GetConfiguredAudienceModelResponse.AddMember("minMatchingSeedSize", _MinMatchingSeedSize)
-
-	GetConfiguredAudienceModelResponse_audienceSizeConfig = GetConfiguredAudienceModelResponse.AddMember("audienceSizeConfig", AudienceSizeConfig)
-
-	GetConfiguredAudienceModelResponse_tags = GetConfiguredAudienceModelResponse.AddMember("tags", _TagMap)
-
-	GetConfiguredAudienceModelResponse_childResourceTagOnCreatePolicy = GetConfiguredAudienceModelResponse.AddMember("childResourceTagOnCreatePolicy", TagOnCreatePolicy)
-
-	GetConfiguredAudienceModelPolicyRequest_configuredAudienceModelArn = GetConfiguredAudienceModelPolicyRequest.AddMember("configuredAudienceModelArn", _ConfiguredAudienceModelArn, &smithytraits.HTTPLabel{})
-
-	GetConfiguredAudienceModelPolicyResponse_configuredAudienceModelArn = GetConfiguredAudienceModelPolicyResponse.AddMember("configuredAudienceModelArn", _ConfiguredAudienceModelArn)
-
-	GetConfiguredAudienceModelPolicyResponse_configuredAudienceModelPolicy = GetConfiguredAudienceModelPolicyResponse.AddMember("configuredAudienceModelPolicy", _ResourcePolicy)
-
-	GetConfiguredAudienceModelPolicyResponse_policyHash = GetConfiguredAudienceModelPolicyResponse.AddMember("policyHash", _Hash)
-
-	GetConfiguredModelAlgorithmAssociationRequest_configuredModelAlgorithmAssociationArn = GetConfiguredModelAlgorithmAssociationRequest.AddMember("configuredModelAlgorithmAssociationArn", _ConfiguredModelAlgorithmAssociationArn, &smithytraits.HTTPLabel{})
-
-	GetConfiguredModelAlgorithmAssociationRequest_membershipIdentifier = GetConfiguredModelAlgorithmAssociationRequest.AddMember("membershipIdentifier", _UUID, &smithytraits.HTTPLabel{})
-
-	GetConfiguredModelAlgorithmAssociationResponse_createTime = GetConfiguredModelAlgorithmAssociationResponse.AddMember("createTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetConfiguredModelAlgorithmAssociationResponse_updateTime = GetConfiguredModelAlgorithmAssociationResponse.AddMember("updateTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetConfiguredModelAlgorithmAssociationResponse_configuredModelAlgorithmAssociationArn = GetConfiguredModelAlgorithmAssociationResponse.AddMember("configuredModelAlgorithmAssociationArn", _ConfiguredModelAlgorithmAssociationArn)
-
-	GetConfiguredModelAlgorithmAssociationResponse_membershipIdentifier = GetConfiguredModelAlgorithmAssociationResponse.AddMember("membershipIdentifier", _UUID)
-
-	GetConfiguredModelAlgorithmAssociationResponse_collaborationIdentifier = GetConfiguredModelAlgorithmAssociationResponse.AddMember("collaborationIdentifier", _UUID)
-
-	GetConfiguredModelAlgorithmAssociationResponse_configuredModelAlgorithmArn = GetConfiguredModelAlgorithmAssociationResponse.AddMember("configuredModelAlgorithmArn", _ConfiguredModelAlgorithmArn)
-
-	GetConfiguredModelAlgorithmAssociationResponse_name = GetConfiguredModelAlgorithmAssociationResponse.AddMember("name", _NameString)
-
-	GetConfiguredModelAlgorithmAssociationResponse_privacyConfiguration = GetConfiguredModelAlgorithmAssociationResponse.AddMember("privacyConfiguration", PrivacyConfiguration)
-
-	GetConfiguredModelAlgorithmAssociationResponse_description = GetConfiguredModelAlgorithmAssociationResponse.AddMember("description", _ResourceDescription)
-
-	GetConfiguredModelAlgorithmAssociationResponse_tags = GetConfiguredModelAlgorithmAssociationResponse.AddMember("tags", _TagMap)
-
-	GetConfiguredModelAlgorithmRequest_configuredModelAlgorithmArn = GetConfiguredModelAlgorithmRequest.AddMember("configuredModelAlgorithmArn", _ConfiguredModelAlgorithmArn, &smithytraits.HTTPLabel{})
-
-	GetConfiguredModelAlgorithmResponse_createTime = GetConfiguredModelAlgorithmResponse.AddMember("createTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetConfiguredModelAlgorithmResponse_updateTime = GetConfiguredModelAlgorithmResponse.AddMember("updateTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetConfiguredModelAlgorithmResponse_configuredModelAlgorithmArn = GetConfiguredModelAlgorithmResponse.AddMember("configuredModelAlgorithmArn", _ConfiguredModelAlgorithmArn)
-
-	GetConfiguredModelAlgorithmResponse_name = GetConfiguredModelAlgorithmResponse.AddMember("name", _NameString)
-
-	GetConfiguredModelAlgorithmResponse_trainingContainerConfig = GetConfiguredModelAlgorithmResponse.AddMember("trainingContainerConfig", ContainerConfig)
-
-	GetConfiguredModelAlgorithmResponse_inferenceContainerConfig = GetConfiguredModelAlgorithmResponse.AddMember("inferenceContainerConfig", InferenceContainerConfig)
-
-	GetConfiguredModelAlgorithmResponse_roleArn = GetConfiguredModelAlgorithmResponse.AddMember("roleArn", _IamRoleArn)
-
-	GetConfiguredModelAlgorithmResponse_description = GetConfiguredModelAlgorithmResponse.AddMember("description", _ResourceDescription)
-
-	GetConfiguredModelAlgorithmResponse_tags = GetConfiguredModelAlgorithmResponse.AddMember("tags", _TagMap)
-
-	GetConfiguredModelAlgorithmResponse_kmsKeyArn = GetConfiguredModelAlgorithmResponse.AddMember("kmsKeyArn", _KmsKeyArn)
-
-	GetMLConfigurationRequest_membershipIdentifier = GetMLConfigurationRequest.AddMember("membershipIdentifier", _UUID, &smithytraits.HTTPLabel{})
-
-	GetMLConfigurationResponse_membershipIdentifier = GetMLConfigurationResponse.AddMember("membershipIdentifier", _UUID)
-
-	GetMLConfigurationResponse_defaultOutputLocation = GetMLConfigurationResponse.AddMember("defaultOutputLocation", MLOutputConfiguration)
-
-	GetMLConfigurationResponse_createTime = GetMLConfigurationResponse.AddMember("createTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetMLConfigurationResponse_updateTime = GetMLConfigurationResponse.AddMember("updateTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetMLInputChannelRequest_mlInputChannelArn = GetMLInputChannelRequest.AddMember("mlInputChannelArn", _MLInputChannelArn, &smithytraits.HTTPLabel{})
-
-	GetMLInputChannelRequest_membershipIdentifier = GetMLInputChannelRequest.AddMember("membershipIdentifier", _UUID, &smithytraits.HTTPLabel{})
-
-	GetMLInputChannelResponse_membershipIdentifier = GetMLInputChannelResponse.AddMember("membershipIdentifier", _UUID)
-
-	GetMLInputChannelResponse_collaborationIdentifier = GetMLInputChannelResponse.AddMember("collaborationIdentifier", _UUID)
-
-	GetMLInputChannelResponse_mlInputChannelArn = GetMLInputChannelResponse.AddMember("mlInputChannelArn", _MLInputChannelArn)
-
-	GetMLInputChannelResponse_name = GetMLInputChannelResponse.AddMember("name", _NameString)
-
-	GetMLInputChannelResponse_configuredModelAlgorithmAssociations = GetMLInputChannelResponse.AddMember("configuredModelAlgorithmAssociations", _ConfiguredModelAlgorithmAssociationArnList)
-
-	GetMLInputChannelResponse_status = GetMLInputChannelResponse.AddMember("status", MLInputChannelStatus)
-
-	GetMLInputChannelResponse_statusDetails = GetMLInputChannelResponse.AddMember("statusDetails", StatusDetails)
-
-	GetMLInputChannelResponse_retentionInDays = GetMLInputChannelResponse.AddMember("retentionInDays", smithyprelude.Integer)
-
-	GetMLInputChannelResponse_numberOfRecords = GetMLInputChannelResponse.AddMember("numberOfRecords", smithyprelude.Long)
-
-	GetMLInputChannelResponse_privacyBudgets = GetMLInputChannelResponse.AddMember("privacyBudgets", PrivacyBudgets)
-
-	GetMLInputChannelResponse_description = GetMLInputChannelResponse.AddMember("description", _ResourceDescription)
-
-	GetMLInputChannelResponse_syntheticDataConfiguration = GetMLInputChannelResponse.AddMember("syntheticDataConfiguration", SyntheticDataConfiguration)
-
-	GetMLInputChannelResponse_payerConfiguration = GetMLInputChannelResponse.AddMember("payerConfiguration", PayerConfiguration)
-
-	GetMLInputChannelResponse_createTime = GetMLInputChannelResponse.AddMember("createTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetMLInputChannelResponse_updateTime = GetMLInputChannelResponse.AddMember("updateTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetMLInputChannelResponse_inputChannel = GetMLInputChannelResponse.AddMember("inputChannel", InputChannel)
-
-	GetMLInputChannelResponse_protectedQueryIdentifier = GetMLInputChannelResponse.AddMember("protectedQueryIdentifier", _UUID)
-
-	GetMLInputChannelResponse_numberOfFiles = GetMLInputChannelResponse.AddMember("numberOfFiles", smithyprelude.Double)
-
-	GetMLInputChannelResponse_sizeInGb = GetMLInputChannelResponse.AddMember("sizeInGb", smithyprelude.Double)
-
-	GetMLInputChannelResponse_kmsKeyArn = GetMLInputChannelResponse.AddMember("kmsKeyArn", _KmsKeyArn)
-
-	GetMLInputChannelResponse_tags = GetMLInputChannelResponse.AddMember("tags", _TagMap)
-
-	GetTrainedModelInferenceJobRequest_membershipIdentifier = GetTrainedModelInferenceJobRequest.AddMember("membershipIdentifier", _UUID, &smithytraits.HTTPLabel{})
-
-	GetTrainedModelInferenceJobRequest_trainedModelInferenceJobArn = GetTrainedModelInferenceJobRequest.AddMember("trainedModelInferenceJobArn", _TrainedModelInferenceJobArn, &smithytraits.HTTPLabel{})
-
-	GetTrainedModelInferenceJobResponse_createTime = GetTrainedModelInferenceJobResponse.AddMember("createTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetTrainedModelInferenceJobResponse_updateTime = GetTrainedModelInferenceJobResponse.AddMember("updateTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetTrainedModelInferenceJobResponse_trainedModelInferenceJobArn = GetTrainedModelInferenceJobResponse.AddMember("trainedModelInferenceJobArn", _TrainedModelInferenceJobArn)
-
-	GetTrainedModelInferenceJobResponse_configuredModelAlgorithmAssociationArn = GetTrainedModelInferenceJobResponse.AddMember("configuredModelAlgorithmAssociationArn", _ConfiguredModelAlgorithmAssociationArn)
-
-	GetTrainedModelInferenceJobResponse_name = GetTrainedModelInferenceJobResponse.AddMember("name", _NameString)
-
-	GetTrainedModelInferenceJobResponse_status = GetTrainedModelInferenceJobResponse.AddMember("status", TrainedModelInferenceJobStatus)
-
-	GetTrainedModelInferenceJobResponse_trainedModelArn = GetTrainedModelInferenceJobResponse.AddMember("trainedModelArn", _TrainedModelArn)
-
-	GetTrainedModelInferenceJobResponse_trainedModelVersionIdentifier = GetTrainedModelInferenceJobResponse.AddMember("trainedModelVersionIdentifier", _UUID)
-
-	GetTrainedModelInferenceJobResponse_resourceConfig = GetTrainedModelInferenceJobResponse.AddMember("resourceConfig", InferenceResourceConfig)
-
-	GetTrainedModelInferenceJobResponse_outputConfiguration = GetTrainedModelInferenceJobResponse.AddMember("outputConfiguration", InferenceOutputConfiguration)
-
-	GetTrainedModelInferenceJobResponse_membershipIdentifier = GetTrainedModelInferenceJobResponse.AddMember("membershipIdentifier", _UUID)
-
-	GetTrainedModelInferenceJobResponse_dataSource = GetTrainedModelInferenceJobResponse.AddMember("dataSource", ModelInferenceDataSource)
-
-	GetTrainedModelInferenceJobResponse_containerExecutionParameters = GetTrainedModelInferenceJobResponse.AddMember("containerExecutionParameters", InferenceContainerExecutionParameters)
-
-	GetTrainedModelInferenceJobResponse_statusDetails = GetTrainedModelInferenceJobResponse.AddMember("statusDetails", StatusDetails)
-
-	GetTrainedModelInferenceJobResponse_description = GetTrainedModelInferenceJobResponse.AddMember("description", _ResourceDescription)
-
-	GetTrainedModelInferenceJobResponse_inferenceContainerImageDigest = GetTrainedModelInferenceJobResponse.AddMember("inferenceContainerImageDigest", smithyprelude.String)
-
-	GetTrainedModelInferenceJobResponse_environment = GetTrainedModelInferenceJobResponse.AddMember("environment", _InferenceEnvironmentMap)
-
-	GetTrainedModelInferenceJobResponse_kmsKeyArn = GetTrainedModelInferenceJobResponse.AddMember("kmsKeyArn", _KmsKeyArn)
-
-	GetTrainedModelInferenceJobResponse_metricsStatus = GetTrainedModelInferenceJobResponse.AddMember("metricsStatus", MetricsStatus)
-
-	GetTrainedModelInferenceJobResponse_metricsStatusDetails = GetTrainedModelInferenceJobResponse.AddMember("metricsStatusDetails", smithyprelude.String)
-
-	GetTrainedModelInferenceJobResponse_logsStatus = GetTrainedModelInferenceJobResponse.AddMember("logsStatus", LogsStatus)
-
-	GetTrainedModelInferenceJobResponse_logsStatusDetails = GetTrainedModelInferenceJobResponse.AddMember("logsStatusDetails", smithyprelude.String)
-
-	GetTrainedModelInferenceJobResponse_tags = GetTrainedModelInferenceJobResponse.AddMember("tags", _TagMap)
-
-	GetTrainedModelInferenceJobResponse_mlModelInferencePayerAccountId = GetTrainedModelInferenceJobResponse.AddMember("mlModelInferencePayerAccountId", _AccountId)
-
-	GetTrainedModelRequest_trainedModelArn = GetTrainedModelRequest.AddMember("trainedModelArn", _TrainedModelArn, &smithytraits.HTTPLabel{})
-
-	GetTrainedModelRequest_membershipIdentifier = GetTrainedModelRequest.AddMember("membershipIdentifier", _UUID, &smithytraits.HTTPLabel{})
-
-	GetTrainedModelRequest_versionIdentifier = GetTrainedModelRequest.AddMember("versionIdentifier", _UUID, &smithytraits.HTTPQuery{Name: "versionIdentifier"})
-
-	GetTrainedModelResponse_membershipIdentifier = GetTrainedModelResponse.AddMember("membershipIdentifier", _UUID)
-
-	GetTrainedModelResponse_collaborationIdentifier = GetTrainedModelResponse.AddMember("collaborationIdentifier", _UUID)
-
-	GetTrainedModelResponse_trainedModelArn = GetTrainedModelResponse.AddMember("trainedModelArn", _TrainedModelArn)
-
-	GetTrainedModelResponse_versionIdentifier = GetTrainedModelResponse.AddMember("versionIdentifier", _UUID)
-
-	GetTrainedModelResponse_incrementalTrainingDataChannels = GetTrainedModelResponse.AddMember("incrementalTrainingDataChannels", _IncrementalTrainingDataChannelsOutput)
-
-	GetTrainedModelResponse_name = GetTrainedModelResponse.AddMember("name", _NameString)
-
-	GetTrainedModelResponse_description = GetTrainedModelResponse.AddMember("description", _ResourceDescription)
-
-	GetTrainedModelResponse_status = GetTrainedModelResponse.AddMember("status", TrainedModelStatus)
-
-	GetTrainedModelResponse_statusDetails = GetTrainedModelResponse.AddMember("statusDetails", StatusDetails)
-
-	GetTrainedModelResponse_configuredModelAlgorithmAssociationArn = GetTrainedModelResponse.AddMember("configuredModelAlgorithmAssociationArn", _ConfiguredModelAlgorithmAssociationArn)
-
-	GetTrainedModelResponse_resourceConfig = GetTrainedModelResponse.AddMember("resourceConfig", ResourceConfig)
-
-	GetTrainedModelResponse_trainingInputMode = GetTrainedModelResponse.AddMember("trainingInputMode", TrainingInputMode)
-
-	GetTrainedModelResponse_stoppingCondition = GetTrainedModelResponse.AddMember("stoppingCondition", StoppingCondition)
-
-	GetTrainedModelResponse_metricsStatus = GetTrainedModelResponse.AddMember("metricsStatus", MetricsStatus)
-
-	GetTrainedModelResponse_metricsStatusDetails = GetTrainedModelResponse.AddMember("metricsStatusDetails", smithyprelude.String)
-
-	GetTrainedModelResponse_logsStatus = GetTrainedModelResponse.AddMember("logsStatus", LogsStatus)
-
-	GetTrainedModelResponse_logsStatusDetails = GetTrainedModelResponse.AddMember("logsStatusDetails", smithyprelude.String)
-
-	GetTrainedModelResponse_trainingContainerImageDigest = GetTrainedModelResponse.AddMember("trainingContainerImageDigest", smithyprelude.String)
-
-	GetTrainedModelResponse_mlModelTrainingPayerAccountId = GetTrainedModelResponse.AddMember("mlModelTrainingPayerAccountId", _AccountId)
-
-	GetTrainedModelResponse_createTime = GetTrainedModelResponse.AddMember("createTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetTrainedModelResponse_updateTime = GetTrainedModelResponse.AddMember("updateTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetTrainedModelResponse_hyperparameters = GetTrainedModelResponse.AddMember("hyperparameters", _HyperParameters)
-
-	GetTrainedModelResponse_environment = GetTrainedModelResponse.AddMember("environment", _Environment)
-
-	GetTrainedModelResponse_kmsKeyArn = GetTrainedModelResponse.AddMember("kmsKeyArn", _KmsKeyArn)
-
-	GetTrainedModelResponse_tags = GetTrainedModelResponse.AddMember("tags", _TagMap)
-
-	GetTrainedModelResponse_dataChannels = GetTrainedModelResponse.AddMember("dataChannels", _ModelTrainingDataChannels)
-
-	GetTrainingDatasetRequest_trainingDatasetArn = GetTrainingDatasetRequest.AddMember("trainingDatasetArn", _TrainingDatasetArn, &smithytraits.HTTPLabel{})
-
-	GetTrainingDatasetResponse_createTime = GetTrainingDatasetResponse.AddMember("createTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetTrainingDatasetResponse_updateTime = GetTrainingDatasetResponse.AddMember("updateTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetTrainingDatasetResponse_trainingDatasetArn = GetTrainingDatasetResponse.AddMember("trainingDatasetArn", _TrainingDatasetArn)
-
-	GetTrainingDatasetResponse_name = GetTrainingDatasetResponse.AddMember("name", _NameString)
-
-	GetTrainingDatasetResponse_trainingData = GetTrainingDatasetResponse.AddMember("trainingData", _DatasetList)
-
-	GetTrainingDatasetResponse_status = GetTrainingDatasetResponse.AddMember("status", TrainingDatasetStatus)
-
-	GetTrainingDatasetResponse_roleArn = GetTrainingDatasetResponse.AddMember("roleArn", _IamRoleArn)
-
-	GetTrainingDatasetResponse_tags = GetTrainingDatasetResponse.AddMember("tags", _TagMap)
-
-	GetTrainingDatasetResponse_description = GetTrainingDatasetResponse.AddMember("description", _ResourceDescription)
-
-	ListAudienceExportJobsRequest_nextToken = ListAudienceExportJobsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListAudienceExportJobsRequest_maxResults = ListAudienceExportJobsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListAudienceExportJobsRequest_audienceGenerationJobArn = ListAudienceExportJobsRequest.AddMember("audienceGenerationJobArn", _AudienceGenerationJobArn, &smithytraits.HTTPQuery{Name: "audienceGenerationJobArn"})
-
-	ListAudienceExportJobsResponse_nextToken = ListAudienceExportJobsResponse.AddMember("nextToken", _NextToken)
-
-	ListAudienceExportJobsResponse_audienceExportJobs = ListAudienceExportJobsResponse.AddMember("audienceExportJobs", _AudienceExportJobList)
-
-	ListAudienceGenerationJobsRequest_nextToken = ListAudienceGenerationJobsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListAudienceGenerationJobsRequest_maxResults = ListAudienceGenerationJobsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListAudienceGenerationJobsRequest_configuredAudienceModelArn = ListAudienceGenerationJobsRequest.AddMember("configuredAudienceModelArn", _ConfiguredAudienceModelArn, &smithytraits.HTTPQuery{Name: "configuredAudienceModelArn"})
-
-	ListAudienceGenerationJobsRequest_collaborationId = ListAudienceGenerationJobsRequest.AddMember("collaborationId", _UUID, &smithytraits.HTTPQuery{Name: "collaborationId"})
-
-	ListAudienceGenerationJobsResponse_nextToken = ListAudienceGenerationJobsResponse.AddMember("nextToken", _NextToken)
-
-	ListAudienceGenerationJobsResponse_audienceGenerationJobs = ListAudienceGenerationJobsResponse.AddMember("audienceGenerationJobs", _AudienceGenerationJobList)
-
-	ListAudienceModelsRequest_nextToken = ListAudienceModelsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListAudienceModelsRequest_maxResults = ListAudienceModelsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListAudienceModelsResponse_nextToken = ListAudienceModelsResponse.AddMember("nextToken", _NextToken)
-
-	ListAudienceModelsResponse_audienceModels = ListAudienceModelsResponse.AddMember("audienceModels", _AudienceModelList)
-
-	ListCollaborationConfiguredModelAlgorithmAssociationsRequest_nextToken = ListCollaborationConfiguredModelAlgorithmAssociationsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListCollaborationConfiguredModelAlgorithmAssociationsRequest_maxResults = ListCollaborationConfiguredModelAlgorithmAssociationsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListCollaborationConfiguredModelAlgorithmAssociationsRequest_collaborationIdentifier = ListCollaborationConfiguredModelAlgorithmAssociationsRequest.AddMember("collaborationIdentifier", _UUID, &smithytraits.HTTPLabel{})
-
-	ListCollaborationConfiguredModelAlgorithmAssociationsResponse_nextToken = ListCollaborationConfiguredModelAlgorithmAssociationsResponse.AddMember("nextToken", _NextToken)
-
-	ListCollaborationConfiguredModelAlgorithmAssociationsResponse_collaborationConfiguredModelAlgorithmAssociations = ListCollaborationConfiguredModelAlgorithmAssociationsResponse.AddMember("collaborationConfiguredModelAlgorithmAssociations", _CollaborationConfiguredModelAlgorithmAssociationList)
-
-	ListCollaborationMLInputChannelsRequest_nextToken = ListCollaborationMLInputChannelsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListCollaborationMLInputChannelsRequest_maxResults = ListCollaborationMLInputChannelsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListCollaborationMLInputChannelsRequest_collaborationIdentifier = ListCollaborationMLInputChannelsRequest.AddMember("collaborationIdentifier", _UUID, &smithytraits.HTTPLabel{})
-
-	ListCollaborationMLInputChannelsResponse_nextToken = ListCollaborationMLInputChannelsResponse.AddMember("nextToken", _NextToken)
-
-	ListCollaborationMLInputChannelsResponse_collaborationMLInputChannelsList = ListCollaborationMLInputChannelsResponse.AddMember("collaborationMLInputChannelsList", _CollaborationMLInputChannelsList)
-
-	ListCollaborationTrainedModelExportJobsRequest_nextToken = ListCollaborationTrainedModelExportJobsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListCollaborationTrainedModelExportJobsRequest_maxResults = ListCollaborationTrainedModelExportJobsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListCollaborationTrainedModelExportJobsRequest_collaborationIdentifier = ListCollaborationTrainedModelExportJobsRequest.AddMember("collaborationIdentifier", _UUID, &smithytraits.HTTPLabel{})
-
-	ListCollaborationTrainedModelExportJobsRequest_trainedModelArn = ListCollaborationTrainedModelExportJobsRequest.AddMember("trainedModelArn", _TrainedModelArn, &smithytraits.HTTPLabel{})
-
-	ListCollaborationTrainedModelExportJobsRequest_trainedModelVersionIdentifier = ListCollaborationTrainedModelExportJobsRequest.AddMember("trainedModelVersionIdentifier", _UUID, &smithytraits.HTTPQuery{Name: "trainedModelVersionIdentifier"})
-
-	ListCollaborationTrainedModelExportJobsResponse_nextToken = ListCollaborationTrainedModelExportJobsResponse.AddMember("nextToken", _NextToken)
-
-	ListCollaborationTrainedModelExportJobsResponse_collaborationTrainedModelExportJobs = ListCollaborationTrainedModelExportJobsResponse.AddMember("collaborationTrainedModelExportJobs", _CollaborationTrainedModelExportJobList)
-
-	ListCollaborationTrainedModelInferenceJobsRequest_nextToken = ListCollaborationTrainedModelInferenceJobsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListCollaborationTrainedModelInferenceJobsRequest_maxResults = ListCollaborationTrainedModelInferenceJobsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListCollaborationTrainedModelInferenceJobsRequest_collaborationIdentifier = ListCollaborationTrainedModelInferenceJobsRequest.AddMember("collaborationIdentifier", _UUID, &smithytraits.HTTPLabel{})
-
-	ListCollaborationTrainedModelInferenceJobsRequest_trainedModelArn = ListCollaborationTrainedModelInferenceJobsRequest.AddMember("trainedModelArn", _TrainedModelArn, &smithytraits.HTTPQuery{Name: "trainedModelArn"})
-
-	ListCollaborationTrainedModelInferenceJobsRequest_trainedModelVersionIdentifier = ListCollaborationTrainedModelInferenceJobsRequest.AddMember("trainedModelVersionIdentifier", _UUID, &smithytraits.HTTPQuery{Name: "trainedModelVersionIdentifier"})
-
-	ListCollaborationTrainedModelInferenceJobsResponse_nextToken = ListCollaborationTrainedModelInferenceJobsResponse.AddMember("nextToken", _NextToken)
-
-	ListCollaborationTrainedModelInferenceJobsResponse_collaborationTrainedModelInferenceJobs = ListCollaborationTrainedModelInferenceJobsResponse.AddMember("collaborationTrainedModelInferenceJobs", _CollaborationTrainedModelInferenceJobList)
-
-	ListCollaborationTrainedModelsRequest_nextToken = ListCollaborationTrainedModelsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListCollaborationTrainedModelsRequest_maxResults = ListCollaborationTrainedModelsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListCollaborationTrainedModelsRequest_collaborationIdentifier = ListCollaborationTrainedModelsRequest.AddMember("collaborationIdentifier", _UUID, &smithytraits.HTTPLabel{})
-
-	ListCollaborationTrainedModelsResponse_nextToken = ListCollaborationTrainedModelsResponse.AddMember("nextToken", _NextToken)
-
-	ListCollaborationTrainedModelsResponse_collaborationTrainedModels = ListCollaborationTrainedModelsResponse.AddMember("collaborationTrainedModels", _CollaborationTrainedModelList)
-
-	ListConfiguredAudienceModelsRequest_nextToken = ListConfiguredAudienceModelsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListConfiguredAudienceModelsRequest_maxResults = ListConfiguredAudienceModelsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListConfiguredAudienceModelsResponse_nextToken = ListConfiguredAudienceModelsResponse.AddMember("nextToken", _NextToken)
-
-	ListConfiguredAudienceModelsResponse_configuredAudienceModels = ListConfiguredAudienceModelsResponse.AddMember("configuredAudienceModels", _ConfiguredAudienceModelList)
-
-	ListConfiguredModelAlgorithmAssociationsRequest_nextToken = ListConfiguredModelAlgorithmAssociationsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListConfiguredModelAlgorithmAssociationsRequest_maxResults = ListConfiguredModelAlgorithmAssociationsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListConfiguredModelAlgorithmAssociationsRequest_membershipIdentifier = ListConfiguredModelAlgorithmAssociationsRequest.AddMember("membershipIdentifier", _UUID, &smithytraits.HTTPLabel{})
-
-	ListConfiguredModelAlgorithmAssociationsResponse_nextToken = ListConfiguredModelAlgorithmAssociationsResponse.AddMember("nextToken", _NextToken)
-
-	ListConfiguredModelAlgorithmAssociationsResponse_configuredModelAlgorithmAssociations = ListConfiguredModelAlgorithmAssociationsResponse.AddMember("configuredModelAlgorithmAssociations", _ConfiguredModelAlgorithmAssociationList)
-
-	ListConfiguredModelAlgorithmsRequest_nextToken = ListConfiguredModelAlgorithmsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListConfiguredModelAlgorithmsRequest_maxResults = ListConfiguredModelAlgorithmsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListConfiguredModelAlgorithmsResponse_nextToken = ListConfiguredModelAlgorithmsResponse.AddMember("nextToken", _NextToken)
-
-	ListConfiguredModelAlgorithmsResponse_configuredModelAlgorithms = ListConfiguredModelAlgorithmsResponse.AddMember("configuredModelAlgorithms", _ConfiguredModelAlgorithmList)
-
-	ListMLInputChannelsRequest_nextToken = ListMLInputChannelsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListMLInputChannelsRequest_maxResults = ListMLInputChannelsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListMLInputChannelsRequest_membershipIdentifier = ListMLInputChannelsRequest.AddMember("membershipIdentifier", _UUID, &smithytraits.HTTPLabel{})
-
-	ListMLInputChannelsResponse_nextToken = ListMLInputChannelsResponse.AddMember("nextToken", _NextToken)
-
-	ListMLInputChannelsResponse_mlInputChannelsList = ListMLInputChannelsResponse.AddMember("mlInputChannelsList", _MLInputChannelsList)
-
-	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", _TaggableArn, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _TagMap)
-
-	ListTrainedModelInferenceJobsRequest_nextToken = ListTrainedModelInferenceJobsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListTrainedModelInferenceJobsRequest_maxResults = ListTrainedModelInferenceJobsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListTrainedModelInferenceJobsRequest_membershipIdentifier = ListTrainedModelInferenceJobsRequest.AddMember("membershipIdentifier", _UUID, &smithytraits.HTTPLabel{})
-
-	ListTrainedModelInferenceJobsRequest_trainedModelArn = ListTrainedModelInferenceJobsRequest.AddMember("trainedModelArn", _TrainedModelArn, &smithytraits.HTTPQuery{Name: "trainedModelArn"})
-
-	ListTrainedModelInferenceJobsRequest_trainedModelVersionIdentifier = ListTrainedModelInferenceJobsRequest.AddMember("trainedModelVersionIdentifier", _UUID, &smithytraits.HTTPQuery{Name: "trainedModelVersionIdentifier"})
-
-	ListTrainedModelInferenceJobsResponse_nextToken = ListTrainedModelInferenceJobsResponse.AddMember("nextToken", _NextToken)
-
-	ListTrainedModelInferenceJobsResponse_trainedModelInferenceJobs = ListTrainedModelInferenceJobsResponse.AddMember("trainedModelInferenceJobs", _TrainedModelInferenceJobList)
-
-	ListTrainedModelsRequest_nextToken = ListTrainedModelsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListTrainedModelsRequest_maxResults = ListTrainedModelsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListTrainedModelsRequest_membershipIdentifier = ListTrainedModelsRequest.AddMember("membershipIdentifier", _UUID, &smithytraits.HTTPLabel{})
-
-	ListTrainedModelsResponse_nextToken = ListTrainedModelsResponse.AddMember("nextToken", _NextToken)
-
-	ListTrainedModelsResponse_trainedModels = ListTrainedModelsResponse.AddMember("trainedModels", _TrainedModelList)
-
-	ListTrainedModelVersionsRequest_nextToken = ListTrainedModelVersionsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListTrainedModelVersionsRequest_maxResults = ListTrainedModelVersionsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListTrainedModelVersionsRequest_membershipIdentifier = ListTrainedModelVersionsRequest.AddMember("membershipIdentifier", _UUID, &smithytraits.HTTPLabel{})
-
-	ListTrainedModelVersionsRequest_trainedModelArn = ListTrainedModelVersionsRequest.AddMember("trainedModelArn", _TrainedModelArn, &smithytraits.HTTPLabel{})
-
-	ListTrainedModelVersionsRequest_status = ListTrainedModelVersionsRequest.AddMember("status", TrainedModelStatus, &smithytraits.HTTPQuery{Name: "status"})
-
-	ListTrainedModelVersionsResponse_nextToken = ListTrainedModelVersionsResponse.AddMember("nextToken", _NextToken)
-
-	ListTrainedModelVersionsResponse_trainedModels = ListTrainedModelVersionsResponse.AddMember("trainedModels", _TrainedModelList)
-
-	ListTrainingDatasetsRequest_nextToken = ListTrainingDatasetsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListTrainingDatasetsRequest_maxResults = ListTrainingDatasetsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListTrainingDatasetsResponse_nextToken = ListTrainingDatasetsResponse.AddMember("nextToken", _NextToken)
-
-	ListTrainingDatasetsResponse_trainingDatasets = ListTrainingDatasetsResponse.AddMember("trainingDatasets", _TrainingDatasetList)
-
-	PutConfiguredAudienceModelPolicyRequest_configuredAudienceModelArn = PutConfiguredAudienceModelPolicyRequest.AddMember("configuredAudienceModelArn", _ConfiguredAudienceModelArn, &smithytraits.HTTPLabel{})
-
-	PutConfiguredAudienceModelPolicyRequest_configuredAudienceModelPolicy = PutConfiguredAudienceModelPolicyRequest.AddMember("configuredAudienceModelPolicy", _ResourcePolicy)
-
-	PutConfiguredAudienceModelPolicyRequest_previousPolicyHash = PutConfiguredAudienceModelPolicyRequest.AddMember("previousPolicyHash", _Hash)
-
-	PutConfiguredAudienceModelPolicyRequest_policyExistenceCondition = PutConfiguredAudienceModelPolicyRequest.AddMember("policyExistenceCondition", PolicyExistenceCondition)
-
-	PutConfiguredAudienceModelPolicyResponse_configuredAudienceModelPolicy = PutConfiguredAudienceModelPolicyResponse.AddMember("configuredAudienceModelPolicy", _ResourcePolicy)
-
-	PutConfiguredAudienceModelPolicyResponse_policyHash = PutConfiguredAudienceModelPolicyResponse.AddMember("policyHash", _Hash)
-
-	PutMLConfigurationRequest_membershipIdentifier = PutMLConfigurationRequest.AddMember("membershipIdentifier", _UUID, &smithytraits.HTTPLabel{})
-
-	PutMLConfigurationRequest_defaultOutputLocation = PutMLConfigurationRequest.AddMember("defaultOutputLocation", MLOutputConfiguration)
-
-	StartAudienceExportJobRequest_name = StartAudienceExportJobRequest.AddMember("name", _NameString)
-
-	StartAudienceExportJobRequest_audienceGenerationJobArn = StartAudienceExportJobRequest.AddMember("audienceGenerationJobArn", _AudienceGenerationJobArn)
-
-	StartAudienceExportJobRequest_audienceSize = StartAudienceExportJobRequest.AddMember("audienceSize", AudienceSize)
-
-	StartAudienceExportJobRequest_description = StartAudienceExportJobRequest.AddMember("description", _ResourceDescription)
-
-	StartAudienceGenerationJobRequest_name = StartAudienceGenerationJobRequest.AddMember("name", _NameString)
-
-	StartAudienceGenerationJobRequest_configuredAudienceModelArn = StartAudienceGenerationJobRequest.AddMember("configuredAudienceModelArn", _ConfiguredAudienceModelArn)
-
-	StartAudienceGenerationJobRequest_seedAudience = StartAudienceGenerationJobRequest.AddMember("seedAudience", AudienceGenerationJobDataSource)
-
-	StartAudienceGenerationJobRequest_includeSeedInOutput = StartAudienceGenerationJobRequest.AddMember("includeSeedInOutput", smithyprelude.Boolean)
-
-	StartAudienceGenerationJobRequest_collaborationId = StartAudienceGenerationJobRequest.AddMember("collaborationId", _UUID)
-
-	StartAudienceGenerationJobRequest_description = StartAudienceGenerationJobRequest.AddMember("description", _ResourceDescription)
-
-	StartAudienceGenerationJobRequest_tags = StartAudienceGenerationJobRequest.AddMember("tags", _TagMap)
-
-	StartAudienceGenerationJobResponse_audienceGenerationJobArn = StartAudienceGenerationJobResponse.AddMember("audienceGenerationJobArn", _AudienceGenerationJobArn)
-
-	StartTrainedModelExportJobRequest_name = StartTrainedModelExportJobRequest.AddMember("name", _NameString)
-
-	StartTrainedModelExportJobRequest_trainedModelArn = StartTrainedModelExportJobRequest.AddMember("trainedModelArn", _TrainedModelArn, &smithytraits.HTTPLabel{})
-
-	StartTrainedModelExportJobRequest_trainedModelVersionIdentifier = StartTrainedModelExportJobRequest.AddMember("trainedModelVersionIdentifier", _UUID)
-
-	StartTrainedModelExportJobRequest_membershipIdentifier = StartTrainedModelExportJobRequest.AddMember("membershipIdentifier", _UUID, &smithytraits.HTTPLabel{})
-
-	StartTrainedModelExportJobRequest_outputConfiguration = StartTrainedModelExportJobRequest.AddMember("outputConfiguration", TrainedModelExportOutputConfiguration)
-
-	StartTrainedModelExportJobRequest_description = StartTrainedModelExportJobRequest.AddMember("description", _ResourceDescription)
-
-	StartTrainedModelInferenceJobRequest_membershipIdentifier = StartTrainedModelInferenceJobRequest.AddMember("membershipIdentifier", _UUID, &smithytraits.HTTPLabel{})
-
-	StartTrainedModelInferenceJobRequest_name = StartTrainedModelInferenceJobRequest.AddMember("name", _NameString)
-
-	StartTrainedModelInferenceJobRequest_trainedModelArn = StartTrainedModelInferenceJobRequest.AddMember("trainedModelArn", _TrainedModelArn)
-
-	StartTrainedModelInferenceJobRequest_trainedModelVersionIdentifier = StartTrainedModelInferenceJobRequest.AddMember("trainedModelVersionIdentifier", _UUID)
-
-	StartTrainedModelInferenceJobRequest_configuredModelAlgorithmAssociationArn = StartTrainedModelInferenceJobRequest.AddMember("configuredModelAlgorithmAssociationArn", _ConfiguredModelAlgorithmAssociationArn)
-
-	StartTrainedModelInferenceJobRequest_resourceConfig = StartTrainedModelInferenceJobRequest.AddMember("resourceConfig", InferenceResourceConfig)
-
-	StartTrainedModelInferenceJobRequest_outputConfiguration = StartTrainedModelInferenceJobRequest.AddMember("outputConfiguration", InferenceOutputConfiguration)
-
-	StartTrainedModelInferenceJobRequest_dataSource = StartTrainedModelInferenceJobRequest.AddMember("dataSource", ModelInferenceDataSource)
-
-	StartTrainedModelInferenceJobRequest_description = StartTrainedModelInferenceJobRequest.AddMember("description", _ResourceDescription)
-
-	StartTrainedModelInferenceJobRequest_containerExecutionParameters = StartTrainedModelInferenceJobRequest.AddMember("containerExecutionParameters", InferenceContainerExecutionParameters)
-
-	StartTrainedModelInferenceJobRequest_environment = StartTrainedModelInferenceJobRequest.AddMember("environment", _InferenceEnvironmentMap)
-
-	StartTrainedModelInferenceJobRequest_kmsKeyArn = StartTrainedModelInferenceJobRequest.AddMember("kmsKeyArn", _KmsKeyArn)
-
-	StartTrainedModelInferenceJobRequest_tags = StartTrainedModelInferenceJobRequest.AddMember("tags", _TagMap)
-
-	StartTrainedModelInferenceJobRequest_mlModelInferencePayerAccountId = StartTrainedModelInferenceJobRequest.AddMember("mlModelInferencePayerAccountId", _AccountId)
-
-	StartTrainedModelInferenceJobResponse_trainedModelInferenceJobArn = StartTrainedModelInferenceJobResponse.AddMember("trainedModelInferenceJobArn", _TrainedModelInferenceJobArn)
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _TaggableArn, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _TagMap)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", _TaggableArn, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeys, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateConfiguredAudienceModelRequest_configuredAudienceModelArn = UpdateConfiguredAudienceModelRequest.AddMember("configuredAudienceModelArn", _ConfiguredAudienceModelArn, &smithytraits.HTTPLabel{})
-
-	UpdateConfiguredAudienceModelRequest_outputConfig = UpdateConfiguredAudienceModelRequest.AddMember("outputConfig", ConfiguredAudienceModelOutputConfig)
-
-	UpdateConfiguredAudienceModelRequest_audienceModelArn = UpdateConfiguredAudienceModelRequest.AddMember("audienceModelArn", _AudienceModelArn)
-
-	UpdateConfiguredAudienceModelRequest_sharedAudienceMetrics = UpdateConfiguredAudienceModelRequest.AddMember("sharedAudienceMetrics", _MetricsList)
-
-	UpdateConfiguredAudienceModelRequest_minMatchingSeedSize = UpdateConfiguredAudienceModelRequest.AddMember("minMatchingSeedSize", _MinMatchingSeedSize)
-
-	UpdateConfiguredAudienceModelRequest_audienceSizeConfig = UpdateConfiguredAudienceModelRequest.AddMember("audienceSizeConfig", AudienceSizeConfig)
-
-	UpdateConfiguredAudienceModelRequest_description = UpdateConfiguredAudienceModelRequest.AddMember("description", _ResourceDescription)
-
-	UpdateConfiguredAudienceModelResponse_configuredAudienceModelArn = UpdateConfiguredAudienceModelResponse.AddMember("configuredAudienceModelArn", _ConfiguredAudienceModelArn)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t59 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400}
+var t60 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t61 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t62 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t63 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t64 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t65 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t66 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t67 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t68 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t69 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t70 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "versionIdentifier"}}, DirectMask: 0x10}
+var t71 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t72 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+var t73 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "audienceGenerationJobArn"}}, DirectMask: 0x10}
+var t74 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "configuredAudienceModelArn"}}, DirectMask: 0x10}
+var t75 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "collaborationId"}}, DirectMask: 0x10}
+var t76 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "trainedModelVersionIdentifier"}}, DirectMask: 0x10}
+var t77 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "trainedModelArn"}}, DirectMask: 0x10}
+var t78 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "status"}}, DirectMask: 0x10}
+var t79 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var mAccessBudget = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessBudget_resourceArn, &sAccessBudget_details, &sAccessBudget_aggregateRemainingBudget}}
+var mAccessBudgetDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessBudgetDetails_startTime, &sAccessBudgetDetails_endTime, &sAccessBudgetDetails_remainingBudget, &sAccessBudgetDetails_budget, &sAccessBudgetDetails_budgetType, &sAccessBudgetDetails_autoRefresh}}
+var m_AccessBudgetDetailsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AccessBudgetDetailsList_member}}
+var m_AccessBudgets = smithy.SchemaMembers{List: []*smithy.Schema{&s_AccessBudgets_member}}
+var mAccessBudgetType = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessBudgetType_CALENDAR_DAY, &sAccessBudgetType_CALENDAR_MONTH, &sAccessBudgetType_CALENDAR_WEEK, &sAccessBudgetType_LIFETIME}}
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var m_AccountIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AccountIdList_member}}
+var mAudienceDestination = smithy.SchemaMembers{List: []*smithy.Schema{&sAudienceDestination_s3Destination}}
+var m_AudienceExportJobList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AudienceExportJobList_member}}
+var mAudienceExportJobStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sAudienceExportJobStatus_CREATE_PENDING, &sAudienceExportJobStatus_CREATE_IN_PROGRESS, &sAudienceExportJobStatus_CREATE_FAILED, &sAudienceExportJobStatus_ACTIVE}}
+var mAudienceExportJobSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sAudienceExportJobSummary_createTime, &sAudienceExportJobSummary_updateTime, &sAudienceExportJobSummary_name, &sAudienceExportJobSummary_audienceGenerationJobArn, &sAudienceExportJobSummary_audienceSize, &sAudienceExportJobSummary_description, &sAudienceExportJobSummary_status, &sAudienceExportJobSummary_statusDetails, &sAudienceExportJobSummary_outputLocation}, Seed: 1, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 1, 4, 0, 0, 2, 8, 0, 0, 0, 0, 0, 0, 7, 0,
+	6, 0, 0, 9, 0, 5, 0, 0,
+}}
+var mAudienceGenerationJobDataSource = smithy.SchemaMembers{List: []*smithy.Schema{&sAudienceGenerationJobDataSource_dataSource, &sAudienceGenerationJobDataSource_roleArn, &sAudienceGenerationJobDataSource_sqlParameters, &sAudienceGenerationJobDataSource_sqlComputeConfiguration}}
+var m_AudienceGenerationJobList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AudienceGenerationJobList_member}}
+var mAudienceGenerationJobStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sAudienceGenerationJobStatus_CREATE_PENDING, &sAudienceGenerationJobStatus_CREATE_IN_PROGRESS, &sAudienceGenerationJobStatus_CREATE_FAILED, &sAudienceGenerationJobStatus_ACTIVE, &sAudienceGenerationJobStatus_DELETE_PENDING, &sAudienceGenerationJobStatus_DELETE_IN_PROGRESS, &sAudienceGenerationJobStatus_DELETE_FAILED}}
+var mAudienceGenerationJobSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sAudienceGenerationJobSummary_createTime, &sAudienceGenerationJobSummary_updateTime, &sAudienceGenerationJobSummary_audienceGenerationJobArn, &sAudienceGenerationJobSummary_name, &sAudienceGenerationJobSummary_description, &sAudienceGenerationJobSummary_status, &sAudienceGenerationJobSummary_configuredAudienceModelArn, &sAudienceGenerationJobSummary_collaborationId, &sAudienceGenerationJobSummary_startedBy}, Seed: 4, Slots: []uint16{
+	2, 4, 0, 0, 1, 0, 0, 0, 0, 6, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0,
+	0, 0, 3, 0, 0, 0, 8, 7,
+}}
+var m_AudienceModelList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AudienceModelList_member}}
+var mAudienceModelStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sAudienceModelStatus_CREATE_PENDING, &sAudienceModelStatus_CREATE_IN_PROGRESS, &sAudienceModelStatus_CREATE_FAILED, &sAudienceModelStatus_ACTIVE, &sAudienceModelStatus_DELETE_PENDING, &sAudienceModelStatus_DELETE_IN_PROGRESS, &sAudienceModelStatus_DELETE_FAILED}}
+var mAudienceModelSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sAudienceModelSummary_createTime, &sAudienceModelSummary_updateTime, &sAudienceModelSummary_audienceModelArn, &sAudienceModelSummary_name, &sAudienceModelSummary_trainingDatasetArn, &sAudienceModelSummary_status, &sAudienceModelSummary_description}}
+var mAudienceQualityMetrics = smithy.SchemaMembers{List: []*smithy.Schema{&sAudienceQualityMetrics_relevanceMetrics, &sAudienceQualityMetrics_recallMetric}}
+var mAudienceSize = smithy.SchemaMembers{List: []*smithy.Schema{&sAudienceSize_type, &sAudienceSize_value}}
+var m_AudienceSizeBins = smithy.SchemaMembers{List: []*smithy.Schema{&s_AudienceSizeBins_member}}
+var mAudienceSizeConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sAudienceSizeConfig_audienceSizeType, &sAudienceSizeConfig_audienceSizeBins}}
+var mAudienceSizeType = smithy.SchemaMembers{List: []*smithy.Schema{&sAudienceSizeType_ABSOLUTE, &sAudienceSizeType_PERCENTAGE}}
+var mAutoRefreshMode = smithy.SchemaMembers{List: []*smithy.Schema{&sAutoRefreshMode_ENABLED, &sAutoRefreshMode_DISABLED}}
+var m_CollaborationConfiguredModelAlgorithmAssociationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CollaborationConfiguredModelAlgorithmAssociationList_member}}
+var mCollaborationConfiguredModelAlgorithmAssociationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sCollaborationConfiguredModelAlgorithmAssociationSummary_createTime, &sCollaborationConfiguredModelAlgorithmAssociationSummary_updateTime, &sCollaborationConfiguredModelAlgorithmAssociationSummary_configuredModelAlgorithmAssociationArn, &sCollaborationConfiguredModelAlgorithmAssociationSummary_name, &sCollaborationConfiguredModelAlgorithmAssociationSummary_description, &sCollaborationConfiguredModelAlgorithmAssociationSummary_membershipIdentifier, &sCollaborationConfiguredModelAlgorithmAssociationSummary_collaborationIdentifier, &sCollaborationConfiguredModelAlgorithmAssociationSummary_configuredModelAlgorithmArn, &sCollaborationConfiguredModelAlgorithmAssociationSummary_creatorAccountId}, Seed: 10, Slots: []uint16{
+	0, 0, 0, 0, 2, 0, 4, 9, 0, 0, 0, 0, 5, 0, 8, 0, 3, 0, 0, 0, 1, 0, 0, 6,
+	0, 0, 0, 0, 7, 0, 0, 0,
+}}
+var m_CollaborationMLInputChannelsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CollaborationMLInputChannelsList_member}}
+var mCollaborationMLInputChannelSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sCollaborationMLInputChannelSummary_createTime, &sCollaborationMLInputChannelSummary_updateTime, &sCollaborationMLInputChannelSummary_membershipIdentifier, &sCollaborationMLInputChannelSummary_collaborationIdentifier, &sCollaborationMLInputChannelSummary_name, &sCollaborationMLInputChannelSummary_configuredModelAlgorithmAssociations, &sCollaborationMLInputChannelSummary_mlInputChannelArn, &sCollaborationMLInputChannelSummary_status, &sCollaborationMLInputChannelSummary_creatorAccountId, &sCollaborationMLInputChannelSummary_description, &sCollaborationMLInputChannelSummary_payerConfiguration}, Seed: 4, Slots: []uint16{
+	2, 5, 0, 0, 1, 0, 11, 0, 0, 8, 10, 0, 0, 7, 4, 0, 0, 0, 0, 0, 0, 6, 0, 0,
+	0, 0, 0, 0, 0, 9, 0, 3,
+}}
+var m_CollaborationTrainedModelExportJobList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CollaborationTrainedModelExportJobList_member}}
+var mCollaborationTrainedModelExportJobSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sCollaborationTrainedModelExportJobSummary_createTime, &sCollaborationTrainedModelExportJobSummary_updateTime, &sCollaborationTrainedModelExportJobSummary_name, &sCollaborationTrainedModelExportJobSummary_outputConfiguration, &sCollaborationTrainedModelExportJobSummary_status, &sCollaborationTrainedModelExportJobSummary_statusDetails, &sCollaborationTrainedModelExportJobSummary_description, &sCollaborationTrainedModelExportJobSummary_creatorAccountId, &sCollaborationTrainedModelExportJobSummary_trainedModelArn, &sCollaborationTrainedModelExportJobSummary_trainedModelVersionIdentifier, &sCollaborationTrainedModelExportJobSummary_membershipIdentifier, &sCollaborationTrainedModelExportJobSummary_collaborationIdentifier}, Seed: 4, Slots: []uint16{
+	2, 3, 0, 0, 1, 0, 0, 10, 0, 5, 7, 0, 0, 0, 12, 0, 0, 4, 0, 0, 0, 6, 0, 0,
+	0, 0, 9, 0, 0, 8, 0, 11,
+}}
+var m_CollaborationTrainedModelInferenceJobList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CollaborationTrainedModelInferenceJobList_member}}
+var mCollaborationTrainedModelInferenceJobSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sCollaborationTrainedModelInferenceJobSummary_trainedModelInferenceJobArn, &sCollaborationTrainedModelInferenceJobSummary_configuredModelAlgorithmAssociationArn, &sCollaborationTrainedModelInferenceJobSummary_membershipIdentifier, &sCollaborationTrainedModelInferenceJobSummary_trainedModelArn, &sCollaborationTrainedModelInferenceJobSummary_trainedModelVersionIdentifier, &sCollaborationTrainedModelInferenceJobSummary_collaborationIdentifier, &sCollaborationTrainedModelInferenceJobSummary_status, &sCollaborationTrainedModelInferenceJobSummary_outputConfiguration, &sCollaborationTrainedModelInferenceJobSummary_name, &sCollaborationTrainedModelInferenceJobSummary_description, &sCollaborationTrainedModelInferenceJobSummary_metricsStatus, &sCollaborationTrainedModelInferenceJobSummary_metricsStatusDetails, &sCollaborationTrainedModelInferenceJobSummary_logsStatus, &sCollaborationTrainedModelInferenceJobSummary_logsStatusDetails, &sCollaborationTrainedModelInferenceJobSummary_mlModelInferencePayerAccountId, &sCollaborationTrainedModelInferenceJobSummary_createTime, &sCollaborationTrainedModelInferenceJobSummary_updateTime, &sCollaborationTrainedModelInferenceJobSummary_creatorAccountId}, Seed: 4, Slots: []uint16{
+	17, 9, 0, 0, 16, 0, 0, 5, 0, 0, 0, 0, 0, 15, 6, 0, 0, 0, 0, 0, 12, 0, 0, 0,
+	0, 0, 4, 0, 0, 0, 0, 0, 0, 13, 0, 0, 2, 0, 0, 0, 0, 7, 10, 11, 0, 0, 0, 14,
+	0, 8, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 18, 0, 3,
+}}
+var m_CollaborationTrainedModelList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CollaborationTrainedModelList_member}}
+var mCollaborationTrainedModelSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sCollaborationTrainedModelSummary_createTime, &sCollaborationTrainedModelSummary_updateTime, &sCollaborationTrainedModelSummary_trainedModelArn, &sCollaborationTrainedModelSummary_name, &sCollaborationTrainedModelSummary_versionIdentifier, &sCollaborationTrainedModelSummary_incrementalTrainingDataChannels, &sCollaborationTrainedModelSummary_description, &sCollaborationTrainedModelSummary_membershipIdentifier, &sCollaborationTrainedModelSummary_collaborationIdentifier, &sCollaborationTrainedModelSummary_status, &sCollaborationTrainedModelSummary_configuredModelAlgorithmAssociationArn, &sCollaborationTrainedModelSummary_creatorAccountId, &sCollaborationTrainedModelSummary_mlModelTrainingPayerAccountId}, Seed: 7, Slots: []uint16{
+	0, 0, 0, 4, 6, 9, 0, 0, 5, 11, 0, 0, 7, 0, 2, 0, 3, 8, 0, 0, 0, 13, 0, 12,
+	0, 0, 0, 10, 0, 0, 1, 0,
+}}
+var mColumnClassificationDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sColumnClassificationDetails_columnMapping}}
+var m_ColumnMappingList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ColumnMappingList_member}}
+var mColumnSchema = smithy.SchemaMembers{List: []*smithy.Schema{&sColumnSchema_columnName, &sColumnSchema_columnTypes}}
+var mColumnType = smithy.SchemaMembers{List: []*smithy.Schema{&sColumnType_USER_ID, &sColumnType_ITEM_ID, &sColumnType_TIMESTAMP, &sColumnType_CATEGORICAL_FEATURE, &sColumnType_NUMERICAL_FEATURE}}
+var m_ColumnTypeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ColumnTypeList_member}}
+var mComputeConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sComputeConfiguration_worker}}
+var m_ConfiguredAudienceModelList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConfiguredAudienceModelList_member}}
+var mConfiguredAudienceModelOutputConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sConfiguredAudienceModelOutputConfig_destination, &sConfiguredAudienceModelOutputConfig_roleArn}}
+var mConfiguredAudienceModelStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sConfiguredAudienceModelStatus_ACTIVE}}
+var mConfiguredAudienceModelSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sConfiguredAudienceModelSummary_createTime, &sConfiguredAudienceModelSummary_updateTime, &sConfiguredAudienceModelSummary_name, &sConfiguredAudienceModelSummary_audienceModelArn, &sConfiguredAudienceModelSummary_outputConfig, &sConfiguredAudienceModelSummary_description, &sConfiguredAudienceModelSummary_configuredAudienceModelArn, &sConfiguredAudienceModelSummary_status}}
+var m_ConfiguredModelAlgorithmAssociationArnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConfiguredModelAlgorithmAssociationArnList_member}}
+var m_ConfiguredModelAlgorithmAssociationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConfiguredModelAlgorithmAssociationList_member}}
+var mConfiguredModelAlgorithmAssociationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sConfiguredModelAlgorithmAssociationSummary_createTime, &sConfiguredModelAlgorithmAssociationSummary_updateTime, &sConfiguredModelAlgorithmAssociationSummary_configuredModelAlgorithmAssociationArn, &sConfiguredModelAlgorithmAssociationSummary_configuredModelAlgorithmArn, &sConfiguredModelAlgorithmAssociationSummary_name, &sConfiguredModelAlgorithmAssociationSummary_description, &sConfiguredModelAlgorithmAssociationSummary_membershipIdentifier, &sConfiguredModelAlgorithmAssociationSummary_collaborationIdentifier}}
+var m_ConfiguredModelAlgorithmList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConfiguredModelAlgorithmList_member}}
+var mConfiguredModelAlgorithmSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sConfiguredModelAlgorithmSummary_createTime, &sConfiguredModelAlgorithmSummary_updateTime, &sConfiguredModelAlgorithmSummary_configuredModelAlgorithmArn, &sConfiguredModelAlgorithmSummary_name, &sConfiguredModelAlgorithmSummary_description}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message}}
+var m_ContainerArguments = smithy.SchemaMembers{List: []*smithy.Schema{&s_ContainerArguments_member}}
+var mContainerConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sContainerConfig_imageUri, &sContainerConfig_entrypoint, &sContainerConfig_arguments, &sContainerConfig_metricDefinitions}}
+var m_ContainerEntrypoint = smithy.SchemaMembers{List: []*smithy.Schema{&s_ContainerEntrypoint_member}}
+var m_CustomDataIdentifierList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CustomDataIdentifierList_member}}
+var mCustomEntityConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomEntityConfig_customDataIdentifiers}}
+var mDataPrivacyScores = smithy.SchemaMembers{List: []*smithy.Schema{&sDataPrivacyScores_membershipInferenceAttackScores}}
+var mDataset = smithy.SchemaMembers{List: []*smithy.Schema{&sDataset_type, &sDataset_inputConfig}}
+var mDatasetInputConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sDatasetInputConfig_schema, &sDatasetInputConfig_dataSource}}
+var m_DatasetList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DatasetList_member}}
+var m_DatasetSchemaList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DatasetSchemaList_member}}
+var mDatasetType = smithy.SchemaMembers{List: []*smithy.Schema{&sDatasetType_INTERACTIONS}}
+var mDataSource = smithy.SchemaMembers{List: []*smithy.Schema{&sDataSource_glueDataSource}}
+var mDestination = smithy.SchemaMembers{List: []*smithy.Schema{&sDestination_s3Destination}}
+var mEntityType = smithy.SchemaMembers{List: []*smithy.Schema{&sEntityType_ALL_PERSONALLY_IDENTIFIABLE_INFORMATION, &sEntityType_NUMBERS, &sEntityType_CUSTOM}}
+var m_EntityTypeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EntityTypeList_member}}
+var m_Environment = smithy.SchemaMembers{List: []*smithy.Schema{&s_Environment_key, &s_Environment_value}}
+var mGlueDataSource = smithy.SchemaMembers{List: []*smithy.Schema{&sGlueDataSource_tableName, &sGlueDataSource_databaseName, &sGlueDataSource_catalogId}}
+var m_HyperParameters = smithy.SchemaMembers{List: []*smithy.Schema{&s_HyperParameters_key, &s_HyperParameters_value}}
+var mIncrementalTrainingDataChannel = smithy.SchemaMembers{List: []*smithy.Schema{&sIncrementalTrainingDataChannel_trainedModelArn, &sIncrementalTrainingDataChannel_versionIdentifier, &sIncrementalTrainingDataChannel_channelName}}
+var mIncrementalTrainingDataChannelOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sIncrementalTrainingDataChannelOutput_channelName, &sIncrementalTrainingDataChannelOutput_versionIdentifier, &sIncrementalTrainingDataChannelOutput_modelName}}
+var m_IncrementalTrainingDataChannels = smithy.SchemaMembers{List: []*smithy.Schema{&s_IncrementalTrainingDataChannels_member}}
+var m_IncrementalTrainingDataChannelsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&s_IncrementalTrainingDataChannelsOutput_member}}
+var mInferenceContainerConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sInferenceContainerConfig_imageUri}}
+var mInferenceContainerExecutionParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sInferenceContainerExecutionParameters_maxPayloadInMB}}
+var m_InferenceEnvironmentMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_InferenceEnvironmentMap_key, &s_InferenceEnvironmentMap_value}}
+var mInferenceInstanceType = smithy.SchemaMembers{List: []*smithy.Schema{&sInferenceInstanceType_ML_R7I_48XLARGE, &sInferenceInstanceType_ML_R6I_16XLARGE, &sInferenceInstanceType_ML_M6I_XLARGE, &sInferenceInstanceType_ML_M5_4XLARGE, &sInferenceInstanceType_ML_P2_XLARGE, &sInferenceInstanceType_ML_M4_16XLARGE, &sInferenceInstanceType_ML_R7I_16XLARGE, &sInferenceInstanceType_ML_M7I_XLARGE, &sInferenceInstanceType_ML_M6I_12XLARGE, &sInferenceInstanceType_ML_R7I_8XLARGE, &sInferenceInstanceType_ML_R7I_LARGE, &sInferenceInstanceType_ML_M7I_12XLARGE, &sInferenceInstanceType_ML_M6I_24XLARGE, &sInferenceInstanceType_ML_M7I_24XLARGE, &sInferenceInstanceType_ML_R6I_8XLARGE, &sInferenceInstanceType_ML_R6I_LARGE, &sInferenceInstanceType_ML_G5_2XLARGE, &sInferenceInstanceType_ML_M5_LARGE, &sInferenceInstanceType_ML_M7I_48XLARGE, &sInferenceInstanceType_ML_M6I_16XLARGE, &sInferenceInstanceType_ML_P2_16XLARGE, &sInferenceInstanceType_ML_G5_4XLARGE, &sInferenceInstanceType_ML_M7I_16XLARGE, &sInferenceInstanceType_ML_C4_2XLARGE, &sInferenceInstanceType_ML_C5_2XLARGE, &sInferenceInstanceType_ML_C6I_32XLARGE, &sInferenceInstanceType_ML_C4_4XLARGE, &sInferenceInstanceType_ML_G5_8XLARGE, &sInferenceInstanceType_ML_C6I_XLARGE, &sInferenceInstanceType_ML_C5_4XLARGE, &sInferenceInstanceType_ML_G4DN_XLARGE, &sInferenceInstanceType_ML_C7I_XLARGE, &sInferenceInstanceType_ML_C6I_12XLARGE, &sInferenceInstanceType_ML_G4DN_12XLARGE, &sInferenceInstanceType_ML_C7I_12XLARGE, &sInferenceInstanceType_ML_C6I_24XLARGE, &sInferenceInstanceType_ML_G4DN_2XLARGE, &sInferenceInstanceType_ML_C7I_24XLARGE, &sInferenceInstanceType_ML_C7I_2XLARGE, &sInferenceInstanceType_ML_C4_8XLARGE, &sInferenceInstanceType_ML_C6I_2XLARGE, &sInferenceInstanceType_ML_G4DN_4XLARGE, &sInferenceInstanceType_ML_C7I_48XLARGE, &sInferenceInstanceType_ML_C7I_4XLARGE, &sInferenceInstanceType_ML_C6I_16XLARGE, &sInferenceInstanceType_ML_C5_9XLARGE, &sInferenceInstanceType_ML_G4DN_16XLARGE, &sInferenceInstanceType_ML_C7I_16XLARGE, &sInferenceInstanceType_ML_C6I_4XLARGE, &sInferenceInstanceType_ML_C5_XLARGE, &sInferenceInstanceType_ML_C4_XLARGE, &sInferenceInstanceType_ML_G4DN_8XLARGE, &sInferenceInstanceType_ML_C7I_8XLARGE, &sInferenceInstanceType_ML_C7I_LARGE, &sInferenceInstanceType_ML_G5_XLARGE, &sInferenceInstanceType_ML_C6I_8XLARGE, &sInferenceInstanceType_ML_C6I_LARGE, &sInferenceInstanceType_ML_G5_12XLARGE, &sInferenceInstanceType_ML_G5_24XLARGE, &sInferenceInstanceType_ML_M7I_2XLARGE, &sInferenceInstanceType_ML_C5_18XLARGE, &sInferenceInstanceType_ML_G5_48XLARGE, &sInferenceInstanceType_ML_M6I_2XLARGE, &sInferenceInstanceType_ML_G5_16XLARGE, &sInferenceInstanceType_ML_M7I_4XLARGE, &sInferenceInstanceType_ML_R6I_32XLARGE, &sInferenceInstanceType_ML_M6I_4XLARGE, &sInferenceInstanceType_ML_M5_XLARGE, &sInferenceInstanceType_ML_M4_10XLARGE, &sInferenceInstanceType_ML_R6I_XLARGE, &sInferenceInstanceType_ML_M5_12XLARGE, &sInferenceInstanceType_ML_M4_XLARGE, &sInferenceInstanceType_ML_R7I_2XLARGE, &sInferenceInstanceType_ML_R7I_XLARGE, &sInferenceInstanceType_ML_R6I_12XLARGE, &sInferenceInstanceType_ML_M5_24XLARGE, &sInferenceInstanceType_ML_R7I_12XLARGE, &sInferenceInstanceType_ML_M7I_8XLARGE, &sInferenceInstanceType_ML_M7I_LARGE, &sInferenceInstanceType_ML_R6I_24XLARGE, &sInferenceInstanceType_ML_R6I_2XLARGE, &sInferenceInstanceType_ML_M4_2XLARGE, &sInferenceInstanceType_ML_R7I_24XLARGE, &sInferenceInstanceType_ML_R7I_4XLARGE, &sInferenceInstanceType_ML_M6I_8XLARGE, &sInferenceInstanceType_ML_M6I_LARGE, &sInferenceInstanceType_ML_M5_2XLARGE, &sInferenceInstanceType_ML_P2_8XLARGE, &sInferenceInstanceType_ML_R6I_4XLARGE, &sInferenceInstanceType_ML_M6I_32XLARGE, &sInferenceInstanceType_ML_M4_4XLARGE, &sInferenceInstanceType_ML_P3_16XLARGE, &sInferenceInstanceType_ML_P3_2XLARGE, &sInferenceInstanceType_ML_P3_8XLARGE}, Seed: 1303, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 35, 0, 0, 0, 0, 54, 0, 0, 2, 0, 0, 0, 0,
+	0, 0, 0, 20, 0, 0, 0, 0, 80, 39, 0, 0, 29, 0, 0, 15, 0, 0, 81, 0, 0, 0, 0, 13,
+	0, 0, 0, 0, 0, 0, 0, 0, 74, 0, 87, 0, 0, 0, 6, 0, 0, 50, 60, 0, 0, 0, 0, 49,
+	0, 0, 0, 0, 48, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 53, 0,
+	67, 0, 0, 0, 0, 0, 0, 0, 33, 0, 0, 64, 0, 0, 0, 0, 0, 0, 0, 0, 66, 0, 0, 0,
+	0, 0, 0, 32, 90, 0, 0, 78, 73, 0, 0, 0, 0, 0, 79, 0, 0, 0, 0, 0, 88, 0, 0, 0,
+	0, 0, 0, 51, 0, 0, 0, 0, 0, 46, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 55, 0, 89, 0,
+	0, 0, 0, 0, 0, 45, 0, 0, 62, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0,
+	0, 0, 0, 0, 0, 93, 0, 0, 42, 37, 40, 0, 58, 52, 0, 0, 0, 0, 0, 0, 38, 0, 0, 18,
+	0, 0, 0, 94, 0, 44, 0, 91, 0, 28, 0, 0, 61, 4, 0, 0, 0, 21, 11, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 24, 0, 0, 0, 0, 0, 0, 0, 0, 0, 65, 0, 1, 0, 0, 25, 71, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 17, 0, 0, 0, 0, 19, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 31, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 84, 72, 0, 0, 0, 0, 0, 0, 0, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 92,
+	0, 0, 0, 0, 0, 86, 59, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 36, 0, 0, 16, 0, 0, 0, 0, 0, 77, 0,
+	0, 0, 69, 0, 0, 0, 26, 83, 0, 0, 0, 0, 0, 0, 76, 14, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 57, 0, 27, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 68,
+	0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 23, 0, 0, 0, 0, 0, 56, 0, 0, 22, 0, 0, 0, 0,
+	0, 0, 0, 41, 47, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 75,
+	0, 85, 70, 0, 0, 63, 0, 0, 0, 0, 0, 0, 0, 0, 43, 82, 0, 34, 30, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0,
+}}
+var mInferenceOutputConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sInferenceOutputConfiguration_accept, &sInferenceOutputConfiguration_members}}
+var mInferenceReceiverMember = smithy.SchemaMembers{List: []*smithy.Schema{&sInferenceReceiverMember_accountId}}
+var m_InferenceReceiverMembers = smithy.SchemaMembers{List: []*smithy.Schema{&s_InferenceReceiverMembers_member}}
+var mInferenceResourceConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sInferenceResourceConfig_instanceType, &sInferenceResourceConfig_instanceCount}}
+var mInputChannel = smithy.SchemaMembers{List: []*smithy.Schema{&sInputChannel_dataSource, &sInputChannel_roleArn}}
+var mInputChannelDataSource = smithy.SchemaMembers{List: []*smithy.Schema{&sInputChannelDataSource_protectedQueryInputParameters}}
+var mInstanceType = smithy.SchemaMembers{List: []*smithy.Schema{&sInstanceType_ML_M4_XLARGE, &sInstanceType_ML_M4_2XLARGE, &sInstanceType_ML_M4_4XLARGE, &sInstanceType_ML_M4_10XLARGE, &sInstanceType_ML_M4_16XLARGE, &sInstanceType_ML_G4DN_XLARGE, &sInstanceType_ML_G4DN_2XLARGE, &sInstanceType_ML_G4DN_4XLARGE, &sInstanceType_ML_G4DN_8XLARGE, &sInstanceType_ML_G4DN_12XLARGE, &sInstanceType_ML_G4DN_16XLARGE, &sInstanceType_ML_M5_LARGE, &sInstanceType_ML_M5_XLARGE, &sInstanceType_ML_M5_2XLARGE, &sInstanceType_ML_M5_4XLARGE, &sInstanceType_ML_M5_12XLARGE, &sInstanceType_ML_M5_24XLARGE, &sInstanceType_ML_C4_XLARGE, &sInstanceType_ML_C4_2XLARGE, &sInstanceType_ML_C4_4XLARGE, &sInstanceType_ML_C4_8XLARGE, &sInstanceType_ML_P2_XLARGE, &sInstanceType_ML_P2_8XLARGE, &sInstanceType_ML_P2_16XLARGE, &sInstanceType_ML_P4D_24XLARGE, &sInstanceType_ML_P4DE_24XLARGE, &sInstanceType_ML_P5_48XLARGE, &sInstanceType_ML_C5_XLARGE, &sInstanceType_ML_C5_2XLARGE, &sInstanceType_ML_C5_4XLARGE, &sInstanceType_ML_C5_9XLARGE, &sInstanceType_ML_C5_18XLARGE, &sInstanceType_ML_C5N_XLARGE, &sInstanceType_ML_C5N_2XLARGE, &sInstanceType_ML_C5N_4XLARGE, &sInstanceType_ML_C5N_9XLARGE, &sInstanceType_ML_C5N_18XLARGE, &sInstanceType_ML_G5_XLARGE, &sInstanceType_ML_G5_2XLARGE, &sInstanceType_ML_G5_4XLARGE, &sInstanceType_ML_G5_8XLARGE, &sInstanceType_ML_G5_16XLARGE, &sInstanceType_ML_G5_12XLARGE, &sInstanceType_ML_G5_24XLARGE, &sInstanceType_ML_G5_48XLARGE, &sInstanceType_ML_TRN1_2XLARGE, &sInstanceType_ML_TRN1_32XLARGE, &sInstanceType_ML_TRN1N_32XLARGE, &sInstanceType_ML_M6I_LARGE, &sInstanceType_ML_M6I_XLARGE, &sInstanceType_ML_M6I_2XLARGE, &sInstanceType_ML_M6I_4XLARGE, &sInstanceType_ML_M6I_8XLARGE, &sInstanceType_ML_M6I_12XLARGE, &sInstanceType_ML_M6I_16XLARGE, &sInstanceType_ML_M6I_24XLARGE, &sInstanceType_ML_M6I_32XLARGE, &sInstanceType_ML_C6I_XLARGE, &sInstanceType_ML_C6I_2XLARGE, &sInstanceType_ML_C6I_8XLARGE, &sInstanceType_ML_C6I_4XLARGE, &sInstanceType_ML_C6I_12XLARGE, &sInstanceType_ML_C6I_16XLARGE, &sInstanceType_ML_C6I_24XLARGE, &sInstanceType_ML_C6I_32XLARGE, &sInstanceType_ML_R5D_LARGE, &sInstanceType_ML_R5D_XLARGE, &sInstanceType_ML_R5D_2XLARGE, &sInstanceType_ML_R5D_4XLARGE, &sInstanceType_ML_R5D_8XLARGE, &sInstanceType_ML_R5D_12XLARGE, &sInstanceType_ML_R5D_16XLARGE, &sInstanceType_ML_R5D_24XLARGE, &sInstanceType_ML_T3_MEDIUM, &sInstanceType_ML_T3_LARGE, &sInstanceType_ML_T3_XLARGE, &sInstanceType_ML_T3_2XLARGE, &sInstanceType_ML_R5_LARGE, &sInstanceType_ML_R5_XLARGE, &sInstanceType_ML_R5_2XLARGE, &sInstanceType_ML_R5_4XLARGE, &sInstanceType_ML_R5_8XLARGE, &sInstanceType_ML_R5_12XLARGE, &sInstanceType_ML_R5_16XLARGE, &sInstanceType_ML_R5_24XLARGE, &sInstanceType_ML_C7I_LARGE, &sInstanceType_ML_C7I_XLARGE, &sInstanceType_ML_C7I_2XLARGE, &sInstanceType_ML_C7I_4XLARGE, &sInstanceType_ML_C7I_8XLARGE, &sInstanceType_ML_C7I_12XLARGE, &sInstanceType_ML_C7I_16XLARGE, &sInstanceType_ML_C7I_24XLARGE, &sInstanceType_ML_C7I_48XLARGE, &sInstanceType_ML_M7I_LARGE, &sInstanceType_ML_M7I_XLARGE, &sInstanceType_ML_M7I_2XLARGE, &sInstanceType_ML_M7I_4XLARGE, &sInstanceType_ML_M7I_8XLARGE, &sInstanceType_ML_M7I_12XLARGE, &sInstanceType_ML_M7I_16XLARGE, &sInstanceType_ML_M7I_24XLARGE, &sInstanceType_ML_M7I_48XLARGE, &sInstanceType_ML_R7I_LARGE, &sInstanceType_ML_R7I_XLARGE, &sInstanceType_ML_R7I_2XLARGE, &sInstanceType_ML_R7I_4XLARGE, &sInstanceType_ML_R7I_8XLARGE, &sInstanceType_ML_R7I_12XLARGE, &sInstanceType_ML_R7I_16XLARGE, &sInstanceType_ML_R7I_24XLARGE, &sInstanceType_ML_R7I_48XLARGE, &sInstanceType_ML_G6_XLARGE, &sInstanceType_ML_G6_2XLARGE, &sInstanceType_ML_G6_4XLARGE, &sInstanceType_ML_G6_8XLARGE, &sInstanceType_ML_G6_12XLARGE, &sInstanceType_ML_G6_16XLARGE, &sInstanceType_ML_G6_24XLARGE, &sInstanceType_ML_G6_48XLARGE, &sInstanceType_ML_G6E_XLARGE, &sInstanceType_ML_G6E_2XLARGE, &sInstanceType_ML_G6E_4XLARGE, &sInstanceType_ML_G6E_8XLARGE, &sInstanceType_ML_G6E_12XLARGE, &sInstanceType_ML_G6E_16XLARGE, &sInstanceType_ML_G6E_24XLARGE, &sInstanceType_ML_G6E_48XLARGE, &sInstanceType_ML_P5EN_48XLARGE, &sInstanceType_ML_P3_2XLARGE, &sInstanceType_ML_P3_8XLARGE, &sInstanceType_ML_P3_16XLARGE, &sInstanceType_ML_P3DN_24XLARGE}, Seed: 15419, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 28, 0, 2, 0, 0, 47, 75, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0, 0, 0, 0, 23, 55, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 25, 56, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 101, 69, 0, 0, 0, 0, 0, 0, 93, 0, 0, 0, 0, 0, 0, 0, 0, 96, 33, 0,
+	0, 24, 0, 0, 0, 0, 0, 0, 0, 0, 84, 0, 0, 0, 0, 30, 0, 0, 0, 0, 0, 107, 50, 0,
+	0, 0, 0, 123, 0, 0, 65, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	109, 0, 0, 0, 0, 126, 0, 0, 0, 0, 38, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 133, 0, 0, 18, 129, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 57, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 42, 0, 0, 78, 0, 0, 119, 0, 0, 0, 0, 0,
+	0, 94, 0, 0, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 117, 0,
+	0, 0, 0, 0, 39, 0, 0, 0, 0, 120, 0, 59, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 121, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 114, 0, 0, 51, 0, 0, 0, 0, 87, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+	0, 130, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 63,
+	86, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 34, 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 7, 0, 92, 0, 0, 0, 0, 103, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 89, 0,
+	0, 0, 0, 0, 0, 0, 102, 58, 0, 0, 0, 0, 0, 0, 0, 127, 0, 0, 0, 0, 0, 0, 116, 0,
+	98, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 0, 0, 6, 0, 82, 0, 0, 0, 128, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 60, 0, 0, 131, 0, 0, 0, 0, 0,
+	0, 0, 0, 36, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 41, 53, 0, 71, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 115, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 108, 0, 37, 0, 0, 0, 124, 0, 0, 0, 0, 0,
+	0, 0, 0, 31, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 91, 0, 0,
+	0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 46, 0, 0, 0, 0, 0, 0, 0, 0, 110, 0, 0,
+	106, 0, 0, 0, 40, 0, 0, 99, 0, 0, 0, 0, 0, 0, 0, 0, 0, 54, 0, 0, 49, 0, 122, 0,
+	0, 0, 0, 0, 70, 48, 0, 0, 0, 0, 118, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 73, 0, 0,
+	100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 81, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	26, 125, 104, 0, 0, 0, 5, 0, 0, 0, 85, 0, 0, 0, 0, 0, 74, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 95, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 35, 0, 0, 0, 27, 0, 0, 0, 0, 0, 0, 32, 0, 0, 0, 0,
+	17, 0, 66, 0, 0, 0, 0, 29, 0, 0, 0, 0, 0, 0, 0, 0, 61, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 83, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 77, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 44, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 67, 0, 0, 0,
+	0, 19, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 113, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 105, 112, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 45,
+	0, 0, 0, 0, 10, 0, 0, 11, 0, 0, 97, 0, 0, 13, 0, 0, 43, 0, 62, 0, 0, 0, 0, 0,
+	0, 76, 0, 0, 0, 0, 0, 0, 68, 0, 0, 0, 0, 0, 0, 72, 0, 0, 0, 0, 9, 90, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 132, 0, 0, 52, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 21, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 111, 0, 79, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 88, 0, 0, 0, 0, 0, 0,
+}}
+var mInternalServiceException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServiceException_message}}
+var mLogRedactionConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sLogRedactionConfiguration_entitiesToRedact, &sLogRedactionConfiguration_customEntityConfig}}
+var mLogsConfigurationPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sLogsConfigurationPolicy_allowedAccountIds, &sLogsConfigurationPolicy_filterPattern, &sLogsConfigurationPolicy_logType, &sLogsConfigurationPolicy_logRedactionConfiguration}}
+var m_LogsConfigurationPolicyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LogsConfigurationPolicyList_member}}
+var mLogsStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sLogsStatus_PUBLISH_SUCCEEDED, &sLogsStatus_PUBLISH_FAILED}}
+var mLogType = smithy.SchemaMembers{List: []*smithy.Schema{&sLogType_ALL, &sLogType_ERROR_SUMMARY}}
+var mMembershipInferenceAttackScore = smithy.SchemaMembers{List: []*smithy.Schema{&sMembershipInferenceAttackScore_attackVersion, &sMembershipInferenceAttackScore_score}}
+var m_MembershipInferenceAttackScoreList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MembershipInferenceAttackScoreList_member}}
+var mMembershipInferenceAttackVersion = smithy.SchemaMembers{List: []*smithy.Schema{&sMembershipInferenceAttackVersion_DISTANCE_TO_CLOSEST_RECORD_V1}}
+var mMetricDefinition = smithy.SchemaMembers{List: []*smithy.Schema{&sMetricDefinition_name, &sMetricDefinition_regex}}
+var m_MetricDefinitionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MetricDefinitionList_member}}
+var mMetricsConfigurationPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sMetricsConfigurationPolicy_noiseLevel}}
+var m_MetricsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MetricsList_member}}
+var mMetricsStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sMetricsStatus_PUBLISH_SUCCEEDED, &sMetricsStatus_PUBLISH_FAILED}}
+var m_MLInputChannelsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MLInputChannelsList_member}}
+var mMLInputChannelStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sMLInputChannelStatus_CREATE_PENDING, &sMLInputChannelStatus_CREATE_IN_PROGRESS, &sMLInputChannelStatus_CREATE_FAILED, &sMLInputChannelStatus_ACTIVE, &sMLInputChannelStatus_DELETE_PENDING, &sMLInputChannelStatus_DELETE_IN_PROGRESS, &sMLInputChannelStatus_DELETE_FAILED, &sMLInputChannelStatus_INACTIVE}}
+var mMLInputChannelSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sMLInputChannelSummary_createTime, &sMLInputChannelSummary_updateTime, &sMLInputChannelSummary_membershipIdentifier, &sMLInputChannelSummary_collaborationIdentifier, &sMLInputChannelSummary_name, &sMLInputChannelSummary_configuredModelAlgorithmAssociations, &sMLInputChannelSummary_protectedQueryIdentifier, &sMLInputChannelSummary_mlInputChannelArn, &sMLInputChannelSummary_status, &sMLInputChannelSummary_description, &sMLInputChannelSummary_payerConfiguration}, Seed: 5, Slots: []uint16{
+	10, 0, 0, 11, 9, 3, 0, 1, 0, 4, 0, 0, 0, 0, 0, 0, 0, 6, 7, 0, 0, 8, 0, 0,
+	0, 0, 0, 2, 0, 0, 0, 5,
+}}
+var mMLOutputConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sMLOutputConfiguration_destination, &sMLOutputConfiguration_roleArn}}
+var mMLSyntheticDataParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sMLSyntheticDataParameters_epsilon, &sMLSyntheticDataParameters_maxMembershipInferenceAttackScore, &sMLSyntheticDataParameters_columnClassification}}
+var mModelInferenceDataSource = smithy.SchemaMembers{List: []*smithy.Schema{&sModelInferenceDataSource_mlInputChannelArn}}
+var mModelTrainingDataChannel = smithy.SchemaMembers{List: []*smithy.Schema{&sModelTrainingDataChannel_mlInputChannelArn, &sModelTrainingDataChannel_channelName, &sModelTrainingDataChannel_s3DataDistributionType}}
+var m_ModelTrainingDataChannels = smithy.SchemaMembers{List: []*smithy.Schema{&s_ModelTrainingDataChannels_member}}
+var mNoiseLevelType = smithy.SchemaMembers{List: []*smithy.Schema{&sNoiseLevelType_HIGH, &sNoiseLevelType_MEDIUM, &sNoiseLevelType_LOW, &sNoiseLevelType_NONE}}
+var m_ParameterMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_ParameterMap_key, &s_ParameterMap_value}}
+var mPayerConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sPayerConfiguration_computePayerAccountId, &sPayerConfiguration_syntheticDataPayerAccountId}}
+var mPolicyExistenceCondition = smithy.SchemaMembers{List: []*smithy.Schema{&sPolicyExistenceCondition_POLICY_MUST_EXIST, &sPolicyExistenceCondition_POLICY_MUST_NOT_EXIST}}
+var mPrivacyBudgets = smithy.SchemaMembers{List: []*smithy.Schema{&sPrivacyBudgets_accessBudgets}}
+var mPrivacyConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sPrivacyConfiguration_policies}}
+var mPrivacyConfigurationPolicies = smithy.SchemaMembers{List: []*smithy.Schema{&sPrivacyConfigurationPolicies_trainedModels, &sPrivacyConfigurationPolicies_trainedModelExports, &sPrivacyConfigurationPolicies_trainedModelInferenceJobs}}
+var mProtectedQueryInputParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sProtectedQueryInputParameters_sqlParameters, &sProtectedQueryInputParameters_computeConfiguration, &sProtectedQueryInputParameters_resultFormat}}
+var mProtectedQuerySQLParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sProtectedQuerySQLParameters_queryString, &sProtectedQuerySQLParameters_analysisTemplateArn, &sProtectedQuerySQLParameters_parameters}}
+var mRelevanceMetric = smithy.SchemaMembers{List: []*smithy.Schema{&sRelevanceMetric_audienceSize, &sRelevanceMetric_score}}
+var m_RelevanceMetrics = smithy.SchemaMembers{List: []*smithy.Schema{&s_RelevanceMetrics_member}}
+var mResourceConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceConfig_instanceCount, &sResourceConfig_instanceType, &sResourceConfig_volumeSizeInGB}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message}}
+var mResultFormat = smithy.SchemaMembers{List: []*smithy.Schema{&sResultFormat_CSV, &sResultFormat_PARQUET}}
+var mS3ConfigMap = smithy.SchemaMembers{List: []*smithy.Schema{&sS3ConfigMap_s3Uri}}
+var mS3DataDistributionType = smithy.SchemaMembers{List: []*smithy.Schema{&sS3DataDistributionType_FULLY_REPLICATED, &sS3DataDistributionType_SHARDED_BY_S3_KEY}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message, &sServiceQuotaExceededException_quotaName, &sServiceQuotaExceededException_quotaValue}}
+var mSharedAudienceMetrics = smithy.SchemaMembers{List: []*smithy.Schema{&sSharedAudienceMetrics_ALL, &sSharedAudienceMetrics_NONE}}
+var m_SparkProperties = smithy.SchemaMembers{List: []*smithy.Schema{&s_SparkProperties_key, &s_SparkProperties_value}}
+var mStatusDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sStatusDetails_statusCode, &sStatusDetails_message}}
+var mStoppingCondition = smithy.SchemaMembers{List: []*smithy.Schema{&sStoppingCondition_maxRuntimeInSeconds}}
+var mSyntheticDataColumnProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sSyntheticDataColumnProperties_columnName, &sSyntheticDataColumnProperties_columnType, &sSyntheticDataColumnProperties_isPredictiveValue}}
+var mSyntheticDataColumnType = smithy.SchemaMembers{List: []*smithy.Schema{&sSyntheticDataColumnType_CATEGORICAL, &sSyntheticDataColumnType_NUMERICAL}}
+var mSyntheticDataConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sSyntheticDataConfiguration_syntheticDataParameters, &sSyntheticDataConfiguration_syntheticDataEvaluationScores}}
+var mSyntheticDataEvaluationScores = smithy.SchemaMembers{List: []*smithy.Schema{&sSyntheticDataEvaluationScores_dataPrivacyScores}}
+var m_TagKeys = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeys_member}}
+var m_TagMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagMap_key, &s_TagMap_value}}
+var mTagOnCreatePolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sTagOnCreatePolicy_FROM_PARENT_RESOURCE, &sTagOnCreatePolicy_NONE}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message}}
+var mTrainedModelArtifactMaxSize = smithy.SchemaMembers{List: []*smithy.Schema{&sTrainedModelArtifactMaxSize_unit, &sTrainedModelArtifactMaxSize_value}}
+var mTrainedModelArtifactMaxSizeUnitType = smithy.SchemaMembers{List: []*smithy.Schema{&sTrainedModelArtifactMaxSizeUnitType_GB}}
+var mTrainedModelExportFileType = smithy.SchemaMembers{List: []*smithy.Schema{&sTrainedModelExportFileType_MODEL, &sTrainedModelExportFileType_OUTPUT}}
+var m_TrainedModelExportFileTypeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TrainedModelExportFileTypeList_member}}
+var mTrainedModelExportJobStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sTrainedModelExportJobStatus_CREATE_PENDING, &sTrainedModelExportJobStatus_CREATE_IN_PROGRESS, &sTrainedModelExportJobStatus_CREATE_FAILED, &sTrainedModelExportJobStatus_ACTIVE}}
+var mTrainedModelExportOutputConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sTrainedModelExportOutputConfiguration_members}}
+var mTrainedModelExportReceiverMember = smithy.SchemaMembers{List: []*smithy.Schema{&sTrainedModelExportReceiverMember_accountId}}
+var m_TrainedModelExportReceiverMembers = smithy.SchemaMembers{List: []*smithy.Schema{&s_TrainedModelExportReceiverMembers_member}}
+var mTrainedModelExportsConfigurationPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sTrainedModelExportsConfigurationPolicy_maxSize, &sTrainedModelExportsConfigurationPolicy_filesToExport}}
+var mTrainedModelExportsMaxSize = smithy.SchemaMembers{List: []*smithy.Schema{&sTrainedModelExportsMaxSize_unit, &sTrainedModelExportsMaxSize_value}}
+var mTrainedModelExportsMaxSizeUnitType = smithy.SchemaMembers{List: []*smithy.Schema{&sTrainedModelExportsMaxSizeUnitType_GB}}
+var m_TrainedModelInferenceJobList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TrainedModelInferenceJobList_member}}
+var mTrainedModelInferenceJobsConfigurationPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sTrainedModelInferenceJobsConfigurationPolicy_containerLogs, &sTrainedModelInferenceJobsConfigurationPolicy_maxOutputSize}}
+var mTrainedModelInferenceJobStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sTrainedModelInferenceJobStatus_CREATE_PENDING, &sTrainedModelInferenceJobStatus_CREATE_IN_PROGRESS, &sTrainedModelInferenceJobStatus_CREATE_FAILED, &sTrainedModelInferenceJobStatus_ACTIVE, &sTrainedModelInferenceJobStatus_CANCEL_PENDING, &sTrainedModelInferenceJobStatus_CANCEL_IN_PROGRESS, &sTrainedModelInferenceJobStatus_CANCEL_FAILED, &sTrainedModelInferenceJobStatus_INACTIVE}}
+var mTrainedModelInferenceJobSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sTrainedModelInferenceJobSummary_trainedModelInferenceJobArn, &sTrainedModelInferenceJobSummary_configuredModelAlgorithmAssociationArn, &sTrainedModelInferenceJobSummary_membershipIdentifier, &sTrainedModelInferenceJobSummary_trainedModelArn, &sTrainedModelInferenceJobSummary_trainedModelVersionIdentifier, &sTrainedModelInferenceJobSummary_collaborationIdentifier, &sTrainedModelInferenceJobSummary_status, &sTrainedModelInferenceJobSummary_outputConfiguration, &sTrainedModelInferenceJobSummary_name, &sTrainedModelInferenceJobSummary_description, &sTrainedModelInferenceJobSummary_metricsStatus, &sTrainedModelInferenceJobSummary_metricsStatusDetails, &sTrainedModelInferenceJobSummary_logsStatus, &sTrainedModelInferenceJobSummary_logsStatusDetails, &sTrainedModelInferenceJobSummary_mlModelInferencePayerAccountId, &sTrainedModelInferenceJobSummary_createTime, &sTrainedModelInferenceJobSummary_updateTime}, Seed: 4, Slots: []uint16{
+	17, 9, 0, 0, 16, 0, 0, 5, 0, 0, 0, 0, 0, 15, 6, 0, 0, 0, 0, 0, 12, 0, 0, 0,
+	0, 0, 4, 0, 0, 0, 0, 0, 0, 13, 0, 0, 2, 0, 0, 0, 0, 7, 10, 11, 0, 0, 0, 14,
+	0, 8, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3,
+}}
+var mTrainedModelInferenceMaxOutputSize = smithy.SchemaMembers{List: []*smithy.Schema{&sTrainedModelInferenceMaxOutputSize_unit, &sTrainedModelInferenceMaxOutputSize_value}}
+var mTrainedModelInferenceMaxOutputSizeUnitType = smithy.SchemaMembers{List: []*smithy.Schema{&sTrainedModelInferenceMaxOutputSizeUnitType_GB}}
+var m_TrainedModelList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TrainedModelList_member}}
+var mTrainedModelsConfigurationPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sTrainedModelsConfigurationPolicy_containerLogs, &sTrainedModelsConfigurationPolicy_containerMetrics, &sTrainedModelsConfigurationPolicy_maxArtifactSize}}
+var mTrainedModelStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sTrainedModelStatus_CREATE_PENDING, &sTrainedModelStatus_CREATE_IN_PROGRESS, &sTrainedModelStatus_CREATE_FAILED, &sTrainedModelStatus_ACTIVE, &sTrainedModelStatus_DELETE_PENDING, &sTrainedModelStatus_DELETE_IN_PROGRESS, &sTrainedModelStatus_DELETE_FAILED, &sTrainedModelStatus_INACTIVE, &sTrainedModelStatus_CANCEL_PENDING, &sTrainedModelStatus_CANCEL_IN_PROGRESS, &sTrainedModelStatus_CANCEL_FAILED}, Seed: 4, Slots: []uint16{
+	0, 0, 0, 0, 0, 2, 9, 0, 4, 0, 0, 0, 6, 0, 11, 1, 0, 0, 0, 0, 0, 8, 10, 0,
+	3, 7, 0, 0, 0, 5, 0, 0,
+}}
+var mTrainedModelSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sTrainedModelSummary_createTime, &sTrainedModelSummary_updateTime, &sTrainedModelSummary_trainedModelArn, &sTrainedModelSummary_versionIdentifier, &sTrainedModelSummary_incrementalTrainingDataChannels, &sTrainedModelSummary_name, &sTrainedModelSummary_description, &sTrainedModelSummary_membershipIdentifier, &sTrainedModelSummary_collaborationIdentifier, &sTrainedModelSummary_status, &sTrainedModelSummary_configuredModelAlgorithmAssociationArn, &sTrainedModelSummary_mlModelTrainingPayerAccountId}, Seed: 5, Slots: []uint16{
+	7, 11, 0, 0, 10, 8, 0, 1, 0, 9, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 12, 0, 0, 0,
+	0, 0, 5, 2, 3, 0, 0, 6,
+}}
+var m_TrainingDatasetList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TrainingDatasetList_member}}
+var mTrainingDatasetStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sTrainingDatasetStatus_ACTIVE}}
+var mTrainingDatasetSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sTrainingDatasetSummary_createTime, &sTrainingDatasetSummary_updateTime, &sTrainingDatasetSummary_trainingDatasetArn, &sTrainingDatasetSummary_name, &sTrainingDatasetSummary_status, &sTrainingDatasetSummary_description}}
+var mTrainingInputMode = smithy.SchemaMembers{List: []*smithy.Schema{&sTrainingInputMode_FILE, &sTrainingInputMode_FAST_FILE, &sTrainingInputMode_PIPE}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message}}
+var mWorkerComputeConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkerComputeConfiguration_type, &sWorkerComputeConfiguration_number, &sWorkerComputeConfiguration_properties}}
+var mWorkerComputeConfigurationProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkerComputeConfigurationProperties_spark}}
+var mWorkerComputeType = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkerComputeType_CR1X, &sWorkerComputeType_CR4X, &sWorkerComputeType_CR8X}}
+var mCancelTrainedModelInferenceJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelTrainedModelInferenceJobRequest_membershipIdentifier, &sCancelTrainedModelInferenceJobRequest_trainedModelInferenceJobArn}}
+var mCancelTrainedModelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelTrainedModelRequest_membershipIdentifier, &sCancelTrainedModelRequest_trainedModelArn, &sCancelTrainedModelRequest_versionIdentifier}}
+var mCreateAudienceModelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAudienceModelRequest_trainingDataStartTime, &sCreateAudienceModelRequest_trainingDataEndTime, &sCreateAudienceModelRequest_name, &sCreateAudienceModelRequest_trainingDatasetArn, &sCreateAudienceModelRequest_kmsKeyArn, &sCreateAudienceModelRequest_tags, &sCreateAudienceModelRequest_description}}
+var mCreateAudienceModelResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAudienceModelResponse_audienceModelArn}}
+var mCreateConfiguredAudienceModelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateConfiguredAudienceModelRequest_name, &sCreateConfiguredAudienceModelRequest_audienceModelArn, &sCreateConfiguredAudienceModelRequest_outputConfig, &sCreateConfiguredAudienceModelRequest_description, &sCreateConfiguredAudienceModelRequest_sharedAudienceMetrics, &sCreateConfiguredAudienceModelRequest_minMatchingSeedSize, &sCreateConfiguredAudienceModelRequest_audienceSizeConfig, &sCreateConfiguredAudienceModelRequest_tags, &sCreateConfiguredAudienceModelRequest_childResourceTagOnCreatePolicy}, Seed: 2, Slots: []uint16{
+	0, 0, 0, 1, 0, 0, 0, 0, 9, 0, 0, 0, 3, 4, 0, 0, 6, 0, 0, 5, 0, 0, 8, 0,
+	0, 2, 0, 0, 0, 7, 0, 0,
+}}
+var mCreateConfiguredAudienceModelResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateConfiguredAudienceModelResponse_configuredAudienceModelArn}}
+var mCreateConfiguredModelAlgorithmAssociationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateConfiguredModelAlgorithmAssociationRequest_membershipIdentifier, &sCreateConfiguredModelAlgorithmAssociationRequest_configuredModelAlgorithmArn, &sCreateConfiguredModelAlgorithmAssociationRequest_name, &sCreateConfiguredModelAlgorithmAssociationRequest_description, &sCreateConfiguredModelAlgorithmAssociationRequest_privacyConfiguration, &sCreateConfiguredModelAlgorithmAssociationRequest_tags}}
+var mCreateConfiguredModelAlgorithmAssociationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateConfiguredModelAlgorithmAssociationResponse_configuredModelAlgorithmAssociationArn}}
+var mCreateConfiguredModelAlgorithmRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateConfiguredModelAlgorithmRequest_name, &sCreateConfiguredModelAlgorithmRequest_description, &sCreateConfiguredModelAlgorithmRequest_roleArn, &sCreateConfiguredModelAlgorithmRequest_trainingContainerConfig, &sCreateConfiguredModelAlgorithmRequest_inferenceContainerConfig, &sCreateConfiguredModelAlgorithmRequest_tags, &sCreateConfiguredModelAlgorithmRequest_kmsKeyArn}}
+var mCreateConfiguredModelAlgorithmResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateConfiguredModelAlgorithmResponse_configuredModelAlgorithmArn}}
+var mCreateMLInputChannelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateMLInputChannelRequest_membershipIdentifier, &sCreateMLInputChannelRequest_configuredModelAlgorithmAssociations, &sCreateMLInputChannelRequest_inputChannel, &sCreateMLInputChannelRequest_name, &sCreateMLInputChannelRequest_retentionInDays, &sCreateMLInputChannelRequest_description, &sCreateMLInputChannelRequest_kmsKeyArn, &sCreateMLInputChannelRequest_tags, &sCreateMLInputChannelRequest_payerConfiguration}, Seed: 4, Slots: []uint16{
+	0, 4, 0, 0, 0, 0, 9, 0, 0, 0, 6, 0, 0, 8, 0, 0, 0, 3, 0, 0, 0, 2, 5, 0,
+	0, 7, 0, 0, 0, 0, 0, 1,
+}}
+var mCreateMLInputChannelResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateMLInputChannelResponse_mlInputChannelArn}}
+var mCreateTrainedModelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTrainedModelRequest_membershipIdentifier, &sCreateTrainedModelRequest_name, &sCreateTrainedModelRequest_configuredModelAlgorithmAssociationArn, &sCreateTrainedModelRequest_hyperparameters, &sCreateTrainedModelRequest_environment, &sCreateTrainedModelRequest_resourceConfig, &sCreateTrainedModelRequest_stoppingCondition, &sCreateTrainedModelRequest_incrementalTrainingDataChannels, &sCreateTrainedModelRequest_dataChannels, &sCreateTrainedModelRequest_trainingInputMode, &sCreateTrainedModelRequest_description, &sCreateTrainedModelRequest_kmsKeyArn, &sCreateTrainedModelRequest_tags, &sCreateTrainedModelRequest_mlModelTrainingPayerAccountId}, Seed: 108, Slots: []uint16{
+	0, 1, 0, 0, 0, 6, 12, 0, 0, 14, 3, 0, 0, 5, 0, 0, 0, 0, 0, 9, 10, 4, 0, 8,
+	2, 11, 7, 0, 0, 0, 13, 0,
+}}
+var mCreateTrainedModelResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTrainedModelResponse_trainedModelArn, &sCreateTrainedModelResponse_versionIdentifier}}
+var mCreateTrainingDatasetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTrainingDatasetRequest_name, &sCreateTrainingDatasetRequest_roleArn, &sCreateTrainingDatasetRequest_trainingData, &sCreateTrainingDatasetRequest_tags, &sCreateTrainingDatasetRequest_description}}
+var mCreateTrainingDatasetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTrainingDatasetResponse_trainingDatasetArn}}
+var mDeleteAudienceGenerationJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAudienceGenerationJobRequest_audienceGenerationJobArn}}
+var mDeleteAudienceModelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAudienceModelRequest_audienceModelArn}}
+var mDeleteConfiguredAudienceModelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteConfiguredAudienceModelRequest_configuredAudienceModelArn}}
+var mDeleteConfiguredAudienceModelPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteConfiguredAudienceModelPolicyRequest_configuredAudienceModelArn}}
+var mDeleteConfiguredModelAlgorithmAssociationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteConfiguredModelAlgorithmAssociationRequest_configuredModelAlgorithmAssociationArn, &sDeleteConfiguredModelAlgorithmAssociationRequest_membershipIdentifier}}
+var mDeleteConfiguredModelAlgorithmRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteConfiguredModelAlgorithmRequest_configuredModelAlgorithmArn}}
+var mDeleteMLConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteMLConfigurationRequest_membershipIdentifier}}
+var mDeleteMLInputChannelDataRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteMLInputChannelDataRequest_mlInputChannelArn, &sDeleteMLInputChannelDataRequest_membershipIdentifier}}
+var mDeleteTrainedModelOutputRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTrainedModelOutputRequest_trainedModelArn, &sDeleteTrainedModelOutputRequest_membershipIdentifier, &sDeleteTrainedModelOutputRequest_versionIdentifier}}
+var mDeleteTrainingDatasetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTrainingDatasetRequest_trainingDatasetArn}}
+var mGetAudienceGenerationJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAudienceGenerationJobRequest_audienceGenerationJobArn}}
+var mGetAudienceGenerationJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAudienceGenerationJobResponse_createTime, &sGetAudienceGenerationJobResponse_updateTime, &sGetAudienceGenerationJobResponse_audienceGenerationJobArn, &sGetAudienceGenerationJobResponse_name, &sGetAudienceGenerationJobResponse_description, &sGetAudienceGenerationJobResponse_status, &sGetAudienceGenerationJobResponse_statusDetails, &sGetAudienceGenerationJobResponse_configuredAudienceModelArn, &sGetAudienceGenerationJobResponse_seedAudience, &sGetAudienceGenerationJobResponse_includeSeedInOutput, &sGetAudienceGenerationJobResponse_collaborationId, &sGetAudienceGenerationJobResponse_metrics, &sGetAudienceGenerationJobResponse_startedBy, &sGetAudienceGenerationJobResponse_tags, &sGetAudienceGenerationJobResponse_protectedQueryIdentifier}, Seed: 17, Slots: []uint16{
+	0, 13, 14, 15, 0, 0, 0, 0, 3, 8, 10, 11, 0, 0, 0, 12, 0, 0, 0, 7, 9, 0, 0, 0,
+	4, 0, 2, 5, 6, 0, 1, 0,
+}}
+var mGetAudienceModelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAudienceModelRequest_audienceModelArn}}
+var mGetAudienceModelResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAudienceModelResponse_createTime, &sGetAudienceModelResponse_updateTime, &sGetAudienceModelResponse_trainingDataStartTime, &sGetAudienceModelResponse_trainingDataEndTime, &sGetAudienceModelResponse_audienceModelArn, &sGetAudienceModelResponse_name, &sGetAudienceModelResponse_trainingDatasetArn, &sGetAudienceModelResponse_status, &sGetAudienceModelResponse_statusDetails, &sGetAudienceModelResponse_kmsKeyArn, &sGetAudienceModelResponse_tags, &sGetAudienceModelResponse_description}, Seed: 4, Slots: []uint16{
+	2, 6, 0, 0, 1, 0, 4, 0, 3, 8, 12, 0, 0, 11, 0, 0, 0, 0, 7, 0, 0, 9, 0, 0,
+	5, 10, 0, 0, 0, 0, 0, 0,
+}}
+var mGetCollaborationConfiguredModelAlgorithmAssociationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCollaborationConfiguredModelAlgorithmAssociationRequest_configuredModelAlgorithmAssociationArn, &sGetCollaborationConfiguredModelAlgorithmAssociationRequest_collaborationIdentifier}}
+var mGetCollaborationConfiguredModelAlgorithmAssociationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCollaborationConfiguredModelAlgorithmAssociationResponse_createTime, &sGetCollaborationConfiguredModelAlgorithmAssociationResponse_updateTime, &sGetCollaborationConfiguredModelAlgorithmAssociationResponse_configuredModelAlgorithmAssociationArn, &sGetCollaborationConfiguredModelAlgorithmAssociationResponse_membershipIdentifier, &sGetCollaborationConfiguredModelAlgorithmAssociationResponse_collaborationIdentifier, &sGetCollaborationConfiguredModelAlgorithmAssociationResponse_configuredModelAlgorithmArn, &sGetCollaborationConfiguredModelAlgorithmAssociationResponse_name, &sGetCollaborationConfiguredModelAlgorithmAssociationResponse_description, &sGetCollaborationConfiguredModelAlgorithmAssociationResponse_creatorAccountId, &sGetCollaborationConfiguredModelAlgorithmAssociationResponse_privacyConfiguration}, Seed: 13, Slots: []uint16{
+	0, 0, 2, 6, 0, 0, 3, 9, 4, 0, 0, 0, 7, 0, 0, 0, 0, 8, 0, 0, 0, 10, 0, 5,
+	0, 0, 0, 0, 0, 0, 1, 0,
+}}
+var mGetCollaborationMLInputChannelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCollaborationMLInputChannelRequest_mlInputChannelArn, &sGetCollaborationMLInputChannelRequest_collaborationIdentifier}}
+var mGetCollaborationMLInputChannelResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCollaborationMLInputChannelResponse_membershipIdentifier, &sGetCollaborationMLInputChannelResponse_collaborationIdentifier, &sGetCollaborationMLInputChannelResponse_mlInputChannelArn, &sGetCollaborationMLInputChannelResponse_name, &sGetCollaborationMLInputChannelResponse_configuredModelAlgorithmAssociations, &sGetCollaborationMLInputChannelResponse_status, &sGetCollaborationMLInputChannelResponse_statusDetails, &sGetCollaborationMLInputChannelResponse_retentionInDays, &sGetCollaborationMLInputChannelResponse_numberOfRecords, &sGetCollaborationMLInputChannelResponse_privacyBudgets, &sGetCollaborationMLInputChannelResponse_description, &sGetCollaborationMLInputChannelResponse_syntheticDataConfiguration, &sGetCollaborationMLInputChannelResponse_payerConfiguration, &sGetCollaborationMLInputChannelResponse_createTime, &sGetCollaborationMLInputChannelResponse_updateTime, &sGetCollaborationMLInputChannelResponse_creatorAccountId}, Seed: 42, Slots: []uint16{
+	13, 6, 0, 16, 0, 0, 7, 3, 0, 0, 0, 11, 0, 8, 0, 0, 0, 0, 4, 14, 0, 0, 2, 9,
+	1, 0, 5, 15, 0, 0, 12, 10,
+}}
+var mGetCollaborationTrainedModelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCollaborationTrainedModelRequest_trainedModelArn, &sGetCollaborationTrainedModelRequest_collaborationIdentifier, &sGetCollaborationTrainedModelRequest_versionIdentifier}}
+var mGetCollaborationTrainedModelResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCollaborationTrainedModelResponse_membershipIdentifier, &sGetCollaborationTrainedModelResponse_collaborationIdentifier, &sGetCollaborationTrainedModelResponse_trainedModelArn, &sGetCollaborationTrainedModelResponse_versionIdentifier, &sGetCollaborationTrainedModelResponse_incrementalTrainingDataChannels, &sGetCollaborationTrainedModelResponse_name, &sGetCollaborationTrainedModelResponse_description, &sGetCollaborationTrainedModelResponse_status, &sGetCollaborationTrainedModelResponse_statusDetails, &sGetCollaborationTrainedModelResponse_configuredModelAlgorithmAssociationArn, &sGetCollaborationTrainedModelResponse_resourceConfig, &sGetCollaborationTrainedModelResponse_trainingInputMode, &sGetCollaborationTrainedModelResponse_stoppingCondition, &sGetCollaborationTrainedModelResponse_metricsStatus, &sGetCollaborationTrainedModelResponse_metricsStatusDetails, &sGetCollaborationTrainedModelResponse_logsStatus, &sGetCollaborationTrainedModelResponse_logsStatusDetails, &sGetCollaborationTrainedModelResponse_trainingContainerImageDigest, &sGetCollaborationTrainedModelResponse_mlModelTrainingPayerAccountId, &sGetCollaborationTrainedModelResponse_createTime, &sGetCollaborationTrainedModelResponse_updateTime, &sGetCollaborationTrainedModelResponse_creatorAccountId}, Seed: 49, Slots: []uint16{
+	0, 16, 0, 0, 13, 21, 0, 0, 1, 3, 0, 0, 0, 0, 0, 0, 14, 7, 0, 0, 6, 0, 0, 18,
+	0, 0, 0, 0, 0, 0, 12, 19, 8, 0, 0, 22, 0, 0, 0, 2, 5, 0, 0, 4, 0, 0, 0, 0,
+	0, 0, 15, 0, 0, 20, 0, 17, 0, 0, 10, 9, 0, 11, 0, 0,
+}}
+var mGetConfiguredAudienceModelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetConfiguredAudienceModelRequest_configuredAudienceModelArn}}
+var mGetConfiguredAudienceModelResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetConfiguredAudienceModelResponse_createTime, &sGetConfiguredAudienceModelResponse_updateTime, &sGetConfiguredAudienceModelResponse_configuredAudienceModelArn, &sGetConfiguredAudienceModelResponse_name, &sGetConfiguredAudienceModelResponse_audienceModelArn, &sGetConfiguredAudienceModelResponse_outputConfig, &sGetConfiguredAudienceModelResponse_description, &sGetConfiguredAudienceModelResponse_status, &sGetConfiguredAudienceModelResponse_sharedAudienceMetrics, &sGetConfiguredAudienceModelResponse_minMatchingSeedSize, &sGetConfiguredAudienceModelResponse_audienceSizeConfig, &sGetConfiguredAudienceModelResponse_tags, &sGetConfiguredAudienceModelResponse_childResourceTagOnCreatePolicy}, Seed: 8, Slots: []uint16{
+	0, 0, 0, 0, 6, 5, 0, 0, 10, 0, 4, 0, 13, 0, 0, 9, 7, 0, 2, 0, 0, 3, 0, 0,
+	0, 0, 0, 11, 12, 1, 8, 0,
+}}
+var mGetConfiguredAudienceModelPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetConfiguredAudienceModelPolicyRequest_configuredAudienceModelArn}}
+var mGetConfiguredAudienceModelPolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetConfiguredAudienceModelPolicyResponse_configuredAudienceModelArn, &sGetConfiguredAudienceModelPolicyResponse_configuredAudienceModelPolicy, &sGetConfiguredAudienceModelPolicyResponse_policyHash}}
+var mGetConfiguredModelAlgorithmAssociationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetConfiguredModelAlgorithmAssociationRequest_configuredModelAlgorithmAssociationArn, &sGetConfiguredModelAlgorithmAssociationRequest_membershipIdentifier}}
+var mGetConfiguredModelAlgorithmAssociationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetConfiguredModelAlgorithmAssociationResponse_createTime, &sGetConfiguredModelAlgorithmAssociationResponse_updateTime, &sGetConfiguredModelAlgorithmAssociationResponse_configuredModelAlgorithmAssociationArn, &sGetConfiguredModelAlgorithmAssociationResponse_membershipIdentifier, &sGetConfiguredModelAlgorithmAssociationResponse_collaborationIdentifier, &sGetConfiguredModelAlgorithmAssociationResponse_configuredModelAlgorithmArn, &sGetConfiguredModelAlgorithmAssociationResponse_name, &sGetConfiguredModelAlgorithmAssociationResponse_privacyConfiguration, &sGetConfiguredModelAlgorithmAssociationResponse_description, &sGetConfiguredModelAlgorithmAssociationResponse_tags}, Seed: 13, Slots: []uint16{
+	0, 0, 2, 6, 0, 0, 3, 0, 4, 0, 0, 0, 7, 0, 0, 0, 0, 9, 0, 0, 0, 8, 0, 5,
+	10, 0, 0, 0, 0, 0, 1, 0,
+}}
+var mGetConfiguredModelAlgorithmRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetConfiguredModelAlgorithmRequest_configuredModelAlgorithmArn}}
+var mGetConfiguredModelAlgorithmResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetConfiguredModelAlgorithmResponse_createTime, &sGetConfiguredModelAlgorithmResponse_updateTime, &sGetConfiguredModelAlgorithmResponse_configuredModelAlgorithmArn, &sGetConfiguredModelAlgorithmResponse_name, &sGetConfiguredModelAlgorithmResponse_trainingContainerConfig, &sGetConfiguredModelAlgorithmResponse_inferenceContainerConfig, &sGetConfiguredModelAlgorithmResponse_roleArn, &sGetConfiguredModelAlgorithmResponse_description, &sGetConfiguredModelAlgorithmResponse_tags, &sGetConfiguredModelAlgorithmResponse_kmsKeyArn}, Seed: 5, Slots: []uint16{
+	8, 0, 0, 0, 0, 9, 5, 1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	6, 7, 0, 2, 0, 0, 10, 4,
+}}
+var mGetMLConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMLConfigurationRequest_membershipIdentifier}}
+var mGetMLConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMLConfigurationResponse_membershipIdentifier, &sGetMLConfigurationResponse_defaultOutputLocation, &sGetMLConfigurationResponse_createTime, &sGetMLConfigurationResponse_updateTime}}
+var mGetMLInputChannelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMLInputChannelRequest_mlInputChannelArn, &sGetMLInputChannelRequest_membershipIdentifier}}
+var mGetMLInputChannelResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMLInputChannelResponse_membershipIdentifier, &sGetMLInputChannelResponse_collaborationIdentifier, &sGetMLInputChannelResponse_mlInputChannelArn, &sGetMLInputChannelResponse_name, &sGetMLInputChannelResponse_configuredModelAlgorithmAssociations, &sGetMLInputChannelResponse_status, &sGetMLInputChannelResponse_statusDetails, &sGetMLInputChannelResponse_retentionInDays, &sGetMLInputChannelResponse_numberOfRecords, &sGetMLInputChannelResponse_privacyBudgets, &sGetMLInputChannelResponse_description, &sGetMLInputChannelResponse_syntheticDataConfiguration, &sGetMLInputChannelResponse_payerConfiguration, &sGetMLInputChannelResponse_createTime, &sGetMLInputChannelResponse_updateTime, &sGetMLInputChannelResponse_inputChannel, &sGetMLInputChannelResponse_protectedQueryIdentifier, &sGetMLInputChannelResponse_numberOfFiles, &sGetMLInputChannelResponse_sizeInGb, &sGetMLInputChannelResponse_kmsKeyArn, &sGetMLInputChannelResponse_tags}, Seed: 31, Slots: []uint16{
+	0, 19, 0, 0, 0, 10, 0, 3, 0, 0, 4, 16, 6, 0, 0, 0, 0, 0, 0, 0, 1, 0, 2, 21,
+	0, 20, 0, 0, 0, 8, 0, 0, 5, 0, 0, 7, 0, 0, 0, 15, 11, 0, 13, 0, 0, 0, 17, 0,
+	0, 0, 0, 0, 18, 9, 0, 14, 0, 0, 0, 0, 0, 12, 0, 0,
+}}
+var mGetTrainedModelInferenceJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTrainedModelInferenceJobRequest_membershipIdentifier, &sGetTrainedModelInferenceJobRequest_trainedModelInferenceJobArn}}
+var mGetTrainedModelInferenceJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTrainedModelInferenceJobResponse_createTime, &sGetTrainedModelInferenceJobResponse_updateTime, &sGetTrainedModelInferenceJobResponse_trainedModelInferenceJobArn, &sGetTrainedModelInferenceJobResponse_configuredModelAlgorithmAssociationArn, &sGetTrainedModelInferenceJobResponse_name, &sGetTrainedModelInferenceJobResponse_status, &sGetTrainedModelInferenceJobResponse_trainedModelArn, &sGetTrainedModelInferenceJobResponse_trainedModelVersionIdentifier, &sGetTrainedModelInferenceJobResponse_resourceConfig, &sGetTrainedModelInferenceJobResponse_outputConfiguration, &sGetTrainedModelInferenceJobResponse_membershipIdentifier, &sGetTrainedModelInferenceJobResponse_dataSource, &sGetTrainedModelInferenceJobResponse_containerExecutionParameters, &sGetTrainedModelInferenceJobResponse_statusDetails, &sGetTrainedModelInferenceJobResponse_description, &sGetTrainedModelInferenceJobResponse_inferenceContainerImageDigest, &sGetTrainedModelInferenceJobResponse_environment, &sGetTrainedModelInferenceJobResponse_kmsKeyArn, &sGetTrainedModelInferenceJobResponse_metricsStatus, &sGetTrainedModelInferenceJobResponse_metricsStatusDetails, &sGetTrainedModelInferenceJobResponse_logsStatus, &sGetTrainedModelInferenceJobResponse_logsStatusDetails, &sGetTrainedModelInferenceJobResponse_tags, &sGetTrainedModelInferenceJobResponse_mlModelInferencePayerAccountId}, Seed: 49, Slots: []uint16{
+	0, 21, 0, 0, 0, 2, 0, 0, 11, 7, 16, 17, 13, 0, 0, 3, 19, 15, 0, 12, 5, 0, 0, 0,
+	0, 0, 0, 0, 10, 0, 23, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 24, 0, 0,
+	18, 0, 20, 0, 0, 1, 0, 22, 0, 8, 4, 14, 0, 9, 0, 0,
+}}
+var mGetTrainedModelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTrainedModelRequest_trainedModelArn, &sGetTrainedModelRequest_membershipIdentifier, &sGetTrainedModelRequest_versionIdentifier}}
+var mGetTrainedModelResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTrainedModelResponse_membershipIdentifier, &sGetTrainedModelResponse_collaborationIdentifier, &sGetTrainedModelResponse_trainedModelArn, &sGetTrainedModelResponse_versionIdentifier, &sGetTrainedModelResponse_incrementalTrainingDataChannels, &sGetTrainedModelResponse_name, &sGetTrainedModelResponse_description, &sGetTrainedModelResponse_status, &sGetTrainedModelResponse_statusDetails, &sGetTrainedModelResponse_configuredModelAlgorithmAssociationArn, &sGetTrainedModelResponse_resourceConfig, &sGetTrainedModelResponse_trainingInputMode, &sGetTrainedModelResponse_stoppingCondition, &sGetTrainedModelResponse_metricsStatus, &sGetTrainedModelResponse_metricsStatusDetails, &sGetTrainedModelResponse_logsStatus, &sGetTrainedModelResponse_logsStatusDetails, &sGetTrainedModelResponse_trainingContainerImageDigest, &sGetTrainedModelResponse_mlModelTrainingPayerAccountId, &sGetTrainedModelResponse_createTime, &sGetTrainedModelResponse_updateTime, &sGetTrainedModelResponse_hyperparameters, &sGetTrainedModelResponse_environment, &sGetTrainedModelResponse_kmsKeyArn, &sGetTrainedModelResponse_tags, &sGetTrainedModelResponse_dataChannels}, Seed: 264, Slots: []uint16{
+	0, 4, 18, 12, 0, 19, 17, 26, 0, 0, 14, 0, 7, 0, 13, 0, 2, 15, 0, 0, 20, 0, 10, 0,
+	22, 21, 0, 0, 0, 0, 3, 16, 0, 23, 0, 9, 0, 6, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0,
+	0, 0, 0, 0, 1, 0, 0, 0, 11, 0, 24, 25, 0, 0, 0, 8,
+}}
+var mGetTrainingDatasetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTrainingDatasetRequest_trainingDatasetArn}}
+var mGetTrainingDatasetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTrainingDatasetResponse_createTime, &sGetTrainingDatasetResponse_updateTime, &sGetTrainingDatasetResponse_trainingDatasetArn, &sGetTrainingDatasetResponse_name, &sGetTrainingDatasetResponse_trainingData, &sGetTrainingDatasetResponse_status, &sGetTrainingDatasetResponse_roleArn, &sGetTrainingDatasetResponse_tags, &sGetTrainingDatasetResponse_description}, Seed: 1, Slots: []uint16{
+	0, 0, 0, 0, 8, 0, 4, 0, 0, 0, 1, 0, 0, 0, 2, 3, 0, 0, 0, 0, 0, 0, 6, 0,
+	9, 0, 0, 7, 0, 0, 5, 0,
+}}
+var mListAudienceExportJobsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAudienceExportJobsRequest_nextToken, &sListAudienceExportJobsRequest_maxResults, &sListAudienceExportJobsRequest_audienceGenerationJobArn}}
+var mListAudienceExportJobsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAudienceExportJobsResponse_nextToken, &sListAudienceExportJobsResponse_audienceExportJobs}}
+var mListAudienceGenerationJobsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAudienceGenerationJobsRequest_nextToken, &sListAudienceGenerationJobsRequest_maxResults, &sListAudienceGenerationJobsRequest_configuredAudienceModelArn, &sListAudienceGenerationJobsRequest_collaborationId}}
+var mListAudienceGenerationJobsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAudienceGenerationJobsResponse_nextToken, &sListAudienceGenerationJobsResponse_audienceGenerationJobs}}
+var mListAudienceModelsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAudienceModelsRequest_nextToken, &sListAudienceModelsRequest_maxResults}}
+var mListAudienceModelsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAudienceModelsResponse_nextToken, &sListAudienceModelsResponse_audienceModels}}
+var mListCollaborationConfiguredModelAlgorithmAssociationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListCollaborationConfiguredModelAlgorithmAssociationsRequest_nextToken, &sListCollaborationConfiguredModelAlgorithmAssociationsRequest_maxResults, &sListCollaborationConfiguredModelAlgorithmAssociationsRequest_collaborationIdentifier}}
+var mListCollaborationConfiguredModelAlgorithmAssociationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListCollaborationConfiguredModelAlgorithmAssociationsResponse_nextToken, &sListCollaborationConfiguredModelAlgorithmAssociationsResponse_collaborationConfiguredModelAlgorithmAssociations}}
+var mListCollaborationMLInputChannelsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListCollaborationMLInputChannelsRequest_nextToken, &sListCollaborationMLInputChannelsRequest_maxResults, &sListCollaborationMLInputChannelsRequest_collaborationIdentifier}}
+var mListCollaborationMLInputChannelsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListCollaborationMLInputChannelsResponse_nextToken, &sListCollaborationMLInputChannelsResponse_collaborationMLInputChannelsList}}
+var mListCollaborationTrainedModelExportJobsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListCollaborationTrainedModelExportJobsRequest_nextToken, &sListCollaborationTrainedModelExportJobsRequest_maxResults, &sListCollaborationTrainedModelExportJobsRequest_collaborationIdentifier, &sListCollaborationTrainedModelExportJobsRequest_trainedModelArn, &sListCollaborationTrainedModelExportJobsRequest_trainedModelVersionIdentifier}}
+var mListCollaborationTrainedModelExportJobsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListCollaborationTrainedModelExportJobsResponse_nextToken, &sListCollaborationTrainedModelExportJobsResponse_collaborationTrainedModelExportJobs}}
+var mListCollaborationTrainedModelInferenceJobsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListCollaborationTrainedModelInferenceJobsRequest_nextToken, &sListCollaborationTrainedModelInferenceJobsRequest_maxResults, &sListCollaborationTrainedModelInferenceJobsRequest_collaborationIdentifier, &sListCollaborationTrainedModelInferenceJobsRequest_trainedModelArn, &sListCollaborationTrainedModelInferenceJobsRequest_trainedModelVersionIdentifier}}
+var mListCollaborationTrainedModelInferenceJobsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListCollaborationTrainedModelInferenceJobsResponse_nextToken, &sListCollaborationTrainedModelInferenceJobsResponse_collaborationTrainedModelInferenceJobs}}
+var mListCollaborationTrainedModelsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListCollaborationTrainedModelsRequest_nextToken, &sListCollaborationTrainedModelsRequest_maxResults, &sListCollaborationTrainedModelsRequest_collaborationIdentifier}}
+var mListCollaborationTrainedModelsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListCollaborationTrainedModelsResponse_nextToken, &sListCollaborationTrainedModelsResponse_collaborationTrainedModels}}
+var mListConfiguredAudienceModelsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListConfiguredAudienceModelsRequest_nextToken, &sListConfiguredAudienceModelsRequest_maxResults}}
+var mListConfiguredAudienceModelsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListConfiguredAudienceModelsResponse_nextToken, &sListConfiguredAudienceModelsResponse_configuredAudienceModels}}
+var mListConfiguredModelAlgorithmAssociationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListConfiguredModelAlgorithmAssociationsRequest_nextToken, &sListConfiguredModelAlgorithmAssociationsRequest_maxResults, &sListConfiguredModelAlgorithmAssociationsRequest_membershipIdentifier}}
+var mListConfiguredModelAlgorithmAssociationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListConfiguredModelAlgorithmAssociationsResponse_nextToken, &sListConfiguredModelAlgorithmAssociationsResponse_configuredModelAlgorithmAssociations}}
+var mListConfiguredModelAlgorithmsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListConfiguredModelAlgorithmsRequest_nextToken, &sListConfiguredModelAlgorithmsRequest_maxResults}}
+var mListConfiguredModelAlgorithmsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListConfiguredModelAlgorithmsResponse_nextToken, &sListConfiguredModelAlgorithmsResponse_configuredModelAlgorithms}}
+var mListMLInputChannelsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListMLInputChannelsRequest_nextToken, &sListMLInputChannelsRequest_maxResults, &sListMLInputChannelsRequest_membershipIdentifier}}
+var mListMLInputChannelsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListMLInputChannelsResponse_nextToken, &sListMLInputChannelsResponse_mlInputChannelsList}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_resourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_tags}}
+var mListTrainedModelInferenceJobsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTrainedModelInferenceJobsRequest_nextToken, &sListTrainedModelInferenceJobsRequest_maxResults, &sListTrainedModelInferenceJobsRequest_membershipIdentifier, &sListTrainedModelInferenceJobsRequest_trainedModelArn, &sListTrainedModelInferenceJobsRequest_trainedModelVersionIdentifier}}
+var mListTrainedModelInferenceJobsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTrainedModelInferenceJobsResponse_nextToken, &sListTrainedModelInferenceJobsResponse_trainedModelInferenceJobs}}
+var mListTrainedModelsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTrainedModelsRequest_nextToken, &sListTrainedModelsRequest_maxResults, &sListTrainedModelsRequest_membershipIdentifier}}
+var mListTrainedModelsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTrainedModelsResponse_nextToken, &sListTrainedModelsResponse_trainedModels}}
+var mListTrainedModelVersionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTrainedModelVersionsRequest_nextToken, &sListTrainedModelVersionsRequest_maxResults, &sListTrainedModelVersionsRequest_membershipIdentifier, &sListTrainedModelVersionsRequest_trainedModelArn, &sListTrainedModelVersionsRequest_status}}
+var mListTrainedModelVersionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTrainedModelVersionsResponse_nextToken, &sListTrainedModelVersionsResponse_trainedModels}}
+var mListTrainingDatasetsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTrainingDatasetsRequest_nextToken, &sListTrainingDatasetsRequest_maxResults}}
+var mListTrainingDatasetsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTrainingDatasetsResponse_nextToken, &sListTrainingDatasetsResponse_trainingDatasets}}
+var mPutConfiguredAudienceModelPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutConfiguredAudienceModelPolicyRequest_configuredAudienceModelArn, &sPutConfiguredAudienceModelPolicyRequest_configuredAudienceModelPolicy, &sPutConfiguredAudienceModelPolicyRequest_previousPolicyHash, &sPutConfiguredAudienceModelPolicyRequest_policyExistenceCondition}}
+var mPutConfiguredAudienceModelPolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutConfiguredAudienceModelPolicyResponse_configuredAudienceModelPolicy, &sPutConfiguredAudienceModelPolicyResponse_policyHash}}
+var mPutMLConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutMLConfigurationRequest_membershipIdentifier, &sPutMLConfigurationRequest_defaultOutputLocation}}
+var mStartAudienceExportJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartAudienceExportJobRequest_name, &sStartAudienceExportJobRequest_audienceGenerationJobArn, &sStartAudienceExportJobRequest_audienceSize, &sStartAudienceExportJobRequest_description}}
+var mStartAudienceGenerationJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartAudienceGenerationJobRequest_name, &sStartAudienceGenerationJobRequest_configuredAudienceModelArn, &sStartAudienceGenerationJobRequest_seedAudience, &sStartAudienceGenerationJobRequest_includeSeedInOutput, &sStartAudienceGenerationJobRequest_collaborationId, &sStartAudienceGenerationJobRequest_description, &sStartAudienceGenerationJobRequest_tags}}
+var mStartAudienceGenerationJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartAudienceGenerationJobResponse_audienceGenerationJobArn}}
+var mStartTrainedModelExportJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartTrainedModelExportJobRequest_name, &sStartTrainedModelExportJobRequest_trainedModelArn, &sStartTrainedModelExportJobRequest_trainedModelVersionIdentifier, &sStartTrainedModelExportJobRequest_membershipIdentifier, &sStartTrainedModelExportJobRequest_outputConfiguration, &sStartTrainedModelExportJobRequest_description}}
+var mStartTrainedModelInferenceJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartTrainedModelInferenceJobRequest_membershipIdentifier, &sStartTrainedModelInferenceJobRequest_name, &sStartTrainedModelInferenceJobRequest_trainedModelArn, &sStartTrainedModelInferenceJobRequest_trainedModelVersionIdentifier, &sStartTrainedModelInferenceJobRequest_configuredModelAlgorithmAssociationArn, &sStartTrainedModelInferenceJobRequest_resourceConfig, &sStartTrainedModelInferenceJobRequest_outputConfiguration, &sStartTrainedModelInferenceJobRequest_dataSource, &sStartTrainedModelInferenceJobRequest_description, &sStartTrainedModelInferenceJobRequest_containerExecutionParameters, &sStartTrainedModelInferenceJobRequest_environment, &sStartTrainedModelInferenceJobRequest_kmsKeyArn, &sStartTrainedModelInferenceJobRequest_tags, &sStartTrainedModelInferenceJobRequest_mlModelInferencePayerAccountId}, Seed: 49, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 0, 1, 3, 0, 11, 10, 14, 0, 0, 12, 9, 0, 8, 2, 0, 0, 0,
+	0, 4, 5, 0, 7, 6, 13, 0,
+}}
+var mStartTrainedModelInferenceJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartTrainedModelInferenceJobResponse_trainedModelInferenceJobArn}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_resourceArn, &sTagResourceRequest_tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_resourceArn, &sUntagResourceRequest_tagKeys}}
+var mUpdateConfiguredAudienceModelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateConfiguredAudienceModelRequest_configuredAudienceModelArn, &sUpdateConfiguredAudienceModelRequest_outputConfig, &sUpdateConfiguredAudienceModelRequest_audienceModelArn, &sUpdateConfiguredAudienceModelRequest_sharedAudienceMetrics, &sUpdateConfiguredAudienceModelRequest_minMatchingSeedSize, &sUpdateConfiguredAudienceModelRequest_audienceSizeConfig, &sUpdateConfiguredAudienceModelRequest_description}}
+var mUpdateConfiguredAudienceModelResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateConfiguredAudienceModelResponse_configuredAudienceModelArn}}
+
+var sCancelTrainedModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelTrainedModel, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sCancelTrainedModelInferenceJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelTrainedModelInferenceJob, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sCreateAudienceModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAudienceModel, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sCreateConfiguredAudienceModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConfiguredAudienceModel, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sCreateConfiguredModelAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConfiguredModelAlgorithm, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sCreateConfiguredModelAlgorithmAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConfiguredModelAlgorithmAssociation, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var sCreateMLInputChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMLInputChannel, Traits: &t6, Type: smithy.ShapeTypeOperation})
+var sCreateTrainedModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTrainedModel, Traits: &t7, Type: smithy.ShapeTypeOperation})
+var sCreateTrainingDataset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTrainingDataset, Traits: &t8, Type: smithy.ShapeTypeOperation})
+var sDeleteAudienceGenerationJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAudienceGenerationJob, Traits: &t9, Type: smithy.ShapeTypeOperation})
+var sDeleteAudienceModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAudienceModel, Traits: &t10, Type: smithy.ShapeTypeOperation})
+var sDeleteConfiguredAudienceModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConfiguredAudienceModel, Traits: &t11, Type: smithy.ShapeTypeOperation})
+var sDeleteConfiguredAudienceModelPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConfiguredAudienceModelPolicy, Traits: &t12, Type: smithy.ShapeTypeOperation})
+var sDeleteConfiguredModelAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConfiguredModelAlgorithm, Traits: &t13, Type: smithy.ShapeTypeOperation})
+var sDeleteConfiguredModelAlgorithmAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConfiguredModelAlgorithmAssociation, Traits: &t14, Type: smithy.ShapeTypeOperation})
+var sDeleteMLConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMLConfiguration, Traits: &t15, Type: smithy.ShapeTypeOperation})
+var sDeleteMLInputChannelData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMLInputChannelData, Traits: &t16, Type: smithy.ShapeTypeOperation})
+var sDeleteTrainedModelOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTrainedModelOutput, Traits: &t17, Type: smithy.ShapeTypeOperation})
+var sDeleteTrainingDataset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTrainingDataset, Traits: &t18, Type: smithy.ShapeTypeOperation})
+var sGetAudienceGenerationJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAudienceGenerationJob, Traits: &t19, Type: smithy.ShapeTypeOperation})
+var sGetAudienceModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAudienceModel, Traits: &t20, Type: smithy.ShapeTypeOperation})
+var sGetCollaborationConfiguredModelAlgorithmAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCollaborationConfiguredModelAlgorithmAssociation, Traits: &t21, Type: smithy.ShapeTypeOperation})
+var sGetCollaborationMLInputChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCollaborationMLInputChannel, Traits: &t22, Type: smithy.ShapeTypeOperation})
+var sGetCollaborationTrainedModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCollaborationTrainedModel, Traits: &t23, Type: smithy.ShapeTypeOperation})
+var sGetConfiguredAudienceModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfiguredAudienceModel, Traits: &t24, Type: smithy.ShapeTypeOperation})
+var sGetConfiguredAudienceModelPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfiguredAudienceModelPolicy, Traits: &t25, Type: smithy.ShapeTypeOperation})
+var sGetConfiguredModelAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfiguredModelAlgorithm, Traits: &t26, Type: smithy.ShapeTypeOperation})
+var sGetConfiguredModelAlgorithmAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfiguredModelAlgorithmAssociation, Traits: &t27, Type: smithy.ShapeTypeOperation})
+var sGetMLConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMLConfiguration, Traits: &t28, Type: smithy.ShapeTypeOperation})
+var sGetMLInputChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMLInputChannel, Traits: &t29, Type: smithy.ShapeTypeOperation})
+var sGetTrainedModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTrainedModel, Traits: &t30, Type: smithy.ShapeTypeOperation})
+var sGetTrainedModelInferenceJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTrainedModelInferenceJob, Traits: &t31, Type: smithy.ShapeTypeOperation})
+var sGetTrainingDataset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTrainingDataset, Traits: &t32, Type: smithy.ShapeTypeOperation})
+var sListAudienceExportJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAudienceExportJobs, Traits: &t33, Type: smithy.ShapeTypeOperation})
+var sListAudienceGenerationJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAudienceGenerationJobs, Traits: &t34, Type: smithy.ShapeTypeOperation})
+var sListAudienceModels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAudienceModels, Traits: &t35, Type: smithy.ShapeTypeOperation})
+var sListCollaborationConfiguredModelAlgorithmAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCollaborationConfiguredModelAlgorithmAssociations, Traits: &t36, Type: smithy.ShapeTypeOperation})
+var sListCollaborationMLInputChannels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCollaborationMLInputChannels, Traits: &t37, Type: smithy.ShapeTypeOperation})
+var sListCollaborationTrainedModelExportJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCollaborationTrainedModelExportJobs, Traits: &t38, Type: smithy.ShapeTypeOperation})
+var sListCollaborationTrainedModelInferenceJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCollaborationTrainedModelInferenceJobs, Traits: &t39, Type: smithy.ShapeTypeOperation})
+var sListCollaborationTrainedModels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCollaborationTrainedModels, Traits: &t40, Type: smithy.ShapeTypeOperation})
+var sListConfiguredAudienceModels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConfiguredAudienceModels, Traits: &t41, Type: smithy.ShapeTypeOperation})
+var sListConfiguredModelAlgorithmAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConfiguredModelAlgorithmAssociations, Traits: &t42, Type: smithy.ShapeTypeOperation})
+var sListConfiguredModelAlgorithms = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConfiguredModelAlgorithms, Traits: &t43, Type: smithy.ShapeTypeOperation})
+var sListMLInputChannels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMLInputChannels, Traits: &t44, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t45, Type: smithy.ShapeTypeOperation})
+var sListTrainedModelInferenceJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTrainedModelInferenceJobs, Traits: &t46, Type: smithy.ShapeTypeOperation})
+var sListTrainedModels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTrainedModels, Traits: &t47, Type: smithy.ShapeTypeOperation})
+var sListTrainedModelVersions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTrainedModelVersions, Traits: &t48, Type: smithy.ShapeTypeOperation})
+var sListTrainingDatasets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTrainingDatasets, Traits: &t49, Type: smithy.ShapeTypeOperation})
+var sPutConfiguredAudienceModelPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutConfiguredAudienceModelPolicy, Traits: &t50, Type: smithy.ShapeTypeOperation})
+var sPutMLConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutMLConfiguration, Traits: &t51, Type: smithy.ShapeTypeOperation})
+var sStartAudienceExportJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartAudienceExportJob, Traits: &t52, Type: smithy.ShapeTypeOperation})
+var sStartAudienceGenerationJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartAudienceGenerationJob, Traits: &t53, Type: smithy.ShapeTypeOperation})
+var sStartTrainedModelExportJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartTrainedModelExportJob, Traits: &t54, Type: smithy.ShapeTypeOperation})
+var sStartTrainedModelInferenceJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartTrainedModelInferenceJob, Traits: &t55, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t56, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t57, Type: smithy.ShapeTypeOperation})
+var sUpdateConfiguredAudienceModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConfiguredAudienceModel, Traits: &t58, Type: smithy.ShapeTypeOperation})
+var s_AWSStarkControlService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSStarkControlService, Type: smithy.ShapeTypeService})
+var sAccessBudget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessBudget, Members: &mAccessBudget, Type: smithy.ShapeTypeStructure})
+var sAccessBudgetDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessBudgetDetails, Members: &mAccessBudgetDetails, Type: smithy.ShapeTypeStructure})
+var s_AccessBudgetDetailsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessBudgetDetailsList, Members: &m_AccessBudgetDetailsList, Type: smithy.ShapeTypeList})
+var s_AccessBudgets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessBudgets, Members: &m_AccessBudgets, Type: smithy.ShapeTypeList})
+var sAccessBudgetType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessBudgetType, Members: &mAccessBudgetType, Type: smithy.ShapeTypeEnum})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t60, Type: smithy.ShapeTypeStructure})
+var s_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var s_AccountIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountIdList, Members: &m_AccountIdList, Type: smithy.ShapeTypeList})
+var s_AlgorithmImage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AlgorithmImage, Type: smithy.ShapeTypeString})
+var s_AnalysisTemplateArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AnalysisTemplateArn, Type: smithy.ShapeTypeString})
+var sAudienceDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAudienceDestination, Members: &mAudienceDestination, Type: smithy.ShapeTypeStructure})
+var s_AudienceExportJobList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AudienceExportJobList, Members: &m_AudienceExportJobList, Type: smithy.ShapeTypeList})
+var sAudienceExportJobStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAudienceExportJobStatus, Members: &mAudienceExportJobStatus, Type: smithy.ShapeTypeEnum})
+var sAudienceExportJobSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAudienceExportJobSummary, Members: &mAudienceExportJobSummary, Type: smithy.ShapeTypeStructure})
+var s_AudienceGenerationJobArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AudienceGenerationJobArn, Type: smithy.ShapeTypeString})
+var sAudienceGenerationJobDataSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAudienceGenerationJobDataSource, Members: &mAudienceGenerationJobDataSource, Type: smithy.ShapeTypeStructure})
+var s_AudienceGenerationJobList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AudienceGenerationJobList, Members: &m_AudienceGenerationJobList, Type: smithy.ShapeTypeList})
+var sAudienceGenerationJobStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAudienceGenerationJobStatus, Members: &mAudienceGenerationJobStatus, Type: smithy.ShapeTypeEnum})
+var sAudienceGenerationJobSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAudienceGenerationJobSummary, Members: &mAudienceGenerationJobSummary, Type: smithy.ShapeTypeStructure})
+var s_AudienceModelArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AudienceModelArn, Type: smithy.ShapeTypeString})
+var s_AudienceModelList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AudienceModelList, Members: &m_AudienceModelList, Type: smithy.ShapeTypeList})
+var sAudienceModelStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAudienceModelStatus, Members: &mAudienceModelStatus, Type: smithy.ShapeTypeEnum})
+var sAudienceModelSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAudienceModelSummary, Members: &mAudienceModelSummary, Type: smithy.ShapeTypeStructure})
+var sAudienceQualityMetrics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAudienceQualityMetrics, Members: &mAudienceQualityMetrics, Type: smithy.ShapeTypeStructure})
+var sAudienceSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAudienceSize, Members: &mAudienceSize, Type: smithy.ShapeTypeStructure})
+var s_AudienceSizeBins = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AudienceSizeBins, Members: &m_AudienceSizeBins, Type: smithy.ShapeTypeList})
+var sAudienceSizeConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAudienceSizeConfig, Members: &mAudienceSizeConfig, Type: smithy.ShapeTypeStructure})
+var sAudienceSizeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAudienceSizeType, Members: &mAudienceSizeType, Type: smithy.ShapeTypeEnum})
+var s_AudienceSizeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AudienceSizeValue, Type: smithy.ShapeTypeInteger})
+var sAutoRefreshMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutoRefreshMode, Members: &mAutoRefreshMode, Type: smithy.ShapeTypeEnum})
+var s_Budget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Budget, Type: smithy.ShapeTypeInteger})
+var s_BudgetedResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BudgetedResourceArn, Type: smithy.ShapeTypeString})
+var s_CollaborationConfiguredModelAlgorithmAssociationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CollaborationConfiguredModelAlgorithmAssociationList, Members: &m_CollaborationConfiguredModelAlgorithmAssociationList, Type: smithy.ShapeTypeList})
+var sCollaborationConfiguredModelAlgorithmAssociationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCollaborationConfiguredModelAlgorithmAssociationSummary, Members: &mCollaborationConfiguredModelAlgorithmAssociationSummary, Type: smithy.ShapeTypeStructure})
+var s_CollaborationMLInputChannelsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CollaborationMLInputChannelsList, Members: &m_CollaborationMLInputChannelsList, Type: smithy.ShapeTypeList})
+var sCollaborationMLInputChannelSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCollaborationMLInputChannelSummary, Members: &mCollaborationMLInputChannelSummary, Type: smithy.ShapeTypeStructure})
+var s_CollaborationTrainedModelExportJobList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CollaborationTrainedModelExportJobList, Members: &m_CollaborationTrainedModelExportJobList, Type: smithy.ShapeTypeList})
+var sCollaborationTrainedModelExportJobSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCollaborationTrainedModelExportJobSummary, Members: &mCollaborationTrainedModelExportJobSummary, Type: smithy.ShapeTypeStructure})
+var s_CollaborationTrainedModelInferenceJobList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CollaborationTrainedModelInferenceJobList, Members: &m_CollaborationTrainedModelInferenceJobList, Type: smithy.ShapeTypeList})
+var sCollaborationTrainedModelInferenceJobSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCollaborationTrainedModelInferenceJobSummary, Members: &mCollaborationTrainedModelInferenceJobSummary, Type: smithy.ShapeTypeStructure})
+var s_CollaborationTrainedModelList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CollaborationTrainedModelList, Members: &m_CollaborationTrainedModelList, Type: smithy.ShapeTypeList})
+var sCollaborationTrainedModelSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCollaborationTrainedModelSummary, Members: &mCollaborationTrainedModelSummary, Type: smithy.ShapeTypeStructure})
+var sColumnClassificationDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iColumnClassificationDetails, Members: &mColumnClassificationDetails, Type: smithy.ShapeTypeStructure})
+var s_ColumnMappingList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ColumnMappingList, Members: &m_ColumnMappingList, Type: smithy.ShapeTypeList})
+var s_ColumnName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ColumnName, Type: smithy.ShapeTypeString})
+var sColumnSchema = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iColumnSchema, Members: &mColumnSchema, Type: smithy.ShapeTypeStructure})
+var sColumnType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iColumnType, Members: &mColumnType, Type: smithy.ShapeTypeEnum})
+var s_ColumnTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ColumnTypeList, Members: &m_ColumnTypeList, Type: smithy.ShapeTypeList})
+var sComputeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComputeConfiguration, Members: &mComputeConfiguration, Type: smithy.ShapeTypeUnion})
+var s_ConfiguredAudienceModelArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfiguredAudienceModelArn, Type: smithy.ShapeTypeString})
+var s_ConfiguredAudienceModelList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfiguredAudienceModelList, Members: &m_ConfiguredAudienceModelList, Type: smithy.ShapeTypeList})
+var sConfiguredAudienceModelOutputConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfiguredAudienceModelOutputConfig, Members: &mConfiguredAudienceModelOutputConfig, Type: smithy.ShapeTypeStructure})
+var sConfiguredAudienceModelStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfiguredAudienceModelStatus, Members: &mConfiguredAudienceModelStatus, Type: smithy.ShapeTypeEnum})
+var sConfiguredAudienceModelSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfiguredAudienceModelSummary, Members: &mConfiguredAudienceModelSummary, Type: smithy.ShapeTypeStructure})
+var s_ConfiguredModelAlgorithmArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfiguredModelAlgorithmArn, Type: smithy.ShapeTypeString})
+var s_ConfiguredModelAlgorithmAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfiguredModelAlgorithmAssociationArn, Type: smithy.ShapeTypeString})
+var s_ConfiguredModelAlgorithmAssociationArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfiguredModelAlgorithmAssociationArnList, Members: &m_ConfiguredModelAlgorithmAssociationArnList, Type: smithy.ShapeTypeList})
+var s_ConfiguredModelAlgorithmAssociationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfiguredModelAlgorithmAssociationList, Members: &m_ConfiguredModelAlgorithmAssociationList, Type: smithy.ShapeTypeList})
+var sConfiguredModelAlgorithmAssociationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfiguredModelAlgorithmAssociationSummary, Members: &mConfiguredModelAlgorithmAssociationSummary, Type: smithy.ShapeTypeStructure})
+var s_ConfiguredModelAlgorithmList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfiguredModelAlgorithmList, Members: &m_ConfiguredModelAlgorithmList, Type: smithy.ShapeTypeList})
+var sConfiguredModelAlgorithmSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfiguredModelAlgorithmSummary, Members: &mConfiguredModelAlgorithmSummary, Type: smithy.ShapeTypeStructure})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t62, Type: smithy.ShapeTypeStructure})
+var s_ContainerArgument = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContainerArgument, Type: smithy.ShapeTypeString})
+var s_ContainerArguments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContainerArguments, Members: &m_ContainerArguments, Type: smithy.ShapeTypeList})
+var sContainerConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContainerConfig, Members: &mContainerConfig, Type: smithy.ShapeTypeStructure})
+var s_ContainerEntrypoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContainerEntrypoint, Members: &m_ContainerEntrypoint, Type: smithy.ShapeTypeList})
+var s_ContainerEntrypointString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContainerEntrypointString, Type: smithy.ShapeTypeString})
+var s_CustomDataIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomDataIdentifier, Type: smithy.ShapeTypeString})
+var s_CustomDataIdentifierList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomDataIdentifierList, Members: &m_CustomDataIdentifierList, Type: smithy.ShapeTypeList})
+var sCustomEntityConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomEntityConfig, Members: &mCustomEntityConfig, Type: smithy.ShapeTypeStructure})
+var sDataPrivacyScores = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataPrivacyScores, Members: &mDataPrivacyScores, Type: smithy.ShapeTypeStructure})
+var sDataset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataset, Members: &mDataset, Type: smithy.ShapeTypeStructure})
+var sDatasetInputConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatasetInputConfig, Members: &mDatasetInputConfig, Type: smithy.ShapeTypeStructure})
+var s_DatasetList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatasetList, Members: &m_DatasetList, Type: smithy.ShapeTypeList})
+var s_DatasetSchemaList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatasetSchemaList, Members: &m_DatasetSchemaList, Type: smithy.ShapeTypeList})
+var sDatasetType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatasetType, Members: &mDatasetType, Type: smithy.ShapeTypeEnum})
+var sDataSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataSource, Members: &mDataSource, Type: smithy.ShapeTypeStructure})
+var sDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDestination, Members: &mDestination, Type: smithy.ShapeTypeStructure})
+var sEntityType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntityType, Members: &mEntityType, Type: smithy.ShapeTypeEnum})
+var s_EntityTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntityTypeList, Members: &m_EntityTypeList, Type: smithy.ShapeTypeList})
+var s_Environment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Environment, Members: &m_Environment, Type: smithy.ShapeTypeMap})
+var s_GlueDatabaseName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GlueDatabaseName, Type: smithy.ShapeTypeString})
+var sGlueDataSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGlueDataSource, Members: &mGlueDataSource, Type: smithy.ShapeTypeStructure})
+var s_GlueTableName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GlueTableName, Type: smithy.ShapeTypeString})
+var s_Hash = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Hash, Type: smithy.ShapeTypeString})
+var s_HyperParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HyperParameters, Members: &m_HyperParameters, Type: smithy.ShapeTypeMap})
+var s_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IamRoleArn, Type: smithy.ShapeTypeString})
+var sIncrementalTrainingDataChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIncrementalTrainingDataChannel, Members: &mIncrementalTrainingDataChannel, Type: smithy.ShapeTypeStructure})
+var sIncrementalTrainingDataChannelOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIncrementalTrainingDataChannelOutput, Members: &mIncrementalTrainingDataChannelOutput, Type: smithy.ShapeTypeStructure})
+var s_IncrementalTrainingDataChannels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IncrementalTrainingDataChannels, Members: &m_IncrementalTrainingDataChannels, Type: smithy.ShapeTypeList})
+var s_IncrementalTrainingDataChannelsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IncrementalTrainingDataChannelsOutput, Members: &m_IncrementalTrainingDataChannelsOutput, Type: smithy.ShapeTypeList})
+var sInferenceContainerConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInferenceContainerConfig, Members: &mInferenceContainerConfig, Type: smithy.ShapeTypeStructure})
+var sInferenceContainerExecutionParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInferenceContainerExecutionParameters, Members: &mInferenceContainerExecutionParameters, Type: smithy.ShapeTypeStructure})
+var s_InferenceEnvironmentMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InferenceEnvironmentMap, Members: &m_InferenceEnvironmentMap, Type: smithy.ShapeTypeMap})
+var sInferenceInstanceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInferenceInstanceType, Members: &mInferenceInstanceType, Type: smithy.ShapeTypeEnum})
+var sInferenceOutputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInferenceOutputConfiguration, Members: &mInferenceOutputConfiguration, Type: smithy.ShapeTypeStructure})
+var sInferenceReceiverMember = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInferenceReceiverMember, Members: &mInferenceReceiverMember, Type: smithy.ShapeTypeStructure})
+var s_InferenceReceiverMembers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InferenceReceiverMembers, Members: &m_InferenceReceiverMembers, Type: smithy.ShapeTypeList})
+var sInferenceResourceConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInferenceResourceConfig, Members: &mInferenceResourceConfig, Type: smithy.ShapeTypeStructure})
+var sInputChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInputChannel, Members: &mInputChannel, Type: smithy.ShapeTypeStructure})
+var sInputChannelDataSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInputChannelDataSource, Members: &mInputChannelDataSource, Type: smithy.ShapeTypeUnion})
+var sInstanceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInstanceType, Members: &mInstanceType, Type: smithy.ShapeTypeEnum})
+var sInternalServiceException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServiceException, Members: &mInternalServiceException, Traits: &t63, Type: smithy.ShapeTypeStructure})
+var s_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString})
+var sLogRedactionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogRedactionConfiguration, Members: &mLogRedactionConfiguration, Type: smithy.ShapeTypeStructure})
+var sLogsConfigurationPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogsConfigurationPolicy, Members: &mLogsConfigurationPolicy, Type: smithy.ShapeTypeStructure})
+var s_LogsConfigurationPolicyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogsConfigurationPolicyList, Members: &m_LogsConfigurationPolicyList, Type: smithy.ShapeTypeList})
+var sLogsStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogsStatus, Members: &mLogsStatus, Type: smithy.ShapeTypeEnum})
+var sLogType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogType, Members: &mLogType, Type: smithy.ShapeTypeEnum})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sMembershipInferenceAttackScore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMembershipInferenceAttackScore, Members: &mMembershipInferenceAttackScore, Type: smithy.ShapeTypeStructure})
+var s_MembershipInferenceAttackScoreList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MembershipInferenceAttackScoreList, Members: &m_MembershipInferenceAttackScoreList, Type: smithy.ShapeTypeList})
+var sMembershipInferenceAttackVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMembershipInferenceAttackVersion, Members: &mMembershipInferenceAttackVersion, Type: smithy.ShapeTypeEnum})
+var sMetricDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricDefinition, Members: &mMetricDefinition, Type: smithy.ShapeTypeStructure})
+var s_MetricDefinitionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricDefinitionList, Members: &m_MetricDefinitionList, Type: smithy.ShapeTypeList})
+var s_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricName, Type: smithy.ShapeTypeString})
+var s_MetricRegex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricRegex, Type: smithy.ShapeTypeString})
+var sMetricsConfigurationPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricsConfigurationPolicy, Members: &mMetricsConfigurationPolicy, Type: smithy.ShapeTypeStructure})
+var s_MetricsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricsList, Members: &m_MetricsList, Type: smithy.ShapeTypeList})
+var sMetricsStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricsStatus, Members: &mMetricsStatus, Type: smithy.ShapeTypeEnum})
+var s_MinMatchingSeedSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MinMatchingSeedSize, Type: smithy.ShapeTypeInteger})
+var s_MLInputChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MLInputChannelArn, Type: smithy.ShapeTypeString})
+var s_MLInputChannelsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MLInputChannelsList, Members: &m_MLInputChannelsList, Type: smithy.ShapeTypeList})
+var sMLInputChannelStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMLInputChannelStatus, Members: &mMLInputChannelStatus, Type: smithy.ShapeTypeEnum})
+var sMLInputChannelSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMLInputChannelSummary, Members: &mMLInputChannelSummary, Type: smithy.ShapeTypeStructure})
+var sMLOutputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMLOutputConfiguration, Members: &mMLOutputConfiguration, Type: smithy.ShapeTypeStructure})
+var sMLSyntheticDataParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMLSyntheticDataParameters, Members: &mMLSyntheticDataParameters, Type: smithy.ShapeTypeStructure})
+var sModelInferenceDataSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModelInferenceDataSource, Members: &mModelInferenceDataSource, Type: smithy.ShapeTypeStructure})
+var sModelTrainingDataChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModelTrainingDataChannel, Members: &mModelTrainingDataChannel, Type: smithy.ShapeTypeStructure})
+var s_ModelTrainingDataChannelName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ModelTrainingDataChannelName, Type: smithy.ShapeTypeString})
+var s_ModelTrainingDataChannels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ModelTrainingDataChannels, Members: &m_ModelTrainingDataChannels, Type: smithy.ShapeTypeList})
+var s_NameString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NameString, Type: smithy.ShapeTypeString})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sNoiseLevelType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNoiseLevelType, Members: &mNoiseLevelType, Type: smithy.ShapeTypeEnum})
+var s_ParameterMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParameterMap, Members: &m_ParameterMap, Traits: &t64, Type: smithy.ShapeTypeMap})
+var s_ParameterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParameterName, Type: smithy.ShapeTypeString})
+var s_ParameterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParameterValue, Type: smithy.ShapeTypeString})
+var sPayerConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPayerConfiguration, Members: &mPayerConfiguration, Type: smithy.ShapeTypeStructure})
+var sPolicyExistenceCondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyExistenceCondition, Members: &mPolicyExistenceCondition, Type: smithy.ShapeTypeEnum})
+var sPrivacyBudgets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPrivacyBudgets, Members: &mPrivacyBudgets, Type: smithy.ShapeTypeUnion})
+var sPrivacyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPrivacyConfiguration, Members: &mPrivacyConfiguration, Type: smithy.ShapeTypeStructure})
+var sPrivacyConfigurationPolicies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPrivacyConfigurationPolicies, Members: &mPrivacyConfigurationPolicies, Type: smithy.ShapeTypeStructure})
+var sProtectedQueryInputParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProtectedQueryInputParameters, Members: &mProtectedQueryInputParameters, Type: smithy.ShapeTypeStructure})
+var sProtectedQuerySQLParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProtectedQuerySQLParameters, Members: &mProtectedQuerySQLParameters, Traits: &t64, Type: smithy.ShapeTypeStructure})
+var sRelevanceMetric = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRelevanceMetric, Members: &mRelevanceMetric, Type: smithy.ShapeTypeStructure})
+var s_RelevanceMetrics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RelevanceMetrics, Members: &m_RelevanceMetrics, Type: smithy.ShapeTypeList})
+var sResourceConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceConfig, Members: &mResourceConfig, Type: smithy.ShapeTypeStructure})
+var s_ResourceDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t65, Type: smithy.ShapeTypeStructure})
+var s_ResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourcePolicy, Type: smithy.ShapeTypeString})
+var sResultFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResultFormat, Members: &mResultFormat, Type: smithy.ShapeTypeEnum})
+var sS3ConfigMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3ConfigMap, Members: &mS3ConfigMap, Type: smithy.ShapeTypeStructure})
+var sS3DataDistributionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3DataDistributionType, Members: &mS3DataDistributionType, Type: smithy.ShapeTypeEnum})
+var s_S3Path = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Path, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t66, Type: smithy.ShapeTypeStructure})
+var sSharedAudienceMetrics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSharedAudienceMetrics, Members: &mSharedAudienceMetrics, Type: smithy.ShapeTypeEnum})
+var s_SparkProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SparkProperties, Members: &m_SparkProperties, Type: smithy.ShapeTypeMap})
+var s_SparkPropertyKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SparkPropertyKey, Type: smithy.ShapeTypeString})
+var s_SparkPropertyValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SparkPropertyValue, Type: smithy.ShapeTypeString})
+var sStatusDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatusDetails, Members: &mStatusDetails, Type: smithy.ShapeTypeStructure})
+var sStoppingCondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStoppingCondition, Members: &mStoppingCondition, Type: smithy.ShapeTypeStructure})
+var s_SyntheticDataColumnName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SyntheticDataColumnName, Type: smithy.ShapeTypeString})
+var sSyntheticDataColumnProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSyntheticDataColumnProperties, Members: &mSyntheticDataColumnProperties, Type: smithy.ShapeTypeStructure})
+var sSyntheticDataColumnType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSyntheticDataColumnType, Members: &mSyntheticDataColumnType, Type: smithy.ShapeTypeEnum})
+var sSyntheticDataConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSyntheticDataConfiguration, Members: &mSyntheticDataConfiguration, Type: smithy.ShapeTypeStructure})
+var sSyntheticDataEvaluationScores = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSyntheticDataEvaluationScores, Members: &mSyntheticDataEvaluationScores, Type: smithy.ShapeTypeStructure})
+var s_TaggableArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaggableArn, Type: smithy.ShapeTypeString})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeys, Members: &m_TagKeys, Type: smithy.ShapeTypeList})
+var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sTagOnCreatePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagOnCreatePolicy, Members: &mTagOnCreatePolicy, Type: smithy.ShapeTypeEnum})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t67, Type: smithy.ShapeTypeStructure})
+var s_TrainedModelArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrainedModelArn, Type: smithy.ShapeTypeString})
+var sTrainedModelArtifactMaxSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrainedModelArtifactMaxSize, Members: &mTrainedModelArtifactMaxSize, Type: smithy.ShapeTypeStructure})
+var sTrainedModelArtifactMaxSizeUnitType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrainedModelArtifactMaxSizeUnitType, Members: &mTrainedModelArtifactMaxSizeUnitType, Type: smithy.ShapeTypeEnum})
+var s_TrainedModelArtifactMaxSizeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrainedModelArtifactMaxSizeValue, Type: smithy.ShapeTypeDouble})
+var sTrainedModelExportFileType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrainedModelExportFileType, Members: &mTrainedModelExportFileType, Type: smithy.ShapeTypeEnum})
+var s_TrainedModelExportFileTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrainedModelExportFileTypeList, Members: &m_TrainedModelExportFileTypeList, Type: smithy.ShapeTypeList})
+var sTrainedModelExportJobStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrainedModelExportJobStatus, Members: &mTrainedModelExportJobStatus, Type: smithy.ShapeTypeEnum})
+var sTrainedModelExportOutputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrainedModelExportOutputConfiguration, Members: &mTrainedModelExportOutputConfiguration, Type: smithy.ShapeTypeStructure})
+var sTrainedModelExportReceiverMember = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrainedModelExportReceiverMember, Members: &mTrainedModelExportReceiverMember, Type: smithy.ShapeTypeStructure})
+var s_TrainedModelExportReceiverMembers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrainedModelExportReceiverMembers, Members: &m_TrainedModelExportReceiverMembers, Type: smithy.ShapeTypeList})
+var sTrainedModelExportsConfigurationPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrainedModelExportsConfigurationPolicy, Members: &mTrainedModelExportsConfigurationPolicy, Type: smithy.ShapeTypeStructure})
+var sTrainedModelExportsMaxSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrainedModelExportsMaxSize, Members: &mTrainedModelExportsMaxSize, Type: smithy.ShapeTypeStructure})
+var sTrainedModelExportsMaxSizeUnitType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrainedModelExportsMaxSizeUnitType, Members: &mTrainedModelExportsMaxSizeUnitType, Type: smithy.ShapeTypeEnum})
+var s_TrainedModelExportsMaxSizeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrainedModelExportsMaxSizeValue, Type: smithy.ShapeTypeDouble})
+var s_TrainedModelInferenceJobArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrainedModelInferenceJobArn, Type: smithy.ShapeTypeString})
+var s_TrainedModelInferenceJobList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrainedModelInferenceJobList, Members: &m_TrainedModelInferenceJobList, Type: smithy.ShapeTypeList})
+var sTrainedModelInferenceJobsConfigurationPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrainedModelInferenceJobsConfigurationPolicy, Members: &mTrainedModelInferenceJobsConfigurationPolicy, Type: smithy.ShapeTypeStructure})
+var sTrainedModelInferenceJobStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrainedModelInferenceJobStatus, Members: &mTrainedModelInferenceJobStatus, Type: smithy.ShapeTypeEnum})
+var sTrainedModelInferenceJobSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrainedModelInferenceJobSummary, Members: &mTrainedModelInferenceJobSummary, Type: smithy.ShapeTypeStructure})
+var sTrainedModelInferenceMaxOutputSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrainedModelInferenceMaxOutputSize, Members: &mTrainedModelInferenceMaxOutputSize, Type: smithy.ShapeTypeStructure})
+var sTrainedModelInferenceMaxOutputSizeUnitType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrainedModelInferenceMaxOutputSizeUnitType, Members: &mTrainedModelInferenceMaxOutputSizeUnitType, Type: smithy.ShapeTypeEnum})
+var s_TrainedModelInferenceMaxOutputSizeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrainedModelInferenceMaxOutputSizeValue, Type: smithy.ShapeTypeDouble})
+var s_TrainedModelList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrainedModelList, Members: &m_TrainedModelList, Type: smithy.ShapeTypeList})
+var sTrainedModelsConfigurationPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrainedModelsConfigurationPolicy, Members: &mTrainedModelsConfigurationPolicy, Type: smithy.ShapeTypeStructure})
+var sTrainedModelStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrainedModelStatus, Members: &mTrainedModelStatus, Type: smithy.ShapeTypeEnum})
+var sTrainedModelSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrainedModelSummary, Members: &mTrainedModelSummary, Type: smithy.ShapeTypeStructure})
+var s_TrainingDatasetArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrainingDatasetArn, Type: smithy.ShapeTypeString})
+var s_TrainingDatasetList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrainingDatasetList, Members: &m_TrainingDatasetList, Type: smithy.ShapeTypeList})
+var sTrainingDatasetStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrainingDatasetStatus, Members: &mTrainingDatasetStatus, Type: smithy.ShapeTypeEnum})
+var sTrainingDatasetSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrainingDatasetSummary, Members: &mTrainingDatasetSummary, Type: smithy.ShapeTypeStructure})
+var sTrainingInputMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrainingInputMode, Members: &mTrainingInputMode, Type: smithy.ShapeTypeEnum})
+var s_UUID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t68, Type: smithy.ShapeTypeStructure})
+var sWorkerComputeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkerComputeConfiguration, Members: &mWorkerComputeConfiguration, Type: smithy.ShapeTypeStructure})
+var sWorkerComputeConfigurationProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkerComputeConfigurationProperties, Members: &mWorkerComputeConfigurationProperties, Type: smithy.ShapeTypeUnion})
+var sWorkerComputeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkerComputeType, Members: &mWorkerComputeType, Type: smithy.ShapeTypeEnum})
+var sCancelTrainedModelInferenceJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelTrainedModelInferenceJobRequest, Members: &mCancelTrainedModelInferenceJobRequest, Type: smithy.ShapeTypeStructure})
+var sCancelTrainedModelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelTrainedModelRequest, Members: &mCancelTrainedModelRequest, Type: smithy.ShapeTypeStructure})
+var sCreateAudienceModelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAudienceModelRequest, Members: &mCreateAudienceModelRequest, Type: smithy.ShapeTypeStructure})
+var sCreateAudienceModelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAudienceModelResponse, Members: &mCreateAudienceModelResponse, Type: smithy.ShapeTypeStructure})
+var sCreateConfiguredAudienceModelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConfiguredAudienceModelRequest, Members: &mCreateConfiguredAudienceModelRequest, Type: smithy.ShapeTypeStructure})
+var sCreateConfiguredAudienceModelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConfiguredAudienceModelResponse, Members: &mCreateConfiguredAudienceModelResponse, Type: smithy.ShapeTypeStructure})
+var sCreateConfiguredModelAlgorithmAssociationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConfiguredModelAlgorithmAssociationRequest, Members: &mCreateConfiguredModelAlgorithmAssociationRequest, Type: smithy.ShapeTypeStructure})
+var sCreateConfiguredModelAlgorithmAssociationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConfiguredModelAlgorithmAssociationResponse, Members: &mCreateConfiguredModelAlgorithmAssociationResponse, Type: smithy.ShapeTypeStructure})
+var sCreateConfiguredModelAlgorithmRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConfiguredModelAlgorithmRequest, Members: &mCreateConfiguredModelAlgorithmRequest, Type: smithy.ShapeTypeStructure})
+var sCreateConfiguredModelAlgorithmResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConfiguredModelAlgorithmResponse, Members: &mCreateConfiguredModelAlgorithmResponse, Type: smithy.ShapeTypeStructure})
+var sCreateMLInputChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMLInputChannelRequest, Members: &mCreateMLInputChannelRequest, Type: smithy.ShapeTypeStructure})
+var sCreateMLInputChannelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMLInputChannelResponse, Members: &mCreateMLInputChannelResponse, Type: smithy.ShapeTypeStructure})
+var sCreateTrainedModelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTrainedModelRequest, Members: &mCreateTrainedModelRequest, Type: smithy.ShapeTypeStructure})
+var sCreateTrainedModelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTrainedModelResponse, Members: &mCreateTrainedModelResponse, Type: smithy.ShapeTypeStructure})
+var sCreateTrainingDatasetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTrainingDatasetRequest, Members: &mCreateTrainingDatasetRequest, Type: smithy.ShapeTypeStructure})
+var sCreateTrainingDatasetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTrainingDatasetResponse, Members: &mCreateTrainingDatasetResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteAudienceGenerationJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAudienceGenerationJobRequest, Members: &mDeleteAudienceGenerationJobRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteAudienceModelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAudienceModelRequest, Members: &mDeleteAudienceModelRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteConfiguredAudienceModelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConfiguredAudienceModelRequest, Members: &mDeleteConfiguredAudienceModelRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteConfiguredAudienceModelPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConfiguredAudienceModelPolicyRequest, Members: &mDeleteConfiguredAudienceModelPolicyRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteConfiguredModelAlgorithmAssociationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConfiguredModelAlgorithmAssociationRequest, Members: &mDeleteConfiguredModelAlgorithmAssociationRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteConfiguredModelAlgorithmRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConfiguredModelAlgorithmRequest, Members: &mDeleteConfiguredModelAlgorithmRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteMLConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMLConfigurationRequest, Members: &mDeleteMLConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteMLInputChannelDataRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMLInputChannelDataRequest, Members: &mDeleteMLInputChannelDataRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteTrainedModelOutputRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTrainedModelOutputRequest, Members: &mDeleteTrainedModelOutputRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteTrainingDatasetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTrainingDatasetRequest, Members: &mDeleteTrainingDatasetRequest, Type: smithy.ShapeTypeStructure})
+var sGetAudienceGenerationJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAudienceGenerationJobRequest, Members: &mGetAudienceGenerationJobRequest, Type: smithy.ShapeTypeStructure})
+var sGetAudienceGenerationJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAudienceGenerationJobResponse, Members: &mGetAudienceGenerationJobResponse, Type: smithy.ShapeTypeStructure})
+var sGetAudienceModelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAudienceModelRequest, Members: &mGetAudienceModelRequest, Type: smithy.ShapeTypeStructure})
+var sGetAudienceModelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAudienceModelResponse, Members: &mGetAudienceModelResponse, Type: smithy.ShapeTypeStructure})
+var sGetCollaborationConfiguredModelAlgorithmAssociationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCollaborationConfiguredModelAlgorithmAssociationRequest, Members: &mGetCollaborationConfiguredModelAlgorithmAssociationRequest, Type: smithy.ShapeTypeStructure})
+var sGetCollaborationConfiguredModelAlgorithmAssociationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCollaborationConfiguredModelAlgorithmAssociationResponse, Members: &mGetCollaborationConfiguredModelAlgorithmAssociationResponse, Type: smithy.ShapeTypeStructure})
+var sGetCollaborationMLInputChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCollaborationMLInputChannelRequest, Members: &mGetCollaborationMLInputChannelRequest, Type: smithy.ShapeTypeStructure})
+var sGetCollaborationMLInputChannelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCollaborationMLInputChannelResponse, Members: &mGetCollaborationMLInputChannelResponse, Type: smithy.ShapeTypeStructure})
+var sGetCollaborationTrainedModelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCollaborationTrainedModelRequest, Members: &mGetCollaborationTrainedModelRequest, Type: smithy.ShapeTypeStructure})
+var sGetCollaborationTrainedModelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCollaborationTrainedModelResponse, Members: &mGetCollaborationTrainedModelResponse, Type: smithy.ShapeTypeStructure})
+var sGetConfiguredAudienceModelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfiguredAudienceModelRequest, Members: &mGetConfiguredAudienceModelRequest, Type: smithy.ShapeTypeStructure})
+var sGetConfiguredAudienceModelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfiguredAudienceModelResponse, Members: &mGetConfiguredAudienceModelResponse, Type: smithy.ShapeTypeStructure})
+var sGetConfiguredAudienceModelPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfiguredAudienceModelPolicyRequest, Members: &mGetConfiguredAudienceModelPolicyRequest, Type: smithy.ShapeTypeStructure})
+var sGetConfiguredAudienceModelPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfiguredAudienceModelPolicyResponse, Members: &mGetConfiguredAudienceModelPolicyResponse, Type: smithy.ShapeTypeStructure})
+var sGetConfiguredModelAlgorithmAssociationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfiguredModelAlgorithmAssociationRequest, Members: &mGetConfiguredModelAlgorithmAssociationRequest, Type: smithy.ShapeTypeStructure})
+var sGetConfiguredModelAlgorithmAssociationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfiguredModelAlgorithmAssociationResponse, Members: &mGetConfiguredModelAlgorithmAssociationResponse, Type: smithy.ShapeTypeStructure})
+var sGetConfiguredModelAlgorithmRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfiguredModelAlgorithmRequest, Members: &mGetConfiguredModelAlgorithmRequest, Type: smithy.ShapeTypeStructure})
+var sGetConfiguredModelAlgorithmResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfiguredModelAlgorithmResponse, Members: &mGetConfiguredModelAlgorithmResponse, Type: smithy.ShapeTypeStructure})
+var sGetMLConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMLConfigurationRequest, Members: &mGetMLConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sGetMLConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMLConfigurationResponse, Members: &mGetMLConfigurationResponse, Type: smithy.ShapeTypeStructure})
+var sGetMLInputChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMLInputChannelRequest, Members: &mGetMLInputChannelRequest, Type: smithy.ShapeTypeStructure})
+var sGetMLInputChannelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMLInputChannelResponse, Members: &mGetMLInputChannelResponse, Type: smithy.ShapeTypeStructure})
+var sGetTrainedModelInferenceJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTrainedModelInferenceJobRequest, Members: &mGetTrainedModelInferenceJobRequest, Type: smithy.ShapeTypeStructure})
+var sGetTrainedModelInferenceJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTrainedModelInferenceJobResponse, Members: &mGetTrainedModelInferenceJobResponse, Type: smithy.ShapeTypeStructure})
+var sGetTrainedModelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTrainedModelRequest, Members: &mGetTrainedModelRequest, Type: smithy.ShapeTypeStructure})
+var sGetTrainedModelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTrainedModelResponse, Members: &mGetTrainedModelResponse, Type: smithy.ShapeTypeStructure})
+var sGetTrainingDatasetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTrainingDatasetRequest, Members: &mGetTrainingDatasetRequest, Type: smithy.ShapeTypeStructure})
+var sGetTrainingDatasetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTrainingDatasetResponse, Members: &mGetTrainingDatasetResponse, Type: smithy.ShapeTypeStructure})
+var sListAudienceExportJobsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAudienceExportJobsRequest, Members: &mListAudienceExportJobsRequest, Type: smithy.ShapeTypeStructure})
+var sListAudienceExportJobsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAudienceExportJobsResponse, Members: &mListAudienceExportJobsResponse, Type: smithy.ShapeTypeStructure})
+var sListAudienceGenerationJobsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAudienceGenerationJobsRequest, Members: &mListAudienceGenerationJobsRequest, Type: smithy.ShapeTypeStructure})
+var sListAudienceGenerationJobsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAudienceGenerationJobsResponse, Members: &mListAudienceGenerationJobsResponse, Type: smithy.ShapeTypeStructure})
+var sListAudienceModelsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAudienceModelsRequest, Members: &mListAudienceModelsRequest, Type: smithy.ShapeTypeStructure})
+var sListAudienceModelsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAudienceModelsResponse, Members: &mListAudienceModelsResponse, Type: smithy.ShapeTypeStructure})
+var sListCollaborationConfiguredModelAlgorithmAssociationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCollaborationConfiguredModelAlgorithmAssociationsRequest, Members: &mListCollaborationConfiguredModelAlgorithmAssociationsRequest, Type: smithy.ShapeTypeStructure})
+var sListCollaborationConfiguredModelAlgorithmAssociationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCollaborationConfiguredModelAlgorithmAssociationsResponse, Members: &mListCollaborationConfiguredModelAlgorithmAssociationsResponse, Type: smithy.ShapeTypeStructure})
+var sListCollaborationMLInputChannelsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCollaborationMLInputChannelsRequest, Members: &mListCollaborationMLInputChannelsRequest, Type: smithy.ShapeTypeStructure})
+var sListCollaborationMLInputChannelsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCollaborationMLInputChannelsResponse, Members: &mListCollaborationMLInputChannelsResponse, Type: smithy.ShapeTypeStructure})
+var sListCollaborationTrainedModelExportJobsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCollaborationTrainedModelExportJobsRequest, Members: &mListCollaborationTrainedModelExportJobsRequest, Type: smithy.ShapeTypeStructure})
+var sListCollaborationTrainedModelExportJobsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCollaborationTrainedModelExportJobsResponse, Members: &mListCollaborationTrainedModelExportJobsResponse, Type: smithy.ShapeTypeStructure})
+var sListCollaborationTrainedModelInferenceJobsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCollaborationTrainedModelInferenceJobsRequest, Members: &mListCollaborationTrainedModelInferenceJobsRequest, Type: smithy.ShapeTypeStructure})
+var sListCollaborationTrainedModelInferenceJobsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCollaborationTrainedModelInferenceJobsResponse, Members: &mListCollaborationTrainedModelInferenceJobsResponse, Type: smithy.ShapeTypeStructure})
+var sListCollaborationTrainedModelsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCollaborationTrainedModelsRequest, Members: &mListCollaborationTrainedModelsRequest, Type: smithy.ShapeTypeStructure})
+var sListCollaborationTrainedModelsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCollaborationTrainedModelsResponse, Members: &mListCollaborationTrainedModelsResponse, Type: smithy.ShapeTypeStructure})
+var sListConfiguredAudienceModelsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConfiguredAudienceModelsRequest, Members: &mListConfiguredAudienceModelsRequest, Type: smithy.ShapeTypeStructure})
+var sListConfiguredAudienceModelsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConfiguredAudienceModelsResponse, Members: &mListConfiguredAudienceModelsResponse, Type: smithy.ShapeTypeStructure})
+var sListConfiguredModelAlgorithmAssociationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConfiguredModelAlgorithmAssociationsRequest, Members: &mListConfiguredModelAlgorithmAssociationsRequest, Type: smithy.ShapeTypeStructure})
+var sListConfiguredModelAlgorithmAssociationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConfiguredModelAlgorithmAssociationsResponse, Members: &mListConfiguredModelAlgorithmAssociationsResponse, Type: smithy.ShapeTypeStructure})
+var sListConfiguredModelAlgorithmsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConfiguredModelAlgorithmsRequest, Members: &mListConfiguredModelAlgorithmsRequest, Type: smithy.ShapeTypeStructure})
+var sListConfiguredModelAlgorithmsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConfiguredModelAlgorithmsResponse, Members: &mListConfiguredModelAlgorithmsResponse, Type: smithy.ShapeTypeStructure})
+var sListMLInputChannelsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMLInputChannelsRequest, Members: &mListMLInputChannelsRequest, Type: smithy.ShapeTypeStructure})
+var sListMLInputChannelsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMLInputChannelsResponse, Members: &mListMLInputChannelsResponse, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure})
+var sListTrainedModelInferenceJobsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTrainedModelInferenceJobsRequest, Members: &mListTrainedModelInferenceJobsRequest, Type: smithy.ShapeTypeStructure})
+var sListTrainedModelInferenceJobsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTrainedModelInferenceJobsResponse, Members: &mListTrainedModelInferenceJobsResponse, Type: smithy.ShapeTypeStructure})
+var sListTrainedModelsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTrainedModelsRequest, Members: &mListTrainedModelsRequest, Type: smithy.ShapeTypeStructure})
+var sListTrainedModelsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTrainedModelsResponse, Members: &mListTrainedModelsResponse, Type: smithy.ShapeTypeStructure})
+var sListTrainedModelVersionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTrainedModelVersionsRequest, Members: &mListTrainedModelVersionsRequest, Type: smithy.ShapeTypeStructure})
+var sListTrainedModelVersionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTrainedModelVersionsResponse, Members: &mListTrainedModelVersionsResponse, Type: smithy.ShapeTypeStructure})
+var sListTrainingDatasetsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTrainingDatasetsRequest, Members: &mListTrainingDatasetsRequest, Type: smithy.ShapeTypeStructure})
+var sListTrainingDatasetsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTrainingDatasetsResponse, Members: &mListTrainingDatasetsResponse, Type: smithy.ShapeTypeStructure})
+var sPutConfiguredAudienceModelPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutConfiguredAudienceModelPolicyRequest, Members: &mPutConfiguredAudienceModelPolicyRequest, Type: smithy.ShapeTypeStructure})
+var sPutConfiguredAudienceModelPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutConfiguredAudienceModelPolicyResponse, Members: &mPutConfiguredAudienceModelPolicyResponse, Type: smithy.ShapeTypeStructure})
+var sPutMLConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutMLConfigurationRequest, Members: &mPutMLConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sStartAudienceExportJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartAudienceExportJobRequest, Members: &mStartAudienceExportJobRequest, Type: smithy.ShapeTypeStructure})
+var sStartAudienceGenerationJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartAudienceGenerationJobRequest, Members: &mStartAudienceGenerationJobRequest, Type: smithy.ShapeTypeStructure})
+var sStartAudienceGenerationJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartAudienceGenerationJobResponse, Members: &mStartAudienceGenerationJobResponse, Type: smithy.ShapeTypeStructure})
+var sStartTrainedModelExportJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartTrainedModelExportJobRequest, Members: &mStartTrainedModelExportJobRequest, Type: smithy.ShapeTypeStructure})
+var sStartTrainedModelInferenceJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartTrainedModelInferenceJobRequest, Members: &mStartTrainedModelInferenceJobRequest, Type: smithy.ShapeTypeStructure})
+var sStartTrainedModelInferenceJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartTrainedModelInferenceJobResponse, Members: &mStartTrainedModelInferenceJobResponse, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateConfiguredAudienceModelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConfiguredAudienceModelRequest, Members: &mUpdateConfiguredAudienceModelRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateConfiguredAudienceModelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConfiguredAudienceModelResponse, Members: &mUpdateConfiguredAudienceModelResponse, Type: smithy.ShapeTypeStructure})
+
+var sAccessBudget_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_BudgetedResourceArn, Type: smithy.ShapeTypeString})
+var sAccessBudget_details = smithy.NewStaticSchema(smithy.StaticSchema{Member: "details", ID: &i_AccessBudgetDetailsList, Members: &m_AccessBudgetDetailsList, Type: smithy.ShapeTypeList})
+var sAccessBudget_aggregateRemainingBudget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aggregateRemainingBudget", ID: &i_Budget, Type: smithy.ShapeTypeInteger})
+var sAccessBudgetDetails_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sAccessBudgetDetails_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sAccessBudgetDetails_remainingBudget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remainingBudget", ID: &i_Budget, Type: smithy.ShapeTypeInteger})
+var sAccessBudgetDetails_budget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "budget", ID: &i_Budget, Type: smithy.ShapeTypeInteger})
+var sAccessBudgetDetails_budgetType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "budgetType", ID: &iAccessBudgetType, Members: &mAccessBudgetType, Type: smithy.ShapeTypeEnum})
+var sAccessBudgetDetails_autoRefresh = smithy.NewStaticSchema(smithy.StaticSchema{Member: "autoRefresh", ID: &iAutoRefreshMode, Members: &mAutoRefreshMode, Type: smithy.ShapeTypeEnum})
+var s_AccessBudgetDetailsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAccessBudgetDetails, Members: &mAccessBudgetDetails, Type: smithy.ShapeTypeStructure})
+var s_AccessBudgets_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAccessBudget, Members: &mAccessBudget, Type: smithy.ShapeTypeStructure})
+var sAccessBudgetType_CALENDAR_DAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CALENDAR_DAY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAccessBudgetType_CALENDAR_MONTH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CALENDAR_MONTH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAccessBudgetType_CALENDAR_WEEK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CALENDAR_WEEK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAccessBudgetType_LIFETIME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LIFETIME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var s_AccountIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString})
+var sAudienceDestination_s3Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Destination", ID: &iS3ConfigMap, Members: &mS3ConfigMap, Type: smithy.ShapeTypeStructure})
+var s_AudienceExportJobList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAudienceExportJobSummary, Members: &mAudienceExportJobSummary, Type: smithy.ShapeTypeStructure})
+var sAudienceExportJobStatus_CREATE_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAudienceExportJobStatus_CREATE_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAudienceExportJobStatus_CREATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAudienceExportJobStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAudienceExportJobSummary_createTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sAudienceExportJobSummary_updateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sAudienceExportJobSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sAudienceExportJobSummary_audienceGenerationJobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "audienceGenerationJobArn", ID: &i_AudienceGenerationJobArn, Type: smithy.ShapeTypeString})
+var sAudienceExportJobSummary_audienceSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "audienceSize", ID: &iAudienceSize, Members: &mAudienceSize, Type: smithy.ShapeTypeStructure})
+var sAudienceExportJobSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sAudienceExportJobSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iAudienceExportJobStatus, Members: &mAudienceExportJobStatus, Type: smithy.ShapeTypeEnum})
+var sAudienceExportJobSummary_statusDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusDetails", ID: &iStatusDetails, Members: &mStatusDetails, Type: smithy.ShapeTypeStructure})
+var sAudienceExportJobSummary_outputLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputLocation", ID: &i_S3Path, Type: smithy.ShapeTypeString})
+var sAudienceGenerationJobDataSource_dataSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSource", ID: &iS3ConfigMap, Members: &mS3ConfigMap, Type: smithy.ShapeTypeStructure})
+var sAudienceGenerationJobDataSource_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString})
+var sAudienceGenerationJobDataSource_sqlParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sqlParameters", ID: &iProtectedQuerySQLParameters, Members: &mProtectedQuerySQLParameters, Traits: &t61, Type: smithy.ShapeTypeStructure})
+var sAudienceGenerationJobDataSource_sqlComputeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sqlComputeConfiguration", ID: &iComputeConfiguration, Members: &mComputeConfiguration, Type: smithy.ShapeTypeUnion})
+var s_AudienceGenerationJobList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAudienceGenerationJobSummary, Members: &mAudienceGenerationJobSummary, Type: smithy.ShapeTypeStructure})
+var sAudienceGenerationJobStatus_CREATE_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAudienceGenerationJobStatus_CREATE_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAudienceGenerationJobStatus_CREATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAudienceGenerationJobStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAudienceGenerationJobStatus_DELETE_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAudienceGenerationJobStatus_DELETE_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAudienceGenerationJobStatus_DELETE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAudienceGenerationJobSummary_createTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sAudienceGenerationJobSummary_updateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sAudienceGenerationJobSummary_audienceGenerationJobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "audienceGenerationJobArn", ID: &i_AudienceGenerationJobArn, Type: smithy.ShapeTypeString})
+var sAudienceGenerationJobSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sAudienceGenerationJobSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sAudienceGenerationJobSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iAudienceGenerationJobStatus, Members: &mAudienceGenerationJobStatus, Type: smithy.ShapeTypeEnum})
+var sAudienceGenerationJobSummary_configuredAudienceModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredAudienceModelArn", ID: &i_ConfiguredAudienceModelArn, Type: smithy.ShapeTypeString})
+var sAudienceGenerationJobSummary_collaborationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collaborationId", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sAudienceGenerationJobSummary_startedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedBy", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var s_AudienceModelList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAudienceModelSummary, Members: &mAudienceModelSummary, Type: smithy.ShapeTypeStructure})
+var sAudienceModelStatus_CREATE_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAudienceModelStatus_CREATE_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAudienceModelStatus_CREATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAudienceModelStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAudienceModelStatus_DELETE_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAudienceModelStatus_DELETE_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAudienceModelStatus_DELETE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAudienceModelSummary_createTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sAudienceModelSummary_updateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sAudienceModelSummary_audienceModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "audienceModelArn", ID: &i_AudienceModelArn, Type: smithy.ShapeTypeString})
+var sAudienceModelSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sAudienceModelSummary_trainingDatasetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainingDatasetArn", ID: &i_TrainingDatasetArn, Type: smithy.ShapeTypeString})
+var sAudienceModelSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iAudienceModelStatus, Members: &mAudienceModelStatus, Type: smithy.ShapeTypeEnum})
+var sAudienceModelSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sAudienceQualityMetrics_relevanceMetrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relevanceMetrics", ID: &i_RelevanceMetrics, Members: &m_RelevanceMetrics, Type: smithy.ShapeTypeList})
+var sAudienceQualityMetrics_recallMetric = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recallMetric", ID: &pDouble, Type: smithy.ShapeTypeDouble})
+var sAudienceSize_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iAudienceSizeType, Members: &mAudienceSizeType, Type: smithy.ShapeTypeEnum})
+var sAudienceSize_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_AudienceSizeValue, Type: smithy.ShapeTypeInteger})
+var s_AudienceSizeBins_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AudienceSizeValue, Type: smithy.ShapeTypeInteger})
+var sAudienceSizeConfig_audienceSizeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "audienceSizeType", ID: &iAudienceSizeType, Members: &mAudienceSizeType, Type: smithy.ShapeTypeEnum})
+var sAudienceSizeConfig_audienceSizeBins = smithy.NewStaticSchema(smithy.StaticSchema{Member: "audienceSizeBins", ID: &i_AudienceSizeBins, Members: &m_AudienceSizeBins, Type: smithy.ShapeTypeList})
+var sAudienceSizeType_ABSOLUTE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ABSOLUTE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAudienceSizeType_PERCENTAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PERCENTAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAutoRefreshMode_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAutoRefreshMode_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_CollaborationConfiguredModelAlgorithmAssociationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCollaborationConfiguredModelAlgorithmAssociationSummary, Members: &mCollaborationConfiguredModelAlgorithmAssociationSummary, Type: smithy.ShapeTypeStructure})
+var sCollaborationConfiguredModelAlgorithmAssociationSummary_createTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sCollaborationConfiguredModelAlgorithmAssociationSummary_updateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sCollaborationConfiguredModelAlgorithmAssociationSummary_configuredModelAlgorithmAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredModelAlgorithmAssociationArn", ID: &i_ConfiguredModelAlgorithmAssociationArn, Type: smithy.ShapeTypeString})
+var sCollaborationConfiguredModelAlgorithmAssociationSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sCollaborationConfiguredModelAlgorithmAssociationSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sCollaborationConfiguredModelAlgorithmAssociationSummary_membershipIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "membershipIdentifier", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sCollaborationConfiguredModelAlgorithmAssociationSummary_collaborationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collaborationIdentifier", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sCollaborationConfiguredModelAlgorithmAssociationSummary_configuredModelAlgorithmArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredModelAlgorithmArn", ID: &i_ConfiguredModelAlgorithmArn, Type: smithy.ShapeTypeString})
+var sCollaborationConfiguredModelAlgorithmAssociationSummary_creatorAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creatorAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var s_CollaborationMLInputChannelsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCollaborationMLInputChannelSummary, Members: &mCollaborationMLInputChannelSummary, Type: smithy.ShapeTypeStructure})
+var sCollaborationMLInputChannelSummary_createTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sCollaborationMLInputChannelSummary_updateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sCollaborationMLInputChannelSummary_membershipIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "membershipIdentifier", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sCollaborationMLInputChannelSummary_collaborationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collaborationIdentifier", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sCollaborationMLInputChannelSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sCollaborationMLInputChannelSummary_configuredModelAlgorithmAssociations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredModelAlgorithmAssociations", ID: &i_ConfiguredModelAlgorithmAssociationArnList, Members: &m_ConfiguredModelAlgorithmAssociationArnList, Type: smithy.ShapeTypeList})
+var sCollaborationMLInputChannelSummary_mlInputChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mlInputChannelArn", ID: &i_MLInputChannelArn, Type: smithy.ShapeTypeString})
+var sCollaborationMLInputChannelSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iMLInputChannelStatus, Members: &mMLInputChannelStatus, Type: smithy.ShapeTypeEnum})
+var sCollaborationMLInputChannelSummary_creatorAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creatorAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sCollaborationMLInputChannelSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sCollaborationMLInputChannelSummary_payerConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "payerConfiguration", ID: &iPayerConfiguration, Members: &mPayerConfiguration, Type: smithy.ShapeTypeStructure})
+var s_CollaborationTrainedModelExportJobList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCollaborationTrainedModelExportJobSummary, Members: &mCollaborationTrainedModelExportJobSummary, Type: smithy.ShapeTypeStructure})
+var sCollaborationTrainedModelExportJobSummary_createTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sCollaborationTrainedModelExportJobSummary_updateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sCollaborationTrainedModelExportJobSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sCollaborationTrainedModelExportJobSummary_outputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputConfiguration", ID: &iTrainedModelExportOutputConfiguration, Members: &mTrainedModelExportOutputConfiguration, Type: smithy.ShapeTypeStructure})
+var sCollaborationTrainedModelExportJobSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iTrainedModelExportJobStatus, Members: &mTrainedModelExportJobStatus, Type: smithy.ShapeTypeEnum})
+var sCollaborationTrainedModelExportJobSummary_statusDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusDetails", ID: &iStatusDetails, Members: &mStatusDetails, Type: smithy.ShapeTypeStructure})
+var sCollaborationTrainedModelExportJobSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sCollaborationTrainedModelExportJobSummary_creatorAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creatorAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sCollaborationTrainedModelExportJobSummary_trainedModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainedModelArn", ID: &i_TrainedModelArn, Type: smithy.ShapeTypeString})
+var sCollaborationTrainedModelExportJobSummary_trainedModelVersionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainedModelVersionIdentifier", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sCollaborationTrainedModelExportJobSummary_membershipIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "membershipIdentifier", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sCollaborationTrainedModelExportJobSummary_collaborationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collaborationIdentifier", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var s_CollaborationTrainedModelInferenceJobList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCollaborationTrainedModelInferenceJobSummary, Members: &mCollaborationTrainedModelInferenceJobSummary, Type: smithy.ShapeTypeStructure})
+var sCollaborationTrainedModelInferenceJobSummary_trainedModelInferenceJobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainedModelInferenceJobArn", ID: &i_TrainedModelInferenceJobArn, Type: smithy.ShapeTypeString})
+var sCollaborationTrainedModelInferenceJobSummary_configuredModelAlgorithmAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredModelAlgorithmAssociationArn", ID: &i_ConfiguredModelAlgorithmAssociationArn, Type: smithy.ShapeTypeString})
+var sCollaborationTrainedModelInferenceJobSummary_membershipIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "membershipIdentifier", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sCollaborationTrainedModelInferenceJobSummary_trainedModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainedModelArn", ID: &i_TrainedModelArn, Type: smithy.ShapeTypeString})
+var sCollaborationTrainedModelInferenceJobSummary_trainedModelVersionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainedModelVersionIdentifier", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sCollaborationTrainedModelInferenceJobSummary_collaborationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collaborationIdentifier", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sCollaborationTrainedModelInferenceJobSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iTrainedModelInferenceJobStatus, Members: &mTrainedModelInferenceJobStatus, Type: smithy.ShapeTypeEnum})
+var sCollaborationTrainedModelInferenceJobSummary_outputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputConfiguration", ID: &iInferenceOutputConfiguration, Members: &mInferenceOutputConfiguration, Type: smithy.ShapeTypeStructure})
+var sCollaborationTrainedModelInferenceJobSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sCollaborationTrainedModelInferenceJobSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sCollaborationTrainedModelInferenceJobSummary_metricsStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metricsStatus", ID: &iMetricsStatus, Members: &mMetricsStatus, Type: smithy.ShapeTypeEnum})
+var sCollaborationTrainedModelInferenceJobSummary_metricsStatusDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metricsStatusDetails", ID: &pString, Type: smithy.ShapeTypeString})
+var sCollaborationTrainedModelInferenceJobSummary_logsStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logsStatus", ID: &iLogsStatus, Members: &mLogsStatus, Type: smithy.ShapeTypeEnum})
+var sCollaborationTrainedModelInferenceJobSummary_logsStatusDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logsStatusDetails", ID: &pString, Type: smithy.ShapeTypeString})
+var sCollaborationTrainedModelInferenceJobSummary_mlModelInferencePayerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mlModelInferencePayerAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sCollaborationTrainedModelInferenceJobSummary_createTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sCollaborationTrainedModelInferenceJobSummary_updateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sCollaborationTrainedModelInferenceJobSummary_creatorAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creatorAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var s_CollaborationTrainedModelList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCollaborationTrainedModelSummary, Members: &mCollaborationTrainedModelSummary, Type: smithy.ShapeTypeStructure})
+var sCollaborationTrainedModelSummary_createTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sCollaborationTrainedModelSummary_updateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sCollaborationTrainedModelSummary_trainedModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainedModelArn", ID: &i_TrainedModelArn, Type: smithy.ShapeTypeString})
+var sCollaborationTrainedModelSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sCollaborationTrainedModelSummary_versionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionIdentifier", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sCollaborationTrainedModelSummary_incrementalTrainingDataChannels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "incrementalTrainingDataChannels", ID: &i_IncrementalTrainingDataChannelsOutput, Members: &m_IncrementalTrainingDataChannelsOutput, Type: smithy.ShapeTypeList})
+var sCollaborationTrainedModelSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sCollaborationTrainedModelSummary_membershipIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "membershipIdentifier", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sCollaborationTrainedModelSummary_collaborationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collaborationIdentifier", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sCollaborationTrainedModelSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iTrainedModelStatus, Members: &mTrainedModelStatus, Type: smithy.ShapeTypeEnum})
+var sCollaborationTrainedModelSummary_configuredModelAlgorithmAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredModelAlgorithmAssociationArn", ID: &i_ConfiguredModelAlgorithmAssociationArn, Type: smithy.ShapeTypeString})
+var sCollaborationTrainedModelSummary_creatorAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creatorAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sCollaborationTrainedModelSummary_mlModelTrainingPayerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mlModelTrainingPayerAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sColumnClassificationDetails_columnMapping = smithy.NewStaticSchema(smithy.StaticSchema{Member: "columnMapping", ID: &i_ColumnMappingList, Members: &m_ColumnMappingList, Type: smithy.ShapeTypeList})
+var s_ColumnMappingList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSyntheticDataColumnProperties, Members: &mSyntheticDataColumnProperties, Type: smithy.ShapeTypeStructure})
+var sColumnSchema_columnName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "columnName", ID: &i_ColumnName, Type: smithy.ShapeTypeString})
+var sColumnSchema_columnTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "columnTypes", ID: &i_ColumnTypeList, Members: &m_ColumnTypeList, Type: smithy.ShapeTypeList})
+var sColumnType_USER_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USER_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sColumnType_ITEM_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ITEM_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sColumnType_TIMESTAMP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIMESTAMP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sColumnType_CATEGORICAL_FEATURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CATEGORICAL_FEATURE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sColumnType_NUMERICAL_FEATURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NUMERICAL_FEATURE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_ColumnTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iColumnType, Members: &mColumnType, Type: smithy.ShapeTypeEnum})
+var sComputeConfiguration_worker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "worker", ID: &iWorkerComputeConfiguration, Members: &mWorkerComputeConfiguration, Type: smithy.ShapeTypeStructure})
+var s_ConfiguredAudienceModelList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConfiguredAudienceModelSummary, Members: &mConfiguredAudienceModelSummary, Type: smithy.ShapeTypeStructure})
+var sConfiguredAudienceModelOutputConfig_destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destination", ID: &iAudienceDestination, Members: &mAudienceDestination, Type: smithy.ShapeTypeStructure})
+var sConfiguredAudienceModelOutputConfig_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString})
+var sConfiguredAudienceModelStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConfiguredAudienceModelSummary_createTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sConfiguredAudienceModelSummary_updateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sConfiguredAudienceModelSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sConfiguredAudienceModelSummary_audienceModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "audienceModelArn", ID: &i_AudienceModelArn, Type: smithy.ShapeTypeString})
+var sConfiguredAudienceModelSummary_outputConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputConfig", ID: &iConfiguredAudienceModelOutputConfig, Members: &mConfiguredAudienceModelOutputConfig, Type: smithy.ShapeTypeStructure})
+var sConfiguredAudienceModelSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sConfiguredAudienceModelSummary_configuredAudienceModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredAudienceModelArn", ID: &i_ConfiguredAudienceModelArn, Type: smithy.ShapeTypeString})
+var sConfiguredAudienceModelSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iConfiguredAudienceModelStatus, Members: &mConfiguredAudienceModelStatus, Type: smithy.ShapeTypeEnum})
+var s_ConfiguredModelAlgorithmAssociationArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ConfiguredModelAlgorithmAssociationArn, Type: smithy.ShapeTypeString})
+var s_ConfiguredModelAlgorithmAssociationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConfiguredModelAlgorithmAssociationSummary, Members: &mConfiguredModelAlgorithmAssociationSummary, Type: smithy.ShapeTypeStructure})
+var sConfiguredModelAlgorithmAssociationSummary_createTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sConfiguredModelAlgorithmAssociationSummary_updateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sConfiguredModelAlgorithmAssociationSummary_configuredModelAlgorithmAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredModelAlgorithmAssociationArn", ID: &i_ConfiguredModelAlgorithmAssociationArn, Type: smithy.ShapeTypeString})
+var sConfiguredModelAlgorithmAssociationSummary_configuredModelAlgorithmArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredModelAlgorithmArn", ID: &i_ConfiguredModelAlgorithmArn, Type: smithy.ShapeTypeString})
+var sConfiguredModelAlgorithmAssociationSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sConfiguredModelAlgorithmAssociationSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sConfiguredModelAlgorithmAssociationSummary_membershipIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "membershipIdentifier", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sConfiguredModelAlgorithmAssociationSummary_collaborationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collaborationIdentifier", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var s_ConfiguredModelAlgorithmList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConfiguredModelAlgorithmSummary, Members: &mConfiguredModelAlgorithmSummary, Type: smithy.ShapeTypeStructure})
+var sConfiguredModelAlgorithmSummary_createTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sConfiguredModelAlgorithmSummary_updateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sConfiguredModelAlgorithmSummary_configuredModelAlgorithmArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredModelAlgorithmArn", ID: &i_ConfiguredModelAlgorithmArn, Type: smithy.ShapeTypeString})
+var sConfiguredModelAlgorithmSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sConfiguredModelAlgorithmSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var s_ContainerArguments_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ContainerArgument, Type: smithy.ShapeTypeString})
+var sContainerConfig_imageUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageUri", ID: &i_AlgorithmImage, Type: smithy.ShapeTypeString})
+var sContainerConfig_entrypoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entrypoint", ID: &i_ContainerEntrypoint, Members: &m_ContainerEntrypoint, Type: smithy.ShapeTypeList})
+var sContainerConfig_arguments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arguments", ID: &i_ContainerArguments, Members: &m_ContainerArguments, Type: smithy.ShapeTypeList})
+var sContainerConfig_metricDefinitions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metricDefinitions", ID: &i_MetricDefinitionList, Members: &m_MetricDefinitionList, Type: smithy.ShapeTypeList})
+var s_ContainerEntrypoint_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ContainerEntrypointString, Type: smithy.ShapeTypeString})
+var s_CustomDataIdentifierList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CustomDataIdentifier, Type: smithy.ShapeTypeString})
+var sCustomEntityConfig_customDataIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customDataIdentifiers", ID: &i_CustomDataIdentifierList, Members: &m_CustomDataIdentifierList, Type: smithy.ShapeTypeList})
+var sDataPrivacyScores_membershipInferenceAttackScores = smithy.NewStaticSchema(smithy.StaticSchema{Member: "membershipInferenceAttackScores", ID: &i_MembershipInferenceAttackScoreList, Members: &m_MembershipInferenceAttackScoreList, Type: smithy.ShapeTypeList})
+var sDataset_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iDatasetType, Members: &mDatasetType, Type: smithy.ShapeTypeEnum})
+var sDataset_inputConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputConfig", ID: &iDatasetInputConfig, Members: &mDatasetInputConfig, Type: smithy.ShapeTypeStructure})
+var sDatasetInputConfig_schema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schema", ID: &i_DatasetSchemaList, Members: &m_DatasetSchemaList, Type: smithy.ShapeTypeList})
+var sDatasetInputConfig_dataSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSource", ID: &iDataSource, Members: &mDataSource, Type: smithy.ShapeTypeStructure})
+var s_DatasetList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDataset, Members: &mDataset, Type: smithy.ShapeTypeStructure})
+var s_DatasetSchemaList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iColumnSchema, Members: &mColumnSchema, Type: smithy.ShapeTypeStructure})
+var sDatasetType_INTERACTIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERACTIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataSource_glueDataSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "glueDataSource", ID: &iGlueDataSource, Members: &mGlueDataSource, Type: smithy.ShapeTypeStructure})
+var sDestination_s3Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Destination", ID: &iS3ConfigMap, Members: &mS3ConfigMap, Type: smithy.ShapeTypeStructure})
+var sEntityType_ALL_PERSONALLY_IDENTIFIABLE_INFORMATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL_PERSONALLY_IDENTIFIABLE_INFORMATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntityType_NUMBERS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NUMBERS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntityType_CUSTOM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_EntityTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEntityType, Members: &mEntityType, Type: smithy.ShapeTypeEnum})
+var s_Environment_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString})
+var s_Environment_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString})
+var sGlueDataSource_tableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableName", ID: &i_GlueTableName, Type: smithy.ShapeTypeString})
+var sGlueDataSource_databaseName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "databaseName", ID: &i_GlueDatabaseName, Type: smithy.ShapeTypeString})
+var sGlueDataSource_catalogId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "catalogId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var s_HyperParameters_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString})
+var s_HyperParameters_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString})
+var sIncrementalTrainingDataChannel_trainedModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainedModelArn", ID: &i_TrainedModelArn, Type: smithy.ShapeTypeString})
+var sIncrementalTrainingDataChannel_versionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionIdentifier", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sIncrementalTrainingDataChannel_channelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelName", ID: &i_ModelTrainingDataChannelName, Type: smithy.ShapeTypeString})
+var sIncrementalTrainingDataChannelOutput_channelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelName", ID: &i_ModelTrainingDataChannelName, Type: smithy.ShapeTypeString})
+var sIncrementalTrainingDataChannelOutput_versionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionIdentifier", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sIncrementalTrainingDataChannelOutput_modelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelName", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var s_IncrementalTrainingDataChannels_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIncrementalTrainingDataChannel, Members: &mIncrementalTrainingDataChannel, Type: smithy.ShapeTypeStructure})
+var s_IncrementalTrainingDataChannelsOutput_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIncrementalTrainingDataChannelOutput, Members: &mIncrementalTrainingDataChannelOutput, Type: smithy.ShapeTypeStructure})
+var sInferenceContainerConfig_imageUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageUri", ID: &i_AlgorithmImage, Type: smithy.ShapeTypeString})
+var sInferenceContainerExecutionParameters_maxPayloadInMB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxPayloadInMB", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var s_InferenceEnvironmentMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString})
+var s_InferenceEnvironmentMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString})
+var sInferenceInstanceType_ML_R7I_48XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_R7I_48XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_R6I_16XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_R6I_16XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_M6I_XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M6I_XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_M5_4XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M5_4XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_P2_XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_P2_XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_M4_16XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M4_16XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_R7I_16XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_R7I_16XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_M7I_XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M7I_XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_M6I_12XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M6I_12XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_R7I_8XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_R7I_8XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_R7I_LARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_R7I_LARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_M7I_12XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M7I_12XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_M6I_24XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M6I_24XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_M7I_24XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M7I_24XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_R6I_8XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_R6I_8XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_R6I_LARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_R6I_LARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_G5_2XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_G5_2XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_M5_LARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M5_LARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_M7I_48XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M7I_48XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_M6I_16XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M6I_16XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_P2_16XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_P2_16XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_G5_4XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_G5_4XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_M7I_16XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M7I_16XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_C4_2XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C4_2XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_C5_2XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C5_2XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_C6I_32XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C6I_32XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_C4_4XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C4_4XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_G5_8XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_G5_8XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_C6I_XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C6I_XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_C5_4XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C5_4XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_G4DN_XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_G4DN_XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_C7I_XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C7I_XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_C6I_12XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C6I_12XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_G4DN_12XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_G4DN_12XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_C7I_12XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C7I_12XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_C6I_24XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C6I_24XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_G4DN_2XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_G4DN_2XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_C7I_24XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C7I_24XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_C7I_2XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C7I_2XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_C4_8XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C4_8XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_C6I_2XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C6I_2XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_G4DN_4XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_G4DN_4XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_C7I_48XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C7I_48XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_C7I_4XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C7I_4XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_C6I_16XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C6I_16XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_C5_9XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C5_9XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_G4DN_16XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_G4DN_16XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_C7I_16XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C7I_16XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_C6I_4XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C6I_4XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_C5_XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C5_XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_C4_XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C4_XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_G4DN_8XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_G4DN_8XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_C7I_8XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C7I_8XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_C7I_LARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C7I_LARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_G5_XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_G5_XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_C6I_8XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C6I_8XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_C6I_LARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C6I_LARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_G5_12XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_G5_12XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_G5_24XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_G5_24XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_M7I_2XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M7I_2XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_C5_18XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C5_18XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_G5_48XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_G5_48XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_M6I_2XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M6I_2XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_G5_16XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_G5_16XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_M7I_4XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M7I_4XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_R6I_32XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_R6I_32XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_M6I_4XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M6I_4XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_M5_XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M5_XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_M4_10XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M4_10XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_R6I_XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_R6I_XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_M5_12XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M5_12XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_M4_XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M4_XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_R7I_2XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_R7I_2XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_R7I_XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_R7I_XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_R6I_12XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_R6I_12XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_M5_24XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M5_24XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_R7I_12XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_R7I_12XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_M7I_8XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M7I_8XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_M7I_LARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M7I_LARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_R6I_24XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_R6I_24XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_R6I_2XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_R6I_2XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_M4_2XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M4_2XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_R7I_24XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_R7I_24XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_R7I_4XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_R7I_4XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_M6I_8XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M6I_8XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_M6I_LARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M6I_LARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_M5_2XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M5_2XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_P2_8XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_P2_8XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_R6I_4XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_R6I_4XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_M6I_32XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M6I_32XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_M4_4XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M4_4XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_P3_16XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_P3_16XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_P3_2XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_P3_2XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceInstanceType_ML_P3_8XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_P3_8XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceOutputConfiguration_accept = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accept", ID: &pString, Type: smithy.ShapeTypeString})
+var sInferenceOutputConfiguration_members = smithy.NewStaticSchema(smithy.StaticSchema{Member: "members", ID: &i_InferenceReceiverMembers, Members: &m_InferenceReceiverMembers, Type: smithy.ShapeTypeList})
+var sInferenceReceiverMember_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var s_InferenceReceiverMembers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInferenceReceiverMember, Members: &mInferenceReceiverMember, Type: smithy.ShapeTypeStructure})
+var sInferenceResourceConfig_instanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceType", ID: &iInferenceInstanceType, Members: &mInferenceInstanceType, Type: smithy.ShapeTypeEnum})
+var sInferenceResourceConfig_instanceCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceCount", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sInputChannel_dataSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSource", ID: &iInputChannelDataSource, Members: &mInputChannelDataSource, Type: smithy.ShapeTypeUnion})
+var sInputChannel_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString})
+var sInputChannelDataSource_protectedQueryInputParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "protectedQueryInputParameters", ID: &iProtectedQueryInputParameters, Members: &mProtectedQueryInputParameters, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_M4_XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M4_XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_M4_2XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M4_2XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_M4_4XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M4_4XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_M4_10XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M4_10XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_M4_16XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M4_16XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_G4DN_XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_G4DN_XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_G4DN_2XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_G4DN_2XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_G4DN_4XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_G4DN_4XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_G4DN_8XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_G4DN_8XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_G4DN_12XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_G4DN_12XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_G4DN_16XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_G4DN_16XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_M5_LARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M5_LARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_M5_XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M5_XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_M5_2XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M5_2XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_M5_4XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M5_4XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_M5_12XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M5_12XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_M5_24XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M5_24XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_C4_XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C4_XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_C4_2XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C4_2XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_C4_4XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C4_4XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_C4_8XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C4_8XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_P2_XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_P2_XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_P2_8XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_P2_8XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_P2_16XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_P2_16XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_P4D_24XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_P4D_24XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_P4DE_24XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_P4DE_24XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_P5_48XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_P5_48XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_C5_XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C5_XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_C5_2XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C5_2XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_C5_4XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C5_4XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_C5_9XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C5_9XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_C5_18XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C5_18XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_C5N_XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C5N_XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_C5N_2XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C5N_2XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_C5N_4XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C5N_4XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_C5N_9XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C5N_9XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_C5N_18XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C5N_18XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_G5_XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_G5_XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_G5_2XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_G5_2XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_G5_4XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_G5_4XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_G5_8XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_G5_8XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_G5_16XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_G5_16XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_G5_12XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_G5_12XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_G5_24XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_G5_24XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_G5_48XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_G5_48XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_TRN1_2XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_TRN1_2XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_TRN1_32XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_TRN1_32XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_TRN1N_32XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_TRN1N_32XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_M6I_LARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M6I_LARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_M6I_XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M6I_XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_M6I_2XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M6I_2XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_M6I_4XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M6I_4XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_M6I_8XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M6I_8XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_M6I_12XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M6I_12XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_M6I_16XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M6I_16XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_M6I_24XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M6I_24XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_M6I_32XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M6I_32XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_C6I_XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C6I_XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_C6I_2XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C6I_2XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_C6I_8XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C6I_8XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_C6I_4XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C6I_4XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_C6I_12XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C6I_12XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_C6I_16XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C6I_16XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_C6I_24XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C6I_24XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_C6I_32XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C6I_32XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_R5D_LARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_R5D_LARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_R5D_XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_R5D_XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_R5D_2XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_R5D_2XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_R5D_4XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_R5D_4XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_R5D_8XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_R5D_8XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_R5D_12XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_R5D_12XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_R5D_16XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_R5D_16XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_R5D_24XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_R5D_24XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_T3_MEDIUM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_T3_MEDIUM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_T3_LARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_T3_LARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_T3_XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_T3_XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_T3_2XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_T3_2XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_R5_LARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_R5_LARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_R5_XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_R5_XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_R5_2XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_R5_2XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_R5_4XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_R5_4XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_R5_8XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_R5_8XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_R5_12XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_R5_12XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_R5_16XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_R5_16XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_R5_24XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_R5_24XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_C7I_LARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C7I_LARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_C7I_XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C7I_XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_C7I_2XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C7I_2XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_C7I_4XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C7I_4XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_C7I_8XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C7I_8XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_C7I_12XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C7I_12XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_C7I_16XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C7I_16XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_C7I_24XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C7I_24XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_C7I_48XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_C7I_48XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_M7I_LARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M7I_LARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_M7I_XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M7I_XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_M7I_2XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M7I_2XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_M7I_4XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M7I_4XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_M7I_8XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M7I_8XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_M7I_12XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M7I_12XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_M7I_16XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M7I_16XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_M7I_24XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M7I_24XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_M7I_48XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_M7I_48XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_R7I_LARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_R7I_LARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_R7I_XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_R7I_XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_R7I_2XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_R7I_2XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_R7I_4XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_R7I_4XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_R7I_8XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_R7I_8XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_R7I_12XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_R7I_12XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_R7I_16XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_R7I_16XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_R7I_24XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_R7I_24XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_R7I_48XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_R7I_48XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_G6_XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_G6_XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_G6_2XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_G6_2XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_G6_4XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_G6_4XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_G6_8XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_G6_8XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_G6_12XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_G6_12XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_G6_16XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_G6_16XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_G6_24XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_G6_24XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_G6_48XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_G6_48XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_G6E_XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_G6E_XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_G6E_2XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_G6E_2XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_G6E_4XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_G6E_4XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_G6E_8XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_G6E_8XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_G6E_12XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_G6E_12XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_G6E_16XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_G6E_16XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_G6E_24XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_G6E_24XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_G6E_48XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_G6E_48XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_P5EN_48XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_P5EN_48XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_P3_2XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_P3_2XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_P3_8XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_P3_8XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_P3_16XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_P3_16XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstanceType_ML_P3DN_24XLARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_P3DN_24XLARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInternalServiceException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sLogRedactionConfiguration_entitiesToRedact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entitiesToRedact", ID: &i_EntityTypeList, Members: &m_EntityTypeList, Type: smithy.ShapeTypeList})
+var sLogRedactionConfiguration_customEntityConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customEntityConfig", ID: &iCustomEntityConfig, Members: &mCustomEntityConfig, Type: smithy.ShapeTypeStructure})
+var sLogsConfigurationPolicy_allowedAccountIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allowedAccountIds", ID: &i_AccountIdList, Members: &m_AccountIdList, Type: smithy.ShapeTypeList})
+var sLogsConfigurationPolicy_filterPattern = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filterPattern", ID: &pString, Type: smithy.ShapeTypeString})
+var sLogsConfigurationPolicy_logType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logType", ID: &iLogType, Members: &mLogType, Type: smithy.ShapeTypeEnum})
+var sLogsConfigurationPolicy_logRedactionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logRedactionConfiguration", ID: &iLogRedactionConfiguration, Members: &mLogRedactionConfiguration, Type: smithy.ShapeTypeStructure})
+var s_LogsConfigurationPolicyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLogsConfigurationPolicy, Members: &mLogsConfigurationPolicy, Type: smithy.ShapeTypeStructure})
+var sLogsStatus_PUBLISH_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PUBLISH_SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLogsStatus_PUBLISH_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PUBLISH_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLogType_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLogType_ERROR_SUMMARY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR_SUMMARY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMembershipInferenceAttackScore_attackVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attackVersion", ID: &iMembershipInferenceAttackVersion, Members: &mMembershipInferenceAttackVersion, Type: smithy.ShapeTypeEnum})
+var sMembershipInferenceAttackScore_score = smithy.NewStaticSchema(smithy.StaticSchema{Member: "score", ID: &pDouble, Type: smithy.ShapeTypeDouble})
+var s_MembershipInferenceAttackScoreList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMembershipInferenceAttackScore, Members: &mMembershipInferenceAttackScore, Type: smithy.ShapeTypeStructure})
+var sMembershipInferenceAttackVersion_DISTANCE_TO_CLOSEST_RECORD_V1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISTANCE_TO_CLOSEST_RECORD_V1", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricDefinition_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_MetricName, Type: smithy.ShapeTypeString})
+var sMetricDefinition_regex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regex", ID: &i_MetricRegex, Type: smithy.ShapeTypeString})
+var s_MetricDefinitionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMetricDefinition, Members: &mMetricDefinition, Type: smithy.ShapeTypeStructure})
+var sMetricsConfigurationPolicy_noiseLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "noiseLevel", ID: &iNoiseLevelType, Members: &mNoiseLevelType, Type: smithy.ShapeTypeEnum})
+var s_MetricsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSharedAudienceMetrics, Members: &mSharedAudienceMetrics, Type: smithy.ShapeTypeEnum})
+var sMetricsStatus_PUBLISH_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PUBLISH_SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricsStatus_PUBLISH_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PUBLISH_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_MLInputChannelsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMLInputChannelSummary, Members: &mMLInputChannelSummary, Type: smithy.ShapeTypeStructure})
+var sMLInputChannelStatus_CREATE_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMLInputChannelStatus_CREATE_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMLInputChannelStatus_CREATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMLInputChannelStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMLInputChannelStatus_DELETE_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMLInputChannelStatus_DELETE_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMLInputChannelStatus_DELETE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMLInputChannelStatus_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMLInputChannelSummary_createTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sMLInputChannelSummary_updateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sMLInputChannelSummary_membershipIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "membershipIdentifier", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sMLInputChannelSummary_collaborationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collaborationIdentifier", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sMLInputChannelSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sMLInputChannelSummary_configuredModelAlgorithmAssociations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredModelAlgorithmAssociations", ID: &i_ConfiguredModelAlgorithmAssociationArnList, Members: &m_ConfiguredModelAlgorithmAssociationArnList, Type: smithy.ShapeTypeList})
+var sMLInputChannelSummary_protectedQueryIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "protectedQueryIdentifier", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sMLInputChannelSummary_mlInputChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mlInputChannelArn", ID: &i_MLInputChannelArn, Type: smithy.ShapeTypeString})
+var sMLInputChannelSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iMLInputChannelStatus, Members: &mMLInputChannelStatus, Type: smithy.ShapeTypeEnum})
+var sMLInputChannelSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sMLInputChannelSummary_payerConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "payerConfiguration", ID: &iPayerConfiguration, Members: &mPayerConfiguration, Type: smithy.ShapeTypeStructure})
+var sMLOutputConfiguration_destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destination", ID: &iDestination, Members: &mDestination, Type: smithy.ShapeTypeStructure})
+var sMLOutputConfiguration_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString})
+var sMLSyntheticDataParameters_epsilon = smithy.NewStaticSchema(smithy.StaticSchema{Member: "epsilon", ID: &pDouble, Type: smithy.ShapeTypeDouble})
+var sMLSyntheticDataParameters_maxMembershipInferenceAttackScore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxMembershipInferenceAttackScore", ID: &pDouble, Type: smithy.ShapeTypeDouble})
+var sMLSyntheticDataParameters_columnClassification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "columnClassification", ID: &iColumnClassificationDetails, Members: &mColumnClassificationDetails, Type: smithy.ShapeTypeStructure})
+var sModelInferenceDataSource_mlInputChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mlInputChannelArn", ID: &i_MLInputChannelArn, Type: smithy.ShapeTypeString})
+var sModelTrainingDataChannel_mlInputChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mlInputChannelArn", ID: &i_MLInputChannelArn, Type: smithy.ShapeTypeString})
+var sModelTrainingDataChannel_channelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelName", ID: &i_ModelTrainingDataChannelName, Type: smithy.ShapeTypeString})
+var sModelTrainingDataChannel_s3DataDistributionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3DataDistributionType", ID: &iS3DataDistributionType, Members: &mS3DataDistributionType, Type: smithy.ShapeTypeEnum})
+var s_ModelTrainingDataChannels_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iModelTrainingDataChannel, Members: &mModelTrainingDataChannel, Type: smithy.ShapeTypeStructure})
+var sNoiseLevelType_HIGH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HIGH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNoiseLevelType_MEDIUM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEDIUM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNoiseLevelType_LOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNoiseLevelType_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_ParameterMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ParameterName, Type: smithy.ShapeTypeString})
+var s_ParameterMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ParameterValue, Type: smithy.ShapeTypeString})
+var sPayerConfiguration_computePayerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computePayerAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sPayerConfiguration_syntheticDataPayerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "syntheticDataPayerAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sPolicyExistenceCondition_POLICY_MUST_EXIST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POLICY_MUST_EXIST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPolicyExistenceCondition_POLICY_MUST_NOT_EXIST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POLICY_MUST_NOT_EXIST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPrivacyBudgets_accessBudgets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessBudgets", ID: &i_AccessBudgets, Members: &m_AccessBudgets, Type: smithy.ShapeTypeList})
+var sPrivacyConfiguration_policies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policies", ID: &iPrivacyConfigurationPolicies, Members: &mPrivacyConfigurationPolicies, Type: smithy.ShapeTypeStructure})
+var sPrivacyConfigurationPolicies_trainedModels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainedModels", ID: &iTrainedModelsConfigurationPolicy, Members: &mTrainedModelsConfigurationPolicy, Type: smithy.ShapeTypeStructure})
+var sPrivacyConfigurationPolicies_trainedModelExports = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainedModelExports", ID: &iTrainedModelExportsConfigurationPolicy, Members: &mTrainedModelExportsConfigurationPolicy, Type: smithy.ShapeTypeStructure})
+var sPrivacyConfigurationPolicies_trainedModelInferenceJobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainedModelInferenceJobs", ID: &iTrainedModelInferenceJobsConfigurationPolicy, Members: &mTrainedModelInferenceJobsConfigurationPolicy, Type: smithy.ShapeTypeStructure})
+var sProtectedQueryInputParameters_sqlParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sqlParameters", ID: &iProtectedQuerySQLParameters, Members: &mProtectedQuerySQLParameters, Traits: &t61, Type: smithy.ShapeTypeStructure})
+var sProtectedQueryInputParameters_computeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeConfiguration", ID: &iComputeConfiguration, Members: &mComputeConfiguration, Type: smithy.ShapeTypeUnion})
+var sProtectedQueryInputParameters_resultFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resultFormat", ID: &iResultFormat, Members: &mResultFormat, Type: smithy.ShapeTypeEnum})
+var sProtectedQuerySQLParameters_queryString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryString", ID: &pString, Type: smithy.ShapeTypeString})
+var sProtectedQuerySQLParameters_analysisTemplateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "analysisTemplateArn", ID: &i_AnalysisTemplateArn, Type: smithy.ShapeTypeString})
+var sProtectedQuerySQLParameters_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_ParameterMap, Members: &m_ParameterMap, Traits: &t61, Type: smithy.ShapeTypeMap})
+var sRelevanceMetric_audienceSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "audienceSize", ID: &iAudienceSize, Members: &mAudienceSize, Type: smithy.ShapeTypeStructure})
+var sRelevanceMetric_score = smithy.NewStaticSchema(smithy.StaticSchema{Member: "score", ID: &pDouble, Type: smithy.ShapeTypeDouble})
+var s_RelevanceMetrics_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRelevanceMetric, Members: &mRelevanceMetric, Type: smithy.ShapeTypeStructure})
+var sResourceConfig_instanceCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceCount", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sResourceConfig_instanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceType", ID: &iInstanceType, Members: &mInstanceType, Type: smithy.ShapeTypeEnum})
+var sResourceConfig_volumeSizeInGB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "volumeSizeInGB", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sResultFormat_CSV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CSV", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResultFormat_PARQUET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PARQUET", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sS3ConfigMap_s3Uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Uri", ID: &i_S3Path, Type: smithy.ShapeTypeString})
+var sS3DataDistributionType_FULLY_REPLICATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FULLY_REPLICATED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sS3DataDistributionType_SHARDED_BY_S3_KEY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHARDED_BY_S3_KEY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_quotaName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaName", ID: &pString, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_quotaValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaValue", ID: &pDouble, Type: smithy.ShapeTypeDouble})
+var sSharedAudienceMetrics_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSharedAudienceMetrics_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_SparkProperties_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_SparkPropertyKey, Type: smithy.ShapeTypeString})
+var s_SparkProperties_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_SparkPropertyValue, Type: smithy.ShapeTypeString})
+var sStatusDetails_statusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusCode", ID: &pString, Type: smithy.ShapeTypeString})
+var sStatusDetails_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sStoppingCondition_maxRuntimeInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxRuntimeInSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sSyntheticDataColumnProperties_columnName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "columnName", ID: &i_SyntheticDataColumnName, Type: smithy.ShapeTypeString})
+var sSyntheticDataColumnProperties_columnType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "columnType", ID: &iSyntheticDataColumnType, Members: &mSyntheticDataColumnType, Type: smithy.ShapeTypeEnum})
+var sSyntheticDataColumnProperties_isPredictiveValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isPredictiveValue", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSyntheticDataColumnType_CATEGORICAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CATEGORICAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSyntheticDataColumnType_NUMERICAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NUMERICAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSyntheticDataConfiguration_syntheticDataParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "syntheticDataParameters", ID: &iMLSyntheticDataParameters, Members: &mMLSyntheticDataParameters, Type: smithy.ShapeTypeStructure})
+var sSyntheticDataConfiguration_syntheticDataEvaluationScores = smithy.NewStaticSchema(smithy.StaticSchema{Member: "syntheticDataEvaluationScores", ID: &iSyntheticDataEvaluationScores, Members: &mSyntheticDataEvaluationScores, Type: smithy.ShapeTypeStructure})
+var sSyntheticDataEvaluationScores_dataPrivacyScores = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataPrivacyScores", ID: &iDataPrivacyScores, Members: &mDataPrivacyScores, Type: smithy.ShapeTypeStructure})
+var s_TagKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sTagOnCreatePolicy_FROM_PARENT_RESOURCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FROM_PARENT_RESOURCE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTagOnCreatePolicy_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sTrainedModelArtifactMaxSize_unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unit", ID: &iTrainedModelArtifactMaxSizeUnitType, Members: &mTrainedModelArtifactMaxSizeUnitType, Type: smithy.ShapeTypeEnum})
+var sTrainedModelArtifactMaxSize_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TrainedModelArtifactMaxSizeValue, Type: smithy.ShapeTypeDouble})
+var sTrainedModelArtifactMaxSizeUnitType_GB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GB", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrainedModelExportFileType_MODEL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MODEL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrainedModelExportFileType_OUTPUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OUTPUT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_TrainedModelExportFileTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTrainedModelExportFileType, Members: &mTrainedModelExportFileType, Type: smithy.ShapeTypeEnum})
+var sTrainedModelExportJobStatus_CREATE_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrainedModelExportJobStatus_CREATE_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrainedModelExportJobStatus_CREATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrainedModelExportJobStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrainedModelExportOutputConfiguration_members = smithy.NewStaticSchema(smithy.StaticSchema{Member: "members", ID: &i_TrainedModelExportReceiverMembers, Members: &m_TrainedModelExportReceiverMembers, Type: smithy.ShapeTypeList})
+var sTrainedModelExportReceiverMember_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var s_TrainedModelExportReceiverMembers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTrainedModelExportReceiverMember, Members: &mTrainedModelExportReceiverMember, Type: smithy.ShapeTypeStructure})
+var sTrainedModelExportsConfigurationPolicy_maxSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxSize", ID: &iTrainedModelExportsMaxSize, Members: &mTrainedModelExportsMaxSize, Type: smithy.ShapeTypeStructure})
+var sTrainedModelExportsConfigurationPolicy_filesToExport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filesToExport", ID: &i_TrainedModelExportFileTypeList, Members: &m_TrainedModelExportFileTypeList, Type: smithy.ShapeTypeList})
+var sTrainedModelExportsMaxSize_unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unit", ID: &iTrainedModelExportsMaxSizeUnitType, Members: &mTrainedModelExportsMaxSizeUnitType, Type: smithy.ShapeTypeEnum})
+var sTrainedModelExportsMaxSize_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TrainedModelExportsMaxSizeValue, Type: smithy.ShapeTypeDouble})
+var sTrainedModelExportsMaxSizeUnitType_GB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GB", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_TrainedModelInferenceJobList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTrainedModelInferenceJobSummary, Members: &mTrainedModelInferenceJobSummary, Type: smithy.ShapeTypeStructure})
+var sTrainedModelInferenceJobsConfigurationPolicy_containerLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "containerLogs", ID: &i_LogsConfigurationPolicyList, Members: &m_LogsConfigurationPolicyList, Type: smithy.ShapeTypeList})
+var sTrainedModelInferenceJobsConfigurationPolicy_maxOutputSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxOutputSize", ID: &iTrainedModelInferenceMaxOutputSize, Members: &mTrainedModelInferenceMaxOutputSize, Type: smithy.ShapeTypeStructure})
+var sTrainedModelInferenceJobStatus_CREATE_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrainedModelInferenceJobStatus_CREATE_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrainedModelInferenceJobStatus_CREATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrainedModelInferenceJobStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrainedModelInferenceJobStatus_CANCEL_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCEL_PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrainedModelInferenceJobStatus_CANCEL_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCEL_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrainedModelInferenceJobStatus_CANCEL_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCEL_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrainedModelInferenceJobStatus_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrainedModelInferenceJobSummary_trainedModelInferenceJobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainedModelInferenceJobArn", ID: &i_TrainedModelInferenceJobArn, Type: smithy.ShapeTypeString})
+var sTrainedModelInferenceJobSummary_configuredModelAlgorithmAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredModelAlgorithmAssociationArn", ID: &i_ConfiguredModelAlgorithmAssociationArn, Type: smithy.ShapeTypeString})
+var sTrainedModelInferenceJobSummary_membershipIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "membershipIdentifier", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sTrainedModelInferenceJobSummary_trainedModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainedModelArn", ID: &i_TrainedModelArn, Type: smithy.ShapeTypeString})
+var sTrainedModelInferenceJobSummary_trainedModelVersionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainedModelVersionIdentifier", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sTrainedModelInferenceJobSummary_collaborationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collaborationIdentifier", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sTrainedModelInferenceJobSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iTrainedModelInferenceJobStatus, Members: &mTrainedModelInferenceJobStatus, Type: smithy.ShapeTypeEnum})
+var sTrainedModelInferenceJobSummary_outputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputConfiguration", ID: &iInferenceOutputConfiguration, Members: &mInferenceOutputConfiguration, Type: smithy.ShapeTypeStructure})
+var sTrainedModelInferenceJobSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sTrainedModelInferenceJobSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sTrainedModelInferenceJobSummary_metricsStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metricsStatus", ID: &iMetricsStatus, Members: &mMetricsStatus, Type: smithy.ShapeTypeEnum})
+var sTrainedModelInferenceJobSummary_metricsStatusDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metricsStatusDetails", ID: &pString, Type: smithy.ShapeTypeString})
+var sTrainedModelInferenceJobSummary_logsStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logsStatus", ID: &iLogsStatus, Members: &mLogsStatus, Type: smithy.ShapeTypeEnum})
+var sTrainedModelInferenceJobSummary_logsStatusDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logsStatusDetails", ID: &pString, Type: smithy.ShapeTypeString})
+var sTrainedModelInferenceJobSummary_mlModelInferencePayerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mlModelInferencePayerAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sTrainedModelInferenceJobSummary_createTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sTrainedModelInferenceJobSummary_updateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sTrainedModelInferenceMaxOutputSize_unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unit", ID: &iTrainedModelInferenceMaxOutputSizeUnitType, Members: &mTrainedModelInferenceMaxOutputSizeUnitType, Type: smithy.ShapeTypeEnum})
+var sTrainedModelInferenceMaxOutputSize_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TrainedModelInferenceMaxOutputSizeValue, Type: smithy.ShapeTypeDouble})
+var sTrainedModelInferenceMaxOutputSizeUnitType_GB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GB", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_TrainedModelList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTrainedModelSummary, Members: &mTrainedModelSummary, Type: smithy.ShapeTypeStructure})
+var sTrainedModelsConfigurationPolicy_containerLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "containerLogs", ID: &i_LogsConfigurationPolicyList, Members: &m_LogsConfigurationPolicyList, Type: smithy.ShapeTypeList})
+var sTrainedModelsConfigurationPolicy_containerMetrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "containerMetrics", ID: &iMetricsConfigurationPolicy, Members: &mMetricsConfigurationPolicy, Type: smithy.ShapeTypeStructure})
+var sTrainedModelsConfigurationPolicy_maxArtifactSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxArtifactSize", ID: &iTrainedModelArtifactMaxSize, Members: &mTrainedModelArtifactMaxSize, Type: smithy.ShapeTypeStructure})
+var sTrainedModelStatus_CREATE_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrainedModelStatus_CREATE_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrainedModelStatus_CREATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrainedModelStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrainedModelStatus_DELETE_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrainedModelStatus_DELETE_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrainedModelStatus_DELETE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrainedModelStatus_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrainedModelStatus_CANCEL_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCEL_PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrainedModelStatus_CANCEL_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCEL_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrainedModelStatus_CANCEL_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCEL_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrainedModelSummary_createTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sTrainedModelSummary_updateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sTrainedModelSummary_trainedModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainedModelArn", ID: &i_TrainedModelArn, Type: smithy.ShapeTypeString})
+var sTrainedModelSummary_versionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionIdentifier", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sTrainedModelSummary_incrementalTrainingDataChannels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "incrementalTrainingDataChannels", ID: &i_IncrementalTrainingDataChannelsOutput, Members: &m_IncrementalTrainingDataChannelsOutput, Type: smithy.ShapeTypeList})
+var sTrainedModelSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sTrainedModelSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sTrainedModelSummary_membershipIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "membershipIdentifier", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sTrainedModelSummary_collaborationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collaborationIdentifier", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sTrainedModelSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iTrainedModelStatus, Members: &mTrainedModelStatus, Type: smithy.ShapeTypeEnum})
+var sTrainedModelSummary_configuredModelAlgorithmAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredModelAlgorithmAssociationArn", ID: &i_ConfiguredModelAlgorithmAssociationArn, Type: smithy.ShapeTypeString})
+var sTrainedModelSummary_mlModelTrainingPayerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mlModelTrainingPayerAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var s_TrainingDatasetList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTrainingDatasetSummary, Members: &mTrainingDatasetSummary, Type: smithy.ShapeTypeStructure})
+var sTrainingDatasetStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrainingDatasetSummary_createTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sTrainingDatasetSummary_updateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sTrainingDatasetSummary_trainingDatasetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainingDatasetArn", ID: &i_TrainingDatasetArn, Type: smithy.ShapeTypeString})
+var sTrainingDatasetSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sTrainingDatasetSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iTrainingDatasetStatus, Members: &mTrainingDatasetStatus, Type: smithy.ShapeTypeEnum})
+var sTrainingDatasetSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sTrainingInputMode_FILE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FILE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrainingInputMode_FAST_FILE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAST_FILE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrainingInputMode_PIPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PIPE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sWorkerComputeConfiguration_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iWorkerComputeType, Members: &mWorkerComputeType, Type: smithy.ShapeTypeEnum})
+var sWorkerComputeConfiguration_number = smithy.NewStaticSchema(smithy.StaticSchema{Member: "number", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sWorkerComputeConfiguration_properties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "properties", ID: &iWorkerComputeConfigurationProperties, Members: &mWorkerComputeConfigurationProperties, Type: smithy.ShapeTypeUnion})
+var sWorkerComputeConfigurationProperties_spark = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spark", ID: &i_SparkProperties, Members: &m_SparkProperties, Type: smithy.ShapeTypeMap})
+var sWorkerComputeType_CR1X = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CR1X", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sWorkerComputeType_CR4X = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CR4X", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sWorkerComputeType_CR8X = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CR8X", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCancelTrainedModelInferenceJobRequest_membershipIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "membershipIdentifier", ID: &i_UUID, Traits: &t69, Type: smithy.ShapeTypeString})
+var sCancelTrainedModelInferenceJobRequest_trainedModelInferenceJobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainedModelInferenceJobArn", ID: &i_TrainedModelInferenceJobArn, Traits: &t69, Type: smithy.ShapeTypeString})
+var sCancelTrainedModelRequest_membershipIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "membershipIdentifier", ID: &i_UUID, Traits: &t69, Type: smithy.ShapeTypeString})
+var sCancelTrainedModelRequest_trainedModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainedModelArn", ID: &i_TrainedModelArn, Traits: &t69, Type: smithy.ShapeTypeString})
+var sCancelTrainedModelRequest_versionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionIdentifier", ID: &i_UUID, Traits: &t70, Type: smithy.ShapeTypeString})
+var sCreateAudienceModelRequest_trainingDataStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainingDataStartTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sCreateAudienceModelRequest_trainingDataEndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainingDataEndTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sCreateAudienceModelRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sCreateAudienceModelRequest_trainingDatasetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainingDatasetArn", ID: &i_TrainingDatasetArn, Type: smithy.ShapeTypeString})
+var sCreateAudienceModelRequest_kmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString})
+var sCreateAudienceModelRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sCreateAudienceModelRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sCreateAudienceModelResponse_audienceModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "audienceModelArn", ID: &i_AudienceModelArn, Type: smithy.ShapeTypeString})
+var sCreateConfiguredAudienceModelRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sCreateConfiguredAudienceModelRequest_audienceModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "audienceModelArn", ID: &i_AudienceModelArn, Type: smithy.ShapeTypeString})
+var sCreateConfiguredAudienceModelRequest_outputConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputConfig", ID: &iConfiguredAudienceModelOutputConfig, Members: &mConfiguredAudienceModelOutputConfig, Type: smithy.ShapeTypeStructure})
+var sCreateConfiguredAudienceModelRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sCreateConfiguredAudienceModelRequest_sharedAudienceMetrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sharedAudienceMetrics", ID: &i_MetricsList, Members: &m_MetricsList, Type: smithy.ShapeTypeList})
+var sCreateConfiguredAudienceModelRequest_minMatchingSeedSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minMatchingSeedSize", ID: &i_MinMatchingSeedSize, Type: smithy.ShapeTypeInteger})
+var sCreateConfiguredAudienceModelRequest_audienceSizeConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "audienceSizeConfig", ID: &iAudienceSizeConfig, Members: &mAudienceSizeConfig, Type: smithy.ShapeTypeStructure})
+var sCreateConfiguredAudienceModelRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sCreateConfiguredAudienceModelRequest_childResourceTagOnCreatePolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "childResourceTagOnCreatePolicy", ID: &iTagOnCreatePolicy, Members: &mTagOnCreatePolicy, Type: smithy.ShapeTypeEnum})
+var sCreateConfiguredAudienceModelResponse_configuredAudienceModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredAudienceModelArn", ID: &i_ConfiguredAudienceModelArn, Type: smithy.ShapeTypeString})
+var sCreateConfiguredModelAlgorithmAssociationRequest_membershipIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "membershipIdentifier", ID: &i_UUID, Traits: &t69, Type: smithy.ShapeTypeString})
+var sCreateConfiguredModelAlgorithmAssociationRequest_configuredModelAlgorithmArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredModelAlgorithmArn", ID: &i_ConfiguredModelAlgorithmArn, Type: smithy.ShapeTypeString})
+var sCreateConfiguredModelAlgorithmAssociationRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sCreateConfiguredModelAlgorithmAssociationRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sCreateConfiguredModelAlgorithmAssociationRequest_privacyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "privacyConfiguration", ID: &iPrivacyConfiguration, Members: &mPrivacyConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateConfiguredModelAlgorithmAssociationRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sCreateConfiguredModelAlgorithmAssociationResponse_configuredModelAlgorithmAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredModelAlgorithmAssociationArn", ID: &i_ConfiguredModelAlgorithmAssociationArn, Type: smithy.ShapeTypeString})
+var sCreateConfiguredModelAlgorithmRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sCreateConfiguredModelAlgorithmRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sCreateConfiguredModelAlgorithmRequest_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString})
+var sCreateConfiguredModelAlgorithmRequest_trainingContainerConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainingContainerConfig", ID: &iContainerConfig, Members: &mContainerConfig, Type: smithy.ShapeTypeStructure})
+var sCreateConfiguredModelAlgorithmRequest_inferenceContainerConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inferenceContainerConfig", ID: &iInferenceContainerConfig, Members: &mInferenceContainerConfig, Type: smithy.ShapeTypeStructure})
+var sCreateConfiguredModelAlgorithmRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sCreateConfiguredModelAlgorithmRequest_kmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString})
+var sCreateConfiguredModelAlgorithmResponse_configuredModelAlgorithmArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredModelAlgorithmArn", ID: &i_ConfiguredModelAlgorithmArn, Type: smithy.ShapeTypeString})
+var sCreateMLInputChannelRequest_membershipIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "membershipIdentifier", ID: &i_UUID, Traits: &t69, Type: smithy.ShapeTypeString})
+var sCreateMLInputChannelRequest_configuredModelAlgorithmAssociations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredModelAlgorithmAssociations", ID: &i_ConfiguredModelAlgorithmAssociationArnList, Members: &m_ConfiguredModelAlgorithmAssociationArnList, Type: smithy.ShapeTypeList})
+var sCreateMLInputChannelRequest_inputChannel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputChannel", ID: &iInputChannel, Members: &mInputChannel, Type: smithy.ShapeTypeStructure})
+var sCreateMLInputChannelRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sCreateMLInputChannelRequest_retentionInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retentionInDays", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sCreateMLInputChannelRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sCreateMLInputChannelRequest_kmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString})
+var sCreateMLInputChannelRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sCreateMLInputChannelRequest_payerConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "payerConfiguration", ID: &iPayerConfiguration, Members: &mPayerConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateMLInputChannelResponse_mlInputChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mlInputChannelArn", ID: &i_MLInputChannelArn, Type: smithy.ShapeTypeString})
+var sCreateTrainedModelRequest_membershipIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "membershipIdentifier", ID: &i_UUID, Traits: &t69, Type: smithy.ShapeTypeString})
+var sCreateTrainedModelRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sCreateTrainedModelRequest_configuredModelAlgorithmAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredModelAlgorithmAssociationArn", ID: &i_ConfiguredModelAlgorithmAssociationArn, Type: smithy.ShapeTypeString})
+var sCreateTrainedModelRequest_hyperparameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hyperparameters", ID: &i_HyperParameters, Members: &m_HyperParameters, Type: smithy.ShapeTypeMap})
+var sCreateTrainedModelRequest_environment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environment", ID: &i_Environment, Members: &m_Environment, Type: smithy.ShapeTypeMap})
+var sCreateTrainedModelRequest_resourceConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceConfig", ID: &iResourceConfig, Members: &mResourceConfig, Type: smithy.ShapeTypeStructure})
+var sCreateTrainedModelRequest_stoppingCondition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stoppingCondition", ID: &iStoppingCondition, Members: &mStoppingCondition, Type: smithy.ShapeTypeStructure})
+var sCreateTrainedModelRequest_incrementalTrainingDataChannels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "incrementalTrainingDataChannels", ID: &i_IncrementalTrainingDataChannels, Members: &m_IncrementalTrainingDataChannels, Type: smithy.ShapeTypeList})
+var sCreateTrainedModelRequest_dataChannels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataChannels", ID: &i_ModelTrainingDataChannels, Members: &m_ModelTrainingDataChannels, Type: smithy.ShapeTypeList})
+var sCreateTrainedModelRequest_trainingInputMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainingInputMode", ID: &iTrainingInputMode, Members: &mTrainingInputMode, Type: smithy.ShapeTypeEnum})
+var sCreateTrainedModelRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sCreateTrainedModelRequest_kmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString})
+var sCreateTrainedModelRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sCreateTrainedModelRequest_mlModelTrainingPayerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mlModelTrainingPayerAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sCreateTrainedModelResponse_trainedModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainedModelArn", ID: &i_TrainedModelArn, Type: smithy.ShapeTypeString})
+var sCreateTrainedModelResponse_versionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionIdentifier", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sCreateTrainingDatasetRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sCreateTrainingDatasetRequest_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString})
+var sCreateTrainingDatasetRequest_trainingData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainingData", ID: &i_DatasetList, Members: &m_DatasetList, Type: smithy.ShapeTypeList})
+var sCreateTrainingDatasetRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sCreateTrainingDatasetRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sCreateTrainingDatasetResponse_trainingDatasetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainingDatasetArn", ID: &i_TrainingDatasetArn, Type: smithy.ShapeTypeString})
+var sDeleteAudienceGenerationJobRequest_audienceGenerationJobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "audienceGenerationJobArn", ID: &i_AudienceGenerationJobArn, Traits: &t69, Type: smithy.ShapeTypeString})
+var sDeleteAudienceModelRequest_audienceModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "audienceModelArn", ID: &i_AudienceModelArn, Traits: &t69, Type: smithy.ShapeTypeString})
+var sDeleteConfiguredAudienceModelRequest_configuredAudienceModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredAudienceModelArn", ID: &i_ConfiguredAudienceModelArn, Traits: &t69, Type: smithy.ShapeTypeString})
+var sDeleteConfiguredAudienceModelPolicyRequest_configuredAudienceModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredAudienceModelArn", ID: &i_ConfiguredAudienceModelArn, Traits: &t69, Type: smithy.ShapeTypeString})
+var sDeleteConfiguredModelAlgorithmAssociationRequest_configuredModelAlgorithmAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredModelAlgorithmAssociationArn", ID: &i_ConfiguredModelAlgorithmAssociationArn, Traits: &t69, Type: smithy.ShapeTypeString})
+var sDeleteConfiguredModelAlgorithmAssociationRequest_membershipIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "membershipIdentifier", ID: &i_UUID, Traits: &t69, Type: smithy.ShapeTypeString})
+var sDeleteConfiguredModelAlgorithmRequest_configuredModelAlgorithmArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredModelAlgorithmArn", ID: &i_ConfiguredModelAlgorithmArn, Traits: &t69, Type: smithy.ShapeTypeString})
+var sDeleteMLConfigurationRequest_membershipIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "membershipIdentifier", ID: &i_UUID, Traits: &t69, Type: smithy.ShapeTypeString})
+var sDeleteMLInputChannelDataRequest_mlInputChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mlInputChannelArn", ID: &i_MLInputChannelArn, Traits: &t69, Type: smithy.ShapeTypeString})
+var sDeleteMLInputChannelDataRequest_membershipIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "membershipIdentifier", ID: &i_UUID, Traits: &t69, Type: smithy.ShapeTypeString})
+var sDeleteTrainedModelOutputRequest_trainedModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainedModelArn", ID: &i_TrainedModelArn, Traits: &t69, Type: smithy.ShapeTypeString})
+var sDeleteTrainedModelOutputRequest_membershipIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "membershipIdentifier", ID: &i_UUID, Traits: &t69, Type: smithy.ShapeTypeString})
+var sDeleteTrainedModelOutputRequest_versionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionIdentifier", ID: &i_UUID, Traits: &t70, Type: smithy.ShapeTypeString})
+var sDeleteTrainingDatasetRequest_trainingDatasetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainingDatasetArn", ID: &i_TrainingDatasetArn, Traits: &t69, Type: smithy.ShapeTypeString})
+var sGetAudienceGenerationJobRequest_audienceGenerationJobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "audienceGenerationJobArn", ID: &i_AudienceGenerationJobArn, Traits: &t69, Type: smithy.ShapeTypeString})
+var sGetAudienceGenerationJobResponse_createTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sGetAudienceGenerationJobResponse_updateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sGetAudienceGenerationJobResponse_audienceGenerationJobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "audienceGenerationJobArn", ID: &i_AudienceGenerationJobArn, Type: smithy.ShapeTypeString})
+var sGetAudienceGenerationJobResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sGetAudienceGenerationJobResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sGetAudienceGenerationJobResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iAudienceGenerationJobStatus, Members: &mAudienceGenerationJobStatus, Type: smithy.ShapeTypeEnum})
+var sGetAudienceGenerationJobResponse_statusDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusDetails", ID: &iStatusDetails, Members: &mStatusDetails, Type: smithy.ShapeTypeStructure})
+var sGetAudienceGenerationJobResponse_configuredAudienceModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredAudienceModelArn", ID: &i_ConfiguredAudienceModelArn, Type: smithy.ShapeTypeString})
+var sGetAudienceGenerationJobResponse_seedAudience = smithy.NewStaticSchema(smithy.StaticSchema{Member: "seedAudience", ID: &iAudienceGenerationJobDataSource, Members: &mAudienceGenerationJobDataSource, Type: smithy.ShapeTypeStructure})
+var sGetAudienceGenerationJobResponse_includeSeedInOutput = smithy.NewStaticSchema(smithy.StaticSchema{Member: "includeSeedInOutput", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sGetAudienceGenerationJobResponse_collaborationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collaborationId", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sGetAudienceGenerationJobResponse_metrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metrics", ID: &iAudienceQualityMetrics, Members: &mAudienceQualityMetrics, Type: smithy.ShapeTypeStructure})
+var sGetAudienceGenerationJobResponse_startedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedBy", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sGetAudienceGenerationJobResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sGetAudienceGenerationJobResponse_protectedQueryIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "protectedQueryIdentifier", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetAudienceModelRequest_audienceModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "audienceModelArn", ID: &i_AudienceModelArn, Traits: &t69, Type: smithy.ShapeTypeString})
+var sGetAudienceModelResponse_createTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sGetAudienceModelResponse_updateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sGetAudienceModelResponse_trainingDataStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainingDataStartTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sGetAudienceModelResponse_trainingDataEndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainingDataEndTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sGetAudienceModelResponse_audienceModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "audienceModelArn", ID: &i_AudienceModelArn, Type: smithy.ShapeTypeString})
+var sGetAudienceModelResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sGetAudienceModelResponse_trainingDatasetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainingDatasetArn", ID: &i_TrainingDatasetArn, Type: smithy.ShapeTypeString})
+var sGetAudienceModelResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iAudienceModelStatus, Members: &mAudienceModelStatus, Type: smithy.ShapeTypeEnum})
+var sGetAudienceModelResponse_statusDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusDetails", ID: &iStatusDetails, Members: &mStatusDetails, Type: smithy.ShapeTypeStructure})
+var sGetAudienceModelResponse_kmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString})
+var sGetAudienceModelResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sGetAudienceModelResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sGetCollaborationConfiguredModelAlgorithmAssociationRequest_configuredModelAlgorithmAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredModelAlgorithmAssociationArn", ID: &i_ConfiguredModelAlgorithmAssociationArn, Traits: &t69, Type: smithy.ShapeTypeString})
+var sGetCollaborationConfiguredModelAlgorithmAssociationRequest_collaborationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collaborationIdentifier", ID: &i_UUID, Traits: &t69, Type: smithy.ShapeTypeString})
+var sGetCollaborationConfiguredModelAlgorithmAssociationResponse_createTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sGetCollaborationConfiguredModelAlgorithmAssociationResponse_updateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sGetCollaborationConfiguredModelAlgorithmAssociationResponse_configuredModelAlgorithmAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredModelAlgorithmAssociationArn", ID: &i_ConfiguredModelAlgorithmAssociationArn, Type: smithy.ShapeTypeString})
+var sGetCollaborationConfiguredModelAlgorithmAssociationResponse_membershipIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "membershipIdentifier", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sGetCollaborationConfiguredModelAlgorithmAssociationResponse_collaborationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collaborationIdentifier", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sGetCollaborationConfiguredModelAlgorithmAssociationResponse_configuredModelAlgorithmArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredModelAlgorithmArn", ID: &i_ConfiguredModelAlgorithmArn, Type: smithy.ShapeTypeString})
+var sGetCollaborationConfiguredModelAlgorithmAssociationResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sGetCollaborationConfiguredModelAlgorithmAssociationResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sGetCollaborationConfiguredModelAlgorithmAssociationResponse_creatorAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creatorAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sGetCollaborationConfiguredModelAlgorithmAssociationResponse_privacyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "privacyConfiguration", ID: &iPrivacyConfiguration, Members: &mPrivacyConfiguration, Type: smithy.ShapeTypeStructure})
+var sGetCollaborationMLInputChannelRequest_mlInputChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mlInputChannelArn", ID: &i_MLInputChannelArn, Traits: &t69, Type: smithy.ShapeTypeString})
+var sGetCollaborationMLInputChannelRequest_collaborationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collaborationIdentifier", ID: &i_UUID, Traits: &t69, Type: smithy.ShapeTypeString})
+var sGetCollaborationMLInputChannelResponse_membershipIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "membershipIdentifier", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sGetCollaborationMLInputChannelResponse_collaborationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collaborationIdentifier", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sGetCollaborationMLInputChannelResponse_mlInputChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mlInputChannelArn", ID: &i_MLInputChannelArn, Type: smithy.ShapeTypeString})
+var sGetCollaborationMLInputChannelResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sGetCollaborationMLInputChannelResponse_configuredModelAlgorithmAssociations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredModelAlgorithmAssociations", ID: &i_ConfiguredModelAlgorithmAssociationArnList, Members: &m_ConfiguredModelAlgorithmAssociationArnList, Type: smithy.ShapeTypeList})
+var sGetCollaborationMLInputChannelResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iMLInputChannelStatus, Members: &mMLInputChannelStatus, Type: smithy.ShapeTypeEnum})
+var sGetCollaborationMLInputChannelResponse_statusDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusDetails", ID: &iStatusDetails, Members: &mStatusDetails, Type: smithy.ShapeTypeStructure})
+var sGetCollaborationMLInputChannelResponse_retentionInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retentionInDays", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sGetCollaborationMLInputChannelResponse_numberOfRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "numberOfRecords", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sGetCollaborationMLInputChannelResponse_privacyBudgets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "privacyBudgets", ID: &iPrivacyBudgets, Members: &mPrivacyBudgets, Type: smithy.ShapeTypeUnion})
+var sGetCollaborationMLInputChannelResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sGetCollaborationMLInputChannelResponse_syntheticDataConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "syntheticDataConfiguration", ID: &iSyntheticDataConfiguration, Members: &mSyntheticDataConfiguration, Type: smithy.ShapeTypeStructure})
+var sGetCollaborationMLInputChannelResponse_payerConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "payerConfiguration", ID: &iPayerConfiguration, Members: &mPayerConfiguration, Type: smithy.ShapeTypeStructure})
+var sGetCollaborationMLInputChannelResponse_createTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sGetCollaborationMLInputChannelResponse_updateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sGetCollaborationMLInputChannelResponse_creatorAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creatorAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sGetCollaborationTrainedModelRequest_trainedModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainedModelArn", ID: &i_TrainedModelArn, Traits: &t69, Type: smithy.ShapeTypeString})
+var sGetCollaborationTrainedModelRequest_collaborationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collaborationIdentifier", ID: &i_UUID, Traits: &t69, Type: smithy.ShapeTypeString})
+var sGetCollaborationTrainedModelRequest_versionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionIdentifier", ID: &i_UUID, Traits: &t70, Type: smithy.ShapeTypeString})
+var sGetCollaborationTrainedModelResponse_membershipIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "membershipIdentifier", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sGetCollaborationTrainedModelResponse_collaborationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collaborationIdentifier", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sGetCollaborationTrainedModelResponse_trainedModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainedModelArn", ID: &i_TrainedModelArn, Type: smithy.ShapeTypeString})
+var sGetCollaborationTrainedModelResponse_versionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionIdentifier", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sGetCollaborationTrainedModelResponse_incrementalTrainingDataChannels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "incrementalTrainingDataChannels", ID: &i_IncrementalTrainingDataChannelsOutput, Members: &m_IncrementalTrainingDataChannelsOutput, Type: smithy.ShapeTypeList})
+var sGetCollaborationTrainedModelResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sGetCollaborationTrainedModelResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sGetCollaborationTrainedModelResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iTrainedModelStatus, Members: &mTrainedModelStatus, Type: smithy.ShapeTypeEnum})
+var sGetCollaborationTrainedModelResponse_statusDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusDetails", ID: &iStatusDetails, Members: &mStatusDetails, Type: smithy.ShapeTypeStructure})
+var sGetCollaborationTrainedModelResponse_configuredModelAlgorithmAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredModelAlgorithmAssociationArn", ID: &i_ConfiguredModelAlgorithmAssociationArn, Type: smithy.ShapeTypeString})
+var sGetCollaborationTrainedModelResponse_resourceConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceConfig", ID: &iResourceConfig, Members: &mResourceConfig, Type: smithy.ShapeTypeStructure})
+var sGetCollaborationTrainedModelResponse_trainingInputMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainingInputMode", ID: &iTrainingInputMode, Members: &mTrainingInputMode, Type: smithy.ShapeTypeEnum})
+var sGetCollaborationTrainedModelResponse_stoppingCondition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stoppingCondition", ID: &iStoppingCondition, Members: &mStoppingCondition, Type: smithy.ShapeTypeStructure})
+var sGetCollaborationTrainedModelResponse_metricsStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metricsStatus", ID: &iMetricsStatus, Members: &mMetricsStatus, Type: smithy.ShapeTypeEnum})
+var sGetCollaborationTrainedModelResponse_metricsStatusDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metricsStatusDetails", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetCollaborationTrainedModelResponse_logsStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logsStatus", ID: &iLogsStatus, Members: &mLogsStatus, Type: smithy.ShapeTypeEnum})
+var sGetCollaborationTrainedModelResponse_logsStatusDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logsStatusDetails", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetCollaborationTrainedModelResponse_trainingContainerImageDigest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainingContainerImageDigest", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetCollaborationTrainedModelResponse_mlModelTrainingPayerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mlModelTrainingPayerAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sGetCollaborationTrainedModelResponse_createTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sGetCollaborationTrainedModelResponse_updateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sGetCollaborationTrainedModelResponse_creatorAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creatorAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sGetConfiguredAudienceModelRequest_configuredAudienceModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredAudienceModelArn", ID: &i_ConfiguredAudienceModelArn, Traits: &t69, Type: smithy.ShapeTypeString})
+var sGetConfiguredAudienceModelResponse_createTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sGetConfiguredAudienceModelResponse_updateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sGetConfiguredAudienceModelResponse_configuredAudienceModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredAudienceModelArn", ID: &i_ConfiguredAudienceModelArn, Type: smithy.ShapeTypeString})
+var sGetConfiguredAudienceModelResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sGetConfiguredAudienceModelResponse_audienceModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "audienceModelArn", ID: &i_AudienceModelArn, Type: smithy.ShapeTypeString})
+var sGetConfiguredAudienceModelResponse_outputConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputConfig", ID: &iConfiguredAudienceModelOutputConfig, Members: &mConfiguredAudienceModelOutputConfig, Type: smithy.ShapeTypeStructure})
+var sGetConfiguredAudienceModelResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sGetConfiguredAudienceModelResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iConfiguredAudienceModelStatus, Members: &mConfiguredAudienceModelStatus, Type: smithy.ShapeTypeEnum})
+var sGetConfiguredAudienceModelResponse_sharedAudienceMetrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sharedAudienceMetrics", ID: &i_MetricsList, Members: &m_MetricsList, Type: smithy.ShapeTypeList})
+var sGetConfiguredAudienceModelResponse_minMatchingSeedSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minMatchingSeedSize", ID: &i_MinMatchingSeedSize, Type: smithy.ShapeTypeInteger})
+var sGetConfiguredAudienceModelResponse_audienceSizeConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "audienceSizeConfig", ID: &iAudienceSizeConfig, Members: &mAudienceSizeConfig, Type: smithy.ShapeTypeStructure})
+var sGetConfiguredAudienceModelResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sGetConfiguredAudienceModelResponse_childResourceTagOnCreatePolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "childResourceTagOnCreatePolicy", ID: &iTagOnCreatePolicy, Members: &mTagOnCreatePolicy, Type: smithy.ShapeTypeEnum})
+var sGetConfiguredAudienceModelPolicyRequest_configuredAudienceModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredAudienceModelArn", ID: &i_ConfiguredAudienceModelArn, Traits: &t69, Type: smithy.ShapeTypeString})
+var sGetConfiguredAudienceModelPolicyResponse_configuredAudienceModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredAudienceModelArn", ID: &i_ConfiguredAudienceModelArn, Type: smithy.ShapeTypeString})
+var sGetConfiguredAudienceModelPolicyResponse_configuredAudienceModelPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredAudienceModelPolicy", ID: &i_ResourcePolicy, Type: smithy.ShapeTypeString})
+var sGetConfiguredAudienceModelPolicyResponse_policyHash = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyHash", ID: &i_Hash, Type: smithy.ShapeTypeString})
+var sGetConfiguredModelAlgorithmAssociationRequest_configuredModelAlgorithmAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredModelAlgorithmAssociationArn", ID: &i_ConfiguredModelAlgorithmAssociationArn, Traits: &t69, Type: smithy.ShapeTypeString})
+var sGetConfiguredModelAlgorithmAssociationRequest_membershipIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "membershipIdentifier", ID: &i_UUID, Traits: &t69, Type: smithy.ShapeTypeString})
+var sGetConfiguredModelAlgorithmAssociationResponse_createTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sGetConfiguredModelAlgorithmAssociationResponse_updateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sGetConfiguredModelAlgorithmAssociationResponse_configuredModelAlgorithmAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredModelAlgorithmAssociationArn", ID: &i_ConfiguredModelAlgorithmAssociationArn, Type: smithy.ShapeTypeString})
+var sGetConfiguredModelAlgorithmAssociationResponse_membershipIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "membershipIdentifier", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sGetConfiguredModelAlgorithmAssociationResponse_collaborationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collaborationIdentifier", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sGetConfiguredModelAlgorithmAssociationResponse_configuredModelAlgorithmArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredModelAlgorithmArn", ID: &i_ConfiguredModelAlgorithmArn, Type: smithy.ShapeTypeString})
+var sGetConfiguredModelAlgorithmAssociationResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sGetConfiguredModelAlgorithmAssociationResponse_privacyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "privacyConfiguration", ID: &iPrivacyConfiguration, Members: &mPrivacyConfiguration, Type: smithy.ShapeTypeStructure})
+var sGetConfiguredModelAlgorithmAssociationResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sGetConfiguredModelAlgorithmAssociationResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sGetConfiguredModelAlgorithmRequest_configuredModelAlgorithmArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredModelAlgorithmArn", ID: &i_ConfiguredModelAlgorithmArn, Traits: &t69, Type: smithy.ShapeTypeString})
+var sGetConfiguredModelAlgorithmResponse_createTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sGetConfiguredModelAlgorithmResponse_updateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sGetConfiguredModelAlgorithmResponse_configuredModelAlgorithmArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredModelAlgorithmArn", ID: &i_ConfiguredModelAlgorithmArn, Type: smithy.ShapeTypeString})
+var sGetConfiguredModelAlgorithmResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sGetConfiguredModelAlgorithmResponse_trainingContainerConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainingContainerConfig", ID: &iContainerConfig, Members: &mContainerConfig, Type: smithy.ShapeTypeStructure})
+var sGetConfiguredModelAlgorithmResponse_inferenceContainerConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inferenceContainerConfig", ID: &iInferenceContainerConfig, Members: &mInferenceContainerConfig, Type: smithy.ShapeTypeStructure})
+var sGetConfiguredModelAlgorithmResponse_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString})
+var sGetConfiguredModelAlgorithmResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sGetConfiguredModelAlgorithmResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sGetConfiguredModelAlgorithmResponse_kmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString})
+var sGetMLConfigurationRequest_membershipIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "membershipIdentifier", ID: &i_UUID, Traits: &t69, Type: smithy.ShapeTypeString})
+var sGetMLConfigurationResponse_membershipIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "membershipIdentifier", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sGetMLConfigurationResponse_defaultOutputLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultOutputLocation", ID: &iMLOutputConfiguration, Members: &mMLOutputConfiguration, Type: smithy.ShapeTypeStructure})
+var sGetMLConfigurationResponse_createTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sGetMLConfigurationResponse_updateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sGetMLInputChannelRequest_mlInputChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mlInputChannelArn", ID: &i_MLInputChannelArn, Traits: &t69, Type: smithy.ShapeTypeString})
+var sGetMLInputChannelRequest_membershipIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "membershipIdentifier", ID: &i_UUID, Traits: &t69, Type: smithy.ShapeTypeString})
+var sGetMLInputChannelResponse_membershipIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "membershipIdentifier", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sGetMLInputChannelResponse_collaborationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collaborationIdentifier", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sGetMLInputChannelResponse_mlInputChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mlInputChannelArn", ID: &i_MLInputChannelArn, Type: smithy.ShapeTypeString})
+var sGetMLInputChannelResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sGetMLInputChannelResponse_configuredModelAlgorithmAssociations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredModelAlgorithmAssociations", ID: &i_ConfiguredModelAlgorithmAssociationArnList, Members: &m_ConfiguredModelAlgorithmAssociationArnList, Type: smithy.ShapeTypeList})
+var sGetMLInputChannelResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iMLInputChannelStatus, Members: &mMLInputChannelStatus, Type: smithy.ShapeTypeEnum})
+var sGetMLInputChannelResponse_statusDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusDetails", ID: &iStatusDetails, Members: &mStatusDetails, Type: smithy.ShapeTypeStructure})
+var sGetMLInputChannelResponse_retentionInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retentionInDays", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sGetMLInputChannelResponse_numberOfRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "numberOfRecords", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sGetMLInputChannelResponse_privacyBudgets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "privacyBudgets", ID: &iPrivacyBudgets, Members: &mPrivacyBudgets, Type: smithy.ShapeTypeUnion})
+var sGetMLInputChannelResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sGetMLInputChannelResponse_syntheticDataConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "syntheticDataConfiguration", ID: &iSyntheticDataConfiguration, Members: &mSyntheticDataConfiguration, Type: smithy.ShapeTypeStructure})
+var sGetMLInputChannelResponse_payerConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "payerConfiguration", ID: &iPayerConfiguration, Members: &mPayerConfiguration, Type: smithy.ShapeTypeStructure})
+var sGetMLInputChannelResponse_createTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sGetMLInputChannelResponse_updateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sGetMLInputChannelResponse_inputChannel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputChannel", ID: &iInputChannel, Members: &mInputChannel, Type: smithy.ShapeTypeStructure})
+var sGetMLInputChannelResponse_protectedQueryIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "protectedQueryIdentifier", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sGetMLInputChannelResponse_numberOfFiles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "numberOfFiles", ID: &pDouble, Type: smithy.ShapeTypeDouble})
+var sGetMLInputChannelResponse_sizeInGb = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sizeInGb", ID: &pDouble, Type: smithy.ShapeTypeDouble})
+var sGetMLInputChannelResponse_kmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString})
+var sGetMLInputChannelResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sGetTrainedModelInferenceJobRequest_membershipIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "membershipIdentifier", ID: &i_UUID, Traits: &t69, Type: smithy.ShapeTypeString})
+var sGetTrainedModelInferenceJobRequest_trainedModelInferenceJobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainedModelInferenceJobArn", ID: &i_TrainedModelInferenceJobArn, Traits: &t69, Type: smithy.ShapeTypeString})
+var sGetTrainedModelInferenceJobResponse_createTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sGetTrainedModelInferenceJobResponse_updateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sGetTrainedModelInferenceJobResponse_trainedModelInferenceJobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainedModelInferenceJobArn", ID: &i_TrainedModelInferenceJobArn, Type: smithy.ShapeTypeString})
+var sGetTrainedModelInferenceJobResponse_configuredModelAlgorithmAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredModelAlgorithmAssociationArn", ID: &i_ConfiguredModelAlgorithmAssociationArn, Type: smithy.ShapeTypeString})
+var sGetTrainedModelInferenceJobResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sGetTrainedModelInferenceJobResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iTrainedModelInferenceJobStatus, Members: &mTrainedModelInferenceJobStatus, Type: smithy.ShapeTypeEnum})
+var sGetTrainedModelInferenceJobResponse_trainedModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainedModelArn", ID: &i_TrainedModelArn, Type: smithy.ShapeTypeString})
+var sGetTrainedModelInferenceJobResponse_trainedModelVersionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainedModelVersionIdentifier", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sGetTrainedModelInferenceJobResponse_resourceConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceConfig", ID: &iInferenceResourceConfig, Members: &mInferenceResourceConfig, Type: smithy.ShapeTypeStructure})
+var sGetTrainedModelInferenceJobResponse_outputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputConfiguration", ID: &iInferenceOutputConfiguration, Members: &mInferenceOutputConfiguration, Type: smithy.ShapeTypeStructure})
+var sGetTrainedModelInferenceJobResponse_membershipIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "membershipIdentifier", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sGetTrainedModelInferenceJobResponse_dataSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSource", ID: &iModelInferenceDataSource, Members: &mModelInferenceDataSource, Type: smithy.ShapeTypeStructure})
+var sGetTrainedModelInferenceJobResponse_containerExecutionParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "containerExecutionParameters", ID: &iInferenceContainerExecutionParameters, Members: &mInferenceContainerExecutionParameters, Type: smithy.ShapeTypeStructure})
+var sGetTrainedModelInferenceJobResponse_statusDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusDetails", ID: &iStatusDetails, Members: &mStatusDetails, Type: smithy.ShapeTypeStructure})
+var sGetTrainedModelInferenceJobResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sGetTrainedModelInferenceJobResponse_inferenceContainerImageDigest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inferenceContainerImageDigest", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetTrainedModelInferenceJobResponse_environment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environment", ID: &i_InferenceEnvironmentMap, Members: &m_InferenceEnvironmentMap, Type: smithy.ShapeTypeMap})
+var sGetTrainedModelInferenceJobResponse_kmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString})
+var sGetTrainedModelInferenceJobResponse_metricsStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metricsStatus", ID: &iMetricsStatus, Members: &mMetricsStatus, Type: smithy.ShapeTypeEnum})
+var sGetTrainedModelInferenceJobResponse_metricsStatusDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metricsStatusDetails", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetTrainedModelInferenceJobResponse_logsStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logsStatus", ID: &iLogsStatus, Members: &mLogsStatus, Type: smithy.ShapeTypeEnum})
+var sGetTrainedModelInferenceJobResponse_logsStatusDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logsStatusDetails", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetTrainedModelInferenceJobResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sGetTrainedModelInferenceJobResponse_mlModelInferencePayerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mlModelInferencePayerAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sGetTrainedModelRequest_trainedModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainedModelArn", ID: &i_TrainedModelArn, Traits: &t69, Type: smithy.ShapeTypeString})
+var sGetTrainedModelRequest_membershipIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "membershipIdentifier", ID: &i_UUID, Traits: &t69, Type: smithy.ShapeTypeString})
+var sGetTrainedModelRequest_versionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionIdentifier", ID: &i_UUID, Traits: &t70, Type: smithy.ShapeTypeString})
+var sGetTrainedModelResponse_membershipIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "membershipIdentifier", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sGetTrainedModelResponse_collaborationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collaborationIdentifier", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sGetTrainedModelResponse_trainedModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainedModelArn", ID: &i_TrainedModelArn, Type: smithy.ShapeTypeString})
+var sGetTrainedModelResponse_versionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionIdentifier", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sGetTrainedModelResponse_incrementalTrainingDataChannels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "incrementalTrainingDataChannels", ID: &i_IncrementalTrainingDataChannelsOutput, Members: &m_IncrementalTrainingDataChannelsOutput, Type: smithy.ShapeTypeList})
+var sGetTrainedModelResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sGetTrainedModelResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sGetTrainedModelResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iTrainedModelStatus, Members: &mTrainedModelStatus, Type: smithy.ShapeTypeEnum})
+var sGetTrainedModelResponse_statusDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusDetails", ID: &iStatusDetails, Members: &mStatusDetails, Type: smithy.ShapeTypeStructure})
+var sGetTrainedModelResponse_configuredModelAlgorithmAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredModelAlgorithmAssociationArn", ID: &i_ConfiguredModelAlgorithmAssociationArn, Type: smithy.ShapeTypeString})
+var sGetTrainedModelResponse_resourceConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceConfig", ID: &iResourceConfig, Members: &mResourceConfig, Type: smithy.ShapeTypeStructure})
+var sGetTrainedModelResponse_trainingInputMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainingInputMode", ID: &iTrainingInputMode, Members: &mTrainingInputMode, Type: smithy.ShapeTypeEnum})
+var sGetTrainedModelResponse_stoppingCondition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stoppingCondition", ID: &iStoppingCondition, Members: &mStoppingCondition, Type: smithy.ShapeTypeStructure})
+var sGetTrainedModelResponse_metricsStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metricsStatus", ID: &iMetricsStatus, Members: &mMetricsStatus, Type: smithy.ShapeTypeEnum})
+var sGetTrainedModelResponse_metricsStatusDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metricsStatusDetails", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetTrainedModelResponse_logsStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logsStatus", ID: &iLogsStatus, Members: &mLogsStatus, Type: smithy.ShapeTypeEnum})
+var sGetTrainedModelResponse_logsStatusDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logsStatusDetails", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetTrainedModelResponse_trainingContainerImageDigest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainingContainerImageDigest", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetTrainedModelResponse_mlModelTrainingPayerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mlModelTrainingPayerAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sGetTrainedModelResponse_createTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sGetTrainedModelResponse_updateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sGetTrainedModelResponse_hyperparameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hyperparameters", ID: &i_HyperParameters, Members: &m_HyperParameters, Type: smithy.ShapeTypeMap})
+var sGetTrainedModelResponse_environment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environment", ID: &i_Environment, Members: &m_Environment, Type: smithy.ShapeTypeMap})
+var sGetTrainedModelResponse_kmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString})
+var sGetTrainedModelResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sGetTrainedModelResponse_dataChannels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataChannels", ID: &i_ModelTrainingDataChannels, Members: &m_ModelTrainingDataChannels, Type: smithy.ShapeTypeList})
+var sGetTrainingDatasetRequest_trainingDatasetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainingDatasetArn", ID: &i_TrainingDatasetArn, Traits: &t69, Type: smithy.ShapeTypeString})
+var sGetTrainingDatasetResponse_createTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sGetTrainingDatasetResponse_updateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateTime", ID: &pTimestamp, Traits: &t59, Type: smithy.ShapeTypeTimestamp})
+var sGetTrainingDatasetResponse_trainingDatasetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainingDatasetArn", ID: &i_TrainingDatasetArn, Type: smithy.ShapeTypeString})
+var sGetTrainingDatasetResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sGetTrainingDatasetResponse_trainingData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainingData", ID: &i_DatasetList, Members: &m_DatasetList, Type: smithy.ShapeTypeList})
+var sGetTrainingDatasetResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iTrainingDatasetStatus, Members: &mTrainingDatasetStatus, Type: smithy.ShapeTypeEnum})
+var sGetTrainingDatasetResponse_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString})
+var sGetTrainingDatasetResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sGetTrainingDatasetResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sListAudienceExportJobsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t71, Type: smithy.ShapeTypeString})
+var sListAudienceExportJobsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t72, Type: smithy.ShapeTypeInteger})
+var sListAudienceExportJobsRequest_audienceGenerationJobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "audienceGenerationJobArn", ID: &i_AudienceGenerationJobArn, Traits: &t73, Type: smithy.ShapeTypeString})
+var sListAudienceExportJobsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListAudienceExportJobsResponse_audienceExportJobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "audienceExportJobs", ID: &i_AudienceExportJobList, Members: &m_AudienceExportJobList, Type: smithy.ShapeTypeList})
+var sListAudienceGenerationJobsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t71, Type: smithy.ShapeTypeString})
+var sListAudienceGenerationJobsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t72, Type: smithy.ShapeTypeInteger})
+var sListAudienceGenerationJobsRequest_configuredAudienceModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredAudienceModelArn", ID: &i_ConfiguredAudienceModelArn, Traits: &t74, Type: smithy.ShapeTypeString})
+var sListAudienceGenerationJobsRequest_collaborationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collaborationId", ID: &i_UUID, Traits: &t75, Type: smithy.ShapeTypeString})
+var sListAudienceGenerationJobsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListAudienceGenerationJobsResponse_audienceGenerationJobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "audienceGenerationJobs", ID: &i_AudienceGenerationJobList, Members: &m_AudienceGenerationJobList, Type: smithy.ShapeTypeList})
+var sListAudienceModelsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t71, Type: smithy.ShapeTypeString})
+var sListAudienceModelsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t72, Type: smithy.ShapeTypeInteger})
+var sListAudienceModelsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListAudienceModelsResponse_audienceModels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "audienceModels", ID: &i_AudienceModelList, Members: &m_AudienceModelList, Type: smithy.ShapeTypeList})
+var sListCollaborationConfiguredModelAlgorithmAssociationsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t71, Type: smithy.ShapeTypeString})
+var sListCollaborationConfiguredModelAlgorithmAssociationsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t72, Type: smithy.ShapeTypeInteger})
+var sListCollaborationConfiguredModelAlgorithmAssociationsRequest_collaborationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collaborationIdentifier", ID: &i_UUID, Traits: &t69, Type: smithy.ShapeTypeString})
+var sListCollaborationConfiguredModelAlgorithmAssociationsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListCollaborationConfiguredModelAlgorithmAssociationsResponse_collaborationConfiguredModelAlgorithmAssociations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collaborationConfiguredModelAlgorithmAssociations", ID: &i_CollaborationConfiguredModelAlgorithmAssociationList, Members: &m_CollaborationConfiguredModelAlgorithmAssociationList, Type: smithy.ShapeTypeList})
+var sListCollaborationMLInputChannelsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t71, Type: smithy.ShapeTypeString})
+var sListCollaborationMLInputChannelsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t72, Type: smithy.ShapeTypeInteger})
+var sListCollaborationMLInputChannelsRequest_collaborationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collaborationIdentifier", ID: &i_UUID, Traits: &t69, Type: smithy.ShapeTypeString})
+var sListCollaborationMLInputChannelsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListCollaborationMLInputChannelsResponse_collaborationMLInputChannelsList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collaborationMLInputChannelsList", ID: &i_CollaborationMLInputChannelsList, Members: &m_CollaborationMLInputChannelsList, Type: smithy.ShapeTypeList})
+var sListCollaborationTrainedModelExportJobsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t71, Type: smithy.ShapeTypeString})
+var sListCollaborationTrainedModelExportJobsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t72, Type: smithy.ShapeTypeInteger})
+var sListCollaborationTrainedModelExportJobsRequest_collaborationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collaborationIdentifier", ID: &i_UUID, Traits: &t69, Type: smithy.ShapeTypeString})
+var sListCollaborationTrainedModelExportJobsRequest_trainedModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainedModelArn", ID: &i_TrainedModelArn, Traits: &t69, Type: smithy.ShapeTypeString})
+var sListCollaborationTrainedModelExportJobsRequest_trainedModelVersionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainedModelVersionIdentifier", ID: &i_UUID, Traits: &t76, Type: smithy.ShapeTypeString})
+var sListCollaborationTrainedModelExportJobsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListCollaborationTrainedModelExportJobsResponse_collaborationTrainedModelExportJobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collaborationTrainedModelExportJobs", ID: &i_CollaborationTrainedModelExportJobList, Members: &m_CollaborationTrainedModelExportJobList, Type: smithy.ShapeTypeList})
+var sListCollaborationTrainedModelInferenceJobsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t71, Type: smithy.ShapeTypeString})
+var sListCollaborationTrainedModelInferenceJobsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t72, Type: smithy.ShapeTypeInteger})
+var sListCollaborationTrainedModelInferenceJobsRequest_collaborationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collaborationIdentifier", ID: &i_UUID, Traits: &t69, Type: smithy.ShapeTypeString})
+var sListCollaborationTrainedModelInferenceJobsRequest_trainedModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainedModelArn", ID: &i_TrainedModelArn, Traits: &t77, Type: smithy.ShapeTypeString})
+var sListCollaborationTrainedModelInferenceJobsRequest_trainedModelVersionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainedModelVersionIdentifier", ID: &i_UUID, Traits: &t76, Type: smithy.ShapeTypeString})
+var sListCollaborationTrainedModelInferenceJobsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListCollaborationTrainedModelInferenceJobsResponse_collaborationTrainedModelInferenceJobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collaborationTrainedModelInferenceJobs", ID: &i_CollaborationTrainedModelInferenceJobList, Members: &m_CollaborationTrainedModelInferenceJobList, Type: smithy.ShapeTypeList})
+var sListCollaborationTrainedModelsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t71, Type: smithy.ShapeTypeString})
+var sListCollaborationTrainedModelsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t72, Type: smithy.ShapeTypeInteger})
+var sListCollaborationTrainedModelsRequest_collaborationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collaborationIdentifier", ID: &i_UUID, Traits: &t69, Type: smithy.ShapeTypeString})
+var sListCollaborationTrainedModelsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListCollaborationTrainedModelsResponse_collaborationTrainedModels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collaborationTrainedModels", ID: &i_CollaborationTrainedModelList, Members: &m_CollaborationTrainedModelList, Type: smithy.ShapeTypeList})
+var sListConfiguredAudienceModelsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t71, Type: smithy.ShapeTypeString})
+var sListConfiguredAudienceModelsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t72, Type: smithy.ShapeTypeInteger})
+var sListConfiguredAudienceModelsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListConfiguredAudienceModelsResponse_configuredAudienceModels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredAudienceModels", ID: &i_ConfiguredAudienceModelList, Members: &m_ConfiguredAudienceModelList, Type: smithy.ShapeTypeList})
+var sListConfiguredModelAlgorithmAssociationsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t71, Type: smithy.ShapeTypeString})
+var sListConfiguredModelAlgorithmAssociationsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t72, Type: smithy.ShapeTypeInteger})
+var sListConfiguredModelAlgorithmAssociationsRequest_membershipIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "membershipIdentifier", ID: &i_UUID, Traits: &t69, Type: smithy.ShapeTypeString})
+var sListConfiguredModelAlgorithmAssociationsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListConfiguredModelAlgorithmAssociationsResponse_configuredModelAlgorithmAssociations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredModelAlgorithmAssociations", ID: &i_ConfiguredModelAlgorithmAssociationList, Members: &m_ConfiguredModelAlgorithmAssociationList, Type: smithy.ShapeTypeList})
+var sListConfiguredModelAlgorithmsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t71, Type: smithy.ShapeTypeString})
+var sListConfiguredModelAlgorithmsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t72, Type: smithy.ShapeTypeInteger})
+var sListConfiguredModelAlgorithmsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListConfiguredModelAlgorithmsResponse_configuredModelAlgorithms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredModelAlgorithms", ID: &i_ConfiguredModelAlgorithmList, Members: &m_ConfiguredModelAlgorithmList, Type: smithy.ShapeTypeList})
+var sListMLInputChannelsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t71, Type: smithy.ShapeTypeString})
+var sListMLInputChannelsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t72, Type: smithy.ShapeTypeInteger})
+var sListMLInputChannelsRequest_membershipIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "membershipIdentifier", ID: &i_UUID, Traits: &t69, Type: smithy.ShapeTypeString})
+var sListMLInputChannelsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListMLInputChannelsResponse_mlInputChannelsList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mlInputChannelsList", ID: &i_MLInputChannelsList, Members: &m_MLInputChannelsList, Type: smithy.ShapeTypeList})
+var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_TaggableArn, Traits: &t69, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sListTrainedModelInferenceJobsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t71, Type: smithy.ShapeTypeString})
+var sListTrainedModelInferenceJobsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t72, Type: smithy.ShapeTypeInteger})
+var sListTrainedModelInferenceJobsRequest_membershipIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "membershipIdentifier", ID: &i_UUID, Traits: &t69, Type: smithy.ShapeTypeString})
+var sListTrainedModelInferenceJobsRequest_trainedModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainedModelArn", ID: &i_TrainedModelArn, Traits: &t77, Type: smithy.ShapeTypeString})
+var sListTrainedModelInferenceJobsRequest_trainedModelVersionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainedModelVersionIdentifier", ID: &i_UUID, Traits: &t76, Type: smithy.ShapeTypeString})
+var sListTrainedModelInferenceJobsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListTrainedModelInferenceJobsResponse_trainedModelInferenceJobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainedModelInferenceJobs", ID: &i_TrainedModelInferenceJobList, Members: &m_TrainedModelInferenceJobList, Type: smithy.ShapeTypeList})
+var sListTrainedModelsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t71, Type: smithy.ShapeTypeString})
+var sListTrainedModelsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t72, Type: smithy.ShapeTypeInteger})
+var sListTrainedModelsRequest_membershipIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "membershipIdentifier", ID: &i_UUID, Traits: &t69, Type: smithy.ShapeTypeString})
+var sListTrainedModelsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListTrainedModelsResponse_trainedModels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainedModels", ID: &i_TrainedModelList, Members: &m_TrainedModelList, Type: smithy.ShapeTypeList})
+var sListTrainedModelVersionsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t71, Type: smithy.ShapeTypeString})
+var sListTrainedModelVersionsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t72, Type: smithy.ShapeTypeInteger})
+var sListTrainedModelVersionsRequest_membershipIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "membershipIdentifier", ID: &i_UUID, Traits: &t69, Type: smithy.ShapeTypeString})
+var sListTrainedModelVersionsRequest_trainedModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainedModelArn", ID: &i_TrainedModelArn, Traits: &t69, Type: smithy.ShapeTypeString})
+var sListTrainedModelVersionsRequest_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iTrainedModelStatus, Members: &mTrainedModelStatus, Traits: &t78, Type: smithy.ShapeTypeEnum})
+var sListTrainedModelVersionsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListTrainedModelVersionsResponse_trainedModels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainedModels", ID: &i_TrainedModelList, Members: &m_TrainedModelList, Type: smithy.ShapeTypeList})
+var sListTrainingDatasetsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t71, Type: smithy.ShapeTypeString})
+var sListTrainingDatasetsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t72, Type: smithy.ShapeTypeInteger})
+var sListTrainingDatasetsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListTrainingDatasetsResponse_trainingDatasets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainingDatasets", ID: &i_TrainingDatasetList, Members: &m_TrainingDatasetList, Type: smithy.ShapeTypeList})
+var sPutConfiguredAudienceModelPolicyRequest_configuredAudienceModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredAudienceModelArn", ID: &i_ConfiguredAudienceModelArn, Traits: &t69, Type: smithy.ShapeTypeString})
+var sPutConfiguredAudienceModelPolicyRequest_configuredAudienceModelPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredAudienceModelPolicy", ID: &i_ResourcePolicy, Type: smithy.ShapeTypeString})
+var sPutConfiguredAudienceModelPolicyRequest_previousPolicyHash = smithy.NewStaticSchema(smithy.StaticSchema{Member: "previousPolicyHash", ID: &i_Hash, Type: smithy.ShapeTypeString})
+var sPutConfiguredAudienceModelPolicyRequest_policyExistenceCondition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyExistenceCondition", ID: &iPolicyExistenceCondition, Members: &mPolicyExistenceCondition, Type: smithy.ShapeTypeEnum})
+var sPutConfiguredAudienceModelPolicyResponse_configuredAudienceModelPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredAudienceModelPolicy", ID: &i_ResourcePolicy, Type: smithy.ShapeTypeString})
+var sPutConfiguredAudienceModelPolicyResponse_policyHash = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyHash", ID: &i_Hash, Type: smithy.ShapeTypeString})
+var sPutMLConfigurationRequest_membershipIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "membershipIdentifier", ID: &i_UUID, Traits: &t69, Type: smithy.ShapeTypeString})
+var sPutMLConfigurationRequest_defaultOutputLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultOutputLocation", ID: &iMLOutputConfiguration, Members: &mMLOutputConfiguration, Type: smithy.ShapeTypeStructure})
+var sStartAudienceExportJobRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sStartAudienceExportJobRequest_audienceGenerationJobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "audienceGenerationJobArn", ID: &i_AudienceGenerationJobArn, Type: smithy.ShapeTypeString})
+var sStartAudienceExportJobRequest_audienceSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "audienceSize", ID: &iAudienceSize, Members: &mAudienceSize, Type: smithy.ShapeTypeStructure})
+var sStartAudienceExportJobRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sStartAudienceGenerationJobRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sStartAudienceGenerationJobRequest_configuredAudienceModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredAudienceModelArn", ID: &i_ConfiguredAudienceModelArn, Type: smithy.ShapeTypeString})
+var sStartAudienceGenerationJobRequest_seedAudience = smithy.NewStaticSchema(smithy.StaticSchema{Member: "seedAudience", ID: &iAudienceGenerationJobDataSource, Members: &mAudienceGenerationJobDataSource, Type: smithy.ShapeTypeStructure})
+var sStartAudienceGenerationJobRequest_includeSeedInOutput = smithy.NewStaticSchema(smithy.StaticSchema{Member: "includeSeedInOutput", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sStartAudienceGenerationJobRequest_collaborationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collaborationId", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sStartAudienceGenerationJobRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sStartAudienceGenerationJobRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sStartAudienceGenerationJobResponse_audienceGenerationJobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "audienceGenerationJobArn", ID: &i_AudienceGenerationJobArn, Type: smithy.ShapeTypeString})
+var sStartTrainedModelExportJobRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sStartTrainedModelExportJobRequest_trainedModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainedModelArn", ID: &i_TrainedModelArn, Traits: &t69, Type: smithy.ShapeTypeString})
+var sStartTrainedModelExportJobRequest_trainedModelVersionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainedModelVersionIdentifier", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sStartTrainedModelExportJobRequest_membershipIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "membershipIdentifier", ID: &i_UUID, Traits: &t69, Type: smithy.ShapeTypeString})
+var sStartTrainedModelExportJobRequest_outputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputConfiguration", ID: &iTrainedModelExportOutputConfiguration, Members: &mTrainedModelExportOutputConfiguration, Type: smithy.ShapeTypeStructure})
+var sStartTrainedModelExportJobRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sStartTrainedModelInferenceJobRequest_membershipIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "membershipIdentifier", ID: &i_UUID, Traits: &t69, Type: smithy.ShapeTypeString})
+var sStartTrainedModelInferenceJobRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sStartTrainedModelInferenceJobRequest_trainedModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainedModelArn", ID: &i_TrainedModelArn, Type: smithy.ShapeTypeString})
+var sStartTrainedModelInferenceJobRequest_trainedModelVersionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainedModelVersionIdentifier", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sStartTrainedModelInferenceJobRequest_configuredModelAlgorithmAssociationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredModelAlgorithmAssociationArn", ID: &i_ConfiguredModelAlgorithmAssociationArn, Type: smithy.ShapeTypeString})
+var sStartTrainedModelInferenceJobRequest_resourceConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceConfig", ID: &iInferenceResourceConfig, Members: &mInferenceResourceConfig, Type: smithy.ShapeTypeStructure})
+var sStartTrainedModelInferenceJobRequest_outputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputConfiguration", ID: &iInferenceOutputConfiguration, Members: &mInferenceOutputConfiguration, Type: smithy.ShapeTypeStructure})
+var sStartTrainedModelInferenceJobRequest_dataSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSource", ID: &iModelInferenceDataSource, Members: &mModelInferenceDataSource, Type: smithy.ShapeTypeStructure})
+var sStartTrainedModelInferenceJobRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sStartTrainedModelInferenceJobRequest_containerExecutionParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "containerExecutionParameters", ID: &iInferenceContainerExecutionParameters, Members: &mInferenceContainerExecutionParameters, Type: smithy.ShapeTypeStructure})
+var sStartTrainedModelInferenceJobRequest_environment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environment", ID: &i_InferenceEnvironmentMap, Members: &m_InferenceEnvironmentMap, Type: smithy.ShapeTypeMap})
+var sStartTrainedModelInferenceJobRequest_kmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString})
+var sStartTrainedModelInferenceJobRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sStartTrainedModelInferenceJobRequest_mlModelInferencePayerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mlModelInferencePayerAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sStartTrainedModelInferenceJobResponse_trainedModelInferenceJobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trainedModelInferenceJobArn", ID: &i_TrainedModelInferenceJobArn, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_TaggableArn, Traits: &t69, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_TaggableArn, Traits: &t69, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeys, Members: &m_TagKeys, Traits: &t79, Type: smithy.ShapeTypeList})
+var sUpdateConfiguredAudienceModelRequest_configuredAudienceModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredAudienceModelArn", ID: &i_ConfiguredAudienceModelArn, Traits: &t69, Type: smithy.ShapeTypeString})
+var sUpdateConfiguredAudienceModelRequest_outputConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputConfig", ID: &iConfiguredAudienceModelOutputConfig, Members: &mConfiguredAudienceModelOutputConfig, Type: smithy.ShapeTypeStructure})
+var sUpdateConfiguredAudienceModelRequest_audienceModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "audienceModelArn", ID: &i_AudienceModelArn, Type: smithy.ShapeTypeString})
+var sUpdateConfiguredAudienceModelRequest_sharedAudienceMetrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sharedAudienceMetrics", ID: &i_MetricsList, Members: &m_MetricsList, Type: smithy.ShapeTypeList})
+var sUpdateConfiguredAudienceModelRequest_minMatchingSeedSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minMatchingSeedSize", ID: &i_MinMatchingSeedSize, Type: smithy.ShapeTypeInteger})
+var sUpdateConfiguredAudienceModelRequest_audienceSizeConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "audienceSizeConfig", ID: &iAudienceSizeConfig, Members: &mAudienceSizeConfig, Type: smithy.ShapeTypeStructure})
+var sUpdateConfiguredAudienceModelRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sUpdateConfiguredAudienceModelResponse_configuredAudienceModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuredAudienceModelArn", ID: &i_ConfiguredAudienceModelArn, Type: smithy.ShapeTypeString})
+
+var CancelTrainedModel = &sCancelTrainedModel
+
+var CancelTrainedModelInferenceJob = &sCancelTrainedModelInferenceJob
+
+var CreateAudienceModel = &sCreateAudienceModel
+
+var CreateConfiguredAudienceModel = &sCreateConfiguredAudienceModel
+
+var CreateConfiguredModelAlgorithm = &sCreateConfiguredModelAlgorithm
+
+var CreateConfiguredModelAlgorithmAssociation = &sCreateConfiguredModelAlgorithmAssociation
+
+var CreateMLInputChannel = &sCreateMLInputChannel
+
+var CreateTrainedModel = &sCreateTrainedModel
+
+var CreateTrainingDataset = &sCreateTrainingDataset
+
+var DeleteAudienceGenerationJob = &sDeleteAudienceGenerationJob
+
+var DeleteAudienceModel = &sDeleteAudienceModel
+
+var DeleteConfiguredAudienceModel = &sDeleteConfiguredAudienceModel
+
+var DeleteConfiguredAudienceModelPolicy = &sDeleteConfiguredAudienceModelPolicy
+
+var DeleteConfiguredModelAlgorithm = &sDeleteConfiguredModelAlgorithm
+
+var DeleteConfiguredModelAlgorithmAssociation = &sDeleteConfiguredModelAlgorithmAssociation
+
+var DeleteMLConfiguration = &sDeleteMLConfiguration
+
+var DeleteMLInputChannelData = &sDeleteMLInputChannelData
+
+var DeleteTrainedModelOutput = &sDeleteTrainedModelOutput
+
+var DeleteTrainingDataset = &sDeleteTrainingDataset
+
+var GetAudienceGenerationJob = &sGetAudienceGenerationJob
+
+var GetAudienceModel = &sGetAudienceModel
+
+var GetCollaborationConfiguredModelAlgorithmAssociation = &sGetCollaborationConfiguredModelAlgorithmAssociation
+
+var GetCollaborationMLInputChannel = &sGetCollaborationMLInputChannel
+
+var GetCollaborationTrainedModel = &sGetCollaborationTrainedModel
+
+var GetConfiguredAudienceModel = &sGetConfiguredAudienceModel
+
+var GetConfiguredAudienceModelPolicy = &sGetConfiguredAudienceModelPolicy
+
+var GetConfiguredModelAlgorithm = &sGetConfiguredModelAlgorithm
+
+var GetConfiguredModelAlgorithmAssociation = &sGetConfiguredModelAlgorithmAssociation
+
+var GetMLConfiguration = &sGetMLConfiguration
+
+var GetMLInputChannel = &sGetMLInputChannel
+
+var GetTrainedModel = &sGetTrainedModel
+
+var GetTrainedModelInferenceJob = &sGetTrainedModelInferenceJob
+
+var GetTrainingDataset = &sGetTrainingDataset
+
+var ListAudienceExportJobs = &sListAudienceExportJobs
+
+var ListAudienceGenerationJobs = &sListAudienceGenerationJobs
+
+var ListAudienceModels = &sListAudienceModels
+
+var ListCollaborationConfiguredModelAlgorithmAssociations = &sListCollaborationConfiguredModelAlgorithmAssociations
+
+var ListCollaborationMLInputChannels = &sListCollaborationMLInputChannels
+
+var ListCollaborationTrainedModelExportJobs = &sListCollaborationTrainedModelExportJobs
+
+var ListCollaborationTrainedModelInferenceJobs = &sListCollaborationTrainedModelInferenceJobs
+
+var ListCollaborationTrainedModels = &sListCollaborationTrainedModels
+
+var ListConfiguredAudienceModels = &sListConfiguredAudienceModels
+
+var ListConfiguredModelAlgorithmAssociations = &sListConfiguredModelAlgorithmAssociations
+
+var ListConfiguredModelAlgorithms = &sListConfiguredModelAlgorithms
+
+var ListMLInputChannels = &sListMLInputChannels
+
+var ListTagsForResource = &sListTagsForResource
+
+var ListTrainedModelInferenceJobs = &sListTrainedModelInferenceJobs
+
+var ListTrainedModels = &sListTrainedModels
+
+var ListTrainedModelVersions = &sListTrainedModelVersions
+
+var ListTrainingDatasets = &sListTrainingDatasets
+
+var PutConfiguredAudienceModelPolicy = &sPutConfiguredAudienceModelPolicy
+
+var PutMLConfiguration = &sPutMLConfiguration
+
+var StartAudienceExportJob = &sStartAudienceExportJob
+
+var StartAudienceGenerationJob = &sStartAudienceGenerationJob
+
+var StartTrainedModelExportJob = &sStartTrainedModelExportJob
+
+var StartTrainedModelInferenceJob = &sStartTrainedModelInferenceJob
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateConfiguredAudienceModel = &sUpdateConfiguredAudienceModel
+
+var _AWSStarkControlService = &s_AWSStarkControlService
+
+var AccessBudget = &sAccessBudget
+var AccessBudget_resourceArn = &sAccessBudget_resourceArn
+var AccessBudget_details = &sAccessBudget_details
+var AccessBudget_aggregateRemainingBudget = &sAccessBudget_aggregateRemainingBudget
+
+var AccessBudgetDetails = &sAccessBudgetDetails
+var AccessBudgetDetails_startTime = &sAccessBudgetDetails_startTime
+var AccessBudgetDetails_endTime = &sAccessBudgetDetails_endTime
+var AccessBudgetDetails_remainingBudget = &sAccessBudgetDetails_remainingBudget
+var AccessBudgetDetails_budget = &sAccessBudgetDetails_budget
+var AccessBudgetDetails_budgetType = &sAccessBudgetDetails_budgetType
+var AccessBudgetDetails_autoRefresh = &sAccessBudgetDetails_autoRefresh
+
+var _AccessBudgetDetailsList = &s_AccessBudgetDetailsList
+var _AccessBudgetDetailsList_member = &s_AccessBudgetDetailsList_member
+
+var _AccessBudgets = &s_AccessBudgets
+var _AccessBudgets_member = &s_AccessBudgets_member
+
+var AccessBudgetType = &sAccessBudgetType
+var AccessBudgetType_CALENDAR_DAY = &sAccessBudgetType_CALENDAR_DAY
+var AccessBudgetType_CALENDAR_MONTH = &sAccessBudgetType_CALENDAR_MONTH
+var AccessBudgetType_CALENDAR_WEEK = &sAccessBudgetType_CALENDAR_WEEK
+var AccessBudgetType_LIFETIME = &sAccessBudgetType_LIFETIME
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var _AccountId = &s_AccountId
+
+var _AccountIdList = &s_AccountIdList
+var _AccountIdList_member = &s_AccountIdList_member
+
+var _AlgorithmImage = &s_AlgorithmImage
+
+var _AnalysisTemplateArn = &s_AnalysisTemplateArn
+
+var AudienceDestination = &sAudienceDestination
+var AudienceDestination_s3Destination = &sAudienceDestination_s3Destination
+
+var _AudienceExportJobList = &s_AudienceExportJobList
+var _AudienceExportJobList_member = &s_AudienceExportJobList_member
+
+var AudienceExportJobStatus = &sAudienceExportJobStatus
+var AudienceExportJobStatus_CREATE_PENDING = &sAudienceExportJobStatus_CREATE_PENDING
+var AudienceExportJobStatus_CREATE_IN_PROGRESS = &sAudienceExportJobStatus_CREATE_IN_PROGRESS
+var AudienceExportJobStatus_CREATE_FAILED = &sAudienceExportJobStatus_CREATE_FAILED
+var AudienceExportJobStatus_ACTIVE = &sAudienceExportJobStatus_ACTIVE
+
+var AudienceExportJobSummary = &sAudienceExportJobSummary
+var AudienceExportJobSummary_createTime = &sAudienceExportJobSummary_createTime
+var AudienceExportJobSummary_updateTime = &sAudienceExportJobSummary_updateTime
+var AudienceExportJobSummary_name = &sAudienceExportJobSummary_name
+var AudienceExportJobSummary_audienceGenerationJobArn = &sAudienceExportJobSummary_audienceGenerationJobArn
+var AudienceExportJobSummary_audienceSize = &sAudienceExportJobSummary_audienceSize
+var AudienceExportJobSummary_description = &sAudienceExportJobSummary_description
+var AudienceExportJobSummary_status = &sAudienceExportJobSummary_status
+var AudienceExportJobSummary_statusDetails = &sAudienceExportJobSummary_statusDetails
+var AudienceExportJobSummary_outputLocation = &sAudienceExportJobSummary_outputLocation
+
+var _AudienceGenerationJobArn = &s_AudienceGenerationJobArn
+
+var AudienceGenerationJobDataSource = &sAudienceGenerationJobDataSource
+var AudienceGenerationJobDataSource_dataSource = &sAudienceGenerationJobDataSource_dataSource
+var AudienceGenerationJobDataSource_roleArn = &sAudienceGenerationJobDataSource_roleArn
+var AudienceGenerationJobDataSource_sqlParameters = &sAudienceGenerationJobDataSource_sqlParameters
+var AudienceGenerationJobDataSource_sqlComputeConfiguration = &sAudienceGenerationJobDataSource_sqlComputeConfiguration
+
+var _AudienceGenerationJobList = &s_AudienceGenerationJobList
+var _AudienceGenerationJobList_member = &s_AudienceGenerationJobList_member
+
+var AudienceGenerationJobStatus = &sAudienceGenerationJobStatus
+var AudienceGenerationJobStatus_CREATE_PENDING = &sAudienceGenerationJobStatus_CREATE_PENDING
+var AudienceGenerationJobStatus_CREATE_IN_PROGRESS = &sAudienceGenerationJobStatus_CREATE_IN_PROGRESS
+var AudienceGenerationJobStatus_CREATE_FAILED = &sAudienceGenerationJobStatus_CREATE_FAILED
+var AudienceGenerationJobStatus_ACTIVE = &sAudienceGenerationJobStatus_ACTIVE
+var AudienceGenerationJobStatus_DELETE_PENDING = &sAudienceGenerationJobStatus_DELETE_PENDING
+var AudienceGenerationJobStatus_DELETE_IN_PROGRESS = &sAudienceGenerationJobStatus_DELETE_IN_PROGRESS
+var AudienceGenerationJobStatus_DELETE_FAILED = &sAudienceGenerationJobStatus_DELETE_FAILED
+
+var AudienceGenerationJobSummary = &sAudienceGenerationJobSummary
+var AudienceGenerationJobSummary_createTime = &sAudienceGenerationJobSummary_createTime
+var AudienceGenerationJobSummary_updateTime = &sAudienceGenerationJobSummary_updateTime
+var AudienceGenerationJobSummary_audienceGenerationJobArn = &sAudienceGenerationJobSummary_audienceGenerationJobArn
+var AudienceGenerationJobSummary_name = &sAudienceGenerationJobSummary_name
+var AudienceGenerationJobSummary_description = &sAudienceGenerationJobSummary_description
+var AudienceGenerationJobSummary_status = &sAudienceGenerationJobSummary_status
+var AudienceGenerationJobSummary_configuredAudienceModelArn = &sAudienceGenerationJobSummary_configuredAudienceModelArn
+var AudienceGenerationJobSummary_collaborationId = &sAudienceGenerationJobSummary_collaborationId
+var AudienceGenerationJobSummary_startedBy = &sAudienceGenerationJobSummary_startedBy
+
+var _AudienceModelArn = &s_AudienceModelArn
+
+var _AudienceModelList = &s_AudienceModelList
+var _AudienceModelList_member = &s_AudienceModelList_member
+
+var AudienceModelStatus = &sAudienceModelStatus
+var AudienceModelStatus_CREATE_PENDING = &sAudienceModelStatus_CREATE_PENDING
+var AudienceModelStatus_CREATE_IN_PROGRESS = &sAudienceModelStatus_CREATE_IN_PROGRESS
+var AudienceModelStatus_CREATE_FAILED = &sAudienceModelStatus_CREATE_FAILED
+var AudienceModelStatus_ACTIVE = &sAudienceModelStatus_ACTIVE
+var AudienceModelStatus_DELETE_PENDING = &sAudienceModelStatus_DELETE_PENDING
+var AudienceModelStatus_DELETE_IN_PROGRESS = &sAudienceModelStatus_DELETE_IN_PROGRESS
+var AudienceModelStatus_DELETE_FAILED = &sAudienceModelStatus_DELETE_FAILED
+
+var AudienceModelSummary = &sAudienceModelSummary
+var AudienceModelSummary_createTime = &sAudienceModelSummary_createTime
+var AudienceModelSummary_updateTime = &sAudienceModelSummary_updateTime
+var AudienceModelSummary_audienceModelArn = &sAudienceModelSummary_audienceModelArn
+var AudienceModelSummary_name = &sAudienceModelSummary_name
+var AudienceModelSummary_trainingDatasetArn = &sAudienceModelSummary_trainingDatasetArn
+var AudienceModelSummary_status = &sAudienceModelSummary_status
+var AudienceModelSummary_description = &sAudienceModelSummary_description
+
+var AudienceQualityMetrics = &sAudienceQualityMetrics
+var AudienceQualityMetrics_relevanceMetrics = &sAudienceQualityMetrics_relevanceMetrics
+var AudienceQualityMetrics_recallMetric = &sAudienceQualityMetrics_recallMetric
+
+var AudienceSize = &sAudienceSize
+var AudienceSize_type = &sAudienceSize_type
+var AudienceSize_value = &sAudienceSize_value
+
+var _AudienceSizeBins = &s_AudienceSizeBins
+var _AudienceSizeBins_member = &s_AudienceSizeBins_member
+
+var AudienceSizeConfig = &sAudienceSizeConfig
+var AudienceSizeConfig_audienceSizeType = &sAudienceSizeConfig_audienceSizeType
+var AudienceSizeConfig_audienceSizeBins = &sAudienceSizeConfig_audienceSizeBins
+
+var AudienceSizeType = &sAudienceSizeType
+var AudienceSizeType_ABSOLUTE = &sAudienceSizeType_ABSOLUTE
+var AudienceSizeType_PERCENTAGE = &sAudienceSizeType_PERCENTAGE
+
+var _AudienceSizeValue = &s_AudienceSizeValue
+
+var AutoRefreshMode = &sAutoRefreshMode
+var AutoRefreshMode_ENABLED = &sAutoRefreshMode_ENABLED
+var AutoRefreshMode_DISABLED = &sAutoRefreshMode_DISABLED
+
+var _Budget = &s_Budget
+
+var _BudgetedResourceArn = &s_BudgetedResourceArn
+
+var _CollaborationConfiguredModelAlgorithmAssociationList = &s_CollaborationConfiguredModelAlgorithmAssociationList
+var _CollaborationConfiguredModelAlgorithmAssociationList_member = &s_CollaborationConfiguredModelAlgorithmAssociationList_member
+
+var CollaborationConfiguredModelAlgorithmAssociationSummary = &sCollaborationConfiguredModelAlgorithmAssociationSummary
+var CollaborationConfiguredModelAlgorithmAssociationSummary_createTime = &sCollaborationConfiguredModelAlgorithmAssociationSummary_createTime
+var CollaborationConfiguredModelAlgorithmAssociationSummary_updateTime = &sCollaborationConfiguredModelAlgorithmAssociationSummary_updateTime
+var CollaborationConfiguredModelAlgorithmAssociationSummary_configuredModelAlgorithmAssociationArn = &sCollaborationConfiguredModelAlgorithmAssociationSummary_configuredModelAlgorithmAssociationArn
+var CollaborationConfiguredModelAlgorithmAssociationSummary_name = &sCollaborationConfiguredModelAlgorithmAssociationSummary_name
+var CollaborationConfiguredModelAlgorithmAssociationSummary_description = &sCollaborationConfiguredModelAlgorithmAssociationSummary_description
+var CollaborationConfiguredModelAlgorithmAssociationSummary_membershipIdentifier = &sCollaborationConfiguredModelAlgorithmAssociationSummary_membershipIdentifier
+var CollaborationConfiguredModelAlgorithmAssociationSummary_collaborationIdentifier = &sCollaborationConfiguredModelAlgorithmAssociationSummary_collaborationIdentifier
+var CollaborationConfiguredModelAlgorithmAssociationSummary_configuredModelAlgorithmArn = &sCollaborationConfiguredModelAlgorithmAssociationSummary_configuredModelAlgorithmArn
+var CollaborationConfiguredModelAlgorithmAssociationSummary_creatorAccountId = &sCollaborationConfiguredModelAlgorithmAssociationSummary_creatorAccountId
+
+var _CollaborationMLInputChannelsList = &s_CollaborationMLInputChannelsList
+var _CollaborationMLInputChannelsList_member = &s_CollaborationMLInputChannelsList_member
+
+var CollaborationMLInputChannelSummary = &sCollaborationMLInputChannelSummary
+var CollaborationMLInputChannelSummary_createTime = &sCollaborationMLInputChannelSummary_createTime
+var CollaborationMLInputChannelSummary_updateTime = &sCollaborationMLInputChannelSummary_updateTime
+var CollaborationMLInputChannelSummary_membershipIdentifier = &sCollaborationMLInputChannelSummary_membershipIdentifier
+var CollaborationMLInputChannelSummary_collaborationIdentifier = &sCollaborationMLInputChannelSummary_collaborationIdentifier
+var CollaborationMLInputChannelSummary_name = &sCollaborationMLInputChannelSummary_name
+var CollaborationMLInputChannelSummary_configuredModelAlgorithmAssociations = &sCollaborationMLInputChannelSummary_configuredModelAlgorithmAssociations
+var CollaborationMLInputChannelSummary_mlInputChannelArn = &sCollaborationMLInputChannelSummary_mlInputChannelArn
+var CollaborationMLInputChannelSummary_status = &sCollaborationMLInputChannelSummary_status
+var CollaborationMLInputChannelSummary_creatorAccountId = &sCollaborationMLInputChannelSummary_creatorAccountId
+var CollaborationMLInputChannelSummary_description = &sCollaborationMLInputChannelSummary_description
+var CollaborationMLInputChannelSummary_payerConfiguration = &sCollaborationMLInputChannelSummary_payerConfiguration
+
+var _CollaborationTrainedModelExportJobList = &s_CollaborationTrainedModelExportJobList
+var _CollaborationTrainedModelExportJobList_member = &s_CollaborationTrainedModelExportJobList_member
+
+var CollaborationTrainedModelExportJobSummary = &sCollaborationTrainedModelExportJobSummary
+var CollaborationTrainedModelExportJobSummary_createTime = &sCollaborationTrainedModelExportJobSummary_createTime
+var CollaborationTrainedModelExportJobSummary_updateTime = &sCollaborationTrainedModelExportJobSummary_updateTime
+var CollaborationTrainedModelExportJobSummary_name = &sCollaborationTrainedModelExportJobSummary_name
+var CollaborationTrainedModelExportJobSummary_outputConfiguration = &sCollaborationTrainedModelExportJobSummary_outputConfiguration
+var CollaborationTrainedModelExportJobSummary_status = &sCollaborationTrainedModelExportJobSummary_status
+var CollaborationTrainedModelExportJobSummary_statusDetails = &sCollaborationTrainedModelExportJobSummary_statusDetails
+var CollaborationTrainedModelExportJobSummary_description = &sCollaborationTrainedModelExportJobSummary_description
+var CollaborationTrainedModelExportJobSummary_creatorAccountId = &sCollaborationTrainedModelExportJobSummary_creatorAccountId
+var CollaborationTrainedModelExportJobSummary_trainedModelArn = &sCollaborationTrainedModelExportJobSummary_trainedModelArn
+var CollaborationTrainedModelExportJobSummary_trainedModelVersionIdentifier = &sCollaborationTrainedModelExportJobSummary_trainedModelVersionIdentifier
+var CollaborationTrainedModelExportJobSummary_membershipIdentifier = &sCollaborationTrainedModelExportJobSummary_membershipIdentifier
+var CollaborationTrainedModelExportJobSummary_collaborationIdentifier = &sCollaborationTrainedModelExportJobSummary_collaborationIdentifier
+
+var _CollaborationTrainedModelInferenceJobList = &s_CollaborationTrainedModelInferenceJobList
+var _CollaborationTrainedModelInferenceJobList_member = &s_CollaborationTrainedModelInferenceJobList_member
+
+var CollaborationTrainedModelInferenceJobSummary = &sCollaborationTrainedModelInferenceJobSummary
+var CollaborationTrainedModelInferenceJobSummary_trainedModelInferenceJobArn = &sCollaborationTrainedModelInferenceJobSummary_trainedModelInferenceJobArn
+var CollaborationTrainedModelInferenceJobSummary_configuredModelAlgorithmAssociationArn = &sCollaborationTrainedModelInferenceJobSummary_configuredModelAlgorithmAssociationArn
+var CollaborationTrainedModelInferenceJobSummary_membershipIdentifier = &sCollaborationTrainedModelInferenceJobSummary_membershipIdentifier
+var CollaborationTrainedModelInferenceJobSummary_trainedModelArn = &sCollaborationTrainedModelInferenceJobSummary_trainedModelArn
+var CollaborationTrainedModelInferenceJobSummary_trainedModelVersionIdentifier = &sCollaborationTrainedModelInferenceJobSummary_trainedModelVersionIdentifier
+var CollaborationTrainedModelInferenceJobSummary_collaborationIdentifier = &sCollaborationTrainedModelInferenceJobSummary_collaborationIdentifier
+var CollaborationTrainedModelInferenceJobSummary_status = &sCollaborationTrainedModelInferenceJobSummary_status
+var CollaborationTrainedModelInferenceJobSummary_outputConfiguration = &sCollaborationTrainedModelInferenceJobSummary_outputConfiguration
+var CollaborationTrainedModelInferenceJobSummary_name = &sCollaborationTrainedModelInferenceJobSummary_name
+var CollaborationTrainedModelInferenceJobSummary_description = &sCollaborationTrainedModelInferenceJobSummary_description
+var CollaborationTrainedModelInferenceJobSummary_metricsStatus = &sCollaborationTrainedModelInferenceJobSummary_metricsStatus
+var CollaborationTrainedModelInferenceJobSummary_metricsStatusDetails = &sCollaborationTrainedModelInferenceJobSummary_metricsStatusDetails
+var CollaborationTrainedModelInferenceJobSummary_logsStatus = &sCollaborationTrainedModelInferenceJobSummary_logsStatus
+var CollaborationTrainedModelInferenceJobSummary_logsStatusDetails = &sCollaborationTrainedModelInferenceJobSummary_logsStatusDetails
+var CollaborationTrainedModelInferenceJobSummary_mlModelInferencePayerAccountId = &sCollaborationTrainedModelInferenceJobSummary_mlModelInferencePayerAccountId
+var CollaborationTrainedModelInferenceJobSummary_createTime = &sCollaborationTrainedModelInferenceJobSummary_createTime
+var CollaborationTrainedModelInferenceJobSummary_updateTime = &sCollaborationTrainedModelInferenceJobSummary_updateTime
+var CollaborationTrainedModelInferenceJobSummary_creatorAccountId = &sCollaborationTrainedModelInferenceJobSummary_creatorAccountId
+
+var _CollaborationTrainedModelList = &s_CollaborationTrainedModelList
+var _CollaborationTrainedModelList_member = &s_CollaborationTrainedModelList_member
+
+var CollaborationTrainedModelSummary = &sCollaborationTrainedModelSummary
+var CollaborationTrainedModelSummary_createTime = &sCollaborationTrainedModelSummary_createTime
+var CollaborationTrainedModelSummary_updateTime = &sCollaborationTrainedModelSummary_updateTime
+var CollaborationTrainedModelSummary_trainedModelArn = &sCollaborationTrainedModelSummary_trainedModelArn
+var CollaborationTrainedModelSummary_name = &sCollaborationTrainedModelSummary_name
+var CollaborationTrainedModelSummary_versionIdentifier = &sCollaborationTrainedModelSummary_versionIdentifier
+var CollaborationTrainedModelSummary_incrementalTrainingDataChannels = &sCollaborationTrainedModelSummary_incrementalTrainingDataChannels
+var CollaborationTrainedModelSummary_description = &sCollaborationTrainedModelSummary_description
+var CollaborationTrainedModelSummary_membershipIdentifier = &sCollaborationTrainedModelSummary_membershipIdentifier
+var CollaborationTrainedModelSummary_collaborationIdentifier = &sCollaborationTrainedModelSummary_collaborationIdentifier
+var CollaborationTrainedModelSummary_status = &sCollaborationTrainedModelSummary_status
+var CollaborationTrainedModelSummary_configuredModelAlgorithmAssociationArn = &sCollaborationTrainedModelSummary_configuredModelAlgorithmAssociationArn
+var CollaborationTrainedModelSummary_creatorAccountId = &sCollaborationTrainedModelSummary_creatorAccountId
+var CollaborationTrainedModelSummary_mlModelTrainingPayerAccountId = &sCollaborationTrainedModelSummary_mlModelTrainingPayerAccountId
+
+var ColumnClassificationDetails = &sColumnClassificationDetails
+var ColumnClassificationDetails_columnMapping = &sColumnClassificationDetails_columnMapping
+
+var _ColumnMappingList = &s_ColumnMappingList
+var _ColumnMappingList_member = &s_ColumnMappingList_member
+
+var _ColumnName = &s_ColumnName
+
+var ColumnSchema = &sColumnSchema
+var ColumnSchema_columnName = &sColumnSchema_columnName
+var ColumnSchema_columnTypes = &sColumnSchema_columnTypes
+
+var ColumnType = &sColumnType
+var ColumnType_USER_ID = &sColumnType_USER_ID
+var ColumnType_ITEM_ID = &sColumnType_ITEM_ID
+var ColumnType_TIMESTAMP = &sColumnType_TIMESTAMP
+var ColumnType_CATEGORICAL_FEATURE = &sColumnType_CATEGORICAL_FEATURE
+var ColumnType_NUMERICAL_FEATURE = &sColumnType_NUMERICAL_FEATURE
+
+var _ColumnTypeList = &s_ColumnTypeList
+var _ColumnTypeList_member = &s_ColumnTypeList_member
+
+var ComputeConfiguration = &sComputeConfiguration
+var ComputeConfiguration_worker = &sComputeConfiguration_worker
+
+var _ConfiguredAudienceModelArn = &s_ConfiguredAudienceModelArn
+
+var _ConfiguredAudienceModelList = &s_ConfiguredAudienceModelList
+var _ConfiguredAudienceModelList_member = &s_ConfiguredAudienceModelList_member
+
+var ConfiguredAudienceModelOutputConfig = &sConfiguredAudienceModelOutputConfig
+var ConfiguredAudienceModelOutputConfig_destination = &sConfiguredAudienceModelOutputConfig_destination
+var ConfiguredAudienceModelOutputConfig_roleArn = &sConfiguredAudienceModelOutputConfig_roleArn
+
+var ConfiguredAudienceModelStatus = &sConfiguredAudienceModelStatus
+var ConfiguredAudienceModelStatus_ACTIVE = &sConfiguredAudienceModelStatus_ACTIVE
+
+var ConfiguredAudienceModelSummary = &sConfiguredAudienceModelSummary
+var ConfiguredAudienceModelSummary_createTime = &sConfiguredAudienceModelSummary_createTime
+var ConfiguredAudienceModelSummary_updateTime = &sConfiguredAudienceModelSummary_updateTime
+var ConfiguredAudienceModelSummary_name = &sConfiguredAudienceModelSummary_name
+var ConfiguredAudienceModelSummary_audienceModelArn = &sConfiguredAudienceModelSummary_audienceModelArn
+var ConfiguredAudienceModelSummary_outputConfig = &sConfiguredAudienceModelSummary_outputConfig
+var ConfiguredAudienceModelSummary_description = &sConfiguredAudienceModelSummary_description
+var ConfiguredAudienceModelSummary_configuredAudienceModelArn = &sConfiguredAudienceModelSummary_configuredAudienceModelArn
+var ConfiguredAudienceModelSummary_status = &sConfiguredAudienceModelSummary_status
+
+var _ConfiguredModelAlgorithmArn = &s_ConfiguredModelAlgorithmArn
+
+var _ConfiguredModelAlgorithmAssociationArn = &s_ConfiguredModelAlgorithmAssociationArn
+
+var _ConfiguredModelAlgorithmAssociationArnList = &s_ConfiguredModelAlgorithmAssociationArnList
+var _ConfiguredModelAlgorithmAssociationArnList_member = &s_ConfiguredModelAlgorithmAssociationArnList_member
+
+var _ConfiguredModelAlgorithmAssociationList = &s_ConfiguredModelAlgorithmAssociationList
+var _ConfiguredModelAlgorithmAssociationList_member = &s_ConfiguredModelAlgorithmAssociationList_member
+
+var ConfiguredModelAlgorithmAssociationSummary = &sConfiguredModelAlgorithmAssociationSummary
+var ConfiguredModelAlgorithmAssociationSummary_createTime = &sConfiguredModelAlgorithmAssociationSummary_createTime
+var ConfiguredModelAlgorithmAssociationSummary_updateTime = &sConfiguredModelAlgorithmAssociationSummary_updateTime
+var ConfiguredModelAlgorithmAssociationSummary_configuredModelAlgorithmAssociationArn = &sConfiguredModelAlgorithmAssociationSummary_configuredModelAlgorithmAssociationArn
+var ConfiguredModelAlgorithmAssociationSummary_configuredModelAlgorithmArn = &sConfiguredModelAlgorithmAssociationSummary_configuredModelAlgorithmArn
+var ConfiguredModelAlgorithmAssociationSummary_name = &sConfiguredModelAlgorithmAssociationSummary_name
+var ConfiguredModelAlgorithmAssociationSummary_description = &sConfiguredModelAlgorithmAssociationSummary_description
+var ConfiguredModelAlgorithmAssociationSummary_membershipIdentifier = &sConfiguredModelAlgorithmAssociationSummary_membershipIdentifier
+var ConfiguredModelAlgorithmAssociationSummary_collaborationIdentifier = &sConfiguredModelAlgorithmAssociationSummary_collaborationIdentifier
+
+var _ConfiguredModelAlgorithmList = &s_ConfiguredModelAlgorithmList
+var _ConfiguredModelAlgorithmList_member = &s_ConfiguredModelAlgorithmList_member
+
+var ConfiguredModelAlgorithmSummary = &sConfiguredModelAlgorithmSummary
+var ConfiguredModelAlgorithmSummary_createTime = &sConfiguredModelAlgorithmSummary_createTime
+var ConfiguredModelAlgorithmSummary_updateTime = &sConfiguredModelAlgorithmSummary_updateTime
+var ConfiguredModelAlgorithmSummary_configuredModelAlgorithmArn = &sConfiguredModelAlgorithmSummary_configuredModelAlgorithmArn
+var ConfiguredModelAlgorithmSummary_name = &sConfiguredModelAlgorithmSummary_name
+var ConfiguredModelAlgorithmSummary_description = &sConfiguredModelAlgorithmSummary_description
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+
+var _ContainerArgument = &s_ContainerArgument
+
+var _ContainerArguments = &s_ContainerArguments
+var _ContainerArguments_member = &s_ContainerArguments_member
+
+var ContainerConfig = &sContainerConfig
+var ContainerConfig_imageUri = &sContainerConfig_imageUri
+var ContainerConfig_entrypoint = &sContainerConfig_entrypoint
+var ContainerConfig_arguments = &sContainerConfig_arguments
+var ContainerConfig_metricDefinitions = &sContainerConfig_metricDefinitions
+
+var _ContainerEntrypoint = &s_ContainerEntrypoint
+var _ContainerEntrypoint_member = &s_ContainerEntrypoint_member
+
+var _ContainerEntrypointString = &s_ContainerEntrypointString
+
+var _CustomDataIdentifier = &s_CustomDataIdentifier
+
+var _CustomDataIdentifierList = &s_CustomDataIdentifierList
+var _CustomDataIdentifierList_member = &s_CustomDataIdentifierList_member
+
+var CustomEntityConfig = &sCustomEntityConfig
+var CustomEntityConfig_customDataIdentifiers = &sCustomEntityConfig_customDataIdentifiers
+
+var DataPrivacyScores = &sDataPrivacyScores
+var DataPrivacyScores_membershipInferenceAttackScores = &sDataPrivacyScores_membershipInferenceAttackScores
+
+var Dataset = &sDataset
+var Dataset_type = &sDataset_type
+var Dataset_inputConfig = &sDataset_inputConfig
+
+var DatasetInputConfig = &sDatasetInputConfig
+var DatasetInputConfig_schema = &sDatasetInputConfig_schema
+var DatasetInputConfig_dataSource = &sDatasetInputConfig_dataSource
+
+var _DatasetList = &s_DatasetList
+var _DatasetList_member = &s_DatasetList_member
+
+var _DatasetSchemaList = &s_DatasetSchemaList
+var _DatasetSchemaList_member = &s_DatasetSchemaList_member
+
+var DatasetType = &sDatasetType
+var DatasetType_INTERACTIONS = &sDatasetType_INTERACTIONS
+
+var DataSource = &sDataSource
+var DataSource_glueDataSource = &sDataSource_glueDataSource
+
+var Destination = &sDestination
+var Destination_s3Destination = &sDestination_s3Destination
+
+var EntityType = &sEntityType
+var EntityType_ALL_PERSONALLY_IDENTIFIABLE_INFORMATION = &sEntityType_ALL_PERSONALLY_IDENTIFIABLE_INFORMATION
+var EntityType_NUMBERS = &sEntityType_NUMBERS
+var EntityType_CUSTOM = &sEntityType_CUSTOM
+
+var _EntityTypeList = &s_EntityTypeList
+var _EntityTypeList_member = &s_EntityTypeList_member
+
+var _Environment = &s_Environment
+var _Environment_key = &s_Environment_key
+var _Environment_value = &s_Environment_value
+
+var _GlueDatabaseName = &s_GlueDatabaseName
+
+var GlueDataSource = &sGlueDataSource
+var GlueDataSource_tableName = &sGlueDataSource_tableName
+var GlueDataSource_databaseName = &sGlueDataSource_databaseName
+var GlueDataSource_catalogId = &sGlueDataSource_catalogId
+
+var _GlueTableName = &s_GlueTableName
+
+var _Hash = &s_Hash
+
+var _HyperParameters = &s_HyperParameters
+var _HyperParameters_key = &s_HyperParameters_key
+var _HyperParameters_value = &s_HyperParameters_value
+
+var _IamRoleArn = &s_IamRoleArn
+
+var IncrementalTrainingDataChannel = &sIncrementalTrainingDataChannel
+var IncrementalTrainingDataChannel_trainedModelArn = &sIncrementalTrainingDataChannel_trainedModelArn
+var IncrementalTrainingDataChannel_versionIdentifier = &sIncrementalTrainingDataChannel_versionIdentifier
+var IncrementalTrainingDataChannel_channelName = &sIncrementalTrainingDataChannel_channelName
+
+var IncrementalTrainingDataChannelOutput = &sIncrementalTrainingDataChannelOutput
+var IncrementalTrainingDataChannelOutput_channelName = &sIncrementalTrainingDataChannelOutput_channelName
+var IncrementalTrainingDataChannelOutput_versionIdentifier = &sIncrementalTrainingDataChannelOutput_versionIdentifier
+var IncrementalTrainingDataChannelOutput_modelName = &sIncrementalTrainingDataChannelOutput_modelName
+
+var _IncrementalTrainingDataChannels = &s_IncrementalTrainingDataChannels
+var _IncrementalTrainingDataChannels_member = &s_IncrementalTrainingDataChannels_member
+
+var _IncrementalTrainingDataChannelsOutput = &s_IncrementalTrainingDataChannelsOutput
+var _IncrementalTrainingDataChannelsOutput_member = &s_IncrementalTrainingDataChannelsOutput_member
+
+var InferenceContainerConfig = &sInferenceContainerConfig
+var InferenceContainerConfig_imageUri = &sInferenceContainerConfig_imageUri
+
+var InferenceContainerExecutionParameters = &sInferenceContainerExecutionParameters
+var InferenceContainerExecutionParameters_maxPayloadInMB = &sInferenceContainerExecutionParameters_maxPayloadInMB
+
+var _InferenceEnvironmentMap = &s_InferenceEnvironmentMap
+var _InferenceEnvironmentMap_key = &s_InferenceEnvironmentMap_key
+var _InferenceEnvironmentMap_value = &s_InferenceEnvironmentMap_value
+
+var InferenceInstanceType = &sInferenceInstanceType
+var InferenceInstanceType_ML_R7I_48XLARGE = &sInferenceInstanceType_ML_R7I_48XLARGE
+var InferenceInstanceType_ML_R6I_16XLARGE = &sInferenceInstanceType_ML_R6I_16XLARGE
+var InferenceInstanceType_ML_M6I_XLARGE = &sInferenceInstanceType_ML_M6I_XLARGE
+var InferenceInstanceType_ML_M5_4XLARGE = &sInferenceInstanceType_ML_M5_4XLARGE
+var InferenceInstanceType_ML_P2_XLARGE = &sInferenceInstanceType_ML_P2_XLARGE
+var InferenceInstanceType_ML_M4_16XLARGE = &sInferenceInstanceType_ML_M4_16XLARGE
+var InferenceInstanceType_ML_R7I_16XLARGE = &sInferenceInstanceType_ML_R7I_16XLARGE
+var InferenceInstanceType_ML_M7I_XLARGE = &sInferenceInstanceType_ML_M7I_XLARGE
+var InferenceInstanceType_ML_M6I_12XLARGE = &sInferenceInstanceType_ML_M6I_12XLARGE
+var InferenceInstanceType_ML_R7I_8XLARGE = &sInferenceInstanceType_ML_R7I_8XLARGE
+var InferenceInstanceType_ML_R7I_LARGE = &sInferenceInstanceType_ML_R7I_LARGE
+var InferenceInstanceType_ML_M7I_12XLARGE = &sInferenceInstanceType_ML_M7I_12XLARGE
+var InferenceInstanceType_ML_M6I_24XLARGE = &sInferenceInstanceType_ML_M6I_24XLARGE
+var InferenceInstanceType_ML_M7I_24XLARGE = &sInferenceInstanceType_ML_M7I_24XLARGE
+var InferenceInstanceType_ML_R6I_8XLARGE = &sInferenceInstanceType_ML_R6I_8XLARGE
+var InferenceInstanceType_ML_R6I_LARGE = &sInferenceInstanceType_ML_R6I_LARGE
+var InferenceInstanceType_ML_G5_2XLARGE = &sInferenceInstanceType_ML_G5_2XLARGE
+var InferenceInstanceType_ML_M5_LARGE = &sInferenceInstanceType_ML_M5_LARGE
+var InferenceInstanceType_ML_M7I_48XLARGE = &sInferenceInstanceType_ML_M7I_48XLARGE
+var InferenceInstanceType_ML_M6I_16XLARGE = &sInferenceInstanceType_ML_M6I_16XLARGE
+var InferenceInstanceType_ML_P2_16XLARGE = &sInferenceInstanceType_ML_P2_16XLARGE
+var InferenceInstanceType_ML_G5_4XLARGE = &sInferenceInstanceType_ML_G5_4XLARGE
+var InferenceInstanceType_ML_M7I_16XLARGE = &sInferenceInstanceType_ML_M7I_16XLARGE
+var InferenceInstanceType_ML_C4_2XLARGE = &sInferenceInstanceType_ML_C4_2XLARGE
+var InferenceInstanceType_ML_C5_2XLARGE = &sInferenceInstanceType_ML_C5_2XLARGE
+var InferenceInstanceType_ML_C6I_32XLARGE = &sInferenceInstanceType_ML_C6I_32XLARGE
+var InferenceInstanceType_ML_C4_4XLARGE = &sInferenceInstanceType_ML_C4_4XLARGE
+var InferenceInstanceType_ML_G5_8XLARGE = &sInferenceInstanceType_ML_G5_8XLARGE
+var InferenceInstanceType_ML_C6I_XLARGE = &sInferenceInstanceType_ML_C6I_XLARGE
+var InferenceInstanceType_ML_C5_4XLARGE = &sInferenceInstanceType_ML_C5_4XLARGE
+var InferenceInstanceType_ML_G4DN_XLARGE = &sInferenceInstanceType_ML_G4DN_XLARGE
+var InferenceInstanceType_ML_C7I_XLARGE = &sInferenceInstanceType_ML_C7I_XLARGE
+var InferenceInstanceType_ML_C6I_12XLARGE = &sInferenceInstanceType_ML_C6I_12XLARGE
+var InferenceInstanceType_ML_G4DN_12XLARGE = &sInferenceInstanceType_ML_G4DN_12XLARGE
+var InferenceInstanceType_ML_C7I_12XLARGE = &sInferenceInstanceType_ML_C7I_12XLARGE
+var InferenceInstanceType_ML_C6I_24XLARGE = &sInferenceInstanceType_ML_C6I_24XLARGE
+var InferenceInstanceType_ML_G4DN_2XLARGE = &sInferenceInstanceType_ML_G4DN_2XLARGE
+var InferenceInstanceType_ML_C7I_24XLARGE = &sInferenceInstanceType_ML_C7I_24XLARGE
+var InferenceInstanceType_ML_C7I_2XLARGE = &sInferenceInstanceType_ML_C7I_2XLARGE
+var InferenceInstanceType_ML_C4_8XLARGE = &sInferenceInstanceType_ML_C4_8XLARGE
+var InferenceInstanceType_ML_C6I_2XLARGE = &sInferenceInstanceType_ML_C6I_2XLARGE
+var InferenceInstanceType_ML_G4DN_4XLARGE = &sInferenceInstanceType_ML_G4DN_4XLARGE
+var InferenceInstanceType_ML_C7I_48XLARGE = &sInferenceInstanceType_ML_C7I_48XLARGE
+var InferenceInstanceType_ML_C7I_4XLARGE = &sInferenceInstanceType_ML_C7I_4XLARGE
+var InferenceInstanceType_ML_C6I_16XLARGE = &sInferenceInstanceType_ML_C6I_16XLARGE
+var InferenceInstanceType_ML_C5_9XLARGE = &sInferenceInstanceType_ML_C5_9XLARGE
+var InferenceInstanceType_ML_G4DN_16XLARGE = &sInferenceInstanceType_ML_G4DN_16XLARGE
+var InferenceInstanceType_ML_C7I_16XLARGE = &sInferenceInstanceType_ML_C7I_16XLARGE
+var InferenceInstanceType_ML_C6I_4XLARGE = &sInferenceInstanceType_ML_C6I_4XLARGE
+var InferenceInstanceType_ML_C5_XLARGE = &sInferenceInstanceType_ML_C5_XLARGE
+var InferenceInstanceType_ML_C4_XLARGE = &sInferenceInstanceType_ML_C4_XLARGE
+var InferenceInstanceType_ML_G4DN_8XLARGE = &sInferenceInstanceType_ML_G4DN_8XLARGE
+var InferenceInstanceType_ML_C7I_8XLARGE = &sInferenceInstanceType_ML_C7I_8XLARGE
+var InferenceInstanceType_ML_C7I_LARGE = &sInferenceInstanceType_ML_C7I_LARGE
+var InferenceInstanceType_ML_G5_XLARGE = &sInferenceInstanceType_ML_G5_XLARGE
+var InferenceInstanceType_ML_C6I_8XLARGE = &sInferenceInstanceType_ML_C6I_8XLARGE
+var InferenceInstanceType_ML_C6I_LARGE = &sInferenceInstanceType_ML_C6I_LARGE
+var InferenceInstanceType_ML_G5_12XLARGE = &sInferenceInstanceType_ML_G5_12XLARGE
+var InferenceInstanceType_ML_G5_24XLARGE = &sInferenceInstanceType_ML_G5_24XLARGE
+var InferenceInstanceType_ML_M7I_2XLARGE = &sInferenceInstanceType_ML_M7I_2XLARGE
+var InferenceInstanceType_ML_C5_18XLARGE = &sInferenceInstanceType_ML_C5_18XLARGE
+var InferenceInstanceType_ML_G5_48XLARGE = &sInferenceInstanceType_ML_G5_48XLARGE
+var InferenceInstanceType_ML_M6I_2XLARGE = &sInferenceInstanceType_ML_M6I_2XLARGE
+var InferenceInstanceType_ML_G5_16XLARGE = &sInferenceInstanceType_ML_G5_16XLARGE
+var InferenceInstanceType_ML_M7I_4XLARGE = &sInferenceInstanceType_ML_M7I_4XLARGE
+var InferenceInstanceType_ML_R6I_32XLARGE = &sInferenceInstanceType_ML_R6I_32XLARGE
+var InferenceInstanceType_ML_M6I_4XLARGE = &sInferenceInstanceType_ML_M6I_4XLARGE
+var InferenceInstanceType_ML_M5_XLARGE = &sInferenceInstanceType_ML_M5_XLARGE
+var InferenceInstanceType_ML_M4_10XLARGE = &sInferenceInstanceType_ML_M4_10XLARGE
+var InferenceInstanceType_ML_R6I_XLARGE = &sInferenceInstanceType_ML_R6I_XLARGE
+var InferenceInstanceType_ML_M5_12XLARGE = &sInferenceInstanceType_ML_M5_12XLARGE
+var InferenceInstanceType_ML_M4_XLARGE = &sInferenceInstanceType_ML_M4_XLARGE
+var InferenceInstanceType_ML_R7I_2XLARGE = &sInferenceInstanceType_ML_R7I_2XLARGE
+var InferenceInstanceType_ML_R7I_XLARGE = &sInferenceInstanceType_ML_R7I_XLARGE
+var InferenceInstanceType_ML_R6I_12XLARGE = &sInferenceInstanceType_ML_R6I_12XLARGE
+var InferenceInstanceType_ML_M5_24XLARGE = &sInferenceInstanceType_ML_M5_24XLARGE
+var InferenceInstanceType_ML_R7I_12XLARGE = &sInferenceInstanceType_ML_R7I_12XLARGE
+var InferenceInstanceType_ML_M7I_8XLARGE = &sInferenceInstanceType_ML_M7I_8XLARGE
+var InferenceInstanceType_ML_M7I_LARGE = &sInferenceInstanceType_ML_M7I_LARGE
+var InferenceInstanceType_ML_R6I_24XLARGE = &sInferenceInstanceType_ML_R6I_24XLARGE
+var InferenceInstanceType_ML_R6I_2XLARGE = &sInferenceInstanceType_ML_R6I_2XLARGE
+var InferenceInstanceType_ML_M4_2XLARGE = &sInferenceInstanceType_ML_M4_2XLARGE
+var InferenceInstanceType_ML_R7I_24XLARGE = &sInferenceInstanceType_ML_R7I_24XLARGE
+var InferenceInstanceType_ML_R7I_4XLARGE = &sInferenceInstanceType_ML_R7I_4XLARGE
+var InferenceInstanceType_ML_M6I_8XLARGE = &sInferenceInstanceType_ML_M6I_8XLARGE
+var InferenceInstanceType_ML_M6I_LARGE = &sInferenceInstanceType_ML_M6I_LARGE
+var InferenceInstanceType_ML_M5_2XLARGE = &sInferenceInstanceType_ML_M5_2XLARGE
+var InferenceInstanceType_ML_P2_8XLARGE = &sInferenceInstanceType_ML_P2_8XLARGE
+var InferenceInstanceType_ML_R6I_4XLARGE = &sInferenceInstanceType_ML_R6I_4XLARGE
+var InferenceInstanceType_ML_M6I_32XLARGE = &sInferenceInstanceType_ML_M6I_32XLARGE
+var InferenceInstanceType_ML_M4_4XLARGE = &sInferenceInstanceType_ML_M4_4XLARGE
+var InferenceInstanceType_ML_P3_16XLARGE = &sInferenceInstanceType_ML_P3_16XLARGE
+var InferenceInstanceType_ML_P3_2XLARGE = &sInferenceInstanceType_ML_P3_2XLARGE
+var InferenceInstanceType_ML_P3_8XLARGE = &sInferenceInstanceType_ML_P3_8XLARGE
+
+var InferenceOutputConfiguration = &sInferenceOutputConfiguration
+var InferenceOutputConfiguration_accept = &sInferenceOutputConfiguration_accept
+var InferenceOutputConfiguration_members = &sInferenceOutputConfiguration_members
+
+var InferenceReceiverMember = &sInferenceReceiverMember
+var InferenceReceiverMember_accountId = &sInferenceReceiverMember_accountId
+
+var _InferenceReceiverMembers = &s_InferenceReceiverMembers
+var _InferenceReceiverMembers_member = &s_InferenceReceiverMembers_member
+
+var InferenceResourceConfig = &sInferenceResourceConfig
+var InferenceResourceConfig_instanceType = &sInferenceResourceConfig_instanceType
+var InferenceResourceConfig_instanceCount = &sInferenceResourceConfig_instanceCount
+
+var InputChannel = &sInputChannel
+var InputChannel_dataSource = &sInputChannel_dataSource
+var InputChannel_roleArn = &sInputChannel_roleArn
+
+var InputChannelDataSource = &sInputChannelDataSource
+var InputChannelDataSource_protectedQueryInputParameters = &sInputChannelDataSource_protectedQueryInputParameters
+
+var InstanceType = &sInstanceType
+var InstanceType_ML_M4_XLARGE = &sInstanceType_ML_M4_XLARGE
+var InstanceType_ML_M4_2XLARGE = &sInstanceType_ML_M4_2XLARGE
+var InstanceType_ML_M4_4XLARGE = &sInstanceType_ML_M4_4XLARGE
+var InstanceType_ML_M4_10XLARGE = &sInstanceType_ML_M4_10XLARGE
+var InstanceType_ML_M4_16XLARGE = &sInstanceType_ML_M4_16XLARGE
+var InstanceType_ML_G4DN_XLARGE = &sInstanceType_ML_G4DN_XLARGE
+var InstanceType_ML_G4DN_2XLARGE = &sInstanceType_ML_G4DN_2XLARGE
+var InstanceType_ML_G4DN_4XLARGE = &sInstanceType_ML_G4DN_4XLARGE
+var InstanceType_ML_G4DN_8XLARGE = &sInstanceType_ML_G4DN_8XLARGE
+var InstanceType_ML_G4DN_12XLARGE = &sInstanceType_ML_G4DN_12XLARGE
+var InstanceType_ML_G4DN_16XLARGE = &sInstanceType_ML_G4DN_16XLARGE
+var InstanceType_ML_M5_LARGE = &sInstanceType_ML_M5_LARGE
+var InstanceType_ML_M5_XLARGE = &sInstanceType_ML_M5_XLARGE
+var InstanceType_ML_M5_2XLARGE = &sInstanceType_ML_M5_2XLARGE
+var InstanceType_ML_M5_4XLARGE = &sInstanceType_ML_M5_4XLARGE
+var InstanceType_ML_M5_12XLARGE = &sInstanceType_ML_M5_12XLARGE
+var InstanceType_ML_M5_24XLARGE = &sInstanceType_ML_M5_24XLARGE
+var InstanceType_ML_C4_XLARGE = &sInstanceType_ML_C4_XLARGE
+var InstanceType_ML_C4_2XLARGE = &sInstanceType_ML_C4_2XLARGE
+var InstanceType_ML_C4_4XLARGE = &sInstanceType_ML_C4_4XLARGE
+var InstanceType_ML_C4_8XLARGE = &sInstanceType_ML_C4_8XLARGE
+var InstanceType_ML_P2_XLARGE = &sInstanceType_ML_P2_XLARGE
+var InstanceType_ML_P2_8XLARGE = &sInstanceType_ML_P2_8XLARGE
+var InstanceType_ML_P2_16XLARGE = &sInstanceType_ML_P2_16XLARGE
+var InstanceType_ML_P4D_24XLARGE = &sInstanceType_ML_P4D_24XLARGE
+var InstanceType_ML_P4DE_24XLARGE = &sInstanceType_ML_P4DE_24XLARGE
+var InstanceType_ML_P5_48XLARGE = &sInstanceType_ML_P5_48XLARGE
+var InstanceType_ML_C5_XLARGE = &sInstanceType_ML_C5_XLARGE
+var InstanceType_ML_C5_2XLARGE = &sInstanceType_ML_C5_2XLARGE
+var InstanceType_ML_C5_4XLARGE = &sInstanceType_ML_C5_4XLARGE
+var InstanceType_ML_C5_9XLARGE = &sInstanceType_ML_C5_9XLARGE
+var InstanceType_ML_C5_18XLARGE = &sInstanceType_ML_C5_18XLARGE
+var InstanceType_ML_C5N_XLARGE = &sInstanceType_ML_C5N_XLARGE
+var InstanceType_ML_C5N_2XLARGE = &sInstanceType_ML_C5N_2XLARGE
+var InstanceType_ML_C5N_4XLARGE = &sInstanceType_ML_C5N_4XLARGE
+var InstanceType_ML_C5N_9XLARGE = &sInstanceType_ML_C5N_9XLARGE
+var InstanceType_ML_C5N_18XLARGE = &sInstanceType_ML_C5N_18XLARGE
+var InstanceType_ML_G5_XLARGE = &sInstanceType_ML_G5_XLARGE
+var InstanceType_ML_G5_2XLARGE = &sInstanceType_ML_G5_2XLARGE
+var InstanceType_ML_G5_4XLARGE = &sInstanceType_ML_G5_4XLARGE
+var InstanceType_ML_G5_8XLARGE = &sInstanceType_ML_G5_8XLARGE
+var InstanceType_ML_G5_16XLARGE = &sInstanceType_ML_G5_16XLARGE
+var InstanceType_ML_G5_12XLARGE = &sInstanceType_ML_G5_12XLARGE
+var InstanceType_ML_G5_24XLARGE = &sInstanceType_ML_G5_24XLARGE
+var InstanceType_ML_G5_48XLARGE = &sInstanceType_ML_G5_48XLARGE
+var InstanceType_ML_TRN1_2XLARGE = &sInstanceType_ML_TRN1_2XLARGE
+var InstanceType_ML_TRN1_32XLARGE = &sInstanceType_ML_TRN1_32XLARGE
+var InstanceType_ML_TRN1N_32XLARGE = &sInstanceType_ML_TRN1N_32XLARGE
+var InstanceType_ML_M6I_LARGE = &sInstanceType_ML_M6I_LARGE
+var InstanceType_ML_M6I_XLARGE = &sInstanceType_ML_M6I_XLARGE
+var InstanceType_ML_M6I_2XLARGE = &sInstanceType_ML_M6I_2XLARGE
+var InstanceType_ML_M6I_4XLARGE = &sInstanceType_ML_M6I_4XLARGE
+var InstanceType_ML_M6I_8XLARGE = &sInstanceType_ML_M6I_8XLARGE
+var InstanceType_ML_M6I_12XLARGE = &sInstanceType_ML_M6I_12XLARGE
+var InstanceType_ML_M6I_16XLARGE = &sInstanceType_ML_M6I_16XLARGE
+var InstanceType_ML_M6I_24XLARGE = &sInstanceType_ML_M6I_24XLARGE
+var InstanceType_ML_M6I_32XLARGE = &sInstanceType_ML_M6I_32XLARGE
+var InstanceType_ML_C6I_XLARGE = &sInstanceType_ML_C6I_XLARGE
+var InstanceType_ML_C6I_2XLARGE = &sInstanceType_ML_C6I_2XLARGE
+var InstanceType_ML_C6I_8XLARGE = &sInstanceType_ML_C6I_8XLARGE
+var InstanceType_ML_C6I_4XLARGE = &sInstanceType_ML_C6I_4XLARGE
+var InstanceType_ML_C6I_12XLARGE = &sInstanceType_ML_C6I_12XLARGE
+var InstanceType_ML_C6I_16XLARGE = &sInstanceType_ML_C6I_16XLARGE
+var InstanceType_ML_C6I_24XLARGE = &sInstanceType_ML_C6I_24XLARGE
+var InstanceType_ML_C6I_32XLARGE = &sInstanceType_ML_C6I_32XLARGE
+var InstanceType_ML_R5D_LARGE = &sInstanceType_ML_R5D_LARGE
+var InstanceType_ML_R5D_XLARGE = &sInstanceType_ML_R5D_XLARGE
+var InstanceType_ML_R5D_2XLARGE = &sInstanceType_ML_R5D_2XLARGE
+var InstanceType_ML_R5D_4XLARGE = &sInstanceType_ML_R5D_4XLARGE
+var InstanceType_ML_R5D_8XLARGE = &sInstanceType_ML_R5D_8XLARGE
+var InstanceType_ML_R5D_12XLARGE = &sInstanceType_ML_R5D_12XLARGE
+var InstanceType_ML_R5D_16XLARGE = &sInstanceType_ML_R5D_16XLARGE
+var InstanceType_ML_R5D_24XLARGE = &sInstanceType_ML_R5D_24XLARGE
+var InstanceType_ML_T3_MEDIUM = &sInstanceType_ML_T3_MEDIUM
+var InstanceType_ML_T3_LARGE = &sInstanceType_ML_T3_LARGE
+var InstanceType_ML_T3_XLARGE = &sInstanceType_ML_T3_XLARGE
+var InstanceType_ML_T3_2XLARGE = &sInstanceType_ML_T3_2XLARGE
+var InstanceType_ML_R5_LARGE = &sInstanceType_ML_R5_LARGE
+var InstanceType_ML_R5_XLARGE = &sInstanceType_ML_R5_XLARGE
+var InstanceType_ML_R5_2XLARGE = &sInstanceType_ML_R5_2XLARGE
+var InstanceType_ML_R5_4XLARGE = &sInstanceType_ML_R5_4XLARGE
+var InstanceType_ML_R5_8XLARGE = &sInstanceType_ML_R5_8XLARGE
+var InstanceType_ML_R5_12XLARGE = &sInstanceType_ML_R5_12XLARGE
+var InstanceType_ML_R5_16XLARGE = &sInstanceType_ML_R5_16XLARGE
+var InstanceType_ML_R5_24XLARGE = &sInstanceType_ML_R5_24XLARGE
+var InstanceType_ML_C7I_LARGE = &sInstanceType_ML_C7I_LARGE
+var InstanceType_ML_C7I_XLARGE = &sInstanceType_ML_C7I_XLARGE
+var InstanceType_ML_C7I_2XLARGE = &sInstanceType_ML_C7I_2XLARGE
+var InstanceType_ML_C7I_4XLARGE = &sInstanceType_ML_C7I_4XLARGE
+var InstanceType_ML_C7I_8XLARGE = &sInstanceType_ML_C7I_8XLARGE
+var InstanceType_ML_C7I_12XLARGE = &sInstanceType_ML_C7I_12XLARGE
+var InstanceType_ML_C7I_16XLARGE = &sInstanceType_ML_C7I_16XLARGE
+var InstanceType_ML_C7I_24XLARGE = &sInstanceType_ML_C7I_24XLARGE
+var InstanceType_ML_C7I_48XLARGE = &sInstanceType_ML_C7I_48XLARGE
+var InstanceType_ML_M7I_LARGE = &sInstanceType_ML_M7I_LARGE
+var InstanceType_ML_M7I_XLARGE = &sInstanceType_ML_M7I_XLARGE
+var InstanceType_ML_M7I_2XLARGE = &sInstanceType_ML_M7I_2XLARGE
+var InstanceType_ML_M7I_4XLARGE = &sInstanceType_ML_M7I_4XLARGE
+var InstanceType_ML_M7I_8XLARGE = &sInstanceType_ML_M7I_8XLARGE
+var InstanceType_ML_M7I_12XLARGE = &sInstanceType_ML_M7I_12XLARGE
+var InstanceType_ML_M7I_16XLARGE = &sInstanceType_ML_M7I_16XLARGE
+var InstanceType_ML_M7I_24XLARGE = &sInstanceType_ML_M7I_24XLARGE
+var InstanceType_ML_M7I_48XLARGE = &sInstanceType_ML_M7I_48XLARGE
+var InstanceType_ML_R7I_LARGE = &sInstanceType_ML_R7I_LARGE
+var InstanceType_ML_R7I_XLARGE = &sInstanceType_ML_R7I_XLARGE
+var InstanceType_ML_R7I_2XLARGE = &sInstanceType_ML_R7I_2XLARGE
+var InstanceType_ML_R7I_4XLARGE = &sInstanceType_ML_R7I_4XLARGE
+var InstanceType_ML_R7I_8XLARGE = &sInstanceType_ML_R7I_8XLARGE
+var InstanceType_ML_R7I_12XLARGE = &sInstanceType_ML_R7I_12XLARGE
+var InstanceType_ML_R7I_16XLARGE = &sInstanceType_ML_R7I_16XLARGE
+var InstanceType_ML_R7I_24XLARGE = &sInstanceType_ML_R7I_24XLARGE
+var InstanceType_ML_R7I_48XLARGE = &sInstanceType_ML_R7I_48XLARGE
+var InstanceType_ML_G6_XLARGE = &sInstanceType_ML_G6_XLARGE
+var InstanceType_ML_G6_2XLARGE = &sInstanceType_ML_G6_2XLARGE
+var InstanceType_ML_G6_4XLARGE = &sInstanceType_ML_G6_4XLARGE
+var InstanceType_ML_G6_8XLARGE = &sInstanceType_ML_G6_8XLARGE
+var InstanceType_ML_G6_12XLARGE = &sInstanceType_ML_G6_12XLARGE
+var InstanceType_ML_G6_16XLARGE = &sInstanceType_ML_G6_16XLARGE
+var InstanceType_ML_G6_24XLARGE = &sInstanceType_ML_G6_24XLARGE
+var InstanceType_ML_G6_48XLARGE = &sInstanceType_ML_G6_48XLARGE
+var InstanceType_ML_G6E_XLARGE = &sInstanceType_ML_G6E_XLARGE
+var InstanceType_ML_G6E_2XLARGE = &sInstanceType_ML_G6E_2XLARGE
+var InstanceType_ML_G6E_4XLARGE = &sInstanceType_ML_G6E_4XLARGE
+var InstanceType_ML_G6E_8XLARGE = &sInstanceType_ML_G6E_8XLARGE
+var InstanceType_ML_G6E_12XLARGE = &sInstanceType_ML_G6E_12XLARGE
+var InstanceType_ML_G6E_16XLARGE = &sInstanceType_ML_G6E_16XLARGE
+var InstanceType_ML_G6E_24XLARGE = &sInstanceType_ML_G6E_24XLARGE
+var InstanceType_ML_G6E_48XLARGE = &sInstanceType_ML_G6E_48XLARGE
+var InstanceType_ML_P5EN_48XLARGE = &sInstanceType_ML_P5EN_48XLARGE
+var InstanceType_ML_P3_2XLARGE = &sInstanceType_ML_P3_2XLARGE
+var InstanceType_ML_P3_8XLARGE = &sInstanceType_ML_P3_8XLARGE
+var InstanceType_ML_P3_16XLARGE = &sInstanceType_ML_P3_16XLARGE
+var InstanceType_ML_P3DN_24XLARGE = &sInstanceType_ML_P3DN_24XLARGE
+
+var InternalServiceException = &sInternalServiceException
+var InternalServiceException_message = &sInternalServiceException_message
+
+var _KmsKeyArn = &s_KmsKeyArn
+
+var LogRedactionConfiguration = &sLogRedactionConfiguration
+var LogRedactionConfiguration_entitiesToRedact = &sLogRedactionConfiguration_entitiesToRedact
+var LogRedactionConfiguration_customEntityConfig = &sLogRedactionConfiguration_customEntityConfig
+
+var LogsConfigurationPolicy = &sLogsConfigurationPolicy
+var LogsConfigurationPolicy_allowedAccountIds = &sLogsConfigurationPolicy_allowedAccountIds
+var LogsConfigurationPolicy_filterPattern = &sLogsConfigurationPolicy_filterPattern
+var LogsConfigurationPolicy_logType = &sLogsConfigurationPolicy_logType
+var LogsConfigurationPolicy_logRedactionConfiguration = &sLogsConfigurationPolicy_logRedactionConfiguration
+
+var _LogsConfigurationPolicyList = &s_LogsConfigurationPolicyList
+var _LogsConfigurationPolicyList_member = &s_LogsConfigurationPolicyList_member
+
+var LogsStatus = &sLogsStatus
+var LogsStatus_PUBLISH_SUCCEEDED = &sLogsStatus_PUBLISH_SUCCEEDED
+var LogsStatus_PUBLISH_FAILED = &sLogsStatus_PUBLISH_FAILED
+
+var LogType = &sLogType
+var LogType_ALL = &sLogType_ALL
+var LogType_ERROR_SUMMARY = &sLogType_ERROR_SUMMARY
+
+var _MaxResults = &s_MaxResults
+
+var MembershipInferenceAttackScore = &sMembershipInferenceAttackScore
+var MembershipInferenceAttackScore_attackVersion = &sMembershipInferenceAttackScore_attackVersion
+var MembershipInferenceAttackScore_score = &sMembershipInferenceAttackScore_score
+
+var _MembershipInferenceAttackScoreList = &s_MembershipInferenceAttackScoreList
+var _MembershipInferenceAttackScoreList_member = &s_MembershipInferenceAttackScoreList_member
+
+var MembershipInferenceAttackVersion = &sMembershipInferenceAttackVersion
+var MembershipInferenceAttackVersion_DISTANCE_TO_CLOSEST_RECORD_V1 = &sMembershipInferenceAttackVersion_DISTANCE_TO_CLOSEST_RECORD_V1
+
+var MetricDefinition = &sMetricDefinition
+var MetricDefinition_name = &sMetricDefinition_name
+var MetricDefinition_regex = &sMetricDefinition_regex
+
+var _MetricDefinitionList = &s_MetricDefinitionList
+var _MetricDefinitionList_member = &s_MetricDefinitionList_member
+
+var _MetricName = &s_MetricName
+
+var _MetricRegex = &s_MetricRegex
+
+var MetricsConfigurationPolicy = &sMetricsConfigurationPolicy
+var MetricsConfigurationPolicy_noiseLevel = &sMetricsConfigurationPolicy_noiseLevel
+
+var _MetricsList = &s_MetricsList
+var _MetricsList_member = &s_MetricsList_member
+
+var MetricsStatus = &sMetricsStatus
+var MetricsStatus_PUBLISH_SUCCEEDED = &sMetricsStatus_PUBLISH_SUCCEEDED
+var MetricsStatus_PUBLISH_FAILED = &sMetricsStatus_PUBLISH_FAILED
+
+var _MinMatchingSeedSize = &s_MinMatchingSeedSize
+
+var _MLInputChannelArn = &s_MLInputChannelArn
+
+var _MLInputChannelsList = &s_MLInputChannelsList
+var _MLInputChannelsList_member = &s_MLInputChannelsList_member
+
+var MLInputChannelStatus = &sMLInputChannelStatus
+var MLInputChannelStatus_CREATE_PENDING = &sMLInputChannelStatus_CREATE_PENDING
+var MLInputChannelStatus_CREATE_IN_PROGRESS = &sMLInputChannelStatus_CREATE_IN_PROGRESS
+var MLInputChannelStatus_CREATE_FAILED = &sMLInputChannelStatus_CREATE_FAILED
+var MLInputChannelStatus_ACTIVE = &sMLInputChannelStatus_ACTIVE
+var MLInputChannelStatus_DELETE_PENDING = &sMLInputChannelStatus_DELETE_PENDING
+var MLInputChannelStatus_DELETE_IN_PROGRESS = &sMLInputChannelStatus_DELETE_IN_PROGRESS
+var MLInputChannelStatus_DELETE_FAILED = &sMLInputChannelStatus_DELETE_FAILED
+var MLInputChannelStatus_INACTIVE = &sMLInputChannelStatus_INACTIVE
+
+var MLInputChannelSummary = &sMLInputChannelSummary
+var MLInputChannelSummary_createTime = &sMLInputChannelSummary_createTime
+var MLInputChannelSummary_updateTime = &sMLInputChannelSummary_updateTime
+var MLInputChannelSummary_membershipIdentifier = &sMLInputChannelSummary_membershipIdentifier
+var MLInputChannelSummary_collaborationIdentifier = &sMLInputChannelSummary_collaborationIdentifier
+var MLInputChannelSummary_name = &sMLInputChannelSummary_name
+var MLInputChannelSummary_configuredModelAlgorithmAssociations = &sMLInputChannelSummary_configuredModelAlgorithmAssociations
+var MLInputChannelSummary_protectedQueryIdentifier = &sMLInputChannelSummary_protectedQueryIdentifier
+var MLInputChannelSummary_mlInputChannelArn = &sMLInputChannelSummary_mlInputChannelArn
+var MLInputChannelSummary_status = &sMLInputChannelSummary_status
+var MLInputChannelSummary_description = &sMLInputChannelSummary_description
+var MLInputChannelSummary_payerConfiguration = &sMLInputChannelSummary_payerConfiguration
+
+var MLOutputConfiguration = &sMLOutputConfiguration
+var MLOutputConfiguration_destination = &sMLOutputConfiguration_destination
+var MLOutputConfiguration_roleArn = &sMLOutputConfiguration_roleArn
+
+var MLSyntheticDataParameters = &sMLSyntheticDataParameters
+var MLSyntheticDataParameters_epsilon = &sMLSyntheticDataParameters_epsilon
+var MLSyntheticDataParameters_maxMembershipInferenceAttackScore = &sMLSyntheticDataParameters_maxMembershipInferenceAttackScore
+var MLSyntheticDataParameters_columnClassification = &sMLSyntheticDataParameters_columnClassification
+
+var ModelInferenceDataSource = &sModelInferenceDataSource
+var ModelInferenceDataSource_mlInputChannelArn = &sModelInferenceDataSource_mlInputChannelArn
+
+var ModelTrainingDataChannel = &sModelTrainingDataChannel
+var ModelTrainingDataChannel_mlInputChannelArn = &sModelTrainingDataChannel_mlInputChannelArn
+var ModelTrainingDataChannel_channelName = &sModelTrainingDataChannel_channelName
+var ModelTrainingDataChannel_s3DataDistributionType = &sModelTrainingDataChannel_s3DataDistributionType
+
+var _ModelTrainingDataChannelName = &s_ModelTrainingDataChannelName
+
+var _ModelTrainingDataChannels = &s_ModelTrainingDataChannels
+var _ModelTrainingDataChannels_member = &s_ModelTrainingDataChannels_member
+
+var _NameString = &s_NameString
+
+var _NextToken = &s_NextToken
+
+var NoiseLevelType = &sNoiseLevelType
+var NoiseLevelType_HIGH = &sNoiseLevelType_HIGH
+var NoiseLevelType_MEDIUM = &sNoiseLevelType_MEDIUM
+var NoiseLevelType_LOW = &sNoiseLevelType_LOW
+var NoiseLevelType_NONE = &sNoiseLevelType_NONE
+
+var _ParameterMap = &s_ParameterMap
+var _ParameterMap_key = &s_ParameterMap_key
+var _ParameterMap_value = &s_ParameterMap_value
+
+var _ParameterName = &s_ParameterName
+
+var _ParameterValue = &s_ParameterValue
+
+var PayerConfiguration = &sPayerConfiguration
+var PayerConfiguration_computePayerAccountId = &sPayerConfiguration_computePayerAccountId
+var PayerConfiguration_syntheticDataPayerAccountId = &sPayerConfiguration_syntheticDataPayerAccountId
+
+var PolicyExistenceCondition = &sPolicyExistenceCondition
+var PolicyExistenceCondition_POLICY_MUST_EXIST = &sPolicyExistenceCondition_POLICY_MUST_EXIST
+var PolicyExistenceCondition_POLICY_MUST_NOT_EXIST = &sPolicyExistenceCondition_POLICY_MUST_NOT_EXIST
+
+var PrivacyBudgets = &sPrivacyBudgets
+var PrivacyBudgets_accessBudgets = &sPrivacyBudgets_accessBudgets
+
+var PrivacyConfiguration = &sPrivacyConfiguration
+var PrivacyConfiguration_policies = &sPrivacyConfiguration_policies
+
+var PrivacyConfigurationPolicies = &sPrivacyConfigurationPolicies
+var PrivacyConfigurationPolicies_trainedModels = &sPrivacyConfigurationPolicies_trainedModels
+var PrivacyConfigurationPolicies_trainedModelExports = &sPrivacyConfigurationPolicies_trainedModelExports
+var PrivacyConfigurationPolicies_trainedModelInferenceJobs = &sPrivacyConfigurationPolicies_trainedModelInferenceJobs
+
+var ProtectedQueryInputParameters = &sProtectedQueryInputParameters
+var ProtectedQueryInputParameters_sqlParameters = &sProtectedQueryInputParameters_sqlParameters
+var ProtectedQueryInputParameters_computeConfiguration = &sProtectedQueryInputParameters_computeConfiguration
+var ProtectedQueryInputParameters_resultFormat = &sProtectedQueryInputParameters_resultFormat
+
+var ProtectedQuerySQLParameters = &sProtectedQuerySQLParameters
+var ProtectedQuerySQLParameters_queryString = &sProtectedQuerySQLParameters_queryString
+var ProtectedQuerySQLParameters_analysisTemplateArn = &sProtectedQuerySQLParameters_analysisTemplateArn
+var ProtectedQuerySQLParameters_parameters = &sProtectedQuerySQLParameters_parameters
+
+var RelevanceMetric = &sRelevanceMetric
+var RelevanceMetric_audienceSize = &sRelevanceMetric_audienceSize
+var RelevanceMetric_score = &sRelevanceMetric_score
+
+var _RelevanceMetrics = &s_RelevanceMetrics
+var _RelevanceMetrics_member = &s_RelevanceMetrics_member
+
+var ResourceConfig = &sResourceConfig
+var ResourceConfig_instanceCount = &sResourceConfig_instanceCount
+var ResourceConfig_instanceType = &sResourceConfig_instanceType
+var ResourceConfig_volumeSizeInGB = &sResourceConfig_volumeSizeInGB
+
+var _ResourceDescription = &s_ResourceDescription
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+
+var _ResourcePolicy = &s_ResourcePolicy
+
+var ResultFormat = &sResultFormat
+var ResultFormat_CSV = &sResultFormat_CSV
+var ResultFormat_PARQUET = &sResultFormat_PARQUET
+
+var S3ConfigMap = &sS3ConfigMap
+var S3ConfigMap_s3Uri = &sS3ConfigMap_s3Uri
+
+var S3DataDistributionType = &sS3DataDistributionType
+var S3DataDistributionType_FULLY_REPLICATED = &sS3DataDistributionType_FULLY_REPLICATED
+var S3DataDistributionType_SHARDED_BY_S3_KEY = &sS3DataDistributionType_SHARDED_BY_S3_KEY
+
+var _S3Path = &s_S3Path
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+var ServiceQuotaExceededException_quotaName = &sServiceQuotaExceededException_quotaName
+var ServiceQuotaExceededException_quotaValue = &sServiceQuotaExceededException_quotaValue
+
+var SharedAudienceMetrics = &sSharedAudienceMetrics
+var SharedAudienceMetrics_ALL = &sSharedAudienceMetrics_ALL
+var SharedAudienceMetrics_NONE = &sSharedAudienceMetrics_NONE
+
+var _SparkProperties = &s_SparkProperties
+var _SparkProperties_key = &s_SparkProperties_key
+var _SparkProperties_value = &s_SparkProperties_value
+
+var _SparkPropertyKey = &s_SparkPropertyKey
+
+var _SparkPropertyValue = &s_SparkPropertyValue
+
+var StatusDetails = &sStatusDetails
+var StatusDetails_statusCode = &sStatusDetails_statusCode
+var StatusDetails_message = &sStatusDetails_message
+
+var StoppingCondition = &sStoppingCondition
+var StoppingCondition_maxRuntimeInSeconds = &sStoppingCondition_maxRuntimeInSeconds
+
+var _SyntheticDataColumnName = &s_SyntheticDataColumnName
+
+var SyntheticDataColumnProperties = &sSyntheticDataColumnProperties
+var SyntheticDataColumnProperties_columnName = &sSyntheticDataColumnProperties_columnName
+var SyntheticDataColumnProperties_columnType = &sSyntheticDataColumnProperties_columnType
+var SyntheticDataColumnProperties_isPredictiveValue = &sSyntheticDataColumnProperties_isPredictiveValue
+
+var SyntheticDataColumnType = &sSyntheticDataColumnType
+var SyntheticDataColumnType_CATEGORICAL = &sSyntheticDataColumnType_CATEGORICAL
+var SyntheticDataColumnType_NUMERICAL = &sSyntheticDataColumnType_NUMERICAL
+
+var SyntheticDataConfiguration = &sSyntheticDataConfiguration
+var SyntheticDataConfiguration_syntheticDataParameters = &sSyntheticDataConfiguration_syntheticDataParameters
+var SyntheticDataConfiguration_syntheticDataEvaluationScores = &sSyntheticDataConfiguration_syntheticDataEvaluationScores
+
+var SyntheticDataEvaluationScores = &sSyntheticDataEvaluationScores
+var SyntheticDataEvaluationScores_dataPrivacyScores = &sSyntheticDataEvaluationScores_dataPrivacyScores
+
+var _TaggableArn = &s_TaggableArn
+
+var _TagKey = &s_TagKey
+
+var _TagKeys = &s_TagKeys
+var _TagKeys_member = &s_TagKeys_member
+
+var _TagMap = &s_TagMap
+var _TagMap_key = &s_TagMap_key
+var _TagMap_value = &s_TagMap_value
+
+var TagOnCreatePolicy = &sTagOnCreatePolicy
+var TagOnCreatePolicy_FROM_PARENT_RESOURCE = &sTagOnCreatePolicy_FROM_PARENT_RESOURCE
+var TagOnCreatePolicy_NONE = &sTagOnCreatePolicy_NONE
+
+var _TagValue = &s_TagValue
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+
+var _TrainedModelArn = &s_TrainedModelArn
+
+var TrainedModelArtifactMaxSize = &sTrainedModelArtifactMaxSize
+var TrainedModelArtifactMaxSize_unit = &sTrainedModelArtifactMaxSize_unit
+var TrainedModelArtifactMaxSize_value = &sTrainedModelArtifactMaxSize_value
+
+var TrainedModelArtifactMaxSizeUnitType = &sTrainedModelArtifactMaxSizeUnitType
+var TrainedModelArtifactMaxSizeUnitType_GB = &sTrainedModelArtifactMaxSizeUnitType_GB
+
+var _TrainedModelArtifactMaxSizeValue = &s_TrainedModelArtifactMaxSizeValue
+
+var TrainedModelExportFileType = &sTrainedModelExportFileType
+var TrainedModelExportFileType_MODEL = &sTrainedModelExportFileType_MODEL
+var TrainedModelExportFileType_OUTPUT = &sTrainedModelExportFileType_OUTPUT
+
+var _TrainedModelExportFileTypeList = &s_TrainedModelExportFileTypeList
+var _TrainedModelExportFileTypeList_member = &s_TrainedModelExportFileTypeList_member
+
+var TrainedModelExportJobStatus = &sTrainedModelExportJobStatus
+var TrainedModelExportJobStatus_CREATE_PENDING = &sTrainedModelExportJobStatus_CREATE_PENDING
+var TrainedModelExportJobStatus_CREATE_IN_PROGRESS = &sTrainedModelExportJobStatus_CREATE_IN_PROGRESS
+var TrainedModelExportJobStatus_CREATE_FAILED = &sTrainedModelExportJobStatus_CREATE_FAILED
+var TrainedModelExportJobStatus_ACTIVE = &sTrainedModelExportJobStatus_ACTIVE
+
+var TrainedModelExportOutputConfiguration = &sTrainedModelExportOutputConfiguration
+var TrainedModelExportOutputConfiguration_members = &sTrainedModelExportOutputConfiguration_members
+
+var TrainedModelExportReceiverMember = &sTrainedModelExportReceiverMember
+var TrainedModelExportReceiverMember_accountId = &sTrainedModelExportReceiverMember_accountId
+
+var _TrainedModelExportReceiverMembers = &s_TrainedModelExportReceiverMembers
+var _TrainedModelExportReceiverMembers_member = &s_TrainedModelExportReceiverMembers_member
+
+var TrainedModelExportsConfigurationPolicy = &sTrainedModelExportsConfigurationPolicy
+var TrainedModelExportsConfigurationPolicy_maxSize = &sTrainedModelExportsConfigurationPolicy_maxSize
+var TrainedModelExportsConfigurationPolicy_filesToExport = &sTrainedModelExportsConfigurationPolicy_filesToExport
+
+var TrainedModelExportsMaxSize = &sTrainedModelExportsMaxSize
+var TrainedModelExportsMaxSize_unit = &sTrainedModelExportsMaxSize_unit
+var TrainedModelExportsMaxSize_value = &sTrainedModelExportsMaxSize_value
+
+var TrainedModelExportsMaxSizeUnitType = &sTrainedModelExportsMaxSizeUnitType
+var TrainedModelExportsMaxSizeUnitType_GB = &sTrainedModelExportsMaxSizeUnitType_GB
+
+var _TrainedModelExportsMaxSizeValue = &s_TrainedModelExportsMaxSizeValue
+
+var _TrainedModelInferenceJobArn = &s_TrainedModelInferenceJobArn
+
+var _TrainedModelInferenceJobList = &s_TrainedModelInferenceJobList
+var _TrainedModelInferenceJobList_member = &s_TrainedModelInferenceJobList_member
+
+var TrainedModelInferenceJobsConfigurationPolicy = &sTrainedModelInferenceJobsConfigurationPolicy
+var TrainedModelInferenceJobsConfigurationPolicy_containerLogs = &sTrainedModelInferenceJobsConfigurationPolicy_containerLogs
+var TrainedModelInferenceJobsConfigurationPolicy_maxOutputSize = &sTrainedModelInferenceJobsConfigurationPolicy_maxOutputSize
+
+var TrainedModelInferenceJobStatus = &sTrainedModelInferenceJobStatus
+var TrainedModelInferenceJobStatus_CREATE_PENDING = &sTrainedModelInferenceJobStatus_CREATE_PENDING
+var TrainedModelInferenceJobStatus_CREATE_IN_PROGRESS = &sTrainedModelInferenceJobStatus_CREATE_IN_PROGRESS
+var TrainedModelInferenceJobStatus_CREATE_FAILED = &sTrainedModelInferenceJobStatus_CREATE_FAILED
+var TrainedModelInferenceJobStatus_ACTIVE = &sTrainedModelInferenceJobStatus_ACTIVE
+var TrainedModelInferenceJobStatus_CANCEL_PENDING = &sTrainedModelInferenceJobStatus_CANCEL_PENDING
+var TrainedModelInferenceJobStatus_CANCEL_IN_PROGRESS = &sTrainedModelInferenceJobStatus_CANCEL_IN_PROGRESS
+var TrainedModelInferenceJobStatus_CANCEL_FAILED = &sTrainedModelInferenceJobStatus_CANCEL_FAILED
+var TrainedModelInferenceJobStatus_INACTIVE = &sTrainedModelInferenceJobStatus_INACTIVE
+
+var TrainedModelInferenceJobSummary = &sTrainedModelInferenceJobSummary
+var TrainedModelInferenceJobSummary_trainedModelInferenceJobArn = &sTrainedModelInferenceJobSummary_trainedModelInferenceJobArn
+var TrainedModelInferenceJobSummary_configuredModelAlgorithmAssociationArn = &sTrainedModelInferenceJobSummary_configuredModelAlgorithmAssociationArn
+var TrainedModelInferenceJobSummary_membershipIdentifier = &sTrainedModelInferenceJobSummary_membershipIdentifier
+var TrainedModelInferenceJobSummary_trainedModelArn = &sTrainedModelInferenceJobSummary_trainedModelArn
+var TrainedModelInferenceJobSummary_trainedModelVersionIdentifier = &sTrainedModelInferenceJobSummary_trainedModelVersionIdentifier
+var TrainedModelInferenceJobSummary_collaborationIdentifier = &sTrainedModelInferenceJobSummary_collaborationIdentifier
+var TrainedModelInferenceJobSummary_status = &sTrainedModelInferenceJobSummary_status
+var TrainedModelInferenceJobSummary_outputConfiguration = &sTrainedModelInferenceJobSummary_outputConfiguration
+var TrainedModelInferenceJobSummary_name = &sTrainedModelInferenceJobSummary_name
+var TrainedModelInferenceJobSummary_description = &sTrainedModelInferenceJobSummary_description
+var TrainedModelInferenceJobSummary_metricsStatus = &sTrainedModelInferenceJobSummary_metricsStatus
+var TrainedModelInferenceJobSummary_metricsStatusDetails = &sTrainedModelInferenceJobSummary_metricsStatusDetails
+var TrainedModelInferenceJobSummary_logsStatus = &sTrainedModelInferenceJobSummary_logsStatus
+var TrainedModelInferenceJobSummary_logsStatusDetails = &sTrainedModelInferenceJobSummary_logsStatusDetails
+var TrainedModelInferenceJobSummary_mlModelInferencePayerAccountId = &sTrainedModelInferenceJobSummary_mlModelInferencePayerAccountId
+var TrainedModelInferenceJobSummary_createTime = &sTrainedModelInferenceJobSummary_createTime
+var TrainedModelInferenceJobSummary_updateTime = &sTrainedModelInferenceJobSummary_updateTime
+
+var TrainedModelInferenceMaxOutputSize = &sTrainedModelInferenceMaxOutputSize
+var TrainedModelInferenceMaxOutputSize_unit = &sTrainedModelInferenceMaxOutputSize_unit
+var TrainedModelInferenceMaxOutputSize_value = &sTrainedModelInferenceMaxOutputSize_value
+
+var TrainedModelInferenceMaxOutputSizeUnitType = &sTrainedModelInferenceMaxOutputSizeUnitType
+var TrainedModelInferenceMaxOutputSizeUnitType_GB = &sTrainedModelInferenceMaxOutputSizeUnitType_GB
+
+var _TrainedModelInferenceMaxOutputSizeValue = &s_TrainedModelInferenceMaxOutputSizeValue
+
+var _TrainedModelList = &s_TrainedModelList
+var _TrainedModelList_member = &s_TrainedModelList_member
+
+var TrainedModelsConfigurationPolicy = &sTrainedModelsConfigurationPolicy
+var TrainedModelsConfigurationPolicy_containerLogs = &sTrainedModelsConfigurationPolicy_containerLogs
+var TrainedModelsConfigurationPolicy_containerMetrics = &sTrainedModelsConfigurationPolicy_containerMetrics
+var TrainedModelsConfigurationPolicy_maxArtifactSize = &sTrainedModelsConfigurationPolicy_maxArtifactSize
+
+var TrainedModelStatus = &sTrainedModelStatus
+var TrainedModelStatus_CREATE_PENDING = &sTrainedModelStatus_CREATE_PENDING
+var TrainedModelStatus_CREATE_IN_PROGRESS = &sTrainedModelStatus_CREATE_IN_PROGRESS
+var TrainedModelStatus_CREATE_FAILED = &sTrainedModelStatus_CREATE_FAILED
+var TrainedModelStatus_ACTIVE = &sTrainedModelStatus_ACTIVE
+var TrainedModelStatus_DELETE_PENDING = &sTrainedModelStatus_DELETE_PENDING
+var TrainedModelStatus_DELETE_IN_PROGRESS = &sTrainedModelStatus_DELETE_IN_PROGRESS
+var TrainedModelStatus_DELETE_FAILED = &sTrainedModelStatus_DELETE_FAILED
+var TrainedModelStatus_INACTIVE = &sTrainedModelStatus_INACTIVE
+var TrainedModelStatus_CANCEL_PENDING = &sTrainedModelStatus_CANCEL_PENDING
+var TrainedModelStatus_CANCEL_IN_PROGRESS = &sTrainedModelStatus_CANCEL_IN_PROGRESS
+var TrainedModelStatus_CANCEL_FAILED = &sTrainedModelStatus_CANCEL_FAILED
+
+var TrainedModelSummary = &sTrainedModelSummary
+var TrainedModelSummary_createTime = &sTrainedModelSummary_createTime
+var TrainedModelSummary_updateTime = &sTrainedModelSummary_updateTime
+var TrainedModelSummary_trainedModelArn = &sTrainedModelSummary_trainedModelArn
+var TrainedModelSummary_versionIdentifier = &sTrainedModelSummary_versionIdentifier
+var TrainedModelSummary_incrementalTrainingDataChannels = &sTrainedModelSummary_incrementalTrainingDataChannels
+var TrainedModelSummary_name = &sTrainedModelSummary_name
+var TrainedModelSummary_description = &sTrainedModelSummary_description
+var TrainedModelSummary_membershipIdentifier = &sTrainedModelSummary_membershipIdentifier
+var TrainedModelSummary_collaborationIdentifier = &sTrainedModelSummary_collaborationIdentifier
+var TrainedModelSummary_status = &sTrainedModelSummary_status
+var TrainedModelSummary_configuredModelAlgorithmAssociationArn = &sTrainedModelSummary_configuredModelAlgorithmAssociationArn
+var TrainedModelSummary_mlModelTrainingPayerAccountId = &sTrainedModelSummary_mlModelTrainingPayerAccountId
+
+var _TrainingDatasetArn = &s_TrainingDatasetArn
+
+var _TrainingDatasetList = &s_TrainingDatasetList
+var _TrainingDatasetList_member = &s_TrainingDatasetList_member
+
+var TrainingDatasetStatus = &sTrainingDatasetStatus
+var TrainingDatasetStatus_ACTIVE = &sTrainingDatasetStatus_ACTIVE
+
+var TrainingDatasetSummary = &sTrainingDatasetSummary
+var TrainingDatasetSummary_createTime = &sTrainingDatasetSummary_createTime
+var TrainingDatasetSummary_updateTime = &sTrainingDatasetSummary_updateTime
+var TrainingDatasetSummary_trainingDatasetArn = &sTrainingDatasetSummary_trainingDatasetArn
+var TrainingDatasetSummary_name = &sTrainingDatasetSummary_name
+var TrainingDatasetSummary_status = &sTrainingDatasetSummary_status
+var TrainingDatasetSummary_description = &sTrainingDatasetSummary_description
+
+var TrainingInputMode = &sTrainingInputMode
+var TrainingInputMode_FILE = &sTrainingInputMode_FILE
+var TrainingInputMode_FAST_FILE = &sTrainingInputMode_FAST_FILE
+var TrainingInputMode_PIPE = &sTrainingInputMode_PIPE
+
+var _UUID = &s_UUID
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+
+var WorkerComputeConfiguration = &sWorkerComputeConfiguration
+var WorkerComputeConfiguration_type = &sWorkerComputeConfiguration_type
+var WorkerComputeConfiguration_number = &sWorkerComputeConfiguration_number
+var WorkerComputeConfiguration_properties = &sWorkerComputeConfiguration_properties
+
+var WorkerComputeConfigurationProperties = &sWorkerComputeConfigurationProperties
+var WorkerComputeConfigurationProperties_spark = &sWorkerComputeConfigurationProperties_spark
+
+var WorkerComputeType = &sWorkerComputeType
+var WorkerComputeType_CR1X = &sWorkerComputeType_CR1X
+var WorkerComputeType_CR4X = &sWorkerComputeType_CR4X
+var WorkerComputeType_CR8X = &sWorkerComputeType_CR8X
+
+var CancelTrainedModelInferenceJobRequest = &sCancelTrainedModelInferenceJobRequest
+var CancelTrainedModelInferenceJobRequest_membershipIdentifier = &sCancelTrainedModelInferenceJobRequest_membershipIdentifier
+var CancelTrainedModelInferenceJobRequest_trainedModelInferenceJobArn = &sCancelTrainedModelInferenceJobRequest_trainedModelInferenceJobArn
+
+var CancelTrainedModelRequest = &sCancelTrainedModelRequest
+var CancelTrainedModelRequest_membershipIdentifier = &sCancelTrainedModelRequest_membershipIdentifier
+var CancelTrainedModelRequest_trainedModelArn = &sCancelTrainedModelRequest_trainedModelArn
+var CancelTrainedModelRequest_versionIdentifier = &sCancelTrainedModelRequest_versionIdentifier
+
+var CreateAudienceModelRequest = &sCreateAudienceModelRequest
+var CreateAudienceModelRequest_trainingDataStartTime = &sCreateAudienceModelRequest_trainingDataStartTime
+var CreateAudienceModelRequest_trainingDataEndTime = &sCreateAudienceModelRequest_trainingDataEndTime
+var CreateAudienceModelRequest_name = &sCreateAudienceModelRequest_name
+var CreateAudienceModelRequest_trainingDatasetArn = &sCreateAudienceModelRequest_trainingDatasetArn
+var CreateAudienceModelRequest_kmsKeyArn = &sCreateAudienceModelRequest_kmsKeyArn
+var CreateAudienceModelRequest_tags = &sCreateAudienceModelRequest_tags
+var CreateAudienceModelRequest_description = &sCreateAudienceModelRequest_description
+
+var CreateAudienceModelResponse = &sCreateAudienceModelResponse
+var CreateAudienceModelResponse_audienceModelArn = &sCreateAudienceModelResponse_audienceModelArn
+
+var CreateConfiguredAudienceModelRequest = &sCreateConfiguredAudienceModelRequest
+var CreateConfiguredAudienceModelRequest_name = &sCreateConfiguredAudienceModelRequest_name
+var CreateConfiguredAudienceModelRequest_audienceModelArn = &sCreateConfiguredAudienceModelRequest_audienceModelArn
+var CreateConfiguredAudienceModelRequest_outputConfig = &sCreateConfiguredAudienceModelRequest_outputConfig
+var CreateConfiguredAudienceModelRequest_description = &sCreateConfiguredAudienceModelRequest_description
+var CreateConfiguredAudienceModelRequest_sharedAudienceMetrics = &sCreateConfiguredAudienceModelRequest_sharedAudienceMetrics
+var CreateConfiguredAudienceModelRequest_minMatchingSeedSize = &sCreateConfiguredAudienceModelRequest_minMatchingSeedSize
+var CreateConfiguredAudienceModelRequest_audienceSizeConfig = &sCreateConfiguredAudienceModelRequest_audienceSizeConfig
+var CreateConfiguredAudienceModelRequest_tags = &sCreateConfiguredAudienceModelRequest_tags
+var CreateConfiguredAudienceModelRequest_childResourceTagOnCreatePolicy = &sCreateConfiguredAudienceModelRequest_childResourceTagOnCreatePolicy
+
+var CreateConfiguredAudienceModelResponse = &sCreateConfiguredAudienceModelResponse
+var CreateConfiguredAudienceModelResponse_configuredAudienceModelArn = &sCreateConfiguredAudienceModelResponse_configuredAudienceModelArn
+
+var CreateConfiguredModelAlgorithmAssociationRequest = &sCreateConfiguredModelAlgorithmAssociationRequest
+var CreateConfiguredModelAlgorithmAssociationRequest_membershipIdentifier = &sCreateConfiguredModelAlgorithmAssociationRequest_membershipIdentifier
+var CreateConfiguredModelAlgorithmAssociationRequest_configuredModelAlgorithmArn = &sCreateConfiguredModelAlgorithmAssociationRequest_configuredModelAlgorithmArn
+var CreateConfiguredModelAlgorithmAssociationRequest_name = &sCreateConfiguredModelAlgorithmAssociationRequest_name
+var CreateConfiguredModelAlgorithmAssociationRequest_description = &sCreateConfiguredModelAlgorithmAssociationRequest_description
+var CreateConfiguredModelAlgorithmAssociationRequest_privacyConfiguration = &sCreateConfiguredModelAlgorithmAssociationRequest_privacyConfiguration
+var CreateConfiguredModelAlgorithmAssociationRequest_tags = &sCreateConfiguredModelAlgorithmAssociationRequest_tags
+
+var CreateConfiguredModelAlgorithmAssociationResponse = &sCreateConfiguredModelAlgorithmAssociationResponse
+var CreateConfiguredModelAlgorithmAssociationResponse_configuredModelAlgorithmAssociationArn = &sCreateConfiguredModelAlgorithmAssociationResponse_configuredModelAlgorithmAssociationArn
+
+var CreateConfiguredModelAlgorithmRequest = &sCreateConfiguredModelAlgorithmRequest
+var CreateConfiguredModelAlgorithmRequest_name = &sCreateConfiguredModelAlgorithmRequest_name
+var CreateConfiguredModelAlgorithmRequest_description = &sCreateConfiguredModelAlgorithmRequest_description
+var CreateConfiguredModelAlgorithmRequest_roleArn = &sCreateConfiguredModelAlgorithmRequest_roleArn
+var CreateConfiguredModelAlgorithmRequest_trainingContainerConfig = &sCreateConfiguredModelAlgorithmRequest_trainingContainerConfig
+var CreateConfiguredModelAlgorithmRequest_inferenceContainerConfig = &sCreateConfiguredModelAlgorithmRequest_inferenceContainerConfig
+var CreateConfiguredModelAlgorithmRequest_tags = &sCreateConfiguredModelAlgorithmRequest_tags
+var CreateConfiguredModelAlgorithmRequest_kmsKeyArn = &sCreateConfiguredModelAlgorithmRequest_kmsKeyArn
+
+var CreateConfiguredModelAlgorithmResponse = &sCreateConfiguredModelAlgorithmResponse
+var CreateConfiguredModelAlgorithmResponse_configuredModelAlgorithmArn = &sCreateConfiguredModelAlgorithmResponse_configuredModelAlgorithmArn
+
+var CreateMLInputChannelRequest = &sCreateMLInputChannelRequest
+var CreateMLInputChannelRequest_membershipIdentifier = &sCreateMLInputChannelRequest_membershipIdentifier
+var CreateMLInputChannelRequest_configuredModelAlgorithmAssociations = &sCreateMLInputChannelRequest_configuredModelAlgorithmAssociations
+var CreateMLInputChannelRequest_inputChannel = &sCreateMLInputChannelRequest_inputChannel
+var CreateMLInputChannelRequest_name = &sCreateMLInputChannelRequest_name
+var CreateMLInputChannelRequest_retentionInDays = &sCreateMLInputChannelRequest_retentionInDays
+var CreateMLInputChannelRequest_description = &sCreateMLInputChannelRequest_description
+var CreateMLInputChannelRequest_kmsKeyArn = &sCreateMLInputChannelRequest_kmsKeyArn
+var CreateMLInputChannelRequest_tags = &sCreateMLInputChannelRequest_tags
+var CreateMLInputChannelRequest_payerConfiguration = &sCreateMLInputChannelRequest_payerConfiguration
+
+var CreateMLInputChannelResponse = &sCreateMLInputChannelResponse
+var CreateMLInputChannelResponse_mlInputChannelArn = &sCreateMLInputChannelResponse_mlInputChannelArn
+
+var CreateTrainedModelRequest = &sCreateTrainedModelRequest
+var CreateTrainedModelRequest_membershipIdentifier = &sCreateTrainedModelRequest_membershipIdentifier
+var CreateTrainedModelRequest_name = &sCreateTrainedModelRequest_name
+var CreateTrainedModelRequest_configuredModelAlgorithmAssociationArn = &sCreateTrainedModelRequest_configuredModelAlgorithmAssociationArn
+var CreateTrainedModelRequest_hyperparameters = &sCreateTrainedModelRequest_hyperparameters
+var CreateTrainedModelRequest_environment = &sCreateTrainedModelRequest_environment
+var CreateTrainedModelRequest_resourceConfig = &sCreateTrainedModelRequest_resourceConfig
+var CreateTrainedModelRequest_stoppingCondition = &sCreateTrainedModelRequest_stoppingCondition
+var CreateTrainedModelRequest_incrementalTrainingDataChannels = &sCreateTrainedModelRequest_incrementalTrainingDataChannels
+var CreateTrainedModelRequest_dataChannels = &sCreateTrainedModelRequest_dataChannels
+var CreateTrainedModelRequest_trainingInputMode = &sCreateTrainedModelRequest_trainingInputMode
+var CreateTrainedModelRequest_description = &sCreateTrainedModelRequest_description
+var CreateTrainedModelRequest_kmsKeyArn = &sCreateTrainedModelRequest_kmsKeyArn
+var CreateTrainedModelRequest_tags = &sCreateTrainedModelRequest_tags
+var CreateTrainedModelRequest_mlModelTrainingPayerAccountId = &sCreateTrainedModelRequest_mlModelTrainingPayerAccountId
+
+var CreateTrainedModelResponse = &sCreateTrainedModelResponse
+var CreateTrainedModelResponse_trainedModelArn = &sCreateTrainedModelResponse_trainedModelArn
+var CreateTrainedModelResponse_versionIdentifier = &sCreateTrainedModelResponse_versionIdentifier
+
+var CreateTrainingDatasetRequest = &sCreateTrainingDatasetRequest
+var CreateTrainingDatasetRequest_name = &sCreateTrainingDatasetRequest_name
+var CreateTrainingDatasetRequest_roleArn = &sCreateTrainingDatasetRequest_roleArn
+var CreateTrainingDatasetRequest_trainingData = &sCreateTrainingDatasetRequest_trainingData
+var CreateTrainingDatasetRequest_tags = &sCreateTrainingDatasetRequest_tags
+var CreateTrainingDatasetRequest_description = &sCreateTrainingDatasetRequest_description
+
+var CreateTrainingDatasetResponse = &sCreateTrainingDatasetResponse
+var CreateTrainingDatasetResponse_trainingDatasetArn = &sCreateTrainingDatasetResponse_trainingDatasetArn
+
+var DeleteAudienceGenerationJobRequest = &sDeleteAudienceGenerationJobRequest
+var DeleteAudienceGenerationJobRequest_audienceGenerationJobArn = &sDeleteAudienceGenerationJobRequest_audienceGenerationJobArn
+
+var DeleteAudienceModelRequest = &sDeleteAudienceModelRequest
+var DeleteAudienceModelRequest_audienceModelArn = &sDeleteAudienceModelRequest_audienceModelArn
+
+var DeleteConfiguredAudienceModelRequest = &sDeleteConfiguredAudienceModelRequest
+var DeleteConfiguredAudienceModelRequest_configuredAudienceModelArn = &sDeleteConfiguredAudienceModelRequest_configuredAudienceModelArn
+
+var DeleteConfiguredAudienceModelPolicyRequest = &sDeleteConfiguredAudienceModelPolicyRequest
+var DeleteConfiguredAudienceModelPolicyRequest_configuredAudienceModelArn = &sDeleteConfiguredAudienceModelPolicyRequest_configuredAudienceModelArn
+
+var DeleteConfiguredModelAlgorithmAssociationRequest = &sDeleteConfiguredModelAlgorithmAssociationRequest
+var DeleteConfiguredModelAlgorithmAssociationRequest_configuredModelAlgorithmAssociationArn = &sDeleteConfiguredModelAlgorithmAssociationRequest_configuredModelAlgorithmAssociationArn
+var DeleteConfiguredModelAlgorithmAssociationRequest_membershipIdentifier = &sDeleteConfiguredModelAlgorithmAssociationRequest_membershipIdentifier
+
+var DeleteConfiguredModelAlgorithmRequest = &sDeleteConfiguredModelAlgorithmRequest
+var DeleteConfiguredModelAlgorithmRequest_configuredModelAlgorithmArn = &sDeleteConfiguredModelAlgorithmRequest_configuredModelAlgorithmArn
+
+var DeleteMLConfigurationRequest = &sDeleteMLConfigurationRequest
+var DeleteMLConfigurationRequest_membershipIdentifier = &sDeleteMLConfigurationRequest_membershipIdentifier
+
+var DeleteMLInputChannelDataRequest = &sDeleteMLInputChannelDataRequest
+var DeleteMLInputChannelDataRequest_mlInputChannelArn = &sDeleteMLInputChannelDataRequest_mlInputChannelArn
+var DeleteMLInputChannelDataRequest_membershipIdentifier = &sDeleteMLInputChannelDataRequest_membershipIdentifier
+
+var DeleteTrainedModelOutputRequest = &sDeleteTrainedModelOutputRequest
+var DeleteTrainedModelOutputRequest_trainedModelArn = &sDeleteTrainedModelOutputRequest_trainedModelArn
+var DeleteTrainedModelOutputRequest_membershipIdentifier = &sDeleteTrainedModelOutputRequest_membershipIdentifier
+var DeleteTrainedModelOutputRequest_versionIdentifier = &sDeleteTrainedModelOutputRequest_versionIdentifier
+
+var DeleteTrainingDatasetRequest = &sDeleteTrainingDatasetRequest
+var DeleteTrainingDatasetRequest_trainingDatasetArn = &sDeleteTrainingDatasetRequest_trainingDatasetArn
+
+var GetAudienceGenerationJobRequest = &sGetAudienceGenerationJobRequest
+var GetAudienceGenerationJobRequest_audienceGenerationJobArn = &sGetAudienceGenerationJobRequest_audienceGenerationJobArn
+
+var GetAudienceGenerationJobResponse = &sGetAudienceGenerationJobResponse
+var GetAudienceGenerationJobResponse_createTime = &sGetAudienceGenerationJobResponse_createTime
+var GetAudienceGenerationJobResponse_updateTime = &sGetAudienceGenerationJobResponse_updateTime
+var GetAudienceGenerationJobResponse_audienceGenerationJobArn = &sGetAudienceGenerationJobResponse_audienceGenerationJobArn
+var GetAudienceGenerationJobResponse_name = &sGetAudienceGenerationJobResponse_name
+var GetAudienceGenerationJobResponse_description = &sGetAudienceGenerationJobResponse_description
+var GetAudienceGenerationJobResponse_status = &sGetAudienceGenerationJobResponse_status
+var GetAudienceGenerationJobResponse_statusDetails = &sGetAudienceGenerationJobResponse_statusDetails
+var GetAudienceGenerationJobResponse_configuredAudienceModelArn = &sGetAudienceGenerationJobResponse_configuredAudienceModelArn
+var GetAudienceGenerationJobResponse_seedAudience = &sGetAudienceGenerationJobResponse_seedAudience
+var GetAudienceGenerationJobResponse_includeSeedInOutput = &sGetAudienceGenerationJobResponse_includeSeedInOutput
+var GetAudienceGenerationJobResponse_collaborationId = &sGetAudienceGenerationJobResponse_collaborationId
+var GetAudienceGenerationJobResponse_metrics = &sGetAudienceGenerationJobResponse_metrics
+var GetAudienceGenerationJobResponse_startedBy = &sGetAudienceGenerationJobResponse_startedBy
+var GetAudienceGenerationJobResponse_tags = &sGetAudienceGenerationJobResponse_tags
+var GetAudienceGenerationJobResponse_protectedQueryIdentifier = &sGetAudienceGenerationJobResponse_protectedQueryIdentifier
+
+var GetAudienceModelRequest = &sGetAudienceModelRequest
+var GetAudienceModelRequest_audienceModelArn = &sGetAudienceModelRequest_audienceModelArn
+
+var GetAudienceModelResponse = &sGetAudienceModelResponse
+var GetAudienceModelResponse_createTime = &sGetAudienceModelResponse_createTime
+var GetAudienceModelResponse_updateTime = &sGetAudienceModelResponse_updateTime
+var GetAudienceModelResponse_trainingDataStartTime = &sGetAudienceModelResponse_trainingDataStartTime
+var GetAudienceModelResponse_trainingDataEndTime = &sGetAudienceModelResponse_trainingDataEndTime
+var GetAudienceModelResponse_audienceModelArn = &sGetAudienceModelResponse_audienceModelArn
+var GetAudienceModelResponse_name = &sGetAudienceModelResponse_name
+var GetAudienceModelResponse_trainingDatasetArn = &sGetAudienceModelResponse_trainingDatasetArn
+var GetAudienceModelResponse_status = &sGetAudienceModelResponse_status
+var GetAudienceModelResponse_statusDetails = &sGetAudienceModelResponse_statusDetails
+var GetAudienceModelResponse_kmsKeyArn = &sGetAudienceModelResponse_kmsKeyArn
+var GetAudienceModelResponse_tags = &sGetAudienceModelResponse_tags
+var GetAudienceModelResponse_description = &sGetAudienceModelResponse_description
+
+var GetCollaborationConfiguredModelAlgorithmAssociationRequest = &sGetCollaborationConfiguredModelAlgorithmAssociationRequest
+var GetCollaborationConfiguredModelAlgorithmAssociationRequest_configuredModelAlgorithmAssociationArn = &sGetCollaborationConfiguredModelAlgorithmAssociationRequest_configuredModelAlgorithmAssociationArn
+var GetCollaborationConfiguredModelAlgorithmAssociationRequest_collaborationIdentifier = &sGetCollaborationConfiguredModelAlgorithmAssociationRequest_collaborationIdentifier
+
+var GetCollaborationConfiguredModelAlgorithmAssociationResponse = &sGetCollaborationConfiguredModelAlgorithmAssociationResponse
+var GetCollaborationConfiguredModelAlgorithmAssociationResponse_createTime = &sGetCollaborationConfiguredModelAlgorithmAssociationResponse_createTime
+var GetCollaborationConfiguredModelAlgorithmAssociationResponse_updateTime = &sGetCollaborationConfiguredModelAlgorithmAssociationResponse_updateTime
+var GetCollaborationConfiguredModelAlgorithmAssociationResponse_configuredModelAlgorithmAssociationArn = &sGetCollaborationConfiguredModelAlgorithmAssociationResponse_configuredModelAlgorithmAssociationArn
+var GetCollaborationConfiguredModelAlgorithmAssociationResponse_membershipIdentifier = &sGetCollaborationConfiguredModelAlgorithmAssociationResponse_membershipIdentifier
+var GetCollaborationConfiguredModelAlgorithmAssociationResponse_collaborationIdentifier = &sGetCollaborationConfiguredModelAlgorithmAssociationResponse_collaborationIdentifier
+var GetCollaborationConfiguredModelAlgorithmAssociationResponse_configuredModelAlgorithmArn = &sGetCollaborationConfiguredModelAlgorithmAssociationResponse_configuredModelAlgorithmArn
+var GetCollaborationConfiguredModelAlgorithmAssociationResponse_name = &sGetCollaborationConfiguredModelAlgorithmAssociationResponse_name
+var GetCollaborationConfiguredModelAlgorithmAssociationResponse_description = &sGetCollaborationConfiguredModelAlgorithmAssociationResponse_description
+var GetCollaborationConfiguredModelAlgorithmAssociationResponse_creatorAccountId = &sGetCollaborationConfiguredModelAlgorithmAssociationResponse_creatorAccountId
+var GetCollaborationConfiguredModelAlgorithmAssociationResponse_privacyConfiguration = &sGetCollaborationConfiguredModelAlgorithmAssociationResponse_privacyConfiguration
+
+var GetCollaborationMLInputChannelRequest = &sGetCollaborationMLInputChannelRequest
+var GetCollaborationMLInputChannelRequest_mlInputChannelArn = &sGetCollaborationMLInputChannelRequest_mlInputChannelArn
+var GetCollaborationMLInputChannelRequest_collaborationIdentifier = &sGetCollaborationMLInputChannelRequest_collaborationIdentifier
+
+var GetCollaborationMLInputChannelResponse = &sGetCollaborationMLInputChannelResponse
+var GetCollaborationMLInputChannelResponse_membershipIdentifier = &sGetCollaborationMLInputChannelResponse_membershipIdentifier
+var GetCollaborationMLInputChannelResponse_collaborationIdentifier = &sGetCollaborationMLInputChannelResponse_collaborationIdentifier
+var GetCollaborationMLInputChannelResponse_mlInputChannelArn = &sGetCollaborationMLInputChannelResponse_mlInputChannelArn
+var GetCollaborationMLInputChannelResponse_name = &sGetCollaborationMLInputChannelResponse_name
+var GetCollaborationMLInputChannelResponse_configuredModelAlgorithmAssociations = &sGetCollaborationMLInputChannelResponse_configuredModelAlgorithmAssociations
+var GetCollaborationMLInputChannelResponse_status = &sGetCollaborationMLInputChannelResponse_status
+var GetCollaborationMLInputChannelResponse_statusDetails = &sGetCollaborationMLInputChannelResponse_statusDetails
+var GetCollaborationMLInputChannelResponse_retentionInDays = &sGetCollaborationMLInputChannelResponse_retentionInDays
+var GetCollaborationMLInputChannelResponse_numberOfRecords = &sGetCollaborationMLInputChannelResponse_numberOfRecords
+var GetCollaborationMLInputChannelResponse_privacyBudgets = &sGetCollaborationMLInputChannelResponse_privacyBudgets
+var GetCollaborationMLInputChannelResponse_description = &sGetCollaborationMLInputChannelResponse_description
+var GetCollaborationMLInputChannelResponse_syntheticDataConfiguration = &sGetCollaborationMLInputChannelResponse_syntheticDataConfiguration
+var GetCollaborationMLInputChannelResponse_payerConfiguration = &sGetCollaborationMLInputChannelResponse_payerConfiguration
+var GetCollaborationMLInputChannelResponse_createTime = &sGetCollaborationMLInputChannelResponse_createTime
+var GetCollaborationMLInputChannelResponse_updateTime = &sGetCollaborationMLInputChannelResponse_updateTime
+var GetCollaborationMLInputChannelResponse_creatorAccountId = &sGetCollaborationMLInputChannelResponse_creatorAccountId
+
+var GetCollaborationTrainedModelRequest = &sGetCollaborationTrainedModelRequest
+var GetCollaborationTrainedModelRequest_trainedModelArn = &sGetCollaborationTrainedModelRequest_trainedModelArn
+var GetCollaborationTrainedModelRequest_collaborationIdentifier = &sGetCollaborationTrainedModelRequest_collaborationIdentifier
+var GetCollaborationTrainedModelRequest_versionIdentifier = &sGetCollaborationTrainedModelRequest_versionIdentifier
+
+var GetCollaborationTrainedModelResponse = &sGetCollaborationTrainedModelResponse
+var GetCollaborationTrainedModelResponse_membershipIdentifier = &sGetCollaborationTrainedModelResponse_membershipIdentifier
+var GetCollaborationTrainedModelResponse_collaborationIdentifier = &sGetCollaborationTrainedModelResponse_collaborationIdentifier
+var GetCollaborationTrainedModelResponse_trainedModelArn = &sGetCollaborationTrainedModelResponse_trainedModelArn
+var GetCollaborationTrainedModelResponse_versionIdentifier = &sGetCollaborationTrainedModelResponse_versionIdentifier
+var GetCollaborationTrainedModelResponse_incrementalTrainingDataChannels = &sGetCollaborationTrainedModelResponse_incrementalTrainingDataChannels
+var GetCollaborationTrainedModelResponse_name = &sGetCollaborationTrainedModelResponse_name
+var GetCollaborationTrainedModelResponse_description = &sGetCollaborationTrainedModelResponse_description
+var GetCollaborationTrainedModelResponse_status = &sGetCollaborationTrainedModelResponse_status
+var GetCollaborationTrainedModelResponse_statusDetails = &sGetCollaborationTrainedModelResponse_statusDetails
+var GetCollaborationTrainedModelResponse_configuredModelAlgorithmAssociationArn = &sGetCollaborationTrainedModelResponse_configuredModelAlgorithmAssociationArn
+var GetCollaborationTrainedModelResponse_resourceConfig = &sGetCollaborationTrainedModelResponse_resourceConfig
+var GetCollaborationTrainedModelResponse_trainingInputMode = &sGetCollaborationTrainedModelResponse_trainingInputMode
+var GetCollaborationTrainedModelResponse_stoppingCondition = &sGetCollaborationTrainedModelResponse_stoppingCondition
+var GetCollaborationTrainedModelResponse_metricsStatus = &sGetCollaborationTrainedModelResponse_metricsStatus
+var GetCollaborationTrainedModelResponse_metricsStatusDetails = &sGetCollaborationTrainedModelResponse_metricsStatusDetails
+var GetCollaborationTrainedModelResponse_logsStatus = &sGetCollaborationTrainedModelResponse_logsStatus
+var GetCollaborationTrainedModelResponse_logsStatusDetails = &sGetCollaborationTrainedModelResponse_logsStatusDetails
+var GetCollaborationTrainedModelResponse_trainingContainerImageDigest = &sGetCollaborationTrainedModelResponse_trainingContainerImageDigest
+var GetCollaborationTrainedModelResponse_mlModelTrainingPayerAccountId = &sGetCollaborationTrainedModelResponse_mlModelTrainingPayerAccountId
+var GetCollaborationTrainedModelResponse_createTime = &sGetCollaborationTrainedModelResponse_createTime
+var GetCollaborationTrainedModelResponse_updateTime = &sGetCollaborationTrainedModelResponse_updateTime
+var GetCollaborationTrainedModelResponse_creatorAccountId = &sGetCollaborationTrainedModelResponse_creatorAccountId
+
+var GetConfiguredAudienceModelRequest = &sGetConfiguredAudienceModelRequest
+var GetConfiguredAudienceModelRequest_configuredAudienceModelArn = &sGetConfiguredAudienceModelRequest_configuredAudienceModelArn
+
+var GetConfiguredAudienceModelResponse = &sGetConfiguredAudienceModelResponse
+var GetConfiguredAudienceModelResponse_createTime = &sGetConfiguredAudienceModelResponse_createTime
+var GetConfiguredAudienceModelResponse_updateTime = &sGetConfiguredAudienceModelResponse_updateTime
+var GetConfiguredAudienceModelResponse_configuredAudienceModelArn = &sGetConfiguredAudienceModelResponse_configuredAudienceModelArn
+var GetConfiguredAudienceModelResponse_name = &sGetConfiguredAudienceModelResponse_name
+var GetConfiguredAudienceModelResponse_audienceModelArn = &sGetConfiguredAudienceModelResponse_audienceModelArn
+var GetConfiguredAudienceModelResponse_outputConfig = &sGetConfiguredAudienceModelResponse_outputConfig
+var GetConfiguredAudienceModelResponse_description = &sGetConfiguredAudienceModelResponse_description
+var GetConfiguredAudienceModelResponse_status = &sGetConfiguredAudienceModelResponse_status
+var GetConfiguredAudienceModelResponse_sharedAudienceMetrics = &sGetConfiguredAudienceModelResponse_sharedAudienceMetrics
+var GetConfiguredAudienceModelResponse_minMatchingSeedSize = &sGetConfiguredAudienceModelResponse_minMatchingSeedSize
+var GetConfiguredAudienceModelResponse_audienceSizeConfig = &sGetConfiguredAudienceModelResponse_audienceSizeConfig
+var GetConfiguredAudienceModelResponse_tags = &sGetConfiguredAudienceModelResponse_tags
+var GetConfiguredAudienceModelResponse_childResourceTagOnCreatePolicy = &sGetConfiguredAudienceModelResponse_childResourceTagOnCreatePolicy
+
+var GetConfiguredAudienceModelPolicyRequest = &sGetConfiguredAudienceModelPolicyRequest
+var GetConfiguredAudienceModelPolicyRequest_configuredAudienceModelArn = &sGetConfiguredAudienceModelPolicyRequest_configuredAudienceModelArn
+
+var GetConfiguredAudienceModelPolicyResponse = &sGetConfiguredAudienceModelPolicyResponse
+var GetConfiguredAudienceModelPolicyResponse_configuredAudienceModelArn = &sGetConfiguredAudienceModelPolicyResponse_configuredAudienceModelArn
+var GetConfiguredAudienceModelPolicyResponse_configuredAudienceModelPolicy = &sGetConfiguredAudienceModelPolicyResponse_configuredAudienceModelPolicy
+var GetConfiguredAudienceModelPolicyResponse_policyHash = &sGetConfiguredAudienceModelPolicyResponse_policyHash
+
+var GetConfiguredModelAlgorithmAssociationRequest = &sGetConfiguredModelAlgorithmAssociationRequest
+var GetConfiguredModelAlgorithmAssociationRequest_configuredModelAlgorithmAssociationArn = &sGetConfiguredModelAlgorithmAssociationRequest_configuredModelAlgorithmAssociationArn
+var GetConfiguredModelAlgorithmAssociationRequest_membershipIdentifier = &sGetConfiguredModelAlgorithmAssociationRequest_membershipIdentifier
+
+var GetConfiguredModelAlgorithmAssociationResponse = &sGetConfiguredModelAlgorithmAssociationResponse
+var GetConfiguredModelAlgorithmAssociationResponse_createTime = &sGetConfiguredModelAlgorithmAssociationResponse_createTime
+var GetConfiguredModelAlgorithmAssociationResponse_updateTime = &sGetConfiguredModelAlgorithmAssociationResponse_updateTime
+var GetConfiguredModelAlgorithmAssociationResponse_configuredModelAlgorithmAssociationArn = &sGetConfiguredModelAlgorithmAssociationResponse_configuredModelAlgorithmAssociationArn
+var GetConfiguredModelAlgorithmAssociationResponse_membershipIdentifier = &sGetConfiguredModelAlgorithmAssociationResponse_membershipIdentifier
+var GetConfiguredModelAlgorithmAssociationResponse_collaborationIdentifier = &sGetConfiguredModelAlgorithmAssociationResponse_collaborationIdentifier
+var GetConfiguredModelAlgorithmAssociationResponse_configuredModelAlgorithmArn = &sGetConfiguredModelAlgorithmAssociationResponse_configuredModelAlgorithmArn
+var GetConfiguredModelAlgorithmAssociationResponse_name = &sGetConfiguredModelAlgorithmAssociationResponse_name
+var GetConfiguredModelAlgorithmAssociationResponse_privacyConfiguration = &sGetConfiguredModelAlgorithmAssociationResponse_privacyConfiguration
+var GetConfiguredModelAlgorithmAssociationResponse_description = &sGetConfiguredModelAlgorithmAssociationResponse_description
+var GetConfiguredModelAlgorithmAssociationResponse_tags = &sGetConfiguredModelAlgorithmAssociationResponse_tags
+
+var GetConfiguredModelAlgorithmRequest = &sGetConfiguredModelAlgorithmRequest
+var GetConfiguredModelAlgorithmRequest_configuredModelAlgorithmArn = &sGetConfiguredModelAlgorithmRequest_configuredModelAlgorithmArn
+
+var GetConfiguredModelAlgorithmResponse = &sGetConfiguredModelAlgorithmResponse
+var GetConfiguredModelAlgorithmResponse_createTime = &sGetConfiguredModelAlgorithmResponse_createTime
+var GetConfiguredModelAlgorithmResponse_updateTime = &sGetConfiguredModelAlgorithmResponse_updateTime
+var GetConfiguredModelAlgorithmResponse_configuredModelAlgorithmArn = &sGetConfiguredModelAlgorithmResponse_configuredModelAlgorithmArn
+var GetConfiguredModelAlgorithmResponse_name = &sGetConfiguredModelAlgorithmResponse_name
+var GetConfiguredModelAlgorithmResponse_trainingContainerConfig = &sGetConfiguredModelAlgorithmResponse_trainingContainerConfig
+var GetConfiguredModelAlgorithmResponse_inferenceContainerConfig = &sGetConfiguredModelAlgorithmResponse_inferenceContainerConfig
+var GetConfiguredModelAlgorithmResponse_roleArn = &sGetConfiguredModelAlgorithmResponse_roleArn
+var GetConfiguredModelAlgorithmResponse_description = &sGetConfiguredModelAlgorithmResponse_description
+var GetConfiguredModelAlgorithmResponse_tags = &sGetConfiguredModelAlgorithmResponse_tags
+var GetConfiguredModelAlgorithmResponse_kmsKeyArn = &sGetConfiguredModelAlgorithmResponse_kmsKeyArn
+
+var GetMLConfigurationRequest = &sGetMLConfigurationRequest
+var GetMLConfigurationRequest_membershipIdentifier = &sGetMLConfigurationRequest_membershipIdentifier
+
+var GetMLConfigurationResponse = &sGetMLConfigurationResponse
+var GetMLConfigurationResponse_membershipIdentifier = &sGetMLConfigurationResponse_membershipIdentifier
+var GetMLConfigurationResponse_defaultOutputLocation = &sGetMLConfigurationResponse_defaultOutputLocation
+var GetMLConfigurationResponse_createTime = &sGetMLConfigurationResponse_createTime
+var GetMLConfigurationResponse_updateTime = &sGetMLConfigurationResponse_updateTime
+
+var GetMLInputChannelRequest = &sGetMLInputChannelRequest
+var GetMLInputChannelRequest_mlInputChannelArn = &sGetMLInputChannelRequest_mlInputChannelArn
+var GetMLInputChannelRequest_membershipIdentifier = &sGetMLInputChannelRequest_membershipIdentifier
+
+var GetMLInputChannelResponse = &sGetMLInputChannelResponse
+var GetMLInputChannelResponse_membershipIdentifier = &sGetMLInputChannelResponse_membershipIdentifier
+var GetMLInputChannelResponse_collaborationIdentifier = &sGetMLInputChannelResponse_collaborationIdentifier
+var GetMLInputChannelResponse_mlInputChannelArn = &sGetMLInputChannelResponse_mlInputChannelArn
+var GetMLInputChannelResponse_name = &sGetMLInputChannelResponse_name
+var GetMLInputChannelResponse_configuredModelAlgorithmAssociations = &sGetMLInputChannelResponse_configuredModelAlgorithmAssociations
+var GetMLInputChannelResponse_status = &sGetMLInputChannelResponse_status
+var GetMLInputChannelResponse_statusDetails = &sGetMLInputChannelResponse_statusDetails
+var GetMLInputChannelResponse_retentionInDays = &sGetMLInputChannelResponse_retentionInDays
+var GetMLInputChannelResponse_numberOfRecords = &sGetMLInputChannelResponse_numberOfRecords
+var GetMLInputChannelResponse_privacyBudgets = &sGetMLInputChannelResponse_privacyBudgets
+var GetMLInputChannelResponse_description = &sGetMLInputChannelResponse_description
+var GetMLInputChannelResponse_syntheticDataConfiguration = &sGetMLInputChannelResponse_syntheticDataConfiguration
+var GetMLInputChannelResponse_payerConfiguration = &sGetMLInputChannelResponse_payerConfiguration
+var GetMLInputChannelResponse_createTime = &sGetMLInputChannelResponse_createTime
+var GetMLInputChannelResponse_updateTime = &sGetMLInputChannelResponse_updateTime
+var GetMLInputChannelResponse_inputChannel = &sGetMLInputChannelResponse_inputChannel
+var GetMLInputChannelResponse_protectedQueryIdentifier = &sGetMLInputChannelResponse_protectedQueryIdentifier
+var GetMLInputChannelResponse_numberOfFiles = &sGetMLInputChannelResponse_numberOfFiles
+var GetMLInputChannelResponse_sizeInGb = &sGetMLInputChannelResponse_sizeInGb
+var GetMLInputChannelResponse_kmsKeyArn = &sGetMLInputChannelResponse_kmsKeyArn
+var GetMLInputChannelResponse_tags = &sGetMLInputChannelResponse_tags
+
+var GetTrainedModelInferenceJobRequest = &sGetTrainedModelInferenceJobRequest
+var GetTrainedModelInferenceJobRequest_membershipIdentifier = &sGetTrainedModelInferenceJobRequest_membershipIdentifier
+var GetTrainedModelInferenceJobRequest_trainedModelInferenceJobArn = &sGetTrainedModelInferenceJobRequest_trainedModelInferenceJobArn
+
+var GetTrainedModelInferenceJobResponse = &sGetTrainedModelInferenceJobResponse
+var GetTrainedModelInferenceJobResponse_createTime = &sGetTrainedModelInferenceJobResponse_createTime
+var GetTrainedModelInferenceJobResponse_updateTime = &sGetTrainedModelInferenceJobResponse_updateTime
+var GetTrainedModelInferenceJobResponse_trainedModelInferenceJobArn = &sGetTrainedModelInferenceJobResponse_trainedModelInferenceJobArn
+var GetTrainedModelInferenceJobResponse_configuredModelAlgorithmAssociationArn = &sGetTrainedModelInferenceJobResponse_configuredModelAlgorithmAssociationArn
+var GetTrainedModelInferenceJobResponse_name = &sGetTrainedModelInferenceJobResponse_name
+var GetTrainedModelInferenceJobResponse_status = &sGetTrainedModelInferenceJobResponse_status
+var GetTrainedModelInferenceJobResponse_trainedModelArn = &sGetTrainedModelInferenceJobResponse_trainedModelArn
+var GetTrainedModelInferenceJobResponse_trainedModelVersionIdentifier = &sGetTrainedModelInferenceJobResponse_trainedModelVersionIdentifier
+var GetTrainedModelInferenceJobResponse_resourceConfig = &sGetTrainedModelInferenceJobResponse_resourceConfig
+var GetTrainedModelInferenceJobResponse_outputConfiguration = &sGetTrainedModelInferenceJobResponse_outputConfiguration
+var GetTrainedModelInferenceJobResponse_membershipIdentifier = &sGetTrainedModelInferenceJobResponse_membershipIdentifier
+var GetTrainedModelInferenceJobResponse_dataSource = &sGetTrainedModelInferenceJobResponse_dataSource
+var GetTrainedModelInferenceJobResponse_containerExecutionParameters = &sGetTrainedModelInferenceJobResponse_containerExecutionParameters
+var GetTrainedModelInferenceJobResponse_statusDetails = &sGetTrainedModelInferenceJobResponse_statusDetails
+var GetTrainedModelInferenceJobResponse_description = &sGetTrainedModelInferenceJobResponse_description
+var GetTrainedModelInferenceJobResponse_inferenceContainerImageDigest = &sGetTrainedModelInferenceJobResponse_inferenceContainerImageDigest
+var GetTrainedModelInferenceJobResponse_environment = &sGetTrainedModelInferenceJobResponse_environment
+var GetTrainedModelInferenceJobResponse_kmsKeyArn = &sGetTrainedModelInferenceJobResponse_kmsKeyArn
+var GetTrainedModelInferenceJobResponse_metricsStatus = &sGetTrainedModelInferenceJobResponse_metricsStatus
+var GetTrainedModelInferenceJobResponse_metricsStatusDetails = &sGetTrainedModelInferenceJobResponse_metricsStatusDetails
+var GetTrainedModelInferenceJobResponse_logsStatus = &sGetTrainedModelInferenceJobResponse_logsStatus
+var GetTrainedModelInferenceJobResponse_logsStatusDetails = &sGetTrainedModelInferenceJobResponse_logsStatusDetails
+var GetTrainedModelInferenceJobResponse_tags = &sGetTrainedModelInferenceJobResponse_tags
+var GetTrainedModelInferenceJobResponse_mlModelInferencePayerAccountId = &sGetTrainedModelInferenceJobResponse_mlModelInferencePayerAccountId
+
+var GetTrainedModelRequest = &sGetTrainedModelRequest
+var GetTrainedModelRequest_trainedModelArn = &sGetTrainedModelRequest_trainedModelArn
+var GetTrainedModelRequest_membershipIdentifier = &sGetTrainedModelRequest_membershipIdentifier
+var GetTrainedModelRequest_versionIdentifier = &sGetTrainedModelRequest_versionIdentifier
+
+var GetTrainedModelResponse = &sGetTrainedModelResponse
+var GetTrainedModelResponse_membershipIdentifier = &sGetTrainedModelResponse_membershipIdentifier
+var GetTrainedModelResponse_collaborationIdentifier = &sGetTrainedModelResponse_collaborationIdentifier
+var GetTrainedModelResponse_trainedModelArn = &sGetTrainedModelResponse_trainedModelArn
+var GetTrainedModelResponse_versionIdentifier = &sGetTrainedModelResponse_versionIdentifier
+var GetTrainedModelResponse_incrementalTrainingDataChannels = &sGetTrainedModelResponse_incrementalTrainingDataChannels
+var GetTrainedModelResponse_name = &sGetTrainedModelResponse_name
+var GetTrainedModelResponse_description = &sGetTrainedModelResponse_description
+var GetTrainedModelResponse_status = &sGetTrainedModelResponse_status
+var GetTrainedModelResponse_statusDetails = &sGetTrainedModelResponse_statusDetails
+var GetTrainedModelResponse_configuredModelAlgorithmAssociationArn = &sGetTrainedModelResponse_configuredModelAlgorithmAssociationArn
+var GetTrainedModelResponse_resourceConfig = &sGetTrainedModelResponse_resourceConfig
+var GetTrainedModelResponse_trainingInputMode = &sGetTrainedModelResponse_trainingInputMode
+var GetTrainedModelResponse_stoppingCondition = &sGetTrainedModelResponse_stoppingCondition
+var GetTrainedModelResponse_metricsStatus = &sGetTrainedModelResponse_metricsStatus
+var GetTrainedModelResponse_metricsStatusDetails = &sGetTrainedModelResponse_metricsStatusDetails
+var GetTrainedModelResponse_logsStatus = &sGetTrainedModelResponse_logsStatus
+var GetTrainedModelResponse_logsStatusDetails = &sGetTrainedModelResponse_logsStatusDetails
+var GetTrainedModelResponse_trainingContainerImageDigest = &sGetTrainedModelResponse_trainingContainerImageDigest
+var GetTrainedModelResponse_mlModelTrainingPayerAccountId = &sGetTrainedModelResponse_mlModelTrainingPayerAccountId
+var GetTrainedModelResponse_createTime = &sGetTrainedModelResponse_createTime
+var GetTrainedModelResponse_updateTime = &sGetTrainedModelResponse_updateTime
+var GetTrainedModelResponse_hyperparameters = &sGetTrainedModelResponse_hyperparameters
+var GetTrainedModelResponse_environment = &sGetTrainedModelResponse_environment
+var GetTrainedModelResponse_kmsKeyArn = &sGetTrainedModelResponse_kmsKeyArn
+var GetTrainedModelResponse_tags = &sGetTrainedModelResponse_tags
+var GetTrainedModelResponse_dataChannels = &sGetTrainedModelResponse_dataChannels
+
+var GetTrainingDatasetRequest = &sGetTrainingDatasetRequest
+var GetTrainingDatasetRequest_trainingDatasetArn = &sGetTrainingDatasetRequest_trainingDatasetArn
+
+var GetTrainingDatasetResponse = &sGetTrainingDatasetResponse
+var GetTrainingDatasetResponse_createTime = &sGetTrainingDatasetResponse_createTime
+var GetTrainingDatasetResponse_updateTime = &sGetTrainingDatasetResponse_updateTime
+var GetTrainingDatasetResponse_trainingDatasetArn = &sGetTrainingDatasetResponse_trainingDatasetArn
+var GetTrainingDatasetResponse_name = &sGetTrainingDatasetResponse_name
+var GetTrainingDatasetResponse_trainingData = &sGetTrainingDatasetResponse_trainingData
+var GetTrainingDatasetResponse_status = &sGetTrainingDatasetResponse_status
+var GetTrainingDatasetResponse_roleArn = &sGetTrainingDatasetResponse_roleArn
+var GetTrainingDatasetResponse_tags = &sGetTrainingDatasetResponse_tags
+var GetTrainingDatasetResponse_description = &sGetTrainingDatasetResponse_description
+
+var ListAudienceExportJobsRequest = &sListAudienceExportJobsRequest
+var ListAudienceExportJobsRequest_nextToken = &sListAudienceExportJobsRequest_nextToken
+var ListAudienceExportJobsRequest_maxResults = &sListAudienceExportJobsRequest_maxResults
+var ListAudienceExportJobsRequest_audienceGenerationJobArn = &sListAudienceExportJobsRequest_audienceGenerationJobArn
+
+var ListAudienceExportJobsResponse = &sListAudienceExportJobsResponse
+var ListAudienceExportJobsResponse_nextToken = &sListAudienceExportJobsResponse_nextToken
+var ListAudienceExportJobsResponse_audienceExportJobs = &sListAudienceExportJobsResponse_audienceExportJobs
+
+var ListAudienceGenerationJobsRequest = &sListAudienceGenerationJobsRequest
+var ListAudienceGenerationJobsRequest_nextToken = &sListAudienceGenerationJobsRequest_nextToken
+var ListAudienceGenerationJobsRequest_maxResults = &sListAudienceGenerationJobsRequest_maxResults
+var ListAudienceGenerationJobsRequest_configuredAudienceModelArn = &sListAudienceGenerationJobsRequest_configuredAudienceModelArn
+var ListAudienceGenerationJobsRequest_collaborationId = &sListAudienceGenerationJobsRequest_collaborationId
+
+var ListAudienceGenerationJobsResponse = &sListAudienceGenerationJobsResponse
+var ListAudienceGenerationJobsResponse_nextToken = &sListAudienceGenerationJobsResponse_nextToken
+var ListAudienceGenerationJobsResponse_audienceGenerationJobs = &sListAudienceGenerationJobsResponse_audienceGenerationJobs
+
+var ListAudienceModelsRequest = &sListAudienceModelsRequest
+var ListAudienceModelsRequest_nextToken = &sListAudienceModelsRequest_nextToken
+var ListAudienceModelsRequest_maxResults = &sListAudienceModelsRequest_maxResults
+
+var ListAudienceModelsResponse = &sListAudienceModelsResponse
+var ListAudienceModelsResponse_nextToken = &sListAudienceModelsResponse_nextToken
+var ListAudienceModelsResponse_audienceModels = &sListAudienceModelsResponse_audienceModels
+
+var ListCollaborationConfiguredModelAlgorithmAssociationsRequest = &sListCollaborationConfiguredModelAlgorithmAssociationsRequest
+var ListCollaborationConfiguredModelAlgorithmAssociationsRequest_nextToken = &sListCollaborationConfiguredModelAlgorithmAssociationsRequest_nextToken
+var ListCollaborationConfiguredModelAlgorithmAssociationsRequest_maxResults = &sListCollaborationConfiguredModelAlgorithmAssociationsRequest_maxResults
+var ListCollaborationConfiguredModelAlgorithmAssociationsRequest_collaborationIdentifier = &sListCollaborationConfiguredModelAlgorithmAssociationsRequest_collaborationIdentifier
+
+var ListCollaborationConfiguredModelAlgorithmAssociationsResponse = &sListCollaborationConfiguredModelAlgorithmAssociationsResponse
+var ListCollaborationConfiguredModelAlgorithmAssociationsResponse_nextToken = &sListCollaborationConfiguredModelAlgorithmAssociationsResponse_nextToken
+var ListCollaborationConfiguredModelAlgorithmAssociationsResponse_collaborationConfiguredModelAlgorithmAssociations = &sListCollaborationConfiguredModelAlgorithmAssociationsResponse_collaborationConfiguredModelAlgorithmAssociations
+
+var ListCollaborationMLInputChannelsRequest = &sListCollaborationMLInputChannelsRequest
+var ListCollaborationMLInputChannelsRequest_nextToken = &sListCollaborationMLInputChannelsRequest_nextToken
+var ListCollaborationMLInputChannelsRequest_maxResults = &sListCollaborationMLInputChannelsRequest_maxResults
+var ListCollaborationMLInputChannelsRequest_collaborationIdentifier = &sListCollaborationMLInputChannelsRequest_collaborationIdentifier
+
+var ListCollaborationMLInputChannelsResponse = &sListCollaborationMLInputChannelsResponse
+var ListCollaborationMLInputChannelsResponse_nextToken = &sListCollaborationMLInputChannelsResponse_nextToken
+var ListCollaborationMLInputChannelsResponse_collaborationMLInputChannelsList = &sListCollaborationMLInputChannelsResponse_collaborationMLInputChannelsList
+
+var ListCollaborationTrainedModelExportJobsRequest = &sListCollaborationTrainedModelExportJobsRequest
+var ListCollaborationTrainedModelExportJobsRequest_nextToken = &sListCollaborationTrainedModelExportJobsRequest_nextToken
+var ListCollaborationTrainedModelExportJobsRequest_maxResults = &sListCollaborationTrainedModelExportJobsRequest_maxResults
+var ListCollaborationTrainedModelExportJobsRequest_collaborationIdentifier = &sListCollaborationTrainedModelExportJobsRequest_collaborationIdentifier
+var ListCollaborationTrainedModelExportJobsRequest_trainedModelArn = &sListCollaborationTrainedModelExportJobsRequest_trainedModelArn
+var ListCollaborationTrainedModelExportJobsRequest_trainedModelVersionIdentifier = &sListCollaborationTrainedModelExportJobsRequest_trainedModelVersionIdentifier
+
+var ListCollaborationTrainedModelExportJobsResponse = &sListCollaborationTrainedModelExportJobsResponse
+var ListCollaborationTrainedModelExportJobsResponse_nextToken = &sListCollaborationTrainedModelExportJobsResponse_nextToken
+var ListCollaborationTrainedModelExportJobsResponse_collaborationTrainedModelExportJobs = &sListCollaborationTrainedModelExportJobsResponse_collaborationTrainedModelExportJobs
+
+var ListCollaborationTrainedModelInferenceJobsRequest = &sListCollaborationTrainedModelInferenceJobsRequest
+var ListCollaborationTrainedModelInferenceJobsRequest_nextToken = &sListCollaborationTrainedModelInferenceJobsRequest_nextToken
+var ListCollaborationTrainedModelInferenceJobsRequest_maxResults = &sListCollaborationTrainedModelInferenceJobsRequest_maxResults
+var ListCollaborationTrainedModelInferenceJobsRequest_collaborationIdentifier = &sListCollaborationTrainedModelInferenceJobsRequest_collaborationIdentifier
+var ListCollaborationTrainedModelInferenceJobsRequest_trainedModelArn = &sListCollaborationTrainedModelInferenceJobsRequest_trainedModelArn
+var ListCollaborationTrainedModelInferenceJobsRequest_trainedModelVersionIdentifier = &sListCollaborationTrainedModelInferenceJobsRequest_trainedModelVersionIdentifier
+
+var ListCollaborationTrainedModelInferenceJobsResponse = &sListCollaborationTrainedModelInferenceJobsResponse
+var ListCollaborationTrainedModelInferenceJobsResponse_nextToken = &sListCollaborationTrainedModelInferenceJobsResponse_nextToken
+var ListCollaborationTrainedModelInferenceJobsResponse_collaborationTrainedModelInferenceJobs = &sListCollaborationTrainedModelInferenceJobsResponse_collaborationTrainedModelInferenceJobs
+
+var ListCollaborationTrainedModelsRequest = &sListCollaborationTrainedModelsRequest
+var ListCollaborationTrainedModelsRequest_nextToken = &sListCollaborationTrainedModelsRequest_nextToken
+var ListCollaborationTrainedModelsRequest_maxResults = &sListCollaborationTrainedModelsRequest_maxResults
+var ListCollaborationTrainedModelsRequest_collaborationIdentifier = &sListCollaborationTrainedModelsRequest_collaborationIdentifier
+
+var ListCollaborationTrainedModelsResponse = &sListCollaborationTrainedModelsResponse
+var ListCollaborationTrainedModelsResponse_nextToken = &sListCollaborationTrainedModelsResponse_nextToken
+var ListCollaborationTrainedModelsResponse_collaborationTrainedModels = &sListCollaborationTrainedModelsResponse_collaborationTrainedModels
+
+var ListConfiguredAudienceModelsRequest = &sListConfiguredAudienceModelsRequest
+var ListConfiguredAudienceModelsRequest_nextToken = &sListConfiguredAudienceModelsRequest_nextToken
+var ListConfiguredAudienceModelsRequest_maxResults = &sListConfiguredAudienceModelsRequest_maxResults
+
+var ListConfiguredAudienceModelsResponse = &sListConfiguredAudienceModelsResponse
+var ListConfiguredAudienceModelsResponse_nextToken = &sListConfiguredAudienceModelsResponse_nextToken
+var ListConfiguredAudienceModelsResponse_configuredAudienceModels = &sListConfiguredAudienceModelsResponse_configuredAudienceModels
+
+var ListConfiguredModelAlgorithmAssociationsRequest = &sListConfiguredModelAlgorithmAssociationsRequest
+var ListConfiguredModelAlgorithmAssociationsRequest_nextToken = &sListConfiguredModelAlgorithmAssociationsRequest_nextToken
+var ListConfiguredModelAlgorithmAssociationsRequest_maxResults = &sListConfiguredModelAlgorithmAssociationsRequest_maxResults
+var ListConfiguredModelAlgorithmAssociationsRequest_membershipIdentifier = &sListConfiguredModelAlgorithmAssociationsRequest_membershipIdentifier
+
+var ListConfiguredModelAlgorithmAssociationsResponse = &sListConfiguredModelAlgorithmAssociationsResponse
+var ListConfiguredModelAlgorithmAssociationsResponse_nextToken = &sListConfiguredModelAlgorithmAssociationsResponse_nextToken
+var ListConfiguredModelAlgorithmAssociationsResponse_configuredModelAlgorithmAssociations = &sListConfiguredModelAlgorithmAssociationsResponse_configuredModelAlgorithmAssociations
+
+var ListConfiguredModelAlgorithmsRequest = &sListConfiguredModelAlgorithmsRequest
+var ListConfiguredModelAlgorithmsRequest_nextToken = &sListConfiguredModelAlgorithmsRequest_nextToken
+var ListConfiguredModelAlgorithmsRequest_maxResults = &sListConfiguredModelAlgorithmsRequest_maxResults
+
+var ListConfiguredModelAlgorithmsResponse = &sListConfiguredModelAlgorithmsResponse
+var ListConfiguredModelAlgorithmsResponse_nextToken = &sListConfiguredModelAlgorithmsResponse_nextToken
+var ListConfiguredModelAlgorithmsResponse_configuredModelAlgorithms = &sListConfiguredModelAlgorithmsResponse_configuredModelAlgorithms
+
+var ListMLInputChannelsRequest = &sListMLInputChannelsRequest
+var ListMLInputChannelsRequest_nextToken = &sListMLInputChannelsRequest_nextToken
+var ListMLInputChannelsRequest_maxResults = &sListMLInputChannelsRequest_maxResults
+var ListMLInputChannelsRequest_membershipIdentifier = &sListMLInputChannelsRequest_membershipIdentifier
+
+var ListMLInputChannelsResponse = &sListMLInputChannelsResponse
+var ListMLInputChannelsResponse_nextToken = &sListMLInputChannelsResponse_nextToken
+var ListMLInputChannelsResponse_mlInputChannelsList = &sListMLInputChannelsResponse_mlInputChannelsList
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_resourceArn = &sListTagsForResourceRequest_resourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_tags = &sListTagsForResourceResponse_tags
+
+var ListTrainedModelInferenceJobsRequest = &sListTrainedModelInferenceJobsRequest
+var ListTrainedModelInferenceJobsRequest_nextToken = &sListTrainedModelInferenceJobsRequest_nextToken
+var ListTrainedModelInferenceJobsRequest_maxResults = &sListTrainedModelInferenceJobsRequest_maxResults
+var ListTrainedModelInferenceJobsRequest_membershipIdentifier = &sListTrainedModelInferenceJobsRequest_membershipIdentifier
+var ListTrainedModelInferenceJobsRequest_trainedModelArn = &sListTrainedModelInferenceJobsRequest_trainedModelArn
+var ListTrainedModelInferenceJobsRequest_trainedModelVersionIdentifier = &sListTrainedModelInferenceJobsRequest_trainedModelVersionIdentifier
+
+var ListTrainedModelInferenceJobsResponse = &sListTrainedModelInferenceJobsResponse
+var ListTrainedModelInferenceJobsResponse_nextToken = &sListTrainedModelInferenceJobsResponse_nextToken
+var ListTrainedModelInferenceJobsResponse_trainedModelInferenceJobs = &sListTrainedModelInferenceJobsResponse_trainedModelInferenceJobs
+
+var ListTrainedModelsRequest = &sListTrainedModelsRequest
+var ListTrainedModelsRequest_nextToken = &sListTrainedModelsRequest_nextToken
+var ListTrainedModelsRequest_maxResults = &sListTrainedModelsRequest_maxResults
+var ListTrainedModelsRequest_membershipIdentifier = &sListTrainedModelsRequest_membershipIdentifier
+
+var ListTrainedModelsResponse = &sListTrainedModelsResponse
+var ListTrainedModelsResponse_nextToken = &sListTrainedModelsResponse_nextToken
+var ListTrainedModelsResponse_trainedModels = &sListTrainedModelsResponse_trainedModels
+
+var ListTrainedModelVersionsRequest = &sListTrainedModelVersionsRequest
+var ListTrainedModelVersionsRequest_nextToken = &sListTrainedModelVersionsRequest_nextToken
+var ListTrainedModelVersionsRequest_maxResults = &sListTrainedModelVersionsRequest_maxResults
+var ListTrainedModelVersionsRequest_membershipIdentifier = &sListTrainedModelVersionsRequest_membershipIdentifier
+var ListTrainedModelVersionsRequest_trainedModelArn = &sListTrainedModelVersionsRequest_trainedModelArn
+var ListTrainedModelVersionsRequest_status = &sListTrainedModelVersionsRequest_status
+
+var ListTrainedModelVersionsResponse = &sListTrainedModelVersionsResponse
+var ListTrainedModelVersionsResponse_nextToken = &sListTrainedModelVersionsResponse_nextToken
+var ListTrainedModelVersionsResponse_trainedModels = &sListTrainedModelVersionsResponse_trainedModels
+
+var ListTrainingDatasetsRequest = &sListTrainingDatasetsRequest
+var ListTrainingDatasetsRequest_nextToken = &sListTrainingDatasetsRequest_nextToken
+var ListTrainingDatasetsRequest_maxResults = &sListTrainingDatasetsRequest_maxResults
+
+var ListTrainingDatasetsResponse = &sListTrainingDatasetsResponse
+var ListTrainingDatasetsResponse_nextToken = &sListTrainingDatasetsResponse_nextToken
+var ListTrainingDatasetsResponse_trainingDatasets = &sListTrainingDatasetsResponse_trainingDatasets
+
+var PutConfiguredAudienceModelPolicyRequest = &sPutConfiguredAudienceModelPolicyRequest
+var PutConfiguredAudienceModelPolicyRequest_configuredAudienceModelArn = &sPutConfiguredAudienceModelPolicyRequest_configuredAudienceModelArn
+var PutConfiguredAudienceModelPolicyRequest_configuredAudienceModelPolicy = &sPutConfiguredAudienceModelPolicyRequest_configuredAudienceModelPolicy
+var PutConfiguredAudienceModelPolicyRequest_previousPolicyHash = &sPutConfiguredAudienceModelPolicyRequest_previousPolicyHash
+var PutConfiguredAudienceModelPolicyRequest_policyExistenceCondition = &sPutConfiguredAudienceModelPolicyRequest_policyExistenceCondition
+
+var PutConfiguredAudienceModelPolicyResponse = &sPutConfiguredAudienceModelPolicyResponse
+var PutConfiguredAudienceModelPolicyResponse_configuredAudienceModelPolicy = &sPutConfiguredAudienceModelPolicyResponse_configuredAudienceModelPolicy
+var PutConfiguredAudienceModelPolicyResponse_policyHash = &sPutConfiguredAudienceModelPolicyResponse_policyHash
+
+var PutMLConfigurationRequest = &sPutMLConfigurationRequest
+var PutMLConfigurationRequest_membershipIdentifier = &sPutMLConfigurationRequest_membershipIdentifier
+var PutMLConfigurationRequest_defaultOutputLocation = &sPutMLConfigurationRequest_defaultOutputLocation
+
+var StartAudienceExportJobRequest = &sStartAudienceExportJobRequest
+var StartAudienceExportJobRequest_name = &sStartAudienceExportJobRequest_name
+var StartAudienceExportJobRequest_audienceGenerationJobArn = &sStartAudienceExportJobRequest_audienceGenerationJobArn
+var StartAudienceExportJobRequest_audienceSize = &sStartAudienceExportJobRequest_audienceSize
+var StartAudienceExportJobRequest_description = &sStartAudienceExportJobRequest_description
+
+var StartAudienceGenerationJobRequest = &sStartAudienceGenerationJobRequest
+var StartAudienceGenerationJobRequest_name = &sStartAudienceGenerationJobRequest_name
+var StartAudienceGenerationJobRequest_configuredAudienceModelArn = &sStartAudienceGenerationJobRequest_configuredAudienceModelArn
+var StartAudienceGenerationJobRequest_seedAudience = &sStartAudienceGenerationJobRequest_seedAudience
+var StartAudienceGenerationJobRequest_includeSeedInOutput = &sStartAudienceGenerationJobRequest_includeSeedInOutput
+var StartAudienceGenerationJobRequest_collaborationId = &sStartAudienceGenerationJobRequest_collaborationId
+var StartAudienceGenerationJobRequest_description = &sStartAudienceGenerationJobRequest_description
+var StartAudienceGenerationJobRequest_tags = &sStartAudienceGenerationJobRequest_tags
+
+var StartAudienceGenerationJobResponse = &sStartAudienceGenerationJobResponse
+var StartAudienceGenerationJobResponse_audienceGenerationJobArn = &sStartAudienceGenerationJobResponse_audienceGenerationJobArn
+
+var StartTrainedModelExportJobRequest = &sStartTrainedModelExportJobRequest
+var StartTrainedModelExportJobRequest_name = &sStartTrainedModelExportJobRequest_name
+var StartTrainedModelExportJobRequest_trainedModelArn = &sStartTrainedModelExportJobRequest_trainedModelArn
+var StartTrainedModelExportJobRequest_trainedModelVersionIdentifier = &sStartTrainedModelExportJobRequest_trainedModelVersionIdentifier
+var StartTrainedModelExportJobRequest_membershipIdentifier = &sStartTrainedModelExportJobRequest_membershipIdentifier
+var StartTrainedModelExportJobRequest_outputConfiguration = &sStartTrainedModelExportJobRequest_outputConfiguration
+var StartTrainedModelExportJobRequest_description = &sStartTrainedModelExportJobRequest_description
+
+var StartTrainedModelInferenceJobRequest = &sStartTrainedModelInferenceJobRequest
+var StartTrainedModelInferenceJobRequest_membershipIdentifier = &sStartTrainedModelInferenceJobRequest_membershipIdentifier
+var StartTrainedModelInferenceJobRequest_name = &sStartTrainedModelInferenceJobRequest_name
+var StartTrainedModelInferenceJobRequest_trainedModelArn = &sStartTrainedModelInferenceJobRequest_trainedModelArn
+var StartTrainedModelInferenceJobRequest_trainedModelVersionIdentifier = &sStartTrainedModelInferenceJobRequest_trainedModelVersionIdentifier
+var StartTrainedModelInferenceJobRequest_configuredModelAlgorithmAssociationArn = &sStartTrainedModelInferenceJobRequest_configuredModelAlgorithmAssociationArn
+var StartTrainedModelInferenceJobRequest_resourceConfig = &sStartTrainedModelInferenceJobRequest_resourceConfig
+var StartTrainedModelInferenceJobRequest_outputConfiguration = &sStartTrainedModelInferenceJobRequest_outputConfiguration
+var StartTrainedModelInferenceJobRequest_dataSource = &sStartTrainedModelInferenceJobRequest_dataSource
+var StartTrainedModelInferenceJobRequest_description = &sStartTrainedModelInferenceJobRequest_description
+var StartTrainedModelInferenceJobRequest_containerExecutionParameters = &sStartTrainedModelInferenceJobRequest_containerExecutionParameters
+var StartTrainedModelInferenceJobRequest_environment = &sStartTrainedModelInferenceJobRequest_environment
+var StartTrainedModelInferenceJobRequest_kmsKeyArn = &sStartTrainedModelInferenceJobRequest_kmsKeyArn
+var StartTrainedModelInferenceJobRequest_tags = &sStartTrainedModelInferenceJobRequest_tags
+var StartTrainedModelInferenceJobRequest_mlModelInferencePayerAccountId = &sStartTrainedModelInferenceJobRequest_mlModelInferencePayerAccountId
+
+var StartTrainedModelInferenceJobResponse = &sStartTrainedModelInferenceJobResponse
+var StartTrainedModelInferenceJobResponse_trainedModelInferenceJobArn = &sStartTrainedModelInferenceJobResponse_trainedModelInferenceJobArn
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_resourceArn = &sTagResourceRequest_resourceArn
+var TagResourceRequest_tags = &sTagResourceRequest_tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_resourceArn = &sUntagResourceRequest_resourceArn
+var UntagResourceRequest_tagKeys = &sUntagResourceRequest_tagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateConfiguredAudienceModelRequest = &sUpdateConfiguredAudienceModelRequest
+var UpdateConfiguredAudienceModelRequest_configuredAudienceModelArn = &sUpdateConfiguredAudienceModelRequest_configuredAudienceModelArn
+var UpdateConfiguredAudienceModelRequest_outputConfig = &sUpdateConfiguredAudienceModelRequest_outputConfig
+var UpdateConfiguredAudienceModelRequest_audienceModelArn = &sUpdateConfiguredAudienceModelRequest_audienceModelArn
+var UpdateConfiguredAudienceModelRequest_sharedAudienceMetrics = &sUpdateConfiguredAudienceModelRequest_sharedAudienceMetrics
+var UpdateConfiguredAudienceModelRequest_minMatchingSeedSize = &sUpdateConfiguredAudienceModelRequest_minMatchingSeedSize
+var UpdateConfiguredAudienceModelRequest_audienceSizeConfig = &sUpdateConfiguredAudienceModelRequest_audienceSizeConfig
+var UpdateConfiguredAudienceModelRequest_description = &sUpdateConfiguredAudienceModelRequest_description
+
+var UpdateConfiguredAudienceModelResponse = &sUpdateConfiguredAudienceModelResponse
+var UpdateConfiguredAudienceModelResponse_configuredAudienceModelArn = &sUpdateConfiguredAudienceModelResponse_configuredAudienceModelArn
+
+var AWSStarkControlService = &smithy.ServiceSchema{Schema: &s_AWSStarkControlService, Version: "2023-09-06"}

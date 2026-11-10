@@ -4,4382 +4,3107 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AssociateAdminAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "AssociateAdminAccount",
-}, smithy.ShapeTypeOperation, 0)
-
-var AssociateThirdPartyFirewall = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "AssociateThirdPartyFirewall",
-}, smithy.ShapeTypeOperation, 0)
-
-var BatchAssociateResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "BatchAssociateResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var BatchDisassociateResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "BatchDisassociateResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteAppsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "DeleteAppsList",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteNotificationChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "DeleteNotificationChannel",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeletePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "DeletePolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteProtocolsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "DeleteProtocolsList",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteResourceSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "DeleteResourceSet",
-}, smithy.ShapeTypeOperation, 0)
-
-var DisassociateAdminAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "DisassociateAdminAccount",
-}, smithy.ShapeTypeOperation, 0)
-
-var DisassociateThirdPartyFirewall = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "DisassociateThirdPartyFirewall",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetAdminAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "GetAdminAccount",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetAdminScope = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "GetAdminScope",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetAppsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "GetAppsList",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetComplianceDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "GetComplianceDetail",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetNotificationChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "GetNotificationChannel",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "GetPolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetProtectionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "GetProtectionStatus",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetProtocolsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "GetProtocolsList",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetResourceSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "GetResourceSet",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetThirdPartyFirewallAssociationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "GetThirdPartyFirewallAssociationStatus",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetViolationDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "GetViolationDetails",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListAdminAccountsForOrganization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ListAdminAccountsForOrganization",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListAdminsManagingAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ListAdminsManagingAccount",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListAppsLists = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ListAppsLists",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListComplianceStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ListComplianceStatus",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListDiscoveredResources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ListDiscoveredResources",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListMemberAccounts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ListMemberAccounts",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListPolicies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ListPolicies",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListProtocolsLists = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ListProtocolsLists",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListResourceSetResources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ListResourceSetResources",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListResourceSets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ListResourceSets",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListThirdPartyFirewallFirewallPolicies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ListThirdPartyFirewallFirewallPolicies",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutAdminAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "PutAdminAccount",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutAppsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "PutAppsList",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutNotificationChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "PutNotificationChannel",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "PutPolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutProtocolsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "PutProtocolsList",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutResourceSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "PutResourceSet",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var _AWSFMS_20180101 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "AWSFMS_20180101",
-}, smithy.ShapeTypeService, 0)
-
-var AWSFMS_20180101 = smithy.NewServiceSchema(_AWSFMS_20180101, "2018-01-01")
-
-var _AccountIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "AccountIdList",
-}, smithy.ShapeTypeList, 1)
-var _AccountIdList_member *smithy.Schema
-
-var AccountRoleStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "AccountRoleStatus",
-}, smithy.ShapeTypeEnum, 5)
-var AccountRoleStatus_Ready *smithy.Schema
-
-var AccountRoleStatus_Creating *smithy.Schema
-
-var AccountRoleStatus_PendingDeletion *smithy.Schema
-
-var AccountRoleStatus_Deleting *smithy.Schema
-
-var AccountRoleStatus_Deleted *smithy.Schema
-
-var AccountScope = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "AccountScope",
-}, smithy.ShapeTypeStructure, 3)
-var AccountScope_Accounts *smithy.Schema
-
-var AccountScope_AllAccountsEnabled *smithy.Schema
-
-var AccountScope_ExcludeSpecifiedAccounts *smithy.Schema
-
-var ActionTarget = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ActionTarget",
-}, smithy.ShapeTypeStructure, 2)
-var ActionTarget_ResourceId *smithy.Schema
-
-var ActionTarget_Description *smithy.Schema
-
-var AdminAccountSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "AdminAccountSummary",
-}, smithy.ShapeTypeStructure, 3)
-var AdminAccountSummary_AdminAccount *smithy.Schema
-
-var AdminAccountSummary_DefaultAdmin *smithy.Schema
-
-var AdminAccountSummary_Status *smithy.Schema
-
-var _AdminAccountSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "AdminAccountSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _AdminAccountSummaryList_member *smithy.Schema
-
-var AdminScope = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "AdminScope",
-}, smithy.ShapeTypeStructure, 4)
-var AdminScope_AccountScope *smithy.Schema
-
-var AdminScope_OrganizationalUnitScope *smithy.Schema
-
-var AdminScope_RegionScope *smithy.Schema
-
-var AdminScope_PolicyTypeScope *smithy.Schema
-
-var App = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "App",
-}, smithy.ShapeTypeStructure, 3)
-var App_AppName *smithy.Schema
-
-var App_Protocol *smithy.Schema
-
-var App_Port *smithy.Schema
-
-var _AppsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "AppsList",
-}, smithy.ShapeTypeList, 1)
-var _AppsList_member *smithy.Schema
-
-var AppsListData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "AppsListData",
-}, smithy.ShapeTypeStructure, 7)
-var AppsListData_ListId *smithy.Schema
-
-var AppsListData_ListName *smithy.Schema
-
-var AppsListData_ListUpdateToken *smithy.Schema
-
-var AppsListData_CreateTime *smithy.Schema
-
-var AppsListData_LastUpdateTime *smithy.Schema
-
-var AppsListData_AppsList *smithy.Schema
-
-var AppsListData_PreviousAppsList *smithy.Schema
-
-var AppsListDataSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "AppsListDataSummary",
-}, smithy.ShapeTypeStructure, 4)
-var AppsListDataSummary_ListArn *smithy.Schema
-
-var AppsListDataSummary_ListId *smithy.Schema
-
-var AppsListDataSummary_ListName *smithy.Schema
-
-var AppsListDataSummary_AppsList *smithy.Schema
-
-var _AppsListsData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "AppsListsData",
-}, smithy.ShapeTypeList, 1)
-var _AppsListsData_member *smithy.Schema
-
-var _AWSAccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "AWSAccountId",
-}, smithy.ShapeTypeString, 0)
-
-var _AWSAccountIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "AWSAccountIdList",
-}, smithy.ShapeTypeList, 1)
-var _AWSAccountIdList_member *smithy.Schema
-
-var AwsEc2InstanceViolation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "AwsEc2InstanceViolation",
-}, smithy.ShapeTypeStructure, 2)
-var AwsEc2InstanceViolation_ViolationTarget *smithy.Schema
-
-var AwsEc2InstanceViolation_AwsEc2NetworkInterfaceViolations *smithy.Schema
-
-var AwsEc2NetworkInterfaceViolation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "AwsEc2NetworkInterfaceViolation",
-}, smithy.ShapeTypeStructure, 2)
-var AwsEc2NetworkInterfaceViolation_ViolationTarget *smithy.Schema
-
-var AwsEc2NetworkInterfaceViolation_ViolatingSecurityGroups *smithy.Schema
-
-var _AwsEc2NetworkInterfaceViolations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "AwsEc2NetworkInterfaceViolations",
-}, smithy.ShapeTypeList, 1)
-var _AwsEc2NetworkInterfaceViolations_member *smithy.Schema
-
-var _AWSRegion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "AWSRegion",
-}, smithy.ShapeTypeString, 0)
-
-var _AWSRegionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "AWSRegionList",
-}, smithy.ShapeTypeList, 1)
-var _AWSRegionList_member *smithy.Schema
-
-var AwsVPCSecurityGroupViolation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "AwsVPCSecurityGroupViolation",
-}, smithy.ShapeTypeStructure, 4)
-var AwsVPCSecurityGroupViolation_ViolationTarget *smithy.Schema
-
-var AwsVPCSecurityGroupViolation_ViolationTargetDescription *smithy.Schema
-
-var AwsVPCSecurityGroupViolation_PartialMatches *smithy.Schema
-
-var AwsVPCSecurityGroupViolation_PossibleSecurityGroupRemediationActions *smithy.Schema
-
-var _Base62Id = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "Base62Id",
-}, smithy.ShapeTypeString, 0)
-
-var _BasicInteger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "BasicInteger",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "Boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _BooleanObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "BooleanObject",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _CIDR = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "CIDR",
-}, smithy.ShapeTypeString, 0)
-
-var ComplianceViolator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ComplianceViolator",
-}, smithy.ShapeTypeStructure, 4)
-var ComplianceViolator_ResourceId *smithy.Schema
-
-var ComplianceViolator_ViolationReason *smithy.Schema
-
-var ComplianceViolator_ResourceType *smithy.Schema
-
-var ComplianceViolator_Metadata *smithy.Schema
-
-var _ComplianceViolatorMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ComplianceViolatorMetadata",
-}, smithy.ShapeTypeMap, 2)
-var _ComplianceViolatorMetadata_key *smithy.Schema
-
-var _ComplianceViolatorMetadata_value *smithy.Schema
-
-var _ComplianceViolators = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ComplianceViolators",
-}, smithy.ShapeTypeList, 1)
-var _ComplianceViolators_member *smithy.Schema
-
-var CreateNetworkAclAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "CreateNetworkAclAction",
-}, smithy.ShapeTypeStructure, 3)
-var CreateNetworkAclAction_Description *smithy.Schema
-
-var CreateNetworkAclAction_Vpc *smithy.Schema
-
-var CreateNetworkAclAction_FMSCanRemediate *smithy.Schema
-
-var CreateNetworkAclEntriesAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "CreateNetworkAclEntriesAction",
-}, smithy.ShapeTypeStructure, 4)
-var CreateNetworkAclEntriesAction_Description *smithy.Schema
-
-var CreateNetworkAclEntriesAction_NetworkAclId *smithy.Schema
-
-var CreateNetworkAclEntriesAction_NetworkAclEntriesToBeCreated *smithy.Schema
-
-var CreateNetworkAclEntriesAction_FMSCanRemediate *smithy.Schema
-
-var _CustomerPolicyScopeId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "CustomerPolicyScopeId",
-}, smithy.ShapeTypeString, 0)
-
-var _CustomerPolicyScopeIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "CustomerPolicyScopeIdList",
-}, smithy.ShapeTypeList, 1)
-var _CustomerPolicyScopeIdList_member *smithy.Schema
-
-var CustomerPolicyScopeIdType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "CustomerPolicyScopeIdType",
-}, smithy.ShapeTypeEnum, 2)
-var CustomerPolicyScopeIdType_ACCOUNT *smithy.Schema
-
-var CustomerPolicyScopeIdType_ORG_UNIT *smithy.Schema
-
-var _CustomerPolicyScopeMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "CustomerPolicyScopeMap",
-}, smithy.ShapeTypeMap, 2)
-var _CustomerPolicyScopeMap_key *smithy.Schema
-
-var _CustomerPolicyScopeMap_value *smithy.Schema
-
-var CustomerPolicyStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "CustomerPolicyStatus",
-}, smithy.ShapeTypeEnum, 2)
-var CustomerPolicyStatus_ACTIVE *smithy.Schema
-
-var CustomerPolicyStatus_OUT_OF_ADMIN_SCOPE *smithy.Schema
-
-var DeleteNetworkAclEntriesAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "DeleteNetworkAclEntriesAction",
-}, smithy.ShapeTypeStructure, 4)
-var DeleteNetworkAclEntriesAction_Description *smithy.Schema
-
-var DeleteNetworkAclEntriesAction_NetworkAclId *smithy.Schema
-
-var DeleteNetworkAclEntriesAction_NetworkAclEntriesToBeDeleted *smithy.Schema
-
-var DeleteNetworkAclEntriesAction_FMSCanRemediate *smithy.Schema
-
-var DependentServiceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "DependentServiceName",
-}, smithy.ShapeTypeEnum, 4)
-var DependentServiceName_AWSConfig *smithy.Schema
-
-var DependentServiceName_AWSWAF *smithy.Schema
-
-var DependentServiceName_AWSShieldAdvanced *smithy.Schema
-
-var DependentServiceName_AWSVirtualPrivateCloud *smithy.Schema
-
-var _Description = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "Description",
-}, smithy.ShapeTypeString, 0)
-
-var DestinationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "DestinationType",
-}, smithy.ShapeTypeEnum, 3)
-var DestinationType_IPV4 *smithy.Schema
-
-var DestinationType_IPV6 *smithy.Schema
-
-var DestinationType_PrefixList *smithy.Schema
-
-var _DetailedInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "DetailedInfo",
-}, smithy.ShapeTypeString, 0)
-
-var DiscoveredResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "DiscoveredResource",
-}, smithy.ShapeTypeStructure, 4)
-var DiscoveredResource_URI *smithy.Schema
-
-var DiscoveredResource_AccountId *smithy.Schema
-
-var DiscoveredResource_Type *smithy.Schema
-
-var DiscoveredResource_Name *smithy.Schema
-
-var _DiscoveredResourceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "DiscoveredResourceList",
-}, smithy.ShapeTypeList, 1)
-var _DiscoveredResourceList_member *smithy.Schema
-
-var DnsDuplicateRuleGroupViolation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "DnsDuplicateRuleGroupViolation",
-}, smithy.ShapeTypeStructure, 2)
-var DnsDuplicateRuleGroupViolation_ViolationTarget *smithy.Schema
-
-var DnsDuplicateRuleGroupViolation_ViolationTargetDescription *smithy.Schema
-
-var DnsRuleGroupLimitExceededViolation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "DnsRuleGroupLimitExceededViolation",
-}, smithy.ShapeTypeStructure, 3)
-var DnsRuleGroupLimitExceededViolation_ViolationTarget *smithy.Schema
-
-var DnsRuleGroupLimitExceededViolation_ViolationTargetDescription *smithy.Schema
-
-var DnsRuleGroupLimitExceededViolation_NumberOfRuleGroupsAlreadyAssociated *smithy.Schema
-
-var _DnsRuleGroupPriorities = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "DnsRuleGroupPriorities",
-}, smithy.ShapeTypeList, 1)
-var _DnsRuleGroupPriorities_member *smithy.Schema
-
-var _DnsRuleGroupPriority = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "DnsRuleGroupPriority",
-}, smithy.ShapeTypeInteger, 0)
-
-var DnsRuleGroupPriorityConflictViolation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "DnsRuleGroupPriorityConflictViolation",
-}, smithy.ShapeTypeStructure, 5)
-var DnsRuleGroupPriorityConflictViolation_ViolationTarget *smithy.Schema
-
-var DnsRuleGroupPriorityConflictViolation_ViolationTargetDescription *smithy.Schema
-
-var DnsRuleGroupPriorityConflictViolation_ConflictingPriority *smithy.Schema
-
-var DnsRuleGroupPriorityConflictViolation_ConflictingPolicyId *smithy.Schema
-
-var DnsRuleGroupPriorityConflictViolation_UnavailablePriorities *smithy.Schema
-
-var EC2AssociateRouteTableAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "EC2AssociateRouteTableAction",
-}, smithy.ShapeTypeStructure, 4)
-var EC2AssociateRouteTableAction_Description *smithy.Schema
-
-var EC2AssociateRouteTableAction_RouteTableId *smithy.Schema
-
-var EC2AssociateRouteTableAction_SubnetId *smithy.Schema
-
-var EC2AssociateRouteTableAction_GatewayId *smithy.Schema
-
-var EC2CopyRouteTableAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "EC2CopyRouteTableAction",
-}, smithy.ShapeTypeStructure, 3)
-var EC2CopyRouteTableAction_Description *smithy.Schema
-
-var EC2CopyRouteTableAction_VpcId *smithy.Schema
-
-var EC2CopyRouteTableAction_RouteTableId *smithy.Schema
-
-var EC2CreateRouteAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "EC2CreateRouteAction",
-}, smithy.ShapeTypeStructure, 7)
-var EC2CreateRouteAction_Description *smithy.Schema
-
-var EC2CreateRouteAction_DestinationCidrBlock *smithy.Schema
-
-var EC2CreateRouteAction_DestinationPrefixListId *smithy.Schema
-
-var EC2CreateRouteAction_DestinationIpv6CidrBlock *smithy.Schema
-
-var EC2CreateRouteAction_VpcEndpointId *smithy.Schema
-
-var EC2CreateRouteAction_GatewayId *smithy.Schema
-
-var EC2CreateRouteAction_RouteTableId *smithy.Schema
-
-var EC2CreateRouteTableAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "EC2CreateRouteTableAction",
-}, smithy.ShapeTypeStructure, 2)
-var EC2CreateRouteTableAction_Description *smithy.Schema
-
-var EC2CreateRouteTableAction_VpcId *smithy.Schema
-
-var EC2DeleteRouteAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "EC2DeleteRouteAction",
-}, smithy.ShapeTypeStructure, 5)
-var EC2DeleteRouteAction_Description *smithy.Schema
-
-var EC2DeleteRouteAction_DestinationCidrBlock *smithy.Schema
-
-var EC2DeleteRouteAction_DestinationPrefixListId *smithy.Schema
-
-var EC2DeleteRouteAction_DestinationIpv6CidrBlock *smithy.Schema
-
-var EC2DeleteRouteAction_RouteTableId *smithy.Schema
-
-var EC2ReplaceRouteAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "EC2ReplaceRouteAction",
-}, smithy.ShapeTypeStructure, 6)
-var EC2ReplaceRouteAction_Description *smithy.Schema
-
-var EC2ReplaceRouteAction_DestinationCidrBlock *smithy.Schema
-
-var EC2ReplaceRouteAction_DestinationPrefixListId *smithy.Schema
-
-var EC2ReplaceRouteAction_DestinationIpv6CidrBlock *smithy.Schema
-
-var EC2ReplaceRouteAction_GatewayId *smithy.Schema
-
-var EC2ReplaceRouteAction_RouteTableId *smithy.Schema
-
-var EC2ReplaceRouteTableAssociationAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "EC2ReplaceRouteTableAssociationAction",
-}, smithy.ShapeTypeStructure, 3)
-var EC2ReplaceRouteTableAssociationAction_Description *smithy.Schema
-
-var EC2ReplaceRouteTableAssociationAction_AssociationId *smithy.Schema
-
-var EC2ReplaceRouteTableAssociationAction_RouteTableId *smithy.Schema
-
-var _EntriesDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "EntriesDescription",
-}, smithy.ShapeTypeList, 1)
-var _EntriesDescription_member *smithy.Schema
-
-var _EntriesWithConflicts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "EntriesWithConflicts",
-}, smithy.ShapeTypeList, 1)
-var _EntriesWithConflicts_member *smithy.Schema
-
-var EntryDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "EntryDescription",
-}, smithy.ShapeTypeStructure, 3)
-var EntryDescription_EntryDetail *smithy.Schema
-
-var EntryDescription_EntryRuleNumber *smithy.Schema
-
-var EntryDescription_EntryType *smithy.Schema
-
-var EntryType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "EntryType",
-}, smithy.ShapeTypeEnum, 3)
-var EntryType_FMSManagedFirstEntry *smithy.Schema
-
-var EntryType_FMSManagedLastEntry *smithy.Schema
-
-var EntryType_CustomEntry *smithy.Schema
-
-var EntryViolation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "EntryViolation",
-}, smithy.ShapeTypeStructure, 6)
-var EntryViolation_ExpectedEntry *smithy.Schema
-
-var EntryViolation_ExpectedEvaluationOrder *smithy.Schema
-
-var EntryViolation_ActualEvaluationOrder *smithy.Schema
-
-var EntryViolation_EntryAtExpectedEvaluationOrder *smithy.Schema
-
-var EntryViolation_EntriesWithConflicts *smithy.Schema
-
-var EntryViolation_EntryViolationReasons *smithy.Schema
-
-var EntryViolationReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "EntryViolationReason",
-}, smithy.ShapeTypeEnum, 3)
-var EntryViolationReason_MissingExpectedEntry *smithy.Schema
-
-var EntryViolationReason_IncorrectEntryOrder *smithy.Schema
-
-var EntryViolationReason_EntryConflict *smithy.Schema
-
-var _EntryViolationReasons = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "EntryViolationReasons",
-}, smithy.ShapeTypeList, 1)
-var _EntryViolationReasons_member *smithy.Schema
-
-var _EntryViolations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "EntryViolations",
-}, smithy.ShapeTypeList, 1)
-var _EntryViolations_member *smithy.Schema
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var EvaluationResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "EvaluationResult",
-}, smithy.ShapeTypeStructure, 3)
-var EvaluationResult_ComplianceStatus *smithy.Schema
-
-var EvaluationResult_ViolatorCount *smithy.Schema
-
-var EvaluationResult_EvaluationLimitExceeded *smithy.Schema
-
-var _EvaluationResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "EvaluationResults",
-}, smithy.ShapeTypeList, 1)
-var _EvaluationResults_member *smithy.Schema
-
-var ExpectedRoute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ExpectedRoute",
-}, smithy.ShapeTypeStructure, 6)
-var ExpectedRoute_IpV4Cidr *smithy.Schema
-
-var ExpectedRoute_PrefixListId *smithy.Schema
-
-var ExpectedRoute_IpV6Cidr *smithy.Schema
-
-var ExpectedRoute_ContributingSubnets *smithy.Schema
-
-var ExpectedRoute_AllowedTargets *smithy.Schema
-
-var ExpectedRoute_RouteTableId *smithy.Schema
-
-var _ExpectedRoutes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ExpectedRoutes",
-}, smithy.ShapeTypeList, 1)
-var _ExpectedRoutes_member *smithy.Schema
-
-var FailedItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "FailedItem",
-}, smithy.ShapeTypeStructure, 2)
-var FailedItem_URI *smithy.Schema
-
-var FailedItem_Reason *smithy.Schema
-
-var _FailedItemList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "FailedItemList",
-}, smithy.ShapeTypeList, 1)
-var _FailedItemList_member *smithy.Schema
-
-var FailedItemReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "FailedItemReason",
-}, smithy.ShapeTypeEnum, 6)
-var FailedItemReason_NotValidArn *smithy.Schema
-
-var FailedItemReason_NotValidPartition *smithy.Schema
-
-var FailedItemReason_NotValidRegion *smithy.Schema
-
-var FailedItemReason_NotValidService *smithy.Schema
-
-var FailedItemReason_NotValidResourceType *smithy.Schema
-
-var FailedItemReason_NotValidAccountId *smithy.Schema
-
-var FirewallDeploymentModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "FirewallDeploymentModel",
-}, smithy.ShapeTypeEnum, 2)
-var FirewallDeploymentModel_CENTRALIZED *smithy.Schema
-
-var FirewallDeploymentModel_DISTRIBUTED *smithy.Schema
-
-var _FirewallPolicyId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "FirewallPolicyId",
-}, smithy.ShapeTypeString, 0)
-
-var _FirewallPolicyName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "FirewallPolicyName",
-}, smithy.ShapeTypeString, 0)
-
-var FirewallSubnetIsOutOfScopeViolation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "FirewallSubnetIsOutOfScopeViolation",
-}, smithy.ShapeTypeStructure, 5)
-var FirewallSubnetIsOutOfScopeViolation_FirewallSubnetId *smithy.Schema
-
-var FirewallSubnetIsOutOfScopeViolation_VpcId *smithy.Schema
-
-var FirewallSubnetIsOutOfScopeViolation_SubnetAvailabilityZone *smithy.Schema
-
-var FirewallSubnetIsOutOfScopeViolation_SubnetAvailabilityZoneId *smithy.Schema
-
-var FirewallSubnetIsOutOfScopeViolation_VpcEndpointId *smithy.Schema
-
-var FirewallSubnetMissingVPCEndpointViolation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "FirewallSubnetMissingVPCEndpointViolation",
-}, smithy.ShapeTypeStructure, 4)
-var FirewallSubnetMissingVPCEndpointViolation_FirewallSubnetId *smithy.Schema
-
-var FirewallSubnetMissingVPCEndpointViolation_VpcId *smithy.Schema
-
-var FirewallSubnetMissingVPCEndpointViolation_SubnetAvailabilityZone *smithy.Schema
-
-var FirewallSubnetMissingVPCEndpointViolation_SubnetAvailabilityZoneId *smithy.Schema
-
-var FMSPolicyUpdateFirewallCreationConfigAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "FMSPolicyUpdateFirewallCreationConfigAction",
-}, smithy.ShapeTypeStructure, 2)
-var FMSPolicyUpdateFirewallCreationConfigAction_Description *smithy.Schema
-
-var FMSPolicyUpdateFirewallCreationConfigAction_FirewallCreationConfig *smithy.Schema
-
-var _Identifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "Identifier",
-}, smithy.ShapeTypeString, 0)
-
-var _IdentifierList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "IdentifierList",
-}, smithy.ShapeTypeList, 1)
-var _IdentifierList_member *smithy.Schema
-
-var _IntegerObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "IntegerObject",
-}, smithy.ShapeTypeInteger, 0)
-
-var _IntegerObjectMinimum0 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "IntegerObjectMinimum0",
-}, smithy.ShapeTypeInteger, 0)
-
-var InternalErrorException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "InternalErrorException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InternalErrorException_Message *smithy.Schema
-
-var InvalidInputException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "InvalidInputException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidInputException_Message *smithy.Schema
-
-var InvalidNetworkAclEntriesViolation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "InvalidNetworkAclEntriesViolation",
-}, smithy.ShapeTypeStructure, 5)
-var InvalidNetworkAclEntriesViolation_Vpc *smithy.Schema
-
-var InvalidNetworkAclEntriesViolation_Subnet *smithy.Schema
-
-var InvalidNetworkAclEntriesViolation_SubnetAvailabilityZone *smithy.Schema
-
-var InvalidNetworkAclEntriesViolation_CurrentAssociatedNetworkAcl *smithy.Schema
-
-var InvalidNetworkAclEntriesViolation_EntryViolations *smithy.Schema
-
-var InvalidOperationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "InvalidOperationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidOperationException_Message *smithy.Schema
-
-var InvalidTypeException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "InvalidTypeException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidTypeException_Message *smithy.Schema
-
-var _IPPortNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "IPPortNumber",
-}, smithy.ShapeTypeLong, 0)
-
-var _IPPortNumberInteger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "IPPortNumberInteger",
-}, smithy.ShapeTypeInteger, 0)
-
-var _IssueInfoMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "IssueInfoMap",
-}, smithy.ShapeTypeMap, 2)
-var _IssueInfoMap_key *smithy.Schema
-
-var _IssueInfoMap_value *smithy.Schema
-
-var _LengthBoundedNonEmptyString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "LengthBoundedNonEmptyString",
-}, smithy.ShapeTypeString, 0)
-
-var _LengthBoundedString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "LengthBoundedString",
-}, smithy.ShapeTypeString, 0)
-
-var _LengthBoundedStringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "LengthBoundedStringList",
-}, smithy.ShapeTypeList, 1)
-var _LengthBoundedStringList_member *smithy.Schema
-
-var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var LimitExceededException_Message *smithy.Schema
-
-var _ListId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ListId",
-}, smithy.ShapeTypeString, 0)
-
-var _ManagedServiceData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ManagedServiceData",
-}, smithy.ShapeTypeString, 0)
-
-var MarketplaceSubscriptionOnboardingStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "MarketplaceSubscriptionOnboardingStatus",
-}, smithy.ShapeTypeEnum, 3)
-var MarketplaceSubscriptionOnboardingStatus_NO_SUBSCRIPTION *smithy.Schema
-
-var MarketplaceSubscriptionOnboardingStatus_NOT_COMPLETE *smithy.Schema
-
-var MarketplaceSubscriptionOnboardingStatus_COMPLETE *smithy.Schema
-
-var _MemberAccounts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "MemberAccounts",
-}, smithy.ShapeTypeList, 1)
-var _MemberAccounts_member *smithy.Schema
-
-var _Name = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "Name",
-}, smithy.ShapeTypeString, 0)
-
-var NetworkAclCommonPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "NetworkAclCommonPolicy",
-}, smithy.ShapeTypeStructure, 1)
-var NetworkAclCommonPolicy_NetworkAclEntrySet *smithy.Schema
-
-var _NetworkAclEntries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "NetworkAclEntries",
-}, smithy.ShapeTypeList, 1)
-var _NetworkAclEntries_member *smithy.Schema
-
-var NetworkAclEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "NetworkAclEntry",
-}, smithy.ShapeTypeStructure, 7)
-var NetworkAclEntry_IcmpTypeCode *smithy.Schema
-
-var NetworkAclEntry_Protocol *smithy.Schema
-
-var NetworkAclEntry_PortRange *smithy.Schema
-
-var NetworkAclEntry_CidrBlock *smithy.Schema
-
-var NetworkAclEntry_Ipv6CidrBlock *smithy.Schema
-
-var NetworkAclEntry_RuleAction *smithy.Schema
-
-var NetworkAclEntry_Egress *smithy.Schema
-
-var NetworkAclEntrySet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "NetworkAclEntrySet",
-}, smithy.ShapeTypeStructure, 4)
-var NetworkAclEntrySet_FirstEntries *smithy.Schema
-
-var NetworkAclEntrySet_ForceRemediateForFirstEntries *smithy.Schema
-
-var NetworkAclEntrySet_LastEntries *smithy.Schema
-
-var NetworkAclEntrySet_ForceRemediateForLastEntries *smithy.Schema
-
-var NetworkAclIcmpTypeCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "NetworkAclIcmpTypeCode",
-}, smithy.ShapeTypeStructure, 2)
-var NetworkAclIcmpTypeCode_Code *smithy.Schema
-
-var NetworkAclIcmpTypeCode_Type *smithy.Schema
-
-var NetworkAclPortRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "NetworkAclPortRange",
-}, smithy.ShapeTypeStructure, 2)
-var NetworkAclPortRange_From *smithy.Schema
-
-var NetworkAclPortRange_To *smithy.Schema
-
-var NetworkAclRuleAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "NetworkAclRuleAction",
-}, smithy.ShapeTypeEnum, 2)
-var NetworkAclRuleAction_ALLOW *smithy.Schema
-
-var NetworkAclRuleAction_DENY *smithy.Schema
-
-var _NetworkFirewallAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "NetworkFirewallAction",
-}, smithy.ShapeTypeString, 0)
-
-var _NetworkFirewallActionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "NetworkFirewallActionList",
-}, smithy.ShapeTypeList, 1)
-var _NetworkFirewallActionList_member *smithy.Schema
-
-var NetworkFirewallBlackHoleRouteDetectedViolation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "NetworkFirewallBlackHoleRouteDetectedViolation",
-}, smithy.ShapeTypeStructure, 4)
-var NetworkFirewallBlackHoleRouteDetectedViolation_ViolationTarget *smithy.Schema
-
-var NetworkFirewallBlackHoleRouteDetectedViolation_RouteTableId *smithy.Schema
-
-var NetworkFirewallBlackHoleRouteDetectedViolation_VpcId *smithy.Schema
-
-var NetworkFirewallBlackHoleRouteDetectedViolation_ViolatingRoutes *smithy.Schema
-
-var NetworkFirewallInternetTrafficNotInspectedViolation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "NetworkFirewallInternetTrafficNotInspectedViolation",
-}, smithy.ShapeTypeStructure, 15)
-var NetworkFirewallInternetTrafficNotInspectedViolation_SubnetId *smithy.Schema
-
-var NetworkFirewallInternetTrafficNotInspectedViolation_SubnetAvailabilityZone *smithy.Schema
-
-var NetworkFirewallInternetTrafficNotInspectedViolation_RouteTableId *smithy.Schema
-
-var NetworkFirewallInternetTrafficNotInspectedViolation_ViolatingRoutes *smithy.Schema
-
-var NetworkFirewallInternetTrafficNotInspectedViolation_IsRouteTableUsedInDifferentAZ *smithy.Schema
-
-var NetworkFirewallInternetTrafficNotInspectedViolation_CurrentFirewallSubnetRouteTable *smithy.Schema
-
-var NetworkFirewallInternetTrafficNotInspectedViolation_ExpectedFirewallEndpoint *smithy.Schema
-
-var NetworkFirewallInternetTrafficNotInspectedViolation_FirewallSubnetId *smithy.Schema
-
-var NetworkFirewallInternetTrafficNotInspectedViolation_ExpectedFirewallSubnetRoutes *smithy.Schema
-
-var NetworkFirewallInternetTrafficNotInspectedViolation_ActualFirewallSubnetRoutes *smithy.Schema
-
-var NetworkFirewallInternetTrafficNotInspectedViolation_InternetGatewayId *smithy.Schema
-
-var NetworkFirewallInternetTrafficNotInspectedViolation_CurrentInternetGatewayRouteTable *smithy.Schema
-
-var NetworkFirewallInternetTrafficNotInspectedViolation_ExpectedInternetGatewayRoutes *smithy.Schema
-
-var NetworkFirewallInternetTrafficNotInspectedViolation_ActualInternetGatewayRoutes *smithy.Schema
-
-var NetworkFirewallInternetTrafficNotInspectedViolation_VpcId *smithy.Schema
-
-var NetworkFirewallInvalidRouteConfigurationViolation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "NetworkFirewallInvalidRouteConfigurationViolation",
-}, smithy.ShapeTypeStructure, 16)
-var NetworkFirewallInvalidRouteConfigurationViolation_AffectedSubnets *smithy.Schema
-
-var NetworkFirewallInvalidRouteConfigurationViolation_RouteTableId *smithy.Schema
-
-var NetworkFirewallInvalidRouteConfigurationViolation_IsRouteTableUsedInDifferentAZ *smithy.Schema
-
-var NetworkFirewallInvalidRouteConfigurationViolation_ViolatingRoute *smithy.Schema
-
-var NetworkFirewallInvalidRouteConfigurationViolation_CurrentFirewallSubnetRouteTable *smithy.Schema
-
-var NetworkFirewallInvalidRouteConfigurationViolation_ExpectedFirewallEndpoint *smithy.Schema
-
-var NetworkFirewallInvalidRouteConfigurationViolation_ActualFirewallEndpoint *smithy.Schema
-
-var NetworkFirewallInvalidRouteConfigurationViolation_ExpectedFirewallSubnetId *smithy.Schema
-
-var NetworkFirewallInvalidRouteConfigurationViolation_ActualFirewallSubnetId *smithy.Schema
-
-var NetworkFirewallInvalidRouteConfigurationViolation_ExpectedFirewallSubnetRoutes *smithy.Schema
-
-var NetworkFirewallInvalidRouteConfigurationViolation_ActualFirewallSubnetRoutes *smithy.Schema
-
-var NetworkFirewallInvalidRouteConfigurationViolation_InternetGatewayId *smithy.Schema
-
-var NetworkFirewallInvalidRouteConfigurationViolation_CurrentInternetGatewayRouteTable *smithy.Schema
-
-var NetworkFirewallInvalidRouteConfigurationViolation_ExpectedInternetGatewayRoutes *smithy.Schema
-
-var NetworkFirewallInvalidRouteConfigurationViolation_ActualInternetGatewayRoutes *smithy.Schema
-
-var NetworkFirewallInvalidRouteConfigurationViolation_VpcId *smithy.Schema
-
-var NetworkFirewallMissingExpectedRoutesViolation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "NetworkFirewallMissingExpectedRoutesViolation",
-}, smithy.ShapeTypeStructure, 3)
-var NetworkFirewallMissingExpectedRoutesViolation_ViolationTarget *smithy.Schema
-
-var NetworkFirewallMissingExpectedRoutesViolation_ExpectedRoutes *smithy.Schema
-
-var NetworkFirewallMissingExpectedRoutesViolation_VpcId *smithy.Schema
-
-var NetworkFirewallMissingExpectedRTViolation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "NetworkFirewallMissingExpectedRTViolation",
-}, smithy.ShapeTypeStructure, 5)
-var NetworkFirewallMissingExpectedRTViolation_ViolationTarget *smithy.Schema
-
-var NetworkFirewallMissingExpectedRTViolation_VPC *smithy.Schema
-
-var NetworkFirewallMissingExpectedRTViolation_AvailabilityZone *smithy.Schema
-
-var NetworkFirewallMissingExpectedRTViolation_CurrentRouteTable *smithy.Schema
-
-var NetworkFirewallMissingExpectedRTViolation_ExpectedRouteTable *smithy.Schema
-
-var NetworkFirewallMissingFirewallViolation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "NetworkFirewallMissingFirewallViolation",
-}, smithy.ShapeTypeStructure, 4)
-var NetworkFirewallMissingFirewallViolation_ViolationTarget *smithy.Schema
-
-var NetworkFirewallMissingFirewallViolation_VPC *smithy.Schema
-
-var NetworkFirewallMissingFirewallViolation_AvailabilityZone *smithy.Schema
-
-var NetworkFirewallMissingFirewallViolation_TargetViolationReason *smithy.Schema
-
-var NetworkFirewallMissingSubnetViolation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "NetworkFirewallMissingSubnetViolation",
-}, smithy.ShapeTypeStructure, 4)
-var NetworkFirewallMissingSubnetViolation_ViolationTarget *smithy.Schema
-
-var NetworkFirewallMissingSubnetViolation_VPC *smithy.Schema
-
-var NetworkFirewallMissingSubnetViolation_AvailabilityZone *smithy.Schema
-
-var NetworkFirewallMissingSubnetViolation_TargetViolationReason *smithy.Schema
-
-var NetworkFirewallOverrideAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "NetworkFirewallOverrideAction",
-}, smithy.ShapeTypeEnum, 1)
-var NetworkFirewallOverrideAction_DROP_TO_ALERT *smithy.Schema
-
-var NetworkFirewallPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "NetworkFirewallPolicy",
-}, smithy.ShapeTypeStructure, 1)
-var NetworkFirewallPolicy_FirewallDeploymentModel *smithy.Schema
-
-var NetworkFirewallPolicyDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "NetworkFirewallPolicyDescription",
-}, smithy.ShapeTypeStructure, 7)
-var NetworkFirewallPolicyDescription_StatelessRuleGroups *smithy.Schema
-
-var NetworkFirewallPolicyDescription_StatelessDefaultActions *smithy.Schema
-
-var NetworkFirewallPolicyDescription_StatelessFragmentDefaultActions *smithy.Schema
-
-var NetworkFirewallPolicyDescription_StatelessCustomActions *smithy.Schema
-
-var NetworkFirewallPolicyDescription_StatefulRuleGroups *smithy.Schema
-
-var NetworkFirewallPolicyDescription_StatefulDefaultActions *smithy.Schema
-
-var NetworkFirewallPolicyDescription_StatefulEngineOptions *smithy.Schema
-
-var NetworkFirewallPolicyModifiedViolation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "NetworkFirewallPolicyModifiedViolation",
-}, smithy.ShapeTypeStructure, 3)
-var NetworkFirewallPolicyModifiedViolation_ViolationTarget *smithy.Schema
-
-var NetworkFirewallPolicyModifiedViolation_CurrentPolicyDescription *smithy.Schema
-
-var NetworkFirewallPolicyModifiedViolation_ExpectedPolicyDescription *smithy.Schema
-
-var _NetworkFirewallResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "NetworkFirewallResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var NetworkFirewallStatefulRuleGroupOverride = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "NetworkFirewallStatefulRuleGroupOverride",
-}, smithy.ShapeTypeStructure, 1)
-var NetworkFirewallStatefulRuleGroupOverride_Action *smithy.Schema
-
-var NetworkFirewallUnexpectedFirewallRoutesViolation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "NetworkFirewallUnexpectedFirewallRoutesViolation",
-}, smithy.ShapeTypeStructure, 5)
-var NetworkFirewallUnexpectedFirewallRoutesViolation_FirewallSubnetId *smithy.Schema
-
-var NetworkFirewallUnexpectedFirewallRoutesViolation_ViolatingRoutes *smithy.Schema
-
-var NetworkFirewallUnexpectedFirewallRoutesViolation_RouteTableId *smithy.Schema
-
-var NetworkFirewallUnexpectedFirewallRoutesViolation_FirewallEndpoint *smithy.Schema
-
-var NetworkFirewallUnexpectedFirewallRoutesViolation_VpcId *smithy.Schema
-
-var NetworkFirewallUnexpectedGatewayRoutesViolation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "NetworkFirewallUnexpectedGatewayRoutesViolation",
-}, smithy.ShapeTypeStructure, 4)
-var NetworkFirewallUnexpectedGatewayRoutesViolation_GatewayId *smithy.Schema
-
-var NetworkFirewallUnexpectedGatewayRoutesViolation_ViolatingRoutes *smithy.Schema
-
-var NetworkFirewallUnexpectedGatewayRoutesViolation_RouteTableId *smithy.Schema
-
-var NetworkFirewallUnexpectedGatewayRoutesViolation_VpcId *smithy.Schema
-
-var _OrderedRemediationActions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "OrderedRemediationActions",
-}, smithy.ShapeTypeList, 1)
-var _OrderedRemediationActions_member *smithy.Schema
-
-var _OrganizationalUnitId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "OrganizationalUnitId",
-}, smithy.ShapeTypeString, 0)
-
-var _OrganizationalUnitIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "OrganizationalUnitIdList",
-}, smithy.ShapeTypeList, 1)
-var _OrganizationalUnitIdList_member *smithy.Schema
-
-var OrganizationalUnitScope = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "OrganizationalUnitScope",
-}, smithy.ShapeTypeStructure, 3)
-var OrganizationalUnitScope_OrganizationalUnits *smithy.Schema
-
-var OrganizationalUnitScope_AllOrganizationalUnitsEnabled *smithy.Schema
-
-var OrganizationalUnitScope_ExcludeSpecifiedOrganizationalUnits *smithy.Schema
-
-var OrganizationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "OrganizationStatus",
-}, smithy.ShapeTypeEnum, 4)
-var OrganizationStatus_Onboarding *smithy.Schema
-
-var OrganizationStatus_OnboardingComplete *smithy.Schema
-
-var OrganizationStatus_Offboarding *smithy.Schema
-
-var OrganizationStatus_OffboardingComplete *smithy.Schema
-
-var _PaginationMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "PaginationMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _PaginationToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "PaginationToken",
-}, smithy.ShapeTypeString, 0)
-
-var PartialMatch = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "PartialMatch",
-}, smithy.ShapeTypeStructure, 2)
-var PartialMatch_Reference *smithy.Schema
-
-var PartialMatch_TargetViolationReasons *smithy.Schema
-
-var _PartialMatches = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "PartialMatches",
-}, smithy.ShapeTypeList, 1)
-var _PartialMatches_member *smithy.Schema
-
-var Policy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "Policy",
-}, smithy.ShapeTypeStructure, 16)
-var Policy_PolicyId *smithy.Schema
-
-var Policy_PolicyName *smithy.Schema
-
-var Policy_PolicyUpdateToken *smithy.Schema
-
-var Policy_SecurityServicePolicyData *smithy.Schema
-
-var Policy_ResourceType *smithy.Schema
-
-var Policy_ResourceTypeList *smithy.Schema
-
-var Policy_ResourceTags *smithy.Schema
-
-var Policy_ExcludeResourceTags *smithy.Schema
-
-var Policy_RemediationEnabled *smithy.Schema
-
-var Policy_DeleteUnusedFMManagedResources *smithy.Schema
-
-var Policy_IncludeMap *smithy.Schema
-
-var Policy_ExcludeMap *smithy.Schema
-
-var Policy_ResourceSetIds *smithy.Schema
-
-var Policy_PolicyDescription *smithy.Schema
-
-var Policy_PolicyStatus *smithy.Schema
-
-var Policy_ResourceTagLogicalOperator *smithy.Schema
-
-var PolicyComplianceDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "PolicyComplianceDetail",
-}, smithy.ShapeTypeStructure, 7)
-var PolicyComplianceDetail_PolicyOwner *smithy.Schema
-
-var PolicyComplianceDetail_PolicyId *smithy.Schema
-
-var PolicyComplianceDetail_MemberAccount *smithy.Schema
-
-var PolicyComplianceDetail_Violators *smithy.Schema
-
-var PolicyComplianceDetail_EvaluationLimitExceeded *smithy.Schema
-
-var PolicyComplianceDetail_ExpiredAt *smithy.Schema
-
-var PolicyComplianceDetail_IssueInfoMap *smithy.Schema
-
-var PolicyComplianceStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "PolicyComplianceStatus",
-}, smithy.ShapeTypeStructure, 7)
-var PolicyComplianceStatus_PolicyOwner *smithy.Schema
-
-var PolicyComplianceStatus_PolicyId *smithy.Schema
-
-var PolicyComplianceStatus_PolicyName *smithy.Schema
-
-var PolicyComplianceStatus_MemberAccount *smithy.Schema
-
-var PolicyComplianceStatus_EvaluationResults *smithy.Schema
-
-var PolicyComplianceStatus_LastUpdated *smithy.Schema
-
-var PolicyComplianceStatus_IssueInfoMap *smithy.Schema
-
-var _PolicyComplianceStatusList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "PolicyComplianceStatusList",
-}, smithy.ShapeTypeList, 1)
-var _PolicyComplianceStatusList_member *smithy.Schema
-
-var PolicyComplianceStatusType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "PolicyComplianceStatusType",
-}, smithy.ShapeTypeEnum, 2)
-var PolicyComplianceStatusType_Compliant *smithy.Schema
-
-var PolicyComplianceStatusType_NonCompliant *smithy.Schema
-
-var _PolicyId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "PolicyId",
-}, smithy.ShapeTypeString, 0)
-
-var PolicyOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "PolicyOption",
-}, smithy.ShapeTypeStructure, 3)
-var PolicyOption_NetworkFirewallPolicy *smithy.Schema
-
-var PolicyOption_ThirdPartyFirewallPolicy *smithy.Schema
-
-var PolicyOption_NetworkAclCommonPolicy *smithy.Schema
-
-var PolicySummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "PolicySummary",
-}, smithy.ShapeTypeStructure, 8)
-var PolicySummary_PolicyArn *smithy.Schema
-
-var PolicySummary_PolicyId *smithy.Schema
-
-var PolicySummary_PolicyName *smithy.Schema
-
-var PolicySummary_ResourceType *smithy.Schema
-
-var PolicySummary_SecurityServiceType *smithy.Schema
-
-var PolicySummary_RemediationEnabled *smithy.Schema
-
-var PolicySummary_DeleteUnusedFMManagedResources *smithy.Schema
-
-var PolicySummary_PolicyStatus *smithy.Schema
-
-var _PolicySummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "PolicySummaryList",
-}, smithy.ShapeTypeList, 1)
-var _PolicySummaryList_member *smithy.Schema
-
-var PolicyTypeScope = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "PolicyTypeScope",
-}, smithy.ShapeTypeStructure, 2)
-var PolicyTypeScope_PolicyTypes *smithy.Schema
-
-var PolicyTypeScope_AllPolicyTypesEnabled *smithy.Schema
-
-var _PolicyUpdateToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "PolicyUpdateToken",
-}, smithy.ShapeTypeString, 0)
-
-var PossibleRemediationAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "PossibleRemediationAction",
-}, smithy.ShapeTypeStructure, 3)
-var PossibleRemediationAction_Description *smithy.Schema
-
-var PossibleRemediationAction_OrderedRemediationActions *smithy.Schema
-
-var PossibleRemediationAction_IsDefaultAction *smithy.Schema
-
-var _PossibleRemediationActionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "PossibleRemediationActionList",
-}, smithy.ShapeTypeList, 1)
-var _PossibleRemediationActionList_member *smithy.Schema
-
-var PossibleRemediationActions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "PossibleRemediationActions",
-}, smithy.ShapeTypeStructure, 2)
-var PossibleRemediationActions_Description *smithy.Schema
-
-var PossibleRemediationActions_Actions *smithy.Schema
-
-var _PreviousAppsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "PreviousAppsList",
-}, smithy.ShapeTypeMap, 2)
-var _PreviousAppsList_key *smithy.Schema
-
-var _PreviousAppsList_value *smithy.Schema
-
-var _PreviousListVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "PreviousListVersion",
-}, smithy.ShapeTypeString, 0)
-
-var _PreviousProtocolsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "PreviousProtocolsList",
-}, smithy.ShapeTypeMap, 2)
-var _PreviousProtocolsList_key *smithy.Schema
-
-var _PreviousProtocolsList_value *smithy.Schema
-
-var _PriorityNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "PriorityNumber",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ProtectionData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ProtectionData",
-}, smithy.ShapeTypeString, 0)
-
-var _Protocol = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "Protocol",
-}, smithy.ShapeTypeString, 0)
-
-var _ProtocolsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ProtocolsList",
-}, smithy.ShapeTypeList, 1)
-var _ProtocolsList_member *smithy.Schema
-
-var ProtocolsListData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ProtocolsListData",
-}, smithy.ShapeTypeStructure, 7)
-var ProtocolsListData_ListId *smithy.Schema
-
-var ProtocolsListData_ListName *smithy.Schema
-
-var ProtocolsListData_ListUpdateToken *smithy.Schema
-
-var ProtocolsListData_CreateTime *smithy.Schema
-
-var ProtocolsListData_LastUpdateTime *smithy.Schema
-
-var ProtocolsListData_ProtocolsList *smithy.Schema
-
-var ProtocolsListData_PreviousProtocolsList *smithy.Schema
-
-var ProtocolsListDataSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ProtocolsListDataSummary",
-}, smithy.ShapeTypeStructure, 4)
-var ProtocolsListDataSummary_ListArn *smithy.Schema
-
-var ProtocolsListDataSummary_ListId *smithy.Schema
-
-var ProtocolsListDataSummary_ListName *smithy.Schema
-
-var ProtocolsListDataSummary_ProtocolsList *smithy.Schema
-
-var _ProtocolsListsData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ProtocolsListsData",
-}, smithy.ShapeTypeList, 1)
-var _ProtocolsListsData_member *smithy.Schema
-
-var _ReferenceRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ReferenceRule",
-}, smithy.ShapeTypeString, 0)
-
-var RegionScope = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "RegionScope",
-}, smithy.ShapeTypeStructure, 2)
-var RegionScope_Regions *smithy.Schema
-
-var RegionScope_AllRegionsEnabled *smithy.Schema
-
-var RemediationAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "RemediationAction",
-}, smithy.ShapeTypeStructure, 13)
-var RemediationAction_Description *smithy.Schema
-
-var RemediationAction_EC2CreateRouteAction *smithy.Schema
-
-var RemediationAction_EC2ReplaceRouteAction *smithy.Schema
-
-var RemediationAction_EC2DeleteRouteAction *smithy.Schema
-
-var RemediationAction_EC2CopyRouteTableAction *smithy.Schema
-
-var RemediationAction_EC2ReplaceRouteTableAssociationAction *smithy.Schema
-
-var RemediationAction_EC2AssociateRouteTableAction *smithy.Schema
-
-var RemediationAction_EC2CreateRouteTableAction *smithy.Schema
-
-var RemediationAction_FMSPolicyUpdateFirewallCreationConfigAction *smithy.Schema
-
-var RemediationAction_CreateNetworkAclAction *smithy.Schema
-
-var RemediationAction_ReplaceNetworkAclAssociationAction *smithy.Schema
-
-var RemediationAction_CreateNetworkAclEntriesAction *smithy.Schema
-
-var RemediationAction_DeleteNetworkAclEntriesAction *smithy.Schema
-
-var _RemediationActionDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "RemediationActionDescription",
-}, smithy.ShapeTypeString, 0)
-
-var RemediationActionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "RemediationActionType",
-}, smithy.ShapeTypeEnum, 2)
-var RemediationActionType_Remove *smithy.Schema
-
-var RemediationActionType_Modify *smithy.Schema
-
-var RemediationActionWithOrder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "RemediationActionWithOrder",
-}, smithy.ShapeTypeStructure, 2)
-var RemediationActionWithOrder_RemediationAction *smithy.Schema
-
-var RemediationActionWithOrder_Order *smithy.Schema
-
-var ReplaceNetworkAclAssociationAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ReplaceNetworkAclAssociationAction",
-}, smithy.ShapeTypeStructure, 4)
-var ReplaceNetworkAclAssociationAction_Description *smithy.Schema
-
-var ReplaceNetworkAclAssociationAction_AssociationId *smithy.Schema
-
-var ReplaceNetworkAclAssociationAction_NetworkAclId *smithy.Schema
-
-var ReplaceNetworkAclAssociationAction_FMSCanRemediate *smithy.Schema
-
-var Resource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "Resource",
-}, smithy.ShapeTypeStructure, 2)
-var Resource_URI *smithy.Schema
-
-var Resource_AccountId *smithy.Schema
-
-var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ResourceArnList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceArnList_member *smithy.Schema
-
-var _ResourceCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ResourceCount",
-}, smithy.ShapeTypeLong, 0)
-
-var _ResourceDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ResourceDescription",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ResourceId",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ResourceIdList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceIdList_member *smithy.Schema
-
-var _ResourceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ResourceList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceList_member *smithy.Schema
-
-var _ResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var ResourceSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ResourceSet",
-}, smithy.ShapeTypeStructure, 7)
-var ResourceSet_Id *smithy.Schema
-
-var ResourceSet_Name *smithy.Schema
-
-var ResourceSet_Description *smithy.Schema
-
-var ResourceSet_UpdateToken *smithy.Schema
-
-var ResourceSet_ResourceTypeList *smithy.Schema
-
-var ResourceSet_LastUpdateTime *smithy.Schema
-
-var ResourceSet_ResourceSetStatus *smithy.Schema
-
-var _ResourceSetIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ResourceSetIds",
-}, smithy.ShapeTypeList, 1)
-var _ResourceSetIds_member *smithy.Schema
-
-var ResourceSetStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ResourceSetStatus",
-}, smithy.ShapeTypeEnum, 2)
-var ResourceSetStatus_ACTIVE *smithy.Schema
-
-var ResourceSetStatus_OUT_OF_ADMIN_SCOPE *smithy.Schema
-
-var ResourceSetSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ResourceSetSummary",
-}, smithy.ShapeTypeStructure, 5)
-var ResourceSetSummary_Id *smithy.Schema
-
-var ResourceSetSummary_Name *smithy.Schema
-
-var ResourceSetSummary_Description *smithy.Schema
-
-var ResourceSetSummary_LastUpdateTime *smithy.Schema
-
-var ResourceSetSummary_ResourceSetStatus *smithy.Schema
-
-var _ResourceSetSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ResourceSetSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceSetSummaryList_member *smithy.Schema
-
-var ResourceTag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ResourceTag",
-}, smithy.ShapeTypeStructure, 2)
-var ResourceTag_Key *smithy.Schema
-
-var ResourceTag_Value *smithy.Schema
-
-var _ResourceTagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ResourceTagKey",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceTagLogicalOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ResourceTagLogicalOperator",
-}, smithy.ShapeTypeEnum, 2)
-var ResourceTagLogicalOperator_AND *smithy.Schema
-
-var ResourceTagLogicalOperator_OR *smithy.Schema
-
-var _ResourceTags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ResourceTags",
-}, smithy.ShapeTypeList, 1)
-var _ResourceTags_member *smithy.Schema
-
-var _ResourceTagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ResourceTagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ResourceType",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ResourceTypeList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceTypeList_member *smithy.Schema
-
-var ResourceViolation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ResourceViolation",
-}, smithy.ShapeTypeStructure, 26)
-var ResourceViolation_AwsVPCSecurityGroupViolation *smithy.Schema
-
-var ResourceViolation_AwsEc2NetworkInterfaceViolation *smithy.Schema
-
-var ResourceViolation_AwsEc2InstanceViolation *smithy.Schema
-
-var ResourceViolation_NetworkFirewallMissingFirewallViolation *smithy.Schema
-
-var ResourceViolation_NetworkFirewallMissingSubnetViolation *smithy.Schema
-
-var ResourceViolation_NetworkFirewallMissingExpectedRTViolation *smithy.Schema
-
-var ResourceViolation_NetworkFirewallPolicyModifiedViolation *smithy.Schema
-
-var ResourceViolation_NetworkFirewallInternetTrafficNotInspectedViolation *smithy.Schema
-
-var ResourceViolation_NetworkFirewallInvalidRouteConfigurationViolation *smithy.Schema
-
-var ResourceViolation_NetworkFirewallBlackHoleRouteDetectedViolation *smithy.Schema
-
-var ResourceViolation_NetworkFirewallUnexpectedFirewallRoutesViolation *smithy.Schema
-
-var ResourceViolation_NetworkFirewallUnexpectedGatewayRoutesViolation *smithy.Schema
-
-var ResourceViolation_NetworkFirewallMissingExpectedRoutesViolation *smithy.Schema
-
-var ResourceViolation_DnsRuleGroupPriorityConflictViolation *smithy.Schema
-
-var ResourceViolation_DnsDuplicateRuleGroupViolation *smithy.Schema
-
-var ResourceViolation_DnsRuleGroupLimitExceededViolation *smithy.Schema
-
-var ResourceViolation_FirewallSubnetIsOutOfScopeViolation *smithy.Schema
-
-var ResourceViolation_RouteHasOutOfScopeEndpointViolation *smithy.Schema
-
-var ResourceViolation_ThirdPartyFirewallMissingFirewallViolation *smithy.Schema
-
-var ResourceViolation_ThirdPartyFirewallMissingSubnetViolation *smithy.Schema
-
-var ResourceViolation_ThirdPartyFirewallMissingExpectedRouteTableViolation *smithy.Schema
-
-var ResourceViolation_FirewallSubnetMissingVPCEndpointViolation *smithy.Schema
-
-var ResourceViolation_InvalidNetworkAclEntriesViolation *smithy.Schema
-
-var ResourceViolation_PossibleRemediationActions *smithy.Schema
-
-var ResourceViolation_WebACLHasIncompatibleConfigurationViolation *smithy.Schema
-
-var ResourceViolation_WebACLHasOutOfScopeResourcesViolation *smithy.Schema
-
-var _ResourceViolations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ResourceViolations",
-}, smithy.ShapeTypeList, 1)
-var _ResourceViolations_member *smithy.Schema
-
-var Route = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "Route",
-}, smithy.ShapeTypeStructure, 4)
-var Route_DestinationType *smithy.Schema
-
-var Route_TargetType *smithy.Schema
-
-var Route_Destination *smithy.Schema
-
-var Route_Target *smithy.Schema
-
-var RouteHasOutOfScopeEndpointViolation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "RouteHasOutOfScopeEndpointViolation",
-}, smithy.ShapeTypeStructure, 12)
-var RouteHasOutOfScopeEndpointViolation_SubnetId *smithy.Schema
-
-var RouteHasOutOfScopeEndpointViolation_VpcId *smithy.Schema
-
-var RouteHasOutOfScopeEndpointViolation_RouteTableId *smithy.Schema
-
-var RouteHasOutOfScopeEndpointViolation_ViolatingRoutes *smithy.Schema
-
-var RouteHasOutOfScopeEndpointViolation_SubnetAvailabilityZone *smithy.Schema
-
-var RouteHasOutOfScopeEndpointViolation_SubnetAvailabilityZoneId *smithy.Schema
-
-var RouteHasOutOfScopeEndpointViolation_CurrentFirewallSubnetRouteTable *smithy.Schema
-
-var RouteHasOutOfScopeEndpointViolation_FirewallSubnetId *smithy.Schema
-
-var RouteHasOutOfScopeEndpointViolation_FirewallSubnetRoutes *smithy.Schema
-
-var RouteHasOutOfScopeEndpointViolation_InternetGatewayId *smithy.Schema
-
-var RouteHasOutOfScopeEndpointViolation_CurrentInternetGatewayRouteTable *smithy.Schema
-
-var RouteHasOutOfScopeEndpointViolation_InternetGatewayRoutes *smithy.Schema
-
-var _Routes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "Routes",
-}, smithy.ShapeTypeList, 1)
-var _Routes_member *smithy.Schema
-
-var RuleOrder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "RuleOrder",
-}, smithy.ShapeTypeEnum, 2)
-var RuleOrder_STRICT_ORDER *smithy.Schema
-
-var RuleOrder_DEFAULT_ACTION_ORDER *smithy.Schema
-
-var SecurityGroupRemediationAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "SecurityGroupRemediationAction",
-}, smithy.ShapeTypeStructure, 4)
-var SecurityGroupRemediationAction_RemediationActionType *smithy.Schema
-
-var SecurityGroupRemediationAction_Description *smithy.Schema
-
-var SecurityGroupRemediationAction_RemediationResult *smithy.Schema
-
-var SecurityGroupRemediationAction_IsDefaultAction *smithy.Schema
-
-var _SecurityGroupRemediationActions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "SecurityGroupRemediationActions",
-}, smithy.ShapeTypeList, 1)
-var _SecurityGroupRemediationActions_member *smithy.Schema
-
-var SecurityGroupRuleDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "SecurityGroupRuleDescription",
-}, smithy.ShapeTypeStructure, 6)
-var SecurityGroupRuleDescription_IPV4Range *smithy.Schema
-
-var SecurityGroupRuleDescription_IPV6Range *smithy.Schema
-
-var SecurityGroupRuleDescription_PrefixListId *smithy.Schema
-
-var SecurityGroupRuleDescription_Protocol *smithy.Schema
-
-var SecurityGroupRuleDescription_FromPort *smithy.Schema
-
-var SecurityGroupRuleDescription_ToPort *smithy.Schema
-
-var SecurityServicePolicyData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "SecurityServicePolicyData",
-}, smithy.ShapeTypeStructure, 3)
-var SecurityServicePolicyData_Type *smithy.Schema
-
-var SecurityServicePolicyData_ManagedServiceData *smithy.Schema
-
-var SecurityServicePolicyData_PolicyOption *smithy.Schema
-
-var SecurityServiceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "SecurityServiceType",
-}, smithy.ShapeTypeEnum, 11)
-var SecurityServiceType_WAF *smithy.Schema
-
-var SecurityServiceType_WAFV2 *smithy.Schema
-
-var SecurityServiceType_SHIELD_ADVANCED *smithy.Schema
-
-var SecurityServiceType_SECURITY_GROUPS_COMMON *smithy.Schema
-
-var SecurityServiceType_SECURITY_GROUPS_CONTENT_AUDIT *smithy.Schema
-
-var SecurityServiceType_SECURITY_GROUPS_USAGE_AUDIT *smithy.Schema
-
-var SecurityServiceType_NETWORK_FIREWALL *smithy.Schema
-
-var SecurityServiceType_DNS_FIREWALL *smithy.Schema
-
-var SecurityServiceType_THIRD_PARTY_FIREWALL *smithy.Schema
-
-var SecurityServiceType_IMPORT_NETWORK_FIREWALL *smithy.Schema
-
-var SecurityServiceType_NETWORK_ACL_COMMON *smithy.Schema
-
-var _SecurityServiceTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "SecurityServiceTypeList",
-}, smithy.ShapeTypeList, 1)
-var _SecurityServiceTypeList_member *smithy.Schema
-
-var StatefulEngineOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "StatefulEngineOptions",
-}, smithy.ShapeTypeStructure, 2)
-var StatefulEngineOptions_RuleOrder *smithy.Schema
-
-var StatefulEngineOptions_StreamExceptionPolicy *smithy.Schema
-
-var StatefulRuleGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "StatefulRuleGroup",
-}, smithy.ShapeTypeStructure, 4)
-var StatefulRuleGroup_RuleGroupName *smithy.Schema
-
-var StatefulRuleGroup_ResourceId *smithy.Schema
-
-var StatefulRuleGroup_Priority *smithy.Schema
-
-var StatefulRuleGroup_Override *smithy.Schema
-
-var _StatefulRuleGroupList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "StatefulRuleGroupList",
-}, smithy.ShapeTypeList, 1)
-var _StatefulRuleGroupList_member *smithy.Schema
-
-var StatelessRuleGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "StatelessRuleGroup",
-}, smithy.ShapeTypeStructure, 3)
-var StatelessRuleGroup_RuleGroupName *smithy.Schema
-
-var StatelessRuleGroup_ResourceId *smithy.Schema
-
-var StatelessRuleGroup_Priority *smithy.Schema
-
-var _StatelessRuleGroupList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "StatelessRuleGroupList",
-}, smithy.ShapeTypeList, 1)
-var _StatelessRuleGroupList_member *smithy.Schema
-
-var _StatelessRuleGroupPriority = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "StatelessRuleGroupPriority",
-}, smithy.ShapeTypeInteger, 0)
-
-var StreamExceptionPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "StreamExceptionPolicy",
-}, smithy.ShapeTypeEnum, 4)
-var StreamExceptionPolicy_DROP *smithy.Schema
-
-var StreamExceptionPolicy_CONTINUE *smithy.Schema
-
-var StreamExceptionPolicy_REJECT *smithy.Schema
-
-var StreamExceptionPolicy_FMS_IGNORE *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var TargetType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "TargetType",
-}, smithy.ShapeTypeEnum, 10)
-var TargetType_Gateway *smithy.Schema
-
-var TargetType_CarrierGateway *smithy.Schema
-
-var TargetType_Instance *smithy.Schema
-
-var TargetType_LocalGateway *smithy.Schema
-
-var TargetType_NatGateway *smithy.Schema
-
-var TargetType_NetworkInterface *smithy.Schema
-
-var TargetType_VPCEndpoint *smithy.Schema
-
-var TargetType_VPCPeeringConnection *smithy.Schema
-
-var TargetType_EgressOnlyInternetGateway *smithy.Schema
-
-var TargetType_TransitGateway *smithy.Schema
-
-var _TargetViolationReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "TargetViolationReason",
-}, smithy.ShapeTypeString, 0)
-
-var _TargetViolationReasons = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "TargetViolationReasons",
-}, smithy.ShapeTypeList, 1)
-var _TargetViolationReasons_member *smithy.Schema
-
-var ThirdPartyFirewall = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ThirdPartyFirewall",
-}, smithy.ShapeTypeEnum, 2)
-var ThirdPartyFirewall_PALO_ALTO_NETWORKS_CLOUD_NGFW *smithy.Schema
-
-var ThirdPartyFirewall_FORTIGATE_CLOUD_NATIVE_FIREWALL *smithy.Schema
-
-var ThirdPartyFirewallAssociationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ThirdPartyFirewallAssociationStatus",
-}, smithy.ShapeTypeEnum, 5)
-var ThirdPartyFirewallAssociationStatus_ONBOARDING *smithy.Schema
-
-var ThirdPartyFirewallAssociationStatus_ONBOARD_COMPLETE *smithy.Schema
-
-var ThirdPartyFirewallAssociationStatus_OFFBOARDING *smithy.Schema
-
-var ThirdPartyFirewallAssociationStatus_OFFBOARD_COMPLETE *smithy.Schema
-
-var ThirdPartyFirewallAssociationStatus_NOT_EXIST *smithy.Schema
-
-var _ThirdPartyFirewallFirewallPolicies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ThirdPartyFirewallFirewallPolicies",
-}, smithy.ShapeTypeList, 1)
-var _ThirdPartyFirewallFirewallPolicies_member *smithy.Schema
-
-var ThirdPartyFirewallFirewallPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ThirdPartyFirewallFirewallPolicy",
-}, smithy.ShapeTypeStructure, 2)
-var ThirdPartyFirewallFirewallPolicy_FirewallPolicyId *smithy.Schema
-
-var ThirdPartyFirewallFirewallPolicy_FirewallPolicyName *smithy.Schema
-
-var ThirdPartyFirewallMissingExpectedRouteTableViolation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ThirdPartyFirewallMissingExpectedRouteTableViolation",
-}, smithy.ShapeTypeStructure, 5)
-var ThirdPartyFirewallMissingExpectedRouteTableViolation_ViolationTarget *smithy.Schema
-
-var ThirdPartyFirewallMissingExpectedRouteTableViolation_VPC *smithy.Schema
-
-var ThirdPartyFirewallMissingExpectedRouteTableViolation_AvailabilityZone *smithy.Schema
-
-var ThirdPartyFirewallMissingExpectedRouteTableViolation_CurrentRouteTable *smithy.Schema
-
-var ThirdPartyFirewallMissingExpectedRouteTableViolation_ExpectedRouteTable *smithy.Schema
-
-var ThirdPartyFirewallMissingFirewallViolation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ThirdPartyFirewallMissingFirewallViolation",
-}, smithy.ShapeTypeStructure, 4)
-var ThirdPartyFirewallMissingFirewallViolation_ViolationTarget *smithy.Schema
-
-var ThirdPartyFirewallMissingFirewallViolation_VPC *smithy.Schema
-
-var ThirdPartyFirewallMissingFirewallViolation_AvailabilityZone *smithy.Schema
-
-var ThirdPartyFirewallMissingFirewallViolation_TargetViolationReason *smithy.Schema
-
-var ThirdPartyFirewallMissingSubnetViolation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ThirdPartyFirewallMissingSubnetViolation",
-}, smithy.ShapeTypeStructure, 4)
-var ThirdPartyFirewallMissingSubnetViolation_ViolationTarget *smithy.Schema
-
-var ThirdPartyFirewallMissingSubnetViolation_VPC *smithy.Schema
-
-var ThirdPartyFirewallMissingSubnetViolation_AvailabilityZone *smithy.Schema
-
-var ThirdPartyFirewallMissingSubnetViolation_TargetViolationReason *smithy.Schema
-
-var ThirdPartyFirewallPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ThirdPartyFirewallPolicy",
-}, smithy.ShapeTypeStructure, 1)
-var ThirdPartyFirewallPolicy_FirewallDeploymentModel *smithy.Schema
-
-var _TimeStamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "TimeStamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _UpdateToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "UpdateToken",
-}, smithy.ShapeTypeString, 0)
-
-var ViolationDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ViolationDetail",
-}, smithy.ShapeTypeStructure, 7)
-var ViolationDetail_PolicyId *smithy.Schema
-
-var ViolationDetail_MemberAccount *smithy.Schema
-
-var ViolationDetail_ResourceId *smithy.Schema
-
-var ViolationDetail_ResourceType *smithy.Schema
-
-var ViolationDetail_ResourceViolations *smithy.Schema
-
-var ViolationDetail_ResourceTags *smithy.Schema
-
-var ViolationDetail_ResourceDescription *smithy.Schema
-
-var ViolationReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ViolationReason",
-}, smithy.ShapeTypeEnum, 30)
-var ViolationReason_WebAclMissingRuleGroup *smithy.Schema
-
-var ViolationReason_ResourceMissingWebAcl *smithy.Schema
-
-var ViolationReason_ResourceIncorrectWebAcl *smithy.Schema
-
-var ViolationReason_ResourceMissingShieldProtection *smithy.Schema
-
-var ViolationReason_ResourceMissingWebaclOrShieldProtection *smithy.Schema
-
-var ViolationReason_ResourceMissingSecurityGroup *smithy.Schema
-
-var ViolationReason_ResourceViolatesAuditSecurityGroup *smithy.Schema
-
-var ViolationReason_SecurityGroupUnused *smithy.Schema
-
-var ViolationReason_SecurityGroupRedundant *smithy.Schema
-
-var ViolationReason_FMSCreatedSecurityGroupEdited *smithy.Schema
-
-var ViolationReason_MissingFirewall *smithy.Schema
-
-var ViolationReason_MissingFirewallSubnetInAZ *smithy.Schema
-
-var ViolationReason_MissingExpectedRouteTable *smithy.Schema
-
-var ViolationReason_NetworkFirewallPolicyModified *smithy.Schema
-
-var ViolationReason_FirewallSubnetIsOutOfScope *smithy.Schema
-
-var ViolationReason_InternetGatewayMissingExpectedRoute *smithy.Schema
-
-var ViolationReason_FirewallSubnetMissingExpectedRoute *smithy.Schema
-
-var ViolationReason_UnexpectedFirewallRoutes *smithy.Schema
-
-var ViolationReason_UnexpectedTargetGatewayRoutes *smithy.Schema
-
-var ViolationReason_TrafficInspectionCrossesAZBoundary *smithy.Schema
-
-var ViolationReason_InvalidRouteConfiguration *smithy.Schema
-
-var ViolationReason_MissingTargetGateway *smithy.Schema
-
-var ViolationReason_InternetTrafficNotInspected *smithy.Schema
-
-var ViolationReason_BlackHoleRouteDetected *smithy.Schema
-
-var ViolationReason_BlackHoleRouteDetectedInFirewallSubnet *smithy.Schema
-
-var ViolationReason_ResourceMissingDnsFirewall *smithy.Schema
-
-var ViolationReason_RouteHasOutOfScopeEndpoint *smithy.Schema
-
-var ViolationReason_FirewallSubnetMissingVPCEndpoint *smithy.Schema
-
-var ViolationReason_InvalidNetworkAclEntry *smithy.Schema
-
-var ViolationReason_WebACLConfigurationOrScopeOfUse *smithy.Schema
-
-var _ViolationTarget = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ViolationTarget",
-}, smithy.ShapeTypeString, 0)
-
-var WebACLHasIncompatibleConfigurationViolation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "WebACLHasIncompatibleConfigurationViolation",
-}, smithy.ShapeTypeStructure, 2)
-var WebACLHasIncompatibleConfigurationViolation_WebACLArn *smithy.Schema
-
-var WebACLHasIncompatibleConfigurationViolation_Description *smithy.Schema
-
-var WebACLHasOutOfScopeResourcesViolation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "WebACLHasOutOfScopeResourcesViolation",
-}, smithy.ShapeTypeStructure, 2)
-var WebACLHasOutOfScopeResourcesViolation_WebACLArn *smithy.Schema
-
-var WebACLHasOutOfScopeResourcesViolation_OutOfScopeResourceList *smithy.Schema
-
-var AssociateAdminAccountRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "AssociateAdminAccountRequest",
-}, smithy.ShapeTypeStructure, 1)
-var AssociateAdminAccountRequest_AdminAccount *smithy.Schema
-
-var AssociateThirdPartyFirewallRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "AssociateThirdPartyFirewallRequest",
-}, smithy.ShapeTypeStructure, 1)
-var AssociateThirdPartyFirewallRequest_ThirdPartyFirewall *smithy.Schema
-
-var AssociateThirdPartyFirewallResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "AssociateThirdPartyFirewallResponse",
-}, smithy.ShapeTypeStructure, 1)
-var AssociateThirdPartyFirewallResponse_ThirdPartyFirewallStatus *smithy.Schema
-
-var BatchAssociateResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "BatchAssociateResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var BatchAssociateResourceRequest_ResourceSetIdentifier *smithy.Schema
-
-var BatchAssociateResourceRequest_Items *smithy.Schema
-
-var BatchAssociateResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "BatchAssociateResourceResponse",
-}, smithy.ShapeTypeStructure, 2)
-var BatchAssociateResourceResponse_ResourceSetIdentifier *smithy.Schema
-
-var BatchAssociateResourceResponse_FailedItems *smithy.Schema
-
-var BatchDisassociateResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "BatchDisassociateResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var BatchDisassociateResourceRequest_ResourceSetIdentifier *smithy.Schema
-
-var BatchDisassociateResourceRequest_Items *smithy.Schema
-
-var BatchDisassociateResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "BatchDisassociateResourceResponse",
-}, smithy.ShapeTypeStructure, 2)
-var BatchDisassociateResourceResponse_ResourceSetIdentifier *smithy.Schema
-
-var BatchDisassociateResourceResponse_FailedItems *smithy.Schema
-
-var DeleteAppsListRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "DeleteAppsListRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteAppsListRequest_ListId *smithy.Schema
-
-var DeleteNotificationChannelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "DeleteNotificationChannelRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeletePolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "DeletePolicyRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeletePolicyRequest_PolicyId *smithy.Schema
-
-var DeletePolicyRequest_DeleteAllPolicyResources *smithy.Schema
-
-var DeleteProtocolsListRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "DeleteProtocolsListRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteProtocolsListRequest_ListId *smithy.Schema
-
-var DeleteResourceSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "DeleteResourceSetRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteResourceSetRequest_Identifier *smithy.Schema
-
-var DisassociateAdminAccountRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "DisassociateAdminAccountRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var DisassociateThirdPartyFirewallRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "DisassociateThirdPartyFirewallRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DisassociateThirdPartyFirewallRequest_ThirdPartyFirewall *smithy.Schema
-
-var DisassociateThirdPartyFirewallResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "DisassociateThirdPartyFirewallResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DisassociateThirdPartyFirewallResponse_ThirdPartyFirewallStatus *smithy.Schema
-
-var GetAdminAccountRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "GetAdminAccountRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetAdminAccountResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "GetAdminAccountResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetAdminAccountResponse_AdminAccount *smithy.Schema
-
-var GetAdminAccountResponse_RoleStatus *smithy.Schema
-
-var GetAdminScopeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "GetAdminScopeRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetAdminScopeRequest_AdminAccount *smithy.Schema
-
-var GetAdminScopeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "GetAdminScopeResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetAdminScopeResponse_AdminScope *smithy.Schema
-
-var GetAdminScopeResponse_Status *smithy.Schema
-
-var GetAppsListRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "GetAppsListRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetAppsListRequest_ListId *smithy.Schema
-
-var GetAppsListRequest_DefaultList *smithy.Schema
-
-var GetAppsListResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "GetAppsListResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetAppsListResponse_AppsList *smithy.Schema
-
-var GetAppsListResponse_AppsListArn *smithy.Schema
-
-var GetComplianceDetailRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "GetComplianceDetailRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetComplianceDetailRequest_PolicyId *smithy.Schema
-
-var GetComplianceDetailRequest_MemberAccount *smithy.Schema
-
-var GetComplianceDetailResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "GetComplianceDetailResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetComplianceDetailResponse_PolicyComplianceDetail *smithy.Schema
-
-var GetNotificationChannelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "GetNotificationChannelRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetNotificationChannelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "GetNotificationChannelResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetNotificationChannelResponse_SnsTopicArn *smithy.Schema
-
-var GetNotificationChannelResponse_SnsRoleName *smithy.Schema
-
-var GetPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "GetPolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetPolicyRequest_PolicyId *smithy.Schema
-
-var GetPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "GetPolicyResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetPolicyResponse_Policy *smithy.Schema
-
-var GetPolicyResponse_PolicyArn *smithy.Schema
-
-var GetProtectionStatusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "GetProtectionStatusRequest",
-}, smithy.ShapeTypeStructure, 6)
-var GetProtectionStatusRequest_PolicyId *smithy.Schema
-
-var GetProtectionStatusRequest_MemberAccountId *smithy.Schema
-
-var GetProtectionStatusRequest_StartTime *smithy.Schema
-
-var GetProtectionStatusRequest_EndTime *smithy.Schema
-
-var GetProtectionStatusRequest_NextToken *smithy.Schema
-
-var GetProtectionStatusRequest_MaxResults *smithy.Schema
-
-var GetProtectionStatusResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "GetProtectionStatusResponse",
-}, smithy.ShapeTypeStructure, 4)
-var GetProtectionStatusResponse_AdminAccountId *smithy.Schema
-
-var GetProtectionStatusResponse_ServiceType *smithy.Schema
-
-var GetProtectionStatusResponse_Data *smithy.Schema
-
-var GetProtectionStatusResponse_NextToken *smithy.Schema
-
-var GetProtocolsListRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "GetProtocolsListRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetProtocolsListRequest_ListId *smithy.Schema
-
-var GetProtocolsListRequest_DefaultList *smithy.Schema
-
-var GetProtocolsListResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "GetProtocolsListResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetProtocolsListResponse_ProtocolsList *smithy.Schema
-
-var GetProtocolsListResponse_ProtocolsListArn *smithy.Schema
-
-var GetResourceSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "GetResourceSetRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetResourceSetRequest_Identifier *smithy.Schema
-
-var GetResourceSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "GetResourceSetResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetResourceSetResponse_ResourceSet *smithy.Schema
-
-var GetResourceSetResponse_ResourceSetArn *smithy.Schema
-
-var GetThirdPartyFirewallAssociationStatusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "GetThirdPartyFirewallAssociationStatusRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetThirdPartyFirewallAssociationStatusRequest_ThirdPartyFirewall *smithy.Schema
-
-var GetThirdPartyFirewallAssociationStatusResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "GetThirdPartyFirewallAssociationStatusResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetThirdPartyFirewallAssociationStatusResponse_ThirdPartyFirewallStatus *smithy.Schema
-
-var GetThirdPartyFirewallAssociationStatusResponse_MarketplaceOnboardingStatus *smithy.Schema
-
-var GetViolationDetailsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "GetViolationDetailsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetViolationDetailsRequest_PolicyId *smithy.Schema
-
-var GetViolationDetailsRequest_MemberAccount *smithy.Schema
-
-var GetViolationDetailsRequest_ResourceId *smithy.Schema
-
-var GetViolationDetailsRequest_ResourceType *smithy.Schema
-
-var GetViolationDetailsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "GetViolationDetailsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetViolationDetailsResponse_ViolationDetail *smithy.Schema
-
-var ListAdminAccountsForOrganizationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ListAdminAccountsForOrganizationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListAdminAccountsForOrganizationRequest_NextToken *smithy.Schema
-
-var ListAdminAccountsForOrganizationRequest_MaxResults *smithy.Schema
-
-var ListAdminAccountsForOrganizationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ListAdminAccountsForOrganizationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAdminAccountsForOrganizationResponse_AdminAccounts *smithy.Schema
-
-var ListAdminAccountsForOrganizationResponse_NextToken *smithy.Schema
-
-var ListAdminsManagingAccountRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ListAdminsManagingAccountRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListAdminsManagingAccountRequest_NextToken *smithy.Schema
-
-var ListAdminsManagingAccountRequest_MaxResults *smithy.Schema
-
-var ListAdminsManagingAccountResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ListAdminsManagingAccountResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAdminsManagingAccountResponse_AdminAccounts *smithy.Schema
-
-var ListAdminsManagingAccountResponse_NextToken *smithy.Schema
-
-var ListAppsListsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ListAppsListsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListAppsListsRequest_DefaultLists *smithy.Schema
-
-var ListAppsListsRequest_NextToken *smithy.Schema
-
-var ListAppsListsRequest_MaxResults *smithy.Schema
-
-var ListAppsListsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ListAppsListsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAppsListsResponse_AppsLists *smithy.Schema
-
-var ListAppsListsResponse_NextToken *smithy.Schema
-
-var ListComplianceStatusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ListComplianceStatusRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListComplianceStatusRequest_PolicyId *smithy.Schema
-
-var ListComplianceStatusRequest_NextToken *smithy.Schema
-
-var ListComplianceStatusRequest_MaxResults *smithy.Schema
-
-var ListComplianceStatusResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ListComplianceStatusResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListComplianceStatusResponse_PolicyComplianceStatusList *smithy.Schema
-
-var ListComplianceStatusResponse_NextToken *smithy.Schema
-
-var ListDiscoveredResourcesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ListDiscoveredResourcesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListDiscoveredResourcesRequest_MemberAccountIds *smithy.Schema
-
-var ListDiscoveredResourcesRequest_ResourceType *smithy.Schema
-
-var ListDiscoveredResourcesRequest_MaxResults *smithy.Schema
-
-var ListDiscoveredResourcesRequest_NextToken *smithy.Schema
-
-var ListDiscoveredResourcesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ListDiscoveredResourcesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListDiscoveredResourcesResponse_Items *smithy.Schema
-
-var ListDiscoveredResourcesResponse_NextToken *smithy.Schema
-
-var ListMemberAccountsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ListMemberAccountsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListMemberAccountsRequest_NextToken *smithy.Schema
-
-var ListMemberAccountsRequest_MaxResults *smithy.Schema
-
-var ListMemberAccountsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ListMemberAccountsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListMemberAccountsResponse_MemberAccounts *smithy.Schema
-
-var ListMemberAccountsResponse_NextToken *smithy.Schema
-
-var ListPoliciesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ListPoliciesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListPoliciesRequest_NextToken *smithy.Schema
-
-var ListPoliciesRequest_MaxResults *smithy.Schema
-
-var ListPoliciesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ListPoliciesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListPoliciesResponse_PolicyList *smithy.Schema
-
-var ListPoliciesResponse_NextToken *smithy.Schema
-
-var ListProtocolsListsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ListProtocolsListsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListProtocolsListsRequest_DefaultLists *smithy.Schema
-
-var ListProtocolsListsRequest_NextToken *smithy.Schema
-
-var ListProtocolsListsRequest_MaxResults *smithy.Schema
-
-var ListProtocolsListsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ListProtocolsListsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListProtocolsListsResponse_ProtocolsLists *smithy.Schema
-
-var ListProtocolsListsResponse_NextToken *smithy.Schema
-
-var ListResourceSetResourcesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ListResourceSetResourcesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListResourceSetResourcesRequest_Identifier *smithy.Schema
-
-var ListResourceSetResourcesRequest_MaxResults *smithy.Schema
-
-var ListResourceSetResourcesRequest_NextToken *smithy.Schema
-
-var ListResourceSetResourcesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ListResourceSetResourcesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListResourceSetResourcesResponse_Items *smithy.Schema
-
-var ListResourceSetResourcesResponse_NextToken *smithy.Schema
-
-var ListResourceSetsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ListResourceSetsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListResourceSetsRequest_NextToken *smithy.Schema
-
-var ListResourceSetsRequest_MaxResults *smithy.Schema
-
-var ListResourceSetsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ListResourceSetsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListResourceSetsResponse_ResourceSets *smithy.Schema
-
-var ListResourceSetsResponse_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_TagList *smithy.Schema
-
-var ListThirdPartyFirewallFirewallPoliciesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ListThirdPartyFirewallFirewallPoliciesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListThirdPartyFirewallFirewallPoliciesRequest_ThirdPartyFirewall *smithy.Schema
-
-var ListThirdPartyFirewallFirewallPoliciesRequest_NextToken *smithy.Schema
-
-var ListThirdPartyFirewallFirewallPoliciesRequest_MaxResults *smithy.Schema
-
-var ListThirdPartyFirewallFirewallPoliciesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "ListThirdPartyFirewallFirewallPoliciesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListThirdPartyFirewallFirewallPoliciesResponse_ThirdPartyFirewallFirewallPolicies *smithy.Schema
-
-var ListThirdPartyFirewallFirewallPoliciesResponse_NextToken *smithy.Schema
-
-var PutAdminAccountRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "PutAdminAccountRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutAdminAccountRequest_AdminAccount *smithy.Schema
-
-var PutAdminAccountRequest_AdminScope *smithy.Schema
-
-var PutAppsListRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "PutAppsListRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutAppsListRequest_AppsList *smithy.Schema
-
-var PutAppsListRequest_TagList *smithy.Schema
-
-var PutAppsListResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "PutAppsListResponse",
-}, smithy.ShapeTypeStructure, 2)
-var PutAppsListResponse_AppsList *smithy.Schema
-
-var PutAppsListResponse_AppsListArn *smithy.Schema
-
-var PutNotificationChannelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "PutNotificationChannelRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutNotificationChannelRequest_SnsTopicArn *smithy.Schema
-
-var PutNotificationChannelRequest_SnsRoleName *smithy.Schema
-
-var PutPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "PutPolicyRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutPolicyRequest_Policy *smithy.Schema
-
-var PutPolicyRequest_TagList *smithy.Schema
-
-var PutPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "PutPolicyResponse",
-}, smithy.ShapeTypeStructure, 2)
-var PutPolicyResponse_Policy *smithy.Schema
-
-var PutPolicyResponse_PolicyArn *smithy.Schema
-
-var PutProtocolsListRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "PutProtocolsListRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutProtocolsListRequest_ProtocolsList *smithy.Schema
-
-var PutProtocolsListRequest_TagList *smithy.Schema
-
-var PutProtocolsListResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "PutProtocolsListResponse",
-}, smithy.ShapeTypeStructure, 2)
-var PutProtocolsListResponse_ProtocolsList *smithy.Schema
-
-var PutProtocolsListResponse_ProtocolsListArn *smithy.Schema
-
-var PutResourceSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "PutResourceSetRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutResourceSetRequest_ResourceSet *smithy.Schema
-
-var PutResourceSetRequest_TagList *smithy.Schema
-
-var PutResourceSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "PutResourceSetResponse",
-}, smithy.ShapeTypeStructure, 2)
-var PutResourceSetResponse_ResourceSet *smithy.Schema
-
-var PutResourceSetResponse_ResourceSetArn *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceArn *smithy.Schema
-
-var TagResourceRequest_TagList *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceArn *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fms",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	_AccountIdList_member = _AccountIdList.AddMember("member", _AWSAccountId)
-
-	AccountRoleStatus_Ready = AccountRoleStatus.AddMember("Ready", smithyprelude.Unit)
-
-	AccountRoleStatus_Creating = AccountRoleStatus.AddMember("Creating", smithyprelude.Unit)
-
-	AccountRoleStatus_PendingDeletion = AccountRoleStatus.AddMember("PendingDeletion", smithyprelude.Unit)
-
-	AccountRoleStatus_Deleting = AccountRoleStatus.AddMember("Deleting", smithyprelude.Unit)
-
-	AccountRoleStatus_Deleted = AccountRoleStatus.AddMember("Deleted", smithyprelude.Unit)
-
-	AccountScope_Accounts = AccountScope.AddMember("Accounts", _AccountIdList)
-
-	AccountScope_AllAccountsEnabled = AccountScope.AddMember("AllAccountsEnabled", _Boolean)
-
-	AccountScope_ExcludeSpecifiedAccounts = AccountScope.AddMember("ExcludeSpecifiedAccounts", _Boolean)
-
-	ActionTarget_ResourceId = ActionTarget.AddMember("ResourceId", _ResourceId)
-
-	ActionTarget_Description = ActionTarget.AddMember("Description", _LengthBoundedString)
-
-	OrganizationStatus_Onboarding = OrganizationStatus.AddMember("Onboarding", smithyprelude.Unit)
-
-	OrganizationStatus_OnboardingComplete = OrganizationStatus.AddMember("OnboardingComplete", smithyprelude.Unit)
-
-	OrganizationStatus_Offboarding = OrganizationStatus.AddMember("Offboarding", smithyprelude.Unit)
-
-	OrganizationStatus_OffboardingComplete = OrganizationStatus.AddMember("OffboardingComplete", smithyprelude.Unit)
-
-	AdminAccountSummary_AdminAccount = AdminAccountSummary.AddMember("AdminAccount", _AWSAccountId)
-
-	AdminAccountSummary_DefaultAdmin = AdminAccountSummary.AddMember("DefaultAdmin", _Boolean)
-
-	AdminAccountSummary_Status = AdminAccountSummary.AddMember("Status", OrganizationStatus)
-
-	_AdminAccountSummaryList_member = _AdminAccountSummaryList.AddMember("member", AdminAccountSummary)
-
-	_OrganizationalUnitIdList_member = _OrganizationalUnitIdList.AddMember("member", _OrganizationalUnitId)
-
-	OrganizationalUnitScope_OrganizationalUnits = OrganizationalUnitScope.AddMember("OrganizationalUnits", _OrganizationalUnitIdList)
-
-	OrganizationalUnitScope_AllOrganizationalUnitsEnabled = OrganizationalUnitScope.AddMember("AllOrganizationalUnitsEnabled", _Boolean)
-
-	OrganizationalUnitScope_ExcludeSpecifiedOrganizationalUnits = OrganizationalUnitScope.AddMember("ExcludeSpecifiedOrganizationalUnits", _Boolean)
-
-	_AWSRegionList_member = _AWSRegionList.AddMember("member", _AWSRegion)
-
-	RegionScope_Regions = RegionScope.AddMember("Regions", _AWSRegionList)
-
-	RegionScope_AllRegionsEnabled = RegionScope.AddMember("AllRegionsEnabled", _Boolean)
-
-	SecurityServiceType_WAF = SecurityServiceType.AddMember("WAF", smithyprelude.Unit)
-
-	SecurityServiceType_WAFV2 = SecurityServiceType.AddMember("WAFV2", smithyprelude.Unit)
-
-	SecurityServiceType_SHIELD_ADVANCED = SecurityServiceType.AddMember("SHIELD_ADVANCED", smithyprelude.Unit)
-
-	SecurityServiceType_SECURITY_GROUPS_COMMON = SecurityServiceType.AddMember("SECURITY_GROUPS_COMMON", smithyprelude.Unit)
-
-	SecurityServiceType_SECURITY_GROUPS_CONTENT_AUDIT = SecurityServiceType.AddMember("SECURITY_GROUPS_CONTENT_AUDIT", smithyprelude.Unit)
-
-	SecurityServiceType_SECURITY_GROUPS_USAGE_AUDIT = SecurityServiceType.AddMember("SECURITY_GROUPS_USAGE_AUDIT", smithyprelude.Unit)
-
-	SecurityServiceType_NETWORK_FIREWALL = SecurityServiceType.AddMember("NETWORK_FIREWALL", smithyprelude.Unit)
-
-	SecurityServiceType_DNS_FIREWALL = SecurityServiceType.AddMember("DNS_FIREWALL", smithyprelude.Unit)
-
-	SecurityServiceType_THIRD_PARTY_FIREWALL = SecurityServiceType.AddMember("THIRD_PARTY_FIREWALL", smithyprelude.Unit)
-
-	SecurityServiceType_IMPORT_NETWORK_FIREWALL = SecurityServiceType.AddMember("IMPORT_NETWORK_FIREWALL", smithyprelude.Unit)
-
-	SecurityServiceType_NETWORK_ACL_COMMON = SecurityServiceType.AddMember("NETWORK_ACL_COMMON", smithyprelude.Unit)
-
-	_SecurityServiceTypeList_member = _SecurityServiceTypeList.AddMember("member", SecurityServiceType)
-
-	PolicyTypeScope_PolicyTypes = PolicyTypeScope.AddMember("PolicyTypes", _SecurityServiceTypeList)
-
-	PolicyTypeScope_AllPolicyTypesEnabled = PolicyTypeScope.AddMember("AllPolicyTypesEnabled", _Boolean)
-
-	AdminScope_AccountScope = AdminScope.AddMember("AccountScope", AccountScope)
-
-	AdminScope_OrganizationalUnitScope = AdminScope.AddMember("OrganizationalUnitScope", OrganizationalUnitScope)
-
-	AdminScope_RegionScope = AdminScope.AddMember("RegionScope", RegionScope)
-
-	AdminScope_PolicyTypeScope = AdminScope.AddMember("PolicyTypeScope", PolicyTypeScope)
-
-	App_AppName = App.AddMember("AppName", _ResourceName)
-
-	App_Protocol = App.AddMember("Protocol", _Protocol)
-
-	App_Port = App.AddMember("Port", _IPPortNumber)
-
-	_AppsList_member = _AppsList.AddMember("member", App)
-
-	_PreviousAppsList_key = _PreviousAppsList.AddMember("key", _PreviousListVersion)
-
-	_PreviousAppsList_value = _PreviousAppsList.AddMember("value", _AppsList)
-
-	AppsListData_ListId = AppsListData.AddMember("ListId", _ListId)
-
-	AppsListData_ListName = AppsListData.AddMember("ListName", _ResourceName)
-
-	AppsListData_ListUpdateToken = AppsListData.AddMember("ListUpdateToken", _UpdateToken)
-
-	AppsListData_CreateTime = AppsListData.AddMember("CreateTime", _TimeStamp)
-
-	AppsListData_LastUpdateTime = AppsListData.AddMember("LastUpdateTime", _TimeStamp)
-
-	AppsListData_AppsList = AppsListData.AddMember("AppsList", _AppsList)
-
-	AppsListData_PreviousAppsList = AppsListData.AddMember("PreviousAppsList", _PreviousAppsList)
-
-	AppsListDataSummary_ListArn = AppsListDataSummary.AddMember("ListArn", _ResourceArn)
-
-	AppsListDataSummary_ListId = AppsListDataSummary.AddMember("ListId", _ListId)
-
-	AppsListDataSummary_ListName = AppsListDataSummary.AddMember("ListName", _ResourceName)
-
-	AppsListDataSummary_AppsList = AppsListDataSummary.AddMember("AppsList", _AppsList)
-
-	_AppsListsData_member = _AppsListsData.AddMember("member", AppsListDataSummary)
-
-	_AWSAccountIdList_member = _AWSAccountIdList.AddMember("member", _AWSAccountId)
-
-	_ResourceIdList_member = _ResourceIdList.AddMember("member", _ResourceId)
-
-	AwsEc2NetworkInterfaceViolation_ViolationTarget = AwsEc2NetworkInterfaceViolation.AddMember("ViolationTarget", _ViolationTarget)
-
-	AwsEc2NetworkInterfaceViolation_ViolatingSecurityGroups = AwsEc2NetworkInterfaceViolation.AddMember("ViolatingSecurityGroups", _ResourceIdList)
-
-	_AwsEc2NetworkInterfaceViolations_member = _AwsEc2NetworkInterfaceViolations.AddMember("member", AwsEc2NetworkInterfaceViolation)
-
-	AwsEc2InstanceViolation_ViolationTarget = AwsEc2InstanceViolation.AddMember("ViolationTarget", _ViolationTarget)
-
-	AwsEc2InstanceViolation_AwsEc2NetworkInterfaceViolations = AwsEc2InstanceViolation.AddMember("AwsEc2NetworkInterfaceViolations", _AwsEc2NetworkInterfaceViolations)
-
-	_TargetViolationReasons_member = _TargetViolationReasons.AddMember("member", _TargetViolationReason)
-
-	PartialMatch_Reference = PartialMatch.AddMember("Reference", _ReferenceRule)
-
-	PartialMatch_TargetViolationReasons = PartialMatch.AddMember("TargetViolationReasons", _TargetViolationReasons)
-
-	_PartialMatches_member = _PartialMatches.AddMember("member", PartialMatch)
-
-	RemediationActionType_Remove = RemediationActionType.AddMember("Remove", smithyprelude.Unit)
-
-	RemediationActionType_Modify = RemediationActionType.AddMember("Modify", smithyprelude.Unit)
-
-	SecurityGroupRuleDescription_IPV4Range = SecurityGroupRuleDescription.AddMember("IPV4Range", _CIDR)
-
-	SecurityGroupRuleDescription_IPV6Range = SecurityGroupRuleDescription.AddMember("IPV6Range", _CIDR)
-
-	SecurityGroupRuleDescription_PrefixListId = SecurityGroupRuleDescription.AddMember("PrefixListId", _ResourceId)
-
-	SecurityGroupRuleDescription_Protocol = SecurityGroupRuleDescription.AddMember("Protocol", _LengthBoundedString)
-
-	SecurityGroupRuleDescription_FromPort = SecurityGroupRuleDescription.AddMember("FromPort", _IPPortNumber)
-
-	SecurityGroupRuleDescription_ToPort = SecurityGroupRuleDescription.AddMember("ToPort", _IPPortNumber)
-
-	SecurityGroupRemediationAction_RemediationActionType = SecurityGroupRemediationAction.AddMember("RemediationActionType", RemediationActionType)
-
-	SecurityGroupRemediationAction_Description = SecurityGroupRemediationAction.AddMember("Description", _RemediationActionDescription)
-
-	SecurityGroupRemediationAction_RemediationResult = SecurityGroupRemediationAction.AddMember("RemediationResult", SecurityGroupRuleDescription)
-
-	SecurityGroupRemediationAction_IsDefaultAction = SecurityGroupRemediationAction.AddMember("IsDefaultAction", _Boolean)
-
-	_SecurityGroupRemediationActions_member = _SecurityGroupRemediationActions.AddMember("member", SecurityGroupRemediationAction)
-
-	AwsVPCSecurityGroupViolation_ViolationTarget = AwsVPCSecurityGroupViolation.AddMember("ViolationTarget", _ViolationTarget)
-
-	AwsVPCSecurityGroupViolation_ViolationTargetDescription = AwsVPCSecurityGroupViolation.AddMember("ViolationTargetDescription", _LengthBoundedString)
-
-	AwsVPCSecurityGroupViolation_PartialMatches = AwsVPCSecurityGroupViolation.AddMember("PartialMatches", _PartialMatches)
-
-	AwsVPCSecurityGroupViolation_PossibleSecurityGroupRemediationActions = AwsVPCSecurityGroupViolation.AddMember("PossibleSecurityGroupRemediationActions", _SecurityGroupRemediationActions)
-
-	ViolationReason_WebAclMissingRuleGroup = ViolationReason.AddMember("WebAclMissingRuleGroup", smithyprelude.Unit)
-
-	ViolationReason_ResourceMissingWebAcl = ViolationReason.AddMember("ResourceMissingWebAcl", smithyprelude.Unit)
-
-	ViolationReason_ResourceIncorrectWebAcl = ViolationReason.AddMember("ResourceIncorrectWebAcl", smithyprelude.Unit)
-
-	ViolationReason_ResourceMissingShieldProtection = ViolationReason.AddMember("ResourceMissingShieldProtection", smithyprelude.Unit)
-
-	ViolationReason_ResourceMissingWebaclOrShieldProtection = ViolationReason.AddMember("ResourceMissingWebaclOrShieldProtection", smithyprelude.Unit)
-
-	ViolationReason_ResourceMissingSecurityGroup = ViolationReason.AddMember("ResourceMissingSecurityGroup", smithyprelude.Unit)
-
-	ViolationReason_ResourceViolatesAuditSecurityGroup = ViolationReason.AddMember("ResourceViolatesAuditSecurityGroup", smithyprelude.Unit)
-
-	ViolationReason_SecurityGroupUnused = ViolationReason.AddMember("SecurityGroupUnused", smithyprelude.Unit)
-
-	ViolationReason_SecurityGroupRedundant = ViolationReason.AddMember("SecurityGroupRedundant", smithyprelude.Unit)
-
-	ViolationReason_FMSCreatedSecurityGroupEdited = ViolationReason.AddMember("FMSCreatedSecurityGroupEdited", smithyprelude.Unit)
-
-	ViolationReason_MissingFirewall = ViolationReason.AddMember("MissingFirewall", smithyprelude.Unit)
-
-	ViolationReason_MissingFirewallSubnetInAZ = ViolationReason.AddMember("MissingFirewallSubnetInAZ", smithyprelude.Unit)
-
-	ViolationReason_MissingExpectedRouteTable = ViolationReason.AddMember("MissingExpectedRouteTable", smithyprelude.Unit)
-
-	ViolationReason_NetworkFirewallPolicyModified = ViolationReason.AddMember("NetworkFirewallPolicyModified", smithyprelude.Unit)
-
-	ViolationReason_FirewallSubnetIsOutOfScope = ViolationReason.AddMember("FirewallSubnetIsOutOfScope", smithyprelude.Unit)
-
-	ViolationReason_InternetGatewayMissingExpectedRoute = ViolationReason.AddMember("InternetGatewayMissingExpectedRoute", smithyprelude.Unit)
-
-	ViolationReason_FirewallSubnetMissingExpectedRoute = ViolationReason.AddMember("FirewallSubnetMissingExpectedRoute", smithyprelude.Unit)
-
-	ViolationReason_UnexpectedFirewallRoutes = ViolationReason.AddMember("UnexpectedFirewallRoutes", smithyprelude.Unit)
-
-	ViolationReason_UnexpectedTargetGatewayRoutes = ViolationReason.AddMember("UnexpectedTargetGatewayRoutes", smithyprelude.Unit)
-
-	ViolationReason_TrafficInspectionCrossesAZBoundary = ViolationReason.AddMember("TrafficInspectionCrossesAZBoundary", smithyprelude.Unit)
-
-	ViolationReason_InvalidRouteConfiguration = ViolationReason.AddMember("InvalidRouteConfiguration", smithyprelude.Unit)
-
-	ViolationReason_MissingTargetGateway = ViolationReason.AddMember("MissingTargetGateway", smithyprelude.Unit)
-
-	ViolationReason_InternetTrafficNotInspected = ViolationReason.AddMember("InternetTrafficNotInspected", smithyprelude.Unit)
-
-	ViolationReason_BlackHoleRouteDetected = ViolationReason.AddMember("BlackHoleRouteDetected", smithyprelude.Unit)
-
-	ViolationReason_BlackHoleRouteDetectedInFirewallSubnet = ViolationReason.AddMember("BlackHoleRouteDetectedInFirewallSubnet", smithyprelude.Unit)
-
-	ViolationReason_ResourceMissingDnsFirewall = ViolationReason.AddMember("ResourceMissingDnsFirewall", smithyprelude.Unit)
-
-	ViolationReason_RouteHasOutOfScopeEndpoint = ViolationReason.AddMember("RouteHasOutOfScopeEndpoint", smithyprelude.Unit)
-
-	ViolationReason_FirewallSubnetMissingVPCEndpoint = ViolationReason.AddMember("FirewallSubnetMissingVPCEndpoint", smithyprelude.Unit)
-
-	ViolationReason_InvalidNetworkAclEntry = ViolationReason.AddMember("InvalidNetworkAclEntry", smithyprelude.Unit)
-
-	ViolationReason_WebACLConfigurationOrScopeOfUse = ViolationReason.AddMember("WebACLConfigurationOrScopeOfUse", smithyprelude.Unit)
-
-	_ComplianceViolatorMetadata_key = _ComplianceViolatorMetadata.AddMember("key", _LengthBoundedString)
-
-	_ComplianceViolatorMetadata_value = _ComplianceViolatorMetadata.AddMember("value", _LengthBoundedString)
-
-	ComplianceViolator_ResourceId = ComplianceViolator.AddMember("ResourceId", _ResourceId)
-
-	ComplianceViolator_ViolationReason = ComplianceViolator.AddMember("ViolationReason", ViolationReason)
-
-	ComplianceViolator_ResourceType = ComplianceViolator.AddMember("ResourceType", _ResourceType)
-
-	ComplianceViolator_Metadata = ComplianceViolator.AddMember("Metadata", _ComplianceViolatorMetadata)
-
-	_ComplianceViolators_member = _ComplianceViolators.AddMember("member", ComplianceViolator)
-
-	CreateNetworkAclAction_Description = CreateNetworkAclAction.AddMember("Description", _LengthBoundedString)
-
-	CreateNetworkAclAction_Vpc = CreateNetworkAclAction.AddMember("Vpc", ActionTarget)
-
-	CreateNetworkAclAction_FMSCanRemediate = CreateNetworkAclAction.AddMember("FMSCanRemediate", _Boolean)
-
-	NetworkAclIcmpTypeCode_Code = NetworkAclIcmpTypeCode.AddMember("Code", _IntegerObject)
-
-	NetworkAclIcmpTypeCode_Type = NetworkAclIcmpTypeCode.AddMember("Type", _IntegerObject)
-
-	NetworkAclPortRange_From = NetworkAclPortRange.AddMember("From", _IPPortNumberInteger)
-
-	NetworkAclPortRange_To = NetworkAclPortRange.AddMember("To", _IPPortNumberInteger)
-
-	NetworkAclRuleAction_ALLOW = NetworkAclRuleAction.AddMember("ALLOW", smithyprelude.Unit)
-
-	NetworkAclRuleAction_DENY = NetworkAclRuleAction.AddMember("DENY", smithyprelude.Unit)
-
-	NetworkAclEntry_IcmpTypeCode = NetworkAclEntry.AddMember("IcmpTypeCode", NetworkAclIcmpTypeCode)
-
-	NetworkAclEntry_Protocol = NetworkAclEntry.AddMember("Protocol", _LengthBoundedString)
-
-	NetworkAclEntry_PortRange = NetworkAclEntry.AddMember("PortRange", NetworkAclPortRange)
-
-	NetworkAclEntry_CidrBlock = NetworkAclEntry.AddMember("CidrBlock", _LengthBoundedNonEmptyString)
-
-	NetworkAclEntry_Ipv6CidrBlock = NetworkAclEntry.AddMember("Ipv6CidrBlock", _LengthBoundedNonEmptyString)
-
-	NetworkAclEntry_RuleAction = NetworkAclEntry.AddMember("RuleAction", NetworkAclRuleAction)
-
-	NetworkAclEntry_Egress = NetworkAclEntry.AddMember("Egress", _BooleanObject)
-
-	EntryType_FMSManagedFirstEntry = EntryType.AddMember("FMSManagedFirstEntry", smithyprelude.Unit)
-
-	EntryType_FMSManagedLastEntry = EntryType.AddMember("FMSManagedLastEntry", smithyprelude.Unit)
-
-	EntryType_CustomEntry = EntryType.AddMember("CustomEntry", smithyprelude.Unit)
-
-	EntryDescription_EntryDetail = EntryDescription.AddMember("EntryDetail", NetworkAclEntry)
-
-	EntryDescription_EntryRuleNumber = EntryDescription.AddMember("EntryRuleNumber", _IntegerObjectMinimum0)
-
-	EntryDescription_EntryType = EntryDescription.AddMember("EntryType", EntryType)
-
-	_EntriesDescription_member = _EntriesDescription.AddMember("member", EntryDescription)
-
-	CreateNetworkAclEntriesAction_Description = CreateNetworkAclEntriesAction.AddMember("Description", _LengthBoundedString)
-
-	CreateNetworkAclEntriesAction_NetworkAclId = CreateNetworkAclEntriesAction.AddMember("NetworkAclId", ActionTarget)
-
-	CreateNetworkAclEntriesAction_NetworkAclEntriesToBeCreated = CreateNetworkAclEntriesAction.AddMember("NetworkAclEntriesToBeCreated", _EntriesDescription)
-
-	CreateNetworkAclEntriesAction_FMSCanRemediate = CreateNetworkAclEntriesAction.AddMember("FMSCanRemediate", _Boolean)
-
-	_CustomerPolicyScopeIdList_member = _CustomerPolicyScopeIdList.AddMember("member", _CustomerPolicyScopeId)
-
-	CustomerPolicyScopeIdType_ACCOUNT = CustomerPolicyScopeIdType.AddMember("ACCOUNT", smithyprelude.Unit)
-
-	CustomerPolicyScopeIdType_ORG_UNIT = CustomerPolicyScopeIdType.AddMember("ORG_UNIT", smithyprelude.Unit)
-
-	_CustomerPolicyScopeMap_key = _CustomerPolicyScopeMap.AddMember("key", CustomerPolicyScopeIdType)
-
-	_CustomerPolicyScopeMap_value = _CustomerPolicyScopeMap.AddMember("value", _CustomerPolicyScopeIdList)
-
-	CustomerPolicyStatus_ACTIVE = CustomerPolicyStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	CustomerPolicyStatus_OUT_OF_ADMIN_SCOPE = CustomerPolicyStatus.AddMember("OUT_OF_ADMIN_SCOPE", smithyprelude.Unit)
-
-	DeleteNetworkAclEntriesAction_Description = DeleteNetworkAclEntriesAction.AddMember("Description", _LengthBoundedString)
-
-	DeleteNetworkAclEntriesAction_NetworkAclId = DeleteNetworkAclEntriesAction.AddMember("NetworkAclId", ActionTarget)
-
-	DeleteNetworkAclEntriesAction_NetworkAclEntriesToBeDeleted = DeleteNetworkAclEntriesAction.AddMember("NetworkAclEntriesToBeDeleted", _EntriesDescription)
-
-	DeleteNetworkAclEntriesAction_FMSCanRemediate = DeleteNetworkAclEntriesAction.AddMember("FMSCanRemediate", _Boolean)
-
-	DependentServiceName_AWSConfig = DependentServiceName.AddMember("AWSConfig", smithyprelude.Unit)
-
-	DependentServiceName_AWSWAF = DependentServiceName.AddMember("AWSWAF", smithyprelude.Unit)
-
-	DependentServiceName_AWSShieldAdvanced = DependentServiceName.AddMember("AWSShieldAdvanced", smithyprelude.Unit)
-
-	DependentServiceName_AWSVirtualPrivateCloud = DependentServiceName.AddMember("AWSVirtualPrivateCloud", smithyprelude.Unit)
-
-	DestinationType_IPV4 = DestinationType.AddMember("IPV4", smithyprelude.Unit)
-
-	DestinationType_IPV6 = DestinationType.AddMember("IPV6", smithyprelude.Unit)
-
-	DestinationType_PrefixList = DestinationType.AddMember("PrefixList", smithyprelude.Unit)
-
-	DiscoveredResource_URI = DiscoveredResource.AddMember("URI", _Identifier)
-
-	DiscoveredResource_AccountId = DiscoveredResource.AddMember("AccountId", _AWSAccountId)
-
-	DiscoveredResource_Type = DiscoveredResource.AddMember("Type", _ResourceType)
-
-	DiscoveredResource_Name = DiscoveredResource.AddMember("Name", _ResourceName)
-
-	_DiscoveredResourceList_member = _DiscoveredResourceList.AddMember("member", DiscoveredResource)
-
-	DnsDuplicateRuleGroupViolation_ViolationTarget = DnsDuplicateRuleGroupViolation.AddMember("ViolationTarget", _ViolationTarget)
-
-	DnsDuplicateRuleGroupViolation_ViolationTargetDescription = DnsDuplicateRuleGroupViolation.AddMember("ViolationTargetDescription", _LengthBoundedString)
-
-	DnsRuleGroupLimitExceededViolation_ViolationTarget = DnsRuleGroupLimitExceededViolation.AddMember("ViolationTarget", _ViolationTarget)
-
-	DnsRuleGroupLimitExceededViolation_ViolationTargetDescription = DnsRuleGroupLimitExceededViolation.AddMember("ViolationTargetDescription", _LengthBoundedString)
-
-	DnsRuleGroupLimitExceededViolation_NumberOfRuleGroupsAlreadyAssociated = DnsRuleGroupLimitExceededViolation.AddMember("NumberOfRuleGroupsAlreadyAssociated", _BasicInteger)
-
-	_DnsRuleGroupPriorities_member = _DnsRuleGroupPriorities.AddMember("member", _DnsRuleGroupPriority)
-
-	DnsRuleGroupPriorityConflictViolation_ViolationTarget = DnsRuleGroupPriorityConflictViolation.AddMember("ViolationTarget", _ViolationTarget)
-
-	DnsRuleGroupPriorityConflictViolation_ViolationTargetDescription = DnsRuleGroupPriorityConflictViolation.AddMember("ViolationTargetDescription", _LengthBoundedString)
-
-	DnsRuleGroupPriorityConflictViolation_ConflictingPriority = DnsRuleGroupPriorityConflictViolation.AddMember("ConflictingPriority", _DnsRuleGroupPriority)
-
-	DnsRuleGroupPriorityConflictViolation_ConflictingPolicyId = DnsRuleGroupPriorityConflictViolation.AddMember("ConflictingPolicyId", _PolicyId)
-
-	DnsRuleGroupPriorityConflictViolation_UnavailablePriorities = DnsRuleGroupPriorityConflictViolation.AddMember("UnavailablePriorities", _DnsRuleGroupPriorities)
-
-	EC2AssociateRouteTableAction_Description = EC2AssociateRouteTableAction.AddMember("Description", _LengthBoundedString)
-
-	EC2AssociateRouteTableAction_RouteTableId = EC2AssociateRouteTableAction.AddMember("RouteTableId", ActionTarget)
-
-	EC2AssociateRouteTableAction_SubnetId = EC2AssociateRouteTableAction.AddMember("SubnetId", ActionTarget)
-
-	EC2AssociateRouteTableAction_GatewayId = EC2AssociateRouteTableAction.AddMember("GatewayId", ActionTarget)
-
-	EC2CopyRouteTableAction_Description = EC2CopyRouteTableAction.AddMember("Description", _LengthBoundedString)
-
-	EC2CopyRouteTableAction_VpcId = EC2CopyRouteTableAction.AddMember("VpcId", ActionTarget)
-
-	EC2CopyRouteTableAction_RouteTableId = EC2CopyRouteTableAction.AddMember("RouteTableId", ActionTarget)
-
-	EC2CreateRouteAction_Description = EC2CreateRouteAction.AddMember("Description", _LengthBoundedString)
-
-	EC2CreateRouteAction_DestinationCidrBlock = EC2CreateRouteAction.AddMember("DestinationCidrBlock", _CIDR)
-
-	EC2CreateRouteAction_DestinationPrefixListId = EC2CreateRouteAction.AddMember("DestinationPrefixListId", _ResourceId)
-
-	EC2CreateRouteAction_DestinationIpv6CidrBlock = EC2CreateRouteAction.AddMember("DestinationIpv6CidrBlock", _CIDR)
-
-	EC2CreateRouteAction_VpcEndpointId = EC2CreateRouteAction.AddMember("VpcEndpointId", ActionTarget)
-
-	EC2CreateRouteAction_GatewayId = EC2CreateRouteAction.AddMember("GatewayId", ActionTarget)
-
-	EC2CreateRouteAction_RouteTableId = EC2CreateRouteAction.AddMember("RouteTableId", ActionTarget)
-
-	EC2CreateRouteTableAction_Description = EC2CreateRouteTableAction.AddMember("Description", _LengthBoundedString)
-
-	EC2CreateRouteTableAction_VpcId = EC2CreateRouteTableAction.AddMember("VpcId", ActionTarget)
-
-	EC2DeleteRouteAction_Description = EC2DeleteRouteAction.AddMember("Description", _LengthBoundedString)
-
-	EC2DeleteRouteAction_DestinationCidrBlock = EC2DeleteRouteAction.AddMember("DestinationCidrBlock", _CIDR)
-
-	EC2DeleteRouteAction_DestinationPrefixListId = EC2DeleteRouteAction.AddMember("DestinationPrefixListId", _ResourceId)
-
-	EC2DeleteRouteAction_DestinationIpv6CidrBlock = EC2DeleteRouteAction.AddMember("DestinationIpv6CidrBlock", _CIDR)
-
-	EC2DeleteRouteAction_RouteTableId = EC2DeleteRouteAction.AddMember("RouteTableId", ActionTarget)
-
-	EC2ReplaceRouteAction_Description = EC2ReplaceRouteAction.AddMember("Description", _LengthBoundedString)
-
-	EC2ReplaceRouteAction_DestinationCidrBlock = EC2ReplaceRouteAction.AddMember("DestinationCidrBlock", _CIDR)
-
-	EC2ReplaceRouteAction_DestinationPrefixListId = EC2ReplaceRouteAction.AddMember("DestinationPrefixListId", _ResourceId)
-
-	EC2ReplaceRouteAction_DestinationIpv6CidrBlock = EC2ReplaceRouteAction.AddMember("DestinationIpv6CidrBlock", _CIDR)
-
-	EC2ReplaceRouteAction_GatewayId = EC2ReplaceRouteAction.AddMember("GatewayId", ActionTarget)
-
-	EC2ReplaceRouteAction_RouteTableId = EC2ReplaceRouteAction.AddMember("RouteTableId", ActionTarget)
-
-	EC2ReplaceRouteTableAssociationAction_Description = EC2ReplaceRouteTableAssociationAction.AddMember("Description", _LengthBoundedString)
-
-	EC2ReplaceRouteTableAssociationAction_AssociationId = EC2ReplaceRouteTableAssociationAction.AddMember("AssociationId", ActionTarget)
-
-	EC2ReplaceRouteTableAssociationAction_RouteTableId = EC2ReplaceRouteTableAssociationAction.AddMember("RouteTableId", ActionTarget)
-
-	_EntriesWithConflicts_member = _EntriesWithConflicts.AddMember("member", EntryDescription)
-
-	EntryViolationReason_MissingExpectedEntry = EntryViolationReason.AddMember("MissingExpectedEntry", smithyprelude.Unit)
-
-	EntryViolationReason_IncorrectEntryOrder = EntryViolationReason.AddMember("IncorrectEntryOrder", smithyprelude.Unit)
-
-	EntryViolationReason_EntryConflict = EntryViolationReason.AddMember("EntryConflict", smithyprelude.Unit)
-
-	_EntryViolationReasons_member = _EntryViolationReasons.AddMember("member", EntryViolationReason)
-
-	EntryViolation_ExpectedEntry = EntryViolation.AddMember("ExpectedEntry", EntryDescription)
-
-	EntryViolation_ExpectedEvaluationOrder = EntryViolation.AddMember("ExpectedEvaluationOrder", _LengthBoundedString)
-
-	EntryViolation_ActualEvaluationOrder = EntryViolation.AddMember("ActualEvaluationOrder", _LengthBoundedString)
-
-	EntryViolation_EntryAtExpectedEvaluationOrder = EntryViolation.AddMember("EntryAtExpectedEvaluationOrder", EntryDescription)
-
-	EntryViolation_EntriesWithConflicts = EntryViolation.AddMember("EntriesWithConflicts", _EntriesWithConflicts)
-
-	EntryViolation_EntryViolationReasons = EntryViolation.AddMember("EntryViolationReasons", _EntryViolationReasons)
-
-	_EntryViolations_member = _EntryViolations.AddMember("member", EntryViolation)
-
-	PolicyComplianceStatusType_Compliant = PolicyComplianceStatusType.AddMember("Compliant", smithyprelude.Unit)
-
-	PolicyComplianceStatusType_NonCompliant = PolicyComplianceStatusType.AddMember("NonCompliant", smithyprelude.Unit)
-
-	EvaluationResult_ComplianceStatus = EvaluationResult.AddMember("ComplianceStatus", PolicyComplianceStatusType)
-
-	EvaluationResult_ViolatorCount = EvaluationResult.AddMember("ViolatorCount", _ResourceCount)
-
-	EvaluationResult_EvaluationLimitExceeded = EvaluationResult.AddMember("EvaluationLimitExceeded", _Boolean)
-
-	_EvaluationResults_member = _EvaluationResults.AddMember("member", EvaluationResult)
-
-	_LengthBoundedStringList_member = _LengthBoundedStringList.AddMember("member", _LengthBoundedString)
-
-	ExpectedRoute_IpV4Cidr = ExpectedRoute.AddMember("IpV4Cidr", _CIDR)
-
-	ExpectedRoute_PrefixListId = ExpectedRoute.AddMember("PrefixListId", _CIDR)
-
-	ExpectedRoute_IpV6Cidr = ExpectedRoute.AddMember("IpV6Cidr", _CIDR)
-
-	ExpectedRoute_ContributingSubnets = ExpectedRoute.AddMember("ContributingSubnets", _ResourceIdList)
-
-	ExpectedRoute_AllowedTargets = ExpectedRoute.AddMember("AllowedTargets", _LengthBoundedStringList)
-
-	ExpectedRoute_RouteTableId = ExpectedRoute.AddMember("RouteTableId", _ResourceId)
-
-	_ExpectedRoutes_member = _ExpectedRoutes.AddMember("member", ExpectedRoute)
-
-	FailedItemReason_NotValidArn = FailedItemReason.AddMember("NotValidArn", smithyprelude.Unit)
-
-	FailedItemReason_NotValidPartition = FailedItemReason.AddMember("NotValidPartition", smithyprelude.Unit)
-
-	FailedItemReason_NotValidRegion = FailedItemReason.AddMember("NotValidRegion", smithyprelude.Unit)
-
-	FailedItemReason_NotValidService = FailedItemReason.AddMember("NotValidService", smithyprelude.Unit)
-
-	FailedItemReason_NotValidResourceType = FailedItemReason.AddMember("NotValidResourceType", smithyprelude.Unit)
-
-	FailedItemReason_NotValidAccountId = FailedItemReason.AddMember("NotValidAccountId", smithyprelude.Unit)
-
-	FailedItem_URI = FailedItem.AddMember("URI", _Identifier)
-
-	FailedItem_Reason = FailedItem.AddMember("Reason", FailedItemReason)
-
-	_FailedItemList_member = _FailedItemList.AddMember("member", FailedItem)
-
-	FirewallDeploymentModel_CENTRALIZED = FirewallDeploymentModel.AddMember("CENTRALIZED", smithyprelude.Unit)
-
-	FirewallDeploymentModel_DISTRIBUTED = FirewallDeploymentModel.AddMember("DISTRIBUTED", smithyprelude.Unit)
-
-	FirewallSubnetIsOutOfScopeViolation_FirewallSubnetId = FirewallSubnetIsOutOfScopeViolation.AddMember("FirewallSubnetId", _ResourceId)
-
-	FirewallSubnetIsOutOfScopeViolation_VpcId = FirewallSubnetIsOutOfScopeViolation.AddMember("VpcId", _ResourceId)
-
-	FirewallSubnetIsOutOfScopeViolation_SubnetAvailabilityZone = FirewallSubnetIsOutOfScopeViolation.AddMember("SubnetAvailabilityZone", _LengthBoundedString)
-
-	FirewallSubnetIsOutOfScopeViolation_SubnetAvailabilityZoneId = FirewallSubnetIsOutOfScopeViolation.AddMember("SubnetAvailabilityZoneId", _LengthBoundedString)
-
-	FirewallSubnetIsOutOfScopeViolation_VpcEndpointId = FirewallSubnetIsOutOfScopeViolation.AddMember("VpcEndpointId", _ResourceId)
-
-	FirewallSubnetMissingVPCEndpointViolation_FirewallSubnetId = FirewallSubnetMissingVPCEndpointViolation.AddMember("FirewallSubnetId", _ResourceId)
-
-	FirewallSubnetMissingVPCEndpointViolation_VpcId = FirewallSubnetMissingVPCEndpointViolation.AddMember("VpcId", _ResourceId)
-
-	FirewallSubnetMissingVPCEndpointViolation_SubnetAvailabilityZone = FirewallSubnetMissingVPCEndpointViolation.AddMember("SubnetAvailabilityZone", _LengthBoundedString)
-
-	FirewallSubnetMissingVPCEndpointViolation_SubnetAvailabilityZoneId = FirewallSubnetMissingVPCEndpointViolation.AddMember("SubnetAvailabilityZoneId", _LengthBoundedString)
-
-	FMSPolicyUpdateFirewallCreationConfigAction_Description = FMSPolicyUpdateFirewallCreationConfigAction.AddMember("Description", _LengthBoundedString)
-
-	FMSPolicyUpdateFirewallCreationConfigAction_FirewallCreationConfig = FMSPolicyUpdateFirewallCreationConfigAction.AddMember("FirewallCreationConfig", _ManagedServiceData)
-
-	_IdentifierList_member = _IdentifierList.AddMember("member", _Identifier)
-
-	InternalErrorException_Message = InternalErrorException.AddMember("Message", _ErrorMessage)
-
-	InvalidInputException_Message = InvalidInputException.AddMember("Message", _ErrorMessage)
-
-	InvalidNetworkAclEntriesViolation_Vpc = InvalidNetworkAclEntriesViolation.AddMember("Vpc", _ResourceId)
-
-	InvalidNetworkAclEntriesViolation_Subnet = InvalidNetworkAclEntriesViolation.AddMember("Subnet", _ResourceId)
-
-	InvalidNetworkAclEntriesViolation_SubnetAvailabilityZone = InvalidNetworkAclEntriesViolation.AddMember("SubnetAvailabilityZone", _LengthBoundedString)
-
-	InvalidNetworkAclEntriesViolation_CurrentAssociatedNetworkAcl = InvalidNetworkAclEntriesViolation.AddMember("CurrentAssociatedNetworkAcl", _ResourceId)
-
-	InvalidNetworkAclEntriesViolation_EntryViolations = InvalidNetworkAclEntriesViolation.AddMember("EntryViolations", _EntryViolations)
-
-	InvalidOperationException_Message = InvalidOperationException.AddMember("Message", _ErrorMessage)
-
-	InvalidTypeException_Message = InvalidTypeException.AddMember("Message", _ErrorMessage)
-
-	_IssueInfoMap_key = _IssueInfoMap.AddMember("key", DependentServiceName)
-
-	_IssueInfoMap_value = _IssueInfoMap.AddMember("value", _DetailedInfo)
-
-	LimitExceededException_Message = LimitExceededException.AddMember("Message", _ErrorMessage)
-
-	MarketplaceSubscriptionOnboardingStatus_NO_SUBSCRIPTION = MarketplaceSubscriptionOnboardingStatus.AddMember("NO_SUBSCRIPTION", smithyprelude.Unit)
-
-	MarketplaceSubscriptionOnboardingStatus_NOT_COMPLETE = MarketplaceSubscriptionOnboardingStatus.AddMember("NOT_COMPLETE", smithyprelude.Unit)
-
-	MarketplaceSubscriptionOnboardingStatus_COMPLETE = MarketplaceSubscriptionOnboardingStatus.AddMember("COMPLETE", smithyprelude.Unit)
-
-	_MemberAccounts_member = _MemberAccounts.AddMember("member", _AWSAccountId)
-
-	_NetworkAclEntries_member = _NetworkAclEntries.AddMember("member", NetworkAclEntry)
-
-	NetworkAclEntrySet_FirstEntries = NetworkAclEntrySet.AddMember("FirstEntries", _NetworkAclEntries)
-
-	NetworkAclEntrySet_ForceRemediateForFirstEntries = NetworkAclEntrySet.AddMember("ForceRemediateForFirstEntries", _BooleanObject)
-
-	NetworkAclEntrySet_LastEntries = NetworkAclEntrySet.AddMember("LastEntries", _NetworkAclEntries)
-
-	NetworkAclEntrySet_ForceRemediateForLastEntries = NetworkAclEntrySet.AddMember("ForceRemediateForLastEntries", _BooleanObject)
-
-	NetworkAclCommonPolicy_NetworkAclEntrySet = NetworkAclCommonPolicy.AddMember("NetworkAclEntrySet", NetworkAclEntrySet)
-
-	_NetworkFirewallActionList_member = _NetworkFirewallActionList.AddMember("member", _NetworkFirewallAction)
-
-	TargetType_Gateway = TargetType.AddMember("Gateway", smithyprelude.Unit)
-
-	TargetType_CarrierGateway = TargetType.AddMember("CarrierGateway", smithyprelude.Unit)
-
-	TargetType_Instance = TargetType.AddMember("Instance", smithyprelude.Unit)
-
-	TargetType_LocalGateway = TargetType.AddMember("LocalGateway", smithyprelude.Unit)
-
-	TargetType_NatGateway = TargetType.AddMember("NatGateway", smithyprelude.Unit)
-
-	TargetType_NetworkInterface = TargetType.AddMember("NetworkInterface", smithyprelude.Unit)
-
-	TargetType_VPCEndpoint = TargetType.AddMember("VPCEndpoint", smithyprelude.Unit)
-
-	TargetType_VPCPeeringConnection = TargetType.AddMember("VPCPeeringConnection", smithyprelude.Unit)
-
-	TargetType_EgressOnlyInternetGateway = TargetType.AddMember("EgressOnlyInternetGateway", smithyprelude.Unit)
-
-	TargetType_TransitGateway = TargetType.AddMember("TransitGateway", smithyprelude.Unit)
-
-	Route_DestinationType = Route.AddMember("DestinationType", DestinationType)
-
-	Route_TargetType = Route.AddMember("TargetType", TargetType)
-
-	Route_Destination = Route.AddMember("Destination", _LengthBoundedString)
-
-	Route_Target = Route.AddMember("Target", _LengthBoundedString)
-
-	_Routes_member = _Routes.AddMember("member", Route)
-
-	NetworkFirewallBlackHoleRouteDetectedViolation_ViolationTarget = NetworkFirewallBlackHoleRouteDetectedViolation.AddMember("ViolationTarget", _ViolationTarget)
-
-	NetworkFirewallBlackHoleRouteDetectedViolation_RouteTableId = NetworkFirewallBlackHoleRouteDetectedViolation.AddMember("RouteTableId", _ResourceId)
-
-	NetworkFirewallBlackHoleRouteDetectedViolation_VpcId = NetworkFirewallBlackHoleRouteDetectedViolation.AddMember("VpcId", _ResourceId)
-
-	NetworkFirewallBlackHoleRouteDetectedViolation_ViolatingRoutes = NetworkFirewallBlackHoleRouteDetectedViolation.AddMember("ViolatingRoutes", _Routes)
-
-	NetworkFirewallInternetTrafficNotInspectedViolation_SubnetId = NetworkFirewallInternetTrafficNotInspectedViolation.AddMember("SubnetId", _ResourceId)
-
-	NetworkFirewallInternetTrafficNotInspectedViolation_SubnetAvailabilityZone = NetworkFirewallInternetTrafficNotInspectedViolation.AddMember("SubnetAvailabilityZone", _LengthBoundedString)
-
-	NetworkFirewallInternetTrafficNotInspectedViolation_RouteTableId = NetworkFirewallInternetTrafficNotInspectedViolation.AddMember("RouteTableId", _ResourceId)
-
-	NetworkFirewallInternetTrafficNotInspectedViolation_ViolatingRoutes = NetworkFirewallInternetTrafficNotInspectedViolation.AddMember("ViolatingRoutes", _Routes)
-
-	NetworkFirewallInternetTrafficNotInspectedViolation_IsRouteTableUsedInDifferentAZ = NetworkFirewallInternetTrafficNotInspectedViolation.AddMember("IsRouteTableUsedInDifferentAZ", _Boolean)
-
-	NetworkFirewallInternetTrafficNotInspectedViolation_CurrentFirewallSubnetRouteTable = NetworkFirewallInternetTrafficNotInspectedViolation.AddMember("CurrentFirewallSubnetRouteTable", _ResourceId)
-
-	NetworkFirewallInternetTrafficNotInspectedViolation_ExpectedFirewallEndpoint = NetworkFirewallInternetTrafficNotInspectedViolation.AddMember("ExpectedFirewallEndpoint", _ResourceId)
-
-	NetworkFirewallInternetTrafficNotInspectedViolation_FirewallSubnetId = NetworkFirewallInternetTrafficNotInspectedViolation.AddMember("FirewallSubnetId", _ResourceId)
-
-	NetworkFirewallInternetTrafficNotInspectedViolation_ExpectedFirewallSubnetRoutes = NetworkFirewallInternetTrafficNotInspectedViolation.AddMember("ExpectedFirewallSubnetRoutes", _ExpectedRoutes)
-
-	NetworkFirewallInternetTrafficNotInspectedViolation_ActualFirewallSubnetRoutes = NetworkFirewallInternetTrafficNotInspectedViolation.AddMember("ActualFirewallSubnetRoutes", _Routes)
-
-	NetworkFirewallInternetTrafficNotInspectedViolation_InternetGatewayId = NetworkFirewallInternetTrafficNotInspectedViolation.AddMember("InternetGatewayId", _ResourceId)
-
-	NetworkFirewallInternetTrafficNotInspectedViolation_CurrentInternetGatewayRouteTable = NetworkFirewallInternetTrafficNotInspectedViolation.AddMember("CurrentInternetGatewayRouteTable", _ResourceId)
-
-	NetworkFirewallInternetTrafficNotInspectedViolation_ExpectedInternetGatewayRoutes = NetworkFirewallInternetTrafficNotInspectedViolation.AddMember("ExpectedInternetGatewayRoutes", _ExpectedRoutes)
-
-	NetworkFirewallInternetTrafficNotInspectedViolation_ActualInternetGatewayRoutes = NetworkFirewallInternetTrafficNotInspectedViolation.AddMember("ActualInternetGatewayRoutes", _Routes)
-
-	NetworkFirewallInternetTrafficNotInspectedViolation_VpcId = NetworkFirewallInternetTrafficNotInspectedViolation.AddMember("VpcId", _ResourceId)
-
-	NetworkFirewallInvalidRouteConfigurationViolation_AffectedSubnets = NetworkFirewallInvalidRouteConfigurationViolation.AddMember("AffectedSubnets", _ResourceIdList)
-
-	NetworkFirewallInvalidRouteConfigurationViolation_RouteTableId = NetworkFirewallInvalidRouteConfigurationViolation.AddMember("RouteTableId", _ResourceId)
-
-	NetworkFirewallInvalidRouteConfigurationViolation_IsRouteTableUsedInDifferentAZ = NetworkFirewallInvalidRouteConfigurationViolation.AddMember("IsRouteTableUsedInDifferentAZ", _Boolean)
-
-	NetworkFirewallInvalidRouteConfigurationViolation_ViolatingRoute = NetworkFirewallInvalidRouteConfigurationViolation.AddMember("ViolatingRoute", Route)
-
-	NetworkFirewallInvalidRouteConfigurationViolation_CurrentFirewallSubnetRouteTable = NetworkFirewallInvalidRouteConfigurationViolation.AddMember("CurrentFirewallSubnetRouteTable", _ResourceId)
-
-	NetworkFirewallInvalidRouteConfigurationViolation_ExpectedFirewallEndpoint = NetworkFirewallInvalidRouteConfigurationViolation.AddMember("ExpectedFirewallEndpoint", _ResourceId)
-
-	NetworkFirewallInvalidRouteConfigurationViolation_ActualFirewallEndpoint = NetworkFirewallInvalidRouteConfigurationViolation.AddMember("ActualFirewallEndpoint", _ResourceId)
-
-	NetworkFirewallInvalidRouteConfigurationViolation_ExpectedFirewallSubnetId = NetworkFirewallInvalidRouteConfigurationViolation.AddMember("ExpectedFirewallSubnetId", _ResourceId)
-
-	NetworkFirewallInvalidRouteConfigurationViolation_ActualFirewallSubnetId = NetworkFirewallInvalidRouteConfigurationViolation.AddMember("ActualFirewallSubnetId", _ResourceId)
-
-	NetworkFirewallInvalidRouteConfigurationViolation_ExpectedFirewallSubnetRoutes = NetworkFirewallInvalidRouteConfigurationViolation.AddMember("ExpectedFirewallSubnetRoutes", _ExpectedRoutes)
-
-	NetworkFirewallInvalidRouteConfigurationViolation_ActualFirewallSubnetRoutes = NetworkFirewallInvalidRouteConfigurationViolation.AddMember("ActualFirewallSubnetRoutes", _Routes)
-
-	NetworkFirewallInvalidRouteConfigurationViolation_InternetGatewayId = NetworkFirewallInvalidRouteConfigurationViolation.AddMember("InternetGatewayId", _ResourceId)
-
-	NetworkFirewallInvalidRouteConfigurationViolation_CurrentInternetGatewayRouteTable = NetworkFirewallInvalidRouteConfigurationViolation.AddMember("CurrentInternetGatewayRouteTable", _ResourceId)
-
-	NetworkFirewallInvalidRouteConfigurationViolation_ExpectedInternetGatewayRoutes = NetworkFirewallInvalidRouteConfigurationViolation.AddMember("ExpectedInternetGatewayRoutes", _ExpectedRoutes)
-
-	NetworkFirewallInvalidRouteConfigurationViolation_ActualInternetGatewayRoutes = NetworkFirewallInvalidRouteConfigurationViolation.AddMember("ActualInternetGatewayRoutes", _Routes)
-
-	NetworkFirewallInvalidRouteConfigurationViolation_VpcId = NetworkFirewallInvalidRouteConfigurationViolation.AddMember("VpcId", _ResourceId)
-
-	NetworkFirewallMissingExpectedRoutesViolation_ViolationTarget = NetworkFirewallMissingExpectedRoutesViolation.AddMember("ViolationTarget", _ViolationTarget)
-
-	NetworkFirewallMissingExpectedRoutesViolation_ExpectedRoutes = NetworkFirewallMissingExpectedRoutesViolation.AddMember("ExpectedRoutes", _ExpectedRoutes)
-
-	NetworkFirewallMissingExpectedRoutesViolation_VpcId = NetworkFirewallMissingExpectedRoutesViolation.AddMember("VpcId", _ResourceId)
-
-	NetworkFirewallMissingExpectedRTViolation_ViolationTarget = NetworkFirewallMissingExpectedRTViolation.AddMember("ViolationTarget", _ViolationTarget)
-
-	NetworkFirewallMissingExpectedRTViolation_VPC = NetworkFirewallMissingExpectedRTViolation.AddMember("VPC", _ResourceId)
-
-	NetworkFirewallMissingExpectedRTViolation_AvailabilityZone = NetworkFirewallMissingExpectedRTViolation.AddMember("AvailabilityZone", _LengthBoundedString)
-
-	NetworkFirewallMissingExpectedRTViolation_CurrentRouteTable = NetworkFirewallMissingExpectedRTViolation.AddMember("CurrentRouteTable", _ResourceId)
-
-	NetworkFirewallMissingExpectedRTViolation_ExpectedRouteTable = NetworkFirewallMissingExpectedRTViolation.AddMember("ExpectedRouteTable", _ResourceId)
-
-	NetworkFirewallMissingFirewallViolation_ViolationTarget = NetworkFirewallMissingFirewallViolation.AddMember("ViolationTarget", _ViolationTarget)
-
-	NetworkFirewallMissingFirewallViolation_VPC = NetworkFirewallMissingFirewallViolation.AddMember("VPC", _ResourceId)
-
-	NetworkFirewallMissingFirewallViolation_AvailabilityZone = NetworkFirewallMissingFirewallViolation.AddMember("AvailabilityZone", _LengthBoundedString)
-
-	NetworkFirewallMissingFirewallViolation_TargetViolationReason = NetworkFirewallMissingFirewallViolation.AddMember("TargetViolationReason", _TargetViolationReason)
-
-	NetworkFirewallMissingSubnetViolation_ViolationTarget = NetworkFirewallMissingSubnetViolation.AddMember("ViolationTarget", _ViolationTarget)
-
-	NetworkFirewallMissingSubnetViolation_VPC = NetworkFirewallMissingSubnetViolation.AddMember("VPC", _ResourceId)
-
-	NetworkFirewallMissingSubnetViolation_AvailabilityZone = NetworkFirewallMissingSubnetViolation.AddMember("AvailabilityZone", _LengthBoundedString)
-
-	NetworkFirewallMissingSubnetViolation_TargetViolationReason = NetworkFirewallMissingSubnetViolation.AddMember("TargetViolationReason", _TargetViolationReason)
-
-	NetworkFirewallOverrideAction_DROP_TO_ALERT = NetworkFirewallOverrideAction.AddMember("DROP_TO_ALERT", smithyprelude.Unit)
-
-	NetworkFirewallPolicy_FirewallDeploymentModel = NetworkFirewallPolicy.AddMember("FirewallDeploymentModel", FirewallDeploymentModel)
-
-	StatelessRuleGroup_RuleGroupName = StatelessRuleGroup.AddMember("RuleGroupName", _NetworkFirewallResourceName)
-
-	StatelessRuleGroup_ResourceId = StatelessRuleGroup.AddMember("ResourceId", _ResourceId)
-
-	StatelessRuleGroup_Priority = StatelessRuleGroup.AddMember("Priority", _StatelessRuleGroupPriority)
-
-	_StatelessRuleGroupList_member = _StatelessRuleGroupList.AddMember("member", StatelessRuleGroup)
-
-	NetworkFirewallStatefulRuleGroupOverride_Action = NetworkFirewallStatefulRuleGroupOverride.AddMember("Action", NetworkFirewallOverrideAction)
-
-	StatefulRuleGroup_RuleGroupName = StatefulRuleGroup.AddMember("RuleGroupName", _NetworkFirewallResourceName)
-
-	StatefulRuleGroup_ResourceId = StatefulRuleGroup.AddMember("ResourceId", _ResourceId)
-
-	StatefulRuleGroup_Priority = StatefulRuleGroup.AddMember("Priority", _PriorityNumber)
-
-	StatefulRuleGroup_Override = StatefulRuleGroup.AddMember("Override", NetworkFirewallStatefulRuleGroupOverride)
-
-	_StatefulRuleGroupList_member = _StatefulRuleGroupList.AddMember("member", StatefulRuleGroup)
-
-	RuleOrder_STRICT_ORDER = RuleOrder.AddMember("STRICT_ORDER", smithyprelude.Unit)
-
-	RuleOrder_DEFAULT_ACTION_ORDER = RuleOrder.AddMember("DEFAULT_ACTION_ORDER", smithyprelude.Unit)
-
-	StreamExceptionPolicy_DROP = StreamExceptionPolicy.AddMember("DROP", smithyprelude.Unit)
-
-	StreamExceptionPolicy_CONTINUE = StreamExceptionPolicy.AddMember("CONTINUE", smithyprelude.Unit)
-
-	StreamExceptionPolicy_REJECT = StreamExceptionPolicy.AddMember("REJECT", smithyprelude.Unit)
-
-	StreamExceptionPolicy_FMS_IGNORE = StreamExceptionPolicy.AddMember("FMS_IGNORE", smithyprelude.Unit)
-
-	StatefulEngineOptions_RuleOrder = StatefulEngineOptions.AddMember("RuleOrder", RuleOrder)
-
-	StatefulEngineOptions_StreamExceptionPolicy = StatefulEngineOptions.AddMember("StreamExceptionPolicy", StreamExceptionPolicy)
-
-	NetworkFirewallPolicyDescription_StatelessRuleGroups = NetworkFirewallPolicyDescription.AddMember("StatelessRuleGroups", _StatelessRuleGroupList)
-
-	NetworkFirewallPolicyDescription_StatelessDefaultActions = NetworkFirewallPolicyDescription.AddMember("StatelessDefaultActions", _NetworkFirewallActionList)
-
-	NetworkFirewallPolicyDescription_StatelessFragmentDefaultActions = NetworkFirewallPolicyDescription.AddMember("StatelessFragmentDefaultActions", _NetworkFirewallActionList)
-
-	NetworkFirewallPolicyDescription_StatelessCustomActions = NetworkFirewallPolicyDescription.AddMember("StatelessCustomActions", _NetworkFirewallActionList)
-
-	NetworkFirewallPolicyDescription_StatefulRuleGroups = NetworkFirewallPolicyDescription.AddMember("StatefulRuleGroups", _StatefulRuleGroupList)
-
-	NetworkFirewallPolicyDescription_StatefulDefaultActions = NetworkFirewallPolicyDescription.AddMember("StatefulDefaultActions", _NetworkFirewallActionList)
-
-	NetworkFirewallPolicyDescription_StatefulEngineOptions = NetworkFirewallPolicyDescription.AddMember("StatefulEngineOptions", StatefulEngineOptions)
-
-	NetworkFirewallPolicyModifiedViolation_ViolationTarget = NetworkFirewallPolicyModifiedViolation.AddMember("ViolationTarget", _ViolationTarget)
-
-	NetworkFirewallPolicyModifiedViolation_CurrentPolicyDescription = NetworkFirewallPolicyModifiedViolation.AddMember("CurrentPolicyDescription", NetworkFirewallPolicyDescription)
-
-	NetworkFirewallPolicyModifiedViolation_ExpectedPolicyDescription = NetworkFirewallPolicyModifiedViolation.AddMember("ExpectedPolicyDescription", NetworkFirewallPolicyDescription)
-
-	NetworkFirewallUnexpectedFirewallRoutesViolation_FirewallSubnetId = NetworkFirewallUnexpectedFirewallRoutesViolation.AddMember("FirewallSubnetId", _ResourceId)
-
-	NetworkFirewallUnexpectedFirewallRoutesViolation_ViolatingRoutes = NetworkFirewallUnexpectedFirewallRoutesViolation.AddMember("ViolatingRoutes", _Routes)
-
-	NetworkFirewallUnexpectedFirewallRoutesViolation_RouteTableId = NetworkFirewallUnexpectedFirewallRoutesViolation.AddMember("RouteTableId", _ResourceId)
-
-	NetworkFirewallUnexpectedFirewallRoutesViolation_FirewallEndpoint = NetworkFirewallUnexpectedFirewallRoutesViolation.AddMember("FirewallEndpoint", _ResourceId)
-
-	NetworkFirewallUnexpectedFirewallRoutesViolation_VpcId = NetworkFirewallUnexpectedFirewallRoutesViolation.AddMember("VpcId", _ResourceId)
-
-	NetworkFirewallUnexpectedGatewayRoutesViolation_GatewayId = NetworkFirewallUnexpectedGatewayRoutesViolation.AddMember("GatewayId", _ResourceId)
-
-	NetworkFirewallUnexpectedGatewayRoutesViolation_ViolatingRoutes = NetworkFirewallUnexpectedGatewayRoutesViolation.AddMember("ViolatingRoutes", _Routes)
-
-	NetworkFirewallUnexpectedGatewayRoutesViolation_RouteTableId = NetworkFirewallUnexpectedGatewayRoutesViolation.AddMember("RouteTableId", _ResourceId)
-
-	NetworkFirewallUnexpectedGatewayRoutesViolation_VpcId = NetworkFirewallUnexpectedGatewayRoutesViolation.AddMember("VpcId", _ResourceId)
-
-	ReplaceNetworkAclAssociationAction_Description = ReplaceNetworkAclAssociationAction.AddMember("Description", _LengthBoundedString)
-
-	ReplaceNetworkAclAssociationAction_AssociationId = ReplaceNetworkAclAssociationAction.AddMember("AssociationId", ActionTarget)
-
-	ReplaceNetworkAclAssociationAction_NetworkAclId = ReplaceNetworkAclAssociationAction.AddMember("NetworkAclId", ActionTarget)
-
-	ReplaceNetworkAclAssociationAction_FMSCanRemediate = ReplaceNetworkAclAssociationAction.AddMember("FMSCanRemediate", _Boolean)
-
-	RemediationAction_Description = RemediationAction.AddMember("Description", _LengthBoundedString)
-
-	RemediationAction_EC2CreateRouteAction = RemediationAction.AddMember("EC2CreateRouteAction", EC2CreateRouteAction)
-
-	RemediationAction_EC2ReplaceRouteAction = RemediationAction.AddMember("EC2ReplaceRouteAction", EC2ReplaceRouteAction)
-
-	RemediationAction_EC2DeleteRouteAction = RemediationAction.AddMember("EC2DeleteRouteAction", EC2DeleteRouteAction)
-
-	RemediationAction_EC2CopyRouteTableAction = RemediationAction.AddMember("EC2CopyRouteTableAction", EC2CopyRouteTableAction)
-
-	RemediationAction_EC2ReplaceRouteTableAssociationAction = RemediationAction.AddMember("EC2ReplaceRouteTableAssociationAction", EC2ReplaceRouteTableAssociationAction)
-
-	RemediationAction_EC2AssociateRouteTableAction = RemediationAction.AddMember("EC2AssociateRouteTableAction", EC2AssociateRouteTableAction)
-
-	RemediationAction_EC2CreateRouteTableAction = RemediationAction.AddMember("EC2CreateRouteTableAction", EC2CreateRouteTableAction)
-
-	RemediationAction_FMSPolicyUpdateFirewallCreationConfigAction = RemediationAction.AddMember("FMSPolicyUpdateFirewallCreationConfigAction", FMSPolicyUpdateFirewallCreationConfigAction)
-
-	RemediationAction_CreateNetworkAclAction = RemediationAction.AddMember("CreateNetworkAclAction", CreateNetworkAclAction)
-
-	RemediationAction_ReplaceNetworkAclAssociationAction = RemediationAction.AddMember("ReplaceNetworkAclAssociationAction", ReplaceNetworkAclAssociationAction)
-
-	RemediationAction_CreateNetworkAclEntriesAction = RemediationAction.AddMember("CreateNetworkAclEntriesAction", CreateNetworkAclEntriesAction)
-
-	RemediationAction_DeleteNetworkAclEntriesAction = RemediationAction.AddMember("DeleteNetworkAclEntriesAction", DeleteNetworkAclEntriesAction)
-
-	RemediationActionWithOrder_RemediationAction = RemediationActionWithOrder.AddMember("RemediationAction", RemediationAction)
-
-	RemediationActionWithOrder_Order = RemediationActionWithOrder.AddMember("Order", _BasicInteger)
-
-	_OrderedRemediationActions_member = _OrderedRemediationActions.AddMember("member", RemediationActionWithOrder)
-
-	ThirdPartyFirewallPolicy_FirewallDeploymentModel = ThirdPartyFirewallPolicy.AddMember("FirewallDeploymentModel", FirewallDeploymentModel)
-
-	PolicyOption_NetworkFirewallPolicy = PolicyOption.AddMember("NetworkFirewallPolicy", NetworkFirewallPolicy)
-
-	PolicyOption_ThirdPartyFirewallPolicy = PolicyOption.AddMember("ThirdPartyFirewallPolicy", ThirdPartyFirewallPolicy)
-
-	PolicyOption_NetworkAclCommonPolicy = PolicyOption.AddMember("NetworkAclCommonPolicy", NetworkAclCommonPolicy)
-
-	SecurityServicePolicyData_Type = SecurityServicePolicyData.AddMember("Type", SecurityServiceType)
-
-	SecurityServicePolicyData_ManagedServiceData = SecurityServicePolicyData.AddMember("ManagedServiceData", _ManagedServiceData)
-
-	SecurityServicePolicyData_PolicyOption = SecurityServicePolicyData.AddMember("PolicyOption", PolicyOption)
-
-	_ResourceTypeList_member = _ResourceTypeList.AddMember("member", _ResourceType)
-
-	ResourceTag_Key = ResourceTag.AddMember("Key", _ResourceTagKey)
-
-	ResourceTag_Value = ResourceTag.AddMember("Value", _ResourceTagValue)
-
-	_ResourceTags_member = _ResourceTags.AddMember("member", ResourceTag)
-
-	_ResourceSetIds_member = _ResourceSetIds.AddMember("member", _Base62Id)
-
-	ResourceTagLogicalOperator_AND = ResourceTagLogicalOperator.AddMember("AND", smithyprelude.Unit)
-
-	ResourceTagLogicalOperator_OR = ResourceTagLogicalOperator.AddMember("OR", smithyprelude.Unit)
-
-	Policy_PolicyId = Policy.AddMember("PolicyId", _PolicyId)
-
-	Policy_PolicyName = Policy.AddMember("PolicyName", _ResourceName)
-
-	Policy_PolicyUpdateToken = Policy.AddMember("PolicyUpdateToken", _PolicyUpdateToken)
-
-	Policy_SecurityServicePolicyData = Policy.AddMember("SecurityServicePolicyData", SecurityServicePolicyData)
-
-	Policy_ResourceType = Policy.AddMember("ResourceType", _ResourceType)
-
-	Policy_ResourceTypeList = Policy.AddMember("ResourceTypeList", _ResourceTypeList)
-
-	Policy_ResourceTags = Policy.AddMember("ResourceTags", _ResourceTags)
-
-	Policy_ExcludeResourceTags = Policy.AddMember("ExcludeResourceTags", _Boolean)
-
-	Policy_RemediationEnabled = Policy.AddMember("RemediationEnabled", _Boolean)
-
-	Policy_DeleteUnusedFMManagedResources = Policy.AddMember("DeleteUnusedFMManagedResources", _Boolean)
-
-	Policy_IncludeMap = Policy.AddMember("IncludeMap", _CustomerPolicyScopeMap)
-
-	Policy_ExcludeMap = Policy.AddMember("ExcludeMap", _CustomerPolicyScopeMap)
-
-	Policy_ResourceSetIds = Policy.AddMember("ResourceSetIds", _ResourceSetIds)
-
-	Policy_PolicyDescription = Policy.AddMember("PolicyDescription", _ResourceDescription)
-
-	Policy_PolicyStatus = Policy.AddMember("PolicyStatus", CustomerPolicyStatus)
-
-	Policy_ResourceTagLogicalOperator = Policy.AddMember("ResourceTagLogicalOperator", ResourceTagLogicalOperator)
-
-	PolicyComplianceDetail_PolicyOwner = PolicyComplianceDetail.AddMember("PolicyOwner", _AWSAccountId)
-
-	PolicyComplianceDetail_PolicyId = PolicyComplianceDetail.AddMember("PolicyId", _PolicyId)
-
-	PolicyComplianceDetail_MemberAccount = PolicyComplianceDetail.AddMember("MemberAccount", _AWSAccountId)
-
-	PolicyComplianceDetail_Violators = PolicyComplianceDetail.AddMember("Violators", _ComplianceViolators)
-
-	PolicyComplianceDetail_EvaluationLimitExceeded = PolicyComplianceDetail.AddMember("EvaluationLimitExceeded", _Boolean)
-
-	PolicyComplianceDetail_ExpiredAt = PolicyComplianceDetail.AddMember("ExpiredAt", _TimeStamp)
-
-	PolicyComplianceDetail_IssueInfoMap = PolicyComplianceDetail.AddMember("IssueInfoMap", _IssueInfoMap)
-
-	PolicyComplianceStatus_PolicyOwner = PolicyComplianceStatus.AddMember("PolicyOwner", _AWSAccountId)
-
-	PolicyComplianceStatus_PolicyId = PolicyComplianceStatus.AddMember("PolicyId", _PolicyId)
-
-	PolicyComplianceStatus_PolicyName = PolicyComplianceStatus.AddMember("PolicyName", _ResourceName)
-
-	PolicyComplianceStatus_MemberAccount = PolicyComplianceStatus.AddMember("MemberAccount", _AWSAccountId)
-
-	PolicyComplianceStatus_EvaluationResults = PolicyComplianceStatus.AddMember("EvaluationResults", _EvaluationResults)
-
-	PolicyComplianceStatus_LastUpdated = PolicyComplianceStatus.AddMember("LastUpdated", _TimeStamp)
-
-	PolicyComplianceStatus_IssueInfoMap = PolicyComplianceStatus.AddMember("IssueInfoMap", _IssueInfoMap)
-
-	_PolicyComplianceStatusList_member = _PolicyComplianceStatusList.AddMember("member", PolicyComplianceStatus)
-
-	PolicySummary_PolicyArn = PolicySummary.AddMember("PolicyArn", _ResourceArn)
-
-	PolicySummary_PolicyId = PolicySummary.AddMember("PolicyId", _PolicyId)
-
-	PolicySummary_PolicyName = PolicySummary.AddMember("PolicyName", _ResourceName)
-
-	PolicySummary_ResourceType = PolicySummary.AddMember("ResourceType", _ResourceType)
-
-	PolicySummary_SecurityServiceType = PolicySummary.AddMember("SecurityServiceType", SecurityServiceType)
-
-	PolicySummary_RemediationEnabled = PolicySummary.AddMember("RemediationEnabled", _Boolean)
-
-	PolicySummary_DeleteUnusedFMManagedResources = PolicySummary.AddMember("DeleteUnusedFMManagedResources", _Boolean)
-
-	PolicySummary_PolicyStatus = PolicySummary.AddMember("PolicyStatus", CustomerPolicyStatus)
-
-	_PolicySummaryList_member = _PolicySummaryList.AddMember("member", PolicySummary)
-
-	PossibleRemediationAction_Description = PossibleRemediationAction.AddMember("Description", _LengthBoundedString)
-
-	PossibleRemediationAction_OrderedRemediationActions = PossibleRemediationAction.AddMember("OrderedRemediationActions", _OrderedRemediationActions)
-
-	PossibleRemediationAction_IsDefaultAction = PossibleRemediationAction.AddMember("IsDefaultAction", _Boolean)
-
-	_PossibleRemediationActionList_member = _PossibleRemediationActionList.AddMember("member", PossibleRemediationAction)
-
-	PossibleRemediationActions_Description = PossibleRemediationActions.AddMember("Description", _LengthBoundedString)
-
-	PossibleRemediationActions_Actions = PossibleRemediationActions.AddMember("Actions", _PossibleRemediationActionList)
-
-	_ProtocolsList_member = _ProtocolsList.AddMember("member", _Protocol)
-
-	_PreviousProtocolsList_key = _PreviousProtocolsList.AddMember("key", _PreviousListVersion)
-
-	_PreviousProtocolsList_value = _PreviousProtocolsList.AddMember("value", _ProtocolsList)
-
-	ProtocolsListData_ListId = ProtocolsListData.AddMember("ListId", _ListId)
-
-	ProtocolsListData_ListName = ProtocolsListData.AddMember("ListName", _ResourceName)
-
-	ProtocolsListData_ListUpdateToken = ProtocolsListData.AddMember("ListUpdateToken", _UpdateToken)
-
-	ProtocolsListData_CreateTime = ProtocolsListData.AddMember("CreateTime", _TimeStamp)
-
-	ProtocolsListData_LastUpdateTime = ProtocolsListData.AddMember("LastUpdateTime", _TimeStamp)
-
-	ProtocolsListData_ProtocolsList = ProtocolsListData.AddMember("ProtocolsList", _ProtocolsList)
-
-	ProtocolsListData_PreviousProtocolsList = ProtocolsListData.AddMember("PreviousProtocolsList", _PreviousProtocolsList)
-
-	ProtocolsListDataSummary_ListArn = ProtocolsListDataSummary.AddMember("ListArn", _ResourceArn)
-
-	ProtocolsListDataSummary_ListId = ProtocolsListDataSummary.AddMember("ListId", _ListId)
-
-	ProtocolsListDataSummary_ListName = ProtocolsListDataSummary.AddMember("ListName", _ResourceName)
-
-	ProtocolsListDataSummary_ProtocolsList = ProtocolsListDataSummary.AddMember("ProtocolsList", _ProtocolsList)
-
-	_ProtocolsListsData_member = _ProtocolsListsData.AddMember("member", ProtocolsListDataSummary)
-
-	Resource_URI = Resource.AddMember("URI", _Identifier)
-
-	Resource_AccountId = Resource.AddMember("AccountId", _AWSAccountId)
-
-	_ResourceArnList_member = _ResourceArnList.AddMember("member", _ResourceArn)
-
-	_ResourceList_member = _ResourceList.AddMember("member", Resource)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _ErrorMessage)
-
-	ResourceSetStatus_ACTIVE = ResourceSetStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	ResourceSetStatus_OUT_OF_ADMIN_SCOPE = ResourceSetStatus.AddMember("OUT_OF_ADMIN_SCOPE", smithyprelude.Unit)
-
-	ResourceSet_Id = ResourceSet.AddMember("Id", _Base62Id)
-
-	ResourceSet_Name = ResourceSet.AddMember("Name", _Name)
-
-	ResourceSet_Description = ResourceSet.AddMember("Description", _Description)
-
-	ResourceSet_UpdateToken = ResourceSet.AddMember("UpdateToken", _UpdateToken)
-
-	ResourceSet_ResourceTypeList = ResourceSet.AddMember("ResourceTypeList", _ResourceTypeList)
-
-	ResourceSet_LastUpdateTime = ResourceSet.AddMember("LastUpdateTime", _TimeStamp)
-
-	ResourceSet_ResourceSetStatus = ResourceSet.AddMember("ResourceSetStatus", ResourceSetStatus)
-
-	ResourceSetSummary_Id = ResourceSetSummary.AddMember("Id", _Base62Id)
-
-	ResourceSetSummary_Name = ResourceSetSummary.AddMember("Name", _Name)
-
-	ResourceSetSummary_Description = ResourceSetSummary.AddMember("Description", _Description)
-
-	ResourceSetSummary_LastUpdateTime = ResourceSetSummary.AddMember("LastUpdateTime", _TimeStamp)
-
-	ResourceSetSummary_ResourceSetStatus = ResourceSetSummary.AddMember("ResourceSetStatus", ResourceSetStatus)
-
-	_ResourceSetSummaryList_member = _ResourceSetSummaryList.AddMember("member", ResourceSetSummary)
-
-	RouteHasOutOfScopeEndpointViolation_SubnetId = RouteHasOutOfScopeEndpointViolation.AddMember("SubnetId", _ResourceId)
-
-	RouteHasOutOfScopeEndpointViolation_VpcId = RouteHasOutOfScopeEndpointViolation.AddMember("VpcId", _ResourceId)
-
-	RouteHasOutOfScopeEndpointViolation_RouteTableId = RouteHasOutOfScopeEndpointViolation.AddMember("RouteTableId", _ResourceId)
-
-	RouteHasOutOfScopeEndpointViolation_ViolatingRoutes = RouteHasOutOfScopeEndpointViolation.AddMember("ViolatingRoutes", _Routes)
-
-	RouteHasOutOfScopeEndpointViolation_SubnetAvailabilityZone = RouteHasOutOfScopeEndpointViolation.AddMember("SubnetAvailabilityZone", _LengthBoundedString)
-
-	RouteHasOutOfScopeEndpointViolation_SubnetAvailabilityZoneId = RouteHasOutOfScopeEndpointViolation.AddMember("SubnetAvailabilityZoneId", _LengthBoundedString)
-
-	RouteHasOutOfScopeEndpointViolation_CurrentFirewallSubnetRouteTable = RouteHasOutOfScopeEndpointViolation.AddMember("CurrentFirewallSubnetRouteTable", _ResourceId)
-
-	RouteHasOutOfScopeEndpointViolation_FirewallSubnetId = RouteHasOutOfScopeEndpointViolation.AddMember("FirewallSubnetId", _ResourceId)
-
-	RouteHasOutOfScopeEndpointViolation_FirewallSubnetRoutes = RouteHasOutOfScopeEndpointViolation.AddMember("FirewallSubnetRoutes", _Routes)
-
-	RouteHasOutOfScopeEndpointViolation_InternetGatewayId = RouteHasOutOfScopeEndpointViolation.AddMember("InternetGatewayId", _ResourceId)
-
-	RouteHasOutOfScopeEndpointViolation_CurrentInternetGatewayRouteTable = RouteHasOutOfScopeEndpointViolation.AddMember("CurrentInternetGatewayRouteTable", _ResourceId)
-
-	RouteHasOutOfScopeEndpointViolation_InternetGatewayRoutes = RouteHasOutOfScopeEndpointViolation.AddMember("InternetGatewayRoutes", _Routes)
-
-	ThirdPartyFirewallMissingFirewallViolation_ViolationTarget = ThirdPartyFirewallMissingFirewallViolation.AddMember("ViolationTarget", _ViolationTarget)
-
-	ThirdPartyFirewallMissingFirewallViolation_VPC = ThirdPartyFirewallMissingFirewallViolation.AddMember("VPC", _ResourceId)
-
-	ThirdPartyFirewallMissingFirewallViolation_AvailabilityZone = ThirdPartyFirewallMissingFirewallViolation.AddMember("AvailabilityZone", _LengthBoundedString)
-
-	ThirdPartyFirewallMissingFirewallViolation_TargetViolationReason = ThirdPartyFirewallMissingFirewallViolation.AddMember("TargetViolationReason", _TargetViolationReason)
-
-	ThirdPartyFirewallMissingSubnetViolation_ViolationTarget = ThirdPartyFirewallMissingSubnetViolation.AddMember("ViolationTarget", _ViolationTarget)
-
-	ThirdPartyFirewallMissingSubnetViolation_VPC = ThirdPartyFirewallMissingSubnetViolation.AddMember("VPC", _ResourceId)
-
-	ThirdPartyFirewallMissingSubnetViolation_AvailabilityZone = ThirdPartyFirewallMissingSubnetViolation.AddMember("AvailabilityZone", _LengthBoundedString)
-
-	ThirdPartyFirewallMissingSubnetViolation_TargetViolationReason = ThirdPartyFirewallMissingSubnetViolation.AddMember("TargetViolationReason", _TargetViolationReason)
-
-	ThirdPartyFirewallMissingExpectedRouteTableViolation_ViolationTarget = ThirdPartyFirewallMissingExpectedRouteTableViolation.AddMember("ViolationTarget", _ViolationTarget)
-
-	ThirdPartyFirewallMissingExpectedRouteTableViolation_VPC = ThirdPartyFirewallMissingExpectedRouteTableViolation.AddMember("VPC", _ResourceId)
-
-	ThirdPartyFirewallMissingExpectedRouteTableViolation_AvailabilityZone = ThirdPartyFirewallMissingExpectedRouteTableViolation.AddMember("AvailabilityZone", _LengthBoundedString)
-
-	ThirdPartyFirewallMissingExpectedRouteTableViolation_CurrentRouteTable = ThirdPartyFirewallMissingExpectedRouteTableViolation.AddMember("CurrentRouteTable", _ResourceId)
-
-	ThirdPartyFirewallMissingExpectedRouteTableViolation_ExpectedRouteTable = ThirdPartyFirewallMissingExpectedRouteTableViolation.AddMember("ExpectedRouteTable", _ResourceId)
-
-	WebACLHasIncompatibleConfigurationViolation_WebACLArn = WebACLHasIncompatibleConfigurationViolation.AddMember("WebACLArn", _ResourceArn)
-
-	WebACLHasIncompatibleConfigurationViolation_Description = WebACLHasIncompatibleConfigurationViolation.AddMember("Description", _LengthBoundedString)
-
-	WebACLHasOutOfScopeResourcesViolation_WebACLArn = WebACLHasOutOfScopeResourcesViolation.AddMember("WebACLArn", _ResourceArn)
-
-	WebACLHasOutOfScopeResourcesViolation_OutOfScopeResourceList = WebACLHasOutOfScopeResourcesViolation.AddMember("OutOfScopeResourceList", _ResourceArnList)
-
-	ResourceViolation_AwsVPCSecurityGroupViolation = ResourceViolation.AddMember("AwsVPCSecurityGroupViolation", AwsVPCSecurityGroupViolation)
-
-	ResourceViolation_AwsEc2NetworkInterfaceViolation = ResourceViolation.AddMember("AwsEc2NetworkInterfaceViolation", AwsEc2NetworkInterfaceViolation)
-
-	ResourceViolation_AwsEc2InstanceViolation = ResourceViolation.AddMember("AwsEc2InstanceViolation", AwsEc2InstanceViolation)
-
-	ResourceViolation_NetworkFirewallMissingFirewallViolation = ResourceViolation.AddMember("NetworkFirewallMissingFirewallViolation", NetworkFirewallMissingFirewallViolation)
-
-	ResourceViolation_NetworkFirewallMissingSubnetViolation = ResourceViolation.AddMember("NetworkFirewallMissingSubnetViolation", NetworkFirewallMissingSubnetViolation)
-
-	ResourceViolation_NetworkFirewallMissingExpectedRTViolation = ResourceViolation.AddMember("NetworkFirewallMissingExpectedRTViolation", NetworkFirewallMissingExpectedRTViolation)
-
-	ResourceViolation_NetworkFirewallPolicyModifiedViolation = ResourceViolation.AddMember("NetworkFirewallPolicyModifiedViolation", NetworkFirewallPolicyModifiedViolation)
-
-	ResourceViolation_NetworkFirewallInternetTrafficNotInspectedViolation = ResourceViolation.AddMember("NetworkFirewallInternetTrafficNotInspectedViolation", NetworkFirewallInternetTrafficNotInspectedViolation)
-
-	ResourceViolation_NetworkFirewallInvalidRouteConfigurationViolation = ResourceViolation.AddMember("NetworkFirewallInvalidRouteConfigurationViolation", NetworkFirewallInvalidRouteConfigurationViolation)
-
-	ResourceViolation_NetworkFirewallBlackHoleRouteDetectedViolation = ResourceViolation.AddMember("NetworkFirewallBlackHoleRouteDetectedViolation", NetworkFirewallBlackHoleRouteDetectedViolation)
-
-	ResourceViolation_NetworkFirewallUnexpectedFirewallRoutesViolation = ResourceViolation.AddMember("NetworkFirewallUnexpectedFirewallRoutesViolation", NetworkFirewallUnexpectedFirewallRoutesViolation)
-
-	ResourceViolation_NetworkFirewallUnexpectedGatewayRoutesViolation = ResourceViolation.AddMember("NetworkFirewallUnexpectedGatewayRoutesViolation", NetworkFirewallUnexpectedGatewayRoutesViolation)
-
-	ResourceViolation_NetworkFirewallMissingExpectedRoutesViolation = ResourceViolation.AddMember("NetworkFirewallMissingExpectedRoutesViolation", NetworkFirewallMissingExpectedRoutesViolation)
-
-	ResourceViolation_DnsRuleGroupPriorityConflictViolation = ResourceViolation.AddMember("DnsRuleGroupPriorityConflictViolation", DnsRuleGroupPriorityConflictViolation)
-
-	ResourceViolation_DnsDuplicateRuleGroupViolation = ResourceViolation.AddMember("DnsDuplicateRuleGroupViolation", DnsDuplicateRuleGroupViolation)
-
-	ResourceViolation_DnsRuleGroupLimitExceededViolation = ResourceViolation.AddMember("DnsRuleGroupLimitExceededViolation", DnsRuleGroupLimitExceededViolation)
-
-	ResourceViolation_FirewallSubnetIsOutOfScopeViolation = ResourceViolation.AddMember("FirewallSubnetIsOutOfScopeViolation", FirewallSubnetIsOutOfScopeViolation)
-
-	ResourceViolation_RouteHasOutOfScopeEndpointViolation = ResourceViolation.AddMember("RouteHasOutOfScopeEndpointViolation", RouteHasOutOfScopeEndpointViolation)
-
-	ResourceViolation_ThirdPartyFirewallMissingFirewallViolation = ResourceViolation.AddMember("ThirdPartyFirewallMissingFirewallViolation", ThirdPartyFirewallMissingFirewallViolation)
-
-	ResourceViolation_ThirdPartyFirewallMissingSubnetViolation = ResourceViolation.AddMember("ThirdPartyFirewallMissingSubnetViolation", ThirdPartyFirewallMissingSubnetViolation)
-
-	ResourceViolation_ThirdPartyFirewallMissingExpectedRouteTableViolation = ResourceViolation.AddMember("ThirdPartyFirewallMissingExpectedRouteTableViolation", ThirdPartyFirewallMissingExpectedRouteTableViolation)
-
-	ResourceViolation_FirewallSubnetMissingVPCEndpointViolation = ResourceViolation.AddMember("FirewallSubnetMissingVPCEndpointViolation", FirewallSubnetMissingVPCEndpointViolation)
-
-	ResourceViolation_InvalidNetworkAclEntriesViolation = ResourceViolation.AddMember("InvalidNetworkAclEntriesViolation", InvalidNetworkAclEntriesViolation)
-
-	ResourceViolation_PossibleRemediationActions = ResourceViolation.AddMember("PossibleRemediationActions", PossibleRemediationActions)
-
-	ResourceViolation_WebACLHasIncompatibleConfigurationViolation = ResourceViolation.AddMember("WebACLHasIncompatibleConfigurationViolation", WebACLHasIncompatibleConfigurationViolation)
-
-	ResourceViolation_WebACLHasOutOfScopeResourcesViolation = ResourceViolation.AddMember("WebACLHasOutOfScopeResourcesViolation", WebACLHasOutOfScopeResourcesViolation)
-
-	_ResourceViolations_member = _ResourceViolations.AddMember("member", ResourceViolation)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	ThirdPartyFirewall_PALO_ALTO_NETWORKS_CLOUD_NGFW = ThirdPartyFirewall.AddMember("PALO_ALTO_NETWORKS_CLOUD_NGFW", smithyprelude.Unit)
-
-	ThirdPartyFirewall_FORTIGATE_CLOUD_NATIVE_FIREWALL = ThirdPartyFirewall.AddMember("FORTIGATE_CLOUD_NATIVE_FIREWALL", smithyprelude.Unit)
-
-	ThirdPartyFirewallAssociationStatus_ONBOARDING = ThirdPartyFirewallAssociationStatus.AddMember("ONBOARDING", smithyprelude.Unit)
-
-	ThirdPartyFirewallAssociationStatus_ONBOARD_COMPLETE = ThirdPartyFirewallAssociationStatus.AddMember("ONBOARD_COMPLETE", smithyprelude.Unit)
-
-	ThirdPartyFirewallAssociationStatus_OFFBOARDING = ThirdPartyFirewallAssociationStatus.AddMember("OFFBOARDING", smithyprelude.Unit)
-
-	ThirdPartyFirewallAssociationStatus_OFFBOARD_COMPLETE = ThirdPartyFirewallAssociationStatus.AddMember("OFFBOARD_COMPLETE", smithyprelude.Unit)
-
-	ThirdPartyFirewallAssociationStatus_NOT_EXIST = ThirdPartyFirewallAssociationStatus.AddMember("NOT_EXIST", smithyprelude.Unit)
-
-	ThirdPartyFirewallFirewallPolicy_FirewallPolicyId = ThirdPartyFirewallFirewallPolicy.AddMember("FirewallPolicyId", _FirewallPolicyId)
-
-	ThirdPartyFirewallFirewallPolicy_FirewallPolicyName = ThirdPartyFirewallFirewallPolicy.AddMember("FirewallPolicyName", _FirewallPolicyName)
-
-	_ThirdPartyFirewallFirewallPolicies_member = _ThirdPartyFirewallFirewallPolicies.AddMember("member", ThirdPartyFirewallFirewallPolicy)
-
-	ViolationDetail_PolicyId = ViolationDetail.AddMember("PolicyId", _PolicyId)
-
-	ViolationDetail_MemberAccount = ViolationDetail.AddMember("MemberAccount", _AWSAccountId)
-
-	ViolationDetail_ResourceId = ViolationDetail.AddMember("ResourceId", _ResourceId)
-
-	ViolationDetail_ResourceType = ViolationDetail.AddMember("ResourceType", _ResourceType)
-
-	ViolationDetail_ResourceViolations = ViolationDetail.AddMember("ResourceViolations", _ResourceViolations)
-
-	ViolationDetail_ResourceTags = ViolationDetail.AddMember("ResourceTags", _TagList)
-
-	ViolationDetail_ResourceDescription = ViolationDetail.AddMember("ResourceDescription", _LengthBoundedString)
-
-	AssociateAdminAccountRequest_AdminAccount = AssociateAdminAccountRequest.AddMember("AdminAccount", _AWSAccountId)
-
-	AssociateThirdPartyFirewallRequest_ThirdPartyFirewall = AssociateThirdPartyFirewallRequest.AddMember("ThirdPartyFirewall", ThirdPartyFirewall)
-
-	AssociateThirdPartyFirewallResponse_ThirdPartyFirewallStatus = AssociateThirdPartyFirewallResponse.AddMember("ThirdPartyFirewallStatus", ThirdPartyFirewallAssociationStatus)
-
-	BatchAssociateResourceRequest_ResourceSetIdentifier = BatchAssociateResourceRequest.AddMember("ResourceSetIdentifier", _Identifier)
-
-	BatchAssociateResourceRequest_Items = BatchAssociateResourceRequest.AddMember("Items", _IdentifierList)
-
-	BatchAssociateResourceResponse_ResourceSetIdentifier = BatchAssociateResourceResponse.AddMember("ResourceSetIdentifier", _Identifier)
-
-	BatchAssociateResourceResponse_FailedItems = BatchAssociateResourceResponse.AddMember("FailedItems", _FailedItemList)
-
-	BatchDisassociateResourceRequest_ResourceSetIdentifier = BatchDisassociateResourceRequest.AddMember("ResourceSetIdentifier", _Identifier)
-
-	BatchDisassociateResourceRequest_Items = BatchDisassociateResourceRequest.AddMember("Items", _IdentifierList)
-
-	BatchDisassociateResourceResponse_ResourceSetIdentifier = BatchDisassociateResourceResponse.AddMember("ResourceSetIdentifier", _Identifier)
-
-	BatchDisassociateResourceResponse_FailedItems = BatchDisassociateResourceResponse.AddMember("FailedItems", _FailedItemList)
-
-	DeleteAppsListRequest_ListId = DeleteAppsListRequest.AddMember("ListId", _ListId)
-
-	DeletePolicyRequest_PolicyId = DeletePolicyRequest.AddMember("PolicyId", _PolicyId)
-
-	DeletePolicyRequest_DeleteAllPolicyResources = DeletePolicyRequest.AddMember("DeleteAllPolicyResources", _Boolean)
-
-	DeleteProtocolsListRequest_ListId = DeleteProtocolsListRequest.AddMember("ListId", _ListId)
-
-	DeleteResourceSetRequest_Identifier = DeleteResourceSetRequest.AddMember("Identifier", _Base62Id)
-
-	DisassociateThirdPartyFirewallRequest_ThirdPartyFirewall = DisassociateThirdPartyFirewallRequest.AddMember("ThirdPartyFirewall", ThirdPartyFirewall)
-
-	DisassociateThirdPartyFirewallResponse_ThirdPartyFirewallStatus = DisassociateThirdPartyFirewallResponse.AddMember("ThirdPartyFirewallStatus", ThirdPartyFirewallAssociationStatus)
-
-	GetAdminAccountResponse_AdminAccount = GetAdminAccountResponse.AddMember("AdminAccount", _AWSAccountId)
-
-	GetAdminAccountResponse_RoleStatus = GetAdminAccountResponse.AddMember("RoleStatus", AccountRoleStatus)
-
-	GetAdminScopeRequest_AdminAccount = GetAdminScopeRequest.AddMember("AdminAccount", _AWSAccountId)
-
-	GetAdminScopeResponse_AdminScope = GetAdminScopeResponse.AddMember("AdminScope", AdminScope)
-
-	GetAdminScopeResponse_Status = GetAdminScopeResponse.AddMember("Status", OrganizationStatus)
-
-	GetAppsListRequest_ListId = GetAppsListRequest.AddMember("ListId", _ListId)
-
-	GetAppsListRequest_DefaultList = GetAppsListRequest.AddMember("DefaultList", _Boolean)
-
-	GetAppsListResponse_AppsList = GetAppsListResponse.AddMember("AppsList", AppsListData)
-
-	GetAppsListResponse_AppsListArn = GetAppsListResponse.AddMember("AppsListArn", _ResourceArn)
-
-	GetComplianceDetailRequest_PolicyId = GetComplianceDetailRequest.AddMember("PolicyId", _PolicyId)
-
-	GetComplianceDetailRequest_MemberAccount = GetComplianceDetailRequest.AddMember("MemberAccount", _AWSAccountId)
-
-	GetComplianceDetailResponse_PolicyComplianceDetail = GetComplianceDetailResponse.AddMember("PolicyComplianceDetail", PolicyComplianceDetail)
-
-	GetNotificationChannelResponse_SnsTopicArn = GetNotificationChannelResponse.AddMember("SnsTopicArn", _ResourceArn)
-
-	GetNotificationChannelResponse_SnsRoleName = GetNotificationChannelResponse.AddMember("SnsRoleName", _ResourceArn)
-
-	GetPolicyRequest_PolicyId = GetPolicyRequest.AddMember("PolicyId", _PolicyId)
-
-	GetPolicyResponse_Policy = GetPolicyResponse.AddMember("Policy", Policy)
-
-	GetPolicyResponse_PolicyArn = GetPolicyResponse.AddMember("PolicyArn", _ResourceArn)
-
-	GetProtectionStatusRequest_PolicyId = GetProtectionStatusRequest.AddMember("PolicyId", _PolicyId)
-
-	GetProtectionStatusRequest_MemberAccountId = GetProtectionStatusRequest.AddMember("MemberAccountId", _AWSAccountId)
-
-	GetProtectionStatusRequest_StartTime = GetProtectionStatusRequest.AddMember("StartTime", _TimeStamp)
-
-	GetProtectionStatusRequest_EndTime = GetProtectionStatusRequest.AddMember("EndTime", _TimeStamp)
-
-	GetProtectionStatusRequest_NextToken = GetProtectionStatusRequest.AddMember("NextToken", _PaginationToken)
-
-	GetProtectionStatusRequest_MaxResults = GetProtectionStatusRequest.AddMember("MaxResults", _PaginationMaxResults)
-
-	GetProtectionStatusResponse_AdminAccountId = GetProtectionStatusResponse.AddMember("AdminAccountId", _AWSAccountId)
-
-	GetProtectionStatusResponse_ServiceType = GetProtectionStatusResponse.AddMember("ServiceType", SecurityServiceType)
-
-	GetProtectionStatusResponse_Data = GetProtectionStatusResponse.AddMember("Data", _ProtectionData)
-
-	GetProtectionStatusResponse_NextToken = GetProtectionStatusResponse.AddMember("NextToken", _PaginationToken)
-
-	GetProtocolsListRequest_ListId = GetProtocolsListRequest.AddMember("ListId", _ListId)
-
-	GetProtocolsListRequest_DefaultList = GetProtocolsListRequest.AddMember("DefaultList", _Boolean)
-
-	GetProtocolsListResponse_ProtocolsList = GetProtocolsListResponse.AddMember("ProtocolsList", ProtocolsListData)
-
-	GetProtocolsListResponse_ProtocolsListArn = GetProtocolsListResponse.AddMember("ProtocolsListArn", _ResourceArn)
-
-	GetResourceSetRequest_Identifier = GetResourceSetRequest.AddMember("Identifier", _Base62Id)
-
-	GetResourceSetResponse_ResourceSet = GetResourceSetResponse.AddMember("ResourceSet", ResourceSet)
-
-	GetResourceSetResponse_ResourceSetArn = GetResourceSetResponse.AddMember("ResourceSetArn", _ResourceArn)
-
-	GetThirdPartyFirewallAssociationStatusRequest_ThirdPartyFirewall = GetThirdPartyFirewallAssociationStatusRequest.AddMember("ThirdPartyFirewall", ThirdPartyFirewall)
-
-	GetThirdPartyFirewallAssociationStatusResponse_ThirdPartyFirewallStatus = GetThirdPartyFirewallAssociationStatusResponse.AddMember("ThirdPartyFirewallStatus", ThirdPartyFirewallAssociationStatus)
-
-	GetThirdPartyFirewallAssociationStatusResponse_MarketplaceOnboardingStatus = GetThirdPartyFirewallAssociationStatusResponse.AddMember("MarketplaceOnboardingStatus", MarketplaceSubscriptionOnboardingStatus)
-
-	GetViolationDetailsRequest_PolicyId = GetViolationDetailsRequest.AddMember("PolicyId", _PolicyId)
-
-	GetViolationDetailsRequest_MemberAccount = GetViolationDetailsRequest.AddMember("MemberAccount", _AWSAccountId)
-
-	GetViolationDetailsRequest_ResourceId = GetViolationDetailsRequest.AddMember("ResourceId", _ResourceId)
-
-	GetViolationDetailsRequest_ResourceType = GetViolationDetailsRequest.AddMember("ResourceType", _ResourceType)
-
-	GetViolationDetailsResponse_ViolationDetail = GetViolationDetailsResponse.AddMember("ViolationDetail", ViolationDetail)
-
-	ListAdminAccountsForOrganizationRequest_NextToken = ListAdminAccountsForOrganizationRequest.AddMember("NextToken", _PaginationToken)
-
-	ListAdminAccountsForOrganizationRequest_MaxResults = ListAdminAccountsForOrganizationRequest.AddMember("MaxResults", _PaginationMaxResults)
-
-	ListAdminAccountsForOrganizationResponse_AdminAccounts = ListAdminAccountsForOrganizationResponse.AddMember("AdminAccounts", _AdminAccountSummaryList)
-
-	ListAdminAccountsForOrganizationResponse_NextToken = ListAdminAccountsForOrganizationResponse.AddMember("NextToken", _PaginationToken)
-
-	ListAdminsManagingAccountRequest_NextToken = ListAdminsManagingAccountRequest.AddMember("NextToken", _PaginationToken)
-
-	ListAdminsManagingAccountRequest_MaxResults = ListAdminsManagingAccountRequest.AddMember("MaxResults", _PaginationMaxResults)
-
-	ListAdminsManagingAccountResponse_AdminAccounts = ListAdminsManagingAccountResponse.AddMember("AdminAccounts", _AccountIdList)
-
-	ListAdminsManagingAccountResponse_NextToken = ListAdminsManagingAccountResponse.AddMember("NextToken", _PaginationToken)
-
-	ListAppsListsRequest_DefaultLists = ListAppsListsRequest.AddMember("DefaultLists", _Boolean)
-
-	ListAppsListsRequest_NextToken = ListAppsListsRequest.AddMember("NextToken", _PaginationToken)
-
-	ListAppsListsRequest_MaxResults = ListAppsListsRequest.AddMember("MaxResults", _PaginationMaxResults)
-
-	ListAppsListsResponse_AppsLists = ListAppsListsResponse.AddMember("AppsLists", _AppsListsData)
-
-	ListAppsListsResponse_NextToken = ListAppsListsResponse.AddMember("NextToken", _PaginationToken)
-
-	ListComplianceStatusRequest_PolicyId = ListComplianceStatusRequest.AddMember("PolicyId", _PolicyId)
-
-	ListComplianceStatusRequest_NextToken = ListComplianceStatusRequest.AddMember("NextToken", _PaginationToken)
-
-	ListComplianceStatusRequest_MaxResults = ListComplianceStatusRequest.AddMember("MaxResults", _PaginationMaxResults)
-
-	ListComplianceStatusResponse_PolicyComplianceStatusList = ListComplianceStatusResponse.AddMember("PolicyComplianceStatusList", _PolicyComplianceStatusList)
-
-	ListComplianceStatusResponse_NextToken = ListComplianceStatusResponse.AddMember("NextToken", _PaginationToken)
-
-	ListDiscoveredResourcesRequest_MemberAccountIds = ListDiscoveredResourcesRequest.AddMember("MemberAccountIds", _AWSAccountIdList)
-
-	ListDiscoveredResourcesRequest_ResourceType = ListDiscoveredResourcesRequest.AddMember("ResourceType", _ResourceType)
-
-	ListDiscoveredResourcesRequest_MaxResults = ListDiscoveredResourcesRequest.AddMember("MaxResults", _PaginationMaxResults)
-
-	ListDiscoveredResourcesRequest_NextToken = ListDiscoveredResourcesRequest.AddMember("NextToken", _PaginationToken)
-
-	ListDiscoveredResourcesResponse_Items = ListDiscoveredResourcesResponse.AddMember("Items", _DiscoveredResourceList)
-
-	ListDiscoveredResourcesResponse_NextToken = ListDiscoveredResourcesResponse.AddMember("NextToken", _PaginationToken)
-
-	ListMemberAccountsRequest_NextToken = ListMemberAccountsRequest.AddMember("NextToken", _PaginationToken)
-
-	ListMemberAccountsRequest_MaxResults = ListMemberAccountsRequest.AddMember("MaxResults", _PaginationMaxResults)
-
-	ListMemberAccountsResponse_MemberAccounts = ListMemberAccountsResponse.AddMember("MemberAccounts", _MemberAccounts)
-
-	ListMemberAccountsResponse_NextToken = ListMemberAccountsResponse.AddMember("NextToken", _PaginationToken)
-
-	ListPoliciesRequest_NextToken = ListPoliciesRequest.AddMember("NextToken", _PaginationToken)
-
-	ListPoliciesRequest_MaxResults = ListPoliciesRequest.AddMember("MaxResults", _PaginationMaxResults)
-
-	ListPoliciesResponse_PolicyList = ListPoliciesResponse.AddMember("PolicyList", _PolicySummaryList)
-
-	ListPoliciesResponse_NextToken = ListPoliciesResponse.AddMember("NextToken", _PaginationToken)
-
-	ListProtocolsListsRequest_DefaultLists = ListProtocolsListsRequest.AddMember("DefaultLists", _Boolean)
-
-	ListProtocolsListsRequest_NextToken = ListProtocolsListsRequest.AddMember("NextToken", _PaginationToken)
-
-	ListProtocolsListsRequest_MaxResults = ListProtocolsListsRequest.AddMember("MaxResults", _PaginationMaxResults)
-
-	ListProtocolsListsResponse_ProtocolsLists = ListProtocolsListsResponse.AddMember("ProtocolsLists", _ProtocolsListsData)
-
-	ListProtocolsListsResponse_NextToken = ListProtocolsListsResponse.AddMember("NextToken", _PaginationToken)
-
-	ListResourceSetResourcesRequest_Identifier = ListResourceSetResourcesRequest.AddMember("Identifier", _ResourceId)
-
-	ListResourceSetResourcesRequest_MaxResults = ListResourceSetResourcesRequest.AddMember("MaxResults", _PaginationMaxResults)
-
-	ListResourceSetResourcesRequest_NextToken = ListResourceSetResourcesRequest.AddMember("NextToken", _PaginationToken)
-
-	ListResourceSetResourcesResponse_Items = ListResourceSetResourcesResponse.AddMember("Items", _ResourceList)
-
-	ListResourceSetResourcesResponse_NextToken = ListResourceSetResourcesResponse.AddMember("NextToken", _PaginationToken)
-
-	ListResourceSetsRequest_NextToken = ListResourceSetsRequest.AddMember("NextToken", _PaginationToken)
-
-	ListResourceSetsRequest_MaxResults = ListResourceSetsRequest.AddMember("MaxResults", _PaginationMaxResults)
-
-	ListResourceSetsResponse_ResourceSets = ListResourceSetsResponse.AddMember("ResourceSets", _ResourceSetSummaryList)
-
-	ListResourceSetsResponse_NextToken = ListResourceSetsResponse.AddMember("NextToken", _PaginationToken)
-
-	ListTagsForResourceRequest_ResourceArn = ListTagsForResourceRequest.AddMember("ResourceArn", _ResourceArn)
-
-	ListTagsForResourceResponse_TagList = ListTagsForResourceResponse.AddMember("TagList", _TagList)
-
-	ListThirdPartyFirewallFirewallPoliciesRequest_ThirdPartyFirewall = ListThirdPartyFirewallFirewallPoliciesRequest.AddMember("ThirdPartyFirewall", ThirdPartyFirewall)
-
-	ListThirdPartyFirewallFirewallPoliciesRequest_NextToken = ListThirdPartyFirewallFirewallPoliciesRequest.AddMember("NextToken", _PaginationToken)
-
-	ListThirdPartyFirewallFirewallPoliciesRequest_MaxResults = ListThirdPartyFirewallFirewallPoliciesRequest.AddMember("MaxResults", _PaginationMaxResults)
-
-	ListThirdPartyFirewallFirewallPoliciesResponse_ThirdPartyFirewallFirewallPolicies = ListThirdPartyFirewallFirewallPoliciesResponse.AddMember("ThirdPartyFirewallFirewallPolicies", _ThirdPartyFirewallFirewallPolicies)
-
-	ListThirdPartyFirewallFirewallPoliciesResponse_NextToken = ListThirdPartyFirewallFirewallPoliciesResponse.AddMember("NextToken", _PaginationToken)
-
-	PutAdminAccountRequest_AdminAccount = PutAdminAccountRequest.AddMember("AdminAccount", _AWSAccountId)
-
-	PutAdminAccountRequest_AdminScope = PutAdminAccountRequest.AddMember("AdminScope", AdminScope)
-
-	PutAppsListRequest_AppsList = PutAppsListRequest.AddMember("AppsList", AppsListData)
-
-	PutAppsListRequest_TagList = PutAppsListRequest.AddMember("TagList", _TagList)
-
-	PutAppsListResponse_AppsList = PutAppsListResponse.AddMember("AppsList", AppsListData)
-
-	PutAppsListResponse_AppsListArn = PutAppsListResponse.AddMember("AppsListArn", _ResourceArn)
-
-	PutNotificationChannelRequest_SnsTopicArn = PutNotificationChannelRequest.AddMember("SnsTopicArn", _ResourceArn)
-
-	PutNotificationChannelRequest_SnsRoleName = PutNotificationChannelRequest.AddMember("SnsRoleName", _ResourceArn)
-
-	PutPolicyRequest_Policy = PutPolicyRequest.AddMember("Policy", Policy)
-
-	PutPolicyRequest_TagList = PutPolicyRequest.AddMember("TagList", _TagList)
-
-	PutPolicyResponse_Policy = PutPolicyResponse.AddMember("Policy", Policy)
-
-	PutPolicyResponse_PolicyArn = PutPolicyResponse.AddMember("PolicyArn", _ResourceArn)
-
-	PutProtocolsListRequest_ProtocolsList = PutProtocolsListRequest.AddMember("ProtocolsList", ProtocolsListData)
-
-	PutProtocolsListRequest_TagList = PutProtocolsListRequest.AddMember("TagList", _TagList)
-
-	PutProtocolsListResponse_ProtocolsList = PutProtocolsListResponse.AddMember("ProtocolsList", ProtocolsListData)
-
-	PutProtocolsListResponse_ProtocolsListArn = PutProtocolsListResponse.AddMember("ProtocolsListArn", _ResourceArn)
-
-	PutResourceSetRequest_ResourceSet = PutResourceSetRequest.AddMember("ResourceSet", ResourceSet)
-
-	PutResourceSetRequest_TagList = PutResourceSetRequest.AddMember("TagList", _TagList)
-
-	PutResourceSetResponse_ResourceSet = PutResourceSetResponse.AddMember("ResourceSet", ResourceSet)
-
-	PutResourceSetResponse_ResourceSetArn = PutResourceSetResponse.AddMember("ResourceSetArn", _ResourceArn)
-
-	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", _ResourceArn)
-
-	TagResourceRequest_TagList = TagResourceRequest.AddMember("TagList", _TagList)
-
-	UntagResourceRequest_ResourceArn = UntagResourceRequest.AddMember("ResourceArn", _ResourceArn)
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList)
-
-}
+var (
+	iAssociateAdminAccount                                = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "AssociateAdminAccount"}
+	iAssociateThirdPartyFirewall                          = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "AssociateThirdPartyFirewall"}
+	iBatchAssociateResource                               = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "BatchAssociateResource"}
+	iBatchDisassociateResource                            = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "BatchDisassociateResource"}
+	iDeleteAppsList                                       = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "DeleteAppsList"}
+	iDeleteNotificationChannel                            = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "DeleteNotificationChannel"}
+	iDeletePolicy                                         = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "DeletePolicy"}
+	iDeleteProtocolsList                                  = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "DeleteProtocolsList"}
+	iDeleteResourceSet                                    = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "DeleteResourceSet"}
+	iDisassociateAdminAccount                             = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "DisassociateAdminAccount"}
+	iDisassociateThirdPartyFirewall                       = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "DisassociateThirdPartyFirewall"}
+	iGetAdminAccount                                      = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "GetAdminAccount"}
+	iGetAdminScope                                        = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "GetAdminScope"}
+	iGetAppsList                                          = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "GetAppsList"}
+	iGetComplianceDetail                                  = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "GetComplianceDetail"}
+	iGetNotificationChannel                               = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "GetNotificationChannel"}
+	iGetPolicy                                            = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "GetPolicy"}
+	iGetProtectionStatus                                  = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "GetProtectionStatus"}
+	iGetProtocolsList                                     = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "GetProtocolsList"}
+	iGetResourceSet                                       = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "GetResourceSet"}
+	iGetThirdPartyFirewallAssociationStatus               = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "GetThirdPartyFirewallAssociationStatus"}
+	iGetViolationDetails                                  = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "GetViolationDetails"}
+	iListAdminAccountsForOrganization                     = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ListAdminAccountsForOrganization"}
+	iListAdminsManagingAccount                            = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ListAdminsManagingAccount"}
+	iListAppsLists                                        = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ListAppsLists"}
+	iListComplianceStatus                                 = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ListComplianceStatus"}
+	iListDiscoveredResources                              = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ListDiscoveredResources"}
+	iListMemberAccounts                                   = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ListMemberAccounts"}
+	iListPolicies                                         = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ListPolicies"}
+	iListProtocolsLists                                   = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ListProtocolsLists"}
+	iListResourceSetResources                             = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ListResourceSetResources"}
+	iListResourceSets                                     = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ListResourceSets"}
+	iListTagsForResource                                  = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ListTagsForResource"}
+	iListThirdPartyFirewallFirewallPolicies               = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ListThirdPartyFirewallFirewallPolicies"}
+	iPutAdminAccount                                      = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "PutAdminAccount"}
+	iPutAppsList                                          = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "PutAppsList"}
+	iPutNotificationChannel                               = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "PutNotificationChannel"}
+	iPutPolicy                                            = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "PutPolicy"}
+	iPutProtocolsList                                     = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "PutProtocolsList"}
+	iPutResourceSet                                       = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "PutResourceSet"}
+	iTagResource                                          = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "TagResource"}
+	iUntagResource                                        = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "UntagResource"}
+	i_AWSFMS_20180101                                     = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "AWSFMS_20180101"}
+	i_AccountIdList                                       = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "AccountIdList"}
+	iAccountRoleStatus                                    = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "AccountRoleStatus"}
+	iAccountScope                                         = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "AccountScope"}
+	iActionTarget                                         = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ActionTarget"}
+	iAdminAccountSummary                                  = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "AdminAccountSummary"}
+	i_AdminAccountSummaryList                             = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "AdminAccountSummaryList"}
+	iAdminScope                                           = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "AdminScope"}
+	iApp                                                  = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "App"}
+	i_AppsList                                            = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "AppsList"}
+	iAppsListData                                         = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "AppsListData"}
+	iAppsListDataSummary                                  = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "AppsListDataSummary"}
+	i_AppsListsData                                       = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "AppsListsData"}
+	i_AWSAccountId                                        = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "AWSAccountId"}
+	i_AWSAccountIdList                                    = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "AWSAccountIdList"}
+	iAwsEc2InstanceViolation                              = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "AwsEc2InstanceViolation"}
+	iAwsEc2NetworkInterfaceViolation                      = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "AwsEc2NetworkInterfaceViolation"}
+	i_AwsEc2NetworkInterfaceViolations                    = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "AwsEc2NetworkInterfaceViolations"}
+	i_AWSRegion                                           = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "AWSRegion"}
+	i_AWSRegionList                                       = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "AWSRegionList"}
+	iAwsVPCSecurityGroupViolation                         = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "AwsVPCSecurityGroupViolation"}
+	i_Base62Id                                            = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "Base62Id"}
+	i_BasicInteger                                        = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "BasicInteger"}
+	i_Boolean                                             = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "Boolean"}
+	i_BooleanObject                                       = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "BooleanObject"}
+	i_CIDR                                                = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "CIDR"}
+	iComplianceViolator                                   = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ComplianceViolator"}
+	i_ComplianceViolatorMetadata                          = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ComplianceViolatorMetadata"}
+	i_ComplianceViolators                                 = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ComplianceViolators"}
+	iCreateNetworkAclAction                               = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "CreateNetworkAclAction"}
+	iCreateNetworkAclEntriesAction                        = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "CreateNetworkAclEntriesAction"}
+	i_CustomerPolicyScopeId                               = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "CustomerPolicyScopeId"}
+	i_CustomerPolicyScopeIdList                           = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "CustomerPolicyScopeIdList"}
+	iCustomerPolicyScopeIdType                            = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "CustomerPolicyScopeIdType"}
+	i_CustomerPolicyScopeMap                              = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "CustomerPolicyScopeMap"}
+	iCustomerPolicyStatus                                 = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "CustomerPolicyStatus"}
+	iDeleteNetworkAclEntriesAction                        = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "DeleteNetworkAclEntriesAction"}
+	iDependentServiceName                                 = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "DependentServiceName"}
+	i_Description                                         = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "Description"}
+	iDestinationType                                      = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "DestinationType"}
+	i_DetailedInfo                                        = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "DetailedInfo"}
+	iDiscoveredResource                                   = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "DiscoveredResource"}
+	i_DiscoveredResourceList                              = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "DiscoveredResourceList"}
+	iDnsDuplicateRuleGroupViolation                       = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "DnsDuplicateRuleGroupViolation"}
+	iDnsRuleGroupLimitExceededViolation                   = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "DnsRuleGroupLimitExceededViolation"}
+	i_DnsRuleGroupPriorities                              = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "DnsRuleGroupPriorities"}
+	i_DnsRuleGroupPriority                                = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "DnsRuleGroupPriority"}
+	iDnsRuleGroupPriorityConflictViolation                = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "DnsRuleGroupPriorityConflictViolation"}
+	iEC2AssociateRouteTableAction                         = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "EC2AssociateRouteTableAction"}
+	iEC2CopyRouteTableAction                              = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "EC2CopyRouteTableAction"}
+	iEC2CreateRouteAction                                 = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "EC2CreateRouteAction"}
+	iEC2CreateRouteTableAction                            = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "EC2CreateRouteTableAction"}
+	iEC2DeleteRouteAction                                 = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "EC2DeleteRouteAction"}
+	iEC2ReplaceRouteAction                                = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "EC2ReplaceRouteAction"}
+	iEC2ReplaceRouteTableAssociationAction                = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "EC2ReplaceRouteTableAssociationAction"}
+	i_EntriesDescription                                  = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "EntriesDescription"}
+	i_EntriesWithConflicts                                = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "EntriesWithConflicts"}
+	iEntryDescription                                     = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "EntryDescription"}
+	iEntryType                                            = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "EntryType"}
+	iEntryViolation                                       = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "EntryViolation"}
+	iEntryViolationReason                                 = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "EntryViolationReason"}
+	i_EntryViolationReasons                               = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "EntryViolationReasons"}
+	i_EntryViolations                                     = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "EntryViolations"}
+	i_ErrorMessage                                        = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ErrorMessage"}
+	iEvaluationResult                                     = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "EvaluationResult"}
+	i_EvaluationResults                                   = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "EvaluationResults"}
+	iExpectedRoute                                        = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ExpectedRoute"}
+	i_ExpectedRoutes                                      = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ExpectedRoutes"}
+	iFailedItem                                           = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "FailedItem"}
+	i_FailedItemList                                      = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "FailedItemList"}
+	iFailedItemReason                                     = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "FailedItemReason"}
+	iFirewallDeploymentModel                              = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "FirewallDeploymentModel"}
+	i_FirewallPolicyId                                    = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "FirewallPolicyId"}
+	i_FirewallPolicyName                                  = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "FirewallPolicyName"}
+	iFirewallSubnetIsOutOfScopeViolation                  = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "FirewallSubnetIsOutOfScopeViolation"}
+	iFirewallSubnetMissingVPCEndpointViolation            = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "FirewallSubnetMissingVPCEndpointViolation"}
+	iFMSPolicyUpdateFirewallCreationConfigAction          = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "FMSPolicyUpdateFirewallCreationConfigAction"}
+	i_Identifier                                          = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "Identifier"}
+	i_IdentifierList                                      = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "IdentifierList"}
+	i_IntegerObject                                       = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "IntegerObject"}
+	i_IntegerObjectMinimum0                               = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "IntegerObjectMinimum0"}
+	iInternalErrorException                               = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "InternalErrorException"}
+	iInvalidInputException                                = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "InvalidInputException"}
+	iInvalidNetworkAclEntriesViolation                    = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "InvalidNetworkAclEntriesViolation"}
+	iInvalidOperationException                            = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "InvalidOperationException"}
+	iInvalidTypeException                                 = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "InvalidTypeException"}
+	i_IPPortNumber                                        = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "IPPortNumber"}
+	i_IPPortNumberInteger                                 = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "IPPortNumberInteger"}
+	i_IssueInfoMap                                        = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "IssueInfoMap"}
+	i_LengthBoundedNonEmptyString                         = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "LengthBoundedNonEmptyString"}
+	i_LengthBoundedString                                 = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "LengthBoundedString"}
+	i_LengthBoundedStringList                             = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "LengthBoundedStringList"}
+	iLimitExceededException                               = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "LimitExceededException"}
+	i_ListId                                              = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ListId"}
+	i_ManagedServiceData                                  = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ManagedServiceData"}
+	iMarketplaceSubscriptionOnboardingStatus              = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "MarketplaceSubscriptionOnboardingStatus"}
+	i_MemberAccounts                                      = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "MemberAccounts"}
+	i_Name                                                = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "Name"}
+	iNetworkAclCommonPolicy                               = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "NetworkAclCommonPolicy"}
+	i_NetworkAclEntries                                   = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "NetworkAclEntries"}
+	iNetworkAclEntry                                      = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "NetworkAclEntry"}
+	iNetworkAclEntrySet                                   = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "NetworkAclEntrySet"}
+	iNetworkAclIcmpTypeCode                               = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "NetworkAclIcmpTypeCode"}
+	iNetworkAclPortRange                                  = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "NetworkAclPortRange"}
+	iNetworkAclRuleAction                                 = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "NetworkAclRuleAction"}
+	i_NetworkFirewallAction                               = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "NetworkFirewallAction"}
+	i_NetworkFirewallActionList                           = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "NetworkFirewallActionList"}
+	iNetworkFirewallBlackHoleRouteDetectedViolation       = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "NetworkFirewallBlackHoleRouteDetectedViolation"}
+	iNetworkFirewallInternetTrafficNotInspectedViolation  = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "NetworkFirewallInternetTrafficNotInspectedViolation"}
+	iNetworkFirewallInvalidRouteConfigurationViolation    = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "NetworkFirewallInvalidRouteConfigurationViolation"}
+	iNetworkFirewallMissingExpectedRoutesViolation        = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "NetworkFirewallMissingExpectedRoutesViolation"}
+	iNetworkFirewallMissingExpectedRTViolation            = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "NetworkFirewallMissingExpectedRTViolation"}
+	iNetworkFirewallMissingFirewallViolation              = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "NetworkFirewallMissingFirewallViolation"}
+	iNetworkFirewallMissingSubnetViolation                = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "NetworkFirewallMissingSubnetViolation"}
+	iNetworkFirewallOverrideAction                        = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "NetworkFirewallOverrideAction"}
+	iNetworkFirewallPolicy                                = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "NetworkFirewallPolicy"}
+	iNetworkFirewallPolicyDescription                     = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "NetworkFirewallPolicyDescription"}
+	iNetworkFirewallPolicyModifiedViolation               = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "NetworkFirewallPolicyModifiedViolation"}
+	i_NetworkFirewallResourceName                         = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "NetworkFirewallResourceName"}
+	iNetworkFirewallStatefulRuleGroupOverride             = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "NetworkFirewallStatefulRuleGroupOverride"}
+	iNetworkFirewallUnexpectedFirewallRoutesViolation     = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "NetworkFirewallUnexpectedFirewallRoutesViolation"}
+	iNetworkFirewallUnexpectedGatewayRoutesViolation      = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "NetworkFirewallUnexpectedGatewayRoutesViolation"}
+	i_OrderedRemediationActions                           = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "OrderedRemediationActions"}
+	i_OrganizationalUnitId                                = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "OrganizationalUnitId"}
+	i_OrganizationalUnitIdList                            = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "OrganizationalUnitIdList"}
+	iOrganizationalUnitScope                              = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "OrganizationalUnitScope"}
+	iOrganizationStatus                                   = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "OrganizationStatus"}
+	i_PaginationMaxResults                                = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "PaginationMaxResults"}
+	i_PaginationToken                                     = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "PaginationToken"}
+	iPartialMatch                                         = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "PartialMatch"}
+	i_PartialMatches                                      = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "PartialMatches"}
+	iPolicy                                               = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "Policy"}
+	iPolicyComplianceDetail                               = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "PolicyComplianceDetail"}
+	iPolicyComplianceStatus                               = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "PolicyComplianceStatus"}
+	i_PolicyComplianceStatusList                          = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "PolicyComplianceStatusList"}
+	iPolicyComplianceStatusType                           = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "PolicyComplianceStatusType"}
+	i_PolicyId                                            = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "PolicyId"}
+	iPolicyOption                                         = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "PolicyOption"}
+	iPolicySummary                                        = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "PolicySummary"}
+	i_PolicySummaryList                                   = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "PolicySummaryList"}
+	iPolicyTypeScope                                      = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "PolicyTypeScope"}
+	i_PolicyUpdateToken                                   = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "PolicyUpdateToken"}
+	iPossibleRemediationAction                            = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "PossibleRemediationAction"}
+	i_PossibleRemediationActionList                       = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "PossibleRemediationActionList"}
+	iPossibleRemediationActions                           = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "PossibleRemediationActions"}
+	i_PreviousAppsList                                    = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "PreviousAppsList"}
+	i_PreviousListVersion                                 = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "PreviousListVersion"}
+	i_PreviousProtocolsList                               = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "PreviousProtocolsList"}
+	i_PriorityNumber                                      = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "PriorityNumber"}
+	i_ProtectionData                                      = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ProtectionData"}
+	i_Protocol                                            = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "Protocol"}
+	i_ProtocolsList                                       = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ProtocolsList"}
+	iProtocolsListData                                    = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ProtocolsListData"}
+	iProtocolsListDataSummary                             = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ProtocolsListDataSummary"}
+	i_ProtocolsListsData                                  = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ProtocolsListsData"}
+	i_ReferenceRule                                       = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ReferenceRule"}
+	iRegionScope                                          = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "RegionScope"}
+	iRemediationAction                                    = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "RemediationAction"}
+	i_RemediationActionDescription                        = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "RemediationActionDescription"}
+	iRemediationActionType                                = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "RemediationActionType"}
+	iRemediationActionWithOrder                           = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "RemediationActionWithOrder"}
+	iReplaceNetworkAclAssociationAction                   = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ReplaceNetworkAclAssociationAction"}
+	iResource                                             = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "Resource"}
+	i_ResourceArn                                         = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ResourceArn"}
+	i_ResourceArnList                                     = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ResourceArnList"}
+	i_ResourceCount                                       = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ResourceCount"}
+	i_ResourceDescription                                 = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ResourceDescription"}
+	i_ResourceId                                          = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ResourceId"}
+	i_ResourceIdList                                      = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ResourceIdList"}
+	i_ResourceList                                        = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ResourceList"}
+	i_ResourceName                                        = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ResourceName"}
+	iResourceNotFoundException                            = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ResourceNotFoundException"}
+	iResourceSet                                          = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ResourceSet"}
+	i_ResourceSetIds                                      = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ResourceSetIds"}
+	iResourceSetStatus                                    = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ResourceSetStatus"}
+	iResourceSetSummary                                   = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ResourceSetSummary"}
+	i_ResourceSetSummaryList                              = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ResourceSetSummaryList"}
+	iResourceTag                                          = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ResourceTag"}
+	i_ResourceTagKey                                      = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ResourceTagKey"}
+	iResourceTagLogicalOperator                           = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ResourceTagLogicalOperator"}
+	i_ResourceTags                                        = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ResourceTags"}
+	i_ResourceTagValue                                    = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ResourceTagValue"}
+	i_ResourceType                                        = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ResourceType"}
+	i_ResourceTypeList                                    = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ResourceTypeList"}
+	iResourceViolation                                    = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ResourceViolation"}
+	i_ResourceViolations                                  = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ResourceViolations"}
+	iRoute                                                = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "Route"}
+	iRouteHasOutOfScopeEndpointViolation                  = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "RouteHasOutOfScopeEndpointViolation"}
+	i_Routes                                              = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "Routes"}
+	iRuleOrder                                            = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "RuleOrder"}
+	iSecurityGroupRemediationAction                       = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "SecurityGroupRemediationAction"}
+	i_SecurityGroupRemediationActions                     = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "SecurityGroupRemediationActions"}
+	iSecurityGroupRuleDescription                         = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "SecurityGroupRuleDescription"}
+	iSecurityServicePolicyData                            = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "SecurityServicePolicyData"}
+	iSecurityServiceType                                  = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "SecurityServiceType"}
+	i_SecurityServiceTypeList                             = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "SecurityServiceTypeList"}
+	iStatefulEngineOptions                                = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "StatefulEngineOptions"}
+	iStatefulRuleGroup                                    = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "StatefulRuleGroup"}
+	i_StatefulRuleGroupList                               = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "StatefulRuleGroupList"}
+	iStatelessRuleGroup                                   = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "StatelessRuleGroup"}
+	i_StatelessRuleGroupList                              = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "StatelessRuleGroupList"}
+	i_StatelessRuleGroupPriority                          = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "StatelessRuleGroupPriority"}
+	iStreamExceptionPolicy                                = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "StreamExceptionPolicy"}
+	iTag                                                  = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "Tag"}
+	i_TagKey                                              = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "TagKey"}
+	i_TagKeyList                                          = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "TagKeyList"}
+	i_TagList                                             = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "TagList"}
+	i_TagValue                                            = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "TagValue"}
+	iTargetType                                           = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "TargetType"}
+	i_TargetViolationReason                               = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "TargetViolationReason"}
+	i_TargetViolationReasons                              = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "TargetViolationReasons"}
+	iThirdPartyFirewall                                   = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ThirdPartyFirewall"}
+	iThirdPartyFirewallAssociationStatus                  = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ThirdPartyFirewallAssociationStatus"}
+	i_ThirdPartyFirewallFirewallPolicies                  = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ThirdPartyFirewallFirewallPolicies"}
+	iThirdPartyFirewallFirewallPolicy                     = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ThirdPartyFirewallFirewallPolicy"}
+	iThirdPartyFirewallMissingExpectedRouteTableViolation = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ThirdPartyFirewallMissingExpectedRouteTableViolation"}
+	iThirdPartyFirewallMissingFirewallViolation           = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ThirdPartyFirewallMissingFirewallViolation"}
+	iThirdPartyFirewallMissingSubnetViolation             = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ThirdPartyFirewallMissingSubnetViolation"}
+	iThirdPartyFirewallPolicy                             = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ThirdPartyFirewallPolicy"}
+	i_TimeStamp                                           = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "TimeStamp"}
+	i_UpdateToken                                         = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "UpdateToken"}
+	iViolationDetail                                      = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ViolationDetail"}
+	iViolationReason                                      = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ViolationReason"}
+	i_ViolationTarget                                     = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ViolationTarget"}
+	iWebACLHasIncompatibleConfigurationViolation          = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "WebACLHasIncompatibleConfigurationViolation"}
+	iWebACLHasOutOfScopeResourcesViolation                = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "WebACLHasOutOfScopeResourcesViolation"}
+	iAssociateAdminAccountRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "AssociateAdminAccountRequest"}
+	iAssociateThirdPartyFirewallRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "AssociateThirdPartyFirewallRequest"}
+	iAssociateThirdPartyFirewallResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "AssociateThirdPartyFirewallResponse"}
+	iBatchAssociateResourceRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "BatchAssociateResourceRequest"}
+	iBatchAssociateResourceResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "BatchAssociateResourceResponse"}
+	iBatchDisassociateResourceRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "BatchDisassociateResourceRequest"}
+	iBatchDisassociateResourceResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "BatchDisassociateResourceResponse"}
+	iDeleteAppsListRequest                                = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "DeleteAppsListRequest"}
+	iDeleteNotificationChannelRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "DeleteNotificationChannelRequest"}
+	iDeletePolicyRequest                                  = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "DeletePolicyRequest"}
+	iDeleteProtocolsListRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "DeleteProtocolsListRequest"}
+	iDeleteResourceSetRequest                             = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "DeleteResourceSetRequest"}
+	iDisassociateAdminAccountRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "DisassociateAdminAccountRequest"}
+	iDisassociateThirdPartyFirewallRequest                = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "DisassociateThirdPartyFirewallRequest"}
+	iDisassociateThirdPartyFirewallResponse               = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "DisassociateThirdPartyFirewallResponse"}
+	iGetAdminAccountRequest                               = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "GetAdminAccountRequest"}
+	iGetAdminAccountResponse                              = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "GetAdminAccountResponse"}
+	iGetAdminScopeRequest                                 = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "GetAdminScopeRequest"}
+	iGetAdminScopeResponse                                = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "GetAdminScopeResponse"}
+	iGetAppsListRequest                                   = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "GetAppsListRequest"}
+	iGetAppsListResponse                                  = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "GetAppsListResponse"}
+	iGetComplianceDetailRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "GetComplianceDetailRequest"}
+	iGetComplianceDetailResponse                          = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "GetComplianceDetailResponse"}
+	iGetNotificationChannelRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "GetNotificationChannelRequest"}
+	iGetNotificationChannelResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "GetNotificationChannelResponse"}
+	iGetPolicyRequest                                     = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "GetPolicyRequest"}
+	iGetPolicyResponse                                    = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "GetPolicyResponse"}
+	iGetProtectionStatusRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "GetProtectionStatusRequest"}
+	iGetProtectionStatusResponse                          = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "GetProtectionStatusResponse"}
+	iGetProtocolsListRequest                              = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "GetProtocolsListRequest"}
+	iGetProtocolsListResponse                             = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "GetProtocolsListResponse"}
+	iGetResourceSetRequest                                = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "GetResourceSetRequest"}
+	iGetResourceSetResponse                               = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "GetResourceSetResponse"}
+	iGetThirdPartyFirewallAssociationStatusRequest        = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "GetThirdPartyFirewallAssociationStatusRequest"}
+	iGetThirdPartyFirewallAssociationStatusResponse       = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "GetThirdPartyFirewallAssociationStatusResponse"}
+	iGetViolationDetailsRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "GetViolationDetailsRequest"}
+	iGetViolationDetailsResponse                          = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "GetViolationDetailsResponse"}
+	iListAdminAccountsForOrganizationRequest              = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ListAdminAccountsForOrganizationRequest"}
+	iListAdminAccountsForOrganizationResponse             = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ListAdminAccountsForOrganizationResponse"}
+	iListAdminsManagingAccountRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ListAdminsManagingAccountRequest"}
+	iListAdminsManagingAccountResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ListAdminsManagingAccountResponse"}
+	iListAppsListsRequest                                 = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ListAppsListsRequest"}
+	iListAppsListsResponse                                = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ListAppsListsResponse"}
+	iListComplianceStatusRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ListComplianceStatusRequest"}
+	iListComplianceStatusResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ListComplianceStatusResponse"}
+	iListDiscoveredResourcesRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ListDiscoveredResourcesRequest"}
+	iListDiscoveredResourcesResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ListDiscoveredResourcesResponse"}
+	iListMemberAccountsRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ListMemberAccountsRequest"}
+	iListMemberAccountsResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ListMemberAccountsResponse"}
+	iListPoliciesRequest                                  = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ListPoliciesRequest"}
+	iListPoliciesResponse                                 = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ListPoliciesResponse"}
+	iListProtocolsListsRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ListProtocolsListsRequest"}
+	iListProtocolsListsResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ListProtocolsListsResponse"}
+	iListResourceSetResourcesRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ListResourceSetResourcesRequest"}
+	iListResourceSetResourcesResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ListResourceSetResourcesResponse"}
+	iListResourceSetsRequest                              = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ListResourceSetsRequest"}
+	iListResourceSetsResponse                             = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ListResourceSetsResponse"}
+	iListTagsForResourceRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse                          = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ListTagsForResourceResponse"}
+	iListThirdPartyFirewallFirewallPoliciesRequest        = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ListThirdPartyFirewallFirewallPoliciesRequest"}
+	iListThirdPartyFirewallFirewallPoliciesResponse       = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "ListThirdPartyFirewallFirewallPoliciesResponse"}
+	iPutAdminAccountRequest                               = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "PutAdminAccountRequest"}
+	iPutAppsListRequest                                   = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "PutAppsListRequest"}
+	iPutAppsListResponse                                  = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "PutAppsListResponse"}
+	iPutNotificationChannelRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "PutNotificationChannelRequest"}
+	iPutPolicyRequest                                     = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "PutPolicyRequest"}
+	iPutPolicyResponse                                    = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "PutPolicyResponse"}
+	iPutProtocolsListRequest                              = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "PutProtocolsListRequest"}
+	iPutProtocolsListResponse                             = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "PutProtocolsListResponse"}
+	iPutResourceSetRequest                                = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "PutResourceSetRequest"}
+	iPutResourceSetResponse                               = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "PutResourceSetResponse"}
+	iTagResourceRequest                                   = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "TagResourceRequest"}
+	iTagResourceResponse                                  = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "TagResourceResponse"}
+	iUntagResourceRequest                                 = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                                = smithy.ShapeID{Namespace: "com.amazonaws.fms", Name: "UntagResourceResponse"}
+	pUnit                                                 = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+
+var m_AccountIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AccountIdList_member}}
+var mAccountRoleStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sAccountRoleStatus_Ready, &sAccountRoleStatus_Creating, &sAccountRoleStatus_PendingDeletion, &sAccountRoleStatus_Deleting, &sAccountRoleStatus_Deleted}}
+var mAccountScope = smithy.SchemaMembers{List: []*smithy.Schema{&sAccountScope_Accounts, &sAccountScope_AllAccountsEnabled, &sAccountScope_ExcludeSpecifiedAccounts}}
+var mActionTarget = smithy.SchemaMembers{List: []*smithy.Schema{&sActionTarget_ResourceId, &sActionTarget_Description}}
+var mAdminAccountSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sAdminAccountSummary_AdminAccount, &sAdminAccountSummary_DefaultAdmin, &sAdminAccountSummary_Status}}
+var m_AdminAccountSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AdminAccountSummaryList_member}}
+var mAdminScope = smithy.SchemaMembers{List: []*smithy.Schema{&sAdminScope_AccountScope, &sAdminScope_OrganizationalUnitScope, &sAdminScope_RegionScope, &sAdminScope_PolicyTypeScope}}
+var mApp = smithy.SchemaMembers{List: []*smithy.Schema{&sApp_AppName, &sApp_Protocol, &sApp_Port}}
+var m_AppsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AppsList_member}}
+var mAppsListData = smithy.SchemaMembers{List: []*smithy.Schema{&sAppsListData_ListId, &sAppsListData_ListName, &sAppsListData_ListUpdateToken, &sAppsListData_CreateTime, &sAppsListData_LastUpdateTime, &sAppsListData_AppsList, &sAppsListData_PreviousAppsList}}
+var mAppsListDataSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sAppsListDataSummary_ListArn, &sAppsListDataSummary_ListId, &sAppsListDataSummary_ListName, &sAppsListDataSummary_AppsList}}
+var m_AppsListsData = smithy.SchemaMembers{List: []*smithy.Schema{&s_AppsListsData_member}}
+var m_AWSAccountIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AWSAccountIdList_member}}
+var mAwsEc2InstanceViolation = smithy.SchemaMembers{List: []*smithy.Schema{&sAwsEc2InstanceViolation_ViolationTarget, &sAwsEc2InstanceViolation_AwsEc2NetworkInterfaceViolations}}
+var mAwsEc2NetworkInterfaceViolation = smithy.SchemaMembers{List: []*smithy.Schema{&sAwsEc2NetworkInterfaceViolation_ViolationTarget, &sAwsEc2NetworkInterfaceViolation_ViolatingSecurityGroups}}
+var m_AwsEc2NetworkInterfaceViolations = smithy.SchemaMembers{List: []*smithy.Schema{&s_AwsEc2NetworkInterfaceViolations_member}}
+var m_AWSRegionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AWSRegionList_member}}
+var mAwsVPCSecurityGroupViolation = smithy.SchemaMembers{List: []*smithy.Schema{&sAwsVPCSecurityGroupViolation_ViolationTarget, &sAwsVPCSecurityGroupViolation_ViolationTargetDescription, &sAwsVPCSecurityGroupViolation_PartialMatches, &sAwsVPCSecurityGroupViolation_PossibleSecurityGroupRemediationActions}}
+var mComplianceViolator = smithy.SchemaMembers{List: []*smithy.Schema{&sComplianceViolator_ResourceId, &sComplianceViolator_ViolationReason, &sComplianceViolator_ResourceType, &sComplianceViolator_Metadata}}
+var m_ComplianceViolatorMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&s_ComplianceViolatorMetadata_key, &s_ComplianceViolatorMetadata_value}}
+var m_ComplianceViolators = smithy.SchemaMembers{List: []*smithy.Schema{&s_ComplianceViolators_member}}
+var mCreateNetworkAclAction = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateNetworkAclAction_Description, &sCreateNetworkAclAction_Vpc, &sCreateNetworkAclAction_FMSCanRemediate}}
+var mCreateNetworkAclEntriesAction = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateNetworkAclEntriesAction_Description, &sCreateNetworkAclEntriesAction_NetworkAclId, &sCreateNetworkAclEntriesAction_NetworkAclEntriesToBeCreated, &sCreateNetworkAclEntriesAction_FMSCanRemediate}}
+var m_CustomerPolicyScopeIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CustomerPolicyScopeIdList_member}}
+var mCustomerPolicyScopeIdType = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomerPolicyScopeIdType_ACCOUNT, &sCustomerPolicyScopeIdType_ORG_UNIT}}
+var m_CustomerPolicyScopeMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_CustomerPolicyScopeMap_key, &s_CustomerPolicyScopeMap_value}}
+var mCustomerPolicyStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomerPolicyStatus_ACTIVE, &sCustomerPolicyStatus_OUT_OF_ADMIN_SCOPE}}
+var mDeleteNetworkAclEntriesAction = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteNetworkAclEntriesAction_Description, &sDeleteNetworkAclEntriesAction_NetworkAclId, &sDeleteNetworkAclEntriesAction_NetworkAclEntriesToBeDeleted, &sDeleteNetworkAclEntriesAction_FMSCanRemediate}}
+var mDependentServiceName = smithy.SchemaMembers{List: []*smithy.Schema{&sDependentServiceName_AWSConfig, &sDependentServiceName_AWSWAF, &sDependentServiceName_AWSShieldAdvanced, &sDependentServiceName_AWSVirtualPrivateCloud}}
+var mDestinationType = smithy.SchemaMembers{List: []*smithy.Schema{&sDestinationType_IPV4, &sDestinationType_IPV6, &sDestinationType_PrefixList}}
+var mDiscoveredResource = smithy.SchemaMembers{List: []*smithy.Schema{&sDiscoveredResource_URI, &sDiscoveredResource_AccountId, &sDiscoveredResource_Type, &sDiscoveredResource_Name}}
+var m_DiscoveredResourceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DiscoveredResourceList_member}}
+var mDnsDuplicateRuleGroupViolation = smithy.SchemaMembers{List: []*smithy.Schema{&sDnsDuplicateRuleGroupViolation_ViolationTarget, &sDnsDuplicateRuleGroupViolation_ViolationTargetDescription}}
+var mDnsRuleGroupLimitExceededViolation = smithy.SchemaMembers{List: []*smithy.Schema{&sDnsRuleGroupLimitExceededViolation_ViolationTarget, &sDnsRuleGroupLimitExceededViolation_ViolationTargetDescription, &sDnsRuleGroupLimitExceededViolation_NumberOfRuleGroupsAlreadyAssociated}}
+var m_DnsRuleGroupPriorities = smithy.SchemaMembers{List: []*smithy.Schema{&s_DnsRuleGroupPriorities_member}}
+var mDnsRuleGroupPriorityConflictViolation = smithy.SchemaMembers{List: []*smithy.Schema{&sDnsRuleGroupPriorityConflictViolation_ViolationTarget, &sDnsRuleGroupPriorityConflictViolation_ViolationTargetDescription, &sDnsRuleGroupPriorityConflictViolation_ConflictingPriority, &sDnsRuleGroupPriorityConflictViolation_ConflictingPolicyId, &sDnsRuleGroupPriorityConflictViolation_UnavailablePriorities}}
+var mEC2AssociateRouteTableAction = smithy.SchemaMembers{List: []*smithy.Schema{&sEC2AssociateRouteTableAction_Description, &sEC2AssociateRouteTableAction_RouteTableId, &sEC2AssociateRouteTableAction_SubnetId, &sEC2AssociateRouteTableAction_GatewayId}}
+var mEC2CopyRouteTableAction = smithy.SchemaMembers{List: []*smithy.Schema{&sEC2CopyRouteTableAction_Description, &sEC2CopyRouteTableAction_VpcId, &sEC2CopyRouteTableAction_RouteTableId}}
+var mEC2CreateRouteAction = smithy.SchemaMembers{List: []*smithy.Schema{&sEC2CreateRouteAction_Description, &sEC2CreateRouteAction_DestinationCidrBlock, &sEC2CreateRouteAction_DestinationPrefixListId, &sEC2CreateRouteAction_DestinationIpv6CidrBlock, &sEC2CreateRouteAction_VpcEndpointId, &sEC2CreateRouteAction_GatewayId, &sEC2CreateRouteAction_RouteTableId}}
+var mEC2CreateRouteTableAction = smithy.SchemaMembers{List: []*smithy.Schema{&sEC2CreateRouteTableAction_Description, &sEC2CreateRouteTableAction_VpcId}}
+var mEC2DeleteRouteAction = smithy.SchemaMembers{List: []*smithy.Schema{&sEC2DeleteRouteAction_Description, &sEC2DeleteRouteAction_DestinationCidrBlock, &sEC2DeleteRouteAction_DestinationPrefixListId, &sEC2DeleteRouteAction_DestinationIpv6CidrBlock, &sEC2DeleteRouteAction_RouteTableId}}
+var mEC2ReplaceRouteAction = smithy.SchemaMembers{List: []*smithy.Schema{&sEC2ReplaceRouteAction_Description, &sEC2ReplaceRouteAction_DestinationCidrBlock, &sEC2ReplaceRouteAction_DestinationPrefixListId, &sEC2ReplaceRouteAction_DestinationIpv6CidrBlock, &sEC2ReplaceRouteAction_GatewayId, &sEC2ReplaceRouteAction_RouteTableId}}
+var mEC2ReplaceRouteTableAssociationAction = smithy.SchemaMembers{List: []*smithy.Schema{&sEC2ReplaceRouteTableAssociationAction_Description, &sEC2ReplaceRouteTableAssociationAction_AssociationId, &sEC2ReplaceRouteTableAssociationAction_RouteTableId}}
+var m_EntriesDescription = smithy.SchemaMembers{List: []*smithy.Schema{&s_EntriesDescription_member}}
+var m_EntriesWithConflicts = smithy.SchemaMembers{List: []*smithy.Schema{&s_EntriesWithConflicts_member}}
+var mEntryDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sEntryDescription_EntryDetail, &sEntryDescription_EntryRuleNumber, &sEntryDescription_EntryType}}
+var mEntryType = smithy.SchemaMembers{List: []*smithy.Schema{&sEntryType_FMSManagedFirstEntry, &sEntryType_FMSManagedLastEntry, &sEntryType_CustomEntry}}
+var mEntryViolation = smithy.SchemaMembers{List: []*smithy.Schema{&sEntryViolation_ExpectedEntry, &sEntryViolation_ExpectedEvaluationOrder, &sEntryViolation_ActualEvaluationOrder, &sEntryViolation_EntryAtExpectedEvaluationOrder, &sEntryViolation_EntriesWithConflicts, &sEntryViolation_EntryViolationReasons}}
+var mEntryViolationReason = smithy.SchemaMembers{List: []*smithy.Schema{&sEntryViolationReason_MissingExpectedEntry, &sEntryViolationReason_IncorrectEntryOrder, &sEntryViolationReason_EntryConflict}}
+var m_EntryViolationReasons = smithy.SchemaMembers{List: []*smithy.Schema{&s_EntryViolationReasons_member}}
+var m_EntryViolations = smithy.SchemaMembers{List: []*smithy.Schema{&s_EntryViolations_member}}
+var mEvaluationResult = smithy.SchemaMembers{List: []*smithy.Schema{&sEvaluationResult_ComplianceStatus, &sEvaluationResult_ViolatorCount, &sEvaluationResult_EvaluationLimitExceeded}}
+var m_EvaluationResults = smithy.SchemaMembers{List: []*smithy.Schema{&s_EvaluationResults_member}}
+var mExpectedRoute = smithy.SchemaMembers{List: []*smithy.Schema{&sExpectedRoute_IpV4Cidr, &sExpectedRoute_PrefixListId, &sExpectedRoute_IpV6Cidr, &sExpectedRoute_ContributingSubnets, &sExpectedRoute_AllowedTargets, &sExpectedRoute_RouteTableId}}
+var m_ExpectedRoutes = smithy.SchemaMembers{List: []*smithy.Schema{&s_ExpectedRoutes_member}}
+var mFailedItem = smithy.SchemaMembers{List: []*smithy.Schema{&sFailedItem_URI, &sFailedItem_Reason}}
+var m_FailedItemList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FailedItemList_member}}
+var mFailedItemReason = smithy.SchemaMembers{List: []*smithy.Schema{&sFailedItemReason_NotValidArn, &sFailedItemReason_NotValidPartition, &sFailedItemReason_NotValidRegion, &sFailedItemReason_NotValidService, &sFailedItemReason_NotValidResourceType, &sFailedItemReason_NotValidAccountId}}
+var mFirewallDeploymentModel = smithy.SchemaMembers{List: []*smithy.Schema{&sFirewallDeploymentModel_CENTRALIZED, &sFirewallDeploymentModel_DISTRIBUTED}}
+var mFirewallSubnetIsOutOfScopeViolation = smithy.SchemaMembers{List: []*smithy.Schema{&sFirewallSubnetIsOutOfScopeViolation_FirewallSubnetId, &sFirewallSubnetIsOutOfScopeViolation_VpcId, &sFirewallSubnetIsOutOfScopeViolation_SubnetAvailabilityZone, &sFirewallSubnetIsOutOfScopeViolation_SubnetAvailabilityZoneId, &sFirewallSubnetIsOutOfScopeViolation_VpcEndpointId}}
+var mFirewallSubnetMissingVPCEndpointViolation = smithy.SchemaMembers{List: []*smithy.Schema{&sFirewallSubnetMissingVPCEndpointViolation_FirewallSubnetId, &sFirewallSubnetMissingVPCEndpointViolation_VpcId, &sFirewallSubnetMissingVPCEndpointViolation_SubnetAvailabilityZone, &sFirewallSubnetMissingVPCEndpointViolation_SubnetAvailabilityZoneId}}
+var mFMSPolicyUpdateFirewallCreationConfigAction = smithy.SchemaMembers{List: []*smithy.Schema{&sFMSPolicyUpdateFirewallCreationConfigAction_Description, &sFMSPolicyUpdateFirewallCreationConfigAction_FirewallCreationConfig}}
+var m_IdentifierList = smithy.SchemaMembers{List: []*smithy.Schema{&s_IdentifierList_member}}
+var mInternalErrorException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalErrorException_Message}}
+var mInvalidInputException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidInputException_Message}}
+var mInvalidNetworkAclEntriesViolation = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidNetworkAclEntriesViolation_Vpc, &sInvalidNetworkAclEntriesViolation_Subnet, &sInvalidNetworkAclEntriesViolation_SubnetAvailabilityZone, &sInvalidNetworkAclEntriesViolation_CurrentAssociatedNetworkAcl, &sInvalidNetworkAclEntriesViolation_EntryViolations}}
+var mInvalidOperationException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidOperationException_Message}}
+var mInvalidTypeException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidTypeException_Message}}
+var m_IssueInfoMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_IssueInfoMap_key, &s_IssueInfoMap_value}}
+var m_LengthBoundedStringList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LengthBoundedStringList_member}}
+var mLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sLimitExceededException_Message}}
+var mMarketplaceSubscriptionOnboardingStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sMarketplaceSubscriptionOnboardingStatus_NO_SUBSCRIPTION, &sMarketplaceSubscriptionOnboardingStatus_NOT_COMPLETE, &sMarketplaceSubscriptionOnboardingStatus_COMPLETE}}
+var m_MemberAccounts = smithy.SchemaMembers{List: []*smithy.Schema{&s_MemberAccounts_member}}
+var mNetworkAclCommonPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkAclCommonPolicy_NetworkAclEntrySet}}
+var m_NetworkAclEntries = smithy.SchemaMembers{List: []*smithy.Schema{&s_NetworkAclEntries_member}}
+var mNetworkAclEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkAclEntry_IcmpTypeCode, &sNetworkAclEntry_Protocol, &sNetworkAclEntry_PortRange, &sNetworkAclEntry_CidrBlock, &sNetworkAclEntry_Ipv6CidrBlock, &sNetworkAclEntry_RuleAction, &sNetworkAclEntry_Egress}}
+var mNetworkAclEntrySet = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkAclEntrySet_FirstEntries, &sNetworkAclEntrySet_ForceRemediateForFirstEntries, &sNetworkAclEntrySet_LastEntries, &sNetworkAclEntrySet_ForceRemediateForLastEntries}}
+var mNetworkAclIcmpTypeCode = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkAclIcmpTypeCode_Code, &sNetworkAclIcmpTypeCode_Type}}
+var mNetworkAclPortRange = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkAclPortRange_From, &sNetworkAclPortRange_To}}
+var mNetworkAclRuleAction = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkAclRuleAction_ALLOW, &sNetworkAclRuleAction_DENY}}
+var m_NetworkFirewallActionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_NetworkFirewallActionList_member}}
+var mNetworkFirewallBlackHoleRouteDetectedViolation = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkFirewallBlackHoleRouteDetectedViolation_ViolationTarget, &sNetworkFirewallBlackHoleRouteDetectedViolation_RouteTableId, &sNetworkFirewallBlackHoleRouteDetectedViolation_VpcId, &sNetworkFirewallBlackHoleRouteDetectedViolation_ViolatingRoutes}}
+var mNetworkFirewallInternetTrafficNotInspectedViolation = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkFirewallInternetTrafficNotInspectedViolation_SubnetId, &sNetworkFirewallInternetTrafficNotInspectedViolation_SubnetAvailabilityZone, &sNetworkFirewallInternetTrafficNotInspectedViolation_RouteTableId, &sNetworkFirewallInternetTrafficNotInspectedViolation_ViolatingRoutes, &sNetworkFirewallInternetTrafficNotInspectedViolation_IsRouteTableUsedInDifferentAZ, &sNetworkFirewallInternetTrafficNotInspectedViolation_CurrentFirewallSubnetRouteTable, &sNetworkFirewallInternetTrafficNotInspectedViolation_ExpectedFirewallEndpoint, &sNetworkFirewallInternetTrafficNotInspectedViolation_FirewallSubnetId, &sNetworkFirewallInternetTrafficNotInspectedViolation_ExpectedFirewallSubnetRoutes, &sNetworkFirewallInternetTrafficNotInspectedViolation_ActualFirewallSubnetRoutes, &sNetworkFirewallInternetTrafficNotInspectedViolation_InternetGatewayId, &sNetworkFirewallInternetTrafficNotInspectedViolation_CurrentInternetGatewayRouteTable, &sNetworkFirewallInternetTrafficNotInspectedViolation_ExpectedInternetGatewayRoutes, &sNetworkFirewallInternetTrafficNotInspectedViolation_ActualInternetGatewayRoutes, &sNetworkFirewallInternetTrafficNotInspectedViolation_VpcId}, Seed: 40, Slots: []uint16{
+	0, 15, 0, 0, 8, 0, 0, 0, 3, 0, 12, 10, 0, 0, 0, 14, 9, 6, 0, 5, 0, 2, 1, 0,
+	13, 7, 11, 0, 0, 4, 0, 0,
+}}
+var mNetworkFirewallInvalidRouteConfigurationViolation = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkFirewallInvalidRouteConfigurationViolation_AffectedSubnets, &sNetworkFirewallInvalidRouteConfigurationViolation_RouteTableId, &sNetworkFirewallInvalidRouteConfigurationViolation_IsRouteTableUsedInDifferentAZ, &sNetworkFirewallInvalidRouteConfigurationViolation_ViolatingRoute, &sNetworkFirewallInvalidRouteConfigurationViolation_CurrentFirewallSubnetRouteTable, &sNetworkFirewallInvalidRouteConfigurationViolation_ExpectedFirewallEndpoint, &sNetworkFirewallInvalidRouteConfigurationViolation_ActualFirewallEndpoint, &sNetworkFirewallInvalidRouteConfigurationViolation_ExpectedFirewallSubnetId, &sNetworkFirewallInvalidRouteConfigurationViolation_ActualFirewallSubnetId, &sNetworkFirewallInvalidRouteConfigurationViolation_ExpectedFirewallSubnetRoutes, &sNetworkFirewallInvalidRouteConfigurationViolation_ActualFirewallSubnetRoutes, &sNetworkFirewallInvalidRouteConfigurationViolation_InternetGatewayId, &sNetworkFirewallInvalidRouteConfigurationViolation_CurrentInternetGatewayRouteTable, &sNetworkFirewallInvalidRouteConfigurationViolation_ExpectedInternetGatewayRoutes, &sNetworkFirewallInvalidRouteConfigurationViolation_ActualInternetGatewayRoutes, &sNetworkFirewallInvalidRouteConfigurationViolation_VpcId}, Seed: 123, Slots: []uint16{
+	0, 0, 0, 3, 7, 0, 15, 1, 13, 0, 0, 9, 14, 0, 10, 0, 2, 5, 0, 0, 11, 16, 12, 0,
+	0, 4, 0, 8, 0, 0, 6, 0,
+}}
+var mNetworkFirewallMissingExpectedRoutesViolation = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkFirewallMissingExpectedRoutesViolation_ViolationTarget, &sNetworkFirewallMissingExpectedRoutesViolation_ExpectedRoutes, &sNetworkFirewallMissingExpectedRoutesViolation_VpcId}}
+var mNetworkFirewallMissingExpectedRTViolation = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkFirewallMissingExpectedRTViolation_ViolationTarget, &sNetworkFirewallMissingExpectedRTViolation_VPC, &sNetworkFirewallMissingExpectedRTViolation_AvailabilityZone, &sNetworkFirewallMissingExpectedRTViolation_CurrentRouteTable, &sNetworkFirewallMissingExpectedRTViolation_ExpectedRouteTable}}
+var mNetworkFirewallMissingFirewallViolation = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkFirewallMissingFirewallViolation_ViolationTarget, &sNetworkFirewallMissingFirewallViolation_VPC, &sNetworkFirewallMissingFirewallViolation_AvailabilityZone, &sNetworkFirewallMissingFirewallViolation_TargetViolationReason}}
+var mNetworkFirewallMissingSubnetViolation = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkFirewallMissingSubnetViolation_ViolationTarget, &sNetworkFirewallMissingSubnetViolation_VPC, &sNetworkFirewallMissingSubnetViolation_AvailabilityZone, &sNetworkFirewallMissingSubnetViolation_TargetViolationReason}}
+var mNetworkFirewallOverrideAction = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkFirewallOverrideAction_DROP_TO_ALERT}}
+var mNetworkFirewallPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkFirewallPolicy_FirewallDeploymentModel}}
+var mNetworkFirewallPolicyDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkFirewallPolicyDescription_StatelessRuleGroups, &sNetworkFirewallPolicyDescription_StatelessDefaultActions, &sNetworkFirewallPolicyDescription_StatelessFragmentDefaultActions, &sNetworkFirewallPolicyDescription_StatelessCustomActions, &sNetworkFirewallPolicyDescription_StatefulRuleGroups, &sNetworkFirewallPolicyDescription_StatefulDefaultActions, &sNetworkFirewallPolicyDescription_StatefulEngineOptions}}
+var mNetworkFirewallPolicyModifiedViolation = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkFirewallPolicyModifiedViolation_ViolationTarget, &sNetworkFirewallPolicyModifiedViolation_CurrentPolicyDescription, &sNetworkFirewallPolicyModifiedViolation_ExpectedPolicyDescription}}
+var mNetworkFirewallStatefulRuleGroupOverride = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkFirewallStatefulRuleGroupOverride_Action}}
+var mNetworkFirewallUnexpectedFirewallRoutesViolation = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkFirewallUnexpectedFirewallRoutesViolation_FirewallSubnetId, &sNetworkFirewallUnexpectedFirewallRoutesViolation_ViolatingRoutes, &sNetworkFirewallUnexpectedFirewallRoutesViolation_RouteTableId, &sNetworkFirewallUnexpectedFirewallRoutesViolation_FirewallEndpoint, &sNetworkFirewallUnexpectedFirewallRoutesViolation_VpcId}}
+var mNetworkFirewallUnexpectedGatewayRoutesViolation = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkFirewallUnexpectedGatewayRoutesViolation_GatewayId, &sNetworkFirewallUnexpectedGatewayRoutesViolation_ViolatingRoutes, &sNetworkFirewallUnexpectedGatewayRoutesViolation_RouteTableId, &sNetworkFirewallUnexpectedGatewayRoutesViolation_VpcId}}
+var m_OrderedRemediationActions = smithy.SchemaMembers{List: []*smithy.Schema{&s_OrderedRemediationActions_member}}
+var m_OrganizationalUnitIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OrganizationalUnitIdList_member}}
+var mOrganizationalUnitScope = smithy.SchemaMembers{List: []*smithy.Schema{&sOrganizationalUnitScope_OrganizationalUnits, &sOrganizationalUnitScope_AllOrganizationalUnitsEnabled, &sOrganizationalUnitScope_ExcludeSpecifiedOrganizationalUnits}}
+var mOrganizationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sOrganizationStatus_Onboarding, &sOrganizationStatus_OnboardingComplete, &sOrganizationStatus_Offboarding, &sOrganizationStatus_OffboardingComplete}}
+var mPartialMatch = smithy.SchemaMembers{List: []*smithy.Schema{&sPartialMatch_Reference, &sPartialMatch_TargetViolationReasons}}
+var m_PartialMatches = smithy.SchemaMembers{List: []*smithy.Schema{&s_PartialMatches_member}}
+var mPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sPolicy_PolicyId, &sPolicy_PolicyName, &sPolicy_PolicyUpdateToken, &sPolicy_SecurityServicePolicyData, &sPolicy_ResourceType, &sPolicy_ResourceTypeList, &sPolicy_ResourceTags, &sPolicy_ExcludeResourceTags, &sPolicy_RemediationEnabled, &sPolicy_DeleteUnusedFMManagedResources, &sPolicy_IncludeMap, &sPolicy_ExcludeMap, &sPolicy_ResourceSetIds, &sPolicy_PolicyDescription, &sPolicy_PolicyStatus, &sPolicy_ResourceTagLogicalOperator}, Seed: 132, Slots: []uint16{
+	0, 0, 0, 13, 1, 12, 7, 0, 16, 8, 11, 6, 10, 0, 14, 0, 0, 3, 0, 0, 0, 5, 0, 0,
+	9, 0, 2, 4, 0, 0, 15, 0,
+}}
+var mPolicyComplianceDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sPolicyComplianceDetail_PolicyOwner, &sPolicyComplianceDetail_PolicyId, &sPolicyComplianceDetail_MemberAccount, &sPolicyComplianceDetail_Violators, &sPolicyComplianceDetail_EvaluationLimitExceeded, &sPolicyComplianceDetail_ExpiredAt, &sPolicyComplianceDetail_IssueInfoMap}}
+var mPolicyComplianceStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sPolicyComplianceStatus_PolicyOwner, &sPolicyComplianceStatus_PolicyId, &sPolicyComplianceStatus_PolicyName, &sPolicyComplianceStatus_MemberAccount, &sPolicyComplianceStatus_EvaluationResults, &sPolicyComplianceStatus_LastUpdated, &sPolicyComplianceStatus_IssueInfoMap}}
+var m_PolicyComplianceStatusList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PolicyComplianceStatusList_member}}
+var mPolicyComplianceStatusType = smithy.SchemaMembers{List: []*smithy.Schema{&sPolicyComplianceStatusType_Compliant, &sPolicyComplianceStatusType_NonCompliant}}
+var mPolicyOption = smithy.SchemaMembers{List: []*smithy.Schema{&sPolicyOption_NetworkFirewallPolicy, &sPolicyOption_ThirdPartyFirewallPolicy, &sPolicyOption_NetworkAclCommonPolicy}}
+var mPolicySummary = smithy.SchemaMembers{List: []*smithy.Schema{&sPolicySummary_PolicyArn, &sPolicySummary_PolicyId, &sPolicySummary_PolicyName, &sPolicySummary_ResourceType, &sPolicySummary_SecurityServiceType, &sPolicySummary_RemediationEnabled, &sPolicySummary_DeleteUnusedFMManagedResources, &sPolicySummary_PolicyStatus}}
+var m_PolicySummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PolicySummaryList_member}}
+var mPolicyTypeScope = smithy.SchemaMembers{List: []*smithy.Schema{&sPolicyTypeScope_PolicyTypes, &sPolicyTypeScope_AllPolicyTypesEnabled}}
+var mPossibleRemediationAction = smithy.SchemaMembers{List: []*smithy.Schema{&sPossibleRemediationAction_Description, &sPossibleRemediationAction_OrderedRemediationActions, &sPossibleRemediationAction_IsDefaultAction}}
+var m_PossibleRemediationActionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PossibleRemediationActionList_member}}
+var mPossibleRemediationActions = smithy.SchemaMembers{List: []*smithy.Schema{&sPossibleRemediationActions_Description, &sPossibleRemediationActions_Actions}}
+var m_PreviousAppsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PreviousAppsList_key, &s_PreviousAppsList_value}}
+var m_PreviousProtocolsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PreviousProtocolsList_key, &s_PreviousProtocolsList_value}}
+var m_ProtocolsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ProtocolsList_member}}
+var mProtocolsListData = smithy.SchemaMembers{List: []*smithy.Schema{&sProtocolsListData_ListId, &sProtocolsListData_ListName, &sProtocolsListData_ListUpdateToken, &sProtocolsListData_CreateTime, &sProtocolsListData_LastUpdateTime, &sProtocolsListData_ProtocolsList, &sProtocolsListData_PreviousProtocolsList}}
+var mProtocolsListDataSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sProtocolsListDataSummary_ListArn, &sProtocolsListDataSummary_ListId, &sProtocolsListDataSummary_ListName, &sProtocolsListDataSummary_ProtocolsList}}
+var m_ProtocolsListsData = smithy.SchemaMembers{List: []*smithy.Schema{&s_ProtocolsListsData_member}}
+var mRegionScope = smithy.SchemaMembers{List: []*smithy.Schema{&sRegionScope_Regions, &sRegionScope_AllRegionsEnabled}}
+var mRemediationAction = smithy.SchemaMembers{List: []*smithy.Schema{&sRemediationAction_Description, &sRemediationAction_EC2CreateRouteAction, &sRemediationAction_EC2ReplaceRouteAction, &sRemediationAction_EC2DeleteRouteAction, &sRemediationAction_EC2CopyRouteTableAction, &sRemediationAction_EC2ReplaceRouteTableAssociationAction, &sRemediationAction_EC2AssociateRouteTableAction, &sRemediationAction_EC2CreateRouteTableAction, &sRemediationAction_FMSPolicyUpdateFirewallCreationConfigAction, &sRemediationAction_CreateNetworkAclAction, &sRemediationAction_ReplaceNetworkAclAssociationAction, &sRemediationAction_CreateNetworkAclEntriesAction, &sRemediationAction_DeleteNetworkAclEntriesAction}, Seed: 9, Slots: []uint16{
+	12, 0, 0, 0, 6, 1, 9, 5, 8, 0, 3, 0, 0, 0, 0, 7, 0, 0, 4, 0, 13, 10, 2, 0,
+	0, 11, 0, 0, 0, 0, 0, 0,
+}}
+var mRemediationActionType = smithy.SchemaMembers{List: []*smithy.Schema{&sRemediationActionType_Remove, &sRemediationActionType_Modify}}
+var mRemediationActionWithOrder = smithy.SchemaMembers{List: []*smithy.Schema{&sRemediationActionWithOrder_RemediationAction, &sRemediationActionWithOrder_Order}}
+var mReplaceNetworkAclAssociationAction = smithy.SchemaMembers{List: []*smithy.Schema{&sReplaceNetworkAclAssociationAction_Description, &sReplaceNetworkAclAssociationAction_AssociationId, &sReplaceNetworkAclAssociationAction_NetworkAclId, &sReplaceNetworkAclAssociationAction_FMSCanRemediate}}
+var mResource = smithy.SchemaMembers{List: []*smithy.Schema{&sResource_URI, &sResource_AccountId}}
+var m_ResourceArnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceArnList_member}}
+var m_ResourceIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceIdList_member}}
+var m_ResourceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceList_member}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message}}
+var mResourceSet = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceSet_Id, &sResourceSet_Name, &sResourceSet_Description, &sResourceSet_UpdateToken, &sResourceSet_ResourceTypeList, &sResourceSet_LastUpdateTime, &sResourceSet_ResourceSetStatus}}
+var m_ResourceSetIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceSetIds_member}}
+var mResourceSetStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceSetStatus_ACTIVE, &sResourceSetStatus_OUT_OF_ADMIN_SCOPE}}
+var mResourceSetSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceSetSummary_Id, &sResourceSetSummary_Name, &sResourceSetSummary_Description, &sResourceSetSummary_LastUpdateTime, &sResourceSetSummary_ResourceSetStatus}}
+var m_ResourceSetSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceSetSummaryList_member}}
+var mResourceTag = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceTag_Key, &sResourceTag_Value}}
+var mResourceTagLogicalOperator = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceTagLogicalOperator_AND, &sResourceTagLogicalOperator_OR}}
+var m_ResourceTags = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceTags_member}}
+var m_ResourceTypeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceTypeList_member}}
+var mResourceViolation = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceViolation_AwsVPCSecurityGroupViolation, &sResourceViolation_AwsEc2NetworkInterfaceViolation, &sResourceViolation_AwsEc2InstanceViolation, &sResourceViolation_NetworkFirewallMissingFirewallViolation, &sResourceViolation_NetworkFirewallMissingSubnetViolation, &sResourceViolation_NetworkFirewallMissingExpectedRTViolation, &sResourceViolation_NetworkFirewallPolicyModifiedViolation, &sResourceViolation_NetworkFirewallInternetTrafficNotInspectedViolation, &sResourceViolation_NetworkFirewallInvalidRouteConfigurationViolation, &sResourceViolation_NetworkFirewallBlackHoleRouteDetectedViolation, &sResourceViolation_NetworkFirewallUnexpectedFirewallRoutesViolation, &sResourceViolation_NetworkFirewallUnexpectedGatewayRoutesViolation, &sResourceViolation_NetworkFirewallMissingExpectedRoutesViolation, &sResourceViolation_DnsRuleGroupPriorityConflictViolation, &sResourceViolation_DnsDuplicateRuleGroupViolation, &sResourceViolation_DnsRuleGroupLimitExceededViolation, &sResourceViolation_FirewallSubnetIsOutOfScopeViolation, &sResourceViolation_RouteHasOutOfScopeEndpointViolation, &sResourceViolation_ThirdPartyFirewallMissingFirewallViolation, &sResourceViolation_ThirdPartyFirewallMissingSubnetViolation, &sResourceViolation_ThirdPartyFirewallMissingExpectedRouteTableViolation, &sResourceViolation_FirewallSubnetMissingVPCEndpointViolation, &sResourceViolation_InvalidNetworkAclEntriesViolation, &sResourceViolation_PossibleRemediationActions, &sResourceViolation_WebACLHasIncompatibleConfigurationViolation, &sResourceViolation_WebACLHasOutOfScopeResourcesViolation}, Seed: 374, Slots: []uint16{
+	3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 14, 0, 20, 24, 0, 0, 0, 13, 0, 0, 0,
+	1, 21, 25, 18, 9, 0, 7, 0, 22, 0, 0, 23, 2, 26, 5, 0, 16, 0, 0, 0, 11, 0, 0, 15,
+	0, 0, 0, 19, 0, 0, 0, 0, 10, 12, 4, 0, 0, 0, 6, 17,
+}}
+var m_ResourceViolations = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceViolations_member}}
+var mRoute = smithy.SchemaMembers{List: []*smithy.Schema{&sRoute_DestinationType, &sRoute_TargetType, &sRoute_Destination, &sRoute_Target}}
+var mRouteHasOutOfScopeEndpointViolation = smithy.SchemaMembers{List: []*smithy.Schema{&sRouteHasOutOfScopeEndpointViolation_SubnetId, &sRouteHasOutOfScopeEndpointViolation_VpcId, &sRouteHasOutOfScopeEndpointViolation_RouteTableId, &sRouteHasOutOfScopeEndpointViolation_ViolatingRoutes, &sRouteHasOutOfScopeEndpointViolation_SubnetAvailabilityZone, &sRouteHasOutOfScopeEndpointViolation_SubnetAvailabilityZoneId, &sRouteHasOutOfScopeEndpointViolation_CurrentFirewallSubnetRouteTable, &sRouteHasOutOfScopeEndpointViolation_FirewallSubnetId, &sRouteHasOutOfScopeEndpointViolation_FirewallSubnetRoutes, &sRouteHasOutOfScopeEndpointViolation_InternetGatewayId, &sRouteHasOutOfScopeEndpointViolation_CurrentInternetGatewayRouteTable, &sRouteHasOutOfScopeEndpointViolation_InternetGatewayRoutes}, Seed: 15, Slots: []uint16{
+	0, 0, 0, 8, 0, 11, 4, 0, 0, 0, 0, 12, 1, 0, 3, 0, 9, 2, 6, 0, 0, 0, 0, 0,
+	10, 5, 0, 0, 0, 0, 7, 0,
+}}
+var m_Routes = smithy.SchemaMembers{List: []*smithy.Schema{&s_Routes_member}}
+var mRuleOrder = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleOrder_STRICT_ORDER, &sRuleOrder_DEFAULT_ACTION_ORDER}}
+var mSecurityGroupRemediationAction = smithy.SchemaMembers{List: []*smithy.Schema{&sSecurityGroupRemediationAction_RemediationActionType, &sSecurityGroupRemediationAction_Description, &sSecurityGroupRemediationAction_RemediationResult, &sSecurityGroupRemediationAction_IsDefaultAction}}
+var m_SecurityGroupRemediationActions = smithy.SchemaMembers{List: []*smithy.Schema{&s_SecurityGroupRemediationActions_member}}
+var mSecurityGroupRuleDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sSecurityGroupRuleDescription_IPV4Range, &sSecurityGroupRuleDescription_IPV6Range, &sSecurityGroupRuleDescription_PrefixListId, &sSecurityGroupRuleDescription_Protocol, &sSecurityGroupRuleDescription_FromPort, &sSecurityGroupRuleDescription_ToPort}}
+var mSecurityServicePolicyData = smithy.SchemaMembers{List: []*smithy.Schema{&sSecurityServicePolicyData_Type, &sSecurityServicePolicyData_ManagedServiceData, &sSecurityServicePolicyData_PolicyOption}}
+var mSecurityServiceType = smithy.SchemaMembers{List: []*smithy.Schema{&sSecurityServiceType_WAF, &sSecurityServiceType_WAFV2, &sSecurityServiceType_SHIELD_ADVANCED, &sSecurityServiceType_SECURITY_GROUPS_COMMON, &sSecurityServiceType_SECURITY_GROUPS_CONTENT_AUDIT, &sSecurityServiceType_SECURITY_GROUPS_USAGE_AUDIT, &sSecurityServiceType_NETWORK_FIREWALL, &sSecurityServiceType_DNS_FIREWALL, &sSecurityServiceType_THIRD_PARTY_FIREWALL, &sSecurityServiceType_IMPORT_NETWORK_FIREWALL, &sSecurityServiceType_NETWORK_ACL_COMMON}, Seed: 8, Slots: []uint16{
+	0, 4, 7, 0, 9, 0, 0, 0, 0, 0, 1, 0, 3, 10, 0, 6, 11, 0, 0, 0, 0, 0, 0, 0,
+	0, 5, 0, 2, 0, 0, 0, 8,
+}}
+var m_SecurityServiceTypeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SecurityServiceTypeList_member}}
+var mStatefulEngineOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sStatefulEngineOptions_RuleOrder, &sStatefulEngineOptions_StreamExceptionPolicy}}
+var mStatefulRuleGroup = smithy.SchemaMembers{List: []*smithy.Schema{&sStatefulRuleGroup_RuleGroupName, &sStatefulRuleGroup_ResourceId, &sStatefulRuleGroup_Priority, &sStatefulRuleGroup_Override}}
+var m_StatefulRuleGroupList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StatefulRuleGroupList_member}}
+var mStatelessRuleGroup = smithy.SchemaMembers{List: []*smithy.Schema{&sStatelessRuleGroup_RuleGroupName, &sStatelessRuleGroup_ResourceId, &sStatelessRuleGroup_Priority}}
+var m_StatelessRuleGroupList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StatelessRuleGroupList_member}}
+var mStreamExceptionPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sStreamExceptionPolicy_DROP, &sStreamExceptionPolicy_CONTINUE, &sStreamExceptionPolicy_REJECT, &sStreamExceptionPolicy_FMS_IGNORE}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var mTargetType = smithy.SchemaMembers{List: []*smithy.Schema{&sTargetType_Gateway, &sTargetType_CarrierGateway, &sTargetType_Instance, &sTargetType_LocalGateway, &sTargetType_NatGateway, &sTargetType_NetworkInterface, &sTargetType_VPCEndpoint, &sTargetType_VPCPeeringConnection, &sTargetType_EgressOnlyInternetGateway, &sTargetType_TransitGateway}, Seed: 9, Slots: []uint16{
+	0, 7, 0, 0, 0, 6, 5, 0, 9, 0, 0, 0, 0, 3, 1, 0, 0, 0, 0, 0, 10, 0, 0, 0,
+	0, 0, 0, 2, 0, 0, 4, 8,
+}}
+var m_TargetViolationReasons = smithy.SchemaMembers{List: []*smithy.Schema{&s_TargetViolationReasons_member}}
+var mThirdPartyFirewall = smithy.SchemaMembers{List: []*smithy.Schema{&sThirdPartyFirewall_PALO_ALTO_NETWORKS_CLOUD_NGFW, &sThirdPartyFirewall_FORTIGATE_CLOUD_NATIVE_FIREWALL}}
+var mThirdPartyFirewallAssociationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sThirdPartyFirewallAssociationStatus_ONBOARDING, &sThirdPartyFirewallAssociationStatus_ONBOARD_COMPLETE, &sThirdPartyFirewallAssociationStatus_OFFBOARDING, &sThirdPartyFirewallAssociationStatus_OFFBOARD_COMPLETE, &sThirdPartyFirewallAssociationStatus_NOT_EXIST}}
+var m_ThirdPartyFirewallFirewallPolicies = smithy.SchemaMembers{List: []*smithy.Schema{&s_ThirdPartyFirewallFirewallPolicies_member}}
+var mThirdPartyFirewallFirewallPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sThirdPartyFirewallFirewallPolicy_FirewallPolicyId, &sThirdPartyFirewallFirewallPolicy_FirewallPolicyName}}
+var mThirdPartyFirewallMissingExpectedRouteTableViolation = smithy.SchemaMembers{List: []*smithy.Schema{&sThirdPartyFirewallMissingExpectedRouteTableViolation_ViolationTarget, &sThirdPartyFirewallMissingExpectedRouteTableViolation_VPC, &sThirdPartyFirewallMissingExpectedRouteTableViolation_AvailabilityZone, &sThirdPartyFirewallMissingExpectedRouteTableViolation_CurrentRouteTable, &sThirdPartyFirewallMissingExpectedRouteTableViolation_ExpectedRouteTable}}
+var mThirdPartyFirewallMissingFirewallViolation = smithy.SchemaMembers{List: []*smithy.Schema{&sThirdPartyFirewallMissingFirewallViolation_ViolationTarget, &sThirdPartyFirewallMissingFirewallViolation_VPC, &sThirdPartyFirewallMissingFirewallViolation_AvailabilityZone, &sThirdPartyFirewallMissingFirewallViolation_TargetViolationReason}}
+var mThirdPartyFirewallMissingSubnetViolation = smithy.SchemaMembers{List: []*smithy.Schema{&sThirdPartyFirewallMissingSubnetViolation_ViolationTarget, &sThirdPartyFirewallMissingSubnetViolation_VPC, &sThirdPartyFirewallMissingSubnetViolation_AvailabilityZone, &sThirdPartyFirewallMissingSubnetViolation_TargetViolationReason}}
+var mThirdPartyFirewallPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sThirdPartyFirewallPolicy_FirewallDeploymentModel}}
+var mViolationDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sViolationDetail_PolicyId, &sViolationDetail_MemberAccount, &sViolationDetail_ResourceId, &sViolationDetail_ResourceType, &sViolationDetail_ResourceViolations, &sViolationDetail_ResourceTags, &sViolationDetail_ResourceDescription}}
+var mViolationReason = smithy.SchemaMembers{List: []*smithy.Schema{&sViolationReason_WebAclMissingRuleGroup, &sViolationReason_ResourceMissingWebAcl, &sViolationReason_ResourceIncorrectWebAcl, &sViolationReason_ResourceMissingShieldProtection, &sViolationReason_ResourceMissingWebaclOrShieldProtection, &sViolationReason_ResourceMissingSecurityGroup, &sViolationReason_ResourceViolatesAuditSecurityGroup, &sViolationReason_SecurityGroupUnused, &sViolationReason_SecurityGroupRedundant, &sViolationReason_FMSCreatedSecurityGroupEdited, &sViolationReason_MissingFirewall, &sViolationReason_MissingFirewallSubnetInAZ, &sViolationReason_MissingExpectedRouteTable, &sViolationReason_NetworkFirewallPolicyModified, &sViolationReason_FirewallSubnetIsOutOfScope, &sViolationReason_InternetGatewayMissingExpectedRoute, &sViolationReason_FirewallSubnetMissingExpectedRoute, &sViolationReason_UnexpectedFirewallRoutes, &sViolationReason_UnexpectedTargetGatewayRoutes, &sViolationReason_TrafficInspectionCrossesAZBoundary, &sViolationReason_InvalidRouteConfiguration, &sViolationReason_MissingTargetGateway, &sViolationReason_InternetTrafficNotInspected, &sViolationReason_BlackHoleRouteDetected, &sViolationReason_BlackHoleRouteDetectedInFirewallSubnet, &sViolationReason_ResourceMissingDnsFirewall, &sViolationReason_RouteHasOutOfScopeEndpoint, &sViolationReason_FirewallSubnetMissingVPCEndpoint, &sViolationReason_InvalidNetworkAclEntry, &sViolationReason_WebACLConfigurationOrScopeOfUse}, Seed: 1459, Slots: []uint16{
+	0, 18, 0, 0, 26, 0, 8, 0, 0, 0, 11, 15, 0, 0, 22, 0, 0, 0, 0, 0, 27, 0, 6, 13,
+	14, 0, 16, 0, 10, 23, 0, 0, 2, 17, 0, 0, 9, 0, 21, 4, 30, 0, 7, 0, 25, 28, 0, 0,
+	1, 20, 5, 0, 0, 0, 0, 19, 3, 0, 24, 0, 29, 0, 12, 0,
+}}
+var mWebACLHasIncompatibleConfigurationViolation = smithy.SchemaMembers{List: []*smithy.Schema{&sWebACLHasIncompatibleConfigurationViolation_WebACLArn, &sWebACLHasIncompatibleConfigurationViolation_Description}}
+var mWebACLHasOutOfScopeResourcesViolation = smithy.SchemaMembers{List: []*smithy.Schema{&sWebACLHasOutOfScopeResourcesViolation_WebACLArn, &sWebACLHasOutOfScopeResourcesViolation_OutOfScopeResourceList}}
+var mAssociateAdminAccountRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateAdminAccountRequest_AdminAccount}}
+var mAssociateThirdPartyFirewallRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateThirdPartyFirewallRequest_ThirdPartyFirewall}}
+var mAssociateThirdPartyFirewallResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateThirdPartyFirewallResponse_ThirdPartyFirewallStatus}}
+var mBatchAssociateResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchAssociateResourceRequest_ResourceSetIdentifier, &sBatchAssociateResourceRequest_Items}}
+var mBatchAssociateResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchAssociateResourceResponse_ResourceSetIdentifier, &sBatchAssociateResourceResponse_FailedItems}}
+var mBatchDisassociateResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDisassociateResourceRequest_ResourceSetIdentifier, &sBatchDisassociateResourceRequest_Items}}
+var mBatchDisassociateResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDisassociateResourceResponse_ResourceSetIdentifier, &sBatchDisassociateResourceResponse_FailedItems}}
+var mDeleteAppsListRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAppsListRequest_ListId}}
+var mDeletePolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeletePolicyRequest_PolicyId, &sDeletePolicyRequest_DeleteAllPolicyResources}}
+var mDeleteProtocolsListRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteProtocolsListRequest_ListId}}
+var mDeleteResourceSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteResourceSetRequest_Identifier}}
+var mDisassociateThirdPartyFirewallRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateThirdPartyFirewallRequest_ThirdPartyFirewall}}
+var mDisassociateThirdPartyFirewallResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateThirdPartyFirewallResponse_ThirdPartyFirewallStatus}}
+var mGetAdminAccountResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAdminAccountResponse_AdminAccount, &sGetAdminAccountResponse_RoleStatus}}
+var mGetAdminScopeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAdminScopeRequest_AdminAccount}}
+var mGetAdminScopeResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAdminScopeResponse_AdminScope, &sGetAdminScopeResponse_Status}}
+var mGetAppsListRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAppsListRequest_ListId, &sGetAppsListRequest_DefaultList}}
+var mGetAppsListResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAppsListResponse_AppsList, &sGetAppsListResponse_AppsListArn}}
+var mGetComplianceDetailRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetComplianceDetailRequest_PolicyId, &sGetComplianceDetailRequest_MemberAccount}}
+var mGetComplianceDetailResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetComplianceDetailResponse_PolicyComplianceDetail}}
+var mGetNotificationChannelResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetNotificationChannelResponse_SnsTopicArn, &sGetNotificationChannelResponse_SnsRoleName}}
+var mGetPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPolicyRequest_PolicyId}}
+var mGetPolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPolicyResponse_Policy, &sGetPolicyResponse_PolicyArn}}
+var mGetProtectionStatusRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetProtectionStatusRequest_PolicyId, &sGetProtectionStatusRequest_MemberAccountId, &sGetProtectionStatusRequest_StartTime, &sGetProtectionStatusRequest_EndTime, &sGetProtectionStatusRequest_NextToken, &sGetProtectionStatusRequest_MaxResults}}
+var mGetProtectionStatusResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetProtectionStatusResponse_AdminAccountId, &sGetProtectionStatusResponse_ServiceType, &sGetProtectionStatusResponse_Data, &sGetProtectionStatusResponse_NextToken}}
+var mGetProtocolsListRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetProtocolsListRequest_ListId, &sGetProtocolsListRequest_DefaultList}}
+var mGetProtocolsListResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetProtocolsListResponse_ProtocolsList, &sGetProtocolsListResponse_ProtocolsListArn}}
+var mGetResourceSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourceSetRequest_Identifier}}
+var mGetResourceSetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourceSetResponse_ResourceSet, &sGetResourceSetResponse_ResourceSetArn}}
+var mGetThirdPartyFirewallAssociationStatusRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetThirdPartyFirewallAssociationStatusRequest_ThirdPartyFirewall}}
+var mGetThirdPartyFirewallAssociationStatusResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetThirdPartyFirewallAssociationStatusResponse_ThirdPartyFirewallStatus, &sGetThirdPartyFirewallAssociationStatusResponse_MarketplaceOnboardingStatus}}
+var mGetViolationDetailsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetViolationDetailsRequest_PolicyId, &sGetViolationDetailsRequest_MemberAccount, &sGetViolationDetailsRequest_ResourceId, &sGetViolationDetailsRequest_ResourceType}}
+var mGetViolationDetailsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetViolationDetailsResponse_ViolationDetail}}
+var mListAdminAccountsForOrganizationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAdminAccountsForOrganizationRequest_NextToken, &sListAdminAccountsForOrganizationRequest_MaxResults}}
+var mListAdminAccountsForOrganizationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAdminAccountsForOrganizationResponse_AdminAccounts, &sListAdminAccountsForOrganizationResponse_NextToken}}
+var mListAdminsManagingAccountRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAdminsManagingAccountRequest_NextToken, &sListAdminsManagingAccountRequest_MaxResults}}
+var mListAdminsManagingAccountResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAdminsManagingAccountResponse_AdminAccounts, &sListAdminsManagingAccountResponse_NextToken}}
+var mListAppsListsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAppsListsRequest_DefaultLists, &sListAppsListsRequest_NextToken, &sListAppsListsRequest_MaxResults}}
+var mListAppsListsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAppsListsResponse_AppsLists, &sListAppsListsResponse_NextToken}}
+var mListComplianceStatusRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListComplianceStatusRequest_PolicyId, &sListComplianceStatusRequest_NextToken, &sListComplianceStatusRequest_MaxResults}}
+var mListComplianceStatusResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListComplianceStatusResponse_PolicyComplianceStatusList, &sListComplianceStatusResponse_NextToken}}
+var mListDiscoveredResourcesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListDiscoveredResourcesRequest_MemberAccountIds, &sListDiscoveredResourcesRequest_ResourceType, &sListDiscoveredResourcesRequest_MaxResults, &sListDiscoveredResourcesRequest_NextToken}}
+var mListDiscoveredResourcesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListDiscoveredResourcesResponse_Items, &sListDiscoveredResourcesResponse_NextToken}}
+var mListMemberAccountsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListMemberAccountsRequest_NextToken, &sListMemberAccountsRequest_MaxResults}}
+var mListMemberAccountsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListMemberAccountsResponse_MemberAccounts, &sListMemberAccountsResponse_NextToken}}
+var mListPoliciesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListPoliciesRequest_NextToken, &sListPoliciesRequest_MaxResults}}
+var mListPoliciesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListPoliciesResponse_PolicyList, &sListPoliciesResponse_NextToken}}
+var mListProtocolsListsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListProtocolsListsRequest_DefaultLists, &sListProtocolsListsRequest_NextToken, &sListProtocolsListsRequest_MaxResults}}
+var mListProtocolsListsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListProtocolsListsResponse_ProtocolsLists, &sListProtocolsListsResponse_NextToken}}
+var mListResourceSetResourcesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListResourceSetResourcesRequest_Identifier, &sListResourceSetResourcesRequest_MaxResults, &sListResourceSetResourcesRequest_NextToken}}
+var mListResourceSetResourcesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListResourceSetResourcesResponse_Items, &sListResourceSetResourcesResponse_NextToken}}
+var mListResourceSetsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListResourceSetsRequest_NextToken, &sListResourceSetsRequest_MaxResults}}
+var mListResourceSetsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListResourceSetsResponse_ResourceSets, &sListResourceSetsResponse_NextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_TagList}}
+var mListThirdPartyFirewallFirewallPoliciesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListThirdPartyFirewallFirewallPoliciesRequest_ThirdPartyFirewall, &sListThirdPartyFirewallFirewallPoliciesRequest_NextToken, &sListThirdPartyFirewallFirewallPoliciesRequest_MaxResults}}
+var mListThirdPartyFirewallFirewallPoliciesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListThirdPartyFirewallFirewallPoliciesResponse_ThirdPartyFirewallFirewallPolicies, &sListThirdPartyFirewallFirewallPoliciesResponse_NextToken}}
+var mPutAdminAccountRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutAdminAccountRequest_AdminAccount, &sPutAdminAccountRequest_AdminScope}}
+var mPutAppsListRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutAppsListRequest_AppsList, &sPutAppsListRequest_TagList}}
+var mPutAppsListResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutAppsListResponse_AppsList, &sPutAppsListResponse_AppsListArn}}
+var mPutNotificationChannelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutNotificationChannelRequest_SnsTopicArn, &sPutNotificationChannelRequest_SnsRoleName}}
+var mPutPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutPolicyRequest_Policy, &sPutPolicyRequest_TagList}}
+var mPutPolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutPolicyResponse_Policy, &sPutPolicyResponse_PolicyArn}}
+var mPutProtocolsListRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutProtocolsListRequest_ProtocolsList, &sPutProtocolsListRequest_TagList}}
+var mPutProtocolsListResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutProtocolsListResponse_ProtocolsList, &sPutProtocolsListResponse_ProtocolsListArn}}
+var mPutResourceSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutResourceSetRequest_ResourceSet, &sPutResourceSetRequest_TagList}}
+var mPutResourceSetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutResourceSetResponse_ResourceSet, &sPutResourceSetResponse_ResourceSetArn}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceArn, &sTagResourceRequest_TagList}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceArn, &sUntagResourceRequest_TagKeys}}
+
+var sAssociateAdminAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateAdminAccount, Type: smithy.ShapeTypeOperation})
+var sAssociateThirdPartyFirewall = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateThirdPartyFirewall, Type: smithy.ShapeTypeOperation})
+var sBatchAssociateResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchAssociateResource, Type: smithy.ShapeTypeOperation})
+var sBatchDisassociateResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDisassociateResource, Type: smithy.ShapeTypeOperation})
+var sDeleteAppsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAppsList, Type: smithy.ShapeTypeOperation})
+var sDeleteNotificationChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteNotificationChannel, Type: smithy.ShapeTypeOperation})
+var sDeletePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePolicy, Type: smithy.ShapeTypeOperation})
+var sDeleteProtocolsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProtocolsList, Type: smithy.ShapeTypeOperation})
+var sDeleteResourceSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourceSet, Type: smithy.ShapeTypeOperation})
+var sDisassociateAdminAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateAdminAccount, Type: smithy.ShapeTypeOperation})
+var sDisassociateThirdPartyFirewall = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateThirdPartyFirewall, Type: smithy.ShapeTypeOperation})
+var sGetAdminAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAdminAccount, Type: smithy.ShapeTypeOperation})
+var sGetAdminScope = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAdminScope, Type: smithy.ShapeTypeOperation})
+var sGetAppsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAppsList, Type: smithy.ShapeTypeOperation})
+var sGetComplianceDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetComplianceDetail, Type: smithy.ShapeTypeOperation})
+var sGetNotificationChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNotificationChannel, Type: smithy.ShapeTypeOperation})
+var sGetPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPolicy, Type: smithy.ShapeTypeOperation})
+var sGetProtectionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetProtectionStatus, Type: smithy.ShapeTypeOperation})
+var sGetProtocolsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetProtocolsList, Type: smithy.ShapeTypeOperation})
+var sGetResourceSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceSet, Type: smithy.ShapeTypeOperation})
+var sGetThirdPartyFirewallAssociationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetThirdPartyFirewallAssociationStatus, Type: smithy.ShapeTypeOperation})
+var sGetViolationDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetViolationDetails, Type: smithy.ShapeTypeOperation})
+var sListAdminAccountsForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAdminAccountsForOrganization, Type: smithy.ShapeTypeOperation})
+var sListAdminsManagingAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAdminsManagingAccount, Type: smithy.ShapeTypeOperation})
+var sListAppsLists = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAppsLists, Type: smithy.ShapeTypeOperation})
+var sListComplianceStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListComplianceStatus, Type: smithy.ShapeTypeOperation})
+var sListDiscoveredResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDiscoveredResources, Type: smithy.ShapeTypeOperation})
+var sListMemberAccounts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMemberAccounts, Type: smithy.ShapeTypeOperation})
+var sListPolicies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPolicies, Type: smithy.ShapeTypeOperation})
+var sListProtocolsLists = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProtocolsLists, Type: smithy.ShapeTypeOperation})
+var sListResourceSetResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourceSetResources, Type: smithy.ShapeTypeOperation})
+var sListResourceSets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourceSets, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation})
+var sListThirdPartyFirewallFirewallPolicies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListThirdPartyFirewallFirewallPolicies, Type: smithy.ShapeTypeOperation})
+var sPutAdminAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAdminAccount, Type: smithy.ShapeTypeOperation})
+var sPutAppsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAppsList, Type: smithy.ShapeTypeOperation})
+var sPutNotificationChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutNotificationChannel, Type: smithy.ShapeTypeOperation})
+var sPutPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutPolicy, Type: smithy.ShapeTypeOperation})
+var sPutProtocolsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutProtocolsList, Type: smithy.ShapeTypeOperation})
+var sPutResourceSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourceSet, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation})
+var s_AWSFMS_20180101 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSFMS_20180101, Type: smithy.ShapeTypeService})
+var s_AccountIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountIdList, Members: &m_AccountIdList, Type: smithy.ShapeTypeList})
+var sAccountRoleStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountRoleStatus, Members: &mAccountRoleStatus, Type: smithy.ShapeTypeEnum})
+var sAccountScope = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountScope, Members: &mAccountScope, Type: smithy.ShapeTypeStructure})
+var sActionTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionTarget, Members: &mActionTarget, Type: smithy.ShapeTypeStructure})
+var sAdminAccountSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdminAccountSummary, Members: &mAdminAccountSummary, Type: smithy.ShapeTypeStructure})
+var s_AdminAccountSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AdminAccountSummaryList, Members: &m_AdminAccountSummaryList, Type: smithy.ShapeTypeList})
+var sAdminScope = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdminScope, Members: &mAdminScope, Type: smithy.ShapeTypeStructure})
+var sApp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApp, Members: &mApp, Type: smithy.ShapeTypeStructure})
+var s_AppsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AppsList, Members: &m_AppsList, Type: smithy.ShapeTypeList})
+var sAppsListData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAppsListData, Members: &mAppsListData, Type: smithy.ShapeTypeStructure})
+var sAppsListDataSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAppsListDataSummary, Members: &mAppsListDataSummary, Type: smithy.ShapeTypeStructure})
+var s_AppsListsData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AppsListsData, Members: &m_AppsListsData, Type: smithy.ShapeTypeList})
+var s_AWSAccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSAccountId, Type: smithy.ShapeTypeString})
+var s_AWSAccountIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSAccountIdList, Members: &m_AWSAccountIdList, Type: smithy.ShapeTypeList})
+var sAwsEc2InstanceViolation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAwsEc2InstanceViolation, Members: &mAwsEc2InstanceViolation, Type: smithy.ShapeTypeStructure})
+var sAwsEc2NetworkInterfaceViolation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAwsEc2NetworkInterfaceViolation, Members: &mAwsEc2NetworkInterfaceViolation, Type: smithy.ShapeTypeStructure})
+var s_AwsEc2NetworkInterfaceViolations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsEc2NetworkInterfaceViolations, Members: &m_AwsEc2NetworkInterfaceViolations, Type: smithy.ShapeTypeList})
+var s_AWSRegion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSRegion, Type: smithy.ShapeTypeString})
+var s_AWSRegionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSRegionList, Members: &m_AWSRegionList, Type: smithy.ShapeTypeList})
+var sAwsVPCSecurityGroupViolation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAwsVPCSecurityGroupViolation, Members: &mAwsVPCSecurityGroupViolation, Type: smithy.ShapeTypeStructure})
+var s_Base62Id = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Base62Id, Type: smithy.ShapeTypeString})
+var s_BasicInteger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BasicInteger, Type: smithy.ShapeTypeInteger})
+var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var s_BooleanObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean})
+var s_CIDR = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CIDR, Type: smithy.ShapeTypeString})
+var sComplianceViolator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComplianceViolator, Members: &mComplianceViolator, Type: smithy.ShapeTypeStructure})
+var s_ComplianceViolatorMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComplianceViolatorMetadata, Members: &m_ComplianceViolatorMetadata, Type: smithy.ShapeTypeMap})
+var s_ComplianceViolators = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComplianceViolators, Members: &m_ComplianceViolators, Type: smithy.ShapeTypeList})
+var sCreateNetworkAclAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateNetworkAclAction, Members: &mCreateNetworkAclAction, Type: smithy.ShapeTypeStructure})
+var sCreateNetworkAclEntriesAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateNetworkAclEntriesAction, Members: &mCreateNetworkAclEntriesAction, Type: smithy.ShapeTypeStructure})
+var s_CustomerPolicyScopeId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomerPolicyScopeId, Type: smithy.ShapeTypeString})
+var s_CustomerPolicyScopeIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomerPolicyScopeIdList, Members: &m_CustomerPolicyScopeIdList, Type: smithy.ShapeTypeList})
+var sCustomerPolicyScopeIdType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomerPolicyScopeIdType, Members: &mCustomerPolicyScopeIdType, Type: smithy.ShapeTypeEnum})
+var s_CustomerPolicyScopeMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomerPolicyScopeMap, Members: &m_CustomerPolicyScopeMap, Type: smithy.ShapeTypeMap})
+var sCustomerPolicyStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomerPolicyStatus, Members: &mCustomerPolicyStatus, Type: smithy.ShapeTypeEnum})
+var sDeleteNetworkAclEntriesAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteNetworkAclEntriesAction, Members: &mDeleteNetworkAclEntriesAction, Type: smithy.ShapeTypeStructure})
+var sDependentServiceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDependentServiceName, Members: &mDependentServiceName, Type: smithy.ShapeTypeEnum})
+var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Type: smithy.ShapeTypeString})
+var sDestinationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDestinationType, Members: &mDestinationType, Type: smithy.ShapeTypeEnum})
+var s_DetailedInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DetailedInfo, Type: smithy.ShapeTypeString})
+var sDiscoveredResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDiscoveredResource, Members: &mDiscoveredResource, Type: smithy.ShapeTypeStructure})
+var s_DiscoveredResourceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DiscoveredResourceList, Members: &m_DiscoveredResourceList, Type: smithy.ShapeTypeList})
+var sDnsDuplicateRuleGroupViolation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDnsDuplicateRuleGroupViolation, Members: &mDnsDuplicateRuleGroupViolation, Type: smithy.ShapeTypeStructure})
+var sDnsRuleGroupLimitExceededViolation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDnsRuleGroupLimitExceededViolation, Members: &mDnsRuleGroupLimitExceededViolation, Type: smithy.ShapeTypeStructure})
+var s_DnsRuleGroupPriorities = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DnsRuleGroupPriorities, Members: &m_DnsRuleGroupPriorities, Type: smithy.ShapeTypeList})
+var s_DnsRuleGroupPriority = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DnsRuleGroupPriority, Type: smithy.ShapeTypeInteger})
+var sDnsRuleGroupPriorityConflictViolation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDnsRuleGroupPriorityConflictViolation, Members: &mDnsRuleGroupPriorityConflictViolation, Type: smithy.ShapeTypeStructure})
+var sEC2AssociateRouteTableAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEC2AssociateRouteTableAction, Members: &mEC2AssociateRouteTableAction, Type: smithy.ShapeTypeStructure})
+var sEC2CopyRouteTableAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEC2CopyRouteTableAction, Members: &mEC2CopyRouteTableAction, Type: smithy.ShapeTypeStructure})
+var sEC2CreateRouteAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEC2CreateRouteAction, Members: &mEC2CreateRouteAction, Type: smithy.ShapeTypeStructure})
+var sEC2CreateRouteTableAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEC2CreateRouteTableAction, Members: &mEC2CreateRouteTableAction, Type: smithy.ShapeTypeStructure})
+var sEC2DeleteRouteAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEC2DeleteRouteAction, Members: &mEC2DeleteRouteAction, Type: smithy.ShapeTypeStructure})
+var sEC2ReplaceRouteAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEC2ReplaceRouteAction, Members: &mEC2ReplaceRouteAction, Type: smithy.ShapeTypeStructure})
+var sEC2ReplaceRouteTableAssociationAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEC2ReplaceRouteTableAssociationAction, Members: &mEC2ReplaceRouteTableAssociationAction, Type: smithy.ShapeTypeStructure})
+var s_EntriesDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntriesDescription, Members: &m_EntriesDescription, Type: smithy.ShapeTypeList})
+var s_EntriesWithConflicts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntriesWithConflicts, Members: &m_EntriesWithConflicts, Type: smithy.ShapeTypeList})
+var sEntryDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntryDescription, Members: &mEntryDescription, Type: smithy.ShapeTypeStructure})
+var sEntryType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntryType, Members: &mEntryType, Type: smithy.ShapeTypeEnum})
+var sEntryViolation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntryViolation, Members: &mEntryViolation, Type: smithy.ShapeTypeStructure})
+var sEntryViolationReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntryViolationReason, Members: &mEntryViolationReason, Type: smithy.ShapeTypeEnum})
+var s_EntryViolationReasons = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntryViolationReasons, Members: &m_EntryViolationReasons, Type: smithy.ShapeTypeList})
+var s_EntryViolations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntryViolations, Members: &m_EntryViolations, Type: smithy.ShapeTypeList})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sEvaluationResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvaluationResult, Members: &mEvaluationResult, Type: smithy.ShapeTypeStructure})
+var s_EvaluationResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EvaluationResults, Members: &m_EvaluationResults, Type: smithy.ShapeTypeList})
+var sExpectedRoute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpectedRoute, Members: &mExpectedRoute, Type: smithy.ShapeTypeStructure})
+var s_ExpectedRoutes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExpectedRoutes, Members: &m_ExpectedRoutes, Type: smithy.ShapeTypeList})
+var sFailedItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFailedItem, Members: &mFailedItem, Type: smithy.ShapeTypeStructure})
+var s_FailedItemList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FailedItemList, Members: &m_FailedItemList, Type: smithy.ShapeTypeList})
+var sFailedItemReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFailedItemReason, Members: &mFailedItemReason, Type: smithy.ShapeTypeEnum})
+var sFirewallDeploymentModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFirewallDeploymentModel, Members: &mFirewallDeploymentModel, Type: smithy.ShapeTypeEnum})
+var s_FirewallPolicyId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FirewallPolicyId, Type: smithy.ShapeTypeString})
+var s_FirewallPolicyName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FirewallPolicyName, Type: smithy.ShapeTypeString})
+var sFirewallSubnetIsOutOfScopeViolation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFirewallSubnetIsOutOfScopeViolation, Members: &mFirewallSubnetIsOutOfScopeViolation, Type: smithy.ShapeTypeStructure})
+var sFirewallSubnetMissingVPCEndpointViolation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFirewallSubnetMissingVPCEndpointViolation, Members: &mFirewallSubnetMissingVPCEndpointViolation, Type: smithy.ShapeTypeStructure})
+var sFMSPolicyUpdateFirewallCreationConfigAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFMSPolicyUpdateFirewallCreationConfigAction, Members: &mFMSPolicyUpdateFirewallCreationConfigAction, Type: smithy.ShapeTypeStructure})
+var s_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Identifier, Type: smithy.ShapeTypeString})
+var s_IdentifierList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdentifierList, Members: &m_IdentifierList, Type: smithy.ShapeTypeList})
+var s_IntegerObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntegerObject, Type: smithy.ShapeTypeInteger})
+var s_IntegerObjectMinimum0 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntegerObjectMinimum0, Type: smithy.ShapeTypeInteger})
+var sInternalErrorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalErrorException, Members: &mInternalErrorException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var sInvalidInputException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidInputException, Members: &mInvalidInputException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var sInvalidNetworkAclEntriesViolation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidNetworkAclEntriesViolation, Members: &mInvalidNetworkAclEntriesViolation, Type: smithy.ShapeTypeStructure})
+var sInvalidOperationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidOperationException, Members: &mInvalidOperationException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var sInvalidTypeException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidTypeException, Members: &mInvalidTypeException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var s_IPPortNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IPPortNumber, Type: smithy.ShapeTypeLong})
+var s_IPPortNumberInteger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IPPortNumberInteger, Type: smithy.ShapeTypeInteger})
+var s_IssueInfoMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IssueInfoMap, Members: &m_IssueInfoMap, Type: smithy.ShapeTypeMap})
+var s_LengthBoundedNonEmptyString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LengthBoundedNonEmptyString, Type: smithy.ShapeTypeString})
+var s_LengthBoundedString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LengthBoundedString, Type: smithy.ShapeTypeString})
+var s_LengthBoundedStringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LengthBoundedStringList, Members: &m_LengthBoundedStringList, Type: smithy.ShapeTypeList})
+var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var s_ListId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListId, Type: smithy.ShapeTypeString})
+var s_ManagedServiceData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ManagedServiceData, Type: smithy.ShapeTypeString})
+var sMarketplaceSubscriptionOnboardingStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMarketplaceSubscriptionOnboardingStatus, Members: &mMarketplaceSubscriptionOnboardingStatus, Type: smithy.ShapeTypeEnum})
+var s_MemberAccounts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MemberAccounts, Members: &m_MemberAccounts, Type: smithy.ShapeTypeList})
+var s_Name = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Name, Type: smithy.ShapeTypeString})
+var sNetworkAclCommonPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkAclCommonPolicy, Members: &mNetworkAclCommonPolicy, Type: smithy.ShapeTypeStructure})
+var s_NetworkAclEntries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkAclEntries, Members: &m_NetworkAclEntries, Type: smithy.ShapeTypeList})
+var sNetworkAclEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkAclEntry, Members: &mNetworkAclEntry, Type: smithy.ShapeTypeStructure})
+var sNetworkAclEntrySet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkAclEntrySet, Members: &mNetworkAclEntrySet, Type: smithy.ShapeTypeStructure})
+var sNetworkAclIcmpTypeCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkAclIcmpTypeCode, Members: &mNetworkAclIcmpTypeCode, Type: smithy.ShapeTypeStructure})
+var sNetworkAclPortRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkAclPortRange, Members: &mNetworkAclPortRange, Type: smithy.ShapeTypeStructure})
+var sNetworkAclRuleAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkAclRuleAction, Members: &mNetworkAclRuleAction, Type: smithy.ShapeTypeEnum})
+var s_NetworkFirewallAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkFirewallAction, Type: smithy.ShapeTypeString})
+var s_NetworkFirewallActionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkFirewallActionList, Members: &m_NetworkFirewallActionList, Type: smithy.ShapeTypeList})
+var sNetworkFirewallBlackHoleRouteDetectedViolation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkFirewallBlackHoleRouteDetectedViolation, Members: &mNetworkFirewallBlackHoleRouteDetectedViolation, Type: smithy.ShapeTypeStructure})
+var sNetworkFirewallInternetTrafficNotInspectedViolation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkFirewallInternetTrafficNotInspectedViolation, Members: &mNetworkFirewallInternetTrafficNotInspectedViolation, Type: smithy.ShapeTypeStructure})
+var sNetworkFirewallInvalidRouteConfigurationViolation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkFirewallInvalidRouteConfigurationViolation, Members: &mNetworkFirewallInvalidRouteConfigurationViolation, Type: smithy.ShapeTypeStructure})
+var sNetworkFirewallMissingExpectedRoutesViolation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkFirewallMissingExpectedRoutesViolation, Members: &mNetworkFirewallMissingExpectedRoutesViolation, Type: smithy.ShapeTypeStructure})
+var sNetworkFirewallMissingExpectedRTViolation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkFirewallMissingExpectedRTViolation, Members: &mNetworkFirewallMissingExpectedRTViolation, Type: smithy.ShapeTypeStructure})
+var sNetworkFirewallMissingFirewallViolation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkFirewallMissingFirewallViolation, Members: &mNetworkFirewallMissingFirewallViolation, Type: smithy.ShapeTypeStructure})
+var sNetworkFirewallMissingSubnetViolation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkFirewallMissingSubnetViolation, Members: &mNetworkFirewallMissingSubnetViolation, Type: smithy.ShapeTypeStructure})
+var sNetworkFirewallOverrideAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkFirewallOverrideAction, Members: &mNetworkFirewallOverrideAction, Type: smithy.ShapeTypeEnum})
+var sNetworkFirewallPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkFirewallPolicy, Members: &mNetworkFirewallPolicy, Type: smithy.ShapeTypeStructure})
+var sNetworkFirewallPolicyDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkFirewallPolicyDescription, Members: &mNetworkFirewallPolicyDescription, Type: smithy.ShapeTypeStructure})
+var sNetworkFirewallPolicyModifiedViolation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkFirewallPolicyModifiedViolation, Members: &mNetworkFirewallPolicyModifiedViolation, Type: smithy.ShapeTypeStructure})
+var s_NetworkFirewallResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkFirewallResourceName, Type: smithy.ShapeTypeString})
+var sNetworkFirewallStatefulRuleGroupOverride = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkFirewallStatefulRuleGroupOverride, Members: &mNetworkFirewallStatefulRuleGroupOverride, Type: smithy.ShapeTypeStructure})
+var sNetworkFirewallUnexpectedFirewallRoutesViolation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkFirewallUnexpectedFirewallRoutesViolation, Members: &mNetworkFirewallUnexpectedFirewallRoutesViolation, Type: smithy.ShapeTypeStructure})
+var sNetworkFirewallUnexpectedGatewayRoutesViolation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkFirewallUnexpectedGatewayRoutesViolation, Members: &mNetworkFirewallUnexpectedGatewayRoutesViolation, Type: smithy.ShapeTypeStructure})
+var s_OrderedRemediationActions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrderedRemediationActions, Members: &m_OrderedRemediationActions, Type: smithy.ShapeTypeList})
+var s_OrganizationalUnitId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrganizationalUnitId, Type: smithy.ShapeTypeString})
+var s_OrganizationalUnitIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrganizationalUnitIdList, Members: &m_OrganizationalUnitIdList, Type: smithy.ShapeTypeList})
+var sOrganizationalUnitScope = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrganizationalUnitScope, Members: &mOrganizationalUnitScope, Type: smithy.ShapeTypeStructure})
+var sOrganizationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrganizationStatus, Members: &mOrganizationStatus, Type: smithy.ShapeTypeEnum})
+var s_PaginationMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PaginationMaxResults, Type: smithy.ShapeTypeInteger})
+var s_PaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sPartialMatch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPartialMatch, Members: &mPartialMatch, Type: smithy.ShapeTypeStructure})
+var s_PartialMatches = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PartialMatches, Members: &m_PartialMatches, Type: smithy.ShapeTypeList})
+var sPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicy, Members: &mPolicy, Type: smithy.ShapeTypeStructure})
+var sPolicyComplianceDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyComplianceDetail, Members: &mPolicyComplianceDetail, Type: smithy.ShapeTypeStructure})
+var sPolicyComplianceStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyComplianceStatus, Members: &mPolicyComplianceStatus, Type: smithy.ShapeTypeStructure})
+var s_PolicyComplianceStatusList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyComplianceStatusList, Members: &m_PolicyComplianceStatusList, Type: smithy.ShapeTypeList})
+var sPolicyComplianceStatusType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyComplianceStatusType, Members: &mPolicyComplianceStatusType, Type: smithy.ShapeTypeEnum})
+var s_PolicyId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyId, Type: smithy.ShapeTypeString})
+var sPolicyOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyOption, Members: &mPolicyOption, Type: smithy.ShapeTypeStructure})
+var sPolicySummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicySummary, Members: &mPolicySummary, Type: smithy.ShapeTypeStructure})
+var s_PolicySummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicySummaryList, Members: &m_PolicySummaryList, Type: smithy.ShapeTypeList})
+var sPolicyTypeScope = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyTypeScope, Members: &mPolicyTypeScope, Type: smithy.ShapeTypeStructure})
+var s_PolicyUpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyUpdateToken, Type: smithy.ShapeTypeString})
+var sPossibleRemediationAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPossibleRemediationAction, Members: &mPossibleRemediationAction, Type: smithy.ShapeTypeStructure})
+var s_PossibleRemediationActionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PossibleRemediationActionList, Members: &m_PossibleRemediationActionList, Type: smithy.ShapeTypeList})
+var sPossibleRemediationActions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPossibleRemediationActions, Members: &mPossibleRemediationActions, Type: smithy.ShapeTypeStructure})
+var s_PreviousAppsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PreviousAppsList, Members: &m_PreviousAppsList, Type: smithy.ShapeTypeMap})
+var s_PreviousListVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PreviousListVersion, Type: smithy.ShapeTypeString})
+var s_PreviousProtocolsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PreviousProtocolsList, Members: &m_PreviousProtocolsList, Type: smithy.ShapeTypeMap})
+var s_PriorityNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PriorityNumber, Type: smithy.ShapeTypeInteger})
+var s_ProtectionData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProtectionData, Type: smithy.ShapeTypeString})
+var s_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Protocol, Type: smithy.ShapeTypeString})
+var s_ProtocolsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProtocolsList, Members: &m_ProtocolsList, Type: smithy.ShapeTypeList})
+var sProtocolsListData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProtocolsListData, Members: &mProtocolsListData, Type: smithy.ShapeTypeStructure})
+var sProtocolsListDataSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProtocolsListDataSummary, Members: &mProtocolsListDataSummary, Type: smithy.ShapeTypeStructure})
+var s_ProtocolsListsData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProtocolsListsData, Members: &m_ProtocolsListsData, Type: smithy.ShapeTypeList})
+var s_ReferenceRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReferenceRule, Type: smithy.ShapeTypeString})
+var sRegionScope = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegionScope, Members: &mRegionScope, Type: smithy.ShapeTypeStructure})
+var sRemediationAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemediationAction, Members: &mRemediationAction, Type: smithy.ShapeTypeStructure})
+var s_RemediationActionDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RemediationActionDescription, Type: smithy.ShapeTypeString})
+var sRemediationActionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemediationActionType, Members: &mRemediationActionType, Type: smithy.ShapeTypeEnum})
+var sRemediationActionWithOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemediationActionWithOrder, Members: &mRemediationActionWithOrder, Type: smithy.ShapeTypeStructure})
+var sReplaceNetworkAclAssociationAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplaceNetworkAclAssociationAction, Members: &mReplaceNetworkAclAssociationAction, Type: smithy.ShapeTypeStructure})
+var sResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResource, Members: &mResource, Type: smithy.ShapeTypeStructure})
+var s_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var s_ResourceArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArnList, Members: &m_ResourceArnList, Type: smithy.ShapeTypeList})
+var s_ResourceCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceCount, Type: smithy.ShapeTypeLong})
+var s_ResourceDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var s_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var s_ResourceIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceIdList, Members: &m_ResourceIdList, Type: smithy.ShapeTypeList})
+var s_ResourceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceList, Members: &m_ResourceList, Type: smithy.ShapeTypeList})
+var s_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var sResourceSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceSet, Members: &mResourceSet, Type: smithy.ShapeTypeStructure})
+var s_ResourceSetIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceSetIds, Members: &m_ResourceSetIds, Type: smithy.ShapeTypeList})
+var sResourceSetStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceSetStatus, Members: &mResourceSetStatus, Type: smithy.ShapeTypeEnum})
+var sResourceSetSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceSetSummary, Members: &mResourceSetSummary, Type: smithy.ShapeTypeStructure})
+var s_ResourceSetSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceSetSummaryList, Members: &m_ResourceSetSummaryList, Type: smithy.ShapeTypeList})
+var sResourceTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceTag, Members: &mResourceTag, Type: smithy.ShapeTypeStructure})
+var s_ResourceTagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceTagKey, Type: smithy.ShapeTypeString})
+var sResourceTagLogicalOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceTagLogicalOperator, Members: &mResourceTagLogicalOperator, Type: smithy.ShapeTypeEnum})
+var s_ResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceTags, Members: &m_ResourceTags, Type: smithy.ShapeTypeList})
+var s_ResourceTagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceTagValue, Type: smithy.ShapeTypeString})
+var s_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceType, Type: smithy.ShapeTypeString})
+var s_ResourceTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceTypeList, Members: &m_ResourceTypeList, Type: smithy.ShapeTypeList})
+var sResourceViolation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceViolation, Members: &mResourceViolation, Type: smithy.ShapeTypeStructure})
+var s_ResourceViolations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceViolations, Members: &m_ResourceViolations, Type: smithy.ShapeTypeList})
+var sRoute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRoute, Members: &mRoute, Type: smithy.ShapeTypeStructure})
+var sRouteHasOutOfScopeEndpointViolation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRouteHasOutOfScopeEndpointViolation, Members: &mRouteHasOutOfScopeEndpointViolation, Type: smithy.ShapeTypeStructure})
+var s_Routes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Routes, Members: &m_Routes, Type: smithy.ShapeTypeList})
+var sRuleOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleOrder, Members: &mRuleOrder, Type: smithy.ShapeTypeEnum})
+var sSecurityGroupRemediationAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSecurityGroupRemediationAction, Members: &mSecurityGroupRemediationAction, Type: smithy.ShapeTypeStructure})
+var s_SecurityGroupRemediationActions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroupRemediationActions, Members: &m_SecurityGroupRemediationActions, Type: smithy.ShapeTypeList})
+var sSecurityGroupRuleDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSecurityGroupRuleDescription, Members: &mSecurityGroupRuleDescription, Type: smithy.ShapeTypeStructure})
+var sSecurityServicePolicyData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSecurityServicePolicyData, Members: &mSecurityServicePolicyData, Type: smithy.ShapeTypeStructure})
+var sSecurityServiceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSecurityServiceType, Members: &mSecurityServiceType, Type: smithy.ShapeTypeEnum})
+var s_SecurityServiceTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityServiceTypeList, Members: &m_SecurityServiceTypeList, Type: smithy.ShapeTypeList})
+var sStatefulEngineOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatefulEngineOptions, Members: &mStatefulEngineOptions, Type: smithy.ShapeTypeStructure})
+var sStatefulRuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatefulRuleGroup, Members: &mStatefulRuleGroup, Type: smithy.ShapeTypeStructure})
+var s_StatefulRuleGroupList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatefulRuleGroupList, Members: &m_StatefulRuleGroupList, Type: smithy.ShapeTypeList})
+var sStatelessRuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatelessRuleGroup, Members: &mStatelessRuleGroup, Type: smithy.ShapeTypeStructure})
+var s_StatelessRuleGroupList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatelessRuleGroupList, Members: &m_StatelessRuleGroupList, Type: smithy.ShapeTypeList})
+var s_StatelessRuleGroupPriority = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatelessRuleGroupPriority, Type: smithy.ShapeTypeInteger})
+var sStreamExceptionPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamExceptionPolicy, Members: &mStreamExceptionPolicy, Type: smithy.ShapeTypeEnum})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sTargetType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetType, Members: &mTargetType, Type: smithy.ShapeTypeEnum})
+var s_TargetViolationReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetViolationReason, Type: smithy.ShapeTypeString})
+var s_TargetViolationReasons = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetViolationReasons, Members: &m_TargetViolationReasons, Type: smithy.ShapeTypeList})
+var sThirdPartyFirewall = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThirdPartyFirewall, Members: &mThirdPartyFirewall, Type: smithy.ShapeTypeEnum})
+var sThirdPartyFirewallAssociationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThirdPartyFirewallAssociationStatus, Members: &mThirdPartyFirewallAssociationStatus, Type: smithy.ShapeTypeEnum})
+var s_ThirdPartyFirewallFirewallPolicies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ThirdPartyFirewallFirewallPolicies, Members: &m_ThirdPartyFirewallFirewallPolicies, Type: smithy.ShapeTypeList})
+var sThirdPartyFirewallFirewallPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThirdPartyFirewallFirewallPolicy, Members: &mThirdPartyFirewallFirewallPolicy, Type: smithy.ShapeTypeStructure})
+var sThirdPartyFirewallMissingExpectedRouteTableViolation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThirdPartyFirewallMissingExpectedRouteTableViolation, Members: &mThirdPartyFirewallMissingExpectedRouteTableViolation, Type: smithy.ShapeTypeStructure})
+var sThirdPartyFirewallMissingFirewallViolation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThirdPartyFirewallMissingFirewallViolation, Members: &mThirdPartyFirewallMissingFirewallViolation, Type: smithy.ShapeTypeStructure})
+var sThirdPartyFirewallMissingSubnetViolation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThirdPartyFirewallMissingSubnetViolation, Members: &mThirdPartyFirewallMissingSubnetViolation, Type: smithy.ShapeTypeStructure})
+var sThirdPartyFirewallPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThirdPartyFirewallPolicy, Members: &mThirdPartyFirewallPolicy, Type: smithy.ShapeTypeStructure})
+var s_TimeStamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimeStamp, Type: smithy.ShapeTypeTimestamp})
+var s_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpdateToken, Type: smithy.ShapeTypeString})
+var sViolationDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iViolationDetail, Members: &mViolationDetail, Type: smithy.ShapeTypeStructure})
+var sViolationReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iViolationReason, Members: &mViolationReason, Type: smithy.ShapeTypeEnum})
+var s_ViolationTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ViolationTarget, Type: smithy.ShapeTypeString})
+var sWebACLHasIncompatibleConfigurationViolation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWebACLHasIncompatibleConfigurationViolation, Members: &mWebACLHasIncompatibleConfigurationViolation, Type: smithy.ShapeTypeStructure})
+var sWebACLHasOutOfScopeResourcesViolation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWebACLHasOutOfScopeResourcesViolation, Members: &mWebACLHasOutOfScopeResourcesViolation, Type: smithy.ShapeTypeStructure})
+var sAssociateAdminAccountRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateAdminAccountRequest, Members: &mAssociateAdminAccountRequest, Type: smithy.ShapeTypeStructure})
+var sAssociateThirdPartyFirewallRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateThirdPartyFirewallRequest, Members: &mAssociateThirdPartyFirewallRequest, Type: smithy.ShapeTypeStructure})
+var sAssociateThirdPartyFirewallResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateThirdPartyFirewallResponse, Members: &mAssociateThirdPartyFirewallResponse, Type: smithy.ShapeTypeStructure})
+var sBatchAssociateResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchAssociateResourceRequest, Members: &mBatchAssociateResourceRequest, Type: smithy.ShapeTypeStructure})
+var sBatchAssociateResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchAssociateResourceResponse, Members: &mBatchAssociateResourceResponse, Type: smithy.ShapeTypeStructure})
+var sBatchDisassociateResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDisassociateResourceRequest, Members: &mBatchDisassociateResourceRequest, Type: smithy.ShapeTypeStructure})
+var sBatchDisassociateResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDisassociateResourceResponse, Members: &mBatchDisassociateResourceResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteAppsListRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAppsListRequest, Members: &mDeleteAppsListRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteNotificationChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteNotificationChannelRequest, Type: smithy.ShapeTypeStructure})
+var sDeletePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePolicyRequest, Members: &mDeletePolicyRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteProtocolsListRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProtocolsListRequest, Members: &mDeleteProtocolsListRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteResourceSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourceSetRequest, Members: &mDeleteResourceSetRequest, Type: smithy.ShapeTypeStructure})
+var sDisassociateAdminAccountRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateAdminAccountRequest, Type: smithy.ShapeTypeStructure})
+var sDisassociateThirdPartyFirewallRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateThirdPartyFirewallRequest, Members: &mDisassociateThirdPartyFirewallRequest, Type: smithy.ShapeTypeStructure})
+var sDisassociateThirdPartyFirewallResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateThirdPartyFirewallResponse, Members: &mDisassociateThirdPartyFirewallResponse, Type: smithy.ShapeTypeStructure})
+var sGetAdminAccountRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAdminAccountRequest, Type: smithy.ShapeTypeStructure})
+var sGetAdminAccountResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAdminAccountResponse, Members: &mGetAdminAccountResponse, Type: smithy.ShapeTypeStructure})
+var sGetAdminScopeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAdminScopeRequest, Members: &mGetAdminScopeRequest, Type: smithy.ShapeTypeStructure})
+var sGetAdminScopeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAdminScopeResponse, Members: &mGetAdminScopeResponse, Type: smithy.ShapeTypeStructure})
+var sGetAppsListRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAppsListRequest, Members: &mGetAppsListRequest, Type: smithy.ShapeTypeStructure})
+var sGetAppsListResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAppsListResponse, Members: &mGetAppsListResponse, Type: smithy.ShapeTypeStructure})
+var sGetComplianceDetailRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetComplianceDetailRequest, Members: &mGetComplianceDetailRequest, Type: smithy.ShapeTypeStructure})
+var sGetComplianceDetailResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetComplianceDetailResponse, Members: &mGetComplianceDetailResponse, Type: smithy.ShapeTypeStructure})
+var sGetNotificationChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNotificationChannelRequest, Type: smithy.ShapeTypeStructure})
+var sGetNotificationChannelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNotificationChannelResponse, Members: &mGetNotificationChannelResponse, Type: smithy.ShapeTypeStructure})
+var sGetPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPolicyRequest, Members: &mGetPolicyRequest, Type: smithy.ShapeTypeStructure})
+var sGetPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPolicyResponse, Members: &mGetPolicyResponse, Type: smithy.ShapeTypeStructure})
+var sGetProtectionStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetProtectionStatusRequest, Members: &mGetProtectionStatusRequest, Type: smithy.ShapeTypeStructure})
+var sGetProtectionStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetProtectionStatusResponse, Members: &mGetProtectionStatusResponse, Type: smithy.ShapeTypeStructure})
+var sGetProtocolsListRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetProtocolsListRequest, Members: &mGetProtocolsListRequest, Type: smithy.ShapeTypeStructure})
+var sGetProtocolsListResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetProtocolsListResponse, Members: &mGetProtocolsListResponse, Type: smithy.ShapeTypeStructure})
+var sGetResourceSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceSetRequest, Members: &mGetResourceSetRequest, Type: smithy.ShapeTypeStructure})
+var sGetResourceSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceSetResponse, Members: &mGetResourceSetResponse, Type: smithy.ShapeTypeStructure})
+var sGetThirdPartyFirewallAssociationStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetThirdPartyFirewallAssociationStatusRequest, Members: &mGetThirdPartyFirewallAssociationStatusRequest, Type: smithy.ShapeTypeStructure})
+var sGetThirdPartyFirewallAssociationStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetThirdPartyFirewallAssociationStatusResponse, Members: &mGetThirdPartyFirewallAssociationStatusResponse, Type: smithy.ShapeTypeStructure})
+var sGetViolationDetailsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetViolationDetailsRequest, Members: &mGetViolationDetailsRequest, Type: smithy.ShapeTypeStructure})
+var sGetViolationDetailsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetViolationDetailsResponse, Members: &mGetViolationDetailsResponse, Type: smithy.ShapeTypeStructure})
+var sListAdminAccountsForOrganizationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAdminAccountsForOrganizationRequest, Members: &mListAdminAccountsForOrganizationRequest, Type: smithy.ShapeTypeStructure})
+var sListAdminAccountsForOrganizationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAdminAccountsForOrganizationResponse, Members: &mListAdminAccountsForOrganizationResponse, Type: smithy.ShapeTypeStructure})
+var sListAdminsManagingAccountRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAdminsManagingAccountRequest, Members: &mListAdminsManagingAccountRequest, Type: smithy.ShapeTypeStructure})
+var sListAdminsManagingAccountResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAdminsManagingAccountResponse, Members: &mListAdminsManagingAccountResponse, Type: smithy.ShapeTypeStructure})
+var sListAppsListsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAppsListsRequest, Members: &mListAppsListsRequest, Type: smithy.ShapeTypeStructure})
+var sListAppsListsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAppsListsResponse, Members: &mListAppsListsResponse, Type: smithy.ShapeTypeStructure})
+var sListComplianceStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListComplianceStatusRequest, Members: &mListComplianceStatusRequest, Type: smithy.ShapeTypeStructure})
+var sListComplianceStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListComplianceStatusResponse, Members: &mListComplianceStatusResponse, Type: smithy.ShapeTypeStructure})
+var sListDiscoveredResourcesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDiscoveredResourcesRequest, Members: &mListDiscoveredResourcesRequest, Type: smithy.ShapeTypeStructure})
+var sListDiscoveredResourcesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDiscoveredResourcesResponse, Members: &mListDiscoveredResourcesResponse, Type: smithy.ShapeTypeStructure})
+var sListMemberAccountsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMemberAccountsRequest, Members: &mListMemberAccountsRequest, Type: smithy.ShapeTypeStructure})
+var sListMemberAccountsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMemberAccountsResponse, Members: &mListMemberAccountsResponse, Type: smithy.ShapeTypeStructure})
+var sListPoliciesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPoliciesRequest, Members: &mListPoliciesRequest, Type: smithy.ShapeTypeStructure})
+var sListPoliciesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPoliciesResponse, Members: &mListPoliciesResponse, Type: smithy.ShapeTypeStructure})
+var sListProtocolsListsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProtocolsListsRequest, Members: &mListProtocolsListsRequest, Type: smithy.ShapeTypeStructure})
+var sListProtocolsListsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProtocolsListsResponse, Members: &mListProtocolsListsResponse, Type: smithy.ShapeTypeStructure})
+var sListResourceSetResourcesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourceSetResourcesRequest, Members: &mListResourceSetResourcesRequest, Type: smithy.ShapeTypeStructure})
+var sListResourceSetResourcesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourceSetResourcesResponse, Members: &mListResourceSetResourcesResponse, Type: smithy.ShapeTypeStructure})
+var sListResourceSetsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourceSetsRequest, Members: &mListResourceSetsRequest, Type: smithy.ShapeTypeStructure})
+var sListResourceSetsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourceSetsResponse, Members: &mListResourceSetsResponse, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure})
+var sListThirdPartyFirewallFirewallPoliciesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListThirdPartyFirewallFirewallPoliciesRequest, Members: &mListThirdPartyFirewallFirewallPoliciesRequest, Type: smithy.ShapeTypeStructure})
+var sListThirdPartyFirewallFirewallPoliciesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListThirdPartyFirewallFirewallPoliciesResponse, Members: &mListThirdPartyFirewallFirewallPoliciesResponse, Type: smithy.ShapeTypeStructure})
+var sPutAdminAccountRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAdminAccountRequest, Members: &mPutAdminAccountRequest, Type: smithy.ShapeTypeStructure})
+var sPutAppsListRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAppsListRequest, Members: &mPutAppsListRequest, Type: smithy.ShapeTypeStructure})
+var sPutAppsListResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAppsListResponse, Members: &mPutAppsListResponse, Type: smithy.ShapeTypeStructure})
+var sPutNotificationChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutNotificationChannelRequest, Members: &mPutNotificationChannelRequest, Type: smithy.ShapeTypeStructure})
+var sPutPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutPolicyRequest, Members: &mPutPolicyRequest, Type: smithy.ShapeTypeStructure})
+var sPutPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutPolicyResponse, Members: &mPutPolicyResponse, Type: smithy.ShapeTypeStructure})
+var sPutProtocolsListRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutProtocolsListRequest, Members: &mPutProtocolsListRequest, Type: smithy.ShapeTypeStructure})
+var sPutProtocolsListResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutProtocolsListResponse, Members: &mPutProtocolsListResponse, Type: smithy.ShapeTypeStructure})
+var sPutResourceSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourceSetRequest, Members: &mPutResourceSetRequest, Type: smithy.ShapeTypeStructure})
+var sPutResourceSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourceSetResponse, Members: &mPutResourceSetResponse, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure})
+
+var s_AccountIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AWSAccountId, Type: smithy.ShapeTypeString})
+var sAccountRoleStatus_Ready = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ready", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAccountRoleStatus_Creating = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Creating", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAccountRoleStatus_PendingDeletion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PendingDeletion", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAccountRoleStatus_Deleting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Deleting", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAccountRoleStatus_Deleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Deleted", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAccountScope_Accounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Accounts", ID: &i_AccountIdList, Members: &m_AccountIdList, Type: smithy.ShapeTypeList})
+var sAccountScope_AllAccountsEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllAccountsEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sAccountScope_ExcludeSpecifiedAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludeSpecifiedAccounts", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sActionTarget_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sActionTarget_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_LengthBoundedString, Type: smithy.ShapeTypeString})
+var sAdminAccountSummary_AdminAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdminAccount", ID: &i_AWSAccountId, Type: smithy.ShapeTypeString})
+var sAdminAccountSummary_DefaultAdmin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultAdmin", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sAdminAccountSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iOrganizationStatus, Members: &mOrganizationStatus, Type: smithy.ShapeTypeEnum})
+var s_AdminAccountSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAdminAccountSummary, Members: &mAdminAccountSummary, Type: smithy.ShapeTypeStructure})
+var sAdminScope_AccountScope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountScope", ID: &iAccountScope, Members: &mAccountScope, Type: smithy.ShapeTypeStructure})
+var sAdminScope_OrganizationalUnitScope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationalUnitScope", ID: &iOrganizationalUnitScope, Members: &mOrganizationalUnitScope, Type: smithy.ShapeTypeStructure})
+var sAdminScope_RegionScope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegionScope", ID: &iRegionScope, Members: &mRegionScope, Type: smithy.ShapeTypeStructure})
+var sAdminScope_PolicyTypeScope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyTypeScope", ID: &iPolicyTypeScope, Members: &mPolicyTypeScope, Type: smithy.ShapeTypeStructure})
+var sApp_AppName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sApp_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &i_Protocol, Type: smithy.ShapeTypeString})
+var sApp_Port = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Port", ID: &i_IPPortNumber, Type: smithy.ShapeTypeLong})
+var s_AppsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iApp, Members: &mApp, Type: smithy.ShapeTypeStructure})
+var sAppsListData_ListId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListId", ID: &i_ListId, Type: smithy.ShapeTypeString})
+var sAppsListData_ListName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sAppsListData_ListUpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListUpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString})
+var sAppsListData_CreateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateTime", ID: &i_TimeStamp, Type: smithy.ShapeTypeTimestamp})
+var sAppsListData_LastUpdateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdateTime", ID: &i_TimeStamp, Type: smithy.ShapeTypeTimestamp})
+var sAppsListData_AppsList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppsList", ID: &i_AppsList, Members: &m_AppsList, Type: smithy.ShapeTypeList})
+var sAppsListData_PreviousAppsList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreviousAppsList", ID: &i_PreviousAppsList, Members: &m_PreviousAppsList, Type: smithy.ShapeTypeMap})
+var sAppsListDataSummary_ListArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sAppsListDataSummary_ListId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListId", ID: &i_ListId, Type: smithy.ShapeTypeString})
+var sAppsListDataSummary_ListName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sAppsListDataSummary_AppsList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppsList", ID: &i_AppsList, Members: &m_AppsList, Type: smithy.ShapeTypeList})
+var s_AppsListsData_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAppsListDataSummary, Members: &mAppsListDataSummary, Type: smithy.ShapeTypeStructure})
+var s_AWSAccountIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AWSAccountId, Type: smithy.ShapeTypeString})
+var sAwsEc2InstanceViolation_ViolationTarget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViolationTarget", ID: &i_ViolationTarget, Type: smithy.ShapeTypeString})
+var sAwsEc2InstanceViolation_AwsEc2NetworkInterfaceViolations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsEc2NetworkInterfaceViolations", ID: &i_AwsEc2NetworkInterfaceViolations, Members: &m_AwsEc2NetworkInterfaceViolations, Type: smithy.ShapeTypeList})
+var sAwsEc2NetworkInterfaceViolation_ViolationTarget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViolationTarget", ID: &i_ViolationTarget, Type: smithy.ShapeTypeString})
+var sAwsEc2NetworkInterfaceViolation_ViolatingSecurityGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViolatingSecurityGroups", ID: &i_ResourceIdList, Members: &m_ResourceIdList, Type: smithy.ShapeTypeList})
+var s_AwsEc2NetworkInterfaceViolations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAwsEc2NetworkInterfaceViolation, Members: &mAwsEc2NetworkInterfaceViolation, Type: smithy.ShapeTypeStructure})
+var s_AWSRegionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AWSRegion, Type: smithy.ShapeTypeString})
+var sAwsVPCSecurityGroupViolation_ViolationTarget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViolationTarget", ID: &i_ViolationTarget, Type: smithy.ShapeTypeString})
+var sAwsVPCSecurityGroupViolation_ViolationTargetDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViolationTargetDescription", ID: &i_LengthBoundedString, Type: smithy.ShapeTypeString})
+var sAwsVPCSecurityGroupViolation_PartialMatches = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartialMatches", ID: &i_PartialMatches, Members: &m_PartialMatches, Type: smithy.ShapeTypeList})
+var sAwsVPCSecurityGroupViolation_PossibleSecurityGroupRemediationActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PossibleSecurityGroupRemediationActions", ID: &i_SecurityGroupRemediationActions, Members: &m_SecurityGroupRemediationActions, Type: smithy.ShapeTypeList})
+var sComplianceViolator_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sComplianceViolator_ViolationReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViolationReason", ID: &iViolationReason, Members: &mViolationReason, Type: smithy.ShapeTypeEnum})
+var sComplianceViolator_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i_ResourceType, Type: smithy.ShapeTypeString})
+var sComplianceViolator_Metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Metadata", ID: &i_ComplianceViolatorMetadata, Members: &m_ComplianceViolatorMetadata, Type: smithy.ShapeTypeMap})
+var s_ComplianceViolatorMetadata_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_LengthBoundedString, Type: smithy.ShapeTypeString})
+var s_ComplianceViolatorMetadata_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_LengthBoundedString, Type: smithy.ShapeTypeString})
+var s_ComplianceViolators_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iComplianceViolator, Members: &mComplianceViolator, Type: smithy.ShapeTypeStructure})
+var sCreateNetworkAclAction_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_LengthBoundedString, Type: smithy.ShapeTypeString})
+var sCreateNetworkAclAction_Vpc = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Vpc", ID: &iActionTarget, Members: &mActionTarget, Type: smithy.ShapeTypeStructure})
+var sCreateNetworkAclAction_FMSCanRemediate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FMSCanRemediate", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sCreateNetworkAclEntriesAction_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_LengthBoundedString, Type: smithy.ShapeTypeString})
+var sCreateNetworkAclEntriesAction_NetworkAclId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkAclId", ID: &iActionTarget, Members: &mActionTarget, Type: smithy.ShapeTypeStructure})
+var sCreateNetworkAclEntriesAction_NetworkAclEntriesToBeCreated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkAclEntriesToBeCreated", ID: &i_EntriesDescription, Members: &m_EntriesDescription, Type: smithy.ShapeTypeList})
+var sCreateNetworkAclEntriesAction_FMSCanRemediate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FMSCanRemediate", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var s_CustomerPolicyScopeIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CustomerPolicyScopeId, Type: smithy.ShapeTypeString})
+var sCustomerPolicyScopeIdType_ACCOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCustomerPolicyScopeIdType_ORG_UNIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ORG_UNIT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_CustomerPolicyScopeMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &iCustomerPolicyScopeIdType, Members: &mCustomerPolicyScopeIdType, Type: smithy.ShapeTypeEnum})
+var s_CustomerPolicyScopeMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_CustomerPolicyScopeIdList, Members: &m_CustomerPolicyScopeIdList, Type: smithy.ShapeTypeList})
+var sCustomerPolicyStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCustomerPolicyStatus_OUT_OF_ADMIN_SCOPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OUT_OF_ADMIN_SCOPE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeleteNetworkAclEntriesAction_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_LengthBoundedString, Type: smithy.ShapeTypeString})
+var sDeleteNetworkAclEntriesAction_NetworkAclId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkAclId", ID: &iActionTarget, Members: &mActionTarget, Type: smithy.ShapeTypeStructure})
+var sDeleteNetworkAclEntriesAction_NetworkAclEntriesToBeDeleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkAclEntriesToBeDeleted", ID: &i_EntriesDescription, Members: &m_EntriesDescription, Type: smithy.ShapeTypeList})
+var sDeleteNetworkAclEntriesAction_FMSCanRemediate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FMSCanRemediate", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sDependentServiceName_AWSConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWSConfig", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDependentServiceName_AWSWAF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWSWAF", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDependentServiceName_AWSShieldAdvanced = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWSShieldAdvanced", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDependentServiceName_AWSVirtualPrivateCloud = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWSVirtualPrivateCloud", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDestinationType_IPV4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPV4", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDestinationType_IPV6 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPV6", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDestinationType_PrefixList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrefixList", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDiscoveredResource_URI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "URI", ID: &i_Identifier, Type: smithy.ShapeTypeString})
+var sDiscoveredResource_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AWSAccountId, Type: smithy.ShapeTypeString})
+var sDiscoveredResource_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_ResourceType, Type: smithy.ShapeTypeString})
+var sDiscoveredResource_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var s_DiscoveredResourceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDiscoveredResource, Members: &mDiscoveredResource, Type: smithy.ShapeTypeStructure})
+var sDnsDuplicateRuleGroupViolation_ViolationTarget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViolationTarget", ID: &i_ViolationTarget, Type: smithy.ShapeTypeString})
+var sDnsDuplicateRuleGroupViolation_ViolationTargetDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViolationTargetDescription", ID: &i_LengthBoundedString, Type: smithy.ShapeTypeString})
+var sDnsRuleGroupLimitExceededViolation_ViolationTarget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViolationTarget", ID: &i_ViolationTarget, Type: smithy.ShapeTypeString})
+var sDnsRuleGroupLimitExceededViolation_ViolationTargetDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViolationTargetDescription", ID: &i_LengthBoundedString, Type: smithy.ShapeTypeString})
+var sDnsRuleGroupLimitExceededViolation_NumberOfRuleGroupsAlreadyAssociated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberOfRuleGroupsAlreadyAssociated", ID: &i_BasicInteger, Type: smithy.ShapeTypeInteger})
+var s_DnsRuleGroupPriorities_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_DnsRuleGroupPriority, Type: smithy.ShapeTypeInteger})
+var sDnsRuleGroupPriorityConflictViolation_ViolationTarget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViolationTarget", ID: &i_ViolationTarget, Type: smithy.ShapeTypeString})
+var sDnsRuleGroupPriorityConflictViolation_ViolationTargetDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViolationTargetDescription", ID: &i_LengthBoundedString, Type: smithy.ShapeTypeString})
+var sDnsRuleGroupPriorityConflictViolation_ConflictingPriority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConflictingPriority", ID: &i_DnsRuleGroupPriority, Type: smithy.ShapeTypeInteger})
+var sDnsRuleGroupPriorityConflictViolation_ConflictingPolicyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConflictingPolicyId", ID: &i_PolicyId, Type: smithy.ShapeTypeString})
+var sDnsRuleGroupPriorityConflictViolation_UnavailablePriorities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UnavailablePriorities", ID: &i_DnsRuleGroupPriorities, Members: &m_DnsRuleGroupPriorities, Type: smithy.ShapeTypeList})
+var sEC2AssociateRouteTableAction_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_LengthBoundedString, Type: smithy.ShapeTypeString})
+var sEC2AssociateRouteTableAction_RouteTableId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteTableId", ID: &iActionTarget, Members: &mActionTarget, Type: smithy.ShapeTypeStructure})
+var sEC2AssociateRouteTableAction_SubnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetId", ID: &iActionTarget, Members: &mActionTarget, Type: smithy.ShapeTypeStructure})
+var sEC2AssociateRouteTableAction_GatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayId", ID: &iActionTarget, Members: &mActionTarget, Type: smithy.ShapeTypeStructure})
+var sEC2CopyRouteTableAction_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_LengthBoundedString, Type: smithy.ShapeTypeString})
+var sEC2CopyRouteTableAction_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &iActionTarget, Members: &mActionTarget, Type: smithy.ShapeTypeStructure})
+var sEC2CopyRouteTableAction_RouteTableId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteTableId", ID: &iActionTarget, Members: &mActionTarget, Type: smithy.ShapeTypeStructure})
+var sEC2CreateRouteAction_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_LengthBoundedString, Type: smithy.ShapeTypeString})
+var sEC2CreateRouteAction_DestinationCidrBlock = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationCidrBlock", ID: &i_CIDR, Type: smithy.ShapeTypeString})
+var sEC2CreateRouteAction_DestinationPrefixListId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationPrefixListId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sEC2CreateRouteAction_DestinationIpv6CidrBlock = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationIpv6CidrBlock", ID: &i_CIDR, Type: smithy.ShapeTypeString})
+var sEC2CreateRouteAction_VpcEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointId", ID: &iActionTarget, Members: &mActionTarget, Type: smithy.ShapeTypeStructure})
+var sEC2CreateRouteAction_GatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayId", ID: &iActionTarget, Members: &mActionTarget, Type: smithy.ShapeTypeStructure})
+var sEC2CreateRouteAction_RouteTableId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteTableId", ID: &iActionTarget, Members: &mActionTarget, Type: smithy.ShapeTypeStructure})
+var sEC2CreateRouteTableAction_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_LengthBoundedString, Type: smithy.ShapeTypeString})
+var sEC2CreateRouteTableAction_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &iActionTarget, Members: &mActionTarget, Type: smithy.ShapeTypeStructure})
+var sEC2DeleteRouteAction_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_LengthBoundedString, Type: smithy.ShapeTypeString})
+var sEC2DeleteRouteAction_DestinationCidrBlock = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationCidrBlock", ID: &i_CIDR, Type: smithy.ShapeTypeString})
+var sEC2DeleteRouteAction_DestinationPrefixListId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationPrefixListId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sEC2DeleteRouteAction_DestinationIpv6CidrBlock = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationIpv6CidrBlock", ID: &i_CIDR, Type: smithy.ShapeTypeString})
+var sEC2DeleteRouteAction_RouteTableId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteTableId", ID: &iActionTarget, Members: &mActionTarget, Type: smithy.ShapeTypeStructure})
+var sEC2ReplaceRouteAction_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_LengthBoundedString, Type: smithy.ShapeTypeString})
+var sEC2ReplaceRouteAction_DestinationCidrBlock = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationCidrBlock", ID: &i_CIDR, Type: smithy.ShapeTypeString})
+var sEC2ReplaceRouteAction_DestinationPrefixListId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationPrefixListId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sEC2ReplaceRouteAction_DestinationIpv6CidrBlock = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationIpv6CidrBlock", ID: &i_CIDR, Type: smithy.ShapeTypeString})
+var sEC2ReplaceRouteAction_GatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayId", ID: &iActionTarget, Members: &mActionTarget, Type: smithy.ShapeTypeStructure})
+var sEC2ReplaceRouteAction_RouteTableId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteTableId", ID: &iActionTarget, Members: &mActionTarget, Type: smithy.ShapeTypeStructure})
+var sEC2ReplaceRouteTableAssociationAction_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_LengthBoundedString, Type: smithy.ShapeTypeString})
+var sEC2ReplaceRouteTableAssociationAction_AssociationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociationId", ID: &iActionTarget, Members: &mActionTarget, Type: smithy.ShapeTypeStructure})
+var sEC2ReplaceRouteTableAssociationAction_RouteTableId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteTableId", ID: &iActionTarget, Members: &mActionTarget, Type: smithy.ShapeTypeStructure})
+var s_EntriesDescription_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEntryDescription, Members: &mEntryDescription, Type: smithy.ShapeTypeStructure})
+var s_EntriesWithConflicts_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEntryDescription, Members: &mEntryDescription, Type: smithy.ShapeTypeStructure})
+var sEntryDescription_EntryDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntryDetail", ID: &iNetworkAclEntry, Members: &mNetworkAclEntry, Type: smithy.ShapeTypeStructure})
+var sEntryDescription_EntryRuleNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntryRuleNumber", ID: &i_IntegerObjectMinimum0, Type: smithy.ShapeTypeInteger})
+var sEntryDescription_EntryType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntryType", ID: &iEntryType, Members: &mEntryType, Type: smithy.ShapeTypeEnum})
+var sEntryType_FMSManagedFirstEntry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FMSManagedFirstEntry", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntryType_FMSManagedLastEntry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FMSManagedLastEntry", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntryType_CustomEntry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomEntry", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntryViolation_ExpectedEntry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpectedEntry", ID: &iEntryDescription, Members: &mEntryDescription, Type: smithy.ShapeTypeStructure})
+var sEntryViolation_ExpectedEvaluationOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpectedEvaluationOrder", ID: &i_LengthBoundedString, Type: smithy.ShapeTypeString})
+var sEntryViolation_ActualEvaluationOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActualEvaluationOrder", ID: &i_LengthBoundedString, Type: smithy.ShapeTypeString})
+var sEntryViolation_EntryAtExpectedEvaluationOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntryAtExpectedEvaluationOrder", ID: &iEntryDescription, Members: &mEntryDescription, Type: smithy.ShapeTypeStructure})
+var sEntryViolation_EntriesWithConflicts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntriesWithConflicts", ID: &i_EntriesWithConflicts, Members: &m_EntriesWithConflicts, Type: smithy.ShapeTypeList})
+var sEntryViolation_EntryViolationReasons = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntryViolationReasons", ID: &i_EntryViolationReasons, Members: &m_EntryViolationReasons, Type: smithy.ShapeTypeList})
+var sEntryViolationReason_MissingExpectedEntry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MissingExpectedEntry", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntryViolationReason_IncorrectEntryOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncorrectEntryOrder", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntryViolationReason_EntryConflict = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntryConflict", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_EntryViolationReasons_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEntryViolationReason, Members: &mEntryViolationReason, Type: smithy.ShapeTypeEnum})
+var s_EntryViolations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEntryViolation, Members: &mEntryViolation, Type: smithy.ShapeTypeStructure})
+var sEvaluationResult_ComplianceStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComplianceStatus", ID: &iPolicyComplianceStatusType, Members: &mPolicyComplianceStatusType, Type: smithy.ShapeTypeEnum})
+var sEvaluationResult_ViolatorCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViolatorCount", ID: &i_ResourceCount, Type: smithy.ShapeTypeLong})
+var sEvaluationResult_EvaluationLimitExceeded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EvaluationLimitExceeded", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var s_EvaluationResults_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEvaluationResult, Members: &mEvaluationResult, Type: smithy.ShapeTypeStructure})
+var sExpectedRoute_IpV4Cidr = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpV4Cidr", ID: &i_CIDR, Type: smithy.ShapeTypeString})
+var sExpectedRoute_PrefixListId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrefixListId", ID: &i_CIDR, Type: smithy.ShapeTypeString})
+var sExpectedRoute_IpV6Cidr = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpV6Cidr", ID: &i_CIDR, Type: smithy.ShapeTypeString})
+var sExpectedRoute_ContributingSubnets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContributingSubnets", ID: &i_ResourceIdList, Members: &m_ResourceIdList, Type: smithy.ShapeTypeList})
+var sExpectedRoute_AllowedTargets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllowedTargets", ID: &i_LengthBoundedStringList, Members: &m_LengthBoundedStringList, Type: smithy.ShapeTypeList})
+var sExpectedRoute_RouteTableId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteTableId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var s_ExpectedRoutes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExpectedRoute, Members: &mExpectedRoute, Type: smithy.ShapeTypeStructure})
+var sFailedItem_URI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "URI", ID: &i_Identifier, Type: smithy.ShapeTypeString})
+var sFailedItem_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iFailedItemReason, Members: &mFailedItemReason, Type: smithy.ShapeTypeEnum})
+var s_FailedItemList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFailedItem, Members: &mFailedItem, Type: smithy.ShapeTypeStructure})
+var sFailedItemReason_NotValidArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotValidArn", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFailedItemReason_NotValidPartition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotValidPartition", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFailedItemReason_NotValidRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotValidRegion", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFailedItemReason_NotValidService = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotValidService", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFailedItemReason_NotValidResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotValidResourceType", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFailedItemReason_NotValidAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotValidAccountId", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFirewallDeploymentModel_CENTRALIZED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CENTRALIZED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFirewallDeploymentModel_DISTRIBUTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISTRIBUTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFirewallSubnetIsOutOfScopeViolation_FirewallSubnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallSubnetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sFirewallSubnetIsOutOfScopeViolation_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sFirewallSubnetIsOutOfScopeViolation_SubnetAvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetAvailabilityZone", ID: &i_LengthBoundedString, Type: smithy.ShapeTypeString})
+var sFirewallSubnetIsOutOfScopeViolation_SubnetAvailabilityZoneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetAvailabilityZoneId", ID: &i_LengthBoundedString, Type: smithy.ShapeTypeString})
+var sFirewallSubnetIsOutOfScopeViolation_VpcEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sFirewallSubnetMissingVPCEndpointViolation_FirewallSubnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallSubnetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sFirewallSubnetMissingVPCEndpointViolation_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sFirewallSubnetMissingVPCEndpointViolation_SubnetAvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetAvailabilityZone", ID: &i_LengthBoundedString, Type: smithy.ShapeTypeString})
+var sFirewallSubnetMissingVPCEndpointViolation_SubnetAvailabilityZoneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetAvailabilityZoneId", ID: &i_LengthBoundedString, Type: smithy.ShapeTypeString})
+var sFMSPolicyUpdateFirewallCreationConfigAction_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_LengthBoundedString, Type: smithy.ShapeTypeString})
+var sFMSPolicyUpdateFirewallCreationConfigAction_FirewallCreationConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallCreationConfig", ID: &i_ManagedServiceData, Type: smithy.ShapeTypeString})
+var s_IdentifierList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Identifier, Type: smithy.ShapeTypeString})
+var sInternalErrorException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidInputException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidNetworkAclEntriesViolation_Vpc = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Vpc", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sInvalidNetworkAclEntriesViolation_Subnet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subnet", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sInvalidNetworkAclEntriesViolation_SubnetAvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetAvailabilityZone", ID: &i_LengthBoundedString, Type: smithy.ShapeTypeString})
+var sInvalidNetworkAclEntriesViolation_CurrentAssociatedNetworkAcl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentAssociatedNetworkAcl", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sInvalidNetworkAclEntriesViolation_EntryViolations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntryViolations", ID: &i_EntryViolations, Members: &m_EntryViolations, Type: smithy.ShapeTypeList})
+var sInvalidOperationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidTypeException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_IssueInfoMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &iDependentServiceName, Members: &mDependentServiceName, Type: smithy.ShapeTypeEnum})
+var s_IssueInfoMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_DetailedInfo, Type: smithy.ShapeTypeString})
+var s_LengthBoundedStringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_LengthBoundedString, Type: smithy.ShapeTypeString})
+var sLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sMarketplaceSubscriptionOnboardingStatus_NO_SUBSCRIPTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_SUBSCRIPTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMarketplaceSubscriptionOnboardingStatus_NOT_COMPLETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_COMPLETE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMarketplaceSubscriptionOnboardingStatus_COMPLETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_MemberAccounts_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AWSAccountId, Type: smithy.ShapeTypeString})
+var sNetworkAclCommonPolicy_NetworkAclEntrySet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkAclEntrySet", ID: &iNetworkAclEntrySet, Members: &mNetworkAclEntrySet, Type: smithy.ShapeTypeStructure})
+var s_NetworkAclEntries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNetworkAclEntry, Members: &mNetworkAclEntry, Type: smithy.ShapeTypeStructure})
+var sNetworkAclEntry_IcmpTypeCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IcmpTypeCode", ID: &iNetworkAclIcmpTypeCode, Members: &mNetworkAclIcmpTypeCode, Type: smithy.ShapeTypeStructure})
+var sNetworkAclEntry_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &i_LengthBoundedString, Type: smithy.ShapeTypeString})
+var sNetworkAclEntry_PortRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortRange", ID: &iNetworkAclPortRange, Members: &mNetworkAclPortRange, Type: smithy.ShapeTypeStructure})
+var sNetworkAclEntry_CidrBlock = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CidrBlock", ID: &i_LengthBoundedNonEmptyString, Type: smithy.ShapeTypeString})
+var sNetworkAclEntry_Ipv6CidrBlock = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ipv6CidrBlock", ID: &i_LengthBoundedNonEmptyString, Type: smithy.ShapeTypeString})
+var sNetworkAclEntry_RuleAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleAction", ID: &iNetworkAclRuleAction, Members: &mNetworkAclRuleAction, Type: smithy.ShapeTypeEnum})
+var sNetworkAclEntry_Egress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Egress", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean})
+var sNetworkAclEntrySet_FirstEntries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirstEntries", ID: &i_NetworkAclEntries, Members: &m_NetworkAclEntries, Type: smithy.ShapeTypeList})
+var sNetworkAclEntrySet_ForceRemediateForFirstEntries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForceRemediateForFirstEntries", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean})
+var sNetworkAclEntrySet_LastEntries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastEntries", ID: &i_NetworkAclEntries, Members: &m_NetworkAclEntries, Type: smithy.ShapeTypeList})
+var sNetworkAclEntrySet_ForceRemediateForLastEntries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForceRemediateForLastEntries", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean})
+var sNetworkAclIcmpTypeCode_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_IntegerObject, Type: smithy.ShapeTypeInteger})
+var sNetworkAclIcmpTypeCode_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_IntegerObject, Type: smithy.ShapeTypeInteger})
+var sNetworkAclPortRange_From = smithy.NewStaticSchema(smithy.StaticSchema{Member: "From", ID: &i_IPPortNumberInteger, Type: smithy.ShapeTypeInteger})
+var sNetworkAclPortRange_To = smithy.NewStaticSchema(smithy.StaticSchema{Member: "To", ID: &i_IPPortNumberInteger, Type: smithy.ShapeTypeInteger})
+var sNetworkAclRuleAction_ALLOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALLOW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNetworkAclRuleAction_DENY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DENY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_NetworkFirewallActionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NetworkFirewallAction, Type: smithy.ShapeTypeString})
+var sNetworkFirewallBlackHoleRouteDetectedViolation_ViolationTarget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViolationTarget", ID: &i_ViolationTarget, Type: smithy.ShapeTypeString})
+var sNetworkFirewallBlackHoleRouteDetectedViolation_RouteTableId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteTableId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sNetworkFirewallBlackHoleRouteDetectedViolation_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sNetworkFirewallBlackHoleRouteDetectedViolation_ViolatingRoutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViolatingRoutes", ID: &i_Routes, Members: &m_Routes, Type: smithy.ShapeTypeList})
+var sNetworkFirewallInternetTrafficNotInspectedViolation_SubnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sNetworkFirewallInternetTrafficNotInspectedViolation_SubnetAvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetAvailabilityZone", ID: &i_LengthBoundedString, Type: smithy.ShapeTypeString})
+var sNetworkFirewallInternetTrafficNotInspectedViolation_RouteTableId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteTableId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sNetworkFirewallInternetTrafficNotInspectedViolation_ViolatingRoutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViolatingRoutes", ID: &i_Routes, Members: &m_Routes, Type: smithy.ShapeTypeList})
+var sNetworkFirewallInternetTrafficNotInspectedViolation_IsRouteTableUsedInDifferentAZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsRouteTableUsedInDifferentAZ", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sNetworkFirewallInternetTrafficNotInspectedViolation_CurrentFirewallSubnetRouteTable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentFirewallSubnetRouteTable", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sNetworkFirewallInternetTrafficNotInspectedViolation_ExpectedFirewallEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpectedFirewallEndpoint", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sNetworkFirewallInternetTrafficNotInspectedViolation_FirewallSubnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallSubnetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sNetworkFirewallInternetTrafficNotInspectedViolation_ExpectedFirewallSubnetRoutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpectedFirewallSubnetRoutes", ID: &i_ExpectedRoutes, Members: &m_ExpectedRoutes, Type: smithy.ShapeTypeList})
+var sNetworkFirewallInternetTrafficNotInspectedViolation_ActualFirewallSubnetRoutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActualFirewallSubnetRoutes", ID: &i_Routes, Members: &m_Routes, Type: smithy.ShapeTypeList})
+var sNetworkFirewallInternetTrafficNotInspectedViolation_InternetGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InternetGatewayId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sNetworkFirewallInternetTrafficNotInspectedViolation_CurrentInternetGatewayRouteTable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentInternetGatewayRouteTable", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sNetworkFirewallInternetTrafficNotInspectedViolation_ExpectedInternetGatewayRoutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpectedInternetGatewayRoutes", ID: &i_ExpectedRoutes, Members: &m_ExpectedRoutes, Type: smithy.ShapeTypeList})
+var sNetworkFirewallInternetTrafficNotInspectedViolation_ActualInternetGatewayRoutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActualInternetGatewayRoutes", ID: &i_Routes, Members: &m_Routes, Type: smithy.ShapeTypeList})
+var sNetworkFirewallInternetTrafficNotInspectedViolation_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sNetworkFirewallInvalidRouteConfigurationViolation_AffectedSubnets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AffectedSubnets", ID: &i_ResourceIdList, Members: &m_ResourceIdList, Type: smithy.ShapeTypeList})
+var sNetworkFirewallInvalidRouteConfigurationViolation_RouteTableId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteTableId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sNetworkFirewallInvalidRouteConfigurationViolation_IsRouteTableUsedInDifferentAZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsRouteTableUsedInDifferentAZ", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sNetworkFirewallInvalidRouteConfigurationViolation_ViolatingRoute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViolatingRoute", ID: &iRoute, Members: &mRoute, Type: smithy.ShapeTypeStructure})
+var sNetworkFirewallInvalidRouteConfigurationViolation_CurrentFirewallSubnetRouteTable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentFirewallSubnetRouteTable", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sNetworkFirewallInvalidRouteConfigurationViolation_ExpectedFirewallEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpectedFirewallEndpoint", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sNetworkFirewallInvalidRouteConfigurationViolation_ActualFirewallEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActualFirewallEndpoint", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sNetworkFirewallInvalidRouteConfigurationViolation_ExpectedFirewallSubnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpectedFirewallSubnetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sNetworkFirewallInvalidRouteConfigurationViolation_ActualFirewallSubnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActualFirewallSubnetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sNetworkFirewallInvalidRouteConfigurationViolation_ExpectedFirewallSubnetRoutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpectedFirewallSubnetRoutes", ID: &i_ExpectedRoutes, Members: &m_ExpectedRoutes, Type: smithy.ShapeTypeList})
+var sNetworkFirewallInvalidRouteConfigurationViolation_ActualFirewallSubnetRoutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActualFirewallSubnetRoutes", ID: &i_Routes, Members: &m_Routes, Type: smithy.ShapeTypeList})
+var sNetworkFirewallInvalidRouteConfigurationViolation_InternetGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InternetGatewayId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sNetworkFirewallInvalidRouteConfigurationViolation_CurrentInternetGatewayRouteTable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentInternetGatewayRouteTable", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sNetworkFirewallInvalidRouteConfigurationViolation_ExpectedInternetGatewayRoutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpectedInternetGatewayRoutes", ID: &i_ExpectedRoutes, Members: &m_ExpectedRoutes, Type: smithy.ShapeTypeList})
+var sNetworkFirewallInvalidRouteConfigurationViolation_ActualInternetGatewayRoutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActualInternetGatewayRoutes", ID: &i_Routes, Members: &m_Routes, Type: smithy.ShapeTypeList})
+var sNetworkFirewallInvalidRouteConfigurationViolation_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sNetworkFirewallMissingExpectedRoutesViolation_ViolationTarget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViolationTarget", ID: &i_ViolationTarget, Type: smithy.ShapeTypeString})
+var sNetworkFirewallMissingExpectedRoutesViolation_ExpectedRoutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpectedRoutes", ID: &i_ExpectedRoutes, Members: &m_ExpectedRoutes, Type: smithy.ShapeTypeList})
+var sNetworkFirewallMissingExpectedRoutesViolation_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sNetworkFirewallMissingExpectedRTViolation_ViolationTarget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViolationTarget", ID: &i_ViolationTarget, Type: smithy.ShapeTypeString})
+var sNetworkFirewallMissingExpectedRTViolation_VPC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPC", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sNetworkFirewallMissingExpectedRTViolation_AvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZone", ID: &i_LengthBoundedString, Type: smithy.ShapeTypeString})
+var sNetworkFirewallMissingExpectedRTViolation_CurrentRouteTable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentRouteTable", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sNetworkFirewallMissingExpectedRTViolation_ExpectedRouteTable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpectedRouteTable", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sNetworkFirewallMissingFirewallViolation_ViolationTarget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViolationTarget", ID: &i_ViolationTarget, Type: smithy.ShapeTypeString})
+var sNetworkFirewallMissingFirewallViolation_VPC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPC", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sNetworkFirewallMissingFirewallViolation_AvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZone", ID: &i_LengthBoundedString, Type: smithy.ShapeTypeString})
+var sNetworkFirewallMissingFirewallViolation_TargetViolationReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetViolationReason", ID: &i_TargetViolationReason, Type: smithy.ShapeTypeString})
+var sNetworkFirewallMissingSubnetViolation_ViolationTarget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViolationTarget", ID: &i_ViolationTarget, Type: smithy.ShapeTypeString})
+var sNetworkFirewallMissingSubnetViolation_VPC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPC", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sNetworkFirewallMissingSubnetViolation_AvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZone", ID: &i_LengthBoundedString, Type: smithy.ShapeTypeString})
+var sNetworkFirewallMissingSubnetViolation_TargetViolationReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetViolationReason", ID: &i_TargetViolationReason, Type: smithy.ShapeTypeString})
+var sNetworkFirewallOverrideAction_DROP_TO_ALERT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DROP_TO_ALERT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNetworkFirewallPolicy_FirewallDeploymentModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallDeploymentModel", ID: &iFirewallDeploymentModel, Members: &mFirewallDeploymentModel, Type: smithy.ShapeTypeEnum})
+var sNetworkFirewallPolicyDescription_StatelessRuleGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatelessRuleGroups", ID: &i_StatelessRuleGroupList, Members: &m_StatelessRuleGroupList, Type: smithy.ShapeTypeList})
+var sNetworkFirewallPolicyDescription_StatelessDefaultActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatelessDefaultActions", ID: &i_NetworkFirewallActionList, Members: &m_NetworkFirewallActionList, Type: smithy.ShapeTypeList})
+var sNetworkFirewallPolicyDescription_StatelessFragmentDefaultActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatelessFragmentDefaultActions", ID: &i_NetworkFirewallActionList, Members: &m_NetworkFirewallActionList, Type: smithy.ShapeTypeList})
+var sNetworkFirewallPolicyDescription_StatelessCustomActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatelessCustomActions", ID: &i_NetworkFirewallActionList, Members: &m_NetworkFirewallActionList, Type: smithy.ShapeTypeList})
+var sNetworkFirewallPolicyDescription_StatefulRuleGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatefulRuleGroups", ID: &i_StatefulRuleGroupList, Members: &m_StatefulRuleGroupList, Type: smithy.ShapeTypeList})
+var sNetworkFirewallPolicyDescription_StatefulDefaultActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatefulDefaultActions", ID: &i_NetworkFirewallActionList, Members: &m_NetworkFirewallActionList, Type: smithy.ShapeTypeList})
+var sNetworkFirewallPolicyDescription_StatefulEngineOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatefulEngineOptions", ID: &iStatefulEngineOptions, Members: &mStatefulEngineOptions, Type: smithy.ShapeTypeStructure})
+var sNetworkFirewallPolicyModifiedViolation_ViolationTarget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViolationTarget", ID: &i_ViolationTarget, Type: smithy.ShapeTypeString})
+var sNetworkFirewallPolicyModifiedViolation_CurrentPolicyDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentPolicyDescription", ID: &iNetworkFirewallPolicyDescription, Members: &mNetworkFirewallPolicyDescription, Type: smithy.ShapeTypeStructure})
+var sNetworkFirewallPolicyModifiedViolation_ExpectedPolicyDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpectedPolicyDescription", ID: &iNetworkFirewallPolicyDescription, Members: &mNetworkFirewallPolicyDescription, Type: smithy.ShapeTypeStructure})
+var sNetworkFirewallStatefulRuleGroupOverride_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &iNetworkFirewallOverrideAction, Members: &mNetworkFirewallOverrideAction, Type: smithy.ShapeTypeEnum})
+var sNetworkFirewallUnexpectedFirewallRoutesViolation_FirewallSubnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallSubnetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sNetworkFirewallUnexpectedFirewallRoutesViolation_ViolatingRoutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViolatingRoutes", ID: &i_Routes, Members: &m_Routes, Type: smithy.ShapeTypeList})
+var sNetworkFirewallUnexpectedFirewallRoutesViolation_RouteTableId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteTableId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sNetworkFirewallUnexpectedFirewallRoutesViolation_FirewallEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallEndpoint", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sNetworkFirewallUnexpectedFirewallRoutesViolation_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sNetworkFirewallUnexpectedGatewayRoutesViolation_GatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sNetworkFirewallUnexpectedGatewayRoutesViolation_ViolatingRoutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViolatingRoutes", ID: &i_Routes, Members: &m_Routes, Type: smithy.ShapeTypeList})
+var sNetworkFirewallUnexpectedGatewayRoutesViolation_RouteTableId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteTableId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sNetworkFirewallUnexpectedGatewayRoutesViolation_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var s_OrderedRemediationActions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRemediationActionWithOrder, Members: &mRemediationActionWithOrder, Type: smithy.ShapeTypeStructure})
+var s_OrganizationalUnitIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_OrganizationalUnitId, Type: smithy.ShapeTypeString})
+var sOrganizationalUnitScope_OrganizationalUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationalUnits", ID: &i_OrganizationalUnitIdList, Members: &m_OrganizationalUnitIdList, Type: smithy.ShapeTypeList})
+var sOrganizationalUnitScope_AllOrganizationalUnitsEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllOrganizationalUnitsEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sOrganizationalUnitScope_ExcludeSpecifiedOrganizationalUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludeSpecifiedOrganizationalUnits", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sOrganizationStatus_Onboarding = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Onboarding", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOrganizationStatus_OnboardingComplete = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OnboardingComplete", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOrganizationStatus_Offboarding = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Offboarding", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOrganizationStatus_OffboardingComplete = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OffboardingComplete", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPartialMatch_Reference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reference", ID: &i_ReferenceRule, Type: smithy.ShapeTypeString})
+var sPartialMatch_TargetViolationReasons = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetViolationReasons", ID: &i_TargetViolationReasons, Members: &m_TargetViolationReasons, Type: smithy.ShapeTypeList})
+var s_PartialMatches_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPartialMatch, Members: &mPartialMatch, Type: smithy.ShapeTypeStructure})
+var sPolicy_PolicyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyId", ID: &i_PolicyId, Type: smithy.ShapeTypeString})
+var sPolicy_PolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sPolicy_PolicyUpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyUpdateToken", ID: &i_PolicyUpdateToken, Type: smithy.ShapeTypeString})
+var sPolicy_SecurityServicePolicyData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityServicePolicyData", ID: &iSecurityServicePolicyData, Members: &mSecurityServicePolicyData, Type: smithy.ShapeTypeStructure})
+var sPolicy_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i_ResourceType, Type: smithy.ShapeTypeString})
+var sPolicy_ResourceTypeList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTypeList", ID: &i_ResourceTypeList, Members: &m_ResourceTypeList, Type: smithy.ShapeTypeList})
+var sPolicy_ResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTags", ID: &i_ResourceTags, Members: &m_ResourceTags, Type: smithy.ShapeTypeList})
+var sPolicy_ExcludeResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludeResourceTags", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sPolicy_RemediationEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemediationEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sPolicy_DeleteUnusedFMManagedResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteUnusedFMManagedResources", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sPolicy_IncludeMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeMap", ID: &i_CustomerPolicyScopeMap, Members: &m_CustomerPolicyScopeMap, Type: smithy.ShapeTypeMap})
+var sPolicy_ExcludeMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludeMap", ID: &i_CustomerPolicyScopeMap, Members: &m_CustomerPolicyScopeMap, Type: smithy.ShapeTypeMap})
+var sPolicy_ResourceSetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSetIds", ID: &i_ResourceSetIds, Members: &m_ResourceSetIds, Type: smithy.ShapeTypeList})
+var sPolicy_PolicyDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyDescription", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sPolicy_PolicyStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyStatus", ID: &iCustomerPolicyStatus, Members: &mCustomerPolicyStatus, Type: smithy.ShapeTypeEnum})
+var sPolicy_ResourceTagLogicalOperator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTagLogicalOperator", ID: &iResourceTagLogicalOperator, Members: &mResourceTagLogicalOperator, Type: smithy.ShapeTypeEnum})
+var sPolicyComplianceDetail_PolicyOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyOwner", ID: &i_AWSAccountId, Type: smithy.ShapeTypeString})
+var sPolicyComplianceDetail_PolicyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyId", ID: &i_PolicyId, Type: smithy.ShapeTypeString})
+var sPolicyComplianceDetail_MemberAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberAccount", ID: &i_AWSAccountId, Type: smithy.ShapeTypeString})
+var sPolicyComplianceDetail_Violators = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Violators", ID: &i_ComplianceViolators, Members: &m_ComplianceViolators, Type: smithy.ShapeTypeList})
+var sPolicyComplianceDetail_EvaluationLimitExceeded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EvaluationLimitExceeded", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sPolicyComplianceDetail_ExpiredAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiredAt", ID: &i_TimeStamp, Type: smithy.ShapeTypeTimestamp})
+var sPolicyComplianceDetail_IssueInfoMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IssueInfoMap", ID: &i_IssueInfoMap, Members: &m_IssueInfoMap, Type: smithy.ShapeTypeMap})
+var sPolicyComplianceStatus_PolicyOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyOwner", ID: &i_AWSAccountId, Type: smithy.ShapeTypeString})
+var sPolicyComplianceStatus_PolicyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyId", ID: &i_PolicyId, Type: smithy.ShapeTypeString})
+var sPolicyComplianceStatus_PolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sPolicyComplianceStatus_MemberAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberAccount", ID: &i_AWSAccountId, Type: smithy.ShapeTypeString})
+var sPolicyComplianceStatus_EvaluationResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EvaluationResults", ID: &i_EvaluationResults, Members: &m_EvaluationResults, Type: smithy.ShapeTypeList})
+var sPolicyComplianceStatus_LastUpdated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdated", ID: &i_TimeStamp, Type: smithy.ShapeTypeTimestamp})
+var sPolicyComplianceStatus_IssueInfoMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IssueInfoMap", ID: &i_IssueInfoMap, Members: &m_IssueInfoMap, Type: smithy.ShapeTypeMap})
+var s_PolicyComplianceStatusList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPolicyComplianceStatus, Members: &mPolicyComplianceStatus, Type: smithy.ShapeTypeStructure})
+var sPolicyComplianceStatusType_Compliant = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Compliant", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPolicyComplianceStatusType_NonCompliant = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NonCompliant", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPolicyOption_NetworkFirewallPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkFirewallPolicy", ID: &iNetworkFirewallPolicy, Members: &mNetworkFirewallPolicy, Type: smithy.ShapeTypeStructure})
+var sPolicyOption_ThirdPartyFirewallPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThirdPartyFirewallPolicy", ID: &iThirdPartyFirewallPolicy, Members: &mThirdPartyFirewallPolicy, Type: smithy.ShapeTypeStructure})
+var sPolicyOption_NetworkAclCommonPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkAclCommonPolicy", ID: &iNetworkAclCommonPolicy, Members: &mNetworkAclCommonPolicy, Type: smithy.ShapeTypeStructure})
+var sPolicySummary_PolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sPolicySummary_PolicyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyId", ID: &i_PolicyId, Type: smithy.ShapeTypeString})
+var sPolicySummary_PolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sPolicySummary_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i_ResourceType, Type: smithy.ShapeTypeString})
+var sPolicySummary_SecurityServiceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityServiceType", ID: &iSecurityServiceType, Members: &mSecurityServiceType, Type: smithy.ShapeTypeEnum})
+var sPolicySummary_RemediationEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemediationEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sPolicySummary_DeleteUnusedFMManagedResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteUnusedFMManagedResources", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sPolicySummary_PolicyStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyStatus", ID: &iCustomerPolicyStatus, Members: &mCustomerPolicyStatus, Type: smithy.ShapeTypeEnum})
+var s_PolicySummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPolicySummary, Members: &mPolicySummary, Type: smithy.ShapeTypeStructure})
+var sPolicyTypeScope_PolicyTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyTypes", ID: &i_SecurityServiceTypeList, Members: &m_SecurityServiceTypeList, Type: smithy.ShapeTypeList})
+var sPolicyTypeScope_AllPolicyTypesEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllPolicyTypesEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sPossibleRemediationAction_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_LengthBoundedString, Type: smithy.ShapeTypeString})
+var sPossibleRemediationAction_OrderedRemediationActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrderedRemediationActions", ID: &i_OrderedRemediationActions, Members: &m_OrderedRemediationActions, Type: smithy.ShapeTypeList})
+var sPossibleRemediationAction_IsDefaultAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsDefaultAction", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var s_PossibleRemediationActionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPossibleRemediationAction, Members: &mPossibleRemediationAction, Type: smithy.ShapeTypeStructure})
+var sPossibleRemediationActions_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_LengthBoundedString, Type: smithy.ShapeTypeString})
+var sPossibleRemediationActions_Actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Actions", ID: &i_PossibleRemediationActionList, Members: &m_PossibleRemediationActionList, Type: smithy.ShapeTypeList})
+var s_PreviousAppsList_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_PreviousListVersion, Type: smithy.ShapeTypeString})
+var s_PreviousAppsList_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_AppsList, Members: &m_AppsList, Type: smithy.ShapeTypeList})
+var s_PreviousProtocolsList_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_PreviousListVersion, Type: smithy.ShapeTypeString})
+var s_PreviousProtocolsList_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ProtocolsList, Members: &m_ProtocolsList, Type: smithy.ShapeTypeList})
+var s_ProtocolsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Protocol, Type: smithy.ShapeTypeString})
+var sProtocolsListData_ListId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListId", ID: &i_ListId, Type: smithy.ShapeTypeString})
+var sProtocolsListData_ListName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sProtocolsListData_ListUpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListUpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString})
+var sProtocolsListData_CreateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateTime", ID: &i_TimeStamp, Type: smithy.ShapeTypeTimestamp})
+var sProtocolsListData_LastUpdateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdateTime", ID: &i_TimeStamp, Type: smithy.ShapeTypeTimestamp})
+var sProtocolsListData_ProtocolsList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProtocolsList", ID: &i_ProtocolsList, Members: &m_ProtocolsList, Type: smithy.ShapeTypeList})
+var sProtocolsListData_PreviousProtocolsList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreviousProtocolsList", ID: &i_PreviousProtocolsList, Members: &m_PreviousProtocolsList, Type: smithy.ShapeTypeMap})
+var sProtocolsListDataSummary_ListArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sProtocolsListDataSummary_ListId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListId", ID: &i_ListId, Type: smithy.ShapeTypeString})
+var sProtocolsListDataSummary_ListName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sProtocolsListDataSummary_ProtocolsList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProtocolsList", ID: &i_ProtocolsList, Members: &m_ProtocolsList, Type: smithy.ShapeTypeList})
+var s_ProtocolsListsData_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProtocolsListDataSummary, Members: &mProtocolsListDataSummary, Type: smithy.ShapeTypeStructure})
+var sRegionScope_Regions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Regions", ID: &i_AWSRegionList, Members: &m_AWSRegionList, Type: smithy.ShapeTypeList})
+var sRegionScope_AllRegionsEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllRegionsEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sRemediationAction_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_LengthBoundedString, Type: smithy.ShapeTypeString})
+var sRemediationAction_EC2CreateRouteAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EC2CreateRouteAction", ID: &iEC2CreateRouteAction, Members: &mEC2CreateRouteAction, Type: smithy.ShapeTypeStructure})
+var sRemediationAction_EC2ReplaceRouteAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EC2ReplaceRouteAction", ID: &iEC2ReplaceRouteAction, Members: &mEC2ReplaceRouteAction, Type: smithy.ShapeTypeStructure})
+var sRemediationAction_EC2DeleteRouteAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EC2DeleteRouteAction", ID: &iEC2DeleteRouteAction, Members: &mEC2DeleteRouteAction, Type: smithy.ShapeTypeStructure})
+var sRemediationAction_EC2CopyRouteTableAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EC2CopyRouteTableAction", ID: &iEC2CopyRouteTableAction, Members: &mEC2CopyRouteTableAction, Type: smithy.ShapeTypeStructure})
+var sRemediationAction_EC2ReplaceRouteTableAssociationAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EC2ReplaceRouteTableAssociationAction", ID: &iEC2ReplaceRouteTableAssociationAction, Members: &mEC2ReplaceRouteTableAssociationAction, Type: smithy.ShapeTypeStructure})
+var sRemediationAction_EC2AssociateRouteTableAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EC2AssociateRouteTableAction", ID: &iEC2AssociateRouteTableAction, Members: &mEC2AssociateRouteTableAction, Type: smithy.ShapeTypeStructure})
+var sRemediationAction_EC2CreateRouteTableAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EC2CreateRouteTableAction", ID: &iEC2CreateRouteTableAction, Members: &mEC2CreateRouteTableAction, Type: smithy.ShapeTypeStructure})
+var sRemediationAction_FMSPolicyUpdateFirewallCreationConfigAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FMSPolicyUpdateFirewallCreationConfigAction", ID: &iFMSPolicyUpdateFirewallCreationConfigAction, Members: &mFMSPolicyUpdateFirewallCreationConfigAction, Type: smithy.ShapeTypeStructure})
+var sRemediationAction_CreateNetworkAclAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateNetworkAclAction", ID: &iCreateNetworkAclAction, Members: &mCreateNetworkAclAction, Type: smithy.ShapeTypeStructure})
+var sRemediationAction_ReplaceNetworkAclAssociationAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplaceNetworkAclAssociationAction", ID: &iReplaceNetworkAclAssociationAction, Members: &mReplaceNetworkAclAssociationAction, Type: smithy.ShapeTypeStructure})
+var sRemediationAction_CreateNetworkAclEntriesAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateNetworkAclEntriesAction", ID: &iCreateNetworkAclEntriesAction, Members: &mCreateNetworkAclEntriesAction, Type: smithy.ShapeTypeStructure})
+var sRemediationAction_DeleteNetworkAclEntriesAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteNetworkAclEntriesAction", ID: &iDeleteNetworkAclEntriesAction, Members: &mDeleteNetworkAclEntriesAction, Type: smithy.ShapeTypeStructure})
+var sRemediationActionType_Remove = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Remove", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRemediationActionType_Modify = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Modify", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRemediationActionWithOrder_RemediationAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemediationAction", ID: &iRemediationAction, Members: &mRemediationAction, Type: smithy.ShapeTypeStructure})
+var sRemediationActionWithOrder_Order = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Order", ID: &i_BasicInteger, Type: smithy.ShapeTypeInteger})
+var sReplaceNetworkAclAssociationAction_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_LengthBoundedString, Type: smithy.ShapeTypeString})
+var sReplaceNetworkAclAssociationAction_AssociationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociationId", ID: &iActionTarget, Members: &mActionTarget, Type: smithy.ShapeTypeStructure})
+var sReplaceNetworkAclAssociationAction_NetworkAclId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkAclId", ID: &iActionTarget, Members: &mActionTarget, Type: smithy.ShapeTypeStructure})
+var sReplaceNetworkAclAssociationAction_FMSCanRemediate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FMSCanRemediate", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sResource_URI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "URI", ID: &i_Identifier, Type: smithy.ShapeTypeString})
+var sResource_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AWSAccountId, Type: smithy.ShapeTypeString})
+var s_ResourceArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var s_ResourceIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var s_ResourceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResource, Members: &mResource, Type: smithy.ShapeTypeStructure})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sResourceSet_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Base62Id, Type: smithy.ShapeTypeString})
+var sResourceSet_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString})
+var sResourceSet_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sResourceSet_UpdateToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateToken", ID: &i_UpdateToken, Type: smithy.ShapeTypeString})
+var sResourceSet_ResourceTypeList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTypeList", ID: &i_ResourceTypeList, Members: &m_ResourceTypeList, Type: smithy.ShapeTypeList})
+var sResourceSet_LastUpdateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdateTime", ID: &i_TimeStamp, Type: smithy.ShapeTypeTimestamp})
+var sResourceSet_ResourceSetStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSetStatus", ID: &iResourceSetStatus, Members: &mResourceSetStatus, Type: smithy.ShapeTypeEnum})
+var s_ResourceSetIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Base62Id, Type: smithy.ShapeTypeString})
+var sResourceSetStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceSetStatus_OUT_OF_ADMIN_SCOPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OUT_OF_ADMIN_SCOPE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceSetSummary_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Base62Id, Type: smithy.ShapeTypeString})
+var sResourceSetSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString})
+var sResourceSetSummary_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sResourceSetSummary_LastUpdateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdateTime", ID: &i_TimeStamp, Type: smithy.ShapeTypeTimestamp})
+var sResourceSetSummary_ResourceSetStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSetStatus", ID: &iResourceSetStatus, Members: &mResourceSetStatus, Type: smithy.ShapeTypeEnum})
+var s_ResourceSetSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourceSetSummary, Members: &mResourceSetSummary, Type: smithy.ShapeTypeStructure})
+var sResourceTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_ResourceTagKey, Type: smithy.ShapeTypeString})
+var sResourceTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_ResourceTagValue, Type: smithy.ShapeTypeString})
+var sResourceTagLogicalOperator_AND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceTagLogicalOperator_OR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_ResourceTags_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourceTag, Members: &mResourceTag, Type: smithy.ShapeTypeStructure})
+var s_ResourceTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ResourceType, Type: smithy.ShapeTypeString})
+var sResourceViolation_AwsVPCSecurityGroupViolation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsVPCSecurityGroupViolation", ID: &iAwsVPCSecurityGroupViolation, Members: &mAwsVPCSecurityGroupViolation, Type: smithy.ShapeTypeStructure})
+var sResourceViolation_AwsEc2NetworkInterfaceViolation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsEc2NetworkInterfaceViolation", ID: &iAwsEc2NetworkInterfaceViolation, Members: &mAwsEc2NetworkInterfaceViolation, Type: smithy.ShapeTypeStructure})
+var sResourceViolation_AwsEc2InstanceViolation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsEc2InstanceViolation", ID: &iAwsEc2InstanceViolation, Members: &mAwsEc2InstanceViolation, Type: smithy.ShapeTypeStructure})
+var sResourceViolation_NetworkFirewallMissingFirewallViolation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkFirewallMissingFirewallViolation", ID: &iNetworkFirewallMissingFirewallViolation, Members: &mNetworkFirewallMissingFirewallViolation, Type: smithy.ShapeTypeStructure})
+var sResourceViolation_NetworkFirewallMissingSubnetViolation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkFirewallMissingSubnetViolation", ID: &iNetworkFirewallMissingSubnetViolation, Members: &mNetworkFirewallMissingSubnetViolation, Type: smithy.ShapeTypeStructure})
+var sResourceViolation_NetworkFirewallMissingExpectedRTViolation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkFirewallMissingExpectedRTViolation", ID: &iNetworkFirewallMissingExpectedRTViolation, Members: &mNetworkFirewallMissingExpectedRTViolation, Type: smithy.ShapeTypeStructure})
+var sResourceViolation_NetworkFirewallPolicyModifiedViolation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkFirewallPolicyModifiedViolation", ID: &iNetworkFirewallPolicyModifiedViolation, Members: &mNetworkFirewallPolicyModifiedViolation, Type: smithy.ShapeTypeStructure})
+var sResourceViolation_NetworkFirewallInternetTrafficNotInspectedViolation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkFirewallInternetTrafficNotInspectedViolation", ID: &iNetworkFirewallInternetTrafficNotInspectedViolation, Members: &mNetworkFirewallInternetTrafficNotInspectedViolation, Type: smithy.ShapeTypeStructure})
+var sResourceViolation_NetworkFirewallInvalidRouteConfigurationViolation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkFirewallInvalidRouteConfigurationViolation", ID: &iNetworkFirewallInvalidRouteConfigurationViolation, Members: &mNetworkFirewallInvalidRouteConfigurationViolation, Type: smithy.ShapeTypeStructure})
+var sResourceViolation_NetworkFirewallBlackHoleRouteDetectedViolation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkFirewallBlackHoleRouteDetectedViolation", ID: &iNetworkFirewallBlackHoleRouteDetectedViolation, Members: &mNetworkFirewallBlackHoleRouteDetectedViolation, Type: smithy.ShapeTypeStructure})
+var sResourceViolation_NetworkFirewallUnexpectedFirewallRoutesViolation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkFirewallUnexpectedFirewallRoutesViolation", ID: &iNetworkFirewallUnexpectedFirewallRoutesViolation, Members: &mNetworkFirewallUnexpectedFirewallRoutesViolation, Type: smithy.ShapeTypeStructure})
+var sResourceViolation_NetworkFirewallUnexpectedGatewayRoutesViolation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkFirewallUnexpectedGatewayRoutesViolation", ID: &iNetworkFirewallUnexpectedGatewayRoutesViolation, Members: &mNetworkFirewallUnexpectedGatewayRoutesViolation, Type: smithy.ShapeTypeStructure})
+var sResourceViolation_NetworkFirewallMissingExpectedRoutesViolation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkFirewallMissingExpectedRoutesViolation", ID: &iNetworkFirewallMissingExpectedRoutesViolation, Members: &mNetworkFirewallMissingExpectedRoutesViolation, Type: smithy.ShapeTypeStructure})
+var sResourceViolation_DnsRuleGroupPriorityConflictViolation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsRuleGroupPriorityConflictViolation", ID: &iDnsRuleGroupPriorityConflictViolation, Members: &mDnsRuleGroupPriorityConflictViolation, Type: smithy.ShapeTypeStructure})
+var sResourceViolation_DnsDuplicateRuleGroupViolation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsDuplicateRuleGroupViolation", ID: &iDnsDuplicateRuleGroupViolation, Members: &mDnsDuplicateRuleGroupViolation, Type: smithy.ShapeTypeStructure})
+var sResourceViolation_DnsRuleGroupLimitExceededViolation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsRuleGroupLimitExceededViolation", ID: &iDnsRuleGroupLimitExceededViolation, Members: &mDnsRuleGroupLimitExceededViolation, Type: smithy.ShapeTypeStructure})
+var sResourceViolation_FirewallSubnetIsOutOfScopeViolation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallSubnetIsOutOfScopeViolation", ID: &iFirewallSubnetIsOutOfScopeViolation, Members: &mFirewallSubnetIsOutOfScopeViolation, Type: smithy.ShapeTypeStructure})
+var sResourceViolation_RouteHasOutOfScopeEndpointViolation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteHasOutOfScopeEndpointViolation", ID: &iRouteHasOutOfScopeEndpointViolation, Members: &mRouteHasOutOfScopeEndpointViolation, Type: smithy.ShapeTypeStructure})
+var sResourceViolation_ThirdPartyFirewallMissingFirewallViolation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThirdPartyFirewallMissingFirewallViolation", ID: &iThirdPartyFirewallMissingFirewallViolation, Members: &mThirdPartyFirewallMissingFirewallViolation, Type: smithy.ShapeTypeStructure})
+var sResourceViolation_ThirdPartyFirewallMissingSubnetViolation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThirdPartyFirewallMissingSubnetViolation", ID: &iThirdPartyFirewallMissingSubnetViolation, Members: &mThirdPartyFirewallMissingSubnetViolation, Type: smithy.ShapeTypeStructure})
+var sResourceViolation_ThirdPartyFirewallMissingExpectedRouteTableViolation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThirdPartyFirewallMissingExpectedRouteTableViolation", ID: &iThirdPartyFirewallMissingExpectedRouteTableViolation, Members: &mThirdPartyFirewallMissingExpectedRouteTableViolation, Type: smithy.ShapeTypeStructure})
+var sResourceViolation_FirewallSubnetMissingVPCEndpointViolation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallSubnetMissingVPCEndpointViolation", ID: &iFirewallSubnetMissingVPCEndpointViolation, Members: &mFirewallSubnetMissingVPCEndpointViolation, Type: smithy.ShapeTypeStructure})
+var sResourceViolation_InvalidNetworkAclEntriesViolation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvalidNetworkAclEntriesViolation", ID: &iInvalidNetworkAclEntriesViolation, Members: &mInvalidNetworkAclEntriesViolation, Type: smithy.ShapeTypeStructure})
+var sResourceViolation_PossibleRemediationActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PossibleRemediationActions", ID: &iPossibleRemediationActions, Members: &mPossibleRemediationActions, Type: smithy.ShapeTypeStructure})
+var sResourceViolation_WebACLHasIncompatibleConfigurationViolation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebACLHasIncompatibleConfigurationViolation", ID: &iWebACLHasIncompatibleConfigurationViolation, Members: &mWebACLHasIncompatibleConfigurationViolation, Type: smithy.ShapeTypeStructure})
+var sResourceViolation_WebACLHasOutOfScopeResourcesViolation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebACLHasOutOfScopeResourcesViolation", ID: &iWebACLHasOutOfScopeResourcesViolation, Members: &mWebACLHasOutOfScopeResourcesViolation, Type: smithy.ShapeTypeStructure})
+var s_ResourceViolations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourceViolation, Members: &mResourceViolation, Type: smithy.ShapeTypeStructure})
+var sRoute_DestinationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationType", ID: &iDestinationType, Members: &mDestinationType, Type: smithy.ShapeTypeEnum})
+var sRoute_TargetType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetType", ID: &iTargetType, Members: &mTargetType, Type: smithy.ShapeTypeEnum})
+var sRoute_Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destination", ID: &i_LengthBoundedString, Type: smithy.ShapeTypeString})
+var sRoute_Target = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Target", ID: &i_LengthBoundedString, Type: smithy.ShapeTypeString})
+var sRouteHasOutOfScopeEndpointViolation_SubnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sRouteHasOutOfScopeEndpointViolation_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sRouteHasOutOfScopeEndpointViolation_RouteTableId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteTableId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sRouteHasOutOfScopeEndpointViolation_ViolatingRoutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViolatingRoutes", ID: &i_Routes, Members: &m_Routes, Type: smithy.ShapeTypeList})
+var sRouteHasOutOfScopeEndpointViolation_SubnetAvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetAvailabilityZone", ID: &i_LengthBoundedString, Type: smithy.ShapeTypeString})
+var sRouteHasOutOfScopeEndpointViolation_SubnetAvailabilityZoneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetAvailabilityZoneId", ID: &i_LengthBoundedString, Type: smithy.ShapeTypeString})
+var sRouteHasOutOfScopeEndpointViolation_CurrentFirewallSubnetRouteTable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentFirewallSubnetRouteTable", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sRouteHasOutOfScopeEndpointViolation_FirewallSubnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallSubnetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sRouteHasOutOfScopeEndpointViolation_FirewallSubnetRoutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallSubnetRoutes", ID: &i_Routes, Members: &m_Routes, Type: smithy.ShapeTypeList})
+var sRouteHasOutOfScopeEndpointViolation_InternetGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InternetGatewayId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sRouteHasOutOfScopeEndpointViolation_CurrentInternetGatewayRouteTable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentInternetGatewayRouteTable", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sRouteHasOutOfScopeEndpointViolation_InternetGatewayRoutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InternetGatewayRoutes", ID: &i_Routes, Members: &m_Routes, Type: smithy.ShapeTypeList})
+var s_Routes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRoute, Members: &mRoute, Type: smithy.ShapeTypeStructure})
+var sRuleOrder_STRICT_ORDER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STRICT_ORDER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRuleOrder_DEFAULT_ACTION_ORDER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEFAULT_ACTION_ORDER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSecurityGroupRemediationAction_RemediationActionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemediationActionType", ID: &iRemediationActionType, Members: &mRemediationActionType, Type: smithy.ShapeTypeEnum})
+var sSecurityGroupRemediationAction_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_RemediationActionDescription, Type: smithy.ShapeTypeString})
+var sSecurityGroupRemediationAction_RemediationResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemediationResult", ID: &iSecurityGroupRuleDescription, Members: &mSecurityGroupRuleDescription, Type: smithy.ShapeTypeStructure})
+var sSecurityGroupRemediationAction_IsDefaultAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsDefaultAction", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var s_SecurityGroupRemediationActions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSecurityGroupRemediationAction, Members: &mSecurityGroupRemediationAction, Type: smithy.ShapeTypeStructure})
+var sSecurityGroupRuleDescription_IPV4Range = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPV4Range", ID: &i_CIDR, Type: smithy.ShapeTypeString})
+var sSecurityGroupRuleDescription_IPV6Range = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPV6Range", ID: &i_CIDR, Type: smithy.ShapeTypeString})
+var sSecurityGroupRuleDescription_PrefixListId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrefixListId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sSecurityGroupRuleDescription_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &i_LengthBoundedString, Type: smithy.ShapeTypeString})
+var sSecurityGroupRuleDescription_FromPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FromPort", ID: &i_IPPortNumber, Type: smithy.ShapeTypeLong})
+var sSecurityGroupRuleDescription_ToPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ToPort", ID: &i_IPPortNumber, Type: smithy.ShapeTypeLong})
+var sSecurityServicePolicyData_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iSecurityServiceType, Members: &mSecurityServiceType, Type: smithy.ShapeTypeEnum})
+var sSecurityServicePolicyData_ManagedServiceData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManagedServiceData", ID: &i_ManagedServiceData, Type: smithy.ShapeTypeString})
+var sSecurityServicePolicyData_PolicyOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyOption", ID: &iPolicyOption, Members: &mPolicyOption, Type: smithy.ShapeTypeStructure})
+var sSecurityServiceType_WAF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WAF", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSecurityServiceType_WAFV2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WAFV2", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSecurityServiceType_SHIELD_ADVANCED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHIELD_ADVANCED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSecurityServiceType_SECURITY_GROUPS_COMMON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECURITY_GROUPS_COMMON", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSecurityServiceType_SECURITY_GROUPS_CONTENT_AUDIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECURITY_GROUPS_CONTENT_AUDIT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSecurityServiceType_SECURITY_GROUPS_USAGE_AUDIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECURITY_GROUPS_USAGE_AUDIT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSecurityServiceType_NETWORK_FIREWALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NETWORK_FIREWALL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSecurityServiceType_DNS_FIREWALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DNS_FIREWALL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSecurityServiceType_THIRD_PARTY_FIREWALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "THIRD_PARTY_FIREWALL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSecurityServiceType_IMPORT_NETWORK_FIREWALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMPORT_NETWORK_FIREWALL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSecurityServiceType_NETWORK_ACL_COMMON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NETWORK_ACL_COMMON", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_SecurityServiceTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSecurityServiceType, Members: &mSecurityServiceType, Type: smithy.ShapeTypeEnum})
+var sStatefulEngineOptions_RuleOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleOrder", ID: &iRuleOrder, Members: &mRuleOrder, Type: smithy.ShapeTypeEnum})
+var sStatefulEngineOptions_StreamExceptionPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamExceptionPolicy", ID: &iStreamExceptionPolicy, Members: &mStreamExceptionPolicy, Type: smithy.ShapeTypeEnum})
+var sStatefulRuleGroup_RuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupName", ID: &i_NetworkFirewallResourceName, Type: smithy.ShapeTypeString})
+var sStatefulRuleGroup_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sStatefulRuleGroup_Priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Priority", ID: &i_PriorityNumber, Type: smithy.ShapeTypeInteger})
+var sStatefulRuleGroup_Override = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Override", ID: &iNetworkFirewallStatefulRuleGroupOverride, Members: &mNetworkFirewallStatefulRuleGroupOverride, Type: smithy.ShapeTypeStructure})
+var s_StatefulRuleGroupList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStatefulRuleGroup, Members: &mStatefulRuleGroup, Type: smithy.ShapeTypeStructure})
+var sStatelessRuleGroup_RuleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleGroupName", ID: &i_NetworkFirewallResourceName, Type: smithy.ShapeTypeString})
+var sStatelessRuleGroup_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sStatelessRuleGroup_Priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Priority", ID: &i_StatelessRuleGroupPriority, Type: smithy.ShapeTypeInteger})
+var s_StatelessRuleGroupList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStatelessRuleGroup, Members: &mStatelessRuleGroup, Type: smithy.ShapeTypeStructure})
+var sStreamExceptionPolicy_DROP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DROP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStreamExceptionPolicy_CONTINUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTINUE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStreamExceptionPolicy_REJECT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStreamExceptionPolicy_FMS_IGNORE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FMS_IGNORE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var sTargetType_Gateway = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Gateway", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTargetType_CarrierGateway = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CarrierGateway", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTargetType_Instance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Instance", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTargetType_LocalGateway = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocalGateway", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTargetType_NatGateway = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NatGateway", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTargetType_NetworkInterface = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkInterface", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTargetType_VPCEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPCEndpoint", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTargetType_VPCPeeringConnection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPCPeeringConnection", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTargetType_EgressOnlyInternetGateway = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EgressOnlyInternetGateway", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTargetType_TransitGateway = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGateway", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_TargetViolationReasons_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TargetViolationReason, Type: smithy.ShapeTypeString})
+var sThirdPartyFirewall_PALO_ALTO_NETWORKS_CLOUD_NGFW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PALO_ALTO_NETWORKS_CLOUD_NGFW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sThirdPartyFirewall_FORTIGATE_CLOUD_NATIVE_FIREWALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FORTIGATE_CLOUD_NATIVE_FIREWALL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sThirdPartyFirewallAssociationStatus_ONBOARDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ONBOARDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sThirdPartyFirewallAssociationStatus_ONBOARD_COMPLETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ONBOARD_COMPLETE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sThirdPartyFirewallAssociationStatus_OFFBOARDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OFFBOARDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sThirdPartyFirewallAssociationStatus_OFFBOARD_COMPLETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OFFBOARD_COMPLETE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sThirdPartyFirewallAssociationStatus_NOT_EXIST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_EXIST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_ThirdPartyFirewallFirewallPolicies_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iThirdPartyFirewallFirewallPolicy, Members: &mThirdPartyFirewallFirewallPolicy, Type: smithy.ShapeTypeStructure})
+var sThirdPartyFirewallFirewallPolicy_FirewallPolicyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyId", ID: &i_FirewallPolicyId, Type: smithy.ShapeTypeString})
+var sThirdPartyFirewallFirewallPolicy_FirewallPolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallPolicyName", ID: &i_FirewallPolicyName, Type: smithy.ShapeTypeString})
+var sThirdPartyFirewallMissingExpectedRouteTableViolation_ViolationTarget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViolationTarget", ID: &i_ViolationTarget, Type: smithy.ShapeTypeString})
+var sThirdPartyFirewallMissingExpectedRouteTableViolation_VPC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPC", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sThirdPartyFirewallMissingExpectedRouteTableViolation_AvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZone", ID: &i_LengthBoundedString, Type: smithy.ShapeTypeString})
+var sThirdPartyFirewallMissingExpectedRouteTableViolation_CurrentRouteTable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentRouteTable", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sThirdPartyFirewallMissingExpectedRouteTableViolation_ExpectedRouteTable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpectedRouteTable", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sThirdPartyFirewallMissingFirewallViolation_ViolationTarget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViolationTarget", ID: &i_ViolationTarget, Type: smithy.ShapeTypeString})
+var sThirdPartyFirewallMissingFirewallViolation_VPC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPC", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sThirdPartyFirewallMissingFirewallViolation_AvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZone", ID: &i_LengthBoundedString, Type: smithy.ShapeTypeString})
+var sThirdPartyFirewallMissingFirewallViolation_TargetViolationReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetViolationReason", ID: &i_TargetViolationReason, Type: smithy.ShapeTypeString})
+var sThirdPartyFirewallMissingSubnetViolation_ViolationTarget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViolationTarget", ID: &i_ViolationTarget, Type: smithy.ShapeTypeString})
+var sThirdPartyFirewallMissingSubnetViolation_VPC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPC", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sThirdPartyFirewallMissingSubnetViolation_AvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZone", ID: &i_LengthBoundedString, Type: smithy.ShapeTypeString})
+var sThirdPartyFirewallMissingSubnetViolation_TargetViolationReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetViolationReason", ID: &i_TargetViolationReason, Type: smithy.ShapeTypeString})
+var sThirdPartyFirewallPolicy_FirewallDeploymentModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallDeploymentModel", ID: &iFirewallDeploymentModel, Members: &mFirewallDeploymentModel, Type: smithy.ShapeTypeEnum})
+var sViolationDetail_PolicyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyId", ID: &i_PolicyId, Type: smithy.ShapeTypeString})
+var sViolationDetail_MemberAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberAccount", ID: &i_AWSAccountId, Type: smithy.ShapeTypeString})
+var sViolationDetail_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sViolationDetail_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i_ResourceType, Type: smithy.ShapeTypeString})
+var sViolationDetail_ResourceViolations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceViolations", ID: &i_ResourceViolations, Members: &m_ResourceViolations, Type: smithy.ShapeTypeList})
+var sViolationDetail_ResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sViolationDetail_ResourceDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceDescription", ID: &i_LengthBoundedString, Type: smithy.ShapeTypeString})
+var sViolationReason_WebAclMissingRuleGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebAclMissingRuleGroup", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sViolationReason_ResourceMissingWebAcl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceMissingWebAcl", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sViolationReason_ResourceIncorrectWebAcl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceIncorrectWebAcl", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sViolationReason_ResourceMissingShieldProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceMissingShieldProtection", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sViolationReason_ResourceMissingWebaclOrShieldProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceMissingWebaclOrShieldProtection", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sViolationReason_ResourceMissingSecurityGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceMissingSecurityGroup", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sViolationReason_ResourceViolatesAuditSecurityGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceViolatesAuditSecurityGroup", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sViolationReason_SecurityGroupUnused = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupUnused", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sViolationReason_SecurityGroupRedundant = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupRedundant", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sViolationReason_FMSCreatedSecurityGroupEdited = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FMSCreatedSecurityGroupEdited", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sViolationReason_MissingFirewall = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MissingFirewall", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sViolationReason_MissingFirewallSubnetInAZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MissingFirewallSubnetInAZ", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sViolationReason_MissingExpectedRouteTable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MissingExpectedRouteTable", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sViolationReason_NetworkFirewallPolicyModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkFirewallPolicyModified", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sViolationReason_FirewallSubnetIsOutOfScope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallSubnetIsOutOfScope", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sViolationReason_InternetGatewayMissingExpectedRoute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InternetGatewayMissingExpectedRoute", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sViolationReason_FirewallSubnetMissingExpectedRoute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallSubnetMissingExpectedRoute", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sViolationReason_UnexpectedFirewallRoutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UnexpectedFirewallRoutes", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sViolationReason_UnexpectedTargetGatewayRoutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UnexpectedTargetGatewayRoutes", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sViolationReason_TrafficInspectionCrossesAZBoundary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrafficInspectionCrossesAZBoundary", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sViolationReason_InvalidRouteConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvalidRouteConfiguration", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sViolationReason_MissingTargetGateway = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MissingTargetGateway", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sViolationReason_InternetTrafficNotInspected = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InternetTrafficNotInspected", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sViolationReason_BlackHoleRouteDetected = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlackHoleRouteDetected", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sViolationReason_BlackHoleRouteDetectedInFirewallSubnet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlackHoleRouteDetectedInFirewallSubnet", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sViolationReason_ResourceMissingDnsFirewall = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceMissingDnsFirewall", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sViolationReason_RouteHasOutOfScopeEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteHasOutOfScopeEndpoint", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sViolationReason_FirewallSubnetMissingVPCEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirewallSubnetMissingVPCEndpoint", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sViolationReason_InvalidNetworkAclEntry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvalidNetworkAclEntry", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sViolationReason_WebACLConfigurationOrScopeOfUse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebACLConfigurationOrScopeOfUse", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sWebACLHasIncompatibleConfigurationViolation_WebACLArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebACLArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sWebACLHasIncompatibleConfigurationViolation_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_LengthBoundedString, Type: smithy.ShapeTypeString})
+var sWebACLHasOutOfScopeResourcesViolation_WebACLArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebACLArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sWebACLHasOutOfScopeResourcesViolation_OutOfScopeResourceList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutOfScopeResourceList", ID: &i_ResourceArnList, Members: &m_ResourceArnList, Type: smithy.ShapeTypeList})
+var sAssociateAdminAccountRequest_AdminAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdminAccount", ID: &i_AWSAccountId, Type: smithy.ShapeTypeString})
+var sAssociateThirdPartyFirewallRequest_ThirdPartyFirewall = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThirdPartyFirewall", ID: &iThirdPartyFirewall, Members: &mThirdPartyFirewall, Type: smithy.ShapeTypeEnum})
+var sAssociateThirdPartyFirewallResponse_ThirdPartyFirewallStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThirdPartyFirewallStatus", ID: &iThirdPartyFirewallAssociationStatus, Members: &mThirdPartyFirewallAssociationStatus, Type: smithy.ShapeTypeEnum})
+var sBatchAssociateResourceRequest_ResourceSetIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSetIdentifier", ID: &i_Identifier, Type: smithy.ShapeTypeString})
+var sBatchAssociateResourceRequest_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i_IdentifierList, Members: &m_IdentifierList, Type: smithy.ShapeTypeList})
+var sBatchAssociateResourceResponse_ResourceSetIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSetIdentifier", ID: &i_Identifier, Type: smithy.ShapeTypeString})
+var sBatchAssociateResourceResponse_FailedItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailedItems", ID: &i_FailedItemList, Members: &m_FailedItemList, Type: smithy.ShapeTypeList})
+var sBatchDisassociateResourceRequest_ResourceSetIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSetIdentifier", ID: &i_Identifier, Type: smithy.ShapeTypeString})
+var sBatchDisassociateResourceRequest_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i_IdentifierList, Members: &m_IdentifierList, Type: smithy.ShapeTypeList})
+var sBatchDisassociateResourceResponse_ResourceSetIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSetIdentifier", ID: &i_Identifier, Type: smithy.ShapeTypeString})
+var sBatchDisassociateResourceResponse_FailedItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailedItems", ID: &i_FailedItemList, Members: &m_FailedItemList, Type: smithy.ShapeTypeList})
+var sDeleteAppsListRequest_ListId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListId", ID: &i_ListId, Type: smithy.ShapeTypeString})
+var sDeletePolicyRequest_PolicyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyId", ID: &i_PolicyId, Type: smithy.ShapeTypeString})
+var sDeletePolicyRequest_DeleteAllPolicyResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteAllPolicyResources", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sDeleteProtocolsListRequest_ListId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListId", ID: &i_ListId, Type: smithy.ShapeTypeString})
+var sDeleteResourceSetRequest_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Base62Id, Type: smithy.ShapeTypeString})
+var sDisassociateThirdPartyFirewallRequest_ThirdPartyFirewall = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThirdPartyFirewall", ID: &iThirdPartyFirewall, Members: &mThirdPartyFirewall, Type: smithy.ShapeTypeEnum})
+var sDisassociateThirdPartyFirewallResponse_ThirdPartyFirewallStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThirdPartyFirewallStatus", ID: &iThirdPartyFirewallAssociationStatus, Members: &mThirdPartyFirewallAssociationStatus, Type: smithy.ShapeTypeEnum})
+var sGetAdminAccountResponse_AdminAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdminAccount", ID: &i_AWSAccountId, Type: smithy.ShapeTypeString})
+var sGetAdminAccountResponse_RoleStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleStatus", ID: &iAccountRoleStatus, Members: &mAccountRoleStatus, Type: smithy.ShapeTypeEnum})
+var sGetAdminScopeRequest_AdminAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdminAccount", ID: &i_AWSAccountId, Type: smithy.ShapeTypeString})
+var sGetAdminScopeResponse_AdminScope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdminScope", ID: &iAdminScope, Members: &mAdminScope, Type: smithy.ShapeTypeStructure})
+var sGetAdminScopeResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iOrganizationStatus, Members: &mOrganizationStatus, Type: smithy.ShapeTypeEnum})
+var sGetAppsListRequest_ListId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListId", ID: &i_ListId, Type: smithy.ShapeTypeString})
+var sGetAppsListRequest_DefaultList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultList", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sGetAppsListResponse_AppsList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppsList", ID: &iAppsListData, Members: &mAppsListData, Type: smithy.ShapeTypeStructure})
+var sGetAppsListResponse_AppsListArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppsListArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sGetComplianceDetailRequest_PolicyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyId", ID: &i_PolicyId, Type: smithy.ShapeTypeString})
+var sGetComplianceDetailRequest_MemberAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberAccount", ID: &i_AWSAccountId, Type: smithy.ShapeTypeString})
+var sGetComplianceDetailResponse_PolicyComplianceDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyComplianceDetail", ID: &iPolicyComplianceDetail, Members: &mPolicyComplianceDetail, Type: smithy.ShapeTypeStructure})
+var sGetNotificationChannelResponse_SnsTopicArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnsTopicArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sGetNotificationChannelResponse_SnsRoleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnsRoleName", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sGetPolicyRequest_PolicyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyId", ID: &i_PolicyId, Type: smithy.ShapeTypeString})
+var sGetPolicyResponse_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &iPolicy, Members: &mPolicy, Type: smithy.ShapeTypeStructure})
+var sGetPolicyResponse_PolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sGetProtectionStatusRequest_PolicyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyId", ID: &i_PolicyId, Type: smithy.ShapeTypeString})
+var sGetProtectionStatusRequest_MemberAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberAccountId", ID: &i_AWSAccountId, Type: smithy.ShapeTypeString})
+var sGetProtectionStatusRequest_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_TimeStamp, Type: smithy.ShapeTypeTimestamp})
+var sGetProtectionStatusRequest_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i_TimeStamp, Type: smithy.ShapeTypeTimestamp})
+var sGetProtectionStatusRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sGetProtectionStatusRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PaginationMaxResults, Type: smithy.ShapeTypeInteger})
+var sGetProtectionStatusResponse_AdminAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdminAccountId", ID: &i_AWSAccountId, Type: smithy.ShapeTypeString})
+var sGetProtectionStatusResponse_ServiceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceType", ID: &iSecurityServiceType, Members: &mSecurityServiceType, Type: smithy.ShapeTypeEnum})
+var sGetProtectionStatusResponse_Data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Data", ID: &i_ProtectionData, Type: smithy.ShapeTypeString})
+var sGetProtectionStatusResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sGetProtocolsListRequest_ListId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListId", ID: &i_ListId, Type: smithy.ShapeTypeString})
+var sGetProtocolsListRequest_DefaultList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultList", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sGetProtocolsListResponse_ProtocolsList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProtocolsList", ID: &iProtocolsListData, Members: &mProtocolsListData, Type: smithy.ShapeTypeStructure})
+var sGetProtocolsListResponse_ProtocolsListArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProtocolsListArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sGetResourceSetRequest_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Base62Id, Type: smithy.ShapeTypeString})
+var sGetResourceSetResponse_ResourceSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSet", ID: &iResourceSet, Members: &mResourceSet, Type: smithy.ShapeTypeStructure})
+var sGetResourceSetResponse_ResourceSetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSetArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sGetThirdPartyFirewallAssociationStatusRequest_ThirdPartyFirewall = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThirdPartyFirewall", ID: &iThirdPartyFirewall, Members: &mThirdPartyFirewall, Type: smithy.ShapeTypeEnum})
+var sGetThirdPartyFirewallAssociationStatusResponse_ThirdPartyFirewallStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThirdPartyFirewallStatus", ID: &iThirdPartyFirewallAssociationStatus, Members: &mThirdPartyFirewallAssociationStatus, Type: smithy.ShapeTypeEnum})
+var sGetThirdPartyFirewallAssociationStatusResponse_MarketplaceOnboardingStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarketplaceOnboardingStatus", ID: &iMarketplaceSubscriptionOnboardingStatus, Members: &mMarketplaceSubscriptionOnboardingStatus, Type: smithy.ShapeTypeEnum})
+var sGetViolationDetailsRequest_PolicyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyId", ID: &i_PolicyId, Type: smithy.ShapeTypeString})
+var sGetViolationDetailsRequest_MemberAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberAccount", ID: &i_AWSAccountId, Type: smithy.ShapeTypeString})
+var sGetViolationDetailsRequest_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sGetViolationDetailsRequest_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i_ResourceType, Type: smithy.ShapeTypeString})
+var sGetViolationDetailsResponse_ViolationDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViolationDetail", ID: &iViolationDetail, Members: &mViolationDetail, Type: smithy.ShapeTypeStructure})
+var sListAdminAccountsForOrganizationRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListAdminAccountsForOrganizationRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PaginationMaxResults, Type: smithy.ShapeTypeInteger})
+var sListAdminAccountsForOrganizationResponse_AdminAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdminAccounts", ID: &i_AdminAccountSummaryList, Members: &m_AdminAccountSummaryList, Type: smithy.ShapeTypeList})
+var sListAdminAccountsForOrganizationResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListAdminsManagingAccountRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListAdminsManagingAccountRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PaginationMaxResults, Type: smithy.ShapeTypeInteger})
+var sListAdminsManagingAccountResponse_AdminAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdminAccounts", ID: &i_AccountIdList, Members: &m_AccountIdList, Type: smithy.ShapeTypeList})
+var sListAdminsManagingAccountResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListAppsListsRequest_DefaultLists = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultLists", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sListAppsListsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListAppsListsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PaginationMaxResults, Type: smithy.ShapeTypeInteger})
+var sListAppsListsResponse_AppsLists = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppsLists", ID: &i_AppsListsData, Members: &m_AppsListsData, Type: smithy.ShapeTypeList})
+var sListAppsListsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListComplianceStatusRequest_PolicyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyId", ID: &i_PolicyId, Type: smithy.ShapeTypeString})
+var sListComplianceStatusRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListComplianceStatusRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PaginationMaxResults, Type: smithy.ShapeTypeInteger})
+var sListComplianceStatusResponse_PolicyComplianceStatusList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyComplianceStatusList", ID: &i_PolicyComplianceStatusList, Members: &m_PolicyComplianceStatusList, Type: smithy.ShapeTypeList})
+var sListComplianceStatusResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListDiscoveredResourcesRequest_MemberAccountIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberAccountIds", ID: &i_AWSAccountIdList, Members: &m_AWSAccountIdList, Type: smithy.ShapeTypeList})
+var sListDiscoveredResourcesRequest_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i_ResourceType, Type: smithy.ShapeTypeString})
+var sListDiscoveredResourcesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PaginationMaxResults, Type: smithy.ShapeTypeInteger})
+var sListDiscoveredResourcesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListDiscoveredResourcesResponse_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i_DiscoveredResourceList, Members: &m_DiscoveredResourceList, Type: smithy.ShapeTypeList})
+var sListDiscoveredResourcesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListMemberAccountsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListMemberAccountsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PaginationMaxResults, Type: smithy.ShapeTypeInteger})
+var sListMemberAccountsResponse_MemberAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberAccounts", ID: &i_MemberAccounts, Members: &m_MemberAccounts, Type: smithy.ShapeTypeList})
+var sListMemberAccountsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListPoliciesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListPoliciesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PaginationMaxResults, Type: smithy.ShapeTypeInteger})
+var sListPoliciesResponse_PolicyList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyList", ID: &i_PolicySummaryList, Members: &m_PolicySummaryList, Type: smithy.ShapeTypeList})
+var sListPoliciesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListProtocolsListsRequest_DefaultLists = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultLists", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sListProtocolsListsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListProtocolsListsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PaginationMaxResults, Type: smithy.ShapeTypeInteger})
+var sListProtocolsListsResponse_ProtocolsLists = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProtocolsLists", ID: &i_ProtocolsListsData, Members: &m_ProtocolsListsData, Type: smithy.ShapeTypeList})
+var sListProtocolsListsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListResourceSetResourcesRequest_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sListResourceSetResourcesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PaginationMaxResults, Type: smithy.ShapeTypeInteger})
+var sListResourceSetResourcesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListResourceSetResourcesResponse_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i_ResourceList, Members: &m_ResourceList, Type: smithy.ShapeTypeList})
+var sListResourceSetResourcesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListResourceSetsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListResourceSetsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PaginationMaxResults, Type: smithy.ShapeTypeInteger})
+var sListResourceSetsResponse_ResourceSets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSets", ID: &i_ResourceSetSummaryList, Members: &m_ResourceSetSummaryList, Type: smithy.ShapeTypeList})
+var sListResourceSetsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_TagList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagList", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sListThirdPartyFirewallFirewallPoliciesRequest_ThirdPartyFirewall = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThirdPartyFirewall", ID: &iThirdPartyFirewall, Members: &mThirdPartyFirewall, Type: smithy.ShapeTypeEnum})
+var sListThirdPartyFirewallFirewallPoliciesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListThirdPartyFirewallFirewallPoliciesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PaginationMaxResults, Type: smithy.ShapeTypeInteger})
+var sListThirdPartyFirewallFirewallPoliciesResponse_ThirdPartyFirewallFirewallPolicies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThirdPartyFirewallFirewallPolicies", ID: &i_ThirdPartyFirewallFirewallPolicies, Members: &m_ThirdPartyFirewallFirewallPolicies, Type: smithy.ShapeTypeList})
+var sListThirdPartyFirewallFirewallPoliciesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sPutAdminAccountRequest_AdminAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdminAccount", ID: &i_AWSAccountId, Type: smithy.ShapeTypeString})
+var sPutAdminAccountRequest_AdminScope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdminScope", ID: &iAdminScope, Members: &mAdminScope, Type: smithy.ShapeTypeStructure})
+var sPutAppsListRequest_AppsList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppsList", ID: &iAppsListData, Members: &mAppsListData, Type: smithy.ShapeTypeStructure})
+var sPutAppsListRequest_TagList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagList", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sPutAppsListResponse_AppsList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppsList", ID: &iAppsListData, Members: &mAppsListData, Type: smithy.ShapeTypeStructure})
+var sPutAppsListResponse_AppsListArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppsListArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sPutNotificationChannelRequest_SnsTopicArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnsTopicArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sPutNotificationChannelRequest_SnsRoleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnsRoleName", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sPutPolicyRequest_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &iPolicy, Members: &mPolicy, Type: smithy.ShapeTypeStructure})
+var sPutPolicyRequest_TagList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagList", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sPutPolicyResponse_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &iPolicy, Members: &mPolicy, Type: smithy.ShapeTypeStructure})
+var sPutPolicyResponse_PolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sPutProtocolsListRequest_ProtocolsList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProtocolsList", ID: &iProtocolsListData, Members: &mProtocolsListData, Type: smithy.ShapeTypeStructure})
+var sPutProtocolsListRequest_TagList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagList", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sPutProtocolsListResponse_ProtocolsList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProtocolsList", ID: &iProtocolsListData, Members: &mProtocolsListData, Type: smithy.ShapeTypeStructure})
+var sPutProtocolsListResponse_ProtocolsListArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProtocolsListArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sPutResourceSetRequest_ResourceSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSet", ID: &iResourceSet, Members: &mResourceSet, Type: smithy.ShapeTypeStructure})
+var sPutResourceSetRequest_TagList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagList", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sPutResourceSetResponse_ResourceSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSet", ID: &iResourceSet, Members: &mResourceSet, Type: smithy.ShapeTypeStructure})
+var sPutResourceSetResponse_ResourceSetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSetArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_TagList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagList", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+
+var AssociateAdminAccount = &sAssociateAdminAccount
+
+var AssociateThirdPartyFirewall = &sAssociateThirdPartyFirewall
+
+var BatchAssociateResource = &sBatchAssociateResource
+
+var BatchDisassociateResource = &sBatchDisassociateResource
+
+var DeleteAppsList = &sDeleteAppsList
+
+var DeleteNotificationChannel = &sDeleteNotificationChannel
+
+var DeletePolicy = &sDeletePolicy
+
+var DeleteProtocolsList = &sDeleteProtocolsList
+
+var DeleteResourceSet = &sDeleteResourceSet
+
+var DisassociateAdminAccount = &sDisassociateAdminAccount
+
+var DisassociateThirdPartyFirewall = &sDisassociateThirdPartyFirewall
+
+var GetAdminAccount = &sGetAdminAccount
+
+var GetAdminScope = &sGetAdminScope
+
+var GetAppsList = &sGetAppsList
+
+var GetComplianceDetail = &sGetComplianceDetail
+
+var GetNotificationChannel = &sGetNotificationChannel
+
+var GetPolicy = &sGetPolicy
+
+var GetProtectionStatus = &sGetProtectionStatus
+
+var GetProtocolsList = &sGetProtocolsList
+
+var GetResourceSet = &sGetResourceSet
+
+var GetThirdPartyFirewallAssociationStatus = &sGetThirdPartyFirewallAssociationStatus
+
+var GetViolationDetails = &sGetViolationDetails
+
+var ListAdminAccountsForOrganization = &sListAdminAccountsForOrganization
+
+var ListAdminsManagingAccount = &sListAdminsManagingAccount
+
+var ListAppsLists = &sListAppsLists
+
+var ListComplianceStatus = &sListComplianceStatus
+
+var ListDiscoveredResources = &sListDiscoveredResources
+
+var ListMemberAccounts = &sListMemberAccounts
+
+var ListPolicies = &sListPolicies
+
+var ListProtocolsLists = &sListProtocolsLists
+
+var ListResourceSetResources = &sListResourceSetResources
+
+var ListResourceSets = &sListResourceSets
+
+var ListTagsForResource = &sListTagsForResource
+
+var ListThirdPartyFirewallFirewallPolicies = &sListThirdPartyFirewallFirewallPolicies
+
+var PutAdminAccount = &sPutAdminAccount
+
+var PutAppsList = &sPutAppsList
+
+var PutNotificationChannel = &sPutNotificationChannel
+
+var PutPolicy = &sPutPolicy
+
+var PutProtocolsList = &sPutProtocolsList
+
+var PutResourceSet = &sPutResourceSet
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var _AWSFMS_20180101 = &s_AWSFMS_20180101
+
+var _AccountIdList = &s_AccountIdList
+var _AccountIdList_member = &s_AccountIdList_member
+
+var AccountRoleStatus = &sAccountRoleStatus
+var AccountRoleStatus_Ready = &sAccountRoleStatus_Ready
+var AccountRoleStatus_Creating = &sAccountRoleStatus_Creating
+var AccountRoleStatus_PendingDeletion = &sAccountRoleStatus_PendingDeletion
+var AccountRoleStatus_Deleting = &sAccountRoleStatus_Deleting
+var AccountRoleStatus_Deleted = &sAccountRoleStatus_Deleted
+
+var AccountScope = &sAccountScope
+var AccountScope_Accounts = &sAccountScope_Accounts
+var AccountScope_AllAccountsEnabled = &sAccountScope_AllAccountsEnabled
+var AccountScope_ExcludeSpecifiedAccounts = &sAccountScope_ExcludeSpecifiedAccounts
+
+var ActionTarget = &sActionTarget
+var ActionTarget_ResourceId = &sActionTarget_ResourceId
+var ActionTarget_Description = &sActionTarget_Description
+
+var AdminAccountSummary = &sAdminAccountSummary
+var AdminAccountSummary_AdminAccount = &sAdminAccountSummary_AdminAccount
+var AdminAccountSummary_DefaultAdmin = &sAdminAccountSummary_DefaultAdmin
+var AdminAccountSummary_Status = &sAdminAccountSummary_Status
+
+var _AdminAccountSummaryList = &s_AdminAccountSummaryList
+var _AdminAccountSummaryList_member = &s_AdminAccountSummaryList_member
+
+var AdminScope = &sAdminScope
+var AdminScope_AccountScope = &sAdminScope_AccountScope
+var AdminScope_OrganizationalUnitScope = &sAdminScope_OrganizationalUnitScope
+var AdminScope_RegionScope = &sAdminScope_RegionScope
+var AdminScope_PolicyTypeScope = &sAdminScope_PolicyTypeScope
+
+var App = &sApp
+var App_AppName = &sApp_AppName
+var App_Protocol = &sApp_Protocol
+var App_Port = &sApp_Port
+
+var _AppsList = &s_AppsList
+var _AppsList_member = &s_AppsList_member
+
+var AppsListData = &sAppsListData
+var AppsListData_ListId = &sAppsListData_ListId
+var AppsListData_ListName = &sAppsListData_ListName
+var AppsListData_ListUpdateToken = &sAppsListData_ListUpdateToken
+var AppsListData_CreateTime = &sAppsListData_CreateTime
+var AppsListData_LastUpdateTime = &sAppsListData_LastUpdateTime
+var AppsListData_AppsList = &sAppsListData_AppsList
+var AppsListData_PreviousAppsList = &sAppsListData_PreviousAppsList
+
+var AppsListDataSummary = &sAppsListDataSummary
+var AppsListDataSummary_ListArn = &sAppsListDataSummary_ListArn
+var AppsListDataSummary_ListId = &sAppsListDataSummary_ListId
+var AppsListDataSummary_ListName = &sAppsListDataSummary_ListName
+var AppsListDataSummary_AppsList = &sAppsListDataSummary_AppsList
+
+var _AppsListsData = &s_AppsListsData
+var _AppsListsData_member = &s_AppsListsData_member
+
+var _AWSAccountId = &s_AWSAccountId
+
+var _AWSAccountIdList = &s_AWSAccountIdList
+var _AWSAccountIdList_member = &s_AWSAccountIdList_member
+
+var AwsEc2InstanceViolation = &sAwsEc2InstanceViolation
+var AwsEc2InstanceViolation_ViolationTarget = &sAwsEc2InstanceViolation_ViolationTarget
+var AwsEc2InstanceViolation_AwsEc2NetworkInterfaceViolations = &sAwsEc2InstanceViolation_AwsEc2NetworkInterfaceViolations
+
+var AwsEc2NetworkInterfaceViolation = &sAwsEc2NetworkInterfaceViolation
+var AwsEc2NetworkInterfaceViolation_ViolationTarget = &sAwsEc2NetworkInterfaceViolation_ViolationTarget
+var AwsEc2NetworkInterfaceViolation_ViolatingSecurityGroups = &sAwsEc2NetworkInterfaceViolation_ViolatingSecurityGroups
+
+var _AwsEc2NetworkInterfaceViolations = &s_AwsEc2NetworkInterfaceViolations
+var _AwsEc2NetworkInterfaceViolations_member = &s_AwsEc2NetworkInterfaceViolations_member
+
+var _AWSRegion = &s_AWSRegion
+
+var _AWSRegionList = &s_AWSRegionList
+var _AWSRegionList_member = &s_AWSRegionList_member
+
+var AwsVPCSecurityGroupViolation = &sAwsVPCSecurityGroupViolation
+var AwsVPCSecurityGroupViolation_ViolationTarget = &sAwsVPCSecurityGroupViolation_ViolationTarget
+var AwsVPCSecurityGroupViolation_ViolationTargetDescription = &sAwsVPCSecurityGroupViolation_ViolationTargetDescription
+var AwsVPCSecurityGroupViolation_PartialMatches = &sAwsVPCSecurityGroupViolation_PartialMatches
+var AwsVPCSecurityGroupViolation_PossibleSecurityGroupRemediationActions = &sAwsVPCSecurityGroupViolation_PossibleSecurityGroupRemediationActions
+
+var _Base62Id = &s_Base62Id
+
+var _BasicInteger = &s_BasicInteger
+
+var _Boolean = &s_Boolean
+
+var _BooleanObject = &s_BooleanObject
+
+var _CIDR = &s_CIDR
+
+var ComplianceViolator = &sComplianceViolator
+var ComplianceViolator_ResourceId = &sComplianceViolator_ResourceId
+var ComplianceViolator_ViolationReason = &sComplianceViolator_ViolationReason
+var ComplianceViolator_ResourceType = &sComplianceViolator_ResourceType
+var ComplianceViolator_Metadata = &sComplianceViolator_Metadata
+
+var _ComplianceViolatorMetadata = &s_ComplianceViolatorMetadata
+var _ComplianceViolatorMetadata_key = &s_ComplianceViolatorMetadata_key
+var _ComplianceViolatorMetadata_value = &s_ComplianceViolatorMetadata_value
+
+var _ComplianceViolators = &s_ComplianceViolators
+var _ComplianceViolators_member = &s_ComplianceViolators_member
+
+var CreateNetworkAclAction = &sCreateNetworkAclAction
+var CreateNetworkAclAction_Description = &sCreateNetworkAclAction_Description
+var CreateNetworkAclAction_Vpc = &sCreateNetworkAclAction_Vpc
+var CreateNetworkAclAction_FMSCanRemediate = &sCreateNetworkAclAction_FMSCanRemediate
+
+var CreateNetworkAclEntriesAction = &sCreateNetworkAclEntriesAction
+var CreateNetworkAclEntriesAction_Description = &sCreateNetworkAclEntriesAction_Description
+var CreateNetworkAclEntriesAction_NetworkAclId = &sCreateNetworkAclEntriesAction_NetworkAclId
+var CreateNetworkAclEntriesAction_NetworkAclEntriesToBeCreated = &sCreateNetworkAclEntriesAction_NetworkAclEntriesToBeCreated
+var CreateNetworkAclEntriesAction_FMSCanRemediate = &sCreateNetworkAclEntriesAction_FMSCanRemediate
+
+var _CustomerPolicyScopeId = &s_CustomerPolicyScopeId
+
+var _CustomerPolicyScopeIdList = &s_CustomerPolicyScopeIdList
+var _CustomerPolicyScopeIdList_member = &s_CustomerPolicyScopeIdList_member
+
+var CustomerPolicyScopeIdType = &sCustomerPolicyScopeIdType
+var CustomerPolicyScopeIdType_ACCOUNT = &sCustomerPolicyScopeIdType_ACCOUNT
+var CustomerPolicyScopeIdType_ORG_UNIT = &sCustomerPolicyScopeIdType_ORG_UNIT
+
+var _CustomerPolicyScopeMap = &s_CustomerPolicyScopeMap
+var _CustomerPolicyScopeMap_key = &s_CustomerPolicyScopeMap_key
+var _CustomerPolicyScopeMap_value = &s_CustomerPolicyScopeMap_value
+
+var CustomerPolicyStatus = &sCustomerPolicyStatus
+var CustomerPolicyStatus_ACTIVE = &sCustomerPolicyStatus_ACTIVE
+var CustomerPolicyStatus_OUT_OF_ADMIN_SCOPE = &sCustomerPolicyStatus_OUT_OF_ADMIN_SCOPE
+
+var DeleteNetworkAclEntriesAction = &sDeleteNetworkAclEntriesAction
+var DeleteNetworkAclEntriesAction_Description = &sDeleteNetworkAclEntriesAction_Description
+var DeleteNetworkAclEntriesAction_NetworkAclId = &sDeleteNetworkAclEntriesAction_NetworkAclId
+var DeleteNetworkAclEntriesAction_NetworkAclEntriesToBeDeleted = &sDeleteNetworkAclEntriesAction_NetworkAclEntriesToBeDeleted
+var DeleteNetworkAclEntriesAction_FMSCanRemediate = &sDeleteNetworkAclEntriesAction_FMSCanRemediate
+
+var DependentServiceName = &sDependentServiceName
+var DependentServiceName_AWSConfig = &sDependentServiceName_AWSConfig
+var DependentServiceName_AWSWAF = &sDependentServiceName_AWSWAF
+var DependentServiceName_AWSShieldAdvanced = &sDependentServiceName_AWSShieldAdvanced
+var DependentServiceName_AWSVirtualPrivateCloud = &sDependentServiceName_AWSVirtualPrivateCloud
+
+var _Description = &s_Description
+
+var DestinationType = &sDestinationType
+var DestinationType_IPV4 = &sDestinationType_IPV4
+var DestinationType_IPV6 = &sDestinationType_IPV6
+var DestinationType_PrefixList = &sDestinationType_PrefixList
+
+var _DetailedInfo = &s_DetailedInfo
+
+var DiscoveredResource = &sDiscoveredResource
+var DiscoveredResource_URI = &sDiscoveredResource_URI
+var DiscoveredResource_AccountId = &sDiscoveredResource_AccountId
+var DiscoveredResource_Type = &sDiscoveredResource_Type
+var DiscoveredResource_Name = &sDiscoveredResource_Name
+
+var _DiscoveredResourceList = &s_DiscoveredResourceList
+var _DiscoveredResourceList_member = &s_DiscoveredResourceList_member
+
+var DnsDuplicateRuleGroupViolation = &sDnsDuplicateRuleGroupViolation
+var DnsDuplicateRuleGroupViolation_ViolationTarget = &sDnsDuplicateRuleGroupViolation_ViolationTarget
+var DnsDuplicateRuleGroupViolation_ViolationTargetDescription = &sDnsDuplicateRuleGroupViolation_ViolationTargetDescription
+
+var DnsRuleGroupLimitExceededViolation = &sDnsRuleGroupLimitExceededViolation
+var DnsRuleGroupLimitExceededViolation_ViolationTarget = &sDnsRuleGroupLimitExceededViolation_ViolationTarget
+var DnsRuleGroupLimitExceededViolation_ViolationTargetDescription = &sDnsRuleGroupLimitExceededViolation_ViolationTargetDescription
+var DnsRuleGroupLimitExceededViolation_NumberOfRuleGroupsAlreadyAssociated = &sDnsRuleGroupLimitExceededViolation_NumberOfRuleGroupsAlreadyAssociated
+
+var _DnsRuleGroupPriorities = &s_DnsRuleGroupPriorities
+var _DnsRuleGroupPriorities_member = &s_DnsRuleGroupPriorities_member
+
+var _DnsRuleGroupPriority = &s_DnsRuleGroupPriority
+
+var DnsRuleGroupPriorityConflictViolation = &sDnsRuleGroupPriorityConflictViolation
+var DnsRuleGroupPriorityConflictViolation_ViolationTarget = &sDnsRuleGroupPriorityConflictViolation_ViolationTarget
+var DnsRuleGroupPriorityConflictViolation_ViolationTargetDescription = &sDnsRuleGroupPriorityConflictViolation_ViolationTargetDescription
+var DnsRuleGroupPriorityConflictViolation_ConflictingPriority = &sDnsRuleGroupPriorityConflictViolation_ConflictingPriority
+var DnsRuleGroupPriorityConflictViolation_ConflictingPolicyId = &sDnsRuleGroupPriorityConflictViolation_ConflictingPolicyId
+var DnsRuleGroupPriorityConflictViolation_UnavailablePriorities = &sDnsRuleGroupPriorityConflictViolation_UnavailablePriorities
+
+var EC2AssociateRouteTableAction = &sEC2AssociateRouteTableAction
+var EC2AssociateRouteTableAction_Description = &sEC2AssociateRouteTableAction_Description
+var EC2AssociateRouteTableAction_RouteTableId = &sEC2AssociateRouteTableAction_RouteTableId
+var EC2AssociateRouteTableAction_SubnetId = &sEC2AssociateRouteTableAction_SubnetId
+var EC2AssociateRouteTableAction_GatewayId = &sEC2AssociateRouteTableAction_GatewayId
+
+var EC2CopyRouteTableAction = &sEC2CopyRouteTableAction
+var EC2CopyRouteTableAction_Description = &sEC2CopyRouteTableAction_Description
+var EC2CopyRouteTableAction_VpcId = &sEC2CopyRouteTableAction_VpcId
+var EC2CopyRouteTableAction_RouteTableId = &sEC2CopyRouteTableAction_RouteTableId
+
+var EC2CreateRouteAction = &sEC2CreateRouteAction
+var EC2CreateRouteAction_Description = &sEC2CreateRouteAction_Description
+var EC2CreateRouteAction_DestinationCidrBlock = &sEC2CreateRouteAction_DestinationCidrBlock
+var EC2CreateRouteAction_DestinationPrefixListId = &sEC2CreateRouteAction_DestinationPrefixListId
+var EC2CreateRouteAction_DestinationIpv6CidrBlock = &sEC2CreateRouteAction_DestinationIpv6CidrBlock
+var EC2CreateRouteAction_VpcEndpointId = &sEC2CreateRouteAction_VpcEndpointId
+var EC2CreateRouteAction_GatewayId = &sEC2CreateRouteAction_GatewayId
+var EC2CreateRouteAction_RouteTableId = &sEC2CreateRouteAction_RouteTableId
+
+var EC2CreateRouteTableAction = &sEC2CreateRouteTableAction
+var EC2CreateRouteTableAction_Description = &sEC2CreateRouteTableAction_Description
+var EC2CreateRouteTableAction_VpcId = &sEC2CreateRouteTableAction_VpcId
+
+var EC2DeleteRouteAction = &sEC2DeleteRouteAction
+var EC2DeleteRouteAction_Description = &sEC2DeleteRouteAction_Description
+var EC2DeleteRouteAction_DestinationCidrBlock = &sEC2DeleteRouteAction_DestinationCidrBlock
+var EC2DeleteRouteAction_DestinationPrefixListId = &sEC2DeleteRouteAction_DestinationPrefixListId
+var EC2DeleteRouteAction_DestinationIpv6CidrBlock = &sEC2DeleteRouteAction_DestinationIpv6CidrBlock
+var EC2DeleteRouteAction_RouteTableId = &sEC2DeleteRouteAction_RouteTableId
+
+var EC2ReplaceRouteAction = &sEC2ReplaceRouteAction
+var EC2ReplaceRouteAction_Description = &sEC2ReplaceRouteAction_Description
+var EC2ReplaceRouteAction_DestinationCidrBlock = &sEC2ReplaceRouteAction_DestinationCidrBlock
+var EC2ReplaceRouteAction_DestinationPrefixListId = &sEC2ReplaceRouteAction_DestinationPrefixListId
+var EC2ReplaceRouteAction_DestinationIpv6CidrBlock = &sEC2ReplaceRouteAction_DestinationIpv6CidrBlock
+var EC2ReplaceRouteAction_GatewayId = &sEC2ReplaceRouteAction_GatewayId
+var EC2ReplaceRouteAction_RouteTableId = &sEC2ReplaceRouteAction_RouteTableId
+
+var EC2ReplaceRouteTableAssociationAction = &sEC2ReplaceRouteTableAssociationAction
+var EC2ReplaceRouteTableAssociationAction_Description = &sEC2ReplaceRouteTableAssociationAction_Description
+var EC2ReplaceRouteTableAssociationAction_AssociationId = &sEC2ReplaceRouteTableAssociationAction_AssociationId
+var EC2ReplaceRouteTableAssociationAction_RouteTableId = &sEC2ReplaceRouteTableAssociationAction_RouteTableId
+
+var _EntriesDescription = &s_EntriesDescription
+var _EntriesDescription_member = &s_EntriesDescription_member
+
+var _EntriesWithConflicts = &s_EntriesWithConflicts
+var _EntriesWithConflicts_member = &s_EntriesWithConflicts_member
+
+var EntryDescription = &sEntryDescription
+var EntryDescription_EntryDetail = &sEntryDescription_EntryDetail
+var EntryDescription_EntryRuleNumber = &sEntryDescription_EntryRuleNumber
+var EntryDescription_EntryType = &sEntryDescription_EntryType
+
+var EntryType = &sEntryType
+var EntryType_FMSManagedFirstEntry = &sEntryType_FMSManagedFirstEntry
+var EntryType_FMSManagedLastEntry = &sEntryType_FMSManagedLastEntry
+var EntryType_CustomEntry = &sEntryType_CustomEntry
+
+var EntryViolation = &sEntryViolation
+var EntryViolation_ExpectedEntry = &sEntryViolation_ExpectedEntry
+var EntryViolation_ExpectedEvaluationOrder = &sEntryViolation_ExpectedEvaluationOrder
+var EntryViolation_ActualEvaluationOrder = &sEntryViolation_ActualEvaluationOrder
+var EntryViolation_EntryAtExpectedEvaluationOrder = &sEntryViolation_EntryAtExpectedEvaluationOrder
+var EntryViolation_EntriesWithConflicts = &sEntryViolation_EntriesWithConflicts
+var EntryViolation_EntryViolationReasons = &sEntryViolation_EntryViolationReasons
+
+var EntryViolationReason = &sEntryViolationReason
+var EntryViolationReason_MissingExpectedEntry = &sEntryViolationReason_MissingExpectedEntry
+var EntryViolationReason_IncorrectEntryOrder = &sEntryViolationReason_IncorrectEntryOrder
+var EntryViolationReason_EntryConflict = &sEntryViolationReason_EntryConflict
+
+var _EntryViolationReasons = &s_EntryViolationReasons
+var _EntryViolationReasons_member = &s_EntryViolationReasons_member
+
+var _EntryViolations = &s_EntryViolations
+var _EntryViolations_member = &s_EntryViolations_member
+
+var _ErrorMessage = &s_ErrorMessage
+
+var EvaluationResult = &sEvaluationResult
+var EvaluationResult_ComplianceStatus = &sEvaluationResult_ComplianceStatus
+var EvaluationResult_ViolatorCount = &sEvaluationResult_ViolatorCount
+var EvaluationResult_EvaluationLimitExceeded = &sEvaluationResult_EvaluationLimitExceeded
+
+var _EvaluationResults = &s_EvaluationResults
+var _EvaluationResults_member = &s_EvaluationResults_member
+
+var ExpectedRoute = &sExpectedRoute
+var ExpectedRoute_IpV4Cidr = &sExpectedRoute_IpV4Cidr
+var ExpectedRoute_PrefixListId = &sExpectedRoute_PrefixListId
+var ExpectedRoute_IpV6Cidr = &sExpectedRoute_IpV6Cidr
+var ExpectedRoute_ContributingSubnets = &sExpectedRoute_ContributingSubnets
+var ExpectedRoute_AllowedTargets = &sExpectedRoute_AllowedTargets
+var ExpectedRoute_RouteTableId = &sExpectedRoute_RouteTableId
+
+var _ExpectedRoutes = &s_ExpectedRoutes
+var _ExpectedRoutes_member = &s_ExpectedRoutes_member
+
+var FailedItem = &sFailedItem
+var FailedItem_URI = &sFailedItem_URI
+var FailedItem_Reason = &sFailedItem_Reason
+
+var _FailedItemList = &s_FailedItemList
+var _FailedItemList_member = &s_FailedItemList_member
+
+var FailedItemReason = &sFailedItemReason
+var FailedItemReason_NotValidArn = &sFailedItemReason_NotValidArn
+var FailedItemReason_NotValidPartition = &sFailedItemReason_NotValidPartition
+var FailedItemReason_NotValidRegion = &sFailedItemReason_NotValidRegion
+var FailedItemReason_NotValidService = &sFailedItemReason_NotValidService
+var FailedItemReason_NotValidResourceType = &sFailedItemReason_NotValidResourceType
+var FailedItemReason_NotValidAccountId = &sFailedItemReason_NotValidAccountId
+
+var FirewallDeploymentModel = &sFirewallDeploymentModel
+var FirewallDeploymentModel_CENTRALIZED = &sFirewallDeploymentModel_CENTRALIZED
+var FirewallDeploymentModel_DISTRIBUTED = &sFirewallDeploymentModel_DISTRIBUTED
+
+var _FirewallPolicyId = &s_FirewallPolicyId
+
+var _FirewallPolicyName = &s_FirewallPolicyName
+
+var FirewallSubnetIsOutOfScopeViolation = &sFirewallSubnetIsOutOfScopeViolation
+var FirewallSubnetIsOutOfScopeViolation_FirewallSubnetId = &sFirewallSubnetIsOutOfScopeViolation_FirewallSubnetId
+var FirewallSubnetIsOutOfScopeViolation_VpcId = &sFirewallSubnetIsOutOfScopeViolation_VpcId
+var FirewallSubnetIsOutOfScopeViolation_SubnetAvailabilityZone = &sFirewallSubnetIsOutOfScopeViolation_SubnetAvailabilityZone
+var FirewallSubnetIsOutOfScopeViolation_SubnetAvailabilityZoneId = &sFirewallSubnetIsOutOfScopeViolation_SubnetAvailabilityZoneId
+var FirewallSubnetIsOutOfScopeViolation_VpcEndpointId = &sFirewallSubnetIsOutOfScopeViolation_VpcEndpointId
+
+var FirewallSubnetMissingVPCEndpointViolation = &sFirewallSubnetMissingVPCEndpointViolation
+var FirewallSubnetMissingVPCEndpointViolation_FirewallSubnetId = &sFirewallSubnetMissingVPCEndpointViolation_FirewallSubnetId
+var FirewallSubnetMissingVPCEndpointViolation_VpcId = &sFirewallSubnetMissingVPCEndpointViolation_VpcId
+var FirewallSubnetMissingVPCEndpointViolation_SubnetAvailabilityZone = &sFirewallSubnetMissingVPCEndpointViolation_SubnetAvailabilityZone
+var FirewallSubnetMissingVPCEndpointViolation_SubnetAvailabilityZoneId = &sFirewallSubnetMissingVPCEndpointViolation_SubnetAvailabilityZoneId
+
+var FMSPolicyUpdateFirewallCreationConfigAction = &sFMSPolicyUpdateFirewallCreationConfigAction
+var FMSPolicyUpdateFirewallCreationConfigAction_Description = &sFMSPolicyUpdateFirewallCreationConfigAction_Description
+var FMSPolicyUpdateFirewallCreationConfigAction_FirewallCreationConfig = &sFMSPolicyUpdateFirewallCreationConfigAction_FirewallCreationConfig
+
+var _Identifier = &s_Identifier
+
+var _IdentifierList = &s_IdentifierList
+var _IdentifierList_member = &s_IdentifierList_member
+
+var _IntegerObject = &s_IntegerObject
+
+var _IntegerObjectMinimum0 = &s_IntegerObjectMinimum0
+
+var InternalErrorException = &sInternalErrorException
+var InternalErrorException_Message = &sInternalErrorException_Message
+
+var InvalidInputException = &sInvalidInputException
+var InvalidInputException_Message = &sInvalidInputException_Message
+
+var InvalidNetworkAclEntriesViolation = &sInvalidNetworkAclEntriesViolation
+var InvalidNetworkAclEntriesViolation_Vpc = &sInvalidNetworkAclEntriesViolation_Vpc
+var InvalidNetworkAclEntriesViolation_Subnet = &sInvalidNetworkAclEntriesViolation_Subnet
+var InvalidNetworkAclEntriesViolation_SubnetAvailabilityZone = &sInvalidNetworkAclEntriesViolation_SubnetAvailabilityZone
+var InvalidNetworkAclEntriesViolation_CurrentAssociatedNetworkAcl = &sInvalidNetworkAclEntriesViolation_CurrentAssociatedNetworkAcl
+var InvalidNetworkAclEntriesViolation_EntryViolations = &sInvalidNetworkAclEntriesViolation_EntryViolations
+
+var InvalidOperationException = &sInvalidOperationException
+var InvalidOperationException_Message = &sInvalidOperationException_Message
+
+var InvalidTypeException = &sInvalidTypeException
+var InvalidTypeException_Message = &sInvalidTypeException_Message
+
+var _IPPortNumber = &s_IPPortNumber
+
+var _IPPortNumberInteger = &s_IPPortNumberInteger
+
+var _IssueInfoMap = &s_IssueInfoMap
+var _IssueInfoMap_key = &s_IssueInfoMap_key
+var _IssueInfoMap_value = &s_IssueInfoMap_value
+
+var _LengthBoundedNonEmptyString = &s_LengthBoundedNonEmptyString
+
+var _LengthBoundedString = &s_LengthBoundedString
+
+var _LengthBoundedStringList = &s_LengthBoundedStringList
+var _LengthBoundedStringList_member = &s_LengthBoundedStringList_member
+
+var LimitExceededException = &sLimitExceededException
+var LimitExceededException_Message = &sLimitExceededException_Message
+
+var _ListId = &s_ListId
+
+var _ManagedServiceData = &s_ManagedServiceData
+
+var MarketplaceSubscriptionOnboardingStatus = &sMarketplaceSubscriptionOnboardingStatus
+var MarketplaceSubscriptionOnboardingStatus_NO_SUBSCRIPTION = &sMarketplaceSubscriptionOnboardingStatus_NO_SUBSCRIPTION
+var MarketplaceSubscriptionOnboardingStatus_NOT_COMPLETE = &sMarketplaceSubscriptionOnboardingStatus_NOT_COMPLETE
+var MarketplaceSubscriptionOnboardingStatus_COMPLETE = &sMarketplaceSubscriptionOnboardingStatus_COMPLETE
+
+var _MemberAccounts = &s_MemberAccounts
+var _MemberAccounts_member = &s_MemberAccounts_member
+
+var _Name = &s_Name
+
+var NetworkAclCommonPolicy = &sNetworkAclCommonPolicy
+var NetworkAclCommonPolicy_NetworkAclEntrySet = &sNetworkAclCommonPolicy_NetworkAclEntrySet
+
+var _NetworkAclEntries = &s_NetworkAclEntries
+var _NetworkAclEntries_member = &s_NetworkAclEntries_member
+
+var NetworkAclEntry = &sNetworkAclEntry
+var NetworkAclEntry_IcmpTypeCode = &sNetworkAclEntry_IcmpTypeCode
+var NetworkAclEntry_Protocol = &sNetworkAclEntry_Protocol
+var NetworkAclEntry_PortRange = &sNetworkAclEntry_PortRange
+var NetworkAclEntry_CidrBlock = &sNetworkAclEntry_CidrBlock
+var NetworkAclEntry_Ipv6CidrBlock = &sNetworkAclEntry_Ipv6CidrBlock
+var NetworkAclEntry_RuleAction = &sNetworkAclEntry_RuleAction
+var NetworkAclEntry_Egress = &sNetworkAclEntry_Egress
+
+var NetworkAclEntrySet = &sNetworkAclEntrySet
+var NetworkAclEntrySet_FirstEntries = &sNetworkAclEntrySet_FirstEntries
+var NetworkAclEntrySet_ForceRemediateForFirstEntries = &sNetworkAclEntrySet_ForceRemediateForFirstEntries
+var NetworkAclEntrySet_LastEntries = &sNetworkAclEntrySet_LastEntries
+var NetworkAclEntrySet_ForceRemediateForLastEntries = &sNetworkAclEntrySet_ForceRemediateForLastEntries
+
+var NetworkAclIcmpTypeCode = &sNetworkAclIcmpTypeCode
+var NetworkAclIcmpTypeCode_Code = &sNetworkAclIcmpTypeCode_Code
+var NetworkAclIcmpTypeCode_Type = &sNetworkAclIcmpTypeCode_Type
+
+var NetworkAclPortRange = &sNetworkAclPortRange
+var NetworkAclPortRange_From = &sNetworkAclPortRange_From
+var NetworkAclPortRange_To = &sNetworkAclPortRange_To
+
+var NetworkAclRuleAction = &sNetworkAclRuleAction
+var NetworkAclRuleAction_ALLOW = &sNetworkAclRuleAction_ALLOW
+var NetworkAclRuleAction_DENY = &sNetworkAclRuleAction_DENY
+
+var _NetworkFirewallAction = &s_NetworkFirewallAction
+
+var _NetworkFirewallActionList = &s_NetworkFirewallActionList
+var _NetworkFirewallActionList_member = &s_NetworkFirewallActionList_member
+
+var NetworkFirewallBlackHoleRouteDetectedViolation = &sNetworkFirewallBlackHoleRouteDetectedViolation
+var NetworkFirewallBlackHoleRouteDetectedViolation_ViolationTarget = &sNetworkFirewallBlackHoleRouteDetectedViolation_ViolationTarget
+var NetworkFirewallBlackHoleRouteDetectedViolation_RouteTableId = &sNetworkFirewallBlackHoleRouteDetectedViolation_RouteTableId
+var NetworkFirewallBlackHoleRouteDetectedViolation_VpcId = &sNetworkFirewallBlackHoleRouteDetectedViolation_VpcId
+var NetworkFirewallBlackHoleRouteDetectedViolation_ViolatingRoutes = &sNetworkFirewallBlackHoleRouteDetectedViolation_ViolatingRoutes
+
+var NetworkFirewallInternetTrafficNotInspectedViolation = &sNetworkFirewallInternetTrafficNotInspectedViolation
+var NetworkFirewallInternetTrafficNotInspectedViolation_SubnetId = &sNetworkFirewallInternetTrafficNotInspectedViolation_SubnetId
+var NetworkFirewallInternetTrafficNotInspectedViolation_SubnetAvailabilityZone = &sNetworkFirewallInternetTrafficNotInspectedViolation_SubnetAvailabilityZone
+var NetworkFirewallInternetTrafficNotInspectedViolation_RouteTableId = &sNetworkFirewallInternetTrafficNotInspectedViolation_RouteTableId
+var NetworkFirewallInternetTrafficNotInspectedViolation_ViolatingRoutes = &sNetworkFirewallInternetTrafficNotInspectedViolation_ViolatingRoutes
+var NetworkFirewallInternetTrafficNotInspectedViolation_IsRouteTableUsedInDifferentAZ = &sNetworkFirewallInternetTrafficNotInspectedViolation_IsRouteTableUsedInDifferentAZ
+var NetworkFirewallInternetTrafficNotInspectedViolation_CurrentFirewallSubnetRouteTable = &sNetworkFirewallInternetTrafficNotInspectedViolation_CurrentFirewallSubnetRouteTable
+var NetworkFirewallInternetTrafficNotInspectedViolation_ExpectedFirewallEndpoint = &sNetworkFirewallInternetTrafficNotInspectedViolation_ExpectedFirewallEndpoint
+var NetworkFirewallInternetTrafficNotInspectedViolation_FirewallSubnetId = &sNetworkFirewallInternetTrafficNotInspectedViolation_FirewallSubnetId
+var NetworkFirewallInternetTrafficNotInspectedViolation_ExpectedFirewallSubnetRoutes = &sNetworkFirewallInternetTrafficNotInspectedViolation_ExpectedFirewallSubnetRoutes
+var NetworkFirewallInternetTrafficNotInspectedViolation_ActualFirewallSubnetRoutes = &sNetworkFirewallInternetTrafficNotInspectedViolation_ActualFirewallSubnetRoutes
+var NetworkFirewallInternetTrafficNotInspectedViolation_InternetGatewayId = &sNetworkFirewallInternetTrafficNotInspectedViolation_InternetGatewayId
+var NetworkFirewallInternetTrafficNotInspectedViolation_CurrentInternetGatewayRouteTable = &sNetworkFirewallInternetTrafficNotInspectedViolation_CurrentInternetGatewayRouteTable
+var NetworkFirewallInternetTrafficNotInspectedViolation_ExpectedInternetGatewayRoutes = &sNetworkFirewallInternetTrafficNotInspectedViolation_ExpectedInternetGatewayRoutes
+var NetworkFirewallInternetTrafficNotInspectedViolation_ActualInternetGatewayRoutes = &sNetworkFirewallInternetTrafficNotInspectedViolation_ActualInternetGatewayRoutes
+var NetworkFirewallInternetTrafficNotInspectedViolation_VpcId = &sNetworkFirewallInternetTrafficNotInspectedViolation_VpcId
+
+var NetworkFirewallInvalidRouteConfigurationViolation = &sNetworkFirewallInvalidRouteConfigurationViolation
+var NetworkFirewallInvalidRouteConfigurationViolation_AffectedSubnets = &sNetworkFirewallInvalidRouteConfigurationViolation_AffectedSubnets
+var NetworkFirewallInvalidRouteConfigurationViolation_RouteTableId = &sNetworkFirewallInvalidRouteConfigurationViolation_RouteTableId
+var NetworkFirewallInvalidRouteConfigurationViolation_IsRouteTableUsedInDifferentAZ = &sNetworkFirewallInvalidRouteConfigurationViolation_IsRouteTableUsedInDifferentAZ
+var NetworkFirewallInvalidRouteConfigurationViolation_ViolatingRoute = &sNetworkFirewallInvalidRouteConfigurationViolation_ViolatingRoute
+var NetworkFirewallInvalidRouteConfigurationViolation_CurrentFirewallSubnetRouteTable = &sNetworkFirewallInvalidRouteConfigurationViolation_CurrentFirewallSubnetRouteTable
+var NetworkFirewallInvalidRouteConfigurationViolation_ExpectedFirewallEndpoint = &sNetworkFirewallInvalidRouteConfigurationViolation_ExpectedFirewallEndpoint
+var NetworkFirewallInvalidRouteConfigurationViolation_ActualFirewallEndpoint = &sNetworkFirewallInvalidRouteConfigurationViolation_ActualFirewallEndpoint
+var NetworkFirewallInvalidRouteConfigurationViolation_ExpectedFirewallSubnetId = &sNetworkFirewallInvalidRouteConfigurationViolation_ExpectedFirewallSubnetId
+var NetworkFirewallInvalidRouteConfigurationViolation_ActualFirewallSubnetId = &sNetworkFirewallInvalidRouteConfigurationViolation_ActualFirewallSubnetId
+var NetworkFirewallInvalidRouteConfigurationViolation_ExpectedFirewallSubnetRoutes = &sNetworkFirewallInvalidRouteConfigurationViolation_ExpectedFirewallSubnetRoutes
+var NetworkFirewallInvalidRouteConfigurationViolation_ActualFirewallSubnetRoutes = &sNetworkFirewallInvalidRouteConfigurationViolation_ActualFirewallSubnetRoutes
+var NetworkFirewallInvalidRouteConfigurationViolation_InternetGatewayId = &sNetworkFirewallInvalidRouteConfigurationViolation_InternetGatewayId
+var NetworkFirewallInvalidRouteConfigurationViolation_CurrentInternetGatewayRouteTable = &sNetworkFirewallInvalidRouteConfigurationViolation_CurrentInternetGatewayRouteTable
+var NetworkFirewallInvalidRouteConfigurationViolation_ExpectedInternetGatewayRoutes = &sNetworkFirewallInvalidRouteConfigurationViolation_ExpectedInternetGatewayRoutes
+var NetworkFirewallInvalidRouteConfigurationViolation_ActualInternetGatewayRoutes = &sNetworkFirewallInvalidRouteConfigurationViolation_ActualInternetGatewayRoutes
+var NetworkFirewallInvalidRouteConfigurationViolation_VpcId = &sNetworkFirewallInvalidRouteConfigurationViolation_VpcId
+
+var NetworkFirewallMissingExpectedRoutesViolation = &sNetworkFirewallMissingExpectedRoutesViolation
+var NetworkFirewallMissingExpectedRoutesViolation_ViolationTarget = &sNetworkFirewallMissingExpectedRoutesViolation_ViolationTarget
+var NetworkFirewallMissingExpectedRoutesViolation_ExpectedRoutes = &sNetworkFirewallMissingExpectedRoutesViolation_ExpectedRoutes
+var NetworkFirewallMissingExpectedRoutesViolation_VpcId = &sNetworkFirewallMissingExpectedRoutesViolation_VpcId
+
+var NetworkFirewallMissingExpectedRTViolation = &sNetworkFirewallMissingExpectedRTViolation
+var NetworkFirewallMissingExpectedRTViolation_ViolationTarget = &sNetworkFirewallMissingExpectedRTViolation_ViolationTarget
+var NetworkFirewallMissingExpectedRTViolation_VPC = &sNetworkFirewallMissingExpectedRTViolation_VPC
+var NetworkFirewallMissingExpectedRTViolation_AvailabilityZone = &sNetworkFirewallMissingExpectedRTViolation_AvailabilityZone
+var NetworkFirewallMissingExpectedRTViolation_CurrentRouteTable = &sNetworkFirewallMissingExpectedRTViolation_CurrentRouteTable
+var NetworkFirewallMissingExpectedRTViolation_ExpectedRouteTable = &sNetworkFirewallMissingExpectedRTViolation_ExpectedRouteTable
+
+var NetworkFirewallMissingFirewallViolation = &sNetworkFirewallMissingFirewallViolation
+var NetworkFirewallMissingFirewallViolation_ViolationTarget = &sNetworkFirewallMissingFirewallViolation_ViolationTarget
+var NetworkFirewallMissingFirewallViolation_VPC = &sNetworkFirewallMissingFirewallViolation_VPC
+var NetworkFirewallMissingFirewallViolation_AvailabilityZone = &sNetworkFirewallMissingFirewallViolation_AvailabilityZone
+var NetworkFirewallMissingFirewallViolation_TargetViolationReason = &sNetworkFirewallMissingFirewallViolation_TargetViolationReason
+
+var NetworkFirewallMissingSubnetViolation = &sNetworkFirewallMissingSubnetViolation
+var NetworkFirewallMissingSubnetViolation_ViolationTarget = &sNetworkFirewallMissingSubnetViolation_ViolationTarget
+var NetworkFirewallMissingSubnetViolation_VPC = &sNetworkFirewallMissingSubnetViolation_VPC
+var NetworkFirewallMissingSubnetViolation_AvailabilityZone = &sNetworkFirewallMissingSubnetViolation_AvailabilityZone
+var NetworkFirewallMissingSubnetViolation_TargetViolationReason = &sNetworkFirewallMissingSubnetViolation_TargetViolationReason
+
+var NetworkFirewallOverrideAction = &sNetworkFirewallOverrideAction
+var NetworkFirewallOverrideAction_DROP_TO_ALERT = &sNetworkFirewallOverrideAction_DROP_TO_ALERT
+
+var NetworkFirewallPolicy = &sNetworkFirewallPolicy
+var NetworkFirewallPolicy_FirewallDeploymentModel = &sNetworkFirewallPolicy_FirewallDeploymentModel
+
+var NetworkFirewallPolicyDescription = &sNetworkFirewallPolicyDescription
+var NetworkFirewallPolicyDescription_StatelessRuleGroups = &sNetworkFirewallPolicyDescription_StatelessRuleGroups
+var NetworkFirewallPolicyDescription_StatelessDefaultActions = &sNetworkFirewallPolicyDescription_StatelessDefaultActions
+var NetworkFirewallPolicyDescription_StatelessFragmentDefaultActions = &sNetworkFirewallPolicyDescription_StatelessFragmentDefaultActions
+var NetworkFirewallPolicyDescription_StatelessCustomActions = &sNetworkFirewallPolicyDescription_StatelessCustomActions
+var NetworkFirewallPolicyDescription_StatefulRuleGroups = &sNetworkFirewallPolicyDescription_StatefulRuleGroups
+var NetworkFirewallPolicyDescription_StatefulDefaultActions = &sNetworkFirewallPolicyDescription_StatefulDefaultActions
+var NetworkFirewallPolicyDescription_StatefulEngineOptions = &sNetworkFirewallPolicyDescription_StatefulEngineOptions
+
+var NetworkFirewallPolicyModifiedViolation = &sNetworkFirewallPolicyModifiedViolation
+var NetworkFirewallPolicyModifiedViolation_ViolationTarget = &sNetworkFirewallPolicyModifiedViolation_ViolationTarget
+var NetworkFirewallPolicyModifiedViolation_CurrentPolicyDescription = &sNetworkFirewallPolicyModifiedViolation_CurrentPolicyDescription
+var NetworkFirewallPolicyModifiedViolation_ExpectedPolicyDescription = &sNetworkFirewallPolicyModifiedViolation_ExpectedPolicyDescription
+
+var _NetworkFirewallResourceName = &s_NetworkFirewallResourceName
+
+var NetworkFirewallStatefulRuleGroupOverride = &sNetworkFirewallStatefulRuleGroupOverride
+var NetworkFirewallStatefulRuleGroupOverride_Action = &sNetworkFirewallStatefulRuleGroupOverride_Action
+
+var NetworkFirewallUnexpectedFirewallRoutesViolation = &sNetworkFirewallUnexpectedFirewallRoutesViolation
+var NetworkFirewallUnexpectedFirewallRoutesViolation_FirewallSubnetId = &sNetworkFirewallUnexpectedFirewallRoutesViolation_FirewallSubnetId
+var NetworkFirewallUnexpectedFirewallRoutesViolation_ViolatingRoutes = &sNetworkFirewallUnexpectedFirewallRoutesViolation_ViolatingRoutes
+var NetworkFirewallUnexpectedFirewallRoutesViolation_RouteTableId = &sNetworkFirewallUnexpectedFirewallRoutesViolation_RouteTableId
+var NetworkFirewallUnexpectedFirewallRoutesViolation_FirewallEndpoint = &sNetworkFirewallUnexpectedFirewallRoutesViolation_FirewallEndpoint
+var NetworkFirewallUnexpectedFirewallRoutesViolation_VpcId = &sNetworkFirewallUnexpectedFirewallRoutesViolation_VpcId
+
+var NetworkFirewallUnexpectedGatewayRoutesViolation = &sNetworkFirewallUnexpectedGatewayRoutesViolation
+var NetworkFirewallUnexpectedGatewayRoutesViolation_GatewayId = &sNetworkFirewallUnexpectedGatewayRoutesViolation_GatewayId
+var NetworkFirewallUnexpectedGatewayRoutesViolation_ViolatingRoutes = &sNetworkFirewallUnexpectedGatewayRoutesViolation_ViolatingRoutes
+var NetworkFirewallUnexpectedGatewayRoutesViolation_RouteTableId = &sNetworkFirewallUnexpectedGatewayRoutesViolation_RouteTableId
+var NetworkFirewallUnexpectedGatewayRoutesViolation_VpcId = &sNetworkFirewallUnexpectedGatewayRoutesViolation_VpcId
+
+var _OrderedRemediationActions = &s_OrderedRemediationActions
+var _OrderedRemediationActions_member = &s_OrderedRemediationActions_member
+
+var _OrganizationalUnitId = &s_OrganizationalUnitId
+
+var _OrganizationalUnitIdList = &s_OrganizationalUnitIdList
+var _OrganizationalUnitIdList_member = &s_OrganizationalUnitIdList_member
+
+var OrganizationalUnitScope = &sOrganizationalUnitScope
+var OrganizationalUnitScope_OrganizationalUnits = &sOrganizationalUnitScope_OrganizationalUnits
+var OrganizationalUnitScope_AllOrganizationalUnitsEnabled = &sOrganizationalUnitScope_AllOrganizationalUnitsEnabled
+var OrganizationalUnitScope_ExcludeSpecifiedOrganizationalUnits = &sOrganizationalUnitScope_ExcludeSpecifiedOrganizationalUnits
+
+var OrganizationStatus = &sOrganizationStatus
+var OrganizationStatus_Onboarding = &sOrganizationStatus_Onboarding
+var OrganizationStatus_OnboardingComplete = &sOrganizationStatus_OnboardingComplete
+var OrganizationStatus_Offboarding = &sOrganizationStatus_Offboarding
+var OrganizationStatus_OffboardingComplete = &sOrganizationStatus_OffboardingComplete
+
+var _PaginationMaxResults = &s_PaginationMaxResults
+
+var _PaginationToken = &s_PaginationToken
+
+var PartialMatch = &sPartialMatch
+var PartialMatch_Reference = &sPartialMatch_Reference
+var PartialMatch_TargetViolationReasons = &sPartialMatch_TargetViolationReasons
+
+var _PartialMatches = &s_PartialMatches
+var _PartialMatches_member = &s_PartialMatches_member
+
+var Policy = &sPolicy
+var Policy_PolicyId = &sPolicy_PolicyId
+var Policy_PolicyName = &sPolicy_PolicyName
+var Policy_PolicyUpdateToken = &sPolicy_PolicyUpdateToken
+var Policy_SecurityServicePolicyData = &sPolicy_SecurityServicePolicyData
+var Policy_ResourceType = &sPolicy_ResourceType
+var Policy_ResourceTypeList = &sPolicy_ResourceTypeList
+var Policy_ResourceTags = &sPolicy_ResourceTags
+var Policy_ExcludeResourceTags = &sPolicy_ExcludeResourceTags
+var Policy_RemediationEnabled = &sPolicy_RemediationEnabled
+var Policy_DeleteUnusedFMManagedResources = &sPolicy_DeleteUnusedFMManagedResources
+var Policy_IncludeMap = &sPolicy_IncludeMap
+var Policy_ExcludeMap = &sPolicy_ExcludeMap
+var Policy_ResourceSetIds = &sPolicy_ResourceSetIds
+var Policy_PolicyDescription = &sPolicy_PolicyDescription
+var Policy_PolicyStatus = &sPolicy_PolicyStatus
+var Policy_ResourceTagLogicalOperator = &sPolicy_ResourceTagLogicalOperator
+
+var PolicyComplianceDetail = &sPolicyComplianceDetail
+var PolicyComplianceDetail_PolicyOwner = &sPolicyComplianceDetail_PolicyOwner
+var PolicyComplianceDetail_PolicyId = &sPolicyComplianceDetail_PolicyId
+var PolicyComplianceDetail_MemberAccount = &sPolicyComplianceDetail_MemberAccount
+var PolicyComplianceDetail_Violators = &sPolicyComplianceDetail_Violators
+var PolicyComplianceDetail_EvaluationLimitExceeded = &sPolicyComplianceDetail_EvaluationLimitExceeded
+var PolicyComplianceDetail_ExpiredAt = &sPolicyComplianceDetail_ExpiredAt
+var PolicyComplianceDetail_IssueInfoMap = &sPolicyComplianceDetail_IssueInfoMap
+
+var PolicyComplianceStatus = &sPolicyComplianceStatus
+var PolicyComplianceStatus_PolicyOwner = &sPolicyComplianceStatus_PolicyOwner
+var PolicyComplianceStatus_PolicyId = &sPolicyComplianceStatus_PolicyId
+var PolicyComplianceStatus_PolicyName = &sPolicyComplianceStatus_PolicyName
+var PolicyComplianceStatus_MemberAccount = &sPolicyComplianceStatus_MemberAccount
+var PolicyComplianceStatus_EvaluationResults = &sPolicyComplianceStatus_EvaluationResults
+var PolicyComplianceStatus_LastUpdated = &sPolicyComplianceStatus_LastUpdated
+var PolicyComplianceStatus_IssueInfoMap = &sPolicyComplianceStatus_IssueInfoMap
+
+var _PolicyComplianceStatusList = &s_PolicyComplianceStatusList
+var _PolicyComplianceStatusList_member = &s_PolicyComplianceStatusList_member
+
+var PolicyComplianceStatusType = &sPolicyComplianceStatusType
+var PolicyComplianceStatusType_Compliant = &sPolicyComplianceStatusType_Compliant
+var PolicyComplianceStatusType_NonCompliant = &sPolicyComplianceStatusType_NonCompliant
+
+var _PolicyId = &s_PolicyId
+
+var PolicyOption = &sPolicyOption
+var PolicyOption_NetworkFirewallPolicy = &sPolicyOption_NetworkFirewallPolicy
+var PolicyOption_ThirdPartyFirewallPolicy = &sPolicyOption_ThirdPartyFirewallPolicy
+var PolicyOption_NetworkAclCommonPolicy = &sPolicyOption_NetworkAclCommonPolicy
+
+var PolicySummary = &sPolicySummary
+var PolicySummary_PolicyArn = &sPolicySummary_PolicyArn
+var PolicySummary_PolicyId = &sPolicySummary_PolicyId
+var PolicySummary_PolicyName = &sPolicySummary_PolicyName
+var PolicySummary_ResourceType = &sPolicySummary_ResourceType
+var PolicySummary_SecurityServiceType = &sPolicySummary_SecurityServiceType
+var PolicySummary_RemediationEnabled = &sPolicySummary_RemediationEnabled
+var PolicySummary_DeleteUnusedFMManagedResources = &sPolicySummary_DeleteUnusedFMManagedResources
+var PolicySummary_PolicyStatus = &sPolicySummary_PolicyStatus
+
+var _PolicySummaryList = &s_PolicySummaryList
+var _PolicySummaryList_member = &s_PolicySummaryList_member
+
+var PolicyTypeScope = &sPolicyTypeScope
+var PolicyTypeScope_PolicyTypes = &sPolicyTypeScope_PolicyTypes
+var PolicyTypeScope_AllPolicyTypesEnabled = &sPolicyTypeScope_AllPolicyTypesEnabled
+
+var _PolicyUpdateToken = &s_PolicyUpdateToken
+
+var PossibleRemediationAction = &sPossibleRemediationAction
+var PossibleRemediationAction_Description = &sPossibleRemediationAction_Description
+var PossibleRemediationAction_OrderedRemediationActions = &sPossibleRemediationAction_OrderedRemediationActions
+var PossibleRemediationAction_IsDefaultAction = &sPossibleRemediationAction_IsDefaultAction
+
+var _PossibleRemediationActionList = &s_PossibleRemediationActionList
+var _PossibleRemediationActionList_member = &s_PossibleRemediationActionList_member
+
+var PossibleRemediationActions = &sPossibleRemediationActions
+var PossibleRemediationActions_Description = &sPossibleRemediationActions_Description
+var PossibleRemediationActions_Actions = &sPossibleRemediationActions_Actions
+
+var _PreviousAppsList = &s_PreviousAppsList
+var _PreviousAppsList_key = &s_PreviousAppsList_key
+var _PreviousAppsList_value = &s_PreviousAppsList_value
+
+var _PreviousListVersion = &s_PreviousListVersion
+
+var _PreviousProtocolsList = &s_PreviousProtocolsList
+var _PreviousProtocolsList_key = &s_PreviousProtocolsList_key
+var _PreviousProtocolsList_value = &s_PreviousProtocolsList_value
+
+var _PriorityNumber = &s_PriorityNumber
+
+var _ProtectionData = &s_ProtectionData
+
+var _Protocol = &s_Protocol
+
+var _ProtocolsList = &s_ProtocolsList
+var _ProtocolsList_member = &s_ProtocolsList_member
+
+var ProtocolsListData = &sProtocolsListData
+var ProtocolsListData_ListId = &sProtocolsListData_ListId
+var ProtocolsListData_ListName = &sProtocolsListData_ListName
+var ProtocolsListData_ListUpdateToken = &sProtocolsListData_ListUpdateToken
+var ProtocolsListData_CreateTime = &sProtocolsListData_CreateTime
+var ProtocolsListData_LastUpdateTime = &sProtocolsListData_LastUpdateTime
+var ProtocolsListData_ProtocolsList = &sProtocolsListData_ProtocolsList
+var ProtocolsListData_PreviousProtocolsList = &sProtocolsListData_PreviousProtocolsList
+
+var ProtocolsListDataSummary = &sProtocolsListDataSummary
+var ProtocolsListDataSummary_ListArn = &sProtocolsListDataSummary_ListArn
+var ProtocolsListDataSummary_ListId = &sProtocolsListDataSummary_ListId
+var ProtocolsListDataSummary_ListName = &sProtocolsListDataSummary_ListName
+var ProtocolsListDataSummary_ProtocolsList = &sProtocolsListDataSummary_ProtocolsList
+
+var _ProtocolsListsData = &s_ProtocolsListsData
+var _ProtocolsListsData_member = &s_ProtocolsListsData_member
+
+var _ReferenceRule = &s_ReferenceRule
+
+var RegionScope = &sRegionScope
+var RegionScope_Regions = &sRegionScope_Regions
+var RegionScope_AllRegionsEnabled = &sRegionScope_AllRegionsEnabled
+
+var RemediationAction = &sRemediationAction
+var RemediationAction_Description = &sRemediationAction_Description
+var RemediationAction_EC2CreateRouteAction = &sRemediationAction_EC2CreateRouteAction
+var RemediationAction_EC2ReplaceRouteAction = &sRemediationAction_EC2ReplaceRouteAction
+var RemediationAction_EC2DeleteRouteAction = &sRemediationAction_EC2DeleteRouteAction
+var RemediationAction_EC2CopyRouteTableAction = &sRemediationAction_EC2CopyRouteTableAction
+var RemediationAction_EC2ReplaceRouteTableAssociationAction = &sRemediationAction_EC2ReplaceRouteTableAssociationAction
+var RemediationAction_EC2AssociateRouteTableAction = &sRemediationAction_EC2AssociateRouteTableAction
+var RemediationAction_EC2CreateRouteTableAction = &sRemediationAction_EC2CreateRouteTableAction
+var RemediationAction_FMSPolicyUpdateFirewallCreationConfigAction = &sRemediationAction_FMSPolicyUpdateFirewallCreationConfigAction
+var RemediationAction_CreateNetworkAclAction = &sRemediationAction_CreateNetworkAclAction
+var RemediationAction_ReplaceNetworkAclAssociationAction = &sRemediationAction_ReplaceNetworkAclAssociationAction
+var RemediationAction_CreateNetworkAclEntriesAction = &sRemediationAction_CreateNetworkAclEntriesAction
+var RemediationAction_DeleteNetworkAclEntriesAction = &sRemediationAction_DeleteNetworkAclEntriesAction
+
+var _RemediationActionDescription = &s_RemediationActionDescription
+
+var RemediationActionType = &sRemediationActionType
+var RemediationActionType_Remove = &sRemediationActionType_Remove
+var RemediationActionType_Modify = &sRemediationActionType_Modify
+
+var RemediationActionWithOrder = &sRemediationActionWithOrder
+var RemediationActionWithOrder_RemediationAction = &sRemediationActionWithOrder_RemediationAction
+var RemediationActionWithOrder_Order = &sRemediationActionWithOrder_Order
+
+var ReplaceNetworkAclAssociationAction = &sReplaceNetworkAclAssociationAction
+var ReplaceNetworkAclAssociationAction_Description = &sReplaceNetworkAclAssociationAction_Description
+var ReplaceNetworkAclAssociationAction_AssociationId = &sReplaceNetworkAclAssociationAction_AssociationId
+var ReplaceNetworkAclAssociationAction_NetworkAclId = &sReplaceNetworkAclAssociationAction_NetworkAclId
+var ReplaceNetworkAclAssociationAction_FMSCanRemediate = &sReplaceNetworkAclAssociationAction_FMSCanRemediate
+
+var Resource = &sResource
+var Resource_URI = &sResource_URI
+var Resource_AccountId = &sResource_AccountId
+
+var _ResourceArn = &s_ResourceArn
+
+var _ResourceArnList = &s_ResourceArnList
+var _ResourceArnList_member = &s_ResourceArnList_member
+
+var _ResourceCount = &s_ResourceCount
+
+var _ResourceDescription = &s_ResourceDescription
+
+var _ResourceId = &s_ResourceId
+
+var _ResourceIdList = &s_ResourceIdList
+var _ResourceIdList_member = &s_ResourceIdList_member
+
+var _ResourceList = &s_ResourceList
+var _ResourceList_member = &s_ResourceList_member
+
+var _ResourceName = &s_ResourceName
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+
+var ResourceSet = &sResourceSet
+var ResourceSet_Id = &sResourceSet_Id
+var ResourceSet_Name = &sResourceSet_Name
+var ResourceSet_Description = &sResourceSet_Description
+var ResourceSet_UpdateToken = &sResourceSet_UpdateToken
+var ResourceSet_ResourceTypeList = &sResourceSet_ResourceTypeList
+var ResourceSet_LastUpdateTime = &sResourceSet_LastUpdateTime
+var ResourceSet_ResourceSetStatus = &sResourceSet_ResourceSetStatus
+
+var _ResourceSetIds = &s_ResourceSetIds
+var _ResourceSetIds_member = &s_ResourceSetIds_member
+
+var ResourceSetStatus = &sResourceSetStatus
+var ResourceSetStatus_ACTIVE = &sResourceSetStatus_ACTIVE
+var ResourceSetStatus_OUT_OF_ADMIN_SCOPE = &sResourceSetStatus_OUT_OF_ADMIN_SCOPE
+
+var ResourceSetSummary = &sResourceSetSummary
+var ResourceSetSummary_Id = &sResourceSetSummary_Id
+var ResourceSetSummary_Name = &sResourceSetSummary_Name
+var ResourceSetSummary_Description = &sResourceSetSummary_Description
+var ResourceSetSummary_LastUpdateTime = &sResourceSetSummary_LastUpdateTime
+var ResourceSetSummary_ResourceSetStatus = &sResourceSetSummary_ResourceSetStatus
+
+var _ResourceSetSummaryList = &s_ResourceSetSummaryList
+var _ResourceSetSummaryList_member = &s_ResourceSetSummaryList_member
+
+var ResourceTag = &sResourceTag
+var ResourceTag_Key = &sResourceTag_Key
+var ResourceTag_Value = &sResourceTag_Value
+
+var _ResourceTagKey = &s_ResourceTagKey
+
+var ResourceTagLogicalOperator = &sResourceTagLogicalOperator
+var ResourceTagLogicalOperator_AND = &sResourceTagLogicalOperator_AND
+var ResourceTagLogicalOperator_OR = &sResourceTagLogicalOperator_OR
+
+var _ResourceTags = &s_ResourceTags
+var _ResourceTags_member = &s_ResourceTags_member
+
+var _ResourceTagValue = &s_ResourceTagValue
+
+var _ResourceType = &s_ResourceType
+
+var _ResourceTypeList = &s_ResourceTypeList
+var _ResourceTypeList_member = &s_ResourceTypeList_member
+
+var ResourceViolation = &sResourceViolation
+var ResourceViolation_AwsVPCSecurityGroupViolation = &sResourceViolation_AwsVPCSecurityGroupViolation
+var ResourceViolation_AwsEc2NetworkInterfaceViolation = &sResourceViolation_AwsEc2NetworkInterfaceViolation
+var ResourceViolation_AwsEc2InstanceViolation = &sResourceViolation_AwsEc2InstanceViolation
+var ResourceViolation_NetworkFirewallMissingFirewallViolation = &sResourceViolation_NetworkFirewallMissingFirewallViolation
+var ResourceViolation_NetworkFirewallMissingSubnetViolation = &sResourceViolation_NetworkFirewallMissingSubnetViolation
+var ResourceViolation_NetworkFirewallMissingExpectedRTViolation = &sResourceViolation_NetworkFirewallMissingExpectedRTViolation
+var ResourceViolation_NetworkFirewallPolicyModifiedViolation = &sResourceViolation_NetworkFirewallPolicyModifiedViolation
+var ResourceViolation_NetworkFirewallInternetTrafficNotInspectedViolation = &sResourceViolation_NetworkFirewallInternetTrafficNotInspectedViolation
+var ResourceViolation_NetworkFirewallInvalidRouteConfigurationViolation = &sResourceViolation_NetworkFirewallInvalidRouteConfigurationViolation
+var ResourceViolation_NetworkFirewallBlackHoleRouteDetectedViolation = &sResourceViolation_NetworkFirewallBlackHoleRouteDetectedViolation
+var ResourceViolation_NetworkFirewallUnexpectedFirewallRoutesViolation = &sResourceViolation_NetworkFirewallUnexpectedFirewallRoutesViolation
+var ResourceViolation_NetworkFirewallUnexpectedGatewayRoutesViolation = &sResourceViolation_NetworkFirewallUnexpectedGatewayRoutesViolation
+var ResourceViolation_NetworkFirewallMissingExpectedRoutesViolation = &sResourceViolation_NetworkFirewallMissingExpectedRoutesViolation
+var ResourceViolation_DnsRuleGroupPriorityConflictViolation = &sResourceViolation_DnsRuleGroupPriorityConflictViolation
+var ResourceViolation_DnsDuplicateRuleGroupViolation = &sResourceViolation_DnsDuplicateRuleGroupViolation
+var ResourceViolation_DnsRuleGroupLimitExceededViolation = &sResourceViolation_DnsRuleGroupLimitExceededViolation
+var ResourceViolation_FirewallSubnetIsOutOfScopeViolation = &sResourceViolation_FirewallSubnetIsOutOfScopeViolation
+var ResourceViolation_RouteHasOutOfScopeEndpointViolation = &sResourceViolation_RouteHasOutOfScopeEndpointViolation
+var ResourceViolation_ThirdPartyFirewallMissingFirewallViolation = &sResourceViolation_ThirdPartyFirewallMissingFirewallViolation
+var ResourceViolation_ThirdPartyFirewallMissingSubnetViolation = &sResourceViolation_ThirdPartyFirewallMissingSubnetViolation
+var ResourceViolation_ThirdPartyFirewallMissingExpectedRouteTableViolation = &sResourceViolation_ThirdPartyFirewallMissingExpectedRouteTableViolation
+var ResourceViolation_FirewallSubnetMissingVPCEndpointViolation = &sResourceViolation_FirewallSubnetMissingVPCEndpointViolation
+var ResourceViolation_InvalidNetworkAclEntriesViolation = &sResourceViolation_InvalidNetworkAclEntriesViolation
+var ResourceViolation_PossibleRemediationActions = &sResourceViolation_PossibleRemediationActions
+var ResourceViolation_WebACLHasIncompatibleConfigurationViolation = &sResourceViolation_WebACLHasIncompatibleConfigurationViolation
+var ResourceViolation_WebACLHasOutOfScopeResourcesViolation = &sResourceViolation_WebACLHasOutOfScopeResourcesViolation
+
+var _ResourceViolations = &s_ResourceViolations
+var _ResourceViolations_member = &s_ResourceViolations_member
+
+var Route = &sRoute
+var Route_DestinationType = &sRoute_DestinationType
+var Route_TargetType = &sRoute_TargetType
+var Route_Destination = &sRoute_Destination
+var Route_Target = &sRoute_Target
+
+var RouteHasOutOfScopeEndpointViolation = &sRouteHasOutOfScopeEndpointViolation
+var RouteHasOutOfScopeEndpointViolation_SubnetId = &sRouteHasOutOfScopeEndpointViolation_SubnetId
+var RouteHasOutOfScopeEndpointViolation_VpcId = &sRouteHasOutOfScopeEndpointViolation_VpcId
+var RouteHasOutOfScopeEndpointViolation_RouteTableId = &sRouteHasOutOfScopeEndpointViolation_RouteTableId
+var RouteHasOutOfScopeEndpointViolation_ViolatingRoutes = &sRouteHasOutOfScopeEndpointViolation_ViolatingRoutes
+var RouteHasOutOfScopeEndpointViolation_SubnetAvailabilityZone = &sRouteHasOutOfScopeEndpointViolation_SubnetAvailabilityZone
+var RouteHasOutOfScopeEndpointViolation_SubnetAvailabilityZoneId = &sRouteHasOutOfScopeEndpointViolation_SubnetAvailabilityZoneId
+var RouteHasOutOfScopeEndpointViolation_CurrentFirewallSubnetRouteTable = &sRouteHasOutOfScopeEndpointViolation_CurrentFirewallSubnetRouteTable
+var RouteHasOutOfScopeEndpointViolation_FirewallSubnetId = &sRouteHasOutOfScopeEndpointViolation_FirewallSubnetId
+var RouteHasOutOfScopeEndpointViolation_FirewallSubnetRoutes = &sRouteHasOutOfScopeEndpointViolation_FirewallSubnetRoutes
+var RouteHasOutOfScopeEndpointViolation_InternetGatewayId = &sRouteHasOutOfScopeEndpointViolation_InternetGatewayId
+var RouteHasOutOfScopeEndpointViolation_CurrentInternetGatewayRouteTable = &sRouteHasOutOfScopeEndpointViolation_CurrentInternetGatewayRouteTable
+var RouteHasOutOfScopeEndpointViolation_InternetGatewayRoutes = &sRouteHasOutOfScopeEndpointViolation_InternetGatewayRoutes
+
+var _Routes = &s_Routes
+var _Routes_member = &s_Routes_member
+
+var RuleOrder = &sRuleOrder
+var RuleOrder_STRICT_ORDER = &sRuleOrder_STRICT_ORDER
+var RuleOrder_DEFAULT_ACTION_ORDER = &sRuleOrder_DEFAULT_ACTION_ORDER
+
+var SecurityGroupRemediationAction = &sSecurityGroupRemediationAction
+var SecurityGroupRemediationAction_RemediationActionType = &sSecurityGroupRemediationAction_RemediationActionType
+var SecurityGroupRemediationAction_Description = &sSecurityGroupRemediationAction_Description
+var SecurityGroupRemediationAction_RemediationResult = &sSecurityGroupRemediationAction_RemediationResult
+var SecurityGroupRemediationAction_IsDefaultAction = &sSecurityGroupRemediationAction_IsDefaultAction
+
+var _SecurityGroupRemediationActions = &s_SecurityGroupRemediationActions
+var _SecurityGroupRemediationActions_member = &s_SecurityGroupRemediationActions_member
+
+var SecurityGroupRuleDescription = &sSecurityGroupRuleDescription
+var SecurityGroupRuleDescription_IPV4Range = &sSecurityGroupRuleDescription_IPV4Range
+var SecurityGroupRuleDescription_IPV6Range = &sSecurityGroupRuleDescription_IPV6Range
+var SecurityGroupRuleDescription_PrefixListId = &sSecurityGroupRuleDescription_PrefixListId
+var SecurityGroupRuleDescription_Protocol = &sSecurityGroupRuleDescription_Protocol
+var SecurityGroupRuleDescription_FromPort = &sSecurityGroupRuleDescription_FromPort
+var SecurityGroupRuleDescription_ToPort = &sSecurityGroupRuleDescription_ToPort
+
+var SecurityServicePolicyData = &sSecurityServicePolicyData
+var SecurityServicePolicyData_Type = &sSecurityServicePolicyData_Type
+var SecurityServicePolicyData_ManagedServiceData = &sSecurityServicePolicyData_ManagedServiceData
+var SecurityServicePolicyData_PolicyOption = &sSecurityServicePolicyData_PolicyOption
+
+var SecurityServiceType = &sSecurityServiceType
+var SecurityServiceType_WAF = &sSecurityServiceType_WAF
+var SecurityServiceType_WAFV2 = &sSecurityServiceType_WAFV2
+var SecurityServiceType_SHIELD_ADVANCED = &sSecurityServiceType_SHIELD_ADVANCED
+var SecurityServiceType_SECURITY_GROUPS_COMMON = &sSecurityServiceType_SECURITY_GROUPS_COMMON
+var SecurityServiceType_SECURITY_GROUPS_CONTENT_AUDIT = &sSecurityServiceType_SECURITY_GROUPS_CONTENT_AUDIT
+var SecurityServiceType_SECURITY_GROUPS_USAGE_AUDIT = &sSecurityServiceType_SECURITY_GROUPS_USAGE_AUDIT
+var SecurityServiceType_NETWORK_FIREWALL = &sSecurityServiceType_NETWORK_FIREWALL
+var SecurityServiceType_DNS_FIREWALL = &sSecurityServiceType_DNS_FIREWALL
+var SecurityServiceType_THIRD_PARTY_FIREWALL = &sSecurityServiceType_THIRD_PARTY_FIREWALL
+var SecurityServiceType_IMPORT_NETWORK_FIREWALL = &sSecurityServiceType_IMPORT_NETWORK_FIREWALL
+var SecurityServiceType_NETWORK_ACL_COMMON = &sSecurityServiceType_NETWORK_ACL_COMMON
+
+var _SecurityServiceTypeList = &s_SecurityServiceTypeList
+var _SecurityServiceTypeList_member = &s_SecurityServiceTypeList_member
+
+var StatefulEngineOptions = &sStatefulEngineOptions
+var StatefulEngineOptions_RuleOrder = &sStatefulEngineOptions_RuleOrder
+var StatefulEngineOptions_StreamExceptionPolicy = &sStatefulEngineOptions_StreamExceptionPolicy
+
+var StatefulRuleGroup = &sStatefulRuleGroup
+var StatefulRuleGroup_RuleGroupName = &sStatefulRuleGroup_RuleGroupName
+var StatefulRuleGroup_ResourceId = &sStatefulRuleGroup_ResourceId
+var StatefulRuleGroup_Priority = &sStatefulRuleGroup_Priority
+var StatefulRuleGroup_Override = &sStatefulRuleGroup_Override
+
+var _StatefulRuleGroupList = &s_StatefulRuleGroupList
+var _StatefulRuleGroupList_member = &s_StatefulRuleGroupList_member
+
+var StatelessRuleGroup = &sStatelessRuleGroup
+var StatelessRuleGroup_RuleGroupName = &sStatelessRuleGroup_RuleGroupName
+var StatelessRuleGroup_ResourceId = &sStatelessRuleGroup_ResourceId
+var StatelessRuleGroup_Priority = &sStatelessRuleGroup_Priority
+
+var _StatelessRuleGroupList = &s_StatelessRuleGroupList
+var _StatelessRuleGroupList_member = &s_StatelessRuleGroupList_member
+
+var _StatelessRuleGroupPriority = &s_StatelessRuleGroupPriority
+
+var StreamExceptionPolicy = &sStreamExceptionPolicy
+var StreamExceptionPolicy_DROP = &sStreamExceptionPolicy_DROP
+var StreamExceptionPolicy_CONTINUE = &sStreamExceptionPolicy_CONTINUE
+var StreamExceptionPolicy_REJECT = &sStreamExceptionPolicy_REJECT
+var StreamExceptionPolicy_FMS_IGNORE = &sStreamExceptionPolicy_FMS_IGNORE
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _TagValue = &s_TagValue
+
+var TargetType = &sTargetType
+var TargetType_Gateway = &sTargetType_Gateway
+var TargetType_CarrierGateway = &sTargetType_CarrierGateway
+var TargetType_Instance = &sTargetType_Instance
+var TargetType_LocalGateway = &sTargetType_LocalGateway
+var TargetType_NatGateway = &sTargetType_NatGateway
+var TargetType_NetworkInterface = &sTargetType_NetworkInterface
+var TargetType_VPCEndpoint = &sTargetType_VPCEndpoint
+var TargetType_VPCPeeringConnection = &sTargetType_VPCPeeringConnection
+var TargetType_EgressOnlyInternetGateway = &sTargetType_EgressOnlyInternetGateway
+var TargetType_TransitGateway = &sTargetType_TransitGateway
+
+var _TargetViolationReason = &s_TargetViolationReason
+
+var _TargetViolationReasons = &s_TargetViolationReasons
+var _TargetViolationReasons_member = &s_TargetViolationReasons_member
+
+var ThirdPartyFirewall = &sThirdPartyFirewall
+var ThirdPartyFirewall_PALO_ALTO_NETWORKS_CLOUD_NGFW = &sThirdPartyFirewall_PALO_ALTO_NETWORKS_CLOUD_NGFW
+var ThirdPartyFirewall_FORTIGATE_CLOUD_NATIVE_FIREWALL = &sThirdPartyFirewall_FORTIGATE_CLOUD_NATIVE_FIREWALL
+
+var ThirdPartyFirewallAssociationStatus = &sThirdPartyFirewallAssociationStatus
+var ThirdPartyFirewallAssociationStatus_ONBOARDING = &sThirdPartyFirewallAssociationStatus_ONBOARDING
+var ThirdPartyFirewallAssociationStatus_ONBOARD_COMPLETE = &sThirdPartyFirewallAssociationStatus_ONBOARD_COMPLETE
+var ThirdPartyFirewallAssociationStatus_OFFBOARDING = &sThirdPartyFirewallAssociationStatus_OFFBOARDING
+var ThirdPartyFirewallAssociationStatus_OFFBOARD_COMPLETE = &sThirdPartyFirewallAssociationStatus_OFFBOARD_COMPLETE
+var ThirdPartyFirewallAssociationStatus_NOT_EXIST = &sThirdPartyFirewallAssociationStatus_NOT_EXIST
+
+var _ThirdPartyFirewallFirewallPolicies = &s_ThirdPartyFirewallFirewallPolicies
+var _ThirdPartyFirewallFirewallPolicies_member = &s_ThirdPartyFirewallFirewallPolicies_member
+
+var ThirdPartyFirewallFirewallPolicy = &sThirdPartyFirewallFirewallPolicy
+var ThirdPartyFirewallFirewallPolicy_FirewallPolicyId = &sThirdPartyFirewallFirewallPolicy_FirewallPolicyId
+var ThirdPartyFirewallFirewallPolicy_FirewallPolicyName = &sThirdPartyFirewallFirewallPolicy_FirewallPolicyName
+
+var ThirdPartyFirewallMissingExpectedRouteTableViolation = &sThirdPartyFirewallMissingExpectedRouteTableViolation
+var ThirdPartyFirewallMissingExpectedRouteTableViolation_ViolationTarget = &sThirdPartyFirewallMissingExpectedRouteTableViolation_ViolationTarget
+var ThirdPartyFirewallMissingExpectedRouteTableViolation_VPC = &sThirdPartyFirewallMissingExpectedRouteTableViolation_VPC
+var ThirdPartyFirewallMissingExpectedRouteTableViolation_AvailabilityZone = &sThirdPartyFirewallMissingExpectedRouteTableViolation_AvailabilityZone
+var ThirdPartyFirewallMissingExpectedRouteTableViolation_CurrentRouteTable = &sThirdPartyFirewallMissingExpectedRouteTableViolation_CurrentRouteTable
+var ThirdPartyFirewallMissingExpectedRouteTableViolation_ExpectedRouteTable = &sThirdPartyFirewallMissingExpectedRouteTableViolation_ExpectedRouteTable
+
+var ThirdPartyFirewallMissingFirewallViolation = &sThirdPartyFirewallMissingFirewallViolation
+var ThirdPartyFirewallMissingFirewallViolation_ViolationTarget = &sThirdPartyFirewallMissingFirewallViolation_ViolationTarget
+var ThirdPartyFirewallMissingFirewallViolation_VPC = &sThirdPartyFirewallMissingFirewallViolation_VPC
+var ThirdPartyFirewallMissingFirewallViolation_AvailabilityZone = &sThirdPartyFirewallMissingFirewallViolation_AvailabilityZone
+var ThirdPartyFirewallMissingFirewallViolation_TargetViolationReason = &sThirdPartyFirewallMissingFirewallViolation_TargetViolationReason
+
+var ThirdPartyFirewallMissingSubnetViolation = &sThirdPartyFirewallMissingSubnetViolation
+var ThirdPartyFirewallMissingSubnetViolation_ViolationTarget = &sThirdPartyFirewallMissingSubnetViolation_ViolationTarget
+var ThirdPartyFirewallMissingSubnetViolation_VPC = &sThirdPartyFirewallMissingSubnetViolation_VPC
+var ThirdPartyFirewallMissingSubnetViolation_AvailabilityZone = &sThirdPartyFirewallMissingSubnetViolation_AvailabilityZone
+var ThirdPartyFirewallMissingSubnetViolation_TargetViolationReason = &sThirdPartyFirewallMissingSubnetViolation_TargetViolationReason
+
+var ThirdPartyFirewallPolicy = &sThirdPartyFirewallPolicy
+var ThirdPartyFirewallPolicy_FirewallDeploymentModel = &sThirdPartyFirewallPolicy_FirewallDeploymentModel
+
+var _TimeStamp = &s_TimeStamp
+
+var _UpdateToken = &s_UpdateToken
+
+var ViolationDetail = &sViolationDetail
+var ViolationDetail_PolicyId = &sViolationDetail_PolicyId
+var ViolationDetail_MemberAccount = &sViolationDetail_MemberAccount
+var ViolationDetail_ResourceId = &sViolationDetail_ResourceId
+var ViolationDetail_ResourceType = &sViolationDetail_ResourceType
+var ViolationDetail_ResourceViolations = &sViolationDetail_ResourceViolations
+var ViolationDetail_ResourceTags = &sViolationDetail_ResourceTags
+var ViolationDetail_ResourceDescription = &sViolationDetail_ResourceDescription
+
+var ViolationReason = &sViolationReason
+var ViolationReason_WebAclMissingRuleGroup = &sViolationReason_WebAclMissingRuleGroup
+var ViolationReason_ResourceMissingWebAcl = &sViolationReason_ResourceMissingWebAcl
+var ViolationReason_ResourceIncorrectWebAcl = &sViolationReason_ResourceIncorrectWebAcl
+var ViolationReason_ResourceMissingShieldProtection = &sViolationReason_ResourceMissingShieldProtection
+var ViolationReason_ResourceMissingWebaclOrShieldProtection = &sViolationReason_ResourceMissingWebaclOrShieldProtection
+var ViolationReason_ResourceMissingSecurityGroup = &sViolationReason_ResourceMissingSecurityGroup
+var ViolationReason_ResourceViolatesAuditSecurityGroup = &sViolationReason_ResourceViolatesAuditSecurityGroup
+var ViolationReason_SecurityGroupUnused = &sViolationReason_SecurityGroupUnused
+var ViolationReason_SecurityGroupRedundant = &sViolationReason_SecurityGroupRedundant
+var ViolationReason_FMSCreatedSecurityGroupEdited = &sViolationReason_FMSCreatedSecurityGroupEdited
+var ViolationReason_MissingFirewall = &sViolationReason_MissingFirewall
+var ViolationReason_MissingFirewallSubnetInAZ = &sViolationReason_MissingFirewallSubnetInAZ
+var ViolationReason_MissingExpectedRouteTable = &sViolationReason_MissingExpectedRouteTable
+var ViolationReason_NetworkFirewallPolicyModified = &sViolationReason_NetworkFirewallPolicyModified
+var ViolationReason_FirewallSubnetIsOutOfScope = &sViolationReason_FirewallSubnetIsOutOfScope
+var ViolationReason_InternetGatewayMissingExpectedRoute = &sViolationReason_InternetGatewayMissingExpectedRoute
+var ViolationReason_FirewallSubnetMissingExpectedRoute = &sViolationReason_FirewallSubnetMissingExpectedRoute
+var ViolationReason_UnexpectedFirewallRoutes = &sViolationReason_UnexpectedFirewallRoutes
+var ViolationReason_UnexpectedTargetGatewayRoutes = &sViolationReason_UnexpectedTargetGatewayRoutes
+var ViolationReason_TrafficInspectionCrossesAZBoundary = &sViolationReason_TrafficInspectionCrossesAZBoundary
+var ViolationReason_InvalidRouteConfiguration = &sViolationReason_InvalidRouteConfiguration
+var ViolationReason_MissingTargetGateway = &sViolationReason_MissingTargetGateway
+var ViolationReason_InternetTrafficNotInspected = &sViolationReason_InternetTrafficNotInspected
+var ViolationReason_BlackHoleRouteDetected = &sViolationReason_BlackHoleRouteDetected
+var ViolationReason_BlackHoleRouteDetectedInFirewallSubnet = &sViolationReason_BlackHoleRouteDetectedInFirewallSubnet
+var ViolationReason_ResourceMissingDnsFirewall = &sViolationReason_ResourceMissingDnsFirewall
+var ViolationReason_RouteHasOutOfScopeEndpoint = &sViolationReason_RouteHasOutOfScopeEndpoint
+var ViolationReason_FirewallSubnetMissingVPCEndpoint = &sViolationReason_FirewallSubnetMissingVPCEndpoint
+var ViolationReason_InvalidNetworkAclEntry = &sViolationReason_InvalidNetworkAclEntry
+var ViolationReason_WebACLConfigurationOrScopeOfUse = &sViolationReason_WebACLConfigurationOrScopeOfUse
+
+var _ViolationTarget = &s_ViolationTarget
+
+var WebACLHasIncompatibleConfigurationViolation = &sWebACLHasIncompatibleConfigurationViolation
+var WebACLHasIncompatibleConfigurationViolation_WebACLArn = &sWebACLHasIncompatibleConfigurationViolation_WebACLArn
+var WebACLHasIncompatibleConfigurationViolation_Description = &sWebACLHasIncompatibleConfigurationViolation_Description
+
+var WebACLHasOutOfScopeResourcesViolation = &sWebACLHasOutOfScopeResourcesViolation
+var WebACLHasOutOfScopeResourcesViolation_WebACLArn = &sWebACLHasOutOfScopeResourcesViolation_WebACLArn
+var WebACLHasOutOfScopeResourcesViolation_OutOfScopeResourceList = &sWebACLHasOutOfScopeResourcesViolation_OutOfScopeResourceList
+
+var AssociateAdminAccountRequest = &sAssociateAdminAccountRequest
+var AssociateAdminAccountRequest_AdminAccount = &sAssociateAdminAccountRequest_AdminAccount
+
+var AssociateThirdPartyFirewallRequest = &sAssociateThirdPartyFirewallRequest
+var AssociateThirdPartyFirewallRequest_ThirdPartyFirewall = &sAssociateThirdPartyFirewallRequest_ThirdPartyFirewall
+
+var AssociateThirdPartyFirewallResponse = &sAssociateThirdPartyFirewallResponse
+var AssociateThirdPartyFirewallResponse_ThirdPartyFirewallStatus = &sAssociateThirdPartyFirewallResponse_ThirdPartyFirewallStatus
+
+var BatchAssociateResourceRequest = &sBatchAssociateResourceRequest
+var BatchAssociateResourceRequest_ResourceSetIdentifier = &sBatchAssociateResourceRequest_ResourceSetIdentifier
+var BatchAssociateResourceRequest_Items = &sBatchAssociateResourceRequest_Items
+
+var BatchAssociateResourceResponse = &sBatchAssociateResourceResponse
+var BatchAssociateResourceResponse_ResourceSetIdentifier = &sBatchAssociateResourceResponse_ResourceSetIdentifier
+var BatchAssociateResourceResponse_FailedItems = &sBatchAssociateResourceResponse_FailedItems
+
+var BatchDisassociateResourceRequest = &sBatchDisassociateResourceRequest
+var BatchDisassociateResourceRequest_ResourceSetIdentifier = &sBatchDisassociateResourceRequest_ResourceSetIdentifier
+var BatchDisassociateResourceRequest_Items = &sBatchDisassociateResourceRequest_Items
+
+var BatchDisassociateResourceResponse = &sBatchDisassociateResourceResponse
+var BatchDisassociateResourceResponse_ResourceSetIdentifier = &sBatchDisassociateResourceResponse_ResourceSetIdentifier
+var BatchDisassociateResourceResponse_FailedItems = &sBatchDisassociateResourceResponse_FailedItems
+
+var DeleteAppsListRequest = &sDeleteAppsListRequest
+var DeleteAppsListRequest_ListId = &sDeleteAppsListRequest_ListId
+
+var DeleteNotificationChannelRequest = &sDeleteNotificationChannelRequest
+
+var DeletePolicyRequest = &sDeletePolicyRequest
+var DeletePolicyRequest_PolicyId = &sDeletePolicyRequest_PolicyId
+var DeletePolicyRequest_DeleteAllPolicyResources = &sDeletePolicyRequest_DeleteAllPolicyResources
+
+var DeleteProtocolsListRequest = &sDeleteProtocolsListRequest
+var DeleteProtocolsListRequest_ListId = &sDeleteProtocolsListRequest_ListId
+
+var DeleteResourceSetRequest = &sDeleteResourceSetRequest
+var DeleteResourceSetRequest_Identifier = &sDeleteResourceSetRequest_Identifier
+
+var DisassociateAdminAccountRequest = &sDisassociateAdminAccountRequest
+
+var DisassociateThirdPartyFirewallRequest = &sDisassociateThirdPartyFirewallRequest
+var DisassociateThirdPartyFirewallRequest_ThirdPartyFirewall = &sDisassociateThirdPartyFirewallRequest_ThirdPartyFirewall
+
+var DisassociateThirdPartyFirewallResponse = &sDisassociateThirdPartyFirewallResponse
+var DisassociateThirdPartyFirewallResponse_ThirdPartyFirewallStatus = &sDisassociateThirdPartyFirewallResponse_ThirdPartyFirewallStatus
+
+var GetAdminAccountRequest = &sGetAdminAccountRequest
+
+var GetAdminAccountResponse = &sGetAdminAccountResponse
+var GetAdminAccountResponse_AdminAccount = &sGetAdminAccountResponse_AdminAccount
+var GetAdminAccountResponse_RoleStatus = &sGetAdminAccountResponse_RoleStatus
+
+var GetAdminScopeRequest = &sGetAdminScopeRequest
+var GetAdminScopeRequest_AdminAccount = &sGetAdminScopeRequest_AdminAccount
+
+var GetAdminScopeResponse = &sGetAdminScopeResponse
+var GetAdminScopeResponse_AdminScope = &sGetAdminScopeResponse_AdminScope
+var GetAdminScopeResponse_Status = &sGetAdminScopeResponse_Status
+
+var GetAppsListRequest = &sGetAppsListRequest
+var GetAppsListRequest_ListId = &sGetAppsListRequest_ListId
+var GetAppsListRequest_DefaultList = &sGetAppsListRequest_DefaultList
+
+var GetAppsListResponse = &sGetAppsListResponse
+var GetAppsListResponse_AppsList = &sGetAppsListResponse_AppsList
+var GetAppsListResponse_AppsListArn = &sGetAppsListResponse_AppsListArn
+
+var GetComplianceDetailRequest = &sGetComplianceDetailRequest
+var GetComplianceDetailRequest_PolicyId = &sGetComplianceDetailRequest_PolicyId
+var GetComplianceDetailRequest_MemberAccount = &sGetComplianceDetailRequest_MemberAccount
+
+var GetComplianceDetailResponse = &sGetComplianceDetailResponse
+var GetComplianceDetailResponse_PolicyComplianceDetail = &sGetComplianceDetailResponse_PolicyComplianceDetail
+
+var GetNotificationChannelRequest = &sGetNotificationChannelRequest
+
+var GetNotificationChannelResponse = &sGetNotificationChannelResponse
+var GetNotificationChannelResponse_SnsTopicArn = &sGetNotificationChannelResponse_SnsTopicArn
+var GetNotificationChannelResponse_SnsRoleName = &sGetNotificationChannelResponse_SnsRoleName
+
+var GetPolicyRequest = &sGetPolicyRequest
+var GetPolicyRequest_PolicyId = &sGetPolicyRequest_PolicyId
+
+var GetPolicyResponse = &sGetPolicyResponse
+var GetPolicyResponse_Policy = &sGetPolicyResponse_Policy
+var GetPolicyResponse_PolicyArn = &sGetPolicyResponse_PolicyArn
+
+var GetProtectionStatusRequest = &sGetProtectionStatusRequest
+var GetProtectionStatusRequest_PolicyId = &sGetProtectionStatusRequest_PolicyId
+var GetProtectionStatusRequest_MemberAccountId = &sGetProtectionStatusRequest_MemberAccountId
+var GetProtectionStatusRequest_StartTime = &sGetProtectionStatusRequest_StartTime
+var GetProtectionStatusRequest_EndTime = &sGetProtectionStatusRequest_EndTime
+var GetProtectionStatusRequest_NextToken = &sGetProtectionStatusRequest_NextToken
+var GetProtectionStatusRequest_MaxResults = &sGetProtectionStatusRequest_MaxResults
+
+var GetProtectionStatusResponse = &sGetProtectionStatusResponse
+var GetProtectionStatusResponse_AdminAccountId = &sGetProtectionStatusResponse_AdminAccountId
+var GetProtectionStatusResponse_ServiceType = &sGetProtectionStatusResponse_ServiceType
+var GetProtectionStatusResponse_Data = &sGetProtectionStatusResponse_Data
+var GetProtectionStatusResponse_NextToken = &sGetProtectionStatusResponse_NextToken
+
+var GetProtocolsListRequest = &sGetProtocolsListRequest
+var GetProtocolsListRequest_ListId = &sGetProtocolsListRequest_ListId
+var GetProtocolsListRequest_DefaultList = &sGetProtocolsListRequest_DefaultList
+
+var GetProtocolsListResponse = &sGetProtocolsListResponse
+var GetProtocolsListResponse_ProtocolsList = &sGetProtocolsListResponse_ProtocolsList
+var GetProtocolsListResponse_ProtocolsListArn = &sGetProtocolsListResponse_ProtocolsListArn
+
+var GetResourceSetRequest = &sGetResourceSetRequest
+var GetResourceSetRequest_Identifier = &sGetResourceSetRequest_Identifier
+
+var GetResourceSetResponse = &sGetResourceSetResponse
+var GetResourceSetResponse_ResourceSet = &sGetResourceSetResponse_ResourceSet
+var GetResourceSetResponse_ResourceSetArn = &sGetResourceSetResponse_ResourceSetArn
+
+var GetThirdPartyFirewallAssociationStatusRequest = &sGetThirdPartyFirewallAssociationStatusRequest
+var GetThirdPartyFirewallAssociationStatusRequest_ThirdPartyFirewall = &sGetThirdPartyFirewallAssociationStatusRequest_ThirdPartyFirewall
+
+var GetThirdPartyFirewallAssociationStatusResponse = &sGetThirdPartyFirewallAssociationStatusResponse
+var GetThirdPartyFirewallAssociationStatusResponse_ThirdPartyFirewallStatus = &sGetThirdPartyFirewallAssociationStatusResponse_ThirdPartyFirewallStatus
+var GetThirdPartyFirewallAssociationStatusResponse_MarketplaceOnboardingStatus = &sGetThirdPartyFirewallAssociationStatusResponse_MarketplaceOnboardingStatus
+
+var GetViolationDetailsRequest = &sGetViolationDetailsRequest
+var GetViolationDetailsRequest_PolicyId = &sGetViolationDetailsRequest_PolicyId
+var GetViolationDetailsRequest_MemberAccount = &sGetViolationDetailsRequest_MemberAccount
+var GetViolationDetailsRequest_ResourceId = &sGetViolationDetailsRequest_ResourceId
+var GetViolationDetailsRequest_ResourceType = &sGetViolationDetailsRequest_ResourceType
+
+var GetViolationDetailsResponse = &sGetViolationDetailsResponse
+var GetViolationDetailsResponse_ViolationDetail = &sGetViolationDetailsResponse_ViolationDetail
+
+var ListAdminAccountsForOrganizationRequest = &sListAdminAccountsForOrganizationRequest
+var ListAdminAccountsForOrganizationRequest_NextToken = &sListAdminAccountsForOrganizationRequest_NextToken
+var ListAdminAccountsForOrganizationRequest_MaxResults = &sListAdminAccountsForOrganizationRequest_MaxResults
+
+var ListAdminAccountsForOrganizationResponse = &sListAdminAccountsForOrganizationResponse
+var ListAdminAccountsForOrganizationResponse_AdminAccounts = &sListAdminAccountsForOrganizationResponse_AdminAccounts
+var ListAdminAccountsForOrganizationResponse_NextToken = &sListAdminAccountsForOrganizationResponse_NextToken
+
+var ListAdminsManagingAccountRequest = &sListAdminsManagingAccountRequest
+var ListAdminsManagingAccountRequest_NextToken = &sListAdminsManagingAccountRequest_NextToken
+var ListAdminsManagingAccountRequest_MaxResults = &sListAdminsManagingAccountRequest_MaxResults
+
+var ListAdminsManagingAccountResponse = &sListAdminsManagingAccountResponse
+var ListAdminsManagingAccountResponse_AdminAccounts = &sListAdminsManagingAccountResponse_AdminAccounts
+var ListAdminsManagingAccountResponse_NextToken = &sListAdminsManagingAccountResponse_NextToken
+
+var ListAppsListsRequest = &sListAppsListsRequest
+var ListAppsListsRequest_DefaultLists = &sListAppsListsRequest_DefaultLists
+var ListAppsListsRequest_NextToken = &sListAppsListsRequest_NextToken
+var ListAppsListsRequest_MaxResults = &sListAppsListsRequest_MaxResults
+
+var ListAppsListsResponse = &sListAppsListsResponse
+var ListAppsListsResponse_AppsLists = &sListAppsListsResponse_AppsLists
+var ListAppsListsResponse_NextToken = &sListAppsListsResponse_NextToken
+
+var ListComplianceStatusRequest = &sListComplianceStatusRequest
+var ListComplianceStatusRequest_PolicyId = &sListComplianceStatusRequest_PolicyId
+var ListComplianceStatusRequest_NextToken = &sListComplianceStatusRequest_NextToken
+var ListComplianceStatusRequest_MaxResults = &sListComplianceStatusRequest_MaxResults
+
+var ListComplianceStatusResponse = &sListComplianceStatusResponse
+var ListComplianceStatusResponse_PolicyComplianceStatusList = &sListComplianceStatusResponse_PolicyComplianceStatusList
+var ListComplianceStatusResponse_NextToken = &sListComplianceStatusResponse_NextToken
+
+var ListDiscoveredResourcesRequest = &sListDiscoveredResourcesRequest
+var ListDiscoveredResourcesRequest_MemberAccountIds = &sListDiscoveredResourcesRequest_MemberAccountIds
+var ListDiscoveredResourcesRequest_ResourceType = &sListDiscoveredResourcesRequest_ResourceType
+var ListDiscoveredResourcesRequest_MaxResults = &sListDiscoveredResourcesRequest_MaxResults
+var ListDiscoveredResourcesRequest_NextToken = &sListDiscoveredResourcesRequest_NextToken
+
+var ListDiscoveredResourcesResponse = &sListDiscoveredResourcesResponse
+var ListDiscoveredResourcesResponse_Items = &sListDiscoveredResourcesResponse_Items
+var ListDiscoveredResourcesResponse_NextToken = &sListDiscoveredResourcesResponse_NextToken
+
+var ListMemberAccountsRequest = &sListMemberAccountsRequest
+var ListMemberAccountsRequest_NextToken = &sListMemberAccountsRequest_NextToken
+var ListMemberAccountsRequest_MaxResults = &sListMemberAccountsRequest_MaxResults
+
+var ListMemberAccountsResponse = &sListMemberAccountsResponse
+var ListMemberAccountsResponse_MemberAccounts = &sListMemberAccountsResponse_MemberAccounts
+var ListMemberAccountsResponse_NextToken = &sListMemberAccountsResponse_NextToken
+
+var ListPoliciesRequest = &sListPoliciesRequest
+var ListPoliciesRequest_NextToken = &sListPoliciesRequest_NextToken
+var ListPoliciesRequest_MaxResults = &sListPoliciesRequest_MaxResults
+
+var ListPoliciesResponse = &sListPoliciesResponse
+var ListPoliciesResponse_PolicyList = &sListPoliciesResponse_PolicyList
+var ListPoliciesResponse_NextToken = &sListPoliciesResponse_NextToken
+
+var ListProtocolsListsRequest = &sListProtocolsListsRequest
+var ListProtocolsListsRequest_DefaultLists = &sListProtocolsListsRequest_DefaultLists
+var ListProtocolsListsRequest_NextToken = &sListProtocolsListsRequest_NextToken
+var ListProtocolsListsRequest_MaxResults = &sListProtocolsListsRequest_MaxResults
+
+var ListProtocolsListsResponse = &sListProtocolsListsResponse
+var ListProtocolsListsResponse_ProtocolsLists = &sListProtocolsListsResponse_ProtocolsLists
+var ListProtocolsListsResponse_NextToken = &sListProtocolsListsResponse_NextToken
+
+var ListResourceSetResourcesRequest = &sListResourceSetResourcesRequest
+var ListResourceSetResourcesRequest_Identifier = &sListResourceSetResourcesRequest_Identifier
+var ListResourceSetResourcesRequest_MaxResults = &sListResourceSetResourcesRequest_MaxResults
+var ListResourceSetResourcesRequest_NextToken = &sListResourceSetResourcesRequest_NextToken
+
+var ListResourceSetResourcesResponse = &sListResourceSetResourcesResponse
+var ListResourceSetResourcesResponse_Items = &sListResourceSetResourcesResponse_Items
+var ListResourceSetResourcesResponse_NextToken = &sListResourceSetResourcesResponse_NextToken
+
+var ListResourceSetsRequest = &sListResourceSetsRequest
+var ListResourceSetsRequest_NextToken = &sListResourceSetsRequest_NextToken
+var ListResourceSetsRequest_MaxResults = &sListResourceSetsRequest_MaxResults
+
+var ListResourceSetsResponse = &sListResourceSetsResponse
+var ListResourceSetsResponse_ResourceSets = &sListResourceSetsResponse_ResourceSets
+var ListResourceSetsResponse_NextToken = &sListResourceSetsResponse_NextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceArn = &sListTagsForResourceRequest_ResourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_TagList = &sListTagsForResourceResponse_TagList
+
+var ListThirdPartyFirewallFirewallPoliciesRequest = &sListThirdPartyFirewallFirewallPoliciesRequest
+var ListThirdPartyFirewallFirewallPoliciesRequest_ThirdPartyFirewall = &sListThirdPartyFirewallFirewallPoliciesRequest_ThirdPartyFirewall
+var ListThirdPartyFirewallFirewallPoliciesRequest_NextToken = &sListThirdPartyFirewallFirewallPoliciesRequest_NextToken
+var ListThirdPartyFirewallFirewallPoliciesRequest_MaxResults = &sListThirdPartyFirewallFirewallPoliciesRequest_MaxResults
+
+var ListThirdPartyFirewallFirewallPoliciesResponse = &sListThirdPartyFirewallFirewallPoliciesResponse
+var ListThirdPartyFirewallFirewallPoliciesResponse_ThirdPartyFirewallFirewallPolicies = &sListThirdPartyFirewallFirewallPoliciesResponse_ThirdPartyFirewallFirewallPolicies
+var ListThirdPartyFirewallFirewallPoliciesResponse_NextToken = &sListThirdPartyFirewallFirewallPoliciesResponse_NextToken
+
+var PutAdminAccountRequest = &sPutAdminAccountRequest
+var PutAdminAccountRequest_AdminAccount = &sPutAdminAccountRequest_AdminAccount
+var PutAdminAccountRequest_AdminScope = &sPutAdminAccountRequest_AdminScope
+
+var PutAppsListRequest = &sPutAppsListRequest
+var PutAppsListRequest_AppsList = &sPutAppsListRequest_AppsList
+var PutAppsListRequest_TagList = &sPutAppsListRequest_TagList
+
+var PutAppsListResponse = &sPutAppsListResponse
+var PutAppsListResponse_AppsList = &sPutAppsListResponse_AppsList
+var PutAppsListResponse_AppsListArn = &sPutAppsListResponse_AppsListArn
+
+var PutNotificationChannelRequest = &sPutNotificationChannelRequest
+var PutNotificationChannelRequest_SnsTopicArn = &sPutNotificationChannelRequest_SnsTopicArn
+var PutNotificationChannelRequest_SnsRoleName = &sPutNotificationChannelRequest_SnsRoleName
+
+var PutPolicyRequest = &sPutPolicyRequest
+var PutPolicyRequest_Policy = &sPutPolicyRequest_Policy
+var PutPolicyRequest_TagList = &sPutPolicyRequest_TagList
+
+var PutPolicyResponse = &sPutPolicyResponse
+var PutPolicyResponse_Policy = &sPutPolicyResponse_Policy
+var PutPolicyResponse_PolicyArn = &sPutPolicyResponse_PolicyArn
+
+var PutProtocolsListRequest = &sPutProtocolsListRequest
+var PutProtocolsListRequest_ProtocolsList = &sPutProtocolsListRequest_ProtocolsList
+var PutProtocolsListRequest_TagList = &sPutProtocolsListRequest_TagList
+
+var PutProtocolsListResponse = &sPutProtocolsListResponse
+var PutProtocolsListResponse_ProtocolsList = &sPutProtocolsListResponse_ProtocolsList
+var PutProtocolsListResponse_ProtocolsListArn = &sPutProtocolsListResponse_ProtocolsListArn
+
+var PutResourceSetRequest = &sPutResourceSetRequest
+var PutResourceSetRequest_ResourceSet = &sPutResourceSetRequest_ResourceSet
+var PutResourceSetRequest_TagList = &sPutResourceSetRequest_TagList
+
+var PutResourceSetResponse = &sPutResourceSetResponse
+var PutResourceSetResponse_ResourceSet = &sPutResourceSetResponse_ResourceSet
+var PutResourceSetResponse_ResourceSetArn = &sPutResourceSetResponse_ResourceSetArn
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceArn = &sTagResourceRequest_ResourceArn
+var TagResourceRequest_TagList = &sTagResourceRequest_TagList
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceArn = &sUntagResourceRequest_ResourceArn
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var AWSFMS_20180101 = &smithy.ServiceSchema{Schema: &s_AWSFMS_20180101, Version: "2018-01-01"}

@@ -4,5352 +4,3899 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AddTags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "AddTags",
-}, smithy.ShapeTypeOperation, 0)
-
-var CancelQuery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "CancelQuery",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "CreateChannel",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateDashboard = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "CreateDashboard",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateEventDataStore = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "CreateEventDataStore",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateTrail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "CreateTrail",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "DeleteChannel",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteDashboard = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "DeleteDashboard",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteEventDataStore = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "DeleteEventDataStore",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "DeleteResourcePolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteTrail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "DeleteTrail",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeregisterOrganizationDelegatedAdmin = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "DeregisterOrganizationDelegatedAdmin",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeQuery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "DescribeQuery",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeTrails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "DescribeTrails",
-}, smithy.ShapeTypeOperation, 0)
-
-var DisableFederation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "DisableFederation",
-}, smithy.ShapeTypeOperation, 0)
-
-var EnableFederation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "EnableFederation",
-}, smithy.ShapeTypeOperation, 0)
-
-var GenerateQuery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "GenerateQuery",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "GetChannel",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetDashboard = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "GetDashboard",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetEventConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "GetEventConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetEventDataStore = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "GetEventDataStore",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetEventSelectors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "GetEventSelectors",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetImport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "GetImport",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetInsightSelectors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "GetInsightSelectors",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetQueryResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "GetQueryResults",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "GetResourcePolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetTrail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "GetTrail",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetTrailStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "GetTrailStatus",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListChannels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ListChannels",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListDashboards = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ListDashboards",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListEventDataStores = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ListEventDataStores",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListImportFailures = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ListImportFailures",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListImports = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ListImports",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListInsightsData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ListInsightsData",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListInsightsMetricData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ListInsightsMetricData",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListPublicKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ListPublicKeys",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListQueries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ListQueries",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ListTags",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTrails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ListTrails",
-}, smithy.ShapeTypeOperation, 0)
-
-var LookupEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "LookupEvents",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutEventConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "PutEventConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutEventSelectors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "PutEventSelectors",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutInsightSelectors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "PutInsightSelectors",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "PutResourcePolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var RegisterOrganizationDelegatedAdmin = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "RegisterOrganizationDelegatedAdmin",
-}, smithy.ShapeTypeOperation, 0)
-
-var RemoveTags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "RemoveTags",
-}, smithy.ShapeTypeOperation, 0)
-
-var RestoreEventDataStore = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "RestoreEventDataStore",
-}, smithy.ShapeTypeOperation, 0)
-
-var SearchSampleQueries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "SearchSampleQueries",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartDashboardRefresh = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "StartDashboardRefresh",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartEventDataStoreIngestion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "StartEventDataStoreIngestion",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartImport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "StartImport",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartLogging = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "StartLogging",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartQuery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "StartQuery",
-}, smithy.ShapeTypeOperation, 0)
-
-var StopEventDataStoreIngestion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "StopEventDataStoreIngestion",
-}, smithy.ShapeTypeOperation, 0)
-
-var StopImport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "StopImport",
-}, smithy.ShapeTypeOperation, 0)
-
-var StopLogging = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "StopLogging",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "UpdateChannel",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateDashboard = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "UpdateDashboard",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateEventDataStore = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "UpdateEventDataStore",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateTrail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "UpdateTrail",
-}, smithy.ShapeTypeOperation, 0)
-
-var _CloudTrail_20131101 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "CloudTrail_20131101",
-}, smithy.ShapeTypeService, 0, &smithytraits.XMLNamespace{URI: "http://cloudtrail.amazonaws.com/doc/2013-11-01/"})
-
-var CloudTrail_20131101 = smithy.NewServiceSchema(_CloudTrail_20131101, "2013-11-01")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403},
-	&smithytraits.AWSQueryError{ErrorCode: "ResourceAccessDenied",
-		StatusCode: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var AccountHasOngoingImportException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "AccountHasOngoingImportException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "AccountHasOngoingImport",
-		StatusCode: 400})
-var AccountHasOngoingImportException_Message *smithy.Schema
-
-var _AccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "AccountId",
-}, smithy.ShapeTypeString, 0)
-
-var AccountNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "AccountNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404},
-	&smithytraits.AWSQueryError{ErrorCode: "AccountNotFound",
-		StatusCode: 404})
-var AccountNotFoundException_Message *smithy.Schema
-
-var AccountNotRegisteredException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "AccountNotRegisteredException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "AccountNotRegistered",
-		StatusCode: 400})
-var AccountNotRegisteredException_Message *smithy.Schema
-
-var AccountRegisteredException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "AccountRegisteredException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "AccountRegistered",
-		StatusCode: 400})
-var AccountRegisteredException_Message *smithy.Schema
-
-var AdvancedEventSelector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "AdvancedEventSelector",
-}, smithy.ShapeTypeStructure, 2)
-var AdvancedEventSelector_Name *smithy.Schema
-
-var AdvancedEventSelector_FieldSelectors *smithy.Schema
-
-var _AdvancedEventSelectors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "AdvancedEventSelectors",
-}, smithy.ShapeTypeList, 1)
-var _AdvancedEventSelectors_member *smithy.Schema
-
-var AdvancedFieldSelector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "AdvancedFieldSelector",
-}, smithy.ShapeTypeStructure, 7)
-var AdvancedFieldSelector_Field *smithy.Schema
-
-var AdvancedFieldSelector_Equals *smithy.Schema
-
-var AdvancedFieldSelector_StartsWith *smithy.Schema
-
-var AdvancedFieldSelector_EndsWith *smithy.Schema
-
-var AdvancedFieldSelector_NotEquals *smithy.Schema
-
-var AdvancedFieldSelector_NotStartsWith *smithy.Schema
-
-var AdvancedFieldSelector_NotEndsWith *smithy.Schema
-
-var _AdvancedFieldSelectors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "AdvancedFieldSelectors",
-}, smithy.ShapeTypeList, 1)
-var _AdvancedFieldSelectors_member *smithy.Schema
-
-var AggregationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "AggregationConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var AggregationConfiguration_Templates *smithy.Schema
-
-var AggregationConfiguration_EventCategory *smithy.Schema
-
-var _AggregationConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "AggregationConfigurations",
-}, smithy.ShapeTypeList, 1)
-var _AggregationConfigurations_member *smithy.Schema
-
-var BillingMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "BillingMode",
-}, smithy.ShapeTypeEnum, 2)
-var BillingMode_EXTENDABLE_RETENTION_PRICING *smithy.Schema
-
-var BillingMode_FIXED_RETENTION_PRICING *smithy.Schema
-
-var _Boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "Boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _ByteBuffer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ByteBuffer",
-}, smithy.ShapeTypeBlob, 0)
-
-var CannotDelegateManagementAccountException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "CannotDelegateManagementAccountException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "CannotDelegateManagementAccount",
-		StatusCode: 400})
-var CannotDelegateManagementAccountException_Message *smithy.Schema
-
-var Channel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "Channel",
-}, smithy.ShapeTypeStructure, 2)
-var Channel_ChannelArn *smithy.Schema
-
-var Channel_Name *smithy.Schema
-
-var ChannelAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ChannelAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "ChannelAlreadyExists",
-		StatusCode: 400})
-var ChannelAlreadyExistsException_Message *smithy.Schema
-
-var _ChannelArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ChannelArn",
-}, smithy.ShapeTypeString, 0)
-
-var ChannelARNInvalidException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ChannelARNInvalidException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "ChannelARNInvalid",
-		StatusCode: 400})
-var ChannelARNInvalidException_Message *smithy.Schema
-
-var ChannelExistsForEDSException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ChannelExistsForEDSException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "ChannelExistsForEDS",
-		StatusCode: 400})
-var ChannelExistsForEDSException_Message *smithy.Schema
-
-var ChannelMaxLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ChannelMaxLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "ChannelMaxLimitExceeded",
-		StatusCode: 400})
-var ChannelMaxLimitExceededException_Message *smithy.Schema
-
-var _ChannelName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ChannelName",
-}, smithy.ShapeTypeString, 0)
-
-var ChannelNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ChannelNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404},
-	&smithytraits.AWSQueryError{ErrorCode: "ChannelNotFound",
-		StatusCode: 404})
-var ChannelNotFoundException_Message *smithy.Schema
-
-var _Channels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "Channels",
-}, smithy.ShapeTypeList, 1)
-var _Channels_member *smithy.Schema
-
-var CloudTrailAccessNotEnabledException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "CloudTrailAccessNotEnabledException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "CloudTrailAccessNotEnabled",
-		StatusCode: 400})
-var CloudTrailAccessNotEnabledException_Message *smithy.Schema
-
-var CloudTrailARNInvalidException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "CloudTrailARNInvalidException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "CloudTrailARNInvalid",
-		StatusCode: 400})
-var CloudTrailARNInvalidException_Message *smithy.Schema
-
-var CloudTrailInvalidClientTokenIdException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "CloudTrailInvalidClientTokenIdException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "CloudTrailInvalidClientTokenId",
-		StatusCode: 400})
-var CloudTrailInvalidClientTokenIdException_Message *smithy.Schema
-
-var CloudWatchLogsDeliveryUnavailableException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "CloudWatchLogsDeliveryUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "CloudWatchLogsDeliveryUnavailable",
-		StatusCode: 400})
-var CloudWatchLogsDeliveryUnavailableException_Message *smithy.Schema
-
-var ConcurrentModificationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ConcurrentModificationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "ConcurrentModification",
-		StatusCode: 400})
-var ConcurrentModificationException_Message *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409},
-	&smithytraits.AWSQueryError{ErrorCode: "ConflictException",
-		StatusCode: 409})
-var ConflictException_Message *smithy.Schema
-
-var ContextKeySelector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ContextKeySelector",
-}, smithy.ShapeTypeStructure, 2)
-var ContextKeySelector_Type *smithy.Schema
-
-var ContextKeySelector_Equals *smithy.Schema
-
-var _ContextKeySelectors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ContextKeySelectors",
-}, smithy.ShapeTypeList, 1)
-var _ContextKeySelectors_member *smithy.Schema
-
-var _DashboardArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "DashboardArn",
-}, smithy.ShapeTypeString, 0)
-
-var DashboardDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "DashboardDetail",
-}, smithy.ShapeTypeStructure, 2)
-var DashboardDetail_DashboardArn *smithy.Schema
-
-var DashboardDetail_Type *smithy.Schema
-
-var _DashboardName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "DashboardName",
-}, smithy.ShapeTypeString, 0)
-
-var _Dashboards = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "Dashboards",
-}, smithy.ShapeTypeList, 1)
-var _Dashboards_member *smithy.Schema
-
-var DashboardStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "DashboardStatus",
-}, smithy.ShapeTypeEnum, 5)
-var DashboardStatus_CREATING *smithy.Schema
-
-var DashboardStatus_CREATED *smithy.Schema
-
-var DashboardStatus_UPDATING *smithy.Schema
-
-var DashboardStatus_UPDATED *smithy.Schema
-
-var DashboardStatus_DELETING *smithy.Schema
-
-var DashboardType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "DashboardType",
-}, smithy.ShapeTypeEnum, 2)
-var DashboardType_MANAGED *smithy.Schema
-
-var DashboardType_CUSTOM *smithy.Schema
-
-var DataResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "DataResource",
-}, smithy.ShapeTypeStructure, 2)
-var DataResource_Type *smithy.Schema
-
-var DataResource_Values *smithy.Schema
-
-var _DataResources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "DataResources",
-}, smithy.ShapeTypeList, 1)
-var _DataResources_member *smithy.Schema
-
-var _DataResourceValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "DataResourceValues",
-}, smithy.ShapeTypeList, 1)
-var _DataResourceValues_member *smithy.Schema
-
-var _Date = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "Date",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var DelegatedAdminAccountLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "DelegatedAdminAccountLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "DelegatedAdminAccountLimitExceeded",
-		StatusCode: 400})
-var DelegatedAdminAccountLimitExceededException_Message *smithy.Schema
-
-var _DeliveryS3Uri = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "DeliveryS3Uri",
-}, smithy.ShapeTypeString, 0)
-
-var DeliveryStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "DeliveryStatus",
-}, smithy.ShapeTypeEnum, 9)
-var DeliveryStatus_SUCCESS *smithy.Schema
-
-var DeliveryStatus_FAILED *smithy.Schema
-
-var DeliveryStatus_FAILED_SIGNING_FILE *smithy.Schema
-
-var DeliveryStatus_PENDING *smithy.Schema
-
-var DeliveryStatus_RESOURCE_NOT_FOUND *smithy.Schema
-
-var DeliveryStatus_ACCESS_DENIED *smithy.Schema
-
-var DeliveryStatus_ACCESS_DENIED_SIGNING_FILE *smithy.Schema
-
-var DeliveryStatus_CANCELLED *smithy.Schema
-
-var DeliveryStatus_UNKNOWN *smithy.Schema
-
-var Destination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "Destination",
-}, smithy.ShapeTypeStructure, 2)
-var Destination_Type *smithy.Schema
-
-var Destination_Location *smithy.Schema
-
-var _Destinations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "Destinations",
-}, smithy.ShapeTypeList, 1)
-var _Destinations_member *smithy.Schema
-
-var DestinationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "DestinationType",
-}, smithy.ShapeTypeEnum, 2)
-var DestinationType_EVENT_DATA_STORE *smithy.Schema
-
-var DestinationType_AWS_SERVICE *smithy.Schema
-
-var _Double = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "Double",
-}, smithy.ShapeTypeDouble, 0)
-
-var _ErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ErrorCode",
-}, smithy.ShapeTypeString, 0)
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var Event = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "Event",
-}, smithy.ShapeTypeStructure, 9)
-var Event_EventId *smithy.Schema
-
-var Event_EventName *smithy.Schema
-
-var Event_ReadOnly *smithy.Schema
-
-var Event_AccessKeyId *smithy.Schema
-
-var Event_EventTime *smithy.Schema
-
-var Event_EventSource *smithy.Schema
-
-var Event_Username *smithy.Schema
-
-var Event_Resources *smithy.Schema
-
-var Event_CloudTrailEvent *smithy.Schema
-
-var EventCategory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "EventCategory",
-}, smithy.ShapeTypeEnum, 1)
-var EventCategory_Insight *smithy.Schema
-
-var EventCategoryAggregation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "EventCategoryAggregation",
-}, smithy.ShapeTypeEnum, 1)
-var EventCategoryAggregation_Data *smithy.Schema
-
-var EventDataStore = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "EventDataStore",
-}, smithy.ShapeTypeStructure, 10)
-var EventDataStore_EventDataStoreArn *smithy.Schema
-
-var EventDataStore_Name *smithy.Schema
-
-var EventDataStore_TerminationProtectionEnabled *smithy.Schema
-
-var EventDataStore_Status *smithy.Schema
-
-var EventDataStore_AdvancedEventSelectors *smithy.Schema
-
-var EventDataStore_MultiRegionEnabled *smithy.Schema
-
-var EventDataStore_OrganizationEnabled *smithy.Schema
-
-var EventDataStore_RetentionPeriod *smithy.Schema
-
-var EventDataStore_CreatedTimestamp *smithy.Schema
-
-var EventDataStore_UpdatedTimestamp *smithy.Schema
-
-var EventDataStoreAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "EventDataStoreAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "EventDataStoreAlreadyExists",
-		StatusCode: 400})
-var EventDataStoreAlreadyExistsException_Message *smithy.Schema
-
-var _EventDataStoreArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "EventDataStoreArn",
-}, smithy.ShapeTypeString, 0)
-
-var EventDataStoreARNInvalidException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "EventDataStoreARNInvalidException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "EventDataStoreARNInvalid",
-		StatusCode: 400})
-var EventDataStoreARNInvalidException_Message *smithy.Schema
-
-var EventDataStoreFederationEnabledException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "EventDataStoreFederationEnabledException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "EventDataStoreFederationEnabled",
-		StatusCode: 400})
-var EventDataStoreFederationEnabledException_Message *smithy.Schema
-
-var EventDataStoreHasOngoingImportException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "EventDataStoreHasOngoingImportException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "EventDataStoreHasOngoingImport",
-		StatusCode: 400})
-var EventDataStoreHasOngoingImportException_Message *smithy.Schema
-
-var _EventDataStoreKmsKeyId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "EventDataStoreKmsKeyId",
-}, smithy.ShapeTypeString, 0)
-
-var _EventDataStoreList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "EventDataStoreList",
-}, smithy.ShapeTypeList, 1)
-var _EventDataStoreList_member *smithy.Schema
-
-var EventDataStoreMaxLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "EventDataStoreMaxLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "EventDataStoreMaxLimitExceeded",
-		StatusCode: 400})
-var EventDataStoreMaxLimitExceededException_Message *smithy.Schema
-
-var _EventDataStoreName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "EventDataStoreName",
-}, smithy.ShapeTypeString, 0)
-
-var EventDataStoreNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "EventDataStoreNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404},
-	&smithytraits.AWSQueryError{ErrorCode: "EventDataStoreNotFound",
-		StatusCode: 404})
-var EventDataStoreNotFoundException_Message *smithy.Schema
-
-var _EventDataStores = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "EventDataStores",
-}, smithy.ShapeTypeList, 1)
-var _EventDataStores_member *smithy.Schema
-
-var EventDataStoreStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "EventDataStoreStatus",
-}, smithy.ShapeTypeEnum, 6)
-var EventDataStoreStatus_CREATED *smithy.Schema
-
-var EventDataStoreStatus_ENABLED *smithy.Schema
-
-var EventDataStoreStatus_PENDING_DELETION *smithy.Schema
-
-var EventDataStoreStatus_STARTING_INGESTION *smithy.Schema
-
-var EventDataStoreStatus_STOPPING_INGESTION *smithy.Schema
-
-var EventDataStoreStatus_STOPPED_INGESTION *smithy.Schema
-
-var EventDataStoreTerminationProtectedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "EventDataStoreTerminationProtectedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "EventDataStoreTerminationProtectedException",
-		StatusCode: 400})
-var EventDataStoreTerminationProtectedException_Message *smithy.Schema
-
-var _EventName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "EventName",
-}, smithy.ShapeTypeString, 0)
-
-var EventSelector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "EventSelector",
-}, smithy.ShapeTypeStructure, 4)
-var EventSelector_ReadWriteType *smithy.Schema
-
-var EventSelector_IncludeManagementEvents *smithy.Schema
-
-var EventSelector_DataResources *smithy.Schema
-
-var EventSelector_ExcludeManagementEventSources *smithy.Schema
-
-var _EventSelectors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "EventSelectors",
-}, smithy.ShapeTypeList, 1)
-var _EventSelectors_member *smithy.Schema
-
-var _EventsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "EventsList",
-}, smithy.ShapeTypeList, 1)
-var _EventsList_member *smithy.Schema
-
-var _EventSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "EventSource",
-}, smithy.ShapeTypeString, 0)
-
-var _ExcludeManagementEventSources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ExcludeManagementEventSources",
-}, smithy.ShapeTypeList, 1)
-var _ExcludeManagementEventSources_member *smithy.Schema
-
-var _FederationRoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "FederationRoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var FederationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "FederationStatus",
-}, smithy.ShapeTypeEnum, 4)
-var FederationStatus_ENABLING *smithy.Schema
-
-var FederationStatus_ENABLED *smithy.Schema
-
-var FederationStatus_DISABLING *smithy.Schema
-
-var FederationStatus_DISABLED *smithy.Schema
-
-var GenerateResponseException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "GenerateResponseException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "GenerateResponse",
-		StatusCode: 400})
-var GenerateResponseException_Message *smithy.Schema
-
-var _ImportDestinations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ImportDestinations",
-}, smithy.ShapeTypeList, 1)
-var _ImportDestinations_member *smithy.Schema
-
-var _ImportFailureList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ImportFailureList",
-}, smithy.ShapeTypeList, 1)
-var _ImportFailureList_member *smithy.Schema
-
-var ImportFailureListItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ImportFailureListItem",
-}, smithy.ShapeTypeStructure, 5)
-var ImportFailureListItem_Location *smithy.Schema
-
-var ImportFailureListItem_Status *smithy.Schema
-
-var ImportFailureListItem_ErrorType *smithy.Schema
-
-var ImportFailureListItem_ErrorMessage *smithy.Schema
-
-var ImportFailureListItem_LastUpdatedTime *smithy.Schema
-
-var ImportFailureStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ImportFailureStatus",
-}, smithy.ShapeTypeEnum, 3)
-var ImportFailureStatus_FAILED *smithy.Schema
-
-var ImportFailureStatus_RETRY *smithy.Schema
-
-var ImportFailureStatus_SUCCEEDED *smithy.Schema
-
-var ImportNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ImportNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404},
-	&smithytraits.AWSQueryError{ErrorCode: "ImportNotFound",
-		StatusCode: 404})
-var ImportNotFoundException_Message *smithy.Schema
-
-var _ImportsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ImportsList",
-}, smithy.ShapeTypeList, 1)
-var _ImportsList_member *smithy.Schema
-
-var ImportsListItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ImportsListItem",
-}, smithy.ShapeTypeStructure, 5)
-var ImportsListItem_ImportId *smithy.Schema
-
-var ImportsListItem_ImportStatus *smithy.Schema
-
-var ImportsListItem_Destinations *smithy.Schema
-
-var ImportsListItem_CreatedTimestamp *smithy.Schema
-
-var ImportsListItem_UpdatedTimestamp *smithy.Schema
-
-var ImportSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ImportSource",
-}, smithy.ShapeTypeStructure, 1)
-var ImportSource_S3 *smithy.Schema
-
-var ImportStatistics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ImportStatistics",
-}, smithy.ShapeTypeStructure, 5)
-var ImportStatistics_PrefixesFound *smithy.Schema
-
-var ImportStatistics_PrefixesCompleted *smithy.Schema
-
-var ImportStatistics_FilesCompleted *smithy.Schema
-
-var ImportStatistics_EventsCompleted *smithy.Schema
-
-var ImportStatistics_FailedEntries *smithy.Schema
-
-var ImportStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ImportStatus",
-}, smithy.ShapeTypeEnum, 5)
-var ImportStatus_INITIALIZING *smithy.Schema
-
-var ImportStatus_IN_PROGRESS *smithy.Schema
-
-var ImportStatus_FAILED *smithy.Schema
-
-var ImportStatus_STOPPED *smithy.Schema
-
-var ImportStatus_COMPLETED *smithy.Schema
-
-var InactiveEventDataStoreException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "InactiveEventDataStoreException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InactiveEventDataStore",
-		StatusCode: 400})
-var InactiveEventDataStoreException_Message *smithy.Schema
-
-var InactiveQueryException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "InactiveQueryException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InactiveQuery",
-		StatusCode: 400})
-var InactiveQueryException_Message *smithy.Schema
-
-var IngestionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "IngestionStatus",
-}, smithy.ShapeTypeStructure, 5)
-var IngestionStatus_LatestIngestionSuccessTime *smithy.Schema
-
-var IngestionStatus_LatestIngestionSuccessEventID *smithy.Schema
-
-var IngestionStatus_LatestIngestionErrorCode *smithy.Schema
-
-var IngestionStatus_LatestIngestionAttemptTime *smithy.Schema
-
-var IngestionStatus_LatestIngestionAttemptEventID *smithy.Schema
-
-var InsightNotEnabledException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "InsightNotEnabledException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InsightNotEnabled",
-		StatusCode: 400})
-var InsightNotEnabledException_Message *smithy.Schema
-
-var InsightSelector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "InsightSelector",
-}, smithy.ShapeTypeStructure, 2)
-var InsightSelector_InsightType *smithy.Schema
-
-var InsightSelector_EventCategories *smithy.Schema
-
-var _InsightSelectors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "InsightSelectors",
-}, smithy.ShapeTypeList, 1)
-var _InsightSelectors_member *smithy.Schema
-
-var InsightsMetricDataType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "InsightsMetricDataType",
-}, smithy.ShapeTypeEnum, 2)
-var InsightsMetricDataType_FILL_WITH_ZEROS *smithy.Schema
-
-var InsightsMetricDataType_NON_ZERO_DATA *smithy.Schema
-
-var _InsightsMetricMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "InsightsMetricMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _InsightsMetricNextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "InsightsMetricNextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _InsightsMetricPeriod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "InsightsMetricPeriod",
-}, smithy.ShapeTypeInteger, 0)
-
-var _InsightsMetricValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "InsightsMetricValues",
-}, smithy.ShapeTypeList, 1)
-var _InsightsMetricValues_member *smithy.Schema
-
-var InsightType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "InsightType",
-}, smithy.ShapeTypeEnum, 2)
-var InsightType_ApiCallRateInsight *smithy.Schema
-
-var InsightType_ApiErrorRateInsight *smithy.Schema
-
-var InsufficientDependencyServiceAccessPermissionException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "InsufficientDependencyServiceAccessPermissionException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InsufficientDependencyServiceAccessPermission",
-		StatusCode: 400})
-var InsufficientDependencyServiceAccessPermissionException_Message *smithy.Schema
-
-var InsufficientEncryptionPolicyException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "InsufficientEncryptionPolicyException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InsufficientEncryptionPolicy",
-		StatusCode: 400})
-var InsufficientEncryptionPolicyException_Message *smithy.Schema
-
-var InsufficientIAMAccessPermissionException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "InsufficientIAMAccessPermissionException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InsufficientIAMAccessPermission",
-		StatusCode: 400})
-var InsufficientIAMAccessPermissionException_Message *smithy.Schema
-
-var InsufficientS3BucketPolicyException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "InsufficientS3BucketPolicyException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403},
-	&smithytraits.AWSQueryError{ErrorCode: "InsufficientS3BucketPolicy",
-		StatusCode: 403})
-var InsufficientS3BucketPolicyException_Message *smithy.Schema
-
-var InsufficientSnsTopicPolicyException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "InsufficientSnsTopicPolicyException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403},
-	&smithytraits.AWSQueryError{ErrorCode: "InsufficientSnsTopicPolicy",
-		StatusCode: 403})
-var InsufficientSnsTopicPolicyException_Message *smithy.Schema
-
-var _Integer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "Integer",
-}, smithy.ShapeTypeInteger, 0)
-
-var InvalidCloudWatchLogsLogGroupArnException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "InvalidCloudWatchLogsLogGroupArnException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidCloudWatchLogsLogGroupArn",
-		StatusCode: 400})
-var InvalidCloudWatchLogsLogGroupArnException_Message *smithy.Schema
-
-var InvalidCloudWatchLogsRoleArnException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "InvalidCloudWatchLogsRoleArnException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidCloudWatchLogsRoleArn",
-		StatusCode: 400})
-var InvalidCloudWatchLogsRoleArnException_Message *smithy.Schema
-
-var InvalidDateRangeException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "InvalidDateRangeException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidDateRange",
-		StatusCode: 400})
-var InvalidDateRangeException_Message *smithy.Schema
-
-var InvalidEventCategoryException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "InvalidEventCategoryException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidEventCategory",
-		StatusCode: 400})
-var InvalidEventCategoryException_Message *smithy.Schema
-
-var InvalidEventDataStoreCategoryException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "InvalidEventDataStoreCategoryException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidEventDataStoreCategory",
-		StatusCode: 400})
-var InvalidEventDataStoreCategoryException_Message *smithy.Schema
-
-var InvalidEventDataStoreStatusException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "InvalidEventDataStoreStatusException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidEventDataStoreStatus",
-		StatusCode: 400})
-var InvalidEventDataStoreStatusException_Message *smithy.Schema
-
-var InvalidEventSelectorsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "InvalidEventSelectorsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidEventSelectors",
-		StatusCode: 400})
-var InvalidEventSelectorsException_Message *smithy.Schema
-
-var InvalidHomeRegionException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "InvalidHomeRegionException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidHomeRegion",
-		StatusCode: 400})
-var InvalidHomeRegionException_Message *smithy.Schema
-
-var InvalidImportSourceException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "InvalidImportSourceException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidImportSource",
-		StatusCode: 400})
-var InvalidImportSourceException_Message *smithy.Schema
-
-var InvalidInsightSelectorsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "InvalidInsightSelectorsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidInsightSelectors",
-		StatusCode: 400})
-var InvalidInsightSelectorsException_Message *smithy.Schema
-
-var InvalidKmsKeyIdException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "InvalidKmsKeyIdException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidKmsKeyId",
-		StatusCode: 400})
-var InvalidKmsKeyIdException_Message *smithy.Schema
-
-var InvalidLookupAttributesException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "InvalidLookupAttributesException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidLookupAttributes",
-		StatusCode: 400})
-var InvalidLookupAttributesException_Message *smithy.Schema
-
-var InvalidMaxResultsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "InvalidMaxResultsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidMaxResults",
-		StatusCode: 400})
-var InvalidMaxResultsException_Message *smithy.Schema
-
-var InvalidNextTokenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "InvalidNextTokenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidNextToken",
-		StatusCode: 400})
-var InvalidNextTokenException_Message *smithy.Schema
-
-var InvalidParameterCombinationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "InvalidParameterCombinationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidParameterCombinationError",
-		StatusCode: 400})
-var InvalidParameterCombinationException_Message *smithy.Schema
-
-var InvalidParameterException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "InvalidParameterException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidParameter",
-		StatusCode: 400})
-var InvalidParameterException_Message *smithy.Schema
-
-var InvalidQueryStatementException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "InvalidQueryStatementException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidQueryStatement",
-		StatusCode: 400})
-var InvalidQueryStatementException_Message *smithy.Schema
-
-var InvalidQueryStatusException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "InvalidQueryStatusException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidQueryStatus",
-		StatusCode: 400})
-var InvalidQueryStatusException_Message *smithy.Schema
-
-var InvalidS3BucketNameException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "InvalidS3BucketNameException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidS3BucketName",
-		StatusCode: 400})
-var InvalidS3BucketNameException_Message *smithy.Schema
-
-var InvalidS3PrefixException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "InvalidS3PrefixException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidS3Prefix",
-		StatusCode: 400})
-var InvalidS3PrefixException_Message *smithy.Schema
-
-var InvalidSnsTopicNameException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "InvalidSnsTopicNameException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidSnsTopicName",
-		StatusCode: 400})
-var InvalidSnsTopicNameException_Message *smithy.Schema
-
-var InvalidSourceException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "InvalidSourceException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidSource",
-		StatusCode: 400})
-var InvalidSourceException_Message *smithy.Schema
-
-var InvalidTagParameterException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "InvalidTagParameterException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidTagParameter",
-		StatusCode: 400})
-var InvalidTagParameterException_Message *smithy.Schema
-
-var InvalidTimeRangeException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "InvalidTimeRangeException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidTimeRange",
-		StatusCode: 400})
-var InvalidTimeRangeException_Message *smithy.Schema
-
-var InvalidTokenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "InvalidTokenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidToken",
-		StatusCode: 400})
-var InvalidTokenException_Message *smithy.Schema
-
-var InvalidTrailNameException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "InvalidTrailNameException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidTrailName",
-		StatusCode: 400})
-var InvalidTrailNameException_Message *smithy.Schema
-
-var KmsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "KmsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "KmsException",
-		StatusCode: 400})
-var KmsException_Message *smithy.Schema
-
-var KmsKeyDisabledException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "KmsKeyDisabledException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "KmsKeyDisabled",
-		StatusCode: 400})
-var KmsKeyDisabledException_Message *smithy.Schema
-
-var KmsKeyNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "KmsKeyNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "KmsKeyNotFound",
-		StatusCode: 400})
-var KmsKeyNotFoundException_Message *smithy.Schema
-
-var _ListChannelsMaxResultsCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ListChannelsMaxResultsCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListDashboardsMaxResultsCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ListDashboardsMaxResultsCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListEventDataStoresMaxResultsCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ListEventDataStoresMaxResultsCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListImportFailuresMaxResultsCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ListImportFailuresMaxResultsCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListImportsMaxResultsCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ListImportsMaxResultsCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var ListInsightsDataDimensionKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ListInsightsDataDimensionKey",
-}, smithy.ShapeTypeEnum, 3)
-var ListInsightsDataDimensionKey_EVENT_ID *smithy.Schema
-
-var ListInsightsDataDimensionKey_EVENT_NAME *smithy.Schema
-
-var ListInsightsDataDimensionKey_EVENT_SOURCE *smithy.Schema
-
-var _ListInsightsDataDimensions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ListInsightsDataDimensions",
-}, smithy.ShapeTypeMap, 2)
-var _ListInsightsDataDimensions_key *smithy.Schema
-
-var _ListInsightsDataDimensions_value *smithy.Schema
-
-var _ListInsightsDataDimensionValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ListInsightsDataDimensionValue",
-}, smithy.ShapeTypeString, 0)
-
-var _ListInsightsDataMaxResultsCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ListInsightsDataMaxResultsCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var ListInsightsDataType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ListInsightsDataType",
-}, smithy.ShapeTypeEnum, 1)
-var ListInsightsDataType_INSIGHTS_EVENTS *smithy.Schema
-
-var _ListQueriesMaxResultsCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ListQueriesMaxResultsCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Location = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "Location",
-}, smithy.ShapeTypeString, 0)
-
-var _Long = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "Long",
-}, smithy.ShapeTypeLong, 0)
-
-var LookupAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "LookupAttribute",
-}, smithy.ShapeTypeStructure, 2)
-var LookupAttribute_AttributeKey *smithy.Schema
-
-var LookupAttribute_AttributeValue *smithy.Schema
-
-var LookupAttributeKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "LookupAttributeKey",
-}, smithy.ShapeTypeEnum, 8)
-var LookupAttributeKey_EVENT_ID *smithy.Schema
-
-var LookupAttributeKey_EVENT_NAME *smithy.Schema
-
-var LookupAttributeKey_READ_ONLY *smithy.Schema
-
-var LookupAttributeKey_USERNAME *smithy.Schema
-
-var LookupAttributeKey_RESOURCE_TYPE *smithy.Schema
-
-var LookupAttributeKey_RESOURCE_NAME *smithy.Schema
-
-var LookupAttributeKey_EVENT_SOURCE *smithy.Schema
-
-var LookupAttributeKey_ACCESS_KEY_ID *smithy.Schema
-
-var _LookupAttributesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "LookupAttributesList",
-}, smithy.ShapeTypeList, 1)
-var _LookupAttributesList_member *smithy.Schema
-
-var _LookupAttributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "LookupAttributeValue",
-}, smithy.ShapeTypeString, 0)
-
-var MaxConcurrentQueriesException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "MaxConcurrentQueriesException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429},
-	&smithytraits.AWSQueryError{ErrorCode: "MaxConcurrentQueries",
-		StatusCode: 429})
-var MaxConcurrentQueriesException_Message *smithy.Schema
-
-var MaxEventSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "MaxEventSize",
-}, smithy.ShapeTypeEnum, 2)
-var MaxEventSize_Standard *smithy.Schema
-
-var MaxEventSize_Large *smithy.Schema
-
-var MaximumNumberOfTrailsExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "MaximumNumberOfTrailsExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403},
-	&smithytraits.AWSQueryError{ErrorCode: "MaximumNumberOfTrailsExceeded",
-		StatusCode: 403})
-var MaximumNumberOfTrailsExceededException_Message *smithy.Schema
-
-var _MaxQueryResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "MaxQueryResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var NoManagementAccountSLRExistsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "NoManagementAccountSLRExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403},
-	&smithytraits.AWSQueryError{ErrorCode: "NoManagementAccountSLRExists",
-		StatusCode: 403})
-var NoManagementAccountSLRExistsException_Message *smithy.Schema
-
-var NotOrganizationManagementAccountException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "NotOrganizationManagementAccountException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403},
-	&smithytraits.AWSQueryError{ErrorCode: "NotOrganizationManagementAccount",
-		StatusCode: 403})
-var NotOrganizationManagementAccountException_Message *smithy.Schema
-
-var NotOrganizationMasterAccountException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "NotOrganizationMasterAccountException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "NotOrganizationMasterAccount",
-		StatusCode: 400})
-var NotOrganizationMasterAccountException_Message *smithy.Schema
-
-var OperationNotPermittedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "OperationNotPermittedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "OperationNotPermitted",
-		StatusCode: 400})
-var OperationNotPermittedException_Message *smithy.Schema
-
-var _Operator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "Operator",
-}, smithy.ShapeTypeList, 1)
-var _Operator_member *smithy.Schema
-
-var _OperatorTargetList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "OperatorTargetList",
-}, smithy.ShapeTypeList, 1)
-var _OperatorTargetList_member *smithy.Schema
-
-var _OperatorTargetListMember = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "OperatorTargetListMember",
-}, smithy.ShapeTypeString, 0)
-
-var _OperatorValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "OperatorValue",
-}, smithy.ShapeTypeString, 0)
-
-var OrganizationNotInAllFeaturesModeException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "OrganizationNotInAllFeaturesModeException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "OrganizationNotInAllFeaturesMode",
-		StatusCode: 400})
-var OrganizationNotInAllFeaturesModeException_Message *smithy.Schema
-
-var OrganizationsNotInUseException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "OrganizationsNotInUseException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404},
-	&smithytraits.AWSQueryError{ErrorCode: "OrganizationsNotInUse",
-		StatusCode: 404})
-var OrganizationsNotInUseException_Message *smithy.Schema
-
-var _PaginationToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "PaginationToken",
-}, smithy.ShapeTypeString, 0)
-
-var PartitionKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "PartitionKey",
-}, smithy.ShapeTypeStructure, 2)
-var PartitionKey_Name *smithy.Schema
-
-var PartitionKey_Type *smithy.Schema
-
-var _PartitionKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "PartitionKeyList",
-}, smithy.ShapeTypeList, 1)
-var _PartitionKeyList_member *smithy.Schema
-
-var _PartitionKeyName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "PartitionKeyName",
-}, smithy.ShapeTypeString, 0)
-
-var _PartitionKeyType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "PartitionKeyType",
-}, smithy.ShapeTypeString, 0)
-
-var _Prompt = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "Prompt",
-}, smithy.ShapeTypeString, 0)
-
-var PublicKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "PublicKey",
-}, smithy.ShapeTypeStructure, 4)
-var PublicKey_Value *smithy.Schema
-
-var PublicKey_ValidityStartTime *smithy.Schema
-
-var PublicKey_ValidityEndTime *smithy.Schema
-
-var PublicKey_Fingerprint *smithy.Schema
-
-var _PublicKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "PublicKeyList",
-}, smithy.ShapeTypeList, 1)
-var _PublicKeyList_member *smithy.Schema
-
-var _Queries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "Queries",
-}, smithy.ShapeTypeList, 1)
-var _Queries_member *smithy.Schema
-
-var Query = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "Query",
-}, smithy.ShapeTypeStructure, 3)
-var Query_QueryId *smithy.Schema
-
-var Query_QueryStatus *smithy.Schema
-
-var Query_CreationTime *smithy.Schema
-
-var _QueryAlias = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "QueryAlias",
-}, smithy.ShapeTypeString, 0)
-
-var QueryIdNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "QueryIdNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404},
-	&smithytraits.AWSQueryError{ErrorCode: "QueryIdNotFound",
-		StatusCode: 404})
-var QueryIdNotFoundException_Message *smithy.Schema
-
-var _QueryParameter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "QueryParameter",
-}, smithy.ShapeTypeString, 0)
-
-var _QueryParameterKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "QueryParameterKey",
-}, smithy.ShapeTypeString, 0)
-
-var _QueryParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "QueryParameters",
-}, smithy.ShapeTypeList, 1)
-var _QueryParameters_member *smithy.Schema
-
-var _QueryParameterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "QueryParameterValue",
-}, smithy.ShapeTypeString, 0)
-
-var _QueryParameterValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "QueryParameterValues",
-}, smithy.ShapeTypeMap, 2)
-var _QueryParameterValues_key *smithy.Schema
-
-var _QueryParameterValues_value *smithy.Schema
-
-var _QueryResultColumn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "QueryResultColumn",
-}, smithy.ShapeTypeMap, 2)
-var _QueryResultColumn_key *smithy.Schema
-
-var _QueryResultColumn_value *smithy.Schema
-
-var _QueryResultKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "QueryResultKey",
-}, smithy.ShapeTypeString, 0)
-
-var _QueryResultRow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "QueryResultRow",
-}, smithy.ShapeTypeList, 1)
-var _QueryResultRow_member *smithy.Schema
-
-var _QueryResultRows = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "QueryResultRows",
-}, smithy.ShapeTypeList, 1)
-var _QueryResultRows_member *smithy.Schema
-
-var _QueryResultValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "QueryResultValue",
-}, smithy.ShapeTypeString, 0)
-
-var _QueryStatement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "QueryStatement",
-}, smithy.ShapeTypeString, 0)
-
-var QueryStatistics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "QueryStatistics",
-}, smithy.ShapeTypeStructure, 3)
-var QueryStatistics_ResultsCount *smithy.Schema
-
-var QueryStatistics_TotalResultsCount *smithy.Schema
-
-var QueryStatistics_BytesScanned *smithy.Schema
-
-var QueryStatisticsForDescribeQuery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "QueryStatisticsForDescribeQuery",
-}, smithy.ShapeTypeStructure, 5)
-var QueryStatisticsForDescribeQuery_EventsMatched *smithy.Schema
-
-var QueryStatisticsForDescribeQuery_EventsScanned *smithy.Schema
-
-var QueryStatisticsForDescribeQuery_BytesScanned *smithy.Schema
-
-var QueryStatisticsForDescribeQuery_ExecutionTimeInMillis *smithy.Schema
-
-var QueryStatisticsForDescribeQuery_CreationTime *smithy.Schema
-
-var QueryStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "QueryStatus",
-}, smithy.ShapeTypeEnum, 6)
-var QueryStatus_QUEUED *smithy.Schema
-
-var QueryStatus_RUNNING *smithy.Schema
-
-var QueryStatus_FINISHED *smithy.Schema
-
-var QueryStatus_FAILED *smithy.Schema
-
-var QueryStatus_CANCELLED *smithy.Schema
-
-var QueryStatus_TIMED_OUT *smithy.Schema
-
-var ReadWriteType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ReadWriteType",
-}, smithy.ShapeTypeEnum, 3)
-var ReadWriteType_ReadOnly *smithy.Schema
-
-var ReadWriteType_WriteOnly *smithy.Schema
-
-var ReadWriteType_All *smithy.Schema
-
-var _RefreshId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "RefreshId",
-}, smithy.ShapeTypeString, 0)
-
-var RefreshSchedule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "RefreshSchedule",
-}, smithy.ShapeTypeStructure, 3)
-var RefreshSchedule_Frequency *smithy.Schema
-
-var RefreshSchedule_Status *smithy.Schema
-
-var RefreshSchedule_TimeOfDay *smithy.Schema
-
-var RefreshScheduleFrequency = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "RefreshScheduleFrequency",
-}, smithy.ShapeTypeStructure, 2)
-var RefreshScheduleFrequency_Unit *smithy.Schema
-
-var RefreshScheduleFrequency_Value *smithy.Schema
-
-var RefreshScheduleFrequencyUnit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "RefreshScheduleFrequencyUnit",
-}, smithy.ShapeTypeEnum, 2)
-var RefreshScheduleFrequencyUnit_HOURS *smithy.Schema
-
-var RefreshScheduleFrequencyUnit_DAYS *smithy.Schema
-
-var _RefreshScheduleFrequencyValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "RefreshScheduleFrequencyValue",
-}, smithy.ShapeTypeInteger, 0)
-
-var RefreshScheduleStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "RefreshScheduleStatus",
-}, smithy.ShapeTypeEnum, 2)
-var RefreshScheduleStatus_ENABLED *smithy.Schema
-
-var RefreshScheduleStatus_DISABLED *smithy.Schema
-
-var RequestWidget = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "RequestWidget",
-}, smithy.ShapeTypeStructure, 3)
-var RequestWidget_QueryStatement *smithy.Schema
-
-var RequestWidget_QueryParameters *smithy.Schema
-
-var RequestWidget_ViewProperties *smithy.Schema
-
-var _RequestWidgetList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "RequestWidgetList",
-}, smithy.ShapeTypeList, 1)
-var _RequestWidgetList_member *smithy.Schema
-
-var Resource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "Resource",
-}, smithy.ShapeTypeStructure, 2)
-var Resource_ResourceType *smithy.Schema
-
-var Resource_ResourceName *smithy.Schema
-
-var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceARNNotValidException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ResourceARNNotValidException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "ResourceARNNotValid",
-		StatusCode: 400})
-var ResourceARNNotValidException_Message *smithy.Schema
-
-var _ResourceIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ResourceIdList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceIdList_member *smithy.Schema
-
-var _ResourceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ResourceList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceList_member *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "ResourceNotFound",
-		StatusCode: 400})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var _ResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ResourcePolicy",
-}, smithy.ShapeTypeString, 0)
-
-var ResourcePolicyNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ResourcePolicyNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404},
-	&smithytraits.AWSQueryError{ErrorCode: "ResourcePolicyNotFound",
-		StatusCode: 404})
-var ResourcePolicyNotFoundException_Message *smithy.Schema
-
-var ResourcePolicyNotValidException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ResourcePolicyNotValidException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "ResourcePolicyNotValid",
-		StatusCode: 400})
-var ResourcePolicyNotValidException_Message *smithy.Schema
-
-var ResourceTag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ResourceTag",
-}, smithy.ShapeTypeStructure, 2)
-var ResourceTag_ResourceId *smithy.Schema
-
-var ResourceTag_TagsList *smithy.Schema
-
-var _ResourceTagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ResourceTagList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceTagList_member *smithy.Schema
-
-var ResourceTypeNotSupportedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ResourceTypeNotSupportedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "ResourceTypeNotSupported",
-		StatusCode: 400})
-var ResourceTypeNotSupportedException_Message *smithy.Schema
-
-var _RetentionPeriod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "RetentionPeriod",
-}, smithy.ShapeTypeInteger, 0)
-
-var S3BucketDoesNotExistException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "S3BucketDoesNotExistException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404},
-	&smithytraits.AWSQueryError{ErrorCode: "S3BucketDoesNotExist",
-		StatusCode: 404})
-var S3BucketDoesNotExistException_Message *smithy.Schema
-
-var S3ImportSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "S3ImportSource",
-}, smithy.ShapeTypeStructure, 3)
-var S3ImportSource_S3LocationUri *smithy.Schema
-
-var S3ImportSource_S3BucketRegion *smithy.Schema
-
-var S3ImportSource_S3BucketAccessRoleArn *smithy.Schema
-
-var _SampleQueryDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "SampleQueryDescription",
-}, smithy.ShapeTypeString, 0)
-
-var _SampleQueryName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "SampleQueryName",
-}, smithy.ShapeTypeString, 0)
-
-var _SampleQueryRelevance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "SampleQueryRelevance",
-}, smithy.ShapeTypeFloat, 0)
-
-var _SampleQuerySQL = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "SampleQuerySQL",
-}, smithy.ShapeTypeString, 0)
-
-var _SearchSampleQueriesMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "SearchSampleQueriesMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _SearchSampleQueriesSearchPhrase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "SearchSampleQueriesSearchPhrase",
-}, smithy.ShapeTypeString, 0)
-
-var SearchSampleQueriesSearchResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "SearchSampleQueriesSearchResult",
-}, smithy.ShapeTypeStructure, 4)
-var SearchSampleQueriesSearchResult_Name *smithy.Schema
-
-var SearchSampleQueriesSearchResult_Description *smithy.Schema
-
-var SearchSampleQueriesSearchResult_SQL *smithy.Schema
-
-var SearchSampleQueriesSearchResult_Relevance *smithy.Schema
-
-var _SearchSampleQueriesSearchResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "SearchSampleQueriesSearchResults",
-}, smithy.ShapeTypeList, 1)
-var _SearchSampleQueriesSearchResults_member *smithy.Schema
-
-var _SelectorField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "SelectorField",
-}, smithy.ShapeTypeString, 0)
-
-var _SelectorName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "SelectorName",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "ServiceQuotaExceeded",
-		StatusCode: 400})
-var ServiceQuotaExceededException_Message *smithy.Schema
-
-var _Source = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "Source",
-}, smithy.ShapeTypeString, 0)
-
-var SourceConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "SourceConfig",
-}, smithy.ShapeTypeStructure, 2)
-var SourceConfig_ApplyToAllRegions *smithy.Schema
-
-var SourceConfig_AdvancedEventSelectors *smithy.Schema
-
-var _SourceEventCategories = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "SourceEventCategories",
-}, smithy.ShapeTypeList, 1)
-var _SourceEventCategories_member *smithy.Schema
-
-var SourceEventCategory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "SourceEventCategory",
-}, smithy.ShapeTypeEnum, 2)
-var SourceEventCategory_Management *smithy.Schema
-
-var SourceEventCategory_Data *smithy.Schema
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var TagsLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "TagsLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "TagsLimitExceeded",
-		StatusCode: 400})
-var TagsLimitExceededException_Message *smithy.Schema
-
-var _TagsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "TagsList",
-}, smithy.ShapeTypeList, 1)
-var _TagsList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var Template = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "Template",
-}, smithy.ShapeTypeEnum, 3)
-var Template_API_ACTIVITY *smithy.Schema
-
-var Template_RESOURCE_ACCESS *smithy.Schema
-
-var Template_USER_ACTIONS *smithy.Schema
-
-var _Templates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "Templates",
-}, smithy.ShapeTypeList, 1)
-var _Templates_member *smithy.Schema
-
-var _TerminationProtectionEnabled = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "TerminationProtectionEnabled",
-}, smithy.ShapeTypeBoolean, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429},
-	&smithytraits.AWSQueryError{ErrorCode: "ThrottlingException",
-		StatusCode: 429})
-var ThrottlingException_Message *smithy.Schema
-
-var _TimeOfDay = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "TimeOfDay",
-}, smithy.ShapeTypeString, 0)
-
-var _Timestamps = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "Timestamps",
-}, smithy.ShapeTypeList, 1)
-var _Timestamps_member *smithy.Schema
-
-var Trail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "Trail",
-}, smithy.ShapeTypeStructure, 17)
-var Trail_Name *smithy.Schema
-
-var Trail_S3BucketName *smithy.Schema
-
-var Trail_S3KeyPrefix *smithy.Schema
-
-var Trail_SnsTopicName *smithy.Schema
-
-var Trail_SnsTopicARN *smithy.Schema
-
-var Trail_IncludeGlobalServiceEvents *smithy.Schema
-
-var Trail_IsMultiRegionTrail *smithy.Schema
-
-var Trail_HomeRegion *smithy.Schema
-
-var Trail_TrailARN *smithy.Schema
-
-var Trail_LogFileValidationEnabled *smithy.Schema
-
-var Trail_CloudWatchLogsLogGroupArn *smithy.Schema
-
-var Trail_CloudWatchLogsRoleArn *smithy.Schema
-
-var Trail_KmsKeyId *smithy.Schema
-
-var Trail_HasCustomEventSelectors *smithy.Schema
-
-var Trail_HasInsightSelectors *smithy.Schema
-
-var Trail_IsOrganizationTrail *smithy.Schema
-
-var Trail_RecursiveLogging *smithy.Schema
-
-var TrailAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "TrailAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "TrailAlreadyExists",
-		StatusCode: 400})
-var TrailAlreadyExistsException_Message *smithy.Schema
-
-var TrailInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "TrailInfo",
-}, smithy.ShapeTypeStructure, 3)
-var TrailInfo_TrailARN *smithy.Schema
-
-var TrailInfo_Name *smithy.Schema
-
-var TrailInfo_HomeRegion *smithy.Schema
-
-var _TrailList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "TrailList",
-}, smithy.ShapeTypeList, 1)
-var _TrailList_member *smithy.Schema
-
-var _TrailNameList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "TrailNameList",
-}, smithy.ShapeTypeList, 1)
-var _TrailNameList_member *smithy.Schema
-
-var TrailNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "TrailNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404},
-	&smithytraits.AWSQueryError{ErrorCode: "TrailNotFound",
-		StatusCode: 404})
-var TrailNotFoundException_Message *smithy.Schema
-
-var TrailNotProvidedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "TrailNotProvidedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404},
-	&smithytraits.AWSQueryError{ErrorCode: "TrailNotProvided",
-		StatusCode: 404})
-var TrailNotProvidedException_Message *smithy.Schema
-
-var _Trails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "Trails",
-}, smithy.ShapeTypeList, 1)
-var _Trails_member *smithy.Schema
-
-var Type = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "Type",
-}, smithy.ShapeTypeEnum, 2)
-var Type_TagContext *smithy.Schema
-
-var Type_RequestContext *smithy.Schema
-
-var UnsupportedOperationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "UnsupportedOperationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "UnsupportedOperation",
-		StatusCode: 400})
-var UnsupportedOperationException_Message *smithy.Schema
-
-var _UUID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "UUID",
-}, smithy.ShapeTypeString, 0)
-
-var _ViewPropertiesKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ViewPropertiesKey",
-}, smithy.ShapeTypeString, 0)
-
-var _ViewPropertiesMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ViewPropertiesMap",
-}, smithy.ShapeTypeMap, 2)
-var _ViewPropertiesMap_key *smithy.Schema
-
-var _ViewPropertiesMap_value *smithy.Schema
-
-var _ViewPropertiesValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ViewPropertiesValue",
-}, smithy.ShapeTypeString, 0)
-
-var Widget = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "Widget",
-}, smithy.ShapeTypeStructure, 4)
-var Widget_QueryAlias *smithy.Schema
-
-var Widget_QueryStatement *smithy.Schema
-
-var Widget_QueryParameters *smithy.Schema
-
-var Widget_ViewProperties *smithy.Schema
-
-var _WidgetList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "WidgetList",
-}, smithy.ShapeTypeList, 1)
-var _WidgetList_member *smithy.Schema
-
-var AddTagsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "AddTagsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var AddTagsRequest_ResourceId *smithy.Schema
-
-var AddTagsRequest_TagsList *smithy.Schema
-
-var AddTagsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "AddTagsResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var CancelQueryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "CancelQueryRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CancelQueryRequest_EventDataStore *smithy.Schema
-
-var CancelQueryRequest_QueryId *smithy.Schema
-
-var CancelQueryRequest_EventDataStoreOwnerAccountId *smithy.Schema
-
-var CancelQueryResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "CancelQueryResponse",
-}, smithy.ShapeTypeStructure, 3)
-var CancelQueryResponse_QueryId *smithy.Schema
-
-var CancelQueryResponse_QueryStatus *smithy.Schema
-
-var CancelQueryResponse_EventDataStoreOwnerAccountId *smithy.Schema
-
-var CreateChannelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "CreateChannelRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateChannelRequest_Name *smithy.Schema
-
-var CreateChannelRequest_Source *smithy.Schema
-
-var CreateChannelRequest_Destinations *smithy.Schema
-
-var CreateChannelRequest_Tags *smithy.Schema
-
-var CreateChannelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "CreateChannelResponse",
-}, smithy.ShapeTypeStructure, 5)
-var CreateChannelResponse_ChannelArn *smithy.Schema
-
-var CreateChannelResponse_Name *smithy.Schema
-
-var CreateChannelResponse_Source *smithy.Schema
-
-var CreateChannelResponse_Destinations *smithy.Schema
-
-var CreateChannelResponse_Tags *smithy.Schema
-
-var CreateDashboardRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "CreateDashboardRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateDashboardRequest_Name *smithy.Schema
-
-var CreateDashboardRequest_RefreshSchedule *smithy.Schema
-
-var CreateDashboardRequest_TagsList *smithy.Schema
-
-var CreateDashboardRequest_TerminationProtectionEnabled *smithy.Schema
-
-var CreateDashboardRequest_Widgets *smithy.Schema
-
-var CreateDashboardResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "CreateDashboardResponse",
-}, smithy.ShapeTypeStructure, 7)
-var CreateDashboardResponse_DashboardArn *smithy.Schema
-
-var CreateDashboardResponse_Name *smithy.Schema
-
-var CreateDashboardResponse_Type *smithy.Schema
-
-var CreateDashboardResponse_Widgets *smithy.Schema
-
-var CreateDashboardResponse_TagsList *smithy.Schema
-
-var CreateDashboardResponse_RefreshSchedule *smithy.Schema
-
-var CreateDashboardResponse_TerminationProtectionEnabled *smithy.Schema
-
-var CreateEventDataStoreRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "CreateEventDataStoreRequest",
-}, smithy.ShapeTypeStructure, 10)
-var CreateEventDataStoreRequest_Name *smithy.Schema
-
-var CreateEventDataStoreRequest_AdvancedEventSelectors *smithy.Schema
-
-var CreateEventDataStoreRequest_MultiRegionEnabled *smithy.Schema
-
-var CreateEventDataStoreRequest_OrganizationEnabled *smithy.Schema
-
-var CreateEventDataStoreRequest_RetentionPeriod *smithy.Schema
-
-var CreateEventDataStoreRequest_TerminationProtectionEnabled *smithy.Schema
-
-var CreateEventDataStoreRequest_TagsList *smithy.Schema
-
-var CreateEventDataStoreRequest_KmsKeyId *smithy.Schema
-
-var CreateEventDataStoreRequest_StartIngestion *smithy.Schema
-
-var CreateEventDataStoreRequest_BillingMode *smithy.Schema
-
-var CreateEventDataStoreResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "CreateEventDataStoreResponse",
-}, smithy.ShapeTypeStructure, 13)
-var CreateEventDataStoreResponse_EventDataStoreArn *smithy.Schema
-
-var CreateEventDataStoreResponse_Name *smithy.Schema
-
-var CreateEventDataStoreResponse_Status *smithy.Schema
-
-var CreateEventDataStoreResponse_AdvancedEventSelectors *smithy.Schema
-
-var CreateEventDataStoreResponse_MultiRegionEnabled *smithy.Schema
-
-var CreateEventDataStoreResponse_OrganizationEnabled *smithy.Schema
-
-var CreateEventDataStoreResponse_RetentionPeriod *smithy.Schema
-
-var CreateEventDataStoreResponse_TerminationProtectionEnabled *smithy.Schema
-
-var CreateEventDataStoreResponse_TagsList *smithy.Schema
-
-var CreateEventDataStoreResponse_CreatedTimestamp *smithy.Schema
-
-var CreateEventDataStoreResponse_UpdatedTimestamp *smithy.Schema
-
-var CreateEventDataStoreResponse_KmsKeyId *smithy.Schema
-
-var CreateEventDataStoreResponse_BillingMode *smithy.Schema
-
-var CreateTrailRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "CreateTrailRequest",
-}, smithy.ShapeTypeStructure, 13)
-var CreateTrailRequest_Name *smithy.Schema
-
-var CreateTrailRequest_S3BucketName *smithy.Schema
-
-var CreateTrailRequest_S3KeyPrefix *smithy.Schema
-
-var CreateTrailRequest_SnsTopicName *smithy.Schema
-
-var CreateTrailRequest_IncludeGlobalServiceEvents *smithy.Schema
-
-var CreateTrailRequest_IsMultiRegionTrail *smithy.Schema
-
-var CreateTrailRequest_EnableLogFileValidation *smithy.Schema
-
-var CreateTrailRequest_CloudWatchLogsLogGroupArn *smithy.Schema
-
-var CreateTrailRequest_CloudWatchLogsRoleArn *smithy.Schema
-
-var CreateTrailRequest_KmsKeyId *smithy.Schema
-
-var CreateTrailRequest_IsOrganizationTrail *smithy.Schema
-
-var CreateTrailRequest_TagsList *smithy.Schema
-
-var CreateTrailRequest_RecursiveLogging *smithy.Schema
-
-var CreateTrailResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "CreateTrailResponse",
-}, smithy.ShapeTypeStructure, 14)
-var CreateTrailResponse_Name *smithy.Schema
-
-var CreateTrailResponse_S3BucketName *smithy.Schema
-
-var CreateTrailResponse_S3KeyPrefix *smithy.Schema
-
-var CreateTrailResponse_SnsTopicName *smithy.Schema
-
-var CreateTrailResponse_SnsTopicARN *smithy.Schema
-
-var CreateTrailResponse_IncludeGlobalServiceEvents *smithy.Schema
-
-var CreateTrailResponse_IsMultiRegionTrail *smithy.Schema
-
-var CreateTrailResponse_TrailARN *smithy.Schema
-
-var CreateTrailResponse_LogFileValidationEnabled *smithy.Schema
-
-var CreateTrailResponse_CloudWatchLogsLogGroupArn *smithy.Schema
-
-var CreateTrailResponse_CloudWatchLogsRoleArn *smithy.Schema
-
-var CreateTrailResponse_KmsKeyId *smithy.Schema
-
-var CreateTrailResponse_IsOrganizationTrail *smithy.Schema
-
-var CreateTrailResponse_RecursiveLogging *smithy.Schema
-
-var DeleteChannelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "DeleteChannelRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteChannelRequest_Channel *smithy.Schema
-
-var DeleteChannelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "DeleteChannelResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteDashboardRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "DeleteDashboardRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDashboardRequest_DashboardId *smithy.Schema
-
-var DeleteDashboardResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "DeleteDashboardResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteEventDataStoreRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "DeleteEventDataStoreRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteEventDataStoreRequest_EventDataStore *smithy.Schema
-
-var DeleteEventDataStoreResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "DeleteEventDataStoreResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteResourcePolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "DeleteResourcePolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteResourcePolicyRequest_ResourceArn *smithy.Schema
-
-var DeleteResourcePolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "DeleteResourcePolicyResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteTrailRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "DeleteTrailRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteTrailRequest_Name *smithy.Schema
-
-var DeleteTrailResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "DeleteTrailResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeregisterOrganizationDelegatedAdminRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "DeregisterOrganizationDelegatedAdminRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeregisterOrganizationDelegatedAdminRequest_DelegatedAdminAccountId *smithy.Schema
-
-var DeregisterOrganizationDelegatedAdminResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "DeregisterOrganizationDelegatedAdminResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DescribeQueryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "DescribeQueryRequest",
-}, smithy.ShapeTypeStructure, 5)
-var DescribeQueryRequest_EventDataStore *smithy.Schema
-
-var DescribeQueryRequest_QueryId *smithy.Schema
-
-var DescribeQueryRequest_QueryAlias *smithy.Schema
-
-var DescribeQueryRequest_RefreshId *smithy.Schema
-
-var DescribeQueryRequest_EventDataStoreOwnerAccountId *smithy.Schema
-
-var DescribeQueryResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "DescribeQueryResponse",
-}, smithy.ShapeTypeStructure, 9)
-var DescribeQueryResponse_QueryId *smithy.Schema
-
-var DescribeQueryResponse_QueryString *smithy.Schema
-
-var DescribeQueryResponse_QueryStatus *smithy.Schema
-
-var DescribeQueryResponse_QueryStatistics *smithy.Schema
-
-var DescribeQueryResponse_ErrorMessage *smithy.Schema
-
-var DescribeQueryResponse_DeliveryS3Uri *smithy.Schema
-
-var DescribeQueryResponse_DeliveryStatus *smithy.Schema
-
-var DescribeQueryResponse_Prompt *smithy.Schema
-
-var DescribeQueryResponse_EventDataStoreOwnerAccountId *smithy.Schema
-
-var DescribeTrailsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "DescribeTrailsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeTrailsRequest_trailNameList *smithy.Schema
-
-var DescribeTrailsRequest_includeShadowTrails *smithy.Schema
-
-var DescribeTrailsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "DescribeTrailsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeTrailsResponse_trailList *smithy.Schema
-
-var DisableFederationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "DisableFederationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DisableFederationRequest_EventDataStore *smithy.Schema
-
-var DisableFederationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "DisableFederationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DisableFederationResponse_EventDataStoreArn *smithy.Schema
-
-var DisableFederationResponse_FederationStatus *smithy.Schema
-
-var EnableFederationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "EnableFederationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var EnableFederationRequest_EventDataStore *smithy.Schema
-
-var EnableFederationRequest_FederationRoleArn *smithy.Schema
-
-var EnableFederationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "EnableFederationResponse",
-}, smithy.ShapeTypeStructure, 3)
-var EnableFederationResponse_EventDataStoreArn *smithy.Schema
-
-var EnableFederationResponse_FederationStatus *smithy.Schema
-
-var EnableFederationResponse_FederationRoleArn *smithy.Schema
-
-var GenerateQueryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "GenerateQueryRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GenerateQueryRequest_EventDataStores *smithy.Schema
-
-var GenerateQueryRequest_Prompt *smithy.Schema
-
-var GenerateQueryResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "GenerateQueryResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GenerateQueryResponse_QueryStatement *smithy.Schema
-
-var GenerateQueryResponse_QueryAlias *smithy.Schema
-
-var GenerateQueryResponse_EventDataStoreOwnerAccountId *smithy.Schema
-
-var GetChannelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "GetChannelRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetChannelRequest_Channel *smithy.Schema
-
-var GetChannelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "GetChannelResponse",
-}, smithy.ShapeTypeStructure, 6)
-var GetChannelResponse_ChannelArn *smithy.Schema
-
-var GetChannelResponse_Name *smithy.Schema
-
-var GetChannelResponse_Source *smithy.Schema
-
-var GetChannelResponse_SourceConfig *smithy.Schema
-
-var GetChannelResponse_Destinations *smithy.Schema
-
-var GetChannelResponse_IngestionStatus *smithy.Schema
-
-var GetDashboardRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "GetDashboardRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetDashboardRequest_DashboardId *smithy.Schema
-
-var GetDashboardResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "GetDashboardResponse",
-}, smithy.ShapeTypeStructure, 10)
-var GetDashboardResponse_DashboardArn *smithy.Schema
-
-var GetDashboardResponse_Type *smithy.Schema
-
-var GetDashboardResponse_Status *smithy.Schema
-
-var GetDashboardResponse_Widgets *smithy.Schema
-
-var GetDashboardResponse_RefreshSchedule *smithy.Schema
-
-var GetDashboardResponse_CreatedTimestamp *smithy.Schema
-
-var GetDashboardResponse_UpdatedTimestamp *smithy.Schema
-
-var GetDashboardResponse_LastRefreshId *smithy.Schema
-
-var GetDashboardResponse_LastRefreshFailureReason *smithy.Schema
-
-var GetDashboardResponse_TerminationProtectionEnabled *smithy.Schema
-
-var GetEventConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "GetEventConfigurationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetEventConfigurationRequest_TrailName *smithy.Schema
-
-var GetEventConfigurationRequest_EventDataStore *smithy.Schema
-
-var GetEventConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "GetEventConfigurationResponse",
-}, smithy.ShapeTypeStructure, 5)
-var GetEventConfigurationResponse_TrailARN *smithy.Schema
-
-var GetEventConfigurationResponse_EventDataStoreArn *smithy.Schema
-
-var GetEventConfigurationResponse_MaxEventSize *smithy.Schema
-
-var GetEventConfigurationResponse_ContextKeySelectors *smithy.Schema
-
-var GetEventConfigurationResponse_AggregationConfigurations *smithy.Schema
-
-var GetEventDataStoreRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "GetEventDataStoreRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetEventDataStoreRequest_EventDataStore *smithy.Schema
-
-var GetEventDataStoreResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "GetEventDataStoreResponse",
-}, smithy.ShapeTypeStructure, 15)
-var GetEventDataStoreResponse_EventDataStoreArn *smithy.Schema
-
-var GetEventDataStoreResponse_Name *smithy.Schema
-
-var GetEventDataStoreResponse_Status *smithy.Schema
-
-var GetEventDataStoreResponse_AdvancedEventSelectors *smithy.Schema
-
-var GetEventDataStoreResponse_MultiRegionEnabled *smithy.Schema
-
-var GetEventDataStoreResponse_OrganizationEnabled *smithy.Schema
-
-var GetEventDataStoreResponse_RetentionPeriod *smithy.Schema
-
-var GetEventDataStoreResponse_TerminationProtectionEnabled *smithy.Schema
-
-var GetEventDataStoreResponse_CreatedTimestamp *smithy.Schema
-
-var GetEventDataStoreResponse_UpdatedTimestamp *smithy.Schema
-
-var GetEventDataStoreResponse_KmsKeyId *smithy.Schema
-
-var GetEventDataStoreResponse_BillingMode *smithy.Schema
-
-var GetEventDataStoreResponse_FederationStatus *smithy.Schema
-
-var GetEventDataStoreResponse_FederationRoleArn *smithy.Schema
-
-var GetEventDataStoreResponse_PartitionKeys *smithy.Schema
-
-var GetEventSelectorsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "GetEventSelectorsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetEventSelectorsRequest_TrailName *smithy.Schema
-
-var GetEventSelectorsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "GetEventSelectorsResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetEventSelectorsResponse_TrailARN *smithy.Schema
-
-var GetEventSelectorsResponse_EventSelectors *smithy.Schema
-
-var GetEventSelectorsResponse_AdvancedEventSelectors *smithy.Schema
-
-var GetImportRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "GetImportRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetImportRequest_ImportId *smithy.Schema
-
-var GetImportResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "GetImportResponse",
-}, smithy.ShapeTypeStructure, 9)
-var GetImportResponse_ImportId *smithy.Schema
-
-var GetImportResponse_Destinations *smithy.Schema
-
-var GetImportResponse_ImportSource *smithy.Schema
-
-var GetImportResponse_StartEventTime *smithy.Schema
-
-var GetImportResponse_EndEventTime *smithy.Schema
-
-var GetImportResponse_ImportStatus *smithy.Schema
-
-var GetImportResponse_CreatedTimestamp *smithy.Schema
-
-var GetImportResponse_UpdatedTimestamp *smithy.Schema
-
-var GetImportResponse_ImportStatistics *smithy.Schema
-
-var GetInsightSelectorsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "GetInsightSelectorsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetInsightSelectorsRequest_TrailName *smithy.Schema
-
-var GetInsightSelectorsRequest_EventDataStore *smithy.Schema
-
-var GetInsightSelectorsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "GetInsightSelectorsResponse",
-}, smithy.ShapeTypeStructure, 4)
-var GetInsightSelectorsResponse_TrailARN *smithy.Schema
-
-var GetInsightSelectorsResponse_InsightSelectors *smithy.Schema
-
-var GetInsightSelectorsResponse_EventDataStoreArn *smithy.Schema
-
-var GetInsightSelectorsResponse_InsightsDestination *smithy.Schema
-
-var GetQueryResultsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "GetQueryResultsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var GetQueryResultsRequest_EventDataStore *smithy.Schema
-
-var GetQueryResultsRequest_QueryId *smithy.Schema
-
-var GetQueryResultsRequest_NextToken *smithy.Schema
-
-var GetQueryResultsRequest_MaxQueryResults *smithy.Schema
-
-var GetQueryResultsRequest_EventDataStoreOwnerAccountId *smithy.Schema
-
-var GetQueryResultsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "GetQueryResultsResponse",
-}, smithy.ShapeTypeStructure, 5)
-var GetQueryResultsResponse_QueryStatus *smithy.Schema
-
-var GetQueryResultsResponse_QueryStatistics *smithy.Schema
-
-var GetQueryResultsResponse_QueryResultRows *smithy.Schema
-
-var GetQueryResultsResponse_NextToken *smithy.Schema
-
-var GetQueryResultsResponse_ErrorMessage *smithy.Schema
-
-var GetResourcePolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "GetResourcePolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetResourcePolicyRequest_ResourceArn *smithy.Schema
-
-var GetResourcePolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "GetResourcePolicyResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetResourcePolicyResponse_ResourceArn *smithy.Schema
-
-var GetResourcePolicyResponse_ResourcePolicy *smithy.Schema
-
-var GetResourcePolicyResponse_DelegatedAdminResourcePolicy *smithy.Schema
-
-var GetTrailRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "GetTrailRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetTrailRequest_Name *smithy.Schema
-
-var GetTrailResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "GetTrailResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetTrailResponse_Trail *smithy.Schema
-
-var GetTrailStatusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "GetTrailStatusRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetTrailStatusRequest_Name *smithy.Schema
-
-var GetTrailStatusResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "GetTrailStatusResponse",
-}, smithy.ShapeTypeStructure, 17)
-var GetTrailStatusResponse_IsLogging *smithy.Schema
-
-var GetTrailStatusResponse_LatestDeliveryError *smithy.Schema
-
-var GetTrailStatusResponse_LatestNotificationError *smithy.Schema
-
-var GetTrailStatusResponse_LatestDeliveryTime *smithy.Schema
-
-var GetTrailStatusResponse_LatestNotificationTime *smithy.Schema
-
-var GetTrailStatusResponse_StartLoggingTime *smithy.Schema
-
-var GetTrailStatusResponse_StopLoggingTime *smithy.Schema
-
-var GetTrailStatusResponse_LatestCloudWatchLogsDeliveryError *smithy.Schema
-
-var GetTrailStatusResponse_LatestCloudWatchLogsDeliveryTime *smithy.Schema
-
-var GetTrailStatusResponse_LatestDigestDeliveryTime *smithy.Schema
-
-var GetTrailStatusResponse_LatestDigestDeliveryError *smithy.Schema
-
-var GetTrailStatusResponse_LatestDeliveryAttemptTime *smithy.Schema
-
-var GetTrailStatusResponse_LatestNotificationAttemptTime *smithy.Schema
-
-var GetTrailStatusResponse_LatestNotificationAttemptSucceeded *smithy.Schema
-
-var GetTrailStatusResponse_LatestDeliveryAttemptSucceeded *smithy.Schema
-
-var GetTrailStatusResponse_TimeLoggingStarted *smithy.Schema
-
-var GetTrailStatusResponse_TimeLoggingStopped *smithy.Schema
-
-var ListChannelsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ListChannelsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListChannelsRequest_MaxResults *smithy.Schema
-
-var ListChannelsRequest_NextToken *smithy.Schema
-
-var ListChannelsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ListChannelsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListChannelsResponse_Channels *smithy.Schema
-
-var ListChannelsResponse_NextToken *smithy.Schema
-
-var ListDashboardsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ListDashboardsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListDashboardsRequest_NamePrefix *smithy.Schema
-
-var ListDashboardsRequest_Type *smithy.Schema
-
-var ListDashboardsRequest_NextToken *smithy.Schema
-
-var ListDashboardsRequest_MaxResults *smithy.Schema
-
-var ListDashboardsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ListDashboardsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListDashboardsResponse_Dashboards *smithy.Schema
-
-var ListDashboardsResponse_NextToken *smithy.Schema
-
-var ListEventDataStoresRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ListEventDataStoresRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListEventDataStoresRequest_NextToken *smithy.Schema
-
-var ListEventDataStoresRequest_MaxResults *smithy.Schema
-
-var ListEventDataStoresResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ListEventDataStoresResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListEventDataStoresResponse_EventDataStores *smithy.Schema
-
-var ListEventDataStoresResponse_NextToken *smithy.Schema
-
-var ListImportFailuresRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ListImportFailuresRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListImportFailuresRequest_ImportId *smithy.Schema
-
-var ListImportFailuresRequest_MaxResults *smithy.Schema
-
-var ListImportFailuresRequest_NextToken *smithy.Schema
-
-var ListImportFailuresResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ListImportFailuresResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListImportFailuresResponse_Failures *smithy.Schema
-
-var ListImportFailuresResponse_NextToken *smithy.Schema
-
-var ListImportsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ListImportsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListImportsRequest_MaxResults *smithy.Schema
-
-var ListImportsRequest_Destination *smithy.Schema
-
-var ListImportsRequest_ImportStatus *smithy.Schema
-
-var ListImportsRequest_NextToken *smithy.Schema
-
-var ListImportsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ListImportsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListImportsResponse_Imports *smithy.Schema
-
-var ListImportsResponse_NextToken *smithy.Schema
-
-var ListInsightsDataRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ListInsightsDataRequest",
-}, smithy.ShapeTypeStructure, 7)
-var ListInsightsDataRequest_InsightSource *smithy.Schema
-
-var ListInsightsDataRequest_DataType *smithy.Schema
-
-var ListInsightsDataRequest_Dimensions *smithy.Schema
-
-var ListInsightsDataRequest_StartTime *smithy.Schema
-
-var ListInsightsDataRequest_EndTime *smithy.Schema
-
-var ListInsightsDataRequest_MaxResults *smithy.Schema
-
-var ListInsightsDataRequest_NextToken *smithy.Schema
-
-var ListInsightsDataResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ListInsightsDataResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListInsightsDataResponse_Events *smithy.Schema
-
-var ListInsightsDataResponse_NextToken *smithy.Schema
-
-var ListInsightsMetricDataRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ListInsightsMetricDataRequest",
-}, smithy.ShapeTypeStructure, 11)
-var ListInsightsMetricDataRequest_TrailName *smithy.Schema
-
-var ListInsightsMetricDataRequest_EventSource *smithy.Schema
-
-var ListInsightsMetricDataRequest_EventName *smithy.Schema
-
-var ListInsightsMetricDataRequest_InsightType *smithy.Schema
-
-var ListInsightsMetricDataRequest_ErrorCode *smithy.Schema
-
-var ListInsightsMetricDataRequest_StartTime *smithy.Schema
-
-var ListInsightsMetricDataRequest_EndTime *smithy.Schema
-
-var ListInsightsMetricDataRequest_Period *smithy.Schema
-
-var ListInsightsMetricDataRequest_DataType *smithy.Schema
-
-var ListInsightsMetricDataRequest_MaxResults *smithy.Schema
-
-var ListInsightsMetricDataRequest_NextToken *smithy.Schema
-
-var ListInsightsMetricDataResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ListInsightsMetricDataResponse",
-}, smithy.ShapeTypeStructure, 8)
-var ListInsightsMetricDataResponse_TrailARN *smithy.Schema
-
-var ListInsightsMetricDataResponse_EventSource *smithy.Schema
-
-var ListInsightsMetricDataResponse_EventName *smithy.Schema
-
-var ListInsightsMetricDataResponse_InsightType *smithy.Schema
-
-var ListInsightsMetricDataResponse_ErrorCode *smithy.Schema
-
-var ListInsightsMetricDataResponse_Timestamps *smithy.Schema
-
-var ListInsightsMetricDataResponse_Values *smithy.Schema
-
-var ListInsightsMetricDataResponse_NextToken *smithy.Schema
-
-var ListPublicKeysRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ListPublicKeysRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListPublicKeysRequest_StartTime *smithy.Schema
-
-var ListPublicKeysRequest_EndTime *smithy.Schema
-
-var ListPublicKeysRequest_NextToken *smithy.Schema
-
-var ListPublicKeysResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ListPublicKeysResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListPublicKeysResponse_PublicKeyList *smithy.Schema
-
-var ListPublicKeysResponse_NextToken *smithy.Schema
-
-var ListQueriesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ListQueriesRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ListQueriesRequest_EventDataStore *smithy.Schema
-
-var ListQueriesRequest_NextToken *smithy.Schema
-
-var ListQueriesRequest_MaxResults *smithy.Schema
-
-var ListQueriesRequest_StartTime *smithy.Schema
-
-var ListQueriesRequest_EndTime *smithy.Schema
-
-var ListQueriesRequest_QueryStatus *smithy.Schema
-
-var ListQueriesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ListQueriesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListQueriesResponse_Queries *smithy.Schema
-
-var ListQueriesResponse_NextToken *smithy.Schema
-
-var ListTagsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ListTagsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListTagsRequest_ResourceIdList *smithy.Schema
-
-var ListTagsRequest_NextToken *smithy.Schema
-
-var ListTagsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ListTagsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTagsResponse_ResourceTagList *smithy.Schema
-
-var ListTagsResponse_NextToken *smithy.Schema
-
-var ListTrailsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ListTrailsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTrailsRequest_NextToken *smithy.Schema
-
-var ListTrailsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "ListTrailsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTrailsResponse_Trails *smithy.Schema
-
-var ListTrailsResponse_NextToken *smithy.Schema
-
-var LookupEventsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "LookupEventsRequest",
-}, smithy.ShapeTypeStructure, 6)
-var LookupEventsRequest_LookupAttributes *smithy.Schema
-
-var LookupEventsRequest_StartTime *smithy.Schema
-
-var LookupEventsRequest_EndTime *smithy.Schema
-
-var LookupEventsRequest_EventCategory *smithy.Schema
-
-var LookupEventsRequest_MaxResults *smithy.Schema
-
-var LookupEventsRequest_NextToken *smithy.Schema
-
-var LookupEventsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "LookupEventsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var LookupEventsResponse_Events *smithy.Schema
-
-var LookupEventsResponse_NextToken *smithy.Schema
-
-var PutEventConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "PutEventConfigurationRequest",
-}, smithy.ShapeTypeStructure, 5)
-var PutEventConfigurationRequest_TrailName *smithy.Schema
-
-var PutEventConfigurationRequest_EventDataStore *smithy.Schema
-
-var PutEventConfigurationRequest_MaxEventSize *smithy.Schema
-
-var PutEventConfigurationRequest_ContextKeySelectors *smithy.Schema
-
-var PutEventConfigurationRequest_AggregationConfigurations *smithy.Schema
-
-var PutEventConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "PutEventConfigurationResponse",
-}, smithy.ShapeTypeStructure, 5)
-var PutEventConfigurationResponse_TrailARN *smithy.Schema
-
-var PutEventConfigurationResponse_EventDataStoreArn *smithy.Schema
-
-var PutEventConfigurationResponse_MaxEventSize *smithy.Schema
-
-var PutEventConfigurationResponse_ContextKeySelectors *smithy.Schema
-
-var PutEventConfigurationResponse_AggregationConfigurations *smithy.Schema
-
-var PutEventSelectorsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "PutEventSelectorsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var PutEventSelectorsRequest_TrailName *smithy.Schema
-
-var PutEventSelectorsRequest_EventSelectors *smithy.Schema
-
-var PutEventSelectorsRequest_AdvancedEventSelectors *smithy.Schema
-
-var PutEventSelectorsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "PutEventSelectorsResponse",
-}, smithy.ShapeTypeStructure, 3)
-var PutEventSelectorsResponse_TrailARN *smithy.Schema
-
-var PutEventSelectorsResponse_EventSelectors *smithy.Schema
-
-var PutEventSelectorsResponse_AdvancedEventSelectors *smithy.Schema
-
-var PutInsightSelectorsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "PutInsightSelectorsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var PutInsightSelectorsRequest_TrailName *smithy.Schema
-
-var PutInsightSelectorsRequest_InsightSelectors *smithy.Schema
-
-var PutInsightSelectorsRequest_EventDataStore *smithy.Schema
-
-var PutInsightSelectorsRequest_InsightsDestination *smithy.Schema
-
-var PutInsightSelectorsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "PutInsightSelectorsResponse",
-}, smithy.ShapeTypeStructure, 4)
-var PutInsightSelectorsResponse_TrailARN *smithy.Schema
-
-var PutInsightSelectorsResponse_InsightSelectors *smithy.Schema
-
-var PutInsightSelectorsResponse_EventDataStoreArn *smithy.Schema
-
-var PutInsightSelectorsResponse_InsightsDestination *smithy.Schema
-
-var PutResourcePolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "PutResourcePolicyRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutResourcePolicyRequest_ResourceArn *smithy.Schema
-
-var PutResourcePolicyRequest_ResourcePolicy *smithy.Schema
-
-var PutResourcePolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "PutResourcePolicyResponse",
-}, smithy.ShapeTypeStructure, 3)
-var PutResourcePolicyResponse_ResourceArn *smithy.Schema
-
-var PutResourcePolicyResponse_ResourcePolicy *smithy.Schema
-
-var PutResourcePolicyResponse_DelegatedAdminResourcePolicy *smithy.Schema
-
-var RegisterOrganizationDelegatedAdminRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "RegisterOrganizationDelegatedAdminRequest",
-}, smithy.ShapeTypeStructure, 1)
-var RegisterOrganizationDelegatedAdminRequest_MemberAccountId *smithy.Schema
-
-var RegisterOrganizationDelegatedAdminResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "RegisterOrganizationDelegatedAdminResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var RemoveTagsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "RemoveTagsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var RemoveTagsRequest_ResourceId *smithy.Schema
-
-var RemoveTagsRequest_TagsList *smithy.Schema
-
-var RemoveTagsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "RemoveTagsResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var RestoreEventDataStoreRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "RestoreEventDataStoreRequest",
-}, smithy.ShapeTypeStructure, 1)
-var RestoreEventDataStoreRequest_EventDataStore *smithy.Schema
-
-var RestoreEventDataStoreResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "RestoreEventDataStoreResponse",
-}, smithy.ShapeTypeStructure, 12)
-var RestoreEventDataStoreResponse_EventDataStoreArn *smithy.Schema
-
-var RestoreEventDataStoreResponse_Name *smithy.Schema
-
-var RestoreEventDataStoreResponse_Status *smithy.Schema
-
-var RestoreEventDataStoreResponse_AdvancedEventSelectors *smithy.Schema
-
-var RestoreEventDataStoreResponse_MultiRegionEnabled *smithy.Schema
-
-var RestoreEventDataStoreResponse_OrganizationEnabled *smithy.Schema
-
-var RestoreEventDataStoreResponse_RetentionPeriod *smithy.Schema
-
-var RestoreEventDataStoreResponse_TerminationProtectionEnabled *smithy.Schema
-
-var RestoreEventDataStoreResponse_CreatedTimestamp *smithy.Schema
-
-var RestoreEventDataStoreResponse_UpdatedTimestamp *smithy.Schema
-
-var RestoreEventDataStoreResponse_KmsKeyId *smithy.Schema
-
-var RestoreEventDataStoreResponse_BillingMode *smithy.Schema
-
-var SearchSampleQueriesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "SearchSampleQueriesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var SearchSampleQueriesRequest_SearchPhrase *smithy.Schema
-
-var SearchSampleQueriesRequest_MaxResults *smithy.Schema
-
-var SearchSampleQueriesRequest_NextToken *smithy.Schema
-
-var SearchSampleQueriesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "SearchSampleQueriesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var SearchSampleQueriesResponse_SearchResults *smithy.Schema
-
-var SearchSampleQueriesResponse_NextToken *smithy.Schema
-
-var StartDashboardRefreshRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "StartDashboardRefreshRequest",
-}, smithy.ShapeTypeStructure, 2)
-var StartDashboardRefreshRequest_DashboardId *smithy.Schema
-
-var StartDashboardRefreshRequest_QueryParameterValues *smithy.Schema
-
-var StartDashboardRefreshResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "StartDashboardRefreshResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartDashboardRefreshResponse_RefreshId *smithy.Schema
-
-var StartEventDataStoreIngestionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "StartEventDataStoreIngestionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StartEventDataStoreIngestionRequest_EventDataStore *smithy.Schema
-
-var StartEventDataStoreIngestionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "StartEventDataStoreIngestionResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var StartImportRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "StartImportRequest",
-}, smithy.ShapeTypeStructure, 5)
-var StartImportRequest_Destinations *smithy.Schema
-
-var StartImportRequest_ImportSource *smithy.Schema
-
-var StartImportRequest_StartEventTime *smithy.Schema
-
-var StartImportRequest_EndEventTime *smithy.Schema
-
-var StartImportRequest_ImportId *smithy.Schema
-
-var StartImportResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "StartImportResponse",
-}, smithy.ShapeTypeStructure, 8)
-var StartImportResponse_ImportId *smithy.Schema
-
-var StartImportResponse_Destinations *smithy.Schema
-
-var StartImportResponse_ImportSource *smithy.Schema
-
-var StartImportResponse_StartEventTime *smithy.Schema
-
-var StartImportResponse_EndEventTime *smithy.Schema
-
-var StartImportResponse_ImportStatus *smithy.Schema
-
-var StartImportResponse_CreatedTimestamp *smithy.Schema
-
-var StartImportResponse_UpdatedTimestamp *smithy.Schema
-
-var StartLoggingRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "StartLoggingRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StartLoggingRequest_Name *smithy.Schema
-
-var StartLoggingResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "StartLoggingResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var StartQueryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "StartQueryRequest",
-}, smithy.ShapeTypeStructure, 5)
-var StartQueryRequest_QueryStatement *smithy.Schema
-
-var StartQueryRequest_DeliveryS3Uri *smithy.Schema
-
-var StartQueryRequest_QueryAlias *smithy.Schema
-
-var StartQueryRequest_QueryParameters *smithy.Schema
-
-var StartQueryRequest_EventDataStoreOwnerAccountId *smithy.Schema
-
-var StartQueryResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "StartQueryResponse",
-}, smithy.ShapeTypeStructure, 2)
-var StartQueryResponse_QueryId *smithy.Schema
-
-var StartQueryResponse_EventDataStoreOwnerAccountId *smithy.Schema
-
-var StopEventDataStoreIngestionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "StopEventDataStoreIngestionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StopEventDataStoreIngestionRequest_EventDataStore *smithy.Schema
-
-var StopEventDataStoreIngestionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "StopEventDataStoreIngestionResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var StopImportRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "StopImportRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StopImportRequest_ImportId *smithy.Schema
-
-var StopImportResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "StopImportResponse",
-}, smithy.ShapeTypeStructure, 9)
-var StopImportResponse_ImportId *smithy.Schema
-
-var StopImportResponse_ImportSource *smithy.Schema
-
-var StopImportResponse_Destinations *smithy.Schema
-
-var StopImportResponse_ImportStatus *smithy.Schema
-
-var StopImportResponse_CreatedTimestamp *smithy.Schema
-
-var StopImportResponse_UpdatedTimestamp *smithy.Schema
-
-var StopImportResponse_StartEventTime *smithy.Schema
-
-var StopImportResponse_EndEventTime *smithy.Schema
-
-var StopImportResponse_ImportStatistics *smithy.Schema
-
-var StopLoggingRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "StopLoggingRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StopLoggingRequest_Name *smithy.Schema
-
-var StopLoggingResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "StopLoggingResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateChannelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "UpdateChannelRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateChannelRequest_Channel *smithy.Schema
-
-var UpdateChannelRequest_Destinations *smithy.Schema
-
-var UpdateChannelRequest_Name *smithy.Schema
-
-var UpdateChannelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "UpdateChannelResponse",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateChannelResponse_ChannelArn *smithy.Schema
-
-var UpdateChannelResponse_Name *smithy.Schema
-
-var UpdateChannelResponse_Source *smithy.Schema
-
-var UpdateChannelResponse_Destinations *smithy.Schema
-
-var UpdateDashboardRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "UpdateDashboardRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateDashboardRequest_DashboardId *smithy.Schema
-
-var UpdateDashboardRequest_Widgets *smithy.Schema
-
-var UpdateDashboardRequest_RefreshSchedule *smithy.Schema
-
-var UpdateDashboardRequest_TerminationProtectionEnabled *smithy.Schema
-
-var UpdateDashboardResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "UpdateDashboardResponse",
-}, smithy.ShapeTypeStructure, 8)
-var UpdateDashboardResponse_DashboardArn *smithy.Schema
-
-var UpdateDashboardResponse_Name *smithy.Schema
-
-var UpdateDashboardResponse_Type *smithy.Schema
-
-var UpdateDashboardResponse_Widgets *smithy.Schema
-
-var UpdateDashboardResponse_RefreshSchedule *smithy.Schema
-
-var UpdateDashboardResponse_TerminationProtectionEnabled *smithy.Schema
-
-var UpdateDashboardResponse_CreatedTimestamp *smithy.Schema
-
-var UpdateDashboardResponse_UpdatedTimestamp *smithy.Schema
-
-var UpdateEventDataStoreRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "UpdateEventDataStoreRequest",
-}, smithy.ShapeTypeStructure, 9)
-var UpdateEventDataStoreRequest_EventDataStore *smithy.Schema
-
-var UpdateEventDataStoreRequest_Name *smithy.Schema
-
-var UpdateEventDataStoreRequest_AdvancedEventSelectors *smithy.Schema
-
-var UpdateEventDataStoreRequest_MultiRegionEnabled *smithy.Schema
-
-var UpdateEventDataStoreRequest_OrganizationEnabled *smithy.Schema
-
-var UpdateEventDataStoreRequest_RetentionPeriod *smithy.Schema
-
-var UpdateEventDataStoreRequest_TerminationProtectionEnabled *smithy.Schema
-
-var UpdateEventDataStoreRequest_KmsKeyId *smithy.Schema
-
-var UpdateEventDataStoreRequest_BillingMode *smithy.Schema
-
-var UpdateEventDataStoreResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "UpdateEventDataStoreResponse",
-}, smithy.ShapeTypeStructure, 14)
-var UpdateEventDataStoreResponse_EventDataStoreArn *smithy.Schema
-
-var UpdateEventDataStoreResponse_Name *smithy.Schema
-
-var UpdateEventDataStoreResponse_Status *smithy.Schema
-
-var UpdateEventDataStoreResponse_AdvancedEventSelectors *smithy.Schema
-
-var UpdateEventDataStoreResponse_MultiRegionEnabled *smithy.Schema
-
-var UpdateEventDataStoreResponse_OrganizationEnabled *smithy.Schema
-
-var UpdateEventDataStoreResponse_RetentionPeriod *smithy.Schema
-
-var UpdateEventDataStoreResponse_TerminationProtectionEnabled *smithy.Schema
-
-var UpdateEventDataStoreResponse_CreatedTimestamp *smithy.Schema
-
-var UpdateEventDataStoreResponse_UpdatedTimestamp *smithy.Schema
-
-var UpdateEventDataStoreResponse_KmsKeyId *smithy.Schema
-
-var UpdateEventDataStoreResponse_BillingMode *smithy.Schema
-
-var UpdateEventDataStoreResponse_FederationStatus *smithy.Schema
-
-var UpdateEventDataStoreResponse_FederationRoleArn *smithy.Schema
-
-var UpdateTrailRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "UpdateTrailRequest",
-}, smithy.ShapeTypeStructure, 12)
-var UpdateTrailRequest_Name *smithy.Schema
-
-var UpdateTrailRequest_S3BucketName *smithy.Schema
-
-var UpdateTrailRequest_S3KeyPrefix *smithy.Schema
-
-var UpdateTrailRequest_SnsTopicName *smithy.Schema
-
-var UpdateTrailRequest_IncludeGlobalServiceEvents *smithy.Schema
-
-var UpdateTrailRequest_IsMultiRegionTrail *smithy.Schema
-
-var UpdateTrailRequest_EnableLogFileValidation *smithy.Schema
-
-var UpdateTrailRequest_CloudWatchLogsLogGroupArn *smithy.Schema
-
-var UpdateTrailRequest_CloudWatchLogsRoleArn *smithy.Schema
-
-var UpdateTrailRequest_KmsKeyId *smithy.Schema
-
-var UpdateTrailRequest_IsOrganizationTrail *smithy.Schema
-
-var UpdateTrailRequest_RecursiveLogging *smithy.Schema
-
-var UpdateTrailResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtrail",
-	Name:      "UpdateTrailResponse",
-}, smithy.ShapeTypeStructure, 14)
-var UpdateTrailResponse_Name *smithy.Schema
-
-var UpdateTrailResponse_S3BucketName *smithy.Schema
-
-var UpdateTrailResponse_S3KeyPrefix *smithy.Schema
-
-var UpdateTrailResponse_SnsTopicName *smithy.Schema
-
-var UpdateTrailResponse_SnsTopicARN *smithy.Schema
-
-var UpdateTrailResponse_IncludeGlobalServiceEvents *smithy.Schema
-
-var UpdateTrailResponse_IsMultiRegionTrail *smithy.Schema
-
-var UpdateTrailResponse_TrailARN *smithy.Schema
-
-var UpdateTrailResponse_LogFileValidationEnabled *smithy.Schema
-
-var UpdateTrailResponse_CloudWatchLogsLogGroupArn *smithy.Schema
-
-var UpdateTrailResponse_CloudWatchLogsRoleArn *smithy.Schema
-
-var UpdateTrailResponse_KmsKeyId *smithy.Schema
-
-var UpdateTrailResponse_IsOrganizationTrail *smithy.Schema
-
-var UpdateTrailResponse_RecursiveLogging *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _ErrorMessage)
-
-	AccountHasOngoingImportException_Message = AccountHasOngoingImportException.AddMember("Message", _ErrorMessage)
-
-	AccountNotFoundException_Message = AccountNotFoundException.AddMember("Message", _ErrorMessage)
-
-	AccountNotRegisteredException_Message = AccountNotRegisteredException.AddMember("Message", _ErrorMessage)
-
-	AccountRegisteredException_Message = AccountRegisteredException.AddMember("Message", _ErrorMessage)
-
-	_Operator_member = _Operator.AddMember("member", _OperatorValue)
-
-	AdvancedFieldSelector_Field = AdvancedFieldSelector.AddMember("Field", _SelectorField)
-
-	AdvancedFieldSelector_Equals = AdvancedFieldSelector.AddMember("Equals", _Operator)
-
-	AdvancedFieldSelector_StartsWith = AdvancedFieldSelector.AddMember("StartsWith", _Operator)
-
-	AdvancedFieldSelector_EndsWith = AdvancedFieldSelector.AddMember("EndsWith", _Operator)
-
-	AdvancedFieldSelector_NotEquals = AdvancedFieldSelector.AddMember("NotEquals", _Operator)
-
-	AdvancedFieldSelector_NotStartsWith = AdvancedFieldSelector.AddMember("NotStartsWith", _Operator)
-
-	AdvancedFieldSelector_NotEndsWith = AdvancedFieldSelector.AddMember("NotEndsWith", _Operator)
-
-	_AdvancedFieldSelectors_member = _AdvancedFieldSelectors.AddMember("member", AdvancedFieldSelector)
-
-	AdvancedEventSelector_Name = AdvancedEventSelector.AddMember("Name", _SelectorName)
-
-	AdvancedEventSelector_FieldSelectors = AdvancedEventSelector.AddMember("FieldSelectors", _AdvancedFieldSelectors)
-
-	_AdvancedEventSelectors_member = _AdvancedEventSelectors.AddMember("member", AdvancedEventSelector)
-
-	Template_API_ACTIVITY = Template.AddMember("API_ACTIVITY", smithyprelude.Unit)
-
-	Template_RESOURCE_ACCESS = Template.AddMember("RESOURCE_ACCESS", smithyprelude.Unit)
-
-	Template_USER_ACTIONS = Template.AddMember("USER_ACTIONS", smithyprelude.Unit)
-
-	_Templates_member = _Templates.AddMember("member", Template)
-
-	EventCategoryAggregation_Data = EventCategoryAggregation.AddMember("Data", smithyprelude.Unit)
-
-	AggregationConfiguration_Templates = AggregationConfiguration.AddMember("Templates", _Templates)
-
-	AggregationConfiguration_EventCategory = AggregationConfiguration.AddMember("EventCategory", EventCategoryAggregation)
-
-	_AggregationConfigurations_member = _AggregationConfigurations.AddMember("member", AggregationConfiguration)
-
-	BillingMode_EXTENDABLE_RETENTION_PRICING = BillingMode.AddMember("EXTENDABLE_RETENTION_PRICING", smithyprelude.Unit)
-
-	BillingMode_FIXED_RETENTION_PRICING = BillingMode.AddMember("FIXED_RETENTION_PRICING", smithyprelude.Unit)
-
-	CannotDelegateManagementAccountException_Message = CannotDelegateManagementAccountException.AddMember("Message", _ErrorMessage)
-
-	Channel_ChannelArn = Channel.AddMember("ChannelArn", _ChannelArn)
-
-	Channel_Name = Channel.AddMember("Name", _ChannelName)
-
-	ChannelAlreadyExistsException_Message = ChannelAlreadyExistsException.AddMember("Message", _ErrorMessage)
-
-	ChannelARNInvalidException_Message = ChannelARNInvalidException.AddMember("Message", _ErrorMessage)
-
-	ChannelExistsForEDSException_Message = ChannelExistsForEDSException.AddMember("Message", _ErrorMessage)
-
-	ChannelMaxLimitExceededException_Message = ChannelMaxLimitExceededException.AddMember("Message", _ErrorMessage)
-
-	ChannelNotFoundException_Message = ChannelNotFoundException.AddMember("Message", _ErrorMessage)
-
-	_Channels_member = _Channels.AddMember("member", Channel)
-
-	CloudTrailAccessNotEnabledException_Message = CloudTrailAccessNotEnabledException.AddMember("Message", _ErrorMessage)
-
-	CloudTrailARNInvalidException_Message = CloudTrailARNInvalidException.AddMember("Message", _ErrorMessage)
-
-	CloudTrailInvalidClientTokenIdException_Message = CloudTrailInvalidClientTokenIdException.AddMember("Message", _ErrorMessage)
-
-	CloudWatchLogsDeliveryUnavailableException_Message = CloudWatchLogsDeliveryUnavailableException.AddMember("Message", _ErrorMessage)
-
-	ConcurrentModificationException_Message = ConcurrentModificationException.AddMember("Message", _ErrorMessage)
-
-	ConflictException_Message = ConflictException.AddMember("Message", _ErrorMessage)
-
-	Type_TagContext = Type.AddMember("TagContext", smithyprelude.Unit)
-
-	Type_RequestContext = Type.AddMember("RequestContext", smithyprelude.Unit)
-
-	_OperatorTargetList_member = _OperatorTargetList.AddMember("member", _OperatorTargetListMember)
-
-	ContextKeySelector_Type = ContextKeySelector.AddMember("Type", Type)
-
-	ContextKeySelector_Equals = ContextKeySelector.AddMember("Equals", _OperatorTargetList)
-
-	_ContextKeySelectors_member = _ContextKeySelectors.AddMember("member", ContextKeySelector)
-
-	DashboardType_MANAGED = DashboardType.AddMember("MANAGED", smithyprelude.Unit)
-
-	DashboardType_CUSTOM = DashboardType.AddMember("CUSTOM", smithyprelude.Unit)
-
-	DashboardDetail_DashboardArn = DashboardDetail.AddMember("DashboardArn", _DashboardArn)
-
-	DashboardDetail_Type = DashboardDetail.AddMember("Type", DashboardType)
-
-	_Dashboards_member = _Dashboards.AddMember("member", DashboardDetail)
-
-	DashboardStatus_CREATING = DashboardStatus.AddMember("CREATING", smithyprelude.Unit)
-
-	DashboardStatus_CREATED = DashboardStatus.AddMember("CREATED", smithyprelude.Unit)
-
-	DashboardStatus_UPDATING = DashboardStatus.AddMember("UPDATING", smithyprelude.Unit)
-
-	DashboardStatus_UPDATED = DashboardStatus.AddMember("UPDATED", smithyprelude.Unit)
-
-	DashboardStatus_DELETING = DashboardStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	_DataResourceValues_member = _DataResourceValues.AddMember("member", _String)
-
-	DataResource_Type = DataResource.AddMember("Type", _String)
-
-	DataResource_Values = DataResource.AddMember("Values", _DataResourceValues)
-
-	_DataResources_member = _DataResources.AddMember("member", DataResource)
-
-	DelegatedAdminAccountLimitExceededException_Message = DelegatedAdminAccountLimitExceededException.AddMember("Message", _ErrorMessage)
-
-	DeliveryStatus_SUCCESS = DeliveryStatus.AddMember("SUCCESS", smithyprelude.Unit)
-
-	DeliveryStatus_FAILED = DeliveryStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	DeliveryStatus_FAILED_SIGNING_FILE = DeliveryStatus.AddMember("FAILED_SIGNING_FILE", smithyprelude.Unit)
-
-	DeliveryStatus_PENDING = DeliveryStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	DeliveryStatus_RESOURCE_NOT_FOUND = DeliveryStatus.AddMember("RESOURCE_NOT_FOUND", smithyprelude.Unit)
-
-	DeliveryStatus_ACCESS_DENIED = DeliveryStatus.AddMember("ACCESS_DENIED", smithyprelude.Unit)
-
-	DeliveryStatus_ACCESS_DENIED_SIGNING_FILE = DeliveryStatus.AddMember("ACCESS_DENIED_SIGNING_FILE", smithyprelude.Unit)
-
-	DeliveryStatus_CANCELLED = DeliveryStatus.AddMember("CANCELLED", smithyprelude.Unit)
-
-	DeliveryStatus_UNKNOWN = DeliveryStatus.AddMember("UNKNOWN", smithyprelude.Unit)
-
-	DestinationType_EVENT_DATA_STORE = DestinationType.AddMember("EVENT_DATA_STORE", smithyprelude.Unit)
-
-	DestinationType_AWS_SERVICE = DestinationType.AddMember("AWS_SERVICE", smithyprelude.Unit)
-
-	Destination_Type = Destination.AddMember("Type", DestinationType)
-
-	Destination_Location = Destination.AddMember("Location", _Location)
-
-	_Destinations_member = _Destinations.AddMember("member", Destination)
-
-	Resource_ResourceType = Resource.AddMember("ResourceType", _String)
-
-	Resource_ResourceName = Resource.AddMember("ResourceName", _String)
-
-	_ResourceList_member = _ResourceList.AddMember("member", Resource)
-
-	Event_EventId = Event.AddMember("EventId", _String)
-
-	Event_EventName = Event.AddMember("EventName", _String)
-
-	Event_ReadOnly = Event.AddMember("ReadOnly", _String)
-
-	Event_AccessKeyId = Event.AddMember("AccessKeyId", _String)
-
-	Event_EventTime = Event.AddMember("EventTime", _Date)
-
-	Event_EventSource = Event.AddMember("EventSource", _String)
-
-	Event_Username = Event.AddMember("Username", _String)
-
-	Event_Resources = Event.AddMember("Resources", _ResourceList)
-
-	Event_CloudTrailEvent = Event.AddMember("CloudTrailEvent", _String)
-
-	EventCategory_Insight = EventCategory.AddMember("Insight", smithyprelude.Unit)
-
-	EventDataStoreStatus_CREATED = EventDataStoreStatus.AddMember("CREATED", smithyprelude.Unit)
-
-	EventDataStoreStatus_ENABLED = EventDataStoreStatus.AddMember("ENABLED", smithyprelude.Unit)
-
-	EventDataStoreStatus_PENDING_DELETION = EventDataStoreStatus.AddMember("PENDING_DELETION", smithyprelude.Unit)
-
-	EventDataStoreStatus_STARTING_INGESTION = EventDataStoreStatus.AddMember("STARTING_INGESTION", smithyprelude.Unit)
-
-	EventDataStoreStatus_STOPPING_INGESTION = EventDataStoreStatus.AddMember("STOPPING_INGESTION", smithyprelude.Unit)
-
-	EventDataStoreStatus_STOPPED_INGESTION = EventDataStoreStatus.AddMember("STOPPED_INGESTION", smithyprelude.Unit)
-
-	EventDataStore_EventDataStoreArn = EventDataStore.AddMember("EventDataStoreArn", _EventDataStoreArn)
-
-	EventDataStore_Name = EventDataStore.AddMember("Name", _EventDataStoreName)
-
-	EventDataStore_TerminationProtectionEnabled = EventDataStore.AddMember("TerminationProtectionEnabled", _TerminationProtectionEnabled)
-
-	EventDataStore_Status = EventDataStore.AddMember("Status", EventDataStoreStatus)
-
-	EventDataStore_AdvancedEventSelectors = EventDataStore.AddMember("AdvancedEventSelectors", _AdvancedEventSelectors)
-
-	EventDataStore_MultiRegionEnabled = EventDataStore.AddMember("MultiRegionEnabled", _Boolean)
-
-	EventDataStore_OrganizationEnabled = EventDataStore.AddMember("OrganizationEnabled", _Boolean)
-
-	EventDataStore_RetentionPeriod = EventDataStore.AddMember("RetentionPeriod", _RetentionPeriod)
-
-	EventDataStore_CreatedTimestamp = EventDataStore.AddMember("CreatedTimestamp", _Date)
-
-	EventDataStore_UpdatedTimestamp = EventDataStore.AddMember("UpdatedTimestamp", _Date)
-
-	EventDataStoreAlreadyExistsException_Message = EventDataStoreAlreadyExistsException.AddMember("Message", _ErrorMessage)
-
-	EventDataStoreARNInvalidException_Message = EventDataStoreARNInvalidException.AddMember("Message", _ErrorMessage)
-
-	EventDataStoreFederationEnabledException_Message = EventDataStoreFederationEnabledException.AddMember("Message", _ErrorMessage)
-
-	EventDataStoreHasOngoingImportException_Message = EventDataStoreHasOngoingImportException.AddMember("Message", _ErrorMessage)
-
-	_EventDataStoreList_member = _EventDataStoreList.AddMember("member", _EventDataStoreArn)
-
-	EventDataStoreMaxLimitExceededException_Message = EventDataStoreMaxLimitExceededException.AddMember("Message", _ErrorMessage)
-
-	EventDataStoreNotFoundException_Message = EventDataStoreNotFoundException.AddMember("Message", _ErrorMessage)
-
-	_EventDataStores_member = _EventDataStores.AddMember("member", EventDataStore)
-
-	EventDataStoreTerminationProtectedException_Message = EventDataStoreTerminationProtectedException.AddMember("Message", _ErrorMessage)
-
-	ReadWriteType_ReadOnly = ReadWriteType.AddMember("ReadOnly", smithyprelude.Unit)
-
-	ReadWriteType_WriteOnly = ReadWriteType.AddMember("WriteOnly", smithyprelude.Unit)
-
-	ReadWriteType_All = ReadWriteType.AddMember("All", smithyprelude.Unit)
-
-	_ExcludeManagementEventSources_member = _ExcludeManagementEventSources.AddMember("member", _String)
-
-	EventSelector_ReadWriteType = EventSelector.AddMember("ReadWriteType", ReadWriteType)
-
-	EventSelector_IncludeManagementEvents = EventSelector.AddMember("IncludeManagementEvents", _Boolean)
-
-	EventSelector_DataResources = EventSelector.AddMember("DataResources", _DataResources)
-
-	EventSelector_ExcludeManagementEventSources = EventSelector.AddMember("ExcludeManagementEventSources", _ExcludeManagementEventSources)
-
-	_EventSelectors_member = _EventSelectors.AddMember("member", EventSelector)
-
-	_EventsList_member = _EventsList.AddMember("member", Event)
-
-	FederationStatus_ENABLING = FederationStatus.AddMember("ENABLING", smithyprelude.Unit)
-
-	FederationStatus_ENABLED = FederationStatus.AddMember("ENABLED", smithyprelude.Unit)
-
-	FederationStatus_DISABLING = FederationStatus.AddMember("DISABLING", smithyprelude.Unit)
-
-	FederationStatus_DISABLED = FederationStatus.AddMember("DISABLED", smithyprelude.Unit)
-
-	GenerateResponseException_Message = GenerateResponseException.AddMember("Message", _ErrorMessage)
-
-	_ImportDestinations_member = _ImportDestinations.AddMember("member", _EventDataStoreArn)
-
-	ImportFailureStatus_FAILED = ImportFailureStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	ImportFailureStatus_RETRY = ImportFailureStatus.AddMember("RETRY", smithyprelude.Unit)
-
-	ImportFailureStatus_SUCCEEDED = ImportFailureStatus.AddMember("SUCCEEDED", smithyprelude.Unit)
-
-	ImportFailureListItem_Location = ImportFailureListItem.AddMember("Location", _String)
-
-	ImportFailureListItem_Status = ImportFailureListItem.AddMember("Status", ImportFailureStatus)
-
-	ImportFailureListItem_ErrorType = ImportFailureListItem.AddMember("ErrorType", _String)
-
-	ImportFailureListItem_ErrorMessage = ImportFailureListItem.AddMember("ErrorMessage", _String)
-
-	ImportFailureListItem_LastUpdatedTime = ImportFailureListItem.AddMember("LastUpdatedTime", _Date)
-
-	_ImportFailureList_member = _ImportFailureList.AddMember("member", ImportFailureListItem)
-
-	ImportNotFoundException_Message = ImportNotFoundException.AddMember("Message", _ErrorMessage)
-
-	ImportStatus_INITIALIZING = ImportStatus.AddMember("INITIALIZING", smithyprelude.Unit)
-
-	ImportStatus_IN_PROGRESS = ImportStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	ImportStatus_FAILED = ImportStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	ImportStatus_STOPPED = ImportStatus.AddMember("STOPPED", smithyprelude.Unit)
-
-	ImportStatus_COMPLETED = ImportStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	ImportsListItem_ImportId = ImportsListItem.AddMember("ImportId", _UUID)
-
-	ImportsListItem_ImportStatus = ImportsListItem.AddMember("ImportStatus", ImportStatus)
-
-	ImportsListItem_Destinations = ImportsListItem.AddMember("Destinations", _ImportDestinations)
-
-	ImportsListItem_CreatedTimestamp = ImportsListItem.AddMember("CreatedTimestamp", _Date)
-
-	ImportsListItem_UpdatedTimestamp = ImportsListItem.AddMember("UpdatedTimestamp", _Date)
-
-	_ImportsList_member = _ImportsList.AddMember("member", ImportsListItem)
-
-	S3ImportSource_S3LocationUri = S3ImportSource.AddMember("S3LocationUri", _String)
-
-	S3ImportSource_S3BucketRegion = S3ImportSource.AddMember("S3BucketRegion", _String)
-
-	S3ImportSource_S3BucketAccessRoleArn = S3ImportSource.AddMember("S3BucketAccessRoleArn", _String)
-
-	ImportSource_S3 = ImportSource.AddMember("S3", S3ImportSource)
-
-	ImportStatistics_PrefixesFound = ImportStatistics.AddMember("PrefixesFound", _Long)
-
-	ImportStatistics_PrefixesCompleted = ImportStatistics.AddMember("PrefixesCompleted", _Long)
-
-	ImportStatistics_FilesCompleted = ImportStatistics.AddMember("FilesCompleted", _Long)
-
-	ImportStatistics_EventsCompleted = ImportStatistics.AddMember("EventsCompleted", _Long)
-
-	ImportStatistics_FailedEntries = ImportStatistics.AddMember("FailedEntries", _Long)
-
-	InactiveEventDataStoreException_Message = InactiveEventDataStoreException.AddMember("Message", _ErrorMessage)
-
-	InactiveQueryException_Message = InactiveQueryException.AddMember("Message", _ErrorMessage)
-
-	IngestionStatus_LatestIngestionSuccessTime = IngestionStatus.AddMember("LatestIngestionSuccessTime", _Date)
-
-	IngestionStatus_LatestIngestionSuccessEventID = IngestionStatus.AddMember("LatestIngestionSuccessEventID", _UUID)
-
-	IngestionStatus_LatestIngestionErrorCode = IngestionStatus.AddMember("LatestIngestionErrorCode", _ErrorMessage)
-
-	IngestionStatus_LatestIngestionAttemptTime = IngestionStatus.AddMember("LatestIngestionAttemptTime", _Date)
-
-	IngestionStatus_LatestIngestionAttemptEventID = IngestionStatus.AddMember("LatestIngestionAttemptEventID", _UUID)
-
-	InsightNotEnabledException_Message = InsightNotEnabledException.AddMember("Message", _ErrorMessage)
-
-	InsightType_ApiCallRateInsight = InsightType.AddMember("ApiCallRateInsight", smithyprelude.Unit)
-
-	InsightType_ApiErrorRateInsight = InsightType.AddMember("ApiErrorRateInsight", smithyprelude.Unit)
-
-	SourceEventCategory_Management = SourceEventCategory.AddMember("Management", smithyprelude.Unit)
-
-	SourceEventCategory_Data = SourceEventCategory.AddMember("Data", smithyprelude.Unit)
-
-	_SourceEventCategories_member = _SourceEventCategories.AddMember("member", SourceEventCategory)
-
-	InsightSelector_InsightType = InsightSelector.AddMember("InsightType", InsightType)
-
-	InsightSelector_EventCategories = InsightSelector.AddMember("EventCategories", _SourceEventCategories)
-
-	_InsightSelectors_member = _InsightSelectors.AddMember("member", InsightSelector)
-
-	InsightsMetricDataType_FILL_WITH_ZEROS = InsightsMetricDataType.AddMember("FILL_WITH_ZEROS", smithyprelude.Unit)
-
-	InsightsMetricDataType_NON_ZERO_DATA = InsightsMetricDataType.AddMember("NON_ZERO_DATA", smithyprelude.Unit)
-
-	_InsightsMetricValues_member = _InsightsMetricValues.AddMember("member", _Double)
-
-	InsufficientDependencyServiceAccessPermissionException_Message = InsufficientDependencyServiceAccessPermissionException.AddMember("Message", _ErrorMessage)
-
-	InsufficientEncryptionPolicyException_Message = InsufficientEncryptionPolicyException.AddMember("Message", _ErrorMessage)
-
-	InsufficientIAMAccessPermissionException_Message = InsufficientIAMAccessPermissionException.AddMember("Message", _ErrorMessage)
-
-	InsufficientS3BucketPolicyException_Message = InsufficientS3BucketPolicyException.AddMember("Message", _ErrorMessage)
-
-	InsufficientSnsTopicPolicyException_Message = InsufficientSnsTopicPolicyException.AddMember("Message", _ErrorMessage)
-
-	InvalidCloudWatchLogsLogGroupArnException_Message = InvalidCloudWatchLogsLogGroupArnException.AddMember("Message", _ErrorMessage)
-
-	InvalidCloudWatchLogsRoleArnException_Message = InvalidCloudWatchLogsRoleArnException.AddMember("Message", _ErrorMessage)
-
-	InvalidDateRangeException_Message = InvalidDateRangeException.AddMember("Message", _ErrorMessage)
-
-	InvalidEventCategoryException_Message = InvalidEventCategoryException.AddMember("Message", _ErrorMessage)
-
-	InvalidEventDataStoreCategoryException_Message = InvalidEventDataStoreCategoryException.AddMember("Message", _ErrorMessage)
-
-	InvalidEventDataStoreStatusException_Message = InvalidEventDataStoreStatusException.AddMember("Message", _ErrorMessage)
-
-	InvalidEventSelectorsException_Message = InvalidEventSelectorsException.AddMember("Message", _ErrorMessage)
-
-	InvalidHomeRegionException_Message = InvalidHomeRegionException.AddMember("Message", _ErrorMessage)
-
-	InvalidImportSourceException_Message = InvalidImportSourceException.AddMember("Message", _ErrorMessage)
-
-	InvalidInsightSelectorsException_Message = InvalidInsightSelectorsException.AddMember("Message", _ErrorMessage)
-
-	InvalidKmsKeyIdException_Message = InvalidKmsKeyIdException.AddMember("Message", _ErrorMessage)
-
-	InvalidLookupAttributesException_Message = InvalidLookupAttributesException.AddMember("Message", _ErrorMessage)
-
-	InvalidMaxResultsException_Message = InvalidMaxResultsException.AddMember("Message", _ErrorMessage)
-
-	InvalidNextTokenException_Message = InvalidNextTokenException.AddMember("Message", _ErrorMessage)
-
-	InvalidParameterCombinationException_Message = InvalidParameterCombinationException.AddMember("Message", _ErrorMessage)
-
-	InvalidParameterException_Message = InvalidParameterException.AddMember("Message", _ErrorMessage)
-
-	InvalidQueryStatementException_Message = InvalidQueryStatementException.AddMember("Message", _ErrorMessage)
-
-	InvalidQueryStatusException_Message = InvalidQueryStatusException.AddMember("Message", _ErrorMessage)
-
-	InvalidS3BucketNameException_Message = InvalidS3BucketNameException.AddMember("Message", _ErrorMessage)
-
-	InvalidS3PrefixException_Message = InvalidS3PrefixException.AddMember("Message", _ErrorMessage)
-
-	InvalidSnsTopicNameException_Message = InvalidSnsTopicNameException.AddMember("Message", _ErrorMessage)
-
-	InvalidSourceException_Message = InvalidSourceException.AddMember("Message", _ErrorMessage)
-
-	InvalidTagParameterException_Message = InvalidTagParameterException.AddMember("Message", _ErrorMessage)
-
-	InvalidTimeRangeException_Message = InvalidTimeRangeException.AddMember("Message", _ErrorMessage)
-
-	InvalidTokenException_Message = InvalidTokenException.AddMember("Message", _ErrorMessage)
-
-	InvalidTrailNameException_Message = InvalidTrailNameException.AddMember("Message", _ErrorMessage)
-
-	KmsException_Message = KmsException.AddMember("Message", _ErrorMessage)
-
-	KmsKeyDisabledException_Message = KmsKeyDisabledException.AddMember("Message", _ErrorMessage)
-
-	KmsKeyNotFoundException_Message = KmsKeyNotFoundException.AddMember("Message", _ErrorMessage)
-
-	ListInsightsDataDimensionKey_EVENT_ID = ListInsightsDataDimensionKey.AddMember("EVENT_ID", smithyprelude.Unit)
-
-	ListInsightsDataDimensionKey_EVENT_NAME = ListInsightsDataDimensionKey.AddMember("EVENT_NAME", smithyprelude.Unit)
-
-	ListInsightsDataDimensionKey_EVENT_SOURCE = ListInsightsDataDimensionKey.AddMember("EVENT_SOURCE", smithyprelude.Unit)
-
-	_ListInsightsDataDimensions_key = _ListInsightsDataDimensions.AddMember("key", ListInsightsDataDimensionKey)
-
-	_ListInsightsDataDimensions_value = _ListInsightsDataDimensions.AddMember("value", _ListInsightsDataDimensionValue)
-
-	ListInsightsDataType_INSIGHTS_EVENTS = ListInsightsDataType.AddMember("INSIGHTS_EVENTS", smithyprelude.Unit)
-
-	LookupAttributeKey_EVENT_ID = LookupAttributeKey.AddMember("EVENT_ID", smithyprelude.Unit)
-
-	LookupAttributeKey_EVENT_NAME = LookupAttributeKey.AddMember("EVENT_NAME", smithyprelude.Unit)
-
-	LookupAttributeKey_READ_ONLY = LookupAttributeKey.AddMember("READ_ONLY", smithyprelude.Unit)
-
-	LookupAttributeKey_USERNAME = LookupAttributeKey.AddMember("USERNAME", smithyprelude.Unit)
-
-	LookupAttributeKey_RESOURCE_TYPE = LookupAttributeKey.AddMember("RESOURCE_TYPE", smithyprelude.Unit)
-
-	LookupAttributeKey_RESOURCE_NAME = LookupAttributeKey.AddMember("RESOURCE_NAME", smithyprelude.Unit)
-
-	LookupAttributeKey_EVENT_SOURCE = LookupAttributeKey.AddMember("EVENT_SOURCE", smithyprelude.Unit)
-
-	LookupAttributeKey_ACCESS_KEY_ID = LookupAttributeKey.AddMember("ACCESS_KEY_ID", smithyprelude.Unit)
-
-	LookupAttribute_AttributeKey = LookupAttribute.AddMember("AttributeKey", LookupAttributeKey)
-
-	LookupAttribute_AttributeValue = LookupAttribute.AddMember("AttributeValue", _LookupAttributeValue)
-
-	_LookupAttributesList_member = _LookupAttributesList.AddMember("member", LookupAttribute)
-
-	MaxConcurrentQueriesException_Message = MaxConcurrentQueriesException.AddMember("Message", _ErrorMessage)
-
-	MaxEventSize_Standard = MaxEventSize.AddMember("Standard", smithyprelude.Unit)
-
-	MaxEventSize_Large = MaxEventSize.AddMember("Large", smithyprelude.Unit)
-
-	MaximumNumberOfTrailsExceededException_Message = MaximumNumberOfTrailsExceededException.AddMember("Message", _ErrorMessage)
-
-	NoManagementAccountSLRExistsException_Message = NoManagementAccountSLRExistsException.AddMember("Message", _ErrorMessage)
-
-	NotOrganizationManagementAccountException_Message = NotOrganizationManagementAccountException.AddMember("Message", _ErrorMessage)
-
-	NotOrganizationMasterAccountException_Message = NotOrganizationMasterAccountException.AddMember("Message", _ErrorMessage)
-
-	OperationNotPermittedException_Message = OperationNotPermittedException.AddMember("Message", _ErrorMessage)
-
-	OrganizationNotInAllFeaturesModeException_Message = OrganizationNotInAllFeaturesModeException.AddMember("Message", _ErrorMessage)
-
-	OrganizationsNotInUseException_Message = OrganizationsNotInUseException.AddMember("Message", _ErrorMessage)
-
-	PartitionKey_Name = PartitionKey.AddMember("Name", _PartitionKeyName)
-
-	PartitionKey_Type = PartitionKey.AddMember("Type", _PartitionKeyType)
-
-	_PartitionKeyList_member = _PartitionKeyList.AddMember("member", PartitionKey)
-
-	PublicKey_Value = PublicKey.AddMember("Value", _ByteBuffer)
-
-	PublicKey_ValidityStartTime = PublicKey.AddMember("ValidityStartTime", _Date)
-
-	PublicKey_ValidityEndTime = PublicKey.AddMember("ValidityEndTime", _Date)
-
-	PublicKey_Fingerprint = PublicKey.AddMember("Fingerprint", _String)
-
-	_PublicKeyList_member = _PublicKeyList.AddMember("member", PublicKey)
-
-	QueryStatus_QUEUED = QueryStatus.AddMember("QUEUED", smithyprelude.Unit)
-
-	QueryStatus_RUNNING = QueryStatus.AddMember("RUNNING", smithyprelude.Unit)
-
-	QueryStatus_FINISHED = QueryStatus.AddMember("FINISHED", smithyprelude.Unit)
-
-	QueryStatus_FAILED = QueryStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	QueryStatus_CANCELLED = QueryStatus.AddMember("CANCELLED", smithyprelude.Unit)
-
-	QueryStatus_TIMED_OUT = QueryStatus.AddMember("TIMED_OUT", smithyprelude.Unit)
-
-	Query_QueryId = Query.AddMember("QueryId", _UUID)
-
-	Query_QueryStatus = Query.AddMember("QueryStatus", QueryStatus)
-
-	Query_CreationTime = Query.AddMember("CreationTime", _Date)
-
-	_Queries_member = _Queries.AddMember("member", Query)
-
-	QueryIdNotFoundException_Message = QueryIdNotFoundException.AddMember("Message", _ErrorMessage)
-
-	_QueryParameters_member = _QueryParameters.AddMember("member", _QueryParameter)
-
-	_QueryParameterValues_key = _QueryParameterValues.AddMember("key", _QueryParameterKey)
-
-	_QueryParameterValues_value = _QueryParameterValues.AddMember("value", _QueryParameterValue)
-
-	_QueryResultColumn_key = _QueryResultColumn.AddMember("key", _QueryResultKey)
-
-	_QueryResultColumn_value = _QueryResultColumn.AddMember("value", _QueryResultValue)
-
-	_QueryResultRow_member = _QueryResultRow.AddMember("member", _QueryResultColumn)
-
-	_QueryResultRows_member = _QueryResultRows.AddMember("member", _QueryResultRow)
-
-	QueryStatistics_ResultsCount = QueryStatistics.AddMember("ResultsCount", _Integer)
-
-	QueryStatistics_TotalResultsCount = QueryStatistics.AddMember("TotalResultsCount", _Integer)
-
-	QueryStatistics_BytesScanned = QueryStatistics.AddMember("BytesScanned", _Long)
-
-	QueryStatisticsForDescribeQuery_EventsMatched = QueryStatisticsForDescribeQuery.AddMember("EventsMatched", _Long)
-
-	QueryStatisticsForDescribeQuery_EventsScanned = QueryStatisticsForDescribeQuery.AddMember("EventsScanned", _Long)
-
-	QueryStatisticsForDescribeQuery_BytesScanned = QueryStatisticsForDescribeQuery.AddMember("BytesScanned", _Long)
-
-	QueryStatisticsForDescribeQuery_ExecutionTimeInMillis = QueryStatisticsForDescribeQuery.AddMember("ExecutionTimeInMillis", _Integer)
-
-	QueryStatisticsForDescribeQuery_CreationTime = QueryStatisticsForDescribeQuery.AddMember("CreationTime", _Date)
-
-	RefreshScheduleFrequencyUnit_HOURS = RefreshScheduleFrequencyUnit.AddMember("HOURS", smithyprelude.Unit)
-
-	RefreshScheduleFrequencyUnit_DAYS = RefreshScheduleFrequencyUnit.AddMember("DAYS", smithyprelude.Unit)
-
-	RefreshScheduleFrequency_Unit = RefreshScheduleFrequency.AddMember("Unit", RefreshScheduleFrequencyUnit)
-
-	RefreshScheduleFrequency_Value = RefreshScheduleFrequency.AddMember("Value", _RefreshScheduleFrequencyValue)
-
-	RefreshScheduleStatus_ENABLED = RefreshScheduleStatus.AddMember("ENABLED", smithyprelude.Unit)
-
-	RefreshScheduleStatus_DISABLED = RefreshScheduleStatus.AddMember("DISABLED", smithyprelude.Unit)
-
-	RefreshSchedule_Frequency = RefreshSchedule.AddMember("Frequency", RefreshScheduleFrequency)
-
-	RefreshSchedule_Status = RefreshSchedule.AddMember("Status", RefreshScheduleStatus)
-
-	RefreshSchedule_TimeOfDay = RefreshSchedule.AddMember("TimeOfDay", _TimeOfDay)
-
-	_ViewPropertiesMap_key = _ViewPropertiesMap.AddMember("key", _ViewPropertiesKey)
-
-	_ViewPropertiesMap_value = _ViewPropertiesMap.AddMember("value", _ViewPropertiesValue)
-
-	RequestWidget_QueryStatement = RequestWidget.AddMember("QueryStatement", _QueryStatement)
-
-	RequestWidget_QueryParameters = RequestWidget.AddMember("QueryParameters", _QueryParameters)
-
-	RequestWidget_ViewProperties = RequestWidget.AddMember("ViewProperties", _ViewPropertiesMap)
-
-	_RequestWidgetList_member = _RequestWidgetList.AddMember("member", RequestWidget)
-
-	ResourceARNNotValidException_Message = ResourceARNNotValidException.AddMember("Message", _ErrorMessage)
-
-	_ResourceIdList_member = _ResourceIdList.AddMember("member", _String)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _ErrorMessage)
-
-	ResourcePolicyNotFoundException_Message = ResourcePolicyNotFoundException.AddMember("Message", _ErrorMessage)
-
-	ResourcePolicyNotValidException_Message = ResourcePolicyNotValidException.AddMember("Message", _ErrorMessage)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagsList_member = _TagsList.AddMember("member", Tag)
-
-	ResourceTag_ResourceId = ResourceTag.AddMember("ResourceId", _String)
-
-	ResourceTag_TagsList = ResourceTag.AddMember("TagsList", _TagsList)
-
-	_ResourceTagList_member = _ResourceTagList.AddMember("member", ResourceTag)
-
-	ResourceTypeNotSupportedException_Message = ResourceTypeNotSupportedException.AddMember("Message", _ErrorMessage)
-
-	S3BucketDoesNotExistException_Message = S3BucketDoesNotExistException.AddMember("Message", _ErrorMessage)
-
-	SearchSampleQueriesSearchResult_Name = SearchSampleQueriesSearchResult.AddMember("Name", _SampleQueryName)
-
-	SearchSampleQueriesSearchResult_Description = SearchSampleQueriesSearchResult.AddMember("Description", _SampleQueryDescription)
-
-	SearchSampleQueriesSearchResult_SQL = SearchSampleQueriesSearchResult.AddMember("SQL", _SampleQuerySQL)
-
-	SearchSampleQueriesSearchResult_Relevance = SearchSampleQueriesSearchResult.AddMember("Relevance", _SampleQueryRelevance)
-
-	_SearchSampleQueriesSearchResults_member = _SearchSampleQueriesSearchResults.AddMember("member", SearchSampleQueriesSearchResult)
-
-	ServiceQuotaExceededException_Message = ServiceQuotaExceededException.AddMember("Message", _ErrorMessage)
-
-	SourceConfig_ApplyToAllRegions = SourceConfig.AddMember("ApplyToAllRegions", _Boolean)
-
-	SourceConfig_AdvancedEventSelectors = SourceConfig.AddMember("AdvancedEventSelectors", _AdvancedEventSelectors)
-
-	TagsLimitExceededException_Message = TagsLimitExceededException.AddMember("Message", _ErrorMessage)
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", _ErrorMessage)
-
-	_Timestamps_member = _Timestamps.AddMember("member", _Date)
-
-	Trail_Name = Trail.AddMember("Name", _String)
-
-	Trail_S3BucketName = Trail.AddMember("S3BucketName", _String)
-
-	Trail_S3KeyPrefix = Trail.AddMember("S3KeyPrefix", _String)
-
-	Trail_SnsTopicName = Trail.AddMember("SnsTopicName", _String)
-
-	Trail_SnsTopicARN = Trail.AddMember("SnsTopicARN", _String)
-
-	Trail_IncludeGlobalServiceEvents = Trail.AddMember("IncludeGlobalServiceEvents", _Boolean)
-
-	Trail_IsMultiRegionTrail = Trail.AddMember("IsMultiRegionTrail", _Boolean)
-
-	Trail_HomeRegion = Trail.AddMember("HomeRegion", _String)
-
-	Trail_TrailARN = Trail.AddMember("TrailARN", _String)
-
-	Trail_LogFileValidationEnabled = Trail.AddMember("LogFileValidationEnabled", _Boolean)
-
-	Trail_CloudWatchLogsLogGroupArn = Trail.AddMember("CloudWatchLogsLogGroupArn", _String)
-
-	Trail_CloudWatchLogsRoleArn = Trail.AddMember("CloudWatchLogsRoleArn", _String)
-
-	Trail_KmsKeyId = Trail.AddMember("KmsKeyId", _String)
-
-	Trail_HasCustomEventSelectors = Trail.AddMember("HasCustomEventSelectors", _Boolean)
-
-	Trail_HasInsightSelectors = Trail.AddMember("HasInsightSelectors", _Boolean)
-
-	Trail_IsOrganizationTrail = Trail.AddMember("IsOrganizationTrail", _Boolean)
-
-	Trail_RecursiveLogging = Trail.AddMember("RecursiveLogging", _Boolean)
-
-	TrailAlreadyExistsException_Message = TrailAlreadyExistsException.AddMember("Message", _ErrorMessage)
-
-	TrailInfo_TrailARN = TrailInfo.AddMember("TrailARN", _String)
-
-	TrailInfo_Name = TrailInfo.AddMember("Name", _String)
-
-	TrailInfo_HomeRegion = TrailInfo.AddMember("HomeRegion", _String)
-
-	_TrailList_member = _TrailList.AddMember("member", Trail)
-
-	_TrailNameList_member = _TrailNameList.AddMember("member", _String)
-
-	TrailNotFoundException_Message = TrailNotFoundException.AddMember("Message", _ErrorMessage)
-
-	TrailNotProvidedException_Message = TrailNotProvidedException.AddMember("Message", _ErrorMessage)
-
-	_Trails_member = _Trails.AddMember("member", TrailInfo)
-
-	UnsupportedOperationException_Message = UnsupportedOperationException.AddMember("Message", _ErrorMessage)
-
-	Widget_QueryAlias = Widget.AddMember("QueryAlias", _QueryAlias)
-
-	Widget_QueryStatement = Widget.AddMember("QueryStatement", _QueryStatement)
-
-	Widget_QueryParameters = Widget.AddMember("QueryParameters", _QueryParameters)
-
-	Widget_ViewProperties = Widget.AddMember("ViewProperties", _ViewPropertiesMap)
-
-	_WidgetList_member = _WidgetList.AddMember("member", Widget)
-
-	AddTagsRequest_ResourceId = AddTagsRequest.AddMember("ResourceId", _String)
-
-	AddTagsRequest_TagsList = AddTagsRequest.AddMember("TagsList", _TagsList)
-
-	CancelQueryRequest_EventDataStore = CancelQueryRequest.AddMember("EventDataStore", _EventDataStoreArn)
-
-	CancelQueryRequest_QueryId = CancelQueryRequest.AddMember("QueryId", _UUID)
-
-	CancelQueryRequest_EventDataStoreOwnerAccountId = CancelQueryRequest.AddMember("EventDataStoreOwnerAccountId", _AccountId)
-
-	CancelQueryResponse_QueryId = CancelQueryResponse.AddMember("QueryId", _UUID)
-
-	CancelQueryResponse_QueryStatus = CancelQueryResponse.AddMember("QueryStatus", QueryStatus)
-
-	CancelQueryResponse_EventDataStoreOwnerAccountId = CancelQueryResponse.AddMember("EventDataStoreOwnerAccountId", _AccountId)
-
-	CreateChannelRequest_Name = CreateChannelRequest.AddMember("Name", _ChannelName)
-
-	CreateChannelRequest_Source = CreateChannelRequest.AddMember("Source", _Source)
-
-	CreateChannelRequest_Destinations = CreateChannelRequest.AddMember("Destinations", _Destinations)
-
-	CreateChannelRequest_Tags = CreateChannelRequest.AddMember("Tags", _TagsList)
-
-	CreateChannelResponse_ChannelArn = CreateChannelResponse.AddMember("ChannelArn", _ChannelArn)
-
-	CreateChannelResponse_Name = CreateChannelResponse.AddMember("Name", _ChannelName)
-
-	CreateChannelResponse_Source = CreateChannelResponse.AddMember("Source", _Source)
-
-	CreateChannelResponse_Destinations = CreateChannelResponse.AddMember("Destinations", _Destinations)
-
-	CreateChannelResponse_Tags = CreateChannelResponse.AddMember("Tags", _TagsList)
-
-	CreateDashboardRequest_Name = CreateDashboardRequest.AddMember("Name", _DashboardName)
-
-	CreateDashboardRequest_RefreshSchedule = CreateDashboardRequest.AddMember("RefreshSchedule", RefreshSchedule)
-
-	CreateDashboardRequest_TagsList = CreateDashboardRequest.AddMember("TagsList", _TagsList)
-
-	CreateDashboardRequest_TerminationProtectionEnabled = CreateDashboardRequest.AddMember("TerminationProtectionEnabled", _TerminationProtectionEnabled)
-
-	CreateDashboardRequest_Widgets = CreateDashboardRequest.AddMember("Widgets", _RequestWidgetList)
-
-	CreateDashboardResponse_DashboardArn = CreateDashboardResponse.AddMember("DashboardArn", _DashboardArn)
-
-	CreateDashboardResponse_Name = CreateDashboardResponse.AddMember("Name", _DashboardName)
-
-	CreateDashboardResponse_Type = CreateDashboardResponse.AddMember("Type", DashboardType)
-
-	CreateDashboardResponse_Widgets = CreateDashboardResponse.AddMember("Widgets", _WidgetList)
-
-	CreateDashboardResponse_TagsList = CreateDashboardResponse.AddMember("TagsList", _TagsList)
-
-	CreateDashboardResponse_RefreshSchedule = CreateDashboardResponse.AddMember("RefreshSchedule", RefreshSchedule)
-
-	CreateDashboardResponse_TerminationProtectionEnabled = CreateDashboardResponse.AddMember("TerminationProtectionEnabled", _TerminationProtectionEnabled)
-
-	CreateEventDataStoreRequest_Name = CreateEventDataStoreRequest.AddMember("Name", _EventDataStoreName)
-
-	CreateEventDataStoreRequest_AdvancedEventSelectors = CreateEventDataStoreRequest.AddMember("AdvancedEventSelectors", _AdvancedEventSelectors)
-
-	CreateEventDataStoreRequest_MultiRegionEnabled = CreateEventDataStoreRequest.AddMember("MultiRegionEnabled", _Boolean)
-
-	CreateEventDataStoreRequest_OrganizationEnabled = CreateEventDataStoreRequest.AddMember("OrganizationEnabled", _Boolean)
-
-	CreateEventDataStoreRequest_RetentionPeriod = CreateEventDataStoreRequest.AddMember("RetentionPeriod", _RetentionPeriod)
-
-	CreateEventDataStoreRequest_TerminationProtectionEnabled = CreateEventDataStoreRequest.AddMember("TerminationProtectionEnabled", _TerminationProtectionEnabled)
-
-	CreateEventDataStoreRequest_TagsList = CreateEventDataStoreRequest.AddMember("TagsList", _TagsList)
-
-	CreateEventDataStoreRequest_KmsKeyId = CreateEventDataStoreRequest.AddMember("KmsKeyId", _EventDataStoreKmsKeyId)
-
-	CreateEventDataStoreRequest_StartIngestion = CreateEventDataStoreRequest.AddMember("StartIngestion", _Boolean)
-
-	CreateEventDataStoreRequest_BillingMode = CreateEventDataStoreRequest.AddMember("BillingMode", BillingMode)
-
-	CreateEventDataStoreResponse_EventDataStoreArn = CreateEventDataStoreResponse.AddMember("EventDataStoreArn", _EventDataStoreArn)
-
-	CreateEventDataStoreResponse_Name = CreateEventDataStoreResponse.AddMember("Name", _EventDataStoreName)
-
-	CreateEventDataStoreResponse_Status = CreateEventDataStoreResponse.AddMember("Status", EventDataStoreStatus)
-
-	CreateEventDataStoreResponse_AdvancedEventSelectors = CreateEventDataStoreResponse.AddMember("AdvancedEventSelectors", _AdvancedEventSelectors)
-
-	CreateEventDataStoreResponse_MultiRegionEnabled = CreateEventDataStoreResponse.AddMember("MultiRegionEnabled", _Boolean)
-
-	CreateEventDataStoreResponse_OrganizationEnabled = CreateEventDataStoreResponse.AddMember("OrganizationEnabled", _Boolean)
-
-	CreateEventDataStoreResponse_RetentionPeriod = CreateEventDataStoreResponse.AddMember("RetentionPeriod", _RetentionPeriod)
-
-	CreateEventDataStoreResponse_TerminationProtectionEnabled = CreateEventDataStoreResponse.AddMember("TerminationProtectionEnabled", _TerminationProtectionEnabled)
-
-	CreateEventDataStoreResponse_TagsList = CreateEventDataStoreResponse.AddMember("TagsList", _TagsList)
-
-	CreateEventDataStoreResponse_CreatedTimestamp = CreateEventDataStoreResponse.AddMember("CreatedTimestamp", _Date)
-
-	CreateEventDataStoreResponse_UpdatedTimestamp = CreateEventDataStoreResponse.AddMember("UpdatedTimestamp", _Date)
-
-	CreateEventDataStoreResponse_KmsKeyId = CreateEventDataStoreResponse.AddMember("KmsKeyId", _EventDataStoreKmsKeyId)
-
-	CreateEventDataStoreResponse_BillingMode = CreateEventDataStoreResponse.AddMember("BillingMode", BillingMode)
-
-	CreateTrailRequest_Name = CreateTrailRequest.AddMember("Name", _String)
-
-	CreateTrailRequest_S3BucketName = CreateTrailRequest.AddMember("S3BucketName", _String)
-
-	CreateTrailRequest_S3KeyPrefix = CreateTrailRequest.AddMember("S3KeyPrefix", _String)
-
-	CreateTrailRequest_SnsTopicName = CreateTrailRequest.AddMember("SnsTopicName", _String)
-
-	CreateTrailRequest_IncludeGlobalServiceEvents = CreateTrailRequest.AddMember("IncludeGlobalServiceEvents", _Boolean)
-
-	CreateTrailRequest_IsMultiRegionTrail = CreateTrailRequest.AddMember("IsMultiRegionTrail", _Boolean)
-
-	CreateTrailRequest_EnableLogFileValidation = CreateTrailRequest.AddMember("EnableLogFileValidation", _Boolean)
-
-	CreateTrailRequest_CloudWatchLogsLogGroupArn = CreateTrailRequest.AddMember("CloudWatchLogsLogGroupArn", _String)
-
-	CreateTrailRequest_CloudWatchLogsRoleArn = CreateTrailRequest.AddMember("CloudWatchLogsRoleArn", _String)
-
-	CreateTrailRequest_KmsKeyId = CreateTrailRequest.AddMember("KmsKeyId", _String)
-
-	CreateTrailRequest_IsOrganizationTrail = CreateTrailRequest.AddMember("IsOrganizationTrail", _Boolean)
-
-	CreateTrailRequest_TagsList = CreateTrailRequest.AddMember("TagsList", _TagsList)
-
-	CreateTrailRequest_RecursiveLogging = CreateTrailRequest.AddMember("RecursiveLogging", _Boolean)
-
-	CreateTrailResponse_Name = CreateTrailResponse.AddMember("Name", _String)
-
-	CreateTrailResponse_S3BucketName = CreateTrailResponse.AddMember("S3BucketName", _String)
-
-	CreateTrailResponse_S3KeyPrefix = CreateTrailResponse.AddMember("S3KeyPrefix", _String)
-
-	CreateTrailResponse_SnsTopicName = CreateTrailResponse.AddMember("SnsTopicName", _String)
-
-	CreateTrailResponse_SnsTopicARN = CreateTrailResponse.AddMember("SnsTopicARN", _String)
-
-	CreateTrailResponse_IncludeGlobalServiceEvents = CreateTrailResponse.AddMember("IncludeGlobalServiceEvents", _Boolean)
-
-	CreateTrailResponse_IsMultiRegionTrail = CreateTrailResponse.AddMember("IsMultiRegionTrail", _Boolean)
-
-	CreateTrailResponse_TrailARN = CreateTrailResponse.AddMember("TrailARN", _String)
-
-	CreateTrailResponse_LogFileValidationEnabled = CreateTrailResponse.AddMember("LogFileValidationEnabled", _Boolean)
-
-	CreateTrailResponse_CloudWatchLogsLogGroupArn = CreateTrailResponse.AddMember("CloudWatchLogsLogGroupArn", _String)
-
-	CreateTrailResponse_CloudWatchLogsRoleArn = CreateTrailResponse.AddMember("CloudWatchLogsRoleArn", _String)
-
-	CreateTrailResponse_KmsKeyId = CreateTrailResponse.AddMember("KmsKeyId", _String)
-
-	CreateTrailResponse_IsOrganizationTrail = CreateTrailResponse.AddMember("IsOrganizationTrail", _Boolean)
-
-	CreateTrailResponse_RecursiveLogging = CreateTrailResponse.AddMember("RecursiveLogging", _Boolean)
-
-	DeleteChannelRequest_Channel = DeleteChannelRequest.AddMember("Channel", _ChannelArn)
-
-	DeleteDashboardRequest_DashboardId = DeleteDashboardRequest.AddMember("DashboardId", _DashboardArn)
-
-	DeleteEventDataStoreRequest_EventDataStore = DeleteEventDataStoreRequest.AddMember("EventDataStore", _EventDataStoreArn)
-
-	DeleteResourcePolicyRequest_ResourceArn = DeleteResourcePolicyRequest.AddMember("ResourceArn", _ResourceArn)
-
-	DeleteTrailRequest_Name = DeleteTrailRequest.AddMember("Name", _String)
-
-	DeregisterOrganizationDelegatedAdminRequest_DelegatedAdminAccountId = DeregisterOrganizationDelegatedAdminRequest.AddMember("DelegatedAdminAccountId", _AccountId)
-
-	DescribeQueryRequest_EventDataStore = DescribeQueryRequest.AddMember("EventDataStore", _EventDataStoreArn)
-
-	DescribeQueryRequest_QueryId = DescribeQueryRequest.AddMember("QueryId", _UUID)
-
-	DescribeQueryRequest_QueryAlias = DescribeQueryRequest.AddMember("QueryAlias", _QueryAlias)
-
-	DescribeQueryRequest_RefreshId = DescribeQueryRequest.AddMember("RefreshId", _RefreshId)
-
-	DescribeQueryRequest_EventDataStoreOwnerAccountId = DescribeQueryRequest.AddMember("EventDataStoreOwnerAccountId", _AccountId)
-
-	DescribeQueryResponse_QueryId = DescribeQueryResponse.AddMember("QueryId", _UUID)
-
-	DescribeQueryResponse_QueryString = DescribeQueryResponse.AddMember("QueryString", _QueryStatement)
-
-	DescribeQueryResponse_QueryStatus = DescribeQueryResponse.AddMember("QueryStatus", QueryStatus)
-
-	DescribeQueryResponse_QueryStatistics = DescribeQueryResponse.AddMember("QueryStatistics", QueryStatisticsForDescribeQuery)
-
-	DescribeQueryResponse_ErrorMessage = DescribeQueryResponse.AddMember("ErrorMessage", _ErrorMessage)
-
-	DescribeQueryResponse_DeliveryS3Uri = DescribeQueryResponse.AddMember("DeliveryS3Uri", _DeliveryS3Uri)
-
-	DescribeQueryResponse_DeliveryStatus = DescribeQueryResponse.AddMember("DeliveryStatus", DeliveryStatus)
-
-	DescribeQueryResponse_Prompt = DescribeQueryResponse.AddMember("Prompt", _Prompt)
-
-	DescribeQueryResponse_EventDataStoreOwnerAccountId = DescribeQueryResponse.AddMember("EventDataStoreOwnerAccountId", _AccountId)
-
-	DescribeTrailsRequest_trailNameList = DescribeTrailsRequest.AddMember("trailNameList", _TrailNameList)
-
-	DescribeTrailsRequest_includeShadowTrails = DescribeTrailsRequest.AddMember("includeShadowTrails", _Boolean)
-
-	DescribeTrailsResponse_trailList = DescribeTrailsResponse.AddMember("trailList", _TrailList)
-
-	DisableFederationRequest_EventDataStore = DisableFederationRequest.AddMember("EventDataStore", _EventDataStoreArn)
-
-	DisableFederationResponse_EventDataStoreArn = DisableFederationResponse.AddMember("EventDataStoreArn", _EventDataStoreArn)
-
-	DisableFederationResponse_FederationStatus = DisableFederationResponse.AddMember("FederationStatus", FederationStatus)
-
-	EnableFederationRequest_EventDataStore = EnableFederationRequest.AddMember("EventDataStore", _EventDataStoreArn)
-
-	EnableFederationRequest_FederationRoleArn = EnableFederationRequest.AddMember("FederationRoleArn", _FederationRoleArn)
-
-	EnableFederationResponse_EventDataStoreArn = EnableFederationResponse.AddMember("EventDataStoreArn", _EventDataStoreArn)
-
-	EnableFederationResponse_FederationStatus = EnableFederationResponse.AddMember("FederationStatus", FederationStatus)
-
-	EnableFederationResponse_FederationRoleArn = EnableFederationResponse.AddMember("FederationRoleArn", _FederationRoleArn)
-
-	GenerateQueryRequest_EventDataStores = GenerateQueryRequest.AddMember("EventDataStores", _EventDataStoreList)
-
-	GenerateQueryRequest_Prompt = GenerateQueryRequest.AddMember("Prompt", _Prompt)
-
-	GenerateQueryResponse_QueryStatement = GenerateQueryResponse.AddMember("QueryStatement", _QueryStatement)
-
-	GenerateQueryResponse_QueryAlias = GenerateQueryResponse.AddMember("QueryAlias", _QueryAlias)
-
-	GenerateQueryResponse_EventDataStoreOwnerAccountId = GenerateQueryResponse.AddMember("EventDataStoreOwnerAccountId", _AccountId)
-
-	GetChannelRequest_Channel = GetChannelRequest.AddMember("Channel", _ChannelArn)
-
-	GetChannelResponse_ChannelArn = GetChannelResponse.AddMember("ChannelArn", _ChannelArn)
-
-	GetChannelResponse_Name = GetChannelResponse.AddMember("Name", _ChannelName)
-
-	GetChannelResponse_Source = GetChannelResponse.AddMember("Source", _Source)
-
-	GetChannelResponse_SourceConfig = GetChannelResponse.AddMember("SourceConfig", SourceConfig)
-
-	GetChannelResponse_Destinations = GetChannelResponse.AddMember("Destinations", _Destinations)
-
-	GetChannelResponse_IngestionStatus = GetChannelResponse.AddMember("IngestionStatus", IngestionStatus)
-
-	GetDashboardRequest_DashboardId = GetDashboardRequest.AddMember("DashboardId", _DashboardArn)
-
-	GetDashboardResponse_DashboardArn = GetDashboardResponse.AddMember("DashboardArn", _DashboardArn)
-
-	GetDashboardResponse_Type = GetDashboardResponse.AddMember("Type", DashboardType)
-
-	GetDashboardResponse_Status = GetDashboardResponse.AddMember("Status", DashboardStatus)
-
-	GetDashboardResponse_Widgets = GetDashboardResponse.AddMember("Widgets", _WidgetList)
-
-	GetDashboardResponse_RefreshSchedule = GetDashboardResponse.AddMember("RefreshSchedule", RefreshSchedule)
-
-	GetDashboardResponse_CreatedTimestamp = GetDashboardResponse.AddMember("CreatedTimestamp", _Date)
-
-	GetDashboardResponse_UpdatedTimestamp = GetDashboardResponse.AddMember("UpdatedTimestamp", _Date)
-
-	GetDashboardResponse_LastRefreshId = GetDashboardResponse.AddMember("LastRefreshId", _RefreshId)
-
-	GetDashboardResponse_LastRefreshFailureReason = GetDashboardResponse.AddMember("LastRefreshFailureReason", _ErrorMessage)
-
-	GetDashboardResponse_TerminationProtectionEnabled = GetDashboardResponse.AddMember("TerminationProtectionEnabled", _TerminationProtectionEnabled)
-
-	GetEventConfigurationRequest_TrailName = GetEventConfigurationRequest.AddMember("TrailName", _String)
-
-	GetEventConfigurationRequest_EventDataStore = GetEventConfigurationRequest.AddMember("EventDataStore", _String)
-
-	GetEventConfigurationResponse_TrailARN = GetEventConfigurationResponse.AddMember("TrailARN", _String)
-
-	GetEventConfigurationResponse_EventDataStoreArn = GetEventConfigurationResponse.AddMember("EventDataStoreArn", _EventDataStoreArn)
-
-	GetEventConfigurationResponse_MaxEventSize = GetEventConfigurationResponse.AddMember("MaxEventSize", MaxEventSize)
-
-	GetEventConfigurationResponse_ContextKeySelectors = GetEventConfigurationResponse.AddMember("ContextKeySelectors", _ContextKeySelectors)
-
-	GetEventConfigurationResponse_AggregationConfigurations = GetEventConfigurationResponse.AddMember("AggregationConfigurations", _AggregationConfigurations)
-
-	GetEventDataStoreRequest_EventDataStore = GetEventDataStoreRequest.AddMember("EventDataStore", _EventDataStoreArn)
-
-	GetEventDataStoreResponse_EventDataStoreArn = GetEventDataStoreResponse.AddMember("EventDataStoreArn", _EventDataStoreArn)
-
-	GetEventDataStoreResponse_Name = GetEventDataStoreResponse.AddMember("Name", _EventDataStoreName)
-
-	GetEventDataStoreResponse_Status = GetEventDataStoreResponse.AddMember("Status", EventDataStoreStatus)
-
-	GetEventDataStoreResponse_AdvancedEventSelectors = GetEventDataStoreResponse.AddMember("AdvancedEventSelectors", _AdvancedEventSelectors)
-
-	GetEventDataStoreResponse_MultiRegionEnabled = GetEventDataStoreResponse.AddMember("MultiRegionEnabled", _Boolean)
-
-	GetEventDataStoreResponse_OrganizationEnabled = GetEventDataStoreResponse.AddMember("OrganizationEnabled", _Boolean)
-
-	GetEventDataStoreResponse_RetentionPeriod = GetEventDataStoreResponse.AddMember("RetentionPeriod", _RetentionPeriod)
-
-	GetEventDataStoreResponse_TerminationProtectionEnabled = GetEventDataStoreResponse.AddMember("TerminationProtectionEnabled", _TerminationProtectionEnabled)
-
-	GetEventDataStoreResponse_CreatedTimestamp = GetEventDataStoreResponse.AddMember("CreatedTimestamp", _Date)
-
-	GetEventDataStoreResponse_UpdatedTimestamp = GetEventDataStoreResponse.AddMember("UpdatedTimestamp", _Date)
-
-	GetEventDataStoreResponse_KmsKeyId = GetEventDataStoreResponse.AddMember("KmsKeyId", _EventDataStoreKmsKeyId)
-
-	GetEventDataStoreResponse_BillingMode = GetEventDataStoreResponse.AddMember("BillingMode", BillingMode)
-
-	GetEventDataStoreResponse_FederationStatus = GetEventDataStoreResponse.AddMember("FederationStatus", FederationStatus)
-
-	GetEventDataStoreResponse_FederationRoleArn = GetEventDataStoreResponse.AddMember("FederationRoleArn", _FederationRoleArn)
-
-	GetEventDataStoreResponse_PartitionKeys = GetEventDataStoreResponse.AddMember("PartitionKeys", _PartitionKeyList)
-
-	GetEventSelectorsRequest_TrailName = GetEventSelectorsRequest.AddMember("TrailName", _String)
-
-	GetEventSelectorsResponse_TrailARN = GetEventSelectorsResponse.AddMember("TrailARN", _String)
-
-	GetEventSelectorsResponse_EventSelectors = GetEventSelectorsResponse.AddMember("EventSelectors", _EventSelectors)
-
-	GetEventSelectorsResponse_AdvancedEventSelectors = GetEventSelectorsResponse.AddMember("AdvancedEventSelectors", _AdvancedEventSelectors)
-
-	GetImportRequest_ImportId = GetImportRequest.AddMember("ImportId", _UUID)
-
-	GetImportResponse_ImportId = GetImportResponse.AddMember("ImportId", _UUID)
-
-	GetImportResponse_Destinations = GetImportResponse.AddMember("Destinations", _ImportDestinations)
-
-	GetImportResponse_ImportSource = GetImportResponse.AddMember("ImportSource", ImportSource)
-
-	GetImportResponse_StartEventTime = GetImportResponse.AddMember("StartEventTime", _Date)
-
-	GetImportResponse_EndEventTime = GetImportResponse.AddMember("EndEventTime", _Date)
-
-	GetImportResponse_ImportStatus = GetImportResponse.AddMember("ImportStatus", ImportStatus)
-
-	GetImportResponse_CreatedTimestamp = GetImportResponse.AddMember("CreatedTimestamp", _Date)
-
-	GetImportResponse_UpdatedTimestamp = GetImportResponse.AddMember("UpdatedTimestamp", _Date)
-
-	GetImportResponse_ImportStatistics = GetImportResponse.AddMember("ImportStatistics", ImportStatistics)
-
-	GetInsightSelectorsRequest_TrailName = GetInsightSelectorsRequest.AddMember("TrailName", _String)
-
-	GetInsightSelectorsRequest_EventDataStore = GetInsightSelectorsRequest.AddMember("EventDataStore", _EventDataStoreArn)
-
-	GetInsightSelectorsResponse_TrailARN = GetInsightSelectorsResponse.AddMember("TrailARN", _String)
-
-	GetInsightSelectorsResponse_InsightSelectors = GetInsightSelectorsResponse.AddMember("InsightSelectors", _InsightSelectors)
-
-	GetInsightSelectorsResponse_EventDataStoreArn = GetInsightSelectorsResponse.AddMember("EventDataStoreArn", _EventDataStoreArn)
-
-	GetInsightSelectorsResponse_InsightsDestination = GetInsightSelectorsResponse.AddMember("InsightsDestination", _EventDataStoreArn)
-
-	GetQueryResultsRequest_EventDataStore = GetQueryResultsRequest.AddMember("EventDataStore", _EventDataStoreArn)
-
-	GetQueryResultsRequest_QueryId = GetQueryResultsRequest.AddMember("QueryId", _UUID)
-
-	GetQueryResultsRequest_NextToken = GetQueryResultsRequest.AddMember("NextToken", _PaginationToken)
-
-	GetQueryResultsRequest_MaxQueryResults = GetQueryResultsRequest.AddMember("MaxQueryResults", _MaxQueryResults)
-
-	GetQueryResultsRequest_EventDataStoreOwnerAccountId = GetQueryResultsRequest.AddMember("EventDataStoreOwnerAccountId", _AccountId)
-
-	GetQueryResultsResponse_QueryStatus = GetQueryResultsResponse.AddMember("QueryStatus", QueryStatus)
-
-	GetQueryResultsResponse_QueryStatistics = GetQueryResultsResponse.AddMember("QueryStatistics", QueryStatistics)
-
-	GetQueryResultsResponse_QueryResultRows = GetQueryResultsResponse.AddMember("QueryResultRows", _QueryResultRows)
-
-	GetQueryResultsResponse_NextToken = GetQueryResultsResponse.AddMember("NextToken", _PaginationToken)
-
-	GetQueryResultsResponse_ErrorMessage = GetQueryResultsResponse.AddMember("ErrorMessage", _ErrorMessage)
-
-	GetResourcePolicyRequest_ResourceArn = GetResourcePolicyRequest.AddMember("ResourceArn", _ResourceArn)
-
-	GetResourcePolicyResponse_ResourceArn = GetResourcePolicyResponse.AddMember("ResourceArn", _ResourceArn)
-
-	GetResourcePolicyResponse_ResourcePolicy = GetResourcePolicyResponse.AddMember("ResourcePolicy", _ResourcePolicy)
-
-	GetResourcePolicyResponse_DelegatedAdminResourcePolicy = GetResourcePolicyResponse.AddMember("DelegatedAdminResourcePolicy", _ResourcePolicy)
-
-	GetTrailRequest_Name = GetTrailRequest.AddMember("Name", _String)
-
-	GetTrailResponse_Trail = GetTrailResponse.AddMember("Trail", Trail)
-
-	GetTrailStatusRequest_Name = GetTrailStatusRequest.AddMember("Name", _String)
-
-	GetTrailStatusResponse_IsLogging = GetTrailStatusResponse.AddMember("IsLogging", _Boolean)
-
-	GetTrailStatusResponse_LatestDeliveryError = GetTrailStatusResponse.AddMember("LatestDeliveryError", _String)
-
-	GetTrailStatusResponse_LatestNotificationError = GetTrailStatusResponse.AddMember("LatestNotificationError", _String)
-
-	GetTrailStatusResponse_LatestDeliveryTime = GetTrailStatusResponse.AddMember("LatestDeliveryTime", _Date)
-
-	GetTrailStatusResponse_LatestNotificationTime = GetTrailStatusResponse.AddMember("LatestNotificationTime", _Date)
-
-	GetTrailStatusResponse_StartLoggingTime = GetTrailStatusResponse.AddMember("StartLoggingTime", _Date)
-
-	GetTrailStatusResponse_StopLoggingTime = GetTrailStatusResponse.AddMember("StopLoggingTime", _Date)
-
-	GetTrailStatusResponse_LatestCloudWatchLogsDeliveryError = GetTrailStatusResponse.AddMember("LatestCloudWatchLogsDeliveryError", _String)
-
-	GetTrailStatusResponse_LatestCloudWatchLogsDeliveryTime = GetTrailStatusResponse.AddMember("LatestCloudWatchLogsDeliveryTime", _Date)
-
-	GetTrailStatusResponse_LatestDigestDeliveryTime = GetTrailStatusResponse.AddMember("LatestDigestDeliveryTime", _Date)
-
-	GetTrailStatusResponse_LatestDigestDeliveryError = GetTrailStatusResponse.AddMember("LatestDigestDeliveryError", _String)
-
-	GetTrailStatusResponse_LatestDeliveryAttemptTime = GetTrailStatusResponse.AddMember("LatestDeliveryAttemptTime", _String)
-
-	GetTrailStatusResponse_LatestNotificationAttemptTime = GetTrailStatusResponse.AddMember("LatestNotificationAttemptTime", _String)
-
-	GetTrailStatusResponse_LatestNotificationAttemptSucceeded = GetTrailStatusResponse.AddMember("LatestNotificationAttemptSucceeded", _String)
-
-	GetTrailStatusResponse_LatestDeliveryAttemptSucceeded = GetTrailStatusResponse.AddMember("LatestDeliveryAttemptSucceeded", _String)
-
-	GetTrailStatusResponse_TimeLoggingStarted = GetTrailStatusResponse.AddMember("TimeLoggingStarted", _String)
-
-	GetTrailStatusResponse_TimeLoggingStopped = GetTrailStatusResponse.AddMember("TimeLoggingStopped", _String)
-
-	ListChannelsRequest_MaxResults = ListChannelsRequest.AddMember("MaxResults", _ListChannelsMaxResultsCount)
-
-	ListChannelsRequest_NextToken = ListChannelsRequest.AddMember("NextToken", _PaginationToken)
-
-	ListChannelsResponse_Channels = ListChannelsResponse.AddMember("Channels", _Channels)
-
-	ListChannelsResponse_NextToken = ListChannelsResponse.AddMember("NextToken", _PaginationToken)
-
-	ListDashboardsRequest_NamePrefix = ListDashboardsRequest.AddMember("NamePrefix", _DashboardName)
-
-	ListDashboardsRequest_Type = ListDashboardsRequest.AddMember("Type", DashboardType)
-
-	ListDashboardsRequest_NextToken = ListDashboardsRequest.AddMember("NextToken", _PaginationToken)
-
-	ListDashboardsRequest_MaxResults = ListDashboardsRequest.AddMember("MaxResults", _ListDashboardsMaxResultsCount)
-
-	ListDashboardsResponse_Dashboards = ListDashboardsResponse.AddMember("Dashboards", _Dashboards)
-
-	ListDashboardsResponse_NextToken = ListDashboardsResponse.AddMember("NextToken", _PaginationToken)
-
-	ListEventDataStoresRequest_NextToken = ListEventDataStoresRequest.AddMember("NextToken", _PaginationToken)
-
-	ListEventDataStoresRequest_MaxResults = ListEventDataStoresRequest.AddMember("MaxResults", _ListEventDataStoresMaxResultsCount)
-
-	ListEventDataStoresResponse_EventDataStores = ListEventDataStoresResponse.AddMember("EventDataStores", _EventDataStores)
-
-	ListEventDataStoresResponse_NextToken = ListEventDataStoresResponse.AddMember("NextToken", _PaginationToken)
-
-	ListImportFailuresRequest_ImportId = ListImportFailuresRequest.AddMember("ImportId", _UUID)
-
-	ListImportFailuresRequest_MaxResults = ListImportFailuresRequest.AddMember("MaxResults", _ListImportFailuresMaxResultsCount)
-
-	ListImportFailuresRequest_NextToken = ListImportFailuresRequest.AddMember("NextToken", _PaginationToken)
-
-	ListImportFailuresResponse_Failures = ListImportFailuresResponse.AddMember("Failures", _ImportFailureList)
-
-	ListImportFailuresResponse_NextToken = ListImportFailuresResponse.AddMember("NextToken", _PaginationToken)
-
-	ListImportsRequest_MaxResults = ListImportsRequest.AddMember("MaxResults", _ListImportsMaxResultsCount)
-
-	ListImportsRequest_Destination = ListImportsRequest.AddMember("Destination", _EventDataStoreArn)
-
-	ListImportsRequest_ImportStatus = ListImportsRequest.AddMember("ImportStatus", ImportStatus)
-
-	ListImportsRequest_NextToken = ListImportsRequest.AddMember("NextToken", _PaginationToken)
-
-	ListImportsResponse_Imports = ListImportsResponse.AddMember("Imports", _ImportsList)
-
-	ListImportsResponse_NextToken = ListImportsResponse.AddMember("NextToken", _PaginationToken)
-
-	ListInsightsDataRequest_InsightSource = ListInsightsDataRequest.AddMember("InsightSource", _ResourceArn)
-
-	ListInsightsDataRequest_DataType = ListInsightsDataRequest.AddMember("DataType", ListInsightsDataType)
-
-	ListInsightsDataRequest_Dimensions = ListInsightsDataRequest.AddMember("Dimensions", _ListInsightsDataDimensions)
-
-	ListInsightsDataRequest_StartTime = ListInsightsDataRequest.AddMember("StartTime", _Date)
-
-	ListInsightsDataRequest_EndTime = ListInsightsDataRequest.AddMember("EndTime", _Date)
-
-	ListInsightsDataRequest_MaxResults = ListInsightsDataRequest.AddMember("MaxResults", _ListInsightsDataMaxResultsCount)
-
-	ListInsightsDataRequest_NextToken = ListInsightsDataRequest.AddMember("NextToken", _PaginationToken)
-
-	ListInsightsDataResponse_Events = ListInsightsDataResponse.AddMember("Events", _EventsList)
-
-	ListInsightsDataResponse_NextToken = ListInsightsDataResponse.AddMember("NextToken", _PaginationToken)
-
-	ListInsightsMetricDataRequest_TrailName = ListInsightsMetricDataRequest.AddMember("TrailName", _String)
-
-	ListInsightsMetricDataRequest_EventSource = ListInsightsMetricDataRequest.AddMember("EventSource", _EventSource)
-
-	ListInsightsMetricDataRequest_EventName = ListInsightsMetricDataRequest.AddMember("EventName", _EventName)
-
-	ListInsightsMetricDataRequest_InsightType = ListInsightsMetricDataRequest.AddMember("InsightType", InsightType)
-
-	ListInsightsMetricDataRequest_ErrorCode = ListInsightsMetricDataRequest.AddMember("ErrorCode", _ErrorCode)
-
-	ListInsightsMetricDataRequest_StartTime = ListInsightsMetricDataRequest.AddMember("StartTime", _Date)
-
-	ListInsightsMetricDataRequest_EndTime = ListInsightsMetricDataRequest.AddMember("EndTime", _Date)
-
-	ListInsightsMetricDataRequest_Period = ListInsightsMetricDataRequest.AddMember("Period", _InsightsMetricPeriod)
-
-	ListInsightsMetricDataRequest_DataType = ListInsightsMetricDataRequest.AddMember("DataType", InsightsMetricDataType)
-
-	ListInsightsMetricDataRequest_MaxResults = ListInsightsMetricDataRequest.AddMember("MaxResults", _InsightsMetricMaxResults)
-
-	ListInsightsMetricDataRequest_NextToken = ListInsightsMetricDataRequest.AddMember("NextToken", _InsightsMetricNextToken)
-
-	ListInsightsMetricDataResponse_TrailARN = ListInsightsMetricDataResponse.AddMember("TrailARN", _String)
-
-	ListInsightsMetricDataResponse_EventSource = ListInsightsMetricDataResponse.AddMember("EventSource", _EventSource)
-
-	ListInsightsMetricDataResponse_EventName = ListInsightsMetricDataResponse.AddMember("EventName", _EventName)
-
-	ListInsightsMetricDataResponse_InsightType = ListInsightsMetricDataResponse.AddMember("InsightType", InsightType)
-
-	ListInsightsMetricDataResponse_ErrorCode = ListInsightsMetricDataResponse.AddMember("ErrorCode", _ErrorCode)
-
-	ListInsightsMetricDataResponse_Timestamps = ListInsightsMetricDataResponse.AddMember("Timestamps", _Timestamps)
-
-	ListInsightsMetricDataResponse_Values = ListInsightsMetricDataResponse.AddMember("Values", _InsightsMetricValues)
-
-	ListInsightsMetricDataResponse_NextToken = ListInsightsMetricDataResponse.AddMember("NextToken", _InsightsMetricNextToken)
-
-	ListPublicKeysRequest_StartTime = ListPublicKeysRequest.AddMember("StartTime", _Date)
-
-	ListPublicKeysRequest_EndTime = ListPublicKeysRequest.AddMember("EndTime", _Date)
-
-	ListPublicKeysRequest_NextToken = ListPublicKeysRequest.AddMember("NextToken", _String)
-
-	ListPublicKeysResponse_PublicKeyList = ListPublicKeysResponse.AddMember("PublicKeyList", _PublicKeyList)
-
-	ListPublicKeysResponse_NextToken = ListPublicKeysResponse.AddMember("NextToken", _String)
-
-	ListQueriesRequest_EventDataStore = ListQueriesRequest.AddMember("EventDataStore", _EventDataStoreArn)
-
-	ListQueriesRequest_NextToken = ListQueriesRequest.AddMember("NextToken", _PaginationToken)
-
-	ListQueriesRequest_MaxResults = ListQueriesRequest.AddMember("MaxResults", _ListQueriesMaxResultsCount)
-
-	ListQueriesRequest_StartTime = ListQueriesRequest.AddMember("StartTime", _Date)
-
-	ListQueriesRequest_EndTime = ListQueriesRequest.AddMember("EndTime", _Date)
-
-	ListQueriesRequest_QueryStatus = ListQueriesRequest.AddMember("QueryStatus", QueryStatus)
-
-	ListQueriesResponse_Queries = ListQueriesResponse.AddMember("Queries", _Queries)
-
-	ListQueriesResponse_NextToken = ListQueriesResponse.AddMember("NextToken", _PaginationToken)
-
-	ListTagsRequest_ResourceIdList = ListTagsRequest.AddMember("ResourceIdList", _ResourceIdList)
-
-	ListTagsRequest_NextToken = ListTagsRequest.AddMember("NextToken", _String)
-
-	ListTagsResponse_ResourceTagList = ListTagsResponse.AddMember("ResourceTagList", _ResourceTagList)
-
-	ListTagsResponse_NextToken = ListTagsResponse.AddMember("NextToken", _String)
-
-	ListTrailsRequest_NextToken = ListTrailsRequest.AddMember("NextToken", _String)
-
-	ListTrailsResponse_Trails = ListTrailsResponse.AddMember("Trails", _Trails)
-
-	ListTrailsResponse_NextToken = ListTrailsResponse.AddMember("NextToken", _String)
-
-	LookupEventsRequest_LookupAttributes = LookupEventsRequest.AddMember("LookupAttributes", _LookupAttributesList)
-
-	LookupEventsRequest_StartTime = LookupEventsRequest.AddMember("StartTime", _Date)
-
-	LookupEventsRequest_EndTime = LookupEventsRequest.AddMember("EndTime", _Date)
-
-	LookupEventsRequest_EventCategory = LookupEventsRequest.AddMember("EventCategory", EventCategory)
-
-	LookupEventsRequest_MaxResults = LookupEventsRequest.AddMember("MaxResults", _MaxResults)
-
-	LookupEventsRequest_NextToken = LookupEventsRequest.AddMember("NextToken", _NextToken)
-
-	LookupEventsResponse_Events = LookupEventsResponse.AddMember("Events", _EventsList)
-
-	LookupEventsResponse_NextToken = LookupEventsResponse.AddMember("NextToken", _NextToken)
-
-	PutEventConfigurationRequest_TrailName = PutEventConfigurationRequest.AddMember("TrailName", _String)
-
-	PutEventConfigurationRequest_EventDataStore = PutEventConfigurationRequest.AddMember("EventDataStore", _String)
-
-	PutEventConfigurationRequest_MaxEventSize = PutEventConfigurationRequest.AddMember("MaxEventSize", MaxEventSize)
-
-	PutEventConfigurationRequest_ContextKeySelectors = PutEventConfigurationRequest.AddMember("ContextKeySelectors", _ContextKeySelectors)
-
-	PutEventConfigurationRequest_AggregationConfigurations = PutEventConfigurationRequest.AddMember("AggregationConfigurations", _AggregationConfigurations)
-
-	PutEventConfigurationResponse_TrailARN = PutEventConfigurationResponse.AddMember("TrailARN", _String)
-
-	PutEventConfigurationResponse_EventDataStoreArn = PutEventConfigurationResponse.AddMember("EventDataStoreArn", _EventDataStoreArn)
-
-	PutEventConfigurationResponse_MaxEventSize = PutEventConfigurationResponse.AddMember("MaxEventSize", MaxEventSize)
-
-	PutEventConfigurationResponse_ContextKeySelectors = PutEventConfigurationResponse.AddMember("ContextKeySelectors", _ContextKeySelectors)
-
-	PutEventConfigurationResponse_AggregationConfigurations = PutEventConfigurationResponse.AddMember("AggregationConfigurations", _AggregationConfigurations)
-
-	PutEventSelectorsRequest_TrailName = PutEventSelectorsRequest.AddMember("TrailName", _String)
-
-	PutEventSelectorsRequest_EventSelectors = PutEventSelectorsRequest.AddMember("EventSelectors", _EventSelectors)
-
-	PutEventSelectorsRequest_AdvancedEventSelectors = PutEventSelectorsRequest.AddMember("AdvancedEventSelectors", _AdvancedEventSelectors)
-
-	PutEventSelectorsResponse_TrailARN = PutEventSelectorsResponse.AddMember("TrailARN", _String)
-
-	PutEventSelectorsResponse_EventSelectors = PutEventSelectorsResponse.AddMember("EventSelectors", _EventSelectors)
-
-	PutEventSelectorsResponse_AdvancedEventSelectors = PutEventSelectorsResponse.AddMember("AdvancedEventSelectors", _AdvancedEventSelectors)
-
-	PutInsightSelectorsRequest_TrailName = PutInsightSelectorsRequest.AddMember("TrailName", _String)
-
-	PutInsightSelectorsRequest_InsightSelectors = PutInsightSelectorsRequest.AddMember("InsightSelectors", _InsightSelectors)
-
-	PutInsightSelectorsRequest_EventDataStore = PutInsightSelectorsRequest.AddMember("EventDataStore", _EventDataStoreArn)
-
-	PutInsightSelectorsRequest_InsightsDestination = PutInsightSelectorsRequest.AddMember("InsightsDestination", _EventDataStoreArn)
-
-	PutInsightSelectorsResponse_TrailARN = PutInsightSelectorsResponse.AddMember("TrailARN", _String)
-
-	PutInsightSelectorsResponse_InsightSelectors = PutInsightSelectorsResponse.AddMember("InsightSelectors", _InsightSelectors)
-
-	PutInsightSelectorsResponse_EventDataStoreArn = PutInsightSelectorsResponse.AddMember("EventDataStoreArn", _EventDataStoreArn)
-
-	PutInsightSelectorsResponse_InsightsDestination = PutInsightSelectorsResponse.AddMember("InsightsDestination", _EventDataStoreArn)
-
-	PutResourcePolicyRequest_ResourceArn = PutResourcePolicyRequest.AddMember("ResourceArn", _ResourceArn)
-
-	PutResourcePolicyRequest_ResourcePolicy = PutResourcePolicyRequest.AddMember("ResourcePolicy", _ResourcePolicy)
-
-	PutResourcePolicyResponse_ResourceArn = PutResourcePolicyResponse.AddMember("ResourceArn", _ResourceArn)
-
-	PutResourcePolicyResponse_ResourcePolicy = PutResourcePolicyResponse.AddMember("ResourcePolicy", _ResourcePolicy)
-
-	PutResourcePolicyResponse_DelegatedAdminResourcePolicy = PutResourcePolicyResponse.AddMember("DelegatedAdminResourcePolicy", _ResourcePolicy)
-
-	RegisterOrganizationDelegatedAdminRequest_MemberAccountId = RegisterOrganizationDelegatedAdminRequest.AddMember("MemberAccountId", _AccountId)
-
-	RemoveTagsRequest_ResourceId = RemoveTagsRequest.AddMember("ResourceId", _String)
-
-	RemoveTagsRequest_TagsList = RemoveTagsRequest.AddMember("TagsList", _TagsList)
-
-	RestoreEventDataStoreRequest_EventDataStore = RestoreEventDataStoreRequest.AddMember("EventDataStore", _EventDataStoreArn)
-
-	RestoreEventDataStoreResponse_EventDataStoreArn = RestoreEventDataStoreResponse.AddMember("EventDataStoreArn", _EventDataStoreArn)
-
-	RestoreEventDataStoreResponse_Name = RestoreEventDataStoreResponse.AddMember("Name", _EventDataStoreName)
-
-	RestoreEventDataStoreResponse_Status = RestoreEventDataStoreResponse.AddMember("Status", EventDataStoreStatus)
-
-	RestoreEventDataStoreResponse_AdvancedEventSelectors = RestoreEventDataStoreResponse.AddMember("AdvancedEventSelectors", _AdvancedEventSelectors)
-
-	RestoreEventDataStoreResponse_MultiRegionEnabled = RestoreEventDataStoreResponse.AddMember("MultiRegionEnabled", _Boolean)
-
-	RestoreEventDataStoreResponse_OrganizationEnabled = RestoreEventDataStoreResponse.AddMember("OrganizationEnabled", _Boolean)
-
-	RestoreEventDataStoreResponse_RetentionPeriod = RestoreEventDataStoreResponse.AddMember("RetentionPeriod", _RetentionPeriod)
-
-	RestoreEventDataStoreResponse_TerminationProtectionEnabled = RestoreEventDataStoreResponse.AddMember("TerminationProtectionEnabled", _TerminationProtectionEnabled)
-
-	RestoreEventDataStoreResponse_CreatedTimestamp = RestoreEventDataStoreResponse.AddMember("CreatedTimestamp", _Date)
-
-	RestoreEventDataStoreResponse_UpdatedTimestamp = RestoreEventDataStoreResponse.AddMember("UpdatedTimestamp", _Date)
-
-	RestoreEventDataStoreResponse_KmsKeyId = RestoreEventDataStoreResponse.AddMember("KmsKeyId", _EventDataStoreKmsKeyId)
-
-	RestoreEventDataStoreResponse_BillingMode = RestoreEventDataStoreResponse.AddMember("BillingMode", BillingMode)
-
-	SearchSampleQueriesRequest_SearchPhrase = SearchSampleQueriesRequest.AddMember("SearchPhrase", _SearchSampleQueriesSearchPhrase)
-
-	SearchSampleQueriesRequest_MaxResults = SearchSampleQueriesRequest.AddMember("MaxResults", _SearchSampleQueriesMaxResults)
-
-	SearchSampleQueriesRequest_NextToken = SearchSampleQueriesRequest.AddMember("NextToken", _PaginationToken)
-
-	SearchSampleQueriesResponse_SearchResults = SearchSampleQueriesResponse.AddMember("SearchResults", _SearchSampleQueriesSearchResults)
-
-	SearchSampleQueriesResponse_NextToken = SearchSampleQueriesResponse.AddMember("NextToken", _PaginationToken)
-
-	StartDashboardRefreshRequest_DashboardId = StartDashboardRefreshRequest.AddMember("DashboardId", _DashboardArn)
-
-	StartDashboardRefreshRequest_QueryParameterValues = StartDashboardRefreshRequest.AddMember("QueryParameterValues", _QueryParameterValues)
-
-	StartDashboardRefreshResponse_RefreshId = StartDashboardRefreshResponse.AddMember("RefreshId", _RefreshId)
-
-	StartEventDataStoreIngestionRequest_EventDataStore = StartEventDataStoreIngestionRequest.AddMember("EventDataStore", _EventDataStoreArn)
-
-	StartImportRequest_Destinations = StartImportRequest.AddMember("Destinations", _ImportDestinations)
-
-	StartImportRequest_ImportSource = StartImportRequest.AddMember("ImportSource", ImportSource)
-
-	StartImportRequest_StartEventTime = StartImportRequest.AddMember("StartEventTime", _Date)
-
-	StartImportRequest_EndEventTime = StartImportRequest.AddMember("EndEventTime", _Date)
-
-	StartImportRequest_ImportId = StartImportRequest.AddMember("ImportId", _UUID)
-
-	StartImportResponse_ImportId = StartImportResponse.AddMember("ImportId", _UUID)
-
-	StartImportResponse_Destinations = StartImportResponse.AddMember("Destinations", _ImportDestinations)
-
-	StartImportResponse_ImportSource = StartImportResponse.AddMember("ImportSource", ImportSource)
-
-	StartImportResponse_StartEventTime = StartImportResponse.AddMember("StartEventTime", _Date)
-
-	StartImportResponse_EndEventTime = StartImportResponse.AddMember("EndEventTime", _Date)
-
-	StartImportResponse_ImportStatus = StartImportResponse.AddMember("ImportStatus", ImportStatus)
-
-	StartImportResponse_CreatedTimestamp = StartImportResponse.AddMember("CreatedTimestamp", _Date)
-
-	StartImportResponse_UpdatedTimestamp = StartImportResponse.AddMember("UpdatedTimestamp", _Date)
-
-	StartLoggingRequest_Name = StartLoggingRequest.AddMember("Name", _String)
-
-	StartQueryRequest_QueryStatement = StartQueryRequest.AddMember("QueryStatement", _QueryStatement)
-
-	StartQueryRequest_DeliveryS3Uri = StartQueryRequest.AddMember("DeliveryS3Uri", _DeliveryS3Uri)
-
-	StartQueryRequest_QueryAlias = StartQueryRequest.AddMember("QueryAlias", _QueryAlias)
-
-	StartQueryRequest_QueryParameters = StartQueryRequest.AddMember("QueryParameters", _QueryParameters)
-
-	StartQueryRequest_EventDataStoreOwnerAccountId = StartQueryRequest.AddMember("EventDataStoreOwnerAccountId", _AccountId)
-
-	StartQueryResponse_QueryId = StartQueryResponse.AddMember("QueryId", _UUID)
-
-	StartQueryResponse_EventDataStoreOwnerAccountId = StartQueryResponse.AddMember("EventDataStoreOwnerAccountId", _AccountId)
-
-	StopEventDataStoreIngestionRequest_EventDataStore = StopEventDataStoreIngestionRequest.AddMember("EventDataStore", _EventDataStoreArn)
-
-	StopImportRequest_ImportId = StopImportRequest.AddMember("ImportId", _UUID)
-
-	StopImportResponse_ImportId = StopImportResponse.AddMember("ImportId", _UUID)
-
-	StopImportResponse_ImportSource = StopImportResponse.AddMember("ImportSource", ImportSource)
-
-	StopImportResponse_Destinations = StopImportResponse.AddMember("Destinations", _ImportDestinations)
-
-	StopImportResponse_ImportStatus = StopImportResponse.AddMember("ImportStatus", ImportStatus)
-
-	StopImportResponse_CreatedTimestamp = StopImportResponse.AddMember("CreatedTimestamp", _Date)
-
-	StopImportResponse_UpdatedTimestamp = StopImportResponse.AddMember("UpdatedTimestamp", _Date)
-
-	StopImportResponse_StartEventTime = StopImportResponse.AddMember("StartEventTime", _Date)
-
-	StopImportResponse_EndEventTime = StopImportResponse.AddMember("EndEventTime", _Date)
-
-	StopImportResponse_ImportStatistics = StopImportResponse.AddMember("ImportStatistics", ImportStatistics)
-
-	StopLoggingRequest_Name = StopLoggingRequest.AddMember("Name", _String)
-
-	UpdateChannelRequest_Channel = UpdateChannelRequest.AddMember("Channel", _ChannelArn)
-
-	UpdateChannelRequest_Destinations = UpdateChannelRequest.AddMember("Destinations", _Destinations)
-
-	UpdateChannelRequest_Name = UpdateChannelRequest.AddMember("Name", _ChannelName)
-
-	UpdateChannelResponse_ChannelArn = UpdateChannelResponse.AddMember("ChannelArn", _ChannelArn)
-
-	UpdateChannelResponse_Name = UpdateChannelResponse.AddMember("Name", _ChannelName)
-
-	UpdateChannelResponse_Source = UpdateChannelResponse.AddMember("Source", _Source)
-
-	UpdateChannelResponse_Destinations = UpdateChannelResponse.AddMember("Destinations", _Destinations)
-
-	UpdateDashboardRequest_DashboardId = UpdateDashboardRequest.AddMember("DashboardId", _DashboardArn)
-
-	UpdateDashboardRequest_Widgets = UpdateDashboardRequest.AddMember("Widgets", _RequestWidgetList)
-
-	UpdateDashboardRequest_RefreshSchedule = UpdateDashboardRequest.AddMember("RefreshSchedule", RefreshSchedule)
-
-	UpdateDashboardRequest_TerminationProtectionEnabled = UpdateDashboardRequest.AddMember("TerminationProtectionEnabled", _TerminationProtectionEnabled)
-
-	UpdateDashboardResponse_DashboardArn = UpdateDashboardResponse.AddMember("DashboardArn", _DashboardArn)
-
-	UpdateDashboardResponse_Name = UpdateDashboardResponse.AddMember("Name", _DashboardName)
-
-	UpdateDashboardResponse_Type = UpdateDashboardResponse.AddMember("Type", DashboardType)
-
-	UpdateDashboardResponse_Widgets = UpdateDashboardResponse.AddMember("Widgets", _WidgetList)
-
-	UpdateDashboardResponse_RefreshSchedule = UpdateDashboardResponse.AddMember("RefreshSchedule", RefreshSchedule)
-
-	UpdateDashboardResponse_TerminationProtectionEnabled = UpdateDashboardResponse.AddMember("TerminationProtectionEnabled", _TerminationProtectionEnabled)
-
-	UpdateDashboardResponse_CreatedTimestamp = UpdateDashboardResponse.AddMember("CreatedTimestamp", _Date)
-
-	UpdateDashboardResponse_UpdatedTimestamp = UpdateDashboardResponse.AddMember("UpdatedTimestamp", _Date)
-
-	UpdateEventDataStoreRequest_EventDataStore = UpdateEventDataStoreRequest.AddMember("EventDataStore", _EventDataStoreArn)
-
-	UpdateEventDataStoreRequest_Name = UpdateEventDataStoreRequest.AddMember("Name", _EventDataStoreName)
-
-	UpdateEventDataStoreRequest_AdvancedEventSelectors = UpdateEventDataStoreRequest.AddMember("AdvancedEventSelectors", _AdvancedEventSelectors)
-
-	UpdateEventDataStoreRequest_MultiRegionEnabled = UpdateEventDataStoreRequest.AddMember("MultiRegionEnabled", _Boolean)
-
-	UpdateEventDataStoreRequest_OrganizationEnabled = UpdateEventDataStoreRequest.AddMember("OrganizationEnabled", _Boolean)
-
-	UpdateEventDataStoreRequest_RetentionPeriod = UpdateEventDataStoreRequest.AddMember("RetentionPeriod", _RetentionPeriod)
-
-	UpdateEventDataStoreRequest_TerminationProtectionEnabled = UpdateEventDataStoreRequest.AddMember("TerminationProtectionEnabled", _TerminationProtectionEnabled)
-
-	UpdateEventDataStoreRequest_KmsKeyId = UpdateEventDataStoreRequest.AddMember("KmsKeyId", _EventDataStoreKmsKeyId)
-
-	UpdateEventDataStoreRequest_BillingMode = UpdateEventDataStoreRequest.AddMember("BillingMode", BillingMode)
-
-	UpdateEventDataStoreResponse_EventDataStoreArn = UpdateEventDataStoreResponse.AddMember("EventDataStoreArn", _EventDataStoreArn)
-
-	UpdateEventDataStoreResponse_Name = UpdateEventDataStoreResponse.AddMember("Name", _EventDataStoreName)
-
-	UpdateEventDataStoreResponse_Status = UpdateEventDataStoreResponse.AddMember("Status", EventDataStoreStatus)
-
-	UpdateEventDataStoreResponse_AdvancedEventSelectors = UpdateEventDataStoreResponse.AddMember("AdvancedEventSelectors", _AdvancedEventSelectors)
-
-	UpdateEventDataStoreResponse_MultiRegionEnabled = UpdateEventDataStoreResponse.AddMember("MultiRegionEnabled", _Boolean)
-
-	UpdateEventDataStoreResponse_OrganizationEnabled = UpdateEventDataStoreResponse.AddMember("OrganizationEnabled", _Boolean)
-
-	UpdateEventDataStoreResponse_RetentionPeriod = UpdateEventDataStoreResponse.AddMember("RetentionPeriod", _RetentionPeriod)
-
-	UpdateEventDataStoreResponse_TerminationProtectionEnabled = UpdateEventDataStoreResponse.AddMember("TerminationProtectionEnabled", _TerminationProtectionEnabled)
-
-	UpdateEventDataStoreResponse_CreatedTimestamp = UpdateEventDataStoreResponse.AddMember("CreatedTimestamp", _Date)
-
-	UpdateEventDataStoreResponse_UpdatedTimestamp = UpdateEventDataStoreResponse.AddMember("UpdatedTimestamp", _Date)
-
-	UpdateEventDataStoreResponse_KmsKeyId = UpdateEventDataStoreResponse.AddMember("KmsKeyId", _EventDataStoreKmsKeyId)
-
-	UpdateEventDataStoreResponse_BillingMode = UpdateEventDataStoreResponse.AddMember("BillingMode", BillingMode)
-
-	UpdateEventDataStoreResponse_FederationStatus = UpdateEventDataStoreResponse.AddMember("FederationStatus", FederationStatus)
-
-	UpdateEventDataStoreResponse_FederationRoleArn = UpdateEventDataStoreResponse.AddMember("FederationRoleArn", _FederationRoleArn)
-
-	UpdateTrailRequest_Name = UpdateTrailRequest.AddMember("Name", _String)
-
-	UpdateTrailRequest_S3BucketName = UpdateTrailRequest.AddMember("S3BucketName", _String)
-
-	UpdateTrailRequest_S3KeyPrefix = UpdateTrailRequest.AddMember("S3KeyPrefix", _String)
-
-	UpdateTrailRequest_SnsTopicName = UpdateTrailRequest.AddMember("SnsTopicName", _String)
-
-	UpdateTrailRequest_IncludeGlobalServiceEvents = UpdateTrailRequest.AddMember("IncludeGlobalServiceEvents", _Boolean)
-
-	UpdateTrailRequest_IsMultiRegionTrail = UpdateTrailRequest.AddMember("IsMultiRegionTrail", _Boolean)
-
-	UpdateTrailRequest_EnableLogFileValidation = UpdateTrailRequest.AddMember("EnableLogFileValidation", _Boolean)
-
-	UpdateTrailRequest_CloudWatchLogsLogGroupArn = UpdateTrailRequest.AddMember("CloudWatchLogsLogGroupArn", _String)
-
-	UpdateTrailRequest_CloudWatchLogsRoleArn = UpdateTrailRequest.AddMember("CloudWatchLogsRoleArn", _String)
-
-	UpdateTrailRequest_KmsKeyId = UpdateTrailRequest.AddMember("KmsKeyId", _String)
-
-	UpdateTrailRequest_IsOrganizationTrail = UpdateTrailRequest.AddMember("IsOrganizationTrail", _Boolean)
-
-	UpdateTrailRequest_RecursiveLogging = UpdateTrailRequest.AddMember("RecursiveLogging", _Boolean)
-
-	UpdateTrailResponse_Name = UpdateTrailResponse.AddMember("Name", _String)
-
-	UpdateTrailResponse_S3BucketName = UpdateTrailResponse.AddMember("S3BucketName", _String)
-
-	UpdateTrailResponse_S3KeyPrefix = UpdateTrailResponse.AddMember("S3KeyPrefix", _String)
-
-	UpdateTrailResponse_SnsTopicName = UpdateTrailResponse.AddMember("SnsTopicName", _String)
-
-	UpdateTrailResponse_SnsTopicARN = UpdateTrailResponse.AddMember("SnsTopicARN", _String)
-
-	UpdateTrailResponse_IncludeGlobalServiceEvents = UpdateTrailResponse.AddMember("IncludeGlobalServiceEvents", _Boolean)
-
-	UpdateTrailResponse_IsMultiRegionTrail = UpdateTrailResponse.AddMember("IsMultiRegionTrail", _Boolean)
-
-	UpdateTrailResponse_TrailARN = UpdateTrailResponse.AddMember("TrailARN", _String)
-
-	UpdateTrailResponse_LogFileValidationEnabled = UpdateTrailResponse.AddMember("LogFileValidationEnabled", _Boolean)
-
-	UpdateTrailResponse_CloudWatchLogsLogGroupArn = UpdateTrailResponse.AddMember("CloudWatchLogsLogGroupArn", _String)
-
-	UpdateTrailResponse_CloudWatchLogsRoleArn = UpdateTrailResponse.AddMember("CloudWatchLogsRoleArn", _String)
-
-	UpdateTrailResponse_KmsKeyId = UpdateTrailResponse.AddMember("KmsKeyId", _String)
-
-	UpdateTrailResponse_IsOrganizationTrail = UpdateTrailResponse.AddMember("IsOrganizationTrail", _Boolean)
-
-	UpdateTrailResponse_RecursiveLogging = UpdateTrailResponse.AddMember("RecursiveLogging", _Boolean)
-
-}
+var (
+	iAddTags                                                = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "AddTags"}
+	iCancelQuery                                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "CancelQuery"}
+	iCreateChannel                                          = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "CreateChannel"}
+	iCreateDashboard                                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "CreateDashboard"}
+	iCreateEventDataStore                                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "CreateEventDataStore"}
+	iCreateTrail                                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "CreateTrail"}
+	iDeleteChannel                                          = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "DeleteChannel"}
+	iDeleteDashboard                                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "DeleteDashboard"}
+	iDeleteEventDataStore                                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "DeleteEventDataStore"}
+	iDeleteResourcePolicy                                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "DeleteResourcePolicy"}
+	iDeleteTrail                                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "DeleteTrail"}
+	iDeregisterOrganizationDelegatedAdmin                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "DeregisterOrganizationDelegatedAdmin"}
+	iDescribeQuery                                          = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "DescribeQuery"}
+	iDescribeTrails                                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "DescribeTrails"}
+	iDisableFederation                                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "DisableFederation"}
+	iEnableFederation                                       = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "EnableFederation"}
+	iGenerateQuery                                          = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "GenerateQuery"}
+	iGetChannel                                             = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "GetChannel"}
+	iGetDashboard                                           = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "GetDashboard"}
+	iGetEventConfiguration                                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "GetEventConfiguration"}
+	iGetEventDataStore                                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "GetEventDataStore"}
+	iGetEventSelectors                                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "GetEventSelectors"}
+	iGetImport                                              = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "GetImport"}
+	iGetInsightSelectors                                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "GetInsightSelectors"}
+	iGetQueryResults                                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "GetQueryResults"}
+	iGetResourcePolicy                                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "GetResourcePolicy"}
+	iGetTrail                                               = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "GetTrail"}
+	iGetTrailStatus                                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "GetTrailStatus"}
+	iListChannels                                           = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ListChannels"}
+	iListDashboards                                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ListDashboards"}
+	iListEventDataStores                                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ListEventDataStores"}
+	iListImportFailures                                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ListImportFailures"}
+	iListImports                                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ListImports"}
+	iListInsightsData                                       = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ListInsightsData"}
+	iListInsightsMetricData                                 = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ListInsightsMetricData"}
+	iListPublicKeys                                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ListPublicKeys"}
+	iListQueries                                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ListQueries"}
+	iListTags                                               = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ListTags"}
+	iListTrails                                             = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ListTrails"}
+	iLookupEvents                                           = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "LookupEvents"}
+	iPutEventConfiguration                                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "PutEventConfiguration"}
+	iPutEventSelectors                                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "PutEventSelectors"}
+	iPutInsightSelectors                                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "PutInsightSelectors"}
+	iPutResourcePolicy                                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "PutResourcePolicy"}
+	iRegisterOrganizationDelegatedAdmin                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "RegisterOrganizationDelegatedAdmin"}
+	iRemoveTags                                             = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "RemoveTags"}
+	iRestoreEventDataStore                                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "RestoreEventDataStore"}
+	iSearchSampleQueries                                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "SearchSampleQueries"}
+	iStartDashboardRefresh                                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "StartDashboardRefresh"}
+	iStartEventDataStoreIngestion                           = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "StartEventDataStoreIngestion"}
+	iStartImport                                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "StartImport"}
+	iStartLogging                                           = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "StartLogging"}
+	iStartQuery                                             = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "StartQuery"}
+	iStopEventDataStoreIngestion                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "StopEventDataStoreIngestion"}
+	iStopImport                                             = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "StopImport"}
+	iStopLogging                                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "StopLogging"}
+	iUpdateChannel                                          = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "UpdateChannel"}
+	iUpdateDashboard                                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "UpdateDashboard"}
+	iUpdateEventDataStore                                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "UpdateEventDataStore"}
+	iUpdateTrail                                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "UpdateTrail"}
+	i_CloudTrail_20131101                                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "CloudTrail_20131101"}
+	iAccessDeniedException                                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "AccessDeniedException"}
+	iAccountHasOngoingImportException                       = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "AccountHasOngoingImportException"}
+	i_AccountId                                             = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "AccountId"}
+	iAccountNotFoundException                               = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "AccountNotFoundException"}
+	iAccountNotRegisteredException                          = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "AccountNotRegisteredException"}
+	iAccountRegisteredException                             = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "AccountRegisteredException"}
+	iAdvancedEventSelector                                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "AdvancedEventSelector"}
+	i_AdvancedEventSelectors                                = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "AdvancedEventSelectors"}
+	iAdvancedFieldSelector                                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "AdvancedFieldSelector"}
+	i_AdvancedFieldSelectors                                = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "AdvancedFieldSelectors"}
+	iAggregationConfiguration                               = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "AggregationConfiguration"}
+	i_AggregationConfigurations                             = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "AggregationConfigurations"}
+	iBillingMode                                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "BillingMode"}
+	i_Boolean                                               = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "Boolean"}
+	i_ByteBuffer                                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ByteBuffer"}
+	iCannotDelegateManagementAccountException               = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "CannotDelegateManagementAccountException"}
+	iChannel                                                = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "Channel"}
+	iChannelAlreadyExistsException                          = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ChannelAlreadyExistsException"}
+	i_ChannelArn                                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ChannelArn"}
+	iChannelARNInvalidException                             = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ChannelARNInvalidException"}
+	iChannelExistsForEDSException                           = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ChannelExistsForEDSException"}
+	iChannelMaxLimitExceededException                       = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ChannelMaxLimitExceededException"}
+	i_ChannelName                                           = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ChannelName"}
+	iChannelNotFoundException                               = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ChannelNotFoundException"}
+	i_Channels                                              = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "Channels"}
+	iCloudTrailAccessNotEnabledException                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "CloudTrailAccessNotEnabledException"}
+	iCloudTrailARNInvalidException                          = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "CloudTrailARNInvalidException"}
+	iCloudTrailInvalidClientTokenIdException                = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "CloudTrailInvalidClientTokenIdException"}
+	iCloudWatchLogsDeliveryUnavailableException             = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "CloudWatchLogsDeliveryUnavailableException"}
+	iConcurrentModificationException                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ConcurrentModificationException"}
+	iConflictException                                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ConflictException"}
+	iContextKeySelector                                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ContextKeySelector"}
+	i_ContextKeySelectors                                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ContextKeySelectors"}
+	i_DashboardArn                                          = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "DashboardArn"}
+	iDashboardDetail                                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "DashboardDetail"}
+	i_DashboardName                                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "DashboardName"}
+	i_Dashboards                                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "Dashboards"}
+	iDashboardStatus                                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "DashboardStatus"}
+	iDashboardType                                          = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "DashboardType"}
+	iDataResource                                           = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "DataResource"}
+	i_DataResources                                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "DataResources"}
+	i_DataResourceValues                                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "DataResourceValues"}
+	i_Date                                                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "Date"}
+	iDelegatedAdminAccountLimitExceededException            = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "DelegatedAdminAccountLimitExceededException"}
+	i_DeliveryS3Uri                                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "DeliveryS3Uri"}
+	iDeliveryStatus                                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "DeliveryStatus"}
+	iDestination                                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "Destination"}
+	i_Destinations                                          = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "Destinations"}
+	iDestinationType                                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "DestinationType"}
+	i_Double                                                = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "Double"}
+	i_ErrorCode                                             = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ErrorCode"}
+	i_ErrorMessage                                          = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ErrorMessage"}
+	iEvent                                                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "Event"}
+	iEventCategory                                          = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "EventCategory"}
+	iEventCategoryAggregation                               = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "EventCategoryAggregation"}
+	iEventDataStore                                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "EventDataStore"}
+	iEventDataStoreAlreadyExistsException                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "EventDataStoreAlreadyExistsException"}
+	i_EventDataStoreArn                                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "EventDataStoreArn"}
+	iEventDataStoreARNInvalidException                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "EventDataStoreARNInvalidException"}
+	iEventDataStoreFederationEnabledException               = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "EventDataStoreFederationEnabledException"}
+	iEventDataStoreHasOngoingImportException                = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "EventDataStoreHasOngoingImportException"}
+	i_EventDataStoreKmsKeyId                                = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "EventDataStoreKmsKeyId"}
+	i_EventDataStoreList                                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "EventDataStoreList"}
+	iEventDataStoreMaxLimitExceededException                = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "EventDataStoreMaxLimitExceededException"}
+	i_EventDataStoreName                                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "EventDataStoreName"}
+	iEventDataStoreNotFoundException                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "EventDataStoreNotFoundException"}
+	i_EventDataStores                                       = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "EventDataStores"}
+	iEventDataStoreStatus                                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "EventDataStoreStatus"}
+	iEventDataStoreTerminationProtectedException            = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "EventDataStoreTerminationProtectedException"}
+	i_EventName                                             = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "EventName"}
+	iEventSelector                                          = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "EventSelector"}
+	i_EventSelectors                                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "EventSelectors"}
+	i_EventsList                                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "EventsList"}
+	i_EventSource                                           = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "EventSource"}
+	i_ExcludeManagementEventSources                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ExcludeManagementEventSources"}
+	i_FederationRoleArn                                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "FederationRoleArn"}
+	iFederationStatus                                       = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "FederationStatus"}
+	iGenerateResponseException                              = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "GenerateResponseException"}
+	i_ImportDestinations                                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ImportDestinations"}
+	i_ImportFailureList                                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ImportFailureList"}
+	iImportFailureListItem                                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ImportFailureListItem"}
+	iImportFailureStatus                                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ImportFailureStatus"}
+	iImportNotFoundException                                = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ImportNotFoundException"}
+	i_ImportsList                                           = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ImportsList"}
+	iImportsListItem                                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ImportsListItem"}
+	iImportSource                                           = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ImportSource"}
+	iImportStatistics                                       = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ImportStatistics"}
+	iImportStatus                                           = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ImportStatus"}
+	iInactiveEventDataStoreException                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "InactiveEventDataStoreException"}
+	iInactiveQueryException                                 = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "InactiveQueryException"}
+	iIngestionStatus                                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "IngestionStatus"}
+	iInsightNotEnabledException                             = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "InsightNotEnabledException"}
+	iInsightSelector                                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "InsightSelector"}
+	i_InsightSelectors                                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "InsightSelectors"}
+	iInsightsMetricDataType                                 = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "InsightsMetricDataType"}
+	i_InsightsMetricMaxResults                              = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "InsightsMetricMaxResults"}
+	i_InsightsMetricNextToken                               = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "InsightsMetricNextToken"}
+	i_InsightsMetricPeriod                                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "InsightsMetricPeriod"}
+	i_InsightsMetricValues                                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "InsightsMetricValues"}
+	iInsightType                                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "InsightType"}
+	iInsufficientDependencyServiceAccessPermissionException = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "InsufficientDependencyServiceAccessPermissionException"}
+	iInsufficientEncryptionPolicyException                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "InsufficientEncryptionPolicyException"}
+	iInsufficientIAMAccessPermissionException               = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "InsufficientIAMAccessPermissionException"}
+	iInsufficientS3BucketPolicyException                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "InsufficientS3BucketPolicyException"}
+	iInsufficientSnsTopicPolicyException                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "InsufficientSnsTopicPolicyException"}
+	i_Integer                                               = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "Integer"}
+	iInvalidCloudWatchLogsLogGroupArnException              = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "InvalidCloudWatchLogsLogGroupArnException"}
+	iInvalidCloudWatchLogsRoleArnException                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "InvalidCloudWatchLogsRoleArnException"}
+	iInvalidDateRangeException                              = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "InvalidDateRangeException"}
+	iInvalidEventCategoryException                          = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "InvalidEventCategoryException"}
+	iInvalidEventDataStoreCategoryException                 = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "InvalidEventDataStoreCategoryException"}
+	iInvalidEventDataStoreStatusException                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "InvalidEventDataStoreStatusException"}
+	iInvalidEventSelectorsException                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "InvalidEventSelectorsException"}
+	iInvalidHomeRegionException                             = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "InvalidHomeRegionException"}
+	iInvalidImportSourceException                           = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "InvalidImportSourceException"}
+	iInvalidInsightSelectorsException                       = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "InvalidInsightSelectorsException"}
+	iInvalidKmsKeyIdException                               = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "InvalidKmsKeyIdException"}
+	iInvalidLookupAttributesException                       = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "InvalidLookupAttributesException"}
+	iInvalidMaxResultsException                             = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "InvalidMaxResultsException"}
+	iInvalidNextTokenException                              = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "InvalidNextTokenException"}
+	iInvalidParameterCombinationException                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "InvalidParameterCombinationException"}
+	iInvalidParameterException                              = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "InvalidParameterException"}
+	iInvalidQueryStatementException                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "InvalidQueryStatementException"}
+	iInvalidQueryStatusException                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "InvalidQueryStatusException"}
+	iInvalidS3BucketNameException                           = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "InvalidS3BucketNameException"}
+	iInvalidS3PrefixException                               = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "InvalidS3PrefixException"}
+	iInvalidSnsTopicNameException                           = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "InvalidSnsTopicNameException"}
+	iInvalidSourceException                                 = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "InvalidSourceException"}
+	iInvalidTagParameterException                           = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "InvalidTagParameterException"}
+	iInvalidTimeRangeException                              = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "InvalidTimeRangeException"}
+	iInvalidTokenException                                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "InvalidTokenException"}
+	iInvalidTrailNameException                              = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "InvalidTrailNameException"}
+	iKmsException                                           = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "KmsException"}
+	iKmsKeyDisabledException                                = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "KmsKeyDisabledException"}
+	iKmsKeyNotFoundException                                = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "KmsKeyNotFoundException"}
+	i_ListChannelsMaxResultsCount                           = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ListChannelsMaxResultsCount"}
+	i_ListDashboardsMaxResultsCount                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ListDashboardsMaxResultsCount"}
+	i_ListEventDataStoresMaxResultsCount                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ListEventDataStoresMaxResultsCount"}
+	i_ListImportFailuresMaxResultsCount                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ListImportFailuresMaxResultsCount"}
+	i_ListImportsMaxResultsCount                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ListImportsMaxResultsCount"}
+	iListInsightsDataDimensionKey                           = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ListInsightsDataDimensionKey"}
+	i_ListInsightsDataDimensions                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ListInsightsDataDimensions"}
+	i_ListInsightsDataDimensionValue                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ListInsightsDataDimensionValue"}
+	i_ListInsightsDataMaxResultsCount                       = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ListInsightsDataMaxResultsCount"}
+	iListInsightsDataType                                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ListInsightsDataType"}
+	i_ListQueriesMaxResultsCount                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ListQueriesMaxResultsCount"}
+	i_Location                                              = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "Location"}
+	i_Long                                                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "Long"}
+	iLookupAttribute                                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "LookupAttribute"}
+	iLookupAttributeKey                                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "LookupAttributeKey"}
+	i_LookupAttributesList                                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "LookupAttributesList"}
+	i_LookupAttributeValue                                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "LookupAttributeValue"}
+	iMaxConcurrentQueriesException                          = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "MaxConcurrentQueriesException"}
+	iMaxEventSize                                           = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "MaxEventSize"}
+	iMaximumNumberOfTrailsExceededException                 = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "MaximumNumberOfTrailsExceededException"}
+	i_MaxQueryResults                                       = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "MaxQueryResults"}
+	i_MaxResults                                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "MaxResults"}
+	i_NextToken                                             = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "NextToken"}
+	iNoManagementAccountSLRExistsException                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "NoManagementAccountSLRExistsException"}
+	iNotOrganizationManagementAccountException              = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "NotOrganizationManagementAccountException"}
+	iNotOrganizationMasterAccountException                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "NotOrganizationMasterAccountException"}
+	iOperationNotPermittedException                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "OperationNotPermittedException"}
+	i_Operator                                              = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "Operator"}
+	i_OperatorTargetList                                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "OperatorTargetList"}
+	i_OperatorTargetListMember                              = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "OperatorTargetListMember"}
+	i_OperatorValue                                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "OperatorValue"}
+	iOrganizationNotInAllFeaturesModeException              = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "OrganizationNotInAllFeaturesModeException"}
+	iOrganizationsNotInUseException                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "OrganizationsNotInUseException"}
+	i_PaginationToken                                       = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "PaginationToken"}
+	iPartitionKey                                           = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "PartitionKey"}
+	i_PartitionKeyList                                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "PartitionKeyList"}
+	i_PartitionKeyName                                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "PartitionKeyName"}
+	i_PartitionKeyType                                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "PartitionKeyType"}
+	i_Prompt                                                = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "Prompt"}
+	iPublicKey                                              = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "PublicKey"}
+	i_PublicKeyList                                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "PublicKeyList"}
+	i_Queries                                               = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "Queries"}
+	iQuery                                                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "Query"}
+	i_QueryAlias                                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "QueryAlias"}
+	iQueryIdNotFoundException                               = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "QueryIdNotFoundException"}
+	i_QueryParameter                                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "QueryParameter"}
+	i_QueryParameterKey                                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "QueryParameterKey"}
+	i_QueryParameters                                       = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "QueryParameters"}
+	i_QueryParameterValue                                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "QueryParameterValue"}
+	i_QueryParameterValues                                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "QueryParameterValues"}
+	i_QueryResultColumn                                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "QueryResultColumn"}
+	i_QueryResultKey                                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "QueryResultKey"}
+	i_QueryResultRow                                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "QueryResultRow"}
+	i_QueryResultRows                                       = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "QueryResultRows"}
+	i_QueryResultValue                                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "QueryResultValue"}
+	i_QueryStatement                                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "QueryStatement"}
+	iQueryStatistics                                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "QueryStatistics"}
+	iQueryStatisticsForDescribeQuery                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "QueryStatisticsForDescribeQuery"}
+	iQueryStatus                                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "QueryStatus"}
+	iReadWriteType                                          = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ReadWriteType"}
+	i_RefreshId                                             = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "RefreshId"}
+	iRefreshSchedule                                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "RefreshSchedule"}
+	iRefreshScheduleFrequency                               = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "RefreshScheduleFrequency"}
+	iRefreshScheduleFrequencyUnit                           = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "RefreshScheduleFrequencyUnit"}
+	i_RefreshScheduleFrequencyValue                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "RefreshScheduleFrequencyValue"}
+	iRefreshScheduleStatus                                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "RefreshScheduleStatus"}
+	iRequestWidget                                          = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "RequestWidget"}
+	i_RequestWidgetList                                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "RequestWidgetList"}
+	iResource                                               = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "Resource"}
+	i_ResourceArn                                           = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ResourceArn"}
+	iResourceARNNotValidException                           = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ResourceARNNotValidException"}
+	i_ResourceIdList                                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ResourceIdList"}
+	i_ResourceList                                          = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ResourceList"}
+	iResourceNotFoundException                              = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ResourceNotFoundException"}
+	i_ResourcePolicy                                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ResourcePolicy"}
+	iResourcePolicyNotFoundException                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ResourcePolicyNotFoundException"}
+	iResourcePolicyNotValidException                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ResourcePolicyNotValidException"}
+	iResourceTag                                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ResourceTag"}
+	i_ResourceTagList                                       = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ResourceTagList"}
+	iResourceTypeNotSupportedException                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ResourceTypeNotSupportedException"}
+	i_RetentionPeriod                                       = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "RetentionPeriod"}
+	iS3BucketDoesNotExistException                          = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "S3BucketDoesNotExistException"}
+	iS3ImportSource                                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "S3ImportSource"}
+	i_SampleQueryDescription                                = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "SampleQueryDescription"}
+	i_SampleQueryName                                       = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "SampleQueryName"}
+	i_SampleQueryRelevance                                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "SampleQueryRelevance"}
+	i_SampleQuerySQL                                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "SampleQuerySQL"}
+	i_SearchSampleQueriesMaxResults                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "SearchSampleQueriesMaxResults"}
+	i_SearchSampleQueriesSearchPhrase                       = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "SearchSampleQueriesSearchPhrase"}
+	iSearchSampleQueriesSearchResult                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "SearchSampleQueriesSearchResult"}
+	i_SearchSampleQueriesSearchResults                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "SearchSampleQueriesSearchResults"}
+	i_SelectorField                                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "SelectorField"}
+	i_SelectorName                                          = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "SelectorName"}
+	iServiceQuotaExceededException                          = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ServiceQuotaExceededException"}
+	i_Source                                                = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "Source"}
+	iSourceConfig                                           = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "SourceConfig"}
+	i_SourceEventCategories                                 = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "SourceEventCategories"}
+	iSourceEventCategory                                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "SourceEventCategory"}
+	i_String                                                = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "String"}
+	iTag                                                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "Tag"}
+	i_TagKey                                                = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "TagKey"}
+	iTagsLimitExceededException                             = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "TagsLimitExceededException"}
+	i_TagsList                                              = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "TagsList"}
+	i_TagValue                                              = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "TagValue"}
+	iTemplate                                               = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "Template"}
+	i_Templates                                             = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "Templates"}
+	i_TerminationProtectionEnabled                          = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "TerminationProtectionEnabled"}
+	iThrottlingException                                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ThrottlingException"}
+	i_TimeOfDay                                             = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "TimeOfDay"}
+	i_Timestamps                                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "Timestamps"}
+	iTrail                                                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "Trail"}
+	iTrailAlreadyExistsException                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "TrailAlreadyExistsException"}
+	iTrailInfo                                              = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "TrailInfo"}
+	i_TrailList                                             = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "TrailList"}
+	i_TrailNameList                                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "TrailNameList"}
+	iTrailNotFoundException                                 = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "TrailNotFoundException"}
+	iTrailNotProvidedException                              = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "TrailNotProvidedException"}
+	i_Trails                                                = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "Trails"}
+	iType                                                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "Type"}
+	iUnsupportedOperationException                          = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "UnsupportedOperationException"}
+	i_UUID                                                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "UUID"}
+	i_ViewPropertiesKey                                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ViewPropertiesKey"}
+	i_ViewPropertiesMap                                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ViewPropertiesMap"}
+	i_ViewPropertiesValue                                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ViewPropertiesValue"}
+	iWidget                                                 = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "Widget"}
+	i_WidgetList                                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "WidgetList"}
+	iAddTagsRequest                                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "AddTagsRequest"}
+	iAddTagsResponse                                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "AddTagsResponse"}
+	iCancelQueryRequest                                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "CancelQueryRequest"}
+	iCancelQueryResponse                                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "CancelQueryResponse"}
+	iCreateChannelRequest                                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "CreateChannelRequest"}
+	iCreateChannelResponse                                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "CreateChannelResponse"}
+	iCreateDashboardRequest                                 = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "CreateDashboardRequest"}
+	iCreateDashboardResponse                                = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "CreateDashboardResponse"}
+	iCreateEventDataStoreRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "CreateEventDataStoreRequest"}
+	iCreateEventDataStoreResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "CreateEventDataStoreResponse"}
+	iCreateTrailRequest                                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "CreateTrailRequest"}
+	iCreateTrailResponse                                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "CreateTrailResponse"}
+	iDeleteChannelRequest                                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "DeleteChannelRequest"}
+	iDeleteChannelResponse                                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "DeleteChannelResponse"}
+	iDeleteDashboardRequest                                 = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "DeleteDashboardRequest"}
+	iDeleteDashboardResponse                                = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "DeleteDashboardResponse"}
+	iDeleteEventDataStoreRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "DeleteEventDataStoreRequest"}
+	iDeleteEventDataStoreResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "DeleteEventDataStoreResponse"}
+	iDeleteResourcePolicyRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "DeleteResourcePolicyRequest"}
+	iDeleteResourcePolicyResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "DeleteResourcePolicyResponse"}
+	iDeleteTrailRequest                                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "DeleteTrailRequest"}
+	iDeleteTrailResponse                                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "DeleteTrailResponse"}
+	iDeregisterOrganizationDelegatedAdminRequest            = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "DeregisterOrganizationDelegatedAdminRequest"}
+	iDeregisterOrganizationDelegatedAdminResponse           = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "DeregisterOrganizationDelegatedAdminResponse"}
+	iDescribeQueryRequest                                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "DescribeQueryRequest"}
+	iDescribeQueryResponse                                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "DescribeQueryResponse"}
+	iDescribeTrailsRequest                                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "DescribeTrailsRequest"}
+	iDescribeTrailsResponse                                 = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "DescribeTrailsResponse"}
+	iDisableFederationRequest                               = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "DisableFederationRequest"}
+	iDisableFederationResponse                              = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "DisableFederationResponse"}
+	iEnableFederationRequest                                = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "EnableFederationRequest"}
+	iEnableFederationResponse                               = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "EnableFederationResponse"}
+	iGenerateQueryRequest                                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "GenerateQueryRequest"}
+	iGenerateQueryResponse                                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "GenerateQueryResponse"}
+	iGetChannelRequest                                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "GetChannelRequest"}
+	iGetChannelResponse                                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "GetChannelResponse"}
+	iGetDashboardRequest                                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "GetDashboardRequest"}
+	iGetDashboardResponse                                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "GetDashboardResponse"}
+	iGetEventConfigurationRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "GetEventConfigurationRequest"}
+	iGetEventConfigurationResponse                          = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "GetEventConfigurationResponse"}
+	iGetEventDataStoreRequest                               = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "GetEventDataStoreRequest"}
+	iGetEventDataStoreResponse                              = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "GetEventDataStoreResponse"}
+	iGetEventSelectorsRequest                               = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "GetEventSelectorsRequest"}
+	iGetEventSelectorsResponse                              = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "GetEventSelectorsResponse"}
+	iGetImportRequest                                       = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "GetImportRequest"}
+	iGetImportResponse                                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "GetImportResponse"}
+	iGetInsightSelectorsRequest                             = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "GetInsightSelectorsRequest"}
+	iGetInsightSelectorsResponse                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "GetInsightSelectorsResponse"}
+	iGetQueryResultsRequest                                 = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "GetQueryResultsRequest"}
+	iGetQueryResultsResponse                                = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "GetQueryResultsResponse"}
+	iGetResourcePolicyRequest                               = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "GetResourcePolicyRequest"}
+	iGetResourcePolicyResponse                              = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "GetResourcePolicyResponse"}
+	iGetTrailRequest                                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "GetTrailRequest"}
+	iGetTrailResponse                                       = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "GetTrailResponse"}
+	iGetTrailStatusRequest                                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "GetTrailStatusRequest"}
+	iGetTrailStatusResponse                                 = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "GetTrailStatusResponse"}
+	iListChannelsRequest                                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ListChannelsRequest"}
+	iListChannelsResponse                                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ListChannelsResponse"}
+	iListDashboardsRequest                                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ListDashboardsRequest"}
+	iListDashboardsResponse                                 = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ListDashboardsResponse"}
+	iListEventDataStoresRequest                             = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ListEventDataStoresRequest"}
+	iListEventDataStoresResponse                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ListEventDataStoresResponse"}
+	iListImportFailuresRequest                              = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ListImportFailuresRequest"}
+	iListImportFailuresResponse                             = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ListImportFailuresResponse"}
+	iListImportsRequest                                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ListImportsRequest"}
+	iListImportsResponse                                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ListImportsResponse"}
+	iListInsightsDataRequest                                = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ListInsightsDataRequest"}
+	iListInsightsDataResponse                               = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ListInsightsDataResponse"}
+	iListInsightsMetricDataRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ListInsightsMetricDataRequest"}
+	iListInsightsMetricDataResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ListInsightsMetricDataResponse"}
+	iListPublicKeysRequest                                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ListPublicKeysRequest"}
+	iListPublicKeysResponse                                 = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ListPublicKeysResponse"}
+	iListQueriesRequest                                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ListQueriesRequest"}
+	iListQueriesResponse                                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ListQueriesResponse"}
+	iListTagsRequest                                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ListTagsRequest"}
+	iListTagsResponse                                       = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ListTagsResponse"}
+	iListTrailsRequest                                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ListTrailsRequest"}
+	iListTrailsResponse                                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "ListTrailsResponse"}
+	iLookupEventsRequest                                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "LookupEventsRequest"}
+	iLookupEventsResponse                                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "LookupEventsResponse"}
+	iPutEventConfigurationRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "PutEventConfigurationRequest"}
+	iPutEventConfigurationResponse                          = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "PutEventConfigurationResponse"}
+	iPutEventSelectorsRequest                               = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "PutEventSelectorsRequest"}
+	iPutEventSelectorsResponse                              = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "PutEventSelectorsResponse"}
+	iPutInsightSelectorsRequest                             = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "PutInsightSelectorsRequest"}
+	iPutInsightSelectorsResponse                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "PutInsightSelectorsResponse"}
+	iPutResourcePolicyRequest                               = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "PutResourcePolicyRequest"}
+	iPutResourcePolicyResponse                              = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "PutResourcePolicyResponse"}
+	iRegisterOrganizationDelegatedAdminRequest              = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "RegisterOrganizationDelegatedAdminRequest"}
+	iRegisterOrganizationDelegatedAdminResponse             = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "RegisterOrganizationDelegatedAdminResponse"}
+	iRemoveTagsRequest                                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "RemoveTagsRequest"}
+	iRemoveTagsResponse                                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "RemoveTagsResponse"}
+	iRestoreEventDataStoreRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "RestoreEventDataStoreRequest"}
+	iRestoreEventDataStoreResponse                          = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "RestoreEventDataStoreResponse"}
+	iSearchSampleQueriesRequest                             = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "SearchSampleQueriesRequest"}
+	iSearchSampleQueriesResponse                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "SearchSampleQueriesResponse"}
+	iStartDashboardRefreshRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "StartDashboardRefreshRequest"}
+	iStartDashboardRefreshResponse                          = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "StartDashboardRefreshResponse"}
+	iStartEventDataStoreIngestionRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "StartEventDataStoreIngestionRequest"}
+	iStartEventDataStoreIngestionResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "StartEventDataStoreIngestionResponse"}
+	iStartImportRequest                                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "StartImportRequest"}
+	iStartImportResponse                                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "StartImportResponse"}
+	iStartLoggingRequest                                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "StartLoggingRequest"}
+	iStartLoggingResponse                                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "StartLoggingResponse"}
+	iStartQueryRequest                                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "StartQueryRequest"}
+	iStartQueryResponse                                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "StartQueryResponse"}
+	iStopEventDataStoreIngestionRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "StopEventDataStoreIngestionRequest"}
+	iStopEventDataStoreIngestionResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "StopEventDataStoreIngestionResponse"}
+	iStopImportRequest                                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "StopImportRequest"}
+	iStopImportResponse                                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "StopImportResponse"}
+	iStopLoggingRequest                                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "StopLoggingRequest"}
+	iStopLoggingResponse                                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "StopLoggingResponse"}
+	iUpdateChannelRequest                                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "UpdateChannelRequest"}
+	iUpdateChannelResponse                                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "UpdateChannelResponse"}
+	iUpdateDashboardRequest                                 = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "UpdateDashboardRequest"}
+	iUpdateDashboardResponse                                = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "UpdateDashboardResponse"}
+	iUpdateEventDataStoreRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "UpdateEventDataStoreRequest"}
+	iUpdateEventDataStoreResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "UpdateEventDataStoreResponse"}
+	iUpdateTrailRequest                                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "UpdateTrailRequest"}
+	iUpdateTrailResponse                                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudtrail", Name: "UpdateTrailResponse"}
+	pUnit                                                   = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLNamespace{URI: "http://cloudtrail.amazonaws.com/doc/2013-11-01/"}}, DirectMask: 0x8000}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ResourceAccessDenied",
+	StatusCode: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "AccountHasOngoingImport",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "AccountNotFound",
+	StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "AccountNotRegistered",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "AccountRegistered",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "CannotDelegateManagementAccount",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ChannelAlreadyExists",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ChannelARNInvalid",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ChannelExistsForEDS",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ChannelMaxLimitExceeded",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ChannelNotFound",
+	StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "CloudTrailAccessNotEnabled",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "CloudTrailARNInvalid",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "CloudTrailInvalidClientTokenId",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "CloudWatchLogsDeliveryUnavailable",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ConcurrentModification",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ConflictException",
+	StatusCode: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "DelegatedAdminAccountLimitExceeded",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "EventDataStoreAlreadyExists",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "EventDataStoreARNInvalid",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "EventDataStoreFederationEnabled",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "EventDataStoreHasOngoingImport",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "EventDataStoreMaxLimitExceeded",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "EventDataStoreNotFound",
+	StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "EventDataStoreTerminationProtectedException",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "GenerateResponse",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ImportNotFound",
+	StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InactiveEventDataStore",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InactiveQuery",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InsightNotEnabled",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InsufficientDependencyServiceAccessPermission",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InsufficientEncryptionPolicy",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InsufficientIAMAccessPermission",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InsufficientS3BucketPolicy",
+	StatusCode: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InsufficientSnsTopicPolicy",
+	StatusCode: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidCloudWatchLogsLogGroupArn",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidCloudWatchLogsRoleArn",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidDateRange",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidEventCategory",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidEventDataStoreCategory",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidEventDataStoreStatus",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidEventSelectors",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidHomeRegion",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidImportSource",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidInsightSelectors",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidKmsKeyId",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t47 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidLookupAttributes",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t48 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidMaxResults",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t49 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidNextToken",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t50 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidParameterCombinationError",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t51 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidParameter",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t52 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidQueryStatement",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t53 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidQueryStatus",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t54 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidS3BucketName",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t55 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidS3Prefix",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t56 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidSnsTopicName",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t57 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidSource",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t58 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidTagParameter",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t59 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidTimeRange",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t60 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidToken",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t61 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidTrailName",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t62 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "KmsException",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t63 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "KmsKeyDisabled",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t64 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "KmsKeyNotFound",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t65 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "MaxConcurrentQueries",
+	StatusCode: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t66 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "MaximumNumberOfTrailsExceeded",
+	StatusCode: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t67 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "NoManagementAccountSLRExists",
+	StatusCode: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t68 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "NotOrganizationManagementAccount",
+	StatusCode: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t69 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "NotOrganizationMasterAccount",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t70 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "OperationNotPermitted",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t71 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "OrganizationNotInAllFeaturesMode",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t72 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "OrganizationsNotInUse",
+	StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t73 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "QueryIdNotFound",
+	StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t74 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ResourceARNNotValid",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t75 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ResourceNotFound",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t76 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ResourcePolicyNotFound",
+	StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t77 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ResourcePolicyNotValid",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t78 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ResourceTypeNotSupported",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t79 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "S3BucketDoesNotExist",
+	StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t80 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ServiceQuotaExceeded",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t81 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "TagsLimitExceeded",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t82 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ThrottlingException",
+	StatusCode: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t83 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "TrailAlreadyExists",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t84 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "TrailNotFound",
+	StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t85 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "TrailNotProvided",
+	StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t86 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "UnsupportedOperation",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_Message}}
+var mAccountHasOngoingImportException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccountHasOngoingImportException_Message}}
+var mAccountNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccountNotFoundException_Message}}
+var mAccountNotRegisteredException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccountNotRegisteredException_Message}}
+var mAccountRegisteredException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccountRegisteredException_Message}}
+var mAdvancedEventSelector = smithy.SchemaMembers{List: []*smithy.Schema{&sAdvancedEventSelector_Name, &sAdvancedEventSelector_FieldSelectors}}
+var m_AdvancedEventSelectors = smithy.SchemaMembers{List: []*smithy.Schema{&s_AdvancedEventSelectors_member}}
+var mAdvancedFieldSelector = smithy.SchemaMembers{List: []*smithy.Schema{&sAdvancedFieldSelector_Field, &sAdvancedFieldSelector_Equals, &sAdvancedFieldSelector_StartsWith, &sAdvancedFieldSelector_EndsWith, &sAdvancedFieldSelector_NotEquals, &sAdvancedFieldSelector_NotStartsWith, &sAdvancedFieldSelector_NotEndsWith}}
+var m_AdvancedFieldSelectors = smithy.SchemaMembers{List: []*smithy.Schema{&s_AdvancedFieldSelectors_member}}
+var mAggregationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sAggregationConfiguration_Templates, &sAggregationConfiguration_EventCategory}}
+var m_AggregationConfigurations = smithy.SchemaMembers{List: []*smithy.Schema{&s_AggregationConfigurations_member}}
+var mBillingMode = smithy.SchemaMembers{List: []*smithy.Schema{&sBillingMode_EXTENDABLE_RETENTION_PRICING, &sBillingMode_FIXED_RETENTION_PRICING}}
+var mCannotDelegateManagementAccountException = smithy.SchemaMembers{List: []*smithy.Schema{&sCannotDelegateManagementAccountException_Message}}
+var mChannel = smithy.SchemaMembers{List: []*smithy.Schema{&sChannel_ChannelArn, &sChannel_Name}}
+var mChannelAlreadyExistsException = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelAlreadyExistsException_Message}}
+var mChannelARNInvalidException = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelARNInvalidException_Message}}
+var mChannelExistsForEDSException = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelExistsForEDSException_Message}}
+var mChannelMaxLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelMaxLimitExceededException_Message}}
+var mChannelNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelNotFoundException_Message}}
+var m_Channels = smithy.SchemaMembers{List: []*smithy.Schema{&s_Channels_member}}
+var mCloudTrailAccessNotEnabledException = smithy.SchemaMembers{List: []*smithy.Schema{&sCloudTrailAccessNotEnabledException_Message}}
+var mCloudTrailARNInvalidException = smithy.SchemaMembers{List: []*smithy.Schema{&sCloudTrailARNInvalidException_Message}}
+var mCloudTrailInvalidClientTokenIdException = smithy.SchemaMembers{List: []*smithy.Schema{&sCloudTrailInvalidClientTokenIdException_Message}}
+var mCloudWatchLogsDeliveryUnavailableException = smithy.SchemaMembers{List: []*smithy.Schema{&sCloudWatchLogsDeliveryUnavailableException_Message}}
+var mConcurrentModificationException = smithy.SchemaMembers{List: []*smithy.Schema{&sConcurrentModificationException_Message}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_Message}}
+var mContextKeySelector = smithy.SchemaMembers{List: []*smithy.Schema{&sContextKeySelector_Type, &sContextKeySelector_Equals}}
+var m_ContextKeySelectors = smithy.SchemaMembers{List: []*smithy.Schema{&s_ContextKeySelectors_member}}
+var mDashboardDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sDashboardDetail_DashboardArn, &sDashboardDetail_Type}}
+var m_Dashboards = smithy.SchemaMembers{List: []*smithy.Schema{&s_Dashboards_member}}
+var mDashboardStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sDashboardStatus_CREATING, &sDashboardStatus_CREATED, &sDashboardStatus_UPDATING, &sDashboardStatus_UPDATED, &sDashboardStatus_DELETING}}
+var mDashboardType = smithy.SchemaMembers{List: []*smithy.Schema{&sDashboardType_MANAGED, &sDashboardType_CUSTOM}}
+var mDataResource = smithy.SchemaMembers{List: []*smithy.Schema{&sDataResource_Type, &sDataResource_Values}}
+var m_DataResources = smithy.SchemaMembers{List: []*smithy.Schema{&s_DataResources_member}}
+var m_DataResourceValues = smithy.SchemaMembers{List: []*smithy.Schema{&s_DataResourceValues_member}}
+var mDelegatedAdminAccountLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sDelegatedAdminAccountLimitExceededException_Message}}
+var mDeliveryStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sDeliveryStatus_SUCCESS, &sDeliveryStatus_FAILED, &sDeliveryStatus_FAILED_SIGNING_FILE, &sDeliveryStatus_PENDING, &sDeliveryStatus_RESOURCE_NOT_FOUND, &sDeliveryStatus_ACCESS_DENIED, &sDeliveryStatus_ACCESS_DENIED_SIGNING_FILE, &sDeliveryStatus_CANCELLED, &sDeliveryStatus_UNKNOWN}, Seed: 3, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 8, 4, 0, 0, 0, 5, 0, 0, 6, 0, 0, 0, 0, 0, 2, 0, 9,
+	0, 0, 7, 0, 0, 1, 0, 3,
+}}
+var mDestination = smithy.SchemaMembers{List: []*smithy.Schema{&sDestination_Type, &sDestination_Location}}
+var m_Destinations = smithy.SchemaMembers{List: []*smithy.Schema{&s_Destinations_member}}
+var mDestinationType = smithy.SchemaMembers{List: []*smithy.Schema{&sDestinationType_EVENT_DATA_STORE, &sDestinationType_AWS_SERVICE}}
+var mEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sEvent_EventId, &sEvent_EventName, &sEvent_ReadOnly, &sEvent_AccessKeyId, &sEvent_EventTime, &sEvent_EventSource, &sEvent_Username, &sEvent_Resources, &sEvent_CloudTrailEvent}, Seed: 3, Slots: []uint16{
+	0, 0, 0, 0, 6, 0, 2, 0, 0, 0, 0, 1, 9, 4, 0, 0, 7, 0, 3, 8, 5, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0,
+}}
+var mEventCategory = smithy.SchemaMembers{List: []*smithy.Schema{&sEventCategory_Insight}}
+var mEventCategoryAggregation = smithy.SchemaMembers{List: []*smithy.Schema{&sEventCategoryAggregation_Data}}
+var mEventDataStore = smithy.SchemaMembers{List: []*smithy.Schema{&sEventDataStore_EventDataStoreArn, &sEventDataStore_Name, &sEventDataStore_TerminationProtectionEnabled, &sEventDataStore_Status, &sEventDataStore_AdvancedEventSelectors, &sEventDataStore_MultiRegionEnabled, &sEventDataStore_OrganizationEnabled, &sEventDataStore_RetentionPeriod, &sEventDataStore_CreatedTimestamp, &sEventDataStore_UpdatedTimestamp}, Seed: 12, Slots: []uint16{
+	0, 6, 0, 2, 0, 0, 0, 8, 9, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0,
+	0, 0, 4, 3, 1, 0, 0, 5,
+}}
+var mEventDataStoreAlreadyExistsException = smithy.SchemaMembers{List: []*smithy.Schema{&sEventDataStoreAlreadyExistsException_Message}}
+var mEventDataStoreARNInvalidException = smithy.SchemaMembers{List: []*smithy.Schema{&sEventDataStoreARNInvalidException_Message}}
+var mEventDataStoreFederationEnabledException = smithy.SchemaMembers{List: []*smithy.Schema{&sEventDataStoreFederationEnabledException_Message}}
+var mEventDataStoreHasOngoingImportException = smithy.SchemaMembers{List: []*smithy.Schema{&sEventDataStoreHasOngoingImportException_Message}}
+var m_EventDataStoreList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EventDataStoreList_member}}
+var mEventDataStoreMaxLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sEventDataStoreMaxLimitExceededException_Message}}
+var mEventDataStoreNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sEventDataStoreNotFoundException_Message}}
+var m_EventDataStores = smithy.SchemaMembers{List: []*smithy.Schema{&s_EventDataStores_member}}
+var mEventDataStoreStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sEventDataStoreStatus_CREATED, &sEventDataStoreStatus_ENABLED, &sEventDataStoreStatus_PENDING_DELETION, &sEventDataStoreStatus_STARTING_INGESTION, &sEventDataStoreStatus_STOPPING_INGESTION, &sEventDataStoreStatus_STOPPED_INGESTION}}
+var mEventDataStoreTerminationProtectedException = smithy.SchemaMembers{List: []*smithy.Schema{&sEventDataStoreTerminationProtectedException_Message}}
+var mEventSelector = smithy.SchemaMembers{List: []*smithy.Schema{&sEventSelector_ReadWriteType, &sEventSelector_IncludeManagementEvents, &sEventSelector_DataResources, &sEventSelector_ExcludeManagementEventSources}}
+var m_EventSelectors = smithy.SchemaMembers{List: []*smithy.Schema{&s_EventSelectors_member}}
+var m_EventsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EventsList_member}}
+var m_ExcludeManagementEventSources = smithy.SchemaMembers{List: []*smithy.Schema{&s_ExcludeManagementEventSources_member}}
+var mFederationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sFederationStatus_ENABLING, &sFederationStatus_ENABLED, &sFederationStatus_DISABLING, &sFederationStatus_DISABLED}}
+var mGenerateResponseException = smithy.SchemaMembers{List: []*smithy.Schema{&sGenerateResponseException_Message}}
+var m_ImportDestinations = smithy.SchemaMembers{List: []*smithy.Schema{&s_ImportDestinations_member}}
+var m_ImportFailureList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ImportFailureList_member}}
+var mImportFailureListItem = smithy.SchemaMembers{List: []*smithy.Schema{&sImportFailureListItem_Location, &sImportFailureListItem_Status, &sImportFailureListItem_ErrorType, &sImportFailureListItem_ErrorMessage, &sImportFailureListItem_LastUpdatedTime}}
+var mImportFailureStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sImportFailureStatus_FAILED, &sImportFailureStatus_RETRY, &sImportFailureStatus_SUCCEEDED}}
+var mImportNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sImportNotFoundException_Message}}
+var m_ImportsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ImportsList_member}}
+var mImportsListItem = smithy.SchemaMembers{List: []*smithy.Schema{&sImportsListItem_ImportId, &sImportsListItem_ImportStatus, &sImportsListItem_Destinations, &sImportsListItem_CreatedTimestamp, &sImportsListItem_UpdatedTimestamp}}
+var mImportSource = smithy.SchemaMembers{List: []*smithy.Schema{&sImportSource_S3}}
+var mImportStatistics = smithy.SchemaMembers{List: []*smithy.Schema{&sImportStatistics_PrefixesFound, &sImportStatistics_PrefixesCompleted, &sImportStatistics_FilesCompleted, &sImportStatistics_EventsCompleted, &sImportStatistics_FailedEntries}}
+var mImportStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sImportStatus_INITIALIZING, &sImportStatus_IN_PROGRESS, &sImportStatus_FAILED, &sImportStatus_STOPPED, &sImportStatus_COMPLETED}}
+var mInactiveEventDataStoreException = smithy.SchemaMembers{List: []*smithy.Schema{&sInactiveEventDataStoreException_Message}}
+var mInactiveQueryException = smithy.SchemaMembers{List: []*smithy.Schema{&sInactiveQueryException_Message}}
+var mIngestionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sIngestionStatus_LatestIngestionSuccessTime, &sIngestionStatus_LatestIngestionSuccessEventID, &sIngestionStatus_LatestIngestionErrorCode, &sIngestionStatus_LatestIngestionAttemptTime, &sIngestionStatus_LatestIngestionAttemptEventID}}
+var mInsightNotEnabledException = smithy.SchemaMembers{List: []*smithy.Schema{&sInsightNotEnabledException_Message}}
+var mInsightSelector = smithy.SchemaMembers{List: []*smithy.Schema{&sInsightSelector_InsightType, &sInsightSelector_EventCategories}}
+var m_InsightSelectors = smithy.SchemaMembers{List: []*smithy.Schema{&s_InsightSelectors_member}}
+var mInsightsMetricDataType = smithy.SchemaMembers{List: []*smithy.Schema{&sInsightsMetricDataType_FILL_WITH_ZEROS, &sInsightsMetricDataType_NON_ZERO_DATA}}
+var m_InsightsMetricValues = smithy.SchemaMembers{List: []*smithy.Schema{&s_InsightsMetricValues_member}}
+var mInsightType = smithy.SchemaMembers{List: []*smithy.Schema{&sInsightType_ApiCallRateInsight, &sInsightType_ApiErrorRateInsight}}
+var mInsufficientDependencyServiceAccessPermissionException = smithy.SchemaMembers{List: []*smithy.Schema{&sInsufficientDependencyServiceAccessPermissionException_Message}}
+var mInsufficientEncryptionPolicyException = smithy.SchemaMembers{List: []*smithy.Schema{&sInsufficientEncryptionPolicyException_Message}}
+var mInsufficientIAMAccessPermissionException = smithy.SchemaMembers{List: []*smithy.Schema{&sInsufficientIAMAccessPermissionException_Message}}
+var mInsufficientS3BucketPolicyException = smithy.SchemaMembers{List: []*smithy.Schema{&sInsufficientS3BucketPolicyException_Message}}
+var mInsufficientSnsTopicPolicyException = smithy.SchemaMembers{List: []*smithy.Schema{&sInsufficientSnsTopicPolicyException_Message}}
+var mInvalidCloudWatchLogsLogGroupArnException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidCloudWatchLogsLogGroupArnException_Message}}
+var mInvalidCloudWatchLogsRoleArnException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidCloudWatchLogsRoleArnException_Message}}
+var mInvalidDateRangeException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidDateRangeException_Message}}
+var mInvalidEventCategoryException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidEventCategoryException_Message}}
+var mInvalidEventDataStoreCategoryException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidEventDataStoreCategoryException_Message}}
+var mInvalidEventDataStoreStatusException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidEventDataStoreStatusException_Message}}
+var mInvalidEventSelectorsException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidEventSelectorsException_Message}}
+var mInvalidHomeRegionException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidHomeRegionException_Message}}
+var mInvalidImportSourceException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidImportSourceException_Message}}
+var mInvalidInsightSelectorsException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidInsightSelectorsException_Message}}
+var mInvalidKmsKeyIdException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidKmsKeyIdException_Message}}
+var mInvalidLookupAttributesException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidLookupAttributesException_Message}}
+var mInvalidMaxResultsException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidMaxResultsException_Message}}
+var mInvalidNextTokenException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidNextTokenException_Message}}
+var mInvalidParameterCombinationException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidParameterCombinationException_Message}}
+var mInvalidParameterException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidParameterException_Message}}
+var mInvalidQueryStatementException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidQueryStatementException_Message}}
+var mInvalidQueryStatusException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidQueryStatusException_Message}}
+var mInvalidS3BucketNameException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidS3BucketNameException_Message}}
+var mInvalidS3PrefixException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidS3PrefixException_Message}}
+var mInvalidSnsTopicNameException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidSnsTopicNameException_Message}}
+var mInvalidSourceException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidSourceException_Message}}
+var mInvalidTagParameterException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidTagParameterException_Message}}
+var mInvalidTimeRangeException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidTimeRangeException_Message}}
+var mInvalidTokenException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidTokenException_Message}}
+var mInvalidTrailNameException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidTrailNameException_Message}}
+var mKmsException = smithy.SchemaMembers{List: []*smithy.Schema{&sKmsException_Message}}
+var mKmsKeyDisabledException = smithy.SchemaMembers{List: []*smithy.Schema{&sKmsKeyDisabledException_Message}}
+var mKmsKeyNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sKmsKeyNotFoundException_Message}}
+var mListInsightsDataDimensionKey = smithy.SchemaMembers{List: []*smithy.Schema{&sListInsightsDataDimensionKey_EVENT_ID, &sListInsightsDataDimensionKey_EVENT_NAME, &sListInsightsDataDimensionKey_EVENT_SOURCE}}
+var m_ListInsightsDataDimensions = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListInsightsDataDimensions_key, &s_ListInsightsDataDimensions_value}}
+var mListInsightsDataType = smithy.SchemaMembers{List: []*smithy.Schema{&sListInsightsDataType_INSIGHTS_EVENTS}}
+var mLookupAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&sLookupAttribute_AttributeKey, &sLookupAttribute_AttributeValue}}
+var mLookupAttributeKey = smithy.SchemaMembers{List: []*smithy.Schema{&sLookupAttributeKey_EVENT_ID, &sLookupAttributeKey_EVENT_NAME, &sLookupAttributeKey_READ_ONLY, &sLookupAttributeKey_USERNAME, &sLookupAttributeKey_RESOURCE_TYPE, &sLookupAttributeKey_RESOURCE_NAME, &sLookupAttributeKey_EVENT_SOURCE, &sLookupAttributeKey_ACCESS_KEY_ID}}
+var m_LookupAttributesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LookupAttributesList_member}}
+var mMaxConcurrentQueriesException = smithy.SchemaMembers{List: []*smithy.Schema{&sMaxConcurrentQueriesException_Message}}
+var mMaxEventSize = smithy.SchemaMembers{List: []*smithy.Schema{&sMaxEventSize_Standard, &sMaxEventSize_Large}}
+var mMaximumNumberOfTrailsExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sMaximumNumberOfTrailsExceededException_Message}}
+var mNoManagementAccountSLRExistsException = smithy.SchemaMembers{List: []*smithy.Schema{&sNoManagementAccountSLRExistsException_Message}}
+var mNotOrganizationManagementAccountException = smithy.SchemaMembers{List: []*smithy.Schema{&sNotOrganizationManagementAccountException_Message}}
+var mNotOrganizationMasterAccountException = smithy.SchemaMembers{List: []*smithy.Schema{&sNotOrganizationMasterAccountException_Message}}
+var mOperationNotPermittedException = smithy.SchemaMembers{List: []*smithy.Schema{&sOperationNotPermittedException_Message}}
+var m_Operator = smithy.SchemaMembers{List: []*smithy.Schema{&s_Operator_member}}
+var m_OperatorTargetList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OperatorTargetList_member}}
+var mOrganizationNotInAllFeaturesModeException = smithy.SchemaMembers{List: []*smithy.Schema{&sOrganizationNotInAllFeaturesModeException_Message}}
+var mOrganizationsNotInUseException = smithy.SchemaMembers{List: []*smithy.Schema{&sOrganizationsNotInUseException_Message}}
+var mPartitionKey = smithy.SchemaMembers{List: []*smithy.Schema{&sPartitionKey_Name, &sPartitionKey_Type}}
+var m_PartitionKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PartitionKeyList_member}}
+var mPublicKey = smithy.SchemaMembers{List: []*smithy.Schema{&sPublicKey_Value, &sPublicKey_ValidityStartTime, &sPublicKey_ValidityEndTime, &sPublicKey_Fingerprint}}
+var m_PublicKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PublicKeyList_member}}
+var m_Queries = smithy.SchemaMembers{List: []*smithy.Schema{&s_Queries_member}}
+var mQuery = smithy.SchemaMembers{List: []*smithy.Schema{&sQuery_QueryId, &sQuery_QueryStatus, &sQuery_CreationTime}}
+var mQueryIdNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sQueryIdNotFoundException_Message}}
+var m_QueryParameters = smithy.SchemaMembers{List: []*smithy.Schema{&s_QueryParameters_member}}
+var m_QueryParameterValues = smithy.SchemaMembers{List: []*smithy.Schema{&s_QueryParameterValues_key, &s_QueryParameterValues_value}}
+var m_QueryResultColumn = smithy.SchemaMembers{List: []*smithy.Schema{&s_QueryResultColumn_key, &s_QueryResultColumn_value}}
+var m_QueryResultRow = smithy.SchemaMembers{List: []*smithy.Schema{&s_QueryResultRow_member}}
+var m_QueryResultRows = smithy.SchemaMembers{List: []*smithy.Schema{&s_QueryResultRows_member}}
+var mQueryStatistics = smithy.SchemaMembers{List: []*smithy.Schema{&sQueryStatistics_ResultsCount, &sQueryStatistics_TotalResultsCount, &sQueryStatistics_BytesScanned}}
+var mQueryStatisticsForDescribeQuery = smithy.SchemaMembers{List: []*smithy.Schema{&sQueryStatisticsForDescribeQuery_EventsMatched, &sQueryStatisticsForDescribeQuery_EventsScanned, &sQueryStatisticsForDescribeQuery_BytesScanned, &sQueryStatisticsForDescribeQuery_ExecutionTimeInMillis, &sQueryStatisticsForDescribeQuery_CreationTime}}
+var mQueryStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sQueryStatus_QUEUED, &sQueryStatus_RUNNING, &sQueryStatus_FINISHED, &sQueryStatus_FAILED, &sQueryStatus_CANCELLED, &sQueryStatus_TIMED_OUT}}
+var mReadWriteType = smithy.SchemaMembers{List: []*smithy.Schema{&sReadWriteType_ReadOnly, &sReadWriteType_WriteOnly, &sReadWriteType_All}}
+var mRefreshSchedule = smithy.SchemaMembers{List: []*smithy.Schema{&sRefreshSchedule_Frequency, &sRefreshSchedule_Status, &sRefreshSchedule_TimeOfDay}}
+var mRefreshScheduleFrequency = smithy.SchemaMembers{List: []*smithy.Schema{&sRefreshScheduleFrequency_Unit, &sRefreshScheduleFrequency_Value}}
+var mRefreshScheduleFrequencyUnit = smithy.SchemaMembers{List: []*smithy.Schema{&sRefreshScheduleFrequencyUnit_HOURS, &sRefreshScheduleFrequencyUnit_DAYS}}
+var mRefreshScheduleStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sRefreshScheduleStatus_ENABLED, &sRefreshScheduleStatus_DISABLED}}
+var mRequestWidget = smithy.SchemaMembers{List: []*smithy.Schema{&sRequestWidget_QueryStatement, &sRequestWidget_QueryParameters, &sRequestWidget_ViewProperties}}
+var m_RequestWidgetList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RequestWidgetList_member}}
+var mResource = smithy.SchemaMembers{List: []*smithy.Schema{&sResource_ResourceType, &sResource_ResourceName}}
+var mResourceARNNotValidException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceARNNotValidException_Message}}
+var m_ResourceIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceIdList_member}}
+var m_ResourceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceList_member}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message}}
+var mResourcePolicyNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourcePolicyNotFoundException_Message}}
+var mResourcePolicyNotValidException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourcePolicyNotValidException_Message}}
+var mResourceTag = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceTag_ResourceId, &sResourceTag_TagsList}}
+var m_ResourceTagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceTagList_member}}
+var mResourceTypeNotSupportedException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceTypeNotSupportedException_Message}}
+var mS3BucketDoesNotExistException = smithy.SchemaMembers{List: []*smithy.Schema{&sS3BucketDoesNotExistException_Message}}
+var mS3ImportSource = smithy.SchemaMembers{List: []*smithy.Schema{&sS3ImportSource_S3LocationUri, &sS3ImportSource_S3BucketRegion, &sS3ImportSource_S3BucketAccessRoleArn}}
+var mSearchSampleQueriesSearchResult = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchSampleQueriesSearchResult_Name, &sSearchSampleQueriesSearchResult_Description, &sSearchSampleQueriesSearchResult_SQL, &sSearchSampleQueriesSearchResult_Relevance}}
+var m_SearchSampleQueriesSearchResults = smithy.SchemaMembers{List: []*smithy.Schema{&s_SearchSampleQueriesSearchResults_member}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_Message}}
+var mSourceConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceConfig_ApplyToAllRegions, &sSourceConfig_AdvancedEventSelectors}}
+var m_SourceEventCategories = smithy.SchemaMembers{List: []*smithy.Schema{&s_SourceEventCategories_member}}
+var mSourceEventCategory = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceEventCategory_Management, &sSourceEventCategory_Data}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var mTagsLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sTagsLimitExceededException_Message}}
+var m_TagsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagsList_member}}
+var mTemplate = smithy.SchemaMembers{List: []*smithy.Schema{&sTemplate_API_ACTIVITY, &sTemplate_RESOURCE_ACCESS, &sTemplate_USER_ACTIONS}}
+var m_Templates = smithy.SchemaMembers{List: []*smithy.Schema{&s_Templates_member}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_Message}}
+var m_Timestamps = smithy.SchemaMembers{List: []*smithy.Schema{&s_Timestamps_member}}
+var mTrail = smithy.SchemaMembers{List: []*smithy.Schema{&sTrail_Name, &sTrail_S3BucketName, &sTrail_S3KeyPrefix, &sTrail_SnsTopicName, &sTrail_SnsTopicARN, &sTrail_IncludeGlobalServiceEvents, &sTrail_IsMultiRegionTrail, &sTrail_HomeRegion, &sTrail_TrailARN, &sTrail_LogFileValidationEnabled, &sTrail_CloudWatchLogsLogGroupArn, &sTrail_CloudWatchLogsRoleArn, &sTrail_KmsKeyId, &sTrail_HasCustomEventSelectors, &sTrail_HasInsightSelectors, &sTrail_IsOrganizationTrail, &sTrail_RecursiveLogging}, Seed: 22, Slots: []uint16{
+	0, 5, 0, 0, 0, 0, 0, 0, 0, 3, 0, 11, 0, 0, 0, 0, 10, 8, 0, 15, 0, 9, 6, 0,
+	0, 0, 0, 17, 2, 0, 0, 0, 0, 0, 7, 1, 14, 0, 0, 0, 0, 0, 13, 0, 4, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 12, 16, 0, 0, 0, 0, 0, 0, 0, 0,
+}}
+var mTrailAlreadyExistsException = smithy.SchemaMembers{List: []*smithy.Schema{&sTrailAlreadyExistsException_Message}}
+var mTrailInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sTrailInfo_TrailARN, &sTrailInfo_Name, &sTrailInfo_HomeRegion}}
+var m_TrailList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TrailList_member}}
+var m_TrailNameList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TrailNameList_member}}
+var mTrailNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sTrailNotFoundException_Message}}
+var mTrailNotProvidedException = smithy.SchemaMembers{List: []*smithy.Schema{&sTrailNotProvidedException_Message}}
+var m_Trails = smithy.SchemaMembers{List: []*smithy.Schema{&s_Trails_member}}
+var mType = smithy.SchemaMembers{List: []*smithy.Schema{&sType_TagContext, &sType_RequestContext}}
+var mUnsupportedOperationException = smithy.SchemaMembers{List: []*smithy.Schema{&sUnsupportedOperationException_Message}}
+var m_ViewPropertiesMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_ViewPropertiesMap_key, &s_ViewPropertiesMap_value}}
+var mWidget = smithy.SchemaMembers{List: []*smithy.Schema{&sWidget_QueryAlias, &sWidget_QueryStatement, &sWidget_QueryParameters, &sWidget_ViewProperties}}
+var m_WidgetList = smithy.SchemaMembers{List: []*smithy.Schema{&s_WidgetList_member}}
+var mAddTagsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAddTagsRequest_ResourceId, &sAddTagsRequest_TagsList}}
+var mCancelQueryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelQueryRequest_EventDataStore, &sCancelQueryRequest_QueryId, &sCancelQueryRequest_EventDataStoreOwnerAccountId}}
+var mCancelQueryResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelQueryResponse_QueryId, &sCancelQueryResponse_QueryStatus, &sCancelQueryResponse_EventDataStoreOwnerAccountId}}
+var mCreateChannelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateChannelRequest_Name, &sCreateChannelRequest_Source, &sCreateChannelRequest_Destinations, &sCreateChannelRequest_Tags}}
+var mCreateChannelResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateChannelResponse_ChannelArn, &sCreateChannelResponse_Name, &sCreateChannelResponse_Source, &sCreateChannelResponse_Destinations, &sCreateChannelResponse_Tags}}
+var mCreateDashboardRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDashboardRequest_Name, &sCreateDashboardRequest_RefreshSchedule, &sCreateDashboardRequest_TagsList, &sCreateDashboardRequest_TerminationProtectionEnabled, &sCreateDashboardRequest_Widgets}}
+var mCreateDashboardResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDashboardResponse_DashboardArn, &sCreateDashboardResponse_Name, &sCreateDashboardResponse_Type, &sCreateDashboardResponse_Widgets, &sCreateDashboardResponse_TagsList, &sCreateDashboardResponse_RefreshSchedule, &sCreateDashboardResponse_TerminationProtectionEnabled}}
+var mCreateEventDataStoreRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateEventDataStoreRequest_Name, &sCreateEventDataStoreRequest_AdvancedEventSelectors, &sCreateEventDataStoreRequest_MultiRegionEnabled, &sCreateEventDataStoreRequest_OrganizationEnabled, &sCreateEventDataStoreRequest_RetentionPeriod, &sCreateEventDataStoreRequest_TerminationProtectionEnabled, &sCreateEventDataStoreRequest_TagsList, &sCreateEventDataStoreRequest_KmsKeyId, &sCreateEventDataStoreRequest_StartIngestion, &sCreateEventDataStoreRequest_BillingMode}, Seed: 7, Slots: []uint16{
+	0, 8, 0, 0, 0, 3, 0, 1, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 2, 0, 4, 0, 7,
+	0, 0, 0, 6, 5, 0, 9, 0,
+}}
+var mCreateEventDataStoreResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateEventDataStoreResponse_EventDataStoreArn, &sCreateEventDataStoreResponse_Name, &sCreateEventDataStoreResponse_Status, &sCreateEventDataStoreResponse_AdvancedEventSelectors, &sCreateEventDataStoreResponse_MultiRegionEnabled, &sCreateEventDataStoreResponse_OrganizationEnabled, &sCreateEventDataStoreResponse_RetentionPeriod, &sCreateEventDataStoreResponse_TerminationProtectionEnabled, &sCreateEventDataStoreResponse_TagsList, &sCreateEventDataStoreResponse_CreatedTimestamp, &sCreateEventDataStoreResponse_UpdatedTimestamp, &sCreateEventDataStoreResponse_KmsKeyId, &sCreateEventDataStoreResponse_BillingMode}, Seed: 12, Slots: []uint16{
+	0, 5, 0, 2, 0, 12, 0, 7, 10, 0, 0, 0, 6, 0, 0, 0, 13, 0, 0, 11, 0, 9, 0, 0,
+	0, 0, 3, 8, 1, 0, 0, 4,
+}}
+var mCreateTrailRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTrailRequest_Name, &sCreateTrailRequest_S3BucketName, &sCreateTrailRequest_S3KeyPrefix, &sCreateTrailRequest_SnsTopicName, &sCreateTrailRequest_IncludeGlobalServiceEvents, &sCreateTrailRequest_IsMultiRegionTrail, &sCreateTrailRequest_EnableLogFileValidation, &sCreateTrailRequest_CloudWatchLogsLogGroupArn, &sCreateTrailRequest_CloudWatchLogsRoleArn, &sCreateTrailRequest_KmsKeyId, &sCreateTrailRequest_IsOrganizationTrail, &sCreateTrailRequest_TagsList, &sCreateTrailRequest_RecursiveLogging}, Seed: 102, Slots: []uint16{
+	12, 2, 0, 0, 0, 0, 0, 3, 0, 1, 0, 0, 7, 0, 11, 0, 5, 6, 0, 13, 0, 0, 0, 8,
+	0, 4, 0, 9, 10, 0, 0, 0,
+}}
+var mCreateTrailResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTrailResponse_Name, &sCreateTrailResponse_S3BucketName, &sCreateTrailResponse_S3KeyPrefix, &sCreateTrailResponse_SnsTopicName, &sCreateTrailResponse_SnsTopicARN, &sCreateTrailResponse_IncludeGlobalServiceEvents, &sCreateTrailResponse_IsMultiRegionTrail, &sCreateTrailResponse_TrailARN, &sCreateTrailResponse_LogFileValidationEnabled, &sCreateTrailResponse_CloudWatchLogsLogGroupArn, &sCreateTrailResponse_CloudWatchLogsRoleArn, &sCreateTrailResponse_KmsKeyId, &sCreateTrailResponse_IsOrganizationTrail, &sCreateTrailResponse_RecursiveLogging}, Seed: 45, Slots: []uint16{
+	5, 0, 0, 4, 0, 6, 11, 0, 13, 9, 3, 10, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0,
+	12, 0, 2, 14, 0, 1, 0, 7,
+}}
+var mDeleteChannelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteChannelRequest_Channel}}
+var mDeleteDashboardRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDashboardRequest_DashboardId}}
+var mDeleteEventDataStoreRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteEventDataStoreRequest_EventDataStore}}
+var mDeleteResourcePolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteResourcePolicyRequest_ResourceArn}}
+var mDeleteTrailRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTrailRequest_Name}}
+var mDeregisterOrganizationDelegatedAdminRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeregisterOrganizationDelegatedAdminRequest_DelegatedAdminAccountId}}
+var mDescribeQueryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeQueryRequest_EventDataStore, &sDescribeQueryRequest_QueryId, &sDescribeQueryRequest_QueryAlias, &sDescribeQueryRequest_RefreshId, &sDescribeQueryRequest_EventDataStoreOwnerAccountId}}
+var mDescribeQueryResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeQueryResponse_QueryId, &sDescribeQueryResponse_QueryString, &sDescribeQueryResponse_QueryStatus, &sDescribeQueryResponse_QueryStatistics, &sDescribeQueryResponse_ErrorMessage, &sDescribeQueryResponse_DeliveryS3Uri, &sDescribeQueryResponse_DeliveryStatus, &sDescribeQueryResponse_Prompt, &sDescribeQueryResponse_EventDataStoreOwnerAccountId}, Seed: 6, Slots: []uint16{
+	0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 9, 8, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0,
+	3, 0, 7, 6, 4, 0, 0, 2,
+}}
+var mDescribeTrailsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeTrailsRequest_trailNameList, &sDescribeTrailsRequest_includeShadowTrails}}
+var mDescribeTrailsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeTrailsResponse_trailList}}
+var mDisableFederationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisableFederationRequest_EventDataStore}}
+var mDisableFederationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDisableFederationResponse_EventDataStoreArn, &sDisableFederationResponse_FederationStatus}}
+var mEnableFederationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sEnableFederationRequest_EventDataStore, &sEnableFederationRequest_FederationRoleArn}}
+var mEnableFederationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sEnableFederationResponse_EventDataStoreArn, &sEnableFederationResponse_FederationStatus, &sEnableFederationResponse_FederationRoleArn}}
+var mGenerateQueryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGenerateQueryRequest_EventDataStores, &sGenerateQueryRequest_Prompt}}
+var mGenerateQueryResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGenerateQueryResponse_QueryStatement, &sGenerateQueryResponse_QueryAlias, &sGenerateQueryResponse_EventDataStoreOwnerAccountId}}
+var mGetChannelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetChannelRequest_Channel}}
+var mGetChannelResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetChannelResponse_ChannelArn, &sGetChannelResponse_Name, &sGetChannelResponse_Source, &sGetChannelResponse_SourceConfig, &sGetChannelResponse_Destinations, &sGetChannelResponse_IngestionStatus}}
+var mGetDashboardRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDashboardRequest_DashboardId}}
+var mGetDashboardResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDashboardResponse_DashboardArn, &sGetDashboardResponse_Type, &sGetDashboardResponse_Status, &sGetDashboardResponse_Widgets, &sGetDashboardResponse_RefreshSchedule, &sGetDashboardResponse_CreatedTimestamp, &sGetDashboardResponse_UpdatedTimestamp, &sGetDashboardResponse_LastRefreshId, &sGetDashboardResponse_LastRefreshFailureReason, &sGetDashboardResponse_TerminationProtectionEnabled}, Seed: 2, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 0, 4, 7, 0, 2, 0, 0, 0, 5, 0, 0, 0, 9, 0, 8, 1, 0,
+	3, 0, 0, 10, 0, 0, 6, 0,
+}}
+var mGetEventConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEventConfigurationRequest_TrailName, &sGetEventConfigurationRequest_EventDataStore}}
+var mGetEventConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEventConfigurationResponse_TrailARN, &sGetEventConfigurationResponse_EventDataStoreArn, &sGetEventConfigurationResponse_MaxEventSize, &sGetEventConfigurationResponse_ContextKeySelectors, &sGetEventConfigurationResponse_AggregationConfigurations}}
+var mGetEventDataStoreRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEventDataStoreRequest_EventDataStore}}
+var mGetEventDataStoreResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEventDataStoreResponse_EventDataStoreArn, &sGetEventDataStoreResponse_Name, &sGetEventDataStoreResponse_Status, &sGetEventDataStoreResponse_AdvancedEventSelectors, &sGetEventDataStoreResponse_MultiRegionEnabled, &sGetEventDataStoreResponse_OrganizationEnabled, &sGetEventDataStoreResponse_RetentionPeriod, &sGetEventDataStoreResponse_TerminationProtectionEnabled, &sGetEventDataStoreResponse_CreatedTimestamp, &sGetEventDataStoreResponse_UpdatedTimestamp, &sGetEventDataStoreResponse_KmsKeyId, &sGetEventDataStoreResponse_BillingMode, &sGetEventDataStoreResponse_FederationStatus, &sGetEventDataStoreResponse_FederationRoleArn, &sGetEventDataStoreResponse_PartitionKeys}, Seed: 29, Slots: []uint16{
+	0, 0, 4, 0, 0, 0, 0, 12, 0, 10, 0, 2, 6, 5, 14, 0, 0, 0, 15, 0, 9, 0, 7, 1,
+	0, 0, 13, 0, 3, 11, 0, 8,
+}}
+var mGetEventSelectorsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEventSelectorsRequest_TrailName}}
+var mGetEventSelectorsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEventSelectorsResponse_TrailARN, &sGetEventSelectorsResponse_EventSelectors, &sGetEventSelectorsResponse_AdvancedEventSelectors}}
+var mGetImportRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetImportRequest_ImportId}}
+var mGetImportResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetImportResponse_ImportId, &sGetImportResponse_Destinations, &sGetImportResponse_ImportSource, &sGetImportResponse_StartEventTime, &sGetImportResponse_EndEventTime, &sGetImportResponse_ImportStatus, &sGetImportResponse_CreatedTimestamp, &sGetImportResponse_UpdatedTimestamp, &sGetImportResponse_ImportStatistics}, Seed: 1, Slots: []uint16{
+	6, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 0, 9, 0, 0, 0, 5, 0, 0, 7,
+	0, 0, 3, 0, 0, 0, 4, 0,
+}}
+var mGetInsightSelectorsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetInsightSelectorsRequest_TrailName, &sGetInsightSelectorsRequest_EventDataStore}}
+var mGetInsightSelectorsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetInsightSelectorsResponse_TrailARN, &sGetInsightSelectorsResponse_InsightSelectors, &sGetInsightSelectorsResponse_EventDataStoreArn, &sGetInsightSelectorsResponse_InsightsDestination}}
+var mGetQueryResultsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetQueryResultsRequest_EventDataStore, &sGetQueryResultsRequest_QueryId, &sGetQueryResultsRequest_NextToken, &sGetQueryResultsRequest_MaxQueryResults, &sGetQueryResultsRequest_EventDataStoreOwnerAccountId}}
+var mGetQueryResultsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetQueryResultsResponse_QueryStatus, &sGetQueryResultsResponse_QueryStatistics, &sGetQueryResultsResponse_QueryResultRows, &sGetQueryResultsResponse_NextToken, &sGetQueryResultsResponse_ErrorMessage}}
+var mGetResourcePolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourcePolicyRequest_ResourceArn}}
+var mGetResourcePolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourcePolicyResponse_ResourceArn, &sGetResourcePolicyResponse_ResourcePolicy, &sGetResourcePolicyResponse_DelegatedAdminResourcePolicy}}
+var mGetTrailRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTrailRequest_Name}}
+var mGetTrailResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTrailResponse_Trail}}
+var mGetTrailStatusRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTrailStatusRequest_Name}}
+var mGetTrailStatusResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTrailStatusResponse_IsLogging, &sGetTrailStatusResponse_LatestDeliveryError, &sGetTrailStatusResponse_LatestNotificationError, &sGetTrailStatusResponse_LatestDeliveryTime, &sGetTrailStatusResponse_LatestNotificationTime, &sGetTrailStatusResponse_StartLoggingTime, &sGetTrailStatusResponse_StopLoggingTime, &sGetTrailStatusResponse_LatestCloudWatchLogsDeliveryError, &sGetTrailStatusResponse_LatestCloudWatchLogsDeliveryTime, &sGetTrailStatusResponse_LatestDigestDeliveryTime, &sGetTrailStatusResponse_LatestDigestDeliveryError, &sGetTrailStatusResponse_LatestDeliveryAttemptTime, &sGetTrailStatusResponse_LatestNotificationAttemptTime, &sGetTrailStatusResponse_LatestNotificationAttemptSucceeded, &sGetTrailStatusResponse_LatestDeliveryAttemptSucceeded, &sGetTrailStatusResponse_TimeLoggingStarted, &sGetTrailStatusResponse_TimeLoggingStopped}, Seed: 9, Slots: []uint16{
+	0, 0, 1, 15, 0, 2, 0, 16, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 11,
+	9, 0, 0, 0, 12, 0, 0, 14, 5, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 4, 0, 0, 8,
+	0, 0, 0, 0, 6, 0, 10, 0, 0, 0, 0, 13, 0, 0, 0, 17,
+}}
+var mListChannelsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListChannelsRequest_MaxResults, &sListChannelsRequest_NextToken}}
+var mListChannelsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListChannelsResponse_Channels, &sListChannelsResponse_NextToken}}
+var mListDashboardsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListDashboardsRequest_NamePrefix, &sListDashboardsRequest_Type, &sListDashboardsRequest_NextToken, &sListDashboardsRequest_MaxResults}}
+var mListDashboardsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListDashboardsResponse_Dashboards, &sListDashboardsResponse_NextToken}}
+var mListEventDataStoresRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListEventDataStoresRequest_NextToken, &sListEventDataStoresRequest_MaxResults}}
+var mListEventDataStoresResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListEventDataStoresResponse_EventDataStores, &sListEventDataStoresResponse_NextToken}}
+var mListImportFailuresRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListImportFailuresRequest_ImportId, &sListImportFailuresRequest_MaxResults, &sListImportFailuresRequest_NextToken}}
+var mListImportFailuresResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListImportFailuresResponse_Failures, &sListImportFailuresResponse_NextToken}}
+var mListImportsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListImportsRequest_MaxResults, &sListImportsRequest_Destination, &sListImportsRequest_ImportStatus, &sListImportsRequest_NextToken}}
+var mListImportsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListImportsResponse_Imports, &sListImportsResponse_NextToken}}
+var mListInsightsDataRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListInsightsDataRequest_InsightSource, &sListInsightsDataRequest_DataType, &sListInsightsDataRequest_Dimensions, &sListInsightsDataRequest_StartTime, &sListInsightsDataRequest_EndTime, &sListInsightsDataRequest_MaxResults, &sListInsightsDataRequest_NextToken}}
+var mListInsightsDataResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListInsightsDataResponse_Events, &sListInsightsDataResponse_NextToken}}
+var mListInsightsMetricDataRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListInsightsMetricDataRequest_TrailName, &sListInsightsMetricDataRequest_EventSource, &sListInsightsMetricDataRequest_EventName, &sListInsightsMetricDataRequest_InsightType, &sListInsightsMetricDataRequest_ErrorCode, &sListInsightsMetricDataRequest_StartTime, &sListInsightsMetricDataRequest_EndTime, &sListInsightsMetricDataRequest_Period, &sListInsightsMetricDataRequest_DataType, &sListInsightsMetricDataRequest_MaxResults, &sListInsightsMetricDataRequest_NextToken}, Seed: 3, Slots: []uint16{
+	0, 0, 0, 0, 2, 1, 3, 6, 9, 0, 7, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 8, 0,
+	10, 0, 0, 11, 0, 0, 0, 4,
+}}
+var mListInsightsMetricDataResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListInsightsMetricDataResponse_TrailARN, &sListInsightsMetricDataResponse_EventSource, &sListInsightsMetricDataResponse_EventName, &sListInsightsMetricDataResponse_InsightType, &sListInsightsMetricDataResponse_ErrorCode, &sListInsightsMetricDataResponse_Timestamps, &sListInsightsMetricDataResponse_Values, &sListInsightsMetricDataResponse_NextToken}}
+var mListPublicKeysRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListPublicKeysRequest_StartTime, &sListPublicKeysRequest_EndTime, &sListPublicKeysRequest_NextToken}}
+var mListPublicKeysResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListPublicKeysResponse_PublicKeyList, &sListPublicKeysResponse_NextToken}}
+var mListQueriesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListQueriesRequest_EventDataStore, &sListQueriesRequest_NextToken, &sListQueriesRequest_MaxResults, &sListQueriesRequest_StartTime, &sListQueriesRequest_EndTime, &sListQueriesRequest_QueryStatus}}
+var mListQueriesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListQueriesResponse_Queries, &sListQueriesResponse_NextToken}}
+var mListTagsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsRequest_ResourceIdList, &sListTagsRequest_NextToken}}
+var mListTagsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsResponse_ResourceTagList, &sListTagsResponse_NextToken}}
+var mListTrailsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTrailsRequest_NextToken}}
+var mListTrailsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTrailsResponse_Trails, &sListTrailsResponse_NextToken}}
+var mLookupEventsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sLookupEventsRequest_LookupAttributes, &sLookupEventsRequest_StartTime, &sLookupEventsRequest_EndTime, &sLookupEventsRequest_EventCategory, &sLookupEventsRequest_MaxResults, &sLookupEventsRequest_NextToken}}
+var mLookupEventsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sLookupEventsResponse_Events, &sLookupEventsResponse_NextToken}}
+var mPutEventConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutEventConfigurationRequest_TrailName, &sPutEventConfigurationRequest_EventDataStore, &sPutEventConfigurationRequest_MaxEventSize, &sPutEventConfigurationRequest_ContextKeySelectors, &sPutEventConfigurationRequest_AggregationConfigurations}}
+var mPutEventConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutEventConfigurationResponse_TrailARN, &sPutEventConfigurationResponse_EventDataStoreArn, &sPutEventConfigurationResponse_MaxEventSize, &sPutEventConfigurationResponse_ContextKeySelectors, &sPutEventConfigurationResponse_AggregationConfigurations}}
+var mPutEventSelectorsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutEventSelectorsRequest_TrailName, &sPutEventSelectorsRequest_EventSelectors, &sPutEventSelectorsRequest_AdvancedEventSelectors}}
+var mPutEventSelectorsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutEventSelectorsResponse_TrailARN, &sPutEventSelectorsResponse_EventSelectors, &sPutEventSelectorsResponse_AdvancedEventSelectors}}
+var mPutInsightSelectorsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutInsightSelectorsRequest_TrailName, &sPutInsightSelectorsRequest_InsightSelectors, &sPutInsightSelectorsRequest_EventDataStore, &sPutInsightSelectorsRequest_InsightsDestination}}
+var mPutInsightSelectorsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutInsightSelectorsResponse_TrailARN, &sPutInsightSelectorsResponse_InsightSelectors, &sPutInsightSelectorsResponse_EventDataStoreArn, &sPutInsightSelectorsResponse_InsightsDestination}}
+var mPutResourcePolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutResourcePolicyRequest_ResourceArn, &sPutResourcePolicyRequest_ResourcePolicy}}
+var mPutResourcePolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutResourcePolicyResponse_ResourceArn, &sPutResourcePolicyResponse_ResourcePolicy, &sPutResourcePolicyResponse_DelegatedAdminResourcePolicy}}
+var mRegisterOrganizationDelegatedAdminRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisterOrganizationDelegatedAdminRequest_MemberAccountId}}
+var mRemoveTagsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRemoveTagsRequest_ResourceId, &sRemoveTagsRequest_TagsList}}
+var mRestoreEventDataStoreRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRestoreEventDataStoreRequest_EventDataStore}}
+var mRestoreEventDataStoreResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sRestoreEventDataStoreResponse_EventDataStoreArn, &sRestoreEventDataStoreResponse_Name, &sRestoreEventDataStoreResponse_Status, &sRestoreEventDataStoreResponse_AdvancedEventSelectors, &sRestoreEventDataStoreResponse_MultiRegionEnabled, &sRestoreEventDataStoreResponse_OrganizationEnabled, &sRestoreEventDataStoreResponse_RetentionPeriod, &sRestoreEventDataStoreResponse_TerminationProtectionEnabled, &sRestoreEventDataStoreResponse_CreatedTimestamp, &sRestoreEventDataStoreResponse_UpdatedTimestamp, &sRestoreEventDataStoreResponse_KmsKeyId, &sRestoreEventDataStoreResponse_BillingMode}, Seed: 12, Slots: []uint16{
+	0, 5, 0, 2, 0, 11, 0, 7, 9, 0, 0, 0, 6, 0, 0, 0, 12, 0, 0, 10, 0, 0, 0, 0,
+	0, 0, 3, 8, 1, 0, 0, 4,
+}}
+var mSearchSampleQueriesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchSampleQueriesRequest_SearchPhrase, &sSearchSampleQueriesRequest_MaxResults, &sSearchSampleQueriesRequest_NextToken}}
+var mSearchSampleQueriesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchSampleQueriesResponse_SearchResults, &sSearchSampleQueriesResponse_NextToken}}
+var mStartDashboardRefreshRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartDashboardRefreshRequest_DashboardId, &sStartDashboardRefreshRequest_QueryParameterValues}}
+var mStartDashboardRefreshResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartDashboardRefreshResponse_RefreshId}}
+var mStartEventDataStoreIngestionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartEventDataStoreIngestionRequest_EventDataStore}}
+var mStartImportRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartImportRequest_Destinations, &sStartImportRequest_ImportSource, &sStartImportRequest_StartEventTime, &sStartImportRequest_EndEventTime, &sStartImportRequest_ImportId}}
+var mStartImportResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartImportResponse_ImportId, &sStartImportResponse_Destinations, &sStartImportResponse_ImportSource, &sStartImportResponse_StartEventTime, &sStartImportResponse_EndEventTime, &sStartImportResponse_ImportStatus, &sStartImportResponse_CreatedTimestamp, &sStartImportResponse_UpdatedTimestamp}}
+var mStartLoggingRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartLoggingRequest_Name}}
+var mStartQueryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartQueryRequest_QueryStatement, &sStartQueryRequest_DeliveryS3Uri, &sStartQueryRequest_QueryAlias, &sStartQueryRequest_QueryParameters, &sStartQueryRequest_EventDataStoreOwnerAccountId}}
+var mStartQueryResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartQueryResponse_QueryId, &sStartQueryResponse_EventDataStoreOwnerAccountId}}
+var mStopEventDataStoreIngestionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStopEventDataStoreIngestionRequest_EventDataStore}}
+var mStopImportRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStopImportRequest_ImportId}}
+var mStopImportResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStopImportResponse_ImportId, &sStopImportResponse_ImportSource, &sStopImportResponse_Destinations, &sStopImportResponse_ImportStatus, &sStopImportResponse_CreatedTimestamp, &sStopImportResponse_UpdatedTimestamp, &sStopImportResponse_StartEventTime, &sStopImportResponse_EndEventTime, &sStopImportResponse_ImportStatistics}, Seed: 1, Slots: []uint16{
+	4, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 1, 3, 0, 9, 0, 0, 0, 8, 0, 0, 5,
+	0, 0, 2, 0, 0, 0, 7, 0,
+}}
+var mStopLoggingRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStopLoggingRequest_Name}}
+var mUpdateChannelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateChannelRequest_Channel, &sUpdateChannelRequest_Destinations, &sUpdateChannelRequest_Name}}
+var mUpdateChannelResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateChannelResponse_ChannelArn, &sUpdateChannelResponse_Name, &sUpdateChannelResponse_Source, &sUpdateChannelResponse_Destinations}}
+var mUpdateDashboardRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDashboardRequest_DashboardId, &sUpdateDashboardRequest_Widgets, &sUpdateDashboardRequest_RefreshSchedule, &sUpdateDashboardRequest_TerminationProtectionEnabled}}
+var mUpdateDashboardResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDashboardResponse_DashboardArn, &sUpdateDashboardResponse_Name, &sUpdateDashboardResponse_Type, &sUpdateDashboardResponse_Widgets, &sUpdateDashboardResponse_RefreshSchedule, &sUpdateDashboardResponse_TerminationProtectionEnabled, &sUpdateDashboardResponse_CreatedTimestamp, &sUpdateDashboardResponse_UpdatedTimestamp}}
+var mUpdateEventDataStoreRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateEventDataStoreRequest_EventDataStore, &sUpdateEventDataStoreRequest_Name, &sUpdateEventDataStoreRequest_AdvancedEventSelectors, &sUpdateEventDataStoreRequest_MultiRegionEnabled, &sUpdateEventDataStoreRequest_OrganizationEnabled, &sUpdateEventDataStoreRequest_RetentionPeriod, &sUpdateEventDataStoreRequest_TerminationProtectionEnabled, &sUpdateEventDataStoreRequest_KmsKeyId, &sUpdateEventDataStoreRequest_BillingMode}, Seed: 4, Slots: []uint16{
+	0, 0, 0, 0, 2, 0, 0, 3, 6, 0, 0, 0, 0, 0, 0, 8, 9, 5, 0, 7, 4, 0, 0, 0,
+	0, 1, 0, 0, 0, 0, 0, 0,
+}}
+var mUpdateEventDataStoreResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateEventDataStoreResponse_EventDataStoreArn, &sUpdateEventDataStoreResponse_Name, &sUpdateEventDataStoreResponse_Status, &sUpdateEventDataStoreResponse_AdvancedEventSelectors, &sUpdateEventDataStoreResponse_MultiRegionEnabled, &sUpdateEventDataStoreResponse_OrganizationEnabled, &sUpdateEventDataStoreResponse_RetentionPeriod, &sUpdateEventDataStoreResponse_TerminationProtectionEnabled, &sUpdateEventDataStoreResponse_CreatedTimestamp, &sUpdateEventDataStoreResponse_UpdatedTimestamp, &sUpdateEventDataStoreResponse_KmsKeyId, &sUpdateEventDataStoreResponse_BillingMode, &sUpdateEventDataStoreResponse_FederationStatus, &sUpdateEventDataStoreResponse_FederationRoleArn}, Seed: 29, Slots: []uint16{
+	0, 0, 4, 0, 0, 0, 0, 12, 0, 10, 0, 2, 6, 5, 14, 0, 0, 0, 0, 0, 9, 0, 7, 1,
+	0, 0, 13, 0, 3, 11, 0, 8,
+}}
+var mUpdateTrailRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateTrailRequest_Name, &sUpdateTrailRequest_S3BucketName, &sUpdateTrailRequest_S3KeyPrefix, &sUpdateTrailRequest_SnsTopicName, &sUpdateTrailRequest_IncludeGlobalServiceEvents, &sUpdateTrailRequest_IsMultiRegionTrail, &sUpdateTrailRequest_EnableLogFileValidation, &sUpdateTrailRequest_CloudWatchLogsLogGroupArn, &sUpdateTrailRequest_CloudWatchLogsRoleArn, &sUpdateTrailRequest_KmsKeyId, &sUpdateTrailRequest_IsOrganizationTrail, &sUpdateTrailRequest_RecursiveLogging}, Seed: 11, Slots: []uint16{
+	0, 0, 8, 1, 0, 12, 7, 6, 0, 11, 5, 9, 0, 3, 4, 0, 0, 0, 0, 0, 10, 0, 0, 0,
+	0, 2, 0, 0, 0, 0, 0, 0,
+}}
+var mUpdateTrailResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateTrailResponse_Name, &sUpdateTrailResponse_S3BucketName, &sUpdateTrailResponse_S3KeyPrefix, &sUpdateTrailResponse_SnsTopicName, &sUpdateTrailResponse_SnsTopicARN, &sUpdateTrailResponse_IncludeGlobalServiceEvents, &sUpdateTrailResponse_IsMultiRegionTrail, &sUpdateTrailResponse_TrailARN, &sUpdateTrailResponse_LogFileValidationEnabled, &sUpdateTrailResponse_CloudWatchLogsLogGroupArn, &sUpdateTrailResponse_CloudWatchLogsRoleArn, &sUpdateTrailResponse_KmsKeyId, &sUpdateTrailResponse_IsOrganizationTrail, &sUpdateTrailResponse_RecursiveLogging}, Seed: 45, Slots: []uint16{
+	5, 0, 0, 4, 0, 6, 11, 0, 13, 9, 3, 10, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0,
+	12, 0, 2, 14, 0, 1, 0, 7,
+}}
+
+var sAddTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddTags, Type: smithy.ShapeTypeOperation})
+var sCancelQuery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelQuery, Type: smithy.ShapeTypeOperation})
+var sCreateChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannel, Type: smithy.ShapeTypeOperation})
+var sCreateDashboard = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDashboard, Type: smithy.ShapeTypeOperation})
+var sCreateEventDataStore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEventDataStore, Type: smithy.ShapeTypeOperation})
+var sCreateTrail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTrail, Type: smithy.ShapeTypeOperation})
+var sDeleteChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChannel, Type: smithy.ShapeTypeOperation})
+var sDeleteDashboard = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDashboard, Type: smithy.ShapeTypeOperation})
+var sDeleteEventDataStore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEventDataStore, Type: smithy.ShapeTypeOperation})
+var sDeleteResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicy, Type: smithy.ShapeTypeOperation})
+var sDeleteTrail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTrail, Type: smithy.ShapeTypeOperation})
+var sDeregisterOrganizationDelegatedAdmin = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterOrganizationDelegatedAdmin, Type: smithy.ShapeTypeOperation})
+var sDescribeQuery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeQuery, Type: smithy.ShapeTypeOperation})
+var sDescribeTrails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTrails, Type: smithy.ShapeTypeOperation})
+var sDisableFederation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableFederation, Type: smithy.ShapeTypeOperation})
+var sEnableFederation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableFederation, Type: smithy.ShapeTypeOperation})
+var sGenerateQuery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGenerateQuery, Type: smithy.ShapeTypeOperation})
+var sGetChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChannel, Type: smithy.ShapeTypeOperation})
+var sGetDashboard = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDashboard, Type: smithy.ShapeTypeOperation})
+var sGetEventConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEventConfiguration, Type: smithy.ShapeTypeOperation})
+var sGetEventDataStore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEventDataStore, Type: smithy.ShapeTypeOperation})
+var sGetEventSelectors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEventSelectors, Type: smithy.ShapeTypeOperation})
+var sGetImport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetImport, Type: smithy.ShapeTypeOperation})
+var sGetInsightSelectors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInsightSelectors, Type: smithy.ShapeTypeOperation})
+var sGetQueryResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryResults, Type: smithy.ShapeTypeOperation})
+var sGetResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicy, Type: smithy.ShapeTypeOperation})
+var sGetTrail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTrail, Type: smithy.ShapeTypeOperation})
+var sGetTrailStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTrailStatus, Type: smithy.ShapeTypeOperation})
+var sListChannels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannels, Type: smithy.ShapeTypeOperation})
+var sListDashboards = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDashboards, Type: smithy.ShapeTypeOperation})
+var sListEventDataStores = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEventDataStores, Type: smithy.ShapeTypeOperation})
+var sListImportFailures = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListImportFailures, Type: smithy.ShapeTypeOperation})
+var sListImports = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListImports, Type: smithy.ShapeTypeOperation})
+var sListInsightsData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInsightsData, Type: smithy.ShapeTypeOperation})
+var sListInsightsMetricData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInsightsMetricData, Type: smithy.ShapeTypeOperation})
+var sListPublicKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPublicKeys, Type: smithy.ShapeTypeOperation})
+var sListQueries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListQueries, Type: smithy.ShapeTypeOperation})
+var sListTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTags, Type: smithy.ShapeTypeOperation})
+var sListTrails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTrails, Type: smithy.ShapeTypeOperation})
+var sLookupEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLookupEvents, Type: smithy.ShapeTypeOperation})
+var sPutEventConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEventConfiguration, Type: smithy.ShapeTypeOperation})
+var sPutEventSelectors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEventSelectors, Type: smithy.ShapeTypeOperation})
+var sPutInsightSelectors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutInsightSelectors, Type: smithy.ShapeTypeOperation})
+var sPutResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicy, Type: smithy.ShapeTypeOperation})
+var sRegisterOrganizationDelegatedAdmin = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterOrganizationDelegatedAdmin, Type: smithy.ShapeTypeOperation})
+var sRemoveTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveTags, Type: smithy.ShapeTypeOperation})
+var sRestoreEventDataStore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestoreEventDataStore, Type: smithy.ShapeTypeOperation})
+var sSearchSampleQueries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchSampleQueries, Type: smithy.ShapeTypeOperation})
+var sStartDashboardRefresh = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartDashboardRefresh, Type: smithy.ShapeTypeOperation})
+var sStartEventDataStoreIngestion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartEventDataStoreIngestion, Type: smithy.ShapeTypeOperation})
+var sStartImport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartImport, Type: smithy.ShapeTypeOperation})
+var sStartLogging = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartLogging, Type: smithy.ShapeTypeOperation})
+var sStartQuery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartQuery, Type: smithy.ShapeTypeOperation})
+var sStopEventDataStoreIngestion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopEventDataStoreIngestion, Type: smithy.ShapeTypeOperation})
+var sStopImport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopImport, Type: smithy.ShapeTypeOperation})
+var sStopLogging = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopLogging, Type: smithy.ShapeTypeOperation})
+var sUpdateChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChannel, Type: smithy.ShapeTypeOperation})
+var sUpdateDashboard = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDashboard, Type: smithy.ShapeTypeOperation})
+var sUpdateEventDataStore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEventDataStore, Type: smithy.ShapeTypeOperation})
+var sUpdateTrail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTrail, Type: smithy.ShapeTypeOperation})
+var s_CloudTrail_20131101 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CloudTrail_20131101, Traits: &t0, Type: smithy.ShapeTypeService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sAccountHasOngoingImportException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountHasOngoingImportException, Members: &mAccountHasOngoingImportException, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var s_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sAccountNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountNotFoundException, Members: &mAccountNotFoundException, Traits: &t3, Type: smithy.ShapeTypeStructure})
+var sAccountNotRegisteredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountNotRegisteredException, Members: &mAccountNotRegisteredException, Traits: &t4, Type: smithy.ShapeTypeStructure})
+var sAccountRegisteredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountRegisteredException, Members: &mAccountRegisteredException, Traits: &t5, Type: smithy.ShapeTypeStructure})
+var sAdvancedEventSelector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdvancedEventSelector, Members: &mAdvancedEventSelector, Type: smithy.ShapeTypeStructure})
+var s_AdvancedEventSelectors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AdvancedEventSelectors, Members: &m_AdvancedEventSelectors, Type: smithy.ShapeTypeList})
+var sAdvancedFieldSelector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdvancedFieldSelector, Members: &mAdvancedFieldSelector, Type: smithy.ShapeTypeStructure})
+var s_AdvancedFieldSelectors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AdvancedFieldSelectors, Members: &m_AdvancedFieldSelectors, Type: smithy.ShapeTypeList})
+var sAggregationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAggregationConfiguration, Members: &mAggregationConfiguration, Type: smithy.ShapeTypeStructure})
+var s_AggregationConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AggregationConfigurations, Members: &m_AggregationConfigurations, Type: smithy.ShapeTypeList})
+var sBillingMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBillingMode, Members: &mBillingMode, Type: smithy.ShapeTypeEnum})
+var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var s_ByteBuffer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ByteBuffer, Type: smithy.ShapeTypeBlob})
+var sCannotDelegateManagementAccountException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCannotDelegateManagementAccountException, Members: &mCannotDelegateManagementAccountException, Traits: &t6, Type: smithy.ShapeTypeStructure})
+var sChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannel, Members: &mChannel, Type: smithy.ShapeTypeStructure})
+var sChannelAlreadyExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelAlreadyExistsException, Members: &mChannelAlreadyExistsException, Traits: &t7, Type: smithy.ShapeTypeStructure})
+var s_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelArn, Type: smithy.ShapeTypeString})
+var sChannelARNInvalidException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelARNInvalidException, Members: &mChannelARNInvalidException, Traits: &t8, Type: smithy.ShapeTypeStructure})
+var sChannelExistsForEDSException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelExistsForEDSException, Members: &mChannelExistsForEDSException, Traits: &t9, Type: smithy.ShapeTypeStructure})
+var sChannelMaxLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelMaxLimitExceededException, Members: &mChannelMaxLimitExceededException, Traits: &t10, Type: smithy.ShapeTypeStructure})
+var s_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelName, Type: smithy.ShapeTypeString})
+var sChannelNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelNotFoundException, Members: &mChannelNotFoundException, Traits: &t11, Type: smithy.ShapeTypeStructure})
+var s_Channels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Channels, Members: &m_Channels, Type: smithy.ShapeTypeList})
+var sCloudTrailAccessNotEnabledException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudTrailAccessNotEnabledException, Members: &mCloudTrailAccessNotEnabledException, Traits: &t12, Type: smithy.ShapeTypeStructure})
+var sCloudTrailARNInvalidException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudTrailARNInvalidException, Members: &mCloudTrailARNInvalidException, Traits: &t13, Type: smithy.ShapeTypeStructure})
+var sCloudTrailInvalidClientTokenIdException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudTrailInvalidClientTokenIdException, Members: &mCloudTrailInvalidClientTokenIdException, Traits: &t14, Type: smithy.ShapeTypeStructure})
+var sCloudWatchLogsDeliveryUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudWatchLogsDeliveryUnavailableException, Members: &mCloudWatchLogsDeliveryUnavailableException, Traits: &t15, Type: smithy.ShapeTypeStructure})
+var sConcurrentModificationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConcurrentModificationException, Members: &mConcurrentModificationException, Traits: &t16, Type: smithy.ShapeTypeStructure})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t17, Type: smithy.ShapeTypeStructure})
+var sContextKeySelector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContextKeySelector, Members: &mContextKeySelector, Type: smithy.ShapeTypeStructure})
+var s_ContextKeySelectors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContextKeySelectors, Members: &m_ContextKeySelectors, Type: smithy.ShapeTypeList})
+var s_DashboardArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DashboardArn, Type: smithy.ShapeTypeString})
+var sDashboardDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDashboardDetail, Members: &mDashboardDetail, Type: smithy.ShapeTypeStructure})
+var s_DashboardName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DashboardName, Type: smithy.ShapeTypeString})
+var s_Dashboards = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Dashboards, Members: &m_Dashboards, Type: smithy.ShapeTypeList})
+var sDashboardStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDashboardStatus, Members: &mDashboardStatus, Type: smithy.ShapeTypeEnum})
+var sDashboardType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDashboardType, Members: &mDashboardType, Type: smithy.ShapeTypeEnum})
+var sDataResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataResource, Members: &mDataResource, Type: smithy.ShapeTypeStructure})
+var s_DataResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataResources, Members: &m_DataResources, Type: smithy.ShapeTypeList})
+var s_DataResourceValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataResourceValues, Members: &m_DataResourceValues, Type: smithy.ShapeTypeList})
+var s_Date = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sDelegatedAdminAccountLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDelegatedAdminAccountLimitExceededException, Members: &mDelegatedAdminAccountLimitExceededException, Traits: &t18, Type: smithy.ShapeTypeStructure})
+var s_DeliveryS3Uri = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeliveryS3Uri, Type: smithy.ShapeTypeString})
+var sDeliveryStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeliveryStatus, Members: &mDeliveryStatus, Type: smithy.ShapeTypeEnum})
+var sDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDestination, Members: &mDestination, Type: smithy.ShapeTypeStructure})
+var s_Destinations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Destinations, Members: &m_Destinations, Type: smithy.ShapeTypeList})
+var sDestinationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDestinationType, Members: &mDestinationType, Type: smithy.ShapeTypeEnum})
+var s_Double = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Double, Type: smithy.ShapeTypeDouble})
+var s_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorCode, Type: smithy.ShapeTypeString})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvent, Members: &mEvent, Type: smithy.ShapeTypeStructure})
+var sEventCategory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventCategory, Members: &mEventCategory, Type: smithy.ShapeTypeEnum})
+var sEventCategoryAggregation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventCategoryAggregation, Members: &mEventCategoryAggregation, Type: smithy.ShapeTypeEnum})
+var sEventDataStore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventDataStore, Members: &mEventDataStore, Type: smithy.ShapeTypeStructure})
+var sEventDataStoreAlreadyExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventDataStoreAlreadyExistsException, Members: &mEventDataStoreAlreadyExistsException, Traits: &t19, Type: smithy.ShapeTypeStructure})
+var s_EventDataStoreArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventDataStoreArn, Type: smithy.ShapeTypeString})
+var sEventDataStoreARNInvalidException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventDataStoreARNInvalidException, Members: &mEventDataStoreARNInvalidException, Traits: &t20, Type: smithy.ShapeTypeStructure})
+var sEventDataStoreFederationEnabledException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventDataStoreFederationEnabledException, Members: &mEventDataStoreFederationEnabledException, Traits: &t21, Type: smithy.ShapeTypeStructure})
+var sEventDataStoreHasOngoingImportException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventDataStoreHasOngoingImportException, Members: &mEventDataStoreHasOngoingImportException, Traits: &t22, Type: smithy.ShapeTypeStructure})
+var s_EventDataStoreKmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventDataStoreKmsKeyId, Type: smithy.ShapeTypeString})
+var s_EventDataStoreList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventDataStoreList, Members: &m_EventDataStoreList, Type: smithy.ShapeTypeList})
+var sEventDataStoreMaxLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventDataStoreMaxLimitExceededException, Members: &mEventDataStoreMaxLimitExceededException, Traits: &t23, Type: smithy.ShapeTypeStructure})
+var s_EventDataStoreName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventDataStoreName, Type: smithy.ShapeTypeString})
+var sEventDataStoreNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventDataStoreNotFoundException, Members: &mEventDataStoreNotFoundException, Traits: &t24, Type: smithy.ShapeTypeStructure})
+var s_EventDataStores = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventDataStores, Members: &m_EventDataStores, Type: smithy.ShapeTypeList})
+var sEventDataStoreStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventDataStoreStatus, Members: &mEventDataStoreStatus, Type: smithy.ShapeTypeEnum})
+var sEventDataStoreTerminationProtectedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventDataStoreTerminationProtectedException, Members: &mEventDataStoreTerminationProtectedException, Traits: &t25, Type: smithy.ShapeTypeStructure})
+var s_EventName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventName, Type: smithy.ShapeTypeString})
+var sEventSelector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventSelector, Members: &mEventSelector, Type: smithy.ShapeTypeStructure})
+var s_EventSelectors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventSelectors, Members: &m_EventSelectors, Type: smithy.ShapeTypeList})
+var s_EventsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventsList, Members: &m_EventsList, Type: smithy.ShapeTypeList})
+var s_EventSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventSource, Type: smithy.ShapeTypeString})
+var s_ExcludeManagementEventSources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExcludeManagementEventSources, Members: &m_ExcludeManagementEventSources, Type: smithy.ShapeTypeList})
+var s_FederationRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FederationRoleArn, Type: smithy.ShapeTypeString})
+var sFederationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFederationStatus, Members: &mFederationStatus, Type: smithy.ShapeTypeEnum})
+var sGenerateResponseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGenerateResponseException, Members: &mGenerateResponseException, Traits: &t26, Type: smithy.ShapeTypeStructure})
+var s_ImportDestinations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImportDestinations, Members: &m_ImportDestinations, Type: smithy.ShapeTypeList})
+var s_ImportFailureList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImportFailureList, Members: &m_ImportFailureList, Type: smithy.ShapeTypeList})
+var sImportFailureListItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportFailureListItem, Members: &mImportFailureListItem, Type: smithy.ShapeTypeStructure})
+var sImportFailureStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportFailureStatus, Members: &mImportFailureStatus, Type: smithy.ShapeTypeEnum})
+var sImportNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportNotFoundException, Members: &mImportNotFoundException, Traits: &t27, Type: smithy.ShapeTypeStructure})
+var s_ImportsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImportsList, Members: &m_ImportsList, Type: smithy.ShapeTypeList})
+var sImportsListItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportsListItem, Members: &mImportsListItem, Type: smithy.ShapeTypeStructure})
+var sImportSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportSource, Members: &mImportSource, Type: smithy.ShapeTypeStructure})
+var sImportStatistics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportStatistics, Members: &mImportStatistics, Type: smithy.ShapeTypeStructure})
+var sImportStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportStatus, Members: &mImportStatus, Type: smithy.ShapeTypeEnum})
+var sInactiveEventDataStoreException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInactiveEventDataStoreException, Members: &mInactiveEventDataStoreException, Traits: &t28, Type: smithy.ShapeTypeStructure})
+var sInactiveQueryException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInactiveQueryException, Members: &mInactiveQueryException, Traits: &t29, Type: smithy.ShapeTypeStructure})
+var sIngestionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngestionStatus, Members: &mIngestionStatus, Type: smithy.ShapeTypeStructure})
+var sInsightNotEnabledException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInsightNotEnabledException, Members: &mInsightNotEnabledException, Traits: &t30, Type: smithy.ShapeTypeStructure})
+var sInsightSelector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInsightSelector, Members: &mInsightSelector, Type: smithy.ShapeTypeStructure})
+var s_InsightSelectors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InsightSelectors, Members: &m_InsightSelectors, Type: smithy.ShapeTypeList})
+var sInsightsMetricDataType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInsightsMetricDataType, Members: &mInsightsMetricDataType, Type: smithy.ShapeTypeEnum})
+var s_InsightsMetricMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InsightsMetricMaxResults, Type: smithy.ShapeTypeInteger})
+var s_InsightsMetricNextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InsightsMetricNextToken, Type: smithy.ShapeTypeString})
+var s_InsightsMetricPeriod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InsightsMetricPeriod, Type: smithy.ShapeTypeInteger})
+var s_InsightsMetricValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InsightsMetricValues, Members: &m_InsightsMetricValues, Type: smithy.ShapeTypeList})
+var sInsightType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInsightType, Members: &mInsightType, Type: smithy.ShapeTypeEnum})
+var sInsufficientDependencyServiceAccessPermissionException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInsufficientDependencyServiceAccessPermissionException, Members: &mInsufficientDependencyServiceAccessPermissionException, Traits: &t31, Type: smithy.ShapeTypeStructure})
+var sInsufficientEncryptionPolicyException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInsufficientEncryptionPolicyException, Members: &mInsufficientEncryptionPolicyException, Traits: &t32, Type: smithy.ShapeTypeStructure})
+var sInsufficientIAMAccessPermissionException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInsufficientIAMAccessPermissionException, Members: &mInsufficientIAMAccessPermissionException, Traits: &t33, Type: smithy.ShapeTypeStructure})
+var sInsufficientS3BucketPolicyException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInsufficientS3BucketPolicyException, Members: &mInsufficientS3BucketPolicyException, Traits: &t34, Type: smithy.ShapeTypeStructure})
+var sInsufficientSnsTopicPolicyException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInsufficientSnsTopicPolicyException, Members: &mInsufficientSnsTopicPolicyException, Traits: &t35, Type: smithy.ShapeTypeStructure})
+var s_Integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sInvalidCloudWatchLogsLogGroupArnException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidCloudWatchLogsLogGroupArnException, Members: &mInvalidCloudWatchLogsLogGroupArnException, Traits: &t36, Type: smithy.ShapeTypeStructure})
+var sInvalidCloudWatchLogsRoleArnException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidCloudWatchLogsRoleArnException, Members: &mInvalidCloudWatchLogsRoleArnException, Traits: &t37, Type: smithy.ShapeTypeStructure})
+var sInvalidDateRangeException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidDateRangeException, Members: &mInvalidDateRangeException, Traits: &t38, Type: smithy.ShapeTypeStructure})
+var sInvalidEventCategoryException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidEventCategoryException, Members: &mInvalidEventCategoryException, Traits: &t39, Type: smithy.ShapeTypeStructure})
+var sInvalidEventDataStoreCategoryException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidEventDataStoreCategoryException, Members: &mInvalidEventDataStoreCategoryException, Traits: &t40, Type: smithy.ShapeTypeStructure})
+var sInvalidEventDataStoreStatusException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidEventDataStoreStatusException, Members: &mInvalidEventDataStoreStatusException, Traits: &t41, Type: smithy.ShapeTypeStructure})
+var sInvalidEventSelectorsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidEventSelectorsException, Members: &mInvalidEventSelectorsException, Traits: &t42, Type: smithy.ShapeTypeStructure})
+var sInvalidHomeRegionException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidHomeRegionException, Members: &mInvalidHomeRegionException, Traits: &t43, Type: smithy.ShapeTypeStructure})
+var sInvalidImportSourceException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidImportSourceException, Members: &mInvalidImportSourceException, Traits: &t44, Type: smithy.ShapeTypeStructure})
+var sInvalidInsightSelectorsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidInsightSelectorsException, Members: &mInvalidInsightSelectorsException, Traits: &t45, Type: smithy.ShapeTypeStructure})
+var sInvalidKmsKeyIdException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidKmsKeyIdException, Members: &mInvalidKmsKeyIdException, Traits: &t46, Type: smithy.ShapeTypeStructure})
+var sInvalidLookupAttributesException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidLookupAttributesException, Members: &mInvalidLookupAttributesException, Traits: &t47, Type: smithy.ShapeTypeStructure})
+var sInvalidMaxResultsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidMaxResultsException, Members: &mInvalidMaxResultsException, Traits: &t48, Type: smithy.ShapeTypeStructure})
+var sInvalidNextTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidNextTokenException, Members: &mInvalidNextTokenException, Traits: &t49, Type: smithy.ShapeTypeStructure})
+var sInvalidParameterCombinationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidParameterCombinationException, Members: &mInvalidParameterCombinationException, Traits: &t50, Type: smithy.ShapeTypeStructure})
+var sInvalidParameterException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidParameterException, Members: &mInvalidParameterException, Traits: &t51, Type: smithy.ShapeTypeStructure})
+var sInvalidQueryStatementException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidQueryStatementException, Members: &mInvalidQueryStatementException, Traits: &t52, Type: smithy.ShapeTypeStructure})
+var sInvalidQueryStatusException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidQueryStatusException, Members: &mInvalidQueryStatusException, Traits: &t53, Type: smithy.ShapeTypeStructure})
+var sInvalidS3BucketNameException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidS3BucketNameException, Members: &mInvalidS3BucketNameException, Traits: &t54, Type: smithy.ShapeTypeStructure})
+var sInvalidS3PrefixException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidS3PrefixException, Members: &mInvalidS3PrefixException, Traits: &t55, Type: smithy.ShapeTypeStructure})
+var sInvalidSnsTopicNameException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidSnsTopicNameException, Members: &mInvalidSnsTopicNameException, Traits: &t56, Type: smithy.ShapeTypeStructure})
+var sInvalidSourceException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidSourceException, Members: &mInvalidSourceException, Traits: &t57, Type: smithy.ShapeTypeStructure})
+var sInvalidTagParameterException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidTagParameterException, Members: &mInvalidTagParameterException, Traits: &t58, Type: smithy.ShapeTypeStructure})
+var sInvalidTimeRangeException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidTimeRangeException, Members: &mInvalidTimeRangeException, Traits: &t59, Type: smithy.ShapeTypeStructure})
+var sInvalidTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidTokenException, Members: &mInvalidTokenException, Traits: &t60, Type: smithy.ShapeTypeStructure})
+var sInvalidTrailNameException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidTrailNameException, Members: &mInvalidTrailNameException, Traits: &t61, Type: smithy.ShapeTypeStructure})
+var sKmsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKmsException, Members: &mKmsException, Traits: &t62, Type: smithy.ShapeTypeStructure})
+var sKmsKeyDisabledException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKmsKeyDisabledException, Members: &mKmsKeyDisabledException, Traits: &t63, Type: smithy.ShapeTypeStructure})
+var sKmsKeyNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKmsKeyNotFoundException, Members: &mKmsKeyNotFoundException, Traits: &t64, Type: smithy.ShapeTypeStructure})
+var s_ListChannelsMaxResultsCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListChannelsMaxResultsCount, Type: smithy.ShapeTypeInteger})
+var s_ListDashboardsMaxResultsCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListDashboardsMaxResultsCount, Type: smithy.ShapeTypeInteger})
+var s_ListEventDataStoresMaxResultsCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListEventDataStoresMaxResultsCount, Type: smithy.ShapeTypeInteger})
+var s_ListImportFailuresMaxResultsCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListImportFailuresMaxResultsCount, Type: smithy.ShapeTypeInteger})
+var s_ListImportsMaxResultsCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListImportsMaxResultsCount, Type: smithy.ShapeTypeInteger})
+var sListInsightsDataDimensionKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInsightsDataDimensionKey, Members: &mListInsightsDataDimensionKey, Type: smithy.ShapeTypeEnum})
+var s_ListInsightsDataDimensions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListInsightsDataDimensions, Members: &m_ListInsightsDataDimensions, Type: smithy.ShapeTypeMap})
+var s_ListInsightsDataDimensionValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListInsightsDataDimensionValue, Type: smithy.ShapeTypeString})
+var s_ListInsightsDataMaxResultsCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListInsightsDataMaxResultsCount, Type: smithy.ShapeTypeInteger})
+var sListInsightsDataType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInsightsDataType, Members: &mListInsightsDataType, Type: smithy.ShapeTypeEnum})
+var s_ListQueriesMaxResultsCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListQueriesMaxResultsCount, Type: smithy.ShapeTypeInteger})
+var s_Location = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Location, Type: smithy.ShapeTypeString})
+var s_Long = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sLookupAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLookupAttribute, Members: &mLookupAttribute, Type: smithy.ShapeTypeStructure})
+var sLookupAttributeKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLookupAttributeKey, Members: &mLookupAttributeKey, Type: smithy.ShapeTypeEnum})
+var s_LookupAttributesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LookupAttributesList, Members: &m_LookupAttributesList, Type: smithy.ShapeTypeList})
+var s_LookupAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LookupAttributeValue, Type: smithy.ShapeTypeString})
+var sMaxConcurrentQueriesException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMaxConcurrentQueriesException, Members: &mMaxConcurrentQueriesException, Traits: &t65, Type: smithy.ShapeTypeStructure})
+var sMaxEventSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMaxEventSize, Members: &mMaxEventSize, Type: smithy.ShapeTypeEnum})
+var sMaximumNumberOfTrailsExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMaximumNumberOfTrailsExceededException, Members: &mMaximumNumberOfTrailsExceededException, Traits: &t66, Type: smithy.ShapeTypeStructure})
+var s_MaxQueryResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxQueryResults, Type: smithy.ShapeTypeInteger})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sNoManagementAccountSLRExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNoManagementAccountSLRExistsException, Members: &mNoManagementAccountSLRExistsException, Traits: &t67, Type: smithy.ShapeTypeStructure})
+var sNotOrganizationManagementAccountException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotOrganizationManagementAccountException, Members: &mNotOrganizationManagementAccountException, Traits: &t68, Type: smithy.ShapeTypeStructure})
+var sNotOrganizationMasterAccountException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotOrganizationMasterAccountException, Members: &mNotOrganizationMasterAccountException, Traits: &t69, Type: smithy.ShapeTypeStructure})
+var sOperationNotPermittedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperationNotPermittedException, Members: &mOperationNotPermittedException, Traits: &t70, Type: smithy.ShapeTypeStructure})
+var s_Operator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Operator, Members: &m_Operator, Type: smithy.ShapeTypeList})
+var s_OperatorTargetList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OperatorTargetList, Members: &m_OperatorTargetList, Type: smithy.ShapeTypeList})
+var s_OperatorTargetListMember = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OperatorTargetListMember, Type: smithy.ShapeTypeString})
+var s_OperatorValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OperatorValue, Type: smithy.ShapeTypeString})
+var sOrganizationNotInAllFeaturesModeException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrganizationNotInAllFeaturesModeException, Members: &mOrganizationNotInAllFeaturesModeException, Traits: &t71, Type: smithy.ShapeTypeStructure})
+var sOrganizationsNotInUseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrganizationsNotInUseException, Members: &mOrganizationsNotInUseException, Traits: &t72, Type: smithy.ShapeTypeStructure})
+var s_PaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sPartitionKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPartitionKey, Members: &mPartitionKey, Type: smithy.ShapeTypeStructure})
+var s_PartitionKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PartitionKeyList, Members: &m_PartitionKeyList, Type: smithy.ShapeTypeList})
+var s_PartitionKeyName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PartitionKeyName, Type: smithy.ShapeTypeString})
+var s_PartitionKeyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PartitionKeyType, Type: smithy.ShapeTypeString})
+var s_Prompt = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Prompt, Type: smithy.ShapeTypeString})
+var sPublicKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPublicKey, Members: &mPublicKey, Type: smithy.ShapeTypeStructure})
+var s_PublicKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PublicKeyList, Members: &m_PublicKeyList, Type: smithy.ShapeTypeList})
+var s_Queries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Queries, Members: &m_Queries, Type: smithy.ShapeTypeList})
+var sQuery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQuery, Members: &mQuery, Type: smithy.ShapeTypeStructure})
+var s_QueryAlias = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryAlias, Type: smithy.ShapeTypeString})
+var sQueryIdNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryIdNotFoundException, Members: &mQueryIdNotFoundException, Traits: &t73, Type: smithy.ShapeTypeStructure})
+var s_QueryParameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryParameter, Type: smithy.ShapeTypeString})
+var s_QueryParameterKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryParameterKey, Type: smithy.ShapeTypeString})
+var s_QueryParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryParameters, Members: &m_QueryParameters, Type: smithy.ShapeTypeList})
+var s_QueryParameterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryParameterValue, Type: smithy.ShapeTypeString})
+var s_QueryParameterValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryParameterValues, Members: &m_QueryParameterValues, Type: smithy.ShapeTypeMap})
+var s_QueryResultColumn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryResultColumn, Members: &m_QueryResultColumn, Type: smithy.ShapeTypeMap})
+var s_QueryResultKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryResultKey, Type: smithy.ShapeTypeString})
+var s_QueryResultRow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryResultRow, Members: &m_QueryResultRow, Type: smithy.ShapeTypeList})
+var s_QueryResultRows = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryResultRows, Members: &m_QueryResultRows, Type: smithy.ShapeTypeList})
+var s_QueryResultValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryResultValue, Type: smithy.ShapeTypeString})
+var s_QueryStatement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryStatement, Type: smithy.ShapeTypeString})
+var sQueryStatistics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryStatistics, Members: &mQueryStatistics, Type: smithy.ShapeTypeStructure})
+var sQueryStatisticsForDescribeQuery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryStatisticsForDescribeQuery, Members: &mQueryStatisticsForDescribeQuery, Type: smithy.ShapeTypeStructure})
+var sQueryStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryStatus, Members: &mQueryStatus, Type: smithy.ShapeTypeEnum})
+var sReadWriteType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReadWriteType, Members: &mReadWriteType, Type: smithy.ShapeTypeEnum})
+var s_RefreshId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RefreshId, Type: smithy.ShapeTypeString})
+var sRefreshSchedule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRefreshSchedule, Members: &mRefreshSchedule, Type: smithy.ShapeTypeStructure})
+var sRefreshScheduleFrequency = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRefreshScheduleFrequency, Members: &mRefreshScheduleFrequency, Type: smithy.ShapeTypeStructure})
+var sRefreshScheduleFrequencyUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRefreshScheduleFrequencyUnit, Members: &mRefreshScheduleFrequencyUnit, Type: smithy.ShapeTypeEnum})
+var s_RefreshScheduleFrequencyValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RefreshScheduleFrequencyValue, Type: smithy.ShapeTypeInteger})
+var sRefreshScheduleStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRefreshScheduleStatus, Members: &mRefreshScheduleStatus, Type: smithy.ShapeTypeEnum})
+var sRequestWidget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestWidget, Members: &mRequestWidget, Type: smithy.ShapeTypeStructure})
+var s_RequestWidgetList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RequestWidgetList, Members: &m_RequestWidgetList, Type: smithy.ShapeTypeList})
+var sResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResource, Members: &mResource, Type: smithy.ShapeTypeStructure})
+var s_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sResourceARNNotValidException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceARNNotValidException, Members: &mResourceARNNotValidException, Traits: &t74, Type: smithy.ShapeTypeStructure})
+var s_ResourceIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceIdList, Members: &m_ResourceIdList, Type: smithy.ShapeTypeList})
+var s_ResourceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceList, Members: &m_ResourceList, Type: smithy.ShapeTypeList})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t75, Type: smithy.ShapeTypeStructure})
+var s_ResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourcePolicy, Type: smithy.ShapeTypeString})
+var sResourcePolicyNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourcePolicyNotFoundException, Members: &mResourcePolicyNotFoundException, Traits: &t76, Type: smithy.ShapeTypeStructure})
+var sResourcePolicyNotValidException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourcePolicyNotValidException, Members: &mResourcePolicyNotValidException, Traits: &t77, Type: smithy.ShapeTypeStructure})
+var sResourceTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceTag, Members: &mResourceTag, Type: smithy.ShapeTypeStructure})
+var s_ResourceTagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceTagList, Members: &m_ResourceTagList, Type: smithy.ShapeTypeList})
+var sResourceTypeNotSupportedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceTypeNotSupportedException, Members: &mResourceTypeNotSupportedException, Traits: &t78, Type: smithy.ShapeTypeStructure})
+var s_RetentionPeriod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RetentionPeriod, Type: smithy.ShapeTypeInteger})
+var sS3BucketDoesNotExistException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3BucketDoesNotExistException, Members: &mS3BucketDoesNotExistException, Traits: &t79, Type: smithy.ShapeTypeStructure})
+var sS3ImportSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3ImportSource, Members: &mS3ImportSource, Type: smithy.ShapeTypeStructure})
+var s_SampleQueryDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SampleQueryDescription, Type: smithy.ShapeTypeString})
+var s_SampleQueryName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SampleQueryName, Type: smithy.ShapeTypeString})
+var s_SampleQueryRelevance = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SampleQueryRelevance, Type: smithy.ShapeTypeFloat})
+var s_SampleQuerySQL = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SampleQuerySQL, Type: smithy.ShapeTypeString})
+var s_SearchSampleQueriesMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchSampleQueriesMaxResults, Type: smithy.ShapeTypeInteger})
+var s_SearchSampleQueriesSearchPhrase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchSampleQueriesSearchPhrase, Type: smithy.ShapeTypeString})
+var sSearchSampleQueriesSearchResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchSampleQueriesSearchResult, Members: &mSearchSampleQueriesSearchResult, Type: smithy.ShapeTypeStructure})
+var s_SearchSampleQueriesSearchResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchSampleQueriesSearchResults, Members: &m_SearchSampleQueriesSearchResults, Type: smithy.ShapeTypeList})
+var s_SelectorField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SelectorField, Type: smithy.ShapeTypeString})
+var s_SelectorName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SelectorName, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t80, Type: smithy.ShapeTypeStructure})
+var s_Source = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Source, Type: smithy.ShapeTypeString})
+var sSourceConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceConfig, Members: &mSourceConfig, Type: smithy.ShapeTypeStructure})
+var s_SourceEventCategories = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceEventCategories, Members: &m_SourceEventCategories, Type: smithy.ShapeTypeList})
+var sSourceEventCategory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceEventCategory, Members: &mSourceEventCategory, Type: smithy.ShapeTypeEnum})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var sTagsLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagsLimitExceededException, Members: &mTagsLimitExceededException, Traits: &t81, Type: smithy.ShapeTypeStructure})
+var s_TagsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagsList, Members: &m_TagsList, Type: smithy.ShapeTypeList})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTemplate, Members: &mTemplate, Type: smithy.ShapeTypeEnum})
+var s_Templates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Templates, Members: &m_Templates, Type: smithy.ShapeTypeList})
+var s_TerminationProtectionEnabled = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TerminationProtectionEnabled, Type: smithy.ShapeTypeBoolean})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t82, Type: smithy.ShapeTypeStructure})
+var s_TimeOfDay = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimeOfDay, Type: smithy.ShapeTypeString})
+var s_Timestamps = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamps, Members: &m_Timestamps, Type: smithy.ShapeTypeList})
+var sTrail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrail, Members: &mTrail, Type: smithy.ShapeTypeStructure})
+var sTrailAlreadyExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrailAlreadyExistsException, Members: &mTrailAlreadyExistsException, Traits: &t83, Type: smithy.ShapeTypeStructure})
+var sTrailInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrailInfo, Members: &mTrailInfo, Type: smithy.ShapeTypeStructure})
+var s_TrailList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrailList, Members: &m_TrailList, Type: smithy.ShapeTypeList})
+var s_TrailNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrailNameList, Members: &m_TrailNameList, Type: smithy.ShapeTypeList})
+var sTrailNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrailNotFoundException, Members: &mTrailNotFoundException, Traits: &t84, Type: smithy.ShapeTypeStructure})
+var sTrailNotProvidedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrailNotProvidedException, Members: &mTrailNotProvidedException, Traits: &t85, Type: smithy.ShapeTypeStructure})
+var s_Trails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Trails, Members: &m_Trails, Type: smithy.ShapeTypeList})
+var sType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iType, Members: &mType, Type: smithy.ShapeTypeEnum})
+var sUnsupportedOperationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnsupportedOperationException, Members: &mUnsupportedOperationException, Traits: &t86, Type: smithy.ShapeTypeStructure})
+var s_UUID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UUID, Type: smithy.ShapeTypeString})
+var s_ViewPropertiesKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ViewPropertiesKey, Type: smithy.ShapeTypeString})
+var s_ViewPropertiesMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ViewPropertiesMap, Members: &m_ViewPropertiesMap, Type: smithy.ShapeTypeMap})
+var s_ViewPropertiesValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ViewPropertiesValue, Type: smithy.ShapeTypeString})
+var sWidget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWidget, Members: &mWidget, Type: smithy.ShapeTypeStructure})
+var s_WidgetList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WidgetList, Members: &m_WidgetList, Type: smithy.ShapeTypeList})
+var sAddTagsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddTagsRequest, Members: &mAddTagsRequest, Type: smithy.ShapeTypeStructure})
+var sAddTagsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddTagsResponse, Type: smithy.ShapeTypeStructure})
+var sCancelQueryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelQueryRequest, Members: &mCancelQueryRequest, Type: smithy.ShapeTypeStructure})
+var sCancelQueryResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelQueryResponse, Members: &mCancelQueryResponse, Type: smithy.ShapeTypeStructure})
+var sCreateChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannelRequest, Members: &mCreateChannelRequest, Type: smithy.ShapeTypeStructure})
+var sCreateChannelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannelResponse, Members: &mCreateChannelResponse, Type: smithy.ShapeTypeStructure})
+var sCreateDashboardRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDashboardRequest, Members: &mCreateDashboardRequest, Type: smithy.ShapeTypeStructure})
+var sCreateDashboardResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDashboardResponse, Members: &mCreateDashboardResponse, Type: smithy.ShapeTypeStructure})
+var sCreateEventDataStoreRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEventDataStoreRequest, Members: &mCreateEventDataStoreRequest, Type: smithy.ShapeTypeStructure})
+var sCreateEventDataStoreResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEventDataStoreResponse, Members: &mCreateEventDataStoreResponse, Type: smithy.ShapeTypeStructure})
+var sCreateTrailRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTrailRequest, Members: &mCreateTrailRequest, Type: smithy.ShapeTypeStructure})
+var sCreateTrailResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTrailResponse, Members: &mCreateTrailResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChannelRequest, Members: &mDeleteChannelRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteChannelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChannelResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteDashboardRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDashboardRequest, Members: &mDeleteDashboardRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteDashboardResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDashboardResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteEventDataStoreRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEventDataStoreRequest, Members: &mDeleteEventDataStoreRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteEventDataStoreResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEventDataStoreResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicyRequest, Members: &mDeleteResourcePolicyRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteResourcePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicyResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteTrailRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTrailRequest, Members: &mDeleteTrailRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteTrailResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTrailResponse, Type: smithy.ShapeTypeStructure})
+var sDeregisterOrganizationDelegatedAdminRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterOrganizationDelegatedAdminRequest, Members: &mDeregisterOrganizationDelegatedAdminRequest, Type: smithy.ShapeTypeStructure})
+var sDeregisterOrganizationDelegatedAdminResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterOrganizationDelegatedAdminResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeQueryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeQueryRequest, Members: &mDescribeQueryRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeQueryResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeQueryResponse, Members: &mDescribeQueryResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeTrailsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTrailsRequest, Members: &mDescribeTrailsRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeTrailsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTrailsResponse, Members: &mDescribeTrailsResponse, Type: smithy.ShapeTypeStructure})
+var sDisableFederationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableFederationRequest, Members: &mDisableFederationRequest, Type: smithy.ShapeTypeStructure})
+var sDisableFederationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableFederationResponse, Members: &mDisableFederationResponse, Type: smithy.ShapeTypeStructure})
+var sEnableFederationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableFederationRequest, Members: &mEnableFederationRequest, Type: smithy.ShapeTypeStructure})
+var sEnableFederationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableFederationResponse, Members: &mEnableFederationResponse, Type: smithy.ShapeTypeStructure})
+var sGenerateQueryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGenerateQueryRequest, Members: &mGenerateQueryRequest, Type: smithy.ShapeTypeStructure})
+var sGenerateQueryResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGenerateQueryResponse, Members: &mGenerateQueryResponse, Type: smithy.ShapeTypeStructure})
+var sGetChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChannelRequest, Members: &mGetChannelRequest, Type: smithy.ShapeTypeStructure})
+var sGetChannelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChannelResponse, Members: &mGetChannelResponse, Type: smithy.ShapeTypeStructure})
+var sGetDashboardRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDashboardRequest, Members: &mGetDashboardRequest, Type: smithy.ShapeTypeStructure})
+var sGetDashboardResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDashboardResponse, Members: &mGetDashboardResponse, Type: smithy.ShapeTypeStructure})
+var sGetEventConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEventConfigurationRequest, Members: &mGetEventConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sGetEventConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEventConfigurationResponse, Members: &mGetEventConfigurationResponse, Type: smithy.ShapeTypeStructure})
+var sGetEventDataStoreRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEventDataStoreRequest, Members: &mGetEventDataStoreRequest, Type: smithy.ShapeTypeStructure})
+var sGetEventDataStoreResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEventDataStoreResponse, Members: &mGetEventDataStoreResponse, Type: smithy.ShapeTypeStructure})
+var sGetEventSelectorsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEventSelectorsRequest, Members: &mGetEventSelectorsRequest, Type: smithy.ShapeTypeStructure})
+var sGetEventSelectorsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEventSelectorsResponse, Members: &mGetEventSelectorsResponse, Type: smithy.ShapeTypeStructure})
+var sGetImportRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetImportRequest, Members: &mGetImportRequest, Type: smithy.ShapeTypeStructure})
+var sGetImportResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetImportResponse, Members: &mGetImportResponse, Type: smithy.ShapeTypeStructure})
+var sGetInsightSelectorsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInsightSelectorsRequest, Members: &mGetInsightSelectorsRequest, Type: smithy.ShapeTypeStructure})
+var sGetInsightSelectorsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetInsightSelectorsResponse, Members: &mGetInsightSelectorsResponse, Type: smithy.ShapeTypeStructure})
+var sGetQueryResultsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryResultsRequest, Members: &mGetQueryResultsRequest, Type: smithy.ShapeTypeStructure})
+var sGetQueryResultsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryResultsResponse, Members: &mGetQueryResultsResponse, Type: smithy.ShapeTypeStructure})
+var sGetResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicyRequest, Members: &mGetResourcePolicyRequest, Type: smithy.ShapeTypeStructure})
+var sGetResourcePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicyResponse, Members: &mGetResourcePolicyResponse, Type: smithy.ShapeTypeStructure})
+var sGetTrailRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTrailRequest, Members: &mGetTrailRequest, Type: smithy.ShapeTypeStructure})
+var sGetTrailResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTrailResponse, Members: &mGetTrailResponse, Type: smithy.ShapeTypeStructure})
+var sGetTrailStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTrailStatusRequest, Members: &mGetTrailStatusRequest, Type: smithy.ShapeTypeStructure})
+var sGetTrailStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTrailStatusResponse, Members: &mGetTrailStatusResponse, Type: smithy.ShapeTypeStructure})
+var sListChannelsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelsRequest, Members: &mListChannelsRequest, Type: smithy.ShapeTypeStructure})
+var sListChannelsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelsResponse, Members: &mListChannelsResponse, Type: smithy.ShapeTypeStructure})
+var sListDashboardsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDashboardsRequest, Members: &mListDashboardsRequest, Type: smithy.ShapeTypeStructure})
+var sListDashboardsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDashboardsResponse, Members: &mListDashboardsResponse, Type: smithy.ShapeTypeStructure})
+var sListEventDataStoresRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEventDataStoresRequest, Members: &mListEventDataStoresRequest, Type: smithy.ShapeTypeStructure})
+var sListEventDataStoresResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEventDataStoresResponse, Members: &mListEventDataStoresResponse, Type: smithy.ShapeTypeStructure})
+var sListImportFailuresRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListImportFailuresRequest, Members: &mListImportFailuresRequest, Type: smithy.ShapeTypeStructure})
+var sListImportFailuresResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListImportFailuresResponse, Members: &mListImportFailuresResponse, Type: smithy.ShapeTypeStructure})
+var sListImportsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListImportsRequest, Members: &mListImportsRequest, Type: smithy.ShapeTypeStructure})
+var sListImportsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListImportsResponse, Members: &mListImportsResponse, Type: smithy.ShapeTypeStructure})
+var sListInsightsDataRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInsightsDataRequest, Members: &mListInsightsDataRequest, Type: smithy.ShapeTypeStructure})
+var sListInsightsDataResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInsightsDataResponse, Members: &mListInsightsDataResponse, Type: smithy.ShapeTypeStructure})
+var sListInsightsMetricDataRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInsightsMetricDataRequest, Members: &mListInsightsMetricDataRequest, Type: smithy.ShapeTypeStructure})
+var sListInsightsMetricDataResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInsightsMetricDataResponse, Members: &mListInsightsMetricDataResponse, Type: smithy.ShapeTypeStructure})
+var sListPublicKeysRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPublicKeysRequest, Members: &mListPublicKeysRequest, Type: smithy.ShapeTypeStructure})
+var sListPublicKeysResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPublicKeysResponse, Members: &mListPublicKeysResponse, Type: smithy.ShapeTypeStructure})
+var sListQueriesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListQueriesRequest, Members: &mListQueriesRequest, Type: smithy.ShapeTypeStructure})
+var sListQueriesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListQueriesResponse, Members: &mListQueriesResponse, Type: smithy.ShapeTypeStructure})
+var sListTagsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsRequest, Members: &mListTagsRequest, Type: smithy.ShapeTypeStructure})
+var sListTagsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsResponse, Members: &mListTagsResponse, Type: smithy.ShapeTypeStructure})
+var sListTrailsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTrailsRequest, Members: &mListTrailsRequest, Type: smithy.ShapeTypeStructure})
+var sListTrailsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTrailsResponse, Members: &mListTrailsResponse, Type: smithy.ShapeTypeStructure})
+var sLookupEventsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLookupEventsRequest, Members: &mLookupEventsRequest, Type: smithy.ShapeTypeStructure})
+var sLookupEventsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLookupEventsResponse, Members: &mLookupEventsResponse, Type: smithy.ShapeTypeStructure})
+var sPutEventConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEventConfigurationRequest, Members: &mPutEventConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sPutEventConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEventConfigurationResponse, Members: &mPutEventConfigurationResponse, Type: smithy.ShapeTypeStructure})
+var sPutEventSelectorsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEventSelectorsRequest, Members: &mPutEventSelectorsRequest, Type: smithy.ShapeTypeStructure})
+var sPutEventSelectorsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEventSelectorsResponse, Members: &mPutEventSelectorsResponse, Type: smithy.ShapeTypeStructure})
+var sPutInsightSelectorsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutInsightSelectorsRequest, Members: &mPutInsightSelectorsRequest, Type: smithy.ShapeTypeStructure})
+var sPutInsightSelectorsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutInsightSelectorsResponse, Members: &mPutInsightSelectorsResponse, Type: smithy.ShapeTypeStructure})
+var sPutResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicyRequest, Members: &mPutResourcePolicyRequest, Type: smithy.ShapeTypeStructure})
+var sPutResourcePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicyResponse, Members: &mPutResourcePolicyResponse, Type: smithy.ShapeTypeStructure})
+var sRegisterOrganizationDelegatedAdminRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterOrganizationDelegatedAdminRequest, Members: &mRegisterOrganizationDelegatedAdminRequest, Type: smithy.ShapeTypeStructure})
+var sRegisterOrganizationDelegatedAdminResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterOrganizationDelegatedAdminResponse, Type: smithy.ShapeTypeStructure})
+var sRemoveTagsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveTagsRequest, Members: &mRemoveTagsRequest, Type: smithy.ShapeTypeStructure})
+var sRemoveTagsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveTagsResponse, Type: smithy.ShapeTypeStructure})
+var sRestoreEventDataStoreRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestoreEventDataStoreRequest, Members: &mRestoreEventDataStoreRequest, Type: smithy.ShapeTypeStructure})
+var sRestoreEventDataStoreResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestoreEventDataStoreResponse, Members: &mRestoreEventDataStoreResponse, Type: smithy.ShapeTypeStructure})
+var sSearchSampleQueriesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchSampleQueriesRequest, Members: &mSearchSampleQueriesRequest, Type: smithy.ShapeTypeStructure})
+var sSearchSampleQueriesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchSampleQueriesResponse, Members: &mSearchSampleQueriesResponse, Type: smithy.ShapeTypeStructure})
+var sStartDashboardRefreshRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartDashboardRefreshRequest, Members: &mStartDashboardRefreshRequest, Type: smithy.ShapeTypeStructure})
+var sStartDashboardRefreshResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartDashboardRefreshResponse, Members: &mStartDashboardRefreshResponse, Type: smithy.ShapeTypeStructure})
+var sStartEventDataStoreIngestionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartEventDataStoreIngestionRequest, Members: &mStartEventDataStoreIngestionRequest, Type: smithy.ShapeTypeStructure})
+var sStartEventDataStoreIngestionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartEventDataStoreIngestionResponse, Type: smithy.ShapeTypeStructure})
+var sStartImportRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartImportRequest, Members: &mStartImportRequest, Type: smithy.ShapeTypeStructure})
+var sStartImportResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartImportResponse, Members: &mStartImportResponse, Type: smithy.ShapeTypeStructure})
+var sStartLoggingRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartLoggingRequest, Members: &mStartLoggingRequest, Type: smithy.ShapeTypeStructure})
+var sStartLoggingResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartLoggingResponse, Type: smithy.ShapeTypeStructure})
+var sStartQueryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartQueryRequest, Members: &mStartQueryRequest, Type: smithy.ShapeTypeStructure})
+var sStartQueryResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartQueryResponse, Members: &mStartQueryResponse, Type: smithy.ShapeTypeStructure})
+var sStopEventDataStoreIngestionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopEventDataStoreIngestionRequest, Members: &mStopEventDataStoreIngestionRequest, Type: smithy.ShapeTypeStructure})
+var sStopEventDataStoreIngestionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopEventDataStoreIngestionResponse, Type: smithy.ShapeTypeStructure})
+var sStopImportRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopImportRequest, Members: &mStopImportRequest, Type: smithy.ShapeTypeStructure})
+var sStopImportResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopImportResponse, Members: &mStopImportResponse, Type: smithy.ShapeTypeStructure})
+var sStopLoggingRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopLoggingRequest, Members: &mStopLoggingRequest, Type: smithy.ShapeTypeStructure})
+var sStopLoggingResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopLoggingResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChannelRequest, Members: &mUpdateChannelRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateChannelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChannelResponse, Members: &mUpdateChannelResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateDashboardRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDashboardRequest, Members: &mUpdateDashboardRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateDashboardResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDashboardResponse, Members: &mUpdateDashboardResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateEventDataStoreRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEventDataStoreRequest, Members: &mUpdateEventDataStoreRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateEventDataStoreResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEventDataStoreResponse, Members: &mUpdateEventDataStoreResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateTrailRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTrailRequest, Members: &mUpdateTrailRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateTrailResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTrailResponse, Members: &mUpdateTrailResponse, Type: smithy.ShapeTypeStructure})
+
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sAccountHasOngoingImportException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sAccountNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sAccountNotRegisteredException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sAccountRegisteredException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sAdvancedEventSelector_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SelectorName, Type: smithy.ShapeTypeString})
+var sAdvancedEventSelector_FieldSelectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FieldSelectors", ID: &i_AdvancedFieldSelectors, Members: &m_AdvancedFieldSelectors, Type: smithy.ShapeTypeList})
+var s_AdvancedEventSelectors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAdvancedEventSelector, Members: &mAdvancedEventSelector, Type: smithy.ShapeTypeStructure})
+var sAdvancedFieldSelector_Field = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Field", ID: &i_SelectorField, Type: smithy.ShapeTypeString})
+var sAdvancedFieldSelector_Equals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Equals", ID: &i_Operator, Members: &m_Operator, Type: smithy.ShapeTypeList})
+var sAdvancedFieldSelector_StartsWith = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartsWith", ID: &i_Operator, Members: &m_Operator, Type: smithy.ShapeTypeList})
+var sAdvancedFieldSelector_EndsWith = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndsWith", ID: &i_Operator, Members: &m_Operator, Type: smithy.ShapeTypeList})
+var sAdvancedFieldSelector_NotEquals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotEquals", ID: &i_Operator, Members: &m_Operator, Type: smithy.ShapeTypeList})
+var sAdvancedFieldSelector_NotStartsWith = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotStartsWith", ID: &i_Operator, Members: &m_Operator, Type: smithy.ShapeTypeList})
+var sAdvancedFieldSelector_NotEndsWith = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotEndsWith", ID: &i_Operator, Members: &m_Operator, Type: smithy.ShapeTypeList})
+var s_AdvancedFieldSelectors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAdvancedFieldSelector, Members: &mAdvancedFieldSelector, Type: smithy.ShapeTypeStructure})
+var sAggregationConfiguration_Templates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Templates", ID: &i_Templates, Members: &m_Templates, Type: smithy.ShapeTypeList})
+var sAggregationConfiguration_EventCategory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventCategory", ID: &iEventCategoryAggregation, Members: &mEventCategoryAggregation, Type: smithy.ShapeTypeEnum})
+var s_AggregationConfigurations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAggregationConfiguration, Members: &mAggregationConfiguration, Type: smithy.ShapeTypeStructure})
+var sBillingMode_EXTENDABLE_RETENTION_PRICING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXTENDABLE_RETENTION_PRICING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBillingMode_FIXED_RETENTION_PRICING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIXED_RETENTION_PRICING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCannotDelegateManagementAccountException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sChannel_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChannelArn, Type: smithy.ShapeTypeString})
+var sChannel_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ChannelName, Type: smithy.ShapeTypeString})
+var sChannelAlreadyExistsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sChannelARNInvalidException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sChannelExistsForEDSException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sChannelMaxLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sChannelNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_Channels_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iChannel, Members: &mChannel, Type: smithy.ShapeTypeStructure})
+var sCloudTrailAccessNotEnabledException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sCloudTrailARNInvalidException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sCloudTrailInvalidClientTokenIdException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sCloudWatchLogsDeliveryUnavailableException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sConcurrentModificationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sContextKeySelector_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iType, Members: &mType, Type: smithy.ShapeTypeEnum})
+var sContextKeySelector_Equals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Equals", ID: &i_OperatorTargetList, Members: &m_OperatorTargetList, Type: smithy.ShapeTypeList})
+var s_ContextKeySelectors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iContextKeySelector, Members: &mContextKeySelector, Type: smithy.ShapeTypeStructure})
+var sDashboardDetail_DashboardArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashboardArn", ID: &i_DashboardArn, Type: smithy.ShapeTypeString})
+var sDashboardDetail_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iDashboardType, Members: &mDashboardType, Type: smithy.ShapeTypeEnum})
+var s_Dashboards_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDashboardDetail, Members: &mDashboardDetail, Type: smithy.ShapeTypeStructure})
+var sDashboardStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDashboardStatus_CREATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDashboardStatus_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDashboardStatus_UPDATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDashboardStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDashboardType_MANAGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MANAGED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDashboardType_CUSTOM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataResource_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDataResource_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_DataResourceValues, Members: &m_DataResourceValues, Type: smithy.ShapeTypeList})
+var s_DataResources_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDataResource, Members: &mDataResource, Type: smithy.ShapeTypeStructure})
+var s_DataResourceValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDelegatedAdminAccountLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sDeliveryStatus_SUCCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryStatus_FAILED_SIGNING_FILE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED_SIGNING_FILE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryStatus_RESOURCE_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryStatus_ACCESS_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCESS_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryStatus_ACCESS_DENIED_SIGNING_FILE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCESS_DENIED_SIGNING_FILE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryStatus_CANCELLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryStatus_UNKNOWN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDestination_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iDestinationType, Members: &mDestinationType, Type: smithy.ShapeTypeEnum})
+var sDestination_Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Location", ID: &i_Location, Type: smithy.ShapeTypeString})
+var s_Destinations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDestination, Members: &mDestination, Type: smithy.ShapeTypeStructure})
+var sDestinationType_EVENT_DATA_STORE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EVENT_DATA_STORE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDestinationType_AWS_SERVICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_SERVICE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEvent_EventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEvent_EventName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEvent_ReadOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadOnly", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEvent_AccessKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessKeyId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEvent_EventTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sEvent_EventSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventSource", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEvent_Username = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Username", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEvent_Resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resources", ID: &i_ResourceList, Members: &m_ResourceList, Type: smithy.ShapeTypeList})
+var sEvent_CloudTrailEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudTrailEvent", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEventCategory_Insight = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Insight", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventCategoryAggregation_Data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Data", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventDataStore_EventDataStoreArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDataStoreArn", ID: &i_EventDataStoreArn, Type: smithy.ShapeTypeString})
+var sEventDataStore_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_EventDataStoreName, Type: smithy.ShapeTypeString})
+var sEventDataStore_TerminationProtectionEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TerminationProtectionEnabled", ID: &i_TerminationProtectionEnabled, Type: smithy.ShapeTypeBoolean})
+var sEventDataStore_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iEventDataStoreStatus, Members: &mEventDataStoreStatus, Type: smithy.ShapeTypeEnum})
+var sEventDataStore_AdvancedEventSelectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdvancedEventSelectors", ID: &i_AdvancedEventSelectors, Members: &m_AdvancedEventSelectors, Type: smithy.ShapeTypeList})
+var sEventDataStore_MultiRegionEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MultiRegionEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sEventDataStore_OrganizationEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sEventDataStore_RetentionPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionPeriod", ID: &i_RetentionPeriod, Type: smithy.ShapeTypeInteger})
+var sEventDataStore_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sEventDataStore_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sEventDataStoreAlreadyExistsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sEventDataStoreARNInvalidException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sEventDataStoreFederationEnabledException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sEventDataStoreHasOngoingImportException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_EventDataStoreList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_EventDataStoreArn, Type: smithy.ShapeTypeString})
+var sEventDataStoreMaxLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sEventDataStoreNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_EventDataStores_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventDataStore, Members: &mEventDataStore, Type: smithy.ShapeTypeStructure})
+var sEventDataStoreStatus_CREATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventDataStoreStatus_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventDataStoreStatus_PENDING_DELETION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_DELETION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventDataStoreStatus_STARTING_INGESTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STARTING_INGESTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventDataStoreStatus_STOPPING_INGESTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOPPING_INGESTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventDataStoreStatus_STOPPED_INGESTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOPPED_INGESTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventDataStoreTerminationProtectedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sEventSelector_ReadWriteType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadWriteType", ID: &iReadWriteType, Members: &mReadWriteType, Type: smithy.ShapeTypeEnum})
+var sEventSelector_IncludeManagementEvents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeManagementEvents", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sEventSelector_DataResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataResources", ID: &i_DataResources, Members: &m_DataResources, Type: smithy.ShapeTypeList})
+var sEventSelector_ExcludeManagementEventSources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludeManagementEventSources", ID: &i_ExcludeManagementEventSources, Members: &m_ExcludeManagementEventSources, Type: smithy.ShapeTypeList})
+var s_EventSelectors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventSelector, Members: &mEventSelector, Type: smithy.ShapeTypeStructure})
+var s_EventsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEvent, Members: &mEvent, Type: smithy.ShapeTypeStructure})
+var s_ExcludeManagementEventSources_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString})
+var sFederationStatus_ENABLING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFederationStatus_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFederationStatus_DISABLING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFederationStatus_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sGenerateResponseException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_ImportDestinations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_EventDataStoreArn, Type: smithy.ShapeTypeString})
+var s_ImportFailureList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iImportFailureListItem, Members: &mImportFailureListItem, Type: smithy.ShapeTypeStructure})
+var sImportFailureListItem_Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Location", ID: &i_String, Type: smithy.ShapeTypeString})
+var sImportFailureListItem_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iImportFailureStatus, Members: &mImportFailureStatus, Type: smithy.ShapeTypeEnum})
+var sImportFailureListItem_ErrorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorType", ID: &i_String, Type: smithy.ShapeTypeString})
+var sImportFailureListItem_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_String, Type: smithy.ShapeTypeString})
+var sImportFailureListItem_LastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sImportFailureStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sImportFailureStatus_RETRY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RETRY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sImportFailureStatus_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sImportNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_ImportsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iImportsListItem, Members: &mImportsListItem, Type: smithy.ShapeTypeStructure})
+var sImportsListItem_ImportId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportId", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sImportsListItem_ImportStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportStatus", ID: &iImportStatus, Members: &mImportStatus, Type: smithy.ShapeTypeEnum})
+var sImportsListItem_Destinations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destinations", ID: &i_ImportDestinations, Members: &m_ImportDestinations, Type: smithy.ShapeTypeList})
+var sImportsListItem_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sImportsListItem_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sImportSource_S3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3", ID: &iS3ImportSource, Members: &mS3ImportSource, Type: smithy.ShapeTypeStructure})
+var sImportStatistics_PrefixesFound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrefixesFound", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sImportStatistics_PrefixesCompleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrefixesCompleted", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sImportStatistics_FilesCompleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilesCompleted", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sImportStatistics_EventsCompleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventsCompleted", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sImportStatistics_FailedEntries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailedEntries", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sImportStatus_INITIALIZING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INITIALIZING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sImportStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sImportStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sImportStatus_STOPPED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOPPED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sImportStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInactiveEventDataStoreException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInactiveQueryException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sIngestionStatus_LatestIngestionSuccessTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestIngestionSuccessTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sIngestionStatus_LatestIngestionSuccessEventID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestIngestionSuccessEventID", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sIngestionStatus_LatestIngestionErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestIngestionErrorCode", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sIngestionStatus_LatestIngestionAttemptTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestIngestionAttemptTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sIngestionStatus_LatestIngestionAttemptEventID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestIngestionAttemptEventID", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sInsightNotEnabledException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInsightSelector_InsightType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InsightType", ID: &iInsightType, Members: &mInsightType, Type: smithy.ShapeTypeEnum})
+var sInsightSelector_EventCategories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventCategories", ID: &i_SourceEventCategories, Members: &m_SourceEventCategories, Type: smithy.ShapeTypeList})
+var s_InsightSelectors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInsightSelector, Members: &mInsightSelector, Type: smithy.ShapeTypeStructure})
+var sInsightsMetricDataType_FILL_WITH_ZEROS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FILL_WITH_ZEROS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInsightsMetricDataType_NON_ZERO_DATA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NON_ZERO_DATA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_InsightsMetricValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Double, Type: smithy.ShapeTypeDouble})
+var sInsightType_ApiCallRateInsight = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiCallRateInsight", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInsightType_ApiErrorRateInsight = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiErrorRateInsight", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInsufficientDependencyServiceAccessPermissionException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInsufficientEncryptionPolicyException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInsufficientIAMAccessPermissionException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInsufficientS3BucketPolicyException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInsufficientSnsTopicPolicyException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidCloudWatchLogsLogGroupArnException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidCloudWatchLogsRoleArnException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidDateRangeException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidEventCategoryException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidEventDataStoreCategoryException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidEventDataStoreStatusException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidEventSelectorsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidHomeRegionException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidImportSourceException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidInsightSelectorsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidKmsKeyIdException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidLookupAttributesException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidMaxResultsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidNextTokenException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidParameterCombinationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidParameterException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidQueryStatementException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidQueryStatusException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidS3BucketNameException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidS3PrefixException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidSnsTopicNameException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidSourceException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidTagParameterException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidTimeRangeException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidTokenException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidTrailNameException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sKmsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sKmsKeyDisabledException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sKmsKeyNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sListInsightsDataDimensionKey_EVENT_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EVENT_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sListInsightsDataDimensionKey_EVENT_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EVENT_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sListInsightsDataDimensionKey_EVENT_SOURCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EVENT_SOURCE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_ListInsightsDataDimensions_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &iListInsightsDataDimensionKey, Members: &mListInsightsDataDimensionKey, Type: smithy.ShapeTypeEnum})
+var s_ListInsightsDataDimensions_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ListInsightsDataDimensionValue, Type: smithy.ShapeTypeString})
+var sListInsightsDataType_INSIGHTS_EVENTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSIGHTS_EVENTS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLookupAttribute_AttributeKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeKey", ID: &iLookupAttributeKey, Members: &mLookupAttributeKey, Type: smithy.ShapeTypeEnum})
+var sLookupAttribute_AttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeValue", ID: &i_LookupAttributeValue, Type: smithy.ShapeTypeString})
+var sLookupAttributeKey_EVENT_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EVENT_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLookupAttributeKey_EVENT_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EVENT_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLookupAttributeKey_READ_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "READ_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLookupAttributeKey_USERNAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USERNAME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLookupAttributeKey_RESOURCE_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLookupAttributeKey_RESOURCE_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLookupAttributeKey_EVENT_SOURCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EVENT_SOURCE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLookupAttributeKey_ACCESS_KEY_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCESS_KEY_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_LookupAttributesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLookupAttribute, Members: &mLookupAttribute, Type: smithy.ShapeTypeStructure})
+var sMaxConcurrentQueriesException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sMaxEventSize_Standard = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Standard", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMaxEventSize_Large = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Large", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMaximumNumberOfTrailsExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sNoManagementAccountSLRExistsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sNotOrganizationManagementAccountException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sNotOrganizationMasterAccountException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sOperationNotPermittedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_Operator_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_OperatorValue, Type: smithy.ShapeTypeString})
+var s_OperatorTargetList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_OperatorTargetListMember, Type: smithy.ShapeTypeString})
+var sOrganizationNotInAllFeaturesModeException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sOrganizationsNotInUseException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sPartitionKey_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_PartitionKeyName, Type: smithy.ShapeTypeString})
+var sPartitionKey_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_PartitionKeyType, Type: smithy.ShapeTypeString})
+var s_PartitionKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPartitionKey, Members: &mPartitionKey, Type: smithy.ShapeTypeStructure})
+var sPublicKey_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_ByteBuffer, Type: smithy.ShapeTypeBlob})
+var sPublicKey_ValidityStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValidityStartTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sPublicKey_ValidityEndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValidityEndTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sPublicKey_Fingerprint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Fingerprint", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_PublicKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPublicKey, Members: &mPublicKey, Type: smithy.ShapeTypeStructure})
+var s_Queries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iQuery, Members: &mQuery, Type: smithy.ShapeTypeStructure})
+var sQuery_QueryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryId", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sQuery_QueryStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryStatus", ID: &iQueryStatus, Members: &mQueryStatus, Type: smithy.ShapeTypeEnum})
+var sQuery_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sQueryIdNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_QueryParameters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_QueryParameter, Type: smithy.ShapeTypeString})
+var s_QueryParameterValues_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_QueryParameterKey, Type: smithy.ShapeTypeString})
+var s_QueryParameterValues_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_QueryParameterValue, Type: smithy.ShapeTypeString})
+var s_QueryResultColumn_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_QueryResultKey, Type: smithy.ShapeTypeString})
+var s_QueryResultColumn_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_QueryResultValue, Type: smithy.ShapeTypeString})
+var s_QueryResultRow_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_QueryResultColumn, Members: &m_QueryResultColumn, Type: smithy.ShapeTypeMap})
+var s_QueryResultRows_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_QueryResultRow, Members: &m_QueryResultRow, Type: smithy.ShapeTypeList})
+var sQueryStatistics_ResultsCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResultsCount", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sQueryStatistics_TotalResultsCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalResultsCount", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sQueryStatistics_BytesScanned = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BytesScanned", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sQueryStatisticsForDescribeQuery_EventsMatched = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventsMatched", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sQueryStatisticsForDescribeQuery_EventsScanned = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventsScanned", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sQueryStatisticsForDescribeQuery_BytesScanned = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BytesScanned", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sQueryStatisticsForDescribeQuery_ExecutionTimeInMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionTimeInMillis", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sQueryStatisticsForDescribeQuery_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sQueryStatus_QUEUED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUEUED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sQueryStatus_RUNNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUNNING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sQueryStatus_FINISHED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FINISHED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sQueryStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sQueryStatus_CANCELLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sQueryStatus_TIMED_OUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIMED_OUT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sReadWriteType_ReadOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadOnly", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sReadWriteType_WriteOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WriteOnly", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sReadWriteType_All = smithy.NewStaticSchema(smithy.StaticSchema{Member: "All", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRefreshSchedule_Frequency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Frequency", ID: &iRefreshScheduleFrequency, Members: &mRefreshScheduleFrequency, Type: smithy.ShapeTypeStructure})
+var sRefreshSchedule_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iRefreshScheduleStatus, Members: &mRefreshScheduleStatus, Type: smithy.ShapeTypeEnum})
+var sRefreshSchedule_TimeOfDay = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeOfDay", ID: &i_TimeOfDay, Type: smithy.ShapeTypeString})
+var sRefreshScheduleFrequency_Unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unit", ID: &iRefreshScheduleFrequencyUnit, Members: &mRefreshScheduleFrequencyUnit, Type: smithy.ShapeTypeEnum})
+var sRefreshScheduleFrequency_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_RefreshScheduleFrequencyValue, Type: smithy.ShapeTypeInteger})
+var sRefreshScheduleFrequencyUnit_HOURS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HOURS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRefreshScheduleFrequencyUnit_DAYS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DAYS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRefreshScheduleStatus_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRefreshScheduleStatus_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRequestWidget_QueryStatement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryStatement", ID: &i_QueryStatement, Type: smithy.ShapeTypeString})
+var sRequestWidget_QueryParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryParameters", ID: &i_QueryParameters, Members: &m_QueryParameters, Type: smithy.ShapeTypeList})
+var sRequestWidget_ViewProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViewProperties", ID: &i_ViewPropertiesMap, Members: &m_ViewPropertiesMap, Type: smithy.ShapeTypeMap})
+var s_RequestWidgetList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRequestWidget, Members: &mRequestWidget, Type: smithy.ShapeTypeStructure})
+var sResource_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i_String, Type: smithy.ShapeTypeString})
+var sResource_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sResourceARNNotValidException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_ResourceIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_ResourceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResource, Members: &mResource, Type: smithy.ShapeTypeStructure})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sResourcePolicyNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sResourcePolicyNotValidException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sResourceTag_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sResourceTag_TagsList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagsList", ID: &i_TagsList, Members: &m_TagsList, Type: smithy.ShapeTypeList})
+var s_ResourceTagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourceTag, Members: &mResourceTag, Type: smithy.ShapeTypeStructure})
+var sResourceTypeNotSupportedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sS3BucketDoesNotExistException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sS3ImportSource_S3LocationUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3LocationUri", ID: &i_String, Type: smithy.ShapeTypeString})
+var sS3ImportSource_S3BucketRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3BucketRegion", ID: &i_String, Type: smithy.ShapeTypeString})
+var sS3ImportSource_S3BucketAccessRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3BucketAccessRoleArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSearchSampleQueriesSearchResult_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SampleQueryName, Type: smithy.ShapeTypeString})
+var sSearchSampleQueriesSearchResult_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_SampleQueryDescription, Type: smithy.ShapeTypeString})
+var sSearchSampleQueriesSearchResult_SQL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SQL", ID: &i_SampleQuerySQL, Type: smithy.ShapeTypeString})
+var sSearchSampleQueriesSearchResult_Relevance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Relevance", ID: &i_SampleQueryRelevance, Type: smithy.ShapeTypeFloat})
+var s_SearchSampleQueriesSearchResults_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSearchSampleQueriesSearchResult, Members: &mSearchSampleQueriesSearchResult, Type: smithy.ShapeTypeStructure})
+var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sSourceConfig_ApplyToAllRegions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplyToAllRegions", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sSourceConfig_AdvancedEventSelectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdvancedEventSelectors", ID: &i_AdvancedEventSelectors, Members: &m_AdvancedEventSelectors, Type: smithy.ShapeTypeList})
+var s_SourceEventCategories_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSourceEventCategory, Members: &mSourceEventCategory, Type: smithy.ShapeTypeEnum})
+var sSourceEventCategory_Management = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Management", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSourceEventCategory_Data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Data", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sTagsLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_TagsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var sTemplate_API_ACTIVITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "API_ACTIVITY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTemplate_RESOURCE_ACCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_ACCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTemplate_USER_ACTIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USER_ACTIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_Templates_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTemplate, Members: &mTemplate, Type: smithy.ShapeTypeEnum})
+var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_Timestamps_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sTrail_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sTrail_S3BucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3BucketName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sTrail_S3KeyPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3KeyPrefix", ID: &i_String, Type: smithy.ShapeTypeString})
+var sTrail_SnsTopicName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnsTopicName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sTrail_SnsTopicARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnsTopicARN", ID: &i_String, Type: smithy.ShapeTypeString})
+var sTrail_IncludeGlobalServiceEvents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeGlobalServiceEvents", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sTrail_IsMultiRegionTrail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsMultiRegionTrail", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sTrail_HomeRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HomeRegion", ID: &i_String, Type: smithy.ShapeTypeString})
+var sTrail_TrailARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrailARN", ID: &i_String, Type: smithy.ShapeTypeString})
+var sTrail_LogFileValidationEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogFileValidationEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sTrail_CloudWatchLogsLogGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchLogsLogGroupArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sTrail_CloudWatchLogsRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchLogsRoleArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sTrail_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sTrail_HasCustomEventSelectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HasCustomEventSelectors", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sTrail_HasInsightSelectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HasInsightSelectors", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sTrail_IsOrganizationTrail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsOrganizationTrail", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sTrail_RecursiveLogging = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecursiveLogging", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sTrailAlreadyExistsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sTrailInfo_TrailARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrailARN", ID: &i_String, Type: smithy.ShapeTypeString})
+var sTrailInfo_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sTrailInfo_HomeRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HomeRegion", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_TrailList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTrail, Members: &mTrail, Type: smithy.ShapeTypeStructure})
+var s_TrailNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString})
+var sTrailNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sTrailNotProvidedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_Trails_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTrailInfo, Members: &mTrailInfo, Type: smithy.ShapeTypeStructure})
+var sType_TagContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagContext", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sType_RequestContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestContext", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sUnsupportedOperationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_ViewPropertiesMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ViewPropertiesKey, Type: smithy.ShapeTypeString})
+var s_ViewPropertiesMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ViewPropertiesValue, Type: smithy.ShapeTypeString})
+var sWidget_QueryAlias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryAlias", ID: &i_QueryAlias, Type: smithy.ShapeTypeString})
+var sWidget_QueryStatement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryStatement", ID: &i_QueryStatement, Type: smithy.ShapeTypeString})
+var sWidget_QueryParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryParameters", ID: &i_QueryParameters, Members: &m_QueryParameters, Type: smithy.ShapeTypeList})
+var sWidget_ViewProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViewProperties", ID: &i_ViewPropertiesMap, Members: &m_ViewPropertiesMap, Type: smithy.ShapeTypeMap})
+var s_WidgetList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWidget, Members: &mWidget, Type: smithy.ShapeTypeStructure})
+var sAddTagsRequest_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sAddTagsRequest_TagsList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagsList", ID: &i_TagsList, Members: &m_TagsList, Type: smithy.ShapeTypeList})
+var sCancelQueryRequest_EventDataStore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDataStore", ID: &i_EventDataStoreArn, Type: smithy.ShapeTypeString})
+var sCancelQueryRequest_QueryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryId", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sCancelQueryRequest_EventDataStoreOwnerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDataStoreOwnerAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sCancelQueryResponse_QueryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryId", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sCancelQueryResponse_QueryStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryStatus", ID: &iQueryStatus, Members: &mQueryStatus, Type: smithy.ShapeTypeEnum})
+var sCancelQueryResponse_EventDataStoreOwnerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDataStoreOwnerAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sCreateChannelRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ChannelName, Type: smithy.ShapeTypeString})
+var sCreateChannelRequest_Source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Source", ID: &i_Source, Type: smithy.ShapeTypeString})
+var sCreateChannelRequest_Destinations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destinations", ID: &i_Destinations, Members: &m_Destinations, Type: smithy.ShapeTypeList})
+var sCreateChannelRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagsList, Members: &m_TagsList, Type: smithy.ShapeTypeList})
+var sCreateChannelResponse_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChannelArn, Type: smithy.ShapeTypeString})
+var sCreateChannelResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ChannelName, Type: smithy.ShapeTypeString})
+var sCreateChannelResponse_Source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Source", ID: &i_Source, Type: smithy.ShapeTypeString})
+var sCreateChannelResponse_Destinations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destinations", ID: &i_Destinations, Members: &m_Destinations, Type: smithy.ShapeTypeList})
+var sCreateChannelResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagsList, Members: &m_TagsList, Type: smithy.ShapeTypeList})
+var sCreateDashboardRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_DashboardName, Type: smithy.ShapeTypeString})
+var sCreateDashboardRequest_RefreshSchedule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RefreshSchedule", ID: &iRefreshSchedule, Members: &mRefreshSchedule, Type: smithy.ShapeTypeStructure})
+var sCreateDashboardRequest_TagsList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagsList", ID: &i_TagsList, Members: &m_TagsList, Type: smithy.ShapeTypeList})
+var sCreateDashboardRequest_TerminationProtectionEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TerminationProtectionEnabled", ID: &i_TerminationProtectionEnabled, Type: smithy.ShapeTypeBoolean})
+var sCreateDashboardRequest_Widgets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Widgets", ID: &i_RequestWidgetList, Members: &m_RequestWidgetList, Type: smithy.ShapeTypeList})
+var sCreateDashboardResponse_DashboardArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashboardArn", ID: &i_DashboardArn, Type: smithy.ShapeTypeString})
+var sCreateDashboardResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_DashboardName, Type: smithy.ShapeTypeString})
+var sCreateDashboardResponse_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iDashboardType, Members: &mDashboardType, Type: smithy.ShapeTypeEnum})
+var sCreateDashboardResponse_Widgets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Widgets", ID: &i_WidgetList, Members: &m_WidgetList, Type: smithy.ShapeTypeList})
+var sCreateDashboardResponse_TagsList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagsList", ID: &i_TagsList, Members: &m_TagsList, Type: smithy.ShapeTypeList})
+var sCreateDashboardResponse_RefreshSchedule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RefreshSchedule", ID: &iRefreshSchedule, Members: &mRefreshSchedule, Type: smithy.ShapeTypeStructure})
+var sCreateDashboardResponse_TerminationProtectionEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TerminationProtectionEnabled", ID: &i_TerminationProtectionEnabled, Type: smithy.ShapeTypeBoolean})
+var sCreateEventDataStoreRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_EventDataStoreName, Type: smithy.ShapeTypeString})
+var sCreateEventDataStoreRequest_AdvancedEventSelectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdvancedEventSelectors", ID: &i_AdvancedEventSelectors, Members: &m_AdvancedEventSelectors, Type: smithy.ShapeTypeList})
+var sCreateEventDataStoreRequest_MultiRegionEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MultiRegionEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sCreateEventDataStoreRequest_OrganizationEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sCreateEventDataStoreRequest_RetentionPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionPeriod", ID: &i_RetentionPeriod, Type: smithy.ShapeTypeInteger})
+var sCreateEventDataStoreRequest_TerminationProtectionEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TerminationProtectionEnabled", ID: &i_TerminationProtectionEnabled, Type: smithy.ShapeTypeBoolean})
+var sCreateEventDataStoreRequest_TagsList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagsList", ID: &i_TagsList, Members: &m_TagsList, Type: smithy.ShapeTypeList})
+var sCreateEventDataStoreRequest_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_EventDataStoreKmsKeyId, Type: smithy.ShapeTypeString})
+var sCreateEventDataStoreRequest_StartIngestion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartIngestion", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sCreateEventDataStoreRequest_BillingMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingMode", ID: &iBillingMode, Members: &mBillingMode, Type: smithy.ShapeTypeEnum})
+var sCreateEventDataStoreResponse_EventDataStoreArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDataStoreArn", ID: &i_EventDataStoreArn, Type: smithy.ShapeTypeString})
+var sCreateEventDataStoreResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_EventDataStoreName, Type: smithy.ShapeTypeString})
+var sCreateEventDataStoreResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iEventDataStoreStatus, Members: &mEventDataStoreStatus, Type: smithy.ShapeTypeEnum})
+var sCreateEventDataStoreResponse_AdvancedEventSelectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdvancedEventSelectors", ID: &i_AdvancedEventSelectors, Members: &m_AdvancedEventSelectors, Type: smithy.ShapeTypeList})
+var sCreateEventDataStoreResponse_MultiRegionEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MultiRegionEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sCreateEventDataStoreResponse_OrganizationEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sCreateEventDataStoreResponse_RetentionPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionPeriod", ID: &i_RetentionPeriod, Type: smithy.ShapeTypeInteger})
+var sCreateEventDataStoreResponse_TerminationProtectionEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TerminationProtectionEnabled", ID: &i_TerminationProtectionEnabled, Type: smithy.ShapeTypeBoolean})
+var sCreateEventDataStoreResponse_TagsList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagsList", ID: &i_TagsList, Members: &m_TagsList, Type: smithy.ShapeTypeList})
+var sCreateEventDataStoreResponse_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sCreateEventDataStoreResponse_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sCreateEventDataStoreResponse_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_EventDataStoreKmsKeyId, Type: smithy.ShapeTypeString})
+var sCreateEventDataStoreResponse_BillingMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingMode", ID: &iBillingMode, Members: &mBillingMode, Type: smithy.ShapeTypeEnum})
+var sCreateTrailRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCreateTrailRequest_S3BucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3BucketName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCreateTrailRequest_S3KeyPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3KeyPrefix", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCreateTrailRequest_SnsTopicName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnsTopicName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCreateTrailRequest_IncludeGlobalServiceEvents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeGlobalServiceEvents", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sCreateTrailRequest_IsMultiRegionTrail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsMultiRegionTrail", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sCreateTrailRequest_EnableLogFileValidation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableLogFileValidation", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sCreateTrailRequest_CloudWatchLogsLogGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchLogsLogGroupArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCreateTrailRequest_CloudWatchLogsRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchLogsRoleArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCreateTrailRequest_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCreateTrailRequest_IsOrganizationTrail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsOrganizationTrail", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sCreateTrailRequest_TagsList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagsList", ID: &i_TagsList, Members: &m_TagsList, Type: smithy.ShapeTypeList})
+var sCreateTrailRequest_RecursiveLogging = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecursiveLogging", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sCreateTrailResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCreateTrailResponse_S3BucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3BucketName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCreateTrailResponse_S3KeyPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3KeyPrefix", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCreateTrailResponse_SnsTopicName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnsTopicName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCreateTrailResponse_SnsTopicARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnsTopicARN", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCreateTrailResponse_IncludeGlobalServiceEvents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeGlobalServiceEvents", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sCreateTrailResponse_IsMultiRegionTrail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsMultiRegionTrail", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sCreateTrailResponse_TrailARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrailARN", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCreateTrailResponse_LogFileValidationEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogFileValidationEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sCreateTrailResponse_CloudWatchLogsLogGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchLogsLogGroupArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCreateTrailResponse_CloudWatchLogsRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchLogsRoleArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCreateTrailResponse_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCreateTrailResponse_IsOrganizationTrail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsOrganizationTrail", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sCreateTrailResponse_RecursiveLogging = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecursiveLogging", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sDeleteChannelRequest_Channel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Channel", ID: &i_ChannelArn, Type: smithy.ShapeTypeString})
+var sDeleteDashboardRequest_DashboardId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashboardId", ID: &i_DashboardArn, Type: smithy.ShapeTypeString})
+var sDeleteEventDataStoreRequest_EventDataStore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDataStore", ID: &i_EventDataStoreArn, Type: smithy.ShapeTypeString})
+var sDeleteResourcePolicyRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sDeleteTrailRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDeregisterOrganizationDelegatedAdminRequest_DelegatedAdminAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DelegatedAdminAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sDescribeQueryRequest_EventDataStore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDataStore", ID: &i_EventDataStoreArn, Type: smithy.ShapeTypeString})
+var sDescribeQueryRequest_QueryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryId", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sDescribeQueryRequest_QueryAlias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryAlias", ID: &i_QueryAlias, Type: smithy.ShapeTypeString})
+var sDescribeQueryRequest_RefreshId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RefreshId", ID: &i_RefreshId, Type: smithy.ShapeTypeString})
+var sDescribeQueryRequest_EventDataStoreOwnerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDataStoreOwnerAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sDescribeQueryResponse_QueryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryId", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sDescribeQueryResponse_QueryString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryString", ID: &i_QueryStatement, Type: smithy.ShapeTypeString})
+var sDescribeQueryResponse_QueryStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryStatus", ID: &iQueryStatus, Members: &mQueryStatus, Type: smithy.ShapeTypeEnum})
+var sDescribeQueryResponse_QueryStatistics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryStatistics", ID: &iQueryStatisticsForDescribeQuery, Members: &mQueryStatisticsForDescribeQuery, Type: smithy.ShapeTypeStructure})
+var sDescribeQueryResponse_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sDescribeQueryResponse_DeliveryS3Uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryS3Uri", ID: &i_DeliveryS3Uri, Type: smithy.ShapeTypeString})
+var sDescribeQueryResponse_DeliveryStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryStatus", ID: &iDeliveryStatus, Members: &mDeliveryStatus, Type: smithy.ShapeTypeEnum})
+var sDescribeQueryResponse_Prompt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Prompt", ID: &i_Prompt, Type: smithy.ShapeTypeString})
+var sDescribeQueryResponse_EventDataStoreOwnerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDataStoreOwnerAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sDescribeTrailsRequest_trailNameList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trailNameList", ID: &i_TrailNameList, Members: &m_TrailNameList, Type: smithy.ShapeTypeList})
+var sDescribeTrailsRequest_includeShadowTrails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "includeShadowTrails", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sDescribeTrailsResponse_trailList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trailList", ID: &i_TrailList, Members: &m_TrailList, Type: smithy.ShapeTypeList})
+var sDisableFederationRequest_EventDataStore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDataStore", ID: &i_EventDataStoreArn, Type: smithy.ShapeTypeString})
+var sDisableFederationResponse_EventDataStoreArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDataStoreArn", ID: &i_EventDataStoreArn, Type: smithy.ShapeTypeString})
+var sDisableFederationResponse_FederationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FederationStatus", ID: &iFederationStatus, Members: &mFederationStatus, Type: smithy.ShapeTypeEnum})
+var sEnableFederationRequest_EventDataStore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDataStore", ID: &i_EventDataStoreArn, Type: smithy.ShapeTypeString})
+var sEnableFederationRequest_FederationRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FederationRoleArn", ID: &i_FederationRoleArn, Type: smithy.ShapeTypeString})
+var sEnableFederationResponse_EventDataStoreArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDataStoreArn", ID: &i_EventDataStoreArn, Type: smithy.ShapeTypeString})
+var sEnableFederationResponse_FederationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FederationStatus", ID: &iFederationStatus, Members: &mFederationStatus, Type: smithy.ShapeTypeEnum})
+var sEnableFederationResponse_FederationRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FederationRoleArn", ID: &i_FederationRoleArn, Type: smithy.ShapeTypeString})
+var sGenerateQueryRequest_EventDataStores = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDataStores", ID: &i_EventDataStoreList, Members: &m_EventDataStoreList, Type: smithy.ShapeTypeList})
+var sGenerateQueryRequest_Prompt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Prompt", ID: &i_Prompt, Type: smithy.ShapeTypeString})
+var sGenerateQueryResponse_QueryStatement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryStatement", ID: &i_QueryStatement, Type: smithy.ShapeTypeString})
+var sGenerateQueryResponse_QueryAlias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryAlias", ID: &i_QueryAlias, Type: smithy.ShapeTypeString})
+var sGenerateQueryResponse_EventDataStoreOwnerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDataStoreOwnerAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sGetChannelRequest_Channel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Channel", ID: &i_ChannelArn, Type: smithy.ShapeTypeString})
+var sGetChannelResponse_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChannelArn, Type: smithy.ShapeTypeString})
+var sGetChannelResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ChannelName, Type: smithy.ShapeTypeString})
+var sGetChannelResponse_Source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Source", ID: &i_Source, Type: smithy.ShapeTypeString})
+var sGetChannelResponse_SourceConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceConfig", ID: &iSourceConfig, Members: &mSourceConfig, Type: smithy.ShapeTypeStructure})
+var sGetChannelResponse_Destinations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destinations", ID: &i_Destinations, Members: &m_Destinations, Type: smithy.ShapeTypeList})
+var sGetChannelResponse_IngestionStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngestionStatus", ID: &iIngestionStatus, Members: &mIngestionStatus, Type: smithy.ShapeTypeStructure})
+var sGetDashboardRequest_DashboardId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashboardId", ID: &i_DashboardArn, Type: smithy.ShapeTypeString})
+var sGetDashboardResponse_DashboardArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashboardArn", ID: &i_DashboardArn, Type: smithy.ShapeTypeString})
+var sGetDashboardResponse_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iDashboardType, Members: &mDashboardType, Type: smithy.ShapeTypeEnum})
+var sGetDashboardResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iDashboardStatus, Members: &mDashboardStatus, Type: smithy.ShapeTypeEnum})
+var sGetDashboardResponse_Widgets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Widgets", ID: &i_WidgetList, Members: &m_WidgetList, Type: smithy.ShapeTypeList})
+var sGetDashboardResponse_RefreshSchedule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RefreshSchedule", ID: &iRefreshSchedule, Members: &mRefreshSchedule, Type: smithy.ShapeTypeStructure})
+var sGetDashboardResponse_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sGetDashboardResponse_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sGetDashboardResponse_LastRefreshId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastRefreshId", ID: &i_RefreshId, Type: smithy.ShapeTypeString})
+var sGetDashboardResponse_LastRefreshFailureReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastRefreshFailureReason", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sGetDashboardResponse_TerminationProtectionEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TerminationProtectionEnabled", ID: &i_TerminationProtectionEnabled, Type: smithy.ShapeTypeBoolean})
+var sGetEventConfigurationRequest_TrailName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrailName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetEventConfigurationRequest_EventDataStore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDataStore", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetEventConfigurationResponse_TrailARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrailARN", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetEventConfigurationResponse_EventDataStoreArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDataStoreArn", ID: &i_EventDataStoreArn, Type: smithy.ShapeTypeString})
+var sGetEventConfigurationResponse_MaxEventSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxEventSize", ID: &iMaxEventSize, Members: &mMaxEventSize, Type: smithy.ShapeTypeEnum})
+var sGetEventConfigurationResponse_ContextKeySelectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContextKeySelectors", ID: &i_ContextKeySelectors, Members: &m_ContextKeySelectors, Type: smithy.ShapeTypeList})
+var sGetEventConfigurationResponse_AggregationConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AggregationConfigurations", ID: &i_AggregationConfigurations, Members: &m_AggregationConfigurations, Type: smithy.ShapeTypeList})
+var sGetEventDataStoreRequest_EventDataStore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDataStore", ID: &i_EventDataStoreArn, Type: smithy.ShapeTypeString})
+var sGetEventDataStoreResponse_EventDataStoreArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDataStoreArn", ID: &i_EventDataStoreArn, Type: smithy.ShapeTypeString})
+var sGetEventDataStoreResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_EventDataStoreName, Type: smithy.ShapeTypeString})
+var sGetEventDataStoreResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iEventDataStoreStatus, Members: &mEventDataStoreStatus, Type: smithy.ShapeTypeEnum})
+var sGetEventDataStoreResponse_AdvancedEventSelectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdvancedEventSelectors", ID: &i_AdvancedEventSelectors, Members: &m_AdvancedEventSelectors, Type: smithy.ShapeTypeList})
+var sGetEventDataStoreResponse_MultiRegionEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MultiRegionEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sGetEventDataStoreResponse_OrganizationEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sGetEventDataStoreResponse_RetentionPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionPeriod", ID: &i_RetentionPeriod, Type: smithy.ShapeTypeInteger})
+var sGetEventDataStoreResponse_TerminationProtectionEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TerminationProtectionEnabled", ID: &i_TerminationProtectionEnabled, Type: smithy.ShapeTypeBoolean})
+var sGetEventDataStoreResponse_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sGetEventDataStoreResponse_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sGetEventDataStoreResponse_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_EventDataStoreKmsKeyId, Type: smithy.ShapeTypeString})
+var sGetEventDataStoreResponse_BillingMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingMode", ID: &iBillingMode, Members: &mBillingMode, Type: smithy.ShapeTypeEnum})
+var sGetEventDataStoreResponse_FederationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FederationStatus", ID: &iFederationStatus, Members: &mFederationStatus, Type: smithy.ShapeTypeEnum})
+var sGetEventDataStoreResponse_FederationRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FederationRoleArn", ID: &i_FederationRoleArn, Type: smithy.ShapeTypeString})
+var sGetEventDataStoreResponse_PartitionKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartitionKeys", ID: &i_PartitionKeyList, Members: &m_PartitionKeyList, Type: smithy.ShapeTypeList})
+var sGetEventSelectorsRequest_TrailName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrailName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetEventSelectorsResponse_TrailARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrailARN", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetEventSelectorsResponse_EventSelectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventSelectors", ID: &i_EventSelectors, Members: &m_EventSelectors, Type: smithy.ShapeTypeList})
+var sGetEventSelectorsResponse_AdvancedEventSelectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdvancedEventSelectors", ID: &i_AdvancedEventSelectors, Members: &m_AdvancedEventSelectors, Type: smithy.ShapeTypeList})
+var sGetImportRequest_ImportId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportId", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sGetImportResponse_ImportId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportId", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sGetImportResponse_Destinations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destinations", ID: &i_ImportDestinations, Members: &m_ImportDestinations, Type: smithy.ShapeTypeList})
+var sGetImportResponse_ImportSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportSource", ID: &iImportSource, Members: &mImportSource, Type: smithy.ShapeTypeStructure})
+var sGetImportResponse_StartEventTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartEventTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sGetImportResponse_EndEventTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndEventTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sGetImportResponse_ImportStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportStatus", ID: &iImportStatus, Members: &mImportStatus, Type: smithy.ShapeTypeEnum})
+var sGetImportResponse_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sGetImportResponse_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sGetImportResponse_ImportStatistics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportStatistics", ID: &iImportStatistics, Members: &mImportStatistics, Type: smithy.ShapeTypeStructure})
+var sGetInsightSelectorsRequest_TrailName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrailName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetInsightSelectorsRequest_EventDataStore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDataStore", ID: &i_EventDataStoreArn, Type: smithy.ShapeTypeString})
+var sGetInsightSelectorsResponse_TrailARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrailARN", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetInsightSelectorsResponse_InsightSelectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InsightSelectors", ID: &i_InsightSelectors, Members: &m_InsightSelectors, Type: smithy.ShapeTypeList})
+var sGetInsightSelectorsResponse_EventDataStoreArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDataStoreArn", ID: &i_EventDataStoreArn, Type: smithy.ShapeTypeString})
+var sGetInsightSelectorsResponse_InsightsDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InsightsDestination", ID: &i_EventDataStoreArn, Type: smithy.ShapeTypeString})
+var sGetQueryResultsRequest_EventDataStore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDataStore", ID: &i_EventDataStoreArn, Type: smithy.ShapeTypeString})
+var sGetQueryResultsRequest_QueryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryId", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sGetQueryResultsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sGetQueryResultsRequest_MaxQueryResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxQueryResults", ID: &i_MaxQueryResults, Type: smithy.ShapeTypeInteger})
+var sGetQueryResultsRequest_EventDataStoreOwnerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDataStoreOwnerAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sGetQueryResultsResponse_QueryStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryStatus", ID: &iQueryStatus, Members: &mQueryStatus, Type: smithy.ShapeTypeEnum})
+var sGetQueryResultsResponse_QueryStatistics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryStatistics", ID: &iQueryStatistics, Members: &mQueryStatistics, Type: smithy.ShapeTypeStructure})
+var sGetQueryResultsResponse_QueryResultRows = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryResultRows", ID: &i_QueryResultRows, Members: &m_QueryResultRows, Type: smithy.ShapeTypeList})
+var sGetQueryResultsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sGetQueryResultsResponse_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sGetResourcePolicyRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sGetResourcePolicyResponse_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sGetResourcePolicyResponse_ResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourcePolicy", ID: &i_ResourcePolicy, Type: smithy.ShapeTypeString})
+var sGetResourcePolicyResponse_DelegatedAdminResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DelegatedAdminResourcePolicy", ID: &i_ResourcePolicy, Type: smithy.ShapeTypeString})
+var sGetTrailRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetTrailResponse_Trail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Trail", ID: &iTrail, Members: &mTrail, Type: smithy.ShapeTypeStructure})
+var sGetTrailStatusRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetTrailStatusResponse_IsLogging = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsLogging", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sGetTrailStatusResponse_LatestDeliveryError = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestDeliveryError", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetTrailStatusResponse_LatestNotificationError = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestNotificationError", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetTrailStatusResponse_LatestDeliveryTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestDeliveryTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sGetTrailStatusResponse_LatestNotificationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestNotificationTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sGetTrailStatusResponse_StartLoggingTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartLoggingTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sGetTrailStatusResponse_StopLoggingTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StopLoggingTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sGetTrailStatusResponse_LatestCloudWatchLogsDeliveryError = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestCloudWatchLogsDeliveryError", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetTrailStatusResponse_LatestCloudWatchLogsDeliveryTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestCloudWatchLogsDeliveryTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sGetTrailStatusResponse_LatestDigestDeliveryTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestDigestDeliveryTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sGetTrailStatusResponse_LatestDigestDeliveryError = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestDigestDeliveryError", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetTrailStatusResponse_LatestDeliveryAttemptTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestDeliveryAttemptTime", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetTrailStatusResponse_LatestNotificationAttemptTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestNotificationAttemptTime", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetTrailStatusResponse_LatestNotificationAttemptSucceeded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestNotificationAttemptSucceeded", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetTrailStatusResponse_LatestDeliveryAttemptSucceeded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestDeliveryAttemptSucceeded", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetTrailStatusResponse_TimeLoggingStarted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeLoggingStarted", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetTrailStatusResponse_TimeLoggingStopped = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeLoggingStopped", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListChannelsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListChannelsMaxResultsCount, Type: smithy.ShapeTypeInteger})
+var sListChannelsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListChannelsResponse_Channels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Channels", ID: &i_Channels, Members: &m_Channels, Type: smithy.ShapeTypeList})
+var sListChannelsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListDashboardsRequest_NamePrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NamePrefix", ID: &i_DashboardName, Type: smithy.ShapeTypeString})
+var sListDashboardsRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iDashboardType, Members: &mDashboardType, Type: smithy.ShapeTypeEnum})
+var sListDashboardsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListDashboardsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListDashboardsMaxResultsCount, Type: smithy.ShapeTypeInteger})
+var sListDashboardsResponse_Dashboards = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dashboards", ID: &i_Dashboards, Members: &m_Dashboards, Type: smithy.ShapeTypeList})
+var sListDashboardsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListEventDataStoresRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListEventDataStoresRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListEventDataStoresMaxResultsCount, Type: smithy.ShapeTypeInteger})
+var sListEventDataStoresResponse_EventDataStores = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDataStores", ID: &i_EventDataStores, Members: &m_EventDataStores, Type: smithy.ShapeTypeList})
+var sListEventDataStoresResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListImportFailuresRequest_ImportId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportId", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sListImportFailuresRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListImportFailuresMaxResultsCount, Type: smithy.ShapeTypeInteger})
+var sListImportFailuresRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListImportFailuresResponse_Failures = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Failures", ID: &i_ImportFailureList, Members: &m_ImportFailureList, Type: smithy.ShapeTypeList})
+var sListImportFailuresResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListImportsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListImportsMaxResultsCount, Type: smithy.ShapeTypeInteger})
+var sListImportsRequest_Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destination", ID: &i_EventDataStoreArn, Type: smithy.ShapeTypeString})
+var sListImportsRequest_ImportStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportStatus", ID: &iImportStatus, Members: &mImportStatus, Type: smithy.ShapeTypeEnum})
+var sListImportsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListImportsResponse_Imports = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Imports", ID: &i_ImportsList, Members: &m_ImportsList, Type: smithy.ShapeTypeList})
+var sListImportsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListInsightsDataRequest_InsightSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InsightSource", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sListInsightsDataRequest_DataType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataType", ID: &iListInsightsDataType, Members: &mListInsightsDataType, Type: smithy.ShapeTypeEnum})
+var sListInsightsDataRequest_Dimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dimensions", ID: &i_ListInsightsDataDimensions, Members: &m_ListInsightsDataDimensions, Type: smithy.ShapeTypeMap})
+var sListInsightsDataRequest_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sListInsightsDataRequest_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sListInsightsDataRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListInsightsDataMaxResultsCount, Type: smithy.ShapeTypeInteger})
+var sListInsightsDataRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListInsightsDataResponse_Events = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Events", ID: &i_EventsList, Members: &m_EventsList, Type: smithy.ShapeTypeList})
+var sListInsightsDataResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListInsightsMetricDataRequest_TrailName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrailName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListInsightsMetricDataRequest_EventSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventSource", ID: &i_EventSource, Type: smithy.ShapeTypeString})
+var sListInsightsMetricDataRequest_EventName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventName", ID: &i_EventName, Type: smithy.ShapeTypeString})
+var sListInsightsMetricDataRequest_InsightType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InsightType", ID: &iInsightType, Members: &mInsightType, Type: smithy.ShapeTypeEnum})
+var sListInsightsMetricDataRequest_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_ErrorCode, Type: smithy.ShapeTypeString})
+var sListInsightsMetricDataRequest_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sListInsightsMetricDataRequest_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sListInsightsMetricDataRequest_Period = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Period", ID: &i_InsightsMetricPeriod, Type: smithy.ShapeTypeInteger})
+var sListInsightsMetricDataRequest_DataType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataType", ID: &iInsightsMetricDataType, Members: &mInsightsMetricDataType, Type: smithy.ShapeTypeEnum})
+var sListInsightsMetricDataRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_InsightsMetricMaxResults, Type: smithy.ShapeTypeInteger})
+var sListInsightsMetricDataRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_InsightsMetricNextToken, Type: smithy.ShapeTypeString})
+var sListInsightsMetricDataResponse_TrailARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrailARN", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListInsightsMetricDataResponse_EventSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventSource", ID: &i_EventSource, Type: smithy.ShapeTypeString})
+var sListInsightsMetricDataResponse_EventName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventName", ID: &i_EventName, Type: smithy.ShapeTypeString})
+var sListInsightsMetricDataResponse_InsightType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InsightType", ID: &iInsightType, Members: &mInsightType, Type: smithy.ShapeTypeEnum})
+var sListInsightsMetricDataResponse_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_ErrorCode, Type: smithy.ShapeTypeString})
+var sListInsightsMetricDataResponse_Timestamps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timestamps", ID: &i_Timestamps, Members: &m_Timestamps, Type: smithy.ShapeTypeList})
+var sListInsightsMetricDataResponse_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_InsightsMetricValues, Members: &m_InsightsMetricValues, Type: smithy.ShapeTypeList})
+var sListInsightsMetricDataResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_InsightsMetricNextToken, Type: smithy.ShapeTypeString})
+var sListPublicKeysRequest_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sListPublicKeysRequest_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sListPublicKeysRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListPublicKeysResponse_PublicKeyList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublicKeyList", ID: &i_PublicKeyList, Members: &m_PublicKeyList, Type: smithy.ShapeTypeList})
+var sListPublicKeysResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListQueriesRequest_EventDataStore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDataStore", ID: &i_EventDataStoreArn, Type: smithy.ShapeTypeString})
+var sListQueriesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListQueriesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListQueriesMaxResultsCount, Type: smithy.ShapeTypeInteger})
+var sListQueriesRequest_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sListQueriesRequest_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sListQueriesRequest_QueryStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryStatus", ID: &iQueryStatus, Members: &mQueryStatus, Type: smithy.ShapeTypeEnum})
+var sListQueriesResponse_Queries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Queries", ID: &i_Queries, Members: &m_Queries, Type: smithy.ShapeTypeList})
+var sListQueriesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListTagsRequest_ResourceIdList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceIdList", ID: &i_ResourceIdList, Members: &m_ResourceIdList, Type: smithy.ShapeTypeList})
+var sListTagsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListTagsResponse_ResourceTagList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTagList", ID: &i_ResourceTagList, Members: &m_ResourceTagList, Type: smithy.ShapeTypeList})
+var sListTagsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListTrailsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListTrailsResponse_Trails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Trails", ID: &i_Trails, Members: &m_Trails, Type: smithy.ShapeTypeList})
+var sListTrailsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sLookupEventsRequest_LookupAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LookupAttributes", ID: &i_LookupAttributesList, Members: &m_LookupAttributesList, Type: smithy.ShapeTypeList})
+var sLookupEventsRequest_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sLookupEventsRequest_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sLookupEventsRequest_EventCategory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventCategory", ID: &iEventCategory, Members: &mEventCategory, Type: smithy.ShapeTypeEnum})
+var sLookupEventsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sLookupEventsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sLookupEventsResponse_Events = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Events", ID: &i_EventsList, Members: &m_EventsList, Type: smithy.ShapeTypeList})
+var sLookupEventsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sPutEventConfigurationRequest_TrailName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrailName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sPutEventConfigurationRequest_EventDataStore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDataStore", ID: &i_String, Type: smithy.ShapeTypeString})
+var sPutEventConfigurationRequest_MaxEventSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxEventSize", ID: &iMaxEventSize, Members: &mMaxEventSize, Type: smithy.ShapeTypeEnum})
+var sPutEventConfigurationRequest_ContextKeySelectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContextKeySelectors", ID: &i_ContextKeySelectors, Members: &m_ContextKeySelectors, Type: smithy.ShapeTypeList})
+var sPutEventConfigurationRequest_AggregationConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AggregationConfigurations", ID: &i_AggregationConfigurations, Members: &m_AggregationConfigurations, Type: smithy.ShapeTypeList})
+var sPutEventConfigurationResponse_TrailARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrailARN", ID: &i_String, Type: smithy.ShapeTypeString})
+var sPutEventConfigurationResponse_EventDataStoreArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDataStoreArn", ID: &i_EventDataStoreArn, Type: smithy.ShapeTypeString})
+var sPutEventConfigurationResponse_MaxEventSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxEventSize", ID: &iMaxEventSize, Members: &mMaxEventSize, Type: smithy.ShapeTypeEnum})
+var sPutEventConfigurationResponse_ContextKeySelectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContextKeySelectors", ID: &i_ContextKeySelectors, Members: &m_ContextKeySelectors, Type: smithy.ShapeTypeList})
+var sPutEventConfigurationResponse_AggregationConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AggregationConfigurations", ID: &i_AggregationConfigurations, Members: &m_AggregationConfigurations, Type: smithy.ShapeTypeList})
+var sPutEventSelectorsRequest_TrailName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrailName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sPutEventSelectorsRequest_EventSelectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventSelectors", ID: &i_EventSelectors, Members: &m_EventSelectors, Type: smithy.ShapeTypeList})
+var sPutEventSelectorsRequest_AdvancedEventSelectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdvancedEventSelectors", ID: &i_AdvancedEventSelectors, Members: &m_AdvancedEventSelectors, Type: smithy.ShapeTypeList})
+var sPutEventSelectorsResponse_TrailARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrailARN", ID: &i_String, Type: smithy.ShapeTypeString})
+var sPutEventSelectorsResponse_EventSelectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventSelectors", ID: &i_EventSelectors, Members: &m_EventSelectors, Type: smithy.ShapeTypeList})
+var sPutEventSelectorsResponse_AdvancedEventSelectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdvancedEventSelectors", ID: &i_AdvancedEventSelectors, Members: &m_AdvancedEventSelectors, Type: smithy.ShapeTypeList})
+var sPutInsightSelectorsRequest_TrailName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrailName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sPutInsightSelectorsRequest_InsightSelectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InsightSelectors", ID: &i_InsightSelectors, Members: &m_InsightSelectors, Type: smithy.ShapeTypeList})
+var sPutInsightSelectorsRequest_EventDataStore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDataStore", ID: &i_EventDataStoreArn, Type: smithy.ShapeTypeString})
+var sPutInsightSelectorsRequest_InsightsDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InsightsDestination", ID: &i_EventDataStoreArn, Type: smithy.ShapeTypeString})
+var sPutInsightSelectorsResponse_TrailARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrailARN", ID: &i_String, Type: smithy.ShapeTypeString})
+var sPutInsightSelectorsResponse_InsightSelectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InsightSelectors", ID: &i_InsightSelectors, Members: &m_InsightSelectors, Type: smithy.ShapeTypeList})
+var sPutInsightSelectorsResponse_EventDataStoreArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDataStoreArn", ID: &i_EventDataStoreArn, Type: smithy.ShapeTypeString})
+var sPutInsightSelectorsResponse_InsightsDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InsightsDestination", ID: &i_EventDataStoreArn, Type: smithy.ShapeTypeString})
+var sPutResourcePolicyRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sPutResourcePolicyRequest_ResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourcePolicy", ID: &i_ResourcePolicy, Type: smithy.ShapeTypeString})
+var sPutResourcePolicyResponse_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sPutResourcePolicyResponse_ResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourcePolicy", ID: &i_ResourcePolicy, Type: smithy.ShapeTypeString})
+var sPutResourcePolicyResponse_DelegatedAdminResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DelegatedAdminResourcePolicy", ID: &i_ResourcePolicy, Type: smithy.ShapeTypeString})
+var sRegisterOrganizationDelegatedAdminRequest_MemberAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sRemoveTagsRequest_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sRemoveTagsRequest_TagsList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagsList", ID: &i_TagsList, Members: &m_TagsList, Type: smithy.ShapeTypeList})
+var sRestoreEventDataStoreRequest_EventDataStore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDataStore", ID: &i_EventDataStoreArn, Type: smithy.ShapeTypeString})
+var sRestoreEventDataStoreResponse_EventDataStoreArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDataStoreArn", ID: &i_EventDataStoreArn, Type: smithy.ShapeTypeString})
+var sRestoreEventDataStoreResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_EventDataStoreName, Type: smithy.ShapeTypeString})
+var sRestoreEventDataStoreResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iEventDataStoreStatus, Members: &mEventDataStoreStatus, Type: smithy.ShapeTypeEnum})
+var sRestoreEventDataStoreResponse_AdvancedEventSelectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdvancedEventSelectors", ID: &i_AdvancedEventSelectors, Members: &m_AdvancedEventSelectors, Type: smithy.ShapeTypeList})
+var sRestoreEventDataStoreResponse_MultiRegionEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MultiRegionEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sRestoreEventDataStoreResponse_OrganizationEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sRestoreEventDataStoreResponse_RetentionPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionPeriod", ID: &i_RetentionPeriod, Type: smithy.ShapeTypeInteger})
+var sRestoreEventDataStoreResponse_TerminationProtectionEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TerminationProtectionEnabled", ID: &i_TerminationProtectionEnabled, Type: smithy.ShapeTypeBoolean})
+var sRestoreEventDataStoreResponse_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sRestoreEventDataStoreResponse_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sRestoreEventDataStoreResponse_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_EventDataStoreKmsKeyId, Type: smithy.ShapeTypeString})
+var sRestoreEventDataStoreResponse_BillingMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingMode", ID: &iBillingMode, Members: &mBillingMode, Type: smithy.ShapeTypeEnum})
+var sSearchSampleQueriesRequest_SearchPhrase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchPhrase", ID: &i_SearchSampleQueriesSearchPhrase, Type: smithy.ShapeTypeString})
+var sSearchSampleQueriesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_SearchSampleQueriesMaxResults, Type: smithy.ShapeTypeInteger})
+var sSearchSampleQueriesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sSearchSampleQueriesResponse_SearchResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchResults", ID: &i_SearchSampleQueriesSearchResults, Members: &m_SearchSampleQueriesSearchResults, Type: smithy.ShapeTypeList})
+var sSearchSampleQueriesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sStartDashboardRefreshRequest_DashboardId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashboardId", ID: &i_DashboardArn, Type: smithy.ShapeTypeString})
+var sStartDashboardRefreshRequest_QueryParameterValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryParameterValues", ID: &i_QueryParameterValues, Members: &m_QueryParameterValues, Type: smithy.ShapeTypeMap})
+var sStartDashboardRefreshResponse_RefreshId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RefreshId", ID: &i_RefreshId, Type: smithy.ShapeTypeString})
+var sStartEventDataStoreIngestionRequest_EventDataStore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDataStore", ID: &i_EventDataStoreArn, Type: smithy.ShapeTypeString})
+var sStartImportRequest_Destinations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destinations", ID: &i_ImportDestinations, Members: &m_ImportDestinations, Type: smithy.ShapeTypeList})
+var sStartImportRequest_ImportSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportSource", ID: &iImportSource, Members: &mImportSource, Type: smithy.ShapeTypeStructure})
+var sStartImportRequest_StartEventTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartEventTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sStartImportRequest_EndEventTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndEventTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sStartImportRequest_ImportId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportId", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sStartImportResponse_ImportId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportId", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sStartImportResponse_Destinations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destinations", ID: &i_ImportDestinations, Members: &m_ImportDestinations, Type: smithy.ShapeTypeList})
+var sStartImportResponse_ImportSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportSource", ID: &iImportSource, Members: &mImportSource, Type: smithy.ShapeTypeStructure})
+var sStartImportResponse_StartEventTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartEventTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sStartImportResponse_EndEventTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndEventTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sStartImportResponse_ImportStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportStatus", ID: &iImportStatus, Members: &mImportStatus, Type: smithy.ShapeTypeEnum})
+var sStartImportResponse_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sStartImportResponse_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sStartLoggingRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sStartQueryRequest_QueryStatement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryStatement", ID: &i_QueryStatement, Type: smithy.ShapeTypeString})
+var sStartQueryRequest_DeliveryS3Uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryS3Uri", ID: &i_DeliveryS3Uri, Type: smithy.ShapeTypeString})
+var sStartQueryRequest_QueryAlias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryAlias", ID: &i_QueryAlias, Type: smithy.ShapeTypeString})
+var sStartQueryRequest_QueryParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryParameters", ID: &i_QueryParameters, Members: &m_QueryParameters, Type: smithy.ShapeTypeList})
+var sStartQueryRequest_EventDataStoreOwnerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDataStoreOwnerAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sStartQueryResponse_QueryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryId", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sStartQueryResponse_EventDataStoreOwnerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDataStoreOwnerAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sStopEventDataStoreIngestionRequest_EventDataStore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDataStore", ID: &i_EventDataStoreArn, Type: smithy.ShapeTypeString})
+var sStopImportRequest_ImportId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportId", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sStopImportResponse_ImportId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportId", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sStopImportResponse_ImportSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportSource", ID: &iImportSource, Members: &mImportSource, Type: smithy.ShapeTypeStructure})
+var sStopImportResponse_Destinations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destinations", ID: &i_ImportDestinations, Members: &m_ImportDestinations, Type: smithy.ShapeTypeList})
+var sStopImportResponse_ImportStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportStatus", ID: &iImportStatus, Members: &mImportStatus, Type: smithy.ShapeTypeEnum})
+var sStopImportResponse_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sStopImportResponse_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sStopImportResponse_StartEventTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartEventTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sStopImportResponse_EndEventTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndEventTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sStopImportResponse_ImportStatistics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportStatistics", ID: &iImportStatistics, Members: &mImportStatistics, Type: smithy.ShapeTypeStructure})
+var sStopLoggingRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUpdateChannelRequest_Channel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Channel", ID: &i_ChannelArn, Type: smithy.ShapeTypeString})
+var sUpdateChannelRequest_Destinations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destinations", ID: &i_Destinations, Members: &m_Destinations, Type: smithy.ShapeTypeList})
+var sUpdateChannelRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ChannelName, Type: smithy.ShapeTypeString})
+var sUpdateChannelResponse_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelArn", ID: &i_ChannelArn, Type: smithy.ShapeTypeString})
+var sUpdateChannelResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ChannelName, Type: smithy.ShapeTypeString})
+var sUpdateChannelResponse_Source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Source", ID: &i_Source, Type: smithy.ShapeTypeString})
+var sUpdateChannelResponse_Destinations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destinations", ID: &i_Destinations, Members: &m_Destinations, Type: smithy.ShapeTypeList})
+var sUpdateDashboardRequest_DashboardId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashboardId", ID: &i_DashboardArn, Type: smithy.ShapeTypeString})
+var sUpdateDashboardRequest_Widgets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Widgets", ID: &i_RequestWidgetList, Members: &m_RequestWidgetList, Type: smithy.ShapeTypeList})
+var sUpdateDashboardRequest_RefreshSchedule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RefreshSchedule", ID: &iRefreshSchedule, Members: &mRefreshSchedule, Type: smithy.ShapeTypeStructure})
+var sUpdateDashboardRequest_TerminationProtectionEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TerminationProtectionEnabled", ID: &i_TerminationProtectionEnabled, Type: smithy.ShapeTypeBoolean})
+var sUpdateDashboardResponse_DashboardArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashboardArn", ID: &i_DashboardArn, Type: smithy.ShapeTypeString})
+var sUpdateDashboardResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_DashboardName, Type: smithy.ShapeTypeString})
+var sUpdateDashboardResponse_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iDashboardType, Members: &mDashboardType, Type: smithy.ShapeTypeEnum})
+var sUpdateDashboardResponse_Widgets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Widgets", ID: &i_WidgetList, Members: &m_WidgetList, Type: smithy.ShapeTypeList})
+var sUpdateDashboardResponse_RefreshSchedule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RefreshSchedule", ID: &iRefreshSchedule, Members: &mRefreshSchedule, Type: smithy.ShapeTypeStructure})
+var sUpdateDashboardResponse_TerminationProtectionEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TerminationProtectionEnabled", ID: &i_TerminationProtectionEnabled, Type: smithy.ShapeTypeBoolean})
+var sUpdateDashboardResponse_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sUpdateDashboardResponse_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sUpdateEventDataStoreRequest_EventDataStore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDataStore", ID: &i_EventDataStoreArn, Type: smithy.ShapeTypeString})
+var sUpdateEventDataStoreRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_EventDataStoreName, Type: smithy.ShapeTypeString})
+var sUpdateEventDataStoreRequest_AdvancedEventSelectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdvancedEventSelectors", ID: &i_AdvancedEventSelectors, Members: &m_AdvancedEventSelectors, Type: smithy.ShapeTypeList})
+var sUpdateEventDataStoreRequest_MultiRegionEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MultiRegionEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sUpdateEventDataStoreRequest_OrganizationEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sUpdateEventDataStoreRequest_RetentionPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionPeriod", ID: &i_RetentionPeriod, Type: smithy.ShapeTypeInteger})
+var sUpdateEventDataStoreRequest_TerminationProtectionEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TerminationProtectionEnabled", ID: &i_TerminationProtectionEnabled, Type: smithy.ShapeTypeBoolean})
+var sUpdateEventDataStoreRequest_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_EventDataStoreKmsKeyId, Type: smithy.ShapeTypeString})
+var sUpdateEventDataStoreRequest_BillingMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingMode", ID: &iBillingMode, Members: &mBillingMode, Type: smithy.ShapeTypeEnum})
+var sUpdateEventDataStoreResponse_EventDataStoreArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDataStoreArn", ID: &i_EventDataStoreArn, Type: smithy.ShapeTypeString})
+var sUpdateEventDataStoreResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_EventDataStoreName, Type: smithy.ShapeTypeString})
+var sUpdateEventDataStoreResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iEventDataStoreStatus, Members: &mEventDataStoreStatus, Type: smithy.ShapeTypeEnum})
+var sUpdateEventDataStoreResponse_AdvancedEventSelectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdvancedEventSelectors", ID: &i_AdvancedEventSelectors, Members: &m_AdvancedEventSelectors, Type: smithy.ShapeTypeList})
+var sUpdateEventDataStoreResponse_MultiRegionEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MultiRegionEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sUpdateEventDataStoreResponse_OrganizationEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sUpdateEventDataStoreResponse_RetentionPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionPeriod", ID: &i_RetentionPeriod, Type: smithy.ShapeTypeInteger})
+var sUpdateEventDataStoreResponse_TerminationProtectionEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TerminationProtectionEnabled", ID: &i_TerminationProtectionEnabled, Type: smithy.ShapeTypeBoolean})
+var sUpdateEventDataStoreResponse_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sUpdateEventDataStoreResponse_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sUpdateEventDataStoreResponse_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_EventDataStoreKmsKeyId, Type: smithy.ShapeTypeString})
+var sUpdateEventDataStoreResponse_BillingMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BillingMode", ID: &iBillingMode, Members: &mBillingMode, Type: smithy.ShapeTypeEnum})
+var sUpdateEventDataStoreResponse_FederationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FederationStatus", ID: &iFederationStatus, Members: &mFederationStatus, Type: smithy.ShapeTypeEnum})
+var sUpdateEventDataStoreResponse_FederationRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FederationRoleArn", ID: &i_FederationRoleArn, Type: smithy.ShapeTypeString})
+var sUpdateTrailRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUpdateTrailRequest_S3BucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3BucketName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUpdateTrailRequest_S3KeyPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3KeyPrefix", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUpdateTrailRequest_SnsTopicName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnsTopicName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUpdateTrailRequest_IncludeGlobalServiceEvents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeGlobalServiceEvents", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sUpdateTrailRequest_IsMultiRegionTrail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsMultiRegionTrail", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sUpdateTrailRequest_EnableLogFileValidation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableLogFileValidation", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sUpdateTrailRequest_CloudWatchLogsLogGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchLogsLogGroupArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUpdateTrailRequest_CloudWatchLogsRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchLogsRoleArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUpdateTrailRequest_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUpdateTrailRequest_IsOrganizationTrail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsOrganizationTrail", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sUpdateTrailRequest_RecursiveLogging = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecursiveLogging", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sUpdateTrailResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUpdateTrailResponse_S3BucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3BucketName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUpdateTrailResponse_S3KeyPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3KeyPrefix", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUpdateTrailResponse_SnsTopicName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnsTopicName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUpdateTrailResponse_SnsTopicARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnsTopicARN", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUpdateTrailResponse_IncludeGlobalServiceEvents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeGlobalServiceEvents", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sUpdateTrailResponse_IsMultiRegionTrail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsMultiRegionTrail", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sUpdateTrailResponse_TrailARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrailARN", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUpdateTrailResponse_LogFileValidationEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogFileValidationEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sUpdateTrailResponse_CloudWatchLogsLogGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchLogsLogGroupArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUpdateTrailResponse_CloudWatchLogsRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchLogsRoleArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUpdateTrailResponse_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUpdateTrailResponse_IsOrganizationTrail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsOrganizationTrail", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sUpdateTrailResponse_RecursiveLogging = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecursiveLogging", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+
+var AddTags = &sAddTags
+
+var CancelQuery = &sCancelQuery
+
+var CreateChannel = &sCreateChannel
+
+var CreateDashboard = &sCreateDashboard
+
+var CreateEventDataStore = &sCreateEventDataStore
+
+var CreateTrail = &sCreateTrail
+
+var DeleteChannel = &sDeleteChannel
+
+var DeleteDashboard = &sDeleteDashboard
+
+var DeleteEventDataStore = &sDeleteEventDataStore
+
+var DeleteResourcePolicy = &sDeleteResourcePolicy
+
+var DeleteTrail = &sDeleteTrail
+
+var DeregisterOrganizationDelegatedAdmin = &sDeregisterOrganizationDelegatedAdmin
+
+var DescribeQuery = &sDescribeQuery
+
+var DescribeTrails = &sDescribeTrails
+
+var DisableFederation = &sDisableFederation
+
+var EnableFederation = &sEnableFederation
+
+var GenerateQuery = &sGenerateQuery
+
+var GetChannel = &sGetChannel
+
+var GetDashboard = &sGetDashboard
+
+var GetEventConfiguration = &sGetEventConfiguration
+
+var GetEventDataStore = &sGetEventDataStore
+
+var GetEventSelectors = &sGetEventSelectors
+
+var GetImport = &sGetImport
+
+var GetInsightSelectors = &sGetInsightSelectors
+
+var GetQueryResults = &sGetQueryResults
+
+var GetResourcePolicy = &sGetResourcePolicy
+
+var GetTrail = &sGetTrail
+
+var GetTrailStatus = &sGetTrailStatus
+
+var ListChannels = &sListChannels
+
+var ListDashboards = &sListDashboards
+
+var ListEventDataStores = &sListEventDataStores
+
+var ListImportFailures = &sListImportFailures
+
+var ListImports = &sListImports
+
+var ListInsightsData = &sListInsightsData
+
+var ListInsightsMetricData = &sListInsightsMetricData
+
+var ListPublicKeys = &sListPublicKeys
+
+var ListQueries = &sListQueries
+
+var ListTags = &sListTags
+
+var ListTrails = &sListTrails
+
+var LookupEvents = &sLookupEvents
+
+var PutEventConfiguration = &sPutEventConfiguration
+
+var PutEventSelectors = &sPutEventSelectors
+
+var PutInsightSelectors = &sPutInsightSelectors
+
+var PutResourcePolicy = &sPutResourcePolicy
+
+var RegisterOrganizationDelegatedAdmin = &sRegisterOrganizationDelegatedAdmin
+
+var RemoveTags = &sRemoveTags
+
+var RestoreEventDataStore = &sRestoreEventDataStore
+
+var SearchSampleQueries = &sSearchSampleQueries
+
+var StartDashboardRefresh = &sStartDashboardRefresh
+
+var StartEventDataStoreIngestion = &sStartEventDataStoreIngestion
+
+var StartImport = &sStartImport
+
+var StartLogging = &sStartLogging
+
+var StartQuery = &sStartQuery
+
+var StopEventDataStoreIngestion = &sStopEventDataStoreIngestion
+
+var StopImport = &sStopImport
+
+var StopLogging = &sStopLogging
+
+var UpdateChannel = &sUpdateChannel
+
+var UpdateDashboard = &sUpdateDashboard
+
+var UpdateEventDataStore = &sUpdateEventDataStore
+
+var UpdateTrail = &sUpdateTrail
+
+var _CloudTrail_20131101 = &s_CloudTrail_20131101
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_Message = &sAccessDeniedException_Message
+
+var AccountHasOngoingImportException = &sAccountHasOngoingImportException
+var AccountHasOngoingImportException_Message = &sAccountHasOngoingImportException_Message
+
+var _AccountId = &s_AccountId
+
+var AccountNotFoundException = &sAccountNotFoundException
+var AccountNotFoundException_Message = &sAccountNotFoundException_Message
+
+var AccountNotRegisteredException = &sAccountNotRegisteredException
+var AccountNotRegisteredException_Message = &sAccountNotRegisteredException_Message
+
+var AccountRegisteredException = &sAccountRegisteredException
+var AccountRegisteredException_Message = &sAccountRegisteredException_Message
+
+var AdvancedEventSelector = &sAdvancedEventSelector
+var AdvancedEventSelector_Name = &sAdvancedEventSelector_Name
+var AdvancedEventSelector_FieldSelectors = &sAdvancedEventSelector_FieldSelectors
+
+var _AdvancedEventSelectors = &s_AdvancedEventSelectors
+var _AdvancedEventSelectors_member = &s_AdvancedEventSelectors_member
+
+var AdvancedFieldSelector = &sAdvancedFieldSelector
+var AdvancedFieldSelector_Field = &sAdvancedFieldSelector_Field
+var AdvancedFieldSelector_Equals = &sAdvancedFieldSelector_Equals
+var AdvancedFieldSelector_StartsWith = &sAdvancedFieldSelector_StartsWith
+var AdvancedFieldSelector_EndsWith = &sAdvancedFieldSelector_EndsWith
+var AdvancedFieldSelector_NotEquals = &sAdvancedFieldSelector_NotEquals
+var AdvancedFieldSelector_NotStartsWith = &sAdvancedFieldSelector_NotStartsWith
+var AdvancedFieldSelector_NotEndsWith = &sAdvancedFieldSelector_NotEndsWith
+
+var _AdvancedFieldSelectors = &s_AdvancedFieldSelectors
+var _AdvancedFieldSelectors_member = &s_AdvancedFieldSelectors_member
+
+var AggregationConfiguration = &sAggregationConfiguration
+var AggregationConfiguration_Templates = &sAggregationConfiguration_Templates
+var AggregationConfiguration_EventCategory = &sAggregationConfiguration_EventCategory
+
+var _AggregationConfigurations = &s_AggregationConfigurations
+var _AggregationConfigurations_member = &s_AggregationConfigurations_member
+
+var BillingMode = &sBillingMode
+var BillingMode_EXTENDABLE_RETENTION_PRICING = &sBillingMode_EXTENDABLE_RETENTION_PRICING
+var BillingMode_FIXED_RETENTION_PRICING = &sBillingMode_FIXED_RETENTION_PRICING
+
+var _Boolean = &s_Boolean
+
+var _ByteBuffer = &s_ByteBuffer
+
+var CannotDelegateManagementAccountException = &sCannotDelegateManagementAccountException
+var CannotDelegateManagementAccountException_Message = &sCannotDelegateManagementAccountException_Message
+
+var Channel = &sChannel
+var Channel_ChannelArn = &sChannel_ChannelArn
+var Channel_Name = &sChannel_Name
+
+var ChannelAlreadyExistsException = &sChannelAlreadyExistsException
+var ChannelAlreadyExistsException_Message = &sChannelAlreadyExistsException_Message
+
+var _ChannelArn = &s_ChannelArn
+
+var ChannelARNInvalidException = &sChannelARNInvalidException
+var ChannelARNInvalidException_Message = &sChannelARNInvalidException_Message
+
+var ChannelExistsForEDSException = &sChannelExistsForEDSException
+var ChannelExistsForEDSException_Message = &sChannelExistsForEDSException_Message
+
+var ChannelMaxLimitExceededException = &sChannelMaxLimitExceededException
+var ChannelMaxLimitExceededException_Message = &sChannelMaxLimitExceededException_Message
+
+var _ChannelName = &s_ChannelName
+
+var ChannelNotFoundException = &sChannelNotFoundException
+var ChannelNotFoundException_Message = &sChannelNotFoundException_Message
+
+var _Channels = &s_Channels
+var _Channels_member = &s_Channels_member
+
+var CloudTrailAccessNotEnabledException = &sCloudTrailAccessNotEnabledException
+var CloudTrailAccessNotEnabledException_Message = &sCloudTrailAccessNotEnabledException_Message
+
+var CloudTrailARNInvalidException = &sCloudTrailARNInvalidException
+var CloudTrailARNInvalidException_Message = &sCloudTrailARNInvalidException_Message
+
+var CloudTrailInvalidClientTokenIdException = &sCloudTrailInvalidClientTokenIdException
+var CloudTrailInvalidClientTokenIdException_Message = &sCloudTrailInvalidClientTokenIdException_Message
+
+var CloudWatchLogsDeliveryUnavailableException = &sCloudWatchLogsDeliveryUnavailableException
+var CloudWatchLogsDeliveryUnavailableException_Message = &sCloudWatchLogsDeliveryUnavailableException_Message
+
+var ConcurrentModificationException = &sConcurrentModificationException
+var ConcurrentModificationException_Message = &sConcurrentModificationException_Message
+
+var ConflictException = &sConflictException
+var ConflictException_Message = &sConflictException_Message
+
+var ContextKeySelector = &sContextKeySelector
+var ContextKeySelector_Type = &sContextKeySelector_Type
+var ContextKeySelector_Equals = &sContextKeySelector_Equals
+
+var _ContextKeySelectors = &s_ContextKeySelectors
+var _ContextKeySelectors_member = &s_ContextKeySelectors_member
+
+var _DashboardArn = &s_DashboardArn
+
+var DashboardDetail = &sDashboardDetail
+var DashboardDetail_DashboardArn = &sDashboardDetail_DashboardArn
+var DashboardDetail_Type = &sDashboardDetail_Type
+
+var _DashboardName = &s_DashboardName
+
+var _Dashboards = &s_Dashboards
+var _Dashboards_member = &s_Dashboards_member
+
+var DashboardStatus = &sDashboardStatus
+var DashboardStatus_CREATING = &sDashboardStatus_CREATING
+var DashboardStatus_CREATED = &sDashboardStatus_CREATED
+var DashboardStatus_UPDATING = &sDashboardStatus_UPDATING
+var DashboardStatus_UPDATED = &sDashboardStatus_UPDATED
+var DashboardStatus_DELETING = &sDashboardStatus_DELETING
+
+var DashboardType = &sDashboardType
+var DashboardType_MANAGED = &sDashboardType_MANAGED
+var DashboardType_CUSTOM = &sDashboardType_CUSTOM
+
+var DataResource = &sDataResource
+var DataResource_Type = &sDataResource_Type
+var DataResource_Values = &sDataResource_Values
+
+var _DataResources = &s_DataResources
+var _DataResources_member = &s_DataResources_member
+
+var _DataResourceValues = &s_DataResourceValues
+var _DataResourceValues_member = &s_DataResourceValues_member
+
+var _Date = &s_Date
+
+var DelegatedAdminAccountLimitExceededException = &sDelegatedAdminAccountLimitExceededException
+var DelegatedAdminAccountLimitExceededException_Message = &sDelegatedAdminAccountLimitExceededException_Message
+
+var _DeliveryS3Uri = &s_DeliveryS3Uri
+
+var DeliveryStatus = &sDeliveryStatus
+var DeliveryStatus_SUCCESS = &sDeliveryStatus_SUCCESS
+var DeliveryStatus_FAILED = &sDeliveryStatus_FAILED
+var DeliveryStatus_FAILED_SIGNING_FILE = &sDeliveryStatus_FAILED_SIGNING_FILE
+var DeliveryStatus_PENDING = &sDeliveryStatus_PENDING
+var DeliveryStatus_RESOURCE_NOT_FOUND = &sDeliveryStatus_RESOURCE_NOT_FOUND
+var DeliveryStatus_ACCESS_DENIED = &sDeliveryStatus_ACCESS_DENIED
+var DeliveryStatus_ACCESS_DENIED_SIGNING_FILE = &sDeliveryStatus_ACCESS_DENIED_SIGNING_FILE
+var DeliveryStatus_CANCELLED = &sDeliveryStatus_CANCELLED
+var DeliveryStatus_UNKNOWN = &sDeliveryStatus_UNKNOWN
+
+var Destination = &sDestination
+var Destination_Type = &sDestination_Type
+var Destination_Location = &sDestination_Location
+
+var _Destinations = &s_Destinations
+var _Destinations_member = &s_Destinations_member
+
+var DestinationType = &sDestinationType
+var DestinationType_EVENT_DATA_STORE = &sDestinationType_EVENT_DATA_STORE
+var DestinationType_AWS_SERVICE = &sDestinationType_AWS_SERVICE
+
+var _Double = &s_Double
+
+var _ErrorCode = &s_ErrorCode
+
+var _ErrorMessage = &s_ErrorMessage
+
+var Event = &sEvent
+var Event_EventId = &sEvent_EventId
+var Event_EventName = &sEvent_EventName
+var Event_ReadOnly = &sEvent_ReadOnly
+var Event_AccessKeyId = &sEvent_AccessKeyId
+var Event_EventTime = &sEvent_EventTime
+var Event_EventSource = &sEvent_EventSource
+var Event_Username = &sEvent_Username
+var Event_Resources = &sEvent_Resources
+var Event_CloudTrailEvent = &sEvent_CloudTrailEvent
+
+var EventCategory = &sEventCategory
+var EventCategory_Insight = &sEventCategory_Insight
+
+var EventCategoryAggregation = &sEventCategoryAggregation
+var EventCategoryAggregation_Data = &sEventCategoryAggregation_Data
+
+var EventDataStore = &sEventDataStore
+var EventDataStore_EventDataStoreArn = &sEventDataStore_EventDataStoreArn
+var EventDataStore_Name = &sEventDataStore_Name
+var EventDataStore_TerminationProtectionEnabled = &sEventDataStore_TerminationProtectionEnabled
+var EventDataStore_Status = &sEventDataStore_Status
+var EventDataStore_AdvancedEventSelectors = &sEventDataStore_AdvancedEventSelectors
+var EventDataStore_MultiRegionEnabled = &sEventDataStore_MultiRegionEnabled
+var EventDataStore_OrganizationEnabled = &sEventDataStore_OrganizationEnabled
+var EventDataStore_RetentionPeriod = &sEventDataStore_RetentionPeriod
+var EventDataStore_CreatedTimestamp = &sEventDataStore_CreatedTimestamp
+var EventDataStore_UpdatedTimestamp = &sEventDataStore_UpdatedTimestamp
+
+var EventDataStoreAlreadyExistsException = &sEventDataStoreAlreadyExistsException
+var EventDataStoreAlreadyExistsException_Message = &sEventDataStoreAlreadyExistsException_Message
+
+var _EventDataStoreArn = &s_EventDataStoreArn
+
+var EventDataStoreARNInvalidException = &sEventDataStoreARNInvalidException
+var EventDataStoreARNInvalidException_Message = &sEventDataStoreARNInvalidException_Message
+
+var EventDataStoreFederationEnabledException = &sEventDataStoreFederationEnabledException
+var EventDataStoreFederationEnabledException_Message = &sEventDataStoreFederationEnabledException_Message
+
+var EventDataStoreHasOngoingImportException = &sEventDataStoreHasOngoingImportException
+var EventDataStoreHasOngoingImportException_Message = &sEventDataStoreHasOngoingImportException_Message
+
+var _EventDataStoreKmsKeyId = &s_EventDataStoreKmsKeyId
+
+var _EventDataStoreList = &s_EventDataStoreList
+var _EventDataStoreList_member = &s_EventDataStoreList_member
+
+var EventDataStoreMaxLimitExceededException = &sEventDataStoreMaxLimitExceededException
+var EventDataStoreMaxLimitExceededException_Message = &sEventDataStoreMaxLimitExceededException_Message
+
+var _EventDataStoreName = &s_EventDataStoreName
+
+var EventDataStoreNotFoundException = &sEventDataStoreNotFoundException
+var EventDataStoreNotFoundException_Message = &sEventDataStoreNotFoundException_Message
+
+var _EventDataStores = &s_EventDataStores
+var _EventDataStores_member = &s_EventDataStores_member
+
+var EventDataStoreStatus = &sEventDataStoreStatus
+var EventDataStoreStatus_CREATED = &sEventDataStoreStatus_CREATED
+var EventDataStoreStatus_ENABLED = &sEventDataStoreStatus_ENABLED
+var EventDataStoreStatus_PENDING_DELETION = &sEventDataStoreStatus_PENDING_DELETION
+var EventDataStoreStatus_STARTING_INGESTION = &sEventDataStoreStatus_STARTING_INGESTION
+var EventDataStoreStatus_STOPPING_INGESTION = &sEventDataStoreStatus_STOPPING_INGESTION
+var EventDataStoreStatus_STOPPED_INGESTION = &sEventDataStoreStatus_STOPPED_INGESTION
+
+var EventDataStoreTerminationProtectedException = &sEventDataStoreTerminationProtectedException
+var EventDataStoreTerminationProtectedException_Message = &sEventDataStoreTerminationProtectedException_Message
+
+var _EventName = &s_EventName
+
+var EventSelector = &sEventSelector
+var EventSelector_ReadWriteType = &sEventSelector_ReadWriteType
+var EventSelector_IncludeManagementEvents = &sEventSelector_IncludeManagementEvents
+var EventSelector_DataResources = &sEventSelector_DataResources
+var EventSelector_ExcludeManagementEventSources = &sEventSelector_ExcludeManagementEventSources
+
+var _EventSelectors = &s_EventSelectors
+var _EventSelectors_member = &s_EventSelectors_member
+
+var _EventsList = &s_EventsList
+var _EventsList_member = &s_EventsList_member
+
+var _EventSource = &s_EventSource
+
+var _ExcludeManagementEventSources = &s_ExcludeManagementEventSources
+var _ExcludeManagementEventSources_member = &s_ExcludeManagementEventSources_member
+
+var _FederationRoleArn = &s_FederationRoleArn
+
+var FederationStatus = &sFederationStatus
+var FederationStatus_ENABLING = &sFederationStatus_ENABLING
+var FederationStatus_ENABLED = &sFederationStatus_ENABLED
+var FederationStatus_DISABLING = &sFederationStatus_DISABLING
+var FederationStatus_DISABLED = &sFederationStatus_DISABLED
+
+var GenerateResponseException = &sGenerateResponseException
+var GenerateResponseException_Message = &sGenerateResponseException_Message
+
+var _ImportDestinations = &s_ImportDestinations
+var _ImportDestinations_member = &s_ImportDestinations_member
+
+var _ImportFailureList = &s_ImportFailureList
+var _ImportFailureList_member = &s_ImportFailureList_member
+
+var ImportFailureListItem = &sImportFailureListItem
+var ImportFailureListItem_Location = &sImportFailureListItem_Location
+var ImportFailureListItem_Status = &sImportFailureListItem_Status
+var ImportFailureListItem_ErrorType = &sImportFailureListItem_ErrorType
+var ImportFailureListItem_ErrorMessage = &sImportFailureListItem_ErrorMessage
+var ImportFailureListItem_LastUpdatedTime = &sImportFailureListItem_LastUpdatedTime
+
+var ImportFailureStatus = &sImportFailureStatus
+var ImportFailureStatus_FAILED = &sImportFailureStatus_FAILED
+var ImportFailureStatus_RETRY = &sImportFailureStatus_RETRY
+var ImportFailureStatus_SUCCEEDED = &sImportFailureStatus_SUCCEEDED
+
+var ImportNotFoundException = &sImportNotFoundException
+var ImportNotFoundException_Message = &sImportNotFoundException_Message
+
+var _ImportsList = &s_ImportsList
+var _ImportsList_member = &s_ImportsList_member
+
+var ImportsListItem = &sImportsListItem
+var ImportsListItem_ImportId = &sImportsListItem_ImportId
+var ImportsListItem_ImportStatus = &sImportsListItem_ImportStatus
+var ImportsListItem_Destinations = &sImportsListItem_Destinations
+var ImportsListItem_CreatedTimestamp = &sImportsListItem_CreatedTimestamp
+var ImportsListItem_UpdatedTimestamp = &sImportsListItem_UpdatedTimestamp
+
+var ImportSource = &sImportSource
+var ImportSource_S3 = &sImportSource_S3
+
+var ImportStatistics = &sImportStatistics
+var ImportStatistics_PrefixesFound = &sImportStatistics_PrefixesFound
+var ImportStatistics_PrefixesCompleted = &sImportStatistics_PrefixesCompleted
+var ImportStatistics_FilesCompleted = &sImportStatistics_FilesCompleted
+var ImportStatistics_EventsCompleted = &sImportStatistics_EventsCompleted
+var ImportStatistics_FailedEntries = &sImportStatistics_FailedEntries
+
+var ImportStatus = &sImportStatus
+var ImportStatus_INITIALIZING = &sImportStatus_INITIALIZING
+var ImportStatus_IN_PROGRESS = &sImportStatus_IN_PROGRESS
+var ImportStatus_FAILED = &sImportStatus_FAILED
+var ImportStatus_STOPPED = &sImportStatus_STOPPED
+var ImportStatus_COMPLETED = &sImportStatus_COMPLETED
+
+var InactiveEventDataStoreException = &sInactiveEventDataStoreException
+var InactiveEventDataStoreException_Message = &sInactiveEventDataStoreException_Message
+
+var InactiveQueryException = &sInactiveQueryException
+var InactiveQueryException_Message = &sInactiveQueryException_Message
+
+var IngestionStatus = &sIngestionStatus
+var IngestionStatus_LatestIngestionSuccessTime = &sIngestionStatus_LatestIngestionSuccessTime
+var IngestionStatus_LatestIngestionSuccessEventID = &sIngestionStatus_LatestIngestionSuccessEventID
+var IngestionStatus_LatestIngestionErrorCode = &sIngestionStatus_LatestIngestionErrorCode
+var IngestionStatus_LatestIngestionAttemptTime = &sIngestionStatus_LatestIngestionAttemptTime
+var IngestionStatus_LatestIngestionAttemptEventID = &sIngestionStatus_LatestIngestionAttemptEventID
+
+var InsightNotEnabledException = &sInsightNotEnabledException
+var InsightNotEnabledException_Message = &sInsightNotEnabledException_Message
+
+var InsightSelector = &sInsightSelector
+var InsightSelector_InsightType = &sInsightSelector_InsightType
+var InsightSelector_EventCategories = &sInsightSelector_EventCategories
+
+var _InsightSelectors = &s_InsightSelectors
+var _InsightSelectors_member = &s_InsightSelectors_member
+
+var InsightsMetricDataType = &sInsightsMetricDataType
+var InsightsMetricDataType_FILL_WITH_ZEROS = &sInsightsMetricDataType_FILL_WITH_ZEROS
+var InsightsMetricDataType_NON_ZERO_DATA = &sInsightsMetricDataType_NON_ZERO_DATA
+
+var _InsightsMetricMaxResults = &s_InsightsMetricMaxResults
+
+var _InsightsMetricNextToken = &s_InsightsMetricNextToken
+
+var _InsightsMetricPeriod = &s_InsightsMetricPeriod
+
+var _InsightsMetricValues = &s_InsightsMetricValues
+var _InsightsMetricValues_member = &s_InsightsMetricValues_member
+
+var InsightType = &sInsightType
+var InsightType_ApiCallRateInsight = &sInsightType_ApiCallRateInsight
+var InsightType_ApiErrorRateInsight = &sInsightType_ApiErrorRateInsight
+
+var InsufficientDependencyServiceAccessPermissionException = &sInsufficientDependencyServiceAccessPermissionException
+var InsufficientDependencyServiceAccessPermissionException_Message = &sInsufficientDependencyServiceAccessPermissionException_Message
+
+var InsufficientEncryptionPolicyException = &sInsufficientEncryptionPolicyException
+var InsufficientEncryptionPolicyException_Message = &sInsufficientEncryptionPolicyException_Message
+
+var InsufficientIAMAccessPermissionException = &sInsufficientIAMAccessPermissionException
+var InsufficientIAMAccessPermissionException_Message = &sInsufficientIAMAccessPermissionException_Message
+
+var InsufficientS3BucketPolicyException = &sInsufficientS3BucketPolicyException
+var InsufficientS3BucketPolicyException_Message = &sInsufficientS3BucketPolicyException_Message
+
+var InsufficientSnsTopicPolicyException = &sInsufficientSnsTopicPolicyException
+var InsufficientSnsTopicPolicyException_Message = &sInsufficientSnsTopicPolicyException_Message
+
+var _Integer = &s_Integer
+
+var InvalidCloudWatchLogsLogGroupArnException = &sInvalidCloudWatchLogsLogGroupArnException
+var InvalidCloudWatchLogsLogGroupArnException_Message = &sInvalidCloudWatchLogsLogGroupArnException_Message
+
+var InvalidCloudWatchLogsRoleArnException = &sInvalidCloudWatchLogsRoleArnException
+var InvalidCloudWatchLogsRoleArnException_Message = &sInvalidCloudWatchLogsRoleArnException_Message
+
+var InvalidDateRangeException = &sInvalidDateRangeException
+var InvalidDateRangeException_Message = &sInvalidDateRangeException_Message
+
+var InvalidEventCategoryException = &sInvalidEventCategoryException
+var InvalidEventCategoryException_Message = &sInvalidEventCategoryException_Message
+
+var InvalidEventDataStoreCategoryException = &sInvalidEventDataStoreCategoryException
+var InvalidEventDataStoreCategoryException_Message = &sInvalidEventDataStoreCategoryException_Message
+
+var InvalidEventDataStoreStatusException = &sInvalidEventDataStoreStatusException
+var InvalidEventDataStoreStatusException_Message = &sInvalidEventDataStoreStatusException_Message
+
+var InvalidEventSelectorsException = &sInvalidEventSelectorsException
+var InvalidEventSelectorsException_Message = &sInvalidEventSelectorsException_Message
+
+var InvalidHomeRegionException = &sInvalidHomeRegionException
+var InvalidHomeRegionException_Message = &sInvalidHomeRegionException_Message
+
+var InvalidImportSourceException = &sInvalidImportSourceException
+var InvalidImportSourceException_Message = &sInvalidImportSourceException_Message
+
+var InvalidInsightSelectorsException = &sInvalidInsightSelectorsException
+var InvalidInsightSelectorsException_Message = &sInvalidInsightSelectorsException_Message
+
+var InvalidKmsKeyIdException = &sInvalidKmsKeyIdException
+var InvalidKmsKeyIdException_Message = &sInvalidKmsKeyIdException_Message
+
+var InvalidLookupAttributesException = &sInvalidLookupAttributesException
+var InvalidLookupAttributesException_Message = &sInvalidLookupAttributesException_Message
+
+var InvalidMaxResultsException = &sInvalidMaxResultsException
+var InvalidMaxResultsException_Message = &sInvalidMaxResultsException_Message
+
+var InvalidNextTokenException = &sInvalidNextTokenException
+var InvalidNextTokenException_Message = &sInvalidNextTokenException_Message
+
+var InvalidParameterCombinationException = &sInvalidParameterCombinationException
+var InvalidParameterCombinationException_Message = &sInvalidParameterCombinationException_Message
+
+var InvalidParameterException = &sInvalidParameterException
+var InvalidParameterException_Message = &sInvalidParameterException_Message
+
+var InvalidQueryStatementException = &sInvalidQueryStatementException
+var InvalidQueryStatementException_Message = &sInvalidQueryStatementException_Message
+
+var InvalidQueryStatusException = &sInvalidQueryStatusException
+var InvalidQueryStatusException_Message = &sInvalidQueryStatusException_Message
+
+var InvalidS3BucketNameException = &sInvalidS3BucketNameException
+var InvalidS3BucketNameException_Message = &sInvalidS3BucketNameException_Message
+
+var InvalidS3PrefixException = &sInvalidS3PrefixException
+var InvalidS3PrefixException_Message = &sInvalidS3PrefixException_Message
+
+var InvalidSnsTopicNameException = &sInvalidSnsTopicNameException
+var InvalidSnsTopicNameException_Message = &sInvalidSnsTopicNameException_Message
+
+var InvalidSourceException = &sInvalidSourceException
+var InvalidSourceException_Message = &sInvalidSourceException_Message
+
+var InvalidTagParameterException = &sInvalidTagParameterException
+var InvalidTagParameterException_Message = &sInvalidTagParameterException_Message
+
+var InvalidTimeRangeException = &sInvalidTimeRangeException
+var InvalidTimeRangeException_Message = &sInvalidTimeRangeException_Message
+
+var InvalidTokenException = &sInvalidTokenException
+var InvalidTokenException_Message = &sInvalidTokenException_Message
+
+var InvalidTrailNameException = &sInvalidTrailNameException
+var InvalidTrailNameException_Message = &sInvalidTrailNameException_Message
+
+var KmsException = &sKmsException
+var KmsException_Message = &sKmsException_Message
+
+var KmsKeyDisabledException = &sKmsKeyDisabledException
+var KmsKeyDisabledException_Message = &sKmsKeyDisabledException_Message
+
+var KmsKeyNotFoundException = &sKmsKeyNotFoundException
+var KmsKeyNotFoundException_Message = &sKmsKeyNotFoundException_Message
+
+var _ListChannelsMaxResultsCount = &s_ListChannelsMaxResultsCount
+
+var _ListDashboardsMaxResultsCount = &s_ListDashboardsMaxResultsCount
+
+var _ListEventDataStoresMaxResultsCount = &s_ListEventDataStoresMaxResultsCount
+
+var _ListImportFailuresMaxResultsCount = &s_ListImportFailuresMaxResultsCount
+
+var _ListImportsMaxResultsCount = &s_ListImportsMaxResultsCount
+
+var ListInsightsDataDimensionKey = &sListInsightsDataDimensionKey
+var ListInsightsDataDimensionKey_EVENT_ID = &sListInsightsDataDimensionKey_EVENT_ID
+var ListInsightsDataDimensionKey_EVENT_NAME = &sListInsightsDataDimensionKey_EVENT_NAME
+var ListInsightsDataDimensionKey_EVENT_SOURCE = &sListInsightsDataDimensionKey_EVENT_SOURCE
+
+var _ListInsightsDataDimensions = &s_ListInsightsDataDimensions
+var _ListInsightsDataDimensions_key = &s_ListInsightsDataDimensions_key
+var _ListInsightsDataDimensions_value = &s_ListInsightsDataDimensions_value
+
+var _ListInsightsDataDimensionValue = &s_ListInsightsDataDimensionValue
+
+var _ListInsightsDataMaxResultsCount = &s_ListInsightsDataMaxResultsCount
+
+var ListInsightsDataType = &sListInsightsDataType
+var ListInsightsDataType_INSIGHTS_EVENTS = &sListInsightsDataType_INSIGHTS_EVENTS
+
+var _ListQueriesMaxResultsCount = &s_ListQueriesMaxResultsCount
+
+var _Location = &s_Location
+
+var _Long = &s_Long
+
+var LookupAttribute = &sLookupAttribute
+var LookupAttribute_AttributeKey = &sLookupAttribute_AttributeKey
+var LookupAttribute_AttributeValue = &sLookupAttribute_AttributeValue
+
+var LookupAttributeKey = &sLookupAttributeKey
+var LookupAttributeKey_EVENT_ID = &sLookupAttributeKey_EVENT_ID
+var LookupAttributeKey_EVENT_NAME = &sLookupAttributeKey_EVENT_NAME
+var LookupAttributeKey_READ_ONLY = &sLookupAttributeKey_READ_ONLY
+var LookupAttributeKey_USERNAME = &sLookupAttributeKey_USERNAME
+var LookupAttributeKey_RESOURCE_TYPE = &sLookupAttributeKey_RESOURCE_TYPE
+var LookupAttributeKey_RESOURCE_NAME = &sLookupAttributeKey_RESOURCE_NAME
+var LookupAttributeKey_EVENT_SOURCE = &sLookupAttributeKey_EVENT_SOURCE
+var LookupAttributeKey_ACCESS_KEY_ID = &sLookupAttributeKey_ACCESS_KEY_ID
+
+var _LookupAttributesList = &s_LookupAttributesList
+var _LookupAttributesList_member = &s_LookupAttributesList_member
+
+var _LookupAttributeValue = &s_LookupAttributeValue
+
+var MaxConcurrentQueriesException = &sMaxConcurrentQueriesException
+var MaxConcurrentQueriesException_Message = &sMaxConcurrentQueriesException_Message
+
+var MaxEventSize = &sMaxEventSize
+var MaxEventSize_Standard = &sMaxEventSize_Standard
+var MaxEventSize_Large = &sMaxEventSize_Large
+
+var MaximumNumberOfTrailsExceededException = &sMaximumNumberOfTrailsExceededException
+var MaximumNumberOfTrailsExceededException_Message = &sMaximumNumberOfTrailsExceededException_Message
+
+var _MaxQueryResults = &s_MaxQueryResults
+
+var _MaxResults = &s_MaxResults
+
+var _NextToken = &s_NextToken
+
+var NoManagementAccountSLRExistsException = &sNoManagementAccountSLRExistsException
+var NoManagementAccountSLRExistsException_Message = &sNoManagementAccountSLRExistsException_Message
+
+var NotOrganizationManagementAccountException = &sNotOrganizationManagementAccountException
+var NotOrganizationManagementAccountException_Message = &sNotOrganizationManagementAccountException_Message
+
+var NotOrganizationMasterAccountException = &sNotOrganizationMasterAccountException
+var NotOrganizationMasterAccountException_Message = &sNotOrganizationMasterAccountException_Message
+
+var OperationNotPermittedException = &sOperationNotPermittedException
+var OperationNotPermittedException_Message = &sOperationNotPermittedException_Message
+
+var _Operator = &s_Operator
+var _Operator_member = &s_Operator_member
+
+var _OperatorTargetList = &s_OperatorTargetList
+var _OperatorTargetList_member = &s_OperatorTargetList_member
+
+var _OperatorTargetListMember = &s_OperatorTargetListMember
+
+var _OperatorValue = &s_OperatorValue
+
+var OrganizationNotInAllFeaturesModeException = &sOrganizationNotInAllFeaturesModeException
+var OrganizationNotInAllFeaturesModeException_Message = &sOrganizationNotInAllFeaturesModeException_Message
+
+var OrganizationsNotInUseException = &sOrganizationsNotInUseException
+var OrganizationsNotInUseException_Message = &sOrganizationsNotInUseException_Message
+
+var _PaginationToken = &s_PaginationToken
+
+var PartitionKey = &sPartitionKey
+var PartitionKey_Name = &sPartitionKey_Name
+var PartitionKey_Type = &sPartitionKey_Type
+
+var _PartitionKeyList = &s_PartitionKeyList
+var _PartitionKeyList_member = &s_PartitionKeyList_member
+
+var _PartitionKeyName = &s_PartitionKeyName
+
+var _PartitionKeyType = &s_PartitionKeyType
+
+var _Prompt = &s_Prompt
+
+var PublicKey = &sPublicKey
+var PublicKey_Value = &sPublicKey_Value
+var PublicKey_ValidityStartTime = &sPublicKey_ValidityStartTime
+var PublicKey_ValidityEndTime = &sPublicKey_ValidityEndTime
+var PublicKey_Fingerprint = &sPublicKey_Fingerprint
+
+var _PublicKeyList = &s_PublicKeyList
+var _PublicKeyList_member = &s_PublicKeyList_member
+
+var _Queries = &s_Queries
+var _Queries_member = &s_Queries_member
+
+var Query = &sQuery
+var Query_QueryId = &sQuery_QueryId
+var Query_QueryStatus = &sQuery_QueryStatus
+var Query_CreationTime = &sQuery_CreationTime
+
+var _QueryAlias = &s_QueryAlias
+
+var QueryIdNotFoundException = &sQueryIdNotFoundException
+var QueryIdNotFoundException_Message = &sQueryIdNotFoundException_Message
+
+var _QueryParameter = &s_QueryParameter
+
+var _QueryParameterKey = &s_QueryParameterKey
+
+var _QueryParameters = &s_QueryParameters
+var _QueryParameters_member = &s_QueryParameters_member
+
+var _QueryParameterValue = &s_QueryParameterValue
+
+var _QueryParameterValues = &s_QueryParameterValues
+var _QueryParameterValues_key = &s_QueryParameterValues_key
+var _QueryParameterValues_value = &s_QueryParameterValues_value
+
+var _QueryResultColumn = &s_QueryResultColumn
+var _QueryResultColumn_key = &s_QueryResultColumn_key
+var _QueryResultColumn_value = &s_QueryResultColumn_value
+
+var _QueryResultKey = &s_QueryResultKey
+
+var _QueryResultRow = &s_QueryResultRow
+var _QueryResultRow_member = &s_QueryResultRow_member
+
+var _QueryResultRows = &s_QueryResultRows
+var _QueryResultRows_member = &s_QueryResultRows_member
+
+var _QueryResultValue = &s_QueryResultValue
+
+var _QueryStatement = &s_QueryStatement
+
+var QueryStatistics = &sQueryStatistics
+var QueryStatistics_ResultsCount = &sQueryStatistics_ResultsCount
+var QueryStatistics_TotalResultsCount = &sQueryStatistics_TotalResultsCount
+var QueryStatistics_BytesScanned = &sQueryStatistics_BytesScanned
+
+var QueryStatisticsForDescribeQuery = &sQueryStatisticsForDescribeQuery
+var QueryStatisticsForDescribeQuery_EventsMatched = &sQueryStatisticsForDescribeQuery_EventsMatched
+var QueryStatisticsForDescribeQuery_EventsScanned = &sQueryStatisticsForDescribeQuery_EventsScanned
+var QueryStatisticsForDescribeQuery_BytesScanned = &sQueryStatisticsForDescribeQuery_BytesScanned
+var QueryStatisticsForDescribeQuery_ExecutionTimeInMillis = &sQueryStatisticsForDescribeQuery_ExecutionTimeInMillis
+var QueryStatisticsForDescribeQuery_CreationTime = &sQueryStatisticsForDescribeQuery_CreationTime
+
+var QueryStatus = &sQueryStatus
+var QueryStatus_QUEUED = &sQueryStatus_QUEUED
+var QueryStatus_RUNNING = &sQueryStatus_RUNNING
+var QueryStatus_FINISHED = &sQueryStatus_FINISHED
+var QueryStatus_FAILED = &sQueryStatus_FAILED
+var QueryStatus_CANCELLED = &sQueryStatus_CANCELLED
+var QueryStatus_TIMED_OUT = &sQueryStatus_TIMED_OUT
+
+var ReadWriteType = &sReadWriteType
+var ReadWriteType_ReadOnly = &sReadWriteType_ReadOnly
+var ReadWriteType_WriteOnly = &sReadWriteType_WriteOnly
+var ReadWriteType_All = &sReadWriteType_All
+
+var _RefreshId = &s_RefreshId
+
+var RefreshSchedule = &sRefreshSchedule
+var RefreshSchedule_Frequency = &sRefreshSchedule_Frequency
+var RefreshSchedule_Status = &sRefreshSchedule_Status
+var RefreshSchedule_TimeOfDay = &sRefreshSchedule_TimeOfDay
+
+var RefreshScheduleFrequency = &sRefreshScheduleFrequency
+var RefreshScheduleFrequency_Unit = &sRefreshScheduleFrequency_Unit
+var RefreshScheduleFrequency_Value = &sRefreshScheduleFrequency_Value
+
+var RefreshScheduleFrequencyUnit = &sRefreshScheduleFrequencyUnit
+var RefreshScheduleFrequencyUnit_HOURS = &sRefreshScheduleFrequencyUnit_HOURS
+var RefreshScheduleFrequencyUnit_DAYS = &sRefreshScheduleFrequencyUnit_DAYS
+
+var _RefreshScheduleFrequencyValue = &s_RefreshScheduleFrequencyValue
+
+var RefreshScheduleStatus = &sRefreshScheduleStatus
+var RefreshScheduleStatus_ENABLED = &sRefreshScheduleStatus_ENABLED
+var RefreshScheduleStatus_DISABLED = &sRefreshScheduleStatus_DISABLED
+
+var RequestWidget = &sRequestWidget
+var RequestWidget_QueryStatement = &sRequestWidget_QueryStatement
+var RequestWidget_QueryParameters = &sRequestWidget_QueryParameters
+var RequestWidget_ViewProperties = &sRequestWidget_ViewProperties
+
+var _RequestWidgetList = &s_RequestWidgetList
+var _RequestWidgetList_member = &s_RequestWidgetList_member
+
+var Resource = &sResource
+var Resource_ResourceType = &sResource_ResourceType
+var Resource_ResourceName = &sResource_ResourceName
+
+var _ResourceArn = &s_ResourceArn
+
+var ResourceARNNotValidException = &sResourceARNNotValidException
+var ResourceARNNotValidException_Message = &sResourceARNNotValidException_Message
+
+var _ResourceIdList = &s_ResourceIdList
+var _ResourceIdList_member = &s_ResourceIdList_member
+
+var _ResourceList = &s_ResourceList
+var _ResourceList_member = &s_ResourceList_member
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+
+var _ResourcePolicy = &s_ResourcePolicy
+
+var ResourcePolicyNotFoundException = &sResourcePolicyNotFoundException
+var ResourcePolicyNotFoundException_Message = &sResourcePolicyNotFoundException_Message
+
+var ResourcePolicyNotValidException = &sResourcePolicyNotValidException
+var ResourcePolicyNotValidException_Message = &sResourcePolicyNotValidException_Message
+
+var ResourceTag = &sResourceTag
+var ResourceTag_ResourceId = &sResourceTag_ResourceId
+var ResourceTag_TagsList = &sResourceTag_TagsList
+
+var _ResourceTagList = &s_ResourceTagList
+var _ResourceTagList_member = &s_ResourceTagList_member
+
+var ResourceTypeNotSupportedException = &sResourceTypeNotSupportedException
+var ResourceTypeNotSupportedException_Message = &sResourceTypeNotSupportedException_Message
+
+var _RetentionPeriod = &s_RetentionPeriod
+
+var S3BucketDoesNotExistException = &sS3BucketDoesNotExistException
+var S3BucketDoesNotExistException_Message = &sS3BucketDoesNotExistException_Message
+
+var S3ImportSource = &sS3ImportSource
+var S3ImportSource_S3LocationUri = &sS3ImportSource_S3LocationUri
+var S3ImportSource_S3BucketRegion = &sS3ImportSource_S3BucketRegion
+var S3ImportSource_S3BucketAccessRoleArn = &sS3ImportSource_S3BucketAccessRoleArn
+
+var _SampleQueryDescription = &s_SampleQueryDescription
+
+var _SampleQueryName = &s_SampleQueryName
+
+var _SampleQueryRelevance = &s_SampleQueryRelevance
+
+var _SampleQuerySQL = &s_SampleQuerySQL
+
+var _SearchSampleQueriesMaxResults = &s_SearchSampleQueriesMaxResults
+
+var _SearchSampleQueriesSearchPhrase = &s_SearchSampleQueriesSearchPhrase
+
+var SearchSampleQueriesSearchResult = &sSearchSampleQueriesSearchResult
+var SearchSampleQueriesSearchResult_Name = &sSearchSampleQueriesSearchResult_Name
+var SearchSampleQueriesSearchResult_Description = &sSearchSampleQueriesSearchResult_Description
+var SearchSampleQueriesSearchResult_SQL = &sSearchSampleQueriesSearchResult_SQL
+var SearchSampleQueriesSearchResult_Relevance = &sSearchSampleQueriesSearchResult_Relevance
+
+var _SearchSampleQueriesSearchResults = &s_SearchSampleQueriesSearchResults
+var _SearchSampleQueriesSearchResults_member = &s_SearchSampleQueriesSearchResults_member
+
+var _SelectorField = &s_SelectorField
+
+var _SelectorName = &s_SelectorName
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_Message = &sServiceQuotaExceededException_Message
+
+var _Source = &s_Source
+
+var SourceConfig = &sSourceConfig
+var SourceConfig_ApplyToAllRegions = &sSourceConfig_ApplyToAllRegions
+var SourceConfig_AdvancedEventSelectors = &sSourceConfig_AdvancedEventSelectors
+
+var _SourceEventCategories = &s_SourceEventCategories
+var _SourceEventCategories_member = &s_SourceEventCategories_member
+
+var SourceEventCategory = &sSourceEventCategory
+var SourceEventCategory_Management = &sSourceEventCategory_Management
+var SourceEventCategory_Data = &sSourceEventCategory_Data
+
+var _String = &s_String
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var _TagKey = &s_TagKey
+
+var TagsLimitExceededException = &sTagsLimitExceededException
+var TagsLimitExceededException_Message = &sTagsLimitExceededException_Message
+
+var _TagsList = &s_TagsList
+var _TagsList_member = &s_TagsList_member
+
+var _TagValue = &s_TagValue
+
+var Template = &sTemplate
+var Template_API_ACTIVITY = &sTemplate_API_ACTIVITY
+var Template_RESOURCE_ACCESS = &sTemplate_RESOURCE_ACCESS
+var Template_USER_ACTIONS = &sTemplate_USER_ACTIONS
+
+var _Templates = &s_Templates
+var _Templates_member = &s_Templates_member
+
+var _TerminationProtectionEnabled = &s_TerminationProtectionEnabled
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_Message = &sThrottlingException_Message
+
+var _TimeOfDay = &s_TimeOfDay
+
+var _Timestamps = &s_Timestamps
+var _Timestamps_member = &s_Timestamps_member
+
+var Trail = &sTrail
+var Trail_Name = &sTrail_Name
+var Trail_S3BucketName = &sTrail_S3BucketName
+var Trail_S3KeyPrefix = &sTrail_S3KeyPrefix
+var Trail_SnsTopicName = &sTrail_SnsTopicName
+var Trail_SnsTopicARN = &sTrail_SnsTopicARN
+var Trail_IncludeGlobalServiceEvents = &sTrail_IncludeGlobalServiceEvents
+var Trail_IsMultiRegionTrail = &sTrail_IsMultiRegionTrail
+var Trail_HomeRegion = &sTrail_HomeRegion
+var Trail_TrailARN = &sTrail_TrailARN
+var Trail_LogFileValidationEnabled = &sTrail_LogFileValidationEnabled
+var Trail_CloudWatchLogsLogGroupArn = &sTrail_CloudWatchLogsLogGroupArn
+var Trail_CloudWatchLogsRoleArn = &sTrail_CloudWatchLogsRoleArn
+var Trail_KmsKeyId = &sTrail_KmsKeyId
+var Trail_HasCustomEventSelectors = &sTrail_HasCustomEventSelectors
+var Trail_HasInsightSelectors = &sTrail_HasInsightSelectors
+var Trail_IsOrganizationTrail = &sTrail_IsOrganizationTrail
+var Trail_RecursiveLogging = &sTrail_RecursiveLogging
+
+var TrailAlreadyExistsException = &sTrailAlreadyExistsException
+var TrailAlreadyExistsException_Message = &sTrailAlreadyExistsException_Message
+
+var TrailInfo = &sTrailInfo
+var TrailInfo_TrailARN = &sTrailInfo_TrailARN
+var TrailInfo_Name = &sTrailInfo_Name
+var TrailInfo_HomeRegion = &sTrailInfo_HomeRegion
+
+var _TrailList = &s_TrailList
+var _TrailList_member = &s_TrailList_member
+
+var _TrailNameList = &s_TrailNameList
+var _TrailNameList_member = &s_TrailNameList_member
+
+var TrailNotFoundException = &sTrailNotFoundException
+var TrailNotFoundException_Message = &sTrailNotFoundException_Message
+
+var TrailNotProvidedException = &sTrailNotProvidedException
+var TrailNotProvidedException_Message = &sTrailNotProvidedException_Message
+
+var _Trails = &s_Trails
+var _Trails_member = &s_Trails_member
+
+var Type = &sType
+var Type_TagContext = &sType_TagContext
+var Type_RequestContext = &sType_RequestContext
+
+var UnsupportedOperationException = &sUnsupportedOperationException
+var UnsupportedOperationException_Message = &sUnsupportedOperationException_Message
+
+var _UUID = &s_UUID
+
+var _ViewPropertiesKey = &s_ViewPropertiesKey
+
+var _ViewPropertiesMap = &s_ViewPropertiesMap
+var _ViewPropertiesMap_key = &s_ViewPropertiesMap_key
+var _ViewPropertiesMap_value = &s_ViewPropertiesMap_value
+
+var _ViewPropertiesValue = &s_ViewPropertiesValue
+
+var Widget = &sWidget
+var Widget_QueryAlias = &sWidget_QueryAlias
+var Widget_QueryStatement = &sWidget_QueryStatement
+var Widget_QueryParameters = &sWidget_QueryParameters
+var Widget_ViewProperties = &sWidget_ViewProperties
+
+var _WidgetList = &s_WidgetList
+var _WidgetList_member = &s_WidgetList_member
+
+var AddTagsRequest = &sAddTagsRequest
+var AddTagsRequest_ResourceId = &sAddTagsRequest_ResourceId
+var AddTagsRequest_TagsList = &sAddTagsRequest_TagsList
+
+var AddTagsResponse = &sAddTagsResponse
+
+var CancelQueryRequest = &sCancelQueryRequest
+var CancelQueryRequest_EventDataStore = &sCancelQueryRequest_EventDataStore
+var CancelQueryRequest_QueryId = &sCancelQueryRequest_QueryId
+var CancelQueryRequest_EventDataStoreOwnerAccountId = &sCancelQueryRequest_EventDataStoreOwnerAccountId
+
+var CancelQueryResponse = &sCancelQueryResponse
+var CancelQueryResponse_QueryId = &sCancelQueryResponse_QueryId
+var CancelQueryResponse_QueryStatus = &sCancelQueryResponse_QueryStatus
+var CancelQueryResponse_EventDataStoreOwnerAccountId = &sCancelQueryResponse_EventDataStoreOwnerAccountId
+
+var CreateChannelRequest = &sCreateChannelRequest
+var CreateChannelRequest_Name = &sCreateChannelRequest_Name
+var CreateChannelRequest_Source = &sCreateChannelRequest_Source
+var CreateChannelRequest_Destinations = &sCreateChannelRequest_Destinations
+var CreateChannelRequest_Tags = &sCreateChannelRequest_Tags
+
+var CreateChannelResponse = &sCreateChannelResponse
+var CreateChannelResponse_ChannelArn = &sCreateChannelResponse_ChannelArn
+var CreateChannelResponse_Name = &sCreateChannelResponse_Name
+var CreateChannelResponse_Source = &sCreateChannelResponse_Source
+var CreateChannelResponse_Destinations = &sCreateChannelResponse_Destinations
+var CreateChannelResponse_Tags = &sCreateChannelResponse_Tags
+
+var CreateDashboardRequest = &sCreateDashboardRequest
+var CreateDashboardRequest_Name = &sCreateDashboardRequest_Name
+var CreateDashboardRequest_RefreshSchedule = &sCreateDashboardRequest_RefreshSchedule
+var CreateDashboardRequest_TagsList = &sCreateDashboardRequest_TagsList
+var CreateDashboardRequest_TerminationProtectionEnabled = &sCreateDashboardRequest_TerminationProtectionEnabled
+var CreateDashboardRequest_Widgets = &sCreateDashboardRequest_Widgets
+
+var CreateDashboardResponse = &sCreateDashboardResponse
+var CreateDashboardResponse_DashboardArn = &sCreateDashboardResponse_DashboardArn
+var CreateDashboardResponse_Name = &sCreateDashboardResponse_Name
+var CreateDashboardResponse_Type = &sCreateDashboardResponse_Type
+var CreateDashboardResponse_Widgets = &sCreateDashboardResponse_Widgets
+var CreateDashboardResponse_TagsList = &sCreateDashboardResponse_TagsList
+var CreateDashboardResponse_RefreshSchedule = &sCreateDashboardResponse_RefreshSchedule
+var CreateDashboardResponse_TerminationProtectionEnabled = &sCreateDashboardResponse_TerminationProtectionEnabled
+
+var CreateEventDataStoreRequest = &sCreateEventDataStoreRequest
+var CreateEventDataStoreRequest_Name = &sCreateEventDataStoreRequest_Name
+var CreateEventDataStoreRequest_AdvancedEventSelectors = &sCreateEventDataStoreRequest_AdvancedEventSelectors
+var CreateEventDataStoreRequest_MultiRegionEnabled = &sCreateEventDataStoreRequest_MultiRegionEnabled
+var CreateEventDataStoreRequest_OrganizationEnabled = &sCreateEventDataStoreRequest_OrganizationEnabled
+var CreateEventDataStoreRequest_RetentionPeriod = &sCreateEventDataStoreRequest_RetentionPeriod
+var CreateEventDataStoreRequest_TerminationProtectionEnabled = &sCreateEventDataStoreRequest_TerminationProtectionEnabled
+var CreateEventDataStoreRequest_TagsList = &sCreateEventDataStoreRequest_TagsList
+var CreateEventDataStoreRequest_KmsKeyId = &sCreateEventDataStoreRequest_KmsKeyId
+var CreateEventDataStoreRequest_StartIngestion = &sCreateEventDataStoreRequest_StartIngestion
+var CreateEventDataStoreRequest_BillingMode = &sCreateEventDataStoreRequest_BillingMode
+
+var CreateEventDataStoreResponse = &sCreateEventDataStoreResponse
+var CreateEventDataStoreResponse_EventDataStoreArn = &sCreateEventDataStoreResponse_EventDataStoreArn
+var CreateEventDataStoreResponse_Name = &sCreateEventDataStoreResponse_Name
+var CreateEventDataStoreResponse_Status = &sCreateEventDataStoreResponse_Status
+var CreateEventDataStoreResponse_AdvancedEventSelectors = &sCreateEventDataStoreResponse_AdvancedEventSelectors
+var CreateEventDataStoreResponse_MultiRegionEnabled = &sCreateEventDataStoreResponse_MultiRegionEnabled
+var CreateEventDataStoreResponse_OrganizationEnabled = &sCreateEventDataStoreResponse_OrganizationEnabled
+var CreateEventDataStoreResponse_RetentionPeriod = &sCreateEventDataStoreResponse_RetentionPeriod
+var CreateEventDataStoreResponse_TerminationProtectionEnabled = &sCreateEventDataStoreResponse_TerminationProtectionEnabled
+var CreateEventDataStoreResponse_TagsList = &sCreateEventDataStoreResponse_TagsList
+var CreateEventDataStoreResponse_CreatedTimestamp = &sCreateEventDataStoreResponse_CreatedTimestamp
+var CreateEventDataStoreResponse_UpdatedTimestamp = &sCreateEventDataStoreResponse_UpdatedTimestamp
+var CreateEventDataStoreResponse_KmsKeyId = &sCreateEventDataStoreResponse_KmsKeyId
+var CreateEventDataStoreResponse_BillingMode = &sCreateEventDataStoreResponse_BillingMode
+
+var CreateTrailRequest = &sCreateTrailRequest
+var CreateTrailRequest_Name = &sCreateTrailRequest_Name
+var CreateTrailRequest_S3BucketName = &sCreateTrailRequest_S3BucketName
+var CreateTrailRequest_S3KeyPrefix = &sCreateTrailRequest_S3KeyPrefix
+var CreateTrailRequest_SnsTopicName = &sCreateTrailRequest_SnsTopicName
+var CreateTrailRequest_IncludeGlobalServiceEvents = &sCreateTrailRequest_IncludeGlobalServiceEvents
+var CreateTrailRequest_IsMultiRegionTrail = &sCreateTrailRequest_IsMultiRegionTrail
+var CreateTrailRequest_EnableLogFileValidation = &sCreateTrailRequest_EnableLogFileValidation
+var CreateTrailRequest_CloudWatchLogsLogGroupArn = &sCreateTrailRequest_CloudWatchLogsLogGroupArn
+var CreateTrailRequest_CloudWatchLogsRoleArn = &sCreateTrailRequest_CloudWatchLogsRoleArn
+var CreateTrailRequest_KmsKeyId = &sCreateTrailRequest_KmsKeyId
+var CreateTrailRequest_IsOrganizationTrail = &sCreateTrailRequest_IsOrganizationTrail
+var CreateTrailRequest_TagsList = &sCreateTrailRequest_TagsList
+var CreateTrailRequest_RecursiveLogging = &sCreateTrailRequest_RecursiveLogging
+
+var CreateTrailResponse = &sCreateTrailResponse
+var CreateTrailResponse_Name = &sCreateTrailResponse_Name
+var CreateTrailResponse_S3BucketName = &sCreateTrailResponse_S3BucketName
+var CreateTrailResponse_S3KeyPrefix = &sCreateTrailResponse_S3KeyPrefix
+var CreateTrailResponse_SnsTopicName = &sCreateTrailResponse_SnsTopicName
+var CreateTrailResponse_SnsTopicARN = &sCreateTrailResponse_SnsTopicARN
+var CreateTrailResponse_IncludeGlobalServiceEvents = &sCreateTrailResponse_IncludeGlobalServiceEvents
+var CreateTrailResponse_IsMultiRegionTrail = &sCreateTrailResponse_IsMultiRegionTrail
+var CreateTrailResponse_TrailARN = &sCreateTrailResponse_TrailARN
+var CreateTrailResponse_LogFileValidationEnabled = &sCreateTrailResponse_LogFileValidationEnabled
+var CreateTrailResponse_CloudWatchLogsLogGroupArn = &sCreateTrailResponse_CloudWatchLogsLogGroupArn
+var CreateTrailResponse_CloudWatchLogsRoleArn = &sCreateTrailResponse_CloudWatchLogsRoleArn
+var CreateTrailResponse_KmsKeyId = &sCreateTrailResponse_KmsKeyId
+var CreateTrailResponse_IsOrganizationTrail = &sCreateTrailResponse_IsOrganizationTrail
+var CreateTrailResponse_RecursiveLogging = &sCreateTrailResponse_RecursiveLogging
+
+var DeleteChannelRequest = &sDeleteChannelRequest
+var DeleteChannelRequest_Channel = &sDeleteChannelRequest_Channel
+
+var DeleteChannelResponse = &sDeleteChannelResponse
+
+var DeleteDashboardRequest = &sDeleteDashboardRequest
+var DeleteDashboardRequest_DashboardId = &sDeleteDashboardRequest_DashboardId
+
+var DeleteDashboardResponse = &sDeleteDashboardResponse
+
+var DeleteEventDataStoreRequest = &sDeleteEventDataStoreRequest
+var DeleteEventDataStoreRequest_EventDataStore = &sDeleteEventDataStoreRequest_EventDataStore
+
+var DeleteEventDataStoreResponse = &sDeleteEventDataStoreResponse
+
+var DeleteResourcePolicyRequest = &sDeleteResourcePolicyRequest
+var DeleteResourcePolicyRequest_ResourceArn = &sDeleteResourcePolicyRequest_ResourceArn
+
+var DeleteResourcePolicyResponse = &sDeleteResourcePolicyResponse
+
+var DeleteTrailRequest = &sDeleteTrailRequest
+var DeleteTrailRequest_Name = &sDeleteTrailRequest_Name
+
+var DeleteTrailResponse = &sDeleteTrailResponse
+
+var DeregisterOrganizationDelegatedAdminRequest = &sDeregisterOrganizationDelegatedAdminRequest
+var DeregisterOrganizationDelegatedAdminRequest_DelegatedAdminAccountId = &sDeregisterOrganizationDelegatedAdminRequest_DelegatedAdminAccountId
+
+var DeregisterOrganizationDelegatedAdminResponse = &sDeregisterOrganizationDelegatedAdminResponse
+
+var DescribeQueryRequest = &sDescribeQueryRequest
+var DescribeQueryRequest_EventDataStore = &sDescribeQueryRequest_EventDataStore
+var DescribeQueryRequest_QueryId = &sDescribeQueryRequest_QueryId
+var DescribeQueryRequest_QueryAlias = &sDescribeQueryRequest_QueryAlias
+var DescribeQueryRequest_RefreshId = &sDescribeQueryRequest_RefreshId
+var DescribeQueryRequest_EventDataStoreOwnerAccountId = &sDescribeQueryRequest_EventDataStoreOwnerAccountId
+
+var DescribeQueryResponse = &sDescribeQueryResponse
+var DescribeQueryResponse_QueryId = &sDescribeQueryResponse_QueryId
+var DescribeQueryResponse_QueryString = &sDescribeQueryResponse_QueryString
+var DescribeQueryResponse_QueryStatus = &sDescribeQueryResponse_QueryStatus
+var DescribeQueryResponse_QueryStatistics = &sDescribeQueryResponse_QueryStatistics
+var DescribeQueryResponse_ErrorMessage = &sDescribeQueryResponse_ErrorMessage
+var DescribeQueryResponse_DeliveryS3Uri = &sDescribeQueryResponse_DeliveryS3Uri
+var DescribeQueryResponse_DeliveryStatus = &sDescribeQueryResponse_DeliveryStatus
+var DescribeQueryResponse_Prompt = &sDescribeQueryResponse_Prompt
+var DescribeQueryResponse_EventDataStoreOwnerAccountId = &sDescribeQueryResponse_EventDataStoreOwnerAccountId
+
+var DescribeTrailsRequest = &sDescribeTrailsRequest
+var DescribeTrailsRequest_trailNameList = &sDescribeTrailsRequest_trailNameList
+var DescribeTrailsRequest_includeShadowTrails = &sDescribeTrailsRequest_includeShadowTrails
+
+var DescribeTrailsResponse = &sDescribeTrailsResponse
+var DescribeTrailsResponse_trailList = &sDescribeTrailsResponse_trailList
+
+var DisableFederationRequest = &sDisableFederationRequest
+var DisableFederationRequest_EventDataStore = &sDisableFederationRequest_EventDataStore
+
+var DisableFederationResponse = &sDisableFederationResponse
+var DisableFederationResponse_EventDataStoreArn = &sDisableFederationResponse_EventDataStoreArn
+var DisableFederationResponse_FederationStatus = &sDisableFederationResponse_FederationStatus
+
+var EnableFederationRequest = &sEnableFederationRequest
+var EnableFederationRequest_EventDataStore = &sEnableFederationRequest_EventDataStore
+var EnableFederationRequest_FederationRoleArn = &sEnableFederationRequest_FederationRoleArn
+
+var EnableFederationResponse = &sEnableFederationResponse
+var EnableFederationResponse_EventDataStoreArn = &sEnableFederationResponse_EventDataStoreArn
+var EnableFederationResponse_FederationStatus = &sEnableFederationResponse_FederationStatus
+var EnableFederationResponse_FederationRoleArn = &sEnableFederationResponse_FederationRoleArn
+
+var GenerateQueryRequest = &sGenerateQueryRequest
+var GenerateQueryRequest_EventDataStores = &sGenerateQueryRequest_EventDataStores
+var GenerateQueryRequest_Prompt = &sGenerateQueryRequest_Prompt
+
+var GenerateQueryResponse = &sGenerateQueryResponse
+var GenerateQueryResponse_QueryStatement = &sGenerateQueryResponse_QueryStatement
+var GenerateQueryResponse_QueryAlias = &sGenerateQueryResponse_QueryAlias
+var GenerateQueryResponse_EventDataStoreOwnerAccountId = &sGenerateQueryResponse_EventDataStoreOwnerAccountId
+
+var GetChannelRequest = &sGetChannelRequest
+var GetChannelRequest_Channel = &sGetChannelRequest_Channel
+
+var GetChannelResponse = &sGetChannelResponse
+var GetChannelResponse_ChannelArn = &sGetChannelResponse_ChannelArn
+var GetChannelResponse_Name = &sGetChannelResponse_Name
+var GetChannelResponse_Source = &sGetChannelResponse_Source
+var GetChannelResponse_SourceConfig = &sGetChannelResponse_SourceConfig
+var GetChannelResponse_Destinations = &sGetChannelResponse_Destinations
+var GetChannelResponse_IngestionStatus = &sGetChannelResponse_IngestionStatus
+
+var GetDashboardRequest = &sGetDashboardRequest
+var GetDashboardRequest_DashboardId = &sGetDashboardRequest_DashboardId
+
+var GetDashboardResponse = &sGetDashboardResponse
+var GetDashboardResponse_DashboardArn = &sGetDashboardResponse_DashboardArn
+var GetDashboardResponse_Type = &sGetDashboardResponse_Type
+var GetDashboardResponse_Status = &sGetDashboardResponse_Status
+var GetDashboardResponse_Widgets = &sGetDashboardResponse_Widgets
+var GetDashboardResponse_RefreshSchedule = &sGetDashboardResponse_RefreshSchedule
+var GetDashboardResponse_CreatedTimestamp = &sGetDashboardResponse_CreatedTimestamp
+var GetDashboardResponse_UpdatedTimestamp = &sGetDashboardResponse_UpdatedTimestamp
+var GetDashboardResponse_LastRefreshId = &sGetDashboardResponse_LastRefreshId
+var GetDashboardResponse_LastRefreshFailureReason = &sGetDashboardResponse_LastRefreshFailureReason
+var GetDashboardResponse_TerminationProtectionEnabled = &sGetDashboardResponse_TerminationProtectionEnabled
+
+var GetEventConfigurationRequest = &sGetEventConfigurationRequest
+var GetEventConfigurationRequest_TrailName = &sGetEventConfigurationRequest_TrailName
+var GetEventConfigurationRequest_EventDataStore = &sGetEventConfigurationRequest_EventDataStore
+
+var GetEventConfigurationResponse = &sGetEventConfigurationResponse
+var GetEventConfigurationResponse_TrailARN = &sGetEventConfigurationResponse_TrailARN
+var GetEventConfigurationResponse_EventDataStoreArn = &sGetEventConfigurationResponse_EventDataStoreArn
+var GetEventConfigurationResponse_MaxEventSize = &sGetEventConfigurationResponse_MaxEventSize
+var GetEventConfigurationResponse_ContextKeySelectors = &sGetEventConfigurationResponse_ContextKeySelectors
+var GetEventConfigurationResponse_AggregationConfigurations = &sGetEventConfigurationResponse_AggregationConfigurations
+
+var GetEventDataStoreRequest = &sGetEventDataStoreRequest
+var GetEventDataStoreRequest_EventDataStore = &sGetEventDataStoreRequest_EventDataStore
+
+var GetEventDataStoreResponse = &sGetEventDataStoreResponse
+var GetEventDataStoreResponse_EventDataStoreArn = &sGetEventDataStoreResponse_EventDataStoreArn
+var GetEventDataStoreResponse_Name = &sGetEventDataStoreResponse_Name
+var GetEventDataStoreResponse_Status = &sGetEventDataStoreResponse_Status
+var GetEventDataStoreResponse_AdvancedEventSelectors = &sGetEventDataStoreResponse_AdvancedEventSelectors
+var GetEventDataStoreResponse_MultiRegionEnabled = &sGetEventDataStoreResponse_MultiRegionEnabled
+var GetEventDataStoreResponse_OrganizationEnabled = &sGetEventDataStoreResponse_OrganizationEnabled
+var GetEventDataStoreResponse_RetentionPeriod = &sGetEventDataStoreResponse_RetentionPeriod
+var GetEventDataStoreResponse_TerminationProtectionEnabled = &sGetEventDataStoreResponse_TerminationProtectionEnabled
+var GetEventDataStoreResponse_CreatedTimestamp = &sGetEventDataStoreResponse_CreatedTimestamp
+var GetEventDataStoreResponse_UpdatedTimestamp = &sGetEventDataStoreResponse_UpdatedTimestamp
+var GetEventDataStoreResponse_KmsKeyId = &sGetEventDataStoreResponse_KmsKeyId
+var GetEventDataStoreResponse_BillingMode = &sGetEventDataStoreResponse_BillingMode
+var GetEventDataStoreResponse_FederationStatus = &sGetEventDataStoreResponse_FederationStatus
+var GetEventDataStoreResponse_FederationRoleArn = &sGetEventDataStoreResponse_FederationRoleArn
+var GetEventDataStoreResponse_PartitionKeys = &sGetEventDataStoreResponse_PartitionKeys
+
+var GetEventSelectorsRequest = &sGetEventSelectorsRequest
+var GetEventSelectorsRequest_TrailName = &sGetEventSelectorsRequest_TrailName
+
+var GetEventSelectorsResponse = &sGetEventSelectorsResponse
+var GetEventSelectorsResponse_TrailARN = &sGetEventSelectorsResponse_TrailARN
+var GetEventSelectorsResponse_EventSelectors = &sGetEventSelectorsResponse_EventSelectors
+var GetEventSelectorsResponse_AdvancedEventSelectors = &sGetEventSelectorsResponse_AdvancedEventSelectors
+
+var GetImportRequest = &sGetImportRequest
+var GetImportRequest_ImportId = &sGetImportRequest_ImportId
+
+var GetImportResponse = &sGetImportResponse
+var GetImportResponse_ImportId = &sGetImportResponse_ImportId
+var GetImportResponse_Destinations = &sGetImportResponse_Destinations
+var GetImportResponse_ImportSource = &sGetImportResponse_ImportSource
+var GetImportResponse_StartEventTime = &sGetImportResponse_StartEventTime
+var GetImportResponse_EndEventTime = &sGetImportResponse_EndEventTime
+var GetImportResponse_ImportStatus = &sGetImportResponse_ImportStatus
+var GetImportResponse_CreatedTimestamp = &sGetImportResponse_CreatedTimestamp
+var GetImportResponse_UpdatedTimestamp = &sGetImportResponse_UpdatedTimestamp
+var GetImportResponse_ImportStatistics = &sGetImportResponse_ImportStatistics
+
+var GetInsightSelectorsRequest = &sGetInsightSelectorsRequest
+var GetInsightSelectorsRequest_TrailName = &sGetInsightSelectorsRequest_TrailName
+var GetInsightSelectorsRequest_EventDataStore = &sGetInsightSelectorsRequest_EventDataStore
+
+var GetInsightSelectorsResponse = &sGetInsightSelectorsResponse
+var GetInsightSelectorsResponse_TrailARN = &sGetInsightSelectorsResponse_TrailARN
+var GetInsightSelectorsResponse_InsightSelectors = &sGetInsightSelectorsResponse_InsightSelectors
+var GetInsightSelectorsResponse_EventDataStoreArn = &sGetInsightSelectorsResponse_EventDataStoreArn
+var GetInsightSelectorsResponse_InsightsDestination = &sGetInsightSelectorsResponse_InsightsDestination
+
+var GetQueryResultsRequest = &sGetQueryResultsRequest
+var GetQueryResultsRequest_EventDataStore = &sGetQueryResultsRequest_EventDataStore
+var GetQueryResultsRequest_QueryId = &sGetQueryResultsRequest_QueryId
+var GetQueryResultsRequest_NextToken = &sGetQueryResultsRequest_NextToken
+var GetQueryResultsRequest_MaxQueryResults = &sGetQueryResultsRequest_MaxQueryResults
+var GetQueryResultsRequest_EventDataStoreOwnerAccountId = &sGetQueryResultsRequest_EventDataStoreOwnerAccountId
+
+var GetQueryResultsResponse = &sGetQueryResultsResponse
+var GetQueryResultsResponse_QueryStatus = &sGetQueryResultsResponse_QueryStatus
+var GetQueryResultsResponse_QueryStatistics = &sGetQueryResultsResponse_QueryStatistics
+var GetQueryResultsResponse_QueryResultRows = &sGetQueryResultsResponse_QueryResultRows
+var GetQueryResultsResponse_NextToken = &sGetQueryResultsResponse_NextToken
+var GetQueryResultsResponse_ErrorMessage = &sGetQueryResultsResponse_ErrorMessage
+
+var GetResourcePolicyRequest = &sGetResourcePolicyRequest
+var GetResourcePolicyRequest_ResourceArn = &sGetResourcePolicyRequest_ResourceArn
+
+var GetResourcePolicyResponse = &sGetResourcePolicyResponse
+var GetResourcePolicyResponse_ResourceArn = &sGetResourcePolicyResponse_ResourceArn
+var GetResourcePolicyResponse_ResourcePolicy = &sGetResourcePolicyResponse_ResourcePolicy
+var GetResourcePolicyResponse_DelegatedAdminResourcePolicy = &sGetResourcePolicyResponse_DelegatedAdminResourcePolicy
+
+var GetTrailRequest = &sGetTrailRequest
+var GetTrailRequest_Name = &sGetTrailRequest_Name
+
+var GetTrailResponse = &sGetTrailResponse
+var GetTrailResponse_Trail = &sGetTrailResponse_Trail
+
+var GetTrailStatusRequest = &sGetTrailStatusRequest
+var GetTrailStatusRequest_Name = &sGetTrailStatusRequest_Name
+
+var GetTrailStatusResponse = &sGetTrailStatusResponse
+var GetTrailStatusResponse_IsLogging = &sGetTrailStatusResponse_IsLogging
+var GetTrailStatusResponse_LatestDeliveryError = &sGetTrailStatusResponse_LatestDeliveryError
+var GetTrailStatusResponse_LatestNotificationError = &sGetTrailStatusResponse_LatestNotificationError
+var GetTrailStatusResponse_LatestDeliveryTime = &sGetTrailStatusResponse_LatestDeliveryTime
+var GetTrailStatusResponse_LatestNotificationTime = &sGetTrailStatusResponse_LatestNotificationTime
+var GetTrailStatusResponse_StartLoggingTime = &sGetTrailStatusResponse_StartLoggingTime
+var GetTrailStatusResponse_StopLoggingTime = &sGetTrailStatusResponse_StopLoggingTime
+var GetTrailStatusResponse_LatestCloudWatchLogsDeliveryError = &sGetTrailStatusResponse_LatestCloudWatchLogsDeliveryError
+var GetTrailStatusResponse_LatestCloudWatchLogsDeliveryTime = &sGetTrailStatusResponse_LatestCloudWatchLogsDeliveryTime
+var GetTrailStatusResponse_LatestDigestDeliveryTime = &sGetTrailStatusResponse_LatestDigestDeliveryTime
+var GetTrailStatusResponse_LatestDigestDeliveryError = &sGetTrailStatusResponse_LatestDigestDeliveryError
+var GetTrailStatusResponse_LatestDeliveryAttemptTime = &sGetTrailStatusResponse_LatestDeliveryAttemptTime
+var GetTrailStatusResponse_LatestNotificationAttemptTime = &sGetTrailStatusResponse_LatestNotificationAttemptTime
+var GetTrailStatusResponse_LatestNotificationAttemptSucceeded = &sGetTrailStatusResponse_LatestNotificationAttemptSucceeded
+var GetTrailStatusResponse_LatestDeliveryAttemptSucceeded = &sGetTrailStatusResponse_LatestDeliveryAttemptSucceeded
+var GetTrailStatusResponse_TimeLoggingStarted = &sGetTrailStatusResponse_TimeLoggingStarted
+var GetTrailStatusResponse_TimeLoggingStopped = &sGetTrailStatusResponse_TimeLoggingStopped
+
+var ListChannelsRequest = &sListChannelsRequest
+var ListChannelsRequest_MaxResults = &sListChannelsRequest_MaxResults
+var ListChannelsRequest_NextToken = &sListChannelsRequest_NextToken
+
+var ListChannelsResponse = &sListChannelsResponse
+var ListChannelsResponse_Channels = &sListChannelsResponse_Channels
+var ListChannelsResponse_NextToken = &sListChannelsResponse_NextToken
+
+var ListDashboardsRequest = &sListDashboardsRequest
+var ListDashboardsRequest_NamePrefix = &sListDashboardsRequest_NamePrefix
+var ListDashboardsRequest_Type = &sListDashboardsRequest_Type
+var ListDashboardsRequest_NextToken = &sListDashboardsRequest_NextToken
+var ListDashboardsRequest_MaxResults = &sListDashboardsRequest_MaxResults
+
+var ListDashboardsResponse = &sListDashboardsResponse
+var ListDashboardsResponse_Dashboards = &sListDashboardsResponse_Dashboards
+var ListDashboardsResponse_NextToken = &sListDashboardsResponse_NextToken
+
+var ListEventDataStoresRequest = &sListEventDataStoresRequest
+var ListEventDataStoresRequest_NextToken = &sListEventDataStoresRequest_NextToken
+var ListEventDataStoresRequest_MaxResults = &sListEventDataStoresRequest_MaxResults
+
+var ListEventDataStoresResponse = &sListEventDataStoresResponse
+var ListEventDataStoresResponse_EventDataStores = &sListEventDataStoresResponse_EventDataStores
+var ListEventDataStoresResponse_NextToken = &sListEventDataStoresResponse_NextToken
+
+var ListImportFailuresRequest = &sListImportFailuresRequest
+var ListImportFailuresRequest_ImportId = &sListImportFailuresRequest_ImportId
+var ListImportFailuresRequest_MaxResults = &sListImportFailuresRequest_MaxResults
+var ListImportFailuresRequest_NextToken = &sListImportFailuresRequest_NextToken
+
+var ListImportFailuresResponse = &sListImportFailuresResponse
+var ListImportFailuresResponse_Failures = &sListImportFailuresResponse_Failures
+var ListImportFailuresResponse_NextToken = &sListImportFailuresResponse_NextToken
+
+var ListImportsRequest = &sListImportsRequest
+var ListImportsRequest_MaxResults = &sListImportsRequest_MaxResults
+var ListImportsRequest_Destination = &sListImportsRequest_Destination
+var ListImportsRequest_ImportStatus = &sListImportsRequest_ImportStatus
+var ListImportsRequest_NextToken = &sListImportsRequest_NextToken
+
+var ListImportsResponse = &sListImportsResponse
+var ListImportsResponse_Imports = &sListImportsResponse_Imports
+var ListImportsResponse_NextToken = &sListImportsResponse_NextToken
+
+var ListInsightsDataRequest = &sListInsightsDataRequest
+var ListInsightsDataRequest_InsightSource = &sListInsightsDataRequest_InsightSource
+var ListInsightsDataRequest_DataType = &sListInsightsDataRequest_DataType
+var ListInsightsDataRequest_Dimensions = &sListInsightsDataRequest_Dimensions
+var ListInsightsDataRequest_StartTime = &sListInsightsDataRequest_StartTime
+var ListInsightsDataRequest_EndTime = &sListInsightsDataRequest_EndTime
+var ListInsightsDataRequest_MaxResults = &sListInsightsDataRequest_MaxResults
+var ListInsightsDataRequest_NextToken = &sListInsightsDataRequest_NextToken
+
+var ListInsightsDataResponse = &sListInsightsDataResponse
+var ListInsightsDataResponse_Events = &sListInsightsDataResponse_Events
+var ListInsightsDataResponse_NextToken = &sListInsightsDataResponse_NextToken
+
+var ListInsightsMetricDataRequest = &sListInsightsMetricDataRequest
+var ListInsightsMetricDataRequest_TrailName = &sListInsightsMetricDataRequest_TrailName
+var ListInsightsMetricDataRequest_EventSource = &sListInsightsMetricDataRequest_EventSource
+var ListInsightsMetricDataRequest_EventName = &sListInsightsMetricDataRequest_EventName
+var ListInsightsMetricDataRequest_InsightType = &sListInsightsMetricDataRequest_InsightType
+var ListInsightsMetricDataRequest_ErrorCode = &sListInsightsMetricDataRequest_ErrorCode
+var ListInsightsMetricDataRequest_StartTime = &sListInsightsMetricDataRequest_StartTime
+var ListInsightsMetricDataRequest_EndTime = &sListInsightsMetricDataRequest_EndTime
+var ListInsightsMetricDataRequest_Period = &sListInsightsMetricDataRequest_Period
+var ListInsightsMetricDataRequest_DataType = &sListInsightsMetricDataRequest_DataType
+var ListInsightsMetricDataRequest_MaxResults = &sListInsightsMetricDataRequest_MaxResults
+var ListInsightsMetricDataRequest_NextToken = &sListInsightsMetricDataRequest_NextToken
+
+var ListInsightsMetricDataResponse = &sListInsightsMetricDataResponse
+var ListInsightsMetricDataResponse_TrailARN = &sListInsightsMetricDataResponse_TrailARN
+var ListInsightsMetricDataResponse_EventSource = &sListInsightsMetricDataResponse_EventSource
+var ListInsightsMetricDataResponse_EventName = &sListInsightsMetricDataResponse_EventName
+var ListInsightsMetricDataResponse_InsightType = &sListInsightsMetricDataResponse_InsightType
+var ListInsightsMetricDataResponse_ErrorCode = &sListInsightsMetricDataResponse_ErrorCode
+var ListInsightsMetricDataResponse_Timestamps = &sListInsightsMetricDataResponse_Timestamps
+var ListInsightsMetricDataResponse_Values = &sListInsightsMetricDataResponse_Values
+var ListInsightsMetricDataResponse_NextToken = &sListInsightsMetricDataResponse_NextToken
+
+var ListPublicKeysRequest = &sListPublicKeysRequest
+var ListPublicKeysRequest_StartTime = &sListPublicKeysRequest_StartTime
+var ListPublicKeysRequest_EndTime = &sListPublicKeysRequest_EndTime
+var ListPublicKeysRequest_NextToken = &sListPublicKeysRequest_NextToken
+
+var ListPublicKeysResponse = &sListPublicKeysResponse
+var ListPublicKeysResponse_PublicKeyList = &sListPublicKeysResponse_PublicKeyList
+var ListPublicKeysResponse_NextToken = &sListPublicKeysResponse_NextToken
+
+var ListQueriesRequest = &sListQueriesRequest
+var ListQueriesRequest_EventDataStore = &sListQueriesRequest_EventDataStore
+var ListQueriesRequest_NextToken = &sListQueriesRequest_NextToken
+var ListQueriesRequest_MaxResults = &sListQueriesRequest_MaxResults
+var ListQueriesRequest_StartTime = &sListQueriesRequest_StartTime
+var ListQueriesRequest_EndTime = &sListQueriesRequest_EndTime
+var ListQueriesRequest_QueryStatus = &sListQueriesRequest_QueryStatus
+
+var ListQueriesResponse = &sListQueriesResponse
+var ListQueriesResponse_Queries = &sListQueriesResponse_Queries
+var ListQueriesResponse_NextToken = &sListQueriesResponse_NextToken
+
+var ListTagsRequest = &sListTagsRequest
+var ListTagsRequest_ResourceIdList = &sListTagsRequest_ResourceIdList
+var ListTagsRequest_NextToken = &sListTagsRequest_NextToken
+
+var ListTagsResponse = &sListTagsResponse
+var ListTagsResponse_ResourceTagList = &sListTagsResponse_ResourceTagList
+var ListTagsResponse_NextToken = &sListTagsResponse_NextToken
+
+var ListTrailsRequest = &sListTrailsRequest
+var ListTrailsRequest_NextToken = &sListTrailsRequest_NextToken
+
+var ListTrailsResponse = &sListTrailsResponse
+var ListTrailsResponse_Trails = &sListTrailsResponse_Trails
+var ListTrailsResponse_NextToken = &sListTrailsResponse_NextToken
+
+var LookupEventsRequest = &sLookupEventsRequest
+var LookupEventsRequest_LookupAttributes = &sLookupEventsRequest_LookupAttributes
+var LookupEventsRequest_StartTime = &sLookupEventsRequest_StartTime
+var LookupEventsRequest_EndTime = &sLookupEventsRequest_EndTime
+var LookupEventsRequest_EventCategory = &sLookupEventsRequest_EventCategory
+var LookupEventsRequest_MaxResults = &sLookupEventsRequest_MaxResults
+var LookupEventsRequest_NextToken = &sLookupEventsRequest_NextToken
+
+var LookupEventsResponse = &sLookupEventsResponse
+var LookupEventsResponse_Events = &sLookupEventsResponse_Events
+var LookupEventsResponse_NextToken = &sLookupEventsResponse_NextToken
+
+var PutEventConfigurationRequest = &sPutEventConfigurationRequest
+var PutEventConfigurationRequest_TrailName = &sPutEventConfigurationRequest_TrailName
+var PutEventConfigurationRequest_EventDataStore = &sPutEventConfigurationRequest_EventDataStore
+var PutEventConfigurationRequest_MaxEventSize = &sPutEventConfigurationRequest_MaxEventSize
+var PutEventConfigurationRequest_ContextKeySelectors = &sPutEventConfigurationRequest_ContextKeySelectors
+var PutEventConfigurationRequest_AggregationConfigurations = &sPutEventConfigurationRequest_AggregationConfigurations
+
+var PutEventConfigurationResponse = &sPutEventConfigurationResponse
+var PutEventConfigurationResponse_TrailARN = &sPutEventConfigurationResponse_TrailARN
+var PutEventConfigurationResponse_EventDataStoreArn = &sPutEventConfigurationResponse_EventDataStoreArn
+var PutEventConfigurationResponse_MaxEventSize = &sPutEventConfigurationResponse_MaxEventSize
+var PutEventConfigurationResponse_ContextKeySelectors = &sPutEventConfigurationResponse_ContextKeySelectors
+var PutEventConfigurationResponse_AggregationConfigurations = &sPutEventConfigurationResponse_AggregationConfigurations
+
+var PutEventSelectorsRequest = &sPutEventSelectorsRequest
+var PutEventSelectorsRequest_TrailName = &sPutEventSelectorsRequest_TrailName
+var PutEventSelectorsRequest_EventSelectors = &sPutEventSelectorsRequest_EventSelectors
+var PutEventSelectorsRequest_AdvancedEventSelectors = &sPutEventSelectorsRequest_AdvancedEventSelectors
+
+var PutEventSelectorsResponse = &sPutEventSelectorsResponse
+var PutEventSelectorsResponse_TrailARN = &sPutEventSelectorsResponse_TrailARN
+var PutEventSelectorsResponse_EventSelectors = &sPutEventSelectorsResponse_EventSelectors
+var PutEventSelectorsResponse_AdvancedEventSelectors = &sPutEventSelectorsResponse_AdvancedEventSelectors
+
+var PutInsightSelectorsRequest = &sPutInsightSelectorsRequest
+var PutInsightSelectorsRequest_TrailName = &sPutInsightSelectorsRequest_TrailName
+var PutInsightSelectorsRequest_InsightSelectors = &sPutInsightSelectorsRequest_InsightSelectors
+var PutInsightSelectorsRequest_EventDataStore = &sPutInsightSelectorsRequest_EventDataStore
+var PutInsightSelectorsRequest_InsightsDestination = &sPutInsightSelectorsRequest_InsightsDestination
+
+var PutInsightSelectorsResponse = &sPutInsightSelectorsResponse
+var PutInsightSelectorsResponse_TrailARN = &sPutInsightSelectorsResponse_TrailARN
+var PutInsightSelectorsResponse_InsightSelectors = &sPutInsightSelectorsResponse_InsightSelectors
+var PutInsightSelectorsResponse_EventDataStoreArn = &sPutInsightSelectorsResponse_EventDataStoreArn
+var PutInsightSelectorsResponse_InsightsDestination = &sPutInsightSelectorsResponse_InsightsDestination
+
+var PutResourcePolicyRequest = &sPutResourcePolicyRequest
+var PutResourcePolicyRequest_ResourceArn = &sPutResourcePolicyRequest_ResourceArn
+var PutResourcePolicyRequest_ResourcePolicy = &sPutResourcePolicyRequest_ResourcePolicy
+
+var PutResourcePolicyResponse = &sPutResourcePolicyResponse
+var PutResourcePolicyResponse_ResourceArn = &sPutResourcePolicyResponse_ResourceArn
+var PutResourcePolicyResponse_ResourcePolicy = &sPutResourcePolicyResponse_ResourcePolicy
+var PutResourcePolicyResponse_DelegatedAdminResourcePolicy = &sPutResourcePolicyResponse_DelegatedAdminResourcePolicy
+
+var RegisterOrganizationDelegatedAdminRequest = &sRegisterOrganizationDelegatedAdminRequest
+var RegisterOrganizationDelegatedAdminRequest_MemberAccountId = &sRegisterOrganizationDelegatedAdminRequest_MemberAccountId
+
+var RegisterOrganizationDelegatedAdminResponse = &sRegisterOrganizationDelegatedAdminResponse
+
+var RemoveTagsRequest = &sRemoveTagsRequest
+var RemoveTagsRequest_ResourceId = &sRemoveTagsRequest_ResourceId
+var RemoveTagsRequest_TagsList = &sRemoveTagsRequest_TagsList
+
+var RemoveTagsResponse = &sRemoveTagsResponse
+
+var RestoreEventDataStoreRequest = &sRestoreEventDataStoreRequest
+var RestoreEventDataStoreRequest_EventDataStore = &sRestoreEventDataStoreRequest_EventDataStore
+
+var RestoreEventDataStoreResponse = &sRestoreEventDataStoreResponse
+var RestoreEventDataStoreResponse_EventDataStoreArn = &sRestoreEventDataStoreResponse_EventDataStoreArn
+var RestoreEventDataStoreResponse_Name = &sRestoreEventDataStoreResponse_Name
+var RestoreEventDataStoreResponse_Status = &sRestoreEventDataStoreResponse_Status
+var RestoreEventDataStoreResponse_AdvancedEventSelectors = &sRestoreEventDataStoreResponse_AdvancedEventSelectors
+var RestoreEventDataStoreResponse_MultiRegionEnabled = &sRestoreEventDataStoreResponse_MultiRegionEnabled
+var RestoreEventDataStoreResponse_OrganizationEnabled = &sRestoreEventDataStoreResponse_OrganizationEnabled
+var RestoreEventDataStoreResponse_RetentionPeriod = &sRestoreEventDataStoreResponse_RetentionPeriod
+var RestoreEventDataStoreResponse_TerminationProtectionEnabled = &sRestoreEventDataStoreResponse_TerminationProtectionEnabled
+var RestoreEventDataStoreResponse_CreatedTimestamp = &sRestoreEventDataStoreResponse_CreatedTimestamp
+var RestoreEventDataStoreResponse_UpdatedTimestamp = &sRestoreEventDataStoreResponse_UpdatedTimestamp
+var RestoreEventDataStoreResponse_KmsKeyId = &sRestoreEventDataStoreResponse_KmsKeyId
+var RestoreEventDataStoreResponse_BillingMode = &sRestoreEventDataStoreResponse_BillingMode
+
+var SearchSampleQueriesRequest = &sSearchSampleQueriesRequest
+var SearchSampleQueriesRequest_SearchPhrase = &sSearchSampleQueriesRequest_SearchPhrase
+var SearchSampleQueriesRequest_MaxResults = &sSearchSampleQueriesRequest_MaxResults
+var SearchSampleQueriesRequest_NextToken = &sSearchSampleQueriesRequest_NextToken
+
+var SearchSampleQueriesResponse = &sSearchSampleQueriesResponse
+var SearchSampleQueriesResponse_SearchResults = &sSearchSampleQueriesResponse_SearchResults
+var SearchSampleQueriesResponse_NextToken = &sSearchSampleQueriesResponse_NextToken
+
+var StartDashboardRefreshRequest = &sStartDashboardRefreshRequest
+var StartDashboardRefreshRequest_DashboardId = &sStartDashboardRefreshRequest_DashboardId
+var StartDashboardRefreshRequest_QueryParameterValues = &sStartDashboardRefreshRequest_QueryParameterValues
+
+var StartDashboardRefreshResponse = &sStartDashboardRefreshResponse
+var StartDashboardRefreshResponse_RefreshId = &sStartDashboardRefreshResponse_RefreshId
+
+var StartEventDataStoreIngestionRequest = &sStartEventDataStoreIngestionRequest
+var StartEventDataStoreIngestionRequest_EventDataStore = &sStartEventDataStoreIngestionRequest_EventDataStore
+
+var StartEventDataStoreIngestionResponse = &sStartEventDataStoreIngestionResponse
+
+var StartImportRequest = &sStartImportRequest
+var StartImportRequest_Destinations = &sStartImportRequest_Destinations
+var StartImportRequest_ImportSource = &sStartImportRequest_ImportSource
+var StartImportRequest_StartEventTime = &sStartImportRequest_StartEventTime
+var StartImportRequest_EndEventTime = &sStartImportRequest_EndEventTime
+var StartImportRequest_ImportId = &sStartImportRequest_ImportId
+
+var StartImportResponse = &sStartImportResponse
+var StartImportResponse_ImportId = &sStartImportResponse_ImportId
+var StartImportResponse_Destinations = &sStartImportResponse_Destinations
+var StartImportResponse_ImportSource = &sStartImportResponse_ImportSource
+var StartImportResponse_StartEventTime = &sStartImportResponse_StartEventTime
+var StartImportResponse_EndEventTime = &sStartImportResponse_EndEventTime
+var StartImportResponse_ImportStatus = &sStartImportResponse_ImportStatus
+var StartImportResponse_CreatedTimestamp = &sStartImportResponse_CreatedTimestamp
+var StartImportResponse_UpdatedTimestamp = &sStartImportResponse_UpdatedTimestamp
+
+var StartLoggingRequest = &sStartLoggingRequest
+var StartLoggingRequest_Name = &sStartLoggingRequest_Name
+
+var StartLoggingResponse = &sStartLoggingResponse
+
+var StartQueryRequest = &sStartQueryRequest
+var StartQueryRequest_QueryStatement = &sStartQueryRequest_QueryStatement
+var StartQueryRequest_DeliveryS3Uri = &sStartQueryRequest_DeliveryS3Uri
+var StartQueryRequest_QueryAlias = &sStartQueryRequest_QueryAlias
+var StartQueryRequest_QueryParameters = &sStartQueryRequest_QueryParameters
+var StartQueryRequest_EventDataStoreOwnerAccountId = &sStartQueryRequest_EventDataStoreOwnerAccountId
+
+var StartQueryResponse = &sStartQueryResponse
+var StartQueryResponse_QueryId = &sStartQueryResponse_QueryId
+var StartQueryResponse_EventDataStoreOwnerAccountId = &sStartQueryResponse_EventDataStoreOwnerAccountId
+
+var StopEventDataStoreIngestionRequest = &sStopEventDataStoreIngestionRequest
+var StopEventDataStoreIngestionRequest_EventDataStore = &sStopEventDataStoreIngestionRequest_EventDataStore
+
+var StopEventDataStoreIngestionResponse = &sStopEventDataStoreIngestionResponse
+
+var StopImportRequest = &sStopImportRequest
+var StopImportRequest_ImportId = &sStopImportRequest_ImportId
+
+var StopImportResponse = &sStopImportResponse
+var StopImportResponse_ImportId = &sStopImportResponse_ImportId
+var StopImportResponse_ImportSource = &sStopImportResponse_ImportSource
+var StopImportResponse_Destinations = &sStopImportResponse_Destinations
+var StopImportResponse_ImportStatus = &sStopImportResponse_ImportStatus
+var StopImportResponse_CreatedTimestamp = &sStopImportResponse_CreatedTimestamp
+var StopImportResponse_UpdatedTimestamp = &sStopImportResponse_UpdatedTimestamp
+var StopImportResponse_StartEventTime = &sStopImportResponse_StartEventTime
+var StopImportResponse_EndEventTime = &sStopImportResponse_EndEventTime
+var StopImportResponse_ImportStatistics = &sStopImportResponse_ImportStatistics
+
+var StopLoggingRequest = &sStopLoggingRequest
+var StopLoggingRequest_Name = &sStopLoggingRequest_Name
+
+var StopLoggingResponse = &sStopLoggingResponse
+
+var UpdateChannelRequest = &sUpdateChannelRequest
+var UpdateChannelRequest_Channel = &sUpdateChannelRequest_Channel
+var UpdateChannelRequest_Destinations = &sUpdateChannelRequest_Destinations
+var UpdateChannelRequest_Name = &sUpdateChannelRequest_Name
+
+var UpdateChannelResponse = &sUpdateChannelResponse
+var UpdateChannelResponse_ChannelArn = &sUpdateChannelResponse_ChannelArn
+var UpdateChannelResponse_Name = &sUpdateChannelResponse_Name
+var UpdateChannelResponse_Source = &sUpdateChannelResponse_Source
+var UpdateChannelResponse_Destinations = &sUpdateChannelResponse_Destinations
+
+var UpdateDashboardRequest = &sUpdateDashboardRequest
+var UpdateDashboardRequest_DashboardId = &sUpdateDashboardRequest_DashboardId
+var UpdateDashboardRequest_Widgets = &sUpdateDashboardRequest_Widgets
+var UpdateDashboardRequest_RefreshSchedule = &sUpdateDashboardRequest_RefreshSchedule
+var UpdateDashboardRequest_TerminationProtectionEnabled = &sUpdateDashboardRequest_TerminationProtectionEnabled
+
+var UpdateDashboardResponse = &sUpdateDashboardResponse
+var UpdateDashboardResponse_DashboardArn = &sUpdateDashboardResponse_DashboardArn
+var UpdateDashboardResponse_Name = &sUpdateDashboardResponse_Name
+var UpdateDashboardResponse_Type = &sUpdateDashboardResponse_Type
+var UpdateDashboardResponse_Widgets = &sUpdateDashboardResponse_Widgets
+var UpdateDashboardResponse_RefreshSchedule = &sUpdateDashboardResponse_RefreshSchedule
+var UpdateDashboardResponse_TerminationProtectionEnabled = &sUpdateDashboardResponse_TerminationProtectionEnabled
+var UpdateDashboardResponse_CreatedTimestamp = &sUpdateDashboardResponse_CreatedTimestamp
+var UpdateDashboardResponse_UpdatedTimestamp = &sUpdateDashboardResponse_UpdatedTimestamp
+
+var UpdateEventDataStoreRequest = &sUpdateEventDataStoreRequest
+var UpdateEventDataStoreRequest_EventDataStore = &sUpdateEventDataStoreRequest_EventDataStore
+var UpdateEventDataStoreRequest_Name = &sUpdateEventDataStoreRequest_Name
+var UpdateEventDataStoreRequest_AdvancedEventSelectors = &sUpdateEventDataStoreRequest_AdvancedEventSelectors
+var UpdateEventDataStoreRequest_MultiRegionEnabled = &sUpdateEventDataStoreRequest_MultiRegionEnabled
+var UpdateEventDataStoreRequest_OrganizationEnabled = &sUpdateEventDataStoreRequest_OrganizationEnabled
+var UpdateEventDataStoreRequest_RetentionPeriod = &sUpdateEventDataStoreRequest_RetentionPeriod
+var UpdateEventDataStoreRequest_TerminationProtectionEnabled = &sUpdateEventDataStoreRequest_TerminationProtectionEnabled
+var UpdateEventDataStoreRequest_KmsKeyId = &sUpdateEventDataStoreRequest_KmsKeyId
+var UpdateEventDataStoreRequest_BillingMode = &sUpdateEventDataStoreRequest_BillingMode
+
+var UpdateEventDataStoreResponse = &sUpdateEventDataStoreResponse
+var UpdateEventDataStoreResponse_EventDataStoreArn = &sUpdateEventDataStoreResponse_EventDataStoreArn
+var UpdateEventDataStoreResponse_Name = &sUpdateEventDataStoreResponse_Name
+var UpdateEventDataStoreResponse_Status = &sUpdateEventDataStoreResponse_Status
+var UpdateEventDataStoreResponse_AdvancedEventSelectors = &sUpdateEventDataStoreResponse_AdvancedEventSelectors
+var UpdateEventDataStoreResponse_MultiRegionEnabled = &sUpdateEventDataStoreResponse_MultiRegionEnabled
+var UpdateEventDataStoreResponse_OrganizationEnabled = &sUpdateEventDataStoreResponse_OrganizationEnabled
+var UpdateEventDataStoreResponse_RetentionPeriod = &sUpdateEventDataStoreResponse_RetentionPeriod
+var UpdateEventDataStoreResponse_TerminationProtectionEnabled = &sUpdateEventDataStoreResponse_TerminationProtectionEnabled
+var UpdateEventDataStoreResponse_CreatedTimestamp = &sUpdateEventDataStoreResponse_CreatedTimestamp
+var UpdateEventDataStoreResponse_UpdatedTimestamp = &sUpdateEventDataStoreResponse_UpdatedTimestamp
+var UpdateEventDataStoreResponse_KmsKeyId = &sUpdateEventDataStoreResponse_KmsKeyId
+var UpdateEventDataStoreResponse_BillingMode = &sUpdateEventDataStoreResponse_BillingMode
+var UpdateEventDataStoreResponse_FederationStatus = &sUpdateEventDataStoreResponse_FederationStatus
+var UpdateEventDataStoreResponse_FederationRoleArn = &sUpdateEventDataStoreResponse_FederationRoleArn
+
+var UpdateTrailRequest = &sUpdateTrailRequest
+var UpdateTrailRequest_Name = &sUpdateTrailRequest_Name
+var UpdateTrailRequest_S3BucketName = &sUpdateTrailRequest_S3BucketName
+var UpdateTrailRequest_S3KeyPrefix = &sUpdateTrailRequest_S3KeyPrefix
+var UpdateTrailRequest_SnsTopicName = &sUpdateTrailRequest_SnsTopicName
+var UpdateTrailRequest_IncludeGlobalServiceEvents = &sUpdateTrailRequest_IncludeGlobalServiceEvents
+var UpdateTrailRequest_IsMultiRegionTrail = &sUpdateTrailRequest_IsMultiRegionTrail
+var UpdateTrailRequest_EnableLogFileValidation = &sUpdateTrailRequest_EnableLogFileValidation
+var UpdateTrailRequest_CloudWatchLogsLogGroupArn = &sUpdateTrailRequest_CloudWatchLogsLogGroupArn
+var UpdateTrailRequest_CloudWatchLogsRoleArn = &sUpdateTrailRequest_CloudWatchLogsRoleArn
+var UpdateTrailRequest_KmsKeyId = &sUpdateTrailRequest_KmsKeyId
+var UpdateTrailRequest_IsOrganizationTrail = &sUpdateTrailRequest_IsOrganizationTrail
+var UpdateTrailRequest_RecursiveLogging = &sUpdateTrailRequest_RecursiveLogging
+
+var UpdateTrailResponse = &sUpdateTrailResponse
+var UpdateTrailResponse_Name = &sUpdateTrailResponse_Name
+var UpdateTrailResponse_S3BucketName = &sUpdateTrailResponse_S3BucketName
+var UpdateTrailResponse_S3KeyPrefix = &sUpdateTrailResponse_S3KeyPrefix
+var UpdateTrailResponse_SnsTopicName = &sUpdateTrailResponse_SnsTopicName
+var UpdateTrailResponse_SnsTopicARN = &sUpdateTrailResponse_SnsTopicARN
+var UpdateTrailResponse_IncludeGlobalServiceEvents = &sUpdateTrailResponse_IncludeGlobalServiceEvents
+var UpdateTrailResponse_IsMultiRegionTrail = &sUpdateTrailResponse_IsMultiRegionTrail
+var UpdateTrailResponse_TrailARN = &sUpdateTrailResponse_TrailARN
+var UpdateTrailResponse_LogFileValidationEnabled = &sUpdateTrailResponse_LogFileValidationEnabled
+var UpdateTrailResponse_CloudWatchLogsLogGroupArn = &sUpdateTrailResponse_CloudWatchLogsLogGroupArn
+var UpdateTrailResponse_CloudWatchLogsRoleArn = &sUpdateTrailResponse_CloudWatchLogsRoleArn
+var UpdateTrailResponse_KmsKeyId = &sUpdateTrailResponse_KmsKeyId
+var UpdateTrailResponse_IsOrganizationTrail = &sUpdateTrailResponse_IsOrganizationTrail
+var UpdateTrailResponse_RecursiveLogging = &sUpdateTrailResponse_RecursiveLogging
+
+var CloudTrail_20131101 = &smithy.ServiceSchema{Schema: &s_CloudTrail_20131101, Version: "2013-11-01"}

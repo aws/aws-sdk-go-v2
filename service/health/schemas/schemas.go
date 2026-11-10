@@ -4,1740 +4,1280 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var DescribeAffectedAccountsForOrganization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "DescribeAffectedAccountsForOrganization",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeAffectedEntities = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "DescribeAffectedEntities",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeAffectedEntitiesForOrganization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "DescribeAffectedEntitiesForOrganization",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeEntityAggregates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "DescribeEntityAggregates",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeEntityAggregatesForOrganization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "DescribeEntityAggregatesForOrganization",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeEventAggregates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "DescribeEventAggregates",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeEventDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "DescribeEventDetails",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeEventDetailsForOrganization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "DescribeEventDetailsForOrganization",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "DescribeEvents",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeEventsForOrganization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "DescribeEventsForOrganization",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeEventTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "DescribeEventTypes",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeHealthServiceStatusForOrganization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "DescribeHealthServiceStatusForOrganization",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeServiceLifecycle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "DescribeServiceLifecycle",
-}, smithy.ShapeTypeOperation, 0)
-
-var DisableHealthServiceAccessForOrganization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "DisableHealthServiceAccessForOrganization",
-}, smithy.ShapeTypeOperation, 0)
-
-var EnableHealthServiceAccessForOrganization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "EnableHealthServiceAccessForOrganization",
-}, smithy.ShapeTypeOperation, 0)
-
-var _AWSHealth_20160804 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "AWSHealth_20160804",
-}, smithy.ShapeTypeService, 0)
-
-var AWSHealth_20160804 = smithy.NewServiceSchema(_AWSHealth_20160804, "2016-08-04")
-
-var AccountEntityAggregate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "AccountEntityAggregate",
-}, smithy.ShapeTypeStructure, 3)
-var AccountEntityAggregate_accountId *smithy.Schema
-
-var AccountEntityAggregate_count *smithy.Schema
-
-var AccountEntityAggregate_statuses *smithy.Schema
-
-var _AccountEntityAggregatesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "AccountEntityAggregatesList",
-}, smithy.ShapeTypeList, 1)
-var _AccountEntityAggregatesList_member *smithy.Schema
-
-var _accountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "accountId",
-}, smithy.ShapeTypeString, 0)
-
-var _affectedAccountsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "affectedAccountsList",
-}, smithy.ShapeTypeList, 1)
-var _affectedAccountsList_member *smithy.Schema
-
-var AffectedEntity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "AffectedEntity",
-}, smithy.ShapeTypeStructure, 9)
-var AffectedEntity_entityArn *smithy.Schema
-
-var AffectedEntity_eventArn *smithy.Schema
-
-var AffectedEntity_entityValue *smithy.Schema
-
-var AffectedEntity_entityUrl *smithy.Schema
-
-var AffectedEntity_awsAccountId *smithy.Schema
-
-var AffectedEntity_lastUpdatedTime *smithy.Schema
-
-var AffectedEntity_statusCode *smithy.Schema
-
-var AffectedEntity_tags *smithy.Schema
-
-var AffectedEntity_entityMetadata *smithy.Schema
-
-var _aggregateValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "aggregateValue",
-}, smithy.ShapeTypeString, 0)
-
-var _availabilityZone = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "availabilityZone",
-}, smithy.ShapeTypeString, 0)
-
-var _availabilityZones = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "availabilityZones",
-}, smithy.ShapeTypeList, 1)
-var _availabilityZones_member *smithy.Schema
-
-var _awsAccountIdsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "awsAccountIdsList",
-}, smithy.ShapeTypeList, 1)
-var _awsAccountIdsList_member *smithy.Schema
-
-var ConcurrentModificationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "ConcurrentModificationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var ConcurrentModificationException_message *smithy.Schema
-
-var _count = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "count",
-}, smithy.ShapeTypeInteger, 0)
-
-var DateTimeRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "DateTimeRange",
-}, smithy.ShapeTypeStructure, 2)
-var DateTimeRange_from *smithy.Schema
-
-var DateTimeRange_to *smithy.Schema
-
-var _dateTimeRangeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "dateTimeRangeList",
-}, smithy.ShapeTypeList, 1)
-var _dateTimeRangeList_member *smithy.Schema
-
-var _DescribeAffectedEntitiesForOrganizationFailedSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "DescribeAffectedEntitiesForOrganizationFailedSet",
-}, smithy.ShapeTypeList, 1)
-var _DescribeAffectedEntitiesForOrganizationFailedSet_member *smithy.Schema
-
-var _DescribeEventDetailsFailedSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "DescribeEventDetailsFailedSet",
-}, smithy.ShapeTypeList, 1)
-var _DescribeEventDetailsFailedSet_member *smithy.Schema
-
-var _DescribeEventDetailsForOrganizationFailedSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "DescribeEventDetailsForOrganizationFailedSet",
-}, smithy.ShapeTypeList, 1)
-var _DescribeEventDetailsForOrganizationFailedSet_member *smithy.Schema
-
-var _DescribeEventDetailsForOrganizationSuccessfulSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "DescribeEventDetailsForOrganizationSuccessfulSet",
-}, smithy.ShapeTypeList, 1)
-var _DescribeEventDetailsForOrganizationSuccessfulSet_member *smithy.Schema
-
-var _DescribeEventDetailsSuccessfulSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "DescribeEventDetailsSuccessfulSet",
-}, smithy.ShapeTypeList, 1)
-var _DescribeEventDetailsSuccessfulSet_member *smithy.Schema
-
-var EntityAccountFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "EntityAccountFilter",
-}, smithy.ShapeTypeStructure, 3)
-var EntityAccountFilter_eventArn *smithy.Schema
-
-var EntityAccountFilter_awsAccountId *smithy.Schema
-
-var EntityAccountFilter_statusCodes *smithy.Schema
-
-var EntityAggregate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "EntityAggregate",
-}, smithy.ShapeTypeStructure, 3)
-var EntityAggregate_eventArn *smithy.Schema
-
-var EntityAggregate_count *smithy.Schema
-
-var EntityAggregate_statuses *smithy.Schema
-
-var _EntityAggregateList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "EntityAggregateList",
-}, smithy.ShapeTypeList, 1)
-var _EntityAggregateList_member *smithy.Schema
-
-var _entityArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "entityArn",
-}, smithy.ShapeTypeString, 0)
-
-var _entityArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "entityArnList",
-}, smithy.ShapeTypeList, 1)
-var _entityArnList_member *smithy.Schema
-
-var EntityFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "EntityFilter",
-}, smithy.ShapeTypeStructure, 6)
-var EntityFilter_eventArns *smithy.Schema
-
-var EntityFilter_entityArns *smithy.Schema
-
-var EntityFilter_entityValues *smithy.Schema
-
-var EntityFilter_lastUpdatedTimes *smithy.Schema
-
-var EntityFilter_tags *smithy.Schema
-
-var EntityFilter_statusCodes *smithy.Schema
-
-var _EntityList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "EntityList",
-}, smithy.ShapeTypeList, 1)
-var _EntityList_member *smithy.Schema
-
-var _entityMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "entityMetadata",
-}, smithy.ShapeTypeMap, 2)
-var _entityMetadata_key *smithy.Schema
-
-var _entityMetadata_value *smithy.Schema
-
-var _entityMetadataKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "entityMetadataKey",
-}, smithy.ShapeTypeString, 0)
-
-var _entityMetadataValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "entityMetadataValue",
-}, smithy.ShapeTypeString, 0)
-
-var entityStatusCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "entityStatusCode",
-}, smithy.ShapeTypeEnum, 5)
-var entityStatusCode_IMPAIRED *smithy.Schema
-
-var entityStatusCode_UNIMPAIRED *smithy.Schema
-
-var entityStatusCode_UNKNOWN *smithy.Schema
-
-var entityStatusCode_PENDING *smithy.Schema
-
-var entityStatusCode_RESOLVED *smithy.Schema
-
-var _entityStatusCodeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "entityStatusCodeList",
-}, smithy.ShapeTypeList, 1)
-var _entityStatusCodeList_member *smithy.Schema
-
-var _entityStatuses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "entityStatuses",
-}, smithy.ShapeTypeMap, 2)
-var _entityStatuses_key *smithy.Schema
-
-var _entityStatuses_value *smithy.Schema
-
-var _entityUrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "entityUrl",
-}, smithy.ShapeTypeString, 0)
-
-var _entityValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "entityValue",
-}, smithy.ShapeTypeString, 0)
-
-var _entityValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "entityValueList",
-}, smithy.ShapeTypeList, 1)
-var _entityValueList_member *smithy.Schema
-
-var Event = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "Event",
-}, smithy.ShapeTypeStructure, 13)
-var Event_arn *smithy.Schema
-
-var Event_service *smithy.Schema
-
-var Event_eventTypeCode *smithy.Schema
-
-var Event_eventTypeCategory *smithy.Schema
-
-var Event_region *smithy.Schema
-
-var Event_availabilityZone *smithy.Schema
-
-var Event_startTime *smithy.Schema
-
-var Event_endTime *smithy.Schema
-
-var Event_lastUpdatedTime *smithy.Schema
-
-var Event_statusCode *smithy.Schema
-
-var Event_eventScopeCode *smithy.Schema
-
-var Event_actionability *smithy.Schema
-
-var Event_personas *smithy.Schema
-
-var EventAccountFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "EventAccountFilter",
-}, smithy.ShapeTypeStructure, 2)
-var EventAccountFilter_eventArn *smithy.Schema
-
-var EventAccountFilter_awsAccountId *smithy.Schema
-
-var EventActionability = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "EventActionability",
-}, smithy.ShapeTypeEnum, 3)
-var EventActionability_ACTION_REQUIRED *smithy.Schema
-
-var EventActionability_ACTION_MAY_BE_REQUIRED *smithy.Schema
-
-var EventActionability_INFORMATIONAL *smithy.Schema
-
-var _EventActionabilityList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "EventActionabilityList",
-}, smithy.ShapeTypeList, 1)
-var _EventActionabilityList_member *smithy.Schema
-
-var EventAggregate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "EventAggregate",
-}, smithy.ShapeTypeStructure, 2)
-var EventAggregate_aggregateValue *smithy.Schema
-
-var EventAggregate_count *smithy.Schema
-
-var eventAggregateField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "eventAggregateField",
-}, smithy.ShapeTypeEnum, 1)
-var eventAggregateField_EventTypeCategory *smithy.Schema
-
-var _EventAggregateList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "EventAggregateList",
-}, smithy.ShapeTypeList, 1)
-var _EventAggregateList_member *smithy.Schema
-
-var _eventArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "eventArn",
-}, smithy.ShapeTypeString, 0)
-
-var _eventArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "eventArnList",
-}, smithy.ShapeTypeList, 1)
-var _eventArnList_member *smithy.Schema
-
-var _EventArnsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "EventArnsList",
-}, smithy.ShapeTypeList, 1)
-var _EventArnsList_member *smithy.Schema
-
-var EventDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "EventDescription",
-}, smithy.ShapeTypeStructure, 1)
-var EventDescription_latestDescription *smithy.Schema
-
-var _EventDescription2 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "EventDescription2",
-}, smithy.ShapeTypeString, 0)
-
-var EventDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "EventDetails",
-}, smithy.ShapeTypeStructure, 3)
-var EventDetails_event *smithy.Schema
-
-var EventDetails_eventDescription *smithy.Schema
-
-var EventDetails_eventMetadata *smithy.Schema
-
-var EventDetailsErrorItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "EventDetailsErrorItem",
-}, smithy.ShapeTypeStructure, 3)
-var EventDetailsErrorItem_eventArn *smithy.Schema
-
-var EventDetailsErrorItem_errorName *smithy.Schema
-
-var EventDetailsErrorItem_errorMessage *smithy.Schema
-
-var EventFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "EventFilter",
-}, smithy.ShapeTypeStructure, 15)
-var EventFilter_actionabilities *smithy.Schema
-
-var EventFilter_eventArns *smithy.Schema
-
-var EventFilter_eventTypeCodes *smithy.Schema
-
-var EventFilter_services *smithy.Schema
-
-var EventFilter_regions *smithy.Schema
-
-var EventFilter_availabilityZones *smithy.Schema
-
-var EventFilter_startTimes *smithy.Schema
-
-var EventFilter_endTimes *smithy.Schema
-
-var EventFilter_lastUpdatedTimes *smithy.Schema
-
-var EventFilter_entityArns *smithy.Schema
-
-var EventFilter_entityValues *smithy.Schema
-
-var EventFilter_eventTypeCategories *smithy.Schema
-
-var EventFilter_tags *smithy.Schema
-
-var EventFilter_eventStatusCodes *smithy.Schema
-
-var EventFilter_personas *smithy.Schema
-
-var _EventList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "EventList",
-}, smithy.ShapeTypeList, 1)
-var _EventList_member *smithy.Schema
-
-var _eventMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "eventMetadata",
-}, smithy.ShapeTypeMap, 2)
-var _eventMetadata_key *smithy.Schema
-
-var _eventMetadata_value *smithy.Schema
-
-var EventPersona = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "EventPersona",
-}, smithy.ShapeTypeEnum, 3)
-var EventPersona_OPERATIONS *smithy.Schema
-
-var EventPersona_SECURITY *smithy.Schema
-
-var EventPersona_BILLING *smithy.Schema
-
-var _EventPersonaList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "EventPersonaList",
-}, smithy.ShapeTypeList, 1)
-var _EventPersonaList_member *smithy.Schema
-
-var eventScopeCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "eventScopeCode",
-}, smithy.ShapeTypeEnum, 3)
-var eventScopeCode_PUBLIC *smithy.Schema
-
-var eventScopeCode_ACCOUNT_SPECIFIC *smithy.Schema
-
-var eventScopeCode_NONE *smithy.Schema
-
-var eventStatusCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "eventStatusCode",
-}, smithy.ShapeTypeEnum, 3)
-var eventStatusCode_OPEN *smithy.Schema
-
-var eventStatusCode_CLOSED *smithy.Schema
-
-var eventStatusCode_UPCOMING *smithy.Schema
-
-var _eventStatusCodeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "eventStatusCodeList",
-}, smithy.ShapeTypeList, 1)
-var _eventStatusCodeList_member *smithy.Schema
-
-var EventType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "EventType",
-}, smithy.ShapeTypeStructure, 5)
-var EventType_service *smithy.Schema
-
-var EventType_code *smithy.Schema
-
-var EventType_category *smithy.Schema
-
-var EventType_actionability *smithy.Schema
-
-var EventType_personas *smithy.Schema
-
-var _EventType2 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "EventType2",
-}, smithy.ShapeTypeString, 0)
-
-var EventTypeActionability = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "EventTypeActionability",
-}, smithy.ShapeTypeEnum, 3)
-var EventTypeActionability_ACTION_REQUIRED *smithy.Schema
-
-var EventTypeActionability_ACTION_MAY_BE_REQUIRED *smithy.Schema
-
-var EventTypeActionability_INFORMATIONAL *smithy.Schema
-
-var _EventTypeActionabilityList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "EventTypeActionabilityList",
-}, smithy.ShapeTypeList, 1)
-var _EventTypeActionabilityList_member *smithy.Schema
-
-var eventTypeCategory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "eventTypeCategory",
-}, smithy.ShapeTypeEnum, 4)
-var eventTypeCategory_ISSUE *smithy.Schema
-
-var eventTypeCategory_ACCOUNT_NOTIFICATION *smithy.Schema
-
-var eventTypeCategory_SCHEDULED_CHANGE *smithy.Schema
-
-var eventTypeCategory_INVESTIGATION *smithy.Schema
-
-var _EventTypeCategoryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "EventTypeCategoryList",
-}, smithy.ShapeTypeList, 1)
-var _EventTypeCategoryList_member *smithy.Schema
-
-var _eventTypeCategoryList2 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "eventTypeCategoryList2",
-}, smithy.ShapeTypeList, 1)
-var _eventTypeCategoryList2_member *smithy.Schema
-
-var _eventTypeCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "eventTypeCode",
-}, smithy.ShapeTypeString, 0)
-
-var _EventTypeCodeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "EventTypeCodeList",
-}, smithy.ShapeTypeList, 1)
-var _EventTypeCodeList_member *smithy.Schema
-
-var EventTypeFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "EventTypeFilter",
-}, smithy.ShapeTypeStructure, 5)
-var EventTypeFilter_eventTypeCodes *smithy.Schema
-
-var EventTypeFilter_services *smithy.Schema
-
-var EventTypeFilter_eventTypeCategories *smithy.Schema
-
-var EventTypeFilter_actionabilities *smithy.Schema
-
-var EventTypeFilter_personas *smithy.Schema
-
-var _EventTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "EventTypeList",
-}, smithy.ShapeTypeList, 1)
-var _EventTypeList_member *smithy.Schema
-
-var _eventTypeList2 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "eventTypeList2",
-}, smithy.ShapeTypeList, 1)
-var _eventTypeList2_member *smithy.Schema
-
-var EventTypePersona = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "EventTypePersona",
-}, smithy.ShapeTypeEnum, 3)
-var EventTypePersona_OPERATIONS *smithy.Schema
-
-var EventTypePersona_SECURITY *smithy.Schema
-
-var EventTypePersona_BILLING *smithy.Schema
-
-var _EventTypePersonaList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "EventTypePersonaList",
-}, smithy.ShapeTypeList, 1)
-var _EventTypePersonaList_member *smithy.Schema
-
-var _healthServiceAccessStatusForOrganization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "healthServiceAccessStatusForOrganization",
-}, smithy.ShapeTypeString, 0)
-
-var _ImpactRiskList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "ImpactRiskList",
-}, smithy.ShapeTypeList, 1)
-var _ImpactRiskList_member *smithy.Schema
-
-var InvalidPaginationToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "InvalidPaginationToken",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidPaginationToken_message *smithy.Schema
-
-var LifecycleEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "LifecycleEvent",
-}, smithy.ShapeTypeStructure, 5)
-var LifecycleEvent_lifecycleEventType *smithy.Schema
-
-var LifecycleEvent_date *smithy.Schema
-
-var LifecycleEvent_regions *smithy.Schema
-
-var LifecycleEvent_impactRisks *smithy.Schema
-
-var LifecycleEvent_description *smithy.Schema
-
-var _LifecycleEventList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "LifecycleEventList",
-}, smithy.ShapeTypeList, 1)
-var _LifecycleEventList_member *smithy.Schema
-
-var _LifecycleMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "LifecycleMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _locale = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "locale",
-}, smithy.ShapeTypeString, 0)
-
-var _maxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "maxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _maxResultsLowerRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "maxResultsLowerRange",
-}, smithy.ShapeTypeInteger, 0)
-
-var _metadataKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "metadataKey",
-}, smithy.ShapeTypeString, 0)
-
-var _metadataValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "metadataValue",
-}, smithy.ShapeTypeString, 0)
-
-var _nextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "nextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _OrganizationAccountIdsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "OrganizationAccountIdsList",
-}, smithy.ShapeTypeList, 1)
-var _OrganizationAccountIdsList_member *smithy.Schema
-
-var OrganizationAffectedEntitiesErrorItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "OrganizationAffectedEntitiesErrorItem",
-}, smithy.ShapeTypeStructure, 4)
-var OrganizationAffectedEntitiesErrorItem_awsAccountId *smithy.Schema
-
-var OrganizationAffectedEntitiesErrorItem_eventArn *smithy.Schema
-
-var OrganizationAffectedEntitiesErrorItem_errorName *smithy.Schema
-
-var OrganizationAffectedEntitiesErrorItem_errorMessage *smithy.Schema
-
-var _OrganizationEntityAccountFiltersList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "OrganizationEntityAccountFiltersList",
-}, smithy.ShapeTypeList, 1)
-var _OrganizationEntityAccountFiltersList_member *smithy.Schema
-
-var OrganizationEntityAggregate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "OrganizationEntityAggregate",
-}, smithy.ShapeTypeStructure, 4)
-var OrganizationEntityAggregate_eventArn *smithy.Schema
-
-var OrganizationEntityAggregate_count *smithy.Schema
-
-var OrganizationEntityAggregate_statuses *smithy.Schema
-
-var OrganizationEntityAggregate_accounts *smithy.Schema
-
-var _OrganizationEntityAggregatesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "OrganizationEntityAggregatesList",
-}, smithy.ShapeTypeList, 1)
-var _OrganizationEntityAggregatesList_member *smithy.Schema
-
-var _OrganizationEntityFiltersList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "OrganizationEntityFiltersList",
-}, smithy.ShapeTypeList, 1)
-var _OrganizationEntityFiltersList_member *smithy.Schema
-
-var OrganizationEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "OrganizationEvent",
-}, smithy.ShapeTypeStructure, 12)
-var OrganizationEvent_arn *smithy.Schema
-
-var OrganizationEvent_service *smithy.Schema
-
-var OrganizationEvent_eventTypeCode *smithy.Schema
-
-var OrganizationEvent_eventTypeCategory *smithy.Schema
-
-var OrganizationEvent_eventScopeCode *smithy.Schema
-
-var OrganizationEvent_region *smithy.Schema
-
-var OrganizationEvent_startTime *smithy.Schema
-
-var OrganizationEvent_endTime *smithy.Schema
-
-var OrganizationEvent_lastUpdatedTime *smithy.Schema
-
-var OrganizationEvent_statusCode *smithy.Schema
-
-var OrganizationEvent_actionability *smithy.Schema
-
-var OrganizationEvent_personas *smithy.Schema
-
-var _OrganizationEventArnsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "OrganizationEventArnsList",
-}, smithy.ShapeTypeList, 1)
-var _OrganizationEventArnsList_member *smithy.Schema
-
-var _OrganizationEventDetailFiltersList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "OrganizationEventDetailFiltersList",
-}, smithy.ShapeTypeList, 1)
-var _OrganizationEventDetailFiltersList_member *smithy.Schema
-
-var OrganizationEventDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "OrganizationEventDetails",
-}, smithy.ShapeTypeStructure, 4)
-var OrganizationEventDetails_awsAccountId *smithy.Schema
-
-var OrganizationEventDetails_event *smithy.Schema
-
-var OrganizationEventDetails_eventDescription *smithy.Schema
-
-var OrganizationEventDetails_eventMetadata *smithy.Schema
-
-var OrganizationEventDetailsErrorItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "OrganizationEventDetailsErrorItem",
-}, smithy.ShapeTypeStructure, 4)
-var OrganizationEventDetailsErrorItem_awsAccountId *smithy.Schema
-
-var OrganizationEventDetailsErrorItem_eventArn *smithy.Schema
-
-var OrganizationEventDetailsErrorItem_errorName *smithy.Schema
-
-var OrganizationEventDetailsErrorItem_errorMessage *smithy.Schema
-
-var OrganizationEventFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "OrganizationEventFilter",
-}, smithy.ShapeTypeStructure, 13)
-var OrganizationEventFilter_actionabilities *smithy.Schema
-
-var OrganizationEventFilter_eventTypeCodes *smithy.Schema
-
-var OrganizationEventFilter_awsAccountIds *smithy.Schema
-
-var OrganizationEventFilter_services *smithy.Schema
-
-var OrganizationEventFilter_regions *smithy.Schema
-
-var OrganizationEventFilter_startTime *smithy.Schema
-
-var OrganizationEventFilter_endTime *smithy.Schema
-
-var OrganizationEventFilter_lastUpdatedTime *smithy.Schema
-
-var OrganizationEventFilter_entityArns *smithy.Schema
-
-var OrganizationEventFilter_entityValues *smithy.Schema
-
-var OrganizationEventFilter_eventTypeCategories *smithy.Schema
-
-var OrganizationEventFilter_eventStatusCodes *smithy.Schema
-
-var OrganizationEventFilter_personas *smithy.Schema
-
-var _OrganizationEventList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "OrganizationEventList",
-}, smithy.ShapeTypeList, 1)
-var _OrganizationEventList_member *smithy.Schema
-
-var _region = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "region",
-}, smithy.ShapeTypeString, 0)
-
-var _regionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "regionList",
-}, smithy.ShapeTypeList, 1)
-var _regionList_member *smithy.Schema
-
-var _service = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "service",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceLifecycle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "ServiceLifecycle",
-}, smithy.ShapeTypeStructure, 5)
-var ServiceLifecycle_service *smithy.Schema
-
-var ServiceLifecycle_version *smithy.Schema
-
-var ServiceLifecycle_title *smithy.Schema
-
-var ServiceLifecycle_recommendedVersion *smithy.Schema
-
-var ServiceLifecycle_lifecycleEvents *smithy.Schema
-
-var ServiceLifecycleFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "ServiceLifecycleFilter",
-}, smithy.ShapeTypeStructure, 1)
-var ServiceLifecycleFilter_service *smithy.Schema
-
-var _ServiceLifecycleList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "ServiceLifecycleList",
-}, smithy.ShapeTypeList, 1)
-var _ServiceLifecycleList_member *smithy.Schema
-
-var _serviceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "serviceList",
-}, smithy.ShapeTypeList, 1)
-var _serviceList_member *smithy.Schema
-
-var _string = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "string",
-}, smithy.ShapeTypeString, 0)
-
-var _tagFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "tagFilter",
-}, smithy.ShapeTypeList, 1)
-var _tagFilter_member *smithy.Schema
-
-var _tagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "tagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _tagSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "tagSet",
-}, smithy.ShapeTypeMap, 2)
-var _tagSet_key *smithy.Schema
-
-var _tagSet_value *smithy.Schema
-
-var _tagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "tagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var UnsupportedLocale = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "UnsupportedLocale",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var UnsupportedLocale_message *smithy.Schema
-
-var DescribeAffectedAccountsForOrganizationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "DescribeAffectedAccountsForOrganizationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeAffectedAccountsForOrganizationRequest_eventArn *smithy.Schema
-
-var DescribeAffectedAccountsForOrganizationRequest_nextToken *smithy.Schema
-
-var DescribeAffectedAccountsForOrganizationRequest_maxResults *smithy.Schema
-
-var DescribeAffectedAccountsForOrganizationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "DescribeAffectedAccountsForOrganizationResponse",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeAffectedAccountsForOrganizationResponse_affectedAccounts *smithy.Schema
-
-var DescribeAffectedAccountsForOrganizationResponse_eventScopeCode *smithy.Schema
-
-var DescribeAffectedAccountsForOrganizationResponse_nextToken *smithy.Schema
-
-var DescribeAffectedEntitiesForOrganizationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "DescribeAffectedEntitiesForOrganizationRequest",
-}, smithy.ShapeTypeStructure, 5)
-var DescribeAffectedEntitiesForOrganizationRequest_organizationEntityFilters *smithy.Schema
-
-var DescribeAffectedEntitiesForOrganizationRequest_locale *smithy.Schema
-
-var DescribeAffectedEntitiesForOrganizationRequest_nextToken *smithy.Schema
-
-var DescribeAffectedEntitiesForOrganizationRequest_maxResults *smithy.Schema
-
-var DescribeAffectedEntitiesForOrganizationRequest_organizationEntityAccountFilters *smithy.Schema
-
-var DescribeAffectedEntitiesForOrganizationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "DescribeAffectedEntitiesForOrganizationResponse",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeAffectedEntitiesForOrganizationResponse_entities *smithy.Schema
-
-var DescribeAffectedEntitiesForOrganizationResponse_failedSet *smithy.Schema
-
-var DescribeAffectedEntitiesForOrganizationResponse_nextToken *smithy.Schema
-
-var DescribeAffectedEntitiesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "DescribeAffectedEntitiesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeAffectedEntitiesRequest_filter *smithy.Schema
-
-var DescribeAffectedEntitiesRequest_locale *smithy.Schema
-
-var DescribeAffectedEntitiesRequest_nextToken *smithy.Schema
-
-var DescribeAffectedEntitiesRequest_maxResults *smithy.Schema
-
-var DescribeAffectedEntitiesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "DescribeAffectedEntitiesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeAffectedEntitiesResponse_entities *smithy.Schema
-
-var DescribeAffectedEntitiesResponse_nextToken *smithy.Schema
-
-var DescribeEntityAggregatesForOrganizationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "DescribeEntityAggregatesForOrganizationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeEntityAggregatesForOrganizationRequest_eventArns *smithy.Schema
-
-var DescribeEntityAggregatesForOrganizationRequest_awsAccountIds *smithy.Schema
-
-var DescribeEntityAggregatesForOrganizationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "DescribeEntityAggregatesForOrganizationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeEntityAggregatesForOrganizationResponse_organizationEntityAggregates *smithy.Schema
-
-var DescribeEntityAggregatesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "DescribeEntityAggregatesRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeEntityAggregatesRequest_eventArns *smithy.Schema
-
-var DescribeEntityAggregatesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "DescribeEntityAggregatesResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeEntityAggregatesResponse_entityAggregates *smithy.Schema
-
-var DescribeEventAggregatesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "DescribeEventAggregatesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeEventAggregatesRequest_filter *smithy.Schema
-
-var DescribeEventAggregatesRequest_aggregateField *smithy.Schema
-
-var DescribeEventAggregatesRequest_maxResults *smithy.Schema
-
-var DescribeEventAggregatesRequest_nextToken *smithy.Schema
-
-var DescribeEventAggregatesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "DescribeEventAggregatesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeEventAggregatesResponse_eventAggregates *smithy.Schema
-
-var DescribeEventAggregatesResponse_nextToken *smithy.Schema
-
-var DescribeEventDetailsForOrganizationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "DescribeEventDetailsForOrganizationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeEventDetailsForOrganizationRequest_organizationEventDetailFilters *smithy.Schema
-
-var DescribeEventDetailsForOrganizationRequest_locale *smithy.Schema
-
-var DescribeEventDetailsForOrganizationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "DescribeEventDetailsForOrganizationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeEventDetailsForOrganizationResponse_successfulSet *smithy.Schema
-
-var DescribeEventDetailsForOrganizationResponse_failedSet *smithy.Schema
-
-var DescribeEventDetailsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "DescribeEventDetailsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeEventDetailsRequest_eventArns *smithy.Schema
-
-var DescribeEventDetailsRequest_locale *smithy.Schema
-
-var DescribeEventDetailsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "DescribeEventDetailsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeEventDetailsResponse_successfulSet *smithy.Schema
-
-var DescribeEventDetailsResponse_failedSet *smithy.Schema
-
-var DescribeEventsForOrganizationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "DescribeEventsForOrganizationRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeEventsForOrganizationRequest_filter *smithy.Schema
-
-var DescribeEventsForOrganizationRequest_nextToken *smithy.Schema
-
-var DescribeEventsForOrganizationRequest_maxResults *smithy.Schema
-
-var DescribeEventsForOrganizationRequest_locale *smithy.Schema
-
-var DescribeEventsForOrganizationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "DescribeEventsForOrganizationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeEventsForOrganizationResponse_events *smithy.Schema
-
-var DescribeEventsForOrganizationResponse_nextToken *smithy.Schema
-
-var DescribeEventsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "DescribeEventsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeEventsRequest_filter *smithy.Schema
-
-var DescribeEventsRequest_nextToken *smithy.Schema
-
-var DescribeEventsRequest_maxResults *smithy.Schema
-
-var DescribeEventsRequest_locale *smithy.Schema
-
-var DescribeEventsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "DescribeEventsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeEventsResponse_events *smithy.Schema
-
-var DescribeEventsResponse_nextToken *smithy.Schema
-
-var DescribeEventTypesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "DescribeEventTypesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeEventTypesRequest_filter *smithy.Schema
-
-var DescribeEventTypesRequest_locale *smithy.Schema
-
-var DescribeEventTypesRequest_nextToken *smithy.Schema
-
-var DescribeEventTypesRequest_maxResults *smithy.Schema
-
-var DescribeEventTypesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "DescribeEventTypesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeEventTypesResponse_eventTypes *smithy.Schema
-
-var DescribeEventTypesResponse_nextToken *smithy.Schema
-
-var DescribeHealthServiceStatusForOrganizationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "DescribeHealthServiceStatusForOrganizationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeHealthServiceStatusForOrganizationResponse_healthServiceAccessStatusForOrganization *smithy.Schema
-
-var DescribeServiceLifecycleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "DescribeServiceLifecycleRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeServiceLifecycleRequest_filter *smithy.Schema
-
-var DescribeServiceLifecycleRequest_nextToken *smithy.Schema
-
-var DescribeServiceLifecycleRequest_maxResults *smithy.Schema
-
-var DescribeServiceLifecycleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.health",
-	Name:      "DescribeServiceLifecycleResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeServiceLifecycleResponse_serviceLifecycles *smithy.Schema
-
-var DescribeServiceLifecycleResponse_nextToken *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	entityStatusCode_IMPAIRED = entityStatusCode.AddMember("IMPAIRED", smithyprelude.Unit)
-
-	entityStatusCode_UNIMPAIRED = entityStatusCode.AddMember("UNIMPAIRED", smithyprelude.Unit)
-
-	entityStatusCode_UNKNOWN = entityStatusCode.AddMember("UNKNOWN", smithyprelude.Unit)
-
-	entityStatusCode_PENDING = entityStatusCode.AddMember("PENDING", smithyprelude.Unit)
-
-	entityStatusCode_RESOLVED = entityStatusCode.AddMember("RESOLVED", smithyprelude.Unit)
-
-	_entityStatuses_key = _entityStatuses.AddMember("key", entityStatusCode)
-
-	_entityStatuses_value = _entityStatuses.AddMember("value", _count)
-
-	AccountEntityAggregate_accountId = AccountEntityAggregate.AddMember("accountId", _eventArn)
-
-	AccountEntityAggregate_count = AccountEntityAggregate.AddMember("count", _count)
-
-	AccountEntityAggregate_statuses = AccountEntityAggregate.AddMember("statuses", _entityStatuses)
-
-	_AccountEntityAggregatesList_member = _AccountEntityAggregatesList.AddMember("member", AccountEntityAggregate)
-
-	_affectedAccountsList_member = _affectedAccountsList.AddMember("member", _accountId)
-
-	_tagSet_key = _tagSet.AddMember("key", _tagKey)
-
-	_tagSet_value = _tagSet.AddMember("value", _tagValue)
-
-	_entityMetadata_key = _entityMetadata.AddMember("key", _entityMetadataKey)
-
-	_entityMetadata_value = _entityMetadata.AddMember("value", _entityMetadataValue)
-
-	AffectedEntity_entityArn = AffectedEntity.AddMember("entityArn", _entityArn)
-
-	AffectedEntity_eventArn = AffectedEntity.AddMember("eventArn", _eventArn)
-
-	AffectedEntity_entityValue = AffectedEntity.AddMember("entityValue", _entityValue)
-
-	AffectedEntity_entityUrl = AffectedEntity.AddMember("entityUrl", _entityUrl)
-
-	AffectedEntity_awsAccountId = AffectedEntity.AddMember("awsAccountId", _accountId)
-
-	AffectedEntity_lastUpdatedTime = AffectedEntity.AddMember("lastUpdatedTime", _timestamp)
-
-	AffectedEntity_statusCode = AffectedEntity.AddMember("statusCode", entityStatusCode)
-
-	AffectedEntity_tags = AffectedEntity.AddMember("tags", _tagSet)
-
-	AffectedEntity_entityMetadata = AffectedEntity.AddMember("entityMetadata", _entityMetadata)
-
-	_availabilityZones_member = _availabilityZones.AddMember("member", _availabilityZone)
-
-	_awsAccountIdsList_member = _awsAccountIdsList.AddMember("member", _accountId)
-
-	ConcurrentModificationException_message = ConcurrentModificationException.AddMember("message", _string)
-
-	DateTimeRange_from = DateTimeRange.AddMember("from", _timestamp)
-
-	DateTimeRange_to = DateTimeRange.AddMember("to", _timestamp)
-
-	_dateTimeRangeList_member = _dateTimeRangeList.AddMember("member", DateTimeRange)
-
-	OrganizationAffectedEntitiesErrorItem_awsAccountId = OrganizationAffectedEntitiesErrorItem.AddMember("awsAccountId", _accountId)
-
-	OrganizationAffectedEntitiesErrorItem_eventArn = OrganizationAffectedEntitiesErrorItem.AddMember("eventArn", _eventArn)
-
-	OrganizationAffectedEntitiesErrorItem_errorName = OrganizationAffectedEntitiesErrorItem.AddMember("errorName", _string)
-
-	OrganizationAffectedEntitiesErrorItem_errorMessage = OrganizationAffectedEntitiesErrorItem.AddMember("errorMessage", _string)
-
-	_DescribeAffectedEntitiesForOrganizationFailedSet_member = _DescribeAffectedEntitiesForOrganizationFailedSet.AddMember("member", OrganizationAffectedEntitiesErrorItem)
-
-	EventDetailsErrorItem_eventArn = EventDetailsErrorItem.AddMember("eventArn", _eventArn)
-
-	EventDetailsErrorItem_errorName = EventDetailsErrorItem.AddMember("errorName", _string)
-
-	EventDetailsErrorItem_errorMessage = EventDetailsErrorItem.AddMember("errorMessage", _string)
-
-	_DescribeEventDetailsFailedSet_member = _DescribeEventDetailsFailedSet.AddMember("member", EventDetailsErrorItem)
-
-	OrganizationEventDetailsErrorItem_awsAccountId = OrganizationEventDetailsErrorItem.AddMember("awsAccountId", _accountId)
-
-	OrganizationEventDetailsErrorItem_eventArn = OrganizationEventDetailsErrorItem.AddMember("eventArn", _eventArn)
-
-	OrganizationEventDetailsErrorItem_errorName = OrganizationEventDetailsErrorItem.AddMember("errorName", _string)
-
-	OrganizationEventDetailsErrorItem_errorMessage = OrganizationEventDetailsErrorItem.AddMember("errorMessage", _string)
-
-	_DescribeEventDetailsForOrganizationFailedSet_member = _DescribeEventDetailsForOrganizationFailedSet.AddMember("member", OrganizationEventDetailsErrorItem)
-
-	eventTypeCategory_ISSUE = eventTypeCategory.AddMember("ISSUE", smithyprelude.Unit)
-
-	eventTypeCategory_ACCOUNT_NOTIFICATION = eventTypeCategory.AddMember("ACCOUNT_NOTIFICATION", smithyprelude.Unit)
-
-	eventTypeCategory_SCHEDULED_CHANGE = eventTypeCategory.AddMember("SCHEDULED_CHANGE", smithyprelude.Unit)
-
-	eventTypeCategory_INVESTIGATION = eventTypeCategory.AddMember("INVESTIGATION", smithyprelude.Unit)
-
-	eventStatusCode_OPEN = eventStatusCode.AddMember("OPEN", smithyprelude.Unit)
-
-	eventStatusCode_CLOSED = eventStatusCode.AddMember("CLOSED", smithyprelude.Unit)
-
-	eventStatusCode_UPCOMING = eventStatusCode.AddMember("UPCOMING", smithyprelude.Unit)
-
-	eventScopeCode_PUBLIC = eventScopeCode.AddMember("PUBLIC", smithyprelude.Unit)
-
-	eventScopeCode_ACCOUNT_SPECIFIC = eventScopeCode.AddMember("ACCOUNT_SPECIFIC", smithyprelude.Unit)
-
-	eventScopeCode_NONE = eventScopeCode.AddMember("NONE", smithyprelude.Unit)
-
-	EventActionability_ACTION_REQUIRED = EventActionability.AddMember("ACTION_REQUIRED", smithyprelude.Unit)
-
-	EventActionability_ACTION_MAY_BE_REQUIRED = EventActionability.AddMember("ACTION_MAY_BE_REQUIRED", smithyprelude.Unit)
-
-	EventActionability_INFORMATIONAL = EventActionability.AddMember("INFORMATIONAL", smithyprelude.Unit)
-
-	EventPersona_OPERATIONS = EventPersona.AddMember("OPERATIONS", smithyprelude.Unit)
-
-	EventPersona_SECURITY = EventPersona.AddMember("SECURITY", smithyprelude.Unit)
-
-	EventPersona_BILLING = EventPersona.AddMember("BILLING", smithyprelude.Unit)
-
-	_EventPersonaList_member = _EventPersonaList.AddMember("member", EventPersona)
-
-	Event_arn = Event.AddMember("arn", _eventArn)
-
-	Event_service = Event.AddMember("service", _service)
-
-	Event_eventTypeCode = Event.AddMember("eventTypeCode", _eventTypeCode)
-
-	Event_eventTypeCategory = Event.AddMember("eventTypeCategory", eventTypeCategory)
-
-	Event_region = Event.AddMember("region", _region)
-
-	Event_availabilityZone = Event.AddMember("availabilityZone", _availabilityZone)
-
-	Event_startTime = Event.AddMember("startTime", _timestamp)
-
-	Event_endTime = Event.AddMember("endTime", _timestamp)
-
-	Event_lastUpdatedTime = Event.AddMember("lastUpdatedTime", _timestamp)
-
-	Event_statusCode = Event.AddMember("statusCode", eventStatusCode)
-
-	Event_eventScopeCode = Event.AddMember("eventScopeCode", eventScopeCode)
-
-	Event_actionability = Event.AddMember("actionability", EventActionability)
-
-	Event_personas = Event.AddMember("personas", _EventPersonaList)
-
-	EventDescription_latestDescription = EventDescription.AddMember("latestDescription", _EventDescription2)
-
-	_eventMetadata_key = _eventMetadata.AddMember("key", _metadataKey)
-
-	_eventMetadata_value = _eventMetadata.AddMember("value", _metadataValue)
-
-	OrganizationEventDetails_awsAccountId = OrganizationEventDetails.AddMember("awsAccountId", _accountId)
-
-	OrganizationEventDetails_event = OrganizationEventDetails.AddMember("event", Event)
-
-	OrganizationEventDetails_eventDescription = OrganizationEventDetails.AddMember("eventDescription", EventDescription)
-
-	OrganizationEventDetails_eventMetadata = OrganizationEventDetails.AddMember("eventMetadata", _eventMetadata)
-
-	_DescribeEventDetailsForOrganizationSuccessfulSet_member = _DescribeEventDetailsForOrganizationSuccessfulSet.AddMember("member", OrganizationEventDetails)
-
-	EventDetails_event = EventDetails.AddMember("event", Event)
-
-	EventDetails_eventDescription = EventDetails.AddMember("eventDescription", EventDescription)
-
-	EventDetails_eventMetadata = EventDetails.AddMember("eventMetadata", _eventMetadata)
-
-	_DescribeEventDetailsSuccessfulSet_member = _DescribeEventDetailsSuccessfulSet.AddMember("member", EventDetails)
-
-	_entityStatusCodeList_member = _entityStatusCodeList.AddMember("member", entityStatusCode)
-
-	EntityAccountFilter_eventArn = EntityAccountFilter.AddMember("eventArn", _eventArn)
-
-	EntityAccountFilter_awsAccountId = EntityAccountFilter.AddMember("awsAccountId", _accountId)
-
-	EntityAccountFilter_statusCodes = EntityAccountFilter.AddMember("statusCodes", _entityStatusCodeList)
-
-	EntityAggregate_eventArn = EntityAggregate.AddMember("eventArn", _eventArn)
-
-	EntityAggregate_count = EntityAggregate.AddMember("count", _count)
-
-	EntityAggregate_statuses = EntityAggregate.AddMember("statuses", _entityStatuses)
-
-	_EntityAggregateList_member = _EntityAggregateList.AddMember("member", EntityAggregate)
-
-	_entityArnList_member = _entityArnList.AddMember("member", _entityArn)
-
-	_eventArnList_member = _eventArnList.AddMember("member", _eventArn)
-
-	_entityValueList_member = _entityValueList.AddMember("member", _entityValue)
-
-	_tagFilter_member = _tagFilter.AddMember("member", _tagSet)
-
-	EntityFilter_eventArns = EntityFilter.AddMember("eventArns", _eventArnList)
-
-	EntityFilter_entityArns = EntityFilter.AddMember("entityArns", _entityArnList)
-
-	EntityFilter_entityValues = EntityFilter.AddMember("entityValues", _entityValueList)
-
-	EntityFilter_lastUpdatedTimes = EntityFilter.AddMember("lastUpdatedTimes", _dateTimeRangeList)
-
-	EntityFilter_tags = EntityFilter.AddMember("tags", _tagFilter)
-
-	EntityFilter_statusCodes = EntityFilter.AddMember("statusCodes", _entityStatusCodeList)
-
-	_EntityList_member = _EntityList.AddMember("member", AffectedEntity)
-
-	EventAccountFilter_eventArn = EventAccountFilter.AddMember("eventArn", _eventArn)
-
-	EventAccountFilter_awsAccountId = EventAccountFilter.AddMember("awsAccountId", _accountId)
-
-	_EventActionabilityList_member = _EventActionabilityList.AddMember("member", EventActionability)
-
-	EventAggregate_aggregateValue = EventAggregate.AddMember("aggregateValue", _aggregateValue)
-
-	EventAggregate_count = EventAggregate.AddMember("count", _count)
-
-	eventAggregateField_EventTypeCategory = eventAggregateField.AddMember("EventTypeCategory", smithyprelude.Unit)
-
-	_EventAggregateList_member = _EventAggregateList.AddMember("member", EventAggregate)
-
-	_EventArnsList_member = _EventArnsList.AddMember("member", _eventArn)
-
-	_eventTypeList2_member = _eventTypeList2.AddMember("member", _EventType2)
-
-	_serviceList_member = _serviceList.AddMember("member", _service)
-
-	_regionList_member = _regionList.AddMember("member", _region)
-
-	_eventTypeCategoryList2_member = _eventTypeCategoryList2.AddMember("member", eventTypeCategory)
-
-	_eventStatusCodeList_member = _eventStatusCodeList.AddMember("member", eventStatusCode)
-
-	EventFilter_actionabilities = EventFilter.AddMember("actionabilities", _EventActionabilityList)
-
-	EventFilter_eventArns = EventFilter.AddMember("eventArns", _eventArnList)
-
-	EventFilter_eventTypeCodes = EventFilter.AddMember("eventTypeCodes", _eventTypeList2)
-
-	EventFilter_services = EventFilter.AddMember("services", _serviceList)
-
-	EventFilter_regions = EventFilter.AddMember("regions", _regionList)
-
-	EventFilter_availabilityZones = EventFilter.AddMember("availabilityZones", _availabilityZones)
-
-	EventFilter_startTimes = EventFilter.AddMember("startTimes", _dateTimeRangeList)
-
-	EventFilter_endTimes = EventFilter.AddMember("endTimes", _dateTimeRangeList)
-
-	EventFilter_lastUpdatedTimes = EventFilter.AddMember("lastUpdatedTimes", _dateTimeRangeList)
-
-	EventFilter_entityArns = EventFilter.AddMember("entityArns", _entityArnList)
-
-	EventFilter_entityValues = EventFilter.AddMember("entityValues", _entityValueList)
-
-	EventFilter_eventTypeCategories = EventFilter.AddMember("eventTypeCategories", _eventTypeCategoryList2)
-
-	EventFilter_tags = EventFilter.AddMember("tags", _tagFilter)
-
-	EventFilter_eventStatusCodes = EventFilter.AddMember("eventStatusCodes", _eventStatusCodeList)
-
-	EventFilter_personas = EventFilter.AddMember("personas", _EventPersonaList)
-
-	_EventList_member = _EventList.AddMember("member", Event)
-
-	EventTypeActionability_ACTION_REQUIRED = EventTypeActionability.AddMember("ACTION_REQUIRED", smithyprelude.Unit)
-
-	EventTypeActionability_ACTION_MAY_BE_REQUIRED = EventTypeActionability.AddMember("ACTION_MAY_BE_REQUIRED", smithyprelude.Unit)
-
-	EventTypeActionability_INFORMATIONAL = EventTypeActionability.AddMember("INFORMATIONAL", smithyprelude.Unit)
-
-	EventTypePersona_OPERATIONS = EventTypePersona.AddMember("OPERATIONS", smithyprelude.Unit)
-
-	EventTypePersona_SECURITY = EventTypePersona.AddMember("SECURITY", smithyprelude.Unit)
-
-	EventTypePersona_BILLING = EventTypePersona.AddMember("BILLING", smithyprelude.Unit)
-
-	_EventTypePersonaList_member = _EventTypePersonaList.AddMember("member", EventTypePersona)
-
-	EventType_service = EventType.AddMember("service", _service)
-
-	EventType_code = EventType.AddMember("code", _eventTypeCode)
-
-	EventType_category = EventType.AddMember("category", eventTypeCategory)
-
-	EventType_actionability = EventType.AddMember("actionability", EventTypeActionability)
-
-	EventType_personas = EventType.AddMember("personas", _EventTypePersonaList)
-
-	_EventTypeActionabilityList_member = _EventTypeActionabilityList.AddMember("member", EventTypeActionability)
-
-	_EventTypeCategoryList_member = _EventTypeCategoryList.AddMember("member", eventTypeCategory)
-
-	_EventTypeCodeList_member = _EventTypeCodeList.AddMember("member", _eventTypeCode)
-
-	EventTypeFilter_eventTypeCodes = EventTypeFilter.AddMember("eventTypeCodes", _EventTypeCodeList)
-
-	EventTypeFilter_services = EventTypeFilter.AddMember("services", _serviceList)
-
-	EventTypeFilter_eventTypeCategories = EventTypeFilter.AddMember("eventTypeCategories", _EventTypeCategoryList)
-
-	EventTypeFilter_actionabilities = EventTypeFilter.AddMember("actionabilities", _EventTypeActionabilityList)
-
-	EventTypeFilter_personas = EventTypeFilter.AddMember("personas", _EventTypePersonaList)
-
-	_EventTypeList_member = _EventTypeList.AddMember("member", EventType)
-
-	_ImpactRiskList_member = _ImpactRiskList.AddMember("member", _string)
-
-	InvalidPaginationToken_message = InvalidPaginationToken.AddMember("message", _string)
-
-	LifecycleEvent_lifecycleEventType = LifecycleEvent.AddMember("lifecycleEventType", _string)
-
-	LifecycleEvent_date = LifecycleEvent.AddMember("date", _timestamp)
-
-	LifecycleEvent_regions = LifecycleEvent.AddMember("regions", _regionList)
-
-	LifecycleEvent_impactRisks = LifecycleEvent.AddMember("impactRisks", _ImpactRiskList)
-
-	LifecycleEvent_description = LifecycleEvent.AddMember("description", _string)
-
-	_LifecycleEventList_member = _LifecycleEventList.AddMember("member", LifecycleEvent)
-
-	_OrganizationAccountIdsList_member = _OrganizationAccountIdsList.AddMember("member", _accountId)
-
-	_OrganizationEntityAccountFiltersList_member = _OrganizationEntityAccountFiltersList.AddMember("member", EntityAccountFilter)
-
-	OrganizationEntityAggregate_eventArn = OrganizationEntityAggregate.AddMember("eventArn", _eventArn)
-
-	OrganizationEntityAggregate_count = OrganizationEntityAggregate.AddMember("count", _count)
-
-	OrganizationEntityAggregate_statuses = OrganizationEntityAggregate.AddMember("statuses", _entityStatuses)
-
-	OrganizationEntityAggregate_accounts = OrganizationEntityAggregate.AddMember("accounts", _AccountEntityAggregatesList)
-
-	_OrganizationEntityAggregatesList_member = _OrganizationEntityAggregatesList.AddMember("member", OrganizationEntityAggregate)
-
-	_OrganizationEntityFiltersList_member = _OrganizationEntityFiltersList.AddMember("member", EventAccountFilter)
-
-	OrganizationEvent_arn = OrganizationEvent.AddMember("arn", _eventArn)
-
-	OrganizationEvent_service = OrganizationEvent.AddMember("service", _service)
-
-	OrganizationEvent_eventTypeCode = OrganizationEvent.AddMember("eventTypeCode", _eventTypeCode)
-
-	OrganizationEvent_eventTypeCategory = OrganizationEvent.AddMember("eventTypeCategory", eventTypeCategory)
-
-	OrganizationEvent_eventScopeCode = OrganizationEvent.AddMember("eventScopeCode", eventScopeCode)
-
-	OrganizationEvent_region = OrganizationEvent.AddMember("region", _region)
-
-	OrganizationEvent_startTime = OrganizationEvent.AddMember("startTime", _timestamp)
-
-	OrganizationEvent_endTime = OrganizationEvent.AddMember("endTime", _timestamp)
-
-	OrganizationEvent_lastUpdatedTime = OrganizationEvent.AddMember("lastUpdatedTime", _timestamp)
-
-	OrganizationEvent_statusCode = OrganizationEvent.AddMember("statusCode", eventStatusCode)
-
-	OrganizationEvent_actionability = OrganizationEvent.AddMember("actionability", EventActionability)
-
-	OrganizationEvent_personas = OrganizationEvent.AddMember("personas", _EventPersonaList)
-
-	_OrganizationEventArnsList_member = _OrganizationEventArnsList.AddMember("member", _eventArn)
-
-	_OrganizationEventDetailFiltersList_member = _OrganizationEventDetailFiltersList.AddMember("member", EventAccountFilter)
-
-	OrganizationEventFilter_actionabilities = OrganizationEventFilter.AddMember("actionabilities", _EventActionabilityList)
-
-	OrganizationEventFilter_eventTypeCodes = OrganizationEventFilter.AddMember("eventTypeCodes", _eventTypeList2)
-
-	OrganizationEventFilter_awsAccountIds = OrganizationEventFilter.AddMember("awsAccountIds", _awsAccountIdsList)
-
-	OrganizationEventFilter_services = OrganizationEventFilter.AddMember("services", _serviceList)
-
-	OrganizationEventFilter_regions = OrganizationEventFilter.AddMember("regions", _regionList)
-
-	OrganizationEventFilter_startTime = OrganizationEventFilter.AddMember("startTime", DateTimeRange)
-
-	OrganizationEventFilter_endTime = OrganizationEventFilter.AddMember("endTime", DateTimeRange)
-
-	OrganizationEventFilter_lastUpdatedTime = OrganizationEventFilter.AddMember("lastUpdatedTime", DateTimeRange)
-
-	OrganizationEventFilter_entityArns = OrganizationEventFilter.AddMember("entityArns", _entityArnList)
-
-	OrganizationEventFilter_entityValues = OrganizationEventFilter.AddMember("entityValues", _entityValueList)
-
-	OrganizationEventFilter_eventTypeCategories = OrganizationEventFilter.AddMember("eventTypeCategories", _eventTypeCategoryList2)
-
-	OrganizationEventFilter_eventStatusCodes = OrganizationEventFilter.AddMember("eventStatusCodes", _eventStatusCodeList)
-
-	OrganizationEventFilter_personas = OrganizationEventFilter.AddMember("personas", _EventPersonaList)
-
-	_OrganizationEventList_member = _OrganizationEventList.AddMember("member", OrganizationEvent)
-
-	ServiceLifecycle_service = ServiceLifecycle.AddMember("service", _service)
-
-	ServiceLifecycle_version = ServiceLifecycle.AddMember("version", _string)
-
-	ServiceLifecycle_title = ServiceLifecycle.AddMember("title", _string)
-
-	ServiceLifecycle_recommendedVersion = ServiceLifecycle.AddMember("recommendedVersion", _string)
-
-	ServiceLifecycle_lifecycleEvents = ServiceLifecycle.AddMember("lifecycleEvents", _LifecycleEventList)
-
-	ServiceLifecycleFilter_service = ServiceLifecycleFilter.AddMember("service", _service)
-
-	_ServiceLifecycleList_member = _ServiceLifecycleList.AddMember("member", ServiceLifecycle)
-
-	UnsupportedLocale_message = UnsupportedLocale.AddMember("message", _string)
-
-	DescribeAffectedAccountsForOrganizationRequest_eventArn = DescribeAffectedAccountsForOrganizationRequest.AddMember("eventArn", _eventArn)
-
-	DescribeAffectedAccountsForOrganizationRequest_nextToken = DescribeAffectedAccountsForOrganizationRequest.AddMember("nextToken", _nextToken)
-
-	DescribeAffectedAccountsForOrganizationRequest_maxResults = DescribeAffectedAccountsForOrganizationRequest.AddMember("maxResults", _maxResults)
-
-	DescribeAffectedAccountsForOrganizationResponse_affectedAccounts = DescribeAffectedAccountsForOrganizationResponse.AddMember("affectedAccounts", _affectedAccountsList)
-
-	DescribeAffectedAccountsForOrganizationResponse_eventScopeCode = DescribeAffectedAccountsForOrganizationResponse.AddMember("eventScopeCode", eventScopeCode)
-
-	DescribeAffectedAccountsForOrganizationResponse_nextToken = DescribeAffectedAccountsForOrganizationResponse.AddMember("nextToken", _nextToken)
-
-	DescribeAffectedEntitiesForOrganizationRequest_organizationEntityFilters = DescribeAffectedEntitiesForOrganizationRequest.AddMember("organizationEntityFilters", _OrganizationEntityFiltersList)
-
-	DescribeAffectedEntitiesForOrganizationRequest_locale = DescribeAffectedEntitiesForOrganizationRequest.AddMember("locale", _locale)
-
-	DescribeAffectedEntitiesForOrganizationRequest_nextToken = DescribeAffectedEntitiesForOrganizationRequest.AddMember("nextToken", _nextToken)
-
-	DescribeAffectedEntitiesForOrganizationRequest_maxResults = DescribeAffectedEntitiesForOrganizationRequest.AddMember("maxResults", _maxResultsLowerRange)
-
-	DescribeAffectedEntitiesForOrganizationRequest_organizationEntityAccountFilters = DescribeAffectedEntitiesForOrganizationRequest.AddMember("organizationEntityAccountFilters", _OrganizationEntityAccountFiltersList)
-
-	DescribeAffectedEntitiesForOrganizationResponse_entities = DescribeAffectedEntitiesForOrganizationResponse.AddMember("entities", _EntityList)
-
-	DescribeAffectedEntitiesForOrganizationResponse_failedSet = DescribeAffectedEntitiesForOrganizationResponse.AddMember("failedSet", _DescribeAffectedEntitiesForOrganizationFailedSet)
-
-	DescribeAffectedEntitiesForOrganizationResponse_nextToken = DescribeAffectedEntitiesForOrganizationResponse.AddMember("nextToken", _nextToken)
-
-	DescribeAffectedEntitiesRequest_filter = DescribeAffectedEntitiesRequest.AddMember("filter", EntityFilter)
-
-	DescribeAffectedEntitiesRequest_locale = DescribeAffectedEntitiesRequest.AddMember("locale", _locale)
-
-	DescribeAffectedEntitiesRequest_nextToken = DescribeAffectedEntitiesRequest.AddMember("nextToken", _nextToken)
-
-	DescribeAffectedEntitiesRequest_maxResults = DescribeAffectedEntitiesRequest.AddMember("maxResults", _maxResultsLowerRange)
-
-	DescribeAffectedEntitiesResponse_entities = DescribeAffectedEntitiesResponse.AddMember("entities", _EntityList)
-
-	DescribeAffectedEntitiesResponse_nextToken = DescribeAffectedEntitiesResponse.AddMember("nextToken", _nextToken)
-
-	DescribeEntityAggregatesForOrganizationRequest_eventArns = DescribeEntityAggregatesForOrganizationRequest.AddMember("eventArns", _OrganizationEventArnsList)
-
-	DescribeEntityAggregatesForOrganizationRequest_awsAccountIds = DescribeEntityAggregatesForOrganizationRequest.AddMember("awsAccountIds", _OrganizationAccountIdsList)
-
-	DescribeEntityAggregatesForOrganizationResponse_organizationEntityAggregates = DescribeEntityAggregatesForOrganizationResponse.AddMember("organizationEntityAggregates", _OrganizationEntityAggregatesList)
-
-	DescribeEntityAggregatesRequest_eventArns = DescribeEntityAggregatesRequest.AddMember("eventArns", _EventArnsList)
-
-	DescribeEntityAggregatesResponse_entityAggregates = DescribeEntityAggregatesResponse.AddMember("entityAggregates", _EntityAggregateList)
-
-	DescribeEventAggregatesRequest_filter = DescribeEventAggregatesRequest.AddMember("filter", EventFilter)
-
-	DescribeEventAggregatesRequest_aggregateField = DescribeEventAggregatesRequest.AddMember("aggregateField", eventAggregateField)
-
-	DescribeEventAggregatesRequest_maxResults = DescribeEventAggregatesRequest.AddMember("maxResults", _maxResults)
-
-	DescribeEventAggregatesRequest_nextToken = DescribeEventAggregatesRequest.AddMember("nextToken", _nextToken)
-
-	DescribeEventAggregatesResponse_eventAggregates = DescribeEventAggregatesResponse.AddMember("eventAggregates", _EventAggregateList)
-
-	DescribeEventAggregatesResponse_nextToken = DescribeEventAggregatesResponse.AddMember("nextToken", _nextToken)
-
-	DescribeEventDetailsForOrganizationRequest_organizationEventDetailFilters = DescribeEventDetailsForOrganizationRequest.AddMember("organizationEventDetailFilters", _OrganizationEventDetailFiltersList)
-
-	DescribeEventDetailsForOrganizationRequest_locale = DescribeEventDetailsForOrganizationRequest.AddMember("locale", _locale)
-
-	DescribeEventDetailsForOrganizationResponse_successfulSet = DescribeEventDetailsForOrganizationResponse.AddMember("successfulSet", _DescribeEventDetailsForOrganizationSuccessfulSet)
-
-	DescribeEventDetailsForOrganizationResponse_failedSet = DescribeEventDetailsForOrganizationResponse.AddMember("failedSet", _DescribeEventDetailsForOrganizationFailedSet)
-
-	DescribeEventDetailsRequest_eventArns = DescribeEventDetailsRequest.AddMember("eventArns", _eventArnList)
-
-	DescribeEventDetailsRequest_locale = DescribeEventDetailsRequest.AddMember("locale", _locale)
-
-	DescribeEventDetailsResponse_successfulSet = DescribeEventDetailsResponse.AddMember("successfulSet", _DescribeEventDetailsSuccessfulSet)
-
-	DescribeEventDetailsResponse_failedSet = DescribeEventDetailsResponse.AddMember("failedSet", _DescribeEventDetailsFailedSet)
-
-	DescribeEventsForOrganizationRequest_filter = DescribeEventsForOrganizationRequest.AddMember("filter", OrganizationEventFilter)
-
-	DescribeEventsForOrganizationRequest_nextToken = DescribeEventsForOrganizationRequest.AddMember("nextToken", _nextToken)
-
-	DescribeEventsForOrganizationRequest_maxResults = DescribeEventsForOrganizationRequest.AddMember("maxResults", _maxResultsLowerRange)
-
-	DescribeEventsForOrganizationRequest_locale = DescribeEventsForOrganizationRequest.AddMember("locale", _locale)
-
-	DescribeEventsForOrganizationResponse_events = DescribeEventsForOrganizationResponse.AddMember("events", _OrganizationEventList)
-
-	DescribeEventsForOrganizationResponse_nextToken = DescribeEventsForOrganizationResponse.AddMember("nextToken", _nextToken)
-
-	DescribeEventsRequest_filter = DescribeEventsRequest.AddMember("filter", EventFilter)
-
-	DescribeEventsRequest_nextToken = DescribeEventsRequest.AddMember("nextToken", _nextToken)
-
-	DescribeEventsRequest_maxResults = DescribeEventsRequest.AddMember("maxResults", _maxResultsLowerRange)
-
-	DescribeEventsRequest_locale = DescribeEventsRequest.AddMember("locale", _locale)
-
-	DescribeEventsResponse_events = DescribeEventsResponse.AddMember("events", _EventList)
-
-	DescribeEventsResponse_nextToken = DescribeEventsResponse.AddMember("nextToken", _nextToken)
-
-	DescribeEventTypesRequest_filter = DescribeEventTypesRequest.AddMember("filter", EventTypeFilter)
-
-	DescribeEventTypesRequest_locale = DescribeEventTypesRequest.AddMember("locale", _locale)
-
-	DescribeEventTypesRequest_nextToken = DescribeEventTypesRequest.AddMember("nextToken", _nextToken)
-
-	DescribeEventTypesRequest_maxResults = DescribeEventTypesRequest.AddMember("maxResults", _maxResults)
-
-	DescribeEventTypesResponse_eventTypes = DescribeEventTypesResponse.AddMember("eventTypes", _EventTypeList)
-
-	DescribeEventTypesResponse_nextToken = DescribeEventTypesResponse.AddMember("nextToken", _nextToken)
-
-	DescribeHealthServiceStatusForOrganizationResponse_healthServiceAccessStatusForOrganization = DescribeHealthServiceStatusForOrganizationResponse.AddMember("healthServiceAccessStatusForOrganization", _healthServiceAccessStatusForOrganization)
-
-	DescribeServiceLifecycleRequest_filter = DescribeServiceLifecycleRequest.AddMember("filter", ServiceLifecycleFilter)
-
-	DescribeServiceLifecycleRequest_nextToken = DescribeServiceLifecycleRequest.AddMember("nextToken", _nextToken)
-
-	DescribeServiceLifecycleRequest_maxResults = DescribeServiceLifecycleRequest.AddMember("maxResults", _LifecycleMaxResults)
-
-	DescribeServiceLifecycleResponse_serviceLifecycles = DescribeServiceLifecycleResponse.AddMember("serviceLifecycles", _ServiceLifecycleList)
-
-	DescribeServiceLifecycleResponse_nextToken = DescribeServiceLifecycleResponse.AddMember("nextToken", _nextToken)
-
-}
+var (
+	iDescribeAffectedAccountsForOrganization            = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "DescribeAffectedAccountsForOrganization"}
+	iDescribeAffectedEntities                           = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "DescribeAffectedEntities"}
+	iDescribeAffectedEntitiesForOrganization            = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "DescribeAffectedEntitiesForOrganization"}
+	iDescribeEntityAggregates                           = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "DescribeEntityAggregates"}
+	iDescribeEntityAggregatesForOrganization            = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "DescribeEntityAggregatesForOrganization"}
+	iDescribeEventAggregates                            = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "DescribeEventAggregates"}
+	iDescribeEventDetails                               = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "DescribeEventDetails"}
+	iDescribeEventDetailsForOrganization                = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "DescribeEventDetailsForOrganization"}
+	iDescribeEvents                                     = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "DescribeEvents"}
+	iDescribeEventsForOrganization                      = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "DescribeEventsForOrganization"}
+	iDescribeEventTypes                                 = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "DescribeEventTypes"}
+	iDescribeHealthServiceStatusForOrganization         = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "DescribeHealthServiceStatusForOrganization"}
+	iDescribeServiceLifecycle                           = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "DescribeServiceLifecycle"}
+	iDisableHealthServiceAccessForOrganization          = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "DisableHealthServiceAccessForOrganization"}
+	iEnableHealthServiceAccessForOrganization           = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "EnableHealthServiceAccessForOrganization"}
+	i_AWSHealth_20160804                                = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "AWSHealth_20160804"}
+	iAccountEntityAggregate                             = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "AccountEntityAggregate"}
+	i_AccountEntityAggregatesList                       = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "AccountEntityAggregatesList"}
+	i_accountId                                         = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "accountId"}
+	i_affectedAccountsList                              = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "affectedAccountsList"}
+	iAffectedEntity                                     = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "AffectedEntity"}
+	i_aggregateValue                                    = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "aggregateValue"}
+	i_availabilityZone                                  = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "availabilityZone"}
+	i_availabilityZones                                 = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "availabilityZones"}
+	i_awsAccountIdsList                                 = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "awsAccountIdsList"}
+	iConcurrentModificationException                    = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "ConcurrentModificationException"}
+	i_count                                             = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "count"}
+	iDateTimeRange                                      = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "DateTimeRange"}
+	i_dateTimeRangeList                                 = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "dateTimeRangeList"}
+	i_DescribeAffectedEntitiesForOrganizationFailedSet  = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "DescribeAffectedEntitiesForOrganizationFailedSet"}
+	i_DescribeEventDetailsFailedSet                     = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "DescribeEventDetailsFailedSet"}
+	i_DescribeEventDetailsForOrganizationFailedSet      = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "DescribeEventDetailsForOrganizationFailedSet"}
+	i_DescribeEventDetailsForOrganizationSuccessfulSet  = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "DescribeEventDetailsForOrganizationSuccessfulSet"}
+	i_DescribeEventDetailsSuccessfulSet                 = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "DescribeEventDetailsSuccessfulSet"}
+	iEntityAccountFilter                                = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "EntityAccountFilter"}
+	iEntityAggregate                                    = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "EntityAggregate"}
+	i_EntityAggregateList                               = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "EntityAggregateList"}
+	i_entityArn                                         = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "entityArn"}
+	i_entityArnList                                     = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "entityArnList"}
+	iEntityFilter                                       = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "EntityFilter"}
+	i_EntityList                                        = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "EntityList"}
+	i_entityMetadata                                    = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "entityMetadata"}
+	i_entityMetadataKey                                 = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "entityMetadataKey"}
+	i_entityMetadataValue                               = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "entityMetadataValue"}
+	ientityStatusCode                                   = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "entityStatusCode"}
+	i_entityStatusCodeList                              = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "entityStatusCodeList"}
+	i_entityStatuses                                    = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "entityStatuses"}
+	i_entityUrl                                         = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "entityUrl"}
+	i_entityValue                                       = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "entityValue"}
+	i_entityValueList                                   = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "entityValueList"}
+	iEvent                                              = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "Event"}
+	iEventAccountFilter                                 = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "EventAccountFilter"}
+	iEventActionability                                 = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "EventActionability"}
+	i_EventActionabilityList                            = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "EventActionabilityList"}
+	iEventAggregate                                     = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "EventAggregate"}
+	ieventAggregateField                                = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "eventAggregateField"}
+	i_EventAggregateList                                = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "EventAggregateList"}
+	i_eventArn                                          = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "eventArn"}
+	i_eventArnList                                      = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "eventArnList"}
+	i_EventArnsList                                     = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "EventArnsList"}
+	iEventDescription                                   = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "EventDescription"}
+	i_EventDescription2                                 = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "EventDescription2"}
+	iEventDetails                                       = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "EventDetails"}
+	iEventDetailsErrorItem                              = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "EventDetailsErrorItem"}
+	iEventFilter                                        = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "EventFilter"}
+	i_EventList                                         = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "EventList"}
+	i_eventMetadata                                     = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "eventMetadata"}
+	iEventPersona                                       = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "EventPersona"}
+	i_EventPersonaList                                  = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "EventPersonaList"}
+	ieventScopeCode                                     = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "eventScopeCode"}
+	ieventStatusCode                                    = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "eventStatusCode"}
+	i_eventStatusCodeList                               = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "eventStatusCodeList"}
+	iEventType                                          = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "EventType"}
+	i_EventType2                                        = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "EventType2"}
+	iEventTypeActionability                             = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "EventTypeActionability"}
+	i_EventTypeActionabilityList                        = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "EventTypeActionabilityList"}
+	ieventTypeCategory                                  = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "eventTypeCategory"}
+	i_EventTypeCategoryList                             = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "EventTypeCategoryList"}
+	i_eventTypeCategoryList2                            = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "eventTypeCategoryList2"}
+	i_eventTypeCode                                     = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "eventTypeCode"}
+	i_EventTypeCodeList                                 = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "EventTypeCodeList"}
+	iEventTypeFilter                                    = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "EventTypeFilter"}
+	i_EventTypeList                                     = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "EventTypeList"}
+	i_eventTypeList2                                    = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "eventTypeList2"}
+	iEventTypePersona                                   = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "EventTypePersona"}
+	i_EventTypePersonaList                              = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "EventTypePersonaList"}
+	i_healthServiceAccessStatusForOrganization          = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "healthServiceAccessStatusForOrganization"}
+	i_ImpactRiskList                                    = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "ImpactRiskList"}
+	iInvalidPaginationToken                             = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "InvalidPaginationToken"}
+	iLifecycleEvent                                     = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "LifecycleEvent"}
+	i_LifecycleEventList                                = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "LifecycleEventList"}
+	i_LifecycleMaxResults                               = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "LifecycleMaxResults"}
+	i_locale                                            = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "locale"}
+	i_maxResults                                        = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "maxResults"}
+	i_maxResultsLowerRange                              = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "maxResultsLowerRange"}
+	i_metadataKey                                       = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "metadataKey"}
+	i_metadataValue                                     = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "metadataValue"}
+	i_nextToken                                         = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "nextToken"}
+	i_OrganizationAccountIdsList                        = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "OrganizationAccountIdsList"}
+	iOrganizationAffectedEntitiesErrorItem              = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "OrganizationAffectedEntitiesErrorItem"}
+	i_OrganizationEntityAccountFiltersList              = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "OrganizationEntityAccountFiltersList"}
+	iOrganizationEntityAggregate                        = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "OrganizationEntityAggregate"}
+	i_OrganizationEntityAggregatesList                  = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "OrganizationEntityAggregatesList"}
+	i_OrganizationEntityFiltersList                     = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "OrganizationEntityFiltersList"}
+	iOrganizationEvent                                  = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "OrganizationEvent"}
+	i_OrganizationEventArnsList                         = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "OrganizationEventArnsList"}
+	i_OrganizationEventDetailFiltersList                = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "OrganizationEventDetailFiltersList"}
+	iOrganizationEventDetails                           = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "OrganizationEventDetails"}
+	iOrganizationEventDetailsErrorItem                  = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "OrganizationEventDetailsErrorItem"}
+	iOrganizationEventFilter                            = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "OrganizationEventFilter"}
+	i_OrganizationEventList                             = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "OrganizationEventList"}
+	i_region                                            = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "region"}
+	i_regionList                                        = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "regionList"}
+	i_service                                           = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "service"}
+	iServiceLifecycle                                   = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "ServiceLifecycle"}
+	iServiceLifecycleFilter                             = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "ServiceLifecycleFilter"}
+	i_ServiceLifecycleList                              = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "ServiceLifecycleList"}
+	i_serviceList                                       = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "serviceList"}
+	i_string                                            = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "string"}
+	i_tagFilter                                         = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "tagFilter"}
+	i_tagKey                                            = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "tagKey"}
+	i_tagSet                                            = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "tagSet"}
+	i_tagValue                                          = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "tagValue"}
+	i_timestamp                                         = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "timestamp"}
+	iUnsupportedLocale                                  = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "UnsupportedLocale"}
+	iDescribeAffectedAccountsForOrganizationRequest     = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "DescribeAffectedAccountsForOrganizationRequest"}
+	iDescribeAffectedAccountsForOrganizationResponse    = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "DescribeAffectedAccountsForOrganizationResponse"}
+	iDescribeAffectedEntitiesForOrganizationRequest     = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "DescribeAffectedEntitiesForOrganizationRequest"}
+	iDescribeAffectedEntitiesForOrganizationResponse    = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "DescribeAffectedEntitiesForOrganizationResponse"}
+	iDescribeAffectedEntitiesRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "DescribeAffectedEntitiesRequest"}
+	iDescribeAffectedEntitiesResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "DescribeAffectedEntitiesResponse"}
+	iDescribeEntityAggregatesForOrganizationRequest     = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "DescribeEntityAggregatesForOrganizationRequest"}
+	iDescribeEntityAggregatesForOrganizationResponse    = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "DescribeEntityAggregatesForOrganizationResponse"}
+	iDescribeEntityAggregatesRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "DescribeEntityAggregatesRequest"}
+	iDescribeEntityAggregatesResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "DescribeEntityAggregatesResponse"}
+	iDescribeEventAggregatesRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "DescribeEventAggregatesRequest"}
+	iDescribeEventAggregatesResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "DescribeEventAggregatesResponse"}
+	iDescribeEventDetailsForOrganizationRequest         = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "DescribeEventDetailsForOrganizationRequest"}
+	iDescribeEventDetailsForOrganizationResponse        = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "DescribeEventDetailsForOrganizationResponse"}
+	iDescribeEventDetailsRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "DescribeEventDetailsRequest"}
+	iDescribeEventDetailsResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "DescribeEventDetailsResponse"}
+	iDescribeEventsForOrganizationRequest               = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "DescribeEventsForOrganizationRequest"}
+	iDescribeEventsForOrganizationResponse              = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "DescribeEventsForOrganizationResponse"}
+	iDescribeEventsRequest                              = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "DescribeEventsRequest"}
+	iDescribeEventsResponse                             = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "DescribeEventsResponse"}
+	iDescribeEventTypesRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "DescribeEventTypesRequest"}
+	iDescribeEventTypesResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "DescribeEventTypesResponse"}
+	iDescribeHealthServiceStatusForOrganizationResponse = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "DescribeHealthServiceStatusForOrganizationResponse"}
+	iDescribeServiceLifecycleRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "DescribeServiceLifecycleRequest"}
+	iDescribeServiceLifecycleResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.health", Name: "DescribeServiceLifecycleResponse"}
+	pUnit                                               = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+
+var mAccountEntityAggregate = smithy.SchemaMembers{List: []*smithy.Schema{&sAccountEntityAggregate_accountId, &sAccountEntityAggregate_count, &sAccountEntityAggregate_statuses}}
+var m_AccountEntityAggregatesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AccountEntityAggregatesList_member}}
+var m_affectedAccountsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_affectedAccountsList_member}}
+var mAffectedEntity = smithy.SchemaMembers{List: []*smithy.Schema{&sAffectedEntity_entityArn, &sAffectedEntity_eventArn, &sAffectedEntity_entityValue, &sAffectedEntity_entityUrl, &sAffectedEntity_awsAccountId, &sAffectedEntity_lastUpdatedTime, &sAffectedEntity_statusCode, &sAffectedEntity_tags, &sAffectedEntity_entityMetadata}, Seed: 2, Slots: []uint16{
+	0, 6, 0, 0, 0, 0, 0, 5, 0, 0, 1, 7, 3, 0, 0, 9, 4, 0, 0, 0, 0, 2, 8, 0,
+	0, 0, 0, 0, 0, 0, 0, 0,
+}}
+var m_availabilityZones = smithy.SchemaMembers{List: []*smithy.Schema{&s_availabilityZones_member}}
+var m_awsAccountIdsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_awsAccountIdsList_member}}
+var mConcurrentModificationException = smithy.SchemaMembers{List: []*smithy.Schema{&sConcurrentModificationException_message}}
+var mDateTimeRange = smithy.SchemaMembers{List: []*smithy.Schema{&sDateTimeRange_from, &sDateTimeRange_to}}
+var m_dateTimeRangeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_dateTimeRangeList_member}}
+var m_DescribeAffectedEntitiesForOrganizationFailedSet = smithy.SchemaMembers{List: []*smithy.Schema{&s_DescribeAffectedEntitiesForOrganizationFailedSet_member}}
+var m_DescribeEventDetailsFailedSet = smithy.SchemaMembers{List: []*smithy.Schema{&s_DescribeEventDetailsFailedSet_member}}
+var m_DescribeEventDetailsForOrganizationFailedSet = smithy.SchemaMembers{List: []*smithy.Schema{&s_DescribeEventDetailsForOrganizationFailedSet_member}}
+var m_DescribeEventDetailsForOrganizationSuccessfulSet = smithy.SchemaMembers{List: []*smithy.Schema{&s_DescribeEventDetailsForOrganizationSuccessfulSet_member}}
+var m_DescribeEventDetailsSuccessfulSet = smithy.SchemaMembers{List: []*smithy.Schema{&s_DescribeEventDetailsSuccessfulSet_member}}
+var mEntityAccountFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sEntityAccountFilter_eventArn, &sEntityAccountFilter_awsAccountId, &sEntityAccountFilter_statusCodes}}
+var mEntityAggregate = smithy.SchemaMembers{List: []*smithy.Schema{&sEntityAggregate_eventArn, &sEntityAggregate_count, &sEntityAggregate_statuses}}
+var m_EntityAggregateList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EntityAggregateList_member}}
+var m_entityArnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_entityArnList_member}}
+var mEntityFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sEntityFilter_eventArns, &sEntityFilter_entityArns, &sEntityFilter_entityValues, &sEntityFilter_lastUpdatedTimes, &sEntityFilter_tags, &sEntityFilter_statusCodes}}
+var m_EntityList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EntityList_member}}
+var m_entityMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&s_entityMetadata_key, &s_entityMetadata_value}}
+var mentityStatusCode = smithy.SchemaMembers{List: []*smithy.Schema{&sentityStatusCode_IMPAIRED, &sentityStatusCode_UNIMPAIRED, &sentityStatusCode_UNKNOWN, &sentityStatusCode_PENDING, &sentityStatusCode_RESOLVED}}
+var m_entityStatusCodeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_entityStatusCodeList_member}}
+var m_entityStatuses = smithy.SchemaMembers{List: []*smithy.Schema{&s_entityStatuses_key, &s_entityStatuses_value}}
+var m_entityValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_entityValueList_member}}
+var mEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sEvent_arn, &sEvent_service, &sEvent_eventTypeCode, &sEvent_eventTypeCategory, &sEvent_region, &sEvent_availabilityZone, &sEvent_startTime, &sEvent_endTime, &sEvent_lastUpdatedTime, &sEvent_statusCode, &sEvent_eventScopeCode, &sEvent_actionability, &sEvent_personas}, Seed: 4, Slots: []uint16{
+	0, 0, 0, 2, 0, 0, 0, 1, 7, 8, 4, 0, 0, 13, 0, 0, 0, 0, 6, 0, 0, 3, 5, 9,
+	10, 0, 0, 12, 11, 0, 0, 0,
+}}
+var mEventAccountFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sEventAccountFilter_eventArn, &sEventAccountFilter_awsAccountId}}
+var mEventActionability = smithy.SchemaMembers{List: []*smithy.Schema{&sEventActionability_ACTION_REQUIRED, &sEventActionability_ACTION_MAY_BE_REQUIRED, &sEventActionability_INFORMATIONAL}}
+var m_EventActionabilityList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EventActionabilityList_member}}
+var mEventAggregate = smithy.SchemaMembers{List: []*smithy.Schema{&sEventAggregate_aggregateValue, &sEventAggregate_count}}
+var meventAggregateField = smithy.SchemaMembers{List: []*smithy.Schema{&seventAggregateField_EventTypeCategory}}
+var m_EventAggregateList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EventAggregateList_member}}
+var m_eventArnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_eventArnList_member}}
+var m_EventArnsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EventArnsList_member}}
+var mEventDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sEventDescription_latestDescription}}
+var mEventDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sEventDetails_event, &sEventDetails_eventDescription, &sEventDetails_eventMetadata}}
+var mEventDetailsErrorItem = smithy.SchemaMembers{List: []*smithy.Schema{&sEventDetailsErrorItem_eventArn, &sEventDetailsErrorItem_errorName, &sEventDetailsErrorItem_errorMessage}}
+var mEventFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sEventFilter_actionabilities, &sEventFilter_eventArns, &sEventFilter_eventTypeCodes, &sEventFilter_services, &sEventFilter_regions, &sEventFilter_availabilityZones, &sEventFilter_startTimes, &sEventFilter_endTimes, &sEventFilter_lastUpdatedTimes, &sEventFilter_entityArns, &sEventFilter_entityValues, &sEventFilter_eventTypeCategories, &sEventFilter_tags, &sEventFilter_eventStatusCodes, &sEventFilter_personas}, Seed: 24, Slots: []uint16{
+	0, 10, 2, 0, 0, 0, 13, 0, 0, 0, 0, 0, 11, 6, 3, 0, 4, 0, 15, 14, 0, 7, 0, 0,
+	5, 12, 8, 9, 1, 0, 0, 0,
+}}
+var m_EventList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EventList_member}}
+var m_eventMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&s_eventMetadata_key, &s_eventMetadata_value}}
+var mEventPersona = smithy.SchemaMembers{List: []*smithy.Schema{&sEventPersona_OPERATIONS, &sEventPersona_SECURITY, &sEventPersona_BILLING}}
+var m_EventPersonaList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EventPersonaList_member}}
+var meventScopeCode = smithy.SchemaMembers{List: []*smithy.Schema{&seventScopeCode_PUBLIC, &seventScopeCode_ACCOUNT_SPECIFIC, &seventScopeCode_NONE}}
+var meventStatusCode = smithy.SchemaMembers{List: []*smithy.Schema{&seventStatusCode_OPEN, &seventStatusCode_CLOSED, &seventStatusCode_UPCOMING}}
+var m_eventStatusCodeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_eventStatusCodeList_member}}
+var mEventType = smithy.SchemaMembers{List: []*smithy.Schema{&sEventType_service, &sEventType_code, &sEventType_category, &sEventType_actionability, &sEventType_personas}}
+var mEventTypeActionability = smithy.SchemaMembers{List: []*smithy.Schema{&sEventTypeActionability_ACTION_REQUIRED, &sEventTypeActionability_ACTION_MAY_BE_REQUIRED, &sEventTypeActionability_INFORMATIONAL}}
+var m_EventTypeActionabilityList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EventTypeActionabilityList_member}}
+var meventTypeCategory = smithy.SchemaMembers{List: []*smithy.Schema{&seventTypeCategory_ISSUE, &seventTypeCategory_ACCOUNT_NOTIFICATION, &seventTypeCategory_SCHEDULED_CHANGE, &seventTypeCategory_INVESTIGATION}}
+var m_EventTypeCategoryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EventTypeCategoryList_member}}
+var m_eventTypeCategoryList2 = smithy.SchemaMembers{List: []*smithy.Schema{&s_eventTypeCategoryList2_member}}
+var m_EventTypeCodeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EventTypeCodeList_member}}
+var mEventTypeFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sEventTypeFilter_eventTypeCodes, &sEventTypeFilter_services, &sEventTypeFilter_eventTypeCategories, &sEventTypeFilter_actionabilities, &sEventTypeFilter_personas}}
+var m_EventTypeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EventTypeList_member}}
+var m_eventTypeList2 = smithy.SchemaMembers{List: []*smithy.Schema{&s_eventTypeList2_member}}
+var mEventTypePersona = smithy.SchemaMembers{List: []*smithy.Schema{&sEventTypePersona_OPERATIONS, &sEventTypePersona_SECURITY, &sEventTypePersona_BILLING}}
+var m_EventTypePersonaList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EventTypePersonaList_member}}
+var m_ImpactRiskList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ImpactRiskList_member}}
+var mInvalidPaginationToken = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidPaginationToken_message}}
+var mLifecycleEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sLifecycleEvent_lifecycleEventType, &sLifecycleEvent_date, &sLifecycleEvent_regions, &sLifecycleEvent_impactRisks, &sLifecycleEvent_description}}
+var m_LifecycleEventList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LifecycleEventList_member}}
+var m_OrganizationAccountIdsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OrganizationAccountIdsList_member}}
+var mOrganizationAffectedEntitiesErrorItem = smithy.SchemaMembers{List: []*smithy.Schema{&sOrganizationAffectedEntitiesErrorItem_awsAccountId, &sOrganizationAffectedEntitiesErrorItem_eventArn, &sOrganizationAffectedEntitiesErrorItem_errorName, &sOrganizationAffectedEntitiesErrorItem_errorMessage}}
+var m_OrganizationEntityAccountFiltersList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OrganizationEntityAccountFiltersList_member}}
+var mOrganizationEntityAggregate = smithy.SchemaMembers{List: []*smithy.Schema{&sOrganizationEntityAggregate_eventArn, &sOrganizationEntityAggregate_count, &sOrganizationEntityAggregate_statuses, &sOrganizationEntityAggregate_accounts}}
+var m_OrganizationEntityAggregatesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OrganizationEntityAggregatesList_member}}
+var m_OrganizationEntityFiltersList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OrganizationEntityFiltersList_member}}
+var mOrganizationEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sOrganizationEvent_arn, &sOrganizationEvent_service, &sOrganizationEvent_eventTypeCode, &sOrganizationEvent_eventTypeCategory, &sOrganizationEvent_eventScopeCode, &sOrganizationEvent_region, &sOrganizationEvent_startTime, &sOrganizationEvent_endTime, &sOrganizationEvent_lastUpdatedTime, &sOrganizationEvent_statusCode, &sOrganizationEvent_actionability, &sOrganizationEvent_personas}, Seed: 4, Slots: []uint16{
+	0, 0, 0, 2, 0, 0, 0, 1, 7, 8, 4, 0, 0, 12, 0, 0, 0, 0, 0, 0, 0, 3, 6, 9,
+	10, 0, 0, 11, 5, 0, 0, 0,
+}}
+var m_OrganizationEventArnsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OrganizationEventArnsList_member}}
+var m_OrganizationEventDetailFiltersList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OrganizationEventDetailFiltersList_member}}
+var mOrganizationEventDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sOrganizationEventDetails_awsAccountId, &sOrganizationEventDetails_event, &sOrganizationEventDetails_eventDescription, &sOrganizationEventDetails_eventMetadata}}
+var mOrganizationEventDetailsErrorItem = smithy.SchemaMembers{List: []*smithy.Schema{&sOrganizationEventDetailsErrorItem_awsAccountId, &sOrganizationEventDetailsErrorItem_eventArn, &sOrganizationEventDetailsErrorItem_errorName, &sOrganizationEventDetailsErrorItem_errorMessage}}
+var mOrganizationEventFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sOrganizationEventFilter_actionabilities, &sOrganizationEventFilter_eventTypeCodes, &sOrganizationEventFilter_awsAccountIds, &sOrganizationEventFilter_services, &sOrganizationEventFilter_regions, &sOrganizationEventFilter_startTime, &sOrganizationEventFilter_endTime, &sOrganizationEventFilter_lastUpdatedTime, &sOrganizationEventFilter_entityArns, &sOrganizationEventFilter_entityValues, &sOrganizationEventFilter_eventTypeCategories, &sOrganizationEventFilter_eventStatusCodes, &sOrganizationEventFilter_personas}, Seed: 3, Slots: []uint16{
+	0, 2, 8, 0, 3, 5, 10, 0, 0, 1, 9, 0, 0, 13, 0, 0, 0, 0, 0, 0, 0, 4, 0, 11,
+	0, 0, 6, 0, 0, 12, 0, 7,
+}}
+var m_OrganizationEventList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OrganizationEventList_member}}
+var m_regionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_regionList_member}}
+var mServiceLifecycle = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceLifecycle_service, &sServiceLifecycle_version, &sServiceLifecycle_title, &sServiceLifecycle_recommendedVersion, &sServiceLifecycle_lifecycleEvents}}
+var mServiceLifecycleFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceLifecycleFilter_service}}
+var m_ServiceLifecycleList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ServiceLifecycleList_member}}
+var m_serviceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_serviceList_member}}
+var m_tagFilter = smithy.SchemaMembers{List: []*smithy.Schema{&s_tagFilter_member}}
+var m_tagSet = smithy.SchemaMembers{List: []*smithy.Schema{&s_tagSet_key, &s_tagSet_value}}
+var mUnsupportedLocale = smithy.SchemaMembers{List: []*smithy.Schema{&sUnsupportedLocale_message}}
+var mDescribeAffectedAccountsForOrganizationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAffectedAccountsForOrganizationRequest_eventArn, &sDescribeAffectedAccountsForOrganizationRequest_nextToken, &sDescribeAffectedAccountsForOrganizationRequest_maxResults}}
+var mDescribeAffectedAccountsForOrganizationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAffectedAccountsForOrganizationResponse_affectedAccounts, &sDescribeAffectedAccountsForOrganizationResponse_eventScopeCode, &sDescribeAffectedAccountsForOrganizationResponse_nextToken}}
+var mDescribeAffectedEntitiesForOrganizationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAffectedEntitiesForOrganizationRequest_organizationEntityFilters, &sDescribeAffectedEntitiesForOrganizationRequest_locale, &sDescribeAffectedEntitiesForOrganizationRequest_nextToken, &sDescribeAffectedEntitiesForOrganizationRequest_maxResults, &sDescribeAffectedEntitiesForOrganizationRequest_organizationEntityAccountFilters}}
+var mDescribeAffectedEntitiesForOrganizationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAffectedEntitiesForOrganizationResponse_entities, &sDescribeAffectedEntitiesForOrganizationResponse_failedSet, &sDescribeAffectedEntitiesForOrganizationResponse_nextToken}}
+var mDescribeAffectedEntitiesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAffectedEntitiesRequest_filter, &sDescribeAffectedEntitiesRequest_locale, &sDescribeAffectedEntitiesRequest_nextToken, &sDescribeAffectedEntitiesRequest_maxResults}}
+var mDescribeAffectedEntitiesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAffectedEntitiesResponse_entities, &sDescribeAffectedEntitiesResponse_nextToken}}
+var mDescribeEntityAggregatesForOrganizationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEntityAggregatesForOrganizationRequest_eventArns, &sDescribeEntityAggregatesForOrganizationRequest_awsAccountIds}}
+var mDescribeEntityAggregatesForOrganizationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEntityAggregatesForOrganizationResponse_organizationEntityAggregates}}
+var mDescribeEntityAggregatesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEntityAggregatesRequest_eventArns}}
+var mDescribeEntityAggregatesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEntityAggregatesResponse_entityAggregates}}
+var mDescribeEventAggregatesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEventAggregatesRequest_filter, &sDescribeEventAggregatesRequest_aggregateField, &sDescribeEventAggregatesRequest_maxResults, &sDescribeEventAggregatesRequest_nextToken}}
+var mDescribeEventAggregatesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEventAggregatesResponse_eventAggregates, &sDescribeEventAggregatesResponse_nextToken}}
+var mDescribeEventDetailsForOrganizationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEventDetailsForOrganizationRequest_organizationEventDetailFilters, &sDescribeEventDetailsForOrganizationRequest_locale}}
+var mDescribeEventDetailsForOrganizationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEventDetailsForOrganizationResponse_successfulSet, &sDescribeEventDetailsForOrganizationResponse_failedSet}}
+var mDescribeEventDetailsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEventDetailsRequest_eventArns, &sDescribeEventDetailsRequest_locale}}
+var mDescribeEventDetailsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEventDetailsResponse_successfulSet, &sDescribeEventDetailsResponse_failedSet}}
+var mDescribeEventsForOrganizationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEventsForOrganizationRequest_filter, &sDescribeEventsForOrganizationRequest_nextToken, &sDescribeEventsForOrganizationRequest_maxResults, &sDescribeEventsForOrganizationRequest_locale}}
+var mDescribeEventsForOrganizationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEventsForOrganizationResponse_events, &sDescribeEventsForOrganizationResponse_nextToken}}
+var mDescribeEventsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEventsRequest_filter, &sDescribeEventsRequest_nextToken, &sDescribeEventsRequest_maxResults, &sDescribeEventsRequest_locale}}
+var mDescribeEventsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEventsResponse_events, &sDescribeEventsResponse_nextToken}}
+var mDescribeEventTypesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEventTypesRequest_filter, &sDescribeEventTypesRequest_locale, &sDescribeEventTypesRequest_nextToken, &sDescribeEventTypesRequest_maxResults}}
+var mDescribeEventTypesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEventTypesResponse_eventTypes, &sDescribeEventTypesResponse_nextToken}}
+var mDescribeHealthServiceStatusForOrganizationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeHealthServiceStatusForOrganizationResponse_healthServiceAccessStatusForOrganization}}
+var mDescribeServiceLifecycleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeServiceLifecycleRequest_filter, &sDescribeServiceLifecycleRequest_nextToken, &sDescribeServiceLifecycleRequest_maxResults}}
+var mDescribeServiceLifecycleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeServiceLifecycleResponse_serviceLifecycles, &sDescribeServiceLifecycleResponse_nextToken}}
+
+var sDescribeAffectedAccountsForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAffectedAccountsForOrganization, Type: smithy.ShapeTypeOperation})
+var sDescribeAffectedEntities = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAffectedEntities, Type: smithy.ShapeTypeOperation})
+var sDescribeAffectedEntitiesForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAffectedEntitiesForOrganization, Type: smithy.ShapeTypeOperation})
+var sDescribeEntityAggregates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEntityAggregates, Type: smithy.ShapeTypeOperation})
+var sDescribeEntityAggregatesForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEntityAggregatesForOrganization, Type: smithy.ShapeTypeOperation})
+var sDescribeEventAggregates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventAggregates, Type: smithy.ShapeTypeOperation})
+var sDescribeEventDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventDetails, Type: smithy.ShapeTypeOperation})
+var sDescribeEventDetailsForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventDetailsForOrganization, Type: smithy.ShapeTypeOperation})
+var sDescribeEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEvents, Type: smithy.ShapeTypeOperation})
+var sDescribeEventsForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventsForOrganization, Type: smithy.ShapeTypeOperation})
+var sDescribeEventTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventTypes, Type: smithy.ShapeTypeOperation})
+var sDescribeHealthServiceStatusForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeHealthServiceStatusForOrganization, Type: smithy.ShapeTypeOperation})
+var sDescribeServiceLifecycle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeServiceLifecycle, Type: smithy.ShapeTypeOperation})
+var sDisableHealthServiceAccessForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableHealthServiceAccessForOrganization, Type: smithy.ShapeTypeOperation})
+var sEnableHealthServiceAccessForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableHealthServiceAccessForOrganization, Type: smithy.ShapeTypeOperation})
+var s_AWSHealth_20160804 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSHealth_20160804, Type: smithy.ShapeTypeService})
+var sAccountEntityAggregate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountEntityAggregate, Members: &mAccountEntityAggregate, Type: smithy.ShapeTypeStructure})
+var s_AccountEntityAggregatesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountEntityAggregatesList, Members: &m_AccountEntityAggregatesList, Type: smithy.ShapeTypeList})
+var s_accountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_accountId, Type: smithy.ShapeTypeString})
+var s_affectedAccountsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_affectedAccountsList, Members: &m_affectedAccountsList, Type: smithy.ShapeTypeList})
+var sAffectedEntity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAffectedEntity, Members: &mAffectedEntity, Type: smithy.ShapeTypeStructure})
+var s_aggregateValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_aggregateValue, Type: smithy.ShapeTypeString})
+var s_availabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_availabilityZone, Type: smithy.ShapeTypeString})
+var s_availabilityZones = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_availabilityZones, Members: &m_availabilityZones, Type: smithy.ShapeTypeList})
+var s_awsAccountIdsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_awsAccountIdsList, Members: &m_awsAccountIdsList, Type: smithy.ShapeTypeList})
+var sConcurrentModificationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConcurrentModificationException, Members: &mConcurrentModificationException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var s_count = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_count, Type: smithy.ShapeTypeInteger})
+var sDateTimeRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDateTimeRange, Members: &mDateTimeRange, Type: smithy.ShapeTypeStructure})
+var s_dateTimeRangeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_dateTimeRangeList, Members: &m_dateTimeRangeList, Type: smithy.ShapeTypeList})
+var s_DescribeAffectedEntitiesForOrganizationFailedSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescribeAffectedEntitiesForOrganizationFailedSet, Members: &m_DescribeAffectedEntitiesForOrganizationFailedSet, Type: smithy.ShapeTypeList})
+var s_DescribeEventDetailsFailedSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescribeEventDetailsFailedSet, Members: &m_DescribeEventDetailsFailedSet, Type: smithy.ShapeTypeList})
+var s_DescribeEventDetailsForOrganizationFailedSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescribeEventDetailsForOrganizationFailedSet, Members: &m_DescribeEventDetailsForOrganizationFailedSet, Type: smithy.ShapeTypeList})
+var s_DescribeEventDetailsForOrganizationSuccessfulSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescribeEventDetailsForOrganizationSuccessfulSet, Members: &m_DescribeEventDetailsForOrganizationSuccessfulSet, Type: smithy.ShapeTypeList})
+var s_DescribeEventDetailsSuccessfulSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescribeEventDetailsSuccessfulSet, Members: &m_DescribeEventDetailsSuccessfulSet, Type: smithy.ShapeTypeList})
+var sEntityAccountFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntityAccountFilter, Members: &mEntityAccountFilter, Type: smithy.ShapeTypeStructure})
+var sEntityAggregate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntityAggregate, Members: &mEntityAggregate, Type: smithy.ShapeTypeStructure})
+var s_EntityAggregateList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntityAggregateList, Members: &m_EntityAggregateList, Type: smithy.ShapeTypeList})
+var s_entityArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_entityArn, Type: smithy.ShapeTypeString})
+var s_entityArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_entityArnList, Members: &m_entityArnList, Type: smithy.ShapeTypeList})
+var sEntityFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntityFilter, Members: &mEntityFilter, Type: smithy.ShapeTypeStructure})
+var s_EntityList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntityList, Members: &m_EntityList, Type: smithy.ShapeTypeList})
+var s_entityMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_entityMetadata, Members: &m_entityMetadata, Type: smithy.ShapeTypeMap})
+var s_entityMetadataKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_entityMetadataKey, Type: smithy.ShapeTypeString})
+var s_entityMetadataValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_entityMetadataValue, Type: smithy.ShapeTypeString})
+var sentityStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &ientityStatusCode, Members: &mentityStatusCode, Type: smithy.ShapeTypeEnum})
+var s_entityStatusCodeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_entityStatusCodeList, Members: &m_entityStatusCodeList, Type: smithy.ShapeTypeList})
+var s_entityStatuses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_entityStatuses, Members: &m_entityStatuses, Type: smithy.ShapeTypeMap})
+var s_entityUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_entityUrl, Type: smithy.ShapeTypeString})
+var s_entityValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_entityValue, Type: smithy.ShapeTypeString})
+var s_entityValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_entityValueList, Members: &m_entityValueList, Type: smithy.ShapeTypeList})
+var sEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvent, Members: &mEvent, Type: smithy.ShapeTypeStructure})
+var sEventAccountFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventAccountFilter, Members: &mEventAccountFilter, Type: smithy.ShapeTypeStructure})
+var sEventActionability = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventActionability, Members: &mEventActionability, Type: smithy.ShapeTypeEnum})
+var s_EventActionabilityList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventActionabilityList, Members: &m_EventActionabilityList, Type: smithy.ShapeTypeList})
+var sEventAggregate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventAggregate, Members: &mEventAggregate, Type: smithy.ShapeTypeStructure})
+var seventAggregateField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &ieventAggregateField, Members: &meventAggregateField, Type: smithy.ShapeTypeEnum})
+var s_EventAggregateList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventAggregateList, Members: &m_EventAggregateList, Type: smithy.ShapeTypeList})
+var s_eventArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_eventArn, Type: smithy.ShapeTypeString})
+var s_eventArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_eventArnList, Members: &m_eventArnList, Type: smithy.ShapeTypeList})
+var s_EventArnsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventArnsList, Members: &m_EventArnsList, Type: smithy.ShapeTypeList})
+var sEventDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventDescription, Members: &mEventDescription, Type: smithy.ShapeTypeStructure})
+var s_EventDescription2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventDescription2, Type: smithy.ShapeTypeString})
+var sEventDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventDetails, Members: &mEventDetails, Type: smithy.ShapeTypeStructure})
+var sEventDetailsErrorItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventDetailsErrorItem, Members: &mEventDetailsErrorItem, Type: smithy.ShapeTypeStructure})
+var sEventFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventFilter, Members: &mEventFilter, Type: smithy.ShapeTypeStructure})
+var s_EventList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventList, Members: &m_EventList, Type: smithy.ShapeTypeList})
+var s_eventMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_eventMetadata, Members: &m_eventMetadata, Type: smithy.ShapeTypeMap})
+var sEventPersona = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventPersona, Members: &mEventPersona, Type: smithy.ShapeTypeEnum})
+var s_EventPersonaList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventPersonaList, Members: &m_EventPersonaList, Type: smithy.ShapeTypeList})
+var seventScopeCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &ieventScopeCode, Members: &meventScopeCode, Type: smithy.ShapeTypeEnum})
+var seventStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &ieventStatusCode, Members: &meventStatusCode, Type: smithy.ShapeTypeEnum})
+var s_eventStatusCodeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_eventStatusCodeList, Members: &m_eventStatusCodeList, Type: smithy.ShapeTypeList})
+var sEventType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventType, Members: &mEventType, Type: smithy.ShapeTypeStructure})
+var s_EventType2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventType2, Type: smithy.ShapeTypeString})
+var sEventTypeActionability = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventTypeActionability, Members: &mEventTypeActionability, Type: smithy.ShapeTypeEnum})
+var s_EventTypeActionabilityList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventTypeActionabilityList, Members: &m_EventTypeActionabilityList, Type: smithy.ShapeTypeList})
+var seventTypeCategory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &ieventTypeCategory, Members: &meventTypeCategory, Type: smithy.ShapeTypeEnum})
+var s_EventTypeCategoryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventTypeCategoryList, Members: &m_EventTypeCategoryList, Type: smithy.ShapeTypeList})
+var s_eventTypeCategoryList2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_eventTypeCategoryList2, Members: &m_eventTypeCategoryList2, Type: smithy.ShapeTypeList})
+var s_eventTypeCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_eventTypeCode, Type: smithy.ShapeTypeString})
+var s_EventTypeCodeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventTypeCodeList, Members: &m_EventTypeCodeList, Type: smithy.ShapeTypeList})
+var sEventTypeFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventTypeFilter, Members: &mEventTypeFilter, Type: smithy.ShapeTypeStructure})
+var s_EventTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventTypeList, Members: &m_EventTypeList, Type: smithy.ShapeTypeList})
+var s_eventTypeList2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_eventTypeList2, Members: &m_eventTypeList2, Type: smithy.ShapeTypeList})
+var sEventTypePersona = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventTypePersona, Members: &mEventTypePersona, Type: smithy.ShapeTypeEnum})
+var s_EventTypePersonaList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventTypePersonaList, Members: &m_EventTypePersonaList, Type: smithy.ShapeTypeList})
+var s_healthServiceAccessStatusForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_healthServiceAccessStatusForOrganization, Type: smithy.ShapeTypeString})
+var s_ImpactRiskList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImpactRiskList, Members: &m_ImpactRiskList, Type: smithy.ShapeTypeList})
+var sInvalidPaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidPaginationToken, Members: &mInvalidPaginationToken, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var sLifecycleEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLifecycleEvent, Members: &mLifecycleEvent, Type: smithy.ShapeTypeStructure})
+var s_LifecycleEventList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LifecycleEventList, Members: &m_LifecycleEventList, Type: smithy.ShapeTypeList})
+var s_LifecycleMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LifecycleMaxResults, Type: smithy.ShapeTypeInteger})
+var s_locale = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_locale, Type: smithy.ShapeTypeString})
+var s_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_maxResults, Type: smithy.ShapeTypeInteger})
+var s_maxResultsLowerRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_maxResultsLowerRange, Type: smithy.ShapeTypeInteger})
+var s_metadataKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_metadataKey, Type: smithy.ShapeTypeString})
+var s_metadataValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_metadataValue, Type: smithy.ShapeTypeString})
+var s_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_nextToken, Type: smithy.ShapeTypeString})
+var s_OrganizationAccountIdsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrganizationAccountIdsList, Members: &m_OrganizationAccountIdsList, Type: smithy.ShapeTypeList})
+var sOrganizationAffectedEntitiesErrorItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrganizationAffectedEntitiesErrorItem, Members: &mOrganizationAffectedEntitiesErrorItem, Type: smithy.ShapeTypeStructure})
+var s_OrganizationEntityAccountFiltersList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrganizationEntityAccountFiltersList, Members: &m_OrganizationEntityAccountFiltersList, Type: smithy.ShapeTypeList})
+var sOrganizationEntityAggregate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrganizationEntityAggregate, Members: &mOrganizationEntityAggregate, Type: smithy.ShapeTypeStructure})
+var s_OrganizationEntityAggregatesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrganizationEntityAggregatesList, Members: &m_OrganizationEntityAggregatesList, Type: smithy.ShapeTypeList})
+var s_OrganizationEntityFiltersList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrganizationEntityFiltersList, Members: &m_OrganizationEntityFiltersList, Type: smithy.ShapeTypeList})
+var sOrganizationEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrganizationEvent, Members: &mOrganizationEvent, Type: smithy.ShapeTypeStructure})
+var s_OrganizationEventArnsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrganizationEventArnsList, Members: &m_OrganizationEventArnsList, Type: smithy.ShapeTypeList})
+var s_OrganizationEventDetailFiltersList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrganizationEventDetailFiltersList, Members: &m_OrganizationEventDetailFiltersList, Type: smithy.ShapeTypeList})
+var sOrganizationEventDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrganizationEventDetails, Members: &mOrganizationEventDetails, Type: smithy.ShapeTypeStructure})
+var sOrganizationEventDetailsErrorItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrganizationEventDetailsErrorItem, Members: &mOrganizationEventDetailsErrorItem, Type: smithy.ShapeTypeStructure})
+var sOrganizationEventFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrganizationEventFilter, Members: &mOrganizationEventFilter, Type: smithy.ShapeTypeStructure})
+var s_OrganizationEventList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrganizationEventList, Members: &m_OrganizationEventList, Type: smithy.ShapeTypeList})
+var s_region = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_region, Type: smithy.ShapeTypeString})
+var s_regionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_regionList, Members: &m_regionList, Type: smithy.ShapeTypeList})
+var s_service = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_service, Type: smithy.ShapeTypeString})
+var sServiceLifecycle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceLifecycle, Members: &mServiceLifecycle, Type: smithy.ShapeTypeStructure})
+var sServiceLifecycleFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceLifecycleFilter, Members: &mServiceLifecycleFilter, Type: smithy.ShapeTypeStructure})
+var s_ServiceLifecycleList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceLifecycleList, Members: &m_ServiceLifecycleList, Type: smithy.ShapeTypeList})
+var s_serviceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_serviceList, Members: &m_serviceList, Type: smithy.ShapeTypeList})
+var s_string = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_string, Type: smithy.ShapeTypeString})
+var s_tagFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_tagFilter, Members: &m_tagFilter, Type: smithy.ShapeTypeList})
+var s_tagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_tagKey, Type: smithy.ShapeTypeString})
+var s_tagSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_tagSet, Members: &m_tagSet, Type: smithy.ShapeTypeMap})
+var s_tagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_tagValue, Type: smithy.ShapeTypeString})
+var s_timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp})
+var sUnsupportedLocale = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnsupportedLocale, Members: &mUnsupportedLocale, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var sDescribeAffectedAccountsForOrganizationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAffectedAccountsForOrganizationRequest, Members: &mDescribeAffectedAccountsForOrganizationRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeAffectedAccountsForOrganizationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAffectedAccountsForOrganizationResponse, Members: &mDescribeAffectedAccountsForOrganizationResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeAffectedEntitiesForOrganizationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAffectedEntitiesForOrganizationRequest, Members: &mDescribeAffectedEntitiesForOrganizationRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeAffectedEntitiesForOrganizationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAffectedEntitiesForOrganizationResponse, Members: &mDescribeAffectedEntitiesForOrganizationResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeAffectedEntitiesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAffectedEntitiesRequest, Members: &mDescribeAffectedEntitiesRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeAffectedEntitiesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAffectedEntitiesResponse, Members: &mDescribeAffectedEntitiesResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeEntityAggregatesForOrganizationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEntityAggregatesForOrganizationRequest, Members: &mDescribeEntityAggregatesForOrganizationRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeEntityAggregatesForOrganizationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEntityAggregatesForOrganizationResponse, Members: &mDescribeEntityAggregatesForOrganizationResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeEntityAggregatesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEntityAggregatesRequest, Members: &mDescribeEntityAggregatesRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeEntityAggregatesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEntityAggregatesResponse, Members: &mDescribeEntityAggregatesResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeEventAggregatesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventAggregatesRequest, Members: &mDescribeEventAggregatesRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeEventAggregatesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventAggregatesResponse, Members: &mDescribeEventAggregatesResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeEventDetailsForOrganizationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventDetailsForOrganizationRequest, Members: &mDescribeEventDetailsForOrganizationRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeEventDetailsForOrganizationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventDetailsForOrganizationResponse, Members: &mDescribeEventDetailsForOrganizationResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeEventDetailsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventDetailsRequest, Members: &mDescribeEventDetailsRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeEventDetailsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventDetailsResponse, Members: &mDescribeEventDetailsResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeEventsForOrganizationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventsForOrganizationRequest, Members: &mDescribeEventsForOrganizationRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeEventsForOrganizationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventsForOrganizationResponse, Members: &mDescribeEventsForOrganizationResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeEventsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventsRequest, Members: &mDescribeEventsRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeEventsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventsResponse, Members: &mDescribeEventsResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeEventTypesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventTypesRequest, Members: &mDescribeEventTypesRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeEventTypesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventTypesResponse, Members: &mDescribeEventTypesResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeHealthServiceStatusForOrganizationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeHealthServiceStatusForOrganizationResponse, Members: &mDescribeHealthServiceStatusForOrganizationResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeServiceLifecycleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeServiceLifecycleRequest, Members: &mDescribeServiceLifecycleRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeServiceLifecycleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeServiceLifecycleResponse, Members: &mDescribeServiceLifecycleResponse, Type: smithy.ShapeTypeStructure})
+
+var sAccountEntityAggregate_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_eventArn, Type: smithy.ShapeTypeString})
+var sAccountEntityAggregate_count = smithy.NewStaticSchema(smithy.StaticSchema{Member: "count", ID: &i_count, Type: smithy.ShapeTypeInteger})
+var sAccountEntityAggregate_statuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statuses", ID: &i_entityStatuses, Members: &m_entityStatuses, Type: smithy.ShapeTypeMap})
+var s_AccountEntityAggregatesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAccountEntityAggregate, Members: &mAccountEntityAggregate, Type: smithy.ShapeTypeStructure})
+var s_affectedAccountsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_accountId, Type: smithy.ShapeTypeString})
+var sAffectedEntity_entityArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityArn", ID: &i_entityArn, Type: smithy.ShapeTypeString})
+var sAffectedEntity_eventArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventArn", ID: &i_eventArn, Type: smithy.ShapeTypeString})
+var sAffectedEntity_entityValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityValue", ID: &i_entityValue, Type: smithy.ShapeTypeString})
+var sAffectedEntity_entityUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityUrl", ID: &i_entityUrl, Type: smithy.ShapeTypeString})
+var sAffectedEntity_awsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsAccountId", ID: &i_accountId, Type: smithy.ShapeTypeString})
+var sAffectedEntity_lastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp})
+var sAffectedEntity_statusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusCode", ID: &ientityStatusCode, Members: &mentityStatusCode, Type: smithy.ShapeTypeEnum})
+var sAffectedEntity_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_tagSet, Members: &m_tagSet, Type: smithy.ShapeTypeMap})
+var sAffectedEntity_entityMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityMetadata", ID: &i_entityMetadata, Members: &m_entityMetadata, Type: smithy.ShapeTypeMap})
+var s_availabilityZones_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_availabilityZone, Type: smithy.ShapeTypeString})
+var s_awsAccountIdsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_accountId, Type: smithy.ShapeTypeString})
+var sConcurrentModificationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_string, Type: smithy.ShapeTypeString})
+var sDateTimeRange_from = smithy.NewStaticSchema(smithy.StaticSchema{Member: "from", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDateTimeRange_to = smithy.NewStaticSchema(smithy.StaticSchema{Member: "to", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp})
+var s_dateTimeRangeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDateTimeRange, Members: &mDateTimeRange, Type: smithy.ShapeTypeStructure})
+var s_DescribeAffectedEntitiesForOrganizationFailedSet_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOrganizationAffectedEntitiesErrorItem, Members: &mOrganizationAffectedEntitiesErrorItem, Type: smithy.ShapeTypeStructure})
+var s_DescribeEventDetailsFailedSet_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventDetailsErrorItem, Members: &mEventDetailsErrorItem, Type: smithy.ShapeTypeStructure})
+var s_DescribeEventDetailsForOrganizationFailedSet_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOrganizationEventDetailsErrorItem, Members: &mOrganizationEventDetailsErrorItem, Type: smithy.ShapeTypeStructure})
+var s_DescribeEventDetailsForOrganizationSuccessfulSet_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOrganizationEventDetails, Members: &mOrganizationEventDetails, Type: smithy.ShapeTypeStructure})
+var s_DescribeEventDetailsSuccessfulSet_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventDetails, Members: &mEventDetails, Type: smithy.ShapeTypeStructure})
+var sEntityAccountFilter_eventArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventArn", ID: &i_eventArn, Type: smithy.ShapeTypeString})
+var sEntityAccountFilter_awsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsAccountId", ID: &i_accountId, Type: smithy.ShapeTypeString})
+var sEntityAccountFilter_statusCodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusCodes", ID: &i_entityStatusCodeList, Members: &m_entityStatusCodeList, Type: smithy.ShapeTypeList})
+var sEntityAggregate_eventArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventArn", ID: &i_eventArn, Type: smithy.ShapeTypeString})
+var sEntityAggregate_count = smithy.NewStaticSchema(smithy.StaticSchema{Member: "count", ID: &i_count, Type: smithy.ShapeTypeInteger})
+var sEntityAggregate_statuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statuses", ID: &i_entityStatuses, Members: &m_entityStatuses, Type: smithy.ShapeTypeMap})
+var s_EntityAggregateList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEntityAggregate, Members: &mEntityAggregate, Type: smithy.ShapeTypeStructure})
+var s_entityArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_entityArn, Type: smithy.ShapeTypeString})
+var sEntityFilter_eventArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventArns", ID: &i_eventArnList, Members: &m_eventArnList, Type: smithy.ShapeTypeList})
+var sEntityFilter_entityArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityArns", ID: &i_entityArnList, Members: &m_entityArnList, Type: smithy.ShapeTypeList})
+var sEntityFilter_entityValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityValues", ID: &i_entityValueList, Members: &m_entityValueList, Type: smithy.ShapeTypeList})
+var sEntityFilter_lastUpdatedTimes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTimes", ID: &i_dateTimeRangeList, Members: &m_dateTimeRangeList, Type: smithy.ShapeTypeList})
+var sEntityFilter_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_tagFilter, Members: &m_tagFilter, Type: smithy.ShapeTypeList})
+var sEntityFilter_statusCodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusCodes", ID: &i_entityStatusCodeList, Members: &m_entityStatusCodeList, Type: smithy.ShapeTypeList})
+var s_EntityList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAffectedEntity, Members: &mAffectedEntity, Type: smithy.ShapeTypeStructure})
+var s_entityMetadata_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_entityMetadataKey, Type: smithy.ShapeTypeString})
+var s_entityMetadata_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_entityMetadataValue, Type: smithy.ShapeTypeString})
+var sentityStatusCode_IMPAIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMPAIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sentityStatusCode_UNIMPAIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNIMPAIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sentityStatusCode_UNKNOWN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sentityStatusCode_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sentityStatusCode_RESOLVED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOLVED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_entityStatusCodeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &ientityStatusCode, Members: &mentityStatusCode, Type: smithy.ShapeTypeEnum})
+var s_entityStatuses_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &ientityStatusCode, Members: &mentityStatusCode, Type: smithy.ShapeTypeEnum})
+var s_entityStatuses_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_count, Type: smithy.ShapeTypeInteger})
+var s_entityValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_entityValue, Type: smithy.ShapeTypeString})
+var sEvent_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_eventArn, Type: smithy.ShapeTypeString})
+var sEvent_service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "service", ID: &i_service, Type: smithy.ShapeTypeString})
+var sEvent_eventTypeCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeCode", ID: &i_eventTypeCode, Type: smithy.ShapeTypeString})
+var sEvent_eventTypeCategory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeCategory", ID: &ieventTypeCategory, Members: &meventTypeCategory, Type: smithy.ShapeTypeEnum})
+var sEvent_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &i_region, Type: smithy.ShapeTypeString})
+var sEvent_availabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "availabilityZone", ID: &i_availabilityZone, Type: smithy.ShapeTypeString})
+var sEvent_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp})
+var sEvent_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp})
+var sEvent_lastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp})
+var sEvent_statusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusCode", ID: &ieventStatusCode, Members: &meventStatusCode, Type: smithy.ShapeTypeEnum})
+var sEvent_eventScopeCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventScopeCode", ID: &ieventScopeCode, Members: &meventScopeCode, Type: smithy.ShapeTypeEnum})
+var sEvent_actionability = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionability", ID: &iEventActionability, Members: &mEventActionability, Type: smithy.ShapeTypeEnum})
+var sEvent_personas = smithy.NewStaticSchema(smithy.StaticSchema{Member: "personas", ID: &i_EventPersonaList, Members: &m_EventPersonaList, Type: smithy.ShapeTypeList})
+var sEventAccountFilter_eventArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventArn", ID: &i_eventArn, Type: smithy.ShapeTypeString})
+var sEventAccountFilter_awsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsAccountId", ID: &i_accountId, Type: smithy.ShapeTypeString})
+var sEventActionability_ACTION_REQUIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTION_REQUIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventActionability_ACTION_MAY_BE_REQUIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTION_MAY_BE_REQUIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventActionability_INFORMATIONAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INFORMATIONAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_EventActionabilityList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventActionability, Members: &mEventActionability, Type: smithy.ShapeTypeEnum})
+var sEventAggregate_aggregateValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aggregateValue", ID: &i_aggregateValue, Type: smithy.ShapeTypeString})
+var sEventAggregate_count = smithy.NewStaticSchema(smithy.StaticSchema{Member: "count", ID: &i_count, Type: smithy.ShapeTypeInteger})
+var seventAggregateField_EventTypeCategory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventTypeCategory", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_EventAggregateList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventAggregate, Members: &mEventAggregate, Type: smithy.ShapeTypeStructure})
+var s_eventArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_eventArn, Type: smithy.ShapeTypeString})
+var s_EventArnsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_eventArn, Type: smithy.ShapeTypeString})
+var sEventDescription_latestDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestDescription", ID: &i_EventDescription2, Type: smithy.ShapeTypeString})
+var sEventDetails_event = smithy.NewStaticSchema(smithy.StaticSchema{Member: "event", ID: &iEvent, Members: &mEvent, Type: smithy.ShapeTypeStructure})
+var sEventDetails_eventDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventDescription", ID: &iEventDescription, Members: &mEventDescription, Type: smithy.ShapeTypeStructure})
+var sEventDetails_eventMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventMetadata", ID: &i_eventMetadata, Members: &m_eventMetadata, Type: smithy.ShapeTypeMap})
+var sEventDetailsErrorItem_eventArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventArn", ID: &i_eventArn, Type: smithy.ShapeTypeString})
+var sEventDetailsErrorItem_errorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorName", ID: &i_string, Type: smithy.ShapeTypeString})
+var sEventDetailsErrorItem_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &i_string, Type: smithy.ShapeTypeString})
+var sEventFilter_actionabilities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionabilities", ID: &i_EventActionabilityList, Members: &m_EventActionabilityList, Type: smithy.ShapeTypeList})
+var sEventFilter_eventArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventArns", ID: &i_eventArnList, Members: &m_eventArnList, Type: smithy.ShapeTypeList})
+var sEventFilter_eventTypeCodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeCodes", ID: &i_eventTypeList2, Members: &m_eventTypeList2, Type: smithy.ShapeTypeList})
+var sEventFilter_services = smithy.NewStaticSchema(smithy.StaticSchema{Member: "services", ID: &i_serviceList, Members: &m_serviceList, Type: smithy.ShapeTypeList})
+var sEventFilter_regions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regions", ID: &i_regionList, Members: &m_regionList, Type: smithy.ShapeTypeList})
+var sEventFilter_availabilityZones = smithy.NewStaticSchema(smithy.StaticSchema{Member: "availabilityZones", ID: &i_availabilityZones, Members: &m_availabilityZones, Type: smithy.ShapeTypeList})
+var sEventFilter_startTimes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTimes", ID: &i_dateTimeRangeList, Members: &m_dateTimeRangeList, Type: smithy.ShapeTypeList})
+var sEventFilter_endTimes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTimes", ID: &i_dateTimeRangeList, Members: &m_dateTimeRangeList, Type: smithy.ShapeTypeList})
+var sEventFilter_lastUpdatedTimes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTimes", ID: &i_dateTimeRangeList, Members: &m_dateTimeRangeList, Type: smithy.ShapeTypeList})
+var sEventFilter_entityArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityArns", ID: &i_entityArnList, Members: &m_entityArnList, Type: smithy.ShapeTypeList})
+var sEventFilter_entityValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityValues", ID: &i_entityValueList, Members: &m_entityValueList, Type: smithy.ShapeTypeList})
+var sEventFilter_eventTypeCategories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeCategories", ID: &i_eventTypeCategoryList2, Members: &m_eventTypeCategoryList2, Type: smithy.ShapeTypeList})
+var sEventFilter_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_tagFilter, Members: &m_tagFilter, Type: smithy.ShapeTypeList})
+var sEventFilter_eventStatusCodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventStatusCodes", ID: &i_eventStatusCodeList, Members: &m_eventStatusCodeList, Type: smithy.ShapeTypeList})
+var sEventFilter_personas = smithy.NewStaticSchema(smithy.StaticSchema{Member: "personas", ID: &i_EventPersonaList, Members: &m_EventPersonaList, Type: smithy.ShapeTypeList})
+var s_EventList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEvent, Members: &mEvent, Type: smithy.ShapeTypeStructure})
+var s_eventMetadata_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_metadataKey, Type: smithy.ShapeTypeString})
+var s_eventMetadata_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_metadataValue, Type: smithy.ShapeTypeString})
+var sEventPersona_OPERATIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPERATIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventPersona_SECURITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECURITY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventPersona_BILLING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BILLING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_EventPersonaList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventPersona, Members: &mEventPersona, Type: smithy.ShapeTypeEnum})
+var seventScopeCode_PUBLIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PUBLIC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var seventScopeCode_ACCOUNT_SPECIFIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCOUNT_SPECIFIC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var seventScopeCode_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var seventStatusCode_OPEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPEN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var seventStatusCode_CLOSED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLOSED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var seventStatusCode_UPCOMING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPCOMING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_eventStatusCodeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &ieventStatusCode, Members: &meventStatusCode, Type: smithy.ShapeTypeEnum})
+var sEventType_service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "service", ID: &i_service, Type: smithy.ShapeTypeString})
+var sEventType_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_eventTypeCode, Type: smithy.ShapeTypeString})
+var sEventType_category = smithy.NewStaticSchema(smithy.StaticSchema{Member: "category", ID: &ieventTypeCategory, Members: &meventTypeCategory, Type: smithy.ShapeTypeEnum})
+var sEventType_actionability = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionability", ID: &iEventTypeActionability, Members: &mEventTypeActionability, Type: smithy.ShapeTypeEnum})
+var sEventType_personas = smithy.NewStaticSchema(smithy.StaticSchema{Member: "personas", ID: &i_EventTypePersonaList, Members: &m_EventTypePersonaList, Type: smithy.ShapeTypeList})
+var sEventTypeActionability_ACTION_REQUIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTION_REQUIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventTypeActionability_ACTION_MAY_BE_REQUIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTION_MAY_BE_REQUIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventTypeActionability_INFORMATIONAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INFORMATIONAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_EventTypeActionabilityList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventTypeActionability, Members: &mEventTypeActionability, Type: smithy.ShapeTypeEnum})
+var seventTypeCategory_ISSUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ISSUE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var seventTypeCategory_ACCOUNT_NOTIFICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCOUNT_NOTIFICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var seventTypeCategory_SCHEDULED_CHANGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SCHEDULED_CHANGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var seventTypeCategory_INVESTIGATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVESTIGATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_EventTypeCategoryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &ieventTypeCategory, Members: &meventTypeCategory, Type: smithy.ShapeTypeEnum})
+var s_eventTypeCategoryList2_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &ieventTypeCategory, Members: &meventTypeCategory, Type: smithy.ShapeTypeEnum})
+var s_EventTypeCodeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_eventTypeCode, Type: smithy.ShapeTypeString})
+var sEventTypeFilter_eventTypeCodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeCodes", ID: &i_EventTypeCodeList, Members: &m_EventTypeCodeList, Type: smithy.ShapeTypeList})
+var sEventTypeFilter_services = smithy.NewStaticSchema(smithy.StaticSchema{Member: "services", ID: &i_serviceList, Members: &m_serviceList, Type: smithy.ShapeTypeList})
+var sEventTypeFilter_eventTypeCategories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeCategories", ID: &i_EventTypeCategoryList, Members: &m_EventTypeCategoryList, Type: smithy.ShapeTypeList})
+var sEventTypeFilter_actionabilities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionabilities", ID: &i_EventTypeActionabilityList, Members: &m_EventTypeActionabilityList, Type: smithy.ShapeTypeList})
+var sEventTypeFilter_personas = smithy.NewStaticSchema(smithy.StaticSchema{Member: "personas", ID: &i_EventTypePersonaList, Members: &m_EventTypePersonaList, Type: smithy.ShapeTypeList})
+var s_EventTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventType, Members: &mEventType, Type: smithy.ShapeTypeStructure})
+var s_eventTypeList2_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_EventType2, Type: smithy.ShapeTypeString})
+var sEventTypePersona_OPERATIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPERATIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventTypePersona_SECURITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECURITY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventTypePersona_BILLING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BILLING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_EventTypePersonaList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventTypePersona, Members: &mEventTypePersona, Type: smithy.ShapeTypeEnum})
+var s_ImpactRiskList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_string, Type: smithy.ShapeTypeString})
+var sInvalidPaginationToken_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_string, Type: smithy.ShapeTypeString})
+var sLifecycleEvent_lifecycleEventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lifecycleEventType", ID: &i_string, Type: smithy.ShapeTypeString})
+var sLifecycleEvent_date = smithy.NewStaticSchema(smithy.StaticSchema{Member: "date", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp})
+var sLifecycleEvent_regions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regions", ID: &i_regionList, Members: &m_regionList, Type: smithy.ShapeTypeList})
+var sLifecycleEvent_impactRisks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "impactRisks", ID: &i_ImpactRiskList, Members: &m_ImpactRiskList, Type: smithy.ShapeTypeList})
+var sLifecycleEvent_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_string, Type: smithy.ShapeTypeString})
+var s_LifecycleEventList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLifecycleEvent, Members: &mLifecycleEvent, Type: smithy.ShapeTypeStructure})
+var s_OrganizationAccountIdsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_accountId, Type: smithy.ShapeTypeString})
+var sOrganizationAffectedEntitiesErrorItem_awsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsAccountId", ID: &i_accountId, Type: smithy.ShapeTypeString})
+var sOrganizationAffectedEntitiesErrorItem_eventArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventArn", ID: &i_eventArn, Type: smithy.ShapeTypeString})
+var sOrganizationAffectedEntitiesErrorItem_errorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorName", ID: &i_string, Type: smithy.ShapeTypeString})
+var sOrganizationAffectedEntitiesErrorItem_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &i_string, Type: smithy.ShapeTypeString})
+var s_OrganizationEntityAccountFiltersList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEntityAccountFilter, Members: &mEntityAccountFilter, Type: smithy.ShapeTypeStructure})
+var sOrganizationEntityAggregate_eventArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventArn", ID: &i_eventArn, Type: smithy.ShapeTypeString})
+var sOrganizationEntityAggregate_count = smithy.NewStaticSchema(smithy.StaticSchema{Member: "count", ID: &i_count, Type: smithy.ShapeTypeInteger})
+var sOrganizationEntityAggregate_statuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statuses", ID: &i_entityStatuses, Members: &m_entityStatuses, Type: smithy.ShapeTypeMap})
+var sOrganizationEntityAggregate_accounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accounts", ID: &i_AccountEntityAggregatesList, Members: &m_AccountEntityAggregatesList, Type: smithy.ShapeTypeList})
+var s_OrganizationEntityAggregatesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOrganizationEntityAggregate, Members: &mOrganizationEntityAggregate, Type: smithy.ShapeTypeStructure})
+var s_OrganizationEntityFiltersList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventAccountFilter, Members: &mEventAccountFilter, Type: smithy.ShapeTypeStructure})
+var sOrganizationEvent_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_eventArn, Type: smithy.ShapeTypeString})
+var sOrganizationEvent_service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "service", ID: &i_service, Type: smithy.ShapeTypeString})
+var sOrganizationEvent_eventTypeCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeCode", ID: &i_eventTypeCode, Type: smithy.ShapeTypeString})
+var sOrganizationEvent_eventTypeCategory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeCategory", ID: &ieventTypeCategory, Members: &meventTypeCategory, Type: smithy.ShapeTypeEnum})
+var sOrganizationEvent_eventScopeCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventScopeCode", ID: &ieventScopeCode, Members: &meventScopeCode, Type: smithy.ShapeTypeEnum})
+var sOrganizationEvent_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &i_region, Type: smithy.ShapeTypeString})
+var sOrganizationEvent_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp})
+var sOrganizationEvent_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp})
+var sOrganizationEvent_lastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTime", ID: &i_timestamp, Type: smithy.ShapeTypeTimestamp})
+var sOrganizationEvent_statusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusCode", ID: &ieventStatusCode, Members: &meventStatusCode, Type: smithy.ShapeTypeEnum})
+var sOrganizationEvent_actionability = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionability", ID: &iEventActionability, Members: &mEventActionability, Type: smithy.ShapeTypeEnum})
+var sOrganizationEvent_personas = smithy.NewStaticSchema(smithy.StaticSchema{Member: "personas", ID: &i_EventPersonaList, Members: &m_EventPersonaList, Type: smithy.ShapeTypeList})
+var s_OrganizationEventArnsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_eventArn, Type: smithy.ShapeTypeString})
+var s_OrganizationEventDetailFiltersList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventAccountFilter, Members: &mEventAccountFilter, Type: smithy.ShapeTypeStructure})
+var sOrganizationEventDetails_awsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsAccountId", ID: &i_accountId, Type: smithy.ShapeTypeString})
+var sOrganizationEventDetails_event = smithy.NewStaticSchema(smithy.StaticSchema{Member: "event", ID: &iEvent, Members: &mEvent, Type: smithy.ShapeTypeStructure})
+var sOrganizationEventDetails_eventDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventDescription", ID: &iEventDescription, Members: &mEventDescription, Type: smithy.ShapeTypeStructure})
+var sOrganizationEventDetails_eventMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventMetadata", ID: &i_eventMetadata, Members: &m_eventMetadata, Type: smithy.ShapeTypeMap})
+var sOrganizationEventDetailsErrorItem_awsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsAccountId", ID: &i_accountId, Type: smithy.ShapeTypeString})
+var sOrganizationEventDetailsErrorItem_eventArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventArn", ID: &i_eventArn, Type: smithy.ShapeTypeString})
+var sOrganizationEventDetailsErrorItem_errorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorName", ID: &i_string, Type: smithy.ShapeTypeString})
+var sOrganizationEventDetailsErrorItem_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &i_string, Type: smithy.ShapeTypeString})
+var sOrganizationEventFilter_actionabilities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionabilities", ID: &i_EventActionabilityList, Members: &m_EventActionabilityList, Type: smithy.ShapeTypeList})
+var sOrganizationEventFilter_eventTypeCodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeCodes", ID: &i_eventTypeList2, Members: &m_eventTypeList2, Type: smithy.ShapeTypeList})
+var sOrganizationEventFilter_awsAccountIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsAccountIds", ID: &i_awsAccountIdsList, Members: &m_awsAccountIdsList, Type: smithy.ShapeTypeList})
+var sOrganizationEventFilter_services = smithy.NewStaticSchema(smithy.StaticSchema{Member: "services", ID: &i_serviceList, Members: &m_serviceList, Type: smithy.ShapeTypeList})
+var sOrganizationEventFilter_regions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regions", ID: &i_regionList, Members: &m_regionList, Type: smithy.ShapeTypeList})
+var sOrganizationEventFilter_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &iDateTimeRange, Members: &mDateTimeRange, Type: smithy.ShapeTypeStructure})
+var sOrganizationEventFilter_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &iDateTimeRange, Members: &mDateTimeRange, Type: smithy.ShapeTypeStructure})
+var sOrganizationEventFilter_lastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTime", ID: &iDateTimeRange, Members: &mDateTimeRange, Type: smithy.ShapeTypeStructure})
+var sOrganizationEventFilter_entityArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityArns", ID: &i_entityArnList, Members: &m_entityArnList, Type: smithy.ShapeTypeList})
+var sOrganizationEventFilter_entityValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityValues", ID: &i_entityValueList, Members: &m_entityValueList, Type: smithy.ShapeTypeList})
+var sOrganizationEventFilter_eventTypeCategories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypeCategories", ID: &i_eventTypeCategoryList2, Members: &m_eventTypeCategoryList2, Type: smithy.ShapeTypeList})
+var sOrganizationEventFilter_eventStatusCodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventStatusCodes", ID: &i_eventStatusCodeList, Members: &m_eventStatusCodeList, Type: smithy.ShapeTypeList})
+var sOrganizationEventFilter_personas = smithy.NewStaticSchema(smithy.StaticSchema{Member: "personas", ID: &i_EventPersonaList, Members: &m_EventPersonaList, Type: smithy.ShapeTypeList})
+var s_OrganizationEventList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOrganizationEvent, Members: &mOrganizationEvent, Type: smithy.ShapeTypeStructure})
+var s_regionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_region, Type: smithy.ShapeTypeString})
+var sServiceLifecycle_service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "service", ID: &i_service, Type: smithy.ShapeTypeString})
+var sServiceLifecycle_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_string, Type: smithy.ShapeTypeString})
+var sServiceLifecycle_title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "title", ID: &i_string, Type: smithy.ShapeTypeString})
+var sServiceLifecycle_recommendedVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendedVersion", ID: &i_string, Type: smithy.ShapeTypeString})
+var sServiceLifecycle_lifecycleEvents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lifecycleEvents", ID: &i_LifecycleEventList, Members: &m_LifecycleEventList, Type: smithy.ShapeTypeList})
+var sServiceLifecycleFilter_service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "service", ID: &i_service, Type: smithy.ShapeTypeString})
+var s_ServiceLifecycleList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServiceLifecycle, Members: &mServiceLifecycle, Type: smithy.ShapeTypeStructure})
+var s_serviceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_service, Type: smithy.ShapeTypeString})
+var s_tagFilter_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_tagSet, Members: &m_tagSet, Type: smithy.ShapeTypeMap})
+var s_tagSet_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_tagKey, Type: smithy.ShapeTypeString})
+var s_tagSet_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_tagValue, Type: smithy.ShapeTypeString})
+var sUnsupportedLocale_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_string, Type: smithy.ShapeTypeString})
+var sDescribeAffectedAccountsForOrganizationRequest_eventArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventArn", ID: &i_eventArn, Type: smithy.ShapeTypeString})
+var sDescribeAffectedAccountsForOrganizationRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString})
+var sDescribeAffectedAccountsForOrganizationRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_maxResults, Type: smithy.ShapeTypeInteger})
+var sDescribeAffectedAccountsForOrganizationResponse_affectedAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "affectedAccounts", ID: &i_affectedAccountsList, Members: &m_affectedAccountsList, Type: smithy.ShapeTypeList})
+var sDescribeAffectedAccountsForOrganizationResponse_eventScopeCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventScopeCode", ID: &ieventScopeCode, Members: &meventScopeCode, Type: smithy.ShapeTypeEnum})
+var sDescribeAffectedAccountsForOrganizationResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString})
+var sDescribeAffectedEntitiesForOrganizationRequest_organizationEntityFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "organizationEntityFilters", ID: &i_OrganizationEntityFiltersList, Members: &m_OrganizationEntityFiltersList, Type: smithy.ShapeTypeList})
+var sDescribeAffectedEntitiesForOrganizationRequest_locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locale", ID: &i_locale, Type: smithy.ShapeTypeString})
+var sDescribeAffectedEntitiesForOrganizationRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString})
+var sDescribeAffectedEntitiesForOrganizationRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_maxResultsLowerRange, Type: smithy.ShapeTypeInteger})
+var sDescribeAffectedEntitiesForOrganizationRequest_organizationEntityAccountFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "organizationEntityAccountFilters", ID: &i_OrganizationEntityAccountFiltersList, Members: &m_OrganizationEntityAccountFiltersList, Type: smithy.ShapeTypeList})
+var sDescribeAffectedEntitiesForOrganizationResponse_entities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entities", ID: &i_EntityList, Members: &m_EntityList, Type: smithy.ShapeTypeList})
+var sDescribeAffectedEntitiesForOrganizationResponse_failedSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failedSet", ID: &i_DescribeAffectedEntitiesForOrganizationFailedSet, Members: &m_DescribeAffectedEntitiesForOrganizationFailedSet, Type: smithy.ShapeTypeList})
+var sDescribeAffectedEntitiesForOrganizationResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString})
+var sDescribeAffectedEntitiesRequest_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iEntityFilter, Members: &mEntityFilter, Type: smithy.ShapeTypeStructure})
+var sDescribeAffectedEntitiesRequest_locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locale", ID: &i_locale, Type: smithy.ShapeTypeString})
+var sDescribeAffectedEntitiesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString})
+var sDescribeAffectedEntitiesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_maxResultsLowerRange, Type: smithy.ShapeTypeInteger})
+var sDescribeAffectedEntitiesResponse_entities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entities", ID: &i_EntityList, Members: &m_EntityList, Type: smithy.ShapeTypeList})
+var sDescribeAffectedEntitiesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString})
+var sDescribeEntityAggregatesForOrganizationRequest_eventArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventArns", ID: &i_OrganizationEventArnsList, Members: &m_OrganizationEventArnsList, Type: smithy.ShapeTypeList})
+var sDescribeEntityAggregatesForOrganizationRequest_awsAccountIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsAccountIds", ID: &i_OrganizationAccountIdsList, Members: &m_OrganizationAccountIdsList, Type: smithy.ShapeTypeList})
+var sDescribeEntityAggregatesForOrganizationResponse_organizationEntityAggregates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "organizationEntityAggregates", ID: &i_OrganizationEntityAggregatesList, Members: &m_OrganizationEntityAggregatesList, Type: smithy.ShapeTypeList})
+var sDescribeEntityAggregatesRequest_eventArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventArns", ID: &i_EventArnsList, Members: &m_EventArnsList, Type: smithy.ShapeTypeList})
+var sDescribeEntityAggregatesResponse_entityAggregates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityAggregates", ID: &i_EntityAggregateList, Members: &m_EntityAggregateList, Type: smithy.ShapeTypeList})
+var sDescribeEventAggregatesRequest_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iEventFilter, Members: &mEventFilter, Type: smithy.ShapeTypeStructure})
+var sDescribeEventAggregatesRequest_aggregateField = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aggregateField", ID: &ieventAggregateField, Members: &meventAggregateField, Type: smithy.ShapeTypeEnum})
+var sDescribeEventAggregatesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_maxResults, Type: smithy.ShapeTypeInteger})
+var sDescribeEventAggregatesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString})
+var sDescribeEventAggregatesResponse_eventAggregates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventAggregates", ID: &i_EventAggregateList, Members: &m_EventAggregateList, Type: smithy.ShapeTypeList})
+var sDescribeEventAggregatesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString})
+var sDescribeEventDetailsForOrganizationRequest_organizationEventDetailFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "organizationEventDetailFilters", ID: &i_OrganizationEventDetailFiltersList, Members: &m_OrganizationEventDetailFiltersList, Type: smithy.ShapeTypeList})
+var sDescribeEventDetailsForOrganizationRequest_locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locale", ID: &i_locale, Type: smithy.ShapeTypeString})
+var sDescribeEventDetailsForOrganizationResponse_successfulSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "successfulSet", ID: &i_DescribeEventDetailsForOrganizationSuccessfulSet, Members: &m_DescribeEventDetailsForOrganizationSuccessfulSet, Type: smithy.ShapeTypeList})
+var sDescribeEventDetailsForOrganizationResponse_failedSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failedSet", ID: &i_DescribeEventDetailsForOrganizationFailedSet, Members: &m_DescribeEventDetailsForOrganizationFailedSet, Type: smithy.ShapeTypeList})
+var sDescribeEventDetailsRequest_eventArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventArns", ID: &i_eventArnList, Members: &m_eventArnList, Type: smithy.ShapeTypeList})
+var sDescribeEventDetailsRequest_locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locale", ID: &i_locale, Type: smithy.ShapeTypeString})
+var sDescribeEventDetailsResponse_successfulSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "successfulSet", ID: &i_DescribeEventDetailsSuccessfulSet, Members: &m_DescribeEventDetailsSuccessfulSet, Type: smithy.ShapeTypeList})
+var sDescribeEventDetailsResponse_failedSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failedSet", ID: &i_DescribeEventDetailsFailedSet, Members: &m_DescribeEventDetailsFailedSet, Type: smithy.ShapeTypeList})
+var sDescribeEventsForOrganizationRequest_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iOrganizationEventFilter, Members: &mOrganizationEventFilter, Type: smithy.ShapeTypeStructure})
+var sDescribeEventsForOrganizationRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString})
+var sDescribeEventsForOrganizationRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_maxResultsLowerRange, Type: smithy.ShapeTypeInteger})
+var sDescribeEventsForOrganizationRequest_locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locale", ID: &i_locale, Type: smithy.ShapeTypeString})
+var sDescribeEventsForOrganizationResponse_events = smithy.NewStaticSchema(smithy.StaticSchema{Member: "events", ID: &i_OrganizationEventList, Members: &m_OrganizationEventList, Type: smithy.ShapeTypeList})
+var sDescribeEventsForOrganizationResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString})
+var sDescribeEventsRequest_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iEventFilter, Members: &mEventFilter, Type: smithy.ShapeTypeStructure})
+var sDescribeEventsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString})
+var sDescribeEventsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_maxResultsLowerRange, Type: smithy.ShapeTypeInteger})
+var sDescribeEventsRequest_locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locale", ID: &i_locale, Type: smithy.ShapeTypeString})
+var sDescribeEventsResponse_events = smithy.NewStaticSchema(smithy.StaticSchema{Member: "events", ID: &i_EventList, Members: &m_EventList, Type: smithy.ShapeTypeList})
+var sDescribeEventsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString})
+var sDescribeEventTypesRequest_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iEventTypeFilter, Members: &mEventTypeFilter, Type: smithy.ShapeTypeStructure})
+var sDescribeEventTypesRequest_locale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locale", ID: &i_locale, Type: smithy.ShapeTypeString})
+var sDescribeEventTypesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString})
+var sDescribeEventTypesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_maxResults, Type: smithy.ShapeTypeInteger})
+var sDescribeEventTypesResponse_eventTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventTypes", ID: &i_EventTypeList, Members: &m_EventTypeList, Type: smithy.ShapeTypeList})
+var sDescribeEventTypesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString})
+var sDescribeHealthServiceStatusForOrganizationResponse_healthServiceAccessStatusForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "healthServiceAccessStatusForOrganization", ID: &i_healthServiceAccessStatusForOrganization, Type: smithy.ShapeTypeString})
+var sDescribeServiceLifecycleRequest_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iServiceLifecycleFilter, Members: &mServiceLifecycleFilter, Type: smithy.ShapeTypeStructure})
+var sDescribeServiceLifecycleRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString})
+var sDescribeServiceLifecycleRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_LifecycleMaxResults, Type: smithy.ShapeTypeInteger})
+var sDescribeServiceLifecycleResponse_serviceLifecycles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceLifecycles", ID: &i_ServiceLifecycleList, Members: &m_ServiceLifecycleList, Type: smithy.ShapeTypeList})
+var sDescribeServiceLifecycleResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_nextToken, Type: smithy.ShapeTypeString})
+
+var DescribeAffectedAccountsForOrganization = &sDescribeAffectedAccountsForOrganization
+
+var DescribeAffectedEntities = &sDescribeAffectedEntities
+
+var DescribeAffectedEntitiesForOrganization = &sDescribeAffectedEntitiesForOrganization
+
+var DescribeEntityAggregates = &sDescribeEntityAggregates
+
+var DescribeEntityAggregatesForOrganization = &sDescribeEntityAggregatesForOrganization
+
+var DescribeEventAggregates = &sDescribeEventAggregates
+
+var DescribeEventDetails = &sDescribeEventDetails
+
+var DescribeEventDetailsForOrganization = &sDescribeEventDetailsForOrganization
+
+var DescribeEvents = &sDescribeEvents
+
+var DescribeEventsForOrganization = &sDescribeEventsForOrganization
+
+var DescribeEventTypes = &sDescribeEventTypes
+
+var DescribeHealthServiceStatusForOrganization = &sDescribeHealthServiceStatusForOrganization
+
+var DescribeServiceLifecycle = &sDescribeServiceLifecycle
+
+var DisableHealthServiceAccessForOrganization = &sDisableHealthServiceAccessForOrganization
+
+var EnableHealthServiceAccessForOrganization = &sEnableHealthServiceAccessForOrganization
+
+var _AWSHealth_20160804 = &s_AWSHealth_20160804
+
+var AccountEntityAggregate = &sAccountEntityAggregate
+var AccountEntityAggregate_accountId = &sAccountEntityAggregate_accountId
+var AccountEntityAggregate_count = &sAccountEntityAggregate_count
+var AccountEntityAggregate_statuses = &sAccountEntityAggregate_statuses
+
+var _AccountEntityAggregatesList = &s_AccountEntityAggregatesList
+var _AccountEntityAggregatesList_member = &s_AccountEntityAggregatesList_member
+
+var _accountId = &s_accountId
+
+var _affectedAccountsList = &s_affectedAccountsList
+var _affectedAccountsList_member = &s_affectedAccountsList_member
+
+var AffectedEntity = &sAffectedEntity
+var AffectedEntity_entityArn = &sAffectedEntity_entityArn
+var AffectedEntity_eventArn = &sAffectedEntity_eventArn
+var AffectedEntity_entityValue = &sAffectedEntity_entityValue
+var AffectedEntity_entityUrl = &sAffectedEntity_entityUrl
+var AffectedEntity_awsAccountId = &sAffectedEntity_awsAccountId
+var AffectedEntity_lastUpdatedTime = &sAffectedEntity_lastUpdatedTime
+var AffectedEntity_statusCode = &sAffectedEntity_statusCode
+var AffectedEntity_tags = &sAffectedEntity_tags
+var AffectedEntity_entityMetadata = &sAffectedEntity_entityMetadata
+
+var _aggregateValue = &s_aggregateValue
+
+var _availabilityZone = &s_availabilityZone
+
+var _availabilityZones = &s_availabilityZones
+var _availabilityZones_member = &s_availabilityZones_member
+
+var _awsAccountIdsList = &s_awsAccountIdsList
+var _awsAccountIdsList_member = &s_awsAccountIdsList_member
+
+var ConcurrentModificationException = &sConcurrentModificationException
+var ConcurrentModificationException_message = &sConcurrentModificationException_message
+
+var _count = &s_count
+
+var DateTimeRange = &sDateTimeRange
+var DateTimeRange_from = &sDateTimeRange_from
+var DateTimeRange_to = &sDateTimeRange_to
+
+var _dateTimeRangeList = &s_dateTimeRangeList
+var _dateTimeRangeList_member = &s_dateTimeRangeList_member
+
+var _DescribeAffectedEntitiesForOrganizationFailedSet = &s_DescribeAffectedEntitiesForOrganizationFailedSet
+var _DescribeAffectedEntitiesForOrganizationFailedSet_member = &s_DescribeAffectedEntitiesForOrganizationFailedSet_member
+
+var _DescribeEventDetailsFailedSet = &s_DescribeEventDetailsFailedSet
+var _DescribeEventDetailsFailedSet_member = &s_DescribeEventDetailsFailedSet_member
+
+var _DescribeEventDetailsForOrganizationFailedSet = &s_DescribeEventDetailsForOrganizationFailedSet
+var _DescribeEventDetailsForOrganizationFailedSet_member = &s_DescribeEventDetailsForOrganizationFailedSet_member
+
+var _DescribeEventDetailsForOrganizationSuccessfulSet = &s_DescribeEventDetailsForOrganizationSuccessfulSet
+var _DescribeEventDetailsForOrganizationSuccessfulSet_member = &s_DescribeEventDetailsForOrganizationSuccessfulSet_member
+
+var _DescribeEventDetailsSuccessfulSet = &s_DescribeEventDetailsSuccessfulSet
+var _DescribeEventDetailsSuccessfulSet_member = &s_DescribeEventDetailsSuccessfulSet_member
+
+var EntityAccountFilter = &sEntityAccountFilter
+var EntityAccountFilter_eventArn = &sEntityAccountFilter_eventArn
+var EntityAccountFilter_awsAccountId = &sEntityAccountFilter_awsAccountId
+var EntityAccountFilter_statusCodes = &sEntityAccountFilter_statusCodes
+
+var EntityAggregate = &sEntityAggregate
+var EntityAggregate_eventArn = &sEntityAggregate_eventArn
+var EntityAggregate_count = &sEntityAggregate_count
+var EntityAggregate_statuses = &sEntityAggregate_statuses
+
+var _EntityAggregateList = &s_EntityAggregateList
+var _EntityAggregateList_member = &s_EntityAggregateList_member
+
+var _entityArn = &s_entityArn
+
+var _entityArnList = &s_entityArnList
+var _entityArnList_member = &s_entityArnList_member
+
+var EntityFilter = &sEntityFilter
+var EntityFilter_eventArns = &sEntityFilter_eventArns
+var EntityFilter_entityArns = &sEntityFilter_entityArns
+var EntityFilter_entityValues = &sEntityFilter_entityValues
+var EntityFilter_lastUpdatedTimes = &sEntityFilter_lastUpdatedTimes
+var EntityFilter_tags = &sEntityFilter_tags
+var EntityFilter_statusCodes = &sEntityFilter_statusCodes
+
+var _EntityList = &s_EntityList
+var _EntityList_member = &s_EntityList_member
+
+var _entityMetadata = &s_entityMetadata
+var _entityMetadata_key = &s_entityMetadata_key
+var _entityMetadata_value = &s_entityMetadata_value
+
+var _entityMetadataKey = &s_entityMetadataKey
+
+var _entityMetadataValue = &s_entityMetadataValue
+
+var entityStatusCode = &sentityStatusCode
+var entityStatusCode_IMPAIRED = &sentityStatusCode_IMPAIRED
+var entityStatusCode_UNIMPAIRED = &sentityStatusCode_UNIMPAIRED
+var entityStatusCode_UNKNOWN = &sentityStatusCode_UNKNOWN
+var entityStatusCode_PENDING = &sentityStatusCode_PENDING
+var entityStatusCode_RESOLVED = &sentityStatusCode_RESOLVED
+
+var _entityStatusCodeList = &s_entityStatusCodeList
+var _entityStatusCodeList_member = &s_entityStatusCodeList_member
+
+var _entityStatuses = &s_entityStatuses
+var _entityStatuses_key = &s_entityStatuses_key
+var _entityStatuses_value = &s_entityStatuses_value
+
+var _entityUrl = &s_entityUrl
+
+var _entityValue = &s_entityValue
+
+var _entityValueList = &s_entityValueList
+var _entityValueList_member = &s_entityValueList_member
+
+var Event = &sEvent
+var Event_arn = &sEvent_arn
+var Event_service = &sEvent_service
+var Event_eventTypeCode = &sEvent_eventTypeCode
+var Event_eventTypeCategory = &sEvent_eventTypeCategory
+var Event_region = &sEvent_region
+var Event_availabilityZone = &sEvent_availabilityZone
+var Event_startTime = &sEvent_startTime
+var Event_endTime = &sEvent_endTime
+var Event_lastUpdatedTime = &sEvent_lastUpdatedTime
+var Event_statusCode = &sEvent_statusCode
+var Event_eventScopeCode = &sEvent_eventScopeCode
+var Event_actionability = &sEvent_actionability
+var Event_personas = &sEvent_personas
+
+var EventAccountFilter = &sEventAccountFilter
+var EventAccountFilter_eventArn = &sEventAccountFilter_eventArn
+var EventAccountFilter_awsAccountId = &sEventAccountFilter_awsAccountId
+
+var EventActionability = &sEventActionability
+var EventActionability_ACTION_REQUIRED = &sEventActionability_ACTION_REQUIRED
+var EventActionability_ACTION_MAY_BE_REQUIRED = &sEventActionability_ACTION_MAY_BE_REQUIRED
+var EventActionability_INFORMATIONAL = &sEventActionability_INFORMATIONAL
+
+var _EventActionabilityList = &s_EventActionabilityList
+var _EventActionabilityList_member = &s_EventActionabilityList_member
+
+var EventAggregate = &sEventAggregate
+var EventAggregate_aggregateValue = &sEventAggregate_aggregateValue
+var EventAggregate_count = &sEventAggregate_count
+
+var eventAggregateField = &seventAggregateField
+var eventAggregateField_EventTypeCategory = &seventAggregateField_EventTypeCategory
+
+var _EventAggregateList = &s_EventAggregateList
+var _EventAggregateList_member = &s_EventAggregateList_member
+
+var _eventArn = &s_eventArn
+
+var _eventArnList = &s_eventArnList
+var _eventArnList_member = &s_eventArnList_member
+
+var _EventArnsList = &s_EventArnsList
+var _EventArnsList_member = &s_EventArnsList_member
+
+var EventDescription = &sEventDescription
+var EventDescription_latestDescription = &sEventDescription_latestDescription
+
+var _EventDescription2 = &s_EventDescription2
+
+var EventDetails = &sEventDetails
+var EventDetails_event = &sEventDetails_event
+var EventDetails_eventDescription = &sEventDetails_eventDescription
+var EventDetails_eventMetadata = &sEventDetails_eventMetadata
+
+var EventDetailsErrorItem = &sEventDetailsErrorItem
+var EventDetailsErrorItem_eventArn = &sEventDetailsErrorItem_eventArn
+var EventDetailsErrorItem_errorName = &sEventDetailsErrorItem_errorName
+var EventDetailsErrorItem_errorMessage = &sEventDetailsErrorItem_errorMessage
+
+var EventFilter = &sEventFilter
+var EventFilter_actionabilities = &sEventFilter_actionabilities
+var EventFilter_eventArns = &sEventFilter_eventArns
+var EventFilter_eventTypeCodes = &sEventFilter_eventTypeCodes
+var EventFilter_services = &sEventFilter_services
+var EventFilter_regions = &sEventFilter_regions
+var EventFilter_availabilityZones = &sEventFilter_availabilityZones
+var EventFilter_startTimes = &sEventFilter_startTimes
+var EventFilter_endTimes = &sEventFilter_endTimes
+var EventFilter_lastUpdatedTimes = &sEventFilter_lastUpdatedTimes
+var EventFilter_entityArns = &sEventFilter_entityArns
+var EventFilter_entityValues = &sEventFilter_entityValues
+var EventFilter_eventTypeCategories = &sEventFilter_eventTypeCategories
+var EventFilter_tags = &sEventFilter_tags
+var EventFilter_eventStatusCodes = &sEventFilter_eventStatusCodes
+var EventFilter_personas = &sEventFilter_personas
+
+var _EventList = &s_EventList
+var _EventList_member = &s_EventList_member
+
+var _eventMetadata = &s_eventMetadata
+var _eventMetadata_key = &s_eventMetadata_key
+var _eventMetadata_value = &s_eventMetadata_value
+
+var EventPersona = &sEventPersona
+var EventPersona_OPERATIONS = &sEventPersona_OPERATIONS
+var EventPersona_SECURITY = &sEventPersona_SECURITY
+var EventPersona_BILLING = &sEventPersona_BILLING
+
+var _EventPersonaList = &s_EventPersonaList
+var _EventPersonaList_member = &s_EventPersonaList_member
+
+var eventScopeCode = &seventScopeCode
+var eventScopeCode_PUBLIC = &seventScopeCode_PUBLIC
+var eventScopeCode_ACCOUNT_SPECIFIC = &seventScopeCode_ACCOUNT_SPECIFIC
+var eventScopeCode_NONE = &seventScopeCode_NONE
+
+var eventStatusCode = &seventStatusCode
+var eventStatusCode_OPEN = &seventStatusCode_OPEN
+var eventStatusCode_CLOSED = &seventStatusCode_CLOSED
+var eventStatusCode_UPCOMING = &seventStatusCode_UPCOMING
+
+var _eventStatusCodeList = &s_eventStatusCodeList
+var _eventStatusCodeList_member = &s_eventStatusCodeList_member
+
+var EventType = &sEventType
+var EventType_service = &sEventType_service
+var EventType_code = &sEventType_code
+var EventType_category = &sEventType_category
+var EventType_actionability = &sEventType_actionability
+var EventType_personas = &sEventType_personas
+
+var _EventType2 = &s_EventType2
+
+var EventTypeActionability = &sEventTypeActionability
+var EventTypeActionability_ACTION_REQUIRED = &sEventTypeActionability_ACTION_REQUIRED
+var EventTypeActionability_ACTION_MAY_BE_REQUIRED = &sEventTypeActionability_ACTION_MAY_BE_REQUIRED
+var EventTypeActionability_INFORMATIONAL = &sEventTypeActionability_INFORMATIONAL
+
+var _EventTypeActionabilityList = &s_EventTypeActionabilityList
+var _EventTypeActionabilityList_member = &s_EventTypeActionabilityList_member
+
+var eventTypeCategory = &seventTypeCategory
+var eventTypeCategory_ISSUE = &seventTypeCategory_ISSUE
+var eventTypeCategory_ACCOUNT_NOTIFICATION = &seventTypeCategory_ACCOUNT_NOTIFICATION
+var eventTypeCategory_SCHEDULED_CHANGE = &seventTypeCategory_SCHEDULED_CHANGE
+var eventTypeCategory_INVESTIGATION = &seventTypeCategory_INVESTIGATION
+
+var _EventTypeCategoryList = &s_EventTypeCategoryList
+var _EventTypeCategoryList_member = &s_EventTypeCategoryList_member
+
+var _eventTypeCategoryList2 = &s_eventTypeCategoryList2
+var _eventTypeCategoryList2_member = &s_eventTypeCategoryList2_member
+
+var _eventTypeCode = &s_eventTypeCode
+
+var _EventTypeCodeList = &s_EventTypeCodeList
+var _EventTypeCodeList_member = &s_EventTypeCodeList_member
+
+var EventTypeFilter = &sEventTypeFilter
+var EventTypeFilter_eventTypeCodes = &sEventTypeFilter_eventTypeCodes
+var EventTypeFilter_services = &sEventTypeFilter_services
+var EventTypeFilter_eventTypeCategories = &sEventTypeFilter_eventTypeCategories
+var EventTypeFilter_actionabilities = &sEventTypeFilter_actionabilities
+var EventTypeFilter_personas = &sEventTypeFilter_personas
+
+var _EventTypeList = &s_EventTypeList
+var _EventTypeList_member = &s_EventTypeList_member
+
+var _eventTypeList2 = &s_eventTypeList2
+var _eventTypeList2_member = &s_eventTypeList2_member
+
+var EventTypePersona = &sEventTypePersona
+var EventTypePersona_OPERATIONS = &sEventTypePersona_OPERATIONS
+var EventTypePersona_SECURITY = &sEventTypePersona_SECURITY
+var EventTypePersona_BILLING = &sEventTypePersona_BILLING
+
+var _EventTypePersonaList = &s_EventTypePersonaList
+var _EventTypePersonaList_member = &s_EventTypePersonaList_member
+
+var _healthServiceAccessStatusForOrganization = &s_healthServiceAccessStatusForOrganization
+
+var _ImpactRiskList = &s_ImpactRiskList
+var _ImpactRiskList_member = &s_ImpactRiskList_member
+
+var InvalidPaginationToken = &sInvalidPaginationToken
+var InvalidPaginationToken_message = &sInvalidPaginationToken_message
+
+var LifecycleEvent = &sLifecycleEvent
+var LifecycleEvent_lifecycleEventType = &sLifecycleEvent_lifecycleEventType
+var LifecycleEvent_date = &sLifecycleEvent_date
+var LifecycleEvent_regions = &sLifecycleEvent_regions
+var LifecycleEvent_impactRisks = &sLifecycleEvent_impactRisks
+var LifecycleEvent_description = &sLifecycleEvent_description
+
+var _LifecycleEventList = &s_LifecycleEventList
+var _LifecycleEventList_member = &s_LifecycleEventList_member
+
+var _LifecycleMaxResults = &s_LifecycleMaxResults
+
+var _locale = &s_locale
+
+var _maxResults = &s_maxResults
+
+var _maxResultsLowerRange = &s_maxResultsLowerRange
+
+var _metadataKey = &s_metadataKey
+
+var _metadataValue = &s_metadataValue
+
+var _nextToken = &s_nextToken
+
+var _OrganizationAccountIdsList = &s_OrganizationAccountIdsList
+var _OrganizationAccountIdsList_member = &s_OrganizationAccountIdsList_member
+
+var OrganizationAffectedEntitiesErrorItem = &sOrganizationAffectedEntitiesErrorItem
+var OrganizationAffectedEntitiesErrorItem_awsAccountId = &sOrganizationAffectedEntitiesErrorItem_awsAccountId
+var OrganizationAffectedEntitiesErrorItem_eventArn = &sOrganizationAffectedEntitiesErrorItem_eventArn
+var OrganizationAffectedEntitiesErrorItem_errorName = &sOrganizationAffectedEntitiesErrorItem_errorName
+var OrganizationAffectedEntitiesErrorItem_errorMessage = &sOrganizationAffectedEntitiesErrorItem_errorMessage
+
+var _OrganizationEntityAccountFiltersList = &s_OrganizationEntityAccountFiltersList
+var _OrganizationEntityAccountFiltersList_member = &s_OrganizationEntityAccountFiltersList_member
+
+var OrganizationEntityAggregate = &sOrganizationEntityAggregate
+var OrganizationEntityAggregate_eventArn = &sOrganizationEntityAggregate_eventArn
+var OrganizationEntityAggregate_count = &sOrganizationEntityAggregate_count
+var OrganizationEntityAggregate_statuses = &sOrganizationEntityAggregate_statuses
+var OrganizationEntityAggregate_accounts = &sOrganizationEntityAggregate_accounts
+
+var _OrganizationEntityAggregatesList = &s_OrganizationEntityAggregatesList
+var _OrganizationEntityAggregatesList_member = &s_OrganizationEntityAggregatesList_member
+
+var _OrganizationEntityFiltersList = &s_OrganizationEntityFiltersList
+var _OrganizationEntityFiltersList_member = &s_OrganizationEntityFiltersList_member
+
+var OrganizationEvent = &sOrganizationEvent
+var OrganizationEvent_arn = &sOrganizationEvent_arn
+var OrganizationEvent_service = &sOrganizationEvent_service
+var OrganizationEvent_eventTypeCode = &sOrganizationEvent_eventTypeCode
+var OrganizationEvent_eventTypeCategory = &sOrganizationEvent_eventTypeCategory
+var OrganizationEvent_eventScopeCode = &sOrganizationEvent_eventScopeCode
+var OrganizationEvent_region = &sOrganizationEvent_region
+var OrganizationEvent_startTime = &sOrganizationEvent_startTime
+var OrganizationEvent_endTime = &sOrganizationEvent_endTime
+var OrganizationEvent_lastUpdatedTime = &sOrganizationEvent_lastUpdatedTime
+var OrganizationEvent_statusCode = &sOrganizationEvent_statusCode
+var OrganizationEvent_actionability = &sOrganizationEvent_actionability
+var OrganizationEvent_personas = &sOrganizationEvent_personas
+
+var _OrganizationEventArnsList = &s_OrganizationEventArnsList
+var _OrganizationEventArnsList_member = &s_OrganizationEventArnsList_member
+
+var _OrganizationEventDetailFiltersList = &s_OrganizationEventDetailFiltersList
+var _OrganizationEventDetailFiltersList_member = &s_OrganizationEventDetailFiltersList_member
+
+var OrganizationEventDetails = &sOrganizationEventDetails
+var OrganizationEventDetails_awsAccountId = &sOrganizationEventDetails_awsAccountId
+var OrganizationEventDetails_event = &sOrganizationEventDetails_event
+var OrganizationEventDetails_eventDescription = &sOrganizationEventDetails_eventDescription
+var OrganizationEventDetails_eventMetadata = &sOrganizationEventDetails_eventMetadata
+
+var OrganizationEventDetailsErrorItem = &sOrganizationEventDetailsErrorItem
+var OrganizationEventDetailsErrorItem_awsAccountId = &sOrganizationEventDetailsErrorItem_awsAccountId
+var OrganizationEventDetailsErrorItem_eventArn = &sOrganizationEventDetailsErrorItem_eventArn
+var OrganizationEventDetailsErrorItem_errorName = &sOrganizationEventDetailsErrorItem_errorName
+var OrganizationEventDetailsErrorItem_errorMessage = &sOrganizationEventDetailsErrorItem_errorMessage
+
+var OrganizationEventFilter = &sOrganizationEventFilter
+var OrganizationEventFilter_actionabilities = &sOrganizationEventFilter_actionabilities
+var OrganizationEventFilter_eventTypeCodes = &sOrganizationEventFilter_eventTypeCodes
+var OrganizationEventFilter_awsAccountIds = &sOrganizationEventFilter_awsAccountIds
+var OrganizationEventFilter_services = &sOrganizationEventFilter_services
+var OrganizationEventFilter_regions = &sOrganizationEventFilter_regions
+var OrganizationEventFilter_startTime = &sOrganizationEventFilter_startTime
+var OrganizationEventFilter_endTime = &sOrganizationEventFilter_endTime
+var OrganizationEventFilter_lastUpdatedTime = &sOrganizationEventFilter_lastUpdatedTime
+var OrganizationEventFilter_entityArns = &sOrganizationEventFilter_entityArns
+var OrganizationEventFilter_entityValues = &sOrganizationEventFilter_entityValues
+var OrganizationEventFilter_eventTypeCategories = &sOrganizationEventFilter_eventTypeCategories
+var OrganizationEventFilter_eventStatusCodes = &sOrganizationEventFilter_eventStatusCodes
+var OrganizationEventFilter_personas = &sOrganizationEventFilter_personas
+
+var _OrganizationEventList = &s_OrganizationEventList
+var _OrganizationEventList_member = &s_OrganizationEventList_member
+
+var _region = &s_region
+
+var _regionList = &s_regionList
+var _regionList_member = &s_regionList_member
+
+var _service = &s_service
+
+var ServiceLifecycle = &sServiceLifecycle
+var ServiceLifecycle_service = &sServiceLifecycle_service
+var ServiceLifecycle_version = &sServiceLifecycle_version
+var ServiceLifecycle_title = &sServiceLifecycle_title
+var ServiceLifecycle_recommendedVersion = &sServiceLifecycle_recommendedVersion
+var ServiceLifecycle_lifecycleEvents = &sServiceLifecycle_lifecycleEvents
+
+var ServiceLifecycleFilter = &sServiceLifecycleFilter
+var ServiceLifecycleFilter_service = &sServiceLifecycleFilter_service
+
+var _ServiceLifecycleList = &s_ServiceLifecycleList
+var _ServiceLifecycleList_member = &s_ServiceLifecycleList_member
+
+var _serviceList = &s_serviceList
+var _serviceList_member = &s_serviceList_member
+
+var _string = &s_string
+
+var _tagFilter = &s_tagFilter
+var _tagFilter_member = &s_tagFilter_member
+
+var _tagKey = &s_tagKey
+
+var _tagSet = &s_tagSet
+var _tagSet_key = &s_tagSet_key
+var _tagSet_value = &s_tagSet_value
+
+var _tagValue = &s_tagValue
+
+var _timestamp = &s_timestamp
+
+var UnsupportedLocale = &sUnsupportedLocale
+var UnsupportedLocale_message = &sUnsupportedLocale_message
+
+var DescribeAffectedAccountsForOrganizationRequest = &sDescribeAffectedAccountsForOrganizationRequest
+var DescribeAffectedAccountsForOrganizationRequest_eventArn = &sDescribeAffectedAccountsForOrganizationRequest_eventArn
+var DescribeAffectedAccountsForOrganizationRequest_nextToken = &sDescribeAffectedAccountsForOrganizationRequest_nextToken
+var DescribeAffectedAccountsForOrganizationRequest_maxResults = &sDescribeAffectedAccountsForOrganizationRequest_maxResults
+
+var DescribeAffectedAccountsForOrganizationResponse = &sDescribeAffectedAccountsForOrganizationResponse
+var DescribeAffectedAccountsForOrganizationResponse_affectedAccounts = &sDescribeAffectedAccountsForOrganizationResponse_affectedAccounts
+var DescribeAffectedAccountsForOrganizationResponse_eventScopeCode = &sDescribeAffectedAccountsForOrganizationResponse_eventScopeCode
+var DescribeAffectedAccountsForOrganizationResponse_nextToken = &sDescribeAffectedAccountsForOrganizationResponse_nextToken
+
+var DescribeAffectedEntitiesForOrganizationRequest = &sDescribeAffectedEntitiesForOrganizationRequest
+var DescribeAffectedEntitiesForOrganizationRequest_organizationEntityFilters = &sDescribeAffectedEntitiesForOrganizationRequest_organizationEntityFilters
+var DescribeAffectedEntitiesForOrganizationRequest_locale = &sDescribeAffectedEntitiesForOrganizationRequest_locale
+var DescribeAffectedEntitiesForOrganizationRequest_nextToken = &sDescribeAffectedEntitiesForOrganizationRequest_nextToken
+var DescribeAffectedEntitiesForOrganizationRequest_maxResults = &sDescribeAffectedEntitiesForOrganizationRequest_maxResults
+var DescribeAffectedEntitiesForOrganizationRequest_organizationEntityAccountFilters = &sDescribeAffectedEntitiesForOrganizationRequest_organizationEntityAccountFilters
+
+var DescribeAffectedEntitiesForOrganizationResponse = &sDescribeAffectedEntitiesForOrganizationResponse
+var DescribeAffectedEntitiesForOrganizationResponse_entities = &sDescribeAffectedEntitiesForOrganizationResponse_entities
+var DescribeAffectedEntitiesForOrganizationResponse_failedSet = &sDescribeAffectedEntitiesForOrganizationResponse_failedSet
+var DescribeAffectedEntitiesForOrganizationResponse_nextToken = &sDescribeAffectedEntitiesForOrganizationResponse_nextToken
+
+var DescribeAffectedEntitiesRequest = &sDescribeAffectedEntitiesRequest
+var DescribeAffectedEntitiesRequest_filter = &sDescribeAffectedEntitiesRequest_filter
+var DescribeAffectedEntitiesRequest_locale = &sDescribeAffectedEntitiesRequest_locale
+var DescribeAffectedEntitiesRequest_nextToken = &sDescribeAffectedEntitiesRequest_nextToken
+var DescribeAffectedEntitiesRequest_maxResults = &sDescribeAffectedEntitiesRequest_maxResults
+
+var DescribeAffectedEntitiesResponse = &sDescribeAffectedEntitiesResponse
+var DescribeAffectedEntitiesResponse_entities = &sDescribeAffectedEntitiesResponse_entities
+var DescribeAffectedEntitiesResponse_nextToken = &sDescribeAffectedEntitiesResponse_nextToken
+
+var DescribeEntityAggregatesForOrganizationRequest = &sDescribeEntityAggregatesForOrganizationRequest
+var DescribeEntityAggregatesForOrganizationRequest_eventArns = &sDescribeEntityAggregatesForOrganizationRequest_eventArns
+var DescribeEntityAggregatesForOrganizationRequest_awsAccountIds = &sDescribeEntityAggregatesForOrganizationRequest_awsAccountIds
+
+var DescribeEntityAggregatesForOrganizationResponse = &sDescribeEntityAggregatesForOrganizationResponse
+var DescribeEntityAggregatesForOrganizationResponse_organizationEntityAggregates = &sDescribeEntityAggregatesForOrganizationResponse_organizationEntityAggregates
+
+var DescribeEntityAggregatesRequest = &sDescribeEntityAggregatesRequest
+var DescribeEntityAggregatesRequest_eventArns = &sDescribeEntityAggregatesRequest_eventArns
+
+var DescribeEntityAggregatesResponse = &sDescribeEntityAggregatesResponse
+var DescribeEntityAggregatesResponse_entityAggregates = &sDescribeEntityAggregatesResponse_entityAggregates
+
+var DescribeEventAggregatesRequest = &sDescribeEventAggregatesRequest
+var DescribeEventAggregatesRequest_filter = &sDescribeEventAggregatesRequest_filter
+var DescribeEventAggregatesRequest_aggregateField = &sDescribeEventAggregatesRequest_aggregateField
+var DescribeEventAggregatesRequest_maxResults = &sDescribeEventAggregatesRequest_maxResults
+var DescribeEventAggregatesRequest_nextToken = &sDescribeEventAggregatesRequest_nextToken
+
+var DescribeEventAggregatesResponse = &sDescribeEventAggregatesResponse
+var DescribeEventAggregatesResponse_eventAggregates = &sDescribeEventAggregatesResponse_eventAggregates
+var DescribeEventAggregatesResponse_nextToken = &sDescribeEventAggregatesResponse_nextToken
+
+var DescribeEventDetailsForOrganizationRequest = &sDescribeEventDetailsForOrganizationRequest
+var DescribeEventDetailsForOrganizationRequest_organizationEventDetailFilters = &sDescribeEventDetailsForOrganizationRequest_organizationEventDetailFilters
+var DescribeEventDetailsForOrganizationRequest_locale = &sDescribeEventDetailsForOrganizationRequest_locale
+
+var DescribeEventDetailsForOrganizationResponse = &sDescribeEventDetailsForOrganizationResponse
+var DescribeEventDetailsForOrganizationResponse_successfulSet = &sDescribeEventDetailsForOrganizationResponse_successfulSet
+var DescribeEventDetailsForOrganizationResponse_failedSet = &sDescribeEventDetailsForOrganizationResponse_failedSet
+
+var DescribeEventDetailsRequest = &sDescribeEventDetailsRequest
+var DescribeEventDetailsRequest_eventArns = &sDescribeEventDetailsRequest_eventArns
+var DescribeEventDetailsRequest_locale = &sDescribeEventDetailsRequest_locale
+
+var DescribeEventDetailsResponse = &sDescribeEventDetailsResponse
+var DescribeEventDetailsResponse_successfulSet = &sDescribeEventDetailsResponse_successfulSet
+var DescribeEventDetailsResponse_failedSet = &sDescribeEventDetailsResponse_failedSet
+
+var DescribeEventsForOrganizationRequest = &sDescribeEventsForOrganizationRequest
+var DescribeEventsForOrganizationRequest_filter = &sDescribeEventsForOrganizationRequest_filter
+var DescribeEventsForOrganizationRequest_nextToken = &sDescribeEventsForOrganizationRequest_nextToken
+var DescribeEventsForOrganizationRequest_maxResults = &sDescribeEventsForOrganizationRequest_maxResults
+var DescribeEventsForOrganizationRequest_locale = &sDescribeEventsForOrganizationRequest_locale
+
+var DescribeEventsForOrganizationResponse = &sDescribeEventsForOrganizationResponse
+var DescribeEventsForOrganizationResponse_events = &sDescribeEventsForOrganizationResponse_events
+var DescribeEventsForOrganizationResponse_nextToken = &sDescribeEventsForOrganizationResponse_nextToken
+
+var DescribeEventsRequest = &sDescribeEventsRequest
+var DescribeEventsRequest_filter = &sDescribeEventsRequest_filter
+var DescribeEventsRequest_nextToken = &sDescribeEventsRequest_nextToken
+var DescribeEventsRequest_maxResults = &sDescribeEventsRequest_maxResults
+var DescribeEventsRequest_locale = &sDescribeEventsRequest_locale
+
+var DescribeEventsResponse = &sDescribeEventsResponse
+var DescribeEventsResponse_events = &sDescribeEventsResponse_events
+var DescribeEventsResponse_nextToken = &sDescribeEventsResponse_nextToken
+
+var DescribeEventTypesRequest = &sDescribeEventTypesRequest
+var DescribeEventTypesRequest_filter = &sDescribeEventTypesRequest_filter
+var DescribeEventTypesRequest_locale = &sDescribeEventTypesRequest_locale
+var DescribeEventTypesRequest_nextToken = &sDescribeEventTypesRequest_nextToken
+var DescribeEventTypesRequest_maxResults = &sDescribeEventTypesRequest_maxResults
+
+var DescribeEventTypesResponse = &sDescribeEventTypesResponse
+var DescribeEventTypesResponse_eventTypes = &sDescribeEventTypesResponse_eventTypes
+var DescribeEventTypesResponse_nextToken = &sDescribeEventTypesResponse_nextToken
+
+var DescribeHealthServiceStatusForOrganizationResponse = &sDescribeHealthServiceStatusForOrganizationResponse
+var DescribeHealthServiceStatusForOrganizationResponse_healthServiceAccessStatusForOrganization = &sDescribeHealthServiceStatusForOrganizationResponse_healthServiceAccessStatusForOrganization
+
+var DescribeServiceLifecycleRequest = &sDescribeServiceLifecycleRequest
+var DescribeServiceLifecycleRequest_filter = &sDescribeServiceLifecycleRequest_filter
+var DescribeServiceLifecycleRequest_nextToken = &sDescribeServiceLifecycleRequest_nextToken
+var DescribeServiceLifecycleRequest_maxResults = &sDescribeServiceLifecycleRequest_maxResults
+
+var DescribeServiceLifecycleResponse = &sDescribeServiceLifecycleResponse
+var DescribeServiceLifecycleResponse_serviceLifecycles = &sDescribeServiceLifecycleResponse_serviceLifecycles
+var DescribeServiceLifecycleResponse_nextToken = &sDescribeServiceLifecycleResponse_nextToken
+
+var AWSHealth_20160804 = &smithy.ServiceSchema{Schema: &s_AWSHealth_20160804, Version: "2016-08-04"}

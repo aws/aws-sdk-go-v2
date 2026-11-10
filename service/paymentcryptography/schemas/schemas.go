@@ -4,2036 +4,1499 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AddKeyReplicationRegions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "AddKeyReplicationRegions",
-}, smithy.ShapeTypeOperation, 0)
-
-var AssociateMpaTeam = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "AssociateMpaTeam",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateAlias = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "CreateAlias",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "CreateKey",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteAlias = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "DeleteAlias",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "DeleteKey",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "DeleteResourcePolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var DisableDefaultKeyReplicationRegions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "DisableDefaultKeyReplicationRegions",
-}, smithy.ShapeTypeOperation, 0)
-
-var DisassociateMpaTeam = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "DisassociateMpaTeam",
-}, smithy.ShapeTypeOperation, 0)
-
-var EnableDefaultKeyReplicationRegions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "EnableDefaultKeyReplicationRegions",
-}, smithy.ShapeTypeOperation, 0)
-
-var ExportKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ExportKey",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetAlias = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetAlias",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetCertificateSigningRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetCertificateSigningRequest",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetDefaultKeyReplicationRegions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetDefaultKeyReplicationRegions",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetKey",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetMpaTeamAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetMpaTeamAssociation",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetParametersForExport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetParametersForExport",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetParametersForImport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetParametersForImport",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetPublicKeyCertificate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetPublicKeyCertificate",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetResourcePolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var ImportKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ImportKey",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListAliases = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ListAliases",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ListKeys",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "PutResourcePolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var RemoveKeyReplicationRegions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "RemoveKeyReplicationRegions",
-}, smithy.ShapeTypeOperation, 0)
-
-var RestoreKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "RestoreKey",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartKeyUsage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "StartKeyUsage",
-}, smithy.ShapeTypeOperation, 0)
-
-var StopKeyUsage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "StopKeyUsage",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateAlias = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "UpdateAlias",
-}, smithy.ShapeTypeOperation, 0)
-
-var _PaymentCryptographyControlPlane = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "PaymentCryptographyControlPlane",
-}, smithy.ShapeTypeService, 0)
-
-var PaymentCryptographyControlPlane = smithy.NewServiceSchema(_PaymentCryptographyControlPlane, "2021-09-14")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var Alias = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "Alias",
-}, smithy.ShapeTypeStructure, 2)
-var Alias_AliasName *smithy.Schema
-
-var Alias_KeyArn *smithy.Schema
-
-var _Aliases = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "Aliases",
-}, smithy.ShapeTypeList, 1)
-var _Aliases_member *smithy.Schema
-
-var _AliasName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "AliasName",
-}, smithy.ShapeTypeString, 0)
-
-var As2805KeyVariant = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "As2805KeyVariant",
-}, smithy.ShapeTypeEnum, 4)
-var As2805KeyVariant_TERMINAL_MAJOR_KEY_VARIANT_00 *smithy.Schema
-
-var As2805KeyVariant_PIN_ENCRYPTION_KEY_VARIANT_28 *smithy.Schema
-
-var As2805KeyVariant_MESSAGE_AUTHENTICATION_KEY_VARIANT_24 *smithy.Schema
-
-var As2805KeyVariant_DATA_ENCRYPTION_KEY_VARIANT_22 *smithy.Schema
-
-var _AssociationState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "AssociationState",
-}, smithy.ShapeTypeString, 0)
-
-var _CertificateSigningRequestType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "CertificateSigningRequestType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var CertificateSubjectType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "CertificateSubjectType",
-}, smithy.ShapeTypeStructure, 7)
-var CertificateSubjectType_CommonName *smithy.Schema
-
-var CertificateSubjectType_OrganizationUnit *smithy.Schema
-
-var CertificateSubjectType_Organization *smithy.Schema
-
-var CertificateSubjectType_City *smithy.Schema
-
-var CertificateSubjectType_Country *smithy.Schema
-
-var CertificateSubjectType_StateOrProvince *smithy.Schema
-
-var CertificateSubjectType_EmailAddress *smithy.Schema
-
-var _CertificateType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "CertificateType",
-}, smithy.ShapeTypeString, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_Message *smithy.Schema
-
-var _DeriveKeyUsage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "DeriveKeyUsage",
-}, smithy.ShapeTypeString, 0)
-
-var DiffieHellmanDerivationData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "DiffieHellmanDerivationData",
-}, smithy.ShapeTypeUnion, 1)
-var DiffieHellmanDerivationData_SharedInformation *smithy.Schema
-
-var _EvenHexLengthBetween16And32 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "EvenHexLengthBetween16And32",
-}, smithy.ShapeTypeString, 0)
-
-var ExportAs2805KeyCryptogram = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ExportAs2805KeyCryptogram",
-}, smithy.ShapeTypeStructure, 2)
-var ExportAs2805KeyCryptogram_WrappingKeyIdentifier *smithy.Schema
-
-var ExportAs2805KeyCryptogram_As2805KeyVariant *smithy.Schema
-
-var ExportAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ExportAttributes",
-}, smithy.ShapeTypeStructure, 2)
-var ExportAttributes_ExportDukptInitialKey *smithy.Schema
-
-var ExportAttributes_KeyCheckValueAlgorithm *smithy.Schema
-
-var ExportDiffieHellmanTr31KeyBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ExportDiffieHellmanTr31KeyBlock",
-}, smithy.ShapeTypeStructure, 8)
-var ExportDiffieHellmanTr31KeyBlock_PrivateKeyIdentifier *smithy.Schema
-
-var ExportDiffieHellmanTr31KeyBlock_CertificateAuthorityPublicKeyIdentifier *smithy.Schema
-
-var ExportDiffieHellmanTr31KeyBlock_PublicKeyCertificate *smithy.Schema
-
-var ExportDiffieHellmanTr31KeyBlock_DeriveKeyAlgorithm *smithy.Schema
-
-var ExportDiffieHellmanTr31KeyBlock_KeyDerivationFunction *smithy.Schema
-
-var ExportDiffieHellmanTr31KeyBlock_KeyDerivationHashAlgorithm *smithy.Schema
-
-var ExportDiffieHellmanTr31KeyBlock_DerivationData *smithy.Schema
-
-var ExportDiffieHellmanTr31KeyBlock_KeyBlockHeaders *smithy.Schema
-
-var ExportDukptInitialKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ExportDukptInitialKey",
-}, smithy.ShapeTypeStructure, 1)
-var ExportDukptInitialKey_KeySerialNumber *smithy.Schema
-
-var ExportKeyCryptogram = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ExportKeyCryptogram",
-}, smithy.ShapeTypeStructure, 3)
-var ExportKeyCryptogram_CertificateAuthorityPublicKeyIdentifier *smithy.Schema
-
-var ExportKeyCryptogram_WrappingKeyCertificate *smithy.Schema
-
-var ExportKeyCryptogram_WrappingSpec *smithy.Schema
-
-var ExportKeyMaterial = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ExportKeyMaterial",
-}, smithy.ShapeTypeUnion, 5)
-var ExportKeyMaterial_Tr31KeyBlock *smithy.Schema
-
-var ExportKeyMaterial_Tr34KeyBlock *smithy.Schema
-
-var ExportKeyMaterial_KeyCryptogram *smithy.Schema
-
-var ExportKeyMaterial_DiffieHellmanTr31KeyBlock *smithy.Schema
-
-var ExportKeyMaterial_As2805KeyCryptogram *smithy.Schema
-
-var _ExportTokenId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ExportTokenId",
-}, smithy.ShapeTypeString, 0)
-
-var ExportTr31KeyBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ExportTr31KeyBlock",
-}, smithy.ShapeTypeStructure, 2)
-var ExportTr31KeyBlock_WrappingKeyIdentifier *smithy.Schema
-
-var ExportTr31KeyBlock_KeyBlockHeaders *smithy.Schema
-
-var ExportTr34KeyBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ExportTr34KeyBlock",
-}, smithy.ShapeTypeStructure, 8)
-var ExportTr34KeyBlock_CertificateAuthorityPublicKeyIdentifier *smithy.Schema
-
-var ExportTr34KeyBlock_WrappingKeyCertificate *smithy.Schema
-
-var ExportTr34KeyBlock_ExportToken *smithy.Schema
-
-var ExportTr34KeyBlock_SigningKeyIdentifier *smithy.Schema
-
-var ExportTr34KeyBlock_SigningKeyCertificate *smithy.Schema
-
-var ExportTr34KeyBlock_KeyBlockFormat *smithy.Schema
-
-var ExportTr34KeyBlock_RandomNonce *smithy.Schema
-
-var ExportTr34KeyBlock_KeyBlockHeaders *smithy.Schema
-
-var _HexLength20Or24 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "HexLength20Or24",
-}, smithy.ShapeTypeString, 0)
-
-var ImportAs2805KeyCryptogram = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ImportAs2805KeyCryptogram",
-}, smithy.ShapeTypeStructure, 6)
-var ImportAs2805KeyCryptogram_As2805KeyVariant *smithy.Schema
-
-var ImportAs2805KeyCryptogram_KeyModesOfUse *smithy.Schema
-
-var ImportAs2805KeyCryptogram_KeyAlgorithm *smithy.Schema
-
-var ImportAs2805KeyCryptogram_Exportable *smithy.Schema
-
-var ImportAs2805KeyCryptogram_WrappingKeyIdentifier *smithy.Schema
-
-var ImportAs2805KeyCryptogram_WrappedKeyCryptogram *smithy.Schema
-
-var ImportDiffieHellmanTr31KeyBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ImportDiffieHellmanTr31KeyBlock",
-}, smithy.ShapeTypeStructure, 8)
-var ImportDiffieHellmanTr31KeyBlock_PrivateKeyIdentifier *smithy.Schema
-
-var ImportDiffieHellmanTr31KeyBlock_CertificateAuthorityPublicKeyIdentifier *smithy.Schema
-
-var ImportDiffieHellmanTr31KeyBlock_PublicKeyCertificate *smithy.Schema
-
-var ImportDiffieHellmanTr31KeyBlock_DeriveKeyAlgorithm *smithy.Schema
-
-var ImportDiffieHellmanTr31KeyBlock_KeyDerivationFunction *smithy.Schema
-
-var ImportDiffieHellmanTr31KeyBlock_KeyDerivationHashAlgorithm *smithy.Schema
-
-var ImportDiffieHellmanTr31KeyBlock_DerivationData *smithy.Schema
-
-var ImportDiffieHellmanTr31KeyBlock_WrappedKeyBlock *smithy.Schema
-
-var ImportKeyCryptogram = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ImportKeyCryptogram",
-}, smithy.ShapeTypeStructure, 5)
-var ImportKeyCryptogram_KeyAttributes *smithy.Schema
-
-var ImportKeyCryptogram_Exportable *smithy.Schema
-
-var ImportKeyCryptogram_WrappedKeyCryptogram *smithy.Schema
-
-var ImportKeyCryptogram_ImportToken *smithy.Schema
-
-var ImportKeyCryptogram_WrappingSpec *smithy.Schema
-
-var ImportKeyMaterial = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ImportKeyMaterial",
-}, smithy.ShapeTypeUnion, 7)
-var ImportKeyMaterial_RootCertificatePublicKey *smithy.Schema
-
-var ImportKeyMaterial_TrustedCertificatePublicKey *smithy.Schema
-
-var ImportKeyMaterial_Tr31KeyBlock *smithy.Schema
-
-var ImportKeyMaterial_Tr34KeyBlock *smithy.Schema
-
-var ImportKeyMaterial_KeyCryptogram *smithy.Schema
-
-var ImportKeyMaterial_DiffieHellmanTr31KeyBlock *smithy.Schema
-
-var ImportKeyMaterial_As2805KeyCryptogram *smithy.Schema
-
-var _ImportTokenId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ImportTokenId",
-}, smithy.ShapeTypeString, 0)
-
-var ImportTr31KeyBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ImportTr31KeyBlock",
-}, smithy.ShapeTypeStructure, 2)
-var ImportTr31KeyBlock_WrappingKeyIdentifier *smithy.Schema
-
-var ImportTr31KeyBlock_WrappedKeyBlock *smithy.Schema
-
-var ImportTr34KeyBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ImportTr34KeyBlock",
-}, smithy.ShapeTypeStructure, 8)
-var ImportTr34KeyBlock_CertificateAuthorityPublicKeyIdentifier *smithy.Schema
-
-var ImportTr34KeyBlock_SigningKeyCertificate *smithy.Schema
-
-var ImportTr34KeyBlock_ImportToken *smithy.Schema
-
-var ImportTr34KeyBlock_WrappingKeyIdentifier *smithy.Schema
-
-var ImportTr34KeyBlock_WrappingKeyCertificate *smithy.Schema
-
-var ImportTr34KeyBlock_WrappedKeyBlock *smithy.Schema
-
-var ImportTr34KeyBlock_KeyBlockFormat *smithy.Schema
-
-var ImportTr34KeyBlock_RandomNonce *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_Message *smithy.Schema
-
-var Key = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "Key",
-}, smithy.ShapeTypeStructure, 19)
-var Key_KeyArn *smithy.Schema
-
-var Key_KeyAttributes *smithy.Schema
-
-var Key_KeyCheckValue *smithy.Schema
-
-var Key_KeyCheckValueAlgorithm *smithy.Schema
-
-var Key_Enabled *smithy.Schema
-
-var Key_Exportable *smithy.Schema
-
-var Key_KeyState *smithy.Schema
-
-var Key_KeyOrigin *smithy.Schema
-
-var Key_CreateTimestamp *smithy.Schema
-
-var Key_UsageStartTimestamp *smithy.Schema
-
-var Key_UsageStopTimestamp *smithy.Schema
-
-var Key_DeletePendingTimestamp *smithy.Schema
-
-var Key_DeleteTimestamp *smithy.Schema
-
-var Key_DeriveKeyUsage *smithy.Schema
-
-var Key_MultiRegionKeyType *smithy.Schema
-
-var Key_PrimaryRegion *smithy.Schema
-
-var Key_ReplicationStatus *smithy.Schema
-
-var Key_UsingDefaultReplicationRegions *smithy.Schema
-
-var Key_MpaStatus *smithy.Schema
-
-var _KeyAlgorithm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "KeyAlgorithm",
-}, smithy.ShapeTypeString, 0)
-
-var _KeyArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "KeyArn",
-}, smithy.ShapeTypeString, 0)
-
-var _KeyArnOrKeyAliasType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "KeyArnOrKeyAliasType",
-}, smithy.ShapeTypeString, 0)
-
-var KeyAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "KeyAttributes",
-}, smithy.ShapeTypeStructure, 4)
-var KeyAttributes_KeyUsage *smithy.Schema
-
-var KeyAttributes_KeyClass *smithy.Schema
-
-var KeyAttributes_KeyAlgorithm *smithy.Schema
-
-var KeyAttributes_KeyModesOfUse *smithy.Schema
-
-var KeyBlockHeaders = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "KeyBlockHeaders",
-}, smithy.ShapeTypeStructure, 4)
-var KeyBlockHeaders_KeyModesOfUse *smithy.Schema
-
-var KeyBlockHeaders_KeyExportability *smithy.Schema
-
-var KeyBlockHeaders_KeyVersion *smithy.Schema
-
-var KeyBlockHeaders_OptionalBlocks *smithy.Schema
-
-var _KeyCheckValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "KeyCheckValue",
-}, smithy.ShapeTypeString, 0)
-
-var _KeyCheckValueAlgorithm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "KeyCheckValueAlgorithm",
-}, smithy.ShapeTypeString, 0)
-
-var _KeyClass = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "KeyClass",
-}, smithy.ShapeTypeString, 0)
-
-var KeyDerivationFunction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "KeyDerivationFunction",
-}, smithy.ShapeTypeEnum, 2)
-var KeyDerivationFunction_NIST_SP800 *smithy.Schema
-
-var KeyDerivationFunction_ANSI_X963 *smithy.Schema
-
-var KeyDerivationHashAlgorithm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "KeyDerivationHashAlgorithm",
-}, smithy.ShapeTypeEnum, 3)
-var KeyDerivationHashAlgorithm_SHA_256 *smithy.Schema
-
-var KeyDerivationHashAlgorithm_SHA_384 *smithy.Schema
-
-var KeyDerivationHashAlgorithm_SHA_512 *smithy.Schema
-
-var _KeyExportability = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "KeyExportability",
-}, smithy.ShapeTypeString, 0)
-
-var _KeyMaterial = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "KeyMaterial",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _KeyMaterialType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "KeyMaterialType",
-}, smithy.ShapeTypeString, 0)
-
-var KeyModesOfUse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "KeyModesOfUse",
-}, smithy.ShapeTypeStructure, 9)
-var KeyModesOfUse_Encrypt *smithy.Schema
-
-var KeyModesOfUse_Decrypt *smithy.Schema
-
-var KeyModesOfUse_Wrap *smithy.Schema
-
-var KeyModesOfUse_Unwrap *smithy.Schema
-
-var KeyModesOfUse_Generate *smithy.Schema
-
-var KeyModesOfUse_Sign *smithy.Schema
-
-var KeyModesOfUse_Verify *smithy.Schema
-
-var KeyModesOfUse_DeriveKey *smithy.Schema
-
-var KeyModesOfUse_NoRestrictions *smithy.Schema
-
-var _KeyOrigin = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "KeyOrigin",
-}, smithy.ShapeTypeString, 0)
-
-var _KeyReplicationState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "KeyReplicationState",
-}, smithy.ShapeTypeString, 0)
-
-var _KeyState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "KeyState",
-}, smithy.ShapeTypeString, 0)
-
-var KeySummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "KeySummary",
-}, smithy.ShapeTypeStructure, 8)
-var KeySummary_KeyArn *smithy.Schema
-
-var KeySummary_KeyState *smithy.Schema
-
-var KeySummary_KeyAttributes *smithy.Schema
-
-var KeySummary_KeyCheckValue *smithy.Schema
-
-var KeySummary_Exportable *smithy.Schema
-
-var KeySummary_Enabled *smithy.Schema
-
-var KeySummary_MultiRegionKeyType *smithy.Schema
-
-var KeySummary_PrimaryRegion *smithy.Schema
-
-var _KeySummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "KeySummaryList",
-}, smithy.ShapeTypeList, 1)
-var _KeySummaryList_member *smithy.Schema
-
-var _KeyUsage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "KeyUsage",
-}, smithy.ShapeTypeString, 0)
-
-var _KeyVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "KeyVersion",
-}, smithy.ShapeTypeString, 0)
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MpaOperation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "MpaOperation",
-}, smithy.ShapeTypeString, 0)
-
-var _MpaRequesterComment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "MpaRequesterComment",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _MpaSessionArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "MpaSessionArn",
-}, smithy.ShapeTypeString, 0)
-
-var MpaStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "MpaStatus",
-}, smithy.ShapeTypeStructure, 4)
-var MpaStatus_MpaSessionArn *smithy.Schema
-
-var MpaStatus_Status *smithy.Schema
-
-var MpaStatus_InitiationDate *smithy.Schema
-
-var MpaStatus_StatusMessage *smithy.Schema
-
-var _MpaStatusMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "MpaStatusMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _MpaTeamArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "MpaTeamArn",
-}, smithy.ShapeTypeString, 0)
-
-var MpaTeamAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "MpaTeamAssociation",
-}, smithy.ShapeTypeStructure, 4)
-var MpaTeamAssociation_Action *smithy.Schema
-
-var MpaTeamAssociation_MpaTeamArn *smithy.Schema
-
-var MpaTeamAssociation_AssociationState *smithy.Schema
-
-var MpaTeamAssociation_MpaStatus *smithy.Schema
-
-var _MultiRegionKeyType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "MultiRegionKeyType",
-}, smithy.ShapeTypeString, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _OptionalBlockId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "OptionalBlockId",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _OptionalBlocks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "OptionalBlocks",
-}, smithy.ShapeTypeMap, 2)
-var _OptionalBlocks_key *smithy.Schema
-
-var _OptionalBlocks_value *smithy.Schema
-
-var _OptionalBlockValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "OptionalBlockValue",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var PublicPolicyException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "PublicPolicyException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var PublicPolicyException_Message *smithy.Schema
-
-var _Region = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "Region",
-}, smithy.ShapeTypeString, 0)
-
-var _Regions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "Regions",
-}, smithy.ShapeTypeList, 1)
-var _Regions_member *smithy.Schema
-
-var _ReplicationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ReplicationStatus",
-}, smithy.ShapeTypeMap, 2)
-var _ReplicationStatus_key *smithy.Schema
-
-var _ReplicationStatus_value *smithy.Schema
-
-var ReplicationStatusType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ReplicationStatusType",
-}, smithy.ShapeTypeStructure, 2)
-var ReplicationStatusType_Status *smithy.Schema
-
-var ReplicationStatusType_StatusMessage *smithy.Schema
-
-var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_ResourceId *smithy.Schema
-
-var _ResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ResourcePolicy",
-}, smithy.ShapeTypeString, 0)
-
-var RootCertificatePublicKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "RootCertificatePublicKey",
-}, smithy.ShapeTypeStructure, 2)
-var RootCertificatePublicKey_KeyAttributes *smithy.Schema
-
-var RootCertificatePublicKey_PublicKeyCertificate *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_Message *smithy.Schema
-
-var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 503})
-var ServiceUnavailableException_Message *smithy.Schema
-
-var _SessionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "SessionStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _SharedInformation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "SharedInformation",
-}, smithy.ShapeTypeString, 0)
-
-var _SigningAlgorithmType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "SigningAlgorithmType",
-}, smithy.ShapeTypeString, 0)
-
-var SymmetricKeyAlgorithm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "SymmetricKeyAlgorithm",
-}, smithy.ShapeTypeEnum, 9)
-var SymmetricKeyAlgorithm_TDES_2KEY *smithy.Schema
-
-var SymmetricKeyAlgorithm_TDES_3KEY *smithy.Schema
-
-var SymmetricKeyAlgorithm_AES_128 *smithy.Schema
-
-var SymmetricKeyAlgorithm_AES_192 *smithy.Schema
-
-var SymmetricKeyAlgorithm_AES_256 *smithy.Schema
-
-var SymmetricKeyAlgorithm_HMAC_SHA256 *smithy.Schema
-
-var SymmetricKeyAlgorithm_HMAC_SHA384 *smithy.Schema
-
-var SymmetricKeyAlgorithm_HMAC_SHA512 *smithy.Schema
-
-var SymmetricKeyAlgorithm_HMAC_SHA224 *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "TagKeys",
-}, smithy.ShapeTypeList, 1)
-var _TagKeys_member *smithy.Schema
-
-var _Tags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "Tags",
-}, smithy.ShapeTypeList, 1)
-var _Tags_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_Message *smithy.Schema
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _Tr31WrappedKeyBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "Tr31WrappedKeyBlock",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _Tr34KeyBlockFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "Tr34KeyBlockFormat",
-}, smithy.ShapeTypeString, 0)
-
-var _Tr34WrappedKeyBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "Tr34WrappedKeyBlock",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var TrustedCertificatePublicKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "TrustedCertificatePublicKey",
-}, smithy.ShapeTypeStructure, 3)
-var TrustedCertificatePublicKey_KeyAttributes *smithy.Schema
-
-var TrustedCertificatePublicKey_PublicKeyCertificate *smithy.Schema
-
-var TrustedCertificatePublicKey_CertificateAuthorityPublicKeyIdentifier *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_Message *smithy.Schema
-
-var WrappedKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "WrappedKey",
-}, smithy.ShapeTypeStructure, 5)
-var WrappedKey_WrappingKeyArn *smithy.Schema
-
-var WrappedKey_WrappedKeyMaterialFormat *smithy.Schema
-
-var WrappedKey_KeyMaterial *smithy.Schema
-
-var WrappedKey_KeyCheckValue *smithy.Schema
-
-var WrappedKey_KeyCheckValueAlgorithm *smithy.Schema
-
-var _WrappedKeyCryptogram = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "WrappedKeyCryptogram",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _WrappedKeyMaterialFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "WrappedKeyMaterialFormat",
-}, smithy.ShapeTypeString, 0)
-
-var _WrappingKeySpec = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "WrappingKeySpec",
-}, smithy.ShapeTypeString, 0)
-
-var AddKeyReplicationRegionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "AddKeyReplicationRegionsInput",
-}, smithy.ShapeTypeStructure, 2)
-var AddKeyReplicationRegionsInput_KeyIdentifier *smithy.Schema
-
-var AddKeyReplicationRegionsInput_ReplicationRegions *smithy.Schema
-
-var AddKeyReplicationRegionsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "AddKeyReplicationRegionsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var AddKeyReplicationRegionsOutput_Key *smithy.Schema
-
-var AssociateMpaTeamInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "AssociateMpaTeamInput",
-}, smithy.ShapeTypeStructure, 3)
-var AssociateMpaTeamInput_Action *smithy.Schema
-
-var AssociateMpaTeamInput_MpaTeamArn *smithy.Schema
-
-var AssociateMpaTeamInput_RequesterComment *smithy.Schema
-
-var AssociateMpaTeamOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "AssociateMpaTeamOutput",
-}, smithy.ShapeTypeStructure, 1)
-var AssociateMpaTeamOutput_MpaTeamAssociation *smithy.Schema
-
-var CreateAliasInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "CreateAliasInput",
-}, smithy.ShapeTypeStructure, 2)
-var CreateAliasInput_AliasName *smithy.Schema
-
-var CreateAliasInput_KeyArn *smithy.Schema
-
-var CreateAliasOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "CreateAliasOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateAliasOutput_Alias *smithy.Schema
-
-var CreateKeyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "CreateKeyInput",
-}, smithy.ShapeTypeStructure, 7)
-var CreateKeyInput_KeyAttributes *smithy.Schema
-
-var CreateKeyInput_KeyCheckValueAlgorithm *smithy.Schema
-
-var CreateKeyInput_Exportable *smithy.Schema
-
-var CreateKeyInput_Enabled *smithy.Schema
-
-var CreateKeyInput_Tags *smithy.Schema
-
-var CreateKeyInput_DeriveKeyUsage *smithy.Schema
-
-var CreateKeyInput_ReplicationRegions *smithy.Schema
-
-var CreateKeyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "CreateKeyOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateKeyOutput_Key *smithy.Schema
-
-var DeleteAliasInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "DeleteAliasInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteAliasInput_AliasName *smithy.Schema
-
-var DeleteAliasOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "DeleteAliasOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteKeyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "DeleteKeyInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteKeyInput_KeyIdentifier *smithy.Schema
-
-var DeleteKeyInput_DeleteKeyInDays *smithy.Schema
-
-var DeleteKeyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "DeleteKeyOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteKeyOutput_Key *smithy.Schema
-
-var DeleteResourcePolicyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "DeleteResourcePolicyInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteResourcePolicyInput_ResourceArn *smithy.Schema
-
-var DeleteResourcePolicyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "DeleteResourcePolicyOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DisableDefaultKeyReplicationRegionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "DisableDefaultKeyReplicationRegionsInput",
-}, smithy.ShapeTypeStructure, 1)
-var DisableDefaultKeyReplicationRegionsInput_ReplicationRegions *smithy.Schema
-
-var DisableDefaultKeyReplicationRegionsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "DisableDefaultKeyReplicationRegionsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DisableDefaultKeyReplicationRegionsOutput_EnabledReplicationRegions *smithy.Schema
-
-var DisassociateMpaTeamInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "DisassociateMpaTeamInput",
-}, smithy.ShapeTypeStructure, 2)
-var DisassociateMpaTeamInput_Action *smithy.Schema
-
-var DisassociateMpaTeamInput_RequesterComment *smithy.Schema
-
-var DisassociateMpaTeamOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "DisassociateMpaTeamOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DisassociateMpaTeamOutput_MpaTeamAssociation *smithy.Schema
-
-var EnableDefaultKeyReplicationRegionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "EnableDefaultKeyReplicationRegionsInput",
-}, smithy.ShapeTypeStructure, 1)
-var EnableDefaultKeyReplicationRegionsInput_ReplicationRegions *smithy.Schema
-
-var EnableDefaultKeyReplicationRegionsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "EnableDefaultKeyReplicationRegionsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var EnableDefaultKeyReplicationRegionsOutput_EnabledReplicationRegions *smithy.Schema
-
-var ExportKeyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ExportKeyInput",
-}, smithy.ShapeTypeStructure, 3)
-var ExportKeyInput_KeyMaterial *smithy.Schema
-
-var ExportKeyInput_ExportKeyIdentifier *smithy.Schema
-
-var ExportKeyInput_ExportAttributes *smithy.Schema
-
-var ExportKeyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ExportKeyOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ExportKeyOutput_WrappedKey *smithy.Schema
-
-var GetAliasInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetAliasInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetAliasInput_AliasName *smithy.Schema
-
-var GetAliasOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetAliasOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetAliasOutput_Alias *smithy.Schema
-
-var GetCertificateSigningRequestInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetCertificateSigningRequestInput",
-}, smithy.ShapeTypeStructure, 3)
-var GetCertificateSigningRequestInput_KeyIdentifier *smithy.Schema
-
-var GetCertificateSigningRequestInput_SigningAlgorithm *smithy.Schema
-
-var GetCertificateSigningRequestInput_CertificateSubject *smithy.Schema
-
-var GetCertificateSigningRequestOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetCertificateSigningRequestOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetCertificateSigningRequestOutput_CertificateSigningRequest *smithy.Schema
-
-var GetDefaultKeyReplicationRegionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetDefaultKeyReplicationRegionsInput",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetDefaultKeyReplicationRegionsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetDefaultKeyReplicationRegionsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetDefaultKeyReplicationRegionsOutput_EnabledReplicationRegions *smithy.Schema
-
-var GetKeyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetKeyInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetKeyInput_KeyIdentifier *smithy.Schema
-
-var GetKeyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetKeyOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetKeyOutput_Key *smithy.Schema
-
-var GetMpaTeamAssociationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetMpaTeamAssociationInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetMpaTeamAssociationInput_Action *smithy.Schema
-
-var GetMpaTeamAssociationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetMpaTeamAssociationOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetMpaTeamAssociationOutput_MpaTeamAssociation *smithy.Schema
-
-var GetParametersForExportInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetParametersForExportInput",
-}, smithy.ShapeTypeStructure, 3)
-var GetParametersForExportInput_KeyMaterialType *smithy.Schema
-
-var GetParametersForExportInput_SigningKeyAlgorithm *smithy.Schema
-
-var GetParametersForExportInput_ReuseLastGeneratedToken *smithy.Schema
-
-var GetParametersForExportOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetParametersForExportOutput",
-}, smithy.ShapeTypeStructure, 5)
-var GetParametersForExportOutput_SigningKeyCertificate *smithy.Schema
-
-var GetParametersForExportOutput_SigningKeyCertificateChain *smithy.Schema
-
-var GetParametersForExportOutput_SigningKeyAlgorithm *smithy.Schema
-
-var GetParametersForExportOutput_ExportToken *smithy.Schema
-
-var GetParametersForExportOutput_ParametersValidUntilTimestamp *smithy.Schema
-
-var GetParametersForImportInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetParametersForImportInput",
-}, smithy.ShapeTypeStructure, 3)
-var GetParametersForImportInput_KeyMaterialType *smithy.Schema
-
-var GetParametersForImportInput_WrappingKeyAlgorithm *smithy.Schema
-
-var GetParametersForImportInput_ReuseLastGeneratedToken *smithy.Schema
-
-var GetParametersForImportOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetParametersForImportOutput",
-}, smithy.ShapeTypeStructure, 5)
-var GetParametersForImportOutput_WrappingKeyCertificate *smithy.Schema
-
-var GetParametersForImportOutput_WrappingKeyCertificateChain *smithy.Schema
-
-var GetParametersForImportOutput_WrappingKeyAlgorithm *smithy.Schema
-
-var GetParametersForImportOutput_ImportToken *smithy.Schema
-
-var GetParametersForImportOutput_ParametersValidUntilTimestamp *smithy.Schema
-
-var GetPublicKeyCertificateInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetPublicKeyCertificateInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetPublicKeyCertificateInput_KeyIdentifier *smithy.Schema
-
-var GetPublicKeyCertificateOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetPublicKeyCertificateOutput",
-}, smithy.ShapeTypeStructure, 2)
-var GetPublicKeyCertificateOutput_KeyCertificate *smithy.Schema
-
-var GetPublicKeyCertificateOutput_KeyCertificateChain *smithy.Schema
-
-var GetResourcePolicyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetResourcePolicyInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetResourcePolicyInput_ResourceArn *smithy.Schema
-
-var GetResourcePolicyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "GetResourcePolicyOutput",
-}, smithy.ShapeTypeStructure, 2)
-var GetResourcePolicyOutput_ResourceArn *smithy.Schema
-
-var GetResourcePolicyOutput_Policy *smithy.Schema
-
-var ImportKeyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ImportKeyInput",
-}, smithy.ShapeTypeStructure, 6)
-var ImportKeyInput_KeyMaterial *smithy.Schema
-
-var ImportKeyInput_KeyCheckValueAlgorithm *smithy.Schema
-
-var ImportKeyInput_Enabled *smithy.Schema
-
-var ImportKeyInput_Tags *smithy.Schema
-
-var ImportKeyInput_ReplicationRegions *smithy.Schema
-
-var ImportKeyInput_RequesterComment *smithy.Schema
-
-var ImportKeyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ImportKeyOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ImportKeyOutput_Key *smithy.Schema
-
-var ListAliasesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ListAliasesInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListAliasesInput_KeyArn *smithy.Schema
-
-var ListAliasesInput_NextToken *smithy.Schema
-
-var ListAliasesInput_MaxResults *smithy.Schema
-
-var ListAliasesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ListAliasesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListAliasesOutput_Aliases *smithy.Schema
-
-var ListAliasesOutput_NextToken *smithy.Schema
-
-var ListKeysInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ListKeysInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListKeysInput_KeyState *smithy.Schema
-
-var ListKeysInput_NextToken *smithy.Schema
-
-var ListKeysInput_MaxResults *smithy.Schema
-
-var ListKeysOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ListKeysOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListKeysOutput_Keys *smithy.Schema
-
-var ListKeysOutput_NextToken *smithy.Schema
-
-var ListTagsForResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ListTagsForResourceInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListTagsForResourceInput_ResourceArn *smithy.Schema
-
-var ListTagsForResourceInput_NextToken *smithy.Schema
-
-var ListTagsForResourceInput_MaxResults *smithy.Schema
-
-var ListTagsForResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "ListTagsForResourceOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListTagsForResourceOutput_Tags *smithy.Schema
-
-var ListTagsForResourceOutput_NextToken *smithy.Schema
-
-var PutResourcePolicyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "PutResourcePolicyInput",
-}, smithy.ShapeTypeStructure, 2)
-var PutResourcePolicyInput_ResourceArn *smithy.Schema
-
-var PutResourcePolicyInput_Policy *smithy.Schema
-
-var PutResourcePolicyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "PutResourcePolicyOutput",
-}, smithy.ShapeTypeStructure, 2)
-var PutResourcePolicyOutput_ResourceArn *smithy.Schema
-
-var PutResourcePolicyOutput_Policy *smithy.Schema
-
-var RemoveKeyReplicationRegionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "RemoveKeyReplicationRegionsInput",
-}, smithy.ShapeTypeStructure, 2)
-var RemoveKeyReplicationRegionsInput_KeyIdentifier *smithy.Schema
-
-var RemoveKeyReplicationRegionsInput_ReplicationRegions *smithy.Schema
-
-var RemoveKeyReplicationRegionsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "RemoveKeyReplicationRegionsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var RemoveKeyReplicationRegionsOutput_Key *smithy.Schema
-
-var RestoreKeyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "RestoreKeyInput",
-}, smithy.ShapeTypeStructure, 1)
-var RestoreKeyInput_KeyIdentifier *smithy.Schema
-
-var RestoreKeyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "RestoreKeyOutput",
-}, smithy.ShapeTypeStructure, 1)
-var RestoreKeyOutput_Key *smithy.Schema
-
-var StartKeyUsageInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "StartKeyUsageInput",
-}, smithy.ShapeTypeStructure, 1)
-var StartKeyUsageInput_KeyIdentifier *smithy.Schema
-
-var StartKeyUsageOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "StartKeyUsageOutput",
-}, smithy.ShapeTypeStructure, 1)
-var StartKeyUsageOutput_Key *smithy.Schema
-
-var StopKeyUsageInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "StopKeyUsageInput",
-}, smithy.ShapeTypeStructure, 1)
-var StopKeyUsageInput_KeyIdentifier *smithy.Schema
-
-var StopKeyUsageOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "StopKeyUsageOutput",
-}, smithy.ShapeTypeStructure, 1)
-var StopKeyUsageOutput_Key *smithy.Schema
-
-var TagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "TagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceInput_ResourceArn *smithy.Schema
-
-var TagResourceInput_Tags *smithy.Schema
-
-var TagResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "TagResourceOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "UntagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceInput_ResourceArn *smithy.Schema
-
-var UntagResourceInput_TagKeys *smithy.Schema
-
-var UntagResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "UntagResourceOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateAliasInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "UpdateAliasInput",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateAliasInput_AliasName *smithy.Schema
-
-var UpdateAliasInput_KeyArn *smithy.Schema
-
-var UpdateAliasOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.paymentcryptography",
-	Name:      "UpdateAliasOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateAliasOutput_Alias *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", smithyprelude.String)
-
-	Alias_AliasName = Alias.AddMember("AliasName", _AliasName)
-
-	Alias_KeyArn = Alias.AddMember("KeyArn", _KeyArn)
-
-	_Aliases_member = _Aliases.AddMember("member", Alias)
-
-	As2805KeyVariant_TERMINAL_MAJOR_KEY_VARIANT_00 = As2805KeyVariant.AddMember("TERMINAL_MAJOR_KEY_VARIANT_00", smithyprelude.Unit)
-
-	As2805KeyVariant_PIN_ENCRYPTION_KEY_VARIANT_28 = As2805KeyVariant.AddMember("PIN_ENCRYPTION_KEY_VARIANT_28", smithyprelude.Unit)
-
-	As2805KeyVariant_MESSAGE_AUTHENTICATION_KEY_VARIANT_24 = As2805KeyVariant.AddMember("MESSAGE_AUTHENTICATION_KEY_VARIANT_24", smithyprelude.Unit)
-
-	As2805KeyVariant_DATA_ENCRYPTION_KEY_VARIANT_22 = As2805KeyVariant.AddMember("DATA_ENCRYPTION_KEY_VARIANT_22", smithyprelude.Unit)
-
-	CertificateSubjectType_CommonName = CertificateSubjectType.AddMember("CommonName", smithyprelude.String)
-
-	CertificateSubjectType_OrganizationUnit = CertificateSubjectType.AddMember("OrganizationUnit", smithyprelude.String)
-
-	CertificateSubjectType_Organization = CertificateSubjectType.AddMember("Organization", smithyprelude.String)
-
-	CertificateSubjectType_City = CertificateSubjectType.AddMember("City", smithyprelude.String)
-
-	CertificateSubjectType_Country = CertificateSubjectType.AddMember("Country", smithyprelude.String)
-
-	CertificateSubjectType_StateOrProvince = CertificateSubjectType.AddMember("StateOrProvince", smithyprelude.String)
-
-	CertificateSubjectType_EmailAddress = CertificateSubjectType.AddMember("EmailAddress", smithyprelude.String)
-
-	ConflictException_Message = ConflictException.AddMember("Message", smithyprelude.String)
-
-	DiffieHellmanDerivationData_SharedInformation = DiffieHellmanDerivationData.AddMember("SharedInformation", _SharedInformation)
-
-	ExportAs2805KeyCryptogram_WrappingKeyIdentifier = ExportAs2805KeyCryptogram.AddMember("WrappingKeyIdentifier", _KeyArnOrKeyAliasType)
-
-	ExportAs2805KeyCryptogram_As2805KeyVariant = ExportAs2805KeyCryptogram.AddMember("As2805KeyVariant", As2805KeyVariant)
-
-	ExportDukptInitialKey_KeySerialNumber = ExportDukptInitialKey.AddMember("KeySerialNumber", _HexLength20Or24)
-
-	ExportAttributes_ExportDukptInitialKey = ExportAttributes.AddMember("ExportDukptInitialKey", ExportDukptInitialKey)
-
-	ExportAttributes_KeyCheckValueAlgorithm = ExportAttributes.AddMember("KeyCheckValueAlgorithm", _KeyCheckValueAlgorithm)
-
-	SymmetricKeyAlgorithm_TDES_2KEY = SymmetricKeyAlgorithm.AddMember("TDES_2KEY", smithyprelude.Unit)
-
-	SymmetricKeyAlgorithm_TDES_3KEY = SymmetricKeyAlgorithm.AddMember("TDES_3KEY", smithyprelude.Unit)
-
-	SymmetricKeyAlgorithm_AES_128 = SymmetricKeyAlgorithm.AddMember("AES_128", smithyprelude.Unit)
-
-	SymmetricKeyAlgorithm_AES_192 = SymmetricKeyAlgorithm.AddMember("AES_192", smithyprelude.Unit)
-
-	SymmetricKeyAlgorithm_AES_256 = SymmetricKeyAlgorithm.AddMember("AES_256", smithyprelude.Unit)
-
-	SymmetricKeyAlgorithm_HMAC_SHA256 = SymmetricKeyAlgorithm.AddMember("HMAC_SHA256", smithyprelude.Unit)
-
-	SymmetricKeyAlgorithm_HMAC_SHA384 = SymmetricKeyAlgorithm.AddMember("HMAC_SHA384", smithyprelude.Unit)
-
-	SymmetricKeyAlgorithm_HMAC_SHA512 = SymmetricKeyAlgorithm.AddMember("HMAC_SHA512", smithyprelude.Unit)
-
-	SymmetricKeyAlgorithm_HMAC_SHA224 = SymmetricKeyAlgorithm.AddMember("HMAC_SHA224", smithyprelude.Unit)
-
-	KeyDerivationFunction_NIST_SP800 = KeyDerivationFunction.AddMember("NIST_SP800", smithyprelude.Unit)
-
-	KeyDerivationFunction_ANSI_X963 = KeyDerivationFunction.AddMember("ANSI_X963", smithyprelude.Unit)
-
-	KeyDerivationHashAlgorithm_SHA_256 = KeyDerivationHashAlgorithm.AddMember("SHA_256", smithyprelude.Unit)
-
-	KeyDerivationHashAlgorithm_SHA_384 = KeyDerivationHashAlgorithm.AddMember("SHA_384", smithyprelude.Unit)
-
-	KeyDerivationHashAlgorithm_SHA_512 = KeyDerivationHashAlgorithm.AddMember("SHA_512", smithyprelude.Unit)
-
-	KeyModesOfUse_Encrypt = KeyModesOfUse.AddMember("Encrypt", smithyprelude.PrimitiveBoolean)
-
-	KeyModesOfUse_Decrypt = KeyModesOfUse.AddMember("Decrypt", smithyprelude.PrimitiveBoolean)
-
-	KeyModesOfUse_Wrap = KeyModesOfUse.AddMember("Wrap", smithyprelude.PrimitiveBoolean)
-
-	KeyModesOfUse_Unwrap = KeyModesOfUse.AddMember("Unwrap", smithyprelude.PrimitiveBoolean)
-
-	KeyModesOfUse_Generate = KeyModesOfUse.AddMember("Generate", smithyprelude.PrimitiveBoolean)
-
-	KeyModesOfUse_Sign = KeyModesOfUse.AddMember("Sign", smithyprelude.PrimitiveBoolean)
-
-	KeyModesOfUse_Verify = KeyModesOfUse.AddMember("Verify", smithyprelude.PrimitiveBoolean)
-
-	KeyModesOfUse_DeriveKey = KeyModesOfUse.AddMember("DeriveKey", smithyprelude.PrimitiveBoolean)
-
-	KeyModesOfUse_NoRestrictions = KeyModesOfUse.AddMember("NoRestrictions", smithyprelude.PrimitiveBoolean)
-
-	_OptionalBlocks_key = _OptionalBlocks.AddMember("key", _OptionalBlockId)
-
-	_OptionalBlocks_value = _OptionalBlocks.AddMember("value", _OptionalBlockValue)
-
-	KeyBlockHeaders_KeyModesOfUse = KeyBlockHeaders.AddMember("KeyModesOfUse", KeyModesOfUse)
-
-	KeyBlockHeaders_KeyExportability = KeyBlockHeaders.AddMember("KeyExportability", _KeyExportability)
-
-	KeyBlockHeaders_KeyVersion = KeyBlockHeaders.AddMember("KeyVersion", _KeyVersion)
-
-	KeyBlockHeaders_OptionalBlocks = KeyBlockHeaders.AddMember("OptionalBlocks", _OptionalBlocks)
-
-	ExportDiffieHellmanTr31KeyBlock_PrivateKeyIdentifier = ExportDiffieHellmanTr31KeyBlock.AddMember("PrivateKeyIdentifier", _KeyArnOrKeyAliasType)
-
-	ExportDiffieHellmanTr31KeyBlock_CertificateAuthorityPublicKeyIdentifier = ExportDiffieHellmanTr31KeyBlock.AddMember("CertificateAuthorityPublicKeyIdentifier", _KeyArnOrKeyAliasType)
-
-	ExportDiffieHellmanTr31KeyBlock_PublicKeyCertificate = ExportDiffieHellmanTr31KeyBlock.AddMember("PublicKeyCertificate", _CertificateType)
-
-	ExportDiffieHellmanTr31KeyBlock_DeriveKeyAlgorithm = ExportDiffieHellmanTr31KeyBlock.AddMember("DeriveKeyAlgorithm", SymmetricKeyAlgorithm)
-
-	ExportDiffieHellmanTr31KeyBlock_KeyDerivationFunction = ExportDiffieHellmanTr31KeyBlock.AddMember("KeyDerivationFunction", KeyDerivationFunction)
-
-	ExportDiffieHellmanTr31KeyBlock_KeyDerivationHashAlgorithm = ExportDiffieHellmanTr31KeyBlock.AddMember("KeyDerivationHashAlgorithm", KeyDerivationHashAlgorithm)
-
-	ExportDiffieHellmanTr31KeyBlock_DerivationData = ExportDiffieHellmanTr31KeyBlock.AddMember("DerivationData", DiffieHellmanDerivationData)
-
-	ExportDiffieHellmanTr31KeyBlock_KeyBlockHeaders = ExportDiffieHellmanTr31KeyBlock.AddMember("KeyBlockHeaders", KeyBlockHeaders)
-
-	ExportKeyCryptogram_CertificateAuthorityPublicKeyIdentifier = ExportKeyCryptogram.AddMember("CertificateAuthorityPublicKeyIdentifier", _KeyArnOrKeyAliasType)
-
-	ExportKeyCryptogram_WrappingKeyCertificate = ExportKeyCryptogram.AddMember("WrappingKeyCertificate", _CertificateType)
-
-	ExportKeyCryptogram_WrappingSpec = ExportKeyCryptogram.AddMember("WrappingSpec", _WrappingKeySpec)
-
-	ExportTr31KeyBlock_WrappingKeyIdentifier = ExportTr31KeyBlock.AddMember("WrappingKeyIdentifier", _KeyArnOrKeyAliasType)
-
-	ExportTr31KeyBlock_KeyBlockHeaders = ExportTr31KeyBlock.AddMember("KeyBlockHeaders", KeyBlockHeaders)
-
-	ExportTr34KeyBlock_CertificateAuthorityPublicKeyIdentifier = ExportTr34KeyBlock.AddMember("CertificateAuthorityPublicKeyIdentifier", _KeyArnOrKeyAliasType)
-
-	ExportTr34KeyBlock_WrappingKeyCertificate = ExportTr34KeyBlock.AddMember("WrappingKeyCertificate", _CertificateType)
-
-	ExportTr34KeyBlock_ExportToken = ExportTr34KeyBlock.AddMember("ExportToken", _ExportTokenId)
-
-	ExportTr34KeyBlock_SigningKeyIdentifier = ExportTr34KeyBlock.AddMember("SigningKeyIdentifier", _KeyArnOrKeyAliasType)
-
-	ExportTr34KeyBlock_SigningKeyCertificate = ExportTr34KeyBlock.AddMember("SigningKeyCertificate", _CertificateType)
-
-	ExportTr34KeyBlock_KeyBlockFormat = ExportTr34KeyBlock.AddMember("KeyBlockFormat", _Tr34KeyBlockFormat)
-
-	ExportTr34KeyBlock_RandomNonce = ExportTr34KeyBlock.AddMember("RandomNonce", _EvenHexLengthBetween16And32)
-
-	ExportTr34KeyBlock_KeyBlockHeaders = ExportTr34KeyBlock.AddMember("KeyBlockHeaders", KeyBlockHeaders)
-
-	ExportKeyMaterial_Tr31KeyBlock = ExportKeyMaterial.AddMember("Tr31KeyBlock", ExportTr31KeyBlock)
-
-	ExportKeyMaterial_Tr34KeyBlock = ExportKeyMaterial.AddMember("Tr34KeyBlock", ExportTr34KeyBlock)
-
-	ExportKeyMaterial_KeyCryptogram = ExportKeyMaterial.AddMember("KeyCryptogram", ExportKeyCryptogram)
-
-	ExportKeyMaterial_DiffieHellmanTr31KeyBlock = ExportKeyMaterial.AddMember("DiffieHellmanTr31KeyBlock", ExportDiffieHellmanTr31KeyBlock)
-
-	ExportKeyMaterial_As2805KeyCryptogram = ExportKeyMaterial.AddMember("As2805KeyCryptogram", ExportAs2805KeyCryptogram)
-
-	ImportAs2805KeyCryptogram_As2805KeyVariant = ImportAs2805KeyCryptogram.AddMember("As2805KeyVariant", As2805KeyVariant)
-
-	ImportAs2805KeyCryptogram_KeyModesOfUse = ImportAs2805KeyCryptogram.AddMember("KeyModesOfUse", KeyModesOfUse)
-
-	ImportAs2805KeyCryptogram_KeyAlgorithm = ImportAs2805KeyCryptogram.AddMember("KeyAlgorithm", _KeyAlgorithm)
-
-	ImportAs2805KeyCryptogram_Exportable = ImportAs2805KeyCryptogram.AddMember("Exportable", smithyprelude.Boolean)
-
-	ImportAs2805KeyCryptogram_WrappingKeyIdentifier = ImportAs2805KeyCryptogram.AddMember("WrappingKeyIdentifier", _KeyArnOrKeyAliasType)
-
-	ImportAs2805KeyCryptogram_WrappedKeyCryptogram = ImportAs2805KeyCryptogram.AddMember("WrappedKeyCryptogram", _WrappedKeyCryptogram)
-
-	ImportDiffieHellmanTr31KeyBlock_PrivateKeyIdentifier = ImportDiffieHellmanTr31KeyBlock.AddMember("PrivateKeyIdentifier", _KeyArnOrKeyAliasType)
-
-	ImportDiffieHellmanTr31KeyBlock_CertificateAuthorityPublicKeyIdentifier = ImportDiffieHellmanTr31KeyBlock.AddMember("CertificateAuthorityPublicKeyIdentifier", _KeyArnOrKeyAliasType)
-
-	ImportDiffieHellmanTr31KeyBlock_PublicKeyCertificate = ImportDiffieHellmanTr31KeyBlock.AddMember("PublicKeyCertificate", _CertificateType)
-
-	ImportDiffieHellmanTr31KeyBlock_DeriveKeyAlgorithm = ImportDiffieHellmanTr31KeyBlock.AddMember("DeriveKeyAlgorithm", SymmetricKeyAlgorithm)
-
-	ImportDiffieHellmanTr31KeyBlock_KeyDerivationFunction = ImportDiffieHellmanTr31KeyBlock.AddMember("KeyDerivationFunction", KeyDerivationFunction)
-
-	ImportDiffieHellmanTr31KeyBlock_KeyDerivationHashAlgorithm = ImportDiffieHellmanTr31KeyBlock.AddMember("KeyDerivationHashAlgorithm", KeyDerivationHashAlgorithm)
-
-	ImportDiffieHellmanTr31KeyBlock_DerivationData = ImportDiffieHellmanTr31KeyBlock.AddMember("DerivationData", DiffieHellmanDerivationData)
-
-	ImportDiffieHellmanTr31KeyBlock_WrappedKeyBlock = ImportDiffieHellmanTr31KeyBlock.AddMember("WrappedKeyBlock", _Tr31WrappedKeyBlock)
-
-	KeyAttributes_KeyUsage = KeyAttributes.AddMember("KeyUsage", _KeyUsage)
-
-	KeyAttributes_KeyClass = KeyAttributes.AddMember("KeyClass", _KeyClass)
-
-	KeyAttributes_KeyAlgorithm = KeyAttributes.AddMember("KeyAlgorithm", _KeyAlgorithm)
-
-	KeyAttributes_KeyModesOfUse = KeyAttributes.AddMember("KeyModesOfUse", KeyModesOfUse)
-
-	ImportKeyCryptogram_KeyAttributes = ImportKeyCryptogram.AddMember("KeyAttributes", KeyAttributes)
-
-	ImportKeyCryptogram_Exportable = ImportKeyCryptogram.AddMember("Exportable", smithyprelude.Boolean)
-
-	ImportKeyCryptogram_WrappedKeyCryptogram = ImportKeyCryptogram.AddMember("WrappedKeyCryptogram", _WrappedKeyCryptogram)
-
-	ImportKeyCryptogram_ImportToken = ImportKeyCryptogram.AddMember("ImportToken", _ImportTokenId)
-
-	ImportKeyCryptogram_WrappingSpec = ImportKeyCryptogram.AddMember("WrappingSpec", _WrappingKeySpec)
-
-	RootCertificatePublicKey_KeyAttributes = RootCertificatePublicKey.AddMember("KeyAttributes", KeyAttributes)
-
-	RootCertificatePublicKey_PublicKeyCertificate = RootCertificatePublicKey.AddMember("PublicKeyCertificate", _CertificateType)
-
-	TrustedCertificatePublicKey_KeyAttributes = TrustedCertificatePublicKey.AddMember("KeyAttributes", KeyAttributes)
-
-	TrustedCertificatePublicKey_PublicKeyCertificate = TrustedCertificatePublicKey.AddMember("PublicKeyCertificate", _CertificateType)
-
-	TrustedCertificatePublicKey_CertificateAuthorityPublicKeyIdentifier = TrustedCertificatePublicKey.AddMember("CertificateAuthorityPublicKeyIdentifier", _KeyArnOrKeyAliasType)
-
-	ImportTr31KeyBlock_WrappingKeyIdentifier = ImportTr31KeyBlock.AddMember("WrappingKeyIdentifier", _KeyArnOrKeyAliasType)
-
-	ImportTr31KeyBlock_WrappedKeyBlock = ImportTr31KeyBlock.AddMember("WrappedKeyBlock", _Tr31WrappedKeyBlock)
-
-	ImportTr34KeyBlock_CertificateAuthorityPublicKeyIdentifier = ImportTr34KeyBlock.AddMember("CertificateAuthorityPublicKeyIdentifier", _KeyArnOrKeyAliasType)
-
-	ImportTr34KeyBlock_SigningKeyCertificate = ImportTr34KeyBlock.AddMember("SigningKeyCertificate", _CertificateType)
-
-	ImportTr34KeyBlock_ImportToken = ImportTr34KeyBlock.AddMember("ImportToken", _ImportTokenId)
-
-	ImportTr34KeyBlock_WrappingKeyIdentifier = ImportTr34KeyBlock.AddMember("WrappingKeyIdentifier", _KeyArnOrKeyAliasType)
-
-	ImportTr34KeyBlock_WrappingKeyCertificate = ImportTr34KeyBlock.AddMember("WrappingKeyCertificate", _CertificateType)
-
-	ImportTr34KeyBlock_WrappedKeyBlock = ImportTr34KeyBlock.AddMember("WrappedKeyBlock", _Tr34WrappedKeyBlock)
-
-	ImportTr34KeyBlock_KeyBlockFormat = ImportTr34KeyBlock.AddMember("KeyBlockFormat", _Tr34KeyBlockFormat)
-
-	ImportTr34KeyBlock_RandomNonce = ImportTr34KeyBlock.AddMember("RandomNonce", _EvenHexLengthBetween16And32)
-
-	ImportKeyMaterial_RootCertificatePublicKey = ImportKeyMaterial.AddMember("RootCertificatePublicKey", RootCertificatePublicKey)
-
-	ImportKeyMaterial_TrustedCertificatePublicKey = ImportKeyMaterial.AddMember("TrustedCertificatePublicKey", TrustedCertificatePublicKey)
-
-	ImportKeyMaterial_Tr31KeyBlock = ImportKeyMaterial.AddMember("Tr31KeyBlock", ImportTr31KeyBlock)
-
-	ImportKeyMaterial_Tr34KeyBlock = ImportKeyMaterial.AddMember("Tr34KeyBlock", ImportTr34KeyBlock)
-
-	ImportKeyMaterial_KeyCryptogram = ImportKeyMaterial.AddMember("KeyCryptogram", ImportKeyCryptogram)
-
-	ImportKeyMaterial_DiffieHellmanTr31KeyBlock = ImportKeyMaterial.AddMember("DiffieHellmanTr31KeyBlock", ImportDiffieHellmanTr31KeyBlock)
-
-	ImportKeyMaterial_As2805KeyCryptogram = ImportKeyMaterial.AddMember("As2805KeyCryptogram", ImportAs2805KeyCryptogram)
-
-	InternalServerException_Message = InternalServerException.AddMember("Message", smithyprelude.String)
-
-	ReplicationStatusType_Status = ReplicationStatusType.AddMember("Status", _KeyReplicationState)
-
-	ReplicationStatusType_StatusMessage = ReplicationStatusType.AddMember("StatusMessage", smithyprelude.String)
-
-	_ReplicationStatus_key = _ReplicationStatus.AddMember("key", _Region)
-
-	_ReplicationStatus_value = _ReplicationStatus.AddMember("value", ReplicationStatusType)
-
-	MpaStatus_MpaSessionArn = MpaStatus.AddMember("MpaSessionArn", _MpaSessionArn)
-
-	MpaStatus_Status = MpaStatus.AddMember("Status", _SessionStatus)
-
-	MpaStatus_InitiationDate = MpaStatus.AddMember("InitiationDate", _Timestamp)
-
-	MpaStatus_StatusMessage = MpaStatus.AddMember("StatusMessage", _MpaStatusMessage)
-
-	Key_KeyArn = Key.AddMember("KeyArn", _KeyArn)
-
-	Key_KeyAttributes = Key.AddMember("KeyAttributes", KeyAttributes)
-
-	Key_KeyCheckValue = Key.AddMember("KeyCheckValue", _KeyCheckValue)
-
-	Key_KeyCheckValueAlgorithm = Key.AddMember("KeyCheckValueAlgorithm", _KeyCheckValueAlgorithm)
-
-	Key_Enabled = Key.AddMember("Enabled", smithyprelude.Boolean)
-
-	Key_Exportable = Key.AddMember("Exportable", smithyprelude.Boolean)
-
-	Key_KeyState = Key.AddMember("KeyState", _KeyState)
-
-	Key_KeyOrigin = Key.AddMember("KeyOrigin", _KeyOrigin)
-
-	Key_CreateTimestamp = Key.AddMember("CreateTimestamp", _Timestamp)
-
-	Key_UsageStartTimestamp = Key.AddMember("UsageStartTimestamp", _Timestamp)
-
-	Key_UsageStopTimestamp = Key.AddMember("UsageStopTimestamp", _Timestamp)
-
-	Key_DeletePendingTimestamp = Key.AddMember("DeletePendingTimestamp", _Timestamp)
-
-	Key_DeleteTimestamp = Key.AddMember("DeleteTimestamp", _Timestamp)
-
-	Key_DeriveKeyUsage = Key.AddMember("DeriveKeyUsage", _DeriveKeyUsage)
-
-	Key_MultiRegionKeyType = Key.AddMember("MultiRegionKeyType", _MultiRegionKeyType)
-
-	Key_PrimaryRegion = Key.AddMember("PrimaryRegion", _Region)
-
-	Key_ReplicationStatus = Key.AddMember("ReplicationStatus", _ReplicationStatus)
-
-	Key_UsingDefaultReplicationRegions = Key.AddMember("UsingDefaultReplicationRegions", smithyprelude.Boolean)
-
-	Key_MpaStatus = Key.AddMember("MpaStatus", MpaStatus)
-
-	KeySummary_KeyArn = KeySummary.AddMember("KeyArn", _KeyArn)
-
-	KeySummary_KeyState = KeySummary.AddMember("KeyState", _KeyState)
-
-	KeySummary_KeyAttributes = KeySummary.AddMember("KeyAttributes", KeyAttributes)
-
-	KeySummary_KeyCheckValue = KeySummary.AddMember("KeyCheckValue", _KeyCheckValue)
-
-	KeySummary_Exportable = KeySummary.AddMember("Exportable", smithyprelude.Boolean)
-
-	KeySummary_Enabled = KeySummary.AddMember("Enabled", smithyprelude.Boolean)
-
-	KeySummary_MultiRegionKeyType = KeySummary.AddMember("MultiRegionKeyType", _MultiRegionKeyType)
-
-	KeySummary_PrimaryRegion = KeySummary.AddMember("PrimaryRegion", _Region)
-
-	_KeySummaryList_member = _KeySummaryList.AddMember("member", KeySummary)
-
-	MpaTeamAssociation_Action = MpaTeamAssociation.AddMember("Action", _MpaOperation)
-
-	MpaTeamAssociation_MpaTeamArn = MpaTeamAssociation.AddMember("MpaTeamArn", _MpaTeamArn)
-
-	MpaTeamAssociation_AssociationState = MpaTeamAssociation.AddMember("AssociationState", _AssociationState)
-
-	MpaTeamAssociation_MpaStatus = MpaTeamAssociation.AddMember("MpaStatus", MpaStatus)
-
-	PublicPolicyException_Message = PublicPolicyException.AddMember("Message", smithyprelude.String)
-
-	_Regions_member = _Regions.AddMember("member", _Region)
-
-	ResourceNotFoundException_ResourceId = ResourceNotFoundException.AddMember("ResourceId", smithyprelude.String)
-
-	ServiceQuotaExceededException_Message = ServiceQuotaExceededException.AddMember("Message", smithyprelude.String)
-
-	ServiceUnavailableException_Message = ServiceUnavailableException.AddMember("Message", smithyprelude.String)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagKeys_member = _TagKeys.AddMember("member", _TagKey)
-
-	_Tags_member = _Tags.AddMember("member", Tag)
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", smithyprelude.String)
-
-	ValidationException_Message = ValidationException.AddMember("Message", smithyprelude.String)
-
-	WrappedKey_WrappingKeyArn = WrappedKey.AddMember("WrappingKeyArn", _KeyArn)
-
-	WrappedKey_WrappedKeyMaterialFormat = WrappedKey.AddMember("WrappedKeyMaterialFormat", _WrappedKeyMaterialFormat)
-
-	WrappedKey_KeyMaterial = WrappedKey.AddMember("KeyMaterial", _KeyMaterial)
-
-	WrappedKey_KeyCheckValue = WrappedKey.AddMember("KeyCheckValue", _KeyCheckValue)
-
-	WrappedKey_KeyCheckValueAlgorithm = WrappedKey.AddMember("KeyCheckValueAlgorithm", _KeyCheckValueAlgorithm)
-
-	AddKeyReplicationRegionsInput_KeyIdentifier = AddKeyReplicationRegionsInput.AddMember("KeyIdentifier", _KeyArnOrKeyAliasType)
-
-	AddKeyReplicationRegionsInput_ReplicationRegions = AddKeyReplicationRegionsInput.AddMember("ReplicationRegions", _Regions)
-
-	AddKeyReplicationRegionsOutput_Key = AddKeyReplicationRegionsOutput.AddMember("Key", Key)
-
-	AssociateMpaTeamInput_Action = AssociateMpaTeamInput.AddMember("Action", _MpaOperation)
-
-	AssociateMpaTeamInput_MpaTeamArn = AssociateMpaTeamInput.AddMember("MpaTeamArn", _MpaTeamArn)
-
-	AssociateMpaTeamInput_RequesterComment = AssociateMpaTeamInput.AddMember("RequesterComment", _MpaRequesterComment)
-
-	AssociateMpaTeamOutput_MpaTeamAssociation = AssociateMpaTeamOutput.AddMember("MpaTeamAssociation", MpaTeamAssociation)
-
-	CreateAliasInput_AliasName = CreateAliasInput.AddMember("AliasName", _AliasName)
-
-	CreateAliasInput_KeyArn = CreateAliasInput.AddMember("KeyArn", _KeyArn)
-
-	CreateAliasOutput_Alias = CreateAliasOutput.AddMember("Alias", Alias)
-
-	CreateKeyInput_KeyAttributes = CreateKeyInput.AddMember("KeyAttributes", KeyAttributes)
-
-	CreateKeyInput_KeyCheckValueAlgorithm = CreateKeyInput.AddMember("KeyCheckValueAlgorithm", _KeyCheckValueAlgorithm)
-
-	CreateKeyInput_Exportable = CreateKeyInput.AddMember("Exportable", smithyprelude.Boolean)
-
-	CreateKeyInput_Enabled = CreateKeyInput.AddMember("Enabled", smithyprelude.Boolean)
-
-	CreateKeyInput_Tags = CreateKeyInput.AddMember("Tags", _Tags)
-
-	CreateKeyInput_DeriveKeyUsage = CreateKeyInput.AddMember("DeriveKeyUsage", _DeriveKeyUsage)
-
-	CreateKeyInput_ReplicationRegions = CreateKeyInput.AddMember("ReplicationRegions", _Regions)
-
-	CreateKeyOutput_Key = CreateKeyOutput.AddMember("Key", Key)
-
-	DeleteAliasInput_AliasName = DeleteAliasInput.AddMember("AliasName", _AliasName)
-
-	DeleteKeyInput_KeyIdentifier = DeleteKeyInput.AddMember("KeyIdentifier", _KeyArnOrKeyAliasType)
-
-	DeleteKeyInput_DeleteKeyInDays = DeleteKeyInput.AddMember("DeleteKeyInDays", smithyprelude.Integer)
-
-	DeleteKeyOutput_Key = DeleteKeyOutput.AddMember("Key", Key)
-
-	DeleteResourcePolicyInput_ResourceArn = DeleteResourcePolicyInput.AddMember("ResourceArn", _ResourceArn)
-
-	DisableDefaultKeyReplicationRegionsInput_ReplicationRegions = DisableDefaultKeyReplicationRegionsInput.AddMember("ReplicationRegions", _Regions)
-
-	DisableDefaultKeyReplicationRegionsOutput_EnabledReplicationRegions = DisableDefaultKeyReplicationRegionsOutput.AddMember("EnabledReplicationRegions", _Regions)
-
-	DisassociateMpaTeamInput_Action = DisassociateMpaTeamInput.AddMember("Action", _MpaOperation)
-
-	DisassociateMpaTeamInput_RequesterComment = DisassociateMpaTeamInput.AddMember("RequesterComment", _MpaRequesterComment)
-
-	DisassociateMpaTeamOutput_MpaTeamAssociation = DisassociateMpaTeamOutput.AddMember("MpaTeamAssociation", MpaTeamAssociation)
-
-	EnableDefaultKeyReplicationRegionsInput_ReplicationRegions = EnableDefaultKeyReplicationRegionsInput.AddMember("ReplicationRegions", _Regions)
-
-	EnableDefaultKeyReplicationRegionsOutput_EnabledReplicationRegions = EnableDefaultKeyReplicationRegionsOutput.AddMember("EnabledReplicationRegions", _Regions)
-
-	ExportKeyInput_KeyMaterial = ExportKeyInput.AddMember("KeyMaterial", ExportKeyMaterial)
-
-	ExportKeyInput_ExportKeyIdentifier = ExportKeyInput.AddMember("ExportKeyIdentifier", _KeyArnOrKeyAliasType)
-
-	ExportKeyInput_ExportAttributes = ExportKeyInput.AddMember("ExportAttributes", ExportAttributes)
-
-	ExportKeyOutput_WrappedKey = ExportKeyOutput.AddMember("WrappedKey", WrappedKey)
-
-	GetAliasInput_AliasName = GetAliasInput.AddMember("AliasName", _AliasName)
-
-	GetAliasOutput_Alias = GetAliasOutput.AddMember("Alias", Alias)
-
-	GetCertificateSigningRequestInput_KeyIdentifier = GetCertificateSigningRequestInput.AddMember("KeyIdentifier", _KeyArnOrKeyAliasType)
-
-	GetCertificateSigningRequestInput_SigningAlgorithm = GetCertificateSigningRequestInput.AddMember("SigningAlgorithm", _SigningAlgorithmType)
-
-	GetCertificateSigningRequestInput_CertificateSubject = GetCertificateSigningRequestInput.AddMember("CertificateSubject", CertificateSubjectType)
-
-	GetCertificateSigningRequestOutput_CertificateSigningRequest = GetCertificateSigningRequestOutput.AddMember("CertificateSigningRequest", _CertificateSigningRequestType)
-
-	GetDefaultKeyReplicationRegionsOutput_EnabledReplicationRegions = GetDefaultKeyReplicationRegionsOutput.AddMember("EnabledReplicationRegions", _Regions)
-
-	GetKeyInput_KeyIdentifier = GetKeyInput.AddMember("KeyIdentifier", _KeyArnOrKeyAliasType)
-
-	GetKeyOutput_Key = GetKeyOutput.AddMember("Key", Key)
-
-	GetMpaTeamAssociationInput_Action = GetMpaTeamAssociationInput.AddMember("Action", _MpaOperation)
-
-	GetMpaTeamAssociationOutput_MpaTeamAssociation = GetMpaTeamAssociationOutput.AddMember("MpaTeamAssociation", MpaTeamAssociation)
-
-	GetParametersForExportInput_KeyMaterialType = GetParametersForExportInput.AddMember("KeyMaterialType", _KeyMaterialType)
-
-	GetParametersForExportInput_SigningKeyAlgorithm = GetParametersForExportInput.AddMember("SigningKeyAlgorithm", _KeyAlgorithm)
-
-	GetParametersForExportInput_ReuseLastGeneratedToken = GetParametersForExportInput.AddMember("ReuseLastGeneratedToken", smithyprelude.Boolean)
-
-	GetParametersForExportOutput_SigningKeyCertificate = GetParametersForExportOutput.AddMember("SigningKeyCertificate", _CertificateType)
-
-	GetParametersForExportOutput_SigningKeyCertificateChain = GetParametersForExportOutput.AddMember("SigningKeyCertificateChain", _CertificateType)
-
-	GetParametersForExportOutput_SigningKeyAlgorithm = GetParametersForExportOutput.AddMember("SigningKeyAlgorithm", _KeyAlgorithm)
-
-	GetParametersForExportOutput_ExportToken = GetParametersForExportOutput.AddMember("ExportToken", _ExportTokenId)
-
-	GetParametersForExportOutput_ParametersValidUntilTimestamp = GetParametersForExportOutput.AddMember("ParametersValidUntilTimestamp", _Timestamp)
-
-	GetParametersForImportInput_KeyMaterialType = GetParametersForImportInput.AddMember("KeyMaterialType", _KeyMaterialType)
-
-	GetParametersForImportInput_WrappingKeyAlgorithm = GetParametersForImportInput.AddMember("WrappingKeyAlgorithm", _KeyAlgorithm)
-
-	GetParametersForImportInput_ReuseLastGeneratedToken = GetParametersForImportInput.AddMember("ReuseLastGeneratedToken", smithyprelude.Boolean)
-
-	GetParametersForImportOutput_WrappingKeyCertificate = GetParametersForImportOutput.AddMember("WrappingKeyCertificate", _CertificateType)
-
-	GetParametersForImportOutput_WrappingKeyCertificateChain = GetParametersForImportOutput.AddMember("WrappingKeyCertificateChain", _CertificateType)
-
-	GetParametersForImportOutput_WrappingKeyAlgorithm = GetParametersForImportOutput.AddMember("WrappingKeyAlgorithm", _KeyAlgorithm)
-
-	GetParametersForImportOutput_ImportToken = GetParametersForImportOutput.AddMember("ImportToken", _ImportTokenId)
-
-	GetParametersForImportOutput_ParametersValidUntilTimestamp = GetParametersForImportOutput.AddMember("ParametersValidUntilTimestamp", _Timestamp)
-
-	GetPublicKeyCertificateInput_KeyIdentifier = GetPublicKeyCertificateInput.AddMember("KeyIdentifier", _KeyArnOrKeyAliasType)
-
-	GetPublicKeyCertificateOutput_KeyCertificate = GetPublicKeyCertificateOutput.AddMember("KeyCertificate", _CertificateType)
-
-	GetPublicKeyCertificateOutput_KeyCertificateChain = GetPublicKeyCertificateOutput.AddMember("KeyCertificateChain", _CertificateType)
-
-	GetResourcePolicyInput_ResourceArn = GetResourcePolicyInput.AddMember("ResourceArn", _ResourceArn)
-
-	GetResourcePolicyOutput_ResourceArn = GetResourcePolicyOutput.AddMember("ResourceArn", _ResourceArn)
-
-	GetResourcePolicyOutput_Policy = GetResourcePolicyOutput.AddMember("Policy", _ResourcePolicy)
-
-	ImportKeyInput_KeyMaterial = ImportKeyInput.AddMember("KeyMaterial", ImportKeyMaterial)
-
-	ImportKeyInput_KeyCheckValueAlgorithm = ImportKeyInput.AddMember("KeyCheckValueAlgorithm", _KeyCheckValueAlgorithm)
-
-	ImportKeyInput_Enabled = ImportKeyInput.AddMember("Enabled", smithyprelude.Boolean)
-
-	ImportKeyInput_Tags = ImportKeyInput.AddMember("Tags", _Tags)
-
-	ImportKeyInput_ReplicationRegions = ImportKeyInput.AddMember("ReplicationRegions", _Regions)
-
-	ImportKeyInput_RequesterComment = ImportKeyInput.AddMember("RequesterComment", _MpaRequesterComment)
-
-	ImportKeyOutput_Key = ImportKeyOutput.AddMember("Key", Key)
-
-	ListAliasesInput_KeyArn = ListAliasesInput.AddMember("KeyArn", _KeyArn)
-
-	ListAliasesInput_NextToken = ListAliasesInput.AddMember("NextToken", _NextToken)
-
-	ListAliasesInput_MaxResults = ListAliasesInput.AddMember("MaxResults", _MaxResults)
-
-	ListAliasesOutput_Aliases = ListAliasesOutput.AddMember("Aliases", _Aliases)
-
-	ListAliasesOutput_NextToken = ListAliasesOutput.AddMember("NextToken", _NextToken)
-
-	ListKeysInput_KeyState = ListKeysInput.AddMember("KeyState", _KeyState)
-
-	ListKeysInput_NextToken = ListKeysInput.AddMember("NextToken", _NextToken)
-
-	ListKeysInput_MaxResults = ListKeysInput.AddMember("MaxResults", _MaxResults)
-
-	ListKeysOutput_Keys = ListKeysOutput.AddMember("Keys", _KeySummaryList)
-
-	ListKeysOutput_NextToken = ListKeysOutput.AddMember("NextToken", _NextToken)
-
-	ListTagsForResourceInput_ResourceArn = ListTagsForResourceInput.AddMember("ResourceArn", _ResourceArn)
-
-	ListTagsForResourceInput_NextToken = ListTagsForResourceInput.AddMember("NextToken", _NextToken)
-
-	ListTagsForResourceInput_MaxResults = ListTagsForResourceInput.AddMember("MaxResults", _MaxResults)
-
-	ListTagsForResourceOutput_Tags = ListTagsForResourceOutput.AddMember("Tags", _Tags)
-
-	ListTagsForResourceOutput_NextToken = ListTagsForResourceOutput.AddMember("NextToken", _NextToken)
-
-	PutResourcePolicyInput_ResourceArn = PutResourcePolicyInput.AddMember("ResourceArn", _ResourceArn)
-
-	PutResourcePolicyInput_Policy = PutResourcePolicyInput.AddMember("Policy", _ResourcePolicy)
-
-	PutResourcePolicyOutput_ResourceArn = PutResourcePolicyOutput.AddMember("ResourceArn", _ResourceArn)
-
-	PutResourcePolicyOutput_Policy = PutResourcePolicyOutput.AddMember("Policy", _ResourcePolicy)
-
-	RemoveKeyReplicationRegionsInput_KeyIdentifier = RemoveKeyReplicationRegionsInput.AddMember("KeyIdentifier", _KeyArnOrKeyAliasType)
-
-	RemoveKeyReplicationRegionsInput_ReplicationRegions = RemoveKeyReplicationRegionsInput.AddMember("ReplicationRegions", _Regions)
-
-	RemoveKeyReplicationRegionsOutput_Key = RemoveKeyReplicationRegionsOutput.AddMember("Key", Key)
-
-	RestoreKeyInput_KeyIdentifier = RestoreKeyInput.AddMember("KeyIdentifier", _KeyArnOrKeyAliasType)
-
-	RestoreKeyOutput_Key = RestoreKeyOutput.AddMember("Key", Key)
-
-	StartKeyUsageInput_KeyIdentifier = StartKeyUsageInput.AddMember("KeyIdentifier", _KeyArnOrKeyAliasType)
-
-	StartKeyUsageOutput_Key = StartKeyUsageOutput.AddMember("Key", Key)
-
-	StopKeyUsageInput_KeyIdentifier = StopKeyUsageInput.AddMember("KeyIdentifier", _KeyArnOrKeyAliasType)
-
-	StopKeyUsageOutput_Key = StopKeyUsageOutput.AddMember("Key", Key)
-
-	TagResourceInput_ResourceArn = TagResourceInput.AddMember("ResourceArn", _ResourceArn)
-
-	TagResourceInput_Tags = TagResourceInput.AddMember("Tags", _Tags)
-
-	UntagResourceInput_ResourceArn = UntagResourceInput.AddMember("ResourceArn", _ResourceArn)
-
-	UntagResourceInput_TagKeys = UntagResourceInput.AddMember("TagKeys", _TagKeys)
-
-	UpdateAliasInput_AliasName = UpdateAliasInput.AddMember("AliasName", _AliasName)
-
-	UpdateAliasInput_KeyArn = UpdateAliasInput.AddMember("KeyArn", _KeyArn)
-
-	UpdateAliasOutput_Alias = UpdateAliasOutput.AddMember("Alias", Alias)
-
-}
+var (
+	iAddKeyReplicationRegions                  = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "AddKeyReplicationRegions"}
+	iAssociateMpaTeam                          = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "AssociateMpaTeam"}
+	iCreateAlias                               = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "CreateAlias"}
+	iCreateKey                                 = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "CreateKey"}
+	iDeleteAlias                               = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "DeleteAlias"}
+	iDeleteKey                                 = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "DeleteKey"}
+	iDeleteResourcePolicy                      = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "DeleteResourcePolicy"}
+	iDisableDefaultKeyReplicationRegions       = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "DisableDefaultKeyReplicationRegions"}
+	iDisassociateMpaTeam                       = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "DisassociateMpaTeam"}
+	iEnableDefaultKeyReplicationRegions        = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "EnableDefaultKeyReplicationRegions"}
+	iExportKey                                 = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "ExportKey"}
+	iGetAlias                                  = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "GetAlias"}
+	iGetCertificateSigningRequest              = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "GetCertificateSigningRequest"}
+	iGetDefaultKeyReplicationRegions           = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "GetDefaultKeyReplicationRegions"}
+	iGetKey                                    = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "GetKey"}
+	iGetMpaTeamAssociation                     = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "GetMpaTeamAssociation"}
+	iGetParametersForExport                    = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "GetParametersForExport"}
+	iGetParametersForImport                    = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "GetParametersForImport"}
+	iGetPublicKeyCertificate                   = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "GetPublicKeyCertificate"}
+	iGetResourcePolicy                         = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "GetResourcePolicy"}
+	iImportKey                                 = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "ImportKey"}
+	iListAliases                               = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "ListAliases"}
+	iListKeys                                  = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "ListKeys"}
+	iListTagsForResource                       = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "ListTagsForResource"}
+	iPutResourcePolicy                         = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "PutResourcePolicy"}
+	iRemoveKeyReplicationRegions               = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "RemoveKeyReplicationRegions"}
+	iRestoreKey                                = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "RestoreKey"}
+	iStartKeyUsage                             = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "StartKeyUsage"}
+	iStopKeyUsage                              = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "StopKeyUsage"}
+	iTagResource                               = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "TagResource"}
+	iUntagResource                             = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "UntagResource"}
+	iUpdateAlias                               = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "UpdateAlias"}
+	i_PaymentCryptographyControlPlane          = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "PaymentCryptographyControlPlane"}
+	iAccessDeniedException                     = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "AccessDeniedException"}
+	iAlias                                     = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "Alias"}
+	i_Aliases                                  = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "Aliases"}
+	i_AliasName                                = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "AliasName"}
+	iAs2805KeyVariant                          = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "As2805KeyVariant"}
+	i_AssociationState                         = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "AssociationState"}
+	i_CertificateSigningRequestType            = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "CertificateSigningRequestType"}
+	iCertificateSubjectType                    = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "CertificateSubjectType"}
+	i_CertificateType                          = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "CertificateType"}
+	iConflictException                         = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "ConflictException"}
+	i_DeriveKeyUsage                           = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "DeriveKeyUsage"}
+	iDiffieHellmanDerivationData               = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "DiffieHellmanDerivationData"}
+	i_EvenHexLengthBetween16And32              = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "EvenHexLengthBetween16And32"}
+	iExportAs2805KeyCryptogram                 = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "ExportAs2805KeyCryptogram"}
+	iExportAttributes                          = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "ExportAttributes"}
+	iExportDiffieHellmanTr31KeyBlock           = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "ExportDiffieHellmanTr31KeyBlock"}
+	iExportDukptInitialKey                     = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "ExportDukptInitialKey"}
+	iExportKeyCryptogram                       = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "ExportKeyCryptogram"}
+	iExportKeyMaterial                         = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "ExportKeyMaterial"}
+	i_ExportTokenId                            = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "ExportTokenId"}
+	iExportTr31KeyBlock                        = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "ExportTr31KeyBlock"}
+	iExportTr34KeyBlock                        = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "ExportTr34KeyBlock"}
+	i_HexLength20Or24                          = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "HexLength20Or24"}
+	iImportAs2805KeyCryptogram                 = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "ImportAs2805KeyCryptogram"}
+	iImportDiffieHellmanTr31KeyBlock           = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "ImportDiffieHellmanTr31KeyBlock"}
+	iImportKeyCryptogram                       = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "ImportKeyCryptogram"}
+	iImportKeyMaterial                         = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "ImportKeyMaterial"}
+	i_ImportTokenId                            = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "ImportTokenId"}
+	iImportTr31KeyBlock                        = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "ImportTr31KeyBlock"}
+	iImportTr34KeyBlock                        = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "ImportTr34KeyBlock"}
+	iInternalServerException                   = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "InternalServerException"}
+	iKey                                       = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "Key"}
+	i_KeyAlgorithm                             = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "KeyAlgorithm"}
+	i_KeyArn                                   = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "KeyArn"}
+	i_KeyArnOrKeyAliasType                     = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "KeyArnOrKeyAliasType"}
+	iKeyAttributes                             = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "KeyAttributes"}
+	iKeyBlockHeaders                           = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "KeyBlockHeaders"}
+	i_KeyCheckValue                            = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "KeyCheckValue"}
+	i_KeyCheckValueAlgorithm                   = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "KeyCheckValueAlgorithm"}
+	i_KeyClass                                 = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "KeyClass"}
+	iKeyDerivationFunction                     = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "KeyDerivationFunction"}
+	iKeyDerivationHashAlgorithm                = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "KeyDerivationHashAlgorithm"}
+	i_KeyExportability                         = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "KeyExportability"}
+	i_KeyMaterial                              = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "KeyMaterial"}
+	i_KeyMaterialType                          = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "KeyMaterialType"}
+	iKeyModesOfUse                             = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "KeyModesOfUse"}
+	i_KeyOrigin                                = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "KeyOrigin"}
+	i_KeyReplicationState                      = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "KeyReplicationState"}
+	i_KeyState                                 = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "KeyState"}
+	iKeySummary                                = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "KeySummary"}
+	i_KeySummaryList                           = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "KeySummaryList"}
+	i_KeyUsage                                 = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "KeyUsage"}
+	i_KeyVersion                               = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "KeyVersion"}
+	i_MaxResults                               = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "MaxResults"}
+	i_MpaOperation                             = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "MpaOperation"}
+	i_MpaRequesterComment                      = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "MpaRequesterComment"}
+	i_MpaSessionArn                            = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "MpaSessionArn"}
+	iMpaStatus                                 = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "MpaStatus"}
+	i_MpaStatusMessage                         = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "MpaStatusMessage"}
+	i_MpaTeamArn                               = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "MpaTeamArn"}
+	iMpaTeamAssociation                        = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "MpaTeamAssociation"}
+	i_MultiRegionKeyType                       = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "MultiRegionKeyType"}
+	i_NextToken                                = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "NextToken"}
+	i_OptionalBlockId                          = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "OptionalBlockId"}
+	i_OptionalBlocks                           = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "OptionalBlocks"}
+	i_OptionalBlockValue                       = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "OptionalBlockValue"}
+	iPublicPolicyException                     = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "PublicPolicyException"}
+	i_Region                                   = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "Region"}
+	i_Regions                                  = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "Regions"}
+	i_ReplicationStatus                        = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "ReplicationStatus"}
+	iReplicationStatusType                     = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "ReplicationStatusType"}
+	i_ResourceArn                              = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "ResourceArn"}
+	iResourceNotFoundException                 = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "ResourceNotFoundException"}
+	i_ResourcePolicy                           = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "ResourcePolicy"}
+	iRootCertificatePublicKey                  = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "RootCertificatePublicKey"}
+	iServiceQuotaExceededException             = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "ServiceQuotaExceededException"}
+	iServiceUnavailableException               = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "ServiceUnavailableException"}
+	i_SessionStatus                            = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "SessionStatus"}
+	i_SharedInformation                        = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "SharedInformation"}
+	i_SigningAlgorithmType                     = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "SigningAlgorithmType"}
+	iSymmetricKeyAlgorithm                     = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "SymmetricKeyAlgorithm"}
+	iTag                                       = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "Tag"}
+	i_TagKey                                   = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "TagKey"}
+	i_TagKeys                                  = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "TagKeys"}
+	i_Tags                                     = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "Tags"}
+	i_TagValue                                 = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "TagValue"}
+	iThrottlingException                       = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "ThrottlingException"}
+	i_Timestamp                                = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "Timestamp"}
+	i_Tr31WrappedKeyBlock                      = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "Tr31WrappedKeyBlock"}
+	i_Tr34KeyBlockFormat                       = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "Tr34KeyBlockFormat"}
+	i_Tr34WrappedKeyBlock                      = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "Tr34WrappedKeyBlock"}
+	iTrustedCertificatePublicKey               = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "TrustedCertificatePublicKey"}
+	iValidationException                       = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "ValidationException"}
+	iWrappedKey                                = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "WrappedKey"}
+	i_WrappedKeyCryptogram                     = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "WrappedKeyCryptogram"}
+	i_WrappedKeyMaterialFormat                 = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "WrappedKeyMaterialFormat"}
+	i_WrappingKeySpec                          = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "WrappingKeySpec"}
+	iAddKeyReplicationRegionsInput             = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "AddKeyReplicationRegionsInput"}
+	iAddKeyReplicationRegionsOutput            = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "AddKeyReplicationRegionsOutput"}
+	iAssociateMpaTeamInput                     = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "AssociateMpaTeamInput"}
+	iAssociateMpaTeamOutput                    = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "AssociateMpaTeamOutput"}
+	iCreateAliasInput                          = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "CreateAliasInput"}
+	iCreateAliasOutput                         = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "CreateAliasOutput"}
+	iCreateKeyInput                            = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "CreateKeyInput"}
+	iCreateKeyOutput                           = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "CreateKeyOutput"}
+	iDeleteAliasInput                          = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "DeleteAliasInput"}
+	iDeleteAliasOutput                         = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "DeleteAliasOutput"}
+	iDeleteKeyInput                            = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "DeleteKeyInput"}
+	iDeleteKeyOutput                           = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "DeleteKeyOutput"}
+	iDeleteResourcePolicyInput                 = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "DeleteResourcePolicyInput"}
+	iDeleteResourcePolicyOutput                = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "DeleteResourcePolicyOutput"}
+	iDisableDefaultKeyReplicationRegionsInput  = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "DisableDefaultKeyReplicationRegionsInput"}
+	iDisableDefaultKeyReplicationRegionsOutput = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "DisableDefaultKeyReplicationRegionsOutput"}
+	iDisassociateMpaTeamInput                  = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "DisassociateMpaTeamInput"}
+	iDisassociateMpaTeamOutput                 = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "DisassociateMpaTeamOutput"}
+	iEnableDefaultKeyReplicationRegionsInput   = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "EnableDefaultKeyReplicationRegionsInput"}
+	iEnableDefaultKeyReplicationRegionsOutput  = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "EnableDefaultKeyReplicationRegionsOutput"}
+	iExportKeyInput                            = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "ExportKeyInput"}
+	iExportKeyOutput                           = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "ExportKeyOutput"}
+	iGetAliasInput                             = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "GetAliasInput"}
+	iGetAliasOutput                            = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "GetAliasOutput"}
+	iGetCertificateSigningRequestInput         = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "GetCertificateSigningRequestInput"}
+	iGetCertificateSigningRequestOutput        = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "GetCertificateSigningRequestOutput"}
+	iGetDefaultKeyReplicationRegionsInput      = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "GetDefaultKeyReplicationRegionsInput"}
+	iGetDefaultKeyReplicationRegionsOutput     = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "GetDefaultKeyReplicationRegionsOutput"}
+	iGetKeyInput                               = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "GetKeyInput"}
+	iGetKeyOutput                              = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "GetKeyOutput"}
+	iGetMpaTeamAssociationInput                = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "GetMpaTeamAssociationInput"}
+	iGetMpaTeamAssociationOutput               = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "GetMpaTeamAssociationOutput"}
+	iGetParametersForExportInput               = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "GetParametersForExportInput"}
+	iGetParametersForExportOutput              = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "GetParametersForExportOutput"}
+	iGetParametersForImportInput               = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "GetParametersForImportInput"}
+	iGetParametersForImportOutput              = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "GetParametersForImportOutput"}
+	iGetPublicKeyCertificateInput              = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "GetPublicKeyCertificateInput"}
+	iGetPublicKeyCertificateOutput             = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "GetPublicKeyCertificateOutput"}
+	iGetResourcePolicyInput                    = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "GetResourcePolicyInput"}
+	iGetResourcePolicyOutput                   = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "GetResourcePolicyOutput"}
+	iImportKeyInput                            = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "ImportKeyInput"}
+	iImportKeyOutput                           = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "ImportKeyOutput"}
+	iListAliasesInput                          = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "ListAliasesInput"}
+	iListAliasesOutput                         = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "ListAliasesOutput"}
+	iListKeysInput                             = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "ListKeysInput"}
+	iListKeysOutput                            = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "ListKeysOutput"}
+	iListTagsForResourceInput                  = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "ListTagsForResourceInput"}
+	iListTagsForResourceOutput                 = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "ListTagsForResourceOutput"}
+	iPutResourcePolicyInput                    = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "PutResourcePolicyInput"}
+	iPutResourcePolicyOutput                   = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "PutResourcePolicyOutput"}
+	iRemoveKeyReplicationRegionsInput          = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "RemoveKeyReplicationRegionsInput"}
+	iRemoveKeyReplicationRegionsOutput         = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "RemoveKeyReplicationRegionsOutput"}
+	iRestoreKeyInput                           = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "RestoreKeyInput"}
+	iRestoreKeyOutput                          = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "RestoreKeyOutput"}
+	iStartKeyUsageInput                        = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "StartKeyUsageInput"}
+	iStartKeyUsageOutput                       = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "StartKeyUsageOutput"}
+	iStopKeyUsageInput                         = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "StopKeyUsageInput"}
+	iStopKeyUsageOutput                        = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "StopKeyUsageOutput"}
+	iTagResourceInput                          = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "TagResourceInput"}
+	iTagResourceOutput                         = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "TagResourceOutput"}
+	iUntagResourceInput                        = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "UntagResourceInput"}
+	iUntagResourceOutput                       = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "UntagResourceOutput"}
+	iUpdateAliasInput                          = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "UpdateAliasInput"}
+	iUpdateAliasOutput                         = smithy.ShapeID{Namespace: "com.amazonaws.paymentcryptography", Name: "UpdateAliasOutput"}
+	pString                                    = smithy.ShapeID{Namespace: "smithy.api", Name: "String"}
+	pUnit                                      = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+	pBoolean                                   = smithy.ShapeID{Namespace: "smithy.api", Name: "Boolean"}
+	pPrimitiveBoolean                          = smithy.ShapeID{Namespace: "smithy.api", Name: "PrimitiveBoolean"}
+	pInteger                                   = smithy.ShapeID{Namespace: "smithy.api", Name: "Integer"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 503}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_Message}}
+var mAlias = smithy.SchemaMembers{List: []*smithy.Schema{&sAlias_AliasName, &sAlias_KeyArn}}
+var m_Aliases = smithy.SchemaMembers{List: []*smithy.Schema{&s_Aliases_member}}
+var mAs2805KeyVariant = smithy.SchemaMembers{List: []*smithy.Schema{&sAs2805KeyVariant_TERMINAL_MAJOR_KEY_VARIANT_00, &sAs2805KeyVariant_PIN_ENCRYPTION_KEY_VARIANT_28, &sAs2805KeyVariant_MESSAGE_AUTHENTICATION_KEY_VARIANT_24, &sAs2805KeyVariant_DATA_ENCRYPTION_KEY_VARIANT_22}}
+var mCertificateSubjectType = smithy.SchemaMembers{List: []*smithy.Schema{&sCertificateSubjectType_CommonName, &sCertificateSubjectType_OrganizationUnit, &sCertificateSubjectType_Organization, &sCertificateSubjectType_City, &sCertificateSubjectType_Country, &sCertificateSubjectType_StateOrProvince, &sCertificateSubjectType_EmailAddress}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_Message}}
+var mDiffieHellmanDerivationData = smithy.SchemaMembers{List: []*smithy.Schema{&sDiffieHellmanDerivationData_SharedInformation}}
+var mExportAs2805KeyCryptogram = smithy.SchemaMembers{List: []*smithy.Schema{&sExportAs2805KeyCryptogram_WrappingKeyIdentifier, &sExportAs2805KeyCryptogram_As2805KeyVariant}}
+var mExportAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sExportAttributes_ExportDukptInitialKey, &sExportAttributes_KeyCheckValueAlgorithm}}
+var mExportDiffieHellmanTr31KeyBlock = smithy.SchemaMembers{List: []*smithy.Schema{&sExportDiffieHellmanTr31KeyBlock_PrivateKeyIdentifier, &sExportDiffieHellmanTr31KeyBlock_CertificateAuthorityPublicKeyIdentifier, &sExportDiffieHellmanTr31KeyBlock_PublicKeyCertificate, &sExportDiffieHellmanTr31KeyBlock_DeriveKeyAlgorithm, &sExportDiffieHellmanTr31KeyBlock_KeyDerivationFunction, &sExportDiffieHellmanTr31KeyBlock_KeyDerivationHashAlgorithm, &sExportDiffieHellmanTr31KeyBlock_DerivationData, &sExportDiffieHellmanTr31KeyBlock_KeyBlockHeaders}}
+var mExportDukptInitialKey = smithy.SchemaMembers{List: []*smithy.Schema{&sExportDukptInitialKey_KeySerialNumber}}
+var mExportKeyCryptogram = smithy.SchemaMembers{List: []*smithy.Schema{&sExportKeyCryptogram_CertificateAuthorityPublicKeyIdentifier, &sExportKeyCryptogram_WrappingKeyCertificate, &sExportKeyCryptogram_WrappingSpec}}
+var mExportKeyMaterial = smithy.SchemaMembers{List: []*smithy.Schema{&sExportKeyMaterial_Tr31KeyBlock, &sExportKeyMaterial_Tr34KeyBlock, &sExportKeyMaterial_KeyCryptogram, &sExportKeyMaterial_DiffieHellmanTr31KeyBlock, &sExportKeyMaterial_As2805KeyCryptogram}}
+var mExportTr31KeyBlock = smithy.SchemaMembers{List: []*smithy.Schema{&sExportTr31KeyBlock_WrappingKeyIdentifier, &sExportTr31KeyBlock_KeyBlockHeaders}}
+var mExportTr34KeyBlock = smithy.SchemaMembers{List: []*smithy.Schema{&sExportTr34KeyBlock_CertificateAuthorityPublicKeyIdentifier, &sExportTr34KeyBlock_WrappingKeyCertificate, &sExportTr34KeyBlock_ExportToken, &sExportTr34KeyBlock_SigningKeyIdentifier, &sExportTr34KeyBlock_SigningKeyCertificate, &sExportTr34KeyBlock_KeyBlockFormat, &sExportTr34KeyBlock_RandomNonce, &sExportTr34KeyBlock_KeyBlockHeaders}}
+var mImportAs2805KeyCryptogram = smithy.SchemaMembers{List: []*smithy.Schema{&sImportAs2805KeyCryptogram_As2805KeyVariant, &sImportAs2805KeyCryptogram_KeyModesOfUse, &sImportAs2805KeyCryptogram_KeyAlgorithm, &sImportAs2805KeyCryptogram_Exportable, &sImportAs2805KeyCryptogram_WrappingKeyIdentifier, &sImportAs2805KeyCryptogram_WrappedKeyCryptogram}}
+var mImportDiffieHellmanTr31KeyBlock = smithy.SchemaMembers{List: []*smithy.Schema{&sImportDiffieHellmanTr31KeyBlock_PrivateKeyIdentifier, &sImportDiffieHellmanTr31KeyBlock_CertificateAuthorityPublicKeyIdentifier, &sImportDiffieHellmanTr31KeyBlock_PublicKeyCertificate, &sImportDiffieHellmanTr31KeyBlock_DeriveKeyAlgorithm, &sImportDiffieHellmanTr31KeyBlock_KeyDerivationFunction, &sImportDiffieHellmanTr31KeyBlock_KeyDerivationHashAlgorithm, &sImportDiffieHellmanTr31KeyBlock_DerivationData, &sImportDiffieHellmanTr31KeyBlock_WrappedKeyBlock}}
+var mImportKeyCryptogram = smithy.SchemaMembers{List: []*smithy.Schema{&sImportKeyCryptogram_KeyAttributes, &sImportKeyCryptogram_Exportable, &sImportKeyCryptogram_WrappedKeyCryptogram, &sImportKeyCryptogram_ImportToken, &sImportKeyCryptogram_WrappingSpec}}
+var mImportKeyMaterial = smithy.SchemaMembers{List: []*smithy.Schema{&sImportKeyMaterial_RootCertificatePublicKey, &sImportKeyMaterial_TrustedCertificatePublicKey, &sImportKeyMaterial_Tr31KeyBlock, &sImportKeyMaterial_Tr34KeyBlock, &sImportKeyMaterial_KeyCryptogram, &sImportKeyMaterial_DiffieHellmanTr31KeyBlock, &sImportKeyMaterial_As2805KeyCryptogram}}
+var mImportTr31KeyBlock = smithy.SchemaMembers{List: []*smithy.Schema{&sImportTr31KeyBlock_WrappingKeyIdentifier, &sImportTr31KeyBlock_WrappedKeyBlock}}
+var mImportTr34KeyBlock = smithy.SchemaMembers{List: []*smithy.Schema{&sImportTr34KeyBlock_CertificateAuthorityPublicKeyIdentifier, &sImportTr34KeyBlock_SigningKeyCertificate, &sImportTr34KeyBlock_ImportToken, &sImportTr34KeyBlock_WrappingKeyIdentifier, &sImportTr34KeyBlock_WrappingKeyCertificate, &sImportTr34KeyBlock_WrappedKeyBlock, &sImportTr34KeyBlock_KeyBlockFormat, &sImportTr34KeyBlock_RandomNonce}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_Message}}
+var mKey = smithy.SchemaMembers{List: []*smithy.Schema{&sKey_KeyArn, &sKey_KeyAttributes, &sKey_KeyCheckValue, &sKey_KeyCheckValueAlgorithm, &sKey_Enabled, &sKey_Exportable, &sKey_KeyState, &sKey_KeyOrigin, &sKey_CreateTimestamp, &sKey_UsageStartTimestamp, &sKey_UsageStopTimestamp, &sKey_DeletePendingTimestamp, &sKey_DeleteTimestamp, &sKey_DeriveKeyUsage, &sKey_MultiRegionKeyType, &sKey_PrimaryRegion, &sKey_ReplicationStatus, &sKey_UsingDefaultReplicationRegions, &sKey_MpaStatus}, Seed: 55, Slots: []uint16{
+	15, 8, 9, 0, 0, 12, 16, 3, 0, 0, 0, 0, 10, 0, 11, 0, 0, 0, 4, 0, 0, 0, 0, 1,
+	0, 0, 0, 0, 0, 0, 0, 7, 0, 18, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 17, 5,
+	13, 0, 6, 0, 0, 0, 19, 0, 0, 0, 0, 0, 0, 14, 0, 0,
+}}
+var mKeyAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sKeyAttributes_KeyUsage, &sKeyAttributes_KeyClass, &sKeyAttributes_KeyAlgorithm, &sKeyAttributes_KeyModesOfUse}}
+var mKeyBlockHeaders = smithy.SchemaMembers{List: []*smithy.Schema{&sKeyBlockHeaders_KeyModesOfUse, &sKeyBlockHeaders_KeyExportability, &sKeyBlockHeaders_KeyVersion, &sKeyBlockHeaders_OptionalBlocks}}
+var mKeyDerivationFunction = smithy.SchemaMembers{List: []*smithy.Schema{&sKeyDerivationFunction_NIST_SP800, &sKeyDerivationFunction_ANSI_X963}}
+var mKeyDerivationHashAlgorithm = smithy.SchemaMembers{List: []*smithy.Schema{&sKeyDerivationHashAlgorithm_SHA_256, &sKeyDerivationHashAlgorithm_SHA_384, &sKeyDerivationHashAlgorithm_SHA_512}}
+var mKeyModesOfUse = smithy.SchemaMembers{List: []*smithy.Schema{&sKeyModesOfUse_Encrypt, &sKeyModesOfUse_Decrypt, &sKeyModesOfUse_Wrap, &sKeyModesOfUse_Unwrap, &sKeyModesOfUse_Generate, &sKeyModesOfUse_Sign, &sKeyModesOfUse_Verify, &sKeyModesOfUse_DeriveKey, &sKeyModesOfUse_NoRestrictions}, Seed: 8, Slots: []uint16{
+	0, 0, 9, 0, 0, 0, 8, 7, 0, 6, 0, 0, 3, 4, 0, 0, 5, 0, 0, 0, 0, 0, 0, 2,
+	0, 1, 0, 0, 0, 0, 0, 0,
+}}
+var mKeySummary = smithy.SchemaMembers{List: []*smithy.Schema{&sKeySummary_KeyArn, &sKeySummary_KeyState, &sKeySummary_KeyAttributes, &sKeySummary_KeyCheckValue, &sKeySummary_Exportable, &sKeySummary_Enabled, &sKeySummary_MultiRegionKeyType, &sKeySummary_PrimaryRegion}}
+var m_KeySummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_KeySummaryList_member}}
+var mMpaStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sMpaStatus_MpaSessionArn, &sMpaStatus_Status, &sMpaStatus_InitiationDate, &sMpaStatus_StatusMessage}}
+var mMpaTeamAssociation = smithy.SchemaMembers{List: []*smithy.Schema{&sMpaTeamAssociation_Action, &sMpaTeamAssociation_MpaTeamArn, &sMpaTeamAssociation_AssociationState, &sMpaTeamAssociation_MpaStatus}}
+var m_OptionalBlocks = smithy.SchemaMembers{List: []*smithy.Schema{&s_OptionalBlocks_key, &s_OptionalBlocks_value}}
+var mPublicPolicyException = smithy.SchemaMembers{List: []*smithy.Schema{&sPublicPolicyException_Message}}
+var m_Regions = smithy.SchemaMembers{List: []*smithy.Schema{&s_Regions_member}}
+var m_ReplicationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&s_ReplicationStatus_key, &s_ReplicationStatus_value}}
+var mReplicationStatusType = smithy.SchemaMembers{List: []*smithy.Schema{&sReplicationStatusType_Status, &sReplicationStatusType_StatusMessage}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_ResourceId}}
+var mRootCertificatePublicKey = smithy.SchemaMembers{List: []*smithy.Schema{&sRootCertificatePublicKey_KeyAttributes, &sRootCertificatePublicKey_PublicKeyCertificate}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_Message}}
+var mServiceUnavailableException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceUnavailableException_Message}}
+var mSymmetricKeyAlgorithm = smithy.SchemaMembers{List: []*smithy.Schema{&sSymmetricKeyAlgorithm_TDES_2KEY, &sSymmetricKeyAlgorithm_TDES_3KEY, &sSymmetricKeyAlgorithm_AES_128, &sSymmetricKeyAlgorithm_AES_192, &sSymmetricKeyAlgorithm_AES_256, &sSymmetricKeyAlgorithm_HMAC_SHA256, &sSymmetricKeyAlgorithm_HMAC_SHA384, &sSymmetricKeyAlgorithm_HMAC_SHA512, &sSymmetricKeyAlgorithm_HMAC_SHA224}, Seed: 2, Slots: []uint16{
+	0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 3, 2, 9, 1, 5,
+	0, 0, 0, 0, 0, 6, 7, 0,
+}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var m_TagKeys = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeys_member}}
+var m_Tags = smithy.SchemaMembers{List: []*smithy.Schema{&s_Tags_member}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_Message}}
+var mTrustedCertificatePublicKey = smithy.SchemaMembers{List: []*smithy.Schema{&sTrustedCertificatePublicKey_KeyAttributes, &sTrustedCertificatePublicKey_PublicKeyCertificate, &sTrustedCertificatePublicKey_CertificateAuthorityPublicKeyIdentifier}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_Message}}
+var mWrappedKey = smithy.SchemaMembers{List: []*smithy.Schema{&sWrappedKey_WrappingKeyArn, &sWrappedKey_WrappedKeyMaterialFormat, &sWrappedKey_KeyMaterial, &sWrappedKey_KeyCheckValue, &sWrappedKey_KeyCheckValueAlgorithm}}
+var mAddKeyReplicationRegionsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sAddKeyReplicationRegionsInput_KeyIdentifier, &sAddKeyReplicationRegionsInput_ReplicationRegions}}
+var mAddKeyReplicationRegionsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sAddKeyReplicationRegionsOutput_Key}}
+var mAssociateMpaTeamInput = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateMpaTeamInput_Action, &sAssociateMpaTeamInput_MpaTeamArn, &sAssociateMpaTeamInput_RequesterComment}}
+var mAssociateMpaTeamOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateMpaTeamOutput_MpaTeamAssociation}}
+var mCreateAliasInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAliasInput_AliasName, &sCreateAliasInput_KeyArn}}
+var mCreateAliasOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAliasOutput_Alias}}
+var mCreateKeyInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateKeyInput_KeyAttributes, &sCreateKeyInput_KeyCheckValueAlgorithm, &sCreateKeyInput_Exportable, &sCreateKeyInput_Enabled, &sCreateKeyInput_Tags, &sCreateKeyInput_DeriveKeyUsage, &sCreateKeyInput_ReplicationRegions}}
+var mCreateKeyOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateKeyOutput_Key}}
+var mDeleteAliasInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAliasInput_AliasName}}
+var mDeleteKeyInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteKeyInput_KeyIdentifier, &sDeleteKeyInput_DeleteKeyInDays}}
+var mDeleteKeyOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteKeyOutput_Key}}
+var mDeleteResourcePolicyInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteResourcePolicyInput_ResourceArn}}
+var mDisableDefaultKeyReplicationRegionsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDisableDefaultKeyReplicationRegionsInput_ReplicationRegions}}
+var mDisableDefaultKeyReplicationRegionsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDisableDefaultKeyReplicationRegionsOutput_EnabledReplicationRegions}}
+var mDisassociateMpaTeamInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateMpaTeamInput_Action, &sDisassociateMpaTeamInput_RequesterComment}}
+var mDisassociateMpaTeamOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateMpaTeamOutput_MpaTeamAssociation}}
+var mEnableDefaultKeyReplicationRegionsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sEnableDefaultKeyReplicationRegionsInput_ReplicationRegions}}
+var mEnableDefaultKeyReplicationRegionsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sEnableDefaultKeyReplicationRegionsOutput_EnabledReplicationRegions}}
+var mExportKeyInput = smithy.SchemaMembers{List: []*smithy.Schema{&sExportKeyInput_KeyMaterial, &sExportKeyInput_ExportKeyIdentifier, &sExportKeyInput_ExportAttributes}}
+var mExportKeyOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sExportKeyOutput_WrappedKey}}
+var mGetAliasInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAliasInput_AliasName}}
+var mGetAliasOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAliasOutput_Alias}}
+var mGetCertificateSigningRequestInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCertificateSigningRequestInput_KeyIdentifier, &sGetCertificateSigningRequestInput_SigningAlgorithm, &sGetCertificateSigningRequestInput_CertificateSubject}}
+var mGetCertificateSigningRequestOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCertificateSigningRequestOutput_CertificateSigningRequest}}
+var mGetDefaultKeyReplicationRegionsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDefaultKeyReplicationRegionsOutput_EnabledReplicationRegions}}
+var mGetKeyInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetKeyInput_KeyIdentifier}}
+var mGetKeyOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetKeyOutput_Key}}
+var mGetMpaTeamAssociationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMpaTeamAssociationInput_Action}}
+var mGetMpaTeamAssociationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMpaTeamAssociationOutput_MpaTeamAssociation}}
+var mGetParametersForExportInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetParametersForExportInput_KeyMaterialType, &sGetParametersForExportInput_SigningKeyAlgorithm, &sGetParametersForExportInput_ReuseLastGeneratedToken}}
+var mGetParametersForExportOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetParametersForExportOutput_SigningKeyCertificate, &sGetParametersForExportOutput_SigningKeyCertificateChain, &sGetParametersForExportOutput_SigningKeyAlgorithm, &sGetParametersForExportOutput_ExportToken, &sGetParametersForExportOutput_ParametersValidUntilTimestamp}}
+var mGetParametersForImportInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetParametersForImportInput_KeyMaterialType, &sGetParametersForImportInput_WrappingKeyAlgorithm, &sGetParametersForImportInput_ReuseLastGeneratedToken}}
+var mGetParametersForImportOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetParametersForImportOutput_WrappingKeyCertificate, &sGetParametersForImportOutput_WrappingKeyCertificateChain, &sGetParametersForImportOutput_WrappingKeyAlgorithm, &sGetParametersForImportOutput_ImportToken, &sGetParametersForImportOutput_ParametersValidUntilTimestamp}}
+var mGetPublicKeyCertificateInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPublicKeyCertificateInput_KeyIdentifier}}
+var mGetPublicKeyCertificateOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPublicKeyCertificateOutput_KeyCertificate, &sGetPublicKeyCertificateOutput_KeyCertificateChain}}
+var mGetResourcePolicyInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourcePolicyInput_ResourceArn}}
+var mGetResourcePolicyOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourcePolicyOutput_ResourceArn, &sGetResourcePolicyOutput_Policy}}
+var mImportKeyInput = smithy.SchemaMembers{List: []*smithy.Schema{&sImportKeyInput_KeyMaterial, &sImportKeyInput_KeyCheckValueAlgorithm, &sImportKeyInput_Enabled, &sImportKeyInput_Tags, &sImportKeyInput_ReplicationRegions, &sImportKeyInput_RequesterComment}}
+var mImportKeyOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sImportKeyOutput_Key}}
+var mListAliasesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListAliasesInput_KeyArn, &sListAliasesInput_NextToken, &sListAliasesInput_MaxResults}}
+var mListAliasesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListAliasesOutput_Aliases, &sListAliasesOutput_NextToken}}
+var mListKeysInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListKeysInput_KeyState, &sListKeysInput_NextToken, &sListKeysInput_MaxResults}}
+var mListKeysOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListKeysOutput_Keys, &sListKeysOutput_NextToken}}
+var mListTagsForResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceInput_ResourceArn, &sListTagsForResourceInput_NextToken, &sListTagsForResourceInput_MaxResults}}
+var mListTagsForResourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceOutput_Tags, &sListTagsForResourceOutput_NextToken}}
+var mPutResourcePolicyInput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutResourcePolicyInput_ResourceArn, &sPutResourcePolicyInput_Policy}}
+var mPutResourcePolicyOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutResourcePolicyOutput_ResourceArn, &sPutResourcePolicyOutput_Policy}}
+var mRemoveKeyReplicationRegionsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sRemoveKeyReplicationRegionsInput_KeyIdentifier, &sRemoveKeyReplicationRegionsInput_ReplicationRegions}}
+var mRemoveKeyReplicationRegionsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sRemoveKeyReplicationRegionsOutput_Key}}
+var mRestoreKeyInput = smithy.SchemaMembers{List: []*smithy.Schema{&sRestoreKeyInput_KeyIdentifier}}
+var mRestoreKeyOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sRestoreKeyOutput_Key}}
+var mStartKeyUsageInput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartKeyUsageInput_KeyIdentifier}}
+var mStartKeyUsageOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartKeyUsageOutput_Key}}
+var mStopKeyUsageInput = smithy.SchemaMembers{List: []*smithy.Schema{&sStopKeyUsageInput_KeyIdentifier}}
+var mStopKeyUsageOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sStopKeyUsageOutput_Key}}
+var mTagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceInput_ResourceArn, &sTagResourceInput_Tags}}
+var mUntagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceInput_ResourceArn, &sUntagResourceInput_TagKeys}}
+var mUpdateAliasInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAliasInput_AliasName, &sUpdateAliasInput_KeyArn}}
+var mUpdateAliasOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAliasOutput_Alias}}
+
+var sAddKeyReplicationRegions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddKeyReplicationRegions, Type: smithy.ShapeTypeOperation})
+var sAssociateMpaTeam = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateMpaTeam, Type: smithy.ShapeTypeOperation})
+var sCreateAlias = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAlias, Type: smithy.ShapeTypeOperation})
+var sCreateKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateKey, Type: smithy.ShapeTypeOperation})
+var sDeleteAlias = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAlias, Type: smithy.ShapeTypeOperation})
+var sDeleteKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteKey, Type: smithy.ShapeTypeOperation})
+var sDeleteResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicy, Type: smithy.ShapeTypeOperation})
+var sDisableDefaultKeyReplicationRegions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableDefaultKeyReplicationRegions, Type: smithy.ShapeTypeOperation})
+var sDisassociateMpaTeam = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateMpaTeam, Type: smithy.ShapeTypeOperation})
+var sEnableDefaultKeyReplicationRegions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableDefaultKeyReplicationRegions, Type: smithy.ShapeTypeOperation})
+var sExportKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportKey, Type: smithy.ShapeTypeOperation})
+var sGetAlias = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAlias, Type: smithy.ShapeTypeOperation})
+var sGetCertificateSigningRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCertificateSigningRequest, Type: smithy.ShapeTypeOperation})
+var sGetDefaultKeyReplicationRegions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDefaultKeyReplicationRegions, Type: smithy.ShapeTypeOperation})
+var sGetKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetKey, Type: smithy.ShapeTypeOperation})
+var sGetMpaTeamAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMpaTeamAssociation, Type: smithy.ShapeTypeOperation})
+var sGetParametersForExport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetParametersForExport, Type: smithy.ShapeTypeOperation})
+var sGetParametersForImport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetParametersForImport, Type: smithy.ShapeTypeOperation})
+var sGetPublicKeyCertificate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPublicKeyCertificate, Type: smithy.ShapeTypeOperation})
+var sGetResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicy, Type: smithy.ShapeTypeOperation})
+var sImportKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportKey, Type: smithy.ShapeTypeOperation})
+var sListAliases = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAliases, Type: smithy.ShapeTypeOperation})
+var sListKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListKeys, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation})
+var sPutResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicy, Type: smithy.ShapeTypeOperation})
+var sRemoveKeyReplicationRegions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveKeyReplicationRegions, Type: smithy.ShapeTypeOperation})
+var sRestoreKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestoreKey, Type: smithy.ShapeTypeOperation})
+var sStartKeyUsage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartKeyUsage, Type: smithy.ShapeTypeOperation})
+var sStopKeyUsage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopKeyUsage, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation})
+var sUpdateAlias = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAlias, Type: smithy.ShapeTypeOperation})
+var s_PaymentCryptographyControlPlane = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PaymentCryptographyControlPlane, Type: smithy.ShapeTypeService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var sAlias = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAlias, Members: &mAlias, Type: smithy.ShapeTypeStructure})
+var s_Aliases = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Aliases, Members: &m_Aliases, Type: smithy.ShapeTypeList})
+var s_AliasName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AliasName, Type: smithy.ShapeTypeString})
+var sAs2805KeyVariant = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAs2805KeyVariant, Members: &mAs2805KeyVariant, Type: smithy.ShapeTypeEnum})
+var s_AssociationState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssociationState, Type: smithy.ShapeTypeString})
+var s_CertificateSigningRequestType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertificateSigningRequestType, Traits: &t1, Type: smithy.ShapeTypeString})
+var sCertificateSubjectType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCertificateSubjectType, Members: &mCertificateSubjectType, Type: smithy.ShapeTypeStructure})
+var s_CertificateType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertificateType, Type: smithy.ShapeTypeString})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var s_DeriveKeyUsage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeriveKeyUsage, Type: smithy.ShapeTypeString})
+var sDiffieHellmanDerivationData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDiffieHellmanDerivationData, Members: &mDiffieHellmanDerivationData, Type: smithy.ShapeTypeUnion})
+var s_EvenHexLengthBetween16And32 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EvenHexLengthBetween16And32, Type: smithy.ShapeTypeString})
+var sExportAs2805KeyCryptogram = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportAs2805KeyCryptogram, Members: &mExportAs2805KeyCryptogram, Type: smithy.ShapeTypeStructure})
+var sExportAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportAttributes, Members: &mExportAttributes, Type: smithy.ShapeTypeStructure})
+var sExportDiffieHellmanTr31KeyBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportDiffieHellmanTr31KeyBlock, Members: &mExportDiffieHellmanTr31KeyBlock, Type: smithy.ShapeTypeStructure})
+var sExportDukptInitialKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportDukptInitialKey, Members: &mExportDukptInitialKey, Type: smithy.ShapeTypeStructure})
+var sExportKeyCryptogram = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportKeyCryptogram, Members: &mExportKeyCryptogram, Type: smithy.ShapeTypeStructure})
+var sExportKeyMaterial = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportKeyMaterial, Members: &mExportKeyMaterial, Type: smithy.ShapeTypeUnion})
+var s_ExportTokenId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExportTokenId, Type: smithy.ShapeTypeString})
+var sExportTr31KeyBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportTr31KeyBlock, Members: &mExportTr31KeyBlock, Type: smithy.ShapeTypeStructure})
+var sExportTr34KeyBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportTr34KeyBlock, Members: &mExportTr34KeyBlock, Type: smithy.ShapeTypeStructure})
+var s_HexLength20Or24 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HexLength20Or24, Type: smithy.ShapeTypeString})
+var sImportAs2805KeyCryptogram = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportAs2805KeyCryptogram, Members: &mImportAs2805KeyCryptogram, Type: smithy.ShapeTypeStructure})
+var sImportDiffieHellmanTr31KeyBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportDiffieHellmanTr31KeyBlock, Members: &mImportDiffieHellmanTr31KeyBlock, Type: smithy.ShapeTypeStructure})
+var sImportKeyCryptogram = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportKeyCryptogram, Members: &mImportKeyCryptogram, Type: smithy.ShapeTypeStructure})
+var sImportKeyMaterial = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportKeyMaterial, Members: &mImportKeyMaterial, Type: smithy.ShapeTypeUnion})
+var s_ImportTokenId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImportTokenId, Type: smithy.ShapeTypeString})
+var sImportTr31KeyBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportTr31KeyBlock, Members: &mImportTr31KeyBlock, Type: smithy.ShapeTypeStructure})
+var sImportTr34KeyBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportTr34KeyBlock, Members: &mImportTr34KeyBlock, Type: smithy.ShapeTypeStructure})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t4, Type: smithy.ShapeTypeStructure})
+var sKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKey, Members: &mKey, Type: smithy.ShapeTypeStructure})
+var s_KeyAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyAlgorithm, Type: smithy.ShapeTypeString})
+var s_KeyArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyArn, Type: smithy.ShapeTypeString})
+var s_KeyArnOrKeyAliasType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyArnOrKeyAliasType, Type: smithy.ShapeTypeString})
+var sKeyAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyAttributes, Members: &mKeyAttributes, Type: smithy.ShapeTypeStructure})
+var sKeyBlockHeaders = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyBlockHeaders, Members: &mKeyBlockHeaders, Type: smithy.ShapeTypeStructure})
+var s_KeyCheckValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyCheckValue, Type: smithy.ShapeTypeString})
+var s_KeyCheckValueAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyCheckValueAlgorithm, Type: smithy.ShapeTypeString})
+var s_KeyClass = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyClass, Type: smithy.ShapeTypeString})
+var sKeyDerivationFunction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyDerivationFunction, Members: &mKeyDerivationFunction, Type: smithy.ShapeTypeEnum})
+var sKeyDerivationHashAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyDerivationHashAlgorithm, Members: &mKeyDerivationHashAlgorithm, Type: smithy.ShapeTypeEnum})
+var s_KeyExportability = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyExportability, Type: smithy.ShapeTypeString})
+var s_KeyMaterial = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyMaterial, Traits: &t1, Type: smithy.ShapeTypeString})
+var s_KeyMaterialType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyMaterialType, Type: smithy.ShapeTypeString})
+var sKeyModesOfUse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyModesOfUse, Members: &mKeyModesOfUse, Type: smithy.ShapeTypeStructure})
+var s_KeyOrigin = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyOrigin, Type: smithy.ShapeTypeString})
+var s_KeyReplicationState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyReplicationState, Type: smithy.ShapeTypeString})
+var s_KeyState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyState, Type: smithy.ShapeTypeString})
+var sKeySummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeySummary, Members: &mKeySummary, Type: smithy.ShapeTypeStructure})
+var s_KeySummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeySummaryList, Members: &m_KeySummaryList, Type: smithy.ShapeTypeList})
+var s_KeyUsage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyUsage, Type: smithy.ShapeTypeString})
+var s_KeyVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyVersion, Type: smithy.ShapeTypeString})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var s_MpaOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MpaOperation, Type: smithy.ShapeTypeString})
+var s_MpaRequesterComment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MpaRequesterComment, Traits: &t1, Type: smithy.ShapeTypeString})
+var s_MpaSessionArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MpaSessionArn, Type: smithy.ShapeTypeString})
+var sMpaStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMpaStatus, Members: &mMpaStatus, Type: smithy.ShapeTypeStructure})
+var s_MpaStatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MpaStatusMessage, Type: smithy.ShapeTypeString})
+var s_MpaTeamArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MpaTeamArn, Type: smithy.ShapeTypeString})
+var sMpaTeamAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMpaTeamAssociation, Members: &mMpaTeamAssociation, Type: smithy.ShapeTypeStructure})
+var s_MultiRegionKeyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MultiRegionKeyType, Type: smithy.ShapeTypeString})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var s_OptionalBlockId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OptionalBlockId, Traits: &t1, Type: smithy.ShapeTypeString})
+var s_OptionalBlocks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OptionalBlocks, Members: &m_OptionalBlocks, Type: smithy.ShapeTypeMap})
+var s_OptionalBlockValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OptionalBlockValue, Traits: &t1, Type: smithy.ShapeTypeString})
+var sPublicPolicyException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPublicPolicyException, Members: &mPublicPolicyException, Traits: &t5, Type: smithy.ShapeTypeStructure})
+var s_Region = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Region, Type: smithy.ShapeTypeString})
+var s_Regions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Regions, Members: &m_Regions, Type: smithy.ShapeTypeList})
+var s_ReplicationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReplicationStatus, Members: &m_ReplicationStatus, Type: smithy.ShapeTypeMap})
+var sReplicationStatusType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicationStatusType, Members: &mReplicationStatusType, Type: smithy.ShapeTypeStructure})
+var s_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t6, Type: smithy.ShapeTypeStructure})
+var s_ResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourcePolicy, Type: smithy.ShapeTypeString})
+var sRootCertificatePublicKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRootCertificatePublicKey, Members: &mRootCertificatePublicKey, Type: smithy.ShapeTypeStructure})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t7, Type: smithy.ShapeTypeStructure})
+var sServiceUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceUnavailableException, Members: &mServiceUnavailableException, Traits: &t8, Type: smithy.ShapeTypeStructure})
+var s_SessionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SessionStatus, Type: smithy.ShapeTypeString})
+var s_SharedInformation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SharedInformation, Type: smithy.ShapeTypeString})
+var s_SigningAlgorithmType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SigningAlgorithmType, Type: smithy.ShapeTypeString})
+var sSymmetricKeyAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSymmetricKeyAlgorithm, Members: &mSymmetricKeyAlgorithm, Type: smithy.ShapeTypeEnum})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeys, Members: &m_TagKeys, Type: smithy.ShapeTypeList})
+var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t9, Type: smithy.ShapeTypeStructure})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var s_Tr31WrappedKeyBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tr31WrappedKeyBlock, Traits: &t1, Type: smithy.ShapeTypeString})
+var s_Tr34KeyBlockFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tr34KeyBlockFormat, Type: smithy.ShapeTypeString})
+var s_Tr34WrappedKeyBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tr34WrappedKeyBlock, Traits: &t1, Type: smithy.ShapeTypeString})
+var sTrustedCertificatePublicKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrustedCertificatePublicKey, Members: &mTrustedCertificatePublicKey, Type: smithy.ShapeTypeStructure})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t5, Type: smithy.ShapeTypeStructure})
+var sWrappedKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWrappedKey, Members: &mWrappedKey, Type: smithy.ShapeTypeStructure})
+var s_WrappedKeyCryptogram = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WrappedKeyCryptogram, Traits: &t1, Type: smithy.ShapeTypeString})
+var s_WrappedKeyMaterialFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WrappedKeyMaterialFormat, Type: smithy.ShapeTypeString})
+var s_WrappingKeySpec = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WrappingKeySpec, Type: smithy.ShapeTypeString})
+var sAddKeyReplicationRegionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddKeyReplicationRegionsInput, Members: &mAddKeyReplicationRegionsInput, Type: smithy.ShapeTypeStructure})
+var sAddKeyReplicationRegionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddKeyReplicationRegionsOutput, Members: &mAddKeyReplicationRegionsOutput, Type: smithy.ShapeTypeStructure})
+var sAssociateMpaTeamInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateMpaTeamInput, Members: &mAssociateMpaTeamInput, Type: smithy.ShapeTypeStructure})
+var sAssociateMpaTeamOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateMpaTeamOutput, Members: &mAssociateMpaTeamOutput, Type: smithy.ShapeTypeStructure})
+var sCreateAliasInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAliasInput, Members: &mCreateAliasInput, Type: smithy.ShapeTypeStructure})
+var sCreateAliasOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAliasOutput, Members: &mCreateAliasOutput, Type: smithy.ShapeTypeStructure})
+var sCreateKeyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateKeyInput, Members: &mCreateKeyInput, Type: smithy.ShapeTypeStructure})
+var sCreateKeyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateKeyOutput, Members: &mCreateKeyOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteAliasInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAliasInput, Members: &mDeleteAliasInput, Type: smithy.ShapeTypeStructure})
+var sDeleteAliasOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAliasOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteKeyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteKeyInput, Members: &mDeleteKeyInput, Type: smithy.ShapeTypeStructure})
+var sDeleteKeyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteKeyOutput, Members: &mDeleteKeyOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteResourcePolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicyInput, Members: &mDeleteResourcePolicyInput, Type: smithy.ShapeTypeStructure})
+var sDeleteResourcePolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicyOutput, Type: smithy.ShapeTypeStructure})
+var sDisableDefaultKeyReplicationRegionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableDefaultKeyReplicationRegionsInput, Members: &mDisableDefaultKeyReplicationRegionsInput, Type: smithy.ShapeTypeStructure})
+var sDisableDefaultKeyReplicationRegionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableDefaultKeyReplicationRegionsOutput, Members: &mDisableDefaultKeyReplicationRegionsOutput, Type: smithy.ShapeTypeStructure})
+var sDisassociateMpaTeamInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateMpaTeamInput, Members: &mDisassociateMpaTeamInput, Type: smithy.ShapeTypeStructure})
+var sDisassociateMpaTeamOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateMpaTeamOutput, Members: &mDisassociateMpaTeamOutput, Type: smithy.ShapeTypeStructure})
+var sEnableDefaultKeyReplicationRegionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableDefaultKeyReplicationRegionsInput, Members: &mEnableDefaultKeyReplicationRegionsInput, Type: smithy.ShapeTypeStructure})
+var sEnableDefaultKeyReplicationRegionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableDefaultKeyReplicationRegionsOutput, Members: &mEnableDefaultKeyReplicationRegionsOutput, Type: smithy.ShapeTypeStructure})
+var sExportKeyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportKeyInput, Members: &mExportKeyInput, Type: smithy.ShapeTypeStructure})
+var sExportKeyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportKeyOutput, Members: &mExportKeyOutput, Type: smithy.ShapeTypeStructure})
+var sGetAliasInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAliasInput, Members: &mGetAliasInput, Type: smithy.ShapeTypeStructure})
+var sGetAliasOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAliasOutput, Members: &mGetAliasOutput, Type: smithy.ShapeTypeStructure})
+var sGetCertificateSigningRequestInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCertificateSigningRequestInput, Members: &mGetCertificateSigningRequestInput, Type: smithy.ShapeTypeStructure})
+var sGetCertificateSigningRequestOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCertificateSigningRequestOutput, Members: &mGetCertificateSigningRequestOutput, Type: smithy.ShapeTypeStructure})
+var sGetDefaultKeyReplicationRegionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDefaultKeyReplicationRegionsInput, Type: smithy.ShapeTypeStructure})
+var sGetDefaultKeyReplicationRegionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDefaultKeyReplicationRegionsOutput, Members: &mGetDefaultKeyReplicationRegionsOutput, Type: smithy.ShapeTypeStructure})
+var sGetKeyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetKeyInput, Members: &mGetKeyInput, Type: smithy.ShapeTypeStructure})
+var sGetKeyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetKeyOutput, Members: &mGetKeyOutput, Type: smithy.ShapeTypeStructure})
+var sGetMpaTeamAssociationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMpaTeamAssociationInput, Members: &mGetMpaTeamAssociationInput, Type: smithy.ShapeTypeStructure})
+var sGetMpaTeamAssociationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMpaTeamAssociationOutput, Members: &mGetMpaTeamAssociationOutput, Type: smithy.ShapeTypeStructure})
+var sGetParametersForExportInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetParametersForExportInput, Members: &mGetParametersForExportInput, Type: smithy.ShapeTypeStructure})
+var sGetParametersForExportOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetParametersForExportOutput, Members: &mGetParametersForExportOutput, Type: smithy.ShapeTypeStructure})
+var sGetParametersForImportInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetParametersForImportInput, Members: &mGetParametersForImportInput, Type: smithy.ShapeTypeStructure})
+var sGetParametersForImportOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetParametersForImportOutput, Members: &mGetParametersForImportOutput, Type: smithy.ShapeTypeStructure})
+var sGetPublicKeyCertificateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPublicKeyCertificateInput, Members: &mGetPublicKeyCertificateInput, Type: smithy.ShapeTypeStructure})
+var sGetPublicKeyCertificateOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPublicKeyCertificateOutput, Members: &mGetPublicKeyCertificateOutput, Type: smithy.ShapeTypeStructure})
+var sGetResourcePolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicyInput, Members: &mGetResourcePolicyInput, Type: smithy.ShapeTypeStructure})
+var sGetResourcePolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicyOutput, Members: &mGetResourcePolicyOutput, Type: smithy.ShapeTypeStructure})
+var sImportKeyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportKeyInput, Members: &mImportKeyInput, Type: smithy.ShapeTypeStructure})
+var sImportKeyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportKeyOutput, Members: &mImportKeyOutput, Type: smithy.ShapeTypeStructure})
+var sListAliasesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAliasesInput, Members: &mListAliasesInput, Type: smithy.ShapeTypeStructure})
+var sListAliasesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAliasesOutput, Members: &mListAliasesOutput, Type: smithy.ShapeTypeStructure})
+var sListKeysInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListKeysInput, Members: &mListKeysInput, Type: smithy.ShapeTypeStructure})
+var sListKeysOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListKeysOutput, Members: &mListKeysOutput, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceInput, Members: &mListTagsForResourceInput, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceOutput, Members: &mListTagsForResourceOutput, Type: smithy.ShapeTypeStructure})
+var sPutResourcePolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicyInput, Members: &mPutResourcePolicyInput, Type: smithy.ShapeTypeStructure})
+var sPutResourcePolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicyOutput, Members: &mPutResourcePolicyOutput, Type: smithy.ShapeTypeStructure})
+var sRemoveKeyReplicationRegionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveKeyReplicationRegionsInput, Members: &mRemoveKeyReplicationRegionsInput, Type: smithy.ShapeTypeStructure})
+var sRemoveKeyReplicationRegionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveKeyReplicationRegionsOutput, Members: &mRemoveKeyReplicationRegionsOutput, Type: smithy.ShapeTypeStructure})
+var sRestoreKeyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestoreKeyInput, Members: &mRestoreKeyInput, Type: smithy.ShapeTypeStructure})
+var sRestoreKeyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestoreKeyOutput, Members: &mRestoreKeyOutput, Type: smithy.ShapeTypeStructure})
+var sStartKeyUsageInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartKeyUsageInput, Members: &mStartKeyUsageInput, Type: smithy.ShapeTypeStructure})
+var sStartKeyUsageOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartKeyUsageOutput, Members: &mStartKeyUsageOutput, Type: smithy.ShapeTypeStructure})
+var sStopKeyUsageInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopKeyUsageInput, Members: &mStopKeyUsageInput, Type: smithy.ShapeTypeStructure})
+var sStopKeyUsageOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopKeyUsageOutput, Members: &mStopKeyUsageOutput, Type: smithy.ShapeTypeStructure})
+var sTagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceInput, Members: &mTagResourceInput, Type: smithy.ShapeTypeStructure})
+var sTagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceOutput, Type: smithy.ShapeTypeStructure})
+var sUntagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceInput, Members: &mUntagResourceInput, Type: smithy.ShapeTypeStructure})
+var sUntagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateAliasInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAliasInput, Members: &mUpdateAliasInput, Type: smithy.ShapeTypeStructure})
+var sUpdateAliasOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAliasOutput, Members: &mUpdateAliasOutput, Type: smithy.ShapeTypeStructure})
+
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sAlias_AliasName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AliasName", ID: &i_AliasName, Type: smithy.ShapeTypeString})
+var sAlias_KeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyArn", ID: &i_KeyArn, Type: smithy.ShapeTypeString})
+var s_Aliases_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAlias, Members: &mAlias, Type: smithy.ShapeTypeStructure})
+var sAs2805KeyVariant_TERMINAL_MAJOR_KEY_VARIANT_00 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TERMINAL_MAJOR_KEY_VARIANT_00", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAs2805KeyVariant_PIN_ENCRYPTION_KEY_VARIANT_28 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PIN_ENCRYPTION_KEY_VARIANT_28", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAs2805KeyVariant_MESSAGE_AUTHENTICATION_KEY_VARIANT_24 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MESSAGE_AUTHENTICATION_KEY_VARIANT_24", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAs2805KeyVariant_DATA_ENCRYPTION_KEY_VARIANT_22 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DATA_ENCRYPTION_KEY_VARIANT_22", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCertificateSubjectType_CommonName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CommonName", ID: &pString, Type: smithy.ShapeTypeString})
+var sCertificateSubjectType_OrganizationUnit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationUnit", ID: &pString, Type: smithy.ShapeTypeString})
+var sCertificateSubjectType_Organization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Organization", ID: &pString, Type: smithy.ShapeTypeString})
+var sCertificateSubjectType_City = smithy.NewStaticSchema(smithy.StaticSchema{Member: "City", ID: &pString, Type: smithy.ShapeTypeString})
+var sCertificateSubjectType_Country = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Country", ID: &pString, Type: smithy.ShapeTypeString})
+var sCertificateSubjectType_StateOrProvince = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateOrProvince", ID: &pString, Type: smithy.ShapeTypeString})
+var sCertificateSubjectType_EmailAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailAddress", ID: &pString, Type: smithy.ShapeTypeString})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sDiffieHellmanDerivationData_SharedInformation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SharedInformation", ID: &i_SharedInformation, Type: smithy.ShapeTypeString})
+var sExportAs2805KeyCryptogram_WrappingKeyIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WrappingKeyIdentifier", ID: &i_KeyArnOrKeyAliasType, Type: smithy.ShapeTypeString})
+var sExportAs2805KeyCryptogram_As2805KeyVariant = smithy.NewStaticSchema(smithy.StaticSchema{Member: "As2805KeyVariant", ID: &iAs2805KeyVariant, Members: &mAs2805KeyVariant, Type: smithy.ShapeTypeEnum})
+var sExportAttributes_ExportDukptInitialKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportDukptInitialKey", ID: &iExportDukptInitialKey, Members: &mExportDukptInitialKey, Type: smithy.ShapeTypeStructure})
+var sExportAttributes_KeyCheckValueAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyCheckValueAlgorithm", ID: &i_KeyCheckValueAlgorithm, Type: smithy.ShapeTypeString})
+var sExportDiffieHellmanTr31KeyBlock_PrivateKeyIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrivateKeyIdentifier", ID: &i_KeyArnOrKeyAliasType, Type: smithy.ShapeTypeString})
+var sExportDiffieHellmanTr31KeyBlock_CertificateAuthorityPublicKeyIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateAuthorityPublicKeyIdentifier", ID: &i_KeyArnOrKeyAliasType, Type: smithy.ShapeTypeString})
+var sExportDiffieHellmanTr31KeyBlock_PublicKeyCertificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublicKeyCertificate", ID: &i_CertificateType, Type: smithy.ShapeTypeString})
+var sExportDiffieHellmanTr31KeyBlock_DeriveKeyAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeriveKeyAlgorithm", ID: &iSymmetricKeyAlgorithm, Members: &mSymmetricKeyAlgorithm, Type: smithy.ShapeTypeEnum})
+var sExportDiffieHellmanTr31KeyBlock_KeyDerivationFunction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyDerivationFunction", ID: &iKeyDerivationFunction, Members: &mKeyDerivationFunction, Type: smithy.ShapeTypeEnum})
+var sExportDiffieHellmanTr31KeyBlock_KeyDerivationHashAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyDerivationHashAlgorithm", ID: &iKeyDerivationHashAlgorithm, Members: &mKeyDerivationHashAlgorithm, Type: smithy.ShapeTypeEnum})
+var sExportDiffieHellmanTr31KeyBlock_DerivationData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DerivationData", ID: &iDiffieHellmanDerivationData, Members: &mDiffieHellmanDerivationData, Type: smithy.ShapeTypeUnion})
+var sExportDiffieHellmanTr31KeyBlock_KeyBlockHeaders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyBlockHeaders", ID: &iKeyBlockHeaders, Members: &mKeyBlockHeaders, Type: smithy.ShapeTypeStructure})
+var sExportDukptInitialKey_KeySerialNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeySerialNumber", ID: &i_HexLength20Or24, Type: smithy.ShapeTypeString})
+var sExportKeyCryptogram_CertificateAuthorityPublicKeyIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateAuthorityPublicKeyIdentifier", ID: &i_KeyArnOrKeyAliasType, Type: smithy.ShapeTypeString})
+var sExportKeyCryptogram_WrappingKeyCertificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WrappingKeyCertificate", ID: &i_CertificateType, Type: smithy.ShapeTypeString})
+var sExportKeyCryptogram_WrappingSpec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WrappingSpec", ID: &i_WrappingKeySpec, Type: smithy.ShapeTypeString})
+var sExportKeyMaterial_Tr31KeyBlock = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tr31KeyBlock", ID: &iExportTr31KeyBlock, Members: &mExportTr31KeyBlock, Type: smithy.ShapeTypeStructure})
+var sExportKeyMaterial_Tr34KeyBlock = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tr34KeyBlock", ID: &iExportTr34KeyBlock, Members: &mExportTr34KeyBlock, Type: smithy.ShapeTypeStructure})
+var sExportKeyMaterial_KeyCryptogram = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyCryptogram", ID: &iExportKeyCryptogram, Members: &mExportKeyCryptogram, Type: smithy.ShapeTypeStructure})
+var sExportKeyMaterial_DiffieHellmanTr31KeyBlock = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiffieHellmanTr31KeyBlock", ID: &iExportDiffieHellmanTr31KeyBlock, Members: &mExportDiffieHellmanTr31KeyBlock, Type: smithy.ShapeTypeStructure})
+var sExportKeyMaterial_As2805KeyCryptogram = smithy.NewStaticSchema(smithy.StaticSchema{Member: "As2805KeyCryptogram", ID: &iExportAs2805KeyCryptogram, Members: &mExportAs2805KeyCryptogram, Type: smithy.ShapeTypeStructure})
+var sExportTr31KeyBlock_WrappingKeyIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WrappingKeyIdentifier", ID: &i_KeyArnOrKeyAliasType, Type: smithy.ShapeTypeString})
+var sExportTr31KeyBlock_KeyBlockHeaders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyBlockHeaders", ID: &iKeyBlockHeaders, Members: &mKeyBlockHeaders, Type: smithy.ShapeTypeStructure})
+var sExportTr34KeyBlock_CertificateAuthorityPublicKeyIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateAuthorityPublicKeyIdentifier", ID: &i_KeyArnOrKeyAliasType, Type: smithy.ShapeTypeString})
+var sExportTr34KeyBlock_WrappingKeyCertificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WrappingKeyCertificate", ID: &i_CertificateType, Type: smithy.ShapeTypeString})
+var sExportTr34KeyBlock_ExportToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportToken", ID: &i_ExportTokenId, Type: smithy.ShapeTypeString})
+var sExportTr34KeyBlock_SigningKeyIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SigningKeyIdentifier", ID: &i_KeyArnOrKeyAliasType, Type: smithy.ShapeTypeString})
+var sExportTr34KeyBlock_SigningKeyCertificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SigningKeyCertificate", ID: &i_CertificateType, Type: smithy.ShapeTypeString})
+var sExportTr34KeyBlock_KeyBlockFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyBlockFormat", ID: &i_Tr34KeyBlockFormat, Type: smithy.ShapeTypeString})
+var sExportTr34KeyBlock_RandomNonce = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RandomNonce", ID: &i_EvenHexLengthBetween16And32, Type: smithy.ShapeTypeString})
+var sExportTr34KeyBlock_KeyBlockHeaders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyBlockHeaders", ID: &iKeyBlockHeaders, Members: &mKeyBlockHeaders, Type: smithy.ShapeTypeStructure})
+var sImportAs2805KeyCryptogram_As2805KeyVariant = smithy.NewStaticSchema(smithy.StaticSchema{Member: "As2805KeyVariant", ID: &iAs2805KeyVariant, Members: &mAs2805KeyVariant, Type: smithy.ShapeTypeEnum})
+var sImportAs2805KeyCryptogram_KeyModesOfUse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyModesOfUse", ID: &iKeyModesOfUse, Members: &mKeyModesOfUse, Type: smithy.ShapeTypeStructure})
+var sImportAs2805KeyCryptogram_KeyAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyAlgorithm", ID: &i_KeyAlgorithm, Type: smithy.ShapeTypeString})
+var sImportAs2805KeyCryptogram_Exportable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Exportable", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sImportAs2805KeyCryptogram_WrappingKeyIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WrappingKeyIdentifier", ID: &i_KeyArnOrKeyAliasType, Type: smithy.ShapeTypeString})
+var sImportAs2805KeyCryptogram_WrappedKeyCryptogram = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WrappedKeyCryptogram", ID: &i_WrappedKeyCryptogram, Traits: &t3, Type: smithy.ShapeTypeString})
+var sImportDiffieHellmanTr31KeyBlock_PrivateKeyIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrivateKeyIdentifier", ID: &i_KeyArnOrKeyAliasType, Type: smithy.ShapeTypeString})
+var sImportDiffieHellmanTr31KeyBlock_CertificateAuthorityPublicKeyIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateAuthorityPublicKeyIdentifier", ID: &i_KeyArnOrKeyAliasType, Type: smithy.ShapeTypeString})
+var sImportDiffieHellmanTr31KeyBlock_PublicKeyCertificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublicKeyCertificate", ID: &i_CertificateType, Type: smithy.ShapeTypeString})
+var sImportDiffieHellmanTr31KeyBlock_DeriveKeyAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeriveKeyAlgorithm", ID: &iSymmetricKeyAlgorithm, Members: &mSymmetricKeyAlgorithm, Type: smithy.ShapeTypeEnum})
+var sImportDiffieHellmanTr31KeyBlock_KeyDerivationFunction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyDerivationFunction", ID: &iKeyDerivationFunction, Members: &mKeyDerivationFunction, Type: smithy.ShapeTypeEnum})
+var sImportDiffieHellmanTr31KeyBlock_KeyDerivationHashAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyDerivationHashAlgorithm", ID: &iKeyDerivationHashAlgorithm, Members: &mKeyDerivationHashAlgorithm, Type: smithy.ShapeTypeEnum})
+var sImportDiffieHellmanTr31KeyBlock_DerivationData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DerivationData", ID: &iDiffieHellmanDerivationData, Members: &mDiffieHellmanDerivationData, Type: smithy.ShapeTypeUnion})
+var sImportDiffieHellmanTr31KeyBlock_WrappedKeyBlock = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WrappedKeyBlock", ID: &i_Tr31WrappedKeyBlock, Traits: &t3, Type: smithy.ShapeTypeString})
+var sImportKeyCryptogram_KeyAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyAttributes", ID: &iKeyAttributes, Members: &mKeyAttributes, Type: smithy.ShapeTypeStructure})
+var sImportKeyCryptogram_Exportable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Exportable", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sImportKeyCryptogram_WrappedKeyCryptogram = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WrappedKeyCryptogram", ID: &i_WrappedKeyCryptogram, Traits: &t3, Type: smithy.ShapeTypeString})
+var sImportKeyCryptogram_ImportToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportToken", ID: &i_ImportTokenId, Type: smithy.ShapeTypeString})
+var sImportKeyCryptogram_WrappingSpec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WrappingSpec", ID: &i_WrappingKeySpec, Type: smithy.ShapeTypeString})
+var sImportKeyMaterial_RootCertificatePublicKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RootCertificatePublicKey", ID: &iRootCertificatePublicKey, Members: &mRootCertificatePublicKey, Type: smithy.ShapeTypeStructure})
+var sImportKeyMaterial_TrustedCertificatePublicKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrustedCertificatePublicKey", ID: &iTrustedCertificatePublicKey, Members: &mTrustedCertificatePublicKey, Type: smithy.ShapeTypeStructure})
+var sImportKeyMaterial_Tr31KeyBlock = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tr31KeyBlock", ID: &iImportTr31KeyBlock, Members: &mImportTr31KeyBlock, Type: smithy.ShapeTypeStructure})
+var sImportKeyMaterial_Tr34KeyBlock = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tr34KeyBlock", ID: &iImportTr34KeyBlock, Members: &mImportTr34KeyBlock, Type: smithy.ShapeTypeStructure})
+var sImportKeyMaterial_KeyCryptogram = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyCryptogram", ID: &iImportKeyCryptogram, Members: &mImportKeyCryptogram, Type: smithy.ShapeTypeStructure})
+var sImportKeyMaterial_DiffieHellmanTr31KeyBlock = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiffieHellmanTr31KeyBlock", ID: &iImportDiffieHellmanTr31KeyBlock, Members: &mImportDiffieHellmanTr31KeyBlock, Type: smithy.ShapeTypeStructure})
+var sImportKeyMaterial_As2805KeyCryptogram = smithy.NewStaticSchema(smithy.StaticSchema{Member: "As2805KeyCryptogram", ID: &iImportAs2805KeyCryptogram, Members: &mImportAs2805KeyCryptogram, Type: smithy.ShapeTypeStructure})
+var sImportTr31KeyBlock_WrappingKeyIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WrappingKeyIdentifier", ID: &i_KeyArnOrKeyAliasType, Type: smithy.ShapeTypeString})
+var sImportTr31KeyBlock_WrappedKeyBlock = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WrappedKeyBlock", ID: &i_Tr31WrappedKeyBlock, Traits: &t3, Type: smithy.ShapeTypeString})
+var sImportTr34KeyBlock_CertificateAuthorityPublicKeyIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateAuthorityPublicKeyIdentifier", ID: &i_KeyArnOrKeyAliasType, Type: smithy.ShapeTypeString})
+var sImportTr34KeyBlock_SigningKeyCertificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SigningKeyCertificate", ID: &i_CertificateType, Type: smithy.ShapeTypeString})
+var sImportTr34KeyBlock_ImportToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportToken", ID: &i_ImportTokenId, Type: smithy.ShapeTypeString})
+var sImportTr34KeyBlock_WrappingKeyIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WrappingKeyIdentifier", ID: &i_KeyArnOrKeyAliasType, Type: smithy.ShapeTypeString})
+var sImportTr34KeyBlock_WrappingKeyCertificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WrappingKeyCertificate", ID: &i_CertificateType, Type: smithy.ShapeTypeString})
+var sImportTr34KeyBlock_WrappedKeyBlock = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WrappedKeyBlock", ID: &i_Tr34WrappedKeyBlock, Traits: &t3, Type: smithy.ShapeTypeString})
+var sImportTr34KeyBlock_KeyBlockFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyBlockFormat", ID: &i_Tr34KeyBlockFormat, Type: smithy.ShapeTypeString})
+var sImportTr34KeyBlock_RandomNonce = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RandomNonce", ID: &i_EvenHexLengthBetween16And32, Type: smithy.ShapeTypeString})
+var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sKey_KeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyArn", ID: &i_KeyArn, Type: smithy.ShapeTypeString})
+var sKey_KeyAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyAttributes", ID: &iKeyAttributes, Members: &mKeyAttributes, Type: smithy.ShapeTypeStructure})
+var sKey_KeyCheckValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyCheckValue", ID: &i_KeyCheckValue, Type: smithy.ShapeTypeString})
+var sKey_KeyCheckValueAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyCheckValueAlgorithm", ID: &i_KeyCheckValueAlgorithm, Type: smithy.ShapeTypeString})
+var sKey_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sKey_Exportable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Exportable", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sKey_KeyState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyState", ID: &i_KeyState, Type: smithy.ShapeTypeString})
+var sKey_KeyOrigin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyOrigin", ID: &i_KeyOrigin, Type: smithy.ShapeTypeString})
+var sKey_CreateTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sKey_UsageStartTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UsageStartTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sKey_UsageStopTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UsageStopTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sKey_DeletePendingTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeletePendingTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sKey_DeleteTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sKey_DeriveKeyUsage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeriveKeyUsage", ID: &i_DeriveKeyUsage, Type: smithy.ShapeTypeString})
+var sKey_MultiRegionKeyType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MultiRegionKeyType", ID: &i_MultiRegionKeyType, Type: smithy.ShapeTypeString})
+var sKey_PrimaryRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrimaryRegion", ID: &i_Region, Type: smithy.ShapeTypeString})
+var sKey_ReplicationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicationStatus", ID: &i_ReplicationStatus, Members: &m_ReplicationStatus, Type: smithy.ShapeTypeMap})
+var sKey_UsingDefaultReplicationRegions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UsingDefaultReplicationRegions", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sKey_MpaStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MpaStatus", ID: &iMpaStatus, Members: &mMpaStatus, Type: smithy.ShapeTypeStructure})
+var sKeyAttributes_KeyUsage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyUsage", ID: &i_KeyUsage, Type: smithy.ShapeTypeString})
+var sKeyAttributes_KeyClass = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyClass", ID: &i_KeyClass, Type: smithy.ShapeTypeString})
+var sKeyAttributes_KeyAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyAlgorithm", ID: &i_KeyAlgorithm, Type: smithy.ShapeTypeString})
+var sKeyAttributes_KeyModesOfUse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyModesOfUse", ID: &iKeyModesOfUse, Members: &mKeyModesOfUse, Type: smithy.ShapeTypeStructure})
+var sKeyBlockHeaders_KeyModesOfUse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyModesOfUse", ID: &iKeyModesOfUse, Members: &mKeyModesOfUse, Type: smithy.ShapeTypeStructure})
+var sKeyBlockHeaders_KeyExportability = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyExportability", ID: &i_KeyExportability, Type: smithy.ShapeTypeString})
+var sKeyBlockHeaders_KeyVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyVersion", ID: &i_KeyVersion, Type: smithy.ShapeTypeString})
+var sKeyBlockHeaders_OptionalBlocks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OptionalBlocks", ID: &i_OptionalBlocks, Members: &m_OptionalBlocks, Type: smithy.ShapeTypeMap})
+var sKeyDerivationFunction_NIST_SP800 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NIST_SP800", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sKeyDerivationFunction_ANSI_X963 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ANSI_X963", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sKeyDerivationHashAlgorithm_SHA_256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHA_256", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sKeyDerivationHashAlgorithm_SHA_384 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHA_384", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sKeyDerivationHashAlgorithm_SHA_512 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHA_512", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sKeyModesOfUse_Encrypt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Encrypt", ID: &pPrimitiveBoolean, Type: smithy.ShapeTypeBoolean})
+var sKeyModesOfUse_Decrypt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Decrypt", ID: &pPrimitiveBoolean, Type: smithy.ShapeTypeBoolean})
+var sKeyModesOfUse_Wrap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Wrap", ID: &pPrimitiveBoolean, Type: smithy.ShapeTypeBoolean})
+var sKeyModesOfUse_Unwrap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unwrap", ID: &pPrimitiveBoolean, Type: smithy.ShapeTypeBoolean})
+var sKeyModesOfUse_Generate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Generate", ID: &pPrimitiveBoolean, Type: smithy.ShapeTypeBoolean})
+var sKeyModesOfUse_Sign = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sign", ID: &pPrimitiveBoolean, Type: smithy.ShapeTypeBoolean})
+var sKeyModesOfUse_Verify = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Verify", ID: &pPrimitiveBoolean, Type: smithy.ShapeTypeBoolean})
+var sKeyModesOfUse_DeriveKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeriveKey", ID: &pPrimitiveBoolean, Type: smithy.ShapeTypeBoolean})
+var sKeyModesOfUse_NoRestrictions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NoRestrictions", ID: &pPrimitiveBoolean, Type: smithy.ShapeTypeBoolean})
+var sKeySummary_KeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyArn", ID: &i_KeyArn, Type: smithy.ShapeTypeString})
+var sKeySummary_KeyState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyState", ID: &i_KeyState, Type: smithy.ShapeTypeString})
+var sKeySummary_KeyAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyAttributes", ID: &iKeyAttributes, Members: &mKeyAttributes, Type: smithy.ShapeTypeStructure})
+var sKeySummary_KeyCheckValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyCheckValue", ID: &i_KeyCheckValue, Type: smithy.ShapeTypeString})
+var sKeySummary_Exportable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Exportable", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sKeySummary_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sKeySummary_MultiRegionKeyType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MultiRegionKeyType", ID: &i_MultiRegionKeyType, Type: smithy.ShapeTypeString})
+var sKeySummary_PrimaryRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrimaryRegion", ID: &i_Region, Type: smithy.ShapeTypeString})
+var s_KeySummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iKeySummary, Members: &mKeySummary, Type: smithy.ShapeTypeStructure})
+var sMpaStatus_MpaSessionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MpaSessionArn", ID: &i_MpaSessionArn, Type: smithy.ShapeTypeString})
+var sMpaStatus_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_SessionStatus, Type: smithy.ShapeTypeString})
+var sMpaStatus_InitiationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InitiationDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sMpaStatus_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &i_MpaStatusMessage, Type: smithy.ShapeTypeString})
+var sMpaTeamAssociation_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &i_MpaOperation, Type: smithy.ShapeTypeString})
+var sMpaTeamAssociation_MpaTeamArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MpaTeamArn", ID: &i_MpaTeamArn, Type: smithy.ShapeTypeString})
+var sMpaTeamAssociation_AssociationState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociationState", ID: &i_AssociationState, Type: smithy.ShapeTypeString})
+var sMpaTeamAssociation_MpaStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MpaStatus", ID: &iMpaStatus, Members: &mMpaStatus, Type: smithy.ShapeTypeStructure})
+var s_OptionalBlocks_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_OptionalBlockId, Traits: &t3, Type: smithy.ShapeTypeString})
+var s_OptionalBlocks_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_OptionalBlockValue, Traits: &t3, Type: smithy.ShapeTypeString})
+var sPublicPolicyException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var s_Regions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Region, Type: smithy.ShapeTypeString})
+var s_ReplicationStatus_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_Region, Type: smithy.ShapeTypeString})
+var s_ReplicationStatus_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iReplicationStatusType, Members: &mReplicationStatusType, Type: smithy.ShapeTypeStructure})
+var sReplicationStatusType_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_KeyReplicationState, Type: smithy.ShapeTypeString})
+var sReplicationStatusType_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &pString, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &pString, Type: smithy.ShapeTypeString})
+var sRootCertificatePublicKey_KeyAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyAttributes", ID: &iKeyAttributes, Members: &mKeyAttributes, Type: smithy.ShapeTypeStructure})
+var sRootCertificatePublicKey_PublicKeyCertificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublicKeyCertificate", ID: &i_CertificateType, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sServiceUnavailableException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sSymmetricKeyAlgorithm_TDES_2KEY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TDES_2KEY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSymmetricKeyAlgorithm_TDES_3KEY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TDES_3KEY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSymmetricKeyAlgorithm_AES_128 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AES_128", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSymmetricKeyAlgorithm_AES_192 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AES_192", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSymmetricKeyAlgorithm_AES_256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AES_256", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSymmetricKeyAlgorithm_HMAC_SHA256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HMAC_SHA256", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSymmetricKeyAlgorithm_HMAC_SHA384 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HMAC_SHA384", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSymmetricKeyAlgorithm_HMAC_SHA512 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HMAC_SHA512", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSymmetricKeyAlgorithm_HMAC_SHA224 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HMAC_SHA224", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_TagKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_Tags_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sTrustedCertificatePublicKey_KeyAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyAttributes", ID: &iKeyAttributes, Members: &mKeyAttributes, Type: smithy.ShapeTypeStructure})
+var sTrustedCertificatePublicKey_PublicKeyCertificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublicKeyCertificate", ID: &i_CertificateType, Type: smithy.ShapeTypeString})
+var sTrustedCertificatePublicKey_CertificateAuthorityPublicKeyIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateAuthorityPublicKeyIdentifier", ID: &i_KeyArnOrKeyAliasType, Type: smithy.ShapeTypeString})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sWrappedKey_WrappingKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WrappingKeyArn", ID: &i_KeyArn, Type: smithy.ShapeTypeString})
+var sWrappedKey_WrappedKeyMaterialFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WrappedKeyMaterialFormat", ID: &i_WrappedKeyMaterialFormat, Type: smithy.ShapeTypeString})
+var sWrappedKey_KeyMaterial = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyMaterial", ID: &i_KeyMaterial, Traits: &t3, Type: smithy.ShapeTypeString})
+var sWrappedKey_KeyCheckValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyCheckValue", ID: &i_KeyCheckValue, Type: smithy.ShapeTypeString})
+var sWrappedKey_KeyCheckValueAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyCheckValueAlgorithm", ID: &i_KeyCheckValueAlgorithm, Type: smithy.ShapeTypeString})
+var sAddKeyReplicationRegionsInput_KeyIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyIdentifier", ID: &i_KeyArnOrKeyAliasType, Type: smithy.ShapeTypeString})
+var sAddKeyReplicationRegionsInput_ReplicationRegions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicationRegions", ID: &i_Regions, Members: &m_Regions, Type: smithy.ShapeTypeList})
+var sAddKeyReplicationRegionsOutput_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &iKey, Members: &mKey, Type: smithy.ShapeTypeStructure})
+var sAssociateMpaTeamInput_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &i_MpaOperation, Type: smithy.ShapeTypeString})
+var sAssociateMpaTeamInput_MpaTeamArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MpaTeamArn", ID: &i_MpaTeamArn, Type: smithy.ShapeTypeString})
+var sAssociateMpaTeamInput_RequesterComment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequesterComment", ID: &i_MpaRequesterComment, Traits: &t3, Type: smithy.ShapeTypeString})
+var sAssociateMpaTeamOutput_MpaTeamAssociation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MpaTeamAssociation", ID: &iMpaTeamAssociation, Members: &mMpaTeamAssociation, Type: smithy.ShapeTypeStructure})
+var sCreateAliasInput_AliasName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AliasName", ID: &i_AliasName, Type: smithy.ShapeTypeString})
+var sCreateAliasInput_KeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyArn", ID: &i_KeyArn, Type: smithy.ShapeTypeString})
+var sCreateAliasOutput_Alias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Alias", ID: &iAlias, Members: &mAlias, Type: smithy.ShapeTypeStructure})
+var sCreateKeyInput_KeyAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyAttributes", ID: &iKeyAttributes, Members: &mKeyAttributes, Type: smithy.ShapeTypeStructure})
+var sCreateKeyInput_KeyCheckValueAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyCheckValueAlgorithm", ID: &i_KeyCheckValueAlgorithm, Type: smithy.ShapeTypeString})
+var sCreateKeyInput_Exportable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Exportable", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sCreateKeyInput_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sCreateKeyInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sCreateKeyInput_DeriveKeyUsage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeriveKeyUsage", ID: &i_DeriveKeyUsage, Type: smithy.ShapeTypeString})
+var sCreateKeyInput_ReplicationRegions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicationRegions", ID: &i_Regions, Members: &m_Regions, Type: smithy.ShapeTypeList})
+var sCreateKeyOutput_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &iKey, Members: &mKey, Type: smithy.ShapeTypeStructure})
+var sDeleteAliasInput_AliasName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AliasName", ID: &i_AliasName, Type: smithy.ShapeTypeString})
+var sDeleteKeyInput_KeyIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyIdentifier", ID: &i_KeyArnOrKeyAliasType, Type: smithy.ShapeTypeString})
+var sDeleteKeyInput_DeleteKeyInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteKeyInDays", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sDeleteKeyOutput_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &iKey, Members: &mKey, Type: smithy.ShapeTypeStructure})
+var sDeleteResourcePolicyInput_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sDisableDefaultKeyReplicationRegionsInput_ReplicationRegions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicationRegions", ID: &i_Regions, Members: &m_Regions, Type: smithy.ShapeTypeList})
+var sDisableDefaultKeyReplicationRegionsOutput_EnabledReplicationRegions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnabledReplicationRegions", ID: &i_Regions, Members: &m_Regions, Type: smithy.ShapeTypeList})
+var sDisassociateMpaTeamInput_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &i_MpaOperation, Type: smithy.ShapeTypeString})
+var sDisassociateMpaTeamInput_RequesterComment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequesterComment", ID: &i_MpaRequesterComment, Traits: &t3, Type: smithy.ShapeTypeString})
+var sDisassociateMpaTeamOutput_MpaTeamAssociation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MpaTeamAssociation", ID: &iMpaTeamAssociation, Members: &mMpaTeamAssociation, Type: smithy.ShapeTypeStructure})
+var sEnableDefaultKeyReplicationRegionsInput_ReplicationRegions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicationRegions", ID: &i_Regions, Members: &m_Regions, Type: smithy.ShapeTypeList})
+var sEnableDefaultKeyReplicationRegionsOutput_EnabledReplicationRegions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnabledReplicationRegions", ID: &i_Regions, Members: &m_Regions, Type: smithy.ShapeTypeList})
+var sExportKeyInput_KeyMaterial = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyMaterial", ID: &iExportKeyMaterial, Members: &mExportKeyMaterial, Type: smithy.ShapeTypeUnion})
+var sExportKeyInput_ExportKeyIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportKeyIdentifier", ID: &i_KeyArnOrKeyAliasType, Type: smithy.ShapeTypeString})
+var sExportKeyInput_ExportAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportAttributes", ID: &iExportAttributes, Members: &mExportAttributes, Type: smithy.ShapeTypeStructure})
+var sExportKeyOutput_WrappedKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WrappedKey", ID: &iWrappedKey, Members: &mWrappedKey, Type: smithy.ShapeTypeStructure})
+var sGetAliasInput_AliasName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AliasName", ID: &i_AliasName, Type: smithy.ShapeTypeString})
+var sGetAliasOutput_Alias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Alias", ID: &iAlias, Members: &mAlias, Type: smithy.ShapeTypeStructure})
+var sGetCertificateSigningRequestInput_KeyIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyIdentifier", ID: &i_KeyArnOrKeyAliasType, Type: smithy.ShapeTypeString})
+var sGetCertificateSigningRequestInput_SigningAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SigningAlgorithm", ID: &i_SigningAlgorithmType, Type: smithy.ShapeTypeString})
+var sGetCertificateSigningRequestInput_CertificateSubject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateSubject", ID: &iCertificateSubjectType, Members: &mCertificateSubjectType, Type: smithy.ShapeTypeStructure})
+var sGetCertificateSigningRequestOutput_CertificateSigningRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateSigningRequest", ID: &i_CertificateSigningRequestType, Traits: &t3, Type: smithy.ShapeTypeString})
+var sGetDefaultKeyReplicationRegionsOutput_EnabledReplicationRegions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnabledReplicationRegions", ID: &i_Regions, Members: &m_Regions, Type: smithy.ShapeTypeList})
+var sGetKeyInput_KeyIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyIdentifier", ID: &i_KeyArnOrKeyAliasType, Type: smithy.ShapeTypeString})
+var sGetKeyOutput_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &iKey, Members: &mKey, Type: smithy.ShapeTypeStructure})
+var sGetMpaTeamAssociationInput_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &i_MpaOperation, Type: smithy.ShapeTypeString})
+var sGetMpaTeamAssociationOutput_MpaTeamAssociation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MpaTeamAssociation", ID: &iMpaTeamAssociation, Members: &mMpaTeamAssociation, Type: smithy.ShapeTypeStructure})
+var sGetParametersForExportInput_KeyMaterialType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyMaterialType", ID: &i_KeyMaterialType, Type: smithy.ShapeTypeString})
+var sGetParametersForExportInput_SigningKeyAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SigningKeyAlgorithm", ID: &i_KeyAlgorithm, Type: smithy.ShapeTypeString})
+var sGetParametersForExportInput_ReuseLastGeneratedToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReuseLastGeneratedToken", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sGetParametersForExportOutput_SigningKeyCertificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SigningKeyCertificate", ID: &i_CertificateType, Type: smithy.ShapeTypeString})
+var sGetParametersForExportOutput_SigningKeyCertificateChain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SigningKeyCertificateChain", ID: &i_CertificateType, Type: smithy.ShapeTypeString})
+var sGetParametersForExportOutput_SigningKeyAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SigningKeyAlgorithm", ID: &i_KeyAlgorithm, Type: smithy.ShapeTypeString})
+var sGetParametersForExportOutput_ExportToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportToken", ID: &i_ExportTokenId, Type: smithy.ShapeTypeString})
+var sGetParametersForExportOutput_ParametersValidUntilTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParametersValidUntilTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetParametersForImportInput_KeyMaterialType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyMaterialType", ID: &i_KeyMaterialType, Type: smithy.ShapeTypeString})
+var sGetParametersForImportInput_WrappingKeyAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WrappingKeyAlgorithm", ID: &i_KeyAlgorithm, Type: smithy.ShapeTypeString})
+var sGetParametersForImportInput_ReuseLastGeneratedToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReuseLastGeneratedToken", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sGetParametersForImportOutput_WrappingKeyCertificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WrappingKeyCertificate", ID: &i_CertificateType, Type: smithy.ShapeTypeString})
+var sGetParametersForImportOutput_WrappingKeyCertificateChain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WrappingKeyCertificateChain", ID: &i_CertificateType, Type: smithy.ShapeTypeString})
+var sGetParametersForImportOutput_WrappingKeyAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WrappingKeyAlgorithm", ID: &i_KeyAlgorithm, Type: smithy.ShapeTypeString})
+var sGetParametersForImportOutput_ImportToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportToken", ID: &i_ImportTokenId, Type: smithy.ShapeTypeString})
+var sGetParametersForImportOutput_ParametersValidUntilTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParametersValidUntilTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetPublicKeyCertificateInput_KeyIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyIdentifier", ID: &i_KeyArnOrKeyAliasType, Type: smithy.ShapeTypeString})
+var sGetPublicKeyCertificateOutput_KeyCertificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyCertificate", ID: &i_CertificateType, Type: smithy.ShapeTypeString})
+var sGetPublicKeyCertificateOutput_KeyCertificateChain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyCertificateChain", ID: &i_CertificateType, Type: smithy.ShapeTypeString})
+var sGetResourcePolicyInput_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sGetResourcePolicyOutput_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sGetResourcePolicyOutput_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_ResourcePolicy, Type: smithy.ShapeTypeString})
+var sImportKeyInput_KeyMaterial = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyMaterial", ID: &iImportKeyMaterial, Members: &mImportKeyMaterial, Type: smithy.ShapeTypeUnion})
+var sImportKeyInput_KeyCheckValueAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyCheckValueAlgorithm", ID: &i_KeyCheckValueAlgorithm, Type: smithy.ShapeTypeString})
+var sImportKeyInput_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sImportKeyInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sImportKeyInput_ReplicationRegions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicationRegions", ID: &i_Regions, Members: &m_Regions, Type: smithy.ShapeTypeList})
+var sImportKeyInput_RequesterComment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequesterComment", ID: &i_MpaRequesterComment, Traits: &t3, Type: smithy.ShapeTypeString})
+var sImportKeyOutput_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &iKey, Members: &mKey, Type: smithy.ShapeTypeStructure})
+var sListAliasesInput_KeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyArn", ID: &i_KeyArn, Type: smithy.ShapeTypeString})
+var sListAliasesInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListAliasesInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListAliasesOutput_Aliases = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Aliases", ID: &i_Aliases, Members: &m_Aliases, Type: smithy.ShapeTypeList})
+var sListAliasesOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListKeysInput_KeyState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyState", ID: &i_KeyState, Type: smithy.ShapeTypeString})
+var sListKeysInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListKeysInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListKeysOutput_Keys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Keys", ID: &i_KeySummaryList, Members: &m_KeySummaryList, Type: smithy.ShapeTypeList})
+var sListKeysOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListTagsForResourceInput_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sListTagsForResourceInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListTagsForResourceInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListTagsForResourceOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sListTagsForResourceOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sPutResourcePolicyInput_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sPutResourcePolicyInput_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_ResourcePolicy, Type: smithy.ShapeTypeString})
+var sPutResourcePolicyOutput_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sPutResourcePolicyOutput_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_ResourcePolicy, Type: smithy.ShapeTypeString})
+var sRemoveKeyReplicationRegionsInput_KeyIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyIdentifier", ID: &i_KeyArnOrKeyAliasType, Type: smithy.ShapeTypeString})
+var sRemoveKeyReplicationRegionsInput_ReplicationRegions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicationRegions", ID: &i_Regions, Members: &m_Regions, Type: smithy.ShapeTypeList})
+var sRemoveKeyReplicationRegionsOutput_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &iKey, Members: &mKey, Type: smithy.ShapeTypeStructure})
+var sRestoreKeyInput_KeyIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyIdentifier", ID: &i_KeyArnOrKeyAliasType, Type: smithy.ShapeTypeString})
+var sRestoreKeyOutput_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &iKey, Members: &mKey, Type: smithy.ShapeTypeStructure})
+var sStartKeyUsageInput_KeyIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyIdentifier", ID: &i_KeyArnOrKeyAliasType, Type: smithy.ShapeTypeString})
+var sStartKeyUsageOutput_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &iKey, Members: &mKey, Type: smithy.ShapeTypeStructure})
+var sStopKeyUsageInput_KeyIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyIdentifier", ID: &i_KeyArnOrKeyAliasType, Type: smithy.ShapeTypeString})
+var sStopKeyUsageOutput_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &iKey, Members: &mKey, Type: smithy.ShapeTypeStructure})
+var sTagResourceInput_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sTagResourceInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sUntagResourceInput_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sUntagResourceInput_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeys, Members: &m_TagKeys, Type: smithy.ShapeTypeList})
+var sUpdateAliasInput_AliasName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AliasName", ID: &i_AliasName, Type: smithy.ShapeTypeString})
+var sUpdateAliasInput_KeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyArn", ID: &i_KeyArn, Type: smithy.ShapeTypeString})
+var sUpdateAliasOutput_Alias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Alias", ID: &iAlias, Members: &mAlias, Type: smithy.ShapeTypeStructure})
+
+var AddKeyReplicationRegions = &sAddKeyReplicationRegions
+
+var AssociateMpaTeam = &sAssociateMpaTeam
+
+var CreateAlias = &sCreateAlias
+
+var CreateKey = &sCreateKey
+
+var DeleteAlias = &sDeleteAlias
+
+var DeleteKey = &sDeleteKey
+
+var DeleteResourcePolicy = &sDeleteResourcePolicy
+
+var DisableDefaultKeyReplicationRegions = &sDisableDefaultKeyReplicationRegions
+
+var DisassociateMpaTeam = &sDisassociateMpaTeam
+
+var EnableDefaultKeyReplicationRegions = &sEnableDefaultKeyReplicationRegions
+
+var ExportKey = &sExportKey
+
+var GetAlias = &sGetAlias
+
+var GetCertificateSigningRequest = &sGetCertificateSigningRequest
+
+var GetDefaultKeyReplicationRegions = &sGetDefaultKeyReplicationRegions
+
+var GetKey = &sGetKey
+
+var GetMpaTeamAssociation = &sGetMpaTeamAssociation
+
+var GetParametersForExport = &sGetParametersForExport
+
+var GetParametersForImport = &sGetParametersForImport
+
+var GetPublicKeyCertificate = &sGetPublicKeyCertificate
+
+var GetResourcePolicy = &sGetResourcePolicy
+
+var ImportKey = &sImportKey
+
+var ListAliases = &sListAliases
+
+var ListKeys = &sListKeys
+
+var ListTagsForResource = &sListTagsForResource
+
+var PutResourcePolicy = &sPutResourcePolicy
+
+var RemoveKeyReplicationRegions = &sRemoveKeyReplicationRegions
+
+var RestoreKey = &sRestoreKey
+
+var StartKeyUsage = &sStartKeyUsage
+
+var StopKeyUsage = &sStopKeyUsage
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateAlias = &sUpdateAlias
+
+var _PaymentCryptographyControlPlane = &s_PaymentCryptographyControlPlane
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_Message = &sAccessDeniedException_Message
+
+var Alias = &sAlias
+var Alias_AliasName = &sAlias_AliasName
+var Alias_KeyArn = &sAlias_KeyArn
+
+var _Aliases = &s_Aliases
+var _Aliases_member = &s_Aliases_member
+
+var _AliasName = &s_AliasName
+
+var As2805KeyVariant = &sAs2805KeyVariant
+var As2805KeyVariant_TERMINAL_MAJOR_KEY_VARIANT_00 = &sAs2805KeyVariant_TERMINAL_MAJOR_KEY_VARIANT_00
+var As2805KeyVariant_PIN_ENCRYPTION_KEY_VARIANT_28 = &sAs2805KeyVariant_PIN_ENCRYPTION_KEY_VARIANT_28
+var As2805KeyVariant_MESSAGE_AUTHENTICATION_KEY_VARIANT_24 = &sAs2805KeyVariant_MESSAGE_AUTHENTICATION_KEY_VARIANT_24
+var As2805KeyVariant_DATA_ENCRYPTION_KEY_VARIANT_22 = &sAs2805KeyVariant_DATA_ENCRYPTION_KEY_VARIANT_22
+
+var _AssociationState = &s_AssociationState
+
+var _CertificateSigningRequestType = &s_CertificateSigningRequestType
+
+var CertificateSubjectType = &sCertificateSubjectType
+var CertificateSubjectType_CommonName = &sCertificateSubjectType_CommonName
+var CertificateSubjectType_OrganizationUnit = &sCertificateSubjectType_OrganizationUnit
+var CertificateSubjectType_Organization = &sCertificateSubjectType_Organization
+var CertificateSubjectType_City = &sCertificateSubjectType_City
+var CertificateSubjectType_Country = &sCertificateSubjectType_Country
+var CertificateSubjectType_StateOrProvince = &sCertificateSubjectType_StateOrProvince
+var CertificateSubjectType_EmailAddress = &sCertificateSubjectType_EmailAddress
+
+var _CertificateType = &s_CertificateType
+
+var ConflictException = &sConflictException
+var ConflictException_Message = &sConflictException_Message
+
+var _DeriveKeyUsage = &s_DeriveKeyUsage
+
+var DiffieHellmanDerivationData = &sDiffieHellmanDerivationData
+var DiffieHellmanDerivationData_SharedInformation = &sDiffieHellmanDerivationData_SharedInformation
+
+var _EvenHexLengthBetween16And32 = &s_EvenHexLengthBetween16And32
+
+var ExportAs2805KeyCryptogram = &sExportAs2805KeyCryptogram
+var ExportAs2805KeyCryptogram_WrappingKeyIdentifier = &sExportAs2805KeyCryptogram_WrappingKeyIdentifier
+var ExportAs2805KeyCryptogram_As2805KeyVariant = &sExportAs2805KeyCryptogram_As2805KeyVariant
+
+var ExportAttributes = &sExportAttributes
+var ExportAttributes_ExportDukptInitialKey = &sExportAttributes_ExportDukptInitialKey
+var ExportAttributes_KeyCheckValueAlgorithm = &sExportAttributes_KeyCheckValueAlgorithm
+
+var ExportDiffieHellmanTr31KeyBlock = &sExportDiffieHellmanTr31KeyBlock
+var ExportDiffieHellmanTr31KeyBlock_PrivateKeyIdentifier = &sExportDiffieHellmanTr31KeyBlock_PrivateKeyIdentifier
+var ExportDiffieHellmanTr31KeyBlock_CertificateAuthorityPublicKeyIdentifier = &sExportDiffieHellmanTr31KeyBlock_CertificateAuthorityPublicKeyIdentifier
+var ExportDiffieHellmanTr31KeyBlock_PublicKeyCertificate = &sExportDiffieHellmanTr31KeyBlock_PublicKeyCertificate
+var ExportDiffieHellmanTr31KeyBlock_DeriveKeyAlgorithm = &sExportDiffieHellmanTr31KeyBlock_DeriveKeyAlgorithm
+var ExportDiffieHellmanTr31KeyBlock_KeyDerivationFunction = &sExportDiffieHellmanTr31KeyBlock_KeyDerivationFunction
+var ExportDiffieHellmanTr31KeyBlock_KeyDerivationHashAlgorithm = &sExportDiffieHellmanTr31KeyBlock_KeyDerivationHashAlgorithm
+var ExportDiffieHellmanTr31KeyBlock_DerivationData = &sExportDiffieHellmanTr31KeyBlock_DerivationData
+var ExportDiffieHellmanTr31KeyBlock_KeyBlockHeaders = &sExportDiffieHellmanTr31KeyBlock_KeyBlockHeaders
+
+var ExportDukptInitialKey = &sExportDukptInitialKey
+var ExportDukptInitialKey_KeySerialNumber = &sExportDukptInitialKey_KeySerialNumber
+
+var ExportKeyCryptogram = &sExportKeyCryptogram
+var ExportKeyCryptogram_CertificateAuthorityPublicKeyIdentifier = &sExportKeyCryptogram_CertificateAuthorityPublicKeyIdentifier
+var ExportKeyCryptogram_WrappingKeyCertificate = &sExportKeyCryptogram_WrappingKeyCertificate
+var ExportKeyCryptogram_WrappingSpec = &sExportKeyCryptogram_WrappingSpec
+
+var ExportKeyMaterial = &sExportKeyMaterial
+var ExportKeyMaterial_Tr31KeyBlock = &sExportKeyMaterial_Tr31KeyBlock
+var ExportKeyMaterial_Tr34KeyBlock = &sExportKeyMaterial_Tr34KeyBlock
+var ExportKeyMaterial_KeyCryptogram = &sExportKeyMaterial_KeyCryptogram
+var ExportKeyMaterial_DiffieHellmanTr31KeyBlock = &sExportKeyMaterial_DiffieHellmanTr31KeyBlock
+var ExportKeyMaterial_As2805KeyCryptogram = &sExportKeyMaterial_As2805KeyCryptogram
+
+var _ExportTokenId = &s_ExportTokenId
+
+var ExportTr31KeyBlock = &sExportTr31KeyBlock
+var ExportTr31KeyBlock_WrappingKeyIdentifier = &sExportTr31KeyBlock_WrappingKeyIdentifier
+var ExportTr31KeyBlock_KeyBlockHeaders = &sExportTr31KeyBlock_KeyBlockHeaders
+
+var ExportTr34KeyBlock = &sExportTr34KeyBlock
+var ExportTr34KeyBlock_CertificateAuthorityPublicKeyIdentifier = &sExportTr34KeyBlock_CertificateAuthorityPublicKeyIdentifier
+var ExportTr34KeyBlock_WrappingKeyCertificate = &sExportTr34KeyBlock_WrappingKeyCertificate
+var ExportTr34KeyBlock_ExportToken = &sExportTr34KeyBlock_ExportToken
+var ExportTr34KeyBlock_SigningKeyIdentifier = &sExportTr34KeyBlock_SigningKeyIdentifier
+var ExportTr34KeyBlock_SigningKeyCertificate = &sExportTr34KeyBlock_SigningKeyCertificate
+var ExportTr34KeyBlock_KeyBlockFormat = &sExportTr34KeyBlock_KeyBlockFormat
+var ExportTr34KeyBlock_RandomNonce = &sExportTr34KeyBlock_RandomNonce
+var ExportTr34KeyBlock_KeyBlockHeaders = &sExportTr34KeyBlock_KeyBlockHeaders
+
+var _HexLength20Or24 = &s_HexLength20Or24
+
+var ImportAs2805KeyCryptogram = &sImportAs2805KeyCryptogram
+var ImportAs2805KeyCryptogram_As2805KeyVariant = &sImportAs2805KeyCryptogram_As2805KeyVariant
+var ImportAs2805KeyCryptogram_KeyModesOfUse = &sImportAs2805KeyCryptogram_KeyModesOfUse
+var ImportAs2805KeyCryptogram_KeyAlgorithm = &sImportAs2805KeyCryptogram_KeyAlgorithm
+var ImportAs2805KeyCryptogram_Exportable = &sImportAs2805KeyCryptogram_Exportable
+var ImportAs2805KeyCryptogram_WrappingKeyIdentifier = &sImportAs2805KeyCryptogram_WrappingKeyIdentifier
+var ImportAs2805KeyCryptogram_WrappedKeyCryptogram = &sImportAs2805KeyCryptogram_WrappedKeyCryptogram
+
+var ImportDiffieHellmanTr31KeyBlock = &sImportDiffieHellmanTr31KeyBlock
+var ImportDiffieHellmanTr31KeyBlock_PrivateKeyIdentifier = &sImportDiffieHellmanTr31KeyBlock_PrivateKeyIdentifier
+var ImportDiffieHellmanTr31KeyBlock_CertificateAuthorityPublicKeyIdentifier = &sImportDiffieHellmanTr31KeyBlock_CertificateAuthorityPublicKeyIdentifier
+var ImportDiffieHellmanTr31KeyBlock_PublicKeyCertificate = &sImportDiffieHellmanTr31KeyBlock_PublicKeyCertificate
+var ImportDiffieHellmanTr31KeyBlock_DeriveKeyAlgorithm = &sImportDiffieHellmanTr31KeyBlock_DeriveKeyAlgorithm
+var ImportDiffieHellmanTr31KeyBlock_KeyDerivationFunction = &sImportDiffieHellmanTr31KeyBlock_KeyDerivationFunction
+var ImportDiffieHellmanTr31KeyBlock_KeyDerivationHashAlgorithm = &sImportDiffieHellmanTr31KeyBlock_KeyDerivationHashAlgorithm
+var ImportDiffieHellmanTr31KeyBlock_DerivationData = &sImportDiffieHellmanTr31KeyBlock_DerivationData
+var ImportDiffieHellmanTr31KeyBlock_WrappedKeyBlock = &sImportDiffieHellmanTr31KeyBlock_WrappedKeyBlock
+
+var ImportKeyCryptogram = &sImportKeyCryptogram
+var ImportKeyCryptogram_KeyAttributes = &sImportKeyCryptogram_KeyAttributes
+var ImportKeyCryptogram_Exportable = &sImportKeyCryptogram_Exportable
+var ImportKeyCryptogram_WrappedKeyCryptogram = &sImportKeyCryptogram_WrappedKeyCryptogram
+var ImportKeyCryptogram_ImportToken = &sImportKeyCryptogram_ImportToken
+var ImportKeyCryptogram_WrappingSpec = &sImportKeyCryptogram_WrappingSpec
+
+var ImportKeyMaterial = &sImportKeyMaterial
+var ImportKeyMaterial_RootCertificatePublicKey = &sImportKeyMaterial_RootCertificatePublicKey
+var ImportKeyMaterial_TrustedCertificatePublicKey = &sImportKeyMaterial_TrustedCertificatePublicKey
+var ImportKeyMaterial_Tr31KeyBlock = &sImportKeyMaterial_Tr31KeyBlock
+var ImportKeyMaterial_Tr34KeyBlock = &sImportKeyMaterial_Tr34KeyBlock
+var ImportKeyMaterial_KeyCryptogram = &sImportKeyMaterial_KeyCryptogram
+var ImportKeyMaterial_DiffieHellmanTr31KeyBlock = &sImportKeyMaterial_DiffieHellmanTr31KeyBlock
+var ImportKeyMaterial_As2805KeyCryptogram = &sImportKeyMaterial_As2805KeyCryptogram
+
+var _ImportTokenId = &s_ImportTokenId
+
+var ImportTr31KeyBlock = &sImportTr31KeyBlock
+var ImportTr31KeyBlock_WrappingKeyIdentifier = &sImportTr31KeyBlock_WrappingKeyIdentifier
+var ImportTr31KeyBlock_WrappedKeyBlock = &sImportTr31KeyBlock_WrappedKeyBlock
+
+var ImportTr34KeyBlock = &sImportTr34KeyBlock
+var ImportTr34KeyBlock_CertificateAuthorityPublicKeyIdentifier = &sImportTr34KeyBlock_CertificateAuthorityPublicKeyIdentifier
+var ImportTr34KeyBlock_SigningKeyCertificate = &sImportTr34KeyBlock_SigningKeyCertificate
+var ImportTr34KeyBlock_ImportToken = &sImportTr34KeyBlock_ImportToken
+var ImportTr34KeyBlock_WrappingKeyIdentifier = &sImportTr34KeyBlock_WrappingKeyIdentifier
+var ImportTr34KeyBlock_WrappingKeyCertificate = &sImportTr34KeyBlock_WrappingKeyCertificate
+var ImportTr34KeyBlock_WrappedKeyBlock = &sImportTr34KeyBlock_WrappedKeyBlock
+var ImportTr34KeyBlock_KeyBlockFormat = &sImportTr34KeyBlock_KeyBlockFormat
+var ImportTr34KeyBlock_RandomNonce = &sImportTr34KeyBlock_RandomNonce
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_Message = &sInternalServerException_Message
+
+var Key = &sKey
+var Key_KeyArn = &sKey_KeyArn
+var Key_KeyAttributes = &sKey_KeyAttributes
+var Key_KeyCheckValue = &sKey_KeyCheckValue
+var Key_KeyCheckValueAlgorithm = &sKey_KeyCheckValueAlgorithm
+var Key_Enabled = &sKey_Enabled
+var Key_Exportable = &sKey_Exportable
+var Key_KeyState = &sKey_KeyState
+var Key_KeyOrigin = &sKey_KeyOrigin
+var Key_CreateTimestamp = &sKey_CreateTimestamp
+var Key_UsageStartTimestamp = &sKey_UsageStartTimestamp
+var Key_UsageStopTimestamp = &sKey_UsageStopTimestamp
+var Key_DeletePendingTimestamp = &sKey_DeletePendingTimestamp
+var Key_DeleteTimestamp = &sKey_DeleteTimestamp
+var Key_DeriveKeyUsage = &sKey_DeriveKeyUsage
+var Key_MultiRegionKeyType = &sKey_MultiRegionKeyType
+var Key_PrimaryRegion = &sKey_PrimaryRegion
+var Key_ReplicationStatus = &sKey_ReplicationStatus
+var Key_UsingDefaultReplicationRegions = &sKey_UsingDefaultReplicationRegions
+var Key_MpaStatus = &sKey_MpaStatus
+
+var _KeyAlgorithm = &s_KeyAlgorithm
+
+var _KeyArn = &s_KeyArn
+
+var _KeyArnOrKeyAliasType = &s_KeyArnOrKeyAliasType
+
+var KeyAttributes = &sKeyAttributes
+var KeyAttributes_KeyUsage = &sKeyAttributes_KeyUsage
+var KeyAttributes_KeyClass = &sKeyAttributes_KeyClass
+var KeyAttributes_KeyAlgorithm = &sKeyAttributes_KeyAlgorithm
+var KeyAttributes_KeyModesOfUse = &sKeyAttributes_KeyModesOfUse
+
+var KeyBlockHeaders = &sKeyBlockHeaders
+var KeyBlockHeaders_KeyModesOfUse = &sKeyBlockHeaders_KeyModesOfUse
+var KeyBlockHeaders_KeyExportability = &sKeyBlockHeaders_KeyExportability
+var KeyBlockHeaders_KeyVersion = &sKeyBlockHeaders_KeyVersion
+var KeyBlockHeaders_OptionalBlocks = &sKeyBlockHeaders_OptionalBlocks
+
+var _KeyCheckValue = &s_KeyCheckValue
+
+var _KeyCheckValueAlgorithm = &s_KeyCheckValueAlgorithm
+
+var _KeyClass = &s_KeyClass
+
+var KeyDerivationFunction = &sKeyDerivationFunction
+var KeyDerivationFunction_NIST_SP800 = &sKeyDerivationFunction_NIST_SP800
+var KeyDerivationFunction_ANSI_X963 = &sKeyDerivationFunction_ANSI_X963
+
+var KeyDerivationHashAlgorithm = &sKeyDerivationHashAlgorithm
+var KeyDerivationHashAlgorithm_SHA_256 = &sKeyDerivationHashAlgorithm_SHA_256
+var KeyDerivationHashAlgorithm_SHA_384 = &sKeyDerivationHashAlgorithm_SHA_384
+var KeyDerivationHashAlgorithm_SHA_512 = &sKeyDerivationHashAlgorithm_SHA_512
+
+var _KeyExportability = &s_KeyExportability
+
+var _KeyMaterial = &s_KeyMaterial
+
+var _KeyMaterialType = &s_KeyMaterialType
+
+var KeyModesOfUse = &sKeyModesOfUse
+var KeyModesOfUse_Encrypt = &sKeyModesOfUse_Encrypt
+var KeyModesOfUse_Decrypt = &sKeyModesOfUse_Decrypt
+var KeyModesOfUse_Wrap = &sKeyModesOfUse_Wrap
+var KeyModesOfUse_Unwrap = &sKeyModesOfUse_Unwrap
+var KeyModesOfUse_Generate = &sKeyModesOfUse_Generate
+var KeyModesOfUse_Sign = &sKeyModesOfUse_Sign
+var KeyModesOfUse_Verify = &sKeyModesOfUse_Verify
+var KeyModesOfUse_DeriveKey = &sKeyModesOfUse_DeriveKey
+var KeyModesOfUse_NoRestrictions = &sKeyModesOfUse_NoRestrictions
+
+var _KeyOrigin = &s_KeyOrigin
+
+var _KeyReplicationState = &s_KeyReplicationState
+
+var _KeyState = &s_KeyState
+
+var KeySummary = &sKeySummary
+var KeySummary_KeyArn = &sKeySummary_KeyArn
+var KeySummary_KeyState = &sKeySummary_KeyState
+var KeySummary_KeyAttributes = &sKeySummary_KeyAttributes
+var KeySummary_KeyCheckValue = &sKeySummary_KeyCheckValue
+var KeySummary_Exportable = &sKeySummary_Exportable
+var KeySummary_Enabled = &sKeySummary_Enabled
+var KeySummary_MultiRegionKeyType = &sKeySummary_MultiRegionKeyType
+var KeySummary_PrimaryRegion = &sKeySummary_PrimaryRegion
+
+var _KeySummaryList = &s_KeySummaryList
+var _KeySummaryList_member = &s_KeySummaryList_member
+
+var _KeyUsage = &s_KeyUsage
+
+var _KeyVersion = &s_KeyVersion
+
+var _MaxResults = &s_MaxResults
+
+var _MpaOperation = &s_MpaOperation
+
+var _MpaRequesterComment = &s_MpaRequesterComment
+
+var _MpaSessionArn = &s_MpaSessionArn
+
+var MpaStatus = &sMpaStatus
+var MpaStatus_MpaSessionArn = &sMpaStatus_MpaSessionArn
+var MpaStatus_Status = &sMpaStatus_Status
+var MpaStatus_InitiationDate = &sMpaStatus_InitiationDate
+var MpaStatus_StatusMessage = &sMpaStatus_StatusMessage
+
+var _MpaStatusMessage = &s_MpaStatusMessage
+
+var _MpaTeamArn = &s_MpaTeamArn
+
+var MpaTeamAssociation = &sMpaTeamAssociation
+var MpaTeamAssociation_Action = &sMpaTeamAssociation_Action
+var MpaTeamAssociation_MpaTeamArn = &sMpaTeamAssociation_MpaTeamArn
+var MpaTeamAssociation_AssociationState = &sMpaTeamAssociation_AssociationState
+var MpaTeamAssociation_MpaStatus = &sMpaTeamAssociation_MpaStatus
+
+var _MultiRegionKeyType = &s_MultiRegionKeyType
+
+var _NextToken = &s_NextToken
+
+var _OptionalBlockId = &s_OptionalBlockId
+
+var _OptionalBlocks = &s_OptionalBlocks
+var _OptionalBlocks_key = &s_OptionalBlocks_key
+var _OptionalBlocks_value = &s_OptionalBlocks_value
+
+var _OptionalBlockValue = &s_OptionalBlockValue
+
+var PublicPolicyException = &sPublicPolicyException
+var PublicPolicyException_Message = &sPublicPolicyException_Message
+
+var _Region = &s_Region
+
+var _Regions = &s_Regions
+var _Regions_member = &s_Regions_member
+
+var _ReplicationStatus = &s_ReplicationStatus
+var _ReplicationStatus_key = &s_ReplicationStatus_key
+var _ReplicationStatus_value = &s_ReplicationStatus_value
+
+var ReplicationStatusType = &sReplicationStatusType
+var ReplicationStatusType_Status = &sReplicationStatusType_Status
+var ReplicationStatusType_StatusMessage = &sReplicationStatusType_StatusMessage
+
+var _ResourceArn = &s_ResourceArn
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_ResourceId = &sResourceNotFoundException_ResourceId
+
+var _ResourcePolicy = &s_ResourcePolicy
+
+var RootCertificatePublicKey = &sRootCertificatePublicKey
+var RootCertificatePublicKey_KeyAttributes = &sRootCertificatePublicKey_KeyAttributes
+var RootCertificatePublicKey_PublicKeyCertificate = &sRootCertificatePublicKey_PublicKeyCertificate
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_Message = &sServiceQuotaExceededException_Message
+
+var ServiceUnavailableException = &sServiceUnavailableException
+var ServiceUnavailableException_Message = &sServiceUnavailableException_Message
+
+var _SessionStatus = &s_SessionStatus
+
+var _SharedInformation = &s_SharedInformation
+
+var _SigningAlgorithmType = &s_SigningAlgorithmType
+
+var SymmetricKeyAlgorithm = &sSymmetricKeyAlgorithm
+var SymmetricKeyAlgorithm_TDES_2KEY = &sSymmetricKeyAlgorithm_TDES_2KEY
+var SymmetricKeyAlgorithm_TDES_3KEY = &sSymmetricKeyAlgorithm_TDES_3KEY
+var SymmetricKeyAlgorithm_AES_128 = &sSymmetricKeyAlgorithm_AES_128
+var SymmetricKeyAlgorithm_AES_192 = &sSymmetricKeyAlgorithm_AES_192
+var SymmetricKeyAlgorithm_AES_256 = &sSymmetricKeyAlgorithm_AES_256
+var SymmetricKeyAlgorithm_HMAC_SHA256 = &sSymmetricKeyAlgorithm_HMAC_SHA256
+var SymmetricKeyAlgorithm_HMAC_SHA384 = &sSymmetricKeyAlgorithm_HMAC_SHA384
+var SymmetricKeyAlgorithm_HMAC_SHA512 = &sSymmetricKeyAlgorithm_HMAC_SHA512
+var SymmetricKeyAlgorithm_HMAC_SHA224 = &sSymmetricKeyAlgorithm_HMAC_SHA224
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var _TagKey = &s_TagKey
+
+var _TagKeys = &s_TagKeys
+var _TagKeys_member = &s_TagKeys_member
+
+var _Tags = &s_Tags
+var _Tags_member = &s_Tags_member
+
+var _TagValue = &s_TagValue
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_Message = &sThrottlingException_Message
+
+var _Timestamp = &s_Timestamp
+
+var _Tr31WrappedKeyBlock = &s_Tr31WrappedKeyBlock
+
+var _Tr34KeyBlockFormat = &s_Tr34KeyBlockFormat
+
+var _Tr34WrappedKeyBlock = &s_Tr34WrappedKeyBlock
+
+var TrustedCertificatePublicKey = &sTrustedCertificatePublicKey
+var TrustedCertificatePublicKey_KeyAttributes = &sTrustedCertificatePublicKey_KeyAttributes
+var TrustedCertificatePublicKey_PublicKeyCertificate = &sTrustedCertificatePublicKey_PublicKeyCertificate
+var TrustedCertificatePublicKey_CertificateAuthorityPublicKeyIdentifier = &sTrustedCertificatePublicKey_CertificateAuthorityPublicKeyIdentifier
+
+var ValidationException = &sValidationException
+var ValidationException_Message = &sValidationException_Message
+
+var WrappedKey = &sWrappedKey
+var WrappedKey_WrappingKeyArn = &sWrappedKey_WrappingKeyArn
+var WrappedKey_WrappedKeyMaterialFormat = &sWrappedKey_WrappedKeyMaterialFormat
+var WrappedKey_KeyMaterial = &sWrappedKey_KeyMaterial
+var WrappedKey_KeyCheckValue = &sWrappedKey_KeyCheckValue
+var WrappedKey_KeyCheckValueAlgorithm = &sWrappedKey_KeyCheckValueAlgorithm
+
+var _WrappedKeyCryptogram = &s_WrappedKeyCryptogram
+
+var _WrappedKeyMaterialFormat = &s_WrappedKeyMaterialFormat
+
+var _WrappingKeySpec = &s_WrappingKeySpec
+
+var AddKeyReplicationRegionsInput = &sAddKeyReplicationRegionsInput
+var AddKeyReplicationRegionsInput_KeyIdentifier = &sAddKeyReplicationRegionsInput_KeyIdentifier
+var AddKeyReplicationRegionsInput_ReplicationRegions = &sAddKeyReplicationRegionsInput_ReplicationRegions
+
+var AddKeyReplicationRegionsOutput = &sAddKeyReplicationRegionsOutput
+var AddKeyReplicationRegionsOutput_Key = &sAddKeyReplicationRegionsOutput_Key
+
+var AssociateMpaTeamInput = &sAssociateMpaTeamInput
+var AssociateMpaTeamInput_Action = &sAssociateMpaTeamInput_Action
+var AssociateMpaTeamInput_MpaTeamArn = &sAssociateMpaTeamInput_MpaTeamArn
+var AssociateMpaTeamInput_RequesterComment = &sAssociateMpaTeamInput_RequesterComment
+
+var AssociateMpaTeamOutput = &sAssociateMpaTeamOutput
+var AssociateMpaTeamOutput_MpaTeamAssociation = &sAssociateMpaTeamOutput_MpaTeamAssociation
+
+var CreateAliasInput = &sCreateAliasInput
+var CreateAliasInput_AliasName = &sCreateAliasInput_AliasName
+var CreateAliasInput_KeyArn = &sCreateAliasInput_KeyArn
+
+var CreateAliasOutput = &sCreateAliasOutput
+var CreateAliasOutput_Alias = &sCreateAliasOutput_Alias
+
+var CreateKeyInput = &sCreateKeyInput
+var CreateKeyInput_KeyAttributes = &sCreateKeyInput_KeyAttributes
+var CreateKeyInput_KeyCheckValueAlgorithm = &sCreateKeyInput_KeyCheckValueAlgorithm
+var CreateKeyInput_Exportable = &sCreateKeyInput_Exportable
+var CreateKeyInput_Enabled = &sCreateKeyInput_Enabled
+var CreateKeyInput_Tags = &sCreateKeyInput_Tags
+var CreateKeyInput_DeriveKeyUsage = &sCreateKeyInput_DeriveKeyUsage
+var CreateKeyInput_ReplicationRegions = &sCreateKeyInput_ReplicationRegions
+
+var CreateKeyOutput = &sCreateKeyOutput
+var CreateKeyOutput_Key = &sCreateKeyOutput_Key
+
+var DeleteAliasInput = &sDeleteAliasInput
+var DeleteAliasInput_AliasName = &sDeleteAliasInput_AliasName
+
+var DeleteAliasOutput = &sDeleteAliasOutput
+
+var DeleteKeyInput = &sDeleteKeyInput
+var DeleteKeyInput_KeyIdentifier = &sDeleteKeyInput_KeyIdentifier
+var DeleteKeyInput_DeleteKeyInDays = &sDeleteKeyInput_DeleteKeyInDays
+
+var DeleteKeyOutput = &sDeleteKeyOutput
+var DeleteKeyOutput_Key = &sDeleteKeyOutput_Key
+
+var DeleteResourcePolicyInput = &sDeleteResourcePolicyInput
+var DeleteResourcePolicyInput_ResourceArn = &sDeleteResourcePolicyInput_ResourceArn
+
+var DeleteResourcePolicyOutput = &sDeleteResourcePolicyOutput
+
+var DisableDefaultKeyReplicationRegionsInput = &sDisableDefaultKeyReplicationRegionsInput
+var DisableDefaultKeyReplicationRegionsInput_ReplicationRegions = &sDisableDefaultKeyReplicationRegionsInput_ReplicationRegions
+
+var DisableDefaultKeyReplicationRegionsOutput = &sDisableDefaultKeyReplicationRegionsOutput
+var DisableDefaultKeyReplicationRegionsOutput_EnabledReplicationRegions = &sDisableDefaultKeyReplicationRegionsOutput_EnabledReplicationRegions
+
+var DisassociateMpaTeamInput = &sDisassociateMpaTeamInput
+var DisassociateMpaTeamInput_Action = &sDisassociateMpaTeamInput_Action
+var DisassociateMpaTeamInput_RequesterComment = &sDisassociateMpaTeamInput_RequesterComment
+
+var DisassociateMpaTeamOutput = &sDisassociateMpaTeamOutput
+var DisassociateMpaTeamOutput_MpaTeamAssociation = &sDisassociateMpaTeamOutput_MpaTeamAssociation
+
+var EnableDefaultKeyReplicationRegionsInput = &sEnableDefaultKeyReplicationRegionsInput
+var EnableDefaultKeyReplicationRegionsInput_ReplicationRegions = &sEnableDefaultKeyReplicationRegionsInput_ReplicationRegions
+
+var EnableDefaultKeyReplicationRegionsOutput = &sEnableDefaultKeyReplicationRegionsOutput
+var EnableDefaultKeyReplicationRegionsOutput_EnabledReplicationRegions = &sEnableDefaultKeyReplicationRegionsOutput_EnabledReplicationRegions
+
+var ExportKeyInput = &sExportKeyInput
+var ExportKeyInput_KeyMaterial = &sExportKeyInput_KeyMaterial
+var ExportKeyInput_ExportKeyIdentifier = &sExportKeyInput_ExportKeyIdentifier
+var ExportKeyInput_ExportAttributes = &sExportKeyInput_ExportAttributes
+
+var ExportKeyOutput = &sExportKeyOutput
+var ExportKeyOutput_WrappedKey = &sExportKeyOutput_WrappedKey
+
+var GetAliasInput = &sGetAliasInput
+var GetAliasInput_AliasName = &sGetAliasInput_AliasName
+
+var GetAliasOutput = &sGetAliasOutput
+var GetAliasOutput_Alias = &sGetAliasOutput_Alias
+
+var GetCertificateSigningRequestInput = &sGetCertificateSigningRequestInput
+var GetCertificateSigningRequestInput_KeyIdentifier = &sGetCertificateSigningRequestInput_KeyIdentifier
+var GetCertificateSigningRequestInput_SigningAlgorithm = &sGetCertificateSigningRequestInput_SigningAlgorithm
+var GetCertificateSigningRequestInput_CertificateSubject = &sGetCertificateSigningRequestInput_CertificateSubject
+
+var GetCertificateSigningRequestOutput = &sGetCertificateSigningRequestOutput
+var GetCertificateSigningRequestOutput_CertificateSigningRequest = &sGetCertificateSigningRequestOutput_CertificateSigningRequest
+
+var GetDefaultKeyReplicationRegionsInput = &sGetDefaultKeyReplicationRegionsInput
+
+var GetDefaultKeyReplicationRegionsOutput = &sGetDefaultKeyReplicationRegionsOutput
+var GetDefaultKeyReplicationRegionsOutput_EnabledReplicationRegions = &sGetDefaultKeyReplicationRegionsOutput_EnabledReplicationRegions
+
+var GetKeyInput = &sGetKeyInput
+var GetKeyInput_KeyIdentifier = &sGetKeyInput_KeyIdentifier
+
+var GetKeyOutput = &sGetKeyOutput
+var GetKeyOutput_Key = &sGetKeyOutput_Key
+
+var GetMpaTeamAssociationInput = &sGetMpaTeamAssociationInput
+var GetMpaTeamAssociationInput_Action = &sGetMpaTeamAssociationInput_Action
+
+var GetMpaTeamAssociationOutput = &sGetMpaTeamAssociationOutput
+var GetMpaTeamAssociationOutput_MpaTeamAssociation = &sGetMpaTeamAssociationOutput_MpaTeamAssociation
+
+var GetParametersForExportInput = &sGetParametersForExportInput
+var GetParametersForExportInput_KeyMaterialType = &sGetParametersForExportInput_KeyMaterialType
+var GetParametersForExportInput_SigningKeyAlgorithm = &sGetParametersForExportInput_SigningKeyAlgorithm
+var GetParametersForExportInput_ReuseLastGeneratedToken = &sGetParametersForExportInput_ReuseLastGeneratedToken
+
+var GetParametersForExportOutput = &sGetParametersForExportOutput
+var GetParametersForExportOutput_SigningKeyCertificate = &sGetParametersForExportOutput_SigningKeyCertificate
+var GetParametersForExportOutput_SigningKeyCertificateChain = &sGetParametersForExportOutput_SigningKeyCertificateChain
+var GetParametersForExportOutput_SigningKeyAlgorithm = &sGetParametersForExportOutput_SigningKeyAlgorithm
+var GetParametersForExportOutput_ExportToken = &sGetParametersForExportOutput_ExportToken
+var GetParametersForExportOutput_ParametersValidUntilTimestamp = &sGetParametersForExportOutput_ParametersValidUntilTimestamp
+
+var GetParametersForImportInput = &sGetParametersForImportInput
+var GetParametersForImportInput_KeyMaterialType = &sGetParametersForImportInput_KeyMaterialType
+var GetParametersForImportInput_WrappingKeyAlgorithm = &sGetParametersForImportInput_WrappingKeyAlgorithm
+var GetParametersForImportInput_ReuseLastGeneratedToken = &sGetParametersForImportInput_ReuseLastGeneratedToken
+
+var GetParametersForImportOutput = &sGetParametersForImportOutput
+var GetParametersForImportOutput_WrappingKeyCertificate = &sGetParametersForImportOutput_WrappingKeyCertificate
+var GetParametersForImportOutput_WrappingKeyCertificateChain = &sGetParametersForImportOutput_WrappingKeyCertificateChain
+var GetParametersForImportOutput_WrappingKeyAlgorithm = &sGetParametersForImportOutput_WrappingKeyAlgorithm
+var GetParametersForImportOutput_ImportToken = &sGetParametersForImportOutput_ImportToken
+var GetParametersForImportOutput_ParametersValidUntilTimestamp = &sGetParametersForImportOutput_ParametersValidUntilTimestamp
+
+var GetPublicKeyCertificateInput = &sGetPublicKeyCertificateInput
+var GetPublicKeyCertificateInput_KeyIdentifier = &sGetPublicKeyCertificateInput_KeyIdentifier
+
+var GetPublicKeyCertificateOutput = &sGetPublicKeyCertificateOutput
+var GetPublicKeyCertificateOutput_KeyCertificate = &sGetPublicKeyCertificateOutput_KeyCertificate
+var GetPublicKeyCertificateOutput_KeyCertificateChain = &sGetPublicKeyCertificateOutput_KeyCertificateChain
+
+var GetResourcePolicyInput = &sGetResourcePolicyInput
+var GetResourcePolicyInput_ResourceArn = &sGetResourcePolicyInput_ResourceArn
+
+var GetResourcePolicyOutput = &sGetResourcePolicyOutput
+var GetResourcePolicyOutput_ResourceArn = &sGetResourcePolicyOutput_ResourceArn
+var GetResourcePolicyOutput_Policy = &sGetResourcePolicyOutput_Policy
+
+var ImportKeyInput = &sImportKeyInput
+var ImportKeyInput_KeyMaterial = &sImportKeyInput_KeyMaterial
+var ImportKeyInput_KeyCheckValueAlgorithm = &sImportKeyInput_KeyCheckValueAlgorithm
+var ImportKeyInput_Enabled = &sImportKeyInput_Enabled
+var ImportKeyInput_Tags = &sImportKeyInput_Tags
+var ImportKeyInput_ReplicationRegions = &sImportKeyInput_ReplicationRegions
+var ImportKeyInput_RequesterComment = &sImportKeyInput_RequesterComment
+
+var ImportKeyOutput = &sImportKeyOutput
+var ImportKeyOutput_Key = &sImportKeyOutput_Key
+
+var ListAliasesInput = &sListAliasesInput
+var ListAliasesInput_KeyArn = &sListAliasesInput_KeyArn
+var ListAliasesInput_NextToken = &sListAliasesInput_NextToken
+var ListAliasesInput_MaxResults = &sListAliasesInput_MaxResults
+
+var ListAliasesOutput = &sListAliasesOutput
+var ListAliasesOutput_Aliases = &sListAliasesOutput_Aliases
+var ListAliasesOutput_NextToken = &sListAliasesOutput_NextToken
+
+var ListKeysInput = &sListKeysInput
+var ListKeysInput_KeyState = &sListKeysInput_KeyState
+var ListKeysInput_NextToken = &sListKeysInput_NextToken
+var ListKeysInput_MaxResults = &sListKeysInput_MaxResults
+
+var ListKeysOutput = &sListKeysOutput
+var ListKeysOutput_Keys = &sListKeysOutput_Keys
+var ListKeysOutput_NextToken = &sListKeysOutput_NextToken
+
+var ListTagsForResourceInput = &sListTagsForResourceInput
+var ListTagsForResourceInput_ResourceArn = &sListTagsForResourceInput_ResourceArn
+var ListTagsForResourceInput_NextToken = &sListTagsForResourceInput_NextToken
+var ListTagsForResourceInput_MaxResults = &sListTagsForResourceInput_MaxResults
+
+var ListTagsForResourceOutput = &sListTagsForResourceOutput
+var ListTagsForResourceOutput_Tags = &sListTagsForResourceOutput_Tags
+var ListTagsForResourceOutput_NextToken = &sListTagsForResourceOutput_NextToken
+
+var PutResourcePolicyInput = &sPutResourcePolicyInput
+var PutResourcePolicyInput_ResourceArn = &sPutResourcePolicyInput_ResourceArn
+var PutResourcePolicyInput_Policy = &sPutResourcePolicyInput_Policy
+
+var PutResourcePolicyOutput = &sPutResourcePolicyOutput
+var PutResourcePolicyOutput_ResourceArn = &sPutResourcePolicyOutput_ResourceArn
+var PutResourcePolicyOutput_Policy = &sPutResourcePolicyOutput_Policy
+
+var RemoveKeyReplicationRegionsInput = &sRemoveKeyReplicationRegionsInput
+var RemoveKeyReplicationRegionsInput_KeyIdentifier = &sRemoveKeyReplicationRegionsInput_KeyIdentifier
+var RemoveKeyReplicationRegionsInput_ReplicationRegions = &sRemoveKeyReplicationRegionsInput_ReplicationRegions
+
+var RemoveKeyReplicationRegionsOutput = &sRemoveKeyReplicationRegionsOutput
+var RemoveKeyReplicationRegionsOutput_Key = &sRemoveKeyReplicationRegionsOutput_Key
+
+var RestoreKeyInput = &sRestoreKeyInput
+var RestoreKeyInput_KeyIdentifier = &sRestoreKeyInput_KeyIdentifier
+
+var RestoreKeyOutput = &sRestoreKeyOutput
+var RestoreKeyOutput_Key = &sRestoreKeyOutput_Key
+
+var StartKeyUsageInput = &sStartKeyUsageInput
+var StartKeyUsageInput_KeyIdentifier = &sStartKeyUsageInput_KeyIdentifier
+
+var StartKeyUsageOutput = &sStartKeyUsageOutput
+var StartKeyUsageOutput_Key = &sStartKeyUsageOutput_Key
+
+var StopKeyUsageInput = &sStopKeyUsageInput
+var StopKeyUsageInput_KeyIdentifier = &sStopKeyUsageInput_KeyIdentifier
+
+var StopKeyUsageOutput = &sStopKeyUsageOutput
+var StopKeyUsageOutput_Key = &sStopKeyUsageOutput_Key
+
+var TagResourceInput = &sTagResourceInput
+var TagResourceInput_ResourceArn = &sTagResourceInput_ResourceArn
+var TagResourceInput_Tags = &sTagResourceInput_Tags
+
+var TagResourceOutput = &sTagResourceOutput
+
+var UntagResourceInput = &sUntagResourceInput
+var UntagResourceInput_ResourceArn = &sUntagResourceInput_ResourceArn
+var UntagResourceInput_TagKeys = &sUntagResourceInput_TagKeys
+
+var UntagResourceOutput = &sUntagResourceOutput
+
+var UpdateAliasInput = &sUpdateAliasInput
+var UpdateAliasInput_AliasName = &sUpdateAliasInput_AliasName
+var UpdateAliasInput_KeyArn = &sUpdateAliasInput_KeyArn
+
+var UpdateAliasOutput = &sUpdateAliasOutput
+var UpdateAliasOutput_Alias = &sUpdateAliasOutput_Alias
+
+var PaymentCryptographyControlPlane = &smithy.ServiceSchema{Schema: &s_PaymentCryptographyControlPlane, Version: "2021-09-14"}

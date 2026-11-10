@@ -4,2103 +4,1554 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CancelSession = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "CancelSession",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/sessions/{SessionArn}",
-	Code: 200})
+var (
+	iCancelSession                                 = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "CancelSession"}
+	iCreateApprovalTeam                            = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "CreateApprovalTeam"}
+	iCreateIdentitySource                          = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "CreateIdentitySource"}
+	iDeleteIdentitySource                          = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "DeleteIdentitySource"}
+	iDeleteInactiveApprovalTeamVersion             = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "DeleteInactiveApprovalTeamVersion"}
+	iGetApprovalTeam                               = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "GetApprovalTeam"}
+	iGetIdentitySource                             = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "GetIdentitySource"}
+	iGetPolicyVersion                              = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "GetPolicyVersion"}
+	iGetResourcePolicy                             = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "GetResourcePolicy"}
+	iGetSession                                    = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "GetSession"}
+	iListApprovalTeams                             = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "ListApprovalTeams"}
+	iListIdentitySources                           = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "ListIdentitySources"}
+	iListPolicies                                  = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "ListPolicies"}
+	iListPolicyVersions                            = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "ListPolicyVersions"}
+	iListResourcePolicies                          = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "ListResourcePolicies"}
+	iListSessions                                  = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "ListSessions"}
+	iListTagsForResource                           = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "ListTagsForResource"}
+	iStartActiveApprovalTeamDeletion               = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "StartActiveApprovalTeamDeletion"}
+	iStartApprovalTeamBaseline                     = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "StartApprovalTeamBaseline"}
+	iTagResource                                   = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "TagResource"}
+	iUntagResource                                 = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "UntagResource"}
+	iUpdateApprovalTeam                            = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "UpdateApprovalTeam"}
+	i_AWSFluffyCoreService                         = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "AWSFluffyCoreService"}
+	iAccessDeniedException                         = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "AccessDeniedException"}
+	i_AccountId                                    = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "AccountId"}
+	iActionCompletionStrategy                      = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "ActionCompletionStrategy"}
+	i_ActionName                                   = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "ActionName"}
+	iAdditionalSecurityRequirement                 = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "AdditionalSecurityRequirement"}
+	i_AdditionalSecurityRequirements               = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "AdditionalSecurityRequirements"}
+	iApprovalStrategy                              = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "ApprovalStrategy"}
+	iApprovalStrategyResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "ApprovalStrategyResponse"}
+	i_ApprovalTeamArn                              = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "ApprovalTeamArn"}
+	i_ApprovalTeamName                             = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "ApprovalTeamName"}
+	iApprovalTeamRequestApprover                   = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "ApprovalTeamRequestApprover"}
+	i_ApprovalTeamRequestApprovers                 = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "ApprovalTeamRequestApprovers"}
+	iApprovalTeamStatus                            = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "ApprovalTeamStatus"}
+	iApprovalTeamStatusCode                        = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "ApprovalTeamStatusCode"}
+	iApproverLastActivity                          = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "ApproverLastActivity"}
+	iConflictException                             = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "ConflictException"}
+	i_Description                                  = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "Description"}
+	iFilter                                        = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "Filter"}
+	iFilterField                                   = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "FilterField"}
+	i_Filters                                      = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "Filters"}
+	iGetApprovalTeamResponseApprover               = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "GetApprovalTeamResponseApprover"}
+	i_GetApprovalTeamResponseApprovers             = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "GetApprovalTeamResponseApprovers"}
+	iGetSessionResponseApproverResponse            = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "GetSessionResponseApproverResponse"}
+	i_GetSessionResponseApproverResponses          = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "GetSessionResponseApproverResponses"}
+	iIamIdentityCenter                             = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "IamIdentityCenter"}
+	iIamIdentityCenterForGet                       = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "IamIdentityCenterForGet"}
+	iIamIdentityCenterForList                      = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "IamIdentityCenterForList"}
+	i_IdcInstanceArn                               = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "IdcInstanceArn"}
+	i_IdentityId                                   = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "IdentityId"}
+	iIdentitySourceForList                         = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "IdentitySourceForList"}
+	iIdentitySourceParameters                      = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "IdentitySourceParameters"}
+	iIdentitySourceParametersForGet                = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "IdentitySourceParametersForGet"}
+	iIdentitySourceParametersForList               = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "IdentitySourceParametersForList"}
+	i_IdentitySources                              = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "IdentitySources"}
+	iIdentitySourceStatus                          = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "IdentitySourceStatus"}
+	iIdentitySourceStatusCode                      = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "IdentitySourceStatusCode"}
+	iIdentitySourceType                            = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "IdentitySourceType"}
+	iIdentityStatus                                = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "IdentityStatus"}
+	iInternalServerException                       = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "InternalServerException"}
+	iInvalidParameterException                     = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "InvalidParameterException"}
+	i_IsoTimestamp                                 = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "IsoTimestamp"}
+	iListApprovalTeamsResponseApprovalTeam         = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "ListApprovalTeamsResponseApprovalTeam"}
+	i_ListApprovalTeamsResponseApprovalTeams       = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "ListApprovalTeamsResponseApprovalTeams"}
+	i_ListResourcePoliciesResponseResourcePolicies = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "ListResourcePoliciesResponseResourcePolicies"}
+	iListResourcePoliciesResponseResourcePolicy    = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "ListResourcePoliciesResponseResourcePolicy"}
+	iListSessionsResponseSession                   = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "ListSessionsResponseSession"}
+	i_ListSessionsResponseSessions                 = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "ListSessionsResponseSessions"}
+	i_MaxResults                                   = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "MaxResults"}
+	i_Message                                      = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "Message"}
+	iMfaMethod                                     = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "MfaMethod"}
+	i_MfaMethods                                   = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "MfaMethods"}
+	iMfaSyncStatus                                 = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "MfaSyncStatus"}
+	iMfaType                                       = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "MfaType"}
+	iMofNApprovalStrategy                          = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "MofNApprovalStrategy"}
+	iOperator                                      = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "Operator"}
+	i_ParticipantId                                = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "ParticipantId"}
+	iPendingUpdate                                 = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "PendingUpdate"}
+	i_Policies                                     = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "Policies"}
+	i_PoliciesReferences                           = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "PoliciesReferences"}
+	iPolicy                                        = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "Policy"}
+	i_PolicyDocument                               = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "PolicyDocument"}
+	i_PolicyName                                   = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "PolicyName"}
+	iPolicyReference                               = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "PolicyReference"}
+	iPolicyStatus                                  = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "PolicyStatus"}
+	iPolicyType                                    = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "PolicyType"}
+	iPolicyVersion                                 = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "PolicyVersion"}
+	i_PolicyVersionId                              = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "PolicyVersionId"}
+	i_PolicyVersions                               = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "PolicyVersions"}
+	iPolicyVersionSummary                          = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "PolicyVersionSummary"}
+	i_QualifiedPolicyArn                           = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "QualifiedPolicyArn"}
+	i_Region                                       = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "Region"}
+	i_RequesterComment                             = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "RequesterComment"}
+	iResourceNotFoundException                     = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "ResourceNotFoundException"}
+	i_ServicePrincipal                             = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "ServicePrincipal"}
+	iServiceQuotaExceededException                 = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "ServiceQuotaExceededException"}
+	i_SessionArn                                   = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "SessionArn"}
+	iSessionExecutionStatus                        = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "SessionExecutionStatus"}
+	i_SessionKey                                   = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "SessionKey"}
+	i_SessionMetadata                              = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "SessionMetadata"}
+	iSessionResponse                               = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "SessionResponse"}
+	iSessionStatus                                 = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "SessionStatus"}
+	iSessionStatusCode                             = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "SessionStatusCode"}
+	i_SessionValue                                 = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "SessionValue"}
+	i_StartApprovalTeamBaselineApproverIds         = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "StartApprovalTeamBaselineApproverIds"}
+	i_String                                       = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "String"}
+	i_TagKey                                       = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "TagKey"}
+	i_TagKeyList                                   = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "TagKeyList"}
+	i_Tags                                         = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "Tags"}
+	i_TagValue                                     = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "TagValue"}
+	iThrottlingException                           = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "ThrottlingException"}
+	i_Token                                        = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "Token"}
+	iTooManyTagsException                          = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "TooManyTagsException"}
+	i_UnqualifiedPolicyArn                         = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "UnqualifiedPolicyArn"}
+	iUpdateAction                                  = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "UpdateAction"}
+	i_UpdateActions                                = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "UpdateActions"}
+	iValidationException                           = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "ValidationException"}
+	iCancelSessionRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "CancelSessionRequest"}
+	iCancelSessionResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "CancelSessionResponse"}
+	iCreateApprovalTeamRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "CreateApprovalTeamRequest"}
+	iCreateApprovalTeamResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "CreateApprovalTeamResponse"}
+	iCreateIdentitySourceRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "CreateIdentitySourceRequest"}
+	iCreateIdentitySourceResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "CreateIdentitySourceResponse"}
+	iDeleteIdentitySourceRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "DeleteIdentitySourceRequest"}
+	iDeleteInactiveApprovalTeamVersionRequest      = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "DeleteInactiveApprovalTeamVersionRequest"}
+	iDeleteInactiveApprovalTeamVersionResponse     = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "DeleteInactiveApprovalTeamVersionResponse"}
+	iGetApprovalTeamRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "GetApprovalTeamRequest"}
+	iGetApprovalTeamResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "GetApprovalTeamResponse"}
+	iGetIdentitySourceRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "GetIdentitySourceRequest"}
+	iGetIdentitySourceResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "GetIdentitySourceResponse"}
+	iGetPolicyVersionRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "GetPolicyVersionRequest"}
+	iGetPolicyVersionResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "GetPolicyVersionResponse"}
+	iGetResourcePolicyRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "GetResourcePolicyRequest"}
+	iGetResourcePolicyResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "GetResourcePolicyResponse"}
+	iGetSessionRequest                             = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "GetSessionRequest"}
+	iGetSessionResponse                            = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "GetSessionResponse"}
+	iListApprovalTeamsRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "ListApprovalTeamsRequest"}
+	iListApprovalTeamsResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "ListApprovalTeamsResponse"}
+	iListIdentitySourcesRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "ListIdentitySourcesRequest"}
+	iListIdentitySourcesResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "ListIdentitySourcesResponse"}
+	iListPoliciesRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "ListPoliciesRequest"}
+	iListPoliciesResponse                          = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "ListPoliciesResponse"}
+	iListPolicyVersionsRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "ListPolicyVersionsRequest"}
+	iListPolicyVersionsResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "ListPolicyVersionsResponse"}
+	iListResourcePoliciesRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "ListResourcePoliciesRequest"}
+	iListResourcePoliciesResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "ListResourcePoliciesResponse"}
+	iListSessionsRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "ListSessionsRequest"}
+	iListSessionsResponse                          = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "ListSessionsResponse"}
+	iListTagsForResourceRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "ListTagsForResourceResponse"}
+	iStartActiveApprovalTeamDeletionRequest        = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "StartActiveApprovalTeamDeletionRequest"}
+	iStartActiveApprovalTeamDeletionResponse       = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "StartActiveApprovalTeamDeletionResponse"}
+	iStartApprovalTeamBaselineRequest              = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "StartApprovalTeamBaselineRequest"}
+	iStartApprovalTeamBaselineResponse             = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "StartApprovalTeamBaselineResponse"}
+	iTagResourceRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "TagResourceRequest"}
+	iTagResourceResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "TagResourceResponse"}
+	iUntagResourceRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "UntagResourceResponse"}
+	iUpdateApprovalTeamRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "UpdateApprovalTeamRequest"}
+	iUpdateApprovalTeamResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.mpa", Name: "UpdateApprovalTeamResponse"}
+	pUnit                                          = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+	pInteger                                       = smithy.ShapeID{Namespace: "smithy.api", Name: "Integer"}
+	pBoolean                                       = smithy.ShapeID{Namespace: "smithy.api", Name: "Boolean"}
+)
 
-var CreateApprovalTeam = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "CreateApprovalTeam",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+	URI:  "/sessions/{SessionArn}",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/approval-teams",
-	Code: 200})
-
-var CreateIdentitySource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "CreateIdentitySource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/identity-sources",
-	Code: 200})
-
-var DeleteIdentitySource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "DeleteIdentitySource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/identity-sources/{IdentitySourceArn}",
-	Code: 200})
-
-var DeleteInactiveApprovalTeamVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "DeleteInactiveApprovalTeamVersion",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/approval-teams/{Arn}/{VersionId}",
-	Code: 200})
-
-var GetApprovalTeam = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "GetApprovalTeam",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/approval-teams/{Arn}",
-	Code: 200})
-
-var GetIdentitySource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "GetIdentitySource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/identity-sources/{IdentitySourceArn}",
-	Code: 200})
-
-var GetPolicyVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "GetPolicyVersion",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/policy-versions/{PolicyVersionArn}",
-	Code: 200})
-
-var GetResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "GetResourcePolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetResourcePolicy",
-	Code: 200})
-
-var GetSession = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "GetSession",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/sessions/{SessionArn}",
-	Code: 200})
-
-var ListApprovalTeams = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "ListApprovalTeams",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/approval-teams/?List",
-	Code: 200})
-
-var ListIdentitySources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "ListIdentitySources",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/identity-sources/?List",
-	Code: 200})
-
-var ListPolicies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "ListPolicies",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/policies/?List",
-	Code: 200})
-
-var ListPolicyVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "ListPolicyVersions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/policies/{PolicyArn}/?List",
-	Code: 200})
-
-var ListResourcePolicies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "ListResourcePolicies",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/resource-policies/{ResourceArn}/?List",
-	Code: 200})
-
-var ListSessions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "ListSessions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/approval-teams/{ApprovalTeamArn}/sessions/?List",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var StartActiveApprovalTeamDeletion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "StartActiveApprovalTeamDeletion",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/approval-teams/{Arn}?Delete",
-	Code: 200})
-
-var StartApprovalTeamBaseline = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "StartApprovalTeamBaseline",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/approval-teams/{Arn}/baseline",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var UpdateApprovalTeam = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "UpdateApprovalTeam",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/approval-teams/{Arn}",
-	Code: 200})
-
-var _AWSFluffyCoreService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "AWSFluffyCoreService",
-}, smithy.ShapeTypeService, 0)
-
-var AWSFluffyCoreService = smithy.NewServiceSchema(_AWSFluffyCoreService, "2022-07-26")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var _AccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "AccountId",
-}, smithy.ShapeTypeString, 0)
-
-var ActionCompletionStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "ActionCompletionStrategy",
-}, smithy.ShapeTypeEnum, 1)
-var ActionCompletionStrategy_AUTO_COMPLETION_UPON_APPROVAL *smithy.Schema
-
-var _ActionName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "ActionName",
-}, smithy.ShapeTypeString, 0)
-
-var AdditionalSecurityRequirement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "AdditionalSecurityRequirement",
-}, smithy.ShapeTypeEnum, 1)
-var AdditionalSecurityRequirement_APPROVER_VERIFICATION_REQUIRED *smithy.Schema
-
-var _AdditionalSecurityRequirements = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "AdditionalSecurityRequirements",
-}, smithy.ShapeTypeList, 1)
-var _AdditionalSecurityRequirements_member *smithy.Schema
-
-var ApprovalStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "ApprovalStrategy",
-}, smithy.ShapeTypeUnion, 1)
-var ApprovalStrategy_MofN *smithy.Schema
-
-var ApprovalStrategyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "ApprovalStrategyResponse",
-}, smithy.ShapeTypeUnion, 1)
-var ApprovalStrategyResponse_MofN *smithy.Schema
-
-var _ApprovalTeamArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "ApprovalTeamArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ApprovalTeamName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "ApprovalTeamName",
-}, smithy.ShapeTypeString, 0)
-
-var ApprovalTeamRequestApprover = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "ApprovalTeamRequestApprover",
-}, smithy.ShapeTypeStructure, 2)
-var ApprovalTeamRequestApprover_PrimaryIdentityId *smithy.Schema
-
-var ApprovalTeamRequestApprover_PrimaryIdentitySourceArn *smithy.Schema
-
-var _ApprovalTeamRequestApprovers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "ApprovalTeamRequestApprovers",
-}, smithy.ShapeTypeList, 1)
-var _ApprovalTeamRequestApprovers_member *smithy.Schema
-
-var ApprovalTeamStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "ApprovalTeamStatus",
-}, smithy.ShapeTypeEnum, 4)
-var ApprovalTeamStatus_ACTIVE *smithy.Schema
-
-var ApprovalTeamStatus_INACTIVE *smithy.Schema
-
-var ApprovalTeamStatus_DELETING *smithy.Schema
-
-var ApprovalTeamStatus_PENDING *smithy.Schema
-
-var ApprovalTeamStatusCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "ApprovalTeamStatusCode",
-}, smithy.ShapeTypeEnum, 12)
-var ApprovalTeamStatusCode_VALIDATING *smithy.Schema
-
-var ApprovalTeamStatusCode_PENDING_ACTIVATION *smithy.Schema
-
-var ApprovalTeamStatusCode_FAILED_VALIDATION *smithy.Schema
-
-var ApprovalTeamStatusCode_FAILED_ACTIVATION *smithy.Schema
-
-var ApprovalTeamStatusCode_UPDATE_PENDING_APPROVAL *smithy.Schema
-
-var ApprovalTeamStatusCode_UPDATE_PENDING_ACTIVATION *smithy.Schema
-
-var ApprovalTeamStatusCode_UPDATE_FAILED_APPROVAL *smithy.Schema
-
-var ApprovalTeamStatusCode_UPDATE_FAILED_ACTIVATION *smithy.Schema
-
-var ApprovalTeamStatusCode_UPDATE_FAILED_VALIDATION *smithy.Schema
-
-var ApprovalTeamStatusCode_DELETE_PENDING_APPROVAL *smithy.Schema
-
-var ApprovalTeamStatusCode_DELETE_FAILED_APPROVAL *smithy.Schema
-
-var ApprovalTeamStatusCode_DELETE_FAILED_VALIDATION *smithy.Schema
-
-var ApproverLastActivity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "ApproverLastActivity",
-}, smithy.ShapeTypeEnum, 3)
-var ApproverLastActivity_VOTED *smithy.Schema
-
-var ApproverLastActivity_BASELINED *smithy.Schema
-
-var ApproverLastActivity_RESPONDED_TO_INVITATION *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_Message *smithy.Schema
-
-var _Description = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "Description",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var Filter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "Filter",
-}, smithy.ShapeTypeStructure, 3)
-var Filter_FieldName *smithy.Schema
-
-var Filter_Operator *smithy.Schema
-
-var Filter_Value *smithy.Schema
-
-var FilterField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "FilterField",
-}, smithy.ShapeTypeEnum, 6)
-var FilterField_ACTION_NAME *smithy.Schema
-
-var FilterField_APPROVAL_TEAM_NAME *smithy.Schema
-
-var FilterField_VOTING_TIME *smithy.Schema
-
-var FilterField_VOTE *smithy.Schema
-
-var FilterField_SESSION_STATUS *smithy.Schema
-
-var FilterField_INITIATION_TIME *smithy.Schema
-
-var _Filters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "Filters",
-}, smithy.ShapeTypeList, 1)
-var _Filters_member *smithy.Schema
-
-var GetApprovalTeamResponseApprover = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "GetApprovalTeamResponseApprover",
-}, smithy.ShapeTypeStructure, 9)
-var GetApprovalTeamResponseApprover_ApproverId *smithy.Schema
-
-var GetApprovalTeamResponseApprover_ResponseTime *smithy.Schema
-
-var GetApprovalTeamResponseApprover_PrimaryIdentityId *smithy.Schema
-
-var GetApprovalTeamResponseApprover_PrimaryIdentitySourceArn *smithy.Schema
-
-var GetApprovalTeamResponseApprover_PrimaryIdentityStatus *smithy.Schema
-
-var GetApprovalTeamResponseApprover_LastActivity *smithy.Schema
-
-var GetApprovalTeamResponseApprover_LastActivityTime *smithy.Schema
-
-var GetApprovalTeamResponseApprover_PendingBaselineSessionArn *smithy.Schema
-
-var GetApprovalTeamResponseApprover_MfaMethods *smithy.Schema
-
-var _GetApprovalTeamResponseApprovers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "GetApprovalTeamResponseApprovers",
-}, smithy.ShapeTypeList, 1)
-var _GetApprovalTeamResponseApprovers_member *smithy.Schema
-
-var GetSessionResponseApproverResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "GetSessionResponseApproverResponse",
-}, smithy.ShapeTypeStructure, 5)
-var GetSessionResponseApproverResponse_ApproverId *smithy.Schema
-
-var GetSessionResponseApproverResponse_IdentitySourceArn *smithy.Schema
-
-var GetSessionResponseApproverResponse_IdentityId *smithy.Schema
-
-var GetSessionResponseApproverResponse_Response *smithy.Schema
-
-var GetSessionResponseApproverResponse_ResponseTime *smithy.Schema
-
-var _GetSessionResponseApproverResponses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "GetSessionResponseApproverResponses",
-}, smithy.ShapeTypeList, 1)
-var _GetSessionResponseApproverResponses_member *smithy.Schema
-
-var IamIdentityCenter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "IamIdentityCenter",
-}, smithy.ShapeTypeStructure, 2)
-var IamIdentityCenter_InstanceArn *smithy.Schema
-
-var IamIdentityCenter_Region *smithy.Schema
-
-var IamIdentityCenterForGet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "IamIdentityCenterForGet",
-}, smithy.ShapeTypeStructure, 3)
-var IamIdentityCenterForGet_InstanceArn *smithy.Schema
-
-var IamIdentityCenterForGet_ApprovalPortalUrl *smithy.Schema
-
-var IamIdentityCenterForGet_Region *smithy.Schema
-
-var IamIdentityCenterForList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "IamIdentityCenterForList",
-}, smithy.ShapeTypeStructure, 3)
-var IamIdentityCenterForList_InstanceArn *smithy.Schema
-
-var IamIdentityCenterForList_ApprovalPortalUrl *smithy.Schema
-
-var IamIdentityCenterForList_Region *smithy.Schema
-
-var _IdcInstanceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "IdcInstanceArn",
-}, smithy.ShapeTypeString, 0)
-
-var _IdentityId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "IdentityId",
-}, smithy.ShapeTypeString, 0)
-
-var IdentitySourceForList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "IdentitySourceForList",
-}, smithy.ShapeTypeStructure, 7)
-var IdentitySourceForList_IdentitySourceType *smithy.Schema
-
-var IdentitySourceForList_IdentitySourceParameters *smithy.Schema
-
-var IdentitySourceForList_IdentitySourceArn *smithy.Schema
-
-var IdentitySourceForList_CreationTime *smithy.Schema
-
-var IdentitySourceForList_Status *smithy.Schema
-
-var IdentitySourceForList_StatusCode *smithy.Schema
-
-var IdentitySourceForList_StatusMessage *smithy.Schema
-
-var IdentitySourceParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "IdentitySourceParameters",
-}, smithy.ShapeTypeStructure, 1)
-var IdentitySourceParameters_IamIdentityCenter *smithy.Schema
-
-var IdentitySourceParametersForGet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "IdentitySourceParametersForGet",
-}, smithy.ShapeTypeUnion, 1)
-var IdentitySourceParametersForGet_IamIdentityCenter *smithy.Schema
-
-var IdentitySourceParametersForList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "IdentitySourceParametersForList",
-}, smithy.ShapeTypeUnion, 1)
-var IdentitySourceParametersForList_IamIdentityCenter *smithy.Schema
-
-var _IdentitySources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "IdentitySources",
-}, smithy.ShapeTypeList, 1)
-var _IdentitySources_member *smithy.Schema
-
-var IdentitySourceStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "IdentitySourceStatus",
-}, smithy.ShapeTypeEnum, 4)
-var IdentitySourceStatus_CREATING *smithy.Schema
-
-var IdentitySourceStatus_ACTIVE *smithy.Schema
-
-var IdentitySourceStatus_DELETING *smithy.Schema
-
-var IdentitySourceStatus_ERROR *smithy.Schema
-
-var IdentitySourceStatusCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "IdentitySourceStatusCode",
-}, smithy.ShapeTypeEnum, 4)
-var IdentitySourceStatusCode_ACCESS_DENIED *smithy.Schema
-
-var IdentitySourceStatusCode_DELETION_FAILED *smithy.Schema
-
-var IdentitySourceStatusCode_IDC_INSTANCE_NOT_FOUND *smithy.Schema
-
-var IdentitySourceStatusCode_IDC_INSTANCE_NOT_VALID *smithy.Schema
-
-var IdentitySourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "IdentitySourceType",
-}, smithy.ShapeTypeEnum, 1)
-var IdentitySourceType_IAM_IDENTITY_CENTER *smithy.Schema
-
-var IdentityStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "IdentityStatus",
-}, smithy.ShapeTypeEnum, 4)
-var IdentityStatus_PENDING *smithy.Schema
-
-var IdentityStatus_ACCEPTED *smithy.Schema
-
-var IdentityStatus_REJECTED *smithy.Schema
-
-var IdentityStatus_INVALID *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_Message *smithy.Schema
-
-var InvalidParameterException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "InvalidParameterException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidParameterException_Message *smithy.Schema
-
-var _IsoTimestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "IsoTimestamp",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
-
-var ListApprovalTeamsResponseApprovalTeam = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "ListApprovalTeamsResponseApprovalTeam",
-}, smithy.ShapeTypeStructure, 9)
-var ListApprovalTeamsResponseApprovalTeam_CreationTime *smithy.Schema
-
-var ListApprovalTeamsResponseApprovalTeam_ApprovalStrategy *smithy.Schema
-
-var ListApprovalTeamsResponseApprovalTeam_NumberOfApprovers *smithy.Schema
-
-var ListApprovalTeamsResponseApprovalTeam_Arn *smithy.Schema
-
-var ListApprovalTeamsResponseApprovalTeam_Name *smithy.Schema
-
-var ListApprovalTeamsResponseApprovalTeam_Description *smithy.Schema
-
-var ListApprovalTeamsResponseApprovalTeam_Status *smithy.Schema
-
-var ListApprovalTeamsResponseApprovalTeam_StatusCode *smithy.Schema
-
-var ListApprovalTeamsResponseApprovalTeam_StatusMessage *smithy.Schema
-
-var _ListApprovalTeamsResponseApprovalTeams = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "ListApprovalTeamsResponseApprovalTeams",
-}, smithy.ShapeTypeList, 1)
-var _ListApprovalTeamsResponseApprovalTeams_member *smithy.Schema
-
-var _ListResourcePoliciesResponseResourcePolicies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "ListResourcePoliciesResponseResourcePolicies",
-}, smithy.ShapeTypeList, 1)
-var _ListResourcePoliciesResponseResourcePolicies_member *smithy.Schema
-
-var ListResourcePoliciesResponseResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "ListResourcePoliciesResponseResourcePolicy",
-}, smithy.ShapeTypeStructure, 3)
-var ListResourcePoliciesResponseResourcePolicy_PolicyArn *smithy.Schema
-
-var ListResourcePoliciesResponseResourcePolicy_PolicyType *smithy.Schema
-
-var ListResourcePoliciesResponseResourcePolicy_PolicyName *smithy.Schema
-
-var ListSessionsResponseSession = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "ListSessionsResponseSession",
-}, smithy.ShapeTypeStructure, 18)
-var ListSessionsResponseSession_SessionArn *smithy.Schema
-
-var ListSessionsResponseSession_ApprovalTeamName *smithy.Schema
-
-var ListSessionsResponseSession_ApprovalTeamArn *smithy.Schema
-
-var ListSessionsResponseSession_InitiationTime *smithy.Schema
-
-var ListSessionsResponseSession_ExpirationTime *smithy.Schema
-
-var ListSessionsResponseSession_CompletionTime *smithy.Schema
-
-var ListSessionsResponseSession_Description *smithy.Schema
-
-var ListSessionsResponseSession_ActionName *smithy.Schema
-
-var ListSessionsResponseSession_ProtectedResourceArn *smithy.Schema
-
-var ListSessionsResponseSession_RequesterServicePrincipal *smithy.Schema
-
-var ListSessionsResponseSession_RequesterPrincipalArn *smithy.Schema
-
-var ListSessionsResponseSession_RequesterRegion *smithy.Schema
-
-var ListSessionsResponseSession_RequesterAccountId *smithy.Schema
-
-var ListSessionsResponseSession_Status *smithy.Schema
-
-var ListSessionsResponseSession_StatusCode *smithy.Schema
-
-var ListSessionsResponseSession_StatusMessage *smithy.Schema
-
-var ListSessionsResponseSession_ActionCompletionStrategy *smithy.Schema
-
-var ListSessionsResponseSession_AdditionalSecurityRequirements *smithy.Schema
-
-var _ListSessionsResponseSessions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "ListSessionsResponseSessions",
-}, smithy.ShapeTypeList, 1)
-var _ListSessionsResponseSessions_member *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Message = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "Message",
-}, smithy.ShapeTypeString, 0)
-
-var MfaMethod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "MfaMethod",
-}, smithy.ShapeTypeStructure, 2)
-var MfaMethod_Type *smithy.Schema
-
-var MfaMethod_SyncStatus *smithy.Schema
-
-var _MfaMethods = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "MfaMethods",
-}, smithy.ShapeTypeList, 1)
-var _MfaMethods_member *smithy.Schema
-
-var MfaSyncStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "MfaSyncStatus",
-}, smithy.ShapeTypeEnum, 2)
-var MfaSyncStatus_IN_SYNC *smithy.Schema
-
-var MfaSyncStatus_OUT_OF_SYNC *smithy.Schema
-
-var MfaType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "MfaType",
-}, smithy.ShapeTypeEnum, 1)
-var MfaType_EMAIL_OTP *smithy.Schema
-
-var MofNApprovalStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "MofNApprovalStrategy",
-}, smithy.ShapeTypeStructure, 1)
-var MofNApprovalStrategy_MinApprovalsRequired *smithy.Schema
-
-var Operator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "Operator",
-}, smithy.ShapeTypeEnum, 9)
-var Operator_EQUALS *smithy.Schema
-
-var Operator_NOT_EQUALS *smithy.Schema
-
-var Operator_GREATER_THAN *smithy.Schema
-
-var Operator_LESS_THAN *smithy.Schema
-
-var Operator_GREATER_THAN_OR_EQUAL_TO *smithy.Schema
-
-var Operator_LESS_THAN_OR_EQUAL_TO *smithy.Schema
-
-var Operator_CONTAINS *smithy.Schema
-
-var Operator_DOES_NOT_CONTAIN *smithy.Schema
-
-var Operator_BETWEEN *smithy.Schema
-
-var _ParticipantId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "ParticipantId",
-}, smithy.ShapeTypeString, 0)
-
-var PendingUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "PendingUpdate",
-}, smithy.ShapeTypeStructure, 9)
-var PendingUpdate_VersionId *smithy.Schema
-
-var PendingUpdate_Description *smithy.Schema
-
-var PendingUpdate_ApprovalStrategy *smithy.Schema
-
-var PendingUpdate_NumberOfApprovers *smithy.Schema
-
-var PendingUpdate_Status *smithy.Schema
-
-var PendingUpdate_StatusCode *smithy.Schema
-
-var PendingUpdate_StatusMessage *smithy.Schema
-
-var PendingUpdate_Approvers *smithy.Schema
-
-var PendingUpdate_UpdateInitiationTime *smithy.Schema
-
-var _Policies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "Policies",
-}, smithy.ShapeTypeList, 1)
-var _Policies_member *smithy.Schema
-
-var _PoliciesReferences = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "PoliciesReferences",
-}, smithy.ShapeTypeList, 1)
-var _PoliciesReferences_member *smithy.Schema
-
-var Policy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "Policy",
-}, smithy.ShapeTypeStructure, 4)
-var Policy_Arn *smithy.Schema
-
-var Policy_DefaultVersion *smithy.Schema
-
-var Policy_PolicyType *smithy.Schema
-
-var Policy_Name *smithy.Schema
-
-var _PolicyDocument = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "PolicyDocument",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _PolicyName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "PolicyName",
-}, smithy.ShapeTypeString, 0)
-
-var PolicyReference = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "PolicyReference",
-}, smithy.ShapeTypeStructure, 1)
-var PolicyReference_PolicyArn *smithy.Schema
-
-var PolicyStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "PolicyStatus",
-}, smithy.ShapeTypeEnum, 2)
-var PolicyStatus_ATTACHABLE *smithy.Schema
-
-var PolicyStatus_DEPRECATED *smithy.Schema
-
-var PolicyType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "PolicyType",
-}, smithy.ShapeTypeEnum, 2)
-var PolicyType_AWS_MANAGED *smithy.Schema
-
-var PolicyType_AWS_RAM *smithy.Schema
-
-var PolicyVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "PolicyVersion",
-}, smithy.ShapeTypeStructure, 10)
-var PolicyVersion_Arn *smithy.Schema
-
-var PolicyVersion_PolicyArn *smithy.Schema
-
-var PolicyVersion_VersionId *smithy.Schema
-
-var PolicyVersion_PolicyType *smithy.Schema
-
-var PolicyVersion_IsDefault *smithy.Schema
-
-var PolicyVersion_Name *smithy.Schema
-
-var PolicyVersion_Status *smithy.Schema
-
-var PolicyVersion_CreationTime *smithy.Schema
-
-var PolicyVersion_LastUpdatedTime *smithy.Schema
-
-var PolicyVersion_Document *smithy.Schema
-
-var _PolicyVersionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "PolicyVersionId",
-}, smithy.ShapeTypeInteger, 0)
-
-var _PolicyVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "PolicyVersions",
-}, smithy.ShapeTypeList, 1)
-var _PolicyVersions_member *smithy.Schema
-
-var PolicyVersionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "PolicyVersionSummary",
-}, smithy.ShapeTypeStructure, 9)
-var PolicyVersionSummary_Arn *smithy.Schema
-
-var PolicyVersionSummary_PolicyArn *smithy.Schema
-
-var PolicyVersionSummary_VersionId *smithy.Schema
-
-var PolicyVersionSummary_PolicyType *smithy.Schema
-
-var PolicyVersionSummary_IsDefault *smithy.Schema
-
-var PolicyVersionSummary_Name *smithy.Schema
-
-var PolicyVersionSummary_Status *smithy.Schema
-
-var PolicyVersionSummary_CreationTime *smithy.Schema
-
-var PolicyVersionSummary_LastUpdatedTime *smithy.Schema
-
-var _QualifiedPolicyArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "QualifiedPolicyArn",
-}, smithy.ShapeTypeString, 0)
-
-var _Region = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "Region",
-}, smithy.ShapeTypeString, 0)
-
-var _RequesterComment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "RequesterComment",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var _ServicePrincipal = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "ServicePrincipal",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_Message *smithy.Schema
-
-var _SessionArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "SessionArn",
-}, smithy.ShapeTypeString, 0)
-
-var SessionExecutionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "SessionExecutionStatus",
-}, smithy.ShapeTypeEnum, 3)
-var SessionExecutionStatus_EXECUTED *smithy.Schema
-
-var SessionExecutionStatus_FAILED *smithy.Schema
-
-var SessionExecutionStatus_PENDING *smithy.Schema
-
-var _SessionKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "SessionKey",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _SessionMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "SessionMetadata",
-}, smithy.ShapeTypeMap, 2, &smithytraits.Sensitive{})
-var _SessionMetadata_key *smithy.Schema
-
-var _SessionMetadata_value *smithy.Schema
-
-var SessionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "SessionResponse",
-}, smithy.ShapeTypeEnum, 3)
-var SessionResponse_APPROVED *smithy.Schema
-
-var SessionResponse_REJECTED *smithy.Schema
-
-var SessionResponse_NO_RESPONSE *smithy.Schema
-
-var SessionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "SessionStatus",
-}, smithy.ShapeTypeEnum, 5)
-var SessionStatus_PENDING *smithy.Schema
-
-var SessionStatus_CANCELLED *smithy.Schema
-
-var SessionStatus_APPROVED *smithy.Schema
-
-var SessionStatus_FAILED *smithy.Schema
-
-var SessionStatus_CREATING *smithy.Schema
-
-var SessionStatusCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "SessionStatusCode",
-}, smithy.ShapeTypeEnum, 4)
-var SessionStatusCode_REJECTED *smithy.Schema
-
-var SessionStatusCode_EXPIRED *smithy.Schema
-
-var SessionStatusCode_CONFIGURATION_CHANGED *smithy.Schema
-
-var SessionStatusCode_ALL_APPROVERS_IN_SESSION *smithy.Schema
-
-var _SessionValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "SessionValue",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _StartApprovalTeamBaselineApproverIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "StartApprovalTeamBaselineApproverIds",
-}, smithy.ShapeTypeList, 1)
-var _StartApprovalTeamBaselineApproverIds_member *smithy.Schema
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1, &smithytraits.Sensitive{})
-var _TagKeyList_member *smithy.Schema
-
-var _Tags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "Tags",
-}, smithy.ShapeTypeMap, 2, &smithytraits.Sensitive{})
-var _Tags_key *smithy.Schema
-
-var _Tags_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_Message *smithy.Schema
-
-var _Token = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "Token",
-}, smithy.ShapeTypeString, 0)
-
-var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "TooManyTagsException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var TooManyTagsException_Message *smithy.Schema
-
-var TooManyTagsException_ResourceName *smithy.Schema
-
-var _UnqualifiedPolicyArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "UnqualifiedPolicyArn",
-}, smithy.ShapeTypeString, 0)
-
-var UpdateAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "UpdateAction",
-}, smithy.ShapeTypeEnum, 1)
-var UpdateAction_SYNCHRONIZE_MFA_DEVICES *smithy.Schema
-
-var _UpdateActions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "UpdateActions",
-}, smithy.ShapeTypeList, 1)
-var _UpdateActions_member *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_Message *smithy.Schema
-
-var CancelSessionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "CancelSessionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var CancelSessionRequest_SessionArn *smithy.Schema
-
-var CancelSessionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "CancelSessionResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var CreateApprovalTeamRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "CreateApprovalTeamRequest",
-}, smithy.ShapeTypeStructure, 7)
-var CreateApprovalTeamRequest_ClientToken *smithy.Schema
-
-var CreateApprovalTeamRequest_ApprovalStrategy *smithy.Schema
-
-var CreateApprovalTeamRequest_Approvers *smithy.Schema
-
-var CreateApprovalTeamRequest_Description *smithy.Schema
-
-var CreateApprovalTeamRequest_Policies *smithy.Schema
-
-var CreateApprovalTeamRequest_Name *smithy.Schema
-
-var CreateApprovalTeamRequest_Tags *smithy.Schema
-
-var CreateApprovalTeamResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "CreateApprovalTeamResponse",
-}, smithy.ShapeTypeStructure, 4)
-var CreateApprovalTeamResponse_CreationTime *smithy.Schema
-
-var CreateApprovalTeamResponse_Arn *smithy.Schema
-
-var CreateApprovalTeamResponse_Name *smithy.Schema
-
-var CreateApprovalTeamResponse_VersionId *smithy.Schema
-
-var CreateIdentitySourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "CreateIdentitySourceRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateIdentitySourceRequest_IdentitySourceParameters *smithy.Schema
-
-var CreateIdentitySourceRequest_ClientToken *smithy.Schema
-
-var CreateIdentitySourceRequest_Tags *smithy.Schema
-
-var CreateIdentitySourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "CreateIdentitySourceResponse",
-}, smithy.ShapeTypeStructure, 3)
-var CreateIdentitySourceResponse_IdentitySourceType *smithy.Schema
-
-var CreateIdentitySourceResponse_IdentitySourceArn *smithy.Schema
-
-var CreateIdentitySourceResponse_CreationTime *smithy.Schema
-
-var DeleteIdentitySourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "DeleteIdentitySourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteIdentitySourceRequest_IdentitySourceArn *smithy.Schema
-
-var DeleteInactiveApprovalTeamVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "DeleteInactiveApprovalTeamVersionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteInactiveApprovalTeamVersionRequest_Arn *smithy.Schema
-
-var DeleteInactiveApprovalTeamVersionRequest_VersionId *smithy.Schema
-
-var DeleteInactiveApprovalTeamVersionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "DeleteInactiveApprovalTeamVersionResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetApprovalTeamRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "GetApprovalTeamRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetApprovalTeamRequest_Arn *smithy.Schema
-
-var GetApprovalTeamResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "GetApprovalTeamResponse",
-}, smithy.ShapeTypeStructure, 15)
-var GetApprovalTeamResponse_CreationTime *smithy.Schema
-
-var GetApprovalTeamResponse_ApprovalStrategy *smithy.Schema
-
-var GetApprovalTeamResponse_NumberOfApprovers *smithy.Schema
-
-var GetApprovalTeamResponse_Approvers *smithy.Schema
-
-var GetApprovalTeamResponse_Arn *smithy.Schema
-
-var GetApprovalTeamResponse_Description *smithy.Schema
-
-var GetApprovalTeamResponse_Name *smithy.Schema
-
-var GetApprovalTeamResponse_Status *smithy.Schema
-
-var GetApprovalTeamResponse_StatusCode *smithy.Schema
-
-var GetApprovalTeamResponse_StatusMessage *smithy.Schema
-
-var GetApprovalTeamResponse_UpdateSessionArn *smithy.Schema
-
-var GetApprovalTeamResponse_VersionId *smithy.Schema
-
-var GetApprovalTeamResponse_Policies *smithy.Schema
-
-var GetApprovalTeamResponse_LastUpdateTime *smithy.Schema
-
-var GetApprovalTeamResponse_PendingUpdate *smithy.Schema
-
-var GetIdentitySourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "GetIdentitySourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetIdentitySourceRequest_IdentitySourceArn *smithy.Schema
-
-var GetIdentitySourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "GetIdentitySourceResponse",
-}, smithy.ShapeTypeStructure, 7)
-var GetIdentitySourceResponse_IdentitySourceType *smithy.Schema
-
-var GetIdentitySourceResponse_IdentitySourceParameters *smithy.Schema
-
-var GetIdentitySourceResponse_IdentitySourceArn *smithy.Schema
-
-var GetIdentitySourceResponse_CreationTime *smithy.Schema
-
-var GetIdentitySourceResponse_Status *smithy.Schema
-
-var GetIdentitySourceResponse_StatusCode *smithy.Schema
-
-var GetIdentitySourceResponse_StatusMessage *smithy.Schema
-
-var GetPolicyVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "GetPolicyVersionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetPolicyVersionRequest_PolicyVersionArn *smithy.Schema
-
-var GetPolicyVersionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "GetPolicyVersionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetPolicyVersionResponse_PolicyVersion *smithy.Schema
-
-var GetResourcePolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "GetResourcePolicyRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetResourcePolicyRequest_ResourceArn *smithy.Schema
-
-var GetResourcePolicyRequest_PolicyName *smithy.Schema
-
-var GetResourcePolicyRequest_PolicyType *smithy.Schema
-
-var GetResourcePolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "GetResourcePolicyResponse",
-}, smithy.ShapeTypeStructure, 5)
-var GetResourcePolicyResponse_ResourceArn *smithy.Schema
-
-var GetResourcePolicyResponse_PolicyType *smithy.Schema
-
-var GetResourcePolicyResponse_PolicyVersionArn *smithy.Schema
-
-var GetResourcePolicyResponse_PolicyName *smithy.Schema
-
-var GetResourcePolicyResponse_PolicyDocument *smithy.Schema
-
-var GetSessionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "GetSessionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetSessionRequest_SessionArn *smithy.Schema
-
-var GetSessionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "GetSessionResponse",
-}, smithy.ShapeTypeStructure, 24)
-var GetSessionResponse_SessionArn *smithy.Schema
-
-var GetSessionResponse_ApprovalTeamArn *smithy.Schema
-
-var GetSessionResponse_ApprovalTeamName *smithy.Schema
-
-var GetSessionResponse_ProtectedResourceArn *smithy.Schema
-
-var GetSessionResponse_ApprovalStrategy *smithy.Schema
-
-var GetSessionResponse_NumberOfApprovers *smithy.Schema
-
-var GetSessionResponse_InitiationTime *smithy.Schema
-
-var GetSessionResponse_ExpirationTime *smithy.Schema
-
-var GetSessionResponse_CompletionTime *smithy.Schema
-
-var GetSessionResponse_Description *smithy.Schema
-
-var GetSessionResponse_Metadata *smithy.Schema
-
-var GetSessionResponse_Status *smithy.Schema
-
-var GetSessionResponse_StatusCode *smithy.Schema
-
-var GetSessionResponse_StatusMessage *smithy.Schema
-
-var GetSessionResponse_ExecutionStatus *smithy.Schema
-
-var GetSessionResponse_ActionName *smithy.Schema
-
-var GetSessionResponse_RequesterServicePrincipal *smithy.Schema
-
-var GetSessionResponse_RequesterPrincipalArn *smithy.Schema
-
-var GetSessionResponse_RequesterAccountId *smithy.Schema
-
-var GetSessionResponse_RequesterRegion *smithy.Schema
-
-var GetSessionResponse_RequesterComment *smithy.Schema
-
-var GetSessionResponse_ActionCompletionStrategy *smithy.Schema
-
-var GetSessionResponse_ApproverResponses *smithy.Schema
-
-var GetSessionResponse_AdditionalSecurityRequirements *smithy.Schema
-
-var ListApprovalTeamsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "ListApprovalTeamsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListApprovalTeamsRequest_MaxResults *smithy.Schema
-
-var ListApprovalTeamsRequest_NextToken *smithy.Schema
-
-var ListApprovalTeamsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "ListApprovalTeamsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListApprovalTeamsResponse_NextToken *smithy.Schema
-
-var ListApprovalTeamsResponse_ApprovalTeams *smithy.Schema
-
-var ListIdentitySourcesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "ListIdentitySourcesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListIdentitySourcesRequest_MaxResults *smithy.Schema
-
-var ListIdentitySourcesRequest_NextToken *smithy.Schema
-
-var ListIdentitySourcesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "ListIdentitySourcesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListIdentitySourcesResponse_NextToken *smithy.Schema
-
-var ListIdentitySourcesResponse_IdentitySources *smithy.Schema
-
-var ListPoliciesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "ListPoliciesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListPoliciesRequest_MaxResults *smithy.Schema
-
-var ListPoliciesRequest_NextToken *smithy.Schema
-
-var ListPoliciesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "ListPoliciesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListPoliciesResponse_NextToken *smithy.Schema
-
-var ListPoliciesResponse_Policies *smithy.Schema
-
-var ListPolicyVersionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "ListPolicyVersionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListPolicyVersionsRequest_MaxResults *smithy.Schema
-
-var ListPolicyVersionsRequest_NextToken *smithy.Schema
-
-var ListPolicyVersionsRequest_PolicyArn *smithy.Schema
-
-var ListPolicyVersionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "ListPolicyVersionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListPolicyVersionsResponse_NextToken *smithy.Schema
-
-var ListPolicyVersionsResponse_PolicyVersions *smithy.Schema
-
-var ListResourcePoliciesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "ListResourcePoliciesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListResourcePoliciesRequest_ResourceArn *smithy.Schema
-
-var ListResourcePoliciesRequest_MaxResults *smithy.Schema
-
-var ListResourcePoliciesRequest_NextToken *smithy.Schema
-
-var ListResourcePoliciesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "ListResourcePoliciesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListResourcePoliciesResponse_NextToken *smithy.Schema
-
-var ListResourcePoliciesResponse_ResourcePolicies *smithy.Schema
-
-var ListSessionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "ListSessionsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListSessionsRequest_ApprovalTeamArn *smithy.Schema
-
-var ListSessionsRequest_MaxResults *smithy.Schema
-
-var ListSessionsRequest_NextToken *smithy.Schema
-
-var ListSessionsRequest_Filters *smithy.Schema
-
-var ListSessionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "ListSessionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSessionsResponse_NextToken *smithy.Schema
-
-var ListSessionsResponse_Sessions *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var StartActiveApprovalTeamDeletionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "StartActiveApprovalTeamDeletionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var StartActiveApprovalTeamDeletionRequest_PendingWindowDays *smithy.Schema
-
-var StartActiveApprovalTeamDeletionRequest_Arn *smithy.Schema
-
-var StartActiveApprovalTeamDeletionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "StartActiveApprovalTeamDeletionResponse",
-}, smithy.ShapeTypeStructure, 2)
-var StartActiveApprovalTeamDeletionResponse_DeletionCompletionTime *smithy.Schema
-
-var StartActiveApprovalTeamDeletionResponse_DeletionStartTime *smithy.Schema
-
-var StartApprovalTeamBaselineRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "StartApprovalTeamBaselineRequest",
-}, smithy.ShapeTypeStructure, 2)
-var StartApprovalTeamBaselineRequest_Arn *smithy.Schema
-
-var StartApprovalTeamBaselineRequest_ApproverIds *smithy.Schema
-
-var StartApprovalTeamBaselineResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "StartApprovalTeamBaselineResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartApprovalTeamBaselineResponse_BaselineSessionArn *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceArn *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceArn *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateApprovalTeamRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "UpdateApprovalTeamRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateApprovalTeamRequest_ApprovalStrategy *smithy.Schema
-
-var UpdateApprovalTeamRequest_Approvers *smithy.Schema
-
-var UpdateApprovalTeamRequest_Description *smithy.Schema
-
-var UpdateApprovalTeamRequest_Arn *smithy.Schema
-
-var UpdateApprovalTeamRequest_UpdateActions *smithy.Schema
-
-var UpdateApprovalTeamResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mpa",
-	Name:      "UpdateApprovalTeamResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateApprovalTeamResponse_VersionId *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _String)
-
-	ActionCompletionStrategy_AUTO_COMPLETION_UPON_APPROVAL = ActionCompletionStrategy.AddMember("AUTO_COMPLETION_UPON_APPROVAL", smithyprelude.Unit)
-
-	AdditionalSecurityRequirement_APPROVER_VERIFICATION_REQUIRED = AdditionalSecurityRequirement.AddMember("APPROVER_VERIFICATION_REQUIRED", smithyprelude.Unit)
-
-	_AdditionalSecurityRequirements_member = _AdditionalSecurityRequirements.AddMember("member", AdditionalSecurityRequirement)
-
-	MofNApprovalStrategy_MinApprovalsRequired = MofNApprovalStrategy.AddMember("MinApprovalsRequired", smithyprelude.Integer)
-
-	ApprovalStrategy_MofN = ApprovalStrategy.AddMember("MofN", MofNApprovalStrategy)
-
-	ApprovalStrategyResponse_MofN = ApprovalStrategyResponse.AddMember("MofN", MofNApprovalStrategy)
-
-	ApprovalTeamRequestApprover_PrimaryIdentityId = ApprovalTeamRequestApprover.AddMember("PrimaryIdentityId", _IdentityId)
-
-	ApprovalTeamRequestApprover_PrimaryIdentitySourceArn = ApprovalTeamRequestApprover.AddMember("PrimaryIdentitySourceArn", _String)
-
-	_ApprovalTeamRequestApprovers_member = _ApprovalTeamRequestApprovers.AddMember("member", ApprovalTeamRequestApprover)
-
-	ApprovalTeamStatus_ACTIVE = ApprovalTeamStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	ApprovalTeamStatus_INACTIVE = ApprovalTeamStatus.AddMember("INACTIVE", smithyprelude.Unit)
-
-	ApprovalTeamStatus_DELETING = ApprovalTeamStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	ApprovalTeamStatus_PENDING = ApprovalTeamStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	ApprovalTeamStatusCode_VALIDATING = ApprovalTeamStatusCode.AddMember("VALIDATING", smithyprelude.Unit)
-
-	ApprovalTeamStatusCode_PENDING_ACTIVATION = ApprovalTeamStatusCode.AddMember("PENDING_ACTIVATION", smithyprelude.Unit)
-
-	ApprovalTeamStatusCode_FAILED_VALIDATION = ApprovalTeamStatusCode.AddMember("FAILED_VALIDATION", smithyprelude.Unit)
-
-	ApprovalTeamStatusCode_FAILED_ACTIVATION = ApprovalTeamStatusCode.AddMember("FAILED_ACTIVATION", smithyprelude.Unit)
-
-	ApprovalTeamStatusCode_UPDATE_PENDING_APPROVAL = ApprovalTeamStatusCode.AddMember("UPDATE_PENDING_APPROVAL", smithyprelude.Unit)
-
-	ApprovalTeamStatusCode_UPDATE_PENDING_ACTIVATION = ApprovalTeamStatusCode.AddMember("UPDATE_PENDING_ACTIVATION", smithyprelude.Unit)
-
-	ApprovalTeamStatusCode_UPDATE_FAILED_APPROVAL = ApprovalTeamStatusCode.AddMember("UPDATE_FAILED_APPROVAL", smithyprelude.Unit)
-
-	ApprovalTeamStatusCode_UPDATE_FAILED_ACTIVATION = ApprovalTeamStatusCode.AddMember("UPDATE_FAILED_ACTIVATION", smithyprelude.Unit)
-
-	ApprovalTeamStatusCode_UPDATE_FAILED_VALIDATION = ApprovalTeamStatusCode.AddMember("UPDATE_FAILED_VALIDATION", smithyprelude.Unit)
-
-	ApprovalTeamStatusCode_DELETE_PENDING_APPROVAL = ApprovalTeamStatusCode.AddMember("DELETE_PENDING_APPROVAL", smithyprelude.Unit)
-
-	ApprovalTeamStatusCode_DELETE_FAILED_APPROVAL = ApprovalTeamStatusCode.AddMember("DELETE_FAILED_APPROVAL", smithyprelude.Unit)
-
-	ApprovalTeamStatusCode_DELETE_FAILED_VALIDATION = ApprovalTeamStatusCode.AddMember("DELETE_FAILED_VALIDATION", smithyprelude.Unit)
-
-	ApproverLastActivity_VOTED = ApproverLastActivity.AddMember("VOTED", smithyprelude.Unit)
-
-	ApproverLastActivity_BASELINED = ApproverLastActivity.AddMember("BASELINED", smithyprelude.Unit)
-
-	ApproverLastActivity_RESPONDED_TO_INVITATION = ApproverLastActivity.AddMember("RESPONDED_TO_INVITATION", smithyprelude.Unit)
-
-	ConflictException_Message = ConflictException.AddMember("Message", _String)
-
-	FilterField_ACTION_NAME = FilterField.AddMember("ACTION_NAME", smithyprelude.Unit)
-
-	FilterField_APPROVAL_TEAM_NAME = FilterField.AddMember("APPROVAL_TEAM_NAME", smithyprelude.Unit)
-
-	FilterField_VOTING_TIME = FilterField.AddMember("VOTING_TIME", smithyprelude.Unit)
-
-	FilterField_VOTE = FilterField.AddMember("VOTE", smithyprelude.Unit)
-
-	FilterField_SESSION_STATUS = FilterField.AddMember("SESSION_STATUS", smithyprelude.Unit)
-
-	FilterField_INITIATION_TIME = FilterField.AddMember("INITIATION_TIME", smithyprelude.Unit)
-
-	Operator_EQUALS = Operator.AddMember("EQUALS", smithyprelude.Unit)
-
-	Operator_NOT_EQUALS = Operator.AddMember("NOT_EQUALS", smithyprelude.Unit)
-
-	Operator_GREATER_THAN = Operator.AddMember("GREATER_THAN", smithyprelude.Unit)
-
-	Operator_LESS_THAN = Operator.AddMember("LESS_THAN", smithyprelude.Unit)
-
-	Operator_GREATER_THAN_OR_EQUAL_TO = Operator.AddMember("GREATER_THAN_OR_EQUAL_TO", smithyprelude.Unit)
-
-	Operator_LESS_THAN_OR_EQUAL_TO = Operator.AddMember("LESS_THAN_OR_EQUAL_TO", smithyprelude.Unit)
-
-	Operator_CONTAINS = Operator.AddMember("CONTAINS", smithyprelude.Unit)
-
-	Operator_DOES_NOT_CONTAIN = Operator.AddMember("DOES_NOT_CONTAIN", smithyprelude.Unit)
-
-	Operator_BETWEEN = Operator.AddMember("BETWEEN", smithyprelude.Unit)
-
-	Filter_FieldName = Filter.AddMember("FieldName", FilterField)
-
-	Filter_Operator = Filter.AddMember("Operator", Operator)
-
-	Filter_Value = Filter.AddMember("Value", _String)
-
-	_Filters_member = _Filters.AddMember("member", Filter)
-
-	IdentityStatus_PENDING = IdentityStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	IdentityStatus_ACCEPTED = IdentityStatus.AddMember("ACCEPTED", smithyprelude.Unit)
-
-	IdentityStatus_REJECTED = IdentityStatus.AddMember("REJECTED", smithyprelude.Unit)
-
-	IdentityStatus_INVALID = IdentityStatus.AddMember("INVALID", smithyprelude.Unit)
-
-	MfaType_EMAIL_OTP = MfaType.AddMember("EMAIL_OTP", smithyprelude.Unit)
-
-	MfaSyncStatus_IN_SYNC = MfaSyncStatus.AddMember("IN_SYNC", smithyprelude.Unit)
-
-	MfaSyncStatus_OUT_OF_SYNC = MfaSyncStatus.AddMember("OUT_OF_SYNC", smithyprelude.Unit)
-
-	MfaMethod_Type = MfaMethod.AddMember("Type", MfaType)
-
-	MfaMethod_SyncStatus = MfaMethod.AddMember("SyncStatus", MfaSyncStatus)
-
-	_MfaMethods_member = _MfaMethods.AddMember("member", MfaMethod)
-
-	GetApprovalTeamResponseApprover_ApproverId = GetApprovalTeamResponseApprover.AddMember("ApproverId", _ParticipantId)
-
-	GetApprovalTeamResponseApprover_ResponseTime = GetApprovalTeamResponseApprover.AddMember("ResponseTime", _IsoTimestamp)
-
-	GetApprovalTeamResponseApprover_PrimaryIdentityId = GetApprovalTeamResponseApprover.AddMember("PrimaryIdentityId", _IdentityId)
-
-	GetApprovalTeamResponseApprover_PrimaryIdentitySourceArn = GetApprovalTeamResponseApprover.AddMember("PrimaryIdentitySourceArn", _String)
-
-	GetApprovalTeamResponseApprover_PrimaryIdentityStatus = GetApprovalTeamResponseApprover.AddMember("PrimaryIdentityStatus", IdentityStatus)
-
-	GetApprovalTeamResponseApprover_LastActivity = GetApprovalTeamResponseApprover.AddMember("LastActivity", ApproverLastActivity)
-
-	GetApprovalTeamResponseApprover_LastActivityTime = GetApprovalTeamResponseApprover.AddMember("LastActivityTime", _IsoTimestamp)
-
-	GetApprovalTeamResponseApprover_PendingBaselineSessionArn = GetApprovalTeamResponseApprover.AddMember("PendingBaselineSessionArn", _SessionArn)
-
-	GetApprovalTeamResponseApprover_MfaMethods = GetApprovalTeamResponseApprover.AddMember("MfaMethods", _MfaMethods)
-
-	_GetApprovalTeamResponseApprovers_member = _GetApprovalTeamResponseApprovers.AddMember("member", GetApprovalTeamResponseApprover)
-
-	SessionResponse_APPROVED = SessionResponse.AddMember("APPROVED", smithyprelude.Unit)
-
-	SessionResponse_REJECTED = SessionResponse.AddMember("REJECTED", smithyprelude.Unit)
-
-	SessionResponse_NO_RESPONSE = SessionResponse.AddMember("NO_RESPONSE", smithyprelude.Unit)
-
-	GetSessionResponseApproverResponse_ApproverId = GetSessionResponseApproverResponse.AddMember("ApproverId", _ParticipantId)
-
-	GetSessionResponseApproverResponse_IdentitySourceArn = GetSessionResponseApproverResponse.AddMember("IdentitySourceArn", _String)
-
-	GetSessionResponseApproverResponse_IdentityId = GetSessionResponseApproverResponse.AddMember("IdentityId", _IdentityId)
-
-	GetSessionResponseApproverResponse_Response = GetSessionResponseApproverResponse.AddMember("Response", SessionResponse)
-
-	GetSessionResponseApproverResponse_ResponseTime = GetSessionResponseApproverResponse.AddMember("ResponseTime", _IsoTimestamp)
-
-	_GetSessionResponseApproverResponses_member = _GetSessionResponseApproverResponses.AddMember("member", GetSessionResponseApproverResponse)
-
-	IamIdentityCenter_InstanceArn = IamIdentityCenter.AddMember("InstanceArn", _IdcInstanceArn)
-
-	IamIdentityCenter_Region = IamIdentityCenter.AddMember("Region", _String)
-
-	IamIdentityCenterForGet_InstanceArn = IamIdentityCenterForGet.AddMember("InstanceArn", _String)
-
-	IamIdentityCenterForGet_ApprovalPortalUrl = IamIdentityCenterForGet.AddMember("ApprovalPortalUrl", _String)
-
-	IamIdentityCenterForGet_Region = IamIdentityCenterForGet.AddMember("Region", _String)
-
-	IamIdentityCenterForList_InstanceArn = IamIdentityCenterForList.AddMember("InstanceArn", _String)
-
-	IamIdentityCenterForList_ApprovalPortalUrl = IamIdentityCenterForList.AddMember("ApprovalPortalUrl", _String)
-
-	IamIdentityCenterForList_Region = IamIdentityCenterForList.AddMember("Region", _String)
-
-	IdentitySourceType_IAM_IDENTITY_CENTER = IdentitySourceType.AddMember("IAM_IDENTITY_CENTER", smithyprelude.Unit)
-
-	IdentitySourceParametersForList_IamIdentityCenter = IdentitySourceParametersForList.AddMember("IamIdentityCenter", IamIdentityCenterForList)
-
-	IdentitySourceStatus_CREATING = IdentitySourceStatus.AddMember("CREATING", smithyprelude.Unit)
-
-	IdentitySourceStatus_ACTIVE = IdentitySourceStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	IdentitySourceStatus_DELETING = IdentitySourceStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	IdentitySourceStatus_ERROR = IdentitySourceStatus.AddMember("ERROR", smithyprelude.Unit)
-
-	IdentitySourceStatusCode_ACCESS_DENIED = IdentitySourceStatusCode.AddMember("ACCESS_DENIED", smithyprelude.Unit)
-
-	IdentitySourceStatusCode_DELETION_FAILED = IdentitySourceStatusCode.AddMember("DELETION_FAILED", smithyprelude.Unit)
-
-	IdentitySourceStatusCode_IDC_INSTANCE_NOT_FOUND = IdentitySourceStatusCode.AddMember("IDC_INSTANCE_NOT_FOUND", smithyprelude.Unit)
-
-	IdentitySourceStatusCode_IDC_INSTANCE_NOT_VALID = IdentitySourceStatusCode.AddMember("IDC_INSTANCE_NOT_VALID", smithyprelude.Unit)
-
-	IdentitySourceForList_IdentitySourceType = IdentitySourceForList.AddMember("IdentitySourceType", IdentitySourceType)
-
-	IdentitySourceForList_IdentitySourceParameters = IdentitySourceForList.AddMember("IdentitySourceParameters", IdentitySourceParametersForList)
-
-	IdentitySourceForList_IdentitySourceArn = IdentitySourceForList.AddMember("IdentitySourceArn", _String)
-
-	IdentitySourceForList_CreationTime = IdentitySourceForList.AddMember("CreationTime", _IsoTimestamp)
-
-	IdentitySourceForList_Status = IdentitySourceForList.AddMember("Status", IdentitySourceStatus)
-
-	IdentitySourceForList_StatusCode = IdentitySourceForList.AddMember("StatusCode", IdentitySourceStatusCode)
-
-	IdentitySourceForList_StatusMessage = IdentitySourceForList.AddMember("StatusMessage", _String)
-
-	IdentitySourceParameters_IamIdentityCenter = IdentitySourceParameters.AddMember("IamIdentityCenter", IamIdentityCenter)
-
-	IdentitySourceParametersForGet_IamIdentityCenter = IdentitySourceParametersForGet.AddMember("IamIdentityCenter", IamIdentityCenterForGet)
-
-	_IdentitySources_member = _IdentitySources.AddMember("member", IdentitySourceForList)
-
-	InternalServerException_Message = InternalServerException.AddMember("Message", _String)
-
-	InvalidParameterException_Message = InvalidParameterException.AddMember("Message", _String)
-
-	ListApprovalTeamsResponseApprovalTeam_CreationTime = ListApprovalTeamsResponseApprovalTeam.AddMember("CreationTime", _IsoTimestamp)
-
-	ListApprovalTeamsResponseApprovalTeam_ApprovalStrategy = ListApprovalTeamsResponseApprovalTeam.AddMember("ApprovalStrategy", ApprovalStrategyResponse)
-
-	ListApprovalTeamsResponseApprovalTeam_NumberOfApprovers = ListApprovalTeamsResponseApprovalTeam.AddMember("NumberOfApprovers", smithyprelude.Integer)
-
-	ListApprovalTeamsResponseApprovalTeam_Arn = ListApprovalTeamsResponseApprovalTeam.AddMember("Arn", _ApprovalTeamArn)
-
-	ListApprovalTeamsResponseApprovalTeam_Name = ListApprovalTeamsResponseApprovalTeam.AddMember("Name", _ApprovalTeamName)
-
-	ListApprovalTeamsResponseApprovalTeam_Description = ListApprovalTeamsResponseApprovalTeam.AddMember("Description", _Description)
-
-	ListApprovalTeamsResponseApprovalTeam_Status = ListApprovalTeamsResponseApprovalTeam.AddMember("Status", ApprovalTeamStatus)
-
-	ListApprovalTeamsResponseApprovalTeam_StatusCode = ListApprovalTeamsResponseApprovalTeam.AddMember("StatusCode", ApprovalTeamStatusCode)
-
-	ListApprovalTeamsResponseApprovalTeam_StatusMessage = ListApprovalTeamsResponseApprovalTeam.AddMember("StatusMessage", _Message)
-
-	_ListApprovalTeamsResponseApprovalTeams_member = _ListApprovalTeamsResponseApprovalTeams.AddMember("member", ListApprovalTeamsResponseApprovalTeam)
-
-	PolicyType_AWS_MANAGED = PolicyType.AddMember("AWS_MANAGED", smithyprelude.Unit)
-
-	PolicyType_AWS_RAM = PolicyType.AddMember("AWS_RAM", smithyprelude.Unit)
-
-	ListResourcePoliciesResponseResourcePolicy_PolicyArn = ListResourcePoliciesResponseResourcePolicy.AddMember("PolicyArn", _String)
-
-	ListResourcePoliciesResponseResourcePolicy_PolicyType = ListResourcePoliciesResponseResourcePolicy.AddMember("PolicyType", PolicyType)
-
-	ListResourcePoliciesResponseResourcePolicy_PolicyName = ListResourcePoliciesResponseResourcePolicy.AddMember("PolicyName", _String)
-
-	_ListResourcePoliciesResponseResourcePolicies_member = _ListResourcePoliciesResponseResourcePolicies.AddMember("member", ListResourcePoliciesResponseResourcePolicy)
-
-	SessionStatus_PENDING = SessionStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	SessionStatus_CANCELLED = SessionStatus.AddMember("CANCELLED", smithyprelude.Unit)
-
-	SessionStatus_APPROVED = SessionStatus.AddMember("APPROVED", smithyprelude.Unit)
-
-	SessionStatus_FAILED = SessionStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	SessionStatus_CREATING = SessionStatus.AddMember("CREATING", smithyprelude.Unit)
-
-	SessionStatusCode_REJECTED = SessionStatusCode.AddMember("REJECTED", smithyprelude.Unit)
-
-	SessionStatusCode_EXPIRED = SessionStatusCode.AddMember("EXPIRED", smithyprelude.Unit)
-
-	SessionStatusCode_CONFIGURATION_CHANGED = SessionStatusCode.AddMember("CONFIGURATION_CHANGED", smithyprelude.Unit)
-
-	SessionStatusCode_ALL_APPROVERS_IN_SESSION = SessionStatusCode.AddMember("ALL_APPROVERS_IN_SESSION", smithyprelude.Unit)
-
-	ListSessionsResponseSession_SessionArn = ListSessionsResponseSession.AddMember("SessionArn", _SessionArn)
-
-	ListSessionsResponseSession_ApprovalTeamName = ListSessionsResponseSession.AddMember("ApprovalTeamName", _ApprovalTeamName)
-
-	ListSessionsResponseSession_ApprovalTeamArn = ListSessionsResponseSession.AddMember("ApprovalTeamArn", _ApprovalTeamArn)
-
-	ListSessionsResponseSession_InitiationTime = ListSessionsResponseSession.AddMember("InitiationTime", _IsoTimestamp)
-
-	ListSessionsResponseSession_ExpirationTime = ListSessionsResponseSession.AddMember("ExpirationTime", _IsoTimestamp)
-
-	ListSessionsResponseSession_CompletionTime = ListSessionsResponseSession.AddMember("CompletionTime", _IsoTimestamp)
-
-	ListSessionsResponseSession_Description = ListSessionsResponseSession.AddMember("Description", _Description)
-
-	ListSessionsResponseSession_ActionName = ListSessionsResponseSession.AddMember("ActionName", _ActionName)
-
-	ListSessionsResponseSession_ProtectedResourceArn = ListSessionsResponseSession.AddMember("ProtectedResourceArn", _String)
-
-	ListSessionsResponseSession_RequesterServicePrincipal = ListSessionsResponseSession.AddMember("RequesterServicePrincipal", _ServicePrincipal)
-
-	ListSessionsResponseSession_RequesterPrincipalArn = ListSessionsResponseSession.AddMember("RequesterPrincipalArn", _String)
-
-	ListSessionsResponseSession_RequesterRegion = ListSessionsResponseSession.AddMember("RequesterRegion", _Region)
-
-	ListSessionsResponseSession_RequesterAccountId = ListSessionsResponseSession.AddMember("RequesterAccountId", _AccountId)
-
-	ListSessionsResponseSession_Status = ListSessionsResponseSession.AddMember("Status", SessionStatus)
-
-	ListSessionsResponseSession_StatusCode = ListSessionsResponseSession.AddMember("StatusCode", SessionStatusCode)
-
-	ListSessionsResponseSession_StatusMessage = ListSessionsResponseSession.AddMember("StatusMessage", _Message)
-
-	ListSessionsResponseSession_ActionCompletionStrategy = ListSessionsResponseSession.AddMember("ActionCompletionStrategy", ActionCompletionStrategy)
-
-	ListSessionsResponseSession_AdditionalSecurityRequirements = ListSessionsResponseSession.AddMember("AdditionalSecurityRequirements", _AdditionalSecurityRequirements)
-
-	_ListSessionsResponseSessions_member = _ListSessionsResponseSessions.AddMember("member", ListSessionsResponseSession)
-
-	PendingUpdate_VersionId = PendingUpdate.AddMember("VersionId", _String)
-
-	PendingUpdate_Description = PendingUpdate.AddMember("Description", _String)
-
-	PendingUpdate_ApprovalStrategy = PendingUpdate.AddMember("ApprovalStrategy", ApprovalStrategyResponse)
-
-	PendingUpdate_NumberOfApprovers = PendingUpdate.AddMember("NumberOfApprovers", smithyprelude.Integer)
-
-	PendingUpdate_Status = PendingUpdate.AddMember("Status", ApprovalTeamStatus)
-
-	PendingUpdate_StatusCode = PendingUpdate.AddMember("StatusCode", ApprovalTeamStatusCode)
-
-	PendingUpdate_StatusMessage = PendingUpdate.AddMember("StatusMessage", _Message)
-
-	PendingUpdate_Approvers = PendingUpdate.AddMember("Approvers", _GetApprovalTeamResponseApprovers)
-
-	PendingUpdate_UpdateInitiationTime = PendingUpdate.AddMember("UpdateInitiationTime", _IsoTimestamp)
-
-	Policy_Arn = Policy.AddMember("Arn", _UnqualifiedPolicyArn)
-
-	Policy_DefaultVersion = Policy.AddMember("DefaultVersion", _PolicyVersionId)
-
-	Policy_PolicyType = Policy.AddMember("PolicyType", PolicyType)
-
-	Policy_Name = Policy.AddMember("Name", _PolicyName)
-
-	_Policies_member = _Policies.AddMember("member", Policy)
-
-	PolicyReference_PolicyArn = PolicyReference.AddMember("PolicyArn", _QualifiedPolicyArn)
-
-	_PoliciesReferences_member = _PoliciesReferences.AddMember("member", PolicyReference)
-
-	PolicyStatus_ATTACHABLE = PolicyStatus.AddMember("ATTACHABLE", smithyprelude.Unit)
-
-	PolicyStatus_DEPRECATED = PolicyStatus.AddMember("DEPRECATED", smithyprelude.Unit)
-
-	PolicyVersion_Arn = PolicyVersion.AddMember("Arn", _QualifiedPolicyArn)
-
-	PolicyVersion_PolicyArn = PolicyVersion.AddMember("PolicyArn", _UnqualifiedPolicyArn)
-
-	PolicyVersion_VersionId = PolicyVersion.AddMember("VersionId", _PolicyVersionId)
-
-	PolicyVersion_PolicyType = PolicyVersion.AddMember("PolicyType", PolicyType)
-
-	PolicyVersion_IsDefault = PolicyVersion.AddMember("IsDefault", smithyprelude.Boolean)
-
-	PolicyVersion_Name = PolicyVersion.AddMember("Name", _PolicyName)
-
-	PolicyVersion_Status = PolicyVersion.AddMember("Status", PolicyStatus)
-
-	PolicyVersion_CreationTime = PolicyVersion.AddMember("CreationTime", _IsoTimestamp)
-
-	PolicyVersion_LastUpdatedTime = PolicyVersion.AddMember("LastUpdatedTime", _IsoTimestamp)
-
-	PolicyVersion_Document = PolicyVersion.AddMember("Document", _PolicyDocument)
-
-	PolicyVersionSummary_Arn = PolicyVersionSummary.AddMember("Arn", _QualifiedPolicyArn)
-
-	PolicyVersionSummary_PolicyArn = PolicyVersionSummary.AddMember("PolicyArn", _UnqualifiedPolicyArn)
-
-	PolicyVersionSummary_VersionId = PolicyVersionSummary.AddMember("VersionId", _PolicyVersionId)
-
-	PolicyVersionSummary_PolicyType = PolicyVersionSummary.AddMember("PolicyType", PolicyType)
-
-	PolicyVersionSummary_IsDefault = PolicyVersionSummary.AddMember("IsDefault", smithyprelude.Boolean)
-
-	PolicyVersionSummary_Name = PolicyVersionSummary.AddMember("Name", _PolicyName)
-
-	PolicyVersionSummary_Status = PolicyVersionSummary.AddMember("Status", PolicyStatus)
-
-	PolicyVersionSummary_CreationTime = PolicyVersionSummary.AddMember("CreationTime", _IsoTimestamp)
-
-	PolicyVersionSummary_LastUpdatedTime = PolicyVersionSummary.AddMember("LastUpdatedTime", _IsoTimestamp)
-
-	_PolicyVersions_member = _PolicyVersions.AddMember("member", PolicyVersionSummary)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _String)
-
-	ServiceQuotaExceededException_Message = ServiceQuotaExceededException.AddMember("Message", _String)
-
-	SessionExecutionStatus_EXECUTED = SessionExecutionStatus.AddMember("EXECUTED", smithyprelude.Unit)
-
-	SessionExecutionStatus_FAILED = SessionExecutionStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	SessionExecutionStatus_PENDING = SessionExecutionStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	_SessionMetadata_key = _SessionMetadata.AddMember("key", _SessionKey)
-
-	_SessionMetadata_value = _SessionMetadata.AddMember("value", _SessionValue)
-
-	_StartApprovalTeamBaselineApproverIds_member = _StartApprovalTeamBaselineApproverIds.AddMember("member", _ParticipantId)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_Tags_key = _Tags.AddMember("key", _TagKey)
-
-	_Tags_value = _Tags.AddMember("value", _TagValue)
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", _String)
-
-	TooManyTagsException_Message = TooManyTagsException.AddMember("Message", _String)
-
-	TooManyTagsException_ResourceName = TooManyTagsException.AddMember("ResourceName", _String)
-
-	UpdateAction_SYNCHRONIZE_MFA_DEVICES = UpdateAction.AddMember("SYNCHRONIZE_MFA_DEVICES", smithyprelude.Unit)
-
-	_UpdateActions_member = _UpdateActions.AddMember("member", UpdateAction)
-
-	ValidationException_Message = ValidationException.AddMember("Message", _String)
-
-	CancelSessionRequest_SessionArn = CancelSessionRequest.AddMember("SessionArn", _SessionArn, &smithytraits.HTTPLabel{})
-
-	CreateApprovalTeamRequest_ClientToken = CreateApprovalTeamRequest.AddMember("ClientToken", _Token)
-
-	CreateApprovalTeamRequest_ApprovalStrategy = CreateApprovalTeamRequest.AddMember("ApprovalStrategy", ApprovalStrategy)
-
-	CreateApprovalTeamRequest_Approvers = CreateApprovalTeamRequest.AddMember("Approvers", _ApprovalTeamRequestApprovers)
-
-	CreateApprovalTeamRequest_Description = CreateApprovalTeamRequest.AddMember("Description", _Description)
-
-	CreateApprovalTeamRequest_Policies = CreateApprovalTeamRequest.AddMember("Policies", _PoliciesReferences)
-
-	CreateApprovalTeamRequest_Name = CreateApprovalTeamRequest.AddMember("Name", _ApprovalTeamName)
-
-	CreateApprovalTeamRequest_Tags = CreateApprovalTeamRequest.AddMember("Tags", _Tags)
-
-	CreateApprovalTeamResponse_CreationTime = CreateApprovalTeamResponse.AddMember("CreationTime", _IsoTimestamp)
-
-	CreateApprovalTeamResponse_Arn = CreateApprovalTeamResponse.AddMember("Arn", _ApprovalTeamArn)
-
-	CreateApprovalTeamResponse_Name = CreateApprovalTeamResponse.AddMember("Name", _String)
-
-	CreateApprovalTeamResponse_VersionId = CreateApprovalTeamResponse.AddMember("VersionId", _String)
-
-	CreateIdentitySourceRequest_IdentitySourceParameters = CreateIdentitySourceRequest.AddMember("IdentitySourceParameters", IdentitySourceParameters)
-
-	CreateIdentitySourceRequest_ClientToken = CreateIdentitySourceRequest.AddMember("ClientToken", _Token)
-
-	CreateIdentitySourceRequest_Tags = CreateIdentitySourceRequest.AddMember("Tags", _Tags)
-
-	CreateIdentitySourceResponse_IdentitySourceType = CreateIdentitySourceResponse.AddMember("IdentitySourceType", IdentitySourceType)
-
-	CreateIdentitySourceResponse_IdentitySourceArn = CreateIdentitySourceResponse.AddMember("IdentitySourceArn", _String)
-
-	CreateIdentitySourceResponse_CreationTime = CreateIdentitySourceResponse.AddMember("CreationTime", _IsoTimestamp)
-
-	DeleteIdentitySourceRequest_IdentitySourceArn = DeleteIdentitySourceRequest.AddMember("IdentitySourceArn", _String, &smithytraits.HTTPLabel{})
-
-	DeleteInactiveApprovalTeamVersionRequest_Arn = DeleteInactiveApprovalTeamVersionRequest.AddMember("Arn", _ApprovalTeamArn, &smithytraits.HTTPLabel{})
-
-	DeleteInactiveApprovalTeamVersionRequest_VersionId = DeleteInactiveApprovalTeamVersionRequest.AddMember("VersionId", _String, &smithytraits.HTTPLabel{})
-
-	GetApprovalTeamRequest_Arn = GetApprovalTeamRequest.AddMember("Arn", _ApprovalTeamArn, &smithytraits.HTTPLabel{})
-
-	GetApprovalTeamResponse_CreationTime = GetApprovalTeamResponse.AddMember("CreationTime", _IsoTimestamp)
-
-	GetApprovalTeamResponse_ApprovalStrategy = GetApprovalTeamResponse.AddMember("ApprovalStrategy", ApprovalStrategyResponse)
-
-	GetApprovalTeamResponse_NumberOfApprovers = GetApprovalTeamResponse.AddMember("NumberOfApprovers", smithyprelude.Integer)
-
-	GetApprovalTeamResponse_Approvers = GetApprovalTeamResponse.AddMember("Approvers", _GetApprovalTeamResponseApprovers)
-
-	GetApprovalTeamResponse_Arn = GetApprovalTeamResponse.AddMember("Arn", _String)
-
-	GetApprovalTeamResponse_Description = GetApprovalTeamResponse.AddMember("Description", _Description)
-
-	GetApprovalTeamResponse_Name = GetApprovalTeamResponse.AddMember("Name", _String)
-
-	GetApprovalTeamResponse_Status = GetApprovalTeamResponse.AddMember("Status", ApprovalTeamStatus)
-
-	GetApprovalTeamResponse_StatusCode = GetApprovalTeamResponse.AddMember("StatusCode", ApprovalTeamStatusCode)
-
-	GetApprovalTeamResponse_StatusMessage = GetApprovalTeamResponse.AddMember("StatusMessage", _Message)
-
-	GetApprovalTeamResponse_UpdateSessionArn = GetApprovalTeamResponse.AddMember("UpdateSessionArn", _String)
-
-	GetApprovalTeamResponse_VersionId = GetApprovalTeamResponse.AddMember("VersionId", _String)
-
-	GetApprovalTeamResponse_Policies = GetApprovalTeamResponse.AddMember("Policies", _PoliciesReferences)
-
-	GetApprovalTeamResponse_LastUpdateTime = GetApprovalTeamResponse.AddMember("LastUpdateTime", _IsoTimestamp)
-
-	GetApprovalTeamResponse_PendingUpdate = GetApprovalTeamResponse.AddMember("PendingUpdate", PendingUpdate)
-
-	GetIdentitySourceRequest_IdentitySourceArn = GetIdentitySourceRequest.AddMember("IdentitySourceArn", _String, &smithytraits.HTTPLabel{})
-
-	GetIdentitySourceResponse_IdentitySourceType = GetIdentitySourceResponse.AddMember("IdentitySourceType", IdentitySourceType)
-
-	GetIdentitySourceResponse_IdentitySourceParameters = GetIdentitySourceResponse.AddMember("IdentitySourceParameters", IdentitySourceParametersForGet)
-
-	GetIdentitySourceResponse_IdentitySourceArn = GetIdentitySourceResponse.AddMember("IdentitySourceArn", _String)
-
-	GetIdentitySourceResponse_CreationTime = GetIdentitySourceResponse.AddMember("CreationTime", _IsoTimestamp)
-
-	GetIdentitySourceResponse_Status = GetIdentitySourceResponse.AddMember("Status", IdentitySourceStatus)
-
-	GetIdentitySourceResponse_StatusCode = GetIdentitySourceResponse.AddMember("StatusCode", IdentitySourceStatusCode)
-
-	GetIdentitySourceResponse_StatusMessage = GetIdentitySourceResponse.AddMember("StatusMessage", _String)
-
-	GetPolicyVersionRequest_PolicyVersionArn = GetPolicyVersionRequest.AddMember("PolicyVersionArn", _QualifiedPolicyArn, &smithytraits.HTTPLabel{})
-
-	GetPolicyVersionResponse_PolicyVersion = GetPolicyVersionResponse.AddMember("PolicyVersion", PolicyVersion)
-
-	GetResourcePolicyRequest_ResourceArn = GetResourcePolicyRequest.AddMember("ResourceArn", _String)
-
-	GetResourcePolicyRequest_PolicyName = GetResourcePolicyRequest.AddMember("PolicyName", _String)
-
-	GetResourcePolicyRequest_PolicyType = GetResourcePolicyRequest.AddMember("PolicyType", PolicyType)
-
-	GetResourcePolicyResponse_ResourceArn = GetResourcePolicyResponse.AddMember("ResourceArn", _String)
-
-	GetResourcePolicyResponse_PolicyType = GetResourcePolicyResponse.AddMember("PolicyType", PolicyType)
-
-	GetResourcePolicyResponse_PolicyVersionArn = GetResourcePolicyResponse.AddMember("PolicyVersionArn", _String)
-
-	GetResourcePolicyResponse_PolicyName = GetResourcePolicyResponse.AddMember("PolicyName", _PolicyName)
-
-	GetResourcePolicyResponse_PolicyDocument = GetResourcePolicyResponse.AddMember("PolicyDocument", _PolicyDocument)
-
-	GetSessionRequest_SessionArn = GetSessionRequest.AddMember("SessionArn", _SessionArn, &smithytraits.HTTPLabel{})
-
-	GetSessionResponse_SessionArn = GetSessionResponse.AddMember("SessionArn", _SessionArn)
-
-	GetSessionResponse_ApprovalTeamArn = GetSessionResponse.AddMember("ApprovalTeamArn", _ApprovalTeamArn)
-
-	GetSessionResponse_ApprovalTeamName = GetSessionResponse.AddMember("ApprovalTeamName", _ApprovalTeamName)
-
-	GetSessionResponse_ProtectedResourceArn = GetSessionResponse.AddMember("ProtectedResourceArn", _String)
-
-	GetSessionResponse_ApprovalStrategy = GetSessionResponse.AddMember("ApprovalStrategy", ApprovalStrategyResponse)
-
-	GetSessionResponse_NumberOfApprovers = GetSessionResponse.AddMember("NumberOfApprovers", smithyprelude.Integer)
-
-	GetSessionResponse_InitiationTime = GetSessionResponse.AddMember("InitiationTime", _IsoTimestamp)
-
-	GetSessionResponse_ExpirationTime = GetSessionResponse.AddMember("ExpirationTime", _IsoTimestamp)
-
-	GetSessionResponse_CompletionTime = GetSessionResponse.AddMember("CompletionTime", _IsoTimestamp)
-
-	GetSessionResponse_Description = GetSessionResponse.AddMember("Description", _Description)
-
-	GetSessionResponse_Metadata = GetSessionResponse.AddMember("Metadata", _SessionMetadata)
-
-	GetSessionResponse_Status = GetSessionResponse.AddMember("Status", SessionStatus)
-
-	GetSessionResponse_StatusCode = GetSessionResponse.AddMember("StatusCode", SessionStatusCode)
-
-	GetSessionResponse_StatusMessage = GetSessionResponse.AddMember("StatusMessage", _Message)
-
-	GetSessionResponse_ExecutionStatus = GetSessionResponse.AddMember("ExecutionStatus", SessionExecutionStatus)
-
-	GetSessionResponse_ActionName = GetSessionResponse.AddMember("ActionName", _ActionName)
-
-	GetSessionResponse_RequesterServicePrincipal = GetSessionResponse.AddMember("RequesterServicePrincipal", _ServicePrincipal)
-
-	GetSessionResponse_RequesterPrincipalArn = GetSessionResponse.AddMember("RequesterPrincipalArn", _String)
-
-	GetSessionResponse_RequesterAccountId = GetSessionResponse.AddMember("RequesterAccountId", _AccountId)
-
-	GetSessionResponse_RequesterRegion = GetSessionResponse.AddMember("RequesterRegion", _Region)
-
-	GetSessionResponse_RequesterComment = GetSessionResponse.AddMember("RequesterComment", _RequesterComment)
-
-	GetSessionResponse_ActionCompletionStrategy = GetSessionResponse.AddMember("ActionCompletionStrategy", ActionCompletionStrategy)
-
-	GetSessionResponse_ApproverResponses = GetSessionResponse.AddMember("ApproverResponses", _GetSessionResponseApproverResponses)
-
-	GetSessionResponse_AdditionalSecurityRequirements = GetSessionResponse.AddMember("AdditionalSecurityRequirements", _AdditionalSecurityRequirements)
-
-	ListApprovalTeamsRequest_MaxResults = ListApprovalTeamsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "MaxResults"})
-
-	ListApprovalTeamsRequest_NextToken = ListApprovalTeamsRequest.AddMember("NextToken", _Token, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListApprovalTeamsResponse_NextToken = ListApprovalTeamsResponse.AddMember("NextToken", _Token)
-
-	ListApprovalTeamsResponse_ApprovalTeams = ListApprovalTeamsResponse.AddMember("ApprovalTeams", _ListApprovalTeamsResponseApprovalTeams)
-
-	ListIdentitySourcesRequest_MaxResults = ListIdentitySourcesRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "MaxResults"})
-
-	ListIdentitySourcesRequest_NextToken = ListIdentitySourcesRequest.AddMember("NextToken", _Token, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListIdentitySourcesResponse_NextToken = ListIdentitySourcesResponse.AddMember("NextToken", _Token)
-
-	ListIdentitySourcesResponse_IdentitySources = ListIdentitySourcesResponse.AddMember("IdentitySources", _IdentitySources)
-
-	ListPoliciesRequest_MaxResults = ListPoliciesRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "MaxResults"})
-
-	ListPoliciesRequest_NextToken = ListPoliciesRequest.AddMember("NextToken", _Token, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListPoliciesResponse_NextToken = ListPoliciesResponse.AddMember("NextToken", _Token)
-
-	ListPoliciesResponse_Policies = ListPoliciesResponse.AddMember("Policies", _Policies)
-
-	ListPolicyVersionsRequest_MaxResults = ListPolicyVersionsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "MaxResults"})
-
-	ListPolicyVersionsRequest_NextToken = ListPolicyVersionsRequest.AddMember("NextToken", _Token, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListPolicyVersionsRequest_PolicyArn = ListPolicyVersionsRequest.AddMember("PolicyArn", _UnqualifiedPolicyArn, &smithytraits.HTTPLabel{})
-
-	ListPolicyVersionsResponse_NextToken = ListPolicyVersionsResponse.AddMember("NextToken", _Token)
-
-	ListPolicyVersionsResponse_PolicyVersions = ListPolicyVersionsResponse.AddMember("PolicyVersions", _PolicyVersions)
-
-	ListResourcePoliciesRequest_ResourceArn = ListResourcePoliciesRequest.AddMember("ResourceArn", _String, &smithytraits.HTTPLabel{})
-
-	ListResourcePoliciesRequest_MaxResults = ListResourcePoliciesRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "MaxResults"})
-
-	ListResourcePoliciesRequest_NextToken = ListResourcePoliciesRequest.AddMember("NextToken", _Token, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListResourcePoliciesResponse_NextToken = ListResourcePoliciesResponse.AddMember("NextToken", _Token)
-
-	ListResourcePoliciesResponse_ResourcePolicies = ListResourcePoliciesResponse.AddMember("ResourcePolicies", _ListResourcePoliciesResponseResourcePolicies)
-
-	ListSessionsRequest_ApprovalTeamArn = ListSessionsRequest.AddMember("ApprovalTeamArn", _ApprovalTeamArn, &smithytraits.HTTPLabel{})
-
-	ListSessionsRequest_MaxResults = ListSessionsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListSessionsRequest_NextToken = ListSessionsRequest.AddMember("NextToken", _Token)
-
-	ListSessionsRequest_Filters = ListSessionsRequest.AddMember("Filters", _Filters)
-
-	ListSessionsResponse_NextToken = ListSessionsResponse.AddMember("NextToken", _Token)
-
-	ListSessionsResponse_Sessions = ListSessionsResponse.AddMember("Sessions", _ListSessionsResponseSessions)
-
-	ListTagsForResourceRequest_ResourceArn = ListTagsForResourceRequest.AddMember("ResourceArn", _String, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _Tags)
-
-	StartActiveApprovalTeamDeletionRequest_PendingWindowDays = StartActiveApprovalTeamDeletionRequest.AddMember("PendingWindowDays", smithyprelude.Integer)
-
-	StartActiveApprovalTeamDeletionRequest_Arn = StartActiveApprovalTeamDeletionRequest.AddMember("Arn", _ApprovalTeamArn, &smithytraits.HTTPLabel{})
-
-	StartActiveApprovalTeamDeletionResponse_DeletionCompletionTime = StartActiveApprovalTeamDeletionResponse.AddMember("DeletionCompletionTime", _IsoTimestamp)
-
-	StartActiveApprovalTeamDeletionResponse_DeletionStartTime = StartActiveApprovalTeamDeletionResponse.AddMember("DeletionStartTime", _IsoTimestamp)
-
-	StartApprovalTeamBaselineRequest_Arn = StartApprovalTeamBaselineRequest.AddMember("Arn", _ApprovalTeamArn, &smithytraits.HTTPLabel{})
-
-	StartApprovalTeamBaselineRequest_ApproverIds = StartApprovalTeamBaselineRequest.AddMember("ApproverIds", _StartApprovalTeamBaselineApproverIds)
-
-	StartApprovalTeamBaselineResponse_BaselineSessionArn = StartApprovalTeamBaselineResponse.AddMember("BaselineSessionArn", _SessionArn)
-
-	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", _String, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _Tags)
-
-	UntagResourceRequest_ResourceArn = UntagResourceRequest.AddMember("ResourceArn", _String, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList)
-
-	UpdateApprovalTeamRequest_ApprovalStrategy = UpdateApprovalTeamRequest.AddMember("ApprovalStrategy", ApprovalStrategy)
-
-	UpdateApprovalTeamRequest_Approvers = UpdateApprovalTeamRequest.AddMember("Approvers", _ApprovalTeamRequestApprovers)
-
-	UpdateApprovalTeamRequest_Description = UpdateApprovalTeamRequest.AddMember("Description", _Description)
-
-	UpdateApprovalTeamRequest_Arn = UpdateApprovalTeamRequest.AddMember("Arn", _ApprovalTeamArn, &smithytraits.HTTPLabel{})
-
-	UpdateApprovalTeamRequest_UpdateActions = UpdateApprovalTeamRequest.AddMember("UpdateActions", _UpdateActions)
-
-	UpdateApprovalTeamResponse_VersionId = UpdateApprovalTeamResponse.AddMember("VersionId", _String)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "MaxResults"}}, DirectMask: 0x10}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "NextToken"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_Message}}
+var mActionCompletionStrategy = smithy.SchemaMembers{List: []*smithy.Schema{&sActionCompletionStrategy_AUTO_COMPLETION_UPON_APPROVAL}}
+var mAdditionalSecurityRequirement = smithy.SchemaMembers{List: []*smithy.Schema{&sAdditionalSecurityRequirement_APPROVER_VERIFICATION_REQUIRED}}
+var m_AdditionalSecurityRequirements = smithy.SchemaMembers{List: []*smithy.Schema{&s_AdditionalSecurityRequirements_member}}
+var mApprovalStrategy = smithy.SchemaMembers{List: []*smithy.Schema{&sApprovalStrategy_MofN}}
+var mApprovalStrategyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sApprovalStrategyResponse_MofN}}
+var mApprovalTeamRequestApprover = smithy.SchemaMembers{List: []*smithy.Schema{&sApprovalTeamRequestApprover_PrimaryIdentityId, &sApprovalTeamRequestApprover_PrimaryIdentitySourceArn}}
+var m_ApprovalTeamRequestApprovers = smithy.SchemaMembers{List: []*smithy.Schema{&s_ApprovalTeamRequestApprovers_member}}
+var mApprovalTeamStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sApprovalTeamStatus_ACTIVE, &sApprovalTeamStatus_INACTIVE, &sApprovalTeamStatus_DELETING, &sApprovalTeamStatus_PENDING}}
+var mApprovalTeamStatusCode = smithy.SchemaMembers{List: []*smithy.Schema{&sApprovalTeamStatusCode_VALIDATING, &sApprovalTeamStatusCode_PENDING_ACTIVATION, &sApprovalTeamStatusCode_FAILED_VALIDATION, &sApprovalTeamStatusCode_FAILED_ACTIVATION, &sApprovalTeamStatusCode_UPDATE_PENDING_APPROVAL, &sApprovalTeamStatusCode_UPDATE_PENDING_ACTIVATION, &sApprovalTeamStatusCode_UPDATE_FAILED_APPROVAL, &sApprovalTeamStatusCode_UPDATE_FAILED_ACTIVATION, &sApprovalTeamStatusCode_UPDATE_FAILED_VALIDATION, &sApprovalTeamStatusCode_DELETE_PENDING_APPROVAL, &sApprovalTeamStatusCode_DELETE_FAILED_APPROVAL, &sApprovalTeamStatusCode_DELETE_FAILED_VALIDATION}, Seed: 7, Slots: []uint16{
+	8, 12, 0, 0, 0, 10, 9, 0, 0, 7, 0, 11, 0, 0, 0, 6, 0, 0, 0, 0, 4, 2, 0, 0,
+	5, 0, 0, 3, 0, 0, 1, 0,
+}}
+var mApproverLastActivity = smithy.SchemaMembers{List: []*smithy.Schema{&sApproverLastActivity_VOTED, &sApproverLastActivity_BASELINED, &sApproverLastActivity_RESPONDED_TO_INVITATION}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_Message}}
+var mFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sFilter_FieldName, &sFilter_Operator, &sFilter_Value}}
+var mFilterField = smithy.SchemaMembers{List: []*smithy.Schema{&sFilterField_ACTION_NAME, &sFilterField_APPROVAL_TEAM_NAME, &sFilterField_VOTING_TIME, &sFilterField_VOTE, &sFilterField_SESSION_STATUS, &sFilterField_INITIATION_TIME}}
+var m_Filters = smithy.SchemaMembers{List: []*smithy.Schema{&s_Filters_member}}
+var mGetApprovalTeamResponseApprover = smithy.SchemaMembers{List: []*smithy.Schema{&sGetApprovalTeamResponseApprover_ApproverId, &sGetApprovalTeamResponseApprover_ResponseTime, &sGetApprovalTeamResponseApprover_PrimaryIdentityId, &sGetApprovalTeamResponseApprover_PrimaryIdentitySourceArn, &sGetApprovalTeamResponseApprover_PrimaryIdentityStatus, &sGetApprovalTeamResponseApprover_LastActivity, &sGetApprovalTeamResponseApprover_LastActivityTime, &sGetApprovalTeamResponseApprover_PendingBaselineSessionArn, &sGetApprovalTeamResponseApprover_MfaMethods}, Seed: 2, Slots: []uint16{
+	8, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 7, 6, 0, 0, 9, 5, 1, 0, 0, 0, 0, 2,
+	0, 0, 3, 0, 0, 0, 0, 0,
+}}
+var m_GetApprovalTeamResponseApprovers = smithy.SchemaMembers{List: []*smithy.Schema{&s_GetApprovalTeamResponseApprovers_member}}
+var mGetSessionResponseApproverResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSessionResponseApproverResponse_ApproverId, &sGetSessionResponseApproverResponse_IdentitySourceArn, &sGetSessionResponseApproverResponse_IdentityId, &sGetSessionResponseApproverResponse_Response, &sGetSessionResponseApproverResponse_ResponseTime}}
+var m_GetSessionResponseApproverResponses = smithy.SchemaMembers{List: []*smithy.Schema{&s_GetSessionResponseApproverResponses_member}}
+var mIamIdentityCenter = smithy.SchemaMembers{List: []*smithy.Schema{&sIamIdentityCenter_InstanceArn, &sIamIdentityCenter_Region}}
+var mIamIdentityCenterForGet = smithy.SchemaMembers{List: []*smithy.Schema{&sIamIdentityCenterForGet_InstanceArn, &sIamIdentityCenterForGet_ApprovalPortalUrl, &sIamIdentityCenterForGet_Region}}
+var mIamIdentityCenterForList = smithy.SchemaMembers{List: []*smithy.Schema{&sIamIdentityCenterForList_InstanceArn, &sIamIdentityCenterForList_ApprovalPortalUrl, &sIamIdentityCenterForList_Region}}
+var mIdentitySourceForList = smithy.SchemaMembers{List: []*smithy.Schema{&sIdentitySourceForList_IdentitySourceType, &sIdentitySourceForList_IdentitySourceParameters, &sIdentitySourceForList_IdentitySourceArn, &sIdentitySourceForList_CreationTime, &sIdentitySourceForList_Status, &sIdentitySourceForList_StatusCode, &sIdentitySourceForList_StatusMessage}}
+var mIdentitySourceParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sIdentitySourceParameters_IamIdentityCenter}}
+var mIdentitySourceParametersForGet = smithy.SchemaMembers{List: []*smithy.Schema{&sIdentitySourceParametersForGet_IamIdentityCenter}}
+var mIdentitySourceParametersForList = smithy.SchemaMembers{List: []*smithy.Schema{&sIdentitySourceParametersForList_IamIdentityCenter}}
+var m_IdentitySources = smithy.SchemaMembers{List: []*smithy.Schema{&s_IdentitySources_member}}
+var mIdentitySourceStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sIdentitySourceStatus_CREATING, &sIdentitySourceStatus_ACTIVE, &sIdentitySourceStatus_DELETING, &sIdentitySourceStatus_ERROR}}
+var mIdentitySourceStatusCode = smithy.SchemaMembers{List: []*smithy.Schema{&sIdentitySourceStatusCode_ACCESS_DENIED, &sIdentitySourceStatusCode_DELETION_FAILED, &sIdentitySourceStatusCode_IDC_INSTANCE_NOT_FOUND, &sIdentitySourceStatusCode_IDC_INSTANCE_NOT_VALID}}
+var mIdentitySourceType = smithy.SchemaMembers{List: []*smithy.Schema{&sIdentitySourceType_IAM_IDENTITY_CENTER}}
+var mIdentityStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sIdentityStatus_PENDING, &sIdentityStatus_ACCEPTED, &sIdentityStatus_REJECTED, &sIdentityStatus_INVALID}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_Message}}
+var mInvalidParameterException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidParameterException_Message}}
+var mListApprovalTeamsResponseApprovalTeam = smithy.SchemaMembers{List: []*smithy.Schema{&sListApprovalTeamsResponseApprovalTeam_CreationTime, &sListApprovalTeamsResponseApprovalTeam_ApprovalStrategy, &sListApprovalTeamsResponseApprovalTeam_NumberOfApprovers, &sListApprovalTeamsResponseApprovalTeam_Arn, &sListApprovalTeamsResponseApprovalTeam_Name, &sListApprovalTeamsResponseApprovalTeam_Description, &sListApprovalTeamsResponseApprovalTeam_Status, &sListApprovalTeamsResponseApprovalTeam_StatusCode, &sListApprovalTeamsResponseApprovalTeam_StatusMessage}, Seed: 1, Slots: []uint16{
+	0, 3, 0, 5, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1, 0, 0, 9, 0, 0, 6, 4, 0, 0,
+	0, 8, 0, 0, 0, 7, 0, 0,
+}}
+var m_ListApprovalTeamsResponseApprovalTeams = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListApprovalTeamsResponseApprovalTeams_member}}
+var m_ListResourcePoliciesResponseResourcePolicies = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListResourcePoliciesResponseResourcePolicies_member}}
+var mListResourcePoliciesResponseResourcePolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sListResourcePoliciesResponseResourcePolicy_PolicyArn, &sListResourcePoliciesResponseResourcePolicy_PolicyType, &sListResourcePoliciesResponseResourcePolicy_PolicyName}}
+var mListSessionsResponseSession = smithy.SchemaMembers{List: []*smithy.Schema{&sListSessionsResponseSession_SessionArn, &sListSessionsResponseSession_ApprovalTeamName, &sListSessionsResponseSession_ApprovalTeamArn, &sListSessionsResponseSession_InitiationTime, &sListSessionsResponseSession_ExpirationTime, &sListSessionsResponseSession_CompletionTime, &sListSessionsResponseSession_Description, &sListSessionsResponseSession_ActionName, &sListSessionsResponseSession_ProtectedResourceArn, &sListSessionsResponseSession_RequesterServicePrincipal, &sListSessionsResponseSession_RequesterPrincipalArn, &sListSessionsResponseSession_RequesterRegion, &sListSessionsResponseSession_RequesterAccountId, &sListSessionsResponseSession_Status, &sListSessionsResponseSession_StatusCode, &sListSessionsResponseSession_StatusMessage, &sListSessionsResponseSession_ActionCompletionStrategy, &sListSessionsResponseSession_AdditionalSecurityRequirements}, Seed: 10, Slots: []uint16{
+	0, 0, 8, 14, 0, 10, 0, 0, 18, 16, 2, 0, 0, 0, 0, 0, 7, 13, 0, 17, 0, 0, 0, 0,
+	0, 0, 0, 15, 0, 0, 9, 0, 0, 0, 5, 3, 0, 6, 0, 1, 0, 0, 0, 0, 0, 11, 0, 0,
+	0, 0, 0, 0, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
+}}
+var m_ListSessionsResponseSessions = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListSessionsResponseSessions_member}}
+var mMfaMethod = smithy.SchemaMembers{List: []*smithy.Schema{&sMfaMethod_Type, &sMfaMethod_SyncStatus}}
+var m_MfaMethods = smithy.SchemaMembers{List: []*smithy.Schema{&s_MfaMethods_member}}
+var mMfaSyncStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sMfaSyncStatus_IN_SYNC, &sMfaSyncStatus_OUT_OF_SYNC}}
+var mMfaType = smithy.SchemaMembers{List: []*smithy.Schema{&sMfaType_EMAIL_OTP}}
+var mMofNApprovalStrategy = smithy.SchemaMembers{List: []*smithy.Schema{&sMofNApprovalStrategy_MinApprovalsRequired}}
+var mOperator = smithy.SchemaMembers{List: []*smithy.Schema{&sOperator_EQUALS, &sOperator_NOT_EQUALS, &sOperator_GREATER_THAN, &sOperator_LESS_THAN, &sOperator_GREATER_THAN_OR_EQUAL_TO, &sOperator_LESS_THAN_OR_EQUAL_TO, &sOperator_CONTAINS, &sOperator_DOES_NOT_CONTAIN, &sOperator_BETWEEN}, Seed: 2, Slots: []uint16{
+	4, 0, 6, 0, 0, 0, 0, 0, 0, 0, 1, 2, 0, 0, 3, 9, 0, 0, 7, 0, 0, 0, 0, 0,
+	5, 0, 0, 0, 8, 0, 0, 0,
+}}
+var mPendingUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sPendingUpdate_VersionId, &sPendingUpdate_Description, &sPendingUpdate_ApprovalStrategy, &sPendingUpdate_NumberOfApprovers, &sPendingUpdate_Status, &sPendingUpdate_StatusCode, &sPendingUpdate_StatusMessage, &sPendingUpdate_Approvers, &sPendingUpdate_UpdateInitiationTime}, Seed: 4, Slots: []uint16{
+	0, 6, 0, 1, 0, 0, 0, 5, 0, 8, 0, 0, 0, 0, 0, 7, 0, 0, 0, 4, 0, 0, 0, 9,
+	0, 0, 0, 3, 0, 0, 0, 2,
+}}
+var m_Policies = smithy.SchemaMembers{List: []*smithy.Schema{&s_Policies_member}}
+var m_PoliciesReferences = smithy.SchemaMembers{List: []*smithy.Schema{&s_PoliciesReferences_member}}
+var mPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sPolicy_Arn, &sPolicy_DefaultVersion, &sPolicy_PolicyType, &sPolicy_Name}}
+var mPolicyReference = smithy.SchemaMembers{List: []*smithy.Schema{&sPolicyReference_PolicyArn}}
+var mPolicyStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sPolicyStatus_ATTACHABLE, &sPolicyStatus_DEPRECATED}}
+var mPolicyType = smithy.SchemaMembers{List: []*smithy.Schema{&sPolicyType_AWS_MANAGED, &sPolicyType_AWS_RAM}}
+var mPolicyVersion = smithy.SchemaMembers{List: []*smithy.Schema{&sPolicyVersion_Arn, &sPolicyVersion_PolicyArn, &sPolicyVersion_VersionId, &sPolicyVersion_PolicyType, &sPolicyVersion_IsDefault, &sPolicyVersion_Name, &sPolicyVersion_Status, &sPolicyVersion_CreationTime, &sPolicyVersion_LastUpdatedTime, &sPolicyVersion_Document}, Seed: 2, Slots: []uint16{
+	0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 6, 4, 0, 2, 0, 10, 0, 0, 1, 3,
+	7, 0, 0, 8, 0, 5, 0, 0,
+}}
+var m_PolicyVersions = smithy.SchemaMembers{List: []*smithy.Schema{&s_PolicyVersions_member}}
+var mPolicyVersionSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sPolicyVersionSummary_Arn, &sPolicyVersionSummary_PolicyArn, &sPolicyVersionSummary_VersionId, &sPolicyVersionSummary_PolicyType, &sPolicyVersionSummary_IsDefault, &sPolicyVersionSummary_Name, &sPolicyVersionSummary_Status, &sPolicyVersionSummary_CreationTime, &sPolicyVersionSummary_LastUpdatedTime}, Seed: 2, Slots: []uint16{
+	0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 6, 4, 0, 2, 0, 0, 0, 0, 1, 3,
+	7, 0, 0, 8, 0, 5, 0, 0,
+}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_Message}}
+var mSessionExecutionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sSessionExecutionStatus_EXECUTED, &sSessionExecutionStatus_FAILED, &sSessionExecutionStatus_PENDING}}
+var m_SessionMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&s_SessionMetadata_key, &s_SessionMetadata_value}}
+var mSessionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sSessionResponse_APPROVED, &sSessionResponse_REJECTED, &sSessionResponse_NO_RESPONSE}}
+var mSessionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sSessionStatus_PENDING, &sSessionStatus_CANCELLED, &sSessionStatus_APPROVED, &sSessionStatus_FAILED, &sSessionStatus_CREATING}}
+var mSessionStatusCode = smithy.SchemaMembers{List: []*smithy.Schema{&sSessionStatusCode_REJECTED, &sSessionStatusCode_EXPIRED, &sSessionStatusCode_CONFIGURATION_CHANGED, &sSessionStatusCode_ALL_APPROVERS_IN_SESSION}}
+var m_StartApprovalTeamBaselineApproverIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_StartApprovalTeamBaselineApproverIds_member}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_Tags = smithy.SchemaMembers{List: []*smithy.Schema{&s_Tags_key, &s_Tags_value}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_Message}}
+var mTooManyTagsException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyTagsException_Message, &sTooManyTagsException_ResourceName}}
+var mUpdateAction = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAction_SYNCHRONIZE_MFA_DEVICES}}
+var m_UpdateActions = smithy.SchemaMembers{List: []*smithy.Schema{&s_UpdateActions_member}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_Message}}
+var mCancelSessionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelSessionRequest_SessionArn}}
+var mCreateApprovalTeamRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateApprovalTeamRequest_ClientToken, &sCreateApprovalTeamRequest_ApprovalStrategy, &sCreateApprovalTeamRequest_Approvers, &sCreateApprovalTeamRequest_Description, &sCreateApprovalTeamRequest_Policies, &sCreateApprovalTeamRequest_Name, &sCreateApprovalTeamRequest_Tags}}
+var mCreateApprovalTeamResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateApprovalTeamResponse_CreationTime, &sCreateApprovalTeamResponse_Arn, &sCreateApprovalTeamResponse_Name, &sCreateApprovalTeamResponse_VersionId}}
+var mCreateIdentitySourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateIdentitySourceRequest_IdentitySourceParameters, &sCreateIdentitySourceRequest_ClientToken, &sCreateIdentitySourceRequest_Tags}}
+var mCreateIdentitySourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateIdentitySourceResponse_IdentitySourceType, &sCreateIdentitySourceResponse_IdentitySourceArn, &sCreateIdentitySourceResponse_CreationTime}}
+var mDeleteIdentitySourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteIdentitySourceRequest_IdentitySourceArn}}
+var mDeleteInactiveApprovalTeamVersionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteInactiveApprovalTeamVersionRequest_Arn, &sDeleteInactiveApprovalTeamVersionRequest_VersionId}}
+var mGetApprovalTeamRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetApprovalTeamRequest_Arn}}
+var mGetApprovalTeamResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetApprovalTeamResponse_CreationTime, &sGetApprovalTeamResponse_ApprovalStrategy, &sGetApprovalTeamResponse_NumberOfApprovers, &sGetApprovalTeamResponse_Approvers, &sGetApprovalTeamResponse_Arn, &sGetApprovalTeamResponse_Description, &sGetApprovalTeamResponse_Name, &sGetApprovalTeamResponse_Status, &sGetApprovalTeamResponse_StatusCode, &sGetApprovalTeamResponse_StatusMessage, &sGetApprovalTeamResponse_UpdateSessionArn, &sGetApprovalTeamResponse_VersionId, &sGetApprovalTeamResponse_Policies, &sGetApprovalTeamResponse_LastUpdateTime, &sGetApprovalTeamResponse_PendingUpdate}, Seed: 132, Slots: []uint16{
+	0, 5, 10, 0, 0, 0, 0, 13, 0, 3, 0, 11, 0, 0, 1, 0, 4, 0, 15, 0, 7, 6, 12, 8,
+	0, 0, 9, 0, 14, 2, 0, 0,
+}}
+var mGetIdentitySourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetIdentitySourceRequest_IdentitySourceArn}}
+var mGetIdentitySourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetIdentitySourceResponse_IdentitySourceType, &sGetIdentitySourceResponse_IdentitySourceParameters, &sGetIdentitySourceResponse_IdentitySourceArn, &sGetIdentitySourceResponse_CreationTime, &sGetIdentitySourceResponse_Status, &sGetIdentitySourceResponse_StatusCode, &sGetIdentitySourceResponse_StatusMessage}}
+var mGetPolicyVersionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPolicyVersionRequest_PolicyVersionArn}}
+var mGetPolicyVersionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPolicyVersionResponse_PolicyVersion}}
+var mGetResourcePolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourcePolicyRequest_ResourceArn, &sGetResourcePolicyRequest_PolicyName, &sGetResourcePolicyRequest_PolicyType}}
+var mGetResourcePolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourcePolicyResponse_ResourceArn, &sGetResourcePolicyResponse_PolicyType, &sGetResourcePolicyResponse_PolicyVersionArn, &sGetResourcePolicyResponse_PolicyName, &sGetResourcePolicyResponse_PolicyDocument}}
+var mGetSessionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSessionRequest_SessionArn}}
+var mGetSessionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSessionResponse_SessionArn, &sGetSessionResponse_ApprovalTeamArn, &sGetSessionResponse_ApprovalTeamName, &sGetSessionResponse_ProtectedResourceArn, &sGetSessionResponse_ApprovalStrategy, &sGetSessionResponse_NumberOfApprovers, &sGetSessionResponse_InitiationTime, &sGetSessionResponse_ExpirationTime, &sGetSessionResponse_CompletionTime, &sGetSessionResponse_Description, &sGetSessionResponse_Metadata, &sGetSessionResponse_Status, &sGetSessionResponse_StatusCode, &sGetSessionResponse_StatusMessage, &sGetSessionResponse_ExecutionStatus, &sGetSessionResponse_ActionName, &sGetSessionResponse_RequesterServicePrincipal, &sGetSessionResponse_RequesterPrincipalArn, &sGetSessionResponse_RequesterAccountId, &sGetSessionResponse_RequesterRegion, &sGetSessionResponse_RequesterComment, &sGetSessionResponse_ActionCompletionStrategy, &sGetSessionResponse_ApproverResponses, &sGetSessionResponse_AdditionalSecurityRequirements}, Seed: 450, Slots: []uint16{
+	19, 12, 0, 0, 7, 21, 6, 0, 15, 0, 24, 16, 0, 0, 0, 20, 0, 18, 0, 0, 23, 0, 0, 22,
+	0, 14, 0, 0, 0, 0, 0, 0, 13, 10, 0, 0, 0, 11, 1, 8, 17, 0, 0, 0, 0, 0, 0, 5,
+	2, 0, 0, 0, 0, 0, 4, 0, 0, 3, 9, 0, 0, 0, 0, 0,
+}}
+var mListApprovalTeamsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListApprovalTeamsRequest_MaxResults, &sListApprovalTeamsRequest_NextToken}}
+var mListApprovalTeamsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListApprovalTeamsResponse_NextToken, &sListApprovalTeamsResponse_ApprovalTeams}}
+var mListIdentitySourcesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListIdentitySourcesRequest_MaxResults, &sListIdentitySourcesRequest_NextToken}}
+var mListIdentitySourcesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListIdentitySourcesResponse_NextToken, &sListIdentitySourcesResponse_IdentitySources}}
+var mListPoliciesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListPoliciesRequest_MaxResults, &sListPoliciesRequest_NextToken}}
+var mListPoliciesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListPoliciesResponse_NextToken, &sListPoliciesResponse_Policies}}
+var mListPolicyVersionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListPolicyVersionsRequest_MaxResults, &sListPolicyVersionsRequest_NextToken, &sListPolicyVersionsRequest_PolicyArn}}
+var mListPolicyVersionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListPolicyVersionsResponse_NextToken, &sListPolicyVersionsResponse_PolicyVersions}}
+var mListResourcePoliciesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListResourcePoliciesRequest_ResourceArn, &sListResourcePoliciesRequest_MaxResults, &sListResourcePoliciesRequest_NextToken}}
+var mListResourcePoliciesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListResourcePoliciesResponse_NextToken, &sListResourcePoliciesResponse_ResourcePolicies}}
+var mListSessionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListSessionsRequest_ApprovalTeamArn, &sListSessionsRequest_MaxResults, &sListSessionsRequest_NextToken, &sListSessionsRequest_Filters}}
+var mListSessionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListSessionsResponse_NextToken, &sListSessionsResponse_Sessions}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_Tags}}
+var mStartActiveApprovalTeamDeletionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartActiveApprovalTeamDeletionRequest_PendingWindowDays, &sStartActiveApprovalTeamDeletionRequest_Arn}}
+var mStartActiveApprovalTeamDeletionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartActiveApprovalTeamDeletionResponse_DeletionCompletionTime, &sStartActiveApprovalTeamDeletionResponse_DeletionStartTime}}
+var mStartApprovalTeamBaselineRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartApprovalTeamBaselineRequest_Arn, &sStartApprovalTeamBaselineRequest_ApproverIds}}
+var mStartApprovalTeamBaselineResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartApprovalTeamBaselineResponse_BaselineSessionArn}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceArn, &sTagResourceRequest_Tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceArn, &sUntagResourceRequest_TagKeys}}
+var mUpdateApprovalTeamRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateApprovalTeamRequest_ApprovalStrategy, &sUpdateApprovalTeamRequest_Approvers, &sUpdateApprovalTeamRequest_Description, &sUpdateApprovalTeamRequest_Arn, &sUpdateApprovalTeamRequest_UpdateActions}}
+var mUpdateApprovalTeamResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateApprovalTeamResponse_VersionId}}
+
+var sCancelSession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelSession, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sCreateApprovalTeam = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateApprovalTeam, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sCreateIdentitySource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIdentitySource, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sDeleteIdentitySource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIdentitySource, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sDeleteInactiveApprovalTeamVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteInactiveApprovalTeamVersion, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sGetApprovalTeam = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetApprovalTeam, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var sGetIdentitySource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIdentitySource, Traits: &t6, Type: smithy.ShapeTypeOperation})
+var sGetPolicyVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPolicyVersion, Traits: &t7, Type: smithy.ShapeTypeOperation})
+var sGetResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicy, Traits: &t8, Type: smithy.ShapeTypeOperation})
+var sGetSession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSession, Traits: &t9, Type: smithy.ShapeTypeOperation})
+var sListApprovalTeams = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListApprovalTeams, Traits: &t10, Type: smithy.ShapeTypeOperation})
+var sListIdentitySources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIdentitySources, Traits: &t11, Type: smithy.ShapeTypeOperation})
+var sListPolicies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPolicies, Traits: &t12, Type: smithy.ShapeTypeOperation})
+var sListPolicyVersions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPolicyVersions, Traits: &t13, Type: smithy.ShapeTypeOperation})
+var sListResourcePolicies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourcePolicies, Traits: &t14, Type: smithy.ShapeTypeOperation})
+var sListSessions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSessions, Traits: &t15, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t16, Type: smithy.ShapeTypeOperation})
+var sStartActiveApprovalTeamDeletion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartActiveApprovalTeamDeletion, Traits: &t17, Type: smithy.ShapeTypeOperation})
+var sStartApprovalTeamBaseline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartApprovalTeamBaseline, Traits: &t18, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t19, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t20, Type: smithy.ShapeTypeOperation})
+var sUpdateApprovalTeam = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApprovalTeam, Traits: &t21, Type: smithy.ShapeTypeOperation})
+var s_AWSFluffyCoreService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSFluffyCoreService, Type: smithy.ShapeTypeService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t22, Type: smithy.ShapeTypeStructure})
+var s_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sActionCompletionStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionCompletionStrategy, Members: &mActionCompletionStrategy, Type: smithy.ShapeTypeEnum})
+var s_ActionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionName, Type: smithy.ShapeTypeString})
+var sAdditionalSecurityRequirement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdditionalSecurityRequirement, Members: &mAdditionalSecurityRequirement, Type: smithy.ShapeTypeEnum})
+var s_AdditionalSecurityRequirements = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AdditionalSecurityRequirements, Members: &m_AdditionalSecurityRequirements, Type: smithy.ShapeTypeList})
+var sApprovalStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovalStrategy, Members: &mApprovalStrategy, Type: smithy.ShapeTypeUnion})
+var sApprovalStrategyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovalStrategyResponse, Members: &mApprovalStrategyResponse, Type: smithy.ShapeTypeUnion})
+var s_ApprovalTeamArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApprovalTeamArn, Type: smithy.ShapeTypeString})
+var s_ApprovalTeamName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApprovalTeamName, Type: smithy.ShapeTypeString})
+var sApprovalTeamRequestApprover = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovalTeamRequestApprover, Members: &mApprovalTeamRequestApprover, Type: smithy.ShapeTypeStructure})
+var s_ApprovalTeamRequestApprovers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApprovalTeamRequestApprovers, Members: &m_ApprovalTeamRequestApprovers, Type: smithy.ShapeTypeList})
+var sApprovalTeamStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovalTeamStatus, Members: &mApprovalTeamStatus, Type: smithy.ShapeTypeEnum})
+var sApprovalTeamStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovalTeamStatusCode, Members: &mApprovalTeamStatusCode, Type: smithy.ShapeTypeEnum})
+var sApproverLastActivity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApproverLastActivity, Members: &mApproverLastActivity, Type: smithy.ShapeTypeEnum})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t23, Type: smithy.ShapeTypeStructure})
+var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Traits: &t24, Type: smithy.ShapeTypeString})
+var sFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilter, Members: &mFilter, Type: smithy.ShapeTypeStructure})
+var sFilterField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilterField, Members: &mFilterField, Type: smithy.ShapeTypeEnum})
+var s_Filters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Filters, Members: &m_Filters, Type: smithy.ShapeTypeList})
+var sGetApprovalTeamResponseApprover = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetApprovalTeamResponseApprover, Members: &mGetApprovalTeamResponseApprover, Type: smithy.ShapeTypeStructure})
+var s_GetApprovalTeamResponseApprovers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GetApprovalTeamResponseApprovers, Members: &m_GetApprovalTeamResponseApprovers, Type: smithy.ShapeTypeList})
+var sGetSessionResponseApproverResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSessionResponseApproverResponse, Members: &mGetSessionResponseApproverResponse, Type: smithy.ShapeTypeStructure})
+var s_GetSessionResponseApproverResponses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GetSessionResponseApproverResponses, Members: &m_GetSessionResponseApproverResponses, Type: smithy.ShapeTypeList})
+var sIamIdentityCenter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIamIdentityCenter, Members: &mIamIdentityCenter, Type: smithy.ShapeTypeStructure})
+var sIamIdentityCenterForGet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIamIdentityCenterForGet, Members: &mIamIdentityCenterForGet, Type: smithy.ShapeTypeStructure})
+var sIamIdentityCenterForList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIamIdentityCenterForList, Members: &mIamIdentityCenterForList, Type: smithy.ShapeTypeStructure})
+var s_IdcInstanceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdcInstanceArn, Type: smithy.ShapeTypeString})
+var s_IdentityId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdentityId, Type: smithy.ShapeTypeString})
+var sIdentitySourceForList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdentitySourceForList, Members: &mIdentitySourceForList, Type: smithy.ShapeTypeStructure})
+var sIdentitySourceParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdentitySourceParameters, Members: &mIdentitySourceParameters, Type: smithy.ShapeTypeStructure})
+var sIdentitySourceParametersForGet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdentitySourceParametersForGet, Members: &mIdentitySourceParametersForGet, Type: smithy.ShapeTypeUnion})
+var sIdentitySourceParametersForList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdentitySourceParametersForList, Members: &mIdentitySourceParametersForList, Type: smithy.ShapeTypeUnion})
+var s_IdentitySources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdentitySources, Members: &m_IdentitySources, Type: smithy.ShapeTypeList})
+var sIdentitySourceStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdentitySourceStatus, Members: &mIdentitySourceStatus, Type: smithy.ShapeTypeEnum})
+var sIdentitySourceStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdentitySourceStatusCode, Members: &mIdentitySourceStatusCode, Type: smithy.ShapeTypeEnum})
+var sIdentitySourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdentitySourceType, Members: &mIdentitySourceType, Type: smithy.ShapeTypeEnum})
+var sIdentityStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdentityStatus, Members: &mIdentityStatus, Type: smithy.ShapeTypeEnum})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t26, Type: smithy.ShapeTypeStructure})
+var sInvalidParameterException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidParameterException, Members: &mInvalidParameterException, Traits: &t27, Type: smithy.ShapeTypeStructure})
+var s_IsoTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IsoTimestamp, Traits: &t28, Type: smithy.ShapeTypeTimestamp})
+var sListApprovalTeamsResponseApprovalTeam = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListApprovalTeamsResponseApprovalTeam, Members: &mListApprovalTeamsResponseApprovalTeam, Type: smithy.ShapeTypeStructure})
+var s_ListApprovalTeamsResponseApprovalTeams = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListApprovalTeamsResponseApprovalTeams, Members: &m_ListApprovalTeamsResponseApprovalTeams, Type: smithy.ShapeTypeList})
+var s_ListResourcePoliciesResponseResourcePolicies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListResourcePoliciesResponseResourcePolicies, Members: &m_ListResourcePoliciesResponseResourcePolicies, Type: smithy.ShapeTypeList})
+var sListResourcePoliciesResponseResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourcePoliciesResponseResourcePolicy, Members: &mListResourcePoliciesResponseResourcePolicy, Type: smithy.ShapeTypeStructure})
+var sListSessionsResponseSession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSessionsResponseSession, Members: &mListSessionsResponseSession, Type: smithy.ShapeTypeStructure})
+var s_ListSessionsResponseSessions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListSessionsResponseSessions, Members: &m_ListSessionsResponseSessions, Type: smithy.ShapeTypeList})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var s_Message = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Message, Type: smithy.ShapeTypeString})
+var sMfaMethod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMfaMethod, Members: &mMfaMethod, Type: smithy.ShapeTypeStructure})
+var s_MfaMethods = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MfaMethods, Members: &m_MfaMethods, Type: smithy.ShapeTypeList})
+var sMfaSyncStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMfaSyncStatus, Members: &mMfaSyncStatus, Type: smithy.ShapeTypeEnum})
+var sMfaType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMfaType, Members: &mMfaType, Type: smithy.ShapeTypeEnum})
+var sMofNApprovalStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMofNApprovalStrategy, Members: &mMofNApprovalStrategy, Type: smithy.ShapeTypeStructure})
+var sOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperator, Members: &mOperator, Type: smithy.ShapeTypeEnum})
+var s_ParticipantId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParticipantId, Type: smithy.ShapeTypeString})
+var sPendingUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPendingUpdate, Members: &mPendingUpdate, Type: smithy.ShapeTypeStructure})
+var s_Policies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Policies, Members: &m_Policies, Type: smithy.ShapeTypeList})
+var s_PoliciesReferences = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PoliciesReferences, Members: &m_PoliciesReferences, Type: smithy.ShapeTypeList})
+var sPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicy, Members: &mPolicy, Type: smithy.ShapeTypeStructure})
+var s_PolicyDocument = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyDocument, Traits: &t24, Type: smithy.ShapeTypeString})
+var s_PolicyName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyName, Type: smithy.ShapeTypeString})
+var sPolicyReference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyReference, Members: &mPolicyReference, Type: smithy.ShapeTypeStructure})
+var sPolicyStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyStatus, Members: &mPolicyStatus, Type: smithy.ShapeTypeEnum})
+var sPolicyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyType, Members: &mPolicyType, Type: smithy.ShapeTypeEnum})
+var sPolicyVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyVersion, Members: &mPolicyVersion, Type: smithy.ShapeTypeStructure})
+var s_PolicyVersionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyVersionId, Type: smithy.ShapeTypeInteger})
+var s_PolicyVersions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyVersions, Members: &m_PolicyVersions, Type: smithy.ShapeTypeList})
+var sPolicyVersionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyVersionSummary, Members: &mPolicyVersionSummary, Type: smithy.ShapeTypeStructure})
+var s_QualifiedPolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QualifiedPolicyArn, Type: smithy.ShapeTypeString})
+var s_Region = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Region, Type: smithy.ShapeTypeString})
+var s_RequesterComment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RequesterComment, Traits: &t24, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t30, Type: smithy.ShapeTypeStructure})
+var s_ServicePrincipal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServicePrincipal, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t31, Type: smithy.ShapeTypeStructure})
+var s_SessionArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SessionArn, Type: smithy.ShapeTypeString})
+var sSessionExecutionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSessionExecutionStatus, Members: &mSessionExecutionStatus, Type: smithy.ShapeTypeEnum})
+var s_SessionKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SessionKey, Traits: &t24, Type: smithy.ShapeTypeString})
+var s_SessionMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SessionMetadata, Members: &m_SessionMetadata, Traits: &t24, Type: smithy.ShapeTypeMap})
+var sSessionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSessionResponse, Members: &mSessionResponse, Type: smithy.ShapeTypeEnum})
+var sSessionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSessionStatus, Members: &mSessionStatus, Type: smithy.ShapeTypeEnum})
+var sSessionStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSessionStatusCode, Members: &mSessionStatusCode, Type: smithy.ShapeTypeEnum})
+var s_SessionValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SessionValue, Traits: &t24, Type: smithy.ShapeTypeString})
+var s_StartApprovalTeamBaselineApproverIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StartApprovalTeamBaselineApproverIds, Members: &m_StartApprovalTeamBaselineApproverIds, Type: smithy.ShapeTypeList})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Traits: &t24, Type: smithy.ShapeTypeString})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t24, Type: smithy.ShapeTypeList})
+var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Traits: &t24, Type: smithy.ShapeTypeMap})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Traits: &t24, Type: smithy.ShapeTypeString})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t32, Type: smithy.ShapeTypeStructure})
+var s_Token = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Token, Type: smithy.ShapeTypeString})
+var sTooManyTagsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyTagsException, Members: &mTooManyTagsException, Traits: &t27, Type: smithy.ShapeTypeStructure})
+var s_UnqualifiedPolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UnqualifiedPolicyArn, Type: smithy.ShapeTypeString})
+var sUpdateAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAction, Members: &mUpdateAction, Type: smithy.ShapeTypeEnum})
+var s_UpdateActions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpdateActions, Members: &m_UpdateActions, Type: smithy.ShapeTypeList})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t27, Type: smithy.ShapeTypeStructure})
+var sCancelSessionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelSessionRequest, Members: &mCancelSessionRequest, Type: smithy.ShapeTypeStructure})
+var sCancelSessionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelSessionResponse, Type: smithy.ShapeTypeStructure})
+var sCreateApprovalTeamRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateApprovalTeamRequest, Members: &mCreateApprovalTeamRequest, Type: smithy.ShapeTypeStructure})
+var sCreateApprovalTeamResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateApprovalTeamResponse, Members: &mCreateApprovalTeamResponse, Type: smithy.ShapeTypeStructure})
+var sCreateIdentitySourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIdentitySourceRequest, Members: &mCreateIdentitySourceRequest, Type: smithy.ShapeTypeStructure})
+var sCreateIdentitySourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIdentitySourceResponse, Members: &mCreateIdentitySourceResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteIdentitySourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIdentitySourceRequest, Members: &mDeleteIdentitySourceRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteInactiveApprovalTeamVersionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteInactiveApprovalTeamVersionRequest, Members: &mDeleteInactiveApprovalTeamVersionRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteInactiveApprovalTeamVersionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteInactiveApprovalTeamVersionResponse, Type: smithy.ShapeTypeStructure})
+var sGetApprovalTeamRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetApprovalTeamRequest, Members: &mGetApprovalTeamRequest, Type: smithy.ShapeTypeStructure})
+var sGetApprovalTeamResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetApprovalTeamResponse, Members: &mGetApprovalTeamResponse, Type: smithy.ShapeTypeStructure})
+var sGetIdentitySourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIdentitySourceRequest, Members: &mGetIdentitySourceRequest, Type: smithy.ShapeTypeStructure})
+var sGetIdentitySourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIdentitySourceResponse, Members: &mGetIdentitySourceResponse, Type: smithy.ShapeTypeStructure})
+var sGetPolicyVersionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPolicyVersionRequest, Members: &mGetPolicyVersionRequest, Type: smithy.ShapeTypeStructure})
+var sGetPolicyVersionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPolicyVersionResponse, Members: &mGetPolicyVersionResponse, Type: smithy.ShapeTypeStructure})
+var sGetResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicyRequest, Members: &mGetResourcePolicyRequest, Type: smithy.ShapeTypeStructure})
+var sGetResourcePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicyResponse, Members: &mGetResourcePolicyResponse, Type: smithy.ShapeTypeStructure})
+var sGetSessionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSessionRequest, Members: &mGetSessionRequest, Type: smithy.ShapeTypeStructure})
+var sGetSessionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSessionResponse, Members: &mGetSessionResponse, Type: smithy.ShapeTypeStructure})
+var sListApprovalTeamsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListApprovalTeamsRequest, Members: &mListApprovalTeamsRequest, Type: smithy.ShapeTypeStructure})
+var sListApprovalTeamsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListApprovalTeamsResponse, Members: &mListApprovalTeamsResponse, Type: smithy.ShapeTypeStructure})
+var sListIdentitySourcesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIdentitySourcesRequest, Members: &mListIdentitySourcesRequest, Type: smithy.ShapeTypeStructure})
+var sListIdentitySourcesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIdentitySourcesResponse, Members: &mListIdentitySourcesResponse, Type: smithy.ShapeTypeStructure})
+var sListPoliciesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPoliciesRequest, Members: &mListPoliciesRequest, Type: smithy.ShapeTypeStructure})
+var sListPoliciesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPoliciesResponse, Members: &mListPoliciesResponse, Type: smithy.ShapeTypeStructure})
+var sListPolicyVersionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPolicyVersionsRequest, Members: &mListPolicyVersionsRequest, Type: smithy.ShapeTypeStructure})
+var sListPolicyVersionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPolicyVersionsResponse, Members: &mListPolicyVersionsResponse, Type: smithy.ShapeTypeStructure})
+var sListResourcePoliciesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourcePoliciesRequest, Members: &mListResourcePoliciesRequest, Type: smithy.ShapeTypeStructure})
+var sListResourcePoliciesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourcePoliciesResponse, Members: &mListResourcePoliciesResponse, Type: smithy.ShapeTypeStructure})
+var sListSessionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSessionsRequest, Members: &mListSessionsRequest, Type: smithy.ShapeTypeStructure})
+var sListSessionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSessionsResponse, Members: &mListSessionsResponse, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure})
+var sStartActiveApprovalTeamDeletionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartActiveApprovalTeamDeletionRequest, Members: &mStartActiveApprovalTeamDeletionRequest, Type: smithy.ShapeTypeStructure})
+var sStartActiveApprovalTeamDeletionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartActiveApprovalTeamDeletionResponse, Members: &mStartActiveApprovalTeamDeletionResponse, Type: smithy.ShapeTypeStructure})
+var sStartApprovalTeamBaselineRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartApprovalTeamBaselineRequest, Members: &mStartApprovalTeamBaselineRequest, Type: smithy.ShapeTypeStructure})
+var sStartApprovalTeamBaselineResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartApprovalTeamBaselineResponse, Members: &mStartApprovalTeamBaselineResponse, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateApprovalTeamRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApprovalTeamRequest, Members: &mUpdateApprovalTeamRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateApprovalTeamResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApprovalTeamResponse, Members: &mUpdateApprovalTeamResponse, Type: smithy.ShapeTypeStructure})
+
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sActionCompletionStrategy_AUTO_COMPLETION_UPON_APPROVAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTO_COMPLETION_UPON_APPROVAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAdditionalSecurityRequirement_APPROVER_VERIFICATION_REQUIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APPROVER_VERIFICATION_REQUIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_AdditionalSecurityRequirements_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAdditionalSecurityRequirement, Members: &mAdditionalSecurityRequirement, Type: smithy.ShapeTypeEnum})
+var sApprovalStrategy_MofN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MofN", ID: &iMofNApprovalStrategy, Members: &mMofNApprovalStrategy, Type: smithy.ShapeTypeStructure})
+var sApprovalStrategyResponse_MofN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MofN", ID: &iMofNApprovalStrategy, Members: &mMofNApprovalStrategy, Type: smithy.ShapeTypeStructure})
+var sApprovalTeamRequestApprover_PrimaryIdentityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrimaryIdentityId", ID: &i_IdentityId, Type: smithy.ShapeTypeString})
+var sApprovalTeamRequestApprover_PrimaryIdentitySourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrimaryIdentitySourceArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_ApprovalTeamRequestApprovers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iApprovalTeamRequestApprover, Members: &mApprovalTeamRequestApprover, Type: smithy.ShapeTypeStructure})
+var sApprovalTeamStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApprovalTeamStatus_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApprovalTeamStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApprovalTeamStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApprovalTeamStatusCode_VALIDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApprovalTeamStatusCode_PENDING_ACTIVATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_ACTIVATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApprovalTeamStatusCode_FAILED_VALIDATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED_VALIDATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApprovalTeamStatusCode_FAILED_ACTIVATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED_ACTIVATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApprovalTeamStatusCode_UPDATE_PENDING_APPROVAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_PENDING_APPROVAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApprovalTeamStatusCode_UPDATE_PENDING_ACTIVATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_PENDING_ACTIVATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApprovalTeamStatusCode_UPDATE_FAILED_APPROVAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_FAILED_APPROVAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApprovalTeamStatusCode_UPDATE_FAILED_ACTIVATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_FAILED_ACTIVATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApprovalTeamStatusCode_UPDATE_FAILED_VALIDATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_FAILED_VALIDATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApprovalTeamStatusCode_DELETE_PENDING_APPROVAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_PENDING_APPROVAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApprovalTeamStatusCode_DELETE_FAILED_APPROVAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_FAILED_APPROVAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApprovalTeamStatusCode_DELETE_FAILED_VALIDATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_FAILED_VALIDATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApproverLastActivity_VOTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VOTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApproverLastActivity_BASELINED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BASELINED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApproverLastActivity_RESPONDED_TO_INVITATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESPONDED_TO_INVITATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sFilter_FieldName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FieldName", ID: &iFilterField, Members: &mFilterField, Type: smithy.ShapeTypeEnum})
+var sFilter_Operator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operator", ID: &iOperator, Members: &mOperator, Type: smithy.ShapeTypeEnum})
+var sFilter_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_String, Type: smithy.ShapeTypeString})
+var sFilterField_ACTION_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTION_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFilterField_APPROVAL_TEAM_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APPROVAL_TEAM_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFilterField_VOTING_TIME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VOTING_TIME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFilterField_VOTE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VOTE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFilterField_SESSION_STATUS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SESSION_STATUS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFilterField_INITIATION_TIME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INITIATION_TIME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_Filters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFilter, Members: &mFilter, Type: smithy.ShapeTypeStructure})
+var sGetApprovalTeamResponseApprover_ApproverId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApproverId", ID: &i_ParticipantId, Type: smithy.ShapeTypeString})
+var sGetApprovalTeamResponseApprover_ResponseTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponseTime", ID: &i_IsoTimestamp, Traits: &t25, Type: smithy.ShapeTypeTimestamp})
+var sGetApprovalTeamResponseApprover_PrimaryIdentityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrimaryIdentityId", ID: &i_IdentityId, Type: smithy.ShapeTypeString})
+var sGetApprovalTeamResponseApprover_PrimaryIdentitySourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrimaryIdentitySourceArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetApprovalTeamResponseApprover_PrimaryIdentityStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrimaryIdentityStatus", ID: &iIdentityStatus, Members: &mIdentityStatus, Type: smithy.ShapeTypeEnum})
+var sGetApprovalTeamResponseApprover_LastActivity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastActivity", ID: &iApproverLastActivity, Members: &mApproverLastActivity, Type: smithy.ShapeTypeEnum})
+var sGetApprovalTeamResponseApprover_LastActivityTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastActivityTime", ID: &i_IsoTimestamp, Traits: &t25, Type: smithy.ShapeTypeTimestamp})
+var sGetApprovalTeamResponseApprover_PendingBaselineSessionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PendingBaselineSessionArn", ID: &i_SessionArn, Type: smithy.ShapeTypeString})
+var sGetApprovalTeamResponseApprover_MfaMethods = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MfaMethods", ID: &i_MfaMethods, Members: &m_MfaMethods, Type: smithy.ShapeTypeList})
+var s_GetApprovalTeamResponseApprovers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGetApprovalTeamResponseApprover, Members: &mGetApprovalTeamResponseApprover, Type: smithy.ShapeTypeStructure})
+var sGetSessionResponseApproverResponse_ApproverId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApproverId", ID: &i_ParticipantId, Type: smithy.ShapeTypeString})
+var sGetSessionResponseApproverResponse_IdentitySourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentitySourceArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetSessionResponseApproverResponse_IdentityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityId", ID: &i_IdentityId, Type: smithy.ShapeTypeString})
+var sGetSessionResponseApproverResponse_Response = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Response", ID: &iSessionResponse, Members: &mSessionResponse, Type: smithy.ShapeTypeEnum})
+var sGetSessionResponseApproverResponse_ResponseTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponseTime", ID: &i_IsoTimestamp, Traits: &t25, Type: smithy.ShapeTypeTimestamp})
+var s_GetSessionResponseApproverResponses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGetSessionResponseApproverResponse, Members: &mGetSessionResponseApproverResponse, Type: smithy.ShapeTypeStructure})
+var sIamIdentityCenter_InstanceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceArn", ID: &i_IdcInstanceArn, Type: smithy.ShapeTypeString})
+var sIamIdentityCenter_Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Region", ID: &i_String, Type: smithy.ShapeTypeString})
+var sIamIdentityCenterForGet_InstanceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sIamIdentityCenterForGet_ApprovalPortalUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApprovalPortalUrl", ID: &i_String, Type: smithy.ShapeTypeString})
+var sIamIdentityCenterForGet_Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Region", ID: &i_String, Type: smithy.ShapeTypeString})
+var sIamIdentityCenterForList_InstanceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sIamIdentityCenterForList_ApprovalPortalUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApprovalPortalUrl", ID: &i_String, Type: smithy.ShapeTypeString})
+var sIamIdentityCenterForList_Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Region", ID: &i_String, Type: smithy.ShapeTypeString})
+var sIdentitySourceForList_IdentitySourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentitySourceType", ID: &iIdentitySourceType, Members: &mIdentitySourceType, Type: smithy.ShapeTypeEnum})
+var sIdentitySourceForList_IdentitySourceParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentitySourceParameters", ID: &iIdentitySourceParametersForList, Members: &mIdentitySourceParametersForList, Type: smithy.ShapeTypeUnion})
+var sIdentitySourceForList_IdentitySourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentitySourceArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sIdentitySourceForList_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_IsoTimestamp, Traits: &t25, Type: smithy.ShapeTypeTimestamp})
+var sIdentitySourceForList_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iIdentitySourceStatus, Members: &mIdentitySourceStatus, Type: smithy.ShapeTypeEnum})
+var sIdentitySourceForList_StatusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusCode", ID: &iIdentitySourceStatusCode, Members: &mIdentitySourceStatusCode, Type: smithy.ShapeTypeEnum})
+var sIdentitySourceForList_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &i_String, Type: smithy.ShapeTypeString})
+var sIdentitySourceParameters_IamIdentityCenter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IamIdentityCenter", ID: &iIamIdentityCenter, Members: &mIamIdentityCenter, Type: smithy.ShapeTypeStructure})
+var sIdentitySourceParametersForGet_IamIdentityCenter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IamIdentityCenter", ID: &iIamIdentityCenterForGet, Members: &mIamIdentityCenterForGet, Type: smithy.ShapeTypeStructure})
+var sIdentitySourceParametersForList_IamIdentityCenter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IamIdentityCenter", ID: &iIamIdentityCenterForList, Members: &mIamIdentityCenterForList, Type: smithy.ShapeTypeStructure})
+var s_IdentitySources_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIdentitySourceForList, Members: &mIdentitySourceForList, Type: smithy.ShapeTypeStructure})
+var sIdentitySourceStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIdentitySourceStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIdentitySourceStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIdentitySourceStatus_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIdentitySourceStatusCode_ACCESS_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCESS_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIdentitySourceStatusCode_DELETION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIdentitySourceStatusCode_IDC_INSTANCE_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IDC_INSTANCE_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIdentitySourceStatusCode_IDC_INSTANCE_NOT_VALID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IDC_INSTANCE_NOT_VALID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIdentitySourceType_IAM_IDENTITY_CENTER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IAM_IDENTITY_CENTER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIdentityStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIdentityStatus_ACCEPTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCEPTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIdentityStatus_REJECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIdentityStatus_INVALID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sInvalidParameterException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListApprovalTeamsResponseApprovalTeam_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_IsoTimestamp, Traits: &t25, Type: smithy.ShapeTypeTimestamp})
+var sListApprovalTeamsResponseApprovalTeam_ApprovalStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApprovalStrategy", ID: &iApprovalStrategyResponse, Members: &mApprovalStrategyResponse, Type: smithy.ShapeTypeUnion})
+var sListApprovalTeamsResponseApprovalTeam_NumberOfApprovers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberOfApprovers", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sListApprovalTeamsResponseApprovalTeam_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ApprovalTeamArn, Type: smithy.ShapeTypeString})
+var sListApprovalTeamsResponseApprovalTeam_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ApprovalTeamName, Type: smithy.ShapeTypeString})
+var sListApprovalTeamsResponseApprovalTeam_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Traits: &t29, Type: smithy.ShapeTypeString})
+var sListApprovalTeamsResponseApprovalTeam_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iApprovalTeamStatus, Members: &mApprovalTeamStatus, Type: smithy.ShapeTypeEnum})
+var sListApprovalTeamsResponseApprovalTeam_StatusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusCode", ID: &iApprovalTeamStatusCode, Members: &mApprovalTeamStatusCode, Type: smithy.ShapeTypeEnum})
+var sListApprovalTeamsResponseApprovalTeam_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &i_Message, Type: smithy.ShapeTypeString})
+var s_ListApprovalTeamsResponseApprovalTeams_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListApprovalTeamsResponseApprovalTeam, Members: &mListApprovalTeamsResponseApprovalTeam, Type: smithy.ShapeTypeStructure})
+var s_ListResourcePoliciesResponseResourcePolicies_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListResourcePoliciesResponseResourcePolicy, Members: &mListResourcePoliciesResponseResourcePolicy, Type: smithy.ShapeTypeStructure})
+var sListResourcePoliciesResponseResourcePolicy_PolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListResourcePoliciesResponseResourcePolicy_PolicyType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyType", ID: &iPolicyType, Members: &mPolicyType, Type: smithy.ShapeTypeEnum})
+var sListResourcePoliciesResponseResourcePolicy_PolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListSessionsResponseSession_SessionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionArn", ID: &i_SessionArn, Type: smithy.ShapeTypeString})
+var sListSessionsResponseSession_ApprovalTeamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApprovalTeamName", ID: &i_ApprovalTeamName, Type: smithy.ShapeTypeString})
+var sListSessionsResponseSession_ApprovalTeamArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApprovalTeamArn", ID: &i_ApprovalTeamArn, Type: smithy.ShapeTypeString})
+var sListSessionsResponseSession_InitiationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InitiationTime", ID: &i_IsoTimestamp, Traits: &t25, Type: smithy.ShapeTypeTimestamp})
+var sListSessionsResponseSession_ExpirationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpirationTime", ID: &i_IsoTimestamp, Traits: &t25, Type: smithy.ShapeTypeTimestamp})
+var sListSessionsResponseSession_CompletionTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompletionTime", ID: &i_IsoTimestamp, Traits: &t25, Type: smithy.ShapeTypeTimestamp})
+var sListSessionsResponseSession_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Traits: &t29, Type: smithy.ShapeTypeString})
+var sListSessionsResponseSession_ActionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionName", ID: &i_ActionName, Type: smithy.ShapeTypeString})
+var sListSessionsResponseSession_ProtectedResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProtectedResourceArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListSessionsResponseSession_RequesterServicePrincipal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequesterServicePrincipal", ID: &i_ServicePrincipal, Type: smithy.ShapeTypeString})
+var sListSessionsResponseSession_RequesterPrincipalArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequesterPrincipalArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListSessionsResponseSession_RequesterRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequesterRegion", ID: &i_Region, Type: smithy.ShapeTypeString})
+var sListSessionsResponseSession_RequesterAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequesterAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sListSessionsResponseSession_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iSessionStatus, Members: &mSessionStatus, Type: smithy.ShapeTypeEnum})
+var sListSessionsResponseSession_StatusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusCode", ID: &iSessionStatusCode, Members: &mSessionStatusCode, Type: smithy.ShapeTypeEnum})
+var sListSessionsResponseSession_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &i_Message, Type: smithy.ShapeTypeString})
+var sListSessionsResponseSession_ActionCompletionStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionCompletionStrategy", ID: &iActionCompletionStrategy, Members: &mActionCompletionStrategy, Type: smithy.ShapeTypeEnum})
+var sListSessionsResponseSession_AdditionalSecurityRequirements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalSecurityRequirements", ID: &i_AdditionalSecurityRequirements, Members: &m_AdditionalSecurityRequirements, Type: smithy.ShapeTypeList})
+var s_ListSessionsResponseSessions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListSessionsResponseSession, Members: &mListSessionsResponseSession, Type: smithy.ShapeTypeStructure})
+var sMfaMethod_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iMfaType, Members: &mMfaType, Type: smithy.ShapeTypeEnum})
+var sMfaMethod_SyncStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SyncStatus", ID: &iMfaSyncStatus, Members: &mMfaSyncStatus, Type: smithy.ShapeTypeEnum})
+var s_MfaMethods_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMfaMethod, Members: &mMfaMethod, Type: smithy.ShapeTypeStructure})
+var sMfaSyncStatus_IN_SYNC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_SYNC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMfaSyncStatus_OUT_OF_SYNC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OUT_OF_SYNC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMfaType_EMAIL_OTP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EMAIL_OTP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMofNApprovalStrategy_MinApprovalsRequired = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinApprovalsRequired", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sOperator_EQUALS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EQUALS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperator_NOT_EQUALS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_EQUALS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperator_GREATER_THAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GREATER_THAN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperator_LESS_THAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LESS_THAN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperator_GREATER_THAN_OR_EQUAL_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GREATER_THAN_OR_EQUAL_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperator_LESS_THAN_OR_EQUAL_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LESS_THAN_OR_EQUAL_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperator_CONTAINS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTAINS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperator_DOES_NOT_CONTAIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOES_NOT_CONTAIN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperator_BETWEEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BETWEEN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPendingUpdate_VersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sPendingUpdate_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_String, Type: smithy.ShapeTypeString})
+var sPendingUpdate_ApprovalStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApprovalStrategy", ID: &iApprovalStrategyResponse, Members: &mApprovalStrategyResponse, Type: smithy.ShapeTypeUnion})
+var sPendingUpdate_NumberOfApprovers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberOfApprovers", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sPendingUpdate_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iApprovalTeamStatus, Members: &mApprovalTeamStatus, Type: smithy.ShapeTypeEnum})
+var sPendingUpdate_StatusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusCode", ID: &iApprovalTeamStatusCode, Members: &mApprovalTeamStatusCode, Type: smithy.ShapeTypeEnum})
+var sPendingUpdate_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &i_Message, Type: smithy.ShapeTypeString})
+var sPendingUpdate_Approvers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Approvers", ID: &i_GetApprovalTeamResponseApprovers, Members: &m_GetApprovalTeamResponseApprovers, Type: smithy.ShapeTypeList})
+var sPendingUpdate_UpdateInitiationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateInitiationTime", ID: &i_IsoTimestamp, Traits: &t25, Type: smithy.ShapeTypeTimestamp})
+var s_Policies_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPolicy, Members: &mPolicy, Type: smithy.ShapeTypeStructure})
+var s_PoliciesReferences_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPolicyReference, Members: &mPolicyReference, Type: smithy.ShapeTypeStructure})
+var sPolicy_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_UnqualifiedPolicyArn, Type: smithy.ShapeTypeString})
+var sPolicy_DefaultVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultVersion", ID: &i_PolicyVersionId, Type: smithy.ShapeTypeInteger})
+var sPolicy_PolicyType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyType", ID: &iPolicyType, Members: &mPolicyType, Type: smithy.ShapeTypeEnum})
+var sPolicy_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_PolicyName, Type: smithy.ShapeTypeString})
+var sPolicyReference_PolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyArn", ID: &i_QualifiedPolicyArn, Type: smithy.ShapeTypeString})
+var sPolicyStatus_ATTACHABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ATTACHABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPolicyStatus_DEPRECATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPRECATED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPolicyType_AWS_MANAGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_MANAGED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPolicyType_AWS_RAM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_RAM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPolicyVersion_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_QualifiedPolicyArn, Type: smithy.ShapeTypeString})
+var sPolicyVersion_PolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyArn", ID: &i_UnqualifiedPolicyArn, Type: smithy.ShapeTypeString})
+var sPolicyVersion_VersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionId", ID: &i_PolicyVersionId, Type: smithy.ShapeTypeInteger})
+var sPolicyVersion_PolicyType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyType", ID: &iPolicyType, Members: &mPolicyType, Type: smithy.ShapeTypeEnum})
+var sPolicyVersion_IsDefault = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsDefault", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sPolicyVersion_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_PolicyName, Type: smithy.ShapeTypeString})
+var sPolicyVersion_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iPolicyStatus, Members: &mPolicyStatus, Type: smithy.ShapeTypeEnum})
+var sPolicyVersion_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_IsoTimestamp, Traits: &t25, Type: smithy.ShapeTypeTimestamp})
+var sPolicyVersion_LastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedTime", ID: &i_IsoTimestamp, Traits: &t25, Type: smithy.ShapeTypeTimestamp})
+var sPolicyVersion_Document = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Document", ID: &i_PolicyDocument, Traits: &t29, Type: smithy.ShapeTypeString})
+var s_PolicyVersions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPolicyVersionSummary, Members: &mPolicyVersionSummary, Type: smithy.ShapeTypeStructure})
+var sPolicyVersionSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_QualifiedPolicyArn, Type: smithy.ShapeTypeString})
+var sPolicyVersionSummary_PolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyArn", ID: &i_UnqualifiedPolicyArn, Type: smithy.ShapeTypeString})
+var sPolicyVersionSummary_VersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionId", ID: &i_PolicyVersionId, Type: smithy.ShapeTypeInteger})
+var sPolicyVersionSummary_PolicyType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyType", ID: &iPolicyType, Members: &mPolicyType, Type: smithy.ShapeTypeEnum})
+var sPolicyVersionSummary_IsDefault = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsDefault", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sPolicyVersionSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_PolicyName, Type: smithy.ShapeTypeString})
+var sPolicyVersionSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iPolicyStatus, Members: &mPolicyStatus, Type: smithy.ShapeTypeEnum})
+var sPolicyVersionSummary_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_IsoTimestamp, Traits: &t25, Type: smithy.ShapeTypeTimestamp})
+var sPolicyVersionSummary_LastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedTime", ID: &i_IsoTimestamp, Traits: &t25, Type: smithy.ShapeTypeTimestamp})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSessionExecutionStatus_EXECUTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXECUTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSessionExecutionStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSessionExecutionStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_SessionMetadata_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_SessionKey, Traits: &t29, Type: smithy.ShapeTypeString})
+var s_SessionMetadata_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_SessionValue, Traits: &t29, Type: smithy.ShapeTypeString})
+var sSessionResponse_APPROVED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APPROVED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSessionResponse_REJECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSessionResponse_NO_RESPONSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_RESPONSE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSessionStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSessionStatus_CANCELLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSessionStatus_APPROVED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APPROVED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSessionStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSessionStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSessionStatusCode_REJECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSessionStatusCode_EXPIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSessionStatusCode_CONFIGURATION_CHANGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONFIGURATION_CHANGED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSessionStatusCode_ALL_APPROVERS_IN_SESSION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL_APPROVERS_IN_SESSION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_StartApprovalTeamBaselineApproverIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ParticipantId, Type: smithy.ShapeTypeString})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Traits: &t29, Type: smithy.ShapeTypeString})
+var s_Tags_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Traits: &t29, Type: smithy.ShapeTypeString})
+var s_Tags_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Traits: &t29, Type: smithy.ShapeTypeString})
+var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sTooManyTagsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sTooManyTagsException_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUpdateAction_SYNCHRONIZE_MFA_DEVICES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYNCHRONIZE_MFA_DEVICES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_UpdateActions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUpdateAction, Members: &mUpdateAction, Type: smithy.ShapeTypeEnum})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCancelSessionRequest_SessionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionArn", ID: &i_SessionArn, Traits: &t33, Type: smithy.ShapeTypeString})
+var sCreateApprovalTeamRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sCreateApprovalTeamRequest_ApprovalStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApprovalStrategy", ID: &iApprovalStrategy, Members: &mApprovalStrategy, Type: smithy.ShapeTypeUnion})
+var sCreateApprovalTeamRequest_Approvers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Approvers", ID: &i_ApprovalTeamRequestApprovers, Members: &m_ApprovalTeamRequestApprovers, Type: smithy.ShapeTypeList})
+var sCreateApprovalTeamRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Traits: &t29, Type: smithy.ShapeTypeString})
+var sCreateApprovalTeamRequest_Policies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policies", ID: &i_PoliciesReferences, Members: &m_PoliciesReferences, Type: smithy.ShapeTypeList})
+var sCreateApprovalTeamRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ApprovalTeamName, Type: smithy.ShapeTypeString})
+var sCreateApprovalTeamRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t29, Type: smithy.ShapeTypeMap})
+var sCreateApprovalTeamResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_IsoTimestamp, Traits: &t25, Type: smithy.ShapeTypeTimestamp})
+var sCreateApprovalTeamResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ApprovalTeamArn, Type: smithy.ShapeTypeString})
+var sCreateApprovalTeamResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCreateApprovalTeamResponse_VersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCreateIdentitySourceRequest_IdentitySourceParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentitySourceParameters", ID: &iIdentitySourceParameters, Members: &mIdentitySourceParameters, Type: smithy.ShapeTypeStructure})
+var sCreateIdentitySourceRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sCreateIdentitySourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t29, Type: smithy.ShapeTypeMap})
+var sCreateIdentitySourceResponse_IdentitySourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentitySourceType", ID: &iIdentitySourceType, Members: &mIdentitySourceType, Type: smithy.ShapeTypeEnum})
+var sCreateIdentitySourceResponse_IdentitySourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentitySourceArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCreateIdentitySourceResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_IsoTimestamp, Traits: &t25, Type: smithy.ShapeTypeTimestamp})
+var sDeleteIdentitySourceRequest_IdentitySourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentitySourceArn", ID: &i_String, Traits: &t33, Type: smithy.ShapeTypeString})
+var sDeleteInactiveApprovalTeamVersionRequest_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ApprovalTeamArn, Traits: &t33, Type: smithy.ShapeTypeString})
+var sDeleteInactiveApprovalTeamVersionRequest_VersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionId", ID: &i_String, Traits: &t33, Type: smithy.ShapeTypeString})
+var sGetApprovalTeamRequest_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ApprovalTeamArn, Traits: &t33, Type: smithy.ShapeTypeString})
+var sGetApprovalTeamResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_IsoTimestamp, Traits: &t25, Type: smithy.ShapeTypeTimestamp})
+var sGetApprovalTeamResponse_ApprovalStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApprovalStrategy", ID: &iApprovalStrategyResponse, Members: &mApprovalStrategyResponse, Type: smithy.ShapeTypeUnion})
+var sGetApprovalTeamResponse_NumberOfApprovers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberOfApprovers", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sGetApprovalTeamResponse_Approvers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Approvers", ID: &i_GetApprovalTeamResponseApprovers, Members: &m_GetApprovalTeamResponseApprovers, Type: smithy.ShapeTypeList})
+var sGetApprovalTeamResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetApprovalTeamResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Traits: &t29, Type: smithy.ShapeTypeString})
+var sGetApprovalTeamResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetApprovalTeamResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iApprovalTeamStatus, Members: &mApprovalTeamStatus, Type: smithy.ShapeTypeEnum})
+var sGetApprovalTeamResponse_StatusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusCode", ID: &iApprovalTeamStatusCode, Members: &mApprovalTeamStatusCode, Type: smithy.ShapeTypeEnum})
+var sGetApprovalTeamResponse_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &i_Message, Type: smithy.ShapeTypeString})
+var sGetApprovalTeamResponse_UpdateSessionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateSessionArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetApprovalTeamResponse_VersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetApprovalTeamResponse_Policies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policies", ID: &i_PoliciesReferences, Members: &m_PoliciesReferences, Type: smithy.ShapeTypeList})
+var sGetApprovalTeamResponse_LastUpdateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdateTime", ID: &i_IsoTimestamp, Traits: &t25, Type: smithy.ShapeTypeTimestamp})
+var sGetApprovalTeamResponse_PendingUpdate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PendingUpdate", ID: &iPendingUpdate, Members: &mPendingUpdate, Type: smithy.ShapeTypeStructure})
+var sGetIdentitySourceRequest_IdentitySourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentitySourceArn", ID: &i_String, Traits: &t33, Type: smithy.ShapeTypeString})
+var sGetIdentitySourceResponse_IdentitySourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentitySourceType", ID: &iIdentitySourceType, Members: &mIdentitySourceType, Type: smithy.ShapeTypeEnum})
+var sGetIdentitySourceResponse_IdentitySourceParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentitySourceParameters", ID: &iIdentitySourceParametersForGet, Members: &mIdentitySourceParametersForGet, Type: smithy.ShapeTypeUnion})
+var sGetIdentitySourceResponse_IdentitySourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentitySourceArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetIdentitySourceResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_IsoTimestamp, Traits: &t25, Type: smithy.ShapeTypeTimestamp})
+var sGetIdentitySourceResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iIdentitySourceStatus, Members: &mIdentitySourceStatus, Type: smithy.ShapeTypeEnum})
+var sGetIdentitySourceResponse_StatusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusCode", ID: &iIdentitySourceStatusCode, Members: &mIdentitySourceStatusCode, Type: smithy.ShapeTypeEnum})
+var sGetIdentitySourceResponse_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetPolicyVersionRequest_PolicyVersionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyVersionArn", ID: &i_QualifiedPolicyArn, Traits: &t33, Type: smithy.ShapeTypeString})
+var sGetPolicyVersionResponse_PolicyVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyVersion", ID: &iPolicyVersion, Members: &mPolicyVersion, Type: smithy.ShapeTypeStructure})
+var sGetResourcePolicyRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetResourcePolicyRequest_PolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetResourcePolicyRequest_PolicyType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyType", ID: &iPolicyType, Members: &mPolicyType, Type: smithy.ShapeTypeEnum})
+var sGetResourcePolicyResponse_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetResourcePolicyResponse_PolicyType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyType", ID: &iPolicyType, Members: &mPolicyType, Type: smithy.ShapeTypeEnum})
+var sGetResourcePolicyResponse_PolicyVersionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyVersionArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetResourcePolicyResponse_PolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyName", ID: &i_PolicyName, Type: smithy.ShapeTypeString})
+var sGetResourcePolicyResponse_PolicyDocument = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyDocument", ID: &i_PolicyDocument, Traits: &t29, Type: smithy.ShapeTypeString})
+var sGetSessionRequest_SessionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionArn", ID: &i_SessionArn, Traits: &t33, Type: smithy.ShapeTypeString})
+var sGetSessionResponse_SessionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionArn", ID: &i_SessionArn, Type: smithy.ShapeTypeString})
+var sGetSessionResponse_ApprovalTeamArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApprovalTeamArn", ID: &i_ApprovalTeamArn, Type: smithy.ShapeTypeString})
+var sGetSessionResponse_ApprovalTeamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApprovalTeamName", ID: &i_ApprovalTeamName, Type: smithy.ShapeTypeString})
+var sGetSessionResponse_ProtectedResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProtectedResourceArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetSessionResponse_ApprovalStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApprovalStrategy", ID: &iApprovalStrategyResponse, Members: &mApprovalStrategyResponse, Type: smithy.ShapeTypeUnion})
+var sGetSessionResponse_NumberOfApprovers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberOfApprovers", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sGetSessionResponse_InitiationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InitiationTime", ID: &i_IsoTimestamp, Traits: &t25, Type: smithy.ShapeTypeTimestamp})
+var sGetSessionResponse_ExpirationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpirationTime", ID: &i_IsoTimestamp, Traits: &t25, Type: smithy.ShapeTypeTimestamp})
+var sGetSessionResponse_CompletionTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompletionTime", ID: &i_IsoTimestamp, Traits: &t25, Type: smithy.ShapeTypeTimestamp})
+var sGetSessionResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Traits: &t29, Type: smithy.ShapeTypeString})
+var sGetSessionResponse_Metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Metadata", ID: &i_SessionMetadata, Members: &m_SessionMetadata, Traits: &t29, Type: smithy.ShapeTypeMap})
+var sGetSessionResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iSessionStatus, Members: &mSessionStatus, Type: smithy.ShapeTypeEnum})
+var sGetSessionResponse_StatusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusCode", ID: &iSessionStatusCode, Members: &mSessionStatusCode, Type: smithy.ShapeTypeEnum})
+var sGetSessionResponse_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &i_Message, Type: smithy.ShapeTypeString})
+var sGetSessionResponse_ExecutionStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionStatus", ID: &iSessionExecutionStatus, Members: &mSessionExecutionStatus, Type: smithy.ShapeTypeEnum})
+var sGetSessionResponse_ActionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionName", ID: &i_ActionName, Type: smithy.ShapeTypeString})
+var sGetSessionResponse_RequesterServicePrincipal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequesterServicePrincipal", ID: &i_ServicePrincipal, Type: smithy.ShapeTypeString})
+var sGetSessionResponse_RequesterPrincipalArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequesterPrincipalArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetSessionResponse_RequesterAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequesterAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sGetSessionResponse_RequesterRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequesterRegion", ID: &i_Region, Type: smithy.ShapeTypeString})
+var sGetSessionResponse_RequesterComment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequesterComment", ID: &i_RequesterComment, Traits: &t29, Type: smithy.ShapeTypeString})
+var sGetSessionResponse_ActionCompletionStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionCompletionStrategy", ID: &iActionCompletionStrategy, Members: &mActionCompletionStrategy, Type: smithy.ShapeTypeEnum})
+var sGetSessionResponse_ApproverResponses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApproverResponses", ID: &i_GetSessionResponseApproverResponses, Members: &m_GetSessionResponseApproverResponses, Type: smithy.ShapeTypeList})
+var sGetSessionResponse_AdditionalSecurityRequirements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalSecurityRequirements", ID: &i_AdditionalSecurityRequirements, Members: &m_AdditionalSecurityRequirements, Type: smithy.ShapeTypeList})
+var sListApprovalTeamsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t34, Type: smithy.ShapeTypeInteger})
+var sListApprovalTeamsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Traits: &t35, Type: smithy.ShapeTypeString})
+var sListApprovalTeamsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sListApprovalTeamsResponse_ApprovalTeams = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApprovalTeams", ID: &i_ListApprovalTeamsResponseApprovalTeams, Members: &m_ListApprovalTeamsResponseApprovalTeams, Type: smithy.ShapeTypeList})
+var sListIdentitySourcesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t34, Type: smithy.ShapeTypeInteger})
+var sListIdentitySourcesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Traits: &t35, Type: smithy.ShapeTypeString})
+var sListIdentitySourcesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sListIdentitySourcesResponse_IdentitySources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentitySources", ID: &i_IdentitySources, Members: &m_IdentitySources, Type: smithy.ShapeTypeList})
+var sListPoliciesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t34, Type: smithy.ShapeTypeInteger})
+var sListPoliciesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Traits: &t35, Type: smithy.ShapeTypeString})
+var sListPoliciesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sListPoliciesResponse_Policies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policies", ID: &i_Policies, Members: &m_Policies, Type: smithy.ShapeTypeList})
+var sListPolicyVersionsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t34, Type: smithy.ShapeTypeInteger})
+var sListPolicyVersionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Traits: &t35, Type: smithy.ShapeTypeString})
+var sListPolicyVersionsRequest_PolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyArn", ID: &i_UnqualifiedPolicyArn, Traits: &t33, Type: smithy.ShapeTypeString})
+var sListPolicyVersionsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sListPolicyVersionsResponse_PolicyVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyVersions", ID: &i_PolicyVersions, Members: &m_PolicyVersions, Type: smithy.ShapeTypeList})
+var sListResourcePoliciesRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_String, Traits: &t33, Type: smithy.ShapeTypeString})
+var sListResourcePoliciesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t34, Type: smithy.ShapeTypeInteger})
+var sListResourcePoliciesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Traits: &t35, Type: smithy.ShapeTypeString})
+var sListResourcePoliciesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sListResourcePoliciesResponse_ResourcePolicies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourcePolicies", ID: &i_ListResourcePoliciesResponseResourcePolicies, Members: &m_ListResourcePoliciesResponseResourcePolicies, Type: smithy.ShapeTypeList})
+var sListSessionsRequest_ApprovalTeamArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApprovalTeamArn", ID: &i_ApprovalTeamArn, Traits: &t33, Type: smithy.ShapeTypeString})
+var sListSessionsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListSessionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sListSessionsRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_Filters, Members: &m_Filters, Type: smithy.ShapeTypeList})
+var sListSessionsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sListSessionsResponse_Sessions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sessions", ID: &i_ListSessionsResponseSessions, Members: &m_ListSessionsResponseSessions, Type: smithy.ShapeTypeList})
+var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_String, Traits: &t33, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t29, Type: smithy.ShapeTypeMap})
+var sStartActiveApprovalTeamDeletionRequest_PendingWindowDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PendingWindowDays", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sStartActiveApprovalTeamDeletionRequest_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ApprovalTeamArn, Traits: &t33, Type: smithy.ShapeTypeString})
+var sStartActiveApprovalTeamDeletionResponse_DeletionCompletionTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeletionCompletionTime", ID: &i_IsoTimestamp, Traits: &t25, Type: smithy.ShapeTypeTimestamp})
+var sStartActiveApprovalTeamDeletionResponse_DeletionStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeletionStartTime", ID: &i_IsoTimestamp, Traits: &t25, Type: smithy.ShapeTypeTimestamp})
+var sStartApprovalTeamBaselineRequest_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ApprovalTeamArn, Traits: &t33, Type: smithy.ShapeTypeString})
+var sStartApprovalTeamBaselineRequest_ApproverIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApproverIds", ID: &i_StartApprovalTeamBaselineApproverIds, Members: &m_StartApprovalTeamBaselineApproverIds, Type: smithy.ShapeTypeList})
+var sStartApprovalTeamBaselineResponse_BaselineSessionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BaselineSessionArn", ID: &i_SessionArn, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_String, Traits: &t33, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t29, Type: smithy.ShapeTypeMap})
+var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_String, Traits: &t33, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t29, Type: smithy.ShapeTypeList})
+var sUpdateApprovalTeamRequest_ApprovalStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApprovalStrategy", ID: &iApprovalStrategy, Members: &mApprovalStrategy, Type: smithy.ShapeTypeUnion})
+var sUpdateApprovalTeamRequest_Approvers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Approvers", ID: &i_ApprovalTeamRequestApprovers, Members: &m_ApprovalTeamRequestApprovers, Type: smithy.ShapeTypeList})
+var sUpdateApprovalTeamRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Traits: &t29, Type: smithy.ShapeTypeString})
+var sUpdateApprovalTeamRequest_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ApprovalTeamArn, Traits: &t33, Type: smithy.ShapeTypeString})
+var sUpdateApprovalTeamRequest_UpdateActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateActions", ID: &i_UpdateActions, Members: &m_UpdateActions, Type: smithy.ShapeTypeList})
+var sUpdateApprovalTeamResponse_VersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionId", ID: &i_String, Type: smithy.ShapeTypeString})
+
+var CancelSession = &sCancelSession
+
+var CreateApprovalTeam = &sCreateApprovalTeam
+
+var CreateIdentitySource = &sCreateIdentitySource
+
+var DeleteIdentitySource = &sDeleteIdentitySource
+
+var DeleteInactiveApprovalTeamVersion = &sDeleteInactiveApprovalTeamVersion
+
+var GetApprovalTeam = &sGetApprovalTeam
+
+var GetIdentitySource = &sGetIdentitySource
+
+var GetPolicyVersion = &sGetPolicyVersion
+
+var GetResourcePolicy = &sGetResourcePolicy
+
+var GetSession = &sGetSession
+
+var ListApprovalTeams = &sListApprovalTeams
+
+var ListIdentitySources = &sListIdentitySources
+
+var ListPolicies = &sListPolicies
+
+var ListPolicyVersions = &sListPolicyVersions
+
+var ListResourcePolicies = &sListResourcePolicies
+
+var ListSessions = &sListSessions
+
+var ListTagsForResource = &sListTagsForResource
+
+var StartActiveApprovalTeamDeletion = &sStartActiveApprovalTeamDeletion
+
+var StartApprovalTeamBaseline = &sStartApprovalTeamBaseline
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateApprovalTeam = &sUpdateApprovalTeam
+
+var _AWSFluffyCoreService = &s_AWSFluffyCoreService
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_Message = &sAccessDeniedException_Message
+
+var _AccountId = &s_AccountId
+
+var ActionCompletionStrategy = &sActionCompletionStrategy
+var ActionCompletionStrategy_AUTO_COMPLETION_UPON_APPROVAL = &sActionCompletionStrategy_AUTO_COMPLETION_UPON_APPROVAL
+
+var _ActionName = &s_ActionName
+
+var AdditionalSecurityRequirement = &sAdditionalSecurityRequirement
+var AdditionalSecurityRequirement_APPROVER_VERIFICATION_REQUIRED = &sAdditionalSecurityRequirement_APPROVER_VERIFICATION_REQUIRED
+
+var _AdditionalSecurityRequirements = &s_AdditionalSecurityRequirements
+var _AdditionalSecurityRequirements_member = &s_AdditionalSecurityRequirements_member
+
+var ApprovalStrategy = &sApprovalStrategy
+var ApprovalStrategy_MofN = &sApprovalStrategy_MofN
+
+var ApprovalStrategyResponse = &sApprovalStrategyResponse
+var ApprovalStrategyResponse_MofN = &sApprovalStrategyResponse_MofN
+
+var _ApprovalTeamArn = &s_ApprovalTeamArn
+
+var _ApprovalTeamName = &s_ApprovalTeamName
+
+var ApprovalTeamRequestApprover = &sApprovalTeamRequestApprover
+var ApprovalTeamRequestApprover_PrimaryIdentityId = &sApprovalTeamRequestApprover_PrimaryIdentityId
+var ApprovalTeamRequestApprover_PrimaryIdentitySourceArn = &sApprovalTeamRequestApprover_PrimaryIdentitySourceArn
+
+var _ApprovalTeamRequestApprovers = &s_ApprovalTeamRequestApprovers
+var _ApprovalTeamRequestApprovers_member = &s_ApprovalTeamRequestApprovers_member
+
+var ApprovalTeamStatus = &sApprovalTeamStatus
+var ApprovalTeamStatus_ACTIVE = &sApprovalTeamStatus_ACTIVE
+var ApprovalTeamStatus_INACTIVE = &sApprovalTeamStatus_INACTIVE
+var ApprovalTeamStatus_DELETING = &sApprovalTeamStatus_DELETING
+var ApprovalTeamStatus_PENDING = &sApprovalTeamStatus_PENDING
+
+var ApprovalTeamStatusCode = &sApprovalTeamStatusCode
+var ApprovalTeamStatusCode_VALIDATING = &sApprovalTeamStatusCode_VALIDATING
+var ApprovalTeamStatusCode_PENDING_ACTIVATION = &sApprovalTeamStatusCode_PENDING_ACTIVATION
+var ApprovalTeamStatusCode_FAILED_VALIDATION = &sApprovalTeamStatusCode_FAILED_VALIDATION
+var ApprovalTeamStatusCode_FAILED_ACTIVATION = &sApprovalTeamStatusCode_FAILED_ACTIVATION
+var ApprovalTeamStatusCode_UPDATE_PENDING_APPROVAL = &sApprovalTeamStatusCode_UPDATE_PENDING_APPROVAL
+var ApprovalTeamStatusCode_UPDATE_PENDING_ACTIVATION = &sApprovalTeamStatusCode_UPDATE_PENDING_ACTIVATION
+var ApprovalTeamStatusCode_UPDATE_FAILED_APPROVAL = &sApprovalTeamStatusCode_UPDATE_FAILED_APPROVAL
+var ApprovalTeamStatusCode_UPDATE_FAILED_ACTIVATION = &sApprovalTeamStatusCode_UPDATE_FAILED_ACTIVATION
+var ApprovalTeamStatusCode_UPDATE_FAILED_VALIDATION = &sApprovalTeamStatusCode_UPDATE_FAILED_VALIDATION
+var ApprovalTeamStatusCode_DELETE_PENDING_APPROVAL = &sApprovalTeamStatusCode_DELETE_PENDING_APPROVAL
+var ApprovalTeamStatusCode_DELETE_FAILED_APPROVAL = &sApprovalTeamStatusCode_DELETE_FAILED_APPROVAL
+var ApprovalTeamStatusCode_DELETE_FAILED_VALIDATION = &sApprovalTeamStatusCode_DELETE_FAILED_VALIDATION
+
+var ApproverLastActivity = &sApproverLastActivity
+var ApproverLastActivity_VOTED = &sApproverLastActivity_VOTED
+var ApproverLastActivity_BASELINED = &sApproverLastActivity_BASELINED
+var ApproverLastActivity_RESPONDED_TO_INVITATION = &sApproverLastActivity_RESPONDED_TO_INVITATION
+
+var ConflictException = &sConflictException
+var ConflictException_Message = &sConflictException_Message
+
+var _Description = &s_Description
+
+var Filter = &sFilter
+var Filter_FieldName = &sFilter_FieldName
+var Filter_Operator = &sFilter_Operator
+var Filter_Value = &sFilter_Value
+
+var FilterField = &sFilterField
+var FilterField_ACTION_NAME = &sFilterField_ACTION_NAME
+var FilterField_APPROVAL_TEAM_NAME = &sFilterField_APPROVAL_TEAM_NAME
+var FilterField_VOTING_TIME = &sFilterField_VOTING_TIME
+var FilterField_VOTE = &sFilterField_VOTE
+var FilterField_SESSION_STATUS = &sFilterField_SESSION_STATUS
+var FilterField_INITIATION_TIME = &sFilterField_INITIATION_TIME
+
+var _Filters = &s_Filters
+var _Filters_member = &s_Filters_member
+
+var GetApprovalTeamResponseApprover = &sGetApprovalTeamResponseApprover
+var GetApprovalTeamResponseApprover_ApproverId = &sGetApprovalTeamResponseApprover_ApproverId
+var GetApprovalTeamResponseApprover_ResponseTime = &sGetApprovalTeamResponseApprover_ResponseTime
+var GetApprovalTeamResponseApprover_PrimaryIdentityId = &sGetApprovalTeamResponseApprover_PrimaryIdentityId
+var GetApprovalTeamResponseApprover_PrimaryIdentitySourceArn = &sGetApprovalTeamResponseApprover_PrimaryIdentitySourceArn
+var GetApprovalTeamResponseApprover_PrimaryIdentityStatus = &sGetApprovalTeamResponseApprover_PrimaryIdentityStatus
+var GetApprovalTeamResponseApprover_LastActivity = &sGetApprovalTeamResponseApprover_LastActivity
+var GetApprovalTeamResponseApprover_LastActivityTime = &sGetApprovalTeamResponseApprover_LastActivityTime
+var GetApprovalTeamResponseApprover_PendingBaselineSessionArn = &sGetApprovalTeamResponseApprover_PendingBaselineSessionArn
+var GetApprovalTeamResponseApprover_MfaMethods = &sGetApprovalTeamResponseApprover_MfaMethods
+
+var _GetApprovalTeamResponseApprovers = &s_GetApprovalTeamResponseApprovers
+var _GetApprovalTeamResponseApprovers_member = &s_GetApprovalTeamResponseApprovers_member
+
+var GetSessionResponseApproverResponse = &sGetSessionResponseApproverResponse
+var GetSessionResponseApproverResponse_ApproverId = &sGetSessionResponseApproverResponse_ApproverId
+var GetSessionResponseApproverResponse_IdentitySourceArn = &sGetSessionResponseApproverResponse_IdentitySourceArn
+var GetSessionResponseApproverResponse_IdentityId = &sGetSessionResponseApproverResponse_IdentityId
+var GetSessionResponseApproverResponse_Response = &sGetSessionResponseApproverResponse_Response
+var GetSessionResponseApproverResponse_ResponseTime = &sGetSessionResponseApproverResponse_ResponseTime
+
+var _GetSessionResponseApproverResponses = &s_GetSessionResponseApproverResponses
+var _GetSessionResponseApproverResponses_member = &s_GetSessionResponseApproverResponses_member
+
+var IamIdentityCenter = &sIamIdentityCenter
+var IamIdentityCenter_InstanceArn = &sIamIdentityCenter_InstanceArn
+var IamIdentityCenter_Region = &sIamIdentityCenter_Region
+
+var IamIdentityCenterForGet = &sIamIdentityCenterForGet
+var IamIdentityCenterForGet_InstanceArn = &sIamIdentityCenterForGet_InstanceArn
+var IamIdentityCenterForGet_ApprovalPortalUrl = &sIamIdentityCenterForGet_ApprovalPortalUrl
+var IamIdentityCenterForGet_Region = &sIamIdentityCenterForGet_Region
+
+var IamIdentityCenterForList = &sIamIdentityCenterForList
+var IamIdentityCenterForList_InstanceArn = &sIamIdentityCenterForList_InstanceArn
+var IamIdentityCenterForList_ApprovalPortalUrl = &sIamIdentityCenterForList_ApprovalPortalUrl
+var IamIdentityCenterForList_Region = &sIamIdentityCenterForList_Region
+
+var _IdcInstanceArn = &s_IdcInstanceArn
+
+var _IdentityId = &s_IdentityId
+
+var IdentitySourceForList = &sIdentitySourceForList
+var IdentitySourceForList_IdentitySourceType = &sIdentitySourceForList_IdentitySourceType
+var IdentitySourceForList_IdentitySourceParameters = &sIdentitySourceForList_IdentitySourceParameters
+var IdentitySourceForList_IdentitySourceArn = &sIdentitySourceForList_IdentitySourceArn
+var IdentitySourceForList_CreationTime = &sIdentitySourceForList_CreationTime
+var IdentitySourceForList_Status = &sIdentitySourceForList_Status
+var IdentitySourceForList_StatusCode = &sIdentitySourceForList_StatusCode
+var IdentitySourceForList_StatusMessage = &sIdentitySourceForList_StatusMessage
+
+var IdentitySourceParameters = &sIdentitySourceParameters
+var IdentitySourceParameters_IamIdentityCenter = &sIdentitySourceParameters_IamIdentityCenter
+
+var IdentitySourceParametersForGet = &sIdentitySourceParametersForGet
+var IdentitySourceParametersForGet_IamIdentityCenter = &sIdentitySourceParametersForGet_IamIdentityCenter
+
+var IdentitySourceParametersForList = &sIdentitySourceParametersForList
+var IdentitySourceParametersForList_IamIdentityCenter = &sIdentitySourceParametersForList_IamIdentityCenter
+
+var _IdentitySources = &s_IdentitySources
+var _IdentitySources_member = &s_IdentitySources_member
+
+var IdentitySourceStatus = &sIdentitySourceStatus
+var IdentitySourceStatus_CREATING = &sIdentitySourceStatus_CREATING
+var IdentitySourceStatus_ACTIVE = &sIdentitySourceStatus_ACTIVE
+var IdentitySourceStatus_DELETING = &sIdentitySourceStatus_DELETING
+var IdentitySourceStatus_ERROR = &sIdentitySourceStatus_ERROR
+
+var IdentitySourceStatusCode = &sIdentitySourceStatusCode
+var IdentitySourceStatusCode_ACCESS_DENIED = &sIdentitySourceStatusCode_ACCESS_DENIED
+var IdentitySourceStatusCode_DELETION_FAILED = &sIdentitySourceStatusCode_DELETION_FAILED
+var IdentitySourceStatusCode_IDC_INSTANCE_NOT_FOUND = &sIdentitySourceStatusCode_IDC_INSTANCE_NOT_FOUND
+var IdentitySourceStatusCode_IDC_INSTANCE_NOT_VALID = &sIdentitySourceStatusCode_IDC_INSTANCE_NOT_VALID
+
+var IdentitySourceType = &sIdentitySourceType
+var IdentitySourceType_IAM_IDENTITY_CENTER = &sIdentitySourceType_IAM_IDENTITY_CENTER
+
+var IdentityStatus = &sIdentityStatus
+var IdentityStatus_PENDING = &sIdentityStatus_PENDING
+var IdentityStatus_ACCEPTED = &sIdentityStatus_ACCEPTED
+var IdentityStatus_REJECTED = &sIdentityStatus_REJECTED
+var IdentityStatus_INVALID = &sIdentityStatus_INVALID
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_Message = &sInternalServerException_Message
+
+var InvalidParameterException = &sInvalidParameterException
+var InvalidParameterException_Message = &sInvalidParameterException_Message
+
+var _IsoTimestamp = &s_IsoTimestamp
+
+var ListApprovalTeamsResponseApprovalTeam = &sListApprovalTeamsResponseApprovalTeam
+var ListApprovalTeamsResponseApprovalTeam_CreationTime = &sListApprovalTeamsResponseApprovalTeam_CreationTime
+var ListApprovalTeamsResponseApprovalTeam_ApprovalStrategy = &sListApprovalTeamsResponseApprovalTeam_ApprovalStrategy
+var ListApprovalTeamsResponseApprovalTeam_NumberOfApprovers = &sListApprovalTeamsResponseApprovalTeam_NumberOfApprovers
+var ListApprovalTeamsResponseApprovalTeam_Arn = &sListApprovalTeamsResponseApprovalTeam_Arn
+var ListApprovalTeamsResponseApprovalTeam_Name = &sListApprovalTeamsResponseApprovalTeam_Name
+var ListApprovalTeamsResponseApprovalTeam_Description = &sListApprovalTeamsResponseApprovalTeam_Description
+var ListApprovalTeamsResponseApprovalTeam_Status = &sListApprovalTeamsResponseApprovalTeam_Status
+var ListApprovalTeamsResponseApprovalTeam_StatusCode = &sListApprovalTeamsResponseApprovalTeam_StatusCode
+var ListApprovalTeamsResponseApprovalTeam_StatusMessage = &sListApprovalTeamsResponseApprovalTeam_StatusMessage
+
+var _ListApprovalTeamsResponseApprovalTeams = &s_ListApprovalTeamsResponseApprovalTeams
+var _ListApprovalTeamsResponseApprovalTeams_member = &s_ListApprovalTeamsResponseApprovalTeams_member
+
+var _ListResourcePoliciesResponseResourcePolicies = &s_ListResourcePoliciesResponseResourcePolicies
+var _ListResourcePoliciesResponseResourcePolicies_member = &s_ListResourcePoliciesResponseResourcePolicies_member
+
+var ListResourcePoliciesResponseResourcePolicy = &sListResourcePoliciesResponseResourcePolicy
+var ListResourcePoliciesResponseResourcePolicy_PolicyArn = &sListResourcePoliciesResponseResourcePolicy_PolicyArn
+var ListResourcePoliciesResponseResourcePolicy_PolicyType = &sListResourcePoliciesResponseResourcePolicy_PolicyType
+var ListResourcePoliciesResponseResourcePolicy_PolicyName = &sListResourcePoliciesResponseResourcePolicy_PolicyName
+
+var ListSessionsResponseSession = &sListSessionsResponseSession
+var ListSessionsResponseSession_SessionArn = &sListSessionsResponseSession_SessionArn
+var ListSessionsResponseSession_ApprovalTeamName = &sListSessionsResponseSession_ApprovalTeamName
+var ListSessionsResponseSession_ApprovalTeamArn = &sListSessionsResponseSession_ApprovalTeamArn
+var ListSessionsResponseSession_InitiationTime = &sListSessionsResponseSession_InitiationTime
+var ListSessionsResponseSession_ExpirationTime = &sListSessionsResponseSession_ExpirationTime
+var ListSessionsResponseSession_CompletionTime = &sListSessionsResponseSession_CompletionTime
+var ListSessionsResponseSession_Description = &sListSessionsResponseSession_Description
+var ListSessionsResponseSession_ActionName = &sListSessionsResponseSession_ActionName
+var ListSessionsResponseSession_ProtectedResourceArn = &sListSessionsResponseSession_ProtectedResourceArn
+var ListSessionsResponseSession_RequesterServicePrincipal = &sListSessionsResponseSession_RequesterServicePrincipal
+var ListSessionsResponseSession_RequesterPrincipalArn = &sListSessionsResponseSession_RequesterPrincipalArn
+var ListSessionsResponseSession_RequesterRegion = &sListSessionsResponseSession_RequesterRegion
+var ListSessionsResponseSession_RequesterAccountId = &sListSessionsResponseSession_RequesterAccountId
+var ListSessionsResponseSession_Status = &sListSessionsResponseSession_Status
+var ListSessionsResponseSession_StatusCode = &sListSessionsResponseSession_StatusCode
+var ListSessionsResponseSession_StatusMessage = &sListSessionsResponseSession_StatusMessage
+var ListSessionsResponseSession_ActionCompletionStrategy = &sListSessionsResponseSession_ActionCompletionStrategy
+var ListSessionsResponseSession_AdditionalSecurityRequirements = &sListSessionsResponseSession_AdditionalSecurityRequirements
+
+var _ListSessionsResponseSessions = &s_ListSessionsResponseSessions
+var _ListSessionsResponseSessions_member = &s_ListSessionsResponseSessions_member
+
+var _MaxResults = &s_MaxResults
+
+var _Message = &s_Message
+
+var MfaMethod = &sMfaMethod
+var MfaMethod_Type = &sMfaMethod_Type
+var MfaMethod_SyncStatus = &sMfaMethod_SyncStatus
+
+var _MfaMethods = &s_MfaMethods
+var _MfaMethods_member = &s_MfaMethods_member
+
+var MfaSyncStatus = &sMfaSyncStatus
+var MfaSyncStatus_IN_SYNC = &sMfaSyncStatus_IN_SYNC
+var MfaSyncStatus_OUT_OF_SYNC = &sMfaSyncStatus_OUT_OF_SYNC
+
+var MfaType = &sMfaType
+var MfaType_EMAIL_OTP = &sMfaType_EMAIL_OTP
+
+var MofNApprovalStrategy = &sMofNApprovalStrategy
+var MofNApprovalStrategy_MinApprovalsRequired = &sMofNApprovalStrategy_MinApprovalsRequired
+
+var Operator = &sOperator
+var Operator_EQUALS = &sOperator_EQUALS
+var Operator_NOT_EQUALS = &sOperator_NOT_EQUALS
+var Operator_GREATER_THAN = &sOperator_GREATER_THAN
+var Operator_LESS_THAN = &sOperator_LESS_THAN
+var Operator_GREATER_THAN_OR_EQUAL_TO = &sOperator_GREATER_THAN_OR_EQUAL_TO
+var Operator_LESS_THAN_OR_EQUAL_TO = &sOperator_LESS_THAN_OR_EQUAL_TO
+var Operator_CONTAINS = &sOperator_CONTAINS
+var Operator_DOES_NOT_CONTAIN = &sOperator_DOES_NOT_CONTAIN
+var Operator_BETWEEN = &sOperator_BETWEEN
+
+var _ParticipantId = &s_ParticipantId
+
+var PendingUpdate = &sPendingUpdate
+var PendingUpdate_VersionId = &sPendingUpdate_VersionId
+var PendingUpdate_Description = &sPendingUpdate_Description
+var PendingUpdate_ApprovalStrategy = &sPendingUpdate_ApprovalStrategy
+var PendingUpdate_NumberOfApprovers = &sPendingUpdate_NumberOfApprovers
+var PendingUpdate_Status = &sPendingUpdate_Status
+var PendingUpdate_StatusCode = &sPendingUpdate_StatusCode
+var PendingUpdate_StatusMessage = &sPendingUpdate_StatusMessage
+var PendingUpdate_Approvers = &sPendingUpdate_Approvers
+var PendingUpdate_UpdateInitiationTime = &sPendingUpdate_UpdateInitiationTime
+
+var _Policies = &s_Policies
+var _Policies_member = &s_Policies_member
+
+var _PoliciesReferences = &s_PoliciesReferences
+var _PoliciesReferences_member = &s_PoliciesReferences_member
+
+var Policy = &sPolicy
+var Policy_Arn = &sPolicy_Arn
+var Policy_DefaultVersion = &sPolicy_DefaultVersion
+var Policy_PolicyType = &sPolicy_PolicyType
+var Policy_Name = &sPolicy_Name
+
+var _PolicyDocument = &s_PolicyDocument
+
+var _PolicyName = &s_PolicyName
+
+var PolicyReference = &sPolicyReference
+var PolicyReference_PolicyArn = &sPolicyReference_PolicyArn
+
+var PolicyStatus = &sPolicyStatus
+var PolicyStatus_ATTACHABLE = &sPolicyStatus_ATTACHABLE
+var PolicyStatus_DEPRECATED = &sPolicyStatus_DEPRECATED
+
+var PolicyType = &sPolicyType
+var PolicyType_AWS_MANAGED = &sPolicyType_AWS_MANAGED
+var PolicyType_AWS_RAM = &sPolicyType_AWS_RAM
+
+var PolicyVersion = &sPolicyVersion
+var PolicyVersion_Arn = &sPolicyVersion_Arn
+var PolicyVersion_PolicyArn = &sPolicyVersion_PolicyArn
+var PolicyVersion_VersionId = &sPolicyVersion_VersionId
+var PolicyVersion_PolicyType = &sPolicyVersion_PolicyType
+var PolicyVersion_IsDefault = &sPolicyVersion_IsDefault
+var PolicyVersion_Name = &sPolicyVersion_Name
+var PolicyVersion_Status = &sPolicyVersion_Status
+var PolicyVersion_CreationTime = &sPolicyVersion_CreationTime
+var PolicyVersion_LastUpdatedTime = &sPolicyVersion_LastUpdatedTime
+var PolicyVersion_Document = &sPolicyVersion_Document
+
+var _PolicyVersionId = &s_PolicyVersionId
+
+var _PolicyVersions = &s_PolicyVersions
+var _PolicyVersions_member = &s_PolicyVersions_member
+
+var PolicyVersionSummary = &sPolicyVersionSummary
+var PolicyVersionSummary_Arn = &sPolicyVersionSummary_Arn
+var PolicyVersionSummary_PolicyArn = &sPolicyVersionSummary_PolicyArn
+var PolicyVersionSummary_VersionId = &sPolicyVersionSummary_VersionId
+var PolicyVersionSummary_PolicyType = &sPolicyVersionSummary_PolicyType
+var PolicyVersionSummary_IsDefault = &sPolicyVersionSummary_IsDefault
+var PolicyVersionSummary_Name = &sPolicyVersionSummary_Name
+var PolicyVersionSummary_Status = &sPolicyVersionSummary_Status
+var PolicyVersionSummary_CreationTime = &sPolicyVersionSummary_CreationTime
+var PolicyVersionSummary_LastUpdatedTime = &sPolicyVersionSummary_LastUpdatedTime
+
+var _QualifiedPolicyArn = &s_QualifiedPolicyArn
+
+var _Region = &s_Region
+
+var _RequesterComment = &s_RequesterComment
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+
+var _ServicePrincipal = &s_ServicePrincipal
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_Message = &sServiceQuotaExceededException_Message
+
+var _SessionArn = &s_SessionArn
+
+var SessionExecutionStatus = &sSessionExecutionStatus
+var SessionExecutionStatus_EXECUTED = &sSessionExecutionStatus_EXECUTED
+var SessionExecutionStatus_FAILED = &sSessionExecutionStatus_FAILED
+var SessionExecutionStatus_PENDING = &sSessionExecutionStatus_PENDING
+
+var _SessionKey = &s_SessionKey
+
+var _SessionMetadata = &s_SessionMetadata
+var _SessionMetadata_key = &s_SessionMetadata_key
+var _SessionMetadata_value = &s_SessionMetadata_value
+
+var SessionResponse = &sSessionResponse
+var SessionResponse_APPROVED = &sSessionResponse_APPROVED
+var SessionResponse_REJECTED = &sSessionResponse_REJECTED
+var SessionResponse_NO_RESPONSE = &sSessionResponse_NO_RESPONSE
+
+var SessionStatus = &sSessionStatus
+var SessionStatus_PENDING = &sSessionStatus_PENDING
+var SessionStatus_CANCELLED = &sSessionStatus_CANCELLED
+var SessionStatus_APPROVED = &sSessionStatus_APPROVED
+var SessionStatus_FAILED = &sSessionStatus_FAILED
+var SessionStatus_CREATING = &sSessionStatus_CREATING
+
+var SessionStatusCode = &sSessionStatusCode
+var SessionStatusCode_REJECTED = &sSessionStatusCode_REJECTED
+var SessionStatusCode_EXPIRED = &sSessionStatusCode_EXPIRED
+var SessionStatusCode_CONFIGURATION_CHANGED = &sSessionStatusCode_CONFIGURATION_CHANGED
+var SessionStatusCode_ALL_APPROVERS_IN_SESSION = &sSessionStatusCode_ALL_APPROVERS_IN_SESSION
+
+var _SessionValue = &s_SessionValue
+
+var _StartApprovalTeamBaselineApproverIds = &s_StartApprovalTeamBaselineApproverIds
+var _StartApprovalTeamBaselineApproverIds_member = &s_StartApprovalTeamBaselineApproverIds_member
+
+var _String = &s_String
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _Tags = &s_Tags
+var _Tags_key = &s_Tags_key
+var _Tags_value = &s_Tags_value
+
+var _TagValue = &s_TagValue
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_Message = &sThrottlingException_Message
+
+var _Token = &s_Token
+
+var TooManyTagsException = &sTooManyTagsException
+var TooManyTagsException_Message = &sTooManyTagsException_Message
+var TooManyTagsException_ResourceName = &sTooManyTagsException_ResourceName
+
+var _UnqualifiedPolicyArn = &s_UnqualifiedPolicyArn
+
+var UpdateAction = &sUpdateAction
+var UpdateAction_SYNCHRONIZE_MFA_DEVICES = &sUpdateAction_SYNCHRONIZE_MFA_DEVICES
+
+var _UpdateActions = &s_UpdateActions
+var _UpdateActions_member = &s_UpdateActions_member
+
+var ValidationException = &sValidationException
+var ValidationException_Message = &sValidationException_Message
+
+var CancelSessionRequest = &sCancelSessionRequest
+var CancelSessionRequest_SessionArn = &sCancelSessionRequest_SessionArn
+
+var CancelSessionResponse = &sCancelSessionResponse
+
+var CreateApprovalTeamRequest = &sCreateApprovalTeamRequest
+var CreateApprovalTeamRequest_ClientToken = &sCreateApprovalTeamRequest_ClientToken
+var CreateApprovalTeamRequest_ApprovalStrategy = &sCreateApprovalTeamRequest_ApprovalStrategy
+var CreateApprovalTeamRequest_Approvers = &sCreateApprovalTeamRequest_Approvers
+var CreateApprovalTeamRequest_Description = &sCreateApprovalTeamRequest_Description
+var CreateApprovalTeamRequest_Policies = &sCreateApprovalTeamRequest_Policies
+var CreateApprovalTeamRequest_Name = &sCreateApprovalTeamRequest_Name
+var CreateApprovalTeamRequest_Tags = &sCreateApprovalTeamRequest_Tags
+
+var CreateApprovalTeamResponse = &sCreateApprovalTeamResponse
+var CreateApprovalTeamResponse_CreationTime = &sCreateApprovalTeamResponse_CreationTime
+var CreateApprovalTeamResponse_Arn = &sCreateApprovalTeamResponse_Arn
+var CreateApprovalTeamResponse_Name = &sCreateApprovalTeamResponse_Name
+var CreateApprovalTeamResponse_VersionId = &sCreateApprovalTeamResponse_VersionId
+
+var CreateIdentitySourceRequest = &sCreateIdentitySourceRequest
+var CreateIdentitySourceRequest_IdentitySourceParameters = &sCreateIdentitySourceRequest_IdentitySourceParameters
+var CreateIdentitySourceRequest_ClientToken = &sCreateIdentitySourceRequest_ClientToken
+var CreateIdentitySourceRequest_Tags = &sCreateIdentitySourceRequest_Tags
+
+var CreateIdentitySourceResponse = &sCreateIdentitySourceResponse
+var CreateIdentitySourceResponse_IdentitySourceType = &sCreateIdentitySourceResponse_IdentitySourceType
+var CreateIdentitySourceResponse_IdentitySourceArn = &sCreateIdentitySourceResponse_IdentitySourceArn
+var CreateIdentitySourceResponse_CreationTime = &sCreateIdentitySourceResponse_CreationTime
+
+var DeleteIdentitySourceRequest = &sDeleteIdentitySourceRequest
+var DeleteIdentitySourceRequest_IdentitySourceArn = &sDeleteIdentitySourceRequest_IdentitySourceArn
+
+var DeleteInactiveApprovalTeamVersionRequest = &sDeleteInactiveApprovalTeamVersionRequest
+var DeleteInactiveApprovalTeamVersionRequest_Arn = &sDeleteInactiveApprovalTeamVersionRequest_Arn
+var DeleteInactiveApprovalTeamVersionRequest_VersionId = &sDeleteInactiveApprovalTeamVersionRequest_VersionId
+
+var DeleteInactiveApprovalTeamVersionResponse = &sDeleteInactiveApprovalTeamVersionResponse
+
+var GetApprovalTeamRequest = &sGetApprovalTeamRequest
+var GetApprovalTeamRequest_Arn = &sGetApprovalTeamRequest_Arn
+
+var GetApprovalTeamResponse = &sGetApprovalTeamResponse
+var GetApprovalTeamResponse_CreationTime = &sGetApprovalTeamResponse_CreationTime
+var GetApprovalTeamResponse_ApprovalStrategy = &sGetApprovalTeamResponse_ApprovalStrategy
+var GetApprovalTeamResponse_NumberOfApprovers = &sGetApprovalTeamResponse_NumberOfApprovers
+var GetApprovalTeamResponse_Approvers = &sGetApprovalTeamResponse_Approvers
+var GetApprovalTeamResponse_Arn = &sGetApprovalTeamResponse_Arn
+var GetApprovalTeamResponse_Description = &sGetApprovalTeamResponse_Description
+var GetApprovalTeamResponse_Name = &sGetApprovalTeamResponse_Name
+var GetApprovalTeamResponse_Status = &sGetApprovalTeamResponse_Status
+var GetApprovalTeamResponse_StatusCode = &sGetApprovalTeamResponse_StatusCode
+var GetApprovalTeamResponse_StatusMessage = &sGetApprovalTeamResponse_StatusMessage
+var GetApprovalTeamResponse_UpdateSessionArn = &sGetApprovalTeamResponse_UpdateSessionArn
+var GetApprovalTeamResponse_VersionId = &sGetApprovalTeamResponse_VersionId
+var GetApprovalTeamResponse_Policies = &sGetApprovalTeamResponse_Policies
+var GetApprovalTeamResponse_LastUpdateTime = &sGetApprovalTeamResponse_LastUpdateTime
+var GetApprovalTeamResponse_PendingUpdate = &sGetApprovalTeamResponse_PendingUpdate
+
+var GetIdentitySourceRequest = &sGetIdentitySourceRequest
+var GetIdentitySourceRequest_IdentitySourceArn = &sGetIdentitySourceRequest_IdentitySourceArn
+
+var GetIdentitySourceResponse = &sGetIdentitySourceResponse
+var GetIdentitySourceResponse_IdentitySourceType = &sGetIdentitySourceResponse_IdentitySourceType
+var GetIdentitySourceResponse_IdentitySourceParameters = &sGetIdentitySourceResponse_IdentitySourceParameters
+var GetIdentitySourceResponse_IdentitySourceArn = &sGetIdentitySourceResponse_IdentitySourceArn
+var GetIdentitySourceResponse_CreationTime = &sGetIdentitySourceResponse_CreationTime
+var GetIdentitySourceResponse_Status = &sGetIdentitySourceResponse_Status
+var GetIdentitySourceResponse_StatusCode = &sGetIdentitySourceResponse_StatusCode
+var GetIdentitySourceResponse_StatusMessage = &sGetIdentitySourceResponse_StatusMessage
+
+var GetPolicyVersionRequest = &sGetPolicyVersionRequest
+var GetPolicyVersionRequest_PolicyVersionArn = &sGetPolicyVersionRequest_PolicyVersionArn
+
+var GetPolicyVersionResponse = &sGetPolicyVersionResponse
+var GetPolicyVersionResponse_PolicyVersion = &sGetPolicyVersionResponse_PolicyVersion
+
+var GetResourcePolicyRequest = &sGetResourcePolicyRequest
+var GetResourcePolicyRequest_ResourceArn = &sGetResourcePolicyRequest_ResourceArn
+var GetResourcePolicyRequest_PolicyName = &sGetResourcePolicyRequest_PolicyName
+var GetResourcePolicyRequest_PolicyType = &sGetResourcePolicyRequest_PolicyType
+
+var GetResourcePolicyResponse = &sGetResourcePolicyResponse
+var GetResourcePolicyResponse_ResourceArn = &sGetResourcePolicyResponse_ResourceArn
+var GetResourcePolicyResponse_PolicyType = &sGetResourcePolicyResponse_PolicyType
+var GetResourcePolicyResponse_PolicyVersionArn = &sGetResourcePolicyResponse_PolicyVersionArn
+var GetResourcePolicyResponse_PolicyName = &sGetResourcePolicyResponse_PolicyName
+var GetResourcePolicyResponse_PolicyDocument = &sGetResourcePolicyResponse_PolicyDocument
+
+var GetSessionRequest = &sGetSessionRequest
+var GetSessionRequest_SessionArn = &sGetSessionRequest_SessionArn
+
+var GetSessionResponse = &sGetSessionResponse
+var GetSessionResponse_SessionArn = &sGetSessionResponse_SessionArn
+var GetSessionResponse_ApprovalTeamArn = &sGetSessionResponse_ApprovalTeamArn
+var GetSessionResponse_ApprovalTeamName = &sGetSessionResponse_ApprovalTeamName
+var GetSessionResponse_ProtectedResourceArn = &sGetSessionResponse_ProtectedResourceArn
+var GetSessionResponse_ApprovalStrategy = &sGetSessionResponse_ApprovalStrategy
+var GetSessionResponse_NumberOfApprovers = &sGetSessionResponse_NumberOfApprovers
+var GetSessionResponse_InitiationTime = &sGetSessionResponse_InitiationTime
+var GetSessionResponse_ExpirationTime = &sGetSessionResponse_ExpirationTime
+var GetSessionResponse_CompletionTime = &sGetSessionResponse_CompletionTime
+var GetSessionResponse_Description = &sGetSessionResponse_Description
+var GetSessionResponse_Metadata = &sGetSessionResponse_Metadata
+var GetSessionResponse_Status = &sGetSessionResponse_Status
+var GetSessionResponse_StatusCode = &sGetSessionResponse_StatusCode
+var GetSessionResponse_StatusMessage = &sGetSessionResponse_StatusMessage
+var GetSessionResponse_ExecutionStatus = &sGetSessionResponse_ExecutionStatus
+var GetSessionResponse_ActionName = &sGetSessionResponse_ActionName
+var GetSessionResponse_RequesterServicePrincipal = &sGetSessionResponse_RequesterServicePrincipal
+var GetSessionResponse_RequesterPrincipalArn = &sGetSessionResponse_RequesterPrincipalArn
+var GetSessionResponse_RequesterAccountId = &sGetSessionResponse_RequesterAccountId
+var GetSessionResponse_RequesterRegion = &sGetSessionResponse_RequesterRegion
+var GetSessionResponse_RequesterComment = &sGetSessionResponse_RequesterComment
+var GetSessionResponse_ActionCompletionStrategy = &sGetSessionResponse_ActionCompletionStrategy
+var GetSessionResponse_ApproverResponses = &sGetSessionResponse_ApproverResponses
+var GetSessionResponse_AdditionalSecurityRequirements = &sGetSessionResponse_AdditionalSecurityRequirements
+
+var ListApprovalTeamsRequest = &sListApprovalTeamsRequest
+var ListApprovalTeamsRequest_MaxResults = &sListApprovalTeamsRequest_MaxResults
+var ListApprovalTeamsRequest_NextToken = &sListApprovalTeamsRequest_NextToken
+
+var ListApprovalTeamsResponse = &sListApprovalTeamsResponse
+var ListApprovalTeamsResponse_NextToken = &sListApprovalTeamsResponse_NextToken
+var ListApprovalTeamsResponse_ApprovalTeams = &sListApprovalTeamsResponse_ApprovalTeams
+
+var ListIdentitySourcesRequest = &sListIdentitySourcesRequest
+var ListIdentitySourcesRequest_MaxResults = &sListIdentitySourcesRequest_MaxResults
+var ListIdentitySourcesRequest_NextToken = &sListIdentitySourcesRequest_NextToken
+
+var ListIdentitySourcesResponse = &sListIdentitySourcesResponse
+var ListIdentitySourcesResponse_NextToken = &sListIdentitySourcesResponse_NextToken
+var ListIdentitySourcesResponse_IdentitySources = &sListIdentitySourcesResponse_IdentitySources
+
+var ListPoliciesRequest = &sListPoliciesRequest
+var ListPoliciesRequest_MaxResults = &sListPoliciesRequest_MaxResults
+var ListPoliciesRequest_NextToken = &sListPoliciesRequest_NextToken
+
+var ListPoliciesResponse = &sListPoliciesResponse
+var ListPoliciesResponse_NextToken = &sListPoliciesResponse_NextToken
+var ListPoliciesResponse_Policies = &sListPoliciesResponse_Policies
+
+var ListPolicyVersionsRequest = &sListPolicyVersionsRequest
+var ListPolicyVersionsRequest_MaxResults = &sListPolicyVersionsRequest_MaxResults
+var ListPolicyVersionsRequest_NextToken = &sListPolicyVersionsRequest_NextToken
+var ListPolicyVersionsRequest_PolicyArn = &sListPolicyVersionsRequest_PolicyArn
+
+var ListPolicyVersionsResponse = &sListPolicyVersionsResponse
+var ListPolicyVersionsResponse_NextToken = &sListPolicyVersionsResponse_NextToken
+var ListPolicyVersionsResponse_PolicyVersions = &sListPolicyVersionsResponse_PolicyVersions
+
+var ListResourcePoliciesRequest = &sListResourcePoliciesRequest
+var ListResourcePoliciesRequest_ResourceArn = &sListResourcePoliciesRequest_ResourceArn
+var ListResourcePoliciesRequest_MaxResults = &sListResourcePoliciesRequest_MaxResults
+var ListResourcePoliciesRequest_NextToken = &sListResourcePoliciesRequest_NextToken
+
+var ListResourcePoliciesResponse = &sListResourcePoliciesResponse
+var ListResourcePoliciesResponse_NextToken = &sListResourcePoliciesResponse_NextToken
+var ListResourcePoliciesResponse_ResourcePolicies = &sListResourcePoliciesResponse_ResourcePolicies
+
+var ListSessionsRequest = &sListSessionsRequest
+var ListSessionsRequest_ApprovalTeamArn = &sListSessionsRequest_ApprovalTeamArn
+var ListSessionsRequest_MaxResults = &sListSessionsRequest_MaxResults
+var ListSessionsRequest_NextToken = &sListSessionsRequest_NextToken
+var ListSessionsRequest_Filters = &sListSessionsRequest_Filters
+
+var ListSessionsResponse = &sListSessionsResponse
+var ListSessionsResponse_NextToken = &sListSessionsResponse_NextToken
+var ListSessionsResponse_Sessions = &sListSessionsResponse_Sessions
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceArn = &sListTagsForResourceRequest_ResourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_Tags = &sListTagsForResourceResponse_Tags
+
+var StartActiveApprovalTeamDeletionRequest = &sStartActiveApprovalTeamDeletionRequest
+var StartActiveApprovalTeamDeletionRequest_PendingWindowDays = &sStartActiveApprovalTeamDeletionRequest_PendingWindowDays
+var StartActiveApprovalTeamDeletionRequest_Arn = &sStartActiveApprovalTeamDeletionRequest_Arn
+
+var StartActiveApprovalTeamDeletionResponse = &sStartActiveApprovalTeamDeletionResponse
+var StartActiveApprovalTeamDeletionResponse_DeletionCompletionTime = &sStartActiveApprovalTeamDeletionResponse_DeletionCompletionTime
+var StartActiveApprovalTeamDeletionResponse_DeletionStartTime = &sStartActiveApprovalTeamDeletionResponse_DeletionStartTime
+
+var StartApprovalTeamBaselineRequest = &sStartApprovalTeamBaselineRequest
+var StartApprovalTeamBaselineRequest_Arn = &sStartApprovalTeamBaselineRequest_Arn
+var StartApprovalTeamBaselineRequest_ApproverIds = &sStartApprovalTeamBaselineRequest_ApproverIds
+
+var StartApprovalTeamBaselineResponse = &sStartApprovalTeamBaselineResponse
+var StartApprovalTeamBaselineResponse_BaselineSessionArn = &sStartApprovalTeamBaselineResponse_BaselineSessionArn
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceArn = &sTagResourceRequest_ResourceArn
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceArn = &sUntagResourceRequest_ResourceArn
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateApprovalTeamRequest = &sUpdateApprovalTeamRequest
+var UpdateApprovalTeamRequest_ApprovalStrategy = &sUpdateApprovalTeamRequest_ApprovalStrategy
+var UpdateApprovalTeamRequest_Approvers = &sUpdateApprovalTeamRequest_Approvers
+var UpdateApprovalTeamRequest_Description = &sUpdateApprovalTeamRequest_Description
+var UpdateApprovalTeamRequest_Arn = &sUpdateApprovalTeamRequest_Arn
+var UpdateApprovalTeamRequest_UpdateActions = &sUpdateApprovalTeamRequest_UpdateActions
+
+var UpdateApprovalTeamResponse = &sUpdateApprovalTeamResponse
+var UpdateApprovalTeamResponse_VersionId = &sUpdateApprovalTeamResponse_VersionId
+
+var AWSFluffyCoreService = &smithy.ServiceSchema{Schema: &s_AWSFluffyCoreService, Version: "2022-07-26"}

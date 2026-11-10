@@ -4,2135 +4,1626 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateSignalingChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "CreateSignalingChannel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	iCreateSignalingChannel                     = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "CreateSignalingChannel"}
+	iCreateStream                               = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "CreateStream"}
+	iDeleteEdgeConfiguration                    = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "DeleteEdgeConfiguration"}
+	iDeleteSignalingChannel                     = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "DeleteSignalingChannel"}
+	iDeleteStream                               = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "DeleteStream"}
+	iDescribeEdgeConfiguration                  = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "DescribeEdgeConfiguration"}
+	iDescribeImageGenerationConfiguration       = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "DescribeImageGenerationConfiguration"}
+	iDescribeMappedResourceConfiguration        = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "DescribeMappedResourceConfiguration"}
+	iDescribeMediaStorageConfiguration          = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "DescribeMediaStorageConfiguration"}
+	iDescribeNotificationConfiguration          = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "DescribeNotificationConfiguration"}
+	iDescribeSignalingChannel                   = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "DescribeSignalingChannel"}
+	iDescribeStream                             = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "DescribeStream"}
+	iDescribeStreamStorageConfiguration         = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "DescribeStreamStorageConfiguration"}
+	iGetDataEndpoint                            = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "GetDataEndpoint"}
+	iGetSignalingChannelEndpoint                = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "GetSignalingChannelEndpoint"}
+	iListEdgeAgentConfigurations                = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "ListEdgeAgentConfigurations"}
+	iListSignalingChannels                      = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "ListSignalingChannels"}
+	iListStreams                                = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "ListStreams"}
+	iListTagsForResource                        = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "ListTagsForResource"}
+	iListTagsForStream                          = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "ListTagsForStream"}
+	iStartEdgeConfigurationUpdate               = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "StartEdgeConfigurationUpdate"}
+	iTagResource                                = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "TagResource"}
+	iTagStream                                  = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "TagStream"}
+	iUntagResource                              = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "UntagResource"}
+	iUntagStream                                = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "UntagStream"}
+	iUpdateDataRetention                        = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "UpdateDataRetention"}
+	iUpdateImageGenerationConfiguration         = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "UpdateImageGenerationConfiguration"}
+	iUpdateMediaStorageConfiguration            = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "UpdateMediaStorageConfiguration"}
+	iUpdateNotificationConfiguration            = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "UpdateNotificationConfiguration"}
+	iUpdateSignalingChannel                     = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "UpdateSignalingChannel"}
+	iUpdateStream                               = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "UpdateStream"}
+	iUpdateStreamStorageConfiguration           = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "UpdateStreamStorageConfiguration"}
+	i_KinesisVideo_20170930                     = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "KinesisVideo_20170930"}
+	iAccessDeniedException                      = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "AccessDeniedException"}
+	iAccountChannelLimitExceededException       = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "AccountChannelLimitExceededException"}
+	iAccountStreamLimitExceededException        = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "AccountStreamLimitExceededException"}
+	iAPIName                                    = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "APIName"}
+	iChannelInfo                                = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "ChannelInfo"}
+	i_ChannelInfoList                           = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "ChannelInfoList"}
+	i_ChannelName                               = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "ChannelName"}
+	iChannelNameCondition                       = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "ChannelNameCondition"}
+	iChannelProtocol                            = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "ChannelProtocol"}
+	iChannelRole                                = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "ChannelRole"}
+	iChannelType                                = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "ChannelType"}
+	iClientLimitExceededException               = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "ClientLimitExceededException"}
+	iComparisonOperator                         = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "ComparisonOperator"}
+	iConfigurationStatus                        = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "ConfigurationStatus"}
+	i_DataEndpoint                              = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "DataEndpoint"}
+	i_DataRetentionChangeInHours                = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "DataRetentionChangeInHours"}
+	i_DataRetentionInHours                      = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "DataRetentionInHours"}
+	iDefaultStorageTier                         = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "DefaultStorageTier"}
+	i_DeleteAfterUpload                         = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "DeleteAfterUpload"}
+	iDeletionConfig                             = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "DeletionConfig"}
+	i_DestinationRegion                         = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "DestinationRegion"}
+	i_DestinationUri                            = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "DestinationUri"}
+	i_DeviceName                                = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "DeviceName"}
+	iDeviceStreamLimitExceededException         = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "DeviceStreamLimitExceededException"}
+	i_DurationInSeconds                         = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "DurationInSeconds"}
+	iEdgeAgentStatus                            = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "EdgeAgentStatus"}
+	iEdgeConfig                                 = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "EdgeConfig"}
+	i_EdgeRetentionInHours                      = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "EdgeRetentionInHours"}
+	i_ErrorMessage                              = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "ErrorMessage"}
+	i_FailedStatusDetails                       = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "FailedStatusDetails"}
+	iFormat                                     = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "Format"}
+	i_FormatConfig                              = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "FormatConfig"}
+	iFormatConfigKey                            = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "FormatConfigKey"}
+	i_FormatConfigValue                         = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "FormatConfigValue"}
+	i_HeightPixels                              = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "HeightPixels"}
+	i_HubDeviceArn                              = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "HubDeviceArn"}
+	iImageGenerationConfiguration               = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "ImageGenerationConfiguration"}
+	iImageGenerationDestinationConfig           = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "ImageGenerationDestinationConfig"}
+	iImageSelectorType                          = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "ImageSelectorType"}
+	iInvalidArgumentException                   = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "InvalidArgumentException"}
+	iInvalidDeviceException                     = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "InvalidDeviceException"}
+	iInvalidResourceFormatException             = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "InvalidResourceFormatException"}
+	i_JobStatusDetails                          = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "JobStatusDetails"}
+	i_KmsKeyId                                  = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "KmsKeyId"}
+	iLastRecorderStatus                         = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "LastRecorderStatus"}
+	iLastUploaderStatus                         = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "LastUploaderStatus"}
+	iListEdgeAgentConfigurationsEdgeConfig      = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "ListEdgeAgentConfigurationsEdgeConfig"}
+	i_ListEdgeAgentConfigurationsEdgeConfigList = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "ListEdgeAgentConfigurationsEdgeConfigList"}
+	i_ListEdgeAgentConfigurationsInputLimit     = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "ListEdgeAgentConfigurationsInputLimit"}
+	i_ListOfProtocols                           = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "ListOfProtocols"}
+	i_ListStreamsInputLimit                     = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "ListStreamsInputLimit"}
+	iLocalSizeConfig                            = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "LocalSizeConfig"}
+	i_MappedResourceConfigurationList           = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "MappedResourceConfigurationList"}
+	iMappedResourceConfigurationListItem        = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "MappedResourceConfigurationListItem"}
+	i_MappedResourceConfigurationListLimit      = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "MappedResourceConfigurationListLimit"}
+	i_MaxLocalMediaSizeInMB                     = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "MaxLocalMediaSizeInMB"}
+	iMediaSourceConfig                          = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "MediaSourceConfig"}
+	iMediaStorageConfiguration                  = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "MediaStorageConfiguration"}
+	iMediaStorageConfigurationStatus            = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "MediaStorageConfigurationStatus"}
+	i_MediaType                                 = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "MediaType"}
+	i_MediaUriSecretArn                         = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "MediaUriSecretArn"}
+	iMediaUriType                               = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "MediaUriType"}
+	i_MessageTtlSeconds                         = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "MessageTtlSeconds"}
+	i_NextToken                                 = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "NextToken"}
+	iNoDataRetentionException                   = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "NoDataRetentionException"}
+	iNotAuthorizedException                     = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "NotAuthorizedException"}
+	iNotificationConfiguration                  = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "NotificationConfiguration"}
+	iNotificationDestinationConfig              = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "NotificationDestinationConfig"}
+	iRecorderConfig                             = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "RecorderConfig"}
+	iRecorderStatus                             = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "RecorderStatus"}
+	i_ResourceARN                               = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "ResourceARN"}
+	i_ResourceEndpoint                          = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "ResourceEndpoint"}
+	i_ResourceEndpointList                      = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "ResourceEndpointList"}
+	iResourceEndpointListItem                   = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "ResourceEndpointListItem"}
+	iResourceInUseException                     = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "ResourceInUseException"}
+	iResourceNotFoundException                  = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "ResourceNotFoundException"}
+	i_ResourceTags                              = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "ResourceTags"}
+	i_SamplingInterval                          = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "SamplingInterval"}
+	iScheduleConfig                             = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "ScheduleConfig"}
+	i_ScheduleExpression                        = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "ScheduleExpression"}
+	iSingleMasterChannelEndpointConfiguration   = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "SingleMasterChannelEndpointConfiguration"}
+	iSingleMasterConfiguration                  = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "SingleMasterConfiguration"}
+	iStatus                                     = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "Status"}
+	iStrategyOnFullSize                         = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "StrategyOnFullSize"}
+	iStreamEdgeConfigurationNotFoundException   = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "StreamEdgeConfigurationNotFoundException"}
+	iStreamInfo                                 = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "StreamInfo"}
+	i_StreamInfoList                            = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "StreamInfoList"}
+	i_StreamName                                = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "StreamName"}
+	iStreamNameCondition                        = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "StreamNameCondition"}
+	iStreamStorageConfiguration                 = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "StreamStorageConfiguration"}
+	iSyncStatus                                 = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "SyncStatus"}
+	iTag                                        = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "Tag"}
+	i_TagKey                                    = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "TagKey"}
+	i_TagKeyList                                = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "TagKeyList"}
+	i_TagList                                   = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "TagList"}
+	i_TagOnCreateList                           = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "TagOnCreateList"}
+	iTagsPerResourceExceededLimitException      = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "TagsPerResourceExceededLimitException"}
+	i_TagValue                                  = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "TagValue"}
+	i_Timestamp                                 = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "Timestamp"}
+	i_Type                                      = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "Type"}
+	iUpdateDataRetentionOperation               = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "UpdateDataRetentionOperation"}
+	iUploaderConfig                             = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "UploaderConfig"}
+	iUploaderStatus                             = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "UploaderStatus"}
+	i_Version                                   = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "Version"}
+	iVersionMismatchException                   = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "VersionMismatchException"}
+	i_WidthPixels                               = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "WidthPixels"}
+	iCreateSignalingChannelInput                = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "CreateSignalingChannelInput"}
+	iCreateSignalingChannelOutput               = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "CreateSignalingChannelOutput"}
+	iCreateStreamInput                          = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "CreateStreamInput"}
+	iCreateStreamOutput                         = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "CreateStreamOutput"}
+	iDeleteEdgeConfigurationInput               = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "DeleteEdgeConfigurationInput"}
+	iDeleteEdgeConfigurationOutput              = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "DeleteEdgeConfigurationOutput"}
+	iDeleteSignalingChannelInput                = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "DeleteSignalingChannelInput"}
+	iDeleteSignalingChannelOutput               = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "DeleteSignalingChannelOutput"}
+	iDeleteStreamInput                          = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "DeleteStreamInput"}
+	iDeleteStreamOutput                         = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "DeleteStreamOutput"}
+	iDescribeEdgeConfigurationInput             = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "DescribeEdgeConfigurationInput"}
+	iDescribeEdgeConfigurationOutput            = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "DescribeEdgeConfigurationOutput"}
+	iDescribeImageGenerationConfigurationInput  = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "DescribeImageGenerationConfigurationInput"}
+	iDescribeImageGenerationConfigurationOutput = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "DescribeImageGenerationConfigurationOutput"}
+	iDescribeMappedResourceConfigurationInput   = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "DescribeMappedResourceConfigurationInput"}
+	iDescribeMappedResourceConfigurationOutput  = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "DescribeMappedResourceConfigurationOutput"}
+	iDescribeMediaStorageConfigurationInput     = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "DescribeMediaStorageConfigurationInput"}
+	iDescribeMediaStorageConfigurationOutput    = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "DescribeMediaStorageConfigurationOutput"}
+	iDescribeNotificationConfigurationInput     = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "DescribeNotificationConfigurationInput"}
+	iDescribeNotificationConfigurationOutput    = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "DescribeNotificationConfigurationOutput"}
+	iDescribeSignalingChannelInput              = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "DescribeSignalingChannelInput"}
+	iDescribeSignalingChannelOutput             = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "DescribeSignalingChannelOutput"}
+	iDescribeStreamInput                        = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "DescribeStreamInput"}
+	iDescribeStreamOutput                       = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "DescribeStreamOutput"}
+	iDescribeStreamStorageConfigurationInput    = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "DescribeStreamStorageConfigurationInput"}
+	iDescribeStreamStorageConfigurationOutput   = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "DescribeStreamStorageConfigurationOutput"}
+	iGetDataEndpointInput                       = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "GetDataEndpointInput"}
+	iGetDataEndpointOutput                      = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "GetDataEndpointOutput"}
+	iGetSignalingChannelEndpointInput           = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "GetSignalingChannelEndpointInput"}
+	iGetSignalingChannelEndpointOutput          = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "GetSignalingChannelEndpointOutput"}
+	iListEdgeAgentConfigurationsInput           = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "ListEdgeAgentConfigurationsInput"}
+	iListEdgeAgentConfigurationsOutput          = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "ListEdgeAgentConfigurationsOutput"}
+	iListSignalingChannelsInput                 = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "ListSignalingChannelsInput"}
+	iListSignalingChannelsOutput                = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "ListSignalingChannelsOutput"}
+	iListStreamsInput                           = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "ListStreamsInput"}
+	iListStreamsOutput                          = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "ListStreamsOutput"}
+	iListTagsForResourceInput                   = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "ListTagsForResourceInput"}
+	iListTagsForResourceOutput                  = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "ListTagsForResourceOutput"}
+	iListTagsForStreamInput                     = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "ListTagsForStreamInput"}
+	iListTagsForStreamOutput                    = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "ListTagsForStreamOutput"}
+	iStartEdgeConfigurationUpdateInput          = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "StartEdgeConfigurationUpdateInput"}
+	iStartEdgeConfigurationUpdateOutput         = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "StartEdgeConfigurationUpdateOutput"}
+	iTagResourceInput                           = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "TagResourceInput"}
+	iTagResourceOutput                          = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "TagResourceOutput"}
+	iTagStreamInput                             = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "TagStreamInput"}
+	iTagStreamOutput                            = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "TagStreamOutput"}
+	iUntagResourceInput                         = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "UntagResourceInput"}
+	iUntagResourceOutput                        = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "UntagResourceOutput"}
+	iUntagStreamInput                           = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "UntagStreamInput"}
+	iUntagStreamOutput                          = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "UntagStreamOutput"}
+	iUpdateDataRetentionInput                   = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "UpdateDataRetentionInput"}
+	iUpdateDataRetentionOutput                  = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "UpdateDataRetentionOutput"}
+	iUpdateImageGenerationConfigurationInput    = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "UpdateImageGenerationConfigurationInput"}
+	iUpdateImageGenerationConfigurationOutput   = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "UpdateImageGenerationConfigurationOutput"}
+	iUpdateMediaStorageConfigurationInput       = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "UpdateMediaStorageConfigurationInput"}
+	iUpdateMediaStorageConfigurationOutput      = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "UpdateMediaStorageConfigurationOutput"}
+	iUpdateNotificationConfigurationInput       = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "UpdateNotificationConfigurationInput"}
+	iUpdateNotificationConfigurationOutput      = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "UpdateNotificationConfigurationOutput"}
+	iUpdateSignalingChannelInput                = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "UpdateSignalingChannelInput"}
+	iUpdateSignalingChannelOutput               = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "UpdateSignalingChannelOutput"}
+	iUpdateStreamInput                          = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "UpdateStreamInput"}
+	iUpdateStreamOutput                         = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "UpdateStreamOutput"}
+	iUpdateStreamStorageConfigurationInput      = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "UpdateStreamStorageConfigurationInput"}
+	iUpdateStreamStorageConfigurationOutput     = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideo", Name: "UpdateStreamStorageConfigurationOutput"}
+	pUnit                                       = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/createSignalingChannel",
-	Code: 200})
-
-var CreateStream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "CreateStream",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/createStream",
-	Code: 200})
-
-var DeleteEdgeConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "DeleteEdgeConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/deleteEdgeConfiguration",
-	Code: 200})
-
-var DeleteSignalingChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "DeleteSignalingChannel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/deleteSignalingChannel",
-	Code: 200})
-
-var DeleteStream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "DeleteStream",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/deleteStream",
-	Code: 200})
-
-var DescribeEdgeConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "DescribeEdgeConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/describeEdgeConfiguration",
-	Code: 200})
-
-var DescribeImageGenerationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "DescribeImageGenerationConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/describeImageGenerationConfiguration",
-	Code: 200})
-
-var DescribeMappedResourceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "DescribeMappedResourceConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/describeMappedResourceConfiguration",
-	Code: 200})
-
-var DescribeMediaStorageConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "DescribeMediaStorageConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/describeMediaStorageConfiguration",
-	Code: 200})
-
-var DescribeNotificationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "DescribeNotificationConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/describeNotificationConfiguration",
-	Code: 200})
-
-var DescribeSignalingChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "DescribeSignalingChannel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/describeSignalingChannel",
-	Code: 200})
-
-var DescribeStream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "DescribeStream",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/describeStream",
-	Code: 200})
-
-var DescribeStreamStorageConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "DescribeStreamStorageConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/describeStreamStorageConfiguration",
-	Code: 200})
-
-var GetDataEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "GetDataEndpoint",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/getDataEndpoint",
-	Code: 200})
-
-var GetSignalingChannelEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "GetSignalingChannelEndpoint",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/getSignalingChannelEndpoint",
-	Code: 200})
-
-var ListEdgeAgentConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "ListEdgeAgentConfigurations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/listEdgeAgentConfigurations",
-	Code: 200})
-
-var ListSignalingChannels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "ListSignalingChannels",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/listSignalingChannels",
-	Code: 200})
-
-var ListStreams = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "ListStreams",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/listStreams",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListTagsForResource",
-	Code: 200})
-
-var ListTagsForStream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "ListTagsForStream",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/listTagsForStream",
-	Code: 200})
-
-var StartEdgeConfigurationUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "StartEdgeConfigurationUpdate",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/startEdgeConfigurationUpdate",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/TagResource",
-	Code: 200})
-
-var TagStream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "TagStream",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tagStream",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/UntagResource",
-	Code: 200})
-
-var UntagStream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "UntagStream",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/untagStream",
-	Code: 200})
-
-var UpdateDataRetention = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "UpdateDataRetention",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/updateDataRetention",
-	Code: 200})
-
-var UpdateImageGenerationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "UpdateImageGenerationConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/updateImageGenerationConfiguration",
-	Code: 200})
-
-var UpdateMediaStorageConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "UpdateMediaStorageConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/updateMediaStorageConfiguration",
-	Code: 200})
-
-var UpdateNotificationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "UpdateNotificationConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/updateNotificationConfiguration",
-	Code: 200})
-
-var UpdateSignalingChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "UpdateSignalingChannel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/updateSignalingChannel",
-	Code: 200})
-
-var UpdateStream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "UpdateStream",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/updateStream",
-	Code: 200})
-
-var UpdateStreamStorageConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "UpdateStreamStorageConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/updateStreamStorageConfiguration",
-	Code: 200})
-
-var _KinesisVideo_20170930 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "KinesisVideo_20170930",
-}, smithy.ShapeTypeService, 0, &smithytraits.XMLNamespace{URI: "https://kinesisvideo.amazonaws.com/doc/2017-09-30/"})
-
-var KinesisVideo_20170930 = smithy.NewServiceSchema(_KinesisVideo_20170930, "2017-09-30")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 401})
-var AccessDeniedException_Message *smithy.Schema
-
-var AccountChannelLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "AccountChannelLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var AccountChannelLimitExceededException_Message *smithy.Schema
-
-var AccountStreamLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "AccountStreamLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var AccountStreamLimitExceededException_Message *smithy.Schema
-
-var APIName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "APIName",
-}, smithy.ShapeTypeEnum, 8)
-var APIName_PUT_MEDIA *smithy.Schema
-
-var APIName_GET_MEDIA *smithy.Schema
-
-var APIName_LIST_FRAGMENTS *smithy.Schema
-
-var APIName_GET_MEDIA_FOR_FRAGMENT_LIST *smithy.Schema
-
-var APIName_GET_HLS_STREAMING_SESSION_URL *smithy.Schema
-
-var APIName_GET_DASH_STREAMING_SESSION_URL *smithy.Schema
-
-var APIName_GET_CLIP *smithy.Schema
-
-var APIName_GET_IMAGES *smithy.Schema
-
-var ChannelInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "ChannelInfo",
-}, smithy.ShapeTypeStructure, 7)
-var ChannelInfo_ChannelName *smithy.Schema
-
-var ChannelInfo_ChannelARN *smithy.Schema
-
-var ChannelInfo_ChannelType *smithy.Schema
-
-var ChannelInfo_ChannelStatus *smithy.Schema
-
-var ChannelInfo_CreationTime *smithy.Schema
-
-var ChannelInfo_SingleMasterConfiguration *smithy.Schema
-
-var ChannelInfo_Version *smithy.Schema
-
-var _ChannelInfoList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "ChannelInfoList",
-}, smithy.ShapeTypeList, 1)
-var _ChannelInfoList_member *smithy.Schema
-
-var _ChannelName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "ChannelName",
-}, smithy.ShapeTypeString, 0)
-
-var ChannelNameCondition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "ChannelNameCondition",
-}, smithy.ShapeTypeStructure, 2)
-var ChannelNameCondition_ComparisonOperator *smithy.Schema
-
-var ChannelNameCondition_ComparisonValue *smithy.Schema
-
-var ChannelProtocol = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "ChannelProtocol",
-}, smithy.ShapeTypeEnum, 3)
-var ChannelProtocol_WSS *smithy.Schema
-
-var ChannelProtocol_HTTPS *smithy.Schema
-
-var ChannelProtocol_WEBRTC *smithy.Schema
-
-var ChannelRole = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "ChannelRole",
-}, smithy.ShapeTypeEnum, 2)
-var ChannelRole_MASTER *smithy.Schema
-
-var ChannelRole_VIEWER *smithy.Schema
-
-var ChannelType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "ChannelType",
-}, smithy.ShapeTypeEnum, 2)
-var ChannelType_SINGLE_MASTER *smithy.Schema
-
-var ChannelType_FULL_MESH *smithy.Schema
-
-var ClientLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "ClientLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ClientLimitExceededException_Message *smithy.Schema
-
-var ComparisonOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "ComparisonOperator",
-}, smithy.ShapeTypeEnum, 1)
-var ComparisonOperator_BEGINS_WITH *smithy.Schema
-
-var ConfigurationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "ConfigurationStatus",
-}, smithy.ShapeTypeEnum, 2)
-var ConfigurationStatus_ENABLED *smithy.Schema
-
-var ConfigurationStatus_DISABLED *smithy.Schema
-
-var _DataEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "DataEndpoint",
-}, smithy.ShapeTypeString, 0)
-
-var _DataRetentionChangeInHours = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "DataRetentionChangeInHours",
-}, smithy.ShapeTypeInteger, 0)
-
-var _DataRetentionInHours = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "DataRetentionInHours",
-}, smithy.ShapeTypeInteger, 0)
-
-var DefaultStorageTier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "DefaultStorageTier",
-}, smithy.ShapeTypeEnum, 2)
-var DefaultStorageTier_HOT *smithy.Schema
-
-var DefaultStorageTier_WARM *smithy.Schema
-
-var _DeleteAfterUpload = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "DeleteAfterUpload",
-}, smithy.ShapeTypeBoolean, 0)
-
-var DeletionConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "DeletionConfig",
-}, smithy.ShapeTypeStructure, 3)
-var DeletionConfig_EdgeRetentionInHours *smithy.Schema
-
-var DeletionConfig_LocalSizeConfig *smithy.Schema
-
-var DeletionConfig_DeleteAfterUpload *smithy.Schema
-
-var _DestinationRegion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "DestinationRegion",
-}, smithy.ShapeTypeString, 0)
-
-var _DestinationUri = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "DestinationUri",
-}, smithy.ShapeTypeString, 0)
-
-var _DeviceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "DeviceName",
-}, smithy.ShapeTypeString, 0)
-
-var DeviceStreamLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "DeviceStreamLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var DeviceStreamLimitExceededException_Message *smithy.Schema
-
-var _DurationInSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "DurationInSeconds",
-}, smithy.ShapeTypeInteger, 0)
-
-var EdgeAgentStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "EdgeAgentStatus",
-}, smithy.ShapeTypeStructure, 2)
-var EdgeAgentStatus_LastRecorderStatus *smithy.Schema
-
-var EdgeAgentStatus_LastUploaderStatus *smithy.Schema
-
-var EdgeConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "EdgeConfig",
-}, smithy.ShapeTypeStructure, 4)
-var EdgeConfig_HubDeviceArn *smithy.Schema
-
-var EdgeConfig_RecorderConfig *smithy.Schema
-
-var EdgeConfig_UploaderConfig *smithy.Schema
-
-var EdgeConfig_DeletionConfig *smithy.Schema
-
-var _EdgeRetentionInHours = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "EdgeRetentionInHours",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _FailedStatusDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "FailedStatusDetails",
-}, smithy.ShapeTypeString, 0)
-
-var Format = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "Format",
-}, smithy.ShapeTypeEnum, 2)
-var Format_JPEG *smithy.Schema
-
-var Format_PNG *smithy.Schema
-
-var _FormatConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "FormatConfig",
-}, smithy.ShapeTypeMap, 2)
-var _FormatConfig_key *smithy.Schema
-
-var _FormatConfig_value *smithy.Schema
-
-var FormatConfigKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "FormatConfigKey",
-}, smithy.ShapeTypeEnum, 1)
-var FormatConfigKey_JPEGQuality *smithy.Schema
-
-var _FormatConfigValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "FormatConfigValue",
-}, smithy.ShapeTypeString, 0)
-
-var _HeightPixels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "HeightPixels",
-}, smithy.ShapeTypeInteger, 0)
-
-var _HubDeviceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "HubDeviceArn",
-}, smithy.ShapeTypeString, 0)
-
-var ImageGenerationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "ImageGenerationConfiguration",
-}, smithy.ShapeTypeStructure, 8)
-var ImageGenerationConfiguration_Status *smithy.Schema
-
-var ImageGenerationConfiguration_ImageSelectorType *smithy.Schema
-
-var ImageGenerationConfiguration_DestinationConfig *smithy.Schema
-
-var ImageGenerationConfiguration_SamplingInterval *smithy.Schema
-
-var ImageGenerationConfiguration_Format *smithy.Schema
-
-var ImageGenerationConfiguration_FormatConfig *smithy.Schema
-
-var ImageGenerationConfiguration_WidthPixels *smithy.Schema
-
-var ImageGenerationConfiguration_HeightPixels *smithy.Schema
-
-var ImageGenerationDestinationConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "ImageGenerationDestinationConfig",
-}, smithy.ShapeTypeStructure, 2)
-var ImageGenerationDestinationConfig_Uri *smithy.Schema
-
-var ImageGenerationDestinationConfig_DestinationRegion *smithy.Schema
-
-var ImageSelectorType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "ImageSelectorType",
-}, smithy.ShapeTypeEnum, 2)
-var ImageSelectorType_SERVER_TIMESTAMP *smithy.Schema
-
-var ImageSelectorType_PRODUCER_TIMESTAMP *smithy.Schema
-
-var InvalidArgumentException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "InvalidArgumentException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidArgumentException_Message *smithy.Schema
-
-var InvalidDeviceException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "InvalidDeviceException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidDeviceException_Message *smithy.Schema
-
-var InvalidResourceFormatException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "InvalidResourceFormatException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidResourceFormatException_Message *smithy.Schema
-
-var _JobStatusDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "JobStatusDetails",
-}, smithy.ShapeTypeString, 0)
-
-var _KmsKeyId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "KmsKeyId",
-}, smithy.ShapeTypeString, 0)
-
-var LastRecorderStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "LastRecorderStatus",
-}, smithy.ShapeTypeStructure, 4)
-var LastRecorderStatus_JobStatusDetails *smithy.Schema
-
-var LastRecorderStatus_LastCollectedTime *smithy.Schema
-
-var LastRecorderStatus_LastUpdatedTime *smithy.Schema
-
-var LastRecorderStatus_RecorderStatus *smithy.Schema
-
-var LastUploaderStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "LastUploaderStatus",
-}, smithy.ShapeTypeStructure, 4)
-var LastUploaderStatus_JobStatusDetails *smithy.Schema
-
-var LastUploaderStatus_LastCollectedTime *smithy.Schema
-
-var LastUploaderStatus_LastUpdatedTime *smithy.Schema
-
-var LastUploaderStatus_UploaderStatus *smithy.Schema
-
-var ListEdgeAgentConfigurationsEdgeConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "ListEdgeAgentConfigurationsEdgeConfig",
-}, smithy.ShapeTypeStructure, 7)
-var ListEdgeAgentConfigurationsEdgeConfig_StreamName *smithy.Schema
-
-var ListEdgeAgentConfigurationsEdgeConfig_StreamARN *smithy.Schema
-
-var ListEdgeAgentConfigurationsEdgeConfig_CreationTime *smithy.Schema
-
-var ListEdgeAgentConfigurationsEdgeConfig_LastUpdatedTime *smithy.Schema
-
-var ListEdgeAgentConfigurationsEdgeConfig_SyncStatus *smithy.Schema
-
-var ListEdgeAgentConfigurationsEdgeConfig_FailedStatusDetails *smithy.Schema
-
-var ListEdgeAgentConfigurationsEdgeConfig_EdgeConfig *smithy.Schema
-
-var _ListEdgeAgentConfigurationsEdgeConfigList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "ListEdgeAgentConfigurationsEdgeConfigList",
-}, smithy.ShapeTypeList, 1)
-var _ListEdgeAgentConfigurationsEdgeConfigList_member *smithy.Schema
-
-var _ListEdgeAgentConfigurationsInputLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "ListEdgeAgentConfigurationsInputLimit",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListOfProtocols = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "ListOfProtocols",
-}, smithy.ShapeTypeList, 1)
-var _ListOfProtocols_member *smithy.Schema
-
-var _ListStreamsInputLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "ListStreamsInputLimit",
-}, smithy.ShapeTypeInteger, 0)
-
-var LocalSizeConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "LocalSizeConfig",
-}, smithy.ShapeTypeStructure, 2)
-var LocalSizeConfig_MaxLocalMediaSizeInMB *smithy.Schema
-
-var LocalSizeConfig_StrategyOnFullSize *smithy.Schema
-
-var _MappedResourceConfigurationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "MappedResourceConfigurationList",
-}, smithy.ShapeTypeList, 1)
-var _MappedResourceConfigurationList_member *smithy.Schema
-
-var MappedResourceConfigurationListItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "MappedResourceConfigurationListItem",
-}, smithy.ShapeTypeStructure, 2)
-var MappedResourceConfigurationListItem_Type *smithy.Schema
-
-var MappedResourceConfigurationListItem_ARN *smithy.Schema
-
-var _MappedResourceConfigurationListLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "MappedResourceConfigurationListLimit",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxLocalMediaSizeInMB = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "MaxLocalMediaSizeInMB",
-}, smithy.ShapeTypeInteger, 0)
-
-var MediaSourceConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "MediaSourceConfig",
-}, smithy.ShapeTypeStructure, 2)
-var MediaSourceConfig_MediaUriSecretArn *smithy.Schema
-
-var MediaSourceConfig_MediaUriType *smithy.Schema
-
-var MediaStorageConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "MediaStorageConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var MediaStorageConfiguration_StreamARN *smithy.Schema
-
-var MediaStorageConfiguration_Status *smithy.Schema
-
-var MediaStorageConfigurationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "MediaStorageConfigurationStatus",
-}, smithy.ShapeTypeEnum, 2)
-var MediaStorageConfigurationStatus_ENABLED *smithy.Schema
-
-var MediaStorageConfigurationStatus_DISABLED *smithy.Schema
-
-var _MediaType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "MediaType",
-}, smithy.ShapeTypeString, 0)
-
-var _MediaUriSecretArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "MediaUriSecretArn",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var MediaUriType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "MediaUriType",
-}, smithy.ShapeTypeEnum, 2)
-var MediaUriType_RTSP_URI *smithy.Schema
-
-var MediaUriType_FILE_URI *smithy.Schema
-
-var _MessageTtlSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "MessageTtlSeconds",
-}, smithy.ShapeTypeInteger, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var NoDataRetentionException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "NoDataRetentionException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var NoDataRetentionException_Message *smithy.Schema
-
-var NotAuthorizedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "NotAuthorizedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 401})
-var NotAuthorizedException_Message *smithy.Schema
-
-var NotificationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "NotificationConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var NotificationConfiguration_Status *smithy.Schema
-
-var NotificationConfiguration_DestinationConfig *smithy.Schema
-
-var NotificationDestinationConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "NotificationDestinationConfig",
-}, smithy.ShapeTypeStructure, 1)
-var NotificationDestinationConfig_Uri *smithy.Schema
-
-var RecorderConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "RecorderConfig",
-}, smithy.ShapeTypeStructure, 2)
-var RecorderConfig_MediaSourceConfig *smithy.Schema
-
-var RecorderConfig_ScheduleConfig *smithy.Schema
-
-var RecorderStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "RecorderStatus",
-}, smithy.ShapeTypeEnum, 3)
-var RecorderStatus_SUCCESS *smithy.Schema
-
-var RecorderStatus_USER_ERROR *smithy.Schema
-
-var RecorderStatus_SYSTEM_ERROR *smithy.Schema
-
-var _ResourceARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "ResourceARN",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "ResourceEndpoint",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceEndpointList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "ResourceEndpointList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceEndpointList_member *smithy.Schema
-
-var ResourceEndpointListItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "ResourceEndpointListItem",
-}, smithy.ShapeTypeStructure, 2)
-var ResourceEndpointListItem_Protocol *smithy.Schema
-
-var ResourceEndpointListItem_ResourceEndpoint *smithy.Schema
-
-var ResourceInUseException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "ResourceInUseException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ResourceInUseException_Message *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var _ResourceTags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "ResourceTags",
-}, smithy.ShapeTypeMap, 2)
-var _ResourceTags_key *smithy.Schema
-
-var _ResourceTags_value *smithy.Schema
-
-var _SamplingInterval = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "SamplingInterval",
-}, smithy.ShapeTypeInteger, 0)
-
-var ScheduleConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "ScheduleConfig",
-}, smithy.ShapeTypeStructure, 2)
-var ScheduleConfig_ScheduleExpression *smithy.Schema
-
-var ScheduleConfig_DurationInSeconds *smithy.Schema
-
-var _ScheduleExpression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "ScheduleExpression",
-}, smithy.ShapeTypeString, 0)
-
-var SingleMasterChannelEndpointConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "SingleMasterChannelEndpointConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var SingleMasterChannelEndpointConfiguration_Protocols *smithy.Schema
-
-var SingleMasterChannelEndpointConfiguration_Role *smithy.Schema
-
-var SingleMasterConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "SingleMasterConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var SingleMasterConfiguration_MessageTtlSeconds *smithy.Schema
-
-var Status = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "Status",
-}, smithy.ShapeTypeEnum, 4)
-var Status_CREATING *smithy.Schema
-
-var Status_ACTIVE *smithy.Schema
-
-var Status_UPDATING *smithy.Schema
-
-var Status_DELETING *smithy.Schema
-
-var StrategyOnFullSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "StrategyOnFullSize",
-}, smithy.ShapeTypeEnum, 2)
-var StrategyOnFullSize_DELETE_OLDEST_MEDIA *smithy.Schema
-
-var StrategyOnFullSize_DENY_NEW_MEDIA *smithy.Schema
-
-var StreamEdgeConfigurationNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "StreamEdgeConfigurationNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var StreamEdgeConfigurationNotFoundException_Message *smithy.Schema
-
-var StreamInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "StreamInfo",
-}, smithy.ShapeTypeStructure, 9)
-var StreamInfo_DeviceName *smithy.Schema
-
-var StreamInfo_StreamName *smithy.Schema
-
-var StreamInfo_StreamARN *smithy.Schema
-
-var StreamInfo_MediaType *smithy.Schema
-
-var StreamInfo_KmsKeyId *smithy.Schema
-
-var StreamInfo_Version *smithy.Schema
-
-var StreamInfo_Status *smithy.Schema
-
-var StreamInfo_CreationTime *smithy.Schema
-
-var StreamInfo_DataRetentionInHours *smithy.Schema
-
-var _StreamInfoList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "StreamInfoList",
-}, smithy.ShapeTypeList, 1)
-var _StreamInfoList_member *smithy.Schema
-
-var _StreamName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "StreamName",
-}, smithy.ShapeTypeString, 0)
-
-var StreamNameCondition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "StreamNameCondition",
-}, smithy.ShapeTypeStructure, 2)
-var StreamNameCondition_ComparisonOperator *smithy.Schema
-
-var StreamNameCondition_ComparisonValue *smithy.Schema
-
-var StreamStorageConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "StreamStorageConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var StreamStorageConfiguration_DefaultStorageTier *smithy.Schema
-
-var SyncStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "SyncStatus",
-}, smithy.ShapeTypeEnum, 7)
-var SyncStatus_SYNCING *smithy.Schema
-
-var SyncStatus_ACKNOWLEDGED *smithy.Schema
-
-var SyncStatus_IN_SYNC *smithy.Schema
-
-var SyncStatus_SYNC_FAILED *smithy.Schema
-
-var SyncStatus_DELETING *smithy.Schema
-
-var SyncStatus_DELETE_FAILED *smithy.Schema
-
-var SyncStatus_DELETING_ACKNOWLEDGED *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagOnCreateList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "TagOnCreateList",
-}, smithy.ShapeTypeList, 1)
-var _TagOnCreateList_member *smithy.Schema
-
-var TagsPerResourceExceededLimitException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "TagsPerResourceExceededLimitException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var TagsPerResourceExceededLimitException_Message *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _Type = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "Type",
-}, smithy.ShapeTypeString, 0)
-
-var UpdateDataRetentionOperation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "UpdateDataRetentionOperation",
-}, smithy.ShapeTypeEnum, 2)
-var UpdateDataRetentionOperation_INCREASE_DATA_RETENTION *smithy.Schema
-
-var UpdateDataRetentionOperation_DECREASE_DATA_RETENTION *smithy.Schema
-
-var UploaderConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "UploaderConfig",
-}, smithy.ShapeTypeStructure, 1)
-var UploaderConfig_ScheduleConfig *smithy.Schema
-
-var UploaderStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "UploaderStatus",
-}, smithy.ShapeTypeEnum, 3)
-var UploaderStatus_SUCCESS *smithy.Schema
-
-var UploaderStatus_USER_ERROR *smithy.Schema
-
-var UploaderStatus_SYSTEM_ERROR *smithy.Schema
-
-var _Version = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "Version",
-}, smithy.ShapeTypeString, 0)
-
-var VersionMismatchException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "VersionMismatchException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var VersionMismatchException_Message *smithy.Schema
-
-var _WidthPixels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "WidthPixels",
-}, smithy.ShapeTypeInteger, 0)
-
-var CreateSignalingChannelInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "CreateSignalingChannelInput",
-}, smithy.ShapeTypeStructure, 4)
-var CreateSignalingChannelInput_ChannelName *smithy.Schema
-
-var CreateSignalingChannelInput_ChannelType *smithy.Schema
-
-var CreateSignalingChannelInput_SingleMasterConfiguration *smithy.Schema
-
-var CreateSignalingChannelInput_Tags *smithy.Schema
-
-var CreateSignalingChannelOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "CreateSignalingChannelOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateSignalingChannelOutput_ChannelARN *smithy.Schema
-
-var CreateStreamInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "CreateStreamInput",
-}, smithy.ShapeTypeStructure, 7)
-var CreateStreamInput_DeviceName *smithy.Schema
-
-var CreateStreamInput_StreamName *smithy.Schema
-
-var CreateStreamInput_MediaType *smithy.Schema
-
-var CreateStreamInput_KmsKeyId *smithy.Schema
-
-var CreateStreamInput_DataRetentionInHours *smithy.Schema
-
-var CreateStreamInput_Tags *smithy.Schema
-
-var CreateStreamInput_StreamStorageConfiguration *smithy.Schema
-
-var CreateStreamOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "CreateStreamOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateStreamOutput_StreamARN *smithy.Schema
-
-var DeleteEdgeConfigurationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "DeleteEdgeConfigurationInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteEdgeConfigurationInput_StreamName *smithy.Schema
-
-var DeleteEdgeConfigurationInput_StreamARN *smithy.Schema
-
-var DeleteEdgeConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "DeleteEdgeConfigurationOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteSignalingChannelInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "DeleteSignalingChannelInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteSignalingChannelInput_ChannelARN *smithy.Schema
-
-var DeleteSignalingChannelInput_CurrentVersion *smithy.Schema
-
-var DeleteSignalingChannelOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "DeleteSignalingChannelOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteStreamInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "DeleteStreamInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteStreamInput_StreamARN *smithy.Schema
-
-var DeleteStreamInput_CurrentVersion *smithy.Schema
-
-var DeleteStreamOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "DeleteStreamOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DescribeEdgeConfigurationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "DescribeEdgeConfigurationInput",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeEdgeConfigurationInput_StreamName *smithy.Schema
-
-var DescribeEdgeConfigurationInput_StreamARN *smithy.Schema
-
-var DescribeEdgeConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "DescribeEdgeConfigurationOutput",
-}, smithy.ShapeTypeStructure, 8)
-var DescribeEdgeConfigurationOutput_StreamName *smithy.Schema
-
-var DescribeEdgeConfigurationOutput_StreamARN *smithy.Schema
-
-var DescribeEdgeConfigurationOutput_CreationTime *smithy.Schema
-
-var DescribeEdgeConfigurationOutput_LastUpdatedTime *smithy.Schema
-
-var DescribeEdgeConfigurationOutput_SyncStatus *smithy.Schema
-
-var DescribeEdgeConfigurationOutput_FailedStatusDetails *smithy.Schema
-
-var DescribeEdgeConfigurationOutput_EdgeConfig *smithy.Schema
-
-var DescribeEdgeConfigurationOutput_EdgeAgentStatus *smithy.Schema
-
-var DescribeImageGenerationConfigurationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "DescribeImageGenerationConfigurationInput",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeImageGenerationConfigurationInput_StreamName *smithy.Schema
-
-var DescribeImageGenerationConfigurationInput_StreamARN *smithy.Schema
-
-var DescribeImageGenerationConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "DescribeImageGenerationConfigurationOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeImageGenerationConfigurationOutput_ImageGenerationConfiguration *smithy.Schema
-
-var DescribeMappedResourceConfigurationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "DescribeMappedResourceConfigurationInput",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeMappedResourceConfigurationInput_StreamName *smithy.Schema
-
-var DescribeMappedResourceConfigurationInput_StreamARN *smithy.Schema
-
-var DescribeMappedResourceConfigurationInput_MaxResults *smithy.Schema
-
-var DescribeMappedResourceConfigurationInput_NextToken *smithy.Schema
-
-var DescribeMappedResourceConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "DescribeMappedResourceConfigurationOutput",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeMappedResourceConfigurationOutput_MappedResourceConfigurationList *smithy.Schema
-
-var DescribeMappedResourceConfigurationOutput_NextToken *smithy.Schema
-
-var DescribeMediaStorageConfigurationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "DescribeMediaStorageConfigurationInput",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeMediaStorageConfigurationInput_ChannelName *smithy.Schema
-
-var DescribeMediaStorageConfigurationInput_ChannelARN *smithy.Schema
-
-var DescribeMediaStorageConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "DescribeMediaStorageConfigurationOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeMediaStorageConfigurationOutput_MediaStorageConfiguration *smithy.Schema
-
-var DescribeNotificationConfigurationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "DescribeNotificationConfigurationInput",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeNotificationConfigurationInput_StreamName *smithy.Schema
-
-var DescribeNotificationConfigurationInput_StreamARN *smithy.Schema
-
-var DescribeNotificationConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "DescribeNotificationConfigurationOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeNotificationConfigurationOutput_NotificationConfiguration *smithy.Schema
-
-var DescribeSignalingChannelInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "DescribeSignalingChannelInput",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeSignalingChannelInput_ChannelName *smithy.Schema
-
-var DescribeSignalingChannelInput_ChannelARN *smithy.Schema
-
-var DescribeSignalingChannelOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "DescribeSignalingChannelOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeSignalingChannelOutput_ChannelInfo *smithy.Schema
-
-var DescribeStreamInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "DescribeStreamInput",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeStreamInput_StreamName *smithy.Schema
-
-var DescribeStreamInput_StreamARN *smithy.Schema
-
-var DescribeStreamOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "DescribeStreamOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeStreamOutput_StreamInfo *smithy.Schema
-
-var DescribeStreamStorageConfigurationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "DescribeStreamStorageConfigurationInput",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeStreamStorageConfigurationInput_StreamName *smithy.Schema
-
-var DescribeStreamStorageConfigurationInput_StreamARN *smithy.Schema
-
-var DescribeStreamStorageConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "DescribeStreamStorageConfigurationOutput",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeStreamStorageConfigurationOutput_StreamName *smithy.Schema
-
-var DescribeStreamStorageConfigurationOutput_StreamARN *smithy.Schema
-
-var DescribeStreamStorageConfigurationOutput_StreamStorageConfiguration *smithy.Schema
-
-var GetDataEndpointInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "GetDataEndpointInput",
-}, smithy.ShapeTypeStructure, 3)
-var GetDataEndpointInput_StreamName *smithy.Schema
-
-var GetDataEndpointInput_StreamARN *smithy.Schema
-
-var GetDataEndpointInput_APIName *smithy.Schema
-
-var GetDataEndpointOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "GetDataEndpointOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetDataEndpointOutput_DataEndpoint *smithy.Schema
-
-var GetSignalingChannelEndpointInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "GetSignalingChannelEndpointInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetSignalingChannelEndpointInput_ChannelARN *smithy.Schema
-
-var GetSignalingChannelEndpointInput_SingleMasterChannelEndpointConfiguration *smithy.Schema
-
-var GetSignalingChannelEndpointOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "GetSignalingChannelEndpointOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetSignalingChannelEndpointOutput_ResourceEndpointList *smithy.Schema
-
-var ListEdgeAgentConfigurationsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "ListEdgeAgentConfigurationsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListEdgeAgentConfigurationsInput_HubDeviceArn *smithy.Schema
-
-var ListEdgeAgentConfigurationsInput_MaxResults *smithy.Schema
-
-var ListEdgeAgentConfigurationsInput_NextToken *smithy.Schema
-
-var ListEdgeAgentConfigurationsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "ListEdgeAgentConfigurationsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListEdgeAgentConfigurationsOutput_EdgeConfigs *smithy.Schema
-
-var ListEdgeAgentConfigurationsOutput_NextToken *smithy.Schema
-
-var ListSignalingChannelsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "ListSignalingChannelsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListSignalingChannelsInput_MaxResults *smithy.Schema
-
-var ListSignalingChannelsInput_NextToken *smithy.Schema
-
-var ListSignalingChannelsInput_ChannelNameCondition *smithy.Schema
-
-var ListSignalingChannelsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "ListSignalingChannelsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListSignalingChannelsOutput_ChannelInfoList *smithy.Schema
-
-var ListSignalingChannelsOutput_NextToken *smithy.Schema
-
-var ListStreamsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "ListStreamsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListStreamsInput_MaxResults *smithy.Schema
-
-var ListStreamsInput_NextToken *smithy.Schema
-
-var ListStreamsInput_StreamNameCondition *smithy.Schema
-
-var ListStreamsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "ListStreamsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListStreamsOutput_StreamInfoList *smithy.Schema
-
-var ListStreamsOutput_NextToken *smithy.Schema
-
-var ListTagsForResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "ListTagsForResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListTagsForResourceInput_NextToken *smithy.Schema
-
-var ListTagsForResourceInput_ResourceARN *smithy.Schema
-
-var ListTagsForResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "ListTagsForResourceOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListTagsForResourceOutput_NextToken *smithy.Schema
-
-var ListTagsForResourceOutput_Tags *smithy.Schema
-
-var ListTagsForStreamInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "ListTagsForStreamInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListTagsForStreamInput_NextToken *smithy.Schema
-
-var ListTagsForStreamInput_StreamARN *smithy.Schema
-
-var ListTagsForStreamInput_StreamName *smithy.Schema
-
-var ListTagsForStreamOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "ListTagsForStreamOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListTagsForStreamOutput_NextToken *smithy.Schema
-
-var ListTagsForStreamOutput_Tags *smithy.Schema
-
-var StartEdgeConfigurationUpdateInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "StartEdgeConfigurationUpdateInput",
-}, smithy.ShapeTypeStructure, 3)
-var StartEdgeConfigurationUpdateInput_StreamName *smithy.Schema
-
-var StartEdgeConfigurationUpdateInput_StreamARN *smithy.Schema
-
-var StartEdgeConfigurationUpdateInput_EdgeConfig *smithy.Schema
-
-var StartEdgeConfigurationUpdateOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "StartEdgeConfigurationUpdateOutput",
-}, smithy.ShapeTypeStructure, 7)
-var StartEdgeConfigurationUpdateOutput_StreamName *smithy.Schema
-
-var StartEdgeConfigurationUpdateOutput_StreamARN *smithy.Schema
-
-var StartEdgeConfigurationUpdateOutput_CreationTime *smithy.Schema
-
-var StartEdgeConfigurationUpdateOutput_LastUpdatedTime *smithy.Schema
-
-var StartEdgeConfigurationUpdateOutput_SyncStatus *smithy.Schema
-
-var StartEdgeConfigurationUpdateOutput_FailedStatusDetails *smithy.Schema
-
-var StartEdgeConfigurationUpdateOutput_EdgeConfig *smithy.Schema
-
-var TagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "TagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceInput_ResourceARN *smithy.Schema
-
-var TagResourceInput_Tags *smithy.Schema
-
-var TagResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "TagResourceOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var TagStreamInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "TagStreamInput",
-}, smithy.ShapeTypeStructure, 3)
-var TagStreamInput_StreamARN *smithy.Schema
-
-var TagStreamInput_StreamName *smithy.Schema
-
-var TagStreamInput_Tags *smithy.Schema
-
-var TagStreamOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "TagStreamOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "UntagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceInput_ResourceARN *smithy.Schema
-
-var UntagResourceInput_TagKeyList *smithy.Schema
-
-var UntagResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "UntagResourceOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagStreamInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "UntagStreamInput",
-}, smithy.ShapeTypeStructure, 3)
-var UntagStreamInput_StreamARN *smithy.Schema
-
-var UntagStreamInput_StreamName *smithy.Schema
-
-var UntagStreamInput_TagKeyList *smithy.Schema
-
-var UntagStreamOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "UntagStreamOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateDataRetentionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "UpdateDataRetentionInput",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateDataRetentionInput_StreamName *smithy.Schema
-
-var UpdateDataRetentionInput_StreamARN *smithy.Schema
-
-var UpdateDataRetentionInput_CurrentVersion *smithy.Schema
-
-var UpdateDataRetentionInput_Operation *smithy.Schema
-
-var UpdateDataRetentionInput_DataRetentionChangeInHours *smithy.Schema
-
-var UpdateDataRetentionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "UpdateDataRetentionOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateImageGenerationConfigurationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "UpdateImageGenerationConfigurationInput",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateImageGenerationConfigurationInput_StreamName *smithy.Schema
-
-var UpdateImageGenerationConfigurationInput_StreamARN *smithy.Schema
-
-var UpdateImageGenerationConfigurationInput_ImageGenerationConfiguration *smithy.Schema
-
-var UpdateImageGenerationConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "UpdateImageGenerationConfigurationOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateMediaStorageConfigurationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "UpdateMediaStorageConfigurationInput",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateMediaStorageConfigurationInput_ChannelARN *smithy.Schema
-
-var UpdateMediaStorageConfigurationInput_MediaStorageConfiguration *smithy.Schema
-
-var UpdateMediaStorageConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "UpdateMediaStorageConfigurationOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateNotificationConfigurationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "UpdateNotificationConfigurationInput",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateNotificationConfigurationInput_StreamName *smithy.Schema
-
-var UpdateNotificationConfigurationInput_StreamARN *smithy.Schema
-
-var UpdateNotificationConfigurationInput_NotificationConfiguration *smithy.Schema
-
-var UpdateNotificationConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "UpdateNotificationConfigurationOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateSignalingChannelInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "UpdateSignalingChannelInput",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateSignalingChannelInput_ChannelARN *smithy.Schema
-
-var UpdateSignalingChannelInput_CurrentVersion *smithy.Schema
-
-var UpdateSignalingChannelInput_SingleMasterConfiguration *smithy.Schema
-
-var UpdateSignalingChannelOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "UpdateSignalingChannelOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateStreamInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "UpdateStreamInput",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateStreamInput_StreamName *smithy.Schema
-
-var UpdateStreamInput_StreamARN *smithy.Schema
-
-var UpdateStreamInput_CurrentVersion *smithy.Schema
-
-var UpdateStreamInput_DeviceName *smithy.Schema
-
-var UpdateStreamInput_MediaType *smithy.Schema
-
-var UpdateStreamOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "UpdateStreamOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateStreamStorageConfigurationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "UpdateStreamStorageConfigurationInput",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateStreamStorageConfigurationInput_StreamName *smithy.Schema
-
-var UpdateStreamStorageConfigurationInput_StreamARN *smithy.Schema
-
-var UpdateStreamStorageConfigurationInput_CurrentVersion *smithy.Schema
-
-var UpdateStreamStorageConfigurationInput_StreamStorageConfiguration *smithy.Schema
-
-var UpdateStreamStorageConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideo",
-	Name:      "UpdateStreamStorageConfigurationOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _ErrorMessage)
-
-	AccountChannelLimitExceededException_Message = AccountChannelLimitExceededException.AddMember("Message", _ErrorMessage)
-
-	AccountStreamLimitExceededException_Message = AccountStreamLimitExceededException.AddMember("Message", _ErrorMessage)
-
-	APIName_PUT_MEDIA = APIName.AddMember("PUT_MEDIA", smithyprelude.Unit)
-
-	APIName_GET_MEDIA = APIName.AddMember("GET_MEDIA", smithyprelude.Unit)
-
-	APIName_LIST_FRAGMENTS = APIName.AddMember("LIST_FRAGMENTS", smithyprelude.Unit)
-
-	APIName_GET_MEDIA_FOR_FRAGMENT_LIST = APIName.AddMember("GET_MEDIA_FOR_FRAGMENT_LIST", smithyprelude.Unit)
-
-	APIName_GET_HLS_STREAMING_SESSION_URL = APIName.AddMember("GET_HLS_STREAMING_SESSION_URL", smithyprelude.Unit)
-
-	APIName_GET_DASH_STREAMING_SESSION_URL = APIName.AddMember("GET_DASH_STREAMING_SESSION_URL", smithyprelude.Unit)
-
-	APIName_GET_CLIP = APIName.AddMember("GET_CLIP", smithyprelude.Unit)
-
-	APIName_GET_IMAGES = APIName.AddMember("GET_IMAGES", smithyprelude.Unit)
-
-	ChannelType_SINGLE_MASTER = ChannelType.AddMember("SINGLE_MASTER", smithyprelude.Unit)
-
-	ChannelType_FULL_MESH = ChannelType.AddMember("FULL_MESH", smithyprelude.Unit)
-
-	Status_CREATING = Status.AddMember("CREATING", smithyprelude.Unit)
-
-	Status_ACTIVE = Status.AddMember("ACTIVE", smithyprelude.Unit)
-
-	Status_UPDATING = Status.AddMember("UPDATING", smithyprelude.Unit)
-
-	Status_DELETING = Status.AddMember("DELETING", smithyprelude.Unit)
-
-	SingleMasterConfiguration_MessageTtlSeconds = SingleMasterConfiguration.AddMember("MessageTtlSeconds", _MessageTtlSeconds)
-
-	ChannelInfo_ChannelName = ChannelInfo.AddMember("ChannelName", _ChannelName)
-
-	ChannelInfo_ChannelARN = ChannelInfo.AddMember("ChannelARN", _ResourceARN)
-
-	ChannelInfo_ChannelType = ChannelInfo.AddMember("ChannelType", ChannelType)
-
-	ChannelInfo_ChannelStatus = ChannelInfo.AddMember("ChannelStatus", Status)
-
-	ChannelInfo_CreationTime = ChannelInfo.AddMember("CreationTime", _Timestamp)
-
-	ChannelInfo_SingleMasterConfiguration = ChannelInfo.AddMember("SingleMasterConfiguration", SingleMasterConfiguration)
-
-	ChannelInfo_Version = ChannelInfo.AddMember("Version", _Version)
-
-	_ChannelInfoList_member = _ChannelInfoList.AddMember("member", ChannelInfo)
-
-	ComparisonOperator_BEGINS_WITH = ComparisonOperator.AddMember("BEGINS_WITH", smithyprelude.Unit)
-
-	ChannelNameCondition_ComparisonOperator = ChannelNameCondition.AddMember("ComparisonOperator", ComparisonOperator)
-
-	ChannelNameCondition_ComparisonValue = ChannelNameCondition.AddMember("ComparisonValue", _ChannelName)
-
-	ChannelProtocol_WSS = ChannelProtocol.AddMember("WSS", smithyprelude.Unit)
-
-	ChannelProtocol_HTTPS = ChannelProtocol.AddMember("HTTPS", smithyprelude.Unit)
-
-	ChannelProtocol_WEBRTC = ChannelProtocol.AddMember("WEBRTC", smithyprelude.Unit)
-
-	ChannelRole_MASTER = ChannelRole.AddMember("MASTER", smithyprelude.Unit)
-
-	ChannelRole_VIEWER = ChannelRole.AddMember("VIEWER", smithyprelude.Unit)
-
-	ClientLimitExceededException_Message = ClientLimitExceededException.AddMember("Message", _ErrorMessage)
-
-	ConfigurationStatus_ENABLED = ConfigurationStatus.AddMember("ENABLED", smithyprelude.Unit)
-
-	ConfigurationStatus_DISABLED = ConfigurationStatus.AddMember("DISABLED", smithyprelude.Unit)
-
-	DefaultStorageTier_HOT = DefaultStorageTier.AddMember("HOT", smithyprelude.Unit)
-
-	DefaultStorageTier_WARM = DefaultStorageTier.AddMember("WARM", smithyprelude.Unit)
-
-	StrategyOnFullSize_DELETE_OLDEST_MEDIA = StrategyOnFullSize.AddMember("DELETE_OLDEST_MEDIA", smithyprelude.Unit)
-
-	StrategyOnFullSize_DENY_NEW_MEDIA = StrategyOnFullSize.AddMember("DENY_NEW_MEDIA", smithyprelude.Unit)
-
-	LocalSizeConfig_MaxLocalMediaSizeInMB = LocalSizeConfig.AddMember("MaxLocalMediaSizeInMB", _MaxLocalMediaSizeInMB)
-
-	LocalSizeConfig_StrategyOnFullSize = LocalSizeConfig.AddMember("StrategyOnFullSize", StrategyOnFullSize)
-
-	DeletionConfig_EdgeRetentionInHours = DeletionConfig.AddMember("EdgeRetentionInHours", _EdgeRetentionInHours)
-
-	DeletionConfig_LocalSizeConfig = DeletionConfig.AddMember("LocalSizeConfig", LocalSizeConfig)
-
-	DeletionConfig_DeleteAfterUpload = DeletionConfig.AddMember("DeleteAfterUpload", _DeleteAfterUpload)
-
-	DeviceStreamLimitExceededException_Message = DeviceStreamLimitExceededException.AddMember("Message", _ErrorMessage)
-
-	RecorderStatus_SUCCESS = RecorderStatus.AddMember("SUCCESS", smithyprelude.Unit)
-
-	RecorderStatus_USER_ERROR = RecorderStatus.AddMember("USER_ERROR", smithyprelude.Unit)
-
-	RecorderStatus_SYSTEM_ERROR = RecorderStatus.AddMember("SYSTEM_ERROR", smithyprelude.Unit)
-
-	LastRecorderStatus_JobStatusDetails = LastRecorderStatus.AddMember("JobStatusDetails", _JobStatusDetails)
-
-	LastRecorderStatus_LastCollectedTime = LastRecorderStatus.AddMember("LastCollectedTime", _Timestamp)
-
-	LastRecorderStatus_LastUpdatedTime = LastRecorderStatus.AddMember("LastUpdatedTime", _Timestamp)
-
-	LastRecorderStatus_RecorderStatus = LastRecorderStatus.AddMember("RecorderStatus", RecorderStatus)
-
-	UploaderStatus_SUCCESS = UploaderStatus.AddMember("SUCCESS", smithyprelude.Unit)
-
-	UploaderStatus_USER_ERROR = UploaderStatus.AddMember("USER_ERROR", smithyprelude.Unit)
-
-	UploaderStatus_SYSTEM_ERROR = UploaderStatus.AddMember("SYSTEM_ERROR", smithyprelude.Unit)
-
-	LastUploaderStatus_JobStatusDetails = LastUploaderStatus.AddMember("JobStatusDetails", _JobStatusDetails)
-
-	LastUploaderStatus_LastCollectedTime = LastUploaderStatus.AddMember("LastCollectedTime", _Timestamp)
-
-	LastUploaderStatus_LastUpdatedTime = LastUploaderStatus.AddMember("LastUpdatedTime", _Timestamp)
-
-	LastUploaderStatus_UploaderStatus = LastUploaderStatus.AddMember("UploaderStatus", UploaderStatus)
-
-	EdgeAgentStatus_LastRecorderStatus = EdgeAgentStatus.AddMember("LastRecorderStatus", LastRecorderStatus)
-
-	EdgeAgentStatus_LastUploaderStatus = EdgeAgentStatus.AddMember("LastUploaderStatus", LastUploaderStatus)
-
-	MediaUriType_RTSP_URI = MediaUriType.AddMember("RTSP_URI", smithyprelude.Unit)
-
-	MediaUriType_FILE_URI = MediaUriType.AddMember("FILE_URI", smithyprelude.Unit)
-
-	MediaSourceConfig_MediaUriSecretArn = MediaSourceConfig.AddMember("MediaUriSecretArn", _MediaUriSecretArn)
-
-	MediaSourceConfig_MediaUriType = MediaSourceConfig.AddMember("MediaUriType", MediaUriType)
-
-	ScheduleConfig_ScheduleExpression = ScheduleConfig.AddMember("ScheduleExpression", _ScheduleExpression)
-
-	ScheduleConfig_DurationInSeconds = ScheduleConfig.AddMember("DurationInSeconds", _DurationInSeconds)
-
-	RecorderConfig_MediaSourceConfig = RecorderConfig.AddMember("MediaSourceConfig", MediaSourceConfig)
-
-	RecorderConfig_ScheduleConfig = RecorderConfig.AddMember("ScheduleConfig", ScheduleConfig)
-
-	UploaderConfig_ScheduleConfig = UploaderConfig.AddMember("ScheduleConfig", ScheduleConfig)
-
-	EdgeConfig_HubDeviceArn = EdgeConfig.AddMember("HubDeviceArn", _HubDeviceArn)
-
-	EdgeConfig_RecorderConfig = EdgeConfig.AddMember("RecorderConfig", RecorderConfig)
-
-	EdgeConfig_UploaderConfig = EdgeConfig.AddMember("UploaderConfig", UploaderConfig)
-
-	EdgeConfig_DeletionConfig = EdgeConfig.AddMember("DeletionConfig", DeletionConfig)
-
-	Format_JPEG = Format.AddMember("JPEG", smithyprelude.Unit)
-
-	Format_PNG = Format.AddMember("PNG", smithyprelude.Unit)
-
-	FormatConfigKey_JPEGQuality = FormatConfigKey.AddMember("JPEGQuality", smithyprelude.Unit)
-
-	_FormatConfig_key = _FormatConfig.AddMember("key", FormatConfigKey)
-
-	_FormatConfig_value = _FormatConfig.AddMember("value", _FormatConfigValue)
-
-	ImageSelectorType_SERVER_TIMESTAMP = ImageSelectorType.AddMember("SERVER_TIMESTAMP", smithyprelude.Unit)
-
-	ImageSelectorType_PRODUCER_TIMESTAMP = ImageSelectorType.AddMember("PRODUCER_TIMESTAMP", smithyprelude.Unit)
-
-	ImageGenerationDestinationConfig_Uri = ImageGenerationDestinationConfig.AddMember("Uri", _DestinationUri)
-
-	ImageGenerationDestinationConfig_DestinationRegion = ImageGenerationDestinationConfig.AddMember("DestinationRegion", _DestinationRegion)
-
-	ImageGenerationConfiguration_Status = ImageGenerationConfiguration.AddMember("Status", ConfigurationStatus)
-
-	ImageGenerationConfiguration_ImageSelectorType = ImageGenerationConfiguration.AddMember("ImageSelectorType", ImageSelectorType)
-
-	ImageGenerationConfiguration_DestinationConfig = ImageGenerationConfiguration.AddMember("DestinationConfig", ImageGenerationDestinationConfig)
-
-	ImageGenerationConfiguration_SamplingInterval = ImageGenerationConfiguration.AddMember("SamplingInterval", _SamplingInterval)
-
-	ImageGenerationConfiguration_Format = ImageGenerationConfiguration.AddMember("Format", Format)
-
-	ImageGenerationConfiguration_FormatConfig = ImageGenerationConfiguration.AddMember("FormatConfig", _FormatConfig)
-
-	ImageGenerationConfiguration_WidthPixels = ImageGenerationConfiguration.AddMember("WidthPixels", _WidthPixels)
-
-	ImageGenerationConfiguration_HeightPixels = ImageGenerationConfiguration.AddMember("HeightPixels", _HeightPixels)
-
-	InvalidArgumentException_Message = InvalidArgumentException.AddMember("Message", _ErrorMessage)
-
-	InvalidDeviceException_Message = InvalidDeviceException.AddMember("Message", _ErrorMessage)
-
-	InvalidResourceFormatException_Message = InvalidResourceFormatException.AddMember("Message", _ErrorMessage)
-
-	SyncStatus_SYNCING = SyncStatus.AddMember("SYNCING", smithyprelude.Unit)
-
-	SyncStatus_ACKNOWLEDGED = SyncStatus.AddMember("ACKNOWLEDGED", smithyprelude.Unit)
-
-	SyncStatus_IN_SYNC = SyncStatus.AddMember("IN_SYNC", smithyprelude.Unit)
-
-	SyncStatus_SYNC_FAILED = SyncStatus.AddMember("SYNC_FAILED", smithyprelude.Unit)
-
-	SyncStatus_DELETING = SyncStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	SyncStatus_DELETE_FAILED = SyncStatus.AddMember("DELETE_FAILED", smithyprelude.Unit)
-
-	SyncStatus_DELETING_ACKNOWLEDGED = SyncStatus.AddMember("DELETING_ACKNOWLEDGED", smithyprelude.Unit)
-
-	ListEdgeAgentConfigurationsEdgeConfig_StreamName = ListEdgeAgentConfigurationsEdgeConfig.AddMember("StreamName", _StreamName)
-
-	ListEdgeAgentConfigurationsEdgeConfig_StreamARN = ListEdgeAgentConfigurationsEdgeConfig.AddMember("StreamARN", _ResourceARN)
-
-	ListEdgeAgentConfigurationsEdgeConfig_CreationTime = ListEdgeAgentConfigurationsEdgeConfig.AddMember("CreationTime", _Timestamp)
-
-	ListEdgeAgentConfigurationsEdgeConfig_LastUpdatedTime = ListEdgeAgentConfigurationsEdgeConfig.AddMember("LastUpdatedTime", _Timestamp)
-
-	ListEdgeAgentConfigurationsEdgeConfig_SyncStatus = ListEdgeAgentConfigurationsEdgeConfig.AddMember("SyncStatus", SyncStatus)
-
-	ListEdgeAgentConfigurationsEdgeConfig_FailedStatusDetails = ListEdgeAgentConfigurationsEdgeConfig.AddMember("FailedStatusDetails", _FailedStatusDetails)
-
-	ListEdgeAgentConfigurationsEdgeConfig_EdgeConfig = ListEdgeAgentConfigurationsEdgeConfig.AddMember("EdgeConfig", EdgeConfig)
-
-	_ListEdgeAgentConfigurationsEdgeConfigList_member = _ListEdgeAgentConfigurationsEdgeConfigList.AddMember("member", ListEdgeAgentConfigurationsEdgeConfig)
-
-	_ListOfProtocols_member = _ListOfProtocols.AddMember("member", ChannelProtocol)
-
-	MappedResourceConfigurationListItem_Type = MappedResourceConfigurationListItem.AddMember("Type", _Type)
-
-	MappedResourceConfigurationListItem_ARN = MappedResourceConfigurationListItem.AddMember("ARN", _ResourceARN)
-
-	_MappedResourceConfigurationList_member = _MappedResourceConfigurationList.AddMember("member", MappedResourceConfigurationListItem)
-
-	MediaStorageConfigurationStatus_ENABLED = MediaStorageConfigurationStatus.AddMember("ENABLED", smithyprelude.Unit)
-
-	MediaStorageConfigurationStatus_DISABLED = MediaStorageConfigurationStatus.AddMember("DISABLED", smithyprelude.Unit)
-
-	MediaStorageConfiguration_StreamARN = MediaStorageConfiguration.AddMember("StreamARN", _ResourceARN)
-
-	MediaStorageConfiguration_Status = MediaStorageConfiguration.AddMember("Status", MediaStorageConfigurationStatus)
-
-	NoDataRetentionException_Message = NoDataRetentionException.AddMember("Message", _ErrorMessage)
-
-	NotAuthorizedException_Message = NotAuthorizedException.AddMember("Message", _ErrorMessage)
-
-	NotificationDestinationConfig_Uri = NotificationDestinationConfig.AddMember("Uri", _DestinationUri)
-
-	NotificationConfiguration_Status = NotificationConfiguration.AddMember("Status", ConfigurationStatus)
-
-	NotificationConfiguration_DestinationConfig = NotificationConfiguration.AddMember("DestinationConfig", NotificationDestinationConfig)
-
-	ResourceEndpointListItem_Protocol = ResourceEndpointListItem.AddMember("Protocol", ChannelProtocol)
-
-	ResourceEndpointListItem_ResourceEndpoint = ResourceEndpointListItem.AddMember("ResourceEndpoint", _ResourceEndpoint)
-
-	_ResourceEndpointList_member = _ResourceEndpointList.AddMember("member", ResourceEndpointListItem)
-
-	ResourceInUseException_Message = ResourceInUseException.AddMember("Message", _ErrorMessage)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _ErrorMessage)
-
-	_ResourceTags_key = _ResourceTags.AddMember("key", _TagKey)
-
-	_ResourceTags_value = _ResourceTags.AddMember("value", _TagValue)
-
-	SingleMasterChannelEndpointConfiguration_Protocols = SingleMasterChannelEndpointConfiguration.AddMember("Protocols", _ListOfProtocols)
-
-	SingleMasterChannelEndpointConfiguration_Role = SingleMasterChannelEndpointConfiguration.AddMember("Role", ChannelRole)
-
-	StreamEdgeConfigurationNotFoundException_Message = StreamEdgeConfigurationNotFoundException.AddMember("Message", _ErrorMessage)
-
-	StreamInfo_DeviceName = StreamInfo.AddMember("DeviceName", _DeviceName)
-
-	StreamInfo_StreamName = StreamInfo.AddMember("StreamName", _StreamName)
-
-	StreamInfo_StreamARN = StreamInfo.AddMember("StreamARN", _ResourceARN)
-
-	StreamInfo_MediaType = StreamInfo.AddMember("MediaType", _MediaType)
-
-	StreamInfo_KmsKeyId = StreamInfo.AddMember("KmsKeyId", _KmsKeyId)
-
-	StreamInfo_Version = StreamInfo.AddMember("Version", _Version)
-
-	StreamInfo_Status = StreamInfo.AddMember("Status", Status)
-
-	StreamInfo_CreationTime = StreamInfo.AddMember("CreationTime", _Timestamp)
-
-	StreamInfo_DataRetentionInHours = StreamInfo.AddMember("DataRetentionInHours", _DataRetentionInHours)
-
-	_StreamInfoList_member = _StreamInfoList.AddMember("member", StreamInfo)
-
-	StreamNameCondition_ComparisonOperator = StreamNameCondition.AddMember("ComparisonOperator", ComparisonOperator)
-
-	StreamNameCondition_ComparisonValue = StreamNameCondition.AddMember("ComparisonValue", _StreamName)
-
-	StreamStorageConfiguration_DefaultStorageTier = StreamStorageConfiguration.AddMember("DefaultStorageTier", DefaultStorageTier)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	_TagOnCreateList_member = _TagOnCreateList.AddMember("member", Tag)
-
-	TagsPerResourceExceededLimitException_Message = TagsPerResourceExceededLimitException.AddMember("Message", _ErrorMessage)
-
-	UpdateDataRetentionOperation_INCREASE_DATA_RETENTION = UpdateDataRetentionOperation.AddMember("INCREASE_DATA_RETENTION", smithyprelude.Unit)
-
-	UpdateDataRetentionOperation_DECREASE_DATA_RETENTION = UpdateDataRetentionOperation.AddMember("DECREASE_DATA_RETENTION", smithyprelude.Unit)
-
-	VersionMismatchException_Message = VersionMismatchException.AddMember("Message", _ErrorMessage)
-
-	CreateSignalingChannelInput_ChannelName = CreateSignalingChannelInput.AddMember("ChannelName", _ChannelName)
-
-	CreateSignalingChannelInput_ChannelType = CreateSignalingChannelInput.AddMember("ChannelType", ChannelType)
-
-	CreateSignalingChannelInput_SingleMasterConfiguration = CreateSignalingChannelInput.AddMember("SingleMasterConfiguration", SingleMasterConfiguration)
-
-	CreateSignalingChannelInput_Tags = CreateSignalingChannelInput.AddMember("Tags", _TagOnCreateList)
-
-	CreateSignalingChannelOutput_ChannelARN = CreateSignalingChannelOutput.AddMember("ChannelARN", _ResourceARN)
-
-	CreateStreamInput_DeviceName = CreateStreamInput.AddMember("DeviceName", _DeviceName)
-
-	CreateStreamInput_StreamName = CreateStreamInput.AddMember("StreamName", _StreamName)
-
-	CreateStreamInput_MediaType = CreateStreamInput.AddMember("MediaType", _MediaType)
-
-	CreateStreamInput_KmsKeyId = CreateStreamInput.AddMember("KmsKeyId", _KmsKeyId)
-
-	CreateStreamInput_DataRetentionInHours = CreateStreamInput.AddMember("DataRetentionInHours", _DataRetentionInHours)
-
-	CreateStreamInput_Tags = CreateStreamInput.AddMember("Tags", _ResourceTags)
-
-	CreateStreamInput_StreamStorageConfiguration = CreateStreamInput.AddMember("StreamStorageConfiguration", StreamStorageConfiguration)
-
-	CreateStreamOutput_StreamARN = CreateStreamOutput.AddMember("StreamARN", _ResourceARN)
-
-	DeleteEdgeConfigurationInput_StreamName = DeleteEdgeConfigurationInput.AddMember("StreamName", _StreamName)
-
-	DeleteEdgeConfigurationInput_StreamARN = DeleteEdgeConfigurationInput.AddMember("StreamARN", _ResourceARN)
-
-	DeleteSignalingChannelInput_ChannelARN = DeleteSignalingChannelInput.AddMember("ChannelARN", _ResourceARN)
-
-	DeleteSignalingChannelInput_CurrentVersion = DeleteSignalingChannelInput.AddMember("CurrentVersion", _Version)
-
-	DeleteStreamInput_StreamARN = DeleteStreamInput.AddMember("StreamARN", _ResourceARN)
-
-	DeleteStreamInput_CurrentVersion = DeleteStreamInput.AddMember("CurrentVersion", _Version)
-
-	DescribeEdgeConfigurationInput_StreamName = DescribeEdgeConfigurationInput.AddMember("StreamName", _StreamName)
-
-	DescribeEdgeConfigurationInput_StreamARN = DescribeEdgeConfigurationInput.AddMember("StreamARN", _ResourceARN)
-
-	DescribeEdgeConfigurationOutput_StreamName = DescribeEdgeConfigurationOutput.AddMember("StreamName", _StreamName)
-
-	DescribeEdgeConfigurationOutput_StreamARN = DescribeEdgeConfigurationOutput.AddMember("StreamARN", _ResourceARN)
-
-	DescribeEdgeConfigurationOutput_CreationTime = DescribeEdgeConfigurationOutput.AddMember("CreationTime", _Timestamp)
-
-	DescribeEdgeConfigurationOutput_LastUpdatedTime = DescribeEdgeConfigurationOutput.AddMember("LastUpdatedTime", _Timestamp)
-
-	DescribeEdgeConfigurationOutput_SyncStatus = DescribeEdgeConfigurationOutput.AddMember("SyncStatus", SyncStatus)
-
-	DescribeEdgeConfigurationOutput_FailedStatusDetails = DescribeEdgeConfigurationOutput.AddMember("FailedStatusDetails", _FailedStatusDetails)
-
-	DescribeEdgeConfigurationOutput_EdgeConfig = DescribeEdgeConfigurationOutput.AddMember("EdgeConfig", EdgeConfig)
-
-	DescribeEdgeConfigurationOutput_EdgeAgentStatus = DescribeEdgeConfigurationOutput.AddMember("EdgeAgentStatus", EdgeAgentStatus)
-
-	DescribeImageGenerationConfigurationInput_StreamName = DescribeImageGenerationConfigurationInput.AddMember("StreamName", _StreamName)
-
-	DescribeImageGenerationConfigurationInput_StreamARN = DescribeImageGenerationConfigurationInput.AddMember("StreamARN", _ResourceARN)
-
-	DescribeImageGenerationConfigurationOutput_ImageGenerationConfiguration = DescribeImageGenerationConfigurationOutput.AddMember("ImageGenerationConfiguration", ImageGenerationConfiguration)
-
-	DescribeMappedResourceConfigurationInput_StreamName = DescribeMappedResourceConfigurationInput.AddMember("StreamName", _StreamName)
-
-	DescribeMappedResourceConfigurationInput_StreamARN = DescribeMappedResourceConfigurationInput.AddMember("StreamARN", _ResourceARN)
-
-	DescribeMappedResourceConfigurationInput_MaxResults = DescribeMappedResourceConfigurationInput.AddMember("MaxResults", _MappedResourceConfigurationListLimit)
-
-	DescribeMappedResourceConfigurationInput_NextToken = DescribeMappedResourceConfigurationInput.AddMember("NextToken", _NextToken)
-
-	DescribeMappedResourceConfigurationOutput_MappedResourceConfigurationList = DescribeMappedResourceConfigurationOutput.AddMember("MappedResourceConfigurationList", _MappedResourceConfigurationList)
-
-	DescribeMappedResourceConfigurationOutput_NextToken = DescribeMappedResourceConfigurationOutput.AddMember("NextToken", _NextToken)
-
-	DescribeMediaStorageConfigurationInput_ChannelName = DescribeMediaStorageConfigurationInput.AddMember("ChannelName", _ChannelName)
-
-	DescribeMediaStorageConfigurationInput_ChannelARN = DescribeMediaStorageConfigurationInput.AddMember("ChannelARN", _ResourceARN)
-
-	DescribeMediaStorageConfigurationOutput_MediaStorageConfiguration = DescribeMediaStorageConfigurationOutput.AddMember("MediaStorageConfiguration", MediaStorageConfiguration)
-
-	DescribeNotificationConfigurationInput_StreamName = DescribeNotificationConfigurationInput.AddMember("StreamName", _StreamName)
-
-	DescribeNotificationConfigurationInput_StreamARN = DescribeNotificationConfigurationInput.AddMember("StreamARN", _ResourceARN)
-
-	DescribeNotificationConfigurationOutput_NotificationConfiguration = DescribeNotificationConfigurationOutput.AddMember("NotificationConfiguration", NotificationConfiguration)
-
-	DescribeSignalingChannelInput_ChannelName = DescribeSignalingChannelInput.AddMember("ChannelName", _ChannelName)
-
-	DescribeSignalingChannelInput_ChannelARN = DescribeSignalingChannelInput.AddMember("ChannelARN", _ResourceARN)
-
-	DescribeSignalingChannelOutput_ChannelInfo = DescribeSignalingChannelOutput.AddMember("ChannelInfo", ChannelInfo)
-
-	DescribeStreamInput_StreamName = DescribeStreamInput.AddMember("StreamName", _StreamName)
-
-	DescribeStreamInput_StreamARN = DescribeStreamInput.AddMember("StreamARN", _ResourceARN)
-
-	DescribeStreamOutput_StreamInfo = DescribeStreamOutput.AddMember("StreamInfo", StreamInfo)
-
-	DescribeStreamStorageConfigurationInput_StreamName = DescribeStreamStorageConfigurationInput.AddMember("StreamName", _StreamName)
-
-	DescribeStreamStorageConfigurationInput_StreamARN = DescribeStreamStorageConfigurationInput.AddMember("StreamARN", _ResourceARN)
-
-	DescribeStreamStorageConfigurationOutput_StreamName = DescribeStreamStorageConfigurationOutput.AddMember("StreamName", _StreamName)
-
-	DescribeStreamStorageConfigurationOutput_StreamARN = DescribeStreamStorageConfigurationOutput.AddMember("StreamARN", _ResourceARN)
-
-	DescribeStreamStorageConfigurationOutput_StreamStorageConfiguration = DescribeStreamStorageConfigurationOutput.AddMember("StreamStorageConfiguration", StreamStorageConfiguration)
-
-	GetDataEndpointInput_StreamName = GetDataEndpointInput.AddMember("StreamName", _StreamName)
-
-	GetDataEndpointInput_StreamARN = GetDataEndpointInput.AddMember("StreamARN", _ResourceARN)
-
-	GetDataEndpointInput_APIName = GetDataEndpointInput.AddMember("APIName", APIName)
-
-	GetDataEndpointOutput_DataEndpoint = GetDataEndpointOutput.AddMember("DataEndpoint", _DataEndpoint)
-
-	GetSignalingChannelEndpointInput_ChannelARN = GetSignalingChannelEndpointInput.AddMember("ChannelARN", _ResourceARN)
-
-	GetSignalingChannelEndpointInput_SingleMasterChannelEndpointConfiguration = GetSignalingChannelEndpointInput.AddMember("SingleMasterChannelEndpointConfiguration", SingleMasterChannelEndpointConfiguration)
-
-	GetSignalingChannelEndpointOutput_ResourceEndpointList = GetSignalingChannelEndpointOutput.AddMember("ResourceEndpointList", _ResourceEndpointList)
-
-	ListEdgeAgentConfigurationsInput_HubDeviceArn = ListEdgeAgentConfigurationsInput.AddMember("HubDeviceArn", _HubDeviceArn)
-
-	ListEdgeAgentConfigurationsInput_MaxResults = ListEdgeAgentConfigurationsInput.AddMember("MaxResults", _ListEdgeAgentConfigurationsInputLimit)
-
-	ListEdgeAgentConfigurationsInput_NextToken = ListEdgeAgentConfigurationsInput.AddMember("NextToken", _NextToken)
-
-	ListEdgeAgentConfigurationsOutput_EdgeConfigs = ListEdgeAgentConfigurationsOutput.AddMember("EdgeConfigs", _ListEdgeAgentConfigurationsEdgeConfigList)
-
-	ListEdgeAgentConfigurationsOutput_NextToken = ListEdgeAgentConfigurationsOutput.AddMember("NextToken", _NextToken)
-
-	ListSignalingChannelsInput_MaxResults = ListSignalingChannelsInput.AddMember("MaxResults", _ListStreamsInputLimit)
-
-	ListSignalingChannelsInput_NextToken = ListSignalingChannelsInput.AddMember("NextToken", _NextToken)
-
-	ListSignalingChannelsInput_ChannelNameCondition = ListSignalingChannelsInput.AddMember("ChannelNameCondition", ChannelNameCondition)
-
-	ListSignalingChannelsOutput_ChannelInfoList = ListSignalingChannelsOutput.AddMember("ChannelInfoList", _ChannelInfoList)
-
-	ListSignalingChannelsOutput_NextToken = ListSignalingChannelsOutput.AddMember("NextToken", _NextToken)
-
-	ListStreamsInput_MaxResults = ListStreamsInput.AddMember("MaxResults", _ListStreamsInputLimit)
-
-	ListStreamsInput_NextToken = ListStreamsInput.AddMember("NextToken", _NextToken)
-
-	ListStreamsInput_StreamNameCondition = ListStreamsInput.AddMember("StreamNameCondition", StreamNameCondition)
-
-	ListStreamsOutput_StreamInfoList = ListStreamsOutput.AddMember("StreamInfoList", _StreamInfoList)
-
-	ListStreamsOutput_NextToken = ListStreamsOutput.AddMember("NextToken", _NextToken)
-
-	ListTagsForResourceInput_NextToken = ListTagsForResourceInput.AddMember("NextToken", _NextToken)
-
-	ListTagsForResourceInput_ResourceARN = ListTagsForResourceInput.AddMember("ResourceARN", _ResourceARN)
-
-	ListTagsForResourceOutput_NextToken = ListTagsForResourceOutput.AddMember("NextToken", _NextToken)
-
-	ListTagsForResourceOutput_Tags = ListTagsForResourceOutput.AddMember("Tags", _ResourceTags)
-
-	ListTagsForStreamInput_NextToken = ListTagsForStreamInput.AddMember("NextToken", _NextToken)
-
-	ListTagsForStreamInput_StreamARN = ListTagsForStreamInput.AddMember("StreamARN", _ResourceARN)
-
-	ListTagsForStreamInput_StreamName = ListTagsForStreamInput.AddMember("StreamName", _StreamName)
-
-	ListTagsForStreamOutput_NextToken = ListTagsForStreamOutput.AddMember("NextToken", _NextToken)
-
-	ListTagsForStreamOutput_Tags = ListTagsForStreamOutput.AddMember("Tags", _ResourceTags)
-
-	StartEdgeConfigurationUpdateInput_StreamName = StartEdgeConfigurationUpdateInput.AddMember("StreamName", _StreamName)
-
-	StartEdgeConfigurationUpdateInput_StreamARN = StartEdgeConfigurationUpdateInput.AddMember("StreamARN", _ResourceARN)
-
-	StartEdgeConfigurationUpdateInput_EdgeConfig = StartEdgeConfigurationUpdateInput.AddMember("EdgeConfig", EdgeConfig)
-
-	StartEdgeConfigurationUpdateOutput_StreamName = StartEdgeConfigurationUpdateOutput.AddMember("StreamName", _StreamName)
-
-	StartEdgeConfigurationUpdateOutput_StreamARN = StartEdgeConfigurationUpdateOutput.AddMember("StreamARN", _ResourceARN)
-
-	StartEdgeConfigurationUpdateOutput_CreationTime = StartEdgeConfigurationUpdateOutput.AddMember("CreationTime", _Timestamp)
-
-	StartEdgeConfigurationUpdateOutput_LastUpdatedTime = StartEdgeConfigurationUpdateOutput.AddMember("LastUpdatedTime", _Timestamp)
-
-	StartEdgeConfigurationUpdateOutput_SyncStatus = StartEdgeConfigurationUpdateOutput.AddMember("SyncStatus", SyncStatus)
-
-	StartEdgeConfigurationUpdateOutput_FailedStatusDetails = StartEdgeConfigurationUpdateOutput.AddMember("FailedStatusDetails", _FailedStatusDetails)
-
-	StartEdgeConfigurationUpdateOutput_EdgeConfig = StartEdgeConfigurationUpdateOutput.AddMember("EdgeConfig", EdgeConfig)
-
-	TagResourceInput_ResourceARN = TagResourceInput.AddMember("ResourceARN", _ResourceARN)
-
-	TagResourceInput_Tags = TagResourceInput.AddMember("Tags", _TagList)
-
-	TagStreamInput_StreamARN = TagStreamInput.AddMember("StreamARN", _ResourceARN)
-
-	TagStreamInput_StreamName = TagStreamInput.AddMember("StreamName", _StreamName)
-
-	TagStreamInput_Tags = TagStreamInput.AddMember("Tags", _ResourceTags)
-
-	UntagResourceInput_ResourceARN = UntagResourceInput.AddMember("ResourceARN", _ResourceARN)
-
-	UntagResourceInput_TagKeyList = UntagResourceInput.AddMember("TagKeyList", _TagKeyList)
-
-	UntagStreamInput_StreamARN = UntagStreamInput.AddMember("StreamARN", _ResourceARN)
-
-	UntagStreamInput_StreamName = UntagStreamInput.AddMember("StreamName", _StreamName)
-
-	UntagStreamInput_TagKeyList = UntagStreamInput.AddMember("TagKeyList", _TagKeyList)
-
-	UpdateDataRetentionInput_StreamName = UpdateDataRetentionInput.AddMember("StreamName", _StreamName)
-
-	UpdateDataRetentionInput_StreamARN = UpdateDataRetentionInput.AddMember("StreamARN", _ResourceARN)
-
-	UpdateDataRetentionInput_CurrentVersion = UpdateDataRetentionInput.AddMember("CurrentVersion", _Version)
-
-	UpdateDataRetentionInput_Operation = UpdateDataRetentionInput.AddMember("Operation", UpdateDataRetentionOperation)
-
-	UpdateDataRetentionInput_DataRetentionChangeInHours = UpdateDataRetentionInput.AddMember("DataRetentionChangeInHours", _DataRetentionChangeInHours)
-
-	UpdateImageGenerationConfigurationInput_StreamName = UpdateImageGenerationConfigurationInput.AddMember("StreamName", _StreamName)
-
-	UpdateImageGenerationConfigurationInput_StreamARN = UpdateImageGenerationConfigurationInput.AddMember("StreamARN", _ResourceARN)
-
-	UpdateImageGenerationConfigurationInput_ImageGenerationConfiguration = UpdateImageGenerationConfigurationInput.AddMember("ImageGenerationConfiguration", ImageGenerationConfiguration)
-
-	UpdateMediaStorageConfigurationInput_ChannelARN = UpdateMediaStorageConfigurationInput.AddMember("ChannelARN", _ResourceARN)
-
-	UpdateMediaStorageConfigurationInput_MediaStorageConfiguration = UpdateMediaStorageConfigurationInput.AddMember("MediaStorageConfiguration", MediaStorageConfiguration)
-
-	UpdateNotificationConfigurationInput_StreamName = UpdateNotificationConfigurationInput.AddMember("StreamName", _StreamName)
-
-	UpdateNotificationConfigurationInput_StreamARN = UpdateNotificationConfigurationInput.AddMember("StreamARN", _ResourceARN)
-
-	UpdateNotificationConfigurationInput_NotificationConfiguration = UpdateNotificationConfigurationInput.AddMember("NotificationConfiguration", NotificationConfiguration)
-
-	UpdateSignalingChannelInput_ChannelARN = UpdateSignalingChannelInput.AddMember("ChannelARN", _ResourceARN)
-
-	UpdateSignalingChannelInput_CurrentVersion = UpdateSignalingChannelInput.AddMember("CurrentVersion", _Version)
-
-	UpdateSignalingChannelInput_SingleMasterConfiguration = UpdateSignalingChannelInput.AddMember("SingleMasterConfiguration", SingleMasterConfiguration)
-
-	UpdateStreamInput_StreamName = UpdateStreamInput.AddMember("StreamName", _StreamName)
-
-	UpdateStreamInput_StreamARN = UpdateStreamInput.AddMember("StreamARN", _ResourceARN)
-
-	UpdateStreamInput_CurrentVersion = UpdateStreamInput.AddMember("CurrentVersion", _Version)
-
-	UpdateStreamInput_DeviceName = UpdateStreamInput.AddMember("DeviceName", _DeviceName)
-
-	UpdateStreamInput_MediaType = UpdateStreamInput.AddMember("MediaType", _MediaType)
-
-	UpdateStreamStorageConfigurationInput_StreamName = UpdateStreamStorageConfigurationInput.AddMember("StreamName", _StreamName)
-
-	UpdateStreamStorageConfigurationInput_StreamARN = UpdateStreamStorageConfigurationInput.AddMember("StreamARN", _ResourceARN)
-
-	UpdateStreamStorageConfigurationInput_CurrentVersion = UpdateStreamStorageConfigurationInput.AddMember("CurrentVersion", _Version)
-
-	UpdateStreamStorageConfigurationInput_StreamStorageConfiguration = UpdateStreamStorageConfigurationInput.AddMember("StreamStorageConfiguration", StreamStorageConfiguration)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLNamespace{URI: "https://kinesisvideo.amazonaws.com/doc/2017-09-30/"}}, DirectMask: 0x8000}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 401}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_Message}}
+var mAccountChannelLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccountChannelLimitExceededException_Message}}
+var mAccountStreamLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccountStreamLimitExceededException_Message}}
+var mAPIName = smithy.SchemaMembers{List: []*smithy.Schema{&sAPIName_PUT_MEDIA, &sAPIName_GET_MEDIA, &sAPIName_LIST_FRAGMENTS, &sAPIName_GET_MEDIA_FOR_FRAGMENT_LIST, &sAPIName_GET_HLS_STREAMING_SESSION_URL, &sAPIName_GET_DASH_STREAMING_SESSION_URL, &sAPIName_GET_CLIP, &sAPIName_GET_IMAGES}}
+var mChannelInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelInfo_ChannelName, &sChannelInfo_ChannelARN, &sChannelInfo_ChannelType, &sChannelInfo_ChannelStatus, &sChannelInfo_CreationTime, &sChannelInfo_SingleMasterConfiguration, &sChannelInfo_Version}}
+var m_ChannelInfoList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ChannelInfoList_member}}
+var mChannelNameCondition = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelNameCondition_ComparisonOperator, &sChannelNameCondition_ComparisonValue}}
+var mChannelProtocol = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelProtocol_WSS, &sChannelProtocol_HTTPS, &sChannelProtocol_WEBRTC}}
+var mChannelRole = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelRole_MASTER, &sChannelRole_VIEWER}}
+var mChannelType = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelType_SINGLE_MASTER, &sChannelType_FULL_MESH}}
+var mClientLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sClientLimitExceededException_Message}}
+var mComparisonOperator = smithy.SchemaMembers{List: []*smithy.Schema{&sComparisonOperator_BEGINS_WITH}}
+var mConfigurationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sConfigurationStatus_ENABLED, &sConfigurationStatus_DISABLED}}
+var mDefaultStorageTier = smithy.SchemaMembers{List: []*smithy.Schema{&sDefaultStorageTier_HOT, &sDefaultStorageTier_WARM}}
+var mDeletionConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sDeletionConfig_EdgeRetentionInHours, &sDeletionConfig_LocalSizeConfig, &sDeletionConfig_DeleteAfterUpload}}
+var mDeviceStreamLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sDeviceStreamLimitExceededException_Message}}
+var mEdgeAgentStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sEdgeAgentStatus_LastRecorderStatus, &sEdgeAgentStatus_LastUploaderStatus}}
+var mEdgeConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sEdgeConfig_HubDeviceArn, &sEdgeConfig_RecorderConfig, &sEdgeConfig_UploaderConfig, &sEdgeConfig_DeletionConfig}}
+var mFormat = smithy.SchemaMembers{List: []*smithy.Schema{&sFormat_JPEG, &sFormat_PNG}}
+var m_FormatConfig = smithy.SchemaMembers{List: []*smithy.Schema{&s_FormatConfig_key, &s_FormatConfig_value}}
+var mFormatConfigKey = smithy.SchemaMembers{List: []*smithy.Schema{&sFormatConfigKey_JPEGQuality}}
+var mImageGenerationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sImageGenerationConfiguration_Status, &sImageGenerationConfiguration_ImageSelectorType, &sImageGenerationConfiguration_DestinationConfig, &sImageGenerationConfiguration_SamplingInterval, &sImageGenerationConfiguration_Format, &sImageGenerationConfiguration_FormatConfig, &sImageGenerationConfiguration_WidthPixels, &sImageGenerationConfiguration_HeightPixels}}
+var mImageGenerationDestinationConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sImageGenerationDestinationConfig_Uri, &sImageGenerationDestinationConfig_DestinationRegion}}
+var mImageSelectorType = smithy.SchemaMembers{List: []*smithy.Schema{&sImageSelectorType_SERVER_TIMESTAMP, &sImageSelectorType_PRODUCER_TIMESTAMP}}
+var mInvalidArgumentException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidArgumentException_Message}}
+var mInvalidDeviceException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidDeviceException_Message}}
+var mInvalidResourceFormatException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidResourceFormatException_Message}}
+var mLastRecorderStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sLastRecorderStatus_JobStatusDetails, &sLastRecorderStatus_LastCollectedTime, &sLastRecorderStatus_LastUpdatedTime, &sLastRecorderStatus_RecorderStatus}}
+var mLastUploaderStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sLastUploaderStatus_JobStatusDetails, &sLastUploaderStatus_LastCollectedTime, &sLastUploaderStatus_LastUpdatedTime, &sLastUploaderStatus_UploaderStatus}}
+var mListEdgeAgentConfigurationsEdgeConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sListEdgeAgentConfigurationsEdgeConfig_StreamName, &sListEdgeAgentConfigurationsEdgeConfig_StreamARN, &sListEdgeAgentConfigurationsEdgeConfig_CreationTime, &sListEdgeAgentConfigurationsEdgeConfig_LastUpdatedTime, &sListEdgeAgentConfigurationsEdgeConfig_SyncStatus, &sListEdgeAgentConfigurationsEdgeConfig_FailedStatusDetails, &sListEdgeAgentConfigurationsEdgeConfig_EdgeConfig}}
+var m_ListEdgeAgentConfigurationsEdgeConfigList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListEdgeAgentConfigurationsEdgeConfigList_member}}
+var m_ListOfProtocols = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListOfProtocols_member}}
+var mLocalSizeConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sLocalSizeConfig_MaxLocalMediaSizeInMB, &sLocalSizeConfig_StrategyOnFullSize}}
+var m_MappedResourceConfigurationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MappedResourceConfigurationList_member}}
+var mMappedResourceConfigurationListItem = smithy.SchemaMembers{List: []*smithy.Schema{&sMappedResourceConfigurationListItem_Type, &sMappedResourceConfigurationListItem_ARN}}
+var mMediaSourceConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sMediaSourceConfig_MediaUriSecretArn, &sMediaSourceConfig_MediaUriType}}
+var mMediaStorageConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sMediaStorageConfiguration_StreamARN, &sMediaStorageConfiguration_Status}}
+var mMediaStorageConfigurationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sMediaStorageConfigurationStatus_ENABLED, &sMediaStorageConfigurationStatus_DISABLED}}
+var mMediaUriType = smithy.SchemaMembers{List: []*smithy.Schema{&sMediaUriType_RTSP_URI, &sMediaUriType_FILE_URI}}
+var mNoDataRetentionException = smithy.SchemaMembers{List: []*smithy.Schema{&sNoDataRetentionException_Message}}
+var mNotAuthorizedException = smithy.SchemaMembers{List: []*smithy.Schema{&sNotAuthorizedException_Message}}
+var mNotificationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sNotificationConfiguration_Status, &sNotificationConfiguration_DestinationConfig}}
+var mNotificationDestinationConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sNotificationDestinationConfig_Uri}}
+var mRecorderConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sRecorderConfig_MediaSourceConfig, &sRecorderConfig_ScheduleConfig}}
+var mRecorderStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sRecorderStatus_SUCCESS, &sRecorderStatus_USER_ERROR, &sRecorderStatus_SYSTEM_ERROR}}
+var m_ResourceEndpointList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceEndpointList_member}}
+var mResourceEndpointListItem = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceEndpointListItem_Protocol, &sResourceEndpointListItem_ResourceEndpoint}}
+var mResourceInUseException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceInUseException_Message}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message}}
+var m_ResourceTags = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceTags_key, &s_ResourceTags_value}}
+var mScheduleConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sScheduleConfig_ScheduleExpression, &sScheduleConfig_DurationInSeconds}}
+var mSingleMasterChannelEndpointConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sSingleMasterChannelEndpointConfiguration_Protocols, &sSingleMasterChannelEndpointConfiguration_Role}}
+var mSingleMasterConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sSingleMasterConfiguration_MessageTtlSeconds}}
+var mStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sStatus_CREATING, &sStatus_ACTIVE, &sStatus_UPDATING, &sStatus_DELETING}}
+var mStrategyOnFullSize = smithy.SchemaMembers{List: []*smithy.Schema{&sStrategyOnFullSize_DELETE_OLDEST_MEDIA, &sStrategyOnFullSize_DENY_NEW_MEDIA}}
+var mStreamEdgeConfigurationNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sStreamEdgeConfigurationNotFoundException_Message}}
+var mStreamInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sStreamInfo_DeviceName, &sStreamInfo_StreamName, &sStreamInfo_StreamARN, &sStreamInfo_MediaType, &sStreamInfo_KmsKeyId, &sStreamInfo_Version, &sStreamInfo_Status, &sStreamInfo_CreationTime, &sStreamInfo_DataRetentionInHours}, Seed: 7, Slots: []uint16{
+	6, 5, 0, 0, 0, 0, 0, 1, 3, 0, 0, 4, 0, 0, 0, 2, 0, 7, 0, 8, 0, 0, 0, 0,
+	0, 0, 9, 0, 0, 0, 0, 0,
+}}
+var m_StreamInfoList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StreamInfoList_member}}
+var mStreamNameCondition = smithy.SchemaMembers{List: []*smithy.Schema{&sStreamNameCondition_ComparisonOperator, &sStreamNameCondition_ComparisonValue}}
+var mStreamStorageConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sStreamStorageConfiguration_DefaultStorageTier}}
+var mSyncStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sSyncStatus_SYNCING, &sSyncStatus_ACKNOWLEDGED, &sSyncStatus_IN_SYNC, &sSyncStatus_SYNC_FAILED, &sSyncStatus_DELETING, &sSyncStatus_DELETE_FAILED, &sSyncStatus_DELETING_ACKNOWLEDGED}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var m_TagOnCreateList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagOnCreateList_member}}
+var mTagsPerResourceExceededLimitException = smithy.SchemaMembers{List: []*smithy.Schema{&sTagsPerResourceExceededLimitException_Message}}
+var mUpdateDataRetentionOperation = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDataRetentionOperation_INCREASE_DATA_RETENTION, &sUpdateDataRetentionOperation_DECREASE_DATA_RETENTION}}
+var mUploaderConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sUploaderConfig_ScheduleConfig}}
+var mUploaderStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sUploaderStatus_SUCCESS, &sUploaderStatus_USER_ERROR, &sUploaderStatus_SYSTEM_ERROR}}
+var mVersionMismatchException = smithy.SchemaMembers{List: []*smithy.Schema{&sVersionMismatchException_Message}}
+var mCreateSignalingChannelInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSignalingChannelInput_ChannelName, &sCreateSignalingChannelInput_ChannelType, &sCreateSignalingChannelInput_SingleMasterConfiguration, &sCreateSignalingChannelInput_Tags}}
+var mCreateSignalingChannelOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSignalingChannelOutput_ChannelARN}}
+var mCreateStreamInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateStreamInput_DeviceName, &sCreateStreamInput_StreamName, &sCreateStreamInput_MediaType, &sCreateStreamInput_KmsKeyId, &sCreateStreamInput_DataRetentionInHours, &sCreateStreamInput_Tags, &sCreateStreamInput_StreamStorageConfiguration}}
+var mCreateStreamOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateStreamOutput_StreamARN}}
+var mDeleteEdgeConfigurationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteEdgeConfigurationInput_StreamName, &sDeleteEdgeConfigurationInput_StreamARN}}
+var mDeleteSignalingChannelInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSignalingChannelInput_ChannelARN, &sDeleteSignalingChannelInput_CurrentVersion}}
+var mDeleteStreamInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteStreamInput_StreamARN, &sDeleteStreamInput_CurrentVersion}}
+var mDescribeEdgeConfigurationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEdgeConfigurationInput_StreamName, &sDescribeEdgeConfigurationInput_StreamARN}}
+var mDescribeEdgeConfigurationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEdgeConfigurationOutput_StreamName, &sDescribeEdgeConfigurationOutput_StreamARN, &sDescribeEdgeConfigurationOutput_CreationTime, &sDescribeEdgeConfigurationOutput_LastUpdatedTime, &sDescribeEdgeConfigurationOutput_SyncStatus, &sDescribeEdgeConfigurationOutput_FailedStatusDetails, &sDescribeEdgeConfigurationOutput_EdgeConfig, &sDescribeEdgeConfigurationOutput_EdgeAgentStatus}}
+var mDescribeImageGenerationConfigurationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeImageGenerationConfigurationInput_StreamName, &sDescribeImageGenerationConfigurationInput_StreamARN}}
+var mDescribeImageGenerationConfigurationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeImageGenerationConfigurationOutput_ImageGenerationConfiguration}}
+var mDescribeMappedResourceConfigurationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeMappedResourceConfigurationInput_StreamName, &sDescribeMappedResourceConfigurationInput_StreamARN, &sDescribeMappedResourceConfigurationInput_MaxResults, &sDescribeMappedResourceConfigurationInput_NextToken}}
+var mDescribeMappedResourceConfigurationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeMappedResourceConfigurationOutput_MappedResourceConfigurationList, &sDescribeMappedResourceConfigurationOutput_NextToken}}
+var mDescribeMediaStorageConfigurationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeMediaStorageConfigurationInput_ChannelName, &sDescribeMediaStorageConfigurationInput_ChannelARN}}
+var mDescribeMediaStorageConfigurationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeMediaStorageConfigurationOutput_MediaStorageConfiguration}}
+var mDescribeNotificationConfigurationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeNotificationConfigurationInput_StreamName, &sDescribeNotificationConfigurationInput_StreamARN}}
+var mDescribeNotificationConfigurationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeNotificationConfigurationOutput_NotificationConfiguration}}
+var mDescribeSignalingChannelInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSignalingChannelInput_ChannelName, &sDescribeSignalingChannelInput_ChannelARN}}
+var mDescribeSignalingChannelOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSignalingChannelOutput_ChannelInfo}}
+var mDescribeStreamInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeStreamInput_StreamName, &sDescribeStreamInput_StreamARN}}
+var mDescribeStreamOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeStreamOutput_StreamInfo}}
+var mDescribeStreamStorageConfigurationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeStreamStorageConfigurationInput_StreamName, &sDescribeStreamStorageConfigurationInput_StreamARN}}
+var mDescribeStreamStorageConfigurationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeStreamStorageConfigurationOutput_StreamName, &sDescribeStreamStorageConfigurationOutput_StreamARN, &sDescribeStreamStorageConfigurationOutput_StreamStorageConfiguration}}
+var mGetDataEndpointInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDataEndpointInput_StreamName, &sGetDataEndpointInput_StreamARN, &sGetDataEndpointInput_APIName}}
+var mGetDataEndpointOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDataEndpointOutput_DataEndpoint}}
+var mGetSignalingChannelEndpointInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSignalingChannelEndpointInput_ChannelARN, &sGetSignalingChannelEndpointInput_SingleMasterChannelEndpointConfiguration}}
+var mGetSignalingChannelEndpointOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSignalingChannelEndpointOutput_ResourceEndpointList}}
+var mListEdgeAgentConfigurationsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListEdgeAgentConfigurationsInput_HubDeviceArn, &sListEdgeAgentConfigurationsInput_MaxResults, &sListEdgeAgentConfigurationsInput_NextToken}}
+var mListEdgeAgentConfigurationsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListEdgeAgentConfigurationsOutput_EdgeConfigs, &sListEdgeAgentConfigurationsOutput_NextToken}}
+var mListSignalingChannelsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListSignalingChannelsInput_MaxResults, &sListSignalingChannelsInput_NextToken, &sListSignalingChannelsInput_ChannelNameCondition}}
+var mListSignalingChannelsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListSignalingChannelsOutput_ChannelInfoList, &sListSignalingChannelsOutput_NextToken}}
+var mListStreamsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListStreamsInput_MaxResults, &sListStreamsInput_NextToken, &sListStreamsInput_StreamNameCondition}}
+var mListStreamsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListStreamsOutput_StreamInfoList, &sListStreamsOutput_NextToken}}
+var mListTagsForResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceInput_NextToken, &sListTagsForResourceInput_ResourceARN}}
+var mListTagsForResourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceOutput_NextToken, &sListTagsForResourceOutput_Tags}}
+var mListTagsForStreamInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForStreamInput_NextToken, &sListTagsForStreamInput_StreamARN, &sListTagsForStreamInput_StreamName}}
+var mListTagsForStreamOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForStreamOutput_NextToken, &sListTagsForStreamOutput_Tags}}
+var mStartEdgeConfigurationUpdateInput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartEdgeConfigurationUpdateInput_StreamName, &sStartEdgeConfigurationUpdateInput_StreamARN, &sStartEdgeConfigurationUpdateInput_EdgeConfig}}
+var mStartEdgeConfigurationUpdateOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartEdgeConfigurationUpdateOutput_StreamName, &sStartEdgeConfigurationUpdateOutput_StreamARN, &sStartEdgeConfigurationUpdateOutput_CreationTime, &sStartEdgeConfigurationUpdateOutput_LastUpdatedTime, &sStartEdgeConfigurationUpdateOutput_SyncStatus, &sStartEdgeConfigurationUpdateOutput_FailedStatusDetails, &sStartEdgeConfigurationUpdateOutput_EdgeConfig}}
+var mTagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceInput_ResourceARN, &sTagResourceInput_Tags}}
+var mTagStreamInput = smithy.SchemaMembers{List: []*smithy.Schema{&sTagStreamInput_StreamARN, &sTagStreamInput_StreamName, &sTagStreamInput_Tags}}
+var mUntagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceInput_ResourceARN, &sUntagResourceInput_TagKeyList}}
+var mUntagStreamInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagStreamInput_StreamARN, &sUntagStreamInput_StreamName, &sUntagStreamInput_TagKeyList}}
+var mUpdateDataRetentionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDataRetentionInput_StreamName, &sUpdateDataRetentionInput_StreamARN, &sUpdateDataRetentionInput_CurrentVersion, &sUpdateDataRetentionInput_Operation, &sUpdateDataRetentionInput_DataRetentionChangeInHours}}
+var mUpdateImageGenerationConfigurationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateImageGenerationConfigurationInput_StreamName, &sUpdateImageGenerationConfigurationInput_StreamARN, &sUpdateImageGenerationConfigurationInput_ImageGenerationConfiguration}}
+var mUpdateMediaStorageConfigurationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateMediaStorageConfigurationInput_ChannelARN, &sUpdateMediaStorageConfigurationInput_MediaStorageConfiguration}}
+var mUpdateNotificationConfigurationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateNotificationConfigurationInput_StreamName, &sUpdateNotificationConfigurationInput_StreamARN, &sUpdateNotificationConfigurationInput_NotificationConfiguration}}
+var mUpdateSignalingChannelInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSignalingChannelInput_ChannelARN, &sUpdateSignalingChannelInput_CurrentVersion, &sUpdateSignalingChannelInput_SingleMasterConfiguration}}
+var mUpdateStreamInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateStreamInput_StreamName, &sUpdateStreamInput_StreamARN, &sUpdateStreamInput_CurrentVersion, &sUpdateStreamInput_DeviceName, &sUpdateStreamInput_MediaType}}
+var mUpdateStreamStorageConfigurationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateStreamStorageConfigurationInput_StreamName, &sUpdateStreamStorageConfigurationInput_StreamARN, &sUpdateStreamStorageConfigurationInput_CurrentVersion, &sUpdateStreamStorageConfigurationInput_StreamStorageConfiguration}}
+
+var sCreateSignalingChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSignalingChannel, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sCreateStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStream, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sDeleteEdgeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEdgeConfiguration, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sDeleteSignalingChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSignalingChannel, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sDeleteStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteStream, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sDescribeEdgeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEdgeConfiguration, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var sDescribeImageGenerationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeImageGenerationConfiguration, Traits: &t6, Type: smithy.ShapeTypeOperation})
+var sDescribeMappedResourceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeMappedResourceConfiguration, Traits: &t7, Type: smithy.ShapeTypeOperation})
+var sDescribeMediaStorageConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeMediaStorageConfiguration, Traits: &t8, Type: smithy.ShapeTypeOperation})
+var sDescribeNotificationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeNotificationConfiguration, Traits: &t9, Type: smithy.ShapeTypeOperation})
+var sDescribeSignalingChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSignalingChannel, Traits: &t10, Type: smithy.ShapeTypeOperation})
+var sDescribeStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeStream, Traits: &t11, Type: smithy.ShapeTypeOperation})
+var sDescribeStreamStorageConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeStreamStorageConfiguration, Traits: &t12, Type: smithy.ShapeTypeOperation})
+var sGetDataEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDataEndpoint, Traits: &t13, Type: smithy.ShapeTypeOperation})
+var sGetSignalingChannelEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSignalingChannelEndpoint, Traits: &t14, Type: smithy.ShapeTypeOperation})
+var sListEdgeAgentConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEdgeAgentConfigurations, Traits: &t15, Type: smithy.ShapeTypeOperation})
+var sListSignalingChannels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSignalingChannels, Traits: &t16, Type: smithy.ShapeTypeOperation})
+var sListStreams = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreams, Traits: &t17, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t18, Type: smithy.ShapeTypeOperation})
+var sListTagsForStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForStream, Traits: &t19, Type: smithy.ShapeTypeOperation})
+var sStartEdgeConfigurationUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartEdgeConfigurationUpdate, Traits: &t20, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t21, Type: smithy.ShapeTypeOperation})
+var sTagStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagStream, Traits: &t22, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t23, Type: smithy.ShapeTypeOperation})
+var sUntagStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagStream, Traits: &t24, Type: smithy.ShapeTypeOperation})
+var sUpdateDataRetention = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDataRetention, Traits: &t25, Type: smithy.ShapeTypeOperation})
+var sUpdateImageGenerationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateImageGenerationConfiguration, Traits: &t26, Type: smithy.ShapeTypeOperation})
+var sUpdateMediaStorageConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMediaStorageConfiguration, Traits: &t27, Type: smithy.ShapeTypeOperation})
+var sUpdateNotificationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNotificationConfiguration, Traits: &t28, Type: smithy.ShapeTypeOperation})
+var sUpdateSignalingChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSignalingChannel, Traits: &t29, Type: smithy.ShapeTypeOperation})
+var sUpdateStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateStream, Traits: &t30, Type: smithy.ShapeTypeOperation})
+var sUpdateStreamStorageConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateStreamStorageConfiguration, Traits: &t31, Type: smithy.ShapeTypeOperation})
+var s_KinesisVideo_20170930 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KinesisVideo_20170930, Traits: &t32, Type: smithy.ShapeTypeService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t33, Type: smithy.ShapeTypeStructure})
+var sAccountChannelLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountChannelLimitExceededException, Members: &mAccountChannelLimitExceededException, Traits: &t34, Type: smithy.ShapeTypeStructure})
+var sAccountStreamLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountStreamLimitExceededException, Members: &mAccountStreamLimitExceededException, Traits: &t34, Type: smithy.ShapeTypeStructure})
+var sAPIName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAPIName, Members: &mAPIName, Type: smithy.ShapeTypeEnum})
+var sChannelInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelInfo, Members: &mChannelInfo, Type: smithy.ShapeTypeStructure})
+var s_ChannelInfoList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelInfoList, Members: &m_ChannelInfoList, Type: smithy.ShapeTypeList})
+var s_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelName, Type: smithy.ShapeTypeString})
+var sChannelNameCondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelNameCondition, Members: &mChannelNameCondition, Type: smithy.ShapeTypeStructure})
+var sChannelProtocol = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelProtocol, Members: &mChannelProtocol, Type: smithy.ShapeTypeEnum})
+var sChannelRole = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelRole, Members: &mChannelRole, Type: smithy.ShapeTypeEnum})
+var sChannelType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelType, Members: &mChannelType, Type: smithy.ShapeTypeEnum})
+var sClientLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClientLimitExceededException, Members: &mClientLimitExceededException, Traits: &t34, Type: smithy.ShapeTypeStructure})
+var sComparisonOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComparisonOperator, Members: &mComparisonOperator, Type: smithy.ShapeTypeEnum})
+var sConfigurationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigurationStatus, Members: &mConfigurationStatus, Type: smithy.ShapeTypeEnum})
+var s_DataEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataEndpoint, Type: smithy.ShapeTypeString})
+var s_DataRetentionChangeInHours = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataRetentionChangeInHours, Type: smithy.ShapeTypeInteger})
+var s_DataRetentionInHours = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataRetentionInHours, Type: smithy.ShapeTypeInteger})
+var sDefaultStorageTier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDefaultStorageTier, Members: &mDefaultStorageTier, Type: smithy.ShapeTypeEnum})
+var s_DeleteAfterUpload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeleteAfterUpload, Type: smithy.ShapeTypeBoolean})
+var sDeletionConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletionConfig, Members: &mDeletionConfig, Type: smithy.ShapeTypeStructure})
+var s_DestinationRegion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DestinationRegion, Type: smithy.ShapeTypeString})
+var s_DestinationUri = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DestinationUri, Type: smithy.ShapeTypeString})
+var s_DeviceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeviceName, Type: smithy.ShapeTypeString})
+var sDeviceStreamLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeviceStreamLimitExceededException, Members: &mDeviceStreamLimitExceededException, Traits: &t34, Type: smithy.ShapeTypeStructure})
+var s_DurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DurationInSeconds, Type: smithy.ShapeTypeInteger})
+var sEdgeAgentStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEdgeAgentStatus, Members: &mEdgeAgentStatus, Type: smithy.ShapeTypeStructure})
+var sEdgeConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEdgeConfig, Members: &mEdgeConfig, Type: smithy.ShapeTypeStructure})
+var s_EdgeRetentionInHours = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EdgeRetentionInHours, Type: smithy.ShapeTypeInteger})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_FailedStatusDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FailedStatusDetails, Type: smithy.ShapeTypeString})
+var sFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFormat, Members: &mFormat, Type: smithy.ShapeTypeEnum})
+var s_FormatConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FormatConfig, Members: &m_FormatConfig, Type: smithy.ShapeTypeMap})
+var sFormatConfigKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFormatConfigKey, Members: &mFormatConfigKey, Type: smithy.ShapeTypeEnum})
+var s_FormatConfigValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FormatConfigValue, Type: smithy.ShapeTypeString})
+var s_HeightPixels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HeightPixels, Type: smithy.ShapeTypeInteger})
+var s_HubDeviceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HubDeviceArn, Type: smithy.ShapeTypeString})
+var sImageGenerationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImageGenerationConfiguration, Members: &mImageGenerationConfiguration, Type: smithy.ShapeTypeStructure})
+var sImageGenerationDestinationConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImageGenerationDestinationConfig, Members: &mImageGenerationDestinationConfig, Type: smithy.ShapeTypeStructure})
+var sImageSelectorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImageSelectorType, Members: &mImageSelectorType, Type: smithy.ShapeTypeEnum})
+var sInvalidArgumentException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidArgumentException, Members: &mInvalidArgumentException, Traits: &t34, Type: smithy.ShapeTypeStructure})
+var sInvalidDeviceException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidDeviceException, Members: &mInvalidDeviceException, Traits: &t34, Type: smithy.ShapeTypeStructure})
+var sInvalidResourceFormatException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidResourceFormatException, Members: &mInvalidResourceFormatException, Traits: &t34, Type: smithy.ShapeTypeStructure})
+var s_JobStatusDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobStatusDetails, Type: smithy.ShapeTypeString})
+var s_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKeyId, Type: smithy.ShapeTypeString})
+var sLastRecorderStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLastRecorderStatus, Members: &mLastRecorderStatus, Type: smithy.ShapeTypeStructure})
+var sLastUploaderStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLastUploaderStatus, Members: &mLastUploaderStatus, Type: smithy.ShapeTypeStructure})
+var sListEdgeAgentConfigurationsEdgeConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEdgeAgentConfigurationsEdgeConfig, Members: &mListEdgeAgentConfigurationsEdgeConfig, Type: smithy.ShapeTypeStructure})
+var s_ListEdgeAgentConfigurationsEdgeConfigList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListEdgeAgentConfigurationsEdgeConfigList, Members: &m_ListEdgeAgentConfigurationsEdgeConfigList, Type: smithy.ShapeTypeList})
+var s_ListEdgeAgentConfigurationsInputLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListEdgeAgentConfigurationsInputLimit, Type: smithy.ShapeTypeInteger})
+var s_ListOfProtocols = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListOfProtocols, Members: &m_ListOfProtocols, Type: smithy.ShapeTypeList})
+var s_ListStreamsInputLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListStreamsInputLimit, Type: smithy.ShapeTypeInteger})
+var sLocalSizeConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLocalSizeConfig, Members: &mLocalSizeConfig, Type: smithy.ShapeTypeStructure})
+var s_MappedResourceConfigurationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MappedResourceConfigurationList, Members: &m_MappedResourceConfigurationList, Type: smithy.ShapeTypeList})
+var sMappedResourceConfigurationListItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMappedResourceConfigurationListItem, Members: &mMappedResourceConfigurationListItem, Type: smithy.ShapeTypeStructure})
+var s_MappedResourceConfigurationListLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MappedResourceConfigurationListLimit, Type: smithy.ShapeTypeInteger})
+var s_MaxLocalMediaSizeInMB = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxLocalMediaSizeInMB, Type: smithy.ShapeTypeInteger})
+var sMediaSourceConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMediaSourceConfig, Members: &mMediaSourceConfig, Type: smithy.ShapeTypeStructure})
+var sMediaStorageConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMediaStorageConfiguration, Members: &mMediaStorageConfiguration, Type: smithy.ShapeTypeStructure})
+var sMediaStorageConfigurationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMediaStorageConfigurationStatus, Members: &mMediaStorageConfigurationStatus, Type: smithy.ShapeTypeEnum})
+var s_MediaType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MediaType, Type: smithy.ShapeTypeString})
+var s_MediaUriSecretArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MediaUriSecretArn, Traits: &t36, Type: smithy.ShapeTypeString})
+var sMediaUriType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMediaUriType, Members: &mMediaUriType, Type: smithy.ShapeTypeEnum})
+var s_MessageTtlSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MessageTtlSeconds, Type: smithy.ShapeTypeInteger})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sNoDataRetentionException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNoDataRetentionException, Members: &mNoDataRetentionException, Traits: &t34, Type: smithy.ShapeTypeStructure})
+var sNotAuthorizedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotAuthorizedException, Members: &mNotAuthorizedException, Traits: &t33, Type: smithy.ShapeTypeStructure})
+var sNotificationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotificationConfiguration, Members: &mNotificationConfiguration, Type: smithy.ShapeTypeStructure})
+var sNotificationDestinationConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotificationDestinationConfig, Members: &mNotificationDestinationConfig, Type: smithy.ShapeTypeStructure})
+var sRecorderConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecorderConfig, Members: &mRecorderConfig, Type: smithy.ShapeTypeStructure})
+var sRecorderStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecorderStatus, Members: &mRecorderStatus, Type: smithy.ShapeTypeEnum})
+var s_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var s_ResourceEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceEndpoint, Type: smithy.ShapeTypeString})
+var s_ResourceEndpointList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceEndpointList, Members: &m_ResourceEndpointList, Type: smithy.ShapeTypeList})
+var sResourceEndpointListItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceEndpointListItem, Members: &mResourceEndpointListItem, Type: smithy.ShapeTypeStructure})
+var sResourceInUseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceInUseException, Members: &mResourceInUseException, Traits: &t34, Type: smithy.ShapeTypeStructure})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t37, Type: smithy.ShapeTypeStructure})
+var s_ResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceTags, Members: &m_ResourceTags, Type: smithy.ShapeTypeMap})
+var s_SamplingInterval = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SamplingInterval, Type: smithy.ShapeTypeInteger})
+var sScheduleConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScheduleConfig, Members: &mScheduleConfig, Type: smithy.ShapeTypeStructure})
+var s_ScheduleExpression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScheduleExpression, Type: smithy.ShapeTypeString})
+var sSingleMasterChannelEndpointConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSingleMasterChannelEndpointConfiguration, Members: &mSingleMasterChannelEndpointConfiguration, Type: smithy.ShapeTypeStructure})
+var sSingleMasterConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSingleMasterConfiguration, Members: &mSingleMasterConfiguration, Type: smithy.ShapeTypeStructure})
+var sStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum})
+var sStrategyOnFullSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStrategyOnFullSize, Members: &mStrategyOnFullSize, Type: smithy.ShapeTypeEnum})
+var sStreamEdgeConfigurationNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamEdgeConfigurationNotFoundException, Members: &mStreamEdgeConfigurationNotFoundException, Traits: &t37, Type: smithy.ShapeTypeStructure})
+var sStreamInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamInfo, Members: &mStreamInfo, Type: smithy.ShapeTypeStructure})
+var s_StreamInfoList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamInfoList, Members: &m_StreamInfoList, Type: smithy.ShapeTypeList})
+var s_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sStreamNameCondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamNameCondition, Members: &mStreamNameCondition, Type: smithy.ShapeTypeStructure})
+var sStreamStorageConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamStorageConfiguration, Members: &mStreamStorageConfiguration, Type: smithy.ShapeTypeStructure})
+var sSyncStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSyncStatus, Members: &mSyncStatus, Type: smithy.ShapeTypeEnum})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var s_TagOnCreateList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagOnCreateList, Members: &m_TagOnCreateList, Type: smithy.ShapeTypeList})
+var sTagsPerResourceExceededLimitException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagsPerResourceExceededLimitException, Members: &mTagsPerResourceExceededLimitException, Traits: &t34, Type: smithy.ShapeTypeStructure})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var s_Type = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Type, Type: smithy.ShapeTypeString})
+var sUpdateDataRetentionOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDataRetentionOperation, Members: &mUpdateDataRetentionOperation, Type: smithy.ShapeTypeEnum})
+var sUploaderConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUploaderConfig, Members: &mUploaderConfig, Type: smithy.ShapeTypeStructure})
+var sUploaderStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUploaderStatus, Members: &mUploaderStatus, Type: smithy.ShapeTypeEnum})
+var s_Version = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Version, Type: smithy.ShapeTypeString})
+var sVersionMismatchException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVersionMismatchException, Members: &mVersionMismatchException, Traits: &t34, Type: smithy.ShapeTypeStructure})
+var s_WidthPixels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WidthPixels, Type: smithy.ShapeTypeInteger})
+var sCreateSignalingChannelInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSignalingChannelInput, Members: &mCreateSignalingChannelInput, Type: smithy.ShapeTypeStructure})
+var sCreateSignalingChannelOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSignalingChannelOutput, Members: &mCreateSignalingChannelOutput, Type: smithy.ShapeTypeStructure})
+var sCreateStreamInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStreamInput, Members: &mCreateStreamInput, Type: smithy.ShapeTypeStructure})
+var sCreateStreamOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStreamOutput, Members: &mCreateStreamOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteEdgeConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEdgeConfigurationInput, Members: &mDeleteEdgeConfigurationInput, Type: smithy.ShapeTypeStructure})
+var sDeleteEdgeConfigurationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEdgeConfigurationOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteSignalingChannelInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSignalingChannelInput, Members: &mDeleteSignalingChannelInput, Type: smithy.ShapeTypeStructure})
+var sDeleteSignalingChannelOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSignalingChannelOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteStreamInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteStreamInput, Members: &mDeleteStreamInput, Type: smithy.ShapeTypeStructure})
+var sDeleteStreamOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteStreamOutput, Type: smithy.ShapeTypeStructure})
+var sDescribeEdgeConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEdgeConfigurationInput, Members: &mDescribeEdgeConfigurationInput, Type: smithy.ShapeTypeStructure})
+var sDescribeEdgeConfigurationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEdgeConfigurationOutput, Members: &mDescribeEdgeConfigurationOutput, Type: smithy.ShapeTypeStructure})
+var sDescribeImageGenerationConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeImageGenerationConfigurationInput, Members: &mDescribeImageGenerationConfigurationInput, Type: smithy.ShapeTypeStructure})
+var sDescribeImageGenerationConfigurationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeImageGenerationConfigurationOutput, Members: &mDescribeImageGenerationConfigurationOutput, Type: smithy.ShapeTypeStructure})
+var sDescribeMappedResourceConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeMappedResourceConfigurationInput, Members: &mDescribeMappedResourceConfigurationInput, Type: smithy.ShapeTypeStructure})
+var sDescribeMappedResourceConfigurationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeMappedResourceConfigurationOutput, Members: &mDescribeMappedResourceConfigurationOutput, Type: smithy.ShapeTypeStructure})
+var sDescribeMediaStorageConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeMediaStorageConfigurationInput, Members: &mDescribeMediaStorageConfigurationInput, Type: smithy.ShapeTypeStructure})
+var sDescribeMediaStorageConfigurationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeMediaStorageConfigurationOutput, Members: &mDescribeMediaStorageConfigurationOutput, Type: smithy.ShapeTypeStructure})
+var sDescribeNotificationConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeNotificationConfigurationInput, Members: &mDescribeNotificationConfigurationInput, Type: smithy.ShapeTypeStructure})
+var sDescribeNotificationConfigurationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeNotificationConfigurationOutput, Members: &mDescribeNotificationConfigurationOutput, Type: smithy.ShapeTypeStructure})
+var sDescribeSignalingChannelInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSignalingChannelInput, Members: &mDescribeSignalingChannelInput, Type: smithy.ShapeTypeStructure})
+var sDescribeSignalingChannelOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSignalingChannelOutput, Members: &mDescribeSignalingChannelOutput, Type: smithy.ShapeTypeStructure})
+var sDescribeStreamInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeStreamInput, Members: &mDescribeStreamInput, Type: smithy.ShapeTypeStructure})
+var sDescribeStreamOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeStreamOutput, Members: &mDescribeStreamOutput, Type: smithy.ShapeTypeStructure})
+var sDescribeStreamStorageConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeStreamStorageConfigurationInput, Members: &mDescribeStreamStorageConfigurationInput, Type: smithy.ShapeTypeStructure})
+var sDescribeStreamStorageConfigurationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeStreamStorageConfigurationOutput, Members: &mDescribeStreamStorageConfigurationOutput, Type: smithy.ShapeTypeStructure})
+var sGetDataEndpointInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDataEndpointInput, Members: &mGetDataEndpointInput, Type: smithy.ShapeTypeStructure})
+var sGetDataEndpointOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDataEndpointOutput, Members: &mGetDataEndpointOutput, Type: smithy.ShapeTypeStructure})
+var sGetSignalingChannelEndpointInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSignalingChannelEndpointInput, Members: &mGetSignalingChannelEndpointInput, Type: smithy.ShapeTypeStructure})
+var sGetSignalingChannelEndpointOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSignalingChannelEndpointOutput, Members: &mGetSignalingChannelEndpointOutput, Type: smithy.ShapeTypeStructure})
+var sListEdgeAgentConfigurationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEdgeAgentConfigurationsInput, Members: &mListEdgeAgentConfigurationsInput, Type: smithy.ShapeTypeStructure})
+var sListEdgeAgentConfigurationsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEdgeAgentConfigurationsOutput, Members: &mListEdgeAgentConfigurationsOutput, Type: smithy.ShapeTypeStructure})
+var sListSignalingChannelsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSignalingChannelsInput, Members: &mListSignalingChannelsInput, Type: smithy.ShapeTypeStructure})
+var sListSignalingChannelsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSignalingChannelsOutput, Members: &mListSignalingChannelsOutput, Type: smithy.ShapeTypeStructure})
+var sListStreamsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamsInput, Members: &mListStreamsInput, Type: smithy.ShapeTypeStructure})
+var sListStreamsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamsOutput, Members: &mListStreamsOutput, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceInput, Members: &mListTagsForResourceInput, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceOutput, Members: &mListTagsForResourceOutput, Type: smithy.ShapeTypeStructure})
+var sListTagsForStreamInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForStreamInput, Members: &mListTagsForStreamInput, Type: smithy.ShapeTypeStructure})
+var sListTagsForStreamOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForStreamOutput, Members: &mListTagsForStreamOutput, Type: smithy.ShapeTypeStructure})
+var sStartEdgeConfigurationUpdateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartEdgeConfigurationUpdateInput, Members: &mStartEdgeConfigurationUpdateInput, Type: smithy.ShapeTypeStructure})
+var sStartEdgeConfigurationUpdateOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartEdgeConfigurationUpdateOutput, Members: &mStartEdgeConfigurationUpdateOutput, Type: smithy.ShapeTypeStructure})
+var sTagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceInput, Members: &mTagResourceInput, Type: smithy.ShapeTypeStructure})
+var sTagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceOutput, Type: smithy.ShapeTypeStructure})
+var sTagStreamInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagStreamInput, Members: &mTagStreamInput, Type: smithy.ShapeTypeStructure})
+var sTagStreamOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagStreamOutput, Type: smithy.ShapeTypeStructure})
+var sUntagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceInput, Members: &mUntagResourceInput, Type: smithy.ShapeTypeStructure})
+var sUntagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceOutput, Type: smithy.ShapeTypeStructure})
+var sUntagStreamInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagStreamInput, Members: &mUntagStreamInput, Type: smithy.ShapeTypeStructure})
+var sUntagStreamOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagStreamOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateDataRetentionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDataRetentionInput, Members: &mUpdateDataRetentionInput, Type: smithy.ShapeTypeStructure})
+var sUpdateDataRetentionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDataRetentionOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateImageGenerationConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateImageGenerationConfigurationInput, Members: &mUpdateImageGenerationConfigurationInput, Type: smithy.ShapeTypeStructure})
+var sUpdateImageGenerationConfigurationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateImageGenerationConfigurationOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateMediaStorageConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMediaStorageConfigurationInput, Members: &mUpdateMediaStorageConfigurationInput, Type: smithy.ShapeTypeStructure})
+var sUpdateMediaStorageConfigurationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMediaStorageConfigurationOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateNotificationConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNotificationConfigurationInput, Members: &mUpdateNotificationConfigurationInput, Type: smithy.ShapeTypeStructure})
+var sUpdateNotificationConfigurationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNotificationConfigurationOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateSignalingChannelInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSignalingChannelInput, Members: &mUpdateSignalingChannelInput, Type: smithy.ShapeTypeStructure})
+var sUpdateSignalingChannelOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSignalingChannelOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateStreamInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateStreamInput, Members: &mUpdateStreamInput, Type: smithy.ShapeTypeStructure})
+var sUpdateStreamOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateStreamOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateStreamStorageConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateStreamStorageConfigurationInput, Members: &mUpdateStreamStorageConfigurationInput, Type: smithy.ShapeTypeStructure})
+var sUpdateStreamStorageConfigurationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateStreamStorageConfigurationOutput, Type: smithy.ShapeTypeStructure})
+
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sAccountChannelLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sAccountStreamLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sAPIName_PUT_MEDIA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PUT_MEDIA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAPIName_GET_MEDIA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GET_MEDIA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAPIName_LIST_FRAGMENTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LIST_FRAGMENTS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAPIName_GET_MEDIA_FOR_FRAGMENT_LIST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GET_MEDIA_FOR_FRAGMENT_LIST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAPIName_GET_HLS_STREAMING_SESSION_URL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GET_HLS_STREAMING_SESSION_URL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAPIName_GET_DASH_STREAMING_SESSION_URL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GET_DASH_STREAMING_SESSION_URL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAPIName_GET_CLIP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GET_CLIP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAPIName_GET_IMAGES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GET_IMAGES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChannelInfo_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i_ChannelName, Type: smithy.ShapeTypeString})
+var sChannelInfo_ChannelARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sChannelInfo_ChannelType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelType", ID: &iChannelType, Members: &mChannelType, Type: smithy.ShapeTypeEnum})
+var sChannelInfo_ChannelStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelStatus", ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum})
+var sChannelInfo_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sChannelInfo_SingleMasterConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SingleMasterConfiguration", ID: &iSingleMasterConfiguration, Members: &mSingleMasterConfiguration, Type: smithy.ShapeTypeStructure})
+var sChannelInfo_Version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Version", ID: &i_Version, Type: smithy.ShapeTypeString})
+var s_ChannelInfoList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iChannelInfo, Members: &mChannelInfo, Type: smithy.ShapeTypeStructure})
+var sChannelNameCondition_ComparisonOperator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComparisonOperator", ID: &iComparisonOperator, Members: &mComparisonOperator, Type: smithy.ShapeTypeEnum})
+var sChannelNameCondition_ComparisonValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComparisonValue", ID: &i_ChannelName, Type: smithy.ShapeTypeString})
+var sChannelProtocol_WSS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WSS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChannelProtocol_HTTPS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTTPS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChannelProtocol_WEBRTC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WEBRTC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChannelRole_MASTER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASTER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChannelRole_VIEWER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VIEWER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChannelType_SINGLE_MASTER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SINGLE_MASTER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChannelType_FULL_MESH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FULL_MESH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sClientLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sComparisonOperator_BEGINS_WITH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BEGINS_WITH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConfigurationStatus_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConfigurationStatus_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDefaultStorageTier_HOT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HOT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDefaultStorageTier_WARM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WARM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeletionConfig_EdgeRetentionInHours = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EdgeRetentionInHours", ID: &i_EdgeRetentionInHours, Type: smithy.ShapeTypeInteger})
+var sDeletionConfig_LocalSizeConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocalSizeConfig", ID: &iLocalSizeConfig, Members: &mLocalSizeConfig, Type: smithy.ShapeTypeStructure})
+var sDeletionConfig_DeleteAfterUpload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteAfterUpload", ID: &i_DeleteAfterUpload, Type: smithy.ShapeTypeBoolean})
+var sDeviceStreamLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sEdgeAgentStatus_LastRecorderStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastRecorderStatus", ID: &iLastRecorderStatus, Members: &mLastRecorderStatus, Type: smithy.ShapeTypeStructure})
+var sEdgeAgentStatus_LastUploaderStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUploaderStatus", ID: &iLastUploaderStatus, Members: &mLastUploaderStatus, Type: smithy.ShapeTypeStructure})
+var sEdgeConfig_HubDeviceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HubDeviceArn", ID: &i_HubDeviceArn, Type: smithy.ShapeTypeString})
+var sEdgeConfig_RecorderConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecorderConfig", ID: &iRecorderConfig, Members: &mRecorderConfig, Type: smithy.ShapeTypeStructure})
+var sEdgeConfig_UploaderConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UploaderConfig", ID: &iUploaderConfig, Members: &mUploaderConfig, Type: smithy.ShapeTypeStructure})
+var sEdgeConfig_DeletionConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeletionConfig", ID: &iDeletionConfig, Members: &mDeletionConfig, Type: smithy.ShapeTypeStructure})
+var sFormat_JPEG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JPEG", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFormat_PNG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PNG", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_FormatConfig_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &iFormatConfigKey, Members: &mFormatConfigKey, Type: smithy.ShapeTypeEnum})
+var s_FormatConfig_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_FormatConfigValue, Type: smithy.ShapeTypeString})
+var sFormatConfigKey_JPEGQuality = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JPEGQuality", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sImageGenerationConfiguration_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iConfigurationStatus, Members: &mConfigurationStatus, Type: smithy.ShapeTypeEnum})
+var sImageGenerationConfiguration_ImageSelectorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageSelectorType", ID: &iImageSelectorType, Members: &mImageSelectorType, Type: smithy.ShapeTypeEnum})
+var sImageGenerationConfiguration_DestinationConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationConfig", ID: &iImageGenerationDestinationConfig, Members: &mImageGenerationDestinationConfig, Type: smithy.ShapeTypeStructure})
+var sImageGenerationConfiguration_SamplingInterval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SamplingInterval", ID: &i_SamplingInterval, Type: smithy.ShapeTypeInteger})
+var sImageGenerationConfiguration_Format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Format", ID: &iFormat, Members: &mFormat, Type: smithy.ShapeTypeEnum})
+var sImageGenerationConfiguration_FormatConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FormatConfig", ID: &i_FormatConfig, Members: &m_FormatConfig, Type: smithy.ShapeTypeMap})
+var sImageGenerationConfiguration_WidthPixels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WidthPixels", ID: &i_WidthPixels, Type: smithy.ShapeTypeInteger})
+var sImageGenerationConfiguration_HeightPixels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HeightPixels", ID: &i_HeightPixels, Type: smithy.ShapeTypeInteger})
+var sImageGenerationDestinationConfig_Uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Uri", ID: &i_DestinationUri, Type: smithy.ShapeTypeString})
+var sImageGenerationDestinationConfig_DestinationRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationRegion", ID: &i_DestinationRegion, Type: smithy.ShapeTypeString})
+var sImageSelectorType_SERVER_TIMESTAMP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVER_TIMESTAMP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sImageSelectorType_PRODUCER_TIMESTAMP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRODUCER_TIMESTAMP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInvalidArgumentException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidDeviceException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidResourceFormatException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sLastRecorderStatus_JobStatusDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobStatusDetails", ID: &i_JobStatusDetails, Type: smithy.ShapeTypeString})
+var sLastRecorderStatus_LastCollectedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastCollectedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sLastRecorderStatus_LastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sLastRecorderStatus_RecorderStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecorderStatus", ID: &iRecorderStatus, Members: &mRecorderStatus, Type: smithy.ShapeTypeEnum})
+var sLastUploaderStatus_JobStatusDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobStatusDetails", ID: &i_JobStatusDetails, Type: smithy.ShapeTypeString})
+var sLastUploaderStatus_LastCollectedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastCollectedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sLastUploaderStatus_LastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sLastUploaderStatus_UploaderStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UploaderStatus", ID: &iUploaderStatus, Members: &mUploaderStatus, Type: smithy.ShapeTypeEnum})
+var sListEdgeAgentConfigurationsEdgeConfig_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sListEdgeAgentConfigurationsEdgeConfig_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sListEdgeAgentConfigurationsEdgeConfig_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sListEdgeAgentConfigurationsEdgeConfig_LastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sListEdgeAgentConfigurationsEdgeConfig_SyncStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SyncStatus", ID: &iSyncStatus, Members: &mSyncStatus, Type: smithy.ShapeTypeEnum})
+var sListEdgeAgentConfigurationsEdgeConfig_FailedStatusDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailedStatusDetails", ID: &i_FailedStatusDetails, Type: smithy.ShapeTypeString})
+var sListEdgeAgentConfigurationsEdgeConfig_EdgeConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EdgeConfig", ID: &iEdgeConfig, Members: &mEdgeConfig, Type: smithy.ShapeTypeStructure})
+var s_ListEdgeAgentConfigurationsEdgeConfigList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListEdgeAgentConfigurationsEdgeConfig, Members: &mListEdgeAgentConfigurationsEdgeConfig, Type: smithy.ShapeTypeStructure})
+var s_ListOfProtocols_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iChannelProtocol, Members: &mChannelProtocol, Type: smithy.ShapeTypeEnum})
+var sLocalSizeConfig_MaxLocalMediaSizeInMB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxLocalMediaSizeInMB", ID: &i_MaxLocalMediaSizeInMB, Type: smithy.ShapeTypeInteger})
+var sLocalSizeConfig_StrategyOnFullSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StrategyOnFullSize", ID: &iStrategyOnFullSize, Members: &mStrategyOnFullSize, Type: smithy.ShapeTypeEnum})
+var s_MappedResourceConfigurationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMappedResourceConfigurationListItem, Members: &mMappedResourceConfigurationListItem, Type: smithy.ShapeTypeStructure})
+var sMappedResourceConfigurationListItem_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_Type, Type: smithy.ShapeTypeString})
+var sMappedResourceConfigurationListItem_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sMediaSourceConfig_MediaUriSecretArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaUriSecretArn", ID: &i_MediaUriSecretArn, Traits: &t35, Type: smithy.ShapeTypeString})
+var sMediaSourceConfig_MediaUriType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaUriType", ID: &iMediaUriType, Members: &mMediaUriType, Type: smithy.ShapeTypeEnum})
+var sMediaStorageConfiguration_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sMediaStorageConfiguration_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iMediaStorageConfigurationStatus, Members: &mMediaStorageConfigurationStatus, Type: smithy.ShapeTypeEnum})
+var sMediaStorageConfigurationStatus_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMediaStorageConfigurationStatus_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMediaUriType_RTSP_URI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RTSP_URI", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMediaUriType_FILE_URI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FILE_URI", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNoDataRetentionException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sNotAuthorizedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sNotificationConfiguration_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iConfigurationStatus, Members: &mConfigurationStatus, Type: smithy.ShapeTypeEnum})
+var sNotificationConfiguration_DestinationConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationConfig", ID: &iNotificationDestinationConfig, Members: &mNotificationDestinationConfig, Type: smithy.ShapeTypeStructure})
+var sNotificationDestinationConfig_Uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Uri", ID: &i_DestinationUri, Type: smithy.ShapeTypeString})
+var sRecorderConfig_MediaSourceConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaSourceConfig", ID: &iMediaSourceConfig, Members: &mMediaSourceConfig, Type: smithy.ShapeTypeStructure})
+var sRecorderConfig_ScheduleConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduleConfig", ID: &iScheduleConfig, Members: &mScheduleConfig, Type: smithy.ShapeTypeStructure})
+var sRecorderStatus_SUCCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRecorderStatus_USER_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USER_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRecorderStatus_SYSTEM_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYSTEM_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_ResourceEndpointList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourceEndpointListItem, Members: &mResourceEndpointListItem, Type: smithy.ShapeTypeStructure})
+var sResourceEndpointListItem_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &iChannelProtocol, Members: &mChannelProtocol, Type: smithy.ShapeTypeEnum})
+var sResourceEndpointListItem_ResourceEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceEndpoint", ID: &i_ResourceEndpoint, Type: smithy.ShapeTypeString})
+var sResourceInUseException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_ResourceTags_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_ResourceTags_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sScheduleConfig_ScheduleExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduleExpression", ID: &i_ScheduleExpression, Type: smithy.ShapeTypeString})
+var sScheduleConfig_DurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurationInSeconds", ID: &i_DurationInSeconds, Type: smithy.ShapeTypeInteger})
+var sSingleMasterChannelEndpointConfiguration_Protocols = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocols", ID: &i_ListOfProtocols, Members: &m_ListOfProtocols, Type: smithy.ShapeTypeList})
+var sSingleMasterChannelEndpointConfiguration_Role = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Role", ID: &iChannelRole, Members: &mChannelRole, Type: smithy.ShapeTypeEnum})
+var sSingleMasterConfiguration_MessageTtlSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageTtlSeconds", ID: &i_MessageTtlSeconds, Type: smithy.ShapeTypeInteger})
+var sStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatus_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStrategyOnFullSize_DELETE_OLDEST_MEDIA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_OLDEST_MEDIA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStrategyOnFullSize_DENY_NEW_MEDIA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DENY_NEW_MEDIA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStreamEdgeConfigurationNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sStreamInfo_DeviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceName", ID: &i_DeviceName, Type: smithy.ShapeTypeString})
+var sStreamInfo_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sStreamInfo_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sStreamInfo_MediaType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaType", ID: &i_MediaType, Type: smithy.ShapeTypeString})
+var sStreamInfo_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_KmsKeyId, Type: smithy.ShapeTypeString})
+var sStreamInfo_Version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Version", ID: &i_Version, Type: smithy.ShapeTypeString})
+var sStreamInfo_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum})
+var sStreamInfo_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sStreamInfo_DataRetentionInHours = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataRetentionInHours", ID: &i_DataRetentionInHours, Type: smithy.ShapeTypeInteger})
+var s_StreamInfoList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStreamInfo, Members: &mStreamInfo, Type: smithy.ShapeTypeStructure})
+var sStreamNameCondition_ComparisonOperator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComparisonOperator", ID: &iComparisonOperator, Members: &mComparisonOperator, Type: smithy.ShapeTypeEnum})
+var sStreamNameCondition_ComparisonValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComparisonValue", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sStreamStorageConfiguration_DefaultStorageTier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultStorageTier", ID: &iDefaultStorageTier, Members: &mDefaultStorageTier, Type: smithy.ShapeTypeEnum})
+var sSyncStatus_SYNCING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYNCING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSyncStatus_ACKNOWLEDGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACKNOWLEDGED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSyncStatus_IN_SYNC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_SYNC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSyncStatus_SYNC_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYNC_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSyncStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSyncStatus_DELETE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSyncStatus_DELETING_ACKNOWLEDGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING_ACKNOWLEDGED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var s_TagOnCreateList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var sTagsPerResourceExceededLimitException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sUpdateDataRetentionOperation_INCREASE_DATA_RETENTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INCREASE_DATA_RETENTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sUpdateDataRetentionOperation_DECREASE_DATA_RETENTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DECREASE_DATA_RETENTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sUploaderConfig_ScheduleConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduleConfig", ID: &iScheduleConfig, Members: &mScheduleConfig, Type: smithy.ShapeTypeStructure})
+var sUploaderStatus_SUCCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sUploaderStatus_USER_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USER_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sUploaderStatus_SYSTEM_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYSTEM_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVersionMismatchException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sCreateSignalingChannelInput_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i_ChannelName, Type: smithy.ShapeTypeString})
+var sCreateSignalingChannelInput_ChannelType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelType", ID: &iChannelType, Members: &mChannelType, Type: smithy.ShapeTypeEnum})
+var sCreateSignalingChannelInput_SingleMasterConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SingleMasterConfiguration", ID: &iSingleMasterConfiguration, Members: &mSingleMasterConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateSignalingChannelInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagOnCreateList, Members: &m_TagOnCreateList, Type: smithy.ShapeTypeList})
+var sCreateSignalingChannelOutput_ChannelARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sCreateStreamInput_DeviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceName", ID: &i_DeviceName, Type: smithy.ShapeTypeString})
+var sCreateStreamInput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sCreateStreamInput_MediaType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaType", ID: &i_MediaType, Type: smithy.ShapeTypeString})
+var sCreateStreamInput_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_KmsKeyId, Type: smithy.ShapeTypeString})
+var sCreateStreamInput_DataRetentionInHours = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataRetentionInHours", ID: &i_DataRetentionInHours, Type: smithy.ShapeTypeInteger})
+var sCreateStreamInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_ResourceTags, Members: &m_ResourceTags, Type: smithy.ShapeTypeMap})
+var sCreateStreamInput_StreamStorageConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamStorageConfiguration", ID: &iStreamStorageConfiguration, Members: &mStreamStorageConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateStreamOutput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sDeleteEdgeConfigurationInput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sDeleteEdgeConfigurationInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sDeleteSignalingChannelInput_ChannelARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sDeleteSignalingChannelInput_CurrentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentVersion", ID: &i_Version, Type: smithy.ShapeTypeString})
+var sDeleteStreamInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sDeleteStreamInput_CurrentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentVersion", ID: &i_Version, Type: smithy.ShapeTypeString})
+var sDescribeEdgeConfigurationInput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sDescribeEdgeConfigurationInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sDescribeEdgeConfigurationOutput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sDescribeEdgeConfigurationOutput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sDescribeEdgeConfigurationOutput_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeEdgeConfigurationOutput_LastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeEdgeConfigurationOutput_SyncStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SyncStatus", ID: &iSyncStatus, Members: &mSyncStatus, Type: smithy.ShapeTypeEnum})
+var sDescribeEdgeConfigurationOutput_FailedStatusDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailedStatusDetails", ID: &i_FailedStatusDetails, Type: smithy.ShapeTypeString})
+var sDescribeEdgeConfigurationOutput_EdgeConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EdgeConfig", ID: &iEdgeConfig, Members: &mEdgeConfig, Type: smithy.ShapeTypeStructure})
+var sDescribeEdgeConfigurationOutput_EdgeAgentStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EdgeAgentStatus", ID: &iEdgeAgentStatus, Members: &mEdgeAgentStatus, Type: smithy.ShapeTypeStructure})
+var sDescribeImageGenerationConfigurationInput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sDescribeImageGenerationConfigurationInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sDescribeImageGenerationConfigurationOutput_ImageGenerationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageGenerationConfiguration", ID: &iImageGenerationConfiguration, Members: &mImageGenerationConfiguration, Type: smithy.ShapeTypeStructure})
+var sDescribeMappedResourceConfigurationInput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sDescribeMappedResourceConfigurationInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sDescribeMappedResourceConfigurationInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MappedResourceConfigurationListLimit, Type: smithy.ShapeTypeInteger})
+var sDescribeMappedResourceConfigurationInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeMappedResourceConfigurationOutput_MappedResourceConfigurationList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MappedResourceConfigurationList", ID: &i_MappedResourceConfigurationList, Members: &m_MappedResourceConfigurationList, Type: smithy.ShapeTypeList})
+var sDescribeMappedResourceConfigurationOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeMediaStorageConfigurationInput_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i_ChannelName, Type: smithy.ShapeTypeString})
+var sDescribeMediaStorageConfigurationInput_ChannelARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sDescribeMediaStorageConfigurationOutput_MediaStorageConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaStorageConfiguration", ID: &iMediaStorageConfiguration, Members: &mMediaStorageConfiguration, Type: smithy.ShapeTypeStructure})
+var sDescribeNotificationConfigurationInput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sDescribeNotificationConfigurationInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sDescribeNotificationConfigurationOutput_NotificationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotificationConfiguration", ID: &iNotificationConfiguration, Members: &mNotificationConfiguration, Type: smithy.ShapeTypeStructure})
+var sDescribeSignalingChannelInput_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i_ChannelName, Type: smithy.ShapeTypeString})
+var sDescribeSignalingChannelInput_ChannelARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sDescribeSignalingChannelOutput_ChannelInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelInfo", ID: &iChannelInfo, Members: &mChannelInfo, Type: smithy.ShapeTypeStructure})
+var sDescribeStreamInput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sDescribeStreamInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sDescribeStreamOutput_StreamInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamInfo", ID: &iStreamInfo, Members: &mStreamInfo, Type: smithy.ShapeTypeStructure})
+var sDescribeStreamStorageConfigurationInput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sDescribeStreamStorageConfigurationInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sDescribeStreamStorageConfigurationOutput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sDescribeStreamStorageConfigurationOutput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sDescribeStreamStorageConfigurationOutput_StreamStorageConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamStorageConfiguration", ID: &iStreamStorageConfiguration, Members: &mStreamStorageConfiguration, Type: smithy.ShapeTypeStructure})
+var sGetDataEndpointInput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sGetDataEndpointInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sGetDataEndpointInput_APIName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APIName", ID: &iAPIName, Members: &mAPIName, Type: smithy.ShapeTypeEnum})
+var sGetDataEndpointOutput_DataEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataEndpoint", ID: &i_DataEndpoint, Type: smithy.ShapeTypeString})
+var sGetSignalingChannelEndpointInput_ChannelARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sGetSignalingChannelEndpointInput_SingleMasterChannelEndpointConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SingleMasterChannelEndpointConfiguration", ID: &iSingleMasterChannelEndpointConfiguration, Members: &mSingleMasterChannelEndpointConfiguration, Type: smithy.ShapeTypeStructure})
+var sGetSignalingChannelEndpointOutput_ResourceEndpointList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceEndpointList", ID: &i_ResourceEndpointList, Members: &m_ResourceEndpointList, Type: smithy.ShapeTypeList})
+var sListEdgeAgentConfigurationsInput_HubDeviceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HubDeviceArn", ID: &i_HubDeviceArn, Type: smithy.ShapeTypeString})
+var sListEdgeAgentConfigurationsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListEdgeAgentConfigurationsInputLimit, Type: smithy.ShapeTypeInteger})
+var sListEdgeAgentConfigurationsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListEdgeAgentConfigurationsOutput_EdgeConfigs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EdgeConfigs", ID: &i_ListEdgeAgentConfigurationsEdgeConfigList, Members: &m_ListEdgeAgentConfigurationsEdgeConfigList, Type: smithy.ShapeTypeList})
+var sListEdgeAgentConfigurationsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListSignalingChannelsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListStreamsInputLimit, Type: smithy.ShapeTypeInteger})
+var sListSignalingChannelsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListSignalingChannelsInput_ChannelNameCondition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelNameCondition", ID: &iChannelNameCondition, Members: &mChannelNameCondition, Type: smithy.ShapeTypeStructure})
+var sListSignalingChannelsOutput_ChannelInfoList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelInfoList", ID: &i_ChannelInfoList, Members: &m_ChannelInfoList, Type: smithy.ShapeTypeList})
+var sListSignalingChannelsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListStreamsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListStreamsInputLimit, Type: smithy.ShapeTypeInteger})
+var sListStreamsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListStreamsInput_StreamNameCondition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamNameCondition", ID: &iStreamNameCondition, Members: &mStreamNameCondition, Type: smithy.ShapeTypeStructure})
+var sListStreamsOutput_StreamInfoList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamInfoList", ID: &i_StreamInfoList, Members: &m_StreamInfoList, Type: smithy.ShapeTypeList})
+var sListStreamsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListTagsForResourceInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListTagsForResourceInput_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sListTagsForResourceOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListTagsForResourceOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_ResourceTags, Members: &m_ResourceTags, Type: smithy.ShapeTypeMap})
+var sListTagsForStreamInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListTagsForStreamInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sListTagsForStreamInput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sListTagsForStreamOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListTagsForStreamOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_ResourceTags, Members: &m_ResourceTags, Type: smithy.ShapeTypeMap})
+var sStartEdgeConfigurationUpdateInput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sStartEdgeConfigurationUpdateInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sStartEdgeConfigurationUpdateInput_EdgeConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EdgeConfig", ID: &iEdgeConfig, Members: &mEdgeConfig, Type: smithy.ShapeTypeStructure})
+var sStartEdgeConfigurationUpdateOutput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sStartEdgeConfigurationUpdateOutput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sStartEdgeConfigurationUpdateOutput_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sStartEdgeConfigurationUpdateOutput_LastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sStartEdgeConfigurationUpdateOutput_SyncStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SyncStatus", ID: &iSyncStatus, Members: &mSyncStatus, Type: smithy.ShapeTypeEnum})
+var sStartEdgeConfigurationUpdateOutput_FailedStatusDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailedStatusDetails", ID: &i_FailedStatusDetails, Type: smithy.ShapeTypeString})
+var sStartEdgeConfigurationUpdateOutput_EdgeConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EdgeConfig", ID: &iEdgeConfig, Members: &mEdgeConfig, Type: smithy.ShapeTypeStructure})
+var sTagResourceInput_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sTagResourceInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sTagStreamInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sTagStreamInput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sTagStreamInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_ResourceTags, Members: &m_ResourceTags, Type: smithy.ShapeTypeMap})
+var sUntagResourceInput_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sUntagResourceInput_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeyList", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var sUntagStreamInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sUntagStreamInput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sUntagStreamInput_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeyList", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var sUpdateDataRetentionInput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sUpdateDataRetentionInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sUpdateDataRetentionInput_CurrentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentVersion", ID: &i_Version, Type: smithy.ShapeTypeString})
+var sUpdateDataRetentionInput_Operation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operation", ID: &iUpdateDataRetentionOperation, Members: &mUpdateDataRetentionOperation, Type: smithy.ShapeTypeEnum})
+var sUpdateDataRetentionInput_DataRetentionChangeInHours = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataRetentionChangeInHours", ID: &i_DataRetentionChangeInHours, Type: smithy.ShapeTypeInteger})
+var sUpdateImageGenerationConfigurationInput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sUpdateImageGenerationConfigurationInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sUpdateImageGenerationConfigurationInput_ImageGenerationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageGenerationConfiguration", ID: &iImageGenerationConfiguration, Members: &mImageGenerationConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateMediaStorageConfigurationInput_ChannelARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sUpdateMediaStorageConfigurationInput_MediaStorageConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaStorageConfiguration", ID: &iMediaStorageConfiguration, Members: &mMediaStorageConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateNotificationConfigurationInput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sUpdateNotificationConfigurationInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sUpdateNotificationConfigurationInput_NotificationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotificationConfiguration", ID: &iNotificationConfiguration, Members: &mNotificationConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateSignalingChannelInput_ChannelARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sUpdateSignalingChannelInput_CurrentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentVersion", ID: &i_Version, Type: smithy.ShapeTypeString})
+var sUpdateSignalingChannelInput_SingleMasterConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SingleMasterConfiguration", ID: &iSingleMasterConfiguration, Members: &mSingleMasterConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateStreamInput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sUpdateStreamInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sUpdateStreamInput_CurrentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentVersion", ID: &i_Version, Type: smithy.ShapeTypeString})
+var sUpdateStreamInput_DeviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceName", ID: &i_DeviceName, Type: smithy.ShapeTypeString})
+var sUpdateStreamInput_MediaType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaType", ID: &i_MediaType, Type: smithy.ShapeTypeString})
+var sUpdateStreamStorageConfigurationInput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sUpdateStreamStorageConfigurationInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sUpdateStreamStorageConfigurationInput_CurrentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentVersion", ID: &i_Version, Type: smithy.ShapeTypeString})
+var sUpdateStreamStorageConfigurationInput_StreamStorageConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamStorageConfiguration", ID: &iStreamStorageConfiguration, Members: &mStreamStorageConfiguration, Type: smithy.ShapeTypeStructure})
+
+var CreateSignalingChannel = &sCreateSignalingChannel
+
+var CreateStream = &sCreateStream
+
+var DeleteEdgeConfiguration = &sDeleteEdgeConfiguration
+
+var DeleteSignalingChannel = &sDeleteSignalingChannel
+
+var DeleteStream = &sDeleteStream
+
+var DescribeEdgeConfiguration = &sDescribeEdgeConfiguration
+
+var DescribeImageGenerationConfiguration = &sDescribeImageGenerationConfiguration
+
+var DescribeMappedResourceConfiguration = &sDescribeMappedResourceConfiguration
+
+var DescribeMediaStorageConfiguration = &sDescribeMediaStorageConfiguration
+
+var DescribeNotificationConfiguration = &sDescribeNotificationConfiguration
+
+var DescribeSignalingChannel = &sDescribeSignalingChannel
+
+var DescribeStream = &sDescribeStream
+
+var DescribeStreamStorageConfiguration = &sDescribeStreamStorageConfiguration
+
+var GetDataEndpoint = &sGetDataEndpoint
+
+var GetSignalingChannelEndpoint = &sGetSignalingChannelEndpoint
+
+var ListEdgeAgentConfigurations = &sListEdgeAgentConfigurations
+
+var ListSignalingChannels = &sListSignalingChannels
+
+var ListStreams = &sListStreams
+
+var ListTagsForResource = &sListTagsForResource
+
+var ListTagsForStream = &sListTagsForStream
+
+var StartEdgeConfigurationUpdate = &sStartEdgeConfigurationUpdate
+
+var TagResource = &sTagResource
+
+var TagStream = &sTagStream
+
+var UntagResource = &sUntagResource
+
+var UntagStream = &sUntagStream
+
+var UpdateDataRetention = &sUpdateDataRetention
+
+var UpdateImageGenerationConfiguration = &sUpdateImageGenerationConfiguration
+
+var UpdateMediaStorageConfiguration = &sUpdateMediaStorageConfiguration
+
+var UpdateNotificationConfiguration = &sUpdateNotificationConfiguration
+
+var UpdateSignalingChannel = &sUpdateSignalingChannel
+
+var UpdateStream = &sUpdateStream
+
+var UpdateStreamStorageConfiguration = &sUpdateStreamStorageConfiguration
+
+var _KinesisVideo_20170930 = &s_KinesisVideo_20170930
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_Message = &sAccessDeniedException_Message
+
+var AccountChannelLimitExceededException = &sAccountChannelLimitExceededException
+var AccountChannelLimitExceededException_Message = &sAccountChannelLimitExceededException_Message
+
+var AccountStreamLimitExceededException = &sAccountStreamLimitExceededException
+var AccountStreamLimitExceededException_Message = &sAccountStreamLimitExceededException_Message
+
+var APIName = &sAPIName
+var APIName_PUT_MEDIA = &sAPIName_PUT_MEDIA
+var APIName_GET_MEDIA = &sAPIName_GET_MEDIA
+var APIName_LIST_FRAGMENTS = &sAPIName_LIST_FRAGMENTS
+var APIName_GET_MEDIA_FOR_FRAGMENT_LIST = &sAPIName_GET_MEDIA_FOR_FRAGMENT_LIST
+var APIName_GET_HLS_STREAMING_SESSION_URL = &sAPIName_GET_HLS_STREAMING_SESSION_URL
+var APIName_GET_DASH_STREAMING_SESSION_URL = &sAPIName_GET_DASH_STREAMING_SESSION_URL
+var APIName_GET_CLIP = &sAPIName_GET_CLIP
+var APIName_GET_IMAGES = &sAPIName_GET_IMAGES
+
+var ChannelInfo = &sChannelInfo
+var ChannelInfo_ChannelName = &sChannelInfo_ChannelName
+var ChannelInfo_ChannelARN = &sChannelInfo_ChannelARN
+var ChannelInfo_ChannelType = &sChannelInfo_ChannelType
+var ChannelInfo_ChannelStatus = &sChannelInfo_ChannelStatus
+var ChannelInfo_CreationTime = &sChannelInfo_CreationTime
+var ChannelInfo_SingleMasterConfiguration = &sChannelInfo_SingleMasterConfiguration
+var ChannelInfo_Version = &sChannelInfo_Version
+
+var _ChannelInfoList = &s_ChannelInfoList
+var _ChannelInfoList_member = &s_ChannelInfoList_member
+
+var _ChannelName = &s_ChannelName
+
+var ChannelNameCondition = &sChannelNameCondition
+var ChannelNameCondition_ComparisonOperator = &sChannelNameCondition_ComparisonOperator
+var ChannelNameCondition_ComparisonValue = &sChannelNameCondition_ComparisonValue
+
+var ChannelProtocol = &sChannelProtocol
+var ChannelProtocol_WSS = &sChannelProtocol_WSS
+var ChannelProtocol_HTTPS = &sChannelProtocol_HTTPS
+var ChannelProtocol_WEBRTC = &sChannelProtocol_WEBRTC
+
+var ChannelRole = &sChannelRole
+var ChannelRole_MASTER = &sChannelRole_MASTER
+var ChannelRole_VIEWER = &sChannelRole_VIEWER
+
+var ChannelType = &sChannelType
+var ChannelType_SINGLE_MASTER = &sChannelType_SINGLE_MASTER
+var ChannelType_FULL_MESH = &sChannelType_FULL_MESH
+
+var ClientLimitExceededException = &sClientLimitExceededException
+var ClientLimitExceededException_Message = &sClientLimitExceededException_Message
+
+var ComparisonOperator = &sComparisonOperator
+var ComparisonOperator_BEGINS_WITH = &sComparisonOperator_BEGINS_WITH
+
+var ConfigurationStatus = &sConfigurationStatus
+var ConfigurationStatus_ENABLED = &sConfigurationStatus_ENABLED
+var ConfigurationStatus_DISABLED = &sConfigurationStatus_DISABLED
+
+var _DataEndpoint = &s_DataEndpoint
+
+var _DataRetentionChangeInHours = &s_DataRetentionChangeInHours
+
+var _DataRetentionInHours = &s_DataRetentionInHours
+
+var DefaultStorageTier = &sDefaultStorageTier
+var DefaultStorageTier_HOT = &sDefaultStorageTier_HOT
+var DefaultStorageTier_WARM = &sDefaultStorageTier_WARM
+
+var _DeleteAfterUpload = &s_DeleteAfterUpload
+
+var DeletionConfig = &sDeletionConfig
+var DeletionConfig_EdgeRetentionInHours = &sDeletionConfig_EdgeRetentionInHours
+var DeletionConfig_LocalSizeConfig = &sDeletionConfig_LocalSizeConfig
+var DeletionConfig_DeleteAfterUpload = &sDeletionConfig_DeleteAfterUpload
+
+var _DestinationRegion = &s_DestinationRegion
+
+var _DestinationUri = &s_DestinationUri
+
+var _DeviceName = &s_DeviceName
+
+var DeviceStreamLimitExceededException = &sDeviceStreamLimitExceededException
+var DeviceStreamLimitExceededException_Message = &sDeviceStreamLimitExceededException_Message
+
+var _DurationInSeconds = &s_DurationInSeconds
+
+var EdgeAgentStatus = &sEdgeAgentStatus
+var EdgeAgentStatus_LastRecorderStatus = &sEdgeAgentStatus_LastRecorderStatus
+var EdgeAgentStatus_LastUploaderStatus = &sEdgeAgentStatus_LastUploaderStatus
+
+var EdgeConfig = &sEdgeConfig
+var EdgeConfig_HubDeviceArn = &sEdgeConfig_HubDeviceArn
+var EdgeConfig_RecorderConfig = &sEdgeConfig_RecorderConfig
+var EdgeConfig_UploaderConfig = &sEdgeConfig_UploaderConfig
+var EdgeConfig_DeletionConfig = &sEdgeConfig_DeletionConfig
+
+var _EdgeRetentionInHours = &s_EdgeRetentionInHours
+
+var _ErrorMessage = &s_ErrorMessage
+
+var _FailedStatusDetails = &s_FailedStatusDetails
+
+var Format = &sFormat
+var Format_JPEG = &sFormat_JPEG
+var Format_PNG = &sFormat_PNG
+
+var _FormatConfig = &s_FormatConfig
+var _FormatConfig_key = &s_FormatConfig_key
+var _FormatConfig_value = &s_FormatConfig_value
+
+var FormatConfigKey = &sFormatConfigKey
+var FormatConfigKey_JPEGQuality = &sFormatConfigKey_JPEGQuality
+
+var _FormatConfigValue = &s_FormatConfigValue
+
+var _HeightPixels = &s_HeightPixels
+
+var _HubDeviceArn = &s_HubDeviceArn
+
+var ImageGenerationConfiguration = &sImageGenerationConfiguration
+var ImageGenerationConfiguration_Status = &sImageGenerationConfiguration_Status
+var ImageGenerationConfiguration_ImageSelectorType = &sImageGenerationConfiguration_ImageSelectorType
+var ImageGenerationConfiguration_DestinationConfig = &sImageGenerationConfiguration_DestinationConfig
+var ImageGenerationConfiguration_SamplingInterval = &sImageGenerationConfiguration_SamplingInterval
+var ImageGenerationConfiguration_Format = &sImageGenerationConfiguration_Format
+var ImageGenerationConfiguration_FormatConfig = &sImageGenerationConfiguration_FormatConfig
+var ImageGenerationConfiguration_WidthPixels = &sImageGenerationConfiguration_WidthPixels
+var ImageGenerationConfiguration_HeightPixels = &sImageGenerationConfiguration_HeightPixels
+
+var ImageGenerationDestinationConfig = &sImageGenerationDestinationConfig
+var ImageGenerationDestinationConfig_Uri = &sImageGenerationDestinationConfig_Uri
+var ImageGenerationDestinationConfig_DestinationRegion = &sImageGenerationDestinationConfig_DestinationRegion
+
+var ImageSelectorType = &sImageSelectorType
+var ImageSelectorType_SERVER_TIMESTAMP = &sImageSelectorType_SERVER_TIMESTAMP
+var ImageSelectorType_PRODUCER_TIMESTAMP = &sImageSelectorType_PRODUCER_TIMESTAMP
+
+var InvalidArgumentException = &sInvalidArgumentException
+var InvalidArgumentException_Message = &sInvalidArgumentException_Message
+
+var InvalidDeviceException = &sInvalidDeviceException
+var InvalidDeviceException_Message = &sInvalidDeviceException_Message
+
+var InvalidResourceFormatException = &sInvalidResourceFormatException
+var InvalidResourceFormatException_Message = &sInvalidResourceFormatException_Message
+
+var _JobStatusDetails = &s_JobStatusDetails
+
+var _KmsKeyId = &s_KmsKeyId
+
+var LastRecorderStatus = &sLastRecorderStatus
+var LastRecorderStatus_JobStatusDetails = &sLastRecorderStatus_JobStatusDetails
+var LastRecorderStatus_LastCollectedTime = &sLastRecorderStatus_LastCollectedTime
+var LastRecorderStatus_LastUpdatedTime = &sLastRecorderStatus_LastUpdatedTime
+var LastRecorderStatus_RecorderStatus = &sLastRecorderStatus_RecorderStatus
+
+var LastUploaderStatus = &sLastUploaderStatus
+var LastUploaderStatus_JobStatusDetails = &sLastUploaderStatus_JobStatusDetails
+var LastUploaderStatus_LastCollectedTime = &sLastUploaderStatus_LastCollectedTime
+var LastUploaderStatus_LastUpdatedTime = &sLastUploaderStatus_LastUpdatedTime
+var LastUploaderStatus_UploaderStatus = &sLastUploaderStatus_UploaderStatus
+
+var ListEdgeAgentConfigurationsEdgeConfig = &sListEdgeAgentConfigurationsEdgeConfig
+var ListEdgeAgentConfigurationsEdgeConfig_StreamName = &sListEdgeAgentConfigurationsEdgeConfig_StreamName
+var ListEdgeAgentConfigurationsEdgeConfig_StreamARN = &sListEdgeAgentConfigurationsEdgeConfig_StreamARN
+var ListEdgeAgentConfigurationsEdgeConfig_CreationTime = &sListEdgeAgentConfigurationsEdgeConfig_CreationTime
+var ListEdgeAgentConfigurationsEdgeConfig_LastUpdatedTime = &sListEdgeAgentConfigurationsEdgeConfig_LastUpdatedTime
+var ListEdgeAgentConfigurationsEdgeConfig_SyncStatus = &sListEdgeAgentConfigurationsEdgeConfig_SyncStatus
+var ListEdgeAgentConfigurationsEdgeConfig_FailedStatusDetails = &sListEdgeAgentConfigurationsEdgeConfig_FailedStatusDetails
+var ListEdgeAgentConfigurationsEdgeConfig_EdgeConfig = &sListEdgeAgentConfigurationsEdgeConfig_EdgeConfig
+
+var _ListEdgeAgentConfigurationsEdgeConfigList = &s_ListEdgeAgentConfigurationsEdgeConfigList
+var _ListEdgeAgentConfigurationsEdgeConfigList_member = &s_ListEdgeAgentConfigurationsEdgeConfigList_member
+
+var _ListEdgeAgentConfigurationsInputLimit = &s_ListEdgeAgentConfigurationsInputLimit
+
+var _ListOfProtocols = &s_ListOfProtocols
+var _ListOfProtocols_member = &s_ListOfProtocols_member
+
+var _ListStreamsInputLimit = &s_ListStreamsInputLimit
+
+var LocalSizeConfig = &sLocalSizeConfig
+var LocalSizeConfig_MaxLocalMediaSizeInMB = &sLocalSizeConfig_MaxLocalMediaSizeInMB
+var LocalSizeConfig_StrategyOnFullSize = &sLocalSizeConfig_StrategyOnFullSize
+
+var _MappedResourceConfigurationList = &s_MappedResourceConfigurationList
+var _MappedResourceConfigurationList_member = &s_MappedResourceConfigurationList_member
+
+var MappedResourceConfigurationListItem = &sMappedResourceConfigurationListItem
+var MappedResourceConfigurationListItem_Type = &sMappedResourceConfigurationListItem_Type
+var MappedResourceConfigurationListItem_ARN = &sMappedResourceConfigurationListItem_ARN
+
+var _MappedResourceConfigurationListLimit = &s_MappedResourceConfigurationListLimit
+
+var _MaxLocalMediaSizeInMB = &s_MaxLocalMediaSizeInMB
+
+var MediaSourceConfig = &sMediaSourceConfig
+var MediaSourceConfig_MediaUriSecretArn = &sMediaSourceConfig_MediaUriSecretArn
+var MediaSourceConfig_MediaUriType = &sMediaSourceConfig_MediaUriType
+
+var MediaStorageConfiguration = &sMediaStorageConfiguration
+var MediaStorageConfiguration_StreamARN = &sMediaStorageConfiguration_StreamARN
+var MediaStorageConfiguration_Status = &sMediaStorageConfiguration_Status
+
+var MediaStorageConfigurationStatus = &sMediaStorageConfigurationStatus
+var MediaStorageConfigurationStatus_ENABLED = &sMediaStorageConfigurationStatus_ENABLED
+var MediaStorageConfigurationStatus_DISABLED = &sMediaStorageConfigurationStatus_DISABLED
+
+var _MediaType = &s_MediaType
+
+var _MediaUriSecretArn = &s_MediaUriSecretArn
+
+var MediaUriType = &sMediaUriType
+var MediaUriType_RTSP_URI = &sMediaUriType_RTSP_URI
+var MediaUriType_FILE_URI = &sMediaUriType_FILE_URI
+
+var _MessageTtlSeconds = &s_MessageTtlSeconds
+
+var _NextToken = &s_NextToken
+
+var NoDataRetentionException = &sNoDataRetentionException
+var NoDataRetentionException_Message = &sNoDataRetentionException_Message
+
+var NotAuthorizedException = &sNotAuthorizedException
+var NotAuthorizedException_Message = &sNotAuthorizedException_Message
+
+var NotificationConfiguration = &sNotificationConfiguration
+var NotificationConfiguration_Status = &sNotificationConfiguration_Status
+var NotificationConfiguration_DestinationConfig = &sNotificationConfiguration_DestinationConfig
+
+var NotificationDestinationConfig = &sNotificationDestinationConfig
+var NotificationDestinationConfig_Uri = &sNotificationDestinationConfig_Uri
+
+var RecorderConfig = &sRecorderConfig
+var RecorderConfig_MediaSourceConfig = &sRecorderConfig_MediaSourceConfig
+var RecorderConfig_ScheduleConfig = &sRecorderConfig_ScheduleConfig
+
+var RecorderStatus = &sRecorderStatus
+var RecorderStatus_SUCCESS = &sRecorderStatus_SUCCESS
+var RecorderStatus_USER_ERROR = &sRecorderStatus_USER_ERROR
+var RecorderStatus_SYSTEM_ERROR = &sRecorderStatus_SYSTEM_ERROR
+
+var _ResourceARN = &s_ResourceARN
+
+var _ResourceEndpoint = &s_ResourceEndpoint
+
+var _ResourceEndpointList = &s_ResourceEndpointList
+var _ResourceEndpointList_member = &s_ResourceEndpointList_member
+
+var ResourceEndpointListItem = &sResourceEndpointListItem
+var ResourceEndpointListItem_Protocol = &sResourceEndpointListItem_Protocol
+var ResourceEndpointListItem_ResourceEndpoint = &sResourceEndpointListItem_ResourceEndpoint
+
+var ResourceInUseException = &sResourceInUseException
+var ResourceInUseException_Message = &sResourceInUseException_Message
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+
+var _ResourceTags = &s_ResourceTags
+var _ResourceTags_key = &s_ResourceTags_key
+var _ResourceTags_value = &s_ResourceTags_value
+
+var _SamplingInterval = &s_SamplingInterval
+
+var ScheduleConfig = &sScheduleConfig
+var ScheduleConfig_ScheduleExpression = &sScheduleConfig_ScheduleExpression
+var ScheduleConfig_DurationInSeconds = &sScheduleConfig_DurationInSeconds
+
+var _ScheduleExpression = &s_ScheduleExpression
+
+var SingleMasterChannelEndpointConfiguration = &sSingleMasterChannelEndpointConfiguration
+var SingleMasterChannelEndpointConfiguration_Protocols = &sSingleMasterChannelEndpointConfiguration_Protocols
+var SingleMasterChannelEndpointConfiguration_Role = &sSingleMasterChannelEndpointConfiguration_Role
+
+var SingleMasterConfiguration = &sSingleMasterConfiguration
+var SingleMasterConfiguration_MessageTtlSeconds = &sSingleMasterConfiguration_MessageTtlSeconds
+
+var Status = &sStatus
+var Status_CREATING = &sStatus_CREATING
+var Status_ACTIVE = &sStatus_ACTIVE
+var Status_UPDATING = &sStatus_UPDATING
+var Status_DELETING = &sStatus_DELETING
+
+var StrategyOnFullSize = &sStrategyOnFullSize
+var StrategyOnFullSize_DELETE_OLDEST_MEDIA = &sStrategyOnFullSize_DELETE_OLDEST_MEDIA
+var StrategyOnFullSize_DENY_NEW_MEDIA = &sStrategyOnFullSize_DENY_NEW_MEDIA
+
+var StreamEdgeConfigurationNotFoundException = &sStreamEdgeConfigurationNotFoundException
+var StreamEdgeConfigurationNotFoundException_Message = &sStreamEdgeConfigurationNotFoundException_Message
+
+var StreamInfo = &sStreamInfo
+var StreamInfo_DeviceName = &sStreamInfo_DeviceName
+var StreamInfo_StreamName = &sStreamInfo_StreamName
+var StreamInfo_StreamARN = &sStreamInfo_StreamARN
+var StreamInfo_MediaType = &sStreamInfo_MediaType
+var StreamInfo_KmsKeyId = &sStreamInfo_KmsKeyId
+var StreamInfo_Version = &sStreamInfo_Version
+var StreamInfo_Status = &sStreamInfo_Status
+var StreamInfo_CreationTime = &sStreamInfo_CreationTime
+var StreamInfo_DataRetentionInHours = &sStreamInfo_DataRetentionInHours
+
+var _StreamInfoList = &s_StreamInfoList
+var _StreamInfoList_member = &s_StreamInfoList_member
+
+var _StreamName = &s_StreamName
+
+var StreamNameCondition = &sStreamNameCondition
+var StreamNameCondition_ComparisonOperator = &sStreamNameCondition_ComparisonOperator
+var StreamNameCondition_ComparisonValue = &sStreamNameCondition_ComparisonValue
+
+var StreamStorageConfiguration = &sStreamStorageConfiguration
+var StreamStorageConfiguration_DefaultStorageTier = &sStreamStorageConfiguration_DefaultStorageTier
+
+var SyncStatus = &sSyncStatus
+var SyncStatus_SYNCING = &sSyncStatus_SYNCING
+var SyncStatus_ACKNOWLEDGED = &sSyncStatus_ACKNOWLEDGED
+var SyncStatus_IN_SYNC = &sSyncStatus_IN_SYNC
+var SyncStatus_SYNC_FAILED = &sSyncStatus_SYNC_FAILED
+var SyncStatus_DELETING = &sSyncStatus_DELETING
+var SyncStatus_DELETE_FAILED = &sSyncStatus_DELETE_FAILED
+var SyncStatus_DELETING_ACKNOWLEDGED = &sSyncStatus_DELETING_ACKNOWLEDGED
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _TagOnCreateList = &s_TagOnCreateList
+var _TagOnCreateList_member = &s_TagOnCreateList_member
+
+var TagsPerResourceExceededLimitException = &sTagsPerResourceExceededLimitException
+var TagsPerResourceExceededLimitException_Message = &sTagsPerResourceExceededLimitException_Message
+
+var _TagValue = &s_TagValue
+
+var _Timestamp = &s_Timestamp
+
+var _Type = &s_Type
+
+var UpdateDataRetentionOperation = &sUpdateDataRetentionOperation
+var UpdateDataRetentionOperation_INCREASE_DATA_RETENTION = &sUpdateDataRetentionOperation_INCREASE_DATA_RETENTION
+var UpdateDataRetentionOperation_DECREASE_DATA_RETENTION = &sUpdateDataRetentionOperation_DECREASE_DATA_RETENTION
+
+var UploaderConfig = &sUploaderConfig
+var UploaderConfig_ScheduleConfig = &sUploaderConfig_ScheduleConfig
+
+var UploaderStatus = &sUploaderStatus
+var UploaderStatus_SUCCESS = &sUploaderStatus_SUCCESS
+var UploaderStatus_USER_ERROR = &sUploaderStatus_USER_ERROR
+var UploaderStatus_SYSTEM_ERROR = &sUploaderStatus_SYSTEM_ERROR
+
+var _Version = &s_Version
+
+var VersionMismatchException = &sVersionMismatchException
+var VersionMismatchException_Message = &sVersionMismatchException_Message
+
+var _WidthPixels = &s_WidthPixels
+
+var CreateSignalingChannelInput = &sCreateSignalingChannelInput
+var CreateSignalingChannelInput_ChannelName = &sCreateSignalingChannelInput_ChannelName
+var CreateSignalingChannelInput_ChannelType = &sCreateSignalingChannelInput_ChannelType
+var CreateSignalingChannelInput_SingleMasterConfiguration = &sCreateSignalingChannelInput_SingleMasterConfiguration
+var CreateSignalingChannelInput_Tags = &sCreateSignalingChannelInput_Tags
+
+var CreateSignalingChannelOutput = &sCreateSignalingChannelOutput
+var CreateSignalingChannelOutput_ChannelARN = &sCreateSignalingChannelOutput_ChannelARN
+
+var CreateStreamInput = &sCreateStreamInput
+var CreateStreamInput_DeviceName = &sCreateStreamInput_DeviceName
+var CreateStreamInput_StreamName = &sCreateStreamInput_StreamName
+var CreateStreamInput_MediaType = &sCreateStreamInput_MediaType
+var CreateStreamInput_KmsKeyId = &sCreateStreamInput_KmsKeyId
+var CreateStreamInput_DataRetentionInHours = &sCreateStreamInput_DataRetentionInHours
+var CreateStreamInput_Tags = &sCreateStreamInput_Tags
+var CreateStreamInput_StreamStorageConfiguration = &sCreateStreamInput_StreamStorageConfiguration
+
+var CreateStreamOutput = &sCreateStreamOutput
+var CreateStreamOutput_StreamARN = &sCreateStreamOutput_StreamARN
+
+var DeleteEdgeConfigurationInput = &sDeleteEdgeConfigurationInput
+var DeleteEdgeConfigurationInput_StreamName = &sDeleteEdgeConfigurationInput_StreamName
+var DeleteEdgeConfigurationInput_StreamARN = &sDeleteEdgeConfigurationInput_StreamARN
+
+var DeleteEdgeConfigurationOutput = &sDeleteEdgeConfigurationOutput
+
+var DeleteSignalingChannelInput = &sDeleteSignalingChannelInput
+var DeleteSignalingChannelInput_ChannelARN = &sDeleteSignalingChannelInput_ChannelARN
+var DeleteSignalingChannelInput_CurrentVersion = &sDeleteSignalingChannelInput_CurrentVersion
+
+var DeleteSignalingChannelOutput = &sDeleteSignalingChannelOutput
+
+var DeleteStreamInput = &sDeleteStreamInput
+var DeleteStreamInput_StreamARN = &sDeleteStreamInput_StreamARN
+var DeleteStreamInput_CurrentVersion = &sDeleteStreamInput_CurrentVersion
+
+var DeleteStreamOutput = &sDeleteStreamOutput
+
+var DescribeEdgeConfigurationInput = &sDescribeEdgeConfigurationInput
+var DescribeEdgeConfigurationInput_StreamName = &sDescribeEdgeConfigurationInput_StreamName
+var DescribeEdgeConfigurationInput_StreamARN = &sDescribeEdgeConfigurationInput_StreamARN
+
+var DescribeEdgeConfigurationOutput = &sDescribeEdgeConfigurationOutput
+var DescribeEdgeConfigurationOutput_StreamName = &sDescribeEdgeConfigurationOutput_StreamName
+var DescribeEdgeConfigurationOutput_StreamARN = &sDescribeEdgeConfigurationOutput_StreamARN
+var DescribeEdgeConfigurationOutput_CreationTime = &sDescribeEdgeConfigurationOutput_CreationTime
+var DescribeEdgeConfigurationOutput_LastUpdatedTime = &sDescribeEdgeConfigurationOutput_LastUpdatedTime
+var DescribeEdgeConfigurationOutput_SyncStatus = &sDescribeEdgeConfigurationOutput_SyncStatus
+var DescribeEdgeConfigurationOutput_FailedStatusDetails = &sDescribeEdgeConfigurationOutput_FailedStatusDetails
+var DescribeEdgeConfigurationOutput_EdgeConfig = &sDescribeEdgeConfigurationOutput_EdgeConfig
+var DescribeEdgeConfigurationOutput_EdgeAgentStatus = &sDescribeEdgeConfigurationOutput_EdgeAgentStatus
+
+var DescribeImageGenerationConfigurationInput = &sDescribeImageGenerationConfigurationInput
+var DescribeImageGenerationConfigurationInput_StreamName = &sDescribeImageGenerationConfigurationInput_StreamName
+var DescribeImageGenerationConfigurationInput_StreamARN = &sDescribeImageGenerationConfigurationInput_StreamARN
+
+var DescribeImageGenerationConfigurationOutput = &sDescribeImageGenerationConfigurationOutput
+var DescribeImageGenerationConfigurationOutput_ImageGenerationConfiguration = &sDescribeImageGenerationConfigurationOutput_ImageGenerationConfiguration
+
+var DescribeMappedResourceConfigurationInput = &sDescribeMappedResourceConfigurationInput
+var DescribeMappedResourceConfigurationInput_StreamName = &sDescribeMappedResourceConfigurationInput_StreamName
+var DescribeMappedResourceConfigurationInput_StreamARN = &sDescribeMappedResourceConfigurationInput_StreamARN
+var DescribeMappedResourceConfigurationInput_MaxResults = &sDescribeMappedResourceConfigurationInput_MaxResults
+var DescribeMappedResourceConfigurationInput_NextToken = &sDescribeMappedResourceConfigurationInput_NextToken
+
+var DescribeMappedResourceConfigurationOutput = &sDescribeMappedResourceConfigurationOutput
+var DescribeMappedResourceConfigurationOutput_MappedResourceConfigurationList = &sDescribeMappedResourceConfigurationOutput_MappedResourceConfigurationList
+var DescribeMappedResourceConfigurationOutput_NextToken = &sDescribeMappedResourceConfigurationOutput_NextToken
+
+var DescribeMediaStorageConfigurationInput = &sDescribeMediaStorageConfigurationInput
+var DescribeMediaStorageConfigurationInput_ChannelName = &sDescribeMediaStorageConfigurationInput_ChannelName
+var DescribeMediaStorageConfigurationInput_ChannelARN = &sDescribeMediaStorageConfigurationInput_ChannelARN
+
+var DescribeMediaStorageConfigurationOutput = &sDescribeMediaStorageConfigurationOutput
+var DescribeMediaStorageConfigurationOutput_MediaStorageConfiguration = &sDescribeMediaStorageConfigurationOutput_MediaStorageConfiguration
+
+var DescribeNotificationConfigurationInput = &sDescribeNotificationConfigurationInput
+var DescribeNotificationConfigurationInput_StreamName = &sDescribeNotificationConfigurationInput_StreamName
+var DescribeNotificationConfigurationInput_StreamARN = &sDescribeNotificationConfigurationInput_StreamARN
+
+var DescribeNotificationConfigurationOutput = &sDescribeNotificationConfigurationOutput
+var DescribeNotificationConfigurationOutput_NotificationConfiguration = &sDescribeNotificationConfigurationOutput_NotificationConfiguration
+
+var DescribeSignalingChannelInput = &sDescribeSignalingChannelInput
+var DescribeSignalingChannelInput_ChannelName = &sDescribeSignalingChannelInput_ChannelName
+var DescribeSignalingChannelInput_ChannelARN = &sDescribeSignalingChannelInput_ChannelARN
+
+var DescribeSignalingChannelOutput = &sDescribeSignalingChannelOutput
+var DescribeSignalingChannelOutput_ChannelInfo = &sDescribeSignalingChannelOutput_ChannelInfo
+
+var DescribeStreamInput = &sDescribeStreamInput
+var DescribeStreamInput_StreamName = &sDescribeStreamInput_StreamName
+var DescribeStreamInput_StreamARN = &sDescribeStreamInput_StreamARN
+
+var DescribeStreamOutput = &sDescribeStreamOutput
+var DescribeStreamOutput_StreamInfo = &sDescribeStreamOutput_StreamInfo
+
+var DescribeStreamStorageConfigurationInput = &sDescribeStreamStorageConfigurationInput
+var DescribeStreamStorageConfigurationInput_StreamName = &sDescribeStreamStorageConfigurationInput_StreamName
+var DescribeStreamStorageConfigurationInput_StreamARN = &sDescribeStreamStorageConfigurationInput_StreamARN
+
+var DescribeStreamStorageConfigurationOutput = &sDescribeStreamStorageConfigurationOutput
+var DescribeStreamStorageConfigurationOutput_StreamName = &sDescribeStreamStorageConfigurationOutput_StreamName
+var DescribeStreamStorageConfigurationOutput_StreamARN = &sDescribeStreamStorageConfigurationOutput_StreamARN
+var DescribeStreamStorageConfigurationOutput_StreamStorageConfiguration = &sDescribeStreamStorageConfigurationOutput_StreamStorageConfiguration
+
+var GetDataEndpointInput = &sGetDataEndpointInput
+var GetDataEndpointInput_StreamName = &sGetDataEndpointInput_StreamName
+var GetDataEndpointInput_StreamARN = &sGetDataEndpointInput_StreamARN
+var GetDataEndpointInput_APIName = &sGetDataEndpointInput_APIName
+
+var GetDataEndpointOutput = &sGetDataEndpointOutput
+var GetDataEndpointOutput_DataEndpoint = &sGetDataEndpointOutput_DataEndpoint
+
+var GetSignalingChannelEndpointInput = &sGetSignalingChannelEndpointInput
+var GetSignalingChannelEndpointInput_ChannelARN = &sGetSignalingChannelEndpointInput_ChannelARN
+var GetSignalingChannelEndpointInput_SingleMasterChannelEndpointConfiguration = &sGetSignalingChannelEndpointInput_SingleMasterChannelEndpointConfiguration
+
+var GetSignalingChannelEndpointOutput = &sGetSignalingChannelEndpointOutput
+var GetSignalingChannelEndpointOutput_ResourceEndpointList = &sGetSignalingChannelEndpointOutput_ResourceEndpointList
+
+var ListEdgeAgentConfigurationsInput = &sListEdgeAgentConfigurationsInput
+var ListEdgeAgentConfigurationsInput_HubDeviceArn = &sListEdgeAgentConfigurationsInput_HubDeviceArn
+var ListEdgeAgentConfigurationsInput_MaxResults = &sListEdgeAgentConfigurationsInput_MaxResults
+var ListEdgeAgentConfigurationsInput_NextToken = &sListEdgeAgentConfigurationsInput_NextToken
+
+var ListEdgeAgentConfigurationsOutput = &sListEdgeAgentConfigurationsOutput
+var ListEdgeAgentConfigurationsOutput_EdgeConfigs = &sListEdgeAgentConfigurationsOutput_EdgeConfigs
+var ListEdgeAgentConfigurationsOutput_NextToken = &sListEdgeAgentConfigurationsOutput_NextToken
+
+var ListSignalingChannelsInput = &sListSignalingChannelsInput
+var ListSignalingChannelsInput_MaxResults = &sListSignalingChannelsInput_MaxResults
+var ListSignalingChannelsInput_NextToken = &sListSignalingChannelsInput_NextToken
+var ListSignalingChannelsInput_ChannelNameCondition = &sListSignalingChannelsInput_ChannelNameCondition
+
+var ListSignalingChannelsOutput = &sListSignalingChannelsOutput
+var ListSignalingChannelsOutput_ChannelInfoList = &sListSignalingChannelsOutput_ChannelInfoList
+var ListSignalingChannelsOutput_NextToken = &sListSignalingChannelsOutput_NextToken
+
+var ListStreamsInput = &sListStreamsInput
+var ListStreamsInput_MaxResults = &sListStreamsInput_MaxResults
+var ListStreamsInput_NextToken = &sListStreamsInput_NextToken
+var ListStreamsInput_StreamNameCondition = &sListStreamsInput_StreamNameCondition
+
+var ListStreamsOutput = &sListStreamsOutput
+var ListStreamsOutput_StreamInfoList = &sListStreamsOutput_StreamInfoList
+var ListStreamsOutput_NextToken = &sListStreamsOutput_NextToken
+
+var ListTagsForResourceInput = &sListTagsForResourceInput
+var ListTagsForResourceInput_NextToken = &sListTagsForResourceInput_NextToken
+var ListTagsForResourceInput_ResourceARN = &sListTagsForResourceInput_ResourceARN
+
+var ListTagsForResourceOutput = &sListTagsForResourceOutput
+var ListTagsForResourceOutput_NextToken = &sListTagsForResourceOutput_NextToken
+var ListTagsForResourceOutput_Tags = &sListTagsForResourceOutput_Tags
+
+var ListTagsForStreamInput = &sListTagsForStreamInput
+var ListTagsForStreamInput_NextToken = &sListTagsForStreamInput_NextToken
+var ListTagsForStreamInput_StreamARN = &sListTagsForStreamInput_StreamARN
+var ListTagsForStreamInput_StreamName = &sListTagsForStreamInput_StreamName
+
+var ListTagsForStreamOutput = &sListTagsForStreamOutput
+var ListTagsForStreamOutput_NextToken = &sListTagsForStreamOutput_NextToken
+var ListTagsForStreamOutput_Tags = &sListTagsForStreamOutput_Tags
+
+var StartEdgeConfigurationUpdateInput = &sStartEdgeConfigurationUpdateInput
+var StartEdgeConfigurationUpdateInput_StreamName = &sStartEdgeConfigurationUpdateInput_StreamName
+var StartEdgeConfigurationUpdateInput_StreamARN = &sStartEdgeConfigurationUpdateInput_StreamARN
+var StartEdgeConfigurationUpdateInput_EdgeConfig = &sStartEdgeConfigurationUpdateInput_EdgeConfig
+
+var StartEdgeConfigurationUpdateOutput = &sStartEdgeConfigurationUpdateOutput
+var StartEdgeConfigurationUpdateOutput_StreamName = &sStartEdgeConfigurationUpdateOutput_StreamName
+var StartEdgeConfigurationUpdateOutput_StreamARN = &sStartEdgeConfigurationUpdateOutput_StreamARN
+var StartEdgeConfigurationUpdateOutput_CreationTime = &sStartEdgeConfigurationUpdateOutput_CreationTime
+var StartEdgeConfigurationUpdateOutput_LastUpdatedTime = &sStartEdgeConfigurationUpdateOutput_LastUpdatedTime
+var StartEdgeConfigurationUpdateOutput_SyncStatus = &sStartEdgeConfigurationUpdateOutput_SyncStatus
+var StartEdgeConfigurationUpdateOutput_FailedStatusDetails = &sStartEdgeConfigurationUpdateOutput_FailedStatusDetails
+var StartEdgeConfigurationUpdateOutput_EdgeConfig = &sStartEdgeConfigurationUpdateOutput_EdgeConfig
+
+var TagResourceInput = &sTagResourceInput
+var TagResourceInput_ResourceARN = &sTagResourceInput_ResourceARN
+var TagResourceInput_Tags = &sTagResourceInput_Tags
+
+var TagResourceOutput = &sTagResourceOutput
+
+var TagStreamInput = &sTagStreamInput
+var TagStreamInput_StreamARN = &sTagStreamInput_StreamARN
+var TagStreamInput_StreamName = &sTagStreamInput_StreamName
+var TagStreamInput_Tags = &sTagStreamInput_Tags
+
+var TagStreamOutput = &sTagStreamOutput
+
+var UntagResourceInput = &sUntagResourceInput
+var UntagResourceInput_ResourceARN = &sUntagResourceInput_ResourceARN
+var UntagResourceInput_TagKeyList = &sUntagResourceInput_TagKeyList
+
+var UntagResourceOutput = &sUntagResourceOutput
+
+var UntagStreamInput = &sUntagStreamInput
+var UntagStreamInput_StreamARN = &sUntagStreamInput_StreamARN
+var UntagStreamInput_StreamName = &sUntagStreamInput_StreamName
+var UntagStreamInput_TagKeyList = &sUntagStreamInput_TagKeyList
+
+var UntagStreamOutput = &sUntagStreamOutput
+
+var UpdateDataRetentionInput = &sUpdateDataRetentionInput
+var UpdateDataRetentionInput_StreamName = &sUpdateDataRetentionInput_StreamName
+var UpdateDataRetentionInput_StreamARN = &sUpdateDataRetentionInput_StreamARN
+var UpdateDataRetentionInput_CurrentVersion = &sUpdateDataRetentionInput_CurrentVersion
+var UpdateDataRetentionInput_Operation = &sUpdateDataRetentionInput_Operation
+var UpdateDataRetentionInput_DataRetentionChangeInHours = &sUpdateDataRetentionInput_DataRetentionChangeInHours
+
+var UpdateDataRetentionOutput = &sUpdateDataRetentionOutput
+
+var UpdateImageGenerationConfigurationInput = &sUpdateImageGenerationConfigurationInput
+var UpdateImageGenerationConfigurationInput_StreamName = &sUpdateImageGenerationConfigurationInput_StreamName
+var UpdateImageGenerationConfigurationInput_StreamARN = &sUpdateImageGenerationConfigurationInput_StreamARN
+var UpdateImageGenerationConfigurationInput_ImageGenerationConfiguration = &sUpdateImageGenerationConfigurationInput_ImageGenerationConfiguration
+
+var UpdateImageGenerationConfigurationOutput = &sUpdateImageGenerationConfigurationOutput
+
+var UpdateMediaStorageConfigurationInput = &sUpdateMediaStorageConfigurationInput
+var UpdateMediaStorageConfigurationInput_ChannelARN = &sUpdateMediaStorageConfigurationInput_ChannelARN
+var UpdateMediaStorageConfigurationInput_MediaStorageConfiguration = &sUpdateMediaStorageConfigurationInput_MediaStorageConfiguration
+
+var UpdateMediaStorageConfigurationOutput = &sUpdateMediaStorageConfigurationOutput
+
+var UpdateNotificationConfigurationInput = &sUpdateNotificationConfigurationInput
+var UpdateNotificationConfigurationInput_StreamName = &sUpdateNotificationConfigurationInput_StreamName
+var UpdateNotificationConfigurationInput_StreamARN = &sUpdateNotificationConfigurationInput_StreamARN
+var UpdateNotificationConfigurationInput_NotificationConfiguration = &sUpdateNotificationConfigurationInput_NotificationConfiguration
+
+var UpdateNotificationConfigurationOutput = &sUpdateNotificationConfigurationOutput
+
+var UpdateSignalingChannelInput = &sUpdateSignalingChannelInput
+var UpdateSignalingChannelInput_ChannelARN = &sUpdateSignalingChannelInput_ChannelARN
+var UpdateSignalingChannelInput_CurrentVersion = &sUpdateSignalingChannelInput_CurrentVersion
+var UpdateSignalingChannelInput_SingleMasterConfiguration = &sUpdateSignalingChannelInput_SingleMasterConfiguration
+
+var UpdateSignalingChannelOutput = &sUpdateSignalingChannelOutput
+
+var UpdateStreamInput = &sUpdateStreamInput
+var UpdateStreamInput_StreamName = &sUpdateStreamInput_StreamName
+var UpdateStreamInput_StreamARN = &sUpdateStreamInput_StreamARN
+var UpdateStreamInput_CurrentVersion = &sUpdateStreamInput_CurrentVersion
+var UpdateStreamInput_DeviceName = &sUpdateStreamInput_DeviceName
+var UpdateStreamInput_MediaType = &sUpdateStreamInput_MediaType
+
+var UpdateStreamOutput = &sUpdateStreamOutput
+
+var UpdateStreamStorageConfigurationInput = &sUpdateStreamStorageConfigurationInput
+var UpdateStreamStorageConfigurationInput_StreamName = &sUpdateStreamStorageConfigurationInput_StreamName
+var UpdateStreamStorageConfigurationInput_StreamARN = &sUpdateStreamStorageConfigurationInput_StreamARN
+var UpdateStreamStorageConfigurationInput_CurrentVersion = &sUpdateStreamStorageConfigurationInput_CurrentVersion
+var UpdateStreamStorageConfigurationInput_StreamStorageConfiguration = &sUpdateStreamStorageConfigurationInput_StreamStorageConfiguration
+
+var UpdateStreamStorageConfigurationOutput = &sUpdateStreamStorageConfigurationOutput
+
+var KinesisVideo_20170930 = &smithy.ServiceSchema{Schema: &s_KinesisVideo_20170930, Version: "2017-09-30"}

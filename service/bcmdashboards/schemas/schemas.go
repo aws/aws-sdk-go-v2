@@ -4,1565 +4,1129 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateDashboard = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "CreateDashboard",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateScheduledReport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "CreateScheduledReport",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteDashboard = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "DeleteDashboard",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteScheduledReport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "DeleteScheduledReport",
-}, smithy.ShapeTypeOperation, 0)
-
-var ExecuteScheduledReport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "ExecuteScheduledReport",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetDashboard = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "GetDashboard",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "GetResourcePolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetScheduledReport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "GetScheduledReport",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListDashboards = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "ListDashboards",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListScheduledReports = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "ListScheduledReports",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateDashboard = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "UpdateDashboard",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateScheduledReport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "UpdateScheduledReport",
-}, smithy.ShapeTypeOperation, 0)
-
-var _AWSBCMDashboardsService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "AWSBCMDashboardsService",
-}, smithy.ShapeTypeService, 0)
-
-var AWSBCMDashboardsService = smithy.NewServiceSchema(_AWSBCMDashboardsService, "2025-08-18")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var _ClientToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "ClientToken",
-}, smithy.ShapeTypeString, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var CostAndUsageQuery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "CostAndUsageQuery",
-}, smithy.ShapeTypeStructure, 5)
-var CostAndUsageQuery_metrics *smithy.Schema
-
-var CostAndUsageQuery_timeRange *smithy.Schema
-
-var CostAndUsageQuery_granularity *smithy.Schema
-
-var CostAndUsageQuery_groupBy *smithy.Schema
-
-var CostAndUsageQuery_filter *smithy.Schema
-
-var CostCategoryValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "CostCategoryValues",
-}, smithy.ShapeTypeStructure, 3)
-var CostCategoryValues_key *smithy.Schema
-
-var CostCategoryValues_values *smithy.Schema
-
-var CostCategoryValues_matchOptions *smithy.Schema
-
-var _DashboardArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "DashboardArn",
-}, smithy.ShapeTypeString, 0)
-
-var _DashboardName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "DashboardName",
-}, smithy.ShapeTypeString, 0)
-
-var DashboardReference = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "DashboardReference",
-}, smithy.ShapeTypeStructure, 6)
-var DashboardReference_arn *smithy.Schema
-
-var DashboardReference_name *smithy.Schema
-
-var DashboardReference_description *smithy.Schema
-
-var DashboardReference_type *smithy.Schema
-
-var DashboardReference_createdAt *smithy.Schema
-
-var DashboardReference_updatedAt *smithy.Schema
-
-var _DashboardReferenceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "DashboardReferenceList",
-}, smithy.ShapeTypeList, 1)
-var _DashboardReferenceList_member *smithy.Schema
-
-var DashboardType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "DashboardType",
-}, smithy.ShapeTypeEnum, 1)
-var DashboardType_CUSTOM *smithy.Schema
-
-var DateTimeRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "DateTimeRange",
-}, smithy.ShapeTypeStructure, 2)
-var DateTimeRange_startTime *smithy.Schema
-
-var DateTimeRange_endTime *smithy.Schema
-
-var DateTimeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "DateTimeType",
-}, smithy.ShapeTypeEnum, 2)
-var DateTimeType_ABSOLUTE *smithy.Schema
-
-var DateTimeType_RELATIVE *smithy.Schema
-
-var DateTimeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "DateTimeValue",
-}, smithy.ShapeTypeStructure, 2)
-var DateTimeValue_type *smithy.Schema
-
-var DateTimeValue_value *smithy.Schema
-
-var _Description = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "Description",
-}, smithy.ShapeTypeString, 0)
-
-var Dimension = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "Dimension",
-}, smithy.ShapeTypeEnum, 26)
-var Dimension_AZ *smithy.Schema
-
-var Dimension_INSTANCE_TYPE *smithy.Schema
-
-var Dimension_LINKED_ACCOUNT *smithy.Schema
-
-var Dimension_OPERATION *smithy.Schema
-
-var Dimension_PURCHASE_TYPE *smithy.Schema
-
-var Dimension_REGION *smithy.Schema
-
-var Dimension_SERVICE *smithy.Schema
-
-var Dimension_USAGE_TYPE *smithy.Schema
-
-var Dimension_USAGE_TYPE_GROUP *smithy.Schema
-
-var Dimension_RECORD_TYPE *smithy.Schema
-
-var Dimension_RESOURCE_ID *smithy.Schema
-
-var Dimension_SUBSCRIPTION_ID *smithy.Schema
-
-var Dimension_TAG_KEY *smithy.Schema
-
-var Dimension_OPERATING_SYSTEM *smithy.Schema
-
-var Dimension_TENANCY *smithy.Schema
-
-var Dimension_BILLING_ENTITY *smithy.Schema
-
-var Dimension_RESERVATION_ID *smithy.Schema
-
-var Dimension_COST_CATEGORY_NAME *smithy.Schema
-
-var Dimension_DATABASE_ENGINE *smithy.Schema
-
-var Dimension_LEGAL_ENTITY_NAME *smithy.Schema
-
-var Dimension_SAVINGS_PLANS_TYPE *smithy.Schema
-
-var Dimension_INSTANCE_TYPE_FAMILY *smithy.Schema
-
-var Dimension_CACHE_ENGINE *smithy.Schema
-
-var Dimension_DEPLOYMENT_OPTION *smithy.Schema
-
-var Dimension_SCOPE *smithy.Schema
-
-var Dimension_PLATFORM *smithy.Schema
-
-var DimensionValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "DimensionValues",
-}, smithy.ShapeTypeStructure, 3)
-var DimensionValues_key *smithy.Schema
-
-var DimensionValues_values *smithy.Schema
-
-var DimensionValues_matchOptions *smithy.Schema
-
-var DisplayConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "DisplayConfig",
-}, smithy.ShapeTypeUnion, 2)
-var DisplayConfig_graph *smithy.Schema
-
-var DisplayConfig_table *smithy.Schema
-
-var Expression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "Expression",
-}, smithy.ShapeTypeStructure, 6)
-var Expression_or *smithy.Schema
-
-var Expression_and *smithy.Schema
-
-var Expression_not *smithy.Schema
-
-var Expression_dimensions *smithy.Schema
-
-var Expression_tags *smithy.Schema
-
-var Expression_costCategories *smithy.Schema
-
-var _Expressions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "Expressions",
-}, smithy.ShapeTypeList, 1)
-var _Expressions_member *smithy.Schema
-
-var _GenericString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "GenericString",
-}, smithy.ShapeTypeString, 0)
-
-var _GenericTimeStamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "GenericTimeStamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var Granularity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "Granularity",
-}, smithy.ShapeTypeEnum, 3)
-var Granularity_HOURLY *smithy.Schema
-
-var Granularity_DAILY *smithy.Schema
-
-var Granularity_MONTHLY *smithy.Schema
-
-var GraphDisplayConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "GraphDisplayConfig",
-}, smithy.ShapeTypeStructure, 1)
-var GraphDisplayConfig_visualType *smithy.Schema
-
-var _GraphDisplayConfigMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "GraphDisplayConfigMap",
-}, smithy.ShapeTypeMap, 2)
-var _GraphDisplayConfigMap_key *smithy.Schema
-
-var _GraphDisplayConfigMap_value *smithy.Schema
-
-var GroupDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "GroupDefinition",
-}, smithy.ShapeTypeStructure, 2)
-var GroupDefinition_key *smithy.Schema
-
-var GroupDefinition_type *smithy.Schema
-
-var _GroupDefinitions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "GroupDefinitions",
-}, smithy.ShapeTypeList, 1)
-var _GroupDefinitions_member *smithy.Schema
-
-var GroupDefinitionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "GroupDefinitionType",
-}, smithy.ShapeTypeEnum, 3)
-var GroupDefinitionType_DIMENSION *smithy.Schema
-
-var GroupDefinitionType_TAG *smithy.Schema
-
-var GroupDefinitionType_COST_CATEGORY *smithy.Schema
-
-var HealthStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "HealthStatus",
-}, smithy.ShapeTypeStructure, 3)
-var HealthStatus_statusCode *smithy.Schema
-
-var HealthStatus_lastRefreshedAt *smithy.Schema
-
-var HealthStatus_statusReasons *smithy.Schema
-
-var HealthStatusCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "HealthStatusCode",
-}, smithy.ShapeTypeEnum, 2)
-var HealthStatusCode_HEALTHY *smithy.Schema
-
-var HealthStatusCode_UNHEALTHY *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var MatchOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "MatchOption",
-}, smithy.ShapeTypeEnum, 8)
-var MatchOption_EQUALS *smithy.Schema
-
-var MatchOption_ABSENT *smithy.Schema
-
-var MatchOption_STARTS_WITH *smithy.Schema
-
-var MatchOption_ENDS_WITH *smithy.Schema
-
-var MatchOption_CONTAINS *smithy.Schema
-
-var MatchOption_GREATER_THAN_OR_EQUAL *smithy.Schema
-
-var MatchOption_CASE_SENSITIVE *smithy.Schema
-
-var MatchOption_CASE_INSENSITIVE *smithy.Schema
-
-var _MatchOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "MatchOptions",
-}, smithy.ShapeTypeList, 1)
-var _MatchOptions_member *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var MetricName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "MetricName",
-}, smithy.ShapeTypeEnum, 11)
-var MetricName_AmortizedCost *smithy.Schema
-
-var MetricName_BlendedCost *smithy.Schema
-
-var MetricName_NetAmortizedCost *smithy.Schema
-
-var MetricName_NetUnblendedCost *smithy.Schema
-
-var MetricName_NormalizedUsageAmount *smithy.Schema
-
-var MetricName_UnblendedCost *smithy.Schema
-
-var MetricName_UsageQuantity *smithy.Schema
-
-var MetricName_SpendCoveredBySavingsPlans *smithy.Schema
-
-var MetricName_Hour *smithy.Schema
-
-var MetricName_Unit *smithy.Schema
-
-var MetricName_Cost *smithy.Schema
-
-var _MetricNames = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "MetricNames",
-}, smithy.ShapeTypeList, 1)
-var _MetricNames_member *smithy.Schema
-
-var _NextPageToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "NextPageToken",
-}, smithy.ShapeTypeString, 0)
-
-var QueryParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "QueryParameters",
-}, smithy.ShapeTypeUnion, 5)
-var QueryParameters_costAndUsage *smithy.Schema
-
-var QueryParameters_savingsPlansCoverage *smithy.Schema
-
-var QueryParameters_savingsPlansUtilization *smithy.Schema
-
-var QueryParameters_reservationCoverage *smithy.Schema
-
-var QueryParameters_reservationUtilization *smithy.Schema
-
-var ReservationCoverageQuery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "ReservationCoverageQuery",
-}, smithy.ShapeTypeStructure, 5)
-var ReservationCoverageQuery_timeRange *smithy.Schema
-
-var ReservationCoverageQuery_groupBy *smithy.Schema
-
-var ReservationCoverageQuery_granularity *smithy.Schema
-
-var ReservationCoverageQuery_filter *smithy.Schema
-
-var ReservationCoverageQuery_metrics *smithy.Schema
-
-var ReservationUtilizationQuery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "ReservationUtilizationQuery",
-}, smithy.ShapeTypeStructure, 4)
-var ReservationUtilizationQuery_timeRange *smithy.Schema
-
-var ReservationUtilizationQuery_groupBy *smithy.Schema
-
-var ReservationUtilizationQuery_granularity *smithy.Schema
-
-var ReservationUtilizationQuery_filter *smithy.Schema
-
-var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "ResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceTag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "ResourceTag",
-}, smithy.ShapeTypeStructure, 2)
-var ResourceTag_key *smithy.Schema
-
-var ResourceTag_value *smithy.Schema
-
-var _ResourceTagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "ResourceTagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceTagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "ResourceTagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceTagKeyList_member *smithy.Schema
-
-var _ResourceTagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "ResourceTagList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceTagList_member *smithy.Schema
-
-var _ResourceTagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "ResourceTagValue",
-}, smithy.ShapeTypeString, 0)
-
-var SavingsPlansCoverageQuery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "SavingsPlansCoverageQuery",
-}, smithy.ShapeTypeStructure, 5)
-var SavingsPlansCoverageQuery_timeRange *smithy.Schema
-
-var SavingsPlansCoverageQuery_metrics *smithy.Schema
-
-var SavingsPlansCoverageQuery_granularity *smithy.Schema
-
-var SavingsPlansCoverageQuery_groupBy *smithy.Schema
-
-var SavingsPlansCoverageQuery_filter *smithy.Schema
-
-var SavingsPlansUtilizationQuery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "SavingsPlansUtilizationQuery",
-}, smithy.ShapeTypeStructure, 3)
-var SavingsPlansUtilizationQuery_timeRange *smithy.Schema
-
-var SavingsPlansUtilizationQuery_granularity *smithy.Schema
-
-var SavingsPlansUtilizationQuery_filter *smithy.Schema
-
-var ScheduleConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "ScheduleConfig",
-}, smithy.ShapeTypeStructure, 4)
-var ScheduleConfig_scheduleExpression *smithy.Schema
-
-var ScheduleConfig_scheduleExpressionTimeZone *smithy.Schema
-
-var ScheduleConfig_schedulePeriod *smithy.Schema
-
-var ScheduleConfig_state *smithy.Schema
-
-var ScheduledReport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "ScheduledReport",
-}, smithy.ShapeTypeStructure, 12)
-var ScheduledReport_arn *smithy.Schema
-
-var ScheduledReport_name *smithy.Schema
-
-var ScheduledReport_dashboardArn *smithy.Schema
-
-var ScheduledReport_scheduledReportExecutionRoleArn *smithy.Schema
-
-var ScheduledReport_scheduleConfig *smithy.Schema
-
-var ScheduledReport_description *smithy.Schema
-
-var ScheduledReport_widgetIds *smithy.Schema
-
-var ScheduledReport_widgetDateRangeOverride *smithy.Schema
-
-var ScheduledReport_createdAt *smithy.Schema
-
-var ScheduledReport_updatedAt *smithy.Schema
-
-var ScheduledReport_lastExecutionAt *smithy.Schema
-
-var ScheduledReport_healthStatus *smithy.Schema
-
-var _ScheduledReportArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "ScheduledReportArn",
-}, smithy.ShapeTypeString, 0)
-
-var ScheduledReportInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "ScheduledReportInput",
-}, smithy.ShapeTypeStructure, 7)
-var ScheduledReportInput_name *smithy.Schema
-
-var ScheduledReportInput_dashboardArn *smithy.Schema
-
-var ScheduledReportInput_scheduledReportExecutionRoleArn *smithy.Schema
-
-var ScheduledReportInput_scheduleConfig *smithy.Schema
-
-var ScheduledReportInput_description *smithy.Schema
-
-var ScheduledReportInput_widgetIds *smithy.Schema
-
-var ScheduledReportInput_widgetDateRangeOverride *smithy.Schema
-
-var _ScheduledReportName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "ScheduledReportName",
-}, smithy.ShapeTypeString, 0)
-
-var ScheduledReportSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "ScheduledReportSummary",
-}, smithy.ShapeTypeStructure, 8)
-var ScheduledReportSummary_arn *smithy.Schema
-
-var ScheduledReportSummary_name *smithy.Schema
-
-var ScheduledReportSummary_dashboardArn *smithy.Schema
-
-var ScheduledReportSummary_scheduleExpression *smithy.Schema
-
-var ScheduledReportSummary_state *smithy.Schema
-
-var ScheduledReportSummary_healthStatus *smithy.Schema
-
-var ScheduledReportSummary_scheduleExpressionTimeZone *smithy.Schema
-
-var ScheduledReportSummary_widgetIds *smithy.Schema
-
-var _ScheduledReportSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "ScheduledReportSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _ScheduledReportSummaryList_member *smithy.Schema
-
-var SchedulePeriod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "SchedulePeriod",
-}, smithy.ShapeTypeStructure, 2)
-var SchedulePeriod_startTime *smithy.Schema
-
-var SchedulePeriod_endTime *smithy.Schema
-
-var ScheduleState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "ScheduleState",
-}, smithy.ShapeTypeEnum, 2)
-var ScheduleState_ENABLED *smithy.Schema
-
-var ScheduleState_DISABLED *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var _ServiceRoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "ServiceRoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var StatusReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "StatusReason",
-}, smithy.ShapeTypeEnum, 7)
-var StatusReason_DATA_SOURCE_ACCESS_DENIED *smithy.Schema
-
-var StatusReason_EXECUTION_ROLE_ASSUME_FAILED *smithy.Schema
-
-var StatusReason_EXECUTION_ROLE_INSUFFICIENT_PERMISSIONS *smithy.Schema
-
-var StatusReason_DASHBOARD_NOT_FOUND *smithy.Schema
-
-var StatusReason_DASHBOARD_ACCESS_DENIED *smithy.Schema
-
-var StatusReason_INTERNAL_FAILURE *smithy.Schema
-
-var StatusReason_WIDGET_ID_NOT_FOUND *smithy.Schema
-
-var _StatusReasonList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "StatusReasonList",
-}, smithy.ShapeTypeList, 1)
-var _StatusReasonList_member *smithy.Schema
-
-var _StringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "StringList",
-}, smithy.ShapeTypeList, 1)
-var _StringList_member *smithy.Schema
-
-var TableDisplayConfigStruct = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "TableDisplayConfigStruct",
-}, smithy.ShapeTypeStructure, 0)
-
-var TagValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "TagValues",
-}, smithy.ShapeTypeStructure, 3)
-var TagValues_key *smithy.Schema
-
-var TagValues_values *smithy.Schema
-
-var TagValues_matchOptions *smithy.Schema
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var VisualType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "VisualType",
-}, smithy.ShapeTypeEnum, 3)
-var VisualType_LINE *smithy.Schema
-
-var VisualType_BAR *smithy.Schema
-
-var VisualType_STACK *smithy.Schema
-
-var Widget = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "Widget",
-}, smithy.ShapeTypeStructure, 7)
-var Widget_id *smithy.Schema
-
-var Widget_title *smithy.Schema
-
-var Widget_description *smithy.Schema
-
-var Widget_width *smithy.Schema
-
-var Widget_height *smithy.Schema
-
-var Widget_horizontalOffset *smithy.Schema
-
-var Widget_configs *smithy.Schema
-
-var WidgetConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "WidgetConfig",
-}, smithy.ShapeTypeStructure, 2)
-var WidgetConfig_queryParameters *smithy.Schema
-
-var WidgetConfig_displayConfig *smithy.Schema
-
-var _WidgetConfigList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "WidgetConfigList",
-}, smithy.ShapeTypeList, 1)
-var _WidgetConfigList_member *smithy.Schema
-
-var _WidgetHeight = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "WidgetHeight",
-}, smithy.ShapeTypeInteger, 0)
-
-var _WidgetId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "WidgetId",
-}, smithy.ShapeTypeString, 0)
-
-var _WidgetIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "WidgetIdList",
-}, smithy.ShapeTypeList, 1)
-var _WidgetIdList_member *smithy.Schema
-
-var _WidgetList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "WidgetList",
-}, smithy.ShapeTypeList, 1)
-var _WidgetList_member *smithy.Schema
-
-var _WidgetTitle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "WidgetTitle",
-}, smithy.ShapeTypeString, 0)
-
-var _WidgetWidth = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "WidgetWidth",
-}, smithy.ShapeTypeInteger, 0)
-
-var CreateDashboardRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "CreateDashboardRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateDashboardRequest_name *smithy.Schema
-
-var CreateDashboardRequest_description *smithy.Schema
-
-var CreateDashboardRequest_widgets *smithy.Schema
-
-var CreateDashboardRequest_resourceTags *smithy.Schema
-
-var CreateDashboardResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "CreateDashboardResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateDashboardResponse_arn *smithy.Schema
-
-var CreateScheduledReportRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "CreateScheduledReportRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateScheduledReportRequest_scheduledReport *smithy.Schema
-
-var CreateScheduledReportRequest_resourceTags *smithy.Schema
-
-var CreateScheduledReportRequest_clientToken *smithy.Schema
-
-var CreateScheduledReportResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "CreateScheduledReportResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateScheduledReportResponse_arn *smithy.Schema
-
-var DeleteDashboardRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "DeleteDashboardRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDashboardRequest_arn *smithy.Schema
-
-var DeleteDashboardResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "DeleteDashboardResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDashboardResponse_arn *smithy.Schema
-
-var DeleteScheduledReportRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "DeleteScheduledReportRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteScheduledReportRequest_arn *smithy.Schema
-
-var DeleteScheduledReportResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "DeleteScheduledReportResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteScheduledReportResponse_arn *smithy.Schema
-
-var ExecuteScheduledReportRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "ExecuteScheduledReportRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ExecuteScheduledReportRequest_arn *smithy.Schema
-
-var ExecuteScheduledReportRequest_clientToken *smithy.Schema
-
-var ExecuteScheduledReportRequest_dryRun *smithy.Schema
-
-var ExecuteScheduledReportResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "ExecuteScheduledReportResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ExecuteScheduledReportResponse_healthStatus *smithy.Schema
-
-var ExecuteScheduledReportResponse_executionTriggered *smithy.Schema
-
-var GetDashboardRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "GetDashboardRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetDashboardRequest_arn *smithy.Schema
-
-var GetDashboardResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "GetDashboardResponse",
-}, smithy.ShapeTypeStructure, 7)
-var GetDashboardResponse_arn *smithy.Schema
-
-var GetDashboardResponse_name *smithy.Schema
-
-var GetDashboardResponse_description *smithy.Schema
-
-var GetDashboardResponse_type *smithy.Schema
-
-var GetDashboardResponse_widgets *smithy.Schema
-
-var GetDashboardResponse_createdAt *smithy.Schema
-
-var GetDashboardResponse_updatedAt *smithy.Schema
-
-var GetResourcePolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "GetResourcePolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetResourcePolicyRequest_resourceArn *smithy.Schema
-
-var GetResourcePolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "GetResourcePolicyResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetResourcePolicyResponse_resourceArn *smithy.Schema
-
-var GetResourcePolicyResponse_policyDocument *smithy.Schema
-
-var GetScheduledReportRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "GetScheduledReportRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetScheduledReportRequest_arn *smithy.Schema
-
-var GetScheduledReportResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "GetScheduledReportResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetScheduledReportResponse_scheduledReport *smithy.Schema
-
-var ListDashboardsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "ListDashboardsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListDashboardsRequest_maxResults *smithy.Schema
-
-var ListDashboardsRequest_nextToken *smithy.Schema
-
-var ListDashboardsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "ListDashboardsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListDashboardsResponse_dashboards *smithy.Schema
-
-var ListDashboardsResponse_nextToken *smithy.Schema
-
-var ListScheduledReportsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "ListScheduledReportsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListScheduledReportsRequest_nextToken *smithy.Schema
-
-var ListScheduledReportsRequest_maxResults *smithy.Schema
-
-var ListScheduledReportsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "ListScheduledReportsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListScheduledReportsResponse_scheduledReports *smithy.Schema
-
-var ListScheduledReportsResponse_nextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_resourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_resourceTags *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_resourceTags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_resourceTagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateDashboardRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "UpdateDashboardRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateDashboardRequest_arn *smithy.Schema
-
-var UpdateDashboardRequest_name *smithy.Schema
-
-var UpdateDashboardRequest_description *smithy.Schema
-
-var UpdateDashboardRequest_widgets *smithy.Schema
-
-var UpdateDashboardResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "UpdateDashboardResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateDashboardResponse_arn *smithy.Schema
-
-var UpdateScheduledReportRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "UpdateScheduledReportRequest",
-}, smithy.ShapeTypeStructure, 10)
-var UpdateScheduledReportRequest_arn *smithy.Schema
-
-var UpdateScheduledReportRequest_name *smithy.Schema
-
-var UpdateScheduledReportRequest_description *smithy.Schema
-
-var UpdateScheduledReportRequest_dashboardArn *smithy.Schema
-
-var UpdateScheduledReportRequest_scheduledReportExecutionRoleArn *smithy.Schema
-
-var UpdateScheduledReportRequest_scheduleConfig *smithy.Schema
-
-var UpdateScheduledReportRequest_widgetIds *smithy.Schema
-
-var UpdateScheduledReportRequest_widgetDateRangeOverride *smithy.Schema
-
-var UpdateScheduledReportRequest_clearWidgetIds *smithy.Schema
-
-var UpdateScheduledReportRequest_clearWidgetDateRangeOverride *smithy.Schema
-
-var UpdateScheduledReportResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.bcmdashboards",
-	Name:      "UpdateScheduledReportResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateScheduledReportResponse_arn *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
+var (
+	iCreateDashboard                = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "CreateDashboard"}
+	iCreateScheduledReport          = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "CreateScheduledReport"}
+	iDeleteDashboard                = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "DeleteDashboard"}
+	iDeleteScheduledReport          = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "DeleteScheduledReport"}
+	iExecuteScheduledReport         = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "ExecuteScheduledReport"}
+	iGetDashboard                   = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "GetDashboard"}
+	iGetResourcePolicy              = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "GetResourcePolicy"}
+	iGetScheduledReport             = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "GetScheduledReport"}
+	iListDashboards                 = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "ListDashboards"}
+	iListScheduledReports           = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "ListScheduledReports"}
+	iListTagsForResource            = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "ListTagsForResource"}
+	iTagResource                    = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "TagResource"}
+	iUntagResource                  = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "UntagResource"}
+	iUpdateDashboard                = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "UpdateDashboard"}
+	iUpdateScheduledReport          = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "UpdateScheduledReport"}
+	i_AWSBCMDashboardsService       = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "AWSBCMDashboardsService"}
+	iAccessDeniedException          = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "AccessDeniedException"}
+	i_ClientToken                   = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "ClientToken"}
+	iConflictException              = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "ConflictException"}
+	iCostAndUsageQuery              = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "CostAndUsageQuery"}
+	iCostCategoryValues             = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "CostCategoryValues"}
+	i_DashboardArn                  = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "DashboardArn"}
+	i_DashboardName                 = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "DashboardName"}
+	iDashboardReference             = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "DashboardReference"}
+	i_DashboardReferenceList        = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "DashboardReferenceList"}
+	iDashboardType                  = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "DashboardType"}
+	iDateTimeRange                  = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "DateTimeRange"}
+	iDateTimeType                   = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "DateTimeType"}
+	iDateTimeValue                  = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "DateTimeValue"}
+	i_Description                   = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "Description"}
+	iDimension                      = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "Dimension"}
+	iDimensionValues                = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "DimensionValues"}
+	iDisplayConfig                  = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "DisplayConfig"}
+	iExpression                     = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "Expression"}
+	i_Expressions                   = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "Expressions"}
+	i_GenericString                 = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "GenericString"}
+	i_GenericTimeStamp              = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "GenericTimeStamp"}
+	iGranularity                    = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "Granularity"}
+	iGraphDisplayConfig             = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "GraphDisplayConfig"}
+	i_GraphDisplayConfigMap         = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "GraphDisplayConfigMap"}
+	iGroupDefinition                = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "GroupDefinition"}
+	i_GroupDefinitions              = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "GroupDefinitions"}
+	iGroupDefinitionType            = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "GroupDefinitionType"}
+	iHealthStatus                   = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "HealthStatus"}
+	iHealthStatusCode               = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "HealthStatusCode"}
+	iInternalServerException        = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "InternalServerException"}
+	iMatchOption                    = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "MatchOption"}
+	i_MatchOptions                  = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "MatchOptions"}
+	i_MaxResults                    = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "MaxResults"}
+	iMetricName                     = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "MetricName"}
+	i_MetricNames                   = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "MetricNames"}
+	i_NextPageToken                 = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "NextPageToken"}
+	iQueryParameters                = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "QueryParameters"}
+	iReservationCoverageQuery       = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "ReservationCoverageQuery"}
+	iReservationUtilizationQuery    = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "ReservationUtilizationQuery"}
+	i_ResourceArn                   = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "ResourceArn"}
+	iResourceNotFoundException      = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "ResourceNotFoundException"}
+	iResourceTag                    = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "ResourceTag"}
+	i_ResourceTagKey                = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "ResourceTagKey"}
+	i_ResourceTagKeyList            = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "ResourceTagKeyList"}
+	i_ResourceTagList               = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "ResourceTagList"}
+	i_ResourceTagValue              = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "ResourceTagValue"}
+	iSavingsPlansCoverageQuery      = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "SavingsPlansCoverageQuery"}
+	iSavingsPlansUtilizationQuery   = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "SavingsPlansUtilizationQuery"}
+	iScheduleConfig                 = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "ScheduleConfig"}
+	iScheduledReport                = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "ScheduledReport"}
+	i_ScheduledReportArn            = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "ScheduledReportArn"}
+	iScheduledReportInput           = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "ScheduledReportInput"}
+	i_ScheduledReportName           = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "ScheduledReportName"}
+	iScheduledReportSummary         = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "ScheduledReportSummary"}
+	i_ScheduledReportSummaryList    = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "ScheduledReportSummaryList"}
+	iSchedulePeriod                 = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "SchedulePeriod"}
+	iScheduleState                  = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "ScheduleState"}
+	iServiceQuotaExceededException  = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "ServiceQuotaExceededException"}
+	i_ServiceRoleArn                = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "ServiceRoleArn"}
+	iStatusReason                   = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "StatusReason"}
+	i_StatusReasonList              = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "StatusReasonList"}
+	i_StringList                    = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "StringList"}
+	iTableDisplayConfigStruct       = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "TableDisplayConfigStruct"}
+	iTagValues                      = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "TagValues"}
+	iThrottlingException            = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "ThrottlingException"}
+	iValidationException            = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "ValidationException"}
+	iVisualType                     = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "VisualType"}
+	iWidget                         = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "Widget"}
+	iWidgetConfig                   = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "WidgetConfig"}
+	i_WidgetConfigList              = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "WidgetConfigList"}
+	i_WidgetHeight                  = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "WidgetHeight"}
+	i_WidgetId                      = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "WidgetId"}
+	i_WidgetIdList                  = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "WidgetIdList"}
+	i_WidgetList                    = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "WidgetList"}
+	i_WidgetTitle                   = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "WidgetTitle"}
+	i_WidgetWidth                   = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "WidgetWidth"}
+	iCreateDashboardRequest         = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "CreateDashboardRequest"}
+	iCreateDashboardResponse        = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "CreateDashboardResponse"}
+	iCreateScheduledReportRequest   = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "CreateScheduledReportRequest"}
+	iCreateScheduledReportResponse  = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "CreateScheduledReportResponse"}
+	iDeleteDashboardRequest         = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "DeleteDashboardRequest"}
+	iDeleteDashboardResponse        = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "DeleteDashboardResponse"}
+	iDeleteScheduledReportRequest   = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "DeleteScheduledReportRequest"}
+	iDeleteScheduledReportResponse  = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "DeleteScheduledReportResponse"}
+	iExecuteScheduledReportRequest  = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "ExecuteScheduledReportRequest"}
+	iExecuteScheduledReportResponse = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "ExecuteScheduledReportResponse"}
+	iGetDashboardRequest            = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "GetDashboardRequest"}
+	iGetDashboardResponse           = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "GetDashboardResponse"}
+	iGetResourcePolicyRequest       = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "GetResourcePolicyRequest"}
+	iGetResourcePolicyResponse      = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "GetResourcePolicyResponse"}
+	iGetScheduledReportRequest      = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "GetScheduledReportRequest"}
+	iGetScheduledReportResponse     = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "GetScheduledReportResponse"}
+	iListDashboardsRequest          = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "ListDashboardsRequest"}
+	iListDashboardsResponse         = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "ListDashboardsResponse"}
+	iListScheduledReportsRequest    = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "ListScheduledReportsRequest"}
+	iListScheduledReportsResponse   = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "ListScheduledReportsResponse"}
+	iListTagsForResourceRequest     = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse    = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "ListTagsForResourceResponse"}
+	iTagResourceRequest             = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "TagResourceRequest"}
+	iTagResourceResponse            = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "TagResourceResponse"}
+	iUntagResourceRequest           = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "UntagResourceRequest"}
+	iUntagResourceResponse          = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "UntagResourceResponse"}
+	iUpdateDashboardRequest         = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "UpdateDashboardRequest"}
+	iUpdateDashboardResponse        = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "UpdateDashboardResponse"}
+	iUpdateScheduledReportRequest   = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "UpdateScheduledReportRequest"}
+	iUpdateScheduledReportResponse  = smithy.ShapeID{Namespace: "com.amazonaws.bcmdashboards", Name: "UpdateScheduledReportResponse"}
+	pString                         = smithy.ShapeID{Namespace: "smithy.api", Name: "String"}
+	pUnit                           = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+	pInteger                        = smithy.ShapeID{Namespace: "smithy.api", Name: "Integer"}
+	pBoolean                        = smithy.ShapeID{Namespace: "smithy.api", Name: "Boolean"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "X-Amzn-Client-Token"}}, DirectMask: 0x80}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message}}
+var mCostAndUsageQuery = smithy.SchemaMembers{List: []*smithy.Schema{&sCostAndUsageQuery_metrics, &sCostAndUsageQuery_timeRange, &sCostAndUsageQuery_granularity, &sCostAndUsageQuery_groupBy, &sCostAndUsageQuery_filter}}
+var mCostCategoryValues = smithy.SchemaMembers{List: []*smithy.Schema{&sCostCategoryValues_key, &sCostCategoryValues_values, &sCostCategoryValues_matchOptions}}
+var mDashboardReference = smithy.SchemaMembers{List: []*smithy.Schema{&sDashboardReference_arn, &sDashboardReference_name, &sDashboardReference_description, &sDashboardReference_type, &sDashboardReference_createdAt, &sDashboardReference_updatedAt}}
+var m_DashboardReferenceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DashboardReferenceList_member}}
+var mDashboardType = smithy.SchemaMembers{List: []*smithy.Schema{&sDashboardType_CUSTOM}}
+var mDateTimeRange = smithy.SchemaMembers{List: []*smithy.Schema{&sDateTimeRange_startTime, &sDateTimeRange_endTime}}
+var mDateTimeType = smithy.SchemaMembers{List: []*smithy.Schema{&sDateTimeType_ABSOLUTE, &sDateTimeType_RELATIVE}}
+var mDateTimeValue = smithy.SchemaMembers{List: []*smithy.Schema{&sDateTimeValue_type, &sDateTimeValue_value}}
+var mDimension = smithy.SchemaMembers{List: []*smithy.Schema{&sDimension_AZ, &sDimension_INSTANCE_TYPE, &sDimension_LINKED_ACCOUNT, &sDimension_OPERATION, &sDimension_PURCHASE_TYPE, &sDimension_REGION, &sDimension_SERVICE, &sDimension_USAGE_TYPE, &sDimension_USAGE_TYPE_GROUP, &sDimension_RECORD_TYPE, &sDimension_RESOURCE_ID, &sDimension_SUBSCRIPTION_ID, &sDimension_TAG_KEY, &sDimension_OPERATING_SYSTEM, &sDimension_TENANCY, &sDimension_BILLING_ENTITY, &sDimension_RESERVATION_ID, &sDimension_COST_CATEGORY_NAME, &sDimension_DATABASE_ENGINE, &sDimension_LEGAL_ENTITY_NAME, &sDimension_SAVINGS_PLANS_TYPE, &sDimension_INSTANCE_TYPE_FAMILY, &sDimension_CACHE_ENGINE, &sDimension_DEPLOYMENT_OPTION, &sDimension_SCOPE, &sDimension_PLATFORM}, Seed: 18, Slots: []uint16{
+	3, 0, 0, 0, 0, 9, 0, 20, 18, 0, 0, 0, 0, 0, 4, 10, 24, 6, 8, 0, 25, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 15, 0, 26, 11, 0, 2, 16, 0, 19, 5, 13, 23, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 21, 0, 14, 17, 0, 0, 0, 1, 7, 12, 22, 0,
+}}
+var mDimensionValues = smithy.SchemaMembers{List: []*smithy.Schema{&sDimensionValues_key, &sDimensionValues_values, &sDimensionValues_matchOptions}}
+var mDisplayConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sDisplayConfig_graph, &sDisplayConfig_table}}
+var mExpression = smithy.SchemaMembers{List: []*smithy.Schema{&sExpression_or, &sExpression_and, &sExpression_not, &sExpression_dimensions, &sExpression_tags, &sExpression_costCategories}}
+var m_Expressions = smithy.SchemaMembers{List: []*smithy.Schema{&s_Expressions_member}}
+var mGranularity = smithy.SchemaMembers{List: []*smithy.Schema{&sGranularity_HOURLY, &sGranularity_DAILY, &sGranularity_MONTHLY}}
+var mGraphDisplayConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sGraphDisplayConfig_visualType}}
+var m_GraphDisplayConfigMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_GraphDisplayConfigMap_key, &s_GraphDisplayConfigMap_value}}
+var mGroupDefinition = smithy.SchemaMembers{List: []*smithy.Schema{&sGroupDefinition_key, &sGroupDefinition_type}}
+var m_GroupDefinitions = smithy.SchemaMembers{List: []*smithy.Schema{&s_GroupDefinitions_member}}
+var mGroupDefinitionType = smithy.SchemaMembers{List: []*smithy.Schema{&sGroupDefinitionType_DIMENSION, &sGroupDefinitionType_TAG, &sGroupDefinitionType_COST_CATEGORY}}
+var mHealthStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sHealthStatus_statusCode, &sHealthStatus_lastRefreshedAt, &sHealthStatus_statusReasons}}
+var mHealthStatusCode = smithy.SchemaMembers{List: []*smithy.Schema{&sHealthStatusCode_HEALTHY, &sHealthStatusCode_UNHEALTHY}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message}}
+var mMatchOption = smithy.SchemaMembers{List: []*smithy.Schema{&sMatchOption_EQUALS, &sMatchOption_ABSENT, &sMatchOption_STARTS_WITH, &sMatchOption_ENDS_WITH, &sMatchOption_CONTAINS, &sMatchOption_GREATER_THAN_OR_EQUAL, &sMatchOption_CASE_SENSITIVE, &sMatchOption_CASE_INSENSITIVE}}
+var m_MatchOptions = smithy.SchemaMembers{List: []*smithy.Schema{&s_MatchOptions_member}}
+var mMetricName = smithy.SchemaMembers{List: []*smithy.Schema{&sMetricName_AmortizedCost, &sMetricName_BlendedCost, &sMetricName_NetAmortizedCost, &sMetricName_NetUnblendedCost, &sMetricName_NormalizedUsageAmount, &sMetricName_UnblendedCost, &sMetricName_UsageQuantity, &sMetricName_SpendCoveredBySavingsPlans, &sMetricName_Hour, &sMetricName_Unit, &sMetricName_Cost}, Seed: 7, Slots: []uint16{
+	0, 0, 0, 0, 0, 2, 0, 0, 0, 8, 0, 5, 0, 0, 0, 11, 0, 0, 9, 0, 0, 1, 10, 0,
+	0, 6, 7, 0, 4, 0, 0, 3,
+}}
+var m_MetricNames = smithy.SchemaMembers{List: []*smithy.Schema{&s_MetricNames_member}}
+var mQueryParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sQueryParameters_costAndUsage, &sQueryParameters_savingsPlansCoverage, &sQueryParameters_savingsPlansUtilization, &sQueryParameters_reservationCoverage, &sQueryParameters_reservationUtilization}}
+var mReservationCoverageQuery = smithy.SchemaMembers{List: []*smithy.Schema{&sReservationCoverageQuery_timeRange, &sReservationCoverageQuery_groupBy, &sReservationCoverageQuery_granularity, &sReservationCoverageQuery_filter, &sReservationCoverageQuery_metrics}}
+var mReservationUtilizationQuery = smithy.SchemaMembers{List: []*smithy.Schema{&sReservationUtilizationQuery_timeRange, &sReservationUtilizationQuery_groupBy, &sReservationUtilizationQuery_granularity, &sReservationUtilizationQuery_filter}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message}}
+var mResourceTag = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceTag_key, &sResourceTag_value}}
+var m_ResourceTagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceTagKeyList_member}}
+var m_ResourceTagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceTagList_member}}
+var mSavingsPlansCoverageQuery = smithy.SchemaMembers{List: []*smithy.Schema{&sSavingsPlansCoverageQuery_timeRange, &sSavingsPlansCoverageQuery_metrics, &sSavingsPlansCoverageQuery_granularity, &sSavingsPlansCoverageQuery_groupBy, &sSavingsPlansCoverageQuery_filter}}
+var mSavingsPlansUtilizationQuery = smithy.SchemaMembers{List: []*smithy.Schema{&sSavingsPlansUtilizationQuery_timeRange, &sSavingsPlansUtilizationQuery_granularity, &sSavingsPlansUtilizationQuery_filter}}
+var mScheduleConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sScheduleConfig_scheduleExpression, &sScheduleConfig_scheduleExpressionTimeZone, &sScheduleConfig_schedulePeriod, &sScheduleConfig_state}}
+var mScheduledReport = smithy.SchemaMembers{List: []*smithy.Schema{&sScheduledReport_arn, &sScheduledReport_name, &sScheduledReport_dashboardArn, &sScheduledReport_scheduledReportExecutionRoleArn, &sScheduledReport_scheduleConfig, &sScheduledReport_description, &sScheduledReport_widgetIds, &sScheduledReport_widgetDateRangeOverride, &sScheduledReport_createdAt, &sScheduledReport_updatedAt, &sScheduledReport_lastExecutionAt, &sScheduledReport_healthStatus}, Seed: 12, Slots: []uint16{
+	0, 4, 0, 0, 1, 5, 9, 11, 0, 6, 0, 0, 2, 12, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0,
+	0, 0, 0, 0, 3, 10, 0, 8,
+}}
+var mScheduledReportInput = smithy.SchemaMembers{List: []*smithy.Schema{&sScheduledReportInput_name, &sScheduledReportInput_dashboardArn, &sScheduledReportInput_scheduledReportExecutionRoleArn, &sScheduledReportInput_scheduleConfig, &sScheduledReportInput_description, &sScheduledReportInput_widgetIds, &sScheduledReportInput_widgetDateRangeOverride}}
+var mScheduledReportSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sScheduledReportSummary_arn, &sScheduledReportSummary_name, &sScheduledReportSummary_dashboardArn, &sScheduledReportSummary_scheduleExpression, &sScheduledReportSummary_state, &sScheduledReportSummary_healthStatus, &sScheduledReportSummary_scheduleExpressionTimeZone, &sScheduledReportSummary_widgetIds}}
+var m_ScheduledReportSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ScheduledReportSummaryList_member}}
+var mSchedulePeriod = smithy.SchemaMembers{List: []*smithy.Schema{&sSchedulePeriod_startTime, &sSchedulePeriod_endTime}}
+var mScheduleState = smithy.SchemaMembers{List: []*smithy.Schema{&sScheduleState_ENABLED, &sScheduleState_DISABLED}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message}}
+var mStatusReason = smithy.SchemaMembers{List: []*smithy.Schema{&sStatusReason_DATA_SOURCE_ACCESS_DENIED, &sStatusReason_EXECUTION_ROLE_ASSUME_FAILED, &sStatusReason_EXECUTION_ROLE_INSUFFICIENT_PERMISSIONS, &sStatusReason_DASHBOARD_NOT_FOUND, &sStatusReason_DASHBOARD_ACCESS_DENIED, &sStatusReason_INTERNAL_FAILURE, &sStatusReason_WIDGET_ID_NOT_FOUND}}
+var m_StatusReasonList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StatusReasonList_member}}
+var m_StringList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StringList_member}}
+var mTagValues = smithy.SchemaMembers{List: []*smithy.Schema{&sTagValues_key, &sTagValues_values, &sTagValues_matchOptions}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message}}
+var mVisualType = smithy.SchemaMembers{List: []*smithy.Schema{&sVisualType_LINE, &sVisualType_BAR, &sVisualType_STACK}}
+var mWidget = smithy.SchemaMembers{List: []*smithy.Schema{&sWidget_id, &sWidget_title, &sWidget_description, &sWidget_width, &sWidget_height, &sWidget_horizontalOffset, &sWidget_configs}}
+var mWidgetConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sWidgetConfig_queryParameters, &sWidgetConfig_displayConfig}}
+var m_WidgetConfigList = smithy.SchemaMembers{List: []*smithy.Schema{&s_WidgetConfigList_member}}
+var m_WidgetIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_WidgetIdList_member}}
+var m_WidgetList = smithy.SchemaMembers{List: []*smithy.Schema{&s_WidgetList_member}}
+var mCreateDashboardRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDashboardRequest_name, &sCreateDashboardRequest_description, &sCreateDashboardRequest_widgets, &sCreateDashboardRequest_resourceTags}}
+var mCreateDashboardResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDashboardResponse_arn}}
+var mCreateScheduledReportRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateScheduledReportRequest_scheduledReport, &sCreateScheduledReportRequest_resourceTags, &sCreateScheduledReportRequest_clientToken}}
+var mCreateScheduledReportResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateScheduledReportResponse_arn}}
+var mDeleteDashboardRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDashboardRequest_arn}}
+var mDeleteDashboardResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDashboardResponse_arn}}
+var mDeleteScheduledReportRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteScheduledReportRequest_arn}}
+var mDeleteScheduledReportResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteScheduledReportResponse_arn}}
+var mExecuteScheduledReportRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sExecuteScheduledReportRequest_arn, &sExecuteScheduledReportRequest_clientToken, &sExecuteScheduledReportRequest_dryRun}}
+var mExecuteScheduledReportResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sExecuteScheduledReportResponse_healthStatus, &sExecuteScheduledReportResponse_executionTriggered}}
+var mGetDashboardRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDashboardRequest_arn}}
+var mGetDashboardResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDashboardResponse_arn, &sGetDashboardResponse_name, &sGetDashboardResponse_description, &sGetDashboardResponse_type, &sGetDashboardResponse_widgets, &sGetDashboardResponse_createdAt, &sGetDashboardResponse_updatedAt}}
+var mGetResourcePolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourcePolicyRequest_resourceArn}}
+var mGetResourcePolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourcePolicyResponse_resourceArn, &sGetResourcePolicyResponse_policyDocument}}
+var mGetScheduledReportRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetScheduledReportRequest_arn}}
+var mGetScheduledReportResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetScheduledReportResponse_scheduledReport}}
+var mListDashboardsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListDashboardsRequest_maxResults, &sListDashboardsRequest_nextToken}}
+var mListDashboardsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListDashboardsResponse_dashboards, &sListDashboardsResponse_nextToken}}
+var mListScheduledReportsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListScheduledReportsRequest_nextToken, &sListScheduledReportsRequest_maxResults}}
+var mListScheduledReportsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListScheduledReportsResponse_scheduledReports, &sListScheduledReportsResponse_nextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_resourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_resourceTags}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_resourceArn, &sTagResourceRequest_resourceTags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_resourceArn, &sUntagResourceRequest_resourceTagKeys}}
+var mUpdateDashboardRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDashboardRequest_arn, &sUpdateDashboardRequest_name, &sUpdateDashboardRequest_description, &sUpdateDashboardRequest_widgets}}
+var mUpdateDashboardResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDashboardResponse_arn}}
+var mUpdateScheduledReportRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateScheduledReportRequest_arn, &sUpdateScheduledReportRequest_name, &sUpdateScheduledReportRequest_description, &sUpdateScheduledReportRequest_dashboardArn, &sUpdateScheduledReportRequest_scheduledReportExecutionRoleArn, &sUpdateScheduledReportRequest_scheduleConfig, &sUpdateScheduledReportRequest_widgetIds, &sUpdateScheduledReportRequest_widgetDateRangeOverride, &sUpdateScheduledReportRequest_clearWidgetIds, &sUpdateScheduledReportRequest_clearWidgetDateRangeOverride}, Seed: 3, Slots: []uint16{
+	0, 1, 0, 0, 0, 2, 0, 5, 8, 0, 0, 0, 9, 10, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0,
+	0, 0, 7, 0, 4, 3, 0, 0,
+}}
+var mUpdateScheduledReportResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateScheduledReportResponse_arn}}
+
+var sCreateDashboard = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDashboard, Type: smithy.ShapeTypeOperation})
+var sCreateScheduledReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateScheduledReport, Type: smithy.ShapeTypeOperation})
+var sDeleteDashboard = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDashboard, Type: smithy.ShapeTypeOperation})
+var sDeleteScheduledReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteScheduledReport, Type: smithy.ShapeTypeOperation})
+var sExecuteScheduledReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecuteScheduledReport, Type: smithy.ShapeTypeOperation})
+var sGetDashboard = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDashboard, Type: smithy.ShapeTypeOperation})
+var sGetResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicy, Type: smithy.ShapeTypeOperation})
+var sGetScheduledReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetScheduledReport, Type: smithy.ShapeTypeOperation})
+var sListDashboards = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDashboards, Type: smithy.ShapeTypeOperation})
+var sListScheduledReports = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListScheduledReports, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation})
+var sUpdateDashboard = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDashboard, Type: smithy.ShapeTypeOperation})
+var sUpdateScheduledReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateScheduledReport, Type: smithy.ShapeTypeOperation})
+var s_AWSBCMDashboardsService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSBCMDashboardsService, Type: smithy.ShapeTypeService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sCostAndUsageQuery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCostAndUsageQuery, Members: &mCostAndUsageQuery, Type: smithy.ShapeTypeStructure})
+var sCostCategoryValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCostCategoryValues, Members: &mCostCategoryValues, Type: smithy.ShapeTypeStructure})
+var s_DashboardArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DashboardArn, Type: smithy.ShapeTypeString})
+var s_DashboardName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DashboardName, Type: smithy.ShapeTypeString})
+var sDashboardReference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDashboardReference, Members: &mDashboardReference, Type: smithy.ShapeTypeStructure})
+var s_DashboardReferenceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DashboardReferenceList, Members: &m_DashboardReferenceList, Type: smithy.ShapeTypeList})
+var sDashboardType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDashboardType, Members: &mDashboardType, Type: smithy.ShapeTypeEnum})
+var sDateTimeRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDateTimeRange, Members: &mDateTimeRange, Type: smithy.ShapeTypeStructure})
+var sDateTimeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDateTimeType, Members: &mDateTimeType, Type: smithy.ShapeTypeEnum})
+var sDateTimeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDateTimeValue, Members: &mDateTimeValue, Type: smithy.ShapeTypeStructure})
+var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Type: smithy.ShapeTypeString})
+var sDimension = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDimension, Members: &mDimension, Type: smithy.ShapeTypeEnum})
+var sDimensionValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDimensionValues, Members: &mDimensionValues, Type: smithy.ShapeTypeStructure})
+var sDisplayConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisplayConfig, Members: &mDisplayConfig, Type: smithy.ShapeTypeUnion})
+var sExpression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpression, Members: &mExpression, Type: smithy.ShapeTypeStructure})
+var s_Expressions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Expressions, Members: &m_Expressions, Type: smithy.ShapeTypeList})
+var s_GenericString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var s_GenericTimeStamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GenericTimeStamp, Type: smithy.ShapeTypeTimestamp})
+var sGranularity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGranularity, Members: &mGranularity, Type: smithy.ShapeTypeEnum})
+var sGraphDisplayConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGraphDisplayConfig, Members: &mGraphDisplayConfig, Type: smithy.ShapeTypeStructure})
+var s_GraphDisplayConfigMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GraphDisplayConfigMap, Members: &m_GraphDisplayConfigMap, Type: smithy.ShapeTypeMap})
+var sGroupDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGroupDefinition, Members: &mGroupDefinition, Type: smithy.ShapeTypeStructure})
+var s_GroupDefinitions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GroupDefinitions, Members: &m_GroupDefinitions, Type: smithy.ShapeTypeList})
+var sGroupDefinitionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGroupDefinitionType, Members: &mGroupDefinitionType, Type: smithy.ShapeTypeEnum})
+var sHealthStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHealthStatus, Members: &mHealthStatus, Type: smithy.ShapeTypeStructure})
+var sHealthStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHealthStatusCode, Members: &mHealthStatusCode, Type: smithy.ShapeTypeEnum})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var sMatchOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMatchOption, Members: &mMatchOption, Type: smithy.ShapeTypeEnum})
+var s_MatchOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MatchOptions, Members: &m_MatchOptions, Type: smithy.ShapeTypeList})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sMetricName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricName, Members: &mMetricName, Type: smithy.ShapeTypeEnum})
+var s_MetricNames = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricNames, Members: &m_MetricNames, Type: smithy.ShapeTypeList})
+var s_NextPageToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextPageToken, Type: smithy.ShapeTypeString})
+var sQueryParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryParameters, Members: &mQueryParameters, Type: smithy.ShapeTypeUnion})
+var sReservationCoverageQuery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReservationCoverageQuery, Members: &mReservationCoverageQuery, Type: smithy.ShapeTypeStructure})
+var sReservationUtilizationQuery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReservationUtilizationQuery, Members: &mReservationUtilizationQuery, Type: smithy.ShapeTypeStructure})
+var s_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t3, Type: smithy.ShapeTypeStructure})
+var sResourceTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceTag, Members: &mResourceTag, Type: smithy.ShapeTypeStructure})
+var s_ResourceTagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceTagKey, Type: smithy.ShapeTypeString})
+var s_ResourceTagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceTagKeyList, Members: &m_ResourceTagKeyList, Type: smithy.ShapeTypeList})
+var s_ResourceTagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceTagList, Members: &m_ResourceTagList, Type: smithy.ShapeTypeList})
+var s_ResourceTagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceTagValue, Type: smithy.ShapeTypeString})
+var sSavingsPlansCoverageQuery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSavingsPlansCoverageQuery, Members: &mSavingsPlansCoverageQuery, Type: smithy.ShapeTypeStructure})
+var sSavingsPlansUtilizationQuery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSavingsPlansUtilizationQuery, Members: &mSavingsPlansUtilizationQuery, Type: smithy.ShapeTypeStructure})
+var sScheduleConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScheduleConfig, Members: &mScheduleConfig, Type: smithy.ShapeTypeStructure})
+var sScheduledReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScheduledReport, Members: &mScheduledReport, Type: smithy.ShapeTypeStructure})
+var s_ScheduledReportArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScheduledReportArn, Type: smithy.ShapeTypeString})
+var sScheduledReportInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScheduledReportInput, Members: &mScheduledReportInput, Type: smithy.ShapeTypeStructure})
+var s_ScheduledReportName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScheduledReportName, Type: smithy.ShapeTypeString})
+var sScheduledReportSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScheduledReportSummary, Members: &mScheduledReportSummary, Type: smithy.ShapeTypeStructure})
+var s_ScheduledReportSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScheduledReportSummaryList, Members: &m_ScheduledReportSummaryList, Type: smithy.ShapeTypeList})
+var sSchedulePeriod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSchedulePeriod, Members: &mSchedulePeriod, Type: smithy.ShapeTypeStructure})
+var sScheduleState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScheduleState, Members: &mScheduleState, Type: smithy.ShapeTypeEnum})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t4, Type: smithy.ShapeTypeStructure})
+var s_ServiceRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceRoleArn, Type: smithy.ShapeTypeString})
+var sStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatusReason, Members: &mStatusReason, Type: smithy.ShapeTypeEnum})
+var s_StatusReasonList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatusReasonList, Members: &m_StatusReasonList, Type: smithy.ShapeTypeList})
+var s_StringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sTableDisplayConfigStruct = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTableDisplayConfigStruct, Type: smithy.ShapeTypeStructure})
+var sTagValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagValues, Members: &mTagValues, Type: smithy.ShapeTypeStructure})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t5, Type: smithy.ShapeTypeStructure})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t6, Type: smithy.ShapeTypeStructure})
+var sVisualType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVisualType, Members: &mVisualType, Type: smithy.ShapeTypeEnum})
+var sWidget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWidget, Members: &mWidget, Type: smithy.ShapeTypeStructure})
+var sWidgetConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWidgetConfig, Members: &mWidgetConfig, Type: smithy.ShapeTypeStructure})
+var s_WidgetConfigList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WidgetConfigList, Members: &m_WidgetConfigList, Type: smithy.ShapeTypeList})
+var s_WidgetHeight = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WidgetHeight, Type: smithy.ShapeTypeInteger})
+var s_WidgetId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WidgetId, Type: smithy.ShapeTypeString})
+var s_WidgetIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WidgetIdList, Members: &m_WidgetIdList, Type: smithy.ShapeTypeList})
+var s_WidgetList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WidgetList, Members: &m_WidgetList, Type: smithy.ShapeTypeList})
+var s_WidgetTitle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WidgetTitle, Type: smithy.ShapeTypeString})
+var s_WidgetWidth = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WidgetWidth, Type: smithy.ShapeTypeInteger})
+var sCreateDashboardRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDashboardRequest, Members: &mCreateDashboardRequest, Type: smithy.ShapeTypeStructure})
+var sCreateDashboardResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDashboardResponse, Members: &mCreateDashboardResponse, Type: smithy.ShapeTypeStructure})
+var sCreateScheduledReportRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateScheduledReportRequest, Members: &mCreateScheduledReportRequest, Type: smithy.ShapeTypeStructure})
+var sCreateScheduledReportResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateScheduledReportResponse, Members: &mCreateScheduledReportResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteDashboardRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDashboardRequest, Members: &mDeleteDashboardRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteDashboardResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDashboardResponse, Members: &mDeleteDashboardResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteScheduledReportRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteScheduledReportRequest, Members: &mDeleteScheduledReportRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteScheduledReportResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteScheduledReportResponse, Members: &mDeleteScheduledReportResponse, Type: smithy.ShapeTypeStructure})
+var sExecuteScheduledReportRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecuteScheduledReportRequest, Members: &mExecuteScheduledReportRequest, Type: smithy.ShapeTypeStructure})
+var sExecuteScheduledReportResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecuteScheduledReportResponse, Members: &mExecuteScheduledReportResponse, Type: smithy.ShapeTypeStructure})
+var sGetDashboardRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDashboardRequest, Members: &mGetDashboardRequest, Type: smithy.ShapeTypeStructure})
+var sGetDashboardResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDashboardResponse, Members: &mGetDashboardResponse, Type: smithy.ShapeTypeStructure})
+var sGetResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicyRequest, Members: &mGetResourcePolicyRequest, Type: smithy.ShapeTypeStructure})
+var sGetResourcePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicyResponse, Members: &mGetResourcePolicyResponse, Type: smithy.ShapeTypeStructure})
+var sGetScheduledReportRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetScheduledReportRequest, Members: &mGetScheduledReportRequest, Type: smithy.ShapeTypeStructure})
+var sGetScheduledReportResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetScheduledReportResponse, Members: &mGetScheduledReportResponse, Type: smithy.ShapeTypeStructure})
+var sListDashboardsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDashboardsRequest, Members: &mListDashboardsRequest, Type: smithy.ShapeTypeStructure})
+var sListDashboardsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDashboardsResponse, Members: &mListDashboardsResponse, Type: smithy.ShapeTypeStructure})
+var sListScheduledReportsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListScheduledReportsRequest, Members: &mListScheduledReportsRequest, Type: smithy.ShapeTypeStructure})
+var sListScheduledReportsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListScheduledReportsResponse, Members: &mListScheduledReportsResponse, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateDashboardRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDashboardRequest, Members: &mUpdateDashboardRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateDashboardResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDashboardResponse, Members: &mUpdateDashboardResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateScheduledReportRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateScheduledReportRequest, Members: &mUpdateScheduledReportRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateScheduledReportResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateScheduledReportResponse, Members: &mUpdateScheduledReportResponse, Type: smithy.ShapeTypeStructure})
+
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sCostAndUsageQuery_metrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metrics", ID: &i_MetricNames, Members: &m_MetricNames, Type: smithy.ShapeTypeList})
+var sCostAndUsageQuery_timeRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeRange", ID: &iDateTimeRange, Members: &mDateTimeRange, Type: smithy.ShapeTypeStructure})
+var sCostAndUsageQuery_granularity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "granularity", ID: &iGranularity, Members: &mGranularity, Type: smithy.ShapeTypeEnum})
+var sCostAndUsageQuery_groupBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupBy", ID: &i_GroupDefinitions, Members: &m_GroupDefinitions, Type: smithy.ShapeTypeList})
+var sCostAndUsageQuery_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iExpression, Members: &mExpression, Type: smithy.ShapeTypeStructure})
+var sCostCategoryValues_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString})
+var sCostCategoryValues_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sCostCategoryValues_matchOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "matchOptions", ID: &i_MatchOptions, Members: &m_MatchOptions, Type: smithy.ShapeTypeList})
+var sDashboardReference_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_DashboardArn, Type: smithy.ShapeTypeString})
+var sDashboardReference_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_DashboardName, Type: smithy.ShapeTypeString})
+var sDashboardReference_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sDashboardReference_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iDashboardType, Members: &mDashboardType, Type: smithy.ShapeTypeEnum})
+var sDashboardReference_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_GenericTimeStamp, Type: smithy.ShapeTypeTimestamp})
+var sDashboardReference_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_GenericTimeStamp, Type: smithy.ShapeTypeTimestamp})
+var s_DashboardReferenceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDashboardReference, Members: &mDashboardReference, Type: smithy.ShapeTypeStructure})
+var sDashboardType_CUSTOM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDateTimeRange_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &iDateTimeValue, Members: &mDateTimeValue, Type: smithy.ShapeTypeStructure})
+var sDateTimeRange_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &iDateTimeValue, Members: &mDateTimeValue, Type: smithy.ShapeTypeStructure})
+var sDateTimeType_ABSOLUTE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ABSOLUTE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDateTimeType_RELATIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RELATIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDateTimeValue_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iDateTimeType, Members: &mDateTimeType, Type: smithy.ShapeTypeEnum})
+var sDateTimeValue_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sDimension_AZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AZ", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDimension_INSTANCE_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSTANCE_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDimension_LINKED_ACCOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LINKED_ACCOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDimension_OPERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDimension_PURCHASE_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PURCHASE_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDimension_REGION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REGION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDimension_SERVICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVICE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDimension_USAGE_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USAGE_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDimension_USAGE_TYPE_GROUP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USAGE_TYPE_GROUP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDimension_RECORD_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RECORD_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDimension_RESOURCE_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDimension_SUBSCRIPTION_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBSCRIPTION_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDimension_TAG_KEY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TAG_KEY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDimension_OPERATING_SYSTEM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPERATING_SYSTEM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDimension_TENANCY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TENANCY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDimension_BILLING_ENTITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BILLING_ENTITY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDimension_RESERVATION_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESERVATION_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDimension_COST_CATEGORY_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COST_CATEGORY_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDimension_DATABASE_ENGINE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DATABASE_ENGINE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDimension_LEGAL_ENTITY_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LEGAL_ENTITY_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDimension_SAVINGS_PLANS_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAVINGS_PLANS_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDimension_INSTANCE_TYPE_FAMILY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSTANCE_TYPE_FAMILY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDimension_CACHE_ENGINE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CACHE_ENGINE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDimension_DEPLOYMENT_OPTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPLOYMENT_OPTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDimension_SCOPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SCOPE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDimension_PLATFORM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PLATFORM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDimensionValues_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &iDimension, Members: &mDimension, Type: smithy.ShapeTypeEnum})
+var sDimensionValues_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sDimensionValues_matchOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "matchOptions", ID: &i_MatchOptions, Members: &m_MatchOptions, Type: smithy.ShapeTypeList})
+var sDisplayConfig_graph = smithy.NewStaticSchema(smithy.StaticSchema{Member: "graph", ID: &i_GraphDisplayConfigMap, Members: &m_GraphDisplayConfigMap, Type: smithy.ShapeTypeMap})
+var sDisplayConfig_table = smithy.NewStaticSchema(smithy.StaticSchema{Member: "table", ID: &iTableDisplayConfigStruct, Type: smithy.ShapeTypeStructure})
+var sExpression_or = smithy.NewStaticSchema(smithy.StaticSchema{Member: "or", ID: &i_Expressions, Members: &m_Expressions, Type: smithy.ShapeTypeList})
+var sExpression_and = smithy.NewStaticSchema(smithy.StaticSchema{Member: "and", ID: &i_Expressions, Members: &m_Expressions, Type: smithy.ShapeTypeList})
+var sExpression_not = smithy.NewStaticSchema(smithy.StaticSchema{Member: "not", ID: &iExpression, Type: smithy.ShapeTypeStructure})
+var sExpression_dimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dimensions", ID: &iDimensionValues, Members: &mDimensionValues, Type: smithy.ShapeTypeStructure})
+var sExpression_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &iTagValues, Members: &mTagValues, Type: smithy.ShapeTypeStructure})
+var sExpression_costCategories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "costCategories", ID: &iCostCategoryValues, Members: &mCostCategoryValues, Type: smithy.ShapeTypeStructure})
+var s_Expressions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExpression, Type: smithy.ShapeTypeStructure})
+var sGranularity_HOURLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HOURLY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sGranularity_DAILY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DAILY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sGranularity_MONTHLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MONTHLY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sGraphDisplayConfig_visualType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "visualType", ID: &iVisualType, Members: &mVisualType, Type: smithy.ShapeTypeEnum})
+var s_GraphDisplayConfigMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var s_GraphDisplayConfigMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iGraphDisplayConfig, Members: &mGraphDisplayConfig, Type: smithy.ShapeTypeStructure})
+var sGroupDefinition_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString})
+var sGroupDefinition_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iGroupDefinitionType, Members: &mGroupDefinitionType, Type: smithy.ShapeTypeEnum})
+var s_GroupDefinitions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGroupDefinition, Members: &mGroupDefinition, Type: smithy.ShapeTypeStructure})
+var sGroupDefinitionType_DIMENSION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIMENSION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sGroupDefinitionType_TAG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TAG", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sGroupDefinitionType_COST_CATEGORY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COST_CATEGORY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHealthStatus_statusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusCode", ID: &iHealthStatusCode, Members: &mHealthStatusCode, Type: smithy.ShapeTypeEnum})
+var sHealthStatus_lastRefreshedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastRefreshedAt", ID: &i_GenericTimeStamp, Type: smithy.ShapeTypeTimestamp})
+var sHealthStatus_statusReasons = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusReasons", ID: &i_StatusReasonList, Members: &m_StatusReasonList, Type: smithy.ShapeTypeList})
+var sHealthStatusCode_HEALTHY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HEALTHY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHealthStatusCode_UNHEALTHY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNHEALTHY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sMatchOption_EQUALS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EQUALS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMatchOption_ABSENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ABSENT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMatchOption_STARTS_WITH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STARTS_WITH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMatchOption_ENDS_WITH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENDS_WITH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMatchOption_CONTAINS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTAINS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMatchOption_GREATER_THAN_OR_EQUAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GREATER_THAN_OR_EQUAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMatchOption_CASE_SENSITIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CASE_SENSITIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMatchOption_CASE_INSENSITIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CASE_INSENSITIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_MatchOptions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMatchOption, Members: &mMatchOption, Type: smithy.ShapeTypeEnum})
+var sMetricName_AmortizedCost = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AmortizedCost", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricName_BlendedCost = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlendedCost", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricName_NetAmortizedCost = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetAmortizedCost", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricName_NetUnblendedCost = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetUnblendedCost", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricName_NormalizedUsageAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NormalizedUsageAmount", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricName_UnblendedCost = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UnblendedCost", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricName_UsageQuantity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UsageQuantity", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricName_SpendCoveredBySavingsPlans = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpendCoveredBySavingsPlans", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricName_Hour = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Hour", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricName_Unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unit", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricName_Cost = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cost", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_MetricNames_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMetricName, Members: &mMetricName, Type: smithy.ShapeTypeEnum})
+var sQueryParameters_costAndUsage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "costAndUsage", ID: &iCostAndUsageQuery, Members: &mCostAndUsageQuery, Type: smithy.ShapeTypeStructure})
+var sQueryParameters_savingsPlansCoverage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "savingsPlansCoverage", ID: &iSavingsPlansCoverageQuery, Members: &mSavingsPlansCoverageQuery, Type: smithy.ShapeTypeStructure})
+var sQueryParameters_savingsPlansUtilization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "savingsPlansUtilization", ID: &iSavingsPlansUtilizationQuery, Members: &mSavingsPlansUtilizationQuery, Type: smithy.ShapeTypeStructure})
+var sQueryParameters_reservationCoverage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reservationCoverage", ID: &iReservationCoverageQuery, Members: &mReservationCoverageQuery, Type: smithy.ShapeTypeStructure})
+var sQueryParameters_reservationUtilization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reservationUtilization", ID: &iReservationUtilizationQuery, Members: &mReservationUtilizationQuery, Type: smithy.ShapeTypeStructure})
+var sReservationCoverageQuery_timeRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeRange", ID: &iDateTimeRange, Members: &mDateTimeRange, Type: smithy.ShapeTypeStructure})
+var sReservationCoverageQuery_groupBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupBy", ID: &i_GroupDefinitions, Members: &m_GroupDefinitions, Type: smithy.ShapeTypeList})
+var sReservationCoverageQuery_granularity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "granularity", ID: &iGranularity, Members: &mGranularity, Type: smithy.ShapeTypeEnum})
+var sReservationCoverageQuery_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iExpression, Members: &mExpression, Type: smithy.ShapeTypeStructure})
+var sReservationCoverageQuery_metrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metrics", ID: &i_MetricNames, Members: &m_MetricNames, Type: smithy.ShapeTypeList})
+var sReservationUtilizationQuery_timeRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeRange", ID: &iDateTimeRange, Members: &mDateTimeRange, Type: smithy.ShapeTypeStructure})
+var sReservationUtilizationQuery_groupBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupBy", ID: &i_GroupDefinitions, Members: &m_GroupDefinitions, Type: smithy.ShapeTypeList})
+var sReservationUtilizationQuery_granularity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "granularity", ID: &iGranularity, Members: &mGranularity, Type: smithy.ShapeTypeEnum})
+var sReservationUtilizationQuery_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iExpression, Members: &mExpression, Type: smithy.ShapeTypeStructure})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sResourceTag_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ResourceTagKey, Type: smithy.ShapeTypeString})
+var sResourceTag_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ResourceTagValue, Type: smithy.ShapeTypeString})
+var s_ResourceTagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ResourceTagKey, Type: smithy.ShapeTypeString})
+var s_ResourceTagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourceTag, Members: &mResourceTag, Type: smithy.ShapeTypeStructure})
+var sSavingsPlansCoverageQuery_timeRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeRange", ID: &iDateTimeRange, Members: &mDateTimeRange, Type: smithy.ShapeTypeStructure})
+var sSavingsPlansCoverageQuery_metrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metrics", ID: &i_MetricNames, Members: &m_MetricNames, Type: smithy.ShapeTypeList})
+var sSavingsPlansCoverageQuery_granularity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "granularity", ID: &iGranularity, Members: &mGranularity, Type: smithy.ShapeTypeEnum})
+var sSavingsPlansCoverageQuery_groupBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupBy", ID: &i_GroupDefinitions, Members: &m_GroupDefinitions, Type: smithy.ShapeTypeList})
+var sSavingsPlansCoverageQuery_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iExpression, Members: &mExpression, Type: smithy.ShapeTypeStructure})
+var sSavingsPlansUtilizationQuery_timeRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeRange", ID: &iDateTimeRange, Members: &mDateTimeRange, Type: smithy.ShapeTypeStructure})
+var sSavingsPlansUtilizationQuery_granularity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "granularity", ID: &iGranularity, Members: &mGranularity, Type: smithy.ShapeTypeEnum})
+var sSavingsPlansUtilizationQuery_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iExpression, Members: &mExpression, Type: smithy.ShapeTypeStructure})
+var sScheduleConfig_scheduleExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduleExpression", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sScheduleConfig_scheduleExpressionTimeZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduleExpressionTimeZone", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sScheduleConfig_schedulePeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schedulePeriod", ID: &iSchedulePeriod, Members: &mSchedulePeriod, Type: smithy.ShapeTypeStructure})
+var sScheduleConfig_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iScheduleState, Members: &mScheduleState, Type: smithy.ShapeTypeEnum})
+var sScheduledReport_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ScheduledReportArn, Type: smithy.ShapeTypeString})
+var sScheduledReport_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ScheduledReportName, Type: smithy.ShapeTypeString})
+var sScheduledReport_dashboardArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dashboardArn", ID: &i_DashboardArn, Type: smithy.ShapeTypeString})
+var sScheduledReport_scheduledReportExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduledReportExecutionRoleArn", ID: &i_ServiceRoleArn, Type: smithy.ShapeTypeString})
+var sScheduledReport_scheduleConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduleConfig", ID: &iScheduleConfig, Members: &mScheduleConfig, Type: smithy.ShapeTypeStructure})
+var sScheduledReport_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sScheduledReport_widgetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "widgetIds", ID: &i_WidgetIdList, Members: &m_WidgetIdList, Type: smithy.ShapeTypeList})
+var sScheduledReport_widgetDateRangeOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "widgetDateRangeOverride", ID: &iDateTimeRange, Members: &mDateTimeRange, Type: smithy.ShapeTypeStructure})
+var sScheduledReport_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_GenericTimeStamp, Type: smithy.ShapeTypeTimestamp})
+var sScheduledReport_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_GenericTimeStamp, Type: smithy.ShapeTypeTimestamp})
+var sScheduledReport_lastExecutionAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastExecutionAt", ID: &i_GenericTimeStamp, Type: smithy.ShapeTypeTimestamp})
+var sScheduledReport_healthStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "healthStatus", ID: &iHealthStatus, Members: &mHealthStatus, Type: smithy.ShapeTypeStructure})
+var sScheduledReportInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ScheduledReportName, Type: smithy.ShapeTypeString})
+var sScheduledReportInput_dashboardArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dashboardArn", ID: &i_DashboardArn, Type: smithy.ShapeTypeString})
+var sScheduledReportInput_scheduledReportExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduledReportExecutionRoleArn", ID: &i_ServiceRoleArn, Type: smithy.ShapeTypeString})
+var sScheduledReportInput_scheduleConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduleConfig", ID: &iScheduleConfig, Members: &mScheduleConfig, Type: smithy.ShapeTypeStructure})
+var sScheduledReportInput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sScheduledReportInput_widgetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "widgetIds", ID: &i_WidgetIdList, Members: &m_WidgetIdList, Type: smithy.ShapeTypeList})
+var sScheduledReportInput_widgetDateRangeOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "widgetDateRangeOverride", ID: &iDateTimeRange, Members: &mDateTimeRange, Type: smithy.ShapeTypeStructure})
+var sScheduledReportSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ScheduledReportArn, Type: smithy.ShapeTypeString})
+var sScheduledReportSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ScheduledReportName, Type: smithy.ShapeTypeString})
+var sScheduledReportSummary_dashboardArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dashboardArn", ID: &i_DashboardArn, Type: smithy.ShapeTypeString})
+var sScheduledReportSummary_scheduleExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduleExpression", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sScheduledReportSummary_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iScheduleState, Members: &mScheduleState, Type: smithy.ShapeTypeEnum})
+var sScheduledReportSummary_healthStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "healthStatus", ID: &iHealthStatus, Members: &mHealthStatus, Type: smithy.ShapeTypeStructure})
+var sScheduledReportSummary_scheduleExpressionTimeZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduleExpressionTimeZone", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sScheduledReportSummary_widgetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "widgetIds", ID: &i_WidgetIdList, Members: &m_WidgetIdList, Type: smithy.ShapeTypeList})
+var s_ScheduledReportSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iScheduledReportSummary, Members: &mScheduledReportSummary, Type: smithy.ShapeTypeStructure})
+var sSchedulePeriod_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_GenericTimeStamp, Type: smithy.ShapeTypeTimestamp})
+var sSchedulePeriod_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_GenericTimeStamp, Type: smithy.ShapeTypeTimestamp})
+var sScheduleState_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScheduleState_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sStatusReason_DATA_SOURCE_ACCESS_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DATA_SOURCE_ACCESS_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatusReason_EXECUTION_ROLE_ASSUME_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXECUTION_ROLE_ASSUME_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatusReason_EXECUTION_ROLE_INSUFFICIENT_PERMISSIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXECUTION_ROLE_INSUFFICIENT_PERMISSIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatusReason_DASHBOARD_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DASHBOARD_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatusReason_DASHBOARD_ACCESS_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DASHBOARD_ACCESS_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatusReason_INTERNAL_FAILURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_FAILURE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatusReason_WIDGET_ID_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WIDGET_ID_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_StatusReasonList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStatusReason, Members: &mStatusReason, Type: smithy.ShapeTypeEnum})
+var s_StringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString})
+var sTagValues_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString})
+var sTagValues_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sTagValues_matchOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "matchOptions", ID: &i_MatchOptions, Members: &m_MatchOptions, Type: smithy.ShapeTypeList})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sVisualType_LINE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LINE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVisualType_BAR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BAR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVisualType_STACK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STACK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sWidget_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_WidgetId, Type: smithy.ShapeTypeString})
+var sWidget_title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "title", ID: &i_WidgetTitle, Type: smithy.ShapeTypeString})
+var sWidget_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sWidget_width = smithy.NewStaticSchema(smithy.StaticSchema{Member: "width", ID: &i_WidgetWidth, Type: smithy.ShapeTypeInteger})
+var sWidget_height = smithy.NewStaticSchema(smithy.StaticSchema{Member: "height", ID: &i_WidgetHeight, Type: smithy.ShapeTypeInteger})
+var sWidget_horizontalOffset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "horizontalOffset", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sWidget_configs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configs", ID: &i_WidgetConfigList, Members: &m_WidgetConfigList, Type: smithy.ShapeTypeList})
+var sWidgetConfig_queryParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryParameters", ID: &iQueryParameters, Members: &mQueryParameters, Type: smithy.ShapeTypeUnion})
+var sWidgetConfig_displayConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayConfig", ID: &iDisplayConfig, Members: &mDisplayConfig, Type: smithy.ShapeTypeUnion})
+var s_WidgetConfigList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWidgetConfig, Members: &mWidgetConfig, Type: smithy.ShapeTypeStructure})
+var s_WidgetIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString})
+var s_WidgetList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWidget, Members: &mWidget, Type: smithy.ShapeTypeStructure})
+var sCreateDashboardRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_DashboardName, Type: smithy.ShapeTypeString})
+var sCreateDashboardRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sCreateDashboardRequest_widgets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "widgets", ID: &i_WidgetList, Members: &m_WidgetList, Type: smithy.ShapeTypeList})
+var sCreateDashboardRequest_resourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceTags", ID: &i_ResourceTagList, Members: &m_ResourceTagList, Type: smithy.ShapeTypeList})
+var sCreateDashboardResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_DashboardArn, Type: smithy.ShapeTypeString})
+var sCreateScheduledReportRequest_scheduledReport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduledReport", ID: &iScheduledReportInput, Members: &mScheduledReportInput, Type: smithy.ShapeTypeStructure})
+var sCreateScheduledReportRequest_resourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceTags", ID: &i_ResourceTagList, Members: &m_ResourceTagList, Type: smithy.ShapeTypeList})
+var sCreateScheduledReportRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Traits: &t7, Type: smithy.ShapeTypeString})
+var sCreateScheduledReportResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ScheduledReportArn, Type: smithy.ShapeTypeString})
+var sDeleteDashboardRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_DashboardArn, Type: smithy.ShapeTypeString})
+var sDeleteDashboardResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_DashboardArn, Type: smithy.ShapeTypeString})
+var sDeleteScheduledReportRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ScheduledReportArn, Type: smithy.ShapeTypeString})
+var sDeleteScheduledReportResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ScheduledReportArn, Type: smithy.ShapeTypeString})
+var sExecuteScheduledReportRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ScheduledReportArn, Type: smithy.ShapeTypeString})
+var sExecuteScheduledReportRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Traits: &t7, Type: smithy.ShapeTypeString})
+var sExecuteScheduledReportRequest_dryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dryRun", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sExecuteScheduledReportResponse_healthStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "healthStatus", ID: &iHealthStatus, Members: &mHealthStatus, Type: smithy.ShapeTypeStructure})
+var sExecuteScheduledReportResponse_executionTriggered = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionTriggered", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sGetDashboardRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_DashboardArn, Type: smithy.ShapeTypeString})
+var sGetDashboardResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_DashboardArn, Type: smithy.ShapeTypeString})
+var sGetDashboardResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_DashboardName, Type: smithy.ShapeTypeString})
+var sGetDashboardResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sGetDashboardResponse_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iDashboardType, Members: &mDashboardType, Type: smithy.ShapeTypeEnum})
+var sGetDashboardResponse_widgets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "widgets", ID: &i_WidgetList, Members: &m_WidgetList, Type: smithy.ShapeTypeList})
+var sGetDashboardResponse_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_GenericTimeStamp, Type: smithy.ShapeTypeTimestamp})
+var sGetDashboardResponse_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &i_GenericTimeStamp, Type: smithy.ShapeTypeTimestamp})
+var sGetResourcePolicyRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_DashboardArn, Type: smithy.ShapeTypeString})
+var sGetResourcePolicyResponse_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_DashboardArn, Type: smithy.ShapeTypeString})
+var sGetResourcePolicyResponse_policyDocument = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyDocument", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sGetScheduledReportRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ScheduledReportArn, Type: smithy.ShapeTypeString})
+var sGetScheduledReportResponse_scheduledReport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduledReport", ID: &iScheduledReport, Members: &mScheduledReport, Type: smithy.ShapeTypeStructure})
+var sListDashboardsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListDashboardsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextPageToken, Type: smithy.ShapeTypeString})
+var sListDashboardsResponse_dashboards = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dashboards", ID: &i_DashboardReferenceList, Members: &m_DashboardReferenceList, Type: smithy.ShapeTypeList})
+var sListDashboardsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextPageToken, Type: smithy.ShapeTypeString})
+var sListScheduledReportsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextPageToken, Type: smithy.ShapeTypeString})
+var sListScheduledReportsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListScheduledReportsResponse_scheduledReports = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduledReports", ID: &i_ScheduledReportSummaryList, Members: &m_ScheduledReportSummaryList, Type: smithy.ShapeTypeList})
+var sListScheduledReportsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextPageToken, Type: smithy.ShapeTypeString})
+var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_resourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceTags", ID: &i_ResourceTagList, Members: &m_ResourceTagList, Type: smithy.ShapeTypeList})
+var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_resourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceTags", ID: &i_ResourceTagList, Members: &m_ResourceTagList, Type: smithy.ShapeTypeList})
+var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_resourceTagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceTagKeys", ID: &i_ResourceTagKeyList, Members: &m_ResourceTagKeyList, Type: smithy.ShapeTypeList})
+var sUpdateDashboardRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_DashboardArn, Type: smithy.ShapeTypeString})
+var sUpdateDashboardRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_DashboardName, Type: smithy.ShapeTypeString})
+var sUpdateDashboardRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sUpdateDashboardRequest_widgets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "widgets", ID: &i_WidgetList, Members: &m_WidgetList, Type: smithy.ShapeTypeList})
+var sUpdateDashboardResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_DashboardArn, Type: smithy.ShapeTypeString})
+var sUpdateScheduledReportRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ScheduledReportArn, Type: smithy.ShapeTypeString})
+var sUpdateScheduledReportRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ScheduledReportName, Type: smithy.ShapeTypeString})
+var sUpdateScheduledReportRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sUpdateScheduledReportRequest_dashboardArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dashboardArn", ID: &i_DashboardArn, Type: smithy.ShapeTypeString})
+var sUpdateScheduledReportRequest_scheduledReportExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduledReportExecutionRoleArn", ID: &i_ServiceRoleArn, Type: smithy.ShapeTypeString})
+var sUpdateScheduledReportRequest_scheduleConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduleConfig", ID: &iScheduleConfig, Members: &mScheduleConfig, Type: smithy.ShapeTypeStructure})
+var sUpdateScheduledReportRequest_widgetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "widgetIds", ID: &i_WidgetIdList, Members: &m_WidgetIdList, Type: smithy.ShapeTypeList})
+var sUpdateScheduledReportRequest_widgetDateRangeOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "widgetDateRangeOverride", ID: &iDateTimeRange, Members: &mDateTimeRange, Type: smithy.ShapeTypeStructure})
+var sUpdateScheduledReportRequest_clearWidgetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clearWidgetIds", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sUpdateScheduledReportRequest_clearWidgetDateRangeOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clearWidgetDateRangeOverride", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sUpdateScheduledReportResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ScheduledReportArn, Type: smithy.ShapeTypeString})
+
+// Members of recursive shapes would make the variables' initializers refer to
+// each other in a cycle, which Go rejects, so they are completed here.
 func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", _GenericString)
-
-	ConflictException_message = ConflictException.AddMember("message", _GenericString)
-
-	MetricName_AmortizedCost = MetricName.AddMember("AmortizedCost", smithyprelude.Unit)
-
-	MetricName_BlendedCost = MetricName.AddMember("BlendedCost", smithyprelude.Unit)
-
-	MetricName_NetAmortizedCost = MetricName.AddMember("NetAmortizedCost", smithyprelude.Unit)
-
-	MetricName_NetUnblendedCost = MetricName.AddMember("NetUnblendedCost", smithyprelude.Unit)
-
-	MetricName_NormalizedUsageAmount = MetricName.AddMember("NormalizedUsageAmount", smithyprelude.Unit)
-
-	MetricName_UnblendedCost = MetricName.AddMember("UnblendedCost", smithyprelude.Unit)
-
-	MetricName_UsageQuantity = MetricName.AddMember("UsageQuantity", smithyprelude.Unit)
-
-	MetricName_SpendCoveredBySavingsPlans = MetricName.AddMember("SpendCoveredBySavingsPlans", smithyprelude.Unit)
-
-	MetricName_Hour = MetricName.AddMember("Hour", smithyprelude.Unit)
-
-	MetricName_Unit = MetricName.AddMember("Unit", smithyprelude.Unit)
-
-	MetricName_Cost = MetricName.AddMember("Cost", smithyprelude.Unit)
-
-	_MetricNames_member = _MetricNames.AddMember("member", MetricName)
-
-	DateTimeType_ABSOLUTE = DateTimeType.AddMember("ABSOLUTE", smithyprelude.Unit)
-
-	DateTimeType_RELATIVE = DateTimeType.AddMember("RELATIVE", smithyprelude.Unit)
-
-	DateTimeValue_type = DateTimeValue.AddMember("type", DateTimeType)
-
-	DateTimeValue_value = DateTimeValue.AddMember("value", _GenericString)
-
-	DateTimeRange_startTime = DateTimeRange.AddMember("startTime", DateTimeValue)
-
-	DateTimeRange_endTime = DateTimeRange.AddMember("endTime", DateTimeValue)
-
-	Granularity_HOURLY = Granularity.AddMember("HOURLY", smithyprelude.Unit)
-
-	Granularity_DAILY = Granularity.AddMember("DAILY", smithyprelude.Unit)
-
-	Granularity_MONTHLY = Granularity.AddMember("MONTHLY", smithyprelude.Unit)
-
-	GroupDefinitionType_DIMENSION = GroupDefinitionType.AddMember("DIMENSION", smithyprelude.Unit)
-
-	GroupDefinitionType_TAG = GroupDefinitionType.AddMember("TAG", smithyprelude.Unit)
-
-	GroupDefinitionType_COST_CATEGORY = GroupDefinitionType.AddMember("COST_CATEGORY", smithyprelude.Unit)
-
-	GroupDefinition_key = GroupDefinition.AddMember("key", smithyprelude.String)
-
-	GroupDefinition_type = GroupDefinition.AddMember("type", GroupDefinitionType)
-
-	_GroupDefinitions_member = _GroupDefinitions.AddMember("member", GroupDefinition)
-
-	_Expressions_member = _Expressions.AddMember("member", Expression)
-
-	Dimension_AZ = Dimension.AddMember("AZ", smithyprelude.Unit)
-
-	Dimension_INSTANCE_TYPE = Dimension.AddMember("INSTANCE_TYPE", smithyprelude.Unit)
-
-	Dimension_LINKED_ACCOUNT = Dimension.AddMember("LINKED_ACCOUNT", smithyprelude.Unit)
-
-	Dimension_OPERATION = Dimension.AddMember("OPERATION", smithyprelude.Unit)
-
-	Dimension_PURCHASE_TYPE = Dimension.AddMember("PURCHASE_TYPE", smithyprelude.Unit)
-
-	Dimension_REGION = Dimension.AddMember("REGION", smithyprelude.Unit)
-
-	Dimension_SERVICE = Dimension.AddMember("SERVICE", smithyprelude.Unit)
-
-	Dimension_USAGE_TYPE = Dimension.AddMember("USAGE_TYPE", smithyprelude.Unit)
-
-	Dimension_USAGE_TYPE_GROUP = Dimension.AddMember("USAGE_TYPE_GROUP", smithyprelude.Unit)
-
-	Dimension_RECORD_TYPE = Dimension.AddMember("RECORD_TYPE", smithyprelude.Unit)
-
-	Dimension_RESOURCE_ID = Dimension.AddMember("RESOURCE_ID", smithyprelude.Unit)
-
-	Dimension_SUBSCRIPTION_ID = Dimension.AddMember("SUBSCRIPTION_ID", smithyprelude.Unit)
-
-	Dimension_TAG_KEY = Dimension.AddMember("TAG_KEY", smithyprelude.Unit)
-
-	Dimension_OPERATING_SYSTEM = Dimension.AddMember("OPERATING_SYSTEM", smithyprelude.Unit)
-
-	Dimension_TENANCY = Dimension.AddMember("TENANCY", smithyprelude.Unit)
-
-	Dimension_BILLING_ENTITY = Dimension.AddMember("BILLING_ENTITY", smithyprelude.Unit)
-
-	Dimension_RESERVATION_ID = Dimension.AddMember("RESERVATION_ID", smithyprelude.Unit)
-
-	Dimension_COST_CATEGORY_NAME = Dimension.AddMember("COST_CATEGORY_NAME", smithyprelude.Unit)
-
-	Dimension_DATABASE_ENGINE = Dimension.AddMember("DATABASE_ENGINE", smithyprelude.Unit)
-
-	Dimension_LEGAL_ENTITY_NAME = Dimension.AddMember("LEGAL_ENTITY_NAME", smithyprelude.Unit)
-
-	Dimension_SAVINGS_PLANS_TYPE = Dimension.AddMember("SAVINGS_PLANS_TYPE", smithyprelude.Unit)
-
-	Dimension_INSTANCE_TYPE_FAMILY = Dimension.AddMember("INSTANCE_TYPE_FAMILY", smithyprelude.Unit)
-
-	Dimension_CACHE_ENGINE = Dimension.AddMember("CACHE_ENGINE", smithyprelude.Unit)
-
-	Dimension_DEPLOYMENT_OPTION = Dimension.AddMember("DEPLOYMENT_OPTION", smithyprelude.Unit)
-
-	Dimension_SCOPE = Dimension.AddMember("SCOPE", smithyprelude.Unit)
-
-	Dimension_PLATFORM = Dimension.AddMember("PLATFORM", smithyprelude.Unit)
-
-	_StringList_member = _StringList.AddMember("member", smithyprelude.String)
-
-	MatchOption_EQUALS = MatchOption.AddMember("EQUALS", smithyprelude.Unit)
-
-	MatchOption_ABSENT = MatchOption.AddMember("ABSENT", smithyprelude.Unit)
-
-	MatchOption_STARTS_WITH = MatchOption.AddMember("STARTS_WITH", smithyprelude.Unit)
-
-	MatchOption_ENDS_WITH = MatchOption.AddMember("ENDS_WITH", smithyprelude.Unit)
-
-	MatchOption_CONTAINS = MatchOption.AddMember("CONTAINS", smithyprelude.Unit)
-
-	MatchOption_GREATER_THAN_OR_EQUAL = MatchOption.AddMember("GREATER_THAN_OR_EQUAL", smithyprelude.Unit)
-
-	MatchOption_CASE_SENSITIVE = MatchOption.AddMember("CASE_SENSITIVE", smithyprelude.Unit)
-
-	MatchOption_CASE_INSENSITIVE = MatchOption.AddMember("CASE_INSENSITIVE", smithyprelude.Unit)
-
-	_MatchOptions_member = _MatchOptions.AddMember("member", MatchOption)
-
-	DimensionValues_key = DimensionValues.AddMember("key", Dimension)
-
-	DimensionValues_values = DimensionValues.AddMember("values", _StringList)
-
-	DimensionValues_matchOptions = DimensionValues.AddMember("matchOptions", _MatchOptions)
-
-	TagValues_key = TagValues.AddMember("key", smithyprelude.String)
-
-	TagValues_values = TagValues.AddMember("values", _StringList)
-
-	TagValues_matchOptions = TagValues.AddMember("matchOptions", _MatchOptions)
-
-	CostCategoryValues_key = CostCategoryValues.AddMember("key", smithyprelude.String)
-
-	CostCategoryValues_values = CostCategoryValues.AddMember("values", _StringList)
-
-	CostCategoryValues_matchOptions = CostCategoryValues.AddMember("matchOptions", _MatchOptions)
-
-	Expression_or = Expression.AddMember("or", _Expressions)
-
-	Expression_and = Expression.AddMember("and", _Expressions)
-
-	Expression_not = Expression.AddMember("not", Expression)
-
-	Expression_dimensions = Expression.AddMember("dimensions", DimensionValues)
-
-	Expression_tags = Expression.AddMember("tags", TagValues)
-
-	Expression_costCategories = Expression.AddMember("costCategories", CostCategoryValues)
-
-	CostAndUsageQuery_metrics = CostAndUsageQuery.AddMember("metrics", _MetricNames)
-
-	CostAndUsageQuery_timeRange = CostAndUsageQuery.AddMember("timeRange", DateTimeRange)
-
-	CostAndUsageQuery_granularity = CostAndUsageQuery.AddMember("granularity", Granularity)
-
-	CostAndUsageQuery_groupBy = CostAndUsageQuery.AddMember("groupBy", _GroupDefinitions)
-
-	CostAndUsageQuery_filter = CostAndUsageQuery.AddMember("filter", Expression)
-
-	DashboardType_CUSTOM = DashboardType.AddMember("CUSTOM", smithyprelude.Unit)
-
-	DashboardReference_arn = DashboardReference.AddMember("arn", _DashboardArn)
-
-	DashboardReference_name = DashboardReference.AddMember("name", _DashboardName)
-
-	DashboardReference_description = DashboardReference.AddMember("description", _Description)
-
-	DashboardReference_type = DashboardReference.AddMember("type", DashboardType)
-
-	DashboardReference_createdAt = DashboardReference.AddMember("createdAt", _GenericTimeStamp)
-
-	DashboardReference_updatedAt = DashboardReference.AddMember("updatedAt", _GenericTimeStamp)
-
-	_DashboardReferenceList_member = _DashboardReferenceList.AddMember("member", DashboardReference)
-
-	VisualType_LINE = VisualType.AddMember("LINE", smithyprelude.Unit)
-
-	VisualType_BAR = VisualType.AddMember("BAR", smithyprelude.Unit)
-
-	VisualType_STACK = VisualType.AddMember("STACK", smithyprelude.Unit)
-
-	GraphDisplayConfig_visualType = GraphDisplayConfig.AddMember("visualType", VisualType)
-
-	_GraphDisplayConfigMap_key = _GraphDisplayConfigMap.AddMember("key", _GenericString)
-
-	_GraphDisplayConfigMap_value = _GraphDisplayConfigMap.AddMember("value", GraphDisplayConfig)
-
-	DisplayConfig_graph = DisplayConfig.AddMember("graph", _GraphDisplayConfigMap)
-
-	DisplayConfig_table = DisplayConfig.AddMember("table", TableDisplayConfigStruct)
-
-	HealthStatusCode_HEALTHY = HealthStatusCode.AddMember("HEALTHY", smithyprelude.Unit)
-
-	HealthStatusCode_UNHEALTHY = HealthStatusCode.AddMember("UNHEALTHY", smithyprelude.Unit)
-
-	StatusReason_DATA_SOURCE_ACCESS_DENIED = StatusReason.AddMember("DATA_SOURCE_ACCESS_DENIED", smithyprelude.Unit)
-
-	StatusReason_EXECUTION_ROLE_ASSUME_FAILED = StatusReason.AddMember("EXECUTION_ROLE_ASSUME_FAILED", smithyprelude.Unit)
-
-	StatusReason_EXECUTION_ROLE_INSUFFICIENT_PERMISSIONS = StatusReason.AddMember("EXECUTION_ROLE_INSUFFICIENT_PERMISSIONS", smithyprelude.Unit)
-
-	StatusReason_DASHBOARD_NOT_FOUND = StatusReason.AddMember("DASHBOARD_NOT_FOUND", smithyprelude.Unit)
-
-	StatusReason_DASHBOARD_ACCESS_DENIED = StatusReason.AddMember("DASHBOARD_ACCESS_DENIED", smithyprelude.Unit)
-
-	StatusReason_INTERNAL_FAILURE = StatusReason.AddMember("INTERNAL_FAILURE", smithyprelude.Unit)
-
-	StatusReason_WIDGET_ID_NOT_FOUND = StatusReason.AddMember("WIDGET_ID_NOT_FOUND", smithyprelude.Unit)
-
-	_StatusReasonList_member = _StatusReasonList.AddMember("member", StatusReason)
-
-	HealthStatus_statusCode = HealthStatus.AddMember("statusCode", HealthStatusCode)
-
-	HealthStatus_lastRefreshedAt = HealthStatus.AddMember("lastRefreshedAt", _GenericTimeStamp)
-
-	HealthStatus_statusReasons = HealthStatus.AddMember("statusReasons", _StatusReasonList)
-
-	InternalServerException_message = InternalServerException.AddMember("message", _GenericString)
-
-	SavingsPlansCoverageQuery_timeRange = SavingsPlansCoverageQuery.AddMember("timeRange", DateTimeRange)
-
-	SavingsPlansCoverageQuery_metrics = SavingsPlansCoverageQuery.AddMember("metrics", _MetricNames)
-
-	SavingsPlansCoverageQuery_granularity = SavingsPlansCoverageQuery.AddMember("granularity", Granularity)
-
-	SavingsPlansCoverageQuery_groupBy = SavingsPlansCoverageQuery.AddMember("groupBy", _GroupDefinitions)
-
-	SavingsPlansCoverageQuery_filter = SavingsPlansCoverageQuery.AddMember("filter", Expression)
-
-	SavingsPlansUtilizationQuery_timeRange = SavingsPlansUtilizationQuery.AddMember("timeRange", DateTimeRange)
-
-	SavingsPlansUtilizationQuery_granularity = SavingsPlansUtilizationQuery.AddMember("granularity", Granularity)
-
-	SavingsPlansUtilizationQuery_filter = SavingsPlansUtilizationQuery.AddMember("filter", Expression)
-
-	ReservationCoverageQuery_timeRange = ReservationCoverageQuery.AddMember("timeRange", DateTimeRange)
-
-	ReservationCoverageQuery_groupBy = ReservationCoverageQuery.AddMember("groupBy", _GroupDefinitions)
-
-	ReservationCoverageQuery_granularity = ReservationCoverageQuery.AddMember("granularity", Granularity)
-
-	ReservationCoverageQuery_filter = ReservationCoverageQuery.AddMember("filter", Expression)
-
-	ReservationCoverageQuery_metrics = ReservationCoverageQuery.AddMember("metrics", _MetricNames)
-
-	ReservationUtilizationQuery_timeRange = ReservationUtilizationQuery.AddMember("timeRange", DateTimeRange)
-
-	ReservationUtilizationQuery_groupBy = ReservationUtilizationQuery.AddMember("groupBy", _GroupDefinitions)
-
-	ReservationUtilizationQuery_granularity = ReservationUtilizationQuery.AddMember("granularity", Granularity)
-
-	ReservationUtilizationQuery_filter = ReservationUtilizationQuery.AddMember("filter", Expression)
-
-	QueryParameters_costAndUsage = QueryParameters.AddMember("costAndUsage", CostAndUsageQuery)
-
-	QueryParameters_savingsPlansCoverage = QueryParameters.AddMember("savingsPlansCoverage", SavingsPlansCoverageQuery)
-
-	QueryParameters_savingsPlansUtilization = QueryParameters.AddMember("savingsPlansUtilization", SavingsPlansUtilizationQuery)
-
-	QueryParameters_reservationCoverage = QueryParameters.AddMember("reservationCoverage", ReservationCoverageQuery)
-
-	QueryParameters_reservationUtilization = QueryParameters.AddMember("reservationUtilization", ReservationUtilizationQuery)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _GenericString)
-
-	ResourceTag_key = ResourceTag.AddMember("key", _ResourceTagKey)
-
-	ResourceTag_value = ResourceTag.AddMember("value", _ResourceTagValue)
-
-	_ResourceTagKeyList_member = _ResourceTagKeyList.AddMember("member", _ResourceTagKey)
-
-	_ResourceTagList_member = _ResourceTagList.AddMember("member", ResourceTag)
-
-	SchedulePeriod_startTime = SchedulePeriod.AddMember("startTime", _GenericTimeStamp)
-
-	SchedulePeriod_endTime = SchedulePeriod.AddMember("endTime", _GenericTimeStamp)
-
-	ScheduleState_ENABLED = ScheduleState.AddMember("ENABLED", smithyprelude.Unit)
-
-	ScheduleState_DISABLED = ScheduleState.AddMember("DISABLED", smithyprelude.Unit)
-
-	ScheduleConfig_scheduleExpression = ScheduleConfig.AddMember("scheduleExpression", _GenericString)
-
-	ScheduleConfig_scheduleExpressionTimeZone = ScheduleConfig.AddMember("scheduleExpressionTimeZone", _GenericString)
-
-	ScheduleConfig_schedulePeriod = ScheduleConfig.AddMember("schedulePeriod", SchedulePeriod)
-
-	ScheduleConfig_state = ScheduleConfig.AddMember("state", ScheduleState)
-
-	_WidgetIdList_member = _WidgetIdList.AddMember("member", smithyprelude.String)
-
-	ScheduledReport_arn = ScheduledReport.AddMember("arn", _ScheduledReportArn)
-
-	ScheduledReport_name = ScheduledReport.AddMember("name", _ScheduledReportName)
-
-	ScheduledReport_dashboardArn = ScheduledReport.AddMember("dashboardArn", _DashboardArn)
-
-	ScheduledReport_scheduledReportExecutionRoleArn = ScheduledReport.AddMember("scheduledReportExecutionRoleArn", _ServiceRoleArn)
-
-	ScheduledReport_scheduleConfig = ScheduledReport.AddMember("scheduleConfig", ScheduleConfig)
-
-	ScheduledReport_description = ScheduledReport.AddMember("description", _Description)
-
-	ScheduledReport_widgetIds = ScheduledReport.AddMember("widgetIds", _WidgetIdList)
-
-	ScheduledReport_widgetDateRangeOverride = ScheduledReport.AddMember("widgetDateRangeOverride", DateTimeRange)
-
-	ScheduledReport_createdAt = ScheduledReport.AddMember("createdAt", _GenericTimeStamp)
-
-	ScheduledReport_updatedAt = ScheduledReport.AddMember("updatedAt", _GenericTimeStamp)
-
-	ScheduledReport_lastExecutionAt = ScheduledReport.AddMember("lastExecutionAt", _GenericTimeStamp)
-
-	ScheduledReport_healthStatus = ScheduledReport.AddMember("healthStatus", HealthStatus)
-
-	ScheduledReportInput_name = ScheduledReportInput.AddMember("name", _ScheduledReportName)
-
-	ScheduledReportInput_dashboardArn = ScheduledReportInput.AddMember("dashboardArn", _DashboardArn)
-
-	ScheduledReportInput_scheduledReportExecutionRoleArn = ScheduledReportInput.AddMember("scheduledReportExecutionRoleArn", _ServiceRoleArn)
-
-	ScheduledReportInput_scheduleConfig = ScheduledReportInput.AddMember("scheduleConfig", ScheduleConfig)
-
-	ScheduledReportInput_description = ScheduledReportInput.AddMember("description", _Description)
-
-	ScheduledReportInput_widgetIds = ScheduledReportInput.AddMember("widgetIds", _WidgetIdList)
-
-	ScheduledReportInput_widgetDateRangeOverride = ScheduledReportInput.AddMember("widgetDateRangeOverride", DateTimeRange)
-
-	ScheduledReportSummary_arn = ScheduledReportSummary.AddMember("arn", _ScheduledReportArn)
-
-	ScheduledReportSummary_name = ScheduledReportSummary.AddMember("name", _ScheduledReportName)
-
-	ScheduledReportSummary_dashboardArn = ScheduledReportSummary.AddMember("dashboardArn", _DashboardArn)
-
-	ScheduledReportSummary_scheduleExpression = ScheduledReportSummary.AddMember("scheduleExpression", _GenericString)
-
-	ScheduledReportSummary_state = ScheduledReportSummary.AddMember("state", ScheduleState)
-
-	ScheduledReportSummary_healthStatus = ScheduledReportSummary.AddMember("healthStatus", HealthStatus)
-
-	ScheduledReportSummary_scheduleExpressionTimeZone = ScheduledReportSummary.AddMember("scheduleExpressionTimeZone", _GenericString)
-
-	ScheduledReportSummary_widgetIds = ScheduledReportSummary.AddMember("widgetIds", _WidgetIdList)
-
-	_ScheduledReportSummaryList_member = _ScheduledReportSummaryList.AddMember("member", ScheduledReportSummary)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", _GenericString)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", _GenericString)
-
-	ValidationException_message = ValidationException.AddMember("message", _GenericString)
-
-	WidgetConfig_queryParameters = WidgetConfig.AddMember("queryParameters", QueryParameters)
-
-	WidgetConfig_displayConfig = WidgetConfig.AddMember("displayConfig", DisplayConfig)
-
-	_WidgetConfigList_member = _WidgetConfigList.AddMember("member", WidgetConfig)
-
-	Widget_id = Widget.AddMember("id", _WidgetId)
-
-	Widget_title = Widget.AddMember("title", _WidgetTitle)
-
-	Widget_description = Widget.AddMember("description", _Description)
-
-	Widget_width = Widget.AddMember("width", _WidgetWidth)
-
-	Widget_height = Widget.AddMember("height", _WidgetHeight)
-
-	Widget_horizontalOffset = Widget.AddMember("horizontalOffset", smithyprelude.Integer)
-
-	Widget_configs = Widget.AddMember("configs", _WidgetConfigList)
-
-	_WidgetList_member = _WidgetList.AddMember("member", Widget)
-
-	CreateDashboardRequest_name = CreateDashboardRequest.AddMember("name", _DashboardName)
-
-	CreateDashboardRequest_description = CreateDashboardRequest.AddMember("description", _Description)
-
-	CreateDashboardRequest_widgets = CreateDashboardRequest.AddMember("widgets", _WidgetList)
-
-	CreateDashboardRequest_resourceTags = CreateDashboardRequest.AddMember("resourceTags", _ResourceTagList)
-
-	CreateDashboardResponse_arn = CreateDashboardResponse.AddMember("arn", _DashboardArn)
-
-	CreateScheduledReportRequest_scheduledReport = CreateScheduledReportRequest.AddMember("scheduledReport", ScheduledReportInput)
-
-	CreateScheduledReportRequest_resourceTags = CreateScheduledReportRequest.AddMember("resourceTags", _ResourceTagList)
-
-	CreateScheduledReportRequest_clientToken = CreateScheduledReportRequest.AddMember("clientToken", _ClientToken, &smithytraits.HTTPHeader{Name: "X-Amzn-Client-Token"})
-
-	CreateScheduledReportResponse_arn = CreateScheduledReportResponse.AddMember("arn", _ScheduledReportArn)
-
-	DeleteDashboardRequest_arn = DeleteDashboardRequest.AddMember("arn", _DashboardArn)
-
-	DeleteDashboardResponse_arn = DeleteDashboardResponse.AddMember("arn", _DashboardArn)
-
-	DeleteScheduledReportRequest_arn = DeleteScheduledReportRequest.AddMember("arn", _ScheduledReportArn)
-
-	DeleteScheduledReportResponse_arn = DeleteScheduledReportResponse.AddMember("arn", _ScheduledReportArn)
-
-	ExecuteScheduledReportRequest_arn = ExecuteScheduledReportRequest.AddMember("arn", _ScheduledReportArn)
-
-	ExecuteScheduledReportRequest_clientToken = ExecuteScheduledReportRequest.AddMember("clientToken", _ClientToken, &smithytraits.HTTPHeader{Name: "X-Amzn-Client-Token"})
-
-	ExecuteScheduledReportRequest_dryRun = ExecuteScheduledReportRequest.AddMember("dryRun", smithyprelude.Boolean)
-
-	ExecuteScheduledReportResponse_healthStatus = ExecuteScheduledReportResponse.AddMember("healthStatus", HealthStatus)
-
-	ExecuteScheduledReportResponse_executionTriggered = ExecuteScheduledReportResponse.AddMember("executionTriggered", smithyprelude.Boolean)
-
-	GetDashboardRequest_arn = GetDashboardRequest.AddMember("arn", _DashboardArn)
-
-	GetDashboardResponse_arn = GetDashboardResponse.AddMember("arn", _DashboardArn)
-
-	GetDashboardResponse_name = GetDashboardResponse.AddMember("name", _DashboardName)
-
-	GetDashboardResponse_description = GetDashboardResponse.AddMember("description", _Description)
-
-	GetDashboardResponse_type = GetDashboardResponse.AddMember("type", DashboardType)
-
-	GetDashboardResponse_widgets = GetDashboardResponse.AddMember("widgets", _WidgetList)
-
-	GetDashboardResponse_createdAt = GetDashboardResponse.AddMember("createdAt", _GenericTimeStamp)
-
-	GetDashboardResponse_updatedAt = GetDashboardResponse.AddMember("updatedAt", _GenericTimeStamp)
-
-	GetResourcePolicyRequest_resourceArn = GetResourcePolicyRequest.AddMember("resourceArn", _DashboardArn)
-
-	GetResourcePolicyResponse_resourceArn = GetResourcePolicyResponse.AddMember("resourceArn", _DashboardArn)
-
-	GetResourcePolicyResponse_policyDocument = GetResourcePolicyResponse.AddMember("policyDocument", _GenericString)
-
-	GetScheduledReportRequest_arn = GetScheduledReportRequest.AddMember("arn", _ScheduledReportArn)
-
-	GetScheduledReportResponse_scheduledReport = GetScheduledReportResponse.AddMember("scheduledReport", ScheduledReport)
-
-	ListDashboardsRequest_maxResults = ListDashboardsRequest.AddMember("maxResults", _MaxResults)
-
-	ListDashboardsRequest_nextToken = ListDashboardsRequest.AddMember("nextToken", _NextPageToken)
-
-	ListDashboardsResponse_dashboards = ListDashboardsResponse.AddMember("dashboards", _DashboardReferenceList)
-
-	ListDashboardsResponse_nextToken = ListDashboardsResponse.AddMember("nextToken", _NextPageToken)
-
-	ListScheduledReportsRequest_nextToken = ListScheduledReportsRequest.AddMember("nextToken", _NextPageToken)
-
-	ListScheduledReportsRequest_maxResults = ListScheduledReportsRequest.AddMember("maxResults", _MaxResults)
-
-	ListScheduledReportsResponse_scheduledReports = ListScheduledReportsResponse.AddMember("scheduledReports", _ScheduledReportSummaryList)
-
-	ListScheduledReportsResponse_nextToken = ListScheduledReportsResponse.AddMember("nextToken", _NextPageToken)
-
-	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", _ResourceArn)
-
-	ListTagsForResourceResponse_resourceTags = ListTagsForResourceResponse.AddMember("resourceTags", _ResourceTagList)
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _ResourceArn)
-
-	TagResourceRequest_resourceTags = TagResourceRequest.AddMember("resourceTags", _ResourceTagList)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", _ResourceArn)
-
-	UntagResourceRequest_resourceTagKeys = UntagResourceRequest.AddMember("resourceTagKeys", _ResourceTagKeyList)
-
-	UpdateDashboardRequest_arn = UpdateDashboardRequest.AddMember("arn", _DashboardArn)
-
-	UpdateDashboardRequest_name = UpdateDashboardRequest.AddMember("name", _DashboardName)
-
-	UpdateDashboardRequest_description = UpdateDashboardRequest.AddMember("description", _Description)
-
-	UpdateDashboardRequest_widgets = UpdateDashboardRequest.AddMember("widgets", _WidgetList)
-
-	UpdateDashboardResponse_arn = UpdateDashboardResponse.AddMember("arn", _DashboardArn)
-
-	UpdateScheduledReportRequest_arn = UpdateScheduledReportRequest.AddMember("arn", _ScheduledReportArn)
-
-	UpdateScheduledReportRequest_name = UpdateScheduledReportRequest.AddMember("name", _ScheduledReportName)
-
-	UpdateScheduledReportRequest_description = UpdateScheduledReportRequest.AddMember("description", _Description)
-
-	UpdateScheduledReportRequest_dashboardArn = UpdateScheduledReportRequest.AddMember("dashboardArn", _DashboardArn)
-
-	UpdateScheduledReportRequest_scheduledReportExecutionRoleArn = UpdateScheduledReportRequest.AddMember("scheduledReportExecutionRoleArn", _ServiceRoleArn)
-
-	UpdateScheduledReportRequest_scheduleConfig = UpdateScheduledReportRequest.AddMember("scheduleConfig", ScheduleConfig)
-
-	UpdateScheduledReportRequest_widgetIds = UpdateScheduledReportRequest.AddMember("widgetIds", _WidgetIdList)
-
-	UpdateScheduledReportRequest_widgetDateRangeOverride = UpdateScheduledReportRequest.AddMember("widgetDateRangeOverride", DateTimeRange)
-
-	UpdateScheduledReportRequest_clearWidgetIds = UpdateScheduledReportRequest.AddMember("clearWidgetIds", smithyprelude.Boolean)
-
-	UpdateScheduledReportRequest_clearWidgetDateRangeOverride = UpdateScheduledReportRequest.AddMember("clearWidgetDateRangeOverride", smithyprelude.Boolean)
-
-	UpdateScheduledReportResponse_arn = UpdateScheduledReportResponse.AddMember("arn", _ScheduledReportArn)
-
+	sExpression_not = smithy.NewStaticSchema(smithy.StaticSchema{Member: "not", ID: &iExpression, Members: &mExpression, Type: smithy.ShapeTypeStructure})
+	s_Expressions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExpression, Members: &mExpression, Type: smithy.ShapeTypeStructure})
 }
+
+var CreateDashboard = &sCreateDashboard
+
+var CreateScheduledReport = &sCreateScheduledReport
+
+var DeleteDashboard = &sDeleteDashboard
+
+var DeleteScheduledReport = &sDeleteScheduledReport
+
+var ExecuteScheduledReport = &sExecuteScheduledReport
+
+var GetDashboard = &sGetDashboard
+
+var GetResourcePolicy = &sGetResourcePolicy
+
+var GetScheduledReport = &sGetScheduledReport
+
+var ListDashboards = &sListDashboards
+
+var ListScheduledReports = &sListScheduledReports
+
+var ListTagsForResource = &sListTagsForResource
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateDashboard = &sUpdateDashboard
+
+var UpdateScheduledReport = &sUpdateScheduledReport
+
+var _AWSBCMDashboardsService = &s_AWSBCMDashboardsService
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var _ClientToken = &s_ClientToken
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+
+var CostAndUsageQuery = &sCostAndUsageQuery
+var CostAndUsageQuery_metrics = &sCostAndUsageQuery_metrics
+var CostAndUsageQuery_timeRange = &sCostAndUsageQuery_timeRange
+var CostAndUsageQuery_granularity = &sCostAndUsageQuery_granularity
+var CostAndUsageQuery_groupBy = &sCostAndUsageQuery_groupBy
+var CostAndUsageQuery_filter = &sCostAndUsageQuery_filter
+
+var CostCategoryValues = &sCostCategoryValues
+var CostCategoryValues_key = &sCostCategoryValues_key
+var CostCategoryValues_values = &sCostCategoryValues_values
+var CostCategoryValues_matchOptions = &sCostCategoryValues_matchOptions
+
+var _DashboardArn = &s_DashboardArn
+
+var _DashboardName = &s_DashboardName
+
+var DashboardReference = &sDashboardReference
+var DashboardReference_arn = &sDashboardReference_arn
+var DashboardReference_name = &sDashboardReference_name
+var DashboardReference_description = &sDashboardReference_description
+var DashboardReference_type = &sDashboardReference_type
+var DashboardReference_createdAt = &sDashboardReference_createdAt
+var DashboardReference_updatedAt = &sDashboardReference_updatedAt
+
+var _DashboardReferenceList = &s_DashboardReferenceList
+var _DashboardReferenceList_member = &s_DashboardReferenceList_member
+
+var DashboardType = &sDashboardType
+var DashboardType_CUSTOM = &sDashboardType_CUSTOM
+
+var DateTimeRange = &sDateTimeRange
+var DateTimeRange_startTime = &sDateTimeRange_startTime
+var DateTimeRange_endTime = &sDateTimeRange_endTime
+
+var DateTimeType = &sDateTimeType
+var DateTimeType_ABSOLUTE = &sDateTimeType_ABSOLUTE
+var DateTimeType_RELATIVE = &sDateTimeType_RELATIVE
+
+var DateTimeValue = &sDateTimeValue
+var DateTimeValue_type = &sDateTimeValue_type
+var DateTimeValue_value = &sDateTimeValue_value
+
+var _Description = &s_Description
+
+var Dimension = &sDimension
+var Dimension_AZ = &sDimension_AZ
+var Dimension_INSTANCE_TYPE = &sDimension_INSTANCE_TYPE
+var Dimension_LINKED_ACCOUNT = &sDimension_LINKED_ACCOUNT
+var Dimension_OPERATION = &sDimension_OPERATION
+var Dimension_PURCHASE_TYPE = &sDimension_PURCHASE_TYPE
+var Dimension_REGION = &sDimension_REGION
+var Dimension_SERVICE = &sDimension_SERVICE
+var Dimension_USAGE_TYPE = &sDimension_USAGE_TYPE
+var Dimension_USAGE_TYPE_GROUP = &sDimension_USAGE_TYPE_GROUP
+var Dimension_RECORD_TYPE = &sDimension_RECORD_TYPE
+var Dimension_RESOURCE_ID = &sDimension_RESOURCE_ID
+var Dimension_SUBSCRIPTION_ID = &sDimension_SUBSCRIPTION_ID
+var Dimension_TAG_KEY = &sDimension_TAG_KEY
+var Dimension_OPERATING_SYSTEM = &sDimension_OPERATING_SYSTEM
+var Dimension_TENANCY = &sDimension_TENANCY
+var Dimension_BILLING_ENTITY = &sDimension_BILLING_ENTITY
+var Dimension_RESERVATION_ID = &sDimension_RESERVATION_ID
+var Dimension_COST_CATEGORY_NAME = &sDimension_COST_CATEGORY_NAME
+var Dimension_DATABASE_ENGINE = &sDimension_DATABASE_ENGINE
+var Dimension_LEGAL_ENTITY_NAME = &sDimension_LEGAL_ENTITY_NAME
+var Dimension_SAVINGS_PLANS_TYPE = &sDimension_SAVINGS_PLANS_TYPE
+var Dimension_INSTANCE_TYPE_FAMILY = &sDimension_INSTANCE_TYPE_FAMILY
+var Dimension_CACHE_ENGINE = &sDimension_CACHE_ENGINE
+var Dimension_DEPLOYMENT_OPTION = &sDimension_DEPLOYMENT_OPTION
+var Dimension_SCOPE = &sDimension_SCOPE
+var Dimension_PLATFORM = &sDimension_PLATFORM
+
+var DimensionValues = &sDimensionValues
+var DimensionValues_key = &sDimensionValues_key
+var DimensionValues_values = &sDimensionValues_values
+var DimensionValues_matchOptions = &sDimensionValues_matchOptions
+
+var DisplayConfig = &sDisplayConfig
+var DisplayConfig_graph = &sDisplayConfig_graph
+var DisplayConfig_table = &sDisplayConfig_table
+
+var Expression = &sExpression
+var Expression_or = &sExpression_or
+var Expression_and = &sExpression_and
+var Expression_not = &sExpression_not
+var Expression_dimensions = &sExpression_dimensions
+var Expression_tags = &sExpression_tags
+var Expression_costCategories = &sExpression_costCategories
+
+var _Expressions = &s_Expressions
+var _Expressions_member = &s_Expressions_member
+
+var _GenericString = &s_GenericString
+
+var _GenericTimeStamp = &s_GenericTimeStamp
+
+var Granularity = &sGranularity
+var Granularity_HOURLY = &sGranularity_HOURLY
+var Granularity_DAILY = &sGranularity_DAILY
+var Granularity_MONTHLY = &sGranularity_MONTHLY
+
+var GraphDisplayConfig = &sGraphDisplayConfig
+var GraphDisplayConfig_visualType = &sGraphDisplayConfig_visualType
+
+var _GraphDisplayConfigMap = &s_GraphDisplayConfigMap
+var _GraphDisplayConfigMap_key = &s_GraphDisplayConfigMap_key
+var _GraphDisplayConfigMap_value = &s_GraphDisplayConfigMap_value
+
+var GroupDefinition = &sGroupDefinition
+var GroupDefinition_key = &sGroupDefinition_key
+var GroupDefinition_type = &sGroupDefinition_type
+
+var _GroupDefinitions = &s_GroupDefinitions
+var _GroupDefinitions_member = &s_GroupDefinitions_member
+
+var GroupDefinitionType = &sGroupDefinitionType
+var GroupDefinitionType_DIMENSION = &sGroupDefinitionType_DIMENSION
+var GroupDefinitionType_TAG = &sGroupDefinitionType_TAG
+var GroupDefinitionType_COST_CATEGORY = &sGroupDefinitionType_COST_CATEGORY
+
+var HealthStatus = &sHealthStatus
+var HealthStatus_statusCode = &sHealthStatus_statusCode
+var HealthStatus_lastRefreshedAt = &sHealthStatus_lastRefreshedAt
+var HealthStatus_statusReasons = &sHealthStatus_statusReasons
+
+var HealthStatusCode = &sHealthStatusCode
+var HealthStatusCode_HEALTHY = &sHealthStatusCode_HEALTHY
+var HealthStatusCode_UNHEALTHY = &sHealthStatusCode_UNHEALTHY
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+
+var MatchOption = &sMatchOption
+var MatchOption_EQUALS = &sMatchOption_EQUALS
+var MatchOption_ABSENT = &sMatchOption_ABSENT
+var MatchOption_STARTS_WITH = &sMatchOption_STARTS_WITH
+var MatchOption_ENDS_WITH = &sMatchOption_ENDS_WITH
+var MatchOption_CONTAINS = &sMatchOption_CONTAINS
+var MatchOption_GREATER_THAN_OR_EQUAL = &sMatchOption_GREATER_THAN_OR_EQUAL
+var MatchOption_CASE_SENSITIVE = &sMatchOption_CASE_SENSITIVE
+var MatchOption_CASE_INSENSITIVE = &sMatchOption_CASE_INSENSITIVE
+
+var _MatchOptions = &s_MatchOptions
+var _MatchOptions_member = &s_MatchOptions_member
+
+var _MaxResults = &s_MaxResults
+
+var MetricName = &sMetricName
+var MetricName_AmortizedCost = &sMetricName_AmortizedCost
+var MetricName_BlendedCost = &sMetricName_BlendedCost
+var MetricName_NetAmortizedCost = &sMetricName_NetAmortizedCost
+var MetricName_NetUnblendedCost = &sMetricName_NetUnblendedCost
+var MetricName_NormalizedUsageAmount = &sMetricName_NormalizedUsageAmount
+var MetricName_UnblendedCost = &sMetricName_UnblendedCost
+var MetricName_UsageQuantity = &sMetricName_UsageQuantity
+var MetricName_SpendCoveredBySavingsPlans = &sMetricName_SpendCoveredBySavingsPlans
+var MetricName_Hour = &sMetricName_Hour
+var MetricName_Unit = &sMetricName_Unit
+var MetricName_Cost = &sMetricName_Cost
+
+var _MetricNames = &s_MetricNames
+var _MetricNames_member = &s_MetricNames_member
+
+var _NextPageToken = &s_NextPageToken
+
+var QueryParameters = &sQueryParameters
+var QueryParameters_costAndUsage = &sQueryParameters_costAndUsage
+var QueryParameters_savingsPlansCoverage = &sQueryParameters_savingsPlansCoverage
+var QueryParameters_savingsPlansUtilization = &sQueryParameters_savingsPlansUtilization
+var QueryParameters_reservationCoverage = &sQueryParameters_reservationCoverage
+var QueryParameters_reservationUtilization = &sQueryParameters_reservationUtilization
+
+var ReservationCoverageQuery = &sReservationCoverageQuery
+var ReservationCoverageQuery_timeRange = &sReservationCoverageQuery_timeRange
+var ReservationCoverageQuery_groupBy = &sReservationCoverageQuery_groupBy
+var ReservationCoverageQuery_granularity = &sReservationCoverageQuery_granularity
+var ReservationCoverageQuery_filter = &sReservationCoverageQuery_filter
+var ReservationCoverageQuery_metrics = &sReservationCoverageQuery_metrics
+
+var ReservationUtilizationQuery = &sReservationUtilizationQuery
+var ReservationUtilizationQuery_timeRange = &sReservationUtilizationQuery_timeRange
+var ReservationUtilizationQuery_groupBy = &sReservationUtilizationQuery_groupBy
+var ReservationUtilizationQuery_granularity = &sReservationUtilizationQuery_granularity
+var ReservationUtilizationQuery_filter = &sReservationUtilizationQuery_filter
+
+var _ResourceArn = &s_ResourceArn
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+
+var ResourceTag = &sResourceTag
+var ResourceTag_key = &sResourceTag_key
+var ResourceTag_value = &sResourceTag_value
+
+var _ResourceTagKey = &s_ResourceTagKey
+
+var _ResourceTagKeyList = &s_ResourceTagKeyList
+var _ResourceTagKeyList_member = &s_ResourceTagKeyList_member
+
+var _ResourceTagList = &s_ResourceTagList
+var _ResourceTagList_member = &s_ResourceTagList_member
+
+var _ResourceTagValue = &s_ResourceTagValue
+
+var SavingsPlansCoverageQuery = &sSavingsPlansCoverageQuery
+var SavingsPlansCoverageQuery_timeRange = &sSavingsPlansCoverageQuery_timeRange
+var SavingsPlansCoverageQuery_metrics = &sSavingsPlansCoverageQuery_metrics
+var SavingsPlansCoverageQuery_granularity = &sSavingsPlansCoverageQuery_granularity
+var SavingsPlansCoverageQuery_groupBy = &sSavingsPlansCoverageQuery_groupBy
+var SavingsPlansCoverageQuery_filter = &sSavingsPlansCoverageQuery_filter
+
+var SavingsPlansUtilizationQuery = &sSavingsPlansUtilizationQuery
+var SavingsPlansUtilizationQuery_timeRange = &sSavingsPlansUtilizationQuery_timeRange
+var SavingsPlansUtilizationQuery_granularity = &sSavingsPlansUtilizationQuery_granularity
+var SavingsPlansUtilizationQuery_filter = &sSavingsPlansUtilizationQuery_filter
+
+var ScheduleConfig = &sScheduleConfig
+var ScheduleConfig_scheduleExpression = &sScheduleConfig_scheduleExpression
+var ScheduleConfig_scheduleExpressionTimeZone = &sScheduleConfig_scheduleExpressionTimeZone
+var ScheduleConfig_schedulePeriod = &sScheduleConfig_schedulePeriod
+var ScheduleConfig_state = &sScheduleConfig_state
+
+var ScheduledReport = &sScheduledReport
+var ScheduledReport_arn = &sScheduledReport_arn
+var ScheduledReport_name = &sScheduledReport_name
+var ScheduledReport_dashboardArn = &sScheduledReport_dashboardArn
+var ScheduledReport_scheduledReportExecutionRoleArn = &sScheduledReport_scheduledReportExecutionRoleArn
+var ScheduledReport_scheduleConfig = &sScheduledReport_scheduleConfig
+var ScheduledReport_description = &sScheduledReport_description
+var ScheduledReport_widgetIds = &sScheduledReport_widgetIds
+var ScheduledReport_widgetDateRangeOverride = &sScheduledReport_widgetDateRangeOverride
+var ScheduledReport_createdAt = &sScheduledReport_createdAt
+var ScheduledReport_updatedAt = &sScheduledReport_updatedAt
+var ScheduledReport_lastExecutionAt = &sScheduledReport_lastExecutionAt
+var ScheduledReport_healthStatus = &sScheduledReport_healthStatus
+
+var _ScheduledReportArn = &s_ScheduledReportArn
+
+var ScheduledReportInput = &sScheduledReportInput
+var ScheduledReportInput_name = &sScheduledReportInput_name
+var ScheduledReportInput_dashboardArn = &sScheduledReportInput_dashboardArn
+var ScheduledReportInput_scheduledReportExecutionRoleArn = &sScheduledReportInput_scheduledReportExecutionRoleArn
+var ScheduledReportInput_scheduleConfig = &sScheduledReportInput_scheduleConfig
+var ScheduledReportInput_description = &sScheduledReportInput_description
+var ScheduledReportInput_widgetIds = &sScheduledReportInput_widgetIds
+var ScheduledReportInput_widgetDateRangeOverride = &sScheduledReportInput_widgetDateRangeOverride
+
+var _ScheduledReportName = &s_ScheduledReportName
+
+var ScheduledReportSummary = &sScheduledReportSummary
+var ScheduledReportSummary_arn = &sScheduledReportSummary_arn
+var ScheduledReportSummary_name = &sScheduledReportSummary_name
+var ScheduledReportSummary_dashboardArn = &sScheduledReportSummary_dashboardArn
+var ScheduledReportSummary_scheduleExpression = &sScheduledReportSummary_scheduleExpression
+var ScheduledReportSummary_state = &sScheduledReportSummary_state
+var ScheduledReportSummary_healthStatus = &sScheduledReportSummary_healthStatus
+var ScheduledReportSummary_scheduleExpressionTimeZone = &sScheduledReportSummary_scheduleExpressionTimeZone
+var ScheduledReportSummary_widgetIds = &sScheduledReportSummary_widgetIds
+
+var _ScheduledReportSummaryList = &s_ScheduledReportSummaryList
+var _ScheduledReportSummaryList_member = &s_ScheduledReportSummaryList_member
+
+var SchedulePeriod = &sSchedulePeriod
+var SchedulePeriod_startTime = &sSchedulePeriod_startTime
+var SchedulePeriod_endTime = &sSchedulePeriod_endTime
+
+var ScheduleState = &sScheduleState
+var ScheduleState_ENABLED = &sScheduleState_ENABLED
+var ScheduleState_DISABLED = &sScheduleState_DISABLED
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+
+var _ServiceRoleArn = &s_ServiceRoleArn
+
+var StatusReason = &sStatusReason
+var StatusReason_DATA_SOURCE_ACCESS_DENIED = &sStatusReason_DATA_SOURCE_ACCESS_DENIED
+var StatusReason_EXECUTION_ROLE_ASSUME_FAILED = &sStatusReason_EXECUTION_ROLE_ASSUME_FAILED
+var StatusReason_EXECUTION_ROLE_INSUFFICIENT_PERMISSIONS = &sStatusReason_EXECUTION_ROLE_INSUFFICIENT_PERMISSIONS
+var StatusReason_DASHBOARD_NOT_FOUND = &sStatusReason_DASHBOARD_NOT_FOUND
+var StatusReason_DASHBOARD_ACCESS_DENIED = &sStatusReason_DASHBOARD_ACCESS_DENIED
+var StatusReason_INTERNAL_FAILURE = &sStatusReason_INTERNAL_FAILURE
+var StatusReason_WIDGET_ID_NOT_FOUND = &sStatusReason_WIDGET_ID_NOT_FOUND
+
+var _StatusReasonList = &s_StatusReasonList
+var _StatusReasonList_member = &s_StatusReasonList_member
+
+var _StringList = &s_StringList
+var _StringList_member = &s_StringList_member
+
+var TableDisplayConfigStruct = &sTableDisplayConfigStruct
+
+var TagValues = &sTagValues
+var TagValues_key = &sTagValues_key
+var TagValues_values = &sTagValues_values
+var TagValues_matchOptions = &sTagValues_matchOptions
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+
+var VisualType = &sVisualType
+var VisualType_LINE = &sVisualType_LINE
+var VisualType_BAR = &sVisualType_BAR
+var VisualType_STACK = &sVisualType_STACK
+
+var Widget = &sWidget
+var Widget_id = &sWidget_id
+var Widget_title = &sWidget_title
+var Widget_description = &sWidget_description
+var Widget_width = &sWidget_width
+var Widget_height = &sWidget_height
+var Widget_horizontalOffset = &sWidget_horizontalOffset
+var Widget_configs = &sWidget_configs
+
+var WidgetConfig = &sWidgetConfig
+var WidgetConfig_queryParameters = &sWidgetConfig_queryParameters
+var WidgetConfig_displayConfig = &sWidgetConfig_displayConfig
+
+var _WidgetConfigList = &s_WidgetConfigList
+var _WidgetConfigList_member = &s_WidgetConfigList_member
+
+var _WidgetHeight = &s_WidgetHeight
+
+var _WidgetId = &s_WidgetId
+
+var _WidgetIdList = &s_WidgetIdList
+var _WidgetIdList_member = &s_WidgetIdList_member
+
+var _WidgetList = &s_WidgetList
+var _WidgetList_member = &s_WidgetList_member
+
+var _WidgetTitle = &s_WidgetTitle
+
+var _WidgetWidth = &s_WidgetWidth
+
+var CreateDashboardRequest = &sCreateDashboardRequest
+var CreateDashboardRequest_name = &sCreateDashboardRequest_name
+var CreateDashboardRequest_description = &sCreateDashboardRequest_description
+var CreateDashboardRequest_widgets = &sCreateDashboardRequest_widgets
+var CreateDashboardRequest_resourceTags = &sCreateDashboardRequest_resourceTags
+
+var CreateDashboardResponse = &sCreateDashboardResponse
+var CreateDashboardResponse_arn = &sCreateDashboardResponse_arn
+
+var CreateScheduledReportRequest = &sCreateScheduledReportRequest
+var CreateScheduledReportRequest_scheduledReport = &sCreateScheduledReportRequest_scheduledReport
+var CreateScheduledReportRequest_resourceTags = &sCreateScheduledReportRequest_resourceTags
+var CreateScheduledReportRequest_clientToken = &sCreateScheduledReportRequest_clientToken
+
+var CreateScheduledReportResponse = &sCreateScheduledReportResponse
+var CreateScheduledReportResponse_arn = &sCreateScheduledReportResponse_arn
+
+var DeleteDashboardRequest = &sDeleteDashboardRequest
+var DeleteDashboardRequest_arn = &sDeleteDashboardRequest_arn
+
+var DeleteDashboardResponse = &sDeleteDashboardResponse
+var DeleteDashboardResponse_arn = &sDeleteDashboardResponse_arn
+
+var DeleteScheduledReportRequest = &sDeleteScheduledReportRequest
+var DeleteScheduledReportRequest_arn = &sDeleteScheduledReportRequest_arn
+
+var DeleteScheduledReportResponse = &sDeleteScheduledReportResponse
+var DeleteScheduledReportResponse_arn = &sDeleteScheduledReportResponse_arn
+
+var ExecuteScheduledReportRequest = &sExecuteScheduledReportRequest
+var ExecuteScheduledReportRequest_arn = &sExecuteScheduledReportRequest_arn
+var ExecuteScheduledReportRequest_clientToken = &sExecuteScheduledReportRequest_clientToken
+var ExecuteScheduledReportRequest_dryRun = &sExecuteScheduledReportRequest_dryRun
+
+var ExecuteScheduledReportResponse = &sExecuteScheduledReportResponse
+var ExecuteScheduledReportResponse_healthStatus = &sExecuteScheduledReportResponse_healthStatus
+var ExecuteScheduledReportResponse_executionTriggered = &sExecuteScheduledReportResponse_executionTriggered
+
+var GetDashboardRequest = &sGetDashboardRequest
+var GetDashboardRequest_arn = &sGetDashboardRequest_arn
+
+var GetDashboardResponse = &sGetDashboardResponse
+var GetDashboardResponse_arn = &sGetDashboardResponse_arn
+var GetDashboardResponse_name = &sGetDashboardResponse_name
+var GetDashboardResponse_description = &sGetDashboardResponse_description
+var GetDashboardResponse_type = &sGetDashboardResponse_type
+var GetDashboardResponse_widgets = &sGetDashboardResponse_widgets
+var GetDashboardResponse_createdAt = &sGetDashboardResponse_createdAt
+var GetDashboardResponse_updatedAt = &sGetDashboardResponse_updatedAt
+
+var GetResourcePolicyRequest = &sGetResourcePolicyRequest
+var GetResourcePolicyRequest_resourceArn = &sGetResourcePolicyRequest_resourceArn
+
+var GetResourcePolicyResponse = &sGetResourcePolicyResponse
+var GetResourcePolicyResponse_resourceArn = &sGetResourcePolicyResponse_resourceArn
+var GetResourcePolicyResponse_policyDocument = &sGetResourcePolicyResponse_policyDocument
+
+var GetScheduledReportRequest = &sGetScheduledReportRequest
+var GetScheduledReportRequest_arn = &sGetScheduledReportRequest_arn
+
+var GetScheduledReportResponse = &sGetScheduledReportResponse
+var GetScheduledReportResponse_scheduledReport = &sGetScheduledReportResponse_scheduledReport
+
+var ListDashboardsRequest = &sListDashboardsRequest
+var ListDashboardsRequest_maxResults = &sListDashboardsRequest_maxResults
+var ListDashboardsRequest_nextToken = &sListDashboardsRequest_nextToken
+
+var ListDashboardsResponse = &sListDashboardsResponse
+var ListDashboardsResponse_dashboards = &sListDashboardsResponse_dashboards
+var ListDashboardsResponse_nextToken = &sListDashboardsResponse_nextToken
+
+var ListScheduledReportsRequest = &sListScheduledReportsRequest
+var ListScheduledReportsRequest_nextToken = &sListScheduledReportsRequest_nextToken
+var ListScheduledReportsRequest_maxResults = &sListScheduledReportsRequest_maxResults
+
+var ListScheduledReportsResponse = &sListScheduledReportsResponse
+var ListScheduledReportsResponse_scheduledReports = &sListScheduledReportsResponse_scheduledReports
+var ListScheduledReportsResponse_nextToken = &sListScheduledReportsResponse_nextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_resourceArn = &sListTagsForResourceRequest_resourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_resourceTags = &sListTagsForResourceResponse_resourceTags
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_resourceArn = &sTagResourceRequest_resourceArn
+var TagResourceRequest_resourceTags = &sTagResourceRequest_resourceTags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_resourceArn = &sUntagResourceRequest_resourceArn
+var UntagResourceRequest_resourceTagKeys = &sUntagResourceRequest_resourceTagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateDashboardRequest = &sUpdateDashboardRequest
+var UpdateDashboardRequest_arn = &sUpdateDashboardRequest_arn
+var UpdateDashboardRequest_name = &sUpdateDashboardRequest_name
+var UpdateDashboardRequest_description = &sUpdateDashboardRequest_description
+var UpdateDashboardRequest_widgets = &sUpdateDashboardRequest_widgets
+
+var UpdateDashboardResponse = &sUpdateDashboardResponse
+var UpdateDashboardResponse_arn = &sUpdateDashboardResponse_arn
+
+var UpdateScheduledReportRequest = &sUpdateScheduledReportRequest
+var UpdateScheduledReportRequest_arn = &sUpdateScheduledReportRequest_arn
+var UpdateScheduledReportRequest_name = &sUpdateScheduledReportRequest_name
+var UpdateScheduledReportRequest_description = &sUpdateScheduledReportRequest_description
+var UpdateScheduledReportRequest_dashboardArn = &sUpdateScheduledReportRequest_dashboardArn
+var UpdateScheduledReportRequest_scheduledReportExecutionRoleArn = &sUpdateScheduledReportRequest_scheduledReportExecutionRoleArn
+var UpdateScheduledReportRequest_scheduleConfig = &sUpdateScheduledReportRequest_scheduleConfig
+var UpdateScheduledReportRequest_widgetIds = &sUpdateScheduledReportRequest_widgetIds
+var UpdateScheduledReportRequest_widgetDateRangeOverride = &sUpdateScheduledReportRequest_widgetDateRangeOverride
+var UpdateScheduledReportRequest_clearWidgetIds = &sUpdateScheduledReportRequest_clearWidgetIds
+var UpdateScheduledReportRequest_clearWidgetDateRangeOverride = &sUpdateScheduledReportRequest_clearWidgetDateRangeOverride
+
+var UpdateScheduledReportResponse = &sUpdateScheduledReportResponse
+var UpdateScheduledReportResponse_arn = &sUpdateScheduledReportResponse_arn
+
+var AWSBCMDashboardsService = &smithy.ServiceSchema{Schema: &s_AWSBCMDashboardsService, Version: "2025-08-18"}

@@ -4,41 +4,41 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var QueryCompatibleOperation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.json10",
-	Name:      "QueryCompatibleOperation",
-}, smithy.ShapeTypeOperation, 0)
+var (
+	iQueryCompatibleOperation  = smithy.ShapeID{Namespace: "aws.protocoltests.json10", Name: "QueryCompatibleOperation"}
+	i_QueryCompatibleJsonRpc10 = smithy.ShapeID{Namespace: "aws.protocoltests.json10", Name: "QueryCompatibleJsonRpc10"}
+	iCustomCodeError           = smithy.ShapeID{Namespace: "aws.protocoltests.json10", Name: "CustomCodeError"}
+	iNoCustomCodeError         = smithy.ShapeID{Namespace: "aws.protocoltests.json10", Name: "NoCustomCodeError"}
+	pString                    = smithy.ShapeID{Namespace: "smithy.api", Name: "String"}
+)
 
-var _QueryCompatibleJsonRpc10 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.json10",
-	Name:      "QueryCompatibleJsonRpc10",
-}, smithy.ShapeTypeService, 0, &smithytraits.AWSQueryCompatible{})
+var t0 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.AWSQueryCompatible{}}}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "Customized",
+	StatusCode: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x200}
+var t2 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
 
-var QueryCompatibleJsonRpc10 = smithy.NewServiceSchema(_QueryCompatibleJsonRpc10, "2020-07-14")
+var mCustomCodeError = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomCodeError_message}}
+var mNoCustomCodeError = smithy.SchemaMembers{List: []*smithy.Schema{&sNoCustomCodeError_message}}
 
-var CustomCodeError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.json10",
-	Name:      "CustomCodeError",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.AWSQueryError{ErrorCode: "Customized",
-		StatusCode: 402})
-var CustomCodeError_message *smithy.Schema
+var sQueryCompatibleOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryCompatibleOperation, Type: smithy.ShapeTypeOperation})
+var s_QueryCompatibleJsonRpc10 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryCompatibleJsonRpc10, Traits: &t0, Type: smithy.ShapeTypeService})
+var sCustomCodeError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomCodeError, Members: &mCustomCodeError, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sNoCustomCodeError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNoCustomCodeError, Members: &mNoCustomCodeError, Traits: &t2, Type: smithy.ShapeTypeStructure})
 
-var NoCustomCodeError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.json10",
-	Name:      "NoCustomCodeError",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var NoCustomCodeError_message *smithy.Schema
+var sCustomCodeError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sNoCustomCodeError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
 
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	CustomCodeError_message = CustomCodeError.AddMember("message", smithyprelude.String)
+var QueryCompatibleOperation = &sQueryCompatibleOperation
 
-	NoCustomCodeError_message = NoCustomCodeError.AddMember("message", smithyprelude.String)
+var _QueryCompatibleJsonRpc10 = &s_QueryCompatibleJsonRpc10
 
-}
+var CustomCodeError = &sCustomCodeError
+var CustomCodeError_message = &sCustomCodeError_message
+
+var NoCustomCodeError = &sNoCustomCodeError
+var NoCustomCodeError_message = &sNoCustomCodeError_message
+
+var QueryCompatibleJsonRpc10 = &smithy.ServiceSchema{Schema: &s_QueryCompatibleJsonRpc10, Version: "2020-07-14"}

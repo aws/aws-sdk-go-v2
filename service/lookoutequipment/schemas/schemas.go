@@ -4,3742 +4,2596 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateDataset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "CreateDataset",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateInferenceScheduler = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "CreateInferenceScheduler",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateLabel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "CreateLabel",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateLabelGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "CreateLabelGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "CreateModel",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateRetrainingScheduler = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "CreateRetrainingScheduler",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteDataset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DeleteDataset",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteInferenceScheduler = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DeleteInferenceScheduler",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteLabel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DeleteLabel",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteLabelGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DeleteLabelGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DeleteModel",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DeleteResourcePolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteRetrainingScheduler = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DeleteRetrainingScheduler",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeDataIngestionJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DescribeDataIngestionJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeDataset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DescribeDataset",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeInferenceScheduler = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DescribeInferenceScheduler",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeLabel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DescribeLabel",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeLabelGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DescribeLabelGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DescribeModel",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeModelVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DescribeModelVersion",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DescribeResourcePolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeRetrainingScheduler = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DescribeRetrainingScheduler",
-}, smithy.ShapeTypeOperation, 0)
-
-var ImportDataset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ImportDataset",
-}, smithy.ShapeTypeOperation, 0)
-
-var ImportModelVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ImportModelVersion",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListDataIngestionJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ListDataIngestionJobs",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListDatasets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ListDatasets",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListInferenceEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ListInferenceEvents",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListInferenceExecutions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ListInferenceExecutions",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListInferenceSchedulers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ListInferenceSchedulers",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListLabelGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ListLabelGroups",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListLabels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ListLabels",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListModels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ListModels",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListModelVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ListModelVersions",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListRetrainingSchedulers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ListRetrainingSchedulers",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListSensorStatistics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ListSensorStatistics",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "PutResourcePolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartDataIngestionJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "StartDataIngestionJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartInferenceScheduler = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "StartInferenceScheduler",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartRetrainingScheduler = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "StartRetrainingScheduler",
-}, smithy.ShapeTypeOperation, 0)
-
-var StopInferenceScheduler = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "StopInferenceScheduler",
-}, smithy.ShapeTypeOperation, 0)
-
-var StopRetrainingScheduler = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "StopRetrainingScheduler",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateActiveModelVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "UpdateActiveModelVersion",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateInferenceScheduler = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "UpdateInferenceScheduler",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateLabelGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "UpdateLabelGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "UpdateModel",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateRetrainingScheduler = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "UpdateRetrainingScheduler",
-}, smithy.ShapeTypeOperation, 0)
-
-var _AWSLookoutEquipmentFrontendService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "AWSLookoutEquipmentFrontendService",
-}, smithy.ShapeTypeService, 0)
-
-var AWSLookoutEquipmentFrontendService = smithy.NewServiceSchema(_AWSLookoutEquipmentFrontendService, "2020-12-15")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var _AmazonResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "AmazonResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var AutoPromotionResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "AutoPromotionResult",
-}, smithy.ShapeTypeEnum, 5)
-var AutoPromotionResult_MODEL_PROMOTED *smithy.Schema
-
-var AutoPromotionResult_MODEL_NOT_PROMOTED *smithy.Schema
-
-var AutoPromotionResult_RETRAINING_INTERNAL_ERROR *smithy.Schema
-
-var AutoPromotionResult_RETRAINING_CUSTOMER_ERROR *smithy.Schema
-
-var AutoPromotionResult_RETRAINING_CANCELLED *smithy.Schema
-
-var _AutoPromotionResultReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "AutoPromotionResultReason",
-}, smithy.ShapeTypeString, 0)
-
-var _Boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "Boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _BoundedLengthString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "BoundedLengthString",
-}, smithy.ShapeTypeString, 0)
-
-var CategoricalValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "CategoricalValues",
-}, smithy.ShapeTypeStructure, 2)
-var CategoricalValues_Status *smithy.Schema
-
-var CategoricalValues_NumberOfCategory *smithy.Schema
-
-var _Comments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "Comments",
-}, smithy.ShapeTypeString, 0)
-
-var _ComponentName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ComponentName",
-}, smithy.ShapeTypeString, 0)
-
-var _ComponentTimestampDelimiter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ComponentTimestampDelimiter",
-}, smithy.ShapeTypeString, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_Message *smithy.Schema
-
-var CountPercent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "CountPercent",
-}, smithy.ShapeTypeStructure, 2)
-var CountPercent_Count *smithy.Schema
-
-var CountPercent_Percentage *smithy.Schema
-
-var _DataDelayOffsetInMinutes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DataDelayOffsetInMinutes",
-}, smithy.ShapeTypeLong, 0)
-
-var _DataIngestionJobSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DataIngestionJobSummaries",
-}, smithy.ShapeTypeList, 1)
-var _DataIngestionJobSummaries_member *smithy.Schema
-
-var DataIngestionJobSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DataIngestionJobSummary",
-}, smithy.ShapeTypeStructure, 5)
-var DataIngestionJobSummary_JobId *smithy.Schema
-
-var DataIngestionJobSummary_DatasetName *smithy.Schema
-
-var DataIngestionJobSummary_DatasetArn *smithy.Schema
-
-var DataIngestionJobSummary_IngestionInputConfiguration *smithy.Schema
-
-var DataIngestionJobSummary_Status *smithy.Schema
-
-var DataPreProcessingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DataPreProcessingConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var DataPreProcessingConfiguration_TargetSamplingRate *smithy.Schema
-
-var DataQualitySummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DataQualitySummary",
-}, smithy.ShapeTypeStructure, 5)
-var DataQualitySummary_InsufficientSensorData *smithy.Schema
-
-var DataQualitySummary_MissingSensorData *smithy.Schema
-
-var DataQualitySummary_InvalidSensorData *smithy.Schema
-
-var DataQualitySummary_UnsupportedTimestamps *smithy.Schema
-
-var DataQualitySummary_DuplicateTimestamps *smithy.Schema
-
-var _DatasetArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DatasetArn",
-}, smithy.ShapeTypeString, 0)
-
-var _DatasetIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DatasetIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _DatasetName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DatasetName",
-}, smithy.ShapeTypeString, 0)
-
-var DatasetSchema = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DatasetSchema",
-}, smithy.ShapeTypeStructure, 1)
-var DatasetSchema_InlineDataSchema *smithy.Schema
-
-var DatasetStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DatasetStatus",
-}, smithy.ShapeTypeEnum, 4)
-var DatasetStatus_CREATED *smithy.Schema
-
-var DatasetStatus_INGESTION_IN_PROGRESS *smithy.Schema
-
-var DatasetStatus_ACTIVE *smithy.Schema
-
-var DatasetStatus_IMPORT_IN_PROGRESS *smithy.Schema
-
-var _DatasetSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DatasetSummaries",
-}, smithy.ShapeTypeList, 1)
-var _DatasetSummaries_member *smithy.Schema
-
-var DatasetSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DatasetSummary",
-}, smithy.ShapeTypeStructure, 4)
-var DatasetSummary_DatasetName *smithy.Schema
-
-var DatasetSummary_DatasetArn *smithy.Schema
-
-var DatasetSummary_Status *smithy.Schema
-
-var DatasetSummary_CreatedAt *smithy.Schema
-
-var _DataSizeInBytes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DataSizeInBytes",
-}, smithy.ShapeTypeLong, 0)
-
-var DataUploadFrequency = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DataUploadFrequency",
-}, smithy.ShapeTypeEnum, 5)
-var DataUploadFrequency_PT5M *smithy.Schema
-
-var DataUploadFrequency_PT10M *smithy.Schema
-
-var DataUploadFrequency_PT15M *smithy.Schema
-
-var DataUploadFrequency_PT30M *smithy.Schema
-
-var DataUploadFrequency_PT1H *smithy.Schema
-
-var DuplicateTimestamps = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DuplicateTimestamps",
-}, smithy.ShapeTypeStructure, 1)
-var DuplicateTimestamps_TotalNumberOfDuplicateTimestamps *smithy.Schema
-
-var _Equipment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "Equipment",
-}, smithy.ShapeTypeString, 0)
-
-var _EventDurationInSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "EventDurationInSeconds",
-}, smithy.ShapeTypeLong, 0)
-
-var _FaultCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "FaultCode",
-}, smithy.ShapeTypeString, 0)
-
-var _FaultCodes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "FaultCodes",
-}, smithy.ShapeTypeList, 1)
-var _FaultCodes_member *smithy.Schema
-
-var _FileNameTimestampFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "FileNameTimestampFormat",
-}, smithy.ShapeTypeString, 0)
-
-var _Float = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "Float",
-}, smithy.ShapeTypeFloat, 0)
-
-var _IamRoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "IamRoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var _IdempotenceToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "IdempotenceToken",
-}, smithy.ShapeTypeString, 0)
-
-var InferenceDataImportStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "InferenceDataImportStrategy",
-}, smithy.ShapeTypeEnum, 3)
-var InferenceDataImportStrategy_NO_IMPORT *smithy.Schema
-
-var InferenceDataImportStrategy_ADD_WHEN_EMPTY *smithy.Schema
-
-var InferenceDataImportStrategy_OVERWRITE *smithy.Schema
-
-var _InferenceEventSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "InferenceEventSummaries",
-}, smithy.ShapeTypeList, 1)
-var _InferenceEventSummaries_member *smithy.Schema
-
-var InferenceEventSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "InferenceEventSummary",
-}, smithy.ShapeTypeStructure, 6)
-var InferenceEventSummary_InferenceSchedulerArn *smithy.Schema
-
-var InferenceEventSummary_InferenceSchedulerName *smithy.Schema
-
-var InferenceEventSummary_EventStartTime *smithy.Schema
-
-var InferenceEventSummary_EventEndTime *smithy.Schema
-
-var InferenceEventSummary_Diagnostics *smithy.Schema
-
-var InferenceEventSummary_EventDurationInSeconds *smithy.Schema
-
-var InferenceExecutionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "InferenceExecutionStatus",
-}, smithy.ShapeTypeEnum, 3)
-var InferenceExecutionStatus_IN_PROGRESS *smithy.Schema
-
-var InferenceExecutionStatus_SUCCESS *smithy.Schema
-
-var InferenceExecutionStatus_FAILED *smithy.Schema
-
-var _InferenceExecutionSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "InferenceExecutionSummaries",
-}, smithy.ShapeTypeList, 1)
-var _InferenceExecutionSummaries_member *smithy.Schema
-
-var InferenceExecutionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "InferenceExecutionSummary",
-}, smithy.ShapeTypeStructure, 14)
-var InferenceExecutionSummary_ModelName *smithy.Schema
-
-var InferenceExecutionSummary_ModelArn *smithy.Schema
-
-var InferenceExecutionSummary_InferenceSchedulerName *smithy.Schema
-
-var InferenceExecutionSummary_InferenceSchedulerArn *smithy.Schema
-
-var InferenceExecutionSummary_ScheduledStartTime *smithy.Schema
-
-var InferenceExecutionSummary_DataStartTime *smithy.Schema
-
-var InferenceExecutionSummary_DataEndTime *smithy.Schema
-
-var InferenceExecutionSummary_DataInputConfiguration *smithy.Schema
-
-var InferenceExecutionSummary_DataOutputConfiguration *smithy.Schema
-
-var InferenceExecutionSummary_CustomerResultObject *smithy.Schema
-
-var InferenceExecutionSummary_Status *smithy.Schema
-
-var InferenceExecutionSummary_FailedReason *smithy.Schema
-
-var InferenceExecutionSummary_ModelVersion *smithy.Schema
-
-var InferenceExecutionSummary_ModelVersionArn *smithy.Schema
-
-var InferenceInputConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "InferenceInputConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var InferenceInputConfiguration_S3InputConfiguration *smithy.Schema
-
-var InferenceInputConfiguration_InputTimeZoneOffset *smithy.Schema
-
-var InferenceInputConfiguration_InferenceInputNameConfiguration *smithy.Schema
-
-var InferenceInputNameConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "InferenceInputNameConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var InferenceInputNameConfiguration_TimestampFormat *smithy.Schema
-
-var InferenceInputNameConfiguration_ComponentTimestampDelimiter *smithy.Schema
-
-var InferenceOutputConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "InferenceOutputConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var InferenceOutputConfiguration_S3OutputConfiguration *smithy.Schema
-
-var InferenceOutputConfiguration_KmsKeyId *smithy.Schema
-
-var InferenceS3InputConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "InferenceS3InputConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var InferenceS3InputConfiguration_Bucket *smithy.Schema
-
-var InferenceS3InputConfiguration_Prefix *smithy.Schema
-
-var InferenceS3OutputConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "InferenceS3OutputConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var InferenceS3OutputConfiguration_Bucket *smithy.Schema
-
-var InferenceS3OutputConfiguration_Prefix *smithy.Schema
-
-var _InferenceSchedulerArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "InferenceSchedulerArn",
-}, smithy.ShapeTypeString, 0)
-
-var _InferenceSchedulerIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "InferenceSchedulerIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _InferenceSchedulerName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "InferenceSchedulerName",
-}, smithy.ShapeTypeString, 0)
-
-var InferenceSchedulerStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "InferenceSchedulerStatus",
-}, smithy.ShapeTypeEnum, 4)
-var InferenceSchedulerStatus_PENDING *smithy.Schema
-
-var InferenceSchedulerStatus_RUNNING *smithy.Schema
-
-var InferenceSchedulerStatus_STOPPING *smithy.Schema
-
-var InferenceSchedulerStatus_STOPPED *smithy.Schema
-
-var _InferenceSchedulerSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "InferenceSchedulerSummaries",
-}, smithy.ShapeTypeList, 1)
-var _InferenceSchedulerSummaries_member *smithy.Schema
-
-var InferenceSchedulerSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "InferenceSchedulerSummary",
-}, smithy.ShapeTypeStructure, 8)
-var InferenceSchedulerSummary_ModelName *smithy.Schema
-
-var InferenceSchedulerSummary_ModelArn *smithy.Schema
-
-var InferenceSchedulerSummary_InferenceSchedulerName *smithy.Schema
-
-var InferenceSchedulerSummary_InferenceSchedulerArn *smithy.Schema
-
-var InferenceSchedulerSummary_Status *smithy.Schema
-
-var InferenceSchedulerSummary_DataDelayOffsetInMinutes *smithy.Schema
-
-var InferenceSchedulerSummary_DataUploadFrequency *smithy.Schema
-
-var InferenceSchedulerSummary_LatestInferenceResult *smithy.Schema
-
-var IngestedFilesSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "IngestedFilesSummary",
-}, smithy.ShapeTypeStructure, 3)
-var IngestedFilesSummary_TotalNumberOfFiles *smithy.Schema
-
-var IngestedFilesSummary_IngestedNumberOfFiles *smithy.Schema
-
-var IngestedFilesSummary_DiscardedFiles *smithy.Schema
-
-var IngestionInputConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "IngestionInputConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var IngestionInputConfiguration_S3InputConfiguration *smithy.Schema
-
-var _IngestionJobId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "IngestionJobId",
-}, smithy.ShapeTypeString, 0)
-
-var IngestionJobStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "IngestionJobStatus",
-}, smithy.ShapeTypeEnum, 4)
-var IngestionJobStatus_IN_PROGRESS *smithy.Schema
-
-var IngestionJobStatus_SUCCESS *smithy.Schema
-
-var IngestionJobStatus_FAILED *smithy.Schema
-
-var IngestionJobStatus_IMPORT_IN_PROGRESS *smithy.Schema
-
-var IngestionS3InputConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "IngestionS3InputConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var IngestionS3InputConfiguration_Bucket *smithy.Schema
-
-var IngestionS3InputConfiguration_Prefix *smithy.Schema
-
-var IngestionS3InputConfiguration_KeyPattern *smithy.Schema
-
-var _InlineDataSchema = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "InlineDataSchema",
-}, smithy.ShapeTypeString, 0)
-
-var InsufficientSensorData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "InsufficientSensorData",
-}, smithy.ShapeTypeStructure, 2)
-var InsufficientSensorData_MissingCompleteSensorData *smithy.Schema
-
-var InsufficientSensorData_SensorsWithShortDateRange *smithy.Schema
-
-var _Integer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "Integer",
-}, smithy.ShapeTypeInteger, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_Message *smithy.Schema
-
-var InvalidSensorData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "InvalidSensorData",
-}, smithy.ShapeTypeStructure, 2)
-var InvalidSensorData_AffectedSensorCount *smithy.Schema
-
-var InvalidSensorData_TotalNumberOfInvalidValues *smithy.Schema
-
-var _KeyPattern = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "KeyPattern",
-}, smithy.ShapeTypeString, 0)
-
-var _KmsKeyArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "KmsKeyArn",
-}, smithy.ShapeTypeString, 0)
-
-var _LabelGroupArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "LabelGroupArn",
-}, smithy.ShapeTypeString, 0)
-
-var _LabelGroupName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "LabelGroupName",
-}, smithy.ShapeTypeString, 0)
-
-var _LabelGroupSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "LabelGroupSummaries",
-}, smithy.ShapeTypeList, 1)
-var _LabelGroupSummaries_member *smithy.Schema
-
-var LabelGroupSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "LabelGroupSummary",
-}, smithy.ShapeTypeStructure, 4)
-var LabelGroupSummary_LabelGroupName *smithy.Schema
-
-var LabelGroupSummary_LabelGroupArn *smithy.Schema
-
-var LabelGroupSummary_CreatedAt *smithy.Schema
-
-var LabelGroupSummary_UpdatedAt *smithy.Schema
-
-var _LabelId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "LabelId",
-}, smithy.ShapeTypeString, 0)
-
-var LabelRating = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "LabelRating",
-}, smithy.ShapeTypeEnum, 3)
-var LabelRating_ANOMALY *smithy.Schema
-
-var LabelRating_NO_ANOMALY *smithy.Schema
-
-var LabelRating_NEUTRAL *smithy.Schema
-
-var LabelsInputConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "LabelsInputConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var LabelsInputConfiguration_S3InputConfiguration *smithy.Schema
-
-var LabelsInputConfiguration_LabelGroupName *smithy.Schema
-
-var LabelsS3InputConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "LabelsS3InputConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var LabelsS3InputConfiguration_Bucket *smithy.Schema
-
-var LabelsS3InputConfiguration_Prefix *smithy.Schema
-
-var _LabelSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "LabelSummaries",
-}, smithy.ShapeTypeList, 1)
-var _LabelSummaries_member *smithy.Schema
-
-var LabelSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "LabelSummary",
-}, smithy.ShapeTypeStructure, 9)
-var LabelSummary_LabelGroupName *smithy.Schema
-
-var LabelSummary_LabelId *smithy.Schema
-
-var LabelSummary_LabelGroupArn *smithy.Schema
-
-var LabelSummary_StartTime *smithy.Schema
-
-var LabelSummary_EndTime *smithy.Schema
-
-var LabelSummary_Rating *smithy.Schema
-
-var LabelSummary_FaultCode *smithy.Schema
-
-var LabelSummary_Equipment *smithy.Schema
-
-var LabelSummary_CreatedAt *smithy.Schema
-
-var LargeTimestampGaps = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "LargeTimestampGaps",
-}, smithy.ShapeTypeStructure, 3)
-var LargeTimestampGaps_Status *smithy.Schema
-
-var LargeTimestampGaps_NumberOfLargeTimestampGaps *smithy.Schema
-
-var LargeTimestampGaps_MaxTimestampGapInDays *smithy.Schema
-
-var LatestInferenceResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "LatestInferenceResult",
-}, smithy.ShapeTypeEnum, 2)
-var LatestInferenceResult_ANOMALOUS *smithy.Schema
-
-var LatestInferenceResult_NORMAL *smithy.Schema
-
-var _ListOfDiscardedFiles = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ListOfDiscardedFiles",
-}, smithy.ShapeTypeList, 1)
-var _ListOfDiscardedFiles_member *smithy.Schema
-
-var _LookbackWindow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "LookbackWindow",
-}, smithy.ShapeTypeString, 0)
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var MissingCompleteSensorData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "MissingCompleteSensorData",
-}, smithy.ShapeTypeStructure, 1)
-var MissingCompleteSensorData_AffectedSensorCount *smithy.Schema
-
-var MissingSensorData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "MissingSensorData",
-}, smithy.ShapeTypeStructure, 2)
-var MissingSensorData_AffectedSensorCount *smithy.Schema
-
-var MissingSensorData_TotalNumberOfMissingValues *smithy.Schema
-
-var _ModelArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ModelArn",
-}, smithy.ShapeTypeString, 0)
-
-var ModelDiagnosticsOutputConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ModelDiagnosticsOutputConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var ModelDiagnosticsOutputConfiguration_S3OutputConfiguration *smithy.Schema
-
-var ModelDiagnosticsOutputConfiguration_KmsKeyId *smithy.Schema
-
-var ModelDiagnosticsS3OutputConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ModelDiagnosticsS3OutputConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var ModelDiagnosticsS3OutputConfiguration_Bucket *smithy.Schema
-
-var ModelDiagnosticsS3OutputConfiguration_Prefix *smithy.Schema
-
-var _ModelMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ModelMetrics",
-}, smithy.ShapeTypeString, 0)
-
-var _ModelName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ModelName",
-}, smithy.ShapeTypeString, 0)
-
-var ModelPromoteMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ModelPromoteMode",
-}, smithy.ShapeTypeEnum, 2)
-var ModelPromoteMode_MANAGED *smithy.Schema
-
-var ModelPromoteMode_MANUAL *smithy.Schema
-
-var ModelQuality = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ModelQuality",
-}, smithy.ShapeTypeEnum, 3)
-var ModelQuality_QUALITY_THRESHOLD_MET *smithy.Schema
-
-var ModelQuality_CANNOT_DETERMINE_QUALITY *smithy.Schema
-
-var ModelQuality_POOR_QUALITY_DETECTED *smithy.Schema
-
-var ModelStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ModelStatus",
-}, smithy.ShapeTypeEnum, 4)
-var ModelStatus_IN_PROGRESS *smithy.Schema
-
-var ModelStatus_SUCCESS *smithy.Schema
-
-var ModelStatus_FAILED *smithy.Schema
-
-var ModelStatus_IMPORT_IN_PROGRESS *smithy.Schema
-
-var _ModelSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ModelSummaries",
-}, smithy.ShapeTypeList, 1)
-var _ModelSummaries_member *smithy.Schema
-
-var ModelSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ModelSummary",
-}, smithy.ShapeTypeStructure, 15)
-var ModelSummary_ModelName *smithy.Schema
-
-var ModelSummary_ModelArn *smithy.Schema
-
-var ModelSummary_DatasetName *smithy.Schema
-
-var ModelSummary_DatasetArn *smithy.Schema
-
-var ModelSummary_Status *smithy.Schema
-
-var ModelSummary_CreatedAt *smithy.Schema
-
-var ModelSummary_ActiveModelVersion *smithy.Schema
-
-var ModelSummary_ActiveModelVersionArn *smithy.Schema
-
-var ModelSummary_LatestScheduledRetrainingStatus *smithy.Schema
-
-var ModelSummary_LatestScheduledRetrainingModelVersion *smithy.Schema
-
-var ModelSummary_LatestScheduledRetrainingStartTime *smithy.Schema
-
-var ModelSummary_NextScheduledRetrainingStartDate *smithy.Schema
-
-var ModelSummary_RetrainingSchedulerStatus *smithy.Schema
-
-var ModelSummary_ModelDiagnosticsOutputConfiguration *smithy.Schema
-
-var ModelSummary_ModelQuality *smithy.Schema
-
-var _ModelVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ModelVersion",
-}, smithy.ShapeTypeLong, 0)
-
-var _ModelVersionArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ModelVersionArn",
-}, smithy.ShapeTypeString, 0)
-
-var ModelVersionSourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ModelVersionSourceType",
-}, smithy.ShapeTypeEnum, 3)
-var ModelVersionSourceType_TRAINING *smithy.Schema
-
-var ModelVersionSourceType_RETRAINING *smithy.Schema
-
-var ModelVersionSourceType_IMPORT *smithy.Schema
-
-var ModelVersionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ModelVersionStatus",
-}, smithy.ShapeTypeEnum, 5)
-var ModelVersionStatus_IN_PROGRESS *smithy.Schema
-
-var ModelVersionStatus_SUCCESS *smithy.Schema
-
-var ModelVersionStatus_FAILED *smithy.Schema
-
-var ModelVersionStatus_IMPORT_IN_PROGRESS *smithy.Schema
-
-var ModelVersionStatus_CANCELED *smithy.Schema
-
-var _ModelVersionSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ModelVersionSummaries",
-}, smithy.ShapeTypeList, 1)
-var _ModelVersionSummaries_member *smithy.Schema
-
-var ModelVersionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ModelVersionSummary",
-}, smithy.ShapeTypeStructure, 8)
-var ModelVersionSummary_ModelName *smithy.Schema
-
-var ModelVersionSummary_ModelArn *smithy.Schema
-
-var ModelVersionSummary_ModelVersion *smithy.Schema
-
-var ModelVersionSummary_ModelVersionArn *smithy.Schema
-
-var ModelVersionSummary_CreatedAt *smithy.Schema
-
-var ModelVersionSummary_Status *smithy.Schema
-
-var ModelVersionSummary_SourceType *smithy.Schema
-
-var ModelVersionSummary_ModelQuality *smithy.Schema
-
-var Monotonicity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "Monotonicity",
-}, smithy.ShapeTypeEnum, 3)
-var Monotonicity_DECREASING *smithy.Schema
-
-var Monotonicity_INCREASING *smithy.Schema
-
-var Monotonicity_STATIC *smithy.Schema
-
-var MonotonicValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "MonotonicValues",
-}, smithy.ShapeTypeStructure, 2)
-var MonotonicValues_Status *smithy.Schema
-
-var MonotonicValues_Monotonicity *smithy.Schema
-
-var MultipleOperatingModes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "MultipleOperatingModes",
-}, smithy.ShapeTypeStructure, 1)
-var MultipleOperatingModes_Status *smithy.Schema
-
-var _NameOrArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "NameOrArn",
-}, smithy.ShapeTypeString, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _OffCondition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "OffCondition",
-}, smithy.ShapeTypeString, 0)
-
-var _Policy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "Policy",
-}, smithy.ShapeTypeString, 0)
-
-var _PolicyRevisionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "PolicyRevisionId",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var _RetrainingFrequency = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "RetrainingFrequency",
-}, smithy.ShapeTypeString, 0)
-
-var RetrainingSchedulerStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "RetrainingSchedulerStatus",
-}, smithy.ShapeTypeEnum, 4)
-var RetrainingSchedulerStatus_PENDING *smithy.Schema
-
-var RetrainingSchedulerStatus_RUNNING *smithy.Schema
-
-var RetrainingSchedulerStatus_STOPPING *smithy.Schema
-
-var RetrainingSchedulerStatus_STOPPED *smithy.Schema
-
-var _RetrainingSchedulerSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "RetrainingSchedulerSummaries",
-}, smithy.ShapeTypeList, 1)
-var _RetrainingSchedulerSummaries_member *smithy.Schema
-
-var RetrainingSchedulerSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "RetrainingSchedulerSummary",
-}, smithy.ShapeTypeStructure, 6)
-var RetrainingSchedulerSummary_ModelName *smithy.Schema
-
-var RetrainingSchedulerSummary_ModelArn *smithy.Schema
-
-var RetrainingSchedulerSummary_Status *smithy.Schema
-
-var RetrainingSchedulerSummary_RetrainingStartDate *smithy.Schema
-
-var RetrainingSchedulerSummary_RetrainingFrequency *smithy.Schema
-
-var RetrainingSchedulerSummary_LookbackWindow *smithy.Schema
-
-var _S3Bucket = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "S3Bucket",
-}, smithy.ShapeTypeString, 0)
-
-var _S3Key = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "S3Key",
-}, smithy.ShapeTypeString, 0)
-
-var S3Object = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "S3Object",
-}, smithy.ShapeTypeStructure, 2)
-var S3Object_Bucket *smithy.Schema
-
-var S3Object_Key *smithy.Schema
-
-var _S3Prefix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "S3Prefix",
-}, smithy.ShapeTypeString, 0)
-
-var _SensorName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "SensorName",
-}, smithy.ShapeTypeString, 0)
-
-var _SensorStatisticsSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "SensorStatisticsSummaries",
-}, smithy.ShapeTypeList, 1)
-var _SensorStatisticsSummaries_member *smithy.Schema
-
-var SensorStatisticsSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "SensorStatisticsSummary",
-}, smithy.ShapeTypeStructure, 13)
-var SensorStatisticsSummary_ComponentName *smithy.Schema
-
-var SensorStatisticsSummary_SensorName *smithy.Schema
-
-var SensorStatisticsSummary_DataExists *smithy.Schema
-
-var SensorStatisticsSummary_MissingValues *smithy.Schema
-
-var SensorStatisticsSummary_InvalidValues *smithy.Schema
-
-var SensorStatisticsSummary_InvalidDateEntries *smithy.Schema
-
-var SensorStatisticsSummary_DuplicateTimestamps *smithy.Schema
-
-var SensorStatisticsSummary_CategoricalValues *smithy.Schema
-
-var SensorStatisticsSummary_MultipleOperatingModes *smithy.Schema
-
-var SensorStatisticsSummary_LargeTimestampGaps *smithy.Schema
-
-var SensorStatisticsSummary_MonotonicValues *smithy.Schema
-
-var SensorStatisticsSummary_DataStartTime *smithy.Schema
-
-var SensorStatisticsSummary_DataEndTime *smithy.Schema
-
-var SensorsWithShortDateRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "SensorsWithShortDateRange",
-}, smithy.ShapeTypeStructure, 1)
-var SensorsWithShortDateRange_AffectedSensorCount *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_Message *smithy.Schema
-
-var StatisticalIssueStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "StatisticalIssueStatus",
-}, smithy.ShapeTypeEnum, 2)
-var StatisticalIssueStatus_POTENTIAL_ISSUE_DETECTED *smithy.Schema
-
-var StatisticalIssueStatus_NO_ISSUE_DETECTED *smithy.Schema
-
-var _SynthesizedJsonInlineDataSchema = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "SynthesizedJsonInlineDataSchema",
-}, smithy.ShapeTypeString, 0, &smithytraits.MediaType{Type: "application/json"})
-
-var _SynthesizedJsonModelMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "SynthesizedJsonModelMetrics",
-}, smithy.ShapeTypeString, 0, &smithytraits.MediaType{Type: "application/json"})
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var TargetSamplingRate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "TargetSamplingRate",
-}, smithy.ShapeTypeEnum, 11)
-var TargetSamplingRate_PT1S *smithy.Schema
-
-var TargetSamplingRate_PT5S *smithy.Schema
-
-var TargetSamplingRate_PT10S *smithy.Schema
-
-var TargetSamplingRate_PT15S *smithy.Schema
-
-var TargetSamplingRate_PT30S *smithy.Schema
-
-var TargetSamplingRate_PT1M *smithy.Schema
-
-var TargetSamplingRate_PT5M *smithy.Schema
-
-var TargetSamplingRate_PT10M *smithy.Schema
-
-var TargetSamplingRate_PT15M *smithy.Schema
-
-var TargetSamplingRate_PT30M *smithy.Schema
-
-var TargetSamplingRate_PT1H *smithy.Schema
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_Message *smithy.Schema
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _TimeZoneOffset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "TimeZoneOffset",
-}, smithy.ShapeTypeString, 0)
-
-var UnsupportedTimestamps = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "UnsupportedTimestamps",
-}, smithy.ShapeTypeStructure, 1)
-var UnsupportedTimestamps_TotalNumberOfUnsupportedTimestamps *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_Message *smithy.Schema
-
-var CreateDatasetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "CreateDatasetRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateDatasetRequest_DatasetName *smithy.Schema
-
-var CreateDatasetRequest_DatasetSchema *smithy.Schema
-
-var CreateDatasetRequest_ServerSideKmsKeyId *smithy.Schema
-
-var CreateDatasetRequest_ClientToken *smithy.Schema
-
-var CreateDatasetRequest_Tags *smithy.Schema
-
-var CreateDatasetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "CreateDatasetResponse",
-}, smithy.ShapeTypeStructure, 3)
-var CreateDatasetResponse_DatasetName *smithy.Schema
-
-var CreateDatasetResponse_DatasetArn *smithy.Schema
-
-var CreateDatasetResponse_Status *smithy.Schema
-
-var CreateInferenceSchedulerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "CreateInferenceSchedulerRequest",
-}, smithy.ShapeTypeStructure, 10)
-var CreateInferenceSchedulerRequest_ModelName *smithy.Schema
-
-var CreateInferenceSchedulerRequest_InferenceSchedulerName *smithy.Schema
-
-var CreateInferenceSchedulerRequest_DataDelayOffsetInMinutes *smithy.Schema
-
-var CreateInferenceSchedulerRequest_DataUploadFrequency *smithy.Schema
-
-var CreateInferenceSchedulerRequest_DataInputConfiguration *smithy.Schema
-
-var CreateInferenceSchedulerRequest_DataOutputConfiguration *smithy.Schema
-
-var CreateInferenceSchedulerRequest_RoleArn *smithy.Schema
-
-var CreateInferenceSchedulerRequest_ServerSideKmsKeyId *smithy.Schema
-
-var CreateInferenceSchedulerRequest_ClientToken *smithy.Schema
-
-var CreateInferenceSchedulerRequest_Tags *smithy.Schema
-
-var CreateInferenceSchedulerResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "CreateInferenceSchedulerResponse",
-}, smithy.ShapeTypeStructure, 4)
-var CreateInferenceSchedulerResponse_InferenceSchedulerArn *smithy.Schema
-
-var CreateInferenceSchedulerResponse_InferenceSchedulerName *smithy.Schema
-
-var CreateInferenceSchedulerResponse_Status *smithy.Schema
-
-var CreateInferenceSchedulerResponse_ModelQuality *smithy.Schema
-
-var CreateLabelGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "CreateLabelGroupRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateLabelGroupRequest_LabelGroupName *smithy.Schema
-
-var CreateLabelGroupRequest_FaultCodes *smithy.Schema
-
-var CreateLabelGroupRequest_ClientToken *smithy.Schema
-
-var CreateLabelGroupRequest_Tags *smithy.Schema
-
-var CreateLabelGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "CreateLabelGroupResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateLabelGroupResponse_LabelGroupName *smithy.Schema
-
-var CreateLabelGroupResponse_LabelGroupArn *smithy.Schema
-
-var CreateLabelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "CreateLabelRequest",
-}, smithy.ShapeTypeStructure, 8)
-var CreateLabelRequest_LabelGroupName *smithy.Schema
-
-var CreateLabelRequest_StartTime *smithy.Schema
-
-var CreateLabelRequest_EndTime *smithy.Schema
-
-var CreateLabelRequest_Rating *smithy.Schema
-
-var CreateLabelRequest_FaultCode *smithy.Schema
-
-var CreateLabelRequest_Notes *smithy.Schema
-
-var CreateLabelRequest_Equipment *smithy.Schema
-
-var CreateLabelRequest_ClientToken *smithy.Schema
-
-var CreateLabelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "CreateLabelResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateLabelResponse_LabelId *smithy.Schema
-
-var CreateModelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "CreateModelRequest",
-}, smithy.ShapeTypeStructure, 15)
-var CreateModelRequest_ModelName *smithy.Schema
-
-var CreateModelRequest_DatasetName *smithy.Schema
-
-var CreateModelRequest_DatasetSchema *smithy.Schema
-
-var CreateModelRequest_LabelsInputConfiguration *smithy.Schema
-
-var CreateModelRequest_ClientToken *smithy.Schema
-
-var CreateModelRequest_TrainingDataStartTime *smithy.Schema
-
-var CreateModelRequest_TrainingDataEndTime *smithy.Schema
-
-var CreateModelRequest_EvaluationDataStartTime *smithy.Schema
-
-var CreateModelRequest_EvaluationDataEndTime *smithy.Schema
-
-var CreateModelRequest_RoleArn *smithy.Schema
-
-var CreateModelRequest_DataPreProcessingConfiguration *smithy.Schema
-
-var CreateModelRequest_ServerSideKmsKeyId *smithy.Schema
-
-var CreateModelRequest_Tags *smithy.Schema
-
-var CreateModelRequest_OffCondition *smithy.Schema
-
-var CreateModelRequest_ModelDiagnosticsOutputConfiguration *smithy.Schema
-
-var CreateModelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "CreateModelResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateModelResponse_ModelArn *smithy.Schema
-
-var CreateModelResponse_Status *smithy.Schema
-
-var CreateRetrainingSchedulerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "CreateRetrainingSchedulerRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateRetrainingSchedulerRequest_ModelName *smithy.Schema
-
-var CreateRetrainingSchedulerRequest_RetrainingStartDate *smithy.Schema
-
-var CreateRetrainingSchedulerRequest_RetrainingFrequency *smithy.Schema
-
-var CreateRetrainingSchedulerRequest_LookbackWindow *smithy.Schema
-
-var CreateRetrainingSchedulerRequest_PromoteMode *smithy.Schema
-
-var CreateRetrainingSchedulerRequest_ClientToken *smithy.Schema
-
-var CreateRetrainingSchedulerResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "CreateRetrainingSchedulerResponse",
-}, smithy.ShapeTypeStructure, 3)
-var CreateRetrainingSchedulerResponse_ModelName *smithy.Schema
-
-var CreateRetrainingSchedulerResponse_ModelArn *smithy.Schema
-
-var CreateRetrainingSchedulerResponse_Status *smithy.Schema
-
-var DeleteDatasetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DeleteDatasetRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDatasetRequest_DatasetName *smithy.Schema
-
-var DeleteInferenceSchedulerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DeleteInferenceSchedulerRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteInferenceSchedulerRequest_InferenceSchedulerName *smithy.Schema
-
-var DeleteLabelGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DeleteLabelGroupRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteLabelGroupRequest_LabelGroupName *smithy.Schema
-
-var DeleteLabelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DeleteLabelRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteLabelRequest_LabelGroupName *smithy.Schema
-
-var DeleteLabelRequest_LabelId *smithy.Schema
-
-var DeleteModelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DeleteModelRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteModelRequest_ModelName *smithy.Schema
-
-var DeleteResourcePolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DeleteResourcePolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteResourcePolicyRequest_ResourceArn *smithy.Schema
-
-var DeleteRetrainingSchedulerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DeleteRetrainingSchedulerRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteRetrainingSchedulerRequest_ModelName *smithy.Schema
-
-var DescribeDataIngestionJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DescribeDataIngestionJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeDataIngestionJobRequest_JobId *smithy.Schema
-
-var DescribeDataIngestionJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DescribeDataIngestionJobResponse",
-}, smithy.ShapeTypeStructure, 14)
-var DescribeDataIngestionJobResponse_JobId *smithy.Schema
-
-var DescribeDataIngestionJobResponse_DatasetArn *smithy.Schema
-
-var DescribeDataIngestionJobResponse_IngestionInputConfiguration *smithy.Schema
-
-var DescribeDataIngestionJobResponse_RoleArn *smithy.Schema
-
-var DescribeDataIngestionJobResponse_CreatedAt *smithy.Schema
-
-var DescribeDataIngestionJobResponse_Status *smithy.Schema
-
-var DescribeDataIngestionJobResponse_FailedReason *smithy.Schema
-
-var DescribeDataIngestionJobResponse_DataQualitySummary *smithy.Schema
-
-var DescribeDataIngestionJobResponse_IngestedFilesSummary *smithy.Schema
-
-var DescribeDataIngestionJobResponse_StatusDetail *smithy.Schema
-
-var DescribeDataIngestionJobResponse_IngestedDataSize *smithy.Schema
-
-var DescribeDataIngestionJobResponse_DataStartTime *smithy.Schema
-
-var DescribeDataIngestionJobResponse_DataEndTime *smithy.Schema
-
-var DescribeDataIngestionJobResponse_SourceDatasetArn *smithy.Schema
-
-var DescribeDatasetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DescribeDatasetRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeDatasetRequest_DatasetName *smithy.Schema
-
-var DescribeDatasetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DescribeDatasetResponse",
-}, smithy.ShapeTypeStructure, 14)
-var DescribeDatasetResponse_DatasetName *smithy.Schema
-
-var DescribeDatasetResponse_DatasetArn *smithy.Schema
-
-var DescribeDatasetResponse_CreatedAt *smithy.Schema
-
-var DescribeDatasetResponse_LastUpdatedAt *smithy.Schema
-
-var DescribeDatasetResponse_Status *smithy.Schema
-
-var DescribeDatasetResponse_Schema *smithy.Schema
-
-var DescribeDatasetResponse_ServerSideKmsKeyId *smithy.Schema
-
-var DescribeDatasetResponse_IngestionInputConfiguration *smithy.Schema
-
-var DescribeDatasetResponse_DataQualitySummary *smithy.Schema
-
-var DescribeDatasetResponse_IngestedFilesSummary *smithy.Schema
-
-var DescribeDatasetResponse_RoleArn *smithy.Schema
-
-var DescribeDatasetResponse_DataStartTime *smithy.Schema
-
-var DescribeDatasetResponse_DataEndTime *smithy.Schema
-
-var DescribeDatasetResponse_SourceDatasetArn *smithy.Schema
-
-var DescribeInferenceSchedulerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DescribeInferenceSchedulerRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeInferenceSchedulerRequest_InferenceSchedulerName *smithy.Schema
-
-var DescribeInferenceSchedulerResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DescribeInferenceSchedulerResponse",
-}, smithy.ShapeTypeStructure, 14)
-var DescribeInferenceSchedulerResponse_ModelArn *smithy.Schema
-
-var DescribeInferenceSchedulerResponse_ModelName *smithy.Schema
-
-var DescribeInferenceSchedulerResponse_InferenceSchedulerName *smithy.Schema
-
-var DescribeInferenceSchedulerResponse_InferenceSchedulerArn *smithy.Schema
-
-var DescribeInferenceSchedulerResponse_Status *smithy.Schema
-
-var DescribeInferenceSchedulerResponse_DataDelayOffsetInMinutes *smithy.Schema
-
-var DescribeInferenceSchedulerResponse_DataUploadFrequency *smithy.Schema
-
-var DescribeInferenceSchedulerResponse_CreatedAt *smithy.Schema
-
-var DescribeInferenceSchedulerResponse_UpdatedAt *smithy.Schema
-
-var DescribeInferenceSchedulerResponse_DataInputConfiguration *smithy.Schema
-
-var DescribeInferenceSchedulerResponse_DataOutputConfiguration *smithy.Schema
-
-var DescribeInferenceSchedulerResponse_RoleArn *smithy.Schema
-
-var DescribeInferenceSchedulerResponse_ServerSideKmsKeyId *smithy.Schema
-
-var DescribeInferenceSchedulerResponse_LatestInferenceResult *smithy.Schema
-
-var DescribeLabelGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DescribeLabelGroupRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeLabelGroupRequest_LabelGroupName *smithy.Schema
-
-var DescribeLabelGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DescribeLabelGroupResponse",
-}, smithy.ShapeTypeStructure, 5)
-var DescribeLabelGroupResponse_LabelGroupName *smithy.Schema
-
-var DescribeLabelGroupResponse_LabelGroupArn *smithy.Schema
-
-var DescribeLabelGroupResponse_FaultCodes *smithy.Schema
-
-var DescribeLabelGroupResponse_CreatedAt *smithy.Schema
-
-var DescribeLabelGroupResponse_UpdatedAt *smithy.Schema
-
-var DescribeLabelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DescribeLabelRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeLabelRequest_LabelGroupName *smithy.Schema
-
-var DescribeLabelRequest_LabelId *smithy.Schema
-
-var DescribeLabelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DescribeLabelResponse",
-}, smithy.ShapeTypeStructure, 10)
-var DescribeLabelResponse_LabelGroupName *smithy.Schema
-
-var DescribeLabelResponse_LabelGroupArn *smithy.Schema
-
-var DescribeLabelResponse_LabelId *smithy.Schema
-
-var DescribeLabelResponse_StartTime *smithy.Schema
-
-var DescribeLabelResponse_EndTime *smithy.Schema
-
-var DescribeLabelResponse_Rating *smithy.Schema
-
-var DescribeLabelResponse_FaultCode *smithy.Schema
-
-var DescribeLabelResponse_Notes *smithy.Schema
-
-var DescribeLabelResponse_Equipment *smithy.Schema
-
-var DescribeLabelResponse_CreatedAt *smithy.Schema
-
-var DescribeModelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DescribeModelRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeModelRequest_ModelName *smithy.Schema
-
-var DescribeModelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DescribeModelResponse",
-}, smithy.ShapeTypeStructure, 42)
-var DescribeModelResponse_ModelName *smithy.Schema
-
-var DescribeModelResponse_ModelArn *smithy.Schema
-
-var DescribeModelResponse_DatasetName *smithy.Schema
-
-var DescribeModelResponse_DatasetArn *smithy.Schema
-
-var DescribeModelResponse_Schema *smithy.Schema
-
-var DescribeModelResponse_LabelsInputConfiguration *smithy.Schema
-
-var DescribeModelResponse_TrainingDataStartTime *smithy.Schema
-
-var DescribeModelResponse_TrainingDataEndTime *smithy.Schema
-
-var DescribeModelResponse_EvaluationDataStartTime *smithy.Schema
-
-var DescribeModelResponse_EvaluationDataEndTime *smithy.Schema
-
-var DescribeModelResponse_RoleArn *smithy.Schema
-
-var DescribeModelResponse_DataPreProcessingConfiguration *smithy.Schema
-
-var DescribeModelResponse_Status *smithy.Schema
-
-var DescribeModelResponse_TrainingExecutionStartTime *smithy.Schema
-
-var DescribeModelResponse_TrainingExecutionEndTime *smithy.Schema
-
-var DescribeModelResponse_FailedReason *smithy.Schema
-
-var DescribeModelResponse_ModelMetrics *smithy.Schema
-
-var DescribeModelResponse_LastUpdatedTime *smithy.Schema
-
-var DescribeModelResponse_CreatedAt *smithy.Schema
-
-var DescribeModelResponse_ServerSideKmsKeyId *smithy.Schema
-
-var DescribeModelResponse_OffCondition *smithy.Schema
-
-var DescribeModelResponse_SourceModelVersionArn *smithy.Schema
-
-var DescribeModelResponse_ImportJobStartTime *smithy.Schema
-
-var DescribeModelResponse_ImportJobEndTime *smithy.Schema
-
-var DescribeModelResponse_ActiveModelVersion *smithy.Schema
-
-var DescribeModelResponse_ActiveModelVersionArn *smithy.Schema
-
-var DescribeModelResponse_ModelVersionActivatedAt *smithy.Schema
-
-var DescribeModelResponse_PreviousActiveModelVersion *smithy.Schema
-
-var DescribeModelResponse_PreviousActiveModelVersionArn *smithy.Schema
-
-var DescribeModelResponse_PreviousModelVersionActivatedAt *smithy.Schema
-
-var DescribeModelResponse_PriorModelMetrics *smithy.Schema
-
-var DescribeModelResponse_LatestScheduledRetrainingFailedReason *smithy.Schema
-
-var DescribeModelResponse_LatestScheduledRetrainingStatus *smithy.Schema
-
-var DescribeModelResponse_LatestScheduledRetrainingModelVersion *smithy.Schema
-
-var DescribeModelResponse_LatestScheduledRetrainingStartTime *smithy.Schema
-
-var DescribeModelResponse_LatestScheduledRetrainingAvailableDataInDays *smithy.Schema
-
-var DescribeModelResponse_NextScheduledRetrainingStartDate *smithy.Schema
-
-var DescribeModelResponse_AccumulatedInferenceDataStartTime *smithy.Schema
-
-var DescribeModelResponse_AccumulatedInferenceDataEndTime *smithy.Schema
-
-var DescribeModelResponse_RetrainingSchedulerStatus *smithy.Schema
-
-var DescribeModelResponse_ModelDiagnosticsOutputConfiguration *smithy.Schema
-
-var DescribeModelResponse_ModelQuality *smithy.Schema
-
-var DescribeModelVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DescribeModelVersionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeModelVersionRequest_ModelName *smithy.Schema
-
-var DescribeModelVersionRequest_ModelVersion *smithy.Schema
-
-var DescribeModelVersionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DescribeModelVersionResponse",
-}, smithy.ShapeTypeStructure, 35)
-var DescribeModelVersionResponse_ModelName *smithy.Schema
-
-var DescribeModelVersionResponse_ModelArn *smithy.Schema
-
-var DescribeModelVersionResponse_ModelVersion *smithy.Schema
-
-var DescribeModelVersionResponse_ModelVersionArn *smithy.Schema
-
-var DescribeModelVersionResponse_Status *smithy.Schema
-
-var DescribeModelVersionResponse_SourceType *smithy.Schema
-
-var DescribeModelVersionResponse_DatasetName *smithy.Schema
-
-var DescribeModelVersionResponse_DatasetArn *smithy.Schema
-
-var DescribeModelVersionResponse_Schema *smithy.Schema
-
-var DescribeModelVersionResponse_LabelsInputConfiguration *smithy.Schema
-
-var DescribeModelVersionResponse_TrainingDataStartTime *smithy.Schema
-
-var DescribeModelVersionResponse_TrainingDataEndTime *smithy.Schema
-
-var DescribeModelVersionResponse_EvaluationDataStartTime *smithy.Schema
-
-var DescribeModelVersionResponse_EvaluationDataEndTime *smithy.Schema
-
-var DescribeModelVersionResponse_RoleArn *smithy.Schema
-
-var DescribeModelVersionResponse_DataPreProcessingConfiguration *smithy.Schema
-
-var DescribeModelVersionResponse_TrainingExecutionStartTime *smithy.Schema
-
-var DescribeModelVersionResponse_TrainingExecutionEndTime *smithy.Schema
-
-var DescribeModelVersionResponse_FailedReason *smithy.Schema
-
-var DescribeModelVersionResponse_ModelMetrics *smithy.Schema
-
-var DescribeModelVersionResponse_LastUpdatedTime *smithy.Schema
-
-var DescribeModelVersionResponse_CreatedAt *smithy.Schema
-
-var DescribeModelVersionResponse_ServerSideKmsKeyId *smithy.Schema
-
-var DescribeModelVersionResponse_OffCondition *smithy.Schema
-
-var DescribeModelVersionResponse_SourceModelVersionArn *smithy.Schema
-
-var DescribeModelVersionResponse_ImportJobStartTime *smithy.Schema
-
-var DescribeModelVersionResponse_ImportJobEndTime *smithy.Schema
-
-var DescribeModelVersionResponse_ImportedDataSizeInBytes *smithy.Schema
-
-var DescribeModelVersionResponse_PriorModelMetrics *smithy.Schema
-
-var DescribeModelVersionResponse_RetrainingAvailableDataInDays *smithy.Schema
-
-var DescribeModelVersionResponse_AutoPromotionResult *smithy.Schema
-
-var DescribeModelVersionResponse_AutoPromotionResultReason *smithy.Schema
-
-var DescribeModelVersionResponse_ModelDiagnosticsOutputConfiguration *smithy.Schema
-
-var DescribeModelVersionResponse_ModelDiagnosticsResultsObject *smithy.Schema
-
-var DescribeModelVersionResponse_ModelQuality *smithy.Schema
-
-var DescribeResourcePolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DescribeResourcePolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeResourcePolicyRequest_ResourceArn *smithy.Schema
-
-var DescribeResourcePolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DescribeResourcePolicyResponse",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeResourcePolicyResponse_PolicyRevisionId *smithy.Schema
-
-var DescribeResourcePolicyResponse_ResourcePolicy *smithy.Schema
-
-var DescribeResourcePolicyResponse_CreationTime *smithy.Schema
-
-var DescribeResourcePolicyResponse_LastModifiedTime *smithy.Schema
-
-var DescribeRetrainingSchedulerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DescribeRetrainingSchedulerRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeRetrainingSchedulerRequest_ModelName *smithy.Schema
-
-var DescribeRetrainingSchedulerResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "DescribeRetrainingSchedulerResponse",
-}, smithy.ShapeTypeStructure, 9)
-var DescribeRetrainingSchedulerResponse_ModelName *smithy.Schema
-
-var DescribeRetrainingSchedulerResponse_ModelArn *smithy.Schema
-
-var DescribeRetrainingSchedulerResponse_RetrainingStartDate *smithy.Schema
-
-var DescribeRetrainingSchedulerResponse_RetrainingFrequency *smithy.Schema
-
-var DescribeRetrainingSchedulerResponse_LookbackWindow *smithy.Schema
-
-var DescribeRetrainingSchedulerResponse_Status *smithy.Schema
-
-var DescribeRetrainingSchedulerResponse_PromoteMode *smithy.Schema
-
-var DescribeRetrainingSchedulerResponse_CreatedAt *smithy.Schema
-
-var DescribeRetrainingSchedulerResponse_UpdatedAt *smithy.Schema
-
-var ImportDatasetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ImportDatasetRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ImportDatasetRequest_SourceDatasetArn *smithy.Schema
-
-var ImportDatasetRequest_DatasetName *smithy.Schema
-
-var ImportDatasetRequest_ClientToken *smithy.Schema
-
-var ImportDatasetRequest_ServerSideKmsKeyId *smithy.Schema
-
-var ImportDatasetRequest_Tags *smithy.Schema
-
-var ImportDatasetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ImportDatasetResponse",
-}, smithy.ShapeTypeStructure, 4)
-var ImportDatasetResponse_DatasetName *smithy.Schema
-
-var ImportDatasetResponse_DatasetArn *smithy.Schema
-
-var ImportDatasetResponse_Status *smithy.Schema
-
-var ImportDatasetResponse_JobId *smithy.Schema
-
-var ImportModelVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ImportModelVersionRequest",
-}, smithy.ShapeTypeStructure, 9)
-var ImportModelVersionRequest_SourceModelVersionArn *smithy.Schema
-
-var ImportModelVersionRequest_ModelName *smithy.Schema
-
-var ImportModelVersionRequest_DatasetName *smithy.Schema
-
-var ImportModelVersionRequest_LabelsInputConfiguration *smithy.Schema
-
-var ImportModelVersionRequest_ClientToken *smithy.Schema
-
-var ImportModelVersionRequest_RoleArn *smithy.Schema
-
-var ImportModelVersionRequest_ServerSideKmsKeyId *smithy.Schema
-
-var ImportModelVersionRequest_Tags *smithy.Schema
-
-var ImportModelVersionRequest_InferenceDataImportStrategy *smithy.Schema
-
-var ImportModelVersionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ImportModelVersionResponse",
-}, smithy.ShapeTypeStructure, 5)
-var ImportModelVersionResponse_ModelName *smithy.Schema
-
-var ImportModelVersionResponse_ModelArn *smithy.Schema
-
-var ImportModelVersionResponse_ModelVersionArn *smithy.Schema
-
-var ImportModelVersionResponse_ModelVersion *smithy.Schema
-
-var ImportModelVersionResponse_Status *smithy.Schema
-
-var ListDataIngestionJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ListDataIngestionJobsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListDataIngestionJobsRequest_DatasetName *smithy.Schema
-
-var ListDataIngestionJobsRequest_NextToken *smithy.Schema
-
-var ListDataIngestionJobsRequest_MaxResults *smithy.Schema
-
-var ListDataIngestionJobsRequest_Status *smithy.Schema
-
-var ListDataIngestionJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ListDataIngestionJobsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListDataIngestionJobsResponse_NextToken *smithy.Schema
-
-var ListDataIngestionJobsResponse_DataIngestionJobSummaries *smithy.Schema
-
-var ListDatasetsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ListDatasetsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListDatasetsRequest_NextToken *smithy.Schema
-
-var ListDatasetsRequest_MaxResults *smithy.Schema
-
-var ListDatasetsRequest_DatasetNameBeginsWith *smithy.Schema
-
-var ListDatasetsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ListDatasetsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListDatasetsResponse_NextToken *smithy.Schema
-
-var ListDatasetsResponse_DatasetSummaries *smithy.Schema
-
-var ListInferenceEventsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ListInferenceEventsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListInferenceEventsRequest_NextToken *smithy.Schema
-
-var ListInferenceEventsRequest_MaxResults *smithy.Schema
-
-var ListInferenceEventsRequest_InferenceSchedulerName *smithy.Schema
-
-var ListInferenceEventsRequest_IntervalStartTime *smithy.Schema
-
-var ListInferenceEventsRequest_IntervalEndTime *smithy.Schema
-
-var ListInferenceEventsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ListInferenceEventsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListInferenceEventsResponse_NextToken *smithy.Schema
-
-var ListInferenceEventsResponse_InferenceEventSummaries *smithy.Schema
-
-var ListInferenceExecutionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ListInferenceExecutionsRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ListInferenceExecutionsRequest_NextToken *smithy.Schema
-
-var ListInferenceExecutionsRequest_MaxResults *smithy.Schema
-
-var ListInferenceExecutionsRequest_InferenceSchedulerName *smithy.Schema
-
-var ListInferenceExecutionsRequest_DataStartTimeAfter *smithy.Schema
-
-var ListInferenceExecutionsRequest_DataEndTimeBefore *smithy.Schema
-
-var ListInferenceExecutionsRequest_Status *smithy.Schema
-
-var ListInferenceExecutionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ListInferenceExecutionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListInferenceExecutionsResponse_NextToken *smithy.Schema
-
-var ListInferenceExecutionsResponse_InferenceExecutionSummaries *smithy.Schema
-
-var ListInferenceSchedulersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ListInferenceSchedulersRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListInferenceSchedulersRequest_NextToken *smithy.Schema
-
-var ListInferenceSchedulersRequest_MaxResults *smithy.Schema
-
-var ListInferenceSchedulersRequest_InferenceSchedulerNameBeginsWith *smithy.Schema
-
-var ListInferenceSchedulersRequest_ModelName *smithy.Schema
-
-var ListInferenceSchedulersRequest_Status *smithy.Schema
-
-var ListInferenceSchedulersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ListInferenceSchedulersResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListInferenceSchedulersResponse_NextToken *smithy.Schema
-
-var ListInferenceSchedulersResponse_InferenceSchedulerSummaries *smithy.Schema
-
-var ListLabelGroupsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ListLabelGroupsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListLabelGroupsRequest_LabelGroupNameBeginsWith *smithy.Schema
-
-var ListLabelGroupsRequest_NextToken *smithy.Schema
-
-var ListLabelGroupsRequest_MaxResults *smithy.Schema
-
-var ListLabelGroupsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ListLabelGroupsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListLabelGroupsResponse_NextToken *smithy.Schema
-
-var ListLabelGroupsResponse_LabelGroupSummaries *smithy.Schema
-
-var ListLabelsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ListLabelsRequest",
-}, smithy.ShapeTypeStructure, 7)
-var ListLabelsRequest_LabelGroupName *smithy.Schema
-
-var ListLabelsRequest_IntervalStartTime *smithy.Schema
-
-var ListLabelsRequest_IntervalEndTime *smithy.Schema
-
-var ListLabelsRequest_FaultCode *smithy.Schema
-
-var ListLabelsRequest_Equipment *smithy.Schema
-
-var ListLabelsRequest_NextToken *smithy.Schema
-
-var ListLabelsRequest_MaxResults *smithy.Schema
-
-var ListLabelsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ListLabelsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListLabelsResponse_NextToken *smithy.Schema
-
-var ListLabelsResponse_LabelSummaries *smithy.Schema
-
-var ListModelsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ListModelsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListModelsRequest_NextToken *smithy.Schema
-
-var ListModelsRequest_MaxResults *smithy.Schema
-
-var ListModelsRequest_Status *smithy.Schema
-
-var ListModelsRequest_ModelNameBeginsWith *smithy.Schema
-
-var ListModelsRequest_DatasetNameBeginsWith *smithy.Schema
-
-var ListModelsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ListModelsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListModelsResponse_NextToken *smithy.Schema
-
-var ListModelsResponse_ModelSummaries *smithy.Schema
-
-var ListModelVersionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ListModelVersionsRequest",
-}, smithy.ShapeTypeStructure, 9)
-var ListModelVersionsRequest_ModelName *smithy.Schema
-
-var ListModelVersionsRequest_NextToken *smithy.Schema
-
-var ListModelVersionsRequest_MaxResults *smithy.Schema
-
-var ListModelVersionsRequest_Status *smithy.Schema
-
-var ListModelVersionsRequest_SourceType *smithy.Schema
-
-var ListModelVersionsRequest_CreatedAtEndTime *smithy.Schema
-
-var ListModelVersionsRequest_CreatedAtStartTime *smithy.Schema
-
-var ListModelVersionsRequest_MaxModelVersion *smithy.Schema
-
-var ListModelVersionsRequest_MinModelVersion *smithy.Schema
-
-var ListModelVersionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ListModelVersionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListModelVersionsResponse_NextToken *smithy.Schema
-
-var ListModelVersionsResponse_ModelVersionSummaries *smithy.Schema
-
-var ListRetrainingSchedulersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ListRetrainingSchedulersRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListRetrainingSchedulersRequest_ModelNameBeginsWith *smithy.Schema
-
-var ListRetrainingSchedulersRequest_Status *smithy.Schema
-
-var ListRetrainingSchedulersRequest_NextToken *smithy.Schema
-
-var ListRetrainingSchedulersRequest_MaxResults *smithy.Schema
-
-var ListRetrainingSchedulersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ListRetrainingSchedulersResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListRetrainingSchedulersResponse_RetrainingSchedulerSummaries *smithy.Schema
-
-var ListRetrainingSchedulersResponse_NextToken *smithy.Schema
-
-var ListSensorStatisticsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ListSensorStatisticsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListSensorStatisticsRequest_DatasetName *smithy.Schema
-
-var ListSensorStatisticsRequest_IngestionJobId *smithy.Schema
-
-var ListSensorStatisticsRequest_MaxResults *smithy.Schema
-
-var ListSensorStatisticsRequest_NextToken *smithy.Schema
-
-var ListSensorStatisticsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ListSensorStatisticsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSensorStatisticsResponse_SensorStatisticsSummaries *smithy.Schema
-
-var ListSensorStatisticsResponse_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var PutResourcePolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "PutResourcePolicyRequest",
-}, smithy.ShapeTypeStructure, 4)
-var PutResourcePolicyRequest_ResourceArn *smithy.Schema
-
-var PutResourcePolicyRequest_ResourcePolicy *smithy.Schema
-
-var PutResourcePolicyRequest_PolicyRevisionId *smithy.Schema
-
-var PutResourcePolicyRequest_ClientToken *smithy.Schema
-
-var PutResourcePolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "PutResourcePolicyResponse",
-}, smithy.ShapeTypeStructure, 2)
-var PutResourcePolicyResponse_ResourceArn *smithy.Schema
-
-var PutResourcePolicyResponse_PolicyRevisionId *smithy.Schema
-
-var StartDataIngestionJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "StartDataIngestionJobRequest",
-}, smithy.ShapeTypeStructure, 4)
-var StartDataIngestionJobRequest_DatasetName *smithy.Schema
-
-var StartDataIngestionJobRequest_IngestionInputConfiguration *smithy.Schema
-
-var StartDataIngestionJobRequest_RoleArn *smithy.Schema
-
-var StartDataIngestionJobRequest_ClientToken *smithy.Schema
-
-var StartDataIngestionJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "StartDataIngestionJobResponse",
-}, smithy.ShapeTypeStructure, 2)
-var StartDataIngestionJobResponse_JobId *smithy.Schema
-
-var StartDataIngestionJobResponse_Status *smithy.Schema
-
-var StartInferenceSchedulerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "StartInferenceSchedulerRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StartInferenceSchedulerRequest_InferenceSchedulerName *smithy.Schema
-
-var StartInferenceSchedulerResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "StartInferenceSchedulerResponse",
-}, smithy.ShapeTypeStructure, 5)
-var StartInferenceSchedulerResponse_ModelArn *smithy.Schema
-
-var StartInferenceSchedulerResponse_ModelName *smithy.Schema
-
-var StartInferenceSchedulerResponse_InferenceSchedulerName *smithy.Schema
-
-var StartInferenceSchedulerResponse_InferenceSchedulerArn *smithy.Schema
-
-var StartInferenceSchedulerResponse_Status *smithy.Schema
-
-var StartRetrainingSchedulerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "StartRetrainingSchedulerRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StartRetrainingSchedulerRequest_ModelName *smithy.Schema
-
-var StartRetrainingSchedulerResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "StartRetrainingSchedulerResponse",
-}, smithy.ShapeTypeStructure, 3)
-var StartRetrainingSchedulerResponse_ModelName *smithy.Schema
-
-var StartRetrainingSchedulerResponse_ModelArn *smithy.Schema
-
-var StartRetrainingSchedulerResponse_Status *smithy.Schema
-
-var StopInferenceSchedulerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "StopInferenceSchedulerRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StopInferenceSchedulerRequest_InferenceSchedulerName *smithy.Schema
-
-var StopInferenceSchedulerResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "StopInferenceSchedulerResponse",
-}, smithy.ShapeTypeStructure, 5)
-var StopInferenceSchedulerResponse_ModelArn *smithy.Schema
-
-var StopInferenceSchedulerResponse_ModelName *smithy.Schema
-
-var StopInferenceSchedulerResponse_InferenceSchedulerName *smithy.Schema
-
-var StopInferenceSchedulerResponse_InferenceSchedulerArn *smithy.Schema
-
-var StopInferenceSchedulerResponse_Status *smithy.Schema
-
-var StopRetrainingSchedulerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "StopRetrainingSchedulerRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StopRetrainingSchedulerRequest_ModelName *smithy.Schema
-
-var StopRetrainingSchedulerResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "StopRetrainingSchedulerResponse",
-}, smithy.ShapeTypeStructure, 3)
-var StopRetrainingSchedulerResponse_ModelName *smithy.Schema
-
-var StopRetrainingSchedulerResponse_ModelArn *smithy.Schema
-
-var StopRetrainingSchedulerResponse_Status *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceArn *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceArn *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateActiveModelVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "UpdateActiveModelVersionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateActiveModelVersionRequest_ModelName *smithy.Schema
-
-var UpdateActiveModelVersionRequest_ModelVersion *smithy.Schema
-
-var UpdateActiveModelVersionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "UpdateActiveModelVersionResponse",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateActiveModelVersionResponse_ModelName *smithy.Schema
-
-var UpdateActiveModelVersionResponse_ModelArn *smithy.Schema
-
-var UpdateActiveModelVersionResponse_CurrentActiveVersion *smithy.Schema
-
-var UpdateActiveModelVersionResponse_PreviousActiveVersion *smithy.Schema
-
-var UpdateActiveModelVersionResponse_CurrentActiveVersionArn *smithy.Schema
-
-var UpdateActiveModelVersionResponse_PreviousActiveVersionArn *smithy.Schema
-
-var UpdateInferenceSchedulerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "UpdateInferenceSchedulerRequest",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateInferenceSchedulerRequest_InferenceSchedulerName *smithy.Schema
-
-var UpdateInferenceSchedulerRequest_DataDelayOffsetInMinutes *smithy.Schema
-
-var UpdateInferenceSchedulerRequest_DataUploadFrequency *smithy.Schema
-
-var UpdateInferenceSchedulerRequest_DataInputConfiguration *smithy.Schema
-
-var UpdateInferenceSchedulerRequest_DataOutputConfiguration *smithy.Schema
-
-var UpdateInferenceSchedulerRequest_RoleArn *smithy.Schema
-
-var UpdateLabelGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "UpdateLabelGroupRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateLabelGroupRequest_LabelGroupName *smithy.Schema
-
-var UpdateLabelGroupRequest_FaultCodes *smithy.Schema
-
-var UpdateModelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "UpdateModelRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateModelRequest_ModelName *smithy.Schema
-
-var UpdateModelRequest_LabelsInputConfiguration *smithy.Schema
-
-var UpdateModelRequest_RoleArn *smithy.Schema
-
-var UpdateModelRequest_ModelDiagnosticsOutputConfiguration *smithy.Schema
-
-var UpdateRetrainingSchedulerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lookoutequipment",
-	Name:      "UpdateRetrainingSchedulerRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateRetrainingSchedulerRequest_ModelName *smithy.Schema
-
-var UpdateRetrainingSchedulerRequest_RetrainingStartDate *smithy.Schema
-
-var UpdateRetrainingSchedulerRequest_RetrainingFrequency *smithy.Schema
-
-var UpdateRetrainingSchedulerRequest_LookbackWindow *smithy.Schema
-
-var UpdateRetrainingSchedulerRequest_PromoteMode *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _BoundedLengthString)
-
-	AutoPromotionResult_MODEL_PROMOTED = AutoPromotionResult.AddMember("MODEL_PROMOTED", smithyprelude.Unit)
-
-	AutoPromotionResult_MODEL_NOT_PROMOTED = AutoPromotionResult.AddMember("MODEL_NOT_PROMOTED", smithyprelude.Unit)
-
-	AutoPromotionResult_RETRAINING_INTERNAL_ERROR = AutoPromotionResult.AddMember("RETRAINING_INTERNAL_ERROR", smithyprelude.Unit)
-
-	AutoPromotionResult_RETRAINING_CUSTOMER_ERROR = AutoPromotionResult.AddMember("RETRAINING_CUSTOMER_ERROR", smithyprelude.Unit)
-
-	AutoPromotionResult_RETRAINING_CANCELLED = AutoPromotionResult.AddMember("RETRAINING_CANCELLED", smithyprelude.Unit)
-
-	StatisticalIssueStatus_POTENTIAL_ISSUE_DETECTED = StatisticalIssueStatus.AddMember("POTENTIAL_ISSUE_DETECTED", smithyprelude.Unit)
-
-	StatisticalIssueStatus_NO_ISSUE_DETECTED = StatisticalIssueStatus.AddMember("NO_ISSUE_DETECTED", smithyprelude.Unit)
-
-	CategoricalValues_Status = CategoricalValues.AddMember("Status", StatisticalIssueStatus)
-
-	CategoricalValues_NumberOfCategory = CategoricalValues.AddMember("NumberOfCategory", _Integer)
-
-	ConflictException_Message = ConflictException.AddMember("Message", _BoundedLengthString)
-
-	CountPercent_Count = CountPercent.AddMember("Count", _Integer)
-
-	CountPercent_Percentage = CountPercent.AddMember("Percentage", _Float)
-
-	IngestionS3InputConfiguration_Bucket = IngestionS3InputConfiguration.AddMember("Bucket", _S3Bucket)
-
-	IngestionS3InputConfiguration_Prefix = IngestionS3InputConfiguration.AddMember("Prefix", _S3Prefix)
-
-	IngestionS3InputConfiguration_KeyPattern = IngestionS3InputConfiguration.AddMember("KeyPattern", _KeyPattern)
-
-	IngestionInputConfiguration_S3InputConfiguration = IngestionInputConfiguration.AddMember("S3InputConfiguration", IngestionS3InputConfiguration)
-
-	IngestionJobStatus_IN_PROGRESS = IngestionJobStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	IngestionJobStatus_SUCCESS = IngestionJobStatus.AddMember("SUCCESS", smithyprelude.Unit)
-
-	IngestionJobStatus_FAILED = IngestionJobStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	IngestionJobStatus_IMPORT_IN_PROGRESS = IngestionJobStatus.AddMember("IMPORT_IN_PROGRESS", smithyprelude.Unit)
-
-	DataIngestionJobSummary_JobId = DataIngestionJobSummary.AddMember("JobId", _IngestionJobId)
-
-	DataIngestionJobSummary_DatasetName = DataIngestionJobSummary.AddMember("DatasetName", _DatasetName)
-
-	DataIngestionJobSummary_DatasetArn = DataIngestionJobSummary.AddMember("DatasetArn", _DatasetArn)
-
-	DataIngestionJobSummary_IngestionInputConfiguration = DataIngestionJobSummary.AddMember("IngestionInputConfiguration", IngestionInputConfiguration)
-
-	DataIngestionJobSummary_Status = DataIngestionJobSummary.AddMember("Status", IngestionJobStatus)
-
-	_DataIngestionJobSummaries_member = _DataIngestionJobSummaries.AddMember("member", DataIngestionJobSummary)
-
-	TargetSamplingRate_PT1S = TargetSamplingRate.AddMember("PT1S", smithyprelude.Unit)
-
-	TargetSamplingRate_PT5S = TargetSamplingRate.AddMember("PT5S", smithyprelude.Unit)
-
-	TargetSamplingRate_PT10S = TargetSamplingRate.AddMember("PT10S", smithyprelude.Unit)
-
-	TargetSamplingRate_PT15S = TargetSamplingRate.AddMember("PT15S", smithyprelude.Unit)
-
-	TargetSamplingRate_PT30S = TargetSamplingRate.AddMember("PT30S", smithyprelude.Unit)
-
-	TargetSamplingRate_PT1M = TargetSamplingRate.AddMember("PT1M", smithyprelude.Unit)
-
-	TargetSamplingRate_PT5M = TargetSamplingRate.AddMember("PT5M", smithyprelude.Unit)
-
-	TargetSamplingRate_PT10M = TargetSamplingRate.AddMember("PT10M", smithyprelude.Unit)
-
-	TargetSamplingRate_PT15M = TargetSamplingRate.AddMember("PT15M", smithyprelude.Unit)
-
-	TargetSamplingRate_PT30M = TargetSamplingRate.AddMember("PT30M", smithyprelude.Unit)
-
-	TargetSamplingRate_PT1H = TargetSamplingRate.AddMember("PT1H", smithyprelude.Unit)
-
-	DataPreProcessingConfiguration_TargetSamplingRate = DataPreProcessingConfiguration.AddMember("TargetSamplingRate", TargetSamplingRate)
-
-	MissingCompleteSensorData_AffectedSensorCount = MissingCompleteSensorData.AddMember("AffectedSensorCount", _Integer)
-
-	SensorsWithShortDateRange_AffectedSensorCount = SensorsWithShortDateRange.AddMember("AffectedSensorCount", _Integer)
-
-	InsufficientSensorData_MissingCompleteSensorData = InsufficientSensorData.AddMember("MissingCompleteSensorData", MissingCompleteSensorData)
-
-	InsufficientSensorData_SensorsWithShortDateRange = InsufficientSensorData.AddMember("SensorsWithShortDateRange", SensorsWithShortDateRange)
-
-	MissingSensorData_AffectedSensorCount = MissingSensorData.AddMember("AffectedSensorCount", _Integer)
-
-	MissingSensorData_TotalNumberOfMissingValues = MissingSensorData.AddMember("TotalNumberOfMissingValues", _Integer)
-
-	InvalidSensorData_AffectedSensorCount = InvalidSensorData.AddMember("AffectedSensorCount", _Integer)
-
-	InvalidSensorData_TotalNumberOfInvalidValues = InvalidSensorData.AddMember("TotalNumberOfInvalidValues", _Integer)
-
-	UnsupportedTimestamps_TotalNumberOfUnsupportedTimestamps = UnsupportedTimestamps.AddMember("TotalNumberOfUnsupportedTimestamps", _Integer)
-
-	DuplicateTimestamps_TotalNumberOfDuplicateTimestamps = DuplicateTimestamps.AddMember("TotalNumberOfDuplicateTimestamps", _Integer)
-
-	DataQualitySummary_InsufficientSensorData = DataQualitySummary.AddMember("InsufficientSensorData", InsufficientSensorData)
-
-	DataQualitySummary_MissingSensorData = DataQualitySummary.AddMember("MissingSensorData", MissingSensorData)
-
-	DataQualitySummary_InvalidSensorData = DataQualitySummary.AddMember("InvalidSensorData", InvalidSensorData)
-
-	DataQualitySummary_UnsupportedTimestamps = DataQualitySummary.AddMember("UnsupportedTimestamps", UnsupportedTimestamps)
-
-	DataQualitySummary_DuplicateTimestamps = DataQualitySummary.AddMember("DuplicateTimestamps", DuplicateTimestamps)
-
-	DatasetSchema_InlineDataSchema = DatasetSchema.AddMember("InlineDataSchema", _SynthesizedJsonInlineDataSchema)
-
-	DatasetStatus_CREATED = DatasetStatus.AddMember("CREATED", smithyprelude.Unit)
-
-	DatasetStatus_INGESTION_IN_PROGRESS = DatasetStatus.AddMember("INGESTION_IN_PROGRESS", smithyprelude.Unit)
-
-	DatasetStatus_ACTIVE = DatasetStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	DatasetStatus_IMPORT_IN_PROGRESS = DatasetStatus.AddMember("IMPORT_IN_PROGRESS", smithyprelude.Unit)
-
-	DatasetSummary_DatasetName = DatasetSummary.AddMember("DatasetName", _DatasetName)
-
-	DatasetSummary_DatasetArn = DatasetSummary.AddMember("DatasetArn", _DatasetArn)
-
-	DatasetSummary_Status = DatasetSummary.AddMember("Status", DatasetStatus)
-
-	DatasetSummary_CreatedAt = DatasetSummary.AddMember("CreatedAt", _Timestamp)
-
-	_DatasetSummaries_member = _DatasetSummaries.AddMember("member", DatasetSummary)
-
-	DataUploadFrequency_PT5M = DataUploadFrequency.AddMember("PT5M", smithyprelude.Unit)
-
-	DataUploadFrequency_PT10M = DataUploadFrequency.AddMember("PT10M", smithyprelude.Unit)
-
-	DataUploadFrequency_PT15M = DataUploadFrequency.AddMember("PT15M", smithyprelude.Unit)
-
-	DataUploadFrequency_PT30M = DataUploadFrequency.AddMember("PT30M", smithyprelude.Unit)
-
-	DataUploadFrequency_PT1H = DataUploadFrequency.AddMember("PT1H", smithyprelude.Unit)
-
-	_FaultCodes_member = _FaultCodes.AddMember("member", _FaultCode)
-
-	InferenceDataImportStrategy_NO_IMPORT = InferenceDataImportStrategy.AddMember("NO_IMPORT", smithyprelude.Unit)
-
-	InferenceDataImportStrategy_ADD_WHEN_EMPTY = InferenceDataImportStrategy.AddMember("ADD_WHEN_EMPTY", smithyprelude.Unit)
-
-	InferenceDataImportStrategy_OVERWRITE = InferenceDataImportStrategy.AddMember("OVERWRITE", smithyprelude.Unit)
-
-	InferenceEventSummary_InferenceSchedulerArn = InferenceEventSummary.AddMember("InferenceSchedulerArn", _InferenceSchedulerArn)
-
-	InferenceEventSummary_InferenceSchedulerName = InferenceEventSummary.AddMember("InferenceSchedulerName", _InferenceSchedulerName)
-
-	InferenceEventSummary_EventStartTime = InferenceEventSummary.AddMember("EventStartTime", _Timestamp)
-
-	InferenceEventSummary_EventEndTime = InferenceEventSummary.AddMember("EventEndTime", _Timestamp)
-
-	InferenceEventSummary_Diagnostics = InferenceEventSummary.AddMember("Diagnostics", _ModelMetrics)
-
-	InferenceEventSummary_EventDurationInSeconds = InferenceEventSummary.AddMember("EventDurationInSeconds", _EventDurationInSeconds)
-
-	_InferenceEventSummaries_member = _InferenceEventSummaries.AddMember("member", InferenceEventSummary)
-
-	InferenceExecutionStatus_IN_PROGRESS = InferenceExecutionStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	InferenceExecutionStatus_SUCCESS = InferenceExecutionStatus.AddMember("SUCCESS", smithyprelude.Unit)
-
-	InferenceExecutionStatus_FAILED = InferenceExecutionStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	InferenceS3InputConfiguration_Bucket = InferenceS3InputConfiguration.AddMember("Bucket", _S3Bucket)
-
-	InferenceS3InputConfiguration_Prefix = InferenceS3InputConfiguration.AddMember("Prefix", _S3Prefix)
-
-	InferenceInputNameConfiguration_TimestampFormat = InferenceInputNameConfiguration.AddMember("TimestampFormat", _FileNameTimestampFormat)
-
-	InferenceInputNameConfiguration_ComponentTimestampDelimiter = InferenceInputNameConfiguration.AddMember("ComponentTimestampDelimiter", _ComponentTimestampDelimiter)
-
-	InferenceInputConfiguration_S3InputConfiguration = InferenceInputConfiguration.AddMember("S3InputConfiguration", InferenceS3InputConfiguration)
-
-	InferenceInputConfiguration_InputTimeZoneOffset = InferenceInputConfiguration.AddMember("InputTimeZoneOffset", _TimeZoneOffset)
-
-	InferenceInputConfiguration_InferenceInputNameConfiguration = InferenceInputConfiguration.AddMember("InferenceInputNameConfiguration", InferenceInputNameConfiguration)
-
-	InferenceS3OutputConfiguration_Bucket = InferenceS3OutputConfiguration.AddMember("Bucket", _S3Bucket)
-
-	InferenceS3OutputConfiguration_Prefix = InferenceS3OutputConfiguration.AddMember("Prefix", _S3Prefix)
-
-	InferenceOutputConfiguration_S3OutputConfiguration = InferenceOutputConfiguration.AddMember("S3OutputConfiguration", InferenceS3OutputConfiguration)
-
-	InferenceOutputConfiguration_KmsKeyId = InferenceOutputConfiguration.AddMember("KmsKeyId", _NameOrArn)
-
-	S3Object_Bucket = S3Object.AddMember("Bucket", _S3Bucket)
-
-	S3Object_Key = S3Object.AddMember("Key", _S3Key)
-
-	InferenceExecutionSummary_ModelName = InferenceExecutionSummary.AddMember("ModelName", _ModelName)
-
-	InferenceExecutionSummary_ModelArn = InferenceExecutionSummary.AddMember("ModelArn", _ModelArn)
-
-	InferenceExecutionSummary_InferenceSchedulerName = InferenceExecutionSummary.AddMember("InferenceSchedulerName", _InferenceSchedulerName)
-
-	InferenceExecutionSummary_InferenceSchedulerArn = InferenceExecutionSummary.AddMember("InferenceSchedulerArn", _InferenceSchedulerArn)
-
-	InferenceExecutionSummary_ScheduledStartTime = InferenceExecutionSummary.AddMember("ScheduledStartTime", _Timestamp)
-
-	InferenceExecutionSummary_DataStartTime = InferenceExecutionSummary.AddMember("DataStartTime", _Timestamp)
-
-	InferenceExecutionSummary_DataEndTime = InferenceExecutionSummary.AddMember("DataEndTime", _Timestamp)
-
-	InferenceExecutionSummary_DataInputConfiguration = InferenceExecutionSummary.AddMember("DataInputConfiguration", InferenceInputConfiguration)
-
-	InferenceExecutionSummary_DataOutputConfiguration = InferenceExecutionSummary.AddMember("DataOutputConfiguration", InferenceOutputConfiguration)
-
-	InferenceExecutionSummary_CustomerResultObject = InferenceExecutionSummary.AddMember("CustomerResultObject", S3Object)
-
-	InferenceExecutionSummary_Status = InferenceExecutionSummary.AddMember("Status", InferenceExecutionStatus)
-
-	InferenceExecutionSummary_FailedReason = InferenceExecutionSummary.AddMember("FailedReason", _BoundedLengthString)
-
-	InferenceExecutionSummary_ModelVersion = InferenceExecutionSummary.AddMember("ModelVersion", _ModelVersion)
-
-	InferenceExecutionSummary_ModelVersionArn = InferenceExecutionSummary.AddMember("ModelVersionArn", _ModelVersionArn)
-
-	_InferenceExecutionSummaries_member = _InferenceExecutionSummaries.AddMember("member", InferenceExecutionSummary)
-
-	InferenceSchedulerStatus_PENDING = InferenceSchedulerStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	InferenceSchedulerStatus_RUNNING = InferenceSchedulerStatus.AddMember("RUNNING", smithyprelude.Unit)
-
-	InferenceSchedulerStatus_STOPPING = InferenceSchedulerStatus.AddMember("STOPPING", smithyprelude.Unit)
-
-	InferenceSchedulerStatus_STOPPED = InferenceSchedulerStatus.AddMember("STOPPED", smithyprelude.Unit)
-
-	LatestInferenceResult_ANOMALOUS = LatestInferenceResult.AddMember("ANOMALOUS", smithyprelude.Unit)
-
-	LatestInferenceResult_NORMAL = LatestInferenceResult.AddMember("NORMAL", smithyprelude.Unit)
-
-	InferenceSchedulerSummary_ModelName = InferenceSchedulerSummary.AddMember("ModelName", _ModelName)
-
-	InferenceSchedulerSummary_ModelArn = InferenceSchedulerSummary.AddMember("ModelArn", _ModelArn)
-
-	InferenceSchedulerSummary_InferenceSchedulerName = InferenceSchedulerSummary.AddMember("InferenceSchedulerName", _InferenceSchedulerName)
-
-	InferenceSchedulerSummary_InferenceSchedulerArn = InferenceSchedulerSummary.AddMember("InferenceSchedulerArn", _InferenceSchedulerArn)
-
-	InferenceSchedulerSummary_Status = InferenceSchedulerSummary.AddMember("Status", InferenceSchedulerStatus)
-
-	InferenceSchedulerSummary_DataDelayOffsetInMinutes = InferenceSchedulerSummary.AddMember("DataDelayOffsetInMinutes", _DataDelayOffsetInMinutes)
-
-	InferenceSchedulerSummary_DataUploadFrequency = InferenceSchedulerSummary.AddMember("DataUploadFrequency", DataUploadFrequency)
-
-	InferenceSchedulerSummary_LatestInferenceResult = InferenceSchedulerSummary.AddMember("LatestInferenceResult", LatestInferenceResult)
-
-	_InferenceSchedulerSummaries_member = _InferenceSchedulerSummaries.AddMember("member", InferenceSchedulerSummary)
-
-	_ListOfDiscardedFiles_member = _ListOfDiscardedFiles.AddMember("member", S3Object)
-
-	IngestedFilesSummary_TotalNumberOfFiles = IngestedFilesSummary.AddMember("TotalNumberOfFiles", _Integer)
-
-	IngestedFilesSummary_IngestedNumberOfFiles = IngestedFilesSummary.AddMember("IngestedNumberOfFiles", _Integer)
-
-	IngestedFilesSummary_DiscardedFiles = IngestedFilesSummary.AddMember("DiscardedFiles", _ListOfDiscardedFiles)
-
-	InternalServerException_Message = InternalServerException.AddMember("Message", _BoundedLengthString)
-
-	LabelGroupSummary_LabelGroupName = LabelGroupSummary.AddMember("LabelGroupName", _LabelGroupName)
-
-	LabelGroupSummary_LabelGroupArn = LabelGroupSummary.AddMember("LabelGroupArn", _LabelGroupArn)
-
-	LabelGroupSummary_CreatedAt = LabelGroupSummary.AddMember("CreatedAt", _Timestamp)
-
-	LabelGroupSummary_UpdatedAt = LabelGroupSummary.AddMember("UpdatedAt", _Timestamp)
-
-	_LabelGroupSummaries_member = _LabelGroupSummaries.AddMember("member", LabelGroupSummary)
-
-	LabelRating_ANOMALY = LabelRating.AddMember("ANOMALY", smithyprelude.Unit)
-
-	LabelRating_NO_ANOMALY = LabelRating.AddMember("NO_ANOMALY", smithyprelude.Unit)
-
-	LabelRating_NEUTRAL = LabelRating.AddMember("NEUTRAL", smithyprelude.Unit)
-
-	LabelsS3InputConfiguration_Bucket = LabelsS3InputConfiguration.AddMember("Bucket", _S3Bucket)
-
-	LabelsS3InputConfiguration_Prefix = LabelsS3InputConfiguration.AddMember("Prefix", _S3Prefix)
-
-	LabelsInputConfiguration_S3InputConfiguration = LabelsInputConfiguration.AddMember("S3InputConfiguration", LabelsS3InputConfiguration)
-
-	LabelsInputConfiguration_LabelGroupName = LabelsInputConfiguration.AddMember("LabelGroupName", _LabelGroupName)
-
-	LabelSummary_LabelGroupName = LabelSummary.AddMember("LabelGroupName", _LabelGroupName)
-
-	LabelSummary_LabelId = LabelSummary.AddMember("LabelId", _LabelId)
-
-	LabelSummary_LabelGroupArn = LabelSummary.AddMember("LabelGroupArn", _LabelGroupArn)
-
-	LabelSummary_StartTime = LabelSummary.AddMember("StartTime", _Timestamp)
-
-	LabelSummary_EndTime = LabelSummary.AddMember("EndTime", _Timestamp)
-
-	LabelSummary_Rating = LabelSummary.AddMember("Rating", LabelRating)
-
-	LabelSummary_FaultCode = LabelSummary.AddMember("FaultCode", _FaultCode)
-
-	LabelSummary_Equipment = LabelSummary.AddMember("Equipment", _Equipment)
-
-	LabelSummary_CreatedAt = LabelSummary.AddMember("CreatedAt", _Timestamp)
-
-	_LabelSummaries_member = _LabelSummaries.AddMember("member", LabelSummary)
-
-	LargeTimestampGaps_Status = LargeTimestampGaps.AddMember("Status", StatisticalIssueStatus)
-
-	LargeTimestampGaps_NumberOfLargeTimestampGaps = LargeTimestampGaps.AddMember("NumberOfLargeTimestampGaps", _Integer)
-
-	LargeTimestampGaps_MaxTimestampGapInDays = LargeTimestampGaps.AddMember("MaxTimestampGapInDays", _Integer)
-
-	ModelDiagnosticsS3OutputConfiguration_Bucket = ModelDiagnosticsS3OutputConfiguration.AddMember("Bucket", _S3Bucket)
-
-	ModelDiagnosticsS3OutputConfiguration_Prefix = ModelDiagnosticsS3OutputConfiguration.AddMember("Prefix", _S3Prefix)
-
-	ModelDiagnosticsOutputConfiguration_S3OutputConfiguration = ModelDiagnosticsOutputConfiguration.AddMember("S3OutputConfiguration", ModelDiagnosticsS3OutputConfiguration)
-
-	ModelDiagnosticsOutputConfiguration_KmsKeyId = ModelDiagnosticsOutputConfiguration.AddMember("KmsKeyId", _NameOrArn)
-
-	ModelPromoteMode_MANAGED = ModelPromoteMode.AddMember("MANAGED", smithyprelude.Unit)
-
-	ModelPromoteMode_MANUAL = ModelPromoteMode.AddMember("MANUAL", smithyprelude.Unit)
-
-	ModelQuality_QUALITY_THRESHOLD_MET = ModelQuality.AddMember("QUALITY_THRESHOLD_MET", smithyprelude.Unit)
-
-	ModelQuality_CANNOT_DETERMINE_QUALITY = ModelQuality.AddMember("CANNOT_DETERMINE_QUALITY", smithyprelude.Unit)
-
-	ModelQuality_POOR_QUALITY_DETECTED = ModelQuality.AddMember("POOR_QUALITY_DETECTED", smithyprelude.Unit)
-
-	ModelStatus_IN_PROGRESS = ModelStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	ModelStatus_SUCCESS = ModelStatus.AddMember("SUCCESS", smithyprelude.Unit)
-
-	ModelStatus_FAILED = ModelStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	ModelStatus_IMPORT_IN_PROGRESS = ModelStatus.AddMember("IMPORT_IN_PROGRESS", smithyprelude.Unit)
-
-	ModelVersionStatus_IN_PROGRESS = ModelVersionStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	ModelVersionStatus_SUCCESS = ModelVersionStatus.AddMember("SUCCESS", smithyprelude.Unit)
-
-	ModelVersionStatus_FAILED = ModelVersionStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	ModelVersionStatus_IMPORT_IN_PROGRESS = ModelVersionStatus.AddMember("IMPORT_IN_PROGRESS", smithyprelude.Unit)
-
-	ModelVersionStatus_CANCELED = ModelVersionStatus.AddMember("CANCELED", smithyprelude.Unit)
-
-	RetrainingSchedulerStatus_PENDING = RetrainingSchedulerStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	RetrainingSchedulerStatus_RUNNING = RetrainingSchedulerStatus.AddMember("RUNNING", smithyprelude.Unit)
-
-	RetrainingSchedulerStatus_STOPPING = RetrainingSchedulerStatus.AddMember("STOPPING", smithyprelude.Unit)
-
-	RetrainingSchedulerStatus_STOPPED = RetrainingSchedulerStatus.AddMember("STOPPED", smithyprelude.Unit)
-
-	ModelSummary_ModelName = ModelSummary.AddMember("ModelName", _ModelName)
-
-	ModelSummary_ModelArn = ModelSummary.AddMember("ModelArn", _ModelArn)
-
-	ModelSummary_DatasetName = ModelSummary.AddMember("DatasetName", _DatasetName)
-
-	ModelSummary_DatasetArn = ModelSummary.AddMember("DatasetArn", _DatasetArn)
-
-	ModelSummary_Status = ModelSummary.AddMember("Status", ModelStatus)
-
-	ModelSummary_CreatedAt = ModelSummary.AddMember("CreatedAt", _Timestamp)
-
-	ModelSummary_ActiveModelVersion = ModelSummary.AddMember("ActiveModelVersion", _ModelVersion)
-
-	ModelSummary_ActiveModelVersionArn = ModelSummary.AddMember("ActiveModelVersionArn", _ModelVersionArn)
-
-	ModelSummary_LatestScheduledRetrainingStatus = ModelSummary.AddMember("LatestScheduledRetrainingStatus", ModelVersionStatus)
-
-	ModelSummary_LatestScheduledRetrainingModelVersion = ModelSummary.AddMember("LatestScheduledRetrainingModelVersion", _ModelVersion)
-
-	ModelSummary_LatestScheduledRetrainingStartTime = ModelSummary.AddMember("LatestScheduledRetrainingStartTime", _Timestamp)
-
-	ModelSummary_NextScheduledRetrainingStartDate = ModelSummary.AddMember("NextScheduledRetrainingStartDate", _Timestamp)
-
-	ModelSummary_RetrainingSchedulerStatus = ModelSummary.AddMember("RetrainingSchedulerStatus", RetrainingSchedulerStatus)
-
-	ModelSummary_ModelDiagnosticsOutputConfiguration = ModelSummary.AddMember("ModelDiagnosticsOutputConfiguration", ModelDiagnosticsOutputConfiguration)
-
-	ModelSummary_ModelQuality = ModelSummary.AddMember("ModelQuality", ModelQuality)
-
-	_ModelSummaries_member = _ModelSummaries.AddMember("member", ModelSummary)
-
-	ModelVersionSourceType_TRAINING = ModelVersionSourceType.AddMember("TRAINING", smithyprelude.Unit)
-
-	ModelVersionSourceType_RETRAINING = ModelVersionSourceType.AddMember("RETRAINING", smithyprelude.Unit)
-
-	ModelVersionSourceType_IMPORT = ModelVersionSourceType.AddMember("IMPORT", smithyprelude.Unit)
-
-	ModelVersionSummary_ModelName = ModelVersionSummary.AddMember("ModelName", _ModelName)
-
-	ModelVersionSummary_ModelArn = ModelVersionSummary.AddMember("ModelArn", _ModelArn)
-
-	ModelVersionSummary_ModelVersion = ModelVersionSummary.AddMember("ModelVersion", _ModelVersion)
-
-	ModelVersionSummary_ModelVersionArn = ModelVersionSummary.AddMember("ModelVersionArn", _ModelVersionArn)
-
-	ModelVersionSummary_CreatedAt = ModelVersionSummary.AddMember("CreatedAt", _Timestamp)
-
-	ModelVersionSummary_Status = ModelVersionSummary.AddMember("Status", ModelVersionStatus)
-
-	ModelVersionSummary_SourceType = ModelVersionSummary.AddMember("SourceType", ModelVersionSourceType)
-
-	ModelVersionSummary_ModelQuality = ModelVersionSummary.AddMember("ModelQuality", ModelQuality)
-
-	_ModelVersionSummaries_member = _ModelVersionSummaries.AddMember("member", ModelVersionSummary)
-
-	Monotonicity_DECREASING = Monotonicity.AddMember("DECREASING", smithyprelude.Unit)
-
-	Monotonicity_INCREASING = Monotonicity.AddMember("INCREASING", smithyprelude.Unit)
-
-	Monotonicity_STATIC = Monotonicity.AddMember("STATIC", smithyprelude.Unit)
-
-	MonotonicValues_Status = MonotonicValues.AddMember("Status", StatisticalIssueStatus)
-
-	MonotonicValues_Monotonicity = MonotonicValues.AddMember("Monotonicity", Monotonicity)
-
-	MultipleOperatingModes_Status = MultipleOperatingModes.AddMember("Status", StatisticalIssueStatus)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _BoundedLengthString)
-
-	RetrainingSchedulerSummary_ModelName = RetrainingSchedulerSummary.AddMember("ModelName", _ModelName)
-
-	RetrainingSchedulerSummary_ModelArn = RetrainingSchedulerSummary.AddMember("ModelArn", _ModelArn)
-
-	RetrainingSchedulerSummary_Status = RetrainingSchedulerSummary.AddMember("Status", RetrainingSchedulerStatus)
-
-	RetrainingSchedulerSummary_RetrainingStartDate = RetrainingSchedulerSummary.AddMember("RetrainingStartDate", _Timestamp)
-
-	RetrainingSchedulerSummary_RetrainingFrequency = RetrainingSchedulerSummary.AddMember("RetrainingFrequency", _RetrainingFrequency)
-
-	RetrainingSchedulerSummary_LookbackWindow = RetrainingSchedulerSummary.AddMember("LookbackWindow", _LookbackWindow)
-
-	_RetrainingSchedulerSummaries_member = _RetrainingSchedulerSummaries.AddMember("member", RetrainingSchedulerSummary)
-
-	SensorStatisticsSummary_ComponentName = SensorStatisticsSummary.AddMember("ComponentName", _ComponentName)
-
-	SensorStatisticsSummary_SensorName = SensorStatisticsSummary.AddMember("SensorName", _SensorName)
-
-	SensorStatisticsSummary_DataExists = SensorStatisticsSummary.AddMember("DataExists", _Boolean)
-
-	SensorStatisticsSummary_MissingValues = SensorStatisticsSummary.AddMember("MissingValues", CountPercent)
-
-	SensorStatisticsSummary_InvalidValues = SensorStatisticsSummary.AddMember("InvalidValues", CountPercent)
-
-	SensorStatisticsSummary_InvalidDateEntries = SensorStatisticsSummary.AddMember("InvalidDateEntries", CountPercent)
-
-	SensorStatisticsSummary_DuplicateTimestamps = SensorStatisticsSummary.AddMember("DuplicateTimestamps", CountPercent)
-
-	SensorStatisticsSummary_CategoricalValues = SensorStatisticsSummary.AddMember("CategoricalValues", CategoricalValues)
-
-	SensorStatisticsSummary_MultipleOperatingModes = SensorStatisticsSummary.AddMember("MultipleOperatingModes", MultipleOperatingModes)
-
-	SensorStatisticsSummary_LargeTimestampGaps = SensorStatisticsSummary.AddMember("LargeTimestampGaps", LargeTimestampGaps)
-
-	SensorStatisticsSummary_MonotonicValues = SensorStatisticsSummary.AddMember("MonotonicValues", MonotonicValues)
-
-	SensorStatisticsSummary_DataStartTime = SensorStatisticsSummary.AddMember("DataStartTime", _Timestamp)
-
-	SensorStatisticsSummary_DataEndTime = SensorStatisticsSummary.AddMember("DataEndTime", _Timestamp)
-
-	_SensorStatisticsSummaries_member = _SensorStatisticsSummaries.AddMember("member", SensorStatisticsSummary)
-
-	ServiceQuotaExceededException_Message = ServiceQuotaExceededException.AddMember("Message", _BoundedLengthString)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", _BoundedLengthString)
-
-	ValidationException_Message = ValidationException.AddMember("Message", _BoundedLengthString)
-
-	CreateDatasetRequest_DatasetName = CreateDatasetRequest.AddMember("DatasetName", _DatasetName)
-
-	CreateDatasetRequest_DatasetSchema = CreateDatasetRequest.AddMember("DatasetSchema", DatasetSchema)
-
-	CreateDatasetRequest_ServerSideKmsKeyId = CreateDatasetRequest.AddMember("ServerSideKmsKeyId", _NameOrArn)
-
-	CreateDatasetRequest_ClientToken = CreateDatasetRequest.AddMember("ClientToken", _IdempotenceToken)
-
-	CreateDatasetRequest_Tags = CreateDatasetRequest.AddMember("Tags", _TagList)
-
-	CreateDatasetResponse_DatasetName = CreateDatasetResponse.AddMember("DatasetName", _DatasetName)
-
-	CreateDatasetResponse_DatasetArn = CreateDatasetResponse.AddMember("DatasetArn", _DatasetArn)
-
-	CreateDatasetResponse_Status = CreateDatasetResponse.AddMember("Status", DatasetStatus)
-
-	CreateInferenceSchedulerRequest_ModelName = CreateInferenceSchedulerRequest.AddMember("ModelName", _ModelName)
-
-	CreateInferenceSchedulerRequest_InferenceSchedulerName = CreateInferenceSchedulerRequest.AddMember("InferenceSchedulerName", _InferenceSchedulerName)
-
-	CreateInferenceSchedulerRequest_DataDelayOffsetInMinutes = CreateInferenceSchedulerRequest.AddMember("DataDelayOffsetInMinutes", _DataDelayOffsetInMinutes)
-
-	CreateInferenceSchedulerRequest_DataUploadFrequency = CreateInferenceSchedulerRequest.AddMember("DataUploadFrequency", DataUploadFrequency)
-
-	CreateInferenceSchedulerRequest_DataInputConfiguration = CreateInferenceSchedulerRequest.AddMember("DataInputConfiguration", InferenceInputConfiguration)
-
-	CreateInferenceSchedulerRequest_DataOutputConfiguration = CreateInferenceSchedulerRequest.AddMember("DataOutputConfiguration", InferenceOutputConfiguration)
-
-	CreateInferenceSchedulerRequest_RoleArn = CreateInferenceSchedulerRequest.AddMember("RoleArn", _IamRoleArn)
-
-	CreateInferenceSchedulerRequest_ServerSideKmsKeyId = CreateInferenceSchedulerRequest.AddMember("ServerSideKmsKeyId", _NameOrArn)
-
-	CreateInferenceSchedulerRequest_ClientToken = CreateInferenceSchedulerRequest.AddMember("ClientToken", _IdempotenceToken)
-
-	CreateInferenceSchedulerRequest_Tags = CreateInferenceSchedulerRequest.AddMember("Tags", _TagList)
-
-	CreateInferenceSchedulerResponse_InferenceSchedulerArn = CreateInferenceSchedulerResponse.AddMember("InferenceSchedulerArn", _InferenceSchedulerArn)
-
-	CreateInferenceSchedulerResponse_InferenceSchedulerName = CreateInferenceSchedulerResponse.AddMember("InferenceSchedulerName", _InferenceSchedulerName)
-
-	CreateInferenceSchedulerResponse_Status = CreateInferenceSchedulerResponse.AddMember("Status", InferenceSchedulerStatus)
-
-	CreateInferenceSchedulerResponse_ModelQuality = CreateInferenceSchedulerResponse.AddMember("ModelQuality", ModelQuality)
-
-	CreateLabelGroupRequest_LabelGroupName = CreateLabelGroupRequest.AddMember("LabelGroupName", _LabelGroupName)
-
-	CreateLabelGroupRequest_FaultCodes = CreateLabelGroupRequest.AddMember("FaultCodes", _FaultCodes)
-
-	CreateLabelGroupRequest_ClientToken = CreateLabelGroupRequest.AddMember("ClientToken", _IdempotenceToken)
-
-	CreateLabelGroupRequest_Tags = CreateLabelGroupRequest.AddMember("Tags", _TagList)
-
-	CreateLabelGroupResponse_LabelGroupName = CreateLabelGroupResponse.AddMember("LabelGroupName", _LabelGroupName)
-
-	CreateLabelGroupResponse_LabelGroupArn = CreateLabelGroupResponse.AddMember("LabelGroupArn", _LabelGroupArn)
-
-	CreateLabelRequest_LabelGroupName = CreateLabelRequest.AddMember("LabelGroupName", _LabelGroupName)
-
-	CreateLabelRequest_StartTime = CreateLabelRequest.AddMember("StartTime", _Timestamp)
-
-	CreateLabelRequest_EndTime = CreateLabelRequest.AddMember("EndTime", _Timestamp)
-
-	CreateLabelRequest_Rating = CreateLabelRequest.AddMember("Rating", LabelRating)
-
-	CreateLabelRequest_FaultCode = CreateLabelRequest.AddMember("FaultCode", _FaultCode)
-
-	CreateLabelRequest_Notes = CreateLabelRequest.AddMember("Notes", _Comments)
-
-	CreateLabelRequest_Equipment = CreateLabelRequest.AddMember("Equipment", _Equipment)
-
-	CreateLabelRequest_ClientToken = CreateLabelRequest.AddMember("ClientToken", _IdempotenceToken)
-
-	CreateLabelResponse_LabelId = CreateLabelResponse.AddMember("LabelId", _LabelId)
-
-	CreateModelRequest_ModelName = CreateModelRequest.AddMember("ModelName", _ModelName)
-
-	CreateModelRequest_DatasetName = CreateModelRequest.AddMember("DatasetName", _DatasetIdentifier)
-
-	CreateModelRequest_DatasetSchema = CreateModelRequest.AddMember("DatasetSchema", DatasetSchema)
-
-	CreateModelRequest_LabelsInputConfiguration = CreateModelRequest.AddMember("LabelsInputConfiguration", LabelsInputConfiguration)
-
-	CreateModelRequest_ClientToken = CreateModelRequest.AddMember("ClientToken", _IdempotenceToken)
-
-	CreateModelRequest_TrainingDataStartTime = CreateModelRequest.AddMember("TrainingDataStartTime", _Timestamp)
-
-	CreateModelRequest_TrainingDataEndTime = CreateModelRequest.AddMember("TrainingDataEndTime", _Timestamp)
-
-	CreateModelRequest_EvaluationDataStartTime = CreateModelRequest.AddMember("EvaluationDataStartTime", _Timestamp)
-
-	CreateModelRequest_EvaluationDataEndTime = CreateModelRequest.AddMember("EvaluationDataEndTime", _Timestamp)
-
-	CreateModelRequest_RoleArn = CreateModelRequest.AddMember("RoleArn", _IamRoleArn)
-
-	CreateModelRequest_DataPreProcessingConfiguration = CreateModelRequest.AddMember("DataPreProcessingConfiguration", DataPreProcessingConfiguration)
-
-	CreateModelRequest_ServerSideKmsKeyId = CreateModelRequest.AddMember("ServerSideKmsKeyId", _NameOrArn)
-
-	CreateModelRequest_Tags = CreateModelRequest.AddMember("Tags", _TagList)
-
-	CreateModelRequest_OffCondition = CreateModelRequest.AddMember("OffCondition", _OffCondition)
-
-	CreateModelRequest_ModelDiagnosticsOutputConfiguration = CreateModelRequest.AddMember("ModelDiagnosticsOutputConfiguration", ModelDiagnosticsOutputConfiguration)
-
-	CreateModelResponse_ModelArn = CreateModelResponse.AddMember("ModelArn", _ModelArn)
-
-	CreateModelResponse_Status = CreateModelResponse.AddMember("Status", ModelStatus)
-
-	CreateRetrainingSchedulerRequest_ModelName = CreateRetrainingSchedulerRequest.AddMember("ModelName", _ModelName)
-
-	CreateRetrainingSchedulerRequest_RetrainingStartDate = CreateRetrainingSchedulerRequest.AddMember("RetrainingStartDate", _Timestamp)
-
-	CreateRetrainingSchedulerRequest_RetrainingFrequency = CreateRetrainingSchedulerRequest.AddMember("RetrainingFrequency", _RetrainingFrequency)
-
-	CreateRetrainingSchedulerRequest_LookbackWindow = CreateRetrainingSchedulerRequest.AddMember("LookbackWindow", _LookbackWindow)
-
-	CreateRetrainingSchedulerRequest_PromoteMode = CreateRetrainingSchedulerRequest.AddMember("PromoteMode", ModelPromoteMode)
-
-	CreateRetrainingSchedulerRequest_ClientToken = CreateRetrainingSchedulerRequest.AddMember("ClientToken", _IdempotenceToken)
-
-	CreateRetrainingSchedulerResponse_ModelName = CreateRetrainingSchedulerResponse.AddMember("ModelName", _ModelName)
-
-	CreateRetrainingSchedulerResponse_ModelArn = CreateRetrainingSchedulerResponse.AddMember("ModelArn", _ModelArn)
-
-	CreateRetrainingSchedulerResponse_Status = CreateRetrainingSchedulerResponse.AddMember("Status", RetrainingSchedulerStatus)
-
-	DeleteDatasetRequest_DatasetName = DeleteDatasetRequest.AddMember("DatasetName", _DatasetIdentifier)
-
-	DeleteInferenceSchedulerRequest_InferenceSchedulerName = DeleteInferenceSchedulerRequest.AddMember("InferenceSchedulerName", _InferenceSchedulerIdentifier)
-
-	DeleteLabelGroupRequest_LabelGroupName = DeleteLabelGroupRequest.AddMember("LabelGroupName", _LabelGroupName)
-
-	DeleteLabelRequest_LabelGroupName = DeleteLabelRequest.AddMember("LabelGroupName", _LabelGroupName)
-
-	DeleteLabelRequest_LabelId = DeleteLabelRequest.AddMember("LabelId", _LabelId)
-
-	DeleteModelRequest_ModelName = DeleteModelRequest.AddMember("ModelName", _ModelName)
-
-	DeleteResourcePolicyRequest_ResourceArn = DeleteResourcePolicyRequest.AddMember("ResourceArn", _ResourceArn)
-
-	DeleteRetrainingSchedulerRequest_ModelName = DeleteRetrainingSchedulerRequest.AddMember("ModelName", _ModelName)
-
-	DescribeDataIngestionJobRequest_JobId = DescribeDataIngestionJobRequest.AddMember("JobId", _IngestionJobId)
-
-	DescribeDataIngestionJobResponse_JobId = DescribeDataIngestionJobResponse.AddMember("JobId", _IngestionJobId)
-
-	DescribeDataIngestionJobResponse_DatasetArn = DescribeDataIngestionJobResponse.AddMember("DatasetArn", _DatasetArn)
-
-	DescribeDataIngestionJobResponse_IngestionInputConfiguration = DescribeDataIngestionJobResponse.AddMember("IngestionInputConfiguration", IngestionInputConfiguration)
-
-	DescribeDataIngestionJobResponse_RoleArn = DescribeDataIngestionJobResponse.AddMember("RoleArn", _IamRoleArn)
-
-	DescribeDataIngestionJobResponse_CreatedAt = DescribeDataIngestionJobResponse.AddMember("CreatedAt", _Timestamp)
-
-	DescribeDataIngestionJobResponse_Status = DescribeDataIngestionJobResponse.AddMember("Status", IngestionJobStatus)
-
-	DescribeDataIngestionJobResponse_FailedReason = DescribeDataIngestionJobResponse.AddMember("FailedReason", _BoundedLengthString)
-
-	DescribeDataIngestionJobResponse_DataQualitySummary = DescribeDataIngestionJobResponse.AddMember("DataQualitySummary", DataQualitySummary)
-
-	DescribeDataIngestionJobResponse_IngestedFilesSummary = DescribeDataIngestionJobResponse.AddMember("IngestedFilesSummary", IngestedFilesSummary)
-
-	DescribeDataIngestionJobResponse_StatusDetail = DescribeDataIngestionJobResponse.AddMember("StatusDetail", _BoundedLengthString)
-
-	DescribeDataIngestionJobResponse_IngestedDataSize = DescribeDataIngestionJobResponse.AddMember("IngestedDataSize", _DataSizeInBytes)
-
-	DescribeDataIngestionJobResponse_DataStartTime = DescribeDataIngestionJobResponse.AddMember("DataStartTime", _Timestamp)
-
-	DescribeDataIngestionJobResponse_DataEndTime = DescribeDataIngestionJobResponse.AddMember("DataEndTime", _Timestamp)
-
-	DescribeDataIngestionJobResponse_SourceDatasetArn = DescribeDataIngestionJobResponse.AddMember("SourceDatasetArn", _DatasetArn)
-
-	DescribeDatasetRequest_DatasetName = DescribeDatasetRequest.AddMember("DatasetName", _DatasetIdentifier)
-
-	DescribeDatasetResponse_DatasetName = DescribeDatasetResponse.AddMember("DatasetName", _DatasetName)
-
-	DescribeDatasetResponse_DatasetArn = DescribeDatasetResponse.AddMember("DatasetArn", _DatasetArn)
-
-	DescribeDatasetResponse_CreatedAt = DescribeDatasetResponse.AddMember("CreatedAt", _Timestamp)
-
-	DescribeDatasetResponse_LastUpdatedAt = DescribeDatasetResponse.AddMember("LastUpdatedAt", _Timestamp)
-
-	DescribeDatasetResponse_Status = DescribeDatasetResponse.AddMember("Status", DatasetStatus)
-
-	DescribeDatasetResponse_Schema = DescribeDatasetResponse.AddMember("Schema", _SynthesizedJsonInlineDataSchema)
-
-	DescribeDatasetResponse_ServerSideKmsKeyId = DescribeDatasetResponse.AddMember("ServerSideKmsKeyId", _KmsKeyArn)
-
-	DescribeDatasetResponse_IngestionInputConfiguration = DescribeDatasetResponse.AddMember("IngestionInputConfiguration", IngestionInputConfiguration)
-
-	DescribeDatasetResponse_DataQualitySummary = DescribeDatasetResponse.AddMember("DataQualitySummary", DataQualitySummary)
-
-	DescribeDatasetResponse_IngestedFilesSummary = DescribeDatasetResponse.AddMember("IngestedFilesSummary", IngestedFilesSummary)
-
-	DescribeDatasetResponse_RoleArn = DescribeDatasetResponse.AddMember("RoleArn", _IamRoleArn)
-
-	DescribeDatasetResponse_DataStartTime = DescribeDatasetResponse.AddMember("DataStartTime", _Timestamp)
-
-	DescribeDatasetResponse_DataEndTime = DescribeDatasetResponse.AddMember("DataEndTime", _Timestamp)
-
-	DescribeDatasetResponse_SourceDatasetArn = DescribeDatasetResponse.AddMember("SourceDatasetArn", _DatasetArn)
-
-	DescribeInferenceSchedulerRequest_InferenceSchedulerName = DescribeInferenceSchedulerRequest.AddMember("InferenceSchedulerName", _InferenceSchedulerIdentifier)
-
-	DescribeInferenceSchedulerResponse_ModelArn = DescribeInferenceSchedulerResponse.AddMember("ModelArn", _ModelArn)
-
-	DescribeInferenceSchedulerResponse_ModelName = DescribeInferenceSchedulerResponse.AddMember("ModelName", _ModelName)
-
-	DescribeInferenceSchedulerResponse_InferenceSchedulerName = DescribeInferenceSchedulerResponse.AddMember("InferenceSchedulerName", _InferenceSchedulerName)
-
-	DescribeInferenceSchedulerResponse_InferenceSchedulerArn = DescribeInferenceSchedulerResponse.AddMember("InferenceSchedulerArn", _InferenceSchedulerArn)
-
-	DescribeInferenceSchedulerResponse_Status = DescribeInferenceSchedulerResponse.AddMember("Status", InferenceSchedulerStatus)
-
-	DescribeInferenceSchedulerResponse_DataDelayOffsetInMinutes = DescribeInferenceSchedulerResponse.AddMember("DataDelayOffsetInMinutes", _DataDelayOffsetInMinutes)
-
-	DescribeInferenceSchedulerResponse_DataUploadFrequency = DescribeInferenceSchedulerResponse.AddMember("DataUploadFrequency", DataUploadFrequency)
-
-	DescribeInferenceSchedulerResponse_CreatedAt = DescribeInferenceSchedulerResponse.AddMember("CreatedAt", _Timestamp)
-
-	DescribeInferenceSchedulerResponse_UpdatedAt = DescribeInferenceSchedulerResponse.AddMember("UpdatedAt", _Timestamp)
-
-	DescribeInferenceSchedulerResponse_DataInputConfiguration = DescribeInferenceSchedulerResponse.AddMember("DataInputConfiguration", InferenceInputConfiguration)
-
-	DescribeInferenceSchedulerResponse_DataOutputConfiguration = DescribeInferenceSchedulerResponse.AddMember("DataOutputConfiguration", InferenceOutputConfiguration)
-
-	DescribeInferenceSchedulerResponse_RoleArn = DescribeInferenceSchedulerResponse.AddMember("RoleArn", _IamRoleArn)
-
-	DescribeInferenceSchedulerResponse_ServerSideKmsKeyId = DescribeInferenceSchedulerResponse.AddMember("ServerSideKmsKeyId", _KmsKeyArn)
-
-	DescribeInferenceSchedulerResponse_LatestInferenceResult = DescribeInferenceSchedulerResponse.AddMember("LatestInferenceResult", LatestInferenceResult)
-
-	DescribeLabelGroupRequest_LabelGroupName = DescribeLabelGroupRequest.AddMember("LabelGroupName", _LabelGroupName)
-
-	DescribeLabelGroupResponse_LabelGroupName = DescribeLabelGroupResponse.AddMember("LabelGroupName", _LabelGroupName)
-
-	DescribeLabelGroupResponse_LabelGroupArn = DescribeLabelGroupResponse.AddMember("LabelGroupArn", _LabelGroupArn)
-
-	DescribeLabelGroupResponse_FaultCodes = DescribeLabelGroupResponse.AddMember("FaultCodes", _FaultCodes)
-
-	DescribeLabelGroupResponse_CreatedAt = DescribeLabelGroupResponse.AddMember("CreatedAt", _Timestamp)
-
-	DescribeLabelGroupResponse_UpdatedAt = DescribeLabelGroupResponse.AddMember("UpdatedAt", _Timestamp)
-
-	DescribeLabelRequest_LabelGroupName = DescribeLabelRequest.AddMember("LabelGroupName", _LabelGroupName)
-
-	DescribeLabelRequest_LabelId = DescribeLabelRequest.AddMember("LabelId", _LabelId)
-
-	DescribeLabelResponse_LabelGroupName = DescribeLabelResponse.AddMember("LabelGroupName", _LabelGroupName)
-
-	DescribeLabelResponse_LabelGroupArn = DescribeLabelResponse.AddMember("LabelGroupArn", _LabelGroupArn)
-
-	DescribeLabelResponse_LabelId = DescribeLabelResponse.AddMember("LabelId", _LabelId)
-
-	DescribeLabelResponse_StartTime = DescribeLabelResponse.AddMember("StartTime", _Timestamp)
-
-	DescribeLabelResponse_EndTime = DescribeLabelResponse.AddMember("EndTime", _Timestamp)
-
-	DescribeLabelResponse_Rating = DescribeLabelResponse.AddMember("Rating", LabelRating)
-
-	DescribeLabelResponse_FaultCode = DescribeLabelResponse.AddMember("FaultCode", _FaultCode)
-
-	DescribeLabelResponse_Notes = DescribeLabelResponse.AddMember("Notes", _Comments)
-
-	DescribeLabelResponse_Equipment = DescribeLabelResponse.AddMember("Equipment", _Equipment)
-
-	DescribeLabelResponse_CreatedAt = DescribeLabelResponse.AddMember("CreatedAt", _Timestamp)
-
-	DescribeModelRequest_ModelName = DescribeModelRequest.AddMember("ModelName", _ModelName)
-
-	DescribeModelResponse_ModelName = DescribeModelResponse.AddMember("ModelName", _ModelName)
-
-	DescribeModelResponse_ModelArn = DescribeModelResponse.AddMember("ModelArn", _ModelArn)
-
-	DescribeModelResponse_DatasetName = DescribeModelResponse.AddMember("DatasetName", _DatasetName)
-
-	DescribeModelResponse_DatasetArn = DescribeModelResponse.AddMember("DatasetArn", _DatasetArn)
-
-	DescribeModelResponse_Schema = DescribeModelResponse.AddMember("Schema", _SynthesizedJsonInlineDataSchema)
-
-	DescribeModelResponse_LabelsInputConfiguration = DescribeModelResponse.AddMember("LabelsInputConfiguration", LabelsInputConfiguration)
-
-	DescribeModelResponse_TrainingDataStartTime = DescribeModelResponse.AddMember("TrainingDataStartTime", _Timestamp)
-
-	DescribeModelResponse_TrainingDataEndTime = DescribeModelResponse.AddMember("TrainingDataEndTime", _Timestamp)
-
-	DescribeModelResponse_EvaluationDataStartTime = DescribeModelResponse.AddMember("EvaluationDataStartTime", _Timestamp)
-
-	DescribeModelResponse_EvaluationDataEndTime = DescribeModelResponse.AddMember("EvaluationDataEndTime", _Timestamp)
-
-	DescribeModelResponse_RoleArn = DescribeModelResponse.AddMember("RoleArn", _IamRoleArn)
-
-	DescribeModelResponse_DataPreProcessingConfiguration = DescribeModelResponse.AddMember("DataPreProcessingConfiguration", DataPreProcessingConfiguration)
-
-	DescribeModelResponse_Status = DescribeModelResponse.AddMember("Status", ModelStatus)
-
-	DescribeModelResponse_TrainingExecutionStartTime = DescribeModelResponse.AddMember("TrainingExecutionStartTime", _Timestamp)
-
-	DescribeModelResponse_TrainingExecutionEndTime = DescribeModelResponse.AddMember("TrainingExecutionEndTime", _Timestamp)
-
-	DescribeModelResponse_FailedReason = DescribeModelResponse.AddMember("FailedReason", _BoundedLengthString)
-
-	DescribeModelResponse_ModelMetrics = DescribeModelResponse.AddMember("ModelMetrics", _SynthesizedJsonModelMetrics)
-
-	DescribeModelResponse_LastUpdatedTime = DescribeModelResponse.AddMember("LastUpdatedTime", _Timestamp)
-
-	DescribeModelResponse_CreatedAt = DescribeModelResponse.AddMember("CreatedAt", _Timestamp)
-
-	DescribeModelResponse_ServerSideKmsKeyId = DescribeModelResponse.AddMember("ServerSideKmsKeyId", _KmsKeyArn)
-
-	DescribeModelResponse_OffCondition = DescribeModelResponse.AddMember("OffCondition", _OffCondition)
-
-	DescribeModelResponse_SourceModelVersionArn = DescribeModelResponse.AddMember("SourceModelVersionArn", _ModelVersionArn)
-
-	DescribeModelResponse_ImportJobStartTime = DescribeModelResponse.AddMember("ImportJobStartTime", _Timestamp)
-
-	DescribeModelResponse_ImportJobEndTime = DescribeModelResponse.AddMember("ImportJobEndTime", _Timestamp)
-
-	DescribeModelResponse_ActiveModelVersion = DescribeModelResponse.AddMember("ActiveModelVersion", _ModelVersion)
-
-	DescribeModelResponse_ActiveModelVersionArn = DescribeModelResponse.AddMember("ActiveModelVersionArn", _ModelVersionArn)
-
-	DescribeModelResponse_ModelVersionActivatedAt = DescribeModelResponse.AddMember("ModelVersionActivatedAt", _Timestamp)
-
-	DescribeModelResponse_PreviousActiveModelVersion = DescribeModelResponse.AddMember("PreviousActiveModelVersion", _ModelVersion)
-
-	DescribeModelResponse_PreviousActiveModelVersionArn = DescribeModelResponse.AddMember("PreviousActiveModelVersionArn", _ModelVersionArn)
-
-	DescribeModelResponse_PreviousModelVersionActivatedAt = DescribeModelResponse.AddMember("PreviousModelVersionActivatedAt", _Timestamp)
-
-	DescribeModelResponse_PriorModelMetrics = DescribeModelResponse.AddMember("PriorModelMetrics", _SynthesizedJsonModelMetrics)
-
-	DescribeModelResponse_LatestScheduledRetrainingFailedReason = DescribeModelResponse.AddMember("LatestScheduledRetrainingFailedReason", _BoundedLengthString)
-
-	DescribeModelResponse_LatestScheduledRetrainingStatus = DescribeModelResponse.AddMember("LatestScheduledRetrainingStatus", ModelVersionStatus)
-
-	DescribeModelResponse_LatestScheduledRetrainingModelVersion = DescribeModelResponse.AddMember("LatestScheduledRetrainingModelVersion", _ModelVersion)
-
-	DescribeModelResponse_LatestScheduledRetrainingStartTime = DescribeModelResponse.AddMember("LatestScheduledRetrainingStartTime", _Timestamp)
-
-	DescribeModelResponse_LatestScheduledRetrainingAvailableDataInDays = DescribeModelResponse.AddMember("LatestScheduledRetrainingAvailableDataInDays", _Integer)
-
-	DescribeModelResponse_NextScheduledRetrainingStartDate = DescribeModelResponse.AddMember("NextScheduledRetrainingStartDate", _Timestamp)
-
-	DescribeModelResponse_AccumulatedInferenceDataStartTime = DescribeModelResponse.AddMember("AccumulatedInferenceDataStartTime", _Timestamp)
-
-	DescribeModelResponse_AccumulatedInferenceDataEndTime = DescribeModelResponse.AddMember("AccumulatedInferenceDataEndTime", _Timestamp)
-
-	DescribeModelResponse_RetrainingSchedulerStatus = DescribeModelResponse.AddMember("RetrainingSchedulerStatus", RetrainingSchedulerStatus)
-
-	DescribeModelResponse_ModelDiagnosticsOutputConfiguration = DescribeModelResponse.AddMember("ModelDiagnosticsOutputConfiguration", ModelDiagnosticsOutputConfiguration)
-
-	DescribeModelResponse_ModelQuality = DescribeModelResponse.AddMember("ModelQuality", ModelQuality)
-
-	DescribeModelVersionRequest_ModelName = DescribeModelVersionRequest.AddMember("ModelName", _ModelName)
-
-	DescribeModelVersionRequest_ModelVersion = DescribeModelVersionRequest.AddMember("ModelVersion", _ModelVersion)
-
-	DescribeModelVersionResponse_ModelName = DescribeModelVersionResponse.AddMember("ModelName", _ModelName)
-
-	DescribeModelVersionResponse_ModelArn = DescribeModelVersionResponse.AddMember("ModelArn", _ModelArn)
-
-	DescribeModelVersionResponse_ModelVersion = DescribeModelVersionResponse.AddMember("ModelVersion", _ModelVersion)
-
-	DescribeModelVersionResponse_ModelVersionArn = DescribeModelVersionResponse.AddMember("ModelVersionArn", _ModelVersionArn)
-
-	DescribeModelVersionResponse_Status = DescribeModelVersionResponse.AddMember("Status", ModelVersionStatus)
-
-	DescribeModelVersionResponse_SourceType = DescribeModelVersionResponse.AddMember("SourceType", ModelVersionSourceType)
-
-	DescribeModelVersionResponse_DatasetName = DescribeModelVersionResponse.AddMember("DatasetName", _DatasetName)
-
-	DescribeModelVersionResponse_DatasetArn = DescribeModelVersionResponse.AddMember("DatasetArn", _DatasetArn)
-
-	DescribeModelVersionResponse_Schema = DescribeModelVersionResponse.AddMember("Schema", _InlineDataSchema)
-
-	DescribeModelVersionResponse_LabelsInputConfiguration = DescribeModelVersionResponse.AddMember("LabelsInputConfiguration", LabelsInputConfiguration)
-
-	DescribeModelVersionResponse_TrainingDataStartTime = DescribeModelVersionResponse.AddMember("TrainingDataStartTime", _Timestamp)
-
-	DescribeModelVersionResponse_TrainingDataEndTime = DescribeModelVersionResponse.AddMember("TrainingDataEndTime", _Timestamp)
-
-	DescribeModelVersionResponse_EvaluationDataStartTime = DescribeModelVersionResponse.AddMember("EvaluationDataStartTime", _Timestamp)
-
-	DescribeModelVersionResponse_EvaluationDataEndTime = DescribeModelVersionResponse.AddMember("EvaluationDataEndTime", _Timestamp)
-
-	DescribeModelVersionResponse_RoleArn = DescribeModelVersionResponse.AddMember("RoleArn", _IamRoleArn)
-
-	DescribeModelVersionResponse_DataPreProcessingConfiguration = DescribeModelVersionResponse.AddMember("DataPreProcessingConfiguration", DataPreProcessingConfiguration)
-
-	DescribeModelVersionResponse_TrainingExecutionStartTime = DescribeModelVersionResponse.AddMember("TrainingExecutionStartTime", _Timestamp)
-
-	DescribeModelVersionResponse_TrainingExecutionEndTime = DescribeModelVersionResponse.AddMember("TrainingExecutionEndTime", _Timestamp)
-
-	DescribeModelVersionResponse_FailedReason = DescribeModelVersionResponse.AddMember("FailedReason", _BoundedLengthString)
-
-	DescribeModelVersionResponse_ModelMetrics = DescribeModelVersionResponse.AddMember("ModelMetrics", _ModelMetrics)
-
-	DescribeModelVersionResponse_LastUpdatedTime = DescribeModelVersionResponse.AddMember("LastUpdatedTime", _Timestamp)
-
-	DescribeModelVersionResponse_CreatedAt = DescribeModelVersionResponse.AddMember("CreatedAt", _Timestamp)
-
-	DescribeModelVersionResponse_ServerSideKmsKeyId = DescribeModelVersionResponse.AddMember("ServerSideKmsKeyId", _KmsKeyArn)
-
-	DescribeModelVersionResponse_OffCondition = DescribeModelVersionResponse.AddMember("OffCondition", _OffCondition)
-
-	DescribeModelVersionResponse_SourceModelVersionArn = DescribeModelVersionResponse.AddMember("SourceModelVersionArn", _ModelVersionArn)
-
-	DescribeModelVersionResponse_ImportJobStartTime = DescribeModelVersionResponse.AddMember("ImportJobStartTime", _Timestamp)
-
-	DescribeModelVersionResponse_ImportJobEndTime = DescribeModelVersionResponse.AddMember("ImportJobEndTime", _Timestamp)
-
-	DescribeModelVersionResponse_ImportedDataSizeInBytes = DescribeModelVersionResponse.AddMember("ImportedDataSizeInBytes", _DataSizeInBytes)
-
-	DescribeModelVersionResponse_PriorModelMetrics = DescribeModelVersionResponse.AddMember("PriorModelMetrics", _ModelMetrics)
-
-	DescribeModelVersionResponse_RetrainingAvailableDataInDays = DescribeModelVersionResponse.AddMember("RetrainingAvailableDataInDays", _Integer)
-
-	DescribeModelVersionResponse_AutoPromotionResult = DescribeModelVersionResponse.AddMember("AutoPromotionResult", AutoPromotionResult)
-
-	DescribeModelVersionResponse_AutoPromotionResultReason = DescribeModelVersionResponse.AddMember("AutoPromotionResultReason", _AutoPromotionResultReason)
-
-	DescribeModelVersionResponse_ModelDiagnosticsOutputConfiguration = DescribeModelVersionResponse.AddMember("ModelDiagnosticsOutputConfiguration", ModelDiagnosticsOutputConfiguration)
-
-	DescribeModelVersionResponse_ModelDiagnosticsResultsObject = DescribeModelVersionResponse.AddMember("ModelDiagnosticsResultsObject", S3Object)
-
-	DescribeModelVersionResponse_ModelQuality = DescribeModelVersionResponse.AddMember("ModelQuality", ModelQuality)
-
-	DescribeResourcePolicyRequest_ResourceArn = DescribeResourcePolicyRequest.AddMember("ResourceArn", _ResourceArn)
-
-	DescribeResourcePolicyResponse_PolicyRevisionId = DescribeResourcePolicyResponse.AddMember("PolicyRevisionId", _PolicyRevisionId)
-
-	DescribeResourcePolicyResponse_ResourcePolicy = DescribeResourcePolicyResponse.AddMember("ResourcePolicy", _Policy)
-
-	DescribeResourcePolicyResponse_CreationTime = DescribeResourcePolicyResponse.AddMember("CreationTime", _Timestamp)
-
-	DescribeResourcePolicyResponse_LastModifiedTime = DescribeResourcePolicyResponse.AddMember("LastModifiedTime", _Timestamp)
-
-	DescribeRetrainingSchedulerRequest_ModelName = DescribeRetrainingSchedulerRequest.AddMember("ModelName", _ModelName)
-
-	DescribeRetrainingSchedulerResponse_ModelName = DescribeRetrainingSchedulerResponse.AddMember("ModelName", _ModelName)
-
-	DescribeRetrainingSchedulerResponse_ModelArn = DescribeRetrainingSchedulerResponse.AddMember("ModelArn", _ModelArn)
-
-	DescribeRetrainingSchedulerResponse_RetrainingStartDate = DescribeRetrainingSchedulerResponse.AddMember("RetrainingStartDate", _Timestamp)
-
-	DescribeRetrainingSchedulerResponse_RetrainingFrequency = DescribeRetrainingSchedulerResponse.AddMember("RetrainingFrequency", _RetrainingFrequency)
-
-	DescribeRetrainingSchedulerResponse_LookbackWindow = DescribeRetrainingSchedulerResponse.AddMember("LookbackWindow", _LookbackWindow)
-
-	DescribeRetrainingSchedulerResponse_Status = DescribeRetrainingSchedulerResponse.AddMember("Status", RetrainingSchedulerStatus)
-
-	DescribeRetrainingSchedulerResponse_PromoteMode = DescribeRetrainingSchedulerResponse.AddMember("PromoteMode", ModelPromoteMode)
-
-	DescribeRetrainingSchedulerResponse_CreatedAt = DescribeRetrainingSchedulerResponse.AddMember("CreatedAt", _Timestamp)
-
-	DescribeRetrainingSchedulerResponse_UpdatedAt = DescribeRetrainingSchedulerResponse.AddMember("UpdatedAt", _Timestamp)
-
-	ImportDatasetRequest_SourceDatasetArn = ImportDatasetRequest.AddMember("SourceDatasetArn", _DatasetArn)
-
-	ImportDatasetRequest_DatasetName = ImportDatasetRequest.AddMember("DatasetName", _DatasetName)
-
-	ImportDatasetRequest_ClientToken = ImportDatasetRequest.AddMember("ClientToken", _IdempotenceToken)
-
-	ImportDatasetRequest_ServerSideKmsKeyId = ImportDatasetRequest.AddMember("ServerSideKmsKeyId", _NameOrArn)
-
-	ImportDatasetRequest_Tags = ImportDatasetRequest.AddMember("Tags", _TagList)
-
-	ImportDatasetResponse_DatasetName = ImportDatasetResponse.AddMember("DatasetName", _DatasetName)
-
-	ImportDatasetResponse_DatasetArn = ImportDatasetResponse.AddMember("DatasetArn", _DatasetArn)
-
-	ImportDatasetResponse_Status = ImportDatasetResponse.AddMember("Status", DatasetStatus)
-
-	ImportDatasetResponse_JobId = ImportDatasetResponse.AddMember("JobId", _IngestionJobId)
-
-	ImportModelVersionRequest_SourceModelVersionArn = ImportModelVersionRequest.AddMember("SourceModelVersionArn", _ModelVersionArn)
-
-	ImportModelVersionRequest_ModelName = ImportModelVersionRequest.AddMember("ModelName", _ModelName)
-
-	ImportModelVersionRequest_DatasetName = ImportModelVersionRequest.AddMember("DatasetName", _DatasetIdentifier)
-
-	ImportModelVersionRequest_LabelsInputConfiguration = ImportModelVersionRequest.AddMember("LabelsInputConfiguration", LabelsInputConfiguration)
-
-	ImportModelVersionRequest_ClientToken = ImportModelVersionRequest.AddMember("ClientToken", _IdempotenceToken)
-
-	ImportModelVersionRequest_RoleArn = ImportModelVersionRequest.AddMember("RoleArn", _IamRoleArn)
-
-	ImportModelVersionRequest_ServerSideKmsKeyId = ImportModelVersionRequest.AddMember("ServerSideKmsKeyId", _NameOrArn)
-
-	ImportModelVersionRequest_Tags = ImportModelVersionRequest.AddMember("Tags", _TagList)
-
-	ImportModelVersionRequest_InferenceDataImportStrategy = ImportModelVersionRequest.AddMember("InferenceDataImportStrategy", InferenceDataImportStrategy)
-
-	ImportModelVersionResponse_ModelName = ImportModelVersionResponse.AddMember("ModelName", _ModelName)
-
-	ImportModelVersionResponse_ModelArn = ImportModelVersionResponse.AddMember("ModelArn", _ModelArn)
-
-	ImportModelVersionResponse_ModelVersionArn = ImportModelVersionResponse.AddMember("ModelVersionArn", _ModelVersionArn)
-
-	ImportModelVersionResponse_ModelVersion = ImportModelVersionResponse.AddMember("ModelVersion", _ModelVersion)
-
-	ImportModelVersionResponse_Status = ImportModelVersionResponse.AddMember("Status", ModelVersionStatus)
-
-	ListDataIngestionJobsRequest_DatasetName = ListDataIngestionJobsRequest.AddMember("DatasetName", _DatasetName)
-
-	ListDataIngestionJobsRequest_NextToken = ListDataIngestionJobsRequest.AddMember("NextToken", _NextToken)
-
-	ListDataIngestionJobsRequest_MaxResults = ListDataIngestionJobsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListDataIngestionJobsRequest_Status = ListDataIngestionJobsRequest.AddMember("Status", IngestionJobStatus)
-
-	ListDataIngestionJobsResponse_NextToken = ListDataIngestionJobsResponse.AddMember("NextToken", _NextToken)
-
-	ListDataIngestionJobsResponse_DataIngestionJobSummaries = ListDataIngestionJobsResponse.AddMember("DataIngestionJobSummaries", _DataIngestionJobSummaries)
-
-	ListDatasetsRequest_NextToken = ListDatasetsRequest.AddMember("NextToken", _NextToken)
-
-	ListDatasetsRequest_MaxResults = ListDatasetsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListDatasetsRequest_DatasetNameBeginsWith = ListDatasetsRequest.AddMember("DatasetNameBeginsWith", _DatasetName)
-
-	ListDatasetsResponse_NextToken = ListDatasetsResponse.AddMember("NextToken", _NextToken)
-
-	ListDatasetsResponse_DatasetSummaries = ListDatasetsResponse.AddMember("DatasetSummaries", _DatasetSummaries)
-
-	ListInferenceEventsRequest_NextToken = ListInferenceEventsRequest.AddMember("NextToken", _NextToken)
-
-	ListInferenceEventsRequest_MaxResults = ListInferenceEventsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListInferenceEventsRequest_InferenceSchedulerName = ListInferenceEventsRequest.AddMember("InferenceSchedulerName", _InferenceSchedulerIdentifier)
-
-	ListInferenceEventsRequest_IntervalStartTime = ListInferenceEventsRequest.AddMember("IntervalStartTime", _Timestamp)
-
-	ListInferenceEventsRequest_IntervalEndTime = ListInferenceEventsRequest.AddMember("IntervalEndTime", _Timestamp)
-
-	ListInferenceEventsResponse_NextToken = ListInferenceEventsResponse.AddMember("NextToken", _NextToken)
-
-	ListInferenceEventsResponse_InferenceEventSummaries = ListInferenceEventsResponse.AddMember("InferenceEventSummaries", _InferenceEventSummaries)
-
-	ListInferenceExecutionsRequest_NextToken = ListInferenceExecutionsRequest.AddMember("NextToken", _NextToken)
-
-	ListInferenceExecutionsRequest_MaxResults = ListInferenceExecutionsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListInferenceExecutionsRequest_InferenceSchedulerName = ListInferenceExecutionsRequest.AddMember("InferenceSchedulerName", _InferenceSchedulerIdentifier)
-
-	ListInferenceExecutionsRequest_DataStartTimeAfter = ListInferenceExecutionsRequest.AddMember("DataStartTimeAfter", _Timestamp)
-
-	ListInferenceExecutionsRequest_DataEndTimeBefore = ListInferenceExecutionsRequest.AddMember("DataEndTimeBefore", _Timestamp)
-
-	ListInferenceExecutionsRequest_Status = ListInferenceExecutionsRequest.AddMember("Status", InferenceExecutionStatus)
-
-	ListInferenceExecutionsResponse_NextToken = ListInferenceExecutionsResponse.AddMember("NextToken", _NextToken)
-
-	ListInferenceExecutionsResponse_InferenceExecutionSummaries = ListInferenceExecutionsResponse.AddMember("InferenceExecutionSummaries", _InferenceExecutionSummaries)
-
-	ListInferenceSchedulersRequest_NextToken = ListInferenceSchedulersRequest.AddMember("NextToken", _NextToken)
-
-	ListInferenceSchedulersRequest_MaxResults = ListInferenceSchedulersRequest.AddMember("MaxResults", _MaxResults)
-
-	ListInferenceSchedulersRequest_InferenceSchedulerNameBeginsWith = ListInferenceSchedulersRequest.AddMember("InferenceSchedulerNameBeginsWith", _InferenceSchedulerIdentifier)
-
-	ListInferenceSchedulersRequest_ModelName = ListInferenceSchedulersRequest.AddMember("ModelName", _ModelName)
-
-	ListInferenceSchedulersRequest_Status = ListInferenceSchedulersRequest.AddMember("Status", InferenceSchedulerStatus)
-
-	ListInferenceSchedulersResponse_NextToken = ListInferenceSchedulersResponse.AddMember("NextToken", _NextToken)
-
-	ListInferenceSchedulersResponse_InferenceSchedulerSummaries = ListInferenceSchedulersResponse.AddMember("InferenceSchedulerSummaries", _InferenceSchedulerSummaries)
-
-	ListLabelGroupsRequest_LabelGroupNameBeginsWith = ListLabelGroupsRequest.AddMember("LabelGroupNameBeginsWith", _LabelGroupName)
-
-	ListLabelGroupsRequest_NextToken = ListLabelGroupsRequest.AddMember("NextToken", _NextToken)
-
-	ListLabelGroupsRequest_MaxResults = ListLabelGroupsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListLabelGroupsResponse_NextToken = ListLabelGroupsResponse.AddMember("NextToken", _NextToken)
-
-	ListLabelGroupsResponse_LabelGroupSummaries = ListLabelGroupsResponse.AddMember("LabelGroupSummaries", _LabelGroupSummaries)
-
-	ListLabelsRequest_LabelGroupName = ListLabelsRequest.AddMember("LabelGroupName", _LabelGroupName)
-
-	ListLabelsRequest_IntervalStartTime = ListLabelsRequest.AddMember("IntervalStartTime", _Timestamp)
-
-	ListLabelsRequest_IntervalEndTime = ListLabelsRequest.AddMember("IntervalEndTime", _Timestamp)
-
-	ListLabelsRequest_FaultCode = ListLabelsRequest.AddMember("FaultCode", _FaultCode)
-
-	ListLabelsRequest_Equipment = ListLabelsRequest.AddMember("Equipment", _Equipment)
-
-	ListLabelsRequest_NextToken = ListLabelsRequest.AddMember("NextToken", _NextToken)
-
-	ListLabelsRequest_MaxResults = ListLabelsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListLabelsResponse_NextToken = ListLabelsResponse.AddMember("NextToken", _NextToken)
-
-	ListLabelsResponse_LabelSummaries = ListLabelsResponse.AddMember("LabelSummaries", _LabelSummaries)
-
-	ListModelsRequest_NextToken = ListModelsRequest.AddMember("NextToken", _NextToken)
-
-	ListModelsRequest_MaxResults = ListModelsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListModelsRequest_Status = ListModelsRequest.AddMember("Status", ModelStatus)
-
-	ListModelsRequest_ModelNameBeginsWith = ListModelsRequest.AddMember("ModelNameBeginsWith", _ModelName)
-
-	ListModelsRequest_DatasetNameBeginsWith = ListModelsRequest.AddMember("DatasetNameBeginsWith", _DatasetName)
-
-	ListModelsResponse_NextToken = ListModelsResponse.AddMember("NextToken", _NextToken)
-
-	ListModelsResponse_ModelSummaries = ListModelsResponse.AddMember("ModelSummaries", _ModelSummaries)
-
-	ListModelVersionsRequest_ModelName = ListModelVersionsRequest.AddMember("ModelName", _ModelName)
-
-	ListModelVersionsRequest_NextToken = ListModelVersionsRequest.AddMember("NextToken", _NextToken)
-
-	ListModelVersionsRequest_MaxResults = ListModelVersionsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListModelVersionsRequest_Status = ListModelVersionsRequest.AddMember("Status", ModelVersionStatus)
-
-	ListModelVersionsRequest_SourceType = ListModelVersionsRequest.AddMember("SourceType", ModelVersionSourceType)
-
-	ListModelVersionsRequest_CreatedAtEndTime = ListModelVersionsRequest.AddMember("CreatedAtEndTime", _Timestamp)
-
-	ListModelVersionsRequest_CreatedAtStartTime = ListModelVersionsRequest.AddMember("CreatedAtStartTime", _Timestamp)
-
-	ListModelVersionsRequest_MaxModelVersion = ListModelVersionsRequest.AddMember("MaxModelVersion", _ModelVersion)
-
-	ListModelVersionsRequest_MinModelVersion = ListModelVersionsRequest.AddMember("MinModelVersion", _ModelVersion)
-
-	ListModelVersionsResponse_NextToken = ListModelVersionsResponse.AddMember("NextToken", _NextToken)
-
-	ListModelVersionsResponse_ModelVersionSummaries = ListModelVersionsResponse.AddMember("ModelVersionSummaries", _ModelVersionSummaries)
-
-	ListRetrainingSchedulersRequest_ModelNameBeginsWith = ListRetrainingSchedulersRequest.AddMember("ModelNameBeginsWith", _ModelName)
-
-	ListRetrainingSchedulersRequest_Status = ListRetrainingSchedulersRequest.AddMember("Status", RetrainingSchedulerStatus)
-
-	ListRetrainingSchedulersRequest_NextToken = ListRetrainingSchedulersRequest.AddMember("NextToken", _NextToken)
-
-	ListRetrainingSchedulersRequest_MaxResults = ListRetrainingSchedulersRequest.AddMember("MaxResults", _MaxResults)
-
-	ListRetrainingSchedulersResponse_RetrainingSchedulerSummaries = ListRetrainingSchedulersResponse.AddMember("RetrainingSchedulerSummaries", _RetrainingSchedulerSummaries)
-
-	ListRetrainingSchedulersResponse_NextToken = ListRetrainingSchedulersResponse.AddMember("NextToken", _NextToken)
-
-	ListSensorStatisticsRequest_DatasetName = ListSensorStatisticsRequest.AddMember("DatasetName", _DatasetName)
-
-	ListSensorStatisticsRequest_IngestionJobId = ListSensorStatisticsRequest.AddMember("IngestionJobId", _IngestionJobId)
-
-	ListSensorStatisticsRequest_MaxResults = ListSensorStatisticsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListSensorStatisticsRequest_NextToken = ListSensorStatisticsRequest.AddMember("NextToken", _NextToken)
-
-	ListSensorStatisticsResponse_SensorStatisticsSummaries = ListSensorStatisticsResponse.AddMember("SensorStatisticsSummaries", _SensorStatisticsSummaries)
-
-	ListSensorStatisticsResponse_NextToken = ListSensorStatisticsResponse.AddMember("NextToken", _NextToken)
-
-	ListTagsForResourceRequest_ResourceArn = ListTagsForResourceRequest.AddMember("ResourceArn", _AmazonResourceArn)
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _TagList)
-
-	PutResourcePolicyRequest_ResourceArn = PutResourcePolicyRequest.AddMember("ResourceArn", _ResourceArn)
-
-	PutResourcePolicyRequest_ResourcePolicy = PutResourcePolicyRequest.AddMember("ResourcePolicy", _Policy)
-
-	PutResourcePolicyRequest_PolicyRevisionId = PutResourcePolicyRequest.AddMember("PolicyRevisionId", _PolicyRevisionId)
-
-	PutResourcePolicyRequest_ClientToken = PutResourcePolicyRequest.AddMember("ClientToken", _IdempotenceToken)
-
-	PutResourcePolicyResponse_ResourceArn = PutResourcePolicyResponse.AddMember("ResourceArn", _ResourceArn)
-
-	PutResourcePolicyResponse_PolicyRevisionId = PutResourcePolicyResponse.AddMember("PolicyRevisionId", _PolicyRevisionId)
-
-	StartDataIngestionJobRequest_DatasetName = StartDataIngestionJobRequest.AddMember("DatasetName", _DatasetIdentifier)
-
-	StartDataIngestionJobRequest_IngestionInputConfiguration = StartDataIngestionJobRequest.AddMember("IngestionInputConfiguration", IngestionInputConfiguration)
-
-	StartDataIngestionJobRequest_RoleArn = StartDataIngestionJobRequest.AddMember("RoleArn", _IamRoleArn)
-
-	StartDataIngestionJobRequest_ClientToken = StartDataIngestionJobRequest.AddMember("ClientToken", _IdempotenceToken)
-
-	StartDataIngestionJobResponse_JobId = StartDataIngestionJobResponse.AddMember("JobId", _IngestionJobId)
-
-	StartDataIngestionJobResponse_Status = StartDataIngestionJobResponse.AddMember("Status", IngestionJobStatus)
-
-	StartInferenceSchedulerRequest_InferenceSchedulerName = StartInferenceSchedulerRequest.AddMember("InferenceSchedulerName", _InferenceSchedulerIdentifier)
-
-	StartInferenceSchedulerResponse_ModelArn = StartInferenceSchedulerResponse.AddMember("ModelArn", _ModelArn)
-
-	StartInferenceSchedulerResponse_ModelName = StartInferenceSchedulerResponse.AddMember("ModelName", _ModelName)
-
-	StartInferenceSchedulerResponse_InferenceSchedulerName = StartInferenceSchedulerResponse.AddMember("InferenceSchedulerName", _InferenceSchedulerName)
-
-	StartInferenceSchedulerResponse_InferenceSchedulerArn = StartInferenceSchedulerResponse.AddMember("InferenceSchedulerArn", _InferenceSchedulerArn)
-
-	StartInferenceSchedulerResponse_Status = StartInferenceSchedulerResponse.AddMember("Status", InferenceSchedulerStatus)
-
-	StartRetrainingSchedulerRequest_ModelName = StartRetrainingSchedulerRequest.AddMember("ModelName", _ModelName)
-
-	StartRetrainingSchedulerResponse_ModelName = StartRetrainingSchedulerResponse.AddMember("ModelName", _ModelName)
-
-	StartRetrainingSchedulerResponse_ModelArn = StartRetrainingSchedulerResponse.AddMember("ModelArn", _ModelArn)
-
-	StartRetrainingSchedulerResponse_Status = StartRetrainingSchedulerResponse.AddMember("Status", RetrainingSchedulerStatus)
-
-	StopInferenceSchedulerRequest_InferenceSchedulerName = StopInferenceSchedulerRequest.AddMember("InferenceSchedulerName", _InferenceSchedulerIdentifier)
-
-	StopInferenceSchedulerResponse_ModelArn = StopInferenceSchedulerResponse.AddMember("ModelArn", _ModelArn)
-
-	StopInferenceSchedulerResponse_ModelName = StopInferenceSchedulerResponse.AddMember("ModelName", _ModelName)
-
-	StopInferenceSchedulerResponse_InferenceSchedulerName = StopInferenceSchedulerResponse.AddMember("InferenceSchedulerName", _InferenceSchedulerName)
-
-	StopInferenceSchedulerResponse_InferenceSchedulerArn = StopInferenceSchedulerResponse.AddMember("InferenceSchedulerArn", _InferenceSchedulerArn)
-
-	StopInferenceSchedulerResponse_Status = StopInferenceSchedulerResponse.AddMember("Status", InferenceSchedulerStatus)
-
-	StopRetrainingSchedulerRequest_ModelName = StopRetrainingSchedulerRequest.AddMember("ModelName", _ModelName)
-
-	StopRetrainingSchedulerResponse_ModelName = StopRetrainingSchedulerResponse.AddMember("ModelName", _ModelName)
-
-	StopRetrainingSchedulerResponse_ModelArn = StopRetrainingSchedulerResponse.AddMember("ModelArn", _ModelArn)
-
-	StopRetrainingSchedulerResponse_Status = StopRetrainingSchedulerResponse.AddMember("Status", RetrainingSchedulerStatus)
-
-	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", _AmazonResourceArn)
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _TagList)
-
-	UntagResourceRequest_ResourceArn = UntagResourceRequest.AddMember("ResourceArn", _AmazonResourceArn)
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList)
-
-	UpdateActiveModelVersionRequest_ModelName = UpdateActiveModelVersionRequest.AddMember("ModelName", _ModelName)
-
-	UpdateActiveModelVersionRequest_ModelVersion = UpdateActiveModelVersionRequest.AddMember("ModelVersion", _ModelVersion)
-
-	UpdateActiveModelVersionResponse_ModelName = UpdateActiveModelVersionResponse.AddMember("ModelName", _ModelName)
-
-	UpdateActiveModelVersionResponse_ModelArn = UpdateActiveModelVersionResponse.AddMember("ModelArn", _ModelArn)
-
-	UpdateActiveModelVersionResponse_CurrentActiveVersion = UpdateActiveModelVersionResponse.AddMember("CurrentActiveVersion", _ModelVersion)
-
-	UpdateActiveModelVersionResponse_PreviousActiveVersion = UpdateActiveModelVersionResponse.AddMember("PreviousActiveVersion", _ModelVersion)
-
-	UpdateActiveModelVersionResponse_CurrentActiveVersionArn = UpdateActiveModelVersionResponse.AddMember("CurrentActiveVersionArn", _ModelVersionArn)
-
-	UpdateActiveModelVersionResponse_PreviousActiveVersionArn = UpdateActiveModelVersionResponse.AddMember("PreviousActiveVersionArn", _ModelVersionArn)
-
-	UpdateInferenceSchedulerRequest_InferenceSchedulerName = UpdateInferenceSchedulerRequest.AddMember("InferenceSchedulerName", _InferenceSchedulerIdentifier)
-
-	UpdateInferenceSchedulerRequest_DataDelayOffsetInMinutes = UpdateInferenceSchedulerRequest.AddMember("DataDelayOffsetInMinutes", _DataDelayOffsetInMinutes)
-
-	UpdateInferenceSchedulerRequest_DataUploadFrequency = UpdateInferenceSchedulerRequest.AddMember("DataUploadFrequency", DataUploadFrequency)
-
-	UpdateInferenceSchedulerRequest_DataInputConfiguration = UpdateInferenceSchedulerRequest.AddMember("DataInputConfiguration", InferenceInputConfiguration)
-
-	UpdateInferenceSchedulerRequest_DataOutputConfiguration = UpdateInferenceSchedulerRequest.AddMember("DataOutputConfiguration", InferenceOutputConfiguration)
-
-	UpdateInferenceSchedulerRequest_RoleArn = UpdateInferenceSchedulerRequest.AddMember("RoleArn", _IamRoleArn)
-
-	UpdateLabelGroupRequest_LabelGroupName = UpdateLabelGroupRequest.AddMember("LabelGroupName", _LabelGroupName)
-
-	UpdateLabelGroupRequest_FaultCodes = UpdateLabelGroupRequest.AddMember("FaultCodes", _FaultCodes)
-
-	UpdateModelRequest_ModelName = UpdateModelRequest.AddMember("ModelName", _ModelName)
-
-	UpdateModelRequest_LabelsInputConfiguration = UpdateModelRequest.AddMember("LabelsInputConfiguration", LabelsInputConfiguration)
-
-	UpdateModelRequest_RoleArn = UpdateModelRequest.AddMember("RoleArn", _IamRoleArn)
-
-	UpdateModelRequest_ModelDiagnosticsOutputConfiguration = UpdateModelRequest.AddMember("ModelDiagnosticsOutputConfiguration", ModelDiagnosticsOutputConfiguration)
-
-	UpdateRetrainingSchedulerRequest_ModelName = UpdateRetrainingSchedulerRequest.AddMember("ModelName", _ModelName)
-
-	UpdateRetrainingSchedulerRequest_RetrainingStartDate = UpdateRetrainingSchedulerRequest.AddMember("RetrainingStartDate", _Timestamp)
-
-	UpdateRetrainingSchedulerRequest_RetrainingFrequency = UpdateRetrainingSchedulerRequest.AddMember("RetrainingFrequency", _RetrainingFrequency)
-
-	UpdateRetrainingSchedulerRequest_LookbackWindow = UpdateRetrainingSchedulerRequest.AddMember("LookbackWindow", _LookbackWindow)
-
-	UpdateRetrainingSchedulerRequest_PromoteMode = UpdateRetrainingSchedulerRequest.AddMember("PromoteMode", ModelPromoteMode)
-
-}
+var (
+	iCreateDataset                         = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "CreateDataset"}
+	iCreateInferenceScheduler              = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "CreateInferenceScheduler"}
+	iCreateLabel                           = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "CreateLabel"}
+	iCreateLabelGroup                      = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "CreateLabelGroup"}
+	iCreateModel                           = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "CreateModel"}
+	iCreateRetrainingScheduler             = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "CreateRetrainingScheduler"}
+	iDeleteDataset                         = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DeleteDataset"}
+	iDeleteInferenceScheduler              = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DeleteInferenceScheduler"}
+	iDeleteLabel                           = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DeleteLabel"}
+	iDeleteLabelGroup                      = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DeleteLabelGroup"}
+	iDeleteModel                           = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DeleteModel"}
+	iDeleteResourcePolicy                  = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DeleteResourcePolicy"}
+	iDeleteRetrainingScheduler             = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DeleteRetrainingScheduler"}
+	iDescribeDataIngestionJob              = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DescribeDataIngestionJob"}
+	iDescribeDataset                       = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DescribeDataset"}
+	iDescribeInferenceScheduler            = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DescribeInferenceScheduler"}
+	iDescribeLabel                         = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DescribeLabel"}
+	iDescribeLabelGroup                    = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DescribeLabelGroup"}
+	iDescribeModel                         = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DescribeModel"}
+	iDescribeModelVersion                  = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DescribeModelVersion"}
+	iDescribeResourcePolicy                = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DescribeResourcePolicy"}
+	iDescribeRetrainingScheduler           = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DescribeRetrainingScheduler"}
+	iImportDataset                         = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ImportDataset"}
+	iImportModelVersion                    = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ImportModelVersion"}
+	iListDataIngestionJobs                 = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ListDataIngestionJobs"}
+	iListDatasets                          = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ListDatasets"}
+	iListInferenceEvents                   = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ListInferenceEvents"}
+	iListInferenceExecutions               = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ListInferenceExecutions"}
+	iListInferenceSchedulers               = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ListInferenceSchedulers"}
+	iListLabelGroups                       = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ListLabelGroups"}
+	iListLabels                            = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ListLabels"}
+	iListModels                            = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ListModels"}
+	iListModelVersions                     = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ListModelVersions"}
+	iListRetrainingSchedulers              = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ListRetrainingSchedulers"}
+	iListSensorStatistics                  = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ListSensorStatistics"}
+	iListTagsForResource                   = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ListTagsForResource"}
+	iPutResourcePolicy                     = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "PutResourcePolicy"}
+	iStartDataIngestionJob                 = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "StartDataIngestionJob"}
+	iStartInferenceScheduler               = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "StartInferenceScheduler"}
+	iStartRetrainingScheduler              = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "StartRetrainingScheduler"}
+	iStopInferenceScheduler                = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "StopInferenceScheduler"}
+	iStopRetrainingScheduler               = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "StopRetrainingScheduler"}
+	iTagResource                           = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "TagResource"}
+	iUntagResource                         = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "UntagResource"}
+	iUpdateActiveModelVersion              = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "UpdateActiveModelVersion"}
+	iUpdateInferenceScheduler              = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "UpdateInferenceScheduler"}
+	iUpdateLabelGroup                      = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "UpdateLabelGroup"}
+	iUpdateModel                           = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "UpdateModel"}
+	iUpdateRetrainingScheduler             = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "UpdateRetrainingScheduler"}
+	i_AWSLookoutEquipmentFrontendService   = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "AWSLookoutEquipmentFrontendService"}
+	iAccessDeniedException                 = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "AccessDeniedException"}
+	i_AmazonResourceArn                    = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "AmazonResourceArn"}
+	iAutoPromotionResult                   = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "AutoPromotionResult"}
+	i_AutoPromotionResultReason            = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "AutoPromotionResultReason"}
+	i_Boolean                              = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "Boolean"}
+	i_BoundedLengthString                  = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "BoundedLengthString"}
+	iCategoricalValues                     = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "CategoricalValues"}
+	i_Comments                             = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "Comments"}
+	i_ComponentName                        = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ComponentName"}
+	i_ComponentTimestampDelimiter          = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ComponentTimestampDelimiter"}
+	iConflictException                     = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ConflictException"}
+	iCountPercent                          = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "CountPercent"}
+	i_DataDelayOffsetInMinutes             = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DataDelayOffsetInMinutes"}
+	i_DataIngestionJobSummaries            = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DataIngestionJobSummaries"}
+	iDataIngestionJobSummary               = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DataIngestionJobSummary"}
+	iDataPreProcessingConfiguration        = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DataPreProcessingConfiguration"}
+	iDataQualitySummary                    = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DataQualitySummary"}
+	i_DatasetArn                           = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DatasetArn"}
+	i_DatasetIdentifier                    = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DatasetIdentifier"}
+	i_DatasetName                          = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DatasetName"}
+	iDatasetSchema                         = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DatasetSchema"}
+	iDatasetStatus                         = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DatasetStatus"}
+	i_DatasetSummaries                     = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DatasetSummaries"}
+	iDatasetSummary                        = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DatasetSummary"}
+	i_DataSizeInBytes                      = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DataSizeInBytes"}
+	iDataUploadFrequency                   = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DataUploadFrequency"}
+	iDuplicateTimestamps                   = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DuplicateTimestamps"}
+	i_Equipment                            = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "Equipment"}
+	i_EventDurationInSeconds               = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "EventDurationInSeconds"}
+	i_FaultCode                            = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "FaultCode"}
+	i_FaultCodes                           = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "FaultCodes"}
+	i_FileNameTimestampFormat              = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "FileNameTimestampFormat"}
+	i_Float                                = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "Float"}
+	i_IamRoleArn                           = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "IamRoleArn"}
+	i_IdempotenceToken                     = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "IdempotenceToken"}
+	iInferenceDataImportStrategy           = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "InferenceDataImportStrategy"}
+	i_InferenceEventSummaries              = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "InferenceEventSummaries"}
+	iInferenceEventSummary                 = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "InferenceEventSummary"}
+	iInferenceExecutionStatus              = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "InferenceExecutionStatus"}
+	i_InferenceExecutionSummaries          = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "InferenceExecutionSummaries"}
+	iInferenceExecutionSummary             = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "InferenceExecutionSummary"}
+	iInferenceInputConfiguration           = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "InferenceInputConfiguration"}
+	iInferenceInputNameConfiguration       = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "InferenceInputNameConfiguration"}
+	iInferenceOutputConfiguration          = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "InferenceOutputConfiguration"}
+	iInferenceS3InputConfiguration         = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "InferenceS3InputConfiguration"}
+	iInferenceS3OutputConfiguration        = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "InferenceS3OutputConfiguration"}
+	i_InferenceSchedulerArn                = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "InferenceSchedulerArn"}
+	i_InferenceSchedulerIdentifier         = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "InferenceSchedulerIdentifier"}
+	i_InferenceSchedulerName               = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "InferenceSchedulerName"}
+	iInferenceSchedulerStatus              = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "InferenceSchedulerStatus"}
+	i_InferenceSchedulerSummaries          = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "InferenceSchedulerSummaries"}
+	iInferenceSchedulerSummary             = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "InferenceSchedulerSummary"}
+	iIngestedFilesSummary                  = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "IngestedFilesSummary"}
+	iIngestionInputConfiguration           = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "IngestionInputConfiguration"}
+	i_IngestionJobId                       = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "IngestionJobId"}
+	iIngestionJobStatus                    = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "IngestionJobStatus"}
+	iIngestionS3InputConfiguration         = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "IngestionS3InputConfiguration"}
+	i_InlineDataSchema                     = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "InlineDataSchema"}
+	iInsufficientSensorData                = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "InsufficientSensorData"}
+	i_Integer                              = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "Integer"}
+	iInternalServerException               = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "InternalServerException"}
+	iInvalidSensorData                     = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "InvalidSensorData"}
+	i_KeyPattern                           = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "KeyPattern"}
+	i_KmsKeyArn                            = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "KmsKeyArn"}
+	i_LabelGroupArn                        = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "LabelGroupArn"}
+	i_LabelGroupName                       = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "LabelGroupName"}
+	i_LabelGroupSummaries                  = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "LabelGroupSummaries"}
+	iLabelGroupSummary                     = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "LabelGroupSummary"}
+	i_LabelId                              = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "LabelId"}
+	iLabelRating                           = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "LabelRating"}
+	iLabelsInputConfiguration              = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "LabelsInputConfiguration"}
+	iLabelsS3InputConfiguration            = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "LabelsS3InputConfiguration"}
+	i_LabelSummaries                       = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "LabelSummaries"}
+	iLabelSummary                          = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "LabelSummary"}
+	iLargeTimestampGaps                    = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "LargeTimestampGaps"}
+	iLatestInferenceResult                 = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "LatestInferenceResult"}
+	i_ListOfDiscardedFiles                 = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ListOfDiscardedFiles"}
+	i_LookbackWindow                       = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "LookbackWindow"}
+	i_MaxResults                           = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "MaxResults"}
+	iMissingCompleteSensorData             = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "MissingCompleteSensorData"}
+	iMissingSensorData                     = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "MissingSensorData"}
+	i_ModelArn                             = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ModelArn"}
+	iModelDiagnosticsOutputConfiguration   = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ModelDiagnosticsOutputConfiguration"}
+	iModelDiagnosticsS3OutputConfiguration = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ModelDiagnosticsS3OutputConfiguration"}
+	i_ModelMetrics                         = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ModelMetrics"}
+	i_ModelName                            = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ModelName"}
+	iModelPromoteMode                      = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ModelPromoteMode"}
+	iModelQuality                          = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ModelQuality"}
+	iModelStatus                           = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ModelStatus"}
+	i_ModelSummaries                       = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ModelSummaries"}
+	iModelSummary                          = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ModelSummary"}
+	i_ModelVersion                         = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ModelVersion"}
+	i_ModelVersionArn                      = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ModelVersionArn"}
+	iModelVersionSourceType                = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ModelVersionSourceType"}
+	iModelVersionStatus                    = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ModelVersionStatus"}
+	i_ModelVersionSummaries                = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ModelVersionSummaries"}
+	iModelVersionSummary                   = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ModelVersionSummary"}
+	iMonotonicity                          = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "Monotonicity"}
+	iMonotonicValues                       = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "MonotonicValues"}
+	iMultipleOperatingModes                = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "MultipleOperatingModes"}
+	i_NameOrArn                            = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "NameOrArn"}
+	i_NextToken                            = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "NextToken"}
+	i_OffCondition                         = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "OffCondition"}
+	i_Policy                               = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "Policy"}
+	i_PolicyRevisionId                     = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "PolicyRevisionId"}
+	i_ResourceArn                          = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ResourceArn"}
+	iResourceNotFoundException             = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ResourceNotFoundException"}
+	i_RetrainingFrequency                  = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "RetrainingFrequency"}
+	iRetrainingSchedulerStatus             = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "RetrainingSchedulerStatus"}
+	i_RetrainingSchedulerSummaries         = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "RetrainingSchedulerSummaries"}
+	iRetrainingSchedulerSummary            = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "RetrainingSchedulerSummary"}
+	i_S3Bucket                             = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "S3Bucket"}
+	i_S3Key                                = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "S3Key"}
+	iS3Object                              = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "S3Object"}
+	i_S3Prefix                             = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "S3Prefix"}
+	i_SensorName                           = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "SensorName"}
+	i_SensorStatisticsSummaries            = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "SensorStatisticsSummaries"}
+	iSensorStatisticsSummary               = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "SensorStatisticsSummary"}
+	iSensorsWithShortDateRange             = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "SensorsWithShortDateRange"}
+	iServiceQuotaExceededException         = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ServiceQuotaExceededException"}
+	iStatisticalIssueStatus                = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "StatisticalIssueStatus"}
+	i_SynthesizedJsonInlineDataSchema      = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "SynthesizedJsonInlineDataSchema"}
+	i_SynthesizedJsonModelMetrics          = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "SynthesizedJsonModelMetrics"}
+	iTag                                   = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "Tag"}
+	i_TagKey                               = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "TagKey"}
+	i_TagKeyList                           = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "TagKeyList"}
+	i_TagList                              = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "TagList"}
+	i_TagValue                             = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "TagValue"}
+	iTargetSamplingRate                    = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "TargetSamplingRate"}
+	iThrottlingException                   = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ThrottlingException"}
+	i_Timestamp                            = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "Timestamp"}
+	i_TimeZoneOffset                       = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "TimeZoneOffset"}
+	iUnsupportedTimestamps                 = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "UnsupportedTimestamps"}
+	iValidationException                   = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ValidationException"}
+	iCreateDatasetRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "CreateDatasetRequest"}
+	iCreateDatasetResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "CreateDatasetResponse"}
+	iCreateInferenceSchedulerRequest       = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "CreateInferenceSchedulerRequest"}
+	iCreateInferenceSchedulerResponse      = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "CreateInferenceSchedulerResponse"}
+	iCreateLabelGroupRequest               = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "CreateLabelGroupRequest"}
+	iCreateLabelGroupResponse              = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "CreateLabelGroupResponse"}
+	iCreateLabelRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "CreateLabelRequest"}
+	iCreateLabelResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "CreateLabelResponse"}
+	iCreateModelRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "CreateModelRequest"}
+	iCreateModelResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "CreateModelResponse"}
+	iCreateRetrainingSchedulerRequest      = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "CreateRetrainingSchedulerRequest"}
+	iCreateRetrainingSchedulerResponse     = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "CreateRetrainingSchedulerResponse"}
+	iDeleteDatasetRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DeleteDatasetRequest"}
+	iDeleteInferenceSchedulerRequest       = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DeleteInferenceSchedulerRequest"}
+	iDeleteLabelGroupRequest               = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DeleteLabelGroupRequest"}
+	iDeleteLabelRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DeleteLabelRequest"}
+	iDeleteModelRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DeleteModelRequest"}
+	iDeleteResourcePolicyRequest           = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DeleteResourcePolicyRequest"}
+	iDeleteRetrainingSchedulerRequest      = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DeleteRetrainingSchedulerRequest"}
+	iDescribeDataIngestionJobRequest       = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DescribeDataIngestionJobRequest"}
+	iDescribeDataIngestionJobResponse      = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DescribeDataIngestionJobResponse"}
+	iDescribeDatasetRequest                = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DescribeDatasetRequest"}
+	iDescribeDatasetResponse               = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DescribeDatasetResponse"}
+	iDescribeInferenceSchedulerRequest     = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DescribeInferenceSchedulerRequest"}
+	iDescribeInferenceSchedulerResponse    = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DescribeInferenceSchedulerResponse"}
+	iDescribeLabelGroupRequest             = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DescribeLabelGroupRequest"}
+	iDescribeLabelGroupResponse            = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DescribeLabelGroupResponse"}
+	iDescribeLabelRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DescribeLabelRequest"}
+	iDescribeLabelResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DescribeLabelResponse"}
+	iDescribeModelRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DescribeModelRequest"}
+	iDescribeModelResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DescribeModelResponse"}
+	iDescribeModelVersionRequest           = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DescribeModelVersionRequest"}
+	iDescribeModelVersionResponse          = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DescribeModelVersionResponse"}
+	iDescribeResourcePolicyRequest         = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DescribeResourcePolicyRequest"}
+	iDescribeResourcePolicyResponse        = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DescribeResourcePolicyResponse"}
+	iDescribeRetrainingSchedulerRequest    = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DescribeRetrainingSchedulerRequest"}
+	iDescribeRetrainingSchedulerResponse   = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "DescribeRetrainingSchedulerResponse"}
+	iImportDatasetRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ImportDatasetRequest"}
+	iImportDatasetResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ImportDatasetResponse"}
+	iImportModelVersionRequest             = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ImportModelVersionRequest"}
+	iImportModelVersionResponse            = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ImportModelVersionResponse"}
+	iListDataIngestionJobsRequest          = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ListDataIngestionJobsRequest"}
+	iListDataIngestionJobsResponse         = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ListDataIngestionJobsResponse"}
+	iListDatasetsRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ListDatasetsRequest"}
+	iListDatasetsResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ListDatasetsResponse"}
+	iListInferenceEventsRequest            = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ListInferenceEventsRequest"}
+	iListInferenceEventsResponse           = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ListInferenceEventsResponse"}
+	iListInferenceExecutionsRequest        = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ListInferenceExecutionsRequest"}
+	iListInferenceExecutionsResponse       = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ListInferenceExecutionsResponse"}
+	iListInferenceSchedulersRequest        = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ListInferenceSchedulersRequest"}
+	iListInferenceSchedulersResponse       = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ListInferenceSchedulersResponse"}
+	iListLabelGroupsRequest                = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ListLabelGroupsRequest"}
+	iListLabelGroupsResponse               = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ListLabelGroupsResponse"}
+	iListLabelsRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ListLabelsRequest"}
+	iListLabelsResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ListLabelsResponse"}
+	iListModelsRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ListModelsRequest"}
+	iListModelsResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ListModelsResponse"}
+	iListModelVersionsRequest              = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ListModelVersionsRequest"}
+	iListModelVersionsResponse             = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ListModelVersionsResponse"}
+	iListRetrainingSchedulersRequest       = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ListRetrainingSchedulersRequest"}
+	iListRetrainingSchedulersResponse      = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ListRetrainingSchedulersResponse"}
+	iListSensorStatisticsRequest           = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ListSensorStatisticsRequest"}
+	iListSensorStatisticsResponse          = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ListSensorStatisticsResponse"}
+	iListTagsForResourceRequest            = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse           = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "ListTagsForResourceResponse"}
+	iPutResourcePolicyRequest              = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "PutResourcePolicyRequest"}
+	iPutResourcePolicyResponse             = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "PutResourcePolicyResponse"}
+	iStartDataIngestionJobRequest          = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "StartDataIngestionJobRequest"}
+	iStartDataIngestionJobResponse         = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "StartDataIngestionJobResponse"}
+	iStartInferenceSchedulerRequest        = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "StartInferenceSchedulerRequest"}
+	iStartInferenceSchedulerResponse       = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "StartInferenceSchedulerResponse"}
+	iStartRetrainingSchedulerRequest       = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "StartRetrainingSchedulerRequest"}
+	iStartRetrainingSchedulerResponse      = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "StartRetrainingSchedulerResponse"}
+	iStopInferenceSchedulerRequest         = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "StopInferenceSchedulerRequest"}
+	iStopInferenceSchedulerResponse        = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "StopInferenceSchedulerResponse"}
+	iStopRetrainingSchedulerRequest        = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "StopRetrainingSchedulerRequest"}
+	iStopRetrainingSchedulerResponse       = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "StopRetrainingSchedulerResponse"}
+	iTagResourceRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "TagResourceRequest"}
+	iTagResourceResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "TagResourceResponse"}
+	iUntagResourceRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "UntagResourceResponse"}
+	iUpdateActiveModelVersionRequest       = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "UpdateActiveModelVersionRequest"}
+	iUpdateActiveModelVersionResponse      = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "UpdateActiveModelVersionResponse"}
+	iUpdateInferenceSchedulerRequest       = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "UpdateInferenceSchedulerRequest"}
+	iUpdateLabelGroupRequest               = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "UpdateLabelGroupRequest"}
+	iUpdateModelRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "UpdateModelRequest"}
+	iUpdateRetrainingSchedulerRequest      = smithy.ShapeID{Namespace: "com.amazonaws.lookoutequipment", Name: "UpdateRetrainingSchedulerRequest"}
+	pUnit                                  = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.MediaType{Type: "application/json"}}}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.MediaType{Type: "application/json"}}, DirectMask: 0x40000}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_Message}}
+var mAutoPromotionResult = smithy.SchemaMembers{List: []*smithy.Schema{&sAutoPromotionResult_MODEL_PROMOTED, &sAutoPromotionResult_MODEL_NOT_PROMOTED, &sAutoPromotionResult_RETRAINING_INTERNAL_ERROR, &sAutoPromotionResult_RETRAINING_CUSTOMER_ERROR, &sAutoPromotionResult_RETRAINING_CANCELLED}}
+var mCategoricalValues = smithy.SchemaMembers{List: []*smithy.Schema{&sCategoricalValues_Status, &sCategoricalValues_NumberOfCategory}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_Message}}
+var mCountPercent = smithy.SchemaMembers{List: []*smithy.Schema{&sCountPercent_Count, &sCountPercent_Percentage}}
+var m_DataIngestionJobSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_DataIngestionJobSummaries_member}}
+var mDataIngestionJobSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sDataIngestionJobSummary_JobId, &sDataIngestionJobSummary_DatasetName, &sDataIngestionJobSummary_DatasetArn, &sDataIngestionJobSummary_IngestionInputConfiguration, &sDataIngestionJobSummary_Status}}
+var mDataPreProcessingConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sDataPreProcessingConfiguration_TargetSamplingRate}}
+var mDataQualitySummary = smithy.SchemaMembers{List: []*smithy.Schema{&sDataQualitySummary_InsufficientSensorData, &sDataQualitySummary_MissingSensorData, &sDataQualitySummary_InvalidSensorData, &sDataQualitySummary_UnsupportedTimestamps, &sDataQualitySummary_DuplicateTimestamps}}
+var mDatasetSchema = smithy.SchemaMembers{List: []*smithy.Schema{&sDatasetSchema_InlineDataSchema}}
+var mDatasetStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sDatasetStatus_CREATED, &sDatasetStatus_INGESTION_IN_PROGRESS, &sDatasetStatus_ACTIVE, &sDatasetStatus_IMPORT_IN_PROGRESS}}
+var m_DatasetSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_DatasetSummaries_member}}
+var mDatasetSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sDatasetSummary_DatasetName, &sDatasetSummary_DatasetArn, &sDatasetSummary_Status, &sDatasetSummary_CreatedAt}}
+var mDataUploadFrequency = smithy.SchemaMembers{List: []*smithy.Schema{&sDataUploadFrequency_PT5M, &sDataUploadFrequency_PT10M, &sDataUploadFrequency_PT15M, &sDataUploadFrequency_PT30M, &sDataUploadFrequency_PT1H}}
+var mDuplicateTimestamps = smithy.SchemaMembers{List: []*smithy.Schema{&sDuplicateTimestamps_TotalNumberOfDuplicateTimestamps}}
+var m_FaultCodes = smithy.SchemaMembers{List: []*smithy.Schema{&s_FaultCodes_member}}
+var mInferenceDataImportStrategy = smithy.SchemaMembers{List: []*smithy.Schema{&sInferenceDataImportStrategy_NO_IMPORT, &sInferenceDataImportStrategy_ADD_WHEN_EMPTY, &sInferenceDataImportStrategy_OVERWRITE}}
+var m_InferenceEventSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_InferenceEventSummaries_member}}
+var mInferenceEventSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sInferenceEventSummary_InferenceSchedulerArn, &sInferenceEventSummary_InferenceSchedulerName, &sInferenceEventSummary_EventStartTime, &sInferenceEventSummary_EventEndTime, &sInferenceEventSummary_Diagnostics, &sInferenceEventSummary_EventDurationInSeconds}}
+var mInferenceExecutionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sInferenceExecutionStatus_IN_PROGRESS, &sInferenceExecutionStatus_SUCCESS, &sInferenceExecutionStatus_FAILED}}
+var m_InferenceExecutionSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_InferenceExecutionSummaries_member}}
+var mInferenceExecutionSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sInferenceExecutionSummary_ModelName, &sInferenceExecutionSummary_ModelArn, &sInferenceExecutionSummary_InferenceSchedulerName, &sInferenceExecutionSummary_InferenceSchedulerArn, &sInferenceExecutionSummary_ScheduledStartTime, &sInferenceExecutionSummary_DataStartTime, &sInferenceExecutionSummary_DataEndTime, &sInferenceExecutionSummary_DataInputConfiguration, &sInferenceExecutionSummary_DataOutputConfiguration, &sInferenceExecutionSummary_CustomerResultObject, &sInferenceExecutionSummary_Status, &sInferenceExecutionSummary_FailedReason, &sInferenceExecutionSummary_ModelVersion, &sInferenceExecutionSummary_ModelVersionArn}, Seed: 78, Slots: []uint16{
+	5, 6, 0, 13, 0, 9, 2, 0, 0, 11, 0, 7, 10, 0, 0, 0, 0, 0, 0, 12, 0, 0, 0, 0,
+	0, 8, 1, 0, 3, 14, 0, 4,
+}}
+var mInferenceInputConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sInferenceInputConfiguration_S3InputConfiguration, &sInferenceInputConfiguration_InputTimeZoneOffset, &sInferenceInputConfiguration_InferenceInputNameConfiguration}}
+var mInferenceInputNameConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sInferenceInputNameConfiguration_TimestampFormat, &sInferenceInputNameConfiguration_ComponentTimestampDelimiter}}
+var mInferenceOutputConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sInferenceOutputConfiguration_S3OutputConfiguration, &sInferenceOutputConfiguration_KmsKeyId}}
+var mInferenceS3InputConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sInferenceS3InputConfiguration_Bucket, &sInferenceS3InputConfiguration_Prefix}}
+var mInferenceS3OutputConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sInferenceS3OutputConfiguration_Bucket, &sInferenceS3OutputConfiguration_Prefix}}
+var mInferenceSchedulerStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sInferenceSchedulerStatus_PENDING, &sInferenceSchedulerStatus_RUNNING, &sInferenceSchedulerStatus_STOPPING, &sInferenceSchedulerStatus_STOPPED}}
+var m_InferenceSchedulerSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_InferenceSchedulerSummaries_member}}
+var mInferenceSchedulerSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sInferenceSchedulerSummary_ModelName, &sInferenceSchedulerSummary_ModelArn, &sInferenceSchedulerSummary_InferenceSchedulerName, &sInferenceSchedulerSummary_InferenceSchedulerArn, &sInferenceSchedulerSummary_Status, &sInferenceSchedulerSummary_DataDelayOffsetInMinutes, &sInferenceSchedulerSummary_DataUploadFrequency, &sInferenceSchedulerSummary_LatestInferenceResult}}
+var mIngestedFilesSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sIngestedFilesSummary_TotalNumberOfFiles, &sIngestedFilesSummary_IngestedNumberOfFiles, &sIngestedFilesSummary_DiscardedFiles}}
+var mIngestionInputConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sIngestionInputConfiguration_S3InputConfiguration}}
+var mIngestionJobStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sIngestionJobStatus_IN_PROGRESS, &sIngestionJobStatus_SUCCESS, &sIngestionJobStatus_FAILED, &sIngestionJobStatus_IMPORT_IN_PROGRESS}}
+var mIngestionS3InputConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sIngestionS3InputConfiguration_Bucket, &sIngestionS3InputConfiguration_Prefix, &sIngestionS3InputConfiguration_KeyPattern}}
+var mInsufficientSensorData = smithy.SchemaMembers{List: []*smithy.Schema{&sInsufficientSensorData_MissingCompleteSensorData, &sInsufficientSensorData_SensorsWithShortDateRange}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_Message}}
+var mInvalidSensorData = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidSensorData_AffectedSensorCount, &sInvalidSensorData_TotalNumberOfInvalidValues}}
+var m_LabelGroupSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_LabelGroupSummaries_member}}
+var mLabelGroupSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sLabelGroupSummary_LabelGroupName, &sLabelGroupSummary_LabelGroupArn, &sLabelGroupSummary_CreatedAt, &sLabelGroupSummary_UpdatedAt}}
+var mLabelRating = smithy.SchemaMembers{List: []*smithy.Schema{&sLabelRating_ANOMALY, &sLabelRating_NO_ANOMALY, &sLabelRating_NEUTRAL}}
+var mLabelsInputConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sLabelsInputConfiguration_S3InputConfiguration, &sLabelsInputConfiguration_LabelGroupName}}
+var mLabelsS3InputConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sLabelsS3InputConfiguration_Bucket, &sLabelsS3InputConfiguration_Prefix}}
+var m_LabelSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_LabelSummaries_member}}
+var mLabelSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sLabelSummary_LabelGroupName, &sLabelSummary_LabelId, &sLabelSummary_LabelGroupArn, &sLabelSummary_StartTime, &sLabelSummary_EndTime, &sLabelSummary_Rating, &sLabelSummary_FaultCode, &sLabelSummary_Equipment, &sLabelSummary_CreatedAt}, Seed: 1, Slots: []uint16{
+	0, 0, 6, 9, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 2, 0, 0, 0, 0, 3, 0, 0, 0,
+	0, 0, 8, 1, 0, 4, 0, 5,
+}}
+var mLargeTimestampGaps = smithy.SchemaMembers{List: []*smithy.Schema{&sLargeTimestampGaps_Status, &sLargeTimestampGaps_NumberOfLargeTimestampGaps, &sLargeTimestampGaps_MaxTimestampGapInDays}}
+var mLatestInferenceResult = smithy.SchemaMembers{List: []*smithy.Schema{&sLatestInferenceResult_ANOMALOUS, &sLatestInferenceResult_NORMAL}}
+var m_ListOfDiscardedFiles = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListOfDiscardedFiles_member}}
+var mMissingCompleteSensorData = smithy.SchemaMembers{List: []*smithy.Schema{&sMissingCompleteSensorData_AffectedSensorCount}}
+var mMissingSensorData = smithy.SchemaMembers{List: []*smithy.Schema{&sMissingSensorData_AffectedSensorCount, &sMissingSensorData_TotalNumberOfMissingValues}}
+var mModelDiagnosticsOutputConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sModelDiagnosticsOutputConfiguration_S3OutputConfiguration, &sModelDiagnosticsOutputConfiguration_KmsKeyId}}
+var mModelDiagnosticsS3OutputConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sModelDiagnosticsS3OutputConfiguration_Bucket, &sModelDiagnosticsS3OutputConfiguration_Prefix}}
+var mModelPromoteMode = smithy.SchemaMembers{List: []*smithy.Schema{&sModelPromoteMode_MANAGED, &sModelPromoteMode_MANUAL}}
+var mModelQuality = smithy.SchemaMembers{List: []*smithy.Schema{&sModelQuality_QUALITY_THRESHOLD_MET, &sModelQuality_CANNOT_DETERMINE_QUALITY, &sModelQuality_POOR_QUALITY_DETECTED}}
+var mModelStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sModelStatus_IN_PROGRESS, &sModelStatus_SUCCESS, &sModelStatus_FAILED, &sModelStatus_IMPORT_IN_PROGRESS}}
+var m_ModelSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_ModelSummaries_member}}
+var mModelSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sModelSummary_ModelName, &sModelSummary_ModelArn, &sModelSummary_DatasetName, &sModelSummary_DatasetArn, &sModelSummary_Status, &sModelSummary_CreatedAt, &sModelSummary_ActiveModelVersion, &sModelSummary_ActiveModelVersionArn, &sModelSummary_LatestScheduledRetrainingStatus, &sModelSummary_LatestScheduledRetrainingModelVersion, &sModelSummary_LatestScheduledRetrainingStartTime, &sModelSummary_NextScheduledRetrainingStartDate, &sModelSummary_RetrainingSchedulerStatus, &sModelSummary_ModelDiagnosticsOutputConfiguration, &sModelSummary_ModelQuality}, Seed: 42, Slots: []uint16{
+	0, 0, 9, 6, 10, 4, 0, 12, 5, 13, 0, 0, 0, 3, 0, 8, 0, 0, 7, 2, 0, 0, 0, 15,
+	0, 0, 0, 0, 1, 0, 11, 14,
+}}
+var mModelVersionSourceType = smithy.SchemaMembers{List: []*smithy.Schema{&sModelVersionSourceType_TRAINING, &sModelVersionSourceType_RETRAINING, &sModelVersionSourceType_IMPORT}}
+var mModelVersionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sModelVersionStatus_IN_PROGRESS, &sModelVersionStatus_SUCCESS, &sModelVersionStatus_FAILED, &sModelVersionStatus_IMPORT_IN_PROGRESS, &sModelVersionStatus_CANCELED}}
+var m_ModelVersionSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_ModelVersionSummaries_member}}
+var mModelVersionSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sModelVersionSummary_ModelName, &sModelVersionSummary_ModelArn, &sModelVersionSummary_ModelVersion, &sModelVersionSummary_ModelVersionArn, &sModelVersionSummary_CreatedAt, &sModelVersionSummary_Status, &sModelVersionSummary_SourceType, &sModelVersionSummary_ModelQuality}}
+var mMonotonicity = smithy.SchemaMembers{List: []*smithy.Schema{&sMonotonicity_DECREASING, &sMonotonicity_INCREASING, &sMonotonicity_STATIC}}
+var mMonotonicValues = smithy.SchemaMembers{List: []*smithy.Schema{&sMonotonicValues_Status, &sMonotonicValues_Monotonicity}}
+var mMultipleOperatingModes = smithy.SchemaMembers{List: []*smithy.Schema{&sMultipleOperatingModes_Status}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message}}
+var mRetrainingSchedulerStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sRetrainingSchedulerStatus_PENDING, &sRetrainingSchedulerStatus_RUNNING, &sRetrainingSchedulerStatus_STOPPING, &sRetrainingSchedulerStatus_STOPPED}}
+var m_RetrainingSchedulerSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_RetrainingSchedulerSummaries_member}}
+var mRetrainingSchedulerSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sRetrainingSchedulerSummary_ModelName, &sRetrainingSchedulerSummary_ModelArn, &sRetrainingSchedulerSummary_Status, &sRetrainingSchedulerSummary_RetrainingStartDate, &sRetrainingSchedulerSummary_RetrainingFrequency, &sRetrainingSchedulerSummary_LookbackWindow}}
+var mS3Object = smithy.SchemaMembers{List: []*smithy.Schema{&sS3Object_Bucket, &sS3Object_Key}}
+var m_SensorStatisticsSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_SensorStatisticsSummaries_member}}
+var mSensorStatisticsSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sSensorStatisticsSummary_ComponentName, &sSensorStatisticsSummary_SensorName, &sSensorStatisticsSummary_DataExists, &sSensorStatisticsSummary_MissingValues, &sSensorStatisticsSummary_InvalidValues, &sSensorStatisticsSummary_InvalidDateEntries, &sSensorStatisticsSummary_DuplicateTimestamps, &sSensorStatisticsSummary_CategoricalValues, &sSensorStatisticsSummary_MultipleOperatingModes, &sSensorStatisticsSummary_LargeTimestampGaps, &sSensorStatisticsSummary_MonotonicValues, &sSensorStatisticsSummary_DataStartTime, &sSensorStatisticsSummary_DataEndTime}, Seed: 11, Slots: []uint16{
+	0, 0, 0, 2, 6, 7, 9, 0, 0, 0, 0, 0, 11, 0, 4, 0, 10, 0, 3, 0, 13, 12, 0, 0,
+	1, 0, 0, 0, 5, 0, 0, 8,
+}}
+var mSensorsWithShortDateRange = smithy.SchemaMembers{List: []*smithy.Schema{&sSensorsWithShortDateRange_AffectedSensorCount}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_Message}}
+var mStatisticalIssueStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sStatisticalIssueStatus_POTENTIAL_ISSUE_DETECTED, &sStatisticalIssueStatus_NO_ISSUE_DETECTED}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var mTargetSamplingRate = smithy.SchemaMembers{List: []*smithy.Schema{&sTargetSamplingRate_PT1S, &sTargetSamplingRate_PT5S, &sTargetSamplingRate_PT10S, &sTargetSamplingRate_PT15S, &sTargetSamplingRate_PT30S, &sTargetSamplingRate_PT1M, &sTargetSamplingRate_PT5M, &sTargetSamplingRate_PT10M, &sTargetSamplingRate_PT15M, &sTargetSamplingRate_PT30M, &sTargetSamplingRate_PT1H}, Seed: 19, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 6, 0, 0, 0, 0, 0, 0, 8, 9, 4, 0, 0, 3,
+	0, 0, 11, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 7, 0, 0, 2, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0,
+}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_Message}}
+var mUnsupportedTimestamps = smithy.SchemaMembers{List: []*smithy.Schema{&sUnsupportedTimestamps_TotalNumberOfUnsupportedTimestamps}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_Message}}
+var mCreateDatasetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDatasetRequest_DatasetName, &sCreateDatasetRequest_DatasetSchema, &sCreateDatasetRequest_ServerSideKmsKeyId, &sCreateDatasetRequest_ClientToken, &sCreateDatasetRequest_Tags}}
+var mCreateDatasetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDatasetResponse_DatasetName, &sCreateDatasetResponse_DatasetArn, &sCreateDatasetResponse_Status}}
+var mCreateInferenceSchedulerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateInferenceSchedulerRequest_ModelName, &sCreateInferenceSchedulerRequest_InferenceSchedulerName, &sCreateInferenceSchedulerRequest_DataDelayOffsetInMinutes, &sCreateInferenceSchedulerRequest_DataUploadFrequency, &sCreateInferenceSchedulerRequest_DataInputConfiguration, &sCreateInferenceSchedulerRequest_DataOutputConfiguration, &sCreateInferenceSchedulerRequest_RoleArn, &sCreateInferenceSchedulerRequest_ServerSideKmsKeyId, &sCreateInferenceSchedulerRequest_ClientToken, &sCreateInferenceSchedulerRequest_Tags}, Seed: 5, Slots: []uint16{
+	0, 0, 4, 0, 0, 0, 0, 0, 9, 0, 0, 0, 2, 0, 0, 7, 0, 0, 0, 0, 0, 8, 5, 3,
+	0, 0, 10, 0, 0, 6, 0, 1,
+}}
+var mCreateInferenceSchedulerResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateInferenceSchedulerResponse_InferenceSchedulerArn, &sCreateInferenceSchedulerResponse_InferenceSchedulerName, &sCreateInferenceSchedulerResponse_Status, &sCreateInferenceSchedulerResponse_ModelQuality}}
+var mCreateLabelGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLabelGroupRequest_LabelGroupName, &sCreateLabelGroupRequest_FaultCodes, &sCreateLabelGroupRequest_ClientToken, &sCreateLabelGroupRequest_Tags}}
+var mCreateLabelGroupResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLabelGroupResponse_LabelGroupName, &sCreateLabelGroupResponse_LabelGroupArn}}
+var mCreateLabelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLabelRequest_LabelGroupName, &sCreateLabelRequest_StartTime, &sCreateLabelRequest_EndTime, &sCreateLabelRequest_Rating, &sCreateLabelRequest_FaultCode, &sCreateLabelRequest_Notes, &sCreateLabelRequest_Equipment, &sCreateLabelRequest_ClientToken}}
+var mCreateLabelResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLabelResponse_LabelId}}
+var mCreateModelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateModelRequest_ModelName, &sCreateModelRequest_DatasetName, &sCreateModelRequest_DatasetSchema, &sCreateModelRequest_LabelsInputConfiguration, &sCreateModelRequest_ClientToken, &sCreateModelRequest_TrainingDataStartTime, &sCreateModelRequest_TrainingDataEndTime, &sCreateModelRequest_EvaluationDataStartTime, &sCreateModelRequest_EvaluationDataEndTime, &sCreateModelRequest_RoleArn, &sCreateModelRequest_DataPreProcessingConfiguration, &sCreateModelRequest_ServerSideKmsKeyId, &sCreateModelRequest_Tags, &sCreateModelRequest_OffCondition, &sCreateModelRequest_ModelDiagnosticsOutputConfiguration}, Seed: 20, Slots: []uint16{
+	5, 0, 14, 0, 10, 0, 0, 0, 1, 0, 0, 0, 6, 8, 9, 15, 0, 0, 0, 0, 0, 0, 11, 2,
+	12, 4, 13, 3, 0, 0, 0, 7,
+}}
+var mCreateModelResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateModelResponse_ModelArn, &sCreateModelResponse_Status}}
+var mCreateRetrainingSchedulerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRetrainingSchedulerRequest_ModelName, &sCreateRetrainingSchedulerRequest_RetrainingStartDate, &sCreateRetrainingSchedulerRequest_RetrainingFrequency, &sCreateRetrainingSchedulerRequest_LookbackWindow, &sCreateRetrainingSchedulerRequest_PromoteMode, &sCreateRetrainingSchedulerRequest_ClientToken}}
+var mCreateRetrainingSchedulerResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRetrainingSchedulerResponse_ModelName, &sCreateRetrainingSchedulerResponse_ModelArn, &sCreateRetrainingSchedulerResponse_Status}}
+var mDeleteDatasetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDatasetRequest_DatasetName}}
+var mDeleteInferenceSchedulerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteInferenceSchedulerRequest_InferenceSchedulerName}}
+var mDeleteLabelGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteLabelGroupRequest_LabelGroupName}}
+var mDeleteLabelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteLabelRequest_LabelGroupName, &sDeleteLabelRequest_LabelId}}
+var mDeleteModelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteModelRequest_ModelName}}
+var mDeleteResourcePolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteResourcePolicyRequest_ResourceArn}}
+var mDeleteRetrainingSchedulerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRetrainingSchedulerRequest_ModelName}}
+var mDescribeDataIngestionJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDataIngestionJobRequest_JobId}}
+var mDescribeDataIngestionJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDataIngestionJobResponse_JobId, &sDescribeDataIngestionJobResponse_DatasetArn, &sDescribeDataIngestionJobResponse_IngestionInputConfiguration, &sDescribeDataIngestionJobResponse_RoleArn, &sDescribeDataIngestionJobResponse_CreatedAt, &sDescribeDataIngestionJobResponse_Status, &sDescribeDataIngestionJobResponse_FailedReason, &sDescribeDataIngestionJobResponse_DataQualitySummary, &sDescribeDataIngestionJobResponse_IngestedFilesSummary, &sDescribeDataIngestionJobResponse_StatusDetail, &sDescribeDataIngestionJobResponse_IngestedDataSize, &sDescribeDataIngestionJobResponse_DataStartTime, &sDescribeDataIngestionJobResponse_DataEndTime, &sDescribeDataIngestionJobResponse_SourceDatasetArn}, Seed: 26, Slots: []uint16{
+	7, 8, 0, 0, 0, 0, 0, 0, 12, 6, 0, 0, 3, 5, 0, 0, 10, 0, 0, 1, 9, 0, 14, 0,
+	4, 0, 0, 11, 0, 13, 0, 2,
+}}
+var mDescribeDatasetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDatasetRequest_DatasetName}}
+var mDescribeDatasetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDatasetResponse_DatasetName, &sDescribeDatasetResponse_DatasetArn, &sDescribeDatasetResponse_CreatedAt, &sDescribeDatasetResponse_LastUpdatedAt, &sDescribeDatasetResponse_Status, &sDescribeDatasetResponse_Schema, &sDescribeDatasetResponse_ServerSideKmsKeyId, &sDescribeDatasetResponse_IngestionInputConfiguration, &sDescribeDatasetResponse_DataQualitySummary, &sDescribeDatasetResponse_IngestedFilesSummary, &sDescribeDatasetResponse_RoleArn, &sDescribeDatasetResponse_DataStartTime, &sDescribeDatasetResponse_DataEndTime, &sDescribeDatasetResponse_SourceDatasetArn}, Seed: 25, Slots: []uint16{
+	0, 0, 0, 0, 4, 0, 0, 0, 1, 6, 0, 7, 9, 0, 5, 12, 0, 14, 0, 0, 0, 11, 10, 0,
+	0, 13, 3, 2, 0, 0, 8, 0,
+}}
+var mDescribeInferenceSchedulerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeInferenceSchedulerRequest_InferenceSchedulerName}}
+var mDescribeInferenceSchedulerResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeInferenceSchedulerResponse_ModelArn, &sDescribeInferenceSchedulerResponse_ModelName, &sDescribeInferenceSchedulerResponse_InferenceSchedulerName, &sDescribeInferenceSchedulerResponse_InferenceSchedulerArn, &sDescribeInferenceSchedulerResponse_Status, &sDescribeInferenceSchedulerResponse_DataDelayOffsetInMinutes, &sDescribeInferenceSchedulerResponse_DataUploadFrequency, &sDescribeInferenceSchedulerResponse_CreatedAt, &sDescribeInferenceSchedulerResponse_UpdatedAt, &sDescribeInferenceSchedulerResponse_DataInputConfiguration, &sDescribeInferenceSchedulerResponse_DataOutputConfiguration, &sDescribeInferenceSchedulerResponse_RoleArn, &sDescribeInferenceSchedulerResponse_ServerSideKmsKeyId, &sDescribeInferenceSchedulerResponse_LatestInferenceResult}, Seed: 115, Slots: []uint16{
+	0, 3, 0, 0, 2, 0, 0, 13, 9, 0, 11, 8, 0, 0, 0, 10, 0, 0, 12, 1, 6, 0, 5, 14,
+	0, 0, 0, 0, 4, 7, 0, 0,
+}}
+var mDescribeLabelGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLabelGroupRequest_LabelGroupName}}
+var mDescribeLabelGroupResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLabelGroupResponse_LabelGroupName, &sDescribeLabelGroupResponse_LabelGroupArn, &sDescribeLabelGroupResponse_FaultCodes, &sDescribeLabelGroupResponse_CreatedAt, &sDescribeLabelGroupResponse_UpdatedAt}}
+var mDescribeLabelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLabelRequest_LabelGroupName, &sDescribeLabelRequest_LabelId}}
+var mDescribeLabelResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLabelResponse_LabelGroupName, &sDescribeLabelResponse_LabelGroupArn, &sDescribeLabelResponse_LabelId, &sDescribeLabelResponse_StartTime, &sDescribeLabelResponse_EndTime, &sDescribeLabelResponse_Rating, &sDescribeLabelResponse_FaultCode, &sDescribeLabelResponse_Notes, &sDescribeLabelResponse_Equipment, &sDescribeLabelResponse_CreatedAt}, Seed: 4, Slots: []uint16{
+	0, 0, 0, 0, 9, 0, 0, 0, 0, 6, 0, 0, 10, 4, 0, 0, 1, 3, 0, 7, 0, 0, 0, 0,
+	8, 0, 0, 2, 0, 0, 0, 5,
+}}
+var mDescribeModelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeModelRequest_ModelName}}
+var mDescribeModelResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeModelResponse_ModelName, &sDescribeModelResponse_ModelArn, &sDescribeModelResponse_DatasetName, &sDescribeModelResponse_DatasetArn, &sDescribeModelResponse_Schema, &sDescribeModelResponse_LabelsInputConfiguration, &sDescribeModelResponse_TrainingDataStartTime, &sDescribeModelResponse_TrainingDataEndTime, &sDescribeModelResponse_EvaluationDataStartTime, &sDescribeModelResponse_EvaluationDataEndTime, &sDescribeModelResponse_RoleArn, &sDescribeModelResponse_DataPreProcessingConfiguration, &sDescribeModelResponse_Status, &sDescribeModelResponse_TrainingExecutionStartTime, &sDescribeModelResponse_TrainingExecutionEndTime, &sDescribeModelResponse_FailedReason, &sDescribeModelResponse_ModelMetrics, &sDescribeModelResponse_LastUpdatedTime, &sDescribeModelResponse_CreatedAt, &sDescribeModelResponse_ServerSideKmsKeyId, &sDescribeModelResponse_OffCondition, &sDescribeModelResponse_SourceModelVersionArn, &sDescribeModelResponse_ImportJobStartTime, &sDescribeModelResponse_ImportJobEndTime, &sDescribeModelResponse_ActiveModelVersion, &sDescribeModelResponse_ActiveModelVersionArn, &sDescribeModelResponse_ModelVersionActivatedAt, &sDescribeModelResponse_PreviousActiveModelVersion, &sDescribeModelResponse_PreviousActiveModelVersionArn, &sDescribeModelResponse_PreviousModelVersionActivatedAt, &sDescribeModelResponse_PriorModelMetrics, &sDescribeModelResponse_LatestScheduledRetrainingFailedReason, &sDescribeModelResponse_LatestScheduledRetrainingStatus, &sDescribeModelResponse_LatestScheduledRetrainingModelVersion, &sDescribeModelResponse_LatestScheduledRetrainingStartTime, &sDescribeModelResponse_LatestScheduledRetrainingAvailableDataInDays, &sDescribeModelResponse_NextScheduledRetrainingStartDate, &sDescribeModelResponse_AccumulatedInferenceDataStartTime, &sDescribeModelResponse_AccumulatedInferenceDataEndTime, &sDescribeModelResponse_RetrainingSchedulerStatus, &sDescribeModelResponse_ModelDiagnosticsOutputConfiguration, &sDescribeModelResponse_ModelQuality}, Seed: 103, Slots: []uint16{
+	0, 30, 0, 0, 0, 0, 10, 25, 0, 0, 38, 0, 0, 0, 13, 0, 0, 9, 0, 0, 0, 0, 40, 15,
+	21, 0, 0, 0, 1, 14, 0, 0, 41, 0, 33, 6, 0, 0, 0, 0, 0, 23, 17, 0, 0, 0, 36, 0,
+	0, 0, 0, 0, 28, 0, 5, 31, 7, 32, 0, 12, 0, 0, 0, 42, 0, 0, 0, 0, 4, 0, 11, 0,
+	0, 0, 0, 0, 0, 37, 0, 18, 0, 0, 0, 0, 16, 0, 35, 34, 0, 0, 0, 27, 39, 0, 0, 0,
+	0, 0, 0, 24, 0, 26, 0, 0, 0, 19, 0, 2, 8, 0, 0, 0, 20, 3, 0, 0, 0, 0, 0, 0,
+	22, 0, 0, 0, 0, 0, 29, 0,
+}}
+var mDescribeModelVersionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeModelVersionRequest_ModelName, &sDescribeModelVersionRequest_ModelVersion}}
+var mDescribeModelVersionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeModelVersionResponse_ModelName, &sDescribeModelVersionResponse_ModelArn, &sDescribeModelVersionResponse_ModelVersion, &sDescribeModelVersionResponse_ModelVersionArn, &sDescribeModelVersionResponse_Status, &sDescribeModelVersionResponse_SourceType, &sDescribeModelVersionResponse_DatasetName, &sDescribeModelVersionResponse_DatasetArn, &sDescribeModelVersionResponse_Schema, &sDescribeModelVersionResponse_LabelsInputConfiguration, &sDescribeModelVersionResponse_TrainingDataStartTime, &sDescribeModelVersionResponse_TrainingDataEndTime, &sDescribeModelVersionResponse_EvaluationDataStartTime, &sDescribeModelVersionResponse_EvaluationDataEndTime, &sDescribeModelVersionResponse_RoleArn, &sDescribeModelVersionResponse_DataPreProcessingConfiguration, &sDescribeModelVersionResponse_TrainingExecutionStartTime, &sDescribeModelVersionResponse_TrainingExecutionEndTime, &sDescribeModelVersionResponse_FailedReason, &sDescribeModelVersionResponse_ModelMetrics, &sDescribeModelVersionResponse_LastUpdatedTime, &sDescribeModelVersionResponse_CreatedAt, &sDescribeModelVersionResponse_ServerSideKmsKeyId, &sDescribeModelVersionResponse_OffCondition, &sDescribeModelVersionResponse_SourceModelVersionArn, &sDescribeModelVersionResponse_ImportJobStartTime, &sDescribeModelVersionResponse_ImportJobEndTime, &sDescribeModelVersionResponse_ImportedDataSizeInBytes, &sDescribeModelVersionResponse_PriorModelMetrics, &sDescribeModelVersionResponse_RetrainingAvailableDataInDays, &sDescribeModelVersionResponse_AutoPromotionResult, &sDescribeModelVersionResponse_AutoPromotionResultReason, &sDescribeModelVersionResponse_ModelDiagnosticsOutputConfiguration, &sDescribeModelVersionResponse_ModelDiagnosticsResultsObject, &sDescribeModelVersionResponse_ModelQuality}, Seed: 217, Slots: []uint16{
+	0, 9, 0, 0, 0, 0, 0, 16, 0, 17, 0, 0, 0, 25, 0, 2, 0, 0, 0, 0, 27, 0, 30, 0,
+	0, 0, 0, 0, 0, 0, 0, 13, 8, 0, 0, 0, 21, 0, 0, 33, 19, 0, 0, 0, 0, 0, 31, 0,
+	0, 0, 0, 0, 7, 0, 5, 0, 0, 0, 26, 0, 0, 15, 0, 0, 14, 22, 6, 4, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 24, 0, 0, 0, 0, 3, 0, 0, 0, 18, 35, 11, 0, 0,
+	0, 0, 10, 0, 0, 0, 20, 34, 0, 0, 29, 32, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	1, 0, 0, 28, 0, 23, 12, 0,
+}}
+var mDescribeResourcePolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeResourcePolicyRequest_ResourceArn}}
+var mDescribeResourcePolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeResourcePolicyResponse_PolicyRevisionId, &sDescribeResourcePolicyResponse_ResourcePolicy, &sDescribeResourcePolicyResponse_CreationTime, &sDescribeResourcePolicyResponse_LastModifiedTime}}
+var mDescribeRetrainingSchedulerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeRetrainingSchedulerRequest_ModelName}}
+var mDescribeRetrainingSchedulerResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeRetrainingSchedulerResponse_ModelName, &sDescribeRetrainingSchedulerResponse_ModelArn, &sDescribeRetrainingSchedulerResponse_RetrainingStartDate, &sDescribeRetrainingSchedulerResponse_RetrainingFrequency, &sDescribeRetrainingSchedulerResponse_LookbackWindow, &sDescribeRetrainingSchedulerResponse_Status, &sDescribeRetrainingSchedulerResponse_PromoteMode, &sDescribeRetrainingSchedulerResponse_CreatedAt, &sDescribeRetrainingSchedulerResponse_UpdatedAt}, Seed: 2, Slots: []uint16{
+	0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 5, 1, 0, 0, 2, 0, 0, 0, 0, 0, 9, 8, 0,
+	6, 0, 3, 0, 0, 7, 0, 0,
+}}
+var mImportDatasetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sImportDatasetRequest_SourceDatasetArn, &sImportDatasetRequest_DatasetName, &sImportDatasetRequest_ClientToken, &sImportDatasetRequest_ServerSideKmsKeyId, &sImportDatasetRequest_Tags}}
+var mImportDatasetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sImportDatasetResponse_DatasetName, &sImportDatasetResponse_DatasetArn, &sImportDatasetResponse_Status, &sImportDatasetResponse_JobId}}
+var mImportModelVersionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sImportModelVersionRequest_SourceModelVersionArn, &sImportModelVersionRequest_ModelName, &sImportModelVersionRequest_DatasetName, &sImportModelVersionRequest_LabelsInputConfiguration, &sImportModelVersionRequest_ClientToken, &sImportModelVersionRequest_RoleArn, &sImportModelVersionRequest_ServerSideKmsKeyId, &sImportModelVersionRequest_Tags, &sImportModelVersionRequest_InferenceDataImportStrategy}, Seed: 1, Slots: []uint16{
+	0, 8, 0, 0, 0, 0, 0, 0, 2, 0, 3, 0, 9, 4, 1, 0, 6, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 5, 0, 0, 7,
+}}
+var mImportModelVersionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sImportModelVersionResponse_ModelName, &sImportModelVersionResponse_ModelArn, &sImportModelVersionResponse_ModelVersionArn, &sImportModelVersionResponse_ModelVersion, &sImportModelVersionResponse_Status}}
+var mListDataIngestionJobsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListDataIngestionJobsRequest_DatasetName, &sListDataIngestionJobsRequest_NextToken, &sListDataIngestionJobsRequest_MaxResults, &sListDataIngestionJobsRequest_Status}}
+var mListDataIngestionJobsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListDataIngestionJobsResponse_NextToken, &sListDataIngestionJobsResponse_DataIngestionJobSummaries}}
+var mListDatasetsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListDatasetsRequest_NextToken, &sListDatasetsRequest_MaxResults, &sListDatasetsRequest_DatasetNameBeginsWith}}
+var mListDatasetsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListDatasetsResponse_NextToken, &sListDatasetsResponse_DatasetSummaries}}
+var mListInferenceEventsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListInferenceEventsRequest_NextToken, &sListInferenceEventsRequest_MaxResults, &sListInferenceEventsRequest_InferenceSchedulerName, &sListInferenceEventsRequest_IntervalStartTime, &sListInferenceEventsRequest_IntervalEndTime}}
+var mListInferenceEventsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListInferenceEventsResponse_NextToken, &sListInferenceEventsResponse_InferenceEventSummaries}}
+var mListInferenceExecutionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListInferenceExecutionsRequest_NextToken, &sListInferenceExecutionsRequest_MaxResults, &sListInferenceExecutionsRequest_InferenceSchedulerName, &sListInferenceExecutionsRequest_DataStartTimeAfter, &sListInferenceExecutionsRequest_DataEndTimeBefore, &sListInferenceExecutionsRequest_Status}}
+var mListInferenceExecutionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListInferenceExecutionsResponse_NextToken, &sListInferenceExecutionsResponse_InferenceExecutionSummaries}}
+var mListInferenceSchedulersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListInferenceSchedulersRequest_NextToken, &sListInferenceSchedulersRequest_MaxResults, &sListInferenceSchedulersRequest_InferenceSchedulerNameBeginsWith, &sListInferenceSchedulersRequest_ModelName, &sListInferenceSchedulersRequest_Status}}
+var mListInferenceSchedulersResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListInferenceSchedulersResponse_NextToken, &sListInferenceSchedulersResponse_InferenceSchedulerSummaries}}
+var mListLabelGroupsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListLabelGroupsRequest_LabelGroupNameBeginsWith, &sListLabelGroupsRequest_NextToken, &sListLabelGroupsRequest_MaxResults}}
+var mListLabelGroupsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListLabelGroupsResponse_NextToken, &sListLabelGroupsResponse_LabelGroupSummaries}}
+var mListLabelsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListLabelsRequest_LabelGroupName, &sListLabelsRequest_IntervalStartTime, &sListLabelsRequest_IntervalEndTime, &sListLabelsRequest_FaultCode, &sListLabelsRequest_Equipment, &sListLabelsRequest_NextToken, &sListLabelsRequest_MaxResults}}
+var mListLabelsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListLabelsResponse_NextToken, &sListLabelsResponse_LabelSummaries}}
+var mListModelsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListModelsRequest_NextToken, &sListModelsRequest_MaxResults, &sListModelsRequest_Status, &sListModelsRequest_ModelNameBeginsWith, &sListModelsRequest_DatasetNameBeginsWith}}
+var mListModelsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListModelsResponse_NextToken, &sListModelsResponse_ModelSummaries}}
+var mListModelVersionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListModelVersionsRequest_ModelName, &sListModelVersionsRequest_NextToken, &sListModelVersionsRequest_MaxResults, &sListModelVersionsRequest_Status, &sListModelVersionsRequest_SourceType, &sListModelVersionsRequest_CreatedAtEndTime, &sListModelVersionsRequest_CreatedAtStartTime, &sListModelVersionsRequest_MaxModelVersion, &sListModelVersionsRequest_MinModelVersion}, Seed: 4, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 4, 0, 9, 0, 0, 7, 0, 0, 0, 0, 3, 0, 6, 0, 0, 0, 0,
+	0, 8, 0, 0, 2, 1, 5, 0,
+}}
+var mListModelVersionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListModelVersionsResponse_NextToken, &sListModelVersionsResponse_ModelVersionSummaries}}
+var mListRetrainingSchedulersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListRetrainingSchedulersRequest_ModelNameBeginsWith, &sListRetrainingSchedulersRequest_Status, &sListRetrainingSchedulersRequest_NextToken, &sListRetrainingSchedulersRequest_MaxResults}}
+var mListRetrainingSchedulersResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListRetrainingSchedulersResponse_RetrainingSchedulerSummaries, &sListRetrainingSchedulersResponse_NextToken}}
+var mListSensorStatisticsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListSensorStatisticsRequest_DatasetName, &sListSensorStatisticsRequest_IngestionJobId, &sListSensorStatisticsRequest_MaxResults, &sListSensorStatisticsRequest_NextToken}}
+var mListSensorStatisticsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListSensorStatisticsResponse_SensorStatisticsSummaries, &sListSensorStatisticsResponse_NextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_Tags}}
+var mPutResourcePolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutResourcePolicyRequest_ResourceArn, &sPutResourcePolicyRequest_ResourcePolicy, &sPutResourcePolicyRequest_PolicyRevisionId, &sPutResourcePolicyRequest_ClientToken}}
+var mPutResourcePolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutResourcePolicyResponse_ResourceArn, &sPutResourcePolicyResponse_PolicyRevisionId}}
+var mStartDataIngestionJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartDataIngestionJobRequest_DatasetName, &sStartDataIngestionJobRequest_IngestionInputConfiguration, &sStartDataIngestionJobRequest_RoleArn, &sStartDataIngestionJobRequest_ClientToken}}
+var mStartDataIngestionJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartDataIngestionJobResponse_JobId, &sStartDataIngestionJobResponse_Status}}
+var mStartInferenceSchedulerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartInferenceSchedulerRequest_InferenceSchedulerName}}
+var mStartInferenceSchedulerResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartInferenceSchedulerResponse_ModelArn, &sStartInferenceSchedulerResponse_ModelName, &sStartInferenceSchedulerResponse_InferenceSchedulerName, &sStartInferenceSchedulerResponse_InferenceSchedulerArn, &sStartInferenceSchedulerResponse_Status}}
+var mStartRetrainingSchedulerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartRetrainingSchedulerRequest_ModelName}}
+var mStartRetrainingSchedulerResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartRetrainingSchedulerResponse_ModelName, &sStartRetrainingSchedulerResponse_ModelArn, &sStartRetrainingSchedulerResponse_Status}}
+var mStopInferenceSchedulerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStopInferenceSchedulerRequest_InferenceSchedulerName}}
+var mStopInferenceSchedulerResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStopInferenceSchedulerResponse_ModelArn, &sStopInferenceSchedulerResponse_ModelName, &sStopInferenceSchedulerResponse_InferenceSchedulerName, &sStopInferenceSchedulerResponse_InferenceSchedulerArn, &sStopInferenceSchedulerResponse_Status}}
+var mStopRetrainingSchedulerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStopRetrainingSchedulerRequest_ModelName}}
+var mStopRetrainingSchedulerResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStopRetrainingSchedulerResponse_ModelName, &sStopRetrainingSchedulerResponse_ModelArn, &sStopRetrainingSchedulerResponse_Status}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceArn, &sTagResourceRequest_Tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceArn, &sUntagResourceRequest_TagKeys}}
+var mUpdateActiveModelVersionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateActiveModelVersionRequest_ModelName, &sUpdateActiveModelVersionRequest_ModelVersion}}
+var mUpdateActiveModelVersionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateActiveModelVersionResponse_ModelName, &sUpdateActiveModelVersionResponse_ModelArn, &sUpdateActiveModelVersionResponse_CurrentActiveVersion, &sUpdateActiveModelVersionResponse_PreviousActiveVersion, &sUpdateActiveModelVersionResponse_CurrentActiveVersionArn, &sUpdateActiveModelVersionResponse_PreviousActiveVersionArn}}
+var mUpdateInferenceSchedulerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateInferenceSchedulerRequest_InferenceSchedulerName, &sUpdateInferenceSchedulerRequest_DataDelayOffsetInMinutes, &sUpdateInferenceSchedulerRequest_DataUploadFrequency, &sUpdateInferenceSchedulerRequest_DataInputConfiguration, &sUpdateInferenceSchedulerRequest_DataOutputConfiguration, &sUpdateInferenceSchedulerRequest_RoleArn}}
+var mUpdateLabelGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateLabelGroupRequest_LabelGroupName, &sUpdateLabelGroupRequest_FaultCodes}}
+var mUpdateModelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateModelRequest_ModelName, &sUpdateModelRequest_LabelsInputConfiguration, &sUpdateModelRequest_RoleArn, &sUpdateModelRequest_ModelDiagnosticsOutputConfiguration}}
+var mUpdateRetrainingSchedulerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRetrainingSchedulerRequest_ModelName, &sUpdateRetrainingSchedulerRequest_RetrainingStartDate, &sUpdateRetrainingSchedulerRequest_RetrainingFrequency, &sUpdateRetrainingSchedulerRequest_LookbackWindow, &sUpdateRetrainingSchedulerRequest_PromoteMode}}
+
+var sCreateDataset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDataset, Type: smithy.ShapeTypeOperation})
+var sCreateInferenceScheduler = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateInferenceScheduler, Type: smithy.ShapeTypeOperation})
+var sCreateLabel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLabel, Type: smithy.ShapeTypeOperation})
+var sCreateLabelGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLabelGroup, Type: smithy.ShapeTypeOperation})
+var sCreateModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateModel, Type: smithy.ShapeTypeOperation})
+var sCreateRetrainingScheduler = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRetrainingScheduler, Type: smithy.ShapeTypeOperation})
+var sDeleteDataset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDataset, Type: smithy.ShapeTypeOperation})
+var sDeleteInferenceScheduler = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteInferenceScheduler, Type: smithy.ShapeTypeOperation})
+var sDeleteLabel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLabel, Type: smithy.ShapeTypeOperation})
+var sDeleteLabelGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLabelGroup, Type: smithy.ShapeTypeOperation})
+var sDeleteModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteModel, Type: smithy.ShapeTypeOperation})
+var sDeleteResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicy, Type: smithy.ShapeTypeOperation})
+var sDeleteRetrainingScheduler = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRetrainingScheduler, Type: smithy.ShapeTypeOperation})
+var sDescribeDataIngestionJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDataIngestionJob, Type: smithy.ShapeTypeOperation})
+var sDescribeDataset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDataset, Type: smithy.ShapeTypeOperation})
+var sDescribeInferenceScheduler = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeInferenceScheduler, Type: smithy.ShapeTypeOperation})
+var sDescribeLabel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLabel, Type: smithy.ShapeTypeOperation})
+var sDescribeLabelGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLabelGroup, Type: smithy.ShapeTypeOperation})
+var sDescribeModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeModel, Type: smithy.ShapeTypeOperation})
+var sDescribeModelVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeModelVersion, Type: smithy.ShapeTypeOperation})
+var sDescribeResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeResourcePolicy, Type: smithy.ShapeTypeOperation})
+var sDescribeRetrainingScheduler = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRetrainingScheduler, Type: smithy.ShapeTypeOperation})
+var sImportDataset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportDataset, Type: smithy.ShapeTypeOperation})
+var sImportModelVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportModelVersion, Type: smithy.ShapeTypeOperation})
+var sListDataIngestionJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDataIngestionJobs, Type: smithy.ShapeTypeOperation})
+var sListDatasets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDatasets, Type: smithy.ShapeTypeOperation})
+var sListInferenceEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInferenceEvents, Type: smithy.ShapeTypeOperation})
+var sListInferenceExecutions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInferenceExecutions, Type: smithy.ShapeTypeOperation})
+var sListInferenceSchedulers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInferenceSchedulers, Type: smithy.ShapeTypeOperation})
+var sListLabelGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLabelGroups, Type: smithy.ShapeTypeOperation})
+var sListLabels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLabels, Type: smithy.ShapeTypeOperation})
+var sListModels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListModels, Type: smithy.ShapeTypeOperation})
+var sListModelVersions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListModelVersions, Type: smithy.ShapeTypeOperation})
+var sListRetrainingSchedulers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRetrainingSchedulers, Type: smithy.ShapeTypeOperation})
+var sListSensorStatistics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSensorStatistics, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation})
+var sPutResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicy, Type: smithy.ShapeTypeOperation})
+var sStartDataIngestionJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartDataIngestionJob, Type: smithy.ShapeTypeOperation})
+var sStartInferenceScheduler = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartInferenceScheduler, Type: smithy.ShapeTypeOperation})
+var sStartRetrainingScheduler = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartRetrainingScheduler, Type: smithy.ShapeTypeOperation})
+var sStopInferenceScheduler = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopInferenceScheduler, Type: smithy.ShapeTypeOperation})
+var sStopRetrainingScheduler = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopRetrainingScheduler, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation})
+var sUpdateActiveModelVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateActiveModelVersion, Type: smithy.ShapeTypeOperation})
+var sUpdateInferenceScheduler = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateInferenceScheduler, Type: smithy.ShapeTypeOperation})
+var sUpdateLabelGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLabelGroup, Type: smithy.ShapeTypeOperation})
+var sUpdateModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateModel, Type: smithy.ShapeTypeOperation})
+var sUpdateRetrainingScheduler = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRetrainingScheduler, Type: smithy.ShapeTypeOperation})
+var s_AWSLookoutEquipmentFrontendService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSLookoutEquipmentFrontendService, Type: smithy.ShapeTypeService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var s_AmazonResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonResourceArn, Type: smithy.ShapeTypeString})
+var sAutoPromotionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutoPromotionResult, Members: &mAutoPromotionResult, Type: smithy.ShapeTypeEnum})
+var s_AutoPromotionResultReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AutoPromotionResultReason, Type: smithy.ShapeTypeString})
+var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var s_BoundedLengthString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BoundedLengthString, Type: smithy.ShapeTypeString})
+var sCategoricalValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCategoricalValues, Members: &mCategoricalValues, Type: smithy.ShapeTypeStructure})
+var s_Comments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Comments, Type: smithy.ShapeTypeString})
+var s_ComponentName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentName, Type: smithy.ShapeTypeString})
+var s_ComponentTimestampDelimiter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentTimestampDelimiter, Type: smithy.ShapeTypeString})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sCountPercent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCountPercent, Members: &mCountPercent, Type: smithy.ShapeTypeStructure})
+var s_DataDelayOffsetInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataDelayOffsetInMinutes, Type: smithy.ShapeTypeLong})
+var s_DataIngestionJobSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataIngestionJobSummaries, Members: &m_DataIngestionJobSummaries, Type: smithy.ShapeTypeList})
+var sDataIngestionJobSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataIngestionJobSummary, Members: &mDataIngestionJobSummary, Type: smithy.ShapeTypeStructure})
+var sDataPreProcessingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataPreProcessingConfiguration, Members: &mDataPreProcessingConfiguration, Type: smithy.ShapeTypeStructure})
+var sDataQualitySummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataQualitySummary, Members: &mDataQualitySummary, Type: smithy.ShapeTypeStructure})
+var s_DatasetArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatasetArn, Type: smithy.ShapeTypeString})
+var s_DatasetIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatasetIdentifier, Type: smithy.ShapeTypeString})
+var s_DatasetName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatasetName, Type: smithy.ShapeTypeString})
+var sDatasetSchema = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatasetSchema, Members: &mDatasetSchema, Type: smithy.ShapeTypeStructure})
+var sDatasetStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatasetStatus, Members: &mDatasetStatus, Type: smithy.ShapeTypeEnum})
+var s_DatasetSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatasetSummaries, Members: &m_DatasetSummaries, Type: smithy.ShapeTypeList})
+var sDatasetSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatasetSummary, Members: &mDatasetSummary, Type: smithy.ShapeTypeStructure})
+var s_DataSizeInBytes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataSizeInBytes, Type: smithy.ShapeTypeLong})
+var sDataUploadFrequency = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataUploadFrequency, Members: &mDataUploadFrequency, Type: smithy.ShapeTypeEnum})
+var sDuplicateTimestamps = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDuplicateTimestamps, Members: &mDuplicateTimestamps, Type: smithy.ShapeTypeStructure})
+var s_Equipment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Equipment, Type: smithy.ShapeTypeString})
+var s_EventDurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventDurationInSeconds, Type: smithy.ShapeTypeLong})
+var s_FaultCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FaultCode, Type: smithy.ShapeTypeString})
+var s_FaultCodes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FaultCodes, Members: &m_FaultCodes, Type: smithy.ShapeTypeList})
+var s_FileNameTimestampFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileNameTimestampFormat, Type: smithy.ShapeTypeString})
+var s_Float = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Float, Type: smithy.ShapeTypeFloat})
+var s_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IamRoleArn, Type: smithy.ShapeTypeString})
+var s_IdempotenceToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdempotenceToken, Type: smithy.ShapeTypeString})
+var sInferenceDataImportStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInferenceDataImportStrategy, Members: &mInferenceDataImportStrategy, Type: smithy.ShapeTypeEnum})
+var s_InferenceEventSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InferenceEventSummaries, Members: &m_InferenceEventSummaries, Type: smithy.ShapeTypeList})
+var sInferenceEventSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInferenceEventSummary, Members: &mInferenceEventSummary, Type: smithy.ShapeTypeStructure})
+var sInferenceExecutionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInferenceExecutionStatus, Members: &mInferenceExecutionStatus, Type: smithy.ShapeTypeEnum})
+var s_InferenceExecutionSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InferenceExecutionSummaries, Members: &m_InferenceExecutionSummaries, Type: smithy.ShapeTypeList})
+var sInferenceExecutionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInferenceExecutionSummary, Members: &mInferenceExecutionSummary, Type: smithy.ShapeTypeStructure})
+var sInferenceInputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInferenceInputConfiguration, Members: &mInferenceInputConfiguration, Type: smithy.ShapeTypeStructure})
+var sInferenceInputNameConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInferenceInputNameConfiguration, Members: &mInferenceInputNameConfiguration, Type: smithy.ShapeTypeStructure})
+var sInferenceOutputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInferenceOutputConfiguration, Members: &mInferenceOutputConfiguration, Type: smithy.ShapeTypeStructure})
+var sInferenceS3InputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInferenceS3InputConfiguration, Members: &mInferenceS3InputConfiguration, Type: smithy.ShapeTypeStructure})
+var sInferenceS3OutputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInferenceS3OutputConfiguration, Members: &mInferenceS3OutputConfiguration, Type: smithy.ShapeTypeStructure})
+var s_InferenceSchedulerArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InferenceSchedulerArn, Type: smithy.ShapeTypeString})
+var s_InferenceSchedulerIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InferenceSchedulerIdentifier, Type: smithy.ShapeTypeString})
+var s_InferenceSchedulerName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InferenceSchedulerName, Type: smithy.ShapeTypeString})
+var sInferenceSchedulerStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInferenceSchedulerStatus, Members: &mInferenceSchedulerStatus, Type: smithy.ShapeTypeEnum})
+var s_InferenceSchedulerSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InferenceSchedulerSummaries, Members: &m_InferenceSchedulerSummaries, Type: smithy.ShapeTypeList})
+var sInferenceSchedulerSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInferenceSchedulerSummary, Members: &mInferenceSchedulerSummary, Type: smithy.ShapeTypeStructure})
+var sIngestedFilesSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngestedFilesSummary, Members: &mIngestedFilesSummary, Type: smithy.ShapeTypeStructure})
+var sIngestionInputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngestionInputConfiguration, Members: &mIngestionInputConfiguration, Type: smithy.ShapeTypeStructure})
+var s_IngestionJobId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IngestionJobId, Type: smithy.ShapeTypeString})
+var sIngestionJobStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngestionJobStatus, Members: &mIngestionJobStatus, Type: smithy.ShapeTypeEnum})
+var sIngestionS3InputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngestionS3InputConfiguration, Members: &mIngestionS3InputConfiguration, Type: smithy.ShapeTypeStructure})
+var s_InlineDataSchema = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InlineDataSchema, Type: smithy.ShapeTypeString})
+var sInsufficientSensorData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInsufficientSensorData, Members: &mInsufficientSensorData, Type: smithy.ShapeTypeStructure})
+var s_Integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t3, Type: smithy.ShapeTypeStructure})
+var sInvalidSensorData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidSensorData, Members: &mInvalidSensorData, Type: smithy.ShapeTypeStructure})
+var s_KeyPattern = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyPattern, Type: smithy.ShapeTypeString})
+var s_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString})
+var s_LabelGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LabelGroupArn, Type: smithy.ShapeTypeString})
+var s_LabelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LabelGroupName, Type: smithy.ShapeTypeString})
+var s_LabelGroupSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LabelGroupSummaries, Members: &m_LabelGroupSummaries, Type: smithy.ShapeTypeList})
+var sLabelGroupSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLabelGroupSummary, Members: &mLabelGroupSummary, Type: smithy.ShapeTypeStructure})
+var s_LabelId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LabelId, Type: smithy.ShapeTypeString})
+var sLabelRating = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLabelRating, Members: &mLabelRating, Type: smithy.ShapeTypeEnum})
+var sLabelsInputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLabelsInputConfiguration, Members: &mLabelsInputConfiguration, Type: smithy.ShapeTypeStructure})
+var sLabelsS3InputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLabelsS3InputConfiguration, Members: &mLabelsS3InputConfiguration, Type: smithy.ShapeTypeStructure})
+var s_LabelSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LabelSummaries, Members: &m_LabelSummaries, Type: smithy.ShapeTypeList})
+var sLabelSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLabelSummary, Members: &mLabelSummary, Type: smithy.ShapeTypeStructure})
+var sLargeTimestampGaps = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLargeTimestampGaps, Members: &mLargeTimestampGaps, Type: smithy.ShapeTypeStructure})
+var sLatestInferenceResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLatestInferenceResult, Members: &mLatestInferenceResult, Type: smithy.ShapeTypeEnum})
+var s_ListOfDiscardedFiles = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListOfDiscardedFiles, Members: &m_ListOfDiscardedFiles, Type: smithy.ShapeTypeList})
+var s_LookbackWindow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LookbackWindow, Type: smithy.ShapeTypeString})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sMissingCompleteSensorData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMissingCompleteSensorData, Members: &mMissingCompleteSensorData, Type: smithy.ShapeTypeStructure})
+var sMissingSensorData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMissingSensorData, Members: &mMissingSensorData, Type: smithy.ShapeTypeStructure})
+var s_ModelArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ModelArn, Type: smithy.ShapeTypeString})
+var sModelDiagnosticsOutputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModelDiagnosticsOutputConfiguration, Members: &mModelDiagnosticsOutputConfiguration, Type: smithy.ShapeTypeStructure})
+var sModelDiagnosticsS3OutputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModelDiagnosticsS3OutputConfiguration, Members: &mModelDiagnosticsS3OutputConfiguration, Type: smithy.ShapeTypeStructure})
+var s_ModelMetrics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ModelMetrics, Type: smithy.ShapeTypeString})
+var s_ModelName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ModelName, Type: smithy.ShapeTypeString})
+var sModelPromoteMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModelPromoteMode, Members: &mModelPromoteMode, Type: smithy.ShapeTypeEnum})
+var sModelQuality = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModelQuality, Members: &mModelQuality, Type: smithy.ShapeTypeEnum})
+var sModelStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModelStatus, Members: &mModelStatus, Type: smithy.ShapeTypeEnum})
+var s_ModelSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ModelSummaries, Members: &m_ModelSummaries, Type: smithy.ShapeTypeList})
+var sModelSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModelSummary, Members: &mModelSummary, Type: smithy.ShapeTypeStructure})
+var s_ModelVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ModelVersion, Type: smithy.ShapeTypeLong})
+var s_ModelVersionArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ModelVersionArn, Type: smithy.ShapeTypeString})
+var sModelVersionSourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModelVersionSourceType, Members: &mModelVersionSourceType, Type: smithy.ShapeTypeEnum})
+var sModelVersionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModelVersionStatus, Members: &mModelVersionStatus, Type: smithy.ShapeTypeEnum})
+var s_ModelVersionSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ModelVersionSummaries, Members: &m_ModelVersionSummaries, Type: smithy.ShapeTypeList})
+var sModelVersionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModelVersionSummary, Members: &mModelVersionSummary, Type: smithy.ShapeTypeStructure})
+var sMonotonicity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMonotonicity, Members: &mMonotonicity, Type: smithy.ShapeTypeEnum})
+var sMonotonicValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMonotonicValues, Members: &mMonotonicValues, Type: smithy.ShapeTypeStructure})
+var sMultipleOperatingModes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMultipleOperatingModes, Members: &mMultipleOperatingModes, Type: smithy.ShapeTypeStructure})
+var s_NameOrArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NameOrArn, Type: smithy.ShapeTypeString})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var s_OffCondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OffCondition, Type: smithy.ShapeTypeString})
+var s_Policy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Policy, Type: smithy.ShapeTypeString})
+var s_PolicyRevisionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyRevisionId, Type: smithy.ShapeTypeString})
+var s_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t4, Type: smithy.ShapeTypeStructure})
+var s_RetrainingFrequency = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RetrainingFrequency, Type: smithy.ShapeTypeString})
+var sRetrainingSchedulerStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetrainingSchedulerStatus, Members: &mRetrainingSchedulerStatus, Type: smithy.ShapeTypeEnum})
+var s_RetrainingSchedulerSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RetrainingSchedulerSummaries, Members: &m_RetrainingSchedulerSummaries, Type: smithy.ShapeTypeList})
+var sRetrainingSchedulerSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetrainingSchedulerSummary, Members: &mRetrainingSchedulerSummary, Type: smithy.ShapeTypeStructure})
+var s_S3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Bucket, Type: smithy.ShapeTypeString})
+var s_S3Key = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Key, Type: smithy.ShapeTypeString})
+var sS3Object = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3Object, Members: &mS3Object, Type: smithy.ShapeTypeStructure})
+var s_S3Prefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Prefix, Type: smithy.ShapeTypeString})
+var s_SensorName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensorName, Type: smithy.ShapeTypeString})
+var s_SensorStatisticsSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensorStatisticsSummaries, Members: &m_SensorStatisticsSummaries, Type: smithy.ShapeTypeList})
+var sSensorStatisticsSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSensorStatisticsSummary, Members: &mSensorStatisticsSummary, Type: smithy.ShapeTypeStructure})
+var sSensorsWithShortDateRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSensorsWithShortDateRange, Members: &mSensorsWithShortDateRange, Type: smithy.ShapeTypeStructure})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t5, Type: smithy.ShapeTypeStructure})
+var sStatisticalIssueStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatisticalIssueStatus, Members: &mStatisticalIssueStatus, Type: smithy.ShapeTypeEnum})
+var s_SynthesizedJsonInlineDataSchema = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SynthesizedJsonInlineDataSchema, Traits: &t6, Type: smithy.ShapeTypeString})
+var s_SynthesizedJsonModelMetrics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SynthesizedJsonModelMetrics, Traits: &t6, Type: smithy.ShapeTypeString})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sTargetSamplingRate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetSamplingRate, Members: &mTargetSamplingRate, Type: smithy.ShapeTypeEnum})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t7, Type: smithy.ShapeTypeStructure})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var s_TimeZoneOffset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimeZoneOffset, Type: smithy.ShapeTypeString})
+var sUnsupportedTimestamps = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnsupportedTimestamps, Members: &mUnsupportedTimestamps, Type: smithy.ShapeTypeStructure})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t8, Type: smithy.ShapeTypeStructure})
+var sCreateDatasetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDatasetRequest, Members: &mCreateDatasetRequest, Type: smithy.ShapeTypeStructure})
+var sCreateDatasetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDatasetResponse, Members: &mCreateDatasetResponse, Type: smithy.ShapeTypeStructure})
+var sCreateInferenceSchedulerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateInferenceSchedulerRequest, Members: &mCreateInferenceSchedulerRequest, Type: smithy.ShapeTypeStructure})
+var sCreateInferenceSchedulerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateInferenceSchedulerResponse, Members: &mCreateInferenceSchedulerResponse, Type: smithy.ShapeTypeStructure})
+var sCreateLabelGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLabelGroupRequest, Members: &mCreateLabelGroupRequest, Type: smithy.ShapeTypeStructure})
+var sCreateLabelGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLabelGroupResponse, Members: &mCreateLabelGroupResponse, Type: smithy.ShapeTypeStructure})
+var sCreateLabelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLabelRequest, Members: &mCreateLabelRequest, Type: smithy.ShapeTypeStructure})
+var sCreateLabelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLabelResponse, Members: &mCreateLabelResponse, Type: smithy.ShapeTypeStructure})
+var sCreateModelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateModelRequest, Members: &mCreateModelRequest, Type: smithy.ShapeTypeStructure})
+var sCreateModelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateModelResponse, Members: &mCreateModelResponse, Type: smithy.ShapeTypeStructure})
+var sCreateRetrainingSchedulerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRetrainingSchedulerRequest, Members: &mCreateRetrainingSchedulerRequest, Type: smithy.ShapeTypeStructure})
+var sCreateRetrainingSchedulerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRetrainingSchedulerResponse, Members: &mCreateRetrainingSchedulerResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteDatasetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDatasetRequest, Members: &mDeleteDatasetRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteInferenceSchedulerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteInferenceSchedulerRequest, Members: &mDeleteInferenceSchedulerRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteLabelGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLabelGroupRequest, Members: &mDeleteLabelGroupRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteLabelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLabelRequest, Members: &mDeleteLabelRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteModelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteModelRequest, Members: &mDeleteModelRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicyRequest, Members: &mDeleteResourcePolicyRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteRetrainingSchedulerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRetrainingSchedulerRequest, Members: &mDeleteRetrainingSchedulerRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeDataIngestionJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDataIngestionJobRequest, Members: &mDescribeDataIngestionJobRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeDataIngestionJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDataIngestionJobResponse, Members: &mDescribeDataIngestionJobResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeDatasetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDatasetRequest, Members: &mDescribeDatasetRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeDatasetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDatasetResponse, Members: &mDescribeDatasetResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeInferenceSchedulerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeInferenceSchedulerRequest, Members: &mDescribeInferenceSchedulerRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeInferenceSchedulerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeInferenceSchedulerResponse, Members: &mDescribeInferenceSchedulerResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeLabelGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLabelGroupRequest, Members: &mDescribeLabelGroupRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeLabelGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLabelGroupResponse, Members: &mDescribeLabelGroupResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeLabelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLabelRequest, Members: &mDescribeLabelRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeLabelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLabelResponse, Members: &mDescribeLabelResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeModelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeModelRequest, Members: &mDescribeModelRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeModelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeModelResponse, Members: &mDescribeModelResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeModelVersionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeModelVersionRequest, Members: &mDescribeModelVersionRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeModelVersionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeModelVersionResponse, Members: &mDescribeModelVersionResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeResourcePolicyRequest, Members: &mDescribeResourcePolicyRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeResourcePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeResourcePolicyResponse, Members: &mDescribeResourcePolicyResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeRetrainingSchedulerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRetrainingSchedulerRequest, Members: &mDescribeRetrainingSchedulerRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeRetrainingSchedulerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRetrainingSchedulerResponse, Members: &mDescribeRetrainingSchedulerResponse, Type: smithy.ShapeTypeStructure})
+var sImportDatasetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportDatasetRequest, Members: &mImportDatasetRequest, Type: smithy.ShapeTypeStructure})
+var sImportDatasetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportDatasetResponse, Members: &mImportDatasetResponse, Type: smithy.ShapeTypeStructure})
+var sImportModelVersionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportModelVersionRequest, Members: &mImportModelVersionRequest, Type: smithy.ShapeTypeStructure})
+var sImportModelVersionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportModelVersionResponse, Members: &mImportModelVersionResponse, Type: smithy.ShapeTypeStructure})
+var sListDataIngestionJobsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDataIngestionJobsRequest, Members: &mListDataIngestionJobsRequest, Type: smithy.ShapeTypeStructure})
+var sListDataIngestionJobsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDataIngestionJobsResponse, Members: &mListDataIngestionJobsResponse, Type: smithy.ShapeTypeStructure})
+var sListDatasetsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDatasetsRequest, Members: &mListDatasetsRequest, Type: smithy.ShapeTypeStructure})
+var sListDatasetsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDatasetsResponse, Members: &mListDatasetsResponse, Type: smithy.ShapeTypeStructure})
+var sListInferenceEventsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInferenceEventsRequest, Members: &mListInferenceEventsRequest, Type: smithy.ShapeTypeStructure})
+var sListInferenceEventsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInferenceEventsResponse, Members: &mListInferenceEventsResponse, Type: smithy.ShapeTypeStructure})
+var sListInferenceExecutionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInferenceExecutionsRequest, Members: &mListInferenceExecutionsRequest, Type: smithy.ShapeTypeStructure})
+var sListInferenceExecutionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInferenceExecutionsResponse, Members: &mListInferenceExecutionsResponse, Type: smithy.ShapeTypeStructure})
+var sListInferenceSchedulersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInferenceSchedulersRequest, Members: &mListInferenceSchedulersRequest, Type: smithy.ShapeTypeStructure})
+var sListInferenceSchedulersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInferenceSchedulersResponse, Members: &mListInferenceSchedulersResponse, Type: smithy.ShapeTypeStructure})
+var sListLabelGroupsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLabelGroupsRequest, Members: &mListLabelGroupsRequest, Type: smithy.ShapeTypeStructure})
+var sListLabelGroupsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLabelGroupsResponse, Members: &mListLabelGroupsResponse, Type: smithy.ShapeTypeStructure})
+var sListLabelsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLabelsRequest, Members: &mListLabelsRequest, Type: smithy.ShapeTypeStructure})
+var sListLabelsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLabelsResponse, Members: &mListLabelsResponse, Type: smithy.ShapeTypeStructure})
+var sListModelsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListModelsRequest, Members: &mListModelsRequest, Type: smithy.ShapeTypeStructure})
+var sListModelsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListModelsResponse, Members: &mListModelsResponse, Type: smithy.ShapeTypeStructure})
+var sListModelVersionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListModelVersionsRequest, Members: &mListModelVersionsRequest, Type: smithy.ShapeTypeStructure})
+var sListModelVersionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListModelVersionsResponse, Members: &mListModelVersionsResponse, Type: smithy.ShapeTypeStructure})
+var sListRetrainingSchedulersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRetrainingSchedulersRequest, Members: &mListRetrainingSchedulersRequest, Type: smithy.ShapeTypeStructure})
+var sListRetrainingSchedulersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRetrainingSchedulersResponse, Members: &mListRetrainingSchedulersResponse, Type: smithy.ShapeTypeStructure})
+var sListSensorStatisticsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSensorStatisticsRequest, Members: &mListSensorStatisticsRequest, Type: smithy.ShapeTypeStructure})
+var sListSensorStatisticsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSensorStatisticsResponse, Members: &mListSensorStatisticsResponse, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure})
+var sPutResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicyRequest, Members: &mPutResourcePolicyRequest, Type: smithy.ShapeTypeStructure})
+var sPutResourcePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicyResponse, Members: &mPutResourcePolicyResponse, Type: smithy.ShapeTypeStructure})
+var sStartDataIngestionJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartDataIngestionJobRequest, Members: &mStartDataIngestionJobRequest, Type: smithy.ShapeTypeStructure})
+var sStartDataIngestionJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartDataIngestionJobResponse, Members: &mStartDataIngestionJobResponse, Type: smithy.ShapeTypeStructure})
+var sStartInferenceSchedulerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartInferenceSchedulerRequest, Members: &mStartInferenceSchedulerRequest, Type: smithy.ShapeTypeStructure})
+var sStartInferenceSchedulerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartInferenceSchedulerResponse, Members: &mStartInferenceSchedulerResponse, Type: smithy.ShapeTypeStructure})
+var sStartRetrainingSchedulerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartRetrainingSchedulerRequest, Members: &mStartRetrainingSchedulerRequest, Type: smithy.ShapeTypeStructure})
+var sStartRetrainingSchedulerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartRetrainingSchedulerResponse, Members: &mStartRetrainingSchedulerResponse, Type: smithy.ShapeTypeStructure})
+var sStopInferenceSchedulerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopInferenceSchedulerRequest, Members: &mStopInferenceSchedulerRequest, Type: smithy.ShapeTypeStructure})
+var sStopInferenceSchedulerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopInferenceSchedulerResponse, Members: &mStopInferenceSchedulerResponse, Type: smithy.ShapeTypeStructure})
+var sStopRetrainingSchedulerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopRetrainingSchedulerRequest, Members: &mStopRetrainingSchedulerRequest, Type: smithy.ShapeTypeStructure})
+var sStopRetrainingSchedulerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopRetrainingSchedulerResponse, Members: &mStopRetrainingSchedulerResponse, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateActiveModelVersionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateActiveModelVersionRequest, Members: &mUpdateActiveModelVersionRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateActiveModelVersionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateActiveModelVersionResponse, Members: &mUpdateActiveModelVersionResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateInferenceSchedulerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateInferenceSchedulerRequest, Members: &mUpdateInferenceSchedulerRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateLabelGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLabelGroupRequest, Members: &mUpdateLabelGroupRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateModelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateModelRequest, Members: &mUpdateModelRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateRetrainingSchedulerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRetrainingSchedulerRequest, Members: &mUpdateRetrainingSchedulerRequest, Type: smithy.ShapeTypeStructure})
+
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_BoundedLengthString, Type: smithy.ShapeTypeString})
+var sAutoPromotionResult_MODEL_PROMOTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MODEL_PROMOTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAutoPromotionResult_MODEL_NOT_PROMOTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MODEL_NOT_PROMOTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAutoPromotionResult_RETRAINING_INTERNAL_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RETRAINING_INTERNAL_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAutoPromotionResult_RETRAINING_CUSTOMER_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RETRAINING_CUSTOMER_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAutoPromotionResult_RETRAINING_CANCELLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RETRAINING_CANCELLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCategoricalValues_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStatisticalIssueStatus, Members: &mStatisticalIssueStatus, Type: smithy.ShapeTypeEnum})
+var sCategoricalValues_NumberOfCategory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberOfCategory", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_BoundedLengthString, Type: smithy.ShapeTypeString})
+var sCountPercent_Count = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Count", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sCountPercent_Percentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Percentage", ID: &i_Float, Type: smithy.ShapeTypeFloat})
+var s_DataIngestionJobSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDataIngestionJobSummary, Members: &mDataIngestionJobSummary, Type: smithy.ShapeTypeStructure})
+var sDataIngestionJobSummary_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_IngestionJobId, Type: smithy.ShapeTypeString})
+var sDataIngestionJobSummary_DatasetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetName", ID: &i_DatasetName, Type: smithy.ShapeTypeString})
+var sDataIngestionJobSummary_DatasetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetArn", ID: &i_DatasetArn, Type: smithy.ShapeTypeString})
+var sDataIngestionJobSummary_IngestionInputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngestionInputConfiguration", ID: &iIngestionInputConfiguration, Members: &mIngestionInputConfiguration, Type: smithy.ShapeTypeStructure})
+var sDataIngestionJobSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iIngestionJobStatus, Members: &mIngestionJobStatus, Type: smithy.ShapeTypeEnum})
+var sDataPreProcessingConfiguration_TargetSamplingRate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetSamplingRate", ID: &iTargetSamplingRate, Members: &mTargetSamplingRate, Type: smithy.ShapeTypeEnum})
+var sDataQualitySummary_InsufficientSensorData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InsufficientSensorData", ID: &iInsufficientSensorData, Members: &mInsufficientSensorData, Type: smithy.ShapeTypeStructure})
+var sDataQualitySummary_MissingSensorData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MissingSensorData", ID: &iMissingSensorData, Members: &mMissingSensorData, Type: smithy.ShapeTypeStructure})
+var sDataQualitySummary_InvalidSensorData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvalidSensorData", ID: &iInvalidSensorData, Members: &mInvalidSensorData, Type: smithy.ShapeTypeStructure})
+var sDataQualitySummary_UnsupportedTimestamps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UnsupportedTimestamps", ID: &iUnsupportedTimestamps, Members: &mUnsupportedTimestamps, Type: smithy.ShapeTypeStructure})
+var sDataQualitySummary_DuplicateTimestamps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DuplicateTimestamps", ID: &iDuplicateTimestamps, Members: &mDuplicateTimestamps, Type: smithy.ShapeTypeStructure})
+var sDatasetSchema_InlineDataSchema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InlineDataSchema", ID: &i_SynthesizedJsonInlineDataSchema, Traits: &t2, Type: smithy.ShapeTypeString})
+var sDatasetStatus_CREATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDatasetStatus_INGESTION_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INGESTION_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDatasetStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDatasetStatus_IMPORT_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMPORT_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_DatasetSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDatasetSummary, Members: &mDatasetSummary, Type: smithy.ShapeTypeStructure})
+var sDatasetSummary_DatasetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetName", ID: &i_DatasetName, Type: smithy.ShapeTypeString})
+var sDatasetSummary_DatasetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetArn", ID: &i_DatasetArn, Type: smithy.ShapeTypeString})
+var sDatasetSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iDatasetStatus, Members: &mDatasetStatus, Type: smithy.ShapeTypeEnum})
+var sDatasetSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDataUploadFrequency_PT5M = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PT5M", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataUploadFrequency_PT10M = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PT10M", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataUploadFrequency_PT15M = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PT15M", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataUploadFrequency_PT30M = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PT30M", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataUploadFrequency_PT1H = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PT1H", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDuplicateTimestamps_TotalNumberOfDuplicateTimestamps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalNumberOfDuplicateTimestamps", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var s_FaultCodes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_FaultCode, Type: smithy.ShapeTypeString})
+var sInferenceDataImportStrategy_NO_IMPORT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_IMPORT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceDataImportStrategy_ADD_WHEN_EMPTY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADD_WHEN_EMPTY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceDataImportStrategy_OVERWRITE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OVERWRITE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_InferenceEventSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInferenceEventSummary, Members: &mInferenceEventSummary, Type: smithy.ShapeTypeStructure})
+var sInferenceEventSummary_InferenceSchedulerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InferenceSchedulerArn", ID: &i_InferenceSchedulerArn, Type: smithy.ShapeTypeString})
+var sInferenceEventSummary_InferenceSchedulerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InferenceSchedulerName", ID: &i_InferenceSchedulerName, Type: smithy.ShapeTypeString})
+var sInferenceEventSummary_EventStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventStartTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sInferenceEventSummary_EventEndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventEndTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sInferenceEventSummary_Diagnostics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Diagnostics", ID: &i_ModelMetrics, Type: smithy.ShapeTypeString})
+var sInferenceEventSummary_EventDurationInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDurationInSeconds", ID: &i_EventDurationInSeconds, Type: smithy.ShapeTypeLong})
+var sInferenceExecutionStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceExecutionStatus_SUCCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceExecutionStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_InferenceExecutionSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInferenceExecutionSummary, Members: &mInferenceExecutionSummary, Type: smithy.ShapeTypeStructure})
+var sInferenceExecutionSummary_ModelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelName", ID: &i_ModelName, Type: smithy.ShapeTypeString})
+var sInferenceExecutionSummary_ModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelArn", ID: &i_ModelArn, Type: smithy.ShapeTypeString})
+var sInferenceExecutionSummary_InferenceSchedulerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InferenceSchedulerName", ID: &i_InferenceSchedulerName, Type: smithy.ShapeTypeString})
+var sInferenceExecutionSummary_InferenceSchedulerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InferenceSchedulerArn", ID: &i_InferenceSchedulerArn, Type: smithy.ShapeTypeString})
+var sInferenceExecutionSummary_ScheduledStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduledStartTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sInferenceExecutionSummary_DataStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataStartTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sInferenceExecutionSummary_DataEndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataEndTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sInferenceExecutionSummary_DataInputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataInputConfiguration", ID: &iInferenceInputConfiguration, Members: &mInferenceInputConfiguration, Type: smithy.ShapeTypeStructure})
+var sInferenceExecutionSummary_DataOutputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataOutputConfiguration", ID: &iInferenceOutputConfiguration, Members: &mInferenceOutputConfiguration, Type: smithy.ShapeTypeStructure})
+var sInferenceExecutionSummary_CustomerResultObject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerResultObject", ID: &iS3Object, Members: &mS3Object, Type: smithy.ShapeTypeStructure})
+var sInferenceExecutionSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iInferenceExecutionStatus, Members: &mInferenceExecutionStatus, Type: smithy.ShapeTypeEnum})
+var sInferenceExecutionSummary_FailedReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailedReason", ID: &i_BoundedLengthString, Type: smithy.ShapeTypeString})
+var sInferenceExecutionSummary_ModelVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelVersion", ID: &i_ModelVersion, Type: smithy.ShapeTypeLong})
+var sInferenceExecutionSummary_ModelVersionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelVersionArn", ID: &i_ModelVersionArn, Type: smithy.ShapeTypeString})
+var sInferenceInputConfiguration_S3InputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3InputConfiguration", ID: &iInferenceS3InputConfiguration, Members: &mInferenceS3InputConfiguration, Type: smithy.ShapeTypeStructure})
+var sInferenceInputConfiguration_InputTimeZoneOffset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputTimeZoneOffset", ID: &i_TimeZoneOffset, Type: smithy.ShapeTypeString})
+var sInferenceInputConfiguration_InferenceInputNameConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InferenceInputNameConfiguration", ID: &iInferenceInputNameConfiguration, Members: &mInferenceInputNameConfiguration, Type: smithy.ShapeTypeStructure})
+var sInferenceInputNameConfiguration_TimestampFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimestampFormat", ID: &i_FileNameTimestampFormat, Type: smithy.ShapeTypeString})
+var sInferenceInputNameConfiguration_ComponentTimestampDelimiter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComponentTimestampDelimiter", ID: &i_ComponentTimestampDelimiter, Type: smithy.ShapeTypeString})
+var sInferenceOutputConfiguration_S3OutputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3OutputConfiguration", ID: &iInferenceS3OutputConfiguration, Members: &mInferenceS3OutputConfiguration, Type: smithy.ShapeTypeStructure})
+var sInferenceOutputConfiguration_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_NameOrArn, Type: smithy.ShapeTypeString})
+var sInferenceS3InputConfiguration_Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Bucket", ID: &i_S3Bucket, Type: smithy.ShapeTypeString})
+var sInferenceS3InputConfiguration_Prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Prefix", ID: &i_S3Prefix, Type: smithy.ShapeTypeString})
+var sInferenceS3OutputConfiguration_Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Bucket", ID: &i_S3Bucket, Type: smithy.ShapeTypeString})
+var sInferenceS3OutputConfiguration_Prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Prefix", ID: &i_S3Prefix, Type: smithy.ShapeTypeString})
+var sInferenceSchedulerStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceSchedulerStatus_RUNNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUNNING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceSchedulerStatus_STOPPING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOPPING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInferenceSchedulerStatus_STOPPED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOPPED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_InferenceSchedulerSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInferenceSchedulerSummary, Members: &mInferenceSchedulerSummary, Type: smithy.ShapeTypeStructure})
+var sInferenceSchedulerSummary_ModelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelName", ID: &i_ModelName, Type: smithy.ShapeTypeString})
+var sInferenceSchedulerSummary_ModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelArn", ID: &i_ModelArn, Type: smithy.ShapeTypeString})
+var sInferenceSchedulerSummary_InferenceSchedulerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InferenceSchedulerName", ID: &i_InferenceSchedulerName, Type: smithy.ShapeTypeString})
+var sInferenceSchedulerSummary_InferenceSchedulerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InferenceSchedulerArn", ID: &i_InferenceSchedulerArn, Type: smithy.ShapeTypeString})
+var sInferenceSchedulerSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iInferenceSchedulerStatus, Members: &mInferenceSchedulerStatus, Type: smithy.ShapeTypeEnum})
+var sInferenceSchedulerSummary_DataDelayOffsetInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataDelayOffsetInMinutes", ID: &i_DataDelayOffsetInMinutes, Type: smithy.ShapeTypeLong})
+var sInferenceSchedulerSummary_DataUploadFrequency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataUploadFrequency", ID: &iDataUploadFrequency, Members: &mDataUploadFrequency, Type: smithy.ShapeTypeEnum})
+var sInferenceSchedulerSummary_LatestInferenceResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestInferenceResult", ID: &iLatestInferenceResult, Members: &mLatestInferenceResult, Type: smithy.ShapeTypeEnum})
+var sIngestedFilesSummary_TotalNumberOfFiles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalNumberOfFiles", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sIngestedFilesSummary_IngestedNumberOfFiles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngestedNumberOfFiles", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sIngestedFilesSummary_DiscardedFiles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiscardedFiles", ID: &i_ListOfDiscardedFiles, Members: &m_ListOfDiscardedFiles, Type: smithy.ShapeTypeList})
+var sIngestionInputConfiguration_S3InputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3InputConfiguration", ID: &iIngestionS3InputConfiguration, Members: &mIngestionS3InputConfiguration, Type: smithy.ShapeTypeStructure})
+var sIngestionJobStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIngestionJobStatus_SUCCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIngestionJobStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIngestionJobStatus_IMPORT_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMPORT_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIngestionS3InputConfiguration_Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Bucket", ID: &i_S3Bucket, Type: smithy.ShapeTypeString})
+var sIngestionS3InputConfiguration_Prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Prefix", ID: &i_S3Prefix, Type: smithy.ShapeTypeString})
+var sIngestionS3InputConfiguration_KeyPattern = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyPattern", ID: &i_KeyPattern, Type: smithy.ShapeTypeString})
+var sInsufficientSensorData_MissingCompleteSensorData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MissingCompleteSensorData", ID: &iMissingCompleteSensorData, Members: &mMissingCompleteSensorData, Type: smithy.ShapeTypeStructure})
+var sInsufficientSensorData_SensorsWithShortDateRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SensorsWithShortDateRange", ID: &iSensorsWithShortDateRange, Members: &mSensorsWithShortDateRange, Type: smithy.ShapeTypeStructure})
+var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_BoundedLengthString, Type: smithy.ShapeTypeString})
+var sInvalidSensorData_AffectedSensorCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AffectedSensorCount", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sInvalidSensorData_TotalNumberOfInvalidValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalNumberOfInvalidValues", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var s_LabelGroupSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLabelGroupSummary, Members: &mLabelGroupSummary, Type: smithy.ShapeTypeStructure})
+var sLabelGroupSummary_LabelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LabelGroupName", ID: &i_LabelGroupName, Type: smithy.ShapeTypeString})
+var sLabelGroupSummary_LabelGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LabelGroupArn", ID: &i_LabelGroupArn, Type: smithy.ShapeTypeString})
+var sLabelGroupSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sLabelGroupSummary_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sLabelRating_ANOMALY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ANOMALY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLabelRating_NO_ANOMALY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_ANOMALY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLabelRating_NEUTRAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NEUTRAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLabelsInputConfiguration_S3InputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3InputConfiguration", ID: &iLabelsS3InputConfiguration, Members: &mLabelsS3InputConfiguration, Type: smithy.ShapeTypeStructure})
+var sLabelsInputConfiguration_LabelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LabelGroupName", ID: &i_LabelGroupName, Type: smithy.ShapeTypeString})
+var sLabelsS3InputConfiguration_Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Bucket", ID: &i_S3Bucket, Type: smithy.ShapeTypeString})
+var sLabelsS3InputConfiguration_Prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Prefix", ID: &i_S3Prefix, Type: smithy.ShapeTypeString})
+var s_LabelSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLabelSummary, Members: &mLabelSummary, Type: smithy.ShapeTypeStructure})
+var sLabelSummary_LabelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LabelGroupName", ID: &i_LabelGroupName, Type: smithy.ShapeTypeString})
+var sLabelSummary_LabelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LabelId", ID: &i_LabelId, Type: smithy.ShapeTypeString})
+var sLabelSummary_LabelGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LabelGroupArn", ID: &i_LabelGroupArn, Type: smithy.ShapeTypeString})
+var sLabelSummary_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sLabelSummary_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sLabelSummary_Rating = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rating", ID: &iLabelRating, Members: &mLabelRating, Type: smithy.ShapeTypeEnum})
+var sLabelSummary_FaultCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FaultCode", ID: &i_FaultCode, Type: smithy.ShapeTypeString})
+var sLabelSummary_Equipment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Equipment", ID: &i_Equipment, Type: smithy.ShapeTypeString})
+var sLabelSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sLargeTimestampGaps_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStatisticalIssueStatus, Members: &mStatisticalIssueStatus, Type: smithy.ShapeTypeEnum})
+var sLargeTimestampGaps_NumberOfLargeTimestampGaps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberOfLargeTimestampGaps", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sLargeTimestampGaps_MaxTimestampGapInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxTimestampGapInDays", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sLatestInferenceResult_ANOMALOUS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ANOMALOUS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLatestInferenceResult_NORMAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NORMAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_ListOfDiscardedFiles_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iS3Object, Members: &mS3Object, Type: smithy.ShapeTypeStructure})
+var sMissingCompleteSensorData_AffectedSensorCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AffectedSensorCount", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sMissingSensorData_AffectedSensorCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AffectedSensorCount", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sMissingSensorData_TotalNumberOfMissingValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalNumberOfMissingValues", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sModelDiagnosticsOutputConfiguration_S3OutputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3OutputConfiguration", ID: &iModelDiagnosticsS3OutputConfiguration, Members: &mModelDiagnosticsS3OutputConfiguration, Type: smithy.ShapeTypeStructure})
+var sModelDiagnosticsOutputConfiguration_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_NameOrArn, Type: smithy.ShapeTypeString})
+var sModelDiagnosticsS3OutputConfiguration_Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Bucket", ID: &i_S3Bucket, Type: smithy.ShapeTypeString})
+var sModelDiagnosticsS3OutputConfiguration_Prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Prefix", ID: &i_S3Prefix, Type: smithy.ShapeTypeString})
+var sModelPromoteMode_MANAGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MANAGED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sModelPromoteMode_MANUAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MANUAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sModelQuality_QUALITY_THRESHOLD_MET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUALITY_THRESHOLD_MET", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sModelQuality_CANNOT_DETERMINE_QUALITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANNOT_DETERMINE_QUALITY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sModelQuality_POOR_QUALITY_DETECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POOR_QUALITY_DETECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sModelStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sModelStatus_SUCCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sModelStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sModelStatus_IMPORT_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMPORT_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_ModelSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iModelSummary, Members: &mModelSummary, Type: smithy.ShapeTypeStructure})
+var sModelSummary_ModelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelName", ID: &i_ModelName, Type: smithy.ShapeTypeString})
+var sModelSummary_ModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelArn", ID: &i_ModelArn, Type: smithy.ShapeTypeString})
+var sModelSummary_DatasetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetName", ID: &i_DatasetName, Type: smithy.ShapeTypeString})
+var sModelSummary_DatasetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetArn", ID: &i_DatasetArn, Type: smithy.ShapeTypeString})
+var sModelSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iModelStatus, Members: &mModelStatus, Type: smithy.ShapeTypeEnum})
+var sModelSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sModelSummary_ActiveModelVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActiveModelVersion", ID: &i_ModelVersion, Type: smithy.ShapeTypeLong})
+var sModelSummary_ActiveModelVersionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActiveModelVersionArn", ID: &i_ModelVersionArn, Type: smithy.ShapeTypeString})
+var sModelSummary_LatestScheduledRetrainingStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestScheduledRetrainingStatus", ID: &iModelVersionStatus, Members: &mModelVersionStatus, Type: smithy.ShapeTypeEnum})
+var sModelSummary_LatestScheduledRetrainingModelVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestScheduledRetrainingModelVersion", ID: &i_ModelVersion, Type: smithy.ShapeTypeLong})
+var sModelSummary_LatestScheduledRetrainingStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestScheduledRetrainingStartTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sModelSummary_NextScheduledRetrainingStartDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextScheduledRetrainingStartDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sModelSummary_RetrainingSchedulerStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetrainingSchedulerStatus", ID: &iRetrainingSchedulerStatus, Members: &mRetrainingSchedulerStatus, Type: smithy.ShapeTypeEnum})
+var sModelSummary_ModelDiagnosticsOutputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelDiagnosticsOutputConfiguration", ID: &iModelDiagnosticsOutputConfiguration, Members: &mModelDiagnosticsOutputConfiguration, Type: smithy.ShapeTypeStructure})
+var sModelSummary_ModelQuality = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelQuality", ID: &iModelQuality, Members: &mModelQuality, Type: smithy.ShapeTypeEnum})
+var sModelVersionSourceType_TRAINING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRAINING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sModelVersionSourceType_RETRAINING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RETRAINING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sModelVersionSourceType_IMPORT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMPORT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sModelVersionStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sModelVersionStatus_SUCCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sModelVersionStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sModelVersionStatus_IMPORT_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMPORT_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sModelVersionStatus_CANCELED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_ModelVersionSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iModelVersionSummary, Members: &mModelVersionSummary, Type: smithy.ShapeTypeStructure})
+var sModelVersionSummary_ModelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelName", ID: &i_ModelName, Type: smithy.ShapeTypeString})
+var sModelVersionSummary_ModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelArn", ID: &i_ModelArn, Type: smithy.ShapeTypeString})
+var sModelVersionSummary_ModelVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelVersion", ID: &i_ModelVersion, Type: smithy.ShapeTypeLong})
+var sModelVersionSummary_ModelVersionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelVersionArn", ID: &i_ModelVersionArn, Type: smithy.ShapeTypeString})
+var sModelVersionSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sModelVersionSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iModelVersionStatus, Members: &mModelVersionStatus, Type: smithy.ShapeTypeEnum})
+var sModelVersionSummary_SourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceType", ID: &iModelVersionSourceType, Members: &mModelVersionSourceType, Type: smithy.ShapeTypeEnum})
+var sModelVersionSummary_ModelQuality = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelQuality", ID: &iModelQuality, Members: &mModelQuality, Type: smithy.ShapeTypeEnum})
+var sMonotonicity_DECREASING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DECREASING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMonotonicity_INCREASING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INCREASING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMonotonicity_STATIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STATIC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMonotonicValues_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStatisticalIssueStatus, Members: &mStatisticalIssueStatus, Type: smithy.ShapeTypeEnum})
+var sMonotonicValues_Monotonicity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Monotonicity", ID: &iMonotonicity, Members: &mMonotonicity, Type: smithy.ShapeTypeEnum})
+var sMultipleOperatingModes_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStatisticalIssueStatus, Members: &mStatisticalIssueStatus, Type: smithy.ShapeTypeEnum})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_BoundedLengthString, Type: smithy.ShapeTypeString})
+var sRetrainingSchedulerStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRetrainingSchedulerStatus_RUNNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUNNING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRetrainingSchedulerStatus_STOPPING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOPPING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRetrainingSchedulerStatus_STOPPED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOPPED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_RetrainingSchedulerSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRetrainingSchedulerSummary, Members: &mRetrainingSchedulerSummary, Type: smithy.ShapeTypeStructure})
+var sRetrainingSchedulerSummary_ModelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelName", ID: &i_ModelName, Type: smithy.ShapeTypeString})
+var sRetrainingSchedulerSummary_ModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelArn", ID: &i_ModelArn, Type: smithy.ShapeTypeString})
+var sRetrainingSchedulerSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iRetrainingSchedulerStatus, Members: &mRetrainingSchedulerStatus, Type: smithy.ShapeTypeEnum})
+var sRetrainingSchedulerSummary_RetrainingStartDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetrainingStartDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sRetrainingSchedulerSummary_RetrainingFrequency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetrainingFrequency", ID: &i_RetrainingFrequency, Type: smithy.ShapeTypeString})
+var sRetrainingSchedulerSummary_LookbackWindow = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LookbackWindow", ID: &i_LookbackWindow, Type: smithy.ShapeTypeString})
+var sS3Object_Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Bucket", ID: &i_S3Bucket, Type: smithy.ShapeTypeString})
+var sS3Object_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_S3Key, Type: smithy.ShapeTypeString})
+var s_SensorStatisticsSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSensorStatisticsSummary, Members: &mSensorStatisticsSummary, Type: smithy.ShapeTypeStructure})
+var sSensorStatisticsSummary_ComponentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComponentName", ID: &i_ComponentName, Type: smithy.ShapeTypeString})
+var sSensorStatisticsSummary_SensorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SensorName", ID: &i_SensorName, Type: smithy.ShapeTypeString})
+var sSensorStatisticsSummary_DataExists = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataExists", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sSensorStatisticsSummary_MissingValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MissingValues", ID: &iCountPercent, Members: &mCountPercent, Type: smithy.ShapeTypeStructure})
+var sSensorStatisticsSummary_InvalidValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvalidValues", ID: &iCountPercent, Members: &mCountPercent, Type: smithy.ShapeTypeStructure})
+var sSensorStatisticsSummary_InvalidDateEntries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvalidDateEntries", ID: &iCountPercent, Members: &mCountPercent, Type: smithy.ShapeTypeStructure})
+var sSensorStatisticsSummary_DuplicateTimestamps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DuplicateTimestamps", ID: &iCountPercent, Members: &mCountPercent, Type: smithy.ShapeTypeStructure})
+var sSensorStatisticsSummary_CategoricalValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CategoricalValues", ID: &iCategoricalValues, Members: &mCategoricalValues, Type: smithy.ShapeTypeStructure})
+var sSensorStatisticsSummary_MultipleOperatingModes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MultipleOperatingModes", ID: &iMultipleOperatingModes, Members: &mMultipleOperatingModes, Type: smithy.ShapeTypeStructure})
+var sSensorStatisticsSummary_LargeTimestampGaps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LargeTimestampGaps", ID: &iLargeTimestampGaps, Members: &mLargeTimestampGaps, Type: smithy.ShapeTypeStructure})
+var sSensorStatisticsSummary_MonotonicValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonotonicValues", ID: &iMonotonicValues, Members: &mMonotonicValues, Type: smithy.ShapeTypeStructure})
+var sSensorStatisticsSummary_DataStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataStartTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sSensorStatisticsSummary_DataEndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataEndTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sSensorsWithShortDateRange_AffectedSensorCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AffectedSensorCount", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_BoundedLengthString, Type: smithy.ShapeTypeString})
+var sStatisticalIssueStatus_POTENTIAL_ISSUE_DETECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POTENTIAL_ISSUE_DETECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatisticalIssueStatus_NO_ISSUE_DETECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_ISSUE_DETECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var sTargetSamplingRate_PT1S = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PT1S", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTargetSamplingRate_PT5S = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PT5S", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTargetSamplingRate_PT10S = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PT10S", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTargetSamplingRate_PT15S = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PT15S", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTargetSamplingRate_PT30S = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PT30S", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTargetSamplingRate_PT1M = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PT1M", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTargetSamplingRate_PT5M = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PT5M", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTargetSamplingRate_PT10M = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PT10M", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTargetSamplingRate_PT15M = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PT15M", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTargetSamplingRate_PT30M = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PT30M", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTargetSamplingRate_PT1H = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PT1H", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_BoundedLengthString, Type: smithy.ShapeTypeString})
+var sUnsupportedTimestamps_TotalNumberOfUnsupportedTimestamps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalNumberOfUnsupportedTimestamps", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_BoundedLengthString, Type: smithy.ShapeTypeString})
+var sCreateDatasetRequest_DatasetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetName", ID: &i_DatasetName, Type: smithy.ShapeTypeString})
+var sCreateDatasetRequest_DatasetSchema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetSchema", ID: &iDatasetSchema, Members: &mDatasetSchema, Type: smithy.ShapeTypeStructure})
+var sCreateDatasetRequest_ServerSideKmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerSideKmsKeyId", ID: &i_NameOrArn, Type: smithy.ShapeTypeString})
+var sCreateDatasetRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_IdempotenceToken, Type: smithy.ShapeTypeString})
+var sCreateDatasetRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateDatasetResponse_DatasetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetName", ID: &i_DatasetName, Type: smithy.ShapeTypeString})
+var sCreateDatasetResponse_DatasetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetArn", ID: &i_DatasetArn, Type: smithy.ShapeTypeString})
+var sCreateDatasetResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iDatasetStatus, Members: &mDatasetStatus, Type: smithy.ShapeTypeEnum})
+var sCreateInferenceSchedulerRequest_ModelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelName", ID: &i_ModelName, Type: smithy.ShapeTypeString})
+var sCreateInferenceSchedulerRequest_InferenceSchedulerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InferenceSchedulerName", ID: &i_InferenceSchedulerName, Type: smithy.ShapeTypeString})
+var sCreateInferenceSchedulerRequest_DataDelayOffsetInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataDelayOffsetInMinutes", ID: &i_DataDelayOffsetInMinutes, Type: smithy.ShapeTypeLong})
+var sCreateInferenceSchedulerRequest_DataUploadFrequency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataUploadFrequency", ID: &iDataUploadFrequency, Members: &mDataUploadFrequency, Type: smithy.ShapeTypeEnum})
+var sCreateInferenceSchedulerRequest_DataInputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataInputConfiguration", ID: &iInferenceInputConfiguration, Members: &mInferenceInputConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateInferenceSchedulerRequest_DataOutputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataOutputConfiguration", ID: &iInferenceOutputConfiguration, Members: &mInferenceOutputConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateInferenceSchedulerRequest_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString})
+var sCreateInferenceSchedulerRequest_ServerSideKmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerSideKmsKeyId", ID: &i_NameOrArn, Type: smithy.ShapeTypeString})
+var sCreateInferenceSchedulerRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_IdempotenceToken, Type: smithy.ShapeTypeString})
+var sCreateInferenceSchedulerRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateInferenceSchedulerResponse_InferenceSchedulerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InferenceSchedulerArn", ID: &i_InferenceSchedulerArn, Type: smithy.ShapeTypeString})
+var sCreateInferenceSchedulerResponse_InferenceSchedulerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InferenceSchedulerName", ID: &i_InferenceSchedulerName, Type: smithy.ShapeTypeString})
+var sCreateInferenceSchedulerResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iInferenceSchedulerStatus, Members: &mInferenceSchedulerStatus, Type: smithy.ShapeTypeEnum})
+var sCreateInferenceSchedulerResponse_ModelQuality = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelQuality", ID: &iModelQuality, Members: &mModelQuality, Type: smithy.ShapeTypeEnum})
+var sCreateLabelGroupRequest_LabelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LabelGroupName", ID: &i_LabelGroupName, Type: smithy.ShapeTypeString})
+var sCreateLabelGroupRequest_FaultCodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FaultCodes", ID: &i_FaultCodes, Members: &m_FaultCodes, Type: smithy.ShapeTypeList})
+var sCreateLabelGroupRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_IdempotenceToken, Type: smithy.ShapeTypeString})
+var sCreateLabelGroupRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateLabelGroupResponse_LabelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LabelGroupName", ID: &i_LabelGroupName, Type: smithy.ShapeTypeString})
+var sCreateLabelGroupResponse_LabelGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LabelGroupArn", ID: &i_LabelGroupArn, Type: smithy.ShapeTypeString})
+var sCreateLabelRequest_LabelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LabelGroupName", ID: &i_LabelGroupName, Type: smithy.ShapeTypeString})
+var sCreateLabelRequest_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sCreateLabelRequest_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sCreateLabelRequest_Rating = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rating", ID: &iLabelRating, Members: &mLabelRating, Type: smithy.ShapeTypeEnum})
+var sCreateLabelRequest_FaultCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FaultCode", ID: &i_FaultCode, Type: smithy.ShapeTypeString})
+var sCreateLabelRequest_Notes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Notes", ID: &i_Comments, Type: smithy.ShapeTypeString})
+var sCreateLabelRequest_Equipment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Equipment", ID: &i_Equipment, Type: smithy.ShapeTypeString})
+var sCreateLabelRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_IdempotenceToken, Type: smithy.ShapeTypeString})
+var sCreateLabelResponse_LabelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LabelId", ID: &i_LabelId, Type: smithy.ShapeTypeString})
+var sCreateModelRequest_ModelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelName", ID: &i_ModelName, Type: smithy.ShapeTypeString})
+var sCreateModelRequest_DatasetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetName", ID: &i_DatasetIdentifier, Type: smithy.ShapeTypeString})
+var sCreateModelRequest_DatasetSchema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetSchema", ID: &iDatasetSchema, Members: &mDatasetSchema, Type: smithy.ShapeTypeStructure})
+var sCreateModelRequest_LabelsInputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LabelsInputConfiguration", ID: &iLabelsInputConfiguration, Members: &mLabelsInputConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateModelRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_IdempotenceToken, Type: smithy.ShapeTypeString})
+var sCreateModelRequest_TrainingDataStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrainingDataStartTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sCreateModelRequest_TrainingDataEndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrainingDataEndTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sCreateModelRequest_EvaluationDataStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EvaluationDataStartTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sCreateModelRequest_EvaluationDataEndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EvaluationDataEndTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sCreateModelRequest_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString})
+var sCreateModelRequest_DataPreProcessingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataPreProcessingConfiguration", ID: &iDataPreProcessingConfiguration, Members: &mDataPreProcessingConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateModelRequest_ServerSideKmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerSideKmsKeyId", ID: &i_NameOrArn, Type: smithy.ShapeTypeString})
+var sCreateModelRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateModelRequest_OffCondition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OffCondition", ID: &i_OffCondition, Type: smithy.ShapeTypeString})
+var sCreateModelRequest_ModelDiagnosticsOutputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelDiagnosticsOutputConfiguration", ID: &iModelDiagnosticsOutputConfiguration, Members: &mModelDiagnosticsOutputConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateModelResponse_ModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelArn", ID: &i_ModelArn, Type: smithy.ShapeTypeString})
+var sCreateModelResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iModelStatus, Members: &mModelStatus, Type: smithy.ShapeTypeEnum})
+var sCreateRetrainingSchedulerRequest_ModelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelName", ID: &i_ModelName, Type: smithy.ShapeTypeString})
+var sCreateRetrainingSchedulerRequest_RetrainingStartDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetrainingStartDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sCreateRetrainingSchedulerRequest_RetrainingFrequency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetrainingFrequency", ID: &i_RetrainingFrequency, Type: smithy.ShapeTypeString})
+var sCreateRetrainingSchedulerRequest_LookbackWindow = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LookbackWindow", ID: &i_LookbackWindow, Type: smithy.ShapeTypeString})
+var sCreateRetrainingSchedulerRequest_PromoteMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PromoteMode", ID: &iModelPromoteMode, Members: &mModelPromoteMode, Type: smithy.ShapeTypeEnum})
+var sCreateRetrainingSchedulerRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_IdempotenceToken, Type: smithy.ShapeTypeString})
+var sCreateRetrainingSchedulerResponse_ModelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelName", ID: &i_ModelName, Type: smithy.ShapeTypeString})
+var sCreateRetrainingSchedulerResponse_ModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelArn", ID: &i_ModelArn, Type: smithy.ShapeTypeString})
+var sCreateRetrainingSchedulerResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iRetrainingSchedulerStatus, Members: &mRetrainingSchedulerStatus, Type: smithy.ShapeTypeEnum})
+var sDeleteDatasetRequest_DatasetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetName", ID: &i_DatasetIdentifier, Type: smithy.ShapeTypeString})
+var sDeleteInferenceSchedulerRequest_InferenceSchedulerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InferenceSchedulerName", ID: &i_InferenceSchedulerIdentifier, Type: smithy.ShapeTypeString})
+var sDeleteLabelGroupRequest_LabelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LabelGroupName", ID: &i_LabelGroupName, Type: smithy.ShapeTypeString})
+var sDeleteLabelRequest_LabelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LabelGroupName", ID: &i_LabelGroupName, Type: smithy.ShapeTypeString})
+var sDeleteLabelRequest_LabelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LabelId", ID: &i_LabelId, Type: smithy.ShapeTypeString})
+var sDeleteModelRequest_ModelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelName", ID: &i_ModelName, Type: smithy.ShapeTypeString})
+var sDeleteResourcePolicyRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sDeleteRetrainingSchedulerRequest_ModelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelName", ID: &i_ModelName, Type: smithy.ShapeTypeString})
+var sDescribeDataIngestionJobRequest_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_IngestionJobId, Type: smithy.ShapeTypeString})
+var sDescribeDataIngestionJobResponse_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_IngestionJobId, Type: smithy.ShapeTypeString})
+var sDescribeDataIngestionJobResponse_DatasetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetArn", ID: &i_DatasetArn, Type: smithy.ShapeTypeString})
+var sDescribeDataIngestionJobResponse_IngestionInputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngestionInputConfiguration", ID: &iIngestionInputConfiguration, Members: &mIngestionInputConfiguration, Type: smithy.ShapeTypeStructure})
+var sDescribeDataIngestionJobResponse_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString})
+var sDescribeDataIngestionJobResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeDataIngestionJobResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iIngestionJobStatus, Members: &mIngestionJobStatus, Type: smithy.ShapeTypeEnum})
+var sDescribeDataIngestionJobResponse_FailedReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailedReason", ID: &i_BoundedLengthString, Type: smithy.ShapeTypeString})
+var sDescribeDataIngestionJobResponse_DataQualitySummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataQualitySummary", ID: &iDataQualitySummary, Members: &mDataQualitySummary, Type: smithy.ShapeTypeStructure})
+var sDescribeDataIngestionJobResponse_IngestedFilesSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngestedFilesSummary", ID: &iIngestedFilesSummary, Members: &mIngestedFilesSummary, Type: smithy.ShapeTypeStructure})
+var sDescribeDataIngestionJobResponse_StatusDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusDetail", ID: &i_BoundedLengthString, Type: smithy.ShapeTypeString})
+var sDescribeDataIngestionJobResponse_IngestedDataSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngestedDataSize", ID: &i_DataSizeInBytes, Type: smithy.ShapeTypeLong})
+var sDescribeDataIngestionJobResponse_DataStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataStartTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeDataIngestionJobResponse_DataEndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataEndTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeDataIngestionJobResponse_SourceDatasetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceDatasetArn", ID: &i_DatasetArn, Type: smithy.ShapeTypeString})
+var sDescribeDatasetRequest_DatasetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetName", ID: &i_DatasetIdentifier, Type: smithy.ShapeTypeString})
+var sDescribeDatasetResponse_DatasetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetName", ID: &i_DatasetName, Type: smithy.ShapeTypeString})
+var sDescribeDatasetResponse_DatasetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetArn", ID: &i_DatasetArn, Type: smithy.ShapeTypeString})
+var sDescribeDatasetResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeDatasetResponse_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeDatasetResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iDatasetStatus, Members: &mDatasetStatus, Type: smithy.ShapeTypeEnum})
+var sDescribeDatasetResponse_Schema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Schema", ID: &i_SynthesizedJsonInlineDataSchema, Traits: &t2, Type: smithy.ShapeTypeString})
+var sDescribeDatasetResponse_ServerSideKmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerSideKmsKeyId", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString})
+var sDescribeDatasetResponse_IngestionInputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngestionInputConfiguration", ID: &iIngestionInputConfiguration, Members: &mIngestionInputConfiguration, Type: smithy.ShapeTypeStructure})
+var sDescribeDatasetResponse_DataQualitySummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataQualitySummary", ID: &iDataQualitySummary, Members: &mDataQualitySummary, Type: smithy.ShapeTypeStructure})
+var sDescribeDatasetResponse_IngestedFilesSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngestedFilesSummary", ID: &iIngestedFilesSummary, Members: &mIngestedFilesSummary, Type: smithy.ShapeTypeStructure})
+var sDescribeDatasetResponse_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString})
+var sDescribeDatasetResponse_DataStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataStartTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeDatasetResponse_DataEndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataEndTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeDatasetResponse_SourceDatasetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceDatasetArn", ID: &i_DatasetArn, Type: smithy.ShapeTypeString})
+var sDescribeInferenceSchedulerRequest_InferenceSchedulerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InferenceSchedulerName", ID: &i_InferenceSchedulerIdentifier, Type: smithy.ShapeTypeString})
+var sDescribeInferenceSchedulerResponse_ModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelArn", ID: &i_ModelArn, Type: smithy.ShapeTypeString})
+var sDescribeInferenceSchedulerResponse_ModelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelName", ID: &i_ModelName, Type: smithy.ShapeTypeString})
+var sDescribeInferenceSchedulerResponse_InferenceSchedulerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InferenceSchedulerName", ID: &i_InferenceSchedulerName, Type: smithy.ShapeTypeString})
+var sDescribeInferenceSchedulerResponse_InferenceSchedulerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InferenceSchedulerArn", ID: &i_InferenceSchedulerArn, Type: smithy.ShapeTypeString})
+var sDescribeInferenceSchedulerResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iInferenceSchedulerStatus, Members: &mInferenceSchedulerStatus, Type: smithy.ShapeTypeEnum})
+var sDescribeInferenceSchedulerResponse_DataDelayOffsetInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataDelayOffsetInMinutes", ID: &i_DataDelayOffsetInMinutes, Type: smithy.ShapeTypeLong})
+var sDescribeInferenceSchedulerResponse_DataUploadFrequency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataUploadFrequency", ID: &iDataUploadFrequency, Members: &mDataUploadFrequency, Type: smithy.ShapeTypeEnum})
+var sDescribeInferenceSchedulerResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeInferenceSchedulerResponse_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeInferenceSchedulerResponse_DataInputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataInputConfiguration", ID: &iInferenceInputConfiguration, Members: &mInferenceInputConfiguration, Type: smithy.ShapeTypeStructure})
+var sDescribeInferenceSchedulerResponse_DataOutputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataOutputConfiguration", ID: &iInferenceOutputConfiguration, Members: &mInferenceOutputConfiguration, Type: smithy.ShapeTypeStructure})
+var sDescribeInferenceSchedulerResponse_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString})
+var sDescribeInferenceSchedulerResponse_ServerSideKmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerSideKmsKeyId", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString})
+var sDescribeInferenceSchedulerResponse_LatestInferenceResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestInferenceResult", ID: &iLatestInferenceResult, Members: &mLatestInferenceResult, Type: smithy.ShapeTypeEnum})
+var sDescribeLabelGroupRequest_LabelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LabelGroupName", ID: &i_LabelGroupName, Type: smithy.ShapeTypeString})
+var sDescribeLabelGroupResponse_LabelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LabelGroupName", ID: &i_LabelGroupName, Type: smithy.ShapeTypeString})
+var sDescribeLabelGroupResponse_LabelGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LabelGroupArn", ID: &i_LabelGroupArn, Type: smithy.ShapeTypeString})
+var sDescribeLabelGroupResponse_FaultCodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FaultCodes", ID: &i_FaultCodes, Members: &m_FaultCodes, Type: smithy.ShapeTypeList})
+var sDescribeLabelGroupResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeLabelGroupResponse_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeLabelRequest_LabelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LabelGroupName", ID: &i_LabelGroupName, Type: smithy.ShapeTypeString})
+var sDescribeLabelRequest_LabelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LabelId", ID: &i_LabelId, Type: smithy.ShapeTypeString})
+var sDescribeLabelResponse_LabelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LabelGroupName", ID: &i_LabelGroupName, Type: smithy.ShapeTypeString})
+var sDescribeLabelResponse_LabelGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LabelGroupArn", ID: &i_LabelGroupArn, Type: smithy.ShapeTypeString})
+var sDescribeLabelResponse_LabelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LabelId", ID: &i_LabelId, Type: smithy.ShapeTypeString})
+var sDescribeLabelResponse_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeLabelResponse_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeLabelResponse_Rating = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rating", ID: &iLabelRating, Members: &mLabelRating, Type: smithy.ShapeTypeEnum})
+var sDescribeLabelResponse_FaultCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FaultCode", ID: &i_FaultCode, Type: smithy.ShapeTypeString})
+var sDescribeLabelResponse_Notes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Notes", ID: &i_Comments, Type: smithy.ShapeTypeString})
+var sDescribeLabelResponse_Equipment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Equipment", ID: &i_Equipment, Type: smithy.ShapeTypeString})
+var sDescribeLabelResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeModelRequest_ModelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelName", ID: &i_ModelName, Type: smithy.ShapeTypeString})
+var sDescribeModelResponse_ModelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelName", ID: &i_ModelName, Type: smithy.ShapeTypeString})
+var sDescribeModelResponse_ModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelArn", ID: &i_ModelArn, Type: smithy.ShapeTypeString})
+var sDescribeModelResponse_DatasetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetName", ID: &i_DatasetName, Type: smithy.ShapeTypeString})
+var sDescribeModelResponse_DatasetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetArn", ID: &i_DatasetArn, Type: smithy.ShapeTypeString})
+var sDescribeModelResponse_Schema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Schema", ID: &i_SynthesizedJsonInlineDataSchema, Traits: &t2, Type: smithy.ShapeTypeString})
+var sDescribeModelResponse_LabelsInputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LabelsInputConfiguration", ID: &iLabelsInputConfiguration, Members: &mLabelsInputConfiguration, Type: smithy.ShapeTypeStructure})
+var sDescribeModelResponse_TrainingDataStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrainingDataStartTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeModelResponse_TrainingDataEndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrainingDataEndTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeModelResponse_EvaluationDataStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EvaluationDataStartTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeModelResponse_EvaluationDataEndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EvaluationDataEndTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeModelResponse_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString})
+var sDescribeModelResponse_DataPreProcessingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataPreProcessingConfiguration", ID: &iDataPreProcessingConfiguration, Members: &mDataPreProcessingConfiguration, Type: smithy.ShapeTypeStructure})
+var sDescribeModelResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iModelStatus, Members: &mModelStatus, Type: smithy.ShapeTypeEnum})
+var sDescribeModelResponse_TrainingExecutionStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrainingExecutionStartTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeModelResponse_TrainingExecutionEndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrainingExecutionEndTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeModelResponse_FailedReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailedReason", ID: &i_BoundedLengthString, Type: smithy.ShapeTypeString})
+var sDescribeModelResponse_ModelMetrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelMetrics", ID: &i_SynthesizedJsonModelMetrics, Traits: &t2, Type: smithy.ShapeTypeString})
+var sDescribeModelResponse_LastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeModelResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeModelResponse_ServerSideKmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerSideKmsKeyId", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString})
+var sDescribeModelResponse_OffCondition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OffCondition", ID: &i_OffCondition, Type: smithy.ShapeTypeString})
+var sDescribeModelResponse_SourceModelVersionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceModelVersionArn", ID: &i_ModelVersionArn, Type: smithy.ShapeTypeString})
+var sDescribeModelResponse_ImportJobStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportJobStartTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeModelResponse_ImportJobEndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportJobEndTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeModelResponse_ActiveModelVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActiveModelVersion", ID: &i_ModelVersion, Type: smithy.ShapeTypeLong})
+var sDescribeModelResponse_ActiveModelVersionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActiveModelVersionArn", ID: &i_ModelVersionArn, Type: smithy.ShapeTypeString})
+var sDescribeModelResponse_ModelVersionActivatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelVersionActivatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeModelResponse_PreviousActiveModelVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreviousActiveModelVersion", ID: &i_ModelVersion, Type: smithy.ShapeTypeLong})
+var sDescribeModelResponse_PreviousActiveModelVersionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreviousActiveModelVersionArn", ID: &i_ModelVersionArn, Type: smithy.ShapeTypeString})
+var sDescribeModelResponse_PreviousModelVersionActivatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreviousModelVersionActivatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeModelResponse_PriorModelMetrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PriorModelMetrics", ID: &i_SynthesizedJsonModelMetrics, Traits: &t2, Type: smithy.ShapeTypeString})
+var sDescribeModelResponse_LatestScheduledRetrainingFailedReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestScheduledRetrainingFailedReason", ID: &i_BoundedLengthString, Type: smithy.ShapeTypeString})
+var sDescribeModelResponse_LatestScheduledRetrainingStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestScheduledRetrainingStatus", ID: &iModelVersionStatus, Members: &mModelVersionStatus, Type: smithy.ShapeTypeEnum})
+var sDescribeModelResponse_LatestScheduledRetrainingModelVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestScheduledRetrainingModelVersion", ID: &i_ModelVersion, Type: smithy.ShapeTypeLong})
+var sDescribeModelResponse_LatestScheduledRetrainingStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestScheduledRetrainingStartTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeModelResponse_LatestScheduledRetrainingAvailableDataInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestScheduledRetrainingAvailableDataInDays", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sDescribeModelResponse_NextScheduledRetrainingStartDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextScheduledRetrainingStartDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeModelResponse_AccumulatedInferenceDataStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccumulatedInferenceDataStartTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeModelResponse_AccumulatedInferenceDataEndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccumulatedInferenceDataEndTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeModelResponse_RetrainingSchedulerStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetrainingSchedulerStatus", ID: &iRetrainingSchedulerStatus, Members: &mRetrainingSchedulerStatus, Type: smithy.ShapeTypeEnum})
+var sDescribeModelResponse_ModelDiagnosticsOutputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelDiagnosticsOutputConfiguration", ID: &iModelDiagnosticsOutputConfiguration, Members: &mModelDiagnosticsOutputConfiguration, Type: smithy.ShapeTypeStructure})
+var sDescribeModelResponse_ModelQuality = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelQuality", ID: &iModelQuality, Members: &mModelQuality, Type: smithy.ShapeTypeEnum})
+var sDescribeModelVersionRequest_ModelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelName", ID: &i_ModelName, Type: smithy.ShapeTypeString})
+var sDescribeModelVersionRequest_ModelVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelVersion", ID: &i_ModelVersion, Type: smithy.ShapeTypeLong})
+var sDescribeModelVersionResponse_ModelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelName", ID: &i_ModelName, Type: smithy.ShapeTypeString})
+var sDescribeModelVersionResponse_ModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelArn", ID: &i_ModelArn, Type: smithy.ShapeTypeString})
+var sDescribeModelVersionResponse_ModelVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelVersion", ID: &i_ModelVersion, Type: smithy.ShapeTypeLong})
+var sDescribeModelVersionResponse_ModelVersionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelVersionArn", ID: &i_ModelVersionArn, Type: smithy.ShapeTypeString})
+var sDescribeModelVersionResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iModelVersionStatus, Members: &mModelVersionStatus, Type: smithy.ShapeTypeEnum})
+var sDescribeModelVersionResponse_SourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceType", ID: &iModelVersionSourceType, Members: &mModelVersionSourceType, Type: smithy.ShapeTypeEnum})
+var sDescribeModelVersionResponse_DatasetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetName", ID: &i_DatasetName, Type: smithy.ShapeTypeString})
+var sDescribeModelVersionResponse_DatasetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetArn", ID: &i_DatasetArn, Type: smithy.ShapeTypeString})
+var sDescribeModelVersionResponse_Schema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Schema", ID: &i_InlineDataSchema, Type: smithy.ShapeTypeString})
+var sDescribeModelVersionResponse_LabelsInputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LabelsInputConfiguration", ID: &iLabelsInputConfiguration, Members: &mLabelsInputConfiguration, Type: smithy.ShapeTypeStructure})
+var sDescribeModelVersionResponse_TrainingDataStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrainingDataStartTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeModelVersionResponse_TrainingDataEndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrainingDataEndTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeModelVersionResponse_EvaluationDataStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EvaluationDataStartTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeModelVersionResponse_EvaluationDataEndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EvaluationDataEndTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeModelVersionResponse_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString})
+var sDescribeModelVersionResponse_DataPreProcessingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataPreProcessingConfiguration", ID: &iDataPreProcessingConfiguration, Members: &mDataPreProcessingConfiguration, Type: smithy.ShapeTypeStructure})
+var sDescribeModelVersionResponse_TrainingExecutionStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrainingExecutionStartTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeModelVersionResponse_TrainingExecutionEndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrainingExecutionEndTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeModelVersionResponse_FailedReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailedReason", ID: &i_BoundedLengthString, Type: smithy.ShapeTypeString})
+var sDescribeModelVersionResponse_ModelMetrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelMetrics", ID: &i_ModelMetrics, Type: smithy.ShapeTypeString})
+var sDescribeModelVersionResponse_LastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeModelVersionResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeModelVersionResponse_ServerSideKmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerSideKmsKeyId", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString})
+var sDescribeModelVersionResponse_OffCondition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OffCondition", ID: &i_OffCondition, Type: smithy.ShapeTypeString})
+var sDescribeModelVersionResponse_SourceModelVersionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceModelVersionArn", ID: &i_ModelVersionArn, Type: smithy.ShapeTypeString})
+var sDescribeModelVersionResponse_ImportJobStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportJobStartTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeModelVersionResponse_ImportJobEndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportJobEndTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeModelVersionResponse_ImportedDataSizeInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportedDataSizeInBytes", ID: &i_DataSizeInBytes, Type: smithy.ShapeTypeLong})
+var sDescribeModelVersionResponse_PriorModelMetrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PriorModelMetrics", ID: &i_ModelMetrics, Type: smithy.ShapeTypeString})
+var sDescribeModelVersionResponse_RetrainingAvailableDataInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetrainingAvailableDataInDays", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sDescribeModelVersionResponse_AutoPromotionResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoPromotionResult", ID: &iAutoPromotionResult, Members: &mAutoPromotionResult, Type: smithy.ShapeTypeEnum})
+var sDescribeModelVersionResponse_AutoPromotionResultReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoPromotionResultReason", ID: &i_AutoPromotionResultReason, Type: smithy.ShapeTypeString})
+var sDescribeModelVersionResponse_ModelDiagnosticsOutputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelDiagnosticsOutputConfiguration", ID: &iModelDiagnosticsOutputConfiguration, Members: &mModelDiagnosticsOutputConfiguration, Type: smithy.ShapeTypeStructure})
+var sDescribeModelVersionResponse_ModelDiagnosticsResultsObject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelDiagnosticsResultsObject", ID: &iS3Object, Members: &mS3Object, Type: smithy.ShapeTypeStructure})
+var sDescribeModelVersionResponse_ModelQuality = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelQuality", ID: &iModelQuality, Members: &mModelQuality, Type: smithy.ShapeTypeEnum})
+var sDescribeResourcePolicyRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sDescribeResourcePolicyResponse_PolicyRevisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyRevisionId", ID: &i_PolicyRevisionId, Type: smithy.ShapeTypeString})
+var sDescribeResourcePolicyResponse_ResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourcePolicy", ID: &i_Policy, Type: smithy.ShapeTypeString})
+var sDescribeResourcePolicyResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeResourcePolicyResponse_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeRetrainingSchedulerRequest_ModelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelName", ID: &i_ModelName, Type: smithy.ShapeTypeString})
+var sDescribeRetrainingSchedulerResponse_ModelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelName", ID: &i_ModelName, Type: smithy.ShapeTypeString})
+var sDescribeRetrainingSchedulerResponse_ModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelArn", ID: &i_ModelArn, Type: smithy.ShapeTypeString})
+var sDescribeRetrainingSchedulerResponse_RetrainingStartDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetrainingStartDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeRetrainingSchedulerResponse_RetrainingFrequency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetrainingFrequency", ID: &i_RetrainingFrequency, Type: smithy.ShapeTypeString})
+var sDescribeRetrainingSchedulerResponse_LookbackWindow = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LookbackWindow", ID: &i_LookbackWindow, Type: smithy.ShapeTypeString})
+var sDescribeRetrainingSchedulerResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iRetrainingSchedulerStatus, Members: &mRetrainingSchedulerStatus, Type: smithy.ShapeTypeEnum})
+var sDescribeRetrainingSchedulerResponse_PromoteMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PromoteMode", ID: &iModelPromoteMode, Members: &mModelPromoteMode, Type: smithy.ShapeTypeEnum})
+var sDescribeRetrainingSchedulerResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeRetrainingSchedulerResponse_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sImportDatasetRequest_SourceDatasetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceDatasetArn", ID: &i_DatasetArn, Type: smithy.ShapeTypeString})
+var sImportDatasetRequest_DatasetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetName", ID: &i_DatasetName, Type: smithy.ShapeTypeString})
+var sImportDatasetRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_IdempotenceToken, Type: smithy.ShapeTypeString})
+var sImportDatasetRequest_ServerSideKmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerSideKmsKeyId", ID: &i_NameOrArn, Type: smithy.ShapeTypeString})
+var sImportDatasetRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sImportDatasetResponse_DatasetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetName", ID: &i_DatasetName, Type: smithy.ShapeTypeString})
+var sImportDatasetResponse_DatasetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetArn", ID: &i_DatasetArn, Type: smithy.ShapeTypeString})
+var sImportDatasetResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iDatasetStatus, Members: &mDatasetStatus, Type: smithy.ShapeTypeEnum})
+var sImportDatasetResponse_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_IngestionJobId, Type: smithy.ShapeTypeString})
+var sImportModelVersionRequest_SourceModelVersionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceModelVersionArn", ID: &i_ModelVersionArn, Type: smithy.ShapeTypeString})
+var sImportModelVersionRequest_ModelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelName", ID: &i_ModelName, Type: smithy.ShapeTypeString})
+var sImportModelVersionRequest_DatasetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetName", ID: &i_DatasetIdentifier, Type: smithy.ShapeTypeString})
+var sImportModelVersionRequest_LabelsInputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LabelsInputConfiguration", ID: &iLabelsInputConfiguration, Members: &mLabelsInputConfiguration, Type: smithy.ShapeTypeStructure})
+var sImportModelVersionRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_IdempotenceToken, Type: smithy.ShapeTypeString})
+var sImportModelVersionRequest_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString})
+var sImportModelVersionRequest_ServerSideKmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerSideKmsKeyId", ID: &i_NameOrArn, Type: smithy.ShapeTypeString})
+var sImportModelVersionRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sImportModelVersionRequest_InferenceDataImportStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InferenceDataImportStrategy", ID: &iInferenceDataImportStrategy, Members: &mInferenceDataImportStrategy, Type: smithy.ShapeTypeEnum})
+var sImportModelVersionResponse_ModelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelName", ID: &i_ModelName, Type: smithy.ShapeTypeString})
+var sImportModelVersionResponse_ModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelArn", ID: &i_ModelArn, Type: smithy.ShapeTypeString})
+var sImportModelVersionResponse_ModelVersionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelVersionArn", ID: &i_ModelVersionArn, Type: smithy.ShapeTypeString})
+var sImportModelVersionResponse_ModelVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelVersion", ID: &i_ModelVersion, Type: smithy.ShapeTypeLong})
+var sImportModelVersionResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iModelVersionStatus, Members: &mModelVersionStatus, Type: smithy.ShapeTypeEnum})
+var sListDataIngestionJobsRequest_DatasetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetName", ID: &i_DatasetName, Type: smithy.ShapeTypeString})
+var sListDataIngestionJobsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListDataIngestionJobsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListDataIngestionJobsRequest_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iIngestionJobStatus, Members: &mIngestionJobStatus, Type: smithy.ShapeTypeEnum})
+var sListDataIngestionJobsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListDataIngestionJobsResponse_DataIngestionJobSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataIngestionJobSummaries", ID: &i_DataIngestionJobSummaries, Members: &m_DataIngestionJobSummaries, Type: smithy.ShapeTypeList})
+var sListDatasetsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListDatasetsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListDatasetsRequest_DatasetNameBeginsWith = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetNameBeginsWith", ID: &i_DatasetName, Type: smithy.ShapeTypeString})
+var sListDatasetsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListDatasetsResponse_DatasetSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetSummaries", ID: &i_DatasetSummaries, Members: &m_DatasetSummaries, Type: smithy.ShapeTypeList})
+var sListInferenceEventsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListInferenceEventsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListInferenceEventsRequest_InferenceSchedulerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InferenceSchedulerName", ID: &i_InferenceSchedulerIdentifier, Type: smithy.ShapeTypeString})
+var sListInferenceEventsRequest_IntervalStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntervalStartTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sListInferenceEventsRequest_IntervalEndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntervalEndTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sListInferenceEventsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListInferenceEventsResponse_InferenceEventSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InferenceEventSummaries", ID: &i_InferenceEventSummaries, Members: &m_InferenceEventSummaries, Type: smithy.ShapeTypeList})
+var sListInferenceExecutionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListInferenceExecutionsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListInferenceExecutionsRequest_InferenceSchedulerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InferenceSchedulerName", ID: &i_InferenceSchedulerIdentifier, Type: smithy.ShapeTypeString})
+var sListInferenceExecutionsRequest_DataStartTimeAfter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataStartTimeAfter", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sListInferenceExecutionsRequest_DataEndTimeBefore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataEndTimeBefore", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sListInferenceExecutionsRequest_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iInferenceExecutionStatus, Members: &mInferenceExecutionStatus, Type: smithy.ShapeTypeEnum})
+var sListInferenceExecutionsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListInferenceExecutionsResponse_InferenceExecutionSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InferenceExecutionSummaries", ID: &i_InferenceExecutionSummaries, Members: &m_InferenceExecutionSummaries, Type: smithy.ShapeTypeList})
+var sListInferenceSchedulersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListInferenceSchedulersRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListInferenceSchedulersRequest_InferenceSchedulerNameBeginsWith = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InferenceSchedulerNameBeginsWith", ID: &i_InferenceSchedulerIdentifier, Type: smithy.ShapeTypeString})
+var sListInferenceSchedulersRequest_ModelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelName", ID: &i_ModelName, Type: smithy.ShapeTypeString})
+var sListInferenceSchedulersRequest_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iInferenceSchedulerStatus, Members: &mInferenceSchedulerStatus, Type: smithy.ShapeTypeEnum})
+var sListInferenceSchedulersResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListInferenceSchedulersResponse_InferenceSchedulerSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InferenceSchedulerSummaries", ID: &i_InferenceSchedulerSummaries, Members: &m_InferenceSchedulerSummaries, Type: smithy.ShapeTypeList})
+var sListLabelGroupsRequest_LabelGroupNameBeginsWith = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LabelGroupNameBeginsWith", ID: &i_LabelGroupName, Type: smithy.ShapeTypeString})
+var sListLabelGroupsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListLabelGroupsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListLabelGroupsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListLabelGroupsResponse_LabelGroupSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LabelGroupSummaries", ID: &i_LabelGroupSummaries, Members: &m_LabelGroupSummaries, Type: smithy.ShapeTypeList})
+var sListLabelsRequest_LabelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LabelGroupName", ID: &i_LabelGroupName, Type: smithy.ShapeTypeString})
+var sListLabelsRequest_IntervalStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntervalStartTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sListLabelsRequest_IntervalEndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntervalEndTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sListLabelsRequest_FaultCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FaultCode", ID: &i_FaultCode, Type: smithy.ShapeTypeString})
+var sListLabelsRequest_Equipment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Equipment", ID: &i_Equipment, Type: smithy.ShapeTypeString})
+var sListLabelsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListLabelsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListLabelsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListLabelsResponse_LabelSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LabelSummaries", ID: &i_LabelSummaries, Members: &m_LabelSummaries, Type: smithy.ShapeTypeList})
+var sListModelsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListModelsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListModelsRequest_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iModelStatus, Members: &mModelStatus, Type: smithy.ShapeTypeEnum})
+var sListModelsRequest_ModelNameBeginsWith = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelNameBeginsWith", ID: &i_ModelName, Type: smithy.ShapeTypeString})
+var sListModelsRequest_DatasetNameBeginsWith = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetNameBeginsWith", ID: &i_DatasetName, Type: smithy.ShapeTypeString})
+var sListModelsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListModelsResponse_ModelSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelSummaries", ID: &i_ModelSummaries, Members: &m_ModelSummaries, Type: smithy.ShapeTypeList})
+var sListModelVersionsRequest_ModelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelName", ID: &i_ModelName, Type: smithy.ShapeTypeString})
+var sListModelVersionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListModelVersionsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListModelVersionsRequest_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iModelVersionStatus, Members: &mModelVersionStatus, Type: smithy.ShapeTypeEnum})
+var sListModelVersionsRequest_SourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceType", ID: &iModelVersionSourceType, Members: &mModelVersionSourceType, Type: smithy.ShapeTypeEnum})
+var sListModelVersionsRequest_CreatedAtEndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAtEndTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sListModelVersionsRequest_CreatedAtStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAtStartTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sListModelVersionsRequest_MaxModelVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxModelVersion", ID: &i_ModelVersion, Type: smithy.ShapeTypeLong})
+var sListModelVersionsRequest_MinModelVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinModelVersion", ID: &i_ModelVersion, Type: smithy.ShapeTypeLong})
+var sListModelVersionsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListModelVersionsResponse_ModelVersionSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelVersionSummaries", ID: &i_ModelVersionSummaries, Members: &m_ModelVersionSummaries, Type: smithy.ShapeTypeList})
+var sListRetrainingSchedulersRequest_ModelNameBeginsWith = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelNameBeginsWith", ID: &i_ModelName, Type: smithy.ShapeTypeString})
+var sListRetrainingSchedulersRequest_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iRetrainingSchedulerStatus, Members: &mRetrainingSchedulerStatus, Type: smithy.ShapeTypeEnum})
+var sListRetrainingSchedulersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListRetrainingSchedulersRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListRetrainingSchedulersResponse_RetrainingSchedulerSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetrainingSchedulerSummaries", ID: &i_RetrainingSchedulerSummaries, Members: &m_RetrainingSchedulerSummaries, Type: smithy.ShapeTypeList})
+var sListRetrainingSchedulersResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListSensorStatisticsRequest_DatasetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetName", ID: &i_DatasetName, Type: smithy.ShapeTypeString})
+var sListSensorStatisticsRequest_IngestionJobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngestionJobId", ID: &i_IngestionJobId, Type: smithy.ShapeTypeString})
+var sListSensorStatisticsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListSensorStatisticsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListSensorStatisticsResponse_SensorStatisticsSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SensorStatisticsSummaries", ID: &i_SensorStatisticsSummaries, Members: &m_SensorStatisticsSummaries, Type: smithy.ShapeTypeList})
+var sListSensorStatisticsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_AmazonResourceArn, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sPutResourcePolicyRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sPutResourcePolicyRequest_ResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourcePolicy", ID: &i_Policy, Type: smithy.ShapeTypeString})
+var sPutResourcePolicyRequest_PolicyRevisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyRevisionId", ID: &i_PolicyRevisionId, Type: smithy.ShapeTypeString})
+var sPutResourcePolicyRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_IdempotenceToken, Type: smithy.ShapeTypeString})
+var sPutResourcePolicyResponse_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sPutResourcePolicyResponse_PolicyRevisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyRevisionId", ID: &i_PolicyRevisionId, Type: smithy.ShapeTypeString})
+var sStartDataIngestionJobRequest_DatasetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetName", ID: &i_DatasetIdentifier, Type: smithy.ShapeTypeString})
+var sStartDataIngestionJobRequest_IngestionInputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngestionInputConfiguration", ID: &iIngestionInputConfiguration, Members: &mIngestionInputConfiguration, Type: smithy.ShapeTypeStructure})
+var sStartDataIngestionJobRequest_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString})
+var sStartDataIngestionJobRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_IdempotenceToken, Type: smithy.ShapeTypeString})
+var sStartDataIngestionJobResponse_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_IngestionJobId, Type: smithy.ShapeTypeString})
+var sStartDataIngestionJobResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iIngestionJobStatus, Members: &mIngestionJobStatus, Type: smithy.ShapeTypeEnum})
+var sStartInferenceSchedulerRequest_InferenceSchedulerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InferenceSchedulerName", ID: &i_InferenceSchedulerIdentifier, Type: smithy.ShapeTypeString})
+var sStartInferenceSchedulerResponse_ModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelArn", ID: &i_ModelArn, Type: smithy.ShapeTypeString})
+var sStartInferenceSchedulerResponse_ModelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelName", ID: &i_ModelName, Type: smithy.ShapeTypeString})
+var sStartInferenceSchedulerResponse_InferenceSchedulerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InferenceSchedulerName", ID: &i_InferenceSchedulerName, Type: smithy.ShapeTypeString})
+var sStartInferenceSchedulerResponse_InferenceSchedulerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InferenceSchedulerArn", ID: &i_InferenceSchedulerArn, Type: smithy.ShapeTypeString})
+var sStartInferenceSchedulerResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iInferenceSchedulerStatus, Members: &mInferenceSchedulerStatus, Type: smithy.ShapeTypeEnum})
+var sStartRetrainingSchedulerRequest_ModelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelName", ID: &i_ModelName, Type: smithy.ShapeTypeString})
+var sStartRetrainingSchedulerResponse_ModelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelName", ID: &i_ModelName, Type: smithy.ShapeTypeString})
+var sStartRetrainingSchedulerResponse_ModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelArn", ID: &i_ModelArn, Type: smithy.ShapeTypeString})
+var sStartRetrainingSchedulerResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iRetrainingSchedulerStatus, Members: &mRetrainingSchedulerStatus, Type: smithy.ShapeTypeEnum})
+var sStopInferenceSchedulerRequest_InferenceSchedulerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InferenceSchedulerName", ID: &i_InferenceSchedulerIdentifier, Type: smithy.ShapeTypeString})
+var sStopInferenceSchedulerResponse_ModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelArn", ID: &i_ModelArn, Type: smithy.ShapeTypeString})
+var sStopInferenceSchedulerResponse_ModelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelName", ID: &i_ModelName, Type: smithy.ShapeTypeString})
+var sStopInferenceSchedulerResponse_InferenceSchedulerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InferenceSchedulerName", ID: &i_InferenceSchedulerName, Type: smithy.ShapeTypeString})
+var sStopInferenceSchedulerResponse_InferenceSchedulerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InferenceSchedulerArn", ID: &i_InferenceSchedulerArn, Type: smithy.ShapeTypeString})
+var sStopInferenceSchedulerResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iInferenceSchedulerStatus, Members: &mInferenceSchedulerStatus, Type: smithy.ShapeTypeEnum})
+var sStopRetrainingSchedulerRequest_ModelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelName", ID: &i_ModelName, Type: smithy.ShapeTypeString})
+var sStopRetrainingSchedulerResponse_ModelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelName", ID: &i_ModelName, Type: smithy.ShapeTypeString})
+var sStopRetrainingSchedulerResponse_ModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelArn", ID: &i_ModelArn, Type: smithy.ShapeTypeString})
+var sStopRetrainingSchedulerResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iRetrainingSchedulerStatus, Members: &mRetrainingSchedulerStatus, Type: smithy.ShapeTypeEnum})
+var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_AmazonResourceArn, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_AmazonResourceArn, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var sUpdateActiveModelVersionRequest_ModelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelName", ID: &i_ModelName, Type: smithy.ShapeTypeString})
+var sUpdateActiveModelVersionRequest_ModelVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelVersion", ID: &i_ModelVersion, Type: smithy.ShapeTypeLong})
+var sUpdateActiveModelVersionResponse_ModelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelName", ID: &i_ModelName, Type: smithy.ShapeTypeString})
+var sUpdateActiveModelVersionResponse_ModelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelArn", ID: &i_ModelArn, Type: smithy.ShapeTypeString})
+var sUpdateActiveModelVersionResponse_CurrentActiveVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentActiveVersion", ID: &i_ModelVersion, Type: smithy.ShapeTypeLong})
+var sUpdateActiveModelVersionResponse_PreviousActiveVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreviousActiveVersion", ID: &i_ModelVersion, Type: smithy.ShapeTypeLong})
+var sUpdateActiveModelVersionResponse_CurrentActiveVersionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentActiveVersionArn", ID: &i_ModelVersionArn, Type: smithy.ShapeTypeString})
+var sUpdateActiveModelVersionResponse_PreviousActiveVersionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreviousActiveVersionArn", ID: &i_ModelVersionArn, Type: smithy.ShapeTypeString})
+var sUpdateInferenceSchedulerRequest_InferenceSchedulerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InferenceSchedulerName", ID: &i_InferenceSchedulerIdentifier, Type: smithy.ShapeTypeString})
+var sUpdateInferenceSchedulerRequest_DataDelayOffsetInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataDelayOffsetInMinutes", ID: &i_DataDelayOffsetInMinutes, Type: smithy.ShapeTypeLong})
+var sUpdateInferenceSchedulerRequest_DataUploadFrequency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataUploadFrequency", ID: &iDataUploadFrequency, Members: &mDataUploadFrequency, Type: smithy.ShapeTypeEnum})
+var sUpdateInferenceSchedulerRequest_DataInputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataInputConfiguration", ID: &iInferenceInputConfiguration, Members: &mInferenceInputConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateInferenceSchedulerRequest_DataOutputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataOutputConfiguration", ID: &iInferenceOutputConfiguration, Members: &mInferenceOutputConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateInferenceSchedulerRequest_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString})
+var sUpdateLabelGroupRequest_LabelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LabelGroupName", ID: &i_LabelGroupName, Type: smithy.ShapeTypeString})
+var sUpdateLabelGroupRequest_FaultCodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FaultCodes", ID: &i_FaultCodes, Members: &m_FaultCodes, Type: smithy.ShapeTypeList})
+var sUpdateModelRequest_ModelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelName", ID: &i_ModelName, Type: smithy.ShapeTypeString})
+var sUpdateModelRequest_LabelsInputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LabelsInputConfiguration", ID: &iLabelsInputConfiguration, Members: &mLabelsInputConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateModelRequest_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString})
+var sUpdateModelRequest_ModelDiagnosticsOutputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelDiagnosticsOutputConfiguration", ID: &iModelDiagnosticsOutputConfiguration, Members: &mModelDiagnosticsOutputConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateRetrainingSchedulerRequest_ModelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelName", ID: &i_ModelName, Type: smithy.ShapeTypeString})
+var sUpdateRetrainingSchedulerRequest_RetrainingStartDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetrainingStartDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sUpdateRetrainingSchedulerRequest_RetrainingFrequency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetrainingFrequency", ID: &i_RetrainingFrequency, Type: smithy.ShapeTypeString})
+var sUpdateRetrainingSchedulerRequest_LookbackWindow = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LookbackWindow", ID: &i_LookbackWindow, Type: smithy.ShapeTypeString})
+var sUpdateRetrainingSchedulerRequest_PromoteMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PromoteMode", ID: &iModelPromoteMode, Members: &mModelPromoteMode, Type: smithy.ShapeTypeEnum})
+
+var CreateDataset = &sCreateDataset
+
+var CreateInferenceScheduler = &sCreateInferenceScheduler
+
+var CreateLabel = &sCreateLabel
+
+var CreateLabelGroup = &sCreateLabelGroup
+
+var CreateModel = &sCreateModel
+
+var CreateRetrainingScheduler = &sCreateRetrainingScheduler
+
+var DeleteDataset = &sDeleteDataset
+
+var DeleteInferenceScheduler = &sDeleteInferenceScheduler
+
+var DeleteLabel = &sDeleteLabel
+
+var DeleteLabelGroup = &sDeleteLabelGroup
+
+var DeleteModel = &sDeleteModel
+
+var DeleteResourcePolicy = &sDeleteResourcePolicy
+
+var DeleteRetrainingScheduler = &sDeleteRetrainingScheduler
+
+var DescribeDataIngestionJob = &sDescribeDataIngestionJob
+
+var DescribeDataset = &sDescribeDataset
+
+var DescribeInferenceScheduler = &sDescribeInferenceScheduler
+
+var DescribeLabel = &sDescribeLabel
+
+var DescribeLabelGroup = &sDescribeLabelGroup
+
+var DescribeModel = &sDescribeModel
+
+var DescribeModelVersion = &sDescribeModelVersion
+
+var DescribeResourcePolicy = &sDescribeResourcePolicy
+
+var DescribeRetrainingScheduler = &sDescribeRetrainingScheduler
+
+var ImportDataset = &sImportDataset
+
+var ImportModelVersion = &sImportModelVersion
+
+var ListDataIngestionJobs = &sListDataIngestionJobs
+
+var ListDatasets = &sListDatasets
+
+var ListInferenceEvents = &sListInferenceEvents
+
+var ListInferenceExecutions = &sListInferenceExecutions
+
+var ListInferenceSchedulers = &sListInferenceSchedulers
+
+var ListLabelGroups = &sListLabelGroups
+
+var ListLabels = &sListLabels
+
+var ListModels = &sListModels
+
+var ListModelVersions = &sListModelVersions
+
+var ListRetrainingSchedulers = &sListRetrainingSchedulers
+
+var ListSensorStatistics = &sListSensorStatistics
+
+var ListTagsForResource = &sListTagsForResource
+
+var PutResourcePolicy = &sPutResourcePolicy
+
+var StartDataIngestionJob = &sStartDataIngestionJob
+
+var StartInferenceScheduler = &sStartInferenceScheduler
+
+var StartRetrainingScheduler = &sStartRetrainingScheduler
+
+var StopInferenceScheduler = &sStopInferenceScheduler
+
+var StopRetrainingScheduler = &sStopRetrainingScheduler
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateActiveModelVersion = &sUpdateActiveModelVersion
+
+var UpdateInferenceScheduler = &sUpdateInferenceScheduler
+
+var UpdateLabelGroup = &sUpdateLabelGroup
+
+var UpdateModel = &sUpdateModel
+
+var UpdateRetrainingScheduler = &sUpdateRetrainingScheduler
+
+var _AWSLookoutEquipmentFrontendService = &s_AWSLookoutEquipmentFrontendService
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_Message = &sAccessDeniedException_Message
+
+var _AmazonResourceArn = &s_AmazonResourceArn
+
+var AutoPromotionResult = &sAutoPromotionResult
+var AutoPromotionResult_MODEL_PROMOTED = &sAutoPromotionResult_MODEL_PROMOTED
+var AutoPromotionResult_MODEL_NOT_PROMOTED = &sAutoPromotionResult_MODEL_NOT_PROMOTED
+var AutoPromotionResult_RETRAINING_INTERNAL_ERROR = &sAutoPromotionResult_RETRAINING_INTERNAL_ERROR
+var AutoPromotionResult_RETRAINING_CUSTOMER_ERROR = &sAutoPromotionResult_RETRAINING_CUSTOMER_ERROR
+var AutoPromotionResult_RETRAINING_CANCELLED = &sAutoPromotionResult_RETRAINING_CANCELLED
+
+var _AutoPromotionResultReason = &s_AutoPromotionResultReason
+
+var _Boolean = &s_Boolean
+
+var _BoundedLengthString = &s_BoundedLengthString
+
+var CategoricalValues = &sCategoricalValues
+var CategoricalValues_Status = &sCategoricalValues_Status
+var CategoricalValues_NumberOfCategory = &sCategoricalValues_NumberOfCategory
+
+var _Comments = &s_Comments
+
+var _ComponentName = &s_ComponentName
+
+var _ComponentTimestampDelimiter = &s_ComponentTimestampDelimiter
+
+var ConflictException = &sConflictException
+var ConflictException_Message = &sConflictException_Message
+
+var CountPercent = &sCountPercent
+var CountPercent_Count = &sCountPercent_Count
+var CountPercent_Percentage = &sCountPercent_Percentage
+
+var _DataDelayOffsetInMinutes = &s_DataDelayOffsetInMinutes
+
+var _DataIngestionJobSummaries = &s_DataIngestionJobSummaries
+var _DataIngestionJobSummaries_member = &s_DataIngestionJobSummaries_member
+
+var DataIngestionJobSummary = &sDataIngestionJobSummary
+var DataIngestionJobSummary_JobId = &sDataIngestionJobSummary_JobId
+var DataIngestionJobSummary_DatasetName = &sDataIngestionJobSummary_DatasetName
+var DataIngestionJobSummary_DatasetArn = &sDataIngestionJobSummary_DatasetArn
+var DataIngestionJobSummary_IngestionInputConfiguration = &sDataIngestionJobSummary_IngestionInputConfiguration
+var DataIngestionJobSummary_Status = &sDataIngestionJobSummary_Status
+
+var DataPreProcessingConfiguration = &sDataPreProcessingConfiguration
+var DataPreProcessingConfiguration_TargetSamplingRate = &sDataPreProcessingConfiguration_TargetSamplingRate
+
+var DataQualitySummary = &sDataQualitySummary
+var DataQualitySummary_InsufficientSensorData = &sDataQualitySummary_InsufficientSensorData
+var DataQualitySummary_MissingSensorData = &sDataQualitySummary_MissingSensorData
+var DataQualitySummary_InvalidSensorData = &sDataQualitySummary_InvalidSensorData
+var DataQualitySummary_UnsupportedTimestamps = &sDataQualitySummary_UnsupportedTimestamps
+var DataQualitySummary_DuplicateTimestamps = &sDataQualitySummary_DuplicateTimestamps
+
+var _DatasetArn = &s_DatasetArn
+
+var _DatasetIdentifier = &s_DatasetIdentifier
+
+var _DatasetName = &s_DatasetName
+
+var DatasetSchema = &sDatasetSchema
+var DatasetSchema_InlineDataSchema = &sDatasetSchema_InlineDataSchema
+
+var DatasetStatus = &sDatasetStatus
+var DatasetStatus_CREATED = &sDatasetStatus_CREATED
+var DatasetStatus_INGESTION_IN_PROGRESS = &sDatasetStatus_INGESTION_IN_PROGRESS
+var DatasetStatus_ACTIVE = &sDatasetStatus_ACTIVE
+var DatasetStatus_IMPORT_IN_PROGRESS = &sDatasetStatus_IMPORT_IN_PROGRESS
+
+var _DatasetSummaries = &s_DatasetSummaries
+var _DatasetSummaries_member = &s_DatasetSummaries_member
+
+var DatasetSummary = &sDatasetSummary
+var DatasetSummary_DatasetName = &sDatasetSummary_DatasetName
+var DatasetSummary_DatasetArn = &sDatasetSummary_DatasetArn
+var DatasetSummary_Status = &sDatasetSummary_Status
+var DatasetSummary_CreatedAt = &sDatasetSummary_CreatedAt
+
+var _DataSizeInBytes = &s_DataSizeInBytes
+
+var DataUploadFrequency = &sDataUploadFrequency
+var DataUploadFrequency_PT5M = &sDataUploadFrequency_PT5M
+var DataUploadFrequency_PT10M = &sDataUploadFrequency_PT10M
+var DataUploadFrequency_PT15M = &sDataUploadFrequency_PT15M
+var DataUploadFrequency_PT30M = &sDataUploadFrequency_PT30M
+var DataUploadFrequency_PT1H = &sDataUploadFrequency_PT1H
+
+var DuplicateTimestamps = &sDuplicateTimestamps
+var DuplicateTimestamps_TotalNumberOfDuplicateTimestamps = &sDuplicateTimestamps_TotalNumberOfDuplicateTimestamps
+
+var _Equipment = &s_Equipment
+
+var _EventDurationInSeconds = &s_EventDurationInSeconds
+
+var _FaultCode = &s_FaultCode
+
+var _FaultCodes = &s_FaultCodes
+var _FaultCodes_member = &s_FaultCodes_member
+
+var _FileNameTimestampFormat = &s_FileNameTimestampFormat
+
+var _Float = &s_Float
+
+var _IamRoleArn = &s_IamRoleArn
+
+var _IdempotenceToken = &s_IdempotenceToken
+
+var InferenceDataImportStrategy = &sInferenceDataImportStrategy
+var InferenceDataImportStrategy_NO_IMPORT = &sInferenceDataImportStrategy_NO_IMPORT
+var InferenceDataImportStrategy_ADD_WHEN_EMPTY = &sInferenceDataImportStrategy_ADD_WHEN_EMPTY
+var InferenceDataImportStrategy_OVERWRITE = &sInferenceDataImportStrategy_OVERWRITE
+
+var _InferenceEventSummaries = &s_InferenceEventSummaries
+var _InferenceEventSummaries_member = &s_InferenceEventSummaries_member
+
+var InferenceEventSummary = &sInferenceEventSummary
+var InferenceEventSummary_InferenceSchedulerArn = &sInferenceEventSummary_InferenceSchedulerArn
+var InferenceEventSummary_InferenceSchedulerName = &sInferenceEventSummary_InferenceSchedulerName
+var InferenceEventSummary_EventStartTime = &sInferenceEventSummary_EventStartTime
+var InferenceEventSummary_EventEndTime = &sInferenceEventSummary_EventEndTime
+var InferenceEventSummary_Diagnostics = &sInferenceEventSummary_Diagnostics
+var InferenceEventSummary_EventDurationInSeconds = &sInferenceEventSummary_EventDurationInSeconds
+
+var InferenceExecutionStatus = &sInferenceExecutionStatus
+var InferenceExecutionStatus_IN_PROGRESS = &sInferenceExecutionStatus_IN_PROGRESS
+var InferenceExecutionStatus_SUCCESS = &sInferenceExecutionStatus_SUCCESS
+var InferenceExecutionStatus_FAILED = &sInferenceExecutionStatus_FAILED
+
+var _InferenceExecutionSummaries = &s_InferenceExecutionSummaries
+var _InferenceExecutionSummaries_member = &s_InferenceExecutionSummaries_member
+
+var InferenceExecutionSummary = &sInferenceExecutionSummary
+var InferenceExecutionSummary_ModelName = &sInferenceExecutionSummary_ModelName
+var InferenceExecutionSummary_ModelArn = &sInferenceExecutionSummary_ModelArn
+var InferenceExecutionSummary_InferenceSchedulerName = &sInferenceExecutionSummary_InferenceSchedulerName
+var InferenceExecutionSummary_InferenceSchedulerArn = &sInferenceExecutionSummary_InferenceSchedulerArn
+var InferenceExecutionSummary_ScheduledStartTime = &sInferenceExecutionSummary_ScheduledStartTime
+var InferenceExecutionSummary_DataStartTime = &sInferenceExecutionSummary_DataStartTime
+var InferenceExecutionSummary_DataEndTime = &sInferenceExecutionSummary_DataEndTime
+var InferenceExecutionSummary_DataInputConfiguration = &sInferenceExecutionSummary_DataInputConfiguration
+var InferenceExecutionSummary_DataOutputConfiguration = &sInferenceExecutionSummary_DataOutputConfiguration
+var InferenceExecutionSummary_CustomerResultObject = &sInferenceExecutionSummary_CustomerResultObject
+var InferenceExecutionSummary_Status = &sInferenceExecutionSummary_Status
+var InferenceExecutionSummary_FailedReason = &sInferenceExecutionSummary_FailedReason
+var InferenceExecutionSummary_ModelVersion = &sInferenceExecutionSummary_ModelVersion
+var InferenceExecutionSummary_ModelVersionArn = &sInferenceExecutionSummary_ModelVersionArn
+
+var InferenceInputConfiguration = &sInferenceInputConfiguration
+var InferenceInputConfiguration_S3InputConfiguration = &sInferenceInputConfiguration_S3InputConfiguration
+var InferenceInputConfiguration_InputTimeZoneOffset = &sInferenceInputConfiguration_InputTimeZoneOffset
+var InferenceInputConfiguration_InferenceInputNameConfiguration = &sInferenceInputConfiguration_InferenceInputNameConfiguration
+
+var InferenceInputNameConfiguration = &sInferenceInputNameConfiguration
+var InferenceInputNameConfiguration_TimestampFormat = &sInferenceInputNameConfiguration_TimestampFormat
+var InferenceInputNameConfiguration_ComponentTimestampDelimiter = &sInferenceInputNameConfiguration_ComponentTimestampDelimiter
+
+var InferenceOutputConfiguration = &sInferenceOutputConfiguration
+var InferenceOutputConfiguration_S3OutputConfiguration = &sInferenceOutputConfiguration_S3OutputConfiguration
+var InferenceOutputConfiguration_KmsKeyId = &sInferenceOutputConfiguration_KmsKeyId
+
+var InferenceS3InputConfiguration = &sInferenceS3InputConfiguration
+var InferenceS3InputConfiguration_Bucket = &sInferenceS3InputConfiguration_Bucket
+var InferenceS3InputConfiguration_Prefix = &sInferenceS3InputConfiguration_Prefix
+
+var InferenceS3OutputConfiguration = &sInferenceS3OutputConfiguration
+var InferenceS3OutputConfiguration_Bucket = &sInferenceS3OutputConfiguration_Bucket
+var InferenceS3OutputConfiguration_Prefix = &sInferenceS3OutputConfiguration_Prefix
+
+var _InferenceSchedulerArn = &s_InferenceSchedulerArn
+
+var _InferenceSchedulerIdentifier = &s_InferenceSchedulerIdentifier
+
+var _InferenceSchedulerName = &s_InferenceSchedulerName
+
+var InferenceSchedulerStatus = &sInferenceSchedulerStatus
+var InferenceSchedulerStatus_PENDING = &sInferenceSchedulerStatus_PENDING
+var InferenceSchedulerStatus_RUNNING = &sInferenceSchedulerStatus_RUNNING
+var InferenceSchedulerStatus_STOPPING = &sInferenceSchedulerStatus_STOPPING
+var InferenceSchedulerStatus_STOPPED = &sInferenceSchedulerStatus_STOPPED
+
+var _InferenceSchedulerSummaries = &s_InferenceSchedulerSummaries
+var _InferenceSchedulerSummaries_member = &s_InferenceSchedulerSummaries_member
+
+var InferenceSchedulerSummary = &sInferenceSchedulerSummary
+var InferenceSchedulerSummary_ModelName = &sInferenceSchedulerSummary_ModelName
+var InferenceSchedulerSummary_ModelArn = &sInferenceSchedulerSummary_ModelArn
+var InferenceSchedulerSummary_InferenceSchedulerName = &sInferenceSchedulerSummary_InferenceSchedulerName
+var InferenceSchedulerSummary_InferenceSchedulerArn = &sInferenceSchedulerSummary_InferenceSchedulerArn
+var InferenceSchedulerSummary_Status = &sInferenceSchedulerSummary_Status
+var InferenceSchedulerSummary_DataDelayOffsetInMinutes = &sInferenceSchedulerSummary_DataDelayOffsetInMinutes
+var InferenceSchedulerSummary_DataUploadFrequency = &sInferenceSchedulerSummary_DataUploadFrequency
+var InferenceSchedulerSummary_LatestInferenceResult = &sInferenceSchedulerSummary_LatestInferenceResult
+
+var IngestedFilesSummary = &sIngestedFilesSummary
+var IngestedFilesSummary_TotalNumberOfFiles = &sIngestedFilesSummary_TotalNumberOfFiles
+var IngestedFilesSummary_IngestedNumberOfFiles = &sIngestedFilesSummary_IngestedNumberOfFiles
+var IngestedFilesSummary_DiscardedFiles = &sIngestedFilesSummary_DiscardedFiles
+
+var IngestionInputConfiguration = &sIngestionInputConfiguration
+var IngestionInputConfiguration_S3InputConfiguration = &sIngestionInputConfiguration_S3InputConfiguration
+
+var _IngestionJobId = &s_IngestionJobId
+
+var IngestionJobStatus = &sIngestionJobStatus
+var IngestionJobStatus_IN_PROGRESS = &sIngestionJobStatus_IN_PROGRESS
+var IngestionJobStatus_SUCCESS = &sIngestionJobStatus_SUCCESS
+var IngestionJobStatus_FAILED = &sIngestionJobStatus_FAILED
+var IngestionJobStatus_IMPORT_IN_PROGRESS = &sIngestionJobStatus_IMPORT_IN_PROGRESS
+
+var IngestionS3InputConfiguration = &sIngestionS3InputConfiguration
+var IngestionS3InputConfiguration_Bucket = &sIngestionS3InputConfiguration_Bucket
+var IngestionS3InputConfiguration_Prefix = &sIngestionS3InputConfiguration_Prefix
+var IngestionS3InputConfiguration_KeyPattern = &sIngestionS3InputConfiguration_KeyPattern
+
+var _InlineDataSchema = &s_InlineDataSchema
+
+var InsufficientSensorData = &sInsufficientSensorData
+var InsufficientSensorData_MissingCompleteSensorData = &sInsufficientSensorData_MissingCompleteSensorData
+var InsufficientSensorData_SensorsWithShortDateRange = &sInsufficientSensorData_SensorsWithShortDateRange
+
+var _Integer = &s_Integer
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_Message = &sInternalServerException_Message
+
+var InvalidSensorData = &sInvalidSensorData
+var InvalidSensorData_AffectedSensorCount = &sInvalidSensorData_AffectedSensorCount
+var InvalidSensorData_TotalNumberOfInvalidValues = &sInvalidSensorData_TotalNumberOfInvalidValues
+
+var _KeyPattern = &s_KeyPattern
+
+var _KmsKeyArn = &s_KmsKeyArn
+
+var _LabelGroupArn = &s_LabelGroupArn
+
+var _LabelGroupName = &s_LabelGroupName
+
+var _LabelGroupSummaries = &s_LabelGroupSummaries
+var _LabelGroupSummaries_member = &s_LabelGroupSummaries_member
+
+var LabelGroupSummary = &sLabelGroupSummary
+var LabelGroupSummary_LabelGroupName = &sLabelGroupSummary_LabelGroupName
+var LabelGroupSummary_LabelGroupArn = &sLabelGroupSummary_LabelGroupArn
+var LabelGroupSummary_CreatedAt = &sLabelGroupSummary_CreatedAt
+var LabelGroupSummary_UpdatedAt = &sLabelGroupSummary_UpdatedAt
+
+var _LabelId = &s_LabelId
+
+var LabelRating = &sLabelRating
+var LabelRating_ANOMALY = &sLabelRating_ANOMALY
+var LabelRating_NO_ANOMALY = &sLabelRating_NO_ANOMALY
+var LabelRating_NEUTRAL = &sLabelRating_NEUTRAL
+
+var LabelsInputConfiguration = &sLabelsInputConfiguration
+var LabelsInputConfiguration_S3InputConfiguration = &sLabelsInputConfiguration_S3InputConfiguration
+var LabelsInputConfiguration_LabelGroupName = &sLabelsInputConfiguration_LabelGroupName
+
+var LabelsS3InputConfiguration = &sLabelsS3InputConfiguration
+var LabelsS3InputConfiguration_Bucket = &sLabelsS3InputConfiguration_Bucket
+var LabelsS3InputConfiguration_Prefix = &sLabelsS3InputConfiguration_Prefix
+
+var _LabelSummaries = &s_LabelSummaries
+var _LabelSummaries_member = &s_LabelSummaries_member
+
+var LabelSummary = &sLabelSummary
+var LabelSummary_LabelGroupName = &sLabelSummary_LabelGroupName
+var LabelSummary_LabelId = &sLabelSummary_LabelId
+var LabelSummary_LabelGroupArn = &sLabelSummary_LabelGroupArn
+var LabelSummary_StartTime = &sLabelSummary_StartTime
+var LabelSummary_EndTime = &sLabelSummary_EndTime
+var LabelSummary_Rating = &sLabelSummary_Rating
+var LabelSummary_FaultCode = &sLabelSummary_FaultCode
+var LabelSummary_Equipment = &sLabelSummary_Equipment
+var LabelSummary_CreatedAt = &sLabelSummary_CreatedAt
+
+var LargeTimestampGaps = &sLargeTimestampGaps
+var LargeTimestampGaps_Status = &sLargeTimestampGaps_Status
+var LargeTimestampGaps_NumberOfLargeTimestampGaps = &sLargeTimestampGaps_NumberOfLargeTimestampGaps
+var LargeTimestampGaps_MaxTimestampGapInDays = &sLargeTimestampGaps_MaxTimestampGapInDays
+
+var LatestInferenceResult = &sLatestInferenceResult
+var LatestInferenceResult_ANOMALOUS = &sLatestInferenceResult_ANOMALOUS
+var LatestInferenceResult_NORMAL = &sLatestInferenceResult_NORMAL
+
+var _ListOfDiscardedFiles = &s_ListOfDiscardedFiles
+var _ListOfDiscardedFiles_member = &s_ListOfDiscardedFiles_member
+
+var _LookbackWindow = &s_LookbackWindow
+
+var _MaxResults = &s_MaxResults
+
+var MissingCompleteSensorData = &sMissingCompleteSensorData
+var MissingCompleteSensorData_AffectedSensorCount = &sMissingCompleteSensorData_AffectedSensorCount
+
+var MissingSensorData = &sMissingSensorData
+var MissingSensorData_AffectedSensorCount = &sMissingSensorData_AffectedSensorCount
+var MissingSensorData_TotalNumberOfMissingValues = &sMissingSensorData_TotalNumberOfMissingValues
+
+var _ModelArn = &s_ModelArn
+
+var ModelDiagnosticsOutputConfiguration = &sModelDiagnosticsOutputConfiguration
+var ModelDiagnosticsOutputConfiguration_S3OutputConfiguration = &sModelDiagnosticsOutputConfiguration_S3OutputConfiguration
+var ModelDiagnosticsOutputConfiguration_KmsKeyId = &sModelDiagnosticsOutputConfiguration_KmsKeyId
+
+var ModelDiagnosticsS3OutputConfiguration = &sModelDiagnosticsS3OutputConfiguration
+var ModelDiagnosticsS3OutputConfiguration_Bucket = &sModelDiagnosticsS3OutputConfiguration_Bucket
+var ModelDiagnosticsS3OutputConfiguration_Prefix = &sModelDiagnosticsS3OutputConfiguration_Prefix
+
+var _ModelMetrics = &s_ModelMetrics
+
+var _ModelName = &s_ModelName
+
+var ModelPromoteMode = &sModelPromoteMode
+var ModelPromoteMode_MANAGED = &sModelPromoteMode_MANAGED
+var ModelPromoteMode_MANUAL = &sModelPromoteMode_MANUAL
+
+var ModelQuality = &sModelQuality
+var ModelQuality_QUALITY_THRESHOLD_MET = &sModelQuality_QUALITY_THRESHOLD_MET
+var ModelQuality_CANNOT_DETERMINE_QUALITY = &sModelQuality_CANNOT_DETERMINE_QUALITY
+var ModelQuality_POOR_QUALITY_DETECTED = &sModelQuality_POOR_QUALITY_DETECTED
+
+var ModelStatus = &sModelStatus
+var ModelStatus_IN_PROGRESS = &sModelStatus_IN_PROGRESS
+var ModelStatus_SUCCESS = &sModelStatus_SUCCESS
+var ModelStatus_FAILED = &sModelStatus_FAILED
+var ModelStatus_IMPORT_IN_PROGRESS = &sModelStatus_IMPORT_IN_PROGRESS
+
+var _ModelSummaries = &s_ModelSummaries
+var _ModelSummaries_member = &s_ModelSummaries_member
+
+var ModelSummary = &sModelSummary
+var ModelSummary_ModelName = &sModelSummary_ModelName
+var ModelSummary_ModelArn = &sModelSummary_ModelArn
+var ModelSummary_DatasetName = &sModelSummary_DatasetName
+var ModelSummary_DatasetArn = &sModelSummary_DatasetArn
+var ModelSummary_Status = &sModelSummary_Status
+var ModelSummary_CreatedAt = &sModelSummary_CreatedAt
+var ModelSummary_ActiveModelVersion = &sModelSummary_ActiveModelVersion
+var ModelSummary_ActiveModelVersionArn = &sModelSummary_ActiveModelVersionArn
+var ModelSummary_LatestScheduledRetrainingStatus = &sModelSummary_LatestScheduledRetrainingStatus
+var ModelSummary_LatestScheduledRetrainingModelVersion = &sModelSummary_LatestScheduledRetrainingModelVersion
+var ModelSummary_LatestScheduledRetrainingStartTime = &sModelSummary_LatestScheduledRetrainingStartTime
+var ModelSummary_NextScheduledRetrainingStartDate = &sModelSummary_NextScheduledRetrainingStartDate
+var ModelSummary_RetrainingSchedulerStatus = &sModelSummary_RetrainingSchedulerStatus
+var ModelSummary_ModelDiagnosticsOutputConfiguration = &sModelSummary_ModelDiagnosticsOutputConfiguration
+var ModelSummary_ModelQuality = &sModelSummary_ModelQuality
+
+var _ModelVersion = &s_ModelVersion
+
+var _ModelVersionArn = &s_ModelVersionArn
+
+var ModelVersionSourceType = &sModelVersionSourceType
+var ModelVersionSourceType_TRAINING = &sModelVersionSourceType_TRAINING
+var ModelVersionSourceType_RETRAINING = &sModelVersionSourceType_RETRAINING
+var ModelVersionSourceType_IMPORT = &sModelVersionSourceType_IMPORT
+
+var ModelVersionStatus = &sModelVersionStatus
+var ModelVersionStatus_IN_PROGRESS = &sModelVersionStatus_IN_PROGRESS
+var ModelVersionStatus_SUCCESS = &sModelVersionStatus_SUCCESS
+var ModelVersionStatus_FAILED = &sModelVersionStatus_FAILED
+var ModelVersionStatus_IMPORT_IN_PROGRESS = &sModelVersionStatus_IMPORT_IN_PROGRESS
+var ModelVersionStatus_CANCELED = &sModelVersionStatus_CANCELED
+
+var _ModelVersionSummaries = &s_ModelVersionSummaries
+var _ModelVersionSummaries_member = &s_ModelVersionSummaries_member
+
+var ModelVersionSummary = &sModelVersionSummary
+var ModelVersionSummary_ModelName = &sModelVersionSummary_ModelName
+var ModelVersionSummary_ModelArn = &sModelVersionSummary_ModelArn
+var ModelVersionSummary_ModelVersion = &sModelVersionSummary_ModelVersion
+var ModelVersionSummary_ModelVersionArn = &sModelVersionSummary_ModelVersionArn
+var ModelVersionSummary_CreatedAt = &sModelVersionSummary_CreatedAt
+var ModelVersionSummary_Status = &sModelVersionSummary_Status
+var ModelVersionSummary_SourceType = &sModelVersionSummary_SourceType
+var ModelVersionSummary_ModelQuality = &sModelVersionSummary_ModelQuality
+
+var Monotonicity = &sMonotonicity
+var Monotonicity_DECREASING = &sMonotonicity_DECREASING
+var Monotonicity_INCREASING = &sMonotonicity_INCREASING
+var Monotonicity_STATIC = &sMonotonicity_STATIC
+
+var MonotonicValues = &sMonotonicValues
+var MonotonicValues_Status = &sMonotonicValues_Status
+var MonotonicValues_Monotonicity = &sMonotonicValues_Monotonicity
+
+var MultipleOperatingModes = &sMultipleOperatingModes
+var MultipleOperatingModes_Status = &sMultipleOperatingModes_Status
+
+var _NameOrArn = &s_NameOrArn
+
+var _NextToken = &s_NextToken
+
+var _OffCondition = &s_OffCondition
+
+var _Policy = &s_Policy
+
+var _PolicyRevisionId = &s_PolicyRevisionId
+
+var _ResourceArn = &s_ResourceArn
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+
+var _RetrainingFrequency = &s_RetrainingFrequency
+
+var RetrainingSchedulerStatus = &sRetrainingSchedulerStatus
+var RetrainingSchedulerStatus_PENDING = &sRetrainingSchedulerStatus_PENDING
+var RetrainingSchedulerStatus_RUNNING = &sRetrainingSchedulerStatus_RUNNING
+var RetrainingSchedulerStatus_STOPPING = &sRetrainingSchedulerStatus_STOPPING
+var RetrainingSchedulerStatus_STOPPED = &sRetrainingSchedulerStatus_STOPPED
+
+var _RetrainingSchedulerSummaries = &s_RetrainingSchedulerSummaries
+var _RetrainingSchedulerSummaries_member = &s_RetrainingSchedulerSummaries_member
+
+var RetrainingSchedulerSummary = &sRetrainingSchedulerSummary
+var RetrainingSchedulerSummary_ModelName = &sRetrainingSchedulerSummary_ModelName
+var RetrainingSchedulerSummary_ModelArn = &sRetrainingSchedulerSummary_ModelArn
+var RetrainingSchedulerSummary_Status = &sRetrainingSchedulerSummary_Status
+var RetrainingSchedulerSummary_RetrainingStartDate = &sRetrainingSchedulerSummary_RetrainingStartDate
+var RetrainingSchedulerSummary_RetrainingFrequency = &sRetrainingSchedulerSummary_RetrainingFrequency
+var RetrainingSchedulerSummary_LookbackWindow = &sRetrainingSchedulerSummary_LookbackWindow
+
+var _S3Bucket = &s_S3Bucket
+
+var _S3Key = &s_S3Key
+
+var S3Object = &sS3Object
+var S3Object_Bucket = &sS3Object_Bucket
+var S3Object_Key = &sS3Object_Key
+
+var _S3Prefix = &s_S3Prefix
+
+var _SensorName = &s_SensorName
+
+var _SensorStatisticsSummaries = &s_SensorStatisticsSummaries
+var _SensorStatisticsSummaries_member = &s_SensorStatisticsSummaries_member
+
+var SensorStatisticsSummary = &sSensorStatisticsSummary
+var SensorStatisticsSummary_ComponentName = &sSensorStatisticsSummary_ComponentName
+var SensorStatisticsSummary_SensorName = &sSensorStatisticsSummary_SensorName
+var SensorStatisticsSummary_DataExists = &sSensorStatisticsSummary_DataExists
+var SensorStatisticsSummary_MissingValues = &sSensorStatisticsSummary_MissingValues
+var SensorStatisticsSummary_InvalidValues = &sSensorStatisticsSummary_InvalidValues
+var SensorStatisticsSummary_InvalidDateEntries = &sSensorStatisticsSummary_InvalidDateEntries
+var SensorStatisticsSummary_DuplicateTimestamps = &sSensorStatisticsSummary_DuplicateTimestamps
+var SensorStatisticsSummary_CategoricalValues = &sSensorStatisticsSummary_CategoricalValues
+var SensorStatisticsSummary_MultipleOperatingModes = &sSensorStatisticsSummary_MultipleOperatingModes
+var SensorStatisticsSummary_LargeTimestampGaps = &sSensorStatisticsSummary_LargeTimestampGaps
+var SensorStatisticsSummary_MonotonicValues = &sSensorStatisticsSummary_MonotonicValues
+var SensorStatisticsSummary_DataStartTime = &sSensorStatisticsSummary_DataStartTime
+var SensorStatisticsSummary_DataEndTime = &sSensorStatisticsSummary_DataEndTime
+
+var SensorsWithShortDateRange = &sSensorsWithShortDateRange
+var SensorsWithShortDateRange_AffectedSensorCount = &sSensorsWithShortDateRange_AffectedSensorCount
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_Message = &sServiceQuotaExceededException_Message
+
+var StatisticalIssueStatus = &sStatisticalIssueStatus
+var StatisticalIssueStatus_POTENTIAL_ISSUE_DETECTED = &sStatisticalIssueStatus_POTENTIAL_ISSUE_DETECTED
+var StatisticalIssueStatus_NO_ISSUE_DETECTED = &sStatisticalIssueStatus_NO_ISSUE_DETECTED
+
+var _SynthesizedJsonInlineDataSchema = &s_SynthesizedJsonInlineDataSchema
+
+var _SynthesizedJsonModelMetrics = &s_SynthesizedJsonModelMetrics
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _TagValue = &s_TagValue
+
+var TargetSamplingRate = &sTargetSamplingRate
+var TargetSamplingRate_PT1S = &sTargetSamplingRate_PT1S
+var TargetSamplingRate_PT5S = &sTargetSamplingRate_PT5S
+var TargetSamplingRate_PT10S = &sTargetSamplingRate_PT10S
+var TargetSamplingRate_PT15S = &sTargetSamplingRate_PT15S
+var TargetSamplingRate_PT30S = &sTargetSamplingRate_PT30S
+var TargetSamplingRate_PT1M = &sTargetSamplingRate_PT1M
+var TargetSamplingRate_PT5M = &sTargetSamplingRate_PT5M
+var TargetSamplingRate_PT10M = &sTargetSamplingRate_PT10M
+var TargetSamplingRate_PT15M = &sTargetSamplingRate_PT15M
+var TargetSamplingRate_PT30M = &sTargetSamplingRate_PT30M
+var TargetSamplingRate_PT1H = &sTargetSamplingRate_PT1H
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_Message = &sThrottlingException_Message
+
+var _Timestamp = &s_Timestamp
+
+var _TimeZoneOffset = &s_TimeZoneOffset
+
+var UnsupportedTimestamps = &sUnsupportedTimestamps
+var UnsupportedTimestamps_TotalNumberOfUnsupportedTimestamps = &sUnsupportedTimestamps_TotalNumberOfUnsupportedTimestamps
+
+var ValidationException = &sValidationException
+var ValidationException_Message = &sValidationException_Message
+
+var CreateDatasetRequest = &sCreateDatasetRequest
+var CreateDatasetRequest_DatasetName = &sCreateDatasetRequest_DatasetName
+var CreateDatasetRequest_DatasetSchema = &sCreateDatasetRequest_DatasetSchema
+var CreateDatasetRequest_ServerSideKmsKeyId = &sCreateDatasetRequest_ServerSideKmsKeyId
+var CreateDatasetRequest_ClientToken = &sCreateDatasetRequest_ClientToken
+var CreateDatasetRequest_Tags = &sCreateDatasetRequest_Tags
+
+var CreateDatasetResponse = &sCreateDatasetResponse
+var CreateDatasetResponse_DatasetName = &sCreateDatasetResponse_DatasetName
+var CreateDatasetResponse_DatasetArn = &sCreateDatasetResponse_DatasetArn
+var CreateDatasetResponse_Status = &sCreateDatasetResponse_Status
+
+var CreateInferenceSchedulerRequest = &sCreateInferenceSchedulerRequest
+var CreateInferenceSchedulerRequest_ModelName = &sCreateInferenceSchedulerRequest_ModelName
+var CreateInferenceSchedulerRequest_InferenceSchedulerName = &sCreateInferenceSchedulerRequest_InferenceSchedulerName
+var CreateInferenceSchedulerRequest_DataDelayOffsetInMinutes = &sCreateInferenceSchedulerRequest_DataDelayOffsetInMinutes
+var CreateInferenceSchedulerRequest_DataUploadFrequency = &sCreateInferenceSchedulerRequest_DataUploadFrequency
+var CreateInferenceSchedulerRequest_DataInputConfiguration = &sCreateInferenceSchedulerRequest_DataInputConfiguration
+var CreateInferenceSchedulerRequest_DataOutputConfiguration = &sCreateInferenceSchedulerRequest_DataOutputConfiguration
+var CreateInferenceSchedulerRequest_RoleArn = &sCreateInferenceSchedulerRequest_RoleArn
+var CreateInferenceSchedulerRequest_ServerSideKmsKeyId = &sCreateInferenceSchedulerRequest_ServerSideKmsKeyId
+var CreateInferenceSchedulerRequest_ClientToken = &sCreateInferenceSchedulerRequest_ClientToken
+var CreateInferenceSchedulerRequest_Tags = &sCreateInferenceSchedulerRequest_Tags
+
+var CreateInferenceSchedulerResponse = &sCreateInferenceSchedulerResponse
+var CreateInferenceSchedulerResponse_InferenceSchedulerArn = &sCreateInferenceSchedulerResponse_InferenceSchedulerArn
+var CreateInferenceSchedulerResponse_InferenceSchedulerName = &sCreateInferenceSchedulerResponse_InferenceSchedulerName
+var CreateInferenceSchedulerResponse_Status = &sCreateInferenceSchedulerResponse_Status
+var CreateInferenceSchedulerResponse_ModelQuality = &sCreateInferenceSchedulerResponse_ModelQuality
+
+var CreateLabelGroupRequest = &sCreateLabelGroupRequest
+var CreateLabelGroupRequest_LabelGroupName = &sCreateLabelGroupRequest_LabelGroupName
+var CreateLabelGroupRequest_FaultCodes = &sCreateLabelGroupRequest_FaultCodes
+var CreateLabelGroupRequest_ClientToken = &sCreateLabelGroupRequest_ClientToken
+var CreateLabelGroupRequest_Tags = &sCreateLabelGroupRequest_Tags
+
+var CreateLabelGroupResponse = &sCreateLabelGroupResponse
+var CreateLabelGroupResponse_LabelGroupName = &sCreateLabelGroupResponse_LabelGroupName
+var CreateLabelGroupResponse_LabelGroupArn = &sCreateLabelGroupResponse_LabelGroupArn
+
+var CreateLabelRequest = &sCreateLabelRequest
+var CreateLabelRequest_LabelGroupName = &sCreateLabelRequest_LabelGroupName
+var CreateLabelRequest_StartTime = &sCreateLabelRequest_StartTime
+var CreateLabelRequest_EndTime = &sCreateLabelRequest_EndTime
+var CreateLabelRequest_Rating = &sCreateLabelRequest_Rating
+var CreateLabelRequest_FaultCode = &sCreateLabelRequest_FaultCode
+var CreateLabelRequest_Notes = &sCreateLabelRequest_Notes
+var CreateLabelRequest_Equipment = &sCreateLabelRequest_Equipment
+var CreateLabelRequest_ClientToken = &sCreateLabelRequest_ClientToken
+
+var CreateLabelResponse = &sCreateLabelResponse
+var CreateLabelResponse_LabelId = &sCreateLabelResponse_LabelId
+
+var CreateModelRequest = &sCreateModelRequest
+var CreateModelRequest_ModelName = &sCreateModelRequest_ModelName
+var CreateModelRequest_DatasetName = &sCreateModelRequest_DatasetName
+var CreateModelRequest_DatasetSchema = &sCreateModelRequest_DatasetSchema
+var CreateModelRequest_LabelsInputConfiguration = &sCreateModelRequest_LabelsInputConfiguration
+var CreateModelRequest_ClientToken = &sCreateModelRequest_ClientToken
+var CreateModelRequest_TrainingDataStartTime = &sCreateModelRequest_TrainingDataStartTime
+var CreateModelRequest_TrainingDataEndTime = &sCreateModelRequest_TrainingDataEndTime
+var CreateModelRequest_EvaluationDataStartTime = &sCreateModelRequest_EvaluationDataStartTime
+var CreateModelRequest_EvaluationDataEndTime = &sCreateModelRequest_EvaluationDataEndTime
+var CreateModelRequest_RoleArn = &sCreateModelRequest_RoleArn
+var CreateModelRequest_DataPreProcessingConfiguration = &sCreateModelRequest_DataPreProcessingConfiguration
+var CreateModelRequest_ServerSideKmsKeyId = &sCreateModelRequest_ServerSideKmsKeyId
+var CreateModelRequest_Tags = &sCreateModelRequest_Tags
+var CreateModelRequest_OffCondition = &sCreateModelRequest_OffCondition
+var CreateModelRequest_ModelDiagnosticsOutputConfiguration = &sCreateModelRequest_ModelDiagnosticsOutputConfiguration
+
+var CreateModelResponse = &sCreateModelResponse
+var CreateModelResponse_ModelArn = &sCreateModelResponse_ModelArn
+var CreateModelResponse_Status = &sCreateModelResponse_Status
+
+var CreateRetrainingSchedulerRequest = &sCreateRetrainingSchedulerRequest
+var CreateRetrainingSchedulerRequest_ModelName = &sCreateRetrainingSchedulerRequest_ModelName
+var CreateRetrainingSchedulerRequest_RetrainingStartDate = &sCreateRetrainingSchedulerRequest_RetrainingStartDate
+var CreateRetrainingSchedulerRequest_RetrainingFrequency = &sCreateRetrainingSchedulerRequest_RetrainingFrequency
+var CreateRetrainingSchedulerRequest_LookbackWindow = &sCreateRetrainingSchedulerRequest_LookbackWindow
+var CreateRetrainingSchedulerRequest_PromoteMode = &sCreateRetrainingSchedulerRequest_PromoteMode
+var CreateRetrainingSchedulerRequest_ClientToken = &sCreateRetrainingSchedulerRequest_ClientToken
+
+var CreateRetrainingSchedulerResponse = &sCreateRetrainingSchedulerResponse
+var CreateRetrainingSchedulerResponse_ModelName = &sCreateRetrainingSchedulerResponse_ModelName
+var CreateRetrainingSchedulerResponse_ModelArn = &sCreateRetrainingSchedulerResponse_ModelArn
+var CreateRetrainingSchedulerResponse_Status = &sCreateRetrainingSchedulerResponse_Status
+
+var DeleteDatasetRequest = &sDeleteDatasetRequest
+var DeleteDatasetRequest_DatasetName = &sDeleteDatasetRequest_DatasetName
+
+var DeleteInferenceSchedulerRequest = &sDeleteInferenceSchedulerRequest
+var DeleteInferenceSchedulerRequest_InferenceSchedulerName = &sDeleteInferenceSchedulerRequest_InferenceSchedulerName
+
+var DeleteLabelGroupRequest = &sDeleteLabelGroupRequest
+var DeleteLabelGroupRequest_LabelGroupName = &sDeleteLabelGroupRequest_LabelGroupName
+
+var DeleteLabelRequest = &sDeleteLabelRequest
+var DeleteLabelRequest_LabelGroupName = &sDeleteLabelRequest_LabelGroupName
+var DeleteLabelRequest_LabelId = &sDeleteLabelRequest_LabelId
+
+var DeleteModelRequest = &sDeleteModelRequest
+var DeleteModelRequest_ModelName = &sDeleteModelRequest_ModelName
+
+var DeleteResourcePolicyRequest = &sDeleteResourcePolicyRequest
+var DeleteResourcePolicyRequest_ResourceArn = &sDeleteResourcePolicyRequest_ResourceArn
+
+var DeleteRetrainingSchedulerRequest = &sDeleteRetrainingSchedulerRequest
+var DeleteRetrainingSchedulerRequest_ModelName = &sDeleteRetrainingSchedulerRequest_ModelName
+
+var DescribeDataIngestionJobRequest = &sDescribeDataIngestionJobRequest
+var DescribeDataIngestionJobRequest_JobId = &sDescribeDataIngestionJobRequest_JobId
+
+var DescribeDataIngestionJobResponse = &sDescribeDataIngestionJobResponse
+var DescribeDataIngestionJobResponse_JobId = &sDescribeDataIngestionJobResponse_JobId
+var DescribeDataIngestionJobResponse_DatasetArn = &sDescribeDataIngestionJobResponse_DatasetArn
+var DescribeDataIngestionJobResponse_IngestionInputConfiguration = &sDescribeDataIngestionJobResponse_IngestionInputConfiguration
+var DescribeDataIngestionJobResponse_RoleArn = &sDescribeDataIngestionJobResponse_RoleArn
+var DescribeDataIngestionJobResponse_CreatedAt = &sDescribeDataIngestionJobResponse_CreatedAt
+var DescribeDataIngestionJobResponse_Status = &sDescribeDataIngestionJobResponse_Status
+var DescribeDataIngestionJobResponse_FailedReason = &sDescribeDataIngestionJobResponse_FailedReason
+var DescribeDataIngestionJobResponse_DataQualitySummary = &sDescribeDataIngestionJobResponse_DataQualitySummary
+var DescribeDataIngestionJobResponse_IngestedFilesSummary = &sDescribeDataIngestionJobResponse_IngestedFilesSummary
+var DescribeDataIngestionJobResponse_StatusDetail = &sDescribeDataIngestionJobResponse_StatusDetail
+var DescribeDataIngestionJobResponse_IngestedDataSize = &sDescribeDataIngestionJobResponse_IngestedDataSize
+var DescribeDataIngestionJobResponse_DataStartTime = &sDescribeDataIngestionJobResponse_DataStartTime
+var DescribeDataIngestionJobResponse_DataEndTime = &sDescribeDataIngestionJobResponse_DataEndTime
+var DescribeDataIngestionJobResponse_SourceDatasetArn = &sDescribeDataIngestionJobResponse_SourceDatasetArn
+
+var DescribeDatasetRequest = &sDescribeDatasetRequest
+var DescribeDatasetRequest_DatasetName = &sDescribeDatasetRequest_DatasetName
+
+var DescribeDatasetResponse = &sDescribeDatasetResponse
+var DescribeDatasetResponse_DatasetName = &sDescribeDatasetResponse_DatasetName
+var DescribeDatasetResponse_DatasetArn = &sDescribeDatasetResponse_DatasetArn
+var DescribeDatasetResponse_CreatedAt = &sDescribeDatasetResponse_CreatedAt
+var DescribeDatasetResponse_LastUpdatedAt = &sDescribeDatasetResponse_LastUpdatedAt
+var DescribeDatasetResponse_Status = &sDescribeDatasetResponse_Status
+var DescribeDatasetResponse_Schema = &sDescribeDatasetResponse_Schema
+var DescribeDatasetResponse_ServerSideKmsKeyId = &sDescribeDatasetResponse_ServerSideKmsKeyId
+var DescribeDatasetResponse_IngestionInputConfiguration = &sDescribeDatasetResponse_IngestionInputConfiguration
+var DescribeDatasetResponse_DataQualitySummary = &sDescribeDatasetResponse_DataQualitySummary
+var DescribeDatasetResponse_IngestedFilesSummary = &sDescribeDatasetResponse_IngestedFilesSummary
+var DescribeDatasetResponse_RoleArn = &sDescribeDatasetResponse_RoleArn
+var DescribeDatasetResponse_DataStartTime = &sDescribeDatasetResponse_DataStartTime
+var DescribeDatasetResponse_DataEndTime = &sDescribeDatasetResponse_DataEndTime
+var DescribeDatasetResponse_SourceDatasetArn = &sDescribeDatasetResponse_SourceDatasetArn
+
+var DescribeInferenceSchedulerRequest = &sDescribeInferenceSchedulerRequest
+var DescribeInferenceSchedulerRequest_InferenceSchedulerName = &sDescribeInferenceSchedulerRequest_InferenceSchedulerName
+
+var DescribeInferenceSchedulerResponse = &sDescribeInferenceSchedulerResponse
+var DescribeInferenceSchedulerResponse_ModelArn = &sDescribeInferenceSchedulerResponse_ModelArn
+var DescribeInferenceSchedulerResponse_ModelName = &sDescribeInferenceSchedulerResponse_ModelName
+var DescribeInferenceSchedulerResponse_InferenceSchedulerName = &sDescribeInferenceSchedulerResponse_InferenceSchedulerName
+var DescribeInferenceSchedulerResponse_InferenceSchedulerArn = &sDescribeInferenceSchedulerResponse_InferenceSchedulerArn
+var DescribeInferenceSchedulerResponse_Status = &sDescribeInferenceSchedulerResponse_Status
+var DescribeInferenceSchedulerResponse_DataDelayOffsetInMinutes = &sDescribeInferenceSchedulerResponse_DataDelayOffsetInMinutes
+var DescribeInferenceSchedulerResponse_DataUploadFrequency = &sDescribeInferenceSchedulerResponse_DataUploadFrequency
+var DescribeInferenceSchedulerResponse_CreatedAt = &sDescribeInferenceSchedulerResponse_CreatedAt
+var DescribeInferenceSchedulerResponse_UpdatedAt = &sDescribeInferenceSchedulerResponse_UpdatedAt
+var DescribeInferenceSchedulerResponse_DataInputConfiguration = &sDescribeInferenceSchedulerResponse_DataInputConfiguration
+var DescribeInferenceSchedulerResponse_DataOutputConfiguration = &sDescribeInferenceSchedulerResponse_DataOutputConfiguration
+var DescribeInferenceSchedulerResponse_RoleArn = &sDescribeInferenceSchedulerResponse_RoleArn
+var DescribeInferenceSchedulerResponse_ServerSideKmsKeyId = &sDescribeInferenceSchedulerResponse_ServerSideKmsKeyId
+var DescribeInferenceSchedulerResponse_LatestInferenceResult = &sDescribeInferenceSchedulerResponse_LatestInferenceResult
+
+var DescribeLabelGroupRequest = &sDescribeLabelGroupRequest
+var DescribeLabelGroupRequest_LabelGroupName = &sDescribeLabelGroupRequest_LabelGroupName
+
+var DescribeLabelGroupResponse = &sDescribeLabelGroupResponse
+var DescribeLabelGroupResponse_LabelGroupName = &sDescribeLabelGroupResponse_LabelGroupName
+var DescribeLabelGroupResponse_LabelGroupArn = &sDescribeLabelGroupResponse_LabelGroupArn
+var DescribeLabelGroupResponse_FaultCodes = &sDescribeLabelGroupResponse_FaultCodes
+var DescribeLabelGroupResponse_CreatedAt = &sDescribeLabelGroupResponse_CreatedAt
+var DescribeLabelGroupResponse_UpdatedAt = &sDescribeLabelGroupResponse_UpdatedAt
+
+var DescribeLabelRequest = &sDescribeLabelRequest
+var DescribeLabelRequest_LabelGroupName = &sDescribeLabelRequest_LabelGroupName
+var DescribeLabelRequest_LabelId = &sDescribeLabelRequest_LabelId
+
+var DescribeLabelResponse = &sDescribeLabelResponse
+var DescribeLabelResponse_LabelGroupName = &sDescribeLabelResponse_LabelGroupName
+var DescribeLabelResponse_LabelGroupArn = &sDescribeLabelResponse_LabelGroupArn
+var DescribeLabelResponse_LabelId = &sDescribeLabelResponse_LabelId
+var DescribeLabelResponse_StartTime = &sDescribeLabelResponse_StartTime
+var DescribeLabelResponse_EndTime = &sDescribeLabelResponse_EndTime
+var DescribeLabelResponse_Rating = &sDescribeLabelResponse_Rating
+var DescribeLabelResponse_FaultCode = &sDescribeLabelResponse_FaultCode
+var DescribeLabelResponse_Notes = &sDescribeLabelResponse_Notes
+var DescribeLabelResponse_Equipment = &sDescribeLabelResponse_Equipment
+var DescribeLabelResponse_CreatedAt = &sDescribeLabelResponse_CreatedAt
+
+var DescribeModelRequest = &sDescribeModelRequest
+var DescribeModelRequest_ModelName = &sDescribeModelRequest_ModelName
+
+var DescribeModelResponse = &sDescribeModelResponse
+var DescribeModelResponse_ModelName = &sDescribeModelResponse_ModelName
+var DescribeModelResponse_ModelArn = &sDescribeModelResponse_ModelArn
+var DescribeModelResponse_DatasetName = &sDescribeModelResponse_DatasetName
+var DescribeModelResponse_DatasetArn = &sDescribeModelResponse_DatasetArn
+var DescribeModelResponse_Schema = &sDescribeModelResponse_Schema
+var DescribeModelResponse_LabelsInputConfiguration = &sDescribeModelResponse_LabelsInputConfiguration
+var DescribeModelResponse_TrainingDataStartTime = &sDescribeModelResponse_TrainingDataStartTime
+var DescribeModelResponse_TrainingDataEndTime = &sDescribeModelResponse_TrainingDataEndTime
+var DescribeModelResponse_EvaluationDataStartTime = &sDescribeModelResponse_EvaluationDataStartTime
+var DescribeModelResponse_EvaluationDataEndTime = &sDescribeModelResponse_EvaluationDataEndTime
+var DescribeModelResponse_RoleArn = &sDescribeModelResponse_RoleArn
+var DescribeModelResponse_DataPreProcessingConfiguration = &sDescribeModelResponse_DataPreProcessingConfiguration
+var DescribeModelResponse_Status = &sDescribeModelResponse_Status
+var DescribeModelResponse_TrainingExecutionStartTime = &sDescribeModelResponse_TrainingExecutionStartTime
+var DescribeModelResponse_TrainingExecutionEndTime = &sDescribeModelResponse_TrainingExecutionEndTime
+var DescribeModelResponse_FailedReason = &sDescribeModelResponse_FailedReason
+var DescribeModelResponse_ModelMetrics = &sDescribeModelResponse_ModelMetrics
+var DescribeModelResponse_LastUpdatedTime = &sDescribeModelResponse_LastUpdatedTime
+var DescribeModelResponse_CreatedAt = &sDescribeModelResponse_CreatedAt
+var DescribeModelResponse_ServerSideKmsKeyId = &sDescribeModelResponse_ServerSideKmsKeyId
+var DescribeModelResponse_OffCondition = &sDescribeModelResponse_OffCondition
+var DescribeModelResponse_SourceModelVersionArn = &sDescribeModelResponse_SourceModelVersionArn
+var DescribeModelResponse_ImportJobStartTime = &sDescribeModelResponse_ImportJobStartTime
+var DescribeModelResponse_ImportJobEndTime = &sDescribeModelResponse_ImportJobEndTime
+var DescribeModelResponse_ActiveModelVersion = &sDescribeModelResponse_ActiveModelVersion
+var DescribeModelResponse_ActiveModelVersionArn = &sDescribeModelResponse_ActiveModelVersionArn
+var DescribeModelResponse_ModelVersionActivatedAt = &sDescribeModelResponse_ModelVersionActivatedAt
+var DescribeModelResponse_PreviousActiveModelVersion = &sDescribeModelResponse_PreviousActiveModelVersion
+var DescribeModelResponse_PreviousActiveModelVersionArn = &sDescribeModelResponse_PreviousActiveModelVersionArn
+var DescribeModelResponse_PreviousModelVersionActivatedAt = &sDescribeModelResponse_PreviousModelVersionActivatedAt
+var DescribeModelResponse_PriorModelMetrics = &sDescribeModelResponse_PriorModelMetrics
+var DescribeModelResponse_LatestScheduledRetrainingFailedReason = &sDescribeModelResponse_LatestScheduledRetrainingFailedReason
+var DescribeModelResponse_LatestScheduledRetrainingStatus = &sDescribeModelResponse_LatestScheduledRetrainingStatus
+var DescribeModelResponse_LatestScheduledRetrainingModelVersion = &sDescribeModelResponse_LatestScheduledRetrainingModelVersion
+var DescribeModelResponse_LatestScheduledRetrainingStartTime = &sDescribeModelResponse_LatestScheduledRetrainingStartTime
+var DescribeModelResponse_LatestScheduledRetrainingAvailableDataInDays = &sDescribeModelResponse_LatestScheduledRetrainingAvailableDataInDays
+var DescribeModelResponse_NextScheduledRetrainingStartDate = &sDescribeModelResponse_NextScheduledRetrainingStartDate
+var DescribeModelResponse_AccumulatedInferenceDataStartTime = &sDescribeModelResponse_AccumulatedInferenceDataStartTime
+var DescribeModelResponse_AccumulatedInferenceDataEndTime = &sDescribeModelResponse_AccumulatedInferenceDataEndTime
+var DescribeModelResponse_RetrainingSchedulerStatus = &sDescribeModelResponse_RetrainingSchedulerStatus
+var DescribeModelResponse_ModelDiagnosticsOutputConfiguration = &sDescribeModelResponse_ModelDiagnosticsOutputConfiguration
+var DescribeModelResponse_ModelQuality = &sDescribeModelResponse_ModelQuality
+
+var DescribeModelVersionRequest = &sDescribeModelVersionRequest
+var DescribeModelVersionRequest_ModelName = &sDescribeModelVersionRequest_ModelName
+var DescribeModelVersionRequest_ModelVersion = &sDescribeModelVersionRequest_ModelVersion
+
+var DescribeModelVersionResponse = &sDescribeModelVersionResponse
+var DescribeModelVersionResponse_ModelName = &sDescribeModelVersionResponse_ModelName
+var DescribeModelVersionResponse_ModelArn = &sDescribeModelVersionResponse_ModelArn
+var DescribeModelVersionResponse_ModelVersion = &sDescribeModelVersionResponse_ModelVersion
+var DescribeModelVersionResponse_ModelVersionArn = &sDescribeModelVersionResponse_ModelVersionArn
+var DescribeModelVersionResponse_Status = &sDescribeModelVersionResponse_Status
+var DescribeModelVersionResponse_SourceType = &sDescribeModelVersionResponse_SourceType
+var DescribeModelVersionResponse_DatasetName = &sDescribeModelVersionResponse_DatasetName
+var DescribeModelVersionResponse_DatasetArn = &sDescribeModelVersionResponse_DatasetArn
+var DescribeModelVersionResponse_Schema = &sDescribeModelVersionResponse_Schema
+var DescribeModelVersionResponse_LabelsInputConfiguration = &sDescribeModelVersionResponse_LabelsInputConfiguration
+var DescribeModelVersionResponse_TrainingDataStartTime = &sDescribeModelVersionResponse_TrainingDataStartTime
+var DescribeModelVersionResponse_TrainingDataEndTime = &sDescribeModelVersionResponse_TrainingDataEndTime
+var DescribeModelVersionResponse_EvaluationDataStartTime = &sDescribeModelVersionResponse_EvaluationDataStartTime
+var DescribeModelVersionResponse_EvaluationDataEndTime = &sDescribeModelVersionResponse_EvaluationDataEndTime
+var DescribeModelVersionResponse_RoleArn = &sDescribeModelVersionResponse_RoleArn
+var DescribeModelVersionResponse_DataPreProcessingConfiguration = &sDescribeModelVersionResponse_DataPreProcessingConfiguration
+var DescribeModelVersionResponse_TrainingExecutionStartTime = &sDescribeModelVersionResponse_TrainingExecutionStartTime
+var DescribeModelVersionResponse_TrainingExecutionEndTime = &sDescribeModelVersionResponse_TrainingExecutionEndTime
+var DescribeModelVersionResponse_FailedReason = &sDescribeModelVersionResponse_FailedReason
+var DescribeModelVersionResponse_ModelMetrics = &sDescribeModelVersionResponse_ModelMetrics
+var DescribeModelVersionResponse_LastUpdatedTime = &sDescribeModelVersionResponse_LastUpdatedTime
+var DescribeModelVersionResponse_CreatedAt = &sDescribeModelVersionResponse_CreatedAt
+var DescribeModelVersionResponse_ServerSideKmsKeyId = &sDescribeModelVersionResponse_ServerSideKmsKeyId
+var DescribeModelVersionResponse_OffCondition = &sDescribeModelVersionResponse_OffCondition
+var DescribeModelVersionResponse_SourceModelVersionArn = &sDescribeModelVersionResponse_SourceModelVersionArn
+var DescribeModelVersionResponse_ImportJobStartTime = &sDescribeModelVersionResponse_ImportJobStartTime
+var DescribeModelVersionResponse_ImportJobEndTime = &sDescribeModelVersionResponse_ImportJobEndTime
+var DescribeModelVersionResponse_ImportedDataSizeInBytes = &sDescribeModelVersionResponse_ImportedDataSizeInBytes
+var DescribeModelVersionResponse_PriorModelMetrics = &sDescribeModelVersionResponse_PriorModelMetrics
+var DescribeModelVersionResponse_RetrainingAvailableDataInDays = &sDescribeModelVersionResponse_RetrainingAvailableDataInDays
+var DescribeModelVersionResponse_AutoPromotionResult = &sDescribeModelVersionResponse_AutoPromotionResult
+var DescribeModelVersionResponse_AutoPromotionResultReason = &sDescribeModelVersionResponse_AutoPromotionResultReason
+var DescribeModelVersionResponse_ModelDiagnosticsOutputConfiguration = &sDescribeModelVersionResponse_ModelDiagnosticsOutputConfiguration
+var DescribeModelVersionResponse_ModelDiagnosticsResultsObject = &sDescribeModelVersionResponse_ModelDiagnosticsResultsObject
+var DescribeModelVersionResponse_ModelQuality = &sDescribeModelVersionResponse_ModelQuality
+
+var DescribeResourcePolicyRequest = &sDescribeResourcePolicyRequest
+var DescribeResourcePolicyRequest_ResourceArn = &sDescribeResourcePolicyRequest_ResourceArn
+
+var DescribeResourcePolicyResponse = &sDescribeResourcePolicyResponse
+var DescribeResourcePolicyResponse_PolicyRevisionId = &sDescribeResourcePolicyResponse_PolicyRevisionId
+var DescribeResourcePolicyResponse_ResourcePolicy = &sDescribeResourcePolicyResponse_ResourcePolicy
+var DescribeResourcePolicyResponse_CreationTime = &sDescribeResourcePolicyResponse_CreationTime
+var DescribeResourcePolicyResponse_LastModifiedTime = &sDescribeResourcePolicyResponse_LastModifiedTime
+
+var DescribeRetrainingSchedulerRequest = &sDescribeRetrainingSchedulerRequest
+var DescribeRetrainingSchedulerRequest_ModelName = &sDescribeRetrainingSchedulerRequest_ModelName
+
+var DescribeRetrainingSchedulerResponse = &sDescribeRetrainingSchedulerResponse
+var DescribeRetrainingSchedulerResponse_ModelName = &sDescribeRetrainingSchedulerResponse_ModelName
+var DescribeRetrainingSchedulerResponse_ModelArn = &sDescribeRetrainingSchedulerResponse_ModelArn
+var DescribeRetrainingSchedulerResponse_RetrainingStartDate = &sDescribeRetrainingSchedulerResponse_RetrainingStartDate
+var DescribeRetrainingSchedulerResponse_RetrainingFrequency = &sDescribeRetrainingSchedulerResponse_RetrainingFrequency
+var DescribeRetrainingSchedulerResponse_LookbackWindow = &sDescribeRetrainingSchedulerResponse_LookbackWindow
+var DescribeRetrainingSchedulerResponse_Status = &sDescribeRetrainingSchedulerResponse_Status
+var DescribeRetrainingSchedulerResponse_PromoteMode = &sDescribeRetrainingSchedulerResponse_PromoteMode
+var DescribeRetrainingSchedulerResponse_CreatedAt = &sDescribeRetrainingSchedulerResponse_CreatedAt
+var DescribeRetrainingSchedulerResponse_UpdatedAt = &sDescribeRetrainingSchedulerResponse_UpdatedAt
+
+var ImportDatasetRequest = &sImportDatasetRequest
+var ImportDatasetRequest_SourceDatasetArn = &sImportDatasetRequest_SourceDatasetArn
+var ImportDatasetRequest_DatasetName = &sImportDatasetRequest_DatasetName
+var ImportDatasetRequest_ClientToken = &sImportDatasetRequest_ClientToken
+var ImportDatasetRequest_ServerSideKmsKeyId = &sImportDatasetRequest_ServerSideKmsKeyId
+var ImportDatasetRequest_Tags = &sImportDatasetRequest_Tags
+
+var ImportDatasetResponse = &sImportDatasetResponse
+var ImportDatasetResponse_DatasetName = &sImportDatasetResponse_DatasetName
+var ImportDatasetResponse_DatasetArn = &sImportDatasetResponse_DatasetArn
+var ImportDatasetResponse_Status = &sImportDatasetResponse_Status
+var ImportDatasetResponse_JobId = &sImportDatasetResponse_JobId
+
+var ImportModelVersionRequest = &sImportModelVersionRequest
+var ImportModelVersionRequest_SourceModelVersionArn = &sImportModelVersionRequest_SourceModelVersionArn
+var ImportModelVersionRequest_ModelName = &sImportModelVersionRequest_ModelName
+var ImportModelVersionRequest_DatasetName = &sImportModelVersionRequest_DatasetName
+var ImportModelVersionRequest_LabelsInputConfiguration = &sImportModelVersionRequest_LabelsInputConfiguration
+var ImportModelVersionRequest_ClientToken = &sImportModelVersionRequest_ClientToken
+var ImportModelVersionRequest_RoleArn = &sImportModelVersionRequest_RoleArn
+var ImportModelVersionRequest_ServerSideKmsKeyId = &sImportModelVersionRequest_ServerSideKmsKeyId
+var ImportModelVersionRequest_Tags = &sImportModelVersionRequest_Tags
+var ImportModelVersionRequest_InferenceDataImportStrategy = &sImportModelVersionRequest_InferenceDataImportStrategy
+
+var ImportModelVersionResponse = &sImportModelVersionResponse
+var ImportModelVersionResponse_ModelName = &sImportModelVersionResponse_ModelName
+var ImportModelVersionResponse_ModelArn = &sImportModelVersionResponse_ModelArn
+var ImportModelVersionResponse_ModelVersionArn = &sImportModelVersionResponse_ModelVersionArn
+var ImportModelVersionResponse_ModelVersion = &sImportModelVersionResponse_ModelVersion
+var ImportModelVersionResponse_Status = &sImportModelVersionResponse_Status
+
+var ListDataIngestionJobsRequest = &sListDataIngestionJobsRequest
+var ListDataIngestionJobsRequest_DatasetName = &sListDataIngestionJobsRequest_DatasetName
+var ListDataIngestionJobsRequest_NextToken = &sListDataIngestionJobsRequest_NextToken
+var ListDataIngestionJobsRequest_MaxResults = &sListDataIngestionJobsRequest_MaxResults
+var ListDataIngestionJobsRequest_Status = &sListDataIngestionJobsRequest_Status
+
+var ListDataIngestionJobsResponse = &sListDataIngestionJobsResponse
+var ListDataIngestionJobsResponse_NextToken = &sListDataIngestionJobsResponse_NextToken
+var ListDataIngestionJobsResponse_DataIngestionJobSummaries = &sListDataIngestionJobsResponse_DataIngestionJobSummaries
+
+var ListDatasetsRequest = &sListDatasetsRequest
+var ListDatasetsRequest_NextToken = &sListDatasetsRequest_NextToken
+var ListDatasetsRequest_MaxResults = &sListDatasetsRequest_MaxResults
+var ListDatasetsRequest_DatasetNameBeginsWith = &sListDatasetsRequest_DatasetNameBeginsWith
+
+var ListDatasetsResponse = &sListDatasetsResponse
+var ListDatasetsResponse_NextToken = &sListDatasetsResponse_NextToken
+var ListDatasetsResponse_DatasetSummaries = &sListDatasetsResponse_DatasetSummaries
+
+var ListInferenceEventsRequest = &sListInferenceEventsRequest
+var ListInferenceEventsRequest_NextToken = &sListInferenceEventsRequest_NextToken
+var ListInferenceEventsRequest_MaxResults = &sListInferenceEventsRequest_MaxResults
+var ListInferenceEventsRequest_InferenceSchedulerName = &sListInferenceEventsRequest_InferenceSchedulerName
+var ListInferenceEventsRequest_IntervalStartTime = &sListInferenceEventsRequest_IntervalStartTime
+var ListInferenceEventsRequest_IntervalEndTime = &sListInferenceEventsRequest_IntervalEndTime
+
+var ListInferenceEventsResponse = &sListInferenceEventsResponse
+var ListInferenceEventsResponse_NextToken = &sListInferenceEventsResponse_NextToken
+var ListInferenceEventsResponse_InferenceEventSummaries = &sListInferenceEventsResponse_InferenceEventSummaries
+
+var ListInferenceExecutionsRequest = &sListInferenceExecutionsRequest
+var ListInferenceExecutionsRequest_NextToken = &sListInferenceExecutionsRequest_NextToken
+var ListInferenceExecutionsRequest_MaxResults = &sListInferenceExecutionsRequest_MaxResults
+var ListInferenceExecutionsRequest_InferenceSchedulerName = &sListInferenceExecutionsRequest_InferenceSchedulerName
+var ListInferenceExecutionsRequest_DataStartTimeAfter = &sListInferenceExecutionsRequest_DataStartTimeAfter
+var ListInferenceExecutionsRequest_DataEndTimeBefore = &sListInferenceExecutionsRequest_DataEndTimeBefore
+var ListInferenceExecutionsRequest_Status = &sListInferenceExecutionsRequest_Status
+
+var ListInferenceExecutionsResponse = &sListInferenceExecutionsResponse
+var ListInferenceExecutionsResponse_NextToken = &sListInferenceExecutionsResponse_NextToken
+var ListInferenceExecutionsResponse_InferenceExecutionSummaries = &sListInferenceExecutionsResponse_InferenceExecutionSummaries
+
+var ListInferenceSchedulersRequest = &sListInferenceSchedulersRequest
+var ListInferenceSchedulersRequest_NextToken = &sListInferenceSchedulersRequest_NextToken
+var ListInferenceSchedulersRequest_MaxResults = &sListInferenceSchedulersRequest_MaxResults
+var ListInferenceSchedulersRequest_InferenceSchedulerNameBeginsWith = &sListInferenceSchedulersRequest_InferenceSchedulerNameBeginsWith
+var ListInferenceSchedulersRequest_ModelName = &sListInferenceSchedulersRequest_ModelName
+var ListInferenceSchedulersRequest_Status = &sListInferenceSchedulersRequest_Status
+
+var ListInferenceSchedulersResponse = &sListInferenceSchedulersResponse
+var ListInferenceSchedulersResponse_NextToken = &sListInferenceSchedulersResponse_NextToken
+var ListInferenceSchedulersResponse_InferenceSchedulerSummaries = &sListInferenceSchedulersResponse_InferenceSchedulerSummaries
+
+var ListLabelGroupsRequest = &sListLabelGroupsRequest
+var ListLabelGroupsRequest_LabelGroupNameBeginsWith = &sListLabelGroupsRequest_LabelGroupNameBeginsWith
+var ListLabelGroupsRequest_NextToken = &sListLabelGroupsRequest_NextToken
+var ListLabelGroupsRequest_MaxResults = &sListLabelGroupsRequest_MaxResults
+
+var ListLabelGroupsResponse = &sListLabelGroupsResponse
+var ListLabelGroupsResponse_NextToken = &sListLabelGroupsResponse_NextToken
+var ListLabelGroupsResponse_LabelGroupSummaries = &sListLabelGroupsResponse_LabelGroupSummaries
+
+var ListLabelsRequest = &sListLabelsRequest
+var ListLabelsRequest_LabelGroupName = &sListLabelsRequest_LabelGroupName
+var ListLabelsRequest_IntervalStartTime = &sListLabelsRequest_IntervalStartTime
+var ListLabelsRequest_IntervalEndTime = &sListLabelsRequest_IntervalEndTime
+var ListLabelsRequest_FaultCode = &sListLabelsRequest_FaultCode
+var ListLabelsRequest_Equipment = &sListLabelsRequest_Equipment
+var ListLabelsRequest_NextToken = &sListLabelsRequest_NextToken
+var ListLabelsRequest_MaxResults = &sListLabelsRequest_MaxResults
+
+var ListLabelsResponse = &sListLabelsResponse
+var ListLabelsResponse_NextToken = &sListLabelsResponse_NextToken
+var ListLabelsResponse_LabelSummaries = &sListLabelsResponse_LabelSummaries
+
+var ListModelsRequest = &sListModelsRequest
+var ListModelsRequest_NextToken = &sListModelsRequest_NextToken
+var ListModelsRequest_MaxResults = &sListModelsRequest_MaxResults
+var ListModelsRequest_Status = &sListModelsRequest_Status
+var ListModelsRequest_ModelNameBeginsWith = &sListModelsRequest_ModelNameBeginsWith
+var ListModelsRequest_DatasetNameBeginsWith = &sListModelsRequest_DatasetNameBeginsWith
+
+var ListModelsResponse = &sListModelsResponse
+var ListModelsResponse_NextToken = &sListModelsResponse_NextToken
+var ListModelsResponse_ModelSummaries = &sListModelsResponse_ModelSummaries
+
+var ListModelVersionsRequest = &sListModelVersionsRequest
+var ListModelVersionsRequest_ModelName = &sListModelVersionsRequest_ModelName
+var ListModelVersionsRequest_NextToken = &sListModelVersionsRequest_NextToken
+var ListModelVersionsRequest_MaxResults = &sListModelVersionsRequest_MaxResults
+var ListModelVersionsRequest_Status = &sListModelVersionsRequest_Status
+var ListModelVersionsRequest_SourceType = &sListModelVersionsRequest_SourceType
+var ListModelVersionsRequest_CreatedAtEndTime = &sListModelVersionsRequest_CreatedAtEndTime
+var ListModelVersionsRequest_CreatedAtStartTime = &sListModelVersionsRequest_CreatedAtStartTime
+var ListModelVersionsRequest_MaxModelVersion = &sListModelVersionsRequest_MaxModelVersion
+var ListModelVersionsRequest_MinModelVersion = &sListModelVersionsRequest_MinModelVersion
+
+var ListModelVersionsResponse = &sListModelVersionsResponse
+var ListModelVersionsResponse_NextToken = &sListModelVersionsResponse_NextToken
+var ListModelVersionsResponse_ModelVersionSummaries = &sListModelVersionsResponse_ModelVersionSummaries
+
+var ListRetrainingSchedulersRequest = &sListRetrainingSchedulersRequest
+var ListRetrainingSchedulersRequest_ModelNameBeginsWith = &sListRetrainingSchedulersRequest_ModelNameBeginsWith
+var ListRetrainingSchedulersRequest_Status = &sListRetrainingSchedulersRequest_Status
+var ListRetrainingSchedulersRequest_NextToken = &sListRetrainingSchedulersRequest_NextToken
+var ListRetrainingSchedulersRequest_MaxResults = &sListRetrainingSchedulersRequest_MaxResults
+
+var ListRetrainingSchedulersResponse = &sListRetrainingSchedulersResponse
+var ListRetrainingSchedulersResponse_RetrainingSchedulerSummaries = &sListRetrainingSchedulersResponse_RetrainingSchedulerSummaries
+var ListRetrainingSchedulersResponse_NextToken = &sListRetrainingSchedulersResponse_NextToken
+
+var ListSensorStatisticsRequest = &sListSensorStatisticsRequest
+var ListSensorStatisticsRequest_DatasetName = &sListSensorStatisticsRequest_DatasetName
+var ListSensorStatisticsRequest_IngestionJobId = &sListSensorStatisticsRequest_IngestionJobId
+var ListSensorStatisticsRequest_MaxResults = &sListSensorStatisticsRequest_MaxResults
+var ListSensorStatisticsRequest_NextToken = &sListSensorStatisticsRequest_NextToken
+
+var ListSensorStatisticsResponse = &sListSensorStatisticsResponse
+var ListSensorStatisticsResponse_SensorStatisticsSummaries = &sListSensorStatisticsResponse_SensorStatisticsSummaries
+var ListSensorStatisticsResponse_NextToken = &sListSensorStatisticsResponse_NextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceArn = &sListTagsForResourceRequest_ResourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_Tags = &sListTagsForResourceResponse_Tags
+
+var PutResourcePolicyRequest = &sPutResourcePolicyRequest
+var PutResourcePolicyRequest_ResourceArn = &sPutResourcePolicyRequest_ResourceArn
+var PutResourcePolicyRequest_ResourcePolicy = &sPutResourcePolicyRequest_ResourcePolicy
+var PutResourcePolicyRequest_PolicyRevisionId = &sPutResourcePolicyRequest_PolicyRevisionId
+var PutResourcePolicyRequest_ClientToken = &sPutResourcePolicyRequest_ClientToken
+
+var PutResourcePolicyResponse = &sPutResourcePolicyResponse
+var PutResourcePolicyResponse_ResourceArn = &sPutResourcePolicyResponse_ResourceArn
+var PutResourcePolicyResponse_PolicyRevisionId = &sPutResourcePolicyResponse_PolicyRevisionId
+
+var StartDataIngestionJobRequest = &sStartDataIngestionJobRequest
+var StartDataIngestionJobRequest_DatasetName = &sStartDataIngestionJobRequest_DatasetName
+var StartDataIngestionJobRequest_IngestionInputConfiguration = &sStartDataIngestionJobRequest_IngestionInputConfiguration
+var StartDataIngestionJobRequest_RoleArn = &sStartDataIngestionJobRequest_RoleArn
+var StartDataIngestionJobRequest_ClientToken = &sStartDataIngestionJobRequest_ClientToken
+
+var StartDataIngestionJobResponse = &sStartDataIngestionJobResponse
+var StartDataIngestionJobResponse_JobId = &sStartDataIngestionJobResponse_JobId
+var StartDataIngestionJobResponse_Status = &sStartDataIngestionJobResponse_Status
+
+var StartInferenceSchedulerRequest = &sStartInferenceSchedulerRequest
+var StartInferenceSchedulerRequest_InferenceSchedulerName = &sStartInferenceSchedulerRequest_InferenceSchedulerName
+
+var StartInferenceSchedulerResponse = &sStartInferenceSchedulerResponse
+var StartInferenceSchedulerResponse_ModelArn = &sStartInferenceSchedulerResponse_ModelArn
+var StartInferenceSchedulerResponse_ModelName = &sStartInferenceSchedulerResponse_ModelName
+var StartInferenceSchedulerResponse_InferenceSchedulerName = &sStartInferenceSchedulerResponse_InferenceSchedulerName
+var StartInferenceSchedulerResponse_InferenceSchedulerArn = &sStartInferenceSchedulerResponse_InferenceSchedulerArn
+var StartInferenceSchedulerResponse_Status = &sStartInferenceSchedulerResponse_Status
+
+var StartRetrainingSchedulerRequest = &sStartRetrainingSchedulerRequest
+var StartRetrainingSchedulerRequest_ModelName = &sStartRetrainingSchedulerRequest_ModelName
+
+var StartRetrainingSchedulerResponse = &sStartRetrainingSchedulerResponse
+var StartRetrainingSchedulerResponse_ModelName = &sStartRetrainingSchedulerResponse_ModelName
+var StartRetrainingSchedulerResponse_ModelArn = &sStartRetrainingSchedulerResponse_ModelArn
+var StartRetrainingSchedulerResponse_Status = &sStartRetrainingSchedulerResponse_Status
+
+var StopInferenceSchedulerRequest = &sStopInferenceSchedulerRequest
+var StopInferenceSchedulerRequest_InferenceSchedulerName = &sStopInferenceSchedulerRequest_InferenceSchedulerName
+
+var StopInferenceSchedulerResponse = &sStopInferenceSchedulerResponse
+var StopInferenceSchedulerResponse_ModelArn = &sStopInferenceSchedulerResponse_ModelArn
+var StopInferenceSchedulerResponse_ModelName = &sStopInferenceSchedulerResponse_ModelName
+var StopInferenceSchedulerResponse_InferenceSchedulerName = &sStopInferenceSchedulerResponse_InferenceSchedulerName
+var StopInferenceSchedulerResponse_InferenceSchedulerArn = &sStopInferenceSchedulerResponse_InferenceSchedulerArn
+var StopInferenceSchedulerResponse_Status = &sStopInferenceSchedulerResponse_Status
+
+var StopRetrainingSchedulerRequest = &sStopRetrainingSchedulerRequest
+var StopRetrainingSchedulerRequest_ModelName = &sStopRetrainingSchedulerRequest_ModelName
+
+var StopRetrainingSchedulerResponse = &sStopRetrainingSchedulerResponse
+var StopRetrainingSchedulerResponse_ModelName = &sStopRetrainingSchedulerResponse_ModelName
+var StopRetrainingSchedulerResponse_ModelArn = &sStopRetrainingSchedulerResponse_ModelArn
+var StopRetrainingSchedulerResponse_Status = &sStopRetrainingSchedulerResponse_Status
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceArn = &sTagResourceRequest_ResourceArn
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceArn = &sUntagResourceRequest_ResourceArn
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateActiveModelVersionRequest = &sUpdateActiveModelVersionRequest
+var UpdateActiveModelVersionRequest_ModelName = &sUpdateActiveModelVersionRequest_ModelName
+var UpdateActiveModelVersionRequest_ModelVersion = &sUpdateActiveModelVersionRequest_ModelVersion
+
+var UpdateActiveModelVersionResponse = &sUpdateActiveModelVersionResponse
+var UpdateActiveModelVersionResponse_ModelName = &sUpdateActiveModelVersionResponse_ModelName
+var UpdateActiveModelVersionResponse_ModelArn = &sUpdateActiveModelVersionResponse_ModelArn
+var UpdateActiveModelVersionResponse_CurrentActiveVersion = &sUpdateActiveModelVersionResponse_CurrentActiveVersion
+var UpdateActiveModelVersionResponse_PreviousActiveVersion = &sUpdateActiveModelVersionResponse_PreviousActiveVersion
+var UpdateActiveModelVersionResponse_CurrentActiveVersionArn = &sUpdateActiveModelVersionResponse_CurrentActiveVersionArn
+var UpdateActiveModelVersionResponse_PreviousActiveVersionArn = &sUpdateActiveModelVersionResponse_PreviousActiveVersionArn
+
+var UpdateInferenceSchedulerRequest = &sUpdateInferenceSchedulerRequest
+var UpdateInferenceSchedulerRequest_InferenceSchedulerName = &sUpdateInferenceSchedulerRequest_InferenceSchedulerName
+var UpdateInferenceSchedulerRequest_DataDelayOffsetInMinutes = &sUpdateInferenceSchedulerRequest_DataDelayOffsetInMinutes
+var UpdateInferenceSchedulerRequest_DataUploadFrequency = &sUpdateInferenceSchedulerRequest_DataUploadFrequency
+var UpdateInferenceSchedulerRequest_DataInputConfiguration = &sUpdateInferenceSchedulerRequest_DataInputConfiguration
+var UpdateInferenceSchedulerRequest_DataOutputConfiguration = &sUpdateInferenceSchedulerRequest_DataOutputConfiguration
+var UpdateInferenceSchedulerRequest_RoleArn = &sUpdateInferenceSchedulerRequest_RoleArn
+
+var UpdateLabelGroupRequest = &sUpdateLabelGroupRequest
+var UpdateLabelGroupRequest_LabelGroupName = &sUpdateLabelGroupRequest_LabelGroupName
+var UpdateLabelGroupRequest_FaultCodes = &sUpdateLabelGroupRequest_FaultCodes
+
+var UpdateModelRequest = &sUpdateModelRequest
+var UpdateModelRequest_ModelName = &sUpdateModelRequest_ModelName
+var UpdateModelRequest_LabelsInputConfiguration = &sUpdateModelRequest_LabelsInputConfiguration
+var UpdateModelRequest_RoleArn = &sUpdateModelRequest_RoleArn
+var UpdateModelRequest_ModelDiagnosticsOutputConfiguration = &sUpdateModelRequest_ModelDiagnosticsOutputConfiguration
+
+var UpdateRetrainingSchedulerRequest = &sUpdateRetrainingSchedulerRequest
+var UpdateRetrainingSchedulerRequest_ModelName = &sUpdateRetrainingSchedulerRequest_ModelName
+var UpdateRetrainingSchedulerRequest_RetrainingStartDate = &sUpdateRetrainingSchedulerRequest_RetrainingStartDate
+var UpdateRetrainingSchedulerRequest_RetrainingFrequency = &sUpdateRetrainingSchedulerRequest_RetrainingFrequency
+var UpdateRetrainingSchedulerRequest_LookbackWindow = &sUpdateRetrainingSchedulerRequest_LookbackWindow
+var UpdateRetrainingSchedulerRequest_PromoteMode = &sUpdateRetrainingSchedulerRequest_PromoteMode
+
+var AWSLookoutEquipmentFrontendService = &smithy.ServiceSchema{Schema: &s_AWSLookoutEquipmentFrontendService, Version: "2020-12-15"}

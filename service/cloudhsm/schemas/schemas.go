@@ -4,976 +4,753 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AddTagsToResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "AddTagsToResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateHapg = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "CreateHapg",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateHsm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "CreateHsm",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateLunaClient = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "CreateLunaClient",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteHapg = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "DeleteHapg",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteHsm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "DeleteHsm",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteLunaClient = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "DeleteLunaClient",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeHapg = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "DescribeHapg",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeHsm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "DescribeHsm",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeLunaClient = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "DescribeLunaClient",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "GetConfig",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListAvailableZones = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "ListAvailableZones",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListHapgs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "ListHapgs",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListHsms = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "ListHsms",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListLunaClients = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "ListLunaClients",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var ModifyHapg = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "ModifyHapg",
-}, smithy.ShapeTypeOperation, 0)
-
-var ModifyHsm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "ModifyHsm",
-}, smithy.ShapeTypeOperation, 0)
-
-var ModifyLunaClient = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "ModifyLunaClient",
-}, smithy.ShapeTypeOperation, 0)
-
-var RemoveTagsFromResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "RemoveTagsFromResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var _CloudHsmFrontendService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "CloudHsmFrontendService",
-}, smithy.ShapeTypeService, 0)
-
-var CloudHsmFrontendService = smithy.NewServiceSchema(_CloudHsmFrontendService, "2014-05-30")
-
-var _AZ = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "AZ",
-}, smithy.ShapeTypeString, 0)
-
-var _AZList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "AZList",
-}, smithy.ShapeTypeList, 1)
-var _AZList_member *smithy.Schema
-
-var _Boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "Boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _Certificate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "Certificate",
-}, smithy.ShapeTypeString, 0)
-
-var _CertificateFingerprint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "CertificateFingerprint",
-}, smithy.ShapeTypeString, 0)
-
-var _ClientArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "ClientArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ClientLabel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "ClientLabel",
-}, smithy.ShapeTypeString, 0)
-
-var _ClientList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "ClientList",
-}, smithy.ShapeTypeList, 1)
-var _ClientList_member *smithy.Schema
-
-var _ClientToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "ClientToken",
-}, smithy.ShapeTypeString, 0)
-
-var ClientVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "ClientVersion",
-}, smithy.ShapeTypeEnum, 2)
-var ClientVersion_FIVE_ONE *smithy.Schema
-
-var ClientVersion_FIVE_THREE *smithy.Schema
-
-var CloudHsmInternalException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "CloudHsmInternalException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"})
-var CloudHsmInternalException_message *smithy.Schema
-
-var CloudHsmInternalException_retryable *smithy.Schema
-
-var CloudHsmObjectState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "CloudHsmObjectState",
-}, smithy.ShapeTypeEnum, 3)
-var CloudHsmObjectState_READY *smithy.Schema
-
-var CloudHsmObjectState_UPDATING *smithy.Schema
-
-var CloudHsmObjectState_DEGRADED *smithy.Schema
-
-var CloudHsmServiceException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "CloudHsmServiceException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var CloudHsmServiceException_message *smithy.Schema
-
-var CloudHsmServiceException_retryable *smithy.Schema
-
-var _EniId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "EniId",
-}, smithy.ShapeTypeString, 0)
-
-var _ExternalId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "ExternalId",
-}, smithy.ShapeTypeString, 0)
-
-var _HapgArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "HapgArn",
-}, smithy.ShapeTypeString, 0)
-
-var _HapgList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "HapgList",
-}, smithy.ShapeTypeList, 1)
-var _HapgList_member *smithy.Schema
-
-var _HsmArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "HsmArn",
-}, smithy.ShapeTypeString, 0)
-
-var _HsmList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "HsmList",
-}, smithy.ShapeTypeList, 1)
-var _HsmList_member *smithy.Schema
-
-var _HsmSerialNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "HsmSerialNumber",
-}, smithy.ShapeTypeString, 0)
-
-var HsmStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "HsmStatus",
-}, smithy.ShapeTypeEnum, 7)
-var HsmStatus_PENDING *smithy.Schema
-
-var HsmStatus_RUNNING *smithy.Schema
-
-var HsmStatus_UPDATING *smithy.Schema
-
-var HsmStatus_SUSPENDED *smithy.Schema
-
-var HsmStatus_TERMINATING *smithy.Schema
-
-var HsmStatus_TERMINATED *smithy.Schema
-
-var HsmStatus_DEGRADED *smithy.Schema
-
-var _IamRoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "IamRoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var InvalidRequestException_message *smithy.Schema
-
-var InvalidRequestException_retryable *smithy.Schema
-
-var _IpAddress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "IpAddress",
-}, smithy.ShapeTypeString, 0)
-
-var _Label = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "Label",
-}, smithy.ShapeTypeString, 0)
-
-var _PaginationToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "PaginationToken",
-}, smithy.ShapeTypeString, 0)
-
-var _PartitionArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "PartitionArn",
-}, smithy.ShapeTypeString, 0)
-
-var _PartitionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "PartitionList",
-}, smithy.ShapeTypeList, 1)
-var _PartitionList_member *smithy.Schema
-
-var _PartitionSerial = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "PartitionSerial",
-}, smithy.ShapeTypeString, 0)
-
-var _PartitionSerialList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "PartitionSerialList",
-}, smithy.ShapeTypeList, 1)
-var _PartitionSerialList_member *smithy.Schema
-
-var _SshKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "SshKey",
-}, smithy.ShapeTypeString, 0)
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var _SubnetId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "SubnetId",
-}, smithy.ShapeTypeString, 0)
-
-var SubscriptionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "SubscriptionType",
-}, smithy.ShapeTypeEnum, 1)
-var SubscriptionType_PRODUCTION *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeString, 0)
-
-var _VpcId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "VpcId",
-}, smithy.ShapeTypeString, 0)
-
-var AddTagsToResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "AddTagsToResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var AddTagsToResourceRequest_ResourceArn *smithy.Schema
-
-var AddTagsToResourceRequest_TagList *smithy.Schema
-
-var AddTagsToResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "AddTagsToResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var AddTagsToResourceResponse_Status *smithy.Schema
-
-var CreateHapgRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "CreateHapgRequest",
-}, smithy.ShapeTypeStructure, 1)
-var CreateHapgRequest_Label *smithy.Schema
-
-var CreateHapgResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "CreateHapgResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateHapgResponse_HapgArn *smithy.Schema
-
-var CreateHsmRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "CreateHsmRequest",
-}, smithy.ShapeTypeStructure, 8, &smithytraits.XMLName{Name: "CreateHsmRequest"})
-var CreateHsmRequest_SubnetId *smithy.Schema
-
-var CreateHsmRequest_SshKey *smithy.Schema
-
-var CreateHsmRequest_EniIp *smithy.Schema
-
-var CreateHsmRequest_IamRoleArn *smithy.Schema
-
-var CreateHsmRequest_ExternalId *smithy.Schema
-
-var CreateHsmRequest_SubscriptionType *smithy.Schema
-
-var CreateHsmRequest_ClientToken *smithy.Schema
-
-var CreateHsmRequest_SyslogIp *smithy.Schema
-
-var CreateHsmResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "CreateHsmResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateHsmResponse_HsmArn *smithy.Schema
-
-var CreateLunaClientRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "CreateLunaClientRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CreateLunaClientRequest_Label *smithy.Schema
-
-var CreateLunaClientRequest_Certificate *smithy.Schema
-
-var CreateLunaClientResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "CreateLunaClientResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateLunaClientResponse_ClientArn *smithy.Schema
-
-var DeleteHapgRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "DeleteHapgRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteHapgRequest_HapgArn *smithy.Schema
-
-var DeleteHapgResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "DeleteHapgResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteHapgResponse_Status *smithy.Schema
-
-var DeleteHsmRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "DeleteHsmRequest",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.XMLName{Name: "DeleteHsmRequest"})
-var DeleteHsmRequest_HsmArn *smithy.Schema
-
-var DeleteHsmResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "DeleteHsmResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteHsmResponse_Status *smithy.Schema
-
-var DeleteLunaClientRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "DeleteLunaClientRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteLunaClientRequest_ClientArn *smithy.Schema
-
-var DeleteLunaClientResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "DeleteLunaClientResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteLunaClientResponse_Status *smithy.Schema
-
-var DescribeHapgRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "DescribeHapgRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeHapgRequest_HapgArn *smithy.Schema
-
-var DescribeHapgResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "DescribeHapgResponse",
-}, smithy.ShapeTypeStructure, 9)
-var DescribeHapgResponse_HapgArn *smithy.Schema
-
-var DescribeHapgResponse_HapgSerial *smithy.Schema
-
-var DescribeHapgResponse_HsmsLastActionFailed *smithy.Schema
-
-var DescribeHapgResponse_HsmsPendingDeletion *smithy.Schema
-
-var DescribeHapgResponse_HsmsPendingRegistration *smithy.Schema
-
-var DescribeHapgResponse_Label *smithy.Schema
-
-var DescribeHapgResponse_LastModifiedTimestamp *smithy.Schema
-
-var DescribeHapgResponse_PartitionSerialList *smithy.Schema
-
-var DescribeHapgResponse_State *smithy.Schema
-
-var DescribeHsmRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "DescribeHsmRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeHsmRequest_HsmArn *smithy.Schema
-
-var DescribeHsmRequest_HsmSerialNumber *smithy.Schema
-
-var DescribeHsmResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "DescribeHsmResponse",
-}, smithy.ShapeTypeStructure, 21)
-var DescribeHsmResponse_HsmArn *smithy.Schema
-
-var DescribeHsmResponse_Status *smithy.Schema
-
-var DescribeHsmResponse_StatusDetails *smithy.Schema
-
-var DescribeHsmResponse_AvailabilityZone *smithy.Schema
-
-var DescribeHsmResponse_EniId *smithy.Schema
-
-var DescribeHsmResponse_EniIp *smithy.Schema
-
-var DescribeHsmResponse_SubscriptionType *smithy.Schema
-
-var DescribeHsmResponse_SubscriptionStartDate *smithy.Schema
-
-var DescribeHsmResponse_SubscriptionEndDate *smithy.Schema
-
-var DescribeHsmResponse_VpcId *smithy.Schema
-
-var DescribeHsmResponse_SubnetId *smithy.Schema
-
-var DescribeHsmResponse_IamRoleArn *smithy.Schema
-
-var DescribeHsmResponse_SerialNumber *smithy.Schema
-
-var DescribeHsmResponse_VendorName *smithy.Schema
-
-var DescribeHsmResponse_HsmType *smithy.Schema
-
-var DescribeHsmResponse_SoftwareVersion *smithy.Schema
-
-var DescribeHsmResponse_SshPublicKey *smithy.Schema
-
-var DescribeHsmResponse_SshKeyLastUpdated *smithy.Schema
-
-var DescribeHsmResponse_ServerCertUri *smithy.Schema
-
-var DescribeHsmResponse_ServerCertLastUpdated *smithy.Schema
-
-var DescribeHsmResponse_Partitions *smithy.Schema
-
-var DescribeLunaClientRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "DescribeLunaClientRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeLunaClientRequest_ClientArn *smithy.Schema
-
-var DescribeLunaClientRequest_CertificateFingerprint *smithy.Schema
-
-var DescribeLunaClientResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "DescribeLunaClientResponse",
-}, smithy.ShapeTypeStructure, 5)
-var DescribeLunaClientResponse_ClientArn *smithy.Schema
-
-var DescribeLunaClientResponse_Certificate *smithy.Schema
-
-var DescribeLunaClientResponse_CertificateFingerprint *smithy.Schema
-
-var DescribeLunaClientResponse_LastModifiedTimestamp *smithy.Schema
-
-var DescribeLunaClientResponse_Label *smithy.Schema
-
-var GetConfigRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "GetConfigRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetConfigRequest_ClientArn *smithy.Schema
-
-var GetConfigRequest_ClientVersion *smithy.Schema
-
-var GetConfigRequest_HapgList *smithy.Schema
-
-var GetConfigResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "GetConfigResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetConfigResponse_ConfigType *smithy.Schema
-
-var GetConfigResponse_ConfigFile *smithy.Schema
-
-var GetConfigResponse_ConfigCred *smithy.Schema
-
-var ListAvailableZonesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "ListAvailableZonesRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var ListAvailableZonesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "ListAvailableZonesResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListAvailableZonesResponse_AZList *smithy.Schema
-
-var ListHapgsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "ListHapgsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListHapgsRequest_NextToken *smithy.Schema
-
-var ListHapgsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "ListHapgsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListHapgsResponse_HapgList *smithy.Schema
-
-var ListHapgsResponse_NextToken *smithy.Schema
-
-var ListHsmsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "ListHsmsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListHsmsRequest_NextToken *smithy.Schema
-
-var ListHsmsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "ListHsmsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListHsmsResponse_HsmList *smithy.Schema
-
-var ListHsmsResponse_NextToken *smithy.Schema
-
-var ListLunaClientsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "ListLunaClientsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListLunaClientsRequest_NextToken *smithy.Schema
-
-var ListLunaClientsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "ListLunaClientsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListLunaClientsResponse_ClientList *smithy.Schema
-
-var ListLunaClientsResponse_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_TagList *smithy.Schema
-
-var ModifyHapgRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "ModifyHapgRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ModifyHapgRequest_HapgArn *smithy.Schema
-
-var ModifyHapgRequest_Label *smithy.Schema
-
-var ModifyHapgRequest_PartitionSerialList *smithy.Schema
-
-var ModifyHapgResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "ModifyHapgResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ModifyHapgResponse_HapgArn *smithy.Schema
-
-var ModifyHsmRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "ModifyHsmRequest",
-}, smithy.ShapeTypeStructure, 6, &smithytraits.XMLName{Name: "ModifyHsmRequest"})
-var ModifyHsmRequest_HsmArn *smithy.Schema
-
-var ModifyHsmRequest_SubnetId *smithy.Schema
-
-var ModifyHsmRequest_EniIp *smithy.Schema
-
-var ModifyHsmRequest_IamRoleArn *smithy.Schema
-
-var ModifyHsmRequest_ExternalId *smithy.Schema
-
-var ModifyHsmRequest_SyslogIp *smithy.Schema
-
-var ModifyHsmResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "ModifyHsmResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ModifyHsmResponse_HsmArn *smithy.Schema
-
-var ModifyLunaClientRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "ModifyLunaClientRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ModifyLunaClientRequest_ClientArn *smithy.Schema
-
-var ModifyLunaClientRequest_Certificate *smithy.Schema
-
-var ModifyLunaClientResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "ModifyLunaClientResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ModifyLunaClientResponse_ClientArn *smithy.Schema
-
-var RemoveTagsFromResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "RemoveTagsFromResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var RemoveTagsFromResourceRequest_ResourceArn *smithy.Schema
-
-var RemoveTagsFromResourceRequest_TagKeyList *smithy.Schema
-
-var RemoveTagsFromResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudhsm",
-	Name:      "RemoveTagsFromResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var RemoveTagsFromResourceResponse_Status *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	_AZList_member = _AZList.AddMember("member", _AZ)
-
-	_ClientList_member = _ClientList.AddMember("member", _ClientArn)
-
-	ClientVersion_FIVE_ONE = ClientVersion.AddMember("FIVE_ONE", smithyprelude.Unit)
-
-	ClientVersion_FIVE_THREE = ClientVersion.AddMember("FIVE_THREE", smithyprelude.Unit)
-
-	CloudHsmInternalException_message = CloudHsmInternalException.AddMember("message", _String)
-
-	CloudHsmInternalException_retryable = CloudHsmInternalException.AddMember("retryable", _Boolean)
-
-	CloudHsmObjectState_READY = CloudHsmObjectState.AddMember("READY", smithyprelude.Unit)
-
-	CloudHsmObjectState_UPDATING = CloudHsmObjectState.AddMember("UPDATING", smithyprelude.Unit)
-
-	CloudHsmObjectState_DEGRADED = CloudHsmObjectState.AddMember("DEGRADED", smithyprelude.Unit)
-
-	CloudHsmServiceException_message = CloudHsmServiceException.AddMember("message", _String)
-
-	CloudHsmServiceException_retryable = CloudHsmServiceException.AddMember("retryable", _Boolean)
-
-	_HapgList_member = _HapgList.AddMember("member", _HapgArn)
-
-	_HsmList_member = _HsmList.AddMember("member", _HsmArn)
-
-	HsmStatus_PENDING = HsmStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	HsmStatus_RUNNING = HsmStatus.AddMember("RUNNING", smithyprelude.Unit)
-
-	HsmStatus_UPDATING = HsmStatus.AddMember("UPDATING", smithyprelude.Unit)
-
-	HsmStatus_SUSPENDED = HsmStatus.AddMember("SUSPENDED", smithyprelude.Unit)
-
-	HsmStatus_TERMINATING = HsmStatus.AddMember("TERMINATING", smithyprelude.Unit)
-
-	HsmStatus_TERMINATED = HsmStatus.AddMember("TERMINATED", smithyprelude.Unit)
-
-	HsmStatus_DEGRADED = HsmStatus.AddMember("DEGRADED", smithyprelude.Unit)
-
-	InvalidRequestException_message = InvalidRequestException.AddMember("message", _String)
-
-	InvalidRequestException_retryable = InvalidRequestException.AddMember("retryable", _Boolean)
-
-	_PartitionList_member = _PartitionList.AddMember("member", _PartitionArn)
-
-	_PartitionSerialList_member = _PartitionSerialList.AddMember("member", _PartitionSerial)
-
-	SubscriptionType_PRODUCTION = SubscriptionType.AddMember("PRODUCTION", smithyprelude.Unit)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	AddTagsToResourceRequest_ResourceArn = AddTagsToResourceRequest.AddMember("ResourceArn", _String)
-
-	AddTagsToResourceRequest_TagList = AddTagsToResourceRequest.AddMember("TagList", _TagList)
-
-	AddTagsToResourceResponse_Status = AddTagsToResourceResponse.AddMember("Status", _String)
-
-	CreateHapgRequest_Label = CreateHapgRequest.AddMember("Label", _Label)
-
-	CreateHapgResponse_HapgArn = CreateHapgResponse.AddMember("HapgArn", _HapgArn)
-
-	CreateHsmRequest_SubnetId = CreateHsmRequest.AddMember("SubnetId", _SubnetId, &smithytraits.XMLName{Name: "SubnetId"})
-
-	CreateHsmRequest_SshKey = CreateHsmRequest.AddMember("SshKey", _SshKey, &smithytraits.XMLName{Name: "SshKey"})
-
-	CreateHsmRequest_EniIp = CreateHsmRequest.AddMember("EniIp", _IpAddress, &smithytraits.XMLName{Name: "EniIp"})
-
-	CreateHsmRequest_IamRoleArn = CreateHsmRequest.AddMember("IamRoleArn", _IamRoleArn, &smithytraits.XMLName{Name: "IamRoleArn"})
-
-	CreateHsmRequest_ExternalId = CreateHsmRequest.AddMember("ExternalId", _ExternalId, &smithytraits.XMLName{Name: "ExternalId"})
-
-	CreateHsmRequest_SubscriptionType = CreateHsmRequest.AddMember("SubscriptionType", SubscriptionType, &smithytraits.XMLName{Name: "SubscriptionType"})
-
-	CreateHsmRequest_ClientToken = CreateHsmRequest.AddMember("ClientToken", _ClientToken, &smithytraits.XMLName{Name: "ClientToken"})
-
-	CreateHsmRequest_SyslogIp = CreateHsmRequest.AddMember("SyslogIp", _IpAddress, &smithytraits.XMLName{Name: "SyslogIp"})
-
-	CreateHsmResponse_HsmArn = CreateHsmResponse.AddMember("HsmArn", _HsmArn)
-
-	CreateLunaClientRequest_Label = CreateLunaClientRequest.AddMember("Label", _ClientLabel)
-
-	CreateLunaClientRequest_Certificate = CreateLunaClientRequest.AddMember("Certificate", _Certificate)
-
-	CreateLunaClientResponse_ClientArn = CreateLunaClientResponse.AddMember("ClientArn", _ClientArn)
-
-	DeleteHapgRequest_HapgArn = DeleteHapgRequest.AddMember("HapgArn", _HapgArn)
-
-	DeleteHapgResponse_Status = DeleteHapgResponse.AddMember("Status", _String)
-
-	DeleteHsmRequest_HsmArn = DeleteHsmRequest.AddMember("HsmArn", _HsmArn, &smithytraits.XMLName{Name: "HsmArn"})
-
-	DeleteHsmResponse_Status = DeleteHsmResponse.AddMember("Status", _String)
-
-	DeleteLunaClientRequest_ClientArn = DeleteLunaClientRequest.AddMember("ClientArn", _ClientArn)
-
-	DeleteLunaClientResponse_Status = DeleteLunaClientResponse.AddMember("Status", _String)
-
-	DescribeHapgRequest_HapgArn = DescribeHapgRequest.AddMember("HapgArn", _HapgArn)
-
-	DescribeHapgResponse_HapgArn = DescribeHapgResponse.AddMember("HapgArn", _HapgArn)
-
-	DescribeHapgResponse_HapgSerial = DescribeHapgResponse.AddMember("HapgSerial", _String)
-
-	DescribeHapgResponse_HsmsLastActionFailed = DescribeHapgResponse.AddMember("HsmsLastActionFailed", _HsmList)
-
-	DescribeHapgResponse_HsmsPendingDeletion = DescribeHapgResponse.AddMember("HsmsPendingDeletion", _HsmList)
-
-	DescribeHapgResponse_HsmsPendingRegistration = DescribeHapgResponse.AddMember("HsmsPendingRegistration", _HsmList)
-
-	DescribeHapgResponse_Label = DescribeHapgResponse.AddMember("Label", _Label)
-
-	DescribeHapgResponse_LastModifiedTimestamp = DescribeHapgResponse.AddMember("LastModifiedTimestamp", _Timestamp)
-
-	DescribeHapgResponse_PartitionSerialList = DescribeHapgResponse.AddMember("PartitionSerialList", _PartitionSerialList)
-
-	DescribeHapgResponse_State = DescribeHapgResponse.AddMember("State", CloudHsmObjectState)
-
-	DescribeHsmRequest_HsmArn = DescribeHsmRequest.AddMember("HsmArn", _HsmArn)
-
-	DescribeHsmRequest_HsmSerialNumber = DescribeHsmRequest.AddMember("HsmSerialNumber", _HsmSerialNumber)
-
-	DescribeHsmResponse_HsmArn = DescribeHsmResponse.AddMember("HsmArn", _HsmArn)
-
-	DescribeHsmResponse_Status = DescribeHsmResponse.AddMember("Status", HsmStatus)
-
-	DescribeHsmResponse_StatusDetails = DescribeHsmResponse.AddMember("StatusDetails", _String)
-
-	DescribeHsmResponse_AvailabilityZone = DescribeHsmResponse.AddMember("AvailabilityZone", _AZ)
-
-	DescribeHsmResponse_EniId = DescribeHsmResponse.AddMember("EniId", _EniId)
-
-	DescribeHsmResponse_EniIp = DescribeHsmResponse.AddMember("EniIp", _IpAddress)
-
-	DescribeHsmResponse_SubscriptionType = DescribeHsmResponse.AddMember("SubscriptionType", SubscriptionType)
-
-	DescribeHsmResponse_SubscriptionStartDate = DescribeHsmResponse.AddMember("SubscriptionStartDate", _Timestamp)
-
-	DescribeHsmResponse_SubscriptionEndDate = DescribeHsmResponse.AddMember("SubscriptionEndDate", _Timestamp)
-
-	DescribeHsmResponse_VpcId = DescribeHsmResponse.AddMember("VpcId", _VpcId)
-
-	DescribeHsmResponse_SubnetId = DescribeHsmResponse.AddMember("SubnetId", _SubnetId)
-
-	DescribeHsmResponse_IamRoleArn = DescribeHsmResponse.AddMember("IamRoleArn", _IamRoleArn)
-
-	DescribeHsmResponse_SerialNumber = DescribeHsmResponse.AddMember("SerialNumber", _HsmSerialNumber)
-
-	DescribeHsmResponse_VendorName = DescribeHsmResponse.AddMember("VendorName", _String)
-
-	DescribeHsmResponse_HsmType = DescribeHsmResponse.AddMember("HsmType", _String)
-
-	DescribeHsmResponse_SoftwareVersion = DescribeHsmResponse.AddMember("SoftwareVersion", _String)
-
-	DescribeHsmResponse_SshPublicKey = DescribeHsmResponse.AddMember("SshPublicKey", _SshKey)
-
-	DescribeHsmResponse_SshKeyLastUpdated = DescribeHsmResponse.AddMember("SshKeyLastUpdated", _Timestamp)
-
-	DescribeHsmResponse_ServerCertUri = DescribeHsmResponse.AddMember("ServerCertUri", _String)
-
-	DescribeHsmResponse_ServerCertLastUpdated = DescribeHsmResponse.AddMember("ServerCertLastUpdated", _Timestamp)
-
-	DescribeHsmResponse_Partitions = DescribeHsmResponse.AddMember("Partitions", _PartitionList)
-
-	DescribeLunaClientRequest_ClientArn = DescribeLunaClientRequest.AddMember("ClientArn", _ClientArn)
-
-	DescribeLunaClientRequest_CertificateFingerprint = DescribeLunaClientRequest.AddMember("CertificateFingerprint", _CertificateFingerprint)
-
-	DescribeLunaClientResponse_ClientArn = DescribeLunaClientResponse.AddMember("ClientArn", _ClientArn)
-
-	DescribeLunaClientResponse_Certificate = DescribeLunaClientResponse.AddMember("Certificate", _Certificate)
-
-	DescribeLunaClientResponse_CertificateFingerprint = DescribeLunaClientResponse.AddMember("CertificateFingerprint", _CertificateFingerprint)
-
-	DescribeLunaClientResponse_LastModifiedTimestamp = DescribeLunaClientResponse.AddMember("LastModifiedTimestamp", _Timestamp)
-
-	DescribeLunaClientResponse_Label = DescribeLunaClientResponse.AddMember("Label", _Label)
-
-	GetConfigRequest_ClientArn = GetConfigRequest.AddMember("ClientArn", _ClientArn)
-
-	GetConfigRequest_ClientVersion = GetConfigRequest.AddMember("ClientVersion", ClientVersion)
-
-	GetConfigRequest_HapgList = GetConfigRequest.AddMember("HapgList", _HapgList)
-
-	GetConfigResponse_ConfigType = GetConfigResponse.AddMember("ConfigType", _String)
-
-	GetConfigResponse_ConfigFile = GetConfigResponse.AddMember("ConfigFile", _String)
-
-	GetConfigResponse_ConfigCred = GetConfigResponse.AddMember("ConfigCred", _String)
-
-	ListAvailableZonesResponse_AZList = ListAvailableZonesResponse.AddMember("AZList", _AZList)
-
-	ListHapgsRequest_NextToken = ListHapgsRequest.AddMember("NextToken", _PaginationToken)
-
-	ListHapgsResponse_HapgList = ListHapgsResponse.AddMember("HapgList", _HapgList)
-
-	ListHapgsResponse_NextToken = ListHapgsResponse.AddMember("NextToken", _PaginationToken)
-
-	ListHsmsRequest_NextToken = ListHsmsRequest.AddMember("NextToken", _PaginationToken)
-
-	ListHsmsResponse_HsmList = ListHsmsResponse.AddMember("HsmList", _HsmList)
-
-	ListHsmsResponse_NextToken = ListHsmsResponse.AddMember("NextToken", _PaginationToken)
-
-	ListLunaClientsRequest_NextToken = ListLunaClientsRequest.AddMember("NextToken", _PaginationToken)
-
-	ListLunaClientsResponse_ClientList = ListLunaClientsResponse.AddMember("ClientList", _ClientList)
-
-	ListLunaClientsResponse_NextToken = ListLunaClientsResponse.AddMember("NextToken", _PaginationToken)
-
-	ListTagsForResourceRequest_ResourceArn = ListTagsForResourceRequest.AddMember("ResourceArn", _String)
-
-	ListTagsForResourceResponse_TagList = ListTagsForResourceResponse.AddMember("TagList", _TagList)
-
-	ModifyHapgRequest_HapgArn = ModifyHapgRequest.AddMember("HapgArn", _HapgArn)
-
-	ModifyHapgRequest_Label = ModifyHapgRequest.AddMember("Label", _Label)
-
-	ModifyHapgRequest_PartitionSerialList = ModifyHapgRequest.AddMember("PartitionSerialList", _PartitionSerialList)
-
-	ModifyHapgResponse_HapgArn = ModifyHapgResponse.AddMember("HapgArn", _HapgArn)
-
-	ModifyHsmRequest_HsmArn = ModifyHsmRequest.AddMember("HsmArn", _HsmArn, &smithytraits.XMLName{Name: "HsmArn"})
-
-	ModifyHsmRequest_SubnetId = ModifyHsmRequest.AddMember("SubnetId", _SubnetId, &smithytraits.XMLName{Name: "SubnetId"})
-
-	ModifyHsmRequest_EniIp = ModifyHsmRequest.AddMember("EniIp", _IpAddress, &smithytraits.XMLName{Name: "EniIp"})
-
-	ModifyHsmRequest_IamRoleArn = ModifyHsmRequest.AddMember("IamRoleArn", _IamRoleArn, &smithytraits.XMLName{Name: "IamRoleArn"})
-
-	ModifyHsmRequest_ExternalId = ModifyHsmRequest.AddMember("ExternalId", _ExternalId, &smithytraits.XMLName{Name: "ExternalId"})
-
-	ModifyHsmRequest_SyslogIp = ModifyHsmRequest.AddMember("SyslogIp", _IpAddress, &smithytraits.XMLName{Name: "SyslogIp"})
-
-	ModifyHsmResponse_HsmArn = ModifyHsmResponse.AddMember("HsmArn", _HsmArn)
-
-	ModifyLunaClientRequest_ClientArn = ModifyLunaClientRequest.AddMember("ClientArn", _ClientArn)
-
-	ModifyLunaClientRequest_Certificate = ModifyLunaClientRequest.AddMember("Certificate", _Certificate)
-
-	ModifyLunaClientResponse_ClientArn = ModifyLunaClientResponse.AddMember("ClientArn", _ClientArn)
-
-	RemoveTagsFromResourceRequest_ResourceArn = RemoveTagsFromResourceRequest.AddMember("ResourceArn", _String)
-
-	RemoveTagsFromResourceRequest_TagKeyList = RemoveTagsFromResourceRequest.AddMember("TagKeyList", _TagKeyList)
-
-	RemoveTagsFromResourceResponse_Status = RemoveTagsFromResourceResponse.AddMember("Status", _String)
-
-}
+var (
+	iAddTagsToResource              = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "AddTagsToResource"}
+	iCreateHapg                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "CreateHapg"}
+	iCreateHsm                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "CreateHsm"}
+	iCreateLunaClient               = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "CreateLunaClient"}
+	iDeleteHapg                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "DeleteHapg"}
+	iDeleteHsm                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "DeleteHsm"}
+	iDeleteLunaClient               = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "DeleteLunaClient"}
+	iDescribeHapg                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "DescribeHapg"}
+	iDescribeHsm                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "DescribeHsm"}
+	iDescribeLunaClient             = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "DescribeLunaClient"}
+	iGetConfig                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "GetConfig"}
+	iListAvailableZones             = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "ListAvailableZones"}
+	iListHapgs                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "ListHapgs"}
+	iListHsms                       = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "ListHsms"}
+	iListLunaClients                = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "ListLunaClients"}
+	iListTagsForResource            = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "ListTagsForResource"}
+	iModifyHapg                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "ModifyHapg"}
+	iModifyHsm                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "ModifyHsm"}
+	iModifyLunaClient               = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "ModifyLunaClient"}
+	iRemoveTagsFromResource         = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "RemoveTagsFromResource"}
+	i_CloudHsmFrontendService       = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "CloudHsmFrontendService"}
+	i_AZ                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "AZ"}
+	i_AZList                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "AZList"}
+	i_Boolean                       = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "Boolean"}
+	i_Certificate                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "Certificate"}
+	i_CertificateFingerprint        = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "CertificateFingerprint"}
+	i_ClientArn                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "ClientArn"}
+	i_ClientLabel                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "ClientLabel"}
+	i_ClientList                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "ClientList"}
+	i_ClientToken                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "ClientToken"}
+	iClientVersion                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "ClientVersion"}
+	iCloudHsmInternalException      = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "CloudHsmInternalException"}
+	iCloudHsmObjectState            = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "CloudHsmObjectState"}
+	iCloudHsmServiceException       = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "CloudHsmServiceException"}
+	i_EniId                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "EniId"}
+	i_ExternalId                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "ExternalId"}
+	i_HapgArn                       = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "HapgArn"}
+	i_HapgList                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "HapgList"}
+	i_HsmArn                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "HsmArn"}
+	i_HsmList                       = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "HsmList"}
+	i_HsmSerialNumber               = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "HsmSerialNumber"}
+	iHsmStatus                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "HsmStatus"}
+	i_IamRoleArn                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "IamRoleArn"}
+	iInvalidRequestException        = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "InvalidRequestException"}
+	i_IpAddress                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "IpAddress"}
+	i_Label                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "Label"}
+	i_PaginationToken               = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "PaginationToken"}
+	i_PartitionArn                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "PartitionArn"}
+	i_PartitionList                 = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "PartitionList"}
+	i_PartitionSerial               = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "PartitionSerial"}
+	i_PartitionSerialList           = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "PartitionSerialList"}
+	i_SshKey                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "SshKey"}
+	i_String                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "String"}
+	i_SubnetId                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "SubnetId"}
+	iSubscriptionType               = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "SubscriptionType"}
+	iTag                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "Tag"}
+	i_TagKey                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "TagKey"}
+	i_TagKeyList                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "TagKeyList"}
+	i_TagList                       = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "TagList"}
+	i_TagValue                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "TagValue"}
+	i_Timestamp                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "Timestamp"}
+	i_VpcId                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "VpcId"}
+	iAddTagsToResourceRequest       = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "AddTagsToResourceRequest"}
+	iAddTagsToResourceResponse      = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "AddTagsToResourceResponse"}
+	iCreateHapgRequest              = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "CreateHapgRequest"}
+	iCreateHapgResponse             = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "CreateHapgResponse"}
+	iCreateHsmRequest               = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "CreateHsmRequest"}
+	iCreateHsmResponse              = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "CreateHsmResponse"}
+	iCreateLunaClientRequest        = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "CreateLunaClientRequest"}
+	iCreateLunaClientResponse       = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "CreateLunaClientResponse"}
+	iDeleteHapgRequest              = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "DeleteHapgRequest"}
+	iDeleteHapgResponse             = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "DeleteHapgResponse"}
+	iDeleteHsmRequest               = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "DeleteHsmRequest"}
+	iDeleteHsmResponse              = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "DeleteHsmResponse"}
+	iDeleteLunaClientRequest        = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "DeleteLunaClientRequest"}
+	iDeleteLunaClientResponse       = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "DeleteLunaClientResponse"}
+	iDescribeHapgRequest            = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "DescribeHapgRequest"}
+	iDescribeHapgResponse           = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "DescribeHapgResponse"}
+	iDescribeHsmRequest             = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "DescribeHsmRequest"}
+	iDescribeHsmResponse            = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "DescribeHsmResponse"}
+	iDescribeLunaClientRequest      = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "DescribeLunaClientRequest"}
+	iDescribeLunaClientResponse     = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "DescribeLunaClientResponse"}
+	iGetConfigRequest               = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "GetConfigRequest"}
+	iGetConfigResponse              = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "GetConfigResponse"}
+	iListAvailableZonesRequest      = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "ListAvailableZonesRequest"}
+	iListAvailableZonesResponse     = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "ListAvailableZonesResponse"}
+	iListHapgsRequest               = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "ListHapgsRequest"}
+	iListHapgsResponse              = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "ListHapgsResponse"}
+	iListHsmsRequest                = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "ListHsmsRequest"}
+	iListHsmsResponse               = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "ListHsmsResponse"}
+	iListLunaClientsRequest         = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "ListLunaClientsRequest"}
+	iListLunaClientsResponse        = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "ListLunaClientsResponse"}
+	iListTagsForResourceRequest     = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse    = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "ListTagsForResourceResponse"}
+	iModifyHapgRequest              = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "ModifyHapgRequest"}
+	iModifyHapgResponse             = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "ModifyHapgResponse"}
+	iModifyHsmRequest               = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "ModifyHsmRequest"}
+	iModifyHsmResponse              = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "ModifyHsmResponse"}
+	iModifyLunaClientRequest        = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "ModifyLunaClientRequest"}
+	iModifyLunaClientResponse       = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "ModifyLunaClientResponse"}
+	iRemoveTagsFromResourceRequest  = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "RemoveTagsFromResourceRequest"}
+	iRemoveTagsFromResourceResponse = smithy.ShapeID{Namespace: "com.amazonaws.cloudhsm", Name: "RemoveTagsFromResourceResponse"}
+	pUnit                           = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}}
+var t1 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "CreateHsmRequest"}}, DirectMask: 0x8}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "SubnetId"}}, DirectMask: 0x8}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "SshKey"}}, DirectMask: 0x8}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "EniIp"}}, DirectMask: 0x8}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "IamRoleArn"}}, DirectMask: 0x8}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "ExternalId"}}, DirectMask: 0x8}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "SubscriptionType"}}, DirectMask: 0x8}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "ClientToken"}}, DirectMask: 0x8}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "SyslogIp"}}, DirectMask: 0x8}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "DeleteHsmRequest"}}, DirectMask: 0x8}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "HsmArn"}}, DirectMask: 0x8}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "ModifyHsmRequest"}}, DirectMask: 0x8}
+
+var m_AZList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AZList_member}}
+var m_ClientList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ClientList_member}}
+var mClientVersion = smithy.SchemaMembers{List: []*smithy.Schema{&sClientVersion_FIVE_ONE, &sClientVersion_FIVE_THREE}}
+var mCloudHsmInternalException = smithy.SchemaMembers{List: []*smithy.Schema{&sCloudHsmInternalException_message, &sCloudHsmInternalException_retryable}}
+var mCloudHsmObjectState = smithy.SchemaMembers{List: []*smithy.Schema{&sCloudHsmObjectState_READY, &sCloudHsmObjectState_UPDATING, &sCloudHsmObjectState_DEGRADED}}
+var mCloudHsmServiceException = smithy.SchemaMembers{List: []*smithy.Schema{&sCloudHsmServiceException_message, &sCloudHsmServiceException_retryable}}
+var m_HapgList = smithy.SchemaMembers{List: []*smithy.Schema{&s_HapgList_member}}
+var m_HsmList = smithy.SchemaMembers{List: []*smithy.Schema{&s_HsmList_member}}
+var mHsmStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sHsmStatus_PENDING, &sHsmStatus_RUNNING, &sHsmStatus_UPDATING, &sHsmStatus_SUSPENDED, &sHsmStatus_TERMINATING, &sHsmStatus_TERMINATED, &sHsmStatus_DEGRADED}}
+var mInvalidRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidRequestException_message, &sInvalidRequestException_retryable}}
+var m_PartitionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PartitionList_member}}
+var m_PartitionSerialList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PartitionSerialList_member}}
+var mSubscriptionType = smithy.SchemaMembers{List: []*smithy.Schema{&sSubscriptionType_PRODUCTION}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var mAddTagsToResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAddTagsToResourceRequest_ResourceArn, &sAddTagsToResourceRequest_TagList}}
+var mAddTagsToResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAddTagsToResourceResponse_Status}}
+var mCreateHapgRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateHapgRequest_Label}}
+var mCreateHapgResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateHapgResponse_HapgArn}}
+var mCreateHsmRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateHsmRequest_SubnetId, &sCreateHsmRequest_SshKey, &sCreateHsmRequest_EniIp, &sCreateHsmRequest_IamRoleArn, &sCreateHsmRequest_ExternalId, &sCreateHsmRequest_SubscriptionType, &sCreateHsmRequest_ClientToken, &sCreateHsmRequest_SyslogIp}}
+var mCreateHsmResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateHsmResponse_HsmArn}}
+var mCreateLunaClientRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLunaClientRequest_Label, &sCreateLunaClientRequest_Certificate}}
+var mCreateLunaClientResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLunaClientResponse_ClientArn}}
+var mDeleteHapgRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteHapgRequest_HapgArn}}
+var mDeleteHapgResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteHapgResponse_Status}}
+var mDeleteHsmRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteHsmRequest_HsmArn}}
+var mDeleteHsmResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteHsmResponse_Status}}
+var mDeleteLunaClientRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteLunaClientRequest_ClientArn}}
+var mDeleteLunaClientResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteLunaClientResponse_Status}}
+var mDescribeHapgRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeHapgRequest_HapgArn}}
+var mDescribeHapgResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeHapgResponse_HapgArn, &sDescribeHapgResponse_HapgSerial, &sDescribeHapgResponse_HsmsLastActionFailed, &sDescribeHapgResponse_HsmsPendingDeletion, &sDescribeHapgResponse_HsmsPendingRegistration, &sDescribeHapgResponse_Label, &sDescribeHapgResponse_LastModifiedTimestamp, &sDescribeHapgResponse_PartitionSerialList, &sDescribeHapgResponse_State}, Seed: 2, Slots: []uint16{
+	0, 0, 4, 0, 0, 0, 2, 0, 0, 0, 0, 0, 7, 0, 3, 0, 0, 0, 0, 9, 0, 5, 0, 0,
+	0, 0, 6, 8, 0, 0, 0, 1,
+}}
+var mDescribeHsmRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeHsmRequest_HsmArn, &sDescribeHsmRequest_HsmSerialNumber}}
+var mDescribeHsmResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeHsmResponse_HsmArn, &sDescribeHsmResponse_Status, &sDescribeHsmResponse_StatusDetails, &sDescribeHsmResponse_AvailabilityZone, &sDescribeHsmResponse_EniId, &sDescribeHsmResponse_EniIp, &sDescribeHsmResponse_SubscriptionType, &sDescribeHsmResponse_SubscriptionStartDate, &sDescribeHsmResponse_SubscriptionEndDate, &sDescribeHsmResponse_VpcId, &sDescribeHsmResponse_SubnetId, &sDescribeHsmResponse_IamRoleArn, &sDescribeHsmResponse_SerialNumber, &sDescribeHsmResponse_VendorName, &sDescribeHsmResponse_HsmType, &sDescribeHsmResponse_SoftwareVersion, &sDescribeHsmResponse_SshPublicKey, &sDescribeHsmResponse_SshKeyLastUpdated, &sDescribeHsmResponse_ServerCertUri, &sDescribeHsmResponse_ServerCertLastUpdated, &sDescribeHsmResponse_Partitions}, Seed: 96, Slots: []uint16{
+	20, 6, 14, 11, 0, 0, 0, 4, 0, 0, 0, 19, 15, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	16, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 17, 0, 0, 0, 0, 21, 9, 5, 0,
+	0, 0, 0, 18, 0, 12, 2, 1, 3, 0, 0, 0, 0, 0, 13, 0,
+}}
+var mDescribeLunaClientRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLunaClientRequest_ClientArn, &sDescribeLunaClientRequest_CertificateFingerprint}}
+var mDescribeLunaClientResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLunaClientResponse_ClientArn, &sDescribeLunaClientResponse_Certificate, &sDescribeLunaClientResponse_CertificateFingerprint, &sDescribeLunaClientResponse_LastModifiedTimestamp, &sDescribeLunaClientResponse_Label}}
+var mGetConfigRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetConfigRequest_ClientArn, &sGetConfigRequest_ClientVersion, &sGetConfigRequest_HapgList}}
+var mGetConfigResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetConfigResponse_ConfigType, &sGetConfigResponse_ConfigFile, &sGetConfigResponse_ConfigCred}}
+var mListAvailableZonesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAvailableZonesResponse_AZList}}
+var mListHapgsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListHapgsRequest_NextToken}}
+var mListHapgsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListHapgsResponse_HapgList, &sListHapgsResponse_NextToken}}
+var mListHsmsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListHsmsRequest_NextToken}}
+var mListHsmsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListHsmsResponse_HsmList, &sListHsmsResponse_NextToken}}
+var mListLunaClientsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListLunaClientsRequest_NextToken}}
+var mListLunaClientsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListLunaClientsResponse_ClientList, &sListLunaClientsResponse_NextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_TagList}}
+var mModifyHapgRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sModifyHapgRequest_HapgArn, &sModifyHapgRequest_Label, &sModifyHapgRequest_PartitionSerialList}}
+var mModifyHapgResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sModifyHapgResponse_HapgArn}}
+var mModifyHsmRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sModifyHsmRequest_HsmArn, &sModifyHsmRequest_SubnetId, &sModifyHsmRequest_EniIp, &sModifyHsmRequest_IamRoleArn, &sModifyHsmRequest_ExternalId, &sModifyHsmRequest_SyslogIp}}
+var mModifyHsmResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sModifyHsmResponse_HsmArn}}
+var mModifyLunaClientRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sModifyLunaClientRequest_ClientArn, &sModifyLunaClientRequest_Certificate}}
+var mModifyLunaClientResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sModifyLunaClientResponse_ClientArn}}
+var mRemoveTagsFromResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRemoveTagsFromResourceRequest_ResourceArn, &sRemoveTagsFromResourceRequest_TagKeyList}}
+var mRemoveTagsFromResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sRemoveTagsFromResourceResponse_Status}}
+
+var sAddTagsToResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddTagsToResource, Type: smithy.ShapeTypeOperation})
+var sCreateHapg = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHapg, Type: smithy.ShapeTypeOperation})
+var sCreateHsm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHsm, Type: smithy.ShapeTypeOperation})
+var sCreateLunaClient = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLunaClient, Type: smithy.ShapeTypeOperation})
+var sDeleteHapg = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteHapg, Type: smithy.ShapeTypeOperation})
+var sDeleteHsm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteHsm, Type: smithy.ShapeTypeOperation})
+var sDeleteLunaClient = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLunaClient, Type: smithy.ShapeTypeOperation})
+var sDescribeHapg = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeHapg, Type: smithy.ShapeTypeOperation})
+var sDescribeHsm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeHsm, Type: smithy.ShapeTypeOperation})
+var sDescribeLunaClient = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLunaClient, Type: smithy.ShapeTypeOperation})
+var sGetConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfig, Type: smithy.ShapeTypeOperation})
+var sListAvailableZones = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAvailableZones, Type: smithy.ShapeTypeOperation})
+var sListHapgs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHapgs, Type: smithy.ShapeTypeOperation})
+var sListHsms = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHsms, Type: smithy.ShapeTypeOperation})
+var sListLunaClients = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLunaClients, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation})
+var sModifyHapg = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyHapg, Type: smithy.ShapeTypeOperation})
+var sModifyHsm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyHsm, Type: smithy.ShapeTypeOperation})
+var sModifyLunaClient = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyLunaClient, Type: smithy.ShapeTypeOperation})
+var sRemoveTagsFromResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveTagsFromResource, Type: smithy.ShapeTypeOperation})
+var s_CloudHsmFrontendService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CloudHsmFrontendService, Type: smithy.ShapeTypeService})
+var s_AZ = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AZ, Type: smithy.ShapeTypeString})
+var s_AZList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AZList, Members: &m_AZList, Type: smithy.ShapeTypeList})
+var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var s_Certificate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Certificate, Type: smithy.ShapeTypeString})
+var s_CertificateFingerprint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertificateFingerprint, Type: smithy.ShapeTypeString})
+var s_ClientArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientArn, Type: smithy.ShapeTypeString})
+var s_ClientLabel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientLabel, Type: smithy.ShapeTypeString})
+var s_ClientList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientList, Members: &m_ClientList, Type: smithy.ShapeTypeList})
+var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sClientVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClientVersion, Members: &mClientVersion, Type: smithy.ShapeTypeEnum})
+var sCloudHsmInternalException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudHsmInternalException, Members: &mCloudHsmInternalException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var sCloudHsmObjectState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudHsmObjectState, Members: &mCloudHsmObjectState, Type: smithy.ShapeTypeEnum})
+var sCloudHsmServiceException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudHsmServiceException, Members: &mCloudHsmServiceException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_EniId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EniId, Type: smithy.ShapeTypeString})
+var s_ExternalId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExternalId, Type: smithy.ShapeTypeString})
+var s_HapgArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HapgArn, Type: smithy.ShapeTypeString})
+var s_HapgList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HapgList, Members: &m_HapgList, Type: smithy.ShapeTypeList})
+var s_HsmArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HsmArn, Type: smithy.ShapeTypeString})
+var s_HsmList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HsmList, Members: &m_HsmList, Type: smithy.ShapeTypeList})
+var s_HsmSerialNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HsmSerialNumber, Type: smithy.ShapeTypeString})
+var sHsmStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHsmStatus, Members: &mHsmStatus, Type: smithy.ShapeTypeEnum})
+var s_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IamRoleArn, Type: smithy.ShapeTypeString})
+var sInvalidRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRequestException, Members: &mInvalidRequestException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_IpAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IpAddress, Type: smithy.ShapeTypeString})
+var s_Label = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Label, Type: smithy.ShapeTypeString})
+var s_PaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var s_PartitionArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PartitionArn, Type: smithy.ShapeTypeString})
+var s_PartitionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PartitionList, Members: &m_PartitionList, Type: smithy.ShapeTypeList})
+var s_PartitionSerial = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PartitionSerial, Type: smithy.ShapeTypeString})
+var s_PartitionSerialList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PartitionSerialList, Members: &m_PartitionSerialList, Type: smithy.ShapeTypeList})
+var s_SshKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SshKey, Type: smithy.ShapeTypeString})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString})
+var s_SubnetId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetId, Type: smithy.ShapeTypeString})
+var sSubscriptionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscriptionType, Members: &mSubscriptionType, Type: smithy.ShapeTypeEnum})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeString})
+var s_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcId, Type: smithy.ShapeTypeString})
+var sAddTagsToResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddTagsToResourceRequest, Members: &mAddTagsToResourceRequest, Type: smithy.ShapeTypeStructure})
+var sAddTagsToResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddTagsToResourceResponse, Members: &mAddTagsToResourceResponse, Type: smithy.ShapeTypeStructure})
+var sCreateHapgRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHapgRequest, Members: &mCreateHapgRequest, Type: smithy.ShapeTypeStructure})
+var sCreateHapgResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHapgResponse, Members: &mCreateHapgResponse, Type: smithy.ShapeTypeStructure})
+var sCreateHsmRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHsmRequest, Members: &mCreateHsmRequest, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var sCreateHsmResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHsmResponse, Members: &mCreateHsmResponse, Type: smithy.ShapeTypeStructure})
+var sCreateLunaClientRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLunaClientRequest, Members: &mCreateLunaClientRequest, Type: smithy.ShapeTypeStructure})
+var sCreateLunaClientResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLunaClientResponse, Members: &mCreateLunaClientResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteHapgRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteHapgRequest, Members: &mDeleteHapgRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteHapgResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteHapgResponse, Members: &mDeleteHapgResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteHsmRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteHsmRequest, Members: &mDeleteHsmRequest, Traits: &t11, Type: smithy.ShapeTypeStructure})
+var sDeleteHsmResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteHsmResponse, Members: &mDeleteHsmResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteLunaClientRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLunaClientRequest, Members: &mDeleteLunaClientRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteLunaClientResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLunaClientResponse, Members: &mDeleteLunaClientResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeHapgRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeHapgRequest, Members: &mDescribeHapgRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeHapgResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeHapgResponse, Members: &mDescribeHapgResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeHsmRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeHsmRequest, Members: &mDescribeHsmRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeHsmResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeHsmResponse, Members: &mDescribeHsmResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeLunaClientRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLunaClientRequest, Members: &mDescribeLunaClientRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeLunaClientResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLunaClientResponse, Members: &mDescribeLunaClientResponse, Type: smithy.ShapeTypeStructure})
+var sGetConfigRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfigRequest, Members: &mGetConfigRequest, Type: smithy.ShapeTypeStructure})
+var sGetConfigResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfigResponse, Members: &mGetConfigResponse, Type: smithy.ShapeTypeStructure})
+var sListAvailableZonesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAvailableZonesRequest, Type: smithy.ShapeTypeStructure})
+var sListAvailableZonesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAvailableZonesResponse, Members: &mListAvailableZonesResponse, Type: smithy.ShapeTypeStructure})
+var sListHapgsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHapgsRequest, Members: &mListHapgsRequest, Type: smithy.ShapeTypeStructure})
+var sListHapgsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHapgsResponse, Members: &mListHapgsResponse, Type: smithy.ShapeTypeStructure})
+var sListHsmsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHsmsRequest, Members: &mListHsmsRequest, Type: smithy.ShapeTypeStructure})
+var sListHsmsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHsmsResponse, Members: &mListHsmsResponse, Type: smithy.ShapeTypeStructure})
+var sListLunaClientsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLunaClientsRequest, Members: &mListLunaClientsRequest, Type: smithy.ShapeTypeStructure})
+var sListLunaClientsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLunaClientsResponse, Members: &mListLunaClientsResponse, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure})
+var sModifyHapgRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyHapgRequest, Members: &mModifyHapgRequest, Type: smithy.ShapeTypeStructure})
+var sModifyHapgResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyHapgResponse, Members: &mModifyHapgResponse, Type: smithy.ShapeTypeStructure})
+var sModifyHsmRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyHsmRequest, Members: &mModifyHsmRequest, Traits: &t13, Type: smithy.ShapeTypeStructure})
+var sModifyHsmResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyHsmResponse, Members: &mModifyHsmResponse, Type: smithy.ShapeTypeStructure})
+var sModifyLunaClientRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyLunaClientRequest, Members: &mModifyLunaClientRequest, Type: smithy.ShapeTypeStructure})
+var sModifyLunaClientResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModifyLunaClientResponse, Members: &mModifyLunaClientResponse, Type: smithy.ShapeTypeStructure})
+var sRemoveTagsFromResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveTagsFromResourceRequest, Members: &mRemoveTagsFromResourceRequest, Type: smithy.ShapeTypeStructure})
+var sRemoveTagsFromResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveTagsFromResourceResponse, Members: &mRemoveTagsFromResourceResponse, Type: smithy.ShapeTypeStructure})
+
+var s_AZList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AZ, Type: smithy.ShapeTypeString})
+var s_ClientList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ClientArn, Type: smithy.ShapeTypeString})
+var sClientVersion_FIVE_ONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIVE_ONE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sClientVersion_FIVE_THREE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIVE_THREE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCloudHsmInternalException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCloudHsmInternalException_retryable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryable", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sCloudHsmObjectState_READY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "READY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCloudHsmObjectState_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCloudHsmObjectState_DEGRADED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEGRADED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCloudHsmServiceException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCloudHsmServiceException_retryable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryable", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var s_HapgList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_HapgArn, Type: smithy.ShapeTypeString})
+var s_HsmList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_HsmArn, Type: smithy.ShapeTypeString})
+var sHsmStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHsmStatus_RUNNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUNNING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHsmStatus_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHsmStatus_SUSPENDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUSPENDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHsmStatus_TERMINATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TERMINATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHsmStatus_TERMINATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TERMINATED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHsmStatus_DEGRADED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEGRADED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInvalidRequestException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sInvalidRequestException_retryable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryable", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var s_PartitionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_PartitionArn, Type: smithy.ShapeTypeString})
+var s_PartitionSerialList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_PartitionSerial, Type: smithy.ShapeTypeString})
+var sSubscriptionType_PRODUCTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRODUCTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var sAddTagsToResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sAddTagsToResourceRequest_TagList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagList", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sAddTagsToResourceResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCreateHapgRequest_Label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Label", ID: &i_Label, Type: smithy.ShapeTypeString})
+var sCreateHapgResponse_HapgArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HapgArn", ID: &i_HapgArn, Type: smithy.ShapeTypeString})
+var sCreateHsmRequest_SubnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetId", ID: &i_SubnetId, Traits: &t3, Type: smithy.ShapeTypeString})
+var sCreateHsmRequest_SshKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SshKey", ID: &i_SshKey, Traits: &t4, Type: smithy.ShapeTypeString})
+var sCreateHsmRequest_EniIp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EniIp", ID: &i_IpAddress, Traits: &t5, Type: smithy.ShapeTypeString})
+var sCreateHsmRequest_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IamRoleArn", ID: &i_IamRoleArn, Traits: &t6, Type: smithy.ShapeTypeString})
+var sCreateHsmRequest_ExternalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExternalId", ID: &i_ExternalId, Traits: &t7, Type: smithy.ShapeTypeString})
+var sCreateHsmRequest_SubscriptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionType", ID: &iSubscriptionType, Members: &mSubscriptionType, Traits: &t8, Type: smithy.ShapeTypeEnum})
+var sCreateHsmRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Traits: &t9, Type: smithy.ShapeTypeString})
+var sCreateHsmRequest_SyslogIp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SyslogIp", ID: &i_IpAddress, Traits: &t10, Type: smithy.ShapeTypeString})
+var sCreateHsmResponse_HsmArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HsmArn", ID: &i_HsmArn, Type: smithy.ShapeTypeString})
+var sCreateLunaClientRequest_Label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Label", ID: &i_ClientLabel, Type: smithy.ShapeTypeString})
+var sCreateLunaClientRequest_Certificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Certificate", ID: &i_Certificate, Type: smithy.ShapeTypeString})
+var sCreateLunaClientResponse_ClientArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientArn", ID: &i_ClientArn, Type: smithy.ShapeTypeString})
+var sDeleteHapgRequest_HapgArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HapgArn", ID: &i_HapgArn, Type: smithy.ShapeTypeString})
+var sDeleteHapgResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDeleteHsmRequest_HsmArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HsmArn", ID: &i_HsmArn, Traits: &t12, Type: smithy.ShapeTypeString})
+var sDeleteHsmResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDeleteLunaClientRequest_ClientArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientArn", ID: &i_ClientArn, Type: smithy.ShapeTypeString})
+var sDeleteLunaClientResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeHapgRequest_HapgArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HapgArn", ID: &i_HapgArn, Type: smithy.ShapeTypeString})
+var sDescribeHapgResponse_HapgArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HapgArn", ID: &i_HapgArn, Type: smithy.ShapeTypeString})
+var sDescribeHapgResponse_HapgSerial = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HapgSerial", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeHapgResponse_HsmsLastActionFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HsmsLastActionFailed", ID: &i_HsmList, Members: &m_HsmList, Type: smithy.ShapeTypeList})
+var sDescribeHapgResponse_HsmsPendingDeletion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HsmsPendingDeletion", ID: &i_HsmList, Members: &m_HsmList, Type: smithy.ShapeTypeList})
+var sDescribeHapgResponse_HsmsPendingRegistration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HsmsPendingRegistration", ID: &i_HsmList, Members: &m_HsmList, Type: smithy.ShapeTypeList})
+var sDescribeHapgResponse_Label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Label", ID: &i_Label, Type: smithy.ShapeTypeString})
+var sDescribeHapgResponse_LastModifiedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeString})
+var sDescribeHapgResponse_PartitionSerialList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartitionSerialList", ID: &i_PartitionSerialList, Members: &m_PartitionSerialList, Type: smithy.ShapeTypeList})
+var sDescribeHapgResponse_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iCloudHsmObjectState, Members: &mCloudHsmObjectState, Type: smithy.ShapeTypeEnum})
+var sDescribeHsmRequest_HsmArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HsmArn", ID: &i_HsmArn, Type: smithy.ShapeTypeString})
+var sDescribeHsmRequest_HsmSerialNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HsmSerialNumber", ID: &i_HsmSerialNumber, Type: smithy.ShapeTypeString})
+var sDescribeHsmResponse_HsmArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HsmArn", ID: &i_HsmArn, Type: smithy.ShapeTypeString})
+var sDescribeHsmResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iHsmStatus, Members: &mHsmStatus, Type: smithy.ShapeTypeEnum})
+var sDescribeHsmResponse_StatusDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusDetails", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeHsmResponse_AvailabilityZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityZone", ID: &i_AZ, Type: smithy.ShapeTypeString})
+var sDescribeHsmResponse_EniId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EniId", ID: &i_EniId, Type: smithy.ShapeTypeString})
+var sDescribeHsmResponse_EniIp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EniIp", ID: &i_IpAddress, Type: smithy.ShapeTypeString})
+var sDescribeHsmResponse_SubscriptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionType", ID: &iSubscriptionType, Members: &mSubscriptionType, Type: smithy.ShapeTypeEnum})
+var sDescribeHsmResponse_SubscriptionStartDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionStartDate", ID: &i_Timestamp, Type: smithy.ShapeTypeString})
+var sDescribeHsmResponse_SubscriptionEndDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionEndDate", ID: &i_Timestamp, Type: smithy.ShapeTypeString})
+var sDescribeHsmResponse_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString})
+var sDescribeHsmResponse_SubnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetId", ID: &i_SubnetId, Type: smithy.ShapeTypeString})
+var sDescribeHsmResponse_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IamRoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString})
+var sDescribeHsmResponse_SerialNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SerialNumber", ID: &i_HsmSerialNumber, Type: smithy.ShapeTypeString})
+var sDescribeHsmResponse_VendorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VendorName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeHsmResponse_HsmType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HsmType", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeHsmResponse_SoftwareVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SoftwareVersion", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeHsmResponse_SshPublicKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SshPublicKey", ID: &i_SshKey, Type: smithy.ShapeTypeString})
+var sDescribeHsmResponse_SshKeyLastUpdated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SshKeyLastUpdated", ID: &i_Timestamp, Type: smithy.ShapeTypeString})
+var sDescribeHsmResponse_ServerCertUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerCertUri", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeHsmResponse_ServerCertLastUpdated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerCertLastUpdated", ID: &i_Timestamp, Type: smithy.ShapeTypeString})
+var sDescribeHsmResponse_Partitions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Partitions", ID: &i_PartitionList, Members: &m_PartitionList, Type: smithy.ShapeTypeList})
+var sDescribeLunaClientRequest_ClientArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientArn", ID: &i_ClientArn, Type: smithy.ShapeTypeString})
+var sDescribeLunaClientRequest_CertificateFingerprint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateFingerprint", ID: &i_CertificateFingerprint, Type: smithy.ShapeTypeString})
+var sDescribeLunaClientResponse_ClientArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientArn", ID: &i_ClientArn, Type: smithy.ShapeTypeString})
+var sDescribeLunaClientResponse_Certificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Certificate", ID: &i_Certificate, Type: smithy.ShapeTypeString})
+var sDescribeLunaClientResponse_CertificateFingerprint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateFingerprint", ID: &i_CertificateFingerprint, Type: smithy.ShapeTypeString})
+var sDescribeLunaClientResponse_LastModifiedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeString})
+var sDescribeLunaClientResponse_Label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Label", ID: &i_Label, Type: smithy.ShapeTypeString})
+var sGetConfigRequest_ClientArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientArn", ID: &i_ClientArn, Type: smithy.ShapeTypeString})
+var sGetConfigRequest_ClientVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientVersion", ID: &iClientVersion, Members: &mClientVersion, Type: smithy.ShapeTypeEnum})
+var sGetConfigRequest_HapgList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HapgList", ID: &i_HapgList, Members: &m_HapgList, Type: smithy.ShapeTypeList})
+var sGetConfigResponse_ConfigType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigType", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetConfigResponse_ConfigFile = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigFile", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetConfigResponse_ConfigCred = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigCred", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListAvailableZonesResponse_AZList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AZList", ID: &i_AZList, Members: &m_AZList, Type: smithy.ShapeTypeList})
+var sListHapgsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListHapgsResponse_HapgList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HapgList", ID: &i_HapgList, Members: &m_HapgList, Type: smithy.ShapeTypeList})
+var sListHapgsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListHsmsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListHsmsResponse_HsmList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HsmList", ID: &i_HsmList, Members: &m_HsmList, Type: smithy.ShapeTypeList})
+var sListHsmsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListLunaClientsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListLunaClientsResponse_ClientList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientList", ID: &i_ClientList, Members: &m_ClientList, Type: smithy.ShapeTypeList})
+var sListLunaClientsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_TagList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagList", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sModifyHapgRequest_HapgArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HapgArn", ID: &i_HapgArn, Type: smithy.ShapeTypeString})
+var sModifyHapgRequest_Label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Label", ID: &i_Label, Type: smithy.ShapeTypeString})
+var sModifyHapgRequest_PartitionSerialList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartitionSerialList", ID: &i_PartitionSerialList, Members: &m_PartitionSerialList, Type: smithy.ShapeTypeList})
+var sModifyHapgResponse_HapgArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HapgArn", ID: &i_HapgArn, Type: smithy.ShapeTypeString})
+var sModifyHsmRequest_HsmArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HsmArn", ID: &i_HsmArn, Traits: &t12, Type: smithy.ShapeTypeString})
+var sModifyHsmRequest_SubnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetId", ID: &i_SubnetId, Traits: &t3, Type: smithy.ShapeTypeString})
+var sModifyHsmRequest_EniIp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EniIp", ID: &i_IpAddress, Traits: &t5, Type: smithy.ShapeTypeString})
+var sModifyHsmRequest_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IamRoleArn", ID: &i_IamRoleArn, Traits: &t6, Type: smithy.ShapeTypeString})
+var sModifyHsmRequest_ExternalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExternalId", ID: &i_ExternalId, Traits: &t7, Type: smithy.ShapeTypeString})
+var sModifyHsmRequest_SyslogIp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SyslogIp", ID: &i_IpAddress, Traits: &t10, Type: smithy.ShapeTypeString})
+var sModifyHsmResponse_HsmArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HsmArn", ID: &i_HsmArn, Type: smithy.ShapeTypeString})
+var sModifyLunaClientRequest_ClientArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientArn", ID: &i_ClientArn, Type: smithy.ShapeTypeString})
+var sModifyLunaClientRequest_Certificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Certificate", ID: &i_Certificate, Type: smithy.ShapeTypeString})
+var sModifyLunaClientResponse_ClientArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientArn", ID: &i_ClientArn, Type: smithy.ShapeTypeString})
+var sRemoveTagsFromResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sRemoveTagsFromResourceRequest_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeyList", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var sRemoveTagsFromResourceResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_String, Type: smithy.ShapeTypeString})
+
+var AddTagsToResource = &sAddTagsToResource
+
+var CreateHapg = &sCreateHapg
+
+var CreateHsm = &sCreateHsm
+
+var CreateLunaClient = &sCreateLunaClient
+
+var DeleteHapg = &sDeleteHapg
+
+var DeleteHsm = &sDeleteHsm
+
+var DeleteLunaClient = &sDeleteLunaClient
+
+var DescribeHapg = &sDescribeHapg
+
+var DescribeHsm = &sDescribeHsm
+
+var DescribeLunaClient = &sDescribeLunaClient
+
+var GetConfig = &sGetConfig
+
+var ListAvailableZones = &sListAvailableZones
+
+var ListHapgs = &sListHapgs
+
+var ListHsms = &sListHsms
+
+var ListLunaClients = &sListLunaClients
+
+var ListTagsForResource = &sListTagsForResource
+
+var ModifyHapg = &sModifyHapg
+
+var ModifyHsm = &sModifyHsm
+
+var ModifyLunaClient = &sModifyLunaClient
+
+var RemoveTagsFromResource = &sRemoveTagsFromResource
+
+var _CloudHsmFrontendService = &s_CloudHsmFrontendService
+
+var _AZ = &s_AZ
+
+var _AZList = &s_AZList
+var _AZList_member = &s_AZList_member
+
+var _Boolean = &s_Boolean
+
+var _Certificate = &s_Certificate
+
+var _CertificateFingerprint = &s_CertificateFingerprint
+
+var _ClientArn = &s_ClientArn
+
+var _ClientLabel = &s_ClientLabel
+
+var _ClientList = &s_ClientList
+var _ClientList_member = &s_ClientList_member
+
+var _ClientToken = &s_ClientToken
+
+var ClientVersion = &sClientVersion
+var ClientVersion_FIVE_ONE = &sClientVersion_FIVE_ONE
+var ClientVersion_FIVE_THREE = &sClientVersion_FIVE_THREE
+
+var CloudHsmInternalException = &sCloudHsmInternalException
+var CloudHsmInternalException_message = &sCloudHsmInternalException_message
+var CloudHsmInternalException_retryable = &sCloudHsmInternalException_retryable
+
+var CloudHsmObjectState = &sCloudHsmObjectState
+var CloudHsmObjectState_READY = &sCloudHsmObjectState_READY
+var CloudHsmObjectState_UPDATING = &sCloudHsmObjectState_UPDATING
+var CloudHsmObjectState_DEGRADED = &sCloudHsmObjectState_DEGRADED
+
+var CloudHsmServiceException = &sCloudHsmServiceException
+var CloudHsmServiceException_message = &sCloudHsmServiceException_message
+var CloudHsmServiceException_retryable = &sCloudHsmServiceException_retryable
+
+var _EniId = &s_EniId
+
+var _ExternalId = &s_ExternalId
+
+var _HapgArn = &s_HapgArn
+
+var _HapgList = &s_HapgList
+var _HapgList_member = &s_HapgList_member
+
+var _HsmArn = &s_HsmArn
+
+var _HsmList = &s_HsmList
+var _HsmList_member = &s_HsmList_member
+
+var _HsmSerialNumber = &s_HsmSerialNumber
+
+var HsmStatus = &sHsmStatus
+var HsmStatus_PENDING = &sHsmStatus_PENDING
+var HsmStatus_RUNNING = &sHsmStatus_RUNNING
+var HsmStatus_UPDATING = &sHsmStatus_UPDATING
+var HsmStatus_SUSPENDED = &sHsmStatus_SUSPENDED
+var HsmStatus_TERMINATING = &sHsmStatus_TERMINATING
+var HsmStatus_TERMINATED = &sHsmStatus_TERMINATED
+var HsmStatus_DEGRADED = &sHsmStatus_DEGRADED
+
+var _IamRoleArn = &s_IamRoleArn
+
+var InvalidRequestException = &sInvalidRequestException
+var InvalidRequestException_message = &sInvalidRequestException_message
+var InvalidRequestException_retryable = &sInvalidRequestException_retryable
+
+var _IpAddress = &s_IpAddress
+
+var _Label = &s_Label
+
+var _PaginationToken = &s_PaginationToken
+
+var _PartitionArn = &s_PartitionArn
+
+var _PartitionList = &s_PartitionList
+var _PartitionList_member = &s_PartitionList_member
+
+var _PartitionSerial = &s_PartitionSerial
+
+var _PartitionSerialList = &s_PartitionSerialList
+var _PartitionSerialList_member = &s_PartitionSerialList_member
+
+var _SshKey = &s_SshKey
+
+var _String = &s_String
+
+var _SubnetId = &s_SubnetId
+
+var SubscriptionType = &sSubscriptionType
+var SubscriptionType_PRODUCTION = &sSubscriptionType_PRODUCTION
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _TagValue = &s_TagValue
+
+var _Timestamp = &s_Timestamp
+
+var _VpcId = &s_VpcId
+
+var AddTagsToResourceRequest = &sAddTagsToResourceRequest
+var AddTagsToResourceRequest_ResourceArn = &sAddTagsToResourceRequest_ResourceArn
+var AddTagsToResourceRequest_TagList = &sAddTagsToResourceRequest_TagList
+
+var AddTagsToResourceResponse = &sAddTagsToResourceResponse
+var AddTagsToResourceResponse_Status = &sAddTagsToResourceResponse_Status
+
+var CreateHapgRequest = &sCreateHapgRequest
+var CreateHapgRequest_Label = &sCreateHapgRequest_Label
+
+var CreateHapgResponse = &sCreateHapgResponse
+var CreateHapgResponse_HapgArn = &sCreateHapgResponse_HapgArn
+
+var CreateHsmRequest = &sCreateHsmRequest
+var CreateHsmRequest_SubnetId = &sCreateHsmRequest_SubnetId
+var CreateHsmRequest_SshKey = &sCreateHsmRequest_SshKey
+var CreateHsmRequest_EniIp = &sCreateHsmRequest_EniIp
+var CreateHsmRequest_IamRoleArn = &sCreateHsmRequest_IamRoleArn
+var CreateHsmRequest_ExternalId = &sCreateHsmRequest_ExternalId
+var CreateHsmRequest_SubscriptionType = &sCreateHsmRequest_SubscriptionType
+var CreateHsmRequest_ClientToken = &sCreateHsmRequest_ClientToken
+var CreateHsmRequest_SyslogIp = &sCreateHsmRequest_SyslogIp
+
+var CreateHsmResponse = &sCreateHsmResponse
+var CreateHsmResponse_HsmArn = &sCreateHsmResponse_HsmArn
+
+var CreateLunaClientRequest = &sCreateLunaClientRequest
+var CreateLunaClientRequest_Label = &sCreateLunaClientRequest_Label
+var CreateLunaClientRequest_Certificate = &sCreateLunaClientRequest_Certificate
+
+var CreateLunaClientResponse = &sCreateLunaClientResponse
+var CreateLunaClientResponse_ClientArn = &sCreateLunaClientResponse_ClientArn
+
+var DeleteHapgRequest = &sDeleteHapgRequest
+var DeleteHapgRequest_HapgArn = &sDeleteHapgRequest_HapgArn
+
+var DeleteHapgResponse = &sDeleteHapgResponse
+var DeleteHapgResponse_Status = &sDeleteHapgResponse_Status
+
+var DeleteHsmRequest = &sDeleteHsmRequest
+var DeleteHsmRequest_HsmArn = &sDeleteHsmRequest_HsmArn
+
+var DeleteHsmResponse = &sDeleteHsmResponse
+var DeleteHsmResponse_Status = &sDeleteHsmResponse_Status
+
+var DeleteLunaClientRequest = &sDeleteLunaClientRequest
+var DeleteLunaClientRequest_ClientArn = &sDeleteLunaClientRequest_ClientArn
+
+var DeleteLunaClientResponse = &sDeleteLunaClientResponse
+var DeleteLunaClientResponse_Status = &sDeleteLunaClientResponse_Status
+
+var DescribeHapgRequest = &sDescribeHapgRequest
+var DescribeHapgRequest_HapgArn = &sDescribeHapgRequest_HapgArn
+
+var DescribeHapgResponse = &sDescribeHapgResponse
+var DescribeHapgResponse_HapgArn = &sDescribeHapgResponse_HapgArn
+var DescribeHapgResponse_HapgSerial = &sDescribeHapgResponse_HapgSerial
+var DescribeHapgResponse_HsmsLastActionFailed = &sDescribeHapgResponse_HsmsLastActionFailed
+var DescribeHapgResponse_HsmsPendingDeletion = &sDescribeHapgResponse_HsmsPendingDeletion
+var DescribeHapgResponse_HsmsPendingRegistration = &sDescribeHapgResponse_HsmsPendingRegistration
+var DescribeHapgResponse_Label = &sDescribeHapgResponse_Label
+var DescribeHapgResponse_LastModifiedTimestamp = &sDescribeHapgResponse_LastModifiedTimestamp
+var DescribeHapgResponse_PartitionSerialList = &sDescribeHapgResponse_PartitionSerialList
+var DescribeHapgResponse_State = &sDescribeHapgResponse_State
+
+var DescribeHsmRequest = &sDescribeHsmRequest
+var DescribeHsmRequest_HsmArn = &sDescribeHsmRequest_HsmArn
+var DescribeHsmRequest_HsmSerialNumber = &sDescribeHsmRequest_HsmSerialNumber
+
+var DescribeHsmResponse = &sDescribeHsmResponse
+var DescribeHsmResponse_HsmArn = &sDescribeHsmResponse_HsmArn
+var DescribeHsmResponse_Status = &sDescribeHsmResponse_Status
+var DescribeHsmResponse_StatusDetails = &sDescribeHsmResponse_StatusDetails
+var DescribeHsmResponse_AvailabilityZone = &sDescribeHsmResponse_AvailabilityZone
+var DescribeHsmResponse_EniId = &sDescribeHsmResponse_EniId
+var DescribeHsmResponse_EniIp = &sDescribeHsmResponse_EniIp
+var DescribeHsmResponse_SubscriptionType = &sDescribeHsmResponse_SubscriptionType
+var DescribeHsmResponse_SubscriptionStartDate = &sDescribeHsmResponse_SubscriptionStartDate
+var DescribeHsmResponse_SubscriptionEndDate = &sDescribeHsmResponse_SubscriptionEndDate
+var DescribeHsmResponse_VpcId = &sDescribeHsmResponse_VpcId
+var DescribeHsmResponse_SubnetId = &sDescribeHsmResponse_SubnetId
+var DescribeHsmResponse_IamRoleArn = &sDescribeHsmResponse_IamRoleArn
+var DescribeHsmResponse_SerialNumber = &sDescribeHsmResponse_SerialNumber
+var DescribeHsmResponse_VendorName = &sDescribeHsmResponse_VendorName
+var DescribeHsmResponse_HsmType = &sDescribeHsmResponse_HsmType
+var DescribeHsmResponse_SoftwareVersion = &sDescribeHsmResponse_SoftwareVersion
+var DescribeHsmResponse_SshPublicKey = &sDescribeHsmResponse_SshPublicKey
+var DescribeHsmResponse_SshKeyLastUpdated = &sDescribeHsmResponse_SshKeyLastUpdated
+var DescribeHsmResponse_ServerCertUri = &sDescribeHsmResponse_ServerCertUri
+var DescribeHsmResponse_ServerCertLastUpdated = &sDescribeHsmResponse_ServerCertLastUpdated
+var DescribeHsmResponse_Partitions = &sDescribeHsmResponse_Partitions
+
+var DescribeLunaClientRequest = &sDescribeLunaClientRequest
+var DescribeLunaClientRequest_ClientArn = &sDescribeLunaClientRequest_ClientArn
+var DescribeLunaClientRequest_CertificateFingerprint = &sDescribeLunaClientRequest_CertificateFingerprint
+
+var DescribeLunaClientResponse = &sDescribeLunaClientResponse
+var DescribeLunaClientResponse_ClientArn = &sDescribeLunaClientResponse_ClientArn
+var DescribeLunaClientResponse_Certificate = &sDescribeLunaClientResponse_Certificate
+var DescribeLunaClientResponse_CertificateFingerprint = &sDescribeLunaClientResponse_CertificateFingerprint
+var DescribeLunaClientResponse_LastModifiedTimestamp = &sDescribeLunaClientResponse_LastModifiedTimestamp
+var DescribeLunaClientResponse_Label = &sDescribeLunaClientResponse_Label
+
+var GetConfigRequest = &sGetConfigRequest
+var GetConfigRequest_ClientArn = &sGetConfigRequest_ClientArn
+var GetConfigRequest_ClientVersion = &sGetConfigRequest_ClientVersion
+var GetConfigRequest_HapgList = &sGetConfigRequest_HapgList
+
+var GetConfigResponse = &sGetConfigResponse
+var GetConfigResponse_ConfigType = &sGetConfigResponse_ConfigType
+var GetConfigResponse_ConfigFile = &sGetConfigResponse_ConfigFile
+var GetConfigResponse_ConfigCred = &sGetConfigResponse_ConfigCred
+
+var ListAvailableZonesRequest = &sListAvailableZonesRequest
+
+var ListAvailableZonesResponse = &sListAvailableZonesResponse
+var ListAvailableZonesResponse_AZList = &sListAvailableZonesResponse_AZList
+
+var ListHapgsRequest = &sListHapgsRequest
+var ListHapgsRequest_NextToken = &sListHapgsRequest_NextToken
+
+var ListHapgsResponse = &sListHapgsResponse
+var ListHapgsResponse_HapgList = &sListHapgsResponse_HapgList
+var ListHapgsResponse_NextToken = &sListHapgsResponse_NextToken
+
+var ListHsmsRequest = &sListHsmsRequest
+var ListHsmsRequest_NextToken = &sListHsmsRequest_NextToken
+
+var ListHsmsResponse = &sListHsmsResponse
+var ListHsmsResponse_HsmList = &sListHsmsResponse_HsmList
+var ListHsmsResponse_NextToken = &sListHsmsResponse_NextToken
+
+var ListLunaClientsRequest = &sListLunaClientsRequest
+var ListLunaClientsRequest_NextToken = &sListLunaClientsRequest_NextToken
+
+var ListLunaClientsResponse = &sListLunaClientsResponse
+var ListLunaClientsResponse_ClientList = &sListLunaClientsResponse_ClientList
+var ListLunaClientsResponse_NextToken = &sListLunaClientsResponse_NextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceArn = &sListTagsForResourceRequest_ResourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_TagList = &sListTagsForResourceResponse_TagList
+
+var ModifyHapgRequest = &sModifyHapgRequest
+var ModifyHapgRequest_HapgArn = &sModifyHapgRequest_HapgArn
+var ModifyHapgRequest_Label = &sModifyHapgRequest_Label
+var ModifyHapgRequest_PartitionSerialList = &sModifyHapgRequest_PartitionSerialList
+
+var ModifyHapgResponse = &sModifyHapgResponse
+var ModifyHapgResponse_HapgArn = &sModifyHapgResponse_HapgArn
+
+var ModifyHsmRequest = &sModifyHsmRequest
+var ModifyHsmRequest_HsmArn = &sModifyHsmRequest_HsmArn
+var ModifyHsmRequest_SubnetId = &sModifyHsmRequest_SubnetId
+var ModifyHsmRequest_EniIp = &sModifyHsmRequest_EniIp
+var ModifyHsmRequest_IamRoleArn = &sModifyHsmRequest_IamRoleArn
+var ModifyHsmRequest_ExternalId = &sModifyHsmRequest_ExternalId
+var ModifyHsmRequest_SyslogIp = &sModifyHsmRequest_SyslogIp
+
+var ModifyHsmResponse = &sModifyHsmResponse
+var ModifyHsmResponse_HsmArn = &sModifyHsmResponse_HsmArn
+
+var ModifyLunaClientRequest = &sModifyLunaClientRequest
+var ModifyLunaClientRequest_ClientArn = &sModifyLunaClientRequest_ClientArn
+var ModifyLunaClientRequest_Certificate = &sModifyLunaClientRequest_Certificate
+
+var ModifyLunaClientResponse = &sModifyLunaClientResponse
+var ModifyLunaClientResponse_ClientArn = &sModifyLunaClientResponse_ClientArn
+
+var RemoveTagsFromResourceRequest = &sRemoveTagsFromResourceRequest
+var RemoveTagsFromResourceRequest_ResourceArn = &sRemoveTagsFromResourceRequest_ResourceArn
+var RemoveTagsFromResourceRequest_TagKeyList = &sRemoveTagsFromResourceRequest_TagKeyList
+
+var RemoveTagsFromResourceResponse = &sRemoveTagsFromResourceResponse
+var RemoveTagsFromResourceResponse_Status = &sRemoveTagsFromResourceResponse_Status
+
+var CloudHsmFrontendService = &smithy.ServiceSchema{Schema: &s_CloudHsmFrontendService, Version: "2014-05-30"}

@@ -4,4021 +4,2948 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var BatchDeleteRecipeVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "BatchDeleteRecipeVersion",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	iBatchDeleteRecipeVersion           = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "BatchDeleteRecipeVersion"}
+	iCreateDataset                      = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "CreateDataset"}
+	iCreateProfileJob                   = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "CreateProfileJob"}
+	iCreateProject                      = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "CreateProject"}
+	iCreateRecipe                       = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "CreateRecipe"}
+	iCreateRecipeJob                    = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "CreateRecipeJob"}
+	iCreateRuleset                      = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "CreateRuleset"}
+	iCreateSchedule                     = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "CreateSchedule"}
+	iDeleteDataset                      = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DeleteDataset"}
+	iDeleteJob                          = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DeleteJob"}
+	iDeleteProject                      = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DeleteProject"}
+	iDeleteRecipeVersion                = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DeleteRecipeVersion"}
+	iDeleteRuleset                      = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DeleteRuleset"}
+	iDeleteSchedule                     = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DeleteSchedule"}
+	iDescribeDataset                    = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DescribeDataset"}
+	iDescribeJob                        = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DescribeJob"}
+	iDescribeJobRun                     = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DescribeJobRun"}
+	iDescribeProject                    = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DescribeProject"}
+	iDescribeRecipe                     = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DescribeRecipe"}
+	iDescribeRuleset                    = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DescribeRuleset"}
+	iDescribeSchedule                   = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DescribeSchedule"}
+	iListDatasets                       = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ListDatasets"}
+	iListJobRuns                        = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ListJobRuns"}
+	iListJobs                           = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ListJobs"}
+	iListProjects                       = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ListProjects"}
+	iListRecipes                        = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ListRecipes"}
+	iListRecipeVersions                 = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ListRecipeVersions"}
+	iListRulesets                       = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ListRulesets"}
+	iListSchedules                      = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ListSchedules"}
+	iListTagsForResource                = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ListTagsForResource"}
+	iPublishRecipe                      = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "PublishRecipe"}
+	iSendProjectSessionAction           = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "SendProjectSessionAction"}
+	iStartJobRun                        = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "StartJobRun"}
+	iStartProjectSession                = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "StartProjectSession"}
+	iStopJobRun                         = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "StopJobRun"}
+	iTagResource                        = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "TagResource"}
+	iUntagResource                      = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "UntagResource"}
+	iUpdateDataset                      = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "UpdateDataset"}
+	iUpdateProfileJob                   = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "UpdateProfileJob"}
+	iUpdateProject                      = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "UpdateProject"}
+	iUpdateRecipe                       = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "UpdateRecipe"}
+	iUpdateRecipeJob                    = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "UpdateRecipeJob"}
+	iUpdateRuleset                      = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "UpdateRuleset"}
+	iUpdateSchedule                     = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "UpdateSchedule"}
+	i_AWSGlueDataBrew                   = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "AWSGlueDataBrew"}
+	iAccessDeniedException              = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "AccessDeniedException"}
+	i_AccountId                         = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "AccountId"}
+	i_ActionId                          = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ActionId"}
+	i_AllowedStatisticList              = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "AllowedStatisticList"}
+	iAllowedStatistics                  = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "AllowedStatistics"}
+	iAnalyticsMode                      = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "AnalyticsMode"}
+	i_Arn                               = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "Arn"}
+	i_AssumeControl                     = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "AssumeControl"}
+	i_Attempt                           = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "Attempt"}
+	i_Bucket                            = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "Bucket"}
+	i_BucketOwner                       = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "BucketOwner"}
+	i_CatalogId                         = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "CatalogId"}
+	i_ClientSessionId                   = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ClientSessionId"}
+	i_ColumnName                        = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ColumnName"}
+	i_ColumnNameList                    = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ColumnNameList"}
+	i_ColumnRange                       = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ColumnRange"}
+	iColumnSelector                     = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ColumnSelector"}
+	i_ColumnSelectorList                = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ColumnSelectorList"}
+	iColumnStatisticsConfiguration      = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ColumnStatisticsConfiguration"}
+	i_ColumnStatisticsConfigurationList = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ColumnStatisticsConfigurationList"}
+	iCompressionFormat                  = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "CompressionFormat"}
+	i_Condition                         = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "Condition"}
+	iConditionExpression                = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ConditionExpression"}
+	i_ConditionExpressionList           = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ConditionExpressionList"}
+	i_ConditionValue                    = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ConditionValue"}
+	iConflictException                  = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ConflictException"}
+	i_CreateColumn                      = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "CreateColumn"}
+	i_CreatedBy                         = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "CreatedBy"}
+	i_CronExpression                    = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "CronExpression"}
+	iCsvOptions                         = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "CsvOptions"}
+	iCsvOutputOptions                   = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "CsvOutputOptions"}
+	iDatabaseInputDefinition            = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DatabaseInputDefinition"}
+	i_DatabaseName                      = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DatabaseName"}
+	iDatabaseOutput                     = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DatabaseOutput"}
+	i_DatabaseOutputList                = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DatabaseOutputList"}
+	iDatabaseOutputMode                 = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DatabaseOutputMode"}
+	i_DatabaseTableName                 = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DatabaseTableName"}
+	iDatabaseTableOutputOptions         = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DatabaseTableOutputOptions"}
+	iDataCatalogInputDefinition         = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DataCatalogInputDefinition"}
+	iDataCatalogOutput                  = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DataCatalogOutput"}
+	i_DataCatalogOutputList             = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DataCatalogOutputList"}
+	iDataset                            = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "Dataset"}
+	i_DatasetList                       = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DatasetList"}
+	i_DatasetName                       = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DatasetName"}
+	iDatasetParameter                   = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DatasetParameter"}
+	i_Date                              = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "Date"}
+	i_DatetimeFormat                    = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DatetimeFormat"}
+	iDatetimeOptions                    = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DatetimeOptions"}
+	i_Delimiter                         = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "Delimiter"}
+	i_Disabled                          = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "Disabled"}
+	i_EncryptionKeyArn                  = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "EncryptionKeyArn"}
+	iEncryptionMode                     = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "EncryptionMode"}
+	iEntityDetectorConfiguration        = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "EntityDetectorConfiguration"}
+	i_EntityType                        = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "EntityType"}
+	i_EntityTypeList                    = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "EntityTypeList"}
+	i_ErrorCode                         = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ErrorCode"}
+	iExcelOptions                       = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ExcelOptions"}
+	i_ExecutionTime                     = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ExecutionTime"}
+	i_Expression                        = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "Expression"}
+	iFilesLimit                         = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "FilesLimit"}
+	iFilterExpression                   = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "FilterExpression"}
+	iFormatOptions                      = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "FormatOptions"}
+	i_GlueConnectionName                = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "GlueConnectionName"}
+	i_HeaderRow                         = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "HeaderRow"}
+	i_HiddenColumnList                  = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "HiddenColumnList"}
+	iInput                              = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "Input"}
+	iInputFormat                        = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "InputFormat"}
+	iInternalServerException            = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "InternalServerException"}
+	iJob                                = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "Job"}
+	i_JobList                           = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "JobList"}
+	i_JobName                           = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "JobName"}
+	i_JobNameList                       = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "JobNameList"}
+	iJobRun                             = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "JobRun"}
+	i_JobRunErrorMessage                = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "JobRunErrorMessage"}
+	i_JobRunId                          = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "JobRunId"}
+	i_JobRunList                        = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "JobRunList"}
+	iJobRunState                        = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "JobRunState"}
+	iJobSample                          = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "JobSample"}
+	i_JobSize                           = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "JobSize"}
+	iJobType                            = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "JobType"}
+	iJsonOptions                        = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "JsonOptions"}
+	i_Key                               = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "Key"}
+	i_LastModifiedBy                    = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "LastModifiedBy"}
+	i_LocaleCode                        = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "LocaleCode"}
+	i_LogGroupName                      = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "LogGroupName"}
+	iLogSubscription                    = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "LogSubscription"}
+	i_MaxCapacity                       = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "MaxCapacity"}
+	i_MaxFiles                          = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "MaxFiles"}
+	i_MaxOutputFiles                    = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "MaxOutputFiles"}
+	i_MaxResults100                     = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "MaxResults100"}
+	i_MaxRetries                        = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "MaxRetries"}
+	i_Message                           = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "Message"}
+	iMetadata                           = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "Metadata"}
+	i_MultiLine                         = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "MultiLine"}
+	i_NextToken                         = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "NextToken"}
+	i_OpenedBy                          = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "OpenedBy"}
+	i_Operation                         = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "Operation"}
+	iOrder                              = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "Order"}
+	iOrderedBy                          = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "OrderedBy"}
+	iOutput                             = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "Output"}
+	iOutputFormat                       = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "OutputFormat"}
+	iOutputFormatOptions                = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "OutputFormatOptions"}
+	i_OutputList                        = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "OutputList"}
+	i_OverwriteOutput                   = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "OverwriteOutput"}
+	i_ParameterMap                      = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ParameterMap"}
+	i_ParameterName                     = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ParameterName"}
+	iParameterType                      = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ParameterType"}
+	i_ParameterValue                    = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ParameterValue"}
+	iPathOptions                        = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "PathOptions"}
+	i_PathParameterName                 = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "PathParameterName"}
+	i_PathParametersMap                 = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "PathParametersMap"}
+	i_Preview                           = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "Preview"}
+	iProfileConfiguration               = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ProfileConfiguration"}
+	iProject                            = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "Project"}
+	i_ProjectList                       = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ProjectList"}
+	i_ProjectName                       = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ProjectName"}
+	i_PublishedBy                       = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "PublishedBy"}
+	i_QueryString                       = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "QueryString"}
+	iRecipe                             = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "Recipe"}
+	iRecipeAction                       = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "RecipeAction"}
+	i_RecipeDescription                 = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "RecipeDescription"}
+	i_RecipeErrorList                   = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "RecipeErrorList"}
+	i_RecipeErrorMessage                = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "RecipeErrorMessage"}
+	i_RecipeList                        = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "RecipeList"}
+	i_RecipeName                        = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "RecipeName"}
+	iRecipeReference                    = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "RecipeReference"}
+	iRecipeStep                         = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "RecipeStep"}
+	i_RecipeStepList                    = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "RecipeStepList"}
+	i_RecipeVersion                     = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "RecipeVersion"}
+	iRecipeVersionErrorDetail           = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "RecipeVersionErrorDetail"}
+	i_RecipeVersionList                 = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "RecipeVersionList"}
+	iResourceNotFoundException          = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ResourceNotFoundException"}
+	i_Result                            = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "Result"}
+	i_RowRange                          = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "RowRange"}
+	iRule                               = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "Rule"}
+	i_RuleCount                         = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "RuleCount"}
+	i_RuleList                          = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "RuleList"}
+	i_RuleName                          = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "RuleName"}
+	i_RulesetDescription                = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "RulesetDescription"}
+	iRulesetItem                        = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "RulesetItem"}
+	i_RulesetItemList                   = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "RulesetItemList"}
+	i_RulesetName                       = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "RulesetName"}
+	iS3Location                         = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "S3Location"}
+	iS3TableOutputOptions               = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "S3TableOutputOptions"}
+	iSample                             = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "Sample"}
+	iSampleMode                         = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "SampleMode"}
+	i_SampleSize                        = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "SampleSize"}
+	iSampleType                         = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "SampleType"}
+	iSchedule                           = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "Schedule"}
+	i_ScheduleList                      = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ScheduleList"}
+	i_ScheduleName                      = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ScheduleName"}
+	iServiceQuotaExceededException      = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ServiceQuotaExceededException"}
+	iSessionStatus                      = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "SessionStatus"}
+	i_SheetIndex                        = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "SheetIndex"}
+	i_SheetIndexList                    = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "SheetIndexList"}
+	i_SheetName                         = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "SheetName"}
+	i_SheetNameList                     = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "SheetNameList"}
+	iSource                             = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "Source"}
+	i_StartColumnIndex                  = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "StartColumnIndex"}
+	i_StartedBy                         = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "StartedBy"}
+	i_StartRowIndex                     = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "StartRowIndex"}
+	i_Statistic                         = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "Statistic"}
+	i_StatisticList                     = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "StatisticList"}
+	iStatisticOverride                  = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "StatisticOverride"}
+	i_StatisticOverrideList             = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "StatisticOverrideList"}
+	iStatisticsConfiguration            = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "StatisticsConfiguration"}
+	i_StepIndex                         = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "StepIndex"}
+	i_TableName                         = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "TableName"}
+	i_TagKey                            = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "TagKey"}
+	i_TagKeyList                        = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "TagKeyList"}
+	i_TagMap                            = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "TagMap"}
+	i_TagValue                          = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "TagValue"}
+	i_TargetColumn                      = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "TargetColumn"}
+	iThreshold                          = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "Threshold"}
+	iThresholdType                      = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ThresholdType"}
+	iThresholdUnit                      = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ThresholdUnit"}
+	i_ThresholdValue                    = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ThresholdValue"}
+	i_Timeout                           = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "Timeout"}
+	i_TimezoneOffset                    = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "TimezoneOffset"}
+	iValidationConfiguration            = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ValidationConfiguration"}
+	i_ValidationConfigurationList       = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ValidationConfigurationList"}
+	iValidationException                = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ValidationException"}
+	iValidationMode                     = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ValidationMode"}
+	i_ValueReference                    = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ValueReference"}
+	i_ValuesMap                         = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ValuesMap"}
+	iViewFrame                          = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ViewFrame"}
+	iBatchDeleteRecipeVersionRequest    = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "BatchDeleteRecipeVersionRequest"}
+	iBatchDeleteRecipeVersionResponse   = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "BatchDeleteRecipeVersionResponse"}
+	iCreateDatasetRequest               = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "CreateDatasetRequest"}
+	iCreateDatasetResponse              = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "CreateDatasetResponse"}
+	iCreateProfileJobRequest            = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "CreateProfileJobRequest"}
+	iCreateProfileJobResponse           = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "CreateProfileJobResponse"}
+	iCreateProjectRequest               = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "CreateProjectRequest"}
+	iCreateProjectResponse              = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "CreateProjectResponse"}
+	iCreateRecipeRequest                = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "CreateRecipeRequest"}
+	iCreateRecipeJobRequest             = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "CreateRecipeJobRequest"}
+	iCreateRecipeJobResponse            = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "CreateRecipeJobResponse"}
+	iCreateRecipeResponse               = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "CreateRecipeResponse"}
+	iCreateRulesetRequest               = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "CreateRulesetRequest"}
+	iCreateRulesetResponse              = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "CreateRulesetResponse"}
+	iCreateScheduleRequest              = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "CreateScheduleRequest"}
+	iCreateScheduleResponse             = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "CreateScheduleResponse"}
+	iDeleteDatasetRequest               = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DeleteDatasetRequest"}
+	iDeleteDatasetResponse              = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DeleteDatasetResponse"}
+	iDeleteJobRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DeleteJobRequest"}
+	iDeleteJobResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DeleteJobResponse"}
+	iDeleteProjectRequest               = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DeleteProjectRequest"}
+	iDeleteProjectResponse              = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DeleteProjectResponse"}
+	iDeleteRecipeVersionRequest         = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DeleteRecipeVersionRequest"}
+	iDeleteRecipeVersionResponse        = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DeleteRecipeVersionResponse"}
+	iDeleteRulesetRequest               = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DeleteRulesetRequest"}
+	iDeleteRulesetResponse              = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DeleteRulesetResponse"}
+	iDeleteScheduleRequest              = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DeleteScheduleRequest"}
+	iDeleteScheduleResponse             = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DeleteScheduleResponse"}
+	iDescribeDatasetRequest             = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DescribeDatasetRequest"}
+	iDescribeDatasetResponse            = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DescribeDatasetResponse"}
+	iDescribeJobRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DescribeJobRequest"}
+	iDescribeJobResponse                = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DescribeJobResponse"}
+	iDescribeJobRunRequest              = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DescribeJobRunRequest"}
+	iDescribeJobRunResponse             = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DescribeJobRunResponse"}
+	iDescribeProjectRequest             = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DescribeProjectRequest"}
+	iDescribeProjectResponse            = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DescribeProjectResponse"}
+	iDescribeRecipeRequest              = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DescribeRecipeRequest"}
+	iDescribeRecipeResponse             = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DescribeRecipeResponse"}
+	iDescribeRulesetRequest             = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DescribeRulesetRequest"}
+	iDescribeRulesetResponse            = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DescribeRulesetResponse"}
+	iDescribeScheduleRequest            = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DescribeScheduleRequest"}
+	iDescribeScheduleResponse           = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "DescribeScheduleResponse"}
+	iListDatasetsRequest                = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ListDatasetsRequest"}
+	iListDatasetsResponse               = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ListDatasetsResponse"}
+	iListJobRunsRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ListJobRunsRequest"}
+	iListJobRunsResponse                = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ListJobRunsResponse"}
+	iListJobsRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ListJobsRequest"}
+	iListJobsResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ListJobsResponse"}
+	iListProjectsRequest                = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ListProjectsRequest"}
+	iListProjectsResponse               = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ListProjectsResponse"}
+	iListRecipesRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ListRecipesRequest"}
+	iListRecipesResponse                = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ListRecipesResponse"}
+	iListRecipeVersionsRequest          = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ListRecipeVersionsRequest"}
+	iListRecipeVersionsResponse         = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ListRecipeVersionsResponse"}
+	iListRulesetsRequest                = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ListRulesetsRequest"}
+	iListRulesetsResponse               = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ListRulesetsResponse"}
+	iListSchedulesRequest               = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ListSchedulesRequest"}
+	iListSchedulesResponse              = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ListSchedulesResponse"}
+	iListTagsForResourceRequest         = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse        = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "ListTagsForResourceResponse"}
+	iPublishRecipeRequest               = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "PublishRecipeRequest"}
+	iPublishRecipeResponse              = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "PublishRecipeResponse"}
+	iSendProjectSessionActionRequest    = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "SendProjectSessionActionRequest"}
+	iSendProjectSessionActionResponse   = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "SendProjectSessionActionResponse"}
+	iStartJobRunRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "StartJobRunRequest"}
+	iStartJobRunResponse                = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "StartJobRunResponse"}
+	iStartProjectSessionRequest         = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "StartProjectSessionRequest"}
+	iStartProjectSessionResponse        = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "StartProjectSessionResponse"}
+	iStopJobRunRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "StopJobRunRequest"}
+	iStopJobRunResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "StopJobRunResponse"}
+	iTagResourceRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "TagResourceRequest"}
+	iTagResourceResponse                = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "TagResourceResponse"}
+	iUntagResourceRequest               = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "UntagResourceRequest"}
+	iUntagResourceResponse              = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "UntagResourceResponse"}
+	iUpdateDatasetRequest               = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "UpdateDatasetRequest"}
+	iUpdateDatasetResponse              = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "UpdateDatasetResponse"}
+	iUpdateProfileJobRequest            = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "UpdateProfileJobRequest"}
+	iUpdateProfileJobResponse           = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "UpdateProfileJobResponse"}
+	iUpdateProjectRequest               = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "UpdateProjectRequest"}
+	iUpdateProjectResponse              = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "UpdateProjectResponse"}
+	iUpdateRecipeRequest                = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "UpdateRecipeRequest"}
+	iUpdateRecipeJobRequest             = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "UpdateRecipeJobRequest"}
+	iUpdateRecipeJobResponse            = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "UpdateRecipeJobResponse"}
+	iUpdateRecipeResponse               = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "UpdateRecipeResponse"}
+	iUpdateRulesetRequest               = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "UpdateRulesetRequest"}
+	iUpdateRulesetResponse              = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "UpdateRulesetResponse"}
+	iUpdateScheduleRequest              = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "UpdateScheduleRequest"}
+	iUpdateScheduleResponse             = smithy.ShapeID{Namespace: "com.amazonaws.databrew", Name: "UpdateScheduleResponse"}
+	pUnit                               = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/recipes/{Name}/batchDeleteRecipeVersion",
-	Code: 200})
-
-var CreateDataset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "CreateDataset",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/datasets",
-	Code: 200})
-
-var CreateProfileJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "CreateProfileJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/profileJobs",
-	Code: 200})
-
-var CreateProject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "CreateProject",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/projects",
-	Code: 200})
-
-var CreateRecipe = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "CreateRecipe",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/recipes",
-	Code: 200})
-
-var CreateRecipeJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "CreateRecipeJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/recipeJobs",
-	Code: 200})
-
-var CreateRuleset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "CreateRuleset",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/rulesets",
-	Code: 200})
-
-var CreateSchedule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "CreateSchedule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/schedules",
-	Code: 200})
-
-var DeleteDataset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DeleteDataset",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/datasets/{Name}",
-	Code: 200})
-
-var DeleteJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DeleteJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/jobs/{Name}",
-	Code: 200})
-
-var DeleteProject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DeleteProject",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/projects/{Name}",
-	Code: 200})
-
-var DeleteRecipeVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DeleteRecipeVersion",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/recipes/{Name}/recipeVersion/{RecipeVersion}",
-	Code: 200})
-
-var DeleteRuleset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DeleteRuleset",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/rulesets/{Name}",
-	Code: 200})
-
-var DeleteSchedule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DeleteSchedule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/schedules/{Name}",
-	Code: 200})
-
-var DescribeDataset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DescribeDataset",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/datasets/{Name}",
-	Code: 200})
-
-var DescribeJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DescribeJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/jobs/{Name}",
-	Code: 200})
-
-var DescribeJobRun = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DescribeJobRun",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/jobs/{Name}/jobRun/{RunId}",
-	Code: 200})
-
-var DescribeProject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DescribeProject",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/projects/{Name}",
-	Code: 200})
-
-var DescribeRecipe = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DescribeRecipe",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/recipes/{Name}",
-	Code: 200})
-
-var DescribeRuleset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DescribeRuleset",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/rulesets/{Name}",
-	Code: 200})
-
-var DescribeSchedule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DescribeSchedule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/schedules/{Name}",
-	Code: 200})
-
-var ListDatasets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ListDatasets",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/datasets",
-	Code: 200})
-
-var ListJobRuns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ListJobRuns",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/jobs/{Name}/jobRuns",
-	Code: 200})
-
-var ListJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ListJobs",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/jobs",
-	Code: 200})
-
-var ListProjects = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ListProjects",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/projects",
-	Code: 200})
-
-var ListRecipes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ListRecipes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/recipes",
-	Code: 200})
-
-var ListRecipeVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ListRecipeVersions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/recipeVersions",
-	Code: 200})
-
-var ListRulesets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ListRulesets",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/rulesets",
-	Code: 200})
-
-var ListSchedules = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ListSchedules",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/schedules",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var PublishRecipe = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "PublishRecipe",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/recipes/{Name}/publishRecipe",
-	Code: 200})
-
-var SendProjectSessionAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "SendProjectSessionAction",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/projects/{Name}/sendProjectSessionAction",
-	Code: 200})
-
-var StartJobRun = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "StartJobRun",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/jobs/{Name}/startJobRun",
-	Code: 200})
-
-var StartProjectSession = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "StartProjectSession",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/projects/{Name}/startProjectSession",
-	Code: 200})
-
-var StopJobRun = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "StopJobRun",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/jobs/{Name}/jobRun/{RunId}/stopJobRun",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var UpdateDataset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "UpdateDataset",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/datasets/{Name}",
-	Code: 200})
-
-var UpdateProfileJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "UpdateProfileJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/profileJobs/{Name}",
-	Code: 200})
-
-var UpdateProject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "UpdateProject",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/projects/{Name}",
-	Code: 200})
-
-var UpdateRecipe = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "UpdateRecipe",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/recipes/{Name}",
-	Code: 200})
-
-var UpdateRecipeJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "UpdateRecipeJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/recipeJobs/{Name}",
-	Code: 200})
-
-var UpdateRuleset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "UpdateRuleset",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/rulesets/{Name}",
-	Code: 200})
-
-var UpdateSchedule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "UpdateSchedule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/schedules/{Name}",
-	Code: 200})
-
-var _AWSGlueDataBrew = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "AWSGlueDataBrew",
-}, smithy.ShapeTypeService, 0)
-
-var AWSGlueDataBrew = smithy.NewServiceSchema(_AWSGlueDataBrew, "2017-07-25")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var _AccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "AccountId",
-}, smithy.ShapeTypeString, 0)
-
-var _ActionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ActionId",
-}, smithy.ShapeTypeInteger, 0)
-
-var _AllowedStatisticList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "AllowedStatisticList",
-}, smithy.ShapeTypeList, 1)
-var _AllowedStatisticList_member *smithy.Schema
-
-var AllowedStatistics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "AllowedStatistics",
-}, smithy.ShapeTypeStructure, 1)
-var AllowedStatistics_Statistics *smithy.Schema
-
-var AnalyticsMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "AnalyticsMode",
-}, smithy.ShapeTypeEnum, 2)
-var AnalyticsMode_ENABLE *smithy.Schema
-
-var AnalyticsMode_DISABLE *smithy.Schema
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var _AssumeControl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "AssumeControl",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _Attempt = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "Attempt",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Bucket = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "Bucket",
-}, smithy.ShapeTypeString, 0)
-
-var _BucketOwner = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "BucketOwner",
-}, smithy.ShapeTypeString, 0)
-
-var _CatalogId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "CatalogId",
-}, smithy.ShapeTypeString, 0)
-
-var _ClientSessionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ClientSessionId",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ColumnName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ColumnName",
-}, smithy.ShapeTypeString, 0)
-
-var _ColumnNameList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ColumnNameList",
-}, smithy.ShapeTypeList, 1)
-var _ColumnNameList_member *smithy.Schema
-
-var _ColumnRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ColumnRange",
-}, smithy.ShapeTypeInteger, 0)
-
-var ColumnSelector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ColumnSelector",
-}, smithy.ShapeTypeStructure, 2)
-var ColumnSelector_Regex *smithy.Schema
-
-var ColumnSelector_Name *smithy.Schema
-
-var _ColumnSelectorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ColumnSelectorList",
-}, smithy.ShapeTypeList, 1)
-var _ColumnSelectorList_member *smithy.Schema
-
-var ColumnStatisticsConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ColumnStatisticsConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var ColumnStatisticsConfiguration_Selectors *smithy.Schema
-
-var ColumnStatisticsConfiguration_Statistics *smithy.Schema
-
-var _ColumnStatisticsConfigurationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ColumnStatisticsConfigurationList",
-}, smithy.ShapeTypeList, 1)
-var _ColumnStatisticsConfigurationList_member *smithy.Schema
-
-var CompressionFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "CompressionFormat",
-}, smithy.ShapeTypeEnum, 9)
-var CompressionFormat_GZIP *smithy.Schema
-
-var CompressionFormat_LZ4 *smithy.Schema
-
-var CompressionFormat_SNAPPY *smithy.Schema
-
-var CompressionFormat_BZIP2 *smithy.Schema
-
-var CompressionFormat_DEFLATE *smithy.Schema
-
-var CompressionFormat_LZO *smithy.Schema
-
-var CompressionFormat_BROTLI *smithy.Schema
-
-var CompressionFormat_ZSTD *smithy.Schema
-
-var CompressionFormat_ZLIB *smithy.Schema
-
-var _Condition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "Condition",
-}, smithy.ShapeTypeString, 0)
-
-var ConditionExpression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ConditionExpression",
-}, smithy.ShapeTypeStructure, 3)
-var ConditionExpression_Condition *smithy.Schema
-
-var ConditionExpression_Value *smithy.Schema
-
-var ConditionExpression_TargetColumn *smithy.Schema
-
-var _ConditionExpressionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ConditionExpressionList",
-}, smithy.ShapeTypeList, 1)
-var _ConditionExpressionList_member *smithy.Schema
-
-var _ConditionValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ConditionValue",
-}, smithy.ShapeTypeString, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_Message *smithy.Schema
-
-var _CreateColumn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "CreateColumn",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _CreatedBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "CreatedBy",
-}, smithy.ShapeTypeString, 0)
-
-var _CronExpression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "CronExpression",
-}, smithy.ShapeTypeString, 0)
-
-var CsvOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "CsvOptions",
-}, smithy.ShapeTypeStructure, 2)
-var CsvOptions_Delimiter *smithy.Schema
-
-var CsvOptions_HeaderRow *smithy.Schema
-
-var CsvOutputOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "CsvOutputOptions",
-}, smithy.ShapeTypeStructure, 1)
-var CsvOutputOptions_Delimiter *smithy.Schema
-
-var DatabaseInputDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DatabaseInputDefinition",
-}, smithy.ShapeTypeStructure, 4)
-var DatabaseInputDefinition_GlueConnectionName *smithy.Schema
-
-var DatabaseInputDefinition_DatabaseTableName *smithy.Schema
-
-var DatabaseInputDefinition_TempDirectory *smithy.Schema
-
-var DatabaseInputDefinition_QueryString *smithy.Schema
-
-var _DatabaseName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DatabaseName",
-}, smithy.ShapeTypeString, 0)
-
-var DatabaseOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DatabaseOutput",
-}, smithy.ShapeTypeStructure, 3)
-var DatabaseOutput_GlueConnectionName *smithy.Schema
-
-var DatabaseOutput_DatabaseOptions *smithy.Schema
-
-var DatabaseOutput_DatabaseOutputMode *smithy.Schema
-
-var _DatabaseOutputList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DatabaseOutputList",
-}, smithy.ShapeTypeList, 1)
-var _DatabaseOutputList_member *smithy.Schema
-
-var DatabaseOutputMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DatabaseOutputMode",
-}, smithy.ShapeTypeEnum, 1)
-var DatabaseOutputMode_NEW_TABLE *smithy.Schema
-
-var _DatabaseTableName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DatabaseTableName",
-}, smithy.ShapeTypeString, 0)
-
-var DatabaseTableOutputOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DatabaseTableOutputOptions",
-}, smithy.ShapeTypeStructure, 2)
-var DatabaseTableOutputOptions_TempDirectory *smithy.Schema
-
-var DatabaseTableOutputOptions_TableName *smithy.Schema
-
-var DataCatalogInputDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DataCatalogInputDefinition",
-}, smithy.ShapeTypeStructure, 4)
-var DataCatalogInputDefinition_CatalogId *smithy.Schema
-
-var DataCatalogInputDefinition_DatabaseName *smithy.Schema
-
-var DataCatalogInputDefinition_TableName *smithy.Schema
-
-var DataCatalogInputDefinition_TempDirectory *smithy.Schema
-
-var DataCatalogOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DataCatalogOutput",
-}, smithy.ShapeTypeStructure, 6)
-var DataCatalogOutput_CatalogId *smithy.Schema
-
-var DataCatalogOutput_DatabaseName *smithy.Schema
-
-var DataCatalogOutput_TableName *smithy.Schema
-
-var DataCatalogOutput_S3Options *smithy.Schema
-
-var DataCatalogOutput_DatabaseOptions *smithy.Schema
-
-var DataCatalogOutput_Overwrite *smithy.Schema
-
-var _DataCatalogOutputList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DataCatalogOutputList",
-}, smithy.ShapeTypeList, 1)
-var _DataCatalogOutputList_member *smithy.Schema
-
-var Dataset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "Dataset",
-}, smithy.ShapeTypeStructure, 13)
-var Dataset_AccountId *smithy.Schema
-
-var Dataset_CreatedBy *smithy.Schema
-
-var Dataset_CreateDate *smithy.Schema
-
-var Dataset_Name *smithy.Schema
-
-var Dataset_Format *smithy.Schema
-
-var Dataset_FormatOptions *smithy.Schema
-
-var Dataset_Input *smithy.Schema
-
-var Dataset_LastModifiedDate *smithy.Schema
-
-var Dataset_LastModifiedBy *smithy.Schema
-
-var Dataset_Source *smithy.Schema
-
-var Dataset_PathOptions *smithy.Schema
-
-var Dataset_Tags *smithy.Schema
-
-var Dataset_ResourceArn *smithy.Schema
-
-var _DatasetList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DatasetList",
-}, smithy.ShapeTypeList, 1)
-var _DatasetList_member *smithy.Schema
-
-var _DatasetName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DatasetName",
-}, smithy.ShapeTypeString, 0)
-
-var DatasetParameter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DatasetParameter",
-}, smithy.ShapeTypeStructure, 5)
-var DatasetParameter_Name *smithy.Schema
-
-var DatasetParameter_Type *smithy.Schema
-
-var DatasetParameter_DatetimeOptions *smithy.Schema
-
-var DatasetParameter_CreateColumn *smithy.Schema
-
-var DatasetParameter_Filter *smithy.Schema
-
-var _Date = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "Date",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _DatetimeFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DatetimeFormat",
-}, smithy.ShapeTypeString, 0)
-
-var DatetimeOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DatetimeOptions",
-}, smithy.ShapeTypeStructure, 3)
-var DatetimeOptions_Format *smithy.Schema
-
-var DatetimeOptions_TimezoneOffset *smithy.Schema
-
-var DatetimeOptions_LocaleCode *smithy.Schema
-
-var _Delimiter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "Delimiter",
-}, smithy.ShapeTypeString, 0)
-
-var _Disabled = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "Disabled",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _EncryptionKeyArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "EncryptionKeyArn",
-}, smithy.ShapeTypeString, 0)
-
-var EncryptionMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "EncryptionMode",
-}, smithy.ShapeTypeEnum, 2)
-var EncryptionMode_SSEKMS *smithy.Schema
-
-var EncryptionMode_SSES3 *smithy.Schema
-
-var EntityDetectorConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "EntityDetectorConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var EntityDetectorConfiguration_EntityTypes *smithy.Schema
-
-var EntityDetectorConfiguration_AllowedStatistics *smithy.Schema
-
-var _EntityType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "EntityType",
-}, smithy.ShapeTypeString, 0)
-
-var _EntityTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "EntityTypeList",
-}, smithy.ShapeTypeList, 1)
-var _EntityTypeList_member *smithy.Schema
-
-var _ErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ErrorCode",
-}, smithy.ShapeTypeString, 0)
-
-var ExcelOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ExcelOptions",
-}, smithy.ShapeTypeStructure, 3)
-var ExcelOptions_SheetNames *smithy.Schema
-
-var ExcelOptions_SheetIndexes *smithy.Schema
-
-var ExcelOptions_HeaderRow *smithy.Schema
-
-var _ExecutionTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ExecutionTime",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Expression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "Expression",
-}, smithy.ShapeTypeString, 0)
-
-var FilesLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "FilesLimit",
-}, smithy.ShapeTypeStructure, 3)
-var FilesLimit_MaxFiles *smithy.Schema
-
-var FilesLimit_OrderedBy *smithy.Schema
-
-var FilesLimit_Order *smithy.Schema
-
-var FilterExpression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "FilterExpression",
-}, smithy.ShapeTypeStructure, 2)
-var FilterExpression_Expression *smithy.Schema
-
-var FilterExpression_ValuesMap *smithy.Schema
-
-var FormatOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "FormatOptions",
-}, smithy.ShapeTypeStructure, 3)
-var FormatOptions_Json *smithy.Schema
-
-var FormatOptions_Excel *smithy.Schema
-
-var FormatOptions_Csv *smithy.Schema
-
-var _GlueConnectionName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "GlueConnectionName",
-}, smithy.ShapeTypeString, 0)
-
-var _HeaderRow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "HeaderRow",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _HiddenColumnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "HiddenColumnList",
-}, smithy.ShapeTypeList, 1)
-var _HiddenColumnList_member *smithy.Schema
-
-var Input = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "Input",
-}, smithy.ShapeTypeStructure, 4)
-var Input_S3InputDefinition *smithy.Schema
-
-var Input_DataCatalogInputDefinition *smithy.Schema
-
-var Input_DatabaseInputDefinition *smithy.Schema
-
-var Input_Metadata *smithy.Schema
-
-var InputFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "InputFormat",
-}, smithy.ShapeTypeEnum, 5)
-var InputFormat_CSV *smithy.Schema
-
-var InputFormat_JSON *smithy.Schema
-
-var InputFormat_PARQUET *smithy.Schema
-
-var InputFormat_EXCEL *smithy.Schema
-
-var InputFormat_ORC *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_Message *smithy.Schema
-
-var Job = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "Job",
-}, smithy.ShapeTypeStructure, 24)
-var Job_AccountId *smithy.Schema
-
-var Job_CreatedBy *smithy.Schema
-
-var Job_CreateDate *smithy.Schema
-
-var Job_DatasetName *smithy.Schema
-
-var Job_EncryptionKeyArn *smithy.Schema
-
-var Job_EncryptionMode *smithy.Schema
-
-var Job_Name *smithy.Schema
-
-var Job_Type *smithy.Schema
-
-var Job_LastModifiedBy *smithy.Schema
-
-var Job_LastModifiedDate *smithy.Schema
-
-var Job_LogSubscription *smithy.Schema
-
-var Job_MaxCapacity *smithy.Schema
-
-var Job_MaxRetries *smithy.Schema
-
-var Job_Outputs *smithy.Schema
-
-var Job_DataCatalogOutputs *smithy.Schema
-
-var Job_DatabaseOutputs *smithy.Schema
-
-var Job_ProjectName *smithy.Schema
-
-var Job_RecipeReference *smithy.Schema
-
-var Job_ResourceArn *smithy.Schema
-
-var Job_RoleArn *smithy.Schema
-
-var Job_Timeout *smithy.Schema
-
-var Job_Tags *smithy.Schema
-
-var Job_JobSample *smithy.Schema
-
-var Job_ValidationConfigurations *smithy.Schema
-
-var _JobList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "JobList",
-}, smithy.ShapeTypeList, 1)
-var _JobList_member *smithy.Schema
-
-var _JobName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "JobName",
-}, smithy.ShapeTypeString, 0)
-
-var _JobNameList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "JobNameList",
-}, smithy.ShapeTypeList, 1)
-var _JobNameList_member *smithy.Schema
-
-var JobRun = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "JobRun",
-}, smithy.ShapeTypeStructure, 18)
-var JobRun_Attempt *smithy.Schema
-
-var JobRun_CompletedOn *smithy.Schema
-
-var JobRun_DatasetName *smithy.Schema
-
-var JobRun_ErrorMessage *smithy.Schema
-
-var JobRun_ExecutionTime *smithy.Schema
-
-var JobRun_JobName *smithy.Schema
-
-var JobRun_RunId *smithy.Schema
-
-var JobRun_State *smithy.Schema
-
-var JobRun_LogSubscription *smithy.Schema
-
-var JobRun_LogGroupName *smithy.Schema
-
-var JobRun_Outputs *smithy.Schema
-
-var JobRun_DataCatalogOutputs *smithy.Schema
-
-var JobRun_DatabaseOutputs *smithy.Schema
-
-var JobRun_RecipeReference *smithy.Schema
-
-var JobRun_StartedBy *smithy.Schema
-
-var JobRun_StartedOn *smithy.Schema
-
-var JobRun_JobSample *smithy.Schema
-
-var JobRun_ValidationConfigurations *smithy.Schema
-
-var _JobRunErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "JobRunErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _JobRunId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "JobRunId",
-}, smithy.ShapeTypeString, 0)
-
-var _JobRunList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "JobRunList",
-}, smithy.ShapeTypeList, 1)
-var _JobRunList_member *smithy.Schema
-
-var JobRunState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "JobRunState",
-}, smithy.ShapeTypeEnum, 7)
-var JobRunState_STARTING *smithy.Schema
-
-var JobRunState_RUNNING *smithy.Schema
-
-var JobRunState_STOPPING *smithy.Schema
-
-var JobRunState_STOPPED *smithy.Schema
-
-var JobRunState_SUCCEEDED *smithy.Schema
-
-var JobRunState_FAILED *smithy.Schema
-
-var JobRunState_TIMEOUT *smithy.Schema
-
-var JobSample = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "JobSample",
-}, smithy.ShapeTypeStructure, 2)
-var JobSample_Mode *smithy.Schema
-
-var JobSample_Size *smithy.Schema
-
-var _JobSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "JobSize",
-}, smithy.ShapeTypeLong, 0)
-
-var JobType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "JobType",
-}, smithy.ShapeTypeEnum, 2)
-var JobType_PROFILE *smithy.Schema
-
-var JobType_RECIPE *smithy.Schema
-
-var JsonOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "JsonOptions",
-}, smithy.ShapeTypeStructure, 1)
-var JsonOptions_MultiLine *smithy.Schema
-
-var _Key = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "Key",
-}, smithy.ShapeTypeString, 0)
-
-var _LastModifiedBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "LastModifiedBy",
-}, smithy.ShapeTypeString, 0)
-
-var _LocaleCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "LocaleCode",
-}, smithy.ShapeTypeString, 0)
-
-var _LogGroupName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "LogGroupName",
-}, smithy.ShapeTypeString, 0)
-
-var LogSubscription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "LogSubscription",
-}, smithy.ShapeTypeEnum, 2)
-var LogSubscription_ENABLE *smithy.Schema
-
-var LogSubscription_DISABLE *smithy.Schema
-
-var _MaxCapacity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "MaxCapacity",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxFiles = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "MaxFiles",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxOutputFiles = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "MaxOutputFiles",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxResults100 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "MaxResults100",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxRetries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "MaxRetries",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Message = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "Message",
-}, smithy.ShapeTypeString, 0)
-
-var Metadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "Metadata",
-}, smithy.ShapeTypeStructure, 1)
-var Metadata_SourceArn *smithy.Schema
-
-var _MultiLine = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "MultiLine",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _OpenedBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "OpenedBy",
-}, smithy.ShapeTypeString, 0)
-
-var _Operation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "Operation",
-}, smithy.ShapeTypeString, 0)
-
-var Order = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "Order",
-}, smithy.ShapeTypeEnum, 2)
-var Order_DESCENDING *smithy.Schema
-
-var Order_ASCENDING *smithy.Schema
-
-var OrderedBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "OrderedBy",
-}, smithy.ShapeTypeEnum, 1)
-var OrderedBy_LAST_MODIFIED_DATE *smithy.Schema
-
-var Output = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "Output",
-}, smithy.ShapeTypeStructure, 7)
-var Output_CompressionFormat *smithy.Schema
-
-var Output_Format *smithy.Schema
-
-var Output_PartitionColumns *smithy.Schema
-
-var Output_Location *smithy.Schema
-
-var Output_Overwrite *smithy.Schema
-
-var Output_FormatOptions *smithy.Schema
-
-var Output_MaxOutputFiles *smithy.Schema
-
-var OutputFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "OutputFormat",
-}, smithy.ShapeTypeEnum, 8)
-var OutputFormat_CSV *smithy.Schema
-
-var OutputFormat_JSON *smithy.Schema
-
-var OutputFormat_PARQUET *smithy.Schema
-
-var OutputFormat_GLUEPARQUET *smithy.Schema
-
-var OutputFormat_AVRO *smithy.Schema
-
-var OutputFormat_ORC *smithy.Schema
-
-var OutputFormat_XML *smithy.Schema
-
-var OutputFormat_TABLEAUHYPER *smithy.Schema
-
-var OutputFormatOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "OutputFormatOptions",
-}, smithy.ShapeTypeStructure, 1)
-var OutputFormatOptions_Csv *smithy.Schema
-
-var _OutputList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "OutputList",
-}, smithy.ShapeTypeList, 1)
-var _OutputList_member *smithy.Schema
-
-var _OverwriteOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "OverwriteOutput",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _ParameterMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ParameterMap",
-}, smithy.ShapeTypeMap, 2)
-var _ParameterMap_key *smithy.Schema
-
-var _ParameterMap_value *smithy.Schema
-
-var _ParameterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ParameterName",
-}, smithy.ShapeTypeString, 0)
-
-var ParameterType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ParameterType",
-}, smithy.ShapeTypeEnum, 3)
-var ParameterType_Datetime *smithy.Schema
-
-var ParameterType_Number *smithy.Schema
-
-var ParameterType_String *smithy.Schema
-
-var _ParameterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ParameterValue",
-}, smithy.ShapeTypeString, 0)
-
-var PathOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "PathOptions",
-}, smithy.ShapeTypeStructure, 3)
-var PathOptions_LastModifiedDateCondition *smithy.Schema
-
-var PathOptions_FilesLimit *smithy.Schema
-
-var PathOptions_Parameters *smithy.Schema
-
-var _PathParameterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "PathParameterName",
-}, smithy.ShapeTypeString, 0)
-
-var _PathParametersMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "PathParametersMap",
-}, smithy.ShapeTypeMap, 2)
-var _PathParametersMap_key *smithy.Schema
-
-var _PathParametersMap_value *smithy.Schema
-
-var _Preview = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "Preview",
-}, smithy.ShapeTypeBoolean, 0)
-
-var ProfileConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ProfileConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var ProfileConfiguration_DatasetStatisticsConfiguration *smithy.Schema
-
-var ProfileConfiguration_ProfileColumns *smithy.Schema
-
-var ProfileConfiguration_ColumnStatisticsConfigurations *smithy.Schema
-
-var ProfileConfiguration_EntityDetectorConfiguration *smithy.Schema
-
-var Project = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "Project",
-}, smithy.ShapeTypeStructure, 14)
-var Project_AccountId *smithy.Schema
-
-var Project_CreateDate *smithy.Schema
-
-var Project_CreatedBy *smithy.Schema
-
-var Project_DatasetName *smithy.Schema
-
-var Project_LastModifiedDate *smithy.Schema
-
-var Project_LastModifiedBy *smithy.Schema
-
-var Project_Name *smithy.Schema
-
-var Project_RecipeName *smithy.Schema
-
-var Project_ResourceArn *smithy.Schema
-
-var Project_Sample *smithy.Schema
-
-var Project_Tags *smithy.Schema
-
-var Project_RoleArn *smithy.Schema
-
-var Project_OpenedBy *smithy.Schema
-
-var Project_OpenDate *smithy.Schema
-
-var _ProjectList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ProjectList",
-}, smithy.ShapeTypeList, 1)
-var _ProjectList_member *smithy.Schema
-
-var _ProjectName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ProjectName",
-}, smithy.ShapeTypeString, 0)
-
-var _PublishedBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "PublishedBy",
-}, smithy.ShapeTypeString, 0)
-
-var _QueryString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "QueryString",
-}, smithy.ShapeTypeString, 0)
-
-var Recipe = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "Recipe",
-}, smithy.ShapeTypeStructure, 13)
-var Recipe_CreatedBy *smithy.Schema
-
-var Recipe_CreateDate *smithy.Schema
-
-var Recipe_LastModifiedBy *smithy.Schema
-
-var Recipe_LastModifiedDate *smithy.Schema
-
-var Recipe_ProjectName *smithy.Schema
-
-var Recipe_PublishedBy *smithy.Schema
-
-var Recipe_PublishedDate *smithy.Schema
-
-var Recipe_Description *smithy.Schema
-
-var Recipe_Name *smithy.Schema
-
-var Recipe_ResourceArn *smithy.Schema
-
-var Recipe_Steps *smithy.Schema
-
-var Recipe_Tags *smithy.Schema
-
-var Recipe_RecipeVersion *smithy.Schema
-
-var RecipeAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "RecipeAction",
-}, smithy.ShapeTypeStructure, 2)
-var RecipeAction_Operation *smithy.Schema
-
-var RecipeAction_Parameters *smithy.Schema
-
-var _RecipeDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "RecipeDescription",
-}, smithy.ShapeTypeString, 0)
-
-var _RecipeErrorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "RecipeErrorList",
-}, smithy.ShapeTypeList, 1)
-var _RecipeErrorList_member *smithy.Schema
-
-var _RecipeErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "RecipeErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _RecipeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "RecipeList",
-}, smithy.ShapeTypeList, 1)
-var _RecipeList_member *smithy.Schema
-
-var _RecipeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "RecipeName",
-}, smithy.ShapeTypeString, 0)
-
-var RecipeReference = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "RecipeReference",
-}, smithy.ShapeTypeStructure, 2)
-var RecipeReference_Name *smithy.Schema
-
-var RecipeReference_RecipeVersion *smithy.Schema
-
-var RecipeStep = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "RecipeStep",
-}, smithy.ShapeTypeStructure, 2)
-var RecipeStep_Action *smithy.Schema
-
-var RecipeStep_ConditionExpressions *smithy.Schema
-
-var _RecipeStepList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "RecipeStepList",
-}, smithy.ShapeTypeList, 1)
-var _RecipeStepList_member *smithy.Schema
-
-var _RecipeVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "RecipeVersion",
-}, smithy.ShapeTypeString, 0)
-
-var RecipeVersionErrorDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "RecipeVersionErrorDetail",
-}, smithy.ShapeTypeStructure, 3)
-var RecipeVersionErrorDetail_ErrorCode *smithy.Schema
-
-var RecipeVersionErrorDetail_ErrorMessage *smithy.Schema
-
-var RecipeVersionErrorDetail_RecipeVersion *smithy.Schema
-
-var _RecipeVersionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "RecipeVersionList",
-}, smithy.ShapeTypeList, 1)
-var _RecipeVersionList_member *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var _Result = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "Result",
-}, smithy.ShapeTypeString, 0)
-
-var _RowRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "RowRange",
-}, smithy.ShapeTypeInteger, 0)
-
-var Rule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "Rule",
-}, smithy.ShapeTypeStructure, 6)
-var Rule_Name *smithy.Schema
-
-var Rule_Disabled *smithy.Schema
-
-var Rule_CheckExpression *smithy.Schema
-
-var Rule_SubstitutionMap *smithy.Schema
-
-var Rule_Threshold *smithy.Schema
-
-var Rule_ColumnSelectors *smithy.Schema
-
-var _RuleCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "RuleCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var _RuleList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "RuleList",
-}, smithy.ShapeTypeList, 1)
-var _RuleList_member *smithy.Schema
-
-var _RuleName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "RuleName",
-}, smithy.ShapeTypeString, 0)
-
-var _RulesetDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "RulesetDescription",
-}, smithy.ShapeTypeString, 0)
-
-var RulesetItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "RulesetItem",
-}, smithy.ShapeTypeStructure, 11)
-var RulesetItem_AccountId *smithy.Schema
-
-var RulesetItem_CreatedBy *smithy.Schema
-
-var RulesetItem_CreateDate *smithy.Schema
-
-var RulesetItem_Description *smithy.Schema
-
-var RulesetItem_LastModifiedBy *smithy.Schema
-
-var RulesetItem_LastModifiedDate *smithy.Schema
-
-var RulesetItem_Name *smithy.Schema
-
-var RulesetItem_ResourceArn *smithy.Schema
-
-var RulesetItem_RuleCount *smithy.Schema
-
-var RulesetItem_Tags *smithy.Schema
-
-var RulesetItem_TargetArn *smithy.Schema
-
-var _RulesetItemList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "RulesetItemList",
-}, smithy.ShapeTypeList, 1)
-var _RulesetItemList_member *smithy.Schema
-
-var _RulesetName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "RulesetName",
-}, smithy.ShapeTypeString, 0)
-
-var S3Location = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "S3Location",
-}, smithy.ShapeTypeStructure, 3)
-var S3Location_Bucket *smithy.Schema
-
-var S3Location_Key *smithy.Schema
-
-var S3Location_BucketOwner *smithy.Schema
-
-var S3TableOutputOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "S3TableOutputOptions",
-}, smithy.ShapeTypeStructure, 1)
-var S3TableOutputOptions_Location *smithy.Schema
-
-var Sample = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "Sample",
-}, smithy.ShapeTypeStructure, 2)
-var Sample_Size *smithy.Schema
-
-var Sample_Type *smithy.Schema
-
-var SampleMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "SampleMode",
-}, smithy.ShapeTypeEnum, 2)
-var SampleMode_FULL_DATASET *smithy.Schema
-
-var SampleMode_CUSTOM_ROWS *smithy.Schema
-
-var _SampleSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "SampleSize",
-}, smithy.ShapeTypeInteger, 0)
-
-var SampleType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "SampleType",
-}, smithy.ShapeTypeEnum, 3)
-var SampleType_FIRST_N *smithy.Schema
-
-var SampleType_LAST_N *smithy.Schema
-
-var SampleType_RANDOM *smithy.Schema
-
-var Schedule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "Schedule",
-}, smithy.ShapeTypeStructure, 10)
-var Schedule_AccountId *smithy.Schema
-
-var Schedule_CreatedBy *smithy.Schema
-
-var Schedule_CreateDate *smithy.Schema
-
-var Schedule_JobNames *smithy.Schema
-
-var Schedule_LastModifiedBy *smithy.Schema
-
-var Schedule_LastModifiedDate *smithy.Schema
-
-var Schedule_ResourceArn *smithy.Schema
-
-var Schedule_CronExpression *smithy.Schema
-
-var Schedule_Tags *smithy.Schema
-
-var Schedule_Name *smithy.Schema
-
-var _ScheduleList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ScheduleList",
-}, smithy.ShapeTypeList, 1)
-var _ScheduleList_member *smithy.Schema
-
-var _ScheduleName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ScheduleName",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_Message *smithy.Schema
-
-var SessionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "SessionStatus",
-}, smithy.ShapeTypeEnum, 10)
-var SessionStatus_ASSIGNED *smithy.Schema
-
-var SessionStatus_FAILED *smithy.Schema
-
-var SessionStatus_INITIALIZING *smithy.Schema
-
-var SessionStatus_PROVISIONING *smithy.Schema
-
-var SessionStatus_READY *smithy.Schema
-
-var SessionStatus_RECYCLING *smithy.Schema
-
-var SessionStatus_ROTATING *smithy.Schema
-
-var SessionStatus_TERMINATED *smithy.Schema
-
-var SessionStatus_TERMINATING *smithy.Schema
-
-var SessionStatus_UPDATING *smithy.Schema
-
-var _SheetIndex = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "SheetIndex",
-}, smithy.ShapeTypeInteger, 0)
-
-var _SheetIndexList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "SheetIndexList",
-}, smithy.ShapeTypeList, 1)
-var _SheetIndexList_member *smithy.Schema
-
-var _SheetName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "SheetName",
-}, smithy.ShapeTypeString, 0)
-
-var _SheetNameList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "SheetNameList",
-}, smithy.ShapeTypeList, 1)
-var _SheetNameList_member *smithy.Schema
-
-var Source = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "Source",
-}, smithy.ShapeTypeEnum, 3)
-var Source_S3 *smithy.Schema
-
-var Source_DATACATALOG *smithy.Schema
-
-var Source_DATABASE *smithy.Schema
-
-var _StartColumnIndex = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "StartColumnIndex",
-}, smithy.ShapeTypeInteger, 0)
-
-var _StartedBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "StartedBy",
-}, smithy.ShapeTypeString, 0)
-
-var _StartRowIndex = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "StartRowIndex",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Statistic = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "Statistic",
-}, smithy.ShapeTypeString, 0)
-
-var _StatisticList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "StatisticList",
-}, smithy.ShapeTypeList, 1)
-var _StatisticList_member *smithy.Schema
-
-var StatisticOverride = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "StatisticOverride",
-}, smithy.ShapeTypeStructure, 2)
-var StatisticOverride_Statistic *smithy.Schema
-
-var StatisticOverride_Parameters *smithy.Schema
-
-var _StatisticOverrideList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "StatisticOverrideList",
-}, smithy.ShapeTypeList, 1)
-var _StatisticOverrideList_member *smithy.Schema
-
-var StatisticsConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "StatisticsConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var StatisticsConfiguration_IncludedStatistics *smithy.Schema
-
-var StatisticsConfiguration_Overrides *smithy.Schema
-
-var _StepIndex = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "StepIndex",
-}, smithy.ShapeTypeInteger, 0)
-
-var _TableName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "TableName",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "TagMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagMap_key *smithy.Schema
-
-var _TagMap_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _TargetColumn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "TargetColumn",
-}, smithy.ShapeTypeString, 0)
-
-var Threshold = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "Threshold",
-}, smithy.ShapeTypeStructure, 3)
-var Threshold_Value *smithy.Schema
-
-var Threshold_Type *smithy.Schema
-
-var Threshold_Unit *smithy.Schema
-
-var ThresholdType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ThresholdType",
-}, smithy.ShapeTypeEnum, 4)
-var ThresholdType_GREATER_THAN_OR_EQUAL *smithy.Schema
-
-var ThresholdType_LESS_THAN_OR_EQUAL *smithy.Schema
-
-var ThresholdType_GREATER_THAN *smithy.Schema
-
-var ThresholdType_LESS_THAN *smithy.Schema
-
-var ThresholdUnit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ThresholdUnit",
-}, smithy.ShapeTypeEnum, 2)
-var ThresholdUnit_COUNT *smithy.Schema
-
-var ThresholdUnit_PERCENTAGE *smithy.Schema
-
-var _ThresholdValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ThresholdValue",
-}, smithy.ShapeTypeDouble, 0)
-
-var _Timeout = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "Timeout",
-}, smithy.ShapeTypeInteger, 0)
-
-var _TimezoneOffset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "TimezoneOffset",
-}, smithy.ShapeTypeString, 0)
-
-var ValidationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ValidationConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var ValidationConfiguration_RulesetArn *smithy.Schema
-
-var ValidationConfiguration_ValidationMode *smithy.Schema
-
-var _ValidationConfigurationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ValidationConfigurationList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationConfigurationList_member *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_Message *smithy.Schema
-
-var ValidationMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ValidationMode",
-}, smithy.ShapeTypeEnum, 1)
-var ValidationMode_CHECK_ALL *smithy.Schema
-
-var _ValueReference = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ValueReference",
-}, smithy.ShapeTypeString, 0)
-
-var _ValuesMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ValuesMap",
-}, smithy.ShapeTypeMap, 2)
-var _ValuesMap_key *smithy.Schema
-
-var _ValuesMap_value *smithy.Schema
-
-var ViewFrame = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ViewFrame",
-}, smithy.ShapeTypeStructure, 6)
-var ViewFrame_StartColumnIndex *smithy.Schema
-
-var ViewFrame_ColumnRange *smithy.Schema
-
-var ViewFrame_HiddenColumns *smithy.Schema
-
-var ViewFrame_StartRowIndex *smithy.Schema
-
-var ViewFrame_RowRange *smithy.Schema
-
-var ViewFrame_Analytics *smithy.Schema
-
-var BatchDeleteRecipeVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "BatchDeleteRecipeVersionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var BatchDeleteRecipeVersionRequest_Name *smithy.Schema
-
-var BatchDeleteRecipeVersionRequest_RecipeVersions *smithy.Schema
-
-var BatchDeleteRecipeVersionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "BatchDeleteRecipeVersionResponse",
-}, smithy.ShapeTypeStructure, 2)
-var BatchDeleteRecipeVersionResponse_Name *smithy.Schema
-
-var BatchDeleteRecipeVersionResponse_Errors *smithy.Schema
-
-var CreateDatasetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "CreateDatasetRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateDatasetRequest_Name *smithy.Schema
-
-var CreateDatasetRequest_Format *smithy.Schema
-
-var CreateDatasetRequest_FormatOptions *smithy.Schema
-
-var CreateDatasetRequest_Input *smithy.Schema
-
-var CreateDatasetRequest_PathOptions *smithy.Schema
-
-var CreateDatasetRequest_Tags *smithy.Schema
-
-var CreateDatasetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "CreateDatasetResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateDatasetResponse_Name *smithy.Schema
-
-var CreateProfileJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "CreateProfileJobRequest",
-}, smithy.ShapeTypeStructure, 14)
-var CreateProfileJobRequest_DatasetName *smithy.Schema
-
-var CreateProfileJobRequest_EncryptionKeyArn *smithy.Schema
-
-var CreateProfileJobRequest_EncryptionMode *smithy.Schema
-
-var CreateProfileJobRequest_Name *smithy.Schema
-
-var CreateProfileJobRequest_LogSubscription *smithy.Schema
-
-var CreateProfileJobRequest_MaxCapacity *smithy.Schema
-
-var CreateProfileJobRequest_MaxRetries *smithy.Schema
-
-var CreateProfileJobRequest_OutputLocation *smithy.Schema
-
-var CreateProfileJobRequest_Configuration *smithy.Schema
-
-var CreateProfileJobRequest_ValidationConfigurations *smithy.Schema
-
-var CreateProfileJobRequest_RoleArn *smithy.Schema
-
-var CreateProfileJobRequest_Tags *smithy.Schema
-
-var CreateProfileJobRequest_Timeout *smithy.Schema
-
-var CreateProfileJobRequest_JobSample *smithy.Schema
-
-var CreateProfileJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "CreateProfileJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateProfileJobResponse_Name *smithy.Schema
-
-var CreateProjectRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "CreateProjectRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateProjectRequest_DatasetName *smithy.Schema
-
-var CreateProjectRequest_Name *smithy.Schema
-
-var CreateProjectRequest_RecipeName *smithy.Schema
-
-var CreateProjectRequest_Sample *smithy.Schema
-
-var CreateProjectRequest_RoleArn *smithy.Schema
-
-var CreateProjectRequest_Tags *smithy.Schema
-
-var CreateProjectResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "CreateProjectResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateProjectResponse_Name *smithy.Schema
-
-var CreateRecipeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "CreateRecipeRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateRecipeRequest_Description *smithy.Schema
-
-var CreateRecipeRequest_Name *smithy.Schema
-
-var CreateRecipeRequest_Steps *smithy.Schema
-
-var CreateRecipeRequest_Tags *smithy.Schema
-
-var CreateRecipeJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "CreateRecipeJobRequest",
-}, smithy.ShapeTypeStructure, 15)
-var CreateRecipeJobRequest_DatasetName *smithy.Schema
-
-var CreateRecipeJobRequest_EncryptionKeyArn *smithy.Schema
-
-var CreateRecipeJobRequest_EncryptionMode *smithy.Schema
-
-var CreateRecipeJobRequest_Name *smithy.Schema
-
-var CreateRecipeJobRequest_LogSubscription *smithy.Schema
-
-var CreateRecipeJobRequest_MaxCapacity *smithy.Schema
-
-var CreateRecipeJobRequest_MaxRetries *smithy.Schema
-
-var CreateRecipeJobRequest_Outputs *smithy.Schema
-
-var CreateRecipeJobRequest_DataCatalogOutputs *smithy.Schema
-
-var CreateRecipeJobRequest_DatabaseOutputs *smithy.Schema
-
-var CreateRecipeJobRequest_ProjectName *smithy.Schema
-
-var CreateRecipeJobRequest_RecipeReference *smithy.Schema
-
-var CreateRecipeJobRequest_RoleArn *smithy.Schema
-
-var CreateRecipeJobRequest_Tags *smithy.Schema
-
-var CreateRecipeJobRequest_Timeout *smithy.Schema
-
-var CreateRecipeJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "CreateRecipeJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateRecipeJobResponse_Name *smithy.Schema
-
-var CreateRecipeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "CreateRecipeResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateRecipeResponse_Name *smithy.Schema
-
-var CreateRulesetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "CreateRulesetRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateRulesetRequest_Name *smithy.Schema
-
-var CreateRulesetRequest_Description *smithy.Schema
-
-var CreateRulesetRequest_TargetArn *smithy.Schema
-
-var CreateRulesetRequest_Rules *smithy.Schema
-
-var CreateRulesetRequest_Tags *smithy.Schema
-
-var CreateRulesetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "CreateRulesetResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateRulesetResponse_Name *smithy.Schema
-
-var CreateScheduleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "CreateScheduleRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateScheduleRequest_JobNames *smithy.Schema
-
-var CreateScheduleRequest_CronExpression *smithy.Schema
-
-var CreateScheduleRequest_Tags *smithy.Schema
-
-var CreateScheduleRequest_Name *smithy.Schema
-
-var CreateScheduleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "CreateScheduleResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateScheduleResponse_Name *smithy.Schema
-
-var DeleteDatasetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DeleteDatasetRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDatasetRequest_Name *smithy.Schema
-
-var DeleteDatasetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DeleteDatasetResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDatasetResponse_Name *smithy.Schema
-
-var DeleteJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DeleteJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteJobRequest_Name *smithy.Schema
-
-var DeleteJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DeleteJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteJobResponse_Name *smithy.Schema
-
-var DeleteProjectRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DeleteProjectRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteProjectRequest_Name *smithy.Schema
-
-var DeleteProjectResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DeleteProjectResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteProjectResponse_Name *smithy.Schema
-
-var DeleteRecipeVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DeleteRecipeVersionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteRecipeVersionRequest_Name *smithy.Schema
-
-var DeleteRecipeVersionRequest_RecipeVersion *smithy.Schema
-
-var DeleteRecipeVersionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DeleteRecipeVersionResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteRecipeVersionResponse_Name *smithy.Schema
-
-var DeleteRecipeVersionResponse_RecipeVersion *smithy.Schema
-
-var DeleteRulesetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DeleteRulesetRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteRulesetRequest_Name *smithy.Schema
-
-var DeleteRulesetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DeleteRulesetResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteRulesetResponse_Name *smithy.Schema
-
-var DeleteScheduleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DeleteScheduleRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteScheduleRequest_Name *smithy.Schema
-
-var DeleteScheduleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DeleteScheduleResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteScheduleResponse_Name *smithy.Schema
-
-var DescribeDatasetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DescribeDatasetRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeDatasetRequest_Name *smithy.Schema
-
-var DescribeDatasetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DescribeDatasetResponse",
-}, smithy.ShapeTypeStructure, 12)
-var DescribeDatasetResponse_CreatedBy *smithy.Schema
-
-var DescribeDatasetResponse_CreateDate *smithy.Schema
-
-var DescribeDatasetResponse_Name *smithy.Schema
-
-var DescribeDatasetResponse_Format *smithy.Schema
-
-var DescribeDatasetResponse_FormatOptions *smithy.Schema
-
-var DescribeDatasetResponse_Input *smithy.Schema
-
-var DescribeDatasetResponse_LastModifiedDate *smithy.Schema
-
-var DescribeDatasetResponse_LastModifiedBy *smithy.Schema
-
-var DescribeDatasetResponse_Source *smithy.Schema
-
-var DescribeDatasetResponse_PathOptions *smithy.Schema
-
-var DescribeDatasetResponse_Tags *smithy.Schema
-
-var DescribeDatasetResponse_ResourceArn *smithy.Schema
-
-var DescribeJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DescribeJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeJobRequest_Name *smithy.Schema
-
-var DescribeJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DescribeJobResponse",
-}, smithy.ShapeTypeStructure, 24)
-var DescribeJobResponse_CreateDate *smithy.Schema
-
-var DescribeJobResponse_CreatedBy *smithy.Schema
-
-var DescribeJobResponse_DatasetName *smithy.Schema
-
-var DescribeJobResponse_EncryptionKeyArn *smithy.Schema
-
-var DescribeJobResponse_EncryptionMode *smithy.Schema
-
-var DescribeJobResponse_Name *smithy.Schema
-
-var DescribeJobResponse_Type *smithy.Schema
-
-var DescribeJobResponse_LastModifiedBy *smithy.Schema
-
-var DescribeJobResponse_LastModifiedDate *smithy.Schema
-
-var DescribeJobResponse_LogSubscription *smithy.Schema
-
-var DescribeJobResponse_MaxCapacity *smithy.Schema
-
-var DescribeJobResponse_MaxRetries *smithy.Schema
-
-var DescribeJobResponse_Outputs *smithy.Schema
-
-var DescribeJobResponse_DataCatalogOutputs *smithy.Schema
-
-var DescribeJobResponse_DatabaseOutputs *smithy.Schema
-
-var DescribeJobResponse_ProjectName *smithy.Schema
-
-var DescribeJobResponse_ProfileConfiguration *smithy.Schema
-
-var DescribeJobResponse_ValidationConfigurations *smithy.Schema
-
-var DescribeJobResponse_RecipeReference *smithy.Schema
-
-var DescribeJobResponse_ResourceArn *smithy.Schema
-
-var DescribeJobResponse_RoleArn *smithy.Schema
-
-var DescribeJobResponse_Tags *smithy.Schema
-
-var DescribeJobResponse_Timeout *smithy.Schema
-
-var DescribeJobResponse_JobSample *smithy.Schema
-
-var DescribeJobRunRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DescribeJobRunRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeJobRunRequest_Name *smithy.Schema
-
-var DescribeJobRunRequest_RunId *smithy.Schema
-
-var DescribeJobRunResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DescribeJobRunResponse",
-}, smithy.ShapeTypeStructure, 19)
-var DescribeJobRunResponse_Attempt *smithy.Schema
-
-var DescribeJobRunResponse_CompletedOn *smithy.Schema
-
-var DescribeJobRunResponse_DatasetName *smithy.Schema
-
-var DescribeJobRunResponse_ErrorMessage *smithy.Schema
-
-var DescribeJobRunResponse_ExecutionTime *smithy.Schema
-
-var DescribeJobRunResponse_JobName *smithy.Schema
-
-var DescribeJobRunResponse_ProfileConfiguration *smithy.Schema
-
-var DescribeJobRunResponse_ValidationConfigurations *smithy.Schema
-
-var DescribeJobRunResponse_RunId *smithy.Schema
-
-var DescribeJobRunResponse_State *smithy.Schema
-
-var DescribeJobRunResponse_LogSubscription *smithy.Schema
-
-var DescribeJobRunResponse_LogGroupName *smithy.Schema
-
-var DescribeJobRunResponse_Outputs *smithy.Schema
-
-var DescribeJobRunResponse_DataCatalogOutputs *smithy.Schema
-
-var DescribeJobRunResponse_DatabaseOutputs *smithy.Schema
-
-var DescribeJobRunResponse_RecipeReference *smithy.Schema
-
-var DescribeJobRunResponse_StartedBy *smithy.Schema
-
-var DescribeJobRunResponse_StartedOn *smithy.Schema
-
-var DescribeJobRunResponse_JobSample *smithy.Schema
-
-var DescribeProjectRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DescribeProjectRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeProjectRequest_Name *smithy.Schema
-
-var DescribeProjectResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DescribeProjectResponse",
-}, smithy.ShapeTypeStructure, 14)
-var DescribeProjectResponse_CreateDate *smithy.Schema
-
-var DescribeProjectResponse_CreatedBy *smithy.Schema
-
-var DescribeProjectResponse_DatasetName *smithy.Schema
-
-var DescribeProjectResponse_LastModifiedDate *smithy.Schema
-
-var DescribeProjectResponse_LastModifiedBy *smithy.Schema
-
-var DescribeProjectResponse_Name *smithy.Schema
-
-var DescribeProjectResponse_RecipeName *smithy.Schema
-
-var DescribeProjectResponse_ResourceArn *smithy.Schema
-
-var DescribeProjectResponse_Sample *smithy.Schema
-
-var DescribeProjectResponse_RoleArn *smithy.Schema
-
-var DescribeProjectResponse_Tags *smithy.Schema
-
-var DescribeProjectResponse_SessionStatus *smithy.Schema
-
-var DescribeProjectResponse_OpenedBy *smithy.Schema
-
-var DescribeProjectResponse_OpenDate *smithy.Schema
-
-var DescribeRecipeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DescribeRecipeRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeRecipeRequest_Name *smithy.Schema
-
-var DescribeRecipeRequest_RecipeVersion *smithy.Schema
-
-var DescribeRecipeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DescribeRecipeResponse",
-}, smithy.ShapeTypeStructure, 13)
-var DescribeRecipeResponse_CreatedBy *smithy.Schema
-
-var DescribeRecipeResponse_CreateDate *smithy.Schema
-
-var DescribeRecipeResponse_LastModifiedBy *smithy.Schema
-
-var DescribeRecipeResponse_LastModifiedDate *smithy.Schema
-
-var DescribeRecipeResponse_ProjectName *smithy.Schema
-
-var DescribeRecipeResponse_PublishedBy *smithy.Schema
-
-var DescribeRecipeResponse_PublishedDate *smithy.Schema
-
-var DescribeRecipeResponse_Description *smithy.Schema
-
-var DescribeRecipeResponse_Name *smithy.Schema
-
-var DescribeRecipeResponse_Steps *smithy.Schema
-
-var DescribeRecipeResponse_Tags *smithy.Schema
-
-var DescribeRecipeResponse_ResourceArn *smithy.Schema
-
-var DescribeRecipeResponse_RecipeVersion *smithy.Schema
-
-var DescribeRulesetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DescribeRulesetRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeRulesetRequest_Name *smithy.Schema
-
-var DescribeRulesetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DescribeRulesetResponse",
-}, smithy.ShapeTypeStructure, 10)
-var DescribeRulesetResponse_Name *smithy.Schema
-
-var DescribeRulesetResponse_Description *smithy.Schema
-
-var DescribeRulesetResponse_TargetArn *smithy.Schema
-
-var DescribeRulesetResponse_Rules *smithy.Schema
-
-var DescribeRulesetResponse_CreateDate *smithy.Schema
-
-var DescribeRulesetResponse_CreatedBy *smithy.Schema
-
-var DescribeRulesetResponse_LastModifiedBy *smithy.Schema
-
-var DescribeRulesetResponse_LastModifiedDate *smithy.Schema
-
-var DescribeRulesetResponse_ResourceArn *smithy.Schema
-
-var DescribeRulesetResponse_Tags *smithy.Schema
-
-var DescribeScheduleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DescribeScheduleRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeScheduleRequest_Name *smithy.Schema
-
-var DescribeScheduleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "DescribeScheduleResponse",
-}, smithy.ShapeTypeStructure, 9)
-var DescribeScheduleResponse_CreateDate *smithy.Schema
-
-var DescribeScheduleResponse_CreatedBy *smithy.Schema
-
-var DescribeScheduleResponse_JobNames *smithy.Schema
-
-var DescribeScheduleResponse_LastModifiedBy *smithy.Schema
-
-var DescribeScheduleResponse_LastModifiedDate *smithy.Schema
-
-var DescribeScheduleResponse_ResourceArn *smithy.Schema
-
-var DescribeScheduleResponse_CronExpression *smithy.Schema
-
-var DescribeScheduleResponse_Tags *smithy.Schema
-
-var DescribeScheduleResponse_Name *smithy.Schema
-
-var ListDatasetsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ListDatasetsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListDatasetsRequest_MaxResults *smithy.Schema
-
-var ListDatasetsRequest_NextToken *smithy.Schema
-
-var ListDatasetsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ListDatasetsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListDatasetsResponse_Datasets *smithy.Schema
-
-var ListDatasetsResponse_NextToken *smithy.Schema
-
-var ListJobRunsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ListJobRunsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListJobRunsRequest_Name *smithy.Schema
-
-var ListJobRunsRequest_MaxResults *smithy.Schema
-
-var ListJobRunsRequest_NextToken *smithy.Schema
-
-var ListJobRunsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ListJobRunsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListJobRunsResponse_JobRuns *smithy.Schema
-
-var ListJobRunsResponse_NextToken *smithy.Schema
-
-var ListJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ListJobsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListJobsRequest_DatasetName *smithy.Schema
-
-var ListJobsRequest_MaxResults *smithy.Schema
-
-var ListJobsRequest_NextToken *smithy.Schema
-
-var ListJobsRequest_ProjectName *smithy.Schema
-
-var ListJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ListJobsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListJobsResponse_Jobs *smithy.Schema
-
-var ListJobsResponse_NextToken *smithy.Schema
-
-var ListProjectsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ListProjectsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListProjectsRequest_NextToken *smithy.Schema
-
-var ListProjectsRequest_MaxResults *smithy.Schema
-
-var ListProjectsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ListProjectsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListProjectsResponse_Projects *smithy.Schema
-
-var ListProjectsResponse_NextToken *smithy.Schema
-
-var ListRecipesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ListRecipesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListRecipesRequest_MaxResults *smithy.Schema
-
-var ListRecipesRequest_NextToken *smithy.Schema
-
-var ListRecipesRequest_RecipeVersion *smithy.Schema
-
-var ListRecipesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ListRecipesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListRecipesResponse_Recipes *smithy.Schema
-
-var ListRecipesResponse_NextToken *smithy.Schema
-
-var ListRecipeVersionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ListRecipeVersionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListRecipeVersionsRequest_MaxResults *smithy.Schema
-
-var ListRecipeVersionsRequest_NextToken *smithy.Schema
-
-var ListRecipeVersionsRequest_Name *smithy.Schema
-
-var ListRecipeVersionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ListRecipeVersionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListRecipeVersionsResponse_NextToken *smithy.Schema
-
-var ListRecipeVersionsResponse_Recipes *smithy.Schema
-
-var ListRulesetsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ListRulesetsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListRulesetsRequest_TargetArn *smithy.Schema
-
-var ListRulesetsRequest_MaxResults *smithy.Schema
-
-var ListRulesetsRequest_NextToken *smithy.Schema
-
-var ListRulesetsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ListRulesetsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListRulesetsResponse_Rulesets *smithy.Schema
-
-var ListRulesetsResponse_NextToken *smithy.Schema
-
-var ListSchedulesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ListSchedulesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListSchedulesRequest_JobName *smithy.Schema
-
-var ListSchedulesRequest_MaxResults *smithy.Schema
-
-var ListSchedulesRequest_NextToken *smithy.Schema
-
-var ListSchedulesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ListSchedulesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSchedulesResponse_Schedules *smithy.Schema
-
-var ListSchedulesResponse_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var PublishRecipeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "PublishRecipeRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PublishRecipeRequest_Description *smithy.Schema
-
-var PublishRecipeRequest_Name *smithy.Schema
-
-var PublishRecipeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "PublishRecipeResponse",
-}, smithy.ShapeTypeStructure, 1)
-var PublishRecipeResponse_Name *smithy.Schema
-
-var SendProjectSessionActionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "SendProjectSessionActionRequest",
-}, smithy.ShapeTypeStructure, 6)
-var SendProjectSessionActionRequest_Preview *smithy.Schema
-
-var SendProjectSessionActionRequest_Name *smithy.Schema
-
-var SendProjectSessionActionRequest_RecipeStep *smithy.Schema
-
-var SendProjectSessionActionRequest_StepIndex *smithy.Schema
-
-var SendProjectSessionActionRequest_ClientSessionId *smithy.Schema
-
-var SendProjectSessionActionRequest_ViewFrame *smithy.Schema
-
-var SendProjectSessionActionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "SendProjectSessionActionResponse",
-}, smithy.ShapeTypeStructure, 3)
-var SendProjectSessionActionResponse_Result *smithy.Schema
-
-var SendProjectSessionActionResponse_Name *smithy.Schema
-
-var SendProjectSessionActionResponse_ActionId *smithy.Schema
-
-var StartJobRunRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "StartJobRunRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StartJobRunRequest_Name *smithy.Schema
-
-var StartJobRunResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "StartJobRunResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartJobRunResponse_RunId *smithy.Schema
-
-var StartProjectSessionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "StartProjectSessionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var StartProjectSessionRequest_Name *smithy.Schema
-
-var StartProjectSessionRequest_AssumeControl *smithy.Schema
-
-var StartProjectSessionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "StartProjectSessionResponse",
-}, smithy.ShapeTypeStructure, 2)
-var StartProjectSessionResponse_Name *smithy.Schema
-
-var StartProjectSessionResponse_ClientSessionId *smithy.Schema
-
-var StopJobRunRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "StopJobRunRequest",
-}, smithy.ShapeTypeStructure, 2)
-var StopJobRunRequest_Name *smithy.Schema
-
-var StopJobRunRequest_RunId *smithy.Schema
-
-var StopJobRunResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "StopJobRunResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StopJobRunResponse_RunId *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceArn *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceArn *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateDatasetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "UpdateDatasetRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateDatasetRequest_Name *smithy.Schema
-
-var UpdateDatasetRequest_Format *smithy.Schema
-
-var UpdateDatasetRequest_FormatOptions *smithy.Schema
-
-var UpdateDatasetRequest_Input *smithy.Schema
-
-var UpdateDatasetRequest_PathOptions *smithy.Schema
-
-var UpdateDatasetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "UpdateDatasetResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateDatasetResponse_Name *smithy.Schema
-
-var UpdateProfileJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "UpdateProfileJobRequest",
-}, smithy.ShapeTypeStructure, 12)
-var UpdateProfileJobRequest_Configuration *smithy.Schema
-
-var UpdateProfileJobRequest_EncryptionKeyArn *smithy.Schema
-
-var UpdateProfileJobRequest_EncryptionMode *smithy.Schema
-
-var UpdateProfileJobRequest_Name *smithy.Schema
-
-var UpdateProfileJobRequest_LogSubscription *smithy.Schema
-
-var UpdateProfileJobRequest_MaxCapacity *smithy.Schema
-
-var UpdateProfileJobRequest_MaxRetries *smithy.Schema
-
-var UpdateProfileJobRequest_OutputLocation *smithy.Schema
-
-var UpdateProfileJobRequest_ValidationConfigurations *smithy.Schema
-
-var UpdateProfileJobRequest_RoleArn *smithy.Schema
-
-var UpdateProfileJobRequest_Timeout *smithy.Schema
-
-var UpdateProfileJobRequest_JobSample *smithy.Schema
-
-var UpdateProfileJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "UpdateProfileJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateProfileJobResponse_Name *smithy.Schema
-
-var UpdateProjectRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "UpdateProjectRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateProjectRequest_Sample *smithy.Schema
-
-var UpdateProjectRequest_RoleArn *smithy.Schema
-
-var UpdateProjectRequest_Name *smithy.Schema
-
-var UpdateProjectResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "UpdateProjectResponse",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateProjectResponse_LastModifiedDate *smithy.Schema
-
-var UpdateProjectResponse_Name *smithy.Schema
-
-var UpdateRecipeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "UpdateRecipeRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateRecipeRequest_Description *smithy.Schema
-
-var UpdateRecipeRequest_Name *smithy.Schema
-
-var UpdateRecipeRequest_Steps *smithy.Schema
-
-var UpdateRecipeJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "UpdateRecipeJobRequest",
-}, smithy.ShapeTypeStructure, 11)
-var UpdateRecipeJobRequest_EncryptionKeyArn *smithy.Schema
-
-var UpdateRecipeJobRequest_EncryptionMode *smithy.Schema
-
-var UpdateRecipeJobRequest_Name *smithy.Schema
-
-var UpdateRecipeJobRequest_LogSubscription *smithy.Schema
-
-var UpdateRecipeJobRequest_MaxCapacity *smithy.Schema
-
-var UpdateRecipeJobRequest_MaxRetries *smithy.Schema
-
-var UpdateRecipeJobRequest_Outputs *smithy.Schema
-
-var UpdateRecipeJobRequest_DataCatalogOutputs *smithy.Schema
-
-var UpdateRecipeJobRequest_DatabaseOutputs *smithy.Schema
-
-var UpdateRecipeJobRequest_RoleArn *smithy.Schema
-
-var UpdateRecipeJobRequest_Timeout *smithy.Schema
-
-var UpdateRecipeJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "UpdateRecipeJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateRecipeJobResponse_Name *smithy.Schema
-
-var UpdateRecipeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "UpdateRecipeResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateRecipeResponse_Name *smithy.Schema
-
-var UpdateRulesetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "UpdateRulesetRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateRulesetRequest_Name *smithy.Schema
-
-var UpdateRulesetRequest_Description *smithy.Schema
-
-var UpdateRulesetRequest_Rules *smithy.Schema
-
-var UpdateRulesetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "UpdateRulesetResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateRulesetResponse_Name *smithy.Schema
-
-var UpdateScheduleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "UpdateScheduleRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateScheduleRequest_JobNames *smithy.Schema
-
-var UpdateScheduleRequest_CronExpression *smithy.Schema
-
-var UpdateScheduleRequest_Name *smithy.Schema
-
-var UpdateScheduleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.databrew",
-	Name:      "UpdateScheduleResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateScheduleResponse_Name *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _Message)
-
-	_StatisticList_member = _StatisticList.AddMember("member", _Statistic)
-
-	AllowedStatistics_Statistics = AllowedStatistics.AddMember("Statistics", _StatisticList)
-
-	_AllowedStatisticList_member = _AllowedStatisticList.AddMember("member", AllowedStatistics)
-
-	AnalyticsMode_ENABLE = AnalyticsMode.AddMember("ENABLE", smithyprelude.Unit)
-
-	AnalyticsMode_DISABLE = AnalyticsMode.AddMember("DISABLE", smithyprelude.Unit)
-
-	_ColumnNameList_member = _ColumnNameList.AddMember("member", _ColumnName)
-
-	ColumnSelector_Regex = ColumnSelector.AddMember("Regex", _ColumnName)
-
-	ColumnSelector_Name = ColumnSelector.AddMember("Name", _ColumnName)
-
-	_ColumnSelectorList_member = _ColumnSelectorList.AddMember("member", ColumnSelector)
-
-	_ParameterMap_key = _ParameterMap.AddMember("key", _ParameterName)
-
-	_ParameterMap_value = _ParameterMap.AddMember("value", _ParameterValue)
-
-	StatisticOverride_Statistic = StatisticOverride.AddMember("Statistic", _Statistic)
-
-	StatisticOverride_Parameters = StatisticOverride.AddMember("Parameters", _ParameterMap)
-
-	_StatisticOverrideList_member = _StatisticOverrideList.AddMember("member", StatisticOverride)
-
-	StatisticsConfiguration_IncludedStatistics = StatisticsConfiguration.AddMember("IncludedStatistics", _StatisticList)
-
-	StatisticsConfiguration_Overrides = StatisticsConfiguration.AddMember("Overrides", _StatisticOverrideList)
-
-	ColumnStatisticsConfiguration_Selectors = ColumnStatisticsConfiguration.AddMember("Selectors", _ColumnSelectorList)
-
-	ColumnStatisticsConfiguration_Statistics = ColumnStatisticsConfiguration.AddMember("Statistics", StatisticsConfiguration)
-
-	_ColumnStatisticsConfigurationList_member = _ColumnStatisticsConfigurationList.AddMember("member", ColumnStatisticsConfiguration)
-
-	CompressionFormat_GZIP = CompressionFormat.AddMember("GZIP", smithyprelude.Unit)
-
-	CompressionFormat_LZ4 = CompressionFormat.AddMember("LZ4", smithyprelude.Unit)
-
-	CompressionFormat_SNAPPY = CompressionFormat.AddMember("SNAPPY", smithyprelude.Unit)
-
-	CompressionFormat_BZIP2 = CompressionFormat.AddMember("BZIP2", smithyprelude.Unit)
-
-	CompressionFormat_DEFLATE = CompressionFormat.AddMember("DEFLATE", smithyprelude.Unit)
-
-	CompressionFormat_LZO = CompressionFormat.AddMember("LZO", smithyprelude.Unit)
-
-	CompressionFormat_BROTLI = CompressionFormat.AddMember("BROTLI", smithyprelude.Unit)
-
-	CompressionFormat_ZSTD = CompressionFormat.AddMember("ZSTD", smithyprelude.Unit)
-
-	CompressionFormat_ZLIB = CompressionFormat.AddMember("ZLIB", smithyprelude.Unit)
-
-	ConditionExpression_Condition = ConditionExpression.AddMember("Condition", _Condition)
-
-	ConditionExpression_Value = ConditionExpression.AddMember("Value", _ConditionValue)
-
-	ConditionExpression_TargetColumn = ConditionExpression.AddMember("TargetColumn", _TargetColumn)
-
-	_ConditionExpressionList_member = _ConditionExpressionList.AddMember("member", ConditionExpression)
-
-	ConflictException_Message = ConflictException.AddMember("Message", _Message)
-
-	CsvOptions_Delimiter = CsvOptions.AddMember("Delimiter", _Delimiter)
-
-	CsvOptions_HeaderRow = CsvOptions.AddMember("HeaderRow", _HeaderRow)
-
-	CsvOutputOptions_Delimiter = CsvOutputOptions.AddMember("Delimiter", _Delimiter)
-
-	S3Location_Bucket = S3Location.AddMember("Bucket", _Bucket)
-
-	S3Location_Key = S3Location.AddMember("Key", _Key)
-
-	S3Location_BucketOwner = S3Location.AddMember("BucketOwner", _BucketOwner)
-
-	DatabaseInputDefinition_GlueConnectionName = DatabaseInputDefinition.AddMember("GlueConnectionName", _GlueConnectionName)
-
-	DatabaseInputDefinition_DatabaseTableName = DatabaseInputDefinition.AddMember("DatabaseTableName", _DatabaseTableName)
-
-	DatabaseInputDefinition_TempDirectory = DatabaseInputDefinition.AddMember("TempDirectory", S3Location)
-
-	DatabaseInputDefinition_QueryString = DatabaseInputDefinition.AddMember("QueryString", _QueryString)
-
-	DatabaseTableOutputOptions_TempDirectory = DatabaseTableOutputOptions.AddMember("TempDirectory", S3Location)
-
-	DatabaseTableOutputOptions_TableName = DatabaseTableOutputOptions.AddMember("TableName", _DatabaseTableName)
-
-	DatabaseOutputMode_NEW_TABLE = DatabaseOutputMode.AddMember("NEW_TABLE", smithyprelude.Unit)
-
-	DatabaseOutput_GlueConnectionName = DatabaseOutput.AddMember("GlueConnectionName", _GlueConnectionName)
-
-	DatabaseOutput_DatabaseOptions = DatabaseOutput.AddMember("DatabaseOptions", DatabaseTableOutputOptions)
-
-	DatabaseOutput_DatabaseOutputMode = DatabaseOutput.AddMember("DatabaseOutputMode", DatabaseOutputMode)
-
-	_DatabaseOutputList_member = _DatabaseOutputList.AddMember("member", DatabaseOutput)
-
-	DataCatalogInputDefinition_CatalogId = DataCatalogInputDefinition.AddMember("CatalogId", _CatalogId)
-
-	DataCatalogInputDefinition_DatabaseName = DataCatalogInputDefinition.AddMember("DatabaseName", _DatabaseName)
-
-	DataCatalogInputDefinition_TableName = DataCatalogInputDefinition.AddMember("TableName", _TableName)
-
-	DataCatalogInputDefinition_TempDirectory = DataCatalogInputDefinition.AddMember("TempDirectory", S3Location)
-
-	S3TableOutputOptions_Location = S3TableOutputOptions.AddMember("Location", S3Location)
-
-	DataCatalogOutput_CatalogId = DataCatalogOutput.AddMember("CatalogId", _CatalogId)
-
-	DataCatalogOutput_DatabaseName = DataCatalogOutput.AddMember("DatabaseName", _DatabaseName)
-
-	DataCatalogOutput_TableName = DataCatalogOutput.AddMember("TableName", _TableName)
-
-	DataCatalogOutput_S3Options = DataCatalogOutput.AddMember("S3Options", S3TableOutputOptions)
-
-	DataCatalogOutput_DatabaseOptions = DataCatalogOutput.AddMember("DatabaseOptions", DatabaseTableOutputOptions)
-
-	DataCatalogOutput_Overwrite = DataCatalogOutput.AddMember("Overwrite", _OverwriteOutput)
-
-	_DataCatalogOutputList_member = _DataCatalogOutputList.AddMember("member", DataCatalogOutput)
-
-	InputFormat_CSV = InputFormat.AddMember("CSV", smithyprelude.Unit)
-
-	InputFormat_JSON = InputFormat.AddMember("JSON", smithyprelude.Unit)
-
-	InputFormat_PARQUET = InputFormat.AddMember("PARQUET", smithyprelude.Unit)
-
-	InputFormat_EXCEL = InputFormat.AddMember("EXCEL", smithyprelude.Unit)
-
-	InputFormat_ORC = InputFormat.AddMember("ORC", smithyprelude.Unit)
-
-	JsonOptions_MultiLine = JsonOptions.AddMember("MultiLine", _MultiLine)
-
-	_SheetNameList_member = _SheetNameList.AddMember("member", _SheetName)
-
-	_SheetIndexList_member = _SheetIndexList.AddMember("member", _SheetIndex)
-
-	ExcelOptions_SheetNames = ExcelOptions.AddMember("SheetNames", _SheetNameList)
-
-	ExcelOptions_SheetIndexes = ExcelOptions.AddMember("SheetIndexes", _SheetIndexList)
-
-	ExcelOptions_HeaderRow = ExcelOptions.AddMember("HeaderRow", _HeaderRow)
-
-	FormatOptions_Json = FormatOptions.AddMember("Json", JsonOptions)
-
-	FormatOptions_Excel = FormatOptions.AddMember("Excel", ExcelOptions)
-
-	FormatOptions_Csv = FormatOptions.AddMember("Csv", CsvOptions)
-
-	Metadata_SourceArn = Metadata.AddMember("SourceArn", _Arn)
-
-	Input_S3InputDefinition = Input.AddMember("S3InputDefinition", S3Location)
-
-	Input_DataCatalogInputDefinition = Input.AddMember("DataCatalogInputDefinition", DataCatalogInputDefinition)
-
-	Input_DatabaseInputDefinition = Input.AddMember("DatabaseInputDefinition", DatabaseInputDefinition)
-
-	Input_Metadata = Input.AddMember("Metadata", Metadata)
-
-	Source_S3 = Source.AddMember("S3", smithyprelude.Unit)
-
-	Source_DATACATALOG = Source.AddMember("DATACATALOG", smithyprelude.Unit)
-
-	Source_DATABASE = Source.AddMember("DATABASE", smithyprelude.Unit)
-
-	_ValuesMap_key = _ValuesMap.AddMember("key", _ValueReference)
-
-	_ValuesMap_value = _ValuesMap.AddMember("value", _ConditionValue)
-
-	FilterExpression_Expression = FilterExpression.AddMember("Expression", _Expression)
-
-	FilterExpression_ValuesMap = FilterExpression.AddMember("ValuesMap", _ValuesMap)
-
-	OrderedBy_LAST_MODIFIED_DATE = OrderedBy.AddMember("LAST_MODIFIED_DATE", smithyprelude.Unit)
-
-	Order_DESCENDING = Order.AddMember("DESCENDING", smithyprelude.Unit)
-
-	Order_ASCENDING = Order.AddMember("ASCENDING", smithyprelude.Unit)
-
-	FilesLimit_MaxFiles = FilesLimit.AddMember("MaxFiles", _MaxFiles)
-
-	FilesLimit_OrderedBy = FilesLimit.AddMember("OrderedBy", OrderedBy)
-
-	FilesLimit_Order = FilesLimit.AddMember("Order", Order)
-
-	ParameterType_Datetime = ParameterType.AddMember("Datetime", smithyprelude.Unit)
-
-	ParameterType_Number = ParameterType.AddMember("Number", smithyprelude.Unit)
-
-	ParameterType_String = ParameterType.AddMember("String", smithyprelude.Unit)
-
-	DatetimeOptions_Format = DatetimeOptions.AddMember("Format", _DatetimeFormat)
-
-	DatetimeOptions_TimezoneOffset = DatetimeOptions.AddMember("TimezoneOffset", _TimezoneOffset)
-
-	DatetimeOptions_LocaleCode = DatetimeOptions.AddMember("LocaleCode", _LocaleCode)
-
-	DatasetParameter_Name = DatasetParameter.AddMember("Name", _PathParameterName)
-
-	DatasetParameter_Type = DatasetParameter.AddMember("Type", ParameterType)
-
-	DatasetParameter_DatetimeOptions = DatasetParameter.AddMember("DatetimeOptions", DatetimeOptions)
-
-	DatasetParameter_CreateColumn = DatasetParameter.AddMember("CreateColumn", _CreateColumn)
-
-	DatasetParameter_Filter = DatasetParameter.AddMember("Filter", FilterExpression)
-
-	_PathParametersMap_key = _PathParametersMap.AddMember("key", _PathParameterName)
-
-	_PathParametersMap_value = _PathParametersMap.AddMember("value", DatasetParameter)
-
-	PathOptions_LastModifiedDateCondition = PathOptions.AddMember("LastModifiedDateCondition", FilterExpression)
-
-	PathOptions_FilesLimit = PathOptions.AddMember("FilesLimit", FilesLimit)
-
-	PathOptions_Parameters = PathOptions.AddMember("Parameters", _PathParametersMap)
-
-	_TagMap_key = _TagMap.AddMember("key", _TagKey)
-
-	_TagMap_value = _TagMap.AddMember("value", _TagValue)
-
-	Dataset_AccountId = Dataset.AddMember("AccountId", _AccountId)
-
-	Dataset_CreatedBy = Dataset.AddMember("CreatedBy", _CreatedBy)
-
-	Dataset_CreateDate = Dataset.AddMember("CreateDate", _Date)
-
-	Dataset_Name = Dataset.AddMember("Name", _DatasetName)
-
-	Dataset_Format = Dataset.AddMember("Format", InputFormat)
-
-	Dataset_FormatOptions = Dataset.AddMember("FormatOptions", FormatOptions)
-
-	Dataset_Input = Dataset.AddMember("Input", Input)
-
-	Dataset_LastModifiedDate = Dataset.AddMember("LastModifiedDate", _Date)
-
-	Dataset_LastModifiedBy = Dataset.AddMember("LastModifiedBy", _LastModifiedBy)
-
-	Dataset_Source = Dataset.AddMember("Source", Source)
-
-	Dataset_PathOptions = Dataset.AddMember("PathOptions", PathOptions)
-
-	Dataset_Tags = Dataset.AddMember("Tags", _TagMap)
-
-	Dataset_ResourceArn = Dataset.AddMember("ResourceArn", _Arn)
-
-	_DatasetList_member = _DatasetList.AddMember("member", Dataset)
-
-	EncryptionMode_SSEKMS = EncryptionMode.AddMember("SSEKMS", smithyprelude.Unit)
-
-	EncryptionMode_SSES3 = EncryptionMode.AddMember("SSES3", smithyprelude.Unit)
-
-	_EntityTypeList_member = _EntityTypeList.AddMember("member", _EntityType)
-
-	EntityDetectorConfiguration_EntityTypes = EntityDetectorConfiguration.AddMember("EntityTypes", _EntityTypeList)
-
-	EntityDetectorConfiguration_AllowedStatistics = EntityDetectorConfiguration.AddMember("AllowedStatistics", _AllowedStatisticList)
-
-	_HiddenColumnList_member = _HiddenColumnList.AddMember("member", _ColumnName)
-
-	InternalServerException_Message = InternalServerException.AddMember("Message", _Message)
-
-	JobType_PROFILE = JobType.AddMember("PROFILE", smithyprelude.Unit)
-
-	JobType_RECIPE = JobType.AddMember("RECIPE", smithyprelude.Unit)
-
-	LogSubscription_ENABLE = LogSubscription.AddMember("ENABLE", smithyprelude.Unit)
-
-	LogSubscription_DISABLE = LogSubscription.AddMember("DISABLE", smithyprelude.Unit)
-
-	OutputFormat_CSV = OutputFormat.AddMember("CSV", smithyprelude.Unit)
-
-	OutputFormat_JSON = OutputFormat.AddMember("JSON", smithyprelude.Unit)
-
-	OutputFormat_PARQUET = OutputFormat.AddMember("PARQUET", smithyprelude.Unit)
-
-	OutputFormat_GLUEPARQUET = OutputFormat.AddMember("GLUEPARQUET", smithyprelude.Unit)
-
-	OutputFormat_AVRO = OutputFormat.AddMember("AVRO", smithyprelude.Unit)
-
-	OutputFormat_ORC = OutputFormat.AddMember("ORC", smithyprelude.Unit)
-
-	OutputFormat_XML = OutputFormat.AddMember("XML", smithyprelude.Unit)
-
-	OutputFormat_TABLEAUHYPER = OutputFormat.AddMember("TABLEAUHYPER", smithyprelude.Unit)
-
-	OutputFormatOptions_Csv = OutputFormatOptions.AddMember("Csv", CsvOutputOptions)
-
-	Output_CompressionFormat = Output.AddMember("CompressionFormat", CompressionFormat)
-
-	Output_Format = Output.AddMember("Format", OutputFormat)
-
-	Output_PartitionColumns = Output.AddMember("PartitionColumns", _ColumnNameList)
-
-	Output_Location = Output.AddMember("Location", S3Location)
-
-	Output_Overwrite = Output.AddMember("Overwrite", _OverwriteOutput)
-
-	Output_FormatOptions = Output.AddMember("FormatOptions", OutputFormatOptions)
-
-	Output_MaxOutputFiles = Output.AddMember("MaxOutputFiles", _MaxOutputFiles)
-
-	_OutputList_member = _OutputList.AddMember("member", Output)
-
-	RecipeReference_Name = RecipeReference.AddMember("Name", _RecipeName)
-
-	RecipeReference_RecipeVersion = RecipeReference.AddMember("RecipeVersion", _RecipeVersion)
-
-	SampleMode_FULL_DATASET = SampleMode.AddMember("FULL_DATASET", smithyprelude.Unit)
-
-	SampleMode_CUSTOM_ROWS = SampleMode.AddMember("CUSTOM_ROWS", smithyprelude.Unit)
-
-	JobSample_Mode = JobSample.AddMember("Mode", SampleMode)
-
-	JobSample_Size = JobSample.AddMember("Size", _JobSize)
-
-	ValidationMode_CHECK_ALL = ValidationMode.AddMember("CHECK_ALL", smithyprelude.Unit)
-
-	ValidationConfiguration_RulesetArn = ValidationConfiguration.AddMember("RulesetArn", _Arn)
-
-	ValidationConfiguration_ValidationMode = ValidationConfiguration.AddMember("ValidationMode", ValidationMode)
-
-	_ValidationConfigurationList_member = _ValidationConfigurationList.AddMember("member", ValidationConfiguration)
-
-	Job_AccountId = Job.AddMember("AccountId", _AccountId)
-
-	Job_CreatedBy = Job.AddMember("CreatedBy", _CreatedBy)
-
-	Job_CreateDate = Job.AddMember("CreateDate", _Date)
-
-	Job_DatasetName = Job.AddMember("DatasetName", _DatasetName)
-
-	Job_EncryptionKeyArn = Job.AddMember("EncryptionKeyArn", _EncryptionKeyArn)
-
-	Job_EncryptionMode = Job.AddMember("EncryptionMode", EncryptionMode)
-
-	Job_Name = Job.AddMember("Name", _JobName)
-
-	Job_Type = Job.AddMember("Type", JobType)
-
-	Job_LastModifiedBy = Job.AddMember("LastModifiedBy", _LastModifiedBy)
-
-	Job_LastModifiedDate = Job.AddMember("LastModifiedDate", _Date)
-
-	Job_LogSubscription = Job.AddMember("LogSubscription", LogSubscription)
-
-	Job_MaxCapacity = Job.AddMember("MaxCapacity", _MaxCapacity)
-
-	Job_MaxRetries = Job.AddMember("MaxRetries", _MaxRetries)
-
-	Job_Outputs = Job.AddMember("Outputs", _OutputList)
-
-	Job_DataCatalogOutputs = Job.AddMember("DataCatalogOutputs", _DataCatalogOutputList)
-
-	Job_DatabaseOutputs = Job.AddMember("DatabaseOutputs", _DatabaseOutputList)
-
-	Job_ProjectName = Job.AddMember("ProjectName", _ProjectName)
-
-	Job_RecipeReference = Job.AddMember("RecipeReference", RecipeReference)
-
-	Job_ResourceArn = Job.AddMember("ResourceArn", _Arn)
-
-	Job_RoleArn = Job.AddMember("RoleArn", _Arn)
-
-	Job_Timeout = Job.AddMember("Timeout", _Timeout)
-
-	Job_Tags = Job.AddMember("Tags", _TagMap)
-
-	Job_JobSample = Job.AddMember("JobSample", JobSample)
-
-	Job_ValidationConfigurations = Job.AddMember("ValidationConfigurations", _ValidationConfigurationList)
-
-	_JobList_member = _JobList.AddMember("member", Job)
-
-	_JobNameList_member = _JobNameList.AddMember("member", _JobName)
-
-	JobRunState_STARTING = JobRunState.AddMember("STARTING", smithyprelude.Unit)
-
-	JobRunState_RUNNING = JobRunState.AddMember("RUNNING", smithyprelude.Unit)
-
-	JobRunState_STOPPING = JobRunState.AddMember("STOPPING", smithyprelude.Unit)
-
-	JobRunState_STOPPED = JobRunState.AddMember("STOPPED", smithyprelude.Unit)
-
-	JobRunState_SUCCEEDED = JobRunState.AddMember("SUCCEEDED", smithyprelude.Unit)
-
-	JobRunState_FAILED = JobRunState.AddMember("FAILED", smithyprelude.Unit)
-
-	JobRunState_TIMEOUT = JobRunState.AddMember("TIMEOUT", smithyprelude.Unit)
-
-	JobRun_Attempt = JobRun.AddMember("Attempt", _Attempt)
-
-	JobRun_CompletedOn = JobRun.AddMember("CompletedOn", _Date)
-
-	JobRun_DatasetName = JobRun.AddMember("DatasetName", _DatasetName)
-
-	JobRun_ErrorMessage = JobRun.AddMember("ErrorMessage", _JobRunErrorMessage)
-
-	JobRun_ExecutionTime = JobRun.AddMember("ExecutionTime", _ExecutionTime)
-
-	JobRun_JobName = JobRun.AddMember("JobName", _JobName)
-
-	JobRun_RunId = JobRun.AddMember("RunId", _JobRunId)
-
-	JobRun_State = JobRun.AddMember("State", JobRunState)
-
-	JobRun_LogSubscription = JobRun.AddMember("LogSubscription", LogSubscription)
-
-	JobRun_LogGroupName = JobRun.AddMember("LogGroupName", _LogGroupName)
-
-	JobRun_Outputs = JobRun.AddMember("Outputs", _OutputList)
-
-	JobRun_DataCatalogOutputs = JobRun.AddMember("DataCatalogOutputs", _DataCatalogOutputList)
-
-	JobRun_DatabaseOutputs = JobRun.AddMember("DatabaseOutputs", _DatabaseOutputList)
-
-	JobRun_RecipeReference = JobRun.AddMember("RecipeReference", RecipeReference)
-
-	JobRun_StartedBy = JobRun.AddMember("StartedBy", _StartedBy)
-
-	JobRun_StartedOn = JobRun.AddMember("StartedOn", _Date)
-
-	JobRun_JobSample = JobRun.AddMember("JobSample", JobSample)
-
-	JobRun_ValidationConfigurations = JobRun.AddMember("ValidationConfigurations", _ValidationConfigurationList)
-
-	_JobRunList_member = _JobRunList.AddMember("member", JobRun)
-
-	ProfileConfiguration_DatasetStatisticsConfiguration = ProfileConfiguration.AddMember("DatasetStatisticsConfiguration", StatisticsConfiguration)
-
-	ProfileConfiguration_ProfileColumns = ProfileConfiguration.AddMember("ProfileColumns", _ColumnSelectorList)
-
-	ProfileConfiguration_ColumnStatisticsConfigurations = ProfileConfiguration.AddMember("ColumnStatisticsConfigurations", _ColumnStatisticsConfigurationList)
-
-	ProfileConfiguration_EntityDetectorConfiguration = ProfileConfiguration.AddMember("EntityDetectorConfiguration", EntityDetectorConfiguration)
-
-	SampleType_FIRST_N = SampleType.AddMember("FIRST_N", smithyprelude.Unit)
-
-	SampleType_LAST_N = SampleType.AddMember("LAST_N", smithyprelude.Unit)
-
-	SampleType_RANDOM = SampleType.AddMember("RANDOM", smithyprelude.Unit)
-
-	Sample_Size = Sample.AddMember("Size", _SampleSize)
-
-	Sample_Type = Sample.AddMember("Type", SampleType)
-
-	Project_AccountId = Project.AddMember("AccountId", _AccountId)
-
-	Project_CreateDate = Project.AddMember("CreateDate", _Date)
-
-	Project_CreatedBy = Project.AddMember("CreatedBy", _CreatedBy)
-
-	Project_DatasetName = Project.AddMember("DatasetName", _DatasetName)
-
-	Project_LastModifiedDate = Project.AddMember("LastModifiedDate", _Date)
-
-	Project_LastModifiedBy = Project.AddMember("LastModifiedBy", _LastModifiedBy)
-
-	Project_Name = Project.AddMember("Name", _ProjectName)
-
-	Project_RecipeName = Project.AddMember("RecipeName", _RecipeName)
-
-	Project_ResourceArn = Project.AddMember("ResourceArn", _Arn)
-
-	Project_Sample = Project.AddMember("Sample", Sample)
-
-	Project_Tags = Project.AddMember("Tags", _TagMap)
-
-	Project_RoleArn = Project.AddMember("RoleArn", _Arn)
-
-	Project_OpenedBy = Project.AddMember("OpenedBy", _OpenedBy)
-
-	Project_OpenDate = Project.AddMember("OpenDate", _Date)
-
-	_ProjectList_member = _ProjectList.AddMember("member", Project)
-
-	RecipeAction_Operation = RecipeAction.AddMember("Operation", _Operation)
-
-	RecipeAction_Parameters = RecipeAction.AddMember("Parameters", _ParameterMap)
-
-	RecipeStep_Action = RecipeStep.AddMember("Action", RecipeAction)
-
-	RecipeStep_ConditionExpressions = RecipeStep.AddMember("ConditionExpressions", _ConditionExpressionList)
-
-	_RecipeStepList_member = _RecipeStepList.AddMember("member", RecipeStep)
-
-	Recipe_CreatedBy = Recipe.AddMember("CreatedBy", _CreatedBy)
-
-	Recipe_CreateDate = Recipe.AddMember("CreateDate", _Date)
-
-	Recipe_LastModifiedBy = Recipe.AddMember("LastModifiedBy", _LastModifiedBy)
-
-	Recipe_LastModifiedDate = Recipe.AddMember("LastModifiedDate", _Date)
-
-	Recipe_ProjectName = Recipe.AddMember("ProjectName", _ProjectName)
-
-	Recipe_PublishedBy = Recipe.AddMember("PublishedBy", _PublishedBy)
-
-	Recipe_PublishedDate = Recipe.AddMember("PublishedDate", _Date)
-
-	Recipe_Description = Recipe.AddMember("Description", _RecipeDescription)
-
-	Recipe_Name = Recipe.AddMember("Name", _RecipeName)
-
-	Recipe_ResourceArn = Recipe.AddMember("ResourceArn", _Arn)
-
-	Recipe_Steps = Recipe.AddMember("Steps", _RecipeStepList)
-
-	Recipe_Tags = Recipe.AddMember("Tags", _TagMap)
-
-	Recipe_RecipeVersion = Recipe.AddMember("RecipeVersion", _RecipeVersion)
-
-	RecipeVersionErrorDetail_ErrorCode = RecipeVersionErrorDetail.AddMember("ErrorCode", _ErrorCode)
-
-	RecipeVersionErrorDetail_ErrorMessage = RecipeVersionErrorDetail.AddMember("ErrorMessage", _RecipeErrorMessage)
-
-	RecipeVersionErrorDetail_RecipeVersion = RecipeVersionErrorDetail.AddMember("RecipeVersion", _RecipeVersion)
-
-	_RecipeErrorList_member = _RecipeErrorList.AddMember("member", RecipeVersionErrorDetail)
-
-	_RecipeList_member = _RecipeList.AddMember("member", Recipe)
-
-	_RecipeVersionList_member = _RecipeVersionList.AddMember("member", _RecipeVersion)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _Message)
-
-	ThresholdType_GREATER_THAN_OR_EQUAL = ThresholdType.AddMember("GREATER_THAN_OR_EQUAL", smithyprelude.Unit)
-
-	ThresholdType_LESS_THAN_OR_EQUAL = ThresholdType.AddMember("LESS_THAN_OR_EQUAL", smithyprelude.Unit)
-
-	ThresholdType_GREATER_THAN = ThresholdType.AddMember("GREATER_THAN", smithyprelude.Unit)
-
-	ThresholdType_LESS_THAN = ThresholdType.AddMember("LESS_THAN", smithyprelude.Unit)
-
-	ThresholdUnit_COUNT = ThresholdUnit.AddMember("COUNT", smithyprelude.Unit)
-
-	ThresholdUnit_PERCENTAGE = ThresholdUnit.AddMember("PERCENTAGE", smithyprelude.Unit)
-
-	Threshold_Value = Threshold.AddMember("Value", _ThresholdValue)
-
-	Threshold_Type = Threshold.AddMember("Type", ThresholdType)
-
-	Threshold_Unit = Threshold.AddMember("Unit", ThresholdUnit)
-
-	Rule_Name = Rule.AddMember("Name", _RuleName)
-
-	Rule_Disabled = Rule.AddMember("Disabled", _Disabled)
-
-	Rule_CheckExpression = Rule.AddMember("CheckExpression", _Expression)
-
-	Rule_SubstitutionMap = Rule.AddMember("SubstitutionMap", _ValuesMap)
-
-	Rule_Threshold = Rule.AddMember("Threshold", Threshold)
-
-	Rule_ColumnSelectors = Rule.AddMember("ColumnSelectors", _ColumnSelectorList)
-
-	_RuleList_member = _RuleList.AddMember("member", Rule)
-
-	RulesetItem_AccountId = RulesetItem.AddMember("AccountId", _AccountId)
-
-	RulesetItem_CreatedBy = RulesetItem.AddMember("CreatedBy", _CreatedBy)
-
-	RulesetItem_CreateDate = RulesetItem.AddMember("CreateDate", _Date)
-
-	RulesetItem_Description = RulesetItem.AddMember("Description", _RulesetDescription)
-
-	RulesetItem_LastModifiedBy = RulesetItem.AddMember("LastModifiedBy", _LastModifiedBy)
-
-	RulesetItem_LastModifiedDate = RulesetItem.AddMember("LastModifiedDate", _Date)
-
-	RulesetItem_Name = RulesetItem.AddMember("Name", _RulesetName)
-
-	RulesetItem_ResourceArn = RulesetItem.AddMember("ResourceArn", _Arn)
-
-	RulesetItem_RuleCount = RulesetItem.AddMember("RuleCount", _RuleCount)
-
-	RulesetItem_Tags = RulesetItem.AddMember("Tags", _TagMap)
-
-	RulesetItem_TargetArn = RulesetItem.AddMember("TargetArn", _Arn)
-
-	_RulesetItemList_member = _RulesetItemList.AddMember("member", RulesetItem)
-
-	Schedule_AccountId = Schedule.AddMember("AccountId", _AccountId)
-
-	Schedule_CreatedBy = Schedule.AddMember("CreatedBy", _CreatedBy)
-
-	Schedule_CreateDate = Schedule.AddMember("CreateDate", _Date)
-
-	Schedule_JobNames = Schedule.AddMember("JobNames", _JobNameList)
-
-	Schedule_LastModifiedBy = Schedule.AddMember("LastModifiedBy", _LastModifiedBy)
-
-	Schedule_LastModifiedDate = Schedule.AddMember("LastModifiedDate", _Date)
-
-	Schedule_ResourceArn = Schedule.AddMember("ResourceArn", _Arn)
-
-	Schedule_CronExpression = Schedule.AddMember("CronExpression", _CronExpression)
-
-	Schedule_Tags = Schedule.AddMember("Tags", _TagMap)
-
-	Schedule_Name = Schedule.AddMember("Name", _ScheduleName)
-
-	_ScheduleList_member = _ScheduleList.AddMember("member", Schedule)
-
-	ServiceQuotaExceededException_Message = ServiceQuotaExceededException.AddMember("Message", _Message)
-
-	SessionStatus_ASSIGNED = SessionStatus.AddMember("ASSIGNED", smithyprelude.Unit)
-
-	SessionStatus_FAILED = SessionStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	SessionStatus_INITIALIZING = SessionStatus.AddMember("INITIALIZING", smithyprelude.Unit)
-
-	SessionStatus_PROVISIONING = SessionStatus.AddMember("PROVISIONING", smithyprelude.Unit)
-
-	SessionStatus_READY = SessionStatus.AddMember("READY", smithyprelude.Unit)
-
-	SessionStatus_RECYCLING = SessionStatus.AddMember("RECYCLING", smithyprelude.Unit)
-
-	SessionStatus_ROTATING = SessionStatus.AddMember("ROTATING", smithyprelude.Unit)
-
-	SessionStatus_TERMINATED = SessionStatus.AddMember("TERMINATED", smithyprelude.Unit)
-
-	SessionStatus_TERMINATING = SessionStatus.AddMember("TERMINATING", smithyprelude.Unit)
-
-	SessionStatus_UPDATING = SessionStatus.AddMember("UPDATING", smithyprelude.Unit)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	ValidationException_Message = ValidationException.AddMember("Message", _Message)
-
-	ViewFrame_StartColumnIndex = ViewFrame.AddMember("StartColumnIndex", _StartColumnIndex)
-
-	ViewFrame_ColumnRange = ViewFrame.AddMember("ColumnRange", _ColumnRange)
-
-	ViewFrame_HiddenColumns = ViewFrame.AddMember("HiddenColumns", _HiddenColumnList)
-
-	ViewFrame_StartRowIndex = ViewFrame.AddMember("StartRowIndex", _StartRowIndex)
-
-	ViewFrame_RowRange = ViewFrame.AddMember("RowRange", _RowRange)
-
-	ViewFrame_Analytics = ViewFrame.AddMember("Analytics", AnalyticsMode)
-
-	BatchDeleteRecipeVersionRequest_Name = BatchDeleteRecipeVersionRequest.AddMember("Name", _RecipeName, &smithytraits.HTTPLabel{})
-
-	BatchDeleteRecipeVersionRequest_RecipeVersions = BatchDeleteRecipeVersionRequest.AddMember("RecipeVersions", _RecipeVersionList)
-
-	BatchDeleteRecipeVersionResponse_Name = BatchDeleteRecipeVersionResponse.AddMember("Name", _RecipeName)
-
-	BatchDeleteRecipeVersionResponse_Errors = BatchDeleteRecipeVersionResponse.AddMember("Errors", _RecipeErrorList)
-
-	CreateDatasetRequest_Name = CreateDatasetRequest.AddMember("Name", _DatasetName)
-
-	CreateDatasetRequest_Format = CreateDatasetRequest.AddMember("Format", InputFormat)
-
-	CreateDatasetRequest_FormatOptions = CreateDatasetRequest.AddMember("FormatOptions", FormatOptions)
-
-	CreateDatasetRequest_Input = CreateDatasetRequest.AddMember("Input", Input)
-
-	CreateDatasetRequest_PathOptions = CreateDatasetRequest.AddMember("PathOptions", PathOptions)
-
-	CreateDatasetRequest_Tags = CreateDatasetRequest.AddMember("Tags", _TagMap)
-
-	CreateDatasetResponse_Name = CreateDatasetResponse.AddMember("Name", _DatasetName)
-
-	CreateProfileJobRequest_DatasetName = CreateProfileJobRequest.AddMember("DatasetName", _DatasetName)
-
-	CreateProfileJobRequest_EncryptionKeyArn = CreateProfileJobRequest.AddMember("EncryptionKeyArn", _EncryptionKeyArn)
-
-	CreateProfileJobRequest_EncryptionMode = CreateProfileJobRequest.AddMember("EncryptionMode", EncryptionMode)
-
-	CreateProfileJobRequest_Name = CreateProfileJobRequest.AddMember("Name", _JobName)
-
-	CreateProfileJobRequest_LogSubscription = CreateProfileJobRequest.AddMember("LogSubscription", LogSubscription)
-
-	CreateProfileJobRequest_MaxCapacity = CreateProfileJobRequest.AddMember("MaxCapacity", _MaxCapacity)
-
-	CreateProfileJobRequest_MaxRetries = CreateProfileJobRequest.AddMember("MaxRetries", _MaxRetries)
-
-	CreateProfileJobRequest_OutputLocation = CreateProfileJobRequest.AddMember("OutputLocation", S3Location)
-
-	CreateProfileJobRequest_Configuration = CreateProfileJobRequest.AddMember("Configuration", ProfileConfiguration)
-
-	CreateProfileJobRequest_ValidationConfigurations = CreateProfileJobRequest.AddMember("ValidationConfigurations", _ValidationConfigurationList)
-
-	CreateProfileJobRequest_RoleArn = CreateProfileJobRequest.AddMember("RoleArn", _Arn)
-
-	CreateProfileJobRequest_Tags = CreateProfileJobRequest.AddMember("Tags", _TagMap)
-
-	CreateProfileJobRequest_Timeout = CreateProfileJobRequest.AddMember("Timeout", _Timeout)
-
-	CreateProfileJobRequest_JobSample = CreateProfileJobRequest.AddMember("JobSample", JobSample)
-
-	CreateProfileJobResponse_Name = CreateProfileJobResponse.AddMember("Name", _JobName)
-
-	CreateProjectRequest_DatasetName = CreateProjectRequest.AddMember("DatasetName", _DatasetName)
-
-	CreateProjectRequest_Name = CreateProjectRequest.AddMember("Name", _ProjectName)
-
-	CreateProjectRequest_RecipeName = CreateProjectRequest.AddMember("RecipeName", _RecipeName)
-
-	CreateProjectRequest_Sample = CreateProjectRequest.AddMember("Sample", Sample)
-
-	CreateProjectRequest_RoleArn = CreateProjectRequest.AddMember("RoleArn", _Arn)
-
-	CreateProjectRequest_Tags = CreateProjectRequest.AddMember("Tags", _TagMap)
-
-	CreateProjectResponse_Name = CreateProjectResponse.AddMember("Name", _ProjectName)
-
-	CreateRecipeRequest_Description = CreateRecipeRequest.AddMember("Description", _RecipeDescription)
-
-	CreateRecipeRequest_Name = CreateRecipeRequest.AddMember("Name", _RecipeName)
-
-	CreateRecipeRequest_Steps = CreateRecipeRequest.AddMember("Steps", _RecipeStepList)
-
-	CreateRecipeRequest_Tags = CreateRecipeRequest.AddMember("Tags", _TagMap)
-
-	CreateRecipeJobRequest_DatasetName = CreateRecipeJobRequest.AddMember("DatasetName", _DatasetName)
-
-	CreateRecipeJobRequest_EncryptionKeyArn = CreateRecipeJobRequest.AddMember("EncryptionKeyArn", _EncryptionKeyArn)
-
-	CreateRecipeJobRequest_EncryptionMode = CreateRecipeJobRequest.AddMember("EncryptionMode", EncryptionMode)
-
-	CreateRecipeJobRequest_Name = CreateRecipeJobRequest.AddMember("Name", _JobName)
-
-	CreateRecipeJobRequest_LogSubscription = CreateRecipeJobRequest.AddMember("LogSubscription", LogSubscription)
-
-	CreateRecipeJobRequest_MaxCapacity = CreateRecipeJobRequest.AddMember("MaxCapacity", _MaxCapacity)
-
-	CreateRecipeJobRequest_MaxRetries = CreateRecipeJobRequest.AddMember("MaxRetries", _MaxRetries)
-
-	CreateRecipeJobRequest_Outputs = CreateRecipeJobRequest.AddMember("Outputs", _OutputList)
-
-	CreateRecipeJobRequest_DataCatalogOutputs = CreateRecipeJobRequest.AddMember("DataCatalogOutputs", _DataCatalogOutputList)
-
-	CreateRecipeJobRequest_DatabaseOutputs = CreateRecipeJobRequest.AddMember("DatabaseOutputs", _DatabaseOutputList)
-
-	CreateRecipeJobRequest_ProjectName = CreateRecipeJobRequest.AddMember("ProjectName", _ProjectName)
-
-	CreateRecipeJobRequest_RecipeReference = CreateRecipeJobRequest.AddMember("RecipeReference", RecipeReference)
-
-	CreateRecipeJobRequest_RoleArn = CreateRecipeJobRequest.AddMember("RoleArn", _Arn)
-
-	CreateRecipeJobRequest_Tags = CreateRecipeJobRequest.AddMember("Tags", _TagMap)
-
-	CreateRecipeJobRequest_Timeout = CreateRecipeJobRequest.AddMember("Timeout", _Timeout)
-
-	CreateRecipeJobResponse_Name = CreateRecipeJobResponse.AddMember("Name", _JobName)
-
-	CreateRecipeResponse_Name = CreateRecipeResponse.AddMember("Name", _RecipeName)
-
-	CreateRulesetRequest_Name = CreateRulesetRequest.AddMember("Name", _RulesetName)
-
-	CreateRulesetRequest_Description = CreateRulesetRequest.AddMember("Description", _RulesetDescription)
-
-	CreateRulesetRequest_TargetArn = CreateRulesetRequest.AddMember("TargetArn", _Arn)
-
-	CreateRulesetRequest_Rules = CreateRulesetRequest.AddMember("Rules", _RuleList)
-
-	CreateRulesetRequest_Tags = CreateRulesetRequest.AddMember("Tags", _TagMap)
-
-	CreateRulesetResponse_Name = CreateRulesetResponse.AddMember("Name", _RulesetName)
-
-	CreateScheduleRequest_JobNames = CreateScheduleRequest.AddMember("JobNames", _JobNameList)
-
-	CreateScheduleRequest_CronExpression = CreateScheduleRequest.AddMember("CronExpression", _CronExpression)
-
-	CreateScheduleRequest_Tags = CreateScheduleRequest.AddMember("Tags", _TagMap)
-
-	CreateScheduleRequest_Name = CreateScheduleRequest.AddMember("Name", _ScheduleName)
-
-	CreateScheduleResponse_Name = CreateScheduleResponse.AddMember("Name", _ScheduleName)
-
-	DeleteDatasetRequest_Name = DeleteDatasetRequest.AddMember("Name", _DatasetName, &smithytraits.HTTPLabel{})
-
-	DeleteDatasetResponse_Name = DeleteDatasetResponse.AddMember("Name", _DatasetName)
-
-	DeleteJobRequest_Name = DeleteJobRequest.AddMember("Name", _JobName, &smithytraits.HTTPLabel{})
-
-	DeleteJobResponse_Name = DeleteJobResponse.AddMember("Name", _JobName)
-
-	DeleteProjectRequest_Name = DeleteProjectRequest.AddMember("Name", _ProjectName, &smithytraits.HTTPLabel{})
-
-	DeleteProjectResponse_Name = DeleteProjectResponse.AddMember("Name", _ProjectName)
-
-	DeleteRecipeVersionRequest_Name = DeleteRecipeVersionRequest.AddMember("Name", _RecipeName, &smithytraits.HTTPLabel{})
-
-	DeleteRecipeVersionRequest_RecipeVersion = DeleteRecipeVersionRequest.AddMember("RecipeVersion", _RecipeVersion, &smithytraits.HTTPLabel{})
-
-	DeleteRecipeVersionResponse_Name = DeleteRecipeVersionResponse.AddMember("Name", _RecipeName)
-
-	DeleteRecipeVersionResponse_RecipeVersion = DeleteRecipeVersionResponse.AddMember("RecipeVersion", _RecipeVersion)
-
-	DeleteRulesetRequest_Name = DeleteRulesetRequest.AddMember("Name", _RulesetName, &smithytraits.HTTPLabel{})
-
-	DeleteRulesetResponse_Name = DeleteRulesetResponse.AddMember("Name", _RulesetName)
-
-	DeleteScheduleRequest_Name = DeleteScheduleRequest.AddMember("Name", _ScheduleName, &smithytraits.HTTPLabel{})
-
-	DeleteScheduleResponse_Name = DeleteScheduleResponse.AddMember("Name", _ScheduleName)
-
-	DescribeDatasetRequest_Name = DescribeDatasetRequest.AddMember("Name", _DatasetName, &smithytraits.HTTPLabel{})
-
-	DescribeDatasetResponse_CreatedBy = DescribeDatasetResponse.AddMember("CreatedBy", _CreatedBy)
-
-	DescribeDatasetResponse_CreateDate = DescribeDatasetResponse.AddMember("CreateDate", _Date)
-
-	DescribeDatasetResponse_Name = DescribeDatasetResponse.AddMember("Name", _DatasetName)
-
-	DescribeDatasetResponse_Format = DescribeDatasetResponse.AddMember("Format", InputFormat)
-
-	DescribeDatasetResponse_FormatOptions = DescribeDatasetResponse.AddMember("FormatOptions", FormatOptions)
-
-	DescribeDatasetResponse_Input = DescribeDatasetResponse.AddMember("Input", Input)
-
-	DescribeDatasetResponse_LastModifiedDate = DescribeDatasetResponse.AddMember("LastModifiedDate", _Date)
-
-	DescribeDatasetResponse_LastModifiedBy = DescribeDatasetResponse.AddMember("LastModifiedBy", _LastModifiedBy)
-
-	DescribeDatasetResponse_Source = DescribeDatasetResponse.AddMember("Source", Source)
-
-	DescribeDatasetResponse_PathOptions = DescribeDatasetResponse.AddMember("PathOptions", PathOptions)
-
-	DescribeDatasetResponse_Tags = DescribeDatasetResponse.AddMember("Tags", _TagMap)
-
-	DescribeDatasetResponse_ResourceArn = DescribeDatasetResponse.AddMember("ResourceArn", _Arn)
-
-	DescribeJobRequest_Name = DescribeJobRequest.AddMember("Name", _JobName, &smithytraits.HTTPLabel{})
-
-	DescribeJobResponse_CreateDate = DescribeJobResponse.AddMember("CreateDate", _Date)
-
-	DescribeJobResponse_CreatedBy = DescribeJobResponse.AddMember("CreatedBy", _CreatedBy)
-
-	DescribeJobResponse_DatasetName = DescribeJobResponse.AddMember("DatasetName", _DatasetName)
-
-	DescribeJobResponse_EncryptionKeyArn = DescribeJobResponse.AddMember("EncryptionKeyArn", _EncryptionKeyArn)
-
-	DescribeJobResponse_EncryptionMode = DescribeJobResponse.AddMember("EncryptionMode", EncryptionMode)
-
-	DescribeJobResponse_Name = DescribeJobResponse.AddMember("Name", _JobName)
-
-	DescribeJobResponse_Type = DescribeJobResponse.AddMember("Type", JobType)
-
-	DescribeJobResponse_LastModifiedBy = DescribeJobResponse.AddMember("LastModifiedBy", _LastModifiedBy)
-
-	DescribeJobResponse_LastModifiedDate = DescribeJobResponse.AddMember("LastModifiedDate", _Date)
-
-	DescribeJobResponse_LogSubscription = DescribeJobResponse.AddMember("LogSubscription", LogSubscription)
-
-	DescribeJobResponse_MaxCapacity = DescribeJobResponse.AddMember("MaxCapacity", _MaxCapacity)
-
-	DescribeJobResponse_MaxRetries = DescribeJobResponse.AddMember("MaxRetries", _MaxRetries)
-
-	DescribeJobResponse_Outputs = DescribeJobResponse.AddMember("Outputs", _OutputList)
-
-	DescribeJobResponse_DataCatalogOutputs = DescribeJobResponse.AddMember("DataCatalogOutputs", _DataCatalogOutputList)
-
-	DescribeJobResponse_DatabaseOutputs = DescribeJobResponse.AddMember("DatabaseOutputs", _DatabaseOutputList)
-
-	DescribeJobResponse_ProjectName = DescribeJobResponse.AddMember("ProjectName", _ProjectName)
-
-	DescribeJobResponse_ProfileConfiguration = DescribeJobResponse.AddMember("ProfileConfiguration", ProfileConfiguration)
-
-	DescribeJobResponse_ValidationConfigurations = DescribeJobResponse.AddMember("ValidationConfigurations", _ValidationConfigurationList)
-
-	DescribeJobResponse_RecipeReference = DescribeJobResponse.AddMember("RecipeReference", RecipeReference)
-
-	DescribeJobResponse_ResourceArn = DescribeJobResponse.AddMember("ResourceArn", _Arn)
-
-	DescribeJobResponse_RoleArn = DescribeJobResponse.AddMember("RoleArn", _Arn)
-
-	DescribeJobResponse_Tags = DescribeJobResponse.AddMember("Tags", _TagMap)
-
-	DescribeJobResponse_Timeout = DescribeJobResponse.AddMember("Timeout", _Timeout)
-
-	DescribeJobResponse_JobSample = DescribeJobResponse.AddMember("JobSample", JobSample)
-
-	DescribeJobRunRequest_Name = DescribeJobRunRequest.AddMember("Name", _JobName, &smithytraits.HTTPLabel{})
-
-	DescribeJobRunRequest_RunId = DescribeJobRunRequest.AddMember("RunId", _JobRunId, &smithytraits.HTTPLabel{})
-
-	DescribeJobRunResponse_Attempt = DescribeJobRunResponse.AddMember("Attempt", _Attempt)
-
-	DescribeJobRunResponse_CompletedOn = DescribeJobRunResponse.AddMember("CompletedOn", _Date)
-
-	DescribeJobRunResponse_DatasetName = DescribeJobRunResponse.AddMember("DatasetName", _DatasetName)
-
-	DescribeJobRunResponse_ErrorMessage = DescribeJobRunResponse.AddMember("ErrorMessage", _JobRunErrorMessage)
-
-	DescribeJobRunResponse_ExecutionTime = DescribeJobRunResponse.AddMember("ExecutionTime", _ExecutionTime)
-
-	DescribeJobRunResponse_JobName = DescribeJobRunResponse.AddMember("JobName", _JobName)
-
-	DescribeJobRunResponse_ProfileConfiguration = DescribeJobRunResponse.AddMember("ProfileConfiguration", ProfileConfiguration)
-
-	DescribeJobRunResponse_ValidationConfigurations = DescribeJobRunResponse.AddMember("ValidationConfigurations", _ValidationConfigurationList)
-
-	DescribeJobRunResponse_RunId = DescribeJobRunResponse.AddMember("RunId", _JobRunId)
-
-	DescribeJobRunResponse_State = DescribeJobRunResponse.AddMember("State", JobRunState)
-
-	DescribeJobRunResponse_LogSubscription = DescribeJobRunResponse.AddMember("LogSubscription", LogSubscription)
-
-	DescribeJobRunResponse_LogGroupName = DescribeJobRunResponse.AddMember("LogGroupName", _LogGroupName)
-
-	DescribeJobRunResponse_Outputs = DescribeJobRunResponse.AddMember("Outputs", _OutputList)
-
-	DescribeJobRunResponse_DataCatalogOutputs = DescribeJobRunResponse.AddMember("DataCatalogOutputs", _DataCatalogOutputList)
-
-	DescribeJobRunResponse_DatabaseOutputs = DescribeJobRunResponse.AddMember("DatabaseOutputs", _DatabaseOutputList)
-
-	DescribeJobRunResponse_RecipeReference = DescribeJobRunResponse.AddMember("RecipeReference", RecipeReference)
-
-	DescribeJobRunResponse_StartedBy = DescribeJobRunResponse.AddMember("StartedBy", _StartedBy)
-
-	DescribeJobRunResponse_StartedOn = DescribeJobRunResponse.AddMember("StartedOn", _Date)
-
-	DescribeJobRunResponse_JobSample = DescribeJobRunResponse.AddMember("JobSample", JobSample)
-
-	DescribeProjectRequest_Name = DescribeProjectRequest.AddMember("Name", _ProjectName, &smithytraits.HTTPLabel{})
-
-	DescribeProjectResponse_CreateDate = DescribeProjectResponse.AddMember("CreateDate", _Date)
-
-	DescribeProjectResponse_CreatedBy = DescribeProjectResponse.AddMember("CreatedBy", _CreatedBy)
-
-	DescribeProjectResponse_DatasetName = DescribeProjectResponse.AddMember("DatasetName", _DatasetName)
-
-	DescribeProjectResponse_LastModifiedDate = DescribeProjectResponse.AddMember("LastModifiedDate", _Date)
-
-	DescribeProjectResponse_LastModifiedBy = DescribeProjectResponse.AddMember("LastModifiedBy", _LastModifiedBy)
-
-	DescribeProjectResponse_Name = DescribeProjectResponse.AddMember("Name", _ProjectName)
-
-	DescribeProjectResponse_RecipeName = DescribeProjectResponse.AddMember("RecipeName", _RecipeName)
-
-	DescribeProjectResponse_ResourceArn = DescribeProjectResponse.AddMember("ResourceArn", _Arn)
-
-	DescribeProjectResponse_Sample = DescribeProjectResponse.AddMember("Sample", Sample)
-
-	DescribeProjectResponse_RoleArn = DescribeProjectResponse.AddMember("RoleArn", _Arn)
-
-	DescribeProjectResponse_Tags = DescribeProjectResponse.AddMember("Tags", _TagMap)
-
-	DescribeProjectResponse_SessionStatus = DescribeProjectResponse.AddMember("SessionStatus", SessionStatus)
-
-	DescribeProjectResponse_OpenedBy = DescribeProjectResponse.AddMember("OpenedBy", _OpenedBy)
-
-	DescribeProjectResponse_OpenDate = DescribeProjectResponse.AddMember("OpenDate", _Date)
-
-	DescribeRecipeRequest_Name = DescribeRecipeRequest.AddMember("Name", _RecipeName, &smithytraits.HTTPLabel{})
-
-	DescribeRecipeRequest_RecipeVersion = DescribeRecipeRequest.AddMember("RecipeVersion", _RecipeVersion, &smithytraits.HTTPQuery{Name: "recipeVersion"})
-
-	DescribeRecipeResponse_CreatedBy = DescribeRecipeResponse.AddMember("CreatedBy", _CreatedBy)
-
-	DescribeRecipeResponse_CreateDate = DescribeRecipeResponse.AddMember("CreateDate", _Date)
-
-	DescribeRecipeResponse_LastModifiedBy = DescribeRecipeResponse.AddMember("LastModifiedBy", _LastModifiedBy)
-
-	DescribeRecipeResponse_LastModifiedDate = DescribeRecipeResponse.AddMember("LastModifiedDate", _Date)
-
-	DescribeRecipeResponse_ProjectName = DescribeRecipeResponse.AddMember("ProjectName", _ProjectName)
-
-	DescribeRecipeResponse_PublishedBy = DescribeRecipeResponse.AddMember("PublishedBy", _PublishedBy)
-
-	DescribeRecipeResponse_PublishedDate = DescribeRecipeResponse.AddMember("PublishedDate", _Date)
-
-	DescribeRecipeResponse_Description = DescribeRecipeResponse.AddMember("Description", _RecipeDescription)
-
-	DescribeRecipeResponse_Name = DescribeRecipeResponse.AddMember("Name", _RecipeName)
-
-	DescribeRecipeResponse_Steps = DescribeRecipeResponse.AddMember("Steps", _RecipeStepList)
-
-	DescribeRecipeResponse_Tags = DescribeRecipeResponse.AddMember("Tags", _TagMap)
-
-	DescribeRecipeResponse_ResourceArn = DescribeRecipeResponse.AddMember("ResourceArn", _Arn)
-
-	DescribeRecipeResponse_RecipeVersion = DescribeRecipeResponse.AddMember("RecipeVersion", _RecipeVersion)
-
-	DescribeRulesetRequest_Name = DescribeRulesetRequest.AddMember("Name", _RulesetName, &smithytraits.HTTPLabel{})
-
-	DescribeRulesetResponse_Name = DescribeRulesetResponse.AddMember("Name", _RulesetName)
-
-	DescribeRulesetResponse_Description = DescribeRulesetResponse.AddMember("Description", _RulesetDescription)
-
-	DescribeRulesetResponse_TargetArn = DescribeRulesetResponse.AddMember("TargetArn", _Arn)
-
-	DescribeRulesetResponse_Rules = DescribeRulesetResponse.AddMember("Rules", _RuleList)
-
-	DescribeRulesetResponse_CreateDate = DescribeRulesetResponse.AddMember("CreateDate", _Date)
-
-	DescribeRulesetResponse_CreatedBy = DescribeRulesetResponse.AddMember("CreatedBy", _CreatedBy)
-
-	DescribeRulesetResponse_LastModifiedBy = DescribeRulesetResponse.AddMember("LastModifiedBy", _LastModifiedBy)
-
-	DescribeRulesetResponse_LastModifiedDate = DescribeRulesetResponse.AddMember("LastModifiedDate", _Date)
-
-	DescribeRulesetResponse_ResourceArn = DescribeRulesetResponse.AddMember("ResourceArn", _Arn)
-
-	DescribeRulesetResponse_Tags = DescribeRulesetResponse.AddMember("Tags", _TagMap)
-
-	DescribeScheduleRequest_Name = DescribeScheduleRequest.AddMember("Name", _ScheduleName, &smithytraits.HTTPLabel{})
-
-	DescribeScheduleResponse_CreateDate = DescribeScheduleResponse.AddMember("CreateDate", _Date)
-
-	DescribeScheduleResponse_CreatedBy = DescribeScheduleResponse.AddMember("CreatedBy", _CreatedBy)
-
-	DescribeScheduleResponse_JobNames = DescribeScheduleResponse.AddMember("JobNames", _JobNameList)
-
-	DescribeScheduleResponse_LastModifiedBy = DescribeScheduleResponse.AddMember("LastModifiedBy", _LastModifiedBy)
-
-	DescribeScheduleResponse_LastModifiedDate = DescribeScheduleResponse.AddMember("LastModifiedDate", _Date)
-
-	DescribeScheduleResponse_ResourceArn = DescribeScheduleResponse.AddMember("ResourceArn", _Arn)
-
-	DescribeScheduleResponse_CronExpression = DescribeScheduleResponse.AddMember("CronExpression", _CronExpression)
-
-	DescribeScheduleResponse_Tags = DescribeScheduleResponse.AddMember("Tags", _TagMap)
-
-	DescribeScheduleResponse_Name = DescribeScheduleResponse.AddMember("Name", _ScheduleName)
-
-	ListDatasetsRequest_MaxResults = ListDatasetsRequest.AddMember("MaxResults", _MaxResults100, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListDatasetsRequest_NextToken = ListDatasetsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListDatasetsResponse_Datasets = ListDatasetsResponse.AddMember("Datasets", _DatasetList)
-
-	ListDatasetsResponse_NextToken = ListDatasetsResponse.AddMember("NextToken", _NextToken)
-
-	ListJobRunsRequest_Name = ListJobRunsRequest.AddMember("Name", _JobName, &smithytraits.HTTPLabel{})
-
-	ListJobRunsRequest_MaxResults = ListJobRunsRequest.AddMember("MaxResults", _MaxResults100, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListJobRunsRequest_NextToken = ListJobRunsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListJobRunsResponse_JobRuns = ListJobRunsResponse.AddMember("JobRuns", _JobRunList)
-
-	ListJobRunsResponse_NextToken = ListJobRunsResponse.AddMember("NextToken", _NextToken)
-
-	ListJobsRequest_DatasetName = ListJobsRequest.AddMember("DatasetName", _DatasetName, &smithytraits.HTTPQuery{Name: "datasetName"})
-
-	ListJobsRequest_MaxResults = ListJobsRequest.AddMember("MaxResults", _MaxResults100, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListJobsRequest_NextToken = ListJobsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListJobsRequest_ProjectName = ListJobsRequest.AddMember("ProjectName", _ProjectName, &smithytraits.HTTPQuery{Name: "projectName"})
-
-	ListJobsResponse_Jobs = ListJobsResponse.AddMember("Jobs", _JobList)
-
-	ListJobsResponse_NextToken = ListJobsResponse.AddMember("NextToken", _NextToken)
-
-	ListProjectsRequest_NextToken = ListProjectsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListProjectsRequest_MaxResults = ListProjectsRequest.AddMember("MaxResults", _MaxResults100, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListProjectsResponse_Projects = ListProjectsResponse.AddMember("Projects", _ProjectList)
-
-	ListProjectsResponse_NextToken = ListProjectsResponse.AddMember("NextToken", _NextToken)
-
-	ListRecipesRequest_MaxResults = ListRecipesRequest.AddMember("MaxResults", _MaxResults100, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListRecipesRequest_NextToken = ListRecipesRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListRecipesRequest_RecipeVersion = ListRecipesRequest.AddMember("RecipeVersion", _RecipeVersion, &smithytraits.HTTPQuery{Name: "recipeVersion"})
-
-	ListRecipesResponse_Recipes = ListRecipesResponse.AddMember("Recipes", _RecipeList)
-
-	ListRecipesResponse_NextToken = ListRecipesResponse.AddMember("NextToken", _NextToken)
-
-	ListRecipeVersionsRequest_MaxResults = ListRecipeVersionsRequest.AddMember("MaxResults", _MaxResults100, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListRecipeVersionsRequest_NextToken = ListRecipeVersionsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListRecipeVersionsRequest_Name = ListRecipeVersionsRequest.AddMember("Name", _RecipeName, &smithytraits.HTTPQuery{Name: "name"})
-
-	ListRecipeVersionsResponse_NextToken = ListRecipeVersionsResponse.AddMember("NextToken", _NextToken)
-
-	ListRecipeVersionsResponse_Recipes = ListRecipeVersionsResponse.AddMember("Recipes", _RecipeList)
-
-	ListRulesetsRequest_TargetArn = ListRulesetsRequest.AddMember("TargetArn", _Arn, &smithytraits.HTTPQuery{Name: "targetArn"})
-
-	ListRulesetsRequest_MaxResults = ListRulesetsRequest.AddMember("MaxResults", _MaxResults100, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListRulesetsRequest_NextToken = ListRulesetsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListRulesetsResponse_Rulesets = ListRulesetsResponse.AddMember("Rulesets", _RulesetItemList)
-
-	ListRulesetsResponse_NextToken = ListRulesetsResponse.AddMember("NextToken", _NextToken)
-
-	ListSchedulesRequest_JobName = ListSchedulesRequest.AddMember("JobName", _JobName, &smithytraits.HTTPQuery{Name: "jobName"})
-
-	ListSchedulesRequest_MaxResults = ListSchedulesRequest.AddMember("MaxResults", _MaxResults100, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListSchedulesRequest_NextToken = ListSchedulesRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListSchedulesResponse_Schedules = ListSchedulesResponse.AddMember("Schedules", _ScheduleList)
-
-	ListSchedulesResponse_NextToken = ListSchedulesResponse.AddMember("NextToken", _NextToken)
-
-	ListTagsForResourceRequest_ResourceArn = ListTagsForResourceRequest.AddMember("ResourceArn", _Arn, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _TagMap)
-
-	PublishRecipeRequest_Description = PublishRecipeRequest.AddMember("Description", _RecipeDescription)
-
-	PublishRecipeRequest_Name = PublishRecipeRequest.AddMember("Name", _RecipeName, &smithytraits.HTTPLabel{})
-
-	PublishRecipeResponse_Name = PublishRecipeResponse.AddMember("Name", _RecipeName)
-
-	SendProjectSessionActionRequest_Preview = SendProjectSessionActionRequest.AddMember("Preview", _Preview)
-
-	SendProjectSessionActionRequest_Name = SendProjectSessionActionRequest.AddMember("Name", _ProjectName, &smithytraits.HTTPLabel{})
-
-	SendProjectSessionActionRequest_RecipeStep = SendProjectSessionActionRequest.AddMember("RecipeStep", RecipeStep)
-
-	SendProjectSessionActionRequest_StepIndex = SendProjectSessionActionRequest.AddMember("StepIndex", _StepIndex)
-
-	SendProjectSessionActionRequest_ClientSessionId = SendProjectSessionActionRequest.AddMember("ClientSessionId", _ClientSessionId)
-
-	SendProjectSessionActionRequest_ViewFrame = SendProjectSessionActionRequest.AddMember("ViewFrame", ViewFrame)
-
-	SendProjectSessionActionResponse_Result = SendProjectSessionActionResponse.AddMember("Result", _Result)
-
-	SendProjectSessionActionResponse_Name = SendProjectSessionActionResponse.AddMember("Name", _ProjectName)
-
-	SendProjectSessionActionResponse_ActionId = SendProjectSessionActionResponse.AddMember("ActionId", _ActionId)
-
-	StartJobRunRequest_Name = StartJobRunRequest.AddMember("Name", _JobName, &smithytraits.HTTPLabel{})
-
-	StartJobRunResponse_RunId = StartJobRunResponse.AddMember("RunId", _JobRunId)
-
-	StartProjectSessionRequest_Name = StartProjectSessionRequest.AddMember("Name", _ProjectName, &smithytraits.HTTPLabel{})
-
-	StartProjectSessionRequest_AssumeControl = StartProjectSessionRequest.AddMember("AssumeControl", _AssumeControl)
-
-	StartProjectSessionResponse_Name = StartProjectSessionResponse.AddMember("Name", _ProjectName)
-
-	StartProjectSessionResponse_ClientSessionId = StartProjectSessionResponse.AddMember("ClientSessionId", _ClientSessionId)
-
-	StopJobRunRequest_Name = StopJobRunRequest.AddMember("Name", _JobName, &smithytraits.HTTPLabel{})
-
-	StopJobRunRequest_RunId = StopJobRunRequest.AddMember("RunId", _JobRunId, &smithytraits.HTTPLabel{})
-
-	StopJobRunResponse_RunId = StopJobRunResponse.AddMember("RunId", _JobRunId)
-
-	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", _Arn, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _TagMap)
-
-	UntagResourceRequest_ResourceArn = UntagResourceRequest.AddMember("ResourceArn", _Arn, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateDatasetRequest_Name = UpdateDatasetRequest.AddMember("Name", _DatasetName, &smithytraits.HTTPLabel{})
-
-	UpdateDatasetRequest_Format = UpdateDatasetRequest.AddMember("Format", InputFormat)
-
-	UpdateDatasetRequest_FormatOptions = UpdateDatasetRequest.AddMember("FormatOptions", FormatOptions)
-
-	UpdateDatasetRequest_Input = UpdateDatasetRequest.AddMember("Input", Input)
-
-	UpdateDatasetRequest_PathOptions = UpdateDatasetRequest.AddMember("PathOptions", PathOptions)
-
-	UpdateDatasetResponse_Name = UpdateDatasetResponse.AddMember("Name", _DatasetName)
-
-	UpdateProfileJobRequest_Configuration = UpdateProfileJobRequest.AddMember("Configuration", ProfileConfiguration)
-
-	UpdateProfileJobRequest_EncryptionKeyArn = UpdateProfileJobRequest.AddMember("EncryptionKeyArn", _EncryptionKeyArn)
-
-	UpdateProfileJobRequest_EncryptionMode = UpdateProfileJobRequest.AddMember("EncryptionMode", EncryptionMode)
-
-	UpdateProfileJobRequest_Name = UpdateProfileJobRequest.AddMember("Name", _JobName, &smithytraits.HTTPLabel{})
-
-	UpdateProfileJobRequest_LogSubscription = UpdateProfileJobRequest.AddMember("LogSubscription", LogSubscription)
-
-	UpdateProfileJobRequest_MaxCapacity = UpdateProfileJobRequest.AddMember("MaxCapacity", _MaxCapacity)
-
-	UpdateProfileJobRequest_MaxRetries = UpdateProfileJobRequest.AddMember("MaxRetries", _MaxRetries)
-
-	UpdateProfileJobRequest_OutputLocation = UpdateProfileJobRequest.AddMember("OutputLocation", S3Location)
-
-	UpdateProfileJobRequest_ValidationConfigurations = UpdateProfileJobRequest.AddMember("ValidationConfigurations", _ValidationConfigurationList)
-
-	UpdateProfileJobRequest_RoleArn = UpdateProfileJobRequest.AddMember("RoleArn", _Arn)
-
-	UpdateProfileJobRequest_Timeout = UpdateProfileJobRequest.AddMember("Timeout", _Timeout)
-
-	UpdateProfileJobRequest_JobSample = UpdateProfileJobRequest.AddMember("JobSample", JobSample)
-
-	UpdateProfileJobResponse_Name = UpdateProfileJobResponse.AddMember("Name", _JobName)
-
-	UpdateProjectRequest_Sample = UpdateProjectRequest.AddMember("Sample", Sample)
-
-	UpdateProjectRequest_RoleArn = UpdateProjectRequest.AddMember("RoleArn", _Arn)
-
-	UpdateProjectRequest_Name = UpdateProjectRequest.AddMember("Name", _ProjectName, &smithytraits.HTTPLabel{})
-
-	UpdateProjectResponse_LastModifiedDate = UpdateProjectResponse.AddMember("LastModifiedDate", _Date)
-
-	UpdateProjectResponse_Name = UpdateProjectResponse.AddMember("Name", _ProjectName)
-
-	UpdateRecipeRequest_Description = UpdateRecipeRequest.AddMember("Description", _RecipeDescription)
-
-	UpdateRecipeRequest_Name = UpdateRecipeRequest.AddMember("Name", _RecipeName, &smithytraits.HTTPLabel{})
-
-	UpdateRecipeRequest_Steps = UpdateRecipeRequest.AddMember("Steps", _RecipeStepList)
-
-	UpdateRecipeJobRequest_EncryptionKeyArn = UpdateRecipeJobRequest.AddMember("EncryptionKeyArn", _EncryptionKeyArn)
-
-	UpdateRecipeJobRequest_EncryptionMode = UpdateRecipeJobRequest.AddMember("EncryptionMode", EncryptionMode)
-
-	UpdateRecipeJobRequest_Name = UpdateRecipeJobRequest.AddMember("Name", _JobName, &smithytraits.HTTPLabel{})
-
-	UpdateRecipeJobRequest_LogSubscription = UpdateRecipeJobRequest.AddMember("LogSubscription", LogSubscription)
-
-	UpdateRecipeJobRequest_MaxCapacity = UpdateRecipeJobRequest.AddMember("MaxCapacity", _MaxCapacity)
-
-	UpdateRecipeJobRequest_MaxRetries = UpdateRecipeJobRequest.AddMember("MaxRetries", _MaxRetries)
-
-	UpdateRecipeJobRequest_Outputs = UpdateRecipeJobRequest.AddMember("Outputs", _OutputList)
-
-	UpdateRecipeJobRequest_DataCatalogOutputs = UpdateRecipeJobRequest.AddMember("DataCatalogOutputs", _DataCatalogOutputList)
-
-	UpdateRecipeJobRequest_DatabaseOutputs = UpdateRecipeJobRequest.AddMember("DatabaseOutputs", _DatabaseOutputList)
-
-	UpdateRecipeJobRequest_RoleArn = UpdateRecipeJobRequest.AddMember("RoleArn", _Arn)
-
-	UpdateRecipeJobRequest_Timeout = UpdateRecipeJobRequest.AddMember("Timeout", _Timeout)
-
-	UpdateRecipeJobResponse_Name = UpdateRecipeJobResponse.AddMember("Name", _JobName)
-
-	UpdateRecipeResponse_Name = UpdateRecipeResponse.AddMember("Name", _RecipeName)
-
-	UpdateRulesetRequest_Name = UpdateRulesetRequest.AddMember("Name", _RulesetName, &smithytraits.HTTPLabel{})
-
-	UpdateRulesetRequest_Description = UpdateRulesetRequest.AddMember("Description", _RulesetDescription)
-
-	UpdateRulesetRequest_Rules = UpdateRulesetRequest.AddMember("Rules", _RuleList)
-
-	UpdateRulesetResponse_Name = UpdateRulesetResponse.AddMember("Name", _RulesetName)
-
-	UpdateScheduleRequest_JobNames = UpdateScheduleRequest.AddMember("JobNames", _JobNameList)
-
-	UpdateScheduleRequest_CronExpression = UpdateScheduleRequest.AddMember("CronExpression", _CronExpression)
-
-	UpdateScheduleRequest_Name = UpdateScheduleRequest.AddMember("Name", _ScheduleName, &smithytraits.HTTPLabel{})
-
-	UpdateScheduleResponse_Name = UpdateScheduleResponse.AddMember("Name", _ScheduleName)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t47 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t48 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t49 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t50 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t51 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t52 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "recipeVersion"}}, DirectMask: 0x10}
+var t53 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+var t54 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t55 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "datasetName"}}, DirectMask: 0x10}
+var t56 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "projectName"}}, DirectMask: 0x10}
+var t57 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "name"}}, DirectMask: 0x10}
+var t58 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "targetArn"}}, DirectMask: 0x10}
+var t59 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "jobName"}}, DirectMask: 0x10}
+var t60 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t61 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_Message}}
+var m_AllowedStatisticList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AllowedStatisticList_member}}
+var mAllowedStatistics = smithy.SchemaMembers{List: []*smithy.Schema{&sAllowedStatistics_Statistics}}
+var mAnalyticsMode = smithy.SchemaMembers{List: []*smithy.Schema{&sAnalyticsMode_ENABLE, &sAnalyticsMode_DISABLE}}
+var m_ColumnNameList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ColumnNameList_member}}
+var mColumnSelector = smithy.SchemaMembers{List: []*smithy.Schema{&sColumnSelector_Regex, &sColumnSelector_Name}}
+var m_ColumnSelectorList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ColumnSelectorList_member}}
+var mColumnStatisticsConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sColumnStatisticsConfiguration_Selectors, &sColumnStatisticsConfiguration_Statistics}}
+var m_ColumnStatisticsConfigurationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ColumnStatisticsConfigurationList_member}}
+var mCompressionFormat = smithy.SchemaMembers{List: []*smithy.Schema{&sCompressionFormat_GZIP, &sCompressionFormat_LZ4, &sCompressionFormat_SNAPPY, &sCompressionFormat_BZIP2, &sCompressionFormat_DEFLATE, &sCompressionFormat_LZO, &sCompressionFormat_BROTLI, &sCompressionFormat_ZSTD, &sCompressionFormat_ZLIB}, Seed: 4, Slots: []uint16{
+	8, 9, 0, 0, 0, 0, 0, 6, 0, 3, 0, 5, 0, 0, 0, 0, 0, 4, 0, 0, 0, 2, 0, 0,
+	0, 7, 0, 1, 0, 0, 0, 0,
+}}
+var mConditionExpression = smithy.SchemaMembers{List: []*smithy.Schema{&sConditionExpression_Condition, &sConditionExpression_Value, &sConditionExpression_TargetColumn}}
+var m_ConditionExpressionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConditionExpressionList_member}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_Message}}
+var mCsvOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sCsvOptions_Delimiter, &sCsvOptions_HeaderRow}}
+var mCsvOutputOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sCsvOutputOptions_Delimiter}}
+var mDatabaseInputDefinition = smithy.SchemaMembers{List: []*smithy.Schema{&sDatabaseInputDefinition_GlueConnectionName, &sDatabaseInputDefinition_DatabaseTableName, &sDatabaseInputDefinition_TempDirectory, &sDatabaseInputDefinition_QueryString}}
+var mDatabaseOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDatabaseOutput_GlueConnectionName, &sDatabaseOutput_DatabaseOptions, &sDatabaseOutput_DatabaseOutputMode}}
+var m_DatabaseOutputList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DatabaseOutputList_member}}
+var mDatabaseOutputMode = smithy.SchemaMembers{List: []*smithy.Schema{&sDatabaseOutputMode_NEW_TABLE}}
+var mDatabaseTableOutputOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sDatabaseTableOutputOptions_TempDirectory, &sDatabaseTableOutputOptions_TableName}}
+var mDataCatalogInputDefinition = smithy.SchemaMembers{List: []*smithy.Schema{&sDataCatalogInputDefinition_CatalogId, &sDataCatalogInputDefinition_DatabaseName, &sDataCatalogInputDefinition_TableName, &sDataCatalogInputDefinition_TempDirectory}}
+var mDataCatalogOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDataCatalogOutput_CatalogId, &sDataCatalogOutput_DatabaseName, &sDataCatalogOutput_TableName, &sDataCatalogOutput_S3Options, &sDataCatalogOutput_DatabaseOptions, &sDataCatalogOutput_Overwrite}}
+var m_DataCatalogOutputList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DataCatalogOutputList_member}}
+var mDataset = smithy.SchemaMembers{List: []*smithy.Schema{&sDataset_AccountId, &sDataset_CreatedBy, &sDataset_CreateDate, &sDataset_Name, &sDataset_Format, &sDataset_FormatOptions, &sDataset_Input, &sDataset_LastModifiedDate, &sDataset_LastModifiedBy, &sDataset_Source, &sDataset_PathOptions, &sDataset_Tags, &sDataset_ResourceArn}, Seed: 5, Slots: []uint16{
+	13, 2, 5, 0, 4, 0, 0, 0, 0, 0, 0, 11, 6, 7, 0, 0, 0, 0, 0, 0, 0, 9, 0, 10,
+	0, 8, 12, 0, 3, 1, 0, 0,
+}}
+var m_DatasetList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DatasetList_member}}
+var mDatasetParameter = smithy.SchemaMembers{List: []*smithy.Schema{&sDatasetParameter_Name, &sDatasetParameter_Type, &sDatasetParameter_DatetimeOptions, &sDatasetParameter_CreateColumn, &sDatasetParameter_Filter}}
+var mDatetimeOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sDatetimeOptions_Format, &sDatetimeOptions_TimezoneOffset, &sDatetimeOptions_LocaleCode}}
+var mEncryptionMode = smithy.SchemaMembers{List: []*smithy.Schema{&sEncryptionMode_SSEKMS, &sEncryptionMode_SSES3}}
+var mEntityDetectorConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sEntityDetectorConfiguration_EntityTypes, &sEntityDetectorConfiguration_AllowedStatistics}}
+var m_EntityTypeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EntityTypeList_member}}
+var mExcelOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sExcelOptions_SheetNames, &sExcelOptions_SheetIndexes, &sExcelOptions_HeaderRow}}
+var mFilesLimit = smithy.SchemaMembers{List: []*smithy.Schema{&sFilesLimit_MaxFiles, &sFilesLimit_OrderedBy, &sFilesLimit_Order}}
+var mFilterExpression = smithy.SchemaMembers{List: []*smithy.Schema{&sFilterExpression_Expression, &sFilterExpression_ValuesMap}}
+var mFormatOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sFormatOptions_Json, &sFormatOptions_Excel, &sFormatOptions_Csv}}
+var m_HiddenColumnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_HiddenColumnList_member}}
+var mInput = smithy.SchemaMembers{List: []*smithy.Schema{&sInput_S3InputDefinition, &sInput_DataCatalogInputDefinition, &sInput_DatabaseInputDefinition, &sInput_Metadata}}
+var mInputFormat = smithy.SchemaMembers{List: []*smithy.Schema{&sInputFormat_CSV, &sInputFormat_JSON, &sInputFormat_PARQUET, &sInputFormat_EXCEL, &sInputFormat_ORC}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_Message}}
+var mJob = smithy.SchemaMembers{List: []*smithy.Schema{&sJob_AccountId, &sJob_CreatedBy, &sJob_CreateDate, &sJob_DatasetName, &sJob_EncryptionKeyArn, &sJob_EncryptionMode, &sJob_Name, &sJob_Type, &sJob_LastModifiedBy, &sJob_LastModifiedDate, &sJob_LogSubscription, &sJob_MaxCapacity, &sJob_MaxRetries, &sJob_Outputs, &sJob_DataCatalogOutputs, &sJob_DatabaseOutputs, &sJob_ProjectName, &sJob_RecipeReference, &sJob_ResourceArn, &sJob_RoleArn, &sJob_Timeout, &sJob_Tags, &sJob_JobSample, &sJob_ValidationConfigurations}, Seed: 272, Slots: []uint16{
+	15, 0, 0, 0, 19, 16, 0, 7, 0, 13, 0, 0, 0, 23, 3, 0, 14, 12, 0, 0, 5, 0, 0, 6,
+	0, 0, 0, 0, 17, 2, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 10, 20, 0,
+	24, 0, 18, 22, 4, 8, 1, 0, 0, 11, 0, 0, 0, 0, 21, 0,
+}}
+var m_JobList = smithy.SchemaMembers{List: []*smithy.Schema{&s_JobList_member}}
+var m_JobNameList = smithy.SchemaMembers{List: []*smithy.Schema{&s_JobNameList_member}}
+var mJobRun = smithy.SchemaMembers{List: []*smithy.Schema{&sJobRun_Attempt, &sJobRun_CompletedOn, &sJobRun_DatasetName, &sJobRun_ErrorMessage, &sJobRun_ExecutionTime, &sJobRun_JobName, &sJobRun_RunId, &sJobRun_State, &sJobRun_LogSubscription, &sJobRun_LogGroupName, &sJobRun_Outputs, &sJobRun_DataCatalogOutputs, &sJobRun_DatabaseOutputs, &sJobRun_RecipeReference, &sJobRun_StartedBy, &sJobRun_StartedOn, &sJobRun_JobSample, &sJobRun_ValidationConfigurations}, Seed: 7, Slots: []uint16{
+	0, 0, 6, 17, 14, 0, 0, 11, 9, 0, 3, 0, 8, 12, 0, 0, 13, 0, 0, 0, 0, 10, 1, 5,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 18, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 4, 0,
+	0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 0, 15,
+}}
+var m_JobRunList = smithy.SchemaMembers{List: []*smithy.Schema{&s_JobRunList_member}}
+var mJobRunState = smithy.SchemaMembers{List: []*smithy.Schema{&sJobRunState_STARTING, &sJobRunState_RUNNING, &sJobRunState_STOPPING, &sJobRunState_STOPPED, &sJobRunState_SUCCEEDED, &sJobRunState_FAILED, &sJobRunState_TIMEOUT}}
+var mJobSample = smithy.SchemaMembers{List: []*smithy.Schema{&sJobSample_Mode, &sJobSample_Size}}
+var mJobType = smithy.SchemaMembers{List: []*smithy.Schema{&sJobType_PROFILE, &sJobType_RECIPE}}
+var mJsonOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sJsonOptions_MultiLine}}
+var mLogSubscription = smithy.SchemaMembers{List: []*smithy.Schema{&sLogSubscription_ENABLE, &sLogSubscription_DISABLE}}
+var mMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sMetadata_SourceArn}}
+var mOrder = smithy.SchemaMembers{List: []*smithy.Schema{&sOrder_DESCENDING, &sOrder_ASCENDING}}
+var mOrderedBy = smithy.SchemaMembers{List: []*smithy.Schema{&sOrderedBy_LAST_MODIFIED_DATE}}
+var mOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sOutput_CompressionFormat, &sOutput_Format, &sOutput_PartitionColumns, &sOutput_Location, &sOutput_Overwrite, &sOutput_FormatOptions, &sOutput_MaxOutputFiles}}
+var mOutputFormat = smithy.SchemaMembers{List: []*smithy.Schema{&sOutputFormat_CSV, &sOutputFormat_JSON, &sOutputFormat_PARQUET, &sOutputFormat_GLUEPARQUET, &sOutputFormat_AVRO, &sOutputFormat_ORC, &sOutputFormat_XML, &sOutputFormat_TABLEAUHYPER}}
+var mOutputFormatOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sOutputFormatOptions_Csv}}
+var m_OutputList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OutputList_member}}
+var m_ParameterMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_ParameterMap_key, &s_ParameterMap_value}}
+var mParameterType = smithy.SchemaMembers{List: []*smithy.Schema{&sParameterType_Datetime, &sParameterType_Number, &sParameterType_String}}
+var mPathOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sPathOptions_LastModifiedDateCondition, &sPathOptions_FilesLimit, &sPathOptions_Parameters}}
+var m_PathParametersMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_PathParametersMap_key, &s_PathParametersMap_value}}
+var mProfileConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sProfileConfiguration_DatasetStatisticsConfiguration, &sProfileConfiguration_ProfileColumns, &sProfileConfiguration_ColumnStatisticsConfigurations, &sProfileConfiguration_EntityDetectorConfiguration}}
+var mProject = smithy.SchemaMembers{List: []*smithy.Schema{&sProject_AccountId, &sProject_CreateDate, &sProject_CreatedBy, &sProject_DatasetName, &sProject_LastModifiedDate, &sProject_LastModifiedBy, &sProject_Name, &sProject_RecipeName, &sProject_ResourceArn, &sProject_Sample, &sProject_Tags, &sProject_RoleArn, &sProject_OpenedBy, &sProject_OpenDate}, Seed: 9, Slots: []uint16{
+	7, 1, 6, 0, 0, 2, 0, 0, 0, 0, 0, 4, 11, 0, 13, 0, 0, 0, 9, 12, 5, 0, 0, 14,
+	0, 0, 0, 8, 10, 3, 0, 0,
+}}
+var m_ProjectList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ProjectList_member}}
+var mRecipe = smithy.SchemaMembers{List: []*smithy.Schema{&sRecipe_CreatedBy, &sRecipe_CreateDate, &sRecipe_LastModifiedBy, &sRecipe_LastModifiedDate, &sRecipe_ProjectName, &sRecipe_PublishedBy, &sRecipe_PublishedDate, &sRecipe_Description, &sRecipe_Name, &sRecipe_ResourceArn, &sRecipe_Steps, &sRecipe_Tags, &sRecipe_RecipeVersion}, Seed: 12, Slots: []uint16{
+	0, 0, 7, 9, 0, 12, 10, 0, 0, 0, 0, 4, 5, 0, 2, 3, 0, 0, 0, 13, 6, 0, 0, 1,
+	0, 0, 0, 11, 0, 8, 0, 0,
+}}
+var mRecipeAction = smithy.SchemaMembers{List: []*smithy.Schema{&sRecipeAction_Operation, &sRecipeAction_Parameters}}
+var m_RecipeErrorList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RecipeErrorList_member}}
+var m_RecipeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RecipeList_member}}
+var mRecipeReference = smithy.SchemaMembers{List: []*smithy.Schema{&sRecipeReference_Name, &sRecipeReference_RecipeVersion}}
+var mRecipeStep = smithy.SchemaMembers{List: []*smithy.Schema{&sRecipeStep_Action, &sRecipeStep_ConditionExpressions}}
+var m_RecipeStepList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RecipeStepList_member}}
+var mRecipeVersionErrorDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sRecipeVersionErrorDetail_ErrorCode, &sRecipeVersionErrorDetail_ErrorMessage, &sRecipeVersionErrorDetail_RecipeVersion}}
+var m_RecipeVersionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RecipeVersionList_member}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message}}
+var mRule = smithy.SchemaMembers{List: []*smithy.Schema{&sRule_Name, &sRule_Disabled, &sRule_CheckExpression, &sRule_SubstitutionMap, &sRule_Threshold, &sRule_ColumnSelectors}}
+var m_RuleList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RuleList_member}}
+var mRulesetItem = smithy.SchemaMembers{List: []*smithy.Schema{&sRulesetItem_AccountId, &sRulesetItem_CreatedBy, &sRulesetItem_CreateDate, &sRulesetItem_Description, &sRulesetItem_LastModifiedBy, &sRulesetItem_LastModifiedDate, &sRulesetItem_Name, &sRulesetItem_ResourceArn, &sRulesetItem_RuleCount, &sRulesetItem_Tags, &sRulesetItem_TargetArn}, Seed: 5, Slots: []uint16{
+	8, 2, 0, 0, 7, 0, 0, 0, 0, 11, 0, 4, 0, 9, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0,
+	0, 6, 10, 0, 3, 1, 0, 0,
+}}
+var m_RulesetItemList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RulesetItemList_member}}
+var mS3Location = smithy.SchemaMembers{List: []*smithy.Schema{&sS3Location_Bucket, &sS3Location_Key, &sS3Location_BucketOwner}}
+var mS3TableOutputOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sS3TableOutputOptions_Location}}
+var mSample = smithy.SchemaMembers{List: []*smithy.Schema{&sSample_Size, &sSample_Type}}
+var mSampleMode = smithy.SchemaMembers{List: []*smithy.Schema{&sSampleMode_FULL_DATASET, &sSampleMode_CUSTOM_ROWS}}
+var mSampleType = smithy.SchemaMembers{List: []*smithy.Schema{&sSampleType_FIRST_N, &sSampleType_LAST_N, &sSampleType_RANDOM}}
+var mSchedule = smithy.SchemaMembers{List: []*smithy.Schema{&sSchedule_AccountId, &sSchedule_CreatedBy, &sSchedule_CreateDate, &sSchedule_JobNames, &sSchedule_LastModifiedBy, &sSchedule_LastModifiedDate, &sSchedule_ResourceArn, &sSchedule_CronExpression, &sSchedule_Tags, &sSchedule_Name}, Seed: 3, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 2, 0, 9, 10, 0, 0, 4, 0, 0, 8, 3, 0, 0,
+	5, 0, 0, 0, 0, 0, 6, 1,
+}}
+var m_ScheduleList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ScheduleList_member}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_Message}}
+var mSessionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sSessionStatus_ASSIGNED, &sSessionStatus_FAILED, &sSessionStatus_INITIALIZING, &sSessionStatus_PROVISIONING, &sSessionStatus_READY, &sSessionStatus_RECYCLING, &sSessionStatus_ROTATING, &sSessionStatus_TERMINATED, &sSessionStatus_TERMINATING, &sSessionStatus_UPDATING}, Seed: 2, Slots: []uint16{
+	1, 0, 7, 0, 0, 4, 0, 0, 0, 6, 0, 0, 0, 9, 0, 0, 0, 5, 0, 0, 10, 3, 0, 0,
+	0, 0, 8, 0, 2, 0, 0, 0,
+}}
+var m_SheetIndexList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SheetIndexList_member}}
+var m_SheetNameList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SheetNameList_member}}
+var mSource = smithy.SchemaMembers{List: []*smithy.Schema{&sSource_S3, &sSource_DATACATALOG, &sSource_DATABASE}}
+var m_StatisticList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StatisticList_member}}
+var mStatisticOverride = smithy.SchemaMembers{List: []*smithy.Schema{&sStatisticOverride_Statistic, &sStatisticOverride_Parameters}}
+var m_StatisticOverrideList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StatisticOverrideList_member}}
+var mStatisticsConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sStatisticsConfiguration_IncludedStatistics, &sStatisticsConfiguration_Overrides}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagMap_key, &s_TagMap_value}}
+var mThreshold = smithy.SchemaMembers{List: []*smithy.Schema{&sThreshold_Value, &sThreshold_Type, &sThreshold_Unit}}
+var mThresholdType = smithy.SchemaMembers{List: []*smithy.Schema{&sThresholdType_GREATER_THAN_OR_EQUAL, &sThresholdType_LESS_THAN_OR_EQUAL, &sThresholdType_GREATER_THAN, &sThresholdType_LESS_THAN}}
+var mThresholdUnit = smithy.SchemaMembers{List: []*smithy.Schema{&sThresholdUnit_COUNT, &sThresholdUnit_PERCENTAGE}}
+var mValidationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationConfiguration_RulesetArn, &sValidationConfiguration_ValidationMode}}
+var m_ValidationConfigurationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ValidationConfigurationList_member}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_Message}}
+var mValidationMode = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationMode_CHECK_ALL}}
+var m_ValuesMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_ValuesMap_key, &s_ValuesMap_value}}
+var mViewFrame = smithy.SchemaMembers{List: []*smithy.Schema{&sViewFrame_StartColumnIndex, &sViewFrame_ColumnRange, &sViewFrame_HiddenColumns, &sViewFrame_StartRowIndex, &sViewFrame_RowRange, &sViewFrame_Analytics}}
+var mBatchDeleteRecipeVersionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDeleteRecipeVersionRequest_Name, &sBatchDeleteRecipeVersionRequest_RecipeVersions}}
+var mBatchDeleteRecipeVersionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDeleteRecipeVersionResponse_Name, &sBatchDeleteRecipeVersionResponse_Errors}}
+var mCreateDatasetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDatasetRequest_Name, &sCreateDatasetRequest_Format, &sCreateDatasetRequest_FormatOptions, &sCreateDatasetRequest_Input, &sCreateDatasetRequest_PathOptions, &sCreateDatasetRequest_Tags}}
+var mCreateDatasetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDatasetResponse_Name}}
+var mCreateProfileJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateProfileJobRequest_DatasetName, &sCreateProfileJobRequest_EncryptionKeyArn, &sCreateProfileJobRequest_EncryptionMode, &sCreateProfileJobRequest_Name, &sCreateProfileJobRequest_LogSubscription, &sCreateProfileJobRequest_MaxCapacity, &sCreateProfileJobRequest_MaxRetries, &sCreateProfileJobRequest_OutputLocation, &sCreateProfileJobRequest_Configuration, &sCreateProfileJobRequest_ValidationConfigurations, &sCreateProfileJobRequest_RoleArn, &sCreateProfileJobRequest_Tags, &sCreateProfileJobRequest_Timeout, &sCreateProfileJobRequest_JobSample}, Seed: 5, Slots: []uint16{
+	0, 0, 1, 5, 4, 13, 0, 0, 0, 0, 0, 0, 6, 3, 0, 11, 2, 0, 0, 0, 0, 7, 0, 8,
+	0, 0, 12, 9, 0, 0, 10, 14,
+}}
+var mCreateProfileJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateProfileJobResponse_Name}}
+var mCreateProjectRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateProjectRequest_DatasetName, &sCreateProjectRequest_Name, &sCreateProjectRequest_RecipeName, &sCreateProjectRequest_Sample, &sCreateProjectRequest_RoleArn, &sCreateProjectRequest_Tags}}
+var mCreateProjectResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateProjectResponse_Name}}
+var mCreateRecipeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRecipeRequest_Description, &sCreateRecipeRequest_Name, &sCreateRecipeRequest_Steps, &sCreateRecipeRequest_Tags}}
+var mCreateRecipeJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRecipeJobRequest_DatasetName, &sCreateRecipeJobRequest_EncryptionKeyArn, &sCreateRecipeJobRequest_EncryptionMode, &sCreateRecipeJobRequest_Name, &sCreateRecipeJobRequest_LogSubscription, &sCreateRecipeJobRequest_MaxCapacity, &sCreateRecipeJobRequest_MaxRetries, &sCreateRecipeJobRequest_Outputs, &sCreateRecipeJobRequest_DataCatalogOutputs, &sCreateRecipeJobRequest_DatabaseOutputs, &sCreateRecipeJobRequest_ProjectName, &sCreateRecipeJobRequest_RecipeReference, &sCreateRecipeJobRequest_RoleArn, &sCreateRecipeJobRequest_Tags, &sCreateRecipeJobRequest_Timeout}, Seed: 214, Slots: []uint16{
+	15, 9, 0, 1, 13, 0, 3, 2, 0, 0, 11, 4, 0, 0, 6, 0, 0, 0, 14, 5, 0, 0, 0, 0,
+	0, 0, 8, 7, 0, 12, 0, 10,
+}}
+var mCreateRecipeJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRecipeJobResponse_Name}}
+var mCreateRecipeResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRecipeResponse_Name}}
+var mCreateRulesetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRulesetRequest_Name, &sCreateRulesetRequest_Description, &sCreateRulesetRequest_TargetArn, &sCreateRulesetRequest_Rules, &sCreateRulesetRequest_Tags}}
+var mCreateRulesetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRulesetResponse_Name}}
+var mCreateScheduleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateScheduleRequest_JobNames, &sCreateScheduleRequest_CronExpression, &sCreateScheduleRequest_Tags, &sCreateScheduleRequest_Name}}
+var mCreateScheduleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateScheduleResponse_Name}}
+var mDeleteDatasetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDatasetRequest_Name}}
+var mDeleteDatasetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDatasetResponse_Name}}
+var mDeleteJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteJobRequest_Name}}
+var mDeleteJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteJobResponse_Name}}
+var mDeleteProjectRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteProjectRequest_Name}}
+var mDeleteProjectResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteProjectResponse_Name}}
+var mDeleteRecipeVersionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRecipeVersionRequest_Name, &sDeleteRecipeVersionRequest_RecipeVersion}}
+var mDeleteRecipeVersionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRecipeVersionResponse_Name, &sDeleteRecipeVersionResponse_RecipeVersion}}
+var mDeleteRulesetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRulesetRequest_Name}}
+var mDeleteRulesetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRulesetResponse_Name}}
+var mDeleteScheduleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteScheduleRequest_Name}}
+var mDeleteScheduleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteScheduleResponse_Name}}
+var mDescribeDatasetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDatasetRequest_Name}}
+var mDescribeDatasetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDatasetResponse_CreatedBy, &sDescribeDatasetResponse_CreateDate, &sDescribeDatasetResponse_Name, &sDescribeDatasetResponse_Format, &sDescribeDatasetResponse_FormatOptions, &sDescribeDatasetResponse_Input, &sDescribeDatasetResponse_LastModifiedDate, &sDescribeDatasetResponse_LastModifiedBy, &sDescribeDatasetResponse_Source, &sDescribeDatasetResponse_PathOptions, &sDescribeDatasetResponse_Tags, &sDescribeDatasetResponse_ResourceArn}, Seed: 5, Slots: []uint16{
+	12, 1, 4, 0, 3, 0, 0, 0, 0, 0, 0, 10, 5, 6, 0, 0, 0, 0, 0, 0, 0, 8, 0, 9,
+	0, 7, 11, 0, 2, 0, 0, 0,
+}}
+var mDescribeJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeJobRequest_Name}}
+var mDescribeJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeJobResponse_CreateDate, &sDescribeJobResponse_CreatedBy, &sDescribeJobResponse_DatasetName, &sDescribeJobResponse_EncryptionKeyArn, &sDescribeJobResponse_EncryptionMode, &sDescribeJobResponse_Name, &sDescribeJobResponse_Type, &sDescribeJobResponse_LastModifiedBy, &sDescribeJobResponse_LastModifiedDate, &sDescribeJobResponse_LogSubscription, &sDescribeJobResponse_MaxCapacity, &sDescribeJobResponse_MaxRetries, &sDescribeJobResponse_Outputs, &sDescribeJobResponse_DataCatalogOutputs, &sDescribeJobResponse_DatabaseOutputs, &sDescribeJobResponse_ProjectName, &sDescribeJobResponse_ProfileConfiguration, &sDescribeJobResponse_ValidationConfigurations, &sDescribeJobResponse_RecipeReference, &sDescribeJobResponse_ResourceArn, &sDescribeJobResponse_RoleArn, &sDescribeJobResponse_Tags, &sDescribeJobResponse_Timeout, &sDescribeJobResponse_JobSample}, Seed: 227, Slots: []uint16{
+	9, 0, 17, 0, 8, 0, 18, 11, 0, 0, 0, 0, 0, 1, 23, 15, 0, 0, 24, 16, 0, 0, 0, 0,
+	0, 0, 6, 5, 0, 2, 0, 0, 14, 20, 0, 0, 0, 0, 0, 0, 0, 12, 10, 4, 0, 0, 0, 0,
+	3, 0, 0, 0, 0, 0, 0, 19, 13, 22, 0, 7, 21, 0, 0, 0,
+}}
+var mDescribeJobRunRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeJobRunRequest_Name, &sDescribeJobRunRequest_RunId}}
+var mDescribeJobRunResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeJobRunResponse_Attempt, &sDescribeJobRunResponse_CompletedOn, &sDescribeJobRunResponse_DatasetName, &sDescribeJobRunResponse_ErrorMessage, &sDescribeJobRunResponse_ExecutionTime, &sDescribeJobRunResponse_JobName, &sDescribeJobRunResponse_ProfileConfiguration, &sDescribeJobRunResponse_ValidationConfigurations, &sDescribeJobRunResponse_RunId, &sDescribeJobRunResponse_State, &sDescribeJobRunResponse_LogSubscription, &sDescribeJobRunResponse_LogGroupName, &sDescribeJobRunResponse_Outputs, &sDescribeJobRunResponse_DataCatalogOutputs, &sDescribeJobRunResponse_DatabaseOutputs, &sDescribeJobRunResponse_RecipeReference, &sDescribeJobRunResponse_StartedBy, &sDescribeJobRunResponse_StartedOn, &sDescribeJobRunResponse_JobSample}, Seed: 7, Slots: []uint16{
+	0, 0, 6, 19, 16, 0, 0, 13, 11, 0, 3, 0, 10, 14, 0, 0, 15, 0, 0, 0, 0, 12, 1, 5,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 4, 0,
+	0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 18, 0, 17,
+}}
+var mDescribeProjectRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeProjectRequest_Name}}
+var mDescribeProjectResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeProjectResponse_CreateDate, &sDescribeProjectResponse_CreatedBy, &sDescribeProjectResponse_DatasetName, &sDescribeProjectResponse_LastModifiedDate, &sDescribeProjectResponse_LastModifiedBy, &sDescribeProjectResponse_Name, &sDescribeProjectResponse_RecipeName, &sDescribeProjectResponse_ResourceArn, &sDescribeProjectResponse_Sample, &sDescribeProjectResponse_RoleArn, &sDescribeProjectResponse_Tags, &sDescribeProjectResponse_SessionStatus, &sDescribeProjectResponse_OpenedBy, &sDescribeProjectResponse_OpenDate}, Seed: 52, Slots: []uint16{
+	2, 0, 14, 0, 1, 0, 11, 5, 9, 3, 6, 0, 0, 7, 0, 0, 10, 8, 0, 0, 12, 0, 0, 13,
+	0, 0, 0, 0, 0, 0, 0, 4,
+}}
+var mDescribeRecipeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeRecipeRequest_Name, &sDescribeRecipeRequest_RecipeVersion}}
+var mDescribeRecipeResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeRecipeResponse_CreatedBy, &sDescribeRecipeResponse_CreateDate, &sDescribeRecipeResponse_LastModifiedBy, &sDescribeRecipeResponse_LastModifiedDate, &sDescribeRecipeResponse_ProjectName, &sDescribeRecipeResponse_PublishedBy, &sDescribeRecipeResponse_PublishedDate, &sDescribeRecipeResponse_Description, &sDescribeRecipeResponse_Name, &sDescribeRecipeResponse_Steps, &sDescribeRecipeResponse_Tags, &sDescribeRecipeResponse_ResourceArn, &sDescribeRecipeResponse_RecipeVersion}, Seed: 12, Slots: []uint16{
+	0, 0, 7, 9, 0, 11, 12, 0, 0, 0, 0, 4, 5, 0, 2, 3, 0, 0, 0, 13, 6, 0, 0, 1,
+	0, 0, 0, 10, 0, 8, 0, 0,
+}}
+var mDescribeRulesetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeRulesetRequest_Name}}
+var mDescribeRulesetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeRulesetResponse_Name, &sDescribeRulesetResponse_Description, &sDescribeRulesetResponse_TargetArn, &sDescribeRulesetResponse_Rules, &sDescribeRulesetResponse_CreateDate, &sDescribeRulesetResponse_CreatedBy, &sDescribeRulesetResponse_LastModifiedBy, &sDescribeRulesetResponse_LastModifiedDate, &sDescribeRulesetResponse_ResourceArn, &sDescribeRulesetResponse_Tags}, Seed: 5, Slots: []uint16{
+	9, 6, 0, 4, 1, 0, 0, 0, 0, 3, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0,
+	0, 8, 10, 0, 5, 0, 0, 0,
+}}
+var mDescribeScheduleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeScheduleRequest_Name}}
+var mDescribeScheduleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeScheduleResponse_CreateDate, &sDescribeScheduleResponse_CreatedBy, &sDescribeScheduleResponse_JobNames, &sDescribeScheduleResponse_LastModifiedBy, &sDescribeScheduleResponse_LastModifiedDate, &sDescribeScheduleResponse_ResourceArn, &sDescribeScheduleResponse_CronExpression, &sDescribeScheduleResponse_Tags, &sDescribeScheduleResponse_Name}, Seed: 3, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 2, 0, 8, 9, 0, 0, 3, 0, 0, 7, 1, 0, 0,
+	4, 0, 0, 0, 0, 0, 5, 0,
+}}
+var mListDatasetsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListDatasetsRequest_MaxResults, &sListDatasetsRequest_NextToken}}
+var mListDatasetsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListDatasetsResponse_Datasets, &sListDatasetsResponse_NextToken}}
+var mListJobRunsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListJobRunsRequest_Name, &sListJobRunsRequest_MaxResults, &sListJobRunsRequest_NextToken}}
+var mListJobRunsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListJobRunsResponse_JobRuns, &sListJobRunsResponse_NextToken}}
+var mListJobsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListJobsRequest_DatasetName, &sListJobsRequest_MaxResults, &sListJobsRequest_NextToken, &sListJobsRequest_ProjectName}}
+var mListJobsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListJobsResponse_Jobs, &sListJobsResponse_NextToken}}
+var mListProjectsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListProjectsRequest_NextToken, &sListProjectsRequest_MaxResults}}
+var mListProjectsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListProjectsResponse_Projects, &sListProjectsResponse_NextToken}}
+var mListRecipesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListRecipesRequest_MaxResults, &sListRecipesRequest_NextToken, &sListRecipesRequest_RecipeVersion}}
+var mListRecipesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListRecipesResponse_Recipes, &sListRecipesResponse_NextToken}}
+var mListRecipeVersionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListRecipeVersionsRequest_MaxResults, &sListRecipeVersionsRequest_NextToken, &sListRecipeVersionsRequest_Name}}
+var mListRecipeVersionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListRecipeVersionsResponse_NextToken, &sListRecipeVersionsResponse_Recipes}}
+var mListRulesetsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListRulesetsRequest_TargetArn, &sListRulesetsRequest_MaxResults, &sListRulesetsRequest_NextToken}}
+var mListRulesetsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListRulesetsResponse_Rulesets, &sListRulesetsResponse_NextToken}}
+var mListSchedulesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListSchedulesRequest_JobName, &sListSchedulesRequest_MaxResults, &sListSchedulesRequest_NextToken}}
+var mListSchedulesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListSchedulesResponse_Schedules, &sListSchedulesResponse_NextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_Tags}}
+var mPublishRecipeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPublishRecipeRequest_Description, &sPublishRecipeRequest_Name}}
+var mPublishRecipeResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPublishRecipeResponse_Name}}
+var mSendProjectSessionActionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sSendProjectSessionActionRequest_Preview, &sSendProjectSessionActionRequest_Name, &sSendProjectSessionActionRequest_RecipeStep, &sSendProjectSessionActionRequest_StepIndex, &sSendProjectSessionActionRequest_ClientSessionId, &sSendProjectSessionActionRequest_ViewFrame}}
+var mSendProjectSessionActionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sSendProjectSessionActionResponse_Result, &sSendProjectSessionActionResponse_Name, &sSendProjectSessionActionResponse_ActionId}}
+var mStartJobRunRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartJobRunRequest_Name}}
+var mStartJobRunResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartJobRunResponse_RunId}}
+var mStartProjectSessionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartProjectSessionRequest_Name, &sStartProjectSessionRequest_AssumeControl}}
+var mStartProjectSessionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartProjectSessionResponse_Name, &sStartProjectSessionResponse_ClientSessionId}}
+var mStopJobRunRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStopJobRunRequest_Name, &sStopJobRunRequest_RunId}}
+var mStopJobRunResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStopJobRunResponse_RunId}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceArn, &sTagResourceRequest_Tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceArn, &sUntagResourceRequest_TagKeys}}
+var mUpdateDatasetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDatasetRequest_Name, &sUpdateDatasetRequest_Format, &sUpdateDatasetRequest_FormatOptions, &sUpdateDatasetRequest_Input, &sUpdateDatasetRequest_PathOptions}}
+var mUpdateDatasetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDatasetResponse_Name}}
+var mUpdateProfileJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateProfileJobRequest_Configuration, &sUpdateProfileJobRequest_EncryptionKeyArn, &sUpdateProfileJobRequest_EncryptionMode, &sUpdateProfileJobRequest_Name, &sUpdateProfileJobRequest_LogSubscription, &sUpdateProfileJobRequest_MaxCapacity, &sUpdateProfileJobRequest_MaxRetries, &sUpdateProfileJobRequest_OutputLocation, &sUpdateProfileJobRequest_ValidationConfigurations, &sUpdateProfileJobRequest_RoleArn, &sUpdateProfileJobRequest_Timeout, &sUpdateProfileJobRequest_JobSample}, Seed: 5, Slots: []uint16{
+	0, 0, 0, 5, 4, 11, 0, 0, 0, 0, 0, 0, 6, 3, 0, 10, 2, 0, 0, 0, 0, 7, 0, 8,
+	0, 0, 0, 1, 0, 0, 9, 12,
+}}
+var mUpdateProfileJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateProfileJobResponse_Name}}
+var mUpdateProjectRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateProjectRequest_Sample, &sUpdateProjectRequest_RoleArn, &sUpdateProjectRequest_Name}}
+var mUpdateProjectResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateProjectResponse_LastModifiedDate, &sUpdateProjectResponse_Name}}
+var mUpdateRecipeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRecipeRequest_Description, &sUpdateRecipeRequest_Name, &sUpdateRecipeRequest_Steps}}
+var mUpdateRecipeJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRecipeJobRequest_EncryptionKeyArn, &sUpdateRecipeJobRequest_EncryptionMode, &sUpdateRecipeJobRequest_Name, &sUpdateRecipeJobRequest_LogSubscription, &sUpdateRecipeJobRequest_MaxCapacity, &sUpdateRecipeJobRequest_MaxRetries, &sUpdateRecipeJobRequest_Outputs, &sUpdateRecipeJobRequest_DataCatalogOutputs, &sUpdateRecipeJobRequest_DatabaseOutputs, &sUpdateRecipeJobRequest_RoleArn, &sUpdateRecipeJobRequest_Timeout}, Seed: 3, Slots: []uint16{
+	0, 0, 0, 4, 0, 7, 0, 0, 0, 0, 0, 10, 2, 1, 3, 0, 0, 0, 11, 0, 6, 0, 8, 0,
+	0, 9, 0, 0, 5, 0, 0, 0,
+}}
+var mUpdateRecipeJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRecipeJobResponse_Name}}
+var mUpdateRecipeResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRecipeResponse_Name}}
+var mUpdateRulesetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRulesetRequest_Name, &sUpdateRulesetRequest_Description, &sUpdateRulesetRequest_Rules}}
+var mUpdateRulesetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRulesetResponse_Name}}
+var mUpdateScheduleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateScheduleRequest_JobNames, &sUpdateScheduleRequest_CronExpression, &sUpdateScheduleRequest_Name}}
+var mUpdateScheduleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateScheduleResponse_Name}}
+
+var sBatchDeleteRecipeVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeleteRecipeVersion, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sCreateDataset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDataset, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sCreateProfileJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProfileJob, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sCreateProject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProject, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sCreateRecipe = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRecipe, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sCreateRecipeJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRecipeJob, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var sCreateRuleset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRuleset, Traits: &t6, Type: smithy.ShapeTypeOperation})
+var sCreateSchedule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSchedule, Traits: &t7, Type: smithy.ShapeTypeOperation})
+var sDeleteDataset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDataset, Traits: &t8, Type: smithy.ShapeTypeOperation})
+var sDeleteJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteJob, Traits: &t9, Type: smithy.ShapeTypeOperation})
+var sDeleteProject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProject, Traits: &t10, Type: smithy.ShapeTypeOperation})
+var sDeleteRecipeVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRecipeVersion, Traits: &t11, Type: smithy.ShapeTypeOperation})
+var sDeleteRuleset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRuleset, Traits: &t12, Type: smithy.ShapeTypeOperation})
+var sDeleteSchedule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSchedule, Traits: &t13, Type: smithy.ShapeTypeOperation})
+var sDescribeDataset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDataset, Traits: &t14, Type: smithy.ShapeTypeOperation})
+var sDescribeJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeJob, Traits: &t15, Type: smithy.ShapeTypeOperation})
+var sDescribeJobRun = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeJobRun, Traits: &t16, Type: smithy.ShapeTypeOperation})
+var sDescribeProject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeProject, Traits: &t17, Type: smithy.ShapeTypeOperation})
+var sDescribeRecipe = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRecipe, Traits: &t18, Type: smithy.ShapeTypeOperation})
+var sDescribeRuleset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRuleset, Traits: &t19, Type: smithy.ShapeTypeOperation})
+var sDescribeSchedule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSchedule, Traits: &t20, Type: smithy.ShapeTypeOperation})
+var sListDatasets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDatasets, Traits: &t21, Type: smithy.ShapeTypeOperation})
+var sListJobRuns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListJobRuns, Traits: &t22, Type: smithy.ShapeTypeOperation})
+var sListJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListJobs, Traits: &t23, Type: smithy.ShapeTypeOperation})
+var sListProjects = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProjects, Traits: &t24, Type: smithy.ShapeTypeOperation})
+var sListRecipes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecipes, Traits: &t25, Type: smithy.ShapeTypeOperation})
+var sListRecipeVersions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecipeVersions, Traits: &t26, Type: smithy.ShapeTypeOperation})
+var sListRulesets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRulesets, Traits: &t27, Type: smithy.ShapeTypeOperation})
+var sListSchedules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSchedules, Traits: &t28, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t29, Type: smithy.ShapeTypeOperation})
+var sPublishRecipe = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPublishRecipe, Traits: &t30, Type: smithy.ShapeTypeOperation})
+var sSendProjectSessionAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendProjectSessionAction, Traits: &t31, Type: smithy.ShapeTypeOperation})
+var sStartJobRun = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartJobRun, Traits: &t32, Type: smithy.ShapeTypeOperation})
+var sStartProjectSession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartProjectSession, Traits: &t33, Type: smithy.ShapeTypeOperation})
+var sStopJobRun = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopJobRun, Traits: &t34, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t35, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t36, Type: smithy.ShapeTypeOperation})
+var sUpdateDataset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDataset, Traits: &t37, Type: smithy.ShapeTypeOperation})
+var sUpdateProfileJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProfileJob, Traits: &t38, Type: smithy.ShapeTypeOperation})
+var sUpdateProject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProject, Traits: &t39, Type: smithy.ShapeTypeOperation})
+var sUpdateRecipe = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRecipe, Traits: &t40, Type: smithy.ShapeTypeOperation})
+var sUpdateRecipeJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRecipeJob, Traits: &t41, Type: smithy.ShapeTypeOperation})
+var sUpdateRuleset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRuleset, Traits: &t42, Type: smithy.ShapeTypeOperation})
+var sUpdateSchedule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSchedule, Traits: &t43, Type: smithy.ShapeTypeOperation})
+var s_AWSGlueDataBrew = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSGlueDataBrew, Type: smithy.ShapeTypeService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t44, Type: smithy.ShapeTypeStructure})
+var s_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var s_ActionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionId, Type: smithy.ShapeTypeInteger})
+var s_AllowedStatisticList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AllowedStatisticList, Members: &m_AllowedStatisticList, Type: smithy.ShapeTypeList})
+var sAllowedStatistics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAllowedStatistics, Members: &mAllowedStatistics, Type: smithy.ShapeTypeStructure})
+var sAnalyticsMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAnalyticsMode, Members: &mAnalyticsMode, Type: smithy.ShapeTypeEnum})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString})
+var s_AssumeControl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssumeControl, Type: smithy.ShapeTypeBoolean})
+var s_Attempt = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Attempt, Type: smithy.ShapeTypeInteger})
+var s_Bucket = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Bucket, Type: smithy.ShapeTypeString})
+var s_BucketOwner = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BucketOwner, Type: smithy.ShapeTypeString})
+var s_CatalogId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CatalogId, Type: smithy.ShapeTypeString})
+var s_ClientSessionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientSessionId, Traits: &t45, Type: smithy.ShapeTypeString})
+var s_ColumnName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ColumnName, Type: smithy.ShapeTypeString})
+var s_ColumnNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ColumnNameList, Members: &m_ColumnNameList, Type: smithy.ShapeTypeList})
+var s_ColumnRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ColumnRange, Type: smithy.ShapeTypeInteger})
+var sColumnSelector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iColumnSelector, Members: &mColumnSelector, Type: smithy.ShapeTypeStructure})
+var s_ColumnSelectorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ColumnSelectorList, Members: &m_ColumnSelectorList, Type: smithy.ShapeTypeList})
+var sColumnStatisticsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iColumnStatisticsConfiguration, Members: &mColumnStatisticsConfiguration, Type: smithy.ShapeTypeStructure})
+var s_ColumnStatisticsConfigurationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ColumnStatisticsConfigurationList, Members: &m_ColumnStatisticsConfigurationList, Type: smithy.ShapeTypeList})
+var sCompressionFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCompressionFormat, Members: &mCompressionFormat, Type: smithy.ShapeTypeEnum})
+var s_Condition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Condition, Type: smithy.ShapeTypeString})
+var sConditionExpression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConditionExpression, Members: &mConditionExpression, Type: smithy.ShapeTypeStructure})
+var s_ConditionExpressionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConditionExpressionList, Members: &m_ConditionExpressionList, Type: smithy.ShapeTypeList})
+var s_ConditionValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConditionValue, Type: smithy.ShapeTypeString})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t46, Type: smithy.ShapeTypeStructure})
+var s_CreateColumn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreateColumn, Type: smithy.ShapeTypeBoolean})
+var s_CreatedBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreatedBy, Type: smithy.ShapeTypeString})
+var s_CronExpression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CronExpression, Type: smithy.ShapeTypeString})
+var sCsvOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCsvOptions, Members: &mCsvOptions, Type: smithy.ShapeTypeStructure})
+var sCsvOutputOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCsvOutputOptions, Members: &mCsvOutputOptions, Type: smithy.ShapeTypeStructure})
+var sDatabaseInputDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatabaseInputDefinition, Members: &mDatabaseInputDefinition, Type: smithy.ShapeTypeStructure})
+var s_DatabaseName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatabaseName, Type: smithy.ShapeTypeString})
+var sDatabaseOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatabaseOutput, Members: &mDatabaseOutput, Type: smithy.ShapeTypeStructure})
+var s_DatabaseOutputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatabaseOutputList, Members: &m_DatabaseOutputList, Type: smithy.ShapeTypeList})
+var sDatabaseOutputMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatabaseOutputMode, Members: &mDatabaseOutputMode, Type: smithy.ShapeTypeEnum})
+var s_DatabaseTableName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatabaseTableName, Type: smithy.ShapeTypeString})
+var sDatabaseTableOutputOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatabaseTableOutputOptions, Members: &mDatabaseTableOutputOptions, Type: smithy.ShapeTypeStructure})
+var sDataCatalogInputDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataCatalogInputDefinition, Members: &mDataCatalogInputDefinition, Type: smithy.ShapeTypeStructure})
+var sDataCatalogOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataCatalogOutput, Members: &mDataCatalogOutput, Type: smithy.ShapeTypeStructure})
+var s_DataCatalogOutputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataCatalogOutputList, Members: &m_DataCatalogOutputList, Type: smithy.ShapeTypeList})
+var sDataset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataset, Members: &mDataset, Type: smithy.ShapeTypeStructure})
+var s_DatasetList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatasetList, Members: &m_DatasetList, Type: smithy.ShapeTypeList})
+var s_DatasetName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatasetName, Type: smithy.ShapeTypeString})
+var sDatasetParameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatasetParameter, Members: &mDatasetParameter, Type: smithy.ShapeTypeStructure})
+var s_Date = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var s_DatetimeFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatetimeFormat, Type: smithy.ShapeTypeString})
+var sDatetimeOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatetimeOptions, Members: &mDatetimeOptions, Type: smithy.ShapeTypeStructure})
+var s_Delimiter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Delimiter, Type: smithy.ShapeTypeString})
+var s_Disabled = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Disabled, Type: smithy.ShapeTypeBoolean})
+var s_EncryptionKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EncryptionKeyArn, Type: smithy.ShapeTypeString})
+var sEncryptionMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionMode, Members: &mEncryptionMode, Type: smithy.ShapeTypeEnum})
+var sEntityDetectorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntityDetectorConfiguration, Members: &mEntityDetectorConfiguration, Type: smithy.ShapeTypeStructure})
+var s_EntityType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntityType, Type: smithy.ShapeTypeString})
+var s_EntityTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntityTypeList, Members: &m_EntityTypeList, Type: smithy.ShapeTypeList})
+var s_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorCode, Type: smithy.ShapeTypeString})
+var sExcelOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExcelOptions, Members: &mExcelOptions, Type: smithy.ShapeTypeStructure})
+var s_ExecutionTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExecutionTime, Type: smithy.ShapeTypeInteger})
+var s_Expression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Expression, Type: smithy.ShapeTypeString})
+var sFilesLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilesLimit, Members: &mFilesLimit, Type: smithy.ShapeTypeStructure})
+var sFilterExpression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilterExpression, Members: &mFilterExpression, Type: smithy.ShapeTypeStructure})
+var sFormatOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFormatOptions, Members: &mFormatOptions, Type: smithy.ShapeTypeStructure})
+var s_GlueConnectionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GlueConnectionName, Type: smithy.ShapeTypeString})
+var s_HeaderRow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HeaderRow, Type: smithy.ShapeTypeBoolean})
+var s_HiddenColumnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HiddenColumnList, Members: &m_HiddenColumnList, Type: smithy.ShapeTypeList})
+var sInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInput, Members: &mInput, Type: smithy.ShapeTypeStructure})
+var sInputFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInputFormat, Members: &mInputFormat, Type: smithy.ShapeTypeEnum})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t47, Type: smithy.ShapeTypeStructure})
+var sJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJob, Members: &mJob, Type: smithy.ShapeTypeStructure})
+var s_JobList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobList, Members: &m_JobList, Type: smithy.ShapeTypeList})
+var s_JobName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobName, Type: smithy.ShapeTypeString})
+var s_JobNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobNameList, Members: &m_JobNameList, Type: smithy.ShapeTypeList})
+var sJobRun = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobRun, Members: &mJobRun, Type: smithy.ShapeTypeStructure})
+var s_JobRunErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobRunErrorMessage, Type: smithy.ShapeTypeString})
+var s_JobRunId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobRunId, Type: smithy.ShapeTypeString})
+var s_JobRunList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobRunList, Members: &m_JobRunList, Type: smithy.ShapeTypeList})
+var sJobRunState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobRunState, Members: &mJobRunState, Type: smithy.ShapeTypeEnum})
+var sJobSample = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobSample, Members: &mJobSample, Type: smithy.ShapeTypeStructure})
+var s_JobSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobSize, Type: smithy.ShapeTypeLong})
+var sJobType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobType, Members: &mJobType, Type: smithy.ShapeTypeEnum})
+var sJsonOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJsonOptions, Members: &mJsonOptions, Type: smithy.ShapeTypeStructure})
+var s_Key = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Key, Type: smithy.ShapeTypeString})
+var s_LastModifiedBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastModifiedBy, Type: smithy.ShapeTypeString})
+var s_LocaleCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LocaleCode, Type: smithy.ShapeTypeString})
+var s_LogGroupName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogGroupName, Type: smithy.ShapeTypeString})
+var sLogSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogSubscription, Members: &mLogSubscription, Type: smithy.ShapeTypeEnum})
+var s_MaxCapacity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxCapacity, Type: smithy.ShapeTypeInteger})
+var s_MaxFiles = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxFiles, Type: smithy.ShapeTypeInteger})
+var s_MaxOutputFiles = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxOutputFiles, Type: smithy.ShapeTypeInteger})
+var s_MaxResults100 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults100, Type: smithy.ShapeTypeInteger})
+var s_MaxRetries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxRetries, Type: smithy.ShapeTypeInteger})
+var s_Message = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Message, Type: smithy.ShapeTypeString})
+var sMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetadata, Members: &mMetadata, Type: smithy.ShapeTypeStructure})
+var s_MultiLine = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MultiLine, Type: smithy.ShapeTypeBoolean})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var s_OpenedBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OpenedBy, Type: smithy.ShapeTypeString})
+var s_Operation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Operation, Type: smithy.ShapeTypeString})
+var sOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrder, Members: &mOrder, Type: smithy.ShapeTypeEnum})
+var sOrderedBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrderedBy, Members: &mOrderedBy, Type: smithy.ShapeTypeEnum})
+var sOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutput, Members: &mOutput, Type: smithy.ShapeTypeStructure})
+var sOutputFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutputFormat, Members: &mOutputFormat, Type: smithy.ShapeTypeEnum})
+var sOutputFormatOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutputFormatOptions, Members: &mOutputFormatOptions, Type: smithy.ShapeTypeStructure})
+var s_OutputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutputList, Members: &m_OutputList, Type: smithy.ShapeTypeList})
+var s_OverwriteOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OverwriteOutput, Type: smithy.ShapeTypeBoolean})
+var s_ParameterMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParameterMap, Members: &m_ParameterMap, Type: smithy.ShapeTypeMap})
+var s_ParameterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParameterName, Type: smithy.ShapeTypeString})
+var sParameterType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iParameterType, Members: &mParameterType, Type: smithy.ShapeTypeEnum})
+var s_ParameterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParameterValue, Type: smithy.ShapeTypeString})
+var sPathOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPathOptions, Members: &mPathOptions, Type: smithy.ShapeTypeStructure})
+var s_PathParameterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PathParameterName, Type: smithy.ShapeTypeString})
+var s_PathParametersMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PathParametersMap, Members: &m_PathParametersMap, Type: smithy.ShapeTypeMap})
+var s_Preview = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Preview, Type: smithy.ShapeTypeBoolean})
+var sProfileConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProfileConfiguration, Members: &mProfileConfiguration, Type: smithy.ShapeTypeStructure})
+var sProject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProject, Members: &mProject, Type: smithy.ShapeTypeStructure})
+var s_ProjectList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProjectList, Members: &m_ProjectList, Type: smithy.ShapeTypeList})
+var s_ProjectName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProjectName, Type: smithy.ShapeTypeString})
+var s_PublishedBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PublishedBy, Type: smithy.ShapeTypeString})
+var s_QueryString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryString, Type: smithy.ShapeTypeString})
+var sRecipe = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecipe, Members: &mRecipe, Type: smithy.ShapeTypeStructure})
+var sRecipeAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecipeAction, Members: &mRecipeAction, Type: smithy.ShapeTypeStructure})
+var s_RecipeDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecipeDescription, Type: smithy.ShapeTypeString})
+var s_RecipeErrorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecipeErrorList, Members: &m_RecipeErrorList, Type: smithy.ShapeTypeList})
+var s_RecipeErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecipeErrorMessage, Type: smithy.ShapeTypeString})
+var s_RecipeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecipeList, Members: &m_RecipeList, Type: smithy.ShapeTypeList})
+var s_RecipeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecipeName, Type: smithy.ShapeTypeString})
+var sRecipeReference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecipeReference, Members: &mRecipeReference, Type: smithy.ShapeTypeStructure})
+var sRecipeStep = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecipeStep, Members: &mRecipeStep, Type: smithy.ShapeTypeStructure})
+var s_RecipeStepList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecipeStepList, Members: &m_RecipeStepList, Type: smithy.ShapeTypeList})
+var s_RecipeVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecipeVersion, Type: smithy.ShapeTypeString})
+var sRecipeVersionErrorDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecipeVersionErrorDetail, Members: &mRecipeVersionErrorDetail, Type: smithy.ShapeTypeStructure})
+var s_RecipeVersionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecipeVersionList, Members: &m_RecipeVersionList, Type: smithy.ShapeTypeList})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t48, Type: smithy.ShapeTypeStructure})
+var s_Result = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Result, Type: smithy.ShapeTypeString})
+var s_RowRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RowRange, Type: smithy.ShapeTypeInteger})
+var sRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRule, Members: &mRule, Type: smithy.ShapeTypeStructure})
+var s_RuleCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleCount, Type: smithy.ShapeTypeInteger})
+var s_RuleList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleList, Members: &m_RuleList, Type: smithy.ShapeTypeList})
+var s_RuleName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleName, Type: smithy.ShapeTypeString})
+var s_RulesetDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RulesetDescription, Type: smithy.ShapeTypeString})
+var sRulesetItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRulesetItem, Members: &mRulesetItem, Type: smithy.ShapeTypeStructure})
+var s_RulesetItemList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RulesetItemList, Members: &m_RulesetItemList, Type: smithy.ShapeTypeList})
+var s_RulesetName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RulesetName, Type: smithy.ShapeTypeString})
+var sS3Location = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3Location, Members: &mS3Location, Type: smithy.ShapeTypeStructure})
+var sS3TableOutputOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3TableOutputOptions, Members: &mS3TableOutputOptions, Type: smithy.ShapeTypeStructure})
+var sSample = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSample, Members: &mSample, Type: smithy.ShapeTypeStructure})
+var sSampleMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSampleMode, Members: &mSampleMode, Type: smithy.ShapeTypeEnum})
+var s_SampleSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SampleSize, Type: smithy.ShapeTypeInteger})
+var sSampleType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSampleType, Members: &mSampleType, Type: smithy.ShapeTypeEnum})
+var sSchedule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSchedule, Members: &mSchedule, Type: smithy.ShapeTypeStructure})
+var s_ScheduleList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScheduleList, Members: &m_ScheduleList, Type: smithy.ShapeTypeList})
+var s_ScheduleName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScheduleName, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t49, Type: smithy.ShapeTypeStructure})
+var sSessionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSessionStatus, Members: &mSessionStatus, Type: smithy.ShapeTypeEnum})
+var s_SheetIndex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SheetIndex, Type: smithy.ShapeTypeInteger})
+var s_SheetIndexList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SheetIndexList, Members: &m_SheetIndexList, Type: smithy.ShapeTypeList})
+var s_SheetName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SheetName, Type: smithy.ShapeTypeString})
+var s_SheetNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SheetNameList, Members: &m_SheetNameList, Type: smithy.ShapeTypeList})
+var sSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSource, Members: &mSource, Type: smithy.ShapeTypeEnum})
+var s_StartColumnIndex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StartColumnIndex, Type: smithy.ShapeTypeInteger})
+var s_StartedBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StartedBy, Type: smithy.ShapeTypeString})
+var s_StartRowIndex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StartRowIndex, Type: smithy.ShapeTypeInteger})
+var s_Statistic = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Statistic, Type: smithy.ShapeTypeString})
+var s_StatisticList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatisticList, Members: &m_StatisticList, Type: smithy.ShapeTypeList})
+var sStatisticOverride = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatisticOverride, Members: &mStatisticOverride, Type: smithy.ShapeTypeStructure})
+var s_StatisticOverrideList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatisticOverrideList, Members: &m_StatisticOverrideList, Type: smithy.ShapeTypeList})
+var sStatisticsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatisticsConfiguration, Members: &mStatisticsConfiguration, Type: smithy.ShapeTypeStructure})
+var s_StepIndex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StepIndex, Type: smithy.ShapeTypeInteger})
+var s_TableName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TableName, Type: smithy.ShapeTypeString})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_TargetColumn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetColumn, Type: smithy.ShapeTypeString})
+var sThreshold = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThreshold, Members: &mThreshold, Type: smithy.ShapeTypeStructure})
+var sThresholdType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThresholdType, Members: &mThresholdType, Type: smithy.ShapeTypeEnum})
+var sThresholdUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThresholdUnit, Members: &mThresholdUnit, Type: smithy.ShapeTypeEnum})
+var s_ThresholdValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ThresholdValue, Type: smithy.ShapeTypeDouble})
+var s_Timeout = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timeout, Type: smithy.ShapeTypeInteger})
+var s_TimezoneOffset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimezoneOffset, Type: smithy.ShapeTypeString})
+var sValidationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationConfiguration, Members: &mValidationConfiguration, Type: smithy.ShapeTypeStructure})
+var s_ValidationConfigurationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationConfigurationList, Members: &m_ValidationConfigurationList, Type: smithy.ShapeTypeList})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t50, Type: smithy.ShapeTypeStructure})
+var sValidationMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationMode, Members: &mValidationMode, Type: smithy.ShapeTypeEnum})
+var s_ValueReference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValueReference, Type: smithy.ShapeTypeString})
+var s_ValuesMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValuesMap, Members: &m_ValuesMap, Type: smithy.ShapeTypeMap})
+var sViewFrame = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iViewFrame, Members: &mViewFrame, Type: smithy.ShapeTypeStructure})
+var sBatchDeleteRecipeVersionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeleteRecipeVersionRequest, Members: &mBatchDeleteRecipeVersionRequest, Type: smithy.ShapeTypeStructure})
+var sBatchDeleteRecipeVersionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeleteRecipeVersionResponse, Members: &mBatchDeleteRecipeVersionResponse, Type: smithy.ShapeTypeStructure})
+var sCreateDatasetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDatasetRequest, Members: &mCreateDatasetRequest, Type: smithy.ShapeTypeStructure})
+var sCreateDatasetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDatasetResponse, Members: &mCreateDatasetResponse, Type: smithy.ShapeTypeStructure})
+var sCreateProfileJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProfileJobRequest, Members: &mCreateProfileJobRequest, Type: smithy.ShapeTypeStructure})
+var sCreateProfileJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProfileJobResponse, Members: &mCreateProfileJobResponse, Type: smithy.ShapeTypeStructure})
+var sCreateProjectRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProjectRequest, Members: &mCreateProjectRequest, Type: smithy.ShapeTypeStructure})
+var sCreateProjectResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProjectResponse, Members: &mCreateProjectResponse, Type: smithy.ShapeTypeStructure})
+var sCreateRecipeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRecipeRequest, Members: &mCreateRecipeRequest, Type: smithy.ShapeTypeStructure})
+var sCreateRecipeJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRecipeJobRequest, Members: &mCreateRecipeJobRequest, Type: smithy.ShapeTypeStructure})
+var sCreateRecipeJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRecipeJobResponse, Members: &mCreateRecipeJobResponse, Type: smithy.ShapeTypeStructure})
+var sCreateRecipeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRecipeResponse, Members: &mCreateRecipeResponse, Type: smithy.ShapeTypeStructure})
+var sCreateRulesetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRulesetRequest, Members: &mCreateRulesetRequest, Type: smithy.ShapeTypeStructure})
+var sCreateRulesetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRulesetResponse, Members: &mCreateRulesetResponse, Type: smithy.ShapeTypeStructure})
+var sCreateScheduleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateScheduleRequest, Members: &mCreateScheduleRequest, Type: smithy.ShapeTypeStructure})
+var sCreateScheduleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateScheduleResponse, Members: &mCreateScheduleResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteDatasetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDatasetRequest, Members: &mDeleteDatasetRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteDatasetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDatasetResponse, Members: &mDeleteDatasetResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteJobRequest, Members: &mDeleteJobRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteJobResponse, Members: &mDeleteJobResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteProjectRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProjectRequest, Members: &mDeleteProjectRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteProjectResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProjectResponse, Members: &mDeleteProjectResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteRecipeVersionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRecipeVersionRequest, Members: &mDeleteRecipeVersionRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteRecipeVersionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRecipeVersionResponse, Members: &mDeleteRecipeVersionResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteRulesetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRulesetRequest, Members: &mDeleteRulesetRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteRulesetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRulesetResponse, Members: &mDeleteRulesetResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteScheduleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteScheduleRequest, Members: &mDeleteScheduleRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteScheduleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteScheduleResponse, Members: &mDeleteScheduleResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeDatasetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDatasetRequest, Members: &mDescribeDatasetRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeDatasetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDatasetResponse, Members: &mDescribeDatasetResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeJobRequest, Members: &mDescribeJobRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeJobResponse, Members: &mDescribeJobResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeJobRunRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeJobRunRequest, Members: &mDescribeJobRunRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeJobRunResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeJobRunResponse, Members: &mDescribeJobRunResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeProjectRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeProjectRequest, Members: &mDescribeProjectRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeProjectResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeProjectResponse, Members: &mDescribeProjectResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeRecipeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRecipeRequest, Members: &mDescribeRecipeRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeRecipeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRecipeResponse, Members: &mDescribeRecipeResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeRulesetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRulesetRequest, Members: &mDescribeRulesetRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeRulesetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRulesetResponse, Members: &mDescribeRulesetResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeScheduleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeScheduleRequest, Members: &mDescribeScheduleRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeScheduleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeScheduleResponse, Members: &mDescribeScheduleResponse, Type: smithy.ShapeTypeStructure})
+var sListDatasetsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDatasetsRequest, Members: &mListDatasetsRequest, Type: smithy.ShapeTypeStructure})
+var sListDatasetsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDatasetsResponse, Members: &mListDatasetsResponse, Type: smithy.ShapeTypeStructure})
+var sListJobRunsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListJobRunsRequest, Members: &mListJobRunsRequest, Type: smithy.ShapeTypeStructure})
+var sListJobRunsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListJobRunsResponse, Members: &mListJobRunsResponse, Type: smithy.ShapeTypeStructure})
+var sListJobsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListJobsRequest, Members: &mListJobsRequest, Type: smithy.ShapeTypeStructure})
+var sListJobsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListJobsResponse, Members: &mListJobsResponse, Type: smithy.ShapeTypeStructure})
+var sListProjectsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProjectsRequest, Members: &mListProjectsRequest, Type: smithy.ShapeTypeStructure})
+var sListProjectsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProjectsResponse, Members: &mListProjectsResponse, Type: smithy.ShapeTypeStructure})
+var sListRecipesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecipesRequest, Members: &mListRecipesRequest, Type: smithy.ShapeTypeStructure})
+var sListRecipesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecipesResponse, Members: &mListRecipesResponse, Type: smithy.ShapeTypeStructure})
+var sListRecipeVersionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecipeVersionsRequest, Members: &mListRecipeVersionsRequest, Type: smithy.ShapeTypeStructure})
+var sListRecipeVersionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecipeVersionsResponse, Members: &mListRecipeVersionsResponse, Type: smithy.ShapeTypeStructure})
+var sListRulesetsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRulesetsRequest, Members: &mListRulesetsRequest, Type: smithy.ShapeTypeStructure})
+var sListRulesetsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRulesetsResponse, Members: &mListRulesetsResponse, Type: smithy.ShapeTypeStructure})
+var sListSchedulesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSchedulesRequest, Members: &mListSchedulesRequest, Type: smithy.ShapeTypeStructure})
+var sListSchedulesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSchedulesResponse, Members: &mListSchedulesResponse, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure})
+var sPublishRecipeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPublishRecipeRequest, Members: &mPublishRecipeRequest, Type: smithy.ShapeTypeStructure})
+var sPublishRecipeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPublishRecipeResponse, Members: &mPublishRecipeResponse, Type: smithy.ShapeTypeStructure})
+var sSendProjectSessionActionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendProjectSessionActionRequest, Members: &mSendProjectSessionActionRequest, Type: smithy.ShapeTypeStructure})
+var sSendProjectSessionActionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendProjectSessionActionResponse, Members: &mSendProjectSessionActionResponse, Type: smithy.ShapeTypeStructure})
+var sStartJobRunRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartJobRunRequest, Members: &mStartJobRunRequest, Type: smithy.ShapeTypeStructure})
+var sStartJobRunResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartJobRunResponse, Members: &mStartJobRunResponse, Type: smithy.ShapeTypeStructure})
+var sStartProjectSessionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartProjectSessionRequest, Members: &mStartProjectSessionRequest, Type: smithy.ShapeTypeStructure})
+var sStartProjectSessionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartProjectSessionResponse, Members: &mStartProjectSessionResponse, Type: smithy.ShapeTypeStructure})
+var sStopJobRunRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopJobRunRequest, Members: &mStopJobRunRequest, Type: smithy.ShapeTypeStructure})
+var sStopJobRunResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopJobRunResponse, Members: &mStopJobRunResponse, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateDatasetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDatasetRequest, Members: &mUpdateDatasetRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateDatasetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDatasetResponse, Members: &mUpdateDatasetResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateProfileJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProfileJobRequest, Members: &mUpdateProfileJobRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateProfileJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProfileJobResponse, Members: &mUpdateProfileJobResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateProjectRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProjectRequest, Members: &mUpdateProjectRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateProjectResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProjectResponse, Members: &mUpdateProjectResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateRecipeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRecipeRequest, Members: &mUpdateRecipeRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateRecipeJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRecipeJobRequest, Members: &mUpdateRecipeJobRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateRecipeJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRecipeJobResponse, Members: &mUpdateRecipeJobResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateRecipeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRecipeResponse, Members: &mUpdateRecipeResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateRulesetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRulesetRequest, Members: &mUpdateRulesetRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateRulesetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRulesetResponse, Members: &mUpdateRulesetResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateScheduleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateScheduleRequest, Members: &mUpdateScheduleRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateScheduleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateScheduleResponse, Members: &mUpdateScheduleResponse, Type: smithy.ShapeTypeStructure})
+
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString})
+var s_AllowedStatisticList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAllowedStatistics, Members: &mAllowedStatistics, Type: smithy.ShapeTypeStructure})
+var sAllowedStatistics_Statistics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Statistics", ID: &i_StatisticList, Members: &m_StatisticList, Type: smithy.ShapeTypeList})
+var sAnalyticsMode_ENABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAnalyticsMode_DISABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_ColumnNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ColumnName, Type: smithy.ShapeTypeString})
+var sColumnSelector_Regex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Regex", ID: &i_ColumnName, Type: smithy.ShapeTypeString})
+var sColumnSelector_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ColumnName, Type: smithy.ShapeTypeString})
+var s_ColumnSelectorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iColumnSelector, Members: &mColumnSelector, Type: smithy.ShapeTypeStructure})
+var sColumnStatisticsConfiguration_Selectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Selectors", ID: &i_ColumnSelectorList, Members: &m_ColumnSelectorList, Type: smithy.ShapeTypeList})
+var sColumnStatisticsConfiguration_Statistics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Statistics", ID: &iStatisticsConfiguration, Members: &mStatisticsConfiguration, Type: smithy.ShapeTypeStructure})
+var s_ColumnStatisticsConfigurationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iColumnStatisticsConfiguration, Members: &mColumnStatisticsConfiguration, Type: smithy.ShapeTypeStructure})
+var sCompressionFormat_GZIP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GZIP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCompressionFormat_LZ4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LZ4", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCompressionFormat_SNAPPY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SNAPPY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCompressionFormat_BZIP2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BZIP2", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCompressionFormat_DEFLATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEFLATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCompressionFormat_LZO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LZO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCompressionFormat_BROTLI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BROTLI", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCompressionFormat_ZSTD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZSTD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCompressionFormat_ZLIB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZLIB", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConditionExpression_Condition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Condition", ID: &i_Condition, Type: smithy.ShapeTypeString})
+var sConditionExpression_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_ConditionValue, Type: smithy.ShapeTypeString})
+var sConditionExpression_TargetColumn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetColumn", ID: &i_TargetColumn, Type: smithy.ShapeTypeString})
+var s_ConditionExpressionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConditionExpression, Members: &mConditionExpression, Type: smithy.ShapeTypeStructure})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString})
+var sCsvOptions_Delimiter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Delimiter", ID: &i_Delimiter, Type: smithy.ShapeTypeString})
+var sCsvOptions_HeaderRow = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HeaderRow", ID: &i_HeaderRow, Type: smithy.ShapeTypeBoolean})
+var sCsvOutputOptions_Delimiter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Delimiter", ID: &i_Delimiter, Type: smithy.ShapeTypeString})
+var sDatabaseInputDefinition_GlueConnectionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlueConnectionName", ID: &i_GlueConnectionName, Type: smithy.ShapeTypeString})
+var sDatabaseInputDefinition_DatabaseTableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseTableName", ID: &i_DatabaseTableName, Type: smithy.ShapeTypeString})
+var sDatabaseInputDefinition_TempDirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TempDirectory", ID: &iS3Location, Members: &mS3Location, Type: smithy.ShapeTypeStructure})
+var sDatabaseInputDefinition_QueryString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryString", ID: &i_QueryString, Type: smithy.ShapeTypeString})
+var sDatabaseOutput_GlueConnectionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlueConnectionName", ID: &i_GlueConnectionName, Type: smithy.ShapeTypeString})
+var sDatabaseOutput_DatabaseOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseOptions", ID: &iDatabaseTableOutputOptions, Members: &mDatabaseTableOutputOptions, Type: smithy.ShapeTypeStructure})
+var sDatabaseOutput_DatabaseOutputMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseOutputMode", ID: &iDatabaseOutputMode, Members: &mDatabaseOutputMode, Type: smithy.ShapeTypeEnum})
+var s_DatabaseOutputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDatabaseOutput, Members: &mDatabaseOutput, Type: smithy.ShapeTypeStructure})
+var sDatabaseOutputMode_NEW_TABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NEW_TABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDatabaseTableOutputOptions_TempDirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TempDirectory", ID: &iS3Location, Members: &mS3Location, Type: smithy.ShapeTypeStructure})
+var sDatabaseTableOutputOptions_TableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TableName", ID: &i_DatabaseTableName, Type: smithy.ShapeTypeString})
+var sDataCatalogInputDefinition_CatalogId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CatalogId", ID: &i_CatalogId, Type: smithy.ShapeTypeString})
+var sDataCatalogInputDefinition_DatabaseName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseName", ID: &i_DatabaseName, Type: smithy.ShapeTypeString})
+var sDataCatalogInputDefinition_TableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TableName", ID: &i_TableName, Type: smithy.ShapeTypeString})
+var sDataCatalogInputDefinition_TempDirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TempDirectory", ID: &iS3Location, Members: &mS3Location, Type: smithy.ShapeTypeStructure})
+var sDataCatalogOutput_CatalogId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CatalogId", ID: &i_CatalogId, Type: smithy.ShapeTypeString})
+var sDataCatalogOutput_DatabaseName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseName", ID: &i_DatabaseName, Type: smithy.ShapeTypeString})
+var sDataCatalogOutput_TableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TableName", ID: &i_TableName, Type: smithy.ShapeTypeString})
+var sDataCatalogOutput_S3Options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Options", ID: &iS3TableOutputOptions, Members: &mS3TableOutputOptions, Type: smithy.ShapeTypeStructure})
+var sDataCatalogOutput_DatabaseOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseOptions", ID: &iDatabaseTableOutputOptions, Members: &mDatabaseTableOutputOptions, Type: smithy.ShapeTypeStructure})
+var sDataCatalogOutput_Overwrite = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Overwrite", ID: &i_OverwriteOutput, Type: smithy.ShapeTypeBoolean})
+var s_DataCatalogOutputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDataCatalogOutput, Members: &mDataCatalogOutput, Type: smithy.ShapeTypeStructure})
+var sDataset_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sDataset_CreatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedBy", ID: &i_CreatedBy, Type: smithy.ShapeTypeString})
+var sDataset_CreateDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateDate", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sDataset_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_DatasetName, Type: smithy.ShapeTypeString})
+var sDataset_Format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Format", ID: &iInputFormat, Members: &mInputFormat, Type: smithy.ShapeTypeEnum})
+var sDataset_FormatOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FormatOptions", ID: &iFormatOptions, Members: &mFormatOptions, Type: smithy.ShapeTypeStructure})
+var sDataset_Input = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Input", ID: &iInput, Members: &mInput, Type: smithy.ShapeTypeStructure})
+var sDataset_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sDataset_LastModifiedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedBy", ID: &i_LastModifiedBy, Type: smithy.ShapeTypeString})
+var sDataset_Source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Source", ID: &iSource, Members: &mSource, Type: smithy.ShapeTypeEnum})
+var sDataset_PathOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PathOptions", ID: &iPathOptions, Members: &mPathOptions, Type: smithy.ShapeTypeStructure})
+var sDataset_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sDataset_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var s_DatasetList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDataset, Members: &mDataset, Type: smithy.ShapeTypeStructure})
+var sDatasetParameter_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_PathParameterName, Type: smithy.ShapeTypeString})
+var sDatasetParameter_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iParameterType, Members: &mParameterType, Type: smithy.ShapeTypeEnum})
+var sDatasetParameter_DatetimeOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatetimeOptions", ID: &iDatetimeOptions, Members: &mDatetimeOptions, Type: smithy.ShapeTypeStructure})
+var sDatasetParameter_CreateColumn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateColumn", ID: &i_CreateColumn, Type: smithy.ShapeTypeBoolean})
+var sDatasetParameter_Filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filter", ID: &iFilterExpression, Members: &mFilterExpression, Type: smithy.ShapeTypeStructure})
+var sDatetimeOptions_Format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Format", ID: &i_DatetimeFormat, Type: smithy.ShapeTypeString})
+var sDatetimeOptions_TimezoneOffset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimezoneOffset", ID: &i_TimezoneOffset, Type: smithy.ShapeTypeString})
+var sDatetimeOptions_LocaleCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocaleCode", ID: &i_LocaleCode, Type: smithy.ShapeTypeString})
+var sEncryptionMode_SSEKMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSEKMS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEncryptionMode_SSES3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSES3", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntityDetectorConfiguration_EntityTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityTypes", ID: &i_EntityTypeList, Members: &m_EntityTypeList, Type: smithy.ShapeTypeList})
+var sEntityDetectorConfiguration_AllowedStatistics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllowedStatistics", ID: &i_AllowedStatisticList, Members: &m_AllowedStatisticList, Type: smithy.ShapeTypeList})
+var s_EntityTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_EntityType, Type: smithy.ShapeTypeString})
+var sExcelOptions_SheetNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SheetNames", ID: &i_SheetNameList, Members: &m_SheetNameList, Type: smithy.ShapeTypeList})
+var sExcelOptions_SheetIndexes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SheetIndexes", ID: &i_SheetIndexList, Members: &m_SheetIndexList, Type: smithy.ShapeTypeList})
+var sExcelOptions_HeaderRow = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HeaderRow", ID: &i_HeaderRow, Type: smithy.ShapeTypeBoolean})
+var sFilesLimit_MaxFiles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxFiles", ID: &i_MaxFiles, Type: smithy.ShapeTypeInteger})
+var sFilesLimit_OrderedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrderedBy", ID: &iOrderedBy, Members: &mOrderedBy, Type: smithy.ShapeTypeEnum})
+var sFilesLimit_Order = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Order", ID: &iOrder, Members: &mOrder, Type: smithy.ShapeTypeEnum})
+var sFilterExpression_Expression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Expression", ID: &i_Expression, Type: smithy.ShapeTypeString})
+var sFilterExpression_ValuesMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValuesMap", ID: &i_ValuesMap, Members: &m_ValuesMap, Type: smithy.ShapeTypeMap})
+var sFormatOptions_Json = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Json", ID: &iJsonOptions, Members: &mJsonOptions, Type: smithy.ShapeTypeStructure})
+var sFormatOptions_Excel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Excel", ID: &iExcelOptions, Members: &mExcelOptions, Type: smithy.ShapeTypeStructure})
+var sFormatOptions_Csv = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Csv", ID: &iCsvOptions, Members: &mCsvOptions, Type: smithy.ShapeTypeStructure})
+var s_HiddenColumnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ColumnName, Type: smithy.ShapeTypeString})
+var sInput_S3InputDefinition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3InputDefinition", ID: &iS3Location, Members: &mS3Location, Type: smithy.ShapeTypeStructure})
+var sInput_DataCatalogInputDefinition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataCatalogInputDefinition", ID: &iDataCatalogInputDefinition, Members: &mDataCatalogInputDefinition, Type: smithy.ShapeTypeStructure})
+var sInput_DatabaseInputDefinition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseInputDefinition", ID: &iDatabaseInputDefinition, Members: &mDatabaseInputDefinition, Type: smithy.ShapeTypeStructure})
+var sInput_Metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Metadata", ID: &iMetadata, Members: &mMetadata, Type: smithy.ShapeTypeStructure})
+var sInputFormat_CSV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CSV", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInputFormat_JSON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JSON", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInputFormat_PARQUET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PARQUET", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInputFormat_EXCEL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXCEL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInputFormat_ORC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ORC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString})
+var sJob_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sJob_CreatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedBy", ID: &i_CreatedBy, Type: smithy.ShapeTypeString})
+var sJob_CreateDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateDate", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sJob_DatasetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetName", ID: &i_DatasetName, Type: smithy.ShapeTypeString})
+var sJob_EncryptionKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionKeyArn", ID: &i_EncryptionKeyArn, Type: smithy.ShapeTypeString})
+var sJob_EncryptionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionMode", ID: &iEncryptionMode, Members: &mEncryptionMode, Type: smithy.ShapeTypeEnum})
+var sJob_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_JobName, Type: smithy.ShapeTypeString})
+var sJob_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iJobType, Members: &mJobType, Type: smithy.ShapeTypeEnum})
+var sJob_LastModifiedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedBy", ID: &i_LastModifiedBy, Type: smithy.ShapeTypeString})
+var sJob_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sJob_LogSubscription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogSubscription", ID: &iLogSubscription, Members: &mLogSubscription, Type: smithy.ShapeTypeEnum})
+var sJob_MaxCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxCapacity", ID: &i_MaxCapacity, Type: smithy.ShapeTypeInteger})
+var sJob_MaxRetries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxRetries", ID: &i_MaxRetries, Type: smithy.ShapeTypeInteger})
+var sJob_Outputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Outputs", ID: &i_OutputList, Members: &m_OutputList, Type: smithy.ShapeTypeList})
+var sJob_DataCatalogOutputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataCatalogOutputs", ID: &i_DataCatalogOutputList, Members: &m_DataCatalogOutputList, Type: smithy.ShapeTypeList})
+var sJob_DatabaseOutputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseOutputs", ID: &i_DatabaseOutputList, Members: &m_DatabaseOutputList, Type: smithy.ShapeTypeList})
+var sJob_ProjectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProjectName", ID: &i_ProjectName, Type: smithy.ShapeTypeString})
+var sJob_RecipeReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecipeReference", ID: &iRecipeReference, Members: &mRecipeReference, Type: smithy.ShapeTypeStructure})
+var sJob_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sJob_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sJob_Timeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timeout", ID: &i_Timeout, Type: smithy.ShapeTypeInteger})
+var sJob_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sJob_JobSample = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobSample", ID: &iJobSample, Members: &mJobSample, Type: smithy.ShapeTypeStructure})
+var sJob_ValidationConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValidationConfigurations", ID: &i_ValidationConfigurationList, Members: &m_ValidationConfigurationList, Type: smithy.ShapeTypeList})
+var s_JobList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iJob, Members: &mJob, Type: smithy.ShapeTypeStructure})
+var s_JobNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_JobName, Type: smithy.ShapeTypeString})
+var sJobRun_Attempt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attempt", ID: &i_Attempt, Type: smithy.ShapeTypeInteger})
+var sJobRun_CompletedOn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompletedOn", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sJobRun_DatasetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetName", ID: &i_DatasetName, Type: smithy.ShapeTypeString})
+var sJobRun_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_JobRunErrorMessage, Type: smithy.ShapeTypeString})
+var sJobRun_ExecutionTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionTime", ID: &i_ExecutionTime, Type: smithy.ShapeTypeInteger})
+var sJobRun_JobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobName", ID: &i_JobName, Type: smithy.ShapeTypeString})
+var sJobRun_RunId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RunId", ID: &i_JobRunId, Type: smithy.ShapeTypeString})
+var sJobRun_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iJobRunState, Members: &mJobRunState, Type: smithy.ShapeTypeEnum})
+var sJobRun_LogSubscription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogSubscription", ID: &iLogSubscription, Members: &mLogSubscription, Type: smithy.ShapeTypeEnum})
+var sJobRun_LogGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogGroupName", ID: &i_LogGroupName, Type: smithy.ShapeTypeString})
+var sJobRun_Outputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Outputs", ID: &i_OutputList, Members: &m_OutputList, Type: smithy.ShapeTypeList})
+var sJobRun_DataCatalogOutputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataCatalogOutputs", ID: &i_DataCatalogOutputList, Members: &m_DataCatalogOutputList, Type: smithy.ShapeTypeList})
+var sJobRun_DatabaseOutputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseOutputs", ID: &i_DatabaseOutputList, Members: &m_DatabaseOutputList, Type: smithy.ShapeTypeList})
+var sJobRun_RecipeReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecipeReference", ID: &iRecipeReference, Members: &mRecipeReference, Type: smithy.ShapeTypeStructure})
+var sJobRun_StartedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartedBy", ID: &i_StartedBy, Type: smithy.ShapeTypeString})
+var sJobRun_StartedOn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartedOn", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sJobRun_JobSample = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobSample", ID: &iJobSample, Members: &mJobSample, Type: smithy.ShapeTypeStructure})
+var sJobRun_ValidationConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValidationConfigurations", ID: &i_ValidationConfigurationList, Members: &m_ValidationConfigurationList, Type: smithy.ShapeTypeList})
+var s_JobRunList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iJobRun, Members: &mJobRun, Type: smithy.ShapeTypeStructure})
+var sJobRunState_STARTING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STARTING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sJobRunState_RUNNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUNNING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sJobRunState_STOPPING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOPPING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sJobRunState_STOPPED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOPPED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sJobRunState_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sJobRunState_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sJobRunState_TIMEOUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIMEOUT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sJobSample_Mode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Mode", ID: &iSampleMode, Members: &mSampleMode, Type: smithy.ShapeTypeEnum})
+var sJobSample_Size = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Size", ID: &i_JobSize, Type: smithy.ShapeTypeLong})
+var sJobType_PROFILE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROFILE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sJobType_RECIPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RECIPE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sJsonOptions_MultiLine = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MultiLine", ID: &i_MultiLine, Type: smithy.ShapeTypeBoolean})
+var sLogSubscription_ENABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLogSubscription_DISABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetadata_SourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sOrder_DESCENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DESCENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOrder_ASCENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASCENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOrderedBy_LAST_MODIFIED_DATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAST_MODIFIED_DATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOutput_CompressionFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompressionFormat", ID: &iCompressionFormat, Members: &mCompressionFormat, Type: smithy.ShapeTypeEnum})
+var sOutput_Format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Format", ID: &iOutputFormat, Members: &mOutputFormat, Type: smithy.ShapeTypeEnum})
+var sOutput_PartitionColumns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartitionColumns", ID: &i_ColumnNameList, Members: &m_ColumnNameList, Type: smithy.ShapeTypeList})
+var sOutput_Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Location", ID: &iS3Location, Members: &mS3Location, Type: smithy.ShapeTypeStructure})
+var sOutput_Overwrite = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Overwrite", ID: &i_OverwriteOutput, Type: smithy.ShapeTypeBoolean})
+var sOutput_FormatOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FormatOptions", ID: &iOutputFormatOptions, Members: &mOutputFormatOptions, Type: smithy.ShapeTypeStructure})
+var sOutput_MaxOutputFiles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxOutputFiles", ID: &i_MaxOutputFiles, Type: smithy.ShapeTypeInteger})
+var sOutputFormat_CSV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CSV", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOutputFormat_JSON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JSON", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOutputFormat_PARQUET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PARQUET", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOutputFormat_GLUEPARQUET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GLUEPARQUET", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOutputFormat_AVRO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVRO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOutputFormat_ORC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ORC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOutputFormat_XML = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XML", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOutputFormat_TABLEAUHYPER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TABLEAUHYPER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOutputFormatOptions_Csv = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Csv", ID: &iCsvOutputOptions, Members: &mCsvOutputOptions, Type: smithy.ShapeTypeStructure})
+var s_OutputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOutput, Members: &mOutput, Type: smithy.ShapeTypeStructure})
+var s_ParameterMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ParameterName, Type: smithy.ShapeTypeString})
+var s_ParameterMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ParameterValue, Type: smithy.ShapeTypeString})
+var sParameterType_Datetime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Datetime", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sParameterType_Number = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Number", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sParameterType_String = smithy.NewStaticSchema(smithy.StaticSchema{Member: "String", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPathOptions_LastModifiedDateCondition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDateCondition", ID: &iFilterExpression, Members: &mFilterExpression, Type: smithy.ShapeTypeStructure})
+var sPathOptions_FilesLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilesLimit", ID: &iFilesLimit, Members: &mFilesLimit, Type: smithy.ShapeTypeStructure})
+var sPathOptions_Parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Parameters", ID: &i_PathParametersMap, Members: &m_PathParametersMap, Type: smithy.ShapeTypeMap})
+var s_PathParametersMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_PathParameterName, Type: smithy.ShapeTypeString})
+var s_PathParametersMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iDatasetParameter, Members: &mDatasetParameter, Type: smithy.ShapeTypeStructure})
+var sProfileConfiguration_DatasetStatisticsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetStatisticsConfiguration", ID: &iStatisticsConfiguration, Members: &mStatisticsConfiguration, Type: smithy.ShapeTypeStructure})
+var sProfileConfiguration_ProfileColumns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProfileColumns", ID: &i_ColumnSelectorList, Members: &m_ColumnSelectorList, Type: smithy.ShapeTypeList})
+var sProfileConfiguration_ColumnStatisticsConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ColumnStatisticsConfigurations", ID: &i_ColumnStatisticsConfigurationList, Members: &m_ColumnStatisticsConfigurationList, Type: smithy.ShapeTypeList})
+var sProfileConfiguration_EntityDetectorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityDetectorConfiguration", ID: &iEntityDetectorConfiguration, Members: &mEntityDetectorConfiguration, Type: smithy.ShapeTypeStructure})
+var sProject_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sProject_CreateDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateDate", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sProject_CreatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedBy", ID: &i_CreatedBy, Type: smithy.ShapeTypeString})
+var sProject_DatasetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetName", ID: &i_DatasetName, Type: smithy.ShapeTypeString})
+var sProject_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sProject_LastModifiedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedBy", ID: &i_LastModifiedBy, Type: smithy.ShapeTypeString})
+var sProject_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ProjectName, Type: smithy.ShapeTypeString})
+var sProject_RecipeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecipeName", ID: &i_RecipeName, Type: smithy.ShapeTypeString})
+var sProject_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sProject_Sample = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sample", ID: &iSample, Members: &mSample, Type: smithy.ShapeTypeStructure})
+var sProject_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sProject_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sProject_OpenedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpenedBy", ID: &i_OpenedBy, Type: smithy.ShapeTypeString})
+var sProject_OpenDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpenDate", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var s_ProjectList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProject, Members: &mProject, Type: smithy.ShapeTypeStructure})
+var sRecipe_CreatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedBy", ID: &i_CreatedBy, Type: smithy.ShapeTypeString})
+var sRecipe_CreateDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateDate", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sRecipe_LastModifiedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedBy", ID: &i_LastModifiedBy, Type: smithy.ShapeTypeString})
+var sRecipe_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sRecipe_ProjectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProjectName", ID: &i_ProjectName, Type: smithy.ShapeTypeString})
+var sRecipe_PublishedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublishedBy", ID: &i_PublishedBy, Type: smithy.ShapeTypeString})
+var sRecipe_PublishedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublishedDate", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sRecipe_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_RecipeDescription, Type: smithy.ShapeTypeString})
+var sRecipe_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_RecipeName, Type: smithy.ShapeTypeString})
+var sRecipe_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sRecipe_Steps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Steps", ID: &i_RecipeStepList, Members: &m_RecipeStepList, Type: smithy.ShapeTypeList})
+var sRecipe_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sRecipe_RecipeVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecipeVersion", ID: &i_RecipeVersion, Type: smithy.ShapeTypeString})
+var sRecipeAction_Operation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operation", ID: &i_Operation, Type: smithy.ShapeTypeString})
+var sRecipeAction_Parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Parameters", ID: &i_ParameterMap, Members: &m_ParameterMap, Type: smithy.ShapeTypeMap})
+var s_RecipeErrorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRecipeVersionErrorDetail, Members: &mRecipeVersionErrorDetail, Type: smithy.ShapeTypeStructure})
+var s_RecipeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRecipe, Members: &mRecipe, Type: smithy.ShapeTypeStructure})
+var sRecipeReference_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_RecipeName, Type: smithy.ShapeTypeString})
+var sRecipeReference_RecipeVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecipeVersion", ID: &i_RecipeVersion, Type: smithy.ShapeTypeString})
+var sRecipeStep_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &iRecipeAction, Members: &mRecipeAction, Type: smithy.ShapeTypeStructure})
+var sRecipeStep_ConditionExpressions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConditionExpressions", ID: &i_ConditionExpressionList, Members: &m_ConditionExpressionList, Type: smithy.ShapeTypeList})
+var s_RecipeStepList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRecipeStep, Members: &mRecipeStep, Type: smithy.ShapeTypeStructure})
+var sRecipeVersionErrorDetail_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_ErrorCode, Type: smithy.ShapeTypeString})
+var sRecipeVersionErrorDetail_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_RecipeErrorMessage, Type: smithy.ShapeTypeString})
+var sRecipeVersionErrorDetail_RecipeVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecipeVersion", ID: &i_RecipeVersion, Type: smithy.ShapeTypeString})
+var s_RecipeVersionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_RecipeVersion, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString})
+var sRule_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_RuleName, Type: smithy.ShapeTypeString})
+var sRule_Disabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Disabled", ID: &i_Disabled, Type: smithy.ShapeTypeBoolean})
+var sRule_CheckExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CheckExpression", ID: &i_Expression, Type: smithy.ShapeTypeString})
+var sRule_SubstitutionMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubstitutionMap", ID: &i_ValuesMap, Members: &m_ValuesMap, Type: smithy.ShapeTypeMap})
+var sRule_Threshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Threshold", ID: &iThreshold, Members: &mThreshold, Type: smithy.ShapeTypeStructure})
+var sRule_ColumnSelectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ColumnSelectors", ID: &i_ColumnSelectorList, Members: &m_ColumnSelectorList, Type: smithy.ShapeTypeList})
+var s_RuleList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRule, Members: &mRule, Type: smithy.ShapeTypeStructure})
+var sRulesetItem_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sRulesetItem_CreatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedBy", ID: &i_CreatedBy, Type: smithy.ShapeTypeString})
+var sRulesetItem_CreateDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateDate", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sRulesetItem_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_RulesetDescription, Type: smithy.ShapeTypeString})
+var sRulesetItem_LastModifiedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedBy", ID: &i_LastModifiedBy, Type: smithy.ShapeTypeString})
+var sRulesetItem_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sRulesetItem_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_RulesetName, Type: smithy.ShapeTypeString})
+var sRulesetItem_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sRulesetItem_RuleCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleCount", ID: &i_RuleCount, Type: smithy.ShapeTypeInteger})
+var sRulesetItem_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sRulesetItem_TargetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var s_RulesetItemList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRulesetItem, Members: &mRulesetItem, Type: smithy.ShapeTypeStructure})
+var sS3Location_Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Bucket", ID: &i_Bucket, Type: smithy.ShapeTypeString})
+var sS3Location_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_Key, Type: smithy.ShapeTypeString})
+var sS3Location_BucketOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketOwner", ID: &i_BucketOwner, Type: smithy.ShapeTypeString})
+var sS3TableOutputOptions_Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Location", ID: &iS3Location, Members: &mS3Location, Type: smithy.ShapeTypeStructure})
+var sSample_Size = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Size", ID: &i_SampleSize, Type: smithy.ShapeTypeInteger})
+var sSample_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iSampleType, Members: &mSampleType, Type: smithy.ShapeTypeEnum})
+var sSampleMode_FULL_DATASET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FULL_DATASET", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSampleMode_CUSTOM_ROWS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOM_ROWS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSampleType_FIRST_N = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIRST_N", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSampleType_LAST_N = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAST_N", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSampleType_RANDOM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RANDOM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSchedule_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sSchedule_CreatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedBy", ID: &i_CreatedBy, Type: smithy.ShapeTypeString})
+var sSchedule_CreateDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateDate", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sSchedule_JobNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobNames", ID: &i_JobNameList, Members: &m_JobNameList, Type: smithy.ShapeTypeList})
+var sSchedule_LastModifiedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedBy", ID: &i_LastModifiedBy, Type: smithy.ShapeTypeString})
+var sSchedule_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sSchedule_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sSchedule_CronExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CronExpression", ID: &i_CronExpression, Type: smithy.ShapeTypeString})
+var sSchedule_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sSchedule_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ScheduleName, Type: smithy.ShapeTypeString})
+var s_ScheduleList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSchedule, Members: &mSchedule, Type: smithy.ShapeTypeStructure})
+var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString})
+var sSessionStatus_ASSIGNED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASSIGNED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSessionStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSessionStatus_INITIALIZING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INITIALIZING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSessionStatus_PROVISIONING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROVISIONING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSessionStatus_READY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "READY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSessionStatus_RECYCLING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RECYCLING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSessionStatus_ROTATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROTATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSessionStatus_TERMINATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TERMINATED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSessionStatus_TERMINATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TERMINATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSessionStatus_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_SheetIndexList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SheetIndex, Type: smithy.ShapeTypeInteger})
+var s_SheetNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SheetName, Type: smithy.ShapeTypeString})
+var sSource_S3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSource_DATACATALOG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DATACATALOG", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSource_DATABASE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DATABASE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_StatisticList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Statistic, Type: smithy.ShapeTypeString})
+var sStatisticOverride_Statistic = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Statistic", ID: &i_Statistic, Type: smithy.ShapeTypeString})
+var sStatisticOverride_Parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Parameters", ID: &i_ParameterMap, Members: &m_ParameterMap, Type: smithy.ShapeTypeMap})
+var s_StatisticOverrideList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStatisticOverride, Members: &mStatisticOverride, Type: smithy.ShapeTypeStructure})
+var sStatisticsConfiguration_IncludedStatistics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludedStatistics", ID: &i_StatisticList, Members: &m_StatisticList, Type: smithy.ShapeTypeList})
+var sStatisticsConfiguration_Overrides = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Overrides", ID: &i_StatisticOverrideList, Members: &m_StatisticOverrideList, Type: smithy.ShapeTypeList})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sThreshold_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_ThresholdValue, Type: smithy.ShapeTypeDouble})
+var sThreshold_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iThresholdType, Members: &mThresholdType, Type: smithy.ShapeTypeEnum})
+var sThreshold_Unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unit", ID: &iThresholdUnit, Members: &mThresholdUnit, Type: smithy.ShapeTypeEnum})
+var sThresholdType_GREATER_THAN_OR_EQUAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GREATER_THAN_OR_EQUAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sThresholdType_LESS_THAN_OR_EQUAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LESS_THAN_OR_EQUAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sThresholdType_GREATER_THAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GREATER_THAN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sThresholdType_LESS_THAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LESS_THAN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sThresholdUnit_COUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sThresholdUnit_PERCENTAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PERCENTAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationConfiguration_RulesetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RulesetArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sValidationConfiguration_ValidationMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValidationMode", ID: &iValidationMode, Members: &mValidationMode, Type: smithy.ShapeTypeEnum})
+var s_ValidationConfigurationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationConfiguration, Members: &mValidationConfiguration, Type: smithy.ShapeTypeStructure})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString})
+var sValidationMode_CHECK_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CHECK_ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_ValuesMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ValueReference, Type: smithy.ShapeTypeString})
+var s_ValuesMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ConditionValue, Type: smithy.ShapeTypeString})
+var sViewFrame_StartColumnIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartColumnIndex", ID: &i_StartColumnIndex, Type: smithy.ShapeTypeInteger})
+var sViewFrame_ColumnRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ColumnRange", ID: &i_ColumnRange, Type: smithy.ShapeTypeInteger})
+var sViewFrame_HiddenColumns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HiddenColumns", ID: &i_HiddenColumnList, Members: &m_HiddenColumnList, Type: smithy.ShapeTypeList})
+var sViewFrame_StartRowIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartRowIndex", ID: &i_StartRowIndex, Type: smithy.ShapeTypeInteger})
+var sViewFrame_RowRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RowRange", ID: &i_RowRange, Type: smithy.ShapeTypeInteger})
+var sViewFrame_Analytics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Analytics", ID: &iAnalyticsMode, Members: &mAnalyticsMode, Type: smithy.ShapeTypeEnum})
+var sBatchDeleteRecipeVersionRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_RecipeName, Traits: &t51, Type: smithy.ShapeTypeString})
+var sBatchDeleteRecipeVersionRequest_RecipeVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecipeVersions", ID: &i_RecipeVersionList, Members: &m_RecipeVersionList, Type: smithy.ShapeTypeList})
+var sBatchDeleteRecipeVersionResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_RecipeName, Type: smithy.ShapeTypeString})
+var sBatchDeleteRecipeVersionResponse_Errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Errors", ID: &i_RecipeErrorList, Members: &m_RecipeErrorList, Type: smithy.ShapeTypeList})
+var sCreateDatasetRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_DatasetName, Type: smithy.ShapeTypeString})
+var sCreateDatasetRequest_Format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Format", ID: &iInputFormat, Members: &mInputFormat, Type: smithy.ShapeTypeEnum})
+var sCreateDatasetRequest_FormatOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FormatOptions", ID: &iFormatOptions, Members: &mFormatOptions, Type: smithy.ShapeTypeStructure})
+var sCreateDatasetRequest_Input = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Input", ID: &iInput, Members: &mInput, Type: smithy.ShapeTypeStructure})
+var sCreateDatasetRequest_PathOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PathOptions", ID: &iPathOptions, Members: &mPathOptions, Type: smithy.ShapeTypeStructure})
+var sCreateDatasetRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sCreateDatasetResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_DatasetName, Type: smithy.ShapeTypeString})
+var sCreateProfileJobRequest_DatasetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetName", ID: &i_DatasetName, Type: smithy.ShapeTypeString})
+var sCreateProfileJobRequest_EncryptionKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionKeyArn", ID: &i_EncryptionKeyArn, Type: smithy.ShapeTypeString})
+var sCreateProfileJobRequest_EncryptionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionMode", ID: &iEncryptionMode, Members: &mEncryptionMode, Type: smithy.ShapeTypeEnum})
+var sCreateProfileJobRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_JobName, Type: smithy.ShapeTypeString})
+var sCreateProfileJobRequest_LogSubscription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogSubscription", ID: &iLogSubscription, Members: &mLogSubscription, Type: smithy.ShapeTypeEnum})
+var sCreateProfileJobRequest_MaxCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxCapacity", ID: &i_MaxCapacity, Type: smithy.ShapeTypeInteger})
+var sCreateProfileJobRequest_MaxRetries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxRetries", ID: &i_MaxRetries, Type: smithy.ShapeTypeInteger})
+var sCreateProfileJobRequest_OutputLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputLocation", ID: &iS3Location, Members: &mS3Location, Type: smithy.ShapeTypeStructure})
+var sCreateProfileJobRequest_Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Configuration", ID: &iProfileConfiguration, Members: &mProfileConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateProfileJobRequest_ValidationConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValidationConfigurations", ID: &i_ValidationConfigurationList, Members: &m_ValidationConfigurationList, Type: smithy.ShapeTypeList})
+var sCreateProfileJobRequest_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sCreateProfileJobRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sCreateProfileJobRequest_Timeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timeout", ID: &i_Timeout, Type: smithy.ShapeTypeInteger})
+var sCreateProfileJobRequest_JobSample = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobSample", ID: &iJobSample, Members: &mJobSample, Type: smithy.ShapeTypeStructure})
+var sCreateProfileJobResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_JobName, Type: smithy.ShapeTypeString})
+var sCreateProjectRequest_DatasetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetName", ID: &i_DatasetName, Type: smithy.ShapeTypeString})
+var sCreateProjectRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ProjectName, Type: smithy.ShapeTypeString})
+var sCreateProjectRequest_RecipeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecipeName", ID: &i_RecipeName, Type: smithy.ShapeTypeString})
+var sCreateProjectRequest_Sample = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sample", ID: &iSample, Members: &mSample, Type: smithy.ShapeTypeStructure})
+var sCreateProjectRequest_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sCreateProjectRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sCreateProjectResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ProjectName, Type: smithy.ShapeTypeString})
+var sCreateRecipeRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_RecipeDescription, Type: smithy.ShapeTypeString})
+var sCreateRecipeRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_RecipeName, Type: smithy.ShapeTypeString})
+var sCreateRecipeRequest_Steps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Steps", ID: &i_RecipeStepList, Members: &m_RecipeStepList, Type: smithy.ShapeTypeList})
+var sCreateRecipeRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sCreateRecipeJobRequest_DatasetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetName", ID: &i_DatasetName, Type: smithy.ShapeTypeString})
+var sCreateRecipeJobRequest_EncryptionKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionKeyArn", ID: &i_EncryptionKeyArn, Type: smithy.ShapeTypeString})
+var sCreateRecipeJobRequest_EncryptionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionMode", ID: &iEncryptionMode, Members: &mEncryptionMode, Type: smithy.ShapeTypeEnum})
+var sCreateRecipeJobRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_JobName, Type: smithy.ShapeTypeString})
+var sCreateRecipeJobRequest_LogSubscription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogSubscription", ID: &iLogSubscription, Members: &mLogSubscription, Type: smithy.ShapeTypeEnum})
+var sCreateRecipeJobRequest_MaxCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxCapacity", ID: &i_MaxCapacity, Type: smithy.ShapeTypeInteger})
+var sCreateRecipeJobRequest_MaxRetries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxRetries", ID: &i_MaxRetries, Type: smithy.ShapeTypeInteger})
+var sCreateRecipeJobRequest_Outputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Outputs", ID: &i_OutputList, Members: &m_OutputList, Type: smithy.ShapeTypeList})
+var sCreateRecipeJobRequest_DataCatalogOutputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataCatalogOutputs", ID: &i_DataCatalogOutputList, Members: &m_DataCatalogOutputList, Type: smithy.ShapeTypeList})
+var sCreateRecipeJobRequest_DatabaseOutputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseOutputs", ID: &i_DatabaseOutputList, Members: &m_DatabaseOutputList, Type: smithy.ShapeTypeList})
+var sCreateRecipeJobRequest_ProjectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProjectName", ID: &i_ProjectName, Type: smithy.ShapeTypeString})
+var sCreateRecipeJobRequest_RecipeReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecipeReference", ID: &iRecipeReference, Members: &mRecipeReference, Type: smithy.ShapeTypeStructure})
+var sCreateRecipeJobRequest_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sCreateRecipeJobRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sCreateRecipeJobRequest_Timeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timeout", ID: &i_Timeout, Type: smithy.ShapeTypeInteger})
+var sCreateRecipeJobResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_JobName, Type: smithy.ShapeTypeString})
+var sCreateRecipeResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_RecipeName, Type: smithy.ShapeTypeString})
+var sCreateRulesetRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_RulesetName, Type: smithy.ShapeTypeString})
+var sCreateRulesetRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_RulesetDescription, Type: smithy.ShapeTypeString})
+var sCreateRulesetRequest_TargetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sCreateRulesetRequest_Rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rules", ID: &i_RuleList, Members: &m_RuleList, Type: smithy.ShapeTypeList})
+var sCreateRulesetRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sCreateRulesetResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_RulesetName, Type: smithy.ShapeTypeString})
+var sCreateScheduleRequest_JobNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobNames", ID: &i_JobNameList, Members: &m_JobNameList, Type: smithy.ShapeTypeList})
+var sCreateScheduleRequest_CronExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CronExpression", ID: &i_CronExpression, Type: smithy.ShapeTypeString})
+var sCreateScheduleRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sCreateScheduleRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ScheduleName, Type: smithy.ShapeTypeString})
+var sCreateScheduleResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ScheduleName, Type: smithy.ShapeTypeString})
+var sDeleteDatasetRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_DatasetName, Traits: &t51, Type: smithy.ShapeTypeString})
+var sDeleteDatasetResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_DatasetName, Type: smithy.ShapeTypeString})
+var sDeleteJobRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_JobName, Traits: &t51, Type: smithy.ShapeTypeString})
+var sDeleteJobResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_JobName, Type: smithy.ShapeTypeString})
+var sDeleteProjectRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ProjectName, Traits: &t51, Type: smithy.ShapeTypeString})
+var sDeleteProjectResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ProjectName, Type: smithy.ShapeTypeString})
+var sDeleteRecipeVersionRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_RecipeName, Traits: &t51, Type: smithy.ShapeTypeString})
+var sDeleteRecipeVersionRequest_RecipeVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecipeVersion", ID: &i_RecipeVersion, Traits: &t51, Type: smithy.ShapeTypeString})
+var sDeleteRecipeVersionResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_RecipeName, Type: smithy.ShapeTypeString})
+var sDeleteRecipeVersionResponse_RecipeVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecipeVersion", ID: &i_RecipeVersion, Type: smithy.ShapeTypeString})
+var sDeleteRulesetRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_RulesetName, Traits: &t51, Type: smithy.ShapeTypeString})
+var sDeleteRulesetResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_RulesetName, Type: smithy.ShapeTypeString})
+var sDeleteScheduleRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ScheduleName, Traits: &t51, Type: smithy.ShapeTypeString})
+var sDeleteScheduleResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ScheduleName, Type: smithy.ShapeTypeString})
+var sDescribeDatasetRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_DatasetName, Traits: &t51, Type: smithy.ShapeTypeString})
+var sDescribeDatasetResponse_CreatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedBy", ID: &i_CreatedBy, Type: smithy.ShapeTypeString})
+var sDescribeDatasetResponse_CreateDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateDate", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sDescribeDatasetResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_DatasetName, Type: smithy.ShapeTypeString})
+var sDescribeDatasetResponse_Format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Format", ID: &iInputFormat, Members: &mInputFormat, Type: smithy.ShapeTypeEnum})
+var sDescribeDatasetResponse_FormatOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FormatOptions", ID: &iFormatOptions, Members: &mFormatOptions, Type: smithy.ShapeTypeStructure})
+var sDescribeDatasetResponse_Input = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Input", ID: &iInput, Members: &mInput, Type: smithy.ShapeTypeStructure})
+var sDescribeDatasetResponse_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sDescribeDatasetResponse_LastModifiedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedBy", ID: &i_LastModifiedBy, Type: smithy.ShapeTypeString})
+var sDescribeDatasetResponse_Source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Source", ID: &iSource, Members: &mSource, Type: smithy.ShapeTypeEnum})
+var sDescribeDatasetResponse_PathOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PathOptions", ID: &iPathOptions, Members: &mPathOptions, Type: smithy.ShapeTypeStructure})
+var sDescribeDatasetResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sDescribeDatasetResponse_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sDescribeJobRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_JobName, Traits: &t51, Type: smithy.ShapeTypeString})
+var sDescribeJobResponse_CreateDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateDate", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sDescribeJobResponse_CreatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedBy", ID: &i_CreatedBy, Type: smithy.ShapeTypeString})
+var sDescribeJobResponse_DatasetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetName", ID: &i_DatasetName, Type: smithy.ShapeTypeString})
+var sDescribeJobResponse_EncryptionKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionKeyArn", ID: &i_EncryptionKeyArn, Type: smithy.ShapeTypeString})
+var sDescribeJobResponse_EncryptionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionMode", ID: &iEncryptionMode, Members: &mEncryptionMode, Type: smithy.ShapeTypeEnum})
+var sDescribeJobResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_JobName, Type: smithy.ShapeTypeString})
+var sDescribeJobResponse_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iJobType, Members: &mJobType, Type: smithy.ShapeTypeEnum})
+var sDescribeJobResponse_LastModifiedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedBy", ID: &i_LastModifiedBy, Type: smithy.ShapeTypeString})
+var sDescribeJobResponse_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sDescribeJobResponse_LogSubscription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogSubscription", ID: &iLogSubscription, Members: &mLogSubscription, Type: smithy.ShapeTypeEnum})
+var sDescribeJobResponse_MaxCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxCapacity", ID: &i_MaxCapacity, Type: smithy.ShapeTypeInteger})
+var sDescribeJobResponse_MaxRetries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxRetries", ID: &i_MaxRetries, Type: smithy.ShapeTypeInteger})
+var sDescribeJobResponse_Outputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Outputs", ID: &i_OutputList, Members: &m_OutputList, Type: smithy.ShapeTypeList})
+var sDescribeJobResponse_DataCatalogOutputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataCatalogOutputs", ID: &i_DataCatalogOutputList, Members: &m_DataCatalogOutputList, Type: smithy.ShapeTypeList})
+var sDescribeJobResponse_DatabaseOutputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseOutputs", ID: &i_DatabaseOutputList, Members: &m_DatabaseOutputList, Type: smithy.ShapeTypeList})
+var sDescribeJobResponse_ProjectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProjectName", ID: &i_ProjectName, Type: smithy.ShapeTypeString})
+var sDescribeJobResponse_ProfileConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProfileConfiguration", ID: &iProfileConfiguration, Members: &mProfileConfiguration, Type: smithy.ShapeTypeStructure})
+var sDescribeJobResponse_ValidationConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValidationConfigurations", ID: &i_ValidationConfigurationList, Members: &m_ValidationConfigurationList, Type: smithy.ShapeTypeList})
+var sDescribeJobResponse_RecipeReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecipeReference", ID: &iRecipeReference, Members: &mRecipeReference, Type: smithy.ShapeTypeStructure})
+var sDescribeJobResponse_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sDescribeJobResponse_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sDescribeJobResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sDescribeJobResponse_Timeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timeout", ID: &i_Timeout, Type: smithy.ShapeTypeInteger})
+var sDescribeJobResponse_JobSample = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobSample", ID: &iJobSample, Members: &mJobSample, Type: smithy.ShapeTypeStructure})
+var sDescribeJobRunRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_JobName, Traits: &t51, Type: smithy.ShapeTypeString})
+var sDescribeJobRunRequest_RunId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RunId", ID: &i_JobRunId, Traits: &t51, Type: smithy.ShapeTypeString})
+var sDescribeJobRunResponse_Attempt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attempt", ID: &i_Attempt, Type: smithy.ShapeTypeInteger})
+var sDescribeJobRunResponse_CompletedOn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompletedOn", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sDescribeJobRunResponse_DatasetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetName", ID: &i_DatasetName, Type: smithy.ShapeTypeString})
+var sDescribeJobRunResponse_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_JobRunErrorMessage, Type: smithy.ShapeTypeString})
+var sDescribeJobRunResponse_ExecutionTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionTime", ID: &i_ExecutionTime, Type: smithy.ShapeTypeInteger})
+var sDescribeJobRunResponse_JobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobName", ID: &i_JobName, Type: smithy.ShapeTypeString})
+var sDescribeJobRunResponse_ProfileConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProfileConfiguration", ID: &iProfileConfiguration, Members: &mProfileConfiguration, Type: smithy.ShapeTypeStructure})
+var sDescribeJobRunResponse_ValidationConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValidationConfigurations", ID: &i_ValidationConfigurationList, Members: &m_ValidationConfigurationList, Type: smithy.ShapeTypeList})
+var sDescribeJobRunResponse_RunId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RunId", ID: &i_JobRunId, Type: smithy.ShapeTypeString})
+var sDescribeJobRunResponse_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iJobRunState, Members: &mJobRunState, Type: smithy.ShapeTypeEnum})
+var sDescribeJobRunResponse_LogSubscription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogSubscription", ID: &iLogSubscription, Members: &mLogSubscription, Type: smithy.ShapeTypeEnum})
+var sDescribeJobRunResponse_LogGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogGroupName", ID: &i_LogGroupName, Type: smithy.ShapeTypeString})
+var sDescribeJobRunResponse_Outputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Outputs", ID: &i_OutputList, Members: &m_OutputList, Type: smithy.ShapeTypeList})
+var sDescribeJobRunResponse_DataCatalogOutputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataCatalogOutputs", ID: &i_DataCatalogOutputList, Members: &m_DataCatalogOutputList, Type: smithy.ShapeTypeList})
+var sDescribeJobRunResponse_DatabaseOutputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseOutputs", ID: &i_DatabaseOutputList, Members: &m_DatabaseOutputList, Type: smithy.ShapeTypeList})
+var sDescribeJobRunResponse_RecipeReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecipeReference", ID: &iRecipeReference, Members: &mRecipeReference, Type: smithy.ShapeTypeStructure})
+var sDescribeJobRunResponse_StartedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartedBy", ID: &i_StartedBy, Type: smithy.ShapeTypeString})
+var sDescribeJobRunResponse_StartedOn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartedOn", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sDescribeJobRunResponse_JobSample = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobSample", ID: &iJobSample, Members: &mJobSample, Type: smithy.ShapeTypeStructure})
+var sDescribeProjectRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ProjectName, Traits: &t51, Type: smithy.ShapeTypeString})
+var sDescribeProjectResponse_CreateDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateDate", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sDescribeProjectResponse_CreatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedBy", ID: &i_CreatedBy, Type: smithy.ShapeTypeString})
+var sDescribeProjectResponse_DatasetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetName", ID: &i_DatasetName, Type: smithy.ShapeTypeString})
+var sDescribeProjectResponse_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sDescribeProjectResponse_LastModifiedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedBy", ID: &i_LastModifiedBy, Type: smithy.ShapeTypeString})
+var sDescribeProjectResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ProjectName, Type: smithy.ShapeTypeString})
+var sDescribeProjectResponse_RecipeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecipeName", ID: &i_RecipeName, Type: smithy.ShapeTypeString})
+var sDescribeProjectResponse_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sDescribeProjectResponse_Sample = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sample", ID: &iSample, Members: &mSample, Type: smithy.ShapeTypeStructure})
+var sDescribeProjectResponse_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sDescribeProjectResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sDescribeProjectResponse_SessionStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionStatus", ID: &iSessionStatus, Members: &mSessionStatus, Type: smithy.ShapeTypeEnum})
+var sDescribeProjectResponse_OpenedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpenedBy", ID: &i_OpenedBy, Type: smithy.ShapeTypeString})
+var sDescribeProjectResponse_OpenDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpenDate", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sDescribeRecipeRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_RecipeName, Traits: &t51, Type: smithy.ShapeTypeString})
+var sDescribeRecipeRequest_RecipeVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecipeVersion", ID: &i_RecipeVersion, Traits: &t52, Type: smithy.ShapeTypeString})
+var sDescribeRecipeResponse_CreatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedBy", ID: &i_CreatedBy, Type: smithy.ShapeTypeString})
+var sDescribeRecipeResponse_CreateDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateDate", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sDescribeRecipeResponse_LastModifiedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedBy", ID: &i_LastModifiedBy, Type: smithy.ShapeTypeString})
+var sDescribeRecipeResponse_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sDescribeRecipeResponse_ProjectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProjectName", ID: &i_ProjectName, Type: smithy.ShapeTypeString})
+var sDescribeRecipeResponse_PublishedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublishedBy", ID: &i_PublishedBy, Type: smithy.ShapeTypeString})
+var sDescribeRecipeResponse_PublishedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublishedDate", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sDescribeRecipeResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_RecipeDescription, Type: smithy.ShapeTypeString})
+var sDescribeRecipeResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_RecipeName, Type: smithy.ShapeTypeString})
+var sDescribeRecipeResponse_Steps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Steps", ID: &i_RecipeStepList, Members: &m_RecipeStepList, Type: smithy.ShapeTypeList})
+var sDescribeRecipeResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sDescribeRecipeResponse_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sDescribeRecipeResponse_RecipeVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecipeVersion", ID: &i_RecipeVersion, Type: smithy.ShapeTypeString})
+var sDescribeRulesetRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_RulesetName, Traits: &t51, Type: smithy.ShapeTypeString})
+var sDescribeRulesetResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_RulesetName, Type: smithy.ShapeTypeString})
+var sDescribeRulesetResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_RulesetDescription, Type: smithy.ShapeTypeString})
+var sDescribeRulesetResponse_TargetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sDescribeRulesetResponse_Rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rules", ID: &i_RuleList, Members: &m_RuleList, Type: smithy.ShapeTypeList})
+var sDescribeRulesetResponse_CreateDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateDate", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sDescribeRulesetResponse_CreatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedBy", ID: &i_CreatedBy, Type: smithy.ShapeTypeString})
+var sDescribeRulesetResponse_LastModifiedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedBy", ID: &i_LastModifiedBy, Type: smithy.ShapeTypeString})
+var sDescribeRulesetResponse_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sDescribeRulesetResponse_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sDescribeRulesetResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sDescribeScheduleRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ScheduleName, Traits: &t51, Type: smithy.ShapeTypeString})
+var sDescribeScheduleResponse_CreateDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateDate", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sDescribeScheduleResponse_CreatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedBy", ID: &i_CreatedBy, Type: smithy.ShapeTypeString})
+var sDescribeScheduleResponse_JobNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobNames", ID: &i_JobNameList, Members: &m_JobNameList, Type: smithy.ShapeTypeList})
+var sDescribeScheduleResponse_LastModifiedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedBy", ID: &i_LastModifiedBy, Type: smithy.ShapeTypeString})
+var sDescribeScheduleResponse_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sDescribeScheduleResponse_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sDescribeScheduleResponse_CronExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CronExpression", ID: &i_CronExpression, Type: smithy.ShapeTypeString})
+var sDescribeScheduleResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sDescribeScheduleResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ScheduleName, Type: smithy.ShapeTypeString})
+var sListDatasetsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults100, Traits: &t53, Type: smithy.ShapeTypeInteger})
+var sListDatasetsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t54, Type: smithy.ShapeTypeString})
+var sListDatasetsResponse_Datasets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Datasets", ID: &i_DatasetList, Members: &m_DatasetList, Type: smithy.ShapeTypeList})
+var sListDatasetsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListJobRunsRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_JobName, Traits: &t51, Type: smithy.ShapeTypeString})
+var sListJobRunsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults100, Traits: &t53, Type: smithy.ShapeTypeInteger})
+var sListJobRunsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t54, Type: smithy.ShapeTypeString})
+var sListJobRunsResponse_JobRuns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobRuns", ID: &i_JobRunList, Members: &m_JobRunList, Type: smithy.ShapeTypeList})
+var sListJobRunsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListJobsRequest_DatasetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetName", ID: &i_DatasetName, Traits: &t55, Type: smithy.ShapeTypeString})
+var sListJobsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults100, Traits: &t53, Type: smithy.ShapeTypeInteger})
+var sListJobsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t54, Type: smithy.ShapeTypeString})
+var sListJobsRequest_ProjectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProjectName", ID: &i_ProjectName, Traits: &t56, Type: smithy.ShapeTypeString})
+var sListJobsResponse_Jobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Jobs", ID: &i_JobList, Members: &m_JobList, Type: smithy.ShapeTypeList})
+var sListJobsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListProjectsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t54, Type: smithy.ShapeTypeString})
+var sListProjectsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults100, Traits: &t53, Type: smithy.ShapeTypeInteger})
+var sListProjectsResponse_Projects = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Projects", ID: &i_ProjectList, Members: &m_ProjectList, Type: smithy.ShapeTypeList})
+var sListProjectsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListRecipesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults100, Traits: &t53, Type: smithy.ShapeTypeInteger})
+var sListRecipesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t54, Type: smithy.ShapeTypeString})
+var sListRecipesRequest_RecipeVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecipeVersion", ID: &i_RecipeVersion, Traits: &t52, Type: smithy.ShapeTypeString})
+var sListRecipesResponse_Recipes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Recipes", ID: &i_RecipeList, Members: &m_RecipeList, Type: smithy.ShapeTypeList})
+var sListRecipesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListRecipeVersionsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults100, Traits: &t53, Type: smithy.ShapeTypeInteger})
+var sListRecipeVersionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t54, Type: smithy.ShapeTypeString})
+var sListRecipeVersionsRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_RecipeName, Traits: &t57, Type: smithy.ShapeTypeString})
+var sListRecipeVersionsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListRecipeVersionsResponse_Recipes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Recipes", ID: &i_RecipeList, Members: &m_RecipeList, Type: smithy.ShapeTypeList})
+var sListRulesetsRequest_TargetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetArn", ID: &i_Arn, Traits: &t58, Type: smithy.ShapeTypeString})
+var sListRulesetsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults100, Traits: &t53, Type: smithy.ShapeTypeInteger})
+var sListRulesetsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t54, Type: smithy.ShapeTypeString})
+var sListRulesetsResponse_Rulesets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rulesets", ID: &i_RulesetItemList, Members: &m_RulesetItemList, Type: smithy.ShapeTypeList})
+var sListRulesetsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListSchedulesRequest_JobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobName", ID: &i_JobName, Traits: &t59, Type: smithy.ShapeTypeString})
+var sListSchedulesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults100, Traits: &t53, Type: smithy.ShapeTypeInteger})
+var sListSchedulesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t54, Type: smithy.ShapeTypeString})
+var sListSchedulesResponse_Schedules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Schedules", ID: &i_ScheduleList, Members: &m_ScheduleList, Type: smithy.ShapeTypeList})
+var sListSchedulesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Traits: &t51, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sPublishRecipeRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_RecipeDescription, Type: smithy.ShapeTypeString})
+var sPublishRecipeRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_RecipeName, Traits: &t51, Type: smithy.ShapeTypeString})
+var sPublishRecipeResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_RecipeName, Type: smithy.ShapeTypeString})
+var sSendProjectSessionActionRequest_Preview = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Preview", ID: &i_Preview, Type: smithy.ShapeTypeBoolean})
+var sSendProjectSessionActionRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ProjectName, Traits: &t51, Type: smithy.ShapeTypeString})
+var sSendProjectSessionActionRequest_RecipeStep = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecipeStep", ID: &iRecipeStep, Members: &mRecipeStep, Type: smithy.ShapeTypeStructure})
+var sSendProjectSessionActionRequest_StepIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StepIndex", ID: &i_StepIndex, Type: smithy.ShapeTypeInteger})
+var sSendProjectSessionActionRequest_ClientSessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientSessionId", ID: &i_ClientSessionId, Traits: &t60, Type: smithy.ShapeTypeString})
+var sSendProjectSessionActionRequest_ViewFrame = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViewFrame", ID: &iViewFrame, Members: &mViewFrame, Type: smithy.ShapeTypeStructure})
+var sSendProjectSessionActionResponse_Result = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Result", ID: &i_Result, Type: smithy.ShapeTypeString})
+var sSendProjectSessionActionResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ProjectName, Type: smithy.ShapeTypeString})
+var sSendProjectSessionActionResponse_ActionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionId", ID: &i_ActionId, Type: smithy.ShapeTypeInteger})
+var sStartJobRunRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_JobName, Traits: &t51, Type: smithy.ShapeTypeString})
+var sStartJobRunResponse_RunId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RunId", ID: &i_JobRunId, Type: smithy.ShapeTypeString})
+var sStartProjectSessionRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ProjectName, Traits: &t51, Type: smithy.ShapeTypeString})
+var sStartProjectSessionRequest_AssumeControl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssumeControl", ID: &i_AssumeControl, Type: smithy.ShapeTypeBoolean})
+var sStartProjectSessionResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ProjectName, Type: smithy.ShapeTypeString})
+var sStartProjectSessionResponse_ClientSessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientSessionId", ID: &i_ClientSessionId, Traits: &t60, Type: smithy.ShapeTypeString})
+var sStopJobRunRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_JobName, Traits: &t51, Type: smithy.ShapeTypeString})
+var sStopJobRunRequest_RunId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RunId", ID: &i_JobRunId, Traits: &t51, Type: smithy.ShapeTypeString})
+var sStopJobRunResponse_RunId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RunId", ID: &i_JobRunId, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Traits: &t51, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Traits: &t51, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t61, Type: smithy.ShapeTypeList})
+var sUpdateDatasetRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_DatasetName, Traits: &t51, Type: smithy.ShapeTypeString})
+var sUpdateDatasetRequest_Format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Format", ID: &iInputFormat, Members: &mInputFormat, Type: smithy.ShapeTypeEnum})
+var sUpdateDatasetRequest_FormatOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FormatOptions", ID: &iFormatOptions, Members: &mFormatOptions, Type: smithy.ShapeTypeStructure})
+var sUpdateDatasetRequest_Input = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Input", ID: &iInput, Members: &mInput, Type: smithy.ShapeTypeStructure})
+var sUpdateDatasetRequest_PathOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PathOptions", ID: &iPathOptions, Members: &mPathOptions, Type: smithy.ShapeTypeStructure})
+var sUpdateDatasetResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_DatasetName, Type: smithy.ShapeTypeString})
+var sUpdateProfileJobRequest_Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Configuration", ID: &iProfileConfiguration, Members: &mProfileConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateProfileJobRequest_EncryptionKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionKeyArn", ID: &i_EncryptionKeyArn, Type: smithy.ShapeTypeString})
+var sUpdateProfileJobRequest_EncryptionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionMode", ID: &iEncryptionMode, Members: &mEncryptionMode, Type: smithy.ShapeTypeEnum})
+var sUpdateProfileJobRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_JobName, Traits: &t51, Type: smithy.ShapeTypeString})
+var sUpdateProfileJobRequest_LogSubscription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogSubscription", ID: &iLogSubscription, Members: &mLogSubscription, Type: smithy.ShapeTypeEnum})
+var sUpdateProfileJobRequest_MaxCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxCapacity", ID: &i_MaxCapacity, Type: smithy.ShapeTypeInteger})
+var sUpdateProfileJobRequest_MaxRetries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxRetries", ID: &i_MaxRetries, Type: smithy.ShapeTypeInteger})
+var sUpdateProfileJobRequest_OutputLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputLocation", ID: &iS3Location, Members: &mS3Location, Type: smithy.ShapeTypeStructure})
+var sUpdateProfileJobRequest_ValidationConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValidationConfigurations", ID: &i_ValidationConfigurationList, Members: &m_ValidationConfigurationList, Type: smithy.ShapeTypeList})
+var sUpdateProfileJobRequest_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sUpdateProfileJobRequest_Timeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timeout", ID: &i_Timeout, Type: smithy.ShapeTypeInteger})
+var sUpdateProfileJobRequest_JobSample = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobSample", ID: &iJobSample, Members: &mJobSample, Type: smithy.ShapeTypeStructure})
+var sUpdateProfileJobResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_JobName, Type: smithy.ShapeTypeString})
+var sUpdateProjectRequest_Sample = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sample", ID: &iSample, Members: &mSample, Type: smithy.ShapeTypeStructure})
+var sUpdateProjectRequest_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sUpdateProjectRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ProjectName, Traits: &t51, Type: smithy.ShapeTypeString})
+var sUpdateProjectResponse_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sUpdateProjectResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ProjectName, Type: smithy.ShapeTypeString})
+var sUpdateRecipeRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_RecipeDescription, Type: smithy.ShapeTypeString})
+var sUpdateRecipeRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_RecipeName, Traits: &t51, Type: smithy.ShapeTypeString})
+var sUpdateRecipeRequest_Steps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Steps", ID: &i_RecipeStepList, Members: &m_RecipeStepList, Type: smithy.ShapeTypeList})
+var sUpdateRecipeJobRequest_EncryptionKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionKeyArn", ID: &i_EncryptionKeyArn, Type: smithy.ShapeTypeString})
+var sUpdateRecipeJobRequest_EncryptionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionMode", ID: &iEncryptionMode, Members: &mEncryptionMode, Type: smithy.ShapeTypeEnum})
+var sUpdateRecipeJobRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_JobName, Traits: &t51, Type: smithy.ShapeTypeString})
+var sUpdateRecipeJobRequest_LogSubscription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogSubscription", ID: &iLogSubscription, Members: &mLogSubscription, Type: smithy.ShapeTypeEnum})
+var sUpdateRecipeJobRequest_MaxCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxCapacity", ID: &i_MaxCapacity, Type: smithy.ShapeTypeInteger})
+var sUpdateRecipeJobRequest_MaxRetries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxRetries", ID: &i_MaxRetries, Type: smithy.ShapeTypeInteger})
+var sUpdateRecipeJobRequest_Outputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Outputs", ID: &i_OutputList, Members: &m_OutputList, Type: smithy.ShapeTypeList})
+var sUpdateRecipeJobRequest_DataCatalogOutputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataCatalogOutputs", ID: &i_DataCatalogOutputList, Members: &m_DataCatalogOutputList, Type: smithy.ShapeTypeList})
+var sUpdateRecipeJobRequest_DatabaseOutputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseOutputs", ID: &i_DatabaseOutputList, Members: &m_DatabaseOutputList, Type: smithy.ShapeTypeList})
+var sUpdateRecipeJobRequest_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sUpdateRecipeJobRequest_Timeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timeout", ID: &i_Timeout, Type: smithy.ShapeTypeInteger})
+var sUpdateRecipeJobResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_JobName, Type: smithy.ShapeTypeString})
+var sUpdateRecipeResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_RecipeName, Type: smithy.ShapeTypeString})
+var sUpdateRulesetRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_RulesetName, Traits: &t51, Type: smithy.ShapeTypeString})
+var sUpdateRulesetRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_RulesetDescription, Type: smithy.ShapeTypeString})
+var sUpdateRulesetRequest_Rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rules", ID: &i_RuleList, Members: &m_RuleList, Type: smithy.ShapeTypeList})
+var sUpdateRulesetResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_RulesetName, Type: smithy.ShapeTypeString})
+var sUpdateScheduleRequest_JobNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobNames", ID: &i_JobNameList, Members: &m_JobNameList, Type: smithy.ShapeTypeList})
+var sUpdateScheduleRequest_CronExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CronExpression", ID: &i_CronExpression, Type: smithy.ShapeTypeString})
+var sUpdateScheduleRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ScheduleName, Traits: &t51, Type: smithy.ShapeTypeString})
+var sUpdateScheduleResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ScheduleName, Type: smithy.ShapeTypeString})
+
+var BatchDeleteRecipeVersion = &sBatchDeleteRecipeVersion
+
+var CreateDataset = &sCreateDataset
+
+var CreateProfileJob = &sCreateProfileJob
+
+var CreateProject = &sCreateProject
+
+var CreateRecipe = &sCreateRecipe
+
+var CreateRecipeJob = &sCreateRecipeJob
+
+var CreateRuleset = &sCreateRuleset
+
+var CreateSchedule = &sCreateSchedule
+
+var DeleteDataset = &sDeleteDataset
+
+var DeleteJob = &sDeleteJob
+
+var DeleteProject = &sDeleteProject
+
+var DeleteRecipeVersion = &sDeleteRecipeVersion
+
+var DeleteRuleset = &sDeleteRuleset
+
+var DeleteSchedule = &sDeleteSchedule
+
+var DescribeDataset = &sDescribeDataset
+
+var DescribeJob = &sDescribeJob
+
+var DescribeJobRun = &sDescribeJobRun
+
+var DescribeProject = &sDescribeProject
+
+var DescribeRecipe = &sDescribeRecipe
+
+var DescribeRuleset = &sDescribeRuleset
+
+var DescribeSchedule = &sDescribeSchedule
+
+var ListDatasets = &sListDatasets
+
+var ListJobRuns = &sListJobRuns
+
+var ListJobs = &sListJobs
+
+var ListProjects = &sListProjects
+
+var ListRecipes = &sListRecipes
+
+var ListRecipeVersions = &sListRecipeVersions
+
+var ListRulesets = &sListRulesets
+
+var ListSchedules = &sListSchedules
+
+var ListTagsForResource = &sListTagsForResource
+
+var PublishRecipe = &sPublishRecipe
+
+var SendProjectSessionAction = &sSendProjectSessionAction
+
+var StartJobRun = &sStartJobRun
+
+var StartProjectSession = &sStartProjectSession
+
+var StopJobRun = &sStopJobRun
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateDataset = &sUpdateDataset
+
+var UpdateProfileJob = &sUpdateProfileJob
+
+var UpdateProject = &sUpdateProject
+
+var UpdateRecipe = &sUpdateRecipe
+
+var UpdateRecipeJob = &sUpdateRecipeJob
+
+var UpdateRuleset = &sUpdateRuleset
+
+var UpdateSchedule = &sUpdateSchedule
+
+var _AWSGlueDataBrew = &s_AWSGlueDataBrew
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_Message = &sAccessDeniedException_Message
+
+var _AccountId = &s_AccountId
+
+var _ActionId = &s_ActionId
+
+var _AllowedStatisticList = &s_AllowedStatisticList
+var _AllowedStatisticList_member = &s_AllowedStatisticList_member
+
+var AllowedStatistics = &sAllowedStatistics
+var AllowedStatistics_Statistics = &sAllowedStatistics_Statistics
+
+var AnalyticsMode = &sAnalyticsMode
+var AnalyticsMode_ENABLE = &sAnalyticsMode_ENABLE
+var AnalyticsMode_DISABLE = &sAnalyticsMode_DISABLE
+
+var _Arn = &s_Arn
+
+var _AssumeControl = &s_AssumeControl
+
+var _Attempt = &s_Attempt
+
+var _Bucket = &s_Bucket
+
+var _BucketOwner = &s_BucketOwner
+
+var _CatalogId = &s_CatalogId
+
+var _ClientSessionId = &s_ClientSessionId
+
+var _ColumnName = &s_ColumnName
+
+var _ColumnNameList = &s_ColumnNameList
+var _ColumnNameList_member = &s_ColumnNameList_member
+
+var _ColumnRange = &s_ColumnRange
+
+var ColumnSelector = &sColumnSelector
+var ColumnSelector_Regex = &sColumnSelector_Regex
+var ColumnSelector_Name = &sColumnSelector_Name
+
+var _ColumnSelectorList = &s_ColumnSelectorList
+var _ColumnSelectorList_member = &s_ColumnSelectorList_member
+
+var ColumnStatisticsConfiguration = &sColumnStatisticsConfiguration
+var ColumnStatisticsConfiguration_Selectors = &sColumnStatisticsConfiguration_Selectors
+var ColumnStatisticsConfiguration_Statistics = &sColumnStatisticsConfiguration_Statistics
+
+var _ColumnStatisticsConfigurationList = &s_ColumnStatisticsConfigurationList
+var _ColumnStatisticsConfigurationList_member = &s_ColumnStatisticsConfigurationList_member
+
+var CompressionFormat = &sCompressionFormat
+var CompressionFormat_GZIP = &sCompressionFormat_GZIP
+var CompressionFormat_LZ4 = &sCompressionFormat_LZ4
+var CompressionFormat_SNAPPY = &sCompressionFormat_SNAPPY
+var CompressionFormat_BZIP2 = &sCompressionFormat_BZIP2
+var CompressionFormat_DEFLATE = &sCompressionFormat_DEFLATE
+var CompressionFormat_LZO = &sCompressionFormat_LZO
+var CompressionFormat_BROTLI = &sCompressionFormat_BROTLI
+var CompressionFormat_ZSTD = &sCompressionFormat_ZSTD
+var CompressionFormat_ZLIB = &sCompressionFormat_ZLIB
+
+var _Condition = &s_Condition
+
+var ConditionExpression = &sConditionExpression
+var ConditionExpression_Condition = &sConditionExpression_Condition
+var ConditionExpression_Value = &sConditionExpression_Value
+var ConditionExpression_TargetColumn = &sConditionExpression_TargetColumn
+
+var _ConditionExpressionList = &s_ConditionExpressionList
+var _ConditionExpressionList_member = &s_ConditionExpressionList_member
+
+var _ConditionValue = &s_ConditionValue
+
+var ConflictException = &sConflictException
+var ConflictException_Message = &sConflictException_Message
+
+var _CreateColumn = &s_CreateColumn
+
+var _CreatedBy = &s_CreatedBy
+
+var _CronExpression = &s_CronExpression
+
+var CsvOptions = &sCsvOptions
+var CsvOptions_Delimiter = &sCsvOptions_Delimiter
+var CsvOptions_HeaderRow = &sCsvOptions_HeaderRow
+
+var CsvOutputOptions = &sCsvOutputOptions
+var CsvOutputOptions_Delimiter = &sCsvOutputOptions_Delimiter
+
+var DatabaseInputDefinition = &sDatabaseInputDefinition
+var DatabaseInputDefinition_GlueConnectionName = &sDatabaseInputDefinition_GlueConnectionName
+var DatabaseInputDefinition_DatabaseTableName = &sDatabaseInputDefinition_DatabaseTableName
+var DatabaseInputDefinition_TempDirectory = &sDatabaseInputDefinition_TempDirectory
+var DatabaseInputDefinition_QueryString = &sDatabaseInputDefinition_QueryString
+
+var _DatabaseName = &s_DatabaseName
+
+var DatabaseOutput = &sDatabaseOutput
+var DatabaseOutput_GlueConnectionName = &sDatabaseOutput_GlueConnectionName
+var DatabaseOutput_DatabaseOptions = &sDatabaseOutput_DatabaseOptions
+var DatabaseOutput_DatabaseOutputMode = &sDatabaseOutput_DatabaseOutputMode
+
+var _DatabaseOutputList = &s_DatabaseOutputList
+var _DatabaseOutputList_member = &s_DatabaseOutputList_member
+
+var DatabaseOutputMode = &sDatabaseOutputMode
+var DatabaseOutputMode_NEW_TABLE = &sDatabaseOutputMode_NEW_TABLE
+
+var _DatabaseTableName = &s_DatabaseTableName
+
+var DatabaseTableOutputOptions = &sDatabaseTableOutputOptions
+var DatabaseTableOutputOptions_TempDirectory = &sDatabaseTableOutputOptions_TempDirectory
+var DatabaseTableOutputOptions_TableName = &sDatabaseTableOutputOptions_TableName
+
+var DataCatalogInputDefinition = &sDataCatalogInputDefinition
+var DataCatalogInputDefinition_CatalogId = &sDataCatalogInputDefinition_CatalogId
+var DataCatalogInputDefinition_DatabaseName = &sDataCatalogInputDefinition_DatabaseName
+var DataCatalogInputDefinition_TableName = &sDataCatalogInputDefinition_TableName
+var DataCatalogInputDefinition_TempDirectory = &sDataCatalogInputDefinition_TempDirectory
+
+var DataCatalogOutput = &sDataCatalogOutput
+var DataCatalogOutput_CatalogId = &sDataCatalogOutput_CatalogId
+var DataCatalogOutput_DatabaseName = &sDataCatalogOutput_DatabaseName
+var DataCatalogOutput_TableName = &sDataCatalogOutput_TableName
+var DataCatalogOutput_S3Options = &sDataCatalogOutput_S3Options
+var DataCatalogOutput_DatabaseOptions = &sDataCatalogOutput_DatabaseOptions
+var DataCatalogOutput_Overwrite = &sDataCatalogOutput_Overwrite
+
+var _DataCatalogOutputList = &s_DataCatalogOutputList
+var _DataCatalogOutputList_member = &s_DataCatalogOutputList_member
+
+var Dataset = &sDataset
+var Dataset_AccountId = &sDataset_AccountId
+var Dataset_CreatedBy = &sDataset_CreatedBy
+var Dataset_CreateDate = &sDataset_CreateDate
+var Dataset_Name = &sDataset_Name
+var Dataset_Format = &sDataset_Format
+var Dataset_FormatOptions = &sDataset_FormatOptions
+var Dataset_Input = &sDataset_Input
+var Dataset_LastModifiedDate = &sDataset_LastModifiedDate
+var Dataset_LastModifiedBy = &sDataset_LastModifiedBy
+var Dataset_Source = &sDataset_Source
+var Dataset_PathOptions = &sDataset_PathOptions
+var Dataset_Tags = &sDataset_Tags
+var Dataset_ResourceArn = &sDataset_ResourceArn
+
+var _DatasetList = &s_DatasetList
+var _DatasetList_member = &s_DatasetList_member
+
+var _DatasetName = &s_DatasetName
+
+var DatasetParameter = &sDatasetParameter
+var DatasetParameter_Name = &sDatasetParameter_Name
+var DatasetParameter_Type = &sDatasetParameter_Type
+var DatasetParameter_DatetimeOptions = &sDatasetParameter_DatetimeOptions
+var DatasetParameter_CreateColumn = &sDatasetParameter_CreateColumn
+var DatasetParameter_Filter = &sDatasetParameter_Filter
+
+var _Date = &s_Date
+
+var _DatetimeFormat = &s_DatetimeFormat
+
+var DatetimeOptions = &sDatetimeOptions
+var DatetimeOptions_Format = &sDatetimeOptions_Format
+var DatetimeOptions_TimezoneOffset = &sDatetimeOptions_TimezoneOffset
+var DatetimeOptions_LocaleCode = &sDatetimeOptions_LocaleCode
+
+var _Delimiter = &s_Delimiter
+
+var _Disabled = &s_Disabled
+
+var _EncryptionKeyArn = &s_EncryptionKeyArn
+
+var EncryptionMode = &sEncryptionMode
+var EncryptionMode_SSEKMS = &sEncryptionMode_SSEKMS
+var EncryptionMode_SSES3 = &sEncryptionMode_SSES3
+
+var EntityDetectorConfiguration = &sEntityDetectorConfiguration
+var EntityDetectorConfiguration_EntityTypes = &sEntityDetectorConfiguration_EntityTypes
+var EntityDetectorConfiguration_AllowedStatistics = &sEntityDetectorConfiguration_AllowedStatistics
+
+var _EntityType = &s_EntityType
+
+var _EntityTypeList = &s_EntityTypeList
+var _EntityTypeList_member = &s_EntityTypeList_member
+
+var _ErrorCode = &s_ErrorCode
+
+var ExcelOptions = &sExcelOptions
+var ExcelOptions_SheetNames = &sExcelOptions_SheetNames
+var ExcelOptions_SheetIndexes = &sExcelOptions_SheetIndexes
+var ExcelOptions_HeaderRow = &sExcelOptions_HeaderRow
+
+var _ExecutionTime = &s_ExecutionTime
+
+var _Expression = &s_Expression
+
+var FilesLimit = &sFilesLimit
+var FilesLimit_MaxFiles = &sFilesLimit_MaxFiles
+var FilesLimit_OrderedBy = &sFilesLimit_OrderedBy
+var FilesLimit_Order = &sFilesLimit_Order
+
+var FilterExpression = &sFilterExpression
+var FilterExpression_Expression = &sFilterExpression_Expression
+var FilterExpression_ValuesMap = &sFilterExpression_ValuesMap
+
+var FormatOptions = &sFormatOptions
+var FormatOptions_Json = &sFormatOptions_Json
+var FormatOptions_Excel = &sFormatOptions_Excel
+var FormatOptions_Csv = &sFormatOptions_Csv
+
+var _GlueConnectionName = &s_GlueConnectionName
+
+var _HeaderRow = &s_HeaderRow
+
+var _HiddenColumnList = &s_HiddenColumnList
+var _HiddenColumnList_member = &s_HiddenColumnList_member
+
+var Input = &sInput
+var Input_S3InputDefinition = &sInput_S3InputDefinition
+var Input_DataCatalogInputDefinition = &sInput_DataCatalogInputDefinition
+var Input_DatabaseInputDefinition = &sInput_DatabaseInputDefinition
+var Input_Metadata = &sInput_Metadata
+
+var InputFormat = &sInputFormat
+var InputFormat_CSV = &sInputFormat_CSV
+var InputFormat_JSON = &sInputFormat_JSON
+var InputFormat_PARQUET = &sInputFormat_PARQUET
+var InputFormat_EXCEL = &sInputFormat_EXCEL
+var InputFormat_ORC = &sInputFormat_ORC
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_Message = &sInternalServerException_Message
+
+var Job = &sJob
+var Job_AccountId = &sJob_AccountId
+var Job_CreatedBy = &sJob_CreatedBy
+var Job_CreateDate = &sJob_CreateDate
+var Job_DatasetName = &sJob_DatasetName
+var Job_EncryptionKeyArn = &sJob_EncryptionKeyArn
+var Job_EncryptionMode = &sJob_EncryptionMode
+var Job_Name = &sJob_Name
+var Job_Type = &sJob_Type
+var Job_LastModifiedBy = &sJob_LastModifiedBy
+var Job_LastModifiedDate = &sJob_LastModifiedDate
+var Job_LogSubscription = &sJob_LogSubscription
+var Job_MaxCapacity = &sJob_MaxCapacity
+var Job_MaxRetries = &sJob_MaxRetries
+var Job_Outputs = &sJob_Outputs
+var Job_DataCatalogOutputs = &sJob_DataCatalogOutputs
+var Job_DatabaseOutputs = &sJob_DatabaseOutputs
+var Job_ProjectName = &sJob_ProjectName
+var Job_RecipeReference = &sJob_RecipeReference
+var Job_ResourceArn = &sJob_ResourceArn
+var Job_RoleArn = &sJob_RoleArn
+var Job_Timeout = &sJob_Timeout
+var Job_Tags = &sJob_Tags
+var Job_JobSample = &sJob_JobSample
+var Job_ValidationConfigurations = &sJob_ValidationConfigurations
+
+var _JobList = &s_JobList
+var _JobList_member = &s_JobList_member
+
+var _JobName = &s_JobName
+
+var _JobNameList = &s_JobNameList
+var _JobNameList_member = &s_JobNameList_member
+
+var JobRun = &sJobRun
+var JobRun_Attempt = &sJobRun_Attempt
+var JobRun_CompletedOn = &sJobRun_CompletedOn
+var JobRun_DatasetName = &sJobRun_DatasetName
+var JobRun_ErrorMessage = &sJobRun_ErrorMessage
+var JobRun_ExecutionTime = &sJobRun_ExecutionTime
+var JobRun_JobName = &sJobRun_JobName
+var JobRun_RunId = &sJobRun_RunId
+var JobRun_State = &sJobRun_State
+var JobRun_LogSubscription = &sJobRun_LogSubscription
+var JobRun_LogGroupName = &sJobRun_LogGroupName
+var JobRun_Outputs = &sJobRun_Outputs
+var JobRun_DataCatalogOutputs = &sJobRun_DataCatalogOutputs
+var JobRun_DatabaseOutputs = &sJobRun_DatabaseOutputs
+var JobRun_RecipeReference = &sJobRun_RecipeReference
+var JobRun_StartedBy = &sJobRun_StartedBy
+var JobRun_StartedOn = &sJobRun_StartedOn
+var JobRun_JobSample = &sJobRun_JobSample
+var JobRun_ValidationConfigurations = &sJobRun_ValidationConfigurations
+
+var _JobRunErrorMessage = &s_JobRunErrorMessage
+
+var _JobRunId = &s_JobRunId
+
+var _JobRunList = &s_JobRunList
+var _JobRunList_member = &s_JobRunList_member
+
+var JobRunState = &sJobRunState
+var JobRunState_STARTING = &sJobRunState_STARTING
+var JobRunState_RUNNING = &sJobRunState_RUNNING
+var JobRunState_STOPPING = &sJobRunState_STOPPING
+var JobRunState_STOPPED = &sJobRunState_STOPPED
+var JobRunState_SUCCEEDED = &sJobRunState_SUCCEEDED
+var JobRunState_FAILED = &sJobRunState_FAILED
+var JobRunState_TIMEOUT = &sJobRunState_TIMEOUT
+
+var JobSample = &sJobSample
+var JobSample_Mode = &sJobSample_Mode
+var JobSample_Size = &sJobSample_Size
+
+var _JobSize = &s_JobSize
+
+var JobType = &sJobType
+var JobType_PROFILE = &sJobType_PROFILE
+var JobType_RECIPE = &sJobType_RECIPE
+
+var JsonOptions = &sJsonOptions
+var JsonOptions_MultiLine = &sJsonOptions_MultiLine
+
+var _Key = &s_Key
+
+var _LastModifiedBy = &s_LastModifiedBy
+
+var _LocaleCode = &s_LocaleCode
+
+var _LogGroupName = &s_LogGroupName
+
+var LogSubscription = &sLogSubscription
+var LogSubscription_ENABLE = &sLogSubscription_ENABLE
+var LogSubscription_DISABLE = &sLogSubscription_DISABLE
+
+var _MaxCapacity = &s_MaxCapacity
+
+var _MaxFiles = &s_MaxFiles
+
+var _MaxOutputFiles = &s_MaxOutputFiles
+
+var _MaxResults100 = &s_MaxResults100
+
+var _MaxRetries = &s_MaxRetries
+
+var _Message = &s_Message
+
+var Metadata = &sMetadata
+var Metadata_SourceArn = &sMetadata_SourceArn
+
+var _MultiLine = &s_MultiLine
+
+var _NextToken = &s_NextToken
+
+var _OpenedBy = &s_OpenedBy
+
+var _Operation = &s_Operation
+
+var Order = &sOrder
+var Order_DESCENDING = &sOrder_DESCENDING
+var Order_ASCENDING = &sOrder_ASCENDING
+
+var OrderedBy = &sOrderedBy
+var OrderedBy_LAST_MODIFIED_DATE = &sOrderedBy_LAST_MODIFIED_DATE
+
+var Output = &sOutput
+var Output_CompressionFormat = &sOutput_CompressionFormat
+var Output_Format = &sOutput_Format
+var Output_PartitionColumns = &sOutput_PartitionColumns
+var Output_Location = &sOutput_Location
+var Output_Overwrite = &sOutput_Overwrite
+var Output_FormatOptions = &sOutput_FormatOptions
+var Output_MaxOutputFiles = &sOutput_MaxOutputFiles
+
+var OutputFormat = &sOutputFormat
+var OutputFormat_CSV = &sOutputFormat_CSV
+var OutputFormat_JSON = &sOutputFormat_JSON
+var OutputFormat_PARQUET = &sOutputFormat_PARQUET
+var OutputFormat_GLUEPARQUET = &sOutputFormat_GLUEPARQUET
+var OutputFormat_AVRO = &sOutputFormat_AVRO
+var OutputFormat_ORC = &sOutputFormat_ORC
+var OutputFormat_XML = &sOutputFormat_XML
+var OutputFormat_TABLEAUHYPER = &sOutputFormat_TABLEAUHYPER
+
+var OutputFormatOptions = &sOutputFormatOptions
+var OutputFormatOptions_Csv = &sOutputFormatOptions_Csv
+
+var _OutputList = &s_OutputList
+var _OutputList_member = &s_OutputList_member
+
+var _OverwriteOutput = &s_OverwriteOutput
+
+var _ParameterMap = &s_ParameterMap
+var _ParameterMap_key = &s_ParameterMap_key
+var _ParameterMap_value = &s_ParameterMap_value
+
+var _ParameterName = &s_ParameterName
+
+var ParameterType = &sParameterType
+var ParameterType_Datetime = &sParameterType_Datetime
+var ParameterType_Number = &sParameterType_Number
+var ParameterType_String = &sParameterType_String
+
+var _ParameterValue = &s_ParameterValue
+
+var PathOptions = &sPathOptions
+var PathOptions_LastModifiedDateCondition = &sPathOptions_LastModifiedDateCondition
+var PathOptions_FilesLimit = &sPathOptions_FilesLimit
+var PathOptions_Parameters = &sPathOptions_Parameters
+
+var _PathParameterName = &s_PathParameterName
+
+var _PathParametersMap = &s_PathParametersMap
+var _PathParametersMap_key = &s_PathParametersMap_key
+var _PathParametersMap_value = &s_PathParametersMap_value
+
+var _Preview = &s_Preview
+
+var ProfileConfiguration = &sProfileConfiguration
+var ProfileConfiguration_DatasetStatisticsConfiguration = &sProfileConfiguration_DatasetStatisticsConfiguration
+var ProfileConfiguration_ProfileColumns = &sProfileConfiguration_ProfileColumns
+var ProfileConfiguration_ColumnStatisticsConfigurations = &sProfileConfiguration_ColumnStatisticsConfigurations
+var ProfileConfiguration_EntityDetectorConfiguration = &sProfileConfiguration_EntityDetectorConfiguration
+
+var Project = &sProject
+var Project_AccountId = &sProject_AccountId
+var Project_CreateDate = &sProject_CreateDate
+var Project_CreatedBy = &sProject_CreatedBy
+var Project_DatasetName = &sProject_DatasetName
+var Project_LastModifiedDate = &sProject_LastModifiedDate
+var Project_LastModifiedBy = &sProject_LastModifiedBy
+var Project_Name = &sProject_Name
+var Project_RecipeName = &sProject_RecipeName
+var Project_ResourceArn = &sProject_ResourceArn
+var Project_Sample = &sProject_Sample
+var Project_Tags = &sProject_Tags
+var Project_RoleArn = &sProject_RoleArn
+var Project_OpenedBy = &sProject_OpenedBy
+var Project_OpenDate = &sProject_OpenDate
+
+var _ProjectList = &s_ProjectList
+var _ProjectList_member = &s_ProjectList_member
+
+var _ProjectName = &s_ProjectName
+
+var _PublishedBy = &s_PublishedBy
+
+var _QueryString = &s_QueryString
+
+var Recipe = &sRecipe
+var Recipe_CreatedBy = &sRecipe_CreatedBy
+var Recipe_CreateDate = &sRecipe_CreateDate
+var Recipe_LastModifiedBy = &sRecipe_LastModifiedBy
+var Recipe_LastModifiedDate = &sRecipe_LastModifiedDate
+var Recipe_ProjectName = &sRecipe_ProjectName
+var Recipe_PublishedBy = &sRecipe_PublishedBy
+var Recipe_PublishedDate = &sRecipe_PublishedDate
+var Recipe_Description = &sRecipe_Description
+var Recipe_Name = &sRecipe_Name
+var Recipe_ResourceArn = &sRecipe_ResourceArn
+var Recipe_Steps = &sRecipe_Steps
+var Recipe_Tags = &sRecipe_Tags
+var Recipe_RecipeVersion = &sRecipe_RecipeVersion
+
+var RecipeAction = &sRecipeAction
+var RecipeAction_Operation = &sRecipeAction_Operation
+var RecipeAction_Parameters = &sRecipeAction_Parameters
+
+var _RecipeDescription = &s_RecipeDescription
+
+var _RecipeErrorList = &s_RecipeErrorList
+var _RecipeErrorList_member = &s_RecipeErrorList_member
+
+var _RecipeErrorMessage = &s_RecipeErrorMessage
+
+var _RecipeList = &s_RecipeList
+var _RecipeList_member = &s_RecipeList_member
+
+var _RecipeName = &s_RecipeName
+
+var RecipeReference = &sRecipeReference
+var RecipeReference_Name = &sRecipeReference_Name
+var RecipeReference_RecipeVersion = &sRecipeReference_RecipeVersion
+
+var RecipeStep = &sRecipeStep
+var RecipeStep_Action = &sRecipeStep_Action
+var RecipeStep_ConditionExpressions = &sRecipeStep_ConditionExpressions
+
+var _RecipeStepList = &s_RecipeStepList
+var _RecipeStepList_member = &s_RecipeStepList_member
+
+var _RecipeVersion = &s_RecipeVersion
+
+var RecipeVersionErrorDetail = &sRecipeVersionErrorDetail
+var RecipeVersionErrorDetail_ErrorCode = &sRecipeVersionErrorDetail_ErrorCode
+var RecipeVersionErrorDetail_ErrorMessage = &sRecipeVersionErrorDetail_ErrorMessage
+var RecipeVersionErrorDetail_RecipeVersion = &sRecipeVersionErrorDetail_RecipeVersion
+
+var _RecipeVersionList = &s_RecipeVersionList
+var _RecipeVersionList_member = &s_RecipeVersionList_member
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+
+var _Result = &s_Result
+
+var _RowRange = &s_RowRange
+
+var Rule = &sRule
+var Rule_Name = &sRule_Name
+var Rule_Disabled = &sRule_Disabled
+var Rule_CheckExpression = &sRule_CheckExpression
+var Rule_SubstitutionMap = &sRule_SubstitutionMap
+var Rule_Threshold = &sRule_Threshold
+var Rule_ColumnSelectors = &sRule_ColumnSelectors
+
+var _RuleCount = &s_RuleCount
+
+var _RuleList = &s_RuleList
+var _RuleList_member = &s_RuleList_member
+
+var _RuleName = &s_RuleName
+
+var _RulesetDescription = &s_RulesetDescription
+
+var RulesetItem = &sRulesetItem
+var RulesetItem_AccountId = &sRulesetItem_AccountId
+var RulesetItem_CreatedBy = &sRulesetItem_CreatedBy
+var RulesetItem_CreateDate = &sRulesetItem_CreateDate
+var RulesetItem_Description = &sRulesetItem_Description
+var RulesetItem_LastModifiedBy = &sRulesetItem_LastModifiedBy
+var RulesetItem_LastModifiedDate = &sRulesetItem_LastModifiedDate
+var RulesetItem_Name = &sRulesetItem_Name
+var RulesetItem_ResourceArn = &sRulesetItem_ResourceArn
+var RulesetItem_RuleCount = &sRulesetItem_RuleCount
+var RulesetItem_Tags = &sRulesetItem_Tags
+var RulesetItem_TargetArn = &sRulesetItem_TargetArn
+
+var _RulesetItemList = &s_RulesetItemList
+var _RulesetItemList_member = &s_RulesetItemList_member
+
+var _RulesetName = &s_RulesetName
+
+var S3Location = &sS3Location
+var S3Location_Bucket = &sS3Location_Bucket
+var S3Location_Key = &sS3Location_Key
+var S3Location_BucketOwner = &sS3Location_BucketOwner
+
+var S3TableOutputOptions = &sS3TableOutputOptions
+var S3TableOutputOptions_Location = &sS3TableOutputOptions_Location
+
+var Sample = &sSample
+var Sample_Size = &sSample_Size
+var Sample_Type = &sSample_Type
+
+var SampleMode = &sSampleMode
+var SampleMode_FULL_DATASET = &sSampleMode_FULL_DATASET
+var SampleMode_CUSTOM_ROWS = &sSampleMode_CUSTOM_ROWS
+
+var _SampleSize = &s_SampleSize
+
+var SampleType = &sSampleType
+var SampleType_FIRST_N = &sSampleType_FIRST_N
+var SampleType_LAST_N = &sSampleType_LAST_N
+var SampleType_RANDOM = &sSampleType_RANDOM
+
+var Schedule = &sSchedule
+var Schedule_AccountId = &sSchedule_AccountId
+var Schedule_CreatedBy = &sSchedule_CreatedBy
+var Schedule_CreateDate = &sSchedule_CreateDate
+var Schedule_JobNames = &sSchedule_JobNames
+var Schedule_LastModifiedBy = &sSchedule_LastModifiedBy
+var Schedule_LastModifiedDate = &sSchedule_LastModifiedDate
+var Schedule_ResourceArn = &sSchedule_ResourceArn
+var Schedule_CronExpression = &sSchedule_CronExpression
+var Schedule_Tags = &sSchedule_Tags
+var Schedule_Name = &sSchedule_Name
+
+var _ScheduleList = &s_ScheduleList
+var _ScheduleList_member = &s_ScheduleList_member
+
+var _ScheduleName = &s_ScheduleName
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_Message = &sServiceQuotaExceededException_Message
+
+var SessionStatus = &sSessionStatus
+var SessionStatus_ASSIGNED = &sSessionStatus_ASSIGNED
+var SessionStatus_FAILED = &sSessionStatus_FAILED
+var SessionStatus_INITIALIZING = &sSessionStatus_INITIALIZING
+var SessionStatus_PROVISIONING = &sSessionStatus_PROVISIONING
+var SessionStatus_READY = &sSessionStatus_READY
+var SessionStatus_RECYCLING = &sSessionStatus_RECYCLING
+var SessionStatus_ROTATING = &sSessionStatus_ROTATING
+var SessionStatus_TERMINATED = &sSessionStatus_TERMINATED
+var SessionStatus_TERMINATING = &sSessionStatus_TERMINATING
+var SessionStatus_UPDATING = &sSessionStatus_UPDATING
+
+var _SheetIndex = &s_SheetIndex
+
+var _SheetIndexList = &s_SheetIndexList
+var _SheetIndexList_member = &s_SheetIndexList_member
+
+var _SheetName = &s_SheetName
+
+var _SheetNameList = &s_SheetNameList
+var _SheetNameList_member = &s_SheetNameList_member
+
+var Source = &sSource
+var Source_S3 = &sSource_S3
+var Source_DATACATALOG = &sSource_DATACATALOG
+var Source_DATABASE = &sSource_DATABASE
+
+var _StartColumnIndex = &s_StartColumnIndex
+
+var _StartedBy = &s_StartedBy
+
+var _StartRowIndex = &s_StartRowIndex
+
+var _Statistic = &s_Statistic
+
+var _StatisticList = &s_StatisticList
+var _StatisticList_member = &s_StatisticList_member
+
+var StatisticOverride = &sStatisticOverride
+var StatisticOverride_Statistic = &sStatisticOverride_Statistic
+var StatisticOverride_Parameters = &sStatisticOverride_Parameters
+
+var _StatisticOverrideList = &s_StatisticOverrideList
+var _StatisticOverrideList_member = &s_StatisticOverrideList_member
+
+var StatisticsConfiguration = &sStatisticsConfiguration
+var StatisticsConfiguration_IncludedStatistics = &sStatisticsConfiguration_IncludedStatistics
+var StatisticsConfiguration_Overrides = &sStatisticsConfiguration_Overrides
+
+var _StepIndex = &s_StepIndex
+
+var _TableName = &s_TableName
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagMap = &s_TagMap
+var _TagMap_key = &s_TagMap_key
+var _TagMap_value = &s_TagMap_value
+
+var _TagValue = &s_TagValue
+
+var _TargetColumn = &s_TargetColumn
+
+var Threshold = &sThreshold
+var Threshold_Value = &sThreshold_Value
+var Threshold_Type = &sThreshold_Type
+var Threshold_Unit = &sThreshold_Unit
+
+var ThresholdType = &sThresholdType
+var ThresholdType_GREATER_THAN_OR_EQUAL = &sThresholdType_GREATER_THAN_OR_EQUAL
+var ThresholdType_LESS_THAN_OR_EQUAL = &sThresholdType_LESS_THAN_OR_EQUAL
+var ThresholdType_GREATER_THAN = &sThresholdType_GREATER_THAN
+var ThresholdType_LESS_THAN = &sThresholdType_LESS_THAN
+
+var ThresholdUnit = &sThresholdUnit
+var ThresholdUnit_COUNT = &sThresholdUnit_COUNT
+var ThresholdUnit_PERCENTAGE = &sThresholdUnit_PERCENTAGE
+
+var _ThresholdValue = &s_ThresholdValue
+
+var _Timeout = &s_Timeout
+
+var _TimezoneOffset = &s_TimezoneOffset
+
+var ValidationConfiguration = &sValidationConfiguration
+var ValidationConfiguration_RulesetArn = &sValidationConfiguration_RulesetArn
+var ValidationConfiguration_ValidationMode = &sValidationConfiguration_ValidationMode
+
+var _ValidationConfigurationList = &s_ValidationConfigurationList
+var _ValidationConfigurationList_member = &s_ValidationConfigurationList_member
+
+var ValidationException = &sValidationException
+var ValidationException_Message = &sValidationException_Message
+
+var ValidationMode = &sValidationMode
+var ValidationMode_CHECK_ALL = &sValidationMode_CHECK_ALL
+
+var _ValueReference = &s_ValueReference
+
+var _ValuesMap = &s_ValuesMap
+var _ValuesMap_key = &s_ValuesMap_key
+var _ValuesMap_value = &s_ValuesMap_value
+
+var ViewFrame = &sViewFrame
+var ViewFrame_StartColumnIndex = &sViewFrame_StartColumnIndex
+var ViewFrame_ColumnRange = &sViewFrame_ColumnRange
+var ViewFrame_HiddenColumns = &sViewFrame_HiddenColumns
+var ViewFrame_StartRowIndex = &sViewFrame_StartRowIndex
+var ViewFrame_RowRange = &sViewFrame_RowRange
+var ViewFrame_Analytics = &sViewFrame_Analytics
+
+var BatchDeleteRecipeVersionRequest = &sBatchDeleteRecipeVersionRequest
+var BatchDeleteRecipeVersionRequest_Name = &sBatchDeleteRecipeVersionRequest_Name
+var BatchDeleteRecipeVersionRequest_RecipeVersions = &sBatchDeleteRecipeVersionRequest_RecipeVersions
+
+var BatchDeleteRecipeVersionResponse = &sBatchDeleteRecipeVersionResponse
+var BatchDeleteRecipeVersionResponse_Name = &sBatchDeleteRecipeVersionResponse_Name
+var BatchDeleteRecipeVersionResponse_Errors = &sBatchDeleteRecipeVersionResponse_Errors
+
+var CreateDatasetRequest = &sCreateDatasetRequest
+var CreateDatasetRequest_Name = &sCreateDatasetRequest_Name
+var CreateDatasetRequest_Format = &sCreateDatasetRequest_Format
+var CreateDatasetRequest_FormatOptions = &sCreateDatasetRequest_FormatOptions
+var CreateDatasetRequest_Input = &sCreateDatasetRequest_Input
+var CreateDatasetRequest_PathOptions = &sCreateDatasetRequest_PathOptions
+var CreateDatasetRequest_Tags = &sCreateDatasetRequest_Tags
+
+var CreateDatasetResponse = &sCreateDatasetResponse
+var CreateDatasetResponse_Name = &sCreateDatasetResponse_Name
+
+var CreateProfileJobRequest = &sCreateProfileJobRequest
+var CreateProfileJobRequest_DatasetName = &sCreateProfileJobRequest_DatasetName
+var CreateProfileJobRequest_EncryptionKeyArn = &sCreateProfileJobRequest_EncryptionKeyArn
+var CreateProfileJobRequest_EncryptionMode = &sCreateProfileJobRequest_EncryptionMode
+var CreateProfileJobRequest_Name = &sCreateProfileJobRequest_Name
+var CreateProfileJobRequest_LogSubscription = &sCreateProfileJobRequest_LogSubscription
+var CreateProfileJobRequest_MaxCapacity = &sCreateProfileJobRequest_MaxCapacity
+var CreateProfileJobRequest_MaxRetries = &sCreateProfileJobRequest_MaxRetries
+var CreateProfileJobRequest_OutputLocation = &sCreateProfileJobRequest_OutputLocation
+var CreateProfileJobRequest_Configuration = &sCreateProfileJobRequest_Configuration
+var CreateProfileJobRequest_ValidationConfigurations = &sCreateProfileJobRequest_ValidationConfigurations
+var CreateProfileJobRequest_RoleArn = &sCreateProfileJobRequest_RoleArn
+var CreateProfileJobRequest_Tags = &sCreateProfileJobRequest_Tags
+var CreateProfileJobRequest_Timeout = &sCreateProfileJobRequest_Timeout
+var CreateProfileJobRequest_JobSample = &sCreateProfileJobRequest_JobSample
+
+var CreateProfileJobResponse = &sCreateProfileJobResponse
+var CreateProfileJobResponse_Name = &sCreateProfileJobResponse_Name
+
+var CreateProjectRequest = &sCreateProjectRequest
+var CreateProjectRequest_DatasetName = &sCreateProjectRequest_DatasetName
+var CreateProjectRequest_Name = &sCreateProjectRequest_Name
+var CreateProjectRequest_RecipeName = &sCreateProjectRequest_RecipeName
+var CreateProjectRequest_Sample = &sCreateProjectRequest_Sample
+var CreateProjectRequest_RoleArn = &sCreateProjectRequest_RoleArn
+var CreateProjectRequest_Tags = &sCreateProjectRequest_Tags
+
+var CreateProjectResponse = &sCreateProjectResponse
+var CreateProjectResponse_Name = &sCreateProjectResponse_Name
+
+var CreateRecipeRequest = &sCreateRecipeRequest
+var CreateRecipeRequest_Description = &sCreateRecipeRequest_Description
+var CreateRecipeRequest_Name = &sCreateRecipeRequest_Name
+var CreateRecipeRequest_Steps = &sCreateRecipeRequest_Steps
+var CreateRecipeRequest_Tags = &sCreateRecipeRequest_Tags
+
+var CreateRecipeJobRequest = &sCreateRecipeJobRequest
+var CreateRecipeJobRequest_DatasetName = &sCreateRecipeJobRequest_DatasetName
+var CreateRecipeJobRequest_EncryptionKeyArn = &sCreateRecipeJobRequest_EncryptionKeyArn
+var CreateRecipeJobRequest_EncryptionMode = &sCreateRecipeJobRequest_EncryptionMode
+var CreateRecipeJobRequest_Name = &sCreateRecipeJobRequest_Name
+var CreateRecipeJobRequest_LogSubscription = &sCreateRecipeJobRequest_LogSubscription
+var CreateRecipeJobRequest_MaxCapacity = &sCreateRecipeJobRequest_MaxCapacity
+var CreateRecipeJobRequest_MaxRetries = &sCreateRecipeJobRequest_MaxRetries
+var CreateRecipeJobRequest_Outputs = &sCreateRecipeJobRequest_Outputs
+var CreateRecipeJobRequest_DataCatalogOutputs = &sCreateRecipeJobRequest_DataCatalogOutputs
+var CreateRecipeJobRequest_DatabaseOutputs = &sCreateRecipeJobRequest_DatabaseOutputs
+var CreateRecipeJobRequest_ProjectName = &sCreateRecipeJobRequest_ProjectName
+var CreateRecipeJobRequest_RecipeReference = &sCreateRecipeJobRequest_RecipeReference
+var CreateRecipeJobRequest_RoleArn = &sCreateRecipeJobRequest_RoleArn
+var CreateRecipeJobRequest_Tags = &sCreateRecipeJobRequest_Tags
+var CreateRecipeJobRequest_Timeout = &sCreateRecipeJobRequest_Timeout
+
+var CreateRecipeJobResponse = &sCreateRecipeJobResponse
+var CreateRecipeJobResponse_Name = &sCreateRecipeJobResponse_Name
+
+var CreateRecipeResponse = &sCreateRecipeResponse
+var CreateRecipeResponse_Name = &sCreateRecipeResponse_Name
+
+var CreateRulesetRequest = &sCreateRulesetRequest
+var CreateRulesetRequest_Name = &sCreateRulesetRequest_Name
+var CreateRulesetRequest_Description = &sCreateRulesetRequest_Description
+var CreateRulesetRequest_TargetArn = &sCreateRulesetRequest_TargetArn
+var CreateRulesetRequest_Rules = &sCreateRulesetRequest_Rules
+var CreateRulesetRequest_Tags = &sCreateRulesetRequest_Tags
+
+var CreateRulesetResponse = &sCreateRulesetResponse
+var CreateRulesetResponse_Name = &sCreateRulesetResponse_Name
+
+var CreateScheduleRequest = &sCreateScheduleRequest
+var CreateScheduleRequest_JobNames = &sCreateScheduleRequest_JobNames
+var CreateScheduleRequest_CronExpression = &sCreateScheduleRequest_CronExpression
+var CreateScheduleRequest_Tags = &sCreateScheduleRequest_Tags
+var CreateScheduleRequest_Name = &sCreateScheduleRequest_Name
+
+var CreateScheduleResponse = &sCreateScheduleResponse
+var CreateScheduleResponse_Name = &sCreateScheduleResponse_Name
+
+var DeleteDatasetRequest = &sDeleteDatasetRequest
+var DeleteDatasetRequest_Name = &sDeleteDatasetRequest_Name
+
+var DeleteDatasetResponse = &sDeleteDatasetResponse
+var DeleteDatasetResponse_Name = &sDeleteDatasetResponse_Name
+
+var DeleteJobRequest = &sDeleteJobRequest
+var DeleteJobRequest_Name = &sDeleteJobRequest_Name
+
+var DeleteJobResponse = &sDeleteJobResponse
+var DeleteJobResponse_Name = &sDeleteJobResponse_Name
+
+var DeleteProjectRequest = &sDeleteProjectRequest
+var DeleteProjectRequest_Name = &sDeleteProjectRequest_Name
+
+var DeleteProjectResponse = &sDeleteProjectResponse
+var DeleteProjectResponse_Name = &sDeleteProjectResponse_Name
+
+var DeleteRecipeVersionRequest = &sDeleteRecipeVersionRequest
+var DeleteRecipeVersionRequest_Name = &sDeleteRecipeVersionRequest_Name
+var DeleteRecipeVersionRequest_RecipeVersion = &sDeleteRecipeVersionRequest_RecipeVersion
+
+var DeleteRecipeVersionResponse = &sDeleteRecipeVersionResponse
+var DeleteRecipeVersionResponse_Name = &sDeleteRecipeVersionResponse_Name
+var DeleteRecipeVersionResponse_RecipeVersion = &sDeleteRecipeVersionResponse_RecipeVersion
+
+var DeleteRulesetRequest = &sDeleteRulesetRequest
+var DeleteRulesetRequest_Name = &sDeleteRulesetRequest_Name
+
+var DeleteRulesetResponse = &sDeleteRulesetResponse
+var DeleteRulesetResponse_Name = &sDeleteRulesetResponse_Name
+
+var DeleteScheduleRequest = &sDeleteScheduleRequest
+var DeleteScheduleRequest_Name = &sDeleteScheduleRequest_Name
+
+var DeleteScheduleResponse = &sDeleteScheduleResponse
+var DeleteScheduleResponse_Name = &sDeleteScheduleResponse_Name
+
+var DescribeDatasetRequest = &sDescribeDatasetRequest
+var DescribeDatasetRequest_Name = &sDescribeDatasetRequest_Name
+
+var DescribeDatasetResponse = &sDescribeDatasetResponse
+var DescribeDatasetResponse_CreatedBy = &sDescribeDatasetResponse_CreatedBy
+var DescribeDatasetResponse_CreateDate = &sDescribeDatasetResponse_CreateDate
+var DescribeDatasetResponse_Name = &sDescribeDatasetResponse_Name
+var DescribeDatasetResponse_Format = &sDescribeDatasetResponse_Format
+var DescribeDatasetResponse_FormatOptions = &sDescribeDatasetResponse_FormatOptions
+var DescribeDatasetResponse_Input = &sDescribeDatasetResponse_Input
+var DescribeDatasetResponse_LastModifiedDate = &sDescribeDatasetResponse_LastModifiedDate
+var DescribeDatasetResponse_LastModifiedBy = &sDescribeDatasetResponse_LastModifiedBy
+var DescribeDatasetResponse_Source = &sDescribeDatasetResponse_Source
+var DescribeDatasetResponse_PathOptions = &sDescribeDatasetResponse_PathOptions
+var DescribeDatasetResponse_Tags = &sDescribeDatasetResponse_Tags
+var DescribeDatasetResponse_ResourceArn = &sDescribeDatasetResponse_ResourceArn
+
+var DescribeJobRequest = &sDescribeJobRequest
+var DescribeJobRequest_Name = &sDescribeJobRequest_Name
+
+var DescribeJobResponse = &sDescribeJobResponse
+var DescribeJobResponse_CreateDate = &sDescribeJobResponse_CreateDate
+var DescribeJobResponse_CreatedBy = &sDescribeJobResponse_CreatedBy
+var DescribeJobResponse_DatasetName = &sDescribeJobResponse_DatasetName
+var DescribeJobResponse_EncryptionKeyArn = &sDescribeJobResponse_EncryptionKeyArn
+var DescribeJobResponse_EncryptionMode = &sDescribeJobResponse_EncryptionMode
+var DescribeJobResponse_Name = &sDescribeJobResponse_Name
+var DescribeJobResponse_Type = &sDescribeJobResponse_Type
+var DescribeJobResponse_LastModifiedBy = &sDescribeJobResponse_LastModifiedBy
+var DescribeJobResponse_LastModifiedDate = &sDescribeJobResponse_LastModifiedDate
+var DescribeJobResponse_LogSubscription = &sDescribeJobResponse_LogSubscription
+var DescribeJobResponse_MaxCapacity = &sDescribeJobResponse_MaxCapacity
+var DescribeJobResponse_MaxRetries = &sDescribeJobResponse_MaxRetries
+var DescribeJobResponse_Outputs = &sDescribeJobResponse_Outputs
+var DescribeJobResponse_DataCatalogOutputs = &sDescribeJobResponse_DataCatalogOutputs
+var DescribeJobResponse_DatabaseOutputs = &sDescribeJobResponse_DatabaseOutputs
+var DescribeJobResponse_ProjectName = &sDescribeJobResponse_ProjectName
+var DescribeJobResponse_ProfileConfiguration = &sDescribeJobResponse_ProfileConfiguration
+var DescribeJobResponse_ValidationConfigurations = &sDescribeJobResponse_ValidationConfigurations
+var DescribeJobResponse_RecipeReference = &sDescribeJobResponse_RecipeReference
+var DescribeJobResponse_ResourceArn = &sDescribeJobResponse_ResourceArn
+var DescribeJobResponse_RoleArn = &sDescribeJobResponse_RoleArn
+var DescribeJobResponse_Tags = &sDescribeJobResponse_Tags
+var DescribeJobResponse_Timeout = &sDescribeJobResponse_Timeout
+var DescribeJobResponse_JobSample = &sDescribeJobResponse_JobSample
+
+var DescribeJobRunRequest = &sDescribeJobRunRequest
+var DescribeJobRunRequest_Name = &sDescribeJobRunRequest_Name
+var DescribeJobRunRequest_RunId = &sDescribeJobRunRequest_RunId
+
+var DescribeJobRunResponse = &sDescribeJobRunResponse
+var DescribeJobRunResponse_Attempt = &sDescribeJobRunResponse_Attempt
+var DescribeJobRunResponse_CompletedOn = &sDescribeJobRunResponse_CompletedOn
+var DescribeJobRunResponse_DatasetName = &sDescribeJobRunResponse_DatasetName
+var DescribeJobRunResponse_ErrorMessage = &sDescribeJobRunResponse_ErrorMessage
+var DescribeJobRunResponse_ExecutionTime = &sDescribeJobRunResponse_ExecutionTime
+var DescribeJobRunResponse_JobName = &sDescribeJobRunResponse_JobName
+var DescribeJobRunResponse_ProfileConfiguration = &sDescribeJobRunResponse_ProfileConfiguration
+var DescribeJobRunResponse_ValidationConfigurations = &sDescribeJobRunResponse_ValidationConfigurations
+var DescribeJobRunResponse_RunId = &sDescribeJobRunResponse_RunId
+var DescribeJobRunResponse_State = &sDescribeJobRunResponse_State
+var DescribeJobRunResponse_LogSubscription = &sDescribeJobRunResponse_LogSubscription
+var DescribeJobRunResponse_LogGroupName = &sDescribeJobRunResponse_LogGroupName
+var DescribeJobRunResponse_Outputs = &sDescribeJobRunResponse_Outputs
+var DescribeJobRunResponse_DataCatalogOutputs = &sDescribeJobRunResponse_DataCatalogOutputs
+var DescribeJobRunResponse_DatabaseOutputs = &sDescribeJobRunResponse_DatabaseOutputs
+var DescribeJobRunResponse_RecipeReference = &sDescribeJobRunResponse_RecipeReference
+var DescribeJobRunResponse_StartedBy = &sDescribeJobRunResponse_StartedBy
+var DescribeJobRunResponse_StartedOn = &sDescribeJobRunResponse_StartedOn
+var DescribeJobRunResponse_JobSample = &sDescribeJobRunResponse_JobSample
+
+var DescribeProjectRequest = &sDescribeProjectRequest
+var DescribeProjectRequest_Name = &sDescribeProjectRequest_Name
+
+var DescribeProjectResponse = &sDescribeProjectResponse
+var DescribeProjectResponse_CreateDate = &sDescribeProjectResponse_CreateDate
+var DescribeProjectResponse_CreatedBy = &sDescribeProjectResponse_CreatedBy
+var DescribeProjectResponse_DatasetName = &sDescribeProjectResponse_DatasetName
+var DescribeProjectResponse_LastModifiedDate = &sDescribeProjectResponse_LastModifiedDate
+var DescribeProjectResponse_LastModifiedBy = &sDescribeProjectResponse_LastModifiedBy
+var DescribeProjectResponse_Name = &sDescribeProjectResponse_Name
+var DescribeProjectResponse_RecipeName = &sDescribeProjectResponse_RecipeName
+var DescribeProjectResponse_ResourceArn = &sDescribeProjectResponse_ResourceArn
+var DescribeProjectResponse_Sample = &sDescribeProjectResponse_Sample
+var DescribeProjectResponse_RoleArn = &sDescribeProjectResponse_RoleArn
+var DescribeProjectResponse_Tags = &sDescribeProjectResponse_Tags
+var DescribeProjectResponse_SessionStatus = &sDescribeProjectResponse_SessionStatus
+var DescribeProjectResponse_OpenedBy = &sDescribeProjectResponse_OpenedBy
+var DescribeProjectResponse_OpenDate = &sDescribeProjectResponse_OpenDate
+
+var DescribeRecipeRequest = &sDescribeRecipeRequest
+var DescribeRecipeRequest_Name = &sDescribeRecipeRequest_Name
+var DescribeRecipeRequest_RecipeVersion = &sDescribeRecipeRequest_RecipeVersion
+
+var DescribeRecipeResponse = &sDescribeRecipeResponse
+var DescribeRecipeResponse_CreatedBy = &sDescribeRecipeResponse_CreatedBy
+var DescribeRecipeResponse_CreateDate = &sDescribeRecipeResponse_CreateDate
+var DescribeRecipeResponse_LastModifiedBy = &sDescribeRecipeResponse_LastModifiedBy
+var DescribeRecipeResponse_LastModifiedDate = &sDescribeRecipeResponse_LastModifiedDate
+var DescribeRecipeResponse_ProjectName = &sDescribeRecipeResponse_ProjectName
+var DescribeRecipeResponse_PublishedBy = &sDescribeRecipeResponse_PublishedBy
+var DescribeRecipeResponse_PublishedDate = &sDescribeRecipeResponse_PublishedDate
+var DescribeRecipeResponse_Description = &sDescribeRecipeResponse_Description
+var DescribeRecipeResponse_Name = &sDescribeRecipeResponse_Name
+var DescribeRecipeResponse_Steps = &sDescribeRecipeResponse_Steps
+var DescribeRecipeResponse_Tags = &sDescribeRecipeResponse_Tags
+var DescribeRecipeResponse_ResourceArn = &sDescribeRecipeResponse_ResourceArn
+var DescribeRecipeResponse_RecipeVersion = &sDescribeRecipeResponse_RecipeVersion
+
+var DescribeRulesetRequest = &sDescribeRulesetRequest
+var DescribeRulesetRequest_Name = &sDescribeRulesetRequest_Name
+
+var DescribeRulesetResponse = &sDescribeRulesetResponse
+var DescribeRulesetResponse_Name = &sDescribeRulesetResponse_Name
+var DescribeRulesetResponse_Description = &sDescribeRulesetResponse_Description
+var DescribeRulesetResponse_TargetArn = &sDescribeRulesetResponse_TargetArn
+var DescribeRulesetResponse_Rules = &sDescribeRulesetResponse_Rules
+var DescribeRulesetResponse_CreateDate = &sDescribeRulesetResponse_CreateDate
+var DescribeRulesetResponse_CreatedBy = &sDescribeRulesetResponse_CreatedBy
+var DescribeRulesetResponse_LastModifiedBy = &sDescribeRulesetResponse_LastModifiedBy
+var DescribeRulesetResponse_LastModifiedDate = &sDescribeRulesetResponse_LastModifiedDate
+var DescribeRulesetResponse_ResourceArn = &sDescribeRulesetResponse_ResourceArn
+var DescribeRulesetResponse_Tags = &sDescribeRulesetResponse_Tags
+
+var DescribeScheduleRequest = &sDescribeScheduleRequest
+var DescribeScheduleRequest_Name = &sDescribeScheduleRequest_Name
+
+var DescribeScheduleResponse = &sDescribeScheduleResponse
+var DescribeScheduleResponse_CreateDate = &sDescribeScheduleResponse_CreateDate
+var DescribeScheduleResponse_CreatedBy = &sDescribeScheduleResponse_CreatedBy
+var DescribeScheduleResponse_JobNames = &sDescribeScheduleResponse_JobNames
+var DescribeScheduleResponse_LastModifiedBy = &sDescribeScheduleResponse_LastModifiedBy
+var DescribeScheduleResponse_LastModifiedDate = &sDescribeScheduleResponse_LastModifiedDate
+var DescribeScheduleResponse_ResourceArn = &sDescribeScheduleResponse_ResourceArn
+var DescribeScheduleResponse_CronExpression = &sDescribeScheduleResponse_CronExpression
+var DescribeScheduleResponse_Tags = &sDescribeScheduleResponse_Tags
+var DescribeScheduleResponse_Name = &sDescribeScheduleResponse_Name
+
+var ListDatasetsRequest = &sListDatasetsRequest
+var ListDatasetsRequest_MaxResults = &sListDatasetsRequest_MaxResults
+var ListDatasetsRequest_NextToken = &sListDatasetsRequest_NextToken
+
+var ListDatasetsResponse = &sListDatasetsResponse
+var ListDatasetsResponse_Datasets = &sListDatasetsResponse_Datasets
+var ListDatasetsResponse_NextToken = &sListDatasetsResponse_NextToken
+
+var ListJobRunsRequest = &sListJobRunsRequest
+var ListJobRunsRequest_Name = &sListJobRunsRequest_Name
+var ListJobRunsRequest_MaxResults = &sListJobRunsRequest_MaxResults
+var ListJobRunsRequest_NextToken = &sListJobRunsRequest_NextToken
+
+var ListJobRunsResponse = &sListJobRunsResponse
+var ListJobRunsResponse_JobRuns = &sListJobRunsResponse_JobRuns
+var ListJobRunsResponse_NextToken = &sListJobRunsResponse_NextToken
+
+var ListJobsRequest = &sListJobsRequest
+var ListJobsRequest_DatasetName = &sListJobsRequest_DatasetName
+var ListJobsRequest_MaxResults = &sListJobsRequest_MaxResults
+var ListJobsRequest_NextToken = &sListJobsRequest_NextToken
+var ListJobsRequest_ProjectName = &sListJobsRequest_ProjectName
+
+var ListJobsResponse = &sListJobsResponse
+var ListJobsResponse_Jobs = &sListJobsResponse_Jobs
+var ListJobsResponse_NextToken = &sListJobsResponse_NextToken
+
+var ListProjectsRequest = &sListProjectsRequest
+var ListProjectsRequest_NextToken = &sListProjectsRequest_NextToken
+var ListProjectsRequest_MaxResults = &sListProjectsRequest_MaxResults
+
+var ListProjectsResponse = &sListProjectsResponse
+var ListProjectsResponse_Projects = &sListProjectsResponse_Projects
+var ListProjectsResponse_NextToken = &sListProjectsResponse_NextToken
+
+var ListRecipesRequest = &sListRecipesRequest
+var ListRecipesRequest_MaxResults = &sListRecipesRequest_MaxResults
+var ListRecipesRequest_NextToken = &sListRecipesRequest_NextToken
+var ListRecipesRequest_RecipeVersion = &sListRecipesRequest_RecipeVersion
+
+var ListRecipesResponse = &sListRecipesResponse
+var ListRecipesResponse_Recipes = &sListRecipesResponse_Recipes
+var ListRecipesResponse_NextToken = &sListRecipesResponse_NextToken
+
+var ListRecipeVersionsRequest = &sListRecipeVersionsRequest
+var ListRecipeVersionsRequest_MaxResults = &sListRecipeVersionsRequest_MaxResults
+var ListRecipeVersionsRequest_NextToken = &sListRecipeVersionsRequest_NextToken
+var ListRecipeVersionsRequest_Name = &sListRecipeVersionsRequest_Name
+
+var ListRecipeVersionsResponse = &sListRecipeVersionsResponse
+var ListRecipeVersionsResponse_NextToken = &sListRecipeVersionsResponse_NextToken
+var ListRecipeVersionsResponse_Recipes = &sListRecipeVersionsResponse_Recipes
+
+var ListRulesetsRequest = &sListRulesetsRequest
+var ListRulesetsRequest_TargetArn = &sListRulesetsRequest_TargetArn
+var ListRulesetsRequest_MaxResults = &sListRulesetsRequest_MaxResults
+var ListRulesetsRequest_NextToken = &sListRulesetsRequest_NextToken
+
+var ListRulesetsResponse = &sListRulesetsResponse
+var ListRulesetsResponse_Rulesets = &sListRulesetsResponse_Rulesets
+var ListRulesetsResponse_NextToken = &sListRulesetsResponse_NextToken
+
+var ListSchedulesRequest = &sListSchedulesRequest
+var ListSchedulesRequest_JobName = &sListSchedulesRequest_JobName
+var ListSchedulesRequest_MaxResults = &sListSchedulesRequest_MaxResults
+var ListSchedulesRequest_NextToken = &sListSchedulesRequest_NextToken
+
+var ListSchedulesResponse = &sListSchedulesResponse
+var ListSchedulesResponse_Schedules = &sListSchedulesResponse_Schedules
+var ListSchedulesResponse_NextToken = &sListSchedulesResponse_NextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceArn = &sListTagsForResourceRequest_ResourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_Tags = &sListTagsForResourceResponse_Tags
+
+var PublishRecipeRequest = &sPublishRecipeRequest
+var PublishRecipeRequest_Description = &sPublishRecipeRequest_Description
+var PublishRecipeRequest_Name = &sPublishRecipeRequest_Name
+
+var PublishRecipeResponse = &sPublishRecipeResponse
+var PublishRecipeResponse_Name = &sPublishRecipeResponse_Name
+
+var SendProjectSessionActionRequest = &sSendProjectSessionActionRequest
+var SendProjectSessionActionRequest_Preview = &sSendProjectSessionActionRequest_Preview
+var SendProjectSessionActionRequest_Name = &sSendProjectSessionActionRequest_Name
+var SendProjectSessionActionRequest_RecipeStep = &sSendProjectSessionActionRequest_RecipeStep
+var SendProjectSessionActionRequest_StepIndex = &sSendProjectSessionActionRequest_StepIndex
+var SendProjectSessionActionRequest_ClientSessionId = &sSendProjectSessionActionRequest_ClientSessionId
+var SendProjectSessionActionRequest_ViewFrame = &sSendProjectSessionActionRequest_ViewFrame
+
+var SendProjectSessionActionResponse = &sSendProjectSessionActionResponse
+var SendProjectSessionActionResponse_Result = &sSendProjectSessionActionResponse_Result
+var SendProjectSessionActionResponse_Name = &sSendProjectSessionActionResponse_Name
+var SendProjectSessionActionResponse_ActionId = &sSendProjectSessionActionResponse_ActionId
+
+var StartJobRunRequest = &sStartJobRunRequest
+var StartJobRunRequest_Name = &sStartJobRunRequest_Name
+
+var StartJobRunResponse = &sStartJobRunResponse
+var StartJobRunResponse_RunId = &sStartJobRunResponse_RunId
+
+var StartProjectSessionRequest = &sStartProjectSessionRequest
+var StartProjectSessionRequest_Name = &sStartProjectSessionRequest_Name
+var StartProjectSessionRequest_AssumeControl = &sStartProjectSessionRequest_AssumeControl
+
+var StartProjectSessionResponse = &sStartProjectSessionResponse
+var StartProjectSessionResponse_Name = &sStartProjectSessionResponse_Name
+var StartProjectSessionResponse_ClientSessionId = &sStartProjectSessionResponse_ClientSessionId
+
+var StopJobRunRequest = &sStopJobRunRequest
+var StopJobRunRequest_Name = &sStopJobRunRequest_Name
+var StopJobRunRequest_RunId = &sStopJobRunRequest_RunId
+
+var StopJobRunResponse = &sStopJobRunResponse
+var StopJobRunResponse_RunId = &sStopJobRunResponse_RunId
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceArn = &sTagResourceRequest_ResourceArn
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceArn = &sUntagResourceRequest_ResourceArn
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateDatasetRequest = &sUpdateDatasetRequest
+var UpdateDatasetRequest_Name = &sUpdateDatasetRequest_Name
+var UpdateDatasetRequest_Format = &sUpdateDatasetRequest_Format
+var UpdateDatasetRequest_FormatOptions = &sUpdateDatasetRequest_FormatOptions
+var UpdateDatasetRequest_Input = &sUpdateDatasetRequest_Input
+var UpdateDatasetRequest_PathOptions = &sUpdateDatasetRequest_PathOptions
+
+var UpdateDatasetResponse = &sUpdateDatasetResponse
+var UpdateDatasetResponse_Name = &sUpdateDatasetResponse_Name
+
+var UpdateProfileJobRequest = &sUpdateProfileJobRequest
+var UpdateProfileJobRequest_Configuration = &sUpdateProfileJobRequest_Configuration
+var UpdateProfileJobRequest_EncryptionKeyArn = &sUpdateProfileJobRequest_EncryptionKeyArn
+var UpdateProfileJobRequest_EncryptionMode = &sUpdateProfileJobRequest_EncryptionMode
+var UpdateProfileJobRequest_Name = &sUpdateProfileJobRequest_Name
+var UpdateProfileJobRequest_LogSubscription = &sUpdateProfileJobRequest_LogSubscription
+var UpdateProfileJobRequest_MaxCapacity = &sUpdateProfileJobRequest_MaxCapacity
+var UpdateProfileJobRequest_MaxRetries = &sUpdateProfileJobRequest_MaxRetries
+var UpdateProfileJobRequest_OutputLocation = &sUpdateProfileJobRequest_OutputLocation
+var UpdateProfileJobRequest_ValidationConfigurations = &sUpdateProfileJobRequest_ValidationConfigurations
+var UpdateProfileJobRequest_RoleArn = &sUpdateProfileJobRequest_RoleArn
+var UpdateProfileJobRequest_Timeout = &sUpdateProfileJobRequest_Timeout
+var UpdateProfileJobRequest_JobSample = &sUpdateProfileJobRequest_JobSample
+
+var UpdateProfileJobResponse = &sUpdateProfileJobResponse
+var UpdateProfileJobResponse_Name = &sUpdateProfileJobResponse_Name
+
+var UpdateProjectRequest = &sUpdateProjectRequest
+var UpdateProjectRequest_Sample = &sUpdateProjectRequest_Sample
+var UpdateProjectRequest_RoleArn = &sUpdateProjectRequest_RoleArn
+var UpdateProjectRequest_Name = &sUpdateProjectRequest_Name
+
+var UpdateProjectResponse = &sUpdateProjectResponse
+var UpdateProjectResponse_LastModifiedDate = &sUpdateProjectResponse_LastModifiedDate
+var UpdateProjectResponse_Name = &sUpdateProjectResponse_Name
+
+var UpdateRecipeRequest = &sUpdateRecipeRequest
+var UpdateRecipeRequest_Description = &sUpdateRecipeRequest_Description
+var UpdateRecipeRequest_Name = &sUpdateRecipeRequest_Name
+var UpdateRecipeRequest_Steps = &sUpdateRecipeRequest_Steps
+
+var UpdateRecipeJobRequest = &sUpdateRecipeJobRequest
+var UpdateRecipeJobRequest_EncryptionKeyArn = &sUpdateRecipeJobRequest_EncryptionKeyArn
+var UpdateRecipeJobRequest_EncryptionMode = &sUpdateRecipeJobRequest_EncryptionMode
+var UpdateRecipeJobRequest_Name = &sUpdateRecipeJobRequest_Name
+var UpdateRecipeJobRequest_LogSubscription = &sUpdateRecipeJobRequest_LogSubscription
+var UpdateRecipeJobRequest_MaxCapacity = &sUpdateRecipeJobRequest_MaxCapacity
+var UpdateRecipeJobRequest_MaxRetries = &sUpdateRecipeJobRequest_MaxRetries
+var UpdateRecipeJobRequest_Outputs = &sUpdateRecipeJobRequest_Outputs
+var UpdateRecipeJobRequest_DataCatalogOutputs = &sUpdateRecipeJobRequest_DataCatalogOutputs
+var UpdateRecipeJobRequest_DatabaseOutputs = &sUpdateRecipeJobRequest_DatabaseOutputs
+var UpdateRecipeJobRequest_RoleArn = &sUpdateRecipeJobRequest_RoleArn
+var UpdateRecipeJobRequest_Timeout = &sUpdateRecipeJobRequest_Timeout
+
+var UpdateRecipeJobResponse = &sUpdateRecipeJobResponse
+var UpdateRecipeJobResponse_Name = &sUpdateRecipeJobResponse_Name
+
+var UpdateRecipeResponse = &sUpdateRecipeResponse
+var UpdateRecipeResponse_Name = &sUpdateRecipeResponse_Name
+
+var UpdateRulesetRequest = &sUpdateRulesetRequest
+var UpdateRulesetRequest_Name = &sUpdateRulesetRequest_Name
+var UpdateRulesetRequest_Description = &sUpdateRulesetRequest_Description
+var UpdateRulesetRequest_Rules = &sUpdateRulesetRequest_Rules
+
+var UpdateRulesetResponse = &sUpdateRulesetResponse
+var UpdateRulesetResponse_Name = &sUpdateRulesetResponse_Name
+
+var UpdateScheduleRequest = &sUpdateScheduleRequest
+var UpdateScheduleRequest_JobNames = &sUpdateScheduleRequest_JobNames
+var UpdateScheduleRequest_CronExpression = &sUpdateScheduleRequest_CronExpression
+var UpdateScheduleRequest_Name = &sUpdateScheduleRequest_Name
+
+var UpdateScheduleResponse = &sUpdateScheduleResponse
+var UpdateScheduleResponse_Name = &sUpdateScheduleResponse_Name
+
+var AWSGlueDataBrew = &smithy.ServiceSchema{Schema: &s_AWSGlueDataBrew, Version: "2017-07-25"}

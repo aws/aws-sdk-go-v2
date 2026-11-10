@@ -4,2527 +4,1961 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateConfigurationSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "CreateConfigurationSet",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	iCreateConfigurationSet                         = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "CreateConfigurationSet"}
+	iCreateConfigurationSetEventDestination         = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "CreateConfigurationSetEventDestination"}
+	iCreateDedicatedIpPool                          = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "CreateDedicatedIpPool"}
+	iCreateDeliverabilityTestReport                 = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "CreateDeliverabilityTestReport"}
+	iCreateEmailIdentity                            = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "CreateEmailIdentity"}
+	iDeleteConfigurationSet                         = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "DeleteConfigurationSet"}
+	iDeleteConfigurationSetEventDestination         = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "DeleteConfigurationSetEventDestination"}
+	iDeleteDedicatedIpPool                          = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "DeleteDedicatedIpPool"}
+	iDeleteEmailIdentity                            = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "DeleteEmailIdentity"}
+	iGetAccount                                     = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "GetAccount"}
+	iGetBlacklistReports                            = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "GetBlacklistReports"}
+	iGetConfigurationSet                            = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "GetConfigurationSet"}
+	iGetConfigurationSetEventDestinations           = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "GetConfigurationSetEventDestinations"}
+	iGetDedicatedIp                                 = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "GetDedicatedIp"}
+	iGetDedicatedIps                                = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "GetDedicatedIps"}
+	iGetDeliverabilityDashboardOptions              = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "GetDeliverabilityDashboardOptions"}
+	iGetDeliverabilityTestReport                    = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "GetDeliverabilityTestReport"}
+	iGetDomainDeliverabilityCampaign                = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "GetDomainDeliverabilityCampaign"}
+	iGetDomainStatisticsReport                      = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "GetDomainStatisticsReport"}
+	iGetEmailIdentity                               = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "GetEmailIdentity"}
+	iListConfigurationSets                          = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "ListConfigurationSets"}
+	iListDedicatedIpPools                           = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "ListDedicatedIpPools"}
+	iListDeliverabilityTestReports                  = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "ListDeliverabilityTestReports"}
+	iListDomainDeliverabilityCampaigns              = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "ListDomainDeliverabilityCampaigns"}
+	iListEmailIdentities                            = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "ListEmailIdentities"}
+	iListTagsForResource                            = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "ListTagsForResource"}
+	iPutAccountDedicatedIpWarmupAttributes          = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "PutAccountDedicatedIpWarmupAttributes"}
+	iPutAccountSendingAttributes                    = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "PutAccountSendingAttributes"}
+	iPutConfigurationSetDeliveryOptions             = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "PutConfigurationSetDeliveryOptions"}
+	iPutConfigurationSetReputationOptions           = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "PutConfigurationSetReputationOptions"}
+	iPutConfigurationSetSendingOptions              = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "PutConfigurationSetSendingOptions"}
+	iPutConfigurationSetTrackingOptions             = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "PutConfigurationSetTrackingOptions"}
+	iPutDedicatedIpInPool                           = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "PutDedicatedIpInPool"}
+	iPutDedicatedIpWarmupAttributes                 = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "PutDedicatedIpWarmupAttributes"}
+	iPutDeliverabilityDashboardOption               = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "PutDeliverabilityDashboardOption"}
+	iPutEmailIdentityDkimAttributes                 = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "PutEmailIdentityDkimAttributes"}
+	iPutEmailIdentityFeedbackAttributes             = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "PutEmailIdentityFeedbackAttributes"}
+	iPutEmailIdentityMailFromAttributes             = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "PutEmailIdentityMailFromAttributes"}
+	iSendEmail                                      = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "SendEmail"}
+	iTagResource                                    = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "TagResource"}
+	iUntagResource                                  = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "UntagResource"}
+	iUpdateConfigurationSetEventDestination         = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "UpdateConfigurationSetEventDestination"}
+	i_AmazonPinpointEmailService                    = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "AmazonPinpointEmailService"}
+	iAccountSuspendedException                      = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "AccountSuspendedException"}
+	iAlreadyExistsException                         = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "AlreadyExistsException"}
+	i_AmazonResourceName                            = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "AmazonResourceName"}
+	iBadRequestException                            = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "BadRequestException"}
+	iBehaviorOnMxFailure                            = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "BehaviorOnMxFailure"}
+	i_BlacklistEntries                              = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "BlacklistEntries"}
+	iBlacklistEntry                                 = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "BlacklistEntry"}
+	i_BlacklistingDescription                       = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "BlacklistingDescription"}
+	i_BlacklistItemName                             = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "BlacklistItemName"}
+	i_BlacklistItemNames                            = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "BlacklistItemNames"}
+	i_BlacklistReport                               = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "BlacklistReport"}
+	iBody                                           = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "Body"}
+	i_CampaignId                                    = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "CampaignId"}
+	i_Charset                                       = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "Charset"}
+	iCloudWatchDestination                          = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "CloudWatchDestination"}
+	iCloudWatchDimensionConfiguration               = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "CloudWatchDimensionConfiguration"}
+	i_CloudWatchDimensionConfigurations             = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "CloudWatchDimensionConfigurations"}
+	iConcurrentModificationException                = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "ConcurrentModificationException"}
+	i_ConfigurationSetName                          = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "ConfigurationSetName"}
+	i_ConfigurationSetNameList                      = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "ConfigurationSetNameList"}
+	iContent                                        = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "Content"}
+	i_CustomRedirectDomain                          = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "CustomRedirectDomain"}
+	iDailyVolume                                    = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "DailyVolume"}
+	i_DailyVolumes                                  = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "DailyVolumes"}
+	iDedicatedIp                                    = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "DedicatedIp"}
+	i_DedicatedIpList                               = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "DedicatedIpList"}
+	i_DefaultDimensionValue                         = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "DefaultDimensionValue"}
+	iDeliverabilityDashboardAccountStatus           = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "DeliverabilityDashboardAccountStatus"}
+	iDeliverabilityTestReport                       = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "DeliverabilityTestReport"}
+	i_DeliverabilityTestReports                     = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "DeliverabilityTestReports"}
+	iDeliverabilityTestStatus                       = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "DeliverabilityTestStatus"}
+	i_DeliverabilityTestSubject                     = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "DeliverabilityTestSubject"}
+	iDeliveryOptions                                = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "DeliveryOptions"}
+	iDestination                                    = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "Destination"}
+	i_DimensionName                                 = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "DimensionName"}
+	iDimensionValueSource                           = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "DimensionValueSource"}
+	iDkimAttributes                                 = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "DkimAttributes"}
+	iDkimStatus                                     = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "DkimStatus"}
+	i_DnsToken                                      = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "DnsToken"}
+	i_DnsTokenList                                  = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "DnsTokenList"}
+	i_Domain                                        = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "Domain"}
+	iDomainDeliverabilityCampaign                   = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "DomainDeliverabilityCampaign"}
+	i_DomainDeliverabilityCampaignList              = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "DomainDeliverabilityCampaignList"}
+	iDomainDeliverabilityTrackingOption             = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "DomainDeliverabilityTrackingOption"}
+	i_DomainDeliverabilityTrackingOptions           = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "DomainDeliverabilityTrackingOptions"}
+	iDomainIspPlacement                             = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "DomainIspPlacement"}
+	i_DomainIspPlacements                           = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "DomainIspPlacements"}
+	i_EmailAddress                                  = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "EmailAddress"}
+	i_EmailAddressList                              = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "EmailAddressList"}
+	iEmailContent                                   = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "EmailContent"}
+	i_Enabled                                       = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "Enabled"}
+	i_ErrorMessage                                  = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "ErrorMessage"}
+	i_Esp                                           = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "Esp"}
+	i_Esps                                          = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "Esps"}
+	iEventDestination                               = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "EventDestination"}
+	iEventDestinationDefinition                     = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "EventDestinationDefinition"}
+	i_EventDestinationName                          = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "EventDestinationName"}
+	i_EventDestinations                             = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "EventDestinations"}
+	iEventType                                      = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "EventType"}
+	i_EventTypes                                    = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "EventTypes"}
+	i_GeneralEnforcementStatus                      = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "GeneralEnforcementStatus"}
+	i_Identity                                      = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "Identity"}
+	iIdentityInfo                                   = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "IdentityInfo"}
+	i_IdentityInfoList                              = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "IdentityInfoList"}
+	iIdentityType                                   = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "IdentityType"}
+	i_ImageUrl                                      = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "ImageUrl"}
+	iInboxPlacementTrackingOption                   = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "InboxPlacementTrackingOption"}
+	i_Ip                                            = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "Ip"}
+	i_IpList                                        = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "IpList"}
+	i_IspName                                       = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "IspName"}
+	i_IspNameList                                   = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "IspNameList"}
+	iIspPlacement                                   = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "IspPlacement"}
+	i_IspPlacements                                 = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "IspPlacements"}
+	iKinesisFirehoseDestination                     = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "KinesisFirehoseDestination"}
+	i_LastFreshStart                                = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "LastFreshStart"}
+	iLimitExceededException                         = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "LimitExceededException"}
+	i_ListOfDedicatedIpPools                        = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "ListOfDedicatedIpPools"}
+	iMailFromAttributes                             = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "MailFromAttributes"}
+	i_MailFromDomainName                            = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "MailFromDomainName"}
+	iMailFromDomainNotVerifiedException             = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "MailFromDomainNotVerifiedException"}
+	iMailFromDomainStatus                           = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "MailFromDomainStatus"}
+	i_Max24HourSend                                 = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "Max24HourSend"}
+	i_MaxItems                                      = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "MaxItems"}
+	i_MaxSendRate                                   = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "MaxSendRate"}
+	iMessage                                        = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "Message"}
+	i_MessageContent                                = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "MessageContent"}
+	i_MessageData                                   = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "MessageData"}
+	iMessageRejected                                = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "MessageRejected"}
+	iMessageTag                                     = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "MessageTag"}
+	i_MessageTagList                                = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "MessageTagList"}
+	i_MessageTagName                                = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "MessageTagName"}
+	i_MessageTagValue                               = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "MessageTagValue"}
+	i_NextToken                                     = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "NextToken"}
+	iNotFoundException                              = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "NotFoundException"}
+	i_OutboundMessageId                             = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "OutboundMessageId"}
+	iOverallVolume                                  = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "OverallVolume"}
+	i_Percentage                                    = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "Percentage"}
+	i_Percentage100Wrapper                          = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "Percentage100Wrapper"}
+	iPinpointDestination                            = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "PinpointDestination"}
+	iPlacementStatistics                            = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "PlacementStatistics"}
+	i_PoolName                                      = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "PoolName"}
+	iRawMessage                                     = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "RawMessage"}
+	i_RawMessageData                                = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "RawMessageData"}
+	i_RblName                                       = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "RblName"}
+	i_ReportId                                      = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "ReportId"}
+	i_ReportName                                    = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "ReportName"}
+	iReputationOptions                              = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "ReputationOptions"}
+	iSendingOptions                                 = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "SendingOptions"}
+	iSendingPausedException                         = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "SendingPausedException"}
+	i_SendingPoolName                               = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "SendingPoolName"}
+	iSendQuota                                      = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "SendQuota"}
+	i_SentLast24Hours                               = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "SentLast24Hours"}
+	iSnsDestination                                 = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "SnsDestination"}
+	i_Subject                                       = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "Subject"}
+	iTag                                            = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "Tag"}
+	i_TagKey                                        = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "TagKey"}
+	i_TagKeyList                                    = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "TagKeyList"}
+	i_TagList                                       = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "TagList"}
+	i_TagValue                                      = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "TagValue"}
+	iTemplate                                       = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "Template"}
+	i_TemplateArn                                   = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "TemplateArn"}
+	i_TemplateData                                  = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "TemplateData"}
+	i_Timestamp                                     = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "Timestamp"}
+	iTlsPolicy                                      = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "TlsPolicy"}
+	iTooManyRequestsException                       = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "TooManyRequestsException"}
+	iTrackingOptions                                = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "TrackingOptions"}
+	i_Volume                                        = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "Volume"}
+	iVolumeStatistics                               = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "VolumeStatistics"}
+	iWarmupStatus                                   = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "WarmupStatus"}
+	iCreateConfigurationSetEventDestinationRequest  = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "CreateConfigurationSetEventDestinationRequest"}
+	iCreateConfigurationSetEventDestinationResponse = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "CreateConfigurationSetEventDestinationResponse"}
+	iCreateConfigurationSetRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "CreateConfigurationSetRequest"}
+	iCreateConfigurationSetResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "CreateConfigurationSetResponse"}
+	iCreateDedicatedIpPoolRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "CreateDedicatedIpPoolRequest"}
+	iCreateDedicatedIpPoolResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "CreateDedicatedIpPoolResponse"}
+	iCreateDeliverabilityTestReportRequest          = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "CreateDeliverabilityTestReportRequest"}
+	iCreateDeliverabilityTestReportResponse         = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "CreateDeliverabilityTestReportResponse"}
+	iCreateEmailIdentityRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "CreateEmailIdentityRequest"}
+	iCreateEmailIdentityResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "CreateEmailIdentityResponse"}
+	iDeleteConfigurationSetEventDestinationRequest  = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "DeleteConfigurationSetEventDestinationRequest"}
+	iDeleteConfigurationSetEventDestinationResponse = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "DeleteConfigurationSetEventDestinationResponse"}
+	iDeleteConfigurationSetRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "DeleteConfigurationSetRequest"}
+	iDeleteConfigurationSetResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "DeleteConfigurationSetResponse"}
+	iDeleteDedicatedIpPoolRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "DeleteDedicatedIpPoolRequest"}
+	iDeleteDedicatedIpPoolResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "DeleteDedicatedIpPoolResponse"}
+	iDeleteEmailIdentityRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "DeleteEmailIdentityRequest"}
+	iDeleteEmailIdentityResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "DeleteEmailIdentityResponse"}
+	iGetAccountRequest                              = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "GetAccountRequest"}
+	iGetAccountResponse                             = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "GetAccountResponse"}
+	iGetBlacklistReportsRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "GetBlacklistReportsRequest"}
+	iGetBlacklistReportsResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "GetBlacklistReportsResponse"}
+	iGetConfigurationSetEventDestinationsRequest    = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "GetConfigurationSetEventDestinationsRequest"}
+	iGetConfigurationSetEventDestinationsResponse   = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "GetConfigurationSetEventDestinationsResponse"}
+	iGetConfigurationSetRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "GetConfigurationSetRequest"}
+	iGetConfigurationSetResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "GetConfigurationSetResponse"}
+	iGetDedicatedIpRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "GetDedicatedIpRequest"}
+	iGetDedicatedIpResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "GetDedicatedIpResponse"}
+	iGetDedicatedIpsRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "GetDedicatedIpsRequest"}
+	iGetDedicatedIpsResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "GetDedicatedIpsResponse"}
+	iGetDeliverabilityDashboardOptionsRequest       = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "GetDeliverabilityDashboardOptionsRequest"}
+	iGetDeliverabilityDashboardOptionsResponse      = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "GetDeliverabilityDashboardOptionsResponse"}
+	iGetDeliverabilityTestReportRequest             = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "GetDeliverabilityTestReportRequest"}
+	iGetDeliverabilityTestReportResponse            = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "GetDeliverabilityTestReportResponse"}
+	iGetDomainDeliverabilityCampaignRequest         = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "GetDomainDeliverabilityCampaignRequest"}
+	iGetDomainDeliverabilityCampaignResponse        = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "GetDomainDeliverabilityCampaignResponse"}
+	iGetDomainStatisticsReportRequest               = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "GetDomainStatisticsReportRequest"}
+	iGetDomainStatisticsReportResponse              = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "GetDomainStatisticsReportResponse"}
+	iGetEmailIdentityRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "GetEmailIdentityRequest"}
+	iGetEmailIdentityResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "GetEmailIdentityResponse"}
+	iListConfigurationSetsRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "ListConfigurationSetsRequest"}
+	iListConfigurationSetsResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "ListConfigurationSetsResponse"}
+	iListDedicatedIpPoolsRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "ListDedicatedIpPoolsRequest"}
+	iListDedicatedIpPoolsResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "ListDedicatedIpPoolsResponse"}
+	iListDeliverabilityTestReportsRequest           = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "ListDeliverabilityTestReportsRequest"}
+	iListDeliverabilityTestReportsResponse          = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "ListDeliverabilityTestReportsResponse"}
+	iListDomainDeliverabilityCampaignsRequest       = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "ListDomainDeliverabilityCampaignsRequest"}
+	iListDomainDeliverabilityCampaignsResponse      = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "ListDomainDeliverabilityCampaignsResponse"}
+	iListEmailIdentitiesRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "ListEmailIdentitiesRequest"}
+	iListEmailIdentitiesResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "ListEmailIdentitiesResponse"}
+	iListTagsForResourceRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "ListTagsForResourceResponse"}
+	iPutAccountDedicatedIpWarmupAttributesRequest   = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "PutAccountDedicatedIpWarmupAttributesRequest"}
+	iPutAccountDedicatedIpWarmupAttributesResponse  = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "PutAccountDedicatedIpWarmupAttributesResponse"}
+	iPutAccountSendingAttributesRequest             = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "PutAccountSendingAttributesRequest"}
+	iPutAccountSendingAttributesResponse            = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "PutAccountSendingAttributesResponse"}
+	iPutConfigurationSetDeliveryOptionsRequest      = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "PutConfigurationSetDeliveryOptionsRequest"}
+	iPutConfigurationSetDeliveryOptionsResponse     = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "PutConfigurationSetDeliveryOptionsResponse"}
+	iPutConfigurationSetReputationOptionsRequest    = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "PutConfigurationSetReputationOptionsRequest"}
+	iPutConfigurationSetReputationOptionsResponse   = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "PutConfigurationSetReputationOptionsResponse"}
+	iPutConfigurationSetSendingOptionsRequest       = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "PutConfigurationSetSendingOptionsRequest"}
+	iPutConfigurationSetSendingOptionsResponse      = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "PutConfigurationSetSendingOptionsResponse"}
+	iPutConfigurationSetTrackingOptionsRequest      = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "PutConfigurationSetTrackingOptionsRequest"}
+	iPutConfigurationSetTrackingOptionsResponse     = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "PutConfigurationSetTrackingOptionsResponse"}
+	iPutDedicatedIpInPoolRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "PutDedicatedIpInPoolRequest"}
+	iPutDedicatedIpInPoolResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "PutDedicatedIpInPoolResponse"}
+	iPutDedicatedIpWarmupAttributesRequest          = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "PutDedicatedIpWarmupAttributesRequest"}
+	iPutDedicatedIpWarmupAttributesResponse         = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "PutDedicatedIpWarmupAttributesResponse"}
+	iPutDeliverabilityDashboardOptionRequest        = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "PutDeliverabilityDashboardOptionRequest"}
+	iPutDeliverabilityDashboardOptionResponse       = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "PutDeliverabilityDashboardOptionResponse"}
+	iPutEmailIdentityDkimAttributesRequest          = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "PutEmailIdentityDkimAttributesRequest"}
+	iPutEmailIdentityDkimAttributesResponse         = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "PutEmailIdentityDkimAttributesResponse"}
+	iPutEmailIdentityFeedbackAttributesRequest      = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "PutEmailIdentityFeedbackAttributesRequest"}
+	iPutEmailIdentityFeedbackAttributesResponse     = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "PutEmailIdentityFeedbackAttributesResponse"}
+	iPutEmailIdentityMailFromAttributesRequest      = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "PutEmailIdentityMailFromAttributesRequest"}
+	iPutEmailIdentityMailFromAttributesResponse     = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "PutEmailIdentityMailFromAttributesResponse"}
+	iSendEmailRequest                               = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "SendEmailRequest"}
+	iSendEmailResponse                              = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "SendEmailResponse"}
+	iTagResourceRequest                             = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "TagResourceRequest"}
+	iTagResourceResponse                            = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "TagResourceResponse"}
+	iUntagResourceRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                          = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "UntagResourceResponse"}
+	iUpdateConfigurationSetEventDestinationRequest  = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "UpdateConfigurationSetEventDestinationRequest"}
+	iUpdateConfigurationSetEventDestinationResponse = smithy.ShapeID{Namespace: "com.amazonaws.pinpointemail", Name: "UpdateConfigurationSetEventDestinationResponse"}
+	pUnit                                           = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/email/configuration-sets",
-	Code: 200})
-
-var CreateConfigurationSetEventDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "CreateConfigurationSetEventDestination",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/email/configuration-sets/{ConfigurationSetName}/event-destinations",
-	Code: 200})
-
-var CreateDedicatedIpPool = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "CreateDedicatedIpPool",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/email/dedicated-ip-pools",
-	Code: 200})
-
-var CreateDeliverabilityTestReport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "CreateDeliverabilityTestReport",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/email/deliverability-dashboard/test",
-	Code: 200})
-
-var CreateEmailIdentity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "CreateEmailIdentity",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/email/identities",
-	Code: 200})
-
-var DeleteConfigurationSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "DeleteConfigurationSet",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/email/configuration-sets/{ConfigurationSetName}",
-	Code: 200})
-
-var DeleteConfigurationSetEventDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "DeleteConfigurationSetEventDestination",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/email/configuration-sets/{ConfigurationSetName}/event-destinations/{EventDestinationName}",
-	Code: 200})
-
-var DeleteDedicatedIpPool = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "DeleteDedicatedIpPool",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/email/dedicated-ip-pools/{PoolName}",
-	Code: 200})
-
-var DeleteEmailIdentity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "DeleteEmailIdentity",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/email/identities/{EmailIdentity}",
-	Code: 200})
-
-var GetAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "GetAccount",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/email/account",
-	Code: 200})
-
-var GetBlacklistReports = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "GetBlacklistReports",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/email/deliverability-dashboard/blacklist-report",
-	Code: 200})
-
-var GetConfigurationSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "GetConfigurationSet",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/email/configuration-sets/{ConfigurationSetName}",
-	Code: 200})
-
-var GetConfigurationSetEventDestinations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "GetConfigurationSetEventDestinations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/email/configuration-sets/{ConfigurationSetName}/event-destinations",
-	Code: 200})
-
-var GetDedicatedIp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "GetDedicatedIp",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/email/dedicated-ips/{Ip}",
-	Code: 200})
-
-var GetDedicatedIps = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "GetDedicatedIps",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/email/dedicated-ips",
-	Code: 200})
-
-var GetDeliverabilityDashboardOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "GetDeliverabilityDashboardOptions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/email/deliverability-dashboard",
-	Code: 200})
-
-var GetDeliverabilityTestReport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "GetDeliverabilityTestReport",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/email/deliverability-dashboard/test-reports/{ReportId}",
-	Code: 200})
-
-var GetDomainDeliverabilityCampaign = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "GetDomainDeliverabilityCampaign",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/email/deliverability-dashboard/campaigns/{CampaignId}",
-	Code: 200})
-
-var GetDomainStatisticsReport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "GetDomainStatisticsReport",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/email/deliverability-dashboard/statistics-report/{Domain}",
-	Code: 200})
-
-var GetEmailIdentity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "GetEmailIdentity",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/email/identities/{EmailIdentity}",
-	Code: 200})
-
-var ListConfigurationSets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "ListConfigurationSets",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/email/configuration-sets",
-	Code: 200})
-
-var ListDedicatedIpPools = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "ListDedicatedIpPools",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/email/dedicated-ip-pools",
-	Code: 200})
-
-var ListDeliverabilityTestReports = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "ListDeliverabilityTestReports",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/email/deliverability-dashboard/test-reports",
-	Code: 200})
-
-var ListDomainDeliverabilityCampaigns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "ListDomainDeliverabilityCampaigns",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/email/deliverability-dashboard/domains/{SubscribedDomain}/campaigns",
-	Code: 200})
-
-var ListEmailIdentities = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "ListEmailIdentities",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/email/identities",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/email/tags",
-	Code: 200})
-
-var PutAccountDedicatedIpWarmupAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "PutAccountDedicatedIpWarmupAttributes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/email/account/dedicated-ips/warmup",
-	Code: 200})
-
-var PutAccountSendingAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "PutAccountSendingAttributes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/email/account/sending",
-	Code: 200})
-
-var PutConfigurationSetDeliveryOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "PutConfigurationSetDeliveryOptions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/email/configuration-sets/{ConfigurationSetName}/delivery-options",
-	Code: 200})
-
-var PutConfigurationSetReputationOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "PutConfigurationSetReputationOptions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/email/configuration-sets/{ConfigurationSetName}/reputation-options",
-	Code: 200})
-
-var PutConfigurationSetSendingOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "PutConfigurationSetSendingOptions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/email/configuration-sets/{ConfigurationSetName}/sending",
-	Code: 200})
-
-var PutConfigurationSetTrackingOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "PutConfigurationSetTrackingOptions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/email/configuration-sets/{ConfigurationSetName}/tracking-options",
-	Code: 200})
-
-var PutDedicatedIpInPool = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "PutDedicatedIpInPool",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/email/dedicated-ips/{Ip}/pool",
-	Code: 200})
-
-var PutDedicatedIpWarmupAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "PutDedicatedIpWarmupAttributes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/email/dedicated-ips/{Ip}/warmup",
-	Code: 200})
-
-var PutDeliverabilityDashboardOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "PutDeliverabilityDashboardOption",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/email/deliverability-dashboard",
-	Code: 200})
-
-var PutEmailIdentityDkimAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "PutEmailIdentityDkimAttributes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/email/identities/{EmailIdentity}/dkim",
-	Code: 200})
-
-var PutEmailIdentityFeedbackAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "PutEmailIdentityFeedbackAttributes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/email/identities/{EmailIdentity}/feedback",
-	Code: 200})
-
-var PutEmailIdentityMailFromAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "PutEmailIdentityMailFromAttributes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/email/identities/{EmailIdentity}/mail-from",
-	Code: 200})
-
-var SendEmail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "SendEmail",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/email/outbound-emails",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/email/tags",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/email/tags",
-	Code: 200})
-
-var UpdateConfigurationSetEventDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "UpdateConfigurationSetEventDestination",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/email/configuration-sets/{ConfigurationSetName}/event-destinations/{EventDestinationName}",
-	Code: 200})
-
-var _AmazonPinpointEmailService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "AmazonPinpointEmailService",
-}, smithy.ShapeTypeService, 0)
-
-var AmazonPinpointEmailService = smithy.NewServiceSchema(_AmazonPinpointEmailService, "2018-07-26")
-
-var AccountSuspendedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "AccountSuspendedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var AccountSuspendedException_message *smithy.Schema
-
-var AlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "AlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var AlreadyExistsException_message *smithy.Schema
-
-var _AmazonResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "AmazonResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var BadRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var BadRequestException_message *smithy.Schema
-
-var BehaviorOnMxFailure = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "BehaviorOnMxFailure",
-}, smithy.ShapeTypeEnum, 2)
-var BehaviorOnMxFailure_USE_DEFAULT_VALUE *smithy.Schema
-
-var BehaviorOnMxFailure_REJECT_MESSAGE *smithy.Schema
-
-var _BlacklistEntries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "BlacklistEntries",
-}, smithy.ShapeTypeList, 1)
-var _BlacklistEntries_member *smithy.Schema
-
-var BlacklistEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "BlacklistEntry",
-}, smithy.ShapeTypeStructure, 3)
-var BlacklistEntry_RblName *smithy.Schema
-
-var BlacklistEntry_ListingTime *smithy.Schema
-
-var BlacklistEntry_Description *smithy.Schema
-
-var _BlacklistingDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "BlacklistingDescription",
-}, smithy.ShapeTypeString, 0)
-
-var _BlacklistItemName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "BlacklistItemName",
-}, smithy.ShapeTypeString, 0)
-
-var _BlacklistItemNames = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "BlacklistItemNames",
-}, smithy.ShapeTypeList, 1)
-var _BlacklistItemNames_member *smithy.Schema
-
-var _BlacklistReport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "BlacklistReport",
-}, smithy.ShapeTypeMap, 2)
-var _BlacklistReport_key *smithy.Schema
-
-var _BlacklistReport_value *smithy.Schema
-
-var Body = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "Body",
-}, smithy.ShapeTypeStructure, 2)
-var Body_Text *smithy.Schema
-
-var Body_Html *smithy.Schema
-
-var _CampaignId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "CampaignId",
-}, smithy.ShapeTypeString, 0)
-
-var _Charset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "Charset",
-}, smithy.ShapeTypeString, 0)
-
-var CloudWatchDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "CloudWatchDestination",
-}, smithy.ShapeTypeStructure, 1)
-var CloudWatchDestination_DimensionConfigurations *smithy.Schema
-
-var CloudWatchDimensionConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "CloudWatchDimensionConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var CloudWatchDimensionConfiguration_DimensionName *smithy.Schema
-
-var CloudWatchDimensionConfiguration_DimensionValueSource *smithy.Schema
-
-var CloudWatchDimensionConfiguration_DefaultDimensionValue *smithy.Schema
-
-var _CloudWatchDimensionConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "CloudWatchDimensionConfigurations",
-}, smithy.ShapeTypeList, 1)
-var _CloudWatchDimensionConfigurations_member *smithy.Schema
-
-var ConcurrentModificationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "ConcurrentModificationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var ConcurrentModificationException_message *smithy.Schema
-
-var _ConfigurationSetName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "ConfigurationSetName",
-}, smithy.ShapeTypeString, 0)
-
-var _ConfigurationSetNameList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "ConfigurationSetNameList",
-}, smithy.ShapeTypeList, 1)
-var _ConfigurationSetNameList_member *smithy.Schema
-
-var Content = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "Content",
-}, smithy.ShapeTypeStructure, 2)
-var Content_Data *smithy.Schema
-
-var Content_Charset *smithy.Schema
-
-var _CustomRedirectDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "CustomRedirectDomain",
-}, smithy.ShapeTypeString, 0)
-
-var DailyVolume = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "DailyVolume",
-}, smithy.ShapeTypeStructure, 3)
-var DailyVolume_StartDate *smithy.Schema
-
-var DailyVolume_VolumeStatistics *smithy.Schema
-
-var DailyVolume_DomainIspPlacements *smithy.Schema
-
-var _DailyVolumes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "DailyVolumes",
-}, smithy.ShapeTypeList, 1)
-var _DailyVolumes_member *smithy.Schema
-
-var DedicatedIp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "DedicatedIp",
-}, smithy.ShapeTypeStructure, 4)
-var DedicatedIp_Ip *smithy.Schema
-
-var DedicatedIp_WarmupStatus *smithy.Schema
-
-var DedicatedIp_WarmupPercentage *smithy.Schema
-
-var DedicatedIp_PoolName *smithy.Schema
-
-var _DedicatedIpList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "DedicatedIpList",
-}, smithy.ShapeTypeList, 1)
-var _DedicatedIpList_member *smithy.Schema
-
-var _DefaultDimensionValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "DefaultDimensionValue",
-}, smithy.ShapeTypeString, 0)
-
-var DeliverabilityDashboardAccountStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "DeliverabilityDashboardAccountStatus",
-}, smithy.ShapeTypeEnum, 3)
-var DeliverabilityDashboardAccountStatus_ACTIVE *smithy.Schema
-
-var DeliverabilityDashboardAccountStatus_PENDING_EXPIRATION *smithy.Schema
-
-var DeliverabilityDashboardAccountStatus_DISABLED *smithy.Schema
-
-var DeliverabilityTestReport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "DeliverabilityTestReport",
-}, smithy.ShapeTypeStructure, 6)
-var DeliverabilityTestReport_ReportId *smithy.Schema
-
-var DeliverabilityTestReport_ReportName *smithy.Schema
-
-var DeliverabilityTestReport_Subject *smithy.Schema
-
-var DeliverabilityTestReport_FromEmailAddress *smithy.Schema
-
-var DeliverabilityTestReport_CreateDate *smithy.Schema
-
-var DeliverabilityTestReport_DeliverabilityTestStatus *smithy.Schema
-
-var _DeliverabilityTestReports = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "DeliverabilityTestReports",
-}, smithy.ShapeTypeList, 1)
-var _DeliverabilityTestReports_member *smithy.Schema
-
-var DeliverabilityTestStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "DeliverabilityTestStatus",
-}, smithy.ShapeTypeEnum, 2)
-var DeliverabilityTestStatus_IN_PROGRESS *smithy.Schema
-
-var DeliverabilityTestStatus_COMPLETED *smithy.Schema
-
-var _DeliverabilityTestSubject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "DeliverabilityTestSubject",
-}, smithy.ShapeTypeString, 0)
-
-var DeliveryOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "DeliveryOptions",
-}, smithy.ShapeTypeStructure, 2)
-var DeliveryOptions_TlsPolicy *smithy.Schema
-
-var DeliveryOptions_SendingPoolName *smithy.Schema
-
-var Destination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "Destination",
-}, smithy.ShapeTypeStructure, 3)
-var Destination_ToAddresses *smithy.Schema
-
-var Destination_CcAddresses *smithy.Schema
-
-var Destination_BccAddresses *smithy.Schema
-
-var _DimensionName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "DimensionName",
-}, smithy.ShapeTypeString, 0)
-
-var DimensionValueSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "DimensionValueSource",
-}, smithy.ShapeTypeEnum, 3)
-var DimensionValueSource_MESSAGE_TAG *smithy.Schema
-
-var DimensionValueSource_EMAIL_HEADER *smithy.Schema
-
-var DimensionValueSource_LINK_TAG *smithy.Schema
-
-var DkimAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "DkimAttributes",
-}, smithy.ShapeTypeStructure, 3)
-var DkimAttributes_SigningEnabled *smithy.Schema
-
-var DkimAttributes_Status *smithy.Schema
-
-var DkimAttributes_Tokens *smithy.Schema
-
-var DkimStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "DkimStatus",
-}, smithy.ShapeTypeEnum, 5)
-var DkimStatus_PENDING *smithy.Schema
-
-var DkimStatus_SUCCESS *smithy.Schema
-
-var DkimStatus_FAILED *smithy.Schema
-
-var DkimStatus_TEMPORARY_FAILURE *smithy.Schema
-
-var DkimStatus_NOT_STARTED *smithy.Schema
-
-var _DnsToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "DnsToken",
-}, smithy.ShapeTypeString, 0)
-
-var _DnsTokenList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "DnsTokenList",
-}, smithy.ShapeTypeList, 1)
-var _DnsTokenList_member *smithy.Schema
-
-var _Domain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "Domain",
-}, smithy.ShapeTypeString, 0)
-
-var DomainDeliverabilityCampaign = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "DomainDeliverabilityCampaign",
-}, smithy.ShapeTypeStructure, 14)
-var DomainDeliverabilityCampaign_CampaignId *smithy.Schema
-
-var DomainDeliverabilityCampaign_ImageUrl *smithy.Schema
-
-var DomainDeliverabilityCampaign_Subject *smithy.Schema
-
-var DomainDeliverabilityCampaign_FromAddress *smithy.Schema
-
-var DomainDeliverabilityCampaign_SendingIps *smithy.Schema
-
-var DomainDeliverabilityCampaign_FirstSeenDateTime *smithy.Schema
-
-var DomainDeliverabilityCampaign_LastSeenDateTime *smithy.Schema
-
-var DomainDeliverabilityCampaign_InboxCount *smithy.Schema
-
-var DomainDeliverabilityCampaign_SpamCount *smithy.Schema
-
-var DomainDeliverabilityCampaign_ReadRate *smithy.Schema
-
-var DomainDeliverabilityCampaign_DeleteRate *smithy.Schema
-
-var DomainDeliverabilityCampaign_ReadDeleteRate *smithy.Schema
-
-var DomainDeliverabilityCampaign_ProjectedVolume *smithy.Schema
-
-var DomainDeliverabilityCampaign_Esps *smithy.Schema
-
-var _DomainDeliverabilityCampaignList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "DomainDeliverabilityCampaignList",
-}, smithy.ShapeTypeList, 1)
-var _DomainDeliverabilityCampaignList_member *smithy.Schema
-
-var DomainDeliverabilityTrackingOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "DomainDeliverabilityTrackingOption",
-}, smithy.ShapeTypeStructure, 3)
-var DomainDeliverabilityTrackingOption_Domain *smithy.Schema
-
-var DomainDeliverabilityTrackingOption_SubscriptionStartDate *smithy.Schema
-
-var DomainDeliverabilityTrackingOption_InboxPlacementTrackingOption *smithy.Schema
-
-var _DomainDeliverabilityTrackingOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "DomainDeliverabilityTrackingOptions",
-}, smithy.ShapeTypeList, 1)
-var _DomainDeliverabilityTrackingOptions_member *smithy.Schema
-
-var DomainIspPlacement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "DomainIspPlacement",
-}, smithy.ShapeTypeStructure, 5)
-var DomainIspPlacement_IspName *smithy.Schema
-
-var DomainIspPlacement_InboxRawCount *smithy.Schema
-
-var DomainIspPlacement_SpamRawCount *smithy.Schema
-
-var DomainIspPlacement_InboxPercentage *smithy.Schema
-
-var DomainIspPlacement_SpamPercentage *smithy.Schema
-
-var _DomainIspPlacements = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "DomainIspPlacements",
-}, smithy.ShapeTypeList, 1)
-var _DomainIspPlacements_member *smithy.Schema
-
-var _EmailAddress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "EmailAddress",
-}, smithy.ShapeTypeString, 0)
-
-var _EmailAddressList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "EmailAddressList",
-}, smithy.ShapeTypeList, 1)
-var _EmailAddressList_member *smithy.Schema
-
-var EmailContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "EmailContent",
-}, smithy.ShapeTypeStructure, 3)
-var EmailContent_Simple *smithy.Schema
-
-var EmailContent_Raw *smithy.Schema
-
-var EmailContent_Template *smithy.Schema
-
-var _Enabled = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "Enabled",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _Esp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "Esp",
-}, smithy.ShapeTypeString, 0)
-
-var _Esps = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "Esps",
-}, smithy.ShapeTypeList, 1)
-var _Esps_member *smithy.Schema
-
-var EventDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "EventDestination",
-}, smithy.ShapeTypeStructure, 7)
-var EventDestination_Name *smithy.Schema
-
-var EventDestination_Enabled *smithy.Schema
-
-var EventDestination_MatchingEventTypes *smithy.Schema
-
-var EventDestination_KinesisFirehoseDestination *smithy.Schema
-
-var EventDestination_CloudWatchDestination *smithy.Schema
-
-var EventDestination_SnsDestination *smithy.Schema
-
-var EventDestination_PinpointDestination *smithy.Schema
-
-var EventDestinationDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "EventDestinationDefinition",
-}, smithy.ShapeTypeStructure, 6)
-var EventDestinationDefinition_Enabled *smithy.Schema
-
-var EventDestinationDefinition_MatchingEventTypes *smithy.Schema
-
-var EventDestinationDefinition_KinesisFirehoseDestination *smithy.Schema
-
-var EventDestinationDefinition_CloudWatchDestination *smithy.Schema
-
-var EventDestinationDefinition_SnsDestination *smithy.Schema
-
-var EventDestinationDefinition_PinpointDestination *smithy.Schema
-
-var _EventDestinationName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "EventDestinationName",
-}, smithy.ShapeTypeString, 0)
-
-var _EventDestinations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "EventDestinations",
-}, smithy.ShapeTypeList, 1)
-var _EventDestinations_member *smithy.Schema
-
-var EventType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "EventType",
-}, smithy.ShapeTypeEnum, 8)
-var EventType_SEND *smithy.Schema
-
-var EventType_REJECT *smithy.Schema
-
-var EventType_BOUNCE *smithy.Schema
-
-var EventType_COMPLAINT *smithy.Schema
-
-var EventType_DELIVERY *smithy.Schema
-
-var EventType_OPEN *smithy.Schema
-
-var EventType_CLICK *smithy.Schema
-
-var EventType_RENDERING_FAILURE *smithy.Schema
-
-var _EventTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "EventTypes",
-}, smithy.ShapeTypeList, 1)
-var _EventTypes_member *smithy.Schema
-
-var _GeneralEnforcementStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "GeneralEnforcementStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _Identity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "Identity",
-}, smithy.ShapeTypeString, 0)
-
-var IdentityInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "IdentityInfo",
-}, smithy.ShapeTypeStructure, 3)
-var IdentityInfo_IdentityType *smithy.Schema
-
-var IdentityInfo_IdentityName *smithy.Schema
-
-var IdentityInfo_SendingEnabled *smithy.Schema
-
-var _IdentityInfoList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "IdentityInfoList",
-}, smithy.ShapeTypeList, 1)
-var _IdentityInfoList_member *smithy.Schema
-
-var IdentityType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "IdentityType",
-}, smithy.ShapeTypeEnum, 3)
-var IdentityType_EMAIL_ADDRESS *smithy.Schema
-
-var IdentityType_DOMAIN *smithy.Schema
-
-var IdentityType_MANAGED_DOMAIN *smithy.Schema
-
-var _ImageUrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "ImageUrl",
-}, smithy.ShapeTypeString, 0)
-
-var InboxPlacementTrackingOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "InboxPlacementTrackingOption",
-}, smithy.ShapeTypeStructure, 2)
-var InboxPlacementTrackingOption_Global *smithy.Schema
-
-var InboxPlacementTrackingOption_TrackedIsps *smithy.Schema
-
-var _Ip = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "Ip",
-}, smithy.ShapeTypeString, 0)
-
-var _IpList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "IpList",
-}, smithy.ShapeTypeList, 1)
-var _IpList_member *smithy.Schema
-
-var _IspName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "IspName",
-}, smithy.ShapeTypeString, 0)
-
-var _IspNameList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "IspNameList",
-}, smithy.ShapeTypeList, 1)
-var _IspNameList_member *smithy.Schema
-
-var IspPlacement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "IspPlacement",
-}, smithy.ShapeTypeStructure, 2)
-var IspPlacement_IspName *smithy.Schema
-
-var IspPlacement_PlacementStatistics *smithy.Schema
-
-var _IspPlacements = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "IspPlacements",
-}, smithy.ShapeTypeList, 1)
-var _IspPlacements_member *smithy.Schema
-
-var KinesisFirehoseDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "KinesisFirehoseDestination",
-}, smithy.ShapeTypeStructure, 2)
-var KinesisFirehoseDestination_IamRoleArn *smithy.Schema
-
-var KinesisFirehoseDestination_DeliveryStreamArn *smithy.Schema
-
-var _LastFreshStart = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "LastFreshStart",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var LimitExceededException_message *smithy.Schema
-
-var _ListOfDedicatedIpPools = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "ListOfDedicatedIpPools",
-}, smithy.ShapeTypeList, 1)
-var _ListOfDedicatedIpPools_member *smithy.Schema
-
-var MailFromAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "MailFromAttributes",
-}, smithy.ShapeTypeStructure, 3)
-var MailFromAttributes_MailFromDomain *smithy.Schema
-
-var MailFromAttributes_MailFromDomainStatus *smithy.Schema
-
-var MailFromAttributes_BehaviorOnMxFailure *smithy.Schema
-
-var _MailFromDomainName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "MailFromDomainName",
-}, smithy.ShapeTypeString, 0)
-
-var MailFromDomainNotVerifiedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "MailFromDomainNotVerifiedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var MailFromDomainNotVerifiedException_message *smithy.Schema
-
-var MailFromDomainStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "MailFromDomainStatus",
-}, smithy.ShapeTypeEnum, 4)
-var MailFromDomainStatus_PENDING *smithy.Schema
-
-var MailFromDomainStatus_SUCCESS *smithy.Schema
-
-var MailFromDomainStatus_FAILED *smithy.Schema
-
-var MailFromDomainStatus_TEMPORARY_FAILURE *smithy.Schema
-
-var _Max24HourSend = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "Max24HourSend",
-}, smithy.ShapeTypeDouble, 0)
-
-var _MaxItems = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "MaxItems",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxSendRate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "MaxSendRate",
-}, smithy.ShapeTypeDouble, 0)
-
-var Message = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "Message",
-}, smithy.ShapeTypeStructure, 2)
-var Message_Subject *smithy.Schema
-
-var Message_Body *smithy.Schema
-
-var _MessageContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "MessageContent",
-}, smithy.ShapeTypeString, 0)
-
-var _MessageData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "MessageData",
-}, smithy.ShapeTypeString, 0)
-
-var MessageRejected = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "MessageRejected",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var MessageRejected_message *smithy.Schema
-
-var MessageTag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "MessageTag",
-}, smithy.ShapeTypeStructure, 2)
-var MessageTag_Name *smithy.Schema
-
-var MessageTag_Value *smithy.Schema
-
-var _MessageTagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "MessageTagList",
-}, smithy.ShapeTypeList, 1)
-var _MessageTagList_member *smithy.Schema
-
-var _MessageTagName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "MessageTagName",
-}, smithy.ShapeTypeString, 0)
-
-var _MessageTagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "MessageTagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var NotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var NotFoundException_message *smithy.Schema
-
-var _OutboundMessageId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "OutboundMessageId",
-}, smithy.ShapeTypeString, 0)
-
-var OverallVolume = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "OverallVolume",
-}, smithy.ShapeTypeStructure, 3)
-var OverallVolume_VolumeStatistics *smithy.Schema
-
-var OverallVolume_ReadRatePercent *smithy.Schema
-
-var OverallVolume_DomainIspPlacements *smithy.Schema
-
-var _Percentage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "Percentage",
-}, smithy.ShapeTypeDouble, 0)
-
-var _Percentage100Wrapper = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "Percentage100Wrapper",
-}, smithy.ShapeTypeInteger, 0)
-
-var PinpointDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "PinpointDestination",
-}, smithy.ShapeTypeStructure, 1)
-var PinpointDestination_ApplicationArn *smithy.Schema
-
-var PlacementStatistics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "PlacementStatistics",
-}, smithy.ShapeTypeStructure, 5)
-var PlacementStatistics_InboxPercentage *smithy.Schema
-
-var PlacementStatistics_SpamPercentage *smithy.Schema
-
-var PlacementStatistics_MissingPercentage *smithy.Schema
-
-var PlacementStatistics_SpfPercentage *smithy.Schema
-
-var PlacementStatistics_DkimPercentage *smithy.Schema
-
-var _PoolName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "PoolName",
-}, smithy.ShapeTypeString, 0)
-
-var RawMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "RawMessage",
-}, smithy.ShapeTypeStructure, 1)
-var RawMessage_Data *smithy.Schema
-
-var _RawMessageData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "RawMessageData",
-}, smithy.ShapeTypeBlob, 0)
-
-var _RblName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "RblName",
-}, smithy.ShapeTypeString, 0)
-
-var _ReportId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "ReportId",
-}, smithy.ShapeTypeString, 0)
-
-var _ReportName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "ReportName",
-}, smithy.ShapeTypeString, 0)
-
-var ReputationOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "ReputationOptions",
-}, smithy.ShapeTypeStructure, 2)
-var ReputationOptions_ReputationMetricsEnabled *smithy.Schema
-
-var ReputationOptions_LastFreshStart *smithy.Schema
-
-var SendingOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "SendingOptions",
-}, smithy.ShapeTypeStructure, 1)
-var SendingOptions_SendingEnabled *smithy.Schema
-
-var SendingPausedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "SendingPausedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var SendingPausedException_message *smithy.Schema
-
-var _SendingPoolName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "SendingPoolName",
-}, smithy.ShapeTypeString, 0)
-
-var SendQuota = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "SendQuota",
-}, smithy.ShapeTypeStructure, 3)
-var SendQuota_Max24HourSend *smithy.Schema
-
-var SendQuota_MaxSendRate *smithy.Schema
-
-var SendQuota_SentLast24Hours *smithy.Schema
-
-var _SentLast24Hours = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "SentLast24Hours",
-}, smithy.ShapeTypeDouble, 0)
-
-var SnsDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "SnsDestination",
-}, smithy.ShapeTypeStructure, 1)
-var SnsDestination_TopicArn *smithy.Schema
-
-var _Subject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "Subject",
-}, smithy.ShapeTypeString, 0)
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var Template = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "Template",
-}, smithy.ShapeTypeStructure, 2)
-var Template_TemplateArn *smithy.Schema
-
-var Template_TemplateData *smithy.Schema
-
-var _TemplateArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "TemplateArn",
-}, smithy.ShapeTypeString, 0)
-
-var _TemplateData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "TemplateData",
-}, smithy.ShapeTypeString, 0)
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var TlsPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "TlsPolicy",
-}, smithy.ShapeTypeEnum, 2)
-var TlsPolicy_REQUIRE *smithy.Schema
-
-var TlsPolicy_OPTIONAL *smithy.Schema
-
-var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var TooManyRequestsException_message *smithy.Schema
-
-var TrackingOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "TrackingOptions",
-}, smithy.ShapeTypeStructure, 1)
-var TrackingOptions_CustomRedirectDomain *smithy.Schema
-
-var _Volume = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "Volume",
-}, smithy.ShapeTypeLong, 0)
-
-var VolumeStatistics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "VolumeStatistics",
-}, smithy.ShapeTypeStructure, 4)
-var VolumeStatistics_InboxRawCount *smithy.Schema
-
-var VolumeStatistics_SpamRawCount *smithy.Schema
-
-var VolumeStatistics_ProjectedInbox *smithy.Schema
-
-var VolumeStatistics_ProjectedSpam *smithy.Schema
-
-var WarmupStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "WarmupStatus",
-}, smithy.ShapeTypeEnum, 2)
-var WarmupStatus_IN_PROGRESS *smithy.Schema
-
-var WarmupStatus_DONE *smithy.Schema
-
-var CreateConfigurationSetEventDestinationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "CreateConfigurationSetEventDestinationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateConfigurationSetEventDestinationRequest_ConfigurationSetName *smithy.Schema
-
-var CreateConfigurationSetEventDestinationRequest_EventDestinationName *smithy.Schema
-
-var CreateConfigurationSetEventDestinationRequest_EventDestination *smithy.Schema
-
-var CreateConfigurationSetEventDestinationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "CreateConfigurationSetEventDestinationResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var CreateConfigurationSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "CreateConfigurationSetRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateConfigurationSetRequest_ConfigurationSetName *smithy.Schema
-
-var CreateConfigurationSetRequest_TrackingOptions *smithy.Schema
-
-var CreateConfigurationSetRequest_DeliveryOptions *smithy.Schema
-
-var CreateConfigurationSetRequest_ReputationOptions *smithy.Schema
-
-var CreateConfigurationSetRequest_SendingOptions *smithy.Schema
-
-var CreateConfigurationSetRequest_Tags *smithy.Schema
-
-var CreateConfigurationSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "CreateConfigurationSetResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var CreateDedicatedIpPoolRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "CreateDedicatedIpPoolRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CreateDedicatedIpPoolRequest_PoolName *smithy.Schema
-
-var CreateDedicatedIpPoolRequest_Tags *smithy.Schema
-
-var CreateDedicatedIpPoolResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "CreateDedicatedIpPoolResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var CreateDeliverabilityTestReportRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "CreateDeliverabilityTestReportRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateDeliverabilityTestReportRequest_ReportName *smithy.Schema
-
-var CreateDeliverabilityTestReportRequest_FromEmailAddress *smithy.Schema
-
-var CreateDeliverabilityTestReportRequest_Content *smithy.Schema
-
-var CreateDeliverabilityTestReportRequest_Tags *smithy.Schema
-
-var CreateDeliverabilityTestReportResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "CreateDeliverabilityTestReportResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateDeliverabilityTestReportResponse_ReportId *smithy.Schema
-
-var CreateDeliverabilityTestReportResponse_DeliverabilityTestStatus *smithy.Schema
-
-var CreateEmailIdentityRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "CreateEmailIdentityRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CreateEmailIdentityRequest_EmailIdentity *smithy.Schema
-
-var CreateEmailIdentityRequest_Tags *smithy.Schema
-
-var CreateEmailIdentityResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "CreateEmailIdentityResponse",
-}, smithy.ShapeTypeStructure, 3)
-var CreateEmailIdentityResponse_IdentityType *smithy.Schema
-
-var CreateEmailIdentityResponse_VerifiedForSendingStatus *smithy.Schema
-
-var CreateEmailIdentityResponse_DkimAttributes *smithy.Schema
-
-var DeleteConfigurationSetEventDestinationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "DeleteConfigurationSetEventDestinationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteConfigurationSetEventDestinationRequest_ConfigurationSetName *smithy.Schema
-
-var DeleteConfigurationSetEventDestinationRequest_EventDestinationName *smithy.Schema
-
-var DeleteConfigurationSetEventDestinationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "DeleteConfigurationSetEventDestinationResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteConfigurationSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "DeleteConfigurationSetRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteConfigurationSetRequest_ConfigurationSetName *smithy.Schema
-
-var DeleteConfigurationSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "DeleteConfigurationSetResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteDedicatedIpPoolRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "DeleteDedicatedIpPoolRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDedicatedIpPoolRequest_PoolName *smithy.Schema
-
-var DeleteDedicatedIpPoolResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "DeleteDedicatedIpPoolResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteEmailIdentityRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "DeleteEmailIdentityRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteEmailIdentityRequest_EmailIdentity *smithy.Schema
-
-var DeleteEmailIdentityResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "DeleteEmailIdentityResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetAccountRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "GetAccountRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetAccountResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "GetAccountResponse",
-}, smithy.ShapeTypeStructure, 5)
-var GetAccountResponse_SendQuota *smithy.Schema
-
-var GetAccountResponse_SendingEnabled *smithy.Schema
-
-var GetAccountResponse_DedicatedIpAutoWarmupEnabled *smithy.Schema
-
-var GetAccountResponse_EnforcementStatus *smithy.Schema
-
-var GetAccountResponse_ProductionAccessEnabled *smithy.Schema
-
-var GetBlacklistReportsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "GetBlacklistReportsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetBlacklistReportsRequest_BlacklistItemNames *smithy.Schema
-
-var GetBlacklistReportsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "GetBlacklistReportsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetBlacklistReportsResponse_BlacklistReport *smithy.Schema
-
-var GetConfigurationSetEventDestinationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "GetConfigurationSetEventDestinationsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetConfigurationSetEventDestinationsRequest_ConfigurationSetName *smithy.Schema
-
-var GetConfigurationSetEventDestinationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "GetConfigurationSetEventDestinationsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetConfigurationSetEventDestinationsResponse_EventDestinations *smithy.Schema
-
-var GetConfigurationSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "GetConfigurationSetRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetConfigurationSetRequest_ConfigurationSetName *smithy.Schema
-
-var GetConfigurationSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "GetConfigurationSetResponse",
-}, smithy.ShapeTypeStructure, 6)
-var GetConfigurationSetResponse_ConfigurationSetName *smithy.Schema
-
-var GetConfigurationSetResponse_TrackingOptions *smithy.Schema
-
-var GetConfigurationSetResponse_DeliveryOptions *smithy.Schema
-
-var GetConfigurationSetResponse_ReputationOptions *smithy.Schema
-
-var GetConfigurationSetResponse_SendingOptions *smithy.Schema
-
-var GetConfigurationSetResponse_Tags *smithy.Schema
-
-var GetDedicatedIpRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "GetDedicatedIpRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetDedicatedIpRequest_Ip *smithy.Schema
-
-var GetDedicatedIpResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "GetDedicatedIpResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetDedicatedIpResponse_DedicatedIp *smithy.Schema
-
-var GetDedicatedIpsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "GetDedicatedIpsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetDedicatedIpsRequest_PoolName *smithy.Schema
-
-var GetDedicatedIpsRequest_NextToken *smithy.Schema
-
-var GetDedicatedIpsRequest_PageSize *smithy.Schema
-
-var GetDedicatedIpsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "GetDedicatedIpsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetDedicatedIpsResponse_DedicatedIps *smithy.Schema
-
-var GetDedicatedIpsResponse_NextToken *smithy.Schema
-
-var GetDeliverabilityDashboardOptionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "GetDeliverabilityDashboardOptionsRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetDeliverabilityDashboardOptionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "GetDeliverabilityDashboardOptionsResponse",
-}, smithy.ShapeTypeStructure, 5)
-var GetDeliverabilityDashboardOptionsResponse_DashboardEnabled *smithy.Schema
-
-var GetDeliverabilityDashboardOptionsResponse_SubscriptionExpiryDate *smithy.Schema
-
-var GetDeliverabilityDashboardOptionsResponse_AccountStatus *smithy.Schema
-
-var GetDeliverabilityDashboardOptionsResponse_ActiveSubscribedDomains *smithy.Schema
-
-var GetDeliverabilityDashboardOptionsResponse_PendingExpirationSubscribedDomains *smithy.Schema
-
-var GetDeliverabilityTestReportRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "GetDeliverabilityTestReportRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetDeliverabilityTestReportRequest_ReportId *smithy.Schema
-
-var GetDeliverabilityTestReportResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "GetDeliverabilityTestReportResponse",
-}, smithy.ShapeTypeStructure, 5)
-var GetDeliverabilityTestReportResponse_DeliverabilityTestReport *smithy.Schema
-
-var GetDeliverabilityTestReportResponse_OverallPlacement *smithy.Schema
-
-var GetDeliverabilityTestReportResponse_IspPlacements *smithy.Schema
-
-var GetDeliverabilityTestReportResponse_Message *smithy.Schema
-
-var GetDeliverabilityTestReportResponse_Tags *smithy.Schema
-
-var GetDomainDeliverabilityCampaignRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "GetDomainDeliverabilityCampaignRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetDomainDeliverabilityCampaignRequest_CampaignId *smithy.Schema
-
-var GetDomainDeliverabilityCampaignResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "GetDomainDeliverabilityCampaignResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetDomainDeliverabilityCampaignResponse_DomainDeliverabilityCampaign *smithy.Schema
-
-var GetDomainStatisticsReportRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "GetDomainStatisticsReportRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetDomainStatisticsReportRequest_Domain *smithy.Schema
-
-var GetDomainStatisticsReportRequest_StartDate *smithy.Schema
-
-var GetDomainStatisticsReportRequest_EndDate *smithy.Schema
-
-var GetDomainStatisticsReportResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "GetDomainStatisticsReportResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetDomainStatisticsReportResponse_OverallVolume *smithy.Schema
-
-var GetDomainStatisticsReportResponse_DailyVolumes *smithy.Schema
-
-var GetEmailIdentityRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "GetEmailIdentityRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetEmailIdentityRequest_EmailIdentity *smithy.Schema
-
-var GetEmailIdentityResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "GetEmailIdentityResponse",
-}, smithy.ShapeTypeStructure, 6)
-var GetEmailIdentityResponse_IdentityType *smithy.Schema
-
-var GetEmailIdentityResponse_FeedbackForwardingStatus *smithy.Schema
-
-var GetEmailIdentityResponse_VerifiedForSendingStatus *smithy.Schema
-
-var GetEmailIdentityResponse_DkimAttributes *smithy.Schema
-
-var GetEmailIdentityResponse_MailFromAttributes *smithy.Schema
-
-var GetEmailIdentityResponse_Tags *smithy.Schema
-
-var ListConfigurationSetsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "ListConfigurationSetsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListConfigurationSetsRequest_NextToken *smithy.Schema
-
-var ListConfigurationSetsRequest_PageSize *smithy.Schema
-
-var ListConfigurationSetsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "ListConfigurationSetsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListConfigurationSetsResponse_ConfigurationSets *smithy.Schema
-
-var ListConfigurationSetsResponse_NextToken *smithy.Schema
-
-var ListDedicatedIpPoolsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "ListDedicatedIpPoolsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListDedicatedIpPoolsRequest_NextToken *smithy.Schema
-
-var ListDedicatedIpPoolsRequest_PageSize *smithy.Schema
-
-var ListDedicatedIpPoolsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "ListDedicatedIpPoolsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListDedicatedIpPoolsResponse_DedicatedIpPools *smithy.Schema
-
-var ListDedicatedIpPoolsResponse_NextToken *smithy.Schema
-
-var ListDeliverabilityTestReportsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "ListDeliverabilityTestReportsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListDeliverabilityTestReportsRequest_NextToken *smithy.Schema
-
-var ListDeliverabilityTestReportsRequest_PageSize *smithy.Schema
-
-var ListDeliverabilityTestReportsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "ListDeliverabilityTestReportsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListDeliverabilityTestReportsResponse_DeliverabilityTestReports *smithy.Schema
-
-var ListDeliverabilityTestReportsResponse_NextToken *smithy.Schema
-
-var ListDomainDeliverabilityCampaignsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "ListDomainDeliverabilityCampaignsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListDomainDeliverabilityCampaignsRequest_StartDate *smithy.Schema
-
-var ListDomainDeliverabilityCampaignsRequest_EndDate *smithy.Schema
-
-var ListDomainDeliverabilityCampaignsRequest_SubscribedDomain *smithy.Schema
-
-var ListDomainDeliverabilityCampaignsRequest_NextToken *smithy.Schema
-
-var ListDomainDeliverabilityCampaignsRequest_PageSize *smithy.Schema
-
-var ListDomainDeliverabilityCampaignsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "ListDomainDeliverabilityCampaignsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListDomainDeliverabilityCampaignsResponse_DomainDeliverabilityCampaigns *smithy.Schema
-
-var ListDomainDeliverabilityCampaignsResponse_NextToken *smithy.Schema
-
-var ListEmailIdentitiesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "ListEmailIdentitiesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListEmailIdentitiesRequest_NextToken *smithy.Schema
-
-var ListEmailIdentitiesRequest_PageSize *smithy.Schema
-
-var ListEmailIdentitiesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "ListEmailIdentitiesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListEmailIdentitiesResponse_EmailIdentities *smithy.Schema
-
-var ListEmailIdentitiesResponse_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var PutAccountDedicatedIpWarmupAttributesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "PutAccountDedicatedIpWarmupAttributesRequest",
-}, smithy.ShapeTypeStructure, 1)
-var PutAccountDedicatedIpWarmupAttributesRequest_AutoWarmupEnabled *smithy.Schema
-
-var PutAccountDedicatedIpWarmupAttributesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "PutAccountDedicatedIpWarmupAttributesResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var PutAccountSendingAttributesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "PutAccountSendingAttributesRequest",
-}, smithy.ShapeTypeStructure, 1)
-var PutAccountSendingAttributesRequest_SendingEnabled *smithy.Schema
-
-var PutAccountSendingAttributesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "PutAccountSendingAttributesResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var PutConfigurationSetDeliveryOptionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "PutConfigurationSetDeliveryOptionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var PutConfigurationSetDeliveryOptionsRequest_ConfigurationSetName *smithy.Schema
-
-var PutConfigurationSetDeliveryOptionsRequest_TlsPolicy *smithy.Schema
-
-var PutConfigurationSetDeliveryOptionsRequest_SendingPoolName *smithy.Schema
-
-var PutConfigurationSetDeliveryOptionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "PutConfigurationSetDeliveryOptionsResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var PutConfigurationSetReputationOptionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "PutConfigurationSetReputationOptionsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutConfigurationSetReputationOptionsRequest_ConfigurationSetName *smithy.Schema
-
-var PutConfigurationSetReputationOptionsRequest_ReputationMetricsEnabled *smithy.Schema
-
-var PutConfigurationSetReputationOptionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "PutConfigurationSetReputationOptionsResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var PutConfigurationSetSendingOptionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "PutConfigurationSetSendingOptionsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutConfigurationSetSendingOptionsRequest_ConfigurationSetName *smithy.Schema
-
-var PutConfigurationSetSendingOptionsRequest_SendingEnabled *smithy.Schema
-
-var PutConfigurationSetSendingOptionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "PutConfigurationSetSendingOptionsResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var PutConfigurationSetTrackingOptionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "PutConfigurationSetTrackingOptionsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutConfigurationSetTrackingOptionsRequest_ConfigurationSetName *smithy.Schema
-
-var PutConfigurationSetTrackingOptionsRequest_CustomRedirectDomain *smithy.Schema
-
-var PutConfigurationSetTrackingOptionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "PutConfigurationSetTrackingOptionsResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var PutDedicatedIpInPoolRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "PutDedicatedIpInPoolRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutDedicatedIpInPoolRequest_Ip *smithy.Schema
-
-var PutDedicatedIpInPoolRequest_DestinationPoolName *smithy.Schema
-
-var PutDedicatedIpInPoolResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "PutDedicatedIpInPoolResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var PutDedicatedIpWarmupAttributesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "PutDedicatedIpWarmupAttributesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutDedicatedIpWarmupAttributesRequest_Ip *smithy.Schema
-
-var PutDedicatedIpWarmupAttributesRequest_WarmupPercentage *smithy.Schema
-
-var PutDedicatedIpWarmupAttributesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "PutDedicatedIpWarmupAttributesResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var PutDeliverabilityDashboardOptionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "PutDeliverabilityDashboardOptionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutDeliverabilityDashboardOptionRequest_DashboardEnabled *smithy.Schema
-
-var PutDeliverabilityDashboardOptionRequest_SubscribedDomains *smithy.Schema
-
-var PutDeliverabilityDashboardOptionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "PutDeliverabilityDashboardOptionResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var PutEmailIdentityDkimAttributesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "PutEmailIdentityDkimAttributesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutEmailIdentityDkimAttributesRequest_EmailIdentity *smithy.Schema
-
-var PutEmailIdentityDkimAttributesRequest_SigningEnabled *smithy.Schema
-
-var PutEmailIdentityDkimAttributesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "PutEmailIdentityDkimAttributesResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var PutEmailIdentityFeedbackAttributesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "PutEmailIdentityFeedbackAttributesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutEmailIdentityFeedbackAttributesRequest_EmailIdentity *smithy.Schema
-
-var PutEmailIdentityFeedbackAttributesRequest_EmailForwardingEnabled *smithy.Schema
-
-var PutEmailIdentityFeedbackAttributesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "PutEmailIdentityFeedbackAttributesResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var PutEmailIdentityMailFromAttributesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "PutEmailIdentityMailFromAttributesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var PutEmailIdentityMailFromAttributesRequest_EmailIdentity *smithy.Schema
-
-var PutEmailIdentityMailFromAttributesRequest_MailFromDomain *smithy.Schema
-
-var PutEmailIdentityMailFromAttributesRequest_BehaviorOnMxFailure *smithy.Schema
-
-var PutEmailIdentityMailFromAttributesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "PutEmailIdentityMailFromAttributesResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var SendEmailRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "SendEmailRequest",
-}, smithy.ShapeTypeStructure, 7)
-var SendEmailRequest_FromEmailAddress *smithy.Schema
-
-var SendEmailRequest_Destination *smithy.Schema
-
-var SendEmailRequest_ReplyToAddresses *smithy.Schema
-
-var SendEmailRequest_FeedbackForwardingEmailAddress *smithy.Schema
-
-var SendEmailRequest_Content *smithy.Schema
-
-var SendEmailRequest_EmailTags *smithy.Schema
-
-var SendEmailRequest_ConfigurationSetName *smithy.Schema
-
-var SendEmailResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "SendEmailResponse",
-}, smithy.ShapeTypeStructure, 1)
-var SendEmailResponse_MessageId *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceArn *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceArn *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateConfigurationSetEventDestinationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "UpdateConfigurationSetEventDestinationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateConfigurationSetEventDestinationRequest_ConfigurationSetName *smithy.Schema
-
-var UpdateConfigurationSetEventDestinationRequest_EventDestinationName *smithy.Schema
-
-var UpdateConfigurationSetEventDestinationRequest_EventDestination *smithy.Schema
-
-var UpdateConfigurationSetEventDestinationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pinpointemail",
-	Name:      "UpdateConfigurationSetEventDestinationResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccountSuspendedException_message = AccountSuspendedException.AddMember("message", _ErrorMessage)
-
-	AlreadyExistsException_message = AlreadyExistsException.AddMember("message", _ErrorMessage)
-
-	BadRequestException_message = BadRequestException.AddMember("message", _ErrorMessage)
-
-	BehaviorOnMxFailure_USE_DEFAULT_VALUE = BehaviorOnMxFailure.AddMember("USE_DEFAULT_VALUE", smithyprelude.Unit)
-
-	BehaviorOnMxFailure_REJECT_MESSAGE = BehaviorOnMxFailure.AddMember("REJECT_MESSAGE", smithyprelude.Unit)
-
-	BlacklistEntry_RblName = BlacklistEntry.AddMember("RblName", _RblName)
-
-	BlacklistEntry_ListingTime = BlacklistEntry.AddMember("ListingTime", _Timestamp)
-
-	BlacklistEntry_Description = BlacklistEntry.AddMember("Description", _BlacklistingDescription)
-
-	_BlacklistEntries_member = _BlacklistEntries.AddMember("member", BlacklistEntry)
-
-	_BlacklistItemNames_member = _BlacklistItemNames.AddMember("member", _BlacklistItemName)
-
-	_BlacklistReport_key = _BlacklistReport.AddMember("key", _BlacklistItemName)
-
-	_BlacklistReport_value = _BlacklistReport.AddMember("value", _BlacklistEntries)
-
-	Content_Data = Content.AddMember("Data", _MessageData)
-
-	Content_Charset = Content.AddMember("Charset", _Charset)
-
-	Body_Text = Body.AddMember("Text", Content)
-
-	Body_Html = Body.AddMember("Html", Content)
-
-	DimensionValueSource_MESSAGE_TAG = DimensionValueSource.AddMember("MESSAGE_TAG", smithyprelude.Unit)
-
-	DimensionValueSource_EMAIL_HEADER = DimensionValueSource.AddMember("EMAIL_HEADER", smithyprelude.Unit)
-
-	DimensionValueSource_LINK_TAG = DimensionValueSource.AddMember("LINK_TAG", smithyprelude.Unit)
-
-	CloudWatchDimensionConfiguration_DimensionName = CloudWatchDimensionConfiguration.AddMember("DimensionName", _DimensionName)
-
-	CloudWatchDimensionConfiguration_DimensionValueSource = CloudWatchDimensionConfiguration.AddMember("DimensionValueSource", DimensionValueSource)
-
-	CloudWatchDimensionConfiguration_DefaultDimensionValue = CloudWatchDimensionConfiguration.AddMember("DefaultDimensionValue", _DefaultDimensionValue)
-
-	_CloudWatchDimensionConfigurations_member = _CloudWatchDimensionConfigurations.AddMember("member", CloudWatchDimensionConfiguration)
-
-	CloudWatchDestination_DimensionConfigurations = CloudWatchDestination.AddMember("DimensionConfigurations", _CloudWatchDimensionConfigurations)
-
-	ConcurrentModificationException_message = ConcurrentModificationException.AddMember("message", _ErrorMessage)
-
-	_ConfigurationSetNameList_member = _ConfigurationSetNameList.AddMember("member", _ConfigurationSetName)
-
-	VolumeStatistics_InboxRawCount = VolumeStatistics.AddMember("InboxRawCount", _Volume)
-
-	VolumeStatistics_SpamRawCount = VolumeStatistics.AddMember("SpamRawCount", _Volume)
-
-	VolumeStatistics_ProjectedInbox = VolumeStatistics.AddMember("ProjectedInbox", _Volume)
-
-	VolumeStatistics_ProjectedSpam = VolumeStatistics.AddMember("ProjectedSpam", _Volume)
-
-	DomainIspPlacement_IspName = DomainIspPlacement.AddMember("IspName", _IspName)
-
-	DomainIspPlacement_InboxRawCount = DomainIspPlacement.AddMember("InboxRawCount", _Volume)
-
-	DomainIspPlacement_SpamRawCount = DomainIspPlacement.AddMember("SpamRawCount", _Volume)
-
-	DomainIspPlacement_InboxPercentage = DomainIspPlacement.AddMember("InboxPercentage", _Percentage)
-
-	DomainIspPlacement_SpamPercentage = DomainIspPlacement.AddMember("SpamPercentage", _Percentage)
-
-	_DomainIspPlacements_member = _DomainIspPlacements.AddMember("member", DomainIspPlacement)
-
-	DailyVolume_StartDate = DailyVolume.AddMember("StartDate", _Timestamp)
-
-	DailyVolume_VolumeStatistics = DailyVolume.AddMember("VolumeStatistics", VolumeStatistics)
-
-	DailyVolume_DomainIspPlacements = DailyVolume.AddMember("DomainIspPlacements", _DomainIspPlacements)
-
-	_DailyVolumes_member = _DailyVolumes.AddMember("member", DailyVolume)
-
-	WarmupStatus_IN_PROGRESS = WarmupStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	WarmupStatus_DONE = WarmupStatus.AddMember("DONE", smithyprelude.Unit)
-
-	DedicatedIp_Ip = DedicatedIp.AddMember("Ip", _Ip)
-
-	DedicatedIp_WarmupStatus = DedicatedIp.AddMember("WarmupStatus", WarmupStatus)
-
-	DedicatedIp_WarmupPercentage = DedicatedIp.AddMember("WarmupPercentage", _Percentage100Wrapper)
-
-	DedicatedIp_PoolName = DedicatedIp.AddMember("PoolName", _PoolName)
-
-	_DedicatedIpList_member = _DedicatedIpList.AddMember("member", DedicatedIp)
-
-	DeliverabilityDashboardAccountStatus_ACTIVE = DeliverabilityDashboardAccountStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	DeliverabilityDashboardAccountStatus_PENDING_EXPIRATION = DeliverabilityDashboardAccountStatus.AddMember("PENDING_EXPIRATION", smithyprelude.Unit)
-
-	DeliverabilityDashboardAccountStatus_DISABLED = DeliverabilityDashboardAccountStatus.AddMember("DISABLED", smithyprelude.Unit)
-
-	DeliverabilityTestStatus_IN_PROGRESS = DeliverabilityTestStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	DeliverabilityTestStatus_COMPLETED = DeliverabilityTestStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	DeliverabilityTestReport_ReportId = DeliverabilityTestReport.AddMember("ReportId", _ReportId)
-
-	DeliverabilityTestReport_ReportName = DeliverabilityTestReport.AddMember("ReportName", _ReportName)
-
-	DeliverabilityTestReport_Subject = DeliverabilityTestReport.AddMember("Subject", _DeliverabilityTestSubject)
-
-	DeliverabilityTestReport_FromEmailAddress = DeliverabilityTestReport.AddMember("FromEmailAddress", _EmailAddress)
-
-	DeliverabilityTestReport_CreateDate = DeliverabilityTestReport.AddMember("CreateDate", _Timestamp)
-
-	DeliverabilityTestReport_DeliverabilityTestStatus = DeliverabilityTestReport.AddMember("DeliverabilityTestStatus", DeliverabilityTestStatus)
-
-	_DeliverabilityTestReports_member = _DeliverabilityTestReports.AddMember("member", DeliverabilityTestReport)
-
-	TlsPolicy_REQUIRE = TlsPolicy.AddMember("REQUIRE", smithyprelude.Unit)
-
-	TlsPolicy_OPTIONAL = TlsPolicy.AddMember("OPTIONAL", smithyprelude.Unit)
-
-	DeliveryOptions_TlsPolicy = DeliveryOptions.AddMember("TlsPolicy", TlsPolicy)
-
-	DeliveryOptions_SendingPoolName = DeliveryOptions.AddMember("SendingPoolName", _PoolName)
-
-	_EmailAddressList_member = _EmailAddressList.AddMember("member", _EmailAddress)
-
-	Destination_ToAddresses = Destination.AddMember("ToAddresses", _EmailAddressList)
-
-	Destination_CcAddresses = Destination.AddMember("CcAddresses", _EmailAddressList)
-
-	Destination_BccAddresses = Destination.AddMember("BccAddresses", _EmailAddressList)
-
-	DkimStatus_PENDING = DkimStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	DkimStatus_SUCCESS = DkimStatus.AddMember("SUCCESS", smithyprelude.Unit)
-
-	DkimStatus_FAILED = DkimStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	DkimStatus_TEMPORARY_FAILURE = DkimStatus.AddMember("TEMPORARY_FAILURE", smithyprelude.Unit)
-
-	DkimStatus_NOT_STARTED = DkimStatus.AddMember("NOT_STARTED", smithyprelude.Unit)
-
-	_DnsTokenList_member = _DnsTokenList.AddMember("member", _DnsToken)
-
-	DkimAttributes_SigningEnabled = DkimAttributes.AddMember("SigningEnabled", _Enabled)
-
-	DkimAttributes_Status = DkimAttributes.AddMember("Status", DkimStatus)
-
-	DkimAttributes_Tokens = DkimAttributes.AddMember("Tokens", _DnsTokenList)
-
-	_IpList_member = _IpList.AddMember("member", _Ip)
-
-	_Esps_member = _Esps.AddMember("member", _Esp)
-
-	DomainDeliverabilityCampaign_CampaignId = DomainDeliverabilityCampaign.AddMember("CampaignId", _CampaignId)
-
-	DomainDeliverabilityCampaign_ImageUrl = DomainDeliverabilityCampaign.AddMember("ImageUrl", _ImageUrl)
-
-	DomainDeliverabilityCampaign_Subject = DomainDeliverabilityCampaign.AddMember("Subject", _Subject)
-
-	DomainDeliverabilityCampaign_FromAddress = DomainDeliverabilityCampaign.AddMember("FromAddress", _Identity)
-
-	DomainDeliverabilityCampaign_SendingIps = DomainDeliverabilityCampaign.AddMember("SendingIps", _IpList)
-
-	DomainDeliverabilityCampaign_FirstSeenDateTime = DomainDeliverabilityCampaign.AddMember("FirstSeenDateTime", _Timestamp)
-
-	DomainDeliverabilityCampaign_LastSeenDateTime = DomainDeliverabilityCampaign.AddMember("LastSeenDateTime", _Timestamp)
-
-	DomainDeliverabilityCampaign_InboxCount = DomainDeliverabilityCampaign.AddMember("InboxCount", _Volume)
-
-	DomainDeliverabilityCampaign_SpamCount = DomainDeliverabilityCampaign.AddMember("SpamCount", _Volume)
-
-	DomainDeliverabilityCampaign_ReadRate = DomainDeliverabilityCampaign.AddMember("ReadRate", _Percentage)
-
-	DomainDeliverabilityCampaign_DeleteRate = DomainDeliverabilityCampaign.AddMember("DeleteRate", _Percentage)
-
-	DomainDeliverabilityCampaign_ReadDeleteRate = DomainDeliverabilityCampaign.AddMember("ReadDeleteRate", _Percentage)
-
-	DomainDeliverabilityCampaign_ProjectedVolume = DomainDeliverabilityCampaign.AddMember("ProjectedVolume", _Volume)
-
-	DomainDeliverabilityCampaign_Esps = DomainDeliverabilityCampaign.AddMember("Esps", _Esps)
-
-	_DomainDeliverabilityCampaignList_member = _DomainDeliverabilityCampaignList.AddMember("member", DomainDeliverabilityCampaign)
-
-	_IspNameList_member = _IspNameList.AddMember("member", _IspName)
-
-	InboxPlacementTrackingOption_Global = InboxPlacementTrackingOption.AddMember("Global", _Enabled)
-
-	InboxPlacementTrackingOption_TrackedIsps = InboxPlacementTrackingOption.AddMember("TrackedIsps", _IspNameList)
-
-	DomainDeliverabilityTrackingOption_Domain = DomainDeliverabilityTrackingOption.AddMember("Domain", _Domain)
-
-	DomainDeliverabilityTrackingOption_SubscriptionStartDate = DomainDeliverabilityTrackingOption.AddMember("SubscriptionStartDate", _Timestamp)
-
-	DomainDeliverabilityTrackingOption_InboxPlacementTrackingOption = DomainDeliverabilityTrackingOption.AddMember("InboxPlacementTrackingOption", InboxPlacementTrackingOption)
-
-	_DomainDeliverabilityTrackingOptions_member = _DomainDeliverabilityTrackingOptions.AddMember("member", DomainDeliverabilityTrackingOption)
-
-	Message_Subject = Message.AddMember("Subject", Content)
-
-	Message_Body = Message.AddMember("Body", Body)
-
-	RawMessage_Data = RawMessage.AddMember("Data", _RawMessageData)
-
-	Template_TemplateArn = Template.AddMember("TemplateArn", _TemplateArn)
-
-	Template_TemplateData = Template.AddMember("TemplateData", _TemplateData)
-
-	EmailContent_Simple = EmailContent.AddMember("Simple", Message)
-
-	EmailContent_Raw = EmailContent.AddMember("Raw", RawMessage)
-
-	EmailContent_Template = EmailContent.AddMember("Template", Template)
-
-	EventType_SEND = EventType.AddMember("SEND", smithyprelude.Unit)
-
-	EventType_REJECT = EventType.AddMember("REJECT", smithyprelude.Unit)
-
-	EventType_BOUNCE = EventType.AddMember("BOUNCE", smithyprelude.Unit)
-
-	EventType_COMPLAINT = EventType.AddMember("COMPLAINT", smithyprelude.Unit)
-
-	EventType_DELIVERY = EventType.AddMember("DELIVERY", smithyprelude.Unit)
-
-	EventType_OPEN = EventType.AddMember("OPEN", smithyprelude.Unit)
-
-	EventType_CLICK = EventType.AddMember("CLICK", smithyprelude.Unit)
-
-	EventType_RENDERING_FAILURE = EventType.AddMember("RENDERING_FAILURE", smithyprelude.Unit)
-
-	_EventTypes_member = _EventTypes.AddMember("member", EventType)
-
-	KinesisFirehoseDestination_IamRoleArn = KinesisFirehoseDestination.AddMember("IamRoleArn", _AmazonResourceName)
-
-	KinesisFirehoseDestination_DeliveryStreamArn = KinesisFirehoseDestination.AddMember("DeliveryStreamArn", _AmazonResourceName)
-
-	SnsDestination_TopicArn = SnsDestination.AddMember("TopicArn", _AmazonResourceName)
-
-	PinpointDestination_ApplicationArn = PinpointDestination.AddMember("ApplicationArn", _AmazonResourceName)
-
-	EventDestination_Name = EventDestination.AddMember("Name", _EventDestinationName)
-
-	EventDestination_Enabled = EventDestination.AddMember("Enabled", _Enabled)
-
-	EventDestination_MatchingEventTypes = EventDestination.AddMember("MatchingEventTypes", _EventTypes)
-
-	EventDestination_KinesisFirehoseDestination = EventDestination.AddMember("KinesisFirehoseDestination", KinesisFirehoseDestination)
-
-	EventDestination_CloudWatchDestination = EventDestination.AddMember("CloudWatchDestination", CloudWatchDestination)
-
-	EventDestination_SnsDestination = EventDestination.AddMember("SnsDestination", SnsDestination)
-
-	EventDestination_PinpointDestination = EventDestination.AddMember("PinpointDestination", PinpointDestination)
-
-	EventDestinationDefinition_Enabled = EventDestinationDefinition.AddMember("Enabled", _Enabled)
-
-	EventDestinationDefinition_MatchingEventTypes = EventDestinationDefinition.AddMember("MatchingEventTypes", _EventTypes)
-
-	EventDestinationDefinition_KinesisFirehoseDestination = EventDestinationDefinition.AddMember("KinesisFirehoseDestination", KinesisFirehoseDestination)
-
-	EventDestinationDefinition_CloudWatchDestination = EventDestinationDefinition.AddMember("CloudWatchDestination", CloudWatchDestination)
-
-	EventDestinationDefinition_SnsDestination = EventDestinationDefinition.AddMember("SnsDestination", SnsDestination)
-
-	EventDestinationDefinition_PinpointDestination = EventDestinationDefinition.AddMember("PinpointDestination", PinpointDestination)
-
-	_EventDestinations_member = _EventDestinations.AddMember("member", EventDestination)
-
-	IdentityType_EMAIL_ADDRESS = IdentityType.AddMember("EMAIL_ADDRESS", smithyprelude.Unit)
-
-	IdentityType_DOMAIN = IdentityType.AddMember("DOMAIN", smithyprelude.Unit)
-
-	IdentityType_MANAGED_DOMAIN = IdentityType.AddMember("MANAGED_DOMAIN", smithyprelude.Unit)
-
-	IdentityInfo_IdentityType = IdentityInfo.AddMember("IdentityType", IdentityType)
-
-	IdentityInfo_IdentityName = IdentityInfo.AddMember("IdentityName", _Identity)
-
-	IdentityInfo_SendingEnabled = IdentityInfo.AddMember("SendingEnabled", _Enabled)
-
-	_IdentityInfoList_member = _IdentityInfoList.AddMember("member", IdentityInfo)
-
-	PlacementStatistics_InboxPercentage = PlacementStatistics.AddMember("InboxPercentage", _Percentage)
-
-	PlacementStatistics_SpamPercentage = PlacementStatistics.AddMember("SpamPercentage", _Percentage)
-
-	PlacementStatistics_MissingPercentage = PlacementStatistics.AddMember("MissingPercentage", _Percentage)
-
-	PlacementStatistics_SpfPercentage = PlacementStatistics.AddMember("SpfPercentage", _Percentage)
-
-	PlacementStatistics_DkimPercentage = PlacementStatistics.AddMember("DkimPercentage", _Percentage)
-
-	IspPlacement_IspName = IspPlacement.AddMember("IspName", _IspName)
-
-	IspPlacement_PlacementStatistics = IspPlacement.AddMember("PlacementStatistics", PlacementStatistics)
-
-	_IspPlacements_member = _IspPlacements.AddMember("member", IspPlacement)
-
-	LimitExceededException_message = LimitExceededException.AddMember("message", _ErrorMessage)
-
-	_ListOfDedicatedIpPools_member = _ListOfDedicatedIpPools.AddMember("member", _PoolName)
-
-	MailFromDomainStatus_PENDING = MailFromDomainStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	MailFromDomainStatus_SUCCESS = MailFromDomainStatus.AddMember("SUCCESS", smithyprelude.Unit)
-
-	MailFromDomainStatus_FAILED = MailFromDomainStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	MailFromDomainStatus_TEMPORARY_FAILURE = MailFromDomainStatus.AddMember("TEMPORARY_FAILURE", smithyprelude.Unit)
-
-	MailFromAttributes_MailFromDomain = MailFromAttributes.AddMember("MailFromDomain", _MailFromDomainName)
-
-	MailFromAttributes_MailFromDomainStatus = MailFromAttributes.AddMember("MailFromDomainStatus", MailFromDomainStatus)
-
-	MailFromAttributes_BehaviorOnMxFailure = MailFromAttributes.AddMember("BehaviorOnMxFailure", BehaviorOnMxFailure)
-
-	MailFromDomainNotVerifiedException_message = MailFromDomainNotVerifiedException.AddMember("message", _ErrorMessage)
-
-	MessageRejected_message = MessageRejected.AddMember("message", _ErrorMessage)
-
-	MessageTag_Name = MessageTag.AddMember("Name", _MessageTagName)
-
-	MessageTag_Value = MessageTag.AddMember("Value", _MessageTagValue)
-
-	_MessageTagList_member = _MessageTagList.AddMember("member", MessageTag)
-
-	NotFoundException_message = NotFoundException.AddMember("message", _ErrorMessage)
-
-	OverallVolume_VolumeStatistics = OverallVolume.AddMember("VolumeStatistics", VolumeStatistics)
-
-	OverallVolume_ReadRatePercent = OverallVolume.AddMember("ReadRatePercent", _Percentage)
-
-	OverallVolume_DomainIspPlacements = OverallVolume.AddMember("DomainIspPlacements", _DomainIspPlacements)
-
-	ReputationOptions_ReputationMetricsEnabled = ReputationOptions.AddMember("ReputationMetricsEnabled", _Enabled)
-
-	ReputationOptions_LastFreshStart = ReputationOptions.AddMember("LastFreshStart", _LastFreshStart)
-
-	SendingOptions_SendingEnabled = SendingOptions.AddMember("SendingEnabled", _Enabled)
-
-	SendingPausedException_message = SendingPausedException.AddMember("message", _ErrorMessage)
-
-	SendQuota_Max24HourSend = SendQuota.AddMember("Max24HourSend", _Max24HourSend)
-
-	SendQuota_MaxSendRate = SendQuota.AddMember("MaxSendRate", _MaxSendRate)
-
-	SendQuota_SentLast24Hours = SendQuota.AddMember("SentLast24Hours", _SentLast24Hours)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	TooManyRequestsException_message = TooManyRequestsException.AddMember("message", _ErrorMessage)
-
-	TrackingOptions_CustomRedirectDomain = TrackingOptions.AddMember("CustomRedirectDomain", _CustomRedirectDomain)
-
-	CreateConfigurationSetEventDestinationRequest_ConfigurationSetName = CreateConfigurationSetEventDestinationRequest.AddMember("ConfigurationSetName", _ConfigurationSetName, &smithytraits.HTTPLabel{})
-
-	CreateConfigurationSetEventDestinationRequest_EventDestinationName = CreateConfigurationSetEventDestinationRequest.AddMember("EventDestinationName", _EventDestinationName)
-
-	CreateConfigurationSetEventDestinationRequest_EventDestination = CreateConfigurationSetEventDestinationRequest.AddMember("EventDestination", EventDestinationDefinition)
-
-	CreateConfigurationSetRequest_ConfigurationSetName = CreateConfigurationSetRequest.AddMember("ConfigurationSetName", _ConfigurationSetName)
-
-	CreateConfigurationSetRequest_TrackingOptions = CreateConfigurationSetRequest.AddMember("TrackingOptions", TrackingOptions)
-
-	CreateConfigurationSetRequest_DeliveryOptions = CreateConfigurationSetRequest.AddMember("DeliveryOptions", DeliveryOptions)
-
-	CreateConfigurationSetRequest_ReputationOptions = CreateConfigurationSetRequest.AddMember("ReputationOptions", ReputationOptions)
-
-	CreateConfigurationSetRequest_SendingOptions = CreateConfigurationSetRequest.AddMember("SendingOptions", SendingOptions)
-
-	CreateConfigurationSetRequest_Tags = CreateConfigurationSetRequest.AddMember("Tags", _TagList)
-
-	CreateDedicatedIpPoolRequest_PoolName = CreateDedicatedIpPoolRequest.AddMember("PoolName", _PoolName)
-
-	CreateDedicatedIpPoolRequest_Tags = CreateDedicatedIpPoolRequest.AddMember("Tags", _TagList)
-
-	CreateDeliverabilityTestReportRequest_ReportName = CreateDeliverabilityTestReportRequest.AddMember("ReportName", _ReportName)
-
-	CreateDeliverabilityTestReportRequest_FromEmailAddress = CreateDeliverabilityTestReportRequest.AddMember("FromEmailAddress", _EmailAddress)
-
-	CreateDeliverabilityTestReportRequest_Content = CreateDeliverabilityTestReportRequest.AddMember("Content", EmailContent)
-
-	CreateDeliverabilityTestReportRequest_Tags = CreateDeliverabilityTestReportRequest.AddMember("Tags", _TagList)
-
-	CreateDeliverabilityTestReportResponse_ReportId = CreateDeliverabilityTestReportResponse.AddMember("ReportId", _ReportId)
-
-	CreateDeliverabilityTestReportResponse_DeliverabilityTestStatus = CreateDeliverabilityTestReportResponse.AddMember("DeliverabilityTestStatus", DeliverabilityTestStatus)
-
-	CreateEmailIdentityRequest_EmailIdentity = CreateEmailIdentityRequest.AddMember("EmailIdentity", _Identity)
-
-	CreateEmailIdentityRequest_Tags = CreateEmailIdentityRequest.AddMember("Tags", _TagList)
-
-	CreateEmailIdentityResponse_IdentityType = CreateEmailIdentityResponse.AddMember("IdentityType", IdentityType)
-
-	CreateEmailIdentityResponse_VerifiedForSendingStatus = CreateEmailIdentityResponse.AddMember("VerifiedForSendingStatus", _Enabled)
-
-	CreateEmailIdentityResponse_DkimAttributes = CreateEmailIdentityResponse.AddMember("DkimAttributes", DkimAttributes)
-
-	DeleteConfigurationSetEventDestinationRequest_ConfigurationSetName = DeleteConfigurationSetEventDestinationRequest.AddMember("ConfigurationSetName", _ConfigurationSetName, &smithytraits.HTTPLabel{})
-
-	DeleteConfigurationSetEventDestinationRequest_EventDestinationName = DeleteConfigurationSetEventDestinationRequest.AddMember("EventDestinationName", _EventDestinationName, &smithytraits.HTTPLabel{})
-
-	DeleteConfigurationSetRequest_ConfigurationSetName = DeleteConfigurationSetRequest.AddMember("ConfigurationSetName", _ConfigurationSetName, &smithytraits.HTTPLabel{})
-
-	DeleteDedicatedIpPoolRequest_PoolName = DeleteDedicatedIpPoolRequest.AddMember("PoolName", _PoolName, &smithytraits.HTTPLabel{})
-
-	DeleteEmailIdentityRequest_EmailIdentity = DeleteEmailIdentityRequest.AddMember("EmailIdentity", _Identity, &smithytraits.HTTPLabel{})
-
-	GetAccountResponse_SendQuota = GetAccountResponse.AddMember("SendQuota", SendQuota)
-
-	GetAccountResponse_SendingEnabled = GetAccountResponse.AddMember("SendingEnabled", _Enabled)
-
-	GetAccountResponse_DedicatedIpAutoWarmupEnabled = GetAccountResponse.AddMember("DedicatedIpAutoWarmupEnabled", _Enabled)
-
-	GetAccountResponse_EnforcementStatus = GetAccountResponse.AddMember("EnforcementStatus", _GeneralEnforcementStatus)
-
-	GetAccountResponse_ProductionAccessEnabled = GetAccountResponse.AddMember("ProductionAccessEnabled", _Enabled)
-
-	GetBlacklistReportsRequest_BlacklistItemNames = GetBlacklistReportsRequest.AddMember("BlacklistItemNames", _BlacklistItemNames, &smithytraits.HTTPQuery{Name: "BlacklistItemNames"})
-
-	GetBlacklistReportsResponse_BlacklistReport = GetBlacklistReportsResponse.AddMember("BlacklistReport", _BlacklistReport)
-
-	GetConfigurationSetEventDestinationsRequest_ConfigurationSetName = GetConfigurationSetEventDestinationsRequest.AddMember("ConfigurationSetName", _ConfigurationSetName, &smithytraits.HTTPLabel{})
-
-	GetConfigurationSetEventDestinationsResponse_EventDestinations = GetConfigurationSetEventDestinationsResponse.AddMember("EventDestinations", _EventDestinations)
-
-	GetConfigurationSetRequest_ConfigurationSetName = GetConfigurationSetRequest.AddMember("ConfigurationSetName", _ConfigurationSetName, &smithytraits.HTTPLabel{})
-
-	GetConfigurationSetResponse_ConfigurationSetName = GetConfigurationSetResponse.AddMember("ConfigurationSetName", _ConfigurationSetName)
-
-	GetConfigurationSetResponse_TrackingOptions = GetConfigurationSetResponse.AddMember("TrackingOptions", TrackingOptions)
-
-	GetConfigurationSetResponse_DeliveryOptions = GetConfigurationSetResponse.AddMember("DeliveryOptions", DeliveryOptions)
-
-	GetConfigurationSetResponse_ReputationOptions = GetConfigurationSetResponse.AddMember("ReputationOptions", ReputationOptions)
-
-	GetConfigurationSetResponse_SendingOptions = GetConfigurationSetResponse.AddMember("SendingOptions", SendingOptions)
-
-	GetConfigurationSetResponse_Tags = GetConfigurationSetResponse.AddMember("Tags", _TagList)
-
-	GetDedicatedIpRequest_Ip = GetDedicatedIpRequest.AddMember("Ip", _Ip, &smithytraits.HTTPLabel{})
-
-	GetDedicatedIpResponse_DedicatedIp = GetDedicatedIpResponse.AddMember("DedicatedIp", DedicatedIp)
-
-	GetDedicatedIpsRequest_PoolName = GetDedicatedIpsRequest.AddMember("PoolName", _PoolName, &smithytraits.HTTPQuery{Name: "PoolName"})
-
-	GetDedicatedIpsRequest_NextToken = GetDedicatedIpsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	GetDedicatedIpsRequest_PageSize = GetDedicatedIpsRequest.AddMember("PageSize", _MaxItems, &smithytraits.HTTPQuery{Name: "PageSize"})
-
-	GetDedicatedIpsResponse_DedicatedIps = GetDedicatedIpsResponse.AddMember("DedicatedIps", _DedicatedIpList)
-
-	GetDedicatedIpsResponse_NextToken = GetDedicatedIpsResponse.AddMember("NextToken", _NextToken)
-
-	GetDeliverabilityDashboardOptionsResponse_DashboardEnabled = GetDeliverabilityDashboardOptionsResponse.AddMember("DashboardEnabled", _Enabled)
-
-	GetDeliverabilityDashboardOptionsResponse_SubscriptionExpiryDate = GetDeliverabilityDashboardOptionsResponse.AddMember("SubscriptionExpiryDate", _Timestamp)
-
-	GetDeliverabilityDashboardOptionsResponse_AccountStatus = GetDeliverabilityDashboardOptionsResponse.AddMember("AccountStatus", DeliverabilityDashboardAccountStatus)
-
-	GetDeliverabilityDashboardOptionsResponse_ActiveSubscribedDomains = GetDeliverabilityDashboardOptionsResponse.AddMember("ActiveSubscribedDomains", _DomainDeliverabilityTrackingOptions)
-
-	GetDeliverabilityDashboardOptionsResponse_PendingExpirationSubscribedDomains = GetDeliverabilityDashboardOptionsResponse.AddMember("PendingExpirationSubscribedDomains", _DomainDeliverabilityTrackingOptions)
-
-	GetDeliverabilityTestReportRequest_ReportId = GetDeliverabilityTestReportRequest.AddMember("ReportId", _ReportId, &smithytraits.HTTPLabel{})
-
-	GetDeliverabilityTestReportResponse_DeliverabilityTestReport = GetDeliverabilityTestReportResponse.AddMember("DeliverabilityTestReport", DeliverabilityTestReport)
-
-	GetDeliverabilityTestReportResponse_OverallPlacement = GetDeliverabilityTestReportResponse.AddMember("OverallPlacement", PlacementStatistics)
-
-	GetDeliverabilityTestReportResponse_IspPlacements = GetDeliverabilityTestReportResponse.AddMember("IspPlacements", _IspPlacements)
-
-	GetDeliverabilityTestReportResponse_Message = GetDeliverabilityTestReportResponse.AddMember("Message", _MessageContent)
-
-	GetDeliverabilityTestReportResponse_Tags = GetDeliverabilityTestReportResponse.AddMember("Tags", _TagList)
-
-	GetDomainDeliverabilityCampaignRequest_CampaignId = GetDomainDeliverabilityCampaignRequest.AddMember("CampaignId", _CampaignId, &smithytraits.HTTPLabel{})
-
-	GetDomainDeliverabilityCampaignResponse_DomainDeliverabilityCampaign = GetDomainDeliverabilityCampaignResponse.AddMember("DomainDeliverabilityCampaign", DomainDeliverabilityCampaign)
-
-	GetDomainStatisticsReportRequest_Domain = GetDomainStatisticsReportRequest.AddMember("Domain", _Identity, &smithytraits.HTTPLabel{})
-
-	GetDomainStatisticsReportRequest_StartDate = GetDomainStatisticsReportRequest.AddMember("StartDate", _Timestamp, &smithytraits.HTTPQuery{Name: "StartDate"})
-
-	GetDomainStatisticsReportRequest_EndDate = GetDomainStatisticsReportRequest.AddMember("EndDate", _Timestamp, &smithytraits.HTTPQuery{Name: "EndDate"})
-
-	GetDomainStatisticsReportResponse_OverallVolume = GetDomainStatisticsReportResponse.AddMember("OverallVolume", OverallVolume)
-
-	GetDomainStatisticsReportResponse_DailyVolumes = GetDomainStatisticsReportResponse.AddMember("DailyVolumes", _DailyVolumes)
-
-	GetEmailIdentityRequest_EmailIdentity = GetEmailIdentityRequest.AddMember("EmailIdentity", _Identity, &smithytraits.HTTPLabel{})
-
-	GetEmailIdentityResponse_IdentityType = GetEmailIdentityResponse.AddMember("IdentityType", IdentityType)
-
-	GetEmailIdentityResponse_FeedbackForwardingStatus = GetEmailIdentityResponse.AddMember("FeedbackForwardingStatus", _Enabled)
-
-	GetEmailIdentityResponse_VerifiedForSendingStatus = GetEmailIdentityResponse.AddMember("VerifiedForSendingStatus", _Enabled)
-
-	GetEmailIdentityResponse_DkimAttributes = GetEmailIdentityResponse.AddMember("DkimAttributes", DkimAttributes)
-
-	GetEmailIdentityResponse_MailFromAttributes = GetEmailIdentityResponse.AddMember("MailFromAttributes", MailFromAttributes)
-
-	GetEmailIdentityResponse_Tags = GetEmailIdentityResponse.AddMember("Tags", _TagList)
-
-	ListConfigurationSetsRequest_NextToken = ListConfigurationSetsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListConfigurationSetsRequest_PageSize = ListConfigurationSetsRequest.AddMember("PageSize", _MaxItems, &smithytraits.HTTPQuery{Name: "PageSize"})
-
-	ListConfigurationSetsResponse_ConfigurationSets = ListConfigurationSetsResponse.AddMember("ConfigurationSets", _ConfigurationSetNameList)
-
-	ListConfigurationSetsResponse_NextToken = ListConfigurationSetsResponse.AddMember("NextToken", _NextToken)
-
-	ListDedicatedIpPoolsRequest_NextToken = ListDedicatedIpPoolsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListDedicatedIpPoolsRequest_PageSize = ListDedicatedIpPoolsRequest.AddMember("PageSize", _MaxItems, &smithytraits.HTTPQuery{Name: "PageSize"})
-
-	ListDedicatedIpPoolsResponse_DedicatedIpPools = ListDedicatedIpPoolsResponse.AddMember("DedicatedIpPools", _ListOfDedicatedIpPools)
-
-	ListDedicatedIpPoolsResponse_NextToken = ListDedicatedIpPoolsResponse.AddMember("NextToken", _NextToken)
-
-	ListDeliverabilityTestReportsRequest_NextToken = ListDeliverabilityTestReportsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListDeliverabilityTestReportsRequest_PageSize = ListDeliverabilityTestReportsRequest.AddMember("PageSize", _MaxItems, &smithytraits.HTTPQuery{Name: "PageSize"})
-
-	ListDeliverabilityTestReportsResponse_DeliverabilityTestReports = ListDeliverabilityTestReportsResponse.AddMember("DeliverabilityTestReports", _DeliverabilityTestReports)
-
-	ListDeliverabilityTestReportsResponse_NextToken = ListDeliverabilityTestReportsResponse.AddMember("NextToken", _NextToken)
-
-	ListDomainDeliverabilityCampaignsRequest_StartDate = ListDomainDeliverabilityCampaignsRequest.AddMember("StartDate", _Timestamp, &smithytraits.HTTPQuery{Name: "StartDate"})
-
-	ListDomainDeliverabilityCampaignsRequest_EndDate = ListDomainDeliverabilityCampaignsRequest.AddMember("EndDate", _Timestamp, &smithytraits.HTTPQuery{Name: "EndDate"})
-
-	ListDomainDeliverabilityCampaignsRequest_SubscribedDomain = ListDomainDeliverabilityCampaignsRequest.AddMember("SubscribedDomain", _Domain, &smithytraits.HTTPLabel{})
-
-	ListDomainDeliverabilityCampaignsRequest_NextToken = ListDomainDeliverabilityCampaignsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListDomainDeliverabilityCampaignsRequest_PageSize = ListDomainDeliverabilityCampaignsRequest.AddMember("PageSize", _MaxItems, &smithytraits.HTTPQuery{Name: "PageSize"})
-
-	ListDomainDeliverabilityCampaignsResponse_DomainDeliverabilityCampaigns = ListDomainDeliverabilityCampaignsResponse.AddMember("DomainDeliverabilityCampaigns", _DomainDeliverabilityCampaignList)
-
-	ListDomainDeliverabilityCampaignsResponse_NextToken = ListDomainDeliverabilityCampaignsResponse.AddMember("NextToken", _NextToken)
-
-	ListEmailIdentitiesRequest_NextToken = ListEmailIdentitiesRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListEmailIdentitiesRequest_PageSize = ListEmailIdentitiesRequest.AddMember("PageSize", _MaxItems, &smithytraits.HTTPQuery{Name: "PageSize"})
-
-	ListEmailIdentitiesResponse_EmailIdentities = ListEmailIdentitiesResponse.AddMember("EmailIdentities", _IdentityInfoList)
-
-	ListEmailIdentitiesResponse_NextToken = ListEmailIdentitiesResponse.AddMember("NextToken", _NextToken)
-
-	ListTagsForResourceRequest_ResourceArn = ListTagsForResourceRequest.AddMember("ResourceArn", _AmazonResourceName, &smithytraits.HTTPQuery{Name: "ResourceArn"})
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _TagList)
-
-	PutAccountDedicatedIpWarmupAttributesRequest_AutoWarmupEnabled = PutAccountDedicatedIpWarmupAttributesRequest.AddMember("AutoWarmupEnabled", _Enabled)
-
-	PutAccountSendingAttributesRequest_SendingEnabled = PutAccountSendingAttributesRequest.AddMember("SendingEnabled", _Enabled)
-
-	PutConfigurationSetDeliveryOptionsRequest_ConfigurationSetName = PutConfigurationSetDeliveryOptionsRequest.AddMember("ConfigurationSetName", _ConfigurationSetName, &smithytraits.HTTPLabel{})
-
-	PutConfigurationSetDeliveryOptionsRequest_TlsPolicy = PutConfigurationSetDeliveryOptionsRequest.AddMember("TlsPolicy", TlsPolicy)
-
-	PutConfigurationSetDeliveryOptionsRequest_SendingPoolName = PutConfigurationSetDeliveryOptionsRequest.AddMember("SendingPoolName", _SendingPoolName)
-
-	PutConfigurationSetReputationOptionsRequest_ConfigurationSetName = PutConfigurationSetReputationOptionsRequest.AddMember("ConfigurationSetName", _ConfigurationSetName, &smithytraits.HTTPLabel{})
-
-	PutConfigurationSetReputationOptionsRequest_ReputationMetricsEnabled = PutConfigurationSetReputationOptionsRequest.AddMember("ReputationMetricsEnabled", _Enabled)
-
-	PutConfigurationSetSendingOptionsRequest_ConfigurationSetName = PutConfigurationSetSendingOptionsRequest.AddMember("ConfigurationSetName", _ConfigurationSetName, &smithytraits.HTTPLabel{})
-
-	PutConfigurationSetSendingOptionsRequest_SendingEnabled = PutConfigurationSetSendingOptionsRequest.AddMember("SendingEnabled", _Enabled)
-
-	PutConfigurationSetTrackingOptionsRequest_ConfigurationSetName = PutConfigurationSetTrackingOptionsRequest.AddMember("ConfigurationSetName", _ConfigurationSetName, &smithytraits.HTTPLabel{})
-
-	PutConfigurationSetTrackingOptionsRequest_CustomRedirectDomain = PutConfigurationSetTrackingOptionsRequest.AddMember("CustomRedirectDomain", _CustomRedirectDomain)
-
-	PutDedicatedIpInPoolRequest_Ip = PutDedicatedIpInPoolRequest.AddMember("Ip", _Ip, &smithytraits.HTTPLabel{})
-
-	PutDedicatedIpInPoolRequest_DestinationPoolName = PutDedicatedIpInPoolRequest.AddMember("DestinationPoolName", _PoolName)
-
-	PutDedicatedIpWarmupAttributesRequest_Ip = PutDedicatedIpWarmupAttributesRequest.AddMember("Ip", _Ip, &smithytraits.HTTPLabel{})
-
-	PutDedicatedIpWarmupAttributesRequest_WarmupPercentage = PutDedicatedIpWarmupAttributesRequest.AddMember("WarmupPercentage", _Percentage100Wrapper)
-
-	PutDeliverabilityDashboardOptionRequest_DashboardEnabled = PutDeliverabilityDashboardOptionRequest.AddMember("DashboardEnabled", _Enabled)
-
-	PutDeliverabilityDashboardOptionRequest_SubscribedDomains = PutDeliverabilityDashboardOptionRequest.AddMember("SubscribedDomains", _DomainDeliverabilityTrackingOptions)
-
-	PutEmailIdentityDkimAttributesRequest_EmailIdentity = PutEmailIdentityDkimAttributesRequest.AddMember("EmailIdentity", _Identity, &smithytraits.HTTPLabel{})
-
-	PutEmailIdentityDkimAttributesRequest_SigningEnabled = PutEmailIdentityDkimAttributesRequest.AddMember("SigningEnabled", _Enabled)
-
-	PutEmailIdentityFeedbackAttributesRequest_EmailIdentity = PutEmailIdentityFeedbackAttributesRequest.AddMember("EmailIdentity", _Identity, &smithytraits.HTTPLabel{})
-
-	PutEmailIdentityFeedbackAttributesRequest_EmailForwardingEnabled = PutEmailIdentityFeedbackAttributesRequest.AddMember("EmailForwardingEnabled", _Enabled)
-
-	PutEmailIdentityMailFromAttributesRequest_EmailIdentity = PutEmailIdentityMailFromAttributesRequest.AddMember("EmailIdentity", _Identity, &smithytraits.HTTPLabel{})
-
-	PutEmailIdentityMailFromAttributesRequest_MailFromDomain = PutEmailIdentityMailFromAttributesRequest.AddMember("MailFromDomain", _MailFromDomainName)
-
-	PutEmailIdentityMailFromAttributesRequest_BehaviorOnMxFailure = PutEmailIdentityMailFromAttributesRequest.AddMember("BehaviorOnMxFailure", BehaviorOnMxFailure)
-
-	SendEmailRequest_FromEmailAddress = SendEmailRequest.AddMember("FromEmailAddress", _EmailAddress)
-
-	SendEmailRequest_Destination = SendEmailRequest.AddMember("Destination", Destination)
-
-	SendEmailRequest_ReplyToAddresses = SendEmailRequest.AddMember("ReplyToAddresses", _EmailAddressList)
-
-	SendEmailRequest_FeedbackForwardingEmailAddress = SendEmailRequest.AddMember("FeedbackForwardingEmailAddress", _EmailAddress)
-
-	SendEmailRequest_Content = SendEmailRequest.AddMember("Content", EmailContent)
-
-	SendEmailRequest_EmailTags = SendEmailRequest.AddMember("EmailTags", _MessageTagList)
-
-	SendEmailRequest_ConfigurationSetName = SendEmailRequest.AddMember("ConfigurationSetName", _ConfigurationSetName)
-
-	SendEmailResponse_MessageId = SendEmailResponse.AddMember("MessageId", _OutboundMessageId)
-
-	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", _AmazonResourceName)
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _TagList)
-
-	UntagResourceRequest_ResourceArn = UntagResourceRequest.AddMember("ResourceArn", _AmazonResourceName, &smithytraits.HTTPQuery{Name: "ResourceArn"})
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "TagKeys"})
-
-	UpdateConfigurationSetEventDestinationRequest_ConfigurationSetName = UpdateConfigurationSetEventDestinationRequest.AddMember("ConfigurationSetName", _ConfigurationSetName, &smithytraits.HTTPLabel{})
-
-	UpdateConfigurationSetEventDestinationRequest_EventDestinationName = UpdateConfigurationSetEventDestinationRequest.AddMember("EventDestinationName", _EventDestinationName, &smithytraits.HTTPLabel{})
-
-	UpdateConfigurationSetEventDestinationRequest_EventDestination = UpdateConfigurationSetEventDestinationRequest.AddMember("EventDestination", EventDestinationDefinition)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t47 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "BlacklistItemNames"}}, DirectMask: 0x10}
+var t48 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "PoolName"}}, DirectMask: 0x10}
+var t49 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "NextToken"}}, DirectMask: 0x10}
+var t50 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "PageSize"}}, DirectMask: 0x10}
+var t51 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "StartDate"}}, DirectMask: 0x10}
+var t52 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "EndDate"}}, DirectMask: 0x10}
+var t53 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "ResourceArn"}}, DirectMask: 0x10}
+var t54 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "TagKeys"}}, DirectMask: 0x10}
+
+var mAccountSuspendedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccountSuspendedException_message}}
+var mAlreadyExistsException = smithy.SchemaMembers{List: []*smithy.Schema{&sAlreadyExistsException_message}}
+var mBadRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sBadRequestException_message}}
+var mBehaviorOnMxFailure = smithy.SchemaMembers{List: []*smithy.Schema{&sBehaviorOnMxFailure_USE_DEFAULT_VALUE, &sBehaviorOnMxFailure_REJECT_MESSAGE}}
+var m_BlacklistEntries = smithy.SchemaMembers{List: []*smithy.Schema{&s_BlacklistEntries_member}}
+var mBlacklistEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sBlacklistEntry_RblName, &sBlacklistEntry_ListingTime, &sBlacklistEntry_Description}}
+var m_BlacklistItemNames = smithy.SchemaMembers{List: []*smithy.Schema{&s_BlacklistItemNames_member}}
+var m_BlacklistReport = smithy.SchemaMembers{List: []*smithy.Schema{&s_BlacklistReport_key, &s_BlacklistReport_value}}
+var mBody = smithy.SchemaMembers{List: []*smithy.Schema{&sBody_Text, &sBody_Html}}
+var mCloudWatchDestination = smithy.SchemaMembers{List: []*smithy.Schema{&sCloudWatchDestination_DimensionConfigurations}}
+var mCloudWatchDimensionConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sCloudWatchDimensionConfiguration_DimensionName, &sCloudWatchDimensionConfiguration_DimensionValueSource, &sCloudWatchDimensionConfiguration_DefaultDimensionValue}}
+var m_CloudWatchDimensionConfigurations = smithy.SchemaMembers{List: []*smithy.Schema{&s_CloudWatchDimensionConfigurations_member}}
+var mConcurrentModificationException = smithy.SchemaMembers{List: []*smithy.Schema{&sConcurrentModificationException_message}}
+var m_ConfigurationSetNameList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConfigurationSetNameList_member}}
+var mContent = smithy.SchemaMembers{List: []*smithy.Schema{&sContent_Data, &sContent_Charset}}
+var mDailyVolume = smithy.SchemaMembers{List: []*smithy.Schema{&sDailyVolume_StartDate, &sDailyVolume_VolumeStatistics, &sDailyVolume_DomainIspPlacements}}
+var m_DailyVolumes = smithy.SchemaMembers{List: []*smithy.Schema{&s_DailyVolumes_member}}
+var mDedicatedIp = smithy.SchemaMembers{List: []*smithy.Schema{&sDedicatedIp_Ip, &sDedicatedIp_WarmupStatus, &sDedicatedIp_WarmupPercentage, &sDedicatedIp_PoolName}}
+var m_DedicatedIpList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DedicatedIpList_member}}
+var mDeliverabilityDashboardAccountStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sDeliverabilityDashboardAccountStatus_ACTIVE, &sDeliverabilityDashboardAccountStatus_PENDING_EXPIRATION, &sDeliverabilityDashboardAccountStatus_DISABLED}}
+var mDeliverabilityTestReport = smithy.SchemaMembers{List: []*smithy.Schema{&sDeliverabilityTestReport_ReportId, &sDeliverabilityTestReport_ReportName, &sDeliverabilityTestReport_Subject, &sDeliverabilityTestReport_FromEmailAddress, &sDeliverabilityTestReport_CreateDate, &sDeliverabilityTestReport_DeliverabilityTestStatus}}
+var m_DeliverabilityTestReports = smithy.SchemaMembers{List: []*smithy.Schema{&s_DeliverabilityTestReports_member}}
+var mDeliverabilityTestStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sDeliverabilityTestStatus_IN_PROGRESS, &sDeliverabilityTestStatus_COMPLETED}}
+var mDeliveryOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sDeliveryOptions_TlsPolicy, &sDeliveryOptions_SendingPoolName}}
+var mDestination = smithy.SchemaMembers{List: []*smithy.Schema{&sDestination_ToAddresses, &sDestination_CcAddresses, &sDestination_BccAddresses}}
+var mDimensionValueSource = smithy.SchemaMembers{List: []*smithy.Schema{&sDimensionValueSource_MESSAGE_TAG, &sDimensionValueSource_EMAIL_HEADER, &sDimensionValueSource_LINK_TAG}}
+var mDkimAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sDkimAttributes_SigningEnabled, &sDkimAttributes_Status, &sDkimAttributes_Tokens}}
+var mDkimStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sDkimStatus_PENDING, &sDkimStatus_SUCCESS, &sDkimStatus_FAILED, &sDkimStatus_TEMPORARY_FAILURE, &sDkimStatus_NOT_STARTED}}
+var m_DnsTokenList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DnsTokenList_member}}
+var mDomainDeliverabilityCampaign = smithy.SchemaMembers{List: []*smithy.Schema{&sDomainDeliverabilityCampaign_CampaignId, &sDomainDeliverabilityCampaign_ImageUrl, &sDomainDeliverabilityCampaign_Subject, &sDomainDeliverabilityCampaign_FromAddress, &sDomainDeliverabilityCampaign_SendingIps, &sDomainDeliverabilityCampaign_FirstSeenDateTime, &sDomainDeliverabilityCampaign_LastSeenDateTime, &sDomainDeliverabilityCampaign_InboxCount, &sDomainDeliverabilityCampaign_SpamCount, &sDomainDeliverabilityCampaign_ReadRate, &sDomainDeliverabilityCampaign_DeleteRate, &sDomainDeliverabilityCampaign_ReadDeleteRate, &sDomainDeliverabilityCampaign_ProjectedVolume, &sDomainDeliverabilityCampaign_Esps}, Seed: 52, Slots: []uint16{
+	3, 8, 2, 14, 0, 0, 1, 0, 0, 0, 0, 0, 0, 10, 0, 4, 5, 7, 9, 0, 0, 0, 0, 6,
+	0, 0, 12, 0, 0, 11, 13, 0,
+}}
+var m_DomainDeliverabilityCampaignList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DomainDeliverabilityCampaignList_member}}
+var mDomainDeliverabilityTrackingOption = smithy.SchemaMembers{List: []*smithy.Schema{&sDomainDeliverabilityTrackingOption_Domain, &sDomainDeliverabilityTrackingOption_SubscriptionStartDate, &sDomainDeliverabilityTrackingOption_InboxPlacementTrackingOption}}
+var m_DomainDeliverabilityTrackingOptions = smithy.SchemaMembers{List: []*smithy.Schema{&s_DomainDeliverabilityTrackingOptions_member}}
+var mDomainIspPlacement = smithy.SchemaMembers{List: []*smithy.Schema{&sDomainIspPlacement_IspName, &sDomainIspPlacement_InboxRawCount, &sDomainIspPlacement_SpamRawCount, &sDomainIspPlacement_InboxPercentage, &sDomainIspPlacement_SpamPercentage}}
+var m_DomainIspPlacements = smithy.SchemaMembers{List: []*smithy.Schema{&s_DomainIspPlacements_member}}
+var m_EmailAddressList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EmailAddressList_member}}
+var mEmailContent = smithy.SchemaMembers{List: []*smithy.Schema{&sEmailContent_Simple, &sEmailContent_Raw, &sEmailContent_Template}}
+var m_Esps = smithy.SchemaMembers{List: []*smithy.Schema{&s_Esps_member}}
+var mEventDestination = smithy.SchemaMembers{List: []*smithy.Schema{&sEventDestination_Name, &sEventDestination_Enabled, &sEventDestination_MatchingEventTypes, &sEventDestination_KinesisFirehoseDestination, &sEventDestination_CloudWatchDestination, &sEventDestination_SnsDestination, &sEventDestination_PinpointDestination}}
+var mEventDestinationDefinition = smithy.SchemaMembers{List: []*smithy.Schema{&sEventDestinationDefinition_Enabled, &sEventDestinationDefinition_MatchingEventTypes, &sEventDestinationDefinition_KinesisFirehoseDestination, &sEventDestinationDefinition_CloudWatchDestination, &sEventDestinationDefinition_SnsDestination, &sEventDestinationDefinition_PinpointDestination}}
+var m_EventDestinations = smithy.SchemaMembers{List: []*smithy.Schema{&s_EventDestinations_member}}
+var mEventType = smithy.SchemaMembers{List: []*smithy.Schema{&sEventType_SEND, &sEventType_REJECT, &sEventType_BOUNCE, &sEventType_COMPLAINT, &sEventType_DELIVERY, &sEventType_OPEN, &sEventType_CLICK, &sEventType_RENDERING_FAILURE}}
+var m_EventTypes = smithy.SchemaMembers{List: []*smithy.Schema{&s_EventTypes_member}}
+var mIdentityInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sIdentityInfo_IdentityType, &sIdentityInfo_IdentityName, &sIdentityInfo_SendingEnabled}}
+var m_IdentityInfoList = smithy.SchemaMembers{List: []*smithy.Schema{&s_IdentityInfoList_member}}
+var mIdentityType = smithy.SchemaMembers{List: []*smithy.Schema{&sIdentityType_EMAIL_ADDRESS, &sIdentityType_DOMAIN, &sIdentityType_MANAGED_DOMAIN}}
+var mInboxPlacementTrackingOption = smithy.SchemaMembers{List: []*smithy.Schema{&sInboxPlacementTrackingOption_Global, &sInboxPlacementTrackingOption_TrackedIsps}}
+var m_IpList = smithy.SchemaMembers{List: []*smithy.Schema{&s_IpList_member}}
+var m_IspNameList = smithy.SchemaMembers{List: []*smithy.Schema{&s_IspNameList_member}}
+var mIspPlacement = smithy.SchemaMembers{List: []*smithy.Schema{&sIspPlacement_IspName, &sIspPlacement_PlacementStatistics}}
+var m_IspPlacements = smithy.SchemaMembers{List: []*smithy.Schema{&s_IspPlacements_member}}
+var mKinesisFirehoseDestination = smithy.SchemaMembers{List: []*smithy.Schema{&sKinesisFirehoseDestination_IamRoleArn, &sKinesisFirehoseDestination_DeliveryStreamArn}}
+var mLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sLimitExceededException_message}}
+var m_ListOfDedicatedIpPools = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListOfDedicatedIpPools_member}}
+var mMailFromAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sMailFromAttributes_MailFromDomain, &sMailFromAttributes_MailFromDomainStatus, &sMailFromAttributes_BehaviorOnMxFailure}}
+var mMailFromDomainNotVerifiedException = smithy.SchemaMembers{List: []*smithy.Schema{&sMailFromDomainNotVerifiedException_message}}
+var mMailFromDomainStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sMailFromDomainStatus_PENDING, &sMailFromDomainStatus_SUCCESS, &sMailFromDomainStatus_FAILED, &sMailFromDomainStatus_TEMPORARY_FAILURE}}
+var mMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sMessage_Subject, &sMessage_Body}}
+var mMessageRejected = smithy.SchemaMembers{List: []*smithy.Schema{&sMessageRejected_message}}
+var mMessageTag = smithy.SchemaMembers{List: []*smithy.Schema{&sMessageTag_Name, &sMessageTag_Value}}
+var m_MessageTagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MessageTagList_member}}
+var mNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sNotFoundException_message}}
+var mOverallVolume = smithy.SchemaMembers{List: []*smithy.Schema{&sOverallVolume_VolumeStatistics, &sOverallVolume_ReadRatePercent, &sOverallVolume_DomainIspPlacements}}
+var mPinpointDestination = smithy.SchemaMembers{List: []*smithy.Schema{&sPinpointDestination_ApplicationArn}}
+var mPlacementStatistics = smithy.SchemaMembers{List: []*smithy.Schema{&sPlacementStatistics_InboxPercentage, &sPlacementStatistics_SpamPercentage, &sPlacementStatistics_MissingPercentage, &sPlacementStatistics_SpfPercentage, &sPlacementStatistics_DkimPercentage}}
+var mRawMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sRawMessage_Data}}
+var mReputationOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sReputationOptions_ReputationMetricsEnabled, &sReputationOptions_LastFreshStart}}
+var mSendingOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sSendingOptions_SendingEnabled}}
+var mSendingPausedException = smithy.SchemaMembers{List: []*smithy.Schema{&sSendingPausedException_message}}
+var mSendQuota = smithy.SchemaMembers{List: []*smithy.Schema{&sSendQuota_Max24HourSend, &sSendQuota_MaxSendRate, &sSendQuota_SentLast24Hours}}
+var mSnsDestination = smithy.SchemaMembers{List: []*smithy.Schema{&sSnsDestination_TopicArn}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var mTemplate = smithy.SchemaMembers{List: []*smithy.Schema{&sTemplate_TemplateArn, &sTemplate_TemplateData}}
+var mTlsPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sTlsPolicy_REQUIRE, &sTlsPolicy_OPTIONAL}}
+var mTooManyRequestsException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyRequestsException_message}}
+var mTrackingOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sTrackingOptions_CustomRedirectDomain}}
+var mVolumeStatistics = smithy.SchemaMembers{List: []*smithy.Schema{&sVolumeStatistics_InboxRawCount, &sVolumeStatistics_SpamRawCount, &sVolumeStatistics_ProjectedInbox, &sVolumeStatistics_ProjectedSpam}}
+var mWarmupStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sWarmupStatus_IN_PROGRESS, &sWarmupStatus_DONE}}
+var mCreateConfigurationSetEventDestinationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateConfigurationSetEventDestinationRequest_ConfigurationSetName, &sCreateConfigurationSetEventDestinationRequest_EventDestinationName, &sCreateConfigurationSetEventDestinationRequest_EventDestination}}
+var mCreateConfigurationSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateConfigurationSetRequest_ConfigurationSetName, &sCreateConfigurationSetRequest_TrackingOptions, &sCreateConfigurationSetRequest_DeliveryOptions, &sCreateConfigurationSetRequest_ReputationOptions, &sCreateConfigurationSetRequest_SendingOptions, &sCreateConfigurationSetRequest_Tags}}
+var mCreateDedicatedIpPoolRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDedicatedIpPoolRequest_PoolName, &sCreateDedicatedIpPoolRequest_Tags}}
+var mCreateDeliverabilityTestReportRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDeliverabilityTestReportRequest_ReportName, &sCreateDeliverabilityTestReportRequest_FromEmailAddress, &sCreateDeliverabilityTestReportRequest_Content, &sCreateDeliverabilityTestReportRequest_Tags}}
+var mCreateDeliverabilityTestReportResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDeliverabilityTestReportResponse_ReportId, &sCreateDeliverabilityTestReportResponse_DeliverabilityTestStatus}}
+var mCreateEmailIdentityRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateEmailIdentityRequest_EmailIdentity, &sCreateEmailIdentityRequest_Tags}}
+var mCreateEmailIdentityResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateEmailIdentityResponse_IdentityType, &sCreateEmailIdentityResponse_VerifiedForSendingStatus, &sCreateEmailIdentityResponse_DkimAttributes}}
+var mDeleteConfigurationSetEventDestinationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteConfigurationSetEventDestinationRequest_ConfigurationSetName, &sDeleteConfigurationSetEventDestinationRequest_EventDestinationName}}
+var mDeleteConfigurationSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteConfigurationSetRequest_ConfigurationSetName}}
+var mDeleteDedicatedIpPoolRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDedicatedIpPoolRequest_PoolName}}
+var mDeleteEmailIdentityRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteEmailIdentityRequest_EmailIdentity}}
+var mGetAccountResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAccountResponse_SendQuota, &sGetAccountResponse_SendingEnabled, &sGetAccountResponse_DedicatedIpAutoWarmupEnabled, &sGetAccountResponse_EnforcementStatus, &sGetAccountResponse_ProductionAccessEnabled}}
+var mGetBlacklistReportsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBlacklistReportsRequest_BlacklistItemNames}}
+var mGetBlacklistReportsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBlacklistReportsResponse_BlacklistReport}}
+var mGetConfigurationSetEventDestinationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetConfigurationSetEventDestinationsRequest_ConfigurationSetName}}
+var mGetConfigurationSetEventDestinationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetConfigurationSetEventDestinationsResponse_EventDestinations}}
+var mGetConfigurationSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetConfigurationSetRequest_ConfigurationSetName}}
+var mGetConfigurationSetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetConfigurationSetResponse_ConfigurationSetName, &sGetConfigurationSetResponse_TrackingOptions, &sGetConfigurationSetResponse_DeliveryOptions, &sGetConfigurationSetResponse_ReputationOptions, &sGetConfigurationSetResponse_SendingOptions, &sGetConfigurationSetResponse_Tags}}
+var mGetDedicatedIpRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDedicatedIpRequest_Ip}}
+var mGetDedicatedIpResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDedicatedIpResponse_DedicatedIp}}
+var mGetDedicatedIpsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDedicatedIpsRequest_PoolName, &sGetDedicatedIpsRequest_NextToken, &sGetDedicatedIpsRequest_PageSize}}
+var mGetDedicatedIpsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDedicatedIpsResponse_DedicatedIps, &sGetDedicatedIpsResponse_NextToken}}
+var mGetDeliverabilityDashboardOptionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDeliverabilityDashboardOptionsResponse_DashboardEnabled, &sGetDeliverabilityDashboardOptionsResponse_SubscriptionExpiryDate, &sGetDeliverabilityDashboardOptionsResponse_AccountStatus, &sGetDeliverabilityDashboardOptionsResponse_ActiveSubscribedDomains, &sGetDeliverabilityDashboardOptionsResponse_PendingExpirationSubscribedDomains}}
+var mGetDeliverabilityTestReportRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDeliverabilityTestReportRequest_ReportId}}
+var mGetDeliverabilityTestReportResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDeliverabilityTestReportResponse_DeliverabilityTestReport, &sGetDeliverabilityTestReportResponse_OverallPlacement, &sGetDeliverabilityTestReportResponse_IspPlacements, &sGetDeliverabilityTestReportResponse_Message, &sGetDeliverabilityTestReportResponse_Tags}}
+var mGetDomainDeliverabilityCampaignRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDomainDeliverabilityCampaignRequest_CampaignId}}
+var mGetDomainDeliverabilityCampaignResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDomainDeliverabilityCampaignResponse_DomainDeliverabilityCampaign}}
+var mGetDomainStatisticsReportRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDomainStatisticsReportRequest_Domain, &sGetDomainStatisticsReportRequest_StartDate, &sGetDomainStatisticsReportRequest_EndDate}}
+var mGetDomainStatisticsReportResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDomainStatisticsReportResponse_OverallVolume, &sGetDomainStatisticsReportResponse_DailyVolumes}}
+var mGetEmailIdentityRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEmailIdentityRequest_EmailIdentity}}
+var mGetEmailIdentityResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEmailIdentityResponse_IdentityType, &sGetEmailIdentityResponse_FeedbackForwardingStatus, &sGetEmailIdentityResponse_VerifiedForSendingStatus, &sGetEmailIdentityResponse_DkimAttributes, &sGetEmailIdentityResponse_MailFromAttributes, &sGetEmailIdentityResponse_Tags}}
+var mListConfigurationSetsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListConfigurationSetsRequest_NextToken, &sListConfigurationSetsRequest_PageSize}}
+var mListConfigurationSetsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListConfigurationSetsResponse_ConfigurationSets, &sListConfigurationSetsResponse_NextToken}}
+var mListDedicatedIpPoolsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListDedicatedIpPoolsRequest_NextToken, &sListDedicatedIpPoolsRequest_PageSize}}
+var mListDedicatedIpPoolsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListDedicatedIpPoolsResponse_DedicatedIpPools, &sListDedicatedIpPoolsResponse_NextToken}}
+var mListDeliverabilityTestReportsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListDeliverabilityTestReportsRequest_NextToken, &sListDeliverabilityTestReportsRequest_PageSize}}
+var mListDeliverabilityTestReportsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListDeliverabilityTestReportsResponse_DeliverabilityTestReports, &sListDeliverabilityTestReportsResponse_NextToken}}
+var mListDomainDeliverabilityCampaignsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListDomainDeliverabilityCampaignsRequest_StartDate, &sListDomainDeliverabilityCampaignsRequest_EndDate, &sListDomainDeliverabilityCampaignsRequest_SubscribedDomain, &sListDomainDeliverabilityCampaignsRequest_NextToken, &sListDomainDeliverabilityCampaignsRequest_PageSize}}
+var mListDomainDeliverabilityCampaignsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListDomainDeliverabilityCampaignsResponse_DomainDeliverabilityCampaigns, &sListDomainDeliverabilityCampaignsResponse_NextToken}}
+var mListEmailIdentitiesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListEmailIdentitiesRequest_NextToken, &sListEmailIdentitiesRequest_PageSize}}
+var mListEmailIdentitiesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListEmailIdentitiesResponse_EmailIdentities, &sListEmailIdentitiesResponse_NextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_Tags}}
+var mPutAccountDedicatedIpWarmupAttributesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutAccountDedicatedIpWarmupAttributesRequest_AutoWarmupEnabled}}
+var mPutAccountSendingAttributesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutAccountSendingAttributesRequest_SendingEnabled}}
+var mPutConfigurationSetDeliveryOptionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutConfigurationSetDeliveryOptionsRequest_ConfigurationSetName, &sPutConfigurationSetDeliveryOptionsRequest_TlsPolicy, &sPutConfigurationSetDeliveryOptionsRequest_SendingPoolName}}
+var mPutConfigurationSetReputationOptionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutConfigurationSetReputationOptionsRequest_ConfigurationSetName, &sPutConfigurationSetReputationOptionsRequest_ReputationMetricsEnabled}}
+var mPutConfigurationSetSendingOptionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutConfigurationSetSendingOptionsRequest_ConfigurationSetName, &sPutConfigurationSetSendingOptionsRequest_SendingEnabled}}
+var mPutConfigurationSetTrackingOptionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutConfigurationSetTrackingOptionsRequest_ConfigurationSetName, &sPutConfigurationSetTrackingOptionsRequest_CustomRedirectDomain}}
+var mPutDedicatedIpInPoolRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutDedicatedIpInPoolRequest_Ip, &sPutDedicatedIpInPoolRequest_DestinationPoolName}}
+var mPutDedicatedIpWarmupAttributesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutDedicatedIpWarmupAttributesRequest_Ip, &sPutDedicatedIpWarmupAttributesRequest_WarmupPercentage}}
+var mPutDeliverabilityDashboardOptionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutDeliverabilityDashboardOptionRequest_DashboardEnabled, &sPutDeliverabilityDashboardOptionRequest_SubscribedDomains}}
+var mPutEmailIdentityDkimAttributesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutEmailIdentityDkimAttributesRequest_EmailIdentity, &sPutEmailIdentityDkimAttributesRequest_SigningEnabled}}
+var mPutEmailIdentityFeedbackAttributesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutEmailIdentityFeedbackAttributesRequest_EmailIdentity, &sPutEmailIdentityFeedbackAttributesRequest_EmailForwardingEnabled}}
+var mPutEmailIdentityMailFromAttributesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutEmailIdentityMailFromAttributesRequest_EmailIdentity, &sPutEmailIdentityMailFromAttributesRequest_MailFromDomain, &sPutEmailIdentityMailFromAttributesRequest_BehaviorOnMxFailure}}
+var mSendEmailRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sSendEmailRequest_FromEmailAddress, &sSendEmailRequest_Destination, &sSendEmailRequest_ReplyToAddresses, &sSendEmailRequest_FeedbackForwardingEmailAddress, &sSendEmailRequest_Content, &sSendEmailRequest_EmailTags, &sSendEmailRequest_ConfigurationSetName}}
+var mSendEmailResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sSendEmailResponse_MessageId}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceArn, &sTagResourceRequest_Tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceArn, &sUntagResourceRequest_TagKeys}}
+var mUpdateConfigurationSetEventDestinationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateConfigurationSetEventDestinationRequest_ConfigurationSetName, &sUpdateConfigurationSetEventDestinationRequest_EventDestinationName, &sUpdateConfigurationSetEventDestinationRequest_EventDestination}}
+
+var sCreateConfigurationSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConfigurationSet, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sCreateConfigurationSetEventDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConfigurationSetEventDestination, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sCreateDedicatedIpPool = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDedicatedIpPool, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sCreateDeliverabilityTestReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDeliverabilityTestReport, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sCreateEmailIdentity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEmailIdentity, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sDeleteConfigurationSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConfigurationSet, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var sDeleteConfigurationSetEventDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConfigurationSetEventDestination, Traits: &t6, Type: smithy.ShapeTypeOperation})
+var sDeleteDedicatedIpPool = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDedicatedIpPool, Traits: &t7, Type: smithy.ShapeTypeOperation})
+var sDeleteEmailIdentity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEmailIdentity, Traits: &t8, Type: smithy.ShapeTypeOperation})
+var sGetAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccount, Traits: &t9, Type: smithy.ShapeTypeOperation})
+var sGetBlacklistReports = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBlacklistReports, Traits: &t10, Type: smithy.ShapeTypeOperation})
+var sGetConfigurationSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfigurationSet, Traits: &t11, Type: smithy.ShapeTypeOperation})
+var sGetConfigurationSetEventDestinations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfigurationSetEventDestinations, Traits: &t12, Type: smithy.ShapeTypeOperation})
+var sGetDedicatedIp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDedicatedIp, Traits: &t13, Type: smithy.ShapeTypeOperation})
+var sGetDedicatedIps = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDedicatedIps, Traits: &t14, Type: smithy.ShapeTypeOperation})
+var sGetDeliverabilityDashboardOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDeliverabilityDashboardOptions, Traits: &t15, Type: smithy.ShapeTypeOperation})
+var sGetDeliverabilityTestReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDeliverabilityTestReport, Traits: &t16, Type: smithy.ShapeTypeOperation})
+var sGetDomainDeliverabilityCampaign = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainDeliverabilityCampaign, Traits: &t17, Type: smithy.ShapeTypeOperation})
+var sGetDomainStatisticsReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainStatisticsReport, Traits: &t18, Type: smithy.ShapeTypeOperation})
+var sGetEmailIdentity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEmailIdentity, Traits: &t19, Type: smithy.ShapeTypeOperation})
+var sListConfigurationSets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConfigurationSets, Traits: &t20, Type: smithy.ShapeTypeOperation})
+var sListDedicatedIpPools = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDedicatedIpPools, Traits: &t21, Type: smithy.ShapeTypeOperation})
+var sListDeliverabilityTestReports = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDeliverabilityTestReports, Traits: &t22, Type: smithy.ShapeTypeOperation})
+var sListDomainDeliverabilityCampaigns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDomainDeliverabilityCampaigns, Traits: &t23, Type: smithy.ShapeTypeOperation})
+var sListEmailIdentities = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEmailIdentities, Traits: &t24, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t25, Type: smithy.ShapeTypeOperation})
+var sPutAccountDedicatedIpWarmupAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAccountDedicatedIpWarmupAttributes, Traits: &t26, Type: smithy.ShapeTypeOperation})
+var sPutAccountSendingAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAccountSendingAttributes, Traits: &t27, Type: smithy.ShapeTypeOperation})
+var sPutConfigurationSetDeliveryOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutConfigurationSetDeliveryOptions, Traits: &t28, Type: smithy.ShapeTypeOperation})
+var sPutConfigurationSetReputationOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutConfigurationSetReputationOptions, Traits: &t29, Type: smithy.ShapeTypeOperation})
+var sPutConfigurationSetSendingOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutConfigurationSetSendingOptions, Traits: &t30, Type: smithy.ShapeTypeOperation})
+var sPutConfigurationSetTrackingOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutConfigurationSetTrackingOptions, Traits: &t31, Type: smithy.ShapeTypeOperation})
+var sPutDedicatedIpInPool = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutDedicatedIpInPool, Traits: &t32, Type: smithy.ShapeTypeOperation})
+var sPutDedicatedIpWarmupAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutDedicatedIpWarmupAttributes, Traits: &t33, Type: smithy.ShapeTypeOperation})
+var sPutDeliverabilityDashboardOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutDeliverabilityDashboardOption, Traits: &t34, Type: smithy.ShapeTypeOperation})
+var sPutEmailIdentityDkimAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEmailIdentityDkimAttributes, Traits: &t35, Type: smithy.ShapeTypeOperation})
+var sPutEmailIdentityFeedbackAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEmailIdentityFeedbackAttributes, Traits: &t36, Type: smithy.ShapeTypeOperation})
+var sPutEmailIdentityMailFromAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEmailIdentityMailFromAttributes, Traits: &t37, Type: smithy.ShapeTypeOperation})
+var sSendEmail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendEmail, Traits: &t38, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t39, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t40, Type: smithy.ShapeTypeOperation})
+var sUpdateConfigurationSetEventDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConfigurationSetEventDestination, Traits: &t41, Type: smithy.ShapeTypeOperation})
+var s_AmazonPinpointEmailService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonPinpointEmailService, Type: smithy.ShapeTypeService})
+var sAccountSuspendedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountSuspendedException, Members: &mAccountSuspendedException, Traits: &t42, Type: smithy.ShapeTypeStructure})
+var sAlreadyExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAlreadyExistsException, Members: &mAlreadyExistsException, Traits: &t42, Type: smithy.ShapeTypeStructure})
+var s_AmazonResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString})
+var sBadRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBadRequestException, Members: &mBadRequestException, Traits: &t42, Type: smithy.ShapeTypeStructure})
+var sBehaviorOnMxFailure = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBehaviorOnMxFailure, Members: &mBehaviorOnMxFailure, Type: smithy.ShapeTypeEnum})
+var s_BlacklistEntries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlacklistEntries, Members: &m_BlacklistEntries, Type: smithy.ShapeTypeList})
+var sBlacklistEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBlacklistEntry, Members: &mBlacklistEntry, Type: smithy.ShapeTypeStructure})
+var s_BlacklistingDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlacklistingDescription, Type: smithy.ShapeTypeString})
+var s_BlacklistItemName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlacklistItemName, Type: smithy.ShapeTypeString})
+var s_BlacklistItemNames = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlacklistItemNames, Members: &m_BlacklistItemNames, Type: smithy.ShapeTypeList})
+var s_BlacklistReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlacklistReport, Members: &m_BlacklistReport, Type: smithy.ShapeTypeMap})
+var sBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBody, Members: &mBody, Type: smithy.ShapeTypeStructure})
+var s_CampaignId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CampaignId, Type: smithy.ShapeTypeString})
+var s_Charset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Charset, Type: smithy.ShapeTypeString})
+var sCloudWatchDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudWatchDestination, Members: &mCloudWatchDestination, Type: smithy.ShapeTypeStructure})
+var sCloudWatchDimensionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudWatchDimensionConfiguration, Members: &mCloudWatchDimensionConfiguration, Type: smithy.ShapeTypeStructure})
+var s_CloudWatchDimensionConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CloudWatchDimensionConfigurations, Members: &m_CloudWatchDimensionConfigurations, Type: smithy.ShapeTypeList})
+var sConcurrentModificationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConcurrentModificationException, Members: &mConcurrentModificationException, Traits: &t43, Type: smithy.ShapeTypeStructure})
+var s_ConfigurationSetName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfigurationSetName, Type: smithy.ShapeTypeString})
+var s_ConfigurationSetNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfigurationSetNameList, Members: &m_ConfigurationSetNameList, Type: smithy.ShapeTypeList})
+var sContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContent, Members: &mContent, Type: smithy.ShapeTypeStructure})
+var s_CustomRedirectDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomRedirectDomain, Type: smithy.ShapeTypeString})
+var sDailyVolume = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDailyVolume, Members: &mDailyVolume, Type: smithy.ShapeTypeStructure})
+var s_DailyVolumes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DailyVolumes, Members: &m_DailyVolumes, Type: smithy.ShapeTypeList})
+var sDedicatedIp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDedicatedIp, Members: &mDedicatedIp, Type: smithy.ShapeTypeStructure})
+var s_DedicatedIpList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DedicatedIpList, Members: &m_DedicatedIpList, Type: smithy.ShapeTypeList})
+var s_DefaultDimensionValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DefaultDimensionValue, Type: smithy.ShapeTypeString})
+var sDeliverabilityDashboardAccountStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeliverabilityDashboardAccountStatus, Members: &mDeliverabilityDashboardAccountStatus, Type: smithy.ShapeTypeEnum})
+var sDeliverabilityTestReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeliverabilityTestReport, Members: &mDeliverabilityTestReport, Type: smithy.ShapeTypeStructure})
+var s_DeliverabilityTestReports = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeliverabilityTestReports, Members: &m_DeliverabilityTestReports, Type: smithy.ShapeTypeList})
+var sDeliverabilityTestStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeliverabilityTestStatus, Members: &mDeliverabilityTestStatus, Type: smithy.ShapeTypeEnum})
+var s_DeliverabilityTestSubject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeliverabilityTestSubject, Type: smithy.ShapeTypeString})
+var sDeliveryOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeliveryOptions, Members: &mDeliveryOptions, Type: smithy.ShapeTypeStructure})
+var sDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDestination, Members: &mDestination, Type: smithy.ShapeTypeStructure})
+var s_DimensionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DimensionName, Type: smithy.ShapeTypeString})
+var sDimensionValueSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDimensionValueSource, Members: &mDimensionValueSource, Type: smithy.ShapeTypeEnum})
+var sDkimAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDkimAttributes, Members: &mDkimAttributes, Type: smithy.ShapeTypeStructure})
+var sDkimStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDkimStatus, Members: &mDkimStatus, Type: smithy.ShapeTypeEnum})
+var s_DnsToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DnsToken, Type: smithy.ShapeTypeString})
+var s_DnsTokenList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DnsTokenList, Members: &m_DnsTokenList, Type: smithy.ShapeTypeList})
+var s_Domain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Domain, Type: smithy.ShapeTypeString})
+var sDomainDeliverabilityCampaign = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainDeliverabilityCampaign, Members: &mDomainDeliverabilityCampaign, Type: smithy.ShapeTypeStructure})
+var s_DomainDeliverabilityCampaignList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainDeliverabilityCampaignList, Members: &m_DomainDeliverabilityCampaignList, Type: smithy.ShapeTypeList})
+var sDomainDeliverabilityTrackingOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainDeliverabilityTrackingOption, Members: &mDomainDeliverabilityTrackingOption, Type: smithy.ShapeTypeStructure})
+var s_DomainDeliverabilityTrackingOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainDeliverabilityTrackingOptions, Members: &m_DomainDeliverabilityTrackingOptions, Type: smithy.ShapeTypeList})
+var sDomainIspPlacement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainIspPlacement, Members: &mDomainIspPlacement, Type: smithy.ShapeTypeStructure})
+var s_DomainIspPlacements = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainIspPlacements, Members: &m_DomainIspPlacements, Type: smithy.ShapeTypeList})
+var s_EmailAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EmailAddress, Type: smithy.ShapeTypeString})
+var s_EmailAddressList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EmailAddressList, Members: &m_EmailAddressList, Type: smithy.ShapeTypeList})
+var sEmailContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEmailContent, Members: &mEmailContent, Type: smithy.ShapeTypeStructure})
+var s_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Enabled, Type: smithy.ShapeTypeBoolean})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_Esp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Esp, Type: smithy.ShapeTypeString})
+var s_Esps = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Esps, Members: &m_Esps, Type: smithy.ShapeTypeList})
+var sEventDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventDestination, Members: &mEventDestination, Type: smithy.ShapeTypeStructure})
+var sEventDestinationDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventDestinationDefinition, Members: &mEventDestinationDefinition, Type: smithy.ShapeTypeStructure})
+var s_EventDestinationName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventDestinationName, Type: smithy.ShapeTypeString})
+var s_EventDestinations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventDestinations, Members: &m_EventDestinations, Type: smithy.ShapeTypeList})
+var sEventType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventType, Members: &mEventType, Type: smithy.ShapeTypeEnum})
+var s_EventTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventTypes, Members: &m_EventTypes, Type: smithy.ShapeTypeList})
+var s_GeneralEnforcementStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GeneralEnforcementStatus, Type: smithy.ShapeTypeString})
+var s_Identity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Identity, Type: smithy.ShapeTypeString})
+var sIdentityInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdentityInfo, Members: &mIdentityInfo, Type: smithy.ShapeTypeStructure})
+var s_IdentityInfoList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdentityInfoList, Members: &m_IdentityInfoList, Type: smithy.ShapeTypeList})
+var sIdentityType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdentityType, Members: &mIdentityType, Type: smithy.ShapeTypeEnum})
+var s_ImageUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImageUrl, Type: smithy.ShapeTypeString})
+var sInboxPlacementTrackingOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInboxPlacementTrackingOption, Members: &mInboxPlacementTrackingOption, Type: smithy.ShapeTypeStructure})
+var s_Ip = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Ip, Type: smithy.ShapeTypeString})
+var s_IpList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IpList, Members: &m_IpList, Type: smithy.ShapeTypeList})
+var s_IspName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IspName, Type: smithy.ShapeTypeString})
+var s_IspNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IspNameList, Members: &m_IspNameList, Type: smithy.ShapeTypeList})
+var sIspPlacement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIspPlacement, Members: &mIspPlacement, Type: smithy.ShapeTypeStructure})
+var s_IspPlacements = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IspPlacements, Members: &m_IspPlacements, Type: smithy.ShapeTypeList})
+var sKinesisFirehoseDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKinesisFirehoseDestination, Members: &mKinesisFirehoseDestination, Type: smithy.ShapeTypeStructure})
+var s_LastFreshStart = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastFreshStart, Type: smithy.ShapeTypeTimestamp})
+var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t42, Type: smithy.ShapeTypeStructure})
+var s_ListOfDedicatedIpPools = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListOfDedicatedIpPools, Members: &m_ListOfDedicatedIpPools, Type: smithy.ShapeTypeList})
+var sMailFromAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMailFromAttributes, Members: &mMailFromAttributes, Type: smithy.ShapeTypeStructure})
+var s_MailFromDomainName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MailFromDomainName, Type: smithy.ShapeTypeString})
+var sMailFromDomainNotVerifiedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMailFromDomainNotVerifiedException, Members: &mMailFromDomainNotVerifiedException, Traits: &t42, Type: smithy.ShapeTypeStructure})
+var sMailFromDomainStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMailFromDomainStatus, Members: &mMailFromDomainStatus, Type: smithy.ShapeTypeEnum})
+var s_Max24HourSend = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Max24HourSend, Type: smithy.ShapeTypeDouble})
+var s_MaxItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxItems, Type: smithy.ShapeTypeInteger})
+var s_MaxSendRate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxSendRate, Type: smithy.ShapeTypeDouble})
+var sMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMessage, Members: &mMessage, Type: smithy.ShapeTypeStructure})
+var s_MessageContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MessageContent, Type: smithy.ShapeTypeString})
+var s_MessageData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MessageData, Type: smithy.ShapeTypeString})
+var sMessageRejected = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMessageRejected, Members: &mMessageRejected, Traits: &t42, Type: smithy.ShapeTypeStructure})
+var sMessageTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMessageTag, Members: &mMessageTag, Type: smithy.ShapeTypeStructure})
+var s_MessageTagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MessageTagList, Members: &m_MessageTagList, Type: smithy.ShapeTypeList})
+var s_MessageTagName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MessageTagName, Type: smithy.ShapeTypeString})
+var s_MessageTagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MessageTagValue, Type: smithy.ShapeTypeString})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotFoundException, Members: &mNotFoundException, Traits: &t44, Type: smithy.ShapeTypeStructure})
+var s_OutboundMessageId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutboundMessageId, Type: smithy.ShapeTypeString})
+var sOverallVolume = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOverallVolume, Members: &mOverallVolume, Type: smithy.ShapeTypeStructure})
+var s_Percentage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Percentage, Type: smithy.ShapeTypeDouble})
+var s_Percentage100Wrapper = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Percentage100Wrapper, Type: smithy.ShapeTypeInteger})
+var sPinpointDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPinpointDestination, Members: &mPinpointDestination, Type: smithy.ShapeTypeStructure})
+var sPlacementStatistics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlacementStatistics, Members: &mPlacementStatistics, Type: smithy.ShapeTypeStructure})
+var s_PoolName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PoolName, Type: smithy.ShapeTypeString})
+var sRawMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRawMessage, Members: &mRawMessage, Type: smithy.ShapeTypeStructure})
+var s_RawMessageData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RawMessageData, Type: smithy.ShapeTypeBlob})
+var s_RblName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RblName, Type: smithy.ShapeTypeString})
+var s_ReportId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReportId, Type: smithy.ShapeTypeString})
+var s_ReportName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReportName, Type: smithy.ShapeTypeString})
+var sReputationOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReputationOptions, Members: &mReputationOptions, Type: smithy.ShapeTypeStructure})
+var sSendingOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendingOptions, Members: &mSendingOptions, Type: smithy.ShapeTypeStructure})
+var sSendingPausedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendingPausedException, Members: &mSendingPausedException, Traits: &t42, Type: smithy.ShapeTypeStructure})
+var s_SendingPoolName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SendingPoolName, Type: smithy.ShapeTypeString})
+var sSendQuota = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendQuota, Members: &mSendQuota, Type: smithy.ShapeTypeStructure})
+var s_SentLast24Hours = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SentLast24Hours, Type: smithy.ShapeTypeDouble})
+var sSnsDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnsDestination, Members: &mSnsDestination, Type: smithy.ShapeTypeStructure})
+var s_Subject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Subject, Type: smithy.ShapeTypeString})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTemplate, Members: &mTemplate, Type: smithy.ShapeTypeStructure})
+var s_TemplateArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TemplateArn, Type: smithy.ShapeTypeString})
+var s_TemplateData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TemplateData, Type: smithy.ShapeTypeString})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sTlsPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTlsPolicy, Members: &mTlsPolicy, Type: smithy.ShapeTypeEnum})
+var sTooManyRequestsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyRequestsException, Members: &mTooManyRequestsException, Traits: &t45, Type: smithy.ShapeTypeStructure})
+var sTrackingOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrackingOptions, Members: &mTrackingOptions, Type: smithy.ShapeTypeStructure})
+var s_Volume = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Volume, Type: smithy.ShapeTypeLong})
+var sVolumeStatistics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVolumeStatistics, Members: &mVolumeStatistics, Type: smithy.ShapeTypeStructure})
+var sWarmupStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWarmupStatus, Members: &mWarmupStatus, Type: smithy.ShapeTypeEnum})
+var sCreateConfigurationSetEventDestinationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConfigurationSetEventDestinationRequest, Members: &mCreateConfigurationSetEventDestinationRequest, Type: smithy.ShapeTypeStructure})
+var sCreateConfigurationSetEventDestinationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConfigurationSetEventDestinationResponse, Type: smithy.ShapeTypeStructure})
+var sCreateConfigurationSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConfigurationSetRequest, Members: &mCreateConfigurationSetRequest, Type: smithy.ShapeTypeStructure})
+var sCreateConfigurationSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConfigurationSetResponse, Type: smithy.ShapeTypeStructure})
+var sCreateDedicatedIpPoolRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDedicatedIpPoolRequest, Members: &mCreateDedicatedIpPoolRequest, Type: smithy.ShapeTypeStructure})
+var sCreateDedicatedIpPoolResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDedicatedIpPoolResponse, Type: smithy.ShapeTypeStructure})
+var sCreateDeliverabilityTestReportRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDeliverabilityTestReportRequest, Members: &mCreateDeliverabilityTestReportRequest, Type: smithy.ShapeTypeStructure})
+var sCreateDeliverabilityTestReportResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDeliverabilityTestReportResponse, Members: &mCreateDeliverabilityTestReportResponse, Type: smithy.ShapeTypeStructure})
+var sCreateEmailIdentityRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEmailIdentityRequest, Members: &mCreateEmailIdentityRequest, Type: smithy.ShapeTypeStructure})
+var sCreateEmailIdentityResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEmailIdentityResponse, Members: &mCreateEmailIdentityResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteConfigurationSetEventDestinationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConfigurationSetEventDestinationRequest, Members: &mDeleteConfigurationSetEventDestinationRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteConfigurationSetEventDestinationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConfigurationSetEventDestinationResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteConfigurationSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConfigurationSetRequest, Members: &mDeleteConfigurationSetRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteConfigurationSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConfigurationSetResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteDedicatedIpPoolRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDedicatedIpPoolRequest, Members: &mDeleteDedicatedIpPoolRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteDedicatedIpPoolResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDedicatedIpPoolResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteEmailIdentityRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEmailIdentityRequest, Members: &mDeleteEmailIdentityRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteEmailIdentityResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEmailIdentityResponse, Type: smithy.ShapeTypeStructure})
+var sGetAccountRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountRequest, Type: smithy.ShapeTypeStructure})
+var sGetAccountResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountResponse, Members: &mGetAccountResponse, Type: smithy.ShapeTypeStructure})
+var sGetBlacklistReportsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBlacklistReportsRequest, Members: &mGetBlacklistReportsRequest, Type: smithy.ShapeTypeStructure})
+var sGetBlacklistReportsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBlacklistReportsResponse, Members: &mGetBlacklistReportsResponse, Type: smithy.ShapeTypeStructure})
+var sGetConfigurationSetEventDestinationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfigurationSetEventDestinationsRequest, Members: &mGetConfigurationSetEventDestinationsRequest, Type: smithy.ShapeTypeStructure})
+var sGetConfigurationSetEventDestinationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfigurationSetEventDestinationsResponse, Members: &mGetConfigurationSetEventDestinationsResponse, Type: smithy.ShapeTypeStructure})
+var sGetConfigurationSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfigurationSetRequest, Members: &mGetConfigurationSetRequest, Type: smithy.ShapeTypeStructure})
+var sGetConfigurationSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfigurationSetResponse, Members: &mGetConfigurationSetResponse, Type: smithy.ShapeTypeStructure})
+var sGetDedicatedIpRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDedicatedIpRequest, Members: &mGetDedicatedIpRequest, Type: smithy.ShapeTypeStructure})
+var sGetDedicatedIpResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDedicatedIpResponse, Members: &mGetDedicatedIpResponse, Type: smithy.ShapeTypeStructure})
+var sGetDedicatedIpsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDedicatedIpsRequest, Members: &mGetDedicatedIpsRequest, Type: smithy.ShapeTypeStructure})
+var sGetDedicatedIpsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDedicatedIpsResponse, Members: &mGetDedicatedIpsResponse, Type: smithy.ShapeTypeStructure})
+var sGetDeliverabilityDashboardOptionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDeliverabilityDashboardOptionsRequest, Type: smithy.ShapeTypeStructure})
+var sGetDeliverabilityDashboardOptionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDeliverabilityDashboardOptionsResponse, Members: &mGetDeliverabilityDashboardOptionsResponse, Type: smithy.ShapeTypeStructure})
+var sGetDeliverabilityTestReportRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDeliverabilityTestReportRequest, Members: &mGetDeliverabilityTestReportRequest, Type: smithy.ShapeTypeStructure})
+var sGetDeliverabilityTestReportResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDeliverabilityTestReportResponse, Members: &mGetDeliverabilityTestReportResponse, Type: smithy.ShapeTypeStructure})
+var sGetDomainDeliverabilityCampaignRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainDeliverabilityCampaignRequest, Members: &mGetDomainDeliverabilityCampaignRequest, Type: smithy.ShapeTypeStructure})
+var sGetDomainDeliverabilityCampaignResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainDeliverabilityCampaignResponse, Members: &mGetDomainDeliverabilityCampaignResponse, Type: smithy.ShapeTypeStructure})
+var sGetDomainStatisticsReportRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainStatisticsReportRequest, Members: &mGetDomainStatisticsReportRequest, Type: smithy.ShapeTypeStructure})
+var sGetDomainStatisticsReportResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainStatisticsReportResponse, Members: &mGetDomainStatisticsReportResponse, Type: smithy.ShapeTypeStructure})
+var sGetEmailIdentityRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEmailIdentityRequest, Members: &mGetEmailIdentityRequest, Type: smithy.ShapeTypeStructure})
+var sGetEmailIdentityResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEmailIdentityResponse, Members: &mGetEmailIdentityResponse, Type: smithy.ShapeTypeStructure})
+var sListConfigurationSetsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConfigurationSetsRequest, Members: &mListConfigurationSetsRequest, Type: smithy.ShapeTypeStructure})
+var sListConfigurationSetsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConfigurationSetsResponse, Members: &mListConfigurationSetsResponse, Type: smithy.ShapeTypeStructure})
+var sListDedicatedIpPoolsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDedicatedIpPoolsRequest, Members: &mListDedicatedIpPoolsRequest, Type: smithy.ShapeTypeStructure})
+var sListDedicatedIpPoolsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDedicatedIpPoolsResponse, Members: &mListDedicatedIpPoolsResponse, Type: smithy.ShapeTypeStructure})
+var sListDeliverabilityTestReportsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDeliverabilityTestReportsRequest, Members: &mListDeliverabilityTestReportsRequest, Type: smithy.ShapeTypeStructure})
+var sListDeliverabilityTestReportsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDeliverabilityTestReportsResponse, Members: &mListDeliverabilityTestReportsResponse, Type: smithy.ShapeTypeStructure})
+var sListDomainDeliverabilityCampaignsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDomainDeliverabilityCampaignsRequest, Members: &mListDomainDeliverabilityCampaignsRequest, Type: smithy.ShapeTypeStructure})
+var sListDomainDeliverabilityCampaignsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDomainDeliverabilityCampaignsResponse, Members: &mListDomainDeliverabilityCampaignsResponse, Type: smithy.ShapeTypeStructure})
+var sListEmailIdentitiesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEmailIdentitiesRequest, Members: &mListEmailIdentitiesRequest, Type: smithy.ShapeTypeStructure})
+var sListEmailIdentitiesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEmailIdentitiesResponse, Members: &mListEmailIdentitiesResponse, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure})
+var sPutAccountDedicatedIpWarmupAttributesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAccountDedicatedIpWarmupAttributesRequest, Members: &mPutAccountDedicatedIpWarmupAttributesRequest, Type: smithy.ShapeTypeStructure})
+var sPutAccountDedicatedIpWarmupAttributesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAccountDedicatedIpWarmupAttributesResponse, Type: smithy.ShapeTypeStructure})
+var sPutAccountSendingAttributesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAccountSendingAttributesRequest, Members: &mPutAccountSendingAttributesRequest, Type: smithy.ShapeTypeStructure})
+var sPutAccountSendingAttributesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAccountSendingAttributesResponse, Type: smithy.ShapeTypeStructure})
+var sPutConfigurationSetDeliveryOptionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutConfigurationSetDeliveryOptionsRequest, Members: &mPutConfigurationSetDeliveryOptionsRequest, Type: smithy.ShapeTypeStructure})
+var sPutConfigurationSetDeliveryOptionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutConfigurationSetDeliveryOptionsResponse, Type: smithy.ShapeTypeStructure})
+var sPutConfigurationSetReputationOptionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutConfigurationSetReputationOptionsRequest, Members: &mPutConfigurationSetReputationOptionsRequest, Type: smithy.ShapeTypeStructure})
+var sPutConfigurationSetReputationOptionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutConfigurationSetReputationOptionsResponse, Type: smithy.ShapeTypeStructure})
+var sPutConfigurationSetSendingOptionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutConfigurationSetSendingOptionsRequest, Members: &mPutConfigurationSetSendingOptionsRequest, Type: smithy.ShapeTypeStructure})
+var sPutConfigurationSetSendingOptionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutConfigurationSetSendingOptionsResponse, Type: smithy.ShapeTypeStructure})
+var sPutConfigurationSetTrackingOptionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutConfigurationSetTrackingOptionsRequest, Members: &mPutConfigurationSetTrackingOptionsRequest, Type: smithy.ShapeTypeStructure})
+var sPutConfigurationSetTrackingOptionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutConfigurationSetTrackingOptionsResponse, Type: smithy.ShapeTypeStructure})
+var sPutDedicatedIpInPoolRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutDedicatedIpInPoolRequest, Members: &mPutDedicatedIpInPoolRequest, Type: smithy.ShapeTypeStructure})
+var sPutDedicatedIpInPoolResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutDedicatedIpInPoolResponse, Type: smithy.ShapeTypeStructure})
+var sPutDedicatedIpWarmupAttributesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutDedicatedIpWarmupAttributesRequest, Members: &mPutDedicatedIpWarmupAttributesRequest, Type: smithy.ShapeTypeStructure})
+var sPutDedicatedIpWarmupAttributesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutDedicatedIpWarmupAttributesResponse, Type: smithy.ShapeTypeStructure})
+var sPutDeliverabilityDashboardOptionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutDeliverabilityDashboardOptionRequest, Members: &mPutDeliverabilityDashboardOptionRequest, Type: smithy.ShapeTypeStructure})
+var sPutDeliverabilityDashboardOptionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutDeliverabilityDashboardOptionResponse, Type: smithy.ShapeTypeStructure})
+var sPutEmailIdentityDkimAttributesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEmailIdentityDkimAttributesRequest, Members: &mPutEmailIdentityDkimAttributesRequest, Type: smithy.ShapeTypeStructure})
+var sPutEmailIdentityDkimAttributesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEmailIdentityDkimAttributesResponse, Type: smithy.ShapeTypeStructure})
+var sPutEmailIdentityFeedbackAttributesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEmailIdentityFeedbackAttributesRequest, Members: &mPutEmailIdentityFeedbackAttributesRequest, Type: smithy.ShapeTypeStructure})
+var sPutEmailIdentityFeedbackAttributesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEmailIdentityFeedbackAttributesResponse, Type: smithy.ShapeTypeStructure})
+var sPutEmailIdentityMailFromAttributesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEmailIdentityMailFromAttributesRequest, Members: &mPutEmailIdentityMailFromAttributesRequest, Type: smithy.ShapeTypeStructure})
+var sPutEmailIdentityMailFromAttributesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEmailIdentityMailFromAttributesResponse, Type: smithy.ShapeTypeStructure})
+var sSendEmailRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendEmailRequest, Members: &mSendEmailRequest, Type: smithy.ShapeTypeStructure})
+var sSendEmailResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendEmailResponse, Members: &mSendEmailResponse, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateConfigurationSetEventDestinationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConfigurationSetEventDestinationRequest, Members: &mUpdateConfigurationSetEventDestinationRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateConfigurationSetEventDestinationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConfigurationSetEventDestinationResponse, Type: smithy.ShapeTypeStructure})
+
+var sAccountSuspendedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sAlreadyExistsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sBadRequestException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sBehaviorOnMxFailure_USE_DEFAULT_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USE_DEFAULT_VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBehaviorOnMxFailure_REJECT_MESSAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECT_MESSAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_BlacklistEntries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBlacklistEntry, Members: &mBlacklistEntry, Type: smithy.ShapeTypeStructure})
+var sBlacklistEntry_RblName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RblName", ID: &i_RblName, Type: smithy.ShapeTypeString})
+var sBlacklistEntry_ListingTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListingTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sBlacklistEntry_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_BlacklistingDescription, Type: smithy.ShapeTypeString})
+var s_BlacklistItemNames_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_BlacklistItemName, Type: smithy.ShapeTypeString})
+var s_BlacklistReport_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_BlacklistItemName, Type: smithy.ShapeTypeString})
+var s_BlacklistReport_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_BlacklistEntries, Members: &m_BlacklistEntries, Type: smithy.ShapeTypeList})
+var sBody_Text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Text", ID: &iContent, Members: &mContent, Type: smithy.ShapeTypeStructure})
+var sBody_Html = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Html", ID: &iContent, Members: &mContent, Type: smithy.ShapeTypeStructure})
+var sCloudWatchDestination_DimensionConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DimensionConfigurations", ID: &i_CloudWatchDimensionConfigurations, Members: &m_CloudWatchDimensionConfigurations, Type: smithy.ShapeTypeList})
+var sCloudWatchDimensionConfiguration_DimensionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DimensionName", ID: &i_DimensionName, Type: smithy.ShapeTypeString})
+var sCloudWatchDimensionConfiguration_DimensionValueSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DimensionValueSource", ID: &iDimensionValueSource, Members: &mDimensionValueSource, Type: smithy.ShapeTypeEnum})
+var sCloudWatchDimensionConfiguration_DefaultDimensionValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultDimensionValue", ID: &i_DefaultDimensionValue, Type: smithy.ShapeTypeString})
+var s_CloudWatchDimensionConfigurations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCloudWatchDimensionConfiguration, Members: &mCloudWatchDimensionConfiguration, Type: smithy.ShapeTypeStructure})
+var sConcurrentModificationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_ConfigurationSetNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ConfigurationSetName, Type: smithy.ShapeTypeString})
+var sContent_Data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Data", ID: &i_MessageData, Type: smithy.ShapeTypeString})
+var sContent_Charset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Charset", ID: &i_Charset, Type: smithy.ShapeTypeString})
+var sDailyVolume_StartDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDailyVolume_VolumeStatistics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeStatistics", ID: &iVolumeStatistics, Members: &mVolumeStatistics, Type: smithy.ShapeTypeStructure})
+var sDailyVolume_DomainIspPlacements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainIspPlacements", ID: &i_DomainIspPlacements, Members: &m_DomainIspPlacements, Type: smithy.ShapeTypeList})
+var s_DailyVolumes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDailyVolume, Members: &mDailyVolume, Type: smithy.ShapeTypeStructure})
+var sDedicatedIp_Ip = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ip", ID: &i_Ip, Type: smithy.ShapeTypeString})
+var sDedicatedIp_WarmupStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WarmupStatus", ID: &iWarmupStatus, Members: &mWarmupStatus, Type: smithy.ShapeTypeEnum})
+var sDedicatedIp_WarmupPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WarmupPercentage", ID: &i_Percentage100Wrapper, Type: smithy.ShapeTypeInteger})
+var sDedicatedIp_PoolName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoolName", ID: &i_PoolName, Type: smithy.ShapeTypeString})
+var s_DedicatedIpList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDedicatedIp, Members: &mDedicatedIp, Type: smithy.ShapeTypeStructure})
+var sDeliverabilityDashboardAccountStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliverabilityDashboardAccountStatus_PENDING_EXPIRATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_EXPIRATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliverabilityDashboardAccountStatus_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliverabilityTestReport_ReportId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReportId", ID: &i_ReportId, Type: smithy.ShapeTypeString})
+var sDeliverabilityTestReport_ReportName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReportName", ID: &i_ReportName, Type: smithy.ShapeTypeString})
+var sDeliverabilityTestReport_Subject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subject", ID: &i_DeliverabilityTestSubject, Type: smithy.ShapeTypeString})
+var sDeliverabilityTestReport_FromEmailAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FromEmailAddress", ID: &i_EmailAddress, Type: smithy.ShapeTypeString})
+var sDeliverabilityTestReport_CreateDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDeliverabilityTestReport_DeliverabilityTestStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliverabilityTestStatus", ID: &iDeliverabilityTestStatus, Members: &mDeliverabilityTestStatus, Type: smithy.ShapeTypeEnum})
+var s_DeliverabilityTestReports_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDeliverabilityTestReport, Members: &mDeliverabilityTestReport, Type: smithy.ShapeTypeStructure})
+var sDeliverabilityTestStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliverabilityTestStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryOptions_TlsPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TlsPolicy", ID: &iTlsPolicy, Members: &mTlsPolicy, Type: smithy.ShapeTypeEnum})
+var sDeliveryOptions_SendingPoolName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SendingPoolName", ID: &i_PoolName, Type: smithy.ShapeTypeString})
+var sDestination_ToAddresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ToAddresses", ID: &i_EmailAddressList, Members: &m_EmailAddressList, Type: smithy.ShapeTypeList})
+var sDestination_CcAddresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CcAddresses", ID: &i_EmailAddressList, Members: &m_EmailAddressList, Type: smithy.ShapeTypeList})
+var sDestination_BccAddresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BccAddresses", ID: &i_EmailAddressList, Members: &m_EmailAddressList, Type: smithy.ShapeTypeList})
+var sDimensionValueSource_MESSAGE_TAG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MESSAGE_TAG", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDimensionValueSource_EMAIL_HEADER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EMAIL_HEADER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDimensionValueSource_LINK_TAG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LINK_TAG", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDkimAttributes_SigningEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SigningEnabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean})
+var sDkimAttributes_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iDkimStatus, Members: &mDkimStatus, Type: smithy.ShapeTypeEnum})
+var sDkimAttributes_Tokens = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tokens", ID: &i_DnsTokenList, Members: &m_DnsTokenList, Type: smithy.ShapeTypeList})
+var sDkimStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDkimStatus_SUCCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDkimStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDkimStatus_TEMPORARY_FAILURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TEMPORARY_FAILURE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDkimStatus_NOT_STARTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_STARTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_DnsTokenList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_DnsToken, Type: smithy.ShapeTypeString})
+var sDomainDeliverabilityCampaign_CampaignId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CampaignId", ID: &i_CampaignId, Type: smithy.ShapeTypeString})
+var sDomainDeliverabilityCampaign_ImageUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageUrl", ID: &i_ImageUrl, Type: smithy.ShapeTypeString})
+var sDomainDeliverabilityCampaign_Subject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subject", ID: &i_Subject, Type: smithy.ShapeTypeString})
+var sDomainDeliverabilityCampaign_FromAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FromAddress", ID: &i_Identity, Type: smithy.ShapeTypeString})
+var sDomainDeliverabilityCampaign_SendingIps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SendingIps", ID: &i_IpList, Members: &m_IpList, Type: smithy.ShapeTypeList})
+var sDomainDeliverabilityCampaign_FirstSeenDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirstSeenDateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDomainDeliverabilityCampaign_LastSeenDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastSeenDateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDomainDeliverabilityCampaign_InboxCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InboxCount", ID: &i_Volume, Type: smithy.ShapeTypeLong})
+var sDomainDeliverabilityCampaign_SpamCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpamCount", ID: &i_Volume, Type: smithy.ShapeTypeLong})
+var sDomainDeliverabilityCampaign_ReadRate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadRate", ID: &i_Percentage, Type: smithy.ShapeTypeDouble})
+var sDomainDeliverabilityCampaign_DeleteRate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteRate", ID: &i_Percentage, Type: smithy.ShapeTypeDouble})
+var sDomainDeliverabilityCampaign_ReadDeleteRate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadDeleteRate", ID: &i_Percentage, Type: smithy.ShapeTypeDouble})
+var sDomainDeliverabilityCampaign_ProjectedVolume = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProjectedVolume", ID: &i_Volume, Type: smithy.ShapeTypeLong})
+var sDomainDeliverabilityCampaign_Esps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Esps", ID: &i_Esps, Members: &m_Esps, Type: smithy.ShapeTypeList})
+var s_DomainDeliverabilityCampaignList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDomainDeliverabilityCampaign, Members: &mDomainDeliverabilityCampaign, Type: smithy.ShapeTypeStructure})
+var sDomainDeliverabilityTrackingOption_Domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Domain", ID: &i_Domain, Type: smithy.ShapeTypeString})
+var sDomainDeliverabilityTrackingOption_SubscriptionStartDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionStartDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDomainDeliverabilityTrackingOption_InboxPlacementTrackingOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InboxPlacementTrackingOption", ID: &iInboxPlacementTrackingOption, Members: &mInboxPlacementTrackingOption, Type: smithy.ShapeTypeStructure})
+var s_DomainDeliverabilityTrackingOptions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDomainDeliverabilityTrackingOption, Members: &mDomainDeliverabilityTrackingOption, Type: smithy.ShapeTypeStructure})
+var sDomainIspPlacement_IspName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IspName", ID: &i_IspName, Type: smithy.ShapeTypeString})
+var sDomainIspPlacement_InboxRawCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InboxRawCount", ID: &i_Volume, Type: smithy.ShapeTypeLong})
+var sDomainIspPlacement_SpamRawCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpamRawCount", ID: &i_Volume, Type: smithy.ShapeTypeLong})
+var sDomainIspPlacement_InboxPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InboxPercentage", ID: &i_Percentage, Type: smithy.ShapeTypeDouble})
+var sDomainIspPlacement_SpamPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpamPercentage", ID: &i_Percentage, Type: smithy.ShapeTypeDouble})
+var s_DomainIspPlacements_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDomainIspPlacement, Members: &mDomainIspPlacement, Type: smithy.ShapeTypeStructure})
+var s_EmailAddressList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_EmailAddress, Type: smithy.ShapeTypeString})
+var sEmailContent_Simple = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Simple", ID: &iMessage, Members: &mMessage, Type: smithy.ShapeTypeStructure})
+var sEmailContent_Raw = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Raw", ID: &iRawMessage, Members: &mRawMessage, Type: smithy.ShapeTypeStructure})
+var sEmailContent_Template = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Template", ID: &iTemplate, Members: &mTemplate, Type: smithy.ShapeTypeStructure})
+var s_Esps_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Esp, Type: smithy.ShapeTypeString})
+var sEventDestination_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_EventDestinationName, Type: smithy.ShapeTypeString})
+var sEventDestination_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean})
+var sEventDestination_MatchingEventTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MatchingEventTypes", ID: &i_EventTypes, Members: &m_EventTypes, Type: smithy.ShapeTypeList})
+var sEventDestination_KinesisFirehoseDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KinesisFirehoseDestination", ID: &iKinesisFirehoseDestination, Members: &mKinesisFirehoseDestination, Type: smithy.ShapeTypeStructure})
+var sEventDestination_CloudWatchDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchDestination", ID: &iCloudWatchDestination, Members: &mCloudWatchDestination, Type: smithy.ShapeTypeStructure})
+var sEventDestination_SnsDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnsDestination", ID: &iSnsDestination, Members: &mSnsDestination, Type: smithy.ShapeTypeStructure})
+var sEventDestination_PinpointDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PinpointDestination", ID: &iPinpointDestination, Members: &mPinpointDestination, Type: smithy.ShapeTypeStructure})
+var sEventDestinationDefinition_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean})
+var sEventDestinationDefinition_MatchingEventTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MatchingEventTypes", ID: &i_EventTypes, Members: &m_EventTypes, Type: smithy.ShapeTypeList})
+var sEventDestinationDefinition_KinesisFirehoseDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KinesisFirehoseDestination", ID: &iKinesisFirehoseDestination, Members: &mKinesisFirehoseDestination, Type: smithy.ShapeTypeStructure})
+var sEventDestinationDefinition_CloudWatchDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchDestination", ID: &iCloudWatchDestination, Members: &mCloudWatchDestination, Type: smithy.ShapeTypeStructure})
+var sEventDestinationDefinition_SnsDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnsDestination", ID: &iSnsDestination, Members: &mSnsDestination, Type: smithy.ShapeTypeStructure})
+var sEventDestinationDefinition_PinpointDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PinpointDestination", ID: &iPinpointDestination, Members: &mPinpointDestination, Type: smithy.ShapeTypeStructure})
+var s_EventDestinations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventDestination, Members: &mEventDestination, Type: smithy.ShapeTypeStructure})
+var sEventType_SEND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SEND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_REJECT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_BOUNCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BOUNCE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_COMPLAINT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLAINT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_DELIVERY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELIVERY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_OPEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPEN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_CLICK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLICK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_RENDERING_FAILURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RENDERING_FAILURE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_EventTypes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventType, Members: &mEventType, Type: smithy.ShapeTypeEnum})
+var sIdentityInfo_IdentityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityType", ID: &iIdentityType, Members: &mIdentityType, Type: smithy.ShapeTypeEnum})
+var sIdentityInfo_IdentityName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityName", ID: &i_Identity, Type: smithy.ShapeTypeString})
+var sIdentityInfo_SendingEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SendingEnabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean})
+var s_IdentityInfoList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIdentityInfo, Members: &mIdentityInfo, Type: smithy.ShapeTypeStructure})
+var sIdentityType_EMAIL_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EMAIL_ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIdentityType_DOMAIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOMAIN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIdentityType_MANAGED_DOMAIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MANAGED_DOMAIN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInboxPlacementTrackingOption_Global = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Global", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean})
+var sInboxPlacementTrackingOption_TrackedIsps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrackedIsps", ID: &i_IspNameList, Members: &m_IspNameList, Type: smithy.ShapeTypeList})
+var s_IpList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Ip, Type: smithy.ShapeTypeString})
+var s_IspNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_IspName, Type: smithy.ShapeTypeString})
+var sIspPlacement_IspName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IspName", ID: &i_IspName, Type: smithy.ShapeTypeString})
+var sIspPlacement_PlacementStatistics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlacementStatistics", ID: &iPlacementStatistics, Members: &mPlacementStatistics, Type: smithy.ShapeTypeStructure})
+var s_IspPlacements_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIspPlacement, Members: &mIspPlacement, Type: smithy.ShapeTypeStructure})
+var sKinesisFirehoseDestination_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IamRoleArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString})
+var sKinesisFirehoseDestination_DeliveryStreamArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryStreamArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString})
+var sLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_ListOfDedicatedIpPools_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_PoolName, Type: smithy.ShapeTypeString})
+var sMailFromAttributes_MailFromDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MailFromDomain", ID: &i_MailFromDomainName, Type: smithy.ShapeTypeString})
+var sMailFromAttributes_MailFromDomainStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MailFromDomainStatus", ID: &iMailFromDomainStatus, Members: &mMailFromDomainStatus, Type: smithy.ShapeTypeEnum})
+var sMailFromAttributes_BehaviorOnMxFailure = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BehaviorOnMxFailure", ID: &iBehaviorOnMxFailure, Members: &mBehaviorOnMxFailure, Type: smithy.ShapeTypeEnum})
+var sMailFromDomainNotVerifiedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sMailFromDomainStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMailFromDomainStatus_SUCCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMailFromDomainStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMailFromDomainStatus_TEMPORARY_FAILURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TEMPORARY_FAILURE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMessage_Subject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subject", ID: &iContent, Members: &mContent, Type: smithy.ShapeTypeStructure})
+var sMessage_Body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Body", ID: &iBody, Members: &mBody, Type: smithy.ShapeTypeStructure})
+var sMessageRejected_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sMessageTag_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_MessageTagName, Type: smithy.ShapeTypeString})
+var sMessageTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_MessageTagValue, Type: smithy.ShapeTypeString})
+var s_MessageTagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMessageTag, Members: &mMessageTag, Type: smithy.ShapeTypeStructure})
+var sNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sOverallVolume_VolumeStatistics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeStatistics", ID: &iVolumeStatistics, Members: &mVolumeStatistics, Type: smithy.ShapeTypeStructure})
+var sOverallVolume_ReadRatePercent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadRatePercent", ID: &i_Percentage, Type: smithy.ShapeTypeDouble})
+var sOverallVolume_DomainIspPlacements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainIspPlacements", ID: &i_DomainIspPlacements, Members: &m_DomainIspPlacements, Type: smithy.ShapeTypeList})
+var sPinpointDestination_ApplicationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString})
+var sPlacementStatistics_InboxPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InboxPercentage", ID: &i_Percentage, Type: smithy.ShapeTypeDouble})
+var sPlacementStatistics_SpamPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpamPercentage", ID: &i_Percentage, Type: smithy.ShapeTypeDouble})
+var sPlacementStatistics_MissingPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MissingPercentage", ID: &i_Percentage, Type: smithy.ShapeTypeDouble})
+var sPlacementStatistics_SpfPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpfPercentage", ID: &i_Percentage, Type: smithy.ShapeTypeDouble})
+var sPlacementStatistics_DkimPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DkimPercentage", ID: &i_Percentage, Type: smithy.ShapeTypeDouble})
+var sRawMessage_Data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Data", ID: &i_RawMessageData, Type: smithy.ShapeTypeBlob})
+var sReputationOptions_ReputationMetricsEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReputationMetricsEnabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean})
+var sReputationOptions_LastFreshStart = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastFreshStart", ID: &i_LastFreshStart, Type: smithy.ShapeTypeTimestamp})
+var sSendingOptions_SendingEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SendingEnabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean})
+var sSendingPausedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sSendQuota_Max24HourSend = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Max24HourSend", ID: &i_Max24HourSend, Type: smithy.ShapeTypeDouble})
+var sSendQuota_MaxSendRate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxSendRate", ID: &i_MaxSendRate, Type: smithy.ShapeTypeDouble})
+var sSendQuota_SentLast24Hours = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SentLast24Hours", ID: &i_SentLast24Hours, Type: smithy.ShapeTypeDouble})
+var sSnsDestination_TopicArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var sTemplate_TemplateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemplateArn", ID: &i_TemplateArn, Type: smithy.ShapeTypeString})
+var sTemplate_TemplateData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemplateData", ID: &i_TemplateData, Type: smithy.ShapeTypeString})
+var sTlsPolicy_REQUIRE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REQUIRE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTlsPolicy_OPTIONAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPTIONAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTooManyRequestsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sTrackingOptions_CustomRedirectDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomRedirectDomain", ID: &i_CustomRedirectDomain, Type: smithy.ShapeTypeString})
+var sVolumeStatistics_InboxRawCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InboxRawCount", ID: &i_Volume, Type: smithy.ShapeTypeLong})
+var sVolumeStatistics_SpamRawCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpamRawCount", ID: &i_Volume, Type: smithy.ShapeTypeLong})
+var sVolumeStatistics_ProjectedInbox = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProjectedInbox", ID: &i_Volume, Type: smithy.ShapeTypeLong})
+var sVolumeStatistics_ProjectedSpam = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProjectedSpam", ID: &i_Volume, Type: smithy.ShapeTypeLong})
+var sWarmupStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sWarmupStatus_DONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DONE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCreateConfigurationSetEventDestinationRequest_ConfigurationSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationSetName", ID: &i_ConfigurationSetName, Traits: &t46, Type: smithy.ShapeTypeString})
+var sCreateConfigurationSetEventDestinationRequest_EventDestinationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDestinationName", ID: &i_EventDestinationName, Type: smithy.ShapeTypeString})
+var sCreateConfigurationSetEventDestinationRequest_EventDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDestination", ID: &iEventDestinationDefinition, Members: &mEventDestinationDefinition, Type: smithy.ShapeTypeStructure})
+var sCreateConfigurationSetRequest_ConfigurationSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationSetName", ID: &i_ConfigurationSetName, Type: smithy.ShapeTypeString})
+var sCreateConfigurationSetRequest_TrackingOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrackingOptions", ID: &iTrackingOptions, Members: &mTrackingOptions, Type: smithy.ShapeTypeStructure})
+var sCreateConfigurationSetRequest_DeliveryOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryOptions", ID: &iDeliveryOptions, Members: &mDeliveryOptions, Type: smithy.ShapeTypeStructure})
+var sCreateConfigurationSetRequest_ReputationOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReputationOptions", ID: &iReputationOptions, Members: &mReputationOptions, Type: smithy.ShapeTypeStructure})
+var sCreateConfigurationSetRequest_SendingOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SendingOptions", ID: &iSendingOptions, Members: &mSendingOptions, Type: smithy.ShapeTypeStructure})
+var sCreateConfigurationSetRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateDedicatedIpPoolRequest_PoolName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoolName", ID: &i_PoolName, Type: smithy.ShapeTypeString})
+var sCreateDedicatedIpPoolRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateDeliverabilityTestReportRequest_ReportName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReportName", ID: &i_ReportName, Type: smithy.ShapeTypeString})
+var sCreateDeliverabilityTestReportRequest_FromEmailAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FromEmailAddress", ID: &i_EmailAddress, Type: smithy.ShapeTypeString})
+var sCreateDeliverabilityTestReportRequest_Content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Content", ID: &iEmailContent, Members: &mEmailContent, Type: smithy.ShapeTypeStructure})
+var sCreateDeliverabilityTestReportRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateDeliverabilityTestReportResponse_ReportId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReportId", ID: &i_ReportId, Type: smithy.ShapeTypeString})
+var sCreateDeliverabilityTestReportResponse_DeliverabilityTestStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliverabilityTestStatus", ID: &iDeliverabilityTestStatus, Members: &mDeliverabilityTestStatus, Type: smithy.ShapeTypeEnum})
+var sCreateEmailIdentityRequest_EmailIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailIdentity", ID: &i_Identity, Type: smithy.ShapeTypeString})
+var sCreateEmailIdentityRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateEmailIdentityResponse_IdentityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityType", ID: &iIdentityType, Members: &mIdentityType, Type: smithy.ShapeTypeEnum})
+var sCreateEmailIdentityResponse_VerifiedForSendingStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VerifiedForSendingStatus", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean})
+var sCreateEmailIdentityResponse_DkimAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DkimAttributes", ID: &iDkimAttributes, Members: &mDkimAttributes, Type: smithy.ShapeTypeStructure})
+var sDeleteConfigurationSetEventDestinationRequest_ConfigurationSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationSetName", ID: &i_ConfigurationSetName, Traits: &t46, Type: smithy.ShapeTypeString})
+var sDeleteConfigurationSetEventDestinationRequest_EventDestinationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDestinationName", ID: &i_EventDestinationName, Traits: &t46, Type: smithy.ShapeTypeString})
+var sDeleteConfigurationSetRequest_ConfigurationSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationSetName", ID: &i_ConfigurationSetName, Traits: &t46, Type: smithy.ShapeTypeString})
+var sDeleteDedicatedIpPoolRequest_PoolName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoolName", ID: &i_PoolName, Traits: &t46, Type: smithy.ShapeTypeString})
+var sDeleteEmailIdentityRequest_EmailIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailIdentity", ID: &i_Identity, Traits: &t46, Type: smithy.ShapeTypeString})
+var sGetAccountResponse_SendQuota = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SendQuota", ID: &iSendQuota, Members: &mSendQuota, Type: smithy.ShapeTypeStructure})
+var sGetAccountResponse_SendingEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SendingEnabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean})
+var sGetAccountResponse_DedicatedIpAutoWarmupEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DedicatedIpAutoWarmupEnabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean})
+var sGetAccountResponse_EnforcementStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnforcementStatus", ID: &i_GeneralEnforcementStatus, Type: smithy.ShapeTypeString})
+var sGetAccountResponse_ProductionAccessEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductionAccessEnabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean})
+var sGetBlacklistReportsRequest_BlacklistItemNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlacklistItemNames", ID: &i_BlacklistItemNames, Members: &m_BlacklistItemNames, Traits: &t47, Type: smithy.ShapeTypeList})
+var sGetBlacklistReportsResponse_BlacklistReport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BlacklistReport", ID: &i_BlacklistReport, Members: &m_BlacklistReport, Type: smithy.ShapeTypeMap})
+var sGetConfigurationSetEventDestinationsRequest_ConfigurationSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationSetName", ID: &i_ConfigurationSetName, Traits: &t46, Type: smithy.ShapeTypeString})
+var sGetConfigurationSetEventDestinationsResponse_EventDestinations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDestinations", ID: &i_EventDestinations, Members: &m_EventDestinations, Type: smithy.ShapeTypeList})
+var sGetConfigurationSetRequest_ConfigurationSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationSetName", ID: &i_ConfigurationSetName, Traits: &t46, Type: smithy.ShapeTypeString})
+var sGetConfigurationSetResponse_ConfigurationSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationSetName", ID: &i_ConfigurationSetName, Type: smithy.ShapeTypeString})
+var sGetConfigurationSetResponse_TrackingOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrackingOptions", ID: &iTrackingOptions, Members: &mTrackingOptions, Type: smithy.ShapeTypeStructure})
+var sGetConfigurationSetResponse_DeliveryOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryOptions", ID: &iDeliveryOptions, Members: &mDeliveryOptions, Type: smithy.ShapeTypeStructure})
+var sGetConfigurationSetResponse_ReputationOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReputationOptions", ID: &iReputationOptions, Members: &mReputationOptions, Type: smithy.ShapeTypeStructure})
+var sGetConfigurationSetResponse_SendingOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SendingOptions", ID: &iSendingOptions, Members: &mSendingOptions, Type: smithy.ShapeTypeStructure})
+var sGetConfigurationSetResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sGetDedicatedIpRequest_Ip = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ip", ID: &i_Ip, Traits: &t46, Type: smithy.ShapeTypeString})
+var sGetDedicatedIpResponse_DedicatedIp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DedicatedIp", ID: &iDedicatedIp, Members: &mDedicatedIp, Type: smithy.ShapeTypeStructure})
+var sGetDedicatedIpsRequest_PoolName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoolName", ID: &i_PoolName, Traits: &t48, Type: smithy.ShapeTypeString})
+var sGetDedicatedIpsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t49, Type: smithy.ShapeTypeString})
+var sGetDedicatedIpsRequest_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageSize", ID: &i_MaxItems, Traits: &t50, Type: smithy.ShapeTypeInteger})
+var sGetDedicatedIpsResponse_DedicatedIps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DedicatedIps", ID: &i_DedicatedIpList, Members: &m_DedicatedIpList, Type: smithy.ShapeTypeList})
+var sGetDedicatedIpsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sGetDeliverabilityDashboardOptionsResponse_DashboardEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashboardEnabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean})
+var sGetDeliverabilityDashboardOptionsResponse_SubscriptionExpiryDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionExpiryDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetDeliverabilityDashboardOptionsResponse_AccountStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountStatus", ID: &iDeliverabilityDashboardAccountStatus, Members: &mDeliverabilityDashboardAccountStatus, Type: smithy.ShapeTypeEnum})
+var sGetDeliverabilityDashboardOptionsResponse_ActiveSubscribedDomains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActiveSubscribedDomains", ID: &i_DomainDeliverabilityTrackingOptions, Members: &m_DomainDeliverabilityTrackingOptions, Type: smithy.ShapeTypeList})
+var sGetDeliverabilityDashboardOptionsResponse_PendingExpirationSubscribedDomains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PendingExpirationSubscribedDomains", ID: &i_DomainDeliverabilityTrackingOptions, Members: &m_DomainDeliverabilityTrackingOptions, Type: smithy.ShapeTypeList})
+var sGetDeliverabilityTestReportRequest_ReportId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReportId", ID: &i_ReportId, Traits: &t46, Type: smithy.ShapeTypeString})
+var sGetDeliverabilityTestReportResponse_DeliverabilityTestReport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliverabilityTestReport", ID: &iDeliverabilityTestReport, Members: &mDeliverabilityTestReport, Type: smithy.ShapeTypeStructure})
+var sGetDeliverabilityTestReportResponse_OverallPlacement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OverallPlacement", ID: &iPlacementStatistics, Members: &mPlacementStatistics, Type: smithy.ShapeTypeStructure})
+var sGetDeliverabilityTestReportResponse_IspPlacements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IspPlacements", ID: &i_IspPlacements, Members: &m_IspPlacements, Type: smithy.ShapeTypeList})
+var sGetDeliverabilityTestReportResponse_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_MessageContent, Type: smithy.ShapeTypeString})
+var sGetDeliverabilityTestReportResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sGetDomainDeliverabilityCampaignRequest_CampaignId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CampaignId", ID: &i_CampaignId, Traits: &t46, Type: smithy.ShapeTypeString})
+var sGetDomainDeliverabilityCampaignResponse_DomainDeliverabilityCampaign = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainDeliverabilityCampaign", ID: &iDomainDeliverabilityCampaign, Members: &mDomainDeliverabilityCampaign, Type: smithy.ShapeTypeStructure})
+var sGetDomainStatisticsReportRequest_Domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Domain", ID: &i_Identity, Traits: &t46, Type: smithy.ShapeTypeString})
+var sGetDomainStatisticsReportRequest_StartDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartDate", ID: &i_Timestamp, Traits: &t51, Type: smithy.ShapeTypeTimestamp})
+var sGetDomainStatisticsReportRequest_EndDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndDate", ID: &i_Timestamp, Traits: &t52, Type: smithy.ShapeTypeTimestamp})
+var sGetDomainStatisticsReportResponse_OverallVolume = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OverallVolume", ID: &iOverallVolume, Members: &mOverallVolume, Type: smithy.ShapeTypeStructure})
+var sGetDomainStatisticsReportResponse_DailyVolumes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DailyVolumes", ID: &i_DailyVolumes, Members: &m_DailyVolumes, Type: smithy.ShapeTypeList})
+var sGetEmailIdentityRequest_EmailIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailIdentity", ID: &i_Identity, Traits: &t46, Type: smithy.ShapeTypeString})
+var sGetEmailIdentityResponse_IdentityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityType", ID: &iIdentityType, Members: &mIdentityType, Type: smithy.ShapeTypeEnum})
+var sGetEmailIdentityResponse_FeedbackForwardingStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeedbackForwardingStatus", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean})
+var sGetEmailIdentityResponse_VerifiedForSendingStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VerifiedForSendingStatus", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean})
+var sGetEmailIdentityResponse_DkimAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DkimAttributes", ID: &iDkimAttributes, Members: &mDkimAttributes, Type: smithy.ShapeTypeStructure})
+var sGetEmailIdentityResponse_MailFromAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MailFromAttributes", ID: &iMailFromAttributes, Members: &mMailFromAttributes, Type: smithy.ShapeTypeStructure})
+var sGetEmailIdentityResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sListConfigurationSetsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t49, Type: smithy.ShapeTypeString})
+var sListConfigurationSetsRequest_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageSize", ID: &i_MaxItems, Traits: &t50, Type: smithy.ShapeTypeInteger})
+var sListConfigurationSetsResponse_ConfigurationSets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationSets", ID: &i_ConfigurationSetNameList, Members: &m_ConfigurationSetNameList, Type: smithy.ShapeTypeList})
+var sListConfigurationSetsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListDedicatedIpPoolsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t49, Type: smithy.ShapeTypeString})
+var sListDedicatedIpPoolsRequest_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageSize", ID: &i_MaxItems, Traits: &t50, Type: smithy.ShapeTypeInteger})
+var sListDedicatedIpPoolsResponse_DedicatedIpPools = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DedicatedIpPools", ID: &i_ListOfDedicatedIpPools, Members: &m_ListOfDedicatedIpPools, Type: smithy.ShapeTypeList})
+var sListDedicatedIpPoolsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListDeliverabilityTestReportsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t49, Type: smithy.ShapeTypeString})
+var sListDeliverabilityTestReportsRequest_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageSize", ID: &i_MaxItems, Traits: &t50, Type: smithy.ShapeTypeInteger})
+var sListDeliverabilityTestReportsResponse_DeliverabilityTestReports = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliverabilityTestReports", ID: &i_DeliverabilityTestReports, Members: &m_DeliverabilityTestReports, Type: smithy.ShapeTypeList})
+var sListDeliverabilityTestReportsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListDomainDeliverabilityCampaignsRequest_StartDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartDate", ID: &i_Timestamp, Traits: &t51, Type: smithy.ShapeTypeTimestamp})
+var sListDomainDeliverabilityCampaignsRequest_EndDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndDate", ID: &i_Timestamp, Traits: &t52, Type: smithy.ShapeTypeTimestamp})
+var sListDomainDeliverabilityCampaignsRequest_SubscribedDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscribedDomain", ID: &i_Domain, Traits: &t46, Type: smithy.ShapeTypeString})
+var sListDomainDeliverabilityCampaignsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t49, Type: smithy.ShapeTypeString})
+var sListDomainDeliverabilityCampaignsRequest_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageSize", ID: &i_MaxItems, Traits: &t50, Type: smithy.ShapeTypeInteger})
+var sListDomainDeliverabilityCampaignsResponse_DomainDeliverabilityCampaigns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainDeliverabilityCampaigns", ID: &i_DomainDeliverabilityCampaignList, Members: &m_DomainDeliverabilityCampaignList, Type: smithy.ShapeTypeList})
+var sListDomainDeliverabilityCampaignsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListEmailIdentitiesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t49, Type: smithy.ShapeTypeString})
+var sListEmailIdentitiesRequest_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageSize", ID: &i_MaxItems, Traits: &t50, Type: smithy.ShapeTypeInteger})
+var sListEmailIdentitiesResponse_EmailIdentities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailIdentities", ID: &i_IdentityInfoList, Members: &m_IdentityInfoList, Type: smithy.ShapeTypeList})
+var sListEmailIdentitiesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_AmazonResourceName, Traits: &t53, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sPutAccountDedicatedIpWarmupAttributesRequest_AutoWarmupEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoWarmupEnabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean})
+var sPutAccountSendingAttributesRequest_SendingEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SendingEnabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean})
+var sPutConfigurationSetDeliveryOptionsRequest_ConfigurationSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationSetName", ID: &i_ConfigurationSetName, Traits: &t46, Type: smithy.ShapeTypeString})
+var sPutConfigurationSetDeliveryOptionsRequest_TlsPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TlsPolicy", ID: &iTlsPolicy, Members: &mTlsPolicy, Type: smithy.ShapeTypeEnum})
+var sPutConfigurationSetDeliveryOptionsRequest_SendingPoolName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SendingPoolName", ID: &i_SendingPoolName, Type: smithy.ShapeTypeString})
+var sPutConfigurationSetReputationOptionsRequest_ConfigurationSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationSetName", ID: &i_ConfigurationSetName, Traits: &t46, Type: smithy.ShapeTypeString})
+var sPutConfigurationSetReputationOptionsRequest_ReputationMetricsEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReputationMetricsEnabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean})
+var sPutConfigurationSetSendingOptionsRequest_ConfigurationSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationSetName", ID: &i_ConfigurationSetName, Traits: &t46, Type: smithy.ShapeTypeString})
+var sPutConfigurationSetSendingOptionsRequest_SendingEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SendingEnabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean})
+var sPutConfigurationSetTrackingOptionsRequest_ConfigurationSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationSetName", ID: &i_ConfigurationSetName, Traits: &t46, Type: smithy.ShapeTypeString})
+var sPutConfigurationSetTrackingOptionsRequest_CustomRedirectDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomRedirectDomain", ID: &i_CustomRedirectDomain, Type: smithy.ShapeTypeString})
+var sPutDedicatedIpInPoolRequest_Ip = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ip", ID: &i_Ip, Traits: &t46, Type: smithy.ShapeTypeString})
+var sPutDedicatedIpInPoolRequest_DestinationPoolName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationPoolName", ID: &i_PoolName, Type: smithy.ShapeTypeString})
+var sPutDedicatedIpWarmupAttributesRequest_Ip = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ip", ID: &i_Ip, Traits: &t46, Type: smithy.ShapeTypeString})
+var sPutDedicatedIpWarmupAttributesRequest_WarmupPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WarmupPercentage", ID: &i_Percentage100Wrapper, Type: smithy.ShapeTypeInteger})
+var sPutDeliverabilityDashboardOptionRequest_DashboardEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashboardEnabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean})
+var sPutDeliverabilityDashboardOptionRequest_SubscribedDomains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscribedDomains", ID: &i_DomainDeliverabilityTrackingOptions, Members: &m_DomainDeliverabilityTrackingOptions, Type: smithy.ShapeTypeList})
+var sPutEmailIdentityDkimAttributesRequest_EmailIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailIdentity", ID: &i_Identity, Traits: &t46, Type: smithy.ShapeTypeString})
+var sPutEmailIdentityDkimAttributesRequest_SigningEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SigningEnabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean})
+var sPutEmailIdentityFeedbackAttributesRequest_EmailIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailIdentity", ID: &i_Identity, Traits: &t46, Type: smithy.ShapeTypeString})
+var sPutEmailIdentityFeedbackAttributesRequest_EmailForwardingEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailForwardingEnabled", ID: &i_Enabled, Type: smithy.ShapeTypeBoolean})
+var sPutEmailIdentityMailFromAttributesRequest_EmailIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailIdentity", ID: &i_Identity, Traits: &t46, Type: smithy.ShapeTypeString})
+var sPutEmailIdentityMailFromAttributesRequest_MailFromDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MailFromDomain", ID: &i_MailFromDomainName, Type: smithy.ShapeTypeString})
+var sPutEmailIdentityMailFromAttributesRequest_BehaviorOnMxFailure = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BehaviorOnMxFailure", ID: &iBehaviorOnMxFailure, Members: &mBehaviorOnMxFailure, Type: smithy.ShapeTypeEnum})
+var sSendEmailRequest_FromEmailAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FromEmailAddress", ID: &i_EmailAddress, Type: smithy.ShapeTypeString})
+var sSendEmailRequest_Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destination", ID: &iDestination, Members: &mDestination, Type: smithy.ShapeTypeStructure})
+var sSendEmailRequest_ReplyToAddresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplyToAddresses", ID: &i_EmailAddressList, Members: &m_EmailAddressList, Type: smithy.ShapeTypeList})
+var sSendEmailRequest_FeedbackForwardingEmailAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FeedbackForwardingEmailAddress", ID: &i_EmailAddress, Type: smithy.ShapeTypeString})
+var sSendEmailRequest_Content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Content", ID: &iEmailContent, Members: &mEmailContent, Type: smithy.ShapeTypeStructure})
+var sSendEmailRequest_EmailTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailTags", ID: &i_MessageTagList, Members: &m_MessageTagList, Type: smithy.ShapeTypeList})
+var sSendEmailRequest_ConfigurationSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationSetName", ID: &i_ConfigurationSetName, Type: smithy.ShapeTypeString})
+var sSendEmailResponse_MessageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageId", ID: &i_OutboundMessageId, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_AmazonResourceName, Traits: &t53, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t54, Type: smithy.ShapeTypeList})
+var sUpdateConfigurationSetEventDestinationRequest_ConfigurationSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationSetName", ID: &i_ConfigurationSetName, Traits: &t46, Type: smithy.ShapeTypeString})
+var sUpdateConfigurationSetEventDestinationRequest_EventDestinationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDestinationName", ID: &i_EventDestinationName, Traits: &t46, Type: smithy.ShapeTypeString})
+var sUpdateConfigurationSetEventDestinationRequest_EventDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventDestination", ID: &iEventDestinationDefinition, Members: &mEventDestinationDefinition, Type: smithy.ShapeTypeStructure})
+
+var CreateConfigurationSet = &sCreateConfigurationSet
+
+var CreateConfigurationSetEventDestination = &sCreateConfigurationSetEventDestination
+
+var CreateDedicatedIpPool = &sCreateDedicatedIpPool
+
+var CreateDeliverabilityTestReport = &sCreateDeliverabilityTestReport
+
+var CreateEmailIdentity = &sCreateEmailIdentity
+
+var DeleteConfigurationSet = &sDeleteConfigurationSet
+
+var DeleteConfigurationSetEventDestination = &sDeleteConfigurationSetEventDestination
+
+var DeleteDedicatedIpPool = &sDeleteDedicatedIpPool
+
+var DeleteEmailIdentity = &sDeleteEmailIdentity
+
+var GetAccount = &sGetAccount
+
+var GetBlacklistReports = &sGetBlacklistReports
+
+var GetConfigurationSet = &sGetConfigurationSet
+
+var GetConfigurationSetEventDestinations = &sGetConfigurationSetEventDestinations
+
+var GetDedicatedIp = &sGetDedicatedIp
+
+var GetDedicatedIps = &sGetDedicatedIps
+
+var GetDeliverabilityDashboardOptions = &sGetDeliverabilityDashboardOptions
+
+var GetDeliverabilityTestReport = &sGetDeliverabilityTestReport
+
+var GetDomainDeliverabilityCampaign = &sGetDomainDeliverabilityCampaign
+
+var GetDomainStatisticsReport = &sGetDomainStatisticsReport
+
+var GetEmailIdentity = &sGetEmailIdentity
+
+var ListConfigurationSets = &sListConfigurationSets
+
+var ListDedicatedIpPools = &sListDedicatedIpPools
+
+var ListDeliverabilityTestReports = &sListDeliverabilityTestReports
+
+var ListDomainDeliverabilityCampaigns = &sListDomainDeliverabilityCampaigns
+
+var ListEmailIdentities = &sListEmailIdentities
+
+var ListTagsForResource = &sListTagsForResource
+
+var PutAccountDedicatedIpWarmupAttributes = &sPutAccountDedicatedIpWarmupAttributes
+
+var PutAccountSendingAttributes = &sPutAccountSendingAttributes
+
+var PutConfigurationSetDeliveryOptions = &sPutConfigurationSetDeliveryOptions
+
+var PutConfigurationSetReputationOptions = &sPutConfigurationSetReputationOptions
+
+var PutConfigurationSetSendingOptions = &sPutConfigurationSetSendingOptions
+
+var PutConfigurationSetTrackingOptions = &sPutConfigurationSetTrackingOptions
+
+var PutDedicatedIpInPool = &sPutDedicatedIpInPool
+
+var PutDedicatedIpWarmupAttributes = &sPutDedicatedIpWarmupAttributes
+
+var PutDeliverabilityDashboardOption = &sPutDeliverabilityDashboardOption
+
+var PutEmailIdentityDkimAttributes = &sPutEmailIdentityDkimAttributes
+
+var PutEmailIdentityFeedbackAttributes = &sPutEmailIdentityFeedbackAttributes
+
+var PutEmailIdentityMailFromAttributes = &sPutEmailIdentityMailFromAttributes
+
+var SendEmail = &sSendEmail
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateConfigurationSetEventDestination = &sUpdateConfigurationSetEventDestination
+
+var _AmazonPinpointEmailService = &s_AmazonPinpointEmailService
+
+var AccountSuspendedException = &sAccountSuspendedException
+var AccountSuspendedException_message = &sAccountSuspendedException_message
+
+var AlreadyExistsException = &sAlreadyExistsException
+var AlreadyExistsException_message = &sAlreadyExistsException_message
+
+var _AmazonResourceName = &s_AmazonResourceName
+
+var BadRequestException = &sBadRequestException
+var BadRequestException_message = &sBadRequestException_message
+
+var BehaviorOnMxFailure = &sBehaviorOnMxFailure
+var BehaviorOnMxFailure_USE_DEFAULT_VALUE = &sBehaviorOnMxFailure_USE_DEFAULT_VALUE
+var BehaviorOnMxFailure_REJECT_MESSAGE = &sBehaviorOnMxFailure_REJECT_MESSAGE
+
+var _BlacklistEntries = &s_BlacklistEntries
+var _BlacklistEntries_member = &s_BlacklistEntries_member
+
+var BlacklistEntry = &sBlacklistEntry
+var BlacklistEntry_RblName = &sBlacklistEntry_RblName
+var BlacklistEntry_ListingTime = &sBlacklistEntry_ListingTime
+var BlacklistEntry_Description = &sBlacklistEntry_Description
+
+var _BlacklistingDescription = &s_BlacklistingDescription
+
+var _BlacklistItemName = &s_BlacklistItemName
+
+var _BlacklistItemNames = &s_BlacklistItemNames
+var _BlacklistItemNames_member = &s_BlacklistItemNames_member
+
+var _BlacklistReport = &s_BlacklistReport
+var _BlacklistReport_key = &s_BlacklistReport_key
+var _BlacklistReport_value = &s_BlacklistReport_value
+
+var Body = &sBody
+var Body_Text = &sBody_Text
+var Body_Html = &sBody_Html
+
+var _CampaignId = &s_CampaignId
+
+var _Charset = &s_Charset
+
+var CloudWatchDestination = &sCloudWatchDestination
+var CloudWatchDestination_DimensionConfigurations = &sCloudWatchDestination_DimensionConfigurations
+
+var CloudWatchDimensionConfiguration = &sCloudWatchDimensionConfiguration
+var CloudWatchDimensionConfiguration_DimensionName = &sCloudWatchDimensionConfiguration_DimensionName
+var CloudWatchDimensionConfiguration_DimensionValueSource = &sCloudWatchDimensionConfiguration_DimensionValueSource
+var CloudWatchDimensionConfiguration_DefaultDimensionValue = &sCloudWatchDimensionConfiguration_DefaultDimensionValue
+
+var _CloudWatchDimensionConfigurations = &s_CloudWatchDimensionConfigurations
+var _CloudWatchDimensionConfigurations_member = &s_CloudWatchDimensionConfigurations_member
+
+var ConcurrentModificationException = &sConcurrentModificationException
+var ConcurrentModificationException_message = &sConcurrentModificationException_message
+
+var _ConfigurationSetName = &s_ConfigurationSetName
+
+var _ConfigurationSetNameList = &s_ConfigurationSetNameList
+var _ConfigurationSetNameList_member = &s_ConfigurationSetNameList_member
+
+var Content = &sContent
+var Content_Data = &sContent_Data
+var Content_Charset = &sContent_Charset
+
+var _CustomRedirectDomain = &s_CustomRedirectDomain
+
+var DailyVolume = &sDailyVolume
+var DailyVolume_StartDate = &sDailyVolume_StartDate
+var DailyVolume_VolumeStatistics = &sDailyVolume_VolumeStatistics
+var DailyVolume_DomainIspPlacements = &sDailyVolume_DomainIspPlacements
+
+var _DailyVolumes = &s_DailyVolumes
+var _DailyVolumes_member = &s_DailyVolumes_member
+
+var DedicatedIp = &sDedicatedIp
+var DedicatedIp_Ip = &sDedicatedIp_Ip
+var DedicatedIp_WarmupStatus = &sDedicatedIp_WarmupStatus
+var DedicatedIp_WarmupPercentage = &sDedicatedIp_WarmupPercentage
+var DedicatedIp_PoolName = &sDedicatedIp_PoolName
+
+var _DedicatedIpList = &s_DedicatedIpList
+var _DedicatedIpList_member = &s_DedicatedIpList_member
+
+var _DefaultDimensionValue = &s_DefaultDimensionValue
+
+var DeliverabilityDashboardAccountStatus = &sDeliverabilityDashboardAccountStatus
+var DeliverabilityDashboardAccountStatus_ACTIVE = &sDeliverabilityDashboardAccountStatus_ACTIVE
+var DeliverabilityDashboardAccountStatus_PENDING_EXPIRATION = &sDeliverabilityDashboardAccountStatus_PENDING_EXPIRATION
+var DeliverabilityDashboardAccountStatus_DISABLED = &sDeliverabilityDashboardAccountStatus_DISABLED
+
+var DeliverabilityTestReport = &sDeliverabilityTestReport
+var DeliverabilityTestReport_ReportId = &sDeliverabilityTestReport_ReportId
+var DeliverabilityTestReport_ReportName = &sDeliverabilityTestReport_ReportName
+var DeliverabilityTestReport_Subject = &sDeliverabilityTestReport_Subject
+var DeliverabilityTestReport_FromEmailAddress = &sDeliverabilityTestReport_FromEmailAddress
+var DeliverabilityTestReport_CreateDate = &sDeliverabilityTestReport_CreateDate
+var DeliverabilityTestReport_DeliverabilityTestStatus = &sDeliverabilityTestReport_DeliverabilityTestStatus
+
+var _DeliverabilityTestReports = &s_DeliverabilityTestReports
+var _DeliverabilityTestReports_member = &s_DeliverabilityTestReports_member
+
+var DeliverabilityTestStatus = &sDeliverabilityTestStatus
+var DeliverabilityTestStatus_IN_PROGRESS = &sDeliverabilityTestStatus_IN_PROGRESS
+var DeliverabilityTestStatus_COMPLETED = &sDeliverabilityTestStatus_COMPLETED
+
+var _DeliverabilityTestSubject = &s_DeliverabilityTestSubject
+
+var DeliveryOptions = &sDeliveryOptions
+var DeliveryOptions_TlsPolicy = &sDeliveryOptions_TlsPolicy
+var DeliveryOptions_SendingPoolName = &sDeliveryOptions_SendingPoolName
+
+var Destination = &sDestination
+var Destination_ToAddresses = &sDestination_ToAddresses
+var Destination_CcAddresses = &sDestination_CcAddresses
+var Destination_BccAddresses = &sDestination_BccAddresses
+
+var _DimensionName = &s_DimensionName
+
+var DimensionValueSource = &sDimensionValueSource
+var DimensionValueSource_MESSAGE_TAG = &sDimensionValueSource_MESSAGE_TAG
+var DimensionValueSource_EMAIL_HEADER = &sDimensionValueSource_EMAIL_HEADER
+var DimensionValueSource_LINK_TAG = &sDimensionValueSource_LINK_TAG
+
+var DkimAttributes = &sDkimAttributes
+var DkimAttributes_SigningEnabled = &sDkimAttributes_SigningEnabled
+var DkimAttributes_Status = &sDkimAttributes_Status
+var DkimAttributes_Tokens = &sDkimAttributes_Tokens
+
+var DkimStatus = &sDkimStatus
+var DkimStatus_PENDING = &sDkimStatus_PENDING
+var DkimStatus_SUCCESS = &sDkimStatus_SUCCESS
+var DkimStatus_FAILED = &sDkimStatus_FAILED
+var DkimStatus_TEMPORARY_FAILURE = &sDkimStatus_TEMPORARY_FAILURE
+var DkimStatus_NOT_STARTED = &sDkimStatus_NOT_STARTED
+
+var _DnsToken = &s_DnsToken
+
+var _DnsTokenList = &s_DnsTokenList
+var _DnsTokenList_member = &s_DnsTokenList_member
+
+var _Domain = &s_Domain
+
+var DomainDeliverabilityCampaign = &sDomainDeliverabilityCampaign
+var DomainDeliverabilityCampaign_CampaignId = &sDomainDeliverabilityCampaign_CampaignId
+var DomainDeliverabilityCampaign_ImageUrl = &sDomainDeliverabilityCampaign_ImageUrl
+var DomainDeliverabilityCampaign_Subject = &sDomainDeliverabilityCampaign_Subject
+var DomainDeliverabilityCampaign_FromAddress = &sDomainDeliverabilityCampaign_FromAddress
+var DomainDeliverabilityCampaign_SendingIps = &sDomainDeliverabilityCampaign_SendingIps
+var DomainDeliverabilityCampaign_FirstSeenDateTime = &sDomainDeliverabilityCampaign_FirstSeenDateTime
+var DomainDeliverabilityCampaign_LastSeenDateTime = &sDomainDeliverabilityCampaign_LastSeenDateTime
+var DomainDeliverabilityCampaign_InboxCount = &sDomainDeliverabilityCampaign_InboxCount
+var DomainDeliverabilityCampaign_SpamCount = &sDomainDeliverabilityCampaign_SpamCount
+var DomainDeliverabilityCampaign_ReadRate = &sDomainDeliverabilityCampaign_ReadRate
+var DomainDeliverabilityCampaign_DeleteRate = &sDomainDeliverabilityCampaign_DeleteRate
+var DomainDeliverabilityCampaign_ReadDeleteRate = &sDomainDeliverabilityCampaign_ReadDeleteRate
+var DomainDeliverabilityCampaign_ProjectedVolume = &sDomainDeliverabilityCampaign_ProjectedVolume
+var DomainDeliverabilityCampaign_Esps = &sDomainDeliverabilityCampaign_Esps
+
+var _DomainDeliverabilityCampaignList = &s_DomainDeliverabilityCampaignList
+var _DomainDeliverabilityCampaignList_member = &s_DomainDeliverabilityCampaignList_member
+
+var DomainDeliverabilityTrackingOption = &sDomainDeliverabilityTrackingOption
+var DomainDeliverabilityTrackingOption_Domain = &sDomainDeliverabilityTrackingOption_Domain
+var DomainDeliverabilityTrackingOption_SubscriptionStartDate = &sDomainDeliverabilityTrackingOption_SubscriptionStartDate
+var DomainDeliverabilityTrackingOption_InboxPlacementTrackingOption = &sDomainDeliverabilityTrackingOption_InboxPlacementTrackingOption
+
+var _DomainDeliverabilityTrackingOptions = &s_DomainDeliverabilityTrackingOptions
+var _DomainDeliverabilityTrackingOptions_member = &s_DomainDeliverabilityTrackingOptions_member
+
+var DomainIspPlacement = &sDomainIspPlacement
+var DomainIspPlacement_IspName = &sDomainIspPlacement_IspName
+var DomainIspPlacement_InboxRawCount = &sDomainIspPlacement_InboxRawCount
+var DomainIspPlacement_SpamRawCount = &sDomainIspPlacement_SpamRawCount
+var DomainIspPlacement_InboxPercentage = &sDomainIspPlacement_InboxPercentage
+var DomainIspPlacement_SpamPercentage = &sDomainIspPlacement_SpamPercentage
+
+var _DomainIspPlacements = &s_DomainIspPlacements
+var _DomainIspPlacements_member = &s_DomainIspPlacements_member
+
+var _EmailAddress = &s_EmailAddress
+
+var _EmailAddressList = &s_EmailAddressList
+var _EmailAddressList_member = &s_EmailAddressList_member
+
+var EmailContent = &sEmailContent
+var EmailContent_Simple = &sEmailContent_Simple
+var EmailContent_Raw = &sEmailContent_Raw
+var EmailContent_Template = &sEmailContent_Template
+
+var _Enabled = &s_Enabled
+
+var _ErrorMessage = &s_ErrorMessage
+
+var _Esp = &s_Esp
+
+var _Esps = &s_Esps
+var _Esps_member = &s_Esps_member
+
+var EventDestination = &sEventDestination
+var EventDestination_Name = &sEventDestination_Name
+var EventDestination_Enabled = &sEventDestination_Enabled
+var EventDestination_MatchingEventTypes = &sEventDestination_MatchingEventTypes
+var EventDestination_KinesisFirehoseDestination = &sEventDestination_KinesisFirehoseDestination
+var EventDestination_CloudWatchDestination = &sEventDestination_CloudWatchDestination
+var EventDestination_SnsDestination = &sEventDestination_SnsDestination
+var EventDestination_PinpointDestination = &sEventDestination_PinpointDestination
+
+var EventDestinationDefinition = &sEventDestinationDefinition
+var EventDestinationDefinition_Enabled = &sEventDestinationDefinition_Enabled
+var EventDestinationDefinition_MatchingEventTypes = &sEventDestinationDefinition_MatchingEventTypes
+var EventDestinationDefinition_KinesisFirehoseDestination = &sEventDestinationDefinition_KinesisFirehoseDestination
+var EventDestinationDefinition_CloudWatchDestination = &sEventDestinationDefinition_CloudWatchDestination
+var EventDestinationDefinition_SnsDestination = &sEventDestinationDefinition_SnsDestination
+var EventDestinationDefinition_PinpointDestination = &sEventDestinationDefinition_PinpointDestination
+
+var _EventDestinationName = &s_EventDestinationName
+
+var _EventDestinations = &s_EventDestinations
+var _EventDestinations_member = &s_EventDestinations_member
+
+var EventType = &sEventType
+var EventType_SEND = &sEventType_SEND
+var EventType_REJECT = &sEventType_REJECT
+var EventType_BOUNCE = &sEventType_BOUNCE
+var EventType_COMPLAINT = &sEventType_COMPLAINT
+var EventType_DELIVERY = &sEventType_DELIVERY
+var EventType_OPEN = &sEventType_OPEN
+var EventType_CLICK = &sEventType_CLICK
+var EventType_RENDERING_FAILURE = &sEventType_RENDERING_FAILURE
+
+var _EventTypes = &s_EventTypes
+var _EventTypes_member = &s_EventTypes_member
+
+var _GeneralEnforcementStatus = &s_GeneralEnforcementStatus
+
+var _Identity = &s_Identity
+
+var IdentityInfo = &sIdentityInfo
+var IdentityInfo_IdentityType = &sIdentityInfo_IdentityType
+var IdentityInfo_IdentityName = &sIdentityInfo_IdentityName
+var IdentityInfo_SendingEnabled = &sIdentityInfo_SendingEnabled
+
+var _IdentityInfoList = &s_IdentityInfoList
+var _IdentityInfoList_member = &s_IdentityInfoList_member
+
+var IdentityType = &sIdentityType
+var IdentityType_EMAIL_ADDRESS = &sIdentityType_EMAIL_ADDRESS
+var IdentityType_DOMAIN = &sIdentityType_DOMAIN
+var IdentityType_MANAGED_DOMAIN = &sIdentityType_MANAGED_DOMAIN
+
+var _ImageUrl = &s_ImageUrl
+
+var InboxPlacementTrackingOption = &sInboxPlacementTrackingOption
+var InboxPlacementTrackingOption_Global = &sInboxPlacementTrackingOption_Global
+var InboxPlacementTrackingOption_TrackedIsps = &sInboxPlacementTrackingOption_TrackedIsps
+
+var _Ip = &s_Ip
+
+var _IpList = &s_IpList
+var _IpList_member = &s_IpList_member
+
+var _IspName = &s_IspName
+
+var _IspNameList = &s_IspNameList
+var _IspNameList_member = &s_IspNameList_member
+
+var IspPlacement = &sIspPlacement
+var IspPlacement_IspName = &sIspPlacement_IspName
+var IspPlacement_PlacementStatistics = &sIspPlacement_PlacementStatistics
+
+var _IspPlacements = &s_IspPlacements
+var _IspPlacements_member = &s_IspPlacements_member
+
+var KinesisFirehoseDestination = &sKinesisFirehoseDestination
+var KinesisFirehoseDestination_IamRoleArn = &sKinesisFirehoseDestination_IamRoleArn
+var KinesisFirehoseDestination_DeliveryStreamArn = &sKinesisFirehoseDestination_DeliveryStreamArn
+
+var _LastFreshStart = &s_LastFreshStart
+
+var LimitExceededException = &sLimitExceededException
+var LimitExceededException_message = &sLimitExceededException_message
+
+var _ListOfDedicatedIpPools = &s_ListOfDedicatedIpPools
+var _ListOfDedicatedIpPools_member = &s_ListOfDedicatedIpPools_member
+
+var MailFromAttributes = &sMailFromAttributes
+var MailFromAttributes_MailFromDomain = &sMailFromAttributes_MailFromDomain
+var MailFromAttributes_MailFromDomainStatus = &sMailFromAttributes_MailFromDomainStatus
+var MailFromAttributes_BehaviorOnMxFailure = &sMailFromAttributes_BehaviorOnMxFailure
+
+var _MailFromDomainName = &s_MailFromDomainName
+
+var MailFromDomainNotVerifiedException = &sMailFromDomainNotVerifiedException
+var MailFromDomainNotVerifiedException_message = &sMailFromDomainNotVerifiedException_message
+
+var MailFromDomainStatus = &sMailFromDomainStatus
+var MailFromDomainStatus_PENDING = &sMailFromDomainStatus_PENDING
+var MailFromDomainStatus_SUCCESS = &sMailFromDomainStatus_SUCCESS
+var MailFromDomainStatus_FAILED = &sMailFromDomainStatus_FAILED
+var MailFromDomainStatus_TEMPORARY_FAILURE = &sMailFromDomainStatus_TEMPORARY_FAILURE
+
+var _Max24HourSend = &s_Max24HourSend
+
+var _MaxItems = &s_MaxItems
+
+var _MaxSendRate = &s_MaxSendRate
+
+var Message = &sMessage
+var Message_Subject = &sMessage_Subject
+var Message_Body = &sMessage_Body
+
+var _MessageContent = &s_MessageContent
+
+var _MessageData = &s_MessageData
+
+var MessageRejected = &sMessageRejected
+var MessageRejected_message = &sMessageRejected_message
+
+var MessageTag = &sMessageTag
+var MessageTag_Name = &sMessageTag_Name
+var MessageTag_Value = &sMessageTag_Value
+
+var _MessageTagList = &s_MessageTagList
+var _MessageTagList_member = &s_MessageTagList_member
+
+var _MessageTagName = &s_MessageTagName
+
+var _MessageTagValue = &s_MessageTagValue
+
+var _NextToken = &s_NextToken
+
+var NotFoundException = &sNotFoundException
+var NotFoundException_message = &sNotFoundException_message
+
+var _OutboundMessageId = &s_OutboundMessageId
+
+var OverallVolume = &sOverallVolume
+var OverallVolume_VolumeStatistics = &sOverallVolume_VolumeStatistics
+var OverallVolume_ReadRatePercent = &sOverallVolume_ReadRatePercent
+var OverallVolume_DomainIspPlacements = &sOverallVolume_DomainIspPlacements
+
+var _Percentage = &s_Percentage
+
+var _Percentage100Wrapper = &s_Percentage100Wrapper
+
+var PinpointDestination = &sPinpointDestination
+var PinpointDestination_ApplicationArn = &sPinpointDestination_ApplicationArn
+
+var PlacementStatistics = &sPlacementStatistics
+var PlacementStatistics_InboxPercentage = &sPlacementStatistics_InboxPercentage
+var PlacementStatistics_SpamPercentage = &sPlacementStatistics_SpamPercentage
+var PlacementStatistics_MissingPercentage = &sPlacementStatistics_MissingPercentage
+var PlacementStatistics_SpfPercentage = &sPlacementStatistics_SpfPercentage
+var PlacementStatistics_DkimPercentage = &sPlacementStatistics_DkimPercentage
+
+var _PoolName = &s_PoolName
+
+var RawMessage = &sRawMessage
+var RawMessage_Data = &sRawMessage_Data
+
+var _RawMessageData = &s_RawMessageData
+
+var _RblName = &s_RblName
+
+var _ReportId = &s_ReportId
+
+var _ReportName = &s_ReportName
+
+var ReputationOptions = &sReputationOptions
+var ReputationOptions_ReputationMetricsEnabled = &sReputationOptions_ReputationMetricsEnabled
+var ReputationOptions_LastFreshStart = &sReputationOptions_LastFreshStart
+
+var SendingOptions = &sSendingOptions
+var SendingOptions_SendingEnabled = &sSendingOptions_SendingEnabled
+
+var SendingPausedException = &sSendingPausedException
+var SendingPausedException_message = &sSendingPausedException_message
+
+var _SendingPoolName = &s_SendingPoolName
+
+var SendQuota = &sSendQuota
+var SendQuota_Max24HourSend = &sSendQuota_Max24HourSend
+var SendQuota_MaxSendRate = &sSendQuota_MaxSendRate
+var SendQuota_SentLast24Hours = &sSendQuota_SentLast24Hours
+
+var _SentLast24Hours = &s_SentLast24Hours
+
+var SnsDestination = &sSnsDestination
+var SnsDestination_TopicArn = &sSnsDestination_TopicArn
+
+var _Subject = &s_Subject
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _TagValue = &s_TagValue
+
+var Template = &sTemplate
+var Template_TemplateArn = &sTemplate_TemplateArn
+var Template_TemplateData = &sTemplate_TemplateData
+
+var _TemplateArn = &s_TemplateArn
+
+var _TemplateData = &s_TemplateData
+
+var _Timestamp = &s_Timestamp
+
+var TlsPolicy = &sTlsPolicy
+var TlsPolicy_REQUIRE = &sTlsPolicy_REQUIRE
+var TlsPolicy_OPTIONAL = &sTlsPolicy_OPTIONAL
+
+var TooManyRequestsException = &sTooManyRequestsException
+var TooManyRequestsException_message = &sTooManyRequestsException_message
+
+var TrackingOptions = &sTrackingOptions
+var TrackingOptions_CustomRedirectDomain = &sTrackingOptions_CustomRedirectDomain
+
+var _Volume = &s_Volume
+
+var VolumeStatistics = &sVolumeStatistics
+var VolumeStatistics_InboxRawCount = &sVolumeStatistics_InboxRawCount
+var VolumeStatistics_SpamRawCount = &sVolumeStatistics_SpamRawCount
+var VolumeStatistics_ProjectedInbox = &sVolumeStatistics_ProjectedInbox
+var VolumeStatistics_ProjectedSpam = &sVolumeStatistics_ProjectedSpam
+
+var WarmupStatus = &sWarmupStatus
+var WarmupStatus_IN_PROGRESS = &sWarmupStatus_IN_PROGRESS
+var WarmupStatus_DONE = &sWarmupStatus_DONE
+
+var CreateConfigurationSetEventDestinationRequest = &sCreateConfigurationSetEventDestinationRequest
+var CreateConfigurationSetEventDestinationRequest_ConfigurationSetName = &sCreateConfigurationSetEventDestinationRequest_ConfigurationSetName
+var CreateConfigurationSetEventDestinationRequest_EventDestinationName = &sCreateConfigurationSetEventDestinationRequest_EventDestinationName
+var CreateConfigurationSetEventDestinationRequest_EventDestination = &sCreateConfigurationSetEventDestinationRequest_EventDestination
+
+var CreateConfigurationSetEventDestinationResponse = &sCreateConfigurationSetEventDestinationResponse
+
+var CreateConfigurationSetRequest = &sCreateConfigurationSetRequest
+var CreateConfigurationSetRequest_ConfigurationSetName = &sCreateConfigurationSetRequest_ConfigurationSetName
+var CreateConfigurationSetRequest_TrackingOptions = &sCreateConfigurationSetRequest_TrackingOptions
+var CreateConfigurationSetRequest_DeliveryOptions = &sCreateConfigurationSetRequest_DeliveryOptions
+var CreateConfigurationSetRequest_ReputationOptions = &sCreateConfigurationSetRequest_ReputationOptions
+var CreateConfigurationSetRequest_SendingOptions = &sCreateConfigurationSetRequest_SendingOptions
+var CreateConfigurationSetRequest_Tags = &sCreateConfigurationSetRequest_Tags
+
+var CreateConfigurationSetResponse = &sCreateConfigurationSetResponse
+
+var CreateDedicatedIpPoolRequest = &sCreateDedicatedIpPoolRequest
+var CreateDedicatedIpPoolRequest_PoolName = &sCreateDedicatedIpPoolRequest_PoolName
+var CreateDedicatedIpPoolRequest_Tags = &sCreateDedicatedIpPoolRequest_Tags
+
+var CreateDedicatedIpPoolResponse = &sCreateDedicatedIpPoolResponse
+
+var CreateDeliverabilityTestReportRequest = &sCreateDeliverabilityTestReportRequest
+var CreateDeliverabilityTestReportRequest_ReportName = &sCreateDeliverabilityTestReportRequest_ReportName
+var CreateDeliverabilityTestReportRequest_FromEmailAddress = &sCreateDeliverabilityTestReportRequest_FromEmailAddress
+var CreateDeliverabilityTestReportRequest_Content = &sCreateDeliverabilityTestReportRequest_Content
+var CreateDeliverabilityTestReportRequest_Tags = &sCreateDeliverabilityTestReportRequest_Tags
+
+var CreateDeliverabilityTestReportResponse = &sCreateDeliverabilityTestReportResponse
+var CreateDeliverabilityTestReportResponse_ReportId = &sCreateDeliverabilityTestReportResponse_ReportId
+var CreateDeliverabilityTestReportResponse_DeliverabilityTestStatus = &sCreateDeliverabilityTestReportResponse_DeliverabilityTestStatus
+
+var CreateEmailIdentityRequest = &sCreateEmailIdentityRequest
+var CreateEmailIdentityRequest_EmailIdentity = &sCreateEmailIdentityRequest_EmailIdentity
+var CreateEmailIdentityRequest_Tags = &sCreateEmailIdentityRequest_Tags
+
+var CreateEmailIdentityResponse = &sCreateEmailIdentityResponse
+var CreateEmailIdentityResponse_IdentityType = &sCreateEmailIdentityResponse_IdentityType
+var CreateEmailIdentityResponse_VerifiedForSendingStatus = &sCreateEmailIdentityResponse_VerifiedForSendingStatus
+var CreateEmailIdentityResponse_DkimAttributes = &sCreateEmailIdentityResponse_DkimAttributes
+
+var DeleteConfigurationSetEventDestinationRequest = &sDeleteConfigurationSetEventDestinationRequest
+var DeleteConfigurationSetEventDestinationRequest_ConfigurationSetName = &sDeleteConfigurationSetEventDestinationRequest_ConfigurationSetName
+var DeleteConfigurationSetEventDestinationRequest_EventDestinationName = &sDeleteConfigurationSetEventDestinationRequest_EventDestinationName
+
+var DeleteConfigurationSetEventDestinationResponse = &sDeleteConfigurationSetEventDestinationResponse
+
+var DeleteConfigurationSetRequest = &sDeleteConfigurationSetRequest
+var DeleteConfigurationSetRequest_ConfigurationSetName = &sDeleteConfigurationSetRequest_ConfigurationSetName
+
+var DeleteConfigurationSetResponse = &sDeleteConfigurationSetResponse
+
+var DeleteDedicatedIpPoolRequest = &sDeleteDedicatedIpPoolRequest
+var DeleteDedicatedIpPoolRequest_PoolName = &sDeleteDedicatedIpPoolRequest_PoolName
+
+var DeleteDedicatedIpPoolResponse = &sDeleteDedicatedIpPoolResponse
+
+var DeleteEmailIdentityRequest = &sDeleteEmailIdentityRequest
+var DeleteEmailIdentityRequest_EmailIdentity = &sDeleteEmailIdentityRequest_EmailIdentity
+
+var DeleteEmailIdentityResponse = &sDeleteEmailIdentityResponse
+
+var GetAccountRequest = &sGetAccountRequest
+
+var GetAccountResponse = &sGetAccountResponse
+var GetAccountResponse_SendQuota = &sGetAccountResponse_SendQuota
+var GetAccountResponse_SendingEnabled = &sGetAccountResponse_SendingEnabled
+var GetAccountResponse_DedicatedIpAutoWarmupEnabled = &sGetAccountResponse_DedicatedIpAutoWarmupEnabled
+var GetAccountResponse_EnforcementStatus = &sGetAccountResponse_EnforcementStatus
+var GetAccountResponse_ProductionAccessEnabled = &sGetAccountResponse_ProductionAccessEnabled
+
+var GetBlacklistReportsRequest = &sGetBlacklistReportsRequest
+var GetBlacklistReportsRequest_BlacklistItemNames = &sGetBlacklistReportsRequest_BlacklistItemNames
+
+var GetBlacklistReportsResponse = &sGetBlacklistReportsResponse
+var GetBlacklistReportsResponse_BlacklistReport = &sGetBlacklistReportsResponse_BlacklistReport
+
+var GetConfigurationSetEventDestinationsRequest = &sGetConfigurationSetEventDestinationsRequest
+var GetConfigurationSetEventDestinationsRequest_ConfigurationSetName = &sGetConfigurationSetEventDestinationsRequest_ConfigurationSetName
+
+var GetConfigurationSetEventDestinationsResponse = &sGetConfigurationSetEventDestinationsResponse
+var GetConfigurationSetEventDestinationsResponse_EventDestinations = &sGetConfigurationSetEventDestinationsResponse_EventDestinations
+
+var GetConfigurationSetRequest = &sGetConfigurationSetRequest
+var GetConfigurationSetRequest_ConfigurationSetName = &sGetConfigurationSetRequest_ConfigurationSetName
+
+var GetConfigurationSetResponse = &sGetConfigurationSetResponse
+var GetConfigurationSetResponse_ConfigurationSetName = &sGetConfigurationSetResponse_ConfigurationSetName
+var GetConfigurationSetResponse_TrackingOptions = &sGetConfigurationSetResponse_TrackingOptions
+var GetConfigurationSetResponse_DeliveryOptions = &sGetConfigurationSetResponse_DeliveryOptions
+var GetConfigurationSetResponse_ReputationOptions = &sGetConfigurationSetResponse_ReputationOptions
+var GetConfigurationSetResponse_SendingOptions = &sGetConfigurationSetResponse_SendingOptions
+var GetConfigurationSetResponse_Tags = &sGetConfigurationSetResponse_Tags
+
+var GetDedicatedIpRequest = &sGetDedicatedIpRequest
+var GetDedicatedIpRequest_Ip = &sGetDedicatedIpRequest_Ip
+
+var GetDedicatedIpResponse = &sGetDedicatedIpResponse
+var GetDedicatedIpResponse_DedicatedIp = &sGetDedicatedIpResponse_DedicatedIp
+
+var GetDedicatedIpsRequest = &sGetDedicatedIpsRequest
+var GetDedicatedIpsRequest_PoolName = &sGetDedicatedIpsRequest_PoolName
+var GetDedicatedIpsRequest_NextToken = &sGetDedicatedIpsRequest_NextToken
+var GetDedicatedIpsRequest_PageSize = &sGetDedicatedIpsRequest_PageSize
+
+var GetDedicatedIpsResponse = &sGetDedicatedIpsResponse
+var GetDedicatedIpsResponse_DedicatedIps = &sGetDedicatedIpsResponse_DedicatedIps
+var GetDedicatedIpsResponse_NextToken = &sGetDedicatedIpsResponse_NextToken
+
+var GetDeliverabilityDashboardOptionsRequest = &sGetDeliverabilityDashboardOptionsRequest
+
+var GetDeliverabilityDashboardOptionsResponse = &sGetDeliverabilityDashboardOptionsResponse
+var GetDeliverabilityDashboardOptionsResponse_DashboardEnabled = &sGetDeliverabilityDashboardOptionsResponse_DashboardEnabled
+var GetDeliverabilityDashboardOptionsResponse_SubscriptionExpiryDate = &sGetDeliverabilityDashboardOptionsResponse_SubscriptionExpiryDate
+var GetDeliverabilityDashboardOptionsResponse_AccountStatus = &sGetDeliverabilityDashboardOptionsResponse_AccountStatus
+var GetDeliverabilityDashboardOptionsResponse_ActiveSubscribedDomains = &sGetDeliverabilityDashboardOptionsResponse_ActiveSubscribedDomains
+var GetDeliverabilityDashboardOptionsResponse_PendingExpirationSubscribedDomains = &sGetDeliverabilityDashboardOptionsResponse_PendingExpirationSubscribedDomains
+
+var GetDeliverabilityTestReportRequest = &sGetDeliverabilityTestReportRequest
+var GetDeliverabilityTestReportRequest_ReportId = &sGetDeliverabilityTestReportRequest_ReportId
+
+var GetDeliverabilityTestReportResponse = &sGetDeliverabilityTestReportResponse
+var GetDeliverabilityTestReportResponse_DeliverabilityTestReport = &sGetDeliverabilityTestReportResponse_DeliverabilityTestReport
+var GetDeliverabilityTestReportResponse_OverallPlacement = &sGetDeliverabilityTestReportResponse_OverallPlacement
+var GetDeliverabilityTestReportResponse_IspPlacements = &sGetDeliverabilityTestReportResponse_IspPlacements
+var GetDeliverabilityTestReportResponse_Message = &sGetDeliverabilityTestReportResponse_Message
+var GetDeliverabilityTestReportResponse_Tags = &sGetDeliverabilityTestReportResponse_Tags
+
+var GetDomainDeliverabilityCampaignRequest = &sGetDomainDeliverabilityCampaignRequest
+var GetDomainDeliverabilityCampaignRequest_CampaignId = &sGetDomainDeliverabilityCampaignRequest_CampaignId
+
+var GetDomainDeliverabilityCampaignResponse = &sGetDomainDeliverabilityCampaignResponse
+var GetDomainDeliverabilityCampaignResponse_DomainDeliverabilityCampaign = &sGetDomainDeliverabilityCampaignResponse_DomainDeliverabilityCampaign
+
+var GetDomainStatisticsReportRequest = &sGetDomainStatisticsReportRequest
+var GetDomainStatisticsReportRequest_Domain = &sGetDomainStatisticsReportRequest_Domain
+var GetDomainStatisticsReportRequest_StartDate = &sGetDomainStatisticsReportRequest_StartDate
+var GetDomainStatisticsReportRequest_EndDate = &sGetDomainStatisticsReportRequest_EndDate
+
+var GetDomainStatisticsReportResponse = &sGetDomainStatisticsReportResponse
+var GetDomainStatisticsReportResponse_OverallVolume = &sGetDomainStatisticsReportResponse_OverallVolume
+var GetDomainStatisticsReportResponse_DailyVolumes = &sGetDomainStatisticsReportResponse_DailyVolumes
+
+var GetEmailIdentityRequest = &sGetEmailIdentityRequest
+var GetEmailIdentityRequest_EmailIdentity = &sGetEmailIdentityRequest_EmailIdentity
+
+var GetEmailIdentityResponse = &sGetEmailIdentityResponse
+var GetEmailIdentityResponse_IdentityType = &sGetEmailIdentityResponse_IdentityType
+var GetEmailIdentityResponse_FeedbackForwardingStatus = &sGetEmailIdentityResponse_FeedbackForwardingStatus
+var GetEmailIdentityResponse_VerifiedForSendingStatus = &sGetEmailIdentityResponse_VerifiedForSendingStatus
+var GetEmailIdentityResponse_DkimAttributes = &sGetEmailIdentityResponse_DkimAttributes
+var GetEmailIdentityResponse_MailFromAttributes = &sGetEmailIdentityResponse_MailFromAttributes
+var GetEmailIdentityResponse_Tags = &sGetEmailIdentityResponse_Tags
+
+var ListConfigurationSetsRequest = &sListConfigurationSetsRequest
+var ListConfigurationSetsRequest_NextToken = &sListConfigurationSetsRequest_NextToken
+var ListConfigurationSetsRequest_PageSize = &sListConfigurationSetsRequest_PageSize
+
+var ListConfigurationSetsResponse = &sListConfigurationSetsResponse
+var ListConfigurationSetsResponse_ConfigurationSets = &sListConfigurationSetsResponse_ConfigurationSets
+var ListConfigurationSetsResponse_NextToken = &sListConfigurationSetsResponse_NextToken
+
+var ListDedicatedIpPoolsRequest = &sListDedicatedIpPoolsRequest
+var ListDedicatedIpPoolsRequest_NextToken = &sListDedicatedIpPoolsRequest_NextToken
+var ListDedicatedIpPoolsRequest_PageSize = &sListDedicatedIpPoolsRequest_PageSize
+
+var ListDedicatedIpPoolsResponse = &sListDedicatedIpPoolsResponse
+var ListDedicatedIpPoolsResponse_DedicatedIpPools = &sListDedicatedIpPoolsResponse_DedicatedIpPools
+var ListDedicatedIpPoolsResponse_NextToken = &sListDedicatedIpPoolsResponse_NextToken
+
+var ListDeliverabilityTestReportsRequest = &sListDeliverabilityTestReportsRequest
+var ListDeliverabilityTestReportsRequest_NextToken = &sListDeliverabilityTestReportsRequest_NextToken
+var ListDeliverabilityTestReportsRequest_PageSize = &sListDeliverabilityTestReportsRequest_PageSize
+
+var ListDeliverabilityTestReportsResponse = &sListDeliverabilityTestReportsResponse
+var ListDeliverabilityTestReportsResponse_DeliverabilityTestReports = &sListDeliverabilityTestReportsResponse_DeliverabilityTestReports
+var ListDeliverabilityTestReportsResponse_NextToken = &sListDeliverabilityTestReportsResponse_NextToken
+
+var ListDomainDeliverabilityCampaignsRequest = &sListDomainDeliverabilityCampaignsRequest
+var ListDomainDeliverabilityCampaignsRequest_StartDate = &sListDomainDeliverabilityCampaignsRequest_StartDate
+var ListDomainDeliverabilityCampaignsRequest_EndDate = &sListDomainDeliverabilityCampaignsRequest_EndDate
+var ListDomainDeliverabilityCampaignsRequest_SubscribedDomain = &sListDomainDeliverabilityCampaignsRequest_SubscribedDomain
+var ListDomainDeliverabilityCampaignsRequest_NextToken = &sListDomainDeliverabilityCampaignsRequest_NextToken
+var ListDomainDeliverabilityCampaignsRequest_PageSize = &sListDomainDeliverabilityCampaignsRequest_PageSize
+
+var ListDomainDeliverabilityCampaignsResponse = &sListDomainDeliverabilityCampaignsResponse
+var ListDomainDeliverabilityCampaignsResponse_DomainDeliverabilityCampaigns = &sListDomainDeliverabilityCampaignsResponse_DomainDeliverabilityCampaigns
+var ListDomainDeliverabilityCampaignsResponse_NextToken = &sListDomainDeliverabilityCampaignsResponse_NextToken
+
+var ListEmailIdentitiesRequest = &sListEmailIdentitiesRequest
+var ListEmailIdentitiesRequest_NextToken = &sListEmailIdentitiesRequest_NextToken
+var ListEmailIdentitiesRequest_PageSize = &sListEmailIdentitiesRequest_PageSize
+
+var ListEmailIdentitiesResponse = &sListEmailIdentitiesResponse
+var ListEmailIdentitiesResponse_EmailIdentities = &sListEmailIdentitiesResponse_EmailIdentities
+var ListEmailIdentitiesResponse_NextToken = &sListEmailIdentitiesResponse_NextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceArn = &sListTagsForResourceRequest_ResourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_Tags = &sListTagsForResourceResponse_Tags
+
+var PutAccountDedicatedIpWarmupAttributesRequest = &sPutAccountDedicatedIpWarmupAttributesRequest
+var PutAccountDedicatedIpWarmupAttributesRequest_AutoWarmupEnabled = &sPutAccountDedicatedIpWarmupAttributesRequest_AutoWarmupEnabled
+
+var PutAccountDedicatedIpWarmupAttributesResponse = &sPutAccountDedicatedIpWarmupAttributesResponse
+
+var PutAccountSendingAttributesRequest = &sPutAccountSendingAttributesRequest
+var PutAccountSendingAttributesRequest_SendingEnabled = &sPutAccountSendingAttributesRequest_SendingEnabled
+
+var PutAccountSendingAttributesResponse = &sPutAccountSendingAttributesResponse
+
+var PutConfigurationSetDeliveryOptionsRequest = &sPutConfigurationSetDeliveryOptionsRequest
+var PutConfigurationSetDeliveryOptionsRequest_ConfigurationSetName = &sPutConfigurationSetDeliveryOptionsRequest_ConfigurationSetName
+var PutConfigurationSetDeliveryOptionsRequest_TlsPolicy = &sPutConfigurationSetDeliveryOptionsRequest_TlsPolicy
+var PutConfigurationSetDeliveryOptionsRequest_SendingPoolName = &sPutConfigurationSetDeliveryOptionsRequest_SendingPoolName
+
+var PutConfigurationSetDeliveryOptionsResponse = &sPutConfigurationSetDeliveryOptionsResponse
+
+var PutConfigurationSetReputationOptionsRequest = &sPutConfigurationSetReputationOptionsRequest
+var PutConfigurationSetReputationOptionsRequest_ConfigurationSetName = &sPutConfigurationSetReputationOptionsRequest_ConfigurationSetName
+var PutConfigurationSetReputationOptionsRequest_ReputationMetricsEnabled = &sPutConfigurationSetReputationOptionsRequest_ReputationMetricsEnabled
+
+var PutConfigurationSetReputationOptionsResponse = &sPutConfigurationSetReputationOptionsResponse
+
+var PutConfigurationSetSendingOptionsRequest = &sPutConfigurationSetSendingOptionsRequest
+var PutConfigurationSetSendingOptionsRequest_ConfigurationSetName = &sPutConfigurationSetSendingOptionsRequest_ConfigurationSetName
+var PutConfigurationSetSendingOptionsRequest_SendingEnabled = &sPutConfigurationSetSendingOptionsRequest_SendingEnabled
+
+var PutConfigurationSetSendingOptionsResponse = &sPutConfigurationSetSendingOptionsResponse
+
+var PutConfigurationSetTrackingOptionsRequest = &sPutConfigurationSetTrackingOptionsRequest
+var PutConfigurationSetTrackingOptionsRequest_ConfigurationSetName = &sPutConfigurationSetTrackingOptionsRequest_ConfigurationSetName
+var PutConfigurationSetTrackingOptionsRequest_CustomRedirectDomain = &sPutConfigurationSetTrackingOptionsRequest_CustomRedirectDomain
+
+var PutConfigurationSetTrackingOptionsResponse = &sPutConfigurationSetTrackingOptionsResponse
+
+var PutDedicatedIpInPoolRequest = &sPutDedicatedIpInPoolRequest
+var PutDedicatedIpInPoolRequest_Ip = &sPutDedicatedIpInPoolRequest_Ip
+var PutDedicatedIpInPoolRequest_DestinationPoolName = &sPutDedicatedIpInPoolRequest_DestinationPoolName
+
+var PutDedicatedIpInPoolResponse = &sPutDedicatedIpInPoolResponse
+
+var PutDedicatedIpWarmupAttributesRequest = &sPutDedicatedIpWarmupAttributesRequest
+var PutDedicatedIpWarmupAttributesRequest_Ip = &sPutDedicatedIpWarmupAttributesRequest_Ip
+var PutDedicatedIpWarmupAttributesRequest_WarmupPercentage = &sPutDedicatedIpWarmupAttributesRequest_WarmupPercentage
+
+var PutDedicatedIpWarmupAttributesResponse = &sPutDedicatedIpWarmupAttributesResponse
+
+var PutDeliverabilityDashboardOptionRequest = &sPutDeliverabilityDashboardOptionRequest
+var PutDeliverabilityDashboardOptionRequest_DashboardEnabled = &sPutDeliverabilityDashboardOptionRequest_DashboardEnabled
+var PutDeliverabilityDashboardOptionRequest_SubscribedDomains = &sPutDeliverabilityDashboardOptionRequest_SubscribedDomains
+
+var PutDeliverabilityDashboardOptionResponse = &sPutDeliverabilityDashboardOptionResponse
+
+var PutEmailIdentityDkimAttributesRequest = &sPutEmailIdentityDkimAttributesRequest
+var PutEmailIdentityDkimAttributesRequest_EmailIdentity = &sPutEmailIdentityDkimAttributesRequest_EmailIdentity
+var PutEmailIdentityDkimAttributesRequest_SigningEnabled = &sPutEmailIdentityDkimAttributesRequest_SigningEnabled
+
+var PutEmailIdentityDkimAttributesResponse = &sPutEmailIdentityDkimAttributesResponse
+
+var PutEmailIdentityFeedbackAttributesRequest = &sPutEmailIdentityFeedbackAttributesRequest
+var PutEmailIdentityFeedbackAttributesRequest_EmailIdentity = &sPutEmailIdentityFeedbackAttributesRequest_EmailIdentity
+var PutEmailIdentityFeedbackAttributesRequest_EmailForwardingEnabled = &sPutEmailIdentityFeedbackAttributesRequest_EmailForwardingEnabled
+
+var PutEmailIdentityFeedbackAttributesResponse = &sPutEmailIdentityFeedbackAttributesResponse
+
+var PutEmailIdentityMailFromAttributesRequest = &sPutEmailIdentityMailFromAttributesRequest
+var PutEmailIdentityMailFromAttributesRequest_EmailIdentity = &sPutEmailIdentityMailFromAttributesRequest_EmailIdentity
+var PutEmailIdentityMailFromAttributesRequest_MailFromDomain = &sPutEmailIdentityMailFromAttributesRequest_MailFromDomain
+var PutEmailIdentityMailFromAttributesRequest_BehaviorOnMxFailure = &sPutEmailIdentityMailFromAttributesRequest_BehaviorOnMxFailure
+
+var PutEmailIdentityMailFromAttributesResponse = &sPutEmailIdentityMailFromAttributesResponse
+
+var SendEmailRequest = &sSendEmailRequest
+var SendEmailRequest_FromEmailAddress = &sSendEmailRequest_FromEmailAddress
+var SendEmailRequest_Destination = &sSendEmailRequest_Destination
+var SendEmailRequest_ReplyToAddresses = &sSendEmailRequest_ReplyToAddresses
+var SendEmailRequest_FeedbackForwardingEmailAddress = &sSendEmailRequest_FeedbackForwardingEmailAddress
+var SendEmailRequest_Content = &sSendEmailRequest_Content
+var SendEmailRequest_EmailTags = &sSendEmailRequest_EmailTags
+var SendEmailRequest_ConfigurationSetName = &sSendEmailRequest_ConfigurationSetName
+
+var SendEmailResponse = &sSendEmailResponse
+var SendEmailResponse_MessageId = &sSendEmailResponse_MessageId
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceArn = &sTagResourceRequest_ResourceArn
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceArn = &sUntagResourceRequest_ResourceArn
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateConfigurationSetEventDestinationRequest = &sUpdateConfigurationSetEventDestinationRequest
+var UpdateConfigurationSetEventDestinationRequest_ConfigurationSetName = &sUpdateConfigurationSetEventDestinationRequest_ConfigurationSetName
+var UpdateConfigurationSetEventDestinationRequest_EventDestinationName = &sUpdateConfigurationSetEventDestinationRequest_EventDestinationName
+var UpdateConfigurationSetEventDestinationRequest_EventDestination = &sUpdateConfigurationSetEventDestinationRequest_EventDestination
+
+var UpdateConfigurationSetEventDestinationResponse = &sUpdateConfigurationSetEventDestinationResponse
+
+var AmazonPinpointEmailService = &smithy.ServiceSchema{Schema: &s_AmazonPinpointEmailService, Version: "2018-07-26"}

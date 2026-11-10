@@ -4,2070 +4,1600 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AssociateToConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "AssociateToConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	iAssociateToConfiguration                    = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "AssociateToConfiguration"}
+	iCreateChimeWebhookConfiguration             = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "CreateChimeWebhookConfiguration"}
+	iCreateCustomAction                          = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "CreateCustomAction"}
+	iCreateMicrosoftTeamsChannelConfiguration    = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "CreateMicrosoftTeamsChannelConfiguration"}
+	iCreateSlackChannelConfiguration             = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "CreateSlackChannelConfiguration"}
+	iDeleteChimeWebhookConfiguration             = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DeleteChimeWebhookConfiguration"}
+	iDeleteCustomAction                          = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DeleteCustomAction"}
+	iDeleteMicrosoftTeamsChannelConfiguration    = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DeleteMicrosoftTeamsChannelConfiguration"}
+	iDeleteMicrosoftTeamsConfiguredTeam          = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DeleteMicrosoftTeamsConfiguredTeam"}
+	iDeleteMicrosoftTeamsUserIdentity            = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DeleteMicrosoftTeamsUserIdentity"}
+	iDeleteSlackChannelConfiguration             = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DeleteSlackChannelConfiguration"}
+	iDeleteSlackUserIdentity                     = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DeleteSlackUserIdentity"}
+	iDeleteSlackWorkspaceAuthorization           = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DeleteSlackWorkspaceAuthorization"}
+	iDescribeChimeWebhookConfigurations          = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DescribeChimeWebhookConfigurations"}
+	iDescribeSlackChannelConfigurations          = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DescribeSlackChannelConfigurations"}
+	iDescribeSlackUserIdentities                 = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DescribeSlackUserIdentities"}
+	iDescribeSlackWorkspaces                     = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DescribeSlackWorkspaces"}
+	iDisassociateFromConfiguration               = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DisassociateFromConfiguration"}
+	iGetAccountPreferences                       = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "GetAccountPreferences"}
+	iGetCustomAction                             = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "GetCustomAction"}
+	iGetMicrosoftTeamsChannelConfiguration       = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "GetMicrosoftTeamsChannelConfiguration"}
+	iListAssociations                            = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "ListAssociations"}
+	iListCustomActions                           = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "ListCustomActions"}
+	iListMicrosoftTeamsChannelConfigurations     = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "ListMicrosoftTeamsChannelConfigurations"}
+	iListMicrosoftTeamsConfiguredTeams           = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "ListMicrosoftTeamsConfiguredTeams"}
+	iListMicrosoftTeamsUserIdentities            = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "ListMicrosoftTeamsUserIdentities"}
+	iListTagsForResource                         = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "ListTagsForResource"}
+	iTagResource                                 = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "TagResource"}
+	iUntagResource                               = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "UntagResource"}
+	iUpdateAccountPreferences                    = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "UpdateAccountPreferences"}
+	iUpdateChimeWebhookConfiguration             = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "UpdateChimeWebhookConfiguration"}
+	iUpdateCustomAction                          = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "UpdateCustomAction"}
+	iUpdateMicrosoftTeamsChannelConfiguration    = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "UpdateMicrosoftTeamsChannelConfiguration"}
+	iUpdateSlackChannelConfiguration             = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "UpdateSlackChannelConfiguration"}
+	i_WheatleyOrchestration_20171011             = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "WheatleyOrchestration_20171011"}
+	iAccountPreferences                          = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "AccountPreferences"}
+	i_AmazonResourceName                         = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "AmazonResourceName"}
+	i_Arn                                        = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "Arn"}
+	i_AssociationList                            = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "AssociationList"}
+	iAssociationListing                          = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "AssociationListing"}
+	i_AwsUserIdentity                            = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "AwsUserIdentity"}
+	i_BooleanAccountPreference                   = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "BooleanAccountPreference"}
+	i_ChatConfigurationArn                       = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "ChatConfigurationArn"}
+	iChimeWebhookConfiguration                   = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "ChimeWebhookConfiguration"}
+	i_ChimeWebhookConfigurationList              = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "ChimeWebhookConfigurationList"}
+	i_ChimeWebhookDescription                    = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "ChimeWebhookDescription"}
+	i_ChimeWebhookUrl                            = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "ChimeWebhookUrl"}
+	i_ClientToken                                = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "ClientToken"}
+	i_ConfigurationName                          = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "ConfigurationName"}
+	iConfiguredTeam                              = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "ConfiguredTeam"}
+	i_ConfiguredTeamsList                        = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "ConfiguredTeamsList"}
+	iConflictException                           = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "ConflictException"}
+	iCreateChimeWebhookConfigurationException    = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "CreateChimeWebhookConfigurationException"}
+	iCreateSlackChannelConfigurationException    = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "CreateSlackChannelConfigurationException"}
+	iCreateTeamsChannelConfigurationException    = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "CreateTeamsChannelConfigurationException"}
+	iCustomAction                                = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "CustomAction"}
+	i_CustomActionAliasName                      = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "CustomActionAliasName"}
+	i_CustomActionArn                            = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "CustomActionArn"}
+	i_CustomActionArnList                        = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "CustomActionArnList"}
+	iCustomActionAttachment                      = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "CustomActionAttachment"}
+	iCustomActionAttachmentCriteria              = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "CustomActionAttachmentCriteria"}
+	i_CustomActionAttachmentCriteriaList         = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "CustomActionAttachmentCriteriaList"}
+	iCustomActionAttachmentCriteriaOperator      = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "CustomActionAttachmentCriteriaOperator"}
+	i_CustomActionAttachmentList                 = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "CustomActionAttachmentList"}
+	i_CustomActionAttachmentNotificationType     = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "CustomActionAttachmentNotificationType"}
+	i_CustomActionAttachmentVariables            = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "CustomActionAttachmentVariables"}
+	i_CustomActionButtonText                     = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "CustomActionButtonText"}
+	iCustomActionDefinition                      = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "CustomActionDefinition"}
+	i_CustomActionName                           = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "CustomActionName"}
+	i_CustomerCwLogLevel                         = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "CustomerCwLogLevel"}
+	iDeleteChimeWebhookConfigurationException    = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DeleteChimeWebhookConfigurationException"}
+	iDeleteMicrosoftTeamsUserIdentityException   = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DeleteMicrosoftTeamsUserIdentityException"}
+	iDeleteSlackChannelConfigurationException    = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DeleteSlackChannelConfigurationException"}
+	iDeleteSlackUserIdentityException            = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DeleteSlackUserIdentityException"}
+	iDeleteSlackWorkspaceAuthorizationFault      = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DeleteSlackWorkspaceAuthorizationFault"}
+	iDeleteTeamsChannelConfigurationException    = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DeleteTeamsChannelConfigurationException"}
+	iDeleteTeamsConfiguredTeamException          = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DeleteTeamsConfiguredTeamException"}
+	iDescribeChimeWebhookConfigurationsException = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DescribeChimeWebhookConfigurationsException"}
+	iDescribeSlackChannelConfigurationsException = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DescribeSlackChannelConfigurationsException"}
+	iDescribeSlackUserIdentitiesException        = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DescribeSlackUserIdentitiesException"}
+	iDescribeSlackWorkspacesException            = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DescribeSlackWorkspacesException"}
+	i_ErrorMessage                               = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "ErrorMessage"}
+	iGetAccountPreferencesException              = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "GetAccountPreferencesException"}
+	iGetTeamsChannelConfigurationException       = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "GetTeamsChannelConfigurationException"}
+	i_GuardrailPolicyArn                         = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "GuardrailPolicyArn"}
+	i_GuardrailPolicyArnList                     = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "GuardrailPolicyArnList"}
+	iInternalServiceError                        = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "InternalServiceError"}
+	iInvalidParameterException                   = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "InvalidParameterException"}
+	iInvalidRequestException                     = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "InvalidRequestException"}
+	iLimitExceededException                      = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "LimitExceededException"}
+	iListMicrosoftTeamsConfiguredTeamsException  = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "ListMicrosoftTeamsConfiguredTeamsException"}
+	iListMicrosoftTeamsUserIdentitiesException   = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "ListMicrosoftTeamsUserIdentitiesException"}
+	iListTeamsChannelConfigurationsException     = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "ListTeamsChannelConfigurationsException"}
+	i_MaxResults                                 = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "MaxResults"}
+	i_PaginationToken                            = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "PaginationToken"}
+	i_ResourceIdentifier                         = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "ResourceIdentifier"}
+	iResourceNotFoundException                   = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "ResourceNotFoundException"}
+	i_ResourceState                              = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "ResourceState"}
+	iServiceUnavailableException                 = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "ServiceUnavailableException"}
+	iSlackChannelConfiguration                   = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "SlackChannelConfiguration"}
+	i_SlackChannelConfigurationList              = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "SlackChannelConfigurationList"}
+	i_SlackChannelDisplayName                    = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "SlackChannelDisplayName"}
+	i_SlackChannelId                             = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "SlackChannelId"}
+	i_SlackTeamId                                = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "SlackTeamId"}
+	i_SlackTeamName                              = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "SlackTeamName"}
+	i_SlackUserId                                = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "SlackUserId"}
+	i_SlackUserIdentitiesList                    = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "SlackUserIdentitiesList"}
+	iSlackUserIdentity                           = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "SlackUserIdentity"}
+	iSlackWorkspace                              = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "SlackWorkspace"}
+	i_SlackWorkspacesList                        = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "SlackWorkspacesList"}
+	i_SnsTopicArnList                            = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "SnsTopicArnList"}
+	i_String                                     = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "String"}
+	iTag                                         = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "Tag"}
+	i_TagKey                                     = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "TagKey"}
+	i_TagKeyList                                 = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "TagKeyList"}
+	i_TagList                                    = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "TagList"}
+	i_Tags                                       = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "Tags"}
+	i_TagValue                                   = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "TagValue"}
+	i_TeamChannelConfigurationsList              = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "TeamChannelConfigurationsList"}
+	i_TeamName                                   = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "TeamName"}
+	iTeamsChannelConfiguration                   = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "TeamsChannelConfiguration"}
+	i_TeamsChannelId                             = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "TeamsChannelId"}
+	i_TeamsChannelName                           = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "TeamsChannelName"}
+	i_TeamsUserIdentitiesList                    = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "TeamsUserIdentitiesList"}
+	iTeamsUserIdentity                           = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "TeamsUserIdentity"}
+	iTooManyTagsException                        = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "TooManyTagsException"}
+	iUnauthorizedException                       = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "UnauthorizedException"}
+	iUpdateAccountPreferencesException           = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "UpdateAccountPreferencesException"}
+	iUpdateChimeWebhookConfigurationException    = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "UpdateChimeWebhookConfigurationException"}
+	iUpdateSlackChannelConfigurationException    = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "UpdateSlackChannelConfigurationException"}
+	iUpdateTeamsChannelConfigurationException    = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "UpdateTeamsChannelConfigurationException"}
+	i_UUID                                       = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "UUID"}
+	iAssociateToConfigurationRequest             = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "AssociateToConfigurationRequest"}
+	iAssociateToConfigurationResult              = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "AssociateToConfigurationResult"}
+	iCreateChimeWebhookConfigurationRequest      = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "CreateChimeWebhookConfigurationRequest"}
+	iCreateChimeWebhookConfigurationResult       = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "CreateChimeWebhookConfigurationResult"}
+	iCreateCustomActionRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "CreateCustomActionRequest"}
+	iCreateCustomActionResult                    = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "CreateCustomActionResult"}
+	iCreateTeamsChannelConfigurationRequest      = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "CreateTeamsChannelConfigurationRequest"}
+	iCreateTeamsChannelConfigurationResult       = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "CreateTeamsChannelConfigurationResult"}
+	iCreateSlackChannelConfigurationRequest      = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "CreateSlackChannelConfigurationRequest"}
+	iCreateSlackChannelConfigurationResult       = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "CreateSlackChannelConfigurationResult"}
+	iDeleteChimeWebhookConfigurationRequest      = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DeleteChimeWebhookConfigurationRequest"}
+	iDeleteChimeWebhookConfigurationResult       = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DeleteChimeWebhookConfigurationResult"}
+	iDeleteCustomActionRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DeleteCustomActionRequest"}
+	iDeleteCustomActionResult                    = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DeleteCustomActionResult"}
+	iDeleteTeamsChannelConfigurationRequest      = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DeleteTeamsChannelConfigurationRequest"}
+	iDeleteTeamsChannelConfigurationResult       = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DeleteTeamsChannelConfigurationResult"}
+	iDeleteTeamsConfiguredTeamRequest            = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DeleteTeamsConfiguredTeamRequest"}
+	iDeleteTeamsConfiguredTeamResult             = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DeleteTeamsConfiguredTeamResult"}
+	iDeleteMicrosoftTeamsUserIdentityRequest     = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DeleteMicrosoftTeamsUserIdentityRequest"}
+	iDeleteMicrosoftTeamsUserIdentityResult      = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DeleteMicrosoftTeamsUserIdentityResult"}
+	iDeleteSlackChannelConfigurationRequest      = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DeleteSlackChannelConfigurationRequest"}
+	iDeleteSlackChannelConfigurationResult       = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DeleteSlackChannelConfigurationResult"}
+	iDeleteSlackUserIdentityRequest              = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DeleteSlackUserIdentityRequest"}
+	iDeleteSlackUserIdentityResult               = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DeleteSlackUserIdentityResult"}
+	iDeleteSlackWorkspaceAuthorizationRequest    = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DeleteSlackWorkspaceAuthorizationRequest"}
+	iDeleteSlackWorkspaceAuthorizationResult     = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DeleteSlackWorkspaceAuthorizationResult"}
+	iDescribeChimeWebhookConfigurationsRequest   = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DescribeChimeWebhookConfigurationsRequest"}
+	iDescribeChimeWebhookConfigurationsResult    = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DescribeChimeWebhookConfigurationsResult"}
+	iDescribeSlackChannelConfigurationsRequest   = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DescribeSlackChannelConfigurationsRequest"}
+	iDescribeSlackChannelConfigurationsResult    = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DescribeSlackChannelConfigurationsResult"}
+	iDescribeSlackUserIdentitiesRequest          = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DescribeSlackUserIdentitiesRequest"}
+	iDescribeSlackUserIdentitiesResult           = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DescribeSlackUserIdentitiesResult"}
+	iDescribeSlackWorkspacesRequest              = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DescribeSlackWorkspacesRequest"}
+	iDescribeSlackWorkspacesResult               = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DescribeSlackWorkspacesResult"}
+	iDisassociateFromConfigurationRequest        = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DisassociateFromConfigurationRequest"}
+	iDisassociateFromConfigurationResult         = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "DisassociateFromConfigurationResult"}
+	iGetAccountPreferencesRequest                = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "GetAccountPreferencesRequest"}
+	iGetAccountPreferencesResult                 = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "GetAccountPreferencesResult"}
+	iGetCustomActionRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "GetCustomActionRequest"}
+	iGetCustomActionResult                       = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "GetCustomActionResult"}
+	iGetTeamsChannelConfigurationRequest         = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "GetTeamsChannelConfigurationRequest"}
+	iGetTeamsChannelConfigurationResult          = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "GetTeamsChannelConfigurationResult"}
+	iListAssociationsRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "ListAssociationsRequest"}
+	iListAssociationsResult                      = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "ListAssociationsResult"}
+	iListCustomActionsRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "ListCustomActionsRequest"}
+	iListCustomActionsResult                     = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "ListCustomActionsResult"}
+	iListTeamsChannelConfigurationsRequest       = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "ListTeamsChannelConfigurationsRequest"}
+	iListTeamsChannelConfigurationsResult        = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "ListTeamsChannelConfigurationsResult"}
+	iListMicrosoftTeamsConfiguredTeamsRequest    = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "ListMicrosoftTeamsConfiguredTeamsRequest"}
+	iListMicrosoftTeamsConfiguredTeamsResult     = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "ListMicrosoftTeamsConfiguredTeamsResult"}
+	iListMicrosoftTeamsUserIdentitiesRequest     = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "ListMicrosoftTeamsUserIdentitiesRequest"}
+	iListMicrosoftTeamsUserIdentitiesResult      = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "ListMicrosoftTeamsUserIdentitiesResult"}
+	iListTagsForResourceRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "ListTagsForResourceResponse"}
+	iTagResourceRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "TagResourceRequest"}
+	iTagResourceResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "TagResourceResponse"}
+	iUntagResourceRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "UntagResourceResponse"}
+	iUpdateAccountPreferencesRequest             = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "UpdateAccountPreferencesRequest"}
+	iUpdateAccountPreferencesResult              = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "UpdateAccountPreferencesResult"}
+	iUpdateChimeWebhookConfigurationRequest      = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "UpdateChimeWebhookConfigurationRequest"}
+	iUpdateChimeWebhookConfigurationResult       = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "UpdateChimeWebhookConfigurationResult"}
+	iUpdateCustomActionRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "UpdateCustomActionRequest"}
+	iUpdateCustomActionResult                    = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "UpdateCustomActionResult"}
+	iUpdateTeamsChannelConfigurationRequest      = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "UpdateTeamsChannelConfigurationRequest"}
+	iUpdateTeamsChannelConfigurationResult       = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "UpdateTeamsChannelConfigurationResult"}
+	iUpdateSlackChannelConfigurationRequest      = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "UpdateSlackChannelConfigurationRequest"}
+	iUpdateSlackChannelConfigurationResult       = smithy.ShapeID{Namespace: "com.amazonaws.chatbot", Name: "UpdateSlackChannelConfigurationResult"}
+	pString                                      = smithy.ShapeID{Namespace: "smithy.api", Name: "String"}
+	pUnit                                        = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+	pInteger                                     = smithy.ShapeID{Namespace: "smithy.api", Name: "Integer"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/associate-to-configuration",
-	Code: 201})
-
-var CreateChimeWebhookConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "CreateChimeWebhookConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/create-chime-webhook-configuration",
-	Code: 201})
-
-var CreateCustomAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "CreateCustomAction",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/create-custom-action",
-	Code: 201})
-
-var CreateMicrosoftTeamsChannelConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "CreateMicrosoftTeamsChannelConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/create-ms-teams-channel-configuration",
-	Code: 201})
-
-var CreateSlackChannelConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "CreateSlackChannelConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/create-slack-channel-configuration",
-	Code: 201})
-
-var DeleteChimeWebhookConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DeleteChimeWebhookConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/delete-chime-webhook-configuration",
-	Code: 204})
-
-var DeleteCustomAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DeleteCustomAction",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/delete-custom-action",
-	Code: 204})
-
-var DeleteMicrosoftTeamsChannelConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DeleteMicrosoftTeamsChannelConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/delete-ms-teams-channel-configuration",
-	Code: 204})
-
-var DeleteMicrosoftTeamsConfiguredTeam = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DeleteMicrosoftTeamsConfiguredTeam",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/delete-ms-teams-configured-teams",
-	Code: 204})
-
-var DeleteMicrosoftTeamsUserIdentity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DeleteMicrosoftTeamsUserIdentity",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/delete-ms-teams-user-identity",
-	Code: 204})
-
-var DeleteSlackChannelConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DeleteSlackChannelConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/delete-slack-channel-configuration",
-	Code: 204})
-
-var DeleteSlackUserIdentity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DeleteSlackUserIdentity",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/delete-slack-user-identity",
-	Code: 204})
-
-var DeleteSlackWorkspaceAuthorization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DeleteSlackWorkspaceAuthorization",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/delete-slack-workspace-authorization",
-	Code: 204})
-
-var DescribeChimeWebhookConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DescribeChimeWebhookConfigurations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/describe-chime-webhook-configurations",
-	Code: 200})
-
-var DescribeSlackChannelConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DescribeSlackChannelConfigurations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/describe-slack-channel-configurations",
-	Code: 200})
-
-var DescribeSlackUserIdentities = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DescribeSlackUserIdentities",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/describe-slack-user-identities",
-	Code: 200})
-
-var DescribeSlackWorkspaces = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DescribeSlackWorkspaces",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/describe-slack-workspaces",
-	Code: 200})
-
-var DisassociateFromConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DisassociateFromConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/disassociate-from-configuration",
-	Code: 204})
-
-var GetAccountPreferences = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "GetAccountPreferences",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/get-account-preferences",
-	Code: 200})
-
-var GetCustomAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "GetCustomAction",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/get-custom-action",
-	Code: 200})
-
-var GetMicrosoftTeamsChannelConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "GetMicrosoftTeamsChannelConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/get-ms-teams-channel-configuration",
-	Code: 200})
-
-var ListAssociations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "ListAssociations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/list-associations",
-	Code: 200})
-
-var ListCustomActions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "ListCustomActions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/list-custom-actions",
-	Code: 200})
-
-var ListMicrosoftTeamsChannelConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "ListMicrosoftTeamsChannelConfigurations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/list-ms-teams-channel-configurations",
-	Code: 200})
-
-var ListMicrosoftTeamsConfiguredTeams = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "ListMicrosoftTeamsConfiguredTeams",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/list-ms-teams-configured-teams",
-	Code: 200})
-
-var ListMicrosoftTeamsUserIdentities = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "ListMicrosoftTeamsUserIdentities",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/list-ms-teams-user-identities",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/list-tags-for-resource",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tag-resource",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/untag-resource",
-	Code: 200})
-
-var UpdateAccountPreferences = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "UpdateAccountPreferences",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/update-account-preferences",
-	Code: 200})
-
-var UpdateChimeWebhookConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "UpdateChimeWebhookConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/update-chime-webhook-configuration",
-	Code: 200})
-
-var UpdateCustomAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "UpdateCustomAction",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/update-custom-action",
-	Code: 200})
-
-var UpdateMicrosoftTeamsChannelConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "UpdateMicrosoftTeamsChannelConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/update-ms-teams-channel-configuration",
-	Code: 200})
-
-var UpdateSlackChannelConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "UpdateSlackChannelConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/update-slack-channel-configuration",
-	Code: 200})
-
-var _WheatleyOrchestration_20171011 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "WheatleyOrchestration_20171011",
-}, smithy.ShapeTypeService, 0, &smithytraits.XMLNamespace{URI: "http://wheatley.amazonaws.com/orchestration/2017-10-11/"})
-
-var WheatleyOrchestration_20171011 = smithy.NewServiceSchema(_WheatleyOrchestration_20171011, "2017-10-11")
-
-var AccountPreferences = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "AccountPreferences",
-}, smithy.ShapeTypeStructure, 2)
-var AccountPreferences_UserAuthorizationRequired *smithy.Schema
-
-var AccountPreferences_TrainingDataCollectionEnabled *smithy.Schema
-
-var _AmazonResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "AmazonResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var _AssociationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "AssociationList",
-}, smithy.ShapeTypeList, 1)
-var _AssociationList_member *smithy.Schema
-
-var AssociationListing = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "AssociationListing",
-}, smithy.ShapeTypeStructure, 1)
-var AssociationListing_Resource *smithy.Schema
-
-var _AwsUserIdentity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "AwsUserIdentity",
-}, smithy.ShapeTypeString, 0)
-
-var _BooleanAccountPreference = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "BooleanAccountPreference",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _ChatConfigurationArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "ChatConfigurationArn",
-}, smithy.ShapeTypeString, 0)
-
-var ChimeWebhookConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "ChimeWebhookConfiguration",
-}, smithy.ShapeTypeStructure, 9)
-var ChimeWebhookConfiguration_WebhookDescription *smithy.Schema
-
-var ChimeWebhookConfiguration_ChatConfigurationArn *smithy.Schema
-
-var ChimeWebhookConfiguration_IamRoleArn *smithy.Schema
-
-var ChimeWebhookConfiguration_SnsTopicArns *smithy.Schema
-
-var ChimeWebhookConfiguration_ConfigurationName *smithy.Schema
-
-var ChimeWebhookConfiguration_LoggingLevel *smithy.Schema
-
-var ChimeWebhookConfiguration_Tags *smithy.Schema
-
-var ChimeWebhookConfiguration_State *smithy.Schema
-
-var ChimeWebhookConfiguration_StateReason *smithy.Schema
-
-var _ChimeWebhookConfigurationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "ChimeWebhookConfigurationList",
-}, smithy.ShapeTypeList, 1)
-var _ChimeWebhookConfigurationList_member *smithy.Schema
-
-var _ChimeWebhookDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "ChimeWebhookDescription",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ChimeWebhookUrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "ChimeWebhookUrl",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ClientToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "ClientToken",
-}, smithy.ShapeTypeString, 0)
-
-var _ConfigurationName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "ConfigurationName",
-}, smithy.ShapeTypeString, 0)
-
-var ConfiguredTeam = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "ConfiguredTeam",
-}, smithy.ShapeTypeStructure, 5)
-var ConfiguredTeam_TenantId *smithy.Schema
-
-var ConfiguredTeam_TeamId *smithy.Schema
-
-var ConfiguredTeam_TeamName *smithy.Schema
-
-var ConfiguredTeam_State *smithy.Schema
-
-var ConfiguredTeam_StateReason *smithy.Schema
-
-var _ConfiguredTeamsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "ConfiguredTeamsList",
-}, smithy.ShapeTypeList, 1)
-var _ConfiguredTeamsList_member *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var CreateChimeWebhookConfigurationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "CreateChimeWebhookConfigurationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var CreateChimeWebhookConfigurationException_Message *smithy.Schema
-
-var CreateSlackChannelConfigurationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "CreateSlackChannelConfigurationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var CreateSlackChannelConfigurationException_Message *smithy.Schema
-
-var CreateTeamsChannelConfigurationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "CreateTeamsChannelConfigurationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var CreateTeamsChannelConfigurationException_Message *smithy.Schema
-
-var CustomAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "CustomAction",
-}, smithy.ShapeTypeStructure, 5)
-var CustomAction_CustomActionArn *smithy.Schema
-
-var CustomAction_Definition *smithy.Schema
-
-var CustomAction_AliasName *smithy.Schema
-
-var CustomAction_Attachments *smithy.Schema
-
-var CustomAction_ActionName *smithy.Schema
-
-var _CustomActionAliasName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "CustomActionAliasName",
-}, smithy.ShapeTypeString, 0)
-
-var _CustomActionArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "CustomActionArn",
-}, smithy.ShapeTypeString, 0)
-
-var _CustomActionArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "CustomActionArnList",
-}, smithy.ShapeTypeList, 1)
-var _CustomActionArnList_member *smithy.Schema
-
-var CustomActionAttachment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "CustomActionAttachment",
-}, smithy.ShapeTypeStructure, 4)
-var CustomActionAttachment_NotificationType *smithy.Schema
-
-var CustomActionAttachment_ButtonText *smithy.Schema
-
-var CustomActionAttachment_Criteria *smithy.Schema
-
-var CustomActionAttachment_Variables *smithy.Schema
-
-var CustomActionAttachmentCriteria = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "CustomActionAttachmentCriteria",
-}, smithy.ShapeTypeStructure, 3)
-var CustomActionAttachmentCriteria_Operator *smithy.Schema
-
-var CustomActionAttachmentCriteria_VariableName *smithy.Schema
-
-var CustomActionAttachmentCriteria_Value *smithy.Schema
-
-var _CustomActionAttachmentCriteriaList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "CustomActionAttachmentCriteriaList",
-}, smithy.ShapeTypeList, 1)
-var _CustomActionAttachmentCriteriaList_member *smithy.Schema
-
-var CustomActionAttachmentCriteriaOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "CustomActionAttachmentCriteriaOperator",
-}, smithy.ShapeTypeEnum, 2)
-var CustomActionAttachmentCriteriaOperator_HAS_VALUE *smithy.Schema
-
-var CustomActionAttachmentCriteriaOperator_EQUALS *smithy.Schema
-
-var _CustomActionAttachmentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "CustomActionAttachmentList",
-}, smithy.ShapeTypeList, 1)
-var _CustomActionAttachmentList_member *smithy.Schema
-
-var _CustomActionAttachmentNotificationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "CustomActionAttachmentNotificationType",
-}, smithy.ShapeTypeString, 0)
-
-var _CustomActionAttachmentVariables = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "CustomActionAttachmentVariables",
-}, smithy.ShapeTypeMap, 2)
-var _CustomActionAttachmentVariables_key *smithy.Schema
-
-var _CustomActionAttachmentVariables_value *smithy.Schema
-
-var _CustomActionButtonText = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "CustomActionButtonText",
-}, smithy.ShapeTypeString, 0)
-
-var CustomActionDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "CustomActionDefinition",
-}, smithy.ShapeTypeStructure, 1)
-var CustomActionDefinition_CommandText *smithy.Schema
-
-var _CustomActionName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "CustomActionName",
-}, smithy.ShapeTypeString, 0)
-
-var _CustomerCwLogLevel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "CustomerCwLogLevel",
-}, smithy.ShapeTypeString, 0)
-
-var DeleteChimeWebhookConfigurationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DeleteChimeWebhookConfigurationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var DeleteChimeWebhookConfigurationException_Message *smithy.Schema
-
-var DeleteMicrosoftTeamsUserIdentityException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DeleteMicrosoftTeamsUserIdentityException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var DeleteMicrosoftTeamsUserIdentityException_Message *smithy.Schema
-
-var DeleteSlackChannelConfigurationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DeleteSlackChannelConfigurationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var DeleteSlackChannelConfigurationException_Message *smithy.Schema
-
-var DeleteSlackUserIdentityException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DeleteSlackUserIdentityException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var DeleteSlackUserIdentityException_Message *smithy.Schema
-
-var DeleteSlackWorkspaceAuthorizationFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DeleteSlackWorkspaceAuthorizationFault",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var DeleteSlackWorkspaceAuthorizationFault_Message *smithy.Schema
-
-var DeleteTeamsChannelConfigurationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DeleteTeamsChannelConfigurationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var DeleteTeamsChannelConfigurationException_Message *smithy.Schema
-
-var DeleteTeamsConfiguredTeamException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DeleteTeamsConfiguredTeamException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var DeleteTeamsConfiguredTeamException_Message *smithy.Schema
-
-var DescribeChimeWebhookConfigurationsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DescribeChimeWebhookConfigurationsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var DescribeChimeWebhookConfigurationsException_Message *smithy.Schema
-
-var DescribeSlackChannelConfigurationsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DescribeSlackChannelConfigurationsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var DescribeSlackChannelConfigurationsException_Message *smithy.Schema
-
-var DescribeSlackUserIdentitiesException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DescribeSlackUserIdentitiesException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var DescribeSlackUserIdentitiesException_Message *smithy.Schema
-
-var DescribeSlackWorkspacesException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DescribeSlackWorkspacesException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var DescribeSlackWorkspacesException_Message *smithy.Schema
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var GetAccountPreferencesException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "GetAccountPreferencesException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var GetAccountPreferencesException_Message *smithy.Schema
-
-var GetTeamsChannelConfigurationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "GetTeamsChannelConfigurationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var GetTeamsChannelConfigurationException_Message *smithy.Schema
-
-var _GuardrailPolicyArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "GuardrailPolicyArn",
-}, smithy.ShapeTypeString, 0)
-
-var _GuardrailPolicyArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "GuardrailPolicyArnList",
-}, smithy.ShapeTypeList, 1)
-var _GuardrailPolicyArnList_member *smithy.Schema
-
-var InternalServiceError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "InternalServiceError",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServiceError_Message *smithy.Schema
-
-var InvalidParameterException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "InvalidParameterException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidParameterException_message *smithy.Schema
-
-var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidRequestException_message *smithy.Schema
-
-var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var LimitExceededException_message *smithy.Schema
-
-var ListMicrosoftTeamsConfiguredTeamsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "ListMicrosoftTeamsConfiguredTeamsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var ListMicrosoftTeamsConfiguredTeamsException_Message *smithy.Schema
-
-var ListMicrosoftTeamsUserIdentitiesException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "ListMicrosoftTeamsUserIdentitiesException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var ListMicrosoftTeamsUserIdentitiesException_Message *smithy.Schema
-
-var ListTeamsChannelConfigurationsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "ListTeamsChannelConfigurationsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var ListTeamsChannelConfigurationsException_Message *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _PaginationToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "PaginationToken",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "ResourceIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var _ResourceState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "ResourceState",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ServiceUnavailableException_message *smithy.Schema
-
-var SlackChannelConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "SlackChannelConfiguration",
-}, smithy.ShapeTypeStructure, 14)
-var SlackChannelConfiguration_SlackTeamName *smithy.Schema
-
-var SlackChannelConfiguration_SlackTeamId *smithy.Schema
-
-var SlackChannelConfiguration_SlackChannelId *smithy.Schema
-
-var SlackChannelConfiguration_SlackChannelName *smithy.Schema
-
-var SlackChannelConfiguration_ChatConfigurationArn *smithy.Schema
-
-var SlackChannelConfiguration_IamRoleArn *smithy.Schema
-
-var SlackChannelConfiguration_SnsTopicArns *smithy.Schema
-
-var SlackChannelConfiguration_ConfigurationName *smithy.Schema
-
-var SlackChannelConfiguration_LoggingLevel *smithy.Schema
-
-var SlackChannelConfiguration_GuardrailPolicyArns *smithy.Schema
-
-var SlackChannelConfiguration_UserAuthorizationRequired *smithy.Schema
-
-var SlackChannelConfiguration_Tags *smithy.Schema
-
-var SlackChannelConfiguration_State *smithy.Schema
-
-var SlackChannelConfiguration_StateReason *smithy.Schema
-
-var _SlackChannelConfigurationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "SlackChannelConfigurationList",
-}, smithy.ShapeTypeList, 1)
-var _SlackChannelConfigurationList_member *smithy.Schema
-
-var _SlackChannelDisplayName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "SlackChannelDisplayName",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _SlackChannelId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "SlackChannelId",
-}, smithy.ShapeTypeString, 0)
-
-var _SlackTeamId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "SlackTeamId",
-}, smithy.ShapeTypeString, 0)
-
-var _SlackTeamName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "SlackTeamName",
-}, smithy.ShapeTypeString, 0)
-
-var _SlackUserId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "SlackUserId",
-}, smithy.ShapeTypeString, 0)
-
-var _SlackUserIdentitiesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "SlackUserIdentitiesList",
-}, smithy.ShapeTypeList, 1)
-var _SlackUserIdentitiesList_member *smithy.Schema
-
-var SlackUserIdentity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "SlackUserIdentity",
-}, smithy.ShapeTypeStructure, 5)
-var SlackUserIdentity_IamRoleArn *smithy.Schema
-
-var SlackUserIdentity_ChatConfigurationArn *smithy.Schema
-
-var SlackUserIdentity_SlackTeamId *smithy.Schema
-
-var SlackUserIdentity_SlackUserId *smithy.Schema
-
-var SlackUserIdentity_AwsUserIdentity *smithy.Schema
-
-var SlackWorkspace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "SlackWorkspace",
-}, smithy.ShapeTypeStructure, 4)
-var SlackWorkspace_SlackTeamId *smithy.Schema
-
-var SlackWorkspace_SlackTeamName *smithy.Schema
-
-var SlackWorkspace_State *smithy.Schema
-
-var SlackWorkspace_StateReason *smithy.Schema
-
-var _SlackWorkspacesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "SlackWorkspacesList",
-}, smithy.ShapeTypeList, 1)
-var _SlackWorkspacesList_member *smithy.Schema
-
-var _SnsTopicArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "SnsTopicArnList",
-}, smithy.ShapeTypeList, 1)
-var _SnsTopicArnList_member *smithy.Schema
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_TagKey *smithy.Schema
-
-var Tag_TagValue *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _Tags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "Tags",
-}, smithy.ShapeTypeList, 1)
-var _Tags_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _TeamChannelConfigurationsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "TeamChannelConfigurationsList",
-}, smithy.ShapeTypeList, 1)
-var _TeamChannelConfigurationsList_member *smithy.Schema
-
-var _TeamName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "TeamName",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var TeamsChannelConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "TeamsChannelConfiguration",
-}, smithy.ShapeTypeStructure, 15)
-var TeamsChannelConfiguration_ChannelId *smithy.Schema
-
-var TeamsChannelConfiguration_ChannelName *smithy.Schema
-
-var TeamsChannelConfiguration_TeamId *smithy.Schema
-
-var TeamsChannelConfiguration_TeamName *smithy.Schema
-
-var TeamsChannelConfiguration_TenantId *smithy.Schema
-
-var TeamsChannelConfiguration_ChatConfigurationArn *smithy.Schema
-
-var TeamsChannelConfiguration_IamRoleArn *smithy.Schema
-
-var TeamsChannelConfiguration_SnsTopicArns *smithy.Schema
-
-var TeamsChannelConfiguration_ConfigurationName *smithy.Schema
-
-var TeamsChannelConfiguration_LoggingLevel *smithy.Schema
-
-var TeamsChannelConfiguration_GuardrailPolicyArns *smithy.Schema
-
-var TeamsChannelConfiguration_UserAuthorizationRequired *smithy.Schema
-
-var TeamsChannelConfiguration_Tags *smithy.Schema
-
-var TeamsChannelConfiguration_State *smithy.Schema
-
-var TeamsChannelConfiguration_StateReason *smithy.Schema
-
-var _TeamsChannelId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "TeamsChannelId",
-}, smithy.ShapeTypeString, 0)
-
-var _TeamsChannelName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "TeamsChannelName",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _TeamsUserIdentitiesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "TeamsUserIdentitiesList",
-}, smithy.ShapeTypeList, 1)
-var _TeamsUserIdentitiesList_member *smithy.Schema
-
-var TeamsUserIdentity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "TeamsUserIdentity",
-}, smithy.ShapeTypeStructure, 7)
-var TeamsUserIdentity_IamRoleArn *smithy.Schema
-
-var TeamsUserIdentity_ChatConfigurationArn *smithy.Schema
-
-var TeamsUserIdentity_TeamId *smithy.Schema
-
-var TeamsUserIdentity_UserId *smithy.Schema
-
-var TeamsUserIdentity_AwsUserIdentity *smithy.Schema
-
-var TeamsUserIdentity_TeamsChannelId *smithy.Schema
-
-var TeamsUserIdentity_TeamsTenantId *smithy.Schema
-
-var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "TooManyTagsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var TooManyTagsException_message *smithy.Schema
-
-var UnauthorizedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "UnauthorizedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var UnauthorizedException_message *smithy.Schema
-
-var UpdateAccountPreferencesException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "UpdateAccountPreferencesException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var UpdateAccountPreferencesException_Message *smithy.Schema
-
-var UpdateChimeWebhookConfigurationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "UpdateChimeWebhookConfigurationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var UpdateChimeWebhookConfigurationException_Message *smithy.Schema
-
-var UpdateSlackChannelConfigurationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "UpdateSlackChannelConfigurationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var UpdateSlackChannelConfigurationException_Message *smithy.Schema
-
-var UpdateTeamsChannelConfigurationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "UpdateTeamsChannelConfigurationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var UpdateTeamsChannelConfigurationException_Message *smithy.Schema
-
-var _UUID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "UUID",
-}, smithy.ShapeTypeString, 0)
-
-var AssociateToConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "AssociateToConfigurationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var AssociateToConfigurationRequest_Resource *smithy.Schema
-
-var AssociateToConfigurationRequest_ChatConfiguration *smithy.Schema
-
-var AssociateToConfigurationResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "AssociateToConfigurationResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var CreateChimeWebhookConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "CreateChimeWebhookConfigurationRequest",
-}, smithy.ShapeTypeStructure, 7)
-var CreateChimeWebhookConfigurationRequest_WebhookDescription *smithy.Schema
-
-var CreateChimeWebhookConfigurationRequest_WebhookUrl *smithy.Schema
-
-var CreateChimeWebhookConfigurationRequest_SnsTopicArns *smithy.Schema
-
-var CreateChimeWebhookConfigurationRequest_IamRoleArn *smithy.Schema
-
-var CreateChimeWebhookConfigurationRequest_ConfigurationName *smithy.Schema
-
-var CreateChimeWebhookConfigurationRequest_LoggingLevel *smithy.Schema
-
-var CreateChimeWebhookConfigurationRequest_Tags *smithy.Schema
-
-var CreateChimeWebhookConfigurationResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "CreateChimeWebhookConfigurationResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreateChimeWebhookConfigurationResult_WebhookConfiguration *smithy.Schema
-
-var CreateCustomActionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "CreateCustomActionRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateCustomActionRequest_Definition *smithy.Schema
-
-var CreateCustomActionRequest_AliasName *smithy.Schema
-
-var CreateCustomActionRequest_Attachments *smithy.Schema
-
-var CreateCustomActionRequest_Tags *smithy.Schema
-
-var CreateCustomActionRequest_ClientToken *smithy.Schema
-
-var CreateCustomActionRequest_ActionName *smithy.Schema
-
-var CreateCustomActionResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "CreateCustomActionResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreateCustomActionResult_CustomActionArn *smithy.Schema
-
-var CreateTeamsChannelConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "CreateTeamsChannelConfigurationRequest",
-}, smithy.ShapeTypeStructure, 12)
-var CreateTeamsChannelConfigurationRequest_ChannelId *smithy.Schema
-
-var CreateTeamsChannelConfigurationRequest_ChannelName *smithy.Schema
-
-var CreateTeamsChannelConfigurationRequest_TeamId *smithy.Schema
-
-var CreateTeamsChannelConfigurationRequest_TeamName *smithy.Schema
-
-var CreateTeamsChannelConfigurationRequest_TenantId *smithy.Schema
-
-var CreateTeamsChannelConfigurationRequest_SnsTopicArns *smithy.Schema
-
-var CreateTeamsChannelConfigurationRequest_IamRoleArn *smithy.Schema
-
-var CreateTeamsChannelConfigurationRequest_ConfigurationName *smithy.Schema
-
-var CreateTeamsChannelConfigurationRequest_LoggingLevel *smithy.Schema
-
-var CreateTeamsChannelConfigurationRequest_GuardrailPolicyArns *smithy.Schema
-
-var CreateTeamsChannelConfigurationRequest_UserAuthorizationRequired *smithy.Schema
-
-var CreateTeamsChannelConfigurationRequest_Tags *smithy.Schema
-
-var CreateTeamsChannelConfigurationResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "CreateTeamsChannelConfigurationResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreateTeamsChannelConfigurationResult_ChannelConfiguration *smithy.Schema
-
-var CreateSlackChannelConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "CreateSlackChannelConfigurationRequest",
-}, smithy.ShapeTypeStructure, 10)
-var CreateSlackChannelConfigurationRequest_SlackTeamId *smithy.Schema
-
-var CreateSlackChannelConfigurationRequest_SlackChannelId *smithy.Schema
-
-var CreateSlackChannelConfigurationRequest_SlackChannelName *smithy.Schema
-
-var CreateSlackChannelConfigurationRequest_SnsTopicArns *smithy.Schema
-
-var CreateSlackChannelConfigurationRequest_IamRoleArn *smithy.Schema
-
-var CreateSlackChannelConfigurationRequest_ConfigurationName *smithy.Schema
-
-var CreateSlackChannelConfigurationRequest_LoggingLevel *smithy.Schema
-
-var CreateSlackChannelConfigurationRequest_GuardrailPolicyArns *smithy.Schema
-
-var CreateSlackChannelConfigurationRequest_UserAuthorizationRequired *smithy.Schema
-
-var CreateSlackChannelConfigurationRequest_Tags *smithy.Schema
-
-var CreateSlackChannelConfigurationResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "CreateSlackChannelConfigurationResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreateSlackChannelConfigurationResult_ChannelConfiguration *smithy.Schema
-
-var DeleteChimeWebhookConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DeleteChimeWebhookConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteChimeWebhookConfigurationRequest_ChatConfigurationArn *smithy.Schema
-
-var DeleteChimeWebhookConfigurationResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DeleteChimeWebhookConfigurationResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteCustomActionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DeleteCustomActionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteCustomActionRequest_CustomActionArn *smithy.Schema
-
-var DeleteCustomActionResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DeleteCustomActionResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteTeamsChannelConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DeleteTeamsChannelConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteTeamsChannelConfigurationRequest_ChatConfigurationArn *smithy.Schema
-
-var DeleteTeamsChannelConfigurationResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DeleteTeamsChannelConfigurationResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteTeamsConfiguredTeamRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DeleteTeamsConfiguredTeamRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteTeamsConfiguredTeamRequest_TeamId *smithy.Schema
-
-var DeleteTeamsConfiguredTeamResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DeleteTeamsConfiguredTeamResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteMicrosoftTeamsUserIdentityRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DeleteMicrosoftTeamsUserIdentityRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteMicrosoftTeamsUserIdentityRequest_ChatConfigurationArn *smithy.Schema
-
-var DeleteMicrosoftTeamsUserIdentityRequest_UserId *smithy.Schema
-
-var DeleteMicrosoftTeamsUserIdentityResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DeleteMicrosoftTeamsUserIdentityResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteSlackChannelConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DeleteSlackChannelConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteSlackChannelConfigurationRequest_ChatConfigurationArn *smithy.Schema
-
-var DeleteSlackChannelConfigurationResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DeleteSlackChannelConfigurationResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteSlackUserIdentityRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DeleteSlackUserIdentityRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteSlackUserIdentityRequest_ChatConfigurationArn *smithy.Schema
-
-var DeleteSlackUserIdentityRequest_SlackTeamId *smithy.Schema
-
-var DeleteSlackUserIdentityRequest_SlackUserId *smithy.Schema
-
-var DeleteSlackUserIdentityResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DeleteSlackUserIdentityResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteSlackWorkspaceAuthorizationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DeleteSlackWorkspaceAuthorizationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteSlackWorkspaceAuthorizationRequest_SlackTeamId *smithy.Schema
-
-var DeleteSlackWorkspaceAuthorizationResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DeleteSlackWorkspaceAuthorizationResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DescribeChimeWebhookConfigurationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DescribeChimeWebhookConfigurationsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeChimeWebhookConfigurationsRequest_MaxResults *smithy.Schema
-
-var DescribeChimeWebhookConfigurationsRequest_NextToken *smithy.Schema
-
-var DescribeChimeWebhookConfigurationsRequest_ChatConfigurationArn *smithy.Schema
-
-var DescribeChimeWebhookConfigurationsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DescribeChimeWebhookConfigurationsResult",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeChimeWebhookConfigurationsResult_NextToken *smithy.Schema
-
-var DescribeChimeWebhookConfigurationsResult_WebhookConfigurations *smithy.Schema
-
-var DescribeSlackChannelConfigurationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DescribeSlackChannelConfigurationsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeSlackChannelConfigurationsRequest_MaxResults *smithy.Schema
-
-var DescribeSlackChannelConfigurationsRequest_NextToken *smithy.Schema
-
-var DescribeSlackChannelConfigurationsRequest_ChatConfigurationArn *smithy.Schema
-
-var DescribeSlackChannelConfigurationsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DescribeSlackChannelConfigurationsResult",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeSlackChannelConfigurationsResult_NextToken *smithy.Schema
-
-var DescribeSlackChannelConfigurationsResult_SlackChannelConfigurations *smithy.Schema
-
-var DescribeSlackUserIdentitiesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DescribeSlackUserIdentitiesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeSlackUserIdentitiesRequest_ChatConfigurationArn *smithy.Schema
-
-var DescribeSlackUserIdentitiesRequest_NextToken *smithy.Schema
-
-var DescribeSlackUserIdentitiesRequest_MaxResults *smithy.Schema
-
-var DescribeSlackUserIdentitiesResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DescribeSlackUserIdentitiesResult",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeSlackUserIdentitiesResult_SlackUserIdentities *smithy.Schema
-
-var DescribeSlackUserIdentitiesResult_NextToken *smithy.Schema
-
-var DescribeSlackWorkspacesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DescribeSlackWorkspacesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeSlackWorkspacesRequest_MaxResults *smithy.Schema
-
-var DescribeSlackWorkspacesRequest_NextToken *smithy.Schema
-
-var DescribeSlackWorkspacesResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DescribeSlackWorkspacesResult",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeSlackWorkspacesResult_SlackWorkspaces *smithy.Schema
-
-var DescribeSlackWorkspacesResult_NextToken *smithy.Schema
-
-var DisassociateFromConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DisassociateFromConfigurationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DisassociateFromConfigurationRequest_Resource *smithy.Schema
-
-var DisassociateFromConfigurationRequest_ChatConfiguration *smithy.Schema
-
-var DisassociateFromConfigurationResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "DisassociateFromConfigurationResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetAccountPreferencesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "GetAccountPreferencesRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetAccountPreferencesResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "GetAccountPreferencesResult",
-}, smithy.ShapeTypeStructure, 1)
-var GetAccountPreferencesResult_AccountPreferences *smithy.Schema
-
-var GetCustomActionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "GetCustomActionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetCustomActionRequest_CustomActionArn *smithy.Schema
-
-var GetCustomActionResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "GetCustomActionResult",
-}, smithy.ShapeTypeStructure, 1)
-var GetCustomActionResult_CustomAction *smithy.Schema
-
-var GetTeamsChannelConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "GetTeamsChannelConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetTeamsChannelConfigurationRequest_ChatConfigurationArn *smithy.Schema
-
-var GetTeamsChannelConfigurationResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "GetTeamsChannelConfigurationResult",
-}, smithy.ShapeTypeStructure, 1)
-var GetTeamsChannelConfigurationResult_ChannelConfiguration *smithy.Schema
-
-var ListAssociationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "ListAssociationsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListAssociationsRequest_ChatConfiguration *smithy.Schema
-
-var ListAssociationsRequest_MaxResults *smithy.Schema
-
-var ListAssociationsRequest_NextToken *smithy.Schema
-
-var ListAssociationsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "ListAssociationsResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListAssociationsResult_Associations *smithy.Schema
-
-var ListAssociationsResult_NextToken *smithy.Schema
-
-var ListCustomActionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "ListCustomActionsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListCustomActionsRequest_MaxResults *smithy.Schema
-
-var ListCustomActionsRequest_NextToken *smithy.Schema
-
-var ListCustomActionsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "ListCustomActionsResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListCustomActionsResult_CustomActions *smithy.Schema
-
-var ListCustomActionsResult_NextToken *smithy.Schema
-
-var ListTeamsChannelConfigurationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "ListTeamsChannelConfigurationsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListTeamsChannelConfigurationsRequest_MaxResults *smithy.Schema
-
-var ListTeamsChannelConfigurationsRequest_NextToken *smithy.Schema
-
-var ListTeamsChannelConfigurationsRequest_TeamId *smithy.Schema
-
-var ListTeamsChannelConfigurationsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "ListTeamsChannelConfigurationsResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListTeamsChannelConfigurationsResult_NextToken *smithy.Schema
-
-var ListTeamsChannelConfigurationsResult_TeamChannelConfigurations *smithy.Schema
-
-var ListMicrosoftTeamsConfiguredTeamsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "ListMicrosoftTeamsConfiguredTeamsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListMicrosoftTeamsConfiguredTeamsRequest_MaxResults *smithy.Schema
-
-var ListMicrosoftTeamsConfiguredTeamsRequest_NextToken *smithy.Schema
-
-var ListMicrosoftTeamsConfiguredTeamsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "ListMicrosoftTeamsConfiguredTeamsResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListMicrosoftTeamsConfiguredTeamsResult_ConfiguredTeams *smithy.Schema
-
-var ListMicrosoftTeamsConfiguredTeamsResult_NextToken *smithy.Schema
-
-var ListMicrosoftTeamsUserIdentitiesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "ListMicrosoftTeamsUserIdentitiesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListMicrosoftTeamsUserIdentitiesRequest_ChatConfigurationArn *smithy.Schema
-
-var ListMicrosoftTeamsUserIdentitiesRequest_NextToken *smithy.Schema
-
-var ListMicrosoftTeamsUserIdentitiesRequest_MaxResults *smithy.Schema
-
-var ListMicrosoftTeamsUserIdentitiesResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "ListMicrosoftTeamsUserIdentitiesResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListMicrosoftTeamsUserIdentitiesResult_TeamsUserIdentities *smithy.Schema
-
-var ListMicrosoftTeamsUserIdentitiesResult_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceARN *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceARN *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceARN *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateAccountPreferencesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "UpdateAccountPreferencesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateAccountPreferencesRequest_UserAuthorizationRequired *smithy.Schema
-
-var UpdateAccountPreferencesRequest_TrainingDataCollectionEnabled *smithy.Schema
-
-var UpdateAccountPreferencesResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "UpdateAccountPreferencesResult",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateAccountPreferencesResult_AccountPreferences *smithy.Schema
-
-var UpdateChimeWebhookConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "UpdateChimeWebhookConfigurationRequest",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateChimeWebhookConfigurationRequest_ChatConfigurationArn *smithy.Schema
-
-var UpdateChimeWebhookConfigurationRequest_WebhookDescription *smithy.Schema
-
-var UpdateChimeWebhookConfigurationRequest_WebhookUrl *smithy.Schema
-
-var UpdateChimeWebhookConfigurationRequest_SnsTopicArns *smithy.Schema
-
-var UpdateChimeWebhookConfigurationRequest_IamRoleArn *smithy.Schema
-
-var UpdateChimeWebhookConfigurationRequest_LoggingLevel *smithy.Schema
-
-var UpdateChimeWebhookConfigurationResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "UpdateChimeWebhookConfigurationResult",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateChimeWebhookConfigurationResult_WebhookConfiguration *smithy.Schema
-
-var UpdateCustomActionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "UpdateCustomActionRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateCustomActionRequest_CustomActionArn *smithy.Schema
-
-var UpdateCustomActionRequest_Definition *smithy.Schema
-
-var UpdateCustomActionRequest_AliasName *smithy.Schema
-
-var UpdateCustomActionRequest_Attachments *smithy.Schema
-
-var UpdateCustomActionResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "UpdateCustomActionResult",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateCustomActionResult_CustomActionArn *smithy.Schema
-
-var UpdateTeamsChannelConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "UpdateTeamsChannelConfigurationRequest",
-}, smithy.ShapeTypeStructure, 8)
-var UpdateTeamsChannelConfigurationRequest_ChatConfigurationArn *smithy.Schema
-
-var UpdateTeamsChannelConfigurationRequest_ChannelId *smithy.Schema
-
-var UpdateTeamsChannelConfigurationRequest_ChannelName *smithy.Schema
-
-var UpdateTeamsChannelConfigurationRequest_SnsTopicArns *smithy.Schema
-
-var UpdateTeamsChannelConfigurationRequest_IamRoleArn *smithy.Schema
-
-var UpdateTeamsChannelConfigurationRequest_LoggingLevel *smithy.Schema
-
-var UpdateTeamsChannelConfigurationRequest_GuardrailPolicyArns *smithy.Schema
-
-var UpdateTeamsChannelConfigurationRequest_UserAuthorizationRequired *smithy.Schema
-
-var UpdateTeamsChannelConfigurationResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "UpdateTeamsChannelConfigurationResult",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateTeamsChannelConfigurationResult_ChannelConfiguration *smithy.Schema
-
-var UpdateSlackChannelConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "UpdateSlackChannelConfigurationRequest",
-}, smithy.ShapeTypeStructure, 8)
-var UpdateSlackChannelConfigurationRequest_ChatConfigurationArn *smithy.Schema
-
-var UpdateSlackChannelConfigurationRequest_SlackChannelId *smithy.Schema
-
-var UpdateSlackChannelConfigurationRequest_SlackChannelName *smithy.Schema
-
-var UpdateSlackChannelConfigurationRequest_SnsTopicArns *smithy.Schema
-
-var UpdateSlackChannelConfigurationRequest_IamRoleArn *smithy.Schema
-
-var UpdateSlackChannelConfigurationRequest_LoggingLevel *smithy.Schema
-
-var UpdateSlackChannelConfigurationRequest_GuardrailPolicyArns *smithy.Schema
-
-var UpdateSlackChannelConfigurationRequest_UserAuthorizationRequired *smithy.Schema
-
-var UpdateSlackChannelConfigurationResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chatbot",
-	Name:      "UpdateSlackChannelConfigurationResult",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateSlackChannelConfigurationResult_ChannelConfiguration *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccountPreferences_UserAuthorizationRequired = AccountPreferences.AddMember("UserAuthorizationRequired", _BooleanAccountPreference)
-
-	AccountPreferences_TrainingDataCollectionEnabled = AccountPreferences.AddMember("TrainingDataCollectionEnabled", _BooleanAccountPreference)
-
-	AssociationListing_Resource = AssociationListing.AddMember("Resource", _Arn)
-
-	_AssociationList_member = _AssociationList.AddMember("member", AssociationListing)
-
-	_SnsTopicArnList_member = _SnsTopicArnList.AddMember("member", _Arn)
-
-	Tag_TagKey = Tag.AddMember("TagKey", _TagKey)
-
-	Tag_TagValue = Tag.AddMember("TagValue", _TagValue)
-
-	_Tags_member = _Tags.AddMember("member", Tag)
-
-	ChimeWebhookConfiguration_WebhookDescription = ChimeWebhookConfiguration.AddMember("WebhookDescription", _ChimeWebhookDescription)
-
-	ChimeWebhookConfiguration_ChatConfigurationArn = ChimeWebhookConfiguration.AddMember("ChatConfigurationArn", _ChatConfigurationArn)
-
-	ChimeWebhookConfiguration_IamRoleArn = ChimeWebhookConfiguration.AddMember("IamRoleArn", _Arn)
-
-	ChimeWebhookConfiguration_SnsTopicArns = ChimeWebhookConfiguration.AddMember("SnsTopicArns", _SnsTopicArnList)
-
-	ChimeWebhookConfiguration_ConfigurationName = ChimeWebhookConfiguration.AddMember("ConfigurationName", _ConfigurationName)
-
-	ChimeWebhookConfiguration_LoggingLevel = ChimeWebhookConfiguration.AddMember("LoggingLevel", _CustomerCwLogLevel)
-
-	ChimeWebhookConfiguration_Tags = ChimeWebhookConfiguration.AddMember("Tags", _Tags)
-
-	ChimeWebhookConfiguration_State = ChimeWebhookConfiguration.AddMember("State", _ResourceState)
-
-	ChimeWebhookConfiguration_StateReason = ChimeWebhookConfiguration.AddMember("StateReason", _String)
-
-	_ChimeWebhookConfigurationList_member = _ChimeWebhookConfigurationList.AddMember("member", ChimeWebhookConfiguration)
-
-	ConfiguredTeam_TenantId = ConfiguredTeam.AddMember("TenantId", _UUID)
-
-	ConfiguredTeam_TeamId = ConfiguredTeam.AddMember("TeamId", _UUID)
-
-	ConfiguredTeam_TeamName = ConfiguredTeam.AddMember("TeamName", _UUID)
-
-	ConfiguredTeam_State = ConfiguredTeam.AddMember("State", _ResourceState)
-
-	ConfiguredTeam_StateReason = ConfiguredTeam.AddMember("StateReason", _String)
-
-	_ConfiguredTeamsList_member = _ConfiguredTeamsList.AddMember("member", ConfiguredTeam)
-
-	ConflictException_message = ConflictException.AddMember("message", _ErrorMessage)
-
-	CreateChimeWebhookConfigurationException_Message = CreateChimeWebhookConfigurationException.AddMember("Message", _ErrorMessage)
-
-	CreateSlackChannelConfigurationException_Message = CreateSlackChannelConfigurationException.AddMember("Message", _ErrorMessage)
-
-	CreateTeamsChannelConfigurationException_Message = CreateTeamsChannelConfigurationException.AddMember("Message", _ErrorMessage)
-
-	CustomActionDefinition_CommandText = CustomActionDefinition.AddMember("CommandText", smithyprelude.String)
-
-	CustomActionAttachmentCriteriaOperator_HAS_VALUE = CustomActionAttachmentCriteriaOperator.AddMember("HAS_VALUE", smithyprelude.Unit)
-
-	CustomActionAttachmentCriteriaOperator_EQUALS = CustomActionAttachmentCriteriaOperator.AddMember("EQUALS", smithyprelude.Unit)
-
-	CustomActionAttachmentCriteria_Operator = CustomActionAttachmentCriteria.AddMember("Operator", CustomActionAttachmentCriteriaOperator)
-
-	CustomActionAttachmentCriteria_VariableName = CustomActionAttachmentCriteria.AddMember("VariableName", smithyprelude.String)
-
-	CustomActionAttachmentCriteria_Value = CustomActionAttachmentCriteria.AddMember("Value", smithyprelude.String)
-
-	_CustomActionAttachmentCriteriaList_member = _CustomActionAttachmentCriteriaList.AddMember("member", CustomActionAttachmentCriteria)
-
-	_CustomActionAttachmentVariables_key = _CustomActionAttachmentVariables.AddMember("key", smithyprelude.String)
-
-	_CustomActionAttachmentVariables_value = _CustomActionAttachmentVariables.AddMember("value", smithyprelude.String)
-
-	CustomActionAttachment_NotificationType = CustomActionAttachment.AddMember("NotificationType", _CustomActionAttachmentNotificationType)
-
-	CustomActionAttachment_ButtonText = CustomActionAttachment.AddMember("ButtonText", _CustomActionButtonText)
-
-	CustomActionAttachment_Criteria = CustomActionAttachment.AddMember("Criteria", _CustomActionAttachmentCriteriaList)
-
-	CustomActionAttachment_Variables = CustomActionAttachment.AddMember("Variables", _CustomActionAttachmentVariables)
-
-	_CustomActionAttachmentList_member = _CustomActionAttachmentList.AddMember("member", CustomActionAttachment)
-
-	CustomAction_CustomActionArn = CustomAction.AddMember("CustomActionArn", _CustomActionArn)
-
-	CustomAction_Definition = CustomAction.AddMember("Definition", CustomActionDefinition)
-
-	CustomAction_AliasName = CustomAction.AddMember("AliasName", _CustomActionAliasName)
-
-	CustomAction_Attachments = CustomAction.AddMember("Attachments", _CustomActionAttachmentList)
-
-	CustomAction_ActionName = CustomAction.AddMember("ActionName", _CustomActionName)
-
-	_CustomActionArnList_member = _CustomActionArnList.AddMember("member", _CustomActionArn)
-
-	DeleteChimeWebhookConfigurationException_Message = DeleteChimeWebhookConfigurationException.AddMember("Message", _ErrorMessage)
-
-	DeleteMicrosoftTeamsUserIdentityException_Message = DeleteMicrosoftTeamsUserIdentityException.AddMember("Message", _ErrorMessage)
-
-	DeleteSlackChannelConfigurationException_Message = DeleteSlackChannelConfigurationException.AddMember("Message", _ErrorMessage)
-
-	DeleteSlackUserIdentityException_Message = DeleteSlackUserIdentityException.AddMember("Message", _ErrorMessage)
-
-	DeleteSlackWorkspaceAuthorizationFault_Message = DeleteSlackWorkspaceAuthorizationFault.AddMember("Message", _ErrorMessage)
-
-	DeleteTeamsChannelConfigurationException_Message = DeleteTeamsChannelConfigurationException.AddMember("Message", _ErrorMessage)
-
-	DeleteTeamsConfiguredTeamException_Message = DeleteTeamsConfiguredTeamException.AddMember("Message", _ErrorMessage)
-
-	DescribeChimeWebhookConfigurationsException_Message = DescribeChimeWebhookConfigurationsException.AddMember("Message", _ErrorMessage)
-
-	DescribeSlackChannelConfigurationsException_Message = DescribeSlackChannelConfigurationsException.AddMember("Message", _ErrorMessage)
-
-	DescribeSlackUserIdentitiesException_Message = DescribeSlackUserIdentitiesException.AddMember("Message", _ErrorMessage)
-
-	DescribeSlackWorkspacesException_Message = DescribeSlackWorkspacesException.AddMember("Message", _ErrorMessage)
-
-	GetAccountPreferencesException_Message = GetAccountPreferencesException.AddMember("Message", _ErrorMessage)
-
-	GetTeamsChannelConfigurationException_Message = GetTeamsChannelConfigurationException.AddMember("Message", _ErrorMessage)
-
-	_GuardrailPolicyArnList_member = _GuardrailPolicyArnList.AddMember("member", _GuardrailPolicyArn)
-
-	InternalServiceError_Message = InternalServiceError.AddMember("Message", _ErrorMessage)
-
-	InvalidParameterException_message = InvalidParameterException.AddMember("message", _ErrorMessage)
-
-	InvalidRequestException_message = InvalidRequestException.AddMember("message", _ErrorMessage)
-
-	LimitExceededException_message = LimitExceededException.AddMember("message", _ErrorMessage)
-
-	ListMicrosoftTeamsConfiguredTeamsException_Message = ListMicrosoftTeamsConfiguredTeamsException.AddMember("Message", _ErrorMessage)
-
-	ListMicrosoftTeamsUserIdentitiesException_Message = ListMicrosoftTeamsUserIdentitiesException.AddMember("Message", _ErrorMessage)
-
-	ListTeamsChannelConfigurationsException_Message = ListTeamsChannelConfigurationsException.AddMember("Message", _ErrorMessage)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _ErrorMessage)
-
-	ServiceUnavailableException_message = ServiceUnavailableException.AddMember("message", _ErrorMessage)
-
-	SlackChannelConfiguration_SlackTeamName = SlackChannelConfiguration.AddMember("SlackTeamName", _SlackTeamName)
-
-	SlackChannelConfiguration_SlackTeamId = SlackChannelConfiguration.AddMember("SlackTeamId", _SlackTeamId)
-
-	SlackChannelConfiguration_SlackChannelId = SlackChannelConfiguration.AddMember("SlackChannelId", _SlackChannelId)
-
-	SlackChannelConfiguration_SlackChannelName = SlackChannelConfiguration.AddMember("SlackChannelName", _SlackChannelDisplayName)
-
-	SlackChannelConfiguration_ChatConfigurationArn = SlackChannelConfiguration.AddMember("ChatConfigurationArn", _ChatConfigurationArn)
-
-	SlackChannelConfiguration_IamRoleArn = SlackChannelConfiguration.AddMember("IamRoleArn", _Arn)
-
-	SlackChannelConfiguration_SnsTopicArns = SlackChannelConfiguration.AddMember("SnsTopicArns", _SnsTopicArnList)
-
-	SlackChannelConfiguration_ConfigurationName = SlackChannelConfiguration.AddMember("ConfigurationName", _ConfigurationName)
-
-	SlackChannelConfiguration_LoggingLevel = SlackChannelConfiguration.AddMember("LoggingLevel", _CustomerCwLogLevel)
-
-	SlackChannelConfiguration_GuardrailPolicyArns = SlackChannelConfiguration.AddMember("GuardrailPolicyArns", _GuardrailPolicyArnList)
-
-	SlackChannelConfiguration_UserAuthorizationRequired = SlackChannelConfiguration.AddMember("UserAuthorizationRequired", _BooleanAccountPreference)
-
-	SlackChannelConfiguration_Tags = SlackChannelConfiguration.AddMember("Tags", _Tags)
-
-	SlackChannelConfiguration_State = SlackChannelConfiguration.AddMember("State", _ResourceState)
-
-	SlackChannelConfiguration_StateReason = SlackChannelConfiguration.AddMember("StateReason", _String)
-
-	_SlackChannelConfigurationList_member = _SlackChannelConfigurationList.AddMember("member", SlackChannelConfiguration)
-
-	SlackUserIdentity_IamRoleArn = SlackUserIdentity.AddMember("IamRoleArn", _Arn)
-
-	SlackUserIdentity_ChatConfigurationArn = SlackUserIdentity.AddMember("ChatConfigurationArn", _ChatConfigurationArn)
-
-	SlackUserIdentity_SlackTeamId = SlackUserIdentity.AddMember("SlackTeamId", _SlackTeamId)
-
-	SlackUserIdentity_SlackUserId = SlackUserIdentity.AddMember("SlackUserId", _SlackUserId)
-
-	SlackUserIdentity_AwsUserIdentity = SlackUserIdentity.AddMember("AwsUserIdentity", _AwsUserIdentity)
-
-	_SlackUserIdentitiesList_member = _SlackUserIdentitiesList.AddMember("member", SlackUserIdentity)
-
-	SlackWorkspace_SlackTeamId = SlackWorkspace.AddMember("SlackTeamId", _SlackTeamId)
-
-	SlackWorkspace_SlackTeamName = SlackWorkspace.AddMember("SlackTeamName", _SlackTeamName)
-
-	SlackWorkspace_State = SlackWorkspace.AddMember("State", _ResourceState)
-
-	SlackWorkspace_StateReason = SlackWorkspace.AddMember("StateReason", _String)
-
-	_SlackWorkspacesList_member = _SlackWorkspacesList.AddMember("member", SlackWorkspace)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	TeamsChannelConfiguration_ChannelId = TeamsChannelConfiguration.AddMember("ChannelId", _TeamsChannelId)
-
-	TeamsChannelConfiguration_ChannelName = TeamsChannelConfiguration.AddMember("ChannelName", _TeamsChannelName)
-
-	TeamsChannelConfiguration_TeamId = TeamsChannelConfiguration.AddMember("TeamId", _UUID)
-
-	TeamsChannelConfiguration_TeamName = TeamsChannelConfiguration.AddMember("TeamName", _TeamName)
-
-	TeamsChannelConfiguration_TenantId = TeamsChannelConfiguration.AddMember("TenantId", _UUID)
-
-	TeamsChannelConfiguration_ChatConfigurationArn = TeamsChannelConfiguration.AddMember("ChatConfigurationArn", _ChatConfigurationArn)
-
-	TeamsChannelConfiguration_IamRoleArn = TeamsChannelConfiguration.AddMember("IamRoleArn", _Arn)
-
-	TeamsChannelConfiguration_SnsTopicArns = TeamsChannelConfiguration.AddMember("SnsTopicArns", _SnsTopicArnList)
-
-	TeamsChannelConfiguration_ConfigurationName = TeamsChannelConfiguration.AddMember("ConfigurationName", _ConfigurationName)
-
-	TeamsChannelConfiguration_LoggingLevel = TeamsChannelConfiguration.AddMember("LoggingLevel", _CustomerCwLogLevel)
-
-	TeamsChannelConfiguration_GuardrailPolicyArns = TeamsChannelConfiguration.AddMember("GuardrailPolicyArns", _GuardrailPolicyArnList)
-
-	TeamsChannelConfiguration_UserAuthorizationRequired = TeamsChannelConfiguration.AddMember("UserAuthorizationRequired", _BooleanAccountPreference)
-
-	TeamsChannelConfiguration_Tags = TeamsChannelConfiguration.AddMember("Tags", _Tags)
-
-	TeamsChannelConfiguration_State = TeamsChannelConfiguration.AddMember("State", _ResourceState)
-
-	TeamsChannelConfiguration_StateReason = TeamsChannelConfiguration.AddMember("StateReason", _String)
-
-	_TeamChannelConfigurationsList_member = _TeamChannelConfigurationsList.AddMember("member", TeamsChannelConfiguration)
-
-	TeamsUserIdentity_IamRoleArn = TeamsUserIdentity.AddMember("IamRoleArn", _Arn)
-
-	TeamsUserIdentity_ChatConfigurationArn = TeamsUserIdentity.AddMember("ChatConfigurationArn", _ChatConfigurationArn)
-
-	TeamsUserIdentity_TeamId = TeamsUserIdentity.AddMember("TeamId", _UUID)
-
-	TeamsUserIdentity_UserId = TeamsUserIdentity.AddMember("UserId", _UUID)
-
-	TeamsUserIdentity_AwsUserIdentity = TeamsUserIdentity.AddMember("AwsUserIdentity", _AwsUserIdentity)
-
-	TeamsUserIdentity_TeamsChannelId = TeamsUserIdentity.AddMember("TeamsChannelId", _TeamsChannelId)
-
-	TeamsUserIdentity_TeamsTenantId = TeamsUserIdentity.AddMember("TeamsTenantId", _UUID)
-
-	_TeamsUserIdentitiesList_member = _TeamsUserIdentitiesList.AddMember("member", TeamsUserIdentity)
-
-	TooManyTagsException_message = TooManyTagsException.AddMember("message", _ErrorMessage)
-
-	UnauthorizedException_message = UnauthorizedException.AddMember("message", _ErrorMessage)
-
-	UpdateAccountPreferencesException_Message = UpdateAccountPreferencesException.AddMember("Message", _ErrorMessage)
-
-	UpdateChimeWebhookConfigurationException_Message = UpdateChimeWebhookConfigurationException.AddMember("Message", _ErrorMessage)
-
-	UpdateSlackChannelConfigurationException_Message = UpdateSlackChannelConfigurationException.AddMember("Message", _ErrorMessage)
-
-	UpdateTeamsChannelConfigurationException_Message = UpdateTeamsChannelConfigurationException.AddMember("Message", _ErrorMessage)
-
-	AssociateToConfigurationRequest_Resource = AssociateToConfigurationRequest.AddMember("Resource", _ResourceIdentifier)
-
-	AssociateToConfigurationRequest_ChatConfiguration = AssociateToConfigurationRequest.AddMember("ChatConfiguration", _ChatConfigurationArn)
-
-	CreateChimeWebhookConfigurationRequest_WebhookDescription = CreateChimeWebhookConfigurationRequest.AddMember("WebhookDescription", _ChimeWebhookDescription)
-
-	CreateChimeWebhookConfigurationRequest_WebhookUrl = CreateChimeWebhookConfigurationRequest.AddMember("WebhookUrl", _ChimeWebhookUrl)
-
-	CreateChimeWebhookConfigurationRequest_SnsTopicArns = CreateChimeWebhookConfigurationRequest.AddMember("SnsTopicArns", _SnsTopicArnList)
-
-	CreateChimeWebhookConfigurationRequest_IamRoleArn = CreateChimeWebhookConfigurationRequest.AddMember("IamRoleArn", _Arn)
-
-	CreateChimeWebhookConfigurationRequest_ConfigurationName = CreateChimeWebhookConfigurationRequest.AddMember("ConfigurationName", _ConfigurationName)
-
-	CreateChimeWebhookConfigurationRequest_LoggingLevel = CreateChimeWebhookConfigurationRequest.AddMember("LoggingLevel", _CustomerCwLogLevel)
-
-	CreateChimeWebhookConfigurationRequest_Tags = CreateChimeWebhookConfigurationRequest.AddMember("Tags", _Tags)
-
-	CreateChimeWebhookConfigurationResult_WebhookConfiguration = CreateChimeWebhookConfigurationResult.AddMember("WebhookConfiguration", ChimeWebhookConfiguration)
-
-	CreateCustomActionRequest_Definition = CreateCustomActionRequest.AddMember("Definition", CustomActionDefinition)
-
-	CreateCustomActionRequest_AliasName = CreateCustomActionRequest.AddMember("AliasName", _CustomActionAliasName)
-
-	CreateCustomActionRequest_Attachments = CreateCustomActionRequest.AddMember("Attachments", _CustomActionAttachmentList)
-
-	CreateCustomActionRequest_Tags = CreateCustomActionRequest.AddMember("Tags", _TagList)
-
-	CreateCustomActionRequest_ClientToken = CreateCustomActionRequest.AddMember("ClientToken", _ClientToken)
-
-	CreateCustomActionRequest_ActionName = CreateCustomActionRequest.AddMember("ActionName", _CustomActionName)
-
-	CreateCustomActionResult_CustomActionArn = CreateCustomActionResult.AddMember("CustomActionArn", _CustomActionArn)
-
-	CreateTeamsChannelConfigurationRequest_ChannelId = CreateTeamsChannelConfigurationRequest.AddMember("ChannelId", _TeamsChannelId)
-
-	CreateTeamsChannelConfigurationRequest_ChannelName = CreateTeamsChannelConfigurationRequest.AddMember("ChannelName", _TeamsChannelName)
-
-	CreateTeamsChannelConfigurationRequest_TeamId = CreateTeamsChannelConfigurationRequest.AddMember("TeamId", _UUID)
-
-	CreateTeamsChannelConfigurationRequest_TeamName = CreateTeamsChannelConfigurationRequest.AddMember("TeamName", _TeamName)
-
-	CreateTeamsChannelConfigurationRequest_TenantId = CreateTeamsChannelConfigurationRequest.AddMember("TenantId", _UUID)
-
-	CreateTeamsChannelConfigurationRequest_SnsTopicArns = CreateTeamsChannelConfigurationRequest.AddMember("SnsTopicArns", _SnsTopicArnList)
-
-	CreateTeamsChannelConfigurationRequest_IamRoleArn = CreateTeamsChannelConfigurationRequest.AddMember("IamRoleArn", _Arn)
-
-	CreateTeamsChannelConfigurationRequest_ConfigurationName = CreateTeamsChannelConfigurationRequest.AddMember("ConfigurationName", _ConfigurationName)
-
-	CreateTeamsChannelConfigurationRequest_LoggingLevel = CreateTeamsChannelConfigurationRequest.AddMember("LoggingLevel", _CustomerCwLogLevel)
-
-	CreateTeamsChannelConfigurationRequest_GuardrailPolicyArns = CreateTeamsChannelConfigurationRequest.AddMember("GuardrailPolicyArns", _GuardrailPolicyArnList)
-
-	CreateTeamsChannelConfigurationRequest_UserAuthorizationRequired = CreateTeamsChannelConfigurationRequest.AddMember("UserAuthorizationRequired", _BooleanAccountPreference)
-
-	CreateTeamsChannelConfigurationRequest_Tags = CreateTeamsChannelConfigurationRequest.AddMember("Tags", _Tags)
-
-	CreateTeamsChannelConfigurationResult_ChannelConfiguration = CreateTeamsChannelConfigurationResult.AddMember("ChannelConfiguration", TeamsChannelConfiguration)
-
-	CreateSlackChannelConfigurationRequest_SlackTeamId = CreateSlackChannelConfigurationRequest.AddMember("SlackTeamId", _SlackTeamId)
-
-	CreateSlackChannelConfigurationRequest_SlackChannelId = CreateSlackChannelConfigurationRequest.AddMember("SlackChannelId", _SlackChannelId)
-
-	CreateSlackChannelConfigurationRequest_SlackChannelName = CreateSlackChannelConfigurationRequest.AddMember("SlackChannelName", _SlackChannelDisplayName)
-
-	CreateSlackChannelConfigurationRequest_SnsTopicArns = CreateSlackChannelConfigurationRequest.AddMember("SnsTopicArns", _SnsTopicArnList)
-
-	CreateSlackChannelConfigurationRequest_IamRoleArn = CreateSlackChannelConfigurationRequest.AddMember("IamRoleArn", _Arn)
-
-	CreateSlackChannelConfigurationRequest_ConfigurationName = CreateSlackChannelConfigurationRequest.AddMember("ConfigurationName", _ConfigurationName)
-
-	CreateSlackChannelConfigurationRequest_LoggingLevel = CreateSlackChannelConfigurationRequest.AddMember("LoggingLevel", _CustomerCwLogLevel)
-
-	CreateSlackChannelConfigurationRequest_GuardrailPolicyArns = CreateSlackChannelConfigurationRequest.AddMember("GuardrailPolicyArns", _GuardrailPolicyArnList)
-
-	CreateSlackChannelConfigurationRequest_UserAuthorizationRequired = CreateSlackChannelConfigurationRequest.AddMember("UserAuthorizationRequired", _BooleanAccountPreference)
-
-	CreateSlackChannelConfigurationRequest_Tags = CreateSlackChannelConfigurationRequest.AddMember("Tags", _Tags)
-
-	CreateSlackChannelConfigurationResult_ChannelConfiguration = CreateSlackChannelConfigurationResult.AddMember("ChannelConfiguration", SlackChannelConfiguration)
-
-	DeleteChimeWebhookConfigurationRequest_ChatConfigurationArn = DeleteChimeWebhookConfigurationRequest.AddMember("ChatConfigurationArn", _ChatConfigurationArn)
-
-	DeleteCustomActionRequest_CustomActionArn = DeleteCustomActionRequest.AddMember("CustomActionArn", _CustomActionArn)
-
-	DeleteTeamsChannelConfigurationRequest_ChatConfigurationArn = DeleteTeamsChannelConfigurationRequest.AddMember("ChatConfigurationArn", _ChatConfigurationArn)
-
-	DeleteTeamsConfiguredTeamRequest_TeamId = DeleteTeamsConfiguredTeamRequest.AddMember("TeamId", _UUID)
-
-	DeleteMicrosoftTeamsUserIdentityRequest_ChatConfigurationArn = DeleteMicrosoftTeamsUserIdentityRequest.AddMember("ChatConfigurationArn", _ChatConfigurationArn)
-
-	DeleteMicrosoftTeamsUserIdentityRequest_UserId = DeleteMicrosoftTeamsUserIdentityRequest.AddMember("UserId", _UUID)
-
-	DeleteSlackChannelConfigurationRequest_ChatConfigurationArn = DeleteSlackChannelConfigurationRequest.AddMember("ChatConfigurationArn", _ChatConfigurationArn)
-
-	DeleteSlackUserIdentityRequest_ChatConfigurationArn = DeleteSlackUserIdentityRequest.AddMember("ChatConfigurationArn", _ChatConfigurationArn)
-
-	DeleteSlackUserIdentityRequest_SlackTeamId = DeleteSlackUserIdentityRequest.AddMember("SlackTeamId", _SlackTeamId)
-
-	DeleteSlackUserIdentityRequest_SlackUserId = DeleteSlackUserIdentityRequest.AddMember("SlackUserId", _SlackUserId)
-
-	DeleteSlackWorkspaceAuthorizationRequest_SlackTeamId = DeleteSlackWorkspaceAuthorizationRequest.AddMember("SlackTeamId", _SlackTeamId)
-
-	DescribeChimeWebhookConfigurationsRequest_MaxResults = DescribeChimeWebhookConfigurationsRequest.AddMember("MaxResults", _MaxResults)
-
-	DescribeChimeWebhookConfigurationsRequest_NextToken = DescribeChimeWebhookConfigurationsRequest.AddMember("NextToken", _PaginationToken)
-
-	DescribeChimeWebhookConfigurationsRequest_ChatConfigurationArn = DescribeChimeWebhookConfigurationsRequest.AddMember("ChatConfigurationArn", _ChatConfigurationArn)
-
-	DescribeChimeWebhookConfigurationsResult_NextToken = DescribeChimeWebhookConfigurationsResult.AddMember("NextToken", _PaginationToken)
-
-	DescribeChimeWebhookConfigurationsResult_WebhookConfigurations = DescribeChimeWebhookConfigurationsResult.AddMember("WebhookConfigurations", _ChimeWebhookConfigurationList)
-
-	DescribeSlackChannelConfigurationsRequest_MaxResults = DescribeSlackChannelConfigurationsRequest.AddMember("MaxResults", _MaxResults)
-
-	DescribeSlackChannelConfigurationsRequest_NextToken = DescribeSlackChannelConfigurationsRequest.AddMember("NextToken", _PaginationToken)
-
-	DescribeSlackChannelConfigurationsRequest_ChatConfigurationArn = DescribeSlackChannelConfigurationsRequest.AddMember("ChatConfigurationArn", _ChatConfigurationArn)
-
-	DescribeSlackChannelConfigurationsResult_NextToken = DescribeSlackChannelConfigurationsResult.AddMember("NextToken", _PaginationToken)
-
-	DescribeSlackChannelConfigurationsResult_SlackChannelConfigurations = DescribeSlackChannelConfigurationsResult.AddMember("SlackChannelConfigurations", _SlackChannelConfigurationList)
-
-	DescribeSlackUserIdentitiesRequest_ChatConfigurationArn = DescribeSlackUserIdentitiesRequest.AddMember("ChatConfigurationArn", _ChatConfigurationArn)
-
-	DescribeSlackUserIdentitiesRequest_NextToken = DescribeSlackUserIdentitiesRequest.AddMember("NextToken", _PaginationToken)
-
-	DescribeSlackUserIdentitiesRequest_MaxResults = DescribeSlackUserIdentitiesRequest.AddMember("MaxResults", _MaxResults)
-
-	DescribeSlackUserIdentitiesResult_SlackUserIdentities = DescribeSlackUserIdentitiesResult.AddMember("SlackUserIdentities", _SlackUserIdentitiesList)
-
-	DescribeSlackUserIdentitiesResult_NextToken = DescribeSlackUserIdentitiesResult.AddMember("NextToken", _PaginationToken)
-
-	DescribeSlackWorkspacesRequest_MaxResults = DescribeSlackWorkspacesRequest.AddMember("MaxResults", _MaxResults)
-
-	DescribeSlackWorkspacesRequest_NextToken = DescribeSlackWorkspacesRequest.AddMember("NextToken", _PaginationToken)
-
-	DescribeSlackWorkspacesResult_SlackWorkspaces = DescribeSlackWorkspacesResult.AddMember("SlackWorkspaces", _SlackWorkspacesList)
-
-	DescribeSlackWorkspacesResult_NextToken = DescribeSlackWorkspacesResult.AddMember("NextToken", _PaginationToken)
-
-	DisassociateFromConfigurationRequest_Resource = DisassociateFromConfigurationRequest.AddMember("Resource", _ResourceIdentifier)
-
-	DisassociateFromConfigurationRequest_ChatConfiguration = DisassociateFromConfigurationRequest.AddMember("ChatConfiguration", _ChatConfigurationArn)
-
-	GetAccountPreferencesResult_AccountPreferences = GetAccountPreferencesResult.AddMember("AccountPreferences", AccountPreferences)
-
-	GetCustomActionRequest_CustomActionArn = GetCustomActionRequest.AddMember("CustomActionArn", _CustomActionArn)
-
-	GetCustomActionResult_CustomAction = GetCustomActionResult.AddMember("CustomAction", CustomAction)
-
-	GetTeamsChannelConfigurationRequest_ChatConfigurationArn = GetTeamsChannelConfigurationRequest.AddMember("ChatConfigurationArn", _ChatConfigurationArn)
-
-	GetTeamsChannelConfigurationResult_ChannelConfiguration = GetTeamsChannelConfigurationResult.AddMember("ChannelConfiguration", TeamsChannelConfiguration)
-
-	ListAssociationsRequest_ChatConfiguration = ListAssociationsRequest.AddMember("ChatConfiguration", _ChatConfigurationArn)
-
-	ListAssociationsRequest_MaxResults = ListAssociationsRequest.AddMember("MaxResults", smithyprelude.Integer)
-
-	ListAssociationsRequest_NextToken = ListAssociationsRequest.AddMember("NextToken", _String)
-
-	ListAssociationsResult_Associations = ListAssociationsResult.AddMember("Associations", _AssociationList)
-
-	ListAssociationsResult_NextToken = ListAssociationsResult.AddMember("NextToken", _String)
-
-	ListCustomActionsRequest_MaxResults = ListCustomActionsRequest.AddMember("MaxResults", smithyprelude.Integer)
-
-	ListCustomActionsRequest_NextToken = ListCustomActionsRequest.AddMember("NextToken", smithyprelude.String)
-
-	ListCustomActionsResult_CustomActions = ListCustomActionsResult.AddMember("CustomActions", _CustomActionArnList)
-
-	ListCustomActionsResult_NextToken = ListCustomActionsResult.AddMember("NextToken", smithyprelude.String)
-
-	ListTeamsChannelConfigurationsRequest_MaxResults = ListTeamsChannelConfigurationsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListTeamsChannelConfigurationsRequest_NextToken = ListTeamsChannelConfigurationsRequest.AddMember("NextToken", _PaginationToken)
-
-	ListTeamsChannelConfigurationsRequest_TeamId = ListTeamsChannelConfigurationsRequest.AddMember("TeamId", _UUID)
-
-	ListTeamsChannelConfigurationsResult_NextToken = ListTeamsChannelConfigurationsResult.AddMember("NextToken", _PaginationToken)
-
-	ListTeamsChannelConfigurationsResult_TeamChannelConfigurations = ListTeamsChannelConfigurationsResult.AddMember("TeamChannelConfigurations", _TeamChannelConfigurationsList)
-
-	ListMicrosoftTeamsConfiguredTeamsRequest_MaxResults = ListMicrosoftTeamsConfiguredTeamsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListMicrosoftTeamsConfiguredTeamsRequest_NextToken = ListMicrosoftTeamsConfiguredTeamsRequest.AddMember("NextToken", _PaginationToken)
-
-	ListMicrosoftTeamsConfiguredTeamsResult_ConfiguredTeams = ListMicrosoftTeamsConfiguredTeamsResult.AddMember("ConfiguredTeams", _ConfiguredTeamsList)
-
-	ListMicrosoftTeamsConfiguredTeamsResult_NextToken = ListMicrosoftTeamsConfiguredTeamsResult.AddMember("NextToken", _PaginationToken)
-
-	ListMicrosoftTeamsUserIdentitiesRequest_ChatConfigurationArn = ListMicrosoftTeamsUserIdentitiesRequest.AddMember("ChatConfigurationArn", _ChatConfigurationArn)
-
-	ListMicrosoftTeamsUserIdentitiesRequest_NextToken = ListMicrosoftTeamsUserIdentitiesRequest.AddMember("NextToken", _PaginationToken)
-
-	ListMicrosoftTeamsUserIdentitiesRequest_MaxResults = ListMicrosoftTeamsUserIdentitiesRequest.AddMember("MaxResults", _MaxResults)
-
-	ListMicrosoftTeamsUserIdentitiesResult_TeamsUserIdentities = ListMicrosoftTeamsUserIdentitiesResult.AddMember("TeamsUserIdentities", _TeamsUserIdentitiesList)
-
-	ListMicrosoftTeamsUserIdentitiesResult_NextToken = ListMicrosoftTeamsUserIdentitiesResult.AddMember("NextToken", _PaginationToken)
-
-	ListTagsForResourceRequest_ResourceARN = ListTagsForResourceRequest.AddMember("ResourceARN", _AmazonResourceName)
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _TagList)
-
-	TagResourceRequest_ResourceARN = TagResourceRequest.AddMember("ResourceARN", _AmazonResourceName)
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _TagList)
-
-	UntagResourceRequest_ResourceARN = UntagResourceRequest.AddMember("ResourceARN", _AmazonResourceName)
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList)
-
-	UpdateAccountPreferencesRequest_UserAuthorizationRequired = UpdateAccountPreferencesRequest.AddMember("UserAuthorizationRequired", _BooleanAccountPreference)
-
-	UpdateAccountPreferencesRequest_TrainingDataCollectionEnabled = UpdateAccountPreferencesRequest.AddMember("TrainingDataCollectionEnabled", _BooleanAccountPreference)
-
-	UpdateAccountPreferencesResult_AccountPreferences = UpdateAccountPreferencesResult.AddMember("AccountPreferences", AccountPreferences)
-
-	UpdateChimeWebhookConfigurationRequest_ChatConfigurationArn = UpdateChimeWebhookConfigurationRequest.AddMember("ChatConfigurationArn", _ChatConfigurationArn)
-
-	UpdateChimeWebhookConfigurationRequest_WebhookDescription = UpdateChimeWebhookConfigurationRequest.AddMember("WebhookDescription", _ChimeWebhookDescription)
-
-	UpdateChimeWebhookConfigurationRequest_WebhookUrl = UpdateChimeWebhookConfigurationRequest.AddMember("WebhookUrl", _ChimeWebhookUrl)
-
-	UpdateChimeWebhookConfigurationRequest_SnsTopicArns = UpdateChimeWebhookConfigurationRequest.AddMember("SnsTopicArns", _SnsTopicArnList)
-
-	UpdateChimeWebhookConfigurationRequest_IamRoleArn = UpdateChimeWebhookConfigurationRequest.AddMember("IamRoleArn", _Arn)
-
-	UpdateChimeWebhookConfigurationRequest_LoggingLevel = UpdateChimeWebhookConfigurationRequest.AddMember("LoggingLevel", _CustomerCwLogLevel)
-
-	UpdateChimeWebhookConfigurationResult_WebhookConfiguration = UpdateChimeWebhookConfigurationResult.AddMember("WebhookConfiguration", ChimeWebhookConfiguration)
-
-	UpdateCustomActionRequest_CustomActionArn = UpdateCustomActionRequest.AddMember("CustomActionArn", _CustomActionArn)
-
-	UpdateCustomActionRequest_Definition = UpdateCustomActionRequest.AddMember("Definition", CustomActionDefinition)
-
-	UpdateCustomActionRequest_AliasName = UpdateCustomActionRequest.AddMember("AliasName", _CustomActionAliasName)
-
-	UpdateCustomActionRequest_Attachments = UpdateCustomActionRequest.AddMember("Attachments", _CustomActionAttachmentList)
-
-	UpdateCustomActionResult_CustomActionArn = UpdateCustomActionResult.AddMember("CustomActionArn", _CustomActionArn)
-
-	UpdateTeamsChannelConfigurationRequest_ChatConfigurationArn = UpdateTeamsChannelConfigurationRequest.AddMember("ChatConfigurationArn", _ChatConfigurationArn)
-
-	UpdateTeamsChannelConfigurationRequest_ChannelId = UpdateTeamsChannelConfigurationRequest.AddMember("ChannelId", _TeamsChannelId)
-
-	UpdateTeamsChannelConfigurationRequest_ChannelName = UpdateTeamsChannelConfigurationRequest.AddMember("ChannelName", _TeamsChannelName)
-
-	UpdateTeamsChannelConfigurationRequest_SnsTopicArns = UpdateTeamsChannelConfigurationRequest.AddMember("SnsTopicArns", _SnsTopicArnList)
-
-	UpdateTeamsChannelConfigurationRequest_IamRoleArn = UpdateTeamsChannelConfigurationRequest.AddMember("IamRoleArn", _Arn)
-
-	UpdateTeamsChannelConfigurationRequest_LoggingLevel = UpdateTeamsChannelConfigurationRequest.AddMember("LoggingLevel", _CustomerCwLogLevel)
-
-	UpdateTeamsChannelConfigurationRequest_GuardrailPolicyArns = UpdateTeamsChannelConfigurationRequest.AddMember("GuardrailPolicyArns", _GuardrailPolicyArnList)
-
-	UpdateTeamsChannelConfigurationRequest_UserAuthorizationRequired = UpdateTeamsChannelConfigurationRequest.AddMember("UserAuthorizationRequired", _BooleanAccountPreference)
-
-	UpdateTeamsChannelConfigurationResult_ChannelConfiguration = UpdateTeamsChannelConfigurationResult.AddMember("ChannelConfiguration", TeamsChannelConfiguration)
-
-	UpdateSlackChannelConfigurationRequest_ChatConfigurationArn = UpdateSlackChannelConfigurationRequest.AddMember("ChatConfigurationArn", _ChatConfigurationArn)
-
-	UpdateSlackChannelConfigurationRequest_SlackChannelId = UpdateSlackChannelConfigurationRequest.AddMember("SlackChannelId", _SlackChannelId)
-
-	UpdateSlackChannelConfigurationRequest_SlackChannelName = UpdateSlackChannelConfigurationRequest.AddMember("SlackChannelName", _SlackChannelDisplayName)
-
-	UpdateSlackChannelConfigurationRequest_SnsTopicArns = UpdateSlackChannelConfigurationRequest.AddMember("SnsTopicArns", _SnsTopicArnList)
-
-	UpdateSlackChannelConfigurationRequest_IamRoleArn = UpdateSlackChannelConfigurationRequest.AddMember("IamRoleArn", _Arn)
-
-	UpdateSlackChannelConfigurationRequest_LoggingLevel = UpdateSlackChannelConfigurationRequest.AddMember("LoggingLevel", _CustomerCwLogLevel)
-
-	UpdateSlackChannelConfigurationRequest_GuardrailPolicyArns = UpdateSlackChannelConfigurationRequest.AddMember("GuardrailPolicyArns", _GuardrailPolicyArnList)
-
-	UpdateSlackChannelConfigurationRequest_UserAuthorizationRequired = UpdateSlackChannelConfigurationRequest.AddMember("UserAuthorizationRequired", _BooleanAccountPreference)
-
-	UpdateSlackChannelConfigurationResult_ChannelConfiguration = UpdateSlackChannelConfigurationResult.AddMember("ChannelConfiguration", SlackChannelConfiguration)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLNamespace{URI: "http://wheatley.amazonaws.com/orchestration/2017-10-11/"}}, DirectMask: 0x8000}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+
+var mAccountPreferences = smithy.SchemaMembers{List: []*smithy.Schema{&sAccountPreferences_UserAuthorizationRequired, &sAccountPreferences_TrainingDataCollectionEnabled}}
+var m_AssociationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AssociationList_member}}
+var mAssociationListing = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociationListing_Resource}}
+var mChimeWebhookConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sChimeWebhookConfiguration_WebhookDescription, &sChimeWebhookConfiguration_ChatConfigurationArn, &sChimeWebhookConfiguration_IamRoleArn, &sChimeWebhookConfiguration_SnsTopicArns, &sChimeWebhookConfiguration_ConfigurationName, &sChimeWebhookConfiguration_LoggingLevel, &sChimeWebhookConfiguration_Tags, &sChimeWebhookConfiguration_State, &sChimeWebhookConfiguration_StateReason}, Seed: 1, Slots: []uint16{
+	0, 7, 0, 0, 0, 8, 3, 2, 0, 0, 6, 0, 0, 4, 0, 1, 0, 5, 0, 0, 0, 9, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0,
+}}
+var m_ChimeWebhookConfigurationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ChimeWebhookConfigurationList_member}}
+var mConfiguredTeam = smithy.SchemaMembers{List: []*smithy.Schema{&sConfiguredTeam_TenantId, &sConfiguredTeam_TeamId, &sConfiguredTeam_TeamName, &sConfiguredTeam_State, &sConfiguredTeam_StateReason}}
+var m_ConfiguredTeamsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConfiguredTeamsList_member}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message}}
+var mCreateChimeWebhookConfigurationException = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateChimeWebhookConfigurationException_Message}}
+var mCreateSlackChannelConfigurationException = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSlackChannelConfigurationException_Message}}
+var mCreateTeamsChannelConfigurationException = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTeamsChannelConfigurationException_Message}}
+var mCustomAction = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomAction_CustomActionArn, &sCustomAction_Definition, &sCustomAction_AliasName, &sCustomAction_Attachments, &sCustomAction_ActionName}}
+var m_CustomActionArnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CustomActionArnList_member}}
+var mCustomActionAttachment = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomActionAttachment_NotificationType, &sCustomActionAttachment_ButtonText, &sCustomActionAttachment_Criteria, &sCustomActionAttachment_Variables}}
+var mCustomActionAttachmentCriteria = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomActionAttachmentCriteria_Operator, &sCustomActionAttachmentCriteria_VariableName, &sCustomActionAttachmentCriteria_Value}}
+var m_CustomActionAttachmentCriteriaList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CustomActionAttachmentCriteriaList_member}}
+var mCustomActionAttachmentCriteriaOperator = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomActionAttachmentCriteriaOperator_HAS_VALUE, &sCustomActionAttachmentCriteriaOperator_EQUALS}}
+var m_CustomActionAttachmentList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CustomActionAttachmentList_member}}
+var m_CustomActionAttachmentVariables = smithy.SchemaMembers{List: []*smithy.Schema{&s_CustomActionAttachmentVariables_key, &s_CustomActionAttachmentVariables_value}}
+var mCustomActionDefinition = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomActionDefinition_CommandText}}
+var mDeleteChimeWebhookConfigurationException = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteChimeWebhookConfigurationException_Message}}
+var mDeleteMicrosoftTeamsUserIdentityException = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteMicrosoftTeamsUserIdentityException_Message}}
+var mDeleteSlackChannelConfigurationException = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSlackChannelConfigurationException_Message}}
+var mDeleteSlackUserIdentityException = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSlackUserIdentityException_Message}}
+var mDeleteSlackWorkspaceAuthorizationFault = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSlackWorkspaceAuthorizationFault_Message}}
+var mDeleteTeamsChannelConfigurationException = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTeamsChannelConfigurationException_Message}}
+var mDeleteTeamsConfiguredTeamException = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTeamsConfiguredTeamException_Message}}
+var mDescribeChimeWebhookConfigurationsException = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeChimeWebhookConfigurationsException_Message}}
+var mDescribeSlackChannelConfigurationsException = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSlackChannelConfigurationsException_Message}}
+var mDescribeSlackUserIdentitiesException = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSlackUserIdentitiesException_Message}}
+var mDescribeSlackWorkspacesException = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSlackWorkspacesException_Message}}
+var mGetAccountPreferencesException = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAccountPreferencesException_Message}}
+var mGetTeamsChannelConfigurationException = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTeamsChannelConfigurationException_Message}}
+var m_GuardrailPolicyArnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_GuardrailPolicyArnList_member}}
+var mInternalServiceError = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServiceError_Message}}
+var mInvalidParameterException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidParameterException_message}}
+var mInvalidRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidRequestException_message}}
+var mLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sLimitExceededException_message}}
+var mListMicrosoftTeamsConfiguredTeamsException = smithy.SchemaMembers{List: []*smithy.Schema{&sListMicrosoftTeamsConfiguredTeamsException_Message}}
+var mListMicrosoftTeamsUserIdentitiesException = smithy.SchemaMembers{List: []*smithy.Schema{&sListMicrosoftTeamsUserIdentitiesException_Message}}
+var mListTeamsChannelConfigurationsException = smithy.SchemaMembers{List: []*smithy.Schema{&sListTeamsChannelConfigurationsException_Message}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message}}
+var mServiceUnavailableException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceUnavailableException_message}}
+var mSlackChannelConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sSlackChannelConfiguration_SlackTeamName, &sSlackChannelConfiguration_SlackTeamId, &sSlackChannelConfiguration_SlackChannelId, &sSlackChannelConfiguration_SlackChannelName, &sSlackChannelConfiguration_ChatConfigurationArn, &sSlackChannelConfiguration_IamRoleArn, &sSlackChannelConfiguration_SnsTopicArns, &sSlackChannelConfiguration_ConfigurationName, &sSlackChannelConfiguration_LoggingLevel, &sSlackChannelConfiguration_GuardrailPolicyArns, &sSlackChannelConfiguration_UserAuthorizationRequired, &sSlackChannelConfiguration_Tags, &sSlackChannelConfiguration_State, &sSlackChannelConfiguration_StateReason}, Seed: 76, Slots: []uint16{
+	1, 0, 0, 14, 0, 0, 8, 0, 0, 2, 13, 11, 0, 12, 5, 0, 10, 0, 6, 3, 7, 0, 0, 0,
+	0, 0, 0, 4, 0, 9, 0, 0,
+}}
+var m_SlackChannelConfigurationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SlackChannelConfigurationList_member}}
+var m_SlackUserIdentitiesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SlackUserIdentitiesList_member}}
+var mSlackUserIdentity = smithy.SchemaMembers{List: []*smithy.Schema{&sSlackUserIdentity_IamRoleArn, &sSlackUserIdentity_ChatConfigurationArn, &sSlackUserIdentity_SlackTeamId, &sSlackUserIdentity_SlackUserId, &sSlackUserIdentity_AwsUserIdentity}}
+var mSlackWorkspace = smithy.SchemaMembers{List: []*smithy.Schema{&sSlackWorkspace_SlackTeamId, &sSlackWorkspace_SlackTeamName, &sSlackWorkspace_State, &sSlackWorkspace_StateReason}}
+var m_SlackWorkspacesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SlackWorkspacesList_member}}
+var m_SnsTopicArnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SnsTopicArnList_member}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_TagKey, &sTag_TagValue}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var m_Tags = smithy.SchemaMembers{List: []*smithy.Schema{&s_Tags_member}}
+var m_TeamChannelConfigurationsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TeamChannelConfigurationsList_member}}
+var mTeamsChannelConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sTeamsChannelConfiguration_ChannelId, &sTeamsChannelConfiguration_ChannelName, &sTeamsChannelConfiguration_TeamId, &sTeamsChannelConfiguration_TeamName, &sTeamsChannelConfiguration_TenantId, &sTeamsChannelConfiguration_ChatConfigurationArn, &sTeamsChannelConfiguration_IamRoleArn, &sTeamsChannelConfiguration_SnsTopicArns, &sTeamsChannelConfiguration_ConfigurationName, &sTeamsChannelConfiguration_LoggingLevel, &sTeamsChannelConfiguration_GuardrailPolicyArns, &sTeamsChannelConfiguration_UserAuthorizationRequired, &sTeamsChannelConfiguration_Tags, &sTeamsChannelConfiguration_State, &sTeamsChannelConfiguration_StateReason}, Seed: 1, Slots: []uint16{
+	0, 13, 3, 5, 0, 14, 7, 6, 1, 0, 10, 0, 0, 8, 0, 0, 0, 9, 0, 0, 0, 15, 0, 0,
+	0, 4, 2, 0, 12, 11, 0, 0,
+}}
+var m_TeamsUserIdentitiesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TeamsUserIdentitiesList_member}}
+var mTeamsUserIdentity = smithy.SchemaMembers{List: []*smithy.Schema{&sTeamsUserIdentity_IamRoleArn, &sTeamsUserIdentity_ChatConfigurationArn, &sTeamsUserIdentity_TeamId, &sTeamsUserIdentity_UserId, &sTeamsUserIdentity_AwsUserIdentity, &sTeamsUserIdentity_TeamsChannelId, &sTeamsUserIdentity_TeamsTenantId}}
+var mTooManyTagsException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyTagsException_message}}
+var mUnauthorizedException = smithy.SchemaMembers{List: []*smithy.Schema{&sUnauthorizedException_message}}
+var mUpdateAccountPreferencesException = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAccountPreferencesException_Message}}
+var mUpdateChimeWebhookConfigurationException = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateChimeWebhookConfigurationException_Message}}
+var mUpdateSlackChannelConfigurationException = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSlackChannelConfigurationException_Message}}
+var mUpdateTeamsChannelConfigurationException = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateTeamsChannelConfigurationException_Message}}
+var mAssociateToConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateToConfigurationRequest_Resource, &sAssociateToConfigurationRequest_ChatConfiguration}}
+var mCreateChimeWebhookConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateChimeWebhookConfigurationRequest_WebhookDescription, &sCreateChimeWebhookConfigurationRequest_WebhookUrl, &sCreateChimeWebhookConfigurationRequest_SnsTopicArns, &sCreateChimeWebhookConfigurationRequest_IamRoleArn, &sCreateChimeWebhookConfigurationRequest_ConfigurationName, &sCreateChimeWebhookConfigurationRequest_LoggingLevel, &sCreateChimeWebhookConfigurationRequest_Tags}}
+var mCreateChimeWebhookConfigurationResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateChimeWebhookConfigurationResult_WebhookConfiguration}}
+var mCreateCustomActionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCustomActionRequest_Definition, &sCreateCustomActionRequest_AliasName, &sCreateCustomActionRequest_Attachments, &sCreateCustomActionRequest_Tags, &sCreateCustomActionRequest_ClientToken, &sCreateCustomActionRequest_ActionName}}
+var mCreateCustomActionResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCustomActionResult_CustomActionArn}}
+var mCreateTeamsChannelConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTeamsChannelConfigurationRequest_ChannelId, &sCreateTeamsChannelConfigurationRequest_ChannelName, &sCreateTeamsChannelConfigurationRequest_TeamId, &sCreateTeamsChannelConfigurationRequest_TeamName, &sCreateTeamsChannelConfigurationRequest_TenantId, &sCreateTeamsChannelConfigurationRequest_SnsTopicArns, &sCreateTeamsChannelConfigurationRequest_IamRoleArn, &sCreateTeamsChannelConfigurationRequest_ConfigurationName, &sCreateTeamsChannelConfigurationRequest_LoggingLevel, &sCreateTeamsChannelConfigurationRequest_GuardrailPolicyArns, &sCreateTeamsChannelConfigurationRequest_UserAuthorizationRequired, &sCreateTeamsChannelConfigurationRequest_Tags}, Seed: 1, Slots: []uint16{
+	0, 12, 3, 5, 0, 0, 7, 0, 1, 0, 9, 0, 0, 6, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0,
+	0, 4, 2, 0, 11, 10, 0, 0,
+}}
+var mCreateTeamsChannelConfigurationResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTeamsChannelConfigurationResult_ChannelConfiguration}}
+var mCreateSlackChannelConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSlackChannelConfigurationRequest_SlackTeamId, &sCreateSlackChannelConfigurationRequest_SlackChannelId, &sCreateSlackChannelConfigurationRequest_SlackChannelName, &sCreateSlackChannelConfigurationRequest_SnsTopicArns, &sCreateSlackChannelConfigurationRequest_IamRoleArn, &sCreateSlackChannelConfigurationRequest_ConfigurationName, &sCreateSlackChannelConfigurationRequest_LoggingLevel, &sCreateSlackChannelConfigurationRequest_GuardrailPolicyArns, &sCreateSlackChannelConfigurationRequest_UserAuthorizationRequired, &sCreateSlackChannelConfigurationRequest_Tags}, Seed: 5, Slots: []uint16{
+	0, 0, 0, 7, 0, 0, 0, 0, 1, 0, 0, 0, 8, 3, 0, 0, 4, 9, 5, 0, 6, 0, 2, 0,
+	0, 0, 10, 0, 0, 0, 0, 0,
+}}
+var mCreateSlackChannelConfigurationResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSlackChannelConfigurationResult_ChannelConfiguration}}
+var mDeleteChimeWebhookConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteChimeWebhookConfigurationRequest_ChatConfigurationArn}}
+var mDeleteCustomActionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteCustomActionRequest_CustomActionArn}}
+var mDeleteTeamsChannelConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTeamsChannelConfigurationRequest_ChatConfigurationArn}}
+var mDeleteTeamsConfiguredTeamRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTeamsConfiguredTeamRequest_TeamId}}
+var mDeleteMicrosoftTeamsUserIdentityRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteMicrosoftTeamsUserIdentityRequest_ChatConfigurationArn, &sDeleteMicrosoftTeamsUserIdentityRequest_UserId}}
+var mDeleteSlackChannelConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSlackChannelConfigurationRequest_ChatConfigurationArn}}
+var mDeleteSlackUserIdentityRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSlackUserIdentityRequest_ChatConfigurationArn, &sDeleteSlackUserIdentityRequest_SlackTeamId, &sDeleteSlackUserIdentityRequest_SlackUserId}}
+var mDeleteSlackWorkspaceAuthorizationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSlackWorkspaceAuthorizationRequest_SlackTeamId}}
+var mDescribeChimeWebhookConfigurationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeChimeWebhookConfigurationsRequest_MaxResults, &sDescribeChimeWebhookConfigurationsRequest_NextToken, &sDescribeChimeWebhookConfigurationsRequest_ChatConfigurationArn}}
+var mDescribeChimeWebhookConfigurationsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeChimeWebhookConfigurationsResult_NextToken, &sDescribeChimeWebhookConfigurationsResult_WebhookConfigurations}}
+var mDescribeSlackChannelConfigurationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSlackChannelConfigurationsRequest_MaxResults, &sDescribeSlackChannelConfigurationsRequest_NextToken, &sDescribeSlackChannelConfigurationsRequest_ChatConfigurationArn}}
+var mDescribeSlackChannelConfigurationsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSlackChannelConfigurationsResult_NextToken, &sDescribeSlackChannelConfigurationsResult_SlackChannelConfigurations}}
+var mDescribeSlackUserIdentitiesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSlackUserIdentitiesRequest_ChatConfigurationArn, &sDescribeSlackUserIdentitiesRequest_NextToken, &sDescribeSlackUserIdentitiesRequest_MaxResults}}
+var mDescribeSlackUserIdentitiesResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSlackUserIdentitiesResult_SlackUserIdentities, &sDescribeSlackUserIdentitiesResult_NextToken}}
+var mDescribeSlackWorkspacesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSlackWorkspacesRequest_MaxResults, &sDescribeSlackWorkspacesRequest_NextToken}}
+var mDescribeSlackWorkspacesResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSlackWorkspacesResult_SlackWorkspaces, &sDescribeSlackWorkspacesResult_NextToken}}
+var mDisassociateFromConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateFromConfigurationRequest_Resource, &sDisassociateFromConfigurationRequest_ChatConfiguration}}
+var mGetAccountPreferencesResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAccountPreferencesResult_AccountPreferences}}
+var mGetCustomActionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCustomActionRequest_CustomActionArn}}
+var mGetCustomActionResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCustomActionResult_CustomAction}}
+var mGetTeamsChannelConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTeamsChannelConfigurationRequest_ChatConfigurationArn}}
+var mGetTeamsChannelConfigurationResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTeamsChannelConfigurationResult_ChannelConfiguration}}
+var mListAssociationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAssociationsRequest_ChatConfiguration, &sListAssociationsRequest_MaxResults, &sListAssociationsRequest_NextToken}}
+var mListAssociationsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListAssociationsResult_Associations, &sListAssociationsResult_NextToken}}
+var mListCustomActionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListCustomActionsRequest_MaxResults, &sListCustomActionsRequest_NextToken}}
+var mListCustomActionsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListCustomActionsResult_CustomActions, &sListCustomActionsResult_NextToken}}
+var mListTeamsChannelConfigurationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTeamsChannelConfigurationsRequest_MaxResults, &sListTeamsChannelConfigurationsRequest_NextToken, &sListTeamsChannelConfigurationsRequest_TeamId}}
+var mListTeamsChannelConfigurationsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListTeamsChannelConfigurationsResult_NextToken, &sListTeamsChannelConfigurationsResult_TeamChannelConfigurations}}
+var mListMicrosoftTeamsConfiguredTeamsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListMicrosoftTeamsConfiguredTeamsRequest_MaxResults, &sListMicrosoftTeamsConfiguredTeamsRequest_NextToken}}
+var mListMicrosoftTeamsConfiguredTeamsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListMicrosoftTeamsConfiguredTeamsResult_ConfiguredTeams, &sListMicrosoftTeamsConfiguredTeamsResult_NextToken}}
+var mListMicrosoftTeamsUserIdentitiesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListMicrosoftTeamsUserIdentitiesRequest_ChatConfigurationArn, &sListMicrosoftTeamsUserIdentitiesRequest_NextToken, &sListMicrosoftTeamsUserIdentitiesRequest_MaxResults}}
+var mListMicrosoftTeamsUserIdentitiesResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListMicrosoftTeamsUserIdentitiesResult_TeamsUserIdentities, &sListMicrosoftTeamsUserIdentitiesResult_NextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceARN}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_Tags}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceARN, &sTagResourceRequest_Tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceARN, &sUntagResourceRequest_TagKeys}}
+var mUpdateAccountPreferencesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAccountPreferencesRequest_UserAuthorizationRequired, &sUpdateAccountPreferencesRequest_TrainingDataCollectionEnabled}}
+var mUpdateAccountPreferencesResult = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAccountPreferencesResult_AccountPreferences}}
+var mUpdateChimeWebhookConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateChimeWebhookConfigurationRequest_ChatConfigurationArn, &sUpdateChimeWebhookConfigurationRequest_WebhookDescription, &sUpdateChimeWebhookConfigurationRequest_WebhookUrl, &sUpdateChimeWebhookConfigurationRequest_SnsTopicArns, &sUpdateChimeWebhookConfigurationRequest_IamRoleArn, &sUpdateChimeWebhookConfigurationRequest_LoggingLevel}}
+var mUpdateChimeWebhookConfigurationResult = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateChimeWebhookConfigurationResult_WebhookConfiguration}}
+var mUpdateCustomActionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateCustomActionRequest_CustomActionArn, &sUpdateCustomActionRequest_Definition, &sUpdateCustomActionRequest_AliasName, &sUpdateCustomActionRequest_Attachments}}
+var mUpdateCustomActionResult = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateCustomActionResult_CustomActionArn}}
+var mUpdateTeamsChannelConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateTeamsChannelConfigurationRequest_ChatConfigurationArn, &sUpdateTeamsChannelConfigurationRequest_ChannelId, &sUpdateTeamsChannelConfigurationRequest_ChannelName, &sUpdateTeamsChannelConfigurationRequest_SnsTopicArns, &sUpdateTeamsChannelConfigurationRequest_IamRoleArn, &sUpdateTeamsChannelConfigurationRequest_LoggingLevel, &sUpdateTeamsChannelConfigurationRequest_GuardrailPolicyArns, &sUpdateTeamsChannelConfigurationRequest_UserAuthorizationRequired}}
+var mUpdateTeamsChannelConfigurationResult = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateTeamsChannelConfigurationResult_ChannelConfiguration}}
+var mUpdateSlackChannelConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSlackChannelConfigurationRequest_ChatConfigurationArn, &sUpdateSlackChannelConfigurationRequest_SlackChannelId, &sUpdateSlackChannelConfigurationRequest_SlackChannelName, &sUpdateSlackChannelConfigurationRequest_SnsTopicArns, &sUpdateSlackChannelConfigurationRequest_IamRoleArn, &sUpdateSlackChannelConfigurationRequest_LoggingLevel, &sUpdateSlackChannelConfigurationRequest_GuardrailPolicyArns, &sUpdateSlackChannelConfigurationRequest_UserAuthorizationRequired}}
+var mUpdateSlackChannelConfigurationResult = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSlackChannelConfigurationResult_ChannelConfiguration}}
+
+var sAssociateToConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateToConfiguration, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sCreateChimeWebhookConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChimeWebhookConfiguration, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sCreateCustomAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCustomAction, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sCreateMicrosoftTeamsChannelConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMicrosoftTeamsChannelConfiguration, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sCreateSlackChannelConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSlackChannelConfiguration, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sDeleteChimeWebhookConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChimeWebhookConfiguration, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var sDeleteCustomAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCustomAction, Traits: &t6, Type: smithy.ShapeTypeOperation})
+var sDeleteMicrosoftTeamsChannelConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMicrosoftTeamsChannelConfiguration, Traits: &t7, Type: smithy.ShapeTypeOperation})
+var sDeleteMicrosoftTeamsConfiguredTeam = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMicrosoftTeamsConfiguredTeam, Traits: &t8, Type: smithy.ShapeTypeOperation})
+var sDeleteMicrosoftTeamsUserIdentity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMicrosoftTeamsUserIdentity, Traits: &t9, Type: smithy.ShapeTypeOperation})
+var sDeleteSlackChannelConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSlackChannelConfiguration, Traits: &t10, Type: smithy.ShapeTypeOperation})
+var sDeleteSlackUserIdentity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSlackUserIdentity, Traits: &t11, Type: smithy.ShapeTypeOperation})
+var sDeleteSlackWorkspaceAuthorization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSlackWorkspaceAuthorization, Traits: &t12, Type: smithy.ShapeTypeOperation})
+var sDescribeChimeWebhookConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeChimeWebhookConfigurations, Traits: &t13, Type: smithy.ShapeTypeOperation})
+var sDescribeSlackChannelConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSlackChannelConfigurations, Traits: &t14, Type: smithy.ShapeTypeOperation})
+var sDescribeSlackUserIdentities = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSlackUserIdentities, Traits: &t15, Type: smithy.ShapeTypeOperation})
+var sDescribeSlackWorkspaces = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSlackWorkspaces, Traits: &t16, Type: smithy.ShapeTypeOperation})
+var sDisassociateFromConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateFromConfiguration, Traits: &t17, Type: smithy.ShapeTypeOperation})
+var sGetAccountPreferences = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountPreferences, Traits: &t18, Type: smithy.ShapeTypeOperation})
+var sGetCustomAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCustomAction, Traits: &t19, Type: smithy.ShapeTypeOperation})
+var sGetMicrosoftTeamsChannelConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMicrosoftTeamsChannelConfiguration, Traits: &t20, Type: smithy.ShapeTypeOperation})
+var sListAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssociations, Traits: &t21, Type: smithy.ShapeTypeOperation})
+var sListCustomActions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCustomActions, Traits: &t22, Type: smithy.ShapeTypeOperation})
+var sListMicrosoftTeamsChannelConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMicrosoftTeamsChannelConfigurations, Traits: &t23, Type: smithy.ShapeTypeOperation})
+var sListMicrosoftTeamsConfiguredTeams = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMicrosoftTeamsConfiguredTeams, Traits: &t24, Type: smithy.ShapeTypeOperation})
+var sListMicrosoftTeamsUserIdentities = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMicrosoftTeamsUserIdentities, Traits: &t25, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t26, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t27, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t28, Type: smithy.ShapeTypeOperation})
+var sUpdateAccountPreferences = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAccountPreferences, Traits: &t29, Type: smithy.ShapeTypeOperation})
+var sUpdateChimeWebhookConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChimeWebhookConfiguration, Traits: &t30, Type: smithy.ShapeTypeOperation})
+var sUpdateCustomAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCustomAction, Traits: &t31, Type: smithy.ShapeTypeOperation})
+var sUpdateMicrosoftTeamsChannelConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMicrosoftTeamsChannelConfiguration, Traits: &t32, Type: smithy.ShapeTypeOperation})
+var sUpdateSlackChannelConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSlackChannelConfiguration, Traits: &t33, Type: smithy.ShapeTypeOperation})
+var s_WheatleyOrchestration_20171011 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WheatleyOrchestration_20171011, Traits: &t34, Type: smithy.ShapeTypeService})
+var sAccountPreferences = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountPreferences, Members: &mAccountPreferences, Type: smithy.ShapeTypeStructure})
+var s_AmazonResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString})
+var s_AssociationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssociationList, Members: &m_AssociationList, Type: smithy.ShapeTypeList})
+var sAssociationListing = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociationListing, Members: &mAssociationListing, Type: smithy.ShapeTypeStructure})
+var s_AwsUserIdentity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsUserIdentity, Type: smithy.ShapeTypeString})
+var s_BooleanAccountPreference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BooleanAccountPreference, Type: smithy.ShapeTypeBoolean})
+var s_ChatConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChatConfigurationArn, Type: smithy.ShapeTypeString})
+var sChimeWebhookConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChimeWebhookConfiguration, Members: &mChimeWebhookConfiguration, Type: smithy.ShapeTypeStructure})
+var s_ChimeWebhookConfigurationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChimeWebhookConfigurationList, Members: &m_ChimeWebhookConfigurationList, Type: smithy.ShapeTypeList})
+var s_ChimeWebhookDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChimeWebhookDescription, Traits: &t36, Type: smithy.ShapeTypeString})
+var s_ChimeWebhookUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChimeWebhookUrl, Traits: &t36, Type: smithy.ShapeTypeString})
+var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var s_ConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfigurationName, Type: smithy.ShapeTypeString})
+var sConfiguredTeam = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfiguredTeam, Members: &mConfiguredTeam, Type: smithy.ShapeTypeStructure})
+var s_ConfiguredTeamsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfiguredTeamsList, Members: &m_ConfiguredTeamsList, Type: smithy.ShapeTypeList})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t37, Type: smithy.ShapeTypeStructure})
+var sCreateChimeWebhookConfigurationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChimeWebhookConfigurationException, Members: &mCreateChimeWebhookConfigurationException, Traits: &t38, Type: smithy.ShapeTypeStructure})
+var sCreateSlackChannelConfigurationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSlackChannelConfigurationException, Members: &mCreateSlackChannelConfigurationException, Traits: &t38, Type: smithy.ShapeTypeStructure})
+var sCreateTeamsChannelConfigurationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTeamsChannelConfigurationException, Members: &mCreateTeamsChannelConfigurationException, Traits: &t38, Type: smithy.ShapeTypeStructure})
+var sCustomAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomAction, Members: &mCustomAction, Type: smithy.ShapeTypeStructure})
+var s_CustomActionAliasName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomActionAliasName, Type: smithy.ShapeTypeString})
+var s_CustomActionArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomActionArn, Type: smithy.ShapeTypeString})
+var s_CustomActionArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomActionArnList, Members: &m_CustomActionArnList, Type: smithy.ShapeTypeList})
+var sCustomActionAttachment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomActionAttachment, Members: &mCustomActionAttachment, Type: smithy.ShapeTypeStructure})
+var sCustomActionAttachmentCriteria = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomActionAttachmentCriteria, Members: &mCustomActionAttachmentCriteria, Type: smithy.ShapeTypeStructure})
+var s_CustomActionAttachmentCriteriaList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomActionAttachmentCriteriaList, Members: &m_CustomActionAttachmentCriteriaList, Type: smithy.ShapeTypeList})
+var sCustomActionAttachmentCriteriaOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomActionAttachmentCriteriaOperator, Members: &mCustomActionAttachmentCriteriaOperator, Type: smithy.ShapeTypeEnum})
+var s_CustomActionAttachmentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomActionAttachmentList, Members: &m_CustomActionAttachmentList, Type: smithy.ShapeTypeList})
+var s_CustomActionAttachmentNotificationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomActionAttachmentNotificationType, Type: smithy.ShapeTypeString})
+var s_CustomActionAttachmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomActionAttachmentVariables, Members: &m_CustomActionAttachmentVariables, Type: smithy.ShapeTypeMap})
+var s_CustomActionButtonText = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomActionButtonText, Type: smithy.ShapeTypeString})
+var sCustomActionDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomActionDefinition, Members: &mCustomActionDefinition, Type: smithy.ShapeTypeStructure})
+var s_CustomActionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomActionName, Type: smithy.ShapeTypeString})
+var s_CustomerCwLogLevel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomerCwLogLevel, Type: smithy.ShapeTypeString})
+var sDeleteChimeWebhookConfigurationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChimeWebhookConfigurationException, Members: &mDeleteChimeWebhookConfigurationException, Traits: &t38, Type: smithy.ShapeTypeStructure})
+var sDeleteMicrosoftTeamsUserIdentityException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMicrosoftTeamsUserIdentityException, Members: &mDeleteMicrosoftTeamsUserIdentityException, Traits: &t38, Type: smithy.ShapeTypeStructure})
+var sDeleteSlackChannelConfigurationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSlackChannelConfigurationException, Members: &mDeleteSlackChannelConfigurationException, Traits: &t38, Type: smithy.ShapeTypeStructure})
+var sDeleteSlackUserIdentityException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSlackUserIdentityException, Members: &mDeleteSlackUserIdentityException, Traits: &t38, Type: smithy.ShapeTypeStructure})
+var sDeleteSlackWorkspaceAuthorizationFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSlackWorkspaceAuthorizationFault, Members: &mDeleteSlackWorkspaceAuthorizationFault, Traits: &t38, Type: smithy.ShapeTypeStructure})
+var sDeleteTeamsChannelConfigurationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTeamsChannelConfigurationException, Members: &mDeleteTeamsChannelConfigurationException, Traits: &t38, Type: smithy.ShapeTypeStructure})
+var sDeleteTeamsConfiguredTeamException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTeamsConfiguredTeamException, Members: &mDeleteTeamsConfiguredTeamException, Traits: &t38, Type: smithy.ShapeTypeStructure})
+var sDescribeChimeWebhookConfigurationsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeChimeWebhookConfigurationsException, Members: &mDescribeChimeWebhookConfigurationsException, Traits: &t38, Type: smithy.ShapeTypeStructure})
+var sDescribeSlackChannelConfigurationsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSlackChannelConfigurationsException, Members: &mDescribeSlackChannelConfigurationsException, Traits: &t38, Type: smithy.ShapeTypeStructure})
+var sDescribeSlackUserIdentitiesException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSlackUserIdentitiesException, Members: &mDescribeSlackUserIdentitiesException, Traits: &t38, Type: smithy.ShapeTypeStructure})
+var sDescribeSlackWorkspacesException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSlackWorkspacesException, Members: &mDescribeSlackWorkspacesException, Traits: &t38, Type: smithy.ShapeTypeStructure})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sGetAccountPreferencesException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountPreferencesException, Members: &mGetAccountPreferencesException, Traits: &t38, Type: smithy.ShapeTypeStructure})
+var sGetTeamsChannelConfigurationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTeamsChannelConfigurationException, Members: &mGetTeamsChannelConfigurationException, Traits: &t38, Type: smithy.ShapeTypeStructure})
+var s_GuardrailPolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailPolicyArn, Type: smithy.ShapeTypeString})
+var s_GuardrailPolicyArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuardrailPolicyArnList, Members: &m_GuardrailPolicyArnList, Type: smithy.ShapeTypeList})
+var sInternalServiceError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServiceError, Members: &mInternalServiceError, Traits: &t38, Type: smithy.ShapeTypeStructure})
+var sInvalidParameterException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidParameterException, Members: &mInvalidParameterException, Traits: &t39, Type: smithy.ShapeTypeStructure})
+var sInvalidRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRequestException, Members: &mInvalidRequestException, Traits: &t39, Type: smithy.ShapeTypeStructure})
+var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t40, Type: smithy.ShapeTypeStructure})
+var sListMicrosoftTeamsConfiguredTeamsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMicrosoftTeamsConfiguredTeamsException, Members: &mListMicrosoftTeamsConfiguredTeamsException, Traits: &t38, Type: smithy.ShapeTypeStructure})
+var sListMicrosoftTeamsUserIdentitiesException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMicrosoftTeamsUserIdentitiesException, Members: &mListMicrosoftTeamsUserIdentitiesException, Traits: &t38, Type: smithy.ShapeTypeStructure})
+var sListTeamsChannelConfigurationsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTeamsChannelConfigurationsException, Members: &mListTeamsChannelConfigurationsException, Traits: &t38, Type: smithy.ShapeTypeStructure})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var s_PaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var s_ResourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t41, Type: smithy.ShapeTypeStructure})
+var s_ResourceState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceState, Type: smithy.ShapeTypeString})
+var sServiceUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceUnavailableException, Members: &mServiceUnavailableException, Traits: &t42, Type: smithy.ShapeTypeStructure})
+var sSlackChannelConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSlackChannelConfiguration, Members: &mSlackChannelConfiguration, Type: smithy.ShapeTypeStructure})
+var s_SlackChannelConfigurationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SlackChannelConfigurationList, Members: &m_SlackChannelConfigurationList, Type: smithy.ShapeTypeList})
+var s_SlackChannelDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SlackChannelDisplayName, Traits: &t36, Type: smithy.ShapeTypeString})
+var s_SlackChannelId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SlackChannelId, Type: smithy.ShapeTypeString})
+var s_SlackTeamId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SlackTeamId, Type: smithy.ShapeTypeString})
+var s_SlackTeamName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SlackTeamName, Type: smithy.ShapeTypeString})
+var s_SlackUserId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SlackUserId, Type: smithy.ShapeTypeString})
+var s_SlackUserIdentitiesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SlackUserIdentitiesList, Members: &m_SlackUserIdentitiesList, Type: smithy.ShapeTypeList})
+var sSlackUserIdentity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSlackUserIdentity, Members: &mSlackUserIdentity, Type: smithy.ShapeTypeStructure})
+var sSlackWorkspace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSlackWorkspace, Members: &mSlackWorkspace, Type: smithy.ShapeTypeStructure})
+var s_SlackWorkspacesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SlackWorkspacesList, Members: &m_SlackWorkspacesList, Type: smithy.ShapeTypeList})
+var s_SnsTopicArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnsTopicArnList, Members: &m_SnsTopicArnList, Type: smithy.ShapeTypeList})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_TeamChannelConfigurationsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TeamChannelConfigurationsList, Members: &m_TeamChannelConfigurationsList, Type: smithy.ShapeTypeList})
+var s_TeamName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TeamName, Traits: &t36, Type: smithy.ShapeTypeString})
+var sTeamsChannelConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTeamsChannelConfiguration, Members: &mTeamsChannelConfiguration, Type: smithy.ShapeTypeStructure})
+var s_TeamsChannelId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TeamsChannelId, Type: smithy.ShapeTypeString})
+var s_TeamsChannelName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TeamsChannelName, Traits: &t36, Type: smithy.ShapeTypeString})
+var s_TeamsUserIdentitiesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TeamsUserIdentitiesList, Members: &m_TeamsUserIdentitiesList, Type: smithy.ShapeTypeList})
+var sTeamsUserIdentity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTeamsUserIdentity, Members: &mTeamsUserIdentity, Type: smithy.ShapeTypeStructure})
+var sTooManyTagsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyTagsException, Members: &mTooManyTagsException, Traits: &t39, Type: smithy.ShapeTypeStructure})
+var sUnauthorizedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnauthorizedException, Members: &mUnauthorizedException, Traits: &t40, Type: smithy.ShapeTypeStructure})
+var sUpdateAccountPreferencesException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAccountPreferencesException, Members: &mUpdateAccountPreferencesException, Traits: &t38, Type: smithy.ShapeTypeStructure})
+var sUpdateChimeWebhookConfigurationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChimeWebhookConfigurationException, Members: &mUpdateChimeWebhookConfigurationException, Traits: &t38, Type: smithy.ShapeTypeStructure})
+var sUpdateSlackChannelConfigurationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSlackChannelConfigurationException, Members: &mUpdateSlackChannelConfigurationException, Traits: &t38, Type: smithy.ShapeTypeStructure})
+var sUpdateTeamsChannelConfigurationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTeamsChannelConfigurationException, Members: &mUpdateTeamsChannelConfigurationException, Traits: &t38, Type: smithy.ShapeTypeStructure})
+var s_UUID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sAssociateToConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateToConfigurationRequest, Members: &mAssociateToConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sAssociateToConfigurationResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateToConfigurationResult, Type: smithy.ShapeTypeStructure})
+var sCreateChimeWebhookConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChimeWebhookConfigurationRequest, Members: &mCreateChimeWebhookConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sCreateChimeWebhookConfigurationResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChimeWebhookConfigurationResult, Members: &mCreateChimeWebhookConfigurationResult, Type: smithy.ShapeTypeStructure})
+var sCreateCustomActionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCustomActionRequest, Members: &mCreateCustomActionRequest, Type: smithy.ShapeTypeStructure})
+var sCreateCustomActionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCustomActionResult, Members: &mCreateCustomActionResult, Type: smithy.ShapeTypeStructure})
+var sCreateTeamsChannelConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTeamsChannelConfigurationRequest, Members: &mCreateTeamsChannelConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sCreateTeamsChannelConfigurationResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTeamsChannelConfigurationResult, Members: &mCreateTeamsChannelConfigurationResult, Type: smithy.ShapeTypeStructure})
+var sCreateSlackChannelConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSlackChannelConfigurationRequest, Members: &mCreateSlackChannelConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sCreateSlackChannelConfigurationResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSlackChannelConfigurationResult, Members: &mCreateSlackChannelConfigurationResult, Type: smithy.ShapeTypeStructure})
+var sDeleteChimeWebhookConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChimeWebhookConfigurationRequest, Members: &mDeleteChimeWebhookConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteChimeWebhookConfigurationResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChimeWebhookConfigurationResult, Type: smithy.ShapeTypeStructure})
+var sDeleteCustomActionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCustomActionRequest, Members: &mDeleteCustomActionRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteCustomActionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCustomActionResult, Type: smithy.ShapeTypeStructure})
+var sDeleteTeamsChannelConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTeamsChannelConfigurationRequest, Members: &mDeleteTeamsChannelConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteTeamsChannelConfigurationResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTeamsChannelConfigurationResult, Type: smithy.ShapeTypeStructure})
+var sDeleteTeamsConfiguredTeamRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTeamsConfiguredTeamRequest, Members: &mDeleteTeamsConfiguredTeamRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteTeamsConfiguredTeamResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTeamsConfiguredTeamResult, Type: smithy.ShapeTypeStructure})
+var sDeleteMicrosoftTeamsUserIdentityRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMicrosoftTeamsUserIdentityRequest, Members: &mDeleteMicrosoftTeamsUserIdentityRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteMicrosoftTeamsUserIdentityResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMicrosoftTeamsUserIdentityResult, Type: smithy.ShapeTypeStructure})
+var sDeleteSlackChannelConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSlackChannelConfigurationRequest, Members: &mDeleteSlackChannelConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteSlackChannelConfigurationResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSlackChannelConfigurationResult, Type: smithy.ShapeTypeStructure})
+var sDeleteSlackUserIdentityRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSlackUserIdentityRequest, Members: &mDeleteSlackUserIdentityRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteSlackUserIdentityResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSlackUserIdentityResult, Type: smithy.ShapeTypeStructure})
+var sDeleteSlackWorkspaceAuthorizationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSlackWorkspaceAuthorizationRequest, Members: &mDeleteSlackWorkspaceAuthorizationRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteSlackWorkspaceAuthorizationResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSlackWorkspaceAuthorizationResult, Type: smithy.ShapeTypeStructure})
+var sDescribeChimeWebhookConfigurationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeChimeWebhookConfigurationsRequest, Members: &mDescribeChimeWebhookConfigurationsRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeChimeWebhookConfigurationsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeChimeWebhookConfigurationsResult, Members: &mDescribeChimeWebhookConfigurationsResult, Type: smithy.ShapeTypeStructure})
+var sDescribeSlackChannelConfigurationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSlackChannelConfigurationsRequest, Members: &mDescribeSlackChannelConfigurationsRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeSlackChannelConfigurationsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSlackChannelConfigurationsResult, Members: &mDescribeSlackChannelConfigurationsResult, Type: smithy.ShapeTypeStructure})
+var sDescribeSlackUserIdentitiesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSlackUserIdentitiesRequest, Members: &mDescribeSlackUserIdentitiesRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeSlackUserIdentitiesResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSlackUserIdentitiesResult, Members: &mDescribeSlackUserIdentitiesResult, Type: smithy.ShapeTypeStructure})
+var sDescribeSlackWorkspacesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSlackWorkspacesRequest, Members: &mDescribeSlackWorkspacesRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeSlackWorkspacesResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSlackWorkspacesResult, Members: &mDescribeSlackWorkspacesResult, Type: smithy.ShapeTypeStructure})
+var sDisassociateFromConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateFromConfigurationRequest, Members: &mDisassociateFromConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sDisassociateFromConfigurationResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateFromConfigurationResult, Type: smithy.ShapeTypeStructure})
+var sGetAccountPreferencesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountPreferencesRequest, Type: smithy.ShapeTypeStructure})
+var sGetAccountPreferencesResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountPreferencesResult, Members: &mGetAccountPreferencesResult, Type: smithy.ShapeTypeStructure})
+var sGetCustomActionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCustomActionRequest, Members: &mGetCustomActionRequest, Type: smithy.ShapeTypeStructure})
+var sGetCustomActionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCustomActionResult, Members: &mGetCustomActionResult, Type: smithy.ShapeTypeStructure})
+var sGetTeamsChannelConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTeamsChannelConfigurationRequest, Members: &mGetTeamsChannelConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sGetTeamsChannelConfigurationResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTeamsChannelConfigurationResult, Members: &mGetTeamsChannelConfigurationResult, Type: smithy.ShapeTypeStructure})
+var sListAssociationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssociationsRequest, Members: &mListAssociationsRequest, Type: smithy.ShapeTypeStructure})
+var sListAssociationsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssociationsResult, Members: &mListAssociationsResult, Type: smithy.ShapeTypeStructure})
+var sListCustomActionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCustomActionsRequest, Members: &mListCustomActionsRequest, Type: smithy.ShapeTypeStructure})
+var sListCustomActionsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCustomActionsResult, Members: &mListCustomActionsResult, Type: smithy.ShapeTypeStructure})
+var sListTeamsChannelConfigurationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTeamsChannelConfigurationsRequest, Members: &mListTeamsChannelConfigurationsRequest, Type: smithy.ShapeTypeStructure})
+var sListTeamsChannelConfigurationsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTeamsChannelConfigurationsResult, Members: &mListTeamsChannelConfigurationsResult, Type: smithy.ShapeTypeStructure})
+var sListMicrosoftTeamsConfiguredTeamsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMicrosoftTeamsConfiguredTeamsRequest, Members: &mListMicrosoftTeamsConfiguredTeamsRequest, Type: smithy.ShapeTypeStructure})
+var sListMicrosoftTeamsConfiguredTeamsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMicrosoftTeamsConfiguredTeamsResult, Members: &mListMicrosoftTeamsConfiguredTeamsResult, Type: smithy.ShapeTypeStructure})
+var sListMicrosoftTeamsUserIdentitiesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMicrosoftTeamsUserIdentitiesRequest, Members: &mListMicrosoftTeamsUserIdentitiesRequest, Type: smithy.ShapeTypeStructure})
+var sListMicrosoftTeamsUserIdentitiesResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMicrosoftTeamsUserIdentitiesResult, Members: &mListMicrosoftTeamsUserIdentitiesResult, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateAccountPreferencesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAccountPreferencesRequest, Members: &mUpdateAccountPreferencesRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateAccountPreferencesResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAccountPreferencesResult, Members: &mUpdateAccountPreferencesResult, Type: smithy.ShapeTypeStructure})
+var sUpdateChimeWebhookConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChimeWebhookConfigurationRequest, Members: &mUpdateChimeWebhookConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateChimeWebhookConfigurationResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChimeWebhookConfigurationResult, Members: &mUpdateChimeWebhookConfigurationResult, Type: smithy.ShapeTypeStructure})
+var sUpdateCustomActionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCustomActionRequest, Members: &mUpdateCustomActionRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateCustomActionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCustomActionResult, Members: &mUpdateCustomActionResult, Type: smithy.ShapeTypeStructure})
+var sUpdateTeamsChannelConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTeamsChannelConfigurationRequest, Members: &mUpdateTeamsChannelConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateTeamsChannelConfigurationResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTeamsChannelConfigurationResult, Members: &mUpdateTeamsChannelConfigurationResult, Type: smithy.ShapeTypeStructure})
+var sUpdateSlackChannelConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSlackChannelConfigurationRequest, Members: &mUpdateSlackChannelConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateSlackChannelConfigurationResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSlackChannelConfigurationResult, Members: &mUpdateSlackChannelConfigurationResult, Type: smithy.ShapeTypeStructure})
+
+var sAccountPreferences_UserAuthorizationRequired = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserAuthorizationRequired", ID: &i_BooleanAccountPreference, Type: smithy.ShapeTypeBoolean})
+var sAccountPreferences_TrainingDataCollectionEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrainingDataCollectionEnabled", ID: &i_BooleanAccountPreference, Type: smithy.ShapeTypeBoolean})
+var s_AssociationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAssociationListing, Members: &mAssociationListing, Type: smithy.ShapeTypeStructure})
+var sAssociationListing_Resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resource", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sChimeWebhookConfiguration_WebhookDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebhookDescription", ID: &i_ChimeWebhookDescription, Traits: &t35, Type: smithy.ShapeTypeString})
+var sChimeWebhookConfiguration_ChatConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChatConfigurationArn", ID: &i_ChatConfigurationArn, Type: smithy.ShapeTypeString})
+var sChimeWebhookConfiguration_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IamRoleArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sChimeWebhookConfiguration_SnsTopicArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnsTopicArns", ID: &i_SnsTopicArnList, Members: &m_SnsTopicArnList, Type: smithy.ShapeTypeList})
+var sChimeWebhookConfiguration_ConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationName", ID: &i_ConfigurationName, Type: smithy.ShapeTypeString})
+var sChimeWebhookConfiguration_LoggingLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingLevel", ID: &i_CustomerCwLogLevel, Type: smithy.ShapeTypeString})
+var sChimeWebhookConfiguration_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sChimeWebhookConfiguration_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &i_ResourceState, Type: smithy.ShapeTypeString})
+var sChimeWebhookConfiguration_StateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateReason", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_ChimeWebhookConfigurationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iChimeWebhookConfiguration, Members: &mChimeWebhookConfiguration, Type: smithy.ShapeTypeStructure})
+var sConfiguredTeam_TenantId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TenantId", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sConfiguredTeam_TeamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TeamId", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sConfiguredTeam_TeamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TeamName", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sConfiguredTeam_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &i_ResourceState, Type: smithy.ShapeTypeString})
+var sConfiguredTeam_StateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateReason", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_ConfiguredTeamsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConfiguredTeam, Members: &mConfiguredTeam, Type: smithy.ShapeTypeStructure})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sCreateChimeWebhookConfigurationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sCreateSlackChannelConfigurationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sCreateTeamsChannelConfigurationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sCustomAction_CustomActionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomActionArn", ID: &i_CustomActionArn, Type: smithy.ShapeTypeString})
+var sCustomAction_Definition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Definition", ID: &iCustomActionDefinition, Members: &mCustomActionDefinition, Type: smithy.ShapeTypeStructure})
+var sCustomAction_AliasName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AliasName", ID: &i_CustomActionAliasName, Type: smithy.ShapeTypeString})
+var sCustomAction_Attachments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attachments", ID: &i_CustomActionAttachmentList, Members: &m_CustomActionAttachmentList, Type: smithy.ShapeTypeList})
+var sCustomAction_ActionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionName", ID: &i_CustomActionName, Type: smithy.ShapeTypeString})
+var s_CustomActionArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CustomActionArn, Type: smithy.ShapeTypeString})
+var sCustomActionAttachment_NotificationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotificationType", ID: &i_CustomActionAttachmentNotificationType, Type: smithy.ShapeTypeString})
+var sCustomActionAttachment_ButtonText = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ButtonText", ID: &i_CustomActionButtonText, Type: smithy.ShapeTypeString})
+var sCustomActionAttachment_Criteria = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Criteria", ID: &i_CustomActionAttachmentCriteriaList, Members: &m_CustomActionAttachmentCriteriaList, Type: smithy.ShapeTypeList})
+var sCustomActionAttachment_Variables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Variables", ID: &i_CustomActionAttachmentVariables, Members: &m_CustomActionAttachmentVariables, Type: smithy.ShapeTypeMap})
+var sCustomActionAttachmentCriteria_Operator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operator", ID: &iCustomActionAttachmentCriteriaOperator, Members: &mCustomActionAttachmentCriteriaOperator, Type: smithy.ShapeTypeEnum})
+var sCustomActionAttachmentCriteria_VariableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VariableName", ID: &pString, Type: smithy.ShapeTypeString})
+var sCustomActionAttachmentCriteria_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &pString, Type: smithy.ShapeTypeString})
+var s_CustomActionAttachmentCriteriaList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCustomActionAttachmentCriteria, Members: &mCustomActionAttachmentCriteria, Type: smithy.ShapeTypeStructure})
+var sCustomActionAttachmentCriteriaOperator_HAS_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HAS_VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCustomActionAttachmentCriteriaOperator_EQUALS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EQUALS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_CustomActionAttachmentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCustomActionAttachment, Members: &mCustomActionAttachment, Type: smithy.ShapeTypeStructure})
+var s_CustomActionAttachmentVariables_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString})
+var s_CustomActionAttachmentVariables_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString})
+var sCustomActionDefinition_CommandText = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CommandText", ID: &pString, Type: smithy.ShapeTypeString})
+var sDeleteChimeWebhookConfigurationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sDeleteMicrosoftTeamsUserIdentityException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sDeleteSlackChannelConfigurationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sDeleteSlackUserIdentityException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sDeleteSlackWorkspaceAuthorizationFault_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sDeleteTeamsChannelConfigurationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sDeleteTeamsConfiguredTeamException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sDescribeChimeWebhookConfigurationsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sDescribeSlackChannelConfigurationsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sDescribeSlackUserIdentitiesException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sDescribeSlackWorkspacesException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sGetAccountPreferencesException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sGetTeamsChannelConfigurationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_GuardrailPolicyArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_GuardrailPolicyArn, Type: smithy.ShapeTypeString})
+var sInternalServiceError_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidParameterException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidRequestException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sListMicrosoftTeamsConfiguredTeamsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sListMicrosoftTeamsUserIdentitiesException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sListTeamsChannelConfigurationsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sServiceUnavailableException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sSlackChannelConfiguration_SlackTeamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SlackTeamName", ID: &i_SlackTeamName, Type: smithy.ShapeTypeString})
+var sSlackChannelConfiguration_SlackTeamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SlackTeamId", ID: &i_SlackTeamId, Type: smithy.ShapeTypeString})
+var sSlackChannelConfiguration_SlackChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SlackChannelId", ID: &i_SlackChannelId, Type: smithy.ShapeTypeString})
+var sSlackChannelConfiguration_SlackChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SlackChannelName", ID: &i_SlackChannelDisplayName, Traits: &t35, Type: smithy.ShapeTypeString})
+var sSlackChannelConfiguration_ChatConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChatConfigurationArn", ID: &i_ChatConfigurationArn, Type: smithy.ShapeTypeString})
+var sSlackChannelConfiguration_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IamRoleArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sSlackChannelConfiguration_SnsTopicArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnsTopicArns", ID: &i_SnsTopicArnList, Members: &m_SnsTopicArnList, Type: smithy.ShapeTypeList})
+var sSlackChannelConfiguration_ConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationName", ID: &i_ConfigurationName, Type: smithy.ShapeTypeString})
+var sSlackChannelConfiguration_LoggingLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingLevel", ID: &i_CustomerCwLogLevel, Type: smithy.ShapeTypeString})
+var sSlackChannelConfiguration_GuardrailPolicyArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GuardrailPolicyArns", ID: &i_GuardrailPolicyArnList, Members: &m_GuardrailPolicyArnList, Type: smithy.ShapeTypeList})
+var sSlackChannelConfiguration_UserAuthorizationRequired = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserAuthorizationRequired", ID: &i_BooleanAccountPreference, Type: smithy.ShapeTypeBoolean})
+var sSlackChannelConfiguration_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sSlackChannelConfiguration_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &i_ResourceState, Type: smithy.ShapeTypeString})
+var sSlackChannelConfiguration_StateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateReason", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_SlackChannelConfigurationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSlackChannelConfiguration, Members: &mSlackChannelConfiguration, Type: smithy.ShapeTypeStructure})
+var s_SlackUserIdentitiesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSlackUserIdentity, Members: &mSlackUserIdentity, Type: smithy.ShapeTypeStructure})
+var sSlackUserIdentity_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IamRoleArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sSlackUserIdentity_ChatConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChatConfigurationArn", ID: &i_ChatConfigurationArn, Type: smithy.ShapeTypeString})
+var sSlackUserIdentity_SlackTeamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SlackTeamId", ID: &i_SlackTeamId, Type: smithy.ShapeTypeString})
+var sSlackUserIdentity_SlackUserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SlackUserId", ID: &i_SlackUserId, Type: smithy.ShapeTypeString})
+var sSlackUserIdentity_AwsUserIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsUserIdentity", ID: &i_AwsUserIdentity, Type: smithy.ShapeTypeString})
+var sSlackWorkspace_SlackTeamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SlackTeamId", ID: &i_SlackTeamId, Type: smithy.ShapeTypeString})
+var sSlackWorkspace_SlackTeamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SlackTeamName", ID: &i_SlackTeamName, Type: smithy.ShapeTypeString})
+var sSlackWorkspace_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &i_ResourceState, Type: smithy.ShapeTypeString})
+var sSlackWorkspace_StateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateReason", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_SlackWorkspacesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSlackWorkspace, Members: &mSlackWorkspace, Type: smithy.ShapeTypeStructure})
+var s_SnsTopicArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sTag_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKey", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var sTag_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagValue", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var s_Tags_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var s_TeamChannelConfigurationsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTeamsChannelConfiguration, Members: &mTeamsChannelConfiguration, Type: smithy.ShapeTypeStructure})
+var sTeamsChannelConfiguration_ChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelId", ID: &i_TeamsChannelId, Type: smithy.ShapeTypeString})
+var sTeamsChannelConfiguration_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i_TeamsChannelName, Traits: &t35, Type: smithy.ShapeTypeString})
+var sTeamsChannelConfiguration_TeamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TeamId", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sTeamsChannelConfiguration_TeamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TeamName", ID: &i_TeamName, Traits: &t35, Type: smithy.ShapeTypeString})
+var sTeamsChannelConfiguration_TenantId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TenantId", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sTeamsChannelConfiguration_ChatConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChatConfigurationArn", ID: &i_ChatConfigurationArn, Type: smithy.ShapeTypeString})
+var sTeamsChannelConfiguration_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IamRoleArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sTeamsChannelConfiguration_SnsTopicArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnsTopicArns", ID: &i_SnsTopicArnList, Members: &m_SnsTopicArnList, Type: smithy.ShapeTypeList})
+var sTeamsChannelConfiguration_ConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationName", ID: &i_ConfigurationName, Type: smithy.ShapeTypeString})
+var sTeamsChannelConfiguration_LoggingLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingLevel", ID: &i_CustomerCwLogLevel, Type: smithy.ShapeTypeString})
+var sTeamsChannelConfiguration_GuardrailPolicyArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GuardrailPolicyArns", ID: &i_GuardrailPolicyArnList, Members: &m_GuardrailPolicyArnList, Type: smithy.ShapeTypeList})
+var sTeamsChannelConfiguration_UserAuthorizationRequired = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserAuthorizationRequired", ID: &i_BooleanAccountPreference, Type: smithy.ShapeTypeBoolean})
+var sTeamsChannelConfiguration_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sTeamsChannelConfiguration_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &i_ResourceState, Type: smithy.ShapeTypeString})
+var sTeamsChannelConfiguration_StateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateReason", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_TeamsUserIdentitiesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTeamsUserIdentity, Members: &mTeamsUserIdentity, Type: smithy.ShapeTypeStructure})
+var sTeamsUserIdentity_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IamRoleArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sTeamsUserIdentity_ChatConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChatConfigurationArn", ID: &i_ChatConfigurationArn, Type: smithy.ShapeTypeString})
+var sTeamsUserIdentity_TeamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TeamId", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sTeamsUserIdentity_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sTeamsUserIdentity_AwsUserIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsUserIdentity", ID: &i_AwsUserIdentity, Type: smithy.ShapeTypeString})
+var sTeamsUserIdentity_TeamsChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TeamsChannelId", ID: &i_TeamsChannelId, Type: smithy.ShapeTypeString})
+var sTeamsUserIdentity_TeamsTenantId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TeamsTenantId", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sTooManyTagsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sUnauthorizedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sUpdateAccountPreferencesException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sUpdateChimeWebhookConfigurationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sUpdateSlackChannelConfigurationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sUpdateTeamsChannelConfigurationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sAssociateToConfigurationRequest_Resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resource", ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString})
+var sAssociateToConfigurationRequest_ChatConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChatConfiguration", ID: &i_ChatConfigurationArn, Type: smithy.ShapeTypeString})
+var sCreateChimeWebhookConfigurationRequest_WebhookDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebhookDescription", ID: &i_ChimeWebhookDescription, Traits: &t35, Type: smithy.ShapeTypeString})
+var sCreateChimeWebhookConfigurationRequest_WebhookUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebhookUrl", ID: &i_ChimeWebhookUrl, Traits: &t35, Type: smithy.ShapeTypeString})
+var sCreateChimeWebhookConfigurationRequest_SnsTopicArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnsTopicArns", ID: &i_SnsTopicArnList, Members: &m_SnsTopicArnList, Type: smithy.ShapeTypeList})
+var sCreateChimeWebhookConfigurationRequest_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IamRoleArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sCreateChimeWebhookConfigurationRequest_ConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationName", ID: &i_ConfigurationName, Type: smithy.ShapeTypeString})
+var sCreateChimeWebhookConfigurationRequest_LoggingLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingLevel", ID: &i_CustomerCwLogLevel, Type: smithy.ShapeTypeString})
+var sCreateChimeWebhookConfigurationRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sCreateChimeWebhookConfigurationResult_WebhookConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebhookConfiguration", ID: &iChimeWebhookConfiguration, Members: &mChimeWebhookConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateCustomActionRequest_Definition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Definition", ID: &iCustomActionDefinition, Members: &mCustomActionDefinition, Type: smithy.ShapeTypeStructure})
+var sCreateCustomActionRequest_AliasName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AliasName", ID: &i_CustomActionAliasName, Type: smithy.ShapeTypeString})
+var sCreateCustomActionRequest_Attachments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attachments", ID: &i_CustomActionAttachmentList, Members: &m_CustomActionAttachmentList, Type: smithy.ShapeTypeList})
+var sCreateCustomActionRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateCustomActionRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateCustomActionRequest_ActionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionName", ID: &i_CustomActionName, Type: smithy.ShapeTypeString})
+var sCreateCustomActionResult_CustomActionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomActionArn", ID: &i_CustomActionArn, Type: smithy.ShapeTypeString})
+var sCreateTeamsChannelConfigurationRequest_ChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelId", ID: &i_TeamsChannelId, Type: smithy.ShapeTypeString})
+var sCreateTeamsChannelConfigurationRequest_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i_TeamsChannelName, Traits: &t35, Type: smithy.ShapeTypeString})
+var sCreateTeamsChannelConfigurationRequest_TeamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TeamId", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sCreateTeamsChannelConfigurationRequest_TeamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TeamName", ID: &i_TeamName, Traits: &t35, Type: smithy.ShapeTypeString})
+var sCreateTeamsChannelConfigurationRequest_TenantId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TenantId", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sCreateTeamsChannelConfigurationRequest_SnsTopicArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnsTopicArns", ID: &i_SnsTopicArnList, Members: &m_SnsTopicArnList, Type: smithy.ShapeTypeList})
+var sCreateTeamsChannelConfigurationRequest_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IamRoleArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sCreateTeamsChannelConfigurationRequest_ConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationName", ID: &i_ConfigurationName, Type: smithy.ShapeTypeString})
+var sCreateTeamsChannelConfigurationRequest_LoggingLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingLevel", ID: &i_CustomerCwLogLevel, Type: smithy.ShapeTypeString})
+var sCreateTeamsChannelConfigurationRequest_GuardrailPolicyArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GuardrailPolicyArns", ID: &i_GuardrailPolicyArnList, Members: &m_GuardrailPolicyArnList, Type: smithy.ShapeTypeList})
+var sCreateTeamsChannelConfigurationRequest_UserAuthorizationRequired = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserAuthorizationRequired", ID: &i_BooleanAccountPreference, Type: smithy.ShapeTypeBoolean})
+var sCreateTeamsChannelConfigurationRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sCreateTeamsChannelConfigurationResult_ChannelConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelConfiguration", ID: &iTeamsChannelConfiguration, Members: &mTeamsChannelConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateSlackChannelConfigurationRequest_SlackTeamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SlackTeamId", ID: &i_SlackTeamId, Type: smithy.ShapeTypeString})
+var sCreateSlackChannelConfigurationRequest_SlackChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SlackChannelId", ID: &i_SlackChannelId, Type: smithy.ShapeTypeString})
+var sCreateSlackChannelConfigurationRequest_SlackChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SlackChannelName", ID: &i_SlackChannelDisplayName, Traits: &t35, Type: smithy.ShapeTypeString})
+var sCreateSlackChannelConfigurationRequest_SnsTopicArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnsTopicArns", ID: &i_SnsTopicArnList, Members: &m_SnsTopicArnList, Type: smithy.ShapeTypeList})
+var sCreateSlackChannelConfigurationRequest_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IamRoleArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sCreateSlackChannelConfigurationRequest_ConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationName", ID: &i_ConfigurationName, Type: smithy.ShapeTypeString})
+var sCreateSlackChannelConfigurationRequest_LoggingLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingLevel", ID: &i_CustomerCwLogLevel, Type: smithy.ShapeTypeString})
+var sCreateSlackChannelConfigurationRequest_GuardrailPolicyArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GuardrailPolicyArns", ID: &i_GuardrailPolicyArnList, Members: &m_GuardrailPolicyArnList, Type: smithy.ShapeTypeList})
+var sCreateSlackChannelConfigurationRequest_UserAuthorizationRequired = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserAuthorizationRequired", ID: &i_BooleanAccountPreference, Type: smithy.ShapeTypeBoolean})
+var sCreateSlackChannelConfigurationRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sCreateSlackChannelConfigurationResult_ChannelConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelConfiguration", ID: &iSlackChannelConfiguration, Members: &mSlackChannelConfiguration, Type: smithy.ShapeTypeStructure})
+var sDeleteChimeWebhookConfigurationRequest_ChatConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChatConfigurationArn", ID: &i_ChatConfigurationArn, Type: smithy.ShapeTypeString})
+var sDeleteCustomActionRequest_CustomActionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomActionArn", ID: &i_CustomActionArn, Type: smithy.ShapeTypeString})
+var sDeleteTeamsChannelConfigurationRequest_ChatConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChatConfigurationArn", ID: &i_ChatConfigurationArn, Type: smithy.ShapeTypeString})
+var sDeleteTeamsConfiguredTeamRequest_TeamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TeamId", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sDeleteMicrosoftTeamsUserIdentityRequest_ChatConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChatConfigurationArn", ID: &i_ChatConfigurationArn, Type: smithy.ShapeTypeString})
+var sDeleteMicrosoftTeamsUserIdentityRequest_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sDeleteSlackChannelConfigurationRequest_ChatConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChatConfigurationArn", ID: &i_ChatConfigurationArn, Type: smithy.ShapeTypeString})
+var sDeleteSlackUserIdentityRequest_ChatConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChatConfigurationArn", ID: &i_ChatConfigurationArn, Type: smithy.ShapeTypeString})
+var sDeleteSlackUserIdentityRequest_SlackTeamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SlackTeamId", ID: &i_SlackTeamId, Type: smithy.ShapeTypeString})
+var sDeleteSlackUserIdentityRequest_SlackUserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SlackUserId", ID: &i_SlackUserId, Type: smithy.ShapeTypeString})
+var sDeleteSlackWorkspaceAuthorizationRequest_SlackTeamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SlackTeamId", ID: &i_SlackTeamId, Type: smithy.ShapeTypeString})
+var sDescribeChimeWebhookConfigurationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sDescribeChimeWebhookConfigurationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sDescribeChimeWebhookConfigurationsRequest_ChatConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChatConfigurationArn", ID: &i_ChatConfigurationArn, Type: smithy.ShapeTypeString})
+var sDescribeChimeWebhookConfigurationsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sDescribeChimeWebhookConfigurationsResult_WebhookConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebhookConfigurations", ID: &i_ChimeWebhookConfigurationList, Members: &m_ChimeWebhookConfigurationList, Type: smithy.ShapeTypeList})
+var sDescribeSlackChannelConfigurationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sDescribeSlackChannelConfigurationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sDescribeSlackChannelConfigurationsRequest_ChatConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChatConfigurationArn", ID: &i_ChatConfigurationArn, Type: smithy.ShapeTypeString})
+var sDescribeSlackChannelConfigurationsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sDescribeSlackChannelConfigurationsResult_SlackChannelConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SlackChannelConfigurations", ID: &i_SlackChannelConfigurationList, Members: &m_SlackChannelConfigurationList, Type: smithy.ShapeTypeList})
+var sDescribeSlackUserIdentitiesRequest_ChatConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChatConfigurationArn", ID: &i_ChatConfigurationArn, Type: smithy.ShapeTypeString})
+var sDescribeSlackUserIdentitiesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sDescribeSlackUserIdentitiesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sDescribeSlackUserIdentitiesResult_SlackUserIdentities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SlackUserIdentities", ID: &i_SlackUserIdentitiesList, Members: &m_SlackUserIdentitiesList, Type: smithy.ShapeTypeList})
+var sDescribeSlackUserIdentitiesResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sDescribeSlackWorkspacesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sDescribeSlackWorkspacesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sDescribeSlackWorkspacesResult_SlackWorkspaces = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SlackWorkspaces", ID: &i_SlackWorkspacesList, Members: &m_SlackWorkspacesList, Type: smithy.ShapeTypeList})
+var sDescribeSlackWorkspacesResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sDisassociateFromConfigurationRequest_Resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resource", ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString})
+var sDisassociateFromConfigurationRequest_ChatConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChatConfiguration", ID: &i_ChatConfigurationArn, Type: smithy.ShapeTypeString})
+var sGetAccountPreferencesResult_AccountPreferences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountPreferences", ID: &iAccountPreferences, Members: &mAccountPreferences, Type: smithy.ShapeTypeStructure})
+var sGetCustomActionRequest_CustomActionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomActionArn", ID: &i_CustomActionArn, Type: smithy.ShapeTypeString})
+var sGetCustomActionResult_CustomAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomAction", ID: &iCustomAction, Members: &mCustomAction, Type: smithy.ShapeTypeStructure})
+var sGetTeamsChannelConfigurationRequest_ChatConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChatConfigurationArn", ID: &i_ChatConfigurationArn, Type: smithy.ShapeTypeString})
+var sGetTeamsChannelConfigurationResult_ChannelConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelConfiguration", ID: &iTeamsChannelConfiguration, Members: &mTeamsChannelConfiguration, Type: smithy.ShapeTypeStructure})
+var sListAssociationsRequest_ChatConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChatConfiguration", ID: &i_ChatConfigurationArn, Type: smithy.ShapeTypeString})
+var sListAssociationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sListAssociationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListAssociationsResult_Associations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Associations", ID: &i_AssociationList, Members: &m_AssociationList, Type: smithy.ShapeTypeList})
+var sListAssociationsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListCustomActionsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sListCustomActionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListCustomActionsResult_CustomActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomActions", ID: &i_CustomActionArnList, Members: &m_CustomActionArnList, Type: smithy.ShapeTypeList})
+var sListCustomActionsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListTeamsChannelConfigurationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListTeamsChannelConfigurationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListTeamsChannelConfigurationsRequest_TeamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TeamId", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sListTeamsChannelConfigurationsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListTeamsChannelConfigurationsResult_TeamChannelConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TeamChannelConfigurations", ID: &i_TeamChannelConfigurationsList, Members: &m_TeamChannelConfigurationsList, Type: smithy.ShapeTypeList})
+var sListMicrosoftTeamsConfiguredTeamsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListMicrosoftTeamsConfiguredTeamsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListMicrosoftTeamsConfiguredTeamsResult_ConfiguredTeams = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfiguredTeams", ID: &i_ConfiguredTeamsList, Members: &m_ConfiguredTeamsList, Type: smithy.ShapeTypeList})
+var sListMicrosoftTeamsConfiguredTeamsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListMicrosoftTeamsUserIdentitiesRequest_ChatConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChatConfigurationArn", ID: &i_ChatConfigurationArn, Type: smithy.ShapeTypeString})
+var sListMicrosoftTeamsUserIdentitiesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListMicrosoftTeamsUserIdentitiesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListMicrosoftTeamsUserIdentitiesResult_TeamsUserIdentities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TeamsUserIdentities", ID: &i_TeamsUserIdentitiesList, Members: &m_TeamsUserIdentitiesList, Type: smithy.ShapeTypeList})
+var sListMicrosoftTeamsUserIdentitiesResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListTagsForResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sTagResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sUntagResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var sUpdateAccountPreferencesRequest_UserAuthorizationRequired = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserAuthorizationRequired", ID: &i_BooleanAccountPreference, Type: smithy.ShapeTypeBoolean})
+var sUpdateAccountPreferencesRequest_TrainingDataCollectionEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrainingDataCollectionEnabled", ID: &i_BooleanAccountPreference, Type: smithy.ShapeTypeBoolean})
+var sUpdateAccountPreferencesResult_AccountPreferences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountPreferences", ID: &iAccountPreferences, Members: &mAccountPreferences, Type: smithy.ShapeTypeStructure})
+var sUpdateChimeWebhookConfigurationRequest_ChatConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChatConfigurationArn", ID: &i_ChatConfigurationArn, Type: smithy.ShapeTypeString})
+var sUpdateChimeWebhookConfigurationRequest_WebhookDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebhookDescription", ID: &i_ChimeWebhookDescription, Traits: &t35, Type: smithy.ShapeTypeString})
+var sUpdateChimeWebhookConfigurationRequest_WebhookUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebhookUrl", ID: &i_ChimeWebhookUrl, Traits: &t35, Type: smithy.ShapeTypeString})
+var sUpdateChimeWebhookConfigurationRequest_SnsTopicArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnsTopicArns", ID: &i_SnsTopicArnList, Members: &m_SnsTopicArnList, Type: smithy.ShapeTypeList})
+var sUpdateChimeWebhookConfigurationRequest_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IamRoleArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sUpdateChimeWebhookConfigurationRequest_LoggingLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingLevel", ID: &i_CustomerCwLogLevel, Type: smithy.ShapeTypeString})
+var sUpdateChimeWebhookConfigurationResult_WebhookConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebhookConfiguration", ID: &iChimeWebhookConfiguration, Members: &mChimeWebhookConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateCustomActionRequest_CustomActionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomActionArn", ID: &i_CustomActionArn, Type: smithy.ShapeTypeString})
+var sUpdateCustomActionRequest_Definition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Definition", ID: &iCustomActionDefinition, Members: &mCustomActionDefinition, Type: smithy.ShapeTypeStructure})
+var sUpdateCustomActionRequest_AliasName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AliasName", ID: &i_CustomActionAliasName, Type: smithy.ShapeTypeString})
+var sUpdateCustomActionRequest_Attachments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attachments", ID: &i_CustomActionAttachmentList, Members: &m_CustomActionAttachmentList, Type: smithy.ShapeTypeList})
+var sUpdateCustomActionResult_CustomActionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomActionArn", ID: &i_CustomActionArn, Type: smithy.ShapeTypeString})
+var sUpdateTeamsChannelConfigurationRequest_ChatConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChatConfigurationArn", ID: &i_ChatConfigurationArn, Type: smithy.ShapeTypeString})
+var sUpdateTeamsChannelConfigurationRequest_ChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelId", ID: &i_TeamsChannelId, Type: smithy.ShapeTypeString})
+var sUpdateTeamsChannelConfigurationRequest_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i_TeamsChannelName, Traits: &t35, Type: smithy.ShapeTypeString})
+var sUpdateTeamsChannelConfigurationRequest_SnsTopicArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnsTopicArns", ID: &i_SnsTopicArnList, Members: &m_SnsTopicArnList, Type: smithy.ShapeTypeList})
+var sUpdateTeamsChannelConfigurationRequest_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IamRoleArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sUpdateTeamsChannelConfigurationRequest_LoggingLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingLevel", ID: &i_CustomerCwLogLevel, Type: smithy.ShapeTypeString})
+var sUpdateTeamsChannelConfigurationRequest_GuardrailPolicyArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GuardrailPolicyArns", ID: &i_GuardrailPolicyArnList, Members: &m_GuardrailPolicyArnList, Type: smithy.ShapeTypeList})
+var sUpdateTeamsChannelConfigurationRequest_UserAuthorizationRequired = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserAuthorizationRequired", ID: &i_BooleanAccountPreference, Type: smithy.ShapeTypeBoolean})
+var sUpdateTeamsChannelConfigurationResult_ChannelConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelConfiguration", ID: &iTeamsChannelConfiguration, Members: &mTeamsChannelConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateSlackChannelConfigurationRequest_ChatConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChatConfigurationArn", ID: &i_ChatConfigurationArn, Type: smithy.ShapeTypeString})
+var sUpdateSlackChannelConfigurationRequest_SlackChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SlackChannelId", ID: &i_SlackChannelId, Type: smithy.ShapeTypeString})
+var sUpdateSlackChannelConfigurationRequest_SlackChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SlackChannelName", ID: &i_SlackChannelDisplayName, Traits: &t35, Type: smithy.ShapeTypeString})
+var sUpdateSlackChannelConfigurationRequest_SnsTopicArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnsTopicArns", ID: &i_SnsTopicArnList, Members: &m_SnsTopicArnList, Type: smithy.ShapeTypeList})
+var sUpdateSlackChannelConfigurationRequest_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IamRoleArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sUpdateSlackChannelConfigurationRequest_LoggingLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingLevel", ID: &i_CustomerCwLogLevel, Type: smithy.ShapeTypeString})
+var sUpdateSlackChannelConfigurationRequest_GuardrailPolicyArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GuardrailPolicyArns", ID: &i_GuardrailPolicyArnList, Members: &m_GuardrailPolicyArnList, Type: smithy.ShapeTypeList})
+var sUpdateSlackChannelConfigurationRequest_UserAuthorizationRequired = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserAuthorizationRequired", ID: &i_BooleanAccountPreference, Type: smithy.ShapeTypeBoolean})
+var sUpdateSlackChannelConfigurationResult_ChannelConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelConfiguration", ID: &iSlackChannelConfiguration, Members: &mSlackChannelConfiguration, Type: smithy.ShapeTypeStructure})
+
+var AssociateToConfiguration = &sAssociateToConfiguration
+
+var CreateChimeWebhookConfiguration = &sCreateChimeWebhookConfiguration
+
+var CreateCustomAction = &sCreateCustomAction
+
+var CreateMicrosoftTeamsChannelConfiguration = &sCreateMicrosoftTeamsChannelConfiguration
+
+var CreateSlackChannelConfiguration = &sCreateSlackChannelConfiguration
+
+var DeleteChimeWebhookConfiguration = &sDeleteChimeWebhookConfiguration
+
+var DeleteCustomAction = &sDeleteCustomAction
+
+var DeleteMicrosoftTeamsChannelConfiguration = &sDeleteMicrosoftTeamsChannelConfiguration
+
+var DeleteMicrosoftTeamsConfiguredTeam = &sDeleteMicrosoftTeamsConfiguredTeam
+
+var DeleteMicrosoftTeamsUserIdentity = &sDeleteMicrosoftTeamsUserIdentity
+
+var DeleteSlackChannelConfiguration = &sDeleteSlackChannelConfiguration
+
+var DeleteSlackUserIdentity = &sDeleteSlackUserIdentity
+
+var DeleteSlackWorkspaceAuthorization = &sDeleteSlackWorkspaceAuthorization
+
+var DescribeChimeWebhookConfigurations = &sDescribeChimeWebhookConfigurations
+
+var DescribeSlackChannelConfigurations = &sDescribeSlackChannelConfigurations
+
+var DescribeSlackUserIdentities = &sDescribeSlackUserIdentities
+
+var DescribeSlackWorkspaces = &sDescribeSlackWorkspaces
+
+var DisassociateFromConfiguration = &sDisassociateFromConfiguration
+
+var GetAccountPreferences = &sGetAccountPreferences
+
+var GetCustomAction = &sGetCustomAction
+
+var GetMicrosoftTeamsChannelConfiguration = &sGetMicrosoftTeamsChannelConfiguration
+
+var ListAssociations = &sListAssociations
+
+var ListCustomActions = &sListCustomActions
+
+var ListMicrosoftTeamsChannelConfigurations = &sListMicrosoftTeamsChannelConfigurations
+
+var ListMicrosoftTeamsConfiguredTeams = &sListMicrosoftTeamsConfiguredTeams
+
+var ListMicrosoftTeamsUserIdentities = &sListMicrosoftTeamsUserIdentities
+
+var ListTagsForResource = &sListTagsForResource
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateAccountPreferences = &sUpdateAccountPreferences
+
+var UpdateChimeWebhookConfiguration = &sUpdateChimeWebhookConfiguration
+
+var UpdateCustomAction = &sUpdateCustomAction
+
+var UpdateMicrosoftTeamsChannelConfiguration = &sUpdateMicrosoftTeamsChannelConfiguration
+
+var UpdateSlackChannelConfiguration = &sUpdateSlackChannelConfiguration
+
+var _WheatleyOrchestration_20171011 = &s_WheatleyOrchestration_20171011
+
+var AccountPreferences = &sAccountPreferences
+var AccountPreferences_UserAuthorizationRequired = &sAccountPreferences_UserAuthorizationRequired
+var AccountPreferences_TrainingDataCollectionEnabled = &sAccountPreferences_TrainingDataCollectionEnabled
+
+var _AmazonResourceName = &s_AmazonResourceName
+
+var _Arn = &s_Arn
+
+var _AssociationList = &s_AssociationList
+var _AssociationList_member = &s_AssociationList_member
+
+var AssociationListing = &sAssociationListing
+var AssociationListing_Resource = &sAssociationListing_Resource
+
+var _AwsUserIdentity = &s_AwsUserIdentity
+
+var _BooleanAccountPreference = &s_BooleanAccountPreference
+
+var _ChatConfigurationArn = &s_ChatConfigurationArn
+
+var ChimeWebhookConfiguration = &sChimeWebhookConfiguration
+var ChimeWebhookConfiguration_WebhookDescription = &sChimeWebhookConfiguration_WebhookDescription
+var ChimeWebhookConfiguration_ChatConfigurationArn = &sChimeWebhookConfiguration_ChatConfigurationArn
+var ChimeWebhookConfiguration_IamRoleArn = &sChimeWebhookConfiguration_IamRoleArn
+var ChimeWebhookConfiguration_SnsTopicArns = &sChimeWebhookConfiguration_SnsTopicArns
+var ChimeWebhookConfiguration_ConfigurationName = &sChimeWebhookConfiguration_ConfigurationName
+var ChimeWebhookConfiguration_LoggingLevel = &sChimeWebhookConfiguration_LoggingLevel
+var ChimeWebhookConfiguration_Tags = &sChimeWebhookConfiguration_Tags
+var ChimeWebhookConfiguration_State = &sChimeWebhookConfiguration_State
+var ChimeWebhookConfiguration_StateReason = &sChimeWebhookConfiguration_StateReason
+
+var _ChimeWebhookConfigurationList = &s_ChimeWebhookConfigurationList
+var _ChimeWebhookConfigurationList_member = &s_ChimeWebhookConfigurationList_member
+
+var _ChimeWebhookDescription = &s_ChimeWebhookDescription
+
+var _ChimeWebhookUrl = &s_ChimeWebhookUrl
+
+var _ClientToken = &s_ClientToken
+
+var _ConfigurationName = &s_ConfigurationName
+
+var ConfiguredTeam = &sConfiguredTeam
+var ConfiguredTeam_TenantId = &sConfiguredTeam_TenantId
+var ConfiguredTeam_TeamId = &sConfiguredTeam_TeamId
+var ConfiguredTeam_TeamName = &sConfiguredTeam_TeamName
+var ConfiguredTeam_State = &sConfiguredTeam_State
+var ConfiguredTeam_StateReason = &sConfiguredTeam_StateReason
+
+var _ConfiguredTeamsList = &s_ConfiguredTeamsList
+var _ConfiguredTeamsList_member = &s_ConfiguredTeamsList_member
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+
+var CreateChimeWebhookConfigurationException = &sCreateChimeWebhookConfigurationException
+var CreateChimeWebhookConfigurationException_Message = &sCreateChimeWebhookConfigurationException_Message
+
+var CreateSlackChannelConfigurationException = &sCreateSlackChannelConfigurationException
+var CreateSlackChannelConfigurationException_Message = &sCreateSlackChannelConfigurationException_Message
+
+var CreateTeamsChannelConfigurationException = &sCreateTeamsChannelConfigurationException
+var CreateTeamsChannelConfigurationException_Message = &sCreateTeamsChannelConfigurationException_Message
+
+var CustomAction = &sCustomAction
+var CustomAction_CustomActionArn = &sCustomAction_CustomActionArn
+var CustomAction_Definition = &sCustomAction_Definition
+var CustomAction_AliasName = &sCustomAction_AliasName
+var CustomAction_Attachments = &sCustomAction_Attachments
+var CustomAction_ActionName = &sCustomAction_ActionName
+
+var _CustomActionAliasName = &s_CustomActionAliasName
+
+var _CustomActionArn = &s_CustomActionArn
+
+var _CustomActionArnList = &s_CustomActionArnList
+var _CustomActionArnList_member = &s_CustomActionArnList_member
+
+var CustomActionAttachment = &sCustomActionAttachment
+var CustomActionAttachment_NotificationType = &sCustomActionAttachment_NotificationType
+var CustomActionAttachment_ButtonText = &sCustomActionAttachment_ButtonText
+var CustomActionAttachment_Criteria = &sCustomActionAttachment_Criteria
+var CustomActionAttachment_Variables = &sCustomActionAttachment_Variables
+
+var CustomActionAttachmentCriteria = &sCustomActionAttachmentCriteria
+var CustomActionAttachmentCriteria_Operator = &sCustomActionAttachmentCriteria_Operator
+var CustomActionAttachmentCriteria_VariableName = &sCustomActionAttachmentCriteria_VariableName
+var CustomActionAttachmentCriteria_Value = &sCustomActionAttachmentCriteria_Value
+
+var _CustomActionAttachmentCriteriaList = &s_CustomActionAttachmentCriteriaList
+var _CustomActionAttachmentCriteriaList_member = &s_CustomActionAttachmentCriteriaList_member
+
+var CustomActionAttachmentCriteriaOperator = &sCustomActionAttachmentCriteriaOperator
+var CustomActionAttachmentCriteriaOperator_HAS_VALUE = &sCustomActionAttachmentCriteriaOperator_HAS_VALUE
+var CustomActionAttachmentCriteriaOperator_EQUALS = &sCustomActionAttachmentCriteriaOperator_EQUALS
+
+var _CustomActionAttachmentList = &s_CustomActionAttachmentList
+var _CustomActionAttachmentList_member = &s_CustomActionAttachmentList_member
+
+var _CustomActionAttachmentNotificationType = &s_CustomActionAttachmentNotificationType
+
+var _CustomActionAttachmentVariables = &s_CustomActionAttachmentVariables
+var _CustomActionAttachmentVariables_key = &s_CustomActionAttachmentVariables_key
+var _CustomActionAttachmentVariables_value = &s_CustomActionAttachmentVariables_value
+
+var _CustomActionButtonText = &s_CustomActionButtonText
+
+var CustomActionDefinition = &sCustomActionDefinition
+var CustomActionDefinition_CommandText = &sCustomActionDefinition_CommandText
+
+var _CustomActionName = &s_CustomActionName
+
+var _CustomerCwLogLevel = &s_CustomerCwLogLevel
+
+var DeleteChimeWebhookConfigurationException = &sDeleteChimeWebhookConfigurationException
+var DeleteChimeWebhookConfigurationException_Message = &sDeleteChimeWebhookConfigurationException_Message
+
+var DeleteMicrosoftTeamsUserIdentityException = &sDeleteMicrosoftTeamsUserIdentityException
+var DeleteMicrosoftTeamsUserIdentityException_Message = &sDeleteMicrosoftTeamsUserIdentityException_Message
+
+var DeleteSlackChannelConfigurationException = &sDeleteSlackChannelConfigurationException
+var DeleteSlackChannelConfigurationException_Message = &sDeleteSlackChannelConfigurationException_Message
+
+var DeleteSlackUserIdentityException = &sDeleteSlackUserIdentityException
+var DeleteSlackUserIdentityException_Message = &sDeleteSlackUserIdentityException_Message
+
+var DeleteSlackWorkspaceAuthorizationFault = &sDeleteSlackWorkspaceAuthorizationFault
+var DeleteSlackWorkspaceAuthorizationFault_Message = &sDeleteSlackWorkspaceAuthorizationFault_Message
+
+var DeleteTeamsChannelConfigurationException = &sDeleteTeamsChannelConfigurationException
+var DeleteTeamsChannelConfigurationException_Message = &sDeleteTeamsChannelConfigurationException_Message
+
+var DeleteTeamsConfiguredTeamException = &sDeleteTeamsConfiguredTeamException
+var DeleteTeamsConfiguredTeamException_Message = &sDeleteTeamsConfiguredTeamException_Message
+
+var DescribeChimeWebhookConfigurationsException = &sDescribeChimeWebhookConfigurationsException
+var DescribeChimeWebhookConfigurationsException_Message = &sDescribeChimeWebhookConfigurationsException_Message
+
+var DescribeSlackChannelConfigurationsException = &sDescribeSlackChannelConfigurationsException
+var DescribeSlackChannelConfigurationsException_Message = &sDescribeSlackChannelConfigurationsException_Message
+
+var DescribeSlackUserIdentitiesException = &sDescribeSlackUserIdentitiesException
+var DescribeSlackUserIdentitiesException_Message = &sDescribeSlackUserIdentitiesException_Message
+
+var DescribeSlackWorkspacesException = &sDescribeSlackWorkspacesException
+var DescribeSlackWorkspacesException_Message = &sDescribeSlackWorkspacesException_Message
+
+var _ErrorMessage = &s_ErrorMessage
+
+var GetAccountPreferencesException = &sGetAccountPreferencesException
+var GetAccountPreferencesException_Message = &sGetAccountPreferencesException_Message
+
+var GetTeamsChannelConfigurationException = &sGetTeamsChannelConfigurationException
+var GetTeamsChannelConfigurationException_Message = &sGetTeamsChannelConfigurationException_Message
+
+var _GuardrailPolicyArn = &s_GuardrailPolicyArn
+
+var _GuardrailPolicyArnList = &s_GuardrailPolicyArnList
+var _GuardrailPolicyArnList_member = &s_GuardrailPolicyArnList_member
+
+var InternalServiceError = &sInternalServiceError
+var InternalServiceError_Message = &sInternalServiceError_Message
+
+var InvalidParameterException = &sInvalidParameterException
+var InvalidParameterException_message = &sInvalidParameterException_message
+
+var InvalidRequestException = &sInvalidRequestException
+var InvalidRequestException_message = &sInvalidRequestException_message
+
+var LimitExceededException = &sLimitExceededException
+var LimitExceededException_message = &sLimitExceededException_message
+
+var ListMicrosoftTeamsConfiguredTeamsException = &sListMicrosoftTeamsConfiguredTeamsException
+var ListMicrosoftTeamsConfiguredTeamsException_Message = &sListMicrosoftTeamsConfiguredTeamsException_Message
+
+var ListMicrosoftTeamsUserIdentitiesException = &sListMicrosoftTeamsUserIdentitiesException
+var ListMicrosoftTeamsUserIdentitiesException_Message = &sListMicrosoftTeamsUserIdentitiesException_Message
+
+var ListTeamsChannelConfigurationsException = &sListTeamsChannelConfigurationsException
+var ListTeamsChannelConfigurationsException_Message = &sListTeamsChannelConfigurationsException_Message
+
+var _MaxResults = &s_MaxResults
+
+var _PaginationToken = &s_PaginationToken
+
+var _ResourceIdentifier = &s_ResourceIdentifier
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+
+var _ResourceState = &s_ResourceState
+
+var ServiceUnavailableException = &sServiceUnavailableException
+var ServiceUnavailableException_message = &sServiceUnavailableException_message
+
+var SlackChannelConfiguration = &sSlackChannelConfiguration
+var SlackChannelConfiguration_SlackTeamName = &sSlackChannelConfiguration_SlackTeamName
+var SlackChannelConfiguration_SlackTeamId = &sSlackChannelConfiguration_SlackTeamId
+var SlackChannelConfiguration_SlackChannelId = &sSlackChannelConfiguration_SlackChannelId
+var SlackChannelConfiguration_SlackChannelName = &sSlackChannelConfiguration_SlackChannelName
+var SlackChannelConfiguration_ChatConfigurationArn = &sSlackChannelConfiguration_ChatConfigurationArn
+var SlackChannelConfiguration_IamRoleArn = &sSlackChannelConfiguration_IamRoleArn
+var SlackChannelConfiguration_SnsTopicArns = &sSlackChannelConfiguration_SnsTopicArns
+var SlackChannelConfiguration_ConfigurationName = &sSlackChannelConfiguration_ConfigurationName
+var SlackChannelConfiguration_LoggingLevel = &sSlackChannelConfiguration_LoggingLevel
+var SlackChannelConfiguration_GuardrailPolicyArns = &sSlackChannelConfiguration_GuardrailPolicyArns
+var SlackChannelConfiguration_UserAuthorizationRequired = &sSlackChannelConfiguration_UserAuthorizationRequired
+var SlackChannelConfiguration_Tags = &sSlackChannelConfiguration_Tags
+var SlackChannelConfiguration_State = &sSlackChannelConfiguration_State
+var SlackChannelConfiguration_StateReason = &sSlackChannelConfiguration_StateReason
+
+var _SlackChannelConfigurationList = &s_SlackChannelConfigurationList
+var _SlackChannelConfigurationList_member = &s_SlackChannelConfigurationList_member
+
+var _SlackChannelDisplayName = &s_SlackChannelDisplayName
+
+var _SlackChannelId = &s_SlackChannelId
+
+var _SlackTeamId = &s_SlackTeamId
+
+var _SlackTeamName = &s_SlackTeamName
+
+var _SlackUserId = &s_SlackUserId
+
+var _SlackUserIdentitiesList = &s_SlackUserIdentitiesList
+var _SlackUserIdentitiesList_member = &s_SlackUserIdentitiesList_member
+
+var SlackUserIdentity = &sSlackUserIdentity
+var SlackUserIdentity_IamRoleArn = &sSlackUserIdentity_IamRoleArn
+var SlackUserIdentity_ChatConfigurationArn = &sSlackUserIdentity_ChatConfigurationArn
+var SlackUserIdentity_SlackTeamId = &sSlackUserIdentity_SlackTeamId
+var SlackUserIdentity_SlackUserId = &sSlackUserIdentity_SlackUserId
+var SlackUserIdentity_AwsUserIdentity = &sSlackUserIdentity_AwsUserIdentity
+
+var SlackWorkspace = &sSlackWorkspace
+var SlackWorkspace_SlackTeamId = &sSlackWorkspace_SlackTeamId
+var SlackWorkspace_SlackTeamName = &sSlackWorkspace_SlackTeamName
+var SlackWorkspace_State = &sSlackWorkspace_State
+var SlackWorkspace_StateReason = &sSlackWorkspace_StateReason
+
+var _SlackWorkspacesList = &s_SlackWorkspacesList
+var _SlackWorkspacesList_member = &s_SlackWorkspacesList_member
+
+var _SnsTopicArnList = &s_SnsTopicArnList
+var _SnsTopicArnList_member = &s_SnsTopicArnList_member
+
+var _String = &s_String
+
+var Tag = &sTag
+var Tag_TagKey = &sTag_TagKey
+var Tag_TagValue = &sTag_TagValue
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _Tags = &s_Tags
+var _Tags_member = &s_Tags_member
+
+var _TagValue = &s_TagValue
+
+var _TeamChannelConfigurationsList = &s_TeamChannelConfigurationsList
+var _TeamChannelConfigurationsList_member = &s_TeamChannelConfigurationsList_member
+
+var _TeamName = &s_TeamName
+
+var TeamsChannelConfiguration = &sTeamsChannelConfiguration
+var TeamsChannelConfiguration_ChannelId = &sTeamsChannelConfiguration_ChannelId
+var TeamsChannelConfiguration_ChannelName = &sTeamsChannelConfiguration_ChannelName
+var TeamsChannelConfiguration_TeamId = &sTeamsChannelConfiguration_TeamId
+var TeamsChannelConfiguration_TeamName = &sTeamsChannelConfiguration_TeamName
+var TeamsChannelConfiguration_TenantId = &sTeamsChannelConfiguration_TenantId
+var TeamsChannelConfiguration_ChatConfigurationArn = &sTeamsChannelConfiguration_ChatConfigurationArn
+var TeamsChannelConfiguration_IamRoleArn = &sTeamsChannelConfiguration_IamRoleArn
+var TeamsChannelConfiguration_SnsTopicArns = &sTeamsChannelConfiguration_SnsTopicArns
+var TeamsChannelConfiguration_ConfigurationName = &sTeamsChannelConfiguration_ConfigurationName
+var TeamsChannelConfiguration_LoggingLevel = &sTeamsChannelConfiguration_LoggingLevel
+var TeamsChannelConfiguration_GuardrailPolicyArns = &sTeamsChannelConfiguration_GuardrailPolicyArns
+var TeamsChannelConfiguration_UserAuthorizationRequired = &sTeamsChannelConfiguration_UserAuthorizationRequired
+var TeamsChannelConfiguration_Tags = &sTeamsChannelConfiguration_Tags
+var TeamsChannelConfiguration_State = &sTeamsChannelConfiguration_State
+var TeamsChannelConfiguration_StateReason = &sTeamsChannelConfiguration_StateReason
+
+var _TeamsChannelId = &s_TeamsChannelId
+
+var _TeamsChannelName = &s_TeamsChannelName
+
+var _TeamsUserIdentitiesList = &s_TeamsUserIdentitiesList
+var _TeamsUserIdentitiesList_member = &s_TeamsUserIdentitiesList_member
+
+var TeamsUserIdentity = &sTeamsUserIdentity
+var TeamsUserIdentity_IamRoleArn = &sTeamsUserIdentity_IamRoleArn
+var TeamsUserIdentity_ChatConfigurationArn = &sTeamsUserIdentity_ChatConfigurationArn
+var TeamsUserIdentity_TeamId = &sTeamsUserIdentity_TeamId
+var TeamsUserIdentity_UserId = &sTeamsUserIdentity_UserId
+var TeamsUserIdentity_AwsUserIdentity = &sTeamsUserIdentity_AwsUserIdentity
+var TeamsUserIdentity_TeamsChannelId = &sTeamsUserIdentity_TeamsChannelId
+var TeamsUserIdentity_TeamsTenantId = &sTeamsUserIdentity_TeamsTenantId
+
+var TooManyTagsException = &sTooManyTagsException
+var TooManyTagsException_message = &sTooManyTagsException_message
+
+var UnauthorizedException = &sUnauthorizedException
+var UnauthorizedException_message = &sUnauthorizedException_message
+
+var UpdateAccountPreferencesException = &sUpdateAccountPreferencesException
+var UpdateAccountPreferencesException_Message = &sUpdateAccountPreferencesException_Message
+
+var UpdateChimeWebhookConfigurationException = &sUpdateChimeWebhookConfigurationException
+var UpdateChimeWebhookConfigurationException_Message = &sUpdateChimeWebhookConfigurationException_Message
+
+var UpdateSlackChannelConfigurationException = &sUpdateSlackChannelConfigurationException
+var UpdateSlackChannelConfigurationException_Message = &sUpdateSlackChannelConfigurationException_Message
+
+var UpdateTeamsChannelConfigurationException = &sUpdateTeamsChannelConfigurationException
+var UpdateTeamsChannelConfigurationException_Message = &sUpdateTeamsChannelConfigurationException_Message
+
+var _UUID = &s_UUID
+
+var AssociateToConfigurationRequest = &sAssociateToConfigurationRequest
+var AssociateToConfigurationRequest_Resource = &sAssociateToConfigurationRequest_Resource
+var AssociateToConfigurationRequest_ChatConfiguration = &sAssociateToConfigurationRequest_ChatConfiguration
+
+var AssociateToConfigurationResult = &sAssociateToConfigurationResult
+
+var CreateChimeWebhookConfigurationRequest = &sCreateChimeWebhookConfigurationRequest
+var CreateChimeWebhookConfigurationRequest_WebhookDescription = &sCreateChimeWebhookConfigurationRequest_WebhookDescription
+var CreateChimeWebhookConfigurationRequest_WebhookUrl = &sCreateChimeWebhookConfigurationRequest_WebhookUrl
+var CreateChimeWebhookConfigurationRequest_SnsTopicArns = &sCreateChimeWebhookConfigurationRequest_SnsTopicArns
+var CreateChimeWebhookConfigurationRequest_IamRoleArn = &sCreateChimeWebhookConfigurationRequest_IamRoleArn
+var CreateChimeWebhookConfigurationRequest_ConfigurationName = &sCreateChimeWebhookConfigurationRequest_ConfigurationName
+var CreateChimeWebhookConfigurationRequest_LoggingLevel = &sCreateChimeWebhookConfigurationRequest_LoggingLevel
+var CreateChimeWebhookConfigurationRequest_Tags = &sCreateChimeWebhookConfigurationRequest_Tags
+
+var CreateChimeWebhookConfigurationResult = &sCreateChimeWebhookConfigurationResult
+var CreateChimeWebhookConfigurationResult_WebhookConfiguration = &sCreateChimeWebhookConfigurationResult_WebhookConfiguration
+
+var CreateCustomActionRequest = &sCreateCustomActionRequest
+var CreateCustomActionRequest_Definition = &sCreateCustomActionRequest_Definition
+var CreateCustomActionRequest_AliasName = &sCreateCustomActionRequest_AliasName
+var CreateCustomActionRequest_Attachments = &sCreateCustomActionRequest_Attachments
+var CreateCustomActionRequest_Tags = &sCreateCustomActionRequest_Tags
+var CreateCustomActionRequest_ClientToken = &sCreateCustomActionRequest_ClientToken
+var CreateCustomActionRequest_ActionName = &sCreateCustomActionRequest_ActionName
+
+var CreateCustomActionResult = &sCreateCustomActionResult
+var CreateCustomActionResult_CustomActionArn = &sCreateCustomActionResult_CustomActionArn
+
+var CreateTeamsChannelConfigurationRequest = &sCreateTeamsChannelConfigurationRequest
+var CreateTeamsChannelConfigurationRequest_ChannelId = &sCreateTeamsChannelConfigurationRequest_ChannelId
+var CreateTeamsChannelConfigurationRequest_ChannelName = &sCreateTeamsChannelConfigurationRequest_ChannelName
+var CreateTeamsChannelConfigurationRequest_TeamId = &sCreateTeamsChannelConfigurationRequest_TeamId
+var CreateTeamsChannelConfigurationRequest_TeamName = &sCreateTeamsChannelConfigurationRequest_TeamName
+var CreateTeamsChannelConfigurationRequest_TenantId = &sCreateTeamsChannelConfigurationRequest_TenantId
+var CreateTeamsChannelConfigurationRequest_SnsTopicArns = &sCreateTeamsChannelConfigurationRequest_SnsTopicArns
+var CreateTeamsChannelConfigurationRequest_IamRoleArn = &sCreateTeamsChannelConfigurationRequest_IamRoleArn
+var CreateTeamsChannelConfigurationRequest_ConfigurationName = &sCreateTeamsChannelConfigurationRequest_ConfigurationName
+var CreateTeamsChannelConfigurationRequest_LoggingLevel = &sCreateTeamsChannelConfigurationRequest_LoggingLevel
+var CreateTeamsChannelConfigurationRequest_GuardrailPolicyArns = &sCreateTeamsChannelConfigurationRequest_GuardrailPolicyArns
+var CreateTeamsChannelConfigurationRequest_UserAuthorizationRequired = &sCreateTeamsChannelConfigurationRequest_UserAuthorizationRequired
+var CreateTeamsChannelConfigurationRequest_Tags = &sCreateTeamsChannelConfigurationRequest_Tags
+
+var CreateTeamsChannelConfigurationResult = &sCreateTeamsChannelConfigurationResult
+var CreateTeamsChannelConfigurationResult_ChannelConfiguration = &sCreateTeamsChannelConfigurationResult_ChannelConfiguration
+
+var CreateSlackChannelConfigurationRequest = &sCreateSlackChannelConfigurationRequest
+var CreateSlackChannelConfigurationRequest_SlackTeamId = &sCreateSlackChannelConfigurationRequest_SlackTeamId
+var CreateSlackChannelConfigurationRequest_SlackChannelId = &sCreateSlackChannelConfigurationRequest_SlackChannelId
+var CreateSlackChannelConfigurationRequest_SlackChannelName = &sCreateSlackChannelConfigurationRequest_SlackChannelName
+var CreateSlackChannelConfigurationRequest_SnsTopicArns = &sCreateSlackChannelConfigurationRequest_SnsTopicArns
+var CreateSlackChannelConfigurationRequest_IamRoleArn = &sCreateSlackChannelConfigurationRequest_IamRoleArn
+var CreateSlackChannelConfigurationRequest_ConfigurationName = &sCreateSlackChannelConfigurationRequest_ConfigurationName
+var CreateSlackChannelConfigurationRequest_LoggingLevel = &sCreateSlackChannelConfigurationRequest_LoggingLevel
+var CreateSlackChannelConfigurationRequest_GuardrailPolicyArns = &sCreateSlackChannelConfigurationRequest_GuardrailPolicyArns
+var CreateSlackChannelConfigurationRequest_UserAuthorizationRequired = &sCreateSlackChannelConfigurationRequest_UserAuthorizationRequired
+var CreateSlackChannelConfigurationRequest_Tags = &sCreateSlackChannelConfigurationRequest_Tags
+
+var CreateSlackChannelConfigurationResult = &sCreateSlackChannelConfigurationResult
+var CreateSlackChannelConfigurationResult_ChannelConfiguration = &sCreateSlackChannelConfigurationResult_ChannelConfiguration
+
+var DeleteChimeWebhookConfigurationRequest = &sDeleteChimeWebhookConfigurationRequest
+var DeleteChimeWebhookConfigurationRequest_ChatConfigurationArn = &sDeleteChimeWebhookConfigurationRequest_ChatConfigurationArn
+
+var DeleteChimeWebhookConfigurationResult = &sDeleteChimeWebhookConfigurationResult
+
+var DeleteCustomActionRequest = &sDeleteCustomActionRequest
+var DeleteCustomActionRequest_CustomActionArn = &sDeleteCustomActionRequest_CustomActionArn
+
+var DeleteCustomActionResult = &sDeleteCustomActionResult
+
+var DeleteTeamsChannelConfigurationRequest = &sDeleteTeamsChannelConfigurationRequest
+var DeleteTeamsChannelConfigurationRequest_ChatConfigurationArn = &sDeleteTeamsChannelConfigurationRequest_ChatConfigurationArn
+
+var DeleteTeamsChannelConfigurationResult = &sDeleteTeamsChannelConfigurationResult
+
+var DeleteTeamsConfiguredTeamRequest = &sDeleteTeamsConfiguredTeamRequest
+var DeleteTeamsConfiguredTeamRequest_TeamId = &sDeleteTeamsConfiguredTeamRequest_TeamId
+
+var DeleteTeamsConfiguredTeamResult = &sDeleteTeamsConfiguredTeamResult
+
+var DeleteMicrosoftTeamsUserIdentityRequest = &sDeleteMicrosoftTeamsUserIdentityRequest
+var DeleteMicrosoftTeamsUserIdentityRequest_ChatConfigurationArn = &sDeleteMicrosoftTeamsUserIdentityRequest_ChatConfigurationArn
+var DeleteMicrosoftTeamsUserIdentityRequest_UserId = &sDeleteMicrosoftTeamsUserIdentityRequest_UserId
+
+var DeleteMicrosoftTeamsUserIdentityResult = &sDeleteMicrosoftTeamsUserIdentityResult
+
+var DeleteSlackChannelConfigurationRequest = &sDeleteSlackChannelConfigurationRequest
+var DeleteSlackChannelConfigurationRequest_ChatConfigurationArn = &sDeleteSlackChannelConfigurationRequest_ChatConfigurationArn
+
+var DeleteSlackChannelConfigurationResult = &sDeleteSlackChannelConfigurationResult
+
+var DeleteSlackUserIdentityRequest = &sDeleteSlackUserIdentityRequest
+var DeleteSlackUserIdentityRequest_ChatConfigurationArn = &sDeleteSlackUserIdentityRequest_ChatConfigurationArn
+var DeleteSlackUserIdentityRequest_SlackTeamId = &sDeleteSlackUserIdentityRequest_SlackTeamId
+var DeleteSlackUserIdentityRequest_SlackUserId = &sDeleteSlackUserIdentityRequest_SlackUserId
+
+var DeleteSlackUserIdentityResult = &sDeleteSlackUserIdentityResult
+
+var DeleteSlackWorkspaceAuthorizationRequest = &sDeleteSlackWorkspaceAuthorizationRequest
+var DeleteSlackWorkspaceAuthorizationRequest_SlackTeamId = &sDeleteSlackWorkspaceAuthorizationRequest_SlackTeamId
+
+var DeleteSlackWorkspaceAuthorizationResult = &sDeleteSlackWorkspaceAuthorizationResult
+
+var DescribeChimeWebhookConfigurationsRequest = &sDescribeChimeWebhookConfigurationsRequest
+var DescribeChimeWebhookConfigurationsRequest_MaxResults = &sDescribeChimeWebhookConfigurationsRequest_MaxResults
+var DescribeChimeWebhookConfigurationsRequest_NextToken = &sDescribeChimeWebhookConfigurationsRequest_NextToken
+var DescribeChimeWebhookConfigurationsRequest_ChatConfigurationArn = &sDescribeChimeWebhookConfigurationsRequest_ChatConfigurationArn
+
+var DescribeChimeWebhookConfigurationsResult = &sDescribeChimeWebhookConfigurationsResult
+var DescribeChimeWebhookConfigurationsResult_NextToken = &sDescribeChimeWebhookConfigurationsResult_NextToken
+var DescribeChimeWebhookConfigurationsResult_WebhookConfigurations = &sDescribeChimeWebhookConfigurationsResult_WebhookConfigurations
+
+var DescribeSlackChannelConfigurationsRequest = &sDescribeSlackChannelConfigurationsRequest
+var DescribeSlackChannelConfigurationsRequest_MaxResults = &sDescribeSlackChannelConfigurationsRequest_MaxResults
+var DescribeSlackChannelConfigurationsRequest_NextToken = &sDescribeSlackChannelConfigurationsRequest_NextToken
+var DescribeSlackChannelConfigurationsRequest_ChatConfigurationArn = &sDescribeSlackChannelConfigurationsRequest_ChatConfigurationArn
+
+var DescribeSlackChannelConfigurationsResult = &sDescribeSlackChannelConfigurationsResult
+var DescribeSlackChannelConfigurationsResult_NextToken = &sDescribeSlackChannelConfigurationsResult_NextToken
+var DescribeSlackChannelConfigurationsResult_SlackChannelConfigurations = &sDescribeSlackChannelConfigurationsResult_SlackChannelConfigurations
+
+var DescribeSlackUserIdentitiesRequest = &sDescribeSlackUserIdentitiesRequest
+var DescribeSlackUserIdentitiesRequest_ChatConfigurationArn = &sDescribeSlackUserIdentitiesRequest_ChatConfigurationArn
+var DescribeSlackUserIdentitiesRequest_NextToken = &sDescribeSlackUserIdentitiesRequest_NextToken
+var DescribeSlackUserIdentitiesRequest_MaxResults = &sDescribeSlackUserIdentitiesRequest_MaxResults
+
+var DescribeSlackUserIdentitiesResult = &sDescribeSlackUserIdentitiesResult
+var DescribeSlackUserIdentitiesResult_SlackUserIdentities = &sDescribeSlackUserIdentitiesResult_SlackUserIdentities
+var DescribeSlackUserIdentitiesResult_NextToken = &sDescribeSlackUserIdentitiesResult_NextToken
+
+var DescribeSlackWorkspacesRequest = &sDescribeSlackWorkspacesRequest
+var DescribeSlackWorkspacesRequest_MaxResults = &sDescribeSlackWorkspacesRequest_MaxResults
+var DescribeSlackWorkspacesRequest_NextToken = &sDescribeSlackWorkspacesRequest_NextToken
+
+var DescribeSlackWorkspacesResult = &sDescribeSlackWorkspacesResult
+var DescribeSlackWorkspacesResult_SlackWorkspaces = &sDescribeSlackWorkspacesResult_SlackWorkspaces
+var DescribeSlackWorkspacesResult_NextToken = &sDescribeSlackWorkspacesResult_NextToken
+
+var DisassociateFromConfigurationRequest = &sDisassociateFromConfigurationRequest
+var DisassociateFromConfigurationRequest_Resource = &sDisassociateFromConfigurationRequest_Resource
+var DisassociateFromConfigurationRequest_ChatConfiguration = &sDisassociateFromConfigurationRequest_ChatConfiguration
+
+var DisassociateFromConfigurationResult = &sDisassociateFromConfigurationResult
+
+var GetAccountPreferencesRequest = &sGetAccountPreferencesRequest
+
+var GetAccountPreferencesResult = &sGetAccountPreferencesResult
+var GetAccountPreferencesResult_AccountPreferences = &sGetAccountPreferencesResult_AccountPreferences
+
+var GetCustomActionRequest = &sGetCustomActionRequest
+var GetCustomActionRequest_CustomActionArn = &sGetCustomActionRequest_CustomActionArn
+
+var GetCustomActionResult = &sGetCustomActionResult
+var GetCustomActionResult_CustomAction = &sGetCustomActionResult_CustomAction
+
+var GetTeamsChannelConfigurationRequest = &sGetTeamsChannelConfigurationRequest
+var GetTeamsChannelConfigurationRequest_ChatConfigurationArn = &sGetTeamsChannelConfigurationRequest_ChatConfigurationArn
+
+var GetTeamsChannelConfigurationResult = &sGetTeamsChannelConfigurationResult
+var GetTeamsChannelConfigurationResult_ChannelConfiguration = &sGetTeamsChannelConfigurationResult_ChannelConfiguration
+
+var ListAssociationsRequest = &sListAssociationsRequest
+var ListAssociationsRequest_ChatConfiguration = &sListAssociationsRequest_ChatConfiguration
+var ListAssociationsRequest_MaxResults = &sListAssociationsRequest_MaxResults
+var ListAssociationsRequest_NextToken = &sListAssociationsRequest_NextToken
+
+var ListAssociationsResult = &sListAssociationsResult
+var ListAssociationsResult_Associations = &sListAssociationsResult_Associations
+var ListAssociationsResult_NextToken = &sListAssociationsResult_NextToken
+
+var ListCustomActionsRequest = &sListCustomActionsRequest
+var ListCustomActionsRequest_MaxResults = &sListCustomActionsRequest_MaxResults
+var ListCustomActionsRequest_NextToken = &sListCustomActionsRequest_NextToken
+
+var ListCustomActionsResult = &sListCustomActionsResult
+var ListCustomActionsResult_CustomActions = &sListCustomActionsResult_CustomActions
+var ListCustomActionsResult_NextToken = &sListCustomActionsResult_NextToken
+
+var ListTeamsChannelConfigurationsRequest = &sListTeamsChannelConfigurationsRequest
+var ListTeamsChannelConfigurationsRequest_MaxResults = &sListTeamsChannelConfigurationsRequest_MaxResults
+var ListTeamsChannelConfigurationsRequest_NextToken = &sListTeamsChannelConfigurationsRequest_NextToken
+var ListTeamsChannelConfigurationsRequest_TeamId = &sListTeamsChannelConfigurationsRequest_TeamId
+
+var ListTeamsChannelConfigurationsResult = &sListTeamsChannelConfigurationsResult
+var ListTeamsChannelConfigurationsResult_NextToken = &sListTeamsChannelConfigurationsResult_NextToken
+var ListTeamsChannelConfigurationsResult_TeamChannelConfigurations = &sListTeamsChannelConfigurationsResult_TeamChannelConfigurations
+
+var ListMicrosoftTeamsConfiguredTeamsRequest = &sListMicrosoftTeamsConfiguredTeamsRequest
+var ListMicrosoftTeamsConfiguredTeamsRequest_MaxResults = &sListMicrosoftTeamsConfiguredTeamsRequest_MaxResults
+var ListMicrosoftTeamsConfiguredTeamsRequest_NextToken = &sListMicrosoftTeamsConfiguredTeamsRequest_NextToken
+
+var ListMicrosoftTeamsConfiguredTeamsResult = &sListMicrosoftTeamsConfiguredTeamsResult
+var ListMicrosoftTeamsConfiguredTeamsResult_ConfiguredTeams = &sListMicrosoftTeamsConfiguredTeamsResult_ConfiguredTeams
+var ListMicrosoftTeamsConfiguredTeamsResult_NextToken = &sListMicrosoftTeamsConfiguredTeamsResult_NextToken
+
+var ListMicrosoftTeamsUserIdentitiesRequest = &sListMicrosoftTeamsUserIdentitiesRequest
+var ListMicrosoftTeamsUserIdentitiesRequest_ChatConfigurationArn = &sListMicrosoftTeamsUserIdentitiesRequest_ChatConfigurationArn
+var ListMicrosoftTeamsUserIdentitiesRequest_NextToken = &sListMicrosoftTeamsUserIdentitiesRequest_NextToken
+var ListMicrosoftTeamsUserIdentitiesRequest_MaxResults = &sListMicrosoftTeamsUserIdentitiesRequest_MaxResults
+
+var ListMicrosoftTeamsUserIdentitiesResult = &sListMicrosoftTeamsUserIdentitiesResult
+var ListMicrosoftTeamsUserIdentitiesResult_TeamsUserIdentities = &sListMicrosoftTeamsUserIdentitiesResult_TeamsUserIdentities
+var ListMicrosoftTeamsUserIdentitiesResult_NextToken = &sListMicrosoftTeamsUserIdentitiesResult_NextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceARN = &sListTagsForResourceRequest_ResourceARN
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_Tags = &sListTagsForResourceResponse_Tags
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceARN = &sTagResourceRequest_ResourceARN
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceARN = &sUntagResourceRequest_ResourceARN
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateAccountPreferencesRequest = &sUpdateAccountPreferencesRequest
+var UpdateAccountPreferencesRequest_UserAuthorizationRequired = &sUpdateAccountPreferencesRequest_UserAuthorizationRequired
+var UpdateAccountPreferencesRequest_TrainingDataCollectionEnabled = &sUpdateAccountPreferencesRequest_TrainingDataCollectionEnabled
+
+var UpdateAccountPreferencesResult = &sUpdateAccountPreferencesResult
+var UpdateAccountPreferencesResult_AccountPreferences = &sUpdateAccountPreferencesResult_AccountPreferences
+
+var UpdateChimeWebhookConfigurationRequest = &sUpdateChimeWebhookConfigurationRequest
+var UpdateChimeWebhookConfigurationRequest_ChatConfigurationArn = &sUpdateChimeWebhookConfigurationRequest_ChatConfigurationArn
+var UpdateChimeWebhookConfigurationRequest_WebhookDescription = &sUpdateChimeWebhookConfigurationRequest_WebhookDescription
+var UpdateChimeWebhookConfigurationRequest_WebhookUrl = &sUpdateChimeWebhookConfigurationRequest_WebhookUrl
+var UpdateChimeWebhookConfigurationRequest_SnsTopicArns = &sUpdateChimeWebhookConfigurationRequest_SnsTopicArns
+var UpdateChimeWebhookConfigurationRequest_IamRoleArn = &sUpdateChimeWebhookConfigurationRequest_IamRoleArn
+var UpdateChimeWebhookConfigurationRequest_LoggingLevel = &sUpdateChimeWebhookConfigurationRequest_LoggingLevel
+
+var UpdateChimeWebhookConfigurationResult = &sUpdateChimeWebhookConfigurationResult
+var UpdateChimeWebhookConfigurationResult_WebhookConfiguration = &sUpdateChimeWebhookConfigurationResult_WebhookConfiguration
+
+var UpdateCustomActionRequest = &sUpdateCustomActionRequest
+var UpdateCustomActionRequest_CustomActionArn = &sUpdateCustomActionRequest_CustomActionArn
+var UpdateCustomActionRequest_Definition = &sUpdateCustomActionRequest_Definition
+var UpdateCustomActionRequest_AliasName = &sUpdateCustomActionRequest_AliasName
+var UpdateCustomActionRequest_Attachments = &sUpdateCustomActionRequest_Attachments
+
+var UpdateCustomActionResult = &sUpdateCustomActionResult
+var UpdateCustomActionResult_CustomActionArn = &sUpdateCustomActionResult_CustomActionArn
+
+var UpdateTeamsChannelConfigurationRequest = &sUpdateTeamsChannelConfigurationRequest
+var UpdateTeamsChannelConfigurationRequest_ChatConfigurationArn = &sUpdateTeamsChannelConfigurationRequest_ChatConfigurationArn
+var UpdateTeamsChannelConfigurationRequest_ChannelId = &sUpdateTeamsChannelConfigurationRequest_ChannelId
+var UpdateTeamsChannelConfigurationRequest_ChannelName = &sUpdateTeamsChannelConfigurationRequest_ChannelName
+var UpdateTeamsChannelConfigurationRequest_SnsTopicArns = &sUpdateTeamsChannelConfigurationRequest_SnsTopicArns
+var UpdateTeamsChannelConfigurationRequest_IamRoleArn = &sUpdateTeamsChannelConfigurationRequest_IamRoleArn
+var UpdateTeamsChannelConfigurationRequest_LoggingLevel = &sUpdateTeamsChannelConfigurationRequest_LoggingLevel
+var UpdateTeamsChannelConfigurationRequest_GuardrailPolicyArns = &sUpdateTeamsChannelConfigurationRequest_GuardrailPolicyArns
+var UpdateTeamsChannelConfigurationRequest_UserAuthorizationRequired = &sUpdateTeamsChannelConfigurationRequest_UserAuthorizationRequired
+
+var UpdateTeamsChannelConfigurationResult = &sUpdateTeamsChannelConfigurationResult
+var UpdateTeamsChannelConfigurationResult_ChannelConfiguration = &sUpdateTeamsChannelConfigurationResult_ChannelConfiguration
+
+var UpdateSlackChannelConfigurationRequest = &sUpdateSlackChannelConfigurationRequest
+var UpdateSlackChannelConfigurationRequest_ChatConfigurationArn = &sUpdateSlackChannelConfigurationRequest_ChatConfigurationArn
+var UpdateSlackChannelConfigurationRequest_SlackChannelId = &sUpdateSlackChannelConfigurationRequest_SlackChannelId
+var UpdateSlackChannelConfigurationRequest_SlackChannelName = &sUpdateSlackChannelConfigurationRequest_SlackChannelName
+var UpdateSlackChannelConfigurationRequest_SnsTopicArns = &sUpdateSlackChannelConfigurationRequest_SnsTopicArns
+var UpdateSlackChannelConfigurationRequest_IamRoleArn = &sUpdateSlackChannelConfigurationRequest_IamRoleArn
+var UpdateSlackChannelConfigurationRequest_LoggingLevel = &sUpdateSlackChannelConfigurationRequest_LoggingLevel
+var UpdateSlackChannelConfigurationRequest_GuardrailPolicyArns = &sUpdateSlackChannelConfigurationRequest_GuardrailPolicyArns
+var UpdateSlackChannelConfigurationRequest_UserAuthorizationRequired = &sUpdateSlackChannelConfigurationRequest_UserAuthorizationRequired
+
+var UpdateSlackChannelConfigurationResult = &sUpdateSlackChannelConfigurationResult
+var UpdateSlackChannelConfigurationResult_ChannelConfiguration = &sUpdateSlackChannelConfigurationResult_ChannelConfiguration
+
+var WheatleyOrchestration_20171011 = &smithy.ServiceSchema{Schema: &s_WheatleyOrchestration_20171011, Version: "2017-10-11"}

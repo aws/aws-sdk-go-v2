@@ -7,225 +7,186 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var GetLatestConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfigdata",
-	Name:      "GetLatestConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+var (
+	iGetLatestConfiguration            = smithy.ShapeID{Namespace: "com.amazonaws.appconfigdata", Name: "GetLatestConfiguration"}
+	iStartConfigurationSession         = smithy.ShapeID{Namespace: "com.amazonaws.appconfigdata", Name: "StartConfigurationSession"}
+	i_AppConfigData                    = smithy.ShapeID{Namespace: "com.amazonaws.appconfigdata", Name: "AppConfigData"}
+	iBadRequestDetails                 = smithy.ShapeID{Namespace: "com.amazonaws.appconfigdata", Name: "BadRequestDetails"}
+	iBadRequestException               = smithy.ShapeID{Namespace: "com.amazonaws.appconfigdata", Name: "BadRequestException"}
+	i_BadRequestReason                 = smithy.ShapeID{Namespace: "com.amazonaws.appconfigdata", Name: "BadRequestReason"}
+	i_Identifier                       = smithy.ShapeID{Namespace: "com.amazonaws.appconfigdata", Name: "Identifier"}
+	i_Integer                          = smithy.ShapeID{Namespace: "com.amazonaws.appconfigdata", Name: "Integer"}
+	iInternalServerException           = smithy.ShapeID{Namespace: "com.amazonaws.appconfigdata", Name: "InternalServerException"}
+	iInvalidParameterDetail            = smithy.ShapeID{Namespace: "com.amazonaws.appconfigdata", Name: "InvalidParameterDetail"}
+	i_InvalidParameterMap              = smithy.ShapeID{Namespace: "com.amazonaws.appconfigdata", Name: "InvalidParameterMap"}
+	i_InvalidParameterProblem          = smithy.ShapeID{Namespace: "com.amazonaws.appconfigdata", Name: "InvalidParameterProblem"}
+	i_OptionalPollSeconds              = smithy.ShapeID{Namespace: "com.amazonaws.appconfigdata", Name: "OptionalPollSeconds"}
+	iResourceNotFoundException         = smithy.ShapeID{Namespace: "com.amazonaws.appconfigdata", Name: "ResourceNotFoundException"}
+	i_ResourceType                     = smithy.ShapeID{Namespace: "com.amazonaws.appconfigdata", Name: "ResourceType"}
+	i_SensitiveBlob                    = smithy.ShapeID{Namespace: "com.amazonaws.appconfigdata", Name: "SensitiveBlob"}
+	i_String                           = smithy.ShapeID{Namespace: "com.amazonaws.appconfigdata", Name: "String"}
+	i_StringMap                        = smithy.ShapeID{Namespace: "com.amazonaws.appconfigdata", Name: "StringMap"}
+	iThrottlingException               = smithy.ShapeID{Namespace: "com.amazonaws.appconfigdata", Name: "ThrottlingException"}
+	i_Token                            = smithy.ShapeID{Namespace: "com.amazonaws.appconfigdata", Name: "Token"}
+	iGetLatestConfigurationRequest     = smithy.ShapeID{Namespace: "com.amazonaws.appconfigdata", Name: "GetLatestConfigurationRequest"}
+	iGetLatestConfigurationResponse    = smithy.ShapeID{Namespace: "com.amazonaws.appconfigdata", Name: "GetLatestConfigurationResponse"}
+	iStartConfigurationSessionRequest  = smithy.ShapeID{Namespace: "com.amazonaws.appconfigdata", Name: "StartConfigurationSessionRequest"}
+	iStartConfigurationSessionResponse = smithy.ShapeID{Namespace: "com.amazonaws.appconfigdata", Name: "StartConfigurationSessionResponse"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/configuration",
-	Code: 200})
-
-var StartConfigurationSession = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfigdata",
-	Name:      "StartConfigurationSession",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/configurationsessions",
-	Code: 201})
+	Code: 201}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "configuration_token"}}, DirectMask: 0x10}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Next-Poll-Configuration-Token"}}, DirectMask: 0x80}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Next-Poll-Interval-In-Seconds"}}, DirectMask: 0x80}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Content-Type"}}, DirectMask: 0x80}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}, nil, nil, &smithytraits.HTTPPayload{}}, DirectMask: 0x800}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Version-Label"}}, DirectMask: 0x80}
 
-var _AppConfigData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfigdata",
-	Name:      "AppConfigData",
-}, smithy.ShapeTypeService, 0)
+var mBadRequestDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sBadRequestDetails_InvalidParameters}}
+var mBadRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sBadRequestException_Message, &sBadRequestException_Reason, &sBadRequestException_Details}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_Message}}
+var mInvalidParameterDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidParameterDetail_Problem}}
+var m_InvalidParameterMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_InvalidParameterMap_key, &s_InvalidParameterMap_value}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message, &sResourceNotFoundException_ResourceType, &sResourceNotFoundException_ReferencedBy}}
+var m_StringMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_StringMap_key, &s_StringMap_value}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_Message}}
+var mGetLatestConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetLatestConfigurationRequest_ConfigurationToken}}
+var mGetLatestConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetLatestConfigurationResponse_NextPollConfigurationToken, &sGetLatestConfigurationResponse_NextPollIntervalInSeconds, &sGetLatestConfigurationResponse_ContentType, &sGetLatestConfigurationResponse_Configuration, &sGetLatestConfigurationResponse_VersionLabel}}
+var mStartConfigurationSessionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartConfigurationSessionRequest_ApplicationIdentifier, &sStartConfigurationSessionRequest_EnvironmentIdentifier, &sStartConfigurationSessionRequest_ConfigurationProfileIdentifier, &sStartConfigurationSessionRequest_RequiredMinimumPollIntervalInSeconds}}
+var mStartConfigurationSessionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartConfigurationSessionResponse_InitialConfigurationToken}}
 
-var AppConfigData = smithy.NewServiceSchema(_AppConfigData, "2021-11-11")
+var sGetLatestConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLatestConfiguration, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sStartConfigurationSession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartConfigurationSession, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var s_AppConfigData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AppConfigData, Type: smithy.ShapeTypeService})
+var sBadRequestDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBadRequestDetails, Members: &mBadRequestDetails, Type: smithy.ShapeTypeUnion})
+var sBadRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBadRequestException, Members: &mBadRequestException, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var s_BadRequestReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BadRequestReason, Type: smithy.ShapeTypeString})
+var s_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Identifier, Type: smithy.ShapeTypeString})
+var s_Integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t3, Type: smithy.ShapeTypeStructure})
+var sInvalidParameterDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidParameterDetail, Members: &mInvalidParameterDetail, Type: smithy.ShapeTypeStructure})
+var s_InvalidParameterMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InvalidParameterMap, Members: &m_InvalidParameterMap, Type: smithy.ShapeTypeMap})
+var s_InvalidParameterProblem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InvalidParameterProblem, Type: smithy.ShapeTypeString})
+var s_OptionalPollSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OptionalPollSeconds, Type: smithy.ShapeTypeInteger})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t4, Type: smithy.ShapeTypeStructure})
+var s_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceType, Type: smithy.ShapeTypeString})
+var s_SensitiveBlob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensitiveBlob, Traits: &t5, Type: smithy.ShapeTypeBlob})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString})
+var s_StringMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringMap, Members: &m_StringMap, Type: smithy.ShapeTypeMap})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t6, Type: smithy.ShapeTypeStructure})
+var s_Token = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Token, Type: smithy.ShapeTypeString})
+var sGetLatestConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLatestConfigurationRequest, Members: &mGetLatestConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sGetLatestConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLatestConfigurationResponse, Members: &mGetLatestConfigurationResponse, Type: smithy.ShapeTypeStructure})
+var sStartConfigurationSessionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartConfigurationSessionRequest, Members: &mStartConfigurationSessionRequest, Type: smithy.ShapeTypeStructure})
+var sStartConfigurationSessionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartConfigurationSessionResponse, Members: &mStartConfigurationSessionResponse, Type: smithy.ShapeTypeStructure})
 
-var BadRequestDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfigdata",
-	Name:      "BadRequestDetails",
-}, smithy.ShapeTypeUnion, 1)
-var BadRequestDetails_InvalidParameters *smithy.Schema
+var sBadRequestDetails_InvalidParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvalidParameters", ID: &i_InvalidParameterMap, Members: &m_InvalidParameterMap, Type: smithy.ShapeTypeMap})
+var sBadRequestException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sBadRequestException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &i_BadRequestReason, Type: smithy.ShapeTypeString})
+var sBadRequestException_Details = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Details", ID: &iBadRequestDetails, Members: &mBadRequestDetails, Type: smithy.ShapeTypeUnion})
+var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sInvalidParameterDetail_Problem = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Problem", ID: &i_InvalidParameterProblem, Type: smithy.ShapeTypeString})
+var s_InvalidParameterMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_InvalidParameterMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iInvalidParameterDetail, Members: &mInvalidParameterDetail, Type: smithy.ShapeTypeStructure})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i_ResourceType, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_ReferencedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReferencedBy", ID: &i_StringMap, Members: &m_StringMap, Type: smithy.ShapeTypeMap})
+var s_StringMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_StringMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_String, Type: smithy.ShapeTypeString})
+var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetLatestConfigurationRequest_ConfigurationToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationToken", ID: &i_Token, Traits: &t7, Type: smithy.ShapeTypeString})
+var sGetLatestConfigurationResponse_NextPollConfigurationToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextPollConfigurationToken", ID: &i_Token, Traits: &t8, Type: smithy.ShapeTypeString})
+var sGetLatestConfigurationResponse_NextPollIntervalInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextPollIntervalInSeconds", ID: &i_Integer, Traits: &t9, Type: smithy.ShapeTypeInteger})
+var sGetLatestConfigurationResponse_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentType", ID: &i_String, Traits: &t10, Type: smithy.ShapeTypeString})
+var sGetLatestConfigurationResponse_Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Configuration", ID: &i_SensitiveBlob, Traits: &t11, Type: smithy.ShapeTypeBlob})
+var sGetLatestConfigurationResponse_VersionLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionLabel", ID: &i_String, Traits: &t12, Type: smithy.ShapeTypeString})
+var sStartConfigurationSessionRequest_ApplicationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationIdentifier", ID: &i_Identifier, Type: smithy.ShapeTypeString})
+var sStartConfigurationSessionRequest_EnvironmentIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentIdentifier", ID: &i_Identifier, Type: smithy.ShapeTypeString})
+var sStartConfigurationSessionRequest_ConfigurationProfileIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationProfileIdentifier", ID: &i_Identifier, Type: smithy.ShapeTypeString})
+var sStartConfigurationSessionRequest_RequiredMinimumPollIntervalInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequiredMinimumPollIntervalInSeconds", ID: &i_OptionalPollSeconds, Type: smithy.ShapeTypeInteger})
+var sStartConfigurationSessionResponse_InitialConfigurationToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InitialConfigurationToken", ID: &i_Token, Type: smithy.ShapeTypeString})
 
-var BadRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfigdata",
-	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var BadRequestException_Message *smithy.Schema
+var GetLatestConfiguration = &sGetLatestConfiguration
 
-var BadRequestException_Reason *smithy.Schema
+var StartConfigurationSession = &sStartConfigurationSession
 
-var BadRequestException_Details *smithy.Schema
+var _AppConfigData = &s_AppConfigData
 
-var _BadRequestReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfigdata",
-	Name:      "BadRequestReason",
-}, smithy.ShapeTypeString, 0)
+var BadRequestDetails = &sBadRequestDetails
+var BadRequestDetails_InvalidParameters = &sBadRequestDetails_InvalidParameters
 
-var _Identifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfigdata",
-	Name:      "Identifier",
-}, smithy.ShapeTypeString, 0)
+var BadRequestException = &sBadRequestException
+var BadRequestException_Message = &sBadRequestException_Message
+var BadRequestException_Reason = &sBadRequestException_Reason
+var BadRequestException_Details = &sBadRequestException_Details
 
-var _Integer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfigdata",
-	Name:      "Integer",
-}, smithy.ShapeTypeInteger, 0)
+var _BadRequestReason = &s_BadRequestReason
 
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfigdata",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_Message *smithy.Schema
+var _Identifier = &s_Identifier
 
-var InvalidParameterDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfigdata",
-	Name:      "InvalidParameterDetail",
-}, smithy.ShapeTypeStructure, 1)
-var InvalidParameterDetail_Problem *smithy.Schema
+var _Integer = &s_Integer
 
-var _InvalidParameterMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfigdata",
-	Name:      "InvalidParameterMap",
-}, smithy.ShapeTypeMap, 2)
-var _InvalidParameterMap_key *smithy.Schema
+var InternalServerException = &sInternalServerException
+var InternalServerException_Message = &sInternalServerException_Message
 
-var _InvalidParameterMap_value *smithy.Schema
+var InvalidParameterDetail = &sInvalidParameterDetail
+var InvalidParameterDetail_Problem = &sInvalidParameterDetail_Problem
 
-var _InvalidParameterProblem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfigdata",
-	Name:      "InvalidParameterProblem",
-}, smithy.ShapeTypeString, 0)
+var _InvalidParameterMap = &s_InvalidParameterMap
+var _InvalidParameterMap_key = &s_InvalidParameterMap_key
+var _InvalidParameterMap_value = &s_InvalidParameterMap_value
 
-var _OptionalPollSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfigdata",
-	Name:      "OptionalPollSeconds",
-}, smithy.ShapeTypeInteger, 0)
+var _InvalidParameterProblem = &s_InvalidParameterProblem
 
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfigdata",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
+var _OptionalPollSeconds = &s_OptionalPollSeconds
 
-var ResourceNotFoundException_ResourceType *smithy.Schema
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+var ResourceNotFoundException_ResourceType = &sResourceNotFoundException_ResourceType
+var ResourceNotFoundException_ReferencedBy = &sResourceNotFoundException_ReferencedBy
 
-var ResourceNotFoundException_ReferencedBy *smithy.Schema
+var _ResourceType = &s_ResourceType
 
-var _ResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfigdata",
-	Name:      "ResourceType",
-}, smithy.ShapeTypeString, 0)
+var _SensitiveBlob = &s_SensitiveBlob
 
-var _SensitiveBlob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfigdata",
-	Name:      "SensitiveBlob",
-}, smithy.ShapeTypeBlob, 0, &smithytraits.Sensitive{})
+var _String = &s_String
 
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfigdata",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
+var _StringMap = &s_StringMap
+var _StringMap_key = &s_StringMap_key
+var _StringMap_value = &s_StringMap_value
 
-var _StringMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfigdata",
-	Name:      "StringMap",
-}, smithy.ShapeTypeMap, 2)
-var _StringMap_key *smithy.Schema
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_Message = &sThrottlingException_Message
 
-var _StringMap_value *smithy.Schema
+var _Token = &s_Token
 
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfigdata",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_Message *smithy.Schema
+var GetLatestConfigurationRequest = &sGetLatestConfigurationRequest
+var GetLatestConfigurationRequest_ConfigurationToken = &sGetLatestConfigurationRequest_ConfigurationToken
 
-var _Token = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfigdata",
-	Name:      "Token",
-}, smithy.ShapeTypeString, 0)
+var GetLatestConfigurationResponse = &sGetLatestConfigurationResponse
+var GetLatestConfigurationResponse_NextPollConfigurationToken = &sGetLatestConfigurationResponse_NextPollConfigurationToken
+var GetLatestConfigurationResponse_NextPollIntervalInSeconds = &sGetLatestConfigurationResponse_NextPollIntervalInSeconds
+var GetLatestConfigurationResponse_ContentType = &sGetLatestConfigurationResponse_ContentType
+var GetLatestConfigurationResponse_Configuration = &sGetLatestConfigurationResponse_Configuration
+var GetLatestConfigurationResponse_VersionLabel = &sGetLatestConfigurationResponse_VersionLabel
 
-var GetLatestConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfigdata",
-	Name:      "GetLatestConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetLatestConfigurationRequest_ConfigurationToken *smithy.Schema
+var StartConfigurationSessionRequest = &sStartConfigurationSessionRequest
+var StartConfigurationSessionRequest_ApplicationIdentifier = &sStartConfigurationSessionRequest_ApplicationIdentifier
+var StartConfigurationSessionRequest_EnvironmentIdentifier = &sStartConfigurationSessionRequest_EnvironmentIdentifier
+var StartConfigurationSessionRequest_ConfigurationProfileIdentifier = &sStartConfigurationSessionRequest_ConfigurationProfileIdentifier
+var StartConfigurationSessionRequest_RequiredMinimumPollIntervalInSeconds = &sStartConfigurationSessionRequest_RequiredMinimumPollIntervalInSeconds
 
-var GetLatestConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfigdata",
-	Name:      "GetLatestConfigurationResponse",
-}, smithy.ShapeTypeStructure, 5)
-var GetLatestConfigurationResponse_NextPollConfigurationToken *smithy.Schema
+var StartConfigurationSessionResponse = &sStartConfigurationSessionResponse
+var StartConfigurationSessionResponse_InitialConfigurationToken = &sStartConfigurationSessionResponse_InitialConfigurationToken
 
-var GetLatestConfigurationResponse_NextPollIntervalInSeconds *smithy.Schema
-
-var GetLatestConfigurationResponse_ContentType *smithy.Schema
-
-var GetLatestConfigurationResponse_Configuration *smithy.Schema
-
-var GetLatestConfigurationResponse_VersionLabel *smithy.Schema
-
-var StartConfigurationSessionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfigdata",
-	Name:      "StartConfigurationSessionRequest",
-}, smithy.ShapeTypeStructure, 4)
-var StartConfigurationSessionRequest_ApplicationIdentifier *smithy.Schema
-
-var StartConfigurationSessionRequest_EnvironmentIdentifier *smithy.Schema
-
-var StartConfigurationSessionRequest_ConfigurationProfileIdentifier *smithy.Schema
-
-var StartConfigurationSessionRequest_RequiredMinimumPollIntervalInSeconds *smithy.Schema
-
-var StartConfigurationSessionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appconfigdata",
-	Name:      "StartConfigurationSessionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartConfigurationSessionResponse_InitialConfigurationToken *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	InvalidParameterDetail_Problem = InvalidParameterDetail.AddMember("Problem", _InvalidParameterProblem)
-
-	_InvalidParameterMap_key = _InvalidParameterMap.AddMember("key", _String)
-
-	_InvalidParameterMap_value = _InvalidParameterMap.AddMember("value", InvalidParameterDetail)
-
-	BadRequestDetails_InvalidParameters = BadRequestDetails.AddMember("InvalidParameters", _InvalidParameterMap)
-
-	BadRequestException_Message = BadRequestException.AddMember("Message", _String)
-
-	BadRequestException_Reason = BadRequestException.AddMember("Reason", _BadRequestReason)
-
-	BadRequestException_Details = BadRequestException.AddMember("Details", BadRequestDetails)
-
-	InternalServerException_Message = InternalServerException.AddMember("Message", _String)
-
-	_StringMap_key = _StringMap.AddMember("key", _String)
-
-	_StringMap_value = _StringMap.AddMember("value", _String)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _String)
-
-	ResourceNotFoundException_ResourceType = ResourceNotFoundException.AddMember("ResourceType", _ResourceType)
-
-	ResourceNotFoundException_ReferencedBy = ResourceNotFoundException.AddMember("ReferencedBy", _StringMap)
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", _String)
-
-	GetLatestConfigurationRequest_ConfigurationToken = GetLatestConfigurationRequest.AddMember("ConfigurationToken", _Token, &smithytraits.HTTPQuery{Name: "configuration_token"})
-
-	GetLatestConfigurationResponse_NextPollConfigurationToken = GetLatestConfigurationResponse.AddMember("NextPollConfigurationToken", _Token, &smithytraits.HTTPHeader{Name: "Next-Poll-Configuration-Token"})
-
-	GetLatestConfigurationResponse_NextPollIntervalInSeconds = GetLatestConfigurationResponse.AddMember("NextPollIntervalInSeconds", _Integer, &smithytraits.HTTPHeader{Name: "Next-Poll-Interval-In-Seconds"})
-
-	GetLatestConfigurationResponse_ContentType = GetLatestConfigurationResponse.AddMember("ContentType", _String, &smithytraits.HTTPHeader{Name: "Content-Type"})
-
-	GetLatestConfigurationResponse_Configuration = GetLatestConfigurationResponse.AddMember("Configuration", _SensitiveBlob, &smithytraits.HTTPPayload{})
-
-	GetLatestConfigurationResponse_VersionLabel = GetLatestConfigurationResponse.AddMember("VersionLabel", _String, &smithytraits.HTTPHeader{Name: "Version-Label"})
-
-	StartConfigurationSessionRequest_ApplicationIdentifier = StartConfigurationSessionRequest.AddMember("ApplicationIdentifier", _Identifier)
-
-	StartConfigurationSessionRequest_EnvironmentIdentifier = StartConfigurationSessionRequest.AddMember("EnvironmentIdentifier", _Identifier)
-
-	StartConfigurationSessionRequest_ConfigurationProfileIdentifier = StartConfigurationSessionRequest.AddMember("ConfigurationProfileIdentifier", _Identifier)
-
-	StartConfigurationSessionRequest_RequiredMinimumPollIntervalInSeconds = StartConfigurationSessionRequest.AddMember("RequiredMinimumPollIntervalInSeconds", _OptionalPollSeconds)
-
-	StartConfigurationSessionResponse_InitialConfigurationToken = StartConfigurationSessionResponse.AddMember("InitialConfigurationToken", _Token)
-
-}
+var AppConfigData = &smithy.ServiceSchema{Schema: &s_AppConfigData, Version: "2021-11-11"}

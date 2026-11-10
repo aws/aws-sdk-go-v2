@@ -4,3543 +4,2610 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AssociateExternalConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "AssociateExternalConnection",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/v1/repository/external-connection",
-	Code: 200})
+var (
+	iAssociateExternalConnection                  = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "AssociateExternalConnection"}
+	iCopyPackageVersions                          = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "CopyPackageVersions"}
+	iCreateDomain                                 = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "CreateDomain"}
+	iCreatePackageGroup                           = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "CreatePackageGroup"}
+	iCreateRepository                             = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "CreateRepository"}
+	iDeleteDomain                                 = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "DeleteDomain"}
+	iDeleteDomainPermissionsPolicy                = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "DeleteDomainPermissionsPolicy"}
+	iDeletePackage                                = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "DeletePackage"}
+	iDeletePackageGroup                           = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "DeletePackageGroup"}
+	iDeletePackageVersions                        = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "DeletePackageVersions"}
+	iDeleteRepository                             = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "DeleteRepository"}
+	iDeleteRepositoryPermissionsPolicy            = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "DeleteRepositoryPermissionsPolicy"}
+	iDescribeDomain                               = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "DescribeDomain"}
+	iDescribePackage                              = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "DescribePackage"}
+	iDescribePackageGroup                         = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "DescribePackageGroup"}
+	iDescribePackageVersion                       = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "DescribePackageVersion"}
+	iDescribeRepository                           = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "DescribeRepository"}
+	iDisassociateExternalConnection               = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "DisassociateExternalConnection"}
+	iDisposePackageVersions                       = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "DisposePackageVersions"}
+	iGetAssociatedPackageGroup                    = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "GetAssociatedPackageGroup"}
+	iGetAuthorizationToken                        = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "GetAuthorizationToken"}
+	iGetDomainPermissionsPolicy                   = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "GetDomainPermissionsPolicy"}
+	iGetPackageVersionAsset                       = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "GetPackageVersionAsset"}
+	iGetPackageVersionReadme                      = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "GetPackageVersionReadme"}
+	iGetRepositoryEndpoint                        = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "GetRepositoryEndpoint"}
+	iGetRepositoryPermissionsPolicy               = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "GetRepositoryPermissionsPolicy"}
+	iListAllowedRepositoriesForGroup              = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ListAllowedRepositoriesForGroup"}
+	iListAssociatedPackages                       = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ListAssociatedPackages"}
+	iListDomains                                  = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ListDomains"}
+	iListPackageGroups                            = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ListPackageGroups"}
+	iListPackages                                 = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ListPackages"}
+	iListPackageVersionAssets                     = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ListPackageVersionAssets"}
+	iListPackageVersionDependencies               = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ListPackageVersionDependencies"}
+	iListPackageVersions                          = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ListPackageVersions"}
+	iListRepositories                             = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ListRepositories"}
+	iListRepositoriesInDomain                     = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ListRepositoriesInDomain"}
+	iListSubPackageGroups                         = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ListSubPackageGroups"}
+	iListTagsForResource                          = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ListTagsForResource"}
+	iPublishPackageVersion                        = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PublishPackageVersion"}
+	iPutDomainPermissionsPolicy                   = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PutDomainPermissionsPolicy"}
+	iPutPackageOriginConfiguration                = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PutPackageOriginConfiguration"}
+	iPutRepositoryPermissionsPolicy               = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PutRepositoryPermissionsPolicy"}
+	iTagResource                                  = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "TagResource"}
+	iUntagResource                                = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "UntagResource"}
+	iUpdatePackageGroup                           = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "UpdatePackageGroup"}
+	iUpdatePackageGroupOriginConfiguration        = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "UpdatePackageGroupOriginConfiguration"}
+	iUpdatePackageVersionsStatus                  = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "UpdatePackageVersionsStatus"}
+	iUpdateRepository                             = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "UpdateRepository"}
+	i_CodeArtifactControlPlaneService             = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "CodeArtifactControlPlaneService"}
+	iAccessDeniedException                        = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "AccessDeniedException"}
+	i_AccountId                                   = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "AccountId"}
+	iAllowPublish                                 = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "AllowPublish"}
+	iAllowUpstream                                = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "AllowUpstream"}
+	i_Arn                                         = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "Arn"}
+	i_Asset                                       = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "Asset"}
+	i_AssetHashes                                 = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "AssetHashes"}
+	i_AssetName                                   = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "AssetName"}
+	iAssetSummary                                 = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "AssetSummary"}
+	i_AssetSummaryList                            = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "AssetSummaryList"}
+	iAssociatedPackage                            = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "AssociatedPackage"}
+	i_AssociatedPackageList                       = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "AssociatedPackageList"}
+	i_AuthorizationTokenDurationSeconds           = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "AuthorizationTokenDurationSeconds"}
+	i_BooleanOptional                             = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "BooleanOptional"}
+	iConflictException                            = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ConflictException"}
+	i_Description                                 = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "Description"}
+	iDomainDescription                            = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "DomainDescription"}
+	iDomainEntryPoint                             = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "DomainEntryPoint"}
+	i_DomainName                                  = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "DomainName"}
+	iDomainStatus                                 = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "DomainStatus"}
+	iDomainSummary                                = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "DomainSummary"}
+	i_DomainSummaryList                           = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "DomainSummaryList"}
+	iEndpointType                                 = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "EndpointType"}
+	i_ErrorMessage                                = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ErrorMessage"}
+	i_ExternalConnectionName                      = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ExternalConnectionName"}
+	iExternalConnectionStatus                     = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ExternalConnectionStatus"}
+	iHashAlgorithm                                = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "HashAlgorithm"}
+	i_HashValue                                   = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "HashValue"}
+	i_Integer                                     = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "Integer"}
+	iInternalServerException                      = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "InternalServerException"}
+	iLicenseInfo                                  = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "LicenseInfo"}
+	i_LicenseInfoList                             = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "LicenseInfoList"}
+	i_ListAllowedRepositoriesForGroupMaxResults   = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ListAllowedRepositoriesForGroupMaxResults"}
+	i_ListDomainsMaxResults                       = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ListDomainsMaxResults"}
+	i_ListPackageGroupsMaxResults                 = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ListPackageGroupsMaxResults"}
+	i_ListPackagesMaxResults                      = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ListPackagesMaxResults"}
+	i_ListPackageVersionAssetsMaxResults          = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ListPackageVersionAssetsMaxResults"}
+	i_ListPackageVersionsMaxResults               = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ListPackageVersionsMaxResults"}
+	i_ListRepositoriesInDomainMaxResults          = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ListRepositoriesInDomainMaxResults"}
+	i_ListRepositoriesMaxResults                  = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ListRepositoriesMaxResults"}
+	i_Long                                        = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "Long"}
+	i_LongOptional                                = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "LongOptional"}
+	i_OriginRestrictions                          = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "OriginRestrictions"}
+	iPackageDependency                            = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PackageDependency"}
+	i_PackageDependencyList                       = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PackageDependencyList"}
+	iPackageDescription                           = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PackageDescription"}
+	iPackageFormat                                = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PackageFormat"}
+	iPackageGroupAllowedRepository                = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PackageGroupAllowedRepository"}
+	i_PackageGroupAllowedRepositoryList           = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PackageGroupAllowedRepositoryList"}
+	i_PackageGroupAllowedRepositoryUpdate         = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PackageGroupAllowedRepositoryUpdate"}
+	i_PackageGroupAllowedRepositoryUpdates        = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PackageGroupAllowedRepositoryUpdates"}
+	iPackageGroupAllowedRepositoryUpdateType      = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PackageGroupAllowedRepositoryUpdateType"}
+	iPackageGroupAssociationType                  = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PackageGroupAssociationType"}
+	i_PackageGroupContactInfo                     = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PackageGroupContactInfo"}
+	iPackageGroupDescription                      = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PackageGroupDescription"}
+	iPackageGroupOriginConfiguration              = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PackageGroupOriginConfiguration"}
+	iPackageGroupOriginRestriction                = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PackageGroupOriginRestriction"}
+	iPackageGroupOriginRestrictionMode            = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PackageGroupOriginRestrictionMode"}
+	i_PackageGroupOriginRestrictions              = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PackageGroupOriginRestrictions"}
+	iPackageGroupOriginRestrictionType            = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PackageGroupOriginRestrictionType"}
+	i_PackageGroupPattern                         = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PackageGroupPattern"}
+	i_PackageGroupPatternPrefix                   = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PackageGroupPatternPrefix"}
+	iPackageGroupReference                        = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PackageGroupReference"}
+	iPackageGroupSummary                          = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PackageGroupSummary"}
+	i_PackageGroupSummaryList                     = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PackageGroupSummaryList"}
+	i_PackageName                                 = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PackageName"}
+	i_PackageNamespace                            = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PackageNamespace"}
+	iPackageOriginConfiguration                   = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PackageOriginConfiguration"}
+	iPackageOriginRestrictions                    = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PackageOriginRestrictions"}
+	iPackageSummary                               = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PackageSummary"}
+	i_PackageSummaryList                          = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PackageSummaryList"}
+	i_PackageVersion                              = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PackageVersion"}
+	iPackageVersionDescription                    = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PackageVersionDescription"}
+	iPackageVersionError                          = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PackageVersionError"}
+	iPackageVersionErrorCode                      = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PackageVersionErrorCode"}
+	i_PackageVersionErrorMap                      = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PackageVersionErrorMap"}
+	i_PackageVersionList                          = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PackageVersionList"}
+	iPackageVersionOrigin                         = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PackageVersionOrigin"}
+	iPackageVersionOriginType                     = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PackageVersionOriginType"}
+	i_PackageVersionRevision                      = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PackageVersionRevision"}
+	i_PackageVersionRevisionMap                   = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PackageVersionRevisionMap"}
+	iPackageVersionSortType                       = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PackageVersionSortType"}
+	iPackageVersionStatus                         = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PackageVersionStatus"}
+	iPackageVersionSummary                        = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PackageVersionSummary"}
+	i_PackageVersionSummaryList                   = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PackageVersionSummaryList"}
+	i_PaginationToken                             = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PaginationToken"}
+	i_PolicyDocument                              = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PolicyDocument"}
+	i_PolicyRevision                              = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PolicyRevision"}
+	iRepositoryDescription                        = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "RepositoryDescription"}
+	iRepositoryExternalConnectionInfo             = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "RepositoryExternalConnectionInfo"}
+	i_RepositoryExternalConnectionInfoList        = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "RepositoryExternalConnectionInfoList"}
+	i_RepositoryName                              = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "RepositoryName"}
+	i_RepositoryNameList                          = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "RepositoryNameList"}
+	iRepositorySummary                            = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "RepositorySummary"}
+	i_RepositorySummaryList                       = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "RepositorySummaryList"}
+	iResourceNotFoundException                    = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ResourceNotFoundException"}
+	iResourcePolicy                               = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ResourcePolicy"}
+	iResourceType                                 = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ResourceType"}
+	i_RetryAfterSeconds                           = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "RetryAfterSeconds"}
+	iServiceQuotaExceededException                = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ServiceQuotaExceededException"}
+	i_SHA256                                      = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "SHA256"}
+	i_String                                      = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "String"}
+	i_String255                                   = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "String255"}
+	iSuccessfulPackageVersionInfo                 = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "SuccessfulPackageVersionInfo"}
+	i_SuccessfulPackageVersionInfoMap             = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "SuccessfulPackageVersionInfoMap"}
+	iTag                                          = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "Tag"}
+	i_TagKey                                      = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "TagKey"}
+	i_TagKeyList                                  = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "TagKeyList"}
+	i_TagList                                     = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "TagList"}
+	i_TagValue                                    = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "TagValue"}
+	iThrottlingException                          = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ThrottlingException"}
+	i_Timestamp                                   = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "Timestamp"}
+	iUpstreamRepository                           = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "UpstreamRepository"}
+	iUpstreamRepositoryInfo                       = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "UpstreamRepositoryInfo"}
+	i_UpstreamRepositoryInfoList                  = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "UpstreamRepositoryInfoList"}
+	i_UpstreamRepositoryList                      = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "UpstreamRepositoryList"}
+	iValidationException                          = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ValidationException"}
+	iValidationExceptionReason                    = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ValidationExceptionReason"}
+	iAssociateExternalConnectionRequest           = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "AssociateExternalConnectionRequest"}
+	iAssociateExternalConnectionResult            = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "AssociateExternalConnectionResult"}
+	iCopyPackageVersionsRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "CopyPackageVersionsRequest"}
+	iCopyPackageVersionsResult                    = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "CopyPackageVersionsResult"}
+	iCreateDomainRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "CreateDomainRequest"}
+	iCreateDomainResult                           = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "CreateDomainResult"}
+	iCreatePackageGroupRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "CreatePackageGroupRequest"}
+	iCreatePackageGroupResult                     = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "CreatePackageGroupResult"}
+	iCreateRepositoryRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "CreateRepositoryRequest"}
+	iCreateRepositoryResult                       = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "CreateRepositoryResult"}
+	iDeleteDomainRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "DeleteDomainRequest"}
+	iDeleteDomainResult                           = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "DeleteDomainResult"}
+	iDeleteDomainPermissionsPolicyRequest         = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "DeleteDomainPermissionsPolicyRequest"}
+	iDeleteDomainPermissionsPolicyResult          = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "DeleteDomainPermissionsPolicyResult"}
+	iDeletePackageGroupRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "DeletePackageGroupRequest"}
+	iDeletePackageGroupResult                     = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "DeletePackageGroupResult"}
+	iDeletePackageRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "DeletePackageRequest"}
+	iDeletePackageResult                          = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "DeletePackageResult"}
+	iDeletePackageVersionsRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "DeletePackageVersionsRequest"}
+	iDeletePackageVersionsResult                  = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "DeletePackageVersionsResult"}
+	iDeleteRepositoryRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "DeleteRepositoryRequest"}
+	iDeleteRepositoryResult                       = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "DeleteRepositoryResult"}
+	iDeleteRepositoryPermissionsPolicyRequest     = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "DeleteRepositoryPermissionsPolicyRequest"}
+	iDeleteRepositoryPermissionsPolicyResult      = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "DeleteRepositoryPermissionsPolicyResult"}
+	iDescribeDomainRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "DescribeDomainRequest"}
+	iDescribeDomainResult                         = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "DescribeDomainResult"}
+	iDescribePackageGroupRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "DescribePackageGroupRequest"}
+	iDescribePackageGroupResult                   = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "DescribePackageGroupResult"}
+	iDescribePackageRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "DescribePackageRequest"}
+	iDescribePackageResult                        = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "DescribePackageResult"}
+	iDescribePackageVersionRequest                = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "DescribePackageVersionRequest"}
+	iDescribePackageVersionResult                 = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "DescribePackageVersionResult"}
+	iDescribeRepositoryRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "DescribeRepositoryRequest"}
+	iDescribeRepositoryResult                     = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "DescribeRepositoryResult"}
+	iDisassociateExternalConnectionRequest        = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "DisassociateExternalConnectionRequest"}
+	iDisassociateExternalConnectionResult         = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "DisassociateExternalConnectionResult"}
+	iDisposePackageVersionsRequest                = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "DisposePackageVersionsRequest"}
+	iDisposePackageVersionsResult                 = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "DisposePackageVersionsResult"}
+	iGetAssociatedPackageGroupRequest             = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "GetAssociatedPackageGroupRequest"}
+	iGetAssociatedPackageGroupResult              = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "GetAssociatedPackageGroupResult"}
+	iGetAuthorizationTokenRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "GetAuthorizationTokenRequest"}
+	iGetAuthorizationTokenResult                  = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "GetAuthorizationTokenResult"}
+	iGetDomainPermissionsPolicyRequest            = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "GetDomainPermissionsPolicyRequest"}
+	iGetDomainPermissionsPolicyResult             = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "GetDomainPermissionsPolicyResult"}
+	iGetPackageVersionAssetRequest                = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "GetPackageVersionAssetRequest"}
+	iGetPackageVersionAssetResult                 = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "GetPackageVersionAssetResult"}
+	iGetPackageVersionReadmeRequest               = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "GetPackageVersionReadmeRequest"}
+	iGetPackageVersionReadmeResult                = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "GetPackageVersionReadmeResult"}
+	iGetRepositoryEndpointRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "GetRepositoryEndpointRequest"}
+	iGetRepositoryEndpointResult                  = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "GetRepositoryEndpointResult"}
+	iGetRepositoryPermissionsPolicyRequest        = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "GetRepositoryPermissionsPolicyRequest"}
+	iGetRepositoryPermissionsPolicyResult         = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "GetRepositoryPermissionsPolicyResult"}
+	iListAllowedRepositoriesForGroupRequest       = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ListAllowedRepositoriesForGroupRequest"}
+	iListAllowedRepositoriesForGroupResult        = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ListAllowedRepositoriesForGroupResult"}
+	iListAssociatedPackagesRequest                = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ListAssociatedPackagesRequest"}
+	iListAssociatedPackagesResult                 = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ListAssociatedPackagesResult"}
+	iListDomainsRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ListDomainsRequest"}
+	iListDomainsResult                            = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ListDomainsResult"}
+	iListPackageGroupsRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ListPackageGroupsRequest"}
+	iListPackageGroupsResult                      = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ListPackageGroupsResult"}
+	iListPackagesRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ListPackagesRequest"}
+	iListPackagesResult                           = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ListPackagesResult"}
+	iListPackageVersionAssetsRequest              = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ListPackageVersionAssetsRequest"}
+	iListPackageVersionAssetsResult               = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ListPackageVersionAssetsResult"}
+	iListPackageVersionDependenciesRequest        = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ListPackageVersionDependenciesRequest"}
+	iListPackageVersionDependenciesResult         = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ListPackageVersionDependenciesResult"}
+	iListPackageVersionsRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ListPackageVersionsRequest"}
+	iListPackageVersionsResult                    = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ListPackageVersionsResult"}
+	iListRepositoriesInDomainRequest              = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ListRepositoriesInDomainRequest"}
+	iListRepositoriesInDomainResult               = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ListRepositoriesInDomainResult"}
+	iListRepositoriesRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ListRepositoriesRequest"}
+	iListRepositoriesResult                       = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ListRepositoriesResult"}
+	iListSubPackageGroupsRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ListSubPackageGroupsRequest"}
+	iListSubPackageGroupsResult                   = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ListSubPackageGroupsResult"}
+	iListTagsForResourceRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResult                    = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "ListTagsForResourceResult"}
+	iPublishPackageVersionRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PublishPackageVersionRequest"}
+	iPublishPackageVersionResult                  = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PublishPackageVersionResult"}
+	iPutDomainPermissionsPolicyRequest            = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PutDomainPermissionsPolicyRequest"}
+	iPutDomainPermissionsPolicyResult             = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PutDomainPermissionsPolicyResult"}
+	iPutPackageOriginConfigurationRequest         = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PutPackageOriginConfigurationRequest"}
+	iPutPackageOriginConfigurationResult          = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PutPackageOriginConfigurationResult"}
+	iPutRepositoryPermissionsPolicyRequest        = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PutRepositoryPermissionsPolicyRequest"}
+	iPutRepositoryPermissionsPolicyResult         = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "PutRepositoryPermissionsPolicyResult"}
+	iTagResourceRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "TagResourceRequest"}
+	iTagResourceResult                            = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "TagResourceResult"}
+	iUntagResourceRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "UntagResourceRequest"}
+	iUntagResourceResult                          = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "UntagResourceResult"}
+	iUpdatePackageGroupRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "UpdatePackageGroupRequest"}
+	iUpdatePackageGroupOriginConfigurationRequest = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "UpdatePackageGroupOriginConfigurationRequest"}
+	iUpdatePackageGroupOriginConfigurationResult  = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "UpdatePackageGroupOriginConfigurationResult"}
+	iUpdatePackageGroupResult                     = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "UpdatePackageGroupResult"}
+	iUpdatePackageVersionsStatusRequest           = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "UpdatePackageVersionsStatusRequest"}
+	iUpdatePackageVersionsStatusResult            = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "UpdatePackageVersionsStatusResult"}
+	iUpdateRepositoryRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "UpdateRepositoryRequest"}
+	iUpdateRepositoryResult                       = smithy.ShapeID{Namespace: "com.amazonaws.codeartifact", Name: "UpdateRepositoryResult"}
+	pUnit                                         = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
 
-var CopyPackageVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "CopyPackageVersions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+	URI:  "/v1/repository/external-connection",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/package/versions/copy",
-	Code: 200})
-
-var CreateDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "CreateDomain",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/domain",
-	Code: 200})
-
-var CreatePackageGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "CreatePackageGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/package-group",
-	Code: 200})
-
-var CreateRepository = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "CreateRepository",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/repository",
-	Code: 200})
-
-var DeleteDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "DeleteDomain",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/domain",
-	Code: 200})
-
-var DeleteDomainPermissionsPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "DeleteDomainPermissionsPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/domain/permissions/policy",
-	Code: 200})
-
-var DeletePackage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "DeletePackage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/package",
-	Code: 200})
-
-var DeletePackageGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "DeletePackageGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/package-group",
-	Code: 200})
-
-var DeletePackageVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "DeletePackageVersions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/package/versions/delete",
-	Code: 200})
-
-var DeleteRepository = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "DeleteRepository",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/repository",
-	Code: 200})
-
-var DeleteRepositoryPermissionsPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "DeleteRepositoryPermissionsPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/repository/permissions/policies",
-	Code: 200})
-
-var DescribeDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "DescribeDomain",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/domain",
-	Code: 200})
-
-var DescribePackage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "DescribePackage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/package",
-	Code: 200})
-
-var DescribePackageGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "DescribePackageGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/package-group",
-	Code: 200})
-
-var DescribePackageVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "DescribePackageVersion",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/package/version",
-	Code: 200})
-
-var DescribeRepository = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "DescribeRepository",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/repository",
-	Code: 200})
-
-var DisassociateExternalConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "DisassociateExternalConnection",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/repository/external-connection",
-	Code: 200})
-
-var DisposePackageVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "DisposePackageVersions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/package/versions/dispose",
-	Code: 200})
-
-var GetAssociatedPackageGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "GetAssociatedPackageGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/get-associated-package-group",
-	Code: 200})
-
-var GetAuthorizationToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "GetAuthorizationToken",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/authorization-token",
-	Code: 200})
-
-var GetDomainPermissionsPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "GetDomainPermissionsPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/domain/permissions/policy",
-	Code: 200})
-
-var GetPackageVersionAsset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "GetPackageVersionAsset",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/package/version/asset",
-	Code: 200})
-
-var GetPackageVersionReadme = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "GetPackageVersionReadme",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/package/version/readme",
-	Code: 200})
-
-var GetRepositoryEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "GetRepositoryEndpoint",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/repository/endpoint",
-	Code: 200})
-
-var GetRepositoryPermissionsPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "GetRepositoryPermissionsPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/repository/permissions/policy",
-	Code: 200})
-
-var ListAllowedRepositoriesForGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ListAllowedRepositoriesForGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/package-group-allowed-repositories",
-	Code: 200})
-
-var ListAssociatedPackages = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ListAssociatedPackages",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/list-associated-packages",
-	Code: 200})
-
-var ListDomains = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ListDomains",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/domains",
-	Code: 200})
-
-var ListPackageGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ListPackageGroups",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/package-groups",
-	Code: 200})
-
-var ListPackages = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ListPackages",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/packages",
-	Code: 200})
-
-var ListPackageVersionAssets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ListPackageVersionAssets",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/package/version/assets",
-	Code: 200})
-
-var ListPackageVersionDependencies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ListPackageVersionDependencies",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/package/version/dependencies",
-	Code: 200})
-
-var ListPackageVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ListPackageVersions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/package/versions",
-	Code: 200})
-
-var ListRepositories = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ListRepositories",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/repositories",
-	Code: 200})
-
-var ListRepositoriesInDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ListRepositoriesInDomain",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/domain/repositories",
-	Code: 200})
-
-var ListSubPackageGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ListSubPackageGroups",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/package-groups/sub-groups",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/tags",
-	Code: 200})
-
-var PublishPackageVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PublishPackageVersion",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/package/version/publish",
-	Code: 200})
-
-var PutDomainPermissionsPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PutDomainPermissionsPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/domain/permissions/policy",
-	Code: 200})
-
-var PutPackageOriginConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PutPackageOriginConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/package",
-	Code: 200})
-
-var PutRepositoryPermissionsPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PutRepositoryPermissionsPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/repository/permissions/policy",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/tag",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/untag",
-	Code: 200})
-
-var UpdatePackageGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "UpdatePackageGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/package-group",
-	Code: 200})
-
-var UpdatePackageGroupOriginConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "UpdatePackageGroupOriginConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/package-group-origin-configuration",
-	Code: 200})
-
-var UpdatePackageVersionsStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "UpdatePackageVersionsStatus",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/package/versions/update_status",
-	Code: 200})
-
-var UpdateRepository = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "UpdateRepository",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t47 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/repository",
-	Code: 200})
-
-var _CodeArtifactControlPlaneService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "CodeArtifactControlPlaneService",
-}, smithy.ShapeTypeService, 0)
-
-var CodeArtifactControlPlaneService = smithy.NewServiceSchema(_CodeArtifactControlPlaneService, "2018-09-22")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var _AccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "AccountId",
-}, smithy.ShapeTypeString, 0)
-
-var AllowPublish = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "AllowPublish",
-}, smithy.ShapeTypeEnum, 2)
-var AllowPublish_ALLOW *smithy.Schema
-
-var AllowPublish_BLOCK *smithy.Schema
-
-var AllowUpstream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "AllowUpstream",
-}, smithy.ShapeTypeEnum, 2)
-var AllowUpstream_ALLOW *smithy.Schema
-
-var AllowUpstream_BLOCK *smithy.Schema
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var _Asset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "Asset",
-}, smithy.ShapeTypeBlob, 0, &smithytraits.Streaming{})
-
-var _AssetHashes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "AssetHashes",
-}, smithy.ShapeTypeMap, 2)
-var _AssetHashes_key *smithy.Schema
-
-var _AssetHashes_value *smithy.Schema
-
-var _AssetName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "AssetName",
-}, smithy.ShapeTypeString, 0)
-
-var AssetSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "AssetSummary",
-}, smithy.ShapeTypeStructure, 3)
-var AssetSummary_name *smithy.Schema
-
-var AssetSummary_size *smithy.Schema
-
-var AssetSummary_hashes *smithy.Schema
-
-var _AssetSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "AssetSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _AssetSummaryList_member *smithy.Schema
-
-var AssociatedPackage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "AssociatedPackage",
-}, smithy.ShapeTypeStructure, 4)
-var AssociatedPackage_format *smithy.Schema
-
-var AssociatedPackage_namespace *smithy.Schema
-
-var AssociatedPackage_package *smithy.Schema
-
-var AssociatedPackage_associationType *smithy.Schema
-
-var _AssociatedPackageList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "AssociatedPackageList",
-}, smithy.ShapeTypeList, 1)
-var _AssociatedPackageList_member *smithy.Schema
-
-var _AuthorizationTokenDurationSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "AuthorizationTokenDurationSeconds",
-}, smithy.ShapeTypeLong, 0)
-
-var _BooleanOptional = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "BooleanOptional",
-}, smithy.ShapeTypeBoolean, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var ConflictException_resourceId *smithy.Schema
-
-var ConflictException_resourceType *smithy.Schema
-
-var _Description = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "Description",
-}, smithy.ShapeTypeString, 0)
-
-var DomainDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "DomainDescription",
-}, smithy.ShapeTypeStructure, 9)
-var DomainDescription_name *smithy.Schema
-
-var DomainDescription_owner *smithy.Schema
-
-var DomainDescription_arn *smithy.Schema
-
-var DomainDescription_status *smithy.Schema
-
-var DomainDescription_createdTime *smithy.Schema
-
-var DomainDescription_encryptionKey *smithy.Schema
-
-var DomainDescription_repositoryCount *smithy.Schema
-
-var DomainDescription_assetSizeBytes *smithy.Schema
-
-var DomainDescription_s3BucketArn *smithy.Schema
-
-var DomainEntryPoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "DomainEntryPoint",
-}, smithy.ShapeTypeStructure, 2)
-var DomainEntryPoint_repositoryName *smithy.Schema
-
-var DomainEntryPoint_externalConnectionName *smithy.Schema
-
-var _DomainName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "DomainName",
-}, smithy.ShapeTypeString, 0)
-
-var DomainStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "DomainStatus",
-}, smithy.ShapeTypeEnum, 2)
-var DomainStatus_ACTIVE *smithy.Schema
-
-var DomainStatus_DELETED *smithy.Schema
-
-var DomainSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "DomainSummary",
-}, smithy.ShapeTypeStructure, 6)
-var DomainSummary_name *smithy.Schema
-
-var DomainSummary_owner *smithy.Schema
-
-var DomainSummary_arn *smithy.Schema
-
-var DomainSummary_status *smithy.Schema
-
-var DomainSummary_createdTime *smithy.Schema
-
-var DomainSummary_encryptionKey *smithy.Schema
-
-var _DomainSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "DomainSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _DomainSummaryList_member *smithy.Schema
-
-var EndpointType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "EndpointType",
-}, smithy.ShapeTypeEnum, 2)
-var EndpointType_DUALSTACK *smithy.Schema
-
-var EndpointType_IPV4 *smithy.Schema
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _ExternalConnectionName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ExternalConnectionName",
-}, smithy.ShapeTypeString, 0)
-
-var ExternalConnectionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ExternalConnectionStatus",
-}, smithy.ShapeTypeEnum, 1)
-var ExternalConnectionStatus_AVAILABLE *smithy.Schema
-
-var HashAlgorithm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "HashAlgorithm",
-}, smithy.ShapeTypeEnum, 4)
-var HashAlgorithm_MD5 *smithy.Schema
-
-var HashAlgorithm_SHA1 *smithy.Schema
-
-var HashAlgorithm_SHA256 *smithy.Schema
-
-var HashAlgorithm_SHA512 *smithy.Schema
-
-var _HashValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "HashValue",
-}, smithy.ShapeTypeString, 0)
-
-var _Integer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "Integer",
-}, smithy.ShapeTypeInteger, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var LicenseInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "LicenseInfo",
-}, smithy.ShapeTypeStructure, 2)
-var LicenseInfo_name *smithy.Schema
-
-var LicenseInfo_url *smithy.Schema
-
-var _LicenseInfoList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "LicenseInfoList",
-}, smithy.ShapeTypeList, 1)
-var _LicenseInfoList_member *smithy.Schema
-
-var _ListAllowedRepositoriesForGroupMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ListAllowedRepositoriesForGroupMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListDomainsMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ListDomainsMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListPackageGroupsMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ListPackageGroupsMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListPackagesMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ListPackagesMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListPackageVersionAssetsMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ListPackageVersionAssetsMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListPackageVersionsMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ListPackageVersionsMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListRepositoriesInDomainMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ListRepositoriesInDomainMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListRepositoriesMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ListRepositoriesMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Long = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "Long",
-}, smithy.ShapeTypeLong, 0)
-
-var _LongOptional = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "LongOptional",
-}, smithy.ShapeTypeLong, 0)
-
-var _OriginRestrictions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "OriginRestrictions",
-}, smithy.ShapeTypeMap, 2)
-var _OriginRestrictions_key *smithy.Schema
-
-var _OriginRestrictions_value *smithy.Schema
-
-var PackageDependency = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PackageDependency",
-}, smithy.ShapeTypeStructure, 4)
-var PackageDependency_namespace *smithy.Schema
-
-var PackageDependency_package *smithy.Schema
-
-var PackageDependency_dependencyType *smithy.Schema
-
-var PackageDependency_versionRequirement *smithy.Schema
-
-var _PackageDependencyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PackageDependencyList",
-}, smithy.ShapeTypeList, 1)
-var _PackageDependencyList_member *smithy.Schema
-
-var PackageDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PackageDescription",
-}, smithy.ShapeTypeStructure, 4)
-var PackageDescription_format *smithy.Schema
-
-var PackageDescription_namespace *smithy.Schema
-
-var PackageDescription_name *smithy.Schema
-
-var PackageDescription_originConfiguration *smithy.Schema
-
-var PackageFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PackageFormat",
-}, smithy.ShapeTypeEnum, 8)
-var PackageFormat_NPM *smithy.Schema
-
-var PackageFormat_PYPI *smithy.Schema
-
-var PackageFormat_MAVEN *smithy.Schema
-
-var PackageFormat_NUGET *smithy.Schema
-
-var PackageFormat_GENERIC *smithy.Schema
-
-var PackageFormat_RUBY *smithy.Schema
-
-var PackageFormat_SWIFT *smithy.Schema
-
-var PackageFormat_CARGO *smithy.Schema
-
-var PackageGroupAllowedRepository = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PackageGroupAllowedRepository",
-}, smithy.ShapeTypeStructure, 2)
-var PackageGroupAllowedRepository_repositoryName *smithy.Schema
-
-var PackageGroupAllowedRepository_originRestrictionType *smithy.Schema
-
-var _PackageGroupAllowedRepositoryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PackageGroupAllowedRepositoryList",
-}, smithy.ShapeTypeList, 1)
-var _PackageGroupAllowedRepositoryList_member *smithy.Schema
-
-var _PackageGroupAllowedRepositoryUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PackageGroupAllowedRepositoryUpdate",
-}, smithy.ShapeTypeMap, 2)
-var _PackageGroupAllowedRepositoryUpdate_key *smithy.Schema
-
-var _PackageGroupAllowedRepositoryUpdate_value *smithy.Schema
-
-var _PackageGroupAllowedRepositoryUpdates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PackageGroupAllowedRepositoryUpdates",
-}, smithy.ShapeTypeMap, 2)
-var _PackageGroupAllowedRepositoryUpdates_key *smithy.Schema
-
-var _PackageGroupAllowedRepositoryUpdates_value *smithy.Schema
-
-var PackageGroupAllowedRepositoryUpdateType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PackageGroupAllowedRepositoryUpdateType",
-}, smithy.ShapeTypeEnum, 2)
-var PackageGroupAllowedRepositoryUpdateType_ADDED *smithy.Schema
-
-var PackageGroupAllowedRepositoryUpdateType_REMOVED *smithy.Schema
-
-var PackageGroupAssociationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PackageGroupAssociationType",
-}, smithy.ShapeTypeEnum, 2)
-var PackageGroupAssociationType_STRONG *smithy.Schema
-
-var PackageGroupAssociationType_WEAK *smithy.Schema
-
-var _PackageGroupContactInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PackageGroupContactInfo",
-}, smithy.ShapeTypeString, 0)
-
-var PackageGroupDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PackageGroupDescription",
-}, smithy.ShapeTypeStructure, 9)
-var PackageGroupDescription_arn *smithy.Schema
-
-var PackageGroupDescription_pattern *smithy.Schema
-
-var PackageGroupDescription_domainName *smithy.Schema
-
-var PackageGroupDescription_domainOwner *smithy.Schema
-
-var PackageGroupDescription_createdTime *smithy.Schema
-
-var PackageGroupDescription_contactInfo *smithy.Schema
-
-var PackageGroupDescription_description *smithy.Schema
-
-var PackageGroupDescription_originConfiguration *smithy.Schema
-
-var PackageGroupDescription_parent *smithy.Schema
-
-var PackageGroupOriginConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PackageGroupOriginConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var PackageGroupOriginConfiguration_restrictions *smithy.Schema
-
-var PackageGroupOriginRestriction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PackageGroupOriginRestriction",
-}, smithy.ShapeTypeStructure, 4)
-var PackageGroupOriginRestriction_mode *smithy.Schema
-
-var PackageGroupOriginRestriction_effectiveMode *smithy.Schema
-
-var PackageGroupOriginRestriction_inheritedFrom *smithy.Schema
-
-var PackageGroupOriginRestriction_repositoriesCount *smithy.Schema
-
-var PackageGroupOriginRestrictionMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PackageGroupOriginRestrictionMode",
-}, smithy.ShapeTypeEnum, 4)
-var PackageGroupOriginRestrictionMode_ALLOW *smithy.Schema
-
-var PackageGroupOriginRestrictionMode_ALLOW_SPECIFIC_REPOSITORIES *smithy.Schema
-
-var PackageGroupOriginRestrictionMode_BLOCK *smithy.Schema
-
-var PackageGroupOriginRestrictionMode_INHERIT *smithy.Schema
-
-var _PackageGroupOriginRestrictions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PackageGroupOriginRestrictions",
-}, smithy.ShapeTypeMap, 2)
-var _PackageGroupOriginRestrictions_key *smithy.Schema
-
-var _PackageGroupOriginRestrictions_value *smithy.Schema
-
-var PackageGroupOriginRestrictionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PackageGroupOriginRestrictionType",
-}, smithy.ShapeTypeEnum, 3)
-var PackageGroupOriginRestrictionType_EXTERNAL_UPSTREAM *smithy.Schema
-
-var PackageGroupOriginRestrictionType_INTERNAL_UPSTREAM *smithy.Schema
-
-var PackageGroupOriginRestrictionType_PUBLISH *smithy.Schema
-
-var _PackageGroupPattern = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PackageGroupPattern",
-}, smithy.ShapeTypeString, 0)
-
-var _PackageGroupPatternPrefix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PackageGroupPatternPrefix",
-}, smithy.ShapeTypeString, 0)
-
-var PackageGroupReference = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PackageGroupReference",
-}, smithy.ShapeTypeStructure, 2)
-var PackageGroupReference_arn *smithy.Schema
-
-var PackageGroupReference_pattern *smithy.Schema
-
-var PackageGroupSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PackageGroupSummary",
-}, smithy.ShapeTypeStructure, 9)
-var PackageGroupSummary_arn *smithy.Schema
-
-var PackageGroupSummary_pattern *smithy.Schema
-
-var PackageGroupSummary_domainName *smithy.Schema
-
-var PackageGroupSummary_domainOwner *smithy.Schema
-
-var PackageGroupSummary_createdTime *smithy.Schema
-
-var PackageGroupSummary_contactInfo *smithy.Schema
-
-var PackageGroupSummary_description *smithy.Schema
-
-var PackageGroupSummary_originConfiguration *smithy.Schema
-
-var PackageGroupSummary_parent *smithy.Schema
-
-var _PackageGroupSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PackageGroupSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _PackageGroupSummaryList_member *smithy.Schema
-
-var _PackageName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PackageName",
-}, smithy.ShapeTypeString, 0)
-
-var _PackageNamespace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PackageNamespace",
-}, smithy.ShapeTypeString, 0)
-
-var PackageOriginConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PackageOriginConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var PackageOriginConfiguration_restrictions *smithy.Schema
-
-var PackageOriginRestrictions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PackageOriginRestrictions",
-}, smithy.ShapeTypeStructure, 2)
-var PackageOriginRestrictions_publish *smithy.Schema
-
-var PackageOriginRestrictions_upstream *smithy.Schema
-
-var PackageSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PackageSummary",
-}, smithy.ShapeTypeStructure, 4)
-var PackageSummary_format *smithy.Schema
-
-var PackageSummary_namespace *smithy.Schema
-
-var PackageSummary_package *smithy.Schema
-
-var PackageSummary_originConfiguration *smithy.Schema
-
-var _PackageSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PackageSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _PackageSummaryList_member *smithy.Schema
-
-var _PackageVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PackageVersion",
-}, smithy.ShapeTypeString, 0)
-
-var PackageVersionDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PackageVersionDescription",
-}, smithy.ShapeTypeStructure, 13)
-var PackageVersionDescription_format *smithy.Schema
-
-var PackageVersionDescription_namespace *smithy.Schema
-
-var PackageVersionDescription_packageName *smithy.Schema
-
-var PackageVersionDescription_displayName *smithy.Schema
-
-var PackageVersionDescription_version *smithy.Schema
-
-var PackageVersionDescription_summary *smithy.Schema
-
-var PackageVersionDescription_homePage *smithy.Schema
-
-var PackageVersionDescription_sourceCodeRepository *smithy.Schema
-
-var PackageVersionDescription_publishedTime *smithy.Schema
-
-var PackageVersionDescription_licenses *smithy.Schema
-
-var PackageVersionDescription_revision *smithy.Schema
-
-var PackageVersionDescription_status *smithy.Schema
-
-var PackageVersionDescription_origin *smithy.Schema
-
-var PackageVersionError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PackageVersionError",
-}, smithy.ShapeTypeStructure, 2)
-var PackageVersionError_errorCode *smithy.Schema
-
-var PackageVersionError_errorMessage *smithy.Schema
-
-var PackageVersionErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PackageVersionErrorCode",
-}, smithy.ShapeTypeEnum, 6)
-var PackageVersionErrorCode_ALREADY_EXISTS *smithy.Schema
-
-var PackageVersionErrorCode_MISMATCHED_REVISION *smithy.Schema
-
-var PackageVersionErrorCode_MISMATCHED_STATUS *smithy.Schema
-
-var PackageVersionErrorCode_NOT_ALLOWED *smithy.Schema
-
-var PackageVersionErrorCode_NOT_FOUND *smithy.Schema
-
-var PackageVersionErrorCode_SKIPPED *smithy.Schema
-
-var _PackageVersionErrorMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PackageVersionErrorMap",
-}, smithy.ShapeTypeMap, 2)
-var _PackageVersionErrorMap_key *smithy.Schema
-
-var _PackageVersionErrorMap_value *smithy.Schema
-
-var _PackageVersionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PackageVersionList",
-}, smithy.ShapeTypeList, 1)
-var _PackageVersionList_member *smithy.Schema
-
-var PackageVersionOrigin = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PackageVersionOrigin",
-}, smithy.ShapeTypeStructure, 2)
-var PackageVersionOrigin_domainEntryPoint *smithy.Schema
-
-var PackageVersionOrigin_originType *smithy.Schema
-
-var PackageVersionOriginType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PackageVersionOriginType",
-}, smithy.ShapeTypeEnum, 3)
-var PackageVersionOriginType_INTERNAL *smithy.Schema
-
-var PackageVersionOriginType_EXTERNAL *smithy.Schema
-
-var PackageVersionOriginType_UNKNOWN *smithy.Schema
-
-var _PackageVersionRevision = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PackageVersionRevision",
-}, smithy.ShapeTypeString, 0)
-
-var _PackageVersionRevisionMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PackageVersionRevisionMap",
-}, smithy.ShapeTypeMap, 2)
-var _PackageVersionRevisionMap_key *smithy.Schema
-
-var _PackageVersionRevisionMap_value *smithy.Schema
-
-var PackageVersionSortType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PackageVersionSortType",
-}, smithy.ShapeTypeEnum, 1)
-var PackageVersionSortType_PUBLISHED_TIME *smithy.Schema
-
-var PackageVersionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PackageVersionStatus",
-}, smithy.ShapeTypeEnum, 6)
-var PackageVersionStatus_PUBLISHED *smithy.Schema
-
-var PackageVersionStatus_UNFINISHED *smithy.Schema
-
-var PackageVersionStatus_UNLISTED *smithy.Schema
-
-var PackageVersionStatus_ARCHIVED *smithy.Schema
-
-var PackageVersionStatus_DISPOSED *smithy.Schema
-
-var PackageVersionStatus_DELETED *smithy.Schema
-
-var PackageVersionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PackageVersionSummary",
-}, smithy.ShapeTypeStructure, 4)
-var PackageVersionSummary_version *smithy.Schema
-
-var PackageVersionSummary_revision *smithy.Schema
-
-var PackageVersionSummary_status *smithy.Schema
-
-var PackageVersionSummary_origin *smithy.Schema
-
-var _PackageVersionSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PackageVersionSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _PackageVersionSummaryList_member *smithy.Schema
-
-var _PaginationToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PaginationToken",
-}, smithy.ShapeTypeString, 0)
-
-var _PolicyDocument = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PolicyDocument",
-}, smithy.ShapeTypeString, 0)
-
-var _PolicyRevision = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PolicyRevision",
-}, smithy.ShapeTypeString, 0)
-
-var RepositoryDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "RepositoryDescription",
-}, smithy.ShapeTypeStructure, 9)
-var RepositoryDescription_name *smithy.Schema
-
-var RepositoryDescription_administratorAccount *smithy.Schema
-
-var RepositoryDescription_domainName *smithy.Schema
-
-var RepositoryDescription_domainOwner *smithy.Schema
-
-var RepositoryDescription_arn *smithy.Schema
-
-var RepositoryDescription_description *smithy.Schema
-
-var RepositoryDescription_upstreams *smithy.Schema
-
-var RepositoryDescription_externalConnections *smithy.Schema
-
-var RepositoryDescription_createdTime *smithy.Schema
-
-var RepositoryExternalConnectionInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "RepositoryExternalConnectionInfo",
-}, smithy.ShapeTypeStructure, 3)
-var RepositoryExternalConnectionInfo_externalConnectionName *smithy.Schema
-
-var RepositoryExternalConnectionInfo_packageFormat *smithy.Schema
-
-var RepositoryExternalConnectionInfo_status *smithy.Schema
-
-var _RepositoryExternalConnectionInfoList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "RepositoryExternalConnectionInfoList",
-}, smithy.ShapeTypeList, 1)
-var _RepositoryExternalConnectionInfoList_member *smithy.Schema
-
-var _RepositoryName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "RepositoryName",
-}, smithy.ShapeTypeString, 0)
-
-var _RepositoryNameList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "RepositoryNameList",
-}, smithy.ShapeTypeList, 1)
-var _RepositoryNameList_member *smithy.Schema
-
-var RepositorySummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "RepositorySummary",
-}, smithy.ShapeTypeStructure, 7)
-var RepositorySummary_name *smithy.Schema
-
-var RepositorySummary_administratorAccount *smithy.Schema
-
-var RepositorySummary_domainName *smithy.Schema
-
-var RepositorySummary_domainOwner *smithy.Schema
-
-var RepositorySummary_arn *smithy.Schema
-
-var RepositorySummary_description *smithy.Schema
-
-var RepositorySummary_createdTime *smithy.Schema
-
-var _RepositorySummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "RepositorySummaryList",
-}, smithy.ShapeTypeList, 1)
-var _RepositorySummaryList_member *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceNotFoundException_resourceId *smithy.Schema
-
-var ResourceNotFoundException_resourceType *smithy.Schema
-
-var ResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ResourcePolicy",
-}, smithy.ShapeTypeStructure, 3)
-var ResourcePolicy_resourceArn *smithy.Schema
-
-var ResourcePolicy_revision *smithy.Schema
-
-var ResourcePolicy_document *smithy.Schema
-
-var ResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ResourceType",
-}, smithy.ShapeTypeEnum, 5)
-var ResourceType_DOMAIN *smithy.Schema
-
-var ResourceType_REPOSITORY *smithy.Schema
-
-var ResourceType_PACKAGE *smithy.Schema
-
-var ResourceType_PACKAGE_VERSION *smithy.Schema
-
-var ResourceType_ASSET *smithy.Schema
-
-var _RetryAfterSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "RetryAfterSeconds",
-}, smithy.ShapeTypeInteger, 0)
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var ServiceQuotaExceededException_resourceId *smithy.Schema
-
-var ServiceQuotaExceededException_resourceType *smithy.Schema
-
-var _SHA256 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "SHA256",
-}, smithy.ShapeTypeString, 0)
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var _String255 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "String255",
-}, smithy.ShapeTypeString, 0)
-
-var SuccessfulPackageVersionInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "SuccessfulPackageVersionInfo",
-}, smithy.ShapeTypeStructure, 2)
-var SuccessfulPackageVersionInfo_revision *smithy.Schema
-
-var SuccessfulPackageVersionInfo_status *smithy.Schema
-
-var _SuccessfulPackageVersionInfoMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "SuccessfulPackageVersionInfoMap",
-}, smithy.ShapeTypeMap, 2)
-var _SuccessfulPackageVersionInfoMap_key *smithy.Schema
-
-var _SuccessfulPackageVersionInfoMap_value *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_key *smithy.Schema
-
-var Tag_value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ThrottlingException_retryAfterSeconds *smithy.Schema
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var UpstreamRepository = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "UpstreamRepository",
-}, smithy.ShapeTypeStructure, 1)
-var UpstreamRepository_repositoryName *smithy.Schema
-
-var UpstreamRepositoryInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "UpstreamRepositoryInfo",
-}, smithy.ShapeTypeStructure, 1)
-var UpstreamRepositoryInfo_repositoryName *smithy.Schema
-
-var _UpstreamRepositoryInfoList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "UpstreamRepositoryInfoList",
-}, smithy.ShapeTypeList, 1)
-var _UpstreamRepositoryInfoList_member *smithy.Schema
-
-var _UpstreamRepositoryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "UpstreamRepositoryList",
-}, smithy.ShapeTypeList, 1)
-var _UpstreamRepositoryList_member *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var ValidationException_reason *smithy.Schema
-
-var ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeEnum, 5)
-var ValidationExceptionReason_CANNOT_PARSE *smithy.Schema
-
-var ValidationExceptionReason_ENCRYPTION_KEY_ERROR *smithy.Schema
-
-var ValidationExceptionReason_FIELD_VALIDATION_FAILED *smithy.Schema
-
-var ValidationExceptionReason_UNKNOWN_OPERATION *smithy.Schema
-
-var ValidationExceptionReason_OTHER *smithy.Schema
-
-var AssociateExternalConnectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "AssociateExternalConnectionRequest",
-}, smithy.ShapeTypeStructure, 4)
-var AssociateExternalConnectionRequest_domain *smithy.Schema
-
-var AssociateExternalConnectionRequest_domainOwner *smithy.Schema
-
-var AssociateExternalConnectionRequest_repository *smithy.Schema
-
-var AssociateExternalConnectionRequest_externalConnection *smithy.Schema
-
-var AssociateExternalConnectionResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "AssociateExternalConnectionResult",
-}, smithy.ShapeTypeStructure, 1)
-var AssociateExternalConnectionResult_repository *smithy.Schema
-
-var CopyPackageVersionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "CopyPackageVersionsRequest",
-}, smithy.ShapeTypeStructure, 11)
-var CopyPackageVersionsRequest_domain *smithy.Schema
-
-var CopyPackageVersionsRequest_domainOwner *smithy.Schema
-
-var CopyPackageVersionsRequest_sourceRepository *smithy.Schema
-
-var CopyPackageVersionsRequest_destinationRepository *smithy.Schema
-
-var CopyPackageVersionsRequest_format *smithy.Schema
-
-var CopyPackageVersionsRequest_namespace *smithy.Schema
-
-var CopyPackageVersionsRequest_package *smithy.Schema
-
-var CopyPackageVersionsRequest_versions *smithy.Schema
-
-var CopyPackageVersionsRequest_versionRevisions *smithy.Schema
-
-var CopyPackageVersionsRequest_allowOverwrite *smithy.Schema
-
-var CopyPackageVersionsRequest_includeFromUpstream *smithy.Schema
-
-var CopyPackageVersionsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "CopyPackageVersionsResult",
-}, smithy.ShapeTypeStructure, 2)
-var CopyPackageVersionsResult_successfulVersions *smithy.Schema
-
-var CopyPackageVersionsResult_failedVersions *smithy.Schema
-
-var CreateDomainRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "CreateDomainRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateDomainRequest_domain *smithy.Schema
-
-var CreateDomainRequest_encryptionKey *smithy.Schema
-
-var CreateDomainRequest_tags *smithy.Schema
-
-var CreateDomainResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "CreateDomainResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreateDomainResult_domain *smithy.Schema
-
-var CreatePackageGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "CreatePackageGroupRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreatePackageGroupRequest_domain *smithy.Schema
-
-var CreatePackageGroupRequest_domainOwner *smithy.Schema
-
-var CreatePackageGroupRequest_packageGroup *smithy.Schema
-
-var CreatePackageGroupRequest_contactInfo *smithy.Schema
-
-var CreatePackageGroupRequest_description *smithy.Schema
-
-var CreatePackageGroupRequest_tags *smithy.Schema
-
-var CreatePackageGroupResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "CreatePackageGroupResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreatePackageGroupResult_packageGroup *smithy.Schema
-
-var CreateRepositoryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "CreateRepositoryRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateRepositoryRequest_domain *smithy.Schema
-
-var CreateRepositoryRequest_domainOwner *smithy.Schema
-
-var CreateRepositoryRequest_repository *smithy.Schema
-
-var CreateRepositoryRequest_description *smithy.Schema
-
-var CreateRepositoryRequest_upstreams *smithy.Schema
-
-var CreateRepositoryRequest_tags *smithy.Schema
-
-var CreateRepositoryResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "CreateRepositoryResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreateRepositoryResult_repository *smithy.Schema
-
-var DeleteDomainRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "DeleteDomainRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteDomainRequest_domain *smithy.Schema
-
-var DeleteDomainRequest_domainOwner *smithy.Schema
-
-var DeleteDomainResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "DeleteDomainResult",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDomainResult_domain *smithy.Schema
-
-var DeleteDomainPermissionsPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "DeleteDomainPermissionsPolicyRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteDomainPermissionsPolicyRequest_domain *smithy.Schema
-
-var DeleteDomainPermissionsPolicyRequest_domainOwner *smithy.Schema
-
-var DeleteDomainPermissionsPolicyRequest_policyRevision *smithy.Schema
-
-var DeleteDomainPermissionsPolicyResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "DeleteDomainPermissionsPolicyResult",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDomainPermissionsPolicyResult_policy *smithy.Schema
-
-var DeletePackageGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "DeletePackageGroupRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeletePackageGroupRequest_domain *smithy.Schema
-
-var DeletePackageGroupRequest_domainOwner *smithy.Schema
-
-var DeletePackageGroupRequest_packageGroup *smithy.Schema
-
-var DeletePackageGroupResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "DeletePackageGroupResult",
-}, smithy.ShapeTypeStructure, 1)
-var DeletePackageGroupResult_packageGroup *smithy.Schema
-
-var DeletePackageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "DeletePackageRequest",
-}, smithy.ShapeTypeStructure, 6)
-var DeletePackageRequest_domain *smithy.Schema
-
-var DeletePackageRequest_domainOwner *smithy.Schema
-
-var DeletePackageRequest_repository *smithy.Schema
-
-var DeletePackageRequest_format *smithy.Schema
-
-var DeletePackageRequest_namespace *smithy.Schema
-
-var DeletePackageRequest_package *smithy.Schema
-
-var DeletePackageResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "DeletePackageResult",
-}, smithy.ShapeTypeStructure, 1)
-var DeletePackageResult_deletedPackage *smithy.Schema
-
-var DeletePackageVersionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "DeletePackageVersionsRequest",
-}, smithy.ShapeTypeStructure, 8)
-var DeletePackageVersionsRequest_domain *smithy.Schema
-
-var DeletePackageVersionsRequest_domainOwner *smithy.Schema
-
-var DeletePackageVersionsRequest_repository *smithy.Schema
-
-var DeletePackageVersionsRequest_format *smithy.Schema
-
-var DeletePackageVersionsRequest_namespace *smithy.Schema
-
-var DeletePackageVersionsRequest_package *smithy.Schema
-
-var DeletePackageVersionsRequest_versions *smithy.Schema
-
-var DeletePackageVersionsRequest_expectedStatus *smithy.Schema
-
-var DeletePackageVersionsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "DeletePackageVersionsResult",
-}, smithy.ShapeTypeStructure, 2)
-var DeletePackageVersionsResult_successfulVersions *smithy.Schema
-
-var DeletePackageVersionsResult_failedVersions *smithy.Schema
-
-var DeleteRepositoryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "DeleteRepositoryRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteRepositoryRequest_domain *smithy.Schema
-
-var DeleteRepositoryRequest_domainOwner *smithy.Schema
-
-var DeleteRepositoryRequest_repository *smithy.Schema
-
-var DeleteRepositoryResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "DeleteRepositoryResult",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteRepositoryResult_repository *smithy.Schema
-
-var DeleteRepositoryPermissionsPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "DeleteRepositoryPermissionsPolicyRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DeleteRepositoryPermissionsPolicyRequest_domain *smithy.Schema
-
-var DeleteRepositoryPermissionsPolicyRequest_domainOwner *smithy.Schema
-
-var DeleteRepositoryPermissionsPolicyRequest_repository *smithy.Schema
-
-var DeleteRepositoryPermissionsPolicyRequest_policyRevision *smithy.Schema
-
-var DeleteRepositoryPermissionsPolicyResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "DeleteRepositoryPermissionsPolicyResult",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteRepositoryPermissionsPolicyResult_policy *smithy.Schema
-
-var DescribeDomainRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "DescribeDomainRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeDomainRequest_domain *smithy.Schema
-
-var DescribeDomainRequest_domainOwner *smithy.Schema
-
-var DescribeDomainResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "DescribeDomainResult",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeDomainResult_domain *smithy.Schema
-
-var DescribePackageGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "DescribePackageGroupRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribePackageGroupRequest_domain *smithy.Schema
-
-var DescribePackageGroupRequest_domainOwner *smithy.Schema
-
-var DescribePackageGroupRequest_packageGroup *smithy.Schema
-
-var DescribePackageGroupResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "DescribePackageGroupResult",
-}, smithy.ShapeTypeStructure, 1)
-var DescribePackageGroupResult_packageGroup *smithy.Schema
-
-var DescribePackageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "DescribePackageRequest",
-}, smithy.ShapeTypeStructure, 6)
-var DescribePackageRequest_domain *smithy.Schema
-
-var DescribePackageRequest_domainOwner *smithy.Schema
-
-var DescribePackageRequest_repository *smithy.Schema
-
-var DescribePackageRequest_format *smithy.Schema
-
-var DescribePackageRequest_namespace *smithy.Schema
-
-var DescribePackageRequest_package *smithy.Schema
-
-var DescribePackageResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "DescribePackageResult",
-}, smithy.ShapeTypeStructure, 1)
-var DescribePackageResult_package *smithy.Schema
-
-var DescribePackageVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "DescribePackageVersionRequest",
-}, smithy.ShapeTypeStructure, 7)
-var DescribePackageVersionRequest_domain *smithy.Schema
-
-var DescribePackageVersionRequest_domainOwner *smithy.Schema
-
-var DescribePackageVersionRequest_repository *smithy.Schema
-
-var DescribePackageVersionRequest_format *smithy.Schema
-
-var DescribePackageVersionRequest_namespace *smithy.Schema
-
-var DescribePackageVersionRequest_package *smithy.Schema
-
-var DescribePackageVersionRequest_packageVersion *smithy.Schema
-
-var DescribePackageVersionResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "DescribePackageVersionResult",
-}, smithy.ShapeTypeStructure, 1)
-var DescribePackageVersionResult_packageVersion *smithy.Schema
-
-var DescribeRepositoryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "DescribeRepositoryRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeRepositoryRequest_domain *smithy.Schema
-
-var DescribeRepositoryRequest_domainOwner *smithy.Schema
-
-var DescribeRepositoryRequest_repository *smithy.Schema
-
-var DescribeRepositoryResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "DescribeRepositoryResult",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeRepositoryResult_repository *smithy.Schema
-
-var DisassociateExternalConnectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "DisassociateExternalConnectionRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DisassociateExternalConnectionRequest_domain *smithy.Schema
-
-var DisassociateExternalConnectionRequest_domainOwner *smithy.Schema
-
-var DisassociateExternalConnectionRequest_repository *smithy.Schema
-
-var DisassociateExternalConnectionRequest_externalConnection *smithy.Schema
-
-var DisassociateExternalConnectionResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "DisassociateExternalConnectionResult",
-}, smithy.ShapeTypeStructure, 1)
-var DisassociateExternalConnectionResult_repository *smithy.Schema
-
-var DisposePackageVersionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "DisposePackageVersionsRequest",
-}, smithy.ShapeTypeStructure, 9)
-var DisposePackageVersionsRequest_domain *smithy.Schema
-
-var DisposePackageVersionsRequest_domainOwner *smithy.Schema
-
-var DisposePackageVersionsRequest_repository *smithy.Schema
-
-var DisposePackageVersionsRequest_format *smithy.Schema
-
-var DisposePackageVersionsRequest_namespace *smithy.Schema
-
-var DisposePackageVersionsRequest_package *smithy.Schema
-
-var DisposePackageVersionsRequest_versions *smithy.Schema
-
-var DisposePackageVersionsRequest_versionRevisions *smithy.Schema
-
-var DisposePackageVersionsRequest_expectedStatus *smithy.Schema
-
-var DisposePackageVersionsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "DisposePackageVersionsResult",
-}, smithy.ShapeTypeStructure, 2)
-var DisposePackageVersionsResult_successfulVersions *smithy.Schema
-
-var DisposePackageVersionsResult_failedVersions *smithy.Schema
-
-var GetAssociatedPackageGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "GetAssociatedPackageGroupRequest",
-}, smithy.ShapeTypeStructure, 5)
-var GetAssociatedPackageGroupRequest_domain *smithy.Schema
-
-var GetAssociatedPackageGroupRequest_domainOwner *smithy.Schema
-
-var GetAssociatedPackageGroupRequest_format *smithy.Schema
-
-var GetAssociatedPackageGroupRequest_namespace *smithy.Schema
-
-var GetAssociatedPackageGroupRequest_package *smithy.Schema
-
-var GetAssociatedPackageGroupResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "GetAssociatedPackageGroupResult",
-}, smithy.ShapeTypeStructure, 2)
-var GetAssociatedPackageGroupResult_packageGroup *smithy.Schema
-
-var GetAssociatedPackageGroupResult_associationType *smithy.Schema
-
-var GetAuthorizationTokenRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "GetAuthorizationTokenRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetAuthorizationTokenRequest_domain *smithy.Schema
-
-var GetAuthorizationTokenRequest_domainOwner *smithy.Schema
-
-var GetAuthorizationTokenRequest_durationSeconds *smithy.Schema
-
-var GetAuthorizationTokenResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "GetAuthorizationTokenResult",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Sensitive{})
-var GetAuthorizationTokenResult_authorizationToken *smithy.Schema
-
-var GetAuthorizationTokenResult_expiration *smithy.Schema
-
-var GetDomainPermissionsPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "GetDomainPermissionsPolicyRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetDomainPermissionsPolicyRequest_domain *smithy.Schema
-
-var GetDomainPermissionsPolicyRequest_domainOwner *smithy.Schema
-
-var GetDomainPermissionsPolicyResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "GetDomainPermissionsPolicyResult",
-}, smithy.ShapeTypeStructure, 1)
-var GetDomainPermissionsPolicyResult_policy *smithy.Schema
-
-var GetPackageVersionAssetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "GetPackageVersionAssetRequest",
-}, smithy.ShapeTypeStructure, 9)
-var GetPackageVersionAssetRequest_domain *smithy.Schema
-
-var GetPackageVersionAssetRequest_domainOwner *smithy.Schema
-
-var GetPackageVersionAssetRequest_repository *smithy.Schema
-
-var GetPackageVersionAssetRequest_format *smithy.Schema
-
-var GetPackageVersionAssetRequest_namespace *smithy.Schema
-
-var GetPackageVersionAssetRequest_package *smithy.Schema
-
-var GetPackageVersionAssetRequest_packageVersion *smithy.Schema
-
-var GetPackageVersionAssetRequest_asset *smithy.Schema
-
-var GetPackageVersionAssetRequest_packageVersionRevision *smithy.Schema
-
-var GetPackageVersionAssetResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "GetPackageVersionAssetResult",
-}, smithy.ShapeTypeStructure, 4)
-var GetPackageVersionAssetResult_asset *smithy.Schema
-
-var GetPackageVersionAssetResult_assetName *smithy.Schema
-
-var GetPackageVersionAssetResult_packageVersion *smithy.Schema
-
-var GetPackageVersionAssetResult_packageVersionRevision *smithy.Schema
-
-var GetPackageVersionReadmeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "GetPackageVersionReadmeRequest",
-}, smithy.ShapeTypeStructure, 7)
-var GetPackageVersionReadmeRequest_domain *smithy.Schema
-
-var GetPackageVersionReadmeRequest_domainOwner *smithy.Schema
-
-var GetPackageVersionReadmeRequest_repository *smithy.Schema
-
-var GetPackageVersionReadmeRequest_format *smithy.Schema
-
-var GetPackageVersionReadmeRequest_namespace *smithy.Schema
-
-var GetPackageVersionReadmeRequest_package *smithy.Schema
-
-var GetPackageVersionReadmeRequest_packageVersion *smithy.Schema
-
-var GetPackageVersionReadmeResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "GetPackageVersionReadmeResult",
-}, smithy.ShapeTypeStructure, 6)
-var GetPackageVersionReadmeResult_format *smithy.Schema
-
-var GetPackageVersionReadmeResult_namespace *smithy.Schema
-
-var GetPackageVersionReadmeResult_package *smithy.Schema
-
-var GetPackageVersionReadmeResult_version *smithy.Schema
-
-var GetPackageVersionReadmeResult_versionRevision *smithy.Schema
-
-var GetPackageVersionReadmeResult_readme *smithy.Schema
-
-var GetRepositoryEndpointRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "GetRepositoryEndpointRequest",
-}, smithy.ShapeTypeStructure, 5)
-var GetRepositoryEndpointRequest_domain *smithy.Schema
-
-var GetRepositoryEndpointRequest_domainOwner *smithy.Schema
-
-var GetRepositoryEndpointRequest_repository *smithy.Schema
-
-var GetRepositoryEndpointRequest_format *smithy.Schema
-
-var GetRepositoryEndpointRequest_endpointType *smithy.Schema
-
-var GetRepositoryEndpointResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "GetRepositoryEndpointResult",
-}, smithy.ShapeTypeStructure, 1)
-var GetRepositoryEndpointResult_repositoryEndpoint *smithy.Schema
-
-var GetRepositoryPermissionsPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "GetRepositoryPermissionsPolicyRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetRepositoryPermissionsPolicyRequest_domain *smithy.Schema
-
-var GetRepositoryPermissionsPolicyRequest_domainOwner *smithy.Schema
-
-var GetRepositoryPermissionsPolicyRequest_repository *smithy.Schema
-
-var GetRepositoryPermissionsPolicyResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "GetRepositoryPermissionsPolicyResult",
-}, smithy.ShapeTypeStructure, 1)
-var GetRepositoryPermissionsPolicyResult_policy *smithy.Schema
-
-var ListAllowedRepositoriesForGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ListAllowedRepositoriesForGroupRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ListAllowedRepositoriesForGroupRequest_domain *smithy.Schema
-
-var ListAllowedRepositoriesForGroupRequest_domainOwner *smithy.Schema
-
-var ListAllowedRepositoriesForGroupRequest_packageGroup *smithy.Schema
-
-var ListAllowedRepositoriesForGroupRequest_originRestrictionType *smithy.Schema
-
-var ListAllowedRepositoriesForGroupRequest_maxResults *smithy.Schema
-
-var ListAllowedRepositoriesForGroupRequest_nextToken *smithy.Schema
-
-var ListAllowedRepositoriesForGroupResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ListAllowedRepositoriesForGroupResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListAllowedRepositoriesForGroupResult_allowedRepositories *smithy.Schema
-
-var ListAllowedRepositoriesForGroupResult_nextToken *smithy.Schema
-
-var ListAssociatedPackagesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ListAssociatedPackagesRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ListAssociatedPackagesRequest_domain *smithy.Schema
-
-var ListAssociatedPackagesRequest_domainOwner *smithy.Schema
-
-var ListAssociatedPackagesRequest_packageGroup *smithy.Schema
-
-var ListAssociatedPackagesRequest_maxResults *smithy.Schema
-
-var ListAssociatedPackagesRequest_nextToken *smithy.Schema
-
-var ListAssociatedPackagesRequest_preview *smithy.Schema
-
-var ListAssociatedPackagesResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ListAssociatedPackagesResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListAssociatedPackagesResult_packages *smithy.Schema
-
-var ListAssociatedPackagesResult_nextToken *smithy.Schema
-
-var ListDomainsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ListDomainsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListDomainsRequest_maxResults *smithy.Schema
-
-var ListDomainsRequest_nextToken *smithy.Schema
-
-var ListDomainsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ListDomainsResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListDomainsResult_domains *smithy.Schema
-
-var ListDomainsResult_nextToken *smithy.Schema
-
-var ListPackageGroupsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ListPackageGroupsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListPackageGroupsRequest_domain *smithy.Schema
-
-var ListPackageGroupsRequest_domainOwner *smithy.Schema
-
-var ListPackageGroupsRequest_maxResults *smithy.Schema
-
-var ListPackageGroupsRequest_nextToken *smithy.Schema
-
-var ListPackageGroupsRequest_prefix *smithy.Schema
-
-var ListPackageGroupsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ListPackageGroupsResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListPackageGroupsResult_packageGroups *smithy.Schema
-
-var ListPackageGroupsResult_nextToken *smithy.Schema
-
-var ListPackagesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ListPackagesRequest",
-}, smithy.ShapeTypeStructure, 10)
-var ListPackagesRequest_domain *smithy.Schema
-
-var ListPackagesRequest_domainOwner *smithy.Schema
-
-var ListPackagesRequest_repository *smithy.Schema
-
-var ListPackagesRequest_format *smithy.Schema
-
-var ListPackagesRequest_namespace *smithy.Schema
-
-var ListPackagesRequest_packagePrefix *smithy.Schema
-
-var ListPackagesRequest_maxResults *smithy.Schema
-
-var ListPackagesRequest_nextToken *smithy.Schema
-
-var ListPackagesRequest_publish *smithy.Schema
-
-var ListPackagesRequest_upstream *smithy.Schema
-
-var ListPackagesResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ListPackagesResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListPackagesResult_packages *smithy.Schema
-
-var ListPackagesResult_nextToken *smithy.Schema
-
-var ListPackageVersionAssetsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ListPackageVersionAssetsRequest",
-}, smithy.ShapeTypeStructure, 9)
-var ListPackageVersionAssetsRequest_domain *smithy.Schema
-
-var ListPackageVersionAssetsRequest_domainOwner *smithy.Schema
-
-var ListPackageVersionAssetsRequest_repository *smithy.Schema
-
-var ListPackageVersionAssetsRequest_format *smithy.Schema
-
-var ListPackageVersionAssetsRequest_namespace *smithy.Schema
-
-var ListPackageVersionAssetsRequest_package *smithy.Schema
-
-var ListPackageVersionAssetsRequest_packageVersion *smithy.Schema
-
-var ListPackageVersionAssetsRequest_maxResults *smithy.Schema
-
-var ListPackageVersionAssetsRequest_nextToken *smithy.Schema
-
-var ListPackageVersionAssetsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ListPackageVersionAssetsResult",
-}, smithy.ShapeTypeStructure, 7)
-var ListPackageVersionAssetsResult_format *smithy.Schema
-
-var ListPackageVersionAssetsResult_namespace *smithy.Schema
-
-var ListPackageVersionAssetsResult_package *smithy.Schema
-
-var ListPackageVersionAssetsResult_version *smithy.Schema
-
-var ListPackageVersionAssetsResult_versionRevision *smithy.Schema
-
-var ListPackageVersionAssetsResult_nextToken *smithy.Schema
-
-var ListPackageVersionAssetsResult_assets *smithy.Schema
-
-var ListPackageVersionDependenciesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ListPackageVersionDependenciesRequest",
-}, smithy.ShapeTypeStructure, 8)
-var ListPackageVersionDependenciesRequest_domain *smithy.Schema
-
-var ListPackageVersionDependenciesRequest_domainOwner *smithy.Schema
-
-var ListPackageVersionDependenciesRequest_repository *smithy.Schema
-
-var ListPackageVersionDependenciesRequest_format *smithy.Schema
-
-var ListPackageVersionDependenciesRequest_namespace *smithy.Schema
-
-var ListPackageVersionDependenciesRequest_package *smithy.Schema
-
-var ListPackageVersionDependenciesRequest_packageVersion *smithy.Schema
-
-var ListPackageVersionDependenciesRequest_nextToken *smithy.Schema
-
-var ListPackageVersionDependenciesResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ListPackageVersionDependenciesResult",
-}, smithy.ShapeTypeStructure, 7)
-var ListPackageVersionDependenciesResult_format *smithy.Schema
-
-var ListPackageVersionDependenciesResult_namespace *smithy.Schema
-
-var ListPackageVersionDependenciesResult_package *smithy.Schema
-
-var ListPackageVersionDependenciesResult_version *smithy.Schema
-
-var ListPackageVersionDependenciesResult_versionRevision *smithy.Schema
-
-var ListPackageVersionDependenciesResult_nextToken *smithy.Schema
-
-var ListPackageVersionDependenciesResult_dependencies *smithy.Schema
-
-var ListPackageVersionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ListPackageVersionsRequest",
-}, smithy.ShapeTypeStructure, 11)
-var ListPackageVersionsRequest_domain *smithy.Schema
-
-var ListPackageVersionsRequest_domainOwner *smithy.Schema
-
-var ListPackageVersionsRequest_repository *smithy.Schema
-
-var ListPackageVersionsRequest_format *smithy.Schema
-
-var ListPackageVersionsRequest_namespace *smithy.Schema
-
-var ListPackageVersionsRequest_package *smithy.Schema
-
-var ListPackageVersionsRequest_status *smithy.Schema
-
-var ListPackageVersionsRequest_sortBy *smithy.Schema
-
-var ListPackageVersionsRequest_maxResults *smithy.Schema
-
-var ListPackageVersionsRequest_nextToken *smithy.Schema
-
-var ListPackageVersionsRequest_originType *smithy.Schema
-
-var ListPackageVersionsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ListPackageVersionsResult",
-}, smithy.ShapeTypeStructure, 6)
-var ListPackageVersionsResult_defaultDisplayVersion *smithy.Schema
-
-var ListPackageVersionsResult_format *smithy.Schema
-
-var ListPackageVersionsResult_namespace *smithy.Schema
-
-var ListPackageVersionsResult_package *smithy.Schema
-
-var ListPackageVersionsResult_versions *smithy.Schema
-
-var ListPackageVersionsResult_nextToken *smithy.Schema
-
-var ListRepositoriesInDomainRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ListRepositoriesInDomainRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ListRepositoriesInDomainRequest_domain *smithy.Schema
-
-var ListRepositoriesInDomainRequest_domainOwner *smithy.Schema
-
-var ListRepositoriesInDomainRequest_administratorAccount *smithy.Schema
-
-var ListRepositoriesInDomainRequest_repositoryPrefix *smithy.Schema
-
-var ListRepositoriesInDomainRequest_maxResults *smithy.Schema
-
-var ListRepositoriesInDomainRequest_nextToken *smithy.Schema
-
-var ListRepositoriesInDomainResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ListRepositoriesInDomainResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListRepositoriesInDomainResult_repositories *smithy.Schema
-
-var ListRepositoriesInDomainResult_nextToken *smithy.Schema
-
-var ListRepositoriesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ListRepositoriesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListRepositoriesRequest_repositoryPrefix *smithy.Schema
-
-var ListRepositoriesRequest_maxResults *smithy.Schema
-
-var ListRepositoriesRequest_nextToken *smithy.Schema
-
-var ListRepositoriesResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ListRepositoriesResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListRepositoriesResult_repositories *smithy.Schema
-
-var ListRepositoriesResult_nextToken *smithy.Schema
-
-var ListSubPackageGroupsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ListSubPackageGroupsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListSubPackageGroupsRequest_domain *smithy.Schema
-
-var ListSubPackageGroupsRequest_domainOwner *smithy.Schema
-
-var ListSubPackageGroupsRequest_packageGroup *smithy.Schema
-
-var ListSubPackageGroupsRequest_maxResults *smithy.Schema
-
-var ListSubPackageGroupsRequest_nextToken *smithy.Schema
-
-var ListSubPackageGroupsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ListSubPackageGroupsResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListSubPackageGroupsResult_packageGroups *smithy.Schema
-
-var ListSubPackageGroupsResult_nextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_resourceArn *smithy.Schema
-
-var ListTagsForResourceResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "ListTagsForResourceResult",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResult_tags *smithy.Schema
-
-var PublishPackageVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PublishPackageVersionRequest",
-}, smithy.ShapeTypeStructure, 11)
-var PublishPackageVersionRequest_domain *smithy.Schema
-
-var PublishPackageVersionRequest_domainOwner *smithy.Schema
-
-var PublishPackageVersionRequest_repository *smithy.Schema
-
-var PublishPackageVersionRequest_format *smithy.Schema
-
-var PublishPackageVersionRequest_namespace *smithy.Schema
-
-var PublishPackageVersionRequest_package *smithy.Schema
-
-var PublishPackageVersionRequest_packageVersion *smithy.Schema
-
-var PublishPackageVersionRequest_assetContent *smithy.Schema
-
-var PublishPackageVersionRequest_assetName *smithy.Schema
-
-var PublishPackageVersionRequest_assetSHA256 *smithy.Schema
-
-var PublishPackageVersionRequest_unfinished *smithy.Schema
-
-var PublishPackageVersionResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PublishPackageVersionResult",
-}, smithy.ShapeTypeStructure, 7)
-var PublishPackageVersionResult_format *smithy.Schema
-
-var PublishPackageVersionResult_namespace *smithy.Schema
-
-var PublishPackageVersionResult_package *smithy.Schema
-
-var PublishPackageVersionResult_version *smithy.Schema
-
-var PublishPackageVersionResult_versionRevision *smithy.Schema
-
-var PublishPackageVersionResult_status *smithy.Schema
-
-var PublishPackageVersionResult_asset *smithy.Schema
-
-var PutDomainPermissionsPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PutDomainPermissionsPolicyRequest",
-}, smithy.ShapeTypeStructure, 4)
-var PutDomainPermissionsPolicyRequest_domain *smithy.Schema
-
-var PutDomainPermissionsPolicyRequest_domainOwner *smithy.Schema
-
-var PutDomainPermissionsPolicyRequest_policyRevision *smithy.Schema
-
-var PutDomainPermissionsPolicyRequest_policyDocument *smithy.Schema
-
-var PutDomainPermissionsPolicyResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PutDomainPermissionsPolicyResult",
-}, smithy.ShapeTypeStructure, 1)
-var PutDomainPermissionsPolicyResult_policy *smithy.Schema
-
-var PutPackageOriginConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PutPackageOriginConfigurationRequest",
-}, smithy.ShapeTypeStructure, 7)
-var PutPackageOriginConfigurationRequest_domain *smithy.Schema
-
-var PutPackageOriginConfigurationRequest_domainOwner *smithy.Schema
-
-var PutPackageOriginConfigurationRequest_repository *smithy.Schema
-
-var PutPackageOriginConfigurationRequest_format *smithy.Schema
-
-var PutPackageOriginConfigurationRequest_namespace *smithy.Schema
-
-var PutPackageOriginConfigurationRequest_package *smithy.Schema
-
-var PutPackageOriginConfigurationRequest_restrictions *smithy.Schema
-
-var PutPackageOriginConfigurationResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PutPackageOriginConfigurationResult",
-}, smithy.ShapeTypeStructure, 1)
-var PutPackageOriginConfigurationResult_originConfiguration *smithy.Schema
-
-var PutRepositoryPermissionsPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PutRepositoryPermissionsPolicyRequest",
-}, smithy.ShapeTypeStructure, 5)
-var PutRepositoryPermissionsPolicyRequest_domain *smithy.Schema
-
-var PutRepositoryPermissionsPolicyRequest_domainOwner *smithy.Schema
-
-var PutRepositoryPermissionsPolicyRequest_repository *smithy.Schema
-
-var PutRepositoryPermissionsPolicyRequest_policyRevision *smithy.Schema
-
-var PutRepositoryPermissionsPolicyRequest_policyDocument *smithy.Schema
-
-var PutRepositoryPermissionsPolicyResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "PutRepositoryPermissionsPolicyResult",
-}, smithy.ShapeTypeStructure, 1)
-var PutRepositoryPermissionsPolicyResult_policy *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "TagResourceResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "UntagResourceResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdatePackageGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "UpdatePackageGroupRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdatePackageGroupRequest_domain *smithy.Schema
-
-var UpdatePackageGroupRequest_domainOwner *smithy.Schema
-
-var UpdatePackageGroupRequest_packageGroup *smithy.Schema
-
-var UpdatePackageGroupRequest_contactInfo *smithy.Schema
-
-var UpdatePackageGroupRequest_description *smithy.Schema
-
-var UpdatePackageGroupOriginConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "UpdatePackageGroupOriginConfigurationRequest",
-}, smithy.ShapeTypeStructure, 6)
-var UpdatePackageGroupOriginConfigurationRequest_domain *smithy.Schema
-
-var UpdatePackageGroupOriginConfigurationRequest_domainOwner *smithy.Schema
-
-var UpdatePackageGroupOriginConfigurationRequest_packageGroup *smithy.Schema
-
-var UpdatePackageGroupOriginConfigurationRequest_restrictions *smithy.Schema
-
-var UpdatePackageGroupOriginConfigurationRequest_addAllowedRepositories *smithy.Schema
-
-var UpdatePackageGroupOriginConfigurationRequest_removeAllowedRepositories *smithy.Schema
-
-var UpdatePackageGroupOriginConfigurationResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "UpdatePackageGroupOriginConfigurationResult",
-}, smithy.ShapeTypeStructure, 2)
-var UpdatePackageGroupOriginConfigurationResult_packageGroup *smithy.Schema
-
-var UpdatePackageGroupOriginConfigurationResult_allowedRepositoryUpdates *smithy.Schema
-
-var UpdatePackageGroupResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "UpdatePackageGroupResult",
-}, smithy.ShapeTypeStructure, 1)
-var UpdatePackageGroupResult_packageGroup *smithy.Schema
-
-var UpdatePackageVersionsStatusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "UpdatePackageVersionsStatusRequest",
-}, smithy.ShapeTypeStructure, 10)
-var UpdatePackageVersionsStatusRequest_domain *smithy.Schema
-
-var UpdatePackageVersionsStatusRequest_domainOwner *smithy.Schema
-
-var UpdatePackageVersionsStatusRequest_repository *smithy.Schema
-
-var UpdatePackageVersionsStatusRequest_format *smithy.Schema
-
-var UpdatePackageVersionsStatusRequest_namespace *smithy.Schema
-
-var UpdatePackageVersionsStatusRequest_package *smithy.Schema
-
-var UpdatePackageVersionsStatusRequest_versions *smithy.Schema
-
-var UpdatePackageVersionsStatusRequest_versionRevisions *smithy.Schema
-
-var UpdatePackageVersionsStatusRequest_expectedStatus *smithy.Schema
-
-var UpdatePackageVersionsStatusRequest_targetStatus *smithy.Schema
-
-var UpdatePackageVersionsStatusResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "UpdatePackageVersionsStatusResult",
-}, smithy.ShapeTypeStructure, 2)
-var UpdatePackageVersionsStatusResult_successfulVersions *smithy.Schema
-
-var UpdatePackageVersionsStatusResult_failedVersions *smithy.Schema
-
-var UpdateRepositoryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "UpdateRepositoryRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateRepositoryRequest_domain *smithy.Schema
-
-var UpdateRepositoryRequest_domainOwner *smithy.Schema
-
-var UpdateRepositoryRequest_repository *smithy.Schema
-
-var UpdateRepositoryRequest_description *smithy.Schema
-
-var UpdateRepositoryRequest_upstreams *smithy.Schema
-
-var UpdateRepositoryResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codeartifact",
-	Name:      "UpdateRepositoryResult",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateRepositoryResult_repository *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", _String)
-
-	AllowPublish_ALLOW = AllowPublish.AddMember("ALLOW", smithyprelude.Unit)
-
-	AllowPublish_BLOCK = AllowPublish.AddMember("BLOCK", smithyprelude.Unit)
-
-	AllowUpstream_ALLOW = AllowUpstream.AddMember("ALLOW", smithyprelude.Unit)
-
-	AllowUpstream_BLOCK = AllowUpstream.AddMember("BLOCK", smithyprelude.Unit)
-
-	HashAlgorithm_MD5 = HashAlgorithm.AddMember("MD5", smithyprelude.Unit)
-
-	HashAlgorithm_SHA1 = HashAlgorithm.AddMember("SHA1", smithyprelude.Unit)
-
-	HashAlgorithm_SHA256 = HashAlgorithm.AddMember("SHA256", smithyprelude.Unit)
-
-	HashAlgorithm_SHA512 = HashAlgorithm.AddMember("SHA512", smithyprelude.Unit)
-
-	_AssetHashes_key = _AssetHashes.AddMember("key", HashAlgorithm)
-
-	_AssetHashes_value = _AssetHashes.AddMember("value", _HashValue)
-
-	AssetSummary_name = AssetSummary.AddMember("name", _AssetName)
-
-	AssetSummary_size = AssetSummary.AddMember("size", _LongOptional)
-
-	AssetSummary_hashes = AssetSummary.AddMember("hashes", _AssetHashes)
-
-	_AssetSummaryList_member = _AssetSummaryList.AddMember("member", AssetSummary)
-
-	PackageFormat_NPM = PackageFormat.AddMember("NPM", smithyprelude.Unit)
-
-	PackageFormat_PYPI = PackageFormat.AddMember("PYPI", smithyprelude.Unit)
-
-	PackageFormat_MAVEN = PackageFormat.AddMember("MAVEN", smithyprelude.Unit)
-
-	PackageFormat_NUGET = PackageFormat.AddMember("NUGET", smithyprelude.Unit)
-
-	PackageFormat_GENERIC = PackageFormat.AddMember("GENERIC", smithyprelude.Unit)
-
-	PackageFormat_RUBY = PackageFormat.AddMember("RUBY", smithyprelude.Unit)
-
-	PackageFormat_SWIFT = PackageFormat.AddMember("SWIFT", smithyprelude.Unit)
-
-	PackageFormat_CARGO = PackageFormat.AddMember("CARGO", smithyprelude.Unit)
-
-	PackageGroupAssociationType_STRONG = PackageGroupAssociationType.AddMember("STRONG", smithyprelude.Unit)
-
-	PackageGroupAssociationType_WEAK = PackageGroupAssociationType.AddMember("WEAK", smithyprelude.Unit)
-
-	AssociatedPackage_format = AssociatedPackage.AddMember("format", PackageFormat)
-
-	AssociatedPackage_namespace = AssociatedPackage.AddMember("namespace", _PackageNamespace)
-
-	AssociatedPackage_package = AssociatedPackage.AddMember("package", _PackageName)
-
-	AssociatedPackage_associationType = AssociatedPackage.AddMember("associationType", PackageGroupAssociationType)
-
-	_AssociatedPackageList_member = _AssociatedPackageList.AddMember("member", AssociatedPackage)
-
-	ResourceType_DOMAIN = ResourceType.AddMember("DOMAIN", smithyprelude.Unit)
-
-	ResourceType_REPOSITORY = ResourceType.AddMember("REPOSITORY", smithyprelude.Unit)
-
-	ResourceType_PACKAGE = ResourceType.AddMember("PACKAGE", smithyprelude.Unit)
-
-	ResourceType_PACKAGE_VERSION = ResourceType.AddMember("PACKAGE_VERSION", smithyprelude.Unit)
-
-	ResourceType_ASSET = ResourceType.AddMember("ASSET", smithyprelude.Unit)
-
-	ConflictException_message = ConflictException.AddMember("message", _String)
-
-	ConflictException_resourceId = ConflictException.AddMember("resourceId", _String)
-
-	ConflictException_resourceType = ConflictException.AddMember("resourceType", ResourceType)
-
-	DomainStatus_ACTIVE = DomainStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	DomainStatus_DELETED = DomainStatus.AddMember("DELETED", smithyprelude.Unit)
-
-	DomainDescription_name = DomainDescription.AddMember("name", _DomainName)
-
-	DomainDescription_owner = DomainDescription.AddMember("owner", _AccountId)
-
-	DomainDescription_arn = DomainDescription.AddMember("arn", _Arn)
-
-	DomainDescription_status = DomainDescription.AddMember("status", DomainStatus)
-
-	DomainDescription_createdTime = DomainDescription.AddMember("createdTime", _Timestamp)
-
-	DomainDescription_encryptionKey = DomainDescription.AddMember("encryptionKey", _Arn)
-
-	DomainDescription_repositoryCount = DomainDescription.AddMember("repositoryCount", _Integer)
-
-	DomainDescription_assetSizeBytes = DomainDescription.AddMember("assetSizeBytes", _Long)
-
-	DomainDescription_s3BucketArn = DomainDescription.AddMember("s3BucketArn", _Arn)
-
-	DomainEntryPoint_repositoryName = DomainEntryPoint.AddMember("repositoryName", _RepositoryName)
-
-	DomainEntryPoint_externalConnectionName = DomainEntryPoint.AddMember("externalConnectionName", _ExternalConnectionName)
-
-	DomainSummary_name = DomainSummary.AddMember("name", _DomainName)
-
-	DomainSummary_owner = DomainSummary.AddMember("owner", _AccountId)
-
-	DomainSummary_arn = DomainSummary.AddMember("arn", _Arn)
-
-	DomainSummary_status = DomainSummary.AddMember("status", DomainStatus)
-
-	DomainSummary_createdTime = DomainSummary.AddMember("createdTime", _Timestamp)
-
-	DomainSummary_encryptionKey = DomainSummary.AddMember("encryptionKey", _Arn)
-
-	_DomainSummaryList_member = _DomainSummaryList.AddMember("member", DomainSummary)
-
-	EndpointType_DUALSTACK = EndpointType.AddMember("DUALSTACK", smithyprelude.Unit)
-
-	EndpointType_IPV4 = EndpointType.AddMember("IPV4", smithyprelude.Unit)
-
-	ExternalConnectionStatus_AVAILABLE = ExternalConnectionStatus.AddMember("AVAILABLE", smithyprelude.Unit)
-
-	InternalServerException_message = InternalServerException.AddMember("message", _String)
-
-	LicenseInfo_name = LicenseInfo.AddMember("name", _String)
-
-	LicenseInfo_url = LicenseInfo.AddMember("url", _String)
-
-	_LicenseInfoList_member = _LicenseInfoList.AddMember("member", LicenseInfo)
-
-	PackageGroupOriginRestrictionType_EXTERNAL_UPSTREAM = PackageGroupOriginRestrictionType.AddMember("EXTERNAL_UPSTREAM", smithyprelude.Unit)
-
-	PackageGroupOriginRestrictionType_INTERNAL_UPSTREAM = PackageGroupOriginRestrictionType.AddMember("INTERNAL_UPSTREAM", smithyprelude.Unit)
-
-	PackageGroupOriginRestrictionType_PUBLISH = PackageGroupOriginRestrictionType.AddMember("PUBLISH", smithyprelude.Unit)
-
-	PackageGroupOriginRestrictionMode_ALLOW = PackageGroupOriginRestrictionMode.AddMember("ALLOW", smithyprelude.Unit)
-
-	PackageGroupOriginRestrictionMode_ALLOW_SPECIFIC_REPOSITORIES = PackageGroupOriginRestrictionMode.AddMember("ALLOW_SPECIFIC_REPOSITORIES", smithyprelude.Unit)
-
-	PackageGroupOriginRestrictionMode_BLOCK = PackageGroupOriginRestrictionMode.AddMember("BLOCK", smithyprelude.Unit)
-
-	PackageGroupOriginRestrictionMode_INHERIT = PackageGroupOriginRestrictionMode.AddMember("INHERIT", smithyprelude.Unit)
-
-	_OriginRestrictions_key = _OriginRestrictions.AddMember("key", PackageGroupOriginRestrictionType)
-
-	_OriginRestrictions_value = _OriginRestrictions.AddMember("value", PackageGroupOriginRestrictionMode)
-
-	PackageDependency_namespace = PackageDependency.AddMember("namespace", _PackageNamespace)
-
-	PackageDependency_package = PackageDependency.AddMember("package", _PackageName)
-
-	PackageDependency_dependencyType = PackageDependency.AddMember("dependencyType", _String)
-
-	PackageDependency_versionRequirement = PackageDependency.AddMember("versionRequirement", _String)
-
-	_PackageDependencyList_member = _PackageDependencyList.AddMember("member", PackageDependency)
-
-	PackageOriginRestrictions_publish = PackageOriginRestrictions.AddMember("publish", AllowPublish)
-
-	PackageOriginRestrictions_upstream = PackageOriginRestrictions.AddMember("upstream", AllowUpstream)
-
-	PackageOriginConfiguration_restrictions = PackageOriginConfiguration.AddMember("restrictions", PackageOriginRestrictions)
-
-	PackageDescription_format = PackageDescription.AddMember("format", PackageFormat)
-
-	PackageDescription_namespace = PackageDescription.AddMember("namespace", _PackageNamespace)
-
-	PackageDescription_name = PackageDescription.AddMember("name", _PackageName)
-
-	PackageDescription_originConfiguration = PackageDescription.AddMember("originConfiguration", PackageOriginConfiguration)
-
-	PackageGroupAllowedRepository_repositoryName = PackageGroupAllowedRepository.AddMember("repositoryName", _RepositoryName)
-
-	PackageGroupAllowedRepository_originRestrictionType = PackageGroupAllowedRepository.AddMember("originRestrictionType", PackageGroupOriginRestrictionType)
-
-	_PackageGroupAllowedRepositoryList_member = _PackageGroupAllowedRepositoryList.AddMember("member", PackageGroupAllowedRepository)
-
-	PackageGroupAllowedRepositoryUpdateType_ADDED = PackageGroupAllowedRepositoryUpdateType.AddMember("ADDED", smithyprelude.Unit)
-
-	PackageGroupAllowedRepositoryUpdateType_REMOVED = PackageGroupAllowedRepositoryUpdateType.AddMember("REMOVED", smithyprelude.Unit)
-
-	_RepositoryNameList_member = _RepositoryNameList.AddMember("member", _RepositoryName)
-
-	_PackageGroupAllowedRepositoryUpdate_key = _PackageGroupAllowedRepositoryUpdate.AddMember("key", PackageGroupAllowedRepositoryUpdateType)
-
-	_PackageGroupAllowedRepositoryUpdate_value = _PackageGroupAllowedRepositoryUpdate.AddMember("value", _RepositoryNameList)
-
-	_PackageGroupAllowedRepositoryUpdates_key = _PackageGroupAllowedRepositoryUpdates.AddMember("key", PackageGroupOriginRestrictionType)
-
-	_PackageGroupAllowedRepositoryUpdates_value = _PackageGroupAllowedRepositoryUpdates.AddMember("value", _PackageGroupAllowedRepositoryUpdate)
-
-	PackageGroupReference_arn = PackageGroupReference.AddMember("arn", _Arn)
-
-	PackageGroupReference_pattern = PackageGroupReference.AddMember("pattern", _PackageGroupPattern)
-
-	PackageGroupOriginRestriction_mode = PackageGroupOriginRestriction.AddMember("mode", PackageGroupOriginRestrictionMode)
-
-	PackageGroupOriginRestriction_effectiveMode = PackageGroupOriginRestriction.AddMember("effectiveMode", PackageGroupOriginRestrictionMode)
-
-	PackageGroupOriginRestriction_inheritedFrom = PackageGroupOriginRestriction.AddMember("inheritedFrom", PackageGroupReference)
-
-	PackageGroupOriginRestriction_repositoriesCount = PackageGroupOriginRestriction.AddMember("repositoriesCount", _LongOptional)
-
-	_PackageGroupOriginRestrictions_key = _PackageGroupOriginRestrictions.AddMember("key", PackageGroupOriginRestrictionType)
-
-	_PackageGroupOriginRestrictions_value = _PackageGroupOriginRestrictions.AddMember("value", PackageGroupOriginRestriction)
-
-	PackageGroupOriginConfiguration_restrictions = PackageGroupOriginConfiguration.AddMember("restrictions", _PackageGroupOriginRestrictions)
-
-	PackageGroupDescription_arn = PackageGroupDescription.AddMember("arn", _Arn)
-
-	PackageGroupDescription_pattern = PackageGroupDescription.AddMember("pattern", _PackageGroupPattern)
-
-	PackageGroupDescription_domainName = PackageGroupDescription.AddMember("domainName", _DomainName)
-
-	PackageGroupDescription_domainOwner = PackageGroupDescription.AddMember("domainOwner", _AccountId)
-
-	PackageGroupDescription_createdTime = PackageGroupDescription.AddMember("createdTime", _Timestamp)
-
-	PackageGroupDescription_contactInfo = PackageGroupDescription.AddMember("contactInfo", _PackageGroupContactInfo)
-
-	PackageGroupDescription_description = PackageGroupDescription.AddMember("description", _Description)
-
-	PackageGroupDescription_originConfiguration = PackageGroupDescription.AddMember("originConfiguration", PackageGroupOriginConfiguration)
-
-	PackageGroupDescription_parent = PackageGroupDescription.AddMember("parent", PackageGroupReference)
-
-	PackageGroupSummary_arn = PackageGroupSummary.AddMember("arn", _Arn)
-
-	PackageGroupSummary_pattern = PackageGroupSummary.AddMember("pattern", _PackageGroupPattern)
-
-	PackageGroupSummary_domainName = PackageGroupSummary.AddMember("domainName", _DomainName)
-
-	PackageGroupSummary_domainOwner = PackageGroupSummary.AddMember("domainOwner", _AccountId)
-
-	PackageGroupSummary_createdTime = PackageGroupSummary.AddMember("createdTime", _Timestamp)
-
-	PackageGroupSummary_contactInfo = PackageGroupSummary.AddMember("contactInfo", _PackageGroupContactInfo)
-
-	PackageGroupSummary_description = PackageGroupSummary.AddMember("description", _Description)
-
-	PackageGroupSummary_originConfiguration = PackageGroupSummary.AddMember("originConfiguration", PackageGroupOriginConfiguration)
-
-	PackageGroupSummary_parent = PackageGroupSummary.AddMember("parent", PackageGroupReference)
-
-	_PackageGroupSummaryList_member = _PackageGroupSummaryList.AddMember("member", PackageGroupSummary)
-
-	PackageSummary_format = PackageSummary.AddMember("format", PackageFormat)
-
-	PackageSummary_namespace = PackageSummary.AddMember("namespace", _PackageNamespace)
-
-	PackageSummary_package = PackageSummary.AddMember("package", _PackageName)
-
-	PackageSummary_originConfiguration = PackageSummary.AddMember("originConfiguration", PackageOriginConfiguration)
-
-	_PackageSummaryList_member = _PackageSummaryList.AddMember("member", PackageSummary)
-
-	PackageVersionStatus_PUBLISHED = PackageVersionStatus.AddMember("PUBLISHED", smithyprelude.Unit)
-
-	PackageVersionStatus_UNFINISHED = PackageVersionStatus.AddMember("UNFINISHED", smithyprelude.Unit)
-
-	PackageVersionStatus_UNLISTED = PackageVersionStatus.AddMember("UNLISTED", smithyprelude.Unit)
-
-	PackageVersionStatus_ARCHIVED = PackageVersionStatus.AddMember("ARCHIVED", smithyprelude.Unit)
-
-	PackageVersionStatus_DISPOSED = PackageVersionStatus.AddMember("DISPOSED", smithyprelude.Unit)
-
-	PackageVersionStatus_DELETED = PackageVersionStatus.AddMember("DELETED", smithyprelude.Unit)
-
-	PackageVersionOriginType_INTERNAL = PackageVersionOriginType.AddMember("INTERNAL", smithyprelude.Unit)
-
-	PackageVersionOriginType_EXTERNAL = PackageVersionOriginType.AddMember("EXTERNAL", smithyprelude.Unit)
-
-	PackageVersionOriginType_UNKNOWN = PackageVersionOriginType.AddMember("UNKNOWN", smithyprelude.Unit)
-
-	PackageVersionOrigin_domainEntryPoint = PackageVersionOrigin.AddMember("domainEntryPoint", DomainEntryPoint)
-
-	PackageVersionOrigin_originType = PackageVersionOrigin.AddMember("originType", PackageVersionOriginType)
-
-	PackageVersionDescription_format = PackageVersionDescription.AddMember("format", PackageFormat)
-
-	PackageVersionDescription_namespace = PackageVersionDescription.AddMember("namespace", _PackageNamespace)
-
-	PackageVersionDescription_packageName = PackageVersionDescription.AddMember("packageName", _PackageName)
-
-	PackageVersionDescription_displayName = PackageVersionDescription.AddMember("displayName", _String255)
-
-	PackageVersionDescription_version = PackageVersionDescription.AddMember("version", _PackageVersion)
-
-	PackageVersionDescription_summary = PackageVersionDescription.AddMember("summary", _String)
-
-	PackageVersionDescription_homePage = PackageVersionDescription.AddMember("homePage", _String)
-
-	PackageVersionDescription_sourceCodeRepository = PackageVersionDescription.AddMember("sourceCodeRepository", _String)
-
-	PackageVersionDescription_publishedTime = PackageVersionDescription.AddMember("publishedTime", _Timestamp)
-
-	PackageVersionDescription_licenses = PackageVersionDescription.AddMember("licenses", _LicenseInfoList)
-
-	PackageVersionDescription_revision = PackageVersionDescription.AddMember("revision", _PackageVersionRevision)
-
-	PackageVersionDescription_status = PackageVersionDescription.AddMember("status", PackageVersionStatus)
-
-	PackageVersionDescription_origin = PackageVersionDescription.AddMember("origin", PackageVersionOrigin)
-
-	PackageVersionErrorCode_ALREADY_EXISTS = PackageVersionErrorCode.AddMember("ALREADY_EXISTS", smithyprelude.Unit)
-
-	PackageVersionErrorCode_MISMATCHED_REVISION = PackageVersionErrorCode.AddMember("MISMATCHED_REVISION", smithyprelude.Unit)
-
-	PackageVersionErrorCode_MISMATCHED_STATUS = PackageVersionErrorCode.AddMember("MISMATCHED_STATUS", smithyprelude.Unit)
-
-	PackageVersionErrorCode_NOT_ALLOWED = PackageVersionErrorCode.AddMember("NOT_ALLOWED", smithyprelude.Unit)
-
-	PackageVersionErrorCode_NOT_FOUND = PackageVersionErrorCode.AddMember("NOT_FOUND", smithyprelude.Unit)
-
-	PackageVersionErrorCode_SKIPPED = PackageVersionErrorCode.AddMember("SKIPPED", smithyprelude.Unit)
-
-	PackageVersionError_errorCode = PackageVersionError.AddMember("errorCode", PackageVersionErrorCode)
-
-	PackageVersionError_errorMessage = PackageVersionError.AddMember("errorMessage", _ErrorMessage)
-
-	_PackageVersionErrorMap_key = _PackageVersionErrorMap.AddMember("key", _PackageVersion)
-
-	_PackageVersionErrorMap_value = _PackageVersionErrorMap.AddMember("value", PackageVersionError)
-
-	_PackageVersionList_member = _PackageVersionList.AddMember("member", _PackageVersion)
-
-	_PackageVersionRevisionMap_key = _PackageVersionRevisionMap.AddMember("key", _PackageVersion)
-
-	_PackageVersionRevisionMap_value = _PackageVersionRevisionMap.AddMember("value", _PackageVersionRevision)
-
-	PackageVersionSortType_PUBLISHED_TIME = PackageVersionSortType.AddMember("PUBLISHED_TIME", smithyprelude.Unit)
-
-	PackageVersionSummary_version = PackageVersionSummary.AddMember("version", _PackageVersion)
-
-	PackageVersionSummary_revision = PackageVersionSummary.AddMember("revision", _PackageVersionRevision)
-
-	PackageVersionSummary_status = PackageVersionSummary.AddMember("status", PackageVersionStatus)
-
-	PackageVersionSummary_origin = PackageVersionSummary.AddMember("origin", PackageVersionOrigin)
-
-	_PackageVersionSummaryList_member = _PackageVersionSummaryList.AddMember("member", PackageVersionSummary)
-
-	UpstreamRepositoryInfo_repositoryName = UpstreamRepositoryInfo.AddMember("repositoryName", _RepositoryName)
-
-	_UpstreamRepositoryInfoList_member = _UpstreamRepositoryInfoList.AddMember("member", UpstreamRepositoryInfo)
-
-	RepositoryExternalConnectionInfo_externalConnectionName = RepositoryExternalConnectionInfo.AddMember("externalConnectionName", _ExternalConnectionName)
-
-	RepositoryExternalConnectionInfo_packageFormat = RepositoryExternalConnectionInfo.AddMember("packageFormat", PackageFormat)
-
-	RepositoryExternalConnectionInfo_status = RepositoryExternalConnectionInfo.AddMember("status", ExternalConnectionStatus)
-
-	_RepositoryExternalConnectionInfoList_member = _RepositoryExternalConnectionInfoList.AddMember("member", RepositoryExternalConnectionInfo)
-
-	RepositoryDescription_name = RepositoryDescription.AddMember("name", _RepositoryName)
-
-	RepositoryDescription_administratorAccount = RepositoryDescription.AddMember("administratorAccount", _AccountId)
-
-	RepositoryDescription_domainName = RepositoryDescription.AddMember("domainName", _DomainName)
-
-	RepositoryDescription_domainOwner = RepositoryDescription.AddMember("domainOwner", _AccountId)
-
-	RepositoryDescription_arn = RepositoryDescription.AddMember("arn", _Arn)
-
-	RepositoryDescription_description = RepositoryDescription.AddMember("description", _Description)
-
-	RepositoryDescription_upstreams = RepositoryDescription.AddMember("upstreams", _UpstreamRepositoryInfoList)
-
-	RepositoryDescription_externalConnections = RepositoryDescription.AddMember("externalConnections", _RepositoryExternalConnectionInfoList)
-
-	RepositoryDescription_createdTime = RepositoryDescription.AddMember("createdTime", _Timestamp)
-
-	RepositorySummary_name = RepositorySummary.AddMember("name", _RepositoryName)
-
-	RepositorySummary_administratorAccount = RepositorySummary.AddMember("administratorAccount", _AccountId)
-
-	RepositorySummary_domainName = RepositorySummary.AddMember("domainName", _DomainName)
-
-	RepositorySummary_domainOwner = RepositorySummary.AddMember("domainOwner", _AccountId)
-
-	RepositorySummary_arn = RepositorySummary.AddMember("arn", _Arn)
-
-	RepositorySummary_description = RepositorySummary.AddMember("description", _Description)
-
-	RepositorySummary_createdTime = RepositorySummary.AddMember("createdTime", _Timestamp)
-
-	_RepositorySummaryList_member = _RepositorySummaryList.AddMember("member", RepositorySummary)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _String)
-
-	ResourceNotFoundException_resourceId = ResourceNotFoundException.AddMember("resourceId", _String)
-
-	ResourceNotFoundException_resourceType = ResourceNotFoundException.AddMember("resourceType", ResourceType)
-
-	ResourcePolicy_resourceArn = ResourcePolicy.AddMember("resourceArn", _Arn)
-
-	ResourcePolicy_revision = ResourcePolicy.AddMember("revision", _PolicyRevision)
-
-	ResourcePolicy_document = ResourcePolicy.AddMember("document", _PolicyDocument)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", _String)
-
-	ServiceQuotaExceededException_resourceId = ServiceQuotaExceededException.AddMember("resourceId", _String)
-
-	ServiceQuotaExceededException_resourceType = ServiceQuotaExceededException.AddMember("resourceType", ResourceType)
-
-	SuccessfulPackageVersionInfo_revision = SuccessfulPackageVersionInfo.AddMember("revision", _String)
-
-	SuccessfulPackageVersionInfo_status = SuccessfulPackageVersionInfo.AddMember("status", PackageVersionStatus)
-
-	_SuccessfulPackageVersionInfoMap_key = _SuccessfulPackageVersionInfoMap.AddMember("key", _PackageVersion)
-
-	_SuccessfulPackageVersionInfoMap_value = _SuccessfulPackageVersionInfoMap.AddMember("value", SuccessfulPackageVersionInfo)
-
-	Tag_key = Tag.AddMember("key", _TagKey)
-
-	Tag_value = Tag.AddMember("value", _TagValue)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", _String)
-
-	ThrottlingException_retryAfterSeconds = ThrottlingException.AddMember("retryAfterSeconds", _RetryAfterSeconds, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	UpstreamRepository_repositoryName = UpstreamRepository.AddMember("repositoryName", _RepositoryName)
-
-	_UpstreamRepositoryList_member = _UpstreamRepositoryList.AddMember("member", UpstreamRepository)
-
-	ValidationExceptionReason_CANNOT_PARSE = ValidationExceptionReason.AddMember("CANNOT_PARSE", smithyprelude.Unit)
-
-	ValidationExceptionReason_ENCRYPTION_KEY_ERROR = ValidationExceptionReason.AddMember("ENCRYPTION_KEY_ERROR", smithyprelude.Unit)
-
-	ValidationExceptionReason_FIELD_VALIDATION_FAILED = ValidationExceptionReason.AddMember("FIELD_VALIDATION_FAILED", smithyprelude.Unit)
-
-	ValidationExceptionReason_UNKNOWN_OPERATION = ValidationExceptionReason.AddMember("UNKNOWN_OPERATION", smithyprelude.Unit)
-
-	ValidationExceptionReason_OTHER = ValidationExceptionReason.AddMember("OTHER", smithyprelude.Unit)
-
-	ValidationException_message = ValidationException.AddMember("message", _String)
-
-	ValidationException_reason = ValidationException.AddMember("reason", ValidationExceptionReason)
-
-	AssociateExternalConnectionRequest_domain = AssociateExternalConnectionRequest.AddMember("domain", _DomainName, &smithytraits.HTTPQuery{Name: "domain"})
-
-	AssociateExternalConnectionRequest_domainOwner = AssociateExternalConnectionRequest.AddMember("domainOwner", _AccountId, &smithytraits.HTTPQuery{Name: "domain-owner"})
-
-	AssociateExternalConnectionRequest_repository = AssociateExternalConnectionRequest.AddMember("repository", _RepositoryName, &smithytraits.HTTPQuery{Name: "repository"})
-
-	AssociateExternalConnectionRequest_externalConnection = AssociateExternalConnectionRequest.AddMember("externalConnection", _ExternalConnectionName, &smithytraits.HTTPQuery{Name: "external-connection"})
-
-	AssociateExternalConnectionResult_repository = AssociateExternalConnectionResult.AddMember("repository", RepositoryDescription)
-
-	CopyPackageVersionsRequest_domain = CopyPackageVersionsRequest.AddMember("domain", _DomainName, &smithytraits.HTTPQuery{Name: "domain"})
-
-	CopyPackageVersionsRequest_domainOwner = CopyPackageVersionsRequest.AddMember("domainOwner", _AccountId, &smithytraits.HTTPQuery{Name: "domain-owner"})
-
-	CopyPackageVersionsRequest_sourceRepository = CopyPackageVersionsRequest.AddMember("sourceRepository", _RepositoryName, &smithytraits.HTTPQuery{Name: "source-repository"})
-
-	CopyPackageVersionsRequest_destinationRepository = CopyPackageVersionsRequest.AddMember("destinationRepository", _RepositoryName, &smithytraits.HTTPQuery{Name: "destination-repository"})
-
-	CopyPackageVersionsRequest_format = CopyPackageVersionsRequest.AddMember("format", PackageFormat, &smithytraits.HTTPQuery{Name: "format"})
-
-	CopyPackageVersionsRequest_namespace = CopyPackageVersionsRequest.AddMember("namespace", _PackageNamespace, &smithytraits.HTTPQuery{Name: "namespace"})
-
-	CopyPackageVersionsRequest_package = CopyPackageVersionsRequest.AddMember("package", _PackageName, &smithytraits.HTTPQuery{Name: "package"})
-
-	CopyPackageVersionsRequest_versions = CopyPackageVersionsRequest.AddMember("versions", _PackageVersionList)
-
-	CopyPackageVersionsRequest_versionRevisions = CopyPackageVersionsRequest.AddMember("versionRevisions", _PackageVersionRevisionMap)
-
-	CopyPackageVersionsRequest_allowOverwrite = CopyPackageVersionsRequest.AddMember("allowOverwrite", _BooleanOptional)
-
-	CopyPackageVersionsRequest_includeFromUpstream = CopyPackageVersionsRequest.AddMember("includeFromUpstream", _BooleanOptional)
-
-	CopyPackageVersionsResult_successfulVersions = CopyPackageVersionsResult.AddMember("successfulVersions", _SuccessfulPackageVersionInfoMap)
-
-	CopyPackageVersionsResult_failedVersions = CopyPackageVersionsResult.AddMember("failedVersions", _PackageVersionErrorMap)
-
-	CreateDomainRequest_domain = CreateDomainRequest.AddMember("domain", _DomainName, &smithytraits.HTTPQuery{Name: "domain"})
-
-	CreateDomainRequest_encryptionKey = CreateDomainRequest.AddMember("encryptionKey", _Arn)
-
-	CreateDomainRequest_tags = CreateDomainRequest.AddMember("tags", _TagList)
-
-	CreateDomainResult_domain = CreateDomainResult.AddMember("domain", DomainDescription)
-
-	CreatePackageGroupRequest_domain = CreatePackageGroupRequest.AddMember("domain", _DomainName, &smithytraits.HTTPQuery{Name: "domain"})
-
-	CreatePackageGroupRequest_domainOwner = CreatePackageGroupRequest.AddMember("domainOwner", _AccountId, &smithytraits.HTTPQuery{Name: "domain-owner"})
-
-	CreatePackageGroupRequest_packageGroup = CreatePackageGroupRequest.AddMember("packageGroup", _PackageGroupPattern)
-
-	CreatePackageGroupRequest_contactInfo = CreatePackageGroupRequest.AddMember("contactInfo", _PackageGroupContactInfo)
-
-	CreatePackageGroupRequest_description = CreatePackageGroupRequest.AddMember("description", _Description)
-
-	CreatePackageGroupRequest_tags = CreatePackageGroupRequest.AddMember("tags", _TagList)
-
-	CreatePackageGroupResult_packageGroup = CreatePackageGroupResult.AddMember("packageGroup", PackageGroupDescription)
-
-	CreateRepositoryRequest_domain = CreateRepositoryRequest.AddMember("domain", _DomainName, &smithytraits.HTTPQuery{Name: "domain"})
-
-	CreateRepositoryRequest_domainOwner = CreateRepositoryRequest.AddMember("domainOwner", _AccountId, &smithytraits.HTTPQuery{Name: "domain-owner"})
-
-	CreateRepositoryRequest_repository = CreateRepositoryRequest.AddMember("repository", _RepositoryName, &smithytraits.HTTPQuery{Name: "repository"})
-
-	CreateRepositoryRequest_description = CreateRepositoryRequest.AddMember("description", _Description)
-
-	CreateRepositoryRequest_upstreams = CreateRepositoryRequest.AddMember("upstreams", _UpstreamRepositoryList)
-
-	CreateRepositoryRequest_tags = CreateRepositoryRequest.AddMember("tags", _TagList)
-
-	CreateRepositoryResult_repository = CreateRepositoryResult.AddMember("repository", RepositoryDescription)
-
-	DeleteDomainRequest_domain = DeleteDomainRequest.AddMember("domain", _DomainName, &smithytraits.HTTPQuery{Name: "domain"})
-
-	DeleteDomainRequest_domainOwner = DeleteDomainRequest.AddMember("domainOwner", _AccountId, &smithytraits.HTTPQuery{Name: "domain-owner"})
-
-	DeleteDomainResult_domain = DeleteDomainResult.AddMember("domain", DomainDescription)
-
-	DeleteDomainPermissionsPolicyRequest_domain = DeleteDomainPermissionsPolicyRequest.AddMember("domain", _DomainName, &smithytraits.HTTPQuery{Name: "domain"})
-
-	DeleteDomainPermissionsPolicyRequest_domainOwner = DeleteDomainPermissionsPolicyRequest.AddMember("domainOwner", _AccountId, &smithytraits.HTTPQuery{Name: "domain-owner"})
-
-	DeleteDomainPermissionsPolicyRequest_policyRevision = DeleteDomainPermissionsPolicyRequest.AddMember("policyRevision", _PolicyRevision, &smithytraits.HTTPQuery{Name: "policy-revision"})
-
-	DeleteDomainPermissionsPolicyResult_policy = DeleteDomainPermissionsPolicyResult.AddMember("policy", ResourcePolicy)
-
-	DeletePackageGroupRequest_domain = DeletePackageGroupRequest.AddMember("domain", _DomainName, &smithytraits.HTTPQuery{Name: "domain"})
-
-	DeletePackageGroupRequest_domainOwner = DeletePackageGroupRequest.AddMember("domainOwner", _AccountId, &smithytraits.HTTPQuery{Name: "domain-owner"})
-
-	DeletePackageGroupRequest_packageGroup = DeletePackageGroupRequest.AddMember("packageGroup", _String, &smithytraits.HTTPQuery{Name: "package-group"})
-
-	DeletePackageGroupResult_packageGroup = DeletePackageGroupResult.AddMember("packageGroup", PackageGroupDescription)
-
-	DeletePackageRequest_domain = DeletePackageRequest.AddMember("domain", _DomainName, &smithytraits.HTTPQuery{Name: "domain"})
-
-	DeletePackageRequest_domainOwner = DeletePackageRequest.AddMember("domainOwner", _AccountId, &smithytraits.HTTPQuery{Name: "domain-owner"})
-
-	DeletePackageRequest_repository = DeletePackageRequest.AddMember("repository", _RepositoryName, &smithytraits.HTTPQuery{Name: "repository"})
-
-	DeletePackageRequest_format = DeletePackageRequest.AddMember("format", PackageFormat, &smithytraits.HTTPQuery{Name: "format"})
-
-	DeletePackageRequest_namespace = DeletePackageRequest.AddMember("namespace", _PackageNamespace, &smithytraits.HTTPQuery{Name: "namespace"})
-
-	DeletePackageRequest_package = DeletePackageRequest.AddMember("package", _PackageName, &smithytraits.HTTPQuery{Name: "package"})
-
-	DeletePackageResult_deletedPackage = DeletePackageResult.AddMember("deletedPackage", PackageSummary)
-
-	DeletePackageVersionsRequest_domain = DeletePackageVersionsRequest.AddMember("domain", _DomainName, &smithytraits.HTTPQuery{Name: "domain"})
-
-	DeletePackageVersionsRequest_domainOwner = DeletePackageVersionsRequest.AddMember("domainOwner", _AccountId, &smithytraits.HTTPQuery{Name: "domain-owner"})
-
-	DeletePackageVersionsRequest_repository = DeletePackageVersionsRequest.AddMember("repository", _RepositoryName, &smithytraits.HTTPQuery{Name: "repository"})
-
-	DeletePackageVersionsRequest_format = DeletePackageVersionsRequest.AddMember("format", PackageFormat, &smithytraits.HTTPQuery{Name: "format"})
-
-	DeletePackageVersionsRequest_namespace = DeletePackageVersionsRequest.AddMember("namespace", _PackageNamespace, &smithytraits.HTTPQuery{Name: "namespace"})
-
-	DeletePackageVersionsRequest_package = DeletePackageVersionsRequest.AddMember("package", _PackageName, &smithytraits.HTTPQuery{Name: "package"})
-
-	DeletePackageVersionsRequest_versions = DeletePackageVersionsRequest.AddMember("versions", _PackageVersionList)
-
-	DeletePackageVersionsRequest_expectedStatus = DeletePackageVersionsRequest.AddMember("expectedStatus", PackageVersionStatus)
-
-	DeletePackageVersionsResult_successfulVersions = DeletePackageVersionsResult.AddMember("successfulVersions", _SuccessfulPackageVersionInfoMap)
-
-	DeletePackageVersionsResult_failedVersions = DeletePackageVersionsResult.AddMember("failedVersions", _PackageVersionErrorMap)
-
-	DeleteRepositoryRequest_domain = DeleteRepositoryRequest.AddMember("domain", _DomainName, &smithytraits.HTTPQuery{Name: "domain"})
-
-	DeleteRepositoryRequest_domainOwner = DeleteRepositoryRequest.AddMember("domainOwner", _AccountId, &smithytraits.HTTPQuery{Name: "domain-owner"})
-
-	DeleteRepositoryRequest_repository = DeleteRepositoryRequest.AddMember("repository", _RepositoryName, &smithytraits.HTTPQuery{Name: "repository"})
-
-	DeleteRepositoryResult_repository = DeleteRepositoryResult.AddMember("repository", RepositoryDescription)
-
-	DeleteRepositoryPermissionsPolicyRequest_domain = DeleteRepositoryPermissionsPolicyRequest.AddMember("domain", _DomainName, &smithytraits.HTTPQuery{Name: "domain"})
-
-	DeleteRepositoryPermissionsPolicyRequest_domainOwner = DeleteRepositoryPermissionsPolicyRequest.AddMember("domainOwner", _AccountId, &smithytraits.HTTPQuery{Name: "domain-owner"})
-
-	DeleteRepositoryPermissionsPolicyRequest_repository = DeleteRepositoryPermissionsPolicyRequest.AddMember("repository", _RepositoryName, &smithytraits.HTTPQuery{Name: "repository"})
-
-	DeleteRepositoryPermissionsPolicyRequest_policyRevision = DeleteRepositoryPermissionsPolicyRequest.AddMember("policyRevision", _PolicyRevision, &smithytraits.HTTPQuery{Name: "policy-revision"})
-
-	DeleteRepositoryPermissionsPolicyResult_policy = DeleteRepositoryPermissionsPolicyResult.AddMember("policy", ResourcePolicy)
-
-	DescribeDomainRequest_domain = DescribeDomainRequest.AddMember("domain", _DomainName, &smithytraits.HTTPQuery{Name: "domain"})
-
-	DescribeDomainRequest_domainOwner = DescribeDomainRequest.AddMember("domainOwner", _AccountId, &smithytraits.HTTPQuery{Name: "domain-owner"})
-
-	DescribeDomainResult_domain = DescribeDomainResult.AddMember("domain", DomainDescription)
-
-	DescribePackageGroupRequest_domain = DescribePackageGroupRequest.AddMember("domain", _DomainName, &smithytraits.HTTPQuery{Name: "domain"})
-
-	DescribePackageGroupRequest_domainOwner = DescribePackageGroupRequest.AddMember("domainOwner", _AccountId, &smithytraits.HTTPQuery{Name: "domain-owner"})
-
-	DescribePackageGroupRequest_packageGroup = DescribePackageGroupRequest.AddMember("packageGroup", _PackageGroupPattern, &smithytraits.HTTPQuery{Name: "package-group"})
-
-	DescribePackageGroupResult_packageGroup = DescribePackageGroupResult.AddMember("packageGroup", PackageGroupDescription)
-
-	DescribePackageRequest_domain = DescribePackageRequest.AddMember("domain", _DomainName, &smithytraits.HTTPQuery{Name: "domain"})
-
-	DescribePackageRequest_domainOwner = DescribePackageRequest.AddMember("domainOwner", _AccountId, &smithytraits.HTTPQuery{Name: "domain-owner"})
-
-	DescribePackageRequest_repository = DescribePackageRequest.AddMember("repository", _RepositoryName, &smithytraits.HTTPQuery{Name: "repository"})
-
-	DescribePackageRequest_format = DescribePackageRequest.AddMember("format", PackageFormat, &smithytraits.HTTPQuery{Name: "format"})
-
-	DescribePackageRequest_namespace = DescribePackageRequest.AddMember("namespace", _PackageNamespace, &smithytraits.HTTPQuery{Name: "namespace"})
-
-	DescribePackageRequest_package = DescribePackageRequest.AddMember("package", _PackageName, &smithytraits.HTTPQuery{Name: "package"})
-
-	DescribePackageResult_package = DescribePackageResult.AddMember("package", PackageDescription)
-
-	DescribePackageVersionRequest_domain = DescribePackageVersionRequest.AddMember("domain", _DomainName, &smithytraits.HTTPQuery{Name: "domain"})
-
-	DescribePackageVersionRequest_domainOwner = DescribePackageVersionRequest.AddMember("domainOwner", _AccountId, &smithytraits.HTTPQuery{Name: "domain-owner"})
-
-	DescribePackageVersionRequest_repository = DescribePackageVersionRequest.AddMember("repository", _RepositoryName, &smithytraits.HTTPQuery{Name: "repository"})
-
-	DescribePackageVersionRequest_format = DescribePackageVersionRequest.AddMember("format", PackageFormat, &smithytraits.HTTPQuery{Name: "format"})
-
-	DescribePackageVersionRequest_namespace = DescribePackageVersionRequest.AddMember("namespace", _PackageNamespace, &smithytraits.HTTPQuery{Name: "namespace"})
-
-	DescribePackageVersionRequest_package = DescribePackageVersionRequest.AddMember("package", _PackageName, &smithytraits.HTTPQuery{Name: "package"})
-
-	DescribePackageVersionRequest_packageVersion = DescribePackageVersionRequest.AddMember("packageVersion", _PackageVersion, &smithytraits.HTTPQuery{Name: "version"})
-
-	DescribePackageVersionResult_packageVersion = DescribePackageVersionResult.AddMember("packageVersion", PackageVersionDescription)
-
-	DescribeRepositoryRequest_domain = DescribeRepositoryRequest.AddMember("domain", _DomainName, &smithytraits.HTTPQuery{Name: "domain"})
-
-	DescribeRepositoryRequest_domainOwner = DescribeRepositoryRequest.AddMember("domainOwner", _AccountId, &smithytraits.HTTPQuery{Name: "domain-owner"})
-
-	DescribeRepositoryRequest_repository = DescribeRepositoryRequest.AddMember("repository", _RepositoryName, &smithytraits.HTTPQuery{Name: "repository"})
-
-	DescribeRepositoryResult_repository = DescribeRepositoryResult.AddMember("repository", RepositoryDescription)
-
-	DisassociateExternalConnectionRequest_domain = DisassociateExternalConnectionRequest.AddMember("domain", _DomainName, &smithytraits.HTTPQuery{Name: "domain"})
-
-	DisassociateExternalConnectionRequest_domainOwner = DisassociateExternalConnectionRequest.AddMember("domainOwner", _AccountId, &smithytraits.HTTPQuery{Name: "domain-owner"})
-
-	DisassociateExternalConnectionRequest_repository = DisassociateExternalConnectionRequest.AddMember("repository", _RepositoryName, &smithytraits.HTTPQuery{Name: "repository"})
-
-	DisassociateExternalConnectionRequest_externalConnection = DisassociateExternalConnectionRequest.AddMember("externalConnection", _ExternalConnectionName, &smithytraits.HTTPQuery{Name: "external-connection"})
-
-	DisassociateExternalConnectionResult_repository = DisassociateExternalConnectionResult.AddMember("repository", RepositoryDescription)
-
-	DisposePackageVersionsRequest_domain = DisposePackageVersionsRequest.AddMember("domain", _DomainName, &smithytraits.HTTPQuery{Name: "domain"})
-
-	DisposePackageVersionsRequest_domainOwner = DisposePackageVersionsRequest.AddMember("domainOwner", _AccountId, &smithytraits.HTTPQuery{Name: "domain-owner"})
-
-	DisposePackageVersionsRequest_repository = DisposePackageVersionsRequest.AddMember("repository", _RepositoryName, &smithytraits.HTTPQuery{Name: "repository"})
-
-	DisposePackageVersionsRequest_format = DisposePackageVersionsRequest.AddMember("format", PackageFormat, &smithytraits.HTTPQuery{Name: "format"})
-
-	DisposePackageVersionsRequest_namespace = DisposePackageVersionsRequest.AddMember("namespace", _PackageNamespace, &smithytraits.HTTPQuery{Name: "namespace"})
-
-	DisposePackageVersionsRequest_package = DisposePackageVersionsRequest.AddMember("package", _PackageName, &smithytraits.HTTPQuery{Name: "package"})
-
-	DisposePackageVersionsRequest_versions = DisposePackageVersionsRequest.AddMember("versions", _PackageVersionList)
-
-	DisposePackageVersionsRequest_versionRevisions = DisposePackageVersionsRequest.AddMember("versionRevisions", _PackageVersionRevisionMap)
-
-	DisposePackageVersionsRequest_expectedStatus = DisposePackageVersionsRequest.AddMember("expectedStatus", PackageVersionStatus)
-
-	DisposePackageVersionsResult_successfulVersions = DisposePackageVersionsResult.AddMember("successfulVersions", _SuccessfulPackageVersionInfoMap)
-
-	DisposePackageVersionsResult_failedVersions = DisposePackageVersionsResult.AddMember("failedVersions", _PackageVersionErrorMap)
-
-	GetAssociatedPackageGroupRequest_domain = GetAssociatedPackageGroupRequest.AddMember("domain", _DomainName, &smithytraits.HTTPQuery{Name: "domain"})
-
-	GetAssociatedPackageGroupRequest_domainOwner = GetAssociatedPackageGroupRequest.AddMember("domainOwner", _AccountId, &smithytraits.HTTPQuery{Name: "domain-owner"})
-
-	GetAssociatedPackageGroupRequest_format = GetAssociatedPackageGroupRequest.AddMember("format", PackageFormat, &smithytraits.HTTPQuery{Name: "format"})
-
-	GetAssociatedPackageGroupRequest_namespace = GetAssociatedPackageGroupRequest.AddMember("namespace", _PackageNamespace, &smithytraits.HTTPQuery{Name: "namespace"})
-
-	GetAssociatedPackageGroupRequest_package = GetAssociatedPackageGroupRequest.AddMember("package", _PackageName, &smithytraits.HTTPQuery{Name: "package"})
-
-	GetAssociatedPackageGroupResult_packageGroup = GetAssociatedPackageGroupResult.AddMember("packageGroup", PackageGroupDescription)
-
-	GetAssociatedPackageGroupResult_associationType = GetAssociatedPackageGroupResult.AddMember("associationType", PackageGroupAssociationType)
-
-	GetAuthorizationTokenRequest_domain = GetAuthorizationTokenRequest.AddMember("domain", _DomainName, &smithytraits.HTTPQuery{Name: "domain"})
-
-	GetAuthorizationTokenRequest_domainOwner = GetAuthorizationTokenRequest.AddMember("domainOwner", _AccountId, &smithytraits.HTTPQuery{Name: "domain-owner"})
-
-	GetAuthorizationTokenRequest_durationSeconds = GetAuthorizationTokenRequest.AddMember("durationSeconds", _AuthorizationTokenDurationSeconds, &smithytraits.HTTPQuery{Name: "duration"})
-
-	GetAuthorizationTokenResult_authorizationToken = GetAuthorizationTokenResult.AddMember("authorizationToken", _String)
-
-	GetAuthorizationTokenResult_expiration = GetAuthorizationTokenResult.AddMember("expiration", _Timestamp)
-
-	GetDomainPermissionsPolicyRequest_domain = GetDomainPermissionsPolicyRequest.AddMember("domain", _DomainName, &smithytraits.HTTPQuery{Name: "domain"})
-
-	GetDomainPermissionsPolicyRequest_domainOwner = GetDomainPermissionsPolicyRequest.AddMember("domainOwner", _AccountId, &smithytraits.HTTPQuery{Name: "domain-owner"})
-
-	GetDomainPermissionsPolicyResult_policy = GetDomainPermissionsPolicyResult.AddMember("policy", ResourcePolicy)
-
-	GetPackageVersionAssetRequest_domain = GetPackageVersionAssetRequest.AddMember("domain", _DomainName, &smithytraits.HTTPQuery{Name: "domain"})
-
-	GetPackageVersionAssetRequest_domainOwner = GetPackageVersionAssetRequest.AddMember("domainOwner", _AccountId, &smithytraits.HTTPQuery{Name: "domain-owner"})
-
-	GetPackageVersionAssetRequest_repository = GetPackageVersionAssetRequest.AddMember("repository", _RepositoryName, &smithytraits.HTTPQuery{Name: "repository"})
-
-	GetPackageVersionAssetRequest_format = GetPackageVersionAssetRequest.AddMember("format", PackageFormat, &smithytraits.HTTPQuery{Name: "format"})
-
-	GetPackageVersionAssetRequest_namespace = GetPackageVersionAssetRequest.AddMember("namespace", _PackageNamespace, &smithytraits.HTTPQuery{Name: "namespace"})
-
-	GetPackageVersionAssetRequest_package = GetPackageVersionAssetRequest.AddMember("package", _PackageName, &smithytraits.HTTPQuery{Name: "package"})
-
-	GetPackageVersionAssetRequest_packageVersion = GetPackageVersionAssetRequest.AddMember("packageVersion", _PackageVersion, &smithytraits.HTTPQuery{Name: "version"})
-
-	GetPackageVersionAssetRequest_asset = GetPackageVersionAssetRequest.AddMember("asset", _AssetName, &smithytraits.HTTPQuery{Name: "asset"})
-
-	GetPackageVersionAssetRequest_packageVersionRevision = GetPackageVersionAssetRequest.AddMember("packageVersionRevision", _PackageVersionRevision, &smithytraits.HTTPQuery{Name: "revision"})
-
-	GetPackageVersionAssetResult_asset = GetPackageVersionAssetResult.AddMember("asset", _Asset, &smithytraits.HTTPPayload{})
-
-	GetPackageVersionAssetResult_assetName = GetPackageVersionAssetResult.AddMember("assetName", _AssetName, &smithytraits.HTTPHeader{Name: "X-AssetName"})
-
-	GetPackageVersionAssetResult_packageVersion = GetPackageVersionAssetResult.AddMember("packageVersion", _PackageVersion, &smithytraits.HTTPHeader{Name: "X-PackageVersion"})
-
-	GetPackageVersionAssetResult_packageVersionRevision = GetPackageVersionAssetResult.AddMember("packageVersionRevision", _PackageVersionRevision, &smithytraits.HTTPHeader{Name: "X-PackageVersionRevision"})
-
-	GetPackageVersionReadmeRequest_domain = GetPackageVersionReadmeRequest.AddMember("domain", _DomainName, &smithytraits.HTTPQuery{Name: "domain"})
-
-	GetPackageVersionReadmeRequest_domainOwner = GetPackageVersionReadmeRequest.AddMember("domainOwner", _AccountId, &smithytraits.HTTPQuery{Name: "domain-owner"})
-
-	GetPackageVersionReadmeRequest_repository = GetPackageVersionReadmeRequest.AddMember("repository", _RepositoryName, &smithytraits.HTTPQuery{Name: "repository"})
-
-	GetPackageVersionReadmeRequest_format = GetPackageVersionReadmeRequest.AddMember("format", PackageFormat, &smithytraits.HTTPQuery{Name: "format"})
-
-	GetPackageVersionReadmeRequest_namespace = GetPackageVersionReadmeRequest.AddMember("namespace", _PackageNamespace, &smithytraits.HTTPQuery{Name: "namespace"})
-
-	GetPackageVersionReadmeRequest_package = GetPackageVersionReadmeRequest.AddMember("package", _PackageName, &smithytraits.HTTPQuery{Name: "package"})
-
-	GetPackageVersionReadmeRequest_packageVersion = GetPackageVersionReadmeRequest.AddMember("packageVersion", _PackageVersion, &smithytraits.HTTPQuery{Name: "version"})
-
-	GetPackageVersionReadmeResult_format = GetPackageVersionReadmeResult.AddMember("format", PackageFormat)
-
-	GetPackageVersionReadmeResult_namespace = GetPackageVersionReadmeResult.AddMember("namespace", _PackageNamespace)
-
-	GetPackageVersionReadmeResult_package = GetPackageVersionReadmeResult.AddMember("package", _PackageName)
-
-	GetPackageVersionReadmeResult_version = GetPackageVersionReadmeResult.AddMember("version", _PackageVersion)
-
-	GetPackageVersionReadmeResult_versionRevision = GetPackageVersionReadmeResult.AddMember("versionRevision", _PackageVersionRevision)
-
-	GetPackageVersionReadmeResult_readme = GetPackageVersionReadmeResult.AddMember("readme", _String)
-
-	GetRepositoryEndpointRequest_domain = GetRepositoryEndpointRequest.AddMember("domain", _DomainName, &smithytraits.HTTPQuery{Name: "domain"})
-
-	GetRepositoryEndpointRequest_domainOwner = GetRepositoryEndpointRequest.AddMember("domainOwner", _AccountId, &smithytraits.HTTPQuery{Name: "domain-owner"})
-
-	GetRepositoryEndpointRequest_repository = GetRepositoryEndpointRequest.AddMember("repository", _RepositoryName, &smithytraits.HTTPQuery{Name: "repository"})
-
-	GetRepositoryEndpointRequest_format = GetRepositoryEndpointRequest.AddMember("format", PackageFormat, &smithytraits.HTTPQuery{Name: "format"})
-
-	GetRepositoryEndpointRequest_endpointType = GetRepositoryEndpointRequest.AddMember("endpointType", EndpointType, &smithytraits.HTTPQuery{Name: "endpointType"})
-
-	GetRepositoryEndpointResult_repositoryEndpoint = GetRepositoryEndpointResult.AddMember("repositoryEndpoint", _String)
-
-	GetRepositoryPermissionsPolicyRequest_domain = GetRepositoryPermissionsPolicyRequest.AddMember("domain", _DomainName, &smithytraits.HTTPQuery{Name: "domain"})
-
-	GetRepositoryPermissionsPolicyRequest_domainOwner = GetRepositoryPermissionsPolicyRequest.AddMember("domainOwner", _AccountId, &smithytraits.HTTPQuery{Name: "domain-owner"})
-
-	GetRepositoryPermissionsPolicyRequest_repository = GetRepositoryPermissionsPolicyRequest.AddMember("repository", _RepositoryName, &smithytraits.HTTPQuery{Name: "repository"})
-
-	GetRepositoryPermissionsPolicyResult_policy = GetRepositoryPermissionsPolicyResult.AddMember("policy", ResourcePolicy)
-
-	ListAllowedRepositoriesForGroupRequest_domain = ListAllowedRepositoriesForGroupRequest.AddMember("domain", _DomainName, &smithytraits.HTTPQuery{Name: "domain"})
-
-	ListAllowedRepositoriesForGroupRequest_domainOwner = ListAllowedRepositoriesForGroupRequest.AddMember("domainOwner", _AccountId, &smithytraits.HTTPQuery{Name: "domain-owner"})
-
-	ListAllowedRepositoriesForGroupRequest_packageGroup = ListAllowedRepositoriesForGroupRequest.AddMember("packageGroup", _PackageGroupPattern, &smithytraits.HTTPQuery{Name: "package-group"})
-
-	ListAllowedRepositoriesForGroupRequest_originRestrictionType = ListAllowedRepositoriesForGroupRequest.AddMember("originRestrictionType", PackageGroupOriginRestrictionType, &smithytraits.HTTPQuery{Name: "originRestrictionType"})
-
-	ListAllowedRepositoriesForGroupRequest_maxResults = ListAllowedRepositoriesForGroupRequest.AddMember("maxResults", _ListAllowedRepositoriesForGroupMaxResults, &smithytraits.HTTPQuery{Name: "max-results"})
-
-	ListAllowedRepositoriesForGroupRequest_nextToken = ListAllowedRepositoriesForGroupRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "next-token"})
-
-	ListAllowedRepositoriesForGroupResult_allowedRepositories = ListAllowedRepositoriesForGroupResult.AddMember("allowedRepositories", _RepositoryNameList)
-
-	ListAllowedRepositoriesForGroupResult_nextToken = ListAllowedRepositoriesForGroupResult.AddMember("nextToken", _PaginationToken)
-
-	ListAssociatedPackagesRequest_domain = ListAssociatedPackagesRequest.AddMember("domain", _DomainName, &smithytraits.HTTPQuery{Name: "domain"})
-
-	ListAssociatedPackagesRequest_domainOwner = ListAssociatedPackagesRequest.AddMember("domainOwner", _AccountId, &smithytraits.HTTPQuery{Name: "domain-owner"})
-
-	ListAssociatedPackagesRequest_packageGroup = ListAssociatedPackagesRequest.AddMember("packageGroup", _PackageGroupPattern, &smithytraits.HTTPQuery{Name: "package-group"})
-
-	ListAssociatedPackagesRequest_maxResults = ListAssociatedPackagesRequest.AddMember("maxResults", _ListPackagesMaxResults, &smithytraits.HTTPQuery{Name: "max-results"})
-
-	ListAssociatedPackagesRequest_nextToken = ListAssociatedPackagesRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "next-token"})
-
-	ListAssociatedPackagesRequest_preview = ListAssociatedPackagesRequest.AddMember("preview", _BooleanOptional, &smithytraits.HTTPQuery{Name: "preview"})
-
-	ListAssociatedPackagesResult_packages = ListAssociatedPackagesResult.AddMember("packages", _AssociatedPackageList)
-
-	ListAssociatedPackagesResult_nextToken = ListAssociatedPackagesResult.AddMember("nextToken", _PaginationToken)
-
-	ListDomainsRequest_maxResults = ListDomainsRequest.AddMember("maxResults", _ListDomainsMaxResults)
-
-	ListDomainsRequest_nextToken = ListDomainsRequest.AddMember("nextToken", _PaginationToken)
-
-	ListDomainsResult_domains = ListDomainsResult.AddMember("domains", _DomainSummaryList)
-
-	ListDomainsResult_nextToken = ListDomainsResult.AddMember("nextToken", _PaginationToken)
-
-	ListPackageGroupsRequest_domain = ListPackageGroupsRequest.AddMember("domain", _DomainName, &smithytraits.HTTPQuery{Name: "domain"})
-
-	ListPackageGroupsRequest_domainOwner = ListPackageGroupsRequest.AddMember("domainOwner", _AccountId, &smithytraits.HTTPQuery{Name: "domain-owner"})
-
-	ListPackageGroupsRequest_maxResults = ListPackageGroupsRequest.AddMember("maxResults", _ListPackageGroupsMaxResults, &smithytraits.HTTPQuery{Name: "max-results"})
-
-	ListPackageGroupsRequest_nextToken = ListPackageGroupsRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "next-token"})
-
-	ListPackageGroupsRequest_prefix = ListPackageGroupsRequest.AddMember("prefix", _PackageGroupPatternPrefix, &smithytraits.HTTPQuery{Name: "prefix"})
-
-	ListPackageGroupsResult_packageGroups = ListPackageGroupsResult.AddMember("packageGroups", _PackageGroupSummaryList)
-
-	ListPackageGroupsResult_nextToken = ListPackageGroupsResult.AddMember("nextToken", _PaginationToken)
-
-	ListPackagesRequest_domain = ListPackagesRequest.AddMember("domain", _DomainName, &smithytraits.HTTPQuery{Name: "domain"})
-
-	ListPackagesRequest_domainOwner = ListPackagesRequest.AddMember("domainOwner", _AccountId, &smithytraits.HTTPQuery{Name: "domain-owner"})
-
-	ListPackagesRequest_repository = ListPackagesRequest.AddMember("repository", _RepositoryName, &smithytraits.HTTPQuery{Name: "repository"})
-
-	ListPackagesRequest_format = ListPackagesRequest.AddMember("format", PackageFormat, &smithytraits.HTTPQuery{Name: "format"})
-
-	ListPackagesRequest_namespace = ListPackagesRequest.AddMember("namespace", _PackageNamespace, &smithytraits.HTTPQuery{Name: "namespace"})
-
-	ListPackagesRequest_packagePrefix = ListPackagesRequest.AddMember("packagePrefix", _PackageName, &smithytraits.HTTPQuery{Name: "package-prefix"})
-
-	ListPackagesRequest_maxResults = ListPackagesRequest.AddMember("maxResults", _ListPackagesMaxResults, &smithytraits.HTTPQuery{Name: "max-results"})
-
-	ListPackagesRequest_nextToken = ListPackagesRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "next-token"})
-
-	ListPackagesRequest_publish = ListPackagesRequest.AddMember("publish", AllowPublish, &smithytraits.HTTPQuery{Name: "publish"})
-
-	ListPackagesRequest_upstream = ListPackagesRequest.AddMember("upstream", AllowUpstream, &smithytraits.HTTPQuery{Name: "upstream"})
-
-	ListPackagesResult_packages = ListPackagesResult.AddMember("packages", _PackageSummaryList)
-
-	ListPackagesResult_nextToken = ListPackagesResult.AddMember("nextToken", _PaginationToken)
-
-	ListPackageVersionAssetsRequest_domain = ListPackageVersionAssetsRequest.AddMember("domain", _DomainName, &smithytraits.HTTPQuery{Name: "domain"})
-
-	ListPackageVersionAssetsRequest_domainOwner = ListPackageVersionAssetsRequest.AddMember("domainOwner", _AccountId, &smithytraits.HTTPQuery{Name: "domain-owner"})
-
-	ListPackageVersionAssetsRequest_repository = ListPackageVersionAssetsRequest.AddMember("repository", _RepositoryName, &smithytraits.HTTPQuery{Name: "repository"})
-
-	ListPackageVersionAssetsRequest_format = ListPackageVersionAssetsRequest.AddMember("format", PackageFormat, &smithytraits.HTTPQuery{Name: "format"})
-
-	ListPackageVersionAssetsRequest_namespace = ListPackageVersionAssetsRequest.AddMember("namespace", _PackageNamespace, &smithytraits.HTTPQuery{Name: "namespace"})
-
-	ListPackageVersionAssetsRequest_package = ListPackageVersionAssetsRequest.AddMember("package", _PackageName, &smithytraits.HTTPQuery{Name: "package"})
-
-	ListPackageVersionAssetsRequest_packageVersion = ListPackageVersionAssetsRequest.AddMember("packageVersion", _PackageVersion, &smithytraits.HTTPQuery{Name: "version"})
-
-	ListPackageVersionAssetsRequest_maxResults = ListPackageVersionAssetsRequest.AddMember("maxResults", _ListPackageVersionAssetsMaxResults, &smithytraits.HTTPQuery{Name: "max-results"})
-
-	ListPackageVersionAssetsRequest_nextToken = ListPackageVersionAssetsRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "next-token"})
-
-	ListPackageVersionAssetsResult_format = ListPackageVersionAssetsResult.AddMember("format", PackageFormat)
-
-	ListPackageVersionAssetsResult_namespace = ListPackageVersionAssetsResult.AddMember("namespace", _PackageNamespace)
-
-	ListPackageVersionAssetsResult_package = ListPackageVersionAssetsResult.AddMember("package", _PackageName)
-
-	ListPackageVersionAssetsResult_version = ListPackageVersionAssetsResult.AddMember("version", _PackageVersion)
-
-	ListPackageVersionAssetsResult_versionRevision = ListPackageVersionAssetsResult.AddMember("versionRevision", _PackageVersionRevision)
-
-	ListPackageVersionAssetsResult_nextToken = ListPackageVersionAssetsResult.AddMember("nextToken", _PaginationToken)
-
-	ListPackageVersionAssetsResult_assets = ListPackageVersionAssetsResult.AddMember("assets", _AssetSummaryList)
-
-	ListPackageVersionDependenciesRequest_domain = ListPackageVersionDependenciesRequest.AddMember("domain", _DomainName, &smithytraits.HTTPQuery{Name: "domain"})
-
-	ListPackageVersionDependenciesRequest_domainOwner = ListPackageVersionDependenciesRequest.AddMember("domainOwner", _AccountId, &smithytraits.HTTPQuery{Name: "domain-owner"})
-
-	ListPackageVersionDependenciesRequest_repository = ListPackageVersionDependenciesRequest.AddMember("repository", _RepositoryName, &smithytraits.HTTPQuery{Name: "repository"})
-
-	ListPackageVersionDependenciesRequest_format = ListPackageVersionDependenciesRequest.AddMember("format", PackageFormat, &smithytraits.HTTPQuery{Name: "format"})
-
-	ListPackageVersionDependenciesRequest_namespace = ListPackageVersionDependenciesRequest.AddMember("namespace", _PackageNamespace, &smithytraits.HTTPQuery{Name: "namespace"})
-
-	ListPackageVersionDependenciesRequest_package = ListPackageVersionDependenciesRequest.AddMember("package", _PackageName, &smithytraits.HTTPQuery{Name: "package"})
-
-	ListPackageVersionDependenciesRequest_packageVersion = ListPackageVersionDependenciesRequest.AddMember("packageVersion", _PackageVersion, &smithytraits.HTTPQuery{Name: "version"})
-
-	ListPackageVersionDependenciesRequest_nextToken = ListPackageVersionDependenciesRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "next-token"})
-
-	ListPackageVersionDependenciesResult_format = ListPackageVersionDependenciesResult.AddMember("format", PackageFormat)
-
-	ListPackageVersionDependenciesResult_namespace = ListPackageVersionDependenciesResult.AddMember("namespace", _PackageNamespace)
-
-	ListPackageVersionDependenciesResult_package = ListPackageVersionDependenciesResult.AddMember("package", _PackageName)
-
-	ListPackageVersionDependenciesResult_version = ListPackageVersionDependenciesResult.AddMember("version", _PackageVersion)
-
-	ListPackageVersionDependenciesResult_versionRevision = ListPackageVersionDependenciesResult.AddMember("versionRevision", _PackageVersionRevision)
-
-	ListPackageVersionDependenciesResult_nextToken = ListPackageVersionDependenciesResult.AddMember("nextToken", _PaginationToken)
-
-	ListPackageVersionDependenciesResult_dependencies = ListPackageVersionDependenciesResult.AddMember("dependencies", _PackageDependencyList)
-
-	ListPackageVersionsRequest_domain = ListPackageVersionsRequest.AddMember("domain", _DomainName, &smithytraits.HTTPQuery{Name: "domain"})
-
-	ListPackageVersionsRequest_domainOwner = ListPackageVersionsRequest.AddMember("domainOwner", _AccountId, &smithytraits.HTTPQuery{Name: "domain-owner"})
-
-	ListPackageVersionsRequest_repository = ListPackageVersionsRequest.AddMember("repository", _RepositoryName, &smithytraits.HTTPQuery{Name: "repository"})
-
-	ListPackageVersionsRequest_format = ListPackageVersionsRequest.AddMember("format", PackageFormat, &smithytraits.HTTPQuery{Name: "format"})
-
-	ListPackageVersionsRequest_namespace = ListPackageVersionsRequest.AddMember("namespace", _PackageNamespace, &smithytraits.HTTPQuery{Name: "namespace"})
-
-	ListPackageVersionsRequest_package = ListPackageVersionsRequest.AddMember("package", _PackageName, &smithytraits.HTTPQuery{Name: "package"})
-
-	ListPackageVersionsRequest_status = ListPackageVersionsRequest.AddMember("status", PackageVersionStatus, &smithytraits.HTTPQuery{Name: "status"})
-
-	ListPackageVersionsRequest_sortBy = ListPackageVersionsRequest.AddMember("sortBy", PackageVersionSortType, &smithytraits.HTTPQuery{Name: "sortBy"})
-
-	ListPackageVersionsRequest_maxResults = ListPackageVersionsRequest.AddMember("maxResults", _ListPackageVersionsMaxResults, &smithytraits.HTTPQuery{Name: "max-results"})
-
-	ListPackageVersionsRequest_nextToken = ListPackageVersionsRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "next-token"})
-
-	ListPackageVersionsRequest_originType = ListPackageVersionsRequest.AddMember("originType", PackageVersionOriginType, &smithytraits.HTTPQuery{Name: "originType"})
-
-	ListPackageVersionsResult_defaultDisplayVersion = ListPackageVersionsResult.AddMember("defaultDisplayVersion", _PackageVersion)
-
-	ListPackageVersionsResult_format = ListPackageVersionsResult.AddMember("format", PackageFormat)
-
-	ListPackageVersionsResult_namespace = ListPackageVersionsResult.AddMember("namespace", _PackageNamespace)
-
-	ListPackageVersionsResult_package = ListPackageVersionsResult.AddMember("package", _PackageName)
-
-	ListPackageVersionsResult_versions = ListPackageVersionsResult.AddMember("versions", _PackageVersionSummaryList)
-
-	ListPackageVersionsResult_nextToken = ListPackageVersionsResult.AddMember("nextToken", _PaginationToken)
-
-	ListRepositoriesInDomainRequest_domain = ListRepositoriesInDomainRequest.AddMember("domain", _DomainName, &smithytraits.HTTPQuery{Name: "domain"})
-
-	ListRepositoriesInDomainRequest_domainOwner = ListRepositoriesInDomainRequest.AddMember("domainOwner", _AccountId, &smithytraits.HTTPQuery{Name: "domain-owner"})
-
-	ListRepositoriesInDomainRequest_administratorAccount = ListRepositoriesInDomainRequest.AddMember("administratorAccount", _AccountId, &smithytraits.HTTPQuery{Name: "administrator-account"})
-
-	ListRepositoriesInDomainRequest_repositoryPrefix = ListRepositoriesInDomainRequest.AddMember("repositoryPrefix", _RepositoryName, &smithytraits.HTTPQuery{Name: "repository-prefix"})
-
-	ListRepositoriesInDomainRequest_maxResults = ListRepositoriesInDomainRequest.AddMember("maxResults", _ListRepositoriesInDomainMaxResults, &smithytraits.HTTPQuery{Name: "max-results"})
-
-	ListRepositoriesInDomainRequest_nextToken = ListRepositoriesInDomainRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "next-token"})
-
-	ListRepositoriesInDomainResult_repositories = ListRepositoriesInDomainResult.AddMember("repositories", _RepositorySummaryList)
-
-	ListRepositoriesInDomainResult_nextToken = ListRepositoriesInDomainResult.AddMember("nextToken", _PaginationToken)
-
-	ListRepositoriesRequest_repositoryPrefix = ListRepositoriesRequest.AddMember("repositoryPrefix", _RepositoryName, &smithytraits.HTTPQuery{Name: "repository-prefix"})
-
-	ListRepositoriesRequest_maxResults = ListRepositoriesRequest.AddMember("maxResults", _ListRepositoriesMaxResults, &smithytraits.HTTPQuery{Name: "max-results"})
-
-	ListRepositoriesRequest_nextToken = ListRepositoriesRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "next-token"})
-
-	ListRepositoriesResult_repositories = ListRepositoriesResult.AddMember("repositories", _RepositorySummaryList)
-
-	ListRepositoriesResult_nextToken = ListRepositoriesResult.AddMember("nextToken", _PaginationToken)
-
-	ListSubPackageGroupsRequest_domain = ListSubPackageGroupsRequest.AddMember("domain", _DomainName, &smithytraits.HTTPQuery{Name: "domain"})
-
-	ListSubPackageGroupsRequest_domainOwner = ListSubPackageGroupsRequest.AddMember("domainOwner", _AccountId, &smithytraits.HTTPQuery{Name: "domain-owner"})
-
-	ListSubPackageGroupsRequest_packageGroup = ListSubPackageGroupsRequest.AddMember("packageGroup", _PackageGroupPattern, &smithytraits.HTTPQuery{Name: "package-group"})
-
-	ListSubPackageGroupsRequest_maxResults = ListSubPackageGroupsRequest.AddMember("maxResults", _ListPackageGroupsMaxResults, &smithytraits.HTTPQuery{Name: "max-results"})
-
-	ListSubPackageGroupsRequest_nextToken = ListSubPackageGroupsRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "next-token"})
-
-	ListSubPackageGroupsResult_packageGroups = ListSubPackageGroupsResult.AddMember("packageGroups", _PackageGroupSummaryList)
-
-	ListSubPackageGroupsResult_nextToken = ListSubPackageGroupsResult.AddMember("nextToken", _PaginationToken)
-
-	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", _Arn, &smithytraits.HTTPQuery{Name: "resourceArn"})
-
-	ListTagsForResourceResult_tags = ListTagsForResourceResult.AddMember("tags", _TagList)
-
-	PublishPackageVersionRequest_domain = PublishPackageVersionRequest.AddMember("domain", _DomainName, &smithytraits.HTTPQuery{Name: "domain"})
-
-	PublishPackageVersionRequest_domainOwner = PublishPackageVersionRequest.AddMember("domainOwner", _AccountId, &smithytraits.HTTPQuery{Name: "domain-owner"})
-
-	PublishPackageVersionRequest_repository = PublishPackageVersionRequest.AddMember("repository", _RepositoryName, &smithytraits.HTTPQuery{Name: "repository"})
-
-	PublishPackageVersionRequest_format = PublishPackageVersionRequest.AddMember("format", PackageFormat, &smithytraits.HTTPQuery{Name: "format"})
-
-	PublishPackageVersionRequest_namespace = PublishPackageVersionRequest.AddMember("namespace", _PackageNamespace, &smithytraits.HTTPQuery{Name: "namespace"})
-
-	PublishPackageVersionRequest_package = PublishPackageVersionRequest.AddMember("package", _PackageName, &smithytraits.HTTPQuery{Name: "package"})
-
-	PublishPackageVersionRequest_packageVersion = PublishPackageVersionRequest.AddMember("packageVersion", _PackageVersion, &smithytraits.HTTPQuery{Name: "version"})
-
-	PublishPackageVersionRequest_assetContent = PublishPackageVersionRequest.AddMember("assetContent", _Asset, &smithytraits.HTTPPayload{})
-
-	PublishPackageVersionRequest_assetName = PublishPackageVersionRequest.AddMember("assetName", _AssetName, &smithytraits.HTTPQuery{Name: "asset"})
-
-	PublishPackageVersionRequest_assetSHA256 = PublishPackageVersionRequest.AddMember("assetSHA256", _SHA256, &smithytraits.HTTPHeader{Name: "x-amz-content-sha256"})
-
-	PublishPackageVersionRequest_unfinished = PublishPackageVersionRequest.AddMember("unfinished", _BooleanOptional, &smithytraits.HTTPQuery{Name: "unfinished"})
-
-	PublishPackageVersionResult_format = PublishPackageVersionResult.AddMember("format", PackageFormat)
-
-	PublishPackageVersionResult_namespace = PublishPackageVersionResult.AddMember("namespace", _PackageNamespace)
-
-	PublishPackageVersionResult_package = PublishPackageVersionResult.AddMember("package", _PackageName)
-
-	PublishPackageVersionResult_version = PublishPackageVersionResult.AddMember("version", _PackageVersion)
-
-	PublishPackageVersionResult_versionRevision = PublishPackageVersionResult.AddMember("versionRevision", _PackageVersionRevision)
-
-	PublishPackageVersionResult_status = PublishPackageVersionResult.AddMember("status", PackageVersionStatus)
-
-	PublishPackageVersionResult_asset = PublishPackageVersionResult.AddMember("asset", AssetSummary)
-
-	PutDomainPermissionsPolicyRequest_domain = PutDomainPermissionsPolicyRequest.AddMember("domain", _DomainName)
-
-	PutDomainPermissionsPolicyRequest_domainOwner = PutDomainPermissionsPolicyRequest.AddMember("domainOwner", _AccountId)
-
-	PutDomainPermissionsPolicyRequest_policyRevision = PutDomainPermissionsPolicyRequest.AddMember("policyRevision", _PolicyRevision)
-
-	PutDomainPermissionsPolicyRequest_policyDocument = PutDomainPermissionsPolicyRequest.AddMember("policyDocument", _PolicyDocument)
-
-	PutDomainPermissionsPolicyResult_policy = PutDomainPermissionsPolicyResult.AddMember("policy", ResourcePolicy)
-
-	PutPackageOriginConfigurationRequest_domain = PutPackageOriginConfigurationRequest.AddMember("domain", _DomainName, &smithytraits.HTTPQuery{Name: "domain"})
-
-	PutPackageOriginConfigurationRequest_domainOwner = PutPackageOriginConfigurationRequest.AddMember("domainOwner", _AccountId, &smithytraits.HTTPQuery{Name: "domain-owner"})
-
-	PutPackageOriginConfigurationRequest_repository = PutPackageOriginConfigurationRequest.AddMember("repository", _RepositoryName, &smithytraits.HTTPQuery{Name: "repository"})
-
-	PutPackageOriginConfigurationRequest_format = PutPackageOriginConfigurationRequest.AddMember("format", PackageFormat, &smithytraits.HTTPQuery{Name: "format"})
-
-	PutPackageOriginConfigurationRequest_namespace = PutPackageOriginConfigurationRequest.AddMember("namespace", _PackageNamespace, &smithytraits.HTTPQuery{Name: "namespace"})
-
-	PutPackageOriginConfigurationRequest_package = PutPackageOriginConfigurationRequest.AddMember("package", _PackageName, &smithytraits.HTTPQuery{Name: "package"})
-
-	PutPackageOriginConfigurationRequest_restrictions = PutPackageOriginConfigurationRequest.AddMember("restrictions", PackageOriginRestrictions)
-
-	PutPackageOriginConfigurationResult_originConfiguration = PutPackageOriginConfigurationResult.AddMember("originConfiguration", PackageOriginConfiguration)
-
-	PutRepositoryPermissionsPolicyRequest_domain = PutRepositoryPermissionsPolicyRequest.AddMember("domain", _DomainName, &smithytraits.HTTPQuery{Name: "domain"})
-
-	PutRepositoryPermissionsPolicyRequest_domainOwner = PutRepositoryPermissionsPolicyRequest.AddMember("domainOwner", _AccountId, &smithytraits.HTTPQuery{Name: "domain-owner"})
-
-	PutRepositoryPermissionsPolicyRequest_repository = PutRepositoryPermissionsPolicyRequest.AddMember("repository", _RepositoryName, &smithytraits.HTTPQuery{Name: "repository"})
-
-	PutRepositoryPermissionsPolicyRequest_policyRevision = PutRepositoryPermissionsPolicyRequest.AddMember("policyRevision", _PolicyRevision)
-
-	PutRepositoryPermissionsPolicyRequest_policyDocument = PutRepositoryPermissionsPolicyRequest.AddMember("policyDocument", _PolicyDocument)
-
-	PutRepositoryPermissionsPolicyResult_policy = PutRepositoryPermissionsPolicyResult.AddMember("policy", ResourcePolicy)
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _Arn, &smithytraits.HTTPQuery{Name: "resourceArn"})
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _TagList)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", _Arn, &smithytraits.HTTPQuery{Name: "resourceArn"})
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeyList)
-
-	UpdatePackageGroupRequest_domain = UpdatePackageGroupRequest.AddMember("domain", _DomainName, &smithytraits.HTTPQuery{Name: "domain"})
-
-	UpdatePackageGroupRequest_domainOwner = UpdatePackageGroupRequest.AddMember("domainOwner", _AccountId, &smithytraits.HTTPQuery{Name: "domain-owner"})
-
-	UpdatePackageGroupRequest_packageGroup = UpdatePackageGroupRequest.AddMember("packageGroup", _PackageGroupPattern)
-
-	UpdatePackageGroupRequest_contactInfo = UpdatePackageGroupRequest.AddMember("contactInfo", _PackageGroupContactInfo)
-
-	UpdatePackageGroupRequest_description = UpdatePackageGroupRequest.AddMember("description", _Description)
-
-	UpdatePackageGroupOriginConfigurationRequest_domain = UpdatePackageGroupOriginConfigurationRequest.AddMember("domain", _DomainName, &smithytraits.HTTPQuery{Name: "domain"})
-
-	UpdatePackageGroupOriginConfigurationRequest_domainOwner = UpdatePackageGroupOriginConfigurationRequest.AddMember("domainOwner", _AccountId, &smithytraits.HTTPQuery{Name: "domain-owner"})
-
-	UpdatePackageGroupOriginConfigurationRequest_packageGroup = UpdatePackageGroupOriginConfigurationRequest.AddMember("packageGroup", _PackageGroupPattern, &smithytraits.HTTPQuery{Name: "package-group"})
-
-	UpdatePackageGroupOriginConfigurationRequest_restrictions = UpdatePackageGroupOriginConfigurationRequest.AddMember("restrictions", _OriginRestrictions)
-
-	UpdatePackageGroupOriginConfigurationRequest_addAllowedRepositories = UpdatePackageGroupOriginConfigurationRequest.AddMember("addAllowedRepositories", _PackageGroupAllowedRepositoryList)
-
-	UpdatePackageGroupOriginConfigurationRequest_removeAllowedRepositories = UpdatePackageGroupOriginConfigurationRequest.AddMember("removeAllowedRepositories", _PackageGroupAllowedRepositoryList)
-
-	UpdatePackageGroupOriginConfigurationResult_packageGroup = UpdatePackageGroupOriginConfigurationResult.AddMember("packageGroup", PackageGroupDescription)
-
-	UpdatePackageGroupOriginConfigurationResult_allowedRepositoryUpdates = UpdatePackageGroupOriginConfigurationResult.AddMember("allowedRepositoryUpdates", _PackageGroupAllowedRepositoryUpdates)
-
-	UpdatePackageGroupResult_packageGroup = UpdatePackageGroupResult.AddMember("packageGroup", PackageGroupDescription)
-
-	UpdatePackageVersionsStatusRequest_domain = UpdatePackageVersionsStatusRequest.AddMember("domain", _DomainName, &smithytraits.HTTPQuery{Name: "domain"})
-
-	UpdatePackageVersionsStatusRequest_domainOwner = UpdatePackageVersionsStatusRequest.AddMember("domainOwner", _AccountId, &smithytraits.HTTPQuery{Name: "domain-owner"})
-
-	UpdatePackageVersionsStatusRequest_repository = UpdatePackageVersionsStatusRequest.AddMember("repository", _RepositoryName, &smithytraits.HTTPQuery{Name: "repository"})
-
-	UpdatePackageVersionsStatusRequest_format = UpdatePackageVersionsStatusRequest.AddMember("format", PackageFormat, &smithytraits.HTTPQuery{Name: "format"})
-
-	UpdatePackageVersionsStatusRequest_namespace = UpdatePackageVersionsStatusRequest.AddMember("namespace", _PackageNamespace, &smithytraits.HTTPQuery{Name: "namespace"})
-
-	UpdatePackageVersionsStatusRequest_package = UpdatePackageVersionsStatusRequest.AddMember("package", _PackageName, &smithytraits.HTTPQuery{Name: "package"})
-
-	UpdatePackageVersionsStatusRequest_versions = UpdatePackageVersionsStatusRequest.AddMember("versions", _PackageVersionList)
-
-	UpdatePackageVersionsStatusRequest_versionRevisions = UpdatePackageVersionsStatusRequest.AddMember("versionRevisions", _PackageVersionRevisionMap)
-
-	UpdatePackageVersionsStatusRequest_expectedStatus = UpdatePackageVersionsStatusRequest.AddMember("expectedStatus", PackageVersionStatus)
-
-	UpdatePackageVersionsStatusRequest_targetStatus = UpdatePackageVersionsStatusRequest.AddMember("targetStatus", PackageVersionStatus)
-
-	UpdatePackageVersionsStatusResult_successfulVersions = UpdatePackageVersionsStatusResult.AddMember("successfulVersions", _SuccessfulPackageVersionInfoMap)
-
-	UpdatePackageVersionsStatusResult_failedVersions = UpdatePackageVersionsStatusResult.AddMember("failedVersions", _PackageVersionErrorMap)
-
-	UpdateRepositoryRequest_domain = UpdateRepositoryRequest.AddMember("domain", _DomainName, &smithytraits.HTTPQuery{Name: "domain"})
-
-	UpdateRepositoryRequest_domainOwner = UpdateRepositoryRequest.AddMember("domainOwner", _AccountId, &smithytraits.HTTPQuery{Name: "domain-owner"})
-
-	UpdateRepositoryRequest_repository = UpdateRepositoryRequest.AddMember("repository", _RepositoryName, &smithytraits.HTTPQuery{Name: "repository"})
-
-	UpdateRepositoryRequest_description = UpdateRepositoryRequest.AddMember("description", _Description)
-
-	UpdateRepositoryRequest_upstreams = UpdateRepositoryRequest.AddMember("upstreams", _UpstreamRepositoryList)
-
-	UpdateRepositoryResult_repository = UpdateRepositoryResult.AddMember("repository", RepositoryDescription)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t48 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t49 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Streaming{}}, DirectMask: 0x20000}
+var t50 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t51 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t52 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t53 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t54 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t55 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Retry-After"}}, DirectMask: 0x80}
+var t56 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t57 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "domain"}}, DirectMask: 0x10}
+var t58 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "domain-owner"}}, DirectMask: 0x10}
+var t59 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "repository"}}, DirectMask: 0x10}
+var t60 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "external-connection"}}, DirectMask: 0x10}
+var t61 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "source-repository"}}, DirectMask: 0x10}
+var t62 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "destination-repository"}}, DirectMask: 0x10}
+var t63 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "format"}}, DirectMask: 0x10}
+var t64 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "namespace"}}, DirectMask: 0x10}
+var t65 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "package"}}, DirectMask: 0x10}
+var t66 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "policy-revision"}}, DirectMask: 0x10}
+var t67 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "package-group"}}, DirectMask: 0x10}
+var t68 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "version"}}, DirectMask: 0x10}
+var t69 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "duration"}}, DirectMask: 0x10}
+var t70 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t71 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "asset"}}, DirectMask: 0x10}
+var t72 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "revision"}}, DirectMask: 0x10}
+var t73 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPPayload{}, nil, nil, nil, nil, nil, &smithytraits.Streaming{}}, DirectMask: 0x800}
+var t74 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "X-AssetName"}}, DirectMask: 0x80}
+var t75 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "X-PackageVersion"}}, DirectMask: 0x80}
+var t76 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "X-PackageVersionRevision"}}, DirectMask: 0x80}
+var t77 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "endpointType"}}, DirectMask: 0x10}
+var t78 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "originRestrictionType"}}, DirectMask: 0x10}
+var t79 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "max-results"}}, DirectMask: 0x10}
+var t80 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "next-token"}}, DirectMask: 0x10}
+var t81 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "preview"}}, DirectMask: 0x10}
+var t82 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "prefix"}}, DirectMask: 0x10}
+var t83 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "package-prefix"}}, DirectMask: 0x10}
+var t84 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "publish"}}, DirectMask: 0x10}
+var t85 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "upstream"}}, DirectMask: 0x10}
+var t86 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "status"}}, DirectMask: 0x10}
+var t87 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "sortBy"}}, DirectMask: 0x10}
+var t88 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "originType"}}, DirectMask: 0x10}
+var t89 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "administrator-account"}}, DirectMask: 0x10}
+var t90 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "repository-prefix"}}, DirectMask: 0x10}
+var t91 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "resourceArn"}}, DirectMask: 0x10}
+var t92 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-content-sha256"}}, DirectMask: 0x80}
+var t93 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "unfinished"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mAllowPublish = smithy.SchemaMembers{List: []*smithy.Schema{&sAllowPublish_ALLOW, &sAllowPublish_BLOCK}}
+var mAllowUpstream = smithy.SchemaMembers{List: []*smithy.Schema{&sAllowUpstream_ALLOW, &sAllowUpstream_BLOCK}}
+var m_AssetHashes = smithy.SchemaMembers{List: []*smithy.Schema{&s_AssetHashes_key, &s_AssetHashes_value}}
+var mAssetSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sAssetSummary_name, &sAssetSummary_size, &sAssetSummary_hashes}}
+var m_AssetSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AssetSummaryList_member}}
+var mAssociatedPackage = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociatedPackage_format, &sAssociatedPackage_namespace, &sAssociatedPackage_package, &sAssociatedPackage_associationType}}
+var m_AssociatedPackageList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AssociatedPackageList_member}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message, &sConflictException_resourceId, &sConflictException_resourceType}}
+var mDomainDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sDomainDescription_name, &sDomainDescription_owner, &sDomainDescription_arn, &sDomainDescription_status, &sDomainDescription_createdTime, &sDomainDescription_encryptionKey, &sDomainDescription_repositoryCount, &sDomainDescription_assetSizeBytes, &sDomainDescription_s3BucketArn}, Seed: 2, Slots: []uint16{
+	3, 0, 0, 1, 0, 0, 0, 0, 0, 9, 7, 0, 8, 0, 2, 0, 0, 0, 4, 0, 0, 0, 0, 0,
+	0, 0, 5, 0, 6, 0, 0, 0,
+}}
+var mDomainEntryPoint = smithy.SchemaMembers{List: []*smithy.Schema{&sDomainEntryPoint_repositoryName, &sDomainEntryPoint_externalConnectionName}}
+var mDomainStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sDomainStatus_ACTIVE, &sDomainStatus_DELETED}}
+var mDomainSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sDomainSummary_name, &sDomainSummary_owner, &sDomainSummary_arn, &sDomainSummary_status, &sDomainSummary_createdTime, &sDomainSummary_encryptionKey}}
+var m_DomainSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DomainSummaryList_member}}
+var mEndpointType = smithy.SchemaMembers{List: []*smithy.Schema{&sEndpointType_DUALSTACK, &sEndpointType_IPV4}}
+var mExternalConnectionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sExternalConnectionStatus_AVAILABLE}}
+var mHashAlgorithm = smithy.SchemaMembers{List: []*smithy.Schema{&sHashAlgorithm_MD5, &sHashAlgorithm_SHA1, &sHashAlgorithm_SHA256, &sHashAlgorithm_SHA512}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message}}
+var mLicenseInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sLicenseInfo_name, &sLicenseInfo_url}}
+var m_LicenseInfoList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LicenseInfoList_member}}
+var m_OriginRestrictions = smithy.SchemaMembers{List: []*smithy.Schema{&s_OriginRestrictions_key, &s_OriginRestrictions_value}}
+var mPackageDependency = smithy.SchemaMembers{List: []*smithy.Schema{&sPackageDependency_namespace, &sPackageDependency_package, &sPackageDependency_dependencyType, &sPackageDependency_versionRequirement}}
+var m_PackageDependencyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PackageDependencyList_member}}
+var mPackageDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sPackageDescription_format, &sPackageDescription_namespace, &sPackageDescription_name, &sPackageDescription_originConfiguration}}
+var mPackageFormat = smithy.SchemaMembers{List: []*smithy.Schema{&sPackageFormat_NPM, &sPackageFormat_PYPI, &sPackageFormat_MAVEN, &sPackageFormat_NUGET, &sPackageFormat_GENERIC, &sPackageFormat_RUBY, &sPackageFormat_SWIFT, &sPackageFormat_CARGO}}
+var mPackageGroupAllowedRepository = smithy.SchemaMembers{List: []*smithy.Schema{&sPackageGroupAllowedRepository_repositoryName, &sPackageGroupAllowedRepository_originRestrictionType}}
+var m_PackageGroupAllowedRepositoryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PackageGroupAllowedRepositoryList_member}}
+var m_PackageGroupAllowedRepositoryUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&s_PackageGroupAllowedRepositoryUpdate_key, &s_PackageGroupAllowedRepositoryUpdate_value}}
+var m_PackageGroupAllowedRepositoryUpdates = smithy.SchemaMembers{List: []*smithy.Schema{&s_PackageGroupAllowedRepositoryUpdates_key, &s_PackageGroupAllowedRepositoryUpdates_value}}
+var mPackageGroupAllowedRepositoryUpdateType = smithy.SchemaMembers{List: []*smithy.Schema{&sPackageGroupAllowedRepositoryUpdateType_ADDED, &sPackageGroupAllowedRepositoryUpdateType_REMOVED}}
+var mPackageGroupAssociationType = smithy.SchemaMembers{List: []*smithy.Schema{&sPackageGroupAssociationType_STRONG, &sPackageGroupAssociationType_WEAK}}
+var mPackageGroupDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sPackageGroupDescription_arn, &sPackageGroupDescription_pattern, &sPackageGroupDescription_domainName, &sPackageGroupDescription_domainOwner, &sPackageGroupDescription_createdTime, &sPackageGroupDescription_contactInfo, &sPackageGroupDescription_description, &sPackageGroupDescription_originConfiguration, &sPackageGroupDescription_parent}, Seed: 1, Slots: []uint16{
+	1, 4, 0, 2, 0, 0, 3, 0, 0, 9, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	7, 5, 6, 0, 0, 0, 0, 0,
+}}
+var mPackageGroupOriginConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sPackageGroupOriginConfiguration_restrictions}}
+var mPackageGroupOriginRestriction = smithy.SchemaMembers{List: []*smithy.Schema{&sPackageGroupOriginRestriction_mode, &sPackageGroupOriginRestriction_effectiveMode, &sPackageGroupOriginRestriction_inheritedFrom, &sPackageGroupOriginRestriction_repositoriesCount}}
+var mPackageGroupOriginRestrictionMode = smithy.SchemaMembers{List: []*smithy.Schema{&sPackageGroupOriginRestrictionMode_ALLOW, &sPackageGroupOriginRestrictionMode_ALLOW_SPECIFIC_REPOSITORIES, &sPackageGroupOriginRestrictionMode_BLOCK, &sPackageGroupOriginRestrictionMode_INHERIT}}
+var m_PackageGroupOriginRestrictions = smithy.SchemaMembers{List: []*smithy.Schema{&s_PackageGroupOriginRestrictions_key, &s_PackageGroupOriginRestrictions_value}}
+var mPackageGroupOriginRestrictionType = smithy.SchemaMembers{List: []*smithy.Schema{&sPackageGroupOriginRestrictionType_EXTERNAL_UPSTREAM, &sPackageGroupOriginRestrictionType_INTERNAL_UPSTREAM, &sPackageGroupOriginRestrictionType_PUBLISH}}
+var mPackageGroupReference = smithy.SchemaMembers{List: []*smithy.Schema{&sPackageGroupReference_arn, &sPackageGroupReference_pattern}}
+var mPackageGroupSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sPackageGroupSummary_arn, &sPackageGroupSummary_pattern, &sPackageGroupSummary_domainName, &sPackageGroupSummary_domainOwner, &sPackageGroupSummary_createdTime, &sPackageGroupSummary_contactInfo, &sPackageGroupSummary_description, &sPackageGroupSummary_originConfiguration, &sPackageGroupSummary_parent}, Seed: 1, Slots: []uint16{
+	1, 4, 0, 2, 0, 0, 3, 0, 0, 9, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	7, 5, 6, 0, 0, 0, 0, 0,
+}}
+var m_PackageGroupSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PackageGroupSummaryList_member}}
+var mPackageOriginConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sPackageOriginConfiguration_restrictions}}
+var mPackageOriginRestrictions = smithy.SchemaMembers{List: []*smithy.Schema{&sPackageOriginRestrictions_publish, &sPackageOriginRestrictions_upstream}}
+var mPackageSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sPackageSummary_format, &sPackageSummary_namespace, &sPackageSummary_package, &sPackageSummary_originConfiguration}}
+var m_PackageSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PackageSummaryList_member}}
+var mPackageVersionDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sPackageVersionDescription_format, &sPackageVersionDescription_namespace, &sPackageVersionDescription_packageName, &sPackageVersionDescription_displayName, &sPackageVersionDescription_version, &sPackageVersionDescription_summary, &sPackageVersionDescription_homePage, &sPackageVersionDescription_sourceCodeRepository, &sPackageVersionDescription_publishedTime, &sPackageVersionDescription_licenses, &sPackageVersionDescription_revision, &sPackageVersionDescription_status, &sPackageVersionDescription_origin}, Seed: 11, Slots: []uint16{
+	0, 3, 0, 1, 9, 2, 0, 0, 12, 0, 0, 0, 0, 0, 11, 0, 0, 8, 0, 4, 5, 10, 0, 0,
+	13, 0, 0, 7, 0, 0, 6, 0,
+}}
+var mPackageVersionError = smithy.SchemaMembers{List: []*smithy.Schema{&sPackageVersionError_errorCode, &sPackageVersionError_errorMessage}}
+var mPackageVersionErrorCode = smithy.SchemaMembers{List: []*smithy.Schema{&sPackageVersionErrorCode_ALREADY_EXISTS, &sPackageVersionErrorCode_MISMATCHED_REVISION, &sPackageVersionErrorCode_MISMATCHED_STATUS, &sPackageVersionErrorCode_NOT_ALLOWED, &sPackageVersionErrorCode_NOT_FOUND, &sPackageVersionErrorCode_SKIPPED}}
+var m_PackageVersionErrorMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_PackageVersionErrorMap_key, &s_PackageVersionErrorMap_value}}
+var m_PackageVersionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PackageVersionList_member}}
+var mPackageVersionOrigin = smithy.SchemaMembers{List: []*smithy.Schema{&sPackageVersionOrigin_domainEntryPoint, &sPackageVersionOrigin_originType}}
+var mPackageVersionOriginType = smithy.SchemaMembers{List: []*smithy.Schema{&sPackageVersionOriginType_INTERNAL, &sPackageVersionOriginType_EXTERNAL, &sPackageVersionOriginType_UNKNOWN}}
+var m_PackageVersionRevisionMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_PackageVersionRevisionMap_key, &s_PackageVersionRevisionMap_value}}
+var mPackageVersionSortType = smithy.SchemaMembers{List: []*smithy.Schema{&sPackageVersionSortType_PUBLISHED_TIME}}
+var mPackageVersionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sPackageVersionStatus_PUBLISHED, &sPackageVersionStatus_UNFINISHED, &sPackageVersionStatus_UNLISTED, &sPackageVersionStatus_ARCHIVED, &sPackageVersionStatus_DISPOSED, &sPackageVersionStatus_DELETED}}
+var mPackageVersionSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sPackageVersionSummary_version, &sPackageVersionSummary_revision, &sPackageVersionSummary_status, &sPackageVersionSummary_origin}}
+var m_PackageVersionSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PackageVersionSummaryList_member}}
+var mRepositoryDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sRepositoryDescription_name, &sRepositoryDescription_administratorAccount, &sRepositoryDescription_domainName, &sRepositoryDescription_domainOwner, &sRepositoryDescription_arn, &sRepositoryDescription_description, &sRepositoryDescription_upstreams, &sRepositoryDescription_externalConnections, &sRepositoryDescription_createdTime}, Seed: 2, Slots: []uint16{
+	5, 2, 0, 1, 0, 4, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 7, 0, 3, 0, 0, 8,
+	0, 0, 9, 0, 0, 0, 0, 0,
+}}
+var mRepositoryExternalConnectionInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sRepositoryExternalConnectionInfo_externalConnectionName, &sRepositoryExternalConnectionInfo_packageFormat, &sRepositoryExternalConnectionInfo_status}}
+var m_RepositoryExternalConnectionInfoList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RepositoryExternalConnectionInfoList_member}}
+var m_RepositoryNameList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RepositoryNameList_member}}
+var mRepositorySummary = smithy.SchemaMembers{List: []*smithy.Schema{&sRepositorySummary_name, &sRepositorySummary_administratorAccount, &sRepositorySummary_domainName, &sRepositorySummary_domainOwner, &sRepositorySummary_arn, &sRepositorySummary_description, &sRepositorySummary_createdTime}}
+var m_RepositorySummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RepositorySummaryList_member}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message, &sResourceNotFoundException_resourceId, &sResourceNotFoundException_resourceType}}
+var mResourcePolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sResourcePolicy_resourceArn, &sResourcePolicy_revision, &sResourcePolicy_document}}
+var mResourceType = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceType_DOMAIN, &sResourceType_REPOSITORY, &sResourceType_PACKAGE, &sResourceType_PACKAGE_VERSION, &sResourceType_ASSET}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message, &sServiceQuotaExceededException_resourceId, &sServiceQuotaExceededException_resourceType}}
+var mSuccessfulPackageVersionInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sSuccessfulPackageVersionInfo_revision, &sSuccessfulPackageVersionInfo_status}}
+var m_SuccessfulPackageVersionInfoMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_SuccessfulPackageVersionInfoMap_key, &s_SuccessfulPackageVersionInfoMap_value}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_key, &sTag_value}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message, &sThrottlingException_retryAfterSeconds}}
+var mUpstreamRepository = smithy.SchemaMembers{List: []*smithy.Schema{&sUpstreamRepository_repositoryName}}
+var mUpstreamRepositoryInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sUpstreamRepositoryInfo_repositoryName}}
+var m_UpstreamRepositoryInfoList = smithy.SchemaMembers{List: []*smithy.Schema{&s_UpstreamRepositoryInfoList_member}}
+var m_UpstreamRepositoryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_UpstreamRepositoryList_member}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message, &sValidationException_reason}}
+var mValidationExceptionReason = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionReason_CANNOT_PARSE, &sValidationExceptionReason_ENCRYPTION_KEY_ERROR, &sValidationExceptionReason_FIELD_VALIDATION_FAILED, &sValidationExceptionReason_UNKNOWN_OPERATION, &sValidationExceptionReason_OTHER}}
+var mAssociateExternalConnectionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateExternalConnectionRequest_domain, &sAssociateExternalConnectionRequest_domainOwner, &sAssociateExternalConnectionRequest_repository, &sAssociateExternalConnectionRequest_externalConnection}}
+var mAssociateExternalConnectionResult = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateExternalConnectionResult_repository}}
+var mCopyPackageVersionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCopyPackageVersionsRequest_domain, &sCopyPackageVersionsRequest_domainOwner, &sCopyPackageVersionsRequest_sourceRepository, &sCopyPackageVersionsRequest_destinationRepository, &sCopyPackageVersionsRequest_format, &sCopyPackageVersionsRequest_namespace, &sCopyPackageVersionsRequest_package, &sCopyPackageVersionsRequest_versions, &sCopyPackageVersionsRequest_versionRevisions, &sCopyPackageVersionsRequest_allowOverwrite, &sCopyPackageVersionsRequest_includeFromUpstream}, Seed: 19, Slots: []uint16{
+	0, 0, 0, 6, 0, 11, 9, 0, 0, 0, 0, 0, 3, 0, 0, 8, 1, 0, 0, 0, 4, 0, 0, 0,
+	0, 10, 0, 7, 5, 0, 0, 2,
+}}
+var mCopyPackageVersionsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCopyPackageVersionsResult_successfulVersions, &sCopyPackageVersionsResult_failedVersions}}
+var mCreateDomainRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDomainRequest_domain, &sCreateDomainRequest_encryptionKey, &sCreateDomainRequest_tags}}
+var mCreateDomainResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDomainResult_domain}}
+var mCreatePackageGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePackageGroupRequest_domain, &sCreatePackageGroupRequest_domainOwner, &sCreatePackageGroupRequest_packageGroup, &sCreatePackageGroupRequest_contactInfo, &sCreatePackageGroupRequest_description, &sCreatePackageGroupRequest_tags}}
+var mCreatePackageGroupResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePackageGroupResult_packageGroup}}
+var mCreateRepositoryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRepositoryRequest_domain, &sCreateRepositoryRequest_domainOwner, &sCreateRepositoryRequest_repository, &sCreateRepositoryRequest_description, &sCreateRepositoryRequest_upstreams, &sCreateRepositoryRequest_tags}}
+var mCreateRepositoryResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRepositoryResult_repository}}
+var mDeleteDomainRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDomainRequest_domain, &sDeleteDomainRequest_domainOwner}}
+var mDeleteDomainResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDomainResult_domain}}
+var mDeleteDomainPermissionsPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDomainPermissionsPolicyRequest_domain, &sDeleteDomainPermissionsPolicyRequest_domainOwner, &sDeleteDomainPermissionsPolicyRequest_policyRevision}}
+var mDeleteDomainPermissionsPolicyResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDomainPermissionsPolicyResult_policy}}
+var mDeletePackageGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeletePackageGroupRequest_domain, &sDeletePackageGroupRequest_domainOwner, &sDeletePackageGroupRequest_packageGroup}}
+var mDeletePackageGroupResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDeletePackageGroupResult_packageGroup}}
+var mDeletePackageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeletePackageRequest_domain, &sDeletePackageRequest_domainOwner, &sDeletePackageRequest_repository, &sDeletePackageRequest_format, &sDeletePackageRequest_namespace, &sDeletePackageRequest_package}}
+var mDeletePackageResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDeletePackageResult_deletedPackage}}
+var mDeletePackageVersionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeletePackageVersionsRequest_domain, &sDeletePackageVersionsRequest_domainOwner, &sDeletePackageVersionsRequest_repository, &sDeletePackageVersionsRequest_format, &sDeletePackageVersionsRequest_namespace, &sDeletePackageVersionsRequest_package, &sDeletePackageVersionsRequest_versions, &sDeletePackageVersionsRequest_expectedStatus}}
+var mDeletePackageVersionsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDeletePackageVersionsResult_successfulVersions, &sDeletePackageVersionsResult_failedVersions}}
+var mDeleteRepositoryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRepositoryRequest_domain, &sDeleteRepositoryRequest_domainOwner, &sDeleteRepositoryRequest_repository}}
+var mDeleteRepositoryResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRepositoryResult_repository}}
+var mDeleteRepositoryPermissionsPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRepositoryPermissionsPolicyRequest_domain, &sDeleteRepositoryPermissionsPolicyRequest_domainOwner, &sDeleteRepositoryPermissionsPolicyRequest_repository, &sDeleteRepositoryPermissionsPolicyRequest_policyRevision}}
+var mDeleteRepositoryPermissionsPolicyResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRepositoryPermissionsPolicyResult_policy}}
+var mDescribeDomainRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDomainRequest_domain, &sDescribeDomainRequest_domainOwner}}
+var mDescribeDomainResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDomainResult_domain}}
+var mDescribePackageGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribePackageGroupRequest_domain, &sDescribePackageGroupRequest_domainOwner, &sDescribePackageGroupRequest_packageGroup}}
+var mDescribePackageGroupResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribePackageGroupResult_packageGroup}}
+var mDescribePackageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribePackageRequest_domain, &sDescribePackageRequest_domainOwner, &sDescribePackageRequest_repository, &sDescribePackageRequest_format, &sDescribePackageRequest_namespace, &sDescribePackageRequest_package}}
+var mDescribePackageResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribePackageResult_package}}
+var mDescribePackageVersionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribePackageVersionRequest_domain, &sDescribePackageVersionRequest_domainOwner, &sDescribePackageVersionRequest_repository, &sDescribePackageVersionRequest_format, &sDescribePackageVersionRequest_namespace, &sDescribePackageVersionRequest_package, &sDescribePackageVersionRequest_packageVersion}}
+var mDescribePackageVersionResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribePackageVersionResult_packageVersion}}
+var mDescribeRepositoryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeRepositoryRequest_domain, &sDescribeRepositoryRequest_domainOwner, &sDescribeRepositoryRequest_repository}}
+var mDescribeRepositoryResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeRepositoryResult_repository}}
+var mDisassociateExternalConnectionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateExternalConnectionRequest_domain, &sDisassociateExternalConnectionRequest_domainOwner, &sDisassociateExternalConnectionRequest_repository, &sDisassociateExternalConnectionRequest_externalConnection}}
+var mDisassociateExternalConnectionResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateExternalConnectionResult_repository}}
+var mDisposePackageVersionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisposePackageVersionsRequest_domain, &sDisposePackageVersionsRequest_domainOwner, &sDisposePackageVersionsRequest_repository, &sDisposePackageVersionsRequest_format, &sDisposePackageVersionsRequest_namespace, &sDisposePackageVersionsRequest_package, &sDisposePackageVersionsRequest_versions, &sDisposePackageVersionsRequest_versionRevisions, &sDisposePackageVersionsRequest_expectedStatus}, Seed: 7, Slots: []uint16{
+	0, 1, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 2, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3,
+	0, 8, 6, 9, 0, 4, 0, 0,
+}}
+var mDisposePackageVersionsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDisposePackageVersionsResult_successfulVersions, &sDisposePackageVersionsResult_failedVersions}}
+var mGetAssociatedPackageGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAssociatedPackageGroupRequest_domain, &sGetAssociatedPackageGroupRequest_domainOwner, &sGetAssociatedPackageGroupRequest_format, &sGetAssociatedPackageGroupRequest_namespace, &sGetAssociatedPackageGroupRequest_package}}
+var mGetAssociatedPackageGroupResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAssociatedPackageGroupResult_packageGroup, &sGetAssociatedPackageGroupResult_associationType}}
+var mGetAuthorizationTokenRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAuthorizationTokenRequest_domain, &sGetAuthorizationTokenRequest_domainOwner, &sGetAuthorizationTokenRequest_durationSeconds}}
+var mGetAuthorizationTokenResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAuthorizationTokenResult_authorizationToken, &sGetAuthorizationTokenResult_expiration}}
+var mGetDomainPermissionsPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDomainPermissionsPolicyRequest_domain, &sGetDomainPermissionsPolicyRequest_domainOwner}}
+var mGetDomainPermissionsPolicyResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDomainPermissionsPolicyResult_policy}}
+var mGetPackageVersionAssetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPackageVersionAssetRequest_domain, &sGetPackageVersionAssetRequest_domainOwner, &sGetPackageVersionAssetRequest_repository, &sGetPackageVersionAssetRequest_format, &sGetPackageVersionAssetRequest_namespace, &sGetPackageVersionAssetRequest_package, &sGetPackageVersionAssetRequest_packageVersion, &sGetPackageVersionAssetRequest_asset, &sGetPackageVersionAssetRequest_packageVersionRevision}, Seed: 6, Slots: []uint16{
+	0, 0, 9, 0, 0, 0, 2, 4, 0, 0, 0, 7, 0, 0, 0, 5, 0, 0, 3, 0, 0, 0, 8, 0,
+	6, 0, 1, 0, 0, 0, 0, 0,
+}}
+var mGetPackageVersionAssetResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPackageVersionAssetResult_asset, &sGetPackageVersionAssetResult_assetName, &sGetPackageVersionAssetResult_packageVersion, &sGetPackageVersionAssetResult_packageVersionRevision}}
+var mGetPackageVersionReadmeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPackageVersionReadmeRequest_domain, &sGetPackageVersionReadmeRequest_domainOwner, &sGetPackageVersionReadmeRequest_repository, &sGetPackageVersionReadmeRequest_format, &sGetPackageVersionReadmeRequest_namespace, &sGetPackageVersionReadmeRequest_package, &sGetPackageVersionReadmeRequest_packageVersion}}
+var mGetPackageVersionReadmeResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPackageVersionReadmeResult_format, &sGetPackageVersionReadmeResult_namespace, &sGetPackageVersionReadmeResult_package, &sGetPackageVersionReadmeResult_version, &sGetPackageVersionReadmeResult_versionRevision, &sGetPackageVersionReadmeResult_readme}}
+var mGetRepositoryEndpointRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRepositoryEndpointRequest_domain, &sGetRepositoryEndpointRequest_domainOwner, &sGetRepositoryEndpointRequest_repository, &sGetRepositoryEndpointRequest_format, &sGetRepositoryEndpointRequest_endpointType}}
+var mGetRepositoryEndpointResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRepositoryEndpointResult_repositoryEndpoint}}
+var mGetRepositoryPermissionsPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRepositoryPermissionsPolicyRequest_domain, &sGetRepositoryPermissionsPolicyRequest_domainOwner, &sGetRepositoryPermissionsPolicyRequest_repository}}
+var mGetRepositoryPermissionsPolicyResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRepositoryPermissionsPolicyResult_policy}}
+var mListAllowedRepositoriesForGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAllowedRepositoriesForGroupRequest_domain, &sListAllowedRepositoriesForGroupRequest_domainOwner, &sListAllowedRepositoriesForGroupRequest_packageGroup, &sListAllowedRepositoriesForGroupRequest_originRestrictionType, &sListAllowedRepositoriesForGroupRequest_maxResults, &sListAllowedRepositoriesForGroupRequest_nextToken}}
+var mListAllowedRepositoriesForGroupResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListAllowedRepositoriesForGroupResult_allowedRepositories, &sListAllowedRepositoriesForGroupResult_nextToken}}
+var mListAssociatedPackagesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAssociatedPackagesRequest_domain, &sListAssociatedPackagesRequest_domainOwner, &sListAssociatedPackagesRequest_packageGroup, &sListAssociatedPackagesRequest_maxResults, &sListAssociatedPackagesRequest_nextToken, &sListAssociatedPackagesRequest_preview}}
+var mListAssociatedPackagesResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListAssociatedPackagesResult_packages, &sListAssociatedPackagesResult_nextToken}}
+var mListDomainsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListDomainsRequest_maxResults, &sListDomainsRequest_nextToken}}
+var mListDomainsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListDomainsResult_domains, &sListDomainsResult_nextToken}}
+var mListPackageGroupsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListPackageGroupsRequest_domain, &sListPackageGroupsRequest_domainOwner, &sListPackageGroupsRequest_maxResults, &sListPackageGroupsRequest_nextToken, &sListPackageGroupsRequest_prefix}}
+var mListPackageGroupsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListPackageGroupsResult_packageGroups, &sListPackageGroupsResult_nextToken}}
+var mListPackagesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListPackagesRequest_domain, &sListPackagesRequest_domainOwner, &sListPackagesRequest_repository, &sListPackagesRequest_format, &sListPackagesRequest_namespace, &sListPackagesRequest_packagePrefix, &sListPackagesRequest_maxResults, &sListPackagesRequest_nextToken, &sListPackagesRequest_publish, &sListPackagesRequest_upstream}, Seed: 7, Slots: []uint16{
+	0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 2, 5, 0, 0, 0, 0, 0, 0, 0, 10, 0, 3,
+	8, 0, 0, 7, 0, 4, 0, 6,
+}}
+var mListPackagesResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListPackagesResult_packages, &sListPackagesResult_nextToken}}
+var mListPackageVersionAssetsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListPackageVersionAssetsRequest_domain, &sListPackageVersionAssetsRequest_domainOwner, &sListPackageVersionAssetsRequest_repository, &sListPackageVersionAssetsRequest_format, &sListPackageVersionAssetsRequest_namespace, &sListPackageVersionAssetsRequest_package, &sListPackageVersionAssetsRequest_packageVersion, &sListPackageVersionAssetsRequest_maxResults, &sListPackageVersionAssetsRequest_nextToken}, Seed: 7, Slots: []uint16{
+	0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 5, 0, 0, 0, 0, 0, 7, 0, 0, 0, 3,
+	9, 0, 6, 8, 0, 4, 0, 0,
+}}
+var mListPackageVersionAssetsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListPackageVersionAssetsResult_format, &sListPackageVersionAssetsResult_namespace, &sListPackageVersionAssetsResult_package, &sListPackageVersionAssetsResult_version, &sListPackageVersionAssetsResult_versionRevision, &sListPackageVersionAssetsResult_nextToken, &sListPackageVersionAssetsResult_assets}}
+var mListPackageVersionDependenciesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListPackageVersionDependenciesRequest_domain, &sListPackageVersionDependenciesRequest_domainOwner, &sListPackageVersionDependenciesRequest_repository, &sListPackageVersionDependenciesRequest_format, &sListPackageVersionDependenciesRequest_namespace, &sListPackageVersionDependenciesRequest_package, &sListPackageVersionDependenciesRequest_packageVersion, &sListPackageVersionDependenciesRequest_nextToken}}
+var mListPackageVersionDependenciesResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListPackageVersionDependenciesResult_format, &sListPackageVersionDependenciesResult_namespace, &sListPackageVersionDependenciesResult_package, &sListPackageVersionDependenciesResult_version, &sListPackageVersionDependenciesResult_versionRevision, &sListPackageVersionDependenciesResult_nextToken, &sListPackageVersionDependenciesResult_dependencies}}
+var mListPackageVersionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListPackageVersionsRequest_domain, &sListPackageVersionsRequest_domainOwner, &sListPackageVersionsRequest_repository, &sListPackageVersionsRequest_format, &sListPackageVersionsRequest_namespace, &sListPackageVersionsRequest_package, &sListPackageVersionsRequest_status, &sListPackageVersionsRequest_sortBy, &sListPackageVersionsRequest_maxResults, &sListPackageVersionsRequest_nextToken, &sListPackageVersionsRequest_originType}, Seed: 13, Slots: []uint16{
+	0, 0, 0, 0, 11, 0, 0, 0, 0, 1, 10, 0, 0, 0, 0, 7, 0, 4, 9, 0, 0, 0, 2, 0,
+	0, 0, 8, 0, 0, 3, 6, 5,
+}}
+var mListPackageVersionsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListPackageVersionsResult_defaultDisplayVersion, &sListPackageVersionsResult_format, &sListPackageVersionsResult_namespace, &sListPackageVersionsResult_package, &sListPackageVersionsResult_versions, &sListPackageVersionsResult_nextToken}}
+var mListRepositoriesInDomainRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListRepositoriesInDomainRequest_domain, &sListRepositoriesInDomainRequest_domainOwner, &sListRepositoriesInDomainRequest_administratorAccount, &sListRepositoriesInDomainRequest_repositoryPrefix, &sListRepositoriesInDomainRequest_maxResults, &sListRepositoriesInDomainRequest_nextToken}}
+var mListRepositoriesInDomainResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListRepositoriesInDomainResult_repositories, &sListRepositoriesInDomainResult_nextToken}}
+var mListRepositoriesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListRepositoriesRequest_repositoryPrefix, &sListRepositoriesRequest_maxResults, &sListRepositoriesRequest_nextToken}}
+var mListRepositoriesResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListRepositoriesResult_repositories, &sListRepositoriesResult_nextToken}}
+var mListSubPackageGroupsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListSubPackageGroupsRequest_domain, &sListSubPackageGroupsRequest_domainOwner, &sListSubPackageGroupsRequest_packageGroup, &sListSubPackageGroupsRequest_maxResults, &sListSubPackageGroupsRequest_nextToken}}
+var mListSubPackageGroupsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListSubPackageGroupsResult_packageGroups, &sListSubPackageGroupsResult_nextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_resourceArn}}
+var mListTagsForResourceResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResult_tags}}
+var mPublishPackageVersionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPublishPackageVersionRequest_domain, &sPublishPackageVersionRequest_domainOwner, &sPublishPackageVersionRequest_repository, &sPublishPackageVersionRequest_format, &sPublishPackageVersionRequest_namespace, &sPublishPackageVersionRequest_package, &sPublishPackageVersionRequest_packageVersion, &sPublishPackageVersionRequest_assetContent, &sPublishPackageVersionRequest_assetName, &sPublishPackageVersionRequest_assetSHA256, &sPublishPackageVersionRequest_unfinished}, Seed: 17, Slots: []uint16{
+	0, 0, 0, 10, 2, 0, 5, 1, 0, 0, 11, 0, 4, 0, 0, 0, 0, 0, 0, 7, 0, 3, 9, 0,
+	0, 0, 6, 0, 0, 8, 0, 0,
+}}
+var mPublishPackageVersionResult = smithy.SchemaMembers{List: []*smithy.Schema{&sPublishPackageVersionResult_format, &sPublishPackageVersionResult_namespace, &sPublishPackageVersionResult_package, &sPublishPackageVersionResult_version, &sPublishPackageVersionResult_versionRevision, &sPublishPackageVersionResult_status, &sPublishPackageVersionResult_asset}}
+var mPutDomainPermissionsPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutDomainPermissionsPolicyRequest_domain, &sPutDomainPermissionsPolicyRequest_domainOwner, &sPutDomainPermissionsPolicyRequest_policyRevision, &sPutDomainPermissionsPolicyRequest_policyDocument}}
+var mPutDomainPermissionsPolicyResult = smithy.SchemaMembers{List: []*smithy.Schema{&sPutDomainPermissionsPolicyResult_policy}}
+var mPutPackageOriginConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutPackageOriginConfigurationRequest_domain, &sPutPackageOriginConfigurationRequest_domainOwner, &sPutPackageOriginConfigurationRequest_repository, &sPutPackageOriginConfigurationRequest_format, &sPutPackageOriginConfigurationRequest_namespace, &sPutPackageOriginConfigurationRequest_package, &sPutPackageOriginConfigurationRequest_restrictions}}
+var mPutPackageOriginConfigurationResult = smithy.SchemaMembers{List: []*smithy.Schema{&sPutPackageOriginConfigurationResult_originConfiguration}}
+var mPutRepositoryPermissionsPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutRepositoryPermissionsPolicyRequest_domain, &sPutRepositoryPermissionsPolicyRequest_domainOwner, &sPutRepositoryPermissionsPolicyRequest_repository, &sPutRepositoryPermissionsPolicyRequest_policyRevision, &sPutRepositoryPermissionsPolicyRequest_policyDocument}}
+var mPutRepositoryPermissionsPolicyResult = smithy.SchemaMembers{List: []*smithy.Schema{&sPutRepositoryPermissionsPolicyResult_policy}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_resourceArn, &sTagResourceRequest_tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_resourceArn, &sUntagResourceRequest_tagKeys}}
+var mUpdatePackageGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePackageGroupRequest_domain, &sUpdatePackageGroupRequest_domainOwner, &sUpdatePackageGroupRequest_packageGroup, &sUpdatePackageGroupRequest_contactInfo, &sUpdatePackageGroupRequest_description}}
+var mUpdatePackageGroupOriginConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePackageGroupOriginConfigurationRequest_domain, &sUpdatePackageGroupOriginConfigurationRequest_domainOwner, &sUpdatePackageGroupOriginConfigurationRequest_packageGroup, &sUpdatePackageGroupOriginConfigurationRequest_restrictions, &sUpdatePackageGroupOriginConfigurationRequest_addAllowedRepositories, &sUpdatePackageGroupOriginConfigurationRequest_removeAllowedRepositories}}
+var mUpdatePackageGroupOriginConfigurationResult = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePackageGroupOriginConfigurationResult_packageGroup, &sUpdatePackageGroupOriginConfigurationResult_allowedRepositoryUpdates}}
+var mUpdatePackageGroupResult = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePackageGroupResult_packageGroup}}
+var mUpdatePackageVersionsStatusRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePackageVersionsStatusRequest_domain, &sUpdatePackageVersionsStatusRequest_domainOwner, &sUpdatePackageVersionsStatusRequest_repository, &sUpdatePackageVersionsStatusRequest_format, &sUpdatePackageVersionsStatusRequest_namespace, &sUpdatePackageVersionsStatusRequest_package, &sUpdatePackageVersionsStatusRequest_versions, &sUpdatePackageVersionsStatusRequest_versionRevisions, &sUpdatePackageVersionsStatusRequest_expectedStatus, &sUpdatePackageVersionsStatusRequest_targetStatus}, Seed: 7, Slots: []uint16{
+	0, 1, 0, 0, 0, 7, 0, 0, 0, 10, 0, 0, 2, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3,
+	0, 8, 6, 9, 0, 4, 0, 0,
+}}
+var mUpdatePackageVersionsStatusResult = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePackageVersionsStatusResult_successfulVersions, &sUpdatePackageVersionsStatusResult_failedVersions}}
+var mUpdateRepositoryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRepositoryRequest_domain, &sUpdateRepositoryRequest_domainOwner, &sUpdateRepositoryRequest_repository, &sUpdateRepositoryRequest_description, &sUpdateRepositoryRequest_upstreams}}
+var mUpdateRepositoryResult = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRepositoryResult_repository}}
+
+var sAssociateExternalConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateExternalConnection, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sCopyPackageVersions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCopyPackageVersions, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sCreateDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDomain, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sCreatePackageGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePackageGroup, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sCreateRepository = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRepository, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sDeleteDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDomain, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var sDeleteDomainPermissionsPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDomainPermissionsPolicy, Traits: &t6, Type: smithy.ShapeTypeOperation})
+var sDeletePackage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePackage, Traits: &t7, Type: smithy.ShapeTypeOperation})
+var sDeletePackageGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePackageGroup, Traits: &t8, Type: smithy.ShapeTypeOperation})
+var sDeletePackageVersions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePackageVersions, Traits: &t9, Type: smithy.ShapeTypeOperation})
+var sDeleteRepository = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRepository, Traits: &t10, Type: smithy.ShapeTypeOperation})
+var sDeleteRepositoryPermissionsPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRepositoryPermissionsPolicy, Traits: &t11, Type: smithy.ShapeTypeOperation})
+var sDescribeDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDomain, Traits: &t12, Type: smithy.ShapeTypeOperation})
+var sDescribePackage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribePackage, Traits: &t13, Type: smithy.ShapeTypeOperation})
+var sDescribePackageGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribePackageGroup, Traits: &t14, Type: smithy.ShapeTypeOperation})
+var sDescribePackageVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribePackageVersion, Traits: &t15, Type: smithy.ShapeTypeOperation})
+var sDescribeRepository = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRepository, Traits: &t16, Type: smithy.ShapeTypeOperation})
+var sDisassociateExternalConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateExternalConnection, Traits: &t17, Type: smithy.ShapeTypeOperation})
+var sDisposePackageVersions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisposePackageVersions, Traits: &t18, Type: smithy.ShapeTypeOperation})
+var sGetAssociatedPackageGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAssociatedPackageGroup, Traits: &t19, Type: smithy.ShapeTypeOperation})
+var sGetAuthorizationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAuthorizationToken, Traits: &t20, Type: smithy.ShapeTypeOperation})
+var sGetDomainPermissionsPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainPermissionsPolicy, Traits: &t21, Type: smithy.ShapeTypeOperation})
+var sGetPackageVersionAsset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPackageVersionAsset, Traits: &t22, Type: smithy.ShapeTypeOperation})
+var sGetPackageVersionReadme = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPackageVersionReadme, Traits: &t23, Type: smithy.ShapeTypeOperation})
+var sGetRepositoryEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRepositoryEndpoint, Traits: &t24, Type: smithy.ShapeTypeOperation})
+var sGetRepositoryPermissionsPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRepositoryPermissionsPolicy, Traits: &t25, Type: smithy.ShapeTypeOperation})
+var sListAllowedRepositoriesForGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAllowedRepositoriesForGroup, Traits: &t26, Type: smithy.ShapeTypeOperation})
+var sListAssociatedPackages = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssociatedPackages, Traits: &t27, Type: smithy.ShapeTypeOperation})
+var sListDomains = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDomains, Traits: &t28, Type: smithy.ShapeTypeOperation})
+var sListPackageGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPackageGroups, Traits: &t29, Type: smithy.ShapeTypeOperation})
+var sListPackages = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPackages, Traits: &t30, Type: smithy.ShapeTypeOperation})
+var sListPackageVersionAssets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPackageVersionAssets, Traits: &t31, Type: smithy.ShapeTypeOperation})
+var sListPackageVersionDependencies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPackageVersionDependencies, Traits: &t32, Type: smithy.ShapeTypeOperation})
+var sListPackageVersions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPackageVersions, Traits: &t33, Type: smithy.ShapeTypeOperation})
+var sListRepositories = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRepositories, Traits: &t34, Type: smithy.ShapeTypeOperation})
+var sListRepositoriesInDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRepositoriesInDomain, Traits: &t35, Type: smithy.ShapeTypeOperation})
+var sListSubPackageGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSubPackageGroups, Traits: &t36, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t37, Type: smithy.ShapeTypeOperation})
+var sPublishPackageVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPublishPackageVersion, Traits: &t38, Type: smithy.ShapeTypeOperation})
+var sPutDomainPermissionsPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutDomainPermissionsPolicy, Traits: &t39, Type: smithy.ShapeTypeOperation})
+var sPutPackageOriginConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutPackageOriginConfiguration, Traits: &t40, Type: smithy.ShapeTypeOperation})
+var sPutRepositoryPermissionsPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRepositoryPermissionsPolicy, Traits: &t41, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t42, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t43, Type: smithy.ShapeTypeOperation})
+var sUpdatePackageGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePackageGroup, Traits: &t44, Type: smithy.ShapeTypeOperation})
+var sUpdatePackageGroupOriginConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePackageGroupOriginConfiguration, Traits: &t45, Type: smithy.ShapeTypeOperation})
+var sUpdatePackageVersionsStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePackageVersionsStatus, Traits: &t46, Type: smithy.ShapeTypeOperation})
+var sUpdateRepository = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRepository, Traits: &t47, Type: smithy.ShapeTypeOperation})
+var s_CodeArtifactControlPlaneService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CodeArtifactControlPlaneService, Type: smithy.ShapeTypeService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t48, Type: smithy.ShapeTypeStructure})
+var s_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sAllowPublish = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAllowPublish, Members: &mAllowPublish, Type: smithy.ShapeTypeEnum})
+var sAllowUpstream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAllowUpstream, Members: &mAllowUpstream, Type: smithy.ShapeTypeEnum})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString})
+var s_Asset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Asset, Traits: &t49, Type: smithy.ShapeTypeBlob})
+var s_AssetHashes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssetHashes, Members: &m_AssetHashes, Type: smithy.ShapeTypeMap})
+var s_AssetName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssetName, Type: smithy.ShapeTypeString})
+var sAssetSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssetSummary, Members: &mAssetSummary, Type: smithy.ShapeTypeStructure})
+var s_AssetSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssetSummaryList, Members: &m_AssetSummaryList, Type: smithy.ShapeTypeList})
+var sAssociatedPackage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociatedPackage, Members: &mAssociatedPackage, Type: smithy.ShapeTypeStructure})
+var s_AssociatedPackageList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssociatedPackageList, Members: &m_AssociatedPackageList, Type: smithy.ShapeTypeList})
+var s_AuthorizationTokenDurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuthorizationTokenDurationSeconds, Type: smithy.ShapeTypeLong})
+var s_BooleanOptional = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t50, Type: smithy.ShapeTypeStructure})
+var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Type: smithy.ShapeTypeString})
+var sDomainDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainDescription, Members: &mDomainDescription, Type: smithy.ShapeTypeStructure})
+var sDomainEntryPoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainEntryPoint, Members: &mDomainEntryPoint, Type: smithy.ShapeTypeStructure})
+var s_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sDomainStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainStatus, Members: &mDomainStatus, Type: smithy.ShapeTypeEnum})
+var sDomainSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainSummary, Members: &mDomainSummary, Type: smithy.ShapeTypeStructure})
+var s_DomainSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainSummaryList, Members: &m_DomainSummaryList, Type: smithy.ShapeTypeList})
+var sEndpointType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEndpointType, Members: &mEndpointType, Type: smithy.ShapeTypeEnum})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_ExternalConnectionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExternalConnectionName, Type: smithy.ShapeTypeString})
+var sExternalConnectionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExternalConnectionStatus, Members: &mExternalConnectionStatus, Type: smithy.ShapeTypeEnum})
+var sHashAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHashAlgorithm, Members: &mHashAlgorithm, Type: smithy.ShapeTypeEnum})
+var s_HashValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HashValue, Type: smithy.ShapeTypeString})
+var s_Integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t51, Type: smithy.ShapeTypeStructure})
+var sLicenseInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLicenseInfo, Members: &mLicenseInfo, Type: smithy.ShapeTypeStructure})
+var s_LicenseInfoList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LicenseInfoList, Members: &m_LicenseInfoList, Type: smithy.ShapeTypeList})
+var s_ListAllowedRepositoriesForGroupMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListAllowedRepositoriesForGroupMaxResults, Type: smithy.ShapeTypeInteger})
+var s_ListDomainsMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListDomainsMaxResults, Type: smithy.ShapeTypeInteger})
+var s_ListPackageGroupsMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListPackageGroupsMaxResults, Type: smithy.ShapeTypeInteger})
+var s_ListPackagesMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListPackagesMaxResults, Type: smithy.ShapeTypeInteger})
+var s_ListPackageVersionAssetsMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListPackageVersionAssetsMaxResults, Type: smithy.ShapeTypeInteger})
+var s_ListPackageVersionsMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListPackageVersionsMaxResults, Type: smithy.ShapeTypeInteger})
+var s_ListRepositoriesInDomainMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListRepositoriesInDomainMaxResults, Type: smithy.ShapeTypeInteger})
+var s_ListRepositoriesMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListRepositoriesMaxResults, Type: smithy.ShapeTypeInteger})
+var s_Long = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Long, Type: smithy.ShapeTypeLong})
+var s_LongOptional = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LongOptional, Type: smithy.ShapeTypeLong})
+var s_OriginRestrictions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OriginRestrictions, Members: &m_OriginRestrictions, Type: smithy.ShapeTypeMap})
+var sPackageDependency = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPackageDependency, Members: &mPackageDependency, Type: smithy.ShapeTypeStructure})
+var s_PackageDependencyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PackageDependencyList, Members: &m_PackageDependencyList, Type: smithy.ShapeTypeList})
+var sPackageDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPackageDescription, Members: &mPackageDescription, Type: smithy.ShapeTypeStructure})
+var sPackageFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPackageFormat, Members: &mPackageFormat, Type: smithy.ShapeTypeEnum})
+var sPackageGroupAllowedRepository = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPackageGroupAllowedRepository, Members: &mPackageGroupAllowedRepository, Type: smithy.ShapeTypeStructure})
+var s_PackageGroupAllowedRepositoryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PackageGroupAllowedRepositoryList, Members: &m_PackageGroupAllowedRepositoryList, Type: smithy.ShapeTypeList})
+var s_PackageGroupAllowedRepositoryUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PackageGroupAllowedRepositoryUpdate, Members: &m_PackageGroupAllowedRepositoryUpdate, Type: smithy.ShapeTypeMap})
+var s_PackageGroupAllowedRepositoryUpdates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PackageGroupAllowedRepositoryUpdates, Members: &m_PackageGroupAllowedRepositoryUpdates, Type: smithy.ShapeTypeMap})
+var sPackageGroupAllowedRepositoryUpdateType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPackageGroupAllowedRepositoryUpdateType, Members: &mPackageGroupAllowedRepositoryUpdateType, Type: smithy.ShapeTypeEnum})
+var sPackageGroupAssociationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPackageGroupAssociationType, Members: &mPackageGroupAssociationType, Type: smithy.ShapeTypeEnum})
+var s_PackageGroupContactInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PackageGroupContactInfo, Type: smithy.ShapeTypeString})
+var sPackageGroupDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPackageGroupDescription, Members: &mPackageGroupDescription, Type: smithy.ShapeTypeStructure})
+var sPackageGroupOriginConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPackageGroupOriginConfiguration, Members: &mPackageGroupOriginConfiguration, Type: smithy.ShapeTypeStructure})
+var sPackageGroupOriginRestriction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPackageGroupOriginRestriction, Members: &mPackageGroupOriginRestriction, Type: smithy.ShapeTypeStructure})
+var sPackageGroupOriginRestrictionMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPackageGroupOriginRestrictionMode, Members: &mPackageGroupOriginRestrictionMode, Type: smithy.ShapeTypeEnum})
+var s_PackageGroupOriginRestrictions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PackageGroupOriginRestrictions, Members: &m_PackageGroupOriginRestrictions, Type: smithy.ShapeTypeMap})
+var sPackageGroupOriginRestrictionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPackageGroupOriginRestrictionType, Members: &mPackageGroupOriginRestrictionType, Type: smithy.ShapeTypeEnum})
+var s_PackageGroupPattern = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PackageGroupPattern, Type: smithy.ShapeTypeString})
+var s_PackageGroupPatternPrefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PackageGroupPatternPrefix, Type: smithy.ShapeTypeString})
+var sPackageGroupReference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPackageGroupReference, Members: &mPackageGroupReference, Type: smithy.ShapeTypeStructure})
+var sPackageGroupSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPackageGroupSummary, Members: &mPackageGroupSummary, Type: smithy.ShapeTypeStructure})
+var s_PackageGroupSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PackageGroupSummaryList, Members: &m_PackageGroupSummaryList, Type: smithy.ShapeTypeList})
+var s_PackageName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PackageName, Type: smithy.ShapeTypeString})
+var s_PackageNamespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PackageNamespace, Type: smithy.ShapeTypeString})
+var sPackageOriginConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPackageOriginConfiguration, Members: &mPackageOriginConfiguration, Type: smithy.ShapeTypeStructure})
+var sPackageOriginRestrictions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPackageOriginRestrictions, Members: &mPackageOriginRestrictions, Type: smithy.ShapeTypeStructure})
+var sPackageSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPackageSummary, Members: &mPackageSummary, Type: smithy.ShapeTypeStructure})
+var s_PackageSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PackageSummaryList, Members: &m_PackageSummaryList, Type: smithy.ShapeTypeList})
+var s_PackageVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PackageVersion, Type: smithy.ShapeTypeString})
+var sPackageVersionDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPackageVersionDescription, Members: &mPackageVersionDescription, Type: smithy.ShapeTypeStructure})
+var sPackageVersionError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPackageVersionError, Members: &mPackageVersionError, Type: smithy.ShapeTypeStructure})
+var sPackageVersionErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPackageVersionErrorCode, Members: &mPackageVersionErrorCode, Type: smithy.ShapeTypeEnum})
+var s_PackageVersionErrorMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PackageVersionErrorMap, Members: &m_PackageVersionErrorMap, Type: smithy.ShapeTypeMap})
+var s_PackageVersionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PackageVersionList, Members: &m_PackageVersionList, Type: smithy.ShapeTypeList})
+var sPackageVersionOrigin = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPackageVersionOrigin, Members: &mPackageVersionOrigin, Type: smithy.ShapeTypeStructure})
+var sPackageVersionOriginType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPackageVersionOriginType, Members: &mPackageVersionOriginType, Type: smithy.ShapeTypeEnum})
+var s_PackageVersionRevision = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PackageVersionRevision, Type: smithy.ShapeTypeString})
+var s_PackageVersionRevisionMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PackageVersionRevisionMap, Members: &m_PackageVersionRevisionMap, Type: smithy.ShapeTypeMap})
+var sPackageVersionSortType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPackageVersionSortType, Members: &mPackageVersionSortType, Type: smithy.ShapeTypeEnum})
+var sPackageVersionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPackageVersionStatus, Members: &mPackageVersionStatus, Type: smithy.ShapeTypeEnum})
+var sPackageVersionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPackageVersionSummary, Members: &mPackageVersionSummary, Type: smithy.ShapeTypeStructure})
+var s_PackageVersionSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PackageVersionSummaryList, Members: &m_PackageVersionSummaryList, Type: smithy.ShapeTypeList})
+var s_PaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var s_PolicyDocument = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyDocument, Type: smithy.ShapeTypeString})
+var s_PolicyRevision = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyRevision, Type: smithy.ShapeTypeString})
+var sRepositoryDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositoryDescription, Members: &mRepositoryDescription, Type: smithy.ShapeTypeStructure})
+var sRepositoryExternalConnectionInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositoryExternalConnectionInfo, Members: &mRepositoryExternalConnectionInfo, Type: smithy.ShapeTypeStructure})
+var s_RepositoryExternalConnectionInfoList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositoryExternalConnectionInfoList, Members: &m_RepositoryExternalConnectionInfoList, Type: smithy.ShapeTypeList})
+var s_RepositoryName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositoryName, Type: smithy.ShapeTypeString})
+var s_RepositoryNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositoryNameList, Members: &m_RepositoryNameList, Type: smithy.ShapeTypeList})
+var sRepositorySummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositorySummary, Members: &mRepositorySummary, Type: smithy.ShapeTypeStructure})
+var s_RepositorySummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositorySummaryList, Members: &m_RepositorySummaryList, Type: smithy.ShapeTypeList})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t52, Type: smithy.ShapeTypeStructure})
+var sResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourcePolicy, Members: &mResourcePolicy, Type: smithy.ShapeTypeStructure})
+var sResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum})
+var s_RetryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RetryAfterSeconds, Type: smithy.ShapeTypeInteger})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t53, Type: smithy.ShapeTypeStructure})
+var s_SHA256 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SHA256, Type: smithy.ShapeTypeString})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString})
+var s_String255 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String255, Type: smithy.ShapeTypeString})
+var sSuccessfulPackageVersionInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuccessfulPackageVersionInfo, Members: &mSuccessfulPackageVersionInfo, Type: smithy.ShapeTypeStructure})
+var s_SuccessfulPackageVersionInfoMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SuccessfulPackageVersionInfoMap, Members: &m_SuccessfulPackageVersionInfoMap, Type: smithy.ShapeTypeMap})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t54, Type: smithy.ShapeTypeStructure})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sUpstreamRepository = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpstreamRepository, Members: &mUpstreamRepository, Type: smithy.ShapeTypeStructure})
+var sUpstreamRepositoryInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpstreamRepositoryInfo, Members: &mUpstreamRepositoryInfo, Type: smithy.ShapeTypeStructure})
+var s_UpstreamRepositoryInfoList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpstreamRepositoryInfoList, Members: &m_UpstreamRepositoryInfoList, Type: smithy.ShapeTypeList})
+var s_UpstreamRepositoryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpstreamRepositoryList, Members: &m_UpstreamRepositoryList, Type: smithy.ShapeTypeList})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t56, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum})
+var sAssociateExternalConnectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateExternalConnectionRequest, Members: &mAssociateExternalConnectionRequest, Type: smithy.ShapeTypeStructure})
+var sAssociateExternalConnectionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateExternalConnectionResult, Members: &mAssociateExternalConnectionResult, Type: smithy.ShapeTypeStructure})
+var sCopyPackageVersionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCopyPackageVersionsRequest, Members: &mCopyPackageVersionsRequest, Type: smithy.ShapeTypeStructure})
+var sCopyPackageVersionsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCopyPackageVersionsResult, Members: &mCopyPackageVersionsResult, Type: smithy.ShapeTypeStructure})
+var sCreateDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDomainRequest, Members: &mCreateDomainRequest, Type: smithy.ShapeTypeStructure})
+var sCreateDomainResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDomainResult, Members: &mCreateDomainResult, Type: smithy.ShapeTypeStructure})
+var sCreatePackageGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePackageGroupRequest, Members: &mCreatePackageGroupRequest, Type: smithy.ShapeTypeStructure})
+var sCreatePackageGroupResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePackageGroupResult, Members: &mCreatePackageGroupResult, Type: smithy.ShapeTypeStructure})
+var sCreateRepositoryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRepositoryRequest, Members: &mCreateRepositoryRequest, Type: smithy.ShapeTypeStructure})
+var sCreateRepositoryResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRepositoryResult, Members: &mCreateRepositoryResult, Type: smithy.ShapeTypeStructure})
+var sDeleteDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDomainRequest, Members: &mDeleteDomainRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteDomainResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDomainResult, Members: &mDeleteDomainResult, Type: smithy.ShapeTypeStructure})
+var sDeleteDomainPermissionsPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDomainPermissionsPolicyRequest, Members: &mDeleteDomainPermissionsPolicyRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteDomainPermissionsPolicyResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDomainPermissionsPolicyResult, Members: &mDeleteDomainPermissionsPolicyResult, Type: smithy.ShapeTypeStructure})
+var sDeletePackageGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePackageGroupRequest, Members: &mDeletePackageGroupRequest, Type: smithy.ShapeTypeStructure})
+var sDeletePackageGroupResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePackageGroupResult, Members: &mDeletePackageGroupResult, Type: smithy.ShapeTypeStructure})
+var sDeletePackageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePackageRequest, Members: &mDeletePackageRequest, Type: smithy.ShapeTypeStructure})
+var sDeletePackageResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePackageResult, Members: &mDeletePackageResult, Type: smithy.ShapeTypeStructure})
+var sDeletePackageVersionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePackageVersionsRequest, Members: &mDeletePackageVersionsRequest, Type: smithy.ShapeTypeStructure})
+var sDeletePackageVersionsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePackageVersionsResult, Members: &mDeletePackageVersionsResult, Type: smithy.ShapeTypeStructure})
+var sDeleteRepositoryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRepositoryRequest, Members: &mDeleteRepositoryRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteRepositoryResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRepositoryResult, Members: &mDeleteRepositoryResult, Type: smithy.ShapeTypeStructure})
+var sDeleteRepositoryPermissionsPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRepositoryPermissionsPolicyRequest, Members: &mDeleteRepositoryPermissionsPolicyRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteRepositoryPermissionsPolicyResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRepositoryPermissionsPolicyResult, Members: &mDeleteRepositoryPermissionsPolicyResult, Type: smithy.ShapeTypeStructure})
+var sDescribeDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDomainRequest, Members: &mDescribeDomainRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeDomainResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDomainResult, Members: &mDescribeDomainResult, Type: smithy.ShapeTypeStructure})
+var sDescribePackageGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribePackageGroupRequest, Members: &mDescribePackageGroupRequest, Type: smithy.ShapeTypeStructure})
+var sDescribePackageGroupResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribePackageGroupResult, Members: &mDescribePackageGroupResult, Type: smithy.ShapeTypeStructure})
+var sDescribePackageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribePackageRequest, Members: &mDescribePackageRequest, Type: smithy.ShapeTypeStructure})
+var sDescribePackageResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribePackageResult, Members: &mDescribePackageResult, Type: smithy.ShapeTypeStructure})
+var sDescribePackageVersionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribePackageVersionRequest, Members: &mDescribePackageVersionRequest, Type: smithy.ShapeTypeStructure})
+var sDescribePackageVersionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribePackageVersionResult, Members: &mDescribePackageVersionResult, Type: smithy.ShapeTypeStructure})
+var sDescribeRepositoryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRepositoryRequest, Members: &mDescribeRepositoryRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeRepositoryResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRepositoryResult, Members: &mDescribeRepositoryResult, Type: smithy.ShapeTypeStructure})
+var sDisassociateExternalConnectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateExternalConnectionRequest, Members: &mDisassociateExternalConnectionRequest, Type: smithy.ShapeTypeStructure})
+var sDisassociateExternalConnectionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateExternalConnectionResult, Members: &mDisassociateExternalConnectionResult, Type: smithy.ShapeTypeStructure})
+var sDisposePackageVersionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisposePackageVersionsRequest, Members: &mDisposePackageVersionsRequest, Type: smithy.ShapeTypeStructure})
+var sDisposePackageVersionsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisposePackageVersionsResult, Members: &mDisposePackageVersionsResult, Type: smithy.ShapeTypeStructure})
+var sGetAssociatedPackageGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAssociatedPackageGroupRequest, Members: &mGetAssociatedPackageGroupRequest, Type: smithy.ShapeTypeStructure})
+var sGetAssociatedPackageGroupResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAssociatedPackageGroupResult, Members: &mGetAssociatedPackageGroupResult, Type: smithy.ShapeTypeStructure})
+var sGetAuthorizationTokenRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAuthorizationTokenRequest, Members: &mGetAuthorizationTokenRequest, Type: smithy.ShapeTypeStructure})
+var sGetAuthorizationTokenResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAuthorizationTokenResult, Members: &mGetAuthorizationTokenResult, Traits: &t70, Type: smithy.ShapeTypeStructure})
+var sGetDomainPermissionsPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainPermissionsPolicyRequest, Members: &mGetDomainPermissionsPolicyRequest, Type: smithy.ShapeTypeStructure})
+var sGetDomainPermissionsPolicyResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainPermissionsPolicyResult, Members: &mGetDomainPermissionsPolicyResult, Type: smithy.ShapeTypeStructure})
+var sGetPackageVersionAssetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPackageVersionAssetRequest, Members: &mGetPackageVersionAssetRequest, Type: smithy.ShapeTypeStructure})
+var sGetPackageVersionAssetResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPackageVersionAssetResult, Members: &mGetPackageVersionAssetResult, Type: smithy.ShapeTypeStructure})
+var sGetPackageVersionReadmeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPackageVersionReadmeRequest, Members: &mGetPackageVersionReadmeRequest, Type: smithy.ShapeTypeStructure})
+var sGetPackageVersionReadmeResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPackageVersionReadmeResult, Members: &mGetPackageVersionReadmeResult, Type: smithy.ShapeTypeStructure})
+var sGetRepositoryEndpointRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRepositoryEndpointRequest, Members: &mGetRepositoryEndpointRequest, Type: smithy.ShapeTypeStructure})
+var sGetRepositoryEndpointResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRepositoryEndpointResult, Members: &mGetRepositoryEndpointResult, Type: smithy.ShapeTypeStructure})
+var sGetRepositoryPermissionsPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRepositoryPermissionsPolicyRequest, Members: &mGetRepositoryPermissionsPolicyRequest, Type: smithy.ShapeTypeStructure})
+var sGetRepositoryPermissionsPolicyResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRepositoryPermissionsPolicyResult, Members: &mGetRepositoryPermissionsPolicyResult, Type: smithy.ShapeTypeStructure})
+var sListAllowedRepositoriesForGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAllowedRepositoriesForGroupRequest, Members: &mListAllowedRepositoriesForGroupRequest, Type: smithy.ShapeTypeStructure})
+var sListAllowedRepositoriesForGroupResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAllowedRepositoriesForGroupResult, Members: &mListAllowedRepositoriesForGroupResult, Type: smithy.ShapeTypeStructure})
+var sListAssociatedPackagesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssociatedPackagesRequest, Members: &mListAssociatedPackagesRequest, Type: smithy.ShapeTypeStructure})
+var sListAssociatedPackagesResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssociatedPackagesResult, Members: &mListAssociatedPackagesResult, Type: smithy.ShapeTypeStructure})
+var sListDomainsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDomainsRequest, Members: &mListDomainsRequest, Type: smithy.ShapeTypeStructure})
+var sListDomainsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDomainsResult, Members: &mListDomainsResult, Type: smithy.ShapeTypeStructure})
+var sListPackageGroupsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPackageGroupsRequest, Members: &mListPackageGroupsRequest, Type: smithy.ShapeTypeStructure})
+var sListPackageGroupsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPackageGroupsResult, Members: &mListPackageGroupsResult, Type: smithy.ShapeTypeStructure})
+var sListPackagesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPackagesRequest, Members: &mListPackagesRequest, Type: smithy.ShapeTypeStructure})
+var sListPackagesResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPackagesResult, Members: &mListPackagesResult, Type: smithy.ShapeTypeStructure})
+var sListPackageVersionAssetsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPackageVersionAssetsRequest, Members: &mListPackageVersionAssetsRequest, Type: smithy.ShapeTypeStructure})
+var sListPackageVersionAssetsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPackageVersionAssetsResult, Members: &mListPackageVersionAssetsResult, Type: smithy.ShapeTypeStructure})
+var sListPackageVersionDependenciesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPackageVersionDependenciesRequest, Members: &mListPackageVersionDependenciesRequest, Type: smithy.ShapeTypeStructure})
+var sListPackageVersionDependenciesResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPackageVersionDependenciesResult, Members: &mListPackageVersionDependenciesResult, Type: smithy.ShapeTypeStructure})
+var sListPackageVersionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPackageVersionsRequest, Members: &mListPackageVersionsRequest, Type: smithy.ShapeTypeStructure})
+var sListPackageVersionsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPackageVersionsResult, Members: &mListPackageVersionsResult, Type: smithy.ShapeTypeStructure})
+var sListRepositoriesInDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRepositoriesInDomainRequest, Members: &mListRepositoriesInDomainRequest, Type: smithy.ShapeTypeStructure})
+var sListRepositoriesInDomainResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRepositoriesInDomainResult, Members: &mListRepositoriesInDomainResult, Type: smithy.ShapeTypeStructure})
+var sListRepositoriesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRepositoriesRequest, Members: &mListRepositoriesRequest, Type: smithy.ShapeTypeStructure})
+var sListRepositoriesResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRepositoriesResult, Members: &mListRepositoriesResult, Type: smithy.ShapeTypeStructure})
+var sListSubPackageGroupsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSubPackageGroupsRequest, Members: &mListSubPackageGroupsRequest, Type: smithy.ShapeTypeStructure})
+var sListSubPackageGroupsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSubPackageGroupsResult, Members: &mListSubPackageGroupsResult, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResult, Members: &mListTagsForResourceResult, Type: smithy.ShapeTypeStructure})
+var sPublishPackageVersionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPublishPackageVersionRequest, Members: &mPublishPackageVersionRequest, Type: smithy.ShapeTypeStructure})
+var sPublishPackageVersionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPublishPackageVersionResult, Members: &mPublishPackageVersionResult, Type: smithy.ShapeTypeStructure})
+var sPutDomainPermissionsPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutDomainPermissionsPolicyRequest, Members: &mPutDomainPermissionsPolicyRequest, Type: smithy.ShapeTypeStructure})
+var sPutDomainPermissionsPolicyResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutDomainPermissionsPolicyResult, Members: &mPutDomainPermissionsPolicyResult, Type: smithy.ShapeTypeStructure})
+var sPutPackageOriginConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutPackageOriginConfigurationRequest, Members: &mPutPackageOriginConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sPutPackageOriginConfigurationResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutPackageOriginConfigurationResult, Members: &mPutPackageOriginConfigurationResult, Type: smithy.ShapeTypeStructure})
+var sPutRepositoryPermissionsPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRepositoryPermissionsPolicyRequest, Members: &mPutRepositoryPermissionsPolicyRequest, Type: smithy.ShapeTypeStructure})
+var sPutRepositoryPermissionsPolicyResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRepositoryPermissionsPolicyResult, Members: &mPutRepositoryPermissionsPolicyResult, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sTagResourceResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResult, Type: smithy.ShapeTypeStructure})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUntagResourceResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResult, Type: smithy.ShapeTypeStructure})
+var sUpdatePackageGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePackageGroupRequest, Members: &mUpdatePackageGroupRequest, Type: smithy.ShapeTypeStructure})
+var sUpdatePackageGroupOriginConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePackageGroupOriginConfigurationRequest, Members: &mUpdatePackageGroupOriginConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sUpdatePackageGroupOriginConfigurationResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePackageGroupOriginConfigurationResult, Members: &mUpdatePackageGroupOriginConfigurationResult, Type: smithy.ShapeTypeStructure})
+var sUpdatePackageGroupResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePackageGroupResult, Members: &mUpdatePackageGroupResult, Type: smithy.ShapeTypeStructure})
+var sUpdatePackageVersionsStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePackageVersionsStatusRequest, Members: &mUpdatePackageVersionsStatusRequest, Type: smithy.ShapeTypeStructure})
+var sUpdatePackageVersionsStatusResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePackageVersionsStatusResult, Members: &mUpdatePackageVersionsStatusResult, Type: smithy.ShapeTypeStructure})
+var sUpdateRepositoryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRepositoryRequest, Members: &mUpdateRepositoryRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateRepositoryResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRepositoryResult, Members: &mUpdateRepositoryResult, Type: smithy.ShapeTypeStructure})
+
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sAllowPublish_ALLOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALLOW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAllowPublish_BLOCK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BLOCK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAllowUpstream_ALLOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALLOW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAllowUpstream_BLOCK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BLOCK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_AssetHashes_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &iHashAlgorithm, Members: &mHashAlgorithm, Type: smithy.ShapeTypeEnum})
+var s_AssetHashes_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_HashValue, Type: smithy.ShapeTypeString})
+var sAssetSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_AssetName, Type: smithy.ShapeTypeString})
+var sAssetSummary_size = smithy.NewStaticSchema(smithy.StaticSchema{Member: "size", ID: &i_LongOptional, Type: smithy.ShapeTypeLong})
+var sAssetSummary_hashes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hashes", ID: &i_AssetHashes, Members: &m_AssetHashes, Type: smithy.ShapeTypeMap})
+var s_AssetSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAssetSummary, Members: &mAssetSummary, Type: smithy.ShapeTypeStructure})
+var sAssociatedPackage_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iPackageFormat, Members: &mPackageFormat, Type: smithy.ShapeTypeEnum})
+var sAssociatedPackage_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_PackageNamespace, Type: smithy.ShapeTypeString})
+var sAssociatedPackage_package = smithy.NewStaticSchema(smithy.StaticSchema{Member: "package", ID: &i_PackageName, Type: smithy.ShapeTypeString})
+var sAssociatedPackage_associationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associationType", ID: &iPackageGroupAssociationType, Members: &mPackageGroupAssociationType, Type: smithy.ShapeTypeEnum})
+var s_AssociatedPackageList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAssociatedPackage, Members: &mAssociatedPackage, Type: smithy.ShapeTypeStructure})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sConflictException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sConflictException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum})
+var sDomainDescription_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sDomainDescription_owner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "owner", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sDomainDescription_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sDomainDescription_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iDomainStatus, Members: &mDomainStatus, Type: smithy.ShapeTypeEnum})
+var sDomainDescription_createdTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDomainDescription_encryptionKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionKey", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sDomainDescription_repositoryCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryCount", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sDomainDescription_assetSizeBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assetSizeBytes", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sDomainDescription_s3BucketArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3BucketArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sDomainEntryPoint_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString})
+var sDomainEntryPoint_externalConnectionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalConnectionName", ID: &i_ExternalConnectionName, Type: smithy.ShapeTypeString})
+var sDomainStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDomainStatus_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDomainSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sDomainSummary_owner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "owner", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sDomainSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sDomainSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iDomainStatus, Members: &mDomainStatus, Type: smithy.ShapeTypeEnum})
+var sDomainSummary_createdTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDomainSummary_encryptionKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionKey", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var s_DomainSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDomainSummary, Members: &mDomainSummary, Type: smithy.ShapeTypeStructure})
+var sEndpointType_DUALSTACK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUALSTACK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEndpointType_IPV4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPV4", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sExternalConnectionStatus_AVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHashAlgorithm_MD5 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MD5", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHashAlgorithm_SHA1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHA1", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHashAlgorithm_SHA256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHA256", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHashAlgorithm_SHA512 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHA512", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sLicenseInfo_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sLicenseInfo_url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "url", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_LicenseInfoList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLicenseInfo, Members: &mLicenseInfo, Type: smithy.ShapeTypeStructure})
+var s_OriginRestrictions_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &iPackageGroupOriginRestrictionType, Members: &mPackageGroupOriginRestrictionType, Type: smithy.ShapeTypeEnum})
+var s_OriginRestrictions_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iPackageGroupOriginRestrictionMode, Members: &mPackageGroupOriginRestrictionMode, Type: smithy.ShapeTypeEnum})
+var sPackageDependency_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_PackageNamespace, Type: smithy.ShapeTypeString})
+var sPackageDependency_package = smithy.NewStaticSchema(smithy.StaticSchema{Member: "package", ID: &i_PackageName, Type: smithy.ShapeTypeString})
+var sPackageDependency_dependencyType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dependencyType", ID: &i_String, Type: smithy.ShapeTypeString})
+var sPackageDependency_versionRequirement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionRequirement", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_PackageDependencyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPackageDependency, Members: &mPackageDependency, Type: smithy.ShapeTypeStructure})
+var sPackageDescription_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iPackageFormat, Members: &mPackageFormat, Type: smithy.ShapeTypeEnum})
+var sPackageDescription_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_PackageNamespace, Type: smithy.ShapeTypeString})
+var sPackageDescription_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PackageName, Type: smithy.ShapeTypeString})
+var sPackageDescription_originConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "originConfiguration", ID: &iPackageOriginConfiguration, Members: &mPackageOriginConfiguration, Type: smithy.ShapeTypeStructure})
+var sPackageFormat_NPM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NPM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPackageFormat_PYPI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PYPI", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPackageFormat_MAVEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MAVEN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPackageFormat_NUGET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NUGET", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPackageFormat_GENERIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GENERIC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPackageFormat_RUBY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUBY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPackageFormat_SWIFT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SWIFT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPackageFormat_CARGO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CARGO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPackageGroupAllowedRepository_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString})
+var sPackageGroupAllowedRepository_originRestrictionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "originRestrictionType", ID: &iPackageGroupOriginRestrictionType, Members: &mPackageGroupOriginRestrictionType, Type: smithy.ShapeTypeEnum})
+var s_PackageGroupAllowedRepositoryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPackageGroupAllowedRepository, Members: &mPackageGroupAllowedRepository, Type: smithy.ShapeTypeStructure})
+var s_PackageGroupAllowedRepositoryUpdate_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &iPackageGroupAllowedRepositoryUpdateType, Members: &mPackageGroupAllowedRepositoryUpdateType, Type: smithy.ShapeTypeEnum})
+var s_PackageGroupAllowedRepositoryUpdate_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_RepositoryNameList, Members: &m_RepositoryNameList, Type: smithy.ShapeTypeList})
+var s_PackageGroupAllowedRepositoryUpdates_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &iPackageGroupOriginRestrictionType, Members: &mPackageGroupOriginRestrictionType, Type: smithy.ShapeTypeEnum})
+var s_PackageGroupAllowedRepositoryUpdates_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_PackageGroupAllowedRepositoryUpdate, Members: &m_PackageGroupAllowedRepositoryUpdate, Type: smithy.ShapeTypeMap})
+var sPackageGroupAllowedRepositoryUpdateType_ADDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPackageGroupAllowedRepositoryUpdateType_REMOVED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REMOVED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPackageGroupAssociationType_STRONG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STRONG", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPackageGroupAssociationType_WEAK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WEAK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPackageGroupDescription_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sPackageGroupDescription_pattern = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pattern", ID: &i_PackageGroupPattern, Type: smithy.ShapeTypeString})
+var sPackageGroupDescription_domainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainName", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sPackageGroupDescription_domainOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainOwner", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sPackageGroupDescription_createdTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sPackageGroupDescription_contactInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contactInfo", ID: &i_PackageGroupContactInfo, Type: smithy.ShapeTypeString})
+var sPackageGroupDescription_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sPackageGroupDescription_originConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "originConfiguration", ID: &iPackageGroupOriginConfiguration, Members: &mPackageGroupOriginConfiguration, Type: smithy.ShapeTypeStructure})
+var sPackageGroupDescription_parent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parent", ID: &iPackageGroupReference, Members: &mPackageGroupReference, Type: smithy.ShapeTypeStructure})
+var sPackageGroupOriginConfiguration_restrictions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "restrictions", ID: &i_PackageGroupOriginRestrictions, Members: &m_PackageGroupOriginRestrictions, Type: smithy.ShapeTypeMap})
+var sPackageGroupOriginRestriction_mode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mode", ID: &iPackageGroupOriginRestrictionMode, Members: &mPackageGroupOriginRestrictionMode, Type: smithy.ShapeTypeEnum})
+var sPackageGroupOriginRestriction_effectiveMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "effectiveMode", ID: &iPackageGroupOriginRestrictionMode, Members: &mPackageGroupOriginRestrictionMode, Type: smithy.ShapeTypeEnum})
+var sPackageGroupOriginRestriction_inheritedFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inheritedFrom", ID: &iPackageGroupReference, Members: &mPackageGroupReference, Type: smithy.ShapeTypeStructure})
+var sPackageGroupOriginRestriction_repositoriesCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoriesCount", ID: &i_LongOptional, Type: smithy.ShapeTypeLong})
+var sPackageGroupOriginRestrictionMode_ALLOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALLOW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPackageGroupOriginRestrictionMode_ALLOW_SPECIFIC_REPOSITORIES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALLOW_SPECIFIC_REPOSITORIES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPackageGroupOriginRestrictionMode_BLOCK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BLOCK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPackageGroupOriginRestrictionMode_INHERIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INHERIT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_PackageGroupOriginRestrictions_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &iPackageGroupOriginRestrictionType, Members: &mPackageGroupOriginRestrictionType, Type: smithy.ShapeTypeEnum})
+var s_PackageGroupOriginRestrictions_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iPackageGroupOriginRestriction, Members: &mPackageGroupOriginRestriction, Type: smithy.ShapeTypeStructure})
+var sPackageGroupOriginRestrictionType_EXTERNAL_UPSTREAM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXTERNAL_UPSTREAM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPackageGroupOriginRestrictionType_INTERNAL_UPSTREAM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_UPSTREAM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPackageGroupOriginRestrictionType_PUBLISH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PUBLISH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPackageGroupReference_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sPackageGroupReference_pattern = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pattern", ID: &i_PackageGroupPattern, Type: smithy.ShapeTypeString})
+var sPackageGroupSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sPackageGroupSummary_pattern = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pattern", ID: &i_PackageGroupPattern, Type: smithy.ShapeTypeString})
+var sPackageGroupSummary_domainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainName", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sPackageGroupSummary_domainOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainOwner", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sPackageGroupSummary_createdTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sPackageGroupSummary_contactInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contactInfo", ID: &i_PackageGroupContactInfo, Type: smithy.ShapeTypeString})
+var sPackageGroupSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sPackageGroupSummary_originConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "originConfiguration", ID: &iPackageGroupOriginConfiguration, Members: &mPackageGroupOriginConfiguration, Type: smithy.ShapeTypeStructure})
+var sPackageGroupSummary_parent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parent", ID: &iPackageGroupReference, Members: &mPackageGroupReference, Type: smithy.ShapeTypeStructure})
+var s_PackageGroupSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPackageGroupSummary, Members: &mPackageGroupSummary, Type: smithy.ShapeTypeStructure})
+var sPackageOriginConfiguration_restrictions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "restrictions", ID: &iPackageOriginRestrictions, Members: &mPackageOriginRestrictions, Type: smithy.ShapeTypeStructure})
+var sPackageOriginRestrictions_publish = smithy.NewStaticSchema(smithy.StaticSchema{Member: "publish", ID: &iAllowPublish, Members: &mAllowPublish, Type: smithy.ShapeTypeEnum})
+var sPackageOriginRestrictions_upstream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "upstream", ID: &iAllowUpstream, Members: &mAllowUpstream, Type: smithy.ShapeTypeEnum})
+var sPackageSummary_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iPackageFormat, Members: &mPackageFormat, Type: smithy.ShapeTypeEnum})
+var sPackageSummary_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_PackageNamespace, Type: smithy.ShapeTypeString})
+var sPackageSummary_package = smithy.NewStaticSchema(smithy.StaticSchema{Member: "package", ID: &i_PackageName, Type: smithy.ShapeTypeString})
+var sPackageSummary_originConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "originConfiguration", ID: &iPackageOriginConfiguration, Members: &mPackageOriginConfiguration, Type: smithy.ShapeTypeStructure})
+var s_PackageSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPackageSummary, Members: &mPackageSummary, Type: smithy.ShapeTypeStructure})
+var sPackageVersionDescription_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iPackageFormat, Members: &mPackageFormat, Type: smithy.ShapeTypeEnum})
+var sPackageVersionDescription_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_PackageNamespace, Type: smithy.ShapeTypeString})
+var sPackageVersionDescription_packageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "packageName", ID: &i_PackageName, Type: smithy.ShapeTypeString})
+var sPackageVersionDescription_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_String255, Type: smithy.ShapeTypeString})
+var sPackageVersionDescription_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_PackageVersion, Type: smithy.ShapeTypeString})
+var sPackageVersionDescription_summary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "summary", ID: &i_String, Type: smithy.ShapeTypeString})
+var sPackageVersionDescription_homePage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "homePage", ID: &i_String, Type: smithy.ShapeTypeString})
+var sPackageVersionDescription_sourceCodeRepository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceCodeRepository", ID: &i_String, Type: smithy.ShapeTypeString})
+var sPackageVersionDescription_publishedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "publishedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sPackageVersionDescription_licenses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "licenses", ID: &i_LicenseInfoList, Members: &m_LicenseInfoList, Type: smithy.ShapeTypeList})
+var sPackageVersionDescription_revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revision", ID: &i_PackageVersionRevision, Type: smithy.ShapeTypeString})
+var sPackageVersionDescription_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iPackageVersionStatus, Members: &mPackageVersionStatus, Type: smithy.ShapeTypeEnum})
+var sPackageVersionDescription_origin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "origin", ID: &iPackageVersionOrigin, Members: &mPackageVersionOrigin, Type: smithy.ShapeTypeStructure})
+var sPackageVersionError_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &iPackageVersionErrorCode, Members: &mPackageVersionErrorCode, Type: smithy.ShapeTypeEnum})
+var sPackageVersionError_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sPackageVersionErrorCode_ALREADY_EXISTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALREADY_EXISTS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPackageVersionErrorCode_MISMATCHED_REVISION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISMATCHED_REVISION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPackageVersionErrorCode_MISMATCHED_STATUS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISMATCHED_STATUS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPackageVersionErrorCode_NOT_ALLOWED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_ALLOWED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPackageVersionErrorCode_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPackageVersionErrorCode_SKIPPED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SKIPPED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_PackageVersionErrorMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_PackageVersion, Type: smithy.ShapeTypeString})
+var s_PackageVersionErrorMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iPackageVersionError, Members: &mPackageVersionError, Type: smithy.ShapeTypeStructure})
+var s_PackageVersionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_PackageVersion, Type: smithy.ShapeTypeString})
+var sPackageVersionOrigin_domainEntryPoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainEntryPoint", ID: &iDomainEntryPoint, Members: &mDomainEntryPoint, Type: smithy.ShapeTypeStructure})
+var sPackageVersionOrigin_originType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "originType", ID: &iPackageVersionOriginType, Members: &mPackageVersionOriginType, Type: smithy.ShapeTypeEnum})
+var sPackageVersionOriginType_INTERNAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPackageVersionOriginType_EXTERNAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXTERNAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPackageVersionOriginType_UNKNOWN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_PackageVersionRevisionMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_PackageVersion, Type: smithy.ShapeTypeString})
+var s_PackageVersionRevisionMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_PackageVersionRevision, Type: smithy.ShapeTypeString})
+var sPackageVersionSortType_PUBLISHED_TIME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PUBLISHED_TIME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPackageVersionStatus_PUBLISHED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PUBLISHED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPackageVersionStatus_UNFINISHED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNFINISHED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPackageVersionStatus_UNLISTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNLISTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPackageVersionStatus_ARCHIVED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARCHIVED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPackageVersionStatus_DISPOSED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISPOSED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPackageVersionStatus_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPackageVersionSummary_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_PackageVersion, Type: smithy.ShapeTypeString})
+var sPackageVersionSummary_revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revision", ID: &i_PackageVersionRevision, Type: smithy.ShapeTypeString})
+var sPackageVersionSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iPackageVersionStatus, Members: &mPackageVersionStatus, Type: smithy.ShapeTypeEnum})
+var sPackageVersionSummary_origin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "origin", ID: &iPackageVersionOrigin, Members: &mPackageVersionOrigin, Type: smithy.ShapeTypeStructure})
+var s_PackageVersionSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPackageVersionSummary, Members: &mPackageVersionSummary, Type: smithy.ShapeTypeStructure})
+var sRepositoryDescription_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RepositoryName, Type: smithy.ShapeTypeString})
+var sRepositoryDescription_administratorAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "administratorAccount", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sRepositoryDescription_domainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainName", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sRepositoryDescription_domainOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainOwner", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sRepositoryDescription_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sRepositoryDescription_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sRepositoryDescription_upstreams = smithy.NewStaticSchema(smithy.StaticSchema{Member: "upstreams", ID: &i_UpstreamRepositoryInfoList, Members: &m_UpstreamRepositoryInfoList, Type: smithy.ShapeTypeList})
+var sRepositoryDescription_externalConnections = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalConnections", ID: &i_RepositoryExternalConnectionInfoList, Members: &m_RepositoryExternalConnectionInfoList, Type: smithy.ShapeTypeList})
+var sRepositoryDescription_createdTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sRepositoryExternalConnectionInfo_externalConnectionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalConnectionName", ID: &i_ExternalConnectionName, Type: smithy.ShapeTypeString})
+var sRepositoryExternalConnectionInfo_packageFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "packageFormat", ID: &iPackageFormat, Members: &mPackageFormat, Type: smithy.ShapeTypeEnum})
+var sRepositoryExternalConnectionInfo_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iExternalConnectionStatus, Members: &mExternalConnectionStatus, Type: smithy.ShapeTypeEnum})
+var s_RepositoryExternalConnectionInfoList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRepositoryExternalConnectionInfo, Members: &mRepositoryExternalConnectionInfo, Type: smithy.ShapeTypeStructure})
+var s_RepositoryNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_RepositoryName, Type: smithy.ShapeTypeString})
+var sRepositorySummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RepositoryName, Type: smithy.ShapeTypeString})
+var sRepositorySummary_administratorAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "administratorAccount", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sRepositorySummary_domainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainName", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sRepositorySummary_domainOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainOwner", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sRepositorySummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sRepositorySummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sRepositorySummary_createdTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var s_RepositorySummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRepositorySummary, Members: &mRepositorySummary, Type: smithy.ShapeTypeStructure})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum})
+var sResourcePolicy_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sResourcePolicy_revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revision", ID: &i_PolicyRevision, Type: smithy.ShapeTypeString})
+var sResourcePolicy_document = smithy.NewStaticSchema(smithy.StaticSchema{Member: "document", ID: &i_PolicyDocument, Type: smithy.ShapeTypeString})
+var sResourceType_DOMAIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOMAIN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceType_REPOSITORY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REPOSITORY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceType_PACKAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PACKAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceType_PACKAGE_VERSION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PACKAGE_VERSION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceType_ASSET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASSET", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum})
+var sSuccessfulPackageVersionInfo_revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revision", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSuccessfulPackageVersionInfo_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iPackageVersionStatus, Members: &mPackageVersionStatus, Type: smithy.ShapeTypeEnum})
+var s_SuccessfulPackageVersionInfoMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_PackageVersion, Type: smithy.ShapeTypeString})
+var s_SuccessfulPackageVersionInfoMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iSuccessfulPackageVersionInfo, Members: &mSuccessfulPackageVersionInfo, Type: smithy.ShapeTypeStructure})
+var sTag_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var sTag_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sThrottlingException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &i_RetryAfterSeconds, Traits: &t55, Type: smithy.ShapeTypeInteger})
+var sUpstreamRepository_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString})
+var sUpstreamRepositoryInfo_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString})
+var s_UpstreamRepositoryInfoList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUpstreamRepositoryInfo, Members: &mUpstreamRepositoryInfo, Type: smithy.ShapeTypeStructure})
+var s_UpstreamRepositoryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUpstreamRepository, Members: &mUpstreamRepository, Type: smithy.ShapeTypeStructure})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sValidationException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum})
+var sValidationExceptionReason_CANNOT_PARSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANNOT_PARSE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionReason_ENCRYPTION_KEY_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENCRYPTION_KEY_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionReason_FIELD_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIELD_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionReason_UNKNOWN_OPERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN_OPERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionReason_OTHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAssociateExternalConnectionRequest_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Traits: &t57, Type: smithy.ShapeTypeString})
+var sAssociateExternalConnectionRequest_domainOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainOwner", ID: &i_AccountId, Traits: &t58, Type: smithy.ShapeTypeString})
+var sAssociateExternalConnectionRequest_repository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repository", ID: &i_RepositoryName, Traits: &t59, Type: smithy.ShapeTypeString})
+var sAssociateExternalConnectionRequest_externalConnection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalConnection", ID: &i_ExternalConnectionName, Traits: &t60, Type: smithy.ShapeTypeString})
+var sAssociateExternalConnectionResult_repository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repository", ID: &iRepositoryDescription, Members: &mRepositoryDescription, Type: smithy.ShapeTypeStructure})
+var sCopyPackageVersionsRequest_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Traits: &t57, Type: smithy.ShapeTypeString})
+var sCopyPackageVersionsRequest_domainOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainOwner", ID: &i_AccountId, Traits: &t58, Type: smithy.ShapeTypeString})
+var sCopyPackageVersionsRequest_sourceRepository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceRepository", ID: &i_RepositoryName, Traits: &t61, Type: smithy.ShapeTypeString})
+var sCopyPackageVersionsRequest_destinationRepository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationRepository", ID: &i_RepositoryName, Traits: &t62, Type: smithy.ShapeTypeString})
+var sCopyPackageVersionsRequest_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iPackageFormat, Members: &mPackageFormat, Traits: &t63, Type: smithy.ShapeTypeEnum})
+var sCopyPackageVersionsRequest_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_PackageNamespace, Traits: &t64, Type: smithy.ShapeTypeString})
+var sCopyPackageVersionsRequest_package = smithy.NewStaticSchema(smithy.StaticSchema{Member: "package", ID: &i_PackageName, Traits: &t65, Type: smithy.ShapeTypeString})
+var sCopyPackageVersionsRequest_versions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versions", ID: &i_PackageVersionList, Members: &m_PackageVersionList, Type: smithy.ShapeTypeList})
+var sCopyPackageVersionsRequest_versionRevisions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionRevisions", ID: &i_PackageVersionRevisionMap, Members: &m_PackageVersionRevisionMap, Type: smithy.ShapeTypeMap})
+var sCopyPackageVersionsRequest_allowOverwrite = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allowOverwrite", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean})
+var sCopyPackageVersionsRequest_includeFromUpstream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "includeFromUpstream", ID: &i_BooleanOptional, Type: smithy.ShapeTypeBoolean})
+var sCopyPackageVersionsResult_successfulVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "successfulVersions", ID: &i_SuccessfulPackageVersionInfoMap, Members: &m_SuccessfulPackageVersionInfoMap, Type: smithy.ShapeTypeMap})
+var sCopyPackageVersionsResult_failedVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failedVersions", ID: &i_PackageVersionErrorMap, Members: &m_PackageVersionErrorMap, Type: smithy.ShapeTypeMap})
+var sCreateDomainRequest_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Traits: &t57, Type: smithy.ShapeTypeString})
+var sCreateDomainRequest_encryptionKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionKey", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sCreateDomainRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateDomainResult_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &iDomainDescription, Members: &mDomainDescription, Type: smithy.ShapeTypeStructure})
+var sCreatePackageGroupRequest_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Traits: &t57, Type: smithy.ShapeTypeString})
+var sCreatePackageGroupRequest_domainOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainOwner", ID: &i_AccountId, Traits: &t58, Type: smithy.ShapeTypeString})
+var sCreatePackageGroupRequest_packageGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "packageGroup", ID: &i_PackageGroupPattern, Type: smithy.ShapeTypeString})
+var sCreatePackageGroupRequest_contactInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contactInfo", ID: &i_PackageGroupContactInfo, Type: smithy.ShapeTypeString})
+var sCreatePackageGroupRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sCreatePackageGroupRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreatePackageGroupResult_packageGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "packageGroup", ID: &iPackageGroupDescription, Members: &mPackageGroupDescription, Type: smithy.ShapeTypeStructure})
+var sCreateRepositoryRequest_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Traits: &t57, Type: smithy.ShapeTypeString})
+var sCreateRepositoryRequest_domainOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainOwner", ID: &i_AccountId, Traits: &t58, Type: smithy.ShapeTypeString})
+var sCreateRepositoryRequest_repository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repository", ID: &i_RepositoryName, Traits: &t59, Type: smithy.ShapeTypeString})
+var sCreateRepositoryRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sCreateRepositoryRequest_upstreams = smithy.NewStaticSchema(smithy.StaticSchema{Member: "upstreams", ID: &i_UpstreamRepositoryList, Members: &m_UpstreamRepositoryList, Type: smithy.ShapeTypeList})
+var sCreateRepositoryRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateRepositoryResult_repository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repository", ID: &iRepositoryDescription, Members: &mRepositoryDescription, Type: smithy.ShapeTypeStructure})
+var sDeleteDomainRequest_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Traits: &t57, Type: smithy.ShapeTypeString})
+var sDeleteDomainRequest_domainOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainOwner", ID: &i_AccountId, Traits: &t58, Type: smithy.ShapeTypeString})
+var sDeleteDomainResult_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &iDomainDescription, Members: &mDomainDescription, Type: smithy.ShapeTypeStructure})
+var sDeleteDomainPermissionsPolicyRequest_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Traits: &t57, Type: smithy.ShapeTypeString})
+var sDeleteDomainPermissionsPolicyRequest_domainOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainOwner", ID: &i_AccountId, Traits: &t58, Type: smithy.ShapeTypeString})
+var sDeleteDomainPermissionsPolicyRequest_policyRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyRevision", ID: &i_PolicyRevision, Traits: &t66, Type: smithy.ShapeTypeString})
+var sDeleteDomainPermissionsPolicyResult_policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policy", ID: &iResourcePolicy, Members: &mResourcePolicy, Type: smithy.ShapeTypeStructure})
+var sDeletePackageGroupRequest_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Traits: &t57, Type: smithy.ShapeTypeString})
+var sDeletePackageGroupRequest_domainOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainOwner", ID: &i_AccountId, Traits: &t58, Type: smithy.ShapeTypeString})
+var sDeletePackageGroupRequest_packageGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "packageGroup", ID: &i_String, Traits: &t67, Type: smithy.ShapeTypeString})
+var sDeletePackageGroupResult_packageGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "packageGroup", ID: &iPackageGroupDescription, Members: &mPackageGroupDescription, Type: smithy.ShapeTypeStructure})
+var sDeletePackageRequest_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Traits: &t57, Type: smithy.ShapeTypeString})
+var sDeletePackageRequest_domainOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainOwner", ID: &i_AccountId, Traits: &t58, Type: smithy.ShapeTypeString})
+var sDeletePackageRequest_repository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repository", ID: &i_RepositoryName, Traits: &t59, Type: smithy.ShapeTypeString})
+var sDeletePackageRequest_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iPackageFormat, Members: &mPackageFormat, Traits: &t63, Type: smithy.ShapeTypeEnum})
+var sDeletePackageRequest_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_PackageNamespace, Traits: &t64, Type: smithy.ShapeTypeString})
+var sDeletePackageRequest_package = smithy.NewStaticSchema(smithy.StaticSchema{Member: "package", ID: &i_PackageName, Traits: &t65, Type: smithy.ShapeTypeString})
+var sDeletePackageResult_deletedPackage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deletedPackage", ID: &iPackageSummary, Members: &mPackageSummary, Type: smithy.ShapeTypeStructure})
+var sDeletePackageVersionsRequest_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Traits: &t57, Type: smithy.ShapeTypeString})
+var sDeletePackageVersionsRequest_domainOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainOwner", ID: &i_AccountId, Traits: &t58, Type: smithy.ShapeTypeString})
+var sDeletePackageVersionsRequest_repository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repository", ID: &i_RepositoryName, Traits: &t59, Type: smithy.ShapeTypeString})
+var sDeletePackageVersionsRequest_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iPackageFormat, Members: &mPackageFormat, Traits: &t63, Type: smithy.ShapeTypeEnum})
+var sDeletePackageVersionsRequest_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_PackageNamespace, Traits: &t64, Type: smithy.ShapeTypeString})
+var sDeletePackageVersionsRequest_package = smithy.NewStaticSchema(smithy.StaticSchema{Member: "package", ID: &i_PackageName, Traits: &t65, Type: smithy.ShapeTypeString})
+var sDeletePackageVersionsRequest_versions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versions", ID: &i_PackageVersionList, Members: &m_PackageVersionList, Type: smithy.ShapeTypeList})
+var sDeletePackageVersionsRequest_expectedStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expectedStatus", ID: &iPackageVersionStatus, Members: &mPackageVersionStatus, Type: smithy.ShapeTypeEnum})
+var sDeletePackageVersionsResult_successfulVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "successfulVersions", ID: &i_SuccessfulPackageVersionInfoMap, Members: &m_SuccessfulPackageVersionInfoMap, Type: smithy.ShapeTypeMap})
+var sDeletePackageVersionsResult_failedVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failedVersions", ID: &i_PackageVersionErrorMap, Members: &m_PackageVersionErrorMap, Type: smithy.ShapeTypeMap})
+var sDeleteRepositoryRequest_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Traits: &t57, Type: smithy.ShapeTypeString})
+var sDeleteRepositoryRequest_domainOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainOwner", ID: &i_AccountId, Traits: &t58, Type: smithy.ShapeTypeString})
+var sDeleteRepositoryRequest_repository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repository", ID: &i_RepositoryName, Traits: &t59, Type: smithy.ShapeTypeString})
+var sDeleteRepositoryResult_repository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repository", ID: &iRepositoryDescription, Members: &mRepositoryDescription, Type: smithy.ShapeTypeStructure})
+var sDeleteRepositoryPermissionsPolicyRequest_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Traits: &t57, Type: smithy.ShapeTypeString})
+var sDeleteRepositoryPermissionsPolicyRequest_domainOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainOwner", ID: &i_AccountId, Traits: &t58, Type: smithy.ShapeTypeString})
+var sDeleteRepositoryPermissionsPolicyRequest_repository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repository", ID: &i_RepositoryName, Traits: &t59, Type: smithy.ShapeTypeString})
+var sDeleteRepositoryPermissionsPolicyRequest_policyRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyRevision", ID: &i_PolicyRevision, Traits: &t66, Type: smithy.ShapeTypeString})
+var sDeleteRepositoryPermissionsPolicyResult_policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policy", ID: &iResourcePolicy, Members: &mResourcePolicy, Type: smithy.ShapeTypeStructure})
+var sDescribeDomainRequest_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Traits: &t57, Type: smithy.ShapeTypeString})
+var sDescribeDomainRequest_domainOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainOwner", ID: &i_AccountId, Traits: &t58, Type: smithy.ShapeTypeString})
+var sDescribeDomainResult_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &iDomainDescription, Members: &mDomainDescription, Type: smithy.ShapeTypeStructure})
+var sDescribePackageGroupRequest_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Traits: &t57, Type: smithy.ShapeTypeString})
+var sDescribePackageGroupRequest_domainOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainOwner", ID: &i_AccountId, Traits: &t58, Type: smithy.ShapeTypeString})
+var sDescribePackageGroupRequest_packageGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "packageGroup", ID: &i_PackageGroupPattern, Traits: &t67, Type: smithy.ShapeTypeString})
+var sDescribePackageGroupResult_packageGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "packageGroup", ID: &iPackageGroupDescription, Members: &mPackageGroupDescription, Type: smithy.ShapeTypeStructure})
+var sDescribePackageRequest_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Traits: &t57, Type: smithy.ShapeTypeString})
+var sDescribePackageRequest_domainOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainOwner", ID: &i_AccountId, Traits: &t58, Type: smithy.ShapeTypeString})
+var sDescribePackageRequest_repository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repository", ID: &i_RepositoryName, Traits: &t59, Type: smithy.ShapeTypeString})
+var sDescribePackageRequest_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iPackageFormat, Members: &mPackageFormat, Traits: &t63, Type: smithy.ShapeTypeEnum})
+var sDescribePackageRequest_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_PackageNamespace, Traits: &t64, Type: smithy.ShapeTypeString})
+var sDescribePackageRequest_package = smithy.NewStaticSchema(smithy.StaticSchema{Member: "package", ID: &i_PackageName, Traits: &t65, Type: smithy.ShapeTypeString})
+var sDescribePackageResult_package = smithy.NewStaticSchema(smithy.StaticSchema{Member: "package", ID: &iPackageDescription, Members: &mPackageDescription, Type: smithy.ShapeTypeStructure})
+var sDescribePackageVersionRequest_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Traits: &t57, Type: smithy.ShapeTypeString})
+var sDescribePackageVersionRequest_domainOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainOwner", ID: &i_AccountId, Traits: &t58, Type: smithy.ShapeTypeString})
+var sDescribePackageVersionRequest_repository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repository", ID: &i_RepositoryName, Traits: &t59, Type: smithy.ShapeTypeString})
+var sDescribePackageVersionRequest_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iPackageFormat, Members: &mPackageFormat, Traits: &t63, Type: smithy.ShapeTypeEnum})
+var sDescribePackageVersionRequest_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_PackageNamespace, Traits: &t64, Type: smithy.ShapeTypeString})
+var sDescribePackageVersionRequest_package = smithy.NewStaticSchema(smithy.StaticSchema{Member: "package", ID: &i_PackageName, Traits: &t65, Type: smithy.ShapeTypeString})
+var sDescribePackageVersionRequest_packageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "packageVersion", ID: &i_PackageVersion, Traits: &t68, Type: smithy.ShapeTypeString})
+var sDescribePackageVersionResult_packageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "packageVersion", ID: &iPackageVersionDescription, Members: &mPackageVersionDescription, Type: smithy.ShapeTypeStructure})
+var sDescribeRepositoryRequest_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Traits: &t57, Type: smithy.ShapeTypeString})
+var sDescribeRepositoryRequest_domainOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainOwner", ID: &i_AccountId, Traits: &t58, Type: smithy.ShapeTypeString})
+var sDescribeRepositoryRequest_repository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repository", ID: &i_RepositoryName, Traits: &t59, Type: smithy.ShapeTypeString})
+var sDescribeRepositoryResult_repository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repository", ID: &iRepositoryDescription, Members: &mRepositoryDescription, Type: smithy.ShapeTypeStructure})
+var sDisassociateExternalConnectionRequest_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Traits: &t57, Type: smithy.ShapeTypeString})
+var sDisassociateExternalConnectionRequest_domainOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainOwner", ID: &i_AccountId, Traits: &t58, Type: smithy.ShapeTypeString})
+var sDisassociateExternalConnectionRequest_repository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repository", ID: &i_RepositoryName, Traits: &t59, Type: smithy.ShapeTypeString})
+var sDisassociateExternalConnectionRequest_externalConnection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalConnection", ID: &i_ExternalConnectionName, Traits: &t60, Type: smithy.ShapeTypeString})
+var sDisassociateExternalConnectionResult_repository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repository", ID: &iRepositoryDescription, Members: &mRepositoryDescription, Type: smithy.ShapeTypeStructure})
+var sDisposePackageVersionsRequest_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Traits: &t57, Type: smithy.ShapeTypeString})
+var sDisposePackageVersionsRequest_domainOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainOwner", ID: &i_AccountId, Traits: &t58, Type: smithy.ShapeTypeString})
+var sDisposePackageVersionsRequest_repository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repository", ID: &i_RepositoryName, Traits: &t59, Type: smithy.ShapeTypeString})
+var sDisposePackageVersionsRequest_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iPackageFormat, Members: &mPackageFormat, Traits: &t63, Type: smithy.ShapeTypeEnum})
+var sDisposePackageVersionsRequest_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_PackageNamespace, Traits: &t64, Type: smithy.ShapeTypeString})
+var sDisposePackageVersionsRequest_package = smithy.NewStaticSchema(smithy.StaticSchema{Member: "package", ID: &i_PackageName, Traits: &t65, Type: smithy.ShapeTypeString})
+var sDisposePackageVersionsRequest_versions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versions", ID: &i_PackageVersionList, Members: &m_PackageVersionList, Type: smithy.ShapeTypeList})
+var sDisposePackageVersionsRequest_versionRevisions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionRevisions", ID: &i_PackageVersionRevisionMap, Members: &m_PackageVersionRevisionMap, Type: smithy.ShapeTypeMap})
+var sDisposePackageVersionsRequest_expectedStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expectedStatus", ID: &iPackageVersionStatus, Members: &mPackageVersionStatus, Type: smithy.ShapeTypeEnum})
+var sDisposePackageVersionsResult_successfulVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "successfulVersions", ID: &i_SuccessfulPackageVersionInfoMap, Members: &m_SuccessfulPackageVersionInfoMap, Type: smithy.ShapeTypeMap})
+var sDisposePackageVersionsResult_failedVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failedVersions", ID: &i_PackageVersionErrorMap, Members: &m_PackageVersionErrorMap, Type: smithy.ShapeTypeMap})
+var sGetAssociatedPackageGroupRequest_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Traits: &t57, Type: smithy.ShapeTypeString})
+var sGetAssociatedPackageGroupRequest_domainOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainOwner", ID: &i_AccountId, Traits: &t58, Type: smithy.ShapeTypeString})
+var sGetAssociatedPackageGroupRequest_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iPackageFormat, Members: &mPackageFormat, Traits: &t63, Type: smithy.ShapeTypeEnum})
+var sGetAssociatedPackageGroupRequest_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_PackageNamespace, Traits: &t64, Type: smithy.ShapeTypeString})
+var sGetAssociatedPackageGroupRequest_package = smithy.NewStaticSchema(smithy.StaticSchema{Member: "package", ID: &i_PackageName, Traits: &t65, Type: smithy.ShapeTypeString})
+var sGetAssociatedPackageGroupResult_packageGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "packageGroup", ID: &iPackageGroupDescription, Members: &mPackageGroupDescription, Type: smithy.ShapeTypeStructure})
+var sGetAssociatedPackageGroupResult_associationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associationType", ID: &iPackageGroupAssociationType, Members: &mPackageGroupAssociationType, Type: smithy.ShapeTypeEnum})
+var sGetAuthorizationTokenRequest_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Traits: &t57, Type: smithy.ShapeTypeString})
+var sGetAuthorizationTokenRequest_domainOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainOwner", ID: &i_AccountId, Traits: &t58, Type: smithy.ShapeTypeString})
+var sGetAuthorizationTokenRequest_durationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "durationSeconds", ID: &i_AuthorizationTokenDurationSeconds, Traits: &t69, Type: smithy.ShapeTypeLong})
+var sGetAuthorizationTokenResult_authorizationToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authorizationToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetAuthorizationTokenResult_expiration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expiration", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetDomainPermissionsPolicyRequest_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Traits: &t57, Type: smithy.ShapeTypeString})
+var sGetDomainPermissionsPolicyRequest_domainOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainOwner", ID: &i_AccountId, Traits: &t58, Type: smithy.ShapeTypeString})
+var sGetDomainPermissionsPolicyResult_policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policy", ID: &iResourcePolicy, Members: &mResourcePolicy, Type: smithy.ShapeTypeStructure})
+var sGetPackageVersionAssetRequest_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Traits: &t57, Type: smithy.ShapeTypeString})
+var sGetPackageVersionAssetRequest_domainOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainOwner", ID: &i_AccountId, Traits: &t58, Type: smithy.ShapeTypeString})
+var sGetPackageVersionAssetRequest_repository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repository", ID: &i_RepositoryName, Traits: &t59, Type: smithy.ShapeTypeString})
+var sGetPackageVersionAssetRequest_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iPackageFormat, Members: &mPackageFormat, Traits: &t63, Type: smithy.ShapeTypeEnum})
+var sGetPackageVersionAssetRequest_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_PackageNamespace, Traits: &t64, Type: smithy.ShapeTypeString})
+var sGetPackageVersionAssetRequest_package = smithy.NewStaticSchema(smithy.StaticSchema{Member: "package", ID: &i_PackageName, Traits: &t65, Type: smithy.ShapeTypeString})
+var sGetPackageVersionAssetRequest_packageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "packageVersion", ID: &i_PackageVersion, Traits: &t68, Type: smithy.ShapeTypeString})
+var sGetPackageVersionAssetRequest_asset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "asset", ID: &i_AssetName, Traits: &t71, Type: smithy.ShapeTypeString})
+var sGetPackageVersionAssetRequest_packageVersionRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "packageVersionRevision", ID: &i_PackageVersionRevision, Traits: &t72, Type: smithy.ShapeTypeString})
+var sGetPackageVersionAssetResult_asset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "asset", ID: &i_Asset, Traits: &t73, Type: smithy.ShapeTypeBlob})
+var sGetPackageVersionAssetResult_assetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assetName", ID: &i_AssetName, Traits: &t74, Type: smithy.ShapeTypeString})
+var sGetPackageVersionAssetResult_packageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "packageVersion", ID: &i_PackageVersion, Traits: &t75, Type: smithy.ShapeTypeString})
+var sGetPackageVersionAssetResult_packageVersionRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "packageVersionRevision", ID: &i_PackageVersionRevision, Traits: &t76, Type: smithy.ShapeTypeString})
+var sGetPackageVersionReadmeRequest_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Traits: &t57, Type: smithy.ShapeTypeString})
+var sGetPackageVersionReadmeRequest_domainOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainOwner", ID: &i_AccountId, Traits: &t58, Type: smithy.ShapeTypeString})
+var sGetPackageVersionReadmeRequest_repository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repository", ID: &i_RepositoryName, Traits: &t59, Type: smithy.ShapeTypeString})
+var sGetPackageVersionReadmeRequest_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iPackageFormat, Members: &mPackageFormat, Traits: &t63, Type: smithy.ShapeTypeEnum})
+var sGetPackageVersionReadmeRequest_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_PackageNamespace, Traits: &t64, Type: smithy.ShapeTypeString})
+var sGetPackageVersionReadmeRequest_package = smithy.NewStaticSchema(smithy.StaticSchema{Member: "package", ID: &i_PackageName, Traits: &t65, Type: smithy.ShapeTypeString})
+var sGetPackageVersionReadmeRequest_packageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "packageVersion", ID: &i_PackageVersion, Traits: &t68, Type: smithy.ShapeTypeString})
+var sGetPackageVersionReadmeResult_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iPackageFormat, Members: &mPackageFormat, Type: smithy.ShapeTypeEnum})
+var sGetPackageVersionReadmeResult_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_PackageNamespace, Type: smithy.ShapeTypeString})
+var sGetPackageVersionReadmeResult_package = smithy.NewStaticSchema(smithy.StaticSchema{Member: "package", ID: &i_PackageName, Type: smithy.ShapeTypeString})
+var sGetPackageVersionReadmeResult_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_PackageVersion, Type: smithy.ShapeTypeString})
+var sGetPackageVersionReadmeResult_versionRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionRevision", ID: &i_PackageVersionRevision, Type: smithy.ShapeTypeString})
+var sGetPackageVersionReadmeResult_readme = smithy.NewStaticSchema(smithy.StaticSchema{Member: "readme", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetRepositoryEndpointRequest_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Traits: &t57, Type: smithy.ShapeTypeString})
+var sGetRepositoryEndpointRequest_domainOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainOwner", ID: &i_AccountId, Traits: &t58, Type: smithy.ShapeTypeString})
+var sGetRepositoryEndpointRequest_repository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repository", ID: &i_RepositoryName, Traits: &t59, Type: smithy.ShapeTypeString})
+var sGetRepositoryEndpointRequest_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iPackageFormat, Members: &mPackageFormat, Traits: &t63, Type: smithy.ShapeTypeEnum})
+var sGetRepositoryEndpointRequest_endpointType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endpointType", ID: &iEndpointType, Members: &mEndpointType, Traits: &t77, Type: smithy.ShapeTypeEnum})
+var sGetRepositoryEndpointResult_repositoryEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryEndpoint", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetRepositoryPermissionsPolicyRequest_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Traits: &t57, Type: smithy.ShapeTypeString})
+var sGetRepositoryPermissionsPolicyRequest_domainOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainOwner", ID: &i_AccountId, Traits: &t58, Type: smithy.ShapeTypeString})
+var sGetRepositoryPermissionsPolicyRequest_repository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repository", ID: &i_RepositoryName, Traits: &t59, Type: smithy.ShapeTypeString})
+var sGetRepositoryPermissionsPolicyResult_policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policy", ID: &iResourcePolicy, Members: &mResourcePolicy, Type: smithy.ShapeTypeStructure})
+var sListAllowedRepositoriesForGroupRequest_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Traits: &t57, Type: smithy.ShapeTypeString})
+var sListAllowedRepositoriesForGroupRequest_domainOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainOwner", ID: &i_AccountId, Traits: &t58, Type: smithy.ShapeTypeString})
+var sListAllowedRepositoriesForGroupRequest_packageGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "packageGroup", ID: &i_PackageGroupPattern, Traits: &t67, Type: smithy.ShapeTypeString})
+var sListAllowedRepositoriesForGroupRequest_originRestrictionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "originRestrictionType", ID: &iPackageGroupOriginRestrictionType, Members: &mPackageGroupOriginRestrictionType, Traits: &t78, Type: smithy.ShapeTypeEnum})
+var sListAllowedRepositoriesForGroupRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListAllowedRepositoriesForGroupMaxResults, Traits: &t79, Type: smithy.ShapeTypeInteger})
+var sListAllowedRepositoriesForGroupRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t80, Type: smithy.ShapeTypeString})
+var sListAllowedRepositoriesForGroupResult_allowedRepositories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allowedRepositories", ID: &i_RepositoryNameList, Members: &m_RepositoryNameList, Type: smithy.ShapeTypeList})
+var sListAllowedRepositoriesForGroupResult_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListAssociatedPackagesRequest_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Traits: &t57, Type: smithy.ShapeTypeString})
+var sListAssociatedPackagesRequest_domainOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainOwner", ID: &i_AccountId, Traits: &t58, Type: smithy.ShapeTypeString})
+var sListAssociatedPackagesRequest_packageGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "packageGroup", ID: &i_PackageGroupPattern, Traits: &t67, Type: smithy.ShapeTypeString})
+var sListAssociatedPackagesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListPackagesMaxResults, Traits: &t79, Type: smithy.ShapeTypeInteger})
+var sListAssociatedPackagesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t80, Type: smithy.ShapeTypeString})
+var sListAssociatedPackagesRequest_preview = smithy.NewStaticSchema(smithy.StaticSchema{Member: "preview", ID: &i_BooleanOptional, Traits: &t81, Type: smithy.ShapeTypeBoolean})
+var sListAssociatedPackagesResult_packages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "packages", ID: &i_AssociatedPackageList, Members: &m_AssociatedPackageList, Type: smithy.ShapeTypeList})
+var sListAssociatedPackagesResult_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListDomainsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListDomainsMaxResults, Type: smithy.ShapeTypeInteger})
+var sListDomainsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListDomainsResult_domains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domains", ID: &i_DomainSummaryList, Members: &m_DomainSummaryList, Type: smithy.ShapeTypeList})
+var sListDomainsResult_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListPackageGroupsRequest_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Traits: &t57, Type: smithy.ShapeTypeString})
+var sListPackageGroupsRequest_domainOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainOwner", ID: &i_AccountId, Traits: &t58, Type: smithy.ShapeTypeString})
+var sListPackageGroupsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListPackageGroupsMaxResults, Traits: &t79, Type: smithy.ShapeTypeInteger})
+var sListPackageGroupsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t80, Type: smithy.ShapeTypeString})
+var sListPackageGroupsRequest_prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefix", ID: &i_PackageGroupPatternPrefix, Traits: &t82, Type: smithy.ShapeTypeString})
+var sListPackageGroupsResult_packageGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "packageGroups", ID: &i_PackageGroupSummaryList, Members: &m_PackageGroupSummaryList, Type: smithy.ShapeTypeList})
+var sListPackageGroupsResult_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListPackagesRequest_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Traits: &t57, Type: smithy.ShapeTypeString})
+var sListPackagesRequest_domainOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainOwner", ID: &i_AccountId, Traits: &t58, Type: smithy.ShapeTypeString})
+var sListPackagesRequest_repository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repository", ID: &i_RepositoryName, Traits: &t59, Type: smithy.ShapeTypeString})
+var sListPackagesRequest_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iPackageFormat, Members: &mPackageFormat, Traits: &t63, Type: smithy.ShapeTypeEnum})
+var sListPackagesRequest_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_PackageNamespace, Traits: &t64, Type: smithy.ShapeTypeString})
+var sListPackagesRequest_packagePrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "packagePrefix", ID: &i_PackageName, Traits: &t83, Type: smithy.ShapeTypeString})
+var sListPackagesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListPackagesMaxResults, Traits: &t79, Type: smithy.ShapeTypeInteger})
+var sListPackagesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t80, Type: smithy.ShapeTypeString})
+var sListPackagesRequest_publish = smithy.NewStaticSchema(smithy.StaticSchema{Member: "publish", ID: &iAllowPublish, Members: &mAllowPublish, Traits: &t84, Type: smithy.ShapeTypeEnum})
+var sListPackagesRequest_upstream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "upstream", ID: &iAllowUpstream, Members: &mAllowUpstream, Traits: &t85, Type: smithy.ShapeTypeEnum})
+var sListPackagesResult_packages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "packages", ID: &i_PackageSummaryList, Members: &m_PackageSummaryList, Type: smithy.ShapeTypeList})
+var sListPackagesResult_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListPackageVersionAssetsRequest_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Traits: &t57, Type: smithy.ShapeTypeString})
+var sListPackageVersionAssetsRequest_domainOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainOwner", ID: &i_AccountId, Traits: &t58, Type: smithy.ShapeTypeString})
+var sListPackageVersionAssetsRequest_repository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repository", ID: &i_RepositoryName, Traits: &t59, Type: smithy.ShapeTypeString})
+var sListPackageVersionAssetsRequest_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iPackageFormat, Members: &mPackageFormat, Traits: &t63, Type: smithy.ShapeTypeEnum})
+var sListPackageVersionAssetsRequest_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_PackageNamespace, Traits: &t64, Type: smithy.ShapeTypeString})
+var sListPackageVersionAssetsRequest_package = smithy.NewStaticSchema(smithy.StaticSchema{Member: "package", ID: &i_PackageName, Traits: &t65, Type: smithy.ShapeTypeString})
+var sListPackageVersionAssetsRequest_packageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "packageVersion", ID: &i_PackageVersion, Traits: &t68, Type: smithy.ShapeTypeString})
+var sListPackageVersionAssetsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListPackageVersionAssetsMaxResults, Traits: &t79, Type: smithy.ShapeTypeInteger})
+var sListPackageVersionAssetsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t80, Type: smithy.ShapeTypeString})
+var sListPackageVersionAssetsResult_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iPackageFormat, Members: &mPackageFormat, Type: smithy.ShapeTypeEnum})
+var sListPackageVersionAssetsResult_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_PackageNamespace, Type: smithy.ShapeTypeString})
+var sListPackageVersionAssetsResult_package = smithy.NewStaticSchema(smithy.StaticSchema{Member: "package", ID: &i_PackageName, Type: smithy.ShapeTypeString})
+var sListPackageVersionAssetsResult_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_PackageVersion, Type: smithy.ShapeTypeString})
+var sListPackageVersionAssetsResult_versionRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionRevision", ID: &i_PackageVersionRevision, Type: smithy.ShapeTypeString})
+var sListPackageVersionAssetsResult_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListPackageVersionAssetsResult_assets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assets", ID: &i_AssetSummaryList, Members: &m_AssetSummaryList, Type: smithy.ShapeTypeList})
+var sListPackageVersionDependenciesRequest_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Traits: &t57, Type: smithy.ShapeTypeString})
+var sListPackageVersionDependenciesRequest_domainOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainOwner", ID: &i_AccountId, Traits: &t58, Type: smithy.ShapeTypeString})
+var sListPackageVersionDependenciesRequest_repository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repository", ID: &i_RepositoryName, Traits: &t59, Type: smithy.ShapeTypeString})
+var sListPackageVersionDependenciesRequest_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iPackageFormat, Members: &mPackageFormat, Traits: &t63, Type: smithy.ShapeTypeEnum})
+var sListPackageVersionDependenciesRequest_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_PackageNamespace, Traits: &t64, Type: smithy.ShapeTypeString})
+var sListPackageVersionDependenciesRequest_package = smithy.NewStaticSchema(smithy.StaticSchema{Member: "package", ID: &i_PackageName, Traits: &t65, Type: smithy.ShapeTypeString})
+var sListPackageVersionDependenciesRequest_packageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "packageVersion", ID: &i_PackageVersion, Traits: &t68, Type: smithy.ShapeTypeString})
+var sListPackageVersionDependenciesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t80, Type: smithy.ShapeTypeString})
+var sListPackageVersionDependenciesResult_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iPackageFormat, Members: &mPackageFormat, Type: smithy.ShapeTypeEnum})
+var sListPackageVersionDependenciesResult_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_PackageNamespace, Type: smithy.ShapeTypeString})
+var sListPackageVersionDependenciesResult_package = smithy.NewStaticSchema(smithy.StaticSchema{Member: "package", ID: &i_PackageName, Type: smithy.ShapeTypeString})
+var sListPackageVersionDependenciesResult_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_PackageVersion, Type: smithy.ShapeTypeString})
+var sListPackageVersionDependenciesResult_versionRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionRevision", ID: &i_PackageVersionRevision, Type: smithy.ShapeTypeString})
+var sListPackageVersionDependenciesResult_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListPackageVersionDependenciesResult_dependencies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dependencies", ID: &i_PackageDependencyList, Members: &m_PackageDependencyList, Type: smithy.ShapeTypeList})
+var sListPackageVersionsRequest_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Traits: &t57, Type: smithy.ShapeTypeString})
+var sListPackageVersionsRequest_domainOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainOwner", ID: &i_AccountId, Traits: &t58, Type: smithy.ShapeTypeString})
+var sListPackageVersionsRequest_repository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repository", ID: &i_RepositoryName, Traits: &t59, Type: smithy.ShapeTypeString})
+var sListPackageVersionsRequest_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iPackageFormat, Members: &mPackageFormat, Traits: &t63, Type: smithy.ShapeTypeEnum})
+var sListPackageVersionsRequest_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_PackageNamespace, Traits: &t64, Type: smithy.ShapeTypeString})
+var sListPackageVersionsRequest_package = smithy.NewStaticSchema(smithy.StaticSchema{Member: "package", ID: &i_PackageName, Traits: &t65, Type: smithy.ShapeTypeString})
+var sListPackageVersionsRequest_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iPackageVersionStatus, Members: &mPackageVersionStatus, Traits: &t86, Type: smithy.ShapeTypeEnum})
+var sListPackageVersionsRequest_sortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortBy", ID: &iPackageVersionSortType, Members: &mPackageVersionSortType, Traits: &t87, Type: smithy.ShapeTypeEnum})
+var sListPackageVersionsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListPackageVersionsMaxResults, Traits: &t79, Type: smithy.ShapeTypeInteger})
+var sListPackageVersionsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t80, Type: smithy.ShapeTypeString})
+var sListPackageVersionsRequest_originType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "originType", ID: &iPackageVersionOriginType, Members: &mPackageVersionOriginType, Traits: &t88, Type: smithy.ShapeTypeEnum})
+var sListPackageVersionsResult_defaultDisplayVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultDisplayVersion", ID: &i_PackageVersion, Type: smithy.ShapeTypeString})
+var sListPackageVersionsResult_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iPackageFormat, Members: &mPackageFormat, Type: smithy.ShapeTypeEnum})
+var sListPackageVersionsResult_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_PackageNamespace, Type: smithy.ShapeTypeString})
+var sListPackageVersionsResult_package = smithy.NewStaticSchema(smithy.StaticSchema{Member: "package", ID: &i_PackageName, Type: smithy.ShapeTypeString})
+var sListPackageVersionsResult_versions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versions", ID: &i_PackageVersionSummaryList, Members: &m_PackageVersionSummaryList, Type: smithy.ShapeTypeList})
+var sListPackageVersionsResult_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListRepositoriesInDomainRequest_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Traits: &t57, Type: smithy.ShapeTypeString})
+var sListRepositoriesInDomainRequest_domainOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainOwner", ID: &i_AccountId, Traits: &t58, Type: smithy.ShapeTypeString})
+var sListRepositoriesInDomainRequest_administratorAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "administratorAccount", ID: &i_AccountId, Traits: &t89, Type: smithy.ShapeTypeString})
+var sListRepositoriesInDomainRequest_repositoryPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryPrefix", ID: &i_RepositoryName, Traits: &t90, Type: smithy.ShapeTypeString})
+var sListRepositoriesInDomainRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListRepositoriesInDomainMaxResults, Traits: &t79, Type: smithy.ShapeTypeInteger})
+var sListRepositoriesInDomainRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t80, Type: smithy.ShapeTypeString})
+var sListRepositoriesInDomainResult_repositories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositories", ID: &i_RepositorySummaryList, Members: &m_RepositorySummaryList, Type: smithy.ShapeTypeList})
+var sListRepositoriesInDomainResult_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListRepositoriesRequest_repositoryPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryPrefix", ID: &i_RepositoryName, Traits: &t90, Type: smithy.ShapeTypeString})
+var sListRepositoriesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListRepositoriesMaxResults, Traits: &t79, Type: smithy.ShapeTypeInteger})
+var sListRepositoriesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t80, Type: smithy.ShapeTypeString})
+var sListRepositoriesResult_repositories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositories", ID: &i_RepositorySummaryList, Members: &m_RepositorySummaryList, Type: smithy.ShapeTypeList})
+var sListRepositoriesResult_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListSubPackageGroupsRequest_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Traits: &t57, Type: smithy.ShapeTypeString})
+var sListSubPackageGroupsRequest_domainOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainOwner", ID: &i_AccountId, Traits: &t58, Type: smithy.ShapeTypeString})
+var sListSubPackageGroupsRequest_packageGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "packageGroup", ID: &i_PackageGroupPattern, Traits: &t67, Type: smithy.ShapeTypeString})
+var sListSubPackageGroupsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListPackageGroupsMaxResults, Traits: &t79, Type: smithy.ShapeTypeInteger})
+var sListSubPackageGroupsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t80, Type: smithy.ShapeTypeString})
+var sListSubPackageGroupsResult_packageGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "packageGroups", ID: &i_PackageGroupSummaryList, Members: &m_PackageGroupSummaryList, Type: smithy.ShapeTypeList})
+var sListSubPackageGroupsResult_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t91, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResult_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sPublishPackageVersionRequest_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Traits: &t57, Type: smithy.ShapeTypeString})
+var sPublishPackageVersionRequest_domainOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainOwner", ID: &i_AccountId, Traits: &t58, Type: smithy.ShapeTypeString})
+var sPublishPackageVersionRequest_repository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repository", ID: &i_RepositoryName, Traits: &t59, Type: smithy.ShapeTypeString})
+var sPublishPackageVersionRequest_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iPackageFormat, Members: &mPackageFormat, Traits: &t63, Type: smithy.ShapeTypeEnum})
+var sPublishPackageVersionRequest_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_PackageNamespace, Traits: &t64, Type: smithy.ShapeTypeString})
+var sPublishPackageVersionRequest_package = smithy.NewStaticSchema(smithy.StaticSchema{Member: "package", ID: &i_PackageName, Traits: &t65, Type: smithy.ShapeTypeString})
+var sPublishPackageVersionRequest_packageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "packageVersion", ID: &i_PackageVersion, Traits: &t68, Type: smithy.ShapeTypeString})
+var sPublishPackageVersionRequest_assetContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assetContent", ID: &i_Asset, Traits: &t73, Type: smithy.ShapeTypeBlob})
+var sPublishPackageVersionRequest_assetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assetName", ID: &i_AssetName, Traits: &t71, Type: smithy.ShapeTypeString})
+var sPublishPackageVersionRequest_assetSHA256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assetSHA256", ID: &i_SHA256, Traits: &t92, Type: smithy.ShapeTypeString})
+var sPublishPackageVersionRequest_unfinished = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unfinished", ID: &i_BooleanOptional, Traits: &t93, Type: smithy.ShapeTypeBoolean})
+var sPublishPackageVersionResult_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iPackageFormat, Members: &mPackageFormat, Type: smithy.ShapeTypeEnum})
+var sPublishPackageVersionResult_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_PackageNamespace, Type: smithy.ShapeTypeString})
+var sPublishPackageVersionResult_package = smithy.NewStaticSchema(smithy.StaticSchema{Member: "package", ID: &i_PackageName, Type: smithy.ShapeTypeString})
+var sPublishPackageVersionResult_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_PackageVersion, Type: smithy.ShapeTypeString})
+var sPublishPackageVersionResult_versionRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionRevision", ID: &i_PackageVersionRevision, Type: smithy.ShapeTypeString})
+var sPublishPackageVersionResult_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iPackageVersionStatus, Members: &mPackageVersionStatus, Type: smithy.ShapeTypeEnum})
+var sPublishPackageVersionResult_asset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "asset", ID: &iAssetSummary, Members: &mAssetSummary, Type: smithy.ShapeTypeStructure})
+var sPutDomainPermissionsPolicyRequest_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sPutDomainPermissionsPolicyRequest_domainOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainOwner", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sPutDomainPermissionsPolicyRequest_policyRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyRevision", ID: &i_PolicyRevision, Type: smithy.ShapeTypeString})
+var sPutDomainPermissionsPolicyRequest_policyDocument = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyDocument", ID: &i_PolicyDocument, Type: smithy.ShapeTypeString})
+var sPutDomainPermissionsPolicyResult_policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policy", ID: &iResourcePolicy, Members: &mResourcePolicy, Type: smithy.ShapeTypeStructure})
+var sPutPackageOriginConfigurationRequest_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Traits: &t57, Type: smithy.ShapeTypeString})
+var sPutPackageOriginConfigurationRequest_domainOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainOwner", ID: &i_AccountId, Traits: &t58, Type: smithy.ShapeTypeString})
+var sPutPackageOriginConfigurationRequest_repository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repository", ID: &i_RepositoryName, Traits: &t59, Type: smithy.ShapeTypeString})
+var sPutPackageOriginConfigurationRequest_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iPackageFormat, Members: &mPackageFormat, Traits: &t63, Type: smithy.ShapeTypeEnum})
+var sPutPackageOriginConfigurationRequest_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_PackageNamespace, Traits: &t64, Type: smithy.ShapeTypeString})
+var sPutPackageOriginConfigurationRequest_package = smithy.NewStaticSchema(smithy.StaticSchema{Member: "package", ID: &i_PackageName, Traits: &t65, Type: smithy.ShapeTypeString})
+var sPutPackageOriginConfigurationRequest_restrictions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "restrictions", ID: &iPackageOriginRestrictions, Members: &mPackageOriginRestrictions, Type: smithy.ShapeTypeStructure})
+var sPutPackageOriginConfigurationResult_originConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "originConfiguration", ID: &iPackageOriginConfiguration, Members: &mPackageOriginConfiguration, Type: smithy.ShapeTypeStructure})
+var sPutRepositoryPermissionsPolicyRequest_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Traits: &t57, Type: smithy.ShapeTypeString})
+var sPutRepositoryPermissionsPolicyRequest_domainOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainOwner", ID: &i_AccountId, Traits: &t58, Type: smithy.ShapeTypeString})
+var sPutRepositoryPermissionsPolicyRequest_repository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repository", ID: &i_RepositoryName, Traits: &t59, Type: smithy.ShapeTypeString})
+var sPutRepositoryPermissionsPolicyRequest_policyRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyRevision", ID: &i_PolicyRevision, Type: smithy.ShapeTypeString})
+var sPutRepositoryPermissionsPolicyRequest_policyDocument = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policyDocument", ID: &i_PolicyDocument, Type: smithy.ShapeTypeString})
+var sPutRepositoryPermissionsPolicyResult_policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policy", ID: &iResourcePolicy, Members: &mResourcePolicy, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t91, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t91, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var sUpdatePackageGroupRequest_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Traits: &t57, Type: smithy.ShapeTypeString})
+var sUpdatePackageGroupRequest_domainOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainOwner", ID: &i_AccountId, Traits: &t58, Type: smithy.ShapeTypeString})
+var sUpdatePackageGroupRequest_packageGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "packageGroup", ID: &i_PackageGroupPattern, Type: smithy.ShapeTypeString})
+var sUpdatePackageGroupRequest_contactInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contactInfo", ID: &i_PackageGroupContactInfo, Type: smithy.ShapeTypeString})
+var sUpdatePackageGroupRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sUpdatePackageGroupOriginConfigurationRequest_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Traits: &t57, Type: smithy.ShapeTypeString})
+var sUpdatePackageGroupOriginConfigurationRequest_domainOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainOwner", ID: &i_AccountId, Traits: &t58, Type: smithy.ShapeTypeString})
+var sUpdatePackageGroupOriginConfigurationRequest_packageGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "packageGroup", ID: &i_PackageGroupPattern, Traits: &t67, Type: smithy.ShapeTypeString})
+var sUpdatePackageGroupOriginConfigurationRequest_restrictions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "restrictions", ID: &i_OriginRestrictions, Members: &m_OriginRestrictions, Type: smithy.ShapeTypeMap})
+var sUpdatePackageGroupOriginConfigurationRequest_addAllowedRepositories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "addAllowedRepositories", ID: &i_PackageGroupAllowedRepositoryList, Members: &m_PackageGroupAllowedRepositoryList, Type: smithy.ShapeTypeList})
+var sUpdatePackageGroupOriginConfigurationRequest_removeAllowedRepositories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "removeAllowedRepositories", ID: &i_PackageGroupAllowedRepositoryList, Members: &m_PackageGroupAllowedRepositoryList, Type: smithy.ShapeTypeList})
+var sUpdatePackageGroupOriginConfigurationResult_packageGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "packageGroup", ID: &iPackageGroupDescription, Members: &mPackageGroupDescription, Type: smithy.ShapeTypeStructure})
+var sUpdatePackageGroupOriginConfigurationResult_allowedRepositoryUpdates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allowedRepositoryUpdates", ID: &i_PackageGroupAllowedRepositoryUpdates, Members: &m_PackageGroupAllowedRepositoryUpdates, Type: smithy.ShapeTypeMap})
+var sUpdatePackageGroupResult_packageGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "packageGroup", ID: &iPackageGroupDescription, Members: &mPackageGroupDescription, Type: smithy.ShapeTypeStructure})
+var sUpdatePackageVersionsStatusRequest_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Traits: &t57, Type: smithy.ShapeTypeString})
+var sUpdatePackageVersionsStatusRequest_domainOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainOwner", ID: &i_AccountId, Traits: &t58, Type: smithy.ShapeTypeString})
+var sUpdatePackageVersionsStatusRequest_repository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repository", ID: &i_RepositoryName, Traits: &t59, Type: smithy.ShapeTypeString})
+var sUpdatePackageVersionsStatusRequest_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iPackageFormat, Members: &mPackageFormat, Traits: &t63, Type: smithy.ShapeTypeEnum})
+var sUpdatePackageVersionsStatusRequest_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_PackageNamespace, Traits: &t64, Type: smithy.ShapeTypeString})
+var sUpdatePackageVersionsStatusRequest_package = smithy.NewStaticSchema(smithy.StaticSchema{Member: "package", ID: &i_PackageName, Traits: &t65, Type: smithy.ShapeTypeString})
+var sUpdatePackageVersionsStatusRequest_versions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versions", ID: &i_PackageVersionList, Members: &m_PackageVersionList, Type: smithy.ShapeTypeList})
+var sUpdatePackageVersionsStatusRequest_versionRevisions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionRevisions", ID: &i_PackageVersionRevisionMap, Members: &m_PackageVersionRevisionMap, Type: smithy.ShapeTypeMap})
+var sUpdatePackageVersionsStatusRequest_expectedStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expectedStatus", ID: &iPackageVersionStatus, Members: &mPackageVersionStatus, Type: smithy.ShapeTypeEnum})
+var sUpdatePackageVersionsStatusRequest_targetStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetStatus", ID: &iPackageVersionStatus, Members: &mPackageVersionStatus, Type: smithy.ShapeTypeEnum})
+var sUpdatePackageVersionsStatusResult_successfulVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "successfulVersions", ID: &i_SuccessfulPackageVersionInfoMap, Members: &m_SuccessfulPackageVersionInfoMap, Type: smithy.ShapeTypeMap})
+var sUpdatePackageVersionsStatusResult_failedVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failedVersions", ID: &i_PackageVersionErrorMap, Members: &m_PackageVersionErrorMap, Type: smithy.ShapeTypeMap})
+var sUpdateRepositoryRequest_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_DomainName, Traits: &t57, Type: smithy.ShapeTypeString})
+var sUpdateRepositoryRequest_domainOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainOwner", ID: &i_AccountId, Traits: &t58, Type: smithy.ShapeTypeString})
+var sUpdateRepositoryRequest_repository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repository", ID: &i_RepositoryName, Traits: &t59, Type: smithy.ShapeTypeString})
+var sUpdateRepositoryRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sUpdateRepositoryRequest_upstreams = smithy.NewStaticSchema(smithy.StaticSchema{Member: "upstreams", ID: &i_UpstreamRepositoryList, Members: &m_UpstreamRepositoryList, Type: smithy.ShapeTypeList})
+var sUpdateRepositoryResult_repository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repository", ID: &iRepositoryDescription, Members: &mRepositoryDescription, Type: smithy.ShapeTypeStructure})
+
+var AssociateExternalConnection = &sAssociateExternalConnection
+
+var CopyPackageVersions = &sCopyPackageVersions
+
+var CreateDomain = &sCreateDomain
+
+var CreatePackageGroup = &sCreatePackageGroup
+
+var CreateRepository = &sCreateRepository
+
+var DeleteDomain = &sDeleteDomain
+
+var DeleteDomainPermissionsPolicy = &sDeleteDomainPermissionsPolicy
+
+var DeletePackage = &sDeletePackage
+
+var DeletePackageGroup = &sDeletePackageGroup
+
+var DeletePackageVersions = &sDeletePackageVersions
+
+var DeleteRepository = &sDeleteRepository
+
+var DeleteRepositoryPermissionsPolicy = &sDeleteRepositoryPermissionsPolicy
+
+var DescribeDomain = &sDescribeDomain
+
+var DescribePackage = &sDescribePackage
+
+var DescribePackageGroup = &sDescribePackageGroup
+
+var DescribePackageVersion = &sDescribePackageVersion
+
+var DescribeRepository = &sDescribeRepository
+
+var DisassociateExternalConnection = &sDisassociateExternalConnection
+
+var DisposePackageVersions = &sDisposePackageVersions
+
+var GetAssociatedPackageGroup = &sGetAssociatedPackageGroup
+
+var GetAuthorizationToken = &sGetAuthorizationToken
+
+var GetDomainPermissionsPolicy = &sGetDomainPermissionsPolicy
+
+var GetPackageVersionAsset = &sGetPackageVersionAsset
+
+var GetPackageVersionReadme = &sGetPackageVersionReadme
+
+var GetRepositoryEndpoint = &sGetRepositoryEndpoint
+
+var GetRepositoryPermissionsPolicy = &sGetRepositoryPermissionsPolicy
+
+var ListAllowedRepositoriesForGroup = &sListAllowedRepositoriesForGroup
+
+var ListAssociatedPackages = &sListAssociatedPackages
+
+var ListDomains = &sListDomains
+
+var ListPackageGroups = &sListPackageGroups
+
+var ListPackages = &sListPackages
+
+var ListPackageVersionAssets = &sListPackageVersionAssets
+
+var ListPackageVersionDependencies = &sListPackageVersionDependencies
+
+var ListPackageVersions = &sListPackageVersions
+
+var ListRepositories = &sListRepositories
+
+var ListRepositoriesInDomain = &sListRepositoriesInDomain
+
+var ListSubPackageGroups = &sListSubPackageGroups
+
+var ListTagsForResource = &sListTagsForResource
+
+var PublishPackageVersion = &sPublishPackageVersion
+
+var PutDomainPermissionsPolicy = &sPutDomainPermissionsPolicy
+
+var PutPackageOriginConfiguration = &sPutPackageOriginConfiguration
+
+var PutRepositoryPermissionsPolicy = &sPutRepositoryPermissionsPolicy
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdatePackageGroup = &sUpdatePackageGroup
+
+var UpdatePackageGroupOriginConfiguration = &sUpdatePackageGroupOriginConfiguration
+
+var UpdatePackageVersionsStatus = &sUpdatePackageVersionsStatus
+
+var UpdateRepository = &sUpdateRepository
+
+var _CodeArtifactControlPlaneService = &s_CodeArtifactControlPlaneService
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var _AccountId = &s_AccountId
+
+var AllowPublish = &sAllowPublish
+var AllowPublish_ALLOW = &sAllowPublish_ALLOW
+var AllowPublish_BLOCK = &sAllowPublish_BLOCK
+
+var AllowUpstream = &sAllowUpstream
+var AllowUpstream_ALLOW = &sAllowUpstream_ALLOW
+var AllowUpstream_BLOCK = &sAllowUpstream_BLOCK
+
+var _Arn = &s_Arn
+
+var _Asset = &s_Asset
+
+var _AssetHashes = &s_AssetHashes
+var _AssetHashes_key = &s_AssetHashes_key
+var _AssetHashes_value = &s_AssetHashes_value
+
+var _AssetName = &s_AssetName
+
+var AssetSummary = &sAssetSummary
+var AssetSummary_name = &sAssetSummary_name
+var AssetSummary_size = &sAssetSummary_size
+var AssetSummary_hashes = &sAssetSummary_hashes
+
+var _AssetSummaryList = &s_AssetSummaryList
+var _AssetSummaryList_member = &s_AssetSummaryList_member
+
+var AssociatedPackage = &sAssociatedPackage
+var AssociatedPackage_format = &sAssociatedPackage_format
+var AssociatedPackage_namespace = &sAssociatedPackage_namespace
+var AssociatedPackage_package = &sAssociatedPackage_package
+var AssociatedPackage_associationType = &sAssociatedPackage_associationType
+
+var _AssociatedPackageList = &s_AssociatedPackageList
+var _AssociatedPackageList_member = &s_AssociatedPackageList_member
+
+var _AuthorizationTokenDurationSeconds = &s_AuthorizationTokenDurationSeconds
+
+var _BooleanOptional = &s_BooleanOptional
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+var ConflictException_resourceId = &sConflictException_resourceId
+var ConflictException_resourceType = &sConflictException_resourceType
+
+var _Description = &s_Description
+
+var DomainDescription = &sDomainDescription
+var DomainDescription_name = &sDomainDescription_name
+var DomainDescription_owner = &sDomainDescription_owner
+var DomainDescription_arn = &sDomainDescription_arn
+var DomainDescription_status = &sDomainDescription_status
+var DomainDescription_createdTime = &sDomainDescription_createdTime
+var DomainDescription_encryptionKey = &sDomainDescription_encryptionKey
+var DomainDescription_repositoryCount = &sDomainDescription_repositoryCount
+var DomainDescription_assetSizeBytes = &sDomainDescription_assetSizeBytes
+var DomainDescription_s3BucketArn = &sDomainDescription_s3BucketArn
+
+var DomainEntryPoint = &sDomainEntryPoint
+var DomainEntryPoint_repositoryName = &sDomainEntryPoint_repositoryName
+var DomainEntryPoint_externalConnectionName = &sDomainEntryPoint_externalConnectionName
+
+var _DomainName = &s_DomainName
+
+var DomainStatus = &sDomainStatus
+var DomainStatus_ACTIVE = &sDomainStatus_ACTIVE
+var DomainStatus_DELETED = &sDomainStatus_DELETED
+
+var DomainSummary = &sDomainSummary
+var DomainSummary_name = &sDomainSummary_name
+var DomainSummary_owner = &sDomainSummary_owner
+var DomainSummary_arn = &sDomainSummary_arn
+var DomainSummary_status = &sDomainSummary_status
+var DomainSummary_createdTime = &sDomainSummary_createdTime
+var DomainSummary_encryptionKey = &sDomainSummary_encryptionKey
+
+var _DomainSummaryList = &s_DomainSummaryList
+var _DomainSummaryList_member = &s_DomainSummaryList_member
+
+var EndpointType = &sEndpointType
+var EndpointType_DUALSTACK = &sEndpointType_DUALSTACK
+var EndpointType_IPV4 = &sEndpointType_IPV4
+
+var _ErrorMessage = &s_ErrorMessage
+
+var _ExternalConnectionName = &s_ExternalConnectionName
+
+var ExternalConnectionStatus = &sExternalConnectionStatus
+var ExternalConnectionStatus_AVAILABLE = &sExternalConnectionStatus_AVAILABLE
+
+var HashAlgorithm = &sHashAlgorithm
+var HashAlgorithm_MD5 = &sHashAlgorithm_MD5
+var HashAlgorithm_SHA1 = &sHashAlgorithm_SHA1
+var HashAlgorithm_SHA256 = &sHashAlgorithm_SHA256
+var HashAlgorithm_SHA512 = &sHashAlgorithm_SHA512
+
+var _HashValue = &s_HashValue
+
+var _Integer = &s_Integer
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+
+var LicenseInfo = &sLicenseInfo
+var LicenseInfo_name = &sLicenseInfo_name
+var LicenseInfo_url = &sLicenseInfo_url
+
+var _LicenseInfoList = &s_LicenseInfoList
+var _LicenseInfoList_member = &s_LicenseInfoList_member
+
+var _ListAllowedRepositoriesForGroupMaxResults = &s_ListAllowedRepositoriesForGroupMaxResults
+
+var _ListDomainsMaxResults = &s_ListDomainsMaxResults
+
+var _ListPackageGroupsMaxResults = &s_ListPackageGroupsMaxResults
+
+var _ListPackagesMaxResults = &s_ListPackagesMaxResults
+
+var _ListPackageVersionAssetsMaxResults = &s_ListPackageVersionAssetsMaxResults
+
+var _ListPackageVersionsMaxResults = &s_ListPackageVersionsMaxResults
+
+var _ListRepositoriesInDomainMaxResults = &s_ListRepositoriesInDomainMaxResults
+
+var _ListRepositoriesMaxResults = &s_ListRepositoriesMaxResults
+
+var _Long = &s_Long
+
+var _LongOptional = &s_LongOptional
+
+var _OriginRestrictions = &s_OriginRestrictions
+var _OriginRestrictions_key = &s_OriginRestrictions_key
+var _OriginRestrictions_value = &s_OriginRestrictions_value
+
+var PackageDependency = &sPackageDependency
+var PackageDependency_namespace = &sPackageDependency_namespace
+var PackageDependency_package = &sPackageDependency_package
+var PackageDependency_dependencyType = &sPackageDependency_dependencyType
+var PackageDependency_versionRequirement = &sPackageDependency_versionRequirement
+
+var _PackageDependencyList = &s_PackageDependencyList
+var _PackageDependencyList_member = &s_PackageDependencyList_member
+
+var PackageDescription = &sPackageDescription
+var PackageDescription_format = &sPackageDescription_format
+var PackageDescription_namespace = &sPackageDescription_namespace
+var PackageDescription_name = &sPackageDescription_name
+var PackageDescription_originConfiguration = &sPackageDescription_originConfiguration
+
+var PackageFormat = &sPackageFormat
+var PackageFormat_NPM = &sPackageFormat_NPM
+var PackageFormat_PYPI = &sPackageFormat_PYPI
+var PackageFormat_MAVEN = &sPackageFormat_MAVEN
+var PackageFormat_NUGET = &sPackageFormat_NUGET
+var PackageFormat_GENERIC = &sPackageFormat_GENERIC
+var PackageFormat_RUBY = &sPackageFormat_RUBY
+var PackageFormat_SWIFT = &sPackageFormat_SWIFT
+var PackageFormat_CARGO = &sPackageFormat_CARGO
+
+var PackageGroupAllowedRepository = &sPackageGroupAllowedRepository
+var PackageGroupAllowedRepository_repositoryName = &sPackageGroupAllowedRepository_repositoryName
+var PackageGroupAllowedRepository_originRestrictionType = &sPackageGroupAllowedRepository_originRestrictionType
+
+var _PackageGroupAllowedRepositoryList = &s_PackageGroupAllowedRepositoryList
+var _PackageGroupAllowedRepositoryList_member = &s_PackageGroupAllowedRepositoryList_member
+
+var _PackageGroupAllowedRepositoryUpdate = &s_PackageGroupAllowedRepositoryUpdate
+var _PackageGroupAllowedRepositoryUpdate_key = &s_PackageGroupAllowedRepositoryUpdate_key
+var _PackageGroupAllowedRepositoryUpdate_value = &s_PackageGroupAllowedRepositoryUpdate_value
+
+var _PackageGroupAllowedRepositoryUpdates = &s_PackageGroupAllowedRepositoryUpdates
+var _PackageGroupAllowedRepositoryUpdates_key = &s_PackageGroupAllowedRepositoryUpdates_key
+var _PackageGroupAllowedRepositoryUpdates_value = &s_PackageGroupAllowedRepositoryUpdates_value
+
+var PackageGroupAllowedRepositoryUpdateType = &sPackageGroupAllowedRepositoryUpdateType
+var PackageGroupAllowedRepositoryUpdateType_ADDED = &sPackageGroupAllowedRepositoryUpdateType_ADDED
+var PackageGroupAllowedRepositoryUpdateType_REMOVED = &sPackageGroupAllowedRepositoryUpdateType_REMOVED
+
+var PackageGroupAssociationType = &sPackageGroupAssociationType
+var PackageGroupAssociationType_STRONG = &sPackageGroupAssociationType_STRONG
+var PackageGroupAssociationType_WEAK = &sPackageGroupAssociationType_WEAK
+
+var _PackageGroupContactInfo = &s_PackageGroupContactInfo
+
+var PackageGroupDescription = &sPackageGroupDescription
+var PackageGroupDescription_arn = &sPackageGroupDescription_arn
+var PackageGroupDescription_pattern = &sPackageGroupDescription_pattern
+var PackageGroupDescription_domainName = &sPackageGroupDescription_domainName
+var PackageGroupDescription_domainOwner = &sPackageGroupDescription_domainOwner
+var PackageGroupDescription_createdTime = &sPackageGroupDescription_createdTime
+var PackageGroupDescription_contactInfo = &sPackageGroupDescription_contactInfo
+var PackageGroupDescription_description = &sPackageGroupDescription_description
+var PackageGroupDescription_originConfiguration = &sPackageGroupDescription_originConfiguration
+var PackageGroupDescription_parent = &sPackageGroupDescription_parent
+
+var PackageGroupOriginConfiguration = &sPackageGroupOriginConfiguration
+var PackageGroupOriginConfiguration_restrictions = &sPackageGroupOriginConfiguration_restrictions
+
+var PackageGroupOriginRestriction = &sPackageGroupOriginRestriction
+var PackageGroupOriginRestriction_mode = &sPackageGroupOriginRestriction_mode
+var PackageGroupOriginRestriction_effectiveMode = &sPackageGroupOriginRestriction_effectiveMode
+var PackageGroupOriginRestriction_inheritedFrom = &sPackageGroupOriginRestriction_inheritedFrom
+var PackageGroupOriginRestriction_repositoriesCount = &sPackageGroupOriginRestriction_repositoriesCount
+
+var PackageGroupOriginRestrictionMode = &sPackageGroupOriginRestrictionMode
+var PackageGroupOriginRestrictionMode_ALLOW = &sPackageGroupOriginRestrictionMode_ALLOW
+var PackageGroupOriginRestrictionMode_ALLOW_SPECIFIC_REPOSITORIES = &sPackageGroupOriginRestrictionMode_ALLOW_SPECIFIC_REPOSITORIES
+var PackageGroupOriginRestrictionMode_BLOCK = &sPackageGroupOriginRestrictionMode_BLOCK
+var PackageGroupOriginRestrictionMode_INHERIT = &sPackageGroupOriginRestrictionMode_INHERIT
+
+var _PackageGroupOriginRestrictions = &s_PackageGroupOriginRestrictions
+var _PackageGroupOriginRestrictions_key = &s_PackageGroupOriginRestrictions_key
+var _PackageGroupOriginRestrictions_value = &s_PackageGroupOriginRestrictions_value
+
+var PackageGroupOriginRestrictionType = &sPackageGroupOriginRestrictionType
+var PackageGroupOriginRestrictionType_EXTERNAL_UPSTREAM = &sPackageGroupOriginRestrictionType_EXTERNAL_UPSTREAM
+var PackageGroupOriginRestrictionType_INTERNAL_UPSTREAM = &sPackageGroupOriginRestrictionType_INTERNAL_UPSTREAM
+var PackageGroupOriginRestrictionType_PUBLISH = &sPackageGroupOriginRestrictionType_PUBLISH
+
+var _PackageGroupPattern = &s_PackageGroupPattern
+
+var _PackageGroupPatternPrefix = &s_PackageGroupPatternPrefix
+
+var PackageGroupReference = &sPackageGroupReference
+var PackageGroupReference_arn = &sPackageGroupReference_arn
+var PackageGroupReference_pattern = &sPackageGroupReference_pattern
+
+var PackageGroupSummary = &sPackageGroupSummary
+var PackageGroupSummary_arn = &sPackageGroupSummary_arn
+var PackageGroupSummary_pattern = &sPackageGroupSummary_pattern
+var PackageGroupSummary_domainName = &sPackageGroupSummary_domainName
+var PackageGroupSummary_domainOwner = &sPackageGroupSummary_domainOwner
+var PackageGroupSummary_createdTime = &sPackageGroupSummary_createdTime
+var PackageGroupSummary_contactInfo = &sPackageGroupSummary_contactInfo
+var PackageGroupSummary_description = &sPackageGroupSummary_description
+var PackageGroupSummary_originConfiguration = &sPackageGroupSummary_originConfiguration
+var PackageGroupSummary_parent = &sPackageGroupSummary_parent
+
+var _PackageGroupSummaryList = &s_PackageGroupSummaryList
+var _PackageGroupSummaryList_member = &s_PackageGroupSummaryList_member
+
+var _PackageName = &s_PackageName
+
+var _PackageNamespace = &s_PackageNamespace
+
+var PackageOriginConfiguration = &sPackageOriginConfiguration
+var PackageOriginConfiguration_restrictions = &sPackageOriginConfiguration_restrictions
+
+var PackageOriginRestrictions = &sPackageOriginRestrictions
+var PackageOriginRestrictions_publish = &sPackageOriginRestrictions_publish
+var PackageOriginRestrictions_upstream = &sPackageOriginRestrictions_upstream
+
+var PackageSummary = &sPackageSummary
+var PackageSummary_format = &sPackageSummary_format
+var PackageSummary_namespace = &sPackageSummary_namespace
+var PackageSummary_package = &sPackageSummary_package
+var PackageSummary_originConfiguration = &sPackageSummary_originConfiguration
+
+var _PackageSummaryList = &s_PackageSummaryList
+var _PackageSummaryList_member = &s_PackageSummaryList_member
+
+var _PackageVersion = &s_PackageVersion
+
+var PackageVersionDescription = &sPackageVersionDescription
+var PackageVersionDescription_format = &sPackageVersionDescription_format
+var PackageVersionDescription_namespace = &sPackageVersionDescription_namespace
+var PackageVersionDescription_packageName = &sPackageVersionDescription_packageName
+var PackageVersionDescription_displayName = &sPackageVersionDescription_displayName
+var PackageVersionDescription_version = &sPackageVersionDescription_version
+var PackageVersionDescription_summary = &sPackageVersionDescription_summary
+var PackageVersionDescription_homePage = &sPackageVersionDescription_homePage
+var PackageVersionDescription_sourceCodeRepository = &sPackageVersionDescription_sourceCodeRepository
+var PackageVersionDescription_publishedTime = &sPackageVersionDescription_publishedTime
+var PackageVersionDescription_licenses = &sPackageVersionDescription_licenses
+var PackageVersionDescription_revision = &sPackageVersionDescription_revision
+var PackageVersionDescription_status = &sPackageVersionDescription_status
+var PackageVersionDescription_origin = &sPackageVersionDescription_origin
+
+var PackageVersionError = &sPackageVersionError
+var PackageVersionError_errorCode = &sPackageVersionError_errorCode
+var PackageVersionError_errorMessage = &sPackageVersionError_errorMessage
+
+var PackageVersionErrorCode = &sPackageVersionErrorCode
+var PackageVersionErrorCode_ALREADY_EXISTS = &sPackageVersionErrorCode_ALREADY_EXISTS
+var PackageVersionErrorCode_MISMATCHED_REVISION = &sPackageVersionErrorCode_MISMATCHED_REVISION
+var PackageVersionErrorCode_MISMATCHED_STATUS = &sPackageVersionErrorCode_MISMATCHED_STATUS
+var PackageVersionErrorCode_NOT_ALLOWED = &sPackageVersionErrorCode_NOT_ALLOWED
+var PackageVersionErrorCode_NOT_FOUND = &sPackageVersionErrorCode_NOT_FOUND
+var PackageVersionErrorCode_SKIPPED = &sPackageVersionErrorCode_SKIPPED
+
+var _PackageVersionErrorMap = &s_PackageVersionErrorMap
+var _PackageVersionErrorMap_key = &s_PackageVersionErrorMap_key
+var _PackageVersionErrorMap_value = &s_PackageVersionErrorMap_value
+
+var _PackageVersionList = &s_PackageVersionList
+var _PackageVersionList_member = &s_PackageVersionList_member
+
+var PackageVersionOrigin = &sPackageVersionOrigin
+var PackageVersionOrigin_domainEntryPoint = &sPackageVersionOrigin_domainEntryPoint
+var PackageVersionOrigin_originType = &sPackageVersionOrigin_originType
+
+var PackageVersionOriginType = &sPackageVersionOriginType
+var PackageVersionOriginType_INTERNAL = &sPackageVersionOriginType_INTERNAL
+var PackageVersionOriginType_EXTERNAL = &sPackageVersionOriginType_EXTERNAL
+var PackageVersionOriginType_UNKNOWN = &sPackageVersionOriginType_UNKNOWN
+
+var _PackageVersionRevision = &s_PackageVersionRevision
+
+var _PackageVersionRevisionMap = &s_PackageVersionRevisionMap
+var _PackageVersionRevisionMap_key = &s_PackageVersionRevisionMap_key
+var _PackageVersionRevisionMap_value = &s_PackageVersionRevisionMap_value
+
+var PackageVersionSortType = &sPackageVersionSortType
+var PackageVersionSortType_PUBLISHED_TIME = &sPackageVersionSortType_PUBLISHED_TIME
+
+var PackageVersionStatus = &sPackageVersionStatus
+var PackageVersionStatus_PUBLISHED = &sPackageVersionStatus_PUBLISHED
+var PackageVersionStatus_UNFINISHED = &sPackageVersionStatus_UNFINISHED
+var PackageVersionStatus_UNLISTED = &sPackageVersionStatus_UNLISTED
+var PackageVersionStatus_ARCHIVED = &sPackageVersionStatus_ARCHIVED
+var PackageVersionStatus_DISPOSED = &sPackageVersionStatus_DISPOSED
+var PackageVersionStatus_DELETED = &sPackageVersionStatus_DELETED
+
+var PackageVersionSummary = &sPackageVersionSummary
+var PackageVersionSummary_version = &sPackageVersionSummary_version
+var PackageVersionSummary_revision = &sPackageVersionSummary_revision
+var PackageVersionSummary_status = &sPackageVersionSummary_status
+var PackageVersionSummary_origin = &sPackageVersionSummary_origin
+
+var _PackageVersionSummaryList = &s_PackageVersionSummaryList
+var _PackageVersionSummaryList_member = &s_PackageVersionSummaryList_member
+
+var _PaginationToken = &s_PaginationToken
+
+var _PolicyDocument = &s_PolicyDocument
+
+var _PolicyRevision = &s_PolicyRevision
+
+var RepositoryDescription = &sRepositoryDescription
+var RepositoryDescription_name = &sRepositoryDescription_name
+var RepositoryDescription_administratorAccount = &sRepositoryDescription_administratorAccount
+var RepositoryDescription_domainName = &sRepositoryDescription_domainName
+var RepositoryDescription_domainOwner = &sRepositoryDescription_domainOwner
+var RepositoryDescription_arn = &sRepositoryDescription_arn
+var RepositoryDescription_description = &sRepositoryDescription_description
+var RepositoryDescription_upstreams = &sRepositoryDescription_upstreams
+var RepositoryDescription_externalConnections = &sRepositoryDescription_externalConnections
+var RepositoryDescription_createdTime = &sRepositoryDescription_createdTime
+
+var RepositoryExternalConnectionInfo = &sRepositoryExternalConnectionInfo
+var RepositoryExternalConnectionInfo_externalConnectionName = &sRepositoryExternalConnectionInfo_externalConnectionName
+var RepositoryExternalConnectionInfo_packageFormat = &sRepositoryExternalConnectionInfo_packageFormat
+var RepositoryExternalConnectionInfo_status = &sRepositoryExternalConnectionInfo_status
+
+var _RepositoryExternalConnectionInfoList = &s_RepositoryExternalConnectionInfoList
+var _RepositoryExternalConnectionInfoList_member = &s_RepositoryExternalConnectionInfoList_member
+
+var _RepositoryName = &s_RepositoryName
+
+var _RepositoryNameList = &s_RepositoryNameList
+var _RepositoryNameList_member = &s_RepositoryNameList_member
+
+var RepositorySummary = &sRepositorySummary
+var RepositorySummary_name = &sRepositorySummary_name
+var RepositorySummary_administratorAccount = &sRepositorySummary_administratorAccount
+var RepositorySummary_domainName = &sRepositorySummary_domainName
+var RepositorySummary_domainOwner = &sRepositorySummary_domainOwner
+var RepositorySummary_arn = &sRepositorySummary_arn
+var RepositorySummary_description = &sRepositorySummary_description
+var RepositorySummary_createdTime = &sRepositorySummary_createdTime
+
+var _RepositorySummaryList = &s_RepositorySummaryList
+var _RepositorySummaryList_member = &s_RepositorySummaryList_member
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+var ResourceNotFoundException_resourceId = &sResourceNotFoundException_resourceId
+var ResourceNotFoundException_resourceType = &sResourceNotFoundException_resourceType
+
+var ResourcePolicy = &sResourcePolicy
+var ResourcePolicy_resourceArn = &sResourcePolicy_resourceArn
+var ResourcePolicy_revision = &sResourcePolicy_revision
+var ResourcePolicy_document = &sResourcePolicy_document
+
+var ResourceType = &sResourceType
+var ResourceType_DOMAIN = &sResourceType_DOMAIN
+var ResourceType_REPOSITORY = &sResourceType_REPOSITORY
+var ResourceType_PACKAGE = &sResourceType_PACKAGE
+var ResourceType_PACKAGE_VERSION = &sResourceType_PACKAGE_VERSION
+var ResourceType_ASSET = &sResourceType_ASSET
+
+var _RetryAfterSeconds = &s_RetryAfterSeconds
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+var ServiceQuotaExceededException_resourceId = &sServiceQuotaExceededException_resourceId
+var ServiceQuotaExceededException_resourceType = &sServiceQuotaExceededException_resourceType
+
+var _SHA256 = &s_SHA256
+
+var _String = &s_String
+
+var _String255 = &s_String255
+
+var SuccessfulPackageVersionInfo = &sSuccessfulPackageVersionInfo
+var SuccessfulPackageVersionInfo_revision = &sSuccessfulPackageVersionInfo_revision
+var SuccessfulPackageVersionInfo_status = &sSuccessfulPackageVersionInfo_status
+
+var _SuccessfulPackageVersionInfoMap = &s_SuccessfulPackageVersionInfoMap
+var _SuccessfulPackageVersionInfoMap_key = &s_SuccessfulPackageVersionInfoMap_key
+var _SuccessfulPackageVersionInfoMap_value = &s_SuccessfulPackageVersionInfoMap_value
+
+var Tag = &sTag
+var Tag_key = &sTag_key
+var Tag_value = &sTag_value
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _TagValue = &s_TagValue
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+var ThrottlingException_retryAfterSeconds = &sThrottlingException_retryAfterSeconds
+
+var _Timestamp = &s_Timestamp
+
+var UpstreamRepository = &sUpstreamRepository
+var UpstreamRepository_repositoryName = &sUpstreamRepository_repositoryName
+
+var UpstreamRepositoryInfo = &sUpstreamRepositoryInfo
+var UpstreamRepositoryInfo_repositoryName = &sUpstreamRepositoryInfo_repositoryName
+
+var _UpstreamRepositoryInfoList = &s_UpstreamRepositoryInfoList
+var _UpstreamRepositoryInfoList_member = &s_UpstreamRepositoryInfoList_member
+
+var _UpstreamRepositoryList = &s_UpstreamRepositoryList
+var _UpstreamRepositoryList_member = &s_UpstreamRepositoryList_member
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+var ValidationException_reason = &sValidationException_reason
+
+var ValidationExceptionReason = &sValidationExceptionReason
+var ValidationExceptionReason_CANNOT_PARSE = &sValidationExceptionReason_CANNOT_PARSE
+var ValidationExceptionReason_ENCRYPTION_KEY_ERROR = &sValidationExceptionReason_ENCRYPTION_KEY_ERROR
+var ValidationExceptionReason_FIELD_VALIDATION_FAILED = &sValidationExceptionReason_FIELD_VALIDATION_FAILED
+var ValidationExceptionReason_UNKNOWN_OPERATION = &sValidationExceptionReason_UNKNOWN_OPERATION
+var ValidationExceptionReason_OTHER = &sValidationExceptionReason_OTHER
+
+var AssociateExternalConnectionRequest = &sAssociateExternalConnectionRequest
+var AssociateExternalConnectionRequest_domain = &sAssociateExternalConnectionRequest_domain
+var AssociateExternalConnectionRequest_domainOwner = &sAssociateExternalConnectionRequest_domainOwner
+var AssociateExternalConnectionRequest_repository = &sAssociateExternalConnectionRequest_repository
+var AssociateExternalConnectionRequest_externalConnection = &sAssociateExternalConnectionRequest_externalConnection
+
+var AssociateExternalConnectionResult = &sAssociateExternalConnectionResult
+var AssociateExternalConnectionResult_repository = &sAssociateExternalConnectionResult_repository
+
+var CopyPackageVersionsRequest = &sCopyPackageVersionsRequest
+var CopyPackageVersionsRequest_domain = &sCopyPackageVersionsRequest_domain
+var CopyPackageVersionsRequest_domainOwner = &sCopyPackageVersionsRequest_domainOwner
+var CopyPackageVersionsRequest_sourceRepository = &sCopyPackageVersionsRequest_sourceRepository
+var CopyPackageVersionsRequest_destinationRepository = &sCopyPackageVersionsRequest_destinationRepository
+var CopyPackageVersionsRequest_format = &sCopyPackageVersionsRequest_format
+var CopyPackageVersionsRequest_namespace = &sCopyPackageVersionsRequest_namespace
+var CopyPackageVersionsRequest_package = &sCopyPackageVersionsRequest_package
+var CopyPackageVersionsRequest_versions = &sCopyPackageVersionsRequest_versions
+var CopyPackageVersionsRequest_versionRevisions = &sCopyPackageVersionsRequest_versionRevisions
+var CopyPackageVersionsRequest_allowOverwrite = &sCopyPackageVersionsRequest_allowOverwrite
+var CopyPackageVersionsRequest_includeFromUpstream = &sCopyPackageVersionsRequest_includeFromUpstream
+
+var CopyPackageVersionsResult = &sCopyPackageVersionsResult
+var CopyPackageVersionsResult_successfulVersions = &sCopyPackageVersionsResult_successfulVersions
+var CopyPackageVersionsResult_failedVersions = &sCopyPackageVersionsResult_failedVersions
+
+var CreateDomainRequest = &sCreateDomainRequest
+var CreateDomainRequest_domain = &sCreateDomainRequest_domain
+var CreateDomainRequest_encryptionKey = &sCreateDomainRequest_encryptionKey
+var CreateDomainRequest_tags = &sCreateDomainRequest_tags
+
+var CreateDomainResult = &sCreateDomainResult
+var CreateDomainResult_domain = &sCreateDomainResult_domain
+
+var CreatePackageGroupRequest = &sCreatePackageGroupRequest
+var CreatePackageGroupRequest_domain = &sCreatePackageGroupRequest_domain
+var CreatePackageGroupRequest_domainOwner = &sCreatePackageGroupRequest_domainOwner
+var CreatePackageGroupRequest_packageGroup = &sCreatePackageGroupRequest_packageGroup
+var CreatePackageGroupRequest_contactInfo = &sCreatePackageGroupRequest_contactInfo
+var CreatePackageGroupRequest_description = &sCreatePackageGroupRequest_description
+var CreatePackageGroupRequest_tags = &sCreatePackageGroupRequest_tags
+
+var CreatePackageGroupResult = &sCreatePackageGroupResult
+var CreatePackageGroupResult_packageGroup = &sCreatePackageGroupResult_packageGroup
+
+var CreateRepositoryRequest = &sCreateRepositoryRequest
+var CreateRepositoryRequest_domain = &sCreateRepositoryRequest_domain
+var CreateRepositoryRequest_domainOwner = &sCreateRepositoryRequest_domainOwner
+var CreateRepositoryRequest_repository = &sCreateRepositoryRequest_repository
+var CreateRepositoryRequest_description = &sCreateRepositoryRequest_description
+var CreateRepositoryRequest_upstreams = &sCreateRepositoryRequest_upstreams
+var CreateRepositoryRequest_tags = &sCreateRepositoryRequest_tags
+
+var CreateRepositoryResult = &sCreateRepositoryResult
+var CreateRepositoryResult_repository = &sCreateRepositoryResult_repository
+
+var DeleteDomainRequest = &sDeleteDomainRequest
+var DeleteDomainRequest_domain = &sDeleteDomainRequest_domain
+var DeleteDomainRequest_domainOwner = &sDeleteDomainRequest_domainOwner
+
+var DeleteDomainResult = &sDeleteDomainResult
+var DeleteDomainResult_domain = &sDeleteDomainResult_domain
+
+var DeleteDomainPermissionsPolicyRequest = &sDeleteDomainPermissionsPolicyRequest
+var DeleteDomainPermissionsPolicyRequest_domain = &sDeleteDomainPermissionsPolicyRequest_domain
+var DeleteDomainPermissionsPolicyRequest_domainOwner = &sDeleteDomainPermissionsPolicyRequest_domainOwner
+var DeleteDomainPermissionsPolicyRequest_policyRevision = &sDeleteDomainPermissionsPolicyRequest_policyRevision
+
+var DeleteDomainPermissionsPolicyResult = &sDeleteDomainPermissionsPolicyResult
+var DeleteDomainPermissionsPolicyResult_policy = &sDeleteDomainPermissionsPolicyResult_policy
+
+var DeletePackageGroupRequest = &sDeletePackageGroupRequest
+var DeletePackageGroupRequest_domain = &sDeletePackageGroupRequest_domain
+var DeletePackageGroupRequest_domainOwner = &sDeletePackageGroupRequest_domainOwner
+var DeletePackageGroupRequest_packageGroup = &sDeletePackageGroupRequest_packageGroup
+
+var DeletePackageGroupResult = &sDeletePackageGroupResult
+var DeletePackageGroupResult_packageGroup = &sDeletePackageGroupResult_packageGroup
+
+var DeletePackageRequest = &sDeletePackageRequest
+var DeletePackageRequest_domain = &sDeletePackageRequest_domain
+var DeletePackageRequest_domainOwner = &sDeletePackageRequest_domainOwner
+var DeletePackageRequest_repository = &sDeletePackageRequest_repository
+var DeletePackageRequest_format = &sDeletePackageRequest_format
+var DeletePackageRequest_namespace = &sDeletePackageRequest_namespace
+var DeletePackageRequest_package = &sDeletePackageRequest_package
+
+var DeletePackageResult = &sDeletePackageResult
+var DeletePackageResult_deletedPackage = &sDeletePackageResult_deletedPackage
+
+var DeletePackageVersionsRequest = &sDeletePackageVersionsRequest
+var DeletePackageVersionsRequest_domain = &sDeletePackageVersionsRequest_domain
+var DeletePackageVersionsRequest_domainOwner = &sDeletePackageVersionsRequest_domainOwner
+var DeletePackageVersionsRequest_repository = &sDeletePackageVersionsRequest_repository
+var DeletePackageVersionsRequest_format = &sDeletePackageVersionsRequest_format
+var DeletePackageVersionsRequest_namespace = &sDeletePackageVersionsRequest_namespace
+var DeletePackageVersionsRequest_package = &sDeletePackageVersionsRequest_package
+var DeletePackageVersionsRequest_versions = &sDeletePackageVersionsRequest_versions
+var DeletePackageVersionsRequest_expectedStatus = &sDeletePackageVersionsRequest_expectedStatus
+
+var DeletePackageVersionsResult = &sDeletePackageVersionsResult
+var DeletePackageVersionsResult_successfulVersions = &sDeletePackageVersionsResult_successfulVersions
+var DeletePackageVersionsResult_failedVersions = &sDeletePackageVersionsResult_failedVersions
+
+var DeleteRepositoryRequest = &sDeleteRepositoryRequest
+var DeleteRepositoryRequest_domain = &sDeleteRepositoryRequest_domain
+var DeleteRepositoryRequest_domainOwner = &sDeleteRepositoryRequest_domainOwner
+var DeleteRepositoryRequest_repository = &sDeleteRepositoryRequest_repository
+
+var DeleteRepositoryResult = &sDeleteRepositoryResult
+var DeleteRepositoryResult_repository = &sDeleteRepositoryResult_repository
+
+var DeleteRepositoryPermissionsPolicyRequest = &sDeleteRepositoryPermissionsPolicyRequest
+var DeleteRepositoryPermissionsPolicyRequest_domain = &sDeleteRepositoryPermissionsPolicyRequest_domain
+var DeleteRepositoryPermissionsPolicyRequest_domainOwner = &sDeleteRepositoryPermissionsPolicyRequest_domainOwner
+var DeleteRepositoryPermissionsPolicyRequest_repository = &sDeleteRepositoryPermissionsPolicyRequest_repository
+var DeleteRepositoryPermissionsPolicyRequest_policyRevision = &sDeleteRepositoryPermissionsPolicyRequest_policyRevision
+
+var DeleteRepositoryPermissionsPolicyResult = &sDeleteRepositoryPermissionsPolicyResult
+var DeleteRepositoryPermissionsPolicyResult_policy = &sDeleteRepositoryPermissionsPolicyResult_policy
+
+var DescribeDomainRequest = &sDescribeDomainRequest
+var DescribeDomainRequest_domain = &sDescribeDomainRequest_domain
+var DescribeDomainRequest_domainOwner = &sDescribeDomainRequest_domainOwner
+
+var DescribeDomainResult = &sDescribeDomainResult
+var DescribeDomainResult_domain = &sDescribeDomainResult_domain
+
+var DescribePackageGroupRequest = &sDescribePackageGroupRequest
+var DescribePackageGroupRequest_domain = &sDescribePackageGroupRequest_domain
+var DescribePackageGroupRequest_domainOwner = &sDescribePackageGroupRequest_domainOwner
+var DescribePackageGroupRequest_packageGroup = &sDescribePackageGroupRequest_packageGroup
+
+var DescribePackageGroupResult = &sDescribePackageGroupResult
+var DescribePackageGroupResult_packageGroup = &sDescribePackageGroupResult_packageGroup
+
+var DescribePackageRequest = &sDescribePackageRequest
+var DescribePackageRequest_domain = &sDescribePackageRequest_domain
+var DescribePackageRequest_domainOwner = &sDescribePackageRequest_domainOwner
+var DescribePackageRequest_repository = &sDescribePackageRequest_repository
+var DescribePackageRequest_format = &sDescribePackageRequest_format
+var DescribePackageRequest_namespace = &sDescribePackageRequest_namespace
+var DescribePackageRequest_package = &sDescribePackageRequest_package
+
+var DescribePackageResult = &sDescribePackageResult
+var DescribePackageResult_package = &sDescribePackageResult_package
+
+var DescribePackageVersionRequest = &sDescribePackageVersionRequest
+var DescribePackageVersionRequest_domain = &sDescribePackageVersionRequest_domain
+var DescribePackageVersionRequest_domainOwner = &sDescribePackageVersionRequest_domainOwner
+var DescribePackageVersionRequest_repository = &sDescribePackageVersionRequest_repository
+var DescribePackageVersionRequest_format = &sDescribePackageVersionRequest_format
+var DescribePackageVersionRequest_namespace = &sDescribePackageVersionRequest_namespace
+var DescribePackageVersionRequest_package = &sDescribePackageVersionRequest_package
+var DescribePackageVersionRequest_packageVersion = &sDescribePackageVersionRequest_packageVersion
+
+var DescribePackageVersionResult = &sDescribePackageVersionResult
+var DescribePackageVersionResult_packageVersion = &sDescribePackageVersionResult_packageVersion
+
+var DescribeRepositoryRequest = &sDescribeRepositoryRequest
+var DescribeRepositoryRequest_domain = &sDescribeRepositoryRequest_domain
+var DescribeRepositoryRequest_domainOwner = &sDescribeRepositoryRequest_domainOwner
+var DescribeRepositoryRequest_repository = &sDescribeRepositoryRequest_repository
+
+var DescribeRepositoryResult = &sDescribeRepositoryResult
+var DescribeRepositoryResult_repository = &sDescribeRepositoryResult_repository
+
+var DisassociateExternalConnectionRequest = &sDisassociateExternalConnectionRequest
+var DisassociateExternalConnectionRequest_domain = &sDisassociateExternalConnectionRequest_domain
+var DisassociateExternalConnectionRequest_domainOwner = &sDisassociateExternalConnectionRequest_domainOwner
+var DisassociateExternalConnectionRequest_repository = &sDisassociateExternalConnectionRequest_repository
+var DisassociateExternalConnectionRequest_externalConnection = &sDisassociateExternalConnectionRequest_externalConnection
+
+var DisassociateExternalConnectionResult = &sDisassociateExternalConnectionResult
+var DisassociateExternalConnectionResult_repository = &sDisassociateExternalConnectionResult_repository
+
+var DisposePackageVersionsRequest = &sDisposePackageVersionsRequest
+var DisposePackageVersionsRequest_domain = &sDisposePackageVersionsRequest_domain
+var DisposePackageVersionsRequest_domainOwner = &sDisposePackageVersionsRequest_domainOwner
+var DisposePackageVersionsRequest_repository = &sDisposePackageVersionsRequest_repository
+var DisposePackageVersionsRequest_format = &sDisposePackageVersionsRequest_format
+var DisposePackageVersionsRequest_namespace = &sDisposePackageVersionsRequest_namespace
+var DisposePackageVersionsRequest_package = &sDisposePackageVersionsRequest_package
+var DisposePackageVersionsRequest_versions = &sDisposePackageVersionsRequest_versions
+var DisposePackageVersionsRequest_versionRevisions = &sDisposePackageVersionsRequest_versionRevisions
+var DisposePackageVersionsRequest_expectedStatus = &sDisposePackageVersionsRequest_expectedStatus
+
+var DisposePackageVersionsResult = &sDisposePackageVersionsResult
+var DisposePackageVersionsResult_successfulVersions = &sDisposePackageVersionsResult_successfulVersions
+var DisposePackageVersionsResult_failedVersions = &sDisposePackageVersionsResult_failedVersions
+
+var GetAssociatedPackageGroupRequest = &sGetAssociatedPackageGroupRequest
+var GetAssociatedPackageGroupRequest_domain = &sGetAssociatedPackageGroupRequest_domain
+var GetAssociatedPackageGroupRequest_domainOwner = &sGetAssociatedPackageGroupRequest_domainOwner
+var GetAssociatedPackageGroupRequest_format = &sGetAssociatedPackageGroupRequest_format
+var GetAssociatedPackageGroupRequest_namespace = &sGetAssociatedPackageGroupRequest_namespace
+var GetAssociatedPackageGroupRequest_package = &sGetAssociatedPackageGroupRequest_package
+
+var GetAssociatedPackageGroupResult = &sGetAssociatedPackageGroupResult
+var GetAssociatedPackageGroupResult_packageGroup = &sGetAssociatedPackageGroupResult_packageGroup
+var GetAssociatedPackageGroupResult_associationType = &sGetAssociatedPackageGroupResult_associationType
+
+var GetAuthorizationTokenRequest = &sGetAuthorizationTokenRequest
+var GetAuthorizationTokenRequest_domain = &sGetAuthorizationTokenRequest_domain
+var GetAuthorizationTokenRequest_domainOwner = &sGetAuthorizationTokenRequest_domainOwner
+var GetAuthorizationTokenRequest_durationSeconds = &sGetAuthorizationTokenRequest_durationSeconds
+
+var GetAuthorizationTokenResult = &sGetAuthorizationTokenResult
+var GetAuthorizationTokenResult_authorizationToken = &sGetAuthorizationTokenResult_authorizationToken
+var GetAuthorizationTokenResult_expiration = &sGetAuthorizationTokenResult_expiration
+
+var GetDomainPermissionsPolicyRequest = &sGetDomainPermissionsPolicyRequest
+var GetDomainPermissionsPolicyRequest_domain = &sGetDomainPermissionsPolicyRequest_domain
+var GetDomainPermissionsPolicyRequest_domainOwner = &sGetDomainPermissionsPolicyRequest_domainOwner
+
+var GetDomainPermissionsPolicyResult = &sGetDomainPermissionsPolicyResult
+var GetDomainPermissionsPolicyResult_policy = &sGetDomainPermissionsPolicyResult_policy
+
+var GetPackageVersionAssetRequest = &sGetPackageVersionAssetRequest
+var GetPackageVersionAssetRequest_domain = &sGetPackageVersionAssetRequest_domain
+var GetPackageVersionAssetRequest_domainOwner = &sGetPackageVersionAssetRequest_domainOwner
+var GetPackageVersionAssetRequest_repository = &sGetPackageVersionAssetRequest_repository
+var GetPackageVersionAssetRequest_format = &sGetPackageVersionAssetRequest_format
+var GetPackageVersionAssetRequest_namespace = &sGetPackageVersionAssetRequest_namespace
+var GetPackageVersionAssetRequest_package = &sGetPackageVersionAssetRequest_package
+var GetPackageVersionAssetRequest_packageVersion = &sGetPackageVersionAssetRequest_packageVersion
+var GetPackageVersionAssetRequest_asset = &sGetPackageVersionAssetRequest_asset
+var GetPackageVersionAssetRequest_packageVersionRevision = &sGetPackageVersionAssetRequest_packageVersionRevision
+
+var GetPackageVersionAssetResult = &sGetPackageVersionAssetResult
+var GetPackageVersionAssetResult_asset = &sGetPackageVersionAssetResult_asset
+var GetPackageVersionAssetResult_assetName = &sGetPackageVersionAssetResult_assetName
+var GetPackageVersionAssetResult_packageVersion = &sGetPackageVersionAssetResult_packageVersion
+var GetPackageVersionAssetResult_packageVersionRevision = &sGetPackageVersionAssetResult_packageVersionRevision
+
+var GetPackageVersionReadmeRequest = &sGetPackageVersionReadmeRequest
+var GetPackageVersionReadmeRequest_domain = &sGetPackageVersionReadmeRequest_domain
+var GetPackageVersionReadmeRequest_domainOwner = &sGetPackageVersionReadmeRequest_domainOwner
+var GetPackageVersionReadmeRequest_repository = &sGetPackageVersionReadmeRequest_repository
+var GetPackageVersionReadmeRequest_format = &sGetPackageVersionReadmeRequest_format
+var GetPackageVersionReadmeRequest_namespace = &sGetPackageVersionReadmeRequest_namespace
+var GetPackageVersionReadmeRequest_package = &sGetPackageVersionReadmeRequest_package
+var GetPackageVersionReadmeRequest_packageVersion = &sGetPackageVersionReadmeRequest_packageVersion
+
+var GetPackageVersionReadmeResult = &sGetPackageVersionReadmeResult
+var GetPackageVersionReadmeResult_format = &sGetPackageVersionReadmeResult_format
+var GetPackageVersionReadmeResult_namespace = &sGetPackageVersionReadmeResult_namespace
+var GetPackageVersionReadmeResult_package = &sGetPackageVersionReadmeResult_package
+var GetPackageVersionReadmeResult_version = &sGetPackageVersionReadmeResult_version
+var GetPackageVersionReadmeResult_versionRevision = &sGetPackageVersionReadmeResult_versionRevision
+var GetPackageVersionReadmeResult_readme = &sGetPackageVersionReadmeResult_readme
+
+var GetRepositoryEndpointRequest = &sGetRepositoryEndpointRequest
+var GetRepositoryEndpointRequest_domain = &sGetRepositoryEndpointRequest_domain
+var GetRepositoryEndpointRequest_domainOwner = &sGetRepositoryEndpointRequest_domainOwner
+var GetRepositoryEndpointRequest_repository = &sGetRepositoryEndpointRequest_repository
+var GetRepositoryEndpointRequest_format = &sGetRepositoryEndpointRequest_format
+var GetRepositoryEndpointRequest_endpointType = &sGetRepositoryEndpointRequest_endpointType
+
+var GetRepositoryEndpointResult = &sGetRepositoryEndpointResult
+var GetRepositoryEndpointResult_repositoryEndpoint = &sGetRepositoryEndpointResult_repositoryEndpoint
+
+var GetRepositoryPermissionsPolicyRequest = &sGetRepositoryPermissionsPolicyRequest
+var GetRepositoryPermissionsPolicyRequest_domain = &sGetRepositoryPermissionsPolicyRequest_domain
+var GetRepositoryPermissionsPolicyRequest_domainOwner = &sGetRepositoryPermissionsPolicyRequest_domainOwner
+var GetRepositoryPermissionsPolicyRequest_repository = &sGetRepositoryPermissionsPolicyRequest_repository
+
+var GetRepositoryPermissionsPolicyResult = &sGetRepositoryPermissionsPolicyResult
+var GetRepositoryPermissionsPolicyResult_policy = &sGetRepositoryPermissionsPolicyResult_policy
+
+var ListAllowedRepositoriesForGroupRequest = &sListAllowedRepositoriesForGroupRequest
+var ListAllowedRepositoriesForGroupRequest_domain = &sListAllowedRepositoriesForGroupRequest_domain
+var ListAllowedRepositoriesForGroupRequest_domainOwner = &sListAllowedRepositoriesForGroupRequest_domainOwner
+var ListAllowedRepositoriesForGroupRequest_packageGroup = &sListAllowedRepositoriesForGroupRequest_packageGroup
+var ListAllowedRepositoriesForGroupRequest_originRestrictionType = &sListAllowedRepositoriesForGroupRequest_originRestrictionType
+var ListAllowedRepositoriesForGroupRequest_maxResults = &sListAllowedRepositoriesForGroupRequest_maxResults
+var ListAllowedRepositoriesForGroupRequest_nextToken = &sListAllowedRepositoriesForGroupRequest_nextToken
+
+var ListAllowedRepositoriesForGroupResult = &sListAllowedRepositoriesForGroupResult
+var ListAllowedRepositoriesForGroupResult_allowedRepositories = &sListAllowedRepositoriesForGroupResult_allowedRepositories
+var ListAllowedRepositoriesForGroupResult_nextToken = &sListAllowedRepositoriesForGroupResult_nextToken
+
+var ListAssociatedPackagesRequest = &sListAssociatedPackagesRequest
+var ListAssociatedPackagesRequest_domain = &sListAssociatedPackagesRequest_domain
+var ListAssociatedPackagesRequest_domainOwner = &sListAssociatedPackagesRequest_domainOwner
+var ListAssociatedPackagesRequest_packageGroup = &sListAssociatedPackagesRequest_packageGroup
+var ListAssociatedPackagesRequest_maxResults = &sListAssociatedPackagesRequest_maxResults
+var ListAssociatedPackagesRequest_nextToken = &sListAssociatedPackagesRequest_nextToken
+var ListAssociatedPackagesRequest_preview = &sListAssociatedPackagesRequest_preview
+
+var ListAssociatedPackagesResult = &sListAssociatedPackagesResult
+var ListAssociatedPackagesResult_packages = &sListAssociatedPackagesResult_packages
+var ListAssociatedPackagesResult_nextToken = &sListAssociatedPackagesResult_nextToken
+
+var ListDomainsRequest = &sListDomainsRequest
+var ListDomainsRequest_maxResults = &sListDomainsRequest_maxResults
+var ListDomainsRequest_nextToken = &sListDomainsRequest_nextToken
+
+var ListDomainsResult = &sListDomainsResult
+var ListDomainsResult_domains = &sListDomainsResult_domains
+var ListDomainsResult_nextToken = &sListDomainsResult_nextToken
+
+var ListPackageGroupsRequest = &sListPackageGroupsRequest
+var ListPackageGroupsRequest_domain = &sListPackageGroupsRequest_domain
+var ListPackageGroupsRequest_domainOwner = &sListPackageGroupsRequest_domainOwner
+var ListPackageGroupsRequest_maxResults = &sListPackageGroupsRequest_maxResults
+var ListPackageGroupsRequest_nextToken = &sListPackageGroupsRequest_nextToken
+var ListPackageGroupsRequest_prefix = &sListPackageGroupsRequest_prefix
+
+var ListPackageGroupsResult = &sListPackageGroupsResult
+var ListPackageGroupsResult_packageGroups = &sListPackageGroupsResult_packageGroups
+var ListPackageGroupsResult_nextToken = &sListPackageGroupsResult_nextToken
+
+var ListPackagesRequest = &sListPackagesRequest
+var ListPackagesRequest_domain = &sListPackagesRequest_domain
+var ListPackagesRequest_domainOwner = &sListPackagesRequest_domainOwner
+var ListPackagesRequest_repository = &sListPackagesRequest_repository
+var ListPackagesRequest_format = &sListPackagesRequest_format
+var ListPackagesRequest_namespace = &sListPackagesRequest_namespace
+var ListPackagesRequest_packagePrefix = &sListPackagesRequest_packagePrefix
+var ListPackagesRequest_maxResults = &sListPackagesRequest_maxResults
+var ListPackagesRequest_nextToken = &sListPackagesRequest_nextToken
+var ListPackagesRequest_publish = &sListPackagesRequest_publish
+var ListPackagesRequest_upstream = &sListPackagesRequest_upstream
+
+var ListPackagesResult = &sListPackagesResult
+var ListPackagesResult_packages = &sListPackagesResult_packages
+var ListPackagesResult_nextToken = &sListPackagesResult_nextToken
+
+var ListPackageVersionAssetsRequest = &sListPackageVersionAssetsRequest
+var ListPackageVersionAssetsRequest_domain = &sListPackageVersionAssetsRequest_domain
+var ListPackageVersionAssetsRequest_domainOwner = &sListPackageVersionAssetsRequest_domainOwner
+var ListPackageVersionAssetsRequest_repository = &sListPackageVersionAssetsRequest_repository
+var ListPackageVersionAssetsRequest_format = &sListPackageVersionAssetsRequest_format
+var ListPackageVersionAssetsRequest_namespace = &sListPackageVersionAssetsRequest_namespace
+var ListPackageVersionAssetsRequest_package = &sListPackageVersionAssetsRequest_package
+var ListPackageVersionAssetsRequest_packageVersion = &sListPackageVersionAssetsRequest_packageVersion
+var ListPackageVersionAssetsRequest_maxResults = &sListPackageVersionAssetsRequest_maxResults
+var ListPackageVersionAssetsRequest_nextToken = &sListPackageVersionAssetsRequest_nextToken
+
+var ListPackageVersionAssetsResult = &sListPackageVersionAssetsResult
+var ListPackageVersionAssetsResult_format = &sListPackageVersionAssetsResult_format
+var ListPackageVersionAssetsResult_namespace = &sListPackageVersionAssetsResult_namespace
+var ListPackageVersionAssetsResult_package = &sListPackageVersionAssetsResult_package
+var ListPackageVersionAssetsResult_version = &sListPackageVersionAssetsResult_version
+var ListPackageVersionAssetsResult_versionRevision = &sListPackageVersionAssetsResult_versionRevision
+var ListPackageVersionAssetsResult_nextToken = &sListPackageVersionAssetsResult_nextToken
+var ListPackageVersionAssetsResult_assets = &sListPackageVersionAssetsResult_assets
+
+var ListPackageVersionDependenciesRequest = &sListPackageVersionDependenciesRequest
+var ListPackageVersionDependenciesRequest_domain = &sListPackageVersionDependenciesRequest_domain
+var ListPackageVersionDependenciesRequest_domainOwner = &sListPackageVersionDependenciesRequest_domainOwner
+var ListPackageVersionDependenciesRequest_repository = &sListPackageVersionDependenciesRequest_repository
+var ListPackageVersionDependenciesRequest_format = &sListPackageVersionDependenciesRequest_format
+var ListPackageVersionDependenciesRequest_namespace = &sListPackageVersionDependenciesRequest_namespace
+var ListPackageVersionDependenciesRequest_package = &sListPackageVersionDependenciesRequest_package
+var ListPackageVersionDependenciesRequest_packageVersion = &sListPackageVersionDependenciesRequest_packageVersion
+var ListPackageVersionDependenciesRequest_nextToken = &sListPackageVersionDependenciesRequest_nextToken
+
+var ListPackageVersionDependenciesResult = &sListPackageVersionDependenciesResult
+var ListPackageVersionDependenciesResult_format = &sListPackageVersionDependenciesResult_format
+var ListPackageVersionDependenciesResult_namespace = &sListPackageVersionDependenciesResult_namespace
+var ListPackageVersionDependenciesResult_package = &sListPackageVersionDependenciesResult_package
+var ListPackageVersionDependenciesResult_version = &sListPackageVersionDependenciesResult_version
+var ListPackageVersionDependenciesResult_versionRevision = &sListPackageVersionDependenciesResult_versionRevision
+var ListPackageVersionDependenciesResult_nextToken = &sListPackageVersionDependenciesResult_nextToken
+var ListPackageVersionDependenciesResult_dependencies = &sListPackageVersionDependenciesResult_dependencies
+
+var ListPackageVersionsRequest = &sListPackageVersionsRequest
+var ListPackageVersionsRequest_domain = &sListPackageVersionsRequest_domain
+var ListPackageVersionsRequest_domainOwner = &sListPackageVersionsRequest_domainOwner
+var ListPackageVersionsRequest_repository = &sListPackageVersionsRequest_repository
+var ListPackageVersionsRequest_format = &sListPackageVersionsRequest_format
+var ListPackageVersionsRequest_namespace = &sListPackageVersionsRequest_namespace
+var ListPackageVersionsRequest_package = &sListPackageVersionsRequest_package
+var ListPackageVersionsRequest_status = &sListPackageVersionsRequest_status
+var ListPackageVersionsRequest_sortBy = &sListPackageVersionsRequest_sortBy
+var ListPackageVersionsRequest_maxResults = &sListPackageVersionsRequest_maxResults
+var ListPackageVersionsRequest_nextToken = &sListPackageVersionsRequest_nextToken
+var ListPackageVersionsRequest_originType = &sListPackageVersionsRequest_originType
+
+var ListPackageVersionsResult = &sListPackageVersionsResult
+var ListPackageVersionsResult_defaultDisplayVersion = &sListPackageVersionsResult_defaultDisplayVersion
+var ListPackageVersionsResult_format = &sListPackageVersionsResult_format
+var ListPackageVersionsResult_namespace = &sListPackageVersionsResult_namespace
+var ListPackageVersionsResult_package = &sListPackageVersionsResult_package
+var ListPackageVersionsResult_versions = &sListPackageVersionsResult_versions
+var ListPackageVersionsResult_nextToken = &sListPackageVersionsResult_nextToken
+
+var ListRepositoriesInDomainRequest = &sListRepositoriesInDomainRequest
+var ListRepositoriesInDomainRequest_domain = &sListRepositoriesInDomainRequest_domain
+var ListRepositoriesInDomainRequest_domainOwner = &sListRepositoriesInDomainRequest_domainOwner
+var ListRepositoriesInDomainRequest_administratorAccount = &sListRepositoriesInDomainRequest_administratorAccount
+var ListRepositoriesInDomainRequest_repositoryPrefix = &sListRepositoriesInDomainRequest_repositoryPrefix
+var ListRepositoriesInDomainRequest_maxResults = &sListRepositoriesInDomainRequest_maxResults
+var ListRepositoriesInDomainRequest_nextToken = &sListRepositoriesInDomainRequest_nextToken
+
+var ListRepositoriesInDomainResult = &sListRepositoriesInDomainResult
+var ListRepositoriesInDomainResult_repositories = &sListRepositoriesInDomainResult_repositories
+var ListRepositoriesInDomainResult_nextToken = &sListRepositoriesInDomainResult_nextToken
+
+var ListRepositoriesRequest = &sListRepositoriesRequest
+var ListRepositoriesRequest_repositoryPrefix = &sListRepositoriesRequest_repositoryPrefix
+var ListRepositoriesRequest_maxResults = &sListRepositoriesRequest_maxResults
+var ListRepositoriesRequest_nextToken = &sListRepositoriesRequest_nextToken
+
+var ListRepositoriesResult = &sListRepositoriesResult
+var ListRepositoriesResult_repositories = &sListRepositoriesResult_repositories
+var ListRepositoriesResult_nextToken = &sListRepositoriesResult_nextToken
+
+var ListSubPackageGroupsRequest = &sListSubPackageGroupsRequest
+var ListSubPackageGroupsRequest_domain = &sListSubPackageGroupsRequest_domain
+var ListSubPackageGroupsRequest_domainOwner = &sListSubPackageGroupsRequest_domainOwner
+var ListSubPackageGroupsRequest_packageGroup = &sListSubPackageGroupsRequest_packageGroup
+var ListSubPackageGroupsRequest_maxResults = &sListSubPackageGroupsRequest_maxResults
+var ListSubPackageGroupsRequest_nextToken = &sListSubPackageGroupsRequest_nextToken
+
+var ListSubPackageGroupsResult = &sListSubPackageGroupsResult
+var ListSubPackageGroupsResult_packageGroups = &sListSubPackageGroupsResult_packageGroups
+var ListSubPackageGroupsResult_nextToken = &sListSubPackageGroupsResult_nextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_resourceArn = &sListTagsForResourceRequest_resourceArn
+
+var ListTagsForResourceResult = &sListTagsForResourceResult
+var ListTagsForResourceResult_tags = &sListTagsForResourceResult_tags
+
+var PublishPackageVersionRequest = &sPublishPackageVersionRequest
+var PublishPackageVersionRequest_domain = &sPublishPackageVersionRequest_domain
+var PublishPackageVersionRequest_domainOwner = &sPublishPackageVersionRequest_domainOwner
+var PublishPackageVersionRequest_repository = &sPublishPackageVersionRequest_repository
+var PublishPackageVersionRequest_format = &sPublishPackageVersionRequest_format
+var PublishPackageVersionRequest_namespace = &sPublishPackageVersionRequest_namespace
+var PublishPackageVersionRequest_package = &sPublishPackageVersionRequest_package
+var PublishPackageVersionRequest_packageVersion = &sPublishPackageVersionRequest_packageVersion
+var PublishPackageVersionRequest_assetContent = &sPublishPackageVersionRequest_assetContent
+var PublishPackageVersionRequest_assetName = &sPublishPackageVersionRequest_assetName
+var PublishPackageVersionRequest_assetSHA256 = &sPublishPackageVersionRequest_assetSHA256
+var PublishPackageVersionRequest_unfinished = &sPublishPackageVersionRequest_unfinished
+
+var PublishPackageVersionResult = &sPublishPackageVersionResult
+var PublishPackageVersionResult_format = &sPublishPackageVersionResult_format
+var PublishPackageVersionResult_namespace = &sPublishPackageVersionResult_namespace
+var PublishPackageVersionResult_package = &sPublishPackageVersionResult_package
+var PublishPackageVersionResult_version = &sPublishPackageVersionResult_version
+var PublishPackageVersionResult_versionRevision = &sPublishPackageVersionResult_versionRevision
+var PublishPackageVersionResult_status = &sPublishPackageVersionResult_status
+var PublishPackageVersionResult_asset = &sPublishPackageVersionResult_asset
+
+var PutDomainPermissionsPolicyRequest = &sPutDomainPermissionsPolicyRequest
+var PutDomainPermissionsPolicyRequest_domain = &sPutDomainPermissionsPolicyRequest_domain
+var PutDomainPermissionsPolicyRequest_domainOwner = &sPutDomainPermissionsPolicyRequest_domainOwner
+var PutDomainPermissionsPolicyRequest_policyRevision = &sPutDomainPermissionsPolicyRequest_policyRevision
+var PutDomainPermissionsPolicyRequest_policyDocument = &sPutDomainPermissionsPolicyRequest_policyDocument
+
+var PutDomainPermissionsPolicyResult = &sPutDomainPermissionsPolicyResult
+var PutDomainPermissionsPolicyResult_policy = &sPutDomainPermissionsPolicyResult_policy
+
+var PutPackageOriginConfigurationRequest = &sPutPackageOriginConfigurationRequest
+var PutPackageOriginConfigurationRequest_domain = &sPutPackageOriginConfigurationRequest_domain
+var PutPackageOriginConfigurationRequest_domainOwner = &sPutPackageOriginConfigurationRequest_domainOwner
+var PutPackageOriginConfigurationRequest_repository = &sPutPackageOriginConfigurationRequest_repository
+var PutPackageOriginConfigurationRequest_format = &sPutPackageOriginConfigurationRequest_format
+var PutPackageOriginConfigurationRequest_namespace = &sPutPackageOriginConfigurationRequest_namespace
+var PutPackageOriginConfigurationRequest_package = &sPutPackageOriginConfigurationRequest_package
+var PutPackageOriginConfigurationRequest_restrictions = &sPutPackageOriginConfigurationRequest_restrictions
+
+var PutPackageOriginConfigurationResult = &sPutPackageOriginConfigurationResult
+var PutPackageOriginConfigurationResult_originConfiguration = &sPutPackageOriginConfigurationResult_originConfiguration
+
+var PutRepositoryPermissionsPolicyRequest = &sPutRepositoryPermissionsPolicyRequest
+var PutRepositoryPermissionsPolicyRequest_domain = &sPutRepositoryPermissionsPolicyRequest_domain
+var PutRepositoryPermissionsPolicyRequest_domainOwner = &sPutRepositoryPermissionsPolicyRequest_domainOwner
+var PutRepositoryPermissionsPolicyRequest_repository = &sPutRepositoryPermissionsPolicyRequest_repository
+var PutRepositoryPermissionsPolicyRequest_policyRevision = &sPutRepositoryPermissionsPolicyRequest_policyRevision
+var PutRepositoryPermissionsPolicyRequest_policyDocument = &sPutRepositoryPermissionsPolicyRequest_policyDocument
+
+var PutRepositoryPermissionsPolicyResult = &sPutRepositoryPermissionsPolicyResult
+var PutRepositoryPermissionsPolicyResult_policy = &sPutRepositoryPermissionsPolicyResult_policy
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_resourceArn = &sTagResourceRequest_resourceArn
+var TagResourceRequest_tags = &sTagResourceRequest_tags
+
+var TagResourceResult = &sTagResourceResult
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_resourceArn = &sUntagResourceRequest_resourceArn
+var UntagResourceRequest_tagKeys = &sUntagResourceRequest_tagKeys
+
+var UntagResourceResult = &sUntagResourceResult
+
+var UpdatePackageGroupRequest = &sUpdatePackageGroupRequest
+var UpdatePackageGroupRequest_domain = &sUpdatePackageGroupRequest_domain
+var UpdatePackageGroupRequest_domainOwner = &sUpdatePackageGroupRequest_domainOwner
+var UpdatePackageGroupRequest_packageGroup = &sUpdatePackageGroupRequest_packageGroup
+var UpdatePackageGroupRequest_contactInfo = &sUpdatePackageGroupRequest_contactInfo
+var UpdatePackageGroupRequest_description = &sUpdatePackageGroupRequest_description
+
+var UpdatePackageGroupOriginConfigurationRequest = &sUpdatePackageGroupOriginConfigurationRequest
+var UpdatePackageGroupOriginConfigurationRequest_domain = &sUpdatePackageGroupOriginConfigurationRequest_domain
+var UpdatePackageGroupOriginConfigurationRequest_domainOwner = &sUpdatePackageGroupOriginConfigurationRequest_domainOwner
+var UpdatePackageGroupOriginConfigurationRequest_packageGroup = &sUpdatePackageGroupOriginConfigurationRequest_packageGroup
+var UpdatePackageGroupOriginConfigurationRequest_restrictions = &sUpdatePackageGroupOriginConfigurationRequest_restrictions
+var UpdatePackageGroupOriginConfigurationRequest_addAllowedRepositories = &sUpdatePackageGroupOriginConfigurationRequest_addAllowedRepositories
+var UpdatePackageGroupOriginConfigurationRequest_removeAllowedRepositories = &sUpdatePackageGroupOriginConfigurationRequest_removeAllowedRepositories
+
+var UpdatePackageGroupOriginConfigurationResult = &sUpdatePackageGroupOriginConfigurationResult
+var UpdatePackageGroupOriginConfigurationResult_packageGroup = &sUpdatePackageGroupOriginConfigurationResult_packageGroup
+var UpdatePackageGroupOriginConfigurationResult_allowedRepositoryUpdates = &sUpdatePackageGroupOriginConfigurationResult_allowedRepositoryUpdates
+
+var UpdatePackageGroupResult = &sUpdatePackageGroupResult
+var UpdatePackageGroupResult_packageGroup = &sUpdatePackageGroupResult_packageGroup
+
+var UpdatePackageVersionsStatusRequest = &sUpdatePackageVersionsStatusRequest
+var UpdatePackageVersionsStatusRequest_domain = &sUpdatePackageVersionsStatusRequest_domain
+var UpdatePackageVersionsStatusRequest_domainOwner = &sUpdatePackageVersionsStatusRequest_domainOwner
+var UpdatePackageVersionsStatusRequest_repository = &sUpdatePackageVersionsStatusRequest_repository
+var UpdatePackageVersionsStatusRequest_format = &sUpdatePackageVersionsStatusRequest_format
+var UpdatePackageVersionsStatusRequest_namespace = &sUpdatePackageVersionsStatusRequest_namespace
+var UpdatePackageVersionsStatusRequest_package = &sUpdatePackageVersionsStatusRequest_package
+var UpdatePackageVersionsStatusRequest_versions = &sUpdatePackageVersionsStatusRequest_versions
+var UpdatePackageVersionsStatusRequest_versionRevisions = &sUpdatePackageVersionsStatusRequest_versionRevisions
+var UpdatePackageVersionsStatusRequest_expectedStatus = &sUpdatePackageVersionsStatusRequest_expectedStatus
+var UpdatePackageVersionsStatusRequest_targetStatus = &sUpdatePackageVersionsStatusRequest_targetStatus
+
+var UpdatePackageVersionsStatusResult = &sUpdatePackageVersionsStatusResult
+var UpdatePackageVersionsStatusResult_successfulVersions = &sUpdatePackageVersionsStatusResult_successfulVersions
+var UpdatePackageVersionsStatusResult_failedVersions = &sUpdatePackageVersionsStatusResult_failedVersions
+
+var UpdateRepositoryRequest = &sUpdateRepositoryRequest
+var UpdateRepositoryRequest_domain = &sUpdateRepositoryRequest_domain
+var UpdateRepositoryRequest_domainOwner = &sUpdateRepositoryRequest_domainOwner
+var UpdateRepositoryRequest_repository = &sUpdateRepositoryRequest_repository
+var UpdateRepositoryRequest_description = &sUpdateRepositoryRequest_description
+var UpdateRepositoryRequest_upstreams = &sUpdateRepositoryRequest_upstreams
+
+var UpdateRepositoryResult = &sUpdateRepositoryResult
+var UpdateRepositoryResult_repository = &sUpdateRepositoryResult_repository
+
+var CodeArtifactControlPlaneService = &smithy.ServiceSchema{Schema: &s_CodeArtifactControlPlaneService, Version: "2018-09-22"}

@@ -4,3948 +4,2862 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var ActivateEventSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ActivateEventSource",
-}, smithy.ShapeTypeOperation, 0)
-
-var CancelReplay = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "CancelReplay",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateApiDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "CreateApiDestination",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateArchive = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "CreateArchive",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "CreateConnection",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateEventBus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "CreateEventBus",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreatePartnerEventSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "CreatePartnerEventSource",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeactivateEventSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "DeactivateEventSource",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeauthorizeConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "DeauthorizeConnection",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteApiDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "DeleteApiDestination",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteArchive = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "DeleteArchive",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "DeleteConnection",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteEventBus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "DeleteEventBus",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeletePartnerEventSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "DeletePartnerEventSource",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "DeleteRule",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeApiDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "DescribeApiDestination",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeArchive = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "DescribeArchive",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "DescribeConnection",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeEventBus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "DescribeEventBus",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeEventSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "DescribeEventSource",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribePartnerEventSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "DescribePartnerEventSource",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeReplay = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "DescribeReplay",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "DescribeRule",
-}, smithy.ShapeTypeOperation, 0)
-
-var DisableRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "DisableRule",
-}, smithy.ShapeTypeOperation, 0)
-
-var EnableRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "EnableRule",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListApiDestinations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ListApiDestinations",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListArchives = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ListArchives",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListConnections = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ListConnections",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListEventBuses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ListEventBuses",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListEventSources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ListEventSources",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListPartnerEventSourceAccounts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ListPartnerEventSourceAccounts",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListPartnerEventSources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ListPartnerEventSources",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListReplays = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ListReplays",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListRuleNamesByTarget = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ListRuleNamesByTarget",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListRules = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ListRules",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTargetsByRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ListTargetsByRule",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "PutEvents",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutPartnerEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "PutPartnerEvents",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutPermission = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "PutPermission",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "PutRule",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutTargets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "PutTargets",
-}, smithy.ShapeTypeOperation, 0)
-
-var RemovePermission = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "RemovePermission",
-}, smithy.ShapeTypeOperation, 0)
-
-var RemoveTargets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "RemoveTargets",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartReplay = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "StartReplay",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var TestEventPattern = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "TestEventPattern",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateApiDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "UpdateApiDestination",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateArchive = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "UpdateArchive",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "UpdateConnection",
-}, smithy.ShapeTypeOperation, 0)
-
-var _AWSEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "AWSEvents",
-}, smithy.ShapeTypeService, 0, &smithytraits.XMLNamespace{URI: "http://events.amazonaws.com/doc/2015-10-07"})
-
-var AWSEvents = smithy.NewServiceSchema(_AWSEvents, "2015-10-07")
-
-var _AccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "AccountId",
-}, smithy.ShapeTypeString, 0)
-
-var _Action = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "Action",
-}, smithy.ShapeTypeString, 0)
-
-var ApiDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ApiDestination",
-}, smithy.ShapeTypeStructure, 9)
-var ApiDestination_ApiDestinationArn *smithy.Schema
-
-var ApiDestination_Name *smithy.Schema
-
-var ApiDestination_ApiDestinationState *smithy.Schema
-
-var ApiDestination_ConnectionArn *smithy.Schema
-
-var ApiDestination_InvocationEndpoint *smithy.Schema
-
-var ApiDestination_HttpMethod *smithy.Schema
-
-var ApiDestination_InvocationRateLimitPerSecond *smithy.Schema
-
-var ApiDestination_CreationTime *smithy.Schema
-
-var ApiDestination_LastModifiedTime *smithy.Schema
-
-var _ApiDestinationArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ApiDestinationArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ApiDestinationDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ApiDestinationDescription",
-}, smithy.ShapeTypeString, 0)
-
-var ApiDestinationHttpMethod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ApiDestinationHttpMethod",
-}, smithy.ShapeTypeEnum, 7)
-var ApiDestinationHttpMethod_POST *smithy.Schema
-
-var ApiDestinationHttpMethod_GET *smithy.Schema
-
-var ApiDestinationHttpMethod_HEAD *smithy.Schema
-
-var ApiDestinationHttpMethod_OPTIONS *smithy.Schema
-
-var ApiDestinationHttpMethod_PUT *smithy.Schema
-
-var ApiDestinationHttpMethod_PATCH *smithy.Schema
-
-var ApiDestinationHttpMethod_DELETE *smithy.Schema
-
-var _ApiDestinationInvocationRateLimitPerSecond = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ApiDestinationInvocationRateLimitPerSecond",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ApiDestinationName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ApiDestinationName",
-}, smithy.ShapeTypeString, 0)
-
-var _ApiDestinationResponseList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ApiDestinationResponseList",
-}, smithy.ShapeTypeList, 1)
-var _ApiDestinationResponseList_member *smithy.Schema
-
-var ApiDestinationState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ApiDestinationState",
-}, smithy.ShapeTypeEnum, 2)
-var ApiDestinationState_ACTIVE *smithy.Schema
-
-var ApiDestinationState_INACTIVE *smithy.Schema
-
-var Archive = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "Archive",
-}, smithy.ShapeTypeStructure, 8)
-var Archive_ArchiveName *smithy.Schema
-
-var Archive_EventSourceArn *smithy.Schema
-
-var Archive_State *smithy.Schema
-
-var Archive_StateReason *smithy.Schema
-
-var Archive_RetentionDays *smithy.Schema
-
-var Archive_SizeBytes *smithy.Schema
-
-var Archive_EventCount *smithy.Schema
-
-var Archive_CreationTime *smithy.Schema
-
-var _ArchiveArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ArchiveArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ArchiveDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ArchiveDescription",
-}, smithy.ShapeTypeString, 0)
-
-var _ArchiveName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ArchiveName",
-}, smithy.ShapeTypeString, 0)
-
-var _ArchiveResponseList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ArchiveResponseList",
-}, smithy.ShapeTypeList, 1)
-var _ArchiveResponseList_member *smithy.Schema
-
-var ArchiveState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ArchiveState",
-}, smithy.ShapeTypeEnum, 6)
-var ArchiveState_ENABLED *smithy.Schema
-
-var ArchiveState_DISABLED *smithy.Schema
-
-var ArchiveState_CREATING *smithy.Schema
-
-var ArchiveState_UPDATING *smithy.Schema
-
-var ArchiveState_CREATE_FAILED *smithy.Schema
-
-var ArchiveState_UPDATE_FAILED *smithy.Schema
-
-var _ArchiveStateReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ArchiveStateReason",
-}, smithy.ShapeTypeString, 0)
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var AssignPublicIp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "AssignPublicIp",
-}, smithy.ShapeTypeEnum, 2)
-var AssignPublicIp_ENABLED *smithy.Schema
-
-var AssignPublicIp_DISABLED *smithy.Schema
-
-var _AuthHeaderParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "AuthHeaderParameters",
-}, smithy.ShapeTypeString, 0)
-
-var _AuthHeaderParametersSensitive = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "AuthHeaderParametersSensitive",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var AwsVpcConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "AwsVpcConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var AwsVpcConfiguration_Subnets *smithy.Schema
-
-var AwsVpcConfiguration_SecurityGroups *smithy.Schema
-
-var AwsVpcConfiguration_AssignPublicIp *smithy.Schema
-
-var BatchArrayProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "BatchArrayProperties",
-}, smithy.ShapeTypeStructure, 1)
-var BatchArrayProperties_Size *smithy.Schema
-
-var BatchParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "BatchParameters",
-}, smithy.ShapeTypeStructure, 4)
-var BatchParameters_JobDefinition *smithy.Schema
-
-var BatchParameters_JobName *smithy.Schema
-
-var BatchParameters_ArrayProperties *smithy.Schema
-
-var BatchParameters_RetryStrategy *smithy.Schema
-
-var BatchRetryStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "BatchRetryStrategy",
-}, smithy.ShapeTypeStructure, 1)
-var BatchRetryStrategy_Attempts *smithy.Schema
-
-var _Boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "Boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _CapacityProvider = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "CapacityProvider",
-}, smithy.ShapeTypeString, 0)
-
-var _CapacityProviderStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "CapacityProviderStrategy",
-}, smithy.ShapeTypeList, 1)
-var _CapacityProviderStrategy_member *smithy.Schema
-
-var CapacityProviderStrategyItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "CapacityProviderStrategyItem",
-}, smithy.ShapeTypeStructure, 3)
-var CapacityProviderStrategyItem_capacityProvider *smithy.Schema
-
-var CapacityProviderStrategyItem_weight *smithy.Schema
-
-var CapacityProviderStrategyItem_base *smithy.Schema
-
-var _CapacityProviderStrategyItemBase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "CapacityProviderStrategyItemBase",
-}, smithy.ShapeTypeInteger, 0)
-
-var _CapacityProviderStrategyItemWeight = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "CapacityProviderStrategyItemWeight",
-}, smithy.ShapeTypeInteger, 0)
-
-var ConcurrentModificationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ConcurrentModificationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var ConcurrentModificationException_message *smithy.Schema
-
-var Condition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "Condition",
-}, smithy.ShapeTypeStructure, 3)
-var Condition_Type *smithy.Schema
-
-var Condition_Key *smithy.Schema
-
-var Condition_Value *smithy.Schema
-
-var Connection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "Connection",
-}, smithy.ShapeTypeStructure, 8)
-var Connection_ConnectionArn *smithy.Schema
-
-var Connection_Name *smithy.Schema
-
-var Connection_ConnectionState *smithy.Schema
-
-var Connection_StateReason *smithy.Schema
-
-var Connection_AuthorizationType *smithy.Schema
-
-var Connection_CreationTime *smithy.Schema
-
-var Connection_LastModifiedTime *smithy.Schema
-
-var Connection_LastAuthorizedTime *smithy.Schema
-
-var ConnectionApiKeyAuthResponseParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ConnectionApiKeyAuthResponseParameters",
-}, smithy.ShapeTypeStructure, 1)
-var ConnectionApiKeyAuthResponseParameters_ApiKeyName *smithy.Schema
-
-var _ConnectionArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ConnectionArn",
-}, smithy.ShapeTypeString, 0)
-
-var ConnectionAuthorizationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ConnectionAuthorizationType",
-}, smithy.ShapeTypeEnum, 3)
-var ConnectionAuthorizationType_BASIC *smithy.Schema
-
-var ConnectionAuthorizationType_OAUTH_CLIENT_CREDENTIALS *smithy.Schema
-
-var ConnectionAuthorizationType_API_KEY *smithy.Schema
-
-var ConnectionAuthResponseParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ConnectionAuthResponseParameters",
-}, smithy.ShapeTypeStructure, 4)
-var ConnectionAuthResponseParameters_BasicAuthParameters *smithy.Schema
-
-var ConnectionAuthResponseParameters_OAuthParameters *smithy.Schema
-
-var ConnectionAuthResponseParameters_ApiKeyAuthParameters *smithy.Schema
-
-var ConnectionAuthResponseParameters_InvocationHttpParameters *smithy.Schema
-
-var ConnectionBasicAuthResponseParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ConnectionBasicAuthResponseParameters",
-}, smithy.ShapeTypeStructure, 1)
-var ConnectionBasicAuthResponseParameters_Username *smithy.Schema
-
-var ConnectionBodyParameter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ConnectionBodyParameter",
-}, smithy.ShapeTypeStructure, 3)
-var ConnectionBodyParameter_Key *smithy.Schema
-
-var ConnectionBodyParameter_Value *smithy.Schema
-
-var ConnectionBodyParameter_IsValueSecret *smithy.Schema
-
-var _ConnectionBodyParametersList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ConnectionBodyParametersList",
-}, smithy.ShapeTypeList, 1)
-var _ConnectionBodyParametersList_member *smithy.Schema
-
-var _ConnectionDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ConnectionDescription",
-}, smithy.ShapeTypeString, 0)
-
-var ConnectionHeaderParameter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ConnectionHeaderParameter",
-}, smithy.ShapeTypeStructure, 3)
-var ConnectionHeaderParameter_Key *smithy.Schema
-
-var ConnectionHeaderParameter_Value *smithy.Schema
-
-var ConnectionHeaderParameter_IsValueSecret *smithy.Schema
-
-var _ConnectionHeaderParametersList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ConnectionHeaderParametersList",
-}, smithy.ShapeTypeList, 1)
-var _ConnectionHeaderParametersList_member *smithy.Schema
-
-var ConnectionHttpParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ConnectionHttpParameters",
-}, smithy.ShapeTypeStructure, 3)
-var ConnectionHttpParameters_HeaderParameters *smithy.Schema
-
-var ConnectionHttpParameters_QueryStringParameters *smithy.Schema
-
-var ConnectionHttpParameters_BodyParameters *smithy.Schema
-
-var _ConnectionName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ConnectionName",
-}, smithy.ShapeTypeString, 0)
-
-var ConnectionOAuthClientResponseParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ConnectionOAuthClientResponseParameters",
-}, smithy.ShapeTypeStructure, 1)
-var ConnectionOAuthClientResponseParameters_ClientID *smithy.Schema
-
-var ConnectionOAuthHttpMethod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ConnectionOAuthHttpMethod",
-}, smithy.ShapeTypeEnum, 3)
-var ConnectionOAuthHttpMethod_GET *smithy.Schema
-
-var ConnectionOAuthHttpMethod_POST *smithy.Schema
-
-var ConnectionOAuthHttpMethod_PUT *smithy.Schema
-
-var ConnectionOAuthResponseParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ConnectionOAuthResponseParameters",
-}, smithy.ShapeTypeStructure, 4)
-var ConnectionOAuthResponseParameters_ClientParameters *smithy.Schema
-
-var ConnectionOAuthResponseParameters_AuthorizationEndpoint *smithy.Schema
-
-var ConnectionOAuthResponseParameters_HttpMethod *smithy.Schema
-
-var ConnectionOAuthResponseParameters_OAuthHttpParameters *smithy.Schema
-
-var ConnectionQueryStringParameter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ConnectionQueryStringParameter",
-}, smithy.ShapeTypeStructure, 3)
-var ConnectionQueryStringParameter_Key *smithy.Schema
-
-var ConnectionQueryStringParameter_Value *smithy.Schema
-
-var ConnectionQueryStringParameter_IsValueSecret *smithy.Schema
-
-var _ConnectionQueryStringParametersList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ConnectionQueryStringParametersList",
-}, smithy.ShapeTypeList, 1)
-var _ConnectionQueryStringParametersList_member *smithy.Schema
-
-var _ConnectionResponseList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ConnectionResponseList",
-}, smithy.ShapeTypeList, 1)
-var _ConnectionResponseList_member *smithy.Schema
-
-var ConnectionState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ConnectionState",
-}, smithy.ShapeTypeEnum, 7)
-var ConnectionState_CREATING *smithy.Schema
-
-var ConnectionState_UPDATING *smithy.Schema
-
-var ConnectionState_DELETING *smithy.Schema
-
-var ConnectionState_AUTHORIZED *smithy.Schema
-
-var ConnectionState_DEAUTHORIZED *smithy.Schema
-
-var ConnectionState_AUTHORIZING *smithy.Schema
-
-var ConnectionState_DEAUTHORIZING *smithy.Schema
-
-var _ConnectionStateReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ConnectionStateReason",
-}, smithy.ShapeTypeString, 0)
-
-var CreateConnectionApiKeyAuthRequestParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "CreateConnectionApiKeyAuthRequestParameters",
-}, smithy.ShapeTypeStructure, 2)
-var CreateConnectionApiKeyAuthRequestParameters_ApiKeyName *smithy.Schema
-
-var CreateConnectionApiKeyAuthRequestParameters_ApiKeyValue *smithy.Schema
-
-var CreateConnectionAuthRequestParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "CreateConnectionAuthRequestParameters",
-}, smithy.ShapeTypeStructure, 4)
-var CreateConnectionAuthRequestParameters_BasicAuthParameters *smithy.Schema
-
-var CreateConnectionAuthRequestParameters_OAuthParameters *smithy.Schema
-
-var CreateConnectionAuthRequestParameters_ApiKeyAuthParameters *smithy.Schema
-
-var CreateConnectionAuthRequestParameters_InvocationHttpParameters *smithy.Schema
-
-var CreateConnectionBasicAuthRequestParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "CreateConnectionBasicAuthRequestParameters",
-}, smithy.ShapeTypeStructure, 2)
-var CreateConnectionBasicAuthRequestParameters_Username *smithy.Schema
-
-var CreateConnectionBasicAuthRequestParameters_Password *smithy.Schema
-
-var CreateConnectionOAuthClientRequestParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "CreateConnectionOAuthClientRequestParameters",
-}, smithy.ShapeTypeStructure, 2)
-var CreateConnectionOAuthClientRequestParameters_ClientID *smithy.Schema
-
-var CreateConnectionOAuthClientRequestParameters_ClientSecret *smithy.Schema
-
-var CreateConnectionOAuthRequestParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "CreateConnectionOAuthRequestParameters",
-}, smithy.ShapeTypeStructure, 4)
-var CreateConnectionOAuthRequestParameters_ClientParameters *smithy.Schema
-
-var CreateConnectionOAuthRequestParameters_AuthorizationEndpoint *smithy.Schema
-
-var CreateConnectionOAuthRequestParameters_HttpMethod *smithy.Schema
-
-var CreateConnectionOAuthRequestParameters_OAuthHttpParameters *smithy.Schema
-
-var _CreatedBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "CreatedBy",
-}, smithy.ShapeTypeString, 0)
-
-var _Database = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "Database",
-}, smithy.ShapeTypeString, 0)
-
-var _DbUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "DbUser",
-}, smithy.ShapeTypeString, 0)
-
-var DeadLetterConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "DeadLetterConfig",
-}, smithy.ShapeTypeStructure, 1)
-var DeadLetterConfig_Arn *smithy.Schema
-
-var EcsParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "EcsParameters",
-}, smithy.ShapeTypeStructure, 14)
-var EcsParameters_TaskDefinitionArn *smithy.Schema
-
-var EcsParameters_TaskCount *smithy.Schema
-
-var EcsParameters_LaunchType *smithy.Schema
-
-var EcsParameters_NetworkConfiguration *smithy.Schema
-
-var EcsParameters_PlatformVersion *smithy.Schema
-
-var EcsParameters_Group *smithy.Schema
-
-var EcsParameters_CapacityProviderStrategy *smithy.Schema
-
-var EcsParameters_EnableECSManagedTags *smithy.Schema
-
-var EcsParameters_EnableExecuteCommand *smithy.Schema
-
-var EcsParameters_PlacementConstraints *smithy.Schema
-
-var EcsParameters_PlacementStrategy *smithy.Schema
-
-var EcsParameters_PropagateTags *smithy.Schema
-
-var EcsParameters_ReferenceId *smithy.Schema
-
-var EcsParameters_Tags *smithy.Schema
-
-var _ErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ErrorCode",
-}, smithy.ShapeTypeString, 0)
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var EventBus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "EventBus",
-}, smithy.ShapeTypeStructure, 3)
-var EventBus_Name *smithy.Schema
-
-var EventBus_Arn *smithy.Schema
-
-var EventBus_Policy *smithy.Schema
-
-var _EventBusList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "EventBusList",
-}, smithy.ShapeTypeList, 1)
-var _EventBusList_member *smithy.Schema
-
-var _EventBusName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "EventBusName",
-}, smithy.ShapeTypeString, 0)
-
-var _EventBusNameOrArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "EventBusNameOrArn",
-}, smithy.ShapeTypeString, 0)
-
-var _EventId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "EventId",
-}, smithy.ShapeTypeString, 0)
-
-var _EventPattern = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "EventPattern",
-}, smithy.ShapeTypeString, 0)
-
-var _EventResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "EventResource",
-}, smithy.ShapeTypeString, 0)
-
-var _EventResourceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "EventResourceList",
-}, smithy.ShapeTypeList, 1)
-var _EventResourceList_member *smithy.Schema
-
-var EventSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "EventSource",
-}, smithy.ShapeTypeStructure, 6)
-var EventSource_Arn *smithy.Schema
-
-var EventSource_CreatedBy *smithy.Schema
-
-var EventSource_CreationTime *smithy.Schema
-
-var EventSource_ExpirationTime *smithy.Schema
-
-var EventSource_Name *smithy.Schema
-
-var EventSource_State *smithy.Schema
-
-var _EventSourceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "EventSourceList",
-}, smithy.ShapeTypeList, 1)
-var _EventSourceList_member *smithy.Schema
-
-var _EventSourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "EventSourceName",
-}, smithy.ShapeTypeString, 0)
-
-var _EventSourceNamePrefix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "EventSourceNamePrefix",
-}, smithy.ShapeTypeString, 0)
-
-var EventSourceState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "EventSourceState",
-}, smithy.ShapeTypeEnum, 3)
-var EventSourceState_PENDING *smithy.Schema
-
-var EventSourceState_ACTIVE *smithy.Schema
-
-var EventSourceState_DELETED *smithy.Schema
-
-var _EventTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "EventTime",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _HeaderKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "HeaderKey",
-}, smithy.ShapeTypeString, 0)
-
-var _HeaderParametersMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "HeaderParametersMap",
-}, smithy.ShapeTypeMap, 2)
-var _HeaderParametersMap_key *smithy.Schema
-
-var _HeaderParametersMap_value *smithy.Schema
-
-var _HeaderValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "HeaderValue",
-}, smithy.ShapeTypeString, 0)
-
-var _HeaderValueSensitive = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "HeaderValueSensitive",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var HttpParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "HttpParameters",
-}, smithy.ShapeTypeStructure, 3)
-var HttpParameters_PathParameterValues *smithy.Schema
-
-var HttpParameters_HeaderParameters *smithy.Schema
-
-var HttpParameters_QueryStringParameters *smithy.Schema
-
-var _HttpsEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "HttpsEndpoint",
-}, smithy.ShapeTypeString, 0)
-
-var IllegalStatusException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "IllegalStatusException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var IllegalStatusException_message *smithy.Schema
-
-var InputTransformer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "InputTransformer",
-}, smithy.ShapeTypeStructure, 2)
-var InputTransformer_InputPathsMap *smithy.Schema
-
-var InputTransformer_InputTemplate *smithy.Schema
-
-var _InputTransformerPathKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "InputTransformerPathKey",
-}, smithy.ShapeTypeString, 0)
-
-var _Integer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "Integer",
-}, smithy.ShapeTypeInteger, 0)
-
-var InternalException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "InternalException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
-var InternalException_message *smithy.Schema
-
-var InvalidEventPatternException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "InvalidEventPatternException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidEventPatternException_message *smithy.Schema
-
-var InvalidStateException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "InvalidStateException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidStateException_message *smithy.Schema
-
-var KinesisParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "KinesisParameters",
-}, smithy.ShapeTypeStructure, 1)
-var KinesisParameters_PartitionKeyPath *smithy.Schema
-
-var LaunchType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "LaunchType",
-}, smithy.ShapeTypeEnum, 3)
-var LaunchType_EC2 *smithy.Schema
-
-var LaunchType_FARGATE *smithy.Schema
-
-var LaunchType_EXTERNAL *smithy.Schema
-
-var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var LimitExceededException_message *smithy.Schema
-
-var _LimitMax100 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "LimitMax100",
-}, smithy.ShapeTypeInteger, 0)
-
-var _LimitMin1 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "LimitMin1",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Long = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "Long",
-}, smithy.ShapeTypeLong, 0)
-
-var _ManagedBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ManagedBy",
-}, smithy.ShapeTypeString, 0)
-
-var ManagedRuleException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ManagedRuleException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var ManagedRuleException_message *smithy.Schema
-
-var _MaximumEventAgeInSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "MaximumEventAgeInSeconds",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaximumRetryAttempts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "MaximumRetryAttempts",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MessageGroupId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "MessageGroupId",
-}, smithy.ShapeTypeString, 0)
-
-var NetworkConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "NetworkConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var NetworkConfiguration_awsvpcConfiguration *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _NonPartnerEventBusName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "NonPartnerEventBusName",
-}, smithy.ShapeTypeString, 0)
-
-var _NonPartnerEventBusNameOrArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "NonPartnerEventBusNameOrArn",
-}, smithy.ShapeTypeString, 0)
-
-var OperationDisabledException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "OperationDisabledException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var OperationDisabledException_message *smithy.Schema
-
-var PartnerEventSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "PartnerEventSource",
-}, smithy.ShapeTypeStructure, 2)
-var PartnerEventSource_Arn *smithy.Schema
-
-var PartnerEventSource_Name *smithy.Schema
-
-var PartnerEventSourceAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "PartnerEventSourceAccount",
-}, smithy.ShapeTypeStructure, 4)
-var PartnerEventSourceAccount_Account *smithy.Schema
-
-var PartnerEventSourceAccount_CreationTime *smithy.Schema
-
-var PartnerEventSourceAccount_ExpirationTime *smithy.Schema
-
-var PartnerEventSourceAccount_State *smithy.Schema
-
-var _PartnerEventSourceAccountList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "PartnerEventSourceAccountList",
-}, smithy.ShapeTypeList, 1)
-var _PartnerEventSourceAccountList_member *smithy.Schema
-
-var _PartnerEventSourceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "PartnerEventSourceList",
-}, smithy.ShapeTypeList, 1)
-var _PartnerEventSourceList_member *smithy.Schema
-
-var _PartnerEventSourceNamePrefix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "PartnerEventSourceNamePrefix",
-}, smithy.ShapeTypeString, 0)
-
-var _PathParameter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "PathParameter",
-}, smithy.ShapeTypeString, 0)
-
-var _PathParameterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "PathParameterList",
-}, smithy.ShapeTypeList, 1)
-var _PathParameterList_member *smithy.Schema
-
-var PlacementConstraint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "PlacementConstraint",
-}, smithy.ShapeTypeStructure, 2)
-var PlacementConstraint_type *smithy.Schema
-
-var PlacementConstraint_expression *smithy.Schema
-
-var _PlacementConstraintExpression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "PlacementConstraintExpression",
-}, smithy.ShapeTypeString, 0)
-
-var _PlacementConstraints = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "PlacementConstraints",
-}, smithy.ShapeTypeList, 1)
-var _PlacementConstraints_member *smithy.Schema
-
-var PlacementConstraintType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "PlacementConstraintType",
-}, smithy.ShapeTypeEnum, 2)
-var PlacementConstraintType_DISTINCT_INSTANCE *smithy.Schema
-
-var PlacementConstraintType_MEMBER_OF *smithy.Schema
-
-var _PlacementStrategies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "PlacementStrategies",
-}, smithy.ShapeTypeList, 1)
-var _PlacementStrategies_member *smithy.Schema
-
-var PlacementStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "PlacementStrategy",
-}, smithy.ShapeTypeStructure, 2)
-var PlacementStrategy_type *smithy.Schema
-
-var PlacementStrategy_field *smithy.Schema
-
-var _PlacementStrategyField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "PlacementStrategyField",
-}, smithy.ShapeTypeString, 0)
-
-var PlacementStrategyType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "PlacementStrategyType",
-}, smithy.ShapeTypeEnum, 3)
-var PlacementStrategyType_RANDOM *smithy.Schema
-
-var PlacementStrategyType_SPREAD *smithy.Schema
-
-var PlacementStrategyType_BINPACK *smithy.Schema
-
-var PolicyLengthExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "PolicyLengthExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var PolicyLengthExceededException_message *smithy.Schema
-
-var _Principal = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "Principal",
-}, smithy.ShapeTypeString, 0)
-
-var PropagateTags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "PropagateTags",
-}, smithy.ShapeTypeEnum, 1)
-var PropagateTags_TASK_DEFINITION *smithy.Schema
-
-var PutEventsRequestEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "PutEventsRequestEntry",
-}, smithy.ShapeTypeStructure, 7)
-var PutEventsRequestEntry_Time *smithy.Schema
-
-var PutEventsRequestEntry_Source *smithy.Schema
-
-var PutEventsRequestEntry_Resources *smithy.Schema
-
-var PutEventsRequestEntry_DetailType *smithy.Schema
-
-var PutEventsRequestEntry_Detail *smithy.Schema
-
-var PutEventsRequestEntry_EventBusName *smithy.Schema
-
-var PutEventsRequestEntry_TraceHeader *smithy.Schema
-
-var _PutEventsRequestEntryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "PutEventsRequestEntryList",
-}, smithy.ShapeTypeList, 1)
-var _PutEventsRequestEntryList_member *smithy.Schema
-
-var PutEventsResultEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "PutEventsResultEntry",
-}, smithy.ShapeTypeStructure, 3)
-var PutEventsResultEntry_EventId *smithy.Schema
-
-var PutEventsResultEntry_ErrorCode *smithy.Schema
-
-var PutEventsResultEntry_ErrorMessage *smithy.Schema
-
-var _PutEventsResultEntryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "PutEventsResultEntryList",
-}, smithy.ShapeTypeList, 1)
-var _PutEventsResultEntryList_member *smithy.Schema
-
-var PutPartnerEventsRequestEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "PutPartnerEventsRequestEntry",
-}, smithy.ShapeTypeStructure, 5)
-var PutPartnerEventsRequestEntry_Time *smithy.Schema
-
-var PutPartnerEventsRequestEntry_Source *smithy.Schema
-
-var PutPartnerEventsRequestEntry_Resources *smithy.Schema
-
-var PutPartnerEventsRequestEntry_DetailType *smithy.Schema
-
-var PutPartnerEventsRequestEntry_Detail *smithy.Schema
-
-var _PutPartnerEventsRequestEntryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "PutPartnerEventsRequestEntryList",
-}, smithy.ShapeTypeList, 1)
-var _PutPartnerEventsRequestEntryList_member *smithy.Schema
-
-var PutPartnerEventsResultEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "PutPartnerEventsResultEntry",
-}, smithy.ShapeTypeStructure, 3)
-var PutPartnerEventsResultEntry_EventId *smithy.Schema
-
-var PutPartnerEventsResultEntry_ErrorCode *smithy.Schema
-
-var PutPartnerEventsResultEntry_ErrorMessage *smithy.Schema
-
-var _PutPartnerEventsResultEntryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "PutPartnerEventsResultEntryList",
-}, smithy.ShapeTypeList, 1)
-var _PutPartnerEventsResultEntryList_member *smithy.Schema
-
-var PutTargetsResultEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "PutTargetsResultEntry",
-}, smithy.ShapeTypeStructure, 3)
-var PutTargetsResultEntry_TargetId *smithy.Schema
-
-var PutTargetsResultEntry_ErrorCode *smithy.Schema
-
-var PutTargetsResultEntry_ErrorMessage *smithy.Schema
-
-var _PutTargetsResultEntryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "PutTargetsResultEntryList",
-}, smithy.ShapeTypeList, 1)
-var _PutTargetsResultEntryList_member *smithy.Schema
-
-var _QueryStringKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "QueryStringKey",
-}, smithy.ShapeTypeString, 0)
-
-var _QueryStringParametersMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "QueryStringParametersMap",
-}, smithy.ShapeTypeMap, 2)
-var _QueryStringParametersMap_key *smithy.Schema
-
-var _QueryStringParametersMap_value *smithy.Schema
-
-var _QueryStringValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "QueryStringValue",
-}, smithy.ShapeTypeString, 0)
-
-var _QueryStringValueSensitive = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "QueryStringValueSensitive",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var RedshiftDataParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "RedshiftDataParameters",
-}, smithy.ShapeTypeStructure, 6)
-var RedshiftDataParameters_SecretManagerArn *smithy.Schema
-
-var RedshiftDataParameters_Database *smithy.Schema
-
-var RedshiftDataParameters_DbUser *smithy.Schema
-
-var RedshiftDataParameters_Sql *smithy.Schema
-
-var RedshiftDataParameters_StatementName *smithy.Schema
-
-var RedshiftDataParameters_WithEvent *smithy.Schema
-
-var _RedshiftSecretManagerArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "RedshiftSecretManagerArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ReferenceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ReferenceId",
-}, smithy.ShapeTypeString, 0)
-
-var RemoveTargetsResultEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "RemoveTargetsResultEntry",
-}, smithy.ShapeTypeStructure, 3)
-var RemoveTargetsResultEntry_TargetId *smithy.Schema
-
-var RemoveTargetsResultEntry_ErrorCode *smithy.Schema
-
-var RemoveTargetsResultEntry_ErrorMessage *smithy.Schema
-
-var _RemoveTargetsResultEntryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "RemoveTargetsResultEntryList",
-}, smithy.ShapeTypeList, 1)
-var _RemoveTargetsResultEntryList_member *smithy.Schema
-
-var Replay = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "Replay",
-}, smithy.ShapeTypeStructure, 9)
-var Replay_ReplayName *smithy.Schema
-
-var Replay_EventSourceArn *smithy.Schema
-
-var Replay_State *smithy.Schema
-
-var Replay_StateReason *smithy.Schema
-
-var Replay_EventStartTime *smithy.Schema
-
-var Replay_EventEndTime *smithy.Schema
-
-var Replay_EventLastReplayedTime *smithy.Schema
-
-var Replay_ReplayStartTime *smithy.Schema
-
-var Replay_ReplayEndTime *smithy.Schema
-
-var _ReplayArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ReplayArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ReplayDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ReplayDescription",
-}, smithy.ShapeTypeString, 0)
-
-var ReplayDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ReplayDestination",
-}, smithy.ShapeTypeStructure, 2)
-var ReplayDestination_Arn *smithy.Schema
-
-var ReplayDestination_FilterArns *smithy.Schema
-
-var _ReplayDestinationFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ReplayDestinationFilters",
-}, smithy.ShapeTypeList, 1)
-var _ReplayDestinationFilters_member *smithy.Schema
-
-var _ReplayList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ReplayList",
-}, smithy.ShapeTypeList, 1)
-var _ReplayList_member *smithy.Schema
-
-var _ReplayName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ReplayName",
-}, smithy.ShapeTypeString, 0)
-
-var ReplayState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ReplayState",
-}, smithy.ShapeTypeEnum, 6)
-var ReplayState_STARTING *smithy.Schema
-
-var ReplayState_RUNNING *smithy.Schema
-
-var ReplayState_CANCELLING *smithy.Schema
-
-var ReplayState_COMPLETED *smithy.Schema
-
-var ReplayState_CANCELLED *smithy.Schema
-
-var ReplayState_FAILED *smithy.Schema
-
-var _ReplayStateReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ReplayStateReason",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ResourceAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var ResourceAlreadyExistsException_message *smithy.Schema
-
-var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var ResourceNotFoundException_message *smithy.Schema
-
-var _RetentionDays = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "RetentionDays",
-}, smithy.ShapeTypeInteger, 0)
-
-var RetryPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "RetryPolicy",
-}, smithy.ShapeTypeStructure, 2)
-var RetryPolicy_MaximumRetryAttempts *smithy.Schema
-
-var RetryPolicy_MaximumEventAgeInSeconds *smithy.Schema
-
-var _RoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "RoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var Rule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "Rule",
-}, smithy.ShapeTypeStructure, 9)
-var Rule_Name *smithy.Schema
-
-var Rule_Arn *smithy.Schema
-
-var Rule_EventPattern *smithy.Schema
-
-var Rule_State *smithy.Schema
-
-var Rule_Description *smithy.Schema
-
-var Rule_ScheduleExpression *smithy.Schema
-
-var Rule_RoleArn *smithy.Schema
-
-var Rule_ManagedBy *smithy.Schema
-
-var Rule_EventBusName *smithy.Schema
-
-var _RuleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "RuleArn",
-}, smithy.ShapeTypeString, 0)
-
-var _RuleDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "RuleDescription",
-}, smithy.ShapeTypeString, 0)
-
-var _RuleName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "RuleName",
-}, smithy.ShapeTypeString, 0)
-
-var _RuleNameList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "RuleNameList",
-}, smithy.ShapeTypeList, 1)
-var _RuleNameList_member *smithy.Schema
-
-var _RuleResponseList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "RuleResponseList",
-}, smithy.ShapeTypeList, 1)
-var _RuleResponseList_member *smithy.Schema
-
-var RuleState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "RuleState",
-}, smithy.ShapeTypeEnum, 2)
-var RuleState_ENABLED *smithy.Schema
-
-var RuleState_DISABLED *smithy.Schema
-
-var RunCommandParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "RunCommandParameters",
-}, smithy.ShapeTypeStructure, 1)
-var RunCommandParameters_RunCommandTargets *smithy.Schema
-
-var RunCommandTarget = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "RunCommandTarget",
-}, smithy.ShapeTypeStructure, 2)
-var RunCommandTarget_Key *smithy.Schema
-
-var RunCommandTarget_Values *smithy.Schema
-
-var _RunCommandTargetKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "RunCommandTargetKey",
-}, smithy.ShapeTypeString, 0)
-
-var _RunCommandTargets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "RunCommandTargets",
-}, smithy.ShapeTypeList, 1)
-var _RunCommandTargets_member *smithy.Schema
-
-var _RunCommandTargetValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "RunCommandTargetValue",
-}, smithy.ShapeTypeString, 0)
-
-var _RunCommandTargetValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "RunCommandTargetValues",
-}, smithy.ShapeTypeList, 1)
-var _RunCommandTargetValues_member *smithy.Schema
-
-var SageMakerPipelineParameter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "SageMakerPipelineParameter",
-}, smithy.ShapeTypeStructure, 2)
-var SageMakerPipelineParameter_Name *smithy.Schema
-
-var SageMakerPipelineParameter_Value *smithy.Schema
-
-var _SageMakerPipelineParameterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "SageMakerPipelineParameterList",
-}, smithy.ShapeTypeList, 1)
-var _SageMakerPipelineParameterList_member *smithy.Schema
-
-var _SageMakerPipelineParameterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "SageMakerPipelineParameterName",
-}, smithy.ShapeTypeString, 0)
-
-var SageMakerPipelineParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "SageMakerPipelineParameters",
-}, smithy.ShapeTypeStructure, 1)
-var SageMakerPipelineParameters_PipelineParameterList *smithy.Schema
-
-var _SageMakerPipelineParameterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "SageMakerPipelineParameterValue",
-}, smithy.ShapeTypeString, 0)
-
-var _ScheduleExpression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ScheduleExpression",
-}, smithy.ShapeTypeString, 0)
-
-var _SecretsManagerSecretArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "SecretsManagerSecretArn",
-}, smithy.ShapeTypeString, 0)
-
-var _SensitiveString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "SensitiveString",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _Sql = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "Sql",
-}, smithy.ShapeTypeString, 0)
-
-var SqsParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "SqsParameters",
-}, smithy.ShapeTypeStructure, 1)
-var SqsParameters_MessageGroupId *smithy.Schema
-
-var _StatementId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "StatementId",
-}, smithy.ShapeTypeString, 0)
-
-var _StatementName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "StatementName",
-}, smithy.ShapeTypeString, 0)
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var _StringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "StringList",
-}, smithy.ShapeTypeList, 1)
-var _StringList_member *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var Target = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "Target",
-}, smithy.ShapeTypeStructure, 16)
-var Target_Id *smithy.Schema
-
-var Target_Arn *smithy.Schema
-
-var Target_RoleArn *smithy.Schema
-
-var Target_Input *smithy.Schema
-
-var Target_InputPath *smithy.Schema
-
-var Target_InputTransformer *smithy.Schema
-
-var Target_KinesisParameters *smithy.Schema
-
-var Target_RunCommandParameters *smithy.Schema
-
-var Target_EcsParameters *smithy.Schema
-
-var Target_BatchParameters *smithy.Schema
-
-var Target_SqsParameters *smithy.Schema
-
-var Target_HttpParameters *smithy.Schema
-
-var Target_RedshiftDataParameters *smithy.Schema
-
-var Target_SageMakerPipelineParameters *smithy.Schema
-
-var Target_DeadLetterConfig *smithy.Schema
-
-var Target_RetryPolicy *smithy.Schema
-
-var _TargetArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "TargetArn",
-}, smithy.ShapeTypeString, 0)
-
-var _TargetId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "TargetId",
-}, smithy.ShapeTypeString, 0)
-
-var _TargetIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "TargetIdList",
-}, smithy.ShapeTypeList, 1)
-var _TargetIdList_member *smithy.Schema
-
-var _TargetInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "TargetInput",
-}, smithy.ShapeTypeString, 0)
-
-var _TargetInputPath = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "TargetInputPath",
-}, smithy.ShapeTypeString, 0)
-
-var _TargetList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "TargetList",
-}, smithy.ShapeTypeList, 1)
-var _TargetList_member *smithy.Schema
-
-var _TargetPartitionKeyPath = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "TargetPartitionKeyPath",
-}, smithy.ShapeTypeString, 0)
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _TraceHeader = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "TraceHeader",
-}, smithy.ShapeTypeString, 0)
-
-var _TransformerInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "TransformerInput",
-}, smithy.ShapeTypeString, 0)
-
-var _TransformerPaths = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "TransformerPaths",
-}, smithy.ShapeTypeMap, 2)
-var _TransformerPaths_key *smithy.Schema
-
-var _TransformerPaths_value *smithy.Schema
-
-var UpdateConnectionApiKeyAuthRequestParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "UpdateConnectionApiKeyAuthRequestParameters",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateConnectionApiKeyAuthRequestParameters_ApiKeyName *smithy.Schema
-
-var UpdateConnectionApiKeyAuthRequestParameters_ApiKeyValue *smithy.Schema
-
-var UpdateConnectionAuthRequestParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "UpdateConnectionAuthRequestParameters",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateConnectionAuthRequestParameters_BasicAuthParameters *smithy.Schema
-
-var UpdateConnectionAuthRequestParameters_OAuthParameters *smithy.Schema
-
-var UpdateConnectionAuthRequestParameters_ApiKeyAuthParameters *smithy.Schema
-
-var UpdateConnectionAuthRequestParameters_InvocationHttpParameters *smithy.Schema
-
-var UpdateConnectionBasicAuthRequestParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "UpdateConnectionBasicAuthRequestParameters",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateConnectionBasicAuthRequestParameters_Username *smithy.Schema
-
-var UpdateConnectionBasicAuthRequestParameters_Password *smithy.Schema
-
-var UpdateConnectionOAuthClientRequestParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "UpdateConnectionOAuthClientRequestParameters",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateConnectionOAuthClientRequestParameters_ClientID *smithy.Schema
-
-var UpdateConnectionOAuthClientRequestParameters_ClientSecret *smithy.Schema
-
-var UpdateConnectionOAuthRequestParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "UpdateConnectionOAuthRequestParameters",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateConnectionOAuthRequestParameters_ClientParameters *smithy.Schema
-
-var UpdateConnectionOAuthRequestParameters_AuthorizationEndpoint *smithy.Schema
-
-var UpdateConnectionOAuthRequestParameters_HttpMethod *smithy.Schema
-
-var UpdateConnectionOAuthRequestParameters_OAuthHttpParameters *smithy.Schema
-
-var ActivateEventSourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ActivateEventSourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ActivateEventSourceRequest_Name *smithy.Schema
-
-var CancelReplayRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "CancelReplayRequest",
-}, smithy.ShapeTypeStructure, 1)
-var CancelReplayRequest_ReplayName *smithy.Schema
-
-var CancelReplayResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "CancelReplayResponse",
-}, smithy.ShapeTypeStructure, 3)
-var CancelReplayResponse_ReplayArn *smithy.Schema
-
-var CancelReplayResponse_State *smithy.Schema
-
-var CancelReplayResponse_StateReason *smithy.Schema
-
-var CreateApiDestinationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "CreateApiDestinationRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateApiDestinationRequest_Name *smithy.Schema
-
-var CreateApiDestinationRequest_Description *smithy.Schema
-
-var CreateApiDestinationRequest_ConnectionArn *smithy.Schema
-
-var CreateApiDestinationRequest_InvocationEndpoint *smithy.Schema
-
-var CreateApiDestinationRequest_HttpMethod *smithy.Schema
-
-var CreateApiDestinationRequest_InvocationRateLimitPerSecond *smithy.Schema
-
-var CreateApiDestinationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "CreateApiDestinationResponse",
-}, smithy.ShapeTypeStructure, 4)
-var CreateApiDestinationResponse_ApiDestinationArn *smithy.Schema
-
-var CreateApiDestinationResponse_ApiDestinationState *smithy.Schema
-
-var CreateApiDestinationResponse_CreationTime *smithy.Schema
-
-var CreateApiDestinationResponse_LastModifiedTime *smithy.Schema
-
-var CreateArchiveRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "CreateArchiveRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateArchiveRequest_ArchiveName *smithy.Schema
-
-var CreateArchiveRequest_EventSourceArn *smithy.Schema
-
-var CreateArchiveRequest_Description *smithy.Schema
-
-var CreateArchiveRequest_EventPattern *smithy.Schema
-
-var CreateArchiveRequest_RetentionDays *smithy.Schema
-
-var CreateArchiveResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "CreateArchiveResponse",
-}, smithy.ShapeTypeStructure, 4)
-var CreateArchiveResponse_ArchiveArn *smithy.Schema
-
-var CreateArchiveResponse_State *smithy.Schema
-
-var CreateArchiveResponse_StateReason *smithy.Schema
-
-var CreateArchiveResponse_CreationTime *smithy.Schema
-
-var CreateConnectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "CreateConnectionRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateConnectionRequest_Name *smithy.Schema
-
-var CreateConnectionRequest_Description *smithy.Schema
-
-var CreateConnectionRequest_AuthorizationType *smithy.Schema
-
-var CreateConnectionRequest_AuthParameters *smithy.Schema
-
-var CreateConnectionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "CreateConnectionResponse",
-}, smithy.ShapeTypeStructure, 4)
-var CreateConnectionResponse_ConnectionArn *smithy.Schema
-
-var CreateConnectionResponse_ConnectionState *smithy.Schema
-
-var CreateConnectionResponse_CreationTime *smithy.Schema
-
-var CreateConnectionResponse_LastModifiedTime *smithy.Schema
-
-var CreateEventBusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "CreateEventBusRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateEventBusRequest_Name *smithy.Schema
-
-var CreateEventBusRequest_EventSourceName *smithy.Schema
-
-var CreateEventBusRequest_Tags *smithy.Schema
-
-var CreateEventBusResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "CreateEventBusResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateEventBusResponse_EventBusArn *smithy.Schema
-
-var CreatePartnerEventSourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "CreatePartnerEventSourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CreatePartnerEventSourceRequest_Name *smithy.Schema
-
-var CreatePartnerEventSourceRequest_Account *smithy.Schema
-
-var CreatePartnerEventSourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "CreatePartnerEventSourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreatePartnerEventSourceResponse_EventSourceArn *smithy.Schema
-
-var DeactivateEventSourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "DeactivateEventSourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeactivateEventSourceRequest_Name *smithy.Schema
-
-var DeauthorizeConnectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "DeauthorizeConnectionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeauthorizeConnectionRequest_Name *smithy.Schema
-
-var DeauthorizeConnectionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "DeauthorizeConnectionResponse",
-}, smithy.ShapeTypeStructure, 5)
-var DeauthorizeConnectionResponse_ConnectionArn *smithy.Schema
-
-var DeauthorizeConnectionResponse_ConnectionState *smithy.Schema
-
-var DeauthorizeConnectionResponse_CreationTime *smithy.Schema
-
-var DeauthorizeConnectionResponse_LastModifiedTime *smithy.Schema
-
-var DeauthorizeConnectionResponse_LastAuthorizedTime *smithy.Schema
-
-var DeleteApiDestinationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "DeleteApiDestinationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteApiDestinationRequest_Name *smithy.Schema
-
-var DeleteApiDestinationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "DeleteApiDestinationResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteArchiveRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "DeleteArchiveRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteArchiveRequest_ArchiveName *smithy.Schema
-
-var DeleteArchiveResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "DeleteArchiveResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteConnectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "DeleteConnectionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteConnectionRequest_Name *smithy.Schema
-
-var DeleteConnectionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "DeleteConnectionResponse",
-}, smithy.ShapeTypeStructure, 5)
-var DeleteConnectionResponse_ConnectionArn *smithy.Schema
-
-var DeleteConnectionResponse_ConnectionState *smithy.Schema
-
-var DeleteConnectionResponse_CreationTime *smithy.Schema
-
-var DeleteConnectionResponse_LastModifiedTime *smithy.Schema
-
-var DeleteConnectionResponse_LastAuthorizedTime *smithy.Schema
-
-var DeleteEventBusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "DeleteEventBusRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteEventBusRequest_Name *smithy.Schema
-
-var DeletePartnerEventSourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "DeletePartnerEventSourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeletePartnerEventSourceRequest_Name *smithy.Schema
-
-var DeletePartnerEventSourceRequest_Account *smithy.Schema
-
-var DeleteRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "DeleteRuleRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteRuleRequest_Name *smithy.Schema
-
-var DeleteRuleRequest_EventBusName *smithy.Schema
-
-var DeleteRuleRequest_Force *smithy.Schema
-
-var DescribeApiDestinationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "DescribeApiDestinationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeApiDestinationRequest_Name *smithy.Schema
-
-var DescribeApiDestinationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "DescribeApiDestinationResponse",
-}, smithy.ShapeTypeStructure, 10)
-var DescribeApiDestinationResponse_ApiDestinationArn *smithy.Schema
-
-var DescribeApiDestinationResponse_Name *smithy.Schema
-
-var DescribeApiDestinationResponse_Description *smithy.Schema
-
-var DescribeApiDestinationResponse_ApiDestinationState *smithy.Schema
-
-var DescribeApiDestinationResponse_ConnectionArn *smithy.Schema
-
-var DescribeApiDestinationResponse_InvocationEndpoint *smithy.Schema
-
-var DescribeApiDestinationResponse_HttpMethod *smithy.Schema
-
-var DescribeApiDestinationResponse_InvocationRateLimitPerSecond *smithy.Schema
-
-var DescribeApiDestinationResponse_CreationTime *smithy.Schema
-
-var DescribeApiDestinationResponse_LastModifiedTime *smithy.Schema
-
-var DescribeArchiveRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "DescribeArchiveRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeArchiveRequest_ArchiveName *smithy.Schema
-
-var DescribeArchiveResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "DescribeArchiveResponse",
-}, smithy.ShapeTypeStructure, 11)
-var DescribeArchiveResponse_ArchiveArn *smithy.Schema
-
-var DescribeArchiveResponse_ArchiveName *smithy.Schema
-
-var DescribeArchiveResponse_EventSourceArn *smithy.Schema
-
-var DescribeArchiveResponse_Description *smithy.Schema
-
-var DescribeArchiveResponse_EventPattern *smithy.Schema
-
-var DescribeArchiveResponse_State *smithy.Schema
-
-var DescribeArchiveResponse_StateReason *smithy.Schema
-
-var DescribeArchiveResponse_RetentionDays *smithy.Schema
-
-var DescribeArchiveResponse_SizeBytes *smithy.Schema
-
-var DescribeArchiveResponse_EventCount *smithy.Schema
-
-var DescribeArchiveResponse_CreationTime *smithy.Schema
-
-var DescribeConnectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "DescribeConnectionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeConnectionRequest_Name *smithy.Schema
-
-var DescribeConnectionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "DescribeConnectionResponse",
-}, smithy.ShapeTypeStructure, 11)
-var DescribeConnectionResponse_ConnectionArn *smithy.Schema
-
-var DescribeConnectionResponse_Name *smithy.Schema
-
-var DescribeConnectionResponse_Description *smithy.Schema
-
-var DescribeConnectionResponse_ConnectionState *smithy.Schema
-
-var DescribeConnectionResponse_StateReason *smithy.Schema
-
-var DescribeConnectionResponse_AuthorizationType *smithy.Schema
-
-var DescribeConnectionResponse_SecretArn *smithy.Schema
-
-var DescribeConnectionResponse_AuthParameters *smithy.Schema
-
-var DescribeConnectionResponse_CreationTime *smithy.Schema
-
-var DescribeConnectionResponse_LastModifiedTime *smithy.Schema
-
-var DescribeConnectionResponse_LastAuthorizedTime *smithy.Schema
-
-var DescribeEventBusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "DescribeEventBusRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeEventBusRequest_Name *smithy.Schema
-
-var DescribeEventBusResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "DescribeEventBusResponse",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeEventBusResponse_Name *smithy.Schema
-
-var DescribeEventBusResponse_Arn *smithy.Schema
-
-var DescribeEventBusResponse_Policy *smithy.Schema
-
-var DescribeEventSourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "DescribeEventSourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeEventSourceRequest_Name *smithy.Schema
-
-var DescribeEventSourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "DescribeEventSourceResponse",
-}, smithy.ShapeTypeStructure, 6)
-var DescribeEventSourceResponse_Arn *smithy.Schema
-
-var DescribeEventSourceResponse_CreatedBy *smithy.Schema
-
-var DescribeEventSourceResponse_CreationTime *smithy.Schema
-
-var DescribeEventSourceResponse_ExpirationTime *smithy.Schema
-
-var DescribeEventSourceResponse_Name *smithy.Schema
-
-var DescribeEventSourceResponse_State *smithy.Schema
-
-var DescribePartnerEventSourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "DescribePartnerEventSourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribePartnerEventSourceRequest_Name *smithy.Schema
-
-var DescribePartnerEventSourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "DescribePartnerEventSourceResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribePartnerEventSourceResponse_Arn *smithy.Schema
-
-var DescribePartnerEventSourceResponse_Name *smithy.Schema
-
-var DescribeReplayRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "DescribeReplayRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeReplayRequest_ReplayName *smithy.Schema
-
-var DescribeReplayResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "DescribeReplayResponse",
-}, smithy.ShapeTypeStructure, 12)
-var DescribeReplayResponse_ReplayName *smithy.Schema
-
-var DescribeReplayResponse_ReplayArn *smithy.Schema
-
-var DescribeReplayResponse_Description *smithy.Schema
-
-var DescribeReplayResponse_State *smithy.Schema
-
-var DescribeReplayResponse_StateReason *smithy.Schema
-
-var DescribeReplayResponse_EventSourceArn *smithy.Schema
-
-var DescribeReplayResponse_Destination *smithy.Schema
-
-var DescribeReplayResponse_EventStartTime *smithy.Schema
-
-var DescribeReplayResponse_EventEndTime *smithy.Schema
-
-var DescribeReplayResponse_EventLastReplayedTime *smithy.Schema
-
-var DescribeReplayResponse_ReplayStartTime *smithy.Schema
-
-var DescribeReplayResponse_ReplayEndTime *smithy.Schema
-
-var DescribeRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "DescribeRuleRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeRuleRequest_Name *smithy.Schema
-
-var DescribeRuleRequest_EventBusName *smithy.Schema
-
-var DescribeRuleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "DescribeRuleResponse",
-}, smithy.ShapeTypeStructure, 10)
-var DescribeRuleResponse_Name *smithy.Schema
-
-var DescribeRuleResponse_Arn *smithy.Schema
-
-var DescribeRuleResponse_EventPattern *smithy.Schema
-
-var DescribeRuleResponse_ScheduleExpression *smithy.Schema
-
-var DescribeRuleResponse_State *smithy.Schema
-
-var DescribeRuleResponse_Description *smithy.Schema
-
-var DescribeRuleResponse_RoleArn *smithy.Schema
-
-var DescribeRuleResponse_ManagedBy *smithy.Schema
-
-var DescribeRuleResponse_EventBusName *smithy.Schema
-
-var DescribeRuleResponse_CreatedBy *smithy.Schema
-
-var DisableRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "DisableRuleRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DisableRuleRequest_Name *smithy.Schema
-
-var DisableRuleRequest_EventBusName *smithy.Schema
-
-var EnableRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "EnableRuleRequest",
-}, smithy.ShapeTypeStructure, 2)
-var EnableRuleRequest_Name *smithy.Schema
-
-var EnableRuleRequest_EventBusName *smithy.Schema
-
-var ListApiDestinationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ListApiDestinationsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListApiDestinationsRequest_NamePrefix *smithy.Schema
-
-var ListApiDestinationsRequest_ConnectionArn *smithy.Schema
-
-var ListApiDestinationsRequest_NextToken *smithy.Schema
-
-var ListApiDestinationsRequest_Limit *smithy.Schema
-
-var ListApiDestinationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ListApiDestinationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListApiDestinationsResponse_ApiDestinations *smithy.Schema
-
-var ListApiDestinationsResponse_NextToken *smithy.Schema
-
-var ListArchivesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ListArchivesRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListArchivesRequest_NamePrefix *smithy.Schema
-
-var ListArchivesRequest_EventSourceArn *smithy.Schema
-
-var ListArchivesRequest_State *smithy.Schema
-
-var ListArchivesRequest_NextToken *smithy.Schema
-
-var ListArchivesRequest_Limit *smithy.Schema
-
-var ListArchivesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ListArchivesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListArchivesResponse_Archives *smithy.Schema
-
-var ListArchivesResponse_NextToken *smithy.Schema
-
-var ListConnectionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ListConnectionsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListConnectionsRequest_NamePrefix *smithy.Schema
-
-var ListConnectionsRequest_ConnectionState *smithy.Schema
-
-var ListConnectionsRequest_NextToken *smithy.Schema
-
-var ListConnectionsRequest_Limit *smithy.Schema
-
-var ListConnectionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ListConnectionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListConnectionsResponse_Connections *smithy.Schema
-
-var ListConnectionsResponse_NextToken *smithy.Schema
-
-var ListEventBusesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ListEventBusesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListEventBusesRequest_NamePrefix *smithy.Schema
-
-var ListEventBusesRequest_NextToken *smithy.Schema
-
-var ListEventBusesRequest_Limit *smithy.Schema
-
-var ListEventBusesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ListEventBusesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListEventBusesResponse_EventBuses *smithy.Schema
-
-var ListEventBusesResponse_NextToken *smithy.Schema
-
-var ListEventSourcesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ListEventSourcesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListEventSourcesRequest_NamePrefix *smithy.Schema
-
-var ListEventSourcesRequest_NextToken *smithy.Schema
-
-var ListEventSourcesRequest_Limit *smithy.Schema
-
-var ListEventSourcesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ListEventSourcesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListEventSourcesResponse_EventSources *smithy.Schema
-
-var ListEventSourcesResponse_NextToken *smithy.Schema
-
-var ListPartnerEventSourceAccountsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ListPartnerEventSourceAccountsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListPartnerEventSourceAccountsRequest_EventSourceName *smithy.Schema
-
-var ListPartnerEventSourceAccountsRequest_NextToken *smithy.Schema
-
-var ListPartnerEventSourceAccountsRequest_Limit *smithy.Schema
-
-var ListPartnerEventSourceAccountsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ListPartnerEventSourceAccountsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListPartnerEventSourceAccountsResponse_PartnerEventSourceAccounts *smithy.Schema
-
-var ListPartnerEventSourceAccountsResponse_NextToken *smithy.Schema
-
-var ListPartnerEventSourcesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ListPartnerEventSourcesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListPartnerEventSourcesRequest_NamePrefix *smithy.Schema
-
-var ListPartnerEventSourcesRequest_NextToken *smithy.Schema
-
-var ListPartnerEventSourcesRequest_Limit *smithy.Schema
-
-var ListPartnerEventSourcesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ListPartnerEventSourcesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListPartnerEventSourcesResponse_PartnerEventSources *smithy.Schema
-
-var ListPartnerEventSourcesResponse_NextToken *smithy.Schema
-
-var ListReplaysRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ListReplaysRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListReplaysRequest_NamePrefix *smithy.Schema
-
-var ListReplaysRequest_State *smithy.Schema
-
-var ListReplaysRequest_EventSourceArn *smithy.Schema
-
-var ListReplaysRequest_NextToken *smithy.Schema
-
-var ListReplaysRequest_Limit *smithy.Schema
-
-var ListReplaysResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ListReplaysResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListReplaysResponse_Replays *smithy.Schema
-
-var ListReplaysResponse_NextToken *smithy.Schema
-
-var ListRuleNamesByTargetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ListRuleNamesByTargetRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListRuleNamesByTargetRequest_TargetArn *smithy.Schema
-
-var ListRuleNamesByTargetRequest_EventBusName *smithy.Schema
-
-var ListRuleNamesByTargetRequest_NextToken *smithy.Schema
-
-var ListRuleNamesByTargetRequest_Limit *smithy.Schema
-
-var ListRuleNamesByTargetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ListRuleNamesByTargetResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListRuleNamesByTargetResponse_RuleNames *smithy.Schema
-
-var ListRuleNamesByTargetResponse_NextToken *smithy.Schema
-
-var ListRulesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ListRulesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListRulesRequest_NamePrefix *smithy.Schema
-
-var ListRulesRequest_EventBusName *smithy.Schema
-
-var ListRulesRequest_NextToken *smithy.Schema
-
-var ListRulesRequest_Limit *smithy.Schema
-
-var ListRulesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ListRulesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListRulesResponse_Rules *smithy.Schema
-
-var ListRulesResponse_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceARN *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var ListTargetsByRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ListTargetsByRuleRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListTargetsByRuleRequest_Rule *smithy.Schema
-
-var ListTargetsByRuleRequest_EventBusName *smithy.Schema
-
-var ListTargetsByRuleRequest_NextToken *smithy.Schema
-
-var ListTargetsByRuleRequest_Limit *smithy.Schema
-
-var ListTargetsByRuleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "ListTargetsByRuleResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTargetsByRuleResponse_Targets *smithy.Schema
-
-var ListTargetsByRuleResponse_NextToken *smithy.Schema
-
-var PutEventsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "PutEventsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var PutEventsRequest_Entries *smithy.Schema
-
-var PutEventsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "PutEventsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var PutEventsResponse_FailedEntryCount *smithy.Schema
-
-var PutEventsResponse_Entries *smithy.Schema
-
-var PutPartnerEventsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "PutPartnerEventsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var PutPartnerEventsRequest_Entries *smithy.Schema
-
-var PutPartnerEventsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "PutPartnerEventsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var PutPartnerEventsResponse_FailedEntryCount *smithy.Schema
-
-var PutPartnerEventsResponse_Entries *smithy.Schema
-
-var PutPermissionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "PutPermissionRequest",
-}, smithy.ShapeTypeStructure, 6)
-var PutPermissionRequest_EventBusName *smithy.Schema
-
-var PutPermissionRequest_Action *smithy.Schema
-
-var PutPermissionRequest_Principal *smithy.Schema
-
-var PutPermissionRequest_StatementId *smithy.Schema
-
-var PutPermissionRequest_Condition *smithy.Schema
-
-var PutPermissionRequest_Policy *smithy.Schema
-
-var PutRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "PutRuleRequest",
-}, smithy.ShapeTypeStructure, 8)
-var PutRuleRequest_Name *smithy.Schema
-
-var PutRuleRequest_ScheduleExpression *smithy.Schema
-
-var PutRuleRequest_EventPattern *smithy.Schema
-
-var PutRuleRequest_State *smithy.Schema
-
-var PutRuleRequest_Description *smithy.Schema
-
-var PutRuleRequest_RoleArn *smithy.Schema
-
-var PutRuleRequest_Tags *smithy.Schema
-
-var PutRuleRequest_EventBusName *smithy.Schema
-
-var PutRuleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "PutRuleResponse",
-}, smithy.ShapeTypeStructure, 1)
-var PutRuleResponse_RuleArn *smithy.Schema
-
-var PutTargetsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "PutTargetsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var PutTargetsRequest_Rule *smithy.Schema
-
-var PutTargetsRequest_EventBusName *smithy.Schema
-
-var PutTargetsRequest_Targets *smithy.Schema
-
-var PutTargetsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "PutTargetsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var PutTargetsResponse_FailedEntryCount *smithy.Schema
-
-var PutTargetsResponse_FailedEntries *smithy.Schema
-
-var RemovePermissionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "RemovePermissionRequest",
-}, smithy.ShapeTypeStructure, 3)
-var RemovePermissionRequest_StatementId *smithy.Schema
-
-var RemovePermissionRequest_RemoveAllPermissions *smithy.Schema
-
-var RemovePermissionRequest_EventBusName *smithy.Schema
-
-var RemoveTargetsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "RemoveTargetsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var RemoveTargetsRequest_Rule *smithy.Schema
-
-var RemoveTargetsRequest_EventBusName *smithy.Schema
-
-var RemoveTargetsRequest_Ids *smithy.Schema
-
-var RemoveTargetsRequest_Force *smithy.Schema
-
-var RemoveTargetsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "RemoveTargetsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var RemoveTargetsResponse_FailedEntryCount *smithy.Schema
-
-var RemoveTargetsResponse_FailedEntries *smithy.Schema
-
-var StartReplayRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "StartReplayRequest",
-}, smithy.ShapeTypeStructure, 6)
-var StartReplayRequest_ReplayName *smithy.Schema
-
-var StartReplayRequest_Description *smithy.Schema
-
-var StartReplayRequest_EventSourceArn *smithy.Schema
-
-var StartReplayRequest_EventStartTime *smithy.Schema
-
-var StartReplayRequest_EventEndTime *smithy.Schema
-
-var StartReplayRequest_Destination *smithy.Schema
-
-var StartReplayResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "StartReplayResponse",
-}, smithy.ShapeTypeStructure, 4)
-var StartReplayResponse_ReplayArn *smithy.Schema
-
-var StartReplayResponse_State *smithy.Schema
-
-var StartReplayResponse_StateReason *smithy.Schema
-
-var StartReplayResponse_ReplayStartTime *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceARN *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var TestEventPatternRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "TestEventPatternRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TestEventPatternRequest_EventPattern *smithy.Schema
-
-var TestEventPatternRequest_Event *smithy.Schema
-
-var TestEventPatternResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "TestEventPatternResponse",
-}, smithy.ShapeTypeStructure, 1)
-var TestEventPatternResponse_Result *smithy.Schema
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceARN *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateApiDestinationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "UpdateApiDestinationRequest",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateApiDestinationRequest_Name *smithy.Schema
-
-var UpdateApiDestinationRequest_Description *smithy.Schema
-
-var UpdateApiDestinationRequest_ConnectionArn *smithy.Schema
-
-var UpdateApiDestinationRequest_InvocationEndpoint *smithy.Schema
-
-var UpdateApiDestinationRequest_HttpMethod *smithy.Schema
-
-var UpdateApiDestinationRequest_InvocationRateLimitPerSecond *smithy.Schema
-
-var UpdateApiDestinationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "UpdateApiDestinationResponse",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateApiDestinationResponse_ApiDestinationArn *smithy.Schema
-
-var UpdateApiDestinationResponse_ApiDestinationState *smithy.Schema
-
-var UpdateApiDestinationResponse_CreationTime *smithy.Schema
-
-var UpdateApiDestinationResponse_LastModifiedTime *smithy.Schema
-
-var UpdateArchiveRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "UpdateArchiveRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateArchiveRequest_ArchiveName *smithy.Schema
-
-var UpdateArchiveRequest_Description *smithy.Schema
-
-var UpdateArchiveRequest_EventPattern *smithy.Schema
-
-var UpdateArchiveRequest_RetentionDays *smithy.Schema
-
-var UpdateArchiveResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "UpdateArchiveResponse",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateArchiveResponse_ArchiveArn *smithy.Schema
-
-var UpdateArchiveResponse_State *smithy.Schema
-
-var UpdateArchiveResponse_StateReason *smithy.Schema
-
-var UpdateArchiveResponse_CreationTime *smithy.Schema
-
-var UpdateConnectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "UpdateConnectionRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateConnectionRequest_Name *smithy.Schema
-
-var UpdateConnectionRequest_Description *smithy.Schema
-
-var UpdateConnectionRequest_AuthorizationType *smithy.Schema
-
-var UpdateConnectionRequest_AuthParameters *smithy.Schema
-
-var UpdateConnectionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudwatchevents",
-	Name:      "UpdateConnectionResponse",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateConnectionResponse_ConnectionArn *smithy.Schema
-
-var UpdateConnectionResponse_ConnectionState *smithy.Schema
-
-var UpdateConnectionResponse_CreationTime *smithy.Schema
-
-var UpdateConnectionResponse_LastModifiedTime *smithy.Schema
-
-var UpdateConnectionResponse_LastAuthorizedTime *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	ApiDestinationState_ACTIVE = ApiDestinationState.AddMember("ACTIVE", smithyprelude.Unit)
-
-	ApiDestinationState_INACTIVE = ApiDestinationState.AddMember("INACTIVE", smithyprelude.Unit)
-
-	ApiDestinationHttpMethod_POST = ApiDestinationHttpMethod.AddMember("POST", smithyprelude.Unit)
-
-	ApiDestinationHttpMethod_GET = ApiDestinationHttpMethod.AddMember("GET", smithyprelude.Unit)
-
-	ApiDestinationHttpMethod_HEAD = ApiDestinationHttpMethod.AddMember("HEAD", smithyprelude.Unit)
-
-	ApiDestinationHttpMethod_OPTIONS = ApiDestinationHttpMethod.AddMember("OPTIONS", smithyprelude.Unit)
-
-	ApiDestinationHttpMethod_PUT = ApiDestinationHttpMethod.AddMember("PUT", smithyprelude.Unit)
-
-	ApiDestinationHttpMethod_PATCH = ApiDestinationHttpMethod.AddMember("PATCH", smithyprelude.Unit)
-
-	ApiDestinationHttpMethod_DELETE = ApiDestinationHttpMethod.AddMember("DELETE", smithyprelude.Unit)
-
-	ApiDestination_ApiDestinationArn = ApiDestination.AddMember("ApiDestinationArn", _ApiDestinationArn)
-
-	ApiDestination_Name = ApiDestination.AddMember("Name", _ApiDestinationName)
-
-	ApiDestination_ApiDestinationState = ApiDestination.AddMember("ApiDestinationState", ApiDestinationState)
-
-	ApiDestination_ConnectionArn = ApiDestination.AddMember("ConnectionArn", _ConnectionArn)
-
-	ApiDestination_InvocationEndpoint = ApiDestination.AddMember("InvocationEndpoint", _HttpsEndpoint)
-
-	ApiDestination_HttpMethod = ApiDestination.AddMember("HttpMethod", ApiDestinationHttpMethod)
-
-	ApiDestination_InvocationRateLimitPerSecond = ApiDestination.AddMember("InvocationRateLimitPerSecond", _ApiDestinationInvocationRateLimitPerSecond)
-
-	ApiDestination_CreationTime = ApiDestination.AddMember("CreationTime", _Timestamp)
-
-	ApiDestination_LastModifiedTime = ApiDestination.AddMember("LastModifiedTime", _Timestamp)
-
-	_ApiDestinationResponseList_member = _ApiDestinationResponseList.AddMember("member", ApiDestination)
-
-	ArchiveState_ENABLED = ArchiveState.AddMember("ENABLED", smithyprelude.Unit)
-
-	ArchiveState_DISABLED = ArchiveState.AddMember("DISABLED", smithyprelude.Unit)
-
-	ArchiveState_CREATING = ArchiveState.AddMember("CREATING", smithyprelude.Unit)
-
-	ArchiveState_UPDATING = ArchiveState.AddMember("UPDATING", smithyprelude.Unit)
-
-	ArchiveState_CREATE_FAILED = ArchiveState.AddMember("CREATE_FAILED", smithyprelude.Unit)
-
-	ArchiveState_UPDATE_FAILED = ArchiveState.AddMember("UPDATE_FAILED", smithyprelude.Unit)
-
-	Archive_ArchiveName = Archive.AddMember("ArchiveName", _ArchiveName)
-
-	Archive_EventSourceArn = Archive.AddMember("EventSourceArn", _Arn)
-
-	Archive_State = Archive.AddMember("State", ArchiveState)
-
-	Archive_StateReason = Archive.AddMember("StateReason", _ArchiveStateReason)
-
-	Archive_RetentionDays = Archive.AddMember("RetentionDays", _RetentionDays)
-
-	Archive_SizeBytes = Archive.AddMember("SizeBytes", _Long)
-
-	Archive_EventCount = Archive.AddMember("EventCount", _Long)
-
-	Archive_CreationTime = Archive.AddMember("CreationTime", _Timestamp)
-
-	_ArchiveResponseList_member = _ArchiveResponseList.AddMember("member", Archive)
-
-	AssignPublicIp_ENABLED = AssignPublicIp.AddMember("ENABLED", smithyprelude.Unit)
-
-	AssignPublicIp_DISABLED = AssignPublicIp.AddMember("DISABLED", smithyprelude.Unit)
-
-	_StringList_member = _StringList.AddMember("member", _String)
-
-	AwsVpcConfiguration_Subnets = AwsVpcConfiguration.AddMember("Subnets", _StringList)
-
-	AwsVpcConfiguration_SecurityGroups = AwsVpcConfiguration.AddMember("SecurityGroups", _StringList)
-
-	AwsVpcConfiguration_AssignPublicIp = AwsVpcConfiguration.AddMember("AssignPublicIp", AssignPublicIp)
-
-	BatchArrayProperties_Size = BatchArrayProperties.AddMember("Size", _Integer)
-
-	BatchRetryStrategy_Attempts = BatchRetryStrategy.AddMember("Attempts", _Integer)
-
-	BatchParameters_JobDefinition = BatchParameters.AddMember("JobDefinition", _String)
-
-	BatchParameters_JobName = BatchParameters.AddMember("JobName", _String)
-
-	BatchParameters_ArrayProperties = BatchParameters.AddMember("ArrayProperties", BatchArrayProperties)
-
-	BatchParameters_RetryStrategy = BatchParameters.AddMember("RetryStrategy", BatchRetryStrategy)
-
-	CapacityProviderStrategyItem_capacityProvider = CapacityProviderStrategyItem.AddMember("capacityProvider", _CapacityProvider)
-
-	CapacityProviderStrategyItem_weight = CapacityProviderStrategyItem.AddMember("weight", _CapacityProviderStrategyItemWeight)
-
-	CapacityProviderStrategyItem_base = CapacityProviderStrategyItem.AddMember("base", _CapacityProviderStrategyItemBase)
-
-	_CapacityProviderStrategy_member = _CapacityProviderStrategy.AddMember("member", CapacityProviderStrategyItem)
-
-	ConcurrentModificationException_message = ConcurrentModificationException.AddMember("message", _ErrorMessage)
-
-	Condition_Type = Condition.AddMember("Type", _String)
-
-	Condition_Key = Condition.AddMember("Key", _String)
-
-	Condition_Value = Condition.AddMember("Value", _String)
-
-	ConnectionState_CREATING = ConnectionState.AddMember("CREATING", smithyprelude.Unit)
-
-	ConnectionState_UPDATING = ConnectionState.AddMember("UPDATING", smithyprelude.Unit)
-
-	ConnectionState_DELETING = ConnectionState.AddMember("DELETING", smithyprelude.Unit)
-
-	ConnectionState_AUTHORIZED = ConnectionState.AddMember("AUTHORIZED", smithyprelude.Unit)
-
-	ConnectionState_DEAUTHORIZED = ConnectionState.AddMember("DEAUTHORIZED", smithyprelude.Unit)
-
-	ConnectionState_AUTHORIZING = ConnectionState.AddMember("AUTHORIZING", smithyprelude.Unit)
-
-	ConnectionState_DEAUTHORIZING = ConnectionState.AddMember("DEAUTHORIZING", smithyprelude.Unit)
-
-	ConnectionAuthorizationType_BASIC = ConnectionAuthorizationType.AddMember("BASIC", smithyprelude.Unit)
-
-	ConnectionAuthorizationType_OAUTH_CLIENT_CREDENTIALS = ConnectionAuthorizationType.AddMember("OAUTH_CLIENT_CREDENTIALS", smithyprelude.Unit)
-
-	ConnectionAuthorizationType_API_KEY = ConnectionAuthorizationType.AddMember("API_KEY", smithyprelude.Unit)
-
-	Connection_ConnectionArn = Connection.AddMember("ConnectionArn", _ConnectionArn)
-
-	Connection_Name = Connection.AddMember("Name", _ConnectionName)
-
-	Connection_ConnectionState = Connection.AddMember("ConnectionState", ConnectionState)
-
-	Connection_StateReason = Connection.AddMember("StateReason", _ConnectionStateReason)
-
-	Connection_AuthorizationType = Connection.AddMember("AuthorizationType", ConnectionAuthorizationType)
-
-	Connection_CreationTime = Connection.AddMember("CreationTime", _Timestamp)
-
-	Connection_LastModifiedTime = Connection.AddMember("LastModifiedTime", _Timestamp)
-
-	Connection_LastAuthorizedTime = Connection.AddMember("LastAuthorizedTime", _Timestamp)
-
-	ConnectionApiKeyAuthResponseParameters_ApiKeyName = ConnectionApiKeyAuthResponseParameters.AddMember("ApiKeyName", _AuthHeaderParameters)
-
-	ConnectionBasicAuthResponseParameters_Username = ConnectionBasicAuthResponseParameters.AddMember("Username", _AuthHeaderParameters)
-
-	ConnectionOAuthClientResponseParameters_ClientID = ConnectionOAuthClientResponseParameters.AddMember("ClientID", _AuthHeaderParameters)
-
-	ConnectionOAuthHttpMethod_GET = ConnectionOAuthHttpMethod.AddMember("GET", smithyprelude.Unit)
-
-	ConnectionOAuthHttpMethod_POST = ConnectionOAuthHttpMethod.AddMember("POST", smithyprelude.Unit)
-
-	ConnectionOAuthHttpMethod_PUT = ConnectionOAuthHttpMethod.AddMember("PUT", smithyprelude.Unit)
-
-	ConnectionHeaderParameter_Key = ConnectionHeaderParameter.AddMember("Key", _HeaderKey)
-
-	ConnectionHeaderParameter_Value = ConnectionHeaderParameter.AddMember("Value", _HeaderValueSensitive)
-
-	ConnectionHeaderParameter_IsValueSecret = ConnectionHeaderParameter.AddMember("IsValueSecret", _Boolean)
-
-	_ConnectionHeaderParametersList_member = _ConnectionHeaderParametersList.AddMember("member", ConnectionHeaderParameter)
-
-	ConnectionQueryStringParameter_Key = ConnectionQueryStringParameter.AddMember("Key", _QueryStringKey)
-
-	ConnectionQueryStringParameter_Value = ConnectionQueryStringParameter.AddMember("Value", _QueryStringValueSensitive)
-
-	ConnectionQueryStringParameter_IsValueSecret = ConnectionQueryStringParameter.AddMember("IsValueSecret", _Boolean)
-
-	_ConnectionQueryStringParametersList_member = _ConnectionQueryStringParametersList.AddMember("member", ConnectionQueryStringParameter)
-
-	ConnectionBodyParameter_Key = ConnectionBodyParameter.AddMember("Key", _String)
-
-	ConnectionBodyParameter_Value = ConnectionBodyParameter.AddMember("Value", _SensitiveString)
-
-	ConnectionBodyParameter_IsValueSecret = ConnectionBodyParameter.AddMember("IsValueSecret", _Boolean)
-
-	_ConnectionBodyParametersList_member = _ConnectionBodyParametersList.AddMember("member", ConnectionBodyParameter)
-
-	ConnectionHttpParameters_HeaderParameters = ConnectionHttpParameters.AddMember("HeaderParameters", _ConnectionHeaderParametersList)
-
-	ConnectionHttpParameters_QueryStringParameters = ConnectionHttpParameters.AddMember("QueryStringParameters", _ConnectionQueryStringParametersList)
-
-	ConnectionHttpParameters_BodyParameters = ConnectionHttpParameters.AddMember("BodyParameters", _ConnectionBodyParametersList)
-
-	ConnectionOAuthResponseParameters_ClientParameters = ConnectionOAuthResponseParameters.AddMember("ClientParameters", ConnectionOAuthClientResponseParameters)
-
-	ConnectionOAuthResponseParameters_AuthorizationEndpoint = ConnectionOAuthResponseParameters.AddMember("AuthorizationEndpoint", _HttpsEndpoint)
-
-	ConnectionOAuthResponseParameters_HttpMethod = ConnectionOAuthResponseParameters.AddMember("HttpMethod", ConnectionOAuthHttpMethod)
-
-	ConnectionOAuthResponseParameters_OAuthHttpParameters = ConnectionOAuthResponseParameters.AddMember("OAuthHttpParameters", ConnectionHttpParameters)
-
-	ConnectionAuthResponseParameters_BasicAuthParameters = ConnectionAuthResponseParameters.AddMember("BasicAuthParameters", ConnectionBasicAuthResponseParameters)
-
-	ConnectionAuthResponseParameters_OAuthParameters = ConnectionAuthResponseParameters.AddMember("OAuthParameters", ConnectionOAuthResponseParameters)
-
-	ConnectionAuthResponseParameters_ApiKeyAuthParameters = ConnectionAuthResponseParameters.AddMember("ApiKeyAuthParameters", ConnectionApiKeyAuthResponseParameters)
-
-	ConnectionAuthResponseParameters_InvocationHttpParameters = ConnectionAuthResponseParameters.AddMember("InvocationHttpParameters", ConnectionHttpParameters)
-
-	_ConnectionResponseList_member = _ConnectionResponseList.AddMember("member", Connection)
-
-	CreateConnectionApiKeyAuthRequestParameters_ApiKeyName = CreateConnectionApiKeyAuthRequestParameters.AddMember("ApiKeyName", _AuthHeaderParameters)
-
-	CreateConnectionApiKeyAuthRequestParameters_ApiKeyValue = CreateConnectionApiKeyAuthRequestParameters.AddMember("ApiKeyValue", _AuthHeaderParametersSensitive)
-
-	CreateConnectionBasicAuthRequestParameters_Username = CreateConnectionBasicAuthRequestParameters.AddMember("Username", _AuthHeaderParameters)
-
-	CreateConnectionBasicAuthRequestParameters_Password = CreateConnectionBasicAuthRequestParameters.AddMember("Password", _AuthHeaderParametersSensitive)
-
-	CreateConnectionOAuthClientRequestParameters_ClientID = CreateConnectionOAuthClientRequestParameters.AddMember("ClientID", _AuthHeaderParameters)
-
-	CreateConnectionOAuthClientRequestParameters_ClientSecret = CreateConnectionOAuthClientRequestParameters.AddMember("ClientSecret", _AuthHeaderParametersSensitive)
-
-	CreateConnectionOAuthRequestParameters_ClientParameters = CreateConnectionOAuthRequestParameters.AddMember("ClientParameters", CreateConnectionOAuthClientRequestParameters)
-
-	CreateConnectionOAuthRequestParameters_AuthorizationEndpoint = CreateConnectionOAuthRequestParameters.AddMember("AuthorizationEndpoint", _HttpsEndpoint)
-
-	CreateConnectionOAuthRequestParameters_HttpMethod = CreateConnectionOAuthRequestParameters.AddMember("HttpMethod", ConnectionOAuthHttpMethod)
-
-	CreateConnectionOAuthRequestParameters_OAuthHttpParameters = CreateConnectionOAuthRequestParameters.AddMember("OAuthHttpParameters", ConnectionHttpParameters)
-
-	CreateConnectionAuthRequestParameters_BasicAuthParameters = CreateConnectionAuthRequestParameters.AddMember("BasicAuthParameters", CreateConnectionBasicAuthRequestParameters)
-
-	CreateConnectionAuthRequestParameters_OAuthParameters = CreateConnectionAuthRequestParameters.AddMember("OAuthParameters", CreateConnectionOAuthRequestParameters)
-
-	CreateConnectionAuthRequestParameters_ApiKeyAuthParameters = CreateConnectionAuthRequestParameters.AddMember("ApiKeyAuthParameters", CreateConnectionApiKeyAuthRequestParameters)
-
-	CreateConnectionAuthRequestParameters_InvocationHttpParameters = CreateConnectionAuthRequestParameters.AddMember("InvocationHttpParameters", ConnectionHttpParameters)
-
-	DeadLetterConfig_Arn = DeadLetterConfig.AddMember("Arn", _ResourceArn)
-
-	LaunchType_EC2 = LaunchType.AddMember("EC2", smithyprelude.Unit)
-
-	LaunchType_FARGATE = LaunchType.AddMember("FARGATE", smithyprelude.Unit)
-
-	LaunchType_EXTERNAL = LaunchType.AddMember("EXTERNAL", smithyprelude.Unit)
-
-	NetworkConfiguration_awsvpcConfiguration = NetworkConfiguration.AddMember("awsvpcConfiguration", AwsVpcConfiguration)
-
-	PlacementConstraintType_DISTINCT_INSTANCE = PlacementConstraintType.AddMember("DISTINCT_INSTANCE", smithyprelude.Unit)
-
-	PlacementConstraintType_MEMBER_OF = PlacementConstraintType.AddMember("MEMBER_OF", smithyprelude.Unit)
-
-	PlacementConstraint_type = PlacementConstraint.AddMember("type", PlacementConstraintType)
-
-	PlacementConstraint_expression = PlacementConstraint.AddMember("expression", _PlacementConstraintExpression)
-
-	_PlacementConstraints_member = _PlacementConstraints.AddMember("member", PlacementConstraint)
-
-	PlacementStrategyType_RANDOM = PlacementStrategyType.AddMember("RANDOM", smithyprelude.Unit)
-
-	PlacementStrategyType_SPREAD = PlacementStrategyType.AddMember("SPREAD", smithyprelude.Unit)
-
-	PlacementStrategyType_BINPACK = PlacementStrategyType.AddMember("BINPACK", smithyprelude.Unit)
-
-	PlacementStrategy_type = PlacementStrategy.AddMember("type", PlacementStrategyType)
-
-	PlacementStrategy_field = PlacementStrategy.AddMember("field", _PlacementStrategyField)
-
-	_PlacementStrategies_member = _PlacementStrategies.AddMember("member", PlacementStrategy)
-
-	PropagateTags_TASK_DEFINITION = PropagateTags.AddMember("TASK_DEFINITION", smithyprelude.Unit)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	EcsParameters_TaskDefinitionArn = EcsParameters.AddMember("TaskDefinitionArn", _Arn)
-
-	EcsParameters_TaskCount = EcsParameters.AddMember("TaskCount", _LimitMin1)
-
-	EcsParameters_LaunchType = EcsParameters.AddMember("LaunchType", LaunchType)
-
-	EcsParameters_NetworkConfiguration = EcsParameters.AddMember("NetworkConfiguration", NetworkConfiguration)
-
-	EcsParameters_PlatformVersion = EcsParameters.AddMember("PlatformVersion", _String)
-
-	EcsParameters_Group = EcsParameters.AddMember("Group", _String)
-
-	EcsParameters_CapacityProviderStrategy = EcsParameters.AddMember("CapacityProviderStrategy", _CapacityProviderStrategy)
-
-	EcsParameters_EnableECSManagedTags = EcsParameters.AddMember("EnableECSManagedTags", _Boolean)
-
-	EcsParameters_EnableExecuteCommand = EcsParameters.AddMember("EnableExecuteCommand", _Boolean)
-
-	EcsParameters_PlacementConstraints = EcsParameters.AddMember("PlacementConstraints", _PlacementConstraints)
-
-	EcsParameters_PlacementStrategy = EcsParameters.AddMember("PlacementStrategy", _PlacementStrategies)
-
-	EcsParameters_PropagateTags = EcsParameters.AddMember("PropagateTags", PropagateTags)
-
-	EcsParameters_ReferenceId = EcsParameters.AddMember("ReferenceId", _ReferenceId)
-
-	EcsParameters_Tags = EcsParameters.AddMember("Tags", _TagList)
-
-	EventBus_Name = EventBus.AddMember("Name", _String)
-
-	EventBus_Arn = EventBus.AddMember("Arn", _String)
-
-	EventBus_Policy = EventBus.AddMember("Policy", _String)
-
-	_EventBusList_member = _EventBusList.AddMember("member", EventBus)
-
-	_EventResourceList_member = _EventResourceList.AddMember("member", _EventResource)
-
-	EventSourceState_PENDING = EventSourceState.AddMember("PENDING", smithyprelude.Unit)
-
-	EventSourceState_ACTIVE = EventSourceState.AddMember("ACTIVE", smithyprelude.Unit)
-
-	EventSourceState_DELETED = EventSourceState.AddMember("DELETED", smithyprelude.Unit)
-
-	EventSource_Arn = EventSource.AddMember("Arn", _String)
-
-	EventSource_CreatedBy = EventSource.AddMember("CreatedBy", _String)
-
-	EventSource_CreationTime = EventSource.AddMember("CreationTime", _Timestamp)
-
-	EventSource_ExpirationTime = EventSource.AddMember("ExpirationTime", _Timestamp)
-
-	EventSource_Name = EventSource.AddMember("Name", _String)
-
-	EventSource_State = EventSource.AddMember("State", EventSourceState)
-
-	_EventSourceList_member = _EventSourceList.AddMember("member", EventSource)
-
-	_HeaderParametersMap_key = _HeaderParametersMap.AddMember("key", _HeaderKey)
-
-	_HeaderParametersMap_value = _HeaderParametersMap.AddMember("value", _HeaderValue)
-
-	_PathParameterList_member = _PathParameterList.AddMember("member", _PathParameter)
-
-	_QueryStringParametersMap_key = _QueryStringParametersMap.AddMember("key", _QueryStringKey)
-
-	_QueryStringParametersMap_value = _QueryStringParametersMap.AddMember("value", _QueryStringValue)
-
-	HttpParameters_PathParameterValues = HttpParameters.AddMember("PathParameterValues", _PathParameterList)
-
-	HttpParameters_HeaderParameters = HttpParameters.AddMember("HeaderParameters", _HeaderParametersMap)
-
-	HttpParameters_QueryStringParameters = HttpParameters.AddMember("QueryStringParameters", _QueryStringParametersMap)
-
-	IllegalStatusException_message = IllegalStatusException.AddMember("message", _ErrorMessage)
-
-	_TransformerPaths_key = _TransformerPaths.AddMember("key", _InputTransformerPathKey)
-
-	_TransformerPaths_value = _TransformerPaths.AddMember("value", _TargetInputPath)
-
-	InputTransformer_InputPathsMap = InputTransformer.AddMember("InputPathsMap", _TransformerPaths)
-
-	InputTransformer_InputTemplate = InputTransformer.AddMember("InputTemplate", _TransformerInput)
-
-	InternalException_message = InternalException.AddMember("message", _ErrorMessage)
-
-	InvalidEventPatternException_message = InvalidEventPatternException.AddMember("message", _ErrorMessage)
-
-	InvalidStateException_message = InvalidStateException.AddMember("message", _ErrorMessage)
-
-	KinesisParameters_PartitionKeyPath = KinesisParameters.AddMember("PartitionKeyPath", _TargetPartitionKeyPath)
-
-	LimitExceededException_message = LimitExceededException.AddMember("message", _ErrorMessage)
-
-	ManagedRuleException_message = ManagedRuleException.AddMember("message", _ErrorMessage)
-
-	OperationDisabledException_message = OperationDisabledException.AddMember("message", _ErrorMessage)
-
-	PartnerEventSource_Arn = PartnerEventSource.AddMember("Arn", _String)
-
-	PartnerEventSource_Name = PartnerEventSource.AddMember("Name", _String)
-
-	PartnerEventSourceAccount_Account = PartnerEventSourceAccount.AddMember("Account", _AccountId)
-
-	PartnerEventSourceAccount_CreationTime = PartnerEventSourceAccount.AddMember("CreationTime", _Timestamp)
-
-	PartnerEventSourceAccount_ExpirationTime = PartnerEventSourceAccount.AddMember("ExpirationTime", _Timestamp)
-
-	PartnerEventSourceAccount_State = PartnerEventSourceAccount.AddMember("State", EventSourceState)
-
-	_PartnerEventSourceAccountList_member = _PartnerEventSourceAccountList.AddMember("member", PartnerEventSourceAccount)
-
-	_PartnerEventSourceList_member = _PartnerEventSourceList.AddMember("member", PartnerEventSource)
-
-	PolicyLengthExceededException_message = PolicyLengthExceededException.AddMember("message", _ErrorMessage)
-
-	PutEventsRequestEntry_Time = PutEventsRequestEntry.AddMember("Time", _EventTime)
-
-	PutEventsRequestEntry_Source = PutEventsRequestEntry.AddMember("Source", _String)
-
-	PutEventsRequestEntry_Resources = PutEventsRequestEntry.AddMember("Resources", _EventResourceList)
-
-	PutEventsRequestEntry_DetailType = PutEventsRequestEntry.AddMember("DetailType", _String)
-
-	PutEventsRequestEntry_Detail = PutEventsRequestEntry.AddMember("Detail", _String)
-
-	PutEventsRequestEntry_EventBusName = PutEventsRequestEntry.AddMember("EventBusName", _NonPartnerEventBusNameOrArn)
-
-	PutEventsRequestEntry_TraceHeader = PutEventsRequestEntry.AddMember("TraceHeader", _TraceHeader)
-
-	_PutEventsRequestEntryList_member = _PutEventsRequestEntryList.AddMember("member", PutEventsRequestEntry)
-
-	PutEventsResultEntry_EventId = PutEventsResultEntry.AddMember("EventId", _EventId)
-
-	PutEventsResultEntry_ErrorCode = PutEventsResultEntry.AddMember("ErrorCode", _ErrorCode)
-
-	PutEventsResultEntry_ErrorMessage = PutEventsResultEntry.AddMember("ErrorMessage", _ErrorMessage)
-
-	_PutEventsResultEntryList_member = _PutEventsResultEntryList.AddMember("member", PutEventsResultEntry)
-
-	PutPartnerEventsRequestEntry_Time = PutPartnerEventsRequestEntry.AddMember("Time", _EventTime)
-
-	PutPartnerEventsRequestEntry_Source = PutPartnerEventsRequestEntry.AddMember("Source", _EventSourceName)
-
-	PutPartnerEventsRequestEntry_Resources = PutPartnerEventsRequestEntry.AddMember("Resources", _EventResourceList)
-
-	PutPartnerEventsRequestEntry_DetailType = PutPartnerEventsRequestEntry.AddMember("DetailType", _String)
-
-	PutPartnerEventsRequestEntry_Detail = PutPartnerEventsRequestEntry.AddMember("Detail", _String)
-
-	_PutPartnerEventsRequestEntryList_member = _PutPartnerEventsRequestEntryList.AddMember("member", PutPartnerEventsRequestEntry)
-
-	PutPartnerEventsResultEntry_EventId = PutPartnerEventsResultEntry.AddMember("EventId", _EventId)
-
-	PutPartnerEventsResultEntry_ErrorCode = PutPartnerEventsResultEntry.AddMember("ErrorCode", _ErrorCode)
-
-	PutPartnerEventsResultEntry_ErrorMessage = PutPartnerEventsResultEntry.AddMember("ErrorMessage", _ErrorMessage)
-
-	_PutPartnerEventsResultEntryList_member = _PutPartnerEventsResultEntryList.AddMember("member", PutPartnerEventsResultEntry)
-
-	PutTargetsResultEntry_TargetId = PutTargetsResultEntry.AddMember("TargetId", _TargetId)
-
-	PutTargetsResultEntry_ErrorCode = PutTargetsResultEntry.AddMember("ErrorCode", _ErrorCode)
-
-	PutTargetsResultEntry_ErrorMessage = PutTargetsResultEntry.AddMember("ErrorMessage", _ErrorMessage)
-
-	_PutTargetsResultEntryList_member = _PutTargetsResultEntryList.AddMember("member", PutTargetsResultEntry)
-
-	RedshiftDataParameters_SecretManagerArn = RedshiftDataParameters.AddMember("SecretManagerArn", _RedshiftSecretManagerArn)
-
-	RedshiftDataParameters_Database = RedshiftDataParameters.AddMember("Database", _Database)
-
-	RedshiftDataParameters_DbUser = RedshiftDataParameters.AddMember("DbUser", _DbUser)
-
-	RedshiftDataParameters_Sql = RedshiftDataParameters.AddMember("Sql", _Sql)
-
-	RedshiftDataParameters_StatementName = RedshiftDataParameters.AddMember("StatementName", _StatementName)
-
-	RedshiftDataParameters_WithEvent = RedshiftDataParameters.AddMember("WithEvent", _Boolean)
-
-	RemoveTargetsResultEntry_TargetId = RemoveTargetsResultEntry.AddMember("TargetId", _TargetId)
-
-	RemoveTargetsResultEntry_ErrorCode = RemoveTargetsResultEntry.AddMember("ErrorCode", _ErrorCode)
-
-	RemoveTargetsResultEntry_ErrorMessage = RemoveTargetsResultEntry.AddMember("ErrorMessage", _ErrorMessage)
-
-	_RemoveTargetsResultEntryList_member = _RemoveTargetsResultEntryList.AddMember("member", RemoveTargetsResultEntry)
-
-	ReplayState_STARTING = ReplayState.AddMember("STARTING", smithyprelude.Unit)
-
-	ReplayState_RUNNING = ReplayState.AddMember("RUNNING", smithyprelude.Unit)
-
-	ReplayState_CANCELLING = ReplayState.AddMember("CANCELLING", smithyprelude.Unit)
-
-	ReplayState_COMPLETED = ReplayState.AddMember("COMPLETED", smithyprelude.Unit)
-
-	ReplayState_CANCELLED = ReplayState.AddMember("CANCELLED", smithyprelude.Unit)
-
-	ReplayState_FAILED = ReplayState.AddMember("FAILED", smithyprelude.Unit)
-
-	Replay_ReplayName = Replay.AddMember("ReplayName", _ReplayName)
-
-	Replay_EventSourceArn = Replay.AddMember("EventSourceArn", _Arn)
-
-	Replay_State = Replay.AddMember("State", ReplayState)
-
-	Replay_StateReason = Replay.AddMember("StateReason", _ReplayStateReason)
-
-	Replay_EventStartTime = Replay.AddMember("EventStartTime", _Timestamp)
-
-	Replay_EventEndTime = Replay.AddMember("EventEndTime", _Timestamp)
-
-	Replay_EventLastReplayedTime = Replay.AddMember("EventLastReplayedTime", _Timestamp)
-
-	Replay_ReplayStartTime = Replay.AddMember("ReplayStartTime", _Timestamp)
-
-	Replay_ReplayEndTime = Replay.AddMember("ReplayEndTime", _Timestamp)
-
-	_ReplayDestinationFilters_member = _ReplayDestinationFilters.AddMember("member", _Arn)
-
-	ReplayDestination_Arn = ReplayDestination.AddMember("Arn", _Arn)
-
-	ReplayDestination_FilterArns = ReplayDestination.AddMember("FilterArns", _ReplayDestinationFilters)
-
-	_ReplayList_member = _ReplayList.AddMember("member", Replay)
-
-	ResourceAlreadyExistsException_message = ResourceAlreadyExistsException.AddMember("message", _ErrorMessage)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _ErrorMessage)
-
-	RetryPolicy_MaximumRetryAttempts = RetryPolicy.AddMember("MaximumRetryAttempts", _MaximumRetryAttempts)
-
-	RetryPolicy_MaximumEventAgeInSeconds = RetryPolicy.AddMember("MaximumEventAgeInSeconds", _MaximumEventAgeInSeconds)
-
-	RuleState_ENABLED = RuleState.AddMember("ENABLED", smithyprelude.Unit)
-
-	RuleState_DISABLED = RuleState.AddMember("DISABLED", smithyprelude.Unit)
-
-	Rule_Name = Rule.AddMember("Name", _RuleName)
-
-	Rule_Arn = Rule.AddMember("Arn", _RuleArn)
-
-	Rule_EventPattern = Rule.AddMember("EventPattern", _EventPattern)
-
-	Rule_State = Rule.AddMember("State", RuleState)
-
-	Rule_Description = Rule.AddMember("Description", _RuleDescription)
-
-	Rule_ScheduleExpression = Rule.AddMember("ScheduleExpression", _ScheduleExpression)
-
-	Rule_RoleArn = Rule.AddMember("RoleArn", _RoleArn)
-
-	Rule_ManagedBy = Rule.AddMember("ManagedBy", _ManagedBy)
-
-	Rule_EventBusName = Rule.AddMember("EventBusName", _EventBusName)
-
-	_RuleNameList_member = _RuleNameList.AddMember("member", _RuleName)
-
-	_RuleResponseList_member = _RuleResponseList.AddMember("member", Rule)
-
-	_RunCommandTargetValues_member = _RunCommandTargetValues.AddMember("member", _RunCommandTargetValue)
-
-	RunCommandTarget_Key = RunCommandTarget.AddMember("Key", _RunCommandTargetKey)
-
-	RunCommandTarget_Values = RunCommandTarget.AddMember("Values", _RunCommandTargetValues)
-
-	_RunCommandTargets_member = _RunCommandTargets.AddMember("member", RunCommandTarget)
-
-	RunCommandParameters_RunCommandTargets = RunCommandParameters.AddMember("RunCommandTargets", _RunCommandTargets)
-
-	SageMakerPipelineParameter_Name = SageMakerPipelineParameter.AddMember("Name", _SageMakerPipelineParameterName)
-
-	SageMakerPipelineParameter_Value = SageMakerPipelineParameter.AddMember("Value", _SageMakerPipelineParameterValue)
-
-	_SageMakerPipelineParameterList_member = _SageMakerPipelineParameterList.AddMember("member", SageMakerPipelineParameter)
-
-	SageMakerPipelineParameters_PipelineParameterList = SageMakerPipelineParameters.AddMember("PipelineParameterList", _SageMakerPipelineParameterList)
-
-	SqsParameters_MessageGroupId = SqsParameters.AddMember("MessageGroupId", _MessageGroupId)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	Target_Id = Target.AddMember("Id", _TargetId)
-
-	Target_Arn = Target.AddMember("Arn", _TargetArn)
-
-	Target_RoleArn = Target.AddMember("RoleArn", _RoleArn)
-
-	Target_Input = Target.AddMember("Input", _TargetInput)
-
-	Target_InputPath = Target.AddMember("InputPath", _TargetInputPath)
-
-	Target_InputTransformer = Target.AddMember("InputTransformer", InputTransformer)
-
-	Target_KinesisParameters = Target.AddMember("KinesisParameters", KinesisParameters)
-
-	Target_RunCommandParameters = Target.AddMember("RunCommandParameters", RunCommandParameters)
-
-	Target_EcsParameters = Target.AddMember("EcsParameters", EcsParameters)
-
-	Target_BatchParameters = Target.AddMember("BatchParameters", BatchParameters)
-
-	Target_SqsParameters = Target.AddMember("SqsParameters", SqsParameters)
-
-	Target_HttpParameters = Target.AddMember("HttpParameters", HttpParameters)
-
-	Target_RedshiftDataParameters = Target.AddMember("RedshiftDataParameters", RedshiftDataParameters)
-
-	Target_SageMakerPipelineParameters = Target.AddMember("SageMakerPipelineParameters", SageMakerPipelineParameters)
-
-	Target_DeadLetterConfig = Target.AddMember("DeadLetterConfig", DeadLetterConfig)
-
-	Target_RetryPolicy = Target.AddMember("RetryPolicy", RetryPolicy)
-
-	_TargetIdList_member = _TargetIdList.AddMember("member", _TargetId)
-
-	_TargetList_member = _TargetList.AddMember("member", Target)
-
-	UpdateConnectionApiKeyAuthRequestParameters_ApiKeyName = UpdateConnectionApiKeyAuthRequestParameters.AddMember("ApiKeyName", _AuthHeaderParameters)
-
-	UpdateConnectionApiKeyAuthRequestParameters_ApiKeyValue = UpdateConnectionApiKeyAuthRequestParameters.AddMember("ApiKeyValue", _AuthHeaderParametersSensitive)
-
-	UpdateConnectionBasicAuthRequestParameters_Username = UpdateConnectionBasicAuthRequestParameters.AddMember("Username", _AuthHeaderParameters)
-
-	UpdateConnectionBasicAuthRequestParameters_Password = UpdateConnectionBasicAuthRequestParameters.AddMember("Password", _AuthHeaderParametersSensitive)
-
-	UpdateConnectionOAuthClientRequestParameters_ClientID = UpdateConnectionOAuthClientRequestParameters.AddMember("ClientID", _AuthHeaderParameters)
-
-	UpdateConnectionOAuthClientRequestParameters_ClientSecret = UpdateConnectionOAuthClientRequestParameters.AddMember("ClientSecret", _AuthHeaderParametersSensitive)
-
-	UpdateConnectionOAuthRequestParameters_ClientParameters = UpdateConnectionOAuthRequestParameters.AddMember("ClientParameters", UpdateConnectionOAuthClientRequestParameters)
-
-	UpdateConnectionOAuthRequestParameters_AuthorizationEndpoint = UpdateConnectionOAuthRequestParameters.AddMember("AuthorizationEndpoint", _HttpsEndpoint)
-
-	UpdateConnectionOAuthRequestParameters_HttpMethod = UpdateConnectionOAuthRequestParameters.AddMember("HttpMethod", ConnectionOAuthHttpMethod)
-
-	UpdateConnectionOAuthRequestParameters_OAuthHttpParameters = UpdateConnectionOAuthRequestParameters.AddMember("OAuthHttpParameters", ConnectionHttpParameters)
-
-	UpdateConnectionAuthRequestParameters_BasicAuthParameters = UpdateConnectionAuthRequestParameters.AddMember("BasicAuthParameters", UpdateConnectionBasicAuthRequestParameters)
-
-	UpdateConnectionAuthRequestParameters_OAuthParameters = UpdateConnectionAuthRequestParameters.AddMember("OAuthParameters", UpdateConnectionOAuthRequestParameters)
-
-	UpdateConnectionAuthRequestParameters_ApiKeyAuthParameters = UpdateConnectionAuthRequestParameters.AddMember("ApiKeyAuthParameters", UpdateConnectionApiKeyAuthRequestParameters)
-
-	UpdateConnectionAuthRequestParameters_InvocationHttpParameters = UpdateConnectionAuthRequestParameters.AddMember("InvocationHttpParameters", ConnectionHttpParameters)
-
-	ActivateEventSourceRequest_Name = ActivateEventSourceRequest.AddMember("Name", _EventSourceName)
-
-	CancelReplayRequest_ReplayName = CancelReplayRequest.AddMember("ReplayName", _ReplayName)
-
-	CancelReplayResponse_ReplayArn = CancelReplayResponse.AddMember("ReplayArn", _ReplayArn)
-
-	CancelReplayResponse_State = CancelReplayResponse.AddMember("State", ReplayState)
-
-	CancelReplayResponse_StateReason = CancelReplayResponse.AddMember("StateReason", _ReplayStateReason)
-
-	CreateApiDestinationRequest_Name = CreateApiDestinationRequest.AddMember("Name", _ApiDestinationName)
-
-	CreateApiDestinationRequest_Description = CreateApiDestinationRequest.AddMember("Description", _ApiDestinationDescription)
-
-	CreateApiDestinationRequest_ConnectionArn = CreateApiDestinationRequest.AddMember("ConnectionArn", _ConnectionArn)
-
-	CreateApiDestinationRequest_InvocationEndpoint = CreateApiDestinationRequest.AddMember("InvocationEndpoint", _HttpsEndpoint)
-
-	CreateApiDestinationRequest_HttpMethod = CreateApiDestinationRequest.AddMember("HttpMethod", ApiDestinationHttpMethod)
-
-	CreateApiDestinationRequest_InvocationRateLimitPerSecond = CreateApiDestinationRequest.AddMember("InvocationRateLimitPerSecond", _ApiDestinationInvocationRateLimitPerSecond)
-
-	CreateApiDestinationResponse_ApiDestinationArn = CreateApiDestinationResponse.AddMember("ApiDestinationArn", _ApiDestinationArn)
-
-	CreateApiDestinationResponse_ApiDestinationState = CreateApiDestinationResponse.AddMember("ApiDestinationState", ApiDestinationState)
-
-	CreateApiDestinationResponse_CreationTime = CreateApiDestinationResponse.AddMember("CreationTime", _Timestamp)
-
-	CreateApiDestinationResponse_LastModifiedTime = CreateApiDestinationResponse.AddMember("LastModifiedTime", _Timestamp)
-
-	CreateArchiveRequest_ArchiveName = CreateArchiveRequest.AddMember("ArchiveName", _ArchiveName)
-
-	CreateArchiveRequest_EventSourceArn = CreateArchiveRequest.AddMember("EventSourceArn", _Arn)
-
-	CreateArchiveRequest_Description = CreateArchiveRequest.AddMember("Description", _ArchiveDescription)
-
-	CreateArchiveRequest_EventPattern = CreateArchiveRequest.AddMember("EventPattern", _EventPattern)
-
-	CreateArchiveRequest_RetentionDays = CreateArchiveRequest.AddMember("RetentionDays", _RetentionDays)
-
-	CreateArchiveResponse_ArchiveArn = CreateArchiveResponse.AddMember("ArchiveArn", _ArchiveArn)
-
-	CreateArchiveResponse_State = CreateArchiveResponse.AddMember("State", ArchiveState)
-
-	CreateArchiveResponse_StateReason = CreateArchiveResponse.AddMember("StateReason", _ArchiveStateReason)
-
-	CreateArchiveResponse_CreationTime = CreateArchiveResponse.AddMember("CreationTime", _Timestamp)
-
-	CreateConnectionRequest_Name = CreateConnectionRequest.AddMember("Name", _ConnectionName)
-
-	CreateConnectionRequest_Description = CreateConnectionRequest.AddMember("Description", _ConnectionDescription)
-
-	CreateConnectionRequest_AuthorizationType = CreateConnectionRequest.AddMember("AuthorizationType", ConnectionAuthorizationType)
-
-	CreateConnectionRequest_AuthParameters = CreateConnectionRequest.AddMember("AuthParameters", CreateConnectionAuthRequestParameters)
-
-	CreateConnectionResponse_ConnectionArn = CreateConnectionResponse.AddMember("ConnectionArn", _ConnectionArn)
-
-	CreateConnectionResponse_ConnectionState = CreateConnectionResponse.AddMember("ConnectionState", ConnectionState)
-
-	CreateConnectionResponse_CreationTime = CreateConnectionResponse.AddMember("CreationTime", _Timestamp)
-
-	CreateConnectionResponse_LastModifiedTime = CreateConnectionResponse.AddMember("LastModifiedTime", _Timestamp)
-
-	CreateEventBusRequest_Name = CreateEventBusRequest.AddMember("Name", _EventBusName)
-
-	CreateEventBusRequest_EventSourceName = CreateEventBusRequest.AddMember("EventSourceName", _EventSourceName)
-
-	CreateEventBusRequest_Tags = CreateEventBusRequest.AddMember("Tags", _TagList)
-
-	CreateEventBusResponse_EventBusArn = CreateEventBusResponse.AddMember("EventBusArn", _String)
-
-	CreatePartnerEventSourceRequest_Name = CreatePartnerEventSourceRequest.AddMember("Name", _EventSourceName)
-
-	CreatePartnerEventSourceRequest_Account = CreatePartnerEventSourceRequest.AddMember("Account", _AccountId)
-
-	CreatePartnerEventSourceResponse_EventSourceArn = CreatePartnerEventSourceResponse.AddMember("EventSourceArn", _String)
-
-	DeactivateEventSourceRequest_Name = DeactivateEventSourceRequest.AddMember("Name", _EventSourceName)
-
-	DeauthorizeConnectionRequest_Name = DeauthorizeConnectionRequest.AddMember("Name", _ConnectionName)
-
-	DeauthorizeConnectionResponse_ConnectionArn = DeauthorizeConnectionResponse.AddMember("ConnectionArn", _ConnectionArn)
-
-	DeauthorizeConnectionResponse_ConnectionState = DeauthorizeConnectionResponse.AddMember("ConnectionState", ConnectionState)
-
-	DeauthorizeConnectionResponse_CreationTime = DeauthorizeConnectionResponse.AddMember("CreationTime", _Timestamp)
-
-	DeauthorizeConnectionResponse_LastModifiedTime = DeauthorizeConnectionResponse.AddMember("LastModifiedTime", _Timestamp)
-
-	DeauthorizeConnectionResponse_LastAuthorizedTime = DeauthorizeConnectionResponse.AddMember("LastAuthorizedTime", _Timestamp)
-
-	DeleteApiDestinationRequest_Name = DeleteApiDestinationRequest.AddMember("Name", _ApiDestinationName)
-
-	DeleteArchiveRequest_ArchiveName = DeleteArchiveRequest.AddMember("ArchiveName", _ArchiveName)
-
-	DeleteConnectionRequest_Name = DeleteConnectionRequest.AddMember("Name", _ConnectionName)
-
-	DeleteConnectionResponse_ConnectionArn = DeleteConnectionResponse.AddMember("ConnectionArn", _ConnectionArn)
-
-	DeleteConnectionResponse_ConnectionState = DeleteConnectionResponse.AddMember("ConnectionState", ConnectionState)
-
-	DeleteConnectionResponse_CreationTime = DeleteConnectionResponse.AddMember("CreationTime", _Timestamp)
-
-	DeleteConnectionResponse_LastModifiedTime = DeleteConnectionResponse.AddMember("LastModifiedTime", _Timestamp)
-
-	DeleteConnectionResponse_LastAuthorizedTime = DeleteConnectionResponse.AddMember("LastAuthorizedTime", _Timestamp)
-
-	DeleteEventBusRequest_Name = DeleteEventBusRequest.AddMember("Name", _EventBusName)
-
-	DeletePartnerEventSourceRequest_Name = DeletePartnerEventSourceRequest.AddMember("Name", _EventSourceName)
-
-	DeletePartnerEventSourceRequest_Account = DeletePartnerEventSourceRequest.AddMember("Account", _AccountId)
-
-	DeleteRuleRequest_Name = DeleteRuleRequest.AddMember("Name", _RuleName)
-
-	DeleteRuleRequest_EventBusName = DeleteRuleRequest.AddMember("EventBusName", _EventBusNameOrArn)
-
-	DeleteRuleRequest_Force = DeleteRuleRequest.AddMember("Force", _Boolean)
-
-	DescribeApiDestinationRequest_Name = DescribeApiDestinationRequest.AddMember("Name", _ApiDestinationName)
-
-	DescribeApiDestinationResponse_ApiDestinationArn = DescribeApiDestinationResponse.AddMember("ApiDestinationArn", _ApiDestinationArn)
-
-	DescribeApiDestinationResponse_Name = DescribeApiDestinationResponse.AddMember("Name", _ApiDestinationName)
-
-	DescribeApiDestinationResponse_Description = DescribeApiDestinationResponse.AddMember("Description", _ApiDestinationDescription)
-
-	DescribeApiDestinationResponse_ApiDestinationState = DescribeApiDestinationResponse.AddMember("ApiDestinationState", ApiDestinationState)
-
-	DescribeApiDestinationResponse_ConnectionArn = DescribeApiDestinationResponse.AddMember("ConnectionArn", _ConnectionArn)
-
-	DescribeApiDestinationResponse_InvocationEndpoint = DescribeApiDestinationResponse.AddMember("InvocationEndpoint", _HttpsEndpoint)
-
-	DescribeApiDestinationResponse_HttpMethod = DescribeApiDestinationResponse.AddMember("HttpMethod", ApiDestinationHttpMethod)
-
-	DescribeApiDestinationResponse_InvocationRateLimitPerSecond = DescribeApiDestinationResponse.AddMember("InvocationRateLimitPerSecond", _ApiDestinationInvocationRateLimitPerSecond)
-
-	DescribeApiDestinationResponse_CreationTime = DescribeApiDestinationResponse.AddMember("CreationTime", _Timestamp)
-
-	DescribeApiDestinationResponse_LastModifiedTime = DescribeApiDestinationResponse.AddMember("LastModifiedTime", _Timestamp)
-
-	DescribeArchiveRequest_ArchiveName = DescribeArchiveRequest.AddMember("ArchiveName", _ArchiveName)
-
-	DescribeArchiveResponse_ArchiveArn = DescribeArchiveResponse.AddMember("ArchiveArn", _ArchiveArn)
-
-	DescribeArchiveResponse_ArchiveName = DescribeArchiveResponse.AddMember("ArchiveName", _ArchiveName)
-
-	DescribeArchiveResponse_EventSourceArn = DescribeArchiveResponse.AddMember("EventSourceArn", _Arn)
-
-	DescribeArchiveResponse_Description = DescribeArchiveResponse.AddMember("Description", _ArchiveDescription)
-
-	DescribeArchiveResponse_EventPattern = DescribeArchiveResponse.AddMember("EventPattern", _EventPattern)
-
-	DescribeArchiveResponse_State = DescribeArchiveResponse.AddMember("State", ArchiveState)
-
-	DescribeArchiveResponse_StateReason = DescribeArchiveResponse.AddMember("StateReason", _ArchiveStateReason)
-
-	DescribeArchiveResponse_RetentionDays = DescribeArchiveResponse.AddMember("RetentionDays", _RetentionDays)
-
-	DescribeArchiveResponse_SizeBytes = DescribeArchiveResponse.AddMember("SizeBytes", _Long)
-
-	DescribeArchiveResponse_EventCount = DescribeArchiveResponse.AddMember("EventCount", _Long)
-
-	DescribeArchiveResponse_CreationTime = DescribeArchiveResponse.AddMember("CreationTime", _Timestamp)
-
-	DescribeConnectionRequest_Name = DescribeConnectionRequest.AddMember("Name", _ConnectionName)
-
-	DescribeConnectionResponse_ConnectionArn = DescribeConnectionResponse.AddMember("ConnectionArn", _ConnectionArn)
-
-	DescribeConnectionResponse_Name = DescribeConnectionResponse.AddMember("Name", _ConnectionName)
-
-	DescribeConnectionResponse_Description = DescribeConnectionResponse.AddMember("Description", _ConnectionDescription)
-
-	DescribeConnectionResponse_ConnectionState = DescribeConnectionResponse.AddMember("ConnectionState", ConnectionState)
-
-	DescribeConnectionResponse_StateReason = DescribeConnectionResponse.AddMember("StateReason", _ConnectionStateReason)
-
-	DescribeConnectionResponse_AuthorizationType = DescribeConnectionResponse.AddMember("AuthorizationType", ConnectionAuthorizationType)
-
-	DescribeConnectionResponse_SecretArn = DescribeConnectionResponse.AddMember("SecretArn", _SecretsManagerSecretArn)
-
-	DescribeConnectionResponse_AuthParameters = DescribeConnectionResponse.AddMember("AuthParameters", ConnectionAuthResponseParameters)
-
-	DescribeConnectionResponse_CreationTime = DescribeConnectionResponse.AddMember("CreationTime", _Timestamp)
-
-	DescribeConnectionResponse_LastModifiedTime = DescribeConnectionResponse.AddMember("LastModifiedTime", _Timestamp)
-
-	DescribeConnectionResponse_LastAuthorizedTime = DescribeConnectionResponse.AddMember("LastAuthorizedTime", _Timestamp)
-
-	DescribeEventBusRequest_Name = DescribeEventBusRequest.AddMember("Name", _EventBusNameOrArn)
-
-	DescribeEventBusResponse_Name = DescribeEventBusResponse.AddMember("Name", _String)
-
-	DescribeEventBusResponse_Arn = DescribeEventBusResponse.AddMember("Arn", _String)
-
-	DescribeEventBusResponse_Policy = DescribeEventBusResponse.AddMember("Policy", _String)
-
-	DescribeEventSourceRequest_Name = DescribeEventSourceRequest.AddMember("Name", _EventSourceName)
-
-	DescribeEventSourceResponse_Arn = DescribeEventSourceResponse.AddMember("Arn", _String)
-
-	DescribeEventSourceResponse_CreatedBy = DescribeEventSourceResponse.AddMember("CreatedBy", _String)
-
-	DescribeEventSourceResponse_CreationTime = DescribeEventSourceResponse.AddMember("CreationTime", _Timestamp)
-
-	DescribeEventSourceResponse_ExpirationTime = DescribeEventSourceResponse.AddMember("ExpirationTime", _Timestamp)
-
-	DescribeEventSourceResponse_Name = DescribeEventSourceResponse.AddMember("Name", _String)
-
-	DescribeEventSourceResponse_State = DescribeEventSourceResponse.AddMember("State", EventSourceState)
-
-	DescribePartnerEventSourceRequest_Name = DescribePartnerEventSourceRequest.AddMember("Name", _EventSourceName)
-
-	DescribePartnerEventSourceResponse_Arn = DescribePartnerEventSourceResponse.AddMember("Arn", _String)
-
-	DescribePartnerEventSourceResponse_Name = DescribePartnerEventSourceResponse.AddMember("Name", _String)
-
-	DescribeReplayRequest_ReplayName = DescribeReplayRequest.AddMember("ReplayName", _ReplayName)
-
-	DescribeReplayResponse_ReplayName = DescribeReplayResponse.AddMember("ReplayName", _ReplayName)
-
-	DescribeReplayResponse_ReplayArn = DescribeReplayResponse.AddMember("ReplayArn", _ReplayArn)
-
-	DescribeReplayResponse_Description = DescribeReplayResponse.AddMember("Description", _ReplayDescription)
-
-	DescribeReplayResponse_State = DescribeReplayResponse.AddMember("State", ReplayState)
-
-	DescribeReplayResponse_StateReason = DescribeReplayResponse.AddMember("StateReason", _ReplayStateReason)
-
-	DescribeReplayResponse_EventSourceArn = DescribeReplayResponse.AddMember("EventSourceArn", _Arn)
-
-	DescribeReplayResponse_Destination = DescribeReplayResponse.AddMember("Destination", ReplayDestination)
-
-	DescribeReplayResponse_EventStartTime = DescribeReplayResponse.AddMember("EventStartTime", _Timestamp)
-
-	DescribeReplayResponse_EventEndTime = DescribeReplayResponse.AddMember("EventEndTime", _Timestamp)
-
-	DescribeReplayResponse_EventLastReplayedTime = DescribeReplayResponse.AddMember("EventLastReplayedTime", _Timestamp)
-
-	DescribeReplayResponse_ReplayStartTime = DescribeReplayResponse.AddMember("ReplayStartTime", _Timestamp)
-
-	DescribeReplayResponse_ReplayEndTime = DescribeReplayResponse.AddMember("ReplayEndTime", _Timestamp)
-
-	DescribeRuleRequest_Name = DescribeRuleRequest.AddMember("Name", _RuleName)
-
-	DescribeRuleRequest_EventBusName = DescribeRuleRequest.AddMember("EventBusName", _EventBusNameOrArn)
-
-	DescribeRuleResponse_Name = DescribeRuleResponse.AddMember("Name", _RuleName)
-
-	DescribeRuleResponse_Arn = DescribeRuleResponse.AddMember("Arn", _RuleArn)
-
-	DescribeRuleResponse_EventPattern = DescribeRuleResponse.AddMember("EventPattern", _EventPattern)
-
-	DescribeRuleResponse_ScheduleExpression = DescribeRuleResponse.AddMember("ScheduleExpression", _ScheduleExpression)
-
-	DescribeRuleResponse_State = DescribeRuleResponse.AddMember("State", RuleState)
-
-	DescribeRuleResponse_Description = DescribeRuleResponse.AddMember("Description", _RuleDescription)
-
-	DescribeRuleResponse_RoleArn = DescribeRuleResponse.AddMember("RoleArn", _RoleArn)
-
-	DescribeRuleResponse_ManagedBy = DescribeRuleResponse.AddMember("ManagedBy", _ManagedBy)
-
-	DescribeRuleResponse_EventBusName = DescribeRuleResponse.AddMember("EventBusName", _EventBusName)
-
-	DescribeRuleResponse_CreatedBy = DescribeRuleResponse.AddMember("CreatedBy", _CreatedBy)
-
-	DisableRuleRequest_Name = DisableRuleRequest.AddMember("Name", _RuleName)
-
-	DisableRuleRequest_EventBusName = DisableRuleRequest.AddMember("EventBusName", _EventBusNameOrArn)
-
-	EnableRuleRequest_Name = EnableRuleRequest.AddMember("Name", _RuleName)
-
-	EnableRuleRequest_EventBusName = EnableRuleRequest.AddMember("EventBusName", _EventBusNameOrArn)
-
-	ListApiDestinationsRequest_NamePrefix = ListApiDestinationsRequest.AddMember("NamePrefix", _ApiDestinationName)
-
-	ListApiDestinationsRequest_ConnectionArn = ListApiDestinationsRequest.AddMember("ConnectionArn", _ConnectionArn)
-
-	ListApiDestinationsRequest_NextToken = ListApiDestinationsRequest.AddMember("NextToken", _NextToken)
-
-	ListApiDestinationsRequest_Limit = ListApiDestinationsRequest.AddMember("Limit", _LimitMax100)
-
-	ListApiDestinationsResponse_ApiDestinations = ListApiDestinationsResponse.AddMember("ApiDestinations", _ApiDestinationResponseList)
-
-	ListApiDestinationsResponse_NextToken = ListApiDestinationsResponse.AddMember("NextToken", _NextToken)
-
-	ListArchivesRequest_NamePrefix = ListArchivesRequest.AddMember("NamePrefix", _ArchiveName)
-
-	ListArchivesRequest_EventSourceArn = ListArchivesRequest.AddMember("EventSourceArn", _Arn)
-
-	ListArchivesRequest_State = ListArchivesRequest.AddMember("State", ArchiveState)
-
-	ListArchivesRequest_NextToken = ListArchivesRequest.AddMember("NextToken", _NextToken)
-
-	ListArchivesRequest_Limit = ListArchivesRequest.AddMember("Limit", _LimitMax100)
-
-	ListArchivesResponse_Archives = ListArchivesResponse.AddMember("Archives", _ArchiveResponseList)
-
-	ListArchivesResponse_NextToken = ListArchivesResponse.AddMember("NextToken", _NextToken)
-
-	ListConnectionsRequest_NamePrefix = ListConnectionsRequest.AddMember("NamePrefix", _ConnectionName)
-
-	ListConnectionsRequest_ConnectionState = ListConnectionsRequest.AddMember("ConnectionState", ConnectionState)
-
-	ListConnectionsRequest_NextToken = ListConnectionsRequest.AddMember("NextToken", _NextToken)
-
-	ListConnectionsRequest_Limit = ListConnectionsRequest.AddMember("Limit", _LimitMax100)
-
-	ListConnectionsResponse_Connections = ListConnectionsResponse.AddMember("Connections", _ConnectionResponseList)
-
-	ListConnectionsResponse_NextToken = ListConnectionsResponse.AddMember("NextToken", _NextToken)
-
-	ListEventBusesRequest_NamePrefix = ListEventBusesRequest.AddMember("NamePrefix", _EventBusName)
-
-	ListEventBusesRequest_NextToken = ListEventBusesRequest.AddMember("NextToken", _NextToken)
-
-	ListEventBusesRequest_Limit = ListEventBusesRequest.AddMember("Limit", _LimitMax100)
-
-	ListEventBusesResponse_EventBuses = ListEventBusesResponse.AddMember("EventBuses", _EventBusList)
-
-	ListEventBusesResponse_NextToken = ListEventBusesResponse.AddMember("NextToken", _NextToken)
-
-	ListEventSourcesRequest_NamePrefix = ListEventSourcesRequest.AddMember("NamePrefix", _EventSourceNamePrefix)
-
-	ListEventSourcesRequest_NextToken = ListEventSourcesRequest.AddMember("NextToken", _NextToken)
-
-	ListEventSourcesRequest_Limit = ListEventSourcesRequest.AddMember("Limit", _LimitMax100)
-
-	ListEventSourcesResponse_EventSources = ListEventSourcesResponse.AddMember("EventSources", _EventSourceList)
-
-	ListEventSourcesResponse_NextToken = ListEventSourcesResponse.AddMember("NextToken", _NextToken)
-
-	ListPartnerEventSourceAccountsRequest_EventSourceName = ListPartnerEventSourceAccountsRequest.AddMember("EventSourceName", _EventSourceName)
-
-	ListPartnerEventSourceAccountsRequest_NextToken = ListPartnerEventSourceAccountsRequest.AddMember("NextToken", _NextToken)
-
-	ListPartnerEventSourceAccountsRequest_Limit = ListPartnerEventSourceAccountsRequest.AddMember("Limit", _LimitMax100)
-
-	ListPartnerEventSourceAccountsResponse_PartnerEventSourceAccounts = ListPartnerEventSourceAccountsResponse.AddMember("PartnerEventSourceAccounts", _PartnerEventSourceAccountList)
-
-	ListPartnerEventSourceAccountsResponse_NextToken = ListPartnerEventSourceAccountsResponse.AddMember("NextToken", _NextToken)
-
-	ListPartnerEventSourcesRequest_NamePrefix = ListPartnerEventSourcesRequest.AddMember("NamePrefix", _PartnerEventSourceNamePrefix)
-
-	ListPartnerEventSourcesRequest_NextToken = ListPartnerEventSourcesRequest.AddMember("NextToken", _NextToken)
-
-	ListPartnerEventSourcesRequest_Limit = ListPartnerEventSourcesRequest.AddMember("Limit", _LimitMax100)
-
-	ListPartnerEventSourcesResponse_PartnerEventSources = ListPartnerEventSourcesResponse.AddMember("PartnerEventSources", _PartnerEventSourceList)
-
-	ListPartnerEventSourcesResponse_NextToken = ListPartnerEventSourcesResponse.AddMember("NextToken", _NextToken)
-
-	ListReplaysRequest_NamePrefix = ListReplaysRequest.AddMember("NamePrefix", _ReplayName)
-
-	ListReplaysRequest_State = ListReplaysRequest.AddMember("State", ReplayState)
-
-	ListReplaysRequest_EventSourceArn = ListReplaysRequest.AddMember("EventSourceArn", _Arn)
-
-	ListReplaysRequest_NextToken = ListReplaysRequest.AddMember("NextToken", _NextToken)
-
-	ListReplaysRequest_Limit = ListReplaysRequest.AddMember("Limit", _LimitMax100)
-
-	ListReplaysResponse_Replays = ListReplaysResponse.AddMember("Replays", _ReplayList)
-
-	ListReplaysResponse_NextToken = ListReplaysResponse.AddMember("NextToken", _NextToken)
-
-	ListRuleNamesByTargetRequest_TargetArn = ListRuleNamesByTargetRequest.AddMember("TargetArn", _TargetArn)
-
-	ListRuleNamesByTargetRequest_EventBusName = ListRuleNamesByTargetRequest.AddMember("EventBusName", _EventBusNameOrArn)
-
-	ListRuleNamesByTargetRequest_NextToken = ListRuleNamesByTargetRequest.AddMember("NextToken", _NextToken)
-
-	ListRuleNamesByTargetRequest_Limit = ListRuleNamesByTargetRequest.AddMember("Limit", _LimitMax100)
-
-	ListRuleNamesByTargetResponse_RuleNames = ListRuleNamesByTargetResponse.AddMember("RuleNames", _RuleNameList)
-
-	ListRuleNamesByTargetResponse_NextToken = ListRuleNamesByTargetResponse.AddMember("NextToken", _NextToken)
-
-	ListRulesRequest_NamePrefix = ListRulesRequest.AddMember("NamePrefix", _RuleName)
-
-	ListRulesRequest_EventBusName = ListRulesRequest.AddMember("EventBusName", _EventBusNameOrArn)
-
-	ListRulesRequest_NextToken = ListRulesRequest.AddMember("NextToken", _NextToken)
-
-	ListRulesRequest_Limit = ListRulesRequest.AddMember("Limit", _LimitMax100)
-
-	ListRulesResponse_Rules = ListRulesResponse.AddMember("Rules", _RuleResponseList)
-
-	ListRulesResponse_NextToken = ListRulesResponse.AddMember("NextToken", _NextToken)
-
-	ListTagsForResourceRequest_ResourceARN = ListTagsForResourceRequest.AddMember("ResourceARN", _Arn)
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _TagList)
-
-	ListTargetsByRuleRequest_Rule = ListTargetsByRuleRequest.AddMember("Rule", _RuleName)
-
-	ListTargetsByRuleRequest_EventBusName = ListTargetsByRuleRequest.AddMember("EventBusName", _EventBusNameOrArn)
-
-	ListTargetsByRuleRequest_NextToken = ListTargetsByRuleRequest.AddMember("NextToken", _NextToken)
-
-	ListTargetsByRuleRequest_Limit = ListTargetsByRuleRequest.AddMember("Limit", _LimitMax100)
-
-	ListTargetsByRuleResponse_Targets = ListTargetsByRuleResponse.AddMember("Targets", _TargetList)
-
-	ListTargetsByRuleResponse_NextToken = ListTargetsByRuleResponse.AddMember("NextToken", _NextToken)
-
-	PutEventsRequest_Entries = PutEventsRequest.AddMember("Entries", _PutEventsRequestEntryList)
-
-	PutEventsResponse_FailedEntryCount = PutEventsResponse.AddMember("FailedEntryCount", _Integer)
-
-	PutEventsResponse_Entries = PutEventsResponse.AddMember("Entries", _PutEventsResultEntryList)
-
-	PutPartnerEventsRequest_Entries = PutPartnerEventsRequest.AddMember("Entries", _PutPartnerEventsRequestEntryList)
-
-	PutPartnerEventsResponse_FailedEntryCount = PutPartnerEventsResponse.AddMember("FailedEntryCount", _Integer)
-
-	PutPartnerEventsResponse_Entries = PutPartnerEventsResponse.AddMember("Entries", _PutPartnerEventsResultEntryList)
-
-	PutPermissionRequest_EventBusName = PutPermissionRequest.AddMember("EventBusName", _NonPartnerEventBusName)
-
-	PutPermissionRequest_Action = PutPermissionRequest.AddMember("Action", _Action)
-
-	PutPermissionRequest_Principal = PutPermissionRequest.AddMember("Principal", _Principal)
-
-	PutPermissionRequest_StatementId = PutPermissionRequest.AddMember("StatementId", _StatementId)
-
-	PutPermissionRequest_Condition = PutPermissionRequest.AddMember("Condition", Condition)
-
-	PutPermissionRequest_Policy = PutPermissionRequest.AddMember("Policy", _String)
-
-	PutRuleRequest_Name = PutRuleRequest.AddMember("Name", _RuleName)
-
-	PutRuleRequest_ScheduleExpression = PutRuleRequest.AddMember("ScheduleExpression", _ScheduleExpression)
-
-	PutRuleRequest_EventPattern = PutRuleRequest.AddMember("EventPattern", _EventPattern)
-
-	PutRuleRequest_State = PutRuleRequest.AddMember("State", RuleState)
-
-	PutRuleRequest_Description = PutRuleRequest.AddMember("Description", _RuleDescription)
-
-	PutRuleRequest_RoleArn = PutRuleRequest.AddMember("RoleArn", _RoleArn)
-
-	PutRuleRequest_Tags = PutRuleRequest.AddMember("Tags", _TagList)
-
-	PutRuleRequest_EventBusName = PutRuleRequest.AddMember("EventBusName", _EventBusNameOrArn)
-
-	PutRuleResponse_RuleArn = PutRuleResponse.AddMember("RuleArn", _RuleArn)
-
-	PutTargetsRequest_Rule = PutTargetsRequest.AddMember("Rule", _RuleName)
-
-	PutTargetsRequest_EventBusName = PutTargetsRequest.AddMember("EventBusName", _EventBusNameOrArn)
-
-	PutTargetsRequest_Targets = PutTargetsRequest.AddMember("Targets", _TargetList)
-
-	PutTargetsResponse_FailedEntryCount = PutTargetsResponse.AddMember("FailedEntryCount", _Integer)
-
-	PutTargetsResponse_FailedEntries = PutTargetsResponse.AddMember("FailedEntries", _PutTargetsResultEntryList)
-
-	RemovePermissionRequest_StatementId = RemovePermissionRequest.AddMember("StatementId", _StatementId)
-
-	RemovePermissionRequest_RemoveAllPermissions = RemovePermissionRequest.AddMember("RemoveAllPermissions", _Boolean)
-
-	RemovePermissionRequest_EventBusName = RemovePermissionRequest.AddMember("EventBusName", _NonPartnerEventBusName)
-
-	RemoveTargetsRequest_Rule = RemoveTargetsRequest.AddMember("Rule", _RuleName)
-
-	RemoveTargetsRequest_EventBusName = RemoveTargetsRequest.AddMember("EventBusName", _EventBusNameOrArn)
-
-	RemoveTargetsRequest_Ids = RemoveTargetsRequest.AddMember("Ids", _TargetIdList)
-
-	RemoveTargetsRequest_Force = RemoveTargetsRequest.AddMember("Force", _Boolean)
-
-	RemoveTargetsResponse_FailedEntryCount = RemoveTargetsResponse.AddMember("FailedEntryCount", _Integer)
-
-	RemoveTargetsResponse_FailedEntries = RemoveTargetsResponse.AddMember("FailedEntries", _RemoveTargetsResultEntryList)
-
-	StartReplayRequest_ReplayName = StartReplayRequest.AddMember("ReplayName", _ReplayName)
-
-	StartReplayRequest_Description = StartReplayRequest.AddMember("Description", _ReplayDescription)
-
-	StartReplayRequest_EventSourceArn = StartReplayRequest.AddMember("EventSourceArn", _Arn)
-
-	StartReplayRequest_EventStartTime = StartReplayRequest.AddMember("EventStartTime", _Timestamp)
-
-	StartReplayRequest_EventEndTime = StartReplayRequest.AddMember("EventEndTime", _Timestamp)
-
-	StartReplayRequest_Destination = StartReplayRequest.AddMember("Destination", ReplayDestination)
-
-	StartReplayResponse_ReplayArn = StartReplayResponse.AddMember("ReplayArn", _ReplayArn)
-
-	StartReplayResponse_State = StartReplayResponse.AddMember("State", ReplayState)
-
-	StartReplayResponse_StateReason = StartReplayResponse.AddMember("StateReason", _ReplayStateReason)
-
-	StartReplayResponse_ReplayStartTime = StartReplayResponse.AddMember("ReplayStartTime", _Timestamp)
-
-	TagResourceRequest_ResourceARN = TagResourceRequest.AddMember("ResourceARN", _Arn)
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _TagList)
-
-	TestEventPatternRequest_EventPattern = TestEventPatternRequest.AddMember("EventPattern", _EventPattern)
-
-	TestEventPatternRequest_Event = TestEventPatternRequest.AddMember("Event", _String)
-
-	TestEventPatternResponse_Result = TestEventPatternResponse.AddMember("Result", _Boolean)
-
-	UntagResourceRequest_ResourceARN = UntagResourceRequest.AddMember("ResourceARN", _Arn)
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList)
-
-	UpdateApiDestinationRequest_Name = UpdateApiDestinationRequest.AddMember("Name", _ApiDestinationName)
-
-	UpdateApiDestinationRequest_Description = UpdateApiDestinationRequest.AddMember("Description", _ApiDestinationDescription)
-
-	UpdateApiDestinationRequest_ConnectionArn = UpdateApiDestinationRequest.AddMember("ConnectionArn", _ConnectionArn)
-
-	UpdateApiDestinationRequest_InvocationEndpoint = UpdateApiDestinationRequest.AddMember("InvocationEndpoint", _HttpsEndpoint)
-
-	UpdateApiDestinationRequest_HttpMethod = UpdateApiDestinationRequest.AddMember("HttpMethod", ApiDestinationHttpMethod)
-
-	UpdateApiDestinationRequest_InvocationRateLimitPerSecond = UpdateApiDestinationRequest.AddMember("InvocationRateLimitPerSecond", _ApiDestinationInvocationRateLimitPerSecond)
-
-	UpdateApiDestinationResponse_ApiDestinationArn = UpdateApiDestinationResponse.AddMember("ApiDestinationArn", _ApiDestinationArn)
-
-	UpdateApiDestinationResponse_ApiDestinationState = UpdateApiDestinationResponse.AddMember("ApiDestinationState", ApiDestinationState)
-
-	UpdateApiDestinationResponse_CreationTime = UpdateApiDestinationResponse.AddMember("CreationTime", _Timestamp)
-
-	UpdateApiDestinationResponse_LastModifiedTime = UpdateApiDestinationResponse.AddMember("LastModifiedTime", _Timestamp)
-
-	UpdateArchiveRequest_ArchiveName = UpdateArchiveRequest.AddMember("ArchiveName", _ArchiveName)
-
-	UpdateArchiveRequest_Description = UpdateArchiveRequest.AddMember("Description", _ArchiveDescription)
-
-	UpdateArchiveRequest_EventPattern = UpdateArchiveRequest.AddMember("EventPattern", _EventPattern)
-
-	UpdateArchiveRequest_RetentionDays = UpdateArchiveRequest.AddMember("RetentionDays", _RetentionDays)
-
-	UpdateArchiveResponse_ArchiveArn = UpdateArchiveResponse.AddMember("ArchiveArn", _ArchiveArn)
-
-	UpdateArchiveResponse_State = UpdateArchiveResponse.AddMember("State", ArchiveState)
-
-	UpdateArchiveResponse_StateReason = UpdateArchiveResponse.AddMember("StateReason", _ArchiveStateReason)
-
-	UpdateArchiveResponse_CreationTime = UpdateArchiveResponse.AddMember("CreationTime", _Timestamp)
-
-	UpdateConnectionRequest_Name = UpdateConnectionRequest.AddMember("Name", _ConnectionName)
-
-	UpdateConnectionRequest_Description = UpdateConnectionRequest.AddMember("Description", _ConnectionDescription)
-
-	UpdateConnectionRequest_AuthorizationType = UpdateConnectionRequest.AddMember("AuthorizationType", ConnectionAuthorizationType)
-
-	UpdateConnectionRequest_AuthParameters = UpdateConnectionRequest.AddMember("AuthParameters", UpdateConnectionAuthRequestParameters)
-
-	UpdateConnectionResponse_ConnectionArn = UpdateConnectionResponse.AddMember("ConnectionArn", _ConnectionArn)
-
-	UpdateConnectionResponse_ConnectionState = UpdateConnectionResponse.AddMember("ConnectionState", ConnectionState)
-
-	UpdateConnectionResponse_CreationTime = UpdateConnectionResponse.AddMember("CreationTime", _Timestamp)
-
-	UpdateConnectionResponse_LastModifiedTime = UpdateConnectionResponse.AddMember("LastModifiedTime", _Timestamp)
-
-	UpdateConnectionResponse_LastAuthorizedTime = UpdateConnectionResponse.AddMember("LastAuthorizedTime", _Timestamp)
-
-}
+var (
+	iActivateEventSource                          = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ActivateEventSource"}
+	iCancelReplay                                 = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "CancelReplay"}
+	iCreateApiDestination                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "CreateApiDestination"}
+	iCreateArchive                                = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "CreateArchive"}
+	iCreateConnection                             = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "CreateConnection"}
+	iCreateEventBus                               = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "CreateEventBus"}
+	iCreatePartnerEventSource                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "CreatePartnerEventSource"}
+	iDeactivateEventSource                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "DeactivateEventSource"}
+	iDeauthorizeConnection                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "DeauthorizeConnection"}
+	iDeleteApiDestination                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "DeleteApiDestination"}
+	iDeleteArchive                                = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "DeleteArchive"}
+	iDeleteConnection                             = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "DeleteConnection"}
+	iDeleteEventBus                               = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "DeleteEventBus"}
+	iDeletePartnerEventSource                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "DeletePartnerEventSource"}
+	iDeleteRule                                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "DeleteRule"}
+	iDescribeApiDestination                       = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "DescribeApiDestination"}
+	iDescribeArchive                              = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "DescribeArchive"}
+	iDescribeConnection                           = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "DescribeConnection"}
+	iDescribeEventBus                             = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "DescribeEventBus"}
+	iDescribeEventSource                          = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "DescribeEventSource"}
+	iDescribePartnerEventSource                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "DescribePartnerEventSource"}
+	iDescribeReplay                               = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "DescribeReplay"}
+	iDescribeRule                                 = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "DescribeRule"}
+	iDisableRule                                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "DisableRule"}
+	iEnableRule                                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "EnableRule"}
+	iListApiDestinations                          = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ListApiDestinations"}
+	iListArchives                                 = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ListArchives"}
+	iListConnections                              = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ListConnections"}
+	iListEventBuses                               = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ListEventBuses"}
+	iListEventSources                             = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ListEventSources"}
+	iListPartnerEventSourceAccounts               = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ListPartnerEventSourceAccounts"}
+	iListPartnerEventSources                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ListPartnerEventSources"}
+	iListReplays                                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ListReplays"}
+	iListRuleNamesByTarget                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ListRuleNamesByTarget"}
+	iListRules                                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ListRules"}
+	iListTagsForResource                          = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ListTagsForResource"}
+	iListTargetsByRule                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ListTargetsByRule"}
+	iPutEvents                                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "PutEvents"}
+	iPutPartnerEvents                             = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "PutPartnerEvents"}
+	iPutPermission                                = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "PutPermission"}
+	iPutRule                                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "PutRule"}
+	iPutTargets                                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "PutTargets"}
+	iRemovePermission                             = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "RemovePermission"}
+	iRemoveTargets                                = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "RemoveTargets"}
+	iStartReplay                                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "StartReplay"}
+	iTagResource                                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "TagResource"}
+	iTestEventPattern                             = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "TestEventPattern"}
+	iUntagResource                                = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "UntagResource"}
+	iUpdateApiDestination                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "UpdateApiDestination"}
+	iUpdateArchive                                = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "UpdateArchive"}
+	iUpdateConnection                             = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "UpdateConnection"}
+	i_AWSEvents                                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "AWSEvents"}
+	i_AccountId                                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "AccountId"}
+	i_Action                                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "Action"}
+	iApiDestination                               = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ApiDestination"}
+	i_ApiDestinationArn                           = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ApiDestinationArn"}
+	i_ApiDestinationDescription                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ApiDestinationDescription"}
+	iApiDestinationHttpMethod                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ApiDestinationHttpMethod"}
+	i_ApiDestinationInvocationRateLimitPerSecond  = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ApiDestinationInvocationRateLimitPerSecond"}
+	i_ApiDestinationName                          = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ApiDestinationName"}
+	i_ApiDestinationResponseList                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ApiDestinationResponseList"}
+	iApiDestinationState                          = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ApiDestinationState"}
+	iArchive                                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "Archive"}
+	i_ArchiveArn                                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ArchiveArn"}
+	i_ArchiveDescription                          = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ArchiveDescription"}
+	i_ArchiveName                                 = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ArchiveName"}
+	i_ArchiveResponseList                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ArchiveResponseList"}
+	iArchiveState                                 = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ArchiveState"}
+	i_ArchiveStateReason                          = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ArchiveStateReason"}
+	i_Arn                                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "Arn"}
+	iAssignPublicIp                               = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "AssignPublicIp"}
+	i_AuthHeaderParameters                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "AuthHeaderParameters"}
+	i_AuthHeaderParametersSensitive               = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "AuthHeaderParametersSensitive"}
+	iAwsVpcConfiguration                          = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "AwsVpcConfiguration"}
+	iBatchArrayProperties                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "BatchArrayProperties"}
+	iBatchParameters                              = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "BatchParameters"}
+	iBatchRetryStrategy                           = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "BatchRetryStrategy"}
+	i_Boolean                                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "Boolean"}
+	i_CapacityProvider                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "CapacityProvider"}
+	i_CapacityProviderStrategy                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "CapacityProviderStrategy"}
+	iCapacityProviderStrategyItem                 = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "CapacityProviderStrategyItem"}
+	i_CapacityProviderStrategyItemBase            = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "CapacityProviderStrategyItemBase"}
+	i_CapacityProviderStrategyItemWeight          = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "CapacityProviderStrategyItemWeight"}
+	iConcurrentModificationException              = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ConcurrentModificationException"}
+	iCondition                                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "Condition"}
+	iConnection                                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "Connection"}
+	iConnectionApiKeyAuthResponseParameters       = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ConnectionApiKeyAuthResponseParameters"}
+	i_ConnectionArn                               = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ConnectionArn"}
+	iConnectionAuthorizationType                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ConnectionAuthorizationType"}
+	iConnectionAuthResponseParameters             = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ConnectionAuthResponseParameters"}
+	iConnectionBasicAuthResponseParameters        = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ConnectionBasicAuthResponseParameters"}
+	iConnectionBodyParameter                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ConnectionBodyParameter"}
+	i_ConnectionBodyParametersList                = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ConnectionBodyParametersList"}
+	i_ConnectionDescription                       = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ConnectionDescription"}
+	iConnectionHeaderParameter                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ConnectionHeaderParameter"}
+	i_ConnectionHeaderParametersList              = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ConnectionHeaderParametersList"}
+	iConnectionHttpParameters                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ConnectionHttpParameters"}
+	i_ConnectionName                              = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ConnectionName"}
+	iConnectionOAuthClientResponseParameters      = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ConnectionOAuthClientResponseParameters"}
+	iConnectionOAuthHttpMethod                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ConnectionOAuthHttpMethod"}
+	iConnectionOAuthResponseParameters            = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ConnectionOAuthResponseParameters"}
+	iConnectionQueryStringParameter               = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ConnectionQueryStringParameter"}
+	i_ConnectionQueryStringParametersList         = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ConnectionQueryStringParametersList"}
+	i_ConnectionResponseList                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ConnectionResponseList"}
+	iConnectionState                              = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ConnectionState"}
+	i_ConnectionStateReason                       = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ConnectionStateReason"}
+	iCreateConnectionApiKeyAuthRequestParameters  = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "CreateConnectionApiKeyAuthRequestParameters"}
+	iCreateConnectionAuthRequestParameters        = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "CreateConnectionAuthRequestParameters"}
+	iCreateConnectionBasicAuthRequestParameters   = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "CreateConnectionBasicAuthRequestParameters"}
+	iCreateConnectionOAuthClientRequestParameters = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "CreateConnectionOAuthClientRequestParameters"}
+	iCreateConnectionOAuthRequestParameters       = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "CreateConnectionOAuthRequestParameters"}
+	i_CreatedBy                                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "CreatedBy"}
+	i_Database                                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "Database"}
+	i_DbUser                                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "DbUser"}
+	iDeadLetterConfig                             = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "DeadLetterConfig"}
+	iEcsParameters                                = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "EcsParameters"}
+	i_ErrorCode                                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ErrorCode"}
+	i_ErrorMessage                                = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ErrorMessage"}
+	iEventBus                                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "EventBus"}
+	i_EventBusList                                = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "EventBusList"}
+	i_EventBusName                                = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "EventBusName"}
+	i_EventBusNameOrArn                           = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "EventBusNameOrArn"}
+	i_EventId                                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "EventId"}
+	i_EventPattern                                = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "EventPattern"}
+	i_EventResource                               = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "EventResource"}
+	i_EventResourceList                           = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "EventResourceList"}
+	iEventSource                                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "EventSource"}
+	i_EventSourceList                             = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "EventSourceList"}
+	i_EventSourceName                             = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "EventSourceName"}
+	i_EventSourceNamePrefix                       = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "EventSourceNamePrefix"}
+	iEventSourceState                             = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "EventSourceState"}
+	i_EventTime                                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "EventTime"}
+	i_HeaderKey                                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "HeaderKey"}
+	i_HeaderParametersMap                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "HeaderParametersMap"}
+	i_HeaderValue                                 = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "HeaderValue"}
+	i_HeaderValueSensitive                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "HeaderValueSensitive"}
+	iHttpParameters                               = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "HttpParameters"}
+	i_HttpsEndpoint                               = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "HttpsEndpoint"}
+	iIllegalStatusException                       = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "IllegalStatusException"}
+	iInputTransformer                             = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "InputTransformer"}
+	i_InputTransformerPathKey                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "InputTransformerPathKey"}
+	i_Integer                                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "Integer"}
+	iInternalException                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "InternalException"}
+	iInvalidEventPatternException                 = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "InvalidEventPatternException"}
+	iInvalidStateException                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "InvalidStateException"}
+	iKinesisParameters                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "KinesisParameters"}
+	iLaunchType                                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "LaunchType"}
+	iLimitExceededException                       = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "LimitExceededException"}
+	i_LimitMax100                                 = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "LimitMax100"}
+	i_LimitMin1                                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "LimitMin1"}
+	i_Long                                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "Long"}
+	i_ManagedBy                                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ManagedBy"}
+	iManagedRuleException                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ManagedRuleException"}
+	i_MaximumEventAgeInSeconds                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "MaximumEventAgeInSeconds"}
+	i_MaximumRetryAttempts                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "MaximumRetryAttempts"}
+	i_MessageGroupId                              = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "MessageGroupId"}
+	iNetworkConfiguration                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "NetworkConfiguration"}
+	i_NextToken                                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "NextToken"}
+	i_NonPartnerEventBusName                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "NonPartnerEventBusName"}
+	i_NonPartnerEventBusNameOrArn                 = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "NonPartnerEventBusNameOrArn"}
+	iOperationDisabledException                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "OperationDisabledException"}
+	iPartnerEventSource                           = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "PartnerEventSource"}
+	iPartnerEventSourceAccount                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "PartnerEventSourceAccount"}
+	i_PartnerEventSourceAccountList               = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "PartnerEventSourceAccountList"}
+	i_PartnerEventSourceList                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "PartnerEventSourceList"}
+	i_PartnerEventSourceNamePrefix                = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "PartnerEventSourceNamePrefix"}
+	i_PathParameter                               = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "PathParameter"}
+	i_PathParameterList                           = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "PathParameterList"}
+	iPlacementConstraint                          = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "PlacementConstraint"}
+	i_PlacementConstraintExpression               = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "PlacementConstraintExpression"}
+	i_PlacementConstraints                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "PlacementConstraints"}
+	iPlacementConstraintType                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "PlacementConstraintType"}
+	i_PlacementStrategies                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "PlacementStrategies"}
+	iPlacementStrategy                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "PlacementStrategy"}
+	i_PlacementStrategyField                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "PlacementStrategyField"}
+	iPlacementStrategyType                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "PlacementStrategyType"}
+	iPolicyLengthExceededException                = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "PolicyLengthExceededException"}
+	i_Principal                                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "Principal"}
+	iPropagateTags                                = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "PropagateTags"}
+	iPutEventsRequestEntry                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "PutEventsRequestEntry"}
+	i_PutEventsRequestEntryList                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "PutEventsRequestEntryList"}
+	iPutEventsResultEntry                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "PutEventsResultEntry"}
+	i_PutEventsResultEntryList                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "PutEventsResultEntryList"}
+	iPutPartnerEventsRequestEntry                 = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "PutPartnerEventsRequestEntry"}
+	i_PutPartnerEventsRequestEntryList            = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "PutPartnerEventsRequestEntryList"}
+	iPutPartnerEventsResultEntry                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "PutPartnerEventsResultEntry"}
+	i_PutPartnerEventsResultEntryList             = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "PutPartnerEventsResultEntryList"}
+	iPutTargetsResultEntry                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "PutTargetsResultEntry"}
+	i_PutTargetsResultEntryList                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "PutTargetsResultEntryList"}
+	i_QueryStringKey                              = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "QueryStringKey"}
+	i_QueryStringParametersMap                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "QueryStringParametersMap"}
+	i_QueryStringValue                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "QueryStringValue"}
+	i_QueryStringValueSensitive                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "QueryStringValueSensitive"}
+	iRedshiftDataParameters                       = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "RedshiftDataParameters"}
+	i_RedshiftSecretManagerArn                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "RedshiftSecretManagerArn"}
+	i_ReferenceId                                 = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ReferenceId"}
+	iRemoveTargetsResultEntry                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "RemoveTargetsResultEntry"}
+	i_RemoveTargetsResultEntryList                = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "RemoveTargetsResultEntryList"}
+	iReplay                                       = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "Replay"}
+	i_ReplayArn                                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ReplayArn"}
+	i_ReplayDescription                           = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ReplayDescription"}
+	iReplayDestination                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ReplayDestination"}
+	i_ReplayDestinationFilters                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ReplayDestinationFilters"}
+	i_ReplayList                                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ReplayList"}
+	i_ReplayName                                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ReplayName"}
+	iReplayState                                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ReplayState"}
+	i_ReplayStateReason                           = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ReplayStateReason"}
+	iResourceAlreadyExistsException               = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ResourceAlreadyExistsException"}
+	i_ResourceArn                                 = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ResourceArn"}
+	iResourceNotFoundException                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ResourceNotFoundException"}
+	i_RetentionDays                               = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "RetentionDays"}
+	iRetryPolicy                                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "RetryPolicy"}
+	i_RoleArn                                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "RoleArn"}
+	iRule                                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "Rule"}
+	i_RuleArn                                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "RuleArn"}
+	i_RuleDescription                             = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "RuleDescription"}
+	i_RuleName                                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "RuleName"}
+	i_RuleNameList                                = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "RuleNameList"}
+	i_RuleResponseList                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "RuleResponseList"}
+	iRuleState                                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "RuleState"}
+	iRunCommandParameters                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "RunCommandParameters"}
+	iRunCommandTarget                             = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "RunCommandTarget"}
+	i_RunCommandTargetKey                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "RunCommandTargetKey"}
+	i_RunCommandTargets                           = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "RunCommandTargets"}
+	i_RunCommandTargetValue                       = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "RunCommandTargetValue"}
+	i_RunCommandTargetValues                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "RunCommandTargetValues"}
+	iSageMakerPipelineParameter                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "SageMakerPipelineParameter"}
+	i_SageMakerPipelineParameterList              = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "SageMakerPipelineParameterList"}
+	i_SageMakerPipelineParameterName              = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "SageMakerPipelineParameterName"}
+	iSageMakerPipelineParameters                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "SageMakerPipelineParameters"}
+	i_SageMakerPipelineParameterValue             = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "SageMakerPipelineParameterValue"}
+	i_ScheduleExpression                          = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ScheduleExpression"}
+	i_SecretsManagerSecretArn                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "SecretsManagerSecretArn"}
+	i_SensitiveString                             = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "SensitiveString"}
+	i_Sql                                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "Sql"}
+	iSqsParameters                                = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "SqsParameters"}
+	i_StatementId                                 = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "StatementId"}
+	i_StatementName                               = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "StatementName"}
+	i_String                                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "String"}
+	i_StringList                                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "StringList"}
+	iTag                                          = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "Tag"}
+	i_TagKey                                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "TagKey"}
+	i_TagKeyList                                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "TagKeyList"}
+	i_TagList                                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "TagList"}
+	i_TagValue                                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "TagValue"}
+	iTarget                                       = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "Target"}
+	i_TargetArn                                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "TargetArn"}
+	i_TargetId                                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "TargetId"}
+	i_TargetIdList                                = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "TargetIdList"}
+	i_TargetInput                                 = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "TargetInput"}
+	i_TargetInputPath                             = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "TargetInputPath"}
+	i_TargetList                                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "TargetList"}
+	i_TargetPartitionKeyPath                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "TargetPartitionKeyPath"}
+	i_Timestamp                                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "Timestamp"}
+	i_TraceHeader                                 = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "TraceHeader"}
+	i_TransformerInput                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "TransformerInput"}
+	i_TransformerPaths                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "TransformerPaths"}
+	iUpdateConnectionApiKeyAuthRequestParameters  = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "UpdateConnectionApiKeyAuthRequestParameters"}
+	iUpdateConnectionAuthRequestParameters        = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "UpdateConnectionAuthRequestParameters"}
+	iUpdateConnectionBasicAuthRequestParameters   = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "UpdateConnectionBasicAuthRequestParameters"}
+	iUpdateConnectionOAuthClientRequestParameters = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "UpdateConnectionOAuthClientRequestParameters"}
+	iUpdateConnectionOAuthRequestParameters       = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "UpdateConnectionOAuthRequestParameters"}
+	iActivateEventSourceRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ActivateEventSourceRequest"}
+	iCancelReplayRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "CancelReplayRequest"}
+	iCancelReplayResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "CancelReplayResponse"}
+	iCreateApiDestinationRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "CreateApiDestinationRequest"}
+	iCreateApiDestinationResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "CreateApiDestinationResponse"}
+	iCreateArchiveRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "CreateArchiveRequest"}
+	iCreateArchiveResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "CreateArchiveResponse"}
+	iCreateConnectionRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "CreateConnectionRequest"}
+	iCreateConnectionResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "CreateConnectionResponse"}
+	iCreateEventBusRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "CreateEventBusRequest"}
+	iCreateEventBusResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "CreateEventBusResponse"}
+	iCreatePartnerEventSourceRequest              = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "CreatePartnerEventSourceRequest"}
+	iCreatePartnerEventSourceResponse             = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "CreatePartnerEventSourceResponse"}
+	iDeactivateEventSourceRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "DeactivateEventSourceRequest"}
+	iDeauthorizeConnectionRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "DeauthorizeConnectionRequest"}
+	iDeauthorizeConnectionResponse                = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "DeauthorizeConnectionResponse"}
+	iDeleteApiDestinationRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "DeleteApiDestinationRequest"}
+	iDeleteApiDestinationResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "DeleteApiDestinationResponse"}
+	iDeleteArchiveRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "DeleteArchiveRequest"}
+	iDeleteArchiveResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "DeleteArchiveResponse"}
+	iDeleteConnectionRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "DeleteConnectionRequest"}
+	iDeleteConnectionResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "DeleteConnectionResponse"}
+	iDeleteEventBusRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "DeleteEventBusRequest"}
+	iDeletePartnerEventSourceRequest              = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "DeletePartnerEventSourceRequest"}
+	iDeleteRuleRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "DeleteRuleRequest"}
+	iDescribeApiDestinationRequest                = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "DescribeApiDestinationRequest"}
+	iDescribeApiDestinationResponse               = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "DescribeApiDestinationResponse"}
+	iDescribeArchiveRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "DescribeArchiveRequest"}
+	iDescribeArchiveResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "DescribeArchiveResponse"}
+	iDescribeConnectionRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "DescribeConnectionRequest"}
+	iDescribeConnectionResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "DescribeConnectionResponse"}
+	iDescribeEventBusRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "DescribeEventBusRequest"}
+	iDescribeEventBusResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "DescribeEventBusResponse"}
+	iDescribeEventSourceRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "DescribeEventSourceRequest"}
+	iDescribeEventSourceResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "DescribeEventSourceResponse"}
+	iDescribePartnerEventSourceRequest            = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "DescribePartnerEventSourceRequest"}
+	iDescribePartnerEventSourceResponse           = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "DescribePartnerEventSourceResponse"}
+	iDescribeReplayRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "DescribeReplayRequest"}
+	iDescribeReplayResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "DescribeReplayResponse"}
+	iDescribeRuleRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "DescribeRuleRequest"}
+	iDescribeRuleResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "DescribeRuleResponse"}
+	iDisableRuleRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "DisableRuleRequest"}
+	iEnableRuleRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "EnableRuleRequest"}
+	iListApiDestinationsRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ListApiDestinationsRequest"}
+	iListApiDestinationsResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ListApiDestinationsResponse"}
+	iListArchivesRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ListArchivesRequest"}
+	iListArchivesResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ListArchivesResponse"}
+	iListConnectionsRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ListConnectionsRequest"}
+	iListConnectionsResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ListConnectionsResponse"}
+	iListEventBusesRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ListEventBusesRequest"}
+	iListEventBusesResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ListEventBusesResponse"}
+	iListEventSourcesRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ListEventSourcesRequest"}
+	iListEventSourcesResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ListEventSourcesResponse"}
+	iListPartnerEventSourceAccountsRequest        = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ListPartnerEventSourceAccountsRequest"}
+	iListPartnerEventSourceAccountsResponse       = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ListPartnerEventSourceAccountsResponse"}
+	iListPartnerEventSourcesRequest               = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ListPartnerEventSourcesRequest"}
+	iListPartnerEventSourcesResponse              = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ListPartnerEventSourcesResponse"}
+	iListReplaysRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ListReplaysRequest"}
+	iListReplaysResponse                          = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ListReplaysResponse"}
+	iListRuleNamesByTargetRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ListRuleNamesByTargetRequest"}
+	iListRuleNamesByTargetResponse                = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ListRuleNamesByTargetResponse"}
+	iListRulesRequest                             = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ListRulesRequest"}
+	iListRulesResponse                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ListRulesResponse"}
+	iListTagsForResourceRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ListTagsForResourceResponse"}
+	iListTargetsByRuleRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ListTargetsByRuleRequest"}
+	iListTargetsByRuleResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "ListTargetsByRuleResponse"}
+	iPutEventsRequest                             = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "PutEventsRequest"}
+	iPutEventsResponse                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "PutEventsResponse"}
+	iPutPartnerEventsRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "PutPartnerEventsRequest"}
+	iPutPartnerEventsResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "PutPartnerEventsResponse"}
+	iPutPermissionRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "PutPermissionRequest"}
+	iPutRuleRequest                               = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "PutRuleRequest"}
+	iPutRuleResponse                              = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "PutRuleResponse"}
+	iPutTargetsRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "PutTargetsRequest"}
+	iPutTargetsResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "PutTargetsResponse"}
+	iRemovePermissionRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "RemovePermissionRequest"}
+	iRemoveTargetsRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "RemoveTargetsRequest"}
+	iRemoveTargetsResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "RemoveTargetsResponse"}
+	iStartReplayRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "StartReplayRequest"}
+	iStartReplayResponse                          = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "StartReplayResponse"}
+	iTagResourceRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "TagResourceRequest"}
+	iTagResourceResponse                          = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "TagResourceResponse"}
+	iTestEventPatternRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "TestEventPatternRequest"}
+	iTestEventPatternResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "TestEventPatternResponse"}
+	iUntagResourceRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "UntagResourceResponse"}
+	iUpdateApiDestinationRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "UpdateApiDestinationRequest"}
+	iUpdateApiDestinationResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "UpdateApiDestinationResponse"}
+	iUpdateArchiveRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "UpdateArchiveRequest"}
+	iUpdateArchiveResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "UpdateArchiveResponse"}
+	iUpdateConnectionRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "UpdateConnectionRequest"}
+	iUpdateConnectionResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudwatchevents", Name: "UpdateConnectionResponse"}
+	pUnit                                         = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLNamespace{URI: "http://events.amazonaws.com/doc/2015-10-07"}}, DirectMask: 0x8000}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t2 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t4 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}}
+
+var mApiDestination = smithy.SchemaMembers{List: []*smithy.Schema{&sApiDestination_ApiDestinationArn, &sApiDestination_Name, &sApiDestination_ApiDestinationState, &sApiDestination_ConnectionArn, &sApiDestination_InvocationEndpoint, &sApiDestination_HttpMethod, &sApiDestination_InvocationRateLimitPerSecond, &sApiDestination_CreationTime, &sApiDestination_LastModifiedTime}, Seed: 1, Slots: []uint16{
+	0, 0, 0, 2, 0, 0, 0, 0, 0, 1, 0, 9, 0, 0, 8, 0, 0, 0, 0, 0, 6, 0, 0, 4,
+	5, 0, 7, 0, 0, 3, 0, 0,
+}}
+var mApiDestinationHttpMethod = smithy.SchemaMembers{List: []*smithy.Schema{&sApiDestinationHttpMethod_POST, &sApiDestinationHttpMethod_GET, &sApiDestinationHttpMethod_HEAD, &sApiDestinationHttpMethod_OPTIONS, &sApiDestinationHttpMethod_PUT, &sApiDestinationHttpMethod_PATCH, &sApiDestinationHttpMethod_DELETE}}
+var m_ApiDestinationResponseList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ApiDestinationResponseList_member}}
+var mApiDestinationState = smithy.SchemaMembers{List: []*smithy.Schema{&sApiDestinationState_ACTIVE, &sApiDestinationState_INACTIVE}}
+var mArchive = smithy.SchemaMembers{List: []*smithy.Schema{&sArchive_ArchiveName, &sArchive_EventSourceArn, &sArchive_State, &sArchive_StateReason, &sArchive_RetentionDays, &sArchive_SizeBytes, &sArchive_EventCount, &sArchive_CreationTime}}
+var m_ArchiveResponseList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ArchiveResponseList_member}}
+var mArchiveState = smithy.SchemaMembers{List: []*smithy.Schema{&sArchiveState_ENABLED, &sArchiveState_DISABLED, &sArchiveState_CREATING, &sArchiveState_UPDATING, &sArchiveState_CREATE_FAILED, &sArchiveState_UPDATE_FAILED}}
+var mAssignPublicIp = smithy.SchemaMembers{List: []*smithy.Schema{&sAssignPublicIp_ENABLED, &sAssignPublicIp_DISABLED}}
+var mAwsVpcConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sAwsVpcConfiguration_Subnets, &sAwsVpcConfiguration_SecurityGroups, &sAwsVpcConfiguration_AssignPublicIp}}
+var mBatchArrayProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchArrayProperties_Size}}
+var mBatchParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchParameters_JobDefinition, &sBatchParameters_JobName, &sBatchParameters_ArrayProperties, &sBatchParameters_RetryStrategy}}
+var mBatchRetryStrategy = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchRetryStrategy_Attempts}}
+var m_CapacityProviderStrategy = smithy.SchemaMembers{List: []*smithy.Schema{&s_CapacityProviderStrategy_member}}
+var mCapacityProviderStrategyItem = smithy.SchemaMembers{List: []*smithy.Schema{&sCapacityProviderStrategyItem_capacityProvider, &sCapacityProviderStrategyItem_weight, &sCapacityProviderStrategyItem_base}}
+var mConcurrentModificationException = smithy.SchemaMembers{List: []*smithy.Schema{&sConcurrentModificationException_message}}
+var mCondition = smithy.SchemaMembers{List: []*smithy.Schema{&sCondition_Type, &sCondition_Key, &sCondition_Value}}
+var mConnection = smithy.SchemaMembers{List: []*smithy.Schema{&sConnection_ConnectionArn, &sConnection_Name, &sConnection_ConnectionState, &sConnection_StateReason, &sConnection_AuthorizationType, &sConnection_CreationTime, &sConnection_LastModifiedTime, &sConnection_LastAuthorizedTime}}
+var mConnectionApiKeyAuthResponseParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectionApiKeyAuthResponseParameters_ApiKeyName}}
+var mConnectionAuthorizationType = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectionAuthorizationType_BASIC, &sConnectionAuthorizationType_OAUTH_CLIENT_CREDENTIALS, &sConnectionAuthorizationType_API_KEY}}
+var mConnectionAuthResponseParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectionAuthResponseParameters_BasicAuthParameters, &sConnectionAuthResponseParameters_OAuthParameters, &sConnectionAuthResponseParameters_ApiKeyAuthParameters, &sConnectionAuthResponseParameters_InvocationHttpParameters}}
+var mConnectionBasicAuthResponseParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectionBasicAuthResponseParameters_Username}}
+var mConnectionBodyParameter = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectionBodyParameter_Key, &sConnectionBodyParameter_Value, &sConnectionBodyParameter_IsValueSecret}}
+var m_ConnectionBodyParametersList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConnectionBodyParametersList_member}}
+var mConnectionHeaderParameter = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectionHeaderParameter_Key, &sConnectionHeaderParameter_Value, &sConnectionHeaderParameter_IsValueSecret}}
+var m_ConnectionHeaderParametersList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConnectionHeaderParametersList_member}}
+var mConnectionHttpParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectionHttpParameters_HeaderParameters, &sConnectionHttpParameters_QueryStringParameters, &sConnectionHttpParameters_BodyParameters}}
+var mConnectionOAuthClientResponseParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectionOAuthClientResponseParameters_ClientID}}
+var mConnectionOAuthHttpMethod = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectionOAuthHttpMethod_GET, &sConnectionOAuthHttpMethod_POST, &sConnectionOAuthHttpMethod_PUT}}
+var mConnectionOAuthResponseParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectionOAuthResponseParameters_ClientParameters, &sConnectionOAuthResponseParameters_AuthorizationEndpoint, &sConnectionOAuthResponseParameters_HttpMethod, &sConnectionOAuthResponseParameters_OAuthHttpParameters}}
+var mConnectionQueryStringParameter = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectionQueryStringParameter_Key, &sConnectionQueryStringParameter_Value, &sConnectionQueryStringParameter_IsValueSecret}}
+var m_ConnectionQueryStringParametersList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConnectionQueryStringParametersList_member}}
+var m_ConnectionResponseList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConnectionResponseList_member}}
+var mConnectionState = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectionState_CREATING, &sConnectionState_UPDATING, &sConnectionState_DELETING, &sConnectionState_AUTHORIZED, &sConnectionState_DEAUTHORIZED, &sConnectionState_AUTHORIZING, &sConnectionState_DEAUTHORIZING}}
+var mCreateConnectionApiKeyAuthRequestParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateConnectionApiKeyAuthRequestParameters_ApiKeyName, &sCreateConnectionApiKeyAuthRequestParameters_ApiKeyValue}}
+var mCreateConnectionAuthRequestParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateConnectionAuthRequestParameters_BasicAuthParameters, &sCreateConnectionAuthRequestParameters_OAuthParameters, &sCreateConnectionAuthRequestParameters_ApiKeyAuthParameters, &sCreateConnectionAuthRequestParameters_InvocationHttpParameters}}
+var mCreateConnectionBasicAuthRequestParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateConnectionBasicAuthRequestParameters_Username, &sCreateConnectionBasicAuthRequestParameters_Password}}
+var mCreateConnectionOAuthClientRequestParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateConnectionOAuthClientRequestParameters_ClientID, &sCreateConnectionOAuthClientRequestParameters_ClientSecret}}
+var mCreateConnectionOAuthRequestParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateConnectionOAuthRequestParameters_ClientParameters, &sCreateConnectionOAuthRequestParameters_AuthorizationEndpoint, &sCreateConnectionOAuthRequestParameters_HttpMethod, &sCreateConnectionOAuthRequestParameters_OAuthHttpParameters}}
+var mDeadLetterConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sDeadLetterConfig_Arn}}
+var mEcsParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sEcsParameters_TaskDefinitionArn, &sEcsParameters_TaskCount, &sEcsParameters_LaunchType, &sEcsParameters_NetworkConfiguration, &sEcsParameters_PlatformVersion, &sEcsParameters_Group, &sEcsParameters_CapacityProviderStrategy, &sEcsParameters_EnableECSManagedTags, &sEcsParameters_EnableExecuteCommand, &sEcsParameters_PlacementConstraints, &sEcsParameters_PlacementStrategy, &sEcsParameters_PropagateTags, &sEcsParameters_ReferenceId, &sEcsParameters_Tags}, Seed: 51, Slots: []uint16{
+	0, 12, 9, 6, 0, 7, 3, 0, 0, 5, 1, 0, 0, 0, 0, 13, 0, 0, 0, 0, 0, 11, 0, 0,
+	0, 0, 8, 14, 10, 0, 2, 4,
+}}
+var mEventBus = smithy.SchemaMembers{List: []*smithy.Schema{&sEventBus_Name, &sEventBus_Arn, &sEventBus_Policy}}
+var m_EventBusList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EventBusList_member}}
+var m_EventResourceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EventResourceList_member}}
+var mEventSource = smithy.SchemaMembers{List: []*smithy.Schema{&sEventSource_Arn, &sEventSource_CreatedBy, &sEventSource_CreationTime, &sEventSource_ExpirationTime, &sEventSource_Name, &sEventSource_State}}
+var m_EventSourceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EventSourceList_member}}
+var mEventSourceState = smithy.SchemaMembers{List: []*smithy.Schema{&sEventSourceState_PENDING, &sEventSourceState_ACTIVE, &sEventSourceState_DELETED}}
+var m_HeaderParametersMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_HeaderParametersMap_key, &s_HeaderParametersMap_value}}
+var mHttpParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sHttpParameters_PathParameterValues, &sHttpParameters_HeaderParameters, &sHttpParameters_QueryStringParameters}}
+var mIllegalStatusException = smithy.SchemaMembers{List: []*smithy.Schema{&sIllegalStatusException_message}}
+var mInputTransformer = smithy.SchemaMembers{List: []*smithy.Schema{&sInputTransformer_InputPathsMap, &sInputTransformer_InputTemplate}}
+var mInternalException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalException_message}}
+var mInvalidEventPatternException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidEventPatternException_message}}
+var mInvalidStateException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidStateException_message}}
+var mKinesisParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sKinesisParameters_PartitionKeyPath}}
+var mLaunchType = smithy.SchemaMembers{List: []*smithy.Schema{&sLaunchType_EC2, &sLaunchType_FARGATE, &sLaunchType_EXTERNAL}}
+var mLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sLimitExceededException_message}}
+var mManagedRuleException = smithy.SchemaMembers{List: []*smithy.Schema{&sManagedRuleException_message}}
+var mNetworkConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkConfiguration_awsvpcConfiguration}}
+var mOperationDisabledException = smithy.SchemaMembers{List: []*smithy.Schema{&sOperationDisabledException_message}}
+var mPartnerEventSource = smithy.SchemaMembers{List: []*smithy.Schema{&sPartnerEventSource_Arn, &sPartnerEventSource_Name}}
+var mPartnerEventSourceAccount = smithy.SchemaMembers{List: []*smithy.Schema{&sPartnerEventSourceAccount_Account, &sPartnerEventSourceAccount_CreationTime, &sPartnerEventSourceAccount_ExpirationTime, &sPartnerEventSourceAccount_State}}
+var m_PartnerEventSourceAccountList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PartnerEventSourceAccountList_member}}
+var m_PartnerEventSourceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PartnerEventSourceList_member}}
+var m_PathParameterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PathParameterList_member}}
+var mPlacementConstraint = smithy.SchemaMembers{List: []*smithy.Schema{&sPlacementConstraint_type, &sPlacementConstraint_expression}}
+var m_PlacementConstraints = smithy.SchemaMembers{List: []*smithy.Schema{&s_PlacementConstraints_member}}
+var mPlacementConstraintType = smithy.SchemaMembers{List: []*smithy.Schema{&sPlacementConstraintType_DISTINCT_INSTANCE, &sPlacementConstraintType_MEMBER_OF}}
+var m_PlacementStrategies = smithy.SchemaMembers{List: []*smithy.Schema{&s_PlacementStrategies_member}}
+var mPlacementStrategy = smithy.SchemaMembers{List: []*smithy.Schema{&sPlacementStrategy_type, &sPlacementStrategy_field}}
+var mPlacementStrategyType = smithy.SchemaMembers{List: []*smithy.Schema{&sPlacementStrategyType_RANDOM, &sPlacementStrategyType_SPREAD, &sPlacementStrategyType_BINPACK}}
+var mPolicyLengthExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sPolicyLengthExceededException_message}}
+var mPropagateTags = smithy.SchemaMembers{List: []*smithy.Schema{&sPropagateTags_TASK_DEFINITION}}
+var mPutEventsRequestEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sPutEventsRequestEntry_Time, &sPutEventsRequestEntry_Source, &sPutEventsRequestEntry_Resources, &sPutEventsRequestEntry_DetailType, &sPutEventsRequestEntry_Detail, &sPutEventsRequestEntry_EventBusName, &sPutEventsRequestEntry_TraceHeader}}
+var m_PutEventsRequestEntryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PutEventsRequestEntryList_member}}
+var mPutEventsResultEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sPutEventsResultEntry_EventId, &sPutEventsResultEntry_ErrorCode, &sPutEventsResultEntry_ErrorMessage}}
+var m_PutEventsResultEntryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PutEventsResultEntryList_member}}
+var mPutPartnerEventsRequestEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sPutPartnerEventsRequestEntry_Time, &sPutPartnerEventsRequestEntry_Source, &sPutPartnerEventsRequestEntry_Resources, &sPutPartnerEventsRequestEntry_DetailType, &sPutPartnerEventsRequestEntry_Detail}}
+var m_PutPartnerEventsRequestEntryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PutPartnerEventsRequestEntryList_member}}
+var mPutPartnerEventsResultEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sPutPartnerEventsResultEntry_EventId, &sPutPartnerEventsResultEntry_ErrorCode, &sPutPartnerEventsResultEntry_ErrorMessage}}
+var m_PutPartnerEventsResultEntryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PutPartnerEventsResultEntryList_member}}
+var mPutTargetsResultEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sPutTargetsResultEntry_TargetId, &sPutTargetsResultEntry_ErrorCode, &sPutTargetsResultEntry_ErrorMessage}}
+var m_PutTargetsResultEntryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PutTargetsResultEntryList_member}}
+var m_QueryStringParametersMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_QueryStringParametersMap_key, &s_QueryStringParametersMap_value}}
+var mRedshiftDataParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sRedshiftDataParameters_SecretManagerArn, &sRedshiftDataParameters_Database, &sRedshiftDataParameters_DbUser, &sRedshiftDataParameters_Sql, &sRedshiftDataParameters_StatementName, &sRedshiftDataParameters_WithEvent}}
+var mRemoveTargetsResultEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sRemoveTargetsResultEntry_TargetId, &sRemoveTargetsResultEntry_ErrorCode, &sRemoveTargetsResultEntry_ErrorMessage}}
+var m_RemoveTargetsResultEntryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RemoveTargetsResultEntryList_member}}
+var mReplay = smithy.SchemaMembers{List: []*smithy.Schema{&sReplay_ReplayName, &sReplay_EventSourceArn, &sReplay_State, &sReplay_StateReason, &sReplay_EventStartTime, &sReplay_EventEndTime, &sReplay_EventLastReplayedTime, &sReplay_ReplayStartTime, &sReplay_ReplayEndTime}, Seed: 2, Slots: []uint16{
+	0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 1, 0, 0, 0, 4, 0, 0, 3, 9, 0, 2, 0,
+	0, 0, 0, 0, 0, 5, 0, 8,
+}}
+var mReplayDestination = smithy.SchemaMembers{List: []*smithy.Schema{&sReplayDestination_Arn, &sReplayDestination_FilterArns}}
+var m_ReplayDestinationFilters = smithy.SchemaMembers{List: []*smithy.Schema{&s_ReplayDestinationFilters_member}}
+var m_ReplayList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ReplayList_member}}
+var mReplayState = smithy.SchemaMembers{List: []*smithy.Schema{&sReplayState_STARTING, &sReplayState_RUNNING, &sReplayState_CANCELLING, &sReplayState_COMPLETED, &sReplayState_CANCELLED, &sReplayState_FAILED}}
+var mResourceAlreadyExistsException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceAlreadyExistsException_message}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message}}
+var mRetryPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sRetryPolicy_MaximumRetryAttempts, &sRetryPolicy_MaximumEventAgeInSeconds}}
+var mRule = smithy.SchemaMembers{List: []*smithy.Schema{&sRule_Name, &sRule_Arn, &sRule_EventPattern, &sRule_State, &sRule_Description, &sRule_ScheduleExpression, &sRule_RoleArn, &sRule_ManagedBy, &sRule_EventBusName}, Seed: 1, Slots: []uint16{
+	0, 0, 0, 1, 0, 4, 0, 6, 8, 0, 0, 0, 9, 0, 0, 0, 7, 0, 0, 0, 5, 2, 0, 0,
+	0, 3, 0, 0, 0, 0, 0, 0,
+}}
+var m_RuleNameList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RuleNameList_member}}
+var m_RuleResponseList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RuleResponseList_member}}
+var mRuleState = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleState_ENABLED, &sRuleState_DISABLED}}
+var mRunCommandParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sRunCommandParameters_RunCommandTargets}}
+var mRunCommandTarget = smithy.SchemaMembers{List: []*smithy.Schema{&sRunCommandTarget_Key, &sRunCommandTarget_Values}}
+var m_RunCommandTargets = smithy.SchemaMembers{List: []*smithy.Schema{&s_RunCommandTargets_member}}
+var m_RunCommandTargetValues = smithy.SchemaMembers{List: []*smithy.Schema{&s_RunCommandTargetValues_member}}
+var mSageMakerPipelineParameter = smithy.SchemaMembers{List: []*smithy.Schema{&sSageMakerPipelineParameter_Name, &sSageMakerPipelineParameter_Value}}
+var m_SageMakerPipelineParameterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SageMakerPipelineParameterList_member}}
+var mSageMakerPipelineParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sSageMakerPipelineParameters_PipelineParameterList}}
+var mSqsParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sSqsParameters_MessageGroupId}}
+var m_StringList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StringList_member}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var mTarget = smithy.SchemaMembers{List: []*smithy.Schema{&sTarget_Id, &sTarget_Arn, &sTarget_RoleArn, &sTarget_Input, &sTarget_InputPath, &sTarget_InputTransformer, &sTarget_KinesisParameters, &sTarget_RunCommandParameters, &sTarget_EcsParameters, &sTarget_BatchParameters, &sTarget_SqsParameters, &sTarget_HttpParameters, &sTarget_RedshiftDataParameters, &sTarget_SageMakerPipelineParameters, &sTarget_DeadLetterConfig, &sTarget_RetryPolicy}, Seed: 31, Slots: []uint16{
+	0, 14, 0, 7, 0, 0, 16, 3, 0, 11, 10, 0, 12, 0, 15, 8, 0, 0, 0, 0, 13, 6, 9, 0,
+	0, 2, 1, 0, 0, 5, 0, 4,
+}}
+var m_TargetIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TargetIdList_member}}
+var m_TargetList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TargetList_member}}
+var m_TransformerPaths = smithy.SchemaMembers{List: []*smithy.Schema{&s_TransformerPaths_key, &s_TransformerPaths_value}}
+var mUpdateConnectionApiKeyAuthRequestParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateConnectionApiKeyAuthRequestParameters_ApiKeyName, &sUpdateConnectionApiKeyAuthRequestParameters_ApiKeyValue}}
+var mUpdateConnectionAuthRequestParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateConnectionAuthRequestParameters_BasicAuthParameters, &sUpdateConnectionAuthRequestParameters_OAuthParameters, &sUpdateConnectionAuthRequestParameters_ApiKeyAuthParameters, &sUpdateConnectionAuthRequestParameters_InvocationHttpParameters}}
+var mUpdateConnectionBasicAuthRequestParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateConnectionBasicAuthRequestParameters_Username, &sUpdateConnectionBasicAuthRequestParameters_Password}}
+var mUpdateConnectionOAuthClientRequestParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateConnectionOAuthClientRequestParameters_ClientID, &sUpdateConnectionOAuthClientRequestParameters_ClientSecret}}
+var mUpdateConnectionOAuthRequestParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateConnectionOAuthRequestParameters_ClientParameters, &sUpdateConnectionOAuthRequestParameters_AuthorizationEndpoint, &sUpdateConnectionOAuthRequestParameters_HttpMethod, &sUpdateConnectionOAuthRequestParameters_OAuthHttpParameters}}
+var mActivateEventSourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sActivateEventSourceRequest_Name}}
+var mCancelReplayRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelReplayRequest_ReplayName}}
+var mCancelReplayResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelReplayResponse_ReplayArn, &sCancelReplayResponse_State, &sCancelReplayResponse_StateReason}}
+var mCreateApiDestinationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateApiDestinationRequest_Name, &sCreateApiDestinationRequest_Description, &sCreateApiDestinationRequest_ConnectionArn, &sCreateApiDestinationRequest_InvocationEndpoint, &sCreateApiDestinationRequest_HttpMethod, &sCreateApiDestinationRequest_InvocationRateLimitPerSecond}}
+var mCreateApiDestinationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateApiDestinationResponse_ApiDestinationArn, &sCreateApiDestinationResponse_ApiDestinationState, &sCreateApiDestinationResponse_CreationTime, &sCreateApiDestinationResponse_LastModifiedTime}}
+var mCreateArchiveRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateArchiveRequest_ArchiveName, &sCreateArchiveRequest_EventSourceArn, &sCreateArchiveRequest_Description, &sCreateArchiveRequest_EventPattern, &sCreateArchiveRequest_RetentionDays}}
+var mCreateArchiveResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateArchiveResponse_ArchiveArn, &sCreateArchiveResponse_State, &sCreateArchiveResponse_StateReason, &sCreateArchiveResponse_CreationTime}}
+var mCreateConnectionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateConnectionRequest_Name, &sCreateConnectionRequest_Description, &sCreateConnectionRequest_AuthorizationType, &sCreateConnectionRequest_AuthParameters}}
+var mCreateConnectionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateConnectionResponse_ConnectionArn, &sCreateConnectionResponse_ConnectionState, &sCreateConnectionResponse_CreationTime, &sCreateConnectionResponse_LastModifiedTime}}
+var mCreateEventBusRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateEventBusRequest_Name, &sCreateEventBusRequest_EventSourceName, &sCreateEventBusRequest_Tags}}
+var mCreateEventBusResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateEventBusResponse_EventBusArn}}
+var mCreatePartnerEventSourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePartnerEventSourceRequest_Name, &sCreatePartnerEventSourceRequest_Account}}
+var mCreatePartnerEventSourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePartnerEventSourceResponse_EventSourceArn}}
+var mDeactivateEventSourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeactivateEventSourceRequest_Name}}
+var mDeauthorizeConnectionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeauthorizeConnectionRequest_Name}}
+var mDeauthorizeConnectionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeauthorizeConnectionResponse_ConnectionArn, &sDeauthorizeConnectionResponse_ConnectionState, &sDeauthorizeConnectionResponse_CreationTime, &sDeauthorizeConnectionResponse_LastModifiedTime, &sDeauthorizeConnectionResponse_LastAuthorizedTime}}
+var mDeleteApiDestinationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteApiDestinationRequest_Name}}
+var mDeleteArchiveRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteArchiveRequest_ArchiveName}}
+var mDeleteConnectionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteConnectionRequest_Name}}
+var mDeleteConnectionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteConnectionResponse_ConnectionArn, &sDeleteConnectionResponse_ConnectionState, &sDeleteConnectionResponse_CreationTime, &sDeleteConnectionResponse_LastModifiedTime, &sDeleteConnectionResponse_LastAuthorizedTime}}
+var mDeleteEventBusRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteEventBusRequest_Name}}
+var mDeletePartnerEventSourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeletePartnerEventSourceRequest_Name, &sDeletePartnerEventSourceRequest_Account}}
+var mDeleteRuleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRuleRequest_Name, &sDeleteRuleRequest_EventBusName, &sDeleteRuleRequest_Force}}
+var mDescribeApiDestinationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeApiDestinationRequest_Name}}
+var mDescribeApiDestinationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeApiDestinationResponse_ApiDestinationArn, &sDescribeApiDestinationResponse_Name, &sDescribeApiDestinationResponse_Description, &sDescribeApiDestinationResponse_ApiDestinationState, &sDescribeApiDestinationResponse_ConnectionArn, &sDescribeApiDestinationResponse_InvocationEndpoint, &sDescribeApiDestinationResponse_HttpMethod, &sDescribeApiDestinationResponse_InvocationRateLimitPerSecond, &sDescribeApiDestinationResponse_CreationTime, &sDescribeApiDestinationResponse_LastModifiedTime}, Seed: 8, Slots: []uint16{
+	5, 2, 0, 0, 0, 1, 0, 0, 7, 0, 6, 0, 0, 3, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 9, 0, 0, 4, 8,
+}}
+var mDescribeArchiveRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeArchiveRequest_ArchiveName}}
+var mDescribeArchiveResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeArchiveResponse_ArchiveArn, &sDescribeArchiveResponse_ArchiveName, &sDescribeArchiveResponse_EventSourceArn, &sDescribeArchiveResponse_Description, &sDescribeArchiveResponse_EventPattern, &sDescribeArchiveResponse_State, &sDescribeArchiveResponse_StateReason, &sDescribeArchiveResponse_RetentionDays, &sDescribeArchiveResponse_SizeBytes, &sDescribeArchiveResponse_EventCount, &sDescribeArchiveResponse_CreationTime}, Seed: 5, Slots: []uint16{
+	3, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 10, 8, 6, 0, 9, 1, 0, 0,
+	7, 0, 11, 0, 0, 0, 2, 0,
+}}
+var mDescribeConnectionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeConnectionRequest_Name}}
+var mDescribeConnectionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeConnectionResponse_ConnectionArn, &sDescribeConnectionResponse_Name, &sDescribeConnectionResponse_Description, &sDescribeConnectionResponse_ConnectionState, &sDescribeConnectionResponse_StateReason, &sDescribeConnectionResponse_AuthorizationType, &sDescribeConnectionResponse_SecretArn, &sDescribeConnectionResponse_AuthParameters, &sDescribeConnectionResponse_CreationTime, &sDescribeConnectionResponse_LastModifiedTime, &sDescribeConnectionResponse_LastAuthorizedTime}, Seed: 7, Slots: []uint16{
+	3, 0, 0, 6, 0, 0, 8, 2, 7, 1, 0, 11, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 4, 0,
+	0, 10, 0, 0, 0, 0, 0, 5,
+}}
+var mDescribeEventBusRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEventBusRequest_Name}}
+var mDescribeEventBusResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEventBusResponse_Name, &sDescribeEventBusResponse_Arn, &sDescribeEventBusResponse_Policy}}
+var mDescribeEventSourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEventSourceRequest_Name}}
+var mDescribeEventSourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEventSourceResponse_Arn, &sDescribeEventSourceResponse_CreatedBy, &sDescribeEventSourceResponse_CreationTime, &sDescribeEventSourceResponse_ExpirationTime, &sDescribeEventSourceResponse_Name, &sDescribeEventSourceResponse_State}}
+var mDescribePartnerEventSourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribePartnerEventSourceRequest_Name}}
+var mDescribePartnerEventSourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribePartnerEventSourceResponse_Arn, &sDescribePartnerEventSourceResponse_Name}}
+var mDescribeReplayRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeReplayRequest_ReplayName}}
+var mDescribeReplayResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeReplayResponse_ReplayName, &sDescribeReplayResponse_ReplayArn, &sDescribeReplayResponse_Description, &sDescribeReplayResponse_State, &sDescribeReplayResponse_StateReason, &sDescribeReplayResponse_EventSourceArn, &sDescribeReplayResponse_Destination, &sDescribeReplayResponse_EventStartTime, &sDescribeReplayResponse_EventEndTime, &sDescribeReplayResponse_EventLastReplayedTime, &sDescribeReplayResponse_ReplayStartTime, &sDescribeReplayResponse_ReplayEndTime}, Seed: 8, Slots: []uint16{
+	5, 8, 0, 0, 0, 6, 9, 0, 0, 0, 11, 0, 0, 3, 12, 0, 0, 0, 0, 2, 0, 0, 1, 0,
+	0, 7, 0, 0, 4, 10, 0, 0,
+}}
+var mDescribeRuleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeRuleRequest_Name, &sDescribeRuleRequest_EventBusName}}
+var mDescribeRuleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeRuleResponse_Name, &sDescribeRuleResponse_Arn, &sDescribeRuleResponse_EventPattern, &sDescribeRuleResponse_ScheduleExpression, &sDescribeRuleResponse_State, &sDescribeRuleResponse_Description, &sDescribeRuleResponse_RoleArn, &sDescribeRuleResponse_ManagedBy, &sDescribeRuleResponse_EventBusName, &sDescribeRuleResponse_CreatedBy}, Seed: 7, Slots: []uint16{
+	6, 0, 0, 0, 0, 0, 8, 1, 0, 4, 7, 0, 5, 9, 0, 0, 2, 0, 0, 0, 0, 0, 0, 10,
+	0, 0, 0, 0, 0, 0, 3, 0,
+}}
+var mDisableRuleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisableRuleRequest_Name, &sDisableRuleRequest_EventBusName}}
+var mEnableRuleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sEnableRuleRequest_Name, &sEnableRuleRequest_EventBusName}}
+var mListApiDestinationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListApiDestinationsRequest_NamePrefix, &sListApiDestinationsRequest_ConnectionArn, &sListApiDestinationsRequest_NextToken, &sListApiDestinationsRequest_Limit}}
+var mListApiDestinationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListApiDestinationsResponse_ApiDestinations, &sListApiDestinationsResponse_NextToken}}
+var mListArchivesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListArchivesRequest_NamePrefix, &sListArchivesRequest_EventSourceArn, &sListArchivesRequest_State, &sListArchivesRequest_NextToken, &sListArchivesRequest_Limit}}
+var mListArchivesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListArchivesResponse_Archives, &sListArchivesResponse_NextToken}}
+var mListConnectionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListConnectionsRequest_NamePrefix, &sListConnectionsRequest_ConnectionState, &sListConnectionsRequest_NextToken, &sListConnectionsRequest_Limit}}
+var mListConnectionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListConnectionsResponse_Connections, &sListConnectionsResponse_NextToken}}
+var mListEventBusesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListEventBusesRequest_NamePrefix, &sListEventBusesRequest_NextToken, &sListEventBusesRequest_Limit}}
+var mListEventBusesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListEventBusesResponse_EventBuses, &sListEventBusesResponse_NextToken}}
+var mListEventSourcesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListEventSourcesRequest_NamePrefix, &sListEventSourcesRequest_NextToken, &sListEventSourcesRequest_Limit}}
+var mListEventSourcesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListEventSourcesResponse_EventSources, &sListEventSourcesResponse_NextToken}}
+var mListPartnerEventSourceAccountsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListPartnerEventSourceAccountsRequest_EventSourceName, &sListPartnerEventSourceAccountsRequest_NextToken, &sListPartnerEventSourceAccountsRequest_Limit}}
+var mListPartnerEventSourceAccountsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListPartnerEventSourceAccountsResponse_PartnerEventSourceAccounts, &sListPartnerEventSourceAccountsResponse_NextToken}}
+var mListPartnerEventSourcesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListPartnerEventSourcesRequest_NamePrefix, &sListPartnerEventSourcesRequest_NextToken, &sListPartnerEventSourcesRequest_Limit}}
+var mListPartnerEventSourcesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListPartnerEventSourcesResponse_PartnerEventSources, &sListPartnerEventSourcesResponse_NextToken}}
+var mListReplaysRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListReplaysRequest_NamePrefix, &sListReplaysRequest_State, &sListReplaysRequest_EventSourceArn, &sListReplaysRequest_NextToken, &sListReplaysRequest_Limit}}
+var mListReplaysResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListReplaysResponse_Replays, &sListReplaysResponse_NextToken}}
+var mListRuleNamesByTargetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListRuleNamesByTargetRequest_TargetArn, &sListRuleNamesByTargetRequest_EventBusName, &sListRuleNamesByTargetRequest_NextToken, &sListRuleNamesByTargetRequest_Limit}}
+var mListRuleNamesByTargetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListRuleNamesByTargetResponse_RuleNames, &sListRuleNamesByTargetResponse_NextToken}}
+var mListRulesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListRulesRequest_NamePrefix, &sListRulesRequest_EventBusName, &sListRulesRequest_NextToken, &sListRulesRequest_Limit}}
+var mListRulesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListRulesResponse_Rules, &sListRulesResponse_NextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceARN}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_Tags}}
+var mListTargetsByRuleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTargetsByRuleRequest_Rule, &sListTargetsByRuleRequest_EventBusName, &sListTargetsByRuleRequest_NextToken, &sListTargetsByRuleRequest_Limit}}
+var mListTargetsByRuleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTargetsByRuleResponse_Targets, &sListTargetsByRuleResponse_NextToken}}
+var mPutEventsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutEventsRequest_Entries}}
+var mPutEventsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutEventsResponse_FailedEntryCount, &sPutEventsResponse_Entries}}
+var mPutPartnerEventsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutPartnerEventsRequest_Entries}}
+var mPutPartnerEventsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutPartnerEventsResponse_FailedEntryCount, &sPutPartnerEventsResponse_Entries}}
+var mPutPermissionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutPermissionRequest_EventBusName, &sPutPermissionRequest_Action, &sPutPermissionRequest_Principal, &sPutPermissionRequest_StatementId, &sPutPermissionRequest_Condition, &sPutPermissionRequest_Policy}}
+var mPutRuleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutRuleRequest_Name, &sPutRuleRequest_ScheduleExpression, &sPutRuleRequest_EventPattern, &sPutRuleRequest_State, &sPutRuleRequest_Description, &sPutRuleRequest_RoleArn, &sPutRuleRequest_Tags, &sPutRuleRequest_EventBusName}}
+var mPutRuleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutRuleResponse_RuleArn}}
+var mPutTargetsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutTargetsRequest_Rule, &sPutTargetsRequest_EventBusName, &sPutTargetsRequest_Targets}}
+var mPutTargetsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutTargetsResponse_FailedEntryCount, &sPutTargetsResponse_FailedEntries}}
+var mRemovePermissionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRemovePermissionRequest_StatementId, &sRemovePermissionRequest_RemoveAllPermissions, &sRemovePermissionRequest_EventBusName}}
+var mRemoveTargetsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRemoveTargetsRequest_Rule, &sRemoveTargetsRequest_EventBusName, &sRemoveTargetsRequest_Ids, &sRemoveTargetsRequest_Force}}
+var mRemoveTargetsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sRemoveTargetsResponse_FailedEntryCount, &sRemoveTargetsResponse_FailedEntries}}
+var mStartReplayRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartReplayRequest_ReplayName, &sStartReplayRequest_Description, &sStartReplayRequest_EventSourceArn, &sStartReplayRequest_EventStartTime, &sStartReplayRequest_EventEndTime, &sStartReplayRequest_Destination}}
+var mStartReplayResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartReplayResponse_ReplayArn, &sStartReplayResponse_State, &sStartReplayResponse_StateReason, &sStartReplayResponse_ReplayStartTime}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceARN, &sTagResourceRequest_Tags}}
+var mTestEventPatternRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTestEventPatternRequest_EventPattern, &sTestEventPatternRequest_Event}}
+var mTestEventPatternResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sTestEventPatternResponse_Result}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceARN, &sUntagResourceRequest_TagKeys}}
+var mUpdateApiDestinationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateApiDestinationRequest_Name, &sUpdateApiDestinationRequest_Description, &sUpdateApiDestinationRequest_ConnectionArn, &sUpdateApiDestinationRequest_InvocationEndpoint, &sUpdateApiDestinationRequest_HttpMethod, &sUpdateApiDestinationRequest_InvocationRateLimitPerSecond}}
+var mUpdateApiDestinationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateApiDestinationResponse_ApiDestinationArn, &sUpdateApiDestinationResponse_ApiDestinationState, &sUpdateApiDestinationResponse_CreationTime, &sUpdateApiDestinationResponse_LastModifiedTime}}
+var mUpdateArchiveRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateArchiveRequest_ArchiveName, &sUpdateArchiveRequest_Description, &sUpdateArchiveRequest_EventPattern, &sUpdateArchiveRequest_RetentionDays}}
+var mUpdateArchiveResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateArchiveResponse_ArchiveArn, &sUpdateArchiveResponse_State, &sUpdateArchiveResponse_StateReason, &sUpdateArchiveResponse_CreationTime}}
+var mUpdateConnectionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateConnectionRequest_Name, &sUpdateConnectionRequest_Description, &sUpdateConnectionRequest_AuthorizationType, &sUpdateConnectionRequest_AuthParameters}}
+var mUpdateConnectionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateConnectionResponse_ConnectionArn, &sUpdateConnectionResponse_ConnectionState, &sUpdateConnectionResponse_CreationTime, &sUpdateConnectionResponse_LastModifiedTime, &sUpdateConnectionResponse_LastAuthorizedTime}}
+
+var sActivateEventSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActivateEventSource, Type: smithy.ShapeTypeOperation})
+var sCancelReplay = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelReplay, Type: smithy.ShapeTypeOperation})
+var sCreateApiDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateApiDestination, Type: smithy.ShapeTypeOperation})
+var sCreateArchive = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateArchive, Type: smithy.ShapeTypeOperation})
+var sCreateConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConnection, Type: smithy.ShapeTypeOperation})
+var sCreateEventBus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEventBus, Type: smithy.ShapeTypeOperation})
+var sCreatePartnerEventSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePartnerEventSource, Type: smithy.ShapeTypeOperation})
+var sDeactivateEventSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeactivateEventSource, Type: smithy.ShapeTypeOperation})
+var sDeauthorizeConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeauthorizeConnection, Type: smithy.ShapeTypeOperation})
+var sDeleteApiDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteApiDestination, Type: smithy.ShapeTypeOperation})
+var sDeleteArchive = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteArchive, Type: smithy.ShapeTypeOperation})
+var sDeleteConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnection, Type: smithy.ShapeTypeOperation})
+var sDeleteEventBus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEventBus, Type: smithy.ShapeTypeOperation})
+var sDeletePartnerEventSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePartnerEventSource, Type: smithy.ShapeTypeOperation})
+var sDeleteRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRule, Type: smithy.ShapeTypeOperation})
+var sDescribeApiDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeApiDestination, Type: smithy.ShapeTypeOperation})
+var sDescribeArchive = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeArchive, Type: smithy.ShapeTypeOperation})
+var sDescribeConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConnection, Type: smithy.ShapeTypeOperation})
+var sDescribeEventBus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventBus, Type: smithy.ShapeTypeOperation})
+var sDescribeEventSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventSource, Type: smithy.ShapeTypeOperation})
+var sDescribePartnerEventSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribePartnerEventSource, Type: smithy.ShapeTypeOperation})
+var sDescribeReplay = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeReplay, Type: smithy.ShapeTypeOperation})
+var sDescribeRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRule, Type: smithy.ShapeTypeOperation})
+var sDisableRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableRule, Type: smithy.ShapeTypeOperation})
+var sEnableRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableRule, Type: smithy.ShapeTypeOperation})
+var sListApiDestinations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListApiDestinations, Type: smithy.ShapeTypeOperation})
+var sListArchives = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListArchives, Type: smithy.ShapeTypeOperation})
+var sListConnections = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConnections, Type: smithy.ShapeTypeOperation})
+var sListEventBuses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEventBuses, Type: smithy.ShapeTypeOperation})
+var sListEventSources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEventSources, Type: smithy.ShapeTypeOperation})
+var sListPartnerEventSourceAccounts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPartnerEventSourceAccounts, Type: smithy.ShapeTypeOperation})
+var sListPartnerEventSources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPartnerEventSources, Type: smithy.ShapeTypeOperation})
+var sListReplays = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListReplays, Type: smithy.ShapeTypeOperation})
+var sListRuleNamesByTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRuleNamesByTarget, Type: smithy.ShapeTypeOperation})
+var sListRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRules, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation})
+var sListTargetsByRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTargetsByRule, Type: smithy.ShapeTypeOperation})
+var sPutEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEvents, Type: smithy.ShapeTypeOperation})
+var sPutPartnerEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutPartnerEvents, Type: smithy.ShapeTypeOperation})
+var sPutPermission = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutPermission, Type: smithy.ShapeTypeOperation})
+var sPutRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRule, Type: smithy.ShapeTypeOperation})
+var sPutTargets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutTargets, Type: smithy.ShapeTypeOperation})
+var sRemovePermission = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemovePermission, Type: smithy.ShapeTypeOperation})
+var sRemoveTargets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveTargets, Type: smithy.ShapeTypeOperation})
+var sStartReplay = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartReplay, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation})
+var sTestEventPattern = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestEventPattern, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation})
+var sUpdateApiDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApiDestination, Type: smithy.ShapeTypeOperation})
+var sUpdateArchive = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateArchive, Type: smithy.ShapeTypeOperation})
+var sUpdateConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConnection, Type: smithy.ShapeTypeOperation})
+var s_AWSEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSEvents, Traits: &t0, Type: smithy.ShapeTypeService})
+var s_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var s_Action = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Action, Type: smithy.ShapeTypeString})
+var sApiDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApiDestination, Members: &mApiDestination, Type: smithy.ShapeTypeStructure})
+var s_ApiDestinationArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApiDestinationArn, Type: smithy.ShapeTypeString})
+var s_ApiDestinationDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApiDestinationDescription, Type: smithy.ShapeTypeString})
+var sApiDestinationHttpMethod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApiDestinationHttpMethod, Members: &mApiDestinationHttpMethod, Type: smithy.ShapeTypeEnum})
+var s_ApiDestinationInvocationRateLimitPerSecond = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApiDestinationInvocationRateLimitPerSecond, Type: smithy.ShapeTypeInteger})
+var s_ApiDestinationName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApiDestinationName, Type: smithy.ShapeTypeString})
+var s_ApiDestinationResponseList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApiDestinationResponseList, Members: &m_ApiDestinationResponseList, Type: smithy.ShapeTypeList})
+var sApiDestinationState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApiDestinationState, Members: &mApiDestinationState, Type: smithy.ShapeTypeEnum})
+var sArchive = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArchive, Members: &mArchive, Type: smithy.ShapeTypeStructure})
+var s_ArchiveArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ArchiveArn, Type: smithy.ShapeTypeString})
+var s_ArchiveDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ArchiveDescription, Type: smithy.ShapeTypeString})
+var s_ArchiveName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ArchiveName, Type: smithy.ShapeTypeString})
+var s_ArchiveResponseList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ArchiveResponseList, Members: &m_ArchiveResponseList, Type: smithy.ShapeTypeList})
+var sArchiveState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArchiveState, Members: &mArchiveState, Type: smithy.ShapeTypeEnum})
+var s_ArchiveStateReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ArchiveStateReason, Type: smithy.ShapeTypeString})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sAssignPublicIp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssignPublicIp, Members: &mAssignPublicIp, Type: smithy.ShapeTypeEnum})
+var s_AuthHeaderParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuthHeaderParameters, Type: smithy.ShapeTypeString})
+var s_AuthHeaderParametersSensitive = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuthHeaderParametersSensitive, Traits: &t1, Type: smithy.ShapeTypeString})
+var sAwsVpcConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAwsVpcConfiguration, Members: &mAwsVpcConfiguration, Type: smithy.ShapeTypeStructure})
+var sBatchArrayProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchArrayProperties, Members: &mBatchArrayProperties, Type: smithy.ShapeTypeStructure})
+var sBatchParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchParameters, Members: &mBatchParameters, Type: smithy.ShapeTypeStructure})
+var sBatchRetryStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchRetryStrategy, Members: &mBatchRetryStrategy, Type: smithy.ShapeTypeStructure})
+var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var s_CapacityProvider = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CapacityProvider, Type: smithy.ShapeTypeString})
+var s_CapacityProviderStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CapacityProviderStrategy, Members: &m_CapacityProviderStrategy, Type: smithy.ShapeTypeList})
+var sCapacityProviderStrategyItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCapacityProviderStrategyItem, Members: &mCapacityProviderStrategyItem, Type: smithy.ShapeTypeStructure})
+var s_CapacityProviderStrategyItemBase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CapacityProviderStrategyItemBase, Type: smithy.ShapeTypeInteger})
+var s_CapacityProviderStrategyItemWeight = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CapacityProviderStrategyItemWeight, Type: smithy.ShapeTypeInteger})
+var sConcurrentModificationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConcurrentModificationException, Members: &mConcurrentModificationException, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var sCondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCondition, Members: &mCondition, Type: smithy.ShapeTypeStructure})
+var sConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnection, Members: &mConnection, Type: smithy.ShapeTypeStructure})
+var sConnectionApiKeyAuthResponseParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectionApiKeyAuthResponseParameters, Members: &mConnectionApiKeyAuthResponseParameters, Type: smithy.ShapeTypeStructure})
+var s_ConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectionArn, Type: smithy.ShapeTypeString})
+var sConnectionAuthorizationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectionAuthorizationType, Members: &mConnectionAuthorizationType, Type: smithy.ShapeTypeEnum})
+var sConnectionAuthResponseParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectionAuthResponseParameters, Members: &mConnectionAuthResponseParameters, Type: smithy.ShapeTypeStructure})
+var sConnectionBasicAuthResponseParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectionBasicAuthResponseParameters, Members: &mConnectionBasicAuthResponseParameters, Type: smithy.ShapeTypeStructure})
+var sConnectionBodyParameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectionBodyParameter, Members: &mConnectionBodyParameter, Type: smithy.ShapeTypeStructure})
+var s_ConnectionBodyParametersList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectionBodyParametersList, Members: &m_ConnectionBodyParametersList, Type: smithy.ShapeTypeList})
+var s_ConnectionDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectionDescription, Type: smithy.ShapeTypeString})
+var sConnectionHeaderParameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectionHeaderParameter, Members: &mConnectionHeaderParameter, Type: smithy.ShapeTypeStructure})
+var s_ConnectionHeaderParametersList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectionHeaderParametersList, Members: &m_ConnectionHeaderParametersList, Type: smithy.ShapeTypeList})
+var sConnectionHttpParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectionHttpParameters, Members: &mConnectionHttpParameters, Type: smithy.ShapeTypeStructure})
+var s_ConnectionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectionName, Type: smithy.ShapeTypeString})
+var sConnectionOAuthClientResponseParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectionOAuthClientResponseParameters, Members: &mConnectionOAuthClientResponseParameters, Type: smithy.ShapeTypeStructure})
+var sConnectionOAuthHttpMethod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectionOAuthHttpMethod, Members: &mConnectionOAuthHttpMethod, Type: smithy.ShapeTypeEnum})
+var sConnectionOAuthResponseParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectionOAuthResponseParameters, Members: &mConnectionOAuthResponseParameters, Type: smithy.ShapeTypeStructure})
+var sConnectionQueryStringParameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectionQueryStringParameter, Members: &mConnectionQueryStringParameter, Type: smithy.ShapeTypeStructure})
+var s_ConnectionQueryStringParametersList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectionQueryStringParametersList, Members: &m_ConnectionQueryStringParametersList, Type: smithy.ShapeTypeList})
+var s_ConnectionResponseList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectionResponseList, Members: &m_ConnectionResponseList, Type: smithy.ShapeTypeList})
+var sConnectionState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectionState, Members: &mConnectionState, Type: smithy.ShapeTypeEnum})
+var s_ConnectionStateReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectionStateReason, Type: smithy.ShapeTypeString})
+var sCreateConnectionApiKeyAuthRequestParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConnectionApiKeyAuthRequestParameters, Members: &mCreateConnectionApiKeyAuthRequestParameters, Type: smithy.ShapeTypeStructure})
+var sCreateConnectionAuthRequestParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConnectionAuthRequestParameters, Members: &mCreateConnectionAuthRequestParameters, Type: smithy.ShapeTypeStructure})
+var sCreateConnectionBasicAuthRequestParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConnectionBasicAuthRequestParameters, Members: &mCreateConnectionBasicAuthRequestParameters, Type: smithy.ShapeTypeStructure})
+var sCreateConnectionOAuthClientRequestParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConnectionOAuthClientRequestParameters, Members: &mCreateConnectionOAuthClientRequestParameters, Type: smithy.ShapeTypeStructure})
+var sCreateConnectionOAuthRequestParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConnectionOAuthRequestParameters, Members: &mCreateConnectionOAuthRequestParameters, Type: smithy.ShapeTypeStructure})
+var s_CreatedBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreatedBy, Type: smithy.ShapeTypeString})
+var s_Database = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Database, Type: smithy.ShapeTypeString})
+var s_DbUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DbUser, Type: smithy.ShapeTypeString})
+var sDeadLetterConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeadLetterConfig, Members: &mDeadLetterConfig, Type: smithy.ShapeTypeStructure})
+var sEcsParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEcsParameters, Members: &mEcsParameters, Type: smithy.ShapeTypeStructure})
+var s_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorCode, Type: smithy.ShapeTypeString})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sEventBus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventBus, Members: &mEventBus, Type: smithy.ShapeTypeStructure})
+var s_EventBusList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventBusList, Members: &m_EventBusList, Type: smithy.ShapeTypeList})
+var s_EventBusName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventBusName, Type: smithy.ShapeTypeString})
+var s_EventBusNameOrArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventBusNameOrArn, Type: smithy.ShapeTypeString})
+var s_EventId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventId, Type: smithy.ShapeTypeString})
+var s_EventPattern = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventPattern, Type: smithy.ShapeTypeString})
+var s_EventResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventResource, Type: smithy.ShapeTypeString})
+var s_EventResourceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventResourceList, Members: &m_EventResourceList, Type: smithy.ShapeTypeList})
+var sEventSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventSource, Members: &mEventSource, Type: smithy.ShapeTypeStructure})
+var s_EventSourceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventSourceList, Members: &m_EventSourceList, Type: smithy.ShapeTypeList})
+var s_EventSourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventSourceName, Type: smithy.ShapeTypeString})
+var s_EventSourceNamePrefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventSourceNamePrefix, Type: smithy.ShapeTypeString})
+var sEventSourceState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventSourceState, Members: &mEventSourceState, Type: smithy.ShapeTypeEnum})
+var s_EventTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventTime, Type: smithy.ShapeTypeTimestamp})
+var s_HeaderKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HeaderKey, Type: smithy.ShapeTypeString})
+var s_HeaderParametersMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HeaderParametersMap, Members: &m_HeaderParametersMap, Type: smithy.ShapeTypeMap})
+var s_HeaderValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HeaderValue, Type: smithy.ShapeTypeString})
+var s_HeaderValueSensitive = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HeaderValueSensitive, Traits: &t1, Type: smithy.ShapeTypeString})
+var sHttpParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpParameters, Members: &mHttpParameters, Type: smithy.ShapeTypeStructure})
+var s_HttpsEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HttpsEndpoint, Type: smithy.ShapeTypeString})
+var sIllegalStatusException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIllegalStatusException, Members: &mIllegalStatusException, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var sInputTransformer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInputTransformer, Members: &mInputTransformer, Type: smithy.ShapeTypeStructure})
+var s_InputTransformerPathKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InputTransformerPathKey, Type: smithy.ShapeTypeString})
+var s_Integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sInternalException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalException, Members: &mInternalException, Traits: &t4, Type: smithy.ShapeTypeStructure})
+var sInvalidEventPatternException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidEventPatternException, Members: &mInvalidEventPatternException, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var sInvalidStateException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidStateException, Members: &mInvalidStateException, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var sKinesisParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKinesisParameters, Members: &mKinesisParameters, Type: smithy.ShapeTypeStructure})
+var sLaunchType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLaunchType, Members: &mLaunchType, Type: smithy.ShapeTypeEnum})
+var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var s_LimitMax100 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LimitMax100, Type: smithy.ShapeTypeInteger})
+var s_LimitMin1 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LimitMin1, Type: smithy.ShapeTypeInteger})
+var s_Long = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Long, Type: smithy.ShapeTypeLong})
+var s_ManagedBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ManagedBy, Type: smithy.ShapeTypeString})
+var sManagedRuleException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManagedRuleException, Members: &mManagedRuleException, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var s_MaximumEventAgeInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaximumEventAgeInSeconds, Type: smithy.ShapeTypeInteger})
+var s_MaximumRetryAttempts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaximumRetryAttempts, Type: smithy.ShapeTypeInteger})
+var s_MessageGroupId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MessageGroupId, Type: smithy.ShapeTypeString})
+var sNetworkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkConfiguration, Members: &mNetworkConfiguration, Type: smithy.ShapeTypeStructure})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var s_NonPartnerEventBusName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonPartnerEventBusName, Type: smithy.ShapeTypeString})
+var s_NonPartnerEventBusNameOrArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonPartnerEventBusNameOrArn, Type: smithy.ShapeTypeString})
+var sOperationDisabledException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperationDisabledException, Members: &mOperationDisabledException, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var sPartnerEventSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPartnerEventSource, Members: &mPartnerEventSource, Type: smithy.ShapeTypeStructure})
+var sPartnerEventSourceAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPartnerEventSourceAccount, Members: &mPartnerEventSourceAccount, Type: smithy.ShapeTypeStructure})
+var s_PartnerEventSourceAccountList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PartnerEventSourceAccountList, Members: &m_PartnerEventSourceAccountList, Type: smithy.ShapeTypeList})
+var s_PartnerEventSourceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PartnerEventSourceList, Members: &m_PartnerEventSourceList, Type: smithy.ShapeTypeList})
+var s_PartnerEventSourceNamePrefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PartnerEventSourceNamePrefix, Type: smithy.ShapeTypeString})
+var s_PathParameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PathParameter, Type: smithy.ShapeTypeString})
+var s_PathParameterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PathParameterList, Members: &m_PathParameterList, Type: smithy.ShapeTypeList})
+var sPlacementConstraint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlacementConstraint, Members: &mPlacementConstraint, Type: smithy.ShapeTypeStructure})
+var s_PlacementConstraintExpression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlacementConstraintExpression, Type: smithy.ShapeTypeString})
+var s_PlacementConstraints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlacementConstraints, Members: &m_PlacementConstraints, Type: smithy.ShapeTypeList})
+var sPlacementConstraintType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlacementConstraintType, Members: &mPlacementConstraintType, Type: smithy.ShapeTypeEnum})
+var s_PlacementStrategies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlacementStrategies, Members: &m_PlacementStrategies, Type: smithy.ShapeTypeList})
+var sPlacementStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlacementStrategy, Members: &mPlacementStrategy, Type: smithy.ShapeTypeStructure})
+var s_PlacementStrategyField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlacementStrategyField, Type: smithy.ShapeTypeString})
+var sPlacementStrategyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlacementStrategyType, Members: &mPlacementStrategyType, Type: smithy.ShapeTypeEnum})
+var sPolicyLengthExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyLengthExceededException, Members: &mPolicyLengthExceededException, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var s_Principal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Principal, Type: smithy.ShapeTypeString})
+var sPropagateTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPropagateTags, Members: &mPropagateTags, Type: smithy.ShapeTypeEnum})
+var sPutEventsRequestEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEventsRequestEntry, Members: &mPutEventsRequestEntry, Type: smithy.ShapeTypeStructure})
+var s_PutEventsRequestEntryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PutEventsRequestEntryList, Members: &m_PutEventsRequestEntryList, Type: smithy.ShapeTypeList})
+var sPutEventsResultEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEventsResultEntry, Members: &mPutEventsResultEntry, Type: smithy.ShapeTypeStructure})
+var s_PutEventsResultEntryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PutEventsResultEntryList, Members: &m_PutEventsResultEntryList, Type: smithy.ShapeTypeList})
+var sPutPartnerEventsRequestEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutPartnerEventsRequestEntry, Members: &mPutPartnerEventsRequestEntry, Type: smithy.ShapeTypeStructure})
+var s_PutPartnerEventsRequestEntryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PutPartnerEventsRequestEntryList, Members: &m_PutPartnerEventsRequestEntryList, Type: smithy.ShapeTypeList})
+var sPutPartnerEventsResultEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutPartnerEventsResultEntry, Members: &mPutPartnerEventsResultEntry, Type: smithy.ShapeTypeStructure})
+var s_PutPartnerEventsResultEntryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PutPartnerEventsResultEntryList, Members: &m_PutPartnerEventsResultEntryList, Type: smithy.ShapeTypeList})
+var sPutTargetsResultEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutTargetsResultEntry, Members: &mPutTargetsResultEntry, Type: smithy.ShapeTypeStructure})
+var s_PutTargetsResultEntryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PutTargetsResultEntryList, Members: &m_PutTargetsResultEntryList, Type: smithy.ShapeTypeList})
+var s_QueryStringKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryStringKey, Type: smithy.ShapeTypeString})
+var s_QueryStringParametersMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryStringParametersMap, Members: &m_QueryStringParametersMap, Type: smithy.ShapeTypeMap})
+var s_QueryStringValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryStringValue, Type: smithy.ShapeTypeString})
+var s_QueryStringValueSensitive = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryStringValueSensitive, Traits: &t1, Type: smithy.ShapeTypeString})
+var sRedshiftDataParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRedshiftDataParameters, Members: &mRedshiftDataParameters, Type: smithy.ShapeTypeStructure})
+var s_RedshiftSecretManagerArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RedshiftSecretManagerArn, Type: smithy.ShapeTypeString})
+var s_ReferenceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReferenceId, Type: smithy.ShapeTypeString})
+var sRemoveTargetsResultEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveTargetsResultEntry, Members: &mRemoveTargetsResultEntry, Type: smithy.ShapeTypeStructure})
+var s_RemoveTargetsResultEntryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RemoveTargetsResultEntryList, Members: &m_RemoveTargetsResultEntryList, Type: smithy.ShapeTypeList})
+var sReplay = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplay, Members: &mReplay, Type: smithy.ShapeTypeStructure})
+var s_ReplayArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReplayArn, Type: smithy.ShapeTypeString})
+var s_ReplayDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReplayDescription, Type: smithy.ShapeTypeString})
+var sReplayDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplayDestination, Members: &mReplayDestination, Type: smithy.ShapeTypeStructure})
+var s_ReplayDestinationFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReplayDestinationFilters, Members: &m_ReplayDestinationFilters, Type: smithy.ShapeTypeList})
+var s_ReplayList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReplayList, Members: &m_ReplayList, Type: smithy.ShapeTypeList})
+var s_ReplayName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReplayName, Type: smithy.ShapeTypeString})
+var sReplayState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplayState, Members: &mReplayState, Type: smithy.ShapeTypeEnum})
+var s_ReplayStateReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReplayStateReason, Type: smithy.ShapeTypeString})
+var sResourceAlreadyExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceAlreadyExistsException, Members: &mResourceAlreadyExistsException, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var s_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var s_RetentionDays = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RetentionDays, Type: smithy.ShapeTypeInteger})
+var sRetryPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetryPolicy, Members: &mRetryPolicy, Type: smithy.ShapeTypeStructure})
+var s_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRule, Members: &mRule, Type: smithy.ShapeTypeStructure})
+var s_RuleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleArn, Type: smithy.ShapeTypeString})
+var s_RuleDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleDescription, Type: smithy.ShapeTypeString})
+var s_RuleName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleName, Type: smithy.ShapeTypeString})
+var s_RuleNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleNameList, Members: &m_RuleNameList, Type: smithy.ShapeTypeList})
+var s_RuleResponseList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleResponseList, Members: &m_RuleResponseList, Type: smithy.ShapeTypeList})
+var sRuleState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleState, Members: &mRuleState, Type: smithy.ShapeTypeEnum})
+var sRunCommandParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRunCommandParameters, Members: &mRunCommandParameters, Type: smithy.ShapeTypeStructure})
+var sRunCommandTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRunCommandTarget, Members: &mRunCommandTarget, Type: smithy.ShapeTypeStructure})
+var s_RunCommandTargetKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RunCommandTargetKey, Type: smithy.ShapeTypeString})
+var s_RunCommandTargets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RunCommandTargets, Members: &m_RunCommandTargets, Type: smithy.ShapeTypeList})
+var s_RunCommandTargetValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RunCommandTargetValue, Type: smithy.ShapeTypeString})
+var s_RunCommandTargetValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RunCommandTargetValues, Members: &m_RunCommandTargetValues, Type: smithy.ShapeTypeList})
+var sSageMakerPipelineParameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSageMakerPipelineParameter, Members: &mSageMakerPipelineParameter, Type: smithy.ShapeTypeStructure})
+var s_SageMakerPipelineParameterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SageMakerPipelineParameterList, Members: &m_SageMakerPipelineParameterList, Type: smithy.ShapeTypeList})
+var s_SageMakerPipelineParameterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SageMakerPipelineParameterName, Type: smithy.ShapeTypeString})
+var sSageMakerPipelineParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSageMakerPipelineParameters, Members: &mSageMakerPipelineParameters, Type: smithy.ShapeTypeStructure})
+var s_SageMakerPipelineParameterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SageMakerPipelineParameterValue, Type: smithy.ShapeTypeString})
+var s_ScheduleExpression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScheduleExpression, Type: smithy.ShapeTypeString})
+var s_SecretsManagerSecretArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecretsManagerSecretArn, Type: smithy.ShapeTypeString})
+var s_SensitiveString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensitiveString, Traits: &t1, Type: smithy.ShapeTypeString})
+var s_Sql = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Sql, Type: smithy.ShapeTypeString})
+var sSqsParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSqsParameters, Members: &mSqsParameters, Type: smithy.ShapeTypeStructure})
+var s_StatementId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatementId, Type: smithy.ShapeTypeString})
+var s_StatementName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatementName, Type: smithy.ShapeTypeString})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString})
+var s_StringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTarget, Members: &mTarget, Type: smithy.ShapeTypeStructure})
+var s_TargetArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetArn, Type: smithy.ShapeTypeString})
+var s_TargetId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetId, Type: smithy.ShapeTypeString})
+var s_TargetIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetIdList, Members: &m_TargetIdList, Type: smithy.ShapeTypeList})
+var s_TargetInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetInput, Type: smithy.ShapeTypeString})
+var s_TargetInputPath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetInputPath, Type: smithy.ShapeTypeString})
+var s_TargetList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetList, Members: &m_TargetList, Type: smithy.ShapeTypeList})
+var s_TargetPartitionKeyPath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetPartitionKeyPath, Type: smithy.ShapeTypeString})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var s_TraceHeader = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TraceHeader, Type: smithy.ShapeTypeString})
+var s_TransformerInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TransformerInput, Type: smithy.ShapeTypeString})
+var s_TransformerPaths = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TransformerPaths, Members: &m_TransformerPaths, Type: smithy.ShapeTypeMap})
+var sUpdateConnectionApiKeyAuthRequestParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConnectionApiKeyAuthRequestParameters, Members: &mUpdateConnectionApiKeyAuthRequestParameters, Type: smithy.ShapeTypeStructure})
+var sUpdateConnectionAuthRequestParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConnectionAuthRequestParameters, Members: &mUpdateConnectionAuthRequestParameters, Type: smithy.ShapeTypeStructure})
+var sUpdateConnectionBasicAuthRequestParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConnectionBasicAuthRequestParameters, Members: &mUpdateConnectionBasicAuthRequestParameters, Type: smithy.ShapeTypeStructure})
+var sUpdateConnectionOAuthClientRequestParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConnectionOAuthClientRequestParameters, Members: &mUpdateConnectionOAuthClientRequestParameters, Type: smithy.ShapeTypeStructure})
+var sUpdateConnectionOAuthRequestParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConnectionOAuthRequestParameters, Members: &mUpdateConnectionOAuthRequestParameters, Type: smithy.ShapeTypeStructure})
+var sActivateEventSourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActivateEventSourceRequest, Members: &mActivateEventSourceRequest, Type: smithy.ShapeTypeStructure})
+var sCancelReplayRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelReplayRequest, Members: &mCancelReplayRequest, Type: smithy.ShapeTypeStructure})
+var sCancelReplayResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelReplayResponse, Members: &mCancelReplayResponse, Type: smithy.ShapeTypeStructure})
+var sCreateApiDestinationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateApiDestinationRequest, Members: &mCreateApiDestinationRequest, Type: smithy.ShapeTypeStructure})
+var sCreateApiDestinationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateApiDestinationResponse, Members: &mCreateApiDestinationResponse, Type: smithy.ShapeTypeStructure})
+var sCreateArchiveRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateArchiveRequest, Members: &mCreateArchiveRequest, Type: smithy.ShapeTypeStructure})
+var sCreateArchiveResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateArchiveResponse, Members: &mCreateArchiveResponse, Type: smithy.ShapeTypeStructure})
+var sCreateConnectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConnectionRequest, Members: &mCreateConnectionRequest, Type: smithy.ShapeTypeStructure})
+var sCreateConnectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConnectionResponse, Members: &mCreateConnectionResponse, Type: smithy.ShapeTypeStructure})
+var sCreateEventBusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEventBusRequest, Members: &mCreateEventBusRequest, Type: smithy.ShapeTypeStructure})
+var sCreateEventBusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEventBusResponse, Members: &mCreateEventBusResponse, Type: smithy.ShapeTypeStructure})
+var sCreatePartnerEventSourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePartnerEventSourceRequest, Members: &mCreatePartnerEventSourceRequest, Type: smithy.ShapeTypeStructure})
+var sCreatePartnerEventSourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePartnerEventSourceResponse, Members: &mCreatePartnerEventSourceResponse, Type: smithy.ShapeTypeStructure})
+var sDeactivateEventSourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeactivateEventSourceRequest, Members: &mDeactivateEventSourceRequest, Type: smithy.ShapeTypeStructure})
+var sDeauthorizeConnectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeauthorizeConnectionRequest, Members: &mDeauthorizeConnectionRequest, Type: smithy.ShapeTypeStructure})
+var sDeauthorizeConnectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeauthorizeConnectionResponse, Members: &mDeauthorizeConnectionResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteApiDestinationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteApiDestinationRequest, Members: &mDeleteApiDestinationRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteApiDestinationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteApiDestinationResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteArchiveRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteArchiveRequest, Members: &mDeleteArchiveRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteArchiveResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteArchiveResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteConnectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnectionRequest, Members: &mDeleteConnectionRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteConnectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnectionResponse, Members: &mDeleteConnectionResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteEventBusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEventBusRequest, Members: &mDeleteEventBusRequest, Type: smithy.ShapeTypeStructure})
+var sDeletePartnerEventSourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePartnerEventSourceRequest, Members: &mDeletePartnerEventSourceRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRuleRequest, Members: &mDeleteRuleRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeApiDestinationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeApiDestinationRequest, Members: &mDescribeApiDestinationRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeApiDestinationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeApiDestinationResponse, Members: &mDescribeApiDestinationResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeArchiveRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeArchiveRequest, Members: &mDescribeArchiveRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeArchiveResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeArchiveResponse, Members: &mDescribeArchiveResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeConnectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConnectionRequest, Members: &mDescribeConnectionRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeConnectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConnectionResponse, Members: &mDescribeConnectionResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeEventBusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventBusRequest, Members: &mDescribeEventBusRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeEventBusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventBusResponse, Members: &mDescribeEventBusResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeEventSourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventSourceRequest, Members: &mDescribeEventSourceRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeEventSourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventSourceResponse, Members: &mDescribeEventSourceResponse, Type: smithy.ShapeTypeStructure})
+var sDescribePartnerEventSourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribePartnerEventSourceRequest, Members: &mDescribePartnerEventSourceRequest, Type: smithy.ShapeTypeStructure})
+var sDescribePartnerEventSourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribePartnerEventSourceResponse, Members: &mDescribePartnerEventSourceResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeReplayRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeReplayRequest, Members: &mDescribeReplayRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeReplayResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeReplayResponse, Members: &mDescribeReplayResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRuleRequest, Members: &mDescribeRuleRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRuleResponse, Members: &mDescribeRuleResponse, Type: smithy.ShapeTypeStructure})
+var sDisableRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableRuleRequest, Members: &mDisableRuleRequest, Type: smithy.ShapeTypeStructure})
+var sEnableRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableRuleRequest, Members: &mEnableRuleRequest, Type: smithy.ShapeTypeStructure})
+var sListApiDestinationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListApiDestinationsRequest, Members: &mListApiDestinationsRequest, Type: smithy.ShapeTypeStructure})
+var sListApiDestinationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListApiDestinationsResponse, Members: &mListApiDestinationsResponse, Type: smithy.ShapeTypeStructure})
+var sListArchivesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListArchivesRequest, Members: &mListArchivesRequest, Type: smithy.ShapeTypeStructure})
+var sListArchivesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListArchivesResponse, Members: &mListArchivesResponse, Type: smithy.ShapeTypeStructure})
+var sListConnectionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConnectionsRequest, Members: &mListConnectionsRequest, Type: smithy.ShapeTypeStructure})
+var sListConnectionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConnectionsResponse, Members: &mListConnectionsResponse, Type: smithy.ShapeTypeStructure})
+var sListEventBusesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEventBusesRequest, Members: &mListEventBusesRequest, Type: smithy.ShapeTypeStructure})
+var sListEventBusesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEventBusesResponse, Members: &mListEventBusesResponse, Type: smithy.ShapeTypeStructure})
+var sListEventSourcesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEventSourcesRequest, Members: &mListEventSourcesRequest, Type: smithy.ShapeTypeStructure})
+var sListEventSourcesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEventSourcesResponse, Members: &mListEventSourcesResponse, Type: smithy.ShapeTypeStructure})
+var sListPartnerEventSourceAccountsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPartnerEventSourceAccountsRequest, Members: &mListPartnerEventSourceAccountsRequest, Type: smithy.ShapeTypeStructure})
+var sListPartnerEventSourceAccountsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPartnerEventSourceAccountsResponse, Members: &mListPartnerEventSourceAccountsResponse, Type: smithy.ShapeTypeStructure})
+var sListPartnerEventSourcesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPartnerEventSourcesRequest, Members: &mListPartnerEventSourcesRequest, Type: smithy.ShapeTypeStructure})
+var sListPartnerEventSourcesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPartnerEventSourcesResponse, Members: &mListPartnerEventSourcesResponse, Type: smithy.ShapeTypeStructure})
+var sListReplaysRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListReplaysRequest, Members: &mListReplaysRequest, Type: smithy.ShapeTypeStructure})
+var sListReplaysResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListReplaysResponse, Members: &mListReplaysResponse, Type: smithy.ShapeTypeStructure})
+var sListRuleNamesByTargetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRuleNamesByTargetRequest, Members: &mListRuleNamesByTargetRequest, Type: smithy.ShapeTypeStructure})
+var sListRuleNamesByTargetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRuleNamesByTargetResponse, Members: &mListRuleNamesByTargetResponse, Type: smithy.ShapeTypeStructure})
+var sListRulesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRulesRequest, Members: &mListRulesRequest, Type: smithy.ShapeTypeStructure})
+var sListRulesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRulesResponse, Members: &mListRulesResponse, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure})
+var sListTargetsByRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTargetsByRuleRequest, Members: &mListTargetsByRuleRequest, Type: smithy.ShapeTypeStructure})
+var sListTargetsByRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTargetsByRuleResponse, Members: &mListTargetsByRuleResponse, Type: smithy.ShapeTypeStructure})
+var sPutEventsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEventsRequest, Members: &mPutEventsRequest, Type: smithy.ShapeTypeStructure})
+var sPutEventsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEventsResponse, Members: &mPutEventsResponse, Type: smithy.ShapeTypeStructure})
+var sPutPartnerEventsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutPartnerEventsRequest, Members: &mPutPartnerEventsRequest, Type: smithy.ShapeTypeStructure})
+var sPutPartnerEventsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutPartnerEventsResponse, Members: &mPutPartnerEventsResponse, Type: smithy.ShapeTypeStructure})
+var sPutPermissionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutPermissionRequest, Members: &mPutPermissionRequest, Type: smithy.ShapeTypeStructure})
+var sPutRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRuleRequest, Members: &mPutRuleRequest, Type: smithy.ShapeTypeStructure})
+var sPutRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRuleResponse, Members: &mPutRuleResponse, Type: smithy.ShapeTypeStructure})
+var sPutTargetsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutTargetsRequest, Members: &mPutTargetsRequest, Type: smithy.ShapeTypeStructure})
+var sPutTargetsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutTargetsResponse, Members: &mPutTargetsResponse, Type: smithy.ShapeTypeStructure})
+var sRemovePermissionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemovePermissionRequest, Members: &mRemovePermissionRequest, Type: smithy.ShapeTypeStructure})
+var sRemoveTargetsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveTargetsRequest, Members: &mRemoveTargetsRequest, Type: smithy.ShapeTypeStructure})
+var sRemoveTargetsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveTargetsResponse, Members: &mRemoveTargetsResponse, Type: smithy.ShapeTypeStructure})
+var sStartReplayRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartReplayRequest, Members: &mStartReplayRequest, Type: smithy.ShapeTypeStructure})
+var sStartReplayResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartReplayResponse, Members: &mStartReplayResponse, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sTestEventPatternRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestEventPatternRequest, Members: &mTestEventPatternRequest, Type: smithy.ShapeTypeStructure})
+var sTestEventPatternResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestEventPatternResponse, Members: &mTestEventPatternResponse, Type: smithy.ShapeTypeStructure})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateApiDestinationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApiDestinationRequest, Members: &mUpdateApiDestinationRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateApiDestinationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApiDestinationResponse, Members: &mUpdateApiDestinationResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateArchiveRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateArchiveRequest, Members: &mUpdateArchiveRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateArchiveResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateArchiveResponse, Members: &mUpdateArchiveResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateConnectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConnectionRequest, Members: &mUpdateConnectionRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateConnectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConnectionResponse, Members: &mUpdateConnectionResponse, Type: smithy.ShapeTypeStructure})
+
+var sApiDestination_ApiDestinationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiDestinationArn", ID: &i_ApiDestinationArn, Type: smithy.ShapeTypeString})
+var sApiDestination_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ApiDestinationName, Type: smithy.ShapeTypeString})
+var sApiDestination_ApiDestinationState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiDestinationState", ID: &iApiDestinationState, Members: &mApiDestinationState, Type: smithy.ShapeTypeEnum})
+var sApiDestination_ConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionArn", ID: &i_ConnectionArn, Type: smithy.ShapeTypeString})
+var sApiDestination_InvocationEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvocationEndpoint", ID: &i_HttpsEndpoint, Type: smithy.ShapeTypeString})
+var sApiDestination_HttpMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HttpMethod", ID: &iApiDestinationHttpMethod, Members: &mApiDestinationHttpMethod, Type: smithy.ShapeTypeEnum})
+var sApiDestination_InvocationRateLimitPerSecond = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvocationRateLimitPerSecond", ID: &i_ApiDestinationInvocationRateLimitPerSecond, Type: smithy.ShapeTypeInteger})
+var sApiDestination_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sApiDestination_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sApiDestinationHttpMethod_POST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApiDestinationHttpMethod_GET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GET", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApiDestinationHttpMethod_HEAD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HEAD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApiDestinationHttpMethod_OPTIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPTIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApiDestinationHttpMethod_PUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PUT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApiDestinationHttpMethod_PATCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PATCH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApiDestinationHttpMethod_DELETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_ApiDestinationResponseList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iApiDestination, Members: &mApiDestination, Type: smithy.ShapeTypeStructure})
+var sApiDestinationState_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApiDestinationState_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sArchive_ArchiveName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArchiveName", ID: &i_ArchiveName, Type: smithy.ShapeTypeString})
+var sArchive_EventSourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventSourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sArchive_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iArchiveState, Members: &mArchiveState, Type: smithy.ShapeTypeEnum})
+var sArchive_StateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateReason", ID: &i_ArchiveStateReason, Type: smithy.ShapeTypeString})
+var sArchive_RetentionDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionDays", ID: &i_RetentionDays, Type: smithy.ShapeTypeInteger})
+var sArchive_SizeBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SizeBytes", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sArchive_EventCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventCount", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sArchive_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var s_ArchiveResponseList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iArchive, Members: &mArchive, Type: smithy.ShapeTypeStructure})
+var sArchiveState_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sArchiveState_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sArchiveState_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sArchiveState_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sArchiveState_CREATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sArchiveState_UPDATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAssignPublicIp_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAssignPublicIp_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsVpcConfiguration_Subnets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subnets", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sAwsVpcConfiguration_SecurityGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroups", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sAwsVpcConfiguration_AssignPublicIp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssignPublicIp", ID: &iAssignPublicIp, Members: &mAssignPublicIp, Type: smithy.ShapeTypeEnum})
+var sBatchArrayProperties_Size = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Size", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sBatchParameters_JobDefinition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobDefinition", ID: &i_String, Type: smithy.ShapeTypeString})
+var sBatchParameters_JobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sBatchParameters_ArrayProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArrayProperties", ID: &iBatchArrayProperties, Members: &mBatchArrayProperties, Type: smithy.ShapeTypeStructure})
+var sBatchParameters_RetryStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetryStrategy", ID: &iBatchRetryStrategy, Members: &mBatchRetryStrategy, Type: smithy.ShapeTypeStructure})
+var sBatchRetryStrategy_Attempts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attempts", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var s_CapacityProviderStrategy_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCapacityProviderStrategyItem, Members: &mCapacityProviderStrategyItem, Type: smithy.ShapeTypeStructure})
+var sCapacityProviderStrategyItem_capacityProvider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capacityProvider", ID: &i_CapacityProvider, Type: smithy.ShapeTypeString})
+var sCapacityProviderStrategyItem_weight = smithy.NewStaticSchema(smithy.StaticSchema{Member: "weight", ID: &i_CapacityProviderStrategyItemWeight, Type: smithy.ShapeTypeInteger})
+var sCapacityProviderStrategyItem_base = smithy.NewStaticSchema(smithy.StaticSchema{Member: "base", ID: &i_CapacityProviderStrategyItemBase, Type: smithy.ShapeTypeInteger})
+var sConcurrentModificationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sCondition_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCondition_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCondition_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_String, Type: smithy.ShapeTypeString})
+var sConnection_ConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionArn", ID: &i_ConnectionArn, Type: smithy.ShapeTypeString})
+var sConnection_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ConnectionName, Type: smithy.ShapeTypeString})
+var sConnection_ConnectionState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionState", ID: &iConnectionState, Members: &mConnectionState, Type: smithy.ShapeTypeEnum})
+var sConnection_StateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateReason", ID: &i_ConnectionStateReason, Type: smithy.ShapeTypeString})
+var sConnection_AuthorizationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizationType", ID: &iConnectionAuthorizationType, Members: &mConnectionAuthorizationType, Type: smithy.ShapeTypeEnum})
+var sConnection_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sConnection_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sConnection_LastAuthorizedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastAuthorizedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sConnectionApiKeyAuthResponseParameters_ApiKeyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiKeyName", ID: &i_AuthHeaderParameters, Type: smithy.ShapeTypeString})
+var sConnectionAuthorizationType_BASIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BASIC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionAuthorizationType_OAUTH_CLIENT_CREDENTIALS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OAUTH_CLIENT_CREDENTIALS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionAuthorizationType_API_KEY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "API_KEY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionAuthResponseParameters_BasicAuthParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BasicAuthParameters", ID: &iConnectionBasicAuthResponseParameters, Members: &mConnectionBasicAuthResponseParameters, Type: smithy.ShapeTypeStructure})
+var sConnectionAuthResponseParameters_OAuthParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OAuthParameters", ID: &iConnectionOAuthResponseParameters, Members: &mConnectionOAuthResponseParameters, Type: smithy.ShapeTypeStructure})
+var sConnectionAuthResponseParameters_ApiKeyAuthParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiKeyAuthParameters", ID: &iConnectionApiKeyAuthResponseParameters, Members: &mConnectionApiKeyAuthResponseParameters, Type: smithy.ShapeTypeStructure})
+var sConnectionAuthResponseParameters_InvocationHttpParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvocationHttpParameters", ID: &iConnectionHttpParameters, Members: &mConnectionHttpParameters, Type: smithy.ShapeTypeStructure})
+var sConnectionBasicAuthResponseParameters_Username = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Username", ID: &i_AuthHeaderParameters, Type: smithy.ShapeTypeString})
+var sConnectionBodyParameter_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_String, Type: smithy.ShapeTypeString})
+var sConnectionBodyParameter_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_SensitiveString, Traits: &t3, Type: smithy.ShapeTypeString})
+var sConnectionBodyParameter_IsValueSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsValueSecret", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var s_ConnectionBodyParametersList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConnectionBodyParameter, Members: &mConnectionBodyParameter, Type: smithy.ShapeTypeStructure})
+var sConnectionHeaderParameter_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_HeaderKey, Type: smithy.ShapeTypeString})
+var sConnectionHeaderParameter_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_HeaderValueSensitive, Traits: &t3, Type: smithy.ShapeTypeString})
+var sConnectionHeaderParameter_IsValueSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsValueSecret", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var s_ConnectionHeaderParametersList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConnectionHeaderParameter, Members: &mConnectionHeaderParameter, Type: smithy.ShapeTypeStructure})
+var sConnectionHttpParameters_HeaderParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HeaderParameters", ID: &i_ConnectionHeaderParametersList, Members: &m_ConnectionHeaderParametersList, Type: smithy.ShapeTypeList})
+var sConnectionHttpParameters_QueryStringParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryStringParameters", ID: &i_ConnectionQueryStringParametersList, Members: &m_ConnectionQueryStringParametersList, Type: smithy.ShapeTypeList})
+var sConnectionHttpParameters_BodyParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BodyParameters", ID: &i_ConnectionBodyParametersList, Members: &m_ConnectionBodyParametersList, Type: smithy.ShapeTypeList})
+var sConnectionOAuthClientResponseParameters_ClientID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientID", ID: &i_AuthHeaderParameters, Type: smithy.ShapeTypeString})
+var sConnectionOAuthHttpMethod_GET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GET", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionOAuthHttpMethod_POST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionOAuthHttpMethod_PUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PUT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionOAuthResponseParameters_ClientParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientParameters", ID: &iConnectionOAuthClientResponseParameters, Members: &mConnectionOAuthClientResponseParameters, Type: smithy.ShapeTypeStructure})
+var sConnectionOAuthResponseParameters_AuthorizationEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizationEndpoint", ID: &i_HttpsEndpoint, Type: smithy.ShapeTypeString})
+var sConnectionOAuthResponseParameters_HttpMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HttpMethod", ID: &iConnectionOAuthHttpMethod, Members: &mConnectionOAuthHttpMethod, Type: smithy.ShapeTypeEnum})
+var sConnectionOAuthResponseParameters_OAuthHttpParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OAuthHttpParameters", ID: &iConnectionHttpParameters, Members: &mConnectionHttpParameters, Type: smithy.ShapeTypeStructure})
+var sConnectionQueryStringParameter_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_QueryStringKey, Type: smithy.ShapeTypeString})
+var sConnectionQueryStringParameter_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_QueryStringValueSensitive, Traits: &t3, Type: smithy.ShapeTypeString})
+var sConnectionQueryStringParameter_IsValueSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsValueSecret", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var s_ConnectionQueryStringParametersList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConnectionQueryStringParameter, Members: &mConnectionQueryStringParameter, Type: smithy.ShapeTypeStructure})
+var s_ConnectionResponseList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConnection, Members: &mConnection, Type: smithy.ShapeTypeStructure})
+var sConnectionState_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionState_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionState_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionState_AUTHORIZED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTHORIZED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionState_DEAUTHORIZED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEAUTHORIZED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionState_AUTHORIZING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTHORIZING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionState_DEAUTHORIZING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEAUTHORIZING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCreateConnectionApiKeyAuthRequestParameters_ApiKeyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiKeyName", ID: &i_AuthHeaderParameters, Type: smithy.ShapeTypeString})
+var sCreateConnectionApiKeyAuthRequestParameters_ApiKeyValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiKeyValue", ID: &i_AuthHeaderParametersSensitive, Traits: &t3, Type: smithy.ShapeTypeString})
+var sCreateConnectionAuthRequestParameters_BasicAuthParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BasicAuthParameters", ID: &iCreateConnectionBasicAuthRequestParameters, Members: &mCreateConnectionBasicAuthRequestParameters, Type: smithy.ShapeTypeStructure})
+var sCreateConnectionAuthRequestParameters_OAuthParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OAuthParameters", ID: &iCreateConnectionOAuthRequestParameters, Members: &mCreateConnectionOAuthRequestParameters, Type: smithy.ShapeTypeStructure})
+var sCreateConnectionAuthRequestParameters_ApiKeyAuthParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiKeyAuthParameters", ID: &iCreateConnectionApiKeyAuthRequestParameters, Members: &mCreateConnectionApiKeyAuthRequestParameters, Type: smithy.ShapeTypeStructure})
+var sCreateConnectionAuthRequestParameters_InvocationHttpParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvocationHttpParameters", ID: &iConnectionHttpParameters, Members: &mConnectionHttpParameters, Type: smithy.ShapeTypeStructure})
+var sCreateConnectionBasicAuthRequestParameters_Username = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Username", ID: &i_AuthHeaderParameters, Type: smithy.ShapeTypeString})
+var sCreateConnectionBasicAuthRequestParameters_Password = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Password", ID: &i_AuthHeaderParametersSensitive, Traits: &t3, Type: smithy.ShapeTypeString})
+var sCreateConnectionOAuthClientRequestParameters_ClientID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientID", ID: &i_AuthHeaderParameters, Type: smithy.ShapeTypeString})
+var sCreateConnectionOAuthClientRequestParameters_ClientSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientSecret", ID: &i_AuthHeaderParametersSensitive, Traits: &t3, Type: smithy.ShapeTypeString})
+var sCreateConnectionOAuthRequestParameters_ClientParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientParameters", ID: &iCreateConnectionOAuthClientRequestParameters, Members: &mCreateConnectionOAuthClientRequestParameters, Type: smithy.ShapeTypeStructure})
+var sCreateConnectionOAuthRequestParameters_AuthorizationEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizationEndpoint", ID: &i_HttpsEndpoint, Type: smithy.ShapeTypeString})
+var sCreateConnectionOAuthRequestParameters_HttpMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HttpMethod", ID: &iConnectionOAuthHttpMethod, Members: &mConnectionOAuthHttpMethod, Type: smithy.ShapeTypeEnum})
+var sCreateConnectionOAuthRequestParameters_OAuthHttpParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OAuthHttpParameters", ID: &iConnectionHttpParameters, Members: &mConnectionHttpParameters, Type: smithy.ShapeTypeStructure})
+var sDeadLetterConfig_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sEcsParameters_TaskDefinitionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskDefinitionArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sEcsParameters_TaskCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskCount", ID: &i_LimitMin1, Type: smithy.ShapeTypeInteger})
+var sEcsParameters_LaunchType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LaunchType", ID: &iLaunchType, Members: &mLaunchType, Type: smithy.ShapeTypeEnum})
+var sEcsParameters_NetworkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkConfiguration", ID: &iNetworkConfiguration, Members: &mNetworkConfiguration, Type: smithy.ShapeTypeStructure})
+var sEcsParameters_PlatformVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlatformVersion", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEcsParameters_Group = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Group", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEcsParameters_CapacityProviderStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CapacityProviderStrategy", ID: &i_CapacityProviderStrategy, Members: &m_CapacityProviderStrategy, Type: smithy.ShapeTypeList})
+var sEcsParameters_EnableECSManagedTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableECSManagedTags", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sEcsParameters_EnableExecuteCommand = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableExecuteCommand", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sEcsParameters_PlacementConstraints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlacementConstraints", ID: &i_PlacementConstraints, Members: &m_PlacementConstraints, Type: smithy.ShapeTypeList})
+var sEcsParameters_PlacementStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlacementStrategy", ID: &i_PlacementStrategies, Members: &m_PlacementStrategies, Type: smithy.ShapeTypeList})
+var sEcsParameters_PropagateTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PropagateTags", ID: &iPropagateTags, Members: &mPropagateTags, Type: smithy.ShapeTypeEnum})
+var sEcsParameters_ReferenceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReferenceId", ID: &i_ReferenceId, Type: smithy.ShapeTypeString})
+var sEcsParameters_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sEventBus_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEventBus_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEventBus_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_EventBusList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventBus, Members: &mEventBus, Type: smithy.ShapeTypeStructure})
+var s_EventResourceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_EventResource, Type: smithy.ShapeTypeString})
+var sEventSource_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEventSource_CreatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedBy", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEventSource_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sEventSource_ExpirationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpirationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sEventSource_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEventSource_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iEventSourceState, Members: &mEventSourceState, Type: smithy.ShapeTypeEnum})
+var s_EventSourceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventSource, Members: &mEventSource, Type: smithy.ShapeTypeStructure})
+var sEventSourceState_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventSourceState_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventSourceState_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_HeaderParametersMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_HeaderKey, Type: smithy.ShapeTypeString})
+var s_HeaderParametersMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_HeaderValue, Type: smithy.ShapeTypeString})
+var sHttpParameters_PathParameterValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PathParameterValues", ID: &i_PathParameterList, Members: &m_PathParameterList, Type: smithy.ShapeTypeList})
+var sHttpParameters_HeaderParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HeaderParameters", ID: &i_HeaderParametersMap, Members: &m_HeaderParametersMap, Type: smithy.ShapeTypeMap})
+var sHttpParameters_QueryStringParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryStringParameters", ID: &i_QueryStringParametersMap, Members: &m_QueryStringParametersMap, Type: smithy.ShapeTypeMap})
+var sIllegalStatusException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInputTransformer_InputPathsMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputPathsMap", ID: &i_TransformerPaths, Members: &m_TransformerPaths, Type: smithy.ShapeTypeMap})
+var sInputTransformer_InputTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputTemplate", ID: &i_TransformerInput, Type: smithy.ShapeTypeString})
+var sInternalException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidEventPatternException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidStateException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sKinesisParameters_PartitionKeyPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartitionKeyPath", ID: &i_TargetPartitionKeyPath, Type: smithy.ShapeTypeString})
+var sLaunchType_EC2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EC2", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLaunchType_FARGATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FARGATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLaunchType_EXTERNAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXTERNAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sManagedRuleException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sNetworkConfiguration_awsvpcConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsvpcConfiguration", ID: &iAwsVpcConfiguration, Members: &mAwsVpcConfiguration, Type: smithy.ShapeTypeStructure})
+var sOperationDisabledException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sPartnerEventSource_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sPartnerEventSource_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sPartnerEventSourceAccount_Account = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Account", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sPartnerEventSourceAccount_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sPartnerEventSourceAccount_ExpirationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpirationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sPartnerEventSourceAccount_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iEventSourceState, Members: &mEventSourceState, Type: smithy.ShapeTypeEnum})
+var s_PartnerEventSourceAccountList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPartnerEventSourceAccount, Members: &mPartnerEventSourceAccount, Type: smithy.ShapeTypeStructure})
+var s_PartnerEventSourceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPartnerEventSource, Members: &mPartnerEventSource, Type: smithy.ShapeTypeStructure})
+var s_PathParameterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_PathParameter, Type: smithy.ShapeTypeString})
+var sPlacementConstraint_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iPlacementConstraintType, Members: &mPlacementConstraintType, Type: smithy.ShapeTypeEnum})
+var sPlacementConstraint_expression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expression", ID: &i_PlacementConstraintExpression, Type: smithy.ShapeTypeString})
+var s_PlacementConstraints_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPlacementConstraint, Members: &mPlacementConstraint, Type: smithy.ShapeTypeStructure})
+var sPlacementConstraintType_DISTINCT_INSTANCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISTINCT_INSTANCE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPlacementConstraintType_MEMBER_OF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEMBER_OF", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_PlacementStrategies_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPlacementStrategy, Members: &mPlacementStrategy, Type: smithy.ShapeTypeStructure})
+var sPlacementStrategy_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iPlacementStrategyType, Members: &mPlacementStrategyType, Type: smithy.ShapeTypeEnum})
+var sPlacementStrategy_field = smithy.NewStaticSchema(smithy.StaticSchema{Member: "field", ID: &i_PlacementStrategyField, Type: smithy.ShapeTypeString})
+var sPlacementStrategyType_RANDOM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RANDOM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPlacementStrategyType_SPREAD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SPREAD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPlacementStrategyType_BINPACK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BINPACK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPolicyLengthExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sPropagateTags_TASK_DEFINITION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TASK_DEFINITION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPutEventsRequestEntry_Time = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Time", ID: &i_EventTime, Type: smithy.ShapeTypeTimestamp})
+var sPutEventsRequestEntry_Source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Source", ID: &i_String, Type: smithy.ShapeTypeString})
+var sPutEventsRequestEntry_Resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resources", ID: &i_EventResourceList, Members: &m_EventResourceList, Type: smithy.ShapeTypeList})
+var sPutEventsRequestEntry_DetailType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DetailType", ID: &i_String, Type: smithy.ShapeTypeString})
+var sPutEventsRequestEntry_Detail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Detail", ID: &i_String, Type: smithy.ShapeTypeString})
+var sPutEventsRequestEntry_EventBusName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventBusName", ID: &i_NonPartnerEventBusNameOrArn, Type: smithy.ShapeTypeString})
+var sPutEventsRequestEntry_TraceHeader = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TraceHeader", ID: &i_TraceHeader, Type: smithy.ShapeTypeString})
+var s_PutEventsRequestEntryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPutEventsRequestEntry, Members: &mPutEventsRequestEntry, Type: smithy.ShapeTypeStructure})
+var sPutEventsResultEntry_EventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventId", ID: &i_EventId, Type: smithy.ShapeTypeString})
+var sPutEventsResultEntry_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_ErrorCode, Type: smithy.ShapeTypeString})
+var sPutEventsResultEntry_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_PutEventsResultEntryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPutEventsResultEntry, Members: &mPutEventsResultEntry, Type: smithy.ShapeTypeStructure})
+var sPutPartnerEventsRequestEntry_Time = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Time", ID: &i_EventTime, Type: smithy.ShapeTypeTimestamp})
+var sPutPartnerEventsRequestEntry_Source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Source", ID: &i_EventSourceName, Type: smithy.ShapeTypeString})
+var sPutPartnerEventsRequestEntry_Resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resources", ID: &i_EventResourceList, Members: &m_EventResourceList, Type: smithy.ShapeTypeList})
+var sPutPartnerEventsRequestEntry_DetailType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DetailType", ID: &i_String, Type: smithy.ShapeTypeString})
+var sPutPartnerEventsRequestEntry_Detail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Detail", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_PutPartnerEventsRequestEntryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPutPartnerEventsRequestEntry, Members: &mPutPartnerEventsRequestEntry, Type: smithy.ShapeTypeStructure})
+var sPutPartnerEventsResultEntry_EventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventId", ID: &i_EventId, Type: smithy.ShapeTypeString})
+var sPutPartnerEventsResultEntry_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_ErrorCode, Type: smithy.ShapeTypeString})
+var sPutPartnerEventsResultEntry_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_PutPartnerEventsResultEntryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPutPartnerEventsResultEntry, Members: &mPutPartnerEventsResultEntry, Type: smithy.ShapeTypeStructure})
+var sPutTargetsResultEntry_TargetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetId", ID: &i_TargetId, Type: smithy.ShapeTypeString})
+var sPutTargetsResultEntry_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_ErrorCode, Type: smithy.ShapeTypeString})
+var sPutTargetsResultEntry_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_PutTargetsResultEntryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPutTargetsResultEntry, Members: &mPutTargetsResultEntry, Type: smithy.ShapeTypeStructure})
+var s_QueryStringParametersMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_QueryStringKey, Type: smithy.ShapeTypeString})
+var s_QueryStringParametersMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_QueryStringValue, Type: smithy.ShapeTypeString})
+var sRedshiftDataParameters_SecretManagerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretManagerArn", ID: &i_RedshiftSecretManagerArn, Type: smithy.ShapeTypeString})
+var sRedshiftDataParameters_Database = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Database", ID: &i_Database, Type: smithy.ShapeTypeString})
+var sRedshiftDataParameters_DbUser = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DbUser", ID: &i_DbUser, Type: smithy.ShapeTypeString})
+var sRedshiftDataParameters_Sql = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sql", ID: &i_Sql, Type: smithy.ShapeTypeString})
+var sRedshiftDataParameters_StatementName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatementName", ID: &i_StatementName, Type: smithy.ShapeTypeString})
+var sRedshiftDataParameters_WithEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WithEvent", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sRemoveTargetsResultEntry_TargetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetId", ID: &i_TargetId, Type: smithy.ShapeTypeString})
+var sRemoveTargetsResultEntry_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_ErrorCode, Type: smithy.ShapeTypeString})
+var sRemoveTargetsResultEntry_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_RemoveTargetsResultEntryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRemoveTargetsResultEntry, Members: &mRemoveTargetsResultEntry, Type: smithy.ShapeTypeStructure})
+var sReplay_ReplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplayName", ID: &i_ReplayName, Type: smithy.ShapeTypeString})
+var sReplay_EventSourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventSourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sReplay_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iReplayState, Members: &mReplayState, Type: smithy.ShapeTypeEnum})
+var sReplay_StateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateReason", ID: &i_ReplayStateReason, Type: smithy.ShapeTypeString})
+var sReplay_EventStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventStartTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sReplay_EventEndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventEndTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sReplay_EventLastReplayedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventLastReplayedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sReplay_ReplayStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplayStartTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sReplay_ReplayEndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplayEndTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sReplayDestination_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sReplayDestination_FilterArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterArns", ID: &i_ReplayDestinationFilters, Members: &m_ReplayDestinationFilters, Type: smithy.ShapeTypeList})
+var s_ReplayDestinationFilters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var s_ReplayList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReplay, Members: &mReplay, Type: smithy.ShapeTypeStructure})
+var sReplayState_STARTING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STARTING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sReplayState_RUNNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUNNING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sReplayState_CANCELLING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELLING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sReplayState_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sReplayState_CANCELLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sReplayState_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceAlreadyExistsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sRetryPolicy_MaximumRetryAttempts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaximumRetryAttempts", ID: &i_MaximumRetryAttempts, Type: smithy.ShapeTypeInteger})
+var sRetryPolicy_MaximumEventAgeInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaximumEventAgeInSeconds", ID: &i_MaximumEventAgeInSeconds, Type: smithy.ShapeTypeInteger})
+var sRule_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_RuleName, Type: smithy.ShapeTypeString})
+var sRule_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_RuleArn, Type: smithy.ShapeTypeString})
+var sRule_EventPattern = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventPattern", ID: &i_EventPattern, Type: smithy.ShapeTypeString})
+var sRule_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iRuleState, Members: &mRuleState, Type: smithy.ShapeTypeEnum})
+var sRule_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_RuleDescription, Type: smithy.ShapeTypeString})
+var sRule_ScheduleExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduleExpression", ID: &i_ScheduleExpression, Type: smithy.ShapeTypeString})
+var sRule_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sRule_ManagedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManagedBy", ID: &i_ManagedBy, Type: smithy.ShapeTypeString})
+var sRule_EventBusName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventBusName", ID: &i_EventBusName, Type: smithy.ShapeTypeString})
+var s_RuleNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_RuleName, Type: smithy.ShapeTypeString})
+var s_RuleResponseList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRule, Members: &mRule, Type: smithy.ShapeTypeStructure})
+var sRuleState_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRuleState_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRunCommandParameters_RunCommandTargets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RunCommandTargets", ID: &i_RunCommandTargets, Members: &m_RunCommandTargets, Type: smithy.ShapeTypeList})
+var sRunCommandTarget_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_RunCommandTargetKey, Type: smithy.ShapeTypeString})
+var sRunCommandTarget_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_RunCommandTargetValues, Members: &m_RunCommandTargetValues, Type: smithy.ShapeTypeList})
+var s_RunCommandTargets_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRunCommandTarget, Members: &mRunCommandTarget, Type: smithy.ShapeTypeStructure})
+var s_RunCommandTargetValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_RunCommandTargetValue, Type: smithy.ShapeTypeString})
+var sSageMakerPipelineParameter_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SageMakerPipelineParameterName, Type: smithy.ShapeTypeString})
+var sSageMakerPipelineParameter_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_SageMakerPipelineParameterValue, Type: smithy.ShapeTypeString})
+var s_SageMakerPipelineParameterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSageMakerPipelineParameter, Members: &mSageMakerPipelineParameter, Type: smithy.ShapeTypeStructure})
+var sSageMakerPipelineParameters_PipelineParameterList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineParameterList", ID: &i_SageMakerPipelineParameterList, Members: &m_SageMakerPipelineParameterList, Type: smithy.ShapeTypeList})
+var sSqsParameters_MessageGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageGroupId", ID: &i_MessageGroupId, Type: smithy.ShapeTypeString})
+var s_StringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var sTarget_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_TargetId, Type: smithy.ShapeTypeString})
+var sTarget_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_TargetArn, Type: smithy.ShapeTypeString})
+var sTarget_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sTarget_Input = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Input", ID: &i_TargetInput, Type: smithy.ShapeTypeString})
+var sTarget_InputPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputPath", ID: &i_TargetInputPath, Type: smithy.ShapeTypeString})
+var sTarget_InputTransformer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputTransformer", ID: &iInputTransformer, Members: &mInputTransformer, Type: smithy.ShapeTypeStructure})
+var sTarget_KinesisParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KinesisParameters", ID: &iKinesisParameters, Members: &mKinesisParameters, Type: smithy.ShapeTypeStructure})
+var sTarget_RunCommandParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RunCommandParameters", ID: &iRunCommandParameters, Members: &mRunCommandParameters, Type: smithy.ShapeTypeStructure})
+var sTarget_EcsParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EcsParameters", ID: &iEcsParameters, Members: &mEcsParameters, Type: smithy.ShapeTypeStructure})
+var sTarget_BatchParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BatchParameters", ID: &iBatchParameters, Members: &mBatchParameters, Type: smithy.ShapeTypeStructure})
+var sTarget_SqsParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SqsParameters", ID: &iSqsParameters, Members: &mSqsParameters, Type: smithy.ShapeTypeStructure})
+var sTarget_HttpParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HttpParameters", ID: &iHttpParameters, Members: &mHttpParameters, Type: smithy.ShapeTypeStructure})
+var sTarget_RedshiftDataParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RedshiftDataParameters", ID: &iRedshiftDataParameters, Members: &mRedshiftDataParameters, Type: smithy.ShapeTypeStructure})
+var sTarget_SageMakerPipelineParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SageMakerPipelineParameters", ID: &iSageMakerPipelineParameters, Members: &mSageMakerPipelineParameters, Type: smithy.ShapeTypeStructure})
+var sTarget_DeadLetterConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeadLetterConfig", ID: &iDeadLetterConfig, Members: &mDeadLetterConfig, Type: smithy.ShapeTypeStructure})
+var sTarget_RetryPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetryPolicy", ID: &iRetryPolicy, Members: &mRetryPolicy, Type: smithy.ShapeTypeStructure})
+var s_TargetIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TargetId, Type: smithy.ShapeTypeString})
+var s_TargetList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTarget, Members: &mTarget, Type: smithy.ShapeTypeStructure})
+var s_TransformerPaths_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_InputTransformerPathKey, Type: smithy.ShapeTypeString})
+var s_TransformerPaths_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TargetInputPath, Type: smithy.ShapeTypeString})
+var sUpdateConnectionApiKeyAuthRequestParameters_ApiKeyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiKeyName", ID: &i_AuthHeaderParameters, Type: smithy.ShapeTypeString})
+var sUpdateConnectionApiKeyAuthRequestParameters_ApiKeyValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiKeyValue", ID: &i_AuthHeaderParametersSensitive, Traits: &t3, Type: smithy.ShapeTypeString})
+var sUpdateConnectionAuthRequestParameters_BasicAuthParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BasicAuthParameters", ID: &iUpdateConnectionBasicAuthRequestParameters, Members: &mUpdateConnectionBasicAuthRequestParameters, Type: smithy.ShapeTypeStructure})
+var sUpdateConnectionAuthRequestParameters_OAuthParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OAuthParameters", ID: &iUpdateConnectionOAuthRequestParameters, Members: &mUpdateConnectionOAuthRequestParameters, Type: smithy.ShapeTypeStructure})
+var sUpdateConnectionAuthRequestParameters_ApiKeyAuthParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiKeyAuthParameters", ID: &iUpdateConnectionApiKeyAuthRequestParameters, Members: &mUpdateConnectionApiKeyAuthRequestParameters, Type: smithy.ShapeTypeStructure})
+var sUpdateConnectionAuthRequestParameters_InvocationHttpParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvocationHttpParameters", ID: &iConnectionHttpParameters, Members: &mConnectionHttpParameters, Type: smithy.ShapeTypeStructure})
+var sUpdateConnectionBasicAuthRequestParameters_Username = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Username", ID: &i_AuthHeaderParameters, Type: smithy.ShapeTypeString})
+var sUpdateConnectionBasicAuthRequestParameters_Password = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Password", ID: &i_AuthHeaderParametersSensitive, Traits: &t3, Type: smithy.ShapeTypeString})
+var sUpdateConnectionOAuthClientRequestParameters_ClientID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientID", ID: &i_AuthHeaderParameters, Type: smithy.ShapeTypeString})
+var sUpdateConnectionOAuthClientRequestParameters_ClientSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientSecret", ID: &i_AuthHeaderParametersSensitive, Traits: &t3, Type: smithy.ShapeTypeString})
+var sUpdateConnectionOAuthRequestParameters_ClientParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientParameters", ID: &iUpdateConnectionOAuthClientRequestParameters, Members: &mUpdateConnectionOAuthClientRequestParameters, Type: smithy.ShapeTypeStructure})
+var sUpdateConnectionOAuthRequestParameters_AuthorizationEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizationEndpoint", ID: &i_HttpsEndpoint, Type: smithy.ShapeTypeString})
+var sUpdateConnectionOAuthRequestParameters_HttpMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HttpMethod", ID: &iConnectionOAuthHttpMethod, Members: &mConnectionOAuthHttpMethod, Type: smithy.ShapeTypeEnum})
+var sUpdateConnectionOAuthRequestParameters_OAuthHttpParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OAuthHttpParameters", ID: &iConnectionHttpParameters, Members: &mConnectionHttpParameters, Type: smithy.ShapeTypeStructure})
+var sActivateEventSourceRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_EventSourceName, Type: smithy.ShapeTypeString})
+var sCancelReplayRequest_ReplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplayName", ID: &i_ReplayName, Type: smithy.ShapeTypeString})
+var sCancelReplayResponse_ReplayArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplayArn", ID: &i_ReplayArn, Type: smithy.ShapeTypeString})
+var sCancelReplayResponse_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iReplayState, Members: &mReplayState, Type: smithy.ShapeTypeEnum})
+var sCancelReplayResponse_StateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateReason", ID: &i_ReplayStateReason, Type: smithy.ShapeTypeString})
+var sCreateApiDestinationRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ApiDestinationName, Type: smithy.ShapeTypeString})
+var sCreateApiDestinationRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ApiDestinationDescription, Type: smithy.ShapeTypeString})
+var sCreateApiDestinationRequest_ConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionArn", ID: &i_ConnectionArn, Type: smithy.ShapeTypeString})
+var sCreateApiDestinationRequest_InvocationEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvocationEndpoint", ID: &i_HttpsEndpoint, Type: smithy.ShapeTypeString})
+var sCreateApiDestinationRequest_HttpMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HttpMethod", ID: &iApiDestinationHttpMethod, Members: &mApiDestinationHttpMethod, Type: smithy.ShapeTypeEnum})
+var sCreateApiDestinationRequest_InvocationRateLimitPerSecond = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvocationRateLimitPerSecond", ID: &i_ApiDestinationInvocationRateLimitPerSecond, Type: smithy.ShapeTypeInteger})
+var sCreateApiDestinationResponse_ApiDestinationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiDestinationArn", ID: &i_ApiDestinationArn, Type: smithy.ShapeTypeString})
+var sCreateApiDestinationResponse_ApiDestinationState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiDestinationState", ID: &iApiDestinationState, Members: &mApiDestinationState, Type: smithy.ShapeTypeEnum})
+var sCreateApiDestinationResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sCreateApiDestinationResponse_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sCreateArchiveRequest_ArchiveName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArchiveName", ID: &i_ArchiveName, Type: smithy.ShapeTypeString})
+var sCreateArchiveRequest_EventSourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventSourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sCreateArchiveRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ArchiveDescription, Type: smithy.ShapeTypeString})
+var sCreateArchiveRequest_EventPattern = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventPattern", ID: &i_EventPattern, Type: smithy.ShapeTypeString})
+var sCreateArchiveRequest_RetentionDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionDays", ID: &i_RetentionDays, Type: smithy.ShapeTypeInteger})
+var sCreateArchiveResponse_ArchiveArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArchiveArn", ID: &i_ArchiveArn, Type: smithy.ShapeTypeString})
+var sCreateArchiveResponse_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iArchiveState, Members: &mArchiveState, Type: smithy.ShapeTypeEnum})
+var sCreateArchiveResponse_StateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateReason", ID: &i_ArchiveStateReason, Type: smithy.ShapeTypeString})
+var sCreateArchiveResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sCreateConnectionRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ConnectionName, Type: smithy.ShapeTypeString})
+var sCreateConnectionRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ConnectionDescription, Type: smithy.ShapeTypeString})
+var sCreateConnectionRequest_AuthorizationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizationType", ID: &iConnectionAuthorizationType, Members: &mConnectionAuthorizationType, Type: smithy.ShapeTypeEnum})
+var sCreateConnectionRequest_AuthParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthParameters", ID: &iCreateConnectionAuthRequestParameters, Members: &mCreateConnectionAuthRequestParameters, Type: smithy.ShapeTypeStructure})
+var sCreateConnectionResponse_ConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionArn", ID: &i_ConnectionArn, Type: smithy.ShapeTypeString})
+var sCreateConnectionResponse_ConnectionState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionState", ID: &iConnectionState, Members: &mConnectionState, Type: smithy.ShapeTypeEnum})
+var sCreateConnectionResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sCreateConnectionResponse_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sCreateEventBusRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_EventBusName, Type: smithy.ShapeTypeString})
+var sCreateEventBusRequest_EventSourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventSourceName", ID: &i_EventSourceName, Type: smithy.ShapeTypeString})
+var sCreateEventBusRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateEventBusResponse_EventBusArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventBusArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCreatePartnerEventSourceRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_EventSourceName, Type: smithy.ShapeTypeString})
+var sCreatePartnerEventSourceRequest_Account = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Account", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sCreatePartnerEventSourceResponse_EventSourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventSourceArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDeactivateEventSourceRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_EventSourceName, Type: smithy.ShapeTypeString})
+var sDeauthorizeConnectionRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ConnectionName, Type: smithy.ShapeTypeString})
+var sDeauthorizeConnectionResponse_ConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionArn", ID: &i_ConnectionArn, Type: smithy.ShapeTypeString})
+var sDeauthorizeConnectionResponse_ConnectionState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionState", ID: &iConnectionState, Members: &mConnectionState, Type: smithy.ShapeTypeEnum})
+var sDeauthorizeConnectionResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDeauthorizeConnectionResponse_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDeauthorizeConnectionResponse_LastAuthorizedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastAuthorizedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDeleteApiDestinationRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ApiDestinationName, Type: smithy.ShapeTypeString})
+var sDeleteArchiveRequest_ArchiveName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArchiveName", ID: &i_ArchiveName, Type: smithy.ShapeTypeString})
+var sDeleteConnectionRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ConnectionName, Type: smithy.ShapeTypeString})
+var sDeleteConnectionResponse_ConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionArn", ID: &i_ConnectionArn, Type: smithy.ShapeTypeString})
+var sDeleteConnectionResponse_ConnectionState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionState", ID: &iConnectionState, Members: &mConnectionState, Type: smithy.ShapeTypeEnum})
+var sDeleteConnectionResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDeleteConnectionResponse_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDeleteConnectionResponse_LastAuthorizedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastAuthorizedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDeleteEventBusRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_EventBusName, Type: smithy.ShapeTypeString})
+var sDeletePartnerEventSourceRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_EventSourceName, Type: smithy.ShapeTypeString})
+var sDeletePartnerEventSourceRequest_Account = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Account", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sDeleteRuleRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_RuleName, Type: smithy.ShapeTypeString})
+var sDeleteRuleRequest_EventBusName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventBusName", ID: &i_EventBusNameOrArn, Type: smithy.ShapeTypeString})
+var sDeleteRuleRequest_Force = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Force", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sDescribeApiDestinationRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ApiDestinationName, Type: smithy.ShapeTypeString})
+var sDescribeApiDestinationResponse_ApiDestinationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiDestinationArn", ID: &i_ApiDestinationArn, Type: smithy.ShapeTypeString})
+var sDescribeApiDestinationResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ApiDestinationName, Type: smithy.ShapeTypeString})
+var sDescribeApiDestinationResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ApiDestinationDescription, Type: smithy.ShapeTypeString})
+var sDescribeApiDestinationResponse_ApiDestinationState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiDestinationState", ID: &iApiDestinationState, Members: &mApiDestinationState, Type: smithy.ShapeTypeEnum})
+var sDescribeApiDestinationResponse_ConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionArn", ID: &i_ConnectionArn, Type: smithy.ShapeTypeString})
+var sDescribeApiDestinationResponse_InvocationEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvocationEndpoint", ID: &i_HttpsEndpoint, Type: smithy.ShapeTypeString})
+var sDescribeApiDestinationResponse_HttpMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HttpMethod", ID: &iApiDestinationHttpMethod, Members: &mApiDestinationHttpMethod, Type: smithy.ShapeTypeEnum})
+var sDescribeApiDestinationResponse_InvocationRateLimitPerSecond = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvocationRateLimitPerSecond", ID: &i_ApiDestinationInvocationRateLimitPerSecond, Type: smithy.ShapeTypeInteger})
+var sDescribeApiDestinationResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeApiDestinationResponse_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeArchiveRequest_ArchiveName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArchiveName", ID: &i_ArchiveName, Type: smithy.ShapeTypeString})
+var sDescribeArchiveResponse_ArchiveArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArchiveArn", ID: &i_ArchiveArn, Type: smithy.ShapeTypeString})
+var sDescribeArchiveResponse_ArchiveName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArchiveName", ID: &i_ArchiveName, Type: smithy.ShapeTypeString})
+var sDescribeArchiveResponse_EventSourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventSourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sDescribeArchiveResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ArchiveDescription, Type: smithy.ShapeTypeString})
+var sDescribeArchiveResponse_EventPattern = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventPattern", ID: &i_EventPattern, Type: smithy.ShapeTypeString})
+var sDescribeArchiveResponse_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iArchiveState, Members: &mArchiveState, Type: smithy.ShapeTypeEnum})
+var sDescribeArchiveResponse_StateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateReason", ID: &i_ArchiveStateReason, Type: smithy.ShapeTypeString})
+var sDescribeArchiveResponse_RetentionDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionDays", ID: &i_RetentionDays, Type: smithy.ShapeTypeInteger})
+var sDescribeArchiveResponse_SizeBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SizeBytes", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sDescribeArchiveResponse_EventCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventCount", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sDescribeArchiveResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeConnectionRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ConnectionName, Type: smithy.ShapeTypeString})
+var sDescribeConnectionResponse_ConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionArn", ID: &i_ConnectionArn, Type: smithy.ShapeTypeString})
+var sDescribeConnectionResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ConnectionName, Type: smithy.ShapeTypeString})
+var sDescribeConnectionResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ConnectionDescription, Type: smithy.ShapeTypeString})
+var sDescribeConnectionResponse_ConnectionState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionState", ID: &iConnectionState, Members: &mConnectionState, Type: smithy.ShapeTypeEnum})
+var sDescribeConnectionResponse_StateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateReason", ID: &i_ConnectionStateReason, Type: smithy.ShapeTypeString})
+var sDescribeConnectionResponse_AuthorizationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizationType", ID: &iConnectionAuthorizationType, Members: &mConnectionAuthorizationType, Type: smithy.ShapeTypeEnum})
+var sDescribeConnectionResponse_SecretArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretArn", ID: &i_SecretsManagerSecretArn, Type: smithy.ShapeTypeString})
+var sDescribeConnectionResponse_AuthParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthParameters", ID: &iConnectionAuthResponseParameters, Members: &mConnectionAuthResponseParameters, Type: smithy.ShapeTypeStructure})
+var sDescribeConnectionResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeConnectionResponse_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeConnectionResponse_LastAuthorizedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastAuthorizedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeEventBusRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_EventBusNameOrArn, Type: smithy.ShapeTypeString})
+var sDescribeEventBusResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeEventBusResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeEventBusResponse_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeEventSourceRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_EventSourceName, Type: smithy.ShapeTypeString})
+var sDescribeEventSourceResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeEventSourceResponse_CreatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedBy", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeEventSourceResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeEventSourceResponse_ExpirationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpirationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeEventSourceResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeEventSourceResponse_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iEventSourceState, Members: &mEventSourceState, Type: smithy.ShapeTypeEnum})
+var sDescribePartnerEventSourceRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_EventSourceName, Type: smithy.ShapeTypeString})
+var sDescribePartnerEventSourceResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribePartnerEventSourceResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeReplayRequest_ReplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplayName", ID: &i_ReplayName, Type: smithy.ShapeTypeString})
+var sDescribeReplayResponse_ReplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplayName", ID: &i_ReplayName, Type: smithy.ShapeTypeString})
+var sDescribeReplayResponse_ReplayArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplayArn", ID: &i_ReplayArn, Type: smithy.ShapeTypeString})
+var sDescribeReplayResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ReplayDescription, Type: smithy.ShapeTypeString})
+var sDescribeReplayResponse_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iReplayState, Members: &mReplayState, Type: smithy.ShapeTypeEnum})
+var sDescribeReplayResponse_StateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateReason", ID: &i_ReplayStateReason, Type: smithy.ShapeTypeString})
+var sDescribeReplayResponse_EventSourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventSourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sDescribeReplayResponse_Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destination", ID: &iReplayDestination, Members: &mReplayDestination, Type: smithy.ShapeTypeStructure})
+var sDescribeReplayResponse_EventStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventStartTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeReplayResponse_EventEndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventEndTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeReplayResponse_EventLastReplayedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventLastReplayedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeReplayResponse_ReplayStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplayStartTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeReplayResponse_ReplayEndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplayEndTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeRuleRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_RuleName, Type: smithy.ShapeTypeString})
+var sDescribeRuleRequest_EventBusName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventBusName", ID: &i_EventBusNameOrArn, Type: smithy.ShapeTypeString})
+var sDescribeRuleResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_RuleName, Type: smithy.ShapeTypeString})
+var sDescribeRuleResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_RuleArn, Type: smithy.ShapeTypeString})
+var sDescribeRuleResponse_EventPattern = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventPattern", ID: &i_EventPattern, Type: smithy.ShapeTypeString})
+var sDescribeRuleResponse_ScheduleExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduleExpression", ID: &i_ScheduleExpression, Type: smithy.ShapeTypeString})
+var sDescribeRuleResponse_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iRuleState, Members: &mRuleState, Type: smithy.ShapeTypeEnum})
+var sDescribeRuleResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_RuleDescription, Type: smithy.ShapeTypeString})
+var sDescribeRuleResponse_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sDescribeRuleResponse_ManagedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManagedBy", ID: &i_ManagedBy, Type: smithy.ShapeTypeString})
+var sDescribeRuleResponse_EventBusName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventBusName", ID: &i_EventBusName, Type: smithy.ShapeTypeString})
+var sDescribeRuleResponse_CreatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedBy", ID: &i_CreatedBy, Type: smithy.ShapeTypeString})
+var sDisableRuleRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_RuleName, Type: smithy.ShapeTypeString})
+var sDisableRuleRequest_EventBusName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventBusName", ID: &i_EventBusNameOrArn, Type: smithy.ShapeTypeString})
+var sEnableRuleRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_RuleName, Type: smithy.ShapeTypeString})
+var sEnableRuleRequest_EventBusName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventBusName", ID: &i_EventBusNameOrArn, Type: smithy.ShapeTypeString})
+var sListApiDestinationsRequest_NamePrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NamePrefix", ID: &i_ApiDestinationName, Type: smithy.ShapeTypeString})
+var sListApiDestinationsRequest_ConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionArn", ID: &i_ConnectionArn, Type: smithy.ShapeTypeString})
+var sListApiDestinationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListApiDestinationsRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_LimitMax100, Type: smithy.ShapeTypeInteger})
+var sListApiDestinationsResponse_ApiDestinations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiDestinations", ID: &i_ApiDestinationResponseList, Members: &m_ApiDestinationResponseList, Type: smithy.ShapeTypeList})
+var sListApiDestinationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListArchivesRequest_NamePrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NamePrefix", ID: &i_ArchiveName, Type: smithy.ShapeTypeString})
+var sListArchivesRequest_EventSourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventSourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sListArchivesRequest_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iArchiveState, Members: &mArchiveState, Type: smithy.ShapeTypeEnum})
+var sListArchivesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListArchivesRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_LimitMax100, Type: smithy.ShapeTypeInteger})
+var sListArchivesResponse_Archives = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Archives", ID: &i_ArchiveResponseList, Members: &m_ArchiveResponseList, Type: smithy.ShapeTypeList})
+var sListArchivesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListConnectionsRequest_NamePrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NamePrefix", ID: &i_ConnectionName, Type: smithy.ShapeTypeString})
+var sListConnectionsRequest_ConnectionState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionState", ID: &iConnectionState, Members: &mConnectionState, Type: smithy.ShapeTypeEnum})
+var sListConnectionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListConnectionsRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_LimitMax100, Type: smithy.ShapeTypeInteger})
+var sListConnectionsResponse_Connections = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Connections", ID: &i_ConnectionResponseList, Members: &m_ConnectionResponseList, Type: smithy.ShapeTypeList})
+var sListConnectionsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListEventBusesRequest_NamePrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NamePrefix", ID: &i_EventBusName, Type: smithy.ShapeTypeString})
+var sListEventBusesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListEventBusesRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_LimitMax100, Type: smithy.ShapeTypeInteger})
+var sListEventBusesResponse_EventBuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventBuses", ID: &i_EventBusList, Members: &m_EventBusList, Type: smithy.ShapeTypeList})
+var sListEventBusesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListEventSourcesRequest_NamePrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NamePrefix", ID: &i_EventSourceNamePrefix, Type: smithy.ShapeTypeString})
+var sListEventSourcesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListEventSourcesRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_LimitMax100, Type: smithy.ShapeTypeInteger})
+var sListEventSourcesResponse_EventSources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventSources", ID: &i_EventSourceList, Members: &m_EventSourceList, Type: smithy.ShapeTypeList})
+var sListEventSourcesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListPartnerEventSourceAccountsRequest_EventSourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventSourceName", ID: &i_EventSourceName, Type: smithy.ShapeTypeString})
+var sListPartnerEventSourceAccountsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListPartnerEventSourceAccountsRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_LimitMax100, Type: smithy.ShapeTypeInteger})
+var sListPartnerEventSourceAccountsResponse_PartnerEventSourceAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartnerEventSourceAccounts", ID: &i_PartnerEventSourceAccountList, Members: &m_PartnerEventSourceAccountList, Type: smithy.ShapeTypeList})
+var sListPartnerEventSourceAccountsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListPartnerEventSourcesRequest_NamePrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NamePrefix", ID: &i_PartnerEventSourceNamePrefix, Type: smithy.ShapeTypeString})
+var sListPartnerEventSourcesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListPartnerEventSourcesRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_LimitMax100, Type: smithy.ShapeTypeInteger})
+var sListPartnerEventSourcesResponse_PartnerEventSources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartnerEventSources", ID: &i_PartnerEventSourceList, Members: &m_PartnerEventSourceList, Type: smithy.ShapeTypeList})
+var sListPartnerEventSourcesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListReplaysRequest_NamePrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NamePrefix", ID: &i_ReplayName, Type: smithy.ShapeTypeString})
+var sListReplaysRequest_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iReplayState, Members: &mReplayState, Type: smithy.ShapeTypeEnum})
+var sListReplaysRequest_EventSourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventSourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sListReplaysRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListReplaysRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_LimitMax100, Type: smithy.ShapeTypeInteger})
+var sListReplaysResponse_Replays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Replays", ID: &i_ReplayList, Members: &m_ReplayList, Type: smithy.ShapeTypeList})
+var sListReplaysResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListRuleNamesByTargetRequest_TargetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetArn", ID: &i_TargetArn, Type: smithy.ShapeTypeString})
+var sListRuleNamesByTargetRequest_EventBusName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventBusName", ID: &i_EventBusNameOrArn, Type: smithy.ShapeTypeString})
+var sListRuleNamesByTargetRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListRuleNamesByTargetRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_LimitMax100, Type: smithy.ShapeTypeInteger})
+var sListRuleNamesByTargetResponse_RuleNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleNames", ID: &i_RuleNameList, Members: &m_RuleNameList, Type: smithy.ShapeTypeList})
+var sListRuleNamesByTargetResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListRulesRequest_NamePrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NamePrefix", ID: &i_RuleName, Type: smithy.ShapeTypeString})
+var sListRulesRequest_EventBusName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventBusName", ID: &i_EventBusNameOrArn, Type: smithy.ShapeTypeString})
+var sListRulesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListRulesRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_LimitMax100, Type: smithy.ShapeTypeInteger})
+var sListRulesResponse_Rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rules", ID: &i_RuleResponseList, Members: &m_RuleResponseList, Type: smithy.ShapeTypeList})
+var sListRulesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListTagsForResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sListTargetsByRuleRequest_Rule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rule", ID: &i_RuleName, Type: smithy.ShapeTypeString})
+var sListTargetsByRuleRequest_EventBusName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventBusName", ID: &i_EventBusNameOrArn, Type: smithy.ShapeTypeString})
+var sListTargetsByRuleRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListTargetsByRuleRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_LimitMax100, Type: smithy.ShapeTypeInteger})
+var sListTargetsByRuleResponse_Targets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Targets", ID: &i_TargetList, Members: &m_TargetList, Type: smithy.ShapeTypeList})
+var sListTargetsByRuleResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sPutEventsRequest_Entries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Entries", ID: &i_PutEventsRequestEntryList, Members: &m_PutEventsRequestEntryList, Type: smithy.ShapeTypeList})
+var sPutEventsResponse_FailedEntryCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailedEntryCount", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sPutEventsResponse_Entries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Entries", ID: &i_PutEventsResultEntryList, Members: &m_PutEventsResultEntryList, Type: smithy.ShapeTypeList})
+var sPutPartnerEventsRequest_Entries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Entries", ID: &i_PutPartnerEventsRequestEntryList, Members: &m_PutPartnerEventsRequestEntryList, Type: smithy.ShapeTypeList})
+var sPutPartnerEventsResponse_FailedEntryCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailedEntryCount", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sPutPartnerEventsResponse_Entries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Entries", ID: &i_PutPartnerEventsResultEntryList, Members: &m_PutPartnerEventsResultEntryList, Type: smithy.ShapeTypeList})
+var sPutPermissionRequest_EventBusName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventBusName", ID: &i_NonPartnerEventBusName, Type: smithy.ShapeTypeString})
+var sPutPermissionRequest_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &i_Action, Type: smithy.ShapeTypeString})
+var sPutPermissionRequest_Principal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Principal", ID: &i_Principal, Type: smithy.ShapeTypeString})
+var sPutPermissionRequest_StatementId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatementId", ID: &i_StatementId, Type: smithy.ShapeTypeString})
+var sPutPermissionRequest_Condition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Condition", ID: &iCondition, Members: &mCondition, Type: smithy.ShapeTypeStructure})
+var sPutPermissionRequest_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_String, Type: smithy.ShapeTypeString})
+var sPutRuleRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_RuleName, Type: smithy.ShapeTypeString})
+var sPutRuleRequest_ScheduleExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduleExpression", ID: &i_ScheduleExpression, Type: smithy.ShapeTypeString})
+var sPutRuleRequest_EventPattern = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventPattern", ID: &i_EventPattern, Type: smithy.ShapeTypeString})
+var sPutRuleRequest_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iRuleState, Members: &mRuleState, Type: smithy.ShapeTypeEnum})
+var sPutRuleRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_RuleDescription, Type: smithy.ShapeTypeString})
+var sPutRuleRequest_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sPutRuleRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sPutRuleRequest_EventBusName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventBusName", ID: &i_EventBusNameOrArn, Type: smithy.ShapeTypeString})
+var sPutRuleResponse_RuleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleArn", ID: &i_RuleArn, Type: smithy.ShapeTypeString})
+var sPutTargetsRequest_Rule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rule", ID: &i_RuleName, Type: smithy.ShapeTypeString})
+var sPutTargetsRequest_EventBusName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventBusName", ID: &i_EventBusNameOrArn, Type: smithy.ShapeTypeString})
+var sPutTargetsRequest_Targets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Targets", ID: &i_TargetList, Members: &m_TargetList, Type: smithy.ShapeTypeList})
+var sPutTargetsResponse_FailedEntryCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailedEntryCount", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sPutTargetsResponse_FailedEntries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailedEntries", ID: &i_PutTargetsResultEntryList, Members: &m_PutTargetsResultEntryList, Type: smithy.ShapeTypeList})
+var sRemovePermissionRequest_StatementId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatementId", ID: &i_StatementId, Type: smithy.ShapeTypeString})
+var sRemovePermissionRequest_RemoveAllPermissions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemoveAllPermissions", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sRemovePermissionRequest_EventBusName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventBusName", ID: &i_NonPartnerEventBusName, Type: smithy.ShapeTypeString})
+var sRemoveTargetsRequest_Rule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rule", ID: &i_RuleName, Type: smithy.ShapeTypeString})
+var sRemoveTargetsRequest_EventBusName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventBusName", ID: &i_EventBusNameOrArn, Type: smithy.ShapeTypeString})
+var sRemoveTargetsRequest_Ids = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ids", ID: &i_TargetIdList, Members: &m_TargetIdList, Type: smithy.ShapeTypeList})
+var sRemoveTargetsRequest_Force = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Force", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sRemoveTargetsResponse_FailedEntryCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailedEntryCount", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sRemoveTargetsResponse_FailedEntries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailedEntries", ID: &i_RemoveTargetsResultEntryList, Members: &m_RemoveTargetsResultEntryList, Type: smithy.ShapeTypeList})
+var sStartReplayRequest_ReplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplayName", ID: &i_ReplayName, Type: smithy.ShapeTypeString})
+var sStartReplayRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ReplayDescription, Type: smithy.ShapeTypeString})
+var sStartReplayRequest_EventSourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventSourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sStartReplayRequest_EventStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventStartTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sStartReplayRequest_EventEndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventEndTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sStartReplayRequest_Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destination", ID: &iReplayDestination, Members: &mReplayDestination, Type: smithy.ShapeTypeStructure})
+var sStartReplayResponse_ReplayArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplayArn", ID: &i_ReplayArn, Type: smithy.ShapeTypeString})
+var sStartReplayResponse_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iReplayState, Members: &mReplayState, Type: smithy.ShapeTypeEnum})
+var sStartReplayResponse_StateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateReason", ID: &i_ReplayStateReason, Type: smithy.ShapeTypeString})
+var sStartReplayResponse_ReplayStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplayStartTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sTagResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sTestEventPatternRequest_EventPattern = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventPattern", ID: &i_EventPattern, Type: smithy.ShapeTypeString})
+var sTestEventPatternRequest_Event = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Event", ID: &i_String, Type: smithy.ShapeTypeString})
+var sTestEventPatternResponse_Result = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Result", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sUntagResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var sUpdateApiDestinationRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ApiDestinationName, Type: smithy.ShapeTypeString})
+var sUpdateApiDestinationRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ApiDestinationDescription, Type: smithy.ShapeTypeString})
+var sUpdateApiDestinationRequest_ConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionArn", ID: &i_ConnectionArn, Type: smithy.ShapeTypeString})
+var sUpdateApiDestinationRequest_InvocationEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvocationEndpoint", ID: &i_HttpsEndpoint, Type: smithy.ShapeTypeString})
+var sUpdateApiDestinationRequest_HttpMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HttpMethod", ID: &iApiDestinationHttpMethod, Members: &mApiDestinationHttpMethod, Type: smithy.ShapeTypeEnum})
+var sUpdateApiDestinationRequest_InvocationRateLimitPerSecond = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvocationRateLimitPerSecond", ID: &i_ApiDestinationInvocationRateLimitPerSecond, Type: smithy.ShapeTypeInteger})
+var sUpdateApiDestinationResponse_ApiDestinationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiDestinationArn", ID: &i_ApiDestinationArn, Type: smithy.ShapeTypeString})
+var sUpdateApiDestinationResponse_ApiDestinationState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiDestinationState", ID: &iApiDestinationState, Members: &mApiDestinationState, Type: smithy.ShapeTypeEnum})
+var sUpdateApiDestinationResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sUpdateApiDestinationResponse_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sUpdateArchiveRequest_ArchiveName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArchiveName", ID: &i_ArchiveName, Type: smithy.ShapeTypeString})
+var sUpdateArchiveRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ArchiveDescription, Type: smithy.ShapeTypeString})
+var sUpdateArchiveRequest_EventPattern = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventPattern", ID: &i_EventPattern, Type: smithy.ShapeTypeString})
+var sUpdateArchiveRequest_RetentionDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionDays", ID: &i_RetentionDays, Type: smithy.ShapeTypeInteger})
+var sUpdateArchiveResponse_ArchiveArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArchiveArn", ID: &i_ArchiveArn, Type: smithy.ShapeTypeString})
+var sUpdateArchiveResponse_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iArchiveState, Members: &mArchiveState, Type: smithy.ShapeTypeEnum})
+var sUpdateArchiveResponse_StateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateReason", ID: &i_ArchiveStateReason, Type: smithy.ShapeTypeString})
+var sUpdateArchiveResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sUpdateConnectionRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ConnectionName, Type: smithy.ShapeTypeString})
+var sUpdateConnectionRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ConnectionDescription, Type: smithy.ShapeTypeString})
+var sUpdateConnectionRequest_AuthorizationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizationType", ID: &iConnectionAuthorizationType, Members: &mConnectionAuthorizationType, Type: smithy.ShapeTypeEnum})
+var sUpdateConnectionRequest_AuthParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthParameters", ID: &iUpdateConnectionAuthRequestParameters, Members: &mUpdateConnectionAuthRequestParameters, Type: smithy.ShapeTypeStructure})
+var sUpdateConnectionResponse_ConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionArn", ID: &i_ConnectionArn, Type: smithy.ShapeTypeString})
+var sUpdateConnectionResponse_ConnectionState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionState", ID: &iConnectionState, Members: &mConnectionState, Type: smithy.ShapeTypeEnum})
+var sUpdateConnectionResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sUpdateConnectionResponse_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sUpdateConnectionResponse_LastAuthorizedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastAuthorizedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+
+var ActivateEventSource = &sActivateEventSource
+
+var CancelReplay = &sCancelReplay
+
+var CreateApiDestination = &sCreateApiDestination
+
+var CreateArchive = &sCreateArchive
+
+var CreateConnection = &sCreateConnection
+
+var CreateEventBus = &sCreateEventBus
+
+var CreatePartnerEventSource = &sCreatePartnerEventSource
+
+var DeactivateEventSource = &sDeactivateEventSource
+
+var DeauthorizeConnection = &sDeauthorizeConnection
+
+var DeleteApiDestination = &sDeleteApiDestination
+
+var DeleteArchive = &sDeleteArchive
+
+var DeleteConnection = &sDeleteConnection
+
+var DeleteEventBus = &sDeleteEventBus
+
+var DeletePartnerEventSource = &sDeletePartnerEventSource
+
+var DeleteRule = &sDeleteRule
+
+var DescribeApiDestination = &sDescribeApiDestination
+
+var DescribeArchive = &sDescribeArchive
+
+var DescribeConnection = &sDescribeConnection
+
+var DescribeEventBus = &sDescribeEventBus
+
+var DescribeEventSource = &sDescribeEventSource
+
+var DescribePartnerEventSource = &sDescribePartnerEventSource
+
+var DescribeReplay = &sDescribeReplay
+
+var DescribeRule = &sDescribeRule
+
+var DisableRule = &sDisableRule
+
+var EnableRule = &sEnableRule
+
+var ListApiDestinations = &sListApiDestinations
+
+var ListArchives = &sListArchives
+
+var ListConnections = &sListConnections
+
+var ListEventBuses = &sListEventBuses
+
+var ListEventSources = &sListEventSources
+
+var ListPartnerEventSourceAccounts = &sListPartnerEventSourceAccounts
+
+var ListPartnerEventSources = &sListPartnerEventSources
+
+var ListReplays = &sListReplays
+
+var ListRuleNamesByTarget = &sListRuleNamesByTarget
+
+var ListRules = &sListRules
+
+var ListTagsForResource = &sListTagsForResource
+
+var ListTargetsByRule = &sListTargetsByRule
+
+var PutEvents = &sPutEvents
+
+var PutPartnerEvents = &sPutPartnerEvents
+
+var PutPermission = &sPutPermission
+
+var PutRule = &sPutRule
+
+var PutTargets = &sPutTargets
+
+var RemovePermission = &sRemovePermission
+
+var RemoveTargets = &sRemoveTargets
+
+var StartReplay = &sStartReplay
+
+var TagResource = &sTagResource
+
+var TestEventPattern = &sTestEventPattern
+
+var UntagResource = &sUntagResource
+
+var UpdateApiDestination = &sUpdateApiDestination
+
+var UpdateArchive = &sUpdateArchive
+
+var UpdateConnection = &sUpdateConnection
+
+var _AWSEvents = &s_AWSEvents
+
+var _AccountId = &s_AccountId
+
+var _Action = &s_Action
+
+var ApiDestination = &sApiDestination
+var ApiDestination_ApiDestinationArn = &sApiDestination_ApiDestinationArn
+var ApiDestination_Name = &sApiDestination_Name
+var ApiDestination_ApiDestinationState = &sApiDestination_ApiDestinationState
+var ApiDestination_ConnectionArn = &sApiDestination_ConnectionArn
+var ApiDestination_InvocationEndpoint = &sApiDestination_InvocationEndpoint
+var ApiDestination_HttpMethod = &sApiDestination_HttpMethod
+var ApiDestination_InvocationRateLimitPerSecond = &sApiDestination_InvocationRateLimitPerSecond
+var ApiDestination_CreationTime = &sApiDestination_CreationTime
+var ApiDestination_LastModifiedTime = &sApiDestination_LastModifiedTime
+
+var _ApiDestinationArn = &s_ApiDestinationArn
+
+var _ApiDestinationDescription = &s_ApiDestinationDescription
+
+var ApiDestinationHttpMethod = &sApiDestinationHttpMethod
+var ApiDestinationHttpMethod_POST = &sApiDestinationHttpMethod_POST
+var ApiDestinationHttpMethod_GET = &sApiDestinationHttpMethod_GET
+var ApiDestinationHttpMethod_HEAD = &sApiDestinationHttpMethod_HEAD
+var ApiDestinationHttpMethod_OPTIONS = &sApiDestinationHttpMethod_OPTIONS
+var ApiDestinationHttpMethod_PUT = &sApiDestinationHttpMethod_PUT
+var ApiDestinationHttpMethod_PATCH = &sApiDestinationHttpMethod_PATCH
+var ApiDestinationHttpMethod_DELETE = &sApiDestinationHttpMethod_DELETE
+
+var _ApiDestinationInvocationRateLimitPerSecond = &s_ApiDestinationInvocationRateLimitPerSecond
+
+var _ApiDestinationName = &s_ApiDestinationName
+
+var _ApiDestinationResponseList = &s_ApiDestinationResponseList
+var _ApiDestinationResponseList_member = &s_ApiDestinationResponseList_member
+
+var ApiDestinationState = &sApiDestinationState
+var ApiDestinationState_ACTIVE = &sApiDestinationState_ACTIVE
+var ApiDestinationState_INACTIVE = &sApiDestinationState_INACTIVE
+
+var Archive = &sArchive
+var Archive_ArchiveName = &sArchive_ArchiveName
+var Archive_EventSourceArn = &sArchive_EventSourceArn
+var Archive_State = &sArchive_State
+var Archive_StateReason = &sArchive_StateReason
+var Archive_RetentionDays = &sArchive_RetentionDays
+var Archive_SizeBytes = &sArchive_SizeBytes
+var Archive_EventCount = &sArchive_EventCount
+var Archive_CreationTime = &sArchive_CreationTime
+
+var _ArchiveArn = &s_ArchiveArn
+
+var _ArchiveDescription = &s_ArchiveDescription
+
+var _ArchiveName = &s_ArchiveName
+
+var _ArchiveResponseList = &s_ArchiveResponseList
+var _ArchiveResponseList_member = &s_ArchiveResponseList_member
+
+var ArchiveState = &sArchiveState
+var ArchiveState_ENABLED = &sArchiveState_ENABLED
+var ArchiveState_DISABLED = &sArchiveState_DISABLED
+var ArchiveState_CREATING = &sArchiveState_CREATING
+var ArchiveState_UPDATING = &sArchiveState_UPDATING
+var ArchiveState_CREATE_FAILED = &sArchiveState_CREATE_FAILED
+var ArchiveState_UPDATE_FAILED = &sArchiveState_UPDATE_FAILED
+
+var _ArchiveStateReason = &s_ArchiveStateReason
+
+var _Arn = &s_Arn
+
+var AssignPublicIp = &sAssignPublicIp
+var AssignPublicIp_ENABLED = &sAssignPublicIp_ENABLED
+var AssignPublicIp_DISABLED = &sAssignPublicIp_DISABLED
+
+var _AuthHeaderParameters = &s_AuthHeaderParameters
+
+var _AuthHeaderParametersSensitive = &s_AuthHeaderParametersSensitive
+
+var AwsVpcConfiguration = &sAwsVpcConfiguration
+var AwsVpcConfiguration_Subnets = &sAwsVpcConfiguration_Subnets
+var AwsVpcConfiguration_SecurityGroups = &sAwsVpcConfiguration_SecurityGroups
+var AwsVpcConfiguration_AssignPublicIp = &sAwsVpcConfiguration_AssignPublicIp
+
+var BatchArrayProperties = &sBatchArrayProperties
+var BatchArrayProperties_Size = &sBatchArrayProperties_Size
+
+var BatchParameters = &sBatchParameters
+var BatchParameters_JobDefinition = &sBatchParameters_JobDefinition
+var BatchParameters_JobName = &sBatchParameters_JobName
+var BatchParameters_ArrayProperties = &sBatchParameters_ArrayProperties
+var BatchParameters_RetryStrategy = &sBatchParameters_RetryStrategy
+
+var BatchRetryStrategy = &sBatchRetryStrategy
+var BatchRetryStrategy_Attempts = &sBatchRetryStrategy_Attempts
+
+var _Boolean = &s_Boolean
+
+var _CapacityProvider = &s_CapacityProvider
+
+var _CapacityProviderStrategy = &s_CapacityProviderStrategy
+var _CapacityProviderStrategy_member = &s_CapacityProviderStrategy_member
+
+var CapacityProviderStrategyItem = &sCapacityProviderStrategyItem
+var CapacityProviderStrategyItem_capacityProvider = &sCapacityProviderStrategyItem_capacityProvider
+var CapacityProviderStrategyItem_weight = &sCapacityProviderStrategyItem_weight
+var CapacityProviderStrategyItem_base = &sCapacityProviderStrategyItem_base
+
+var _CapacityProviderStrategyItemBase = &s_CapacityProviderStrategyItemBase
+
+var _CapacityProviderStrategyItemWeight = &s_CapacityProviderStrategyItemWeight
+
+var ConcurrentModificationException = &sConcurrentModificationException
+var ConcurrentModificationException_message = &sConcurrentModificationException_message
+
+var Condition = &sCondition
+var Condition_Type = &sCondition_Type
+var Condition_Key = &sCondition_Key
+var Condition_Value = &sCondition_Value
+
+var Connection = &sConnection
+var Connection_ConnectionArn = &sConnection_ConnectionArn
+var Connection_Name = &sConnection_Name
+var Connection_ConnectionState = &sConnection_ConnectionState
+var Connection_StateReason = &sConnection_StateReason
+var Connection_AuthorizationType = &sConnection_AuthorizationType
+var Connection_CreationTime = &sConnection_CreationTime
+var Connection_LastModifiedTime = &sConnection_LastModifiedTime
+var Connection_LastAuthorizedTime = &sConnection_LastAuthorizedTime
+
+var ConnectionApiKeyAuthResponseParameters = &sConnectionApiKeyAuthResponseParameters
+var ConnectionApiKeyAuthResponseParameters_ApiKeyName = &sConnectionApiKeyAuthResponseParameters_ApiKeyName
+
+var _ConnectionArn = &s_ConnectionArn
+
+var ConnectionAuthorizationType = &sConnectionAuthorizationType
+var ConnectionAuthorizationType_BASIC = &sConnectionAuthorizationType_BASIC
+var ConnectionAuthorizationType_OAUTH_CLIENT_CREDENTIALS = &sConnectionAuthorizationType_OAUTH_CLIENT_CREDENTIALS
+var ConnectionAuthorizationType_API_KEY = &sConnectionAuthorizationType_API_KEY
+
+var ConnectionAuthResponseParameters = &sConnectionAuthResponseParameters
+var ConnectionAuthResponseParameters_BasicAuthParameters = &sConnectionAuthResponseParameters_BasicAuthParameters
+var ConnectionAuthResponseParameters_OAuthParameters = &sConnectionAuthResponseParameters_OAuthParameters
+var ConnectionAuthResponseParameters_ApiKeyAuthParameters = &sConnectionAuthResponseParameters_ApiKeyAuthParameters
+var ConnectionAuthResponseParameters_InvocationHttpParameters = &sConnectionAuthResponseParameters_InvocationHttpParameters
+
+var ConnectionBasicAuthResponseParameters = &sConnectionBasicAuthResponseParameters
+var ConnectionBasicAuthResponseParameters_Username = &sConnectionBasicAuthResponseParameters_Username
+
+var ConnectionBodyParameter = &sConnectionBodyParameter
+var ConnectionBodyParameter_Key = &sConnectionBodyParameter_Key
+var ConnectionBodyParameter_Value = &sConnectionBodyParameter_Value
+var ConnectionBodyParameter_IsValueSecret = &sConnectionBodyParameter_IsValueSecret
+
+var _ConnectionBodyParametersList = &s_ConnectionBodyParametersList
+var _ConnectionBodyParametersList_member = &s_ConnectionBodyParametersList_member
+
+var _ConnectionDescription = &s_ConnectionDescription
+
+var ConnectionHeaderParameter = &sConnectionHeaderParameter
+var ConnectionHeaderParameter_Key = &sConnectionHeaderParameter_Key
+var ConnectionHeaderParameter_Value = &sConnectionHeaderParameter_Value
+var ConnectionHeaderParameter_IsValueSecret = &sConnectionHeaderParameter_IsValueSecret
+
+var _ConnectionHeaderParametersList = &s_ConnectionHeaderParametersList
+var _ConnectionHeaderParametersList_member = &s_ConnectionHeaderParametersList_member
+
+var ConnectionHttpParameters = &sConnectionHttpParameters
+var ConnectionHttpParameters_HeaderParameters = &sConnectionHttpParameters_HeaderParameters
+var ConnectionHttpParameters_QueryStringParameters = &sConnectionHttpParameters_QueryStringParameters
+var ConnectionHttpParameters_BodyParameters = &sConnectionHttpParameters_BodyParameters
+
+var _ConnectionName = &s_ConnectionName
+
+var ConnectionOAuthClientResponseParameters = &sConnectionOAuthClientResponseParameters
+var ConnectionOAuthClientResponseParameters_ClientID = &sConnectionOAuthClientResponseParameters_ClientID
+
+var ConnectionOAuthHttpMethod = &sConnectionOAuthHttpMethod
+var ConnectionOAuthHttpMethod_GET = &sConnectionOAuthHttpMethod_GET
+var ConnectionOAuthHttpMethod_POST = &sConnectionOAuthHttpMethod_POST
+var ConnectionOAuthHttpMethod_PUT = &sConnectionOAuthHttpMethod_PUT
+
+var ConnectionOAuthResponseParameters = &sConnectionOAuthResponseParameters
+var ConnectionOAuthResponseParameters_ClientParameters = &sConnectionOAuthResponseParameters_ClientParameters
+var ConnectionOAuthResponseParameters_AuthorizationEndpoint = &sConnectionOAuthResponseParameters_AuthorizationEndpoint
+var ConnectionOAuthResponseParameters_HttpMethod = &sConnectionOAuthResponseParameters_HttpMethod
+var ConnectionOAuthResponseParameters_OAuthHttpParameters = &sConnectionOAuthResponseParameters_OAuthHttpParameters
+
+var ConnectionQueryStringParameter = &sConnectionQueryStringParameter
+var ConnectionQueryStringParameter_Key = &sConnectionQueryStringParameter_Key
+var ConnectionQueryStringParameter_Value = &sConnectionQueryStringParameter_Value
+var ConnectionQueryStringParameter_IsValueSecret = &sConnectionQueryStringParameter_IsValueSecret
+
+var _ConnectionQueryStringParametersList = &s_ConnectionQueryStringParametersList
+var _ConnectionQueryStringParametersList_member = &s_ConnectionQueryStringParametersList_member
+
+var _ConnectionResponseList = &s_ConnectionResponseList
+var _ConnectionResponseList_member = &s_ConnectionResponseList_member
+
+var ConnectionState = &sConnectionState
+var ConnectionState_CREATING = &sConnectionState_CREATING
+var ConnectionState_UPDATING = &sConnectionState_UPDATING
+var ConnectionState_DELETING = &sConnectionState_DELETING
+var ConnectionState_AUTHORIZED = &sConnectionState_AUTHORIZED
+var ConnectionState_DEAUTHORIZED = &sConnectionState_DEAUTHORIZED
+var ConnectionState_AUTHORIZING = &sConnectionState_AUTHORIZING
+var ConnectionState_DEAUTHORIZING = &sConnectionState_DEAUTHORIZING
+
+var _ConnectionStateReason = &s_ConnectionStateReason
+
+var CreateConnectionApiKeyAuthRequestParameters = &sCreateConnectionApiKeyAuthRequestParameters
+var CreateConnectionApiKeyAuthRequestParameters_ApiKeyName = &sCreateConnectionApiKeyAuthRequestParameters_ApiKeyName
+var CreateConnectionApiKeyAuthRequestParameters_ApiKeyValue = &sCreateConnectionApiKeyAuthRequestParameters_ApiKeyValue
+
+var CreateConnectionAuthRequestParameters = &sCreateConnectionAuthRequestParameters
+var CreateConnectionAuthRequestParameters_BasicAuthParameters = &sCreateConnectionAuthRequestParameters_BasicAuthParameters
+var CreateConnectionAuthRequestParameters_OAuthParameters = &sCreateConnectionAuthRequestParameters_OAuthParameters
+var CreateConnectionAuthRequestParameters_ApiKeyAuthParameters = &sCreateConnectionAuthRequestParameters_ApiKeyAuthParameters
+var CreateConnectionAuthRequestParameters_InvocationHttpParameters = &sCreateConnectionAuthRequestParameters_InvocationHttpParameters
+
+var CreateConnectionBasicAuthRequestParameters = &sCreateConnectionBasicAuthRequestParameters
+var CreateConnectionBasicAuthRequestParameters_Username = &sCreateConnectionBasicAuthRequestParameters_Username
+var CreateConnectionBasicAuthRequestParameters_Password = &sCreateConnectionBasicAuthRequestParameters_Password
+
+var CreateConnectionOAuthClientRequestParameters = &sCreateConnectionOAuthClientRequestParameters
+var CreateConnectionOAuthClientRequestParameters_ClientID = &sCreateConnectionOAuthClientRequestParameters_ClientID
+var CreateConnectionOAuthClientRequestParameters_ClientSecret = &sCreateConnectionOAuthClientRequestParameters_ClientSecret
+
+var CreateConnectionOAuthRequestParameters = &sCreateConnectionOAuthRequestParameters
+var CreateConnectionOAuthRequestParameters_ClientParameters = &sCreateConnectionOAuthRequestParameters_ClientParameters
+var CreateConnectionOAuthRequestParameters_AuthorizationEndpoint = &sCreateConnectionOAuthRequestParameters_AuthorizationEndpoint
+var CreateConnectionOAuthRequestParameters_HttpMethod = &sCreateConnectionOAuthRequestParameters_HttpMethod
+var CreateConnectionOAuthRequestParameters_OAuthHttpParameters = &sCreateConnectionOAuthRequestParameters_OAuthHttpParameters
+
+var _CreatedBy = &s_CreatedBy
+
+var _Database = &s_Database
+
+var _DbUser = &s_DbUser
+
+var DeadLetterConfig = &sDeadLetterConfig
+var DeadLetterConfig_Arn = &sDeadLetterConfig_Arn
+
+var EcsParameters = &sEcsParameters
+var EcsParameters_TaskDefinitionArn = &sEcsParameters_TaskDefinitionArn
+var EcsParameters_TaskCount = &sEcsParameters_TaskCount
+var EcsParameters_LaunchType = &sEcsParameters_LaunchType
+var EcsParameters_NetworkConfiguration = &sEcsParameters_NetworkConfiguration
+var EcsParameters_PlatformVersion = &sEcsParameters_PlatformVersion
+var EcsParameters_Group = &sEcsParameters_Group
+var EcsParameters_CapacityProviderStrategy = &sEcsParameters_CapacityProviderStrategy
+var EcsParameters_EnableECSManagedTags = &sEcsParameters_EnableECSManagedTags
+var EcsParameters_EnableExecuteCommand = &sEcsParameters_EnableExecuteCommand
+var EcsParameters_PlacementConstraints = &sEcsParameters_PlacementConstraints
+var EcsParameters_PlacementStrategy = &sEcsParameters_PlacementStrategy
+var EcsParameters_PropagateTags = &sEcsParameters_PropagateTags
+var EcsParameters_ReferenceId = &sEcsParameters_ReferenceId
+var EcsParameters_Tags = &sEcsParameters_Tags
+
+var _ErrorCode = &s_ErrorCode
+
+var _ErrorMessage = &s_ErrorMessage
+
+var EventBus = &sEventBus
+var EventBus_Name = &sEventBus_Name
+var EventBus_Arn = &sEventBus_Arn
+var EventBus_Policy = &sEventBus_Policy
+
+var _EventBusList = &s_EventBusList
+var _EventBusList_member = &s_EventBusList_member
+
+var _EventBusName = &s_EventBusName
+
+var _EventBusNameOrArn = &s_EventBusNameOrArn
+
+var _EventId = &s_EventId
+
+var _EventPattern = &s_EventPattern
+
+var _EventResource = &s_EventResource
+
+var _EventResourceList = &s_EventResourceList
+var _EventResourceList_member = &s_EventResourceList_member
+
+var EventSource = &sEventSource
+var EventSource_Arn = &sEventSource_Arn
+var EventSource_CreatedBy = &sEventSource_CreatedBy
+var EventSource_CreationTime = &sEventSource_CreationTime
+var EventSource_ExpirationTime = &sEventSource_ExpirationTime
+var EventSource_Name = &sEventSource_Name
+var EventSource_State = &sEventSource_State
+
+var _EventSourceList = &s_EventSourceList
+var _EventSourceList_member = &s_EventSourceList_member
+
+var _EventSourceName = &s_EventSourceName
+
+var _EventSourceNamePrefix = &s_EventSourceNamePrefix
+
+var EventSourceState = &sEventSourceState
+var EventSourceState_PENDING = &sEventSourceState_PENDING
+var EventSourceState_ACTIVE = &sEventSourceState_ACTIVE
+var EventSourceState_DELETED = &sEventSourceState_DELETED
+
+var _EventTime = &s_EventTime
+
+var _HeaderKey = &s_HeaderKey
+
+var _HeaderParametersMap = &s_HeaderParametersMap
+var _HeaderParametersMap_key = &s_HeaderParametersMap_key
+var _HeaderParametersMap_value = &s_HeaderParametersMap_value
+
+var _HeaderValue = &s_HeaderValue
+
+var _HeaderValueSensitive = &s_HeaderValueSensitive
+
+var HttpParameters = &sHttpParameters
+var HttpParameters_PathParameterValues = &sHttpParameters_PathParameterValues
+var HttpParameters_HeaderParameters = &sHttpParameters_HeaderParameters
+var HttpParameters_QueryStringParameters = &sHttpParameters_QueryStringParameters
+
+var _HttpsEndpoint = &s_HttpsEndpoint
+
+var IllegalStatusException = &sIllegalStatusException
+var IllegalStatusException_message = &sIllegalStatusException_message
+
+var InputTransformer = &sInputTransformer
+var InputTransformer_InputPathsMap = &sInputTransformer_InputPathsMap
+var InputTransformer_InputTemplate = &sInputTransformer_InputTemplate
+
+var _InputTransformerPathKey = &s_InputTransformerPathKey
+
+var _Integer = &s_Integer
+
+var InternalException = &sInternalException
+var InternalException_message = &sInternalException_message
+
+var InvalidEventPatternException = &sInvalidEventPatternException
+var InvalidEventPatternException_message = &sInvalidEventPatternException_message
+
+var InvalidStateException = &sInvalidStateException
+var InvalidStateException_message = &sInvalidStateException_message
+
+var KinesisParameters = &sKinesisParameters
+var KinesisParameters_PartitionKeyPath = &sKinesisParameters_PartitionKeyPath
+
+var LaunchType = &sLaunchType
+var LaunchType_EC2 = &sLaunchType_EC2
+var LaunchType_FARGATE = &sLaunchType_FARGATE
+var LaunchType_EXTERNAL = &sLaunchType_EXTERNAL
+
+var LimitExceededException = &sLimitExceededException
+var LimitExceededException_message = &sLimitExceededException_message
+
+var _LimitMax100 = &s_LimitMax100
+
+var _LimitMin1 = &s_LimitMin1
+
+var _Long = &s_Long
+
+var _ManagedBy = &s_ManagedBy
+
+var ManagedRuleException = &sManagedRuleException
+var ManagedRuleException_message = &sManagedRuleException_message
+
+var _MaximumEventAgeInSeconds = &s_MaximumEventAgeInSeconds
+
+var _MaximumRetryAttempts = &s_MaximumRetryAttempts
+
+var _MessageGroupId = &s_MessageGroupId
+
+var NetworkConfiguration = &sNetworkConfiguration
+var NetworkConfiguration_awsvpcConfiguration = &sNetworkConfiguration_awsvpcConfiguration
+
+var _NextToken = &s_NextToken
+
+var _NonPartnerEventBusName = &s_NonPartnerEventBusName
+
+var _NonPartnerEventBusNameOrArn = &s_NonPartnerEventBusNameOrArn
+
+var OperationDisabledException = &sOperationDisabledException
+var OperationDisabledException_message = &sOperationDisabledException_message
+
+var PartnerEventSource = &sPartnerEventSource
+var PartnerEventSource_Arn = &sPartnerEventSource_Arn
+var PartnerEventSource_Name = &sPartnerEventSource_Name
+
+var PartnerEventSourceAccount = &sPartnerEventSourceAccount
+var PartnerEventSourceAccount_Account = &sPartnerEventSourceAccount_Account
+var PartnerEventSourceAccount_CreationTime = &sPartnerEventSourceAccount_CreationTime
+var PartnerEventSourceAccount_ExpirationTime = &sPartnerEventSourceAccount_ExpirationTime
+var PartnerEventSourceAccount_State = &sPartnerEventSourceAccount_State
+
+var _PartnerEventSourceAccountList = &s_PartnerEventSourceAccountList
+var _PartnerEventSourceAccountList_member = &s_PartnerEventSourceAccountList_member
+
+var _PartnerEventSourceList = &s_PartnerEventSourceList
+var _PartnerEventSourceList_member = &s_PartnerEventSourceList_member
+
+var _PartnerEventSourceNamePrefix = &s_PartnerEventSourceNamePrefix
+
+var _PathParameter = &s_PathParameter
+
+var _PathParameterList = &s_PathParameterList
+var _PathParameterList_member = &s_PathParameterList_member
+
+var PlacementConstraint = &sPlacementConstraint
+var PlacementConstraint_type = &sPlacementConstraint_type
+var PlacementConstraint_expression = &sPlacementConstraint_expression
+
+var _PlacementConstraintExpression = &s_PlacementConstraintExpression
+
+var _PlacementConstraints = &s_PlacementConstraints
+var _PlacementConstraints_member = &s_PlacementConstraints_member
+
+var PlacementConstraintType = &sPlacementConstraintType
+var PlacementConstraintType_DISTINCT_INSTANCE = &sPlacementConstraintType_DISTINCT_INSTANCE
+var PlacementConstraintType_MEMBER_OF = &sPlacementConstraintType_MEMBER_OF
+
+var _PlacementStrategies = &s_PlacementStrategies
+var _PlacementStrategies_member = &s_PlacementStrategies_member
+
+var PlacementStrategy = &sPlacementStrategy
+var PlacementStrategy_type = &sPlacementStrategy_type
+var PlacementStrategy_field = &sPlacementStrategy_field
+
+var _PlacementStrategyField = &s_PlacementStrategyField
+
+var PlacementStrategyType = &sPlacementStrategyType
+var PlacementStrategyType_RANDOM = &sPlacementStrategyType_RANDOM
+var PlacementStrategyType_SPREAD = &sPlacementStrategyType_SPREAD
+var PlacementStrategyType_BINPACK = &sPlacementStrategyType_BINPACK
+
+var PolicyLengthExceededException = &sPolicyLengthExceededException
+var PolicyLengthExceededException_message = &sPolicyLengthExceededException_message
+
+var _Principal = &s_Principal
+
+var PropagateTags = &sPropagateTags
+var PropagateTags_TASK_DEFINITION = &sPropagateTags_TASK_DEFINITION
+
+var PutEventsRequestEntry = &sPutEventsRequestEntry
+var PutEventsRequestEntry_Time = &sPutEventsRequestEntry_Time
+var PutEventsRequestEntry_Source = &sPutEventsRequestEntry_Source
+var PutEventsRequestEntry_Resources = &sPutEventsRequestEntry_Resources
+var PutEventsRequestEntry_DetailType = &sPutEventsRequestEntry_DetailType
+var PutEventsRequestEntry_Detail = &sPutEventsRequestEntry_Detail
+var PutEventsRequestEntry_EventBusName = &sPutEventsRequestEntry_EventBusName
+var PutEventsRequestEntry_TraceHeader = &sPutEventsRequestEntry_TraceHeader
+
+var _PutEventsRequestEntryList = &s_PutEventsRequestEntryList
+var _PutEventsRequestEntryList_member = &s_PutEventsRequestEntryList_member
+
+var PutEventsResultEntry = &sPutEventsResultEntry
+var PutEventsResultEntry_EventId = &sPutEventsResultEntry_EventId
+var PutEventsResultEntry_ErrorCode = &sPutEventsResultEntry_ErrorCode
+var PutEventsResultEntry_ErrorMessage = &sPutEventsResultEntry_ErrorMessage
+
+var _PutEventsResultEntryList = &s_PutEventsResultEntryList
+var _PutEventsResultEntryList_member = &s_PutEventsResultEntryList_member
+
+var PutPartnerEventsRequestEntry = &sPutPartnerEventsRequestEntry
+var PutPartnerEventsRequestEntry_Time = &sPutPartnerEventsRequestEntry_Time
+var PutPartnerEventsRequestEntry_Source = &sPutPartnerEventsRequestEntry_Source
+var PutPartnerEventsRequestEntry_Resources = &sPutPartnerEventsRequestEntry_Resources
+var PutPartnerEventsRequestEntry_DetailType = &sPutPartnerEventsRequestEntry_DetailType
+var PutPartnerEventsRequestEntry_Detail = &sPutPartnerEventsRequestEntry_Detail
+
+var _PutPartnerEventsRequestEntryList = &s_PutPartnerEventsRequestEntryList
+var _PutPartnerEventsRequestEntryList_member = &s_PutPartnerEventsRequestEntryList_member
+
+var PutPartnerEventsResultEntry = &sPutPartnerEventsResultEntry
+var PutPartnerEventsResultEntry_EventId = &sPutPartnerEventsResultEntry_EventId
+var PutPartnerEventsResultEntry_ErrorCode = &sPutPartnerEventsResultEntry_ErrorCode
+var PutPartnerEventsResultEntry_ErrorMessage = &sPutPartnerEventsResultEntry_ErrorMessage
+
+var _PutPartnerEventsResultEntryList = &s_PutPartnerEventsResultEntryList
+var _PutPartnerEventsResultEntryList_member = &s_PutPartnerEventsResultEntryList_member
+
+var PutTargetsResultEntry = &sPutTargetsResultEntry
+var PutTargetsResultEntry_TargetId = &sPutTargetsResultEntry_TargetId
+var PutTargetsResultEntry_ErrorCode = &sPutTargetsResultEntry_ErrorCode
+var PutTargetsResultEntry_ErrorMessage = &sPutTargetsResultEntry_ErrorMessage
+
+var _PutTargetsResultEntryList = &s_PutTargetsResultEntryList
+var _PutTargetsResultEntryList_member = &s_PutTargetsResultEntryList_member
+
+var _QueryStringKey = &s_QueryStringKey
+
+var _QueryStringParametersMap = &s_QueryStringParametersMap
+var _QueryStringParametersMap_key = &s_QueryStringParametersMap_key
+var _QueryStringParametersMap_value = &s_QueryStringParametersMap_value
+
+var _QueryStringValue = &s_QueryStringValue
+
+var _QueryStringValueSensitive = &s_QueryStringValueSensitive
+
+var RedshiftDataParameters = &sRedshiftDataParameters
+var RedshiftDataParameters_SecretManagerArn = &sRedshiftDataParameters_SecretManagerArn
+var RedshiftDataParameters_Database = &sRedshiftDataParameters_Database
+var RedshiftDataParameters_DbUser = &sRedshiftDataParameters_DbUser
+var RedshiftDataParameters_Sql = &sRedshiftDataParameters_Sql
+var RedshiftDataParameters_StatementName = &sRedshiftDataParameters_StatementName
+var RedshiftDataParameters_WithEvent = &sRedshiftDataParameters_WithEvent
+
+var _RedshiftSecretManagerArn = &s_RedshiftSecretManagerArn
+
+var _ReferenceId = &s_ReferenceId
+
+var RemoveTargetsResultEntry = &sRemoveTargetsResultEntry
+var RemoveTargetsResultEntry_TargetId = &sRemoveTargetsResultEntry_TargetId
+var RemoveTargetsResultEntry_ErrorCode = &sRemoveTargetsResultEntry_ErrorCode
+var RemoveTargetsResultEntry_ErrorMessage = &sRemoveTargetsResultEntry_ErrorMessage
+
+var _RemoveTargetsResultEntryList = &s_RemoveTargetsResultEntryList
+var _RemoveTargetsResultEntryList_member = &s_RemoveTargetsResultEntryList_member
+
+var Replay = &sReplay
+var Replay_ReplayName = &sReplay_ReplayName
+var Replay_EventSourceArn = &sReplay_EventSourceArn
+var Replay_State = &sReplay_State
+var Replay_StateReason = &sReplay_StateReason
+var Replay_EventStartTime = &sReplay_EventStartTime
+var Replay_EventEndTime = &sReplay_EventEndTime
+var Replay_EventLastReplayedTime = &sReplay_EventLastReplayedTime
+var Replay_ReplayStartTime = &sReplay_ReplayStartTime
+var Replay_ReplayEndTime = &sReplay_ReplayEndTime
+
+var _ReplayArn = &s_ReplayArn
+
+var _ReplayDescription = &s_ReplayDescription
+
+var ReplayDestination = &sReplayDestination
+var ReplayDestination_Arn = &sReplayDestination_Arn
+var ReplayDestination_FilterArns = &sReplayDestination_FilterArns
+
+var _ReplayDestinationFilters = &s_ReplayDestinationFilters
+var _ReplayDestinationFilters_member = &s_ReplayDestinationFilters_member
+
+var _ReplayList = &s_ReplayList
+var _ReplayList_member = &s_ReplayList_member
+
+var _ReplayName = &s_ReplayName
+
+var ReplayState = &sReplayState
+var ReplayState_STARTING = &sReplayState_STARTING
+var ReplayState_RUNNING = &sReplayState_RUNNING
+var ReplayState_CANCELLING = &sReplayState_CANCELLING
+var ReplayState_COMPLETED = &sReplayState_COMPLETED
+var ReplayState_CANCELLED = &sReplayState_CANCELLED
+var ReplayState_FAILED = &sReplayState_FAILED
+
+var _ReplayStateReason = &s_ReplayStateReason
+
+var ResourceAlreadyExistsException = &sResourceAlreadyExistsException
+var ResourceAlreadyExistsException_message = &sResourceAlreadyExistsException_message
+
+var _ResourceArn = &s_ResourceArn
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+
+var _RetentionDays = &s_RetentionDays
+
+var RetryPolicy = &sRetryPolicy
+var RetryPolicy_MaximumRetryAttempts = &sRetryPolicy_MaximumRetryAttempts
+var RetryPolicy_MaximumEventAgeInSeconds = &sRetryPolicy_MaximumEventAgeInSeconds
+
+var _RoleArn = &s_RoleArn
+
+var Rule = &sRule
+var Rule_Name = &sRule_Name
+var Rule_Arn = &sRule_Arn
+var Rule_EventPattern = &sRule_EventPattern
+var Rule_State = &sRule_State
+var Rule_Description = &sRule_Description
+var Rule_ScheduleExpression = &sRule_ScheduleExpression
+var Rule_RoleArn = &sRule_RoleArn
+var Rule_ManagedBy = &sRule_ManagedBy
+var Rule_EventBusName = &sRule_EventBusName
+
+var _RuleArn = &s_RuleArn
+
+var _RuleDescription = &s_RuleDescription
+
+var _RuleName = &s_RuleName
+
+var _RuleNameList = &s_RuleNameList
+var _RuleNameList_member = &s_RuleNameList_member
+
+var _RuleResponseList = &s_RuleResponseList
+var _RuleResponseList_member = &s_RuleResponseList_member
+
+var RuleState = &sRuleState
+var RuleState_ENABLED = &sRuleState_ENABLED
+var RuleState_DISABLED = &sRuleState_DISABLED
+
+var RunCommandParameters = &sRunCommandParameters
+var RunCommandParameters_RunCommandTargets = &sRunCommandParameters_RunCommandTargets
+
+var RunCommandTarget = &sRunCommandTarget
+var RunCommandTarget_Key = &sRunCommandTarget_Key
+var RunCommandTarget_Values = &sRunCommandTarget_Values
+
+var _RunCommandTargetKey = &s_RunCommandTargetKey
+
+var _RunCommandTargets = &s_RunCommandTargets
+var _RunCommandTargets_member = &s_RunCommandTargets_member
+
+var _RunCommandTargetValue = &s_RunCommandTargetValue
+
+var _RunCommandTargetValues = &s_RunCommandTargetValues
+var _RunCommandTargetValues_member = &s_RunCommandTargetValues_member
+
+var SageMakerPipelineParameter = &sSageMakerPipelineParameter
+var SageMakerPipelineParameter_Name = &sSageMakerPipelineParameter_Name
+var SageMakerPipelineParameter_Value = &sSageMakerPipelineParameter_Value
+
+var _SageMakerPipelineParameterList = &s_SageMakerPipelineParameterList
+var _SageMakerPipelineParameterList_member = &s_SageMakerPipelineParameterList_member
+
+var _SageMakerPipelineParameterName = &s_SageMakerPipelineParameterName
+
+var SageMakerPipelineParameters = &sSageMakerPipelineParameters
+var SageMakerPipelineParameters_PipelineParameterList = &sSageMakerPipelineParameters_PipelineParameterList
+
+var _SageMakerPipelineParameterValue = &s_SageMakerPipelineParameterValue
+
+var _ScheduleExpression = &s_ScheduleExpression
+
+var _SecretsManagerSecretArn = &s_SecretsManagerSecretArn
+
+var _SensitiveString = &s_SensitiveString
+
+var _Sql = &s_Sql
+
+var SqsParameters = &sSqsParameters
+var SqsParameters_MessageGroupId = &sSqsParameters_MessageGroupId
+
+var _StatementId = &s_StatementId
+
+var _StatementName = &s_StatementName
+
+var _String = &s_String
+
+var _StringList = &s_StringList
+var _StringList_member = &s_StringList_member
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _TagValue = &s_TagValue
+
+var Target = &sTarget
+var Target_Id = &sTarget_Id
+var Target_Arn = &sTarget_Arn
+var Target_RoleArn = &sTarget_RoleArn
+var Target_Input = &sTarget_Input
+var Target_InputPath = &sTarget_InputPath
+var Target_InputTransformer = &sTarget_InputTransformer
+var Target_KinesisParameters = &sTarget_KinesisParameters
+var Target_RunCommandParameters = &sTarget_RunCommandParameters
+var Target_EcsParameters = &sTarget_EcsParameters
+var Target_BatchParameters = &sTarget_BatchParameters
+var Target_SqsParameters = &sTarget_SqsParameters
+var Target_HttpParameters = &sTarget_HttpParameters
+var Target_RedshiftDataParameters = &sTarget_RedshiftDataParameters
+var Target_SageMakerPipelineParameters = &sTarget_SageMakerPipelineParameters
+var Target_DeadLetterConfig = &sTarget_DeadLetterConfig
+var Target_RetryPolicy = &sTarget_RetryPolicy
+
+var _TargetArn = &s_TargetArn
+
+var _TargetId = &s_TargetId
+
+var _TargetIdList = &s_TargetIdList
+var _TargetIdList_member = &s_TargetIdList_member
+
+var _TargetInput = &s_TargetInput
+
+var _TargetInputPath = &s_TargetInputPath
+
+var _TargetList = &s_TargetList
+var _TargetList_member = &s_TargetList_member
+
+var _TargetPartitionKeyPath = &s_TargetPartitionKeyPath
+
+var _Timestamp = &s_Timestamp
+
+var _TraceHeader = &s_TraceHeader
+
+var _TransformerInput = &s_TransformerInput
+
+var _TransformerPaths = &s_TransformerPaths
+var _TransformerPaths_key = &s_TransformerPaths_key
+var _TransformerPaths_value = &s_TransformerPaths_value
+
+var UpdateConnectionApiKeyAuthRequestParameters = &sUpdateConnectionApiKeyAuthRequestParameters
+var UpdateConnectionApiKeyAuthRequestParameters_ApiKeyName = &sUpdateConnectionApiKeyAuthRequestParameters_ApiKeyName
+var UpdateConnectionApiKeyAuthRequestParameters_ApiKeyValue = &sUpdateConnectionApiKeyAuthRequestParameters_ApiKeyValue
+
+var UpdateConnectionAuthRequestParameters = &sUpdateConnectionAuthRequestParameters
+var UpdateConnectionAuthRequestParameters_BasicAuthParameters = &sUpdateConnectionAuthRequestParameters_BasicAuthParameters
+var UpdateConnectionAuthRequestParameters_OAuthParameters = &sUpdateConnectionAuthRequestParameters_OAuthParameters
+var UpdateConnectionAuthRequestParameters_ApiKeyAuthParameters = &sUpdateConnectionAuthRequestParameters_ApiKeyAuthParameters
+var UpdateConnectionAuthRequestParameters_InvocationHttpParameters = &sUpdateConnectionAuthRequestParameters_InvocationHttpParameters
+
+var UpdateConnectionBasicAuthRequestParameters = &sUpdateConnectionBasicAuthRequestParameters
+var UpdateConnectionBasicAuthRequestParameters_Username = &sUpdateConnectionBasicAuthRequestParameters_Username
+var UpdateConnectionBasicAuthRequestParameters_Password = &sUpdateConnectionBasicAuthRequestParameters_Password
+
+var UpdateConnectionOAuthClientRequestParameters = &sUpdateConnectionOAuthClientRequestParameters
+var UpdateConnectionOAuthClientRequestParameters_ClientID = &sUpdateConnectionOAuthClientRequestParameters_ClientID
+var UpdateConnectionOAuthClientRequestParameters_ClientSecret = &sUpdateConnectionOAuthClientRequestParameters_ClientSecret
+
+var UpdateConnectionOAuthRequestParameters = &sUpdateConnectionOAuthRequestParameters
+var UpdateConnectionOAuthRequestParameters_ClientParameters = &sUpdateConnectionOAuthRequestParameters_ClientParameters
+var UpdateConnectionOAuthRequestParameters_AuthorizationEndpoint = &sUpdateConnectionOAuthRequestParameters_AuthorizationEndpoint
+var UpdateConnectionOAuthRequestParameters_HttpMethod = &sUpdateConnectionOAuthRequestParameters_HttpMethod
+var UpdateConnectionOAuthRequestParameters_OAuthHttpParameters = &sUpdateConnectionOAuthRequestParameters_OAuthHttpParameters
+
+var ActivateEventSourceRequest = &sActivateEventSourceRequest
+var ActivateEventSourceRequest_Name = &sActivateEventSourceRequest_Name
+
+var CancelReplayRequest = &sCancelReplayRequest
+var CancelReplayRequest_ReplayName = &sCancelReplayRequest_ReplayName
+
+var CancelReplayResponse = &sCancelReplayResponse
+var CancelReplayResponse_ReplayArn = &sCancelReplayResponse_ReplayArn
+var CancelReplayResponse_State = &sCancelReplayResponse_State
+var CancelReplayResponse_StateReason = &sCancelReplayResponse_StateReason
+
+var CreateApiDestinationRequest = &sCreateApiDestinationRequest
+var CreateApiDestinationRequest_Name = &sCreateApiDestinationRequest_Name
+var CreateApiDestinationRequest_Description = &sCreateApiDestinationRequest_Description
+var CreateApiDestinationRequest_ConnectionArn = &sCreateApiDestinationRequest_ConnectionArn
+var CreateApiDestinationRequest_InvocationEndpoint = &sCreateApiDestinationRequest_InvocationEndpoint
+var CreateApiDestinationRequest_HttpMethod = &sCreateApiDestinationRequest_HttpMethod
+var CreateApiDestinationRequest_InvocationRateLimitPerSecond = &sCreateApiDestinationRequest_InvocationRateLimitPerSecond
+
+var CreateApiDestinationResponse = &sCreateApiDestinationResponse
+var CreateApiDestinationResponse_ApiDestinationArn = &sCreateApiDestinationResponse_ApiDestinationArn
+var CreateApiDestinationResponse_ApiDestinationState = &sCreateApiDestinationResponse_ApiDestinationState
+var CreateApiDestinationResponse_CreationTime = &sCreateApiDestinationResponse_CreationTime
+var CreateApiDestinationResponse_LastModifiedTime = &sCreateApiDestinationResponse_LastModifiedTime
+
+var CreateArchiveRequest = &sCreateArchiveRequest
+var CreateArchiveRequest_ArchiveName = &sCreateArchiveRequest_ArchiveName
+var CreateArchiveRequest_EventSourceArn = &sCreateArchiveRequest_EventSourceArn
+var CreateArchiveRequest_Description = &sCreateArchiveRequest_Description
+var CreateArchiveRequest_EventPattern = &sCreateArchiveRequest_EventPattern
+var CreateArchiveRequest_RetentionDays = &sCreateArchiveRequest_RetentionDays
+
+var CreateArchiveResponse = &sCreateArchiveResponse
+var CreateArchiveResponse_ArchiveArn = &sCreateArchiveResponse_ArchiveArn
+var CreateArchiveResponse_State = &sCreateArchiveResponse_State
+var CreateArchiveResponse_StateReason = &sCreateArchiveResponse_StateReason
+var CreateArchiveResponse_CreationTime = &sCreateArchiveResponse_CreationTime
+
+var CreateConnectionRequest = &sCreateConnectionRequest
+var CreateConnectionRequest_Name = &sCreateConnectionRequest_Name
+var CreateConnectionRequest_Description = &sCreateConnectionRequest_Description
+var CreateConnectionRequest_AuthorizationType = &sCreateConnectionRequest_AuthorizationType
+var CreateConnectionRequest_AuthParameters = &sCreateConnectionRequest_AuthParameters
+
+var CreateConnectionResponse = &sCreateConnectionResponse
+var CreateConnectionResponse_ConnectionArn = &sCreateConnectionResponse_ConnectionArn
+var CreateConnectionResponse_ConnectionState = &sCreateConnectionResponse_ConnectionState
+var CreateConnectionResponse_CreationTime = &sCreateConnectionResponse_CreationTime
+var CreateConnectionResponse_LastModifiedTime = &sCreateConnectionResponse_LastModifiedTime
+
+var CreateEventBusRequest = &sCreateEventBusRequest
+var CreateEventBusRequest_Name = &sCreateEventBusRequest_Name
+var CreateEventBusRequest_EventSourceName = &sCreateEventBusRequest_EventSourceName
+var CreateEventBusRequest_Tags = &sCreateEventBusRequest_Tags
+
+var CreateEventBusResponse = &sCreateEventBusResponse
+var CreateEventBusResponse_EventBusArn = &sCreateEventBusResponse_EventBusArn
+
+var CreatePartnerEventSourceRequest = &sCreatePartnerEventSourceRequest
+var CreatePartnerEventSourceRequest_Name = &sCreatePartnerEventSourceRequest_Name
+var CreatePartnerEventSourceRequest_Account = &sCreatePartnerEventSourceRequest_Account
+
+var CreatePartnerEventSourceResponse = &sCreatePartnerEventSourceResponse
+var CreatePartnerEventSourceResponse_EventSourceArn = &sCreatePartnerEventSourceResponse_EventSourceArn
+
+var DeactivateEventSourceRequest = &sDeactivateEventSourceRequest
+var DeactivateEventSourceRequest_Name = &sDeactivateEventSourceRequest_Name
+
+var DeauthorizeConnectionRequest = &sDeauthorizeConnectionRequest
+var DeauthorizeConnectionRequest_Name = &sDeauthorizeConnectionRequest_Name
+
+var DeauthorizeConnectionResponse = &sDeauthorizeConnectionResponse
+var DeauthorizeConnectionResponse_ConnectionArn = &sDeauthorizeConnectionResponse_ConnectionArn
+var DeauthorizeConnectionResponse_ConnectionState = &sDeauthorizeConnectionResponse_ConnectionState
+var DeauthorizeConnectionResponse_CreationTime = &sDeauthorizeConnectionResponse_CreationTime
+var DeauthorizeConnectionResponse_LastModifiedTime = &sDeauthorizeConnectionResponse_LastModifiedTime
+var DeauthorizeConnectionResponse_LastAuthorizedTime = &sDeauthorizeConnectionResponse_LastAuthorizedTime
+
+var DeleteApiDestinationRequest = &sDeleteApiDestinationRequest
+var DeleteApiDestinationRequest_Name = &sDeleteApiDestinationRequest_Name
+
+var DeleteApiDestinationResponse = &sDeleteApiDestinationResponse
+
+var DeleteArchiveRequest = &sDeleteArchiveRequest
+var DeleteArchiveRequest_ArchiveName = &sDeleteArchiveRequest_ArchiveName
+
+var DeleteArchiveResponse = &sDeleteArchiveResponse
+
+var DeleteConnectionRequest = &sDeleteConnectionRequest
+var DeleteConnectionRequest_Name = &sDeleteConnectionRequest_Name
+
+var DeleteConnectionResponse = &sDeleteConnectionResponse
+var DeleteConnectionResponse_ConnectionArn = &sDeleteConnectionResponse_ConnectionArn
+var DeleteConnectionResponse_ConnectionState = &sDeleteConnectionResponse_ConnectionState
+var DeleteConnectionResponse_CreationTime = &sDeleteConnectionResponse_CreationTime
+var DeleteConnectionResponse_LastModifiedTime = &sDeleteConnectionResponse_LastModifiedTime
+var DeleteConnectionResponse_LastAuthorizedTime = &sDeleteConnectionResponse_LastAuthorizedTime
+
+var DeleteEventBusRequest = &sDeleteEventBusRequest
+var DeleteEventBusRequest_Name = &sDeleteEventBusRequest_Name
+
+var DeletePartnerEventSourceRequest = &sDeletePartnerEventSourceRequest
+var DeletePartnerEventSourceRequest_Name = &sDeletePartnerEventSourceRequest_Name
+var DeletePartnerEventSourceRequest_Account = &sDeletePartnerEventSourceRequest_Account
+
+var DeleteRuleRequest = &sDeleteRuleRequest
+var DeleteRuleRequest_Name = &sDeleteRuleRequest_Name
+var DeleteRuleRequest_EventBusName = &sDeleteRuleRequest_EventBusName
+var DeleteRuleRequest_Force = &sDeleteRuleRequest_Force
+
+var DescribeApiDestinationRequest = &sDescribeApiDestinationRequest
+var DescribeApiDestinationRequest_Name = &sDescribeApiDestinationRequest_Name
+
+var DescribeApiDestinationResponse = &sDescribeApiDestinationResponse
+var DescribeApiDestinationResponse_ApiDestinationArn = &sDescribeApiDestinationResponse_ApiDestinationArn
+var DescribeApiDestinationResponse_Name = &sDescribeApiDestinationResponse_Name
+var DescribeApiDestinationResponse_Description = &sDescribeApiDestinationResponse_Description
+var DescribeApiDestinationResponse_ApiDestinationState = &sDescribeApiDestinationResponse_ApiDestinationState
+var DescribeApiDestinationResponse_ConnectionArn = &sDescribeApiDestinationResponse_ConnectionArn
+var DescribeApiDestinationResponse_InvocationEndpoint = &sDescribeApiDestinationResponse_InvocationEndpoint
+var DescribeApiDestinationResponse_HttpMethod = &sDescribeApiDestinationResponse_HttpMethod
+var DescribeApiDestinationResponse_InvocationRateLimitPerSecond = &sDescribeApiDestinationResponse_InvocationRateLimitPerSecond
+var DescribeApiDestinationResponse_CreationTime = &sDescribeApiDestinationResponse_CreationTime
+var DescribeApiDestinationResponse_LastModifiedTime = &sDescribeApiDestinationResponse_LastModifiedTime
+
+var DescribeArchiveRequest = &sDescribeArchiveRequest
+var DescribeArchiveRequest_ArchiveName = &sDescribeArchiveRequest_ArchiveName
+
+var DescribeArchiveResponse = &sDescribeArchiveResponse
+var DescribeArchiveResponse_ArchiveArn = &sDescribeArchiveResponse_ArchiveArn
+var DescribeArchiveResponse_ArchiveName = &sDescribeArchiveResponse_ArchiveName
+var DescribeArchiveResponse_EventSourceArn = &sDescribeArchiveResponse_EventSourceArn
+var DescribeArchiveResponse_Description = &sDescribeArchiveResponse_Description
+var DescribeArchiveResponse_EventPattern = &sDescribeArchiveResponse_EventPattern
+var DescribeArchiveResponse_State = &sDescribeArchiveResponse_State
+var DescribeArchiveResponse_StateReason = &sDescribeArchiveResponse_StateReason
+var DescribeArchiveResponse_RetentionDays = &sDescribeArchiveResponse_RetentionDays
+var DescribeArchiveResponse_SizeBytes = &sDescribeArchiveResponse_SizeBytes
+var DescribeArchiveResponse_EventCount = &sDescribeArchiveResponse_EventCount
+var DescribeArchiveResponse_CreationTime = &sDescribeArchiveResponse_CreationTime
+
+var DescribeConnectionRequest = &sDescribeConnectionRequest
+var DescribeConnectionRequest_Name = &sDescribeConnectionRequest_Name
+
+var DescribeConnectionResponse = &sDescribeConnectionResponse
+var DescribeConnectionResponse_ConnectionArn = &sDescribeConnectionResponse_ConnectionArn
+var DescribeConnectionResponse_Name = &sDescribeConnectionResponse_Name
+var DescribeConnectionResponse_Description = &sDescribeConnectionResponse_Description
+var DescribeConnectionResponse_ConnectionState = &sDescribeConnectionResponse_ConnectionState
+var DescribeConnectionResponse_StateReason = &sDescribeConnectionResponse_StateReason
+var DescribeConnectionResponse_AuthorizationType = &sDescribeConnectionResponse_AuthorizationType
+var DescribeConnectionResponse_SecretArn = &sDescribeConnectionResponse_SecretArn
+var DescribeConnectionResponse_AuthParameters = &sDescribeConnectionResponse_AuthParameters
+var DescribeConnectionResponse_CreationTime = &sDescribeConnectionResponse_CreationTime
+var DescribeConnectionResponse_LastModifiedTime = &sDescribeConnectionResponse_LastModifiedTime
+var DescribeConnectionResponse_LastAuthorizedTime = &sDescribeConnectionResponse_LastAuthorizedTime
+
+var DescribeEventBusRequest = &sDescribeEventBusRequest
+var DescribeEventBusRequest_Name = &sDescribeEventBusRequest_Name
+
+var DescribeEventBusResponse = &sDescribeEventBusResponse
+var DescribeEventBusResponse_Name = &sDescribeEventBusResponse_Name
+var DescribeEventBusResponse_Arn = &sDescribeEventBusResponse_Arn
+var DescribeEventBusResponse_Policy = &sDescribeEventBusResponse_Policy
+
+var DescribeEventSourceRequest = &sDescribeEventSourceRequest
+var DescribeEventSourceRequest_Name = &sDescribeEventSourceRequest_Name
+
+var DescribeEventSourceResponse = &sDescribeEventSourceResponse
+var DescribeEventSourceResponse_Arn = &sDescribeEventSourceResponse_Arn
+var DescribeEventSourceResponse_CreatedBy = &sDescribeEventSourceResponse_CreatedBy
+var DescribeEventSourceResponse_CreationTime = &sDescribeEventSourceResponse_CreationTime
+var DescribeEventSourceResponse_ExpirationTime = &sDescribeEventSourceResponse_ExpirationTime
+var DescribeEventSourceResponse_Name = &sDescribeEventSourceResponse_Name
+var DescribeEventSourceResponse_State = &sDescribeEventSourceResponse_State
+
+var DescribePartnerEventSourceRequest = &sDescribePartnerEventSourceRequest
+var DescribePartnerEventSourceRequest_Name = &sDescribePartnerEventSourceRequest_Name
+
+var DescribePartnerEventSourceResponse = &sDescribePartnerEventSourceResponse
+var DescribePartnerEventSourceResponse_Arn = &sDescribePartnerEventSourceResponse_Arn
+var DescribePartnerEventSourceResponse_Name = &sDescribePartnerEventSourceResponse_Name
+
+var DescribeReplayRequest = &sDescribeReplayRequest
+var DescribeReplayRequest_ReplayName = &sDescribeReplayRequest_ReplayName
+
+var DescribeReplayResponse = &sDescribeReplayResponse
+var DescribeReplayResponse_ReplayName = &sDescribeReplayResponse_ReplayName
+var DescribeReplayResponse_ReplayArn = &sDescribeReplayResponse_ReplayArn
+var DescribeReplayResponse_Description = &sDescribeReplayResponse_Description
+var DescribeReplayResponse_State = &sDescribeReplayResponse_State
+var DescribeReplayResponse_StateReason = &sDescribeReplayResponse_StateReason
+var DescribeReplayResponse_EventSourceArn = &sDescribeReplayResponse_EventSourceArn
+var DescribeReplayResponse_Destination = &sDescribeReplayResponse_Destination
+var DescribeReplayResponse_EventStartTime = &sDescribeReplayResponse_EventStartTime
+var DescribeReplayResponse_EventEndTime = &sDescribeReplayResponse_EventEndTime
+var DescribeReplayResponse_EventLastReplayedTime = &sDescribeReplayResponse_EventLastReplayedTime
+var DescribeReplayResponse_ReplayStartTime = &sDescribeReplayResponse_ReplayStartTime
+var DescribeReplayResponse_ReplayEndTime = &sDescribeReplayResponse_ReplayEndTime
+
+var DescribeRuleRequest = &sDescribeRuleRequest
+var DescribeRuleRequest_Name = &sDescribeRuleRequest_Name
+var DescribeRuleRequest_EventBusName = &sDescribeRuleRequest_EventBusName
+
+var DescribeRuleResponse = &sDescribeRuleResponse
+var DescribeRuleResponse_Name = &sDescribeRuleResponse_Name
+var DescribeRuleResponse_Arn = &sDescribeRuleResponse_Arn
+var DescribeRuleResponse_EventPattern = &sDescribeRuleResponse_EventPattern
+var DescribeRuleResponse_ScheduleExpression = &sDescribeRuleResponse_ScheduleExpression
+var DescribeRuleResponse_State = &sDescribeRuleResponse_State
+var DescribeRuleResponse_Description = &sDescribeRuleResponse_Description
+var DescribeRuleResponse_RoleArn = &sDescribeRuleResponse_RoleArn
+var DescribeRuleResponse_ManagedBy = &sDescribeRuleResponse_ManagedBy
+var DescribeRuleResponse_EventBusName = &sDescribeRuleResponse_EventBusName
+var DescribeRuleResponse_CreatedBy = &sDescribeRuleResponse_CreatedBy
+
+var DisableRuleRequest = &sDisableRuleRequest
+var DisableRuleRequest_Name = &sDisableRuleRequest_Name
+var DisableRuleRequest_EventBusName = &sDisableRuleRequest_EventBusName
+
+var EnableRuleRequest = &sEnableRuleRequest
+var EnableRuleRequest_Name = &sEnableRuleRequest_Name
+var EnableRuleRequest_EventBusName = &sEnableRuleRequest_EventBusName
+
+var ListApiDestinationsRequest = &sListApiDestinationsRequest
+var ListApiDestinationsRequest_NamePrefix = &sListApiDestinationsRequest_NamePrefix
+var ListApiDestinationsRequest_ConnectionArn = &sListApiDestinationsRequest_ConnectionArn
+var ListApiDestinationsRequest_NextToken = &sListApiDestinationsRequest_NextToken
+var ListApiDestinationsRequest_Limit = &sListApiDestinationsRequest_Limit
+
+var ListApiDestinationsResponse = &sListApiDestinationsResponse
+var ListApiDestinationsResponse_ApiDestinations = &sListApiDestinationsResponse_ApiDestinations
+var ListApiDestinationsResponse_NextToken = &sListApiDestinationsResponse_NextToken
+
+var ListArchivesRequest = &sListArchivesRequest
+var ListArchivesRequest_NamePrefix = &sListArchivesRequest_NamePrefix
+var ListArchivesRequest_EventSourceArn = &sListArchivesRequest_EventSourceArn
+var ListArchivesRequest_State = &sListArchivesRequest_State
+var ListArchivesRequest_NextToken = &sListArchivesRequest_NextToken
+var ListArchivesRequest_Limit = &sListArchivesRequest_Limit
+
+var ListArchivesResponse = &sListArchivesResponse
+var ListArchivesResponse_Archives = &sListArchivesResponse_Archives
+var ListArchivesResponse_NextToken = &sListArchivesResponse_NextToken
+
+var ListConnectionsRequest = &sListConnectionsRequest
+var ListConnectionsRequest_NamePrefix = &sListConnectionsRequest_NamePrefix
+var ListConnectionsRequest_ConnectionState = &sListConnectionsRequest_ConnectionState
+var ListConnectionsRequest_NextToken = &sListConnectionsRequest_NextToken
+var ListConnectionsRequest_Limit = &sListConnectionsRequest_Limit
+
+var ListConnectionsResponse = &sListConnectionsResponse
+var ListConnectionsResponse_Connections = &sListConnectionsResponse_Connections
+var ListConnectionsResponse_NextToken = &sListConnectionsResponse_NextToken
+
+var ListEventBusesRequest = &sListEventBusesRequest
+var ListEventBusesRequest_NamePrefix = &sListEventBusesRequest_NamePrefix
+var ListEventBusesRequest_NextToken = &sListEventBusesRequest_NextToken
+var ListEventBusesRequest_Limit = &sListEventBusesRequest_Limit
+
+var ListEventBusesResponse = &sListEventBusesResponse
+var ListEventBusesResponse_EventBuses = &sListEventBusesResponse_EventBuses
+var ListEventBusesResponse_NextToken = &sListEventBusesResponse_NextToken
+
+var ListEventSourcesRequest = &sListEventSourcesRequest
+var ListEventSourcesRequest_NamePrefix = &sListEventSourcesRequest_NamePrefix
+var ListEventSourcesRequest_NextToken = &sListEventSourcesRequest_NextToken
+var ListEventSourcesRequest_Limit = &sListEventSourcesRequest_Limit
+
+var ListEventSourcesResponse = &sListEventSourcesResponse
+var ListEventSourcesResponse_EventSources = &sListEventSourcesResponse_EventSources
+var ListEventSourcesResponse_NextToken = &sListEventSourcesResponse_NextToken
+
+var ListPartnerEventSourceAccountsRequest = &sListPartnerEventSourceAccountsRequest
+var ListPartnerEventSourceAccountsRequest_EventSourceName = &sListPartnerEventSourceAccountsRequest_EventSourceName
+var ListPartnerEventSourceAccountsRequest_NextToken = &sListPartnerEventSourceAccountsRequest_NextToken
+var ListPartnerEventSourceAccountsRequest_Limit = &sListPartnerEventSourceAccountsRequest_Limit
+
+var ListPartnerEventSourceAccountsResponse = &sListPartnerEventSourceAccountsResponse
+var ListPartnerEventSourceAccountsResponse_PartnerEventSourceAccounts = &sListPartnerEventSourceAccountsResponse_PartnerEventSourceAccounts
+var ListPartnerEventSourceAccountsResponse_NextToken = &sListPartnerEventSourceAccountsResponse_NextToken
+
+var ListPartnerEventSourcesRequest = &sListPartnerEventSourcesRequest
+var ListPartnerEventSourcesRequest_NamePrefix = &sListPartnerEventSourcesRequest_NamePrefix
+var ListPartnerEventSourcesRequest_NextToken = &sListPartnerEventSourcesRequest_NextToken
+var ListPartnerEventSourcesRequest_Limit = &sListPartnerEventSourcesRequest_Limit
+
+var ListPartnerEventSourcesResponse = &sListPartnerEventSourcesResponse
+var ListPartnerEventSourcesResponse_PartnerEventSources = &sListPartnerEventSourcesResponse_PartnerEventSources
+var ListPartnerEventSourcesResponse_NextToken = &sListPartnerEventSourcesResponse_NextToken
+
+var ListReplaysRequest = &sListReplaysRequest
+var ListReplaysRequest_NamePrefix = &sListReplaysRequest_NamePrefix
+var ListReplaysRequest_State = &sListReplaysRequest_State
+var ListReplaysRequest_EventSourceArn = &sListReplaysRequest_EventSourceArn
+var ListReplaysRequest_NextToken = &sListReplaysRequest_NextToken
+var ListReplaysRequest_Limit = &sListReplaysRequest_Limit
+
+var ListReplaysResponse = &sListReplaysResponse
+var ListReplaysResponse_Replays = &sListReplaysResponse_Replays
+var ListReplaysResponse_NextToken = &sListReplaysResponse_NextToken
+
+var ListRuleNamesByTargetRequest = &sListRuleNamesByTargetRequest
+var ListRuleNamesByTargetRequest_TargetArn = &sListRuleNamesByTargetRequest_TargetArn
+var ListRuleNamesByTargetRequest_EventBusName = &sListRuleNamesByTargetRequest_EventBusName
+var ListRuleNamesByTargetRequest_NextToken = &sListRuleNamesByTargetRequest_NextToken
+var ListRuleNamesByTargetRequest_Limit = &sListRuleNamesByTargetRequest_Limit
+
+var ListRuleNamesByTargetResponse = &sListRuleNamesByTargetResponse
+var ListRuleNamesByTargetResponse_RuleNames = &sListRuleNamesByTargetResponse_RuleNames
+var ListRuleNamesByTargetResponse_NextToken = &sListRuleNamesByTargetResponse_NextToken
+
+var ListRulesRequest = &sListRulesRequest
+var ListRulesRequest_NamePrefix = &sListRulesRequest_NamePrefix
+var ListRulesRequest_EventBusName = &sListRulesRequest_EventBusName
+var ListRulesRequest_NextToken = &sListRulesRequest_NextToken
+var ListRulesRequest_Limit = &sListRulesRequest_Limit
+
+var ListRulesResponse = &sListRulesResponse
+var ListRulesResponse_Rules = &sListRulesResponse_Rules
+var ListRulesResponse_NextToken = &sListRulesResponse_NextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceARN = &sListTagsForResourceRequest_ResourceARN
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_Tags = &sListTagsForResourceResponse_Tags
+
+var ListTargetsByRuleRequest = &sListTargetsByRuleRequest
+var ListTargetsByRuleRequest_Rule = &sListTargetsByRuleRequest_Rule
+var ListTargetsByRuleRequest_EventBusName = &sListTargetsByRuleRequest_EventBusName
+var ListTargetsByRuleRequest_NextToken = &sListTargetsByRuleRequest_NextToken
+var ListTargetsByRuleRequest_Limit = &sListTargetsByRuleRequest_Limit
+
+var ListTargetsByRuleResponse = &sListTargetsByRuleResponse
+var ListTargetsByRuleResponse_Targets = &sListTargetsByRuleResponse_Targets
+var ListTargetsByRuleResponse_NextToken = &sListTargetsByRuleResponse_NextToken
+
+var PutEventsRequest = &sPutEventsRequest
+var PutEventsRequest_Entries = &sPutEventsRequest_Entries
+
+var PutEventsResponse = &sPutEventsResponse
+var PutEventsResponse_FailedEntryCount = &sPutEventsResponse_FailedEntryCount
+var PutEventsResponse_Entries = &sPutEventsResponse_Entries
+
+var PutPartnerEventsRequest = &sPutPartnerEventsRequest
+var PutPartnerEventsRequest_Entries = &sPutPartnerEventsRequest_Entries
+
+var PutPartnerEventsResponse = &sPutPartnerEventsResponse
+var PutPartnerEventsResponse_FailedEntryCount = &sPutPartnerEventsResponse_FailedEntryCount
+var PutPartnerEventsResponse_Entries = &sPutPartnerEventsResponse_Entries
+
+var PutPermissionRequest = &sPutPermissionRequest
+var PutPermissionRequest_EventBusName = &sPutPermissionRequest_EventBusName
+var PutPermissionRequest_Action = &sPutPermissionRequest_Action
+var PutPermissionRequest_Principal = &sPutPermissionRequest_Principal
+var PutPermissionRequest_StatementId = &sPutPermissionRequest_StatementId
+var PutPermissionRequest_Condition = &sPutPermissionRequest_Condition
+var PutPermissionRequest_Policy = &sPutPermissionRequest_Policy
+
+var PutRuleRequest = &sPutRuleRequest
+var PutRuleRequest_Name = &sPutRuleRequest_Name
+var PutRuleRequest_ScheduleExpression = &sPutRuleRequest_ScheduleExpression
+var PutRuleRequest_EventPattern = &sPutRuleRequest_EventPattern
+var PutRuleRequest_State = &sPutRuleRequest_State
+var PutRuleRequest_Description = &sPutRuleRequest_Description
+var PutRuleRequest_RoleArn = &sPutRuleRequest_RoleArn
+var PutRuleRequest_Tags = &sPutRuleRequest_Tags
+var PutRuleRequest_EventBusName = &sPutRuleRequest_EventBusName
+
+var PutRuleResponse = &sPutRuleResponse
+var PutRuleResponse_RuleArn = &sPutRuleResponse_RuleArn
+
+var PutTargetsRequest = &sPutTargetsRequest
+var PutTargetsRequest_Rule = &sPutTargetsRequest_Rule
+var PutTargetsRequest_EventBusName = &sPutTargetsRequest_EventBusName
+var PutTargetsRequest_Targets = &sPutTargetsRequest_Targets
+
+var PutTargetsResponse = &sPutTargetsResponse
+var PutTargetsResponse_FailedEntryCount = &sPutTargetsResponse_FailedEntryCount
+var PutTargetsResponse_FailedEntries = &sPutTargetsResponse_FailedEntries
+
+var RemovePermissionRequest = &sRemovePermissionRequest
+var RemovePermissionRequest_StatementId = &sRemovePermissionRequest_StatementId
+var RemovePermissionRequest_RemoveAllPermissions = &sRemovePermissionRequest_RemoveAllPermissions
+var RemovePermissionRequest_EventBusName = &sRemovePermissionRequest_EventBusName
+
+var RemoveTargetsRequest = &sRemoveTargetsRequest
+var RemoveTargetsRequest_Rule = &sRemoveTargetsRequest_Rule
+var RemoveTargetsRequest_EventBusName = &sRemoveTargetsRequest_EventBusName
+var RemoveTargetsRequest_Ids = &sRemoveTargetsRequest_Ids
+var RemoveTargetsRequest_Force = &sRemoveTargetsRequest_Force
+
+var RemoveTargetsResponse = &sRemoveTargetsResponse
+var RemoveTargetsResponse_FailedEntryCount = &sRemoveTargetsResponse_FailedEntryCount
+var RemoveTargetsResponse_FailedEntries = &sRemoveTargetsResponse_FailedEntries
+
+var StartReplayRequest = &sStartReplayRequest
+var StartReplayRequest_ReplayName = &sStartReplayRequest_ReplayName
+var StartReplayRequest_Description = &sStartReplayRequest_Description
+var StartReplayRequest_EventSourceArn = &sStartReplayRequest_EventSourceArn
+var StartReplayRequest_EventStartTime = &sStartReplayRequest_EventStartTime
+var StartReplayRequest_EventEndTime = &sStartReplayRequest_EventEndTime
+var StartReplayRequest_Destination = &sStartReplayRequest_Destination
+
+var StartReplayResponse = &sStartReplayResponse
+var StartReplayResponse_ReplayArn = &sStartReplayResponse_ReplayArn
+var StartReplayResponse_State = &sStartReplayResponse_State
+var StartReplayResponse_StateReason = &sStartReplayResponse_StateReason
+var StartReplayResponse_ReplayStartTime = &sStartReplayResponse_ReplayStartTime
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceARN = &sTagResourceRequest_ResourceARN
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var TestEventPatternRequest = &sTestEventPatternRequest
+var TestEventPatternRequest_EventPattern = &sTestEventPatternRequest_EventPattern
+var TestEventPatternRequest_Event = &sTestEventPatternRequest_Event
+
+var TestEventPatternResponse = &sTestEventPatternResponse
+var TestEventPatternResponse_Result = &sTestEventPatternResponse_Result
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceARN = &sUntagResourceRequest_ResourceARN
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateApiDestinationRequest = &sUpdateApiDestinationRequest
+var UpdateApiDestinationRequest_Name = &sUpdateApiDestinationRequest_Name
+var UpdateApiDestinationRequest_Description = &sUpdateApiDestinationRequest_Description
+var UpdateApiDestinationRequest_ConnectionArn = &sUpdateApiDestinationRequest_ConnectionArn
+var UpdateApiDestinationRequest_InvocationEndpoint = &sUpdateApiDestinationRequest_InvocationEndpoint
+var UpdateApiDestinationRequest_HttpMethod = &sUpdateApiDestinationRequest_HttpMethod
+var UpdateApiDestinationRequest_InvocationRateLimitPerSecond = &sUpdateApiDestinationRequest_InvocationRateLimitPerSecond
+
+var UpdateApiDestinationResponse = &sUpdateApiDestinationResponse
+var UpdateApiDestinationResponse_ApiDestinationArn = &sUpdateApiDestinationResponse_ApiDestinationArn
+var UpdateApiDestinationResponse_ApiDestinationState = &sUpdateApiDestinationResponse_ApiDestinationState
+var UpdateApiDestinationResponse_CreationTime = &sUpdateApiDestinationResponse_CreationTime
+var UpdateApiDestinationResponse_LastModifiedTime = &sUpdateApiDestinationResponse_LastModifiedTime
+
+var UpdateArchiveRequest = &sUpdateArchiveRequest
+var UpdateArchiveRequest_ArchiveName = &sUpdateArchiveRequest_ArchiveName
+var UpdateArchiveRequest_Description = &sUpdateArchiveRequest_Description
+var UpdateArchiveRequest_EventPattern = &sUpdateArchiveRequest_EventPattern
+var UpdateArchiveRequest_RetentionDays = &sUpdateArchiveRequest_RetentionDays
+
+var UpdateArchiveResponse = &sUpdateArchiveResponse
+var UpdateArchiveResponse_ArchiveArn = &sUpdateArchiveResponse_ArchiveArn
+var UpdateArchiveResponse_State = &sUpdateArchiveResponse_State
+var UpdateArchiveResponse_StateReason = &sUpdateArchiveResponse_StateReason
+var UpdateArchiveResponse_CreationTime = &sUpdateArchiveResponse_CreationTime
+
+var UpdateConnectionRequest = &sUpdateConnectionRequest
+var UpdateConnectionRequest_Name = &sUpdateConnectionRequest_Name
+var UpdateConnectionRequest_Description = &sUpdateConnectionRequest_Description
+var UpdateConnectionRequest_AuthorizationType = &sUpdateConnectionRequest_AuthorizationType
+var UpdateConnectionRequest_AuthParameters = &sUpdateConnectionRequest_AuthParameters
+
+var UpdateConnectionResponse = &sUpdateConnectionResponse
+var UpdateConnectionResponse_ConnectionArn = &sUpdateConnectionResponse_ConnectionArn
+var UpdateConnectionResponse_ConnectionState = &sUpdateConnectionResponse_ConnectionState
+var UpdateConnectionResponse_CreationTime = &sUpdateConnectionResponse_CreationTime
+var UpdateConnectionResponse_LastModifiedTime = &sUpdateConnectionResponse_LastModifiedTime
+var UpdateConnectionResponse_LastAuthorizedTime = &sUpdateConnectionResponse_LastAuthorizedTime
+
+var AWSEvents = &smithy.ServiceSchema{Schema: &s_AWSEvents, Version: "2015-10-07"}

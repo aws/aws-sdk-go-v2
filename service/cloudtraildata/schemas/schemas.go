@@ -4,194 +4,163 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var PutAuditEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtraildata",
-	Name:      "PutAuditEvents",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	iPutAuditEvents                = smithy.ShapeID{Namespace: "com.amazonaws.cloudtraildata", Name: "PutAuditEvents"}
+	i_CloudTrailDataService        = smithy.ShapeID{Namespace: "com.amazonaws.cloudtraildata", Name: "CloudTrailDataService"}
+	iAuditEvent                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudtraildata", Name: "AuditEvent"}
+	i_AuditEventResultEntries      = smithy.ShapeID{Namespace: "com.amazonaws.cloudtraildata", Name: "AuditEventResultEntries"}
+	iAuditEventResultEntry         = smithy.ShapeID{Namespace: "com.amazonaws.cloudtraildata", Name: "AuditEventResultEntry"}
+	i_AuditEvents                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudtraildata", Name: "AuditEvents"}
+	i_ChannelArn                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudtraildata", Name: "ChannelArn"}
+	iChannelInsufficientPermission = smithy.ShapeID{Namespace: "com.amazonaws.cloudtraildata", Name: "ChannelInsufficientPermission"}
+	iChannelNotFound               = smithy.ShapeID{Namespace: "com.amazonaws.cloudtraildata", Name: "ChannelNotFound"}
+	iChannelUnsupportedSchema      = smithy.ShapeID{Namespace: "com.amazonaws.cloudtraildata", Name: "ChannelUnsupportedSchema"}
+	iDuplicatedAuditEventId        = smithy.ShapeID{Namespace: "com.amazonaws.cloudtraildata", Name: "DuplicatedAuditEventId"}
+	i_ErrorCode                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudtraildata", Name: "ErrorCode"}
+	i_ErrorMessage                 = smithy.ShapeID{Namespace: "com.amazonaws.cloudtraildata", Name: "ErrorMessage"}
+	i_ExternalId                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudtraildata", Name: "ExternalId"}
+	iInvalidChannelARN             = smithy.ShapeID{Namespace: "com.amazonaws.cloudtraildata", Name: "InvalidChannelARN"}
+	i_ResultErrorEntries           = smithy.ShapeID{Namespace: "com.amazonaws.cloudtraildata", Name: "ResultErrorEntries"}
+	iResultErrorEntry              = smithy.ShapeID{Namespace: "com.amazonaws.cloudtraildata", Name: "ResultErrorEntry"}
+	iUnsupportedOperationException = smithy.ShapeID{Namespace: "com.amazonaws.cloudtraildata", Name: "UnsupportedOperationException"}
+	i_Uuid                         = smithy.ShapeID{Namespace: "com.amazonaws.cloudtraildata", Name: "Uuid"}
+	iPutAuditEventsRequest         = smithy.ShapeID{Namespace: "com.amazonaws.cloudtraildata", Name: "PutAuditEventsRequest"}
+	iPutAuditEventsResponse        = smithy.ShapeID{Namespace: "com.amazonaws.cloudtraildata", Name: "PutAuditEventsResponse"}
+	pString                        = smithy.ShapeID{Namespace: "smithy.api", Name: "String"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/PutAuditEvents",
-	Code: 200})
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "channelArn"}}, DirectMask: 0x10}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "externalId"}}, DirectMask: 0x10}
 
-var _CloudTrailDataService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtraildata",
-	Name:      "CloudTrailDataService",
-}, smithy.ShapeTypeService, 0)
+var mAuditEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sAuditEvent_id, &sAuditEvent_eventData, &sAuditEvent_eventDataChecksum}}
+var m_AuditEventResultEntries = smithy.SchemaMembers{List: []*smithy.Schema{&s_AuditEventResultEntries_member}}
+var mAuditEventResultEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sAuditEventResultEntry_id, &sAuditEventResultEntry_eventID}}
+var m_AuditEvents = smithy.SchemaMembers{List: []*smithy.Schema{&s_AuditEvents_member}}
+var mChannelInsufficientPermission = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelInsufficientPermission_message}}
+var mChannelNotFound = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelNotFound_message}}
+var mChannelUnsupportedSchema = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelUnsupportedSchema_message}}
+var mDuplicatedAuditEventId = smithy.SchemaMembers{List: []*smithy.Schema{&sDuplicatedAuditEventId_message}}
+var mInvalidChannelARN = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidChannelARN_message}}
+var m_ResultErrorEntries = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResultErrorEntries_member}}
+var mResultErrorEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sResultErrorEntry_id, &sResultErrorEntry_errorCode, &sResultErrorEntry_errorMessage}}
+var mUnsupportedOperationException = smithy.SchemaMembers{List: []*smithy.Schema{&sUnsupportedOperationException_message}}
+var mPutAuditEventsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutAuditEventsRequest_auditEvents, &sPutAuditEventsRequest_channelArn, &sPutAuditEventsRequest_externalId}}
+var mPutAuditEventsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutAuditEventsResponse_successful, &sPutAuditEventsResponse_failed}}
 
-var CloudTrailDataService = smithy.NewServiceSchema(_CloudTrailDataService, "2021-08-11")
+var sPutAuditEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAuditEvents, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var s_CloudTrailDataService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CloudTrailDataService, Type: smithy.ShapeTypeService})
+var sAuditEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuditEvent, Members: &mAuditEvent, Type: smithy.ShapeTypeStructure})
+var s_AuditEventResultEntries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuditEventResultEntries, Members: &m_AuditEventResultEntries, Type: smithy.ShapeTypeList})
+var sAuditEventResultEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuditEventResultEntry, Members: &mAuditEventResultEntry, Type: smithy.ShapeTypeStructure})
+var s_AuditEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuditEvents, Members: &m_AuditEvents, Type: smithy.ShapeTypeList})
+var s_ChannelArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelArn, Type: smithy.ShapeTypeString})
+var sChannelInsufficientPermission = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelInsufficientPermission, Members: &mChannelInsufficientPermission, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sChannelNotFound = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelNotFound, Members: &mChannelNotFound, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sChannelUnsupportedSchema = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelUnsupportedSchema, Members: &mChannelUnsupportedSchema, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sDuplicatedAuditEventId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDuplicatedAuditEventId, Members: &mDuplicatedAuditEventId, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorCode, Type: smithy.ShapeTypeString})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_ExternalId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExternalId, Type: smithy.ShapeTypeString})
+var sInvalidChannelARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidChannelARN, Members: &mInvalidChannelARN, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_ResultErrorEntries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResultErrorEntries, Members: &m_ResultErrorEntries, Type: smithy.ShapeTypeList})
+var sResultErrorEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResultErrorEntry, Members: &mResultErrorEntry, Type: smithy.ShapeTypeStructure})
+var sUnsupportedOperationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnsupportedOperationException, Members: &mUnsupportedOperationException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_Uuid = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Uuid, Type: smithy.ShapeTypeString})
+var sPutAuditEventsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAuditEventsRequest, Members: &mPutAuditEventsRequest, Type: smithy.ShapeTypeStructure})
+var sPutAuditEventsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAuditEventsResponse, Members: &mPutAuditEventsResponse, Type: smithy.ShapeTypeStructure})
 
-var AuditEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtraildata",
-	Name:      "AuditEvent",
-}, smithy.ShapeTypeStructure, 3)
-var AuditEvent_id *smithy.Schema
+var sAuditEvent_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_Uuid, Type: smithy.ShapeTypeString})
+var sAuditEvent_eventData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventData", ID: &pString, Type: smithy.ShapeTypeString})
+var sAuditEvent_eventDataChecksum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventDataChecksum", ID: &pString, Type: smithy.ShapeTypeString})
+var s_AuditEventResultEntries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAuditEventResultEntry, Members: &mAuditEventResultEntry, Type: smithy.ShapeTypeStructure})
+var sAuditEventResultEntry_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_Uuid, Type: smithy.ShapeTypeString})
+var sAuditEventResultEntry_eventID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventID", ID: &i_Uuid, Type: smithy.ShapeTypeString})
+var s_AuditEvents_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAuditEvent, Members: &mAuditEvent, Type: smithy.ShapeTypeStructure})
+var sChannelInsufficientPermission_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sChannelNotFound_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sChannelUnsupportedSchema_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sDuplicatedAuditEventId_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sInvalidChannelARN_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var s_ResultErrorEntries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResultErrorEntry, Members: &mResultErrorEntry, Type: smithy.ShapeTypeStructure})
+var sResultErrorEntry_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_Uuid, Type: smithy.ShapeTypeString})
+var sResultErrorEntry_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &i_ErrorCode, Type: smithy.ShapeTypeString})
+var sResultErrorEntry_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sUnsupportedOperationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sPutAuditEventsRequest_auditEvents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "auditEvents", ID: &i_AuditEvents, Members: &m_AuditEvents, Type: smithy.ShapeTypeList})
+var sPutAuditEventsRequest_channelArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelArn", ID: &i_ChannelArn, Traits: &t2, Type: smithy.ShapeTypeString})
+var sPutAuditEventsRequest_externalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalId", ID: &i_ExternalId, Traits: &t3, Type: smithy.ShapeTypeString})
+var sPutAuditEventsResponse_successful = smithy.NewStaticSchema(smithy.StaticSchema{Member: "successful", ID: &i_AuditEventResultEntries, Members: &m_AuditEventResultEntries, Type: smithy.ShapeTypeList})
+var sPutAuditEventsResponse_failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failed", ID: &i_ResultErrorEntries, Members: &m_ResultErrorEntries, Type: smithy.ShapeTypeList})
 
-var AuditEvent_eventData *smithy.Schema
+var PutAuditEvents = &sPutAuditEvents
 
-var AuditEvent_eventDataChecksum *smithy.Schema
+var _CloudTrailDataService = &s_CloudTrailDataService
 
-var _AuditEventResultEntries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtraildata",
-	Name:      "AuditEventResultEntries",
-}, smithy.ShapeTypeList, 1)
-var _AuditEventResultEntries_member *smithy.Schema
+var AuditEvent = &sAuditEvent
+var AuditEvent_id = &sAuditEvent_id
+var AuditEvent_eventData = &sAuditEvent_eventData
+var AuditEvent_eventDataChecksum = &sAuditEvent_eventDataChecksum
 
-var AuditEventResultEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtraildata",
-	Name:      "AuditEventResultEntry",
-}, smithy.ShapeTypeStructure, 2)
-var AuditEventResultEntry_id *smithy.Schema
+var _AuditEventResultEntries = &s_AuditEventResultEntries
+var _AuditEventResultEntries_member = &s_AuditEventResultEntries_member
 
-var AuditEventResultEntry_eventID *smithy.Schema
+var AuditEventResultEntry = &sAuditEventResultEntry
+var AuditEventResultEntry_id = &sAuditEventResultEntry_id
+var AuditEventResultEntry_eventID = &sAuditEventResultEntry_eventID
 
-var _AuditEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtraildata",
-	Name:      "AuditEvents",
-}, smithy.ShapeTypeList, 1)
-var _AuditEvents_member *smithy.Schema
+var _AuditEvents = &s_AuditEvents
+var _AuditEvents_member = &s_AuditEvents_member
 
-var _ChannelArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtraildata",
-	Name:      "ChannelArn",
-}, smithy.ShapeTypeString, 0)
+var _ChannelArn = &s_ChannelArn
 
-var ChannelInsufficientPermission = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtraildata",
-	Name:      "ChannelInsufficientPermission",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var ChannelInsufficientPermission_message *smithy.Schema
+var ChannelInsufficientPermission = &sChannelInsufficientPermission
+var ChannelInsufficientPermission_message = &sChannelInsufficientPermission_message
 
-var ChannelNotFound = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtraildata",
-	Name:      "ChannelNotFound",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var ChannelNotFound_message *smithy.Schema
+var ChannelNotFound = &sChannelNotFound
+var ChannelNotFound_message = &sChannelNotFound_message
 
-var ChannelUnsupportedSchema = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtraildata",
-	Name:      "ChannelUnsupportedSchema",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var ChannelUnsupportedSchema_message *smithy.Schema
+var ChannelUnsupportedSchema = &sChannelUnsupportedSchema
+var ChannelUnsupportedSchema_message = &sChannelUnsupportedSchema_message
 
-var DuplicatedAuditEventId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtraildata",
-	Name:      "DuplicatedAuditEventId",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var DuplicatedAuditEventId_message *smithy.Schema
+var DuplicatedAuditEventId = &sDuplicatedAuditEventId
+var DuplicatedAuditEventId_message = &sDuplicatedAuditEventId_message
 
-var _ErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtraildata",
-	Name:      "ErrorCode",
-}, smithy.ShapeTypeString, 0)
+var _ErrorCode = &s_ErrorCode
 
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtraildata",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
+var _ErrorMessage = &s_ErrorMessage
 
-var _ExternalId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtraildata",
-	Name:      "ExternalId",
-}, smithy.ShapeTypeString, 0)
+var _ExternalId = &s_ExternalId
 
-var InvalidChannelARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtraildata",
-	Name:      "InvalidChannelARN",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidChannelARN_message *smithy.Schema
+var InvalidChannelARN = &sInvalidChannelARN
+var InvalidChannelARN_message = &sInvalidChannelARN_message
 
-var _ResultErrorEntries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtraildata",
-	Name:      "ResultErrorEntries",
-}, smithy.ShapeTypeList, 1)
-var _ResultErrorEntries_member *smithy.Schema
+var _ResultErrorEntries = &s_ResultErrorEntries
+var _ResultErrorEntries_member = &s_ResultErrorEntries_member
 
-var ResultErrorEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtraildata",
-	Name:      "ResultErrorEntry",
-}, smithy.ShapeTypeStructure, 3)
-var ResultErrorEntry_id *smithy.Schema
+var ResultErrorEntry = &sResultErrorEntry
+var ResultErrorEntry_id = &sResultErrorEntry_id
+var ResultErrorEntry_errorCode = &sResultErrorEntry_errorCode
+var ResultErrorEntry_errorMessage = &sResultErrorEntry_errorMessage
 
-var ResultErrorEntry_errorCode *smithy.Schema
+var UnsupportedOperationException = &sUnsupportedOperationException
+var UnsupportedOperationException_message = &sUnsupportedOperationException_message
 
-var ResultErrorEntry_errorMessage *smithy.Schema
+var _Uuid = &s_Uuid
 
-var UnsupportedOperationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtraildata",
-	Name:      "UnsupportedOperationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var UnsupportedOperationException_message *smithy.Schema
+var PutAuditEventsRequest = &sPutAuditEventsRequest
+var PutAuditEventsRequest_auditEvents = &sPutAuditEventsRequest_auditEvents
+var PutAuditEventsRequest_channelArn = &sPutAuditEventsRequest_channelArn
+var PutAuditEventsRequest_externalId = &sPutAuditEventsRequest_externalId
 
-var _Uuid = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtraildata",
-	Name:      "Uuid",
-}, smithy.ShapeTypeString, 0)
+var PutAuditEventsResponse = &sPutAuditEventsResponse
+var PutAuditEventsResponse_successful = &sPutAuditEventsResponse_successful
+var PutAuditEventsResponse_failed = &sPutAuditEventsResponse_failed
 
-var PutAuditEventsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtraildata",
-	Name:      "PutAuditEventsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var PutAuditEventsRequest_auditEvents *smithy.Schema
-
-var PutAuditEventsRequest_channelArn *smithy.Schema
-
-var PutAuditEventsRequest_externalId *smithy.Schema
-
-var PutAuditEventsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudtraildata",
-	Name:      "PutAuditEventsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var PutAuditEventsResponse_successful *smithy.Schema
-
-var PutAuditEventsResponse_failed *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AuditEvent_id = AuditEvent.AddMember("id", _Uuid)
-
-	AuditEvent_eventData = AuditEvent.AddMember("eventData", smithyprelude.String)
-
-	AuditEvent_eventDataChecksum = AuditEvent.AddMember("eventDataChecksum", smithyprelude.String)
-
-	AuditEventResultEntry_id = AuditEventResultEntry.AddMember("id", _Uuid)
-
-	AuditEventResultEntry_eventID = AuditEventResultEntry.AddMember("eventID", _Uuid)
-
-	_AuditEventResultEntries_member = _AuditEventResultEntries.AddMember("member", AuditEventResultEntry)
-
-	_AuditEvents_member = _AuditEvents.AddMember("member", AuditEvent)
-
-	ChannelInsufficientPermission_message = ChannelInsufficientPermission.AddMember("message", smithyprelude.String)
-
-	ChannelNotFound_message = ChannelNotFound.AddMember("message", smithyprelude.String)
-
-	ChannelUnsupportedSchema_message = ChannelUnsupportedSchema.AddMember("message", smithyprelude.String)
-
-	DuplicatedAuditEventId_message = DuplicatedAuditEventId.AddMember("message", smithyprelude.String)
-
-	InvalidChannelARN_message = InvalidChannelARN.AddMember("message", smithyprelude.String)
-
-	ResultErrorEntry_id = ResultErrorEntry.AddMember("id", _Uuid)
-
-	ResultErrorEntry_errorCode = ResultErrorEntry.AddMember("errorCode", _ErrorCode)
-
-	ResultErrorEntry_errorMessage = ResultErrorEntry.AddMember("errorMessage", _ErrorMessage)
-
-	_ResultErrorEntries_member = _ResultErrorEntries.AddMember("member", ResultErrorEntry)
-
-	UnsupportedOperationException_message = UnsupportedOperationException.AddMember("message", smithyprelude.String)
-
-	PutAuditEventsRequest_auditEvents = PutAuditEventsRequest.AddMember("auditEvents", _AuditEvents)
-
-	PutAuditEventsRequest_channelArn = PutAuditEventsRequest.AddMember("channelArn", _ChannelArn, &smithytraits.HTTPQuery{Name: "channelArn"})
-
-	PutAuditEventsRequest_externalId = PutAuditEventsRequest.AddMember("externalId", _ExternalId, &smithytraits.HTTPQuery{Name: "externalId"})
-
-	PutAuditEventsResponse_successful = PutAuditEventsResponse.AddMember("successful", _AuditEventResultEntries)
-
-	PutAuditEventsResponse_failed = PutAuditEventsResponse.AddMember("failed", _ResultErrorEntries)
-
-}
+var CloudTrailDataService = &smithy.ServiceSchema{Schema: &s_CloudTrailDataService, Version: "2021-08-11"}

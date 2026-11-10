@@ -4,4716 +4,3428 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var BatchGetNamedQuery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "BatchGetNamedQuery",
-}, smithy.ShapeTypeOperation, 0)
-
-var BatchGetPreparedStatement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "BatchGetPreparedStatement",
-}, smithy.ShapeTypeOperation, 0)
-
-var BatchGetQueryExecution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "BatchGetQueryExecution",
-}, smithy.ShapeTypeOperation, 0)
-
-var CancelCapacityReservation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "CancelCapacityReservation",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateCapacityReservation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "CreateCapacityReservation",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateDataCatalog = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "CreateDataCatalog",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateNamedQuery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "CreateNamedQuery",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateNotebook = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "CreateNotebook",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreatePreparedStatement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "CreatePreparedStatement",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreatePresignedNotebookUrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "CreatePresignedNotebookUrl",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateWorkGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "CreateWorkGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteCapacityReservation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "DeleteCapacityReservation",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteDataCatalog = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "DeleteDataCatalog",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteNamedQuery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "DeleteNamedQuery",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteNotebook = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "DeleteNotebook",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeletePreparedStatement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "DeletePreparedStatement",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteWorkGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "DeleteWorkGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var ExportNotebook = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ExportNotebook",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetCalculationExecution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetCalculationExecution",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetCalculationExecutionCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetCalculationExecutionCode",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetCalculationExecutionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetCalculationExecutionStatus",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetCapacityAssignmentConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetCapacityAssignmentConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetCapacityReservation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetCapacityReservation",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetDatabase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetDatabase",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetDataCatalog = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetDataCatalog",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetNamedQuery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetNamedQuery",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetNotebookMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetNotebookMetadata",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetPreparedStatement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetPreparedStatement",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetQueryExecution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetQueryExecution",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetQueryResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetQueryResults",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetQueryRuntimeStatistics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetQueryRuntimeStatistics",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetResourceDashboard = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetResourceDashboard",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetSession = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetSession",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetSessionEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetSessionEndpoint",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetSessionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetSessionStatus",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetTableMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetTableMetadata",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetWorkGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetWorkGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var ImportNotebook = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ImportNotebook",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListApplicationDPUSizes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ListApplicationDPUSizes",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListCalculationExecutions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ListCalculationExecutions",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListCapacityReservations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ListCapacityReservations",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListDatabases = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ListDatabases",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListDataCatalogs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ListDataCatalogs",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListEngineVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ListEngineVersions",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListExecutors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ListExecutors",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListNamedQueries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ListNamedQueries",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListNotebookMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ListNotebookMetadata",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListNotebookSessions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ListNotebookSessions",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListPreparedStatements = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ListPreparedStatements",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListQueryExecutions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ListQueryExecutions",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListSessions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ListSessions",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTableMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ListTableMetadata",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListWorkGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ListWorkGroups",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutCapacityAssignmentConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "PutCapacityAssignmentConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartCalculationExecution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "StartCalculationExecution",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartQueryExecution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "StartQueryExecution",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartSession = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "StartSession",
-}, smithy.ShapeTypeOperation, 0)
-
-var StopCalculationExecution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "StopCalculationExecution",
-}, smithy.ShapeTypeOperation, 0)
-
-var StopQueryExecution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "StopQueryExecution",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var TerminateSession = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "TerminateSession",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateCapacityReservation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "UpdateCapacityReservation",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateDataCatalog = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "UpdateDataCatalog",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateNamedQuery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "UpdateNamedQuery",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateNotebook = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "UpdateNotebook",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateNotebookMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "UpdateNotebookMetadata",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdatePreparedStatement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "UpdatePreparedStatement",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateWorkGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "UpdateWorkGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var _AmazonAthena = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "AmazonAthena",
-}, smithy.ShapeTypeService, 0)
-
-var AmazonAthena = smithy.NewServiceSchema(_AmazonAthena, "2017-05-18")
-
-var AclConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "AclConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var AclConfiguration_S3AclOption *smithy.Schema
-
-var _Age = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "Age",
-}, smithy.ShapeTypeInteger, 0)
-
-var _AllocatedDpusInteger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "AllocatedDpusInteger",
-}, smithy.ShapeTypeInteger, 0)
-
-var _AmazonResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "AmazonResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var ApplicationDPUSizes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ApplicationDPUSizes",
-}, smithy.ShapeTypeStructure, 2)
-var ApplicationDPUSizes_ApplicationRuntimeId *smithy.Schema
-
-var ApplicationDPUSizes_SupportedDPUSizes *smithy.Schema
-
-var _ApplicationDPUSizesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ApplicationDPUSizesList",
-}, smithy.ShapeTypeList, 1)
-var _ApplicationDPUSizesList_member *smithy.Schema
-
-var AthenaError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "AthenaError",
-}, smithy.ShapeTypeStructure, 4)
-var AthenaError_ErrorCategory *smithy.Schema
-
-var AthenaError_ErrorType *smithy.Schema
-
-var AthenaError_Retryable *smithy.Schema
-
-var AthenaError_ErrorMessage *smithy.Schema
-
-var AuthenticationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "AuthenticationType",
-}, smithy.ShapeTypeEnum, 1)
-var AuthenticationType_DIRECTORY_IDENTITY *smithy.Schema
-
-var _AuthToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "AuthToken",
-}, smithy.ShapeTypeString, 0)
-
-var _AwsAccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "AwsAccountId",
-}, smithy.ShapeTypeString, 0)
-
-var _Boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "Boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _BoxedBoolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "BoxedBoolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _BytesScannedCutoffValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "BytesScannedCutoffValue",
-}, smithy.ShapeTypeLong, 0)
-
-var CalculationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "CalculationConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var CalculationConfiguration_CodeBlock *smithy.Schema
-
-var _CalculationExecutionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "CalculationExecutionId",
-}, smithy.ShapeTypeString, 0)
-
-var CalculationExecutionState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "CalculationExecutionState",
-}, smithy.ShapeTypeEnum, 8)
-var CalculationExecutionState_CREATING *smithy.Schema
-
-var CalculationExecutionState_CREATED *smithy.Schema
-
-var CalculationExecutionState_QUEUED *smithy.Schema
-
-var CalculationExecutionState_RUNNING *smithy.Schema
-
-var CalculationExecutionState_CANCELING *smithy.Schema
-
-var CalculationExecutionState_CANCELED *smithy.Schema
-
-var CalculationExecutionState_COMPLETED *smithy.Schema
-
-var CalculationExecutionState_FAILED *smithy.Schema
-
-var CalculationResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "CalculationResult",
-}, smithy.ShapeTypeStructure, 4)
-var CalculationResult_StdOutS3Uri *smithy.Schema
-
-var CalculationResult_StdErrorS3Uri *smithy.Schema
-
-var CalculationResult_ResultS3Uri *smithy.Schema
-
-var CalculationResult_ResultType *smithy.Schema
-
-var _CalculationResultType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "CalculationResultType",
-}, smithy.ShapeTypeString, 0)
-
-var _CalculationsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "CalculationsList",
-}, smithy.ShapeTypeList, 1)
-var _CalculationsList_member *smithy.Schema
-
-var CalculationStatistics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "CalculationStatistics",
-}, smithy.ShapeTypeStructure, 2)
-var CalculationStatistics_DpuExecutionInMillis *smithy.Schema
-
-var CalculationStatistics_Progress *smithy.Schema
-
-var CalculationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "CalculationStatus",
-}, smithy.ShapeTypeStructure, 4)
-var CalculationStatus_SubmissionDateTime *smithy.Schema
-
-var CalculationStatus_CompletionDateTime *smithy.Schema
-
-var CalculationStatus_State *smithy.Schema
-
-var CalculationStatus_StateChangeReason *smithy.Schema
-
-var CalculationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "CalculationSummary",
-}, smithy.ShapeTypeStructure, 3)
-var CalculationSummary_CalculationExecutionId *smithy.Schema
-
-var CalculationSummary_Description *smithy.Schema
-
-var CalculationSummary_Status *smithy.Schema
-
-var CapacityAllocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "CapacityAllocation",
-}, smithy.ShapeTypeStructure, 4)
-var CapacityAllocation_Status *smithy.Schema
-
-var CapacityAllocation_StatusMessage *smithy.Schema
-
-var CapacityAllocation_RequestTime *smithy.Schema
-
-var CapacityAllocation_RequestCompletionTime *smithy.Schema
-
-var CapacityAllocationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "CapacityAllocationStatus",
-}, smithy.ShapeTypeEnum, 3)
-var CapacityAllocationStatus_PENDING *smithy.Schema
-
-var CapacityAllocationStatus_SUCCEEDED *smithy.Schema
-
-var CapacityAllocationStatus_FAILED *smithy.Schema
-
-var CapacityAssignment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "CapacityAssignment",
-}, smithy.ShapeTypeStructure, 1)
-var CapacityAssignment_WorkGroupNames *smithy.Schema
-
-var CapacityAssignmentConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "CapacityAssignmentConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var CapacityAssignmentConfiguration_CapacityReservationName *smithy.Schema
-
-var CapacityAssignmentConfiguration_CapacityAssignments *smithy.Schema
-
-var _CapacityAssignmentsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "CapacityAssignmentsList",
-}, smithy.ShapeTypeList, 1)
-var _CapacityAssignmentsList_member *smithy.Schema
-
-var CapacityReservation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "CapacityReservation",
-}, smithy.ShapeTypeStructure, 7)
-var CapacityReservation_Name *smithy.Schema
-
-var CapacityReservation_Status *smithy.Schema
-
-var CapacityReservation_TargetDpus *smithy.Schema
-
-var CapacityReservation_AllocatedDpus *smithy.Schema
-
-var CapacityReservation_LastAllocation *smithy.Schema
-
-var CapacityReservation_LastSuccessfulAllocationTime *smithy.Schema
-
-var CapacityReservation_CreationTime *smithy.Schema
-
-var _CapacityReservationName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "CapacityReservationName",
-}, smithy.ShapeTypeString, 0)
-
-var _CapacityReservationsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "CapacityReservationsList",
-}, smithy.ShapeTypeList, 1)
-var _CapacityReservationsList_member *smithy.Schema
-
-var CapacityReservationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "CapacityReservationStatus",
-}, smithy.ShapeTypeEnum, 6)
-var CapacityReservationStatus_PENDING *smithy.Schema
-
-var CapacityReservationStatus_ACTIVE *smithy.Schema
-
-var CapacityReservationStatus_CANCELLING *smithy.Schema
-
-var CapacityReservationStatus_CANCELLED *smithy.Schema
-
-var CapacityReservationStatus_FAILED *smithy.Schema
-
-var CapacityReservationStatus_UPDATE_PENDING *smithy.Schema
-
-var _CatalogNameString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "CatalogNameString",
-}, smithy.ShapeTypeString, 0)
-
-var Classification = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "Classification",
-}, smithy.ShapeTypeStructure, 2)
-var Classification_Name *smithy.Schema
-
-var Classification_Properties *smithy.Schema
-
-var _ClassificationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ClassificationList",
-}, smithy.ShapeTypeList, 1)
-var _ClassificationList_member *smithy.Schema
-
-var _ClientRequestToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ClientRequestToken",
-}, smithy.ShapeTypeString, 0)
-
-var CloudWatchLoggingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "CloudWatchLoggingConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var CloudWatchLoggingConfiguration_Enabled *smithy.Schema
-
-var CloudWatchLoggingConfiguration_LogGroup *smithy.Schema
-
-var CloudWatchLoggingConfiguration_LogStreamNamePrefix *smithy.Schema
-
-var CloudWatchLoggingConfiguration_LogTypes *smithy.Schema
-
-var _CodeBlock = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "CodeBlock",
-}, smithy.ShapeTypeString, 0)
-
-var Column = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "Column",
-}, smithy.ShapeTypeStructure, 3)
-var Column_Name *smithy.Schema
-
-var Column_Type *smithy.Schema
-
-var Column_Comment *smithy.Schema
-
-var ColumnInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ColumnInfo",
-}, smithy.ShapeTypeStructure, 10)
-var ColumnInfo_CatalogName *smithy.Schema
-
-var ColumnInfo_SchemaName *smithy.Schema
-
-var ColumnInfo_TableName *smithy.Schema
-
-var ColumnInfo_Name *smithy.Schema
-
-var ColumnInfo_Label *smithy.Schema
-
-var ColumnInfo_Type *smithy.Schema
-
-var ColumnInfo_Precision *smithy.Schema
-
-var ColumnInfo_Scale *smithy.Schema
-
-var ColumnInfo_Nullable *smithy.Schema
-
-var ColumnInfo_CaseSensitive *smithy.Schema
-
-var _ColumnInfoList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ColumnInfoList",
-}, smithy.ShapeTypeList, 1)
-var _ColumnInfoList_member *smithy.Schema
-
-var _ColumnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ColumnList",
-}, smithy.ShapeTypeList, 1)
-var _ColumnList_member *smithy.Schema
-
-var ColumnNullable = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ColumnNullable",
-}, smithy.ShapeTypeEnum, 3)
-var ColumnNullable_NOT_NULL *smithy.Schema
-
-var ColumnNullable_NULLABLE *smithy.Schema
-
-var ColumnNullable_UNKNOWN *smithy.Schema
-
-var _CommentString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "CommentString",
-}, smithy.ShapeTypeString, 0)
-
-var ConnectionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ConnectionType",
-}, smithy.ShapeTypeEnum, 20)
-var ConnectionType_DYNAMODB *smithy.Schema
-
-var ConnectionType_MYSQL *smithy.Schema
-
-var ConnectionType_POSTGRESQL *smithy.Schema
-
-var ConnectionType_REDSHIFT *smithy.Schema
-
-var ConnectionType_ORACLE *smithy.Schema
-
-var ConnectionType_SYNAPSE *smithy.Schema
-
-var ConnectionType_SQLSERVER *smithy.Schema
-
-var ConnectionType_DB2 *smithy.Schema
-
-var ConnectionType_OPENSEARCH *smithy.Schema
-
-var ConnectionType_BIGQUERY *smithy.Schema
-
-var ConnectionType_GOOGLECLOUDSTORAGE *smithy.Schema
-
-var ConnectionType_HBASE *smithy.Schema
-
-var ConnectionType_DOCUMENTDB *smithy.Schema
-
-var ConnectionType_CMDB *smithy.Schema
-
-var ConnectionType_TPCDS *smithy.Schema
-
-var ConnectionType_TIMESTREAM *smithy.Schema
-
-var ConnectionType_SAPHANA *smithy.Schema
-
-var ConnectionType_SNOWFLAKE *smithy.Schema
-
-var ConnectionType_DATALAKEGEN2 *smithy.Schema
-
-var ConnectionType_DB2AS400 *smithy.Schema
-
-var _CoordinatorDpuSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "CoordinatorDpuSize",
-}, smithy.ShapeTypeInteger, 0)
-
-var CustomerContentEncryptionConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "CustomerContentEncryptionConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var CustomerContentEncryptionConfiguration_KmsKey *smithy.Schema
-
-var Database = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "Database",
-}, smithy.ShapeTypeStructure, 3)
-var Database_Name *smithy.Schema
-
-var Database_Description *smithy.Schema
-
-var Database_Parameters *smithy.Schema
-
-var _DatabaseList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "DatabaseList",
-}, smithy.ShapeTypeList, 1)
-var _DatabaseList_member *smithy.Schema
-
-var _DatabaseString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "DatabaseString",
-}, smithy.ShapeTypeString, 0)
-
-var DataCatalog = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "DataCatalog",
-}, smithy.ShapeTypeStructure, 7)
-var DataCatalog_Name *smithy.Schema
-
-var DataCatalog_Description *smithy.Schema
-
-var DataCatalog_Type *smithy.Schema
-
-var DataCatalog_Parameters *smithy.Schema
-
-var DataCatalog_Status *smithy.Schema
-
-var DataCatalog_ConnectionType *smithy.Schema
-
-var DataCatalog_Error *smithy.Schema
-
-var DataCatalogStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "DataCatalogStatus",
-}, smithy.ShapeTypeEnum, 9)
-var DataCatalogStatus_CREATE_IN_PROGRESS *smithy.Schema
-
-var DataCatalogStatus_CREATE_COMPLETE *smithy.Schema
-
-var DataCatalogStatus_CREATE_FAILED *smithy.Schema
-
-var DataCatalogStatus_CREATE_FAILED_CLEANUP_IN_PROGRESS *smithy.Schema
-
-var DataCatalogStatus_CREATE_FAILED_CLEANUP_COMPLETE *smithy.Schema
-
-var DataCatalogStatus_CREATE_FAILED_CLEANUP_FAILED *smithy.Schema
-
-var DataCatalogStatus_DELETE_IN_PROGRESS *smithy.Schema
-
-var DataCatalogStatus_DELETE_COMPLETE *smithy.Schema
-
-var DataCatalogStatus_DELETE_FAILED *smithy.Schema
-
-var DataCatalogSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "DataCatalogSummary",
-}, smithy.ShapeTypeStructure, 5)
-var DataCatalogSummary_CatalogName *smithy.Schema
-
-var DataCatalogSummary_Type *smithy.Schema
-
-var DataCatalogSummary_Status *smithy.Schema
-
-var DataCatalogSummary_ConnectionType *smithy.Schema
-
-var DataCatalogSummary_Error *smithy.Schema
-
-var _DataCatalogSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "DataCatalogSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _DataCatalogSummaryList_member *smithy.Schema
-
-var DataCatalogType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "DataCatalogType",
-}, smithy.ShapeTypeEnum, 4)
-var DataCatalogType_LAMBDA *smithy.Schema
-
-var DataCatalogType_GLUE *smithy.Schema
-
-var DataCatalogType_HIVE *smithy.Schema
-
-var DataCatalogType_FEDERATED *smithy.Schema
-
-var _Date = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "Date",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var Datum = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "Datum",
-}, smithy.ShapeTypeStructure, 1)
-var Datum_VarCharValue *smithy.Schema
-
-var _datumList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "datumList",
-}, smithy.ShapeTypeList, 1)
-var _datumList_member *smithy.Schema
-
-var _datumString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "datumString",
-}, smithy.ShapeTypeString, 0)
-
-var _DefaultExecutorDpuSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "DefaultExecutorDpuSize",
-}, smithy.ShapeTypeInteger, 0)
-
-var _DescriptionString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "DescriptionString",
-}, smithy.ShapeTypeString, 0)
-
-var _DpuCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "DpuCount",
-}, smithy.ShapeTypeDouble, 0)
-
-var EncryptionConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "EncryptionConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var EncryptionConfiguration_EncryptionOption *smithy.Schema
-
-var EncryptionConfiguration_KmsKey *smithy.Schema
-
-var EncryptionOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "EncryptionOption",
-}, smithy.ShapeTypeEnum, 3)
-var EncryptionOption_SSE_S3 *smithy.Schema
-
-var EncryptionOption_SSE_KMS *smithy.Schema
-
-var EncryptionOption_CSE_KMS *smithy.Schema
-
-var EngineConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "EngineConfiguration",
-}, smithy.ShapeTypeStructure, 6)
-var EngineConfiguration_CoordinatorDpuSize *smithy.Schema
-
-var EngineConfiguration_MaxConcurrentDpus *smithy.Schema
-
-var EngineConfiguration_DefaultExecutorDpuSize *smithy.Schema
-
-var EngineConfiguration_AdditionalConfigs *smithy.Schema
-
-var EngineConfiguration_SparkProperties *smithy.Schema
-
-var EngineConfiguration_Classifications *smithy.Schema
-
-var EngineVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "EngineVersion",
-}, smithy.ShapeTypeStructure, 2)
-var EngineVersion_SelectedEngineVersion *smithy.Schema
-
-var EngineVersion_EffectiveEngineVersion *smithy.Schema
-
-var _EngineVersionsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "EngineVersionsList",
-}, smithy.ShapeTypeList, 1)
-var _EngineVersionsList_member *smithy.Schema
-
-var _ErrorCategory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ErrorCategory",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ErrorCode",
-}, smithy.ShapeTypeString, 0)
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _ErrorType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ErrorType",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ExecutionParameter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ExecutionParameter",
-}, smithy.ShapeTypeString, 0)
-
-var _ExecutionParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ExecutionParameters",
-}, smithy.ShapeTypeList, 1)
-var _ExecutionParameters_member *smithy.Schema
-
-var _ExecutorId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ExecutorId",
-}, smithy.ShapeTypeString, 0)
-
-var ExecutorsSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ExecutorsSummary",
-}, smithy.ShapeTypeStructure, 6)
-var ExecutorsSummary_ExecutorId *smithy.Schema
-
-var ExecutorsSummary_ExecutorType *smithy.Schema
-
-var ExecutorsSummary_StartDateTime *smithy.Schema
-
-var ExecutorsSummary_TerminationDateTime *smithy.Schema
-
-var ExecutorsSummary_ExecutorState *smithy.Schema
-
-var ExecutorsSummary_ExecutorSize *smithy.Schema
-
-var _ExecutorsSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ExecutorsSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _ExecutorsSummaryList_member *smithy.Schema
-
-var ExecutorState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ExecutorState",
-}, smithy.ShapeTypeEnum, 6)
-var ExecutorState_CREATING *smithy.Schema
-
-var ExecutorState_CREATED *smithy.Schema
-
-var ExecutorState_REGISTERED *smithy.Schema
-
-var ExecutorState_TERMINATING *smithy.Schema
-
-var ExecutorState_TERMINATED *smithy.Schema
-
-var ExecutorState_FAILED *smithy.Schema
-
-var ExecutorType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ExecutorType",
-}, smithy.ShapeTypeEnum, 3)
-var ExecutorType_COORDINATOR *smithy.Schema
-
-var ExecutorType_GATEWAY *smithy.Schema
-
-var ExecutorType_WORKER *smithy.Schema
-
-var _ExpressionString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ExpressionString",
-}, smithy.ShapeTypeString, 0)
-
-var FilterDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "FilterDefinition",
-}, smithy.ShapeTypeStructure, 1)
-var FilterDefinition_Name *smithy.Schema
-
-var _IdempotencyToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "IdempotencyToken",
-}, smithy.ShapeTypeString, 0)
-
-var _IdentityCenterApplicationArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "IdentityCenterApplicationArn",
-}, smithy.ShapeTypeString, 0)
-
-var IdentityCenterConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "IdentityCenterConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var IdentityCenterConfiguration_EnableIdentityCenter *smithy.Schema
-
-var IdentityCenterConfiguration_IdentityCenterInstanceArn *smithy.Schema
-
-var _IdentityCenterInstanceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "IdentityCenterInstanceArn",
-}, smithy.ShapeTypeString, 0)
-
-var _Integer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "Integer",
-}, smithy.ShapeTypeInteger, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
-var InternalServerException_Message *smithy.Schema
-
-var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var InvalidRequestException_AthenaErrorCode *smithy.Schema
-
-var InvalidRequestException_Message *smithy.Schema
-
-var _KeyString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "KeyString",
-}, smithy.ShapeTypeString, 0)
-
-var _KmsKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "KmsKey",
-}, smithy.ShapeTypeString, 0)
-
-var _LogGroupName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "LogGroupName",
-}, smithy.ShapeTypeString, 0)
-
-var _LogStreamNamePrefix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "LogStreamNamePrefix",
-}, smithy.ShapeTypeString, 0)
-
-var _LogTypeKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "LogTypeKey",
-}, smithy.ShapeTypeString, 0)
-
-var _LogTypesMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "LogTypesMap",
-}, smithy.ShapeTypeMap, 2)
-var _LogTypesMap_key *smithy.Schema
-
-var _LogTypesMap_value *smithy.Schema
-
-var _LogTypeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "LogTypeValue",
-}, smithy.ShapeTypeString, 0)
-
-var _LogTypeValuesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "LogTypeValuesList",
-}, smithy.ShapeTypeList, 1)
-var _LogTypeValuesList_member *smithy.Schema
-
-var _Long = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "Long",
-}, smithy.ShapeTypeLong, 0)
-
-var ManagedLoggingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ManagedLoggingConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var ManagedLoggingConfiguration_Enabled *smithy.Schema
-
-var ManagedLoggingConfiguration_KmsKey *smithy.Schema
-
-var ManagedQueryResultsConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ManagedQueryResultsConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var ManagedQueryResultsConfiguration_Enabled *smithy.Schema
-
-var ManagedQueryResultsConfiguration_EncryptionConfiguration *smithy.Schema
-
-var ManagedQueryResultsConfigurationUpdates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ManagedQueryResultsConfigurationUpdates",
-}, smithy.ShapeTypeStructure, 3)
-var ManagedQueryResultsConfigurationUpdates_Enabled *smithy.Schema
-
-var ManagedQueryResultsConfigurationUpdates_EncryptionConfiguration *smithy.Schema
-
-var ManagedQueryResultsConfigurationUpdates_RemoveEncryptionConfiguration *smithy.Schema
-
-var ManagedQueryResultsEncryptionConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ManagedQueryResultsEncryptionConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var ManagedQueryResultsEncryptionConfiguration_KmsKey *smithy.Schema
-
-var _MaxApplicationDPUSizesCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "MaxApplicationDPUSizesCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxCalculationsCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "MaxCalculationsCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxCapacityReservationsCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "MaxCapacityReservationsCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxConcurrentDpus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "MaxConcurrentDpus",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxDatabasesCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "MaxDatabasesCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxDataCatalogsCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "MaxDataCatalogsCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxEngineVersionsCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "MaxEngineVersionsCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxListExecutorsCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "MaxListExecutorsCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxNamedQueriesCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "MaxNamedQueriesCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxNotebooksCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "MaxNotebooksCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxPreparedStatementsCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "MaxPreparedStatementsCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxQueryExecutionsCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "MaxQueryExecutionsCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxQueryResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "MaxQueryResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxSessionsCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "MaxSessionsCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxTableMetadataCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "MaxTableMetadataCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxTagsCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "MaxTagsCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxWorkGroupsCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "MaxWorkGroupsCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var MetadataException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "MetadataException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var MetadataException_Message *smithy.Schema
-
-var MonitoringConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "MonitoringConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var MonitoringConfiguration_CloudWatchLoggingConfiguration *smithy.Schema
-
-var MonitoringConfiguration_ManagedLoggingConfiguration *smithy.Schema
-
-var MonitoringConfiguration_S3LoggingConfiguration *smithy.Schema
-
-var NamedQuery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "NamedQuery",
-}, smithy.ShapeTypeStructure, 6)
-var NamedQuery_Name *smithy.Schema
-
-var NamedQuery_Description *smithy.Schema
-
-var NamedQuery_Database *smithy.Schema
-
-var NamedQuery_QueryString *smithy.Schema
-
-var NamedQuery_NamedQueryId *smithy.Schema
-
-var NamedQuery_WorkGroup *smithy.Schema
-
-var _NamedQueryDescriptionString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "NamedQueryDescriptionString",
-}, smithy.ShapeTypeString, 0)
-
-var _NamedQueryId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "NamedQueryId",
-}, smithy.ShapeTypeString, 0)
-
-var _NamedQueryIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "NamedQueryIdList",
-}, smithy.ShapeTypeList, 1)
-var _NamedQueryIdList_member *smithy.Schema
-
-var _NamedQueryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "NamedQueryList",
-}, smithy.ShapeTypeList, 1)
-var _NamedQueryList_member *smithy.Schema
-
-var _NameString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "NameString",
-}, smithy.ShapeTypeString, 0)
-
-var _NotebookId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "NotebookId",
-}, smithy.ShapeTypeString, 0)
-
-var NotebookMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "NotebookMetadata",
-}, smithy.ShapeTypeStructure, 6)
-var NotebookMetadata_NotebookId *smithy.Schema
-
-var NotebookMetadata_Name *smithy.Schema
-
-var NotebookMetadata_WorkGroup *smithy.Schema
-
-var NotebookMetadata_CreationTime *smithy.Schema
-
-var NotebookMetadata_Type *smithy.Schema
-
-var NotebookMetadata_LastModifiedTime *smithy.Schema
-
-var _NotebookMetadataArray = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "NotebookMetadataArray",
-}, smithy.ShapeTypeList, 1)
-var _NotebookMetadataArray_member *smithy.Schema
-
-var _NotebookName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "NotebookName",
-}, smithy.ShapeTypeString, 0)
-
-var _NotebookSessionsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "NotebookSessionsList",
-}, smithy.ShapeTypeList, 1)
-var _NotebookSessionsList_member *smithy.Schema
-
-var NotebookSessionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "NotebookSessionSummary",
-}, smithy.ShapeTypeStructure, 2)
-var NotebookSessionSummary_SessionId *smithy.Schema
-
-var NotebookSessionSummary_CreationTime *smithy.Schema
-
-var NotebookType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "NotebookType",
-}, smithy.ShapeTypeEnum, 1)
-var NotebookType_IPYNB *smithy.Schema
-
-var _ParametersMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ParametersMap",
-}, smithy.ShapeTypeMap, 2)
-var _ParametersMap_key *smithy.Schema
-
-var _ParametersMap_value *smithy.Schema
-
-var _ParametersMapValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ParametersMapValue",
-}, smithy.ShapeTypeString, 0)
-
-var _Payload = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "Payload",
-}, smithy.ShapeTypeString, 0)
-
-var PreparedStatement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "PreparedStatement",
-}, smithy.ShapeTypeStructure, 5)
-var PreparedStatement_StatementName *smithy.Schema
-
-var PreparedStatement_QueryStatement *smithy.Schema
-
-var PreparedStatement_WorkGroupName *smithy.Schema
-
-var PreparedStatement_Description *smithy.Schema
-
-var PreparedStatement_LastModifiedTime *smithy.Schema
-
-var _PreparedStatementDetailsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "PreparedStatementDetailsList",
-}, smithy.ShapeTypeList, 1)
-var _PreparedStatementDetailsList_member *smithy.Schema
-
-var _PreparedStatementNameList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "PreparedStatementNameList",
-}, smithy.ShapeTypeList, 1)
-var _PreparedStatementNameList_member *smithy.Schema
-
-var _PreparedStatementsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "PreparedStatementsList",
-}, smithy.ShapeTypeList, 1)
-var _PreparedStatementsList_member *smithy.Schema
-
-var PreparedStatementSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "PreparedStatementSummary",
-}, smithy.ShapeTypeStructure, 2)
-var PreparedStatementSummary_StatementName *smithy.Schema
-
-var PreparedStatementSummary_LastModifiedTime *smithy.Schema
-
-var QueryExecution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "QueryExecution",
-}, smithy.ShapeTypeStructure, 14)
-var QueryExecution_QueryExecutionId *smithy.Schema
-
-var QueryExecution_Query *smithy.Schema
-
-var QueryExecution_StatementType *smithy.Schema
-
-var QueryExecution_ManagedQueryResultsConfiguration *smithy.Schema
-
-var QueryExecution_ResultConfiguration *smithy.Schema
-
-var QueryExecution_ResultReuseConfiguration *smithy.Schema
-
-var QueryExecution_QueryExecutionContext *smithy.Schema
-
-var QueryExecution_Status *smithy.Schema
-
-var QueryExecution_Statistics *smithy.Schema
-
-var QueryExecution_WorkGroup *smithy.Schema
-
-var QueryExecution_EngineVersion *smithy.Schema
-
-var QueryExecution_ExecutionParameters *smithy.Schema
-
-var QueryExecution_SubstatementType *smithy.Schema
-
-var QueryExecution_QueryResultsS3AccessGrantsConfiguration *smithy.Schema
-
-var QueryExecutionContext = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "QueryExecutionContext",
-}, smithy.ShapeTypeStructure, 2)
-var QueryExecutionContext_Database *smithy.Schema
-
-var QueryExecutionContext_Catalog *smithy.Schema
-
-var _QueryExecutionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "QueryExecutionId",
-}, smithy.ShapeTypeString, 0)
-
-var _QueryExecutionIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "QueryExecutionIdList",
-}, smithy.ShapeTypeList, 1)
-var _QueryExecutionIdList_member *smithy.Schema
-
-var _QueryExecutionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "QueryExecutionList",
-}, smithy.ShapeTypeList, 1)
-var _QueryExecutionList_member *smithy.Schema
-
-var QueryExecutionState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "QueryExecutionState",
-}, smithy.ShapeTypeEnum, 5)
-var QueryExecutionState_QUEUED *smithy.Schema
-
-var QueryExecutionState_RUNNING *smithy.Schema
-
-var QueryExecutionState_SUCCEEDED *smithy.Schema
-
-var QueryExecutionState_FAILED *smithy.Schema
-
-var QueryExecutionState_CANCELLED *smithy.Schema
-
-var QueryExecutionStatistics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "QueryExecutionStatistics",
-}, smithy.ShapeTypeStructure, 10)
-var QueryExecutionStatistics_EngineExecutionTimeInMillis *smithy.Schema
-
-var QueryExecutionStatistics_DataScannedInBytes *smithy.Schema
-
-var QueryExecutionStatistics_DataManifestLocation *smithy.Schema
-
-var QueryExecutionStatistics_TotalExecutionTimeInMillis *smithy.Schema
-
-var QueryExecutionStatistics_QueryQueueTimeInMillis *smithy.Schema
-
-var QueryExecutionStatistics_ServicePreProcessingTimeInMillis *smithy.Schema
-
-var QueryExecutionStatistics_QueryPlanningTimeInMillis *smithy.Schema
-
-var QueryExecutionStatistics_ServiceProcessingTimeInMillis *smithy.Schema
-
-var QueryExecutionStatistics_ResultReuseInformation *smithy.Schema
-
-var QueryExecutionStatistics_DpuCount *smithy.Schema
-
-var QueryExecutionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "QueryExecutionStatus",
-}, smithy.ShapeTypeStructure, 5)
-var QueryExecutionStatus_State *smithy.Schema
-
-var QueryExecutionStatus_StateChangeReason *smithy.Schema
-
-var QueryExecutionStatus_SubmissionDateTime *smithy.Schema
-
-var QueryExecutionStatus_CompletionDateTime *smithy.Schema
-
-var QueryExecutionStatus_AthenaError *smithy.Schema
-
-var QueryResultsS3AccessGrantsConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "QueryResultsS3AccessGrantsConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var QueryResultsS3AccessGrantsConfiguration_EnableS3AccessGrants *smithy.Schema
-
-var QueryResultsS3AccessGrantsConfiguration_CreateUserLevelPrefix *smithy.Schema
-
-var QueryResultsS3AccessGrantsConfiguration_AuthenticationType *smithy.Schema
-
-var QueryResultType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "QueryResultType",
-}, smithy.ShapeTypeEnum, 2)
-var QueryResultType_DATA_MANIFEST *smithy.Schema
-
-var QueryResultType_DATA_ROWS *smithy.Schema
-
-var QueryRuntimeStatistics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "QueryRuntimeStatistics",
-}, smithy.ShapeTypeStructure, 3)
-var QueryRuntimeStatistics_Timeline *smithy.Schema
-
-var QueryRuntimeStatistics_Rows *smithy.Schema
-
-var QueryRuntimeStatistics_OutputStage *smithy.Schema
-
-var QueryRuntimeStatisticsRows = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "QueryRuntimeStatisticsRows",
-}, smithy.ShapeTypeStructure, 4)
-var QueryRuntimeStatisticsRows_InputRows *smithy.Schema
-
-var QueryRuntimeStatisticsRows_InputBytes *smithy.Schema
-
-var QueryRuntimeStatisticsRows_OutputBytes *smithy.Schema
-
-var QueryRuntimeStatisticsRows_OutputRows *smithy.Schema
-
-var QueryRuntimeStatisticsTimeline = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "QueryRuntimeStatisticsTimeline",
-}, smithy.ShapeTypeStructure, 6)
-var QueryRuntimeStatisticsTimeline_QueryQueueTimeInMillis *smithy.Schema
-
-var QueryRuntimeStatisticsTimeline_ServicePreProcessingTimeInMillis *smithy.Schema
-
-var QueryRuntimeStatisticsTimeline_QueryPlanningTimeInMillis *smithy.Schema
-
-var QueryRuntimeStatisticsTimeline_EngineExecutionTimeInMillis *smithy.Schema
-
-var QueryRuntimeStatisticsTimeline_ServiceProcessingTimeInMillis *smithy.Schema
-
-var QueryRuntimeStatisticsTimeline_TotalExecutionTimeInMillis *smithy.Schema
-
-var QueryStage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "QueryStage",
-}, smithy.ShapeTypeStructure, 9)
-var QueryStage_StageId *smithy.Schema
-
-var QueryStage_State *smithy.Schema
-
-var QueryStage_OutputBytes *smithy.Schema
-
-var QueryStage_OutputRows *smithy.Schema
-
-var QueryStage_InputBytes *smithy.Schema
-
-var QueryStage_InputRows *smithy.Schema
-
-var QueryStage_ExecutionTime *smithy.Schema
-
-var QueryStage_QueryStagePlan *smithy.Schema
-
-var QueryStage_SubStages *smithy.Schema
-
-var QueryStagePlanNode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "QueryStagePlanNode",
-}, smithy.ShapeTypeStructure, 4)
-var QueryStagePlanNode_Name *smithy.Schema
-
-var QueryStagePlanNode_Identifier *smithy.Schema
-
-var QueryStagePlanNode_Children *smithy.Schema
-
-var QueryStagePlanNode_RemoteSources *smithy.Schema
-
-var _QueryStagePlanNodes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "QueryStagePlanNodes",
-}, smithy.ShapeTypeList, 1)
-var _QueryStagePlanNodes_member *smithy.Schema
-
-var _QueryStages = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "QueryStages",
-}, smithy.ShapeTypeList, 1)
-var _QueryStages_member *smithy.Schema
-
-var _QueryString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "QueryString",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var ResourceNotFoundException_ResourceName *smithy.Schema
-
-var ResultConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ResultConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var ResultConfiguration_OutputLocation *smithy.Schema
-
-var ResultConfiguration_EncryptionConfiguration *smithy.Schema
-
-var ResultConfiguration_ExpectedBucketOwner *smithy.Schema
-
-var ResultConfiguration_AclConfiguration *smithy.Schema
-
-var ResultConfigurationUpdates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ResultConfigurationUpdates",
-}, smithy.ShapeTypeStructure, 8)
-var ResultConfigurationUpdates_OutputLocation *smithy.Schema
-
-var ResultConfigurationUpdates_RemoveOutputLocation *smithy.Schema
-
-var ResultConfigurationUpdates_EncryptionConfiguration *smithy.Schema
-
-var ResultConfigurationUpdates_RemoveEncryptionConfiguration *smithy.Schema
-
-var ResultConfigurationUpdates_ExpectedBucketOwner *smithy.Schema
-
-var ResultConfigurationUpdates_RemoveExpectedBucketOwner *smithy.Schema
-
-var ResultConfigurationUpdates_AclConfiguration *smithy.Schema
-
-var ResultConfigurationUpdates_RemoveAclConfiguration *smithy.Schema
-
-var _ResultOutputLocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ResultOutputLocation",
-}, smithy.ShapeTypeString, 0)
-
-var ResultReuseByAgeConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ResultReuseByAgeConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var ResultReuseByAgeConfiguration_Enabled *smithy.Schema
-
-var ResultReuseByAgeConfiguration_MaxAgeInMinutes *smithy.Schema
-
-var ResultReuseConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ResultReuseConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var ResultReuseConfiguration_ResultReuseByAgeConfiguration *smithy.Schema
-
-var ResultReuseInformation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ResultReuseInformation",
-}, smithy.ShapeTypeStructure, 1)
-var ResultReuseInformation_ReusedPreviousResult *smithy.Schema
-
-var ResultSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ResultSet",
-}, smithy.ShapeTypeStructure, 2)
-var ResultSet_Rows *smithy.Schema
-
-var ResultSet_ResultSetMetadata *smithy.Schema
-
-var ResultSetMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ResultSetMetadata",
-}, smithy.ShapeTypeStructure, 1)
-var ResultSetMetadata_ColumnInfo *smithy.Schema
-
-var _RoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "RoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var Row = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "Row",
-}, smithy.ShapeTypeStructure, 1)
-var Row_Data *smithy.Schema
-
-var _RowList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "RowList",
-}, smithy.ShapeTypeList, 1)
-var _RowList_member *smithy.Schema
-
-var S3AclOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "S3AclOption",
-}, smithy.ShapeTypeEnum, 1)
-var S3AclOption_BUCKET_OWNER_FULL_CONTROL *smithy.Schema
-
-var S3LoggingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "S3LoggingConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var S3LoggingConfiguration_Enabled *smithy.Schema
-
-var S3LoggingConfiguration_KmsKey *smithy.Schema
-
-var S3LoggingConfiguration_LogLocation *smithy.Schema
-
-var _S3OutputLocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "S3OutputLocation",
-}, smithy.ShapeTypeString, 0)
-
-var _S3Uri = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "S3Uri",
-}, smithy.ShapeTypeString, 0)
-
-var SessionAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "SessionAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var SessionAlreadyExistsException_Message *smithy.Schema
-
-var SessionConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "SessionConfiguration",
-}, smithy.ShapeTypeStructure, 5)
-var SessionConfiguration_ExecutionRole *smithy.Schema
-
-var SessionConfiguration_WorkingDirectory *smithy.Schema
-
-var SessionConfiguration_IdleTimeoutSeconds *smithy.Schema
-
-var SessionConfiguration_SessionIdleTimeoutInMinutes *smithy.Schema
-
-var SessionConfiguration_EncryptionConfiguration *smithy.Schema
-
-var _SessionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "SessionId",
-}, smithy.ShapeTypeString, 0)
-
-var _SessionIdleTimeoutInMinutes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "SessionIdleTimeoutInMinutes",
-}, smithy.ShapeTypeInteger, 0)
-
-var _SessionManagerToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "SessionManagerToken",
-}, smithy.ShapeTypeString, 0)
-
-var _SessionsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "SessionsList",
-}, smithy.ShapeTypeList, 1)
-var _SessionsList_member *smithy.Schema
-
-var SessionState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "SessionState",
-}, smithy.ShapeTypeEnum, 8)
-var SessionState_CREATING *smithy.Schema
-
-var SessionState_CREATED *smithy.Schema
-
-var SessionState_IDLE *smithy.Schema
-
-var SessionState_BUSY *smithy.Schema
-
-var SessionState_TERMINATING *smithy.Schema
-
-var SessionState_TERMINATED *smithy.Schema
-
-var SessionState_DEGRADED *smithy.Schema
-
-var SessionState_FAILED *smithy.Schema
-
-var SessionStatistics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "SessionStatistics",
-}, smithy.ShapeTypeStructure, 1)
-var SessionStatistics_DpuExecutionInMillis *smithy.Schema
-
-var SessionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "SessionStatus",
-}, smithy.ShapeTypeStructure, 6)
-var SessionStatus_StartDateTime *smithy.Schema
-
-var SessionStatus_LastModifiedDateTime *smithy.Schema
-
-var SessionStatus_EndDateTime *smithy.Schema
-
-var SessionStatus_IdleSinceDateTime *smithy.Schema
-
-var SessionStatus_State *smithy.Schema
-
-var SessionStatus_StateChangeReason *smithy.Schema
-
-var SessionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "SessionSummary",
-}, smithy.ShapeTypeStructure, 5)
-var SessionSummary_SessionId *smithy.Schema
-
-var SessionSummary_Description *smithy.Schema
-
-var SessionSummary_EngineVersion *smithy.Schema
-
-var SessionSummary_NotebookVersion *smithy.Schema
-
-var SessionSummary_Status *smithy.Schema
-
-var _StatementName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "StatementName",
-}, smithy.ShapeTypeString, 0)
-
-var StatementType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "StatementType",
-}, smithy.ShapeTypeEnum, 3)
-var StatementType_DDL *smithy.Schema
-
-var StatementType_DML *smithy.Schema
-
-var StatementType_UTILITY *smithy.Schema
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var _StringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "StringList",
-}, smithy.ShapeTypeList, 1)
-var _StringList_member *smithy.Schema
-
-var _SupportedDPUSizeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "SupportedDPUSizeList",
-}, smithy.ShapeTypeList, 1)
-var _SupportedDPUSizeList_member *smithy.Schema
-
-var TableMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "TableMetadata",
-}, smithy.ShapeTypeStructure, 7)
-var TableMetadata_Name *smithy.Schema
-
-var TableMetadata_CreateTime *smithy.Schema
-
-var TableMetadata_LastAccessTime *smithy.Schema
-
-var TableMetadata_TableType *smithy.Schema
-
-var TableMetadata_Columns *smithy.Schema
-
-var TableMetadata_PartitionKeys *smithy.Schema
-
-var TableMetadata_Parameters *smithy.Schema
-
-var _TableMetadataList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "TableMetadataList",
-}, smithy.ShapeTypeList, 1)
-var _TableMetadataList_member *smithy.Schema
-
-var _TableTypeString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "TableTypeString",
-}, smithy.ShapeTypeString, 0)
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _TargetDpusInteger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "TargetDpusInteger",
-}, smithy.ShapeTypeInteger, 0)
-
-var ThrottleReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ThrottleReason",
-}, smithy.ShapeTypeEnum, 1)
-var ThrottleReason_CONCURRENT_QUERY_LIMIT_EXCEEDED *smithy.Schema
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _Token = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "Token",
-}, smithy.ShapeTypeString, 0)
-
-var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var TooManyRequestsException_Message *smithy.Schema
-
-var TooManyRequestsException_Reason *smithy.Schema
-
-var _TypeString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "TypeString",
-}, smithy.ShapeTypeString, 0)
-
-var UnprocessedNamedQueryId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "UnprocessedNamedQueryId",
-}, smithy.ShapeTypeStructure, 3)
-var UnprocessedNamedQueryId_NamedQueryId *smithy.Schema
-
-var UnprocessedNamedQueryId_ErrorCode *smithy.Schema
-
-var UnprocessedNamedQueryId_ErrorMessage *smithy.Schema
-
-var _UnprocessedNamedQueryIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "UnprocessedNamedQueryIdList",
-}, smithy.ShapeTypeList, 1)
-var _UnprocessedNamedQueryIdList_member *smithy.Schema
-
-var UnprocessedPreparedStatementName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "UnprocessedPreparedStatementName",
-}, smithy.ShapeTypeStructure, 3)
-var UnprocessedPreparedStatementName_StatementName *smithy.Schema
-
-var UnprocessedPreparedStatementName_ErrorCode *smithy.Schema
-
-var UnprocessedPreparedStatementName_ErrorMessage *smithy.Schema
-
-var _UnprocessedPreparedStatementNameList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "UnprocessedPreparedStatementNameList",
-}, smithy.ShapeTypeList, 1)
-var _UnprocessedPreparedStatementNameList_member *smithy.Schema
-
-var UnprocessedQueryExecutionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "UnprocessedQueryExecutionId",
-}, smithy.ShapeTypeStructure, 3)
-var UnprocessedQueryExecutionId_QueryExecutionId *smithy.Schema
-
-var UnprocessedQueryExecutionId_ErrorCode *smithy.Schema
-
-var UnprocessedQueryExecutionId_ErrorMessage *smithy.Schema
-
-var _UnprocessedQueryExecutionIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "UnprocessedQueryExecutionIdList",
-}, smithy.ShapeTypeList, 1)
-var _UnprocessedQueryExecutionIdList_member *smithy.Schema
-
-var WorkGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "WorkGroup",
-}, smithy.ShapeTypeStructure, 6)
-var WorkGroup_Name *smithy.Schema
-
-var WorkGroup_State *smithy.Schema
-
-var WorkGroup_Configuration *smithy.Schema
-
-var WorkGroup_Description *smithy.Schema
-
-var WorkGroup_CreationTime *smithy.Schema
-
-var WorkGroup_IdentityCenterApplicationArn *smithy.Schema
-
-var WorkGroupConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "WorkGroupConfiguration",
-}, smithy.ShapeTypeStructure, 15)
-var WorkGroupConfiguration_ResultConfiguration *smithy.Schema
-
-var WorkGroupConfiguration_ManagedQueryResultsConfiguration *smithy.Schema
-
-var WorkGroupConfiguration_EnforceWorkGroupConfiguration *smithy.Schema
-
-var WorkGroupConfiguration_PublishCloudWatchMetricsEnabled *smithy.Schema
-
-var WorkGroupConfiguration_BytesScannedCutoffPerQuery *smithy.Schema
-
-var WorkGroupConfiguration_RequesterPaysEnabled *smithy.Schema
-
-var WorkGroupConfiguration_EngineVersion *smithy.Schema
-
-var WorkGroupConfiguration_AdditionalConfiguration *smithy.Schema
-
-var WorkGroupConfiguration_ExecutionRole *smithy.Schema
-
-var WorkGroupConfiguration_MonitoringConfiguration *smithy.Schema
-
-var WorkGroupConfiguration_EngineConfiguration *smithy.Schema
-
-var WorkGroupConfiguration_CustomerContentEncryptionConfiguration *smithy.Schema
-
-var WorkGroupConfiguration_EnableMinimumEncryptionConfiguration *smithy.Schema
-
-var WorkGroupConfiguration_IdentityCenterConfiguration *smithy.Schema
-
-var WorkGroupConfiguration_QueryResultsS3AccessGrantsConfiguration *smithy.Schema
-
-var WorkGroupConfigurationUpdates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "WorkGroupConfigurationUpdates",
-}, smithy.ShapeTypeStructure, 16)
-var WorkGroupConfigurationUpdates_EnforceWorkGroupConfiguration *smithy.Schema
-
-var WorkGroupConfigurationUpdates_ResultConfigurationUpdates *smithy.Schema
-
-var WorkGroupConfigurationUpdates_ManagedQueryResultsConfigurationUpdates *smithy.Schema
-
-var WorkGroupConfigurationUpdates_PublishCloudWatchMetricsEnabled *smithy.Schema
-
-var WorkGroupConfigurationUpdates_BytesScannedCutoffPerQuery *smithy.Schema
-
-var WorkGroupConfigurationUpdates_RemoveBytesScannedCutoffPerQuery *smithy.Schema
-
-var WorkGroupConfigurationUpdates_RequesterPaysEnabled *smithy.Schema
-
-var WorkGroupConfigurationUpdates_EngineVersion *smithy.Schema
-
-var WorkGroupConfigurationUpdates_RemoveCustomerContentEncryptionConfiguration *smithy.Schema
-
-var WorkGroupConfigurationUpdates_AdditionalConfiguration *smithy.Schema
-
-var WorkGroupConfigurationUpdates_ExecutionRole *smithy.Schema
-
-var WorkGroupConfigurationUpdates_CustomerContentEncryptionConfiguration *smithy.Schema
-
-var WorkGroupConfigurationUpdates_EnableMinimumEncryptionConfiguration *smithy.Schema
-
-var WorkGroupConfigurationUpdates_QueryResultsS3AccessGrantsConfiguration *smithy.Schema
-
-var WorkGroupConfigurationUpdates_MonitoringConfiguration *smithy.Schema
-
-var WorkGroupConfigurationUpdates_EngineConfiguration *smithy.Schema
-
-var _WorkGroupDescriptionString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "WorkGroupDescriptionString",
-}, smithy.ShapeTypeString, 0)
-
-var _WorkGroupName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "WorkGroupName",
-}, smithy.ShapeTypeString, 0)
-
-var _WorkGroupNamesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "WorkGroupNamesList",
-}, smithy.ShapeTypeList, 1)
-var _WorkGroupNamesList_member *smithy.Schema
-
-var _WorkGroupsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "WorkGroupsList",
-}, smithy.ShapeTypeList, 1)
-var _WorkGroupsList_member *smithy.Schema
-
-var WorkGroupState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "WorkGroupState",
-}, smithy.ShapeTypeEnum, 2)
-var WorkGroupState_ENABLED *smithy.Schema
-
-var WorkGroupState_DISABLED *smithy.Schema
-
-var WorkGroupSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "WorkGroupSummary",
-}, smithy.ShapeTypeStructure, 6)
-var WorkGroupSummary_Name *smithy.Schema
-
-var WorkGroupSummary_State *smithy.Schema
-
-var WorkGroupSummary_Description *smithy.Schema
-
-var WorkGroupSummary_CreationTime *smithy.Schema
-
-var WorkGroupSummary_EngineVersion *smithy.Schema
-
-var WorkGroupSummary_IdentityCenterApplicationArn *smithy.Schema
-
-var BatchGetNamedQueryInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "BatchGetNamedQueryInput",
-}, smithy.ShapeTypeStructure, 1)
-var BatchGetNamedQueryInput_NamedQueryIds *smithy.Schema
-
-var BatchGetNamedQueryOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "BatchGetNamedQueryOutput",
-}, smithy.ShapeTypeStructure, 2)
-var BatchGetNamedQueryOutput_NamedQueries *smithy.Schema
-
-var BatchGetNamedQueryOutput_UnprocessedNamedQueryIds *smithy.Schema
-
-var BatchGetPreparedStatementInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "BatchGetPreparedStatementInput",
-}, smithy.ShapeTypeStructure, 2)
-var BatchGetPreparedStatementInput_PreparedStatementNames *smithy.Schema
-
-var BatchGetPreparedStatementInput_WorkGroup *smithy.Schema
-
-var BatchGetPreparedStatementOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "BatchGetPreparedStatementOutput",
-}, smithy.ShapeTypeStructure, 2)
-var BatchGetPreparedStatementOutput_PreparedStatements *smithy.Schema
-
-var BatchGetPreparedStatementOutput_UnprocessedPreparedStatementNames *smithy.Schema
-
-var BatchGetQueryExecutionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "BatchGetQueryExecutionInput",
-}, smithy.ShapeTypeStructure, 1)
-var BatchGetQueryExecutionInput_QueryExecutionIds *smithy.Schema
-
-var BatchGetQueryExecutionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "BatchGetQueryExecutionOutput",
-}, smithy.ShapeTypeStructure, 2)
-var BatchGetQueryExecutionOutput_QueryExecutions *smithy.Schema
-
-var BatchGetQueryExecutionOutput_UnprocessedQueryExecutionIds *smithy.Schema
-
-var CancelCapacityReservationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "CancelCapacityReservationInput",
-}, smithy.ShapeTypeStructure, 1)
-var CancelCapacityReservationInput_Name *smithy.Schema
-
-var CancelCapacityReservationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "CancelCapacityReservationOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var CreateCapacityReservationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "CreateCapacityReservationInput",
-}, smithy.ShapeTypeStructure, 3)
-var CreateCapacityReservationInput_TargetDpus *smithy.Schema
-
-var CreateCapacityReservationInput_Name *smithy.Schema
-
-var CreateCapacityReservationInput_Tags *smithy.Schema
-
-var CreateCapacityReservationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "CreateCapacityReservationOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var CreateDataCatalogInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "CreateDataCatalogInput",
-}, smithy.ShapeTypeStructure, 5)
-var CreateDataCatalogInput_Name *smithy.Schema
-
-var CreateDataCatalogInput_Type *smithy.Schema
-
-var CreateDataCatalogInput_Description *smithy.Schema
-
-var CreateDataCatalogInput_Parameters *smithy.Schema
-
-var CreateDataCatalogInput_Tags *smithy.Schema
-
-var CreateDataCatalogOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "CreateDataCatalogOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateDataCatalogOutput_DataCatalog *smithy.Schema
-
-var CreateNamedQueryInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "CreateNamedQueryInput",
-}, smithy.ShapeTypeStructure, 6)
-var CreateNamedQueryInput_Name *smithy.Schema
-
-var CreateNamedQueryInput_Description *smithy.Schema
-
-var CreateNamedQueryInput_Database *smithy.Schema
-
-var CreateNamedQueryInput_QueryString *smithy.Schema
-
-var CreateNamedQueryInput_ClientRequestToken *smithy.Schema
-
-var CreateNamedQueryInput_WorkGroup *smithy.Schema
-
-var CreateNamedQueryOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "CreateNamedQueryOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateNamedQueryOutput_NamedQueryId *smithy.Schema
-
-var CreateNotebookInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "CreateNotebookInput",
-}, smithy.ShapeTypeStructure, 3)
-var CreateNotebookInput_WorkGroup *smithy.Schema
-
-var CreateNotebookInput_Name *smithy.Schema
-
-var CreateNotebookInput_ClientRequestToken *smithy.Schema
-
-var CreateNotebookOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "CreateNotebookOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateNotebookOutput_NotebookId *smithy.Schema
-
-var CreatePreparedStatementInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "CreatePreparedStatementInput",
-}, smithy.ShapeTypeStructure, 4)
-var CreatePreparedStatementInput_StatementName *smithy.Schema
-
-var CreatePreparedStatementInput_WorkGroup *smithy.Schema
-
-var CreatePreparedStatementInput_QueryStatement *smithy.Schema
-
-var CreatePreparedStatementInput_Description *smithy.Schema
-
-var CreatePreparedStatementOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "CreatePreparedStatementOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var CreatePresignedNotebookUrlRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "CreatePresignedNotebookUrlRequest",
-}, smithy.ShapeTypeStructure, 1)
-var CreatePresignedNotebookUrlRequest_SessionId *smithy.Schema
-
-var CreatePresignedNotebookUrlResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "CreatePresignedNotebookUrlResponse",
-}, smithy.ShapeTypeStructure, 3)
-var CreatePresignedNotebookUrlResponse_NotebookUrl *smithy.Schema
-
-var CreatePresignedNotebookUrlResponse_AuthToken *smithy.Schema
-
-var CreatePresignedNotebookUrlResponse_AuthTokenExpirationTime *smithy.Schema
-
-var CreateWorkGroupInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "CreateWorkGroupInput",
-}, smithy.ShapeTypeStructure, 4)
-var CreateWorkGroupInput_Name *smithy.Schema
-
-var CreateWorkGroupInput_Configuration *smithy.Schema
-
-var CreateWorkGroupInput_Description *smithy.Schema
-
-var CreateWorkGroupInput_Tags *smithy.Schema
-
-var CreateWorkGroupOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "CreateWorkGroupOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteCapacityReservationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "DeleteCapacityReservationInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteCapacityReservationInput_Name *smithy.Schema
-
-var DeleteCapacityReservationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "DeleteCapacityReservationOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteDataCatalogInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "DeleteDataCatalogInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteDataCatalogInput_Name *smithy.Schema
-
-var DeleteDataCatalogInput_DeleteCatalogOnly *smithy.Schema
-
-var DeleteDataCatalogOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "DeleteDataCatalogOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDataCatalogOutput_DataCatalog *smithy.Schema
-
-var DeleteNamedQueryInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "DeleteNamedQueryInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteNamedQueryInput_NamedQueryId *smithy.Schema
-
-var DeleteNamedQueryOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "DeleteNamedQueryOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteNotebookInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "DeleteNotebookInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteNotebookInput_NotebookId *smithy.Schema
-
-var DeleteNotebookOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "DeleteNotebookOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeletePreparedStatementInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "DeletePreparedStatementInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeletePreparedStatementInput_StatementName *smithy.Schema
-
-var DeletePreparedStatementInput_WorkGroup *smithy.Schema
-
-var DeletePreparedStatementOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "DeletePreparedStatementOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteWorkGroupInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "DeleteWorkGroupInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteWorkGroupInput_WorkGroup *smithy.Schema
-
-var DeleteWorkGroupInput_RecursiveDeleteOption *smithy.Schema
-
-var DeleteWorkGroupOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "DeleteWorkGroupOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var ExportNotebookInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ExportNotebookInput",
-}, smithy.ShapeTypeStructure, 1)
-var ExportNotebookInput_NotebookId *smithy.Schema
-
-var ExportNotebookOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ExportNotebookOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ExportNotebookOutput_NotebookMetadata *smithy.Schema
-
-var ExportNotebookOutput_Payload *smithy.Schema
-
-var GetCalculationExecutionCodeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetCalculationExecutionCodeRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetCalculationExecutionCodeRequest_CalculationExecutionId *smithy.Schema
-
-var GetCalculationExecutionCodeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetCalculationExecutionCodeResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetCalculationExecutionCodeResponse_CodeBlock *smithy.Schema
-
-var GetCalculationExecutionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetCalculationExecutionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetCalculationExecutionRequest_CalculationExecutionId *smithy.Schema
-
-var GetCalculationExecutionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetCalculationExecutionResponse",
-}, smithy.ShapeTypeStructure, 7)
-var GetCalculationExecutionResponse_CalculationExecutionId *smithy.Schema
-
-var GetCalculationExecutionResponse_SessionId *smithy.Schema
-
-var GetCalculationExecutionResponse_Description *smithy.Schema
-
-var GetCalculationExecutionResponse_WorkingDirectory *smithy.Schema
-
-var GetCalculationExecutionResponse_Status *smithy.Schema
-
-var GetCalculationExecutionResponse_Statistics *smithy.Schema
-
-var GetCalculationExecutionResponse_Result *smithy.Schema
-
-var GetCalculationExecutionStatusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetCalculationExecutionStatusRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetCalculationExecutionStatusRequest_CalculationExecutionId *smithy.Schema
-
-var GetCalculationExecutionStatusResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetCalculationExecutionStatusResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetCalculationExecutionStatusResponse_Status *smithy.Schema
-
-var GetCalculationExecutionStatusResponse_Statistics *smithy.Schema
-
-var GetCapacityAssignmentConfigurationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetCapacityAssignmentConfigurationInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetCapacityAssignmentConfigurationInput_CapacityReservationName *smithy.Schema
-
-var GetCapacityAssignmentConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetCapacityAssignmentConfigurationOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetCapacityAssignmentConfigurationOutput_CapacityAssignmentConfiguration *smithy.Schema
-
-var GetCapacityReservationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetCapacityReservationInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetCapacityReservationInput_Name *smithy.Schema
-
-var GetCapacityReservationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetCapacityReservationOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetCapacityReservationOutput_CapacityReservation *smithy.Schema
-
-var GetDatabaseInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetDatabaseInput",
-}, smithy.ShapeTypeStructure, 3)
-var GetDatabaseInput_CatalogName *smithy.Schema
-
-var GetDatabaseInput_DatabaseName *smithy.Schema
-
-var GetDatabaseInput_WorkGroup *smithy.Schema
-
-var GetDatabaseOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetDatabaseOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetDatabaseOutput_Database *smithy.Schema
-
-var GetDataCatalogInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetDataCatalogInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetDataCatalogInput_Name *smithy.Schema
-
-var GetDataCatalogInput_WorkGroup *smithy.Schema
-
-var GetDataCatalogOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetDataCatalogOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetDataCatalogOutput_DataCatalog *smithy.Schema
-
-var GetNamedQueryInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetNamedQueryInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetNamedQueryInput_NamedQueryId *smithy.Schema
-
-var GetNamedQueryOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetNamedQueryOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetNamedQueryOutput_NamedQuery *smithy.Schema
-
-var GetNotebookMetadataInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetNotebookMetadataInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetNotebookMetadataInput_NotebookId *smithy.Schema
-
-var GetNotebookMetadataOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetNotebookMetadataOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetNotebookMetadataOutput_NotebookMetadata *smithy.Schema
-
-var GetPreparedStatementInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetPreparedStatementInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetPreparedStatementInput_StatementName *smithy.Schema
-
-var GetPreparedStatementInput_WorkGroup *smithy.Schema
-
-var GetPreparedStatementOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetPreparedStatementOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetPreparedStatementOutput_PreparedStatement *smithy.Schema
-
-var GetQueryExecutionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetQueryExecutionInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetQueryExecutionInput_QueryExecutionId *smithy.Schema
-
-var GetQueryExecutionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetQueryExecutionOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetQueryExecutionOutput_QueryExecution *smithy.Schema
-
-var GetQueryResultsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetQueryResultsInput",
-}, smithy.ShapeTypeStructure, 4)
-var GetQueryResultsInput_QueryExecutionId *smithy.Schema
-
-var GetQueryResultsInput_NextToken *smithy.Schema
-
-var GetQueryResultsInput_MaxResults *smithy.Schema
-
-var GetQueryResultsInput_QueryResultType *smithy.Schema
-
-var GetQueryResultsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetQueryResultsOutput",
-}, smithy.ShapeTypeStructure, 3)
-var GetQueryResultsOutput_UpdateCount *smithy.Schema
-
-var GetQueryResultsOutput_ResultSet *smithy.Schema
-
-var GetQueryResultsOutput_NextToken *smithy.Schema
-
-var GetQueryRuntimeStatisticsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetQueryRuntimeStatisticsInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetQueryRuntimeStatisticsInput_QueryExecutionId *smithy.Schema
-
-var GetQueryRuntimeStatisticsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetQueryRuntimeStatisticsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetQueryRuntimeStatisticsOutput_QueryRuntimeStatistics *smithy.Schema
-
-var GetResourceDashboardRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetResourceDashboardRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetResourceDashboardRequest_ResourceARN *smithy.Schema
-
-var GetResourceDashboardResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetResourceDashboardResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetResourceDashboardResponse_Url *smithy.Schema
-
-var GetSessionEndpointRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetSessionEndpointRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetSessionEndpointRequest_SessionId *smithy.Schema
-
-var GetSessionEndpointResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetSessionEndpointResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetSessionEndpointResponse_EndpointUrl *smithy.Schema
-
-var GetSessionEndpointResponse_AuthToken *smithy.Schema
-
-var GetSessionEndpointResponse_AuthTokenExpirationTime *smithy.Schema
-
-var GetSessionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetSessionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetSessionRequest_SessionId *smithy.Schema
-
-var GetSessionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetSessionResponse",
-}, smithy.ShapeTypeStructure, 10)
-var GetSessionResponse_SessionId *smithy.Schema
-
-var GetSessionResponse_Description *smithy.Schema
-
-var GetSessionResponse_WorkGroup *smithy.Schema
-
-var GetSessionResponse_EngineVersion *smithy.Schema
-
-var GetSessionResponse_EngineConfiguration *smithy.Schema
-
-var GetSessionResponse_NotebookVersion *smithy.Schema
-
-var GetSessionResponse_MonitoringConfiguration *smithy.Schema
-
-var GetSessionResponse_SessionConfiguration *smithy.Schema
-
-var GetSessionResponse_Status *smithy.Schema
-
-var GetSessionResponse_Statistics *smithy.Schema
-
-var GetSessionStatusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetSessionStatusRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetSessionStatusRequest_SessionId *smithy.Schema
-
-var GetSessionStatusResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetSessionStatusResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetSessionStatusResponse_SessionId *smithy.Schema
-
-var GetSessionStatusResponse_Status *smithy.Schema
-
-var GetTableMetadataInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetTableMetadataInput",
-}, smithy.ShapeTypeStructure, 4)
-var GetTableMetadataInput_CatalogName *smithy.Schema
-
-var GetTableMetadataInput_DatabaseName *smithy.Schema
-
-var GetTableMetadataInput_TableName *smithy.Schema
-
-var GetTableMetadataInput_WorkGroup *smithy.Schema
-
-var GetTableMetadataOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetTableMetadataOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetTableMetadataOutput_TableMetadata *smithy.Schema
-
-var GetWorkGroupInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetWorkGroupInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetWorkGroupInput_WorkGroup *smithy.Schema
-
-var GetWorkGroupOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "GetWorkGroupOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetWorkGroupOutput_WorkGroup *smithy.Schema
-
-var ImportNotebookInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ImportNotebookInput",
-}, smithy.ShapeTypeStructure, 6)
-var ImportNotebookInput_WorkGroup *smithy.Schema
-
-var ImportNotebookInput_Name *smithy.Schema
-
-var ImportNotebookInput_Payload *smithy.Schema
-
-var ImportNotebookInput_Type *smithy.Schema
-
-var ImportNotebookInput_NotebookS3LocationUri *smithy.Schema
-
-var ImportNotebookInput_ClientRequestToken *smithy.Schema
-
-var ImportNotebookOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ImportNotebookOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ImportNotebookOutput_NotebookId *smithy.Schema
-
-var ListApplicationDPUSizesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ListApplicationDPUSizesInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListApplicationDPUSizesInput_MaxResults *smithy.Schema
-
-var ListApplicationDPUSizesInput_NextToken *smithy.Schema
-
-var ListApplicationDPUSizesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ListApplicationDPUSizesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListApplicationDPUSizesOutput_ApplicationDPUSizes *smithy.Schema
-
-var ListApplicationDPUSizesOutput_NextToken *smithy.Schema
-
-var ListCalculationExecutionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ListCalculationExecutionsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListCalculationExecutionsRequest_SessionId *smithy.Schema
-
-var ListCalculationExecutionsRequest_StateFilter *smithy.Schema
-
-var ListCalculationExecutionsRequest_MaxResults *smithy.Schema
-
-var ListCalculationExecutionsRequest_NextToken *smithy.Schema
-
-var ListCalculationExecutionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ListCalculationExecutionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListCalculationExecutionsResponse_NextToken *smithy.Schema
-
-var ListCalculationExecutionsResponse_Calculations *smithy.Schema
-
-var ListCapacityReservationsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ListCapacityReservationsInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListCapacityReservationsInput_NextToken *smithy.Schema
-
-var ListCapacityReservationsInput_MaxResults *smithy.Schema
-
-var ListCapacityReservationsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ListCapacityReservationsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListCapacityReservationsOutput_NextToken *smithy.Schema
-
-var ListCapacityReservationsOutput_CapacityReservations *smithy.Schema
-
-var ListDatabasesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ListDatabasesInput",
-}, smithy.ShapeTypeStructure, 4)
-var ListDatabasesInput_CatalogName *smithy.Schema
-
-var ListDatabasesInput_NextToken *smithy.Schema
-
-var ListDatabasesInput_MaxResults *smithy.Schema
-
-var ListDatabasesInput_WorkGroup *smithy.Schema
-
-var ListDatabasesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ListDatabasesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListDatabasesOutput_DatabaseList *smithy.Schema
-
-var ListDatabasesOutput_NextToken *smithy.Schema
-
-var ListDataCatalogsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ListDataCatalogsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListDataCatalogsInput_NextToken *smithy.Schema
-
-var ListDataCatalogsInput_MaxResults *smithy.Schema
-
-var ListDataCatalogsInput_WorkGroup *smithy.Schema
-
-var ListDataCatalogsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ListDataCatalogsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListDataCatalogsOutput_DataCatalogsSummary *smithy.Schema
-
-var ListDataCatalogsOutput_NextToken *smithy.Schema
-
-var ListEngineVersionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ListEngineVersionsInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListEngineVersionsInput_NextToken *smithy.Schema
-
-var ListEngineVersionsInput_MaxResults *smithy.Schema
-
-var ListEngineVersionsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ListEngineVersionsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListEngineVersionsOutput_EngineVersions *smithy.Schema
-
-var ListEngineVersionsOutput_NextToken *smithy.Schema
-
-var ListExecutorsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ListExecutorsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListExecutorsRequest_SessionId *smithy.Schema
-
-var ListExecutorsRequest_ExecutorStateFilter *smithy.Schema
-
-var ListExecutorsRequest_MaxResults *smithy.Schema
-
-var ListExecutorsRequest_NextToken *smithy.Schema
-
-var ListExecutorsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ListExecutorsResponse",
-}, smithy.ShapeTypeStructure, 3)
-var ListExecutorsResponse_SessionId *smithy.Schema
-
-var ListExecutorsResponse_NextToken *smithy.Schema
-
-var ListExecutorsResponse_ExecutorsSummary *smithy.Schema
-
-var ListNamedQueriesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ListNamedQueriesInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListNamedQueriesInput_NextToken *smithy.Schema
-
-var ListNamedQueriesInput_MaxResults *smithy.Schema
-
-var ListNamedQueriesInput_WorkGroup *smithy.Schema
-
-var ListNamedQueriesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ListNamedQueriesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListNamedQueriesOutput_NamedQueryIds *smithy.Schema
-
-var ListNamedQueriesOutput_NextToken *smithy.Schema
-
-var ListNotebookMetadataInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ListNotebookMetadataInput",
-}, smithy.ShapeTypeStructure, 4)
-var ListNotebookMetadataInput_Filters *smithy.Schema
-
-var ListNotebookMetadataInput_NextToken *smithy.Schema
-
-var ListNotebookMetadataInput_MaxResults *smithy.Schema
-
-var ListNotebookMetadataInput_WorkGroup *smithy.Schema
-
-var ListNotebookMetadataOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ListNotebookMetadataOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListNotebookMetadataOutput_NextToken *smithy.Schema
-
-var ListNotebookMetadataOutput_NotebookMetadataList *smithy.Schema
-
-var ListNotebookSessionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ListNotebookSessionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListNotebookSessionsRequest_NotebookId *smithy.Schema
-
-var ListNotebookSessionsRequest_MaxResults *smithy.Schema
-
-var ListNotebookSessionsRequest_NextToken *smithy.Schema
-
-var ListNotebookSessionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ListNotebookSessionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListNotebookSessionsResponse_NotebookSessionsList *smithy.Schema
-
-var ListNotebookSessionsResponse_NextToken *smithy.Schema
-
-var ListPreparedStatementsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ListPreparedStatementsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListPreparedStatementsInput_WorkGroup *smithy.Schema
-
-var ListPreparedStatementsInput_NextToken *smithy.Schema
-
-var ListPreparedStatementsInput_MaxResults *smithy.Schema
-
-var ListPreparedStatementsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ListPreparedStatementsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListPreparedStatementsOutput_PreparedStatements *smithy.Schema
-
-var ListPreparedStatementsOutput_NextToken *smithy.Schema
-
-var ListQueryExecutionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ListQueryExecutionsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListQueryExecutionsInput_NextToken *smithy.Schema
-
-var ListQueryExecutionsInput_MaxResults *smithy.Schema
-
-var ListQueryExecutionsInput_WorkGroup *smithy.Schema
-
-var ListQueryExecutionsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ListQueryExecutionsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListQueryExecutionsOutput_QueryExecutionIds *smithy.Schema
-
-var ListQueryExecutionsOutput_NextToken *smithy.Schema
-
-var ListSessionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ListSessionsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListSessionsRequest_WorkGroup *smithy.Schema
-
-var ListSessionsRequest_StateFilter *smithy.Schema
-
-var ListSessionsRequest_MaxResults *smithy.Schema
-
-var ListSessionsRequest_NextToken *smithy.Schema
-
-var ListSessionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ListSessionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSessionsResponse_NextToken *smithy.Schema
-
-var ListSessionsResponse_Sessions *smithy.Schema
-
-var ListTableMetadataInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ListTableMetadataInput",
-}, smithy.ShapeTypeStructure, 6)
-var ListTableMetadataInput_CatalogName *smithy.Schema
-
-var ListTableMetadataInput_DatabaseName *smithy.Schema
-
-var ListTableMetadataInput_Expression *smithy.Schema
-
-var ListTableMetadataInput_NextToken *smithy.Schema
-
-var ListTableMetadataInput_MaxResults *smithy.Schema
-
-var ListTableMetadataInput_WorkGroup *smithy.Schema
-
-var ListTableMetadataOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ListTableMetadataOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListTableMetadataOutput_TableMetadataList *smithy.Schema
-
-var ListTableMetadataOutput_NextToken *smithy.Schema
-
-var ListTagsForResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ListTagsForResourceInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListTagsForResourceInput_ResourceARN *smithy.Schema
-
-var ListTagsForResourceInput_NextToken *smithy.Schema
-
-var ListTagsForResourceInput_MaxResults *smithy.Schema
-
-var ListTagsForResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ListTagsForResourceOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListTagsForResourceOutput_Tags *smithy.Schema
-
-var ListTagsForResourceOutput_NextToken *smithy.Schema
-
-var ListWorkGroupsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ListWorkGroupsInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListWorkGroupsInput_NextToken *smithy.Schema
-
-var ListWorkGroupsInput_MaxResults *smithy.Schema
-
-var ListWorkGroupsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "ListWorkGroupsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListWorkGroupsOutput_WorkGroups *smithy.Schema
-
-var ListWorkGroupsOutput_NextToken *smithy.Schema
-
-var PutCapacityAssignmentConfigurationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "PutCapacityAssignmentConfigurationInput",
-}, smithy.ShapeTypeStructure, 2)
-var PutCapacityAssignmentConfigurationInput_CapacityReservationName *smithy.Schema
-
-var PutCapacityAssignmentConfigurationInput_CapacityAssignments *smithy.Schema
-
-var PutCapacityAssignmentConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "PutCapacityAssignmentConfigurationOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var StartCalculationExecutionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "StartCalculationExecutionRequest",
-}, smithy.ShapeTypeStructure, 5)
-var StartCalculationExecutionRequest_SessionId *smithy.Schema
-
-var StartCalculationExecutionRequest_Description *smithy.Schema
-
-var StartCalculationExecutionRequest_CalculationConfiguration *smithy.Schema
-
-var StartCalculationExecutionRequest_CodeBlock *smithy.Schema
-
-var StartCalculationExecutionRequest_ClientRequestToken *smithy.Schema
-
-var StartCalculationExecutionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "StartCalculationExecutionResponse",
-}, smithy.ShapeTypeStructure, 2)
-var StartCalculationExecutionResponse_CalculationExecutionId *smithy.Schema
-
-var StartCalculationExecutionResponse_State *smithy.Schema
-
-var StartQueryExecutionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "StartQueryExecutionInput",
-}, smithy.ShapeTypeStructure, 8)
-var StartQueryExecutionInput_QueryString *smithy.Schema
-
-var StartQueryExecutionInput_ClientRequestToken *smithy.Schema
-
-var StartQueryExecutionInput_QueryExecutionContext *smithy.Schema
-
-var StartQueryExecutionInput_ResultConfiguration *smithy.Schema
-
-var StartQueryExecutionInput_WorkGroup *smithy.Schema
-
-var StartQueryExecutionInput_ExecutionParameters *smithy.Schema
-
-var StartQueryExecutionInput_ResultReuseConfiguration *smithy.Schema
-
-var StartQueryExecutionInput_EngineConfiguration *smithy.Schema
-
-var StartQueryExecutionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "StartQueryExecutionOutput",
-}, smithy.ShapeTypeStructure, 1)
-var StartQueryExecutionOutput_QueryExecutionId *smithy.Schema
-
-var StartSessionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "StartSessionRequest",
-}, smithy.ShapeTypeStructure, 10)
-var StartSessionRequest_Description *smithy.Schema
-
-var StartSessionRequest_WorkGroup *smithy.Schema
-
-var StartSessionRequest_EngineConfiguration *smithy.Schema
-
-var StartSessionRequest_ExecutionRole *smithy.Schema
-
-var StartSessionRequest_MonitoringConfiguration *smithy.Schema
-
-var StartSessionRequest_NotebookVersion *smithy.Schema
-
-var StartSessionRequest_SessionIdleTimeoutInMinutes *smithy.Schema
-
-var StartSessionRequest_ClientRequestToken *smithy.Schema
-
-var StartSessionRequest_Tags *smithy.Schema
-
-var StartSessionRequest_CopyWorkGroupTags *smithy.Schema
-
-var StartSessionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "StartSessionResponse",
-}, smithy.ShapeTypeStructure, 2)
-var StartSessionResponse_SessionId *smithy.Schema
-
-var StartSessionResponse_State *smithy.Schema
-
-var StopCalculationExecutionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "StopCalculationExecutionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StopCalculationExecutionRequest_CalculationExecutionId *smithy.Schema
-
-var StopCalculationExecutionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "StopCalculationExecutionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StopCalculationExecutionResponse_State *smithy.Schema
-
-var StopQueryExecutionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "StopQueryExecutionInput",
-}, smithy.ShapeTypeStructure, 1)
-var StopQueryExecutionInput_QueryExecutionId *smithy.Schema
-
-var StopQueryExecutionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "StopQueryExecutionOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var TagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "TagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceInput_ResourceARN *smithy.Schema
-
-var TagResourceInput_Tags *smithy.Schema
-
-var TagResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "TagResourceOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var TerminateSessionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "TerminateSessionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var TerminateSessionRequest_SessionId *smithy.Schema
-
-var TerminateSessionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "TerminateSessionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var TerminateSessionResponse_State *smithy.Schema
-
-var UntagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "UntagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceInput_ResourceARN *smithy.Schema
-
-var UntagResourceInput_TagKeys *smithy.Schema
-
-var UntagResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "UntagResourceOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateCapacityReservationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "UpdateCapacityReservationInput",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateCapacityReservationInput_TargetDpus *smithy.Schema
-
-var UpdateCapacityReservationInput_Name *smithy.Schema
-
-var UpdateCapacityReservationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "UpdateCapacityReservationOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateDataCatalogInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "UpdateDataCatalogInput",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateDataCatalogInput_Name *smithy.Schema
-
-var UpdateDataCatalogInput_Type *smithy.Schema
-
-var UpdateDataCatalogInput_Description *smithy.Schema
-
-var UpdateDataCatalogInput_Parameters *smithy.Schema
-
-var UpdateDataCatalogOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "UpdateDataCatalogOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateNamedQueryInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "UpdateNamedQueryInput",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateNamedQueryInput_NamedQueryId *smithy.Schema
-
-var UpdateNamedQueryInput_Name *smithy.Schema
-
-var UpdateNamedQueryInput_Description *smithy.Schema
-
-var UpdateNamedQueryInput_QueryString *smithy.Schema
-
-var UpdateNamedQueryOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "UpdateNamedQueryOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateNotebookInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "UpdateNotebookInput",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateNotebookInput_NotebookId *smithy.Schema
-
-var UpdateNotebookInput_Payload *smithy.Schema
-
-var UpdateNotebookInput_Type *smithy.Schema
-
-var UpdateNotebookInput_SessionId *smithy.Schema
-
-var UpdateNotebookInput_ClientRequestToken *smithy.Schema
-
-var UpdateNotebookMetadataInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "UpdateNotebookMetadataInput",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateNotebookMetadataInput_NotebookId *smithy.Schema
-
-var UpdateNotebookMetadataInput_ClientRequestToken *smithy.Schema
-
-var UpdateNotebookMetadataInput_Name *smithy.Schema
-
-var UpdateNotebookMetadataOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "UpdateNotebookMetadataOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateNotebookOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "UpdateNotebookOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdatePreparedStatementInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "UpdatePreparedStatementInput",
-}, smithy.ShapeTypeStructure, 4)
-var UpdatePreparedStatementInput_StatementName *smithy.Schema
-
-var UpdatePreparedStatementInput_WorkGroup *smithy.Schema
-
-var UpdatePreparedStatementInput_QueryStatement *smithy.Schema
-
-var UpdatePreparedStatementInput_Description *smithy.Schema
-
-var UpdatePreparedStatementOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "UpdatePreparedStatementOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateWorkGroupInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "UpdateWorkGroupInput",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateWorkGroupInput_WorkGroup *smithy.Schema
-
-var UpdateWorkGroupInput_Description *smithy.Schema
-
-var UpdateWorkGroupInput_ConfigurationUpdates *smithy.Schema
-
-var UpdateWorkGroupInput_State *smithy.Schema
-
-var UpdateWorkGroupOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.athena",
-	Name:      "UpdateWorkGroupOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
+var (
+	iBatchGetNamedQuery                         = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "BatchGetNamedQuery"}
+	iBatchGetPreparedStatement                  = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "BatchGetPreparedStatement"}
+	iBatchGetQueryExecution                     = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "BatchGetQueryExecution"}
+	iCancelCapacityReservation                  = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "CancelCapacityReservation"}
+	iCreateCapacityReservation                  = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "CreateCapacityReservation"}
+	iCreateDataCatalog                          = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "CreateDataCatalog"}
+	iCreateNamedQuery                           = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "CreateNamedQuery"}
+	iCreateNotebook                             = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "CreateNotebook"}
+	iCreatePreparedStatement                    = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "CreatePreparedStatement"}
+	iCreatePresignedNotebookUrl                 = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "CreatePresignedNotebookUrl"}
+	iCreateWorkGroup                            = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "CreateWorkGroup"}
+	iDeleteCapacityReservation                  = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "DeleteCapacityReservation"}
+	iDeleteDataCatalog                          = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "DeleteDataCatalog"}
+	iDeleteNamedQuery                           = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "DeleteNamedQuery"}
+	iDeleteNotebook                             = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "DeleteNotebook"}
+	iDeletePreparedStatement                    = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "DeletePreparedStatement"}
+	iDeleteWorkGroup                            = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "DeleteWorkGroup"}
+	iExportNotebook                             = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ExportNotebook"}
+	iGetCalculationExecution                    = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetCalculationExecution"}
+	iGetCalculationExecutionCode                = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetCalculationExecutionCode"}
+	iGetCalculationExecutionStatus              = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetCalculationExecutionStatus"}
+	iGetCapacityAssignmentConfiguration         = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetCapacityAssignmentConfiguration"}
+	iGetCapacityReservation                     = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetCapacityReservation"}
+	iGetDatabase                                = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetDatabase"}
+	iGetDataCatalog                             = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetDataCatalog"}
+	iGetNamedQuery                              = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetNamedQuery"}
+	iGetNotebookMetadata                        = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetNotebookMetadata"}
+	iGetPreparedStatement                       = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetPreparedStatement"}
+	iGetQueryExecution                          = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetQueryExecution"}
+	iGetQueryResults                            = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetQueryResults"}
+	iGetQueryRuntimeStatistics                  = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetQueryRuntimeStatistics"}
+	iGetResourceDashboard                       = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetResourceDashboard"}
+	iGetSession                                 = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetSession"}
+	iGetSessionEndpoint                         = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetSessionEndpoint"}
+	iGetSessionStatus                           = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetSessionStatus"}
+	iGetTableMetadata                           = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetTableMetadata"}
+	iGetWorkGroup                               = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetWorkGroup"}
+	iImportNotebook                             = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ImportNotebook"}
+	iListApplicationDPUSizes                    = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ListApplicationDPUSizes"}
+	iListCalculationExecutions                  = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ListCalculationExecutions"}
+	iListCapacityReservations                   = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ListCapacityReservations"}
+	iListDatabases                              = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ListDatabases"}
+	iListDataCatalogs                           = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ListDataCatalogs"}
+	iListEngineVersions                         = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ListEngineVersions"}
+	iListExecutors                              = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ListExecutors"}
+	iListNamedQueries                           = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ListNamedQueries"}
+	iListNotebookMetadata                       = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ListNotebookMetadata"}
+	iListNotebookSessions                       = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ListNotebookSessions"}
+	iListPreparedStatements                     = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ListPreparedStatements"}
+	iListQueryExecutions                        = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ListQueryExecutions"}
+	iListSessions                               = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ListSessions"}
+	iListTableMetadata                          = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ListTableMetadata"}
+	iListTagsForResource                        = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ListTagsForResource"}
+	iListWorkGroups                             = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ListWorkGroups"}
+	iPutCapacityAssignmentConfiguration         = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "PutCapacityAssignmentConfiguration"}
+	iStartCalculationExecution                  = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "StartCalculationExecution"}
+	iStartQueryExecution                        = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "StartQueryExecution"}
+	iStartSession                               = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "StartSession"}
+	iStopCalculationExecution                   = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "StopCalculationExecution"}
+	iStopQueryExecution                         = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "StopQueryExecution"}
+	iTagResource                                = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "TagResource"}
+	iTerminateSession                           = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "TerminateSession"}
+	iUntagResource                              = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "UntagResource"}
+	iUpdateCapacityReservation                  = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "UpdateCapacityReservation"}
+	iUpdateDataCatalog                          = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "UpdateDataCatalog"}
+	iUpdateNamedQuery                           = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "UpdateNamedQuery"}
+	iUpdateNotebook                             = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "UpdateNotebook"}
+	iUpdateNotebookMetadata                     = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "UpdateNotebookMetadata"}
+	iUpdatePreparedStatement                    = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "UpdatePreparedStatement"}
+	iUpdateWorkGroup                            = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "UpdateWorkGroup"}
+	i_AmazonAthena                              = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "AmazonAthena"}
+	iAclConfiguration                           = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "AclConfiguration"}
+	i_Age                                       = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "Age"}
+	i_AllocatedDpusInteger                      = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "AllocatedDpusInteger"}
+	i_AmazonResourceName                        = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "AmazonResourceName"}
+	iApplicationDPUSizes                        = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ApplicationDPUSizes"}
+	i_ApplicationDPUSizesList                   = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ApplicationDPUSizesList"}
+	iAthenaError                                = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "AthenaError"}
+	iAuthenticationType                         = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "AuthenticationType"}
+	i_AuthToken                                 = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "AuthToken"}
+	i_AwsAccountId                              = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "AwsAccountId"}
+	i_Boolean                                   = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "Boolean"}
+	i_BoxedBoolean                              = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "BoxedBoolean"}
+	i_BytesScannedCutoffValue                   = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "BytesScannedCutoffValue"}
+	iCalculationConfiguration                   = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "CalculationConfiguration"}
+	i_CalculationExecutionId                    = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "CalculationExecutionId"}
+	iCalculationExecutionState                  = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "CalculationExecutionState"}
+	iCalculationResult                          = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "CalculationResult"}
+	i_CalculationResultType                     = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "CalculationResultType"}
+	i_CalculationsList                          = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "CalculationsList"}
+	iCalculationStatistics                      = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "CalculationStatistics"}
+	iCalculationStatus                          = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "CalculationStatus"}
+	iCalculationSummary                         = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "CalculationSummary"}
+	iCapacityAllocation                         = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "CapacityAllocation"}
+	iCapacityAllocationStatus                   = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "CapacityAllocationStatus"}
+	iCapacityAssignment                         = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "CapacityAssignment"}
+	iCapacityAssignmentConfiguration            = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "CapacityAssignmentConfiguration"}
+	i_CapacityAssignmentsList                   = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "CapacityAssignmentsList"}
+	iCapacityReservation                        = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "CapacityReservation"}
+	i_CapacityReservationName                   = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "CapacityReservationName"}
+	i_CapacityReservationsList                  = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "CapacityReservationsList"}
+	iCapacityReservationStatus                  = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "CapacityReservationStatus"}
+	i_CatalogNameString                         = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "CatalogNameString"}
+	iClassification                             = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "Classification"}
+	i_ClassificationList                        = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ClassificationList"}
+	i_ClientRequestToken                        = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ClientRequestToken"}
+	iCloudWatchLoggingConfiguration             = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "CloudWatchLoggingConfiguration"}
+	i_CodeBlock                                 = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "CodeBlock"}
+	iColumn                                     = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "Column"}
+	iColumnInfo                                 = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ColumnInfo"}
+	i_ColumnInfoList                            = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ColumnInfoList"}
+	i_ColumnList                                = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ColumnList"}
+	iColumnNullable                             = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ColumnNullable"}
+	i_CommentString                             = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "CommentString"}
+	iConnectionType                             = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ConnectionType"}
+	i_CoordinatorDpuSize                        = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "CoordinatorDpuSize"}
+	iCustomerContentEncryptionConfiguration     = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "CustomerContentEncryptionConfiguration"}
+	iDatabase                                   = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "Database"}
+	i_DatabaseList                              = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "DatabaseList"}
+	i_DatabaseString                            = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "DatabaseString"}
+	iDataCatalog                                = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "DataCatalog"}
+	iDataCatalogStatus                          = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "DataCatalogStatus"}
+	iDataCatalogSummary                         = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "DataCatalogSummary"}
+	i_DataCatalogSummaryList                    = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "DataCatalogSummaryList"}
+	iDataCatalogType                            = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "DataCatalogType"}
+	i_Date                                      = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "Date"}
+	iDatum                                      = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "Datum"}
+	i_datumList                                 = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "datumList"}
+	i_datumString                               = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "datumString"}
+	i_DefaultExecutorDpuSize                    = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "DefaultExecutorDpuSize"}
+	i_DescriptionString                         = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "DescriptionString"}
+	i_DpuCount                                  = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "DpuCount"}
+	iEncryptionConfiguration                    = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "EncryptionConfiguration"}
+	iEncryptionOption                           = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "EncryptionOption"}
+	iEngineConfiguration                        = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "EngineConfiguration"}
+	iEngineVersion                              = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "EngineVersion"}
+	i_EngineVersionsList                        = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "EngineVersionsList"}
+	i_ErrorCategory                             = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ErrorCategory"}
+	i_ErrorCode                                 = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ErrorCode"}
+	i_ErrorMessage                              = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ErrorMessage"}
+	i_ErrorType                                 = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ErrorType"}
+	i_ExecutionParameter                        = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ExecutionParameter"}
+	i_ExecutionParameters                       = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ExecutionParameters"}
+	i_ExecutorId                                = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ExecutorId"}
+	iExecutorsSummary                           = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ExecutorsSummary"}
+	i_ExecutorsSummaryList                      = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ExecutorsSummaryList"}
+	iExecutorState                              = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ExecutorState"}
+	iExecutorType                               = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ExecutorType"}
+	i_ExpressionString                          = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ExpressionString"}
+	iFilterDefinition                           = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "FilterDefinition"}
+	i_IdempotencyToken                          = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "IdempotencyToken"}
+	i_IdentityCenterApplicationArn              = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "IdentityCenterApplicationArn"}
+	iIdentityCenterConfiguration                = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "IdentityCenterConfiguration"}
+	i_IdentityCenterInstanceArn                 = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "IdentityCenterInstanceArn"}
+	i_Integer                                   = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "Integer"}
+	iInternalServerException                    = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "InternalServerException"}
+	iInvalidRequestException                    = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "InvalidRequestException"}
+	i_KeyString                                 = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "KeyString"}
+	i_KmsKey                                    = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "KmsKey"}
+	i_LogGroupName                              = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "LogGroupName"}
+	i_LogStreamNamePrefix                       = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "LogStreamNamePrefix"}
+	i_LogTypeKey                                = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "LogTypeKey"}
+	i_LogTypesMap                               = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "LogTypesMap"}
+	i_LogTypeValue                              = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "LogTypeValue"}
+	i_LogTypeValuesList                         = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "LogTypeValuesList"}
+	i_Long                                      = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "Long"}
+	iManagedLoggingConfiguration                = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ManagedLoggingConfiguration"}
+	iManagedQueryResultsConfiguration           = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ManagedQueryResultsConfiguration"}
+	iManagedQueryResultsConfigurationUpdates    = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ManagedQueryResultsConfigurationUpdates"}
+	iManagedQueryResultsEncryptionConfiguration = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ManagedQueryResultsEncryptionConfiguration"}
+	i_MaxApplicationDPUSizesCount               = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "MaxApplicationDPUSizesCount"}
+	i_MaxCalculationsCount                      = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "MaxCalculationsCount"}
+	i_MaxCapacityReservationsCount              = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "MaxCapacityReservationsCount"}
+	i_MaxConcurrentDpus                         = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "MaxConcurrentDpus"}
+	i_MaxDatabasesCount                         = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "MaxDatabasesCount"}
+	i_MaxDataCatalogsCount                      = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "MaxDataCatalogsCount"}
+	i_MaxEngineVersionsCount                    = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "MaxEngineVersionsCount"}
+	i_MaxListExecutorsCount                     = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "MaxListExecutorsCount"}
+	i_MaxNamedQueriesCount                      = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "MaxNamedQueriesCount"}
+	i_MaxNotebooksCount                         = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "MaxNotebooksCount"}
+	i_MaxPreparedStatementsCount                = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "MaxPreparedStatementsCount"}
+	i_MaxQueryExecutionsCount                   = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "MaxQueryExecutionsCount"}
+	i_MaxQueryResults                           = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "MaxQueryResults"}
+	i_MaxSessionsCount                          = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "MaxSessionsCount"}
+	i_MaxTableMetadataCount                     = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "MaxTableMetadataCount"}
+	i_MaxTagsCount                              = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "MaxTagsCount"}
+	i_MaxWorkGroupsCount                        = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "MaxWorkGroupsCount"}
+	iMetadataException                          = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "MetadataException"}
+	iMonitoringConfiguration                    = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "MonitoringConfiguration"}
+	iNamedQuery                                 = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "NamedQuery"}
+	i_NamedQueryDescriptionString               = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "NamedQueryDescriptionString"}
+	i_NamedQueryId                              = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "NamedQueryId"}
+	i_NamedQueryIdList                          = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "NamedQueryIdList"}
+	i_NamedQueryList                            = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "NamedQueryList"}
+	i_NameString                                = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "NameString"}
+	i_NotebookId                                = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "NotebookId"}
+	iNotebookMetadata                           = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "NotebookMetadata"}
+	i_NotebookMetadataArray                     = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "NotebookMetadataArray"}
+	i_NotebookName                              = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "NotebookName"}
+	i_NotebookSessionsList                      = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "NotebookSessionsList"}
+	iNotebookSessionSummary                     = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "NotebookSessionSummary"}
+	iNotebookType                               = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "NotebookType"}
+	i_ParametersMap                             = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ParametersMap"}
+	i_ParametersMapValue                        = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ParametersMapValue"}
+	i_Payload                                   = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "Payload"}
+	iPreparedStatement                          = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "PreparedStatement"}
+	i_PreparedStatementDetailsList              = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "PreparedStatementDetailsList"}
+	i_PreparedStatementNameList                 = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "PreparedStatementNameList"}
+	i_PreparedStatementsList                    = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "PreparedStatementsList"}
+	iPreparedStatementSummary                   = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "PreparedStatementSummary"}
+	iQueryExecution                             = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "QueryExecution"}
+	iQueryExecutionContext                      = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "QueryExecutionContext"}
+	i_QueryExecutionId                          = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "QueryExecutionId"}
+	i_QueryExecutionIdList                      = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "QueryExecutionIdList"}
+	i_QueryExecutionList                        = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "QueryExecutionList"}
+	iQueryExecutionState                        = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "QueryExecutionState"}
+	iQueryExecutionStatistics                   = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "QueryExecutionStatistics"}
+	iQueryExecutionStatus                       = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "QueryExecutionStatus"}
+	iQueryResultsS3AccessGrantsConfiguration    = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "QueryResultsS3AccessGrantsConfiguration"}
+	iQueryResultType                            = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "QueryResultType"}
+	iQueryRuntimeStatistics                     = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "QueryRuntimeStatistics"}
+	iQueryRuntimeStatisticsRows                 = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "QueryRuntimeStatisticsRows"}
+	iQueryRuntimeStatisticsTimeline             = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "QueryRuntimeStatisticsTimeline"}
+	iQueryStage                                 = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "QueryStage"}
+	iQueryStagePlanNode                         = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "QueryStagePlanNode"}
+	i_QueryStagePlanNodes                       = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "QueryStagePlanNodes"}
+	i_QueryStages                               = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "QueryStages"}
+	i_QueryString                               = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "QueryString"}
+	iResourceNotFoundException                  = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ResourceNotFoundException"}
+	iResultConfiguration                        = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ResultConfiguration"}
+	iResultConfigurationUpdates                 = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ResultConfigurationUpdates"}
+	i_ResultOutputLocation                      = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ResultOutputLocation"}
+	iResultReuseByAgeConfiguration              = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ResultReuseByAgeConfiguration"}
+	iResultReuseConfiguration                   = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ResultReuseConfiguration"}
+	iResultReuseInformation                     = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ResultReuseInformation"}
+	iResultSet                                  = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ResultSet"}
+	iResultSetMetadata                          = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ResultSetMetadata"}
+	i_RoleArn                                   = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "RoleArn"}
+	iRow                                        = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "Row"}
+	i_RowList                                   = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "RowList"}
+	iS3AclOption                                = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "S3AclOption"}
+	iS3LoggingConfiguration                     = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "S3LoggingConfiguration"}
+	i_S3OutputLocation                          = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "S3OutputLocation"}
+	i_S3Uri                                     = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "S3Uri"}
+	iSessionAlreadyExistsException              = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "SessionAlreadyExistsException"}
+	iSessionConfiguration                       = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "SessionConfiguration"}
+	i_SessionId                                 = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "SessionId"}
+	i_SessionIdleTimeoutInMinutes               = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "SessionIdleTimeoutInMinutes"}
+	i_SessionManagerToken                       = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "SessionManagerToken"}
+	i_SessionsList                              = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "SessionsList"}
+	iSessionState                               = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "SessionState"}
+	iSessionStatistics                          = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "SessionStatistics"}
+	iSessionStatus                              = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "SessionStatus"}
+	iSessionSummary                             = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "SessionSummary"}
+	i_StatementName                             = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "StatementName"}
+	iStatementType                              = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "StatementType"}
+	i_String                                    = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "String"}
+	i_StringList                                = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "StringList"}
+	i_SupportedDPUSizeList                      = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "SupportedDPUSizeList"}
+	iTableMetadata                              = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "TableMetadata"}
+	i_TableMetadataList                         = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "TableMetadataList"}
+	i_TableTypeString                           = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "TableTypeString"}
+	iTag                                        = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "Tag"}
+	i_TagKey                                    = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "TagKey"}
+	i_TagKeyList                                = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "TagKeyList"}
+	i_TagList                                   = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "TagList"}
+	i_TagValue                                  = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "TagValue"}
+	i_TargetDpusInteger                         = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "TargetDpusInteger"}
+	iThrottleReason                             = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ThrottleReason"}
+	i_Timestamp                                 = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "Timestamp"}
+	i_Token                                     = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "Token"}
+	iTooManyRequestsException                   = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "TooManyRequestsException"}
+	i_TypeString                                = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "TypeString"}
+	iUnprocessedNamedQueryId                    = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "UnprocessedNamedQueryId"}
+	i_UnprocessedNamedQueryIdList               = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "UnprocessedNamedQueryIdList"}
+	iUnprocessedPreparedStatementName           = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "UnprocessedPreparedStatementName"}
+	i_UnprocessedPreparedStatementNameList      = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "UnprocessedPreparedStatementNameList"}
+	iUnprocessedQueryExecutionId                = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "UnprocessedQueryExecutionId"}
+	i_UnprocessedQueryExecutionIdList           = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "UnprocessedQueryExecutionIdList"}
+	iWorkGroup                                  = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "WorkGroup"}
+	iWorkGroupConfiguration                     = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "WorkGroupConfiguration"}
+	iWorkGroupConfigurationUpdates              = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "WorkGroupConfigurationUpdates"}
+	i_WorkGroupDescriptionString                = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "WorkGroupDescriptionString"}
+	i_WorkGroupName                             = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "WorkGroupName"}
+	i_WorkGroupNamesList                        = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "WorkGroupNamesList"}
+	i_WorkGroupsList                            = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "WorkGroupsList"}
+	iWorkGroupState                             = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "WorkGroupState"}
+	iWorkGroupSummary                           = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "WorkGroupSummary"}
+	iBatchGetNamedQueryInput                    = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "BatchGetNamedQueryInput"}
+	iBatchGetNamedQueryOutput                   = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "BatchGetNamedQueryOutput"}
+	iBatchGetPreparedStatementInput             = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "BatchGetPreparedStatementInput"}
+	iBatchGetPreparedStatementOutput            = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "BatchGetPreparedStatementOutput"}
+	iBatchGetQueryExecutionInput                = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "BatchGetQueryExecutionInput"}
+	iBatchGetQueryExecutionOutput               = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "BatchGetQueryExecutionOutput"}
+	iCancelCapacityReservationInput             = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "CancelCapacityReservationInput"}
+	iCancelCapacityReservationOutput            = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "CancelCapacityReservationOutput"}
+	iCreateCapacityReservationInput             = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "CreateCapacityReservationInput"}
+	iCreateCapacityReservationOutput            = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "CreateCapacityReservationOutput"}
+	iCreateDataCatalogInput                     = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "CreateDataCatalogInput"}
+	iCreateDataCatalogOutput                    = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "CreateDataCatalogOutput"}
+	iCreateNamedQueryInput                      = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "CreateNamedQueryInput"}
+	iCreateNamedQueryOutput                     = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "CreateNamedQueryOutput"}
+	iCreateNotebookInput                        = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "CreateNotebookInput"}
+	iCreateNotebookOutput                       = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "CreateNotebookOutput"}
+	iCreatePreparedStatementInput               = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "CreatePreparedStatementInput"}
+	iCreatePreparedStatementOutput              = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "CreatePreparedStatementOutput"}
+	iCreatePresignedNotebookUrlRequest          = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "CreatePresignedNotebookUrlRequest"}
+	iCreatePresignedNotebookUrlResponse         = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "CreatePresignedNotebookUrlResponse"}
+	iCreateWorkGroupInput                       = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "CreateWorkGroupInput"}
+	iCreateWorkGroupOutput                      = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "CreateWorkGroupOutput"}
+	iDeleteCapacityReservationInput             = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "DeleteCapacityReservationInput"}
+	iDeleteCapacityReservationOutput            = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "DeleteCapacityReservationOutput"}
+	iDeleteDataCatalogInput                     = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "DeleteDataCatalogInput"}
+	iDeleteDataCatalogOutput                    = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "DeleteDataCatalogOutput"}
+	iDeleteNamedQueryInput                      = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "DeleteNamedQueryInput"}
+	iDeleteNamedQueryOutput                     = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "DeleteNamedQueryOutput"}
+	iDeleteNotebookInput                        = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "DeleteNotebookInput"}
+	iDeleteNotebookOutput                       = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "DeleteNotebookOutput"}
+	iDeletePreparedStatementInput               = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "DeletePreparedStatementInput"}
+	iDeletePreparedStatementOutput              = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "DeletePreparedStatementOutput"}
+	iDeleteWorkGroupInput                       = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "DeleteWorkGroupInput"}
+	iDeleteWorkGroupOutput                      = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "DeleteWorkGroupOutput"}
+	iExportNotebookInput                        = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ExportNotebookInput"}
+	iExportNotebookOutput                       = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ExportNotebookOutput"}
+	iGetCalculationExecutionCodeRequest         = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetCalculationExecutionCodeRequest"}
+	iGetCalculationExecutionCodeResponse        = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetCalculationExecutionCodeResponse"}
+	iGetCalculationExecutionRequest             = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetCalculationExecutionRequest"}
+	iGetCalculationExecutionResponse            = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetCalculationExecutionResponse"}
+	iGetCalculationExecutionStatusRequest       = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetCalculationExecutionStatusRequest"}
+	iGetCalculationExecutionStatusResponse      = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetCalculationExecutionStatusResponse"}
+	iGetCapacityAssignmentConfigurationInput    = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetCapacityAssignmentConfigurationInput"}
+	iGetCapacityAssignmentConfigurationOutput   = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetCapacityAssignmentConfigurationOutput"}
+	iGetCapacityReservationInput                = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetCapacityReservationInput"}
+	iGetCapacityReservationOutput               = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetCapacityReservationOutput"}
+	iGetDatabaseInput                           = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetDatabaseInput"}
+	iGetDatabaseOutput                          = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetDatabaseOutput"}
+	iGetDataCatalogInput                        = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetDataCatalogInput"}
+	iGetDataCatalogOutput                       = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetDataCatalogOutput"}
+	iGetNamedQueryInput                         = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetNamedQueryInput"}
+	iGetNamedQueryOutput                        = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetNamedQueryOutput"}
+	iGetNotebookMetadataInput                   = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetNotebookMetadataInput"}
+	iGetNotebookMetadataOutput                  = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetNotebookMetadataOutput"}
+	iGetPreparedStatementInput                  = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetPreparedStatementInput"}
+	iGetPreparedStatementOutput                 = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetPreparedStatementOutput"}
+	iGetQueryExecutionInput                     = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetQueryExecutionInput"}
+	iGetQueryExecutionOutput                    = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetQueryExecutionOutput"}
+	iGetQueryResultsInput                       = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetQueryResultsInput"}
+	iGetQueryResultsOutput                      = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetQueryResultsOutput"}
+	iGetQueryRuntimeStatisticsInput             = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetQueryRuntimeStatisticsInput"}
+	iGetQueryRuntimeStatisticsOutput            = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetQueryRuntimeStatisticsOutput"}
+	iGetResourceDashboardRequest                = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetResourceDashboardRequest"}
+	iGetResourceDashboardResponse               = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetResourceDashboardResponse"}
+	iGetSessionEndpointRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetSessionEndpointRequest"}
+	iGetSessionEndpointResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetSessionEndpointResponse"}
+	iGetSessionRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetSessionRequest"}
+	iGetSessionResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetSessionResponse"}
+	iGetSessionStatusRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetSessionStatusRequest"}
+	iGetSessionStatusResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetSessionStatusResponse"}
+	iGetTableMetadataInput                      = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetTableMetadataInput"}
+	iGetTableMetadataOutput                     = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetTableMetadataOutput"}
+	iGetWorkGroupInput                          = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetWorkGroupInput"}
+	iGetWorkGroupOutput                         = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "GetWorkGroupOutput"}
+	iImportNotebookInput                        = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ImportNotebookInput"}
+	iImportNotebookOutput                       = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ImportNotebookOutput"}
+	iListApplicationDPUSizesInput               = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ListApplicationDPUSizesInput"}
+	iListApplicationDPUSizesOutput              = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ListApplicationDPUSizesOutput"}
+	iListCalculationExecutionsRequest           = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ListCalculationExecutionsRequest"}
+	iListCalculationExecutionsResponse          = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ListCalculationExecutionsResponse"}
+	iListCapacityReservationsInput              = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ListCapacityReservationsInput"}
+	iListCapacityReservationsOutput             = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ListCapacityReservationsOutput"}
+	iListDatabasesInput                         = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ListDatabasesInput"}
+	iListDatabasesOutput                        = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ListDatabasesOutput"}
+	iListDataCatalogsInput                      = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ListDataCatalogsInput"}
+	iListDataCatalogsOutput                     = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ListDataCatalogsOutput"}
+	iListEngineVersionsInput                    = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ListEngineVersionsInput"}
+	iListEngineVersionsOutput                   = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ListEngineVersionsOutput"}
+	iListExecutorsRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ListExecutorsRequest"}
+	iListExecutorsResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ListExecutorsResponse"}
+	iListNamedQueriesInput                      = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ListNamedQueriesInput"}
+	iListNamedQueriesOutput                     = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ListNamedQueriesOutput"}
+	iListNotebookMetadataInput                  = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ListNotebookMetadataInput"}
+	iListNotebookMetadataOutput                 = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ListNotebookMetadataOutput"}
+	iListNotebookSessionsRequest                = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ListNotebookSessionsRequest"}
+	iListNotebookSessionsResponse               = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ListNotebookSessionsResponse"}
+	iListPreparedStatementsInput                = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ListPreparedStatementsInput"}
+	iListPreparedStatementsOutput               = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ListPreparedStatementsOutput"}
+	iListQueryExecutionsInput                   = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ListQueryExecutionsInput"}
+	iListQueryExecutionsOutput                  = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ListQueryExecutionsOutput"}
+	iListSessionsRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ListSessionsRequest"}
+	iListSessionsResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ListSessionsResponse"}
+	iListTableMetadataInput                     = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ListTableMetadataInput"}
+	iListTableMetadataOutput                    = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ListTableMetadataOutput"}
+	iListTagsForResourceInput                   = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ListTagsForResourceInput"}
+	iListTagsForResourceOutput                  = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ListTagsForResourceOutput"}
+	iListWorkGroupsInput                        = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ListWorkGroupsInput"}
+	iListWorkGroupsOutput                       = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "ListWorkGroupsOutput"}
+	iPutCapacityAssignmentConfigurationInput    = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "PutCapacityAssignmentConfigurationInput"}
+	iPutCapacityAssignmentConfigurationOutput   = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "PutCapacityAssignmentConfigurationOutput"}
+	iStartCalculationExecutionRequest           = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "StartCalculationExecutionRequest"}
+	iStartCalculationExecutionResponse          = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "StartCalculationExecutionResponse"}
+	iStartQueryExecutionInput                   = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "StartQueryExecutionInput"}
+	iStartQueryExecutionOutput                  = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "StartQueryExecutionOutput"}
+	iStartSessionRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "StartSessionRequest"}
+	iStartSessionResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "StartSessionResponse"}
+	iStopCalculationExecutionRequest            = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "StopCalculationExecutionRequest"}
+	iStopCalculationExecutionResponse           = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "StopCalculationExecutionResponse"}
+	iStopQueryExecutionInput                    = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "StopQueryExecutionInput"}
+	iStopQueryExecutionOutput                   = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "StopQueryExecutionOutput"}
+	iTagResourceInput                           = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "TagResourceInput"}
+	iTagResourceOutput                          = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "TagResourceOutput"}
+	iTerminateSessionRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "TerminateSessionRequest"}
+	iTerminateSessionResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "TerminateSessionResponse"}
+	iUntagResourceInput                         = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "UntagResourceInput"}
+	iUntagResourceOutput                        = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "UntagResourceOutput"}
+	iUpdateCapacityReservationInput             = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "UpdateCapacityReservationInput"}
+	iUpdateCapacityReservationOutput            = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "UpdateCapacityReservationOutput"}
+	iUpdateDataCatalogInput                     = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "UpdateDataCatalogInput"}
+	iUpdateDataCatalogOutput                    = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "UpdateDataCatalogOutput"}
+	iUpdateNamedQueryInput                      = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "UpdateNamedQueryInput"}
+	iUpdateNamedQueryOutput                     = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "UpdateNamedQueryOutput"}
+	iUpdateNotebookInput                        = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "UpdateNotebookInput"}
+	iUpdateNotebookMetadataInput                = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "UpdateNotebookMetadataInput"}
+	iUpdateNotebookMetadataOutput               = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "UpdateNotebookMetadataOutput"}
+	iUpdateNotebookOutput                       = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "UpdateNotebookOutput"}
+	iUpdatePreparedStatementInput               = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "UpdatePreparedStatementInput"}
+	iUpdatePreparedStatementOutput              = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "UpdatePreparedStatementOutput"}
+	iUpdateWorkGroupInput                       = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "UpdateWorkGroupInput"}
+	iUpdateWorkGroupOutput                      = smithy.ShapeID{Namespace: "com.amazonaws.athena", Name: "UpdateWorkGroupOutput"}
+	pUnit                                       = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}}
+var t1 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+
+var mAclConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sAclConfiguration_S3AclOption}}
+var mApplicationDPUSizes = smithy.SchemaMembers{List: []*smithy.Schema{&sApplicationDPUSizes_ApplicationRuntimeId, &sApplicationDPUSizes_SupportedDPUSizes}}
+var m_ApplicationDPUSizesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ApplicationDPUSizesList_member}}
+var mAthenaError = smithy.SchemaMembers{List: []*smithy.Schema{&sAthenaError_ErrorCategory, &sAthenaError_ErrorType, &sAthenaError_Retryable, &sAthenaError_ErrorMessage}}
+var mAuthenticationType = smithy.SchemaMembers{List: []*smithy.Schema{&sAuthenticationType_DIRECTORY_IDENTITY}}
+var mCalculationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sCalculationConfiguration_CodeBlock}}
+var mCalculationExecutionState = smithy.SchemaMembers{List: []*smithy.Schema{&sCalculationExecutionState_CREATING, &sCalculationExecutionState_CREATED, &sCalculationExecutionState_QUEUED, &sCalculationExecutionState_RUNNING, &sCalculationExecutionState_CANCELING, &sCalculationExecutionState_CANCELED, &sCalculationExecutionState_COMPLETED, &sCalculationExecutionState_FAILED}}
+var mCalculationResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCalculationResult_StdOutS3Uri, &sCalculationResult_StdErrorS3Uri, &sCalculationResult_ResultS3Uri, &sCalculationResult_ResultType}}
+var m_CalculationsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CalculationsList_member}}
+var mCalculationStatistics = smithy.SchemaMembers{List: []*smithy.Schema{&sCalculationStatistics_DpuExecutionInMillis, &sCalculationStatistics_Progress}}
+var mCalculationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sCalculationStatus_SubmissionDateTime, &sCalculationStatus_CompletionDateTime, &sCalculationStatus_State, &sCalculationStatus_StateChangeReason}}
+var mCalculationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sCalculationSummary_CalculationExecutionId, &sCalculationSummary_Description, &sCalculationSummary_Status}}
+var mCapacityAllocation = smithy.SchemaMembers{List: []*smithy.Schema{&sCapacityAllocation_Status, &sCapacityAllocation_StatusMessage, &sCapacityAllocation_RequestTime, &sCapacityAllocation_RequestCompletionTime}}
+var mCapacityAllocationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sCapacityAllocationStatus_PENDING, &sCapacityAllocationStatus_SUCCEEDED, &sCapacityAllocationStatus_FAILED}}
+var mCapacityAssignment = smithy.SchemaMembers{List: []*smithy.Schema{&sCapacityAssignment_WorkGroupNames}}
+var mCapacityAssignmentConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sCapacityAssignmentConfiguration_CapacityReservationName, &sCapacityAssignmentConfiguration_CapacityAssignments}}
+var m_CapacityAssignmentsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CapacityAssignmentsList_member}}
+var mCapacityReservation = smithy.SchemaMembers{List: []*smithy.Schema{&sCapacityReservation_Name, &sCapacityReservation_Status, &sCapacityReservation_TargetDpus, &sCapacityReservation_AllocatedDpus, &sCapacityReservation_LastAllocation, &sCapacityReservation_LastSuccessfulAllocationTime, &sCapacityReservation_CreationTime}}
+var m_CapacityReservationsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CapacityReservationsList_member}}
+var mCapacityReservationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sCapacityReservationStatus_PENDING, &sCapacityReservationStatus_ACTIVE, &sCapacityReservationStatus_CANCELLING, &sCapacityReservationStatus_CANCELLED, &sCapacityReservationStatus_FAILED, &sCapacityReservationStatus_UPDATE_PENDING}}
+var mClassification = smithy.SchemaMembers{List: []*smithy.Schema{&sClassification_Name, &sClassification_Properties}}
+var m_ClassificationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ClassificationList_member}}
+var mCloudWatchLoggingConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sCloudWatchLoggingConfiguration_Enabled, &sCloudWatchLoggingConfiguration_LogGroup, &sCloudWatchLoggingConfiguration_LogStreamNamePrefix, &sCloudWatchLoggingConfiguration_LogTypes}}
+var mColumn = smithy.SchemaMembers{List: []*smithy.Schema{&sColumn_Name, &sColumn_Type, &sColumn_Comment}}
+var mColumnInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sColumnInfo_CatalogName, &sColumnInfo_SchemaName, &sColumnInfo_TableName, &sColumnInfo_Name, &sColumnInfo_Label, &sColumnInfo_Type, &sColumnInfo_Precision, &sColumnInfo_Scale, &sColumnInfo_Nullable, &sColumnInfo_CaseSensitive}, Seed: 1, Slots: []uint16{
+	0, 0, 2, 4, 0, 0, 8, 6, 0, 0, 0, 0, 10, 0, 0, 0, 7, 0, 0, 0, 0, 0, 3, 0,
+	5, 1, 0, 0, 0, 0, 0, 9,
+}}
+var m_ColumnInfoList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ColumnInfoList_member}}
+var m_ColumnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ColumnList_member}}
+var mColumnNullable = smithy.SchemaMembers{List: []*smithy.Schema{&sColumnNullable_NOT_NULL, &sColumnNullable_NULLABLE, &sColumnNullable_UNKNOWN}}
+var mConnectionType = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectionType_DYNAMODB, &sConnectionType_MYSQL, &sConnectionType_POSTGRESQL, &sConnectionType_REDSHIFT, &sConnectionType_ORACLE, &sConnectionType_SYNAPSE, &sConnectionType_SQLSERVER, &sConnectionType_DB2, &sConnectionType_OPENSEARCH, &sConnectionType_BIGQUERY, &sConnectionType_GOOGLECLOUDSTORAGE, &sConnectionType_HBASE, &sConnectionType_DOCUMENTDB, &sConnectionType_CMDB, &sConnectionType_TPCDS, &sConnectionType_TIMESTREAM, &sConnectionType_SAPHANA, &sConnectionType_SNOWFLAKE, &sConnectionType_DATALAKEGEN2, &sConnectionType_DB2AS400}, Seed: 42, Slots: []uint16{
+	0, 14, 0, 0, 13, 0, 17, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0,
+	1, 0, 0, 10, 0, 0, 15, 0, 19, 20, 6, 0, 16, 0, 0, 0, 0, 0, 0, 8, 0, 9, 0, 5,
+	12, 0, 18, 0, 4, 7, 0, 0, 0, 0, 0, 0, 11, 0, 0, 0,
+}}
+var mCustomerContentEncryptionConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomerContentEncryptionConfiguration_KmsKey}}
+var mDatabase = smithy.SchemaMembers{List: []*smithy.Schema{&sDatabase_Name, &sDatabase_Description, &sDatabase_Parameters}}
+var m_DatabaseList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DatabaseList_member}}
+var mDataCatalog = smithy.SchemaMembers{List: []*smithy.Schema{&sDataCatalog_Name, &sDataCatalog_Description, &sDataCatalog_Type, &sDataCatalog_Parameters, &sDataCatalog_Status, &sDataCatalog_ConnectionType, &sDataCatalog_Error}}
+var mDataCatalogStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sDataCatalogStatus_CREATE_IN_PROGRESS, &sDataCatalogStatus_CREATE_COMPLETE, &sDataCatalogStatus_CREATE_FAILED, &sDataCatalogStatus_CREATE_FAILED_CLEANUP_IN_PROGRESS, &sDataCatalogStatus_CREATE_FAILED_CLEANUP_COMPLETE, &sDataCatalogStatus_CREATE_FAILED_CLEANUP_FAILED, &sDataCatalogStatus_DELETE_IN_PROGRESS, &sDataCatalogStatus_DELETE_COMPLETE, &sDataCatalogStatus_DELETE_FAILED}, Seed: 3, Slots: []uint16{
+	0, 0, 0, 0, 8, 7, 0, 0, 0, 5, 3, 6, 0, 9, 0, 2, 0, 0, 0, 0, 0, 1, 0, 0,
+	0, 0, 4, 0, 0, 0, 0, 0,
+}}
+var mDataCatalogSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sDataCatalogSummary_CatalogName, &sDataCatalogSummary_Type, &sDataCatalogSummary_Status, &sDataCatalogSummary_ConnectionType, &sDataCatalogSummary_Error}}
+var m_DataCatalogSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DataCatalogSummaryList_member}}
+var mDataCatalogType = smithy.SchemaMembers{List: []*smithy.Schema{&sDataCatalogType_LAMBDA, &sDataCatalogType_GLUE, &sDataCatalogType_HIVE, &sDataCatalogType_FEDERATED}}
+var mDatum = smithy.SchemaMembers{List: []*smithy.Schema{&sDatum_VarCharValue}}
+var m_datumList = smithy.SchemaMembers{List: []*smithy.Schema{&s_datumList_member}}
+var mEncryptionConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sEncryptionConfiguration_EncryptionOption, &sEncryptionConfiguration_KmsKey}}
+var mEncryptionOption = smithy.SchemaMembers{List: []*smithy.Schema{&sEncryptionOption_SSE_S3, &sEncryptionOption_SSE_KMS, &sEncryptionOption_CSE_KMS}}
+var mEngineConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sEngineConfiguration_CoordinatorDpuSize, &sEngineConfiguration_MaxConcurrentDpus, &sEngineConfiguration_DefaultExecutorDpuSize, &sEngineConfiguration_AdditionalConfigs, &sEngineConfiguration_SparkProperties, &sEngineConfiguration_Classifications}}
+var mEngineVersion = smithy.SchemaMembers{List: []*smithy.Schema{&sEngineVersion_SelectedEngineVersion, &sEngineVersion_EffectiveEngineVersion}}
+var m_EngineVersionsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EngineVersionsList_member}}
+var m_ExecutionParameters = smithy.SchemaMembers{List: []*smithy.Schema{&s_ExecutionParameters_member}}
+var mExecutorsSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sExecutorsSummary_ExecutorId, &sExecutorsSummary_ExecutorType, &sExecutorsSummary_StartDateTime, &sExecutorsSummary_TerminationDateTime, &sExecutorsSummary_ExecutorState, &sExecutorsSummary_ExecutorSize}}
+var m_ExecutorsSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ExecutorsSummaryList_member}}
+var mExecutorState = smithy.SchemaMembers{List: []*smithy.Schema{&sExecutorState_CREATING, &sExecutorState_CREATED, &sExecutorState_REGISTERED, &sExecutorState_TERMINATING, &sExecutorState_TERMINATED, &sExecutorState_FAILED}}
+var mExecutorType = smithy.SchemaMembers{List: []*smithy.Schema{&sExecutorType_COORDINATOR, &sExecutorType_GATEWAY, &sExecutorType_WORKER}}
+var mFilterDefinition = smithy.SchemaMembers{List: []*smithy.Schema{&sFilterDefinition_Name}}
+var mIdentityCenterConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sIdentityCenterConfiguration_EnableIdentityCenter, &sIdentityCenterConfiguration_IdentityCenterInstanceArn}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_Message}}
+var mInvalidRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidRequestException_AthenaErrorCode, &sInvalidRequestException_Message}}
+var m_LogTypesMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_LogTypesMap_key, &s_LogTypesMap_value}}
+var m_LogTypeValuesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LogTypeValuesList_member}}
+var mManagedLoggingConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sManagedLoggingConfiguration_Enabled, &sManagedLoggingConfiguration_KmsKey}}
+var mManagedQueryResultsConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sManagedQueryResultsConfiguration_Enabled, &sManagedQueryResultsConfiguration_EncryptionConfiguration}}
+var mManagedQueryResultsConfigurationUpdates = smithy.SchemaMembers{List: []*smithy.Schema{&sManagedQueryResultsConfigurationUpdates_Enabled, &sManagedQueryResultsConfigurationUpdates_EncryptionConfiguration, &sManagedQueryResultsConfigurationUpdates_RemoveEncryptionConfiguration}}
+var mManagedQueryResultsEncryptionConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sManagedQueryResultsEncryptionConfiguration_KmsKey}}
+var mMetadataException = smithy.SchemaMembers{List: []*smithy.Schema{&sMetadataException_Message}}
+var mMonitoringConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sMonitoringConfiguration_CloudWatchLoggingConfiguration, &sMonitoringConfiguration_ManagedLoggingConfiguration, &sMonitoringConfiguration_S3LoggingConfiguration}}
+var mNamedQuery = smithy.SchemaMembers{List: []*smithy.Schema{&sNamedQuery_Name, &sNamedQuery_Description, &sNamedQuery_Database, &sNamedQuery_QueryString, &sNamedQuery_NamedQueryId, &sNamedQuery_WorkGroup}}
+var m_NamedQueryIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_NamedQueryIdList_member}}
+var m_NamedQueryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_NamedQueryList_member}}
+var mNotebookMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sNotebookMetadata_NotebookId, &sNotebookMetadata_Name, &sNotebookMetadata_WorkGroup, &sNotebookMetadata_CreationTime, &sNotebookMetadata_Type, &sNotebookMetadata_LastModifiedTime}}
+var m_NotebookMetadataArray = smithy.SchemaMembers{List: []*smithy.Schema{&s_NotebookMetadataArray_member}}
+var m_NotebookSessionsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_NotebookSessionsList_member}}
+var mNotebookSessionSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sNotebookSessionSummary_SessionId, &sNotebookSessionSummary_CreationTime}}
+var mNotebookType = smithy.SchemaMembers{List: []*smithy.Schema{&sNotebookType_IPYNB}}
+var m_ParametersMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_ParametersMap_key, &s_ParametersMap_value}}
+var mPreparedStatement = smithy.SchemaMembers{List: []*smithy.Schema{&sPreparedStatement_StatementName, &sPreparedStatement_QueryStatement, &sPreparedStatement_WorkGroupName, &sPreparedStatement_Description, &sPreparedStatement_LastModifiedTime}}
+var m_PreparedStatementDetailsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PreparedStatementDetailsList_member}}
+var m_PreparedStatementNameList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PreparedStatementNameList_member}}
+var m_PreparedStatementsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PreparedStatementsList_member}}
+var mPreparedStatementSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sPreparedStatementSummary_StatementName, &sPreparedStatementSummary_LastModifiedTime}}
+var mQueryExecution = smithy.SchemaMembers{List: []*smithy.Schema{&sQueryExecution_QueryExecutionId, &sQueryExecution_Query, &sQueryExecution_StatementType, &sQueryExecution_ManagedQueryResultsConfiguration, &sQueryExecution_ResultConfiguration, &sQueryExecution_ResultReuseConfiguration, &sQueryExecution_QueryExecutionContext, &sQueryExecution_Status, &sQueryExecution_Statistics, &sQueryExecution_WorkGroup, &sQueryExecution_EngineVersion, &sQueryExecution_ExecutionParameters, &sQueryExecution_SubstatementType, &sQueryExecution_QueryResultsS3AccessGrantsConfiguration}, Seed: 2, Slots: []uint16{
+	0, 6, 0, 0, 7, 0, 12, 0, 0, 11, 2, 0, 0, 0, 0, 0, 4, 13, 0, 14, 0, 0, 10, 3,
+	8, 5, 0, 9, 0, 0, 0, 1,
+}}
+var mQueryExecutionContext = smithy.SchemaMembers{List: []*smithy.Schema{&sQueryExecutionContext_Database, &sQueryExecutionContext_Catalog}}
+var m_QueryExecutionIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_QueryExecutionIdList_member}}
+var m_QueryExecutionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_QueryExecutionList_member}}
+var mQueryExecutionState = smithy.SchemaMembers{List: []*smithy.Schema{&sQueryExecutionState_QUEUED, &sQueryExecutionState_RUNNING, &sQueryExecutionState_SUCCEEDED, &sQueryExecutionState_FAILED, &sQueryExecutionState_CANCELLED}}
+var mQueryExecutionStatistics = smithy.SchemaMembers{List: []*smithy.Schema{&sQueryExecutionStatistics_EngineExecutionTimeInMillis, &sQueryExecutionStatistics_DataScannedInBytes, &sQueryExecutionStatistics_DataManifestLocation, &sQueryExecutionStatistics_TotalExecutionTimeInMillis, &sQueryExecutionStatistics_QueryQueueTimeInMillis, &sQueryExecutionStatistics_ServicePreProcessingTimeInMillis, &sQueryExecutionStatistics_QueryPlanningTimeInMillis, &sQueryExecutionStatistics_ServiceProcessingTimeInMillis, &sQueryExecutionStatistics_ResultReuseInformation, &sQueryExecutionStatistics_DpuCount}, Seed: 2, Slots: []uint16{
+	2, 6, 8, 0, 5, 9, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 7,
+	1, 0, 3, 10, 0, 0, 0, 0,
+}}
+var mQueryExecutionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sQueryExecutionStatus_State, &sQueryExecutionStatus_StateChangeReason, &sQueryExecutionStatus_SubmissionDateTime, &sQueryExecutionStatus_CompletionDateTime, &sQueryExecutionStatus_AthenaError}}
+var mQueryResultsS3AccessGrantsConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sQueryResultsS3AccessGrantsConfiguration_EnableS3AccessGrants, &sQueryResultsS3AccessGrantsConfiguration_CreateUserLevelPrefix, &sQueryResultsS3AccessGrantsConfiguration_AuthenticationType}}
+var mQueryResultType = smithy.SchemaMembers{List: []*smithy.Schema{&sQueryResultType_DATA_MANIFEST, &sQueryResultType_DATA_ROWS}}
+var mQueryRuntimeStatistics = smithy.SchemaMembers{List: []*smithy.Schema{&sQueryRuntimeStatistics_Timeline, &sQueryRuntimeStatistics_Rows, &sQueryRuntimeStatistics_OutputStage}}
+var mQueryRuntimeStatisticsRows = smithy.SchemaMembers{List: []*smithy.Schema{&sQueryRuntimeStatisticsRows_InputRows, &sQueryRuntimeStatisticsRows_InputBytes, &sQueryRuntimeStatisticsRows_OutputBytes, &sQueryRuntimeStatisticsRows_OutputRows}}
+var mQueryRuntimeStatisticsTimeline = smithy.SchemaMembers{List: []*smithy.Schema{&sQueryRuntimeStatisticsTimeline_QueryQueueTimeInMillis, &sQueryRuntimeStatisticsTimeline_ServicePreProcessingTimeInMillis, &sQueryRuntimeStatisticsTimeline_QueryPlanningTimeInMillis, &sQueryRuntimeStatisticsTimeline_EngineExecutionTimeInMillis, &sQueryRuntimeStatisticsTimeline_ServiceProcessingTimeInMillis, &sQueryRuntimeStatisticsTimeline_TotalExecutionTimeInMillis}}
+var mQueryStage = smithy.SchemaMembers{List: []*smithy.Schema{&sQueryStage_StageId, &sQueryStage_State, &sQueryStage_OutputBytes, &sQueryStage_OutputRows, &sQueryStage_InputBytes, &sQueryStage_InputRows, &sQueryStage_ExecutionTime, &sQueryStage_QueryStagePlan, &sQueryStage_SubStages}, Seed: 10, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 1, 0, 0, 0, 6, 9, 0, 3, 8, 2, 0,
+	7, 0, 0, 0, 5, 0, 0, 0,
+}}
+var mQueryStagePlanNode = smithy.SchemaMembers{List: []*smithy.Schema{&sQueryStagePlanNode_Name, &sQueryStagePlanNode_Identifier, &sQueryStagePlanNode_Children, &sQueryStagePlanNode_RemoteSources}}
+var m_QueryStagePlanNodes = smithy.SchemaMembers{List: []*smithy.Schema{&s_QueryStagePlanNodes_member}}
+var m_QueryStages = smithy.SchemaMembers{List: []*smithy.Schema{&s_QueryStages_member}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message, &sResourceNotFoundException_ResourceName}}
+var mResultConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sResultConfiguration_OutputLocation, &sResultConfiguration_EncryptionConfiguration, &sResultConfiguration_ExpectedBucketOwner, &sResultConfiguration_AclConfiguration}}
+var mResultConfigurationUpdates = smithy.SchemaMembers{List: []*smithy.Schema{&sResultConfigurationUpdates_OutputLocation, &sResultConfigurationUpdates_RemoveOutputLocation, &sResultConfigurationUpdates_EncryptionConfiguration, &sResultConfigurationUpdates_RemoveEncryptionConfiguration, &sResultConfigurationUpdates_ExpectedBucketOwner, &sResultConfigurationUpdates_RemoveExpectedBucketOwner, &sResultConfigurationUpdates_AclConfiguration, &sResultConfigurationUpdates_RemoveAclConfiguration}}
+var mResultReuseByAgeConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sResultReuseByAgeConfiguration_Enabled, &sResultReuseByAgeConfiguration_MaxAgeInMinutes}}
+var mResultReuseConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sResultReuseConfiguration_ResultReuseByAgeConfiguration}}
+var mResultReuseInformation = smithy.SchemaMembers{List: []*smithy.Schema{&sResultReuseInformation_ReusedPreviousResult}}
+var mResultSet = smithy.SchemaMembers{List: []*smithy.Schema{&sResultSet_Rows, &sResultSet_ResultSetMetadata}}
+var mResultSetMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sResultSetMetadata_ColumnInfo}}
+var mRow = smithy.SchemaMembers{List: []*smithy.Schema{&sRow_Data}}
+var m_RowList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RowList_member}}
+var mS3AclOption = smithy.SchemaMembers{List: []*smithy.Schema{&sS3AclOption_BUCKET_OWNER_FULL_CONTROL}}
+var mS3LoggingConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sS3LoggingConfiguration_Enabled, &sS3LoggingConfiguration_KmsKey, &sS3LoggingConfiguration_LogLocation}}
+var mSessionAlreadyExistsException = smithy.SchemaMembers{List: []*smithy.Schema{&sSessionAlreadyExistsException_Message}}
+var mSessionConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sSessionConfiguration_ExecutionRole, &sSessionConfiguration_WorkingDirectory, &sSessionConfiguration_IdleTimeoutSeconds, &sSessionConfiguration_SessionIdleTimeoutInMinutes, &sSessionConfiguration_EncryptionConfiguration}}
+var m_SessionsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SessionsList_member}}
+var mSessionState = smithy.SchemaMembers{List: []*smithy.Schema{&sSessionState_CREATING, &sSessionState_CREATED, &sSessionState_IDLE, &sSessionState_BUSY, &sSessionState_TERMINATING, &sSessionState_TERMINATED, &sSessionState_DEGRADED, &sSessionState_FAILED}}
+var mSessionStatistics = smithy.SchemaMembers{List: []*smithy.Schema{&sSessionStatistics_DpuExecutionInMillis}}
+var mSessionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sSessionStatus_StartDateTime, &sSessionStatus_LastModifiedDateTime, &sSessionStatus_EndDateTime, &sSessionStatus_IdleSinceDateTime, &sSessionStatus_State, &sSessionStatus_StateChangeReason}}
+var mSessionSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sSessionSummary_SessionId, &sSessionSummary_Description, &sSessionSummary_EngineVersion, &sSessionSummary_NotebookVersion, &sSessionSummary_Status}}
+var mStatementType = smithy.SchemaMembers{List: []*smithy.Schema{&sStatementType_DDL, &sStatementType_DML, &sStatementType_UTILITY}}
+var m_StringList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StringList_member}}
+var m_SupportedDPUSizeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SupportedDPUSizeList_member}}
+var mTableMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sTableMetadata_Name, &sTableMetadata_CreateTime, &sTableMetadata_LastAccessTime, &sTableMetadata_TableType, &sTableMetadata_Columns, &sTableMetadata_PartitionKeys, &sTableMetadata_Parameters}}
+var m_TableMetadataList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TableMetadataList_member}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var mThrottleReason = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottleReason_CONCURRENT_QUERY_LIMIT_EXCEEDED}}
+var mTooManyRequestsException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyRequestsException_Message, &sTooManyRequestsException_Reason}}
+var mUnprocessedNamedQueryId = smithy.SchemaMembers{List: []*smithy.Schema{&sUnprocessedNamedQueryId_NamedQueryId, &sUnprocessedNamedQueryId_ErrorCode, &sUnprocessedNamedQueryId_ErrorMessage}}
+var m_UnprocessedNamedQueryIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_UnprocessedNamedQueryIdList_member}}
+var mUnprocessedPreparedStatementName = smithy.SchemaMembers{List: []*smithy.Schema{&sUnprocessedPreparedStatementName_StatementName, &sUnprocessedPreparedStatementName_ErrorCode, &sUnprocessedPreparedStatementName_ErrorMessage}}
+var m_UnprocessedPreparedStatementNameList = smithy.SchemaMembers{List: []*smithy.Schema{&s_UnprocessedPreparedStatementNameList_member}}
+var mUnprocessedQueryExecutionId = smithy.SchemaMembers{List: []*smithy.Schema{&sUnprocessedQueryExecutionId_QueryExecutionId, &sUnprocessedQueryExecutionId_ErrorCode, &sUnprocessedQueryExecutionId_ErrorMessage}}
+var m_UnprocessedQueryExecutionIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_UnprocessedQueryExecutionIdList_member}}
+var mWorkGroup = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkGroup_Name, &sWorkGroup_State, &sWorkGroup_Configuration, &sWorkGroup_Description, &sWorkGroup_CreationTime, &sWorkGroup_IdentityCenterApplicationArn}}
+var mWorkGroupConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkGroupConfiguration_ResultConfiguration, &sWorkGroupConfiguration_ManagedQueryResultsConfiguration, &sWorkGroupConfiguration_EnforceWorkGroupConfiguration, &sWorkGroupConfiguration_PublishCloudWatchMetricsEnabled, &sWorkGroupConfiguration_BytesScannedCutoffPerQuery, &sWorkGroupConfiguration_RequesterPaysEnabled, &sWorkGroupConfiguration_EngineVersion, &sWorkGroupConfiguration_AdditionalConfiguration, &sWorkGroupConfiguration_ExecutionRole, &sWorkGroupConfiguration_MonitoringConfiguration, &sWorkGroupConfiguration_EngineConfiguration, &sWorkGroupConfiguration_CustomerContentEncryptionConfiguration, &sWorkGroupConfiguration_EnableMinimumEncryptionConfiguration, &sWorkGroupConfiguration_IdentityCenterConfiguration, &sWorkGroupConfiguration_QueryResultsS3AccessGrantsConfiguration}, Seed: 57, Slots: []uint16{
+	0, 0, 0, 1, 0, 13, 10, 2, 5, 0, 0, 0, 14, 0, 0, 0, 0, 9, 0, 15, 7, 0, 8, 6,
+	12, 4, 11, 0, 0, 0, 0, 3,
+}}
+var mWorkGroupConfigurationUpdates = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkGroupConfigurationUpdates_EnforceWorkGroupConfiguration, &sWorkGroupConfigurationUpdates_ResultConfigurationUpdates, &sWorkGroupConfigurationUpdates_ManagedQueryResultsConfigurationUpdates, &sWorkGroupConfigurationUpdates_PublishCloudWatchMetricsEnabled, &sWorkGroupConfigurationUpdates_BytesScannedCutoffPerQuery, &sWorkGroupConfigurationUpdates_RemoveBytesScannedCutoffPerQuery, &sWorkGroupConfigurationUpdates_RequesterPaysEnabled, &sWorkGroupConfigurationUpdates_EngineVersion, &sWorkGroupConfigurationUpdates_RemoveCustomerContentEncryptionConfiguration, &sWorkGroupConfigurationUpdates_AdditionalConfiguration, &sWorkGroupConfigurationUpdates_ExecutionRole, &sWorkGroupConfigurationUpdates_CustomerContentEncryptionConfiguration, &sWorkGroupConfigurationUpdates_EnableMinimumEncryptionConfiguration, &sWorkGroupConfigurationUpdates_QueryResultsS3AccessGrantsConfiguration, &sWorkGroupConfigurationUpdates_MonitoringConfiguration, &sWorkGroupConfigurationUpdates_EngineConfiguration}, Seed: 37, Slots: []uint16{
+	0, 0, 0, 7, 0, 0, 0, 12, 0, 5, 1, 6, 3, 16, 0, 13, 10, 0, 11, 8, 0, 9, 0, 15,
+	0, 4, 0, 14, 2, 0, 0, 0,
+}}
+var m_WorkGroupNamesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_WorkGroupNamesList_member}}
+var m_WorkGroupsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_WorkGroupsList_member}}
+var mWorkGroupState = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkGroupState_ENABLED, &sWorkGroupState_DISABLED}}
+var mWorkGroupSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkGroupSummary_Name, &sWorkGroupSummary_State, &sWorkGroupSummary_Description, &sWorkGroupSummary_CreationTime, &sWorkGroupSummary_EngineVersion, &sWorkGroupSummary_IdentityCenterApplicationArn}}
+var mBatchGetNamedQueryInput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetNamedQueryInput_NamedQueryIds}}
+var mBatchGetNamedQueryOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetNamedQueryOutput_NamedQueries, &sBatchGetNamedQueryOutput_UnprocessedNamedQueryIds}}
+var mBatchGetPreparedStatementInput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetPreparedStatementInput_PreparedStatementNames, &sBatchGetPreparedStatementInput_WorkGroup}}
+var mBatchGetPreparedStatementOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetPreparedStatementOutput_PreparedStatements, &sBatchGetPreparedStatementOutput_UnprocessedPreparedStatementNames}}
+var mBatchGetQueryExecutionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetQueryExecutionInput_QueryExecutionIds}}
+var mBatchGetQueryExecutionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetQueryExecutionOutput_QueryExecutions, &sBatchGetQueryExecutionOutput_UnprocessedQueryExecutionIds}}
+var mCancelCapacityReservationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelCapacityReservationInput_Name}}
+var mCreateCapacityReservationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCapacityReservationInput_TargetDpus, &sCreateCapacityReservationInput_Name, &sCreateCapacityReservationInput_Tags}}
+var mCreateDataCatalogInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDataCatalogInput_Name, &sCreateDataCatalogInput_Type, &sCreateDataCatalogInput_Description, &sCreateDataCatalogInput_Parameters, &sCreateDataCatalogInput_Tags}}
+var mCreateDataCatalogOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDataCatalogOutput_DataCatalog}}
+var mCreateNamedQueryInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateNamedQueryInput_Name, &sCreateNamedQueryInput_Description, &sCreateNamedQueryInput_Database, &sCreateNamedQueryInput_QueryString, &sCreateNamedQueryInput_ClientRequestToken, &sCreateNamedQueryInput_WorkGroup}}
+var mCreateNamedQueryOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateNamedQueryOutput_NamedQueryId}}
+var mCreateNotebookInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateNotebookInput_WorkGroup, &sCreateNotebookInput_Name, &sCreateNotebookInput_ClientRequestToken}}
+var mCreateNotebookOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateNotebookOutput_NotebookId}}
+var mCreatePreparedStatementInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePreparedStatementInput_StatementName, &sCreatePreparedStatementInput_WorkGroup, &sCreatePreparedStatementInput_QueryStatement, &sCreatePreparedStatementInput_Description}}
+var mCreatePresignedNotebookUrlRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePresignedNotebookUrlRequest_SessionId}}
+var mCreatePresignedNotebookUrlResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePresignedNotebookUrlResponse_NotebookUrl, &sCreatePresignedNotebookUrlResponse_AuthToken, &sCreatePresignedNotebookUrlResponse_AuthTokenExpirationTime}}
+var mCreateWorkGroupInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateWorkGroupInput_Name, &sCreateWorkGroupInput_Configuration, &sCreateWorkGroupInput_Description, &sCreateWorkGroupInput_Tags}}
+var mDeleteCapacityReservationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteCapacityReservationInput_Name}}
+var mDeleteDataCatalogInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDataCatalogInput_Name, &sDeleteDataCatalogInput_DeleteCatalogOnly}}
+var mDeleteDataCatalogOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDataCatalogOutput_DataCatalog}}
+var mDeleteNamedQueryInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteNamedQueryInput_NamedQueryId}}
+var mDeleteNotebookInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteNotebookInput_NotebookId}}
+var mDeletePreparedStatementInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeletePreparedStatementInput_StatementName, &sDeletePreparedStatementInput_WorkGroup}}
+var mDeleteWorkGroupInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteWorkGroupInput_WorkGroup, &sDeleteWorkGroupInput_RecursiveDeleteOption}}
+var mExportNotebookInput = smithy.SchemaMembers{List: []*smithy.Schema{&sExportNotebookInput_NotebookId}}
+var mExportNotebookOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sExportNotebookOutput_NotebookMetadata, &sExportNotebookOutput_Payload}}
+var mGetCalculationExecutionCodeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCalculationExecutionCodeRequest_CalculationExecutionId}}
+var mGetCalculationExecutionCodeResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCalculationExecutionCodeResponse_CodeBlock}}
+var mGetCalculationExecutionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCalculationExecutionRequest_CalculationExecutionId}}
+var mGetCalculationExecutionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCalculationExecutionResponse_CalculationExecutionId, &sGetCalculationExecutionResponse_SessionId, &sGetCalculationExecutionResponse_Description, &sGetCalculationExecutionResponse_WorkingDirectory, &sGetCalculationExecutionResponse_Status, &sGetCalculationExecutionResponse_Statistics, &sGetCalculationExecutionResponse_Result}}
+var mGetCalculationExecutionStatusRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCalculationExecutionStatusRequest_CalculationExecutionId}}
+var mGetCalculationExecutionStatusResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCalculationExecutionStatusResponse_Status, &sGetCalculationExecutionStatusResponse_Statistics}}
+var mGetCapacityAssignmentConfigurationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCapacityAssignmentConfigurationInput_CapacityReservationName}}
+var mGetCapacityAssignmentConfigurationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCapacityAssignmentConfigurationOutput_CapacityAssignmentConfiguration}}
+var mGetCapacityReservationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCapacityReservationInput_Name}}
+var mGetCapacityReservationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCapacityReservationOutput_CapacityReservation}}
+var mGetDatabaseInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDatabaseInput_CatalogName, &sGetDatabaseInput_DatabaseName, &sGetDatabaseInput_WorkGroup}}
+var mGetDatabaseOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDatabaseOutput_Database}}
+var mGetDataCatalogInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDataCatalogInput_Name, &sGetDataCatalogInput_WorkGroup}}
+var mGetDataCatalogOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDataCatalogOutput_DataCatalog}}
+var mGetNamedQueryInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetNamedQueryInput_NamedQueryId}}
+var mGetNamedQueryOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetNamedQueryOutput_NamedQuery}}
+var mGetNotebookMetadataInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetNotebookMetadataInput_NotebookId}}
+var mGetNotebookMetadataOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetNotebookMetadataOutput_NotebookMetadata}}
+var mGetPreparedStatementInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPreparedStatementInput_StatementName, &sGetPreparedStatementInput_WorkGroup}}
+var mGetPreparedStatementOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPreparedStatementOutput_PreparedStatement}}
+var mGetQueryExecutionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetQueryExecutionInput_QueryExecutionId}}
+var mGetQueryExecutionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetQueryExecutionOutput_QueryExecution}}
+var mGetQueryResultsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetQueryResultsInput_QueryExecutionId, &sGetQueryResultsInput_NextToken, &sGetQueryResultsInput_MaxResults, &sGetQueryResultsInput_QueryResultType}}
+var mGetQueryResultsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetQueryResultsOutput_UpdateCount, &sGetQueryResultsOutput_ResultSet, &sGetQueryResultsOutput_NextToken}}
+var mGetQueryRuntimeStatisticsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetQueryRuntimeStatisticsInput_QueryExecutionId}}
+var mGetQueryRuntimeStatisticsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetQueryRuntimeStatisticsOutput_QueryRuntimeStatistics}}
+var mGetResourceDashboardRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourceDashboardRequest_ResourceARN}}
+var mGetResourceDashboardResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourceDashboardResponse_Url}}
+var mGetSessionEndpointRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSessionEndpointRequest_SessionId}}
+var mGetSessionEndpointResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSessionEndpointResponse_EndpointUrl, &sGetSessionEndpointResponse_AuthToken, &sGetSessionEndpointResponse_AuthTokenExpirationTime}}
+var mGetSessionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSessionRequest_SessionId}}
+var mGetSessionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSessionResponse_SessionId, &sGetSessionResponse_Description, &sGetSessionResponse_WorkGroup, &sGetSessionResponse_EngineVersion, &sGetSessionResponse_EngineConfiguration, &sGetSessionResponse_NotebookVersion, &sGetSessionResponse_MonitoringConfiguration, &sGetSessionResponse_SessionConfiguration, &sGetSessionResponse_Status, &sGetSessionResponse_Statistics}, Seed: 2, Slots: []uint16{
+	0, 0, 8, 0, 0, 0, 2, 0, 0, 4, 6, 0, 0, 0, 7, 0, 5, 0, 0, 0, 0, 0, 3, 1,
+	9, 0, 0, 10, 0, 0, 0, 0,
+}}
+var mGetSessionStatusRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSessionStatusRequest_SessionId}}
+var mGetSessionStatusResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSessionStatusResponse_SessionId, &sGetSessionStatusResponse_Status}}
+var mGetTableMetadataInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTableMetadataInput_CatalogName, &sGetTableMetadataInput_DatabaseName, &sGetTableMetadataInput_TableName, &sGetTableMetadataInput_WorkGroup}}
+var mGetTableMetadataOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTableMetadataOutput_TableMetadata}}
+var mGetWorkGroupInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetWorkGroupInput_WorkGroup}}
+var mGetWorkGroupOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetWorkGroupOutput_WorkGroup}}
+var mImportNotebookInput = smithy.SchemaMembers{List: []*smithy.Schema{&sImportNotebookInput_WorkGroup, &sImportNotebookInput_Name, &sImportNotebookInput_Payload, &sImportNotebookInput_Type, &sImportNotebookInput_NotebookS3LocationUri, &sImportNotebookInput_ClientRequestToken}}
+var mImportNotebookOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sImportNotebookOutput_NotebookId}}
+var mListApplicationDPUSizesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListApplicationDPUSizesInput_MaxResults, &sListApplicationDPUSizesInput_NextToken}}
+var mListApplicationDPUSizesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListApplicationDPUSizesOutput_ApplicationDPUSizes, &sListApplicationDPUSizesOutput_NextToken}}
+var mListCalculationExecutionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListCalculationExecutionsRequest_SessionId, &sListCalculationExecutionsRequest_StateFilter, &sListCalculationExecutionsRequest_MaxResults, &sListCalculationExecutionsRequest_NextToken}}
+var mListCalculationExecutionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListCalculationExecutionsResponse_NextToken, &sListCalculationExecutionsResponse_Calculations}}
+var mListCapacityReservationsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListCapacityReservationsInput_NextToken, &sListCapacityReservationsInput_MaxResults}}
+var mListCapacityReservationsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListCapacityReservationsOutput_NextToken, &sListCapacityReservationsOutput_CapacityReservations}}
+var mListDatabasesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListDatabasesInput_CatalogName, &sListDatabasesInput_NextToken, &sListDatabasesInput_MaxResults, &sListDatabasesInput_WorkGroup}}
+var mListDatabasesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListDatabasesOutput_DatabaseList, &sListDatabasesOutput_NextToken}}
+var mListDataCatalogsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListDataCatalogsInput_NextToken, &sListDataCatalogsInput_MaxResults, &sListDataCatalogsInput_WorkGroup}}
+var mListDataCatalogsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListDataCatalogsOutput_DataCatalogsSummary, &sListDataCatalogsOutput_NextToken}}
+var mListEngineVersionsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListEngineVersionsInput_NextToken, &sListEngineVersionsInput_MaxResults}}
+var mListEngineVersionsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListEngineVersionsOutput_EngineVersions, &sListEngineVersionsOutput_NextToken}}
+var mListExecutorsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListExecutorsRequest_SessionId, &sListExecutorsRequest_ExecutorStateFilter, &sListExecutorsRequest_MaxResults, &sListExecutorsRequest_NextToken}}
+var mListExecutorsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListExecutorsResponse_SessionId, &sListExecutorsResponse_NextToken, &sListExecutorsResponse_ExecutorsSummary}}
+var mListNamedQueriesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListNamedQueriesInput_NextToken, &sListNamedQueriesInput_MaxResults, &sListNamedQueriesInput_WorkGroup}}
+var mListNamedQueriesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListNamedQueriesOutput_NamedQueryIds, &sListNamedQueriesOutput_NextToken}}
+var mListNotebookMetadataInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListNotebookMetadataInput_Filters, &sListNotebookMetadataInput_NextToken, &sListNotebookMetadataInput_MaxResults, &sListNotebookMetadataInput_WorkGroup}}
+var mListNotebookMetadataOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListNotebookMetadataOutput_NextToken, &sListNotebookMetadataOutput_NotebookMetadataList}}
+var mListNotebookSessionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListNotebookSessionsRequest_NotebookId, &sListNotebookSessionsRequest_MaxResults, &sListNotebookSessionsRequest_NextToken}}
+var mListNotebookSessionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListNotebookSessionsResponse_NotebookSessionsList, &sListNotebookSessionsResponse_NextToken}}
+var mListPreparedStatementsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListPreparedStatementsInput_WorkGroup, &sListPreparedStatementsInput_NextToken, &sListPreparedStatementsInput_MaxResults}}
+var mListPreparedStatementsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListPreparedStatementsOutput_PreparedStatements, &sListPreparedStatementsOutput_NextToken}}
+var mListQueryExecutionsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListQueryExecutionsInput_NextToken, &sListQueryExecutionsInput_MaxResults, &sListQueryExecutionsInput_WorkGroup}}
+var mListQueryExecutionsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListQueryExecutionsOutput_QueryExecutionIds, &sListQueryExecutionsOutput_NextToken}}
+var mListSessionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListSessionsRequest_WorkGroup, &sListSessionsRequest_StateFilter, &sListSessionsRequest_MaxResults, &sListSessionsRequest_NextToken}}
+var mListSessionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListSessionsResponse_NextToken, &sListSessionsResponse_Sessions}}
+var mListTableMetadataInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTableMetadataInput_CatalogName, &sListTableMetadataInput_DatabaseName, &sListTableMetadataInput_Expression, &sListTableMetadataInput_NextToken, &sListTableMetadataInput_MaxResults, &sListTableMetadataInput_WorkGroup}}
+var mListTableMetadataOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTableMetadataOutput_TableMetadataList, &sListTableMetadataOutput_NextToken}}
+var mListTagsForResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceInput_ResourceARN, &sListTagsForResourceInput_NextToken, &sListTagsForResourceInput_MaxResults}}
+var mListTagsForResourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceOutput_Tags, &sListTagsForResourceOutput_NextToken}}
+var mListWorkGroupsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListWorkGroupsInput_NextToken, &sListWorkGroupsInput_MaxResults}}
+var mListWorkGroupsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListWorkGroupsOutput_WorkGroups, &sListWorkGroupsOutput_NextToken}}
+var mPutCapacityAssignmentConfigurationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutCapacityAssignmentConfigurationInput_CapacityReservationName, &sPutCapacityAssignmentConfigurationInput_CapacityAssignments}}
+var mStartCalculationExecutionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartCalculationExecutionRequest_SessionId, &sStartCalculationExecutionRequest_Description, &sStartCalculationExecutionRequest_CalculationConfiguration, &sStartCalculationExecutionRequest_CodeBlock, &sStartCalculationExecutionRequest_ClientRequestToken}}
+var mStartCalculationExecutionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartCalculationExecutionResponse_CalculationExecutionId, &sStartCalculationExecutionResponse_State}}
+var mStartQueryExecutionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartQueryExecutionInput_QueryString, &sStartQueryExecutionInput_ClientRequestToken, &sStartQueryExecutionInput_QueryExecutionContext, &sStartQueryExecutionInput_ResultConfiguration, &sStartQueryExecutionInput_WorkGroup, &sStartQueryExecutionInput_ExecutionParameters, &sStartQueryExecutionInput_ResultReuseConfiguration, &sStartQueryExecutionInput_EngineConfiguration}}
+var mStartQueryExecutionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartQueryExecutionOutput_QueryExecutionId}}
+var mStartSessionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartSessionRequest_Description, &sStartSessionRequest_WorkGroup, &sStartSessionRequest_EngineConfiguration, &sStartSessionRequest_ExecutionRole, &sStartSessionRequest_MonitoringConfiguration, &sStartSessionRequest_NotebookVersion, &sStartSessionRequest_SessionIdleTimeoutInMinutes, &sStartSessionRequest_ClientRequestToken, &sStartSessionRequest_Tags, &sStartSessionRequest_CopyWorkGroupTags}, Seed: 2, Slots: []uint16{
+	0, 0, 0, 10, 0, 0, 1, 7, 0, 0, 6, 0, 0, 9, 5, 0, 3, 0, 0, 0, 4, 0, 2, 8,
+	0, 0, 0, 0, 0, 0, 0, 0,
+}}
+var mStartSessionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartSessionResponse_SessionId, &sStartSessionResponse_State}}
+var mStopCalculationExecutionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStopCalculationExecutionRequest_CalculationExecutionId}}
+var mStopCalculationExecutionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStopCalculationExecutionResponse_State}}
+var mStopQueryExecutionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sStopQueryExecutionInput_QueryExecutionId}}
+var mTagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceInput_ResourceARN, &sTagResourceInput_Tags}}
+var mTerminateSessionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTerminateSessionRequest_SessionId}}
+var mTerminateSessionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sTerminateSessionResponse_State}}
+var mUntagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceInput_ResourceARN, &sUntagResourceInput_TagKeys}}
+var mUpdateCapacityReservationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateCapacityReservationInput_TargetDpus, &sUpdateCapacityReservationInput_Name}}
+var mUpdateDataCatalogInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDataCatalogInput_Name, &sUpdateDataCatalogInput_Type, &sUpdateDataCatalogInput_Description, &sUpdateDataCatalogInput_Parameters}}
+var mUpdateNamedQueryInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateNamedQueryInput_NamedQueryId, &sUpdateNamedQueryInput_Name, &sUpdateNamedQueryInput_Description, &sUpdateNamedQueryInput_QueryString}}
+var mUpdateNotebookInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateNotebookInput_NotebookId, &sUpdateNotebookInput_Payload, &sUpdateNotebookInput_Type, &sUpdateNotebookInput_SessionId, &sUpdateNotebookInput_ClientRequestToken}}
+var mUpdateNotebookMetadataInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateNotebookMetadataInput_NotebookId, &sUpdateNotebookMetadataInput_ClientRequestToken, &sUpdateNotebookMetadataInput_Name}}
+var mUpdatePreparedStatementInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePreparedStatementInput_StatementName, &sUpdatePreparedStatementInput_WorkGroup, &sUpdatePreparedStatementInput_QueryStatement, &sUpdatePreparedStatementInput_Description}}
+var mUpdateWorkGroupInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateWorkGroupInput_WorkGroup, &sUpdateWorkGroupInput_Description, &sUpdateWorkGroupInput_ConfigurationUpdates, &sUpdateWorkGroupInput_State}}
+
+var sBatchGetNamedQuery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetNamedQuery, Type: smithy.ShapeTypeOperation})
+var sBatchGetPreparedStatement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetPreparedStatement, Type: smithy.ShapeTypeOperation})
+var sBatchGetQueryExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetQueryExecution, Type: smithy.ShapeTypeOperation})
+var sCancelCapacityReservation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelCapacityReservation, Type: smithy.ShapeTypeOperation})
+var sCreateCapacityReservation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCapacityReservation, Type: smithy.ShapeTypeOperation})
+var sCreateDataCatalog = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDataCatalog, Type: smithy.ShapeTypeOperation})
+var sCreateNamedQuery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateNamedQuery, Type: smithy.ShapeTypeOperation})
+var sCreateNotebook = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateNotebook, Type: smithy.ShapeTypeOperation})
+var sCreatePreparedStatement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePreparedStatement, Type: smithy.ShapeTypeOperation})
+var sCreatePresignedNotebookUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePresignedNotebookUrl, Type: smithy.ShapeTypeOperation})
+var sCreateWorkGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWorkGroup, Type: smithy.ShapeTypeOperation})
+var sDeleteCapacityReservation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCapacityReservation, Type: smithy.ShapeTypeOperation})
+var sDeleteDataCatalog = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDataCatalog, Type: smithy.ShapeTypeOperation})
+var sDeleteNamedQuery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteNamedQuery, Type: smithy.ShapeTypeOperation})
+var sDeleteNotebook = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteNotebook, Type: smithy.ShapeTypeOperation})
+var sDeletePreparedStatement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePreparedStatement, Type: smithy.ShapeTypeOperation})
+var sDeleteWorkGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWorkGroup, Type: smithy.ShapeTypeOperation})
+var sExportNotebook = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportNotebook, Type: smithy.ShapeTypeOperation})
+var sGetCalculationExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCalculationExecution, Type: smithy.ShapeTypeOperation})
+var sGetCalculationExecutionCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCalculationExecutionCode, Type: smithy.ShapeTypeOperation})
+var sGetCalculationExecutionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCalculationExecutionStatus, Type: smithy.ShapeTypeOperation})
+var sGetCapacityAssignmentConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCapacityAssignmentConfiguration, Type: smithy.ShapeTypeOperation})
+var sGetCapacityReservation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCapacityReservation, Type: smithy.ShapeTypeOperation})
+var sGetDatabase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDatabase, Type: smithy.ShapeTypeOperation})
+var sGetDataCatalog = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDataCatalog, Type: smithy.ShapeTypeOperation})
+var sGetNamedQuery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNamedQuery, Type: smithy.ShapeTypeOperation})
+var sGetNotebookMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNotebookMetadata, Type: smithy.ShapeTypeOperation})
+var sGetPreparedStatement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPreparedStatement, Type: smithy.ShapeTypeOperation})
+var sGetQueryExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryExecution, Type: smithy.ShapeTypeOperation})
+var sGetQueryResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryResults, Type: smithy.ShapeTypeOperation})
+var sGetQueryRuntimeStatistics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryRuntimeStatistics, Type: smithy.ShapeTypeOperation})
+var sGetResourceDashboard = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceDashboard, Type: smithy.ShapeTypeOperation})
+var sGetSession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSession, Type: smithy.ShapeTypeOperation})
+var sGetSessionEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSessionEndpoint, Type: smithy.ShapeTypeOperation})
+var sGetSessionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSessionStatus, Type: smithy.ShapeTypeOperation})
+var sGetTableMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableMetadata, Type: smithy.ShapeTypeOperation})
+var sGetWorkGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWorkGroup, Type: smithy.ShapeTypeOperation})
+var sImportNotebook = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportNotebook, Type: smithy.ShapeTypeOperation})
+var sListApplicationDPUSizes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListApplicationDPUSizes, Type: smithy.ShapeTypeOperation})
+var sListCalculationExecutions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCalculationExecutions, Type: smithy.ShapeTypeOperation})
+var sListCapacityReservations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCapacityReservations, Type: smithy.ShapeTypeOperation})
+var sListDatabases = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDatabases, Type: smithy.ShapeTypeOperation})
+var sListDataCatalogs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDataCatalogs, Type: smithy.ShapeTypeOperation})
+var sListEngineVersions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEngineVersions, Type: smithy.ShapeTypeOperation})
+var sListExecutors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExecutors, Type: smithy.ShapeTypeOperation})
+var sListNamedQueries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNamedQueries, Type: smithy.ShapeTypeOperation})
+var sListNotebookMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNotebookMetadata, Type: smithy.ShapeTypeOperation})
+var sListNotebookSessions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNotebookSessions, Type: smithy.ShapeTypeOperation})
+var sListPreparedStatements = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPreparedStatements, Type: smithy.ShapeTypeOperation})
+var sListQueryExecutions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListQueryExecutions, Type: smithy.ShapeTypeOperation})
+var sListSessions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSessions, Type: smithy.ShapeTypeOperation})
+var sListTableMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTableMetadata, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation})
+var sListWorkGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkGroups, Type: smithy.ShapeTypeOperation})
+var sPutCapacityAssignmentConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutCapacityAssignmentConfiguration, Type: smithy.ShapeTypeOperation})
+var sStartCalculationExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartCalculationExecution, Type: smithy.ShapeTypeOperation})
+var sStartQueryExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartQueryExecution, Type: smithy.ShapeTypeOperation})
+var sStartSession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSession, Type: smithy.ShapeTypeOperation})
+var sStopCalculationExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopCalculationExecution, Type: smithy.ShapeTypeOperation})
+var sStopQueryExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopQueryExecution, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation})
+var sTerminateSession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTerminateSession, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation})
+var sUpdateCapacityReservation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCapacityReservation, Type: smithy.ShapeTypeOperation})
+var sUpdateDataCatalog = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDataCatalog, Type: smithy.ShapeTypeOperation})
+var sUpdateNamedQuery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNamedQuery, Type: smithy.ShapeTypeOperation})
+var sUpdateNotebook = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNotebook, Type: smithy.ShapeTypeOperation})
+var sUpdateNotebookMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNotebookMetadata, Type: smithy.ShapeTypeOperation})
+var sUpdatePreparedStatement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePreparedStatement, Type: smithy.ShapeTypeOperation})
+var sUpdateWorkGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWorkGroup, Type: smithy.ShapeTypeOperation})
+var s_AmazonAthena = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonAthena, Type: smithy.ShapeTypeService})
+var sAclConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAclConfiguration, Members: &mAclConfiguration, Type: smithy.ShapeTypeStructure})
+var s_Age = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Age, Type: smithy.ShapeTypeInteger})
+var s_AllocatedDpusInteger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AllocatedDpusInteger, Type: smithy.ShapeTypeInteger})
+var s_AmazonResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString})
+var sApplicationDPUSizes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplicationDPUSizes, Members: &mApplicationDPUSizes, Type: smithy.ShapeTypeStructure})
+var s_ApplicationDPUSizesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApplicationDPUSizesList, Members: &m_ApplicationDPUSizesList, Type: smithy.ShapeTypeList})
+var sAthenaError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAthenaError, Members: &mAthenaError, Type: smithy.ShapeTypeStructure})
+var sAuthenticationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuthenticationType, Members: &mAuthenticationType, Type: smithy.ShapeTypeEnum})
+var s_AuthToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuthToken, Type: smithy.ShapeTypeString})
+var s_AwsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsAccountId, Type: smithy.ShapeTypeString})
+var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var s_BoxedBoolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BoxedBoolean, Type: smithy.ShapeTypeBoolean})
+var s_BytesScannedCutoffValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BytesScannedCutoffValue, Type: smithy.ShapeTypeLong})
+var sCalculationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCalculationConfiguration, Members: &mCalculationConfiguration, Type: smithy.ShapeTypeStructure})
+var s_CalculationExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CalculationExecutionId, Type: smithy.ShapeTypeString})
+var sCalculationExecutionState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCalculationExecutionState, Members: &mCalculationExecutionState, Type: smithy.ShapeTypeEnum})
+var sCalculationResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCalculationResult, Members: &mCalculationResult, Type: smithy.ShapeTypeStructure})
+var s_CalculationResultType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CalculationResultType, Type: smithy.ShapeTypeString})
+var s_CalculationsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CalculationsList, Members: &m_CalculationsList, Type: smithy.ShapeTypeList})
+var sCalculationStatistics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCalculationStatistics, Members: &mCalculationStatistics, Type: smithy.ShapeTypeStructure})
+var sCalculationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCalculationStatus, Members: &mCalculationStatus, Type: smithy.ShapeTypeStructure})
+var sCalculationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCalculationSummary, Members: &mCalculationSummary, Type: smithy.ShapeTypeStructure})
+var sCapacityAllocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCapacityAllocation, Members: &mCapacityAllocation, Type: smithy.ShapeTypeStructure})
+var sCapacityAllocationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCapacityAllocationStatus, Members: &mCapacityAllocationStatus, Type: smithy.ShapeTypeEnum})
+var sCapacityAssignment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCapacityAssignment, Members: &mCapacityAssignment, Type: smithy.ShapeTypeStructure})
+var sCapacityAssignmentConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCapacityAssignmentConfiguration, Members: &mCapacityAssignmentConfiguration, Type: smithy.ShapeTypeStructure})
+var s_CapacityAssignmentsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CapacityAssignmentsList, Members: &m_CapacityAssignmentsList, Type: smithy.ShapeTypeList})
+var sCapacityReservation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCapacityReservation, Members: &mCapacityReservation, Type: smithy.ShapeTypeStructure})
+var s_CapacityReservationName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CapacityReservationName, Type: smithy.ShapeTypeString})
+var s_CapacityReservationsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CapacityReservationsList, Members: &m_CapacityReservationsList, Type: smithy.ShapeTypeList})
+var sCapacityReservationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCapacityReservationStatus, Members: &mCapacityReservationStatus, Type: smithy.ShapeTypeEnum})
+var s_CatalogNameString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CatalogNameString, Type: smithy.ShapeTypeString})
+var sClassification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClassification, Members: &mClassification, Type: smithy.ShapeTypeStructure})
+var s_ClassificationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClassificationList, Members: &m_ClassificationList, Type: smithy.ShapeTypeList})
+var s_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sCloudWatchLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudWatchLoggingConfiguration, Members: &mCloudWatchLoggingConfiguration, Type: smithy.ShapeTypeStructure})
+var s_CodeBlock = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CodeBlock, Type: smithy.ShapeTypeString})
+var sColumn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iColumn, Members: &mColumn, Type: smithy.ShapeTypeStructure})
+var sColumnInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iColumnInfo, Members: &mColumnInfo, Type: smithy.ShapeTypeStructure})
+var s_ColumnInfoList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ColumnInfoList, Members: &m_ColumnInfoList, Type: smithy.ShapeTypeList})
+var s_ColumnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ColumnList, Members: &m_ColumnList, Type: smithy.ShapeTypeList})
+var sColumnNullable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iColumnNullable, Members: &mColumnNullable, Type: smithy.ShapeTypeEnum})
+var s_CommentString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CommentString, Type: smithy.ShapeTypeString})
+var sConnectionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectionType, Members: &mConnectionType, Type: smithy.ShapeTypeEnum})
+var s_CoordinatorDpuSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CoordinatorDpuSize, Type: smithy.ShapeTypeInteger})
+var sCustomerContentEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomerContentEncryptionConfiguration, Members: &mCustomerContentEncryptionConfiguration, Type: smithy.ShapeTypeStructure})
+var sDatabase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatabase, Members: &mDatabase, Type: smithy.ShapeTypeStructure})
+var s_DatabaseList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatabaseList, Members: &m_DatabaseList, Type: smithy.ShapeTypeList})
+var s_DatabaseString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatabaseString, Type: smithy.ShapeTypeString})
+var sDataCatalog = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataCatalog, Members: &mDataCatalog, Type: smithy.ShapeTypeStructure})
+var sDataCatalogStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataCatalogStatus, Members: &mDataCatalogStatus, Type: smithy.ShapeTypeEnum})
+var sDataCatalogSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataCatalogSummary, Members: &mDataCatalogSummary, Type: smithy.ShapeTypeStructure})
+var s_DataCatalogSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataCatalogSummaryList, Members: &m_DataCatalogSummaryList, Type: smithy.ShapeTypeList})
+var sDataCatalogType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataCatalogType, Members: &mDataCatalogType, Type: smithy.ShapeTypeEnum})
+var s_Date = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sDatum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatum, Members: &mDatum, Type: smithy.ShapeTypeStructure})
+var s_datumList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_datumList, Members: &m_datumList, Type: smithy.ShapeTypeList})
+var s_datumString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_datumString, Type: smithy.ShapeTypeString})
+var s_DefaultExecutorDpuSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DefaultExecutorDpuSize, Type: smithy.ShapeTypeInteger})
+var s_DescriptionString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescriptionString, Type: smithy.ShapeTypeString})
+var s_DpuCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DpuCount, Type: smithy.ShapeTypeDouble})
+var sEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure})
+var sEncryptionOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionOption, Members: &mEncryptionOption, Type: smithy.ShapeTypeEnum})
+var sEngineConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEngineConfiguration, Members: &mEngineConfiguration, Type: smithy.ShapeTypeStructure})
+var sEngineVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEngineVersion, Members: &mEngineVersion, Type: smithy.ShapeTypeStructure})
+var s_EngineVersionsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EngineVersionsList, Members: &m_EngineVersionsList, Type: smithy.ShapeTypeList})
+var s_ErrorCategory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorCategory, Type: smithy.ShapeTypeInteger})
+var s_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorCode, Type: smithy.ShapeTypeString})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_ErrorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorType, Type: smithy.ShapeTypeInteger})
+var s_ExecutionParameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExecutionParameter, Type: smithy.ShapeTypeString})
+var s_ExecutionParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExecutionParameters, Members: &m_ExecutionParameters, Type: smithy.ShapeTypeList})
+var s_ExecutorId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExecutorId, Type: smithy.ShapeTypeString})
+var sExecutorsSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecutorsSummary, Members: &mExecutorsSummary, Type: smithy.ShapeTypeStructure})
+var s_ExecutorsSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExecutorsSummaryList, Members: &m_ExecutorsSummaryList, Type: smithy.ShapeTypeList})
+var sExecutorState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecutorState, Members: &mExecutorState, Type: smithy.ShapeTypeEnum})
+var sExecutorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecutorType, Members: &mExecutorType, Type: smithy.ShapeTypeEnum})
+var s_ExpressionString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExpressionString, Type: smithy.ShapeTypeString})
+var sFilterDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilterDefinition, Members: &mFilterDefinition, Type: smithy.ShapeTypeStructure})
+var s_IdempotencyToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString})
+var s_IdentityCenterApplicationArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdentityCenterApplicationArn, Type: smithy.ShapeTypeString})
+var sIdentityCenterConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdentityCenterConfiguration, Members: &mIdentityCenterConfiguration, Type: smithy.ShapeTypeStructure})
+var s_IdentityCenterInstanceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdentityCenterInstanceArn, Type: smithy.ShapeTypeString})
+var s_Integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var sInvalidRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRequestException, Members: &mInvalidRequestException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_KeyString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyString, Type: smithy.ShapeTypeString})
+var s_KmsKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKey, Type: smithy.ShapeTypeString})
+var s_LogGroupName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogGroupName, Type: smithy.ShapeTypeString})
+var s_LogStreamNamePrefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogStreamNamePrefix, Type: smithy.ShapeTypeString})
+var s_LogTypeKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogTypeKey, Type: smithy.ShapeTypeString})
+var s_LogTypesMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogTypesMap, Members: &m_LogTypesMap, Type: smithy.ShapeTypeMap})
+var s_LogTypeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogTypeValue, Type: smithy.ShapeTypeString})
+var s_LogTypeValuesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogTypeValuesList, Members: &m_LogTypeValuesList, Type: smithy.ShapeTypeList})
+var s_Long = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sManagedLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManagedLoggingConfiguration, Members: &mManagedLoggingConfiguration, Type: smithy.ShapeTypeStructure})
+var sManagedQueryResultsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManagedQueryResultsConfiguration, Members: &mManagedQueryResultsConfiguration, Type: smithy.ShapeTypeStructure})
+var sManagedQueryResultsConfigurationUpdates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManagedQueryResultsConfigurationUpdates, Members: &mManagedQueryResultsConfigurationUpdates, Type: smithy.ShapeTypeStructure})
+var sManagedQueryResultsEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManagedQueryResultsEncryptionConfiguration, Members: &mManagedQueryResultsEncryptionConfiguration, Type: smithy.ShapeTypeStructure})
+var s_MaxApplicationDPUSizesCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxApplicationDPUSizesCount, Type: smithy.ShapeTypeInteger})
+var s_MaxCalculationsCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxCalculationsCount, Type: smithy.ShapeTypeInteger})
+var s_MaxCapacityReservationsCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxCapacityReservationsCount, Type: smithy.ShapeTypeInteger})
+var s_MaxConcurrentDpus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxConcurrentDpus, Type: smithy.ShapeTypeInteger})
+var s_MaxDatabasesCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxDatabasesCount, Type: smithy.ShapeTypeInteger})
+var s_MaxDataCatalogsCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxDataCatalogsCount, Type: smithy.ShapeTypeInteger})
+var s_MaxEngineVersionsCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxEngineVersionsCount, Type: smithy.ShapeTypeInteger})
+var s_MaxListExecutorsCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxListExecutorsCount, Type: smithy.ShapeTypeInteger})
+var s_MaxNamedQueriesCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxNamedQueriesCount, Type: smithy.ShapeTypeInteger})
+var s_MaxNotebooksCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxNotebooksCount, Type: smithy.ShapeTypeInteger})
+var s_MaxPreparedStatementsCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxPreparedStatementsCount, Type: smithy.ShapeTypeInteger})
+var s_MaxQueryExecutionsCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxQueryExecutionsCount, Type: smithy.ShapeTypeInteger})
+var s_MaxQueryResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxQueryResults, Type: smithy.ShapeTypeInteger})
+var s_MaxSessionsCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxSessionsCount, Type: smithy.ShapeTypeInteger})
+var s_MaxTableMetadataCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxTableMetadataCount, Type: smithy.ShapeTypeInteger})
+var s_MaxTagsCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxTagsCount, Type: smithy.ShapeTypeInteger})
+var s_MaxWorkGroupsCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxWorkGroupsCount, Type: smithy.ShapeTypeInteger})
+var sMetadataException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetadataException, Members: &mMetadataException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sMonitoringConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMonitoringConfiguration, Members: &mMonitoringConfiguration, Type: smithy.ShapeTypeStructure})
+var sNamedQuery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNamedQuery, Members: &mNamedQuery, Type: smithy.ShapeTypeStructure})
+var s_NamedQueryDescriptionString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NamedQueryDescriptionString, Type: smithy.ShapeTypeString})
+var s_NamedQueryId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NamedQueryId, Type: smithy.ShapeTypeString})
+var s_NamedQueryIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NamedQueryIdList, Members: &m_NamedQueryIdList, Type: smithy.ShapeTypeList})
+var s_NamedQueryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NamedQueryList, Members: &m_NamedQueryList, Type: smithy.ShapeTypeList})
+var s_NameString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NameString, Type: smithy.ShapeTypeString})
+var s_NotebookId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NotebookId, Type: smithy.ShapeTypeString})
+var sNotebookMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotebookMetadata, Members: &mNotebookMetadata, Type: smithy.ShapeTypeStructure})
+var s_NotebookMetadataArray = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NotebookMetadataArray, Members: &m_NotebookMetadataArray, Type: smithy.ShapeTypeList})
+var s_NotebookName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NotebookName, Type: smithy.ShapeTypeString})
+var s_NotebookSessionsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NotebookSessionsList, Members: &m_NotebookSessionsList, Type: smithy.ShapeTypeList})
+var sNotebookSessionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotebookSessionSummary, Members: &mNotebookSessionSummary, Type: smithy.ShapeTypeStructure})
+var sNotebookType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotebookType, Members: &mNotebookType, Type: smithy.ShapeTypeEnum})
+var s_ParametersMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParametersMap, Members: &m_ParametersMap, Type: smithy.ShapeTypeMap})
+var s_ParametersMapValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParametersMapValue, Type: smithy.ShapeTypeString})
+var s_Payload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Payload, Type: smithy.ShapeTypeString})
+var sPreparedStatement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPreparedStatement, Members: &mPreparedStatement, Type: smithy.ShapeTypeStructure})
+var s_PreparedStatementDetailsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PreparedStatementDetailsList, Members: &m_PreparedStatementDetailsList, Type: smithy.ShapeTypeList})
+var s_PreparedStatementNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PreparedStatementNameList, Members: &m_PreparedStatementNameList, Type: smithy.ShapeTypeList})
+var s_PreparedStatementsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PreparedStatementsList, Members: &m_PreparedStatementsList, Type: smithy.ShapeTypeList})
+var sPreparedStatementSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPreparedStatementSummary, Members: &mPreparedStatementSummary, Type: smithy.ShapeTypeStructure})
+var sQueryExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryExecution, Members: &mQueryExecution, Type: smithy.ShapeTypeStructure})
+var sQueryExecutionContext = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryExecutionContext, Members: &mQueryExecutionContext, Type: smithy.ShapeTypeStructure})
+var s_QueryExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryExecutionId, Type: smithy.ShapeTypeString})
+var s_QueryExecutionIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryExecutionIdList, Members: &m_QueryExecutionIdList, Type: smithy.ShapeTypeList})
+var s_QueryExecutionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryExecutionList, Members: &m_QueryExecutionList, Type: smithy.ShapeTypeList})
+var sQueryExecutionState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryExecutionState, Members: &mQueryExecutionState, Type: smithy.ShapeTypeEnum})
+var sQueryExecutionStatistics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryExecutionStatistics, Members: &mQueryExecutionStatistics, Type: smithy.ShapeTypeStructure})
+var sQueryExecutionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryExecutionStatus, Members: &mQueryExecutionStatus, Type: smithy.ShapeTypeStructure})
+var sQueryResultsS3AccessGrantsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryResultsS3AccessGrantsConfiguration, Members: &mQueryResultsS3AccessGrantsConfiguration, Type: smithy.ShapeTypeStructure})
+var sQueryResultType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryResultType, Members: &mQueryResultType, Type: smithy.ShapeTypeEnum})
+var sQueryRuntimeStatistics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryRuntimeStatistics, Members: &mQueryRuntimeStatistics, Type: smithy.ShapeTypeStructure})
+var sQueryRuntimeStatisticsRows = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryRuntimeStatisticsRows, Members: &mQueryRuntimeStatisticsRows, Type: smithy.ShapeTypeStructure})
+var sQueryRuntimeStatisticsTimeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryRuntimeStatisticsTimeline, Members: &mQueryRuntimeStatisticsTimeline, Type: smithy.ShapeTypeStructure})
+var sQueryStage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryStage, Members: &mQueryStage, Type: smithy.ShapeTypeStructure})
+var sQueryStagePlanNode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryStagePlanNode, Members: &mQueryStagePlanNode, Type: smithy.ShapeTypeStructure})
+var s_QueryStagePlanNodes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryStagePlanNodes, Members: &m_QueryStagePlanNodes, Type: smithy.ShapeTypeList})
+var s_QueryStages = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryStages, Members: &m_QueryStages, Type: smithy.ShapeTypeList})
+var s_QueryString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryString, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sResultConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResultConfiguration, Members: &mResultConfiguration, Type: smithy.ShapeTypeStructure})
+var sResultConfigurationUpdates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResultConfigurationUpdates, Members: &mResultConfigurationUpdates, Type: smithy.ShapeTypeStructure})
+var s_ResultOutputLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResultOutputLocation, Type: smithy.ShapeTypeString})
+var sResultReuseByAgeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResultReuseByAgeConfiguration, Members: &mResultReuseByAgeConfiguration, Type: smithy.ShapeTypeStructure})
+var sResultReuseConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResultReuseConfiguration, Members: &mResultReuseConfiguration, Type: smithy.ShapeTypeStructure})
+var sResultReuseInformation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResultReuseInformation, Members: &mResultReuseInformation, Type: smithy.ShapeTypeStructure})
+var sResultSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResultSet, Members: &mResultSet, Type: smithy.ShapeTypeStructure})
+var sResultSetMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResultSetMetadata, Members: &mResultSetMetadata, Type: smithy.ShapeTypeStructure})
+var s_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sRow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRow, Members: &mRow, Type: smithy.ShapeTypeStructure})
+var s_RowList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RowList, Members: &m_RowList, Type: smithy.ShapeTypeList})
+var sS3AclOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3AclOption, Members: &mS3AclOption, Type: smithy.ShapeTypeEnum})
+var sS3LoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3LoggingConfiguration, Members: &mS3LoggingConfiguration, Type: smithy.ShapeTypeStructure})
+var s_S3OutputLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3OutputLocation, Type: smithy.ShapeTypeString})
+var s_S3Uri = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Uri, Type: smithy.ShapeTypeString})
+var sSessionAlreadyExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSessionAlreadyExistsException, Members: &mSessionAlreadyExistsException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sSessionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSessionConfiguration, Members: &mSessionConfiguration, Type: smithy.ShapeTypeStructure})
+var s_SessionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SessionId, Type: smithy.ShapeTypeString})
+var s_SessionIdleTimeoutInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SessionIdleTimeoutInMinutes, Type: smithy.ShapeTypeInteger})
+var s_SessionManagerToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SessionManagerToken, Type: smithy.ShapeTypeString})
+var s_SessionsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SessionsList, Members: &m_SessionsList, Type: smithy.ShapeTypeList})
+var sSessionState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSessionState, Members: &mSessionState, Type: smithy.ShapeTypeEnum})
+var sSessionStatistics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSessionStatistics, Members: &mSessionStatistics, Type: smithy.ShapeTypeStructure})
+var sSessionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSessionStatus, Members: &mSessionStatus, Type: smithy.ShapeTypeStructure})
+var sSessionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSessionSummary, Members: &mSessionSummary, Type: smithy.ShapeTypeStructure})
+var s_StatementName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatementName, Type: smithy.ShapeTypeString})
+var sStatementType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatementType, Members: &mStatementType, Type: smithy.ShapeTypeEnum})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString})
+var s_StringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var s_SupportedDPUSizeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SupportedDPUSizeList, Members: &m_SupportedDPUSizeList, Type: smithy.ShapeTypeList})
+var sTableMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTableMetadata, Members: &mTableMetadata, Type: smithy.ShapeTypeStructure})
+var s_TableMetadataList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TableMetadataList, Members: &m_TableMetadataList, Type: smithy.ShapeTypeList})
+var s_TableTypeString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TableTypeString, Type: smithy.ShapeTypeString})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_TargetDpusInteger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetDpusInteger, Type: smithy.ShapeTypeInteger})
+var sThrottleReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottleReason, Members: &mThrottleReason, Type: smithy.ShapeTypeEnum})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var s_Token = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Token, Type: smithy.ShapeTypeString})
+var sTooManyRequestsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyRequestsException, Members: &mTooManyRequestsException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_TypeString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TypeString, Type: smithy.ShapeTypeString})
+var sUnprocessedNamedQueryId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnprocessedNamedQueryId, Members: &mUnprocessedNamedQueryId, Type: smithy.ShapeTypeStructure})
+var s_UnprocessedNamedQueryIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UnprocessedNamedQueryIdList, Members: &m_UnprocessedNamedQueryIdList, Type: smithy.ShapeTypeList})
+var sUnprocessedPreparedStatementName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnprocessedPreparedStatementName, Members: &mUnprocessedPreparedStatementName, Type: smithy.ShapeTypeStructure})
+var s_UnprocessedPreparedStatementNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UnprocessedPreparedStatementNameList, Members: &m_UnprocessedPreparedStatementNameList, Type: smithy.ShapeTypeList})
+var sUnprocessedQueryExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnprocessedQueryExecutionId, Members: &mUnprocessedQueryExecutionId, Type: smithy.ShapeTypeStructure})
+var s_UnprocessedQueryExecutionIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UnprocessedQueryExecutionIdList, Members: &m_UnprocessedQueryExecutionIdList, Type: smithy.ShapeTypeList})
+var sWorkGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkGroup, Members: &mWorkGroup, Type: smithy.ShapeTypeStructure})
+var sWorkGroupConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkGroupConfiguration, Members: &mWorkGroupConfiguration, Type: smithy.ShapeTypeStructure})
+var sWorkGroupConfigurationUpdates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkGroupConfigurationUpdates, Members: &mWorkGroupConfigurationUpdates, Type: smithy.ShapeTypeStructure})
+var s_WorkGroupDescriptionString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkGroupDescriptionString, Type: smithy.ShapeTypeString})
+var s_WorkGroupName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkGroupName, Type: smithy.ShapeTypeString})
+var s_WorkGroupNamesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkGroupNamesList, Members: &m_WorkGroupNamesList, Type: smithy.ShapeTypeList})
+var s_WorkGroupsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkGroupsList, Members: &m_WorkGroupsList, Type: smithy.ShapeTypeList})
+var sWorkGroupState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkGroupState, Members: &mWorkGroupState, Type: smithy.ShapeTypeEnum})
+var sWorkGroupSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkGroupSummary, Members: &mWorkGroupSummary, Type: smithy.ShapeTypeStructure})
+var sBatchGetNamedQueryInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetNamedQueryInput, Members: &mBatchGetNamedQueryInput, Type: smithy.ShapeTypeStructure})
+var sBatchGetNamedQueryOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetNamedQueryOutput, Members: &mBatchGetNamedQueryOutput, Type: smithy.ShapeTypeStructure})
+var sBatchGetPreparedStatementInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetPreparedStatementInput, Members: &mBatchGetPreparedStatementInput, Type: smithy.ShapeTypeStructure})
+var sBatchGetPreparedStatementOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetPreparedStatementOutput, Members: &mBatchGetPreparedStatementOutput, Type: smithy.ShapeTypeStructure})
+var sBatchGetQueryExecutionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetQueryExecutionInput, Members: &mBatchGetQueryExecutionInput, Type: smithy.ShapeTypeStructure})
+var sBatchGetQueryExecutionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetQueryExecutionOutput, Members: &mBatchGetQueryExecutionOutput, Type: smithy.ShapeTypeStructure})
+var sCancelCapacityReservationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelCapacityReservationInput, Members: &mCancelCapacityReservationInput, Type: smithy.ShapeTypeStructure})
+var sCancelCapacityReservationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelCapacityReservationOutput, Type: smithy.ShapeTypeStructure})
+var sCreateCapacityReservationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCapacityReservationInput, Members: &mCreateCapacityReservationInput, Type: smithy.ShapeTypeStructure})
+var sCreateCapacityReservationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCapacityReservationOutput, Type: smithy.ShapeTypeStructure})
+var sCreateDataCatalogInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDataCatalogInput, Members: &mCreateDataCatalogInput, Type: smithy.ShapeTypeStructure})
+var sCreateDataCatalogOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDataCatalogOutput, Members: &mCreateDataCatalogOutput, Type: smithy.ShapeTypeStructure})
+var sCreateNamedQueryInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateNamedQueryInput, Members: &mCreateNamedQueryInput, Type: smithy.ShapeTypeStructure})
+var sCreateNamedQueryOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateNamedQueryOutput, Members: &mCreateNamedQueryOutput, Type: smithy.ShapeTypeStructure})
+var sCreateNotebookInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateNotebookInput, Members: &mCreateNotebookInput, Type: smithy.ShapeTypeStructure})
+var sCreateNotebookOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateNotebookOutput, Members: &mCreateNotebookOutput, Type: smithy.ShapeTypeStructure})
+var sCreatePreparedStatementInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePreparedStatementInput, Members: &mCreatePreparedStatementInput, Type: smithy.ShapeTypeStructure})
+var sCreatePreparedStatementOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePreparedStatementOutput, Type: smithy.ShapeTypeStructure})
+var sCreatePresignedNotebookUrlRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePresignedNotebookUrlRequest, Members: &mCreatePresignedNotebookUrlRequest, Type: smithy.ShapeTypeStructure})
+var sCreatePresignedNotebookUrlResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePresignedNotebookUrlResponse, Members: &mCreatePresignedNotebookUrlResponse, Type: smithy.ShapeTypeStructure})
+var sCreateWorkGroupInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWorkGroupInput, Members: &mCreateWorkGroupInput, Type: smithy.ShapeTypeStructure})
+var sCreateWorkGroupOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWorkGroupOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteCapacityReservationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCapacityReservationInput, Members: &mDeleteCapacityReservationInput, Type: smithy.ShapeTypeStructure})
+var sDeleteCapacityReservationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCapacityReservationOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteDataCatalogInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDataCatalogInput, Members: &mDeleteDataCatalogInput, Type: smithy.ShapeTypeStructure})
+var sDeleteDataCatalogOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDataCatalogOutput, Members: &mDeleteDataCatalogOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteNamedQueryInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteNamedQueryInput, Members: &mDeleteNamedQueryInput, Type: smithy.ShapeTypeStructure})
+var sDeleteNamedQueryOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteNamedQueryOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteNotebookInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteNotebookInput, Members: &mDeleteNotebookInput, Type: smithy.ShapeTypeStructure})
+var sDeleteNotebookOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteNotebookOutput, Type: smithy.ShapeTypeStructure})
+var sDeletePreparedStatementInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePreparedStatementInput, Members: &mDeletePreparedStatementInput, Type: smithy.ShapeTypeStructure})
+var sDeletePreparedStatementOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePreparedStatementOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteWorkGroupInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWorkGroupInput, Members: &mDeleteWorkGroupInput, Type: smithy.ShapeTypeStructure})
+var sDeleteWorkGroupOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWorkGroupOutput, Type: smithy.ShapeTypeStructure})
+var sExportNotebookInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportNotebookInput, Members: &mExportNotebookInput, Type: smithy.ShapeTypeStructure})
+var sExportNotebookOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportNotebookOutput, Members: &mExportNotebookOutput, Type: smithy.ShapeTypeStructure})
+var sGetCalculationExecutionCodeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCalculationExecutionCodeRequest, Members: &mGetCalculationExecutionCodeRequest, Type: smithy.ShapeTypeStructure})
+var sGetCalculationExecutionCodeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCalculationExecutionCodeResponse, Members: &mGetCalculationExecutionCodeResponse, Type: smithy.ShapeTypeStructure})
+var sGetCalculationExecutionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCalculationExecutionRequest, Members: &mGetCalculationExecutionRequest, Type: smithy.ShapeTypeStructure})
+var sGetCalculationExecutionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCalculationExecutionResponse, Members: &mGetCalculationExecutionResponse, Type: smithy.ShapeTypeStructure})
+var sGetCalculationExecutionStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCalculationExecutionStatusRequest, Members: &mGetCalculationExecutionStatusRequest, Type: smithy.ShapeTypeStructure})
+var sGetCalculationExecutionStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCalculationExecutionStatusResponse, Members: &mGetCalculationExecutionStatusResponse, Type: smithy.ShapeTypeStructure})
+var sGetCapacityAssignmentConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCapacityAssignmentConfigurationInput, Members: &mGetCapacityAssignmentConfigurationInput, Type: smithy.ShapeTypeStructure})
+var sGetCapacityAssignmentConfigurationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCapacityAssignmentConfigurationOutput, Members: &mGetCapacityAssignmentConfigurationOutput, Type: smithy.ShapeTypeStructure})
+var sGetCapacityReservationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCapacityReservationInput, Members: &mGetCapacityReservationInput, Type: smithy.ShapeTypeStructure})
+var sGetCapacityReservationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCapacityReservationOutput, Members: &mGetCapacityReservationOutput, Type: smithy.ShapeTypeStructure})
+var sGetDatabaseInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDatabaseInput, Members: &mGetDatabaseInput, Type: smithy.ShapeTypeStructure})
+var sGetDatabaseOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDatabaseOutput, Members: &mGetDatabaseOutput, Type: smithy.ShapeTypeStructure})
+var sGetDataCatalogInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDataCatalogInput, Members: &mGetDataCatalogInput, Type: smithy.ShapeTypeStructure})
+var sGetDataCatalogOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDataCatalogOutput, Members: &mGetDataCatalogOutput, Type: smithy.ShapeTypeStructure})
+var sGetNamedQueryInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNamedQueryInput, Members: &mGetNamedQueryInput, Type: smithy.ShapeTypeStructure})
+var sGetNamedQueryOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNamedQueryOutput, Members: &mGetNamedQueryOutput, Type: smithy.ShapeTypeStructure})
+var sGetNotebookMetadataInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNotebookMetadataInput, Members: &mGetNotebookMetadataInput, Type: smithy.ShapeTypeStructure})
+var sGetNotebookMetadataOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNotebookMetadataOutput, Members: &mGetNotebookMetadataOutput, Type: smithy.ShapeTypeStructure})
+var sGetPreparedStatementInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPreparedStatementInput, Members: &mGetPreparedStatementInput, Type: smithy.ShapeTypeStructure})
+var sGetPreparedStatementOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPreparedStatementOutput, Members: &mGetPreparedStatementOutput, Type: smithy.ShapeTypeStructure})
+var sGetQueryExecutionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryExecutionInput, Members: &mGetQueryExecutionInput, Type: smithy.ShapeTypeStructure})
+var sGetQueryExecutionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryExecutionOutput, Members: &mGetQueryExecutionOutput, Type: smithy.ShapeTypeStructure})
+var sGetQueryResultsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryResultsInput, Members: &mGetQueryResultsInput, Type: smithy.ShapeTypeStructure})
+var sGetQueryResultsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryResultsOutput, Members: &mGetQueryResultsOutput, Type: smithy.ShapeTypeStructure})
+var sGetQueryRuntimeStatisticsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryRuntimeStatisticsInput, Members: &mGetQueryRuntimeStatisticsInput, Type: smithy.ShapeTypeStructure})
+var sGetQueryRuntimeStatisticsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetQueryRuntimeStatisticsOutput, Members: &mGetQueryRuntimeStatisticsOutput, Type: smithy.ShapeTypeStructure})
+var sGetResourceDashboardRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceDashboardRequest, Members: &mGetResourceDashboardRequest, Type: smithy.ShapeTypeStructure})
+var sGetResourceDashboardResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceDashboardResponse, Members: &mGetResourceDashboardResponse, Type: smithy.ShapeTypeStructure})
+var sGetSessionEndpointRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSessionEndpointRequest, Members: &mGetSessionEndpointRequest, Type: smithy.ShapeTypeStructure})
+var sGetSessionEndpointResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSessionEndpointResponse, Members: &mGetSessionEndpointResponse, Type: smithy.ShapeTypeStructure})
+var sGetSessionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSessionRequest, Members: &mGetSessionRequest, Type: smithy.ShapeTypeStructure})
+var sGetSessionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSessionResponse, Members: &mGetSessionResponse, Type: smithy.ShapeTypeStructure})
+var sGetSessionStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSessionStatusRequest, Members: &mGetSessionStatusRequest, Type: smithy.ShapeTypeStructure})
+var sGetSessionStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSessionStatusResponse, Members: &mGetSessionStatusResponse, Type: smithy.ShapeTypeStructure})
+var sGetTableMetadataInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableMetadataInput, Members: &mGetTableMetadataInput, Type: smithy.ShapeTypeStructure})
+var sGetTableMetadataOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableMetadataOutput, Members: &mGetTableMetadataOutput, Type: smithy.ShapeTypeStructure})
+var sGetWorkGroupInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWorkGroupInput, Members: &mGetWorkGroupInput, Type: smithy.ShapeTypeStructure})
+var sGetWorkGroupOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWorkGroupOutput, Members: &mGetWorkGroupOutput, Type: smithy.ShapeTypeStructure})
+var sImportNotebookInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportNotebookInput, Members: &mImportNotebookInput, Type: smithy.ShapeTypeStructure})
+var sImportNotebookOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportNotebookOutput, Members: &mImportNotebookOutput, Type: smithy.ShapeTypeStructure})
+var sListApplicationDPUSizesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListApplicationDPUSizesInput, Members: &mListApplicationDPUSizesInput, Type: smithy.ShapeTypeStructure})
+var sListApplicationDPUSizesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListApplicationDPUSizesOutput, Members: &mListApplicationDPUSizesOutput, Type: smithy.ShapeTypeStructure})
+var sListCalculationExecutionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCalculationExecutionsRequest, Members: &mListCalculationExecutionsRequest, Type: smithy.ShapeTypeStructure})
+var sListCalculationExecutionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCalculationExecutionsResponse, Members: &mListCalculationExecutionsResponse, Type: smithy.ShapeTypeStructure})
+var sListCapacityReservationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCapacityReservationsInput, Members: &mListCapacityReservationsInput, Type: smithy.ShapeTypeStructure})
+var sListCapacityReservationsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCapacityReservationsOutput, Members: &mListCapacityReservationsOutput, Type: smithy.ShapeTypeStructure})
+var sListDatabasesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDatabasesInput, Members: &mListDatabasesInput, Type: smithy.ShapeTypeStructure})
+var sListDatabasesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDatabasesOutput, Members: &mListDatabasesOutput, Type: smithy.ShapeTypeStructure})
+var sListDataCatalogsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDataCatalogsInput, Members: &mListDataCatalogsInput, Type: smithy.ShapeTypeStructure})
+var sListDataCatalogsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDataCatalogsOutput, Members: &mListDataCatalogsOutput, Type: smithy.ShapeTypeStructure})
+var sListEngineVersionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEngineVersionsInput, Members: &mListEngineVersionsInput, Type: smithy.ShapeTypeStructure})
+var sListEngineVersionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEngineVersionsOutput, Members: &mListEngineVersionsOutput, Type: smithy.ShapeTypeStructure})
+var sListExecutorsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExecutorsRequest, Members: &mListExecutorsRequest, Type: smithy.ShapeTypeStructure})
+var sListExecutorsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExecutorsResponse, Members: &mListExecutorsResponse, Type: smithy.ShapeTypeStructure})
+var sListNamedQueriesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNamedQueriesInput, Members: &mListNamedQueriesInput, Type: smithy.ShapeTypeStructure})
+var sListNamedQueriesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNamedQueriesOutput, Members: &mListNamedQueriesOutput, Type: smithy.ShapeTypeStructure})
+var sListNotebookMetadataInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNotebookMetadataInput, Members: &mListNotebookMetadataInput, Type: smithy.ShapeTypeStructure})
+var sListNotebookMetadataOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNotebookMetadataOutput, Members: &mListNotebookMetadataOutput, Type: smithy.ShapeTypeStructure})
+var sListNotebookSessionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNotebookSessionsRequest, Members: &mListNotebookSessionsRequest, Type: smithy.ShapeTypeStructure})
+var sListNotebookSessionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNotebookSessionsResponse, Members: &mListNotebookSessionsResponse, Type: smithy.ShapeTypeStructure})
+var sListPreparedStatementsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPreparedStatementsInput, Members: &mListPreparedStatementsInput, Type: smithy.ShapeTypeStructure})
+var sListPreparedStatementsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPreparedStatementsOutput, Members: &mListPreparedStatementsOutput, Type: smithy.ShapeTypeStructure})
+var sListQueryExecutionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListQueryExecutionsInput, Members: &mListQueryExecutionsInput, Type: smithy.ShapeTypeStructure})
+var sListQueryExecutionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListQueryExecutionsOutput, Members: &mListQueryExecutionsOutput, Type: smithy.ShapeTypeStructure})
+var sListSessionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSessionsRequest, Members: &mListSessionsRequest, Type: smithy.ShapeTypeStructure})
+var sListSessionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSessionsResponse, Members: &mListSessionsResponse, Type: smithy.ShapeTypeStructure})
+var sListTableMetadataInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTableMetadataInput, Members: &mListTableMetadataInput, Type: smithy.ShapeTypeStructure})
+var sListTableMetadataOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTableMetadataOutput, Members: &mListTableMetadataOutput, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceInput, Members: &mListTagsForResourceInput, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceOutput, Members: &mListTagsForResourceOutput, Type: smithy.ShapeTypeStructure})
+var sListWorkGroupsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkGroupsInput, Members: &mListWorkGroupsInput, Type: smithy.ShapeTypeStructure})
+var sListWorkGroupsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkGroupsOutput, Members: &mListWorkGroupsOutput, Type: smithy.ShapeTypeStructure})
+var sPutCapacityAssignmentConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutCapacityAssignmentConfigurationInput, Members: &mPutCapacityAssignmentConfigurationInput, Type: smithy.ShapeTypeStructure})
+var sPutCapacityAssignmentConfigurationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutCapacityAssignmentConfigurationOutput, Type: smithy.ShapeTypeStructure})
+var sStartCalculationExecutionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartCalculationExecutionRequest, Members: &mStartCalculationExecutionRequest, Type: smithy.ShapeTypeStructure})
+var sStartCalculationExecutionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartCalculationExecutionResponse, Members: &mStartCalculationExecutionResponse, Type: smithy.ShapeTypeStructure})
+var sStartQueryExecutionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartQueryExecutionInput, Members: &mStartQueryExecutionInput, Type: smithy.ShapeTypeStructure})
+var sStartQueryExecutionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartQueryExecutionOutput, Members: &mStartQueryExecutionOutput, Type: smithy.ShapeTypeStructure})
+var sStartSessionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSessionRequest, Members: &mStartSessionRequest, Type: smithy.ShapeTypeStructure})
+var sStartSessionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSessionResponse, Members: &mStartSessionResponse, Type: smithy.ShapeTypeStructure})
+var sStopCalculationExecutionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopCalculationExecutionRequest, Members: &mStopCalculationExecutionRequest, Type: smithy.ShapeTypeStructure})
+var sStopCalculationExecutionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopCalculationExecutionResponse, Members: &mStopCalculationExecutionResponse, Type: smithy.ShapeTypeStructure})
+var sStopQueryExecutionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopQueryExecutionInput, Members: &mStopQueryExecutionInput, Type: smithy.ShapeTypeStructure})
+var sStopQueryExecutionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopQueryExecutionOutput, Type: smithy.ShapeTypeStructure})
+var sTagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceInput, Members: &mTagResourceInput, Type: smithy.ShapeTypeStructure})
+var sTagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceOutput, Type: smithy.ShapeTypeStructure})
+var sTerminateSessionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTerminateSessionRequest, Members: &mTerminateSessionRequest, Type: smithy.ShapeTypeStructure})
+var sTerminateSessionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTerminateSessionResponse, Members: &mTerminateSessionResponse, Type: smithy.ShapeTypeStructure})
+var sUntagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceInput, Members: &mUntagResourceInput, Type: smithy.ShapeTypeStructure})
+var sUntagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateCapacityReservationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCapacityReservationInput, Members: &mUpdateCapacityReservationInput, Type: smithy.ShapeTypeStructure})
+var sUpdateCapacityReservationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCapacityReservationOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateDataCatalogInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDataCatalogInput, Members: &mUpdateDataCatalogInput, Type: smithy.ShapeTypeStructure})
+var sUpdateDataCatalogOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDataCatalogOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateNamedQueryInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNamedQueryInput, Members: &mUpdateNamedQueryInput, Type: smithy.ShapeTypeStructure})
+var sUpdateNamedQueryOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNamedQueryOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateNotebookInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNotebookInput, Members: &mUpdateNotebookInput, Type: smithy.ShapeTypeStructure})
+var sUpdateNotebookMetadataInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNotebookMetadataInput, Members: &mUpdateNotebookMetadataInput, Type: smithy.ShapeTypeStructure})
+var sUpdateNotebookMetadataOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNotebookMetadataOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateNotebookOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNotebookOutput, Type: smithy.ShapeTypeStructure})
+var sUpdatePreparedStatementInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePreparedStatementInput, Members: &mUpdatePreparedStatementInput, Type: smithy.ShapeTypeStructure})
+var sUpdatePreparedStatementOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePreparedStatementOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateWorkGroupInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWorkGroupInput, Members: &mUpdateWorkGroupInput, Type: smithy.ShapeTypeStructure})
+var sUpdateWorkGroupOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWorkGroupOutput, Type: smithy.ShapeTypeStructure})
+
+var sAclConfiguration_S3AclOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3AclOption", ID: &iS3AclOption, Members: &mS3AclOption, Type: smithy.ShapeTypeEnum})
+var sApplicationDPUSizes_ApplicationRuntimeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationRuntimeId", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sApplicationDPUSizes_SupportedDPUSizes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupportedDPUSizes", ID: &i_SupportedDPUSizeList, Members: &m_SupportedDPUSizeList, Type: smithy.ShapeTypeList})
+var s_ApplicationDPUSizesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iApplicationDPUSizes, Members: &mApplicationDPUSizes, Type: smithy.ShapeTypeStructure})
+var sAthenaError_ErrorCategory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCategory", ID: &i_ErrorCategory, Type: smithy.ShapeTypeInteger})
+var sAthenaError_ErrorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorType", ID: &i_ErrorType, Type: smithy.ShapeTypeInteger})
+var sAthenaError_Retryable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Retryable", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sAthenaError_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_String, Type: smithy.ShapeTypeString})
+var sAuthenticationType_DIRECTORY_IDENTITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIRECTORY_IDENTITY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCalculationConfiguration_CodeBlock = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CodeBlock", ID: &i_CodeBlock, Type: smithy.ShapeTypeString})
+var sCalculationExecutionState_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCalculationExecutionState_CREATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCalculationExecutionState_QUEUED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUEUED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCalculationExecutionState_RUNNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUNNING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCalculationExecutionState_CANCELING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCalculationExecutionState_CANCELED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCalculationExecutionState_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCalculationExecutionState_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCalculationResult_StdOutS3Uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StdOutS3Uri", ID: &i_S3Uri, Type: smithy.ShapeTypeString})
+var sCalculationResult_StdErrorS3Uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StdErrorS3Uri", ID: &i_S3Uri, Type: smithy.ShapeTypeString})
+var sCalculationResult_ResultS3Uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResultS3Uri", ID: &i_S3Uri, Type: smithy.ShapeTypeString})
+var sCalculationResult_ResultType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResultType", ID: &i_CalculationResultType, Type: smithy.ShapeTypeString})
+var s_CalculationsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCalculationSummary, Members: &mCalculationSummary, Type: smithy.ShapeTypeStructure})
+var sCalculationStatistics_DpuExecutionInMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DpuExecutionInMillis", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sCalculationStatistics_Progress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Progress", ID: &i_DescriptionString, Type: smithy.ShapeTypeString})
+var sCalculationStatus_SubmissionDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubmissionDateTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sCalculationStatus_CompletionDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompletionDateTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sCalculationStatus_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iCalculationExecutionState, Members: &mCalculationExecutionState, Type: smithy.ShapeTypeEnum})
+var sCalculationStatus_StateChangeReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateChangeReason", ID: &i_DescriptionString, Type: smithy.ShapeTypeString})
+var sCalculationSummary_CalculationExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CalculationExecutionId", ID: &i_CalculationExecutionId, Type: smithy.ShapeTypeString})
+var sCalculationSummary_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_DescriptionString, Type: smithy.ShapeTypeString})
+var sCalculationSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iCalculationStatus, Members: &mCalculationStatus, Type: smithy.ShapeTypeStructure})
+var sCapacityAllocation_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iCapacityAllocationStatus, Members: &mCapacityAllocationStatus, Type: smithy.ShapeTypeEnum})
+var sCapacityAllocation_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCapacityAllocation_RequestTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sCapacityAllocation_RequestCompletionTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestCompletionTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sCapacityAllocationStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCapacityAllocationStatus_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCapacityAllocationStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCapacityAssignment_WorkGroupNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkGroupNames", ID: &i_WorkGroupNamesList, Members: &m_WorkGroupNamesList, Type: smithy.ShapeTypeList})
+var sCapacityAssignmentConfiguration_CapacityReservationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CapacityReservationName", ID: &i_CapacityReservationName, Type: smithy.ShapeTypeString})
+var sCapacityAssignmentConfiguration_CapacityAssignments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CapacityAssignments", ID: &i_CapacityAssignmentsList, Members: &m_CapacityAssignmentsList, Type: smithy.ShapeTypeList})
+var s_CapacityAssignmentsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCapacityAssignment, Members: &mCapacityAssignment, Type: smithy.ShapeTypeStructure})
+var sCapacityReservation_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_CapacityReservationName, Type: smithy.ShapeTypeString})
+var sCapacityReservation_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iCapacityReservationStatus, Members: &mCapacityReservationStatus, Type: smithy.ShapeTypeEnum})
+var sCapacityReservation_TargetDpus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetDpus", ID: &i_TargetDpusInteger, Type: smithy.ShapeTypeInteger})
+var sCapacityReservation_AllocatedDpus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllocatedDpus", ID: &i_AllocatedDpusInteger, Type: smithy.ShapeTypeInteger})
+var sCapacityReservation_LastAllocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastAllocation", ID: &iCapacityAllocation, Members: &mCapacityAllocation, Type: smithy.ShapeTypeStructure})
+var sCapacityReservation_LastSuccessfulAllocationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastSuccessfulAllocationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sCapacityReservation_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var s_CapacityReservationsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCapacityReservation, Members: &mCapacityReservation, Type: smithy.ShapeTypeStructure})
+var sCapacityReservationStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCapacityReservationStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCapacityReservationStatus_CANCELLING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELLING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCapacityReservationStatus_CANCELLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCapacityReservationStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCapacityReservationStatus_UPDATE_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sClassification_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sClassification_Properties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Properties", ID: &i_ParametersMap, Members: &m_ParametersMap, Type: smithy.ShapeTypeMap})
+var s_ClassificationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iClassification, Members: &mClassification, Type: smithy.ShapeTypeStructure})
+var sCloudWatchLoggingConfiguration_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_BoxedBoolean, Type: smithy.ShapeTypeBoolean})
+var sCloudWatchLoggingConfiguration_LogGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogGroup", ID: &i_LogGroupName, Type: smithy.ShapeTypeString})
+var sCloudWatchLoggingConfiguration_LogStreamNamePrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogStreamNamePrefix", ID: &i_LogStreamNamePrefix, Type: smithy.ShapeTypeString})
+var sCloudWatchLoggingConfiguration_LogTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogTypes", ID: &i_LogTypesMap, Members: &m_LogTypesMap, Type: smithy.ShapeTypeMap})
+var sColumn_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sColumn_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_TypeString, Type: smithy.ShapeTypeString})
+var sColumn_Comment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Comment", ID: &i_CommentString, Type: smithy.ShapeTypeString})
+var sColumnInfo_CatalogName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CatalogName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sColumnInfo_SchemaName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sColumnInfo_TableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TableName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sColumnInfo_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sColumnInfo_Label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Label", ID: &i_String, Type: smithy.ShapeTypeString})
+var sColumnInfo_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_String, Type: smithy.ShapeTypeString})
+var sColumnInfo_Precision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Precision", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sColumnInfo_Scale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Scale", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sColumnInfo_Nullable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Nullable", ID: &iColumnNullable, Members: &mColumnNullable, Type: smithy.ShapeTypeEnum})
+var sColumnInfo_CaseSensitive = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CaseSensitive", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var s_ColumnInfoList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iColumnInfo, Members: &mColumnInfo, Type: smithy.ShapeTypeStructure})
+var s_ColumnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iColumn, Members: &mColumn, Type: smithy.ShapeTypeStructure})
+var sColumnNullable_NOT_NULL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_NULL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sColumnNullable_NULLABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NULLABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sColumnNullable_UNKNOWN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionType_DYNAMODB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DYNAMODB", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionType_MYSQL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MYSQL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionType_POSTGRESQL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POSTGRESQL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionType_REDSHIFT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REDSHIFT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionType_ORACLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ORACLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionType_SYNAPSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYNAPSE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionType_SQLSERVER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SQLSERVER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionType_DB2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DB2", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionType_OPENSEARCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPENSEARCH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionType_BIGQUERY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BIGQUERY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionType_GOOGLECLOUDSTORAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GOOGLECLOUDSTORAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionType_HBASE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HBASE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionType_DOCUMENTDB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOCUMENTDB", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionType_CMDB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CMDB", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionType_TPCDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TPCDS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionType_TIMESTREAM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIMESTREAM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionType_SAPHANA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAPHANA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionType_SNOWFLAKE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SNOWFLAKE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionType_DATALAKEGEN2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DATALAKEGEN2", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionType_DB2AS400 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DB2AS400", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCustomerContentEncryptionConfiguration_KmsKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKey", ID: &i_KmsKey, Type: smithy.ShapeTypeString})
+var sDatabase_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sDatabase_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_DescriptionString, Type: smithy.ShapeTypeString})
+var sDatabase_Parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Parameters", ID: &i_ParametersMap, Members: &m_ParametersMap, Type: smithy.ShapeTypeMap})
+var s_DatabaseList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDatabase, Members: &mDatabase, Type: smithy.ShapeTypeStructure})
+var sDataCatalog_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_CatalogNameString, Type: smithy.ShapeTypeString})
+var sDataCatalog_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_DescriptionString, Type: smithy.ShapeTypeString})
+var sDataCatalog_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iDataCatalogType, Members: &mDataCatalogType, Type: smithy.ShapeTypeEnum})
+var sDataCatalog_Parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Parameters", ID: &i_ParametersMap, Members: &m_ParametersMap, Type: smithy.ShapeTypeMap})
+var sDataCatalog_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iDataCatalogStatus, Members: &mDataCatalogStatus, Type: smithy.ShapeTypeEnum})
+var sDataCatalog_ConnectionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionType", ID: &iConnectionType, Members: &mConnectionType, Type: smithy.ShapeTypeEnum})
+var sDataCatalog_Error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Error", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sDataCatalogStatus_CREATE_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataCatalogStatus_CREATE_COMPLETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_COMPLETE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataCatalogStatus_CREATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataCatalogStatus_CREATE_FAILED_CLEANUP_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_FAILED_CLEANUP_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataCatalogStatus_CREATE_FAILED_CLEANUP_COMPLETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_FAILED_CLEANUP_COMPLETE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataCatalogStatus_CREATE_FAILED_CLEANUP_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_FAILED_CLEANUP_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataCatalogStatus_DELETE_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataCatalogStatus_DELETE_COMPLETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_COMPLETE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataCatalogStatus_DELETE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataCatalogSummary_CatalogName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CatalogName", ID: &i_CatalogNameString, Type: smithy.ShapeTypeString})
+var sDataCatalogSummary_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iDataCatalogType, Members: &mDataCatalogType, Type: smithy.ShapeTypeEnum})
+var sDataCatalogSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iDataCatalogStatus, Members: &mDataCatalogStatus, Type: smithy.ShapeTypeEnum})
+var sDataCatalogSummary_ConnectionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionType", ID: &iConnectionType, Members: &mConnectionType, Type: smithy.ShapeTypeEnum})
+var sDataCatalogSummary_Error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Error", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_DataCatalogSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDataCatalogSummary, Members: &mDataCatalogSummary, Type: smithy.ShapeTypeStructure})
+var sDataCatalogType_LAMBDA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAMBDA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataCatalogType_GLUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GLUE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataCatalogType_HIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataCatalogType_FEDERATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FEDERATED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDatum_VarCharValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VarCharValue", ID: &i_datumString, Type: smithy.ShapeTypeString})
+var s_datumList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDatum, Members: &mDatum, Type: smithy.ShapeTypeStructure})
+var sEncryptionConfiguration_EncryptionOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionOption", ID: &iEncryptionOption, Members: &mEncryptionOption, Type: smithy.ShapeTypeEnum})
+var sEncryptionConfiguration_KmsKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKey", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEncryptionOption_SSE_S3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSE_S3", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEncryptionOption_SSE_KMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSE_KMS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEncryptionOption_CSE_KMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CSE_KMS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEngineConfiguration_CoordinatorDpuSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoordinatorDpuSize", ID: &i_CoordinatorDpuSize, Type: smithy.ShapeTypeInteger})
+var sEngineConfiguration_MaxConcurrentDpus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxConcurrentDpus", ID: &i_MaxConcurrentDpus, Type: smithy.ShapeTypeInteger})
+var sEngineConfiguration_DefaultExecutorDpuSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultExecutorDpuSize", ID: &i_DefaultExecutorDpuSize, Type: smithy.ShapeTypeInteger})
+var sEngineConfiguration_AdditionalConfigs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalConfigs", ID: &i_ParametersMap, Members: &m_ParametersMap, Type: smithy.ShapeTypeMap})
+var sEngineConfiguration_SparkProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SparkProperties", ID: &i_ParametersMap, Members: &m_ParametersMap, Type: smithy.ShapeTypeMap})
+var sEngineConfiguration_Classifications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Classifications", ID: &i_ClassificationList, Members: &m_ClassificationList, Type: smithy.ShapeTypeList})
+var sEngineVersion_SelectedEngineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SelectedEngineVersion", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sEngineVersion_EffectiveEngineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveEngineVersion", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var s_EngineVersionsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEngineVersion, Members: &mEngineVersion, Type: smithy.ShapeTypeStructure})
+var s_ExecutionParameters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ExecutionParameter, Type: smithy.ShapeTypeString})
+var sExecutorsSummary_ExecutorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutorId", ID: &i_ExecutorId, Type: smithy.ShapeTypeString})
+var sExecutorsSummary_ExecutorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutorType", ID: &iExecutorType, Members: &mExecutorType, Type: smithy.ShapeTypeEnum})
+var sExecutorsSummary_StartDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartDateTime", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sExecutorsSummary_TerminationDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TerminationDateTime", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sExecutorsSummary_ExecutorState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutorState", ID: &iExecutorState, Members: &mExecutorState, Type: smithy.ShapeTypeEnum})
+var sExecutorsSummary_ExecutorSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutorSize", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var s_ExecutorsSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExecutorsSummary, Members: &mExecutorsSummary, Type: smithy.ShapeTypeStructure})
+var sExecutorState_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sExecutorState_CREATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sExecutorState_REGISTERED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REGISTERED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sExecutorState_TERMINATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TERMINATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sExecutorState_TERMINATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TERMINATED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sExecutorState_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sExecutorType_COORDINATOR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COORDINATOR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sExecutorType_GATEWAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GATEWAY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sExecutorType_WORKER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WORKER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFilterDefinition_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NotebookName, Type: smithy.ShapeTypeString})
+var sIdentityCenterConfiguration_EnableIdentityCenter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableIdentityCenter", ID: &i_BoxedBoolean, Type: smithy.ShapeTypeBoolean})
+var sIdentityCenterConfiguration_IdentityCenterInstanceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityCenterInstanceArn", ID: &i_IdentityCenterInstanceArn, Type: smithy.ShapeTypeString})
+var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidRequestException_AthenaErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AthenaErrorCode", ID: &i_ErrorCode, Type: smithy.ShapeTypeString})
+var sInvalidRequestException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_LogTypesMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_LogTypeKey, Type: smithy.ShapeTypeString})
+var s_LogTypesMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_LogTypeValuesList, Members: &m_LogTypeValuesList, Type: smithy.ShapeTypeList})
+var s_LogTypeValuesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_LogTypeValue, Type: smithy.ShapeTypeString})
+var sManagedLoggingConfiguration_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_BoxedBoolean, Type: smithy.ShapeTypeBoolean})
+var sManagedLoggingConfiguration_KmsKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKey", ID: &i_KmsKey, Type: smithy.ShapeTypeString})
+var sManagedQueryResultsConfiguration_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sManagedQueryResultsConfiguration_EncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfiguration", ID: &iManagedQueryResultsEncryptionConfiguration, Members: &mManagedQueryResultsEncryptionConfiguration, Type: smithy.ShapeTypeStructure})
+var sManagedQueryResultsConfigurationUpdates_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_BoxedBoolean, Type: smithy.ShapeTypeBoolean})
+var sManagedQueryResultsConfigurationUpdates_EncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfiguration", ID: &iManagedQueryResultsEncryptionConfiguration, Members: &mManagedQueryResultsEncryptionConfiguration, Type: smithy.ShapeTypeStructure})
+var sManagedQueryResultsConfigurationUpdates_RemoveEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemoveEncryptionConfiguration", ID: &i_BoxedBoolean, Type: smithy.ShapeTypeBoolean})
+var sManagedQueryResultsEncryptionConfiguration_KmsKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKey", ID: &i_KmsKey, Type: smithy.ShapeTypeString})
+var sMetadataException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sMonitoringConfiguration_CloudWatchLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchLoggingConfiguration", ID: &iCloudWatchLoggingConfiguration, Members: &mCloudWatchLoggingConfiguration, Type: smithy.ShapeTypeStructure})
+var sMonitoringConfiguration_ManagedLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManagedLoggingConfiguration", ID: &iManagedLoggingConfiguration, Members: &mManagedLoggingConfiguration, Type: smithy.ShapeTypeStructure})
+var sMonitoringConfiguration_S3LoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3LoggingConfiguration", ID: &iS3LoggingConfiguration, Members: &mS3LoggingConfiguration, Type: smithy.ShapeTypeStructure})
+var sNamedQuery_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sNamedQuery_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_DescriptionString, Type: smithy.ShapeTypeString})
+var sNamedQuery_Database = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Database", ID: &i_DatabaseString, Type: smithy.ShapeTypeString})
+var sNamedQuery_QueryString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryString", ID: &i_QueryString, Type: smithy.ShapeTypeString})
+var sNamedQuery_NamedQueryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NamedQueryId", ID: &i_NamedQueryId, Type: smithy.ShapeTypeString})
+var sNamedQuery_WorkGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkGroup", ID: &i_WorkGroupName, Type: smithy.ShapeTypeString})
+var s_NamedQueryIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NamedQueryId, Type: smithy.ShapeTypeString})
+var s_NamedQueryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNamedQuery, Members: &mNamedQuery, Type: smithy.ShapeTypeStructure})
+var sNotebookMetadata_NotebookId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotebookId", ID: &i_NotebookId, Type: smithy.ShapeTypeString})
+var sNotebookMetadata_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NotebookName, Type: smithy.ShapeTypeString})
+var sNotebookMetadata_WorkGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkGroup", ID: &i_WorkGroupName, Type: smithy.ShapeTypeString})
+var sNotebookMetadata_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sNotebookMetadata_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iNotebookType, Members: &mNotebookType, Type: smithy.ShapeTypeEnum})
+var sNotebookMetadata_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var s_NotebookMetadataArray_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNotebookMetadata, Members: &mNotebookMetadata, Type: smithy.ShapeTypeStructure})
+var s_NotebookSessionsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNotebookSessionSummary, Members: &mNotebookSessionSummary, Type: smithy.ShapeTypeStructure})
+var sNotebookSessionSummary_SessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionId", ID: &i_SessionId, Type: smithy.ShapeTypeString})
+var sNotebookSessionSummary_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sNotebookType_IPYNB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPYNB", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_ParametersMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_KeyString, Type: smithy.ShapeTypeString})
+var s_ParametersMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ParametersMapValue, Type: smithy.ShapeTypeString})
+var sPreparedStatement_StatementName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatementName", ID: &i_StatementName, Type: smithy.ShapeTypeString})
+var sPreparedStatement_QueryStatement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryStatement", ID: &i_QueryString, Type: smithy.ShapeTypeString})
+var sPreparedStatement_WorkGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkGroupName", ID: &i_WorkGroupName, Type: smithy.ShapeTypeString})
+var sPreparedStatement_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_DescriptionString, Type: smithy.ShapeTypeString})
+var sPreparedStatement_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var s_PreparedStatementDetailsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPreparedStatement, Members: &mPreparedStatement, Type: smithy.ShapeTypeStructure})
+var s_PreparedStatementNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_StatementName, Type: smithy.ShapeTypeString})
+var s_PreparedStatementsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPreparedStatementSummary, Members: &mPreparedStatementSummary, Type: smithy.ShapeTypeStructure})
+var sPreparedStatementSummary_StatementName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatementName", ID: &i_StatementName, Type: smithy.ShapeTypeString})
+var sPreparedStatementSummary_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sQueryExecution_QueryExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryExecutionId", ID: &i_QueryExecutionId, Type: smithy.ShapeTypeString})
+var sQueryExecution_Query = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Query", ID: &i_QueryString, Type: smithy.ShapeTypeString})
+var sQueryExecution_StatementType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatementType", ID: &iStatementType, Members: &mStatementType, Type: smithy.ShapeTypeEnum})
+var sQueryExecution_ManagedQueryResultsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManagedQueryResultsConfiguration", ID: &iManagedQueryResultsConfiguration, Members: &mManagedQueryResultsConfiguration, Type: smithy.ShapeTypeStructure})
+var sQueryExecution_ResultConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResultConfiguration", ID: &iResultConfiguration, Members: &mResultConfiguration, Type: smithy.ShapeTypeStructure})
+var sQueryExecution_ResultReuseConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResultReuseConfiguration", ID: &iResultReuseConfiguration, Members: &mResultReuseConfiguration, Type: smithy.ShapeTypeStructure})
+var sQueryExecution_QueryExecutionContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryExecutionContext", ID: &iQueryExecutionContext, Members: &mQueryExecutionContext, Type: smithy.ShapeTypeStructure})
+var sQueryExecution_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iQueryExecutionStatus, Members: &mQueryExecutionStatus, Type: smithy.ShapeTypeStructure})
+var sQueryExecution_Statistics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Statistics", ID: &iQueryExecutionStatistics, Members: &mQueryExecutionStatistics, Type: smithy.ShapeTypeStructure})
+var sQueryExecution_WorkGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkGroup", ID: &i_WorkGroupName, Type: smithy.ShapeTypeString})
+var sQueryExecution_EngineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineVersion", ID: &iEngineVersion, Members: &mEngineVersion, Type: smithy.ShapeTypeStructure})
+var sQueryExecution_ExecutionParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionParameters", ID: &i_ExecutionParameters, Members: &m_ExecutionParameters, Type: smithy.ShapeTypeList})
+var sQueryExecution_SubstatementType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubstatementType", ID: &i_String, Type: smithy.ShapeTypeString})
+var sQueryExecution_QueryResultsS3AccessGrantsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryResultsS3AccessGrantsConfiguration", ID: &iQueryResultsS3AccessGrantsConfiguration, Members: &mQueryResultsS3AccessGrantsConfiguration, Type: smithy.ShapeTypeStructure})
+var sQueryExecutionContext_Database = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Database", ID: &i_DatabaseString, Type: smithy.ShapeTypeString})
+var sQueryExecutionContext_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogNameString, Type: smithy.ShapeTypeString})
+var s_QueryExecutionIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_QueryExecutionId, Type: smithy.ShapeTypeString})
+var s_QueryExecutionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iQueryExecution, Members: &mQueryExecution, Type: smithy.ShapeTypeStructure})
+var sQueryExecutionState_QUEUED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUEUED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sQueryExecutionState_RUNNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUNNING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sQueryExecutionState_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sQueryExecutionState_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sQueryExecutionState_CANCELLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sQueryExecutionStatistics_EngineExecutionTimeInMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineExecutionTimeInMillis", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sQueryExecutionStatistics_DataScannedInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataScannedInBytes", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sQueryExecutionStatistics_DataManifestLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataManifestLocation", ID: &i_String, Type: smithy.ShapeTypeString})
+var sQueryExecutionStatistics_TotalExecutionTimeInMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalExecutionTimeInMillis", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sQueryExecutionStatistics_QueryQueueTimeInMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryQueueTimeInMillis", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sQueryExecutionStatistics_ServicePreProcessingTimeInMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServicePreProcessingTimeInMillis", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sQueryExecutionStatistics_QueryPlanningTimeInMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryPlanningTimeInMillis", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sQueryExecutionStatistics_ServiceProcessingTimeInMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceProcessingTimeInMillis", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sQueryExecutionStatistics_ResultReuseInformation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResultReuseInformation", ID: &iResultReuseInformation, Members: &mResultReuseInformation, Type: smithy.ShapeTypeStructure})
+var sQueryExecutionStatistics_DpuCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DpuCount", ID: &i_DpuCount, Type: smithy.ShapeTypeDouble})
+var sQueryExecutionStatus_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iQueryExecutionState, Members: &mQueryExecutionState, Type: smithy.ShapeTypeEnum})
+var sQueryExecutionStatus_StateChangeReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateChangeReason", ID: &i_String, Type: smithy.ShapeTypeString})
+var sQueryExecutionStatus_SubmissionDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubmissionDateTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sQueryExecutionStatus_CompletionDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompletionDateTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sQueryExecutionStatus_AthenaError = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AthenaError", ID: &iAthenaError, Members: &mAthenaError, Type: smithy.ShapeTypeStructure})
+var sQueryResultsS3AccessGrantsConfiguration_EnableS3AccessGrants = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableS3AccessGrants", ID: &i_BoxedBoolean, Type: smithy.ShapeTypeBoolean})
+var sQueryResultsS3AccessGrantsConfiguration_CreateUserLevelPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateUserLevelPrefix", ID: &i_BoxedBoolean, Type: smithy.ShapeTypeBoolean})
+var sQueryResultsS3AccessGrantsConfiguration_AuthenticationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthenticationType", ID: &iAuthenticationType, Members: &mAuthenticationType, Type: smithy.ShapeTypeEnum})
+var sQueryResultType_DATA_MANIFEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DATA_MANIFEST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sQueryResultType_DATA_ROWS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DATA_ROWS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sQueryRuntimeStatistics_Timeline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timeline", ID: &iQueryRuntimeStatisticsTimeline, Members: &mQueryRuntimeStatisticsTimeline, Type: smithy.ShapeTypeStructure})
+var sQueryRuntimeStatistics_Rows = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rows", ID: &iQueryRuntimeStatisticsRows, Members: &mQueryRuntimeStatisticsRows, Type: smithy.ShapeTypeStructure})
+var sQueryRuntimeStatistics_OutputStage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputStage", ID: &iQueryStage, Members: &mQueryStage, Type: smithy.ShapeTypeStructure})
+var sQueryRuntimeStatisticsRows_InputRows = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputRows", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sQueryRuntimeStatisticsRows_InputBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputBytes", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sQueryRuntimeStatisticsRows_OutputBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputBytes", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sQueryRuntimeStatisticsRows_OutputRows = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputRows", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sQueryRuntimeStatisticsTimeline_QueryQueueTimeInMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryQueueTimeInMillis", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sQueryRuntimeStatisticsTimeline_ServicePreProcessingTimeInMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServicePreProcessingTimeInMillis", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sQueryRuntimeStatisticsTimeline_QueryPlanningTimeInMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryPlanningTimeInMillis", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sQueryRuntimeStatisticsTimeline_EngineExecutionTimeInMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineExecutionTimeInMillis", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sQueryRuntimeStatisticsTimeline_ServiceProcessingTimeInMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceProcessingTimeInMillis", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sQueryRuntimeStatisticsTimeline_TotalExecutionTimeInMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalExecutionTimeInMillis", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sQueryStage_StageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StageId", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sQueryStage_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &i_String, Type: smithy.ShapeTypeString})
+var sQueryStage_OutputBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputBytes", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sQueryStage_OutputRows = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputRows", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sQueryStage_InputBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputBytes", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sQueryStage_InputRows = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputRows", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sQueryStage_ExecutionTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionTime", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sQueryStage_QueryStagePlan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryStagePlan", ID: &iQueryStagePlanNode, Members: &mQueryStagePlanNode, Type: smithy.ShapeTypeStructure})
+var sQueryStage_SubStages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubStages", ID: &i_QueryStages, Members: &m_QueryStages, Type: smithy.ShapeTypeList})
+var sQueryStagePlanNode_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sQueryStagePlanNode_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_String, Type: smithy.ShapeTypeString})
+var sQueryStagePlanNode_Children = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Children", ID: &i_QueryStagePlanNodes, Members: &m_QueryStagePlanNodes, Type: smithy.ShapeTypeList})
+var sQueryStagePlanNode_RemoteSources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemoteSources", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var s_QueryStagePlanNodes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iQueryStagePlanNode, Type: smithy.ShapeTypeStructure})
+var s_QueryStages_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iQueryStage, Type: smithy.ShapeTypeStructure})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceName", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString})
+var sResultConfiguration_OutputLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputLocation", ID: &i_ResultOutputLocation, Type: smithy.ShapeTypeString})
+var sResultConfiguration_EncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure})
+var sResultConfiguration_ExpectedBucketOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpectedBucketOwner", ID: &i_AwsAccountId, Type: smithy.ShapeTypeString})
+var sResultConfiguration_AclConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AclConfiguration", ID: &iAclConfiguration, Members: &mAclConfiguration, Type: smithy.ShapeTypeStructure})
+var sResultConfigurationUpdates_OutputLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputLocation", ID: &i_ResultOutputLocation, Type: smithy.ShapeTypeString})
+var sResultConfigurationUpdates_RemoveOutputLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemoveOutputLocation", ID: &i_BoxedBoolean, Type: smithy.ShapeTypeBoolean})
+var sResultConfigurationUpdates_EncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure})
+var sResultConfigurationUpdates_RemoveEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemoveEncryptionConfiguration", ID: &i_BoxedBoolean, Type: smithy.ShapeTypeBoolean})
+var sResultConfigurationUpdates_ExpectedBucketOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpectedBucketOwner", ID: &i_AwsAccountId, Type: smithy.ShapeTypeString})
+var sResultConfigurationUpdates_RemoveExpectedBucketOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemoveExpectedBucketOwner", ID: &i_BoxedBoolean, Type: smithy.ShapeTypeBoolean})
+var sResultConfigurationUpdates_AclConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AclConfiguration", ID: &iAclConfiguration, Members: &mAclConfiguration, Type: smithy.ShapeTypeStructure})
+var sResultConfigurationUpdates_RemoveAclConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemoveAclConfiguration", ID: &i_BoxedBoolean, Type: smithy.ShapeTypeBoolean})
+var sResultReuseByAgeConfiguration_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sResultReuseByAgeConfiguration_MaxAgeInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxAgeInMinutes", ID: &i_Age, Type: smithy.ShapeTypeInteger})
+var sResultReuseConfiguration_ResultReuseByAgeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResultReuseByAgeConfiguration", ID: &iResultReuseByAgeConfiguration, Members: &mResultReuseByAgeConfiguration, Type: smithy.ShapeTypeStructure})
+var sResultReuseInformation_ReusedPreviousResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReusedPreviousResult", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sResultSet_Rows = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rows", ID: &i_RowList, Members: &m_RowList, Type: smithy.ShapeTypeList})
+var sResultSet_ResultSetMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResultSetMetadata", ID: &iResultSetMetadata, Members: &mResultSetMetadata, Type: smithy.ShapeTypeStructure})
+var sResultSetMetadata_ColumnInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ColumnInfo", ID: &i_ColumnInfoList, Members: &m_ColumnInfoList, Type: smithy.ShapeTypeList})
+var sRow_Data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Data", ID: &i_datumList, Members: &m_datumList, Type: smithy.ShapeTypeList})
+var s_RowList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRow, Members: &mRow, Type: smithy.ShapeTypeStructure})
+var sS3AclOption_BUCKET_OWNER_FULL_CONTROL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUCKET_OWNER_FULL_CONTROL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sS3LoggingConfiguration_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_BoxedBoolean, Type: smithy.ShapeTypeBoolean})
+var sS3LoggingConfiguration_KmsKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKey", ID: &i_KmsKey, Type: smithy.ShapeTypeString})
+var sS3LoggingConfiguration_LogLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogLocation", ID: &i_S3OutputLocation, Type: smithy.ShapeTypeString})
+var sSessionAlreadyExistsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sSessionConfiguration_ExecutionRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionRole", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sSessionConfiguration_WorkingDirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkingDirectory", ID: &i_ResultOutputLocation, Type: smithy.ShapeTypeString})
+var sSessionConfiguration_IdleTimeoutSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdleTimeoutSeconds", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sSessionConfiguration_SessionIdleTimeoutInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionIdleTimeoutInMinutes", ID: &i_SessionIdleTimeoutInMinutes, Type: smithy.ShapeTypeInteger})
+var sSessionConfiguration_EncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure})
+var s_SessionsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSessionSummary, Members: &mSessionSummary, Type: smithy.ShapeTypeStructure})
+var sSessionState_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSessionState_CREATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSessionState_IDLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IDLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSessionState_BUSY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUSY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSessionState_TERMINATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TERMINATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSessionState_TERMINATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TERMINATED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSessionState_DEGRADED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEGRADED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSessionState_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSessionStatistics_DpuExecutionInMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DpuExecutionInMillis", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sSessionStatus_StartDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartDateTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sSessionStatus_LastModifiedDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDateTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sSessionStatus_EndDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndDateTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sSessionStatus_IdleSinceDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdleSinceDateTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sSessionStatus_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iSessionState, Members: &mSessionState, Type: smithy.ShapeTypeEnum})
+var sSessionStatus_StateChangeReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateChangeReason", ID: &i_DescriptionString, Type: smithy.ShapeTypeString})
+var sSessionSummary_SessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionId", ID: &i_SessionId, Type: smithy.ShapeTypeString})
+var sSessionSummary_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_DescriptionString, Type: smithy.ShapeTypeString})
+var sSessionSummary_EngineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineVersion", ID: &iEngineVersion, Members: &mEngineVersion, Type: smithy.ShapeTypeStructure})
+var sSessionSummary_NotebookVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotebookVersion", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sSessionSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iSessionStatus, Members: &mSessionStatus, Type: smithy.ShapeTypeStructure})
+var sStatementType_DDL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DDL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatementType_DML = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DML", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatementType_UTILITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UTILITY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_StringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_SupportedDPUSizeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sTableMetadata_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sTableMetadata_CreateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sTableMetadata_LastAccessTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastAccessTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sTableMetadata_TableType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TableType", ID: &i_TableTypeString, Type: smithy.ShapeTypeString})
+var sTableMetadata_Columns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Columns", ID: &i_ColumnList, Members: &m_ColumnList, Type: smithy.ShapeTypeList})
+var sTableMetadata_PartitionKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartitionKeys", ID: &i_ColumnList, Members: &m_ColumnList, Type: smithy.ShapeTypeList})
+var sTableMetadata_Parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Parameters", ID: &i_ParametersMap, Members: &m_ParametersMap, Type: smithy.ShapeTypeMap})
+var s_TableMetadataList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTableMetadata, Members: &mTableMetadata, Type: smithy.ShapeTypeStructure})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var sThrottleReason_CONCURRENT_QUERY_LIMIT_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONCURRENT_QUERY_LIMIT_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTooManyRequestsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sTooManyRequestsException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iThrottleReason, Members: &mThrottleReason, Type: smithy.ShapeTypeEnum})
+var sUnprocessedNamedQueryId_NamedQueryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NamedQueryId", ID: &i_NamedQueryId, Type: smithy.ShapeTypeString})
+var sUnprocessedNamedQueryId_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_ErrorCode, Type: smithy.ShapeTypeString})
+var sUnprocessedNamedQueryId_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_UnprocessedNamedQueryIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUnprocessedNamedQueryId, Members: &mUnprocessedNamedQueryId, Type: smithy.ShapeTypeStructure})
+var sUnprocessedPreparedStatementName_StatementName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatementName", ID: &i_StatementName, Type: smithy.ShapeTypeString})
+var sUnprocessedPreparedStatementName_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_ErrorCode, Type: smithy.ShapeTypeString})
+var sUnprocessedPreparedStatementName_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_UnprocessedPreparedStatementNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUnprocessedPreparedStatementName, Members: &mUnprocessedPreparedStatementName, Type: smithy.ShapeTypeStructure})
+var sUnprocessedQueryExecutionId_QueryExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryExecutionId", ID: &i_QueryExecutionId, Type: smithy.ShapeTypeString})
+var sUnprocessedQueryExecutionId_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_ErrorCode, Type: smithy.ShapeTypeString})
+var sUnprocessedQueryExecutionId_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_UnprocessedQueryExecutionIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUnprocessedQueryExecutionId, Members: &mUnprocessedQueryExecutionId, Type: smithy.ShapeTypeStructure})
+var sWorkGroup_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_WorkGroupName, Type: smithy.ShapeTypeString})
+var sWorkGroup_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iWorkGroupState, Members: &mWorkGroupState, Type: smithy.ShapeTypeEnum})
+var sWorkGroup_Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Configuration", ID: &iWorkGroupConfiguration, Members: &mWorkGroupConfiguration, Type: smithy.ShapeTypeStructure})
+var sWorkGroup_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_WorkGroupDescriptionString, Type: smithy.ShapeTypeString})
+var sWorkGroup_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sWorkGroup_IdentityCenterApplicationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityCenterApplicationArn", ID: &i_IdentityCenterApplicationArn, Type: smithy.ShapeTypeString})
+var sWorkGroupConfiguration_ResultConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResultConfiguration", ID: &iResultConfiguration, Members: &mResultConfiguration, Type: smithy.ShapeTypeStructure})
+var sWorkGroupConfiguration_ManagedQueryResultsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManagedQueryResultsConfiguration", ID: &iManagedQueryResultsConfiguration, Members: &mManagedQueryResultsConfiguration, Type: smithy.ShapeTypeStructure})
+var sWorkGroupConfiguration_EnforceWorkGroupConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnforceWorkGroupConfiguration", ID: &i_BoxedBoolean, Type: smithy.ShapeTypeBoolean})
+var sWorkGroupConfiguration_PublishCloudWatchMetricsEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublishCloudWatchMetricsEnabled", ID: &i_BoxedBoolean, Type: smithy.ShapeTypeBoolean})
+var sWorkGroupConfiguration_BytesScannedCutoffPerQuery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BytesScannedCutoffPerQuery", ID: &i_BytesScannedCutoffValue, Type: smithy.ShapeTypeLong})
+var sWorkGroupConfiguration_RequesterPaysEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequesterPaysEnabled", ID: &i_BoxedBoolean, Type: smithy.ShapeTypeBoolean})
+var sWorkGroupConfiguration_EngineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineVersion", ID: &iEngineVersion, Members: &mEngineVersion, Type: smithy.ShapeTypeStructure})
+var sWorkGroupConfiguration_AdditionalConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalConfiguration", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sWorkGroupConfiguration_ExecutionRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionRole", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sWorkGroupConfiguration_MonitoringConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitoringConfiguration", ID: &iMonitoringConfiguration, Members: &mMonitoringConfiguration, Type: smithy.ShapeTypeStructure})
+var sWorkGroupConfiguration_EngineConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineConfiguration", ID: &iEngineConfiguration, Members: &mEngineConfiguration, Type: smithy.ShapeTypeStructure})
+var sWorkGroupConfiguration_CustomerContentEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerContentEncryptionConfiguration", ID: &iCustomerContentEncryptionConfiguration, Members: &mCustomerContentEncryptionConfiguration, Type: smithy.ShapeTypeStructure})
+var sWorkGroupConfiguration_EnableMinimumEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableMinimumEncryptionConfiguration", ID: &i_BoxedBoolean, Type: smithy.ShapeTypeBoolean})
+var sWorkGroupConfiguration_IdentityCenterConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityCenterConfiguration", ID: &iIdentityCenterConfiguration, Members: &mIdentityCenterConfiguration, Type: smithy.ShapeTypeStructure})
+var sWorkGroupConfiguration_QueryResultsS3AccessGrantsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryResultsS3AccessGrantsConfiguration", ID: &iQueryResultsS3AccessGrantsConfiguration, Members: &mQueryResultsS3AccessGrantsConfiguration, Type: smithy.ShapeTypeStructure})
+var sWorkGroupConfigurationUpdates_EnforceWorkGroupConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnforceWorkGroupConfiguration", ID: &i_BoxedBoolean, Type: smithy.ShapeTypeBoolean})
+var sWorkGroupConfigurationUpdates_ResultConfigurationUpdates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResultConfigurationUpdates", ID: &iResultConfigurationUpdates, Members: &mResultConfigurationUpdates, Type: smithy.ShapeTypeStructure})
+var sWorkGroupConfigurationUpdates_ManagedQueryResultsConfigurationUpdates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManagedQueryResultsConfigurationUpdates", ID: &iManagedQueryResultsConfigurationUpdates, Members: &mManagedQueryResultsConfigurationUpdates, Type: smithy.ShapeTypeStructure})
+var sWorkGroupConfigurationUpdates_PublishCloudWatchMetricsEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublishCloudWatchMetricsEnabled", ID: &i_BoxedBoolean, Type: smithy.ShapeTypeBoolean})
+var sWorkGroupConfigurationUpdates_BytesScannedCutoffPerQuery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BytesScannedCutoffPerQuery", ID: &i_BytesScannedCutoffValue, Type: smithy.ShapeTypeLong})
+var sWorkGroupConfigurationUpdates_RemoveBytesScannedCutoffPerQuery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemoveBytesScannedCutoffPerQuery", ID: &i_BoxedBoolean, Type: smithy.ShapeTypeBoolean})
+var sWorkGroupConfigurationUpdates_RequesterPaysEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequesterPaysEnabled", ID: &i_BoxedBoolean, Type: smithy.ShapeTypeBoolean})
+var sWorkGroupConfigurationUpdates_EngineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineVersion", ID: &iEngineVersion, Members: &mEngineVersion, Type: smithy.ShapeTypeStructure})
+var sWorkGroupConfigurationUpdates_RemoveCustomerContentEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemoveCustomerContentEncryptionConfiguration", ID: &i_BoxedBoolean, Type: smithy.ShapeTypeBoolean})
+var sWorkGroupConfigurationUpdates_AdditionalConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalConfiguration", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sWorkGroupConfigurationUpdates_ExecutionRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionRole", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sWorkGroupConfigurationUpdates_CustomerContentEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerContentEncryptionConfiguration", ID: &iCustomerContentEncryptionConfiguration, Members: &mCustomerContentEncryptionConfiguration, Type: smithy.ShapeTypeStructure})
+var sWorkGroupConfigurationUpdates_EnableMinimumEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableMinimumEncryptionConfiguration", ID: &i_BoxedBoolean, Type: smithy.ShapeTypeBoolean})
+var sWorkGroupConfigurationUpdates_QueryResultsS3AccessGrantsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryResultsS3AccessGrantsConfiguration", ID: &iQueryResultsS3AccessGrantsConfiguration, Members: &mQueryResultsS3AccessGrantsConfiguration, Type: smithy.ShapeTypeStructure})
+var sWorkGroupConfigurationUpdates_MonitoringConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitoringConfiguration", ID: &iMonitoringConfiguration, Members: &mMonitoringConfiguration, Type: smithy.ShapeTypeStructure})
+var sWorkGroupConfigurationUpdates_EngineConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineConfiguration", ID: &iEngineConfiguration, Members: &mEngineConfiguration, Type: smithy.ShapeTypeStructure})
+var s_WorkGroupNamesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_WorkGroupName, Type: smithy.ShapeTypeString})
+var s_WorkGroupsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWorkGroupSummary, Members: &mWorkGroupSummary, Type: smithy.ShapeTypeStructure})
+var sWorkGroupState_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sWorkGroupState_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sWorkGroupSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_WorkGroupName, Type: smithy.ShapeTypeString})
+var sWorkGroupSummary_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iWorkGroupState, Members: &mWorkGroupState, Type: smithy.ShapeTypeEnum})
+var sWorkGroupSummary_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_WorkGroupDescriptionString, Type: smithy.ShapeTypeString})
+var sWorkGroupSummary_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sWorkGroupSummary_EngineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineVersion", ID: &iEngineVersion, Members: &mEngineVersion, Type: smithy.ShapeTypeStructure})
+var sWorkGroupSummary_IdentityCenterApplicationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityCenterApplicationArn", ID: &i_IdentityCenterApplicationArn, Type: smithy.ShapeTypeString})
+var sBatchGetNamedQueryInput_NamedQueryIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NamedQueryIds", ID: &i_NamedQueryIdList, Members: &m_NamedQueryIdList, Type: smithy.ShapeTypeList})
+var sBatchGetNamedQueryOutput_NamedQueries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NamedQueries", ID: &i_NamedQueryList, Members: &m_NamedQueryList, Type: smithy.ShapeTypeList})
+var sBatchGetNamedQueryOutput_UnprocessedNamedQueryIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UnprocessedNamedQueryIds", ID: &i_UnprocessedNamedQueryIdList, Members: &m_UnprocessedNamedQueryIdList, Type: smithy.ShapeTypeList})
+var sBatchGetPreparedStatementInput_PreparedStatementNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreparedStatementNames", ID: &i_PreparedStatementNameList, Members: &m_PreparedStatementNameList, Type: smithy.ShapeTypeList})
+var sBatchGetPreparedStatementInput_WorkGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkGroup", ID: &i_WorkGroupName, Type: smithy.ShapeTypeString})
+var sBatchGetPreparedStatementOutput_PreparedStatements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreparedStatements", ID: &i_PreparedStatementDetailsList, Members: &m_PreparedStatementDetailsList, Type: smithy.ShapeTypeList})
+var sBatchGetPreparedStatementOutput_UnprocessedPreparedStatementNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UnprocessedPreparedStatementNames", ID: &i_UnprocessedPreparedStatementNameList, Members: &m_UnprocessedPreparedStatementNameList, Type: smithy.ShapeTypeList})
+var sBatchGetQueryExecutionInput_QueryExecutionIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryExecutionIds", ID: &i_QueryExecutionIdList, Members: &m_QueryExecutionIdList, Type: smithy.ShapeTypeList})
+var sBatchGetQueryExecutionOutput_QueryExecutions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryExecutions", ID: &i_QueryExecutionList, Members: &m_QueryExecutionList, Type: smithy.ShapeTypeList})
+var sBatchGetQueryExecutionOutput_UnprocessedQueryExecutionIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UnprocessedQueryExecutionIds", ID: &i_UnprocessedQueryExecutionIdList, Members: &m_UnprocessedQueryExecutionIdList, Type: smithy.ShapeTypeList})
+var sCancelCapacityReservationInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_CapacityReservationName, Type: smithy.ShapeTypeString})
+var sCreateCapacityReservationInput_TargetDpus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetDpus", ID: &i_TargetDpusInteger, Type: smithy.ShapeTypeInteger})
+var sCreateCapacityReservationInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_CapacityReservationName, Type: smithy.ShapeTypeString})
+var sCreateCapacityReservationInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateDataCatalogInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_CatalogNameString, Type: smithy.ShapeTypeString})
+var sCreateDataCatalogInput_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iDataCatalogType, Members: &mDataCatalogType, Type: smithy.ShapeTypeEnum})
+var sCreateDataCatalogInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_DescriptionString, Type: smithy.ShapeTypeString})
+var sCreateDataCatalogInput_Parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Parameters", ID: &i_ParametersMap, Members: &m_ParametersMap, Type: smithy.ShapeTypeMap})
+var sCreateDataCatalogInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateDataCatalogOutput_DataCatalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataCatalog", ID: &iDataCatalog, Members: &mDataCatalog, Type: smithy.ShapeTypeStructure})
+var sCreateNamedQueryInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sCreateNamedQueryInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_DescriptionString, Type: smithy.ShapeTypeString})
+var sCreateNamedQueryInput_Database = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Database", ID: &i_DatabaseString, Type: smithy.ShapeTypeString})
+var sCreateNamedQueryInput_QueryString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryString", ID: &i_QueryString, Type: smithy.ShapeTypeString})
+var sCreateNamedQueryInput_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString})
+var sCreateNamedQueryInput_WorkGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkGroup", ID: &i_WorkGroupName, Type: smithy.ShapeTypeString})
+var sCreateNamedQueryOutput_NamedQueryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NamedQueryId", ID: &i_NamedQueryId, Type: smithy.ShapeTypeString})
+var sCreateNotebookInput_WorkGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkGroup", ID: &i_WorkGroupName, Type: smithy.ShapeTypeString})
+var sCreateNotebookInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NotebookName, Type: smithy.ShapeTypeString})
+var sCreateNotebookInput_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sCreateNotebookOutput_NotebookId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotebookId", ID: &i_NotebookId, Type: smithy.ShapeTypeString})
+var sCreatePreparedStatementInput_StatementName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatementName", ID: &i_StatementName, Type: smithy.ShapeTypeString})
+var sCreatePreparedStatementInput_WorkGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkGroup", ID: &i_WorkGroupName, Type: smithy.ShapeTypeString})
+var sCreatePreparedStatementInput_QueryStatement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryStatement", ID: &i_QueryString, Type: smithy.ShapeTypeString})
+var sCreatePreparedStatementInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_DescriptionString, Type: smithy.ShapeTypeString})
+var sCreatePresignedNotebookUrlRequest_SessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionId", ID: &i_SessionId, Type: smithy.ShapeTypeString})
+var sCreatePresignedNotebookUrlResponse_NotebookUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotebookUrl", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCreatePresignedNotebookUrlResponse_AuthToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthToken", ID: &i_AuthToken, Type: smithy.ShapeTypeString})
+var sCreatePresignedNotebookUrlResponse_AuthTokenExpirationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthTokenExpirationTime", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sCreateWorkGroupInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_WorkGroupName, Type: smithy.ShapeTypeString})
+var sCreateWorkGroupInput_Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Configuration", ID: &iWorkGroupConfiguration, Members: &mWorkGroupConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateWorkGroupInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_WorkGroupDescriptionString, Type: smithy.ShapeTypeString})
+var sCreateWorkGroupInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sDeleteCapacityReservationInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_CapacityReservationName, Type: smithy.ShapeTypeString})
+var sDeleteDataCatalogInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_CatalogNameString, Type: smithy.ShapeTypeString})
+var sDeleteDataCatalogInput_DeleteCatalogOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteCatalogOnly", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sDeleteDataCatalogOutput_DataCatalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataCatalog", ID: &iDataCatalog, Members: &mDataCatalog, Type: smithy.ShapeTypeStructure})
+var sDeleteNamedQueryInput_NamedQueryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NamedQueryId", ID: &i_NamedQueryId, Type: smithy.ShapeTypeString})
+var sDeleteNotebookInput_NotebookId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotebookId", ID: &i_NotebookId, Type: smithy.ShapeTypeString})
+var sDeletePreparedStatementInput_StatementName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatementName", ID: &i_StatementName, Type: smithy.ShapeTypeString})
+var sDeletePreparedStatementInput_WorkGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkGroup", ID: &i_WorkGroupName, Type: smithy.ShapeTypeString})
+var sDeleteWorkGroupInput_WorkGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkGroup", ID: &i_WorkGroupName, Type: smithy.ShapeTypeString})
+var sDeleteWorkGroupInput_RecursiveDeleteOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecursiveDeleteOption", ID: &i_BoxedBoolean, Type: smithy.ShapeTypeBoolean})
+var sExportNotebookInput_NotebookId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotebookId", ID: &i_NotebookId, Type: smithy.ShapeTypeString})
+var sExportNotebookOutput_NotebookMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotebookMetadata", ID: &iNotebookMetadata, Members: &mNotebookMetadata, Type: smithy.ShapeTypeStructure})
+var sExportNotebookOutput_Payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Payload", ID: &i_Payload, Type: smithy.ShapeTypeString})
+var sGetCalculationExecutionCodeRequest_CalculationExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CalculationExecutionId", ID: &i_CalculationExecutionId, Type: smithy.ShapeTypeString})
+var sGetCalculationExecutionCodeResponse_CodeBlock = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CodeBlock", ID: &i_CodeBlock, Type: smithy.ShapeTypeString})
+var sGetCalculationExecutionRequest_CalculationExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CalculationExecutionId", ID: &i_CalculationExecutionId, Type: smithy.ShapeTypeString})
+var sGetCalculationExecutionResponse_CalculationExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CalculationExecutionId", ID: &i_CalculationExecutionId, Type: smithy.ShapeTypeString})
+var sGetCalculationExecutionResponse_SessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionId", ID: &i_SessionId, Type: smithy.ShapeTypeString})
+var sGetCalculationExecutionResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_DescriptionString, Type: smithy.ShapeTypeString})
+var sGetCalculationExecutionResponse_WorkingDirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkingDirectory", ID: &i_S3Uri, Type: smithy.ShapeTypeString})
+var sGetCalculationExecutionResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iCalculationStatus, Members: &mCalculationStatus, Type: smithy.ShapeTypeStructure})
+var sGetCalculationExecutionResponse_Statistics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Statistics", ID: &iCalculationStatistics, Members: &mCalculationStatistics, Type: smithy.ShapeTypeStructure})
+var sGetCalculationExecutionResponse_Result = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Result", ID: &iCalculationResult, Members: &mCalculationResult, Type: smithy.ShapeTypeStructure})
+var sGetCalculationExecutionStatusRequest_CalculationExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CalculationExecutionId", ID: &i_CalculationExecutionId, Type: smithy.ShapeTypeString})
+var sGetCalculationExecutionStatusResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iCalculationStatus, Members: &mCalculationStatus, Type: smithy.ShapeTypeStructure})
+var sGetCalculationExecutionStatusResponse_Statistics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Statistics", ID: &iCalculationStatistics, Members: &mCalculationStatistics, Type: smithy.ShapeTypeStructure})
+var sGetCapacityAssignmentConfigurationInput_CapacityReservationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CapacityReservationName", ID: &i_CapacityReservationName, Type: smithy.ShapeTypeString})
+var sGetCapacityAssignmentConfigurationOutput_CapacityAssignmentConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CapacityAssignmentConfiguration", ID: &iCapacityAssignmentConfiguration, Members: &mCapacityAssignmentConfiguration, Type: smithy.ShapeTypeStructure})
+var sGetCapacityReservationInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_CapacityReservationName, Type: smithy.ShapeTypeString})
+var sGetCapacityReservationOutput_CapacityReservation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CapacityReservation", ID: &iCapacityReservation, Members: &mCapacityReservation, Type: smithy.ShapeTypeStructure})
+var sGetDatabaseInput_CatalogName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CatalogName", ID: &i_CatalogNameString, Type: smithy.ShapeTypeString})
+var sGetDatabaseInput_DatabaseName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseName", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sGetDatabaseInput_WorkGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkGroup", ID: &i_WorkGroupName, Type: smithy.ShapeTypeString})
+var sGetDatabaseOutput_Database = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Database", ID: &iDatabase, Members: &mDatabase, Type: smithy.ShapeTypeStructure})
+var sGetDataCatalogInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_CatalogNameString, Type: smithy.ShapeTypeString})
+var sGetDataCatalogInput_WorkGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkGroup", ID: &i_WorkGroupName, Type: smithy.ShapeTypeString})
+var sGetDataCatalogOutput_DataCatalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataCatalog", ID: &iDataCatalog, Members: &mDataCatalog, Type: smithy.ShapeTypeStructure})
+var sGetNamedQueryInput_NamedQueryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NamedQueryId", ID: &i_NamedQueryId, Type: smithy.ShapeTypeString})
+var sGetNamedQueryOutput_NamedQuery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NamedQuery", ID: &iNamedQuery, Members: &mNamedQuery, Type: smithy.ShapeTypeStructure})
+var sGetNotebookMetadataInput_NotebookId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotebookId", ID: &i_NotebookId, Type: smithy.ShapeTypeString})
+var sGetNotebookMetadataOutput_NotebookMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotebookMetadata", ID: &iNotebookMetadata, Members: &mNotebookMetadata, Type: smithy.ShapeTypeStructure})
+var sGetPreparedStatementInput_StatementName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatementName", ID: &i_StatementName, Type: smithy.ShapeTypeString})
+var sGetPreparedStatementInput_WorkGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkGroup", ID: &i_WorkGroupName, Type: smithy.ShapeTypeString})
+var sGetPreparedStatementOutput_PreparedStatement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreparedStatement", ID: &iPreparedStatement, Members: &mPreparedStatement, Type: smithy.ShapeTypeStructure})
+var sGetQueryExecutionInput_QueryExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryExecutionId", ID: &i_QueryExecutionId, Type: smithy.ShapeTypeString})
+var sGetQueryExecutionOutput_QueryExecution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryExecution", ID: &iQueryExecution, Members: &mQueryExecution, Type: smithy.ShapeTypeStructure})
+var sGetQueryResultsInput_QueryExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryExecutionId", ID: &i_QueryExecutionId, Type: smithy.ShapeTypeString})
+var sGetQueryResultsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sGetQueryResultsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxQueryResults, Type: smithy.ShapeTypeInteger})
+var sGetQueryResultsInput_QueryResultType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryResultType", ID: &iQueryResultType, Members: &mQueryResultType, Type: smithy.ShapeTypeEnum})
+var sGetQueryResultsOutput_UpdateCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateCount", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sGetQueryResultsOutput_ResultSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResultSet", ID: &iResultSet, Members: &mResultSet, Type: smithy.ShapeTypeStructure})
+var sGetQueryResultsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sGetQueryRuntimeStatisticsInput_QueryExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryExecutionId", ID: &i_QueryExecutionId, Type: smithy.ShapeTypeString})
+var sGetQueryRuntimeStatisticsOutput_QueryRuntimeStatistics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryRuntimeStatistics", ID: &iQueryRuntimeStatistics, Members: &mQueryRuntimeStatistics, Type: smithy.ShapeTypeStructure})
+var sGetResourceDashboardRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString})
+var sGetResourceDashboardResponse_Url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Url", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetSessionEndpointRequest_SessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionId", ID: &i_SessionId, Type: smithy.ShapeTypeString})
+var sGetSessionEndpointResponse_EndpointUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointUrl", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetSessionEndpointResponse_AuthToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetSessionEndpointResponse_AuthTokenExpirationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthTokenExpirationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetSessionRequest_SessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionId", ID: &i_SessionId, Type: smithy.ShapeTypeString})
+var sGetSessionResponse_SessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionId", ID: &i_SessionId, Type: smithy.ShapeTypeString})
+var sGetSessionResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_DescriptionString, Type: smithy.ShapeTypeString})
+var sGetSessionResponse_WorkGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkGroup", ID: &i_WorkGroupName, Type: smithy.ShapeTypeString})
+var sGetSessionResponse_EngineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineVersion", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sGetSessionResponse_EngineConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineConfiguration", ID: &iEngineConfiguration, Members: &mEngineConfiguration, Type: smithy.ShapeTypeStructure})
+var sGetSessionResponse_NotebookVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotebookVersion", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sGetSessionResponse_MonitoringConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitoringConfiguration", ID: &iMonitoringConfiguration, Members: &mMonitoringConfiguration, Type: smithy.ShapeTypeStructure})
+var sGetSessionResponse_SessionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionConfiguration", ID: &iSessionConfiguration, Members: &mSessionConfiguration, Type: smithy.ShapeTypeStructure})
+var sGetSessionResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iSessionStatus, Members: &mSessionStatus, Type: smithy.ShapeTypeStructure})
+var sGetSessionResponse_Statistics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Statistics", ID: &iSessionStatistics, Members: &mSessionStatistics, Type: smithy.ShapeTypeStructure})
+var sGetSessionStatusRequest_SessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionId", ID: &i_SessionId, Type: smithy.ShapeTypeString})
+var sGetSessionStatusResponse_SessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionId", ID: &i_SessionId, Type: smithy.ShapeTypeString})
+var sGetSessionStatusResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iSessionStatus, Members: &mSessionStatus, Type: smithy.ShapeTypeStructure})
+var sGetTableMetadataInput_CatalogName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CatalogName", ID: &i_CatalogNameString, Type: smithy.ShapeTypeString})
+var sGetTableMetadataInput_DatabaseName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseName", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sGetTableMetadataInput_TableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TableName", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sGetTableMetadataInput_WorkGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkGroup", ID: &i_WorkGroupName, Type: smithy.ShapeTypeString})
+var sGetTableMetadataOutput_TableMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TableMetadata", ID: &iTableMetadata, Members: &mTableMetadata, Type: smithy.ShapeTypeStructure})
+var sGetWorkGroupInput_WorkGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkGroup", ID: &i_WorkGroupName, Type: smithy.ShapeTypeString})
+var sGetWorkGroupOutput_WorkGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkGroup", ID: &iWorkGroup, Members: &mWorkGroup, Type: smithy.ShapeTypeStructure})
+var sImportNotebookInput_WorkGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkGroup", ID: &i_WorkGroupName, Type: smithy.ShapeTypeString})
+var sImportNotebookInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NotebookName, Type: smithy.ShapeTypeString})
+var sImportNotebookInput_Payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Payload", ID: &i_Payload, Type: smithy.ShapeTypeString})
+var sImportNotebookInput_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iNotebookType, Members: &mNotebookType, Type: smithy.ShapeTypeEnum})
+var sImportNotebookInput_NotebookS3LocationUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotebookS3LocationUri", ID: &i_S3Uri, Type: smithy.ShapeTypeString})
+var sImportNotebookInput_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sImportNotebookOutput_NotebookId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotebookId", ID: &i_NotebookId, Type: smithy.ShapeTypeString})
+var sListApplicationDPUSizesInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxApplicationDPUSizesCount, Type: smithy.ShapeTypeInteger})
+var sListApplicationDPUSizesInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sListApplicationDPUSizesOutput_ApplicationDPUSizes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationDPUSizes", ID: &i_ApplicationDPUSizesList, Members: &m_ApplicationDPUSizesList, Type: smithy.ShapeTypeList})
+var sListApplicationDPUSizesOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sListCalculationExecutionsRequest_SessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionId", ID: &i_SessionId, Type: smithy.ShapeTypeString})
+var sListCalculationExecutionsRequest_StateFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateFilter", ID: &iCalculationExecutionState, Members: &mCalculationExecutionState, Type: smithy.ShapeTypeEnum})
+var sListCalculationExecutionsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxCalculationsCount, Type: smithy.ShapeTypeInteger})
+var sListCalculationExecutionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_SessionManagerToken, Type: smithy.ShapeTypeString})
+var sListCalculationExecutionsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_SessionManagerToken, Type: smithy.ShapeTypeString})
+var sListCalculationExecutionsResponse_Calculations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Calculations", ID: &i_CalculationsList, Members: &m_CalculationsList, Type: smithy.ShapeTypeList})
+var sListCapacityReservationsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sListCapacityReservationsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxCapacityReservationsCount, Type: smithy.ShapeTypeInteger})
+var sListCapacityReservationsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sListCapacityReservationsOutput_CapacityReservations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CapacityReservations", ID: &i_CapacityReservationsList, Members: &m_CapacityReservationsList, Type: smithy.ShapeTypeList})
+var sListDatabasesInput_CatalogName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CatalogName", ID: &i_CatalogNameString, Type: smithy.ShapeTypeString})
+var sListDatabasesInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sListDatabasesInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxDatabasesCount, Type: smithy.ShapeTypeInteger})
+var sListDatabasesInput_WorkGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkGroup", ID: &i_WorkGroupName, Type: smithy.ShapeTypeString})
+var sListDatabasesOutput_DatabaseList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseList", ID: &i_DatabaseList, Members: &m_DatabaseList, Type: smithy.ShapeTypeList})
+var sListDatabasesOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sListDataCatalogsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sListDataCatalogsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxDataCatalogsCount, Type: smithy.ShapeTypeInteger})
+var sListDataCatalogsInput_WorkGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkGroup", ID: &i_WorkGroupName, Type: smithy.ShapeTypeString})
+var sListDataCatalogsOutput_DataCatalogsSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataCatalogsSummary", ID: &i_DataCatalogSummaryList, Members: &m_DataCatalogSummaryList, Type: smithy.ShapeTypeList})
+var sListDataCatalogsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sListEngineVersionsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sListEngineVersionsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxEngineVersionsCount, Type: smithy.ShapeTypeInteger})
+var sListEngineVersionsOutput_EngineVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineVersions", ID: &i_EngineVersionsList, Members: &m_EngineVersionsList, Type: smithy.ShapeTypeList})
+var sListEngineVersionsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sListExecutorsRequest_SessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionId", ID: &i_SessionId, Type: smithy.ShapeTypeString})
+var sListExecutorsRequest_ExecutorStateFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutorStateFilter", ID: &iExecutorState, Members: &mExecutorState, Type: smithy.ShapeTypeEnum})
+var sListExecutorsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxListExecutorsCount, Type: smithy.ShapeTypeInteger})
+var sListExecutorsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_SessionManagerToken, Type: smithy.ShapeTypeString})
+var sListExecutorsResponse_SessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionId", ID: &i_SessionId, Type: smithy.ShapeTypeString})
+var sListExecutorsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_SessionManagerToken, Type: smithy.ShapeTypeString})
+var sListExecutorsResponse_ExecutorsSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutorsSummary", ID: &i_ExecutorsSummaryList, Members: &m_ExecutorsSummaryList, Type: smithy.ShapeTypeList})
+var sListNamedQueriesInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sListNamedQueriesInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxNamedQueriesCount, Type: smithy.ShapeTypeInteger})
+var sListNamedQueriesInput_WorkGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkGroup", ID: &i_WorkGroupName, Type: smithy.ShapeTypeString})
+var sListNamedQueriesOutput_NamedQueryIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NamedQueryIds", ID: &i_NamedQueryIdList, Members: &m_NamedQueryIdList, Type: smithy.ShapeTypeList})
+var sListNamedQueriesOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sListNotebookMetadataInput_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &iFilterDefinition, Members: &mFilterDefinition, Type: smithy.ShapeTypeStructure})
+var sListNotebookMetadataInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sListNotebookMetadataInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxNotebooksCount, Type: smithy.ShapeTypeInteger})
+var sListNotebookMetadataInput_WorkGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkGroup", ID: &i_WorkGroupName, Type: smithy.ShapeTypeString})
+var sListNotebookMetadataOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sListNotebookMetadataOutput_NotebookMetadataList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotebookMetadataList", ID: &i_NotebookMetadataArray, Members: &m_NotebookMetadataArray, Type: smithy.ShapeTypeList})
+var sListNotebookSessionsRequest_NotebookId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotebookId", ID: &i_NotebookId, Type: smithy.ShapeTypeString})
+var sListNotebookSessionsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxSessionsCount, Type: smithy.ShapeTypeInteger})
+var sListNotebookSessionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sListNotebookSessionsResponse_NotebookSessionsList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotebookSessionsList", ID: &i_NotebookSessionsList, Members: &m_NotebookSessionsList, Type: smithy.ShapeTypeList})
+var sListNotebookSessionsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sListPreparedStatementsInput_WorkGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkGroup", ID: &i_WorkGroupName, Type: smithy.ShapeTypeString})
+var sListPreparedStatementsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sListPreparedStatementsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxPreparedStatementsCount, Type: smithy.ShapeTypeInteger})
+var sListPreparedStatementsOutput_PreparedStatements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreparedStatements", ID: &i_PreparedStatementsList, Members: &m_PreparedStatementsList, Type: smithy.ShapeTypeList})
+var sListPreparedStatementsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sListQueryExecutionsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sListQueryExecutionsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxQueryExecutionsCount, Type: smithy.ShapeTypeInteger})
+var sListQueryExecutionsInput_WorkGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkGroup", ID: &i_WorkGroupName, Type: smithy.ShapeTypeString})
+var sListQueryExecutionsOutput_QueryExecutionIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryExecutionIds", ID: &i_QueryExecutionIdList, Members: &m_QueryExecutionIdList, Type: smithy.ShapeTypeList})
+var sListQueryExecutionsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sListSessionsRequest_WorkGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkGroup", ID: &i_WorkGroupName, Type: smithy.ShapeTypeString})
+var sListSessionsRequest_StateFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateFilter", ID: &iSessionState, Members: &mSessionState, Type: smithy.ShapeTypeEnum})
+var sListSessionsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxSessionsCount, Type: smithy.ShapeTypeInteger})
+var sListSessionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_SessionManagerToken, Type: smithy.ShapeTypeString})
+var sListSessionsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_SessionManagerToken, Type: smithy.ShapeTypeString})
+var sListSessionsResponse_Sessions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sessions", ID: &i_SessionsList, Members: &m_SessionsList, Type: smithy.ShapeTypeList})
+var sListTableMetadataInput_CatalogName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CatalogName", ID: &i_CatalogNameString, Type: smithy.ShapeTypeString})
+var sListTableMetadataInput_DatabaseName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseName", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sListTableMetadataInput_Expression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Expression", ID: &i_ExpressionString, Type: smithy.ShapeTypeString})
+var sListTableMetadataInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sListTableMetadataInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxTableMetadataCount, Type: smithy.ShapeTypeInteger})
+var sListTableMetadataInput_WorkGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkGroup", ID: &i_WorkGroupName, Type: smithy.ShapeTypeString})
+var sListTableMetadataOutput_TableMetadataList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TableMetadataList", ID: &i_TableMetadataList, Members: &m_TableMetadataList, Type: smithy.ShapeTypeList})
+var sListTableMetadataOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sListTagsForResourceInput_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString})
+var sListTagsForResourceInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sListTagsForResourceInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxTagsCount, Type: smithy.ShapeTypeInteger})
+var sListTagsForResourceOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sListTagsForResourceOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sListWorkGroupsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sListWorkGroupsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxWorkGroupsCount, Type: smithy.ShapeTypeInteger})
+var sListWorkGroupsOutput_WorkGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkGroups", ID: &i_WorkGroupsList, Members: &m_WorkGroupsList, Type: smithy.ShapeTypeList})
+var sListWorkGroupsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sPutCapacityAssignmentConfigurationInput_CapacityReservationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CapacityReservationName", ID: &i_CapacityReservationName, Type: smithy.ShapeTypeString})
+var sPutCapacityAssignmentConfigurationInput_CapacityAssignments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CapacityAssignments", ID: &i_CapacityAssignmentsList, Members: &m_CapacityAssignmentsList, Type: smithy.ShapeTypeList})
+var sStartCalculationExecutionRequest_SessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionId", ID: &i_SessionId, Type: smithy.ShapeTypeString})
+var sStartCalculationExecutionRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_DescriptionString, Type: smithy.ShapeTypeString})
+var sStartCalculationExecutionRequest_CalculationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CalculationConfiguration", ID: &iCalculationConfiguration, Members: &mCalculationConfiguration, Type: smithy.ShapeTypeStructure})
+var sStartCalculationExecutionRequest_CodeBlock = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CodeBlock", ID: &i_CodeBlock, Type: smithy.ShapeTypeString})
+var sStartCalculationExecutionRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString})
+var sStartCalculationExecutionResponse_CalculationExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CalculationExecutionId", ID: &i_CalculationExecutionId, Type: smithy.ShapeTypeString})
+var sStartCalculationExecutionResponse_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iCalculationExecutionState, Members: &mCalculationExecutionState, Type: smithy.ShapeTypeEnum})
+var sStartQueryExecutionInput_QueryString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryString", ID: &i_QueryString, Type: smithy.ShapeTypeString})
+var sStartQueryExecutionInput_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString})
+var sStartQueryExecutionInput_QueryExecutionContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryExecutionContext", ID: &iQueryExecutionContext, Members: &mQueryExecutionContext, Type: smithy.ShapeTypeStructure})
+var sStartQueryExecutionInput_ResultConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResultConfiguration", ID: &iResultConfiguration, Members: &mResultConfiguration, Type: smithy.ShapeTypeStructure})
+var sStartQueryExecutionInput_WorkGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkGroup", ID: &i_WorkGroupName, Type: smithy.ShapeTypeString})
+var sStartQueryExecutionInput_ExecutionParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionParameters", ID: &i_ExecutionParameters, Members: &m_ExecutionParameters, Type: smithy.ShapeTypeList})
+var sStartQueryExecutionInput_ResultReuseConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResultReuseConfiguration", ID: &iResultReuseConfiguration, Members: &mResultReuseConfiguration, Type: smithy.ShapeTypeStructure})
+var sStartQueryExecutionInput_EngineConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineConfiguration", ID: &iEngineConfiguration, Members: &mEngineConfiguration, Type: smithy.ShapeTypeStructure})
+var sStartQueryExecutionOutput_QueryExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryExecutionId", ID: &i_QueryExecutionId, Type: smithy.ShapeTypeString})
+var sStartSessionRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_DescriptionString, Type: smithy.ShapeTypeString})
+var sStartSessionRequest_WorkGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkGroup", ID: &i_WorkGroupName, Type: smithy.ShapeTypeString})
+var sStartSessionRequest_EngineConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngineConfiguration", ID: &iEngineConfiguration, Members: &mEngineConfiguration, Type: smithy.ShapeTypeStructure})
+var sStartSessionRequest_ExecutionRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionRole", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sStartSessionRequest_MonitoringConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MonitoringConfiguration", ID: &iMonitoringConfiguration, Members: &mMonitoringConfiguration, Type: smithy.ShapeTypeStructure})
+var sStartSessionRequest_NotebookVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotebookVersion", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sStartSessionRequest_SessionIdleTimeoutInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionIdleTimeoutInMinutes", ID: &i_SessionIdleTimeoutInMinutes, Type: smithy.ShapeTypeInteger})
+var sStartSessionRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString})
+var sStartSessionRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sStartSessionRequest_CopyWorkGroupTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyWorkGroupTags", ID: &i_BoxedBoolean, Type: smithy.ShapeTypeBoolean})
+var sStartSessionResponse_SessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionId", ID: &i_SessionId, Type: smithy.ShapeTypeString})
+var sStartSessionResponse_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iSessionState, Members: &mSessionState, Type: smithy.ShapeTypeEnum})
+var sStopCalculationExecutionRequest_CalculationExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CalculationExecutionId", ID: &i_CalculationExecutionId, Type: smithy.ShapeTypeString})
+var sStopCalculationExecutionResponse_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iCalculationExecutionState, Members: &mCalculationExecutionState, Type: smithy.ShapeTypeEnum})
+var sStopQueryExecutionInput_QueryExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryExecutionId", ID: &i_QueryExecutionId, Type: smithy.ShapeTypeString})
+var sTagResourceInput_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString})
+var sTagResourceInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sTerminateSessionRequest_SessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionId", ID: &i_SessionId, Type: smithy.ShapeTypeString})
+var sTerminateSessionResponse_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iSessionState, Members: &mSessionState, Type: smithy.ShapeTypeEnum})
+var sUntagResourceInput_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString})
+var sUntagResourceInput_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var sUpdateCapacityReservationInput_TargetDpus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetDpus", ID: &i_TargetDpusInteger, Type: smithy.ShapeTypeInteger})
+var sUpdateCapacityReservationInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_CapacityReservationName, Type: smithy.ShapeTypeString})
+var sUpdateDataCatalogInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_CatalogNameString, Type: smithy.ShapeTypeString})
+var sUpdateDataCatalogInput_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iDataCatalogType, Members: &mDataCatalogType, Type: smithy.ShapeTypeEnum})
+var sUpdateDataCatalogInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_DescriptionString, Type: smithy.ShapeTypeString})
+var sUpdateDataCatalogInput_Parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Parameters", ID: &i_ParametersMap, Members: &m_ParametersMap, Type: smithy.ShapeTypeMap})
+var sUpdateNamedQueryInput_NamedQueryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NamedQueryId", ID: &i_NamedQueryId, Type: smithy.ShapeTypeString})
+var sUpdateNamedQueryInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NameString, Type: smithy.ShapeTypeString})
+var sUpdateNamedQueryInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_NamedQueryDescriptionString, Type: smithy.ShapeTypeString})
+var sUpdateNamedQueryInput_QueryString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryString", ID: &i_QueryString, Type: smithy.ShapeTypeString})
+var sUpdateNotebookInput_NotebookId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotebookId", ID: &i_NotebookId, Type: smithy.ShapeTypeString})
+var sUpdateNotebookInput_Payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Payload", ID: &i_Payload, Type: smithy.ShapeTypeString})
+var sUpdateNotebookInput_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iNotebookType, Members: &mNotebookType, Type: smithy.ShapeTypeEnum})
+var sUpdateNotebookInput_SessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionId", ID: &i_SessionId, Type: smithy.ShapeTypeString})
+var sUpdateNotebookInput_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sUpdateNotebookMetadataInput_NotebookId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotebookId", ID: &i_NotebookId, Type: smithy.ShapeTypeString})
+var sUpdateNotebookMetadataInput_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sUpdateNotebookMetadataInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NotebookName, Type: smithy.ShapeTypeString})
+var sUpdatePreparedStatementInput_StatementName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatementName", ID: &i_StatementName, Type: smithy.ShapeTypeString})
+var sUpdatePreparedStatementInput_WorkGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkGroup", ID: &i_WorkGroupName, Type: smithy.ShapeTypeString})
+var sUpdatePreparedStatementInput_QueryStatement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryStatement", ID: &i_QueryString, Type: smithy.ShapeTypeString})
+var sUpdatePreparedStatementInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_DescriptionString, Type: smithy.ShapeTypeString})
+var sUpdateWorkGroupInput_WorkGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkGroup", ID: &i_WorkGroupName, Type: smithy.ShapeTypeString})
+var sUpdateWorkGroupInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_WorkGroupDescriptionString, Type: smithy.ShapeTypeString})
+var sUpdateWorkGroupInput_ConfigurationUpdates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationUpdates", ID: &iWorkGroupConfigurationUpdates, Members: &mWorkGroupConfigurationUpdates, Type: smithy.ShapeTypeStructure})
+var sUpdateWorkGroupInput_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iWorkGroupState, Members: &mWorkGroupState, Type: smithy.ShapeTypeEnum})
+
+// Members of recursive shapes would make the variables' initializers refer to
+// each other in a cycle, which Go rejects, so they are completed here.
 func init() {
-	S3AclOption_BUCKET_OWNER_FULL_CONTROL = S3AclOption.AddMember("BUCKET_OWNER_FULL_CONTROL", smithyprelude.Unit)
-
-	AclConfiguration_S3AclOption = AclConfiguration.AddMember("S3AclOption", S3AclOption)
-
-	_SupportedDPUSizeList_member = _SupportedDPUSizeList.AddMember("member", _Integer)
-
-	ApplicationDPUSizes_ApplicationRuntimeId = ApplicationDPUSizes.AddMember("ApplicationRuntimeId", _NameString)
-
-	ApplicationDPUSizes_SupportedDPUSizes = ApplicationDPUSizes.AddMember("SupportedDPUSizes", _SupportedDPUSizeList)
-
-	_ApplicationDPUSizesList_member = _ApplicationDPUSizesList.AddMember("member", ApplicationDPUSizes)
-
-	AthenaError_ErrorCategory = AthenaError.AddMember("ErrorCategory", _ErrorCategory)
-
-	AthenaError_ErrorType = AthenaError.AddMember("ErrorType", _ErrorType)
-
-	AthenaError_Retryable = AthenaError.AddMember("Retryable", _Boolean)
-
-	AthenaError_ErrorMessage = AthenaError.AddMember("ErrorMessage", _String)
-
-	AuthenticationType_DIRECTORY_IDENTITY = AuthenticationType.AddMember("DIRECTORY_IDENTITY", smithyprelude.Unit)
-
-	CalculationConfiguration_CodeBlock = CalculationConfiguration.AddMember("CodeBlock", _CodeBlock)
-
-	CalculationExecutionState_CREATING = CalculationExecutionState.AddMember("CREATING", smithyprelude.Unit)
-
-	CalculationExecutionState_CREATED = CalculationExecutionState.AddMember("CREATED", smithyprelude.Unit)
-
-	CalculationExecutionState_QUEUED = CalculationExecutionState.AddMember("QUEUED", smithyprelude.Unit)
-
-	CalculationExecutionState_RUNNING = CalculationExecutionState.AddMember("RUNNING", smithyprelude.Unit)
-
-	CalculationExecutionState_CANCELING = CalculationExecutionState.AddMember("CANCELING", smithyprelude.Unit)
-
-	CalculationExecutionState_CANCELED = CalculationExecutionState.AddMember("CANCELED", smithyprelude.Unit)
-
-	CalculationExecutionState_COMPLETED = CalculationExecutionState.AddMember("COMPLETED", smithyprelude.Unit)
-
-	CalculationExecutionState_FAILED = CalculationExecutionState.AddMember("FAILED", smithyprelude.Unit)
-
-	CalculationResult_StdOutS3Uri = CalculationResult.AddMember("StdOutS3Uri", _S3Uri)
-
-	CalculationResult_StdErrorS3Uri = CalculationResult.AddMember("StdErrorS3Uri", _S3Uri)
-
-	CalculationResult_ResultS3Uri = CalculationResult.AddMember("ResultS3Uri", _S3Uri)
-
-	CalculationResult_ResultType = CalculationResult.AddMember("ResultType", _CalculationResultType)
-
-	CalculationStatus_SubmissionDateTime = CalculationStatus.AddMember("SubmissionDateTime", _Date)
-
-	CalculationStatus_CompletionDateTime = CalculationStatus.AddMember("CompletionDateTime", _Date)
-
-	CalculationStatus_State = CalculationStatus.AddMember("State", CalculationExecutionState)
-
-	CalculationStatus_StateChangeReason = CalculationStatus.AddMember("StateChangeReason", _DescriptionString)
-
-	CalculationSummary_CalculationExecutionId = CalculationSummary.AddMember("CalculationExecutionId", _CalculationExecutionId)
-
-	CalculationSummary_Description = CalculationSummary.AddMember("Description", _DescriptionString)
-
-	CalculationSummary_Status = CalculationSummary.AddMember("Status", CalculationStatus)
-
-	_CalculationsList_member = _CalculationsList.AddMember("member", CalculationSummary)
-
-	CalculationStatistics_DpuExecutionInMillis = CalculationStatistics.AddMember("DpuExecutionInMillis", _Long)
-
-	CalculationStatistics_Progress = CalculationStatistics.AddMember("Progress", _DescriptionString)
-
-	CapacityAllocationStatus_PENDING = CapacityAllocationStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	CapacityAllocationStatus_SUCCEEDED = CapacityAllocationStatus.AddMember("SUCCEEDED", smithyprelude.Unit)
-
-	CapacityAllocationStatus_FAILED = CapacityAllocationStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	CapacityAllocation_Status = CapacityAllocation.AddMember("Status", CapacityAllocationStatus)
-
-	CapacityAllocation_StatusMessage = CapacityAllocation.AddMember("StatusMessage", _String)
-
-	CapacityAllocation_RequestTime = CapacityAllocation.AddMember("RequestTime", _Timestamp)
-
-	CapacityAllocation_RequestCompletionTime = CapacityAllocation.AddMember("RequestCompletionTime", _Timestamp)
-
-	_WorkGroupNamesList_member = _WorkGroupNamesList.AddMember("member", _WorkGroupName)
-
-	CapacityAssignment_WorkGroupNames = CapacityAssignment.AddMember("WorkGroupNames", _WorkGroupNamesList)
-
-	_CapacityAssignmentsList_member = _CapacityAssignmentsList.AddMember("member", CapacityAssignment)
-
-	CapacityAssignmentConfiguration_CapacityReservationName = CapacityAssignmentConfiguration.AddMember("CapacityReservationName", _CapacityReservationName)
-
-	CapacityAssignmentConfiguration_CapacityAssignments = CapacityAssignmentConfiguration.AddMember("CapacityAssignments", _CapacityAssignmentsList)
-
-	CapacityReservationStatus_PENDING = CapacityReservationStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	CapacityReservationStatus_ACTIVE = CapacityReservationStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	CapacityReservationStatus_CANCELLING = CapacityReservationStatus.AddMember("CANCELLING", smithyprelude.Unit)
-
-	CapacityReservationStatus_CANCELLED = CapacityReservationStatus.AddMember("CANCELLED", smithyprelude.Unit)
-
-	CapacityReservationStatus_FAILED = CapacityReservationStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	CapacityReservationStatus_UPDATE_PENDING = CapacityReservationStatus.AddMember("UPDATE_PENDING", smithyprelude.Unit)
-
-	CapacityReservation_Name = CapacityReservation.AddMember("Name", _CapacityReservationName)
-
-	CapacityReservation_Status = CapacityReservation.AddMember("Status", CapacityReservationStatus)
-
-	CapacityReservation_TargetDpus = CapacityReservation.AddMember("TargetDpus", _TargetDpusInteger)
-
-	CapacityReservation_AllocatedDpus = CapacityReservation.AddMember("AllocatedDpus", _AllocatedDpusInteger)
-
-	CapacityReservation_LastAllocation = CapacityReservation.AddMember("LastAllocation", CapacityAllocation)
-
-	CapacityReservation_LastSuccessfulAllocationTime = CapacityReservation.AddMember("LastSuccessfulAllocationTime", _Timestamp)
-
-	CapacityReservation_CreationTime = CapacityReservation.AddMember("CreationTime", _Timestamp)
-
-	_CapacityReservationsList_member = _CapacityReservationsList.AddMember("member", CapacityReservation)
-
-	_ParametersMap_key = _ParametersMap.AddMember("key", _KeyString)
-
-	_ParametersMap_value = _ParametersMap.AddMember("value", _ParametersMapValue)
-
-	Classification_Name = Classification.AddMember("Name", _NameString)
-
-	Classification_Properties = Classification.AddMember("Properties", _ParametersMap)
-
-	_ClassificationList_member = _ClassificationList.AddMember("member", Classification)
-
-	_LogTypeValuesList_member = _LogTypeValuesList.AddMember("member", _LogTypeValue)
-
-	_LogTypesMap_key = _LogTypesMap.AddMember("key", _LogTypeKey)
-
-	_LogTypesMap_value = _LogTypesMap.AddMember("value", _LogTypeValuesList)
-
-	CloudWatchLoggingConfiguration_Enabled = CloudWatchLoggingConfiguration.AddMember("Enabled", _BoxedBoolean)
-
-	CloudWatchLoggingConfiguration_LogGroup = CloudWatchLoggingConfiguration.AddMember("LogGroup", _LogGroupName)
-
-	CloudWatchLoggingConfiguration_LogStreamNamePrefix = CloudWatchLoggingConfiguration.AddMember("LogStreamNamePrefix", _LogStreamNamePrefix)
-
-	CloudWatchLoggingConfiguration_LogTypes = CloudWatchLoggingConfiguration.AddMember("LogTypes", _LogTypesMap)
-
-	Column_Name = Column.AddMember("Name", _NameString)
-
-	Column_Type = Column.AddMember("Type", _TypeString)
-
-	Column_Comment = Column.AddMember("Comment", _CommentString)
-
-	ColumnNullable_NOT_NULL = ColumnNullable.AddMember("NOT_NULL", smithyprelude.Unit)
-
-	ColumnNullable_NULLABLE = ColumnNullable.AddMember("NULLABLE", smithyprelude.Unit)
-
-	ColumnNullable_UNKNOWN = ColumnNullable.AddMember("UNKNOWN", smithyprelude.Unit)
-
-	ColumnInfo_CatalogName = ColumnInfo.AddMember("CatalogName", _String)
-
-	ColumnInfo_SchemaName = ColumnInfo.AddMember("SchemaName", _String)
-
-	ColumnInfo_TableName = ColumnInfo.AddMember("TableName", _String)
-
-	ColumnInfo_Name = ColumnInfo.AddMember("Name", _String)
-
-	ColumnInfo_Label = ColumnInfo.AddMember("Label", _String)
-
-	ColumnInfo_Type = ColumnInfo.AddMember("Type", _String)
-
-	ColumnInfo_Precision = ColumnInfo.AddMember("Precision", _Integer)
-
-	ColumnInfo_Scale = ColumnInfo.AddMember("Scale", _Integer)
-
-	ColumnInfo_Nullable = ColumnInfo.AddMember("Nullable", ColumnNullable)
-
-	ColumnInfo_CaseSensitive = ColumnInfo.AddMember("CaseSensitive", _Boolean)
-
-	_ColumnInfoList_member = _ColumnInfoList.AddMember("member", ColumnInfo)
-
-	_ColumnList_member = _ColumnList.AddMember("member", Column)
-
-	ConnectionType_DYNAMODB = ConnectionType.AddMember("DYNAMODB", smithyprelude.Unit)
-
-	ConnectionType_MYSQL = ConnectionType.AddMember("MYSQL", smithyprelude.Unit)
-
-	ConnectionType_POSTGRESQL = ConnectionType.AddMember("POSTGRESQL", smithyprelude.Unit)
-
-	ConnectionType_REDSHIFT = ConnectionType.AddMember("REDSHIFT", smithyprelude.Unit)
-
-	ConnectionType_ORACLE = ConnectionType.AddMember("ORACLE", smithyprelude.Unit)
-
-	ConnectionType_SYNAPSE = ConnectionType.AddMember("SYNAPSE", smithyprelude.Unit)
-
-	ConnectionType_SQLSERVER = ConnectionType.AddMember("SQLSERVER", smithyprelude.Unit)
-
-	ConnectionType_DB2 = ConnectionType.AddMember("DB2", smithyprelude.Unit)
-
-	ConnectionType_OPENSEARCH = ConnectionType.AddMember("OPENSEARCH", smithyprelude.Unit)
-
-	ConnectionType_BIGQUERY = ConnectionType.AddMember("BIGQUERY", smithyprelude.Unit)
-
-	ConnectionType_GOOGLECLOUDSTORAGE = ConnectionType.AddMember("GOOGLECLOUDSTORAGE", smithyprelude.Unit)
-
-	ConnectionType_HBASE = ConnectionType.AddMember("HBASE", smithyprelude.Unit)
-
-	ConnectionType_DOCUMENTDB = ConnectionType.AddMember("DOCUMENTDB", smithyprelude.Unit)
-
-	ConnectionType_CMDB = ConnectionType.AddMember("CMDB", smithyprelude.Unit)
-
-	ConnectionType_TPCDS = ConnectionType.AddMember("TPCDS", smithyprelude.Unit)
-
-	ConnectionType_TIMESTREAM = ConnectionType.AddMember("TIMESTREAM", smithyprelude.Unit)
-
-	ConnectionType_SAPHANA = ConnectionType.AddMember("SAPHANA", smithyprelude.Unit)
-
-	ConnectionType_SNOWFLAKE = ConnectionType.AddMember("SNOWFLAKE", smithyprelude.Unit)
-
-	ConnectionType_DATALAKEGEN2 = ConnectionType.AddMember("DATALAKEGEN2", smithyprelude.Unit)
-
-	ConnectionType_DB2AS400 = ConnectionType.AddMember("DB2AS400", smithyprelude.Unit)
-
-	CustomerContentEncryptionConfiguration_KmsKey = CustomerContentEncryptionConfiguration.AddMember("KmsKey", _KmsKey)
-
-	Database_Name = Database.AddMember("Name", _NameString)
-
-	Database_Description = Database.AddMember("Description", _DescriptionString)
-
-	Database_Parameters = Database.AddMember("Parameters", _ParametersMap)
-
-	_DatabaseList_member = _DatabaseList.AddMember("member", Database)
-
-	DataCatalogType_LAMBDA = DataCatalogType.AddMember("LAMBDA", smithyprelude.Unit)
-
-	DataCatalogType_GLUE = DataCatalogType.AddMember("GLUE", smithyprelude.Unit)
-
-	DataCatalogType_HIVE = DataCatalogType.AddMember("HIVE", smithyprelude.Unit)
-
-	DataCatalogType_FEDERATED = DataCatalogType.AddMember("FEDERATED", smithyprelude.Unit)
-
-	DataCatalogStatus_CREATE_IN_PROGRESS = DataCatalogStatus.AddMember("CREATE_IN_PROGRESS", smithyprelude.Unit)
-
-	DataCatalogStatus_CREATE_COMPLETE = DataCatalogStatus.AddMember("CREATE_COMPLETE", smithyprelude.Unit)
-
-	DataCatalogStatus_CREATE_FAILED = DataCatalogStatus.AddMember("CREATE_FAILED", smithyprelude.Unit)
-
-	DataCatalogStatus_CREATE_FAILED_CLEANUP_IN_PROGRESS = DataCatalogStatus.AddMember("CREATE_FAILED_CLEANUP_IN_PROGRESS", smithyprelude.Unit)
-
-	DataCatalogStatus_CREATE_FAILED_CLEANUP_COMPLETE = DataCatalogStatus.AddMember("CREATE_FAILED_CLEANUP_COMPLETE", smithyprelude.Unit)
-
-	DataCatalogStatus_CREATE_FAILED_CLEANUP_FAILED = DataCatalogStatus.AddMember("CREATE_FAILED_CLEANUP_FAILED", smithyprelude.Unit)
-
-	DataCatalogStatus_DELETE_IN_PROGRESS = DataCatalogStatus.AddMember("DELETE_IN_PROGRESS", smithyprelude.Unit)
-
-	DataCatalogStatus_DELETE_COMPLETE = DataCatalogStatus.AddMember("DELETE_COMPLETE", smithyprelude.Unit)
-
-	DataCatalogStatus_DELETE_FAILED = DataCatalogStatus.AddMember("DELETE_FAILED", smithyprelude.Unit)
-
-	DataCatalog_Name = DataCatalog.AddMember("Name", _CatalogNameString)
-
-	DataCatalog_Description = DataCatalog.AddMember("Description", _DescriptionString)
-
-	DataCatalog_Type = DataCatalog.AddMember("Type", DataCatalogType)
-
-	DataCatalog_Parameters = DataCatalog.AddMember("Parameters", _ParametersMap)
-
-	DataCatalog_Status = DataCatalog.AddMember("Status", DataCatalogStatus)
-
-	DataCatalog_ConnectionType = DataCatalog.AddMember("ConnectionType", ConnectionType)
-
-	DataCatalog_Error = DataCatalog.AddMember("Error", _ErrorMessage)
-
-	DataCatalogSummary_CatalogName = DataCatalogSummary.AddMember("CatalogName", _CatalogNameString)
-
-	DataCatalogSummary_Type = DataCatalogSummary.AddMember("Type", DataCatalogType)
-
-	DataCatalogSummary_Status = DataCatalogSummary.AddMember("Status", DataCatalogStatus)
-
-	DataCatalogSummary_ConnectionType = DataCatalogSummary.AddMember("ConnectionType", ConnectionType)
-
-	DataCatalogSummary_Error = DataCatalogSummary.AddMember("Error", _ErrorMessage)
-
-	_DataCatalogSummaryList_member = _DataCatalogSummaryList.AddMember("member", DataCatalogSummary)
-
-	Datum_VarCharValue = Datum.AddMember("VarCharValue", _datumString)
-
-	_datumList_member = _datumList.AddMember("member", Datum)
-
-	EncryptionOption_SSE_S3 = EncryptionOption.AddMember("SSE_S3", smithyprelude.Unit)
-
-	EncryptionOption_SSE_KMS = EncryptionOption.AddMember("SSE_KMS", smithyprelude.Unit)
-
-	EncryptionOption_CSE_KMS = EncryptionOption.AddMember("CSE_KMS", smithyprelude.Unit)
-
-	EncryptionConfiguration_EncryptionOption = EncryptionConfiguration.AddMember("EncryptionOption", EncryptionOption)
-
-	EncryptionConfiguration_KmsKey = EncryptionConfiguration.AddMember("KmsKey", _String)
-
-	EngineConfiguration_CoordinatorDpuSize = EngineConfiguration.AddMember("CoordinatorDpuSize", _CoordinatorDpuSize)
-
-	EngineConfiguration_MaxConcurrentDpus = EngineConfiguration.AddMember("MaxConcurrentDpus", _MaxConcurrentDpus)
-
-	EngineConfiguration_DefaultExecutorDpuSize = EngineConfiguration.AddMember("DefaultExecutorDpuSize", _DefaultExecutorDpuSize)
-
-	EngineConfiguration_AdditionalConfigs = EngineConfiguration.AddMember("AdditionalConfigs", _ParametersMap)
-
-	EngineConfiguration_SparkProperties = EngineConfiguration.AddMember("SparkProperties", _ParametersMap)
-
-	EngineConfiguration_Classifications = EngineConfiguration.AddMember("Classifications", _ClassificationList)
-
-	EngineVersion_SelectedEngineVersion = EngineVersion.AddMember("SelectedEngineVersion", _NameString)
-
-	EngineVersion_EffectiveEngineVersion = EngineVersion.AddMember("EffectiveEngineVersion", _NameString)
-
-	_EngineVersionsList_member = _EngineVersionsList.AddMember("member", EngineVersion)
-
-	_ExecutionParameters_member = _ExecutionParameters.AddMember("member", _ExecutionParameter)
-
-	ExecutorType_COORDINATOR = ExecutorType.AddMember("COORDINATOR", smithyprelude.Unit)
-
-	ExecutorType_GATEWAY = ExecutorType.AddMember("GATEWAY", smithyprelude.Unit)
-
-	ExecutorType_WORKER = ExecutorType.AddMember("WORKER", smithyprelude.Unit)
-
-	ExecutorState_CREATING = ExecutorState.AddMember("CREATING", smithyprelude.Unit)
-
-	ExecutorState_CREATED = ExecutorState.AddMember("CREATED", smithyprelude.Unit)
-
-	ExecutorState_REGISTERED = ExecutorState.AddMember("REGISTERED", smithyprelude.Unit)
-
-	ExecutorState_TERMINATING = ExecutorState.AddMember("TERMINATING", smithyprelude.Unit)
-
-	ExecutorState_TERMINATED = ExecutorState.AddMember("TERMINATED", smithyprelude.Unit)
-
-	ExecutorState_FAILED = ExecutorState.AddMember("FAILED", smithyprelude.Unit)
-
-	ExecutorsSummary_ExecutorId = ExecutorsSummary.AddMember("ExecutorId", _ExecutorId)
-
-	ExecutorsSummary_ExecutorType = ExecutorsSummary.AddMember("ExecutorType", ExecutorType)
-
-	ExecutorsSummary_StartDateTime = ExecutorsSummary.AddMember("StartDateTime", _Long)
-
-	ExecutorsSummary_TerminationDateTime = ExecutorsSummary.AddMember("TerminationDateTime", _Long)
-
-	ExecutorsSummary_ExecutorState = ExecutorsSummary.AddMember("ExecutorState", ExecutorState)
-
-	ExecutorsSummary_ExecutorSize = ExecutorsSummary.AddMember("ExecutorSize", _Long)
-
-	_ExecutorsSummaryList_member = _ExecutorsSummaryList.AddMember("member", ExecutorsSummary)
-
-	FilterDefinition_Name = FilterDefinition.AddMember("Name", _NotebookName)
-
-	IdentityCenterConfiguration_EnableIdentityCenter = IdentityCenterConfiguration.AddMember("EnableIdentityCenter", _BoxedBoolean)
-
-	IdentityCenterConfiguration_IdentityCenterInstanceArn = IdentityCenterConfiguration.AddMember("IdentityCenterInstanceArn", _IdentityCenterInstanceArn)
-
-	InternalServerException_Message = InternalServerException.AddMember("Message", _ErrorMessage)
-
-	InvalidRequestException_AthenaErrorCode = InvalidRequestException.AddMember("AthenaErrorCode", _ErrorCode)
-
-	InvalidRequestException_Message = InvalidRequestException.AddMember("Message", _ErrorMessage)
-
-	ManagedLoggingConfiguration_Enabled = ManagedLoggingConfiguration.AddMember("Enabled", _BoxedBoolean)
-
-	ManagedLoggingConfiguration_KmsKey = ManagedLoggingConfiguration.AddMember("KmsKey", _KmsKey)
-
-	ManagedQueryResultsEncryptionConfiguration_KmsKey = ManagedQueryResultsEncryptionConfiguration.AddMember("KmsKey", _KmsKey)
-
-	ManagedQueryResultsConfiguration_Enabled = ManagedQueryResultsConfiguration.AddMember("Enabled", _Boolean)
-
-	ManagedQueryResultsConfiguration_EncryptionConfiguration = ManagedQueryResultsConfiguration.AddMember("EncryptionConfiguration", ManagedQueryResultsEncryptionConfiguration)
-
-	ManagedQueryResultsConfigurationUpdates_Enabled = ManagedQueryResultsConfigurationUpdates.AddMember("Enabled", _BoxedBoolean)
-
-	ManagedQueryResultsConfigurationUpdates_EncryptionConfiguration = ManagedQueryResultsConfigurationUpdates.AddMember("EncryptionConfiguration", ManagedQueryResultsEncryptionConfiguration)
-
-	ManagedQueryResultsConfigurationUpdates_RemoveEncryptionConfiguration = ManagedQueryResultsConfigurationUpdates.AddMember("RemoveEncryptionConfiguration", _BoxedBoolean)
-
-	MetadataException_Message = MetadataException.AddMember("Message", _ErrorMessage)
-
-	S3LoggingConfiguration_Enabled = S3LoggingConfiguration.AddMember("Enabled", _BoxedBoolean)
-
-	S3LoggingConfiguration_KmsKey = S3LoggingConfiguration.AddMember("KmsKey", _KmsKey)
-
-	S3LoggingConfiguration_LogLocation = S3LoggingConfiguration.AddMember("LogLocation", _S3OutputLocation)
-
-	MonitoringConfiguration_CloudWatchLoggingConfiguration = MonitoringConfiguration.AddMember("CloudWatchLoggingConfiguration", CloudWatchLoggingConfiguration)
-
-	MonitoringConfiguration_ManagedLoggingConfiguration = MonitoringConfiguration.AddMember("ManagedLoggingConfiguration", ManagedLoggingConfiguration)
-
-	MonitoringConfiguration_S3LoggingConfiguration = MonitoringConfiguration.AddMember("S3LoggingConfiguration", S3LoggingConfiguration)
-
-	NamedQuery_Name = NamedQuery.AddMember("Name", _NameString)
-
-	NamedQuery_Description = NamedQuery.AddMember("Description", _DescriptionString)
-
-	NamedQuery_Database = NamedQuery.AddMember("Database", _DatabaseString)
-
-	NamedQuery_QueryString = NamedQuery.AddMember("QueryString", _QueryString)
-
-	NamedQuery_NamedQueryId = NamedQuery.AddMember("NamedQueryId", _NamedQueryId)
-
-	NamedQuery_WorkGroup = NamedQuery.AddMember("WorkGroup", _WorkGroupName)
-
-	_NamedQueryIdList_member = _NamedQueryIdList.AddMember("member", _NamedQueryId)
-
-	_NamedQueryList_member = _NamedQueryList.AddMember("member", NamedQuery)
-
-	NotebookType_IPYNB = NotebookType.AddMember("IPYNB", smithyprelude.Unit)
-
-	NotebookMetadata_NotebookId = NotebookMetadata.AddMember("NotebookId", _NotebookId)
-
-	NotebookMetadata_Name = NotebookMetadata.AddMember("Name", _NotebookName)
-
-	NotebookMetadata_WorkGroup = NotebookMetadata.AddMember("WorkGroup", _WorkGroupName)
-
-	NotebookMetadata_CreationTime = NotebookMetadata.AddMember("CreationTime", _Date)
-
-	NotebookMetadata_Type = NotebookMetadata.AddMember("Type", NotebookType)
-
-	NotebookMetadata_LastModifiedTime = NotebookMetadata.AddMember("LastModifiedTime", _Date)
-
-	_NotebookMetadataArray_member = _NotebookMetadataArray.AddMember("member", NotebookMetadata)
-
-	NotebookSessionSummary_SessionId = NotebookSessionSummary.AddMember("SessionId", _SessionId)
-
-	NotebookSessionSummary_CreationTime = NotebookSessionSummary.AddMember("CreationTime", _Date)
-
-	_NotebookSessionsList_member = _NotebookSessionsList.AddMember("member", NotebookSessionSummary)
-
-	PreparedStatement_StatementName = PreparedStatement.AddMember("StatementName", _StatementName)
-
-	PreparedStatement_QueryStatement = PreparedStatement.AddMember("QueryStatement", _QueryString)
-
-	PreparedStatement_WorkGroupName = PreparedStatement.AddMember("WorkGroupName", _WorkGroupName)
-
-	PreparedStatement_Description = PreparedStatement.AddMember("Description", _DescriptionString)
-
-	PreparedStatement_LastModifiedTime = PreparedStatement.AddMember("LastModifiedTime", _Date)
-
-	_PreparedStatementDetailsList_member = _PreparedStatementDetailsList.AddMember("member", PreparedStatement)
-
-	_PreparedStatementNameList_member = _PreparedStatementNameList.AddMember("member", _StatementName)
-
-	PreparedStatementSummary_StatementName = PreparedStatementSummary.AddMember("StatementName", _StatementName)
-
-	PreparedStatementSummary_LastModifiedTime = PreparedStatementSummary.AddMember("LastModifiedTime", _Date)
-
-	_PreparedStatementsList_member = _PreparedStatementsList.AddMember("member", PreparedStatementSummary)
-
-	StatementType_DDL = StatementType.AddMember("DDL", smithyprelude.Unit)
-
-	StatementType_DML = StatementType.AddMember("DML", smithyprelude.Unit)
-
-	StatementType_UTILITY = StatementType.AddMember("UTILITY", smithyprelude.Unit)
-
-	ResultConfiguration_OutputLocation = ResultConfiguration.AddMember("OutputLocation", _ResultOutputLocation)
-
-	ResultConfiguration_EncryptionConfiguration = ResultConfiguration.AddMember("EncryptionConfiguration", EncryptionConfiguration)
-
-	ResultConfiguration_ExpectedBucketOwner = ResultConfiguration.AddMember("ExpectedBucketOwner", _AwsAccountId)
-
-	ResultConfiguration_AclConfiguration = ResultConfiguration.AddMember("AclConfiguration", AclConfiguration)
-
-	ResultReuseByAgeConfiguration_Enabled = ResultReuseByAgeConfiguration.AddMember("Enabled", _Boolean)
-
-	ResultReuseByAgeConfiguration_MaxAgeInMinutes = ResultReuseByAgeConfiguration.AddMember("MaxAgeInMinutes", _Age)
-
-	ResultReuseConfiguration_ResultReuseByAgeConfiguration = ResultReuseConfiguration.AddMember("ResultReuseByAgeConfiguration", ResultReuseByAgeConfiguration)
-
-	QueryExecutionContext_Database = QueryExecutionContext.AddMember("Database", _DatabaseString)
-
-	QueryExecutionContext_Catalog = QueryExecutionContext.AddMember("Catalog", _CatalogNameString)
-
-	QueryExecutionState_QUEUED = QueryExecutionState.AddMember("QUEUED", smithyprelude.Unit)
-
-	QueryExecutionState_RUNNING = QueryExecutionState.AddMember("RUNNING", smithyprelude.Unit)
-
-	QueryExecutionState_SUCCEEDED = QueryExecutionState.AddMember("SUCCEEDED", smithyprelude.Unit)
-
-	QueryExecutionState_FAILED = QueryExecutionState.AddMember("FAILED", smithyprelude.Unit)
-
-	QueryExecutionState_CANCELLED = QueryExecutionState.AddMember("CANCELLED", smithyprelude.Unit)
-
-	QueryExecutionStatus_State = QueryExecutionStatus.AddMember("State", QueryExecutionState)
-
-	QueryExecutionStatus_StateChangeReason = QueryExecutionStatus.AddMember("StateChangeReason", _String)
-
-	QueryExecutionStatus_SubmissionDateTime = QueryExecutionStatus.AddMember("SubmissionDateTime", _Date)
-
-	QueryExecutionStatus_CompletionDateTime = QueryExecutionStatus.AddMember("CompletionDateTime", _Date)
-
-	QueryExecutionStatus_AthenaError = QueryExecutionStatus.AddMember("AthenaError", AthenaError)
-
-	ResultReuseInformation_ReusedPreviousResult = ResultReuseInformation.AddMember("ReusedPreviousResult", _Boolean)
-
-	QueryExecutionStatistics_EngineExecutionTimeInMillis = QueryExecutionStatistics.AddMember("EngineExecutionTimeInMillis", _Long)
-
-	QueryExecutionStatistics_DataScannedInBytes = QueryExecutionStatistics.AddMember("DataScannedInBytes", _Long)
-
-	QueryExecutionStatistics_DataManifestLocation = QueryExecutionStatistics.AddMember("DataManifestLocation", _String)
-
-	QueryExecutionStatistics_TotalExecutionTimeInMillis = QueryExecutionStatistics.AddMember("TotalExecutionTimeInMillis", _Long)
-
-	QueryExecutionStatistics_QueryQueueTimeInMillis = QueryExecutionStatistics.AddMember("QueryQueueTimeInMillis", _Long)
-
-	QueryExecutionStatistics_ServicePreProcessingTimeInMillis = QueryExecutionStatistics.AddMember("ServicePreProcessingTimeInMillis", _Long)
-
-	QueryExecutionStatistics_QueryPlanningTimeInMillis = QueryExecutionStatistics.AddMember("QueryPlanningTimeInMillis", _Long)
-
-	QueryExecutionStatistics_ServiceProcessingTimeInMillis = QueryExecutionStatistics.AddMember("ServiceProcessingTimeInMillis", _Long)
-
-	QueryExecutionStatistics_ResultReuseInformation = QueryExecutionStatistics.AddMember("ResultReuseInformation", ResultReuseInformation)
-
-	QueryExecutionStatistics_DpuCount = QueryExecutionStatistics.AddMember("DpuCount", _DpuCount)
-
-	QueryResultsS3AccessGrantsConfiguration_EnableS3AccessGrants = QueryResultsS3AccessGrantsConfiguration.AddMember("EnableS3AccessGrants", _BoxedBoolean)
-
-	QueryResultsS3AccessGrantsConfiguration_CreateUserLevelPrefix = QueryResultsS3AccessGrantsConfiguration.AddMember("CreateUserLevelPrefix", _BoxedBoolean)
-
-	QueryResultsS3AccessGrantsConfiguration_AuthenticationType = QueryResultsS3AccessGrantsConfiguration.AddMember("AuthenticationType", AuthenticationType)
-
-	QueryExecution_QueryExecutionId = QueryExecution.AddMember("QueryExecutionId", _QueryExecutionId)
-
-	QueryExecution_Query = QueryExecution.AddMember("Query", _QueryString)
-
-	QueryExecution_StatementType = QueryExecution.AddMember("StatementType", StatementType)
-
-	QueryExecution_ManagedQueryResultsConfiguration = QueryExecution.AddMember("ManagedQueryResultsConfiguration", ManagedQueryResultsConfiguration)
-
-	QueryExecution_ResultConfiguration = QueryExecution.AddMember("ResultConfiguration", ResultConfiguration)
-
-	QueryExecution_ResultReuseConfiguration = QueryExecution.AddMember("ResultReuseConfiguration", ResultReuseConfiguration)
-
-	QueryExecution_QueryExecutionContext = QueryExecution.AddMember("QueryExecutionContext", QueryExecutionContext)
-
-	QueryExecution_Status = QueryExecution.AddMember("Status", QueryExecutionStatus)
-
-	QueryExecution_Statistics = QueryExecution.AddMember("Statistics", QueryExecutionStatistics)
-
-	QueryExecution_WorkGroup = QueryExecution.AddMember("WorkGroup", _WorkGroupName)
-
-	QueryExecution_EngineVersion = QueryExecution.AddMember("EngineVersion", EngineVersion)
-
-	QueryExecution_ExecutionParameters = QueryExecution.AddMember("ExecutionParameters", _ExecutionParameters)
-
-	QueryExecution_SubstatementType = QueryExecution.AddMember("SubstatementType", _String)
-
-	QueryExecution_QueryResultsS3AccessGrantsConfiguration = QueryExecution.AddMember("QueryResultsS3AccessGrantsConfiguration", QueryResultsS3AccessGrantsConfiguration)
-
-	_QueryExecutionIdList_member = _QueryExecutionIdList.AddMember("member", _QueryExecutionId)
-
-	_QueryExecutionList_member = _QueryExecutionList.AddMember("member", QueryExecution)
-
-	QueryResultType_DATA_MANIFEST = QueryResultType.AddMember("DATA_MANIFEST", smithyprelude.Unit)
-
-	QueryResultType_DATA_ROWS = QueryResultType.AddMember("DATA_ROWS", smithyprelude.Unit)
-
-	QueryRuntimeStatisticsTimeline_QueryQueueTimeInMillis = QueryRuntimeStatisticsTimeline.AddMember("QueryQueueTimeInMillis", _Long)
-
-	QueryRuntimeStatisticsTimeline_ServicePreProcessingTimeInMillis = QueryRuntimeStatisticsTimeline.AddMember("ServicePreProcessingTimeInMillis", _Long)
-
-	QueryRuntimeStatisticsTimeline_QueryPlanningTimeInMillis = QueryRuntimeStatisticsTimeline.AddMember("QueryPlanningTimeInMillis", _Long)
-
-	QueryRuntimeStatisticsTimeline_EngineExecutionTimeInMillis = QueryRuntimeStatisticsTimeline.AddMember("EngineExecutionTimeInMillis", _Long)
-
-	QueryRuntimeStatisticsTimeline_ServiceProcessingTimeInMillis = QueryRuntimeStatisticsTimeline.AddMember("ServiceProcessingTimeInMillis", _Long)
-
-	QueryRuntimeStatisticsTimeline_TotalExecutionTimeInMillis = QueryRuntimeStatisticsTimeline.AddMember("TotalExecutionTimeInMillis", _Long)
-
-	QueryRuntimeStatisticsRows_InputRows = QueryRuntimeStatisticsRows.AddMember("InputRows", _Long)
-
-	QueryRuntimeStatisticsRows_InputBytes = QueryRuntimeStatisticsRows.AddMember("InputBytes", _Long)
-
-	QueryRuntimeStatisticsRows_OutputBytes = QueryRuntimeStatisticsRows.AddMember("OutputBytes", _Long)
-
-	QueryRuntimeStatisticsRows_OutputRows = QueryRuntimeStatisticsRows.AddMember("OutputRows", _Long)
-
-	_QueryStagePlanNodes_member = _QueryStagePlanNodes.AddMember("member", QueryStagePlanNode)
-
-	_StringList_member = _StringList.AddMember("member", _String)
-
-	QueryStagePlanNode_Name = QueryStagePlanNode.AddMember("Name", _String)
-
-	QueryStagePlanNode_Identifier = QueryStagePlanNode.AddMember("Identifier", _String)
-
-	QueryStagePlanNode_Children = QueryStagePlanNode.AddMember("Children", _QueryStagePlanNodes)
-
-	QueryStagePlanNode_RemoteSources = QueryStagePlanNode.AddMember("RemoteSources", _StringList)
-
-	_QueryStages_member = _QueryStages.AddMember("member", QueryStage)
-
-	QueryStage_StageId = QueryStage.AddMember("StageId", _Long)
-
-	QueryStage_State = QueryStage.AddMember("State", _String)
-
-	QueryStage_OutputBytes = QueryStage.AddMember("OutputBytes", _Long)
-
-	QueryStage_OutputRows = QueryStage.AddMember("OutputRows", _Long)
-
-	QueryStage_InputBytes = QueryStage.AddMember("InputBytes", _Long)
-
-	QueryStage_InputRows = QueryStage.AddMember("InputRows", _Long)
-
-	QueryStage_ExecutionTime = QueryStage.AddMember("ExecutionTime", _Long)
-
-	QueryStage_QueryStagePlan = QueryStage.AddMember("QueryStagePlan", QueryStagePlanNode)
-
-	QueryStage_SubStages = QueryStage.AddMember("SubStages", _QueryStages)
-
-	QueryRuntimeStatistics_Timeline = QueryRuntimeStatistics.AddMember("Timeline", QueryRuntimeStatisticsTimeline)
-
-	QueryRuntimeStatistics_Rows = QueryRuntimeStatistics.AddMember("Rows", QueryRuntimeStatisticsRows)
-
-	QueryRuntimeStatistics_OutputStage = QueryRuntimeStatistics.AddMember("OutputStage", QueryStage)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _ErrorMessage)
-
-	ResourceNotFoundException_ResourceName = ResourceNotFoundException.AddMember("ResourceName", _AmazonResourceName)
-
-	ResultConfigurationUpdates_OutputLocation = ResultConfigurationUpdates.AddMember("OutputLocation", _ResultOutputLocation)
-
-	ResultConfigurationUpdates_RemoveOutputLocation = ResultConfigurationUpdates.AddMember("RemoveOutputLocation", _BoxedBoolean)
-
-	ResultConfigurationUpdates_EncryptionConfiguration = ResultConfigurationUpdates.AddMember("EncryptionConfiguration", EncryptionConfiguration)
-
-	ResultConfigurationUpdates_RemoveEncryptionConfiguration = ResultConfigurationUpdates.AddMember("RemoveEncryptionConfiguration", _BoxedBoolean)
-
-	ResultConfigurationUpdates_ExpectedBucketOwner = ResultConfigurationUpdates.AddMember("ExpectedBucketOwner", _AwsAccountId)
-
-	ResultConfigurationUpdates_RemoveExpectedBucketOwner = ResultConfigurationUpdates.AddMember("RemoveExpectedBucketOwner", _BoxedBoolean)
-
-	ResultConfigurationUpdates_AclConfiguration = ResultConfigurationUpdates.AddMember("AclConfiguration", AclConfiguration)
-
-	ResultConfigurationUpdates_RemoveAclConfiguration = ResultConfigurationUpdates.AddMember("RemoveAclConfiguration", _BoxedBoolean)
-
-	Row_Data = Row.AddMember("Data", _datumList)
-
-	_RowList_member = _RowList.AddMember("member", Row)
-
-	ResultSetMetadata_ColumnInfo = ResultSetMetadata.AddMember("ColumnInfo", _ColumnInfoList)
-
-	ResultSet_Rows = ResultSet.AddMember("Rows", _RowList)
-
-	ResultSet_ResultSetMetadata = ResultSet.AddMember("ResultSetMetadata", ResultSetMetadata)
-
-	SessionAlreadyExistsException_Message = SessionAlreadyExistsException.AddMember("Message", _ErrorMessage)
-
-	SessionConfiguration_ExecutionRole = SessionConfiguration.AddMember("ExecutionRole", _RoleArn)
-
-	SessionConfiguration_WorkingDirectory = SessionConfiguration.AddMember("WorkingDirectory", _ResultOutputLocation)
-
-	SessionConfiguration_IdleTimeoutSeconds = SessionConfiguration.AddMember("IdleTimeoutSeconds", _Long)
-
-	SessionConfiguration_SessionIdleTimeoutInMinutes = SessionConfiguration.AddMember("SessionIdleTimeoutInMinutes", _SessionIdleTimeoutInMinutes)
-
-	SessionConfiguration_EncryptionConfiguration = SessionConfiguration.AddMember("EncryptionConfiguration", EncryptionConfiguration)
-
-	SessionState_CREATING = SessionState.AddMember("CREATING", smithyprelude.Unit)
-
-	SessionState_CREATED = SessionState.AddMember("CREATED", smithyprelude.Unit)
-
-	SessionState_IDLE = SessionState.AddMember("IDLE", smithyprelude.Unit)
-
-	SessionState_BUSY = SessionState.AddMember("BUSY", smithyprelude.Unit)
-
-	SessionState_TERMINATING = SessionState.AddMember("TERMINATING", smithyprelude.Unit)
-
-	SessionState_TERMINATED = SessionState.AddMember("TERMINATED", smithyprelude.Unit)
-
-	SessionState_DEGRADED = SessionState.AddMember("DEGRADED", smithyprelude.Unit)
-
-	SessionState_FAILED = SessionState.AddMember("FAILED", smithyprelude.Unit)
-
-	SessionStatus_StartDateTime = SessionStatus.AddMember("StartDateTime", _Date)
-
-	SessionStatus_LastModifiedDateTime = SessionStatus.AddMember("LastModifiedDateTime", _Date)
-
-	SessionStatus_EndDateTime = SessionStatus.AddMember("EndDateTime", _Date)
-
-	SessionStatus_IdleSinceDateTime = SessionStatus.AddMember("IdleSinceDateTime", _Date)
-
-	SessionStatus_State = SessionStatus.AddMember("State", SessionState)
-
-	SessionStatus_StateChangeReason = SessionStatus.AddMember("StateChangeReason", _DescriptionString)
-
-	SessionSummary_SessionId = SessionSummary.AddMember("SessionId", _SessionId)
-
-	SessionSummary_Description = SessionSummary.AddMember("Description", _DescriptionString)
-
-	SessionSummary_EngineVersion = SessionSummary.AddMember("EngineVersion", EngineVersion)
-
-	SessionSummary_NotebookVersion = SessionSummary.AddMember("NotebookVersion", _NameString)
-
-	SessionSummary_Status = SessionSummary.AddMember("Status", SessionStatus)
-
-	_SessionsList_member = _SessionsList.AddMember("member", SessionSummary)
-
-	SessionStatistics_DpuExecutionInMillis = SessionStatistics.AddMember("DpuExecutionInMillis", _Long)
-
-	TableMetadata_Name = TableMetadata.AddMember("Name", _NameString)
-
-	TableMetadata_CreateTime = TableMetadata.AddMember("CreateTime", _Timestamp)
-
-	TableMetadata_LastAccessTime = TableMetadata.AddMember("LastAccessTime", _Timestamp)
-
-	TableMetadata_TableType = TableMetadata.AddMember("TableType", _TableTypeString)
-
-	TableMetadata_Columns = TableMetadata.AddMember("Columns", _ColumnList)
-
-	TableMetadata_PartitionKeys = TableMetadata.AddMember("PartitionKeys", _ColumnList)
-
-	TableMetadata_Parameters = TableMetadata.AddMember("Parameters", _ParametersMap)
-
-	_TableMetadataList_member = _TableMetadataList.AddMember("member", TableMetadata)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	ThrottleReason_CONCURRENT_QUERY_LIMIT_EXCEEDED = ThrottleReason.AddMember("CONCURRENT_QUERY_LIMIT_EXCEEDED", smithyprelude.Unit)
-
-	TooManyRequestsException_Message = TooManyRequestsException.AddMember("Message", _ErrorMessage)
-
-	TooManyRequestsException_Reason = TooManyRequestsException.AddMember("Reason", ThrottleReason)
-
-	UnprocessedNamedQueryId_NamedQueryId = UnprocessedNamedQueryId.AddMember("NamedQueryId", _NamedQueryId)
-
-	UnprocessedNamedQueryId_ErrorCode = UnprocessedNamedQueryId.AddMember("ErrorCode", _ErrorCode)
-
-	UnprocessedNamedQueryId_ErrorMessage = UnprocessedNamedQueryId.AddMember("ErrorMessage", _ErrorMessage)
-
-	_UnprocessedNamedQueryIdList_member = _UnprocessedNamedQueryIdList.AddMember("member", UnprocessedNamedQueryId)
-
-	UnprocessedPreparedStatementName_StatementName = UnprocessedPreparedStatementName.AddMember("StatementName", _StatementName)
-
-	UnprocessedPreparedStatementName_ErrorCode = UnprocessedPreparedStatementName.AddMember("ErrorCode", _ErrorCode)
-
-	UnprocessedPreparedStatementName_ErrorMessage = UnprocessedPreparedStatementName.AddMember("ErrorMessage", _ErrorMessage)
-
-	_UnprocessedPreparedStatementNameList_member = _UnprocessedPreparedStatementNameList.AddMember("member", UnprocessedPreparedStatementName)
-
-	UnprocessedQueryExecutionId_QueryExecutionId = UnprocessedQueryExecutionId.AddMember("QueryExecutionId", _QueryExecutionId)
-
-	UnprocessedQueryExecutionId_ErrorCode = UnprocessedQueryExecutionId.AddMember("ErrorCode", _ErrorCode)
-
-	UnprocessedQueryExecutionId_ErrorMessage = UnprocessedQueryExecutionId.AddMember("ErrorMessage", _ErrorMessage)
-
-	_UnprocessedQueryExecutionIdList_member = _UnprocessedQueryExecutionIdList.AddMember("member", UnprocessedQueryExecutionId)
-
-	WorkGroupState_ENABLED = WorkGroupState.AddMember("ENABLED", smithyprelude.Unit)
-
-	WorkGroupState_DISABLED = WorkGroupState.AddMember("DISABLED", smithyprelude.Unit)
-
-	WorkGroupConfiguration_ResultConfiguration = WorkGroupConfiguration.AddMember("ResultConfiguration", ResultConfiguration)
-
-	WorkGroupConfiguration_ManagedQueryResultsConfiguration = WorkGroupConfiguration.AddMember("ManagedQueryResultsConfiguration", ManagedQueryResultsConfiguration)
-
-	WorkGroupConfiguration_EnforceWorkGroupConfiguration = WorkGroupConfiguration.AddMember("EnforceWorkGroupConfiguration", _BoxedBoolean)
-
-	WorkGroupConfiguration_PublishCloudWatchMetricsEnabled = WorkGroupConfiguration.AddMember("PublishCloudWatchMetricsEnabled", _BoxedBoolean)
-
-	WorkGroupConfiguration_BytesScannedCutoffPerQuery = WorkGroupConfiguration.AddMember("BytesScannedCutoffPerQuery", _BytesScannedCutoffValue)
-
-	WorkGroupConfiguration_RequesterPaysEnabled = WorkGroupConfiguration.AddMember("RequesterPaysEnabled", _BoxedBoolean)
-
-	WorkGroupConfiguration_EngineVersion = WorkGroupConfiguration.AddMember("EngineVersion", EngineVersion)
-
-	WorkGroupConfiguration_AdditionalConfiguration = WorkGroupConfiguration.AddMember("AdditionalConfiguration", _NameString)
-
-	WorkGroupConfiguration_ExecutionRole = WorkGroupConfiguration.AddMember("ExecutionRole", _RoleArn)
-
-	WorkGroupConfiguration_MonitoringConfiguration = WorkGroupConfiguration.AddMember("MonitoringConfiguration", MonitoringConfiguration)
-
-	WorkGroupConfiguration_EngineConfiguration = WorkGroupConfiguration.AddMember("EngineConfiguration", EngineConfiguration)
-
-	WorkGroupConfiguration_CustomerContentEncryptionConfiguration = WorkGroupConfiguration.AddMember("CustomerContentEncryptionConfiguration", CustomerContentEncryptionConfiguration)
-
-	WorkGroupConfiguration_EnableMinimumEncryptionConfiguration = WorkGroupConfiguration.AddMember("EnableMinimumEncryptionConfiguration", _BoxedBoolean)
-
-	WorkGroupConfiguration_IdentityCenterConfiguration = WorkGroupConfiguration.AddMember("IdentityCenterConfiguration", IdentityCenterConfiguration)
-
-	WorkGroupConfiguration_QueryResultsS3AccessGrantsConfiguration = WorkGroupConfiguration.AddMember("QueryResultsS3AccessGrantsConfiguration", QueryResultsS3AccessGrantsConfiguration)
-
-	WorkGroup_Name = WorkGroup.AddMember("Name", _WorkGroupName)
-
-	WorkGroup_State = WorkGroup.AddMember("State", WorkGroupState)
-
-	WorkGroup_Configuration = WorkGroup.AddMember("Configuration", WorkGroupConfiguration)
-
-	WorkGroup_Description = WorkGroup.AddMember("Description", _WorkGroupDescriptionString)
-
-	WorkGroup_CreationTime = WorkGroup.AddMember("CreationTime", _Date)
-
-	WorkGroup_IdentityCenterApplicationArn = WorkGroup.AddMember("IdentityCenterApplicationArn", _IdentityCenterApplicationArn)
-
-	WorkGroupConfigurationUpdates_EnforceWorkGroupConfiguration = WorkGroupConfigurationUpdates.AddMember("EnforceWorkGroupConfiguration", _BoxedBoolean)
-
-	WorkGroupConfigurationUpdates_ResultConfigurationUpdates = WorkGroupConfigurationUpdates.AddMember("ResultConfigurationUpdates", ResultConfigurationUpdates)
-
-	WorkGroupConfigurationUpdates_ManagedQueryResultsConfigurationUpdates = WorkGroupConfigurationUpdates.AddMember("ManagedQueryResultsConfigurationUpdates", ManagedQueryResultsConfigurationUpdates)
-
-	WorkGroupConfigurationUpdates_PublishCloudWatchMetricsEnabled = WorkGroupConfigurationUpdates.AddMember("PublishCloudWatchMetricsEnabled", _BoxedBoolean)
-
-	WorkGroupConfigurationUpdates_BytesScannedCutoffPerQuery = WorkGroupConfigurationUpdates.AddMember("BytesScannedCutoffPerQuery", _BytesScannedCutoffValue)
-
-	WorkGroupConfigurationUpdates_RemoveBytesScannedCutoffPerQuery = WorkGroupConfigurationUpdates.AddMember("RemoveBytesScannedCutoffPerQuery", _BoxedBoolean)
-
-	WorkGroupConfigurationUpdates_RequesterPaysEnabled = WorkGroupConfigurationUpdates.AddMember("RequesterPaysEnabled", _BoxedBoolean)
-
-	WorkGroupConfigurationUpdates_EngineVersion = WorkGroupConfigurationUpdates.AddMember("EngineVersion", EngineVersion)
-
-	WorkGroupConfigurationUpdates_RemoveCustomerContentEncryptionConfiguration = WorkGroupConfigurationUpdates.AddMember("RemoveCustomerContentEncryptionConfiguration", _BoxedBoolean)
-
-	WorkGroupConfigurationUpdates_AdditionalConfiguration = WorkGroupConfigurationUpdates.AddMember("AdditionalConfiguration", _NameString)
-
-	WorkGroupConfigurationUpdates_ExecutionRole = WorkGroupConfigurationUpdates.AddMember("ExecutionRole", _RoleArn)
-
-	WorkGroupConfigurationUpdates_CustomerContentEncryptionConfiguration = WorkGroupConfigurationUpdates.AddMember("CustomerContentEncryptionConfiguration", CustomerContentEncryptionConfiguration)
-
-	WorkGroupConfigurationUpdates_EnableMinimumEncryptionConfiguration = WorkGroupConfigurationUpdates.AddMember("EnableMinimumEncryptionConfiguration", _BoxedBoolean)
-
-	WorkGroupConfigurationUpdates_QueryResultsS3AccessGrantsConfiguration = WorkGroupConfigurationUpdates.AddMember("QueryResultsS3AccessGrantsConfiguration", QueryResultsS3AccessGrantsConfiguration)
-
-	WorkGroupConfigurationUpdates_MonitoringConfiguration = WorkGroupConfigurationUpdates.AddMember("MonitoringConfiguration", MonitoringConfiguration)
-
-	WorkGroupConfigurationUpdates_EngineConfiguration = WorkGroupConfigurationUpdates.AddMember("EngineConfiguration", EngineConfiguration)
-
-	WorkGroupSummary_Name = WorkGroupSummary.AddMember("Name", _WorkGroupName)
-
-	WorkGroupSummary_State = WorkGroupSummary.AddMember("State", WorkGroupState)
-
-	WorkGroupSummary_Description = WorkGroupSummary.AddMember("Description", _WorkGroupDescriptionString)
-
-	WorkGroupSummary_CreationTime = WorkGroupSummary.AddMember("CreationTime", _Date)
-
-	WorkGroupSummary_EngineVersion = WorkGroupSummary.AddMember("EngineVersion", EngineVersion)
-
-	WorkGroupSummary_IdentityCenterApplicationArn = WorkGroupSummary.AddMember("IdentityCenterApplicationArn", _IdentityCenterApplicationArn)
-
-	_WorkGroupsList_member = _WorkGroupsList.AddMember("member", WorkGroupSummary)
-
-	BatchGetNamedQueryInput_NamedQueryIds = BatchGetNamedQueryInput.AddMember("NamedQueryIds", _NamedQueryIdList)
-
-	BatchGetNamedQueryOutput_NamedQueries = BatchGetNamedQueryOutput.AddMember("NamedQueries", _NamedQueryList)
-
-	BatchGetNamedQueryOutput_UnprocessedNamedQueryIds = BatchGetNamedQueryOutput.AddMember("UnprocessedNamedQueryIds", _UnprocessedNamedQueryIdList)
-
-	BatchGetPreparedStatementInput_PreparedStatementNames = BatchGetPreparedStatementInput.AddMember("PreparedStatementNames", _PreparedStatementNameList)
-
-	BatchGetPreparedStatementInput_WorkGroup = BatchGetPreparedStatementInput.AddMember("WorkGroup", _WorkGroupName)
-
-	BatchGetPreparedStatementOutput_PreparedStatements = BatchGetPreparedStatementOutput.AddMember("PreparedStatements", _PreparedStatementDetailsList)
-
-	BatchGetPreparedStatementOutput_UnprocessedPreparedStatementNames = BatchGetPreparedStatementOutput.AddMember("UnprocessedPreparedStatementNames", _UnprocessedPreparedStatementNameList)
-
-	BatchGetQueryExecutionInput_QueryExecutionIds = BatchGetQueryExecutionInput.AddMember("QueryExecutionIds", _QueryExecutionIdList)
-
-	BatchGetQueryExecutionOutput_QueryExecutions = BatchGetQueryExecutionOutput.AddMember("QueryExecutions", _QueryExecutionList)
-
-	BatchGetQueryExecutionOutput_UnprocessedQueryExecutionIds = BatchGetQueryExecutionOutput.AddMember("UnprocessedQueryExecutionIds", _UnprocessedQueryExecutionIdList)
-
-	CancelCapacityReservationInput_Name = CancelCapacityReservationInput.AddMember("Name", _CapacityReservationName)
-
-	CreateCapacityReservationInput_TargetDpus = CreateCapacityReservationInput.AddMember("TargetDpus", _TargetDpusInteger)
-
-	CreateCapacityReservationInput_Name = CreateCapacityReservationInput.AddMember("Name", _CapacityReservationName)
-
-	CreateCapacityReservationInput_Tags = CreateCapacityReservationInput.AddMember("Tags", _TagList)
-
-	CreateDataCatalogInput_Name = CreateDataCatalogInput.AddMember("Name", _CatalogNameString)
-
-	CreateDataCatalogInput_Type = CreateDataCatalogInput.AddMember("Type", DataCatalogType)
-
-	CreateDataCatalogInput_Description = CreateDataCatalogInput.AddMember("Description", _DescriptionString)
-
-	CreateDataCatalogInput_Parameters = CreateDataCatalogInput.AddMember("Parameters", _ParametersMap)
-
-	CreateDataCatalogInput_Tags = CreateDataCatalogInput.AddMember("Tags", _TagList)
-
-	CreateDataCatalogOutput_DataCatalog = CreateDataCatalogOutput.AddMember("DataCatalog", DataCatalog)
-
-	CreateNamedQueryInput_Name = CreateNamedQueryInput.AddMember("Name", _NameString)
-
-	CreateNamedQueryInput_Description = CreateNamedQueryInput.AddMember("Description", _DescriptionString)
-
-	CreateNamedQueryInput_Database = CreateNamedQueryInput.AddMember("Database", _DatabaseString)
-
-	CreateNamedQueryInput_QueryString = CreateNamedQueryInput.AddMember("QueryString", _QueryString)
-
-	CreateNamedQueryInput_ClientRequestToken = CreateNamedQueryInput.AddMember("ClientRequestToken", _IdempotencyToken)
-
-	CreateNamedQueryInput_WorkGroup = CreateNamedQueryInput.AddMember("WorkGroup", _WorkGroupName)
-
-	CreateNamedQueryOutput_NamedQueryId = CreateNamedQueryOutput.AddMember("NamedQueryId", _NamedQueryId)
-
-	CreateNotebookInput_WorkGroup = CreateNotebookInput.AddMember("WorkGroup", _WorkGroupName)
-
-	CreateNotebookInput_Name = CreateNotebookInput.AddMember("Name", _NotebookName)
-
-	CreateNotebookInput_ClientRequestToken = CreateNotebookInput.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	CreateNotebookOutput_NotebookId = CreateNotebookOutput.AddMember("NotebookId", _NotebookId)
-
-	CreatePreparedStatementInput_StatementName = CreatePreparedStatementInput.AddMember("StatementName", _StatementName)
-
-	CreatePreparedStatementInput_WorkGroup = CreatePreparedStatementInput.AddMember("WorkGroup", _WorkGroupName)
-
-	CreatePreparedStatementInput_QueryStatement = CreatePreparedStatementInput.AddMember("QueryStatement", _QueryString)
-
-	CreatePreparedStatementInput_Description = CreatePreparedStatementInput.AddMember("Description", _DescriptionString)
-
-	CreatePresignedNotebookUrlRequest_SessionId = CreatePresignedNotebookUrlRequest.AddMember("SessionId", _SessionId)
-
-	CreatePresignedNotebookUrlResponse_NotebookUrl = CreatePresignedNotebookUrlResponse.AddMember("NotebookUrl", _String)
-
-	CreatePresignedNotebookUrlResponse_AuthToken = CreatePresignedNotebookUrlResponse.AddMember("AuthToken", _AuthToken)
-
-	CreatePresignedNotebookUrlResponse_AuthTokenExpirationTime = CreatePresignedNotebookUrlResponse.AddMember("AuthTokenExpirationTime", _Long)
-
-	CreateWorkGroupInput_Name = CreateWorkGroupInput.AddMember("Name", _WorkGroupName)
-
-	CreateWorkGroupInput_Configuration = CreateWorkGroupInput.AddMember("Configuration", WorkGroupConfiguration)
-
-	CreateWorkGroupInput_Description = CreateWorkGroupInput.AddMember("Description", _WorkGroupDescriptionString)
-
-	CreateWorkGroupInput_Tags = CreateWorkGroupInput.AddMember("Tags", _TagList)
-
-	DeleteCapacityReservationInput_Name = DeleteCapacityReservationInput.AddMember("Name", _CapacityReservationName)
-
-	DeleteDataCatalogInput_Name = DeleteDataCatalogInput.AddMember("Name", _CatalogNameString)
-
-	DeleteDataCatalogInput_DeleteCatalogOnly = DeleteDataCatalogInput.AddMember("DeleteCatalogOnly", _Boolean)
-
-	DeleteDataCatalogOutput_DataCatalog = DeleteDataCatalogOutput.AddMember("DataCatalog", DataCatalog)
-
-	DeleteNamedQueryInput_NamedQueryId = DeleteNamedQueryInput.AddMember("NamedQueryId", _NamedQueryId)
-
-	DeleteNotebookInput_NotebookId = DeleteNotebookInput.AddMember("NotebookId", _NotebookId)
-
-	DeletePreparedStatementInput_StatementName = DeletePreparedStatementInput.AddMember("StatementName", _StatementName)
-
-	DeletePreparedStatementInput_WorkGroup = DeletePreparedStatementInput.AddMember("WorkGroup", _WorkGroupName)
-
-	DeleteWorkGroupInput_WorkGroup = DeleteWorkGroupInput.AddMember("WorkGroup", _WorkGroupName)
-
-	DeleteWorkGroupInput_RecursiveDeleteOption = DeleteWorkGroupInput.AddMember("RecursiveDeleteOption", _BoxedBoolean)
-
-	ExportNotebookInput_NotebookId = ExportNotebookInput.AddMember("NotebookId", _NotebookId)
-
-	ExportNotebookOutput_NotebookMetadata = ExportNotebookOutput.AddMember("NotebookMetadata", NotebookMetadata)
-
-	ExportNotebookOutput_Payload = ExportNotebookOutput.AddMember("Payload", _Payload)
-
-	GetCalculationExecutionCodeRequest_CalculationExecutionId = GetCalculationExecutionCodeRequest.AddMember("CalculationExecutionId", _CalculationExecutionId)
-
-	GetCalculationExecutionCodeResponse_CodeBlock = GetCalculationExecutionCodeResponse.AddMember("CodeBlock", _CodeBlock)
-
-	GetCalculationExecutionRequest_CalculationExecutionId = GetCalculationExecutionRequest.AddMember("CalculationExecutionId", _CalculationExecutionId)
-
-	GetCalculationExecutionResponse_CalculationExecutionId = GetCalculationExecutionResponse.AddMember("CalculationExecutionId", _CalculationExecutionId)
-
-	GetCalculationExecutionResponse_SessionId = GetCalculationExecutionResponse.AddMember("SessionId", _SessionId)
-
-	GetCalculationExecutionResponse_Description = GetCalculationExecutionResponse.AddMember("Description", _DescriptionString)
-
-	GetCalculationExecutionResponse_WorkingDirectory = GetCalculationExecutionResponse.AddMember("WorkingDirectory", _S3Uri)
-
-	GetCalculationExecutionResponse_Status = GetCalculationExecutionResponse.AddMember("Status", CalculationStatus)
-
-	GetCalculationExecutionResponse_Statistics = GetCalculationExecutionResponse.AddMember("Statistics", CalculationStatistics)
-
-	GetCalculationExecutionResponse_Result = GetCalculationExecutionResponse.AddMember("Result", CalculationResult)
-
-	GetCalculationExecutionStatusRequest_CalculationExecutionId = GetCalculationExecutionStatusRequest.AddMember("CalculationExecutionId", _CalculationExecutionId)
-
-	GetCalculationExecutionStatusResponse_Status = GetCalculationExecutionStatusResponse.AddMember("Status", CalculationStatus)
-
-	GetCalculationExecutionStatusResponse_Statistics = GetCalculationExecutionStatusResponse.AddMember("Statistics", CalculationStatistics)
-
-	GetCapacityAssignmentConfigurationInput_CapacityReservationName = GetCapacityAssignmentConfigurationInput.AddMember("CapacityReservationName", _CapacityReservationName)
-
-	GetCapacityAssignmentConfigurationOutput_CapacityAssignmentConfiguration = GetCapacityAssignmentConfigurationOutput.AddMember("CapacityAssignmentConfiguration", CapacityAssignmentConfiguration)
-
-	GetCapacityReservationInput_Name = GetCapacityReservationInput.AddMember("Name", _CapacityReservationName)
-
-	GetCapacityReservationOutput_CapacityReservation = GetCapacityReservationOutput.AddMember("CapacityReservation", CapacityReservation)
-
-	GetDatabaseInput_CatalogName = GetDatabaseInput.AddMember("CatalogName", _CatalogNameString)
-
-	GetDatabaseInput_DatabaseName = GetDatabaseInput.AddMember("DatabaseName", _NameString)
-
-	GetDatabaseInput_WorkGroup = GetDatabaseInput.AddMember("WorkGroup", _WorkGroupName)
-
-	GetDatabaseOutput_Database = GetDatabaseOutput.AddMember("Database", Database)
-
-	GetDataCatalogInput_Name = GetDataCatalogInput.AddMember("Name", _CatalogNameString)
-
-	GetDataCatalogInput_WorkGroup = GetDataCatalogInput.AddMember("WorkGroup", _WorkGroupName)
-
-	GetDataCatalogOutput_DataCatalog = GetDataCatalogOutput.AddMember("DataCatalog", DataCatalog)
-
-	GetNamedQueryInput_NamedQueryId = GetNamedQueryInput.AddMember("NamedQueryId", _NamedQueryId)
-
-	GetNamedQueryOutput_NamedQuery = GetNamedQueryOutput.AddMember("NamedQuery", NamedQuery)
-
-	GetNotebookMetadataInput_NotebookId = GetNotebookMetadataInput.AddMember("NotebookId", _NotebookId)
-
-	GetNotebookMetadataOutput_NotebookMetadata = GetNotebookMetadataOutput.AddMember("NotebookMetadata", NotebookMetadata)
-
-	GetPreparedStatementInput_StatementName = GetPreparedStatementInput.AddMember("StatementName", _StatementName)
-
-	GetPreparedStatementInput_WorkGroup = GetPreparedStatementInput.AddMember("WorkGroup", _WorkGroupName)
-
-	GetPreparedStatementOutput_PreparedStatement = GetPreparedStatementOutput.AddMember("PreparedStatement", PreparedStatement)
-
-	GetQueryExecutionInput_QueryExecutionId = GetQueryExecutionInput.AddMember("QueryExecutionId", _QueryExecutionId)
-
-	GetQueryExecutionOutput_QueryExecution = GetQueryExecutionOutput.AddMember("QueryExecution", QueryExecution)
-
-	GetQueryResultsInput_QueryExecutionId = GetQueryResultsInput.AddMember("QueryExecutionId", _QueryExecutionId)
-
-	GetQueryResultsInput_NextToken = GetQueryResultsInput.AddMember("NextToken", _Token)
-
-	GetQueryResultsInput_MaxResults = GetQueryResultsInput.AddMember("MaxResults", _MaxQueryResults)
-
-	GetQueryResultsInput_QueryResultType = GetQueryResultsInput.AddMember("QueryResultType", QueryResultType)
-
-	GetQueryResultsOutput_UpdateCount = GetQueryResultsOutput.AddMember("UpdateCount", _Long)
-
-	GetQueryResultsOutput_ResultSet = GetQueryResultsOutput.AddMember("ResultSet", ResultSet)
-
-	GetQueryResultsOutput_NextToken = GetQueryResultsOutput.AddMember("NextToken", _Token)
-
-	GetQueryRuntimeStatisticsInput_QueryExecutionId = GetQueryRuntimeStatisticsInput.AddMember("QueryExecutionId", _QueryExecutionId)
-
-	GetQueryRuntimeStatisticsOutput_QueryRuntimeStatistics = GetQueryRuntimeStatisticsOutput.AddMember("QueryRuntimeStatistics", QueryRuntimeStatistics)
-
-	GetResourceDashboardRequest_ResourceARN = GetResourceDashboardRequest.AddMember("ResourceARN", _AmazonResourceName)
-
-	GetResourceDashboardResponse_Url = GetResourceDashboardResponse.AddMember("Url", _String)
-
-	GetSessionEndpointRequest_SessionId = GetSessionEndpointRequest.AddMember("SessionId", _SessionId)
-
-	GetSessionEndpointResponse_EndpointUrl = GetSessionEndpointResponse.AddMember("EndpointUrl", _String)
-
-	GetSessionEndpointResponse_AuthToken = GetSessionEndpointResponse.AddMember("AuthToken", _String)
-
-	GetSessionEndpointResponse_AuthTokenExpirationTime = GetSessionEndpointResponse.AddMember("AuthTokenExpirationTime", _Timestamp)
-
-	GetSessionRequest_SessionId = GetSessionRequest.AddMember("SessionId", _SessionId)
-
-	GetSessionResponse_SessionId = GetSessionResponse.AddMember("SessionId", _SessionId)
-
-	GetSessionResponse_Description = GetSessionResponse.AddMember("Description", _DescriptionString)
-
-	GetSessionResponse_WorkGroup = GetSessionResponse.AddMember("WorkGroup", _WorkGroupName)
-
-	GetSessionResponse_EngineVersion = GetSessionResponse.AddMember("EngineVersion", _NameString)
-
-	GetSessionResponse_EngineConfiguration = GetSessionResponse.AddMember("EngineConfiguration", EngineConfiguration)
-
-	GetSessionResponse_NotebookVersion = GetSessionResponse.AddMember("NotebookVersion", _NameString)
-
-	GetSessionResponse_MonitoringConfiguration = GetSessionResponse.AddMember("MonitoringConfiguration", MonitoringConfiguration)
-
-	GetSessionResponse_SessionConfiguration = GetSessionResponse.AddMember("SessionConfiguration", SessionConfiguration)
-
-	GetSessionResponse_Status = GetSessionResponse.AddMember("Status", SessionStatus)
-
-	GetSessionResponse_Statistics = GetSessionResponse.AddMember("Statistics", SessionStatistics)
-
-	GetSessionStatusRequest_SessionId = GetSessionStatusRequest.AddMember("SessionId", _SessionId)
-
-	GetSessionStatusResponse_SessionId = GetSessionStatusResponse.AddMember("SessionId", _SessionId)
-
-	GetSessionStatusResponse_Status = GetSessionStatusResponse.AddMember("Status", SessionStatus)
-
-	GetTableMetadataInput_CatalogName = GetTableMetadataInput.AddMember("CatalogName", _CatalogNameString)
-
-	GetTableMetadataInput_DatabaseName = GetTableMetadataInput.AddMember("DatabaseName", _NameString)
-
-	GetTableMetadataInput_TableName = GetTableMetadataInput.AddMember("TableName", _NameString)
-
-	GetTableMetadataInput_WorkGroup = GetTableMetadataInput.AddMember("WorkGroup", _WorkGroupName)
-
-	GetTableMetadataOutput_TableMetadata = GetTableMetadataOutput.AddMember("TableMetadata", TableMetadata)
-
-	GetWorkGroupInput_WorkGroup = GetWorkGroupInput.AddMember("WorkGroup", _WorkGroupName)
-
-	GetWorkGroupOutput_WorkGroup = GetWorkGroupOutput.AddMember("WorkGroup", WorkGroup)
-
-	ImportNotebookInput_WorkGroup = ImportNotebookInput.AddMember("WorkGroup", _WorkGroupName)
-
-	ImportNotebookInput_Name = ImportNotebookInput.AddMember("Name", _NotebookName)
-
-	ImportNotebookInput_Payload = ImportNotebookInput.AddMember("Payload", _Payload)
-
-	ImportNotebookInput_Type = ImportNotebookInput.AddMember("Type", NotebookType)
-
-	ImportNotebookInput_NotebookS3LocationUri = ImportNotebookInput.AddMember("NotebookS3LocationUri", _S3Uri)
-
-	ImportNotebookInput_ClientRequestToken = ImportNotebookInput.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	ImportNotebookOutput_NotebookId = ImportNotebookOutput.AddMember("NotebookId", _NotebookId)
-
-	ListApplicationDPUSizesInput_MaxResults = ListApplicationDPUSizesInput.AddMember("MaxResults", _MaxApplicationDPUSizesCount)
-
-	ListApplicationDPUSizesInput_NextToken = ListApplicationDPUSizesInput.AddMember("NextToken", _Token)
-
-	ListApplicationDPUSizesOutput_ApplicationDPUSizes = ListApplicationDPUSizesOutput.AddMember("ApplicationDPUSizes", _ApplicationDPUSizesList)
-
-	ListApplicationDPUSizesOutput_NextToken = ListApplicationDPUSizesOutput.AddMember("NextToken", _Token)
-
-	ListCalculationExecutionsRequest_SessionId = ListCalculationExecutionsRequest.AddMember("SessionId", _SessionId)
-
-	ListCalculationExecutionsRequest_StateFilter = ListCalculationExecutionsRequest.AddMember("StateFilter", CalculationExecutionState)
-
-	ListCalculationExecutionsRequest_MaxResults = ListCalculationExecutionsRequest.AddMember("MaxResults", _MaxCalculationsCount)
-
-	ListCalculationExecutionsRequest_NextToken = ListCalculationExecutionsRequest.AddMember("NextToken", _SessionManagerToken)
-
-	ListCalculationExecutionsResponse_NextToken = ListCalculationExecutionsResponse.AddMember("NextToken", _SessionManagerToken)
-
-	ListCalculationExecutionsResponse_Calculations = ListCalculationExecutionsResponse.AddMember("Calculations", _CalculationsList)
-
-	ListCapacityReservationsInput_NextToken = ListCapacityReservationsInput.AddMember("NextToken", _Token)
-
-	ListCapacityReservationsInput_MaxResults = ListCapacityReservationsInput.AddMember("MaxResults", _MaxCapacityReservationsCount)
-
-	ListCapacityReservationsOutput_NextToken = ListCapacityReservationsOutput.AddMember("NextToken", _Token)
-
-	ListCapacityReservationsOutput_CapacityReservations = ListCapacityReservationsOutput.AddMember("CapacityReservations", _CapacityReservationsList)
-
-	ListDatabasesInput_CatalogName = ListDatabasesInput.AddMember("CatalogName", _CatalogNameString)
-
-	ListDatabasesInput_NextToken = ListDatabasesInput.AddMember("NextToken", _Token)
-
-	ListDatabasesInput_MaxResults = ListDatabasesInput.AddMember("MaxResults", _MaxDatabasesCount)
-
-	ListDatabasesInput_WorkGroup = ListDatabasesInput.AddMember("WorkGroup", _WorkGroupName)
-
-	ListDatabasesOutput_DatabaseList = ListDatabasesOutput.AddMember("DatabaseList", _DatabaseList)
-
-	ListDatabasesOutput_NextToken = ListDatabasesOutput.AddMember("NextToken", _Token)
-
-	ListDataCatalogsInput_NextToken = ListDataCatalogsInput.AddMember("NextToken", _Token)
-
-	ListDataCatalogsInput_MaxResults = ListDataCatalogsInput.AddMember("MaxResults", _MaxDataCatalogsCount)
-
-	ListDataCatalogsInput_WorkGroup = ListDataCatalogsInput.AddMember("WorkGroup", _WorkGroupName)
-
-	ListDataCatalogsOutput_DataCatalogsSummary = ListDataCatalogsOutput.AddMember("DataCatalogsSummary", _DataCatalogSummaryList)
-
-	ListDataCatalogsOutput_NextToken = ListDataCatalogsOutput.AddMember("NextToken", _Token)
-
-	ListEngineVersionsInput_NextToken = ListEngineVersionsInput.AddMember("NextToken", _Token)
-
-	ListEngineVersionsInput_MaxResults = ListEngineVersionsInput.AddMember("MaxResults", _MaxEngineVersionsCount)
-
-	ListEngineVersionsOutput_EngineVersions = ListEngineVersionsOutput.AddMember("EngineVersions", _EngineVersionsList)
-
-	ListEngineVersionsOutput_NextToken = ListEngineVersionsOutput.AddMember("NextToken", _Token)
-
-	ListExecutorsRequest_SessionId = ListExecutorsRequest.AddMember("SessionId", _SessionId)
-
-	ListExecutorsRequest_ExecutorStateFilter = ListExecutorsRequest.AddMember("ExecutorStateFilter", ExecutorState)
-
-	ListExecutorsRequest_MaxResults = ListExecutorsRequest.AddMember("MaxResults", _MaxListExecutorsCount)
-
-	ListExecutorsRequest_NextToken = ListExecutorsRequest.AddMember("NextToken", _SessionManagerToken)
-
-	ListExecutorsResponse_SessionId = ListExecutorsResponse.AddMember("SessionId", _SessionId)
-
-	ListExecutorsResponse_NextToken = ListExecutorsResponse.AddMember("NextToken", _SessionManagerToken)
-
-	ListExecutorsResponse_ExecutorsSummary = ListExecutorsResponse.AddMember("ExecutorsSummary", _ExecutorsSummaryList)
-
-	ListNamedQueriesInput_NextToken = ListNamedQueriesInput.AddMember("NextToken", _Token)
-
-	ListNamedQueriesInput_MaxResults = ListNamedQueriesInput.AddMember("MaxResults", _MaxNamedQueriesCount)
-
-	ListNamedQueriesInput_WorkGroup = ListNamedQueriesInput.AddMember("WorkGroup", _WorkGroupName)
-
-	ListNamedQueriesOutput_NamedQueryIds = ListNamedQueriesOutput.AddMember("NamedQueryIds", _NamedQueryIdList)
-
-	ListNamedQueriesOutput_NextToken = ListNamedQueriesOutput.AddMember("NextToken", _Token)
-
-	ListNotebookMetadataInput_Filters = ListNotebookMetadataInput.AddMember("Filters", FilterDefinition)
-
-	ListNotebookMetadataInput_NextToken = ListNotebookMetadataInput.AddMember("NextToken", _Token)
-
-	ListNotebookMetadataInput_MaxResults = ListNotebookMetadataInput.AddMember("MaxResults", _MaxNotebooksCount)
-
-	ListNotebookMetadataInput_WorkGroup = ListNotebookMetadataInput.AddMember("WorkGroup", _WorkGroupName)
-
-	ListNotebookMetadataOutput_NextToken = ListNotebookMetadataOutput.AddMember("NextToken", _Token)
-
-	ListNotebookMetadataOutput_NotebookMetadataList = ListNotebookMetadataOutput.AddMember("NotebookMetadataList", _NotebookMetadataArray)
-
-	ListNotebookSessionsRequest_NotebookId = ListNotebookSessionsRequest.AddMember("NotebookId", _NotebookId)
-
-	ListNotebookSessionsRequest_MaxResults = ListNotebookSessionsRequest.AddMember("MaxResults", _MaxSessionsCount)
-
-	ListNotebookSessionsRequest_NextToken = ListNotebookSessionsRequest.AddMember("NextToken", _Token)
-
-	ListNotebookSessionsResponse_NotebookSessionsList = ListNotebookSessionsResponse.AddMember("NotebookSessionsList", _NotebookSessionsList)
-
-	ListNotebookSessionsResponse_NextToken = ListNotebookSessionsResponse.AddMember("NextToken", _Token)
-
-	ListPreparedStatementsInput_WorkGroup = ListPreparedStatementsInput.AddMember("WorkGroup", _WorkGroupName)
-
-	ListPreparedStatementsInput_NextToken = ListPreparedStatementsInput.AddMember("NextToken", _Token)
-
-	ListPreparedStatementsInput_MaxResults = ListPreparedStatementsInput.AddMember("MaxResults", _MaxPreparedStatementsCount)
-
-	ListPreparedStatementsOutput_PreparedStatements = ListPreparedStatementsOutput.AddMember("PreparedStatements", _PreparedStatementsList)
-
-	ListPreparedStatementsOutput_NextToken = ListPreparedStatementsOutput.AddMember("NextToken", _Token)
-
-	ListQueryExecutionsInput_NextToken = ListQueryExecutionsInput.AddMember("NextToken", _Token)
-
-	ListQueryExecutionsInput_MaxResults = ListQueryExecutionsInput.AddMember("MaxResults", _MaxQueryExecutionsCount)
-
-	ListQueryExecutionsInput_WorkGroup = ListQueryExecutionsInput.AddMember("WorkGroup", _WorkGroupName)
-
-	ListQueryExecutionsOutput_QueryExecutionIds = ListQueryExecutionsOutput.AddMember("QueryExecutionIds", _QueryExecutionIdList)
-
-	ListQueryExecutionsOutput_NextToken = ListQueryExecutionsOutput.AddMember("NextToken", _Token)
-
-	ListSessionsRequest_WorkGroup = ListSessionsRequest.AddMember("WorkGroup", _WorkGroupName)
-
-	ListSessionsRequest_StateFilter = ListSessionsRequest.AddMember("StateFilter", SessionState)
-
-	ListSessionsRequest_MaxResults = ListSessionsRequest.AddMember("MaxResults", _MaxSessionsCount)
-
-	ListSessionsRequest_NextToken = ListSessionsRequest.AddMember("NextToken", _SessionManagerToken)
-
-	ListSessionsResponse_NextToken = ListSessionsResponse.AddMember("NextToken", _SessionManagerToken)
-
-	ListSessionsResponse_Sessions = ListSessionsResponse.AddMember("Sessions", _SessionsList)
-
-	ListTableMetadataInput_CatalogName = ListTableMetadataInput.AddMember("CatalogName", _CatalogNameString)
-
-	ListTableMetadataInput_DatabaseName = ListTableMetadataInput.AddMember("DatabaseName", _NameString)
-
-	ListTableMetadataInput_Expression = ListTableMetadataInput.AddMember("Expression", _ExpressionString)
-
-	ListTableMetadataInput_NextToken = ListTableMetadataInput.AddMember("NextToken", _Token)
-
-	ListTableMetadataInput_MaxResults = ListTableMetadataInput.AddMember("MaxResults", _MaxTableMetadataCount)
-
-	ListTableMetadataInput_WorkGroup = ListTableMetadataInput.AddMember("WorkGroup", _WorkGroupName)
-
-	ListTableMetadataOutput_TableMetadataList = ListTableMetadataOutput.AddMember("TableMetadataList", _TableMetadataList)
-
-	ListTableMetadataOutput_NextToken = ListTableMetadataOutput.AddMember("NextToken", _Token)
-
-	ListTagsForResourceInput_ResourceARN = ListTagsForResourceInput.AddMember("ResourceARN", _AmazonResourceName)
-
-	ListTagsForResourceInput_NextToken = ListTagsForResourceInput.AddMember("NextToken", _Token)
-
-	ListTagsForResourceInput_MaxResults = ListTagsForResourceInput.AddMember("MaxResults", _MaxTagsCount)
-
-	ListTagsForResourceOutput_Tags = ListTagsForResourceOutput.AddMember("Tags", _TagList)
-
-	ListTagsForResourceOutput_NextToken = ListTagsForResourceOutput.AddMember("NextToken", _Token)
-
-	ListWorkGroupsInput_NextToken = ListWorkGroupsInput.AddMember("NextToken", _Token)
-
-	ListWorkGroupsInput_MaxResults = ListWorkGroupsInput.AddMember("MaxResults", _MaxWorkGroupsCount)
-
-	ListWorkGroupsOutput_WorkGroups = ListWorkGroupsOutput.AddMember("WorkGroups", _WorkGroupsList)
-
-	ListWorkGroupsOutput_NextToken = ListWorkGroupsOutput.AddMember("NextToken", _Token)
-
-	PutCapacityAssignmentConfigurationInput_CapacityReservationName = PutCapacityAssignmentConfigurationInput.AddMember("CapacityReservationName", _CapacityReservationName)
-
-	PutCapacityAssignmentConfigurationInput_CapacityAssignments = PutCapacityAssignmentConfigurationInput.AddMember("CapacityAssignments", _CapacityAssignmentsList)
-
-	StartCalculationExecutionRequest_SessionId = StartCalculationExecutionRequest.AddMember("SessionId", _SessionId)
-
-	StartCalculationExecutionRequest_Description = StartCalculationExecutionRequest.AddMember("Description", _DescriptionString)
-
-	StartCalculationExecutionRequest_CalculationConfiguration = StartCalculationExecutionRequest.AddMember("CalculationConfiguration", CalculationConfiguration)
-
-	StartCalculationExecutionRequest_CodeBlock = StartCalculationExecutionRequest.AddMember("CodeBlock", _CodeBlock)
-
-	StartCalculationExecutionRequest_ClientRequestToken = StartCalculationExecutionRequest.AddMember("ClientRequestToken", _IdempotencyToken)
-
-	StartCalculationExecutionResponse_CalculationExecutionId = StartCalculationExecutionResponse.AddMember("CalculationExecutionId", _CalculationExecutionId)
-
-	StartCalculationExecutionResponse_State = StartCalculationExecutionResponse.AddMember("State", CalculationExecutionState)
-
-	StartQueryExecutionInput_QueryString = StartQueryExecutionInput.AddMember("QueryString", _QueryString)
-
-	StartQueryExecutionInput_ClientRequestToken = StartQueryExecutionInput.AddMember("ClientRequestToken", _IdempotencyToken)
-
-	StartQueryExecutionInput_QueryExecutionContext = StartQueryExecutionInput.AddMember("QueryExecutionContext", QueryExecutionContext)
-
-	StartQueryExecutionInput_ResultConfiguration = StartQueryExecutionInput.AddMember("ResultConfiguration", ResultConfiguration)
-
-	StartQueryExecutionInput_WorkGroup = StartQueryExecutionInput.AddMember("WorkGroup", _WorkGroupName)
-
-	StartQueryExecutionInput_ExecutionParameters = StartQueryExecutionInput.AddMember("ExecutionParameters", _ExecutionParameters)
-
-	StartQueryExecutionInput_ResultReuseConfiguration = StartQueryExecutionInput.AddMember("ResultReuseConfiguration", ResultReuseConfiguration)
-
-	StartQueryExecutionInput_EngineConfiguration = StartQueryExecutionInput.AddMember("EngineConfiguration", EngineConfiguration)
-
-	StartQueryExecutionOutput_QueryExecutionId = StartQueryExecutionOutput.AddMember("QueryExecutionId", _QueryExecutionId)
-
-	StartSessionRequest_Description = StartSessionRequest.AddMember("Description", _DescriptionString)
-
-	StartSessionRequest_WorkGroup = StartSessionRequest.AddMember("WorkGroup", _WorkGroupName)
-
-	StartSessionRequest_EngineConfiguration = StartSessionRequest.AddMember("EngineConfiguration", EngineConfiguration)
-
-	StartSessionRequest_ExecutionRole = StartSessionRequest.AddMember("ExecutionRole", _RoleArn)
-
-	StartSessionRequest_MonitoringConfiguration = StartSessionRequest.AddMember("MonitoringConfiguration", MonitoringConfiguration)
-
-	StartSessionRequest_NotebookVersion = StartSessionRequest.AddMember("NotebookVersion", _NameString)
-
-	StartSessionRequest_SessionIdleTimeoutInMinutes = StartSessionRequest.AddMember("SessionIdleTimeoutInMinutes", _SessionIdleTimeoutInMinutes)
-
-	StartSessionRequest_ClientRequestToken = StartSessionRequest.AddMember("ClientRequestToken", _IdempotencyToken)
-
-	StartSessionRequest_Tags = StartSessionRequest.AddMember("Tags", _TagList)
-
-	StartSessionRequest_CopyWorkGroupTags = StartSessionRequest.AddMember("CopyWorkGroupTags", _BoxedBoolean)
-
-	StartSessionResponse_SessionId = StartSessionResponse.AddMember("SessionId", _SessionId)
-
-	StartSessionResponse_State = StartSessionResponse.AddMember("State", SessionState)
-
-	StopCalculationExecutionRequest_CalculationExecutionId = StopCalculationExecutionRequest.AddMember("CalculationExecutionId", _CalculationExecutionId)
-
-	StopCalculationExecutionResponse_State = StopCalculationExecutionResponse.AddMember("State", CalculationExecutionState)
-
-	StopQueryExecutionInput_QueryExecutionId = StopQueryExecutionInput.AddMember("QueryExecutionId", _QueryExecutionId)
-
-	TagResourceInput_ResourceARN = TagResourceInput.AddMember("ResourceARN", _AmazonResourceName)
-
-	TagResourceInput_Tags = TagResourceInput.AddMember("Tags", _TagList)
-
-	TerminateSessionRequest_SessionId = TerminateSessionRequest.AddMember("SessionId", _SessionId)
-
-	TerminateSessionResponse_State = TerminateSessionResponse.AddMember("State", SessionState)
-
-	UntagResourceInput_ResourceARN = UntagResourceInput.AddMember("ResourceARN", _AmazonResourceName)
-
-	UntagResourceInput_TagKeys = UntagResourceInput.AddMember("TagKeys", _TagKeyList)
-
-	UpdateCapacityReservationInput_TargetDpus = UpdateCapacityReservationInput.AddMember("TargetDpus", _TargetDpusInteger)
-
-	UpdateCapacityReservationInput_Name = UpdateCapacityReservationInput.AddMember("Name", _CapacityReservationName)
-
-	UpdateDataCatalogInput_Name = UpdateDataCatalogInput.AddMember("Name", _CatalogNameString)
-
-	UpdateDataCatalogInput_Type = UpdateDataCatalogInput.AddMember("Type", DataCatalogType)
-
-	UpdateDataCatalogInput_Description = UpdateDataCatalogInput.AddMember("Description", _DescriptionString)
-
-	UpdateDataCatalogInput_Parameters = UpdateDataCatalogInput.AddMember("Parameters", _ParametersMap)
-
-	UpdateNamedQueryInput_NamedQueryId = UpdateNamedQueryInput.AddMember("NamedQueryId", _NamedQueryId)
-
-	UpdateNamedQueryInput_Name = UpdateNamedQueryInput.AddMember("Name", _NameString)
-
-	UpdateNamedQueryInput_Description = UpdateNamedQueryInput.AddMember("Description", _NamedQueryDescriptionString)
-
-	UpdateNamedQueryInput_QueryString = UpdateNamedQueryInput.AddMember("QueryString", _QueryString)
-
-	UpdateNotebookInput_NotebookId = UpdateNotebookInput.AddMember("NotebookId", _NotebookId)
-
-	UpdateNotebookInput_Payload = UpdateNotebookInput.AddMember("Payload", _Payload)
-
-	UpdateNotebookInput_Type = UpdateNotebookInput.AddMember("Type", NotebookType)
-
-	UpdateNotebookInput_SessionId = UpdateNotebookInput.AddMember("SessionId", _SessionId)
-
-	UpdateNotebookInput_ClientRequestToken = UpdateNotebookInput.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	UpdateNotebookMetadataInput_NotebookId = UpdateNotebookMetadataInput.AddMember("NotebookId", _NotebookId)
-
-	UpdateNotebookMetadataInput_ClientRequestToken = UpdateNotebookMetadataInput.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	UpdateNotebookMetadataInput_Name = UpdateNotebookMetadataInput.AddMember("Name", _NotebookName)
-
-	UpdatePreparedStatementInput_StatementName = UpdatePreparedStatementInput.AddMember("StatementName", _StatementName)
-
-	UpdatePreparedStatementInput_WorkGroup = UpdatePreparedStatementInput.AddMember("WorkGroup", _WorkGroupName)
-
-	UpdatePreparedStatementInput_QueryStatement = UpdatePreparedStatementInput.AddMember("QueryStatement", _QueryString)
-
-	UpdatePreparedStatementInput_Description = UpdatePreparedStatementInput.AddMember("Description", _DescriptionString)
-
-	UpdateWorkGroupInput_WorkGroup = UpdateWorkGroupInput.AddMember("WorkGroup", _WorkGroupName)
-
-	UpdateWorkGroupInput_Description = UpdateWorkGroupInput.AddMember("Description", _WorkGroupDescriptionString)
-
-	UpdateWorkGroupInput_ConfigurationUpdates = UpdateWorkGroupInput.AddMember("ConfigurationUpdates", WorkGroupConfigurationUpdates)
-
-	UpdateWorkGroupInput_State = UpdateWorkGroupInput.AddMember("State", WorkGroupState)
-
+	s_QueryStagePlanNodes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iQueryStagePlanNode, Members: &mQueryStagePlanNode, Type: smithy.ShapeTypeStructure})
+	s_QueryStages_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iQueryStage, Members: &mQueryStage, Type: smithy.ShapeTypeStructure})
 }
+
+var BatchGetNamedQuery = &sBatchGetNamedQuery
+
+var BatchGetPreparedStatement = &sBatchGetPreparedStatement
+
+var BatchGetQueryExecution = &sBatchGetQueryExecution
+
+var CancelCapacityReservation = &sCancelCapacityReservation
+
+var CreateCapacityReservation = &sCreateCapacityReservation
+
+var CreateDataCatalog = &sCreateDataCatalog
+
+var CreateNamedQuery = &sCreateNamedQuery
+
+var CreateNotebook = &sCreateNotebook
+
+var CreatePreparedStatement = &sCreatePreparedStatement
+
+var CreatePresignedNotebookUrl = &sCreatePresignedNotebookUrl
+
+var CreateWorkGroup = &sCreateWorkGroup
+
+var DeleteCapacityReservation = &sDeleteCapacityReservation
+
+var DeleteDataCatalog = &sDeleteDataCatalog
+
+var DeleteNamedQuery = &sDeleteNamedQuery
+
+var DeleteNotebook = &sDeleteNotebook
+
+var DeletePreparedStatement = &sDeletePreparedStatement
+
+var DeleteWorkGroup = &sDeleteWorkGroup
+
+var ExportNotebook = &sExportNotebook
+
+var GetCalculationExecution = &sGetCalculationExecution
+
+var GetCalculationExecutionCode = &sGetCalculationExecutionCode
+
+var GetCalculationExecutionStatus = &sGetCalculationExecutionStatus
+
+var GetCapacityAssignmentConfiguration = &sGetCapacityAssignmentConfiguration
+
+var GetCapacityReservation = &sGetCapacityReservation
+
+var GetDatabase = &sGetDatabase
+
+var GetDataCatalog = &sGetDataCatalog
+
+var GetNamedQuery = &sGetNamedQuery
+
+var GetNotebookMetadata = &sGetNotebookMetadata
+
+var GetPreparedStatement = &sGetPreparedStatement
+
+var GetQueryExecution = &sGetQueryExecution
+
+var GetQueryResults = &sGetQueryResults
+
+var GetQueryRuntimeStatistics = &sGetQueryRuntimeStatistics
+
+var GetResourceDashboard = &sGetResourceDashboard
+
+var GetSession = &sGetSession
+
+var GetSessionEndpoint = &sGetSessionEndpoint
+
+var GetSessionStatus = &sGetSessionStatus
+
+var GetTableMetadata = &sGetTableMetadata
+
+var GetWorkGroup = &sGetWorkGroup
+
+var ImportNotebook = &sImportNotebook
+
+var ListApplicationDPUSizes = &sListApplicationDPUSizes
+
+var ListCalculationExecutions = &sListCalculationExecutions
+
+var ListCapacityReservations = &sListCapacityReservations
+
+var ListDatabases = &sListDatabases
+
+var ListDataCatalogs = &sListDataCatalogs
+
+var ListEngineVersions = &sListEngineVersions
+
+var ListExecutors = &sListExecutors
+
+var ListNamedQueries = &sListNamedQueries
+
+var ListNotebookMetadata = &sListNotebookMetadata
+
+var ListNotebookSessions = &sListNotebookSessions
+
+var ListPreparedStatements = &sListPreparedStatements
+
+var ListQueryExecutions = &sListQueryExecutions
+
+var ListSessions = &sListSessions
+
+var ListTableMetadata = &sListTableMetadata
+
+var ListTagsForResource = &sListTagsForResource
+
+var ListWorkGroups = &sListWorkGroups
+
+var PutCapacityAssignmentConfiguration = &sPutCapacityAssignmentConfiguration
+
+var StartCalculationExecution = &sStartCalculationExecution
+
+var StartQueryExecution = &sStartQueryExecution
+
+var StartSession = &sStartSession
+
+var StopCalculationExecution = &sStopCalculationExecution
+
+var StopQueryExecution = &sStopQueryExecution
+
+var TagResource = &sTagResource
+
+var TerminateSession = &sTerminateSession
+
+var UntagResource = &sUntagResource
+
+var UpdateCapacityReservation = &sUpdateCapacityReservation
+
+var UpdateDataCatalog = &sUpdateDataCatalog
+
+var UpdateNamedQuery = &sUpdateNamedQuery
+
+var UpdateNotebook = &sUpdateNotebook
+
+var UpdateNotebookMetadata = &sUpdateNotebookMetadata
+
+var UpdatePreparedStatement = &sUpdatePreparedStatement
+
+var UpdateWorkGroup = &sUpdateWorkGroup
+
+var _AmazonAthena = &s_AmazonAthena
+
+var AclConfiguration = &sAclConfiguration
+var AclConfiguration_S3AclOption = &sAclConfiguration_S3AclOption
+
+var _Age = &s_Age
+
+var _AllocatedDpusInteger = &s_AllocatedDpusInteger
+
+var _AmazonResourceName = &s_AmazonResourceName
+
+var ApplicationDPUSizes = &sApplicationDPUSizes
+var ApplicationDPUSizes_ApplicationRuntimeId = &sApplicationDPUSizes_ApplicationRuntimeId
+var ApplicationDPUSizes_SupportedDPUSizes = &sApplicationDPUSizes_SupportedDPUSizes
+
+var _ApplicationDPUSizesList = &s_ApplicationDPUSizesList
+var _ApplicationDPUSizesList_member = &s_ApplicationDPUSizesList_member
+
+var AthenaError = &sAthenaError
+var AthenaError_ErrorCategory = &sAthenaError_ErrorCategory
+var AthenaError_ErrorType = &sAthenaError_ErrorType
+var AthenaError_Retryable = &sAthenaError_Retryable
+var AthenaError_ErrorMessage = &sAthenaError_ErrorMessage
+
+var AuthenticationType = &sAuthenticationType
+var AuthenticationType_DIRECTORY_IDENTITY = &sAuthenticationType_DIRECTORY_IDENTITY
+
+var _AuthToken = &s_AuthToken
+
+var _AwsAccountId = &s_AwsAccountId
+
+var _Boolean = &s_Boolean
+
+var _BoxedBoolean = &s_BoxedBoolean
+
+var _BytesScannedCutoffValue = &s_BytesScannedCutoffValue
+
+var CalculationConfiguration = &sCalculationConfiguration
+var CalculationConfiguration_CodeBlock = &sCalculationConfiguration_CodeBlock
+
+var _CalculationExecutionId = &s_CalculationExecutionId
+
+var CalculationExecutionState = &sCalculationExecutionState
+var CalculationExecutionState_CREATING = &sCalculationExecutionState_CREATING
+var CalculationExecutionState_CREATED = &sCalculationExecutionState_CREATED
+var CalculationExecutionState_QUEUED = &sCalculationExecutionState_QUEUED
+var CalculationExecutionState_RUNNING = &sCalculationExecutionState_RUNNING
+var CalculationExecutionState_CANCELING = &sCalculationExecutionState_CANCELING
+var CalculationExecutionState_CANCELED = &sCalculationExecutionState_CANCELED
+var CalculationExecutionState_COMPLETED = &sCalculationExecutionState_COMPLETED
+var CalculationExecutionState_FAILED = &sCalculationExecutionState_FAILED
+
+var CalculationResult = &sCalculationResult
+var CalculationResult_StdOutS3Uri = &sCalculationResult_StdOutS3Uri
+var CalculationResult_StdErrorS3Uri = &sCalculationResult_StdErrorS3Uri
+var CalculationResult_ResultS3Uri = &sCalculationResult_ResultS3Uri
+var CalculationResult_ResultType = &sCalculationResult_ResultType
+
+var _CalculationResultType = &s_CalculationResultType
+
+var _CalculationsList = &s_CalculationsList
+var _CalculationsList_member = &s_CalculationsList_member
+
+var CalculationStatistics = &sCalculationStatistics
+var CalculationStatistics_DpuExecutionInMillis = &sCalculationStatistics_DpuExecutionInMillis
+var CalculationStatistics_Progress = &sCalculationStatistics_Progress
+
+var CalculationStatus = &sCalculationStatus
+var CalculationStatus_SubmissionDateTime = &sCalculationStatus_SubmissionDateTime
+var CalculationStatus_CompletionDateTime = &sCalculationStatus_CompletionDateTime
+var CalculationStatus_State = &sCalculationStatus_State
+var CalculationStatus_StateChangeReason = &sCalculationStatus_StateChangeReason
+
+var CalculationSummary = &sCalculationSummary
+var CalculationSummary_CalculationExecutionId = &sCalculationSummary_CalculationExecutionId
+var CalculationSummary_Description = &sCalculationSummary_Description
+var CalculationSummary_Status = &sCalculationSummary_Status
+
+var CapacityAllocation = &sCapacityAllocation
+var CapacityAllocation_Status = &sCapacityAllocation_Status
+var CapacityAllocation_StatusMessage = &sCapacityAllocation_StatusMessage
+var CapacityAllocation_RequestTime = &sCapacityAllocation_RequestTime
+var CapacityAllocation_RequestCompletionTime = &sCapacityAllocation_RequestCompletionTime
+
+var CapacityAllocationStatus = &sCapacityAllocationStatus
+var CapacityAllocationStatus_PENDING = &sCapacityAllocationStatus_PENDING
+var CapacityAllocationStatus_SUCCEEDED = &sCapacityAllocationStatus_SUCCEEDED
+var CapacityAllocationStatus_FAILED = &sCapacityAllocationStatus_FAILED
+
+var CapacityAssignment = &sCapacityAssignment
+var CapacityAssignment_WorkGroupNames = &sCapacityAssignment_WorkGroupNames
+
+var CapacityAssignmentConfiguration = &sCapacityAssignmentConfiguration
+var CapacityAssignmentConfiguration_CapacityReservationName = &sCapacityAssignmentConfiguration_CapacityReservationName
+var CapacityAssignmentConfiguration_CapacityAssignments = &sCapacityAssignmentConfiguration_CapacityAssignments
+
+var _CapacityAssignmentsList = &s_CapacityAssignmentsList
+var _CapacityAssignmentsList_member = &s_CapacityAssignmentsList_member
+
+var CapacityReservation = &sCapacityReservation
+var CapacityReservation_Name = &sCapacityReservation_Name
+var CapacityReservation_Status = &sCapacityReservation_Status
+var CapacityReservation_TargetDpus = &sCapacityReservation_TargetDpus
+var CapacityReservation_AllocatedDpus = &sCapacityReservation_AllocatedDpus
+var CapacityReservation_LastAllocation = &sCapacityReservation_LastAllocation
+var CapacityReservation_LastSuccessfulAllocationTime = &sCapacityReservation_LastSuccessfulAllocationTime
+var CapacityReservation_CreationTime = &sCapacityReservation_CreationTime
+
+var _CapacityReservationName = &s_CapacityReservationName
+
+var _CapacityReservationsList = &s_CapacityReservationsList
+var _CapacityReservationsList_member = &s_CapacityReservationsList_member
+
+var CapacityReservationStatus = &sCapacityReservationStatus
+var CapacityReservationStatus_PENDING = &sCapacityReservationStatus_PENDING
+var CapacityReservationStatus_ACTIVE = &sCapacityReservationStatus_ACTIVE
+var CapacityReservationStatus_CANCELLING = &sCapacityReservationStatus_CANCELLING
+var CapacityReservationStatus_CANCELLED = &sCapacityReservationStatus_CANCELLED
+var CapacityReservationStatus_FAILED = &sCapacityReservationStatus_FAILED
+var CapacityReservationStatus_UPDATE_PENDING = &sCapacityReservationStatus_UPDATE_PENDING
+
+var _CatalogNameString = &s_CatalogNameString
+
+var Classification = &sClassification
+var Classification_Name = &sClassification_Name
+var Classification_Properties = &sClassification_Properties
+
+var _ClassificationList = &s_ClassificationList
+var _ClassificationList_member = &s_ClassificationList_member
+
+var _ClientRequestToken = &s_ClientRequestToken
+
+var CloudWatchLoggingConfiguration = &sCloudWatchLoggingConfiguration
+var CloudWatchLoggingConfiguration_Enabled = &sCloudWatchLoggingConfiguration_Enabled
+var CloudWatchLoggingConfiguration_LogGroup = &sCloudWatchLoggingConfiguration_LogGroup
+var CloudWatchLoggingConfiguration_LogStreamNamePrefix = &sCloudWatchLoggingConfiguration_LogStreamNamePrefix
+var CloudWatchLoggingConfiguration_LogTypes = &sCloudWatchLoggingConfiguration_LogTypes
+
+var _CodeBlock = &s_CodeBlock
+
+var Column = &sColumn
+var Column_Name = &sColumn_Name
+var Column_Type = &sColumn_Type
+var Column_Comment = &sColumn_Comment
+
+var ColumnInfo = &sColumnInfo
+var ColumnInfo_CatalogName = &sColumnInfo_CatalogName
+var ColumnInfo_SchemaName = &sColumnInfo_SchemaName
+var ColumnInfo_TableName = &sColumnInfo_TableName
+var ColumnInfo_Name = &sColumnInfo_Name
+var ColumnInfo_Label = &sColumnInfo_Label
+var ColumnInfo_Type = &sColumnInfo_Type
+var ColumnInfo_Precision = &sColumnInfo_Precision
+var ColumnInfo_Scale = &sColumnInfo_Scale
+var ColumnInfo_Nullable = &sColumnInfo_Nullable
+var ColumnInfo_CaseSensitive = &sColumnInfo_CaseSensitive
+
+var _ColumnInfoList = &s_ColumnInfoList
+var _ColumnInfoList_member = &s_ColumnInfoList_member
+
+var _ColumnList = &s_ColumnList
+var _ColumnList_member = &s_ColumnList_member
+
+var ColumnNullable = &sColumnNullable
+var ColumnNullable_NOT_NULL = &sColumnNullable_NOT_NULL
+var ColumnNullable_NULLABLE = &sColumnNullable_NULLABLE
+var ColumnNullable_UNKNOWN = &sColumnNullable_UNKNOWN
+
+var _CommentString = &s_CommentString
+
+var ConnectionType = &sConnectionType
+var ConnectionType_DYNAMODB = &sConnectionType_DYNAMODB
+var ConnectionType_MYSQL = &sConnectionType_MYSQL
+var ConnectionType_POSTGRESQL = &sConnectionType_POSTGRESQL
+var ConnectionType_REDSHIFT = &sConnectionType_REDSHIFT
+var ConnectionType_ORACLE = &sConnectionType_ORACLE
+var ConnectionType_SYNAPSE = &sConnectionType_SYNAPSE
+var ConnectionType_SQLSERVER = &sConnectionType_SQLSERVER
+var ConnectionType_DB2 = &sConnectionType_DB2
+var ConnectionType_OPENSEARCH = &sConnectionType_OPENSEARCH
+var ConnectionType_BIGQUERY = &sConnectionType_BIGQUERY
+var ConnectionType_GOOGLECLOUDSTORAGE = &sConnectionType_GOOGLECLOUDSTORAGE
+var ConnectionType_HBASE = &sConnectionType_HBASE
+var ConnectionType_DOCUMENTDB = &sConnectionType_DOCUMENTDB
+var ConnectionType_CMDB = &sConnectionType_CMDB
+var ConnectionType_TPCDS = &sConnectionType_TPCDS
+var ConnectionType_TIMESTREAM = &sConnectionType_TIMESTREAM
+var ConnectionType_SAPHANA = &sConnectionType_SAPHANA
+var ConnectionType_SNOWFLAKE = &sConnectionType_SNOWFLAKE
+var ConnectionType_DATALAKEGEN2 = &sConnectionType_DATALAKEGEN2
+var ConnectionType_DB2AS400 = &sConnectionType_DB2AS400
+
+var _CoordinatorDpuSize = &s_CoordinatorDpuSize
+
+var CustomerContentEncryptionConfiguration = &sCustomerContentEncryptionConfiguration
+var CustomerContentEncryptionConfiguration_KmsKey = &sCustomerContentEncryptionConfiguration_KmsKey
+
+var Database = &sDatabase
+var Database_Name = &sDatabase_Name
+var Database_Description = &sDatabase_Description
+var Database_Parameters = &sDatabase_Parameters
+
+var _DatabaseList = &s_DatabaseList
+var _DatabaseList_member = &s_DatabaseList_member
+
+var _DatabaseString = &s_DatabaseString
+
+var DataCatalog = &sDataCatalog
+var DataCatalog_Name = &sDataCatalog_Name
+var DataCatalog_Description = &sDataCatalog_Description
+var DataCatalog_Type = &sDataCatalog_Type
+var DataCatalog_Parameters = &sDataCatalog_Parameters
+var DataCatalog_Status = &sDataCatalog_Status
+var DataCatalog_ConnectionType = &sDataCatalog_ConnectionType
+var DataCatalog_Error = &sDataCatalog_Error
+
+var DataCatalogStatus = &sDataCatalogStatus
+var DataCatalogStatus_CREATE_IN_PROGRESS = &sDataCatalogStatus_CREATE_IN_PROGRESS
+var DataCatalogStatus_CREATE_COMPLETE = &sDataCatalogStatus_CREATE_COMPLETE
+var DataCatalogStatus_CREATE_FAILED = &sDataCatalogStatus_CREATE_FAILED
+var DataCatalogStatus_CREATE_FAILED_CLEANUP_IN_PROGRESS = &sDataCatalogStatus_CREATE_FAILED_CLEANUP_IN_PROGRESS
+var DataCatalogStatus_CREATE_FAILED_CLEANUP_COMPLETE = &sDataCatalogStatus_CREATE_FAILED_CLEANUP_COMPLETE
+var DataCatalogStatus_CREATE_FAILED_CLEANUP_FAILED = &sDataCatalogStatus_CREATE_FAILED_CLEANUP_FAILED
+var DataCatalogStatus_DELETE_IN_PROGRESS = &sDataCatalogStatus_DELETE_IN_PROGRESS
+var DataCatalogStatus_DELETE_COMPLETE = &sDataCatalogStatus_DELETE_COMPLETE
+var DataCatalogStatus_DELETE_FAILED = &sDataCatalogStatus_DELETE_FAILED
+
+var DataCatalogSummary = &sDataCatalogSummary
+var DataCatalogSummary_CatalogName = &sDataCatalogSummary_CatalogName
+var DataCatalogSummary_Type = &sDataCatalogSummary_Type
+var DataCatalogSummary_Status = &sDataCatalogSummary_Status
+var DataCatalogSummary_ConnectionType = &sDataCatalogSummary_ConnectionType
+var DataCatalogSummary_Error = &sDataCatalogSummary_Error
+
+var _DataCatalogSummaryList = &s_DataCatalogSummaryList
+var _DataCatalogSummaryList_member = &s_DataCatalogSummaryList_member
+
+var DataCatalogType = &sDataCatalogType
+var DataCatalogType_LAMBDA = &sDataCatalogType_LAMBDA
+var DataCatalogType_GLUE = &sDataCatalogType_GLUE
+var DataCatalogType_HIVE = &sDataCatalogType_HIVE
+var DataCatalogType_FEDERATED = &sDataCatalogType_FEDERATED
+
+var _Date = &s_Date
+
+var Datum = &sDatum
+var Datum_VarCharValue = &sDatum_VarCharValue
+
+var _datumList = &s_datumList
+var _datumList_member = &s_datumList_member
+
+var _datumString = &s_datumString
+
+var _DefaultExecutorDpuSize = &s_DefaultExecutorDpuSize
+
+var _DescriptionString = &s_DescriptionString
+
+var _DpuCount = &s_DpuCount
+
+var EncryptionConfiguration = &sEncryptionConfiguration
+var EncryptionConfiguration_EncryptionOption = &sEncryptionConfiguration_EncryptionOption
+var EncryptionConfiguration_KmsKey = &sEncryptionConfiguration_KmsKey
+
+var EncryptionOption = &sEncryptionOption
+var EncryptionOption_SSE_S3 = &sEncryptionOption_SSE_S3
+var EncryptionOption_SSE_KMS = &sEncryptionOption_SSE_KMS
+var EncryptionOption_CSE_KMS = &sEncryptionOption_CSE_KMS
+
+var EngineConfiguration = &sEngineConfiguration
+var EngineConfiguration_CoordinatorDpuSize = &sEngineConfiguration_CoordinatorDpuSize
+var EngineConfiguration_MaxConcurrentDpus = &sEngineConfiguration_MaxConcurrentDpus
+var EngineConfiguration_DefaultExecutorDpuSize = &sEngineConfiguration_DefaultExecutorDpuSize
+var EngineConfiguration_AdditionalConfigs = &sEngineConfiguration_AdditionalConfigs
+var EngineConfiguration_SparkProperties = &sEngineConfiguration_SparkProperties
+var EngineConfiguration_Classifications = &sEngineConfiguration_Classifications
+
+var EngineVersion = &sEngineVersion
+var EngineVersion_SelectedEngineVersion = &sEngineVersion_SelectedEngineVersion
+var EngineVersion_EffectiveEngineVersion = &sEngineVersion_EffectiveEngineVersion
+
+var _EngineVersionsList = &s_EngineVersionsList
+var _EngineVersionsList_member = &s_EngineVersionsList_member
+
+var _ErrorCategory = &s_ErrorCategory
+
+var _ErrorCode = &s_ErrorCode
+
+var _ErrorMessage = &s_ErrorMessage
+
+var _ErrorType = &s_ErrorType
+
+var _ExecutionParameter = &s_ExecutionParameter
+
+var _ExecutionParameters = &s_ExecutionParameters
+var _ExecutionParameters_member = &s_ExecutionParameters_member
+
+var _ExecutorId = &s_ExecutorId
+
+var ExecutorsSummary = &sExecutorsSummary
+var ExecutorsSummary_ExecutorId = &sExecutorsSummary_ExecutorId
+var ExecutorsSummary_ExecutorType = &sExecutorsSummary_ExecutorType
+var ExecutorsSummary_StartDateTime = &sExecutorsSummary_StartDateTime
+var ExecutorsSummary_TerminationDateTime = &sExecutorsSummary_TerminationDateTime
+var ExecutorsSummary_ExecutorState = &sExecutorsSummary_ExecutorState
+var ExecutorsSummary_ExecutorSize = &sExecutorsSummary_ExecutorSize
+
+var _ExecutorsSummaryList = &s_ExecutorsSummaryList
+var _ExecutorsSummaryList_member = &s_ExecutorsSummaryList_member
+
+var ExecutorState = &sExecutorState
+var ExecutorState_CREATING = &sExecutorState_CREATING
+var ExecutorState_CREATED = &sExecutorState_CREATED
+var ExecutorState_REGISTERED = &sExecutorState_REGISTERED
+var ExecutorState_TERMINATING = &sExecutorState_TERMINATING
+var ExecutorState_TERMINATED = &sExecutorState_TERMINATED
+var ExecutorState_FAILED = &sExecutorState_FAILED
+
+var ExecutorType = &sExecutorType
+var ExecutorType_COORDINATOR = &sExecutorType_COORDINATOR
+var ExecutorType_GATEWAY = &sExecutorType_GATEWAY
+var ExecutorType_WORKER = &sExecutorType_WORKER
+
+var _ExpressionString = &s_ExpressionString
+
+var FilterDefinition = &sFilterDefinition
+var FilterDefinition_Name = &sFilterDefinition_Name
+
+var _IdempotencyToken = &s_IdempotencyToken
+
+var _IdentityCenterApplicationArn = &s_IdentityCenterApplicationArn
+
+var IdentityCenterConfiguration = &sIdentityCenterConfiguration
+var IdentityCenterConfiguration_EnableIdentityCenter = &sIdentityCenterConfiguration_EnableIdentityCenter
+var IdentityCenterConfiguration_IdentityCenterInstanceArn = &sIdentityCenterConfiguration_IdentityCenterInstanceArn
+
+var _IdentityCenterInstanceArn = &s_IdentityCenterInstanceArn
+
+var _Integer = &s_Integer
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_Message = &sInternalServerException_Message
+
+var InvalidRequestException = &sInvalidRequestException
+var InvalidRequestException_AthenaErrorCode = &sInvalidRequestException_AthenaErrorCode
+var InvalidRequestException_Message = &sInvalidRequestException_Message
+
+var _KeyString = &s_KeyString
+
+var _KmsKey = &s_KmsKey
+
+var _LogGroupName = &s_LogGroupName
+
+var _LogStreamNamePrefix = &s_LogStreamNamePrefix
+
+var _LogTypeKey = &s_LogTypeKey
+
+var _LogTypesMap = &s_LogTypesMap
+var _LogTypesMap_key = &s_LogTypesMap_key
+var _LogTypesMap_value = &s_LogTypesMap_value
+
+var _LogTypeValue = &s_LogTypeValue
+
+var _LogTypeValuesList = &s_LogTypeValuesList
+var _LogTypeValuesList_member = &s_LogTypeValuesList_member
+
+var _Long = &s_Long
+
+var ManagedLoggingConfiguration = &sManagedLoggingConfiguration
+var ManagedLoggingConfiguration_Enabled = &sManagedLoggingConfiguration_Enabled
+var ManagedLoggingConfiguration_KmsKey = &sManagedLoggingConfiguration_KmsKey
+
+var ManagedQueryResultsConfiguration = &sManagedQueryResultsConfiguration
+var ManagedQueryResultsConfiguration_Enabled = &sManagedQueryResultsConfiguration_Enabled
+var ManagedQueryResultsConfiguration_EncryptionConfiguration = &sManagedQueryResultsConfiguration_EncryptionConfiguration
+
+var ManagedQueryResultsConfigurationUpdates = &sManagedQueryResultsConfigurationUpdates
+var ManagedQueryResultsConfigurationUpdates_Enabled = &sManagedQueryResultsConfigurationUpdates_Enabled
+var ManagedQueryResultsConfigurationUpdates_EncryptionConfiguration = &sManagedQueryResultsConfigurationUpdates_EncryptionConfiguration
+var ManagedQueryResultsConfigurationUpdates_RemoveEncryptionConfiguration = &sManagedQueryResultsConfigurationUpdates_RemoveEncryptionConfiguration
+
+var ManagedQueryResultsEncryptionConfiguration = &sManagedQueryResultsEncryptionConfiguration
+var ManagedQueryResultsEncryptionConfiguration_KmsKey = &sManagedQueryResultsEncryptionConfiguration_KmsKey
+
+var _MaxApplicationDPUSizesCount = &s_MaxApplicationDPUSizesCount
+
+var _MaxCalculationsCount = &s_MaxCalculationsCount
+
+var _MaxCapacityReservationsCount = &s_MaxCapacityReservationsCount
+
+var _MaxConcurrentDpus = &s_MaxConcurrentDpus
+
+var _MaxDatabasesCount = &s_MaxDatabasesCount
+
+var _MaxDataCatalogsCount = &s_MaxDataCatalogsCount
+
+var _MaxEngineVersionsCount = &s_MaxEngineVersionsCount
+
+var _MaxListExecutorsCount = &s_MaxListExecutorsCount
+
+var _MaxNamedQueriesCount = &s_MaxNamedQueriesCount
+
+var _MaxNotebooksCount = &s_MaxNotebooksCount
+
+var _MaxPreparedStatementsCount = &s_MaxPreparedStatementsCount
+
+var _MaxQueryExecutionsCount = &s_MaxQueryExecutionsCount
+
+var _MaxQueryResults = &s_MaxQueryResults
+
+var _MaxSessionsCount = &s_MaxSessionsCount
+
+var _MaxTableMetadataCount = &s_MaxTableMetadataCount
+
+var _MaxTagsCount = &s_MaxTagsCount
+
+var _MaxWorkGroupsCount = &s_MaxWorkGroupsCount
+
+var MetadataException = &sMetadataException
+var MetadataException_Message = &sMetadataException_Message
+
+var MonitoringConfiguration = &sMonitoringConfiguration
+var MonitoringConfiguration_CloudWatchLoggingConfiguration = &sMonitoringConfiguration_CloudWatchLoggingConfiguration
+var MonitoringConfiguration_ManagedLoggingConfiguration = &sMonitoringConfiguration_ManagedLoggingConfiguration
+var MonitoringConfiguration_S3LoggingConfiguration = &sMonitoringConfiguration_S3LoggingConfiguration
+
+var NamedQuery = &sNamedQuery
+var NamedQuery_Name = &sNamedQuery_Name
+var NamedQuery_Description = &sNamedQuery_Description
+var NamedQuery_Database = &sNamedQuery_Database
+var NamedQuery_QueryString = &sNamedQuery_QueryString
+var NamedQuery_NamedQueryId = &sNamedQuery_NamedQueryId
+var NamedQuery_WorkGroup = &sNamedQuery_WorkGroup
+
+var _NamedQueryDescriptionString = &s_NamedQueryDescriptionString
+
+var _NamedQueryId = &s_NamedQueryId
+
+var _NamedQueryIdList = &s_NamedQueryIdList
+var _NamedQueryIdList_member = &s_NamedQueryIdList_member
+
+var _NamedQueryList = &s_NamedQueryList
+var _NamedQueryList_member = &s_NamedQueryList_member
+
+var _NameString = &s_NameString
+
+var _NotebookId = &s_NotebookId
+
+var NotebookMetadata = &sNotebookMetadata
+var NotebookMetadata_NotebookId = &sNotebookMetadata_NotebookId
+var NotebookMetadata_Name = &sNotebookMetadata_Name
+var NotebookMetadata_WorkGroup = &sNotebookMetadata_WorkGroup
+var NotebookMetadata_CreationTime = &sNotebookMetadata_CreationTime
+var NotebookMetadata_Type = &sNotebookMetadata_Type
+var NotebookMetadata_LastModifiedTime = &sNotebookMetadata_LastModifiedTime
+
+var _NotebookMetadataArray = &s_NotebookMetadataArray
+var _NotebookMetadataArray_member = &s_NotebookMetadataArray_member
+
+var _NotebookName = &s_NotebookName
+
+var _NotebookSessionsList = &s_NotebookSessionsList
+var _NotebookSessionsList_member = &s_NotebookSessionsList_member
+
+var NotebookSessionSummary = &sNotebookSessionSummary
+var NotebookSessionSummary_SessionId = &sNotebookSessionSummary_SessionId
+var NotebookSessionSummary_CreationTime = &sNotebookSessionSummary_CreationTime
+
+var NotebookType = &sNotebookType
+var NotebookType_IPYNB = &sNotebookType_IPYNB
+
+var _ParametersMap = &s_ParametersMap
+var _ParametersMap_key = &s_ParametersMap_key
+var _ParametersMap_value = &s_ParametersMap_value
+
+var _ParametersMapValue = &s_ParametersMapValue
+
+var _Payload = &s_Payload
+
+var PreparedStatement = &sPreparedStatement
+var PreparedStatement_StatementName = &sPreparedStatement_StatementName
+var PreparedStatement_QueryStatement = &sPreparedStatement_QueryStatement
+var PreparedStatement_WorkGroupName = &sPreparedStatement_WorkGroupName
+var PreparedStatement_Description = &sPreparedStatement_Description
+var PreparedStatement_LastModifiedTime = &sPreparedStatement_LastModifiedTime
+
+var _PreparedStatementDetailsList = &s_PreparedStatementDetailsList
+var _PreparedStatementDetailsList_member = &s_PreparedStatementDetailsList_member
+
+var _PreparedStatementNameList = &s_PreparedStatementNameList
+var _PreparedStatementNameList_member = &s_PreparedStatementNameList_member
+
+var _PreparedStatementsList = &s_PreparedStatementsList
+var _PreparedStatementsList_member = &s_PreparedStatementsList_member
+
+var PreparedStatementSummary = &sPreparedStatementSummary
+var PreparedStatementSummary_StatementName = &sPreparedStatementSummary_StatementName
+var PreparedStatementSummary_LastModifiedTime = &sPreparedStatementSummary_LastModifiedTime
+
+var QueryExecution = &sQueryExecution
+var QueryExecution_QueryExecutionId = &sQueryExecution_QueryExecutionId
+var QueryExecution_Query = &sQueryExecution_Query
+var QueryExecution_StatementType = &sQueryExecution_StatementType
+var QueryExecution_ManagedQueryResultsConfiguration = &sQueryExecution_ManagedQueryResultsConfiguration
+var QueryExecution_ResultConfiguration = &sQueryExecution_ResultConfiguration
+var QueryExecution_ResultReuseConfiguration = &sQueryExecution_ResultReuseConfiguration
+var QueryExecution_QueryExecutionContext = &sQueryExecution_QueryExecutionContext
+var QueryExecution_Status = &sQueryExecution_Status
+var QueryExecution_Statistics = &sQueryExecution_Statistics
+var QueryExecution_WorkGroup = &sQueryExecution_WorkGroup
+var QueryExecution_EngineVersion = &sQueryExecution_EngineVersion
+var QueryExecution_ExecutionParameters = &sQueryExecution_ExecutionParameters
+var QueryExecution_SubstatementType = &sQueryExecution_SubstatementType
+var QueryExecution_QueryResultsS3AccessGrantsConfiguration = &sQueryExecution_QueryResultsS3AccessGrantsConfiguration
+
+var QueryExecutionContext = &sQueryExecutionContext
+var QueryExecutionContext_Database = &sQueryExecutionContext_Database
+var QueryExecutionContext_Catalog = &sQueryExecutionContext_Catalog
+
+var _QueryExecutionId = &s_QueryExecutionId
+
+var _QueryExecutionIdList = &s_QueryExecutionIdList
+var _QueryExecutionIdList_member = &s_QueryExecutionIdList_member
+
+var _QueryExecutionList = &s_QueryExecutionList
+var _QueryExecutionList_member = &s_QueryExecutionList_member
+
+var QueryExecutionState = &sQueryExecutionState
+var QueryExecutionState_QUEUED = &sQueryExecutionState_QUEUED
+var QueryExecutionState_RUNNING = &sQueryExecutionState_RUNNING
+var QueryExecutionState_SUCCEEDED = &sQueryExecutionState_SUCCEEDED
+var QueryExecutionState_FAILED = &sQueryExecutionState_FAILED
+var QueryExecutionState_CANCELLED = &sQueryExecutionState_CANCELLED
+
+var QueryExecutionStatistics = &sQueryExecutionStatistics
+var QueryExecutionStatistics_EngineExecutionTimeInMillis = &sQueryExecutionStatistics_EngineExecutionTimeInMillis
+var QueryExecutionStatistics_DataScannedInBytes = &sQueryExecutionStatistics_DataScannedInBytes
+var QueryExecutionStatistics_DataManifestLocation = &sQueryExecutionStatistics_DataManifestLocation
+var QueryExecutionStatistics_TotalExecutionTimeInMillis = &sQueryExecutionStatistics_TotalExecutionTimeInMillis
+var QueryExecutionStatistics_QueryQueueTimeInMillis = &sQueryExecutionStatistics_QueryQueueTimeInMillis
+var QueryExecutionStatistics_ServicePreProcessingTimeInMillis = &sQueryExecutionStatistics_ServicePreProcessingTimeInMillis
+var QueryExecutionStatistics_QueryPlanningTimeInMillis = &sQueryExecutionStatistics_QueryPlanningTimeInMillis
+var QueryExecutionStatistics_ServiceProcessingTimeInMillis = &sQueryExecutionStatistics_ServiceProcessingTimeInMillis
+var QueryExecutionStatistics_ResultReuseInformation = &sQueryExecutionStatistics_ResultReuseInformation
+var QueryExecutionStatistics_DpuCount = &sQueryExecutionStatistics_DpuCount
+
+var QueryExecutionStatus = &sQueryExecutionStatus
+var QueryExecutionStatus_State = &sQueryExecutionStatus_State
+var QueryExecutionStatus_StateChangeReason = &sQueryExecutionStatus_StateChangeReason
+var QueryExecutionStatus_SubmissionDateTime = &sQueryExecutionStatus_SubmissionDateTime
+var QueryExecutionStatus_CompletionDateTime = &sQueryExecutionStatus_CompletionDateTime
+var QueryExecutionStatus_AthenaError = &sQueryExecutionStatus_AthenaError
+
+var QueryResultsS3AccessGrantsConfiguration = &sQueryResultsS3AccessGrantsConfiguration
+var QueryResultsS3AccessGrantsConfiguration_EnableS3AccessGrants = &sQueryResultsS3AccessGrantsConfiguration_EnableS3AccessGrants
+var QueryResultsS3AccessGrantsConfiguration_CreateUserLevelPrefix = &sQueryResultsS3AccessGrantsConfiguration_CreateUserLevelPrefix
+var QueryResultsS3AccessGrantsConfiguration_AuthenticationType = &sQueryResultsS3AccessGrantsConfiguration_AuthenticationType
+
+var QueryResultType = &sQueryResultType
+var QueryResultType_DATA_MANIFEST = &sQueryResultType_DATA_MANIFEST
+var QueryResultType_DATA_ROWS = &sQueryResultType_DATA_ROWS
+
+var QueryRuntimeStatistics = &sQueryRuntimeStatistics
+var QueryRuntimeStatistics_Timeline = &sQueryRuntimeStatistics_Timeline
+var QueryRuntimeStatistics_Rows = &sQueryRuntimeStatistics_Rows
+var QueryRuntimeStatistics_OutputStage = &sQueryRuntimeStatistics_OutputStage
+
+var QueryRuntimeStatisticsRows = &sQueryRuntimeStatisticsRows
+var QueryRuntimeStatisticsRows_InputRows = &sQueryRuntimeStatisticsRows_InputRows
+var QueryRuntimeStatisticsRows_InputBytes = &sQueryRuntimeStatisticsRows_InputBytes
+var QueryRuntimeStatisticsRows_OutputBytes = &sQueryRuntimeStatisticsRows_OutputBytes
+var QueryRuntimeStatisticsRows_OutputRows = &sQueryRuntimeStatisticsRows_OutputRows
+
+var QueryRuntimeStatisticsTimeline = &sQueryRuntimeStatisticsTimeline
+var QueryRuntimeStatisticsTimeline_QueryQueueTimeInMillis = &sQueryRuntimeStatisticsTimeline_QueryQueueTimeInMillis
+var QueryRuntimeStatisticsTimeline_ServicePreProcessingTimeInMillis = &sQueryRuntimeStatisticsTimeline_ServicePreProcessingTimeInMillis
+var QueryRuntimeStatisticsTimeline_QueryPlanningTimeInMillis = &sQueryRuntimeStatisticsTimeline_QueryPlanningTimeInMillis
+var QueryRuntimeStatisticsTimeline_EngineExecutionTimeInMillis = &sQueryRuntimeStatisticsTimeline_EngineExecutionTimeInMillis
+var QueryRuntimeStatisticsTimeline_ServiceProcessingTimeInMillis = &sQueryRuntimeStatisticsTimeline_ServiceProcessingTimeInMillis
+var QueryRuntimeStatisticsTimeline_TotalExecutionTimeInMillis = &sQueryRuntimeStatisticsTimeline_TotalExecutionTimeInMillis
+
+var QueryStage = &sQueryStage
+var QueryStage_StageId = &sQueryStage_StageId
+var QueryStage_State = &sQueryStage_State
+var QueryStage_OutputBytes = &sQueryStage_OutputBytes
+var QueryStage_OutputRows = &sQueryStage_OutputRows
+var QueryStage_InputBytes = &sQueryStage_InputBytes
+var QueryStage_InputRows = &sQueryStage_InputRows
+var QueryStage_ExecutionTime = &sQueryStage_ExecutionTime
+var QueryStage_QueryStagePlan = &sQueryStage_QueryStagePlan
+var QueryStage_SubStages = &sQueryStage_SubStages
+
+var QueryStagePlanNode = &sQueryStagePlanNode
+var QueryStagePlanNode_Name = &sQueryStagePlanNode_Name
+var QueryStagePlanNode_Identifier = &sQueryStagePlanNode_Identifier
+var QueryStagePlanNode_Children = &sQueryStagePlanNode_Children
+var QueryStagePlanNode_RemoteSources = &sQueryStagePlanNode_RemoteSources
+
+var _QueryStagePlanNodes = &s_QueryStagePlanNodes
+var _QueryStagePlanNodes_member = &s_QueryStagePlanNodes_member
+
+var _QueryStages = &s_QueryStages
+var _QueryStages_member = &s_QueryStages_member
+
+var _QueryString = &s_QueryString
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+var ResourceNotFoundException_ResourceName = &sResourceNotFoundException_ResourceName
+
+var ResultConfiguration = &sResultConfiguration
+var ResultConfiguration_OutputLocation = &sResultConfiguration_OutputLocation
+var ResultConfiguration_EncryptionConfiguration = &sResultConfiguration_EncryptionConfiguration
+var ResultConfiguration_ExpectedBucketOwner = &sResultConfiguration_ExpectedBucketOwner
+var ResultConfiguration_AclConfiguration = &sResultConfiguration_AclConfiguration
+
+var ResultConfigurationUpdates = &sResultConfigurationUpdates
+var ResultConfigurationUpdates_OutputLocation = &sResultConfigurationUpdates_OutputLocation
+var ResultConfigurationUpdates_RemoveOutputLocation = &sResultConfigurationUpdates_RemoveOutputLocation
+var ResultConfigurationUpdates_EncryptionConfiguration = &sResultConfigurationUpdates_EncryptionConfiguration
+var ResultConfigurationUpdates_RemoveEncryptionConfiguration = &sResultConfigurationUpdates_RemoveEncryptionConfiguration
+var ResultConfigurationUpdates_ExpectedBucketOwner = &sResultConfigurationUpdates_ExpectedBucketOwner
+var ResultConfigurationUpdates_RemoveExpectedBucketOwner = &sResultConfigurationUpdates_RemoveExpectedBucketOwner
+var ResultConfigurationUpdates_AclConfiguration = &sResultConfigurationUpdates_AclConfiguration
+var ResultConfigurationUpdates_RemoveAclConfiguration = &sResultConfigurationUpdates_RemoveAclConfiguration
+
+var _ResultOutputLocation = &s_ResultOutputLocation
+
+var ResultReuseByAgeConfiguration = &sResultReuseByAgeConfiguration
+var ResultReuseByAgeConfiguration_Enabled = &sResultReuseByAgeConfiguration_Enabled
+var ResultReuseByAgeConfiguration_MaxAgeInMinutes = &sResultReuseByAgeConfiguration_MaxAgeInMinutes
+
+var ResultReuseConfiguration = &sResultReuseConfiguration
+var ResultReuseConfiguration_ResultReuseByAgeConfiguration = &sResultReuseConfiguration_ResultReuseByAgeConfiguration
+
+var ResultReuseInformation = &sResultReuseInformation
+var ResultReuseInformation_ReusedPreviousResult = &sResultReuseInformation_ReusedPreviousResult
+
+var ResultSet = &sResultSet
+var ResultSet_Rows = &sResultSet_Rows
+var ResultSet_ResultSetMetadata = &sResultSet_ResultSetMetadata
+
+var ResultSetMetadata = &sResultSetMetadata
+var ResultSetMetadata_ColumnInfo = &sResultSetMetadata_ColumnInfo
+
+var _RoleArn = &s_RoleArn
+
+var Row = &sRow
+var Row_Data = &sRow_Data
+
+var _RowList = &s_RowList
+var _RowList_member = &s_RowList_member
+
+var S3AclOption = &sS3AclOption
+var S3AclOption_BUCKET_OWNER_FULL_CONTROL = &sS3AclOption_BUCKET_OWNER_FULL_CONTROL
+
+var S3LoggingConfiguration = &sS3LoggingConfiguration
+var S3LoggingConfiguration_Enabled = &sS3LoggingConfiguration_Enabled
+var S3LoggingConfiguration_KmsKey = &sS3LoggingConfiguration_KmsKey
+var S3LoggingConfiguration_LogLocation = &sS3LoggingConfiguration_LogLocation
+
+var _S3OutputLocation = &s_S3OutputLocation
+
+var _S3Uri = &s_S3Uri
+
+var SessionAlreadyExistsException = &sSessionAlreadyExistsException
+var SessionAlreadyExistsException_Message = &sSessionAlreadyExistsException_Message
+
+var SessionConfiguration = &sSessionConfiguration
+var SessionConfiguration_ExecutionRole = &sSessionConfiguration_ExecutionRole
+var SessionConfiguration_WorkingDirectory = &sSessionConfiguration_WorkingDirectory
+var SessionConfiguration_IdleTimeoutSeconds = &sSessionConfiguration_IdleTimeoutSeconds
+var SessionConfiguration_SessionIdleTimeoutInMinutes = &sSessionConfiguration_SessionIdleTimeoutInMinutes
+var SessionConfiguration_EncryptionConfiguration = &sSessionConfiguration_EncryptionConfiguration
+
+var _SessionId = &s_SessionId
+
+var _SessionIdleTimeoutInMinutes = &s_SessionIdleTimeoutInMinutes
+
+var _SessionManagerToken = &s_SessionManagerToken
+
+var _SessionsList = &s_SessionsList
+var _SessionsList_member = &s_SessionsList_member
+
+var SessionState = &sSessionState
+var SessionState_CREATING = &sSessionState_CREATING
+var SessionState_CREATED = &sSessionState_CREATED
+var SessionState_IDLE = &sSessionState_IDLE
+var SessionState_BUSY = &sSessionState_BUSY
+var SessionState_TERMINATING = &sSessionState_TERMINATING
+var SessionState_TERMINATED = &sSessionState_TERMINATED
+var SessionState_DEGRADED = &sSessionState_DEGRADED
+var SessionState_FAILED = &sSessionState_FAILED
+
+var SessionStatistics = &sSessionStatistics
+var SessionStatistics_DpuExecutionInMillis = &sSessionStatistics_DpuExecutionInMillis
+
+var SessionStatus = &sSessionStatus
+var SessionStatus_StartDateTime = &sSessionStatus_StartDateTime
+var SessionStatus_LastModifiedDateTime = &sSessionStatus_LastModifiedDateTime
+var SessionStatus_EndDateTime = &sSessionStatus_EndDateTime
+var SessionStatus_IdleSinceDateTime = &sSessionStatus_IdleSinceDateTime
+var SessionStatus_State = &sSessionStatus_State
+var SessionStatus_StateChangeReason = &sSessionStatus_StateChangeReason
+
+var SessionSummary = &sSessionSummary
+var SessionSummary_SessionId = &sSessionSummary_SessionId
+var SessionSummary_Description = &sSessionSummary_Description
+var SessionSummary_EngineVersion = &sSessionSummary_EngineVersion
+var SessionSummary_NotebookVersion = &sSessionSummary_NotebookVersion
+var SessionSummary_Status = &sSessionSummary_Status
+
+var _StatementName = &s_StatementName
+
+var StatementType = &sStatementType
+var StatementType_DDL = &sStatementType_DDL
+var StatementType_DML = &sStatementType_DML
+var StatementType_UTILITY = &sStatementType_UTILITY
+
+var _String = &s_String
+
+var _StringList = &s_StringList
+var _StringList_member = &s_StringList_member
+
+var _SupportedDPUSizeList = &s_SupportedDPUSizeList
+var _SupportedDPUSizeList_member = &s_SupportedDPUSizeList_member
+
+var TableMetadata = &sTableMetadata
+var TableMetadata_Name = &sTableMetadata_Name
+var TableMetadata_CreateTime = &sTableMetadata_CreateTime
+var TableMetadata_LastAccessTime = &sTableMetadata_LastAccessTime
+var TableMetadata_TableType = &sTableMetadata_TableType
+var TableMetadata_Columns = &sTableMetadata_Columns
+var TableMetadata_PartitionKeys = &sTableMetadata_PartitionKeys
+var TableMetadata_Parameters = &sTableMetadata_Parameters
+
+var _TableMetadataList = &s_TableMetadataList
+var _TableMetadataList_member = &s_TableMetadataList_member
+
+var _TableTypeString = &s_TableTypeString
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _TagValue = &s_TagValue
+
+var _TargetDpusInteger = &s_TargetDpusInteger
+
+var ThrottleReason = &sThrottleReason
+var ThrottleReason_CONCURRENT_QUERY_LIMIT_EXCEEDED = &sThrottleReason_CONCURRENT_QUERY_LIMIT_EXCEEDED
+
+var _Timestamp = &s_Timestamp
+
+var _Token = &s_Token
+
+var TooManyRequestsException = &sTooManyRequestsException
+var TooManyRequestsException_Message = &sTooManyRequestsException_Message
+var TooManyRequestsException_Reason = &sTooManyRequestsException_Reason
+
+var _TypeString = &s_TypeString
+
+var UnprocessedNamedQueryId = &sUnprocessedNamedQueryId
+var UnprocessedNamedQueryId_NamedQueryId = &sUnprocessedNamedQueryId_NamedQueryId
+var UnprocessedNamedQueryId_ErrorCode = &sUnprocessedNamedQueryId_ErrorCode
+var UnprocessedNamedQueryId_ErrorMessage = &sUnprocessedNamedQueryId_ErrorMessage
+
+var _UnprocessedNamedQueryIdList = &s_UnprocessedNamedQueryIdList
+var _UnprocessedNamedQueryIdList_member = &s_UnprocessedNamedQueryIdList_member
+
+var UnprocessedPreparedStatementName = &sUnprocessedPreparedStatementName
+var UnprocessedPreparedStatementName_StatementName = &sUnprocessedPreparedStatementName_StatementName
+var UnprocessedPreparedStatementName_ErrorCode = &sUnprocessedPreparedStatementName_ErrorCode
+var UnprocessedPreparedStatementName_ErrorMessage = &sUnprocessedPreparedStatementName_ErrorMessage
+
+var _UnprocessedPreparedStatementNameList = &s_UnprocessedPreparedStatementNameList
+var _UnprocessedPreparedStatementNameList_member = &s_UnprocessedPreparedStatementNameList_member
+
+var UnprocessedQueryExecutionId = &sUnprocessedQueryExecutionId
+var UnprocessedQueryExecutionId_QueryExecutionId = &sUnprocessedQueryExecutionId_QueryExecutionId
+var UnprocessedQueryExecutionId_ErrorCode = &sUnprocessedQueryExecutionId_ErrorCode
+var UnprocessedQueryExecutionId_ErrorMessage = &sUnprocessedQueryExecutionId_ErrorMessage
+
+var _UnprocessedQueryExecutionIdList = &s_UnprocessedQueryExecutionIdList
+var _UnprocessedQueryExecutionIdList_member = &s_UnprocessedQueryExecutionIdList_member
+
+var WorkGroup = &sWorkGroup
+var WorkGroup_Name = &sWorkGroup_Name
+var WorkGroup_State = &sWorkGroup_State
+var WorkGroup_Configuration = &sWorkGroup_Configuration
+var WorkGroup_Description = &sWorkGroup_Description
+var WorkGroup_CreationTime = &sWorkGroup_CreationTime
+var WorkGroup_IdentityCenterApplicationArn = &sWorkGroup_IdentityCenterApplicationArn
+
+var WorkGroupConfiguration = &sWorkGroupConfiguration
+var WorkGroupConfiguration_ResultConfiguration = &sWorkGroupConfiguration_ResultConfiguration
+var WorkGroupConfiguration_ManagedQueryResultsConfiguration = &sWorkGroupConfiguration_ManagedQueryResultsConfiguration
+var WorkGroupConfiguration_EnforceWorkGroupConfiguration = &sWorkGroupConfiguration_EnforceWorkGroupConfiguration
+var WorkGroupConfiguration_PublishCloudWatchMetricsEnabled = &sWorkGroupConfiguration_PublishCloudWatchMetricsEnabled
+var WorkGroupConfiguration_BytesScannedCutoffPerQuery = &sWorkGroupConfiguration_BytesScannedCutoffPerQuery
+var WorkGroupConfiguration_RequesterPaysEnabled = &sWorkGroupConfiguration_RequesterPaysEnabled
+var WorkGroupConfiguration_EngineVersion = &sWorkGroupConfiguration_EngineVersion
+var WorkGroupConfiguration_AdditionalConfiguration = &sWorkGroupConfiguration_AdditionalConfiguration
+var WorkGroupConfiguration_ExecutionRole = &sWorkGroupConfiguration_ExecutionRole
+var WorkGroupConfiguration_MonitoringConfiguration = &sWorkGroupConfiguration_MonitoringConfiguration
+var WorkGroupConfiguration_EngineConfiguration = &sWorkGroupConfiguration_EngineConfiguration
+var WorkGroupConfiguration_CustomerContentEncryptionConfiguration = &sWorkGroupConfiguration_CustomerContentEncryptionConfiguration
+var WorkGroupConfiguration_EnableMinimumEncryptionConfiguration = &sWorkGroupConfiguration_EnableMinimumEncryptionConfiguration
+var WorkGroupConfiguration_IdentityCenterConfiguration = &sWorkGroupConfiguration_IdentityCenterConfiguration
+var WorkGroupConfiguration_QueryResultsS3AccessGrantsConfiguration = &sWorkGroupConfiguration_QueryResultsS3AccessGrantsConfiguration
+
+var WorkGroupConfigurationUpdates = &sWorkGroupConfigurationUpdates
+var WorkGroupConfigurationUpdates_EnforceWorkGroupConfiguration = &sWorkGroupConfigurationUpdates_EnforceWorkGroupConfiguration
+var WorkGroupConfigurationUpdates_ResultConfigurationUpdates = &sWorkGroupConfigurationUpdates_ResultConfigurationUpdates
+var WorkGroupConfigurationUpdates_ManagedQueryResultsConfigurationUpdates = &sWorkGroupConfigurationUpdates_ManagedQueryResultsConfigurationUpdates
+var WorkGroupConfigurationUpdates_PublishCloudWatchMetricsEnabled = &sWorkGroupConfigurationUpdates_PublishCloudWatchMetricsEnabled
+var WorkGroupConfigurationUpdates_BytesScannedCutoffPerQuery = &sWorkGroupConfigurationUpdates_BytesScannedCutoffPerQuery
+var WorkGroupConfigurationUpdates_RemoveBytesScannedCutoffPerQuery = &sWorkGroupConfigurationUpdates_RemoveBytesScannedCutoffPerQuery
+var WorkGroupConfigurationUpdates_RequesterPaysEnabled = &sWorkGroupConfigurationUpdates_RequesterPaysEnabled
+var WorkGroupConfigurationUpdates_EngineVersion = &sWorkGroupConfigurationUpdates_EngineVersion
+var WorkGroupConfigurationUpdates_RemoveCustomerContentEncryptionConfiguration = &sWorkGroupConfigurationUpdates_RemoveCustomerContentEncryptionConfiguration
+var WorkGroupConfigurationUpdates_AdditionalConfiguration = &sWorkGroupConfigurationUpdates_AdditionalConfiguration
+var WorkGroupConfigurationUpdates_ExecutionRole = &sWorkGroupConfigurationUpdates_ExecutionRole
+var WorkGroupConfigurationUpdates_CustomerContentEncryptionConfiguration = &sWorkGroupConfigurationUpdates_CustomerContentEncryptionConfiguration
+var WorkGroupConfigurationUpdates_EnableMinimumEncryptionConfiguration = &sWorkGroupConfigurationUpdates_EnableMinimumEncryptionConfiguration
+var WorkGroupConfigurationUpdates_QueryResultsS3AccessGrantsConfiguration = &sWorkGroupConfigurationUpdates_QueryResultsS3AccessGrantsConfiguration
+var WorkGroupConfigurationUpdates_MonitoringConfiguration = &sWorkGroupConfigurationUpdates_MonitoringConfiguration
+var WorkGroupConfigurationUpdates_EngineConfiguration = &sWorkGroupConfigurationUpdates_EngineConfiguration
+
+var _WorkGroupDescriptionString = &s_WorkGroupDescriptionString
+
+var _WorkGroupName = &s_WorkGroupName
+
+var _WorkGroupNamesList = &s_WorkGroupNamesList
+var _WorkGroupNamesList_member = &s_WorkGroupNamesList_member
+
+var _WorkGroupsList = &s_WorkGroupsList
+var _WorkGroupsList_member = &s_WorkGroupsList_member
+
+var WorkGroupState = &sWorkGroupState
+var WorkGroupState_ENABLED = &sWorkGroupState_ENABLED
+var WorkGroupState_DISABLED = &sWorkGroupState_DISABLED
+
+var WorkGroupSummary = &sWorkGroupSummary
+var WorkGroupSummary_Name = &sWorkGroupSummary_Name
+var WorkGroupSummary_State = &sWorkGroupSummary_State
+var WorkGroupSummary_Description = &sWorkGroupSummary_Description
+var WorkGroupSummary_CreationTime = &sWorkGroupSummary_CreationTime
+var WorkGroupSummary_EngineVersion = &sWorkGroupSummary_EngineVersion
+var WorkGroupSummary_IdentityCenterApplicationArn = &sWorkGroupSummary_IdentityCenterApplicationArn
+
+var BatchGetNamedQueryInput = &sBatchGetNamedQueryInput
+var BatchGetNamedQueryInput_NamedQueryIds = &sBatchGetNamedQueryInput_NamedQueryIds
+
+var BatchGetNamedQueryOutput = &sBatchGetNamedQueryOutput
+var BatchGetNamedQueryOutput_NamedQueries = &sBatchGetNamedQueryOutput_NamedQueries
+var BatchGetNamedQueryOutput_UnprocessedNamedQueryIds = &sBatchGetNamedQueryOutput_UnprocessedNamedQueryIds
+
+var BatchGetPreparedStatementInput = &sBatchGetPreparedStatementInput
+var BatchGetPreparedStatementInput_PreparedStatementNames = &sBatchGetPreparedStatementInput_PreparedStatementNames
+var BatchGetPreparedStatementInput_WorkGroup = &sBatchGetPreparedStatementInput_WorkGroup
+
+var BatchGetPreparedStatementOutput = &sBatchGetPreparedStatementOutput
+var BatchGetPreparedStatementOutput_PreparedStatements = &sBatchGetPreparedStatementOutput_PreparedStatements
+var BatchGetPreparedStatementOutput_UnprocessedPreparedStatementNames = &sBatchGetPreparedStatementOutput_UnprocessedPreparedStatementNames
+
+var BatchGetQueryExecutionInput = &sBatchGetQueryExecutionInput
+var BatchGetQueryExecutionInput_QueryExecutionIds = &sBatchGetQueryExecutionInput_QueryExecutionIds
+
+var BatchGetQueryExecutionOutput = &sBatchGetQueryExecutionOutput
+var BatchGetQueryExecutionOutput_QueryExecutions = &sBatchGetQueryExecutionOutput_QueryExecutions
+var BatchGetQueryExecutionOutput_UnprocessedQueryExecutionIds = &sBatchGetQueryExecutionOutput_UnprocessedQueryExecutionIds
+
+var CancelCapacityReservationInput = &sCancelCapacityReservationInput
+var CancelCapacityReservationInput_Name = &sCancelCapacityReservationInput_Name
+
+var CancelCapacityReservationOutput = &sCancelCapacityReservationOutput
+
+var CreateCapacityReservationInput = &sCreateCapacityReservationInput
+var CreateCapacityReservationInput_TargetDpus = &sCreateCapacityReservationInput_TargetDpus
+var CreateCapacityReservationInput_Name = &sCreateCapacityReservationInput_Name
+var CreateCapacityReservationInput_Tags = &sCreateCapacityReservationInput_Tags
+
+var CreateCapacityReservationOutput = &sCreateCapacityReservationOutput
+
+var CreateDataCatalogInput = &sCreateDataCatalogInput
+var CreateDataCatalogInput_Name = &sCreateDataCatalogInput_Name
+var CreateDataCatalogInput_Type = &sCreateDataCatalogInput_Type
+var CreateDataCatalogInput_Description = &sCreateDataCatalogInput_Description
+var CreateDataCatalogInput_Parameters = &sCreateDataCatalogInput_Parameters
+var CreateDataCatalogInput_Tags = &sCreateDataCatalogInput_Tags
+
+var CreateDataCatalogOutput = &sCreateDataCatalogOutput
+var CreateDataCatalogOutput_DataCatalog = &sCreateDataCatalogOutput_DataCatalog
+
+var CreateNamedQueryInput = &sCreateNamedQueryInput
+var CreateNamedQueryInput_Name = &sCreateNamedQueryInput_Name
+var CreateNamedQueryInput_Description = &sCreateNamedQueryInput_Description
+var CreateNamedQueryInput_Database = &sCreateNamedQueryInput_Database
+var CreateNamedQueryInput_QueryString = &sCreateNamedQueryInput_QueryString
+var CreateNamedQueryInput_ClientRequestToken = &sCreateNamedQueryInput_ClientRequestToken
+var CreateNamedQueryInput_WorkGroup = &sCreateNamedQueryInput_WorkGroup
+
+var CreateNamedQueryOutput = &sCreateNamedQueryOutput
+var CreateNamedQueryOutput_NamedQueryId = &sCreateNamedQueryOutput_NamedQueryId
+
+var CreateNotebookInput = &sCreateNotebookInput
+var CreateNotebookInput_WorkGroup = &sCreateNotebookInput_WorkGroup
+var CreateNotebookInput_Name = &sCreateNotebookInput_Name
+var CreateNotebookInput_ClientRequestToken = &sCreateNotebookInput_ClientRequestToken
+
+var CreateNotebookOutput = &sCreateNotebookOutput
+var CreateNotebookOutput_NotebookId = &sCreateNotebookOutput_NotebookId
+
+var CreatePreparedStatementInput = &sCreatePreparedStatementInput
+var CreatePreparedStatementInput_StatementName = &sCreatePreparedStatementInput_StatementName
+var CreatePreparedStatementInput_WorkGroup = &sCreatePreparedStatementInput_WorkGroup
+var CreatePreparedStatementInput_QueryStatement = &sCreatePreparedStatementInput_QueryStatement
+var CreatePreparedStatementInput_Description = &sCreatePreparedStatementInput_Description
+
+var CreatePreparedStatementOutput = &sCreatePreparedStatementOutput
+
+var CreatePresignedNotebookUrlRequest = &sCreatePresignedNotebookUrlRequest
+var CreatePresignedNotebookUrlRequest_SessionId = &sCreatePresignedNotebookUrlRequest_SessionId
+
+var CreatePresignedNotebookUrlResponse = &sCreatePresignedNotebookUrlResponse
+var CreatePresignedNotebookUrlResponse_NotebookUrl = &sCreatePresignedNotebookUrlResponse_NotebookUrl
+var CreatePresignedNotebookUrlResponse_AuthToken = &sCreatePresignedNotebookUrlResponse_AuthToken
+var CreatePresignedNotebookUrlResponse_AuthTokenExpirationTime = &sCreatePresignedNotebookUrlResponse_AuthTokenExpirationTime
+
+var CreateWorkGroupInput = &sCreateWorkGroupInput
+var CreateWorkGroupInput_Name = &sCreateWorkGroupInput_Name
+var CreateWorkGroupInput_Configuration = &sCreateWorkGroupInput_Configuration
+var CreateWorkGroupInput_Description = &sCreateWorkGroupInput_Description
+var CreateWorkGroupInput_Tags = &sCreateWorkGroupInput_Tags
+
+var CreateWorkGroupOutput = &sCreateWorkGroupOutput
+
+var DeleteCapacityReservationInput = &sDeleteCapacityReservationInput
+var DeleteCapacityReservationInput_Name = &sDeleteCapacityReservationInput_Name
+
+var DeleteCapacityReservationOutput = &sDeleteCapacityReservationOutput
+
+var DeleteDataCatalogInput = &sDeleteDataCatalogInput
+var DeleteDataCatalogInput_Name = &sDeleteDataCatalogInput_Name
+var DeleteDataCatalogInput_DeleteCatalogOnly = &sDeleteDataCatalogInput_DeleteCatalogOnly
+
+var DeleteDataCatalogOutput = &sDeleteDataCatalogOutput
+var DeleteDataCatalogOutput_DataCatalog = &sDeleteDataCatalogOutput_DataCatalog
+
+var DeleteNamedQueryInput = &sDeleteNamedQueryInput
+var DeleteNamedQueryInput_NamedQueryId = &sDeleteNamedQueryInput_NamedQueryId
+
+var DeleteNamedQueryOutput = &sDeleteNamedQueryOutput
+
+var DeleteNotebookInput = &sDeleteNotebookInput
+var DeleteNotebookInput_NotebookId = &sDeleteNotebookInput_NotebookId
+
+var DeleteNotebookOutput = &sDeleteNotebookOutput
+
+var DeletePreparedStatementInput = &sDeletePreparedStatementInput
+var DeletePreparedStatementInput_StatementName = &sDeletePreparedStatementInput_StatementName
+var DeletePreparedStatementInput_WorkGroup = &sDeletePreparedStatementInput_WorkGroup
+
+var DeletePreparedStatementOutput = &sDeletePreparedStatementOutput
+
+var DeleteWorkGroupInput = &sDeleteWorkGroupInput
+var DeleteWorkGroupInput_WorkGroup = &sDeleteWorkGroupInput_WorkGroup
+var DeleteWorkGroupInput_RecursiveDeleteOption = &sDeleteWorkGroupInput_RecursiveDeleteOption
+
+var DeleteWorkGroupOutput = &sDeleteWorkGroupOutput
+
+var ExportNotebookInput = &sExportNotebookInput
+var ExportNotebookInput_NotebookId = &sExportNotebookInput_NotebookId
+
+var ExportNotebookOutput = &sExportNotebookOutput
+var ExportNotebookOutput_NotebookMetadata = &sExportNotebookOutput_NotebookMetadata
+var ExportNotebookOutput_Payload = &sExportNotebookOutput_Payload
+
+var GetCalculationExecutionCodeRequest = &sGetCalculationExecutionCodeRequest
+var GetCalculationExecutionCodeRequest_CalculationExecutionId = &sGetCalculationExecutionCodeRequest_CalculationExecutionId
+
+var GetCalculationExecutionCodeResponse = &sGetCalculationExecutionCodeResponse
+var GetCalculationExecutionCodeResponse_CodeBlock = &sGetCalculationExecutionCodeResponse_CodeBlock
+
+var GetCalculationExecutionRequest = &sGetCalculationExecutionRequest
+var GetCalculationExecutionRequest_CalculationExecutionId = &sGetCalculationExecutionRequest_CalculationExecutionId
+
+var GetCalculationExecutionResponse = &sGetCalculationExecutionResponse
+var GetCalculationExecutionResponse_CalculationExecutionId = &sGetCalculationExecutionResponse_CalculationExecutionId
+var GetCalculationExecutionResponse_SessionId = &sGetCalculationExecutionResponse_SessionId
+var GetCalculationExecutionResponse_Description = &sGetCalculationExecutionResponse_Description
+var GetCalculationExecutionResponse_WorkingDirectory = &sGetCalculationExecutionResponse_WorkingDirectory
+var GetCalculationExecutionResponse_Status = &sGetCalculationExecutionResponse_Status
+var GetCalculationExecutionResponse_Statistics = &sGetCalculationExecutionResponse_Statistics
+var GetCalculationExecutionResponse_Result = &sGetCalculationExecutionResponse_Result
+
+var GetCalculationExecutionStatusRequest = &sGetCalculationExecutionStatusRequest
+var GetCalculationExecutionStatusRequest_CalculationExecutionId = &sGetCalculationExecutionStatusRequest_CalculationExecutionId
+
+var GetCalculationExecutionStatusResponse = &sGetCalculationExecutionStatusResponse
+var GetCalculationExecutionStatusResponse_Status = &sGetCalculationExecutionStatusResponse_Status
+var GetCalculationExecutionStatusResponse_Statistics = &sGetCalculationExecutionStatusResponse_Statistics
+
+var GetCapacityAssignmentConfigurationInput = &sGetCapacityAssignmentConfigurationInput
+var GetCapacityAssignmentConfigurationInput_CapacityReservationName = &sGetCapacityAssignmentConfigurationInput_CapacityReservationName
+
+var GetCapacityAssignmentConfigurationOutput = &sGetCapacityAssignmentConfigurationOutput
+var GetCapacityAssignmentConfigurationOutput_CapacityAssignmentConfiguration = &sGetCapacityAssignmentConfigurationOutput_CapacityAssignmentConfiguration
+
+var GetCapacityReservationInput = &sGetCapacityReservationInput
+var GetCapacityReservationInput_Name = &sGetCapacityReservationInput_Name
+
+var GetCapacityReservationOutput = &sGetCapacityReservationOutput
+var GetCapacityReservationOutput_CapacityReservation = &sGetCapacityReservationOutput_CapacityReservation
+
+var GetDatabaseInput = &sGetDatabaseInput
+var GetDatabaseInput_CatalogName = &sGetDatabaseInput_CatalogName
+var GetDatabaseInput_DatabaseName = &sGetDatabaseInput_DatabaseName
+var GetDatabaseInput_WorkGroup = &sGetDatabaseInput_WorkGroup
+
+var GetDatabaseOutput = &sGetDatabaseOutput
+var GetDatabaseOutput_Database = &sGetDatabaseOutput_Database
+
+var GetDataCatalogInput = &sGetDataCatalogInput
+var GetDataCatalogInput_Name = &sGetDataCatalogInput_Name
+var GetDataCatalogInput_WorkGroup = &sGetDataCatalogInput_WorkGroup
+
+var GetDataCatalogOutput = &sGetDataCatalogOutput
+var GetDataCatalogOutput_DataCatalog = &sGetDataCatalogOutput_DataCatalog
+
+var GetNamedQueryInput = &sGetNamedQueryInput
+var GetNamedQueryInput_NamedQueryId = &sGetNamedQueryInput_NamedQueryId
+
+var GetNamedQueryOutput = &sGetNamedQueryOutput
+var GetNamedQueryOutput_NamedQuery = &sGetNamedQueryOutput_NamedQuery
+
+var GetNotebookMetadataInput = &sGetNotebookMetadataInput
+var GetNotebookMetadataInput_NotebookId = &sGetNotebookMetadataInput_NotebookId
+
+var GetNotebookMetadataOutput = &sGetNotebookMetadataOutput
+var GetNotebookMetadataOutput_NotebookMetadata = &sGetNotebookMetadataOutput_NotebookMetadata
+
+var GetPreparedStatementInput = &sGetPreparedStatementInput
+var GetPreparedStatementInput_StatementName = &sGetPreparedStatementInput_StatementName
+var GetPreparedStatementInput_WorkGroup = &sGetPreparedStatementInput_WorkGroup
+
+var GetPreparedStatementOutput = &sGetPreparedStatementOutput
+var GetPreparedStatementOutput_PreparedStatement = &sGetPreparedStatementOutput_PreparedStatement
+
+var GetQueryExecutionInput = &sGetQueryExecutionInput
+var GetQueryExecutionInput_QueryExecutionId = &sGetQueryExecutionInput_QueryExecutionId
+
+var GetQueryExecutionOutput = &sGetQueryExecutionOutput
+var GetQueryExecutionOutput_QueryExecution = &sGetQueryExecutionOutput_QueryExecution
+
+var GetQueryResultsInput = &sGetQueryResultsInput
+var GetQueryResultsInput_QueryExecutionId = &sGetQueryResultsInput_QueryExecutionId
+var GetQueryResultsInput_NextToken = &sGetQueryResultsInput_NextToken
+var GetQueryResultsInput_MaxResults = &sGetQueryResultsInput_MaxResults
+var GetQueryResultsInput_QueryResultType = &sGetQueryResultsInput_QueryResultType
+
+var GetQueryResultsOutput = &sGetQueryResultsOutput
+var GetQueryResultsOutput_UpdateCount = &sGetQueryResultsOutput_UpdateCount
+var GetQueryResultsOutput_ResultSet = &sGetQueryResultsOutput_ResultSet
+var GetQueryResultsOutput_NextToken = &sGetQueryResultsOutput_NextToken
+
+var GetQueryRuntimeStatisticsInput = &sGetQueryRuntimeStatisticsInput
+var GetQueryRuntimeStatisticsInput_QueryExecutionId = &sGetQueryRuntimeStatisticsInput_QueryExecutionId
+
+var GetQueryRuntimeStatisticsOutput = &sGetQueryRuntimeStatisticsOutput
+var GetQueryRuntimeStatisticsOutput_QueryRuntimeStatistics = &sGetQueryRuntimeStatisticsOutput_QueryRuntimeStatistics
+
+var GetResourceDashboardRequest = &sGetResourceDashboardRequest
+var GetResourceDashboardRequest_ResourceARN = &sGetResourceDashboardRequest_ResourceARN
+
+var GetResourceDashboardResponse = &sGetResourceDashboardResponse
+var GetResourceDashboardResponse_Url = &sGetResourceDashboardResponse_Url
+
+var GetSessionEndpointRequest = &sGetSessionEndpointRequest
+var GetSessionEndpointRequest_SessionId = &sGetSessionEndpointRequest_SessionId
+
+var GetSessionEndpointResponse = &sGetSessionEndpointResponse
+var GetSessionEndpointResponse_EndpointUrl = &sGetSessionEndpointResponse_EndpointUrl
+var GetSessionEndpointResponse_AuthToken = &sGetSessionEndpointResponse_AuthToken
+var GetSessionEndpointResponse_AuthTokenExpirationTime = &sGetSessionEndpointResponse_AuthTokenExpirationTime
+
+var GetSessionRequest = &sGetSessionRequest
+var GetSessionRequest_SessionId = &sGetSessionRequest_SessionId
+
+var GetSessionResponse = &sGetSessionResponse
+var GetSessionResponse_SessionId = &sGetSessionResponse_SessionId
+var GetSessionResponse_Description = &sGetSessionResponse_Description
+var GetSessionResponse_WorkGroup = &sGetSessionResponse_WorkGroup
+var GetSessionResponse_EngineVersion = &sGetSessionResponse_EngineVersion
+var GetSessionResponse_EngineConfiguration = &sGetSessionResponse_EngineConfiguration
+var GetSessionResponse_NotebookVersion = &sGetSessionResponse_NotebookVersion
+var GetSessionResponse_MonitoringConfiguration = &sGetSessionResponse_MonitoringConfiguration
+var GetSessionResponse_SessionConfiguration = &sGetSessionResponse_SessionConfiguration
+var GetSessionResponse_Status = &sGetSessionResponse_Status
+var GetSessionResponse_Statistics = &sGetSessionResponse_Statistics
+
+var GetSessionStatusRequest = &sGetSessionStatusRequest
+var GetSessionStatusRequest_SessionId = &sGetSessionStatusRequest_SessionId
+
+var GetSessionStatusResponse = &sGetSessionStatusResponse
+var GetSessionStatusResponse_SessionId = &sGetSessionStatusResponse_SessionId
+var GetSessionStatusResponse_Status = &sGetSessionStatusResponse_Status
+
+var GetTableMetadataInput = &sGetTableMetadataInput
+var GetTableMetadataInput_CatalogName = &sGetTableMetadataInput_CatalogName
+var GetTableMetadataInput_DatabaseName = &sGetTableMetadataInput_DatabaseName
+var GetTableMetadataInput_TableName = &sGetTableMetadataInput_TableName
+var GetTableMetadataInput_WorkGroup = &sGetTableMetadataInput_WorkGroup
+
+var GetTableMetadataOutput = &sGetTableMetadataOutput
+var GetTableMetadataOutput_TableMetadata = &sGetTableMetadataOutput_TableMetadata
+
+var GetWorkGroupInput = &sGetWorkGroupInput
+var GetWorkGroupInput_WorkGroup = &sGetWorkGroupInput_WorkGroup
+
+var GetWorkGroupOutput = &sGetWorkGroupOutput
+var GetWorkGroupOutput_WorkGroup = &sGetWorkGroupOutput_WorkGroup
+
+var ImportNotebookInput = &sImportNotebookInput
+var ImportNotebookInput_WorkGroup = &sImportNotebookInput_WorkGroup
+var ImportNotebookInput_Name = &sImportNotebookInput_Name
+var ImportNotebookInput_Payload = &sImportNotebookInput_Payload
+var ImportNotebookInput_Type = &sImportNotebookInput_Type
+var ImportNotebookInput_NotebookS3LocationUri = &sImportNotebookInput_NotebookS3LocationUri
+var ImportNotebookInput_ClientRequestToken = &sImportNotebookInput_ClientRequestToken
+
+var ImportNotebookOutput = &sImportNotebookOutput
+var ImportNotebookOutput_NotebookId = &sImportNotebookOutput_NotebookId
+
+var ListApplicationDPUSizesInput = &sListApplicationDPUSizesInput
+var ListApplicationDPUSizesInput_MaxResults = &sListApplicationDPUSizesInput_MaxResults
+var ListApplicationDPUSizesInput_NextToken = &sListApplicationDPUSizesInput_NextToken
+
+var ListApplicationDPUSizesOutput = &sListApplicationDPUSizesOutput
+var ListApplicationDPUSizesOutput_ApplicationDPUSizes = &sListApplicationDPUSizesOutput_ApplicationDPUSizes
+var ListApplicationDPUSizesOutput_NextToken = &sListApplicationDPUSizesOutput_NextToken
+
+var ListCalculationExecutionsRequest = &sListCalculationExecutionsRequest
+var ListCalculationExecutionsRequest_SessionId = &sListCalculationExecutionsRequest_SessionId
+var ListCalculationExecutionsRequest_StateFilter = &sListCalculationExecutionsRequest_StateFilter
+var ListCalculationExecutionsRequest_MaxResults = &sListCalculationExecutionsRequest_MaxResults
+var ListCalculationExecutionsRequest_NextToken = &sListCalculationExecutionsRequest_NextToken
+
+var ListCalculationExecutionsResponse = &sListCalculationExecutionsResponse
+var ListCalculationExecutionsResponse_NextToken = &sListCalculationExecutionsResponse_NextToken
+var ListCalculationExecutionsResponse_Calculations = &sListCalculationExecutionsResponse_Calculations
+
+var ListCapacityReservationsInput = &sListCapacityReservationsInput
+var ListCapacityReservationsInput_NextToken = &sListCapacityReservationsInput_NextToken
+var ListCapacityReservationsInput_MaxResults = &sListCapacityReservationsInput_MaxResults
+
+var ListCapacityReservationsOutput = &sListCapacityReservationsOutput
+var ListCapacityReservationsOutput_NextToken = &sListCapacityReservationsOutput_NextToken
+var ListCapacityReservationsOutput_CapacityReservations = &sListCapacityReservationsOutput_CapacityReservations
+
+var ListDatabasesInput = &sListDatabasesInput
+var ListDatabasesInput_CatalogName = &sListDatabasesInput_CatalogName
+var ListDatabasesInput_NextToken = &sListDatabasesInput_NextToken
+var ListDatabasesInput_MaxResults = &sListDatabasesInput_MaxResults
+var ListDatabasesInput_WorkGroup = &sListDatabasesInput_WorkGroup
+
+var ListDatabasesOutput = &sListDatabasesOutput
+var ListDatabasesOutput_DatabaseList = &sListDatabasesOutput_DatabaseList
+var ListDatabasesOutput_NextToken = &sListDatabasesOutput_NextToken
+
+var ListDataCatalogsInput = &sListDataCatalogsInput
+var ListDataCatalogsInput_NextToken = &sListDataCatalogsInput_NextToken
+var ListDataCatalogsInput_MaxResults = &sListDataCatalogsInput_MaxResults
+var ListDataCatalogsInput_WorkGroup = &sListDataCatalogsInput_WorkGroup
+
+var ListDataCatalogsOutput = &sListDataCatalogsOutput
+var ListDataCatalogsOutput_DataCatalogsSummary = &sListDataCatalogsOutput_DataCatalogsSummary
+var ListDataCatalogsOutput_NextToken = &sListDataCatalogsOutput_NextToken
+
+var ListEngineVersionsInput = &sListEngineVersionsInput
+var ListEngineVersionsInput_NextToken = &sListEngineVersionsInput_NextToken
+var ListEngineVersionsInput_MaxResults = &sListEngineVersionsInput_MaxResults
+
+var ListEngineVersionsOutput = &sListEngineVersionsOutput
+var ListEngineVersionsOutput_EngineVersions = &sListEngineVersionsOutput_EngineVersions
+var ListEngineVersionsOutput_NextToken = &sListEngineVersionsOutput_NextToken
+
+var ListExecutorsRequest = &sListExecutorsRequest
+var ListExecutorsRequest_SessionId = &sListExecutorsRequest_SessionId
+var ListExecutorsRequest_ExecutorStateFilter = &sListExecutorsRequest_ExecutorStateFilter
+var ListExecutorsRequest_MaxResults = &sListExecutorsRequest_MaxResults
+var ListExecutorsRequest_NextToken = &sListExecutorsRequest_NextToken
+
+var ListExecutorsResponse = &sListExecutorsResponse
+var ListExecutorsResponse_SessionId = &sListExecutorsResponse_SessionId
+var ListExecutorsResponse_NextToken = &sListExecutorsResponse_NextToken
+var ListExecutorsResponse_ExecutorsSummary = &sListExecutorsResponse_ExecutorsSummary
+
+var ListNamedQueriesInput = &sListNamedQueriesInput
+var ListNamedQueriesInput_NextToken = &sListNamedQueriesInput_NextToken
+var ListNamedQueriesInput_MaxResults = &sListNamedQueriesInput_MaxResults
+var ListNamedQueriesInput_WorkGroup = &sListNamedQueriesInput_WorkGroup
+
+var ListNamedQueriesOutput = &sListNamedQueriesOutput
+var ListNamedQueriesOutput_NamedQueryIds = &sListNamedQueriesOutput_NamedQueryIds
+var ListNamedQueriesOutput_NextToken = &sListNamedQueriesOutput_NextToken
+
+var ListNotebookMetadataInput = &sListNotebookMetadataInput
+var ListNotebookMetadataInput_Filters = &sListNotebookMetadataInput_Filters
+var ListNotebookMetadataInput_NextToken = &sListNotebookMetadataInput_NextToken
+var ListNotebookMetadataInput_MaxResults = &sListNotebookMetadataInput_MaxResults
+var ListNotebookMetadataInput_WorkGroup = &sListNotebookMetadataInput_WorkGroup
+
+var ListNotebookMetadataOutput = &sListNotebookMetadataOutput
+var ListNotebookMetadataOutput_NextToken = &sListNotebookMetadataOutput_NextToken
+var ListNotebookMetadataOutput_NotebookMetadataList = &sListNotebookMetadataOutput_NotebookMetadataList
+
+var ListNotebookSessionsRequest = &sListNotebookSessionsRequest
+var ListNotebookSessionsRequest_NotebookId = &sListNotebookSessionsRequest_NotebookId
+var ListNotebookSessionsRequest_MaxResults = &sListNotebookSessionsRequest_MaxResults
+var ListNotebookSessionsRequest_NextToken = &sListNotebookSessionsRequest_NextToken
+
+var ListNotebookSessionsResponse = &sListNotebookSessionsResponse
+var ListNotebookSessionsResponse_NotebookSessionsList = &sListNotebookSessionsResponse_NotebookSessionsList
+var ListNotebookSessionsResponse_NextToken = &sListNotebookSessionsResponse_NextToken
+
+var ListPreparedStatementsInput = &sListPreparedStatementsInput
+var ListPreparedStatementsInput_WorkGroup = &sListPreparedStatementsInput_WorkGroup
+var ListPreparedStatementsInput_NextToken = &sListPreparedStatementsInput_NextToken
+var ListPreparedStatementsInput_MaxResults = &sListPreparedStatementsInput_MaxResults
+
+var ListPreparedStatementsOutput = &sListPreparedStatementsOutput
+var ListPreparedStatementsOutput_PreparedStatements = &sListPreparedStatementsOutput_PreparedStatements
+var ListPreparedStatementsOutput_NextToken = &sListPreparedStatementsOutput_NextToken
+
+var ListQueryExecutionsInput = &sListQueryExecutionsInput
+var ListQueryExecutionsInput_NextToken = &sListQueryExecutionsInput_NextToken
+var ListQueryExecutionsInput_MaxResults = &sListQueryExecutionsInput_MaxResults
+var ListQueryExecutionsInput_WorkGroup = &sListQueryExecutionsInput_WorkGroup
+
+var ListQueryExecutionsOutput = &sListQueryExecutionsOutput
+var ListQueryExecutionsOutput_QueryExecutionIds = &sListQueryExecutionsOutput_QueryExecutionIds
+var ListQueryExecutionsOutput_NextToken = &sListQueryExecutionsOutput_NextToken
+
+var ListSessionsRequest = &sListSessionsRequest
+var ListSessionsRequest_WorkGroup = &sListSessionsRequest_WorkGroup
+var ListSessionsRequest_StateFilter = &sListSessionsRequest_StateFilter
+var ListSessionsRequest_MaxResults = &sListSessionsRequest_MaxResults
+var ListSessionsRequest_NextToken = &sListSessionsRequest_NextToken
+
+var ListSessionsResponse = &sListSessionsResponse
+var ListSessionsResponse_NextToken = &sListSessionsResponse_NextToken
+var ListSessionsResponse_Sessions = &sListSessionsResponse_Sessions
+
+var ListTableMetadataInput = &sListTableMetadataInput
+var ListTableMetadataInput_CatalogName = &sListTableMetadataInput_CatalogName
+var ListTableMetadataInput_DatabaseName = &sListTableMetadataInput_DatabaseName
+var ListTableMetadataInput_Expression = &sListTableMetadataInput_Expression
+var ListTableMetadataInput_NextToken = &sListTableMetadataInput_NextToken
+var ListTableMetadataInput_MaxResults = &sListTableMetadataInput_MaxResults
+var ListTableMetadataInput_WorkGroup = &sListTableMetadataInput_WorkGroup
+
+var ListTableMetadataOutput = &sListTableMetadataOutput
+var ListTableMetadataOutput_TableMetadataList = &sListTableMetadataOutput_TableMetadataList
+var ListTableMetadataOutput_NextToken = &sListTableMetadataOutput_NextToken
+
+var ListTagsForResourceInput = &sListTagsForResourceInput
+var ListTagsForResourceInput_ResourceARN = &sListTagsForResourceInput_ResourceARN
+var ListTagsForResourceInput_NextToken = &sListTagsForResourceInput_NextToken
+var ListTagsForResourceInput_MaxResults = &sListTagsForResourceInput_MaxResults
+
+var ListTagsForResourceOutput = &sListTagsForResourceOutput
+var ListTagsForResourceOutput_Tags = &sListTagsForResourceOutput_Tags
+var ListTagsForResourceOutput_NextToken = &sListTagsForResourceOutput_NextToken
+
+var ListWorkGroupsInput = &sListWorkGroupsInput
+var ListWorkGroupsInput_NextToken = &sListWorkGroupsInput_NextToken
+var ListWorkGroupsInput_MaxResults = &sListWorkGroupsInput_MaxResults
+
+var ListWorkGroupsOutput = &sListWorkGroupsOutput
+var ListWorkGroupsOutput_WorkGroups = &sListWorkGroupsOutput_WorkGroups
+var ListWorkGroupsOutput_NextToken = &sListWorkGroupsOutput_NextToken
+
+var PutCapacityAssignmentConfigurationInput = &sPutCapacityAssignmentConfigurationInput
+var PutCapacityAssignmentConfigurationInput_CapacityReservationName = &sPutCapacityAssignmentConfigurationInput_CapacityReservationName
+var PutCapacityAssignmentConfigurationInput_CapacityAssignments = &sPutCapacityAssignmentConfigurationInput_CapacityAssignments
+
+var PutCapacityAssignmentConfigurationOutput = &sPutCapacityAssignmentConfigurationOutput
+
+var StartCalculationExecutionRequest = &sStartCalculationExecutionRequest
+var StartCalculationExecutionRequest_SessionId = &sStartCalculationExecutionRequest_SessionId
+var StartCalculationExecutionRequest_Description = &sStartCalculationExecutionRequest_Description
+var StartCalculationExecutionRequest_CalculationConfiguration = &sStartCalculationExecutionRequest_CalculationConfiguration
+var StartCalculationExecutionRequest_CodeBlock = &sStartCalculationExecutionRequest_CodeBlock
+var StartCalculationExecutionRequest_ClientRequestToken = &sStartCalculationExecutionRequest_ClientRequestToken
+
+var StartCalculationExecutionResponse = &sStartCalculationExecutionResponse
+var StartCalculationExecutionResponse_CalculationExecutionId = &sStartCalculationExecutionResponse_CalculationExecutionId
+var StartCalculationExecutionResponse_State = &sStartCalculationExecutionResponse_State
+
+var StartQueryExecutionInput = &sStartQueryExecutionInput
+var StartQueryExecutionInput_QueryString = &sStartQueryExecutionInput_QueryString
+var StartQueryExecutionInput_ClientRequestToken = &sStartQueryExecutionInput_ClientRequestToken
+var StartQueryExecutionInput_QueryExecutionContext = &sStartQueryExecutionInput_QueryExecutionContext
+var StartQueryExecutionInput_ResultConfiguration = &sStartQueryExecutionInput_ResultConfiguration
+var StartQueryExecutionInput_WorkGroup = &sStartQueryExecutionInput_WorkGroup
+var StartQueryExecutionInput_ExecutionParameters = &sStartQueryExecutionInput_ExecutionParameters
+var StartQueryExecutionInput_ResultReuseConfiguration = &sStartQueryExecutionInput_ResultReuseConfiguration
+var StartQueryExecutionInput_EngineConfiguration = &sStartQueryExecutionInput_EngineConfiguration
+
+var StartQueryExecutionOutput = &sStartQueryExecutionOutput
+var StartQueryExecutionOutput_QueryExecutionId = &sStartQueryExecutionOutput_QueryExecutionId
+
+var StartSessionRequest = &sStartSessionRequest
+var StartSessionRequest_Description = &sStartSessionRequest_Description
+var StartSessionRequest_WorkGroup = &sStartSessionRequest_WorkGroup
+var StartSessionRequest_EngineConfiguration = &sStartSessionRequest_EngineConfiguration
+var StartSessionRequest_ExecutionRole = &sStartSessionRequest_ExecutionRole
+var StartSessionRequest_MonitoringConfiguration = &sStartSessionRequest_MonitoringConfiguration
+var StartSessionRequest_NotebookVersion = &sStartSessionRequest_NotebookVersion
+var StartSessionRequest_SessionIdleTimeoutInMinutes = &sStartSessionRequest_SessionIdleTimeoutInMinutes
+var StartSessionRequest_ClientRequestToken = &sStartSessionRequest_ClientRequestToken
+var StartSessionRequest_Tags = &sStartSessionRequest_Tags
+var StartSessionRequest_CopyWorkGroupTags = &sStartSessionRequest_CopyWorkGroupTags
+
+var StartSessionResponse = &sStartSessionResponse
+var StartSessionResponse_SessionId = &sStartSessionResponse_SessionId
+var StartSessionResponse_State = &sStartSessionResponse_State
+
+var StopCalculationExecutionRequest = &sStopCalculationExecutionRequest
+var StopCalculationExecutionRequest_CalculationExecutionId = &sStopCalculationExecutionRequest_CalculationExecutionId
+
+var StopCalculationExecutionResponse = &sStopCalculationExecutionResponse
+var StopCalculationExecutionResponse_State = &sStopCalculationExecutionResponse_State
+
+var StopQueryExecutionInput = &sStopQueryExecutionInput
+var StopQueryExecutionInput_QueryExecutionId = &sStopQueryExecutionInput_QueryExecutionId
+
+var StopQueryExecutionOutput = &sStopQueryExecutionOutput
+
+var TagResourceInput = &sTagResourceInput
+var TagResourceInput_ResourceARN = &sTagResourceInput_ResourceARN
+var TagResourceInput_Tags = &sTagResourceInput_Tags
+
+var TagResourceOutput = &sTagResourceOutput
+
+var TerminateSessionRequest = &sTerminateSessionRequest
+var TerminateSessionRequest_SessionId = &sTerminateSessionRequest_SessionId
+
+var TerminateSessionResponse = &sTerminateSessionResponse
+var TerminateSessionResponse_State = &sTerminateSessionResponse_State
+
+var UntagResourceInput = &sUntagResourceInput
+var UntagResourceInput_ResourceARN = &sUntagResourceInput_ResourceARN
+var UntagResourceInput_TagKeys = &sUntagResourceInput_TagKeys
+
+var UntagResourceOutput = &sUntagResourceOutput
+
+var UpdateCapacityReservationInput = &sUpdateCapacityReservationInput
+var UpdateCapacityReservationInput_TargetDpus = &sUpdateCapacityReservationInput_TargetDpus
+var UpdateCapacityReservationInput_Name = &sUpdateCapacityReservationInput_Name
+
+var UpdateCapacityReservationOutput = &sUpdateCapacityReservationOutput
+
+var UpdateDataCatalogInput = &sUpdateDataCatalogInput
+var UpdateDataCatalogInput_Name = &sUpdateDataCatalogInput_Name
+var UpdateDataCatalogInput_Type = &sUpdateDataCatalogInput_Type
+var UpdateDataCatalogInput_Description = &sUpdateDataCatalogInput_Description
+var UpdateDataCatalogInput_Parameters = &sUpdateDataCatalogInput_Parameters
+
+var UpdateDataCatalogOutput = &sUpdateDataCatalogOutput
+
+var UpdateNamedQueryInput = &sUpdateNamedQueryInput
+var UpdateNamedQueryInput_NamedQueryId = &sUpdateNamedQueryInput_NamedQueryId
+var UpdateNamedQueryInput_Name = &sUpdateNamedQueryInput_Name
+var UpdateNamedQueryInput_Description = &sUpdateNamedQueryInput_Description
+var UpdateNamedQueryInput_QueryString = &sUpdateNamedQueryInput_QueryString
+
+var UpdateNamedQueryOutput = &sUpdateNamedQueryOutput
+
+var UpdateNotebookInput = &sUpdateNotebookInput
+var UpdateNotebookInput_NotebookId = &sUpdateNotebookInput_NotebookId
+var UpdateNotebookInput_Payload = &sUpdateNotebookInput_Payload
+var UpdateNotebookInput_Type = &sUpdateNotebookInput_Type
+var UpdateNotebookInput_SessionId = &sUpdateNotebookInput_SessionId
+var UpdateNotebookInput_ClientRequestToken = &sUpdateNotebookInput_ClientRequestToken
+
+var UpdateNotebookMetadataInput = &sUpdateNotebookMetadataInput
+var UpdateNotebookMetadataInput_NotebookId = &sUpdateNotebookMetadataInput_NotebookId
+var UpdateNotebookMetadataInput_ClientRequestToken = &sUpdateNotebookMetadataInput_ClientRequestToken
+var UpdateNotebookMetadataInput_Name = &sUpdateNotebookMetadataInput_Name
+
+var UpdateNotebookMetadataOutput = &sUpdateNotebookMetadataOutput
+
+var UpdateNotebookOutput = &sUpdateNotebookOutput
+
+var UpdatePreparedStatementInput = &sUpdatePreparedStatementInput
+var UpdatePreparedStatementInput_StatementName = &sUpdatePreparedStatementInput_StatementName
+var UpdatePreparedStatementInput_WorkGroup = &sUpdatePreparedStatementInput_WorkGroup
+var UpdatePreparedStatementInput_QueryStatement = &sUpdatePreparedStatementInput_QueryStatement
+var UpdatePreparedStatementInput_Description = &sUpdatePreparedStatementInput_Description
+
+var UpdatePreparedStatementOutput = &sUpdatePreparedStatementOutput
+
+var UpdateWorkGroupInput = &sUpdateWorkGroupInput
+var UpdateWorkGroupInput_WorkGroup = &sUpdateWorkGroupInput_WorkGroup
+var UpdateWorkGroupInput_Description = &sUpdateWorkGroupInput_Description
+var UpdateWorkGroupInput_ConfigurationUpdates = &sUpdateWorkGroupInput_ConfigurationUpdates
+var UpdateWorkGroupInput_State = &sUpdateWorkGroupInput_State
+
+var UpdateWorkGroupOutput = &sUpdateWorkGroupOutput
+
+var AmazonAthena = &smithy.ServiceSchema{Schema: &s_AmazonAthena, Version: "2017-05-18"}

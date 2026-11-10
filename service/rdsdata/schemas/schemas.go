@@ -4,955 +4,727 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var BatchExecuteStatement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "BatchExecuteStatement",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	iBatchExecuteStatement           = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "BatchExecuteStatement"}
+	iBeginTransaction                = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "BeginTransaction"}
+	iCommitTransaction               = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "CommitTransaction"}
+	iExecuteSql                      = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "ExecuteSql"}
+	iExecuteStatement                = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "ExecuteStatement"}
+	iRollbackTransaction             = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "RollbackTransaction"}
+	i_RdsDataService                 = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "RdsDataService"}
+	iAccessDeniedException           = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "AccessDeniedException"}
+	i_Arn                            = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "Arn"}
+	i_ArrayOfArray                   = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "ArrayOfArray"}
+	iArrayValue                      = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "ArrayValue"}
+	i_ArrayValueList                 = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "ArrayValueList"}
+	iBadRequestException             = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "BadRequestException"}
+	i_Blob                           = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "Blob"}
+	i_Boolean                        = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "Boolean"}
+	i_BooleanArray                   = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "BooleanArray"}
+	i_BoxedBoolean                   = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "BoxedBoolean"}
+	i_BoxedDouble                    = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "BoxedDouble"}
+	i_BoxedFloat                     = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "BoxedFloat"}
+	i_BoxedInteger                   = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "BoxedInteger"}
+	i_BoxedLong                      = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "BoxedLong"}
+	iColumnMetadata                  = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "ColumnMetadata"}
+	iDatabaseErrorException          = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "DatabaseErrorException"}
+	iDatabaseNotFoundException       = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "DatabaseNotFoundException"}
+	iDatabaseResumingException       = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "DatabaseResumingException"}
+	iDatabaseUnavailableException    = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "DatabaseUnavailableException"}
+	i_DbName                         = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "DbName"}
+	iDecimalReturnType               = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "DecimalReturnType"}
+	i_DoubleArray                    = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "DoubleArray"}
+	i_ErrorMessage                   = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "ErrorMessage"}
+	iField                           = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "Field"}
+	i_FieldList                      = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "FieldList"}
+	iForbiddenException              = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "ForbiddenException"}
+	i_FormattedSqlRecords            = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "FormattedSqlRecords"}
+	iHttpEndpointNotEnabledException = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "HttpEndpointNotEnabledException"}
+	i_Id                             = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "Id"}
+	i_Integer                        = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "Integer"}
+	iInternalServerErrorException    = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "InternalServerErrorException"}
+	iInvalidResourceStateException   = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "InvalidResourceStateException"}
+	iInvalidSecretException          = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "InvalidSecretException"}
+	i_Long                           = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "Long"}
+	i_LongArray                      = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "LongArray"}
+	iLongReturnType                  = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "LongReturnType"}
+	i_Metadata                       = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "Metadata"}
+	iNotFoundException               = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "NotFoundException"}
+	i_ParameterName                  = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "ParameterName"}
+	iRecord                          = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "Record"}
+	i_Records                        = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "Records"}
+	iRecordsFormatType               = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "RecordsFormatType"}
+	i_RecordsUpdated                 = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "RecordsUpdated"}
+	iResultFrame                     = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "ResultFrame"}
+	iResultSetMetadata               = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "ResultSetMetadata"}
+	iResultSetOptions                = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "ResultSetOptions"}
+	i_Row                            = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "Row"}
+	iSecretsErrorException           = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "SecretsErrorException"}
+	iServiceUnavailableError         = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "ServiceUnavailableError"}
+	iSqlParameter                    = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "SqlParameter"}
+	i_SqlParameterSets               = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "SqlParameterSets"}
+	i_SqlParametersList              = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "SqlParametersList"}
+	i_SqlRecords                     = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "SqlRecords"}
+	i_SqlStatement                   = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "SqlStatement"}
+	iSqlStatementResult              = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "SqlStatementResult"}
+	i_SqlStatementResults            = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "SqlStatementResults"}
+	iStatementTimeoutException       = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "StatementTimeoutException"}
+	i_String                         = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "String"}
+	i_StringArray                    = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "StringArray"}
+	iStructValue                     = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "StructValue"}
+	iTransactionNotFoundException    = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "TransactionNotFoundException"}
+	i_TransactionStatus              = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "TransactionStatus"}
+	iTypeHint                        = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "TypeHint"}
+	iUnsupportedResultException      = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "UnsupportedResultException"}
+	iUpdateResult                    = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "UpdateResult"}
+	i_UpdateResults                  = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "UpdateResults"}
+	iValue                           = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "Value"}
+	iBatchExecuteStatementRequest    = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "BatchExecuteStatementRequest"}
+	iBatchExecuteStatementResponse   = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "BatchExecuteStatementResponse"}
+	iBeginTransactionRequest         = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "BeginTransactionRequest"}
+	iBeginTransactionResponse        = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "BeginTransactionResponse"}
+	iCommitTransactionRequest        = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "CommitTransactionRequest"}
+	iCommitTransactionResponse       = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "CommitTransactionResponse"}
+	iExecuteSqlRequest               = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "ExecuteSqlRequest"}
+	iExecuteSqlResponse              = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "ExecuteSqlResponse"}
+	iExecuteStatementRequest         = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "ExecuteStatementRequest"}
+	iExecuteStatementResponse        = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "ExecuteStatementResponse"}
+	iRollbackTransactionRequest      = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "RollbackTransactionRequest"}
+	iRollbackTransactionResponse     = smithy.ShapeID{Namespace: "com.amazonaws.rdsdata", Name: "RollbackTransactionResponse"}
+	pUnit                            = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/BatchExecute",
-	Code: 200})
-
-var BeginTransaction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "BeginTransaction",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/BeginTransaction",
-	Code: 200})
-
-var CommitTransaction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "CommitTransaction",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/CommitTransaction",
-	Code: 200})
-
-var ExecuteSql = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "ExecuteSql",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ExecuteSql",
-	Code: 200})
-
-var ExecuteStatement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "ExecuteStatement",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/Execute",
-	Code: 200})
-
-var RollbackTransaction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "RollbackTransaction",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/RollbackTransaction",
-	Code: 200})
-
-var _RdsDataService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "RdsDataService",
-}, smithy.ShapeTypeService, 0)
-
-var RdsDataService = smithy.NewServiceSchema(_RdsDataService, "2018-08-01")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var _ArrayOfArray = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "ArrayOfArray",
-}, smithy.ShapeTypeList, 1)
-var _ArrayOfArray_member *smithy.Schema
-
-var ArrayValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "ArrayValue",
-}, smithy.ShapeTypeUnion, 5)
-var ArrayValue_booleanValues *smithy.Schema
-
-var ArrayValue_longValues *smithy.Schema
-
-var ArrayValue_doubleValues *smithy.Schema
-
-var ArrayValue_stringValues *smithy.Schema
-
-var ArrayValue_arrayValues *smithy.Schema
-
-var _ArrayValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "ArrayValueList",
-}, smithy.ShapeTypeList, 1)
-var _ArrayValueList_member *smithy.Schema
-
-var BadRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var BadRequestException_message *smithy.Schema
-
-var _Blob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "Blob",
-}, smithy.ShapeTypeBlob, 0)
-
-var _Boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "Boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _BooleanArray = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "BooleanArray",
-}, smithy.ShapeTypeList, 1)
-var _BooleanArray_member *smithy.Schema
-
-var _BoxedBoolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "BoxedBoolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _BoxedDouble = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "BoxedDouble",
-}, smithy.ShapeTypeDouble, 0)
-
-var _BoxedFloat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "BoxedFloat",
-}, smithy.ShapeTypeFloat, 0)
-
-var _BoxedInteger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "BoxedInteger",
-}, smithy.ShapeTypeInteger, 0)
-
-var _BoxedLong = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "BoxedLong",
-}, smithy.ShapeTypeLong, 0)
-
-var ColumnMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "ColumnMetadata",
-}, smithy.ShapeTypeStructure, 14)
-var ColumnMetadata_name *smithy.Schema
-
-var ColumnMetadata_type *smithy.Schema
-
-var ColumnMetadata_typeName *smithy.Schema
-
-var ColumnMetadata_label *smithy.Schema
-
-var ColumnMetadata_schemaName *smithy.Schema
-
-var ColumnMetadata_tableName *smithy.Schema
-
-var ColumnMetadata_isAutoIncrement *smithy.Schema
-
-var ColumnMetadata_isSigned *smithy.Schema
-
-var ColumnMetadata_isCurrency *smithy.Schema
-
-var ColumnMetadata_isCaseSensitive *smithy.Schema
-
-var ColumnMetadata_nullable *smithy.Schema
-
-var ColumnMetadata_precision *smithy.Schema
-
-var ColumnMetadata_scale *smithy.Schema
-
-var ColumnMetadata_arrayBaseColumnType *smithy.Schema
-
-var DatabaseErrorException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "DatabaseErrorException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var DatabaseErrorException_message *smithy.Schema
-
-var DatabaseNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "DatabaseNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var DatabaseNotFoundException_message *smithy.Schema
-
-var DatabaseResumingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "DatabaseResumingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var DatabaseResumingException_message *smithy.Schema
-
-var DatabaseUnavailableException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "DatabaseUnavailableException",
-}, smithy.ShapeTypeStructure, 0, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 504})
-
-var _DbName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "DbName",
-}, smithy.ShapeTypeString, 0)
-
-var DecimalReturnType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "DecimalReturnType",
-}, smithy.ShapeTypeEnum, 2)
-var DecimalReturnType_STRING *smithy.Schema
-
-var DecimalReturnType_DOUBLE_OR_LONG *smithy.Schema
-
-var _DoubleArray = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "DoubleArray",
-}, smithy.ShapeTypeList, 1)
-var _DoubleArray_member *smithy.Schema
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var Field = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "Field",
-}, smithy.ShapeTypeUnion, 7)
-var Field_isNull *smithy.Schema
-
-var Field_booleanValue *smithy.Schema
-
-var Field_longValue *smithy.Schema
-
-var Field_doubleValue *smithy.Schema
-
-var Field_stringValue *smithy.Schema
-
-var Field_blobValue *smithy.Schema
-
-var Field_arrayValue *smithy.Schema
-
-var _FieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "FieldList",
-}, smithy.ShapeTypeList, 1)
-var _FieldList_member *smithy.Schema
-
-var ForbiddenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "ForbiddenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var ForbiddenException_message *smithy.Schema
-
-var _FormattedSqlRecords = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "FormattedSqlRecords",
-}, smithy.ShapeTypeString, 0)
-
-var HttpEndpointNotEnabledException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "HttpEndpointNotEnabledException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var HttpEndpointNotEnabledException_message *smithy.Schema
-
-var _Id = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "Id",
-}, smithy.ShapeTypeString, 0)
-
-var _Integer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "Integer",
-}, smithy.ShapeTypeInteger, 0)
-
-var InternalServerErrorException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "InternalServerErrorException",
-}, smithy.ShapeTypeStructure, 0, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-
-var InvalidResourceStateException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "InvalidResourceStateException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidResourceStateException_message *smithy.Schema
-
-var InvalidSecretException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "InvalidSecretException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidSecretException_message *smithy.Schema
-
-var _Long = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "Long",
-}, smithy.ShapeTypeLong, 0)
-
-var _LongArray = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "LongArray",
-}, smithy.ShapeTypeList, 1)
-var _LongArray_member *smithy.Schema
-
-var LongReturnType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "LongReturnType",
-}, smithy.ShapeTypeEnum, 2)
-var LongReturnType_STRING *smithy.Schema
-
-var LongReturnType_LONG *smithy.Schema
-
-var _Metadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "Metadata",
-}, smithy.ShapeTypeList, 1)
-var _Metadata_member *smithy.Schema
-
-var NotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var NotFoundException_message *smithy.Schema
-
-var _ParameterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "ParameterName",
-}, smithy.ShapeTypeString, 0)
-
-var Record = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "Record",
-}, smithy.ShapeTypeStructure, 1)
-var Record_values *smithy.Schema
-
-var _Records = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "Records",
-}, smithy.ShapeTypeList, 1)
-var _Records_member *smithy.Schema
-
-var RecordsFormatType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "RecordsFormatType",
-}, smithy.ShapeTypeEnum, 2)
-var RecordsFormatType_NONE *smithy.Schema
-
-var RecordsFormatType_JSON *smithy.Schema
-
-var _RecordsUpdated = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "RecordsUpdated",
-}, smithy.ShapeTypeLong, 0)
-
-var ResultFrame = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "ResultFrame",
-}, smithy.ShapeTypeStructure, 2)
-var ResultFrame_resultSetMetadata *smithy.Schema
-
-var ResultFrame_records *smithy.Schema
-
-var ResultSetMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "ResultSetMetadata",
-}, smithy.ShapeTypeStructure, 2)
-var ResultSetMetadata_columnCount *smithy.Schema
-
-var ResultSetMetadata_columnMetadata *smithy.Schema
-
-var ResultSetOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "ResultSetOptions",
-}, smithy.ShapeTypeStructure, 2)
-var ResultSetOptions_decimalReturnType *smithy.Schema
-
-var ResultSetOptions_longReturnType *smithy.Schema
-
-var _Row = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "Row",
-}, smithy.ShapeTypeList, 1)
-var _Row_member *smithy.Schema
-
-var SecretsErrorException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "SecretsErrorException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var SecretsErrorException_message *smithy.Schema
-
-var ServiceUnavailableError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "ServiceUnavailableError",
-}, smithy.ShapeTypeStructure, 0, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 503})
-
-var SqlParameter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "SqlParameter",
-}, smithy.ShapeTypeStructure, 3)
-var SqlParameter_name *smithy.Schema
-
-var SqlParameter_value *smithy.Schema
-
-var SqlParameter_typeHint *smithy.Schema
-
-var _SqlParameterSets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "SqlParameterSets",
-}, smithy.ShapeTypeList, 1)
-var _SqlParameterSets_member *smithy.Schema
-
-var _SqlParametersList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "SqlParametersList",
-}, smithy.ShapeTypeList, 1)
-var _SqlParametersList_member *smithy.Schema
-
-var _SqlRecords = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "SqlRecords",
-}, smithy.ShapeTypeList, 1)
-var _SqlRecords_member *smithy.Schema
-
-var _SqlStatement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "SqlStatement",
-}, smithy.ShapeTypeString, 0)
-
-var SqlStatementResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "SqlStatementResult",
-}, smithy.ShapeTypeStructure, 2)
-var SqlStatementResult_resultFrame *smithy.Schema
-
-var SqlStatementResult_numberOfRecordsUpdated *smithy.Schema
-
-var _SqlStatementResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "SqlStatementResults",
-}, smithy.ShapeTypeList, 1)
-var _SqlStatementResults_member *smithy.Schema
-
-var StatementTimeoutException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "StatementTimeoutException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var StatementTimeoutException_message *smithy.Schema
-
-var StatementTimeoutException_dbConnectionId *smithy.Schema
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var _StringArray = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "StringArray",
-}, smithy.ShapeTypeList, 1)
-var _StringArray_member *smithy.Schema
-
-var StructValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "StructValue",
-}, smithy.ShapeTypeStructure, 1)
-var StructValue_attributes *smithy.Schema
-
-var TransactionNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "TransactionNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var TransactionNotFoundException_message *smithy.Schema
-
-var _TransactionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "TransactionStatus",
-}, smithy.ShapeTypeString, 0)
-
-var TypeHint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "TypeHint",
-}, smithy.ShapeTypeEnum, 6)
-var TypeHint_JSON *smithy.Schema
-
-var TypeHint_UUID *smithy.Schema
-
-var TypeHint_TIMESTAMP *smithy.Schema
-
-var TypeHint_DATE *smithy.Schema
-
-var TypeHint_TIME *smithy.Schema
-
-var TypeHint_DECIMAL *smithy.Schema
-
-var UnsupportedResultException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "UnsupportedResultException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var UnsupportedResultException_message *smithy.Schema
-
-var UpdateResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "UpdateResult",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateResult_generatedFields *smithy.Schema
-
-var _UpdateResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "UpdateResults",
-}, smithy.ShapeTypeList, 1)
-var _UpdateResults_member *smithy.Schema
-
-var Value = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "Value",
-}, smithy.ShapeTypeUnion, 10)
-var Value_isNull *smithy.Schema
-
-var Value_bitValue *smithy.Schema
-
-var Value_bigIntValue *smithy.Schema
-
-var Value_intValue *smithy.Schema
-
-var Value_doubleValue *smithy.Schema
-
-var Value_realValue *smithy.Schema
-
-var Value_stringValue *smithy.Schema
-
-var Value_blobValue *smithy.Schema
-
-var Value_arrayValues *smithy.Schema
-
-var Value_structValue *smithy.Schema
-
-var BatchExecuteStatementRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "BatchExecuteStatementRequest",
-}, smithy.ShapeTypeStructure, 7)
-var BatchExecuteStatementRequest_resourceArn *smithy.Schema
-
-var BatchExecuteStatementRequest_secretArn *smithy.Schema
-
-var BatchExecuteStatementRequest_sql *smithy.Schema
-
-var BatchExecuteStatementRequest_database *smithy.Schema
-
-var BatchExecuteStatementRequest_schema *smithy.Schema
-
-var BatchExecuteStatementRequest_parameterSets *smithy.Schema
-
-var BatchExecuteStatementRequest_transactionId *smithy.Schema
-
-var BatchExecuteStatementResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "BatchExecuteStatementResponse",
-}, smithy.ShapeTypeStructure, 1)
-var BatchExecuteStatementResponse_updateResults *smithy.Schema
-
-var BeginTransactionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "BeginTransactionRequest",
-}, smithy.ShapeTypeStructure, 4)
-var BeginTransactionRequest_resourceArn *smithy.Schema
-
-var BeginTransactionRequest_secretArn *smithy.Schema
-
-var BeginTransactionRequest_database *smithy.Schema
-
-var BeginTransactionRequest_schema *smithy.Schema
-
-var BeginTransactionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "BeginTransactionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var BeginTransactionResponse_transactionId *smithy.Schema
-
-var CommitTransactionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "CommitTransactionRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CommitTransactionRequest_resourceArn *smithy.Schema
-
-var CommitTransactionRequest_secretArn *smithy.Schema
-
-var CommitTransactionRequest_transactionId *smithy.Schema
-
-var CommitTransactionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "CommitTransactionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CommitTransactionResponse_transactionStatus *smithy.Schema
-
-var ExecuteSqlRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "ExecuteSqlRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ExecuteSqlRequest_dbClusterOrInstanceArn *smithy.Schema
-
-var ExecuteSqlRequest_awsSecretStoreArn *smithy.Schema
-
-var ExecuteSqlRequest_sqlStatements *smithy.Schema
-
-var ExecuteSqlRequest_database *smithy.Schema
-
-var ExecuteSqlRequest_schema *smithy.Schema
-
-var ExecuteSqlResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "ExecuteSqlResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ExecuteSqlResponse_sqlStatementResults *smithy.Schema
-
-var ExecuteStatementRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "ExecuteStatementRequest",
-}, smithy.ShapeTypeStructure, 11)
-var ExecuteStatementRequest_resourceArn *smithy.Schema
-
-var ExecuteStatementRequest_secretArn *smithy.Schema
-
-var ExecuteStatementRequest_sql *smithy.Schema
-
-var ExecuteStatementRequest_database *smithy.Schema
-
-var ExecuteStatementRequest_schema *smithy.Schema
-
-var ExecuteStatementRequest_parameters *smithy.Schema
-
-var ExecuteStatementRequest_transactionId *smithy.Schema
-
-var ExecuteStatementRequest_includeResultMetadata *smithy.Schema
-
-var ExecuteStatementRequest_continueAfterTimeout *smithy.Schema
-
-var ExecuteStatementRequest_resultSetOptions *smithy.Schema
-
-var ExecuteStatementRequest_formatRecordsAs *smithy.Schema
-
-var ExecuteStatementResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "ExecuteStatementResponse",
-}, smithy.ShapeTypeStructure, 5)
-var ExecuteStatementResponse_records *smithy.Schema
-
-var ExecuteStatementResponse_columnMetadata *smithy.Schema
-
-var ExecuteStatementResponse_numberOfRecordsUpdated *smithy.Schema
-
-var ExecuteStatementResponse_generatedFields *smithy.Schema
-
-var ExecuteStatementResponse_formattedRecords *smithy.Schema
-
-var RollbackTransactionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "RollbackTransactionRequest",
-}, smithy.ShapeTypeStructure, 3)
-var RollbackTransactionRequest_resourceArn *smithy.Schema
-
-var RollbackTransactionRequest_secretArn *smithy.Schema
-
-var RollbackTransactionRequest_transactionId *smithy.Schema
-
-var RollbackTransactionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rdsdata",
-	Name:      "RollbackTransactionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var RollbackTransactionResponse_transactionStatus *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 504}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 503}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var m_ArrayOfArray = smithy.SchemaMembers{List: []*smithy.Schema{&s_ArrayOfArray_member}}
+var mArrayValue = smithy.SchemaMembers{List: []*smithy.Schema{&sArrayValue_booleanValues, &sArrayValue_longValues, &sArrayValue_doubleValues, &sArrayValue_stringValues, &sArrayValue_arrayValues}}
+var m_ArrayValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ArrayValueList_member}}
+var mBadRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sBadRequestException_message}}
+var m_BooleanArray = smithy.SchemaMembers{List: []*smithy.Schema{&s_BooleanArray_member}}
+var mColumnMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sColumnMetadata_name, &sColumnMetadata_type, &sColumnMetadata_typeName, &sColumnMetadata_label, &sColumnMetadata_schemaName, &sColumnMetadata_tableName, &sColumnMetadata_isAutoIncrement, &sColumnMetadata_isSigned, &sColumnMetadata_isCurrency, &sColumnMetadata_isCaseSensitive, &sColumnMetadata_nullable, &sColumnMetadata_precision, &sColumnMetadata_scale, &sColumnMetadata_arrayBaseColumnType}, Seed: 6, Slots: []uint16{
+	13, 0, 1, 0, 6, 0, 2, 0, 11, 0, 7, 0, 0, 0, 4, 0, 0, 0, 8, 0, 0, 3, 12, 10,
+	0, 0, 0, 0, 0, 5, 9, 14,
+}}
+var mDatabaseErrorException = smithy.SchemaMembers{List: []*smithy.Schema{&sDatabaseErrorException_message}}
+var mDatabaseNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sDatabaseNotFoundException_message}}
+var mDatabaseResumingException = smithy.SchemaMembers{List: []*smithy.Schema{&sDatabaseResumingException_message}}
+var mDecimalReturnType = smithy.SchemaMembers{List: []*smithy.Schema{&sDecimalReturnType_STRING, &sDecimalReturnType_DOUBLE_OR_LONG}}
+var m_DoubleArray = smithy.SchemaMembers{List: []*smithy.Schema{&s_DoubleArray_member}}
+var mField = smithy.SchemaMembers{List: []*smithy.Schema{&sField_isNull, &sField_booleanValue, &sField_longValue, &sField_doubleValue, &sField_stringValue, &sField_blobValue, &sField_arrayValue}}
+var m_FieldList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FieldList_member}}
+var mForbiddenException = smithy.SchemaMembers{List: []*smithy.Schema{&sForbiddenException_message}}
+var mHttpEndpointNotEnabledException = smithy.SchemaMembers{List: []*smithy.Schema{&sHttpEndpointNotEnabledException_message}}
+var mInvalidResourceStateException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidResourceStateException_message}}
+var mInvalidSecretException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidSecretException_message}}
+var m_LongArray = smithy.SchemaMembers{List: []*smithy.Schema{&s_LongArray_member}}
+var mLongReturnType = smithy.SchemaMembers{List: []*smithy.Schema{&sLongReturnType_STRING, &sLongReturnType_LONG}}
+var m_Metadata = smithy.SchemaMembers{List: []*smithy.Schema{&s_Metadata_member}}
+var mNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sNotFoundException_message}}
+var mRecord = smithy.SchemaMembers{List: []*smithy.Schema{&sRecord_values}}
+var m_Records = smithy.SchemaMembers{List: []*smithy.Schema{&s_Records_member}}
+var mRecordsFormatType = smithy.SchemaMembers{List: []*smithy.Schema{&sRecordsFormatType_NONE, &sRecordsFormatType_JSON}}
+var mResultFrame = smithy.SchemaMembers{List: []*smithy.Schema{&sResultFrame_resultSetMetadata, &sResultFrame_records}}
+var mResultSetMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sResultSetMetadata_columnCount, &sResultSetMetadata_columnMetadata}}
+var mResultSetOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sResultSetOptions_decimalReturnType, &sResultSetOptions_longReturnType}}
+var m_Row = smithy.SchemaMembers{List: []*smithy.Schema{&s_Row_member}}
+var mSecretsErrorException = smithy.SchemaMembers{List: []*smithy.Schema{&sSecretsErrorException_message}}
+var mSqlParameter = smithy.SchemaMembers{List: []*smithy.Schema{&sSqlParameter_name, &sSqlParameter_value, &sSqlParameter_typeHint}}
+var m_SqlParameterSets = smithy.SchemaMembers{List: []*smithy.Schema{&s_SqlParameterSets_member}}
+var m_SqlParametersList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SqlParametersList_member}}
+var m_SqlRecords = smithy.SchemaMembers{List: []*smithy.Schema{&s_SqlRecords_member}}
+var mSqlStatementResult = smithy.SchemaMembers{List: []*smithy.Schema{&sSqlStatementResult_resultFrame, &sSqlStatementResult_numberOfRecordsUpdated}}
+var m_SqlStatementResults = smithy.SchemaMembers{List: []*smithy.Schema{&s_SqlStatementResults_member}}
+var mStatementTimeoutException = smithy.SchemaMembers{List: []*smithy.Schema{&sStatementTimeoutException_message, &sStatementTimeoutException_dbConnectionId}}
+var m_StringArray = smithy.SchemaMembers{List: []*smithy.Schema{&s_StringArray_member}}
+var mStructValue = smithy.SchemaMembers{List: []*smithy.Schema{&sStructValue_attributes}}
+var mTransactionNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sTransactionNotFoundException_message}}
+var mTypeHint = smithy.SchemaMembers{List: []*smithy.Schema{&sTypeHint_JSON, &sTypeHint_UUID, &sTypeHint_TIMESTAMP, &sTypeHint_DATE, &sTypeHint_TIME, &sTypeHint_DECIMAL}}
+var mUnsupportedResultException = smithy.SchemaMembers{List: []*smithy.Schema{&sUnsupportedResultException_message}}
+var mUpdateResult = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateResult_generatedFields}}
+var m_UpdateResults = smithy.SchemaMembers{List: []*smithy.Schema{&s_UpdateResults_member}}
+var mValue = smithy.SchemaMembers{List: []*smithy.Schema{&sValue_isNull, &sValue_bitValue, &sValue_bigIntValue, &sValue_intValue, &sValue_doubleValue, &sValue_realValue, &sValue_stringValue, &sValue_blobValue, &sValue_arrayValues, &sValue_structValue}, Seed: 2, Slots: []uint16{
+	0, 0, 0, 0, 6, 0, 0, 0, 0, 10, 3, 1, 0, 0, 5, 0, 0, 0, 0, 0, 0, 4, 0, 0,
+	7, 0, 0, 0, 8, 2, 0, 9,
+}}
+var mBatchExecuteStatementRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchExecuteStatementRequest_resourceArn, &sBatchExecuteStatementRequest_secretArn, &sBatchExecuteStatementRequest_sql, &sBatchExecuteStatementRequest_database, &sBatchExecuteStatementRequest_schema, &sBatchExecuteStatementRequest_parameterSets, &sBatchExecuteStatementRequest_transactionId}}
+var mBatchExecuteStatementResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchExecuteStatementResponse_updateResults}}
+var mBeginTransactionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBeginTransactionRequest_resourceArn, &sBeginTransactionRequest_secretArn, &sBeginTransactionRequest_database, &sBeginTransactionRequest_schema}}
+var mBeginTransactionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBeginTransactionResponse_transactionId}}
+var mCommitTransactionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCommitTransactionRequest_resourceArn, &sCommitTransactionRequest_secretArn, &sCommitTransactionRequest_transactionId}}
+var mCommitTransactionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCommitTransactionResponse_transactionStatus}}
+var mExecuteSqlRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sExecuteSqlRequest_dbClusterOrInstanceArn, &sExecuteSqlRequest_awsSecretStoreArn, &sExecuteSqlRequest_sqlStatements, &sExecuteSqlRequest_database, &sExecuteSqlRequest_schema}}
+var mExecuteSqlResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sExecuteSqlResponse_sqlStatementResults}}
+var mExecuteStatementRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sExecuteStatementRequest_resourceArn, &sExecuteStatementRequest_secretArn, &sExecuteStatementRequest_sql, &sExecuteStatementRequest_database, &sExecuteStatementRequest_schema, &sExecuteStatementRequest_parameters, &sExecuteStatementRequest_transactionId, &sExecuteStatementRequest_includeResultMetadata, &sExecuteStatementRequest_continueAfterTimeout, &sExecuteStatementRequest_resultSetOptions, &sExecuteStatementRequest_formatRecordsAs}, Seed: 15, Slots: []uint16{
+	4, 5, 0, 6, 0, 11, 0, 7, 0, 0, 0, 1, 10, 0, 2, 0, 0, 0, 3, 8, 0, 0, 0, 0,
+	9, 0, 0, 0, 0, 0, 0, 0,
+}}
+var mExecuteStatementResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sExecuteStatementResponse_records, &sExecuteStatementResponse_columnMetadata, &sExecuteStatementResponse_numberOfRecordsUpdated, &sExecuteStatementResponse_generatedFields, &sExecuteStatementResponse_formattedRecords}}
+var mRollbackTransactionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRollbackTransactionRequest_resourceArn, &sRollbackTransactionRequest_secretArn, &sRollbackTransactionRequest_transactionId}}
+var mRollbackTransactionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sRollbackTransactionResponse_transactionStatus}}
+
+var sBatchExecuteStatement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchExecuteStatement, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sBeginTransaction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBeginTransaction, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sCommitTransaction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCommitTransaction, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sExecuteSql = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecuteSql, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sExecuteStatement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecuteStatement, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sRollbackTransaction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRollbackTransaction, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var s_RdsDataService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RdsDataService, Type: smithy.ShapeTypeService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t6, Type: smithy.ShapeTypeStructure})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString})
+var s_ArrayOfArray = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ArrayOfArray, Members: &m_ArrayOfArray, Type: smithy.ShapeTypeList})
+var sArrayValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArrayValue, Members: &mArrayValue, Type: smithy.ShapeTypeUnion})
+var s_ArrayValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ArrayValueList, Members: &m_ArrayValueList, Type: smithy.ShapeTypeList})
+var sBadRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBadRequestException, Members: &mBadRequestException, Traits: &t7, Type: smithy.ShapeTypeStructure})
+var s_Blob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Blob, Type: smithy.ShapeTypeBlob})
+var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var s_BooleanArray = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BooleanArray, Members: &m_BooleanArray, Type: smithy.ShapeTypeList})
+var s_BoxedBoolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BoxedBoolean, Type: smithy.ShapeTypeBoolean})
+var s_BoxedDouble = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BoxedDouble, Type: smithy.ShapeTypeDouble})
+var s_BoxedFloat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BoxedFloat, Type: smithy.ShapeTypeFloat})
+var s_BoxedInteger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BoxedInteger, Type: smithy.ShapeTypeInteger})
+var s_BoxedLong = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BoxedLong, Type: smithy.ShapeTypeLong})
+var sColumnMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iColumnMetadata, Members: &mColumnMetadata, Type: smithy.ShapeTypeStructure})
+var sDatabaseErrorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatabaseErrorException, Members: &mDatabaseErrorException, Traits: &t7, Type: smithy.ShapeTypeStructure})
+var sDatabaseNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatabaseNotFoundException, Members: &mDatabaseNotFoundException, Traits: &t8, Type: smithy.ShapeTypeStructure})
+var sDatabaseResumingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatabaseResumingException, Members: &mDatabaseResumingException, Traits: &t7, Type: smithy.ShapeTypeStructure})
+var sDatabaseUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatabaseUnavailableException, Traits: &t9, Type: smithy.ShapeTypeStructure})
+var s_DbName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DbName, Type: smithy.ShapeTypeString})
+var sDecimalReturnType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDecimalReturnType, Members: &mDecimalReturnType, Type: smithy.ShapeTypeEnum})
+var s_DoubleArray = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DoubleArray, Members: &m_DoubleArray, Type: smithy.ShapeTypeList})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iField, Members: &mField, Type: smithy.ShapeTypeUnion})
+var s_FieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FieldList, Members: &m_FieldList, Type: smithy.ShapeTypeList})
+var sForbiddenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iForbiddenException, Members: &mForbiddenException, Traits: &t6, Type: smithy.ShapeTypeStructure})
+var s_FormattedSqlRecords = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FormattedSqlRecords, Type: smithy.ShapeTypeString})
+var sHttpEndpointNotEnabledException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpEndpointNotEnabledException, Members: &mHttpEndpointNotEnabledException, Traits: &t7, Type: smithy.ShapeTypeStructure})
+var s_Id = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Id, Type: smithy.ShapeTypeString})
+var s_Integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sInternalServerErrorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerErrorException, Traits: &t10, Type: smithy.ShapeTypeStructure})
+var sInvalidResourceStateException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidResourceStateException, Members: &mInvalidResourceStateException, Traits: &t7, Type: smithy.ShapeTypeStructure})
+var sInvalidSecretException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidSecretException, Members: &mInvalidSecretException, Traits: &t7, Type: smithy.ShapeTypeStructure})
+var s_Long = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Long, Type: smithy.ShapeTypeLong})
+var s_LongArray = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LongArray, Members: &m_LongArray, Type: smithy.ShapeTypeList})
+var sLongReturnType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLongReturnType, Members: &mLongReturnType, Type: smithy.ShapeTypeEnum})
+var s_Metadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Metadata, Members: &m_Metadata, Type: smithy.ShapeTypeList})
+var sNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotFoundException, Members: &mNotFoundException, Traits: &t8, Type: smithy.ShapeTypeStructure})
+var s_ParameterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParameterName, Type: smithy.ShapeTypeString})
+var sRecord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecord, Members: &mRecord, Type: smithy.ShapeTypeStructure})
+var s_Records = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Records, Members: &m_Records, Type: smithy.ShapeTypeList})
+var sRecordsFormatType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecordsFormatType, Members: &mRecordsFormatType, Type: smithy.ShapeTypeEnum})
+var s_RecordsUpdated = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecordsUpdated, Type: smithy.ShapeTypeLong})
+var sResultFrame = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResultFrame, Members: &mResultFrame, Type: smithy.ShapeTypeStructure})
+var sResultSetMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResultSetMetadata, Members: &mResultSetMetadata, Type: smithy.ShapeTypeStructure})
+var sResultSetOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResultSetOptions, Members: &mResultSetOptions, Type: smithy.ShapeTypeStructure})
+var s_Row = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Row, Members: &m_Row, Type: smithy.ShapeTypeList})
+var sSecretsErrorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSecretsErrorException, Members: &mSecretsErrorException, Traits: &t7, Type: smithy.ShapeTypeStructure})
+var sServiceUnavailableError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceUnavailableError, Traits: &t11, Type: smithy.ShapeTypeStructure})
+var sSqlParameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSqlParameter, Members: &mSqlParameter, Type: smithy.ShapeTypeStructure})
+var s_SqlParameterSets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SqlParameterSets, Members: &m_SqlParameterSets, Type: smithy.ShapeTypeList})
+var s_SqlParametersList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SqlParametersList, Members: &m_SqlParametersList, Type: smithy.ShapeTypeList})
+var s_SqlRecords = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SqlRecords, Members: &m_SqlRecords, Type: smithy.ShapeTypeList})
+var s_SqlStatement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SqlStatement, Type: smithy.ShapeTypeString})
+var sSqlStatementResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSqlStatementResult, Members: &mSqlStatementResult, Type: smithy.ShapeTypeStructure})
+var s_SqlStatementResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SqlStatementResults, Members: &m_SqlStatementResults, Type: smithy.ShapeTypeList})
+var sStatementTimeoutException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatementTimeoutException, Members: &mStatementTimeoutException, Traits: &t7, Type: smithy.ShapeTypeStructure})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString})
+var s_StringArray = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringArray, Members: &m_StringArray, Type: smithy.ShapeTypeList})
+var sStructValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStructValue, Members: &mStructValue, Type: smithy.ShapeTypeStructure})
+var sTransactionNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTransactionNotFoundException, Members: &mTransactionNotFoundException, Traits: &t8, Type: smithy.ShapeTypeStructure})
+var s_TransactionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TransactionStatus, Type: smithy.ShapeTypeString})
+var sTypeHint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTypeHint, Members: &mTypeHint, Type: smithy.ShapeTypeEnum})
+var sUnsupportedResultException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnsupportedResultException, Members: &mUnsupportedResultException, Traits: &t7, Type: smithy.ShapeTypeStructure})
+var sUpdateResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateResult, Members: &mUpdateResult, Type: smithy.ShapeTypeStructure})
+var s_UpdateResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpdateResults, Members: &m_UpdateResults, Type: smithy.ShapeTypeList})
+var sValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValue, Members: &mValue, Type: smithy.ShapeTypeUnion})
+var sBatchExecuteStatementRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchExecuteStatementRequest, Members: &mBatchExecuteStatementRequest, Type: smithy.ShapeTypeStructure})
+var sBatchExecuteStatementResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchExecuteStatementResponse, Members: &mBatchExecuteStatementResponse, Type: smithy.ShapeTypeStructure})
+var sBeginTransactionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBeginTransactionRequest, Members: &mBeginTransactionRequest, Type: smithy.ShapeTypeStructure})
+var sBeginTransactionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBeginTransactionResponse, Members: &mBeginTransactionResponse, Type: smithy.ShapeTypeStructure})
+var sCommitTransactionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCommitTransactionRequest, Members: &mCommitTransactionRequest, Type: smithy.ShapeTypeStructure})
+var sCommitTransactionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCommitTransactionResponse, Members: &mCommitTransactionResponse, Type: smithy.ShapeTypeStructure})
+var sExecuteSqlRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecuteSqlRequest, Members: &mExecuteSqlRequest, Type: smithy.ShapeTypeStructure})
+var sExecuteSqlResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecuteSqlResponse, Members: &mExecuteSqlResponse, Type: smithy.ShapeTypeStructure})
+var sExecuteStatementRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecuteStatementRequest, Members: &mExecuteStatementRequest, Type: smithy.ShapeTypeStructure})
+var sExecuteStatementResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecuteStatementResponse, Members: &mExecuteStatementResponse, Type: smithy.ShapeTypeStructure})
+var sRollbackTransactionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRollbackTransactionRequest, Members: &mRollbackTransactionRequest, Type: smithy.ShapeTypeStructure})
+var sRollbackTransactionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRollbackTransactionResponse, Members: &mRollbackTransactionResponse, Type: smithy.ShapeTypeStructure})
+
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_ArrayOfArray_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iArrayValue, Members: &mArrayValue, Type: smithy.ShapeTypeUnion})
+var sArrayValue_booleanValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "booleanValues", ID: &i_BooleanArray, Members: &m_BooleanArray, Type: smithy.ShapeTypeList})
+var sArrayValue_longValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "longValues", ID: &i_LongArray, Members: &m_LongArray, Type: smithy.ShapeTypeList})
+var sArrayValue_doubleValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "doubleValues", ID: &i_DoubleArray, Members: &m_DoubleArray, Type: smithy.ShapeTypeList})
+var sArrayValue_stringValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stringValues", ID: &i_StringArray, Members: &m_StringArray, Type: smithy.ShapeTypeList})
+var sArrayValue_arrayValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arrayValues", ID: &i_ArrayOfArray, Type: smithy.ShapeTypeList})
+var s_ArrayValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValue, Members: &mValue, Type: smithy.ShapeTypeUnion})
+var sBadRequestException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_BooleanArray_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_BoxedBoolean, Type: smithy.ShapeTypeBoolean})
+var sColumnMetadata_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sColumnMetadata_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sColumnMetadata_typeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "typeName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sColumnMetadata_label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "label", ID: &i_String, Type: smithy.ShapeTypeString})
+var sColumnMetadata_schemaName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schemaName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sColumnMetadata_tableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sColumnMetadata_isAutoIncrement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isAutoIncrement", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sColumnMetadata_isSigned = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isSigned", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sColumnMetadata_isCurrency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isCurrency", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sColumnMetadata_isCaseSensitive = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isCaseSensitive", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sColumnMetadata_nullable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nullable", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sColumnMetadata_precision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "precision", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sColumnMetadata_scale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scale", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sColumnMetadata_arrayBaseColumnType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arrayBaseColumnType", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sDatabaseErrorException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sDatabaseNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sDatabaseResumingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sDecimalReturnType_STRING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STRING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDecimalReturnType_DOUBLE_OR_LONG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOUBLE_OR_LONG", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_DoubleArray_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_BoxedDouble, Type: smithy.ShapeTypeDouble})
+var sField_isNull = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isNull", ID: &i_BoxedBoolean, Type: smithy.ShapeTypeBoolean})
+var sField_booleanValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "booleanValue", ID: &i_BoxedBoolean, Type: smithy.ShapeTypeBoolean})
+var sField_longValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "longValue", ID: &i_BoxedLong, Type: smithy.ShapeTypeLong})
+var sField_doubleValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "doubleValue", ID: &i_BoxedDouble, Type: smithy.ShapeTypeDouble})
+var sField_stringValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stringValue", ID: &i_String, Type: smithy.ShapeTypeString})
+var sField_blobValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blobValue", ID: &i_Blob, Type: smithy.ShapeTypeBlob})
+var sField_arrayValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arrayValue", ID: &iArrayValue, Members: &mArrayValue, Type: smithy.ShapeTypeUnion})
+var s_FieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iField, Members: &mField, Type: smithy.ShapeTypeUnion})
+var sForbiddenException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sHttpEndpointNotEnabledException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidResourceStateException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidSecretException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_LongArray_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_BoxedLong, Type: smithy.ShapeTypeLong})
+var sLongReturnType_STRING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STRING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLongReturnType_LONG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LONG", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_Metadata_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iColumnMetadata, Members: &mColumnMetadata, Type: smithy.ShapeTypeStructure})
+var sNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sRecord_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_Row, Members: &m_Row, Type: smithy.ShapeTypeList})
+var s_Records_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRecord, Members: &mRecord, Type: smithy.ShapeTypeStructure})
+var sRecordsFormatType_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRecordsFormatType_JSON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JSON", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResultFrame_resultSetMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resultSetMetadata", ID: &iResultSetMetadata, Members: &mResultSetMetadata, Type: smithy.ShapeTypeStructure})
+var sResultFrame_records = smithy.NewStaticSchema(smithy.StaticSchema{Member: "records", ID: &i_Records, Members: &m_Records, Type: smithy.ShapeTypeList})
+var sResultSetMetadata_columnCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "columnCount", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sResultSetMetadata_columnMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "columnMetadata", ID: &i_Metadata, Members: &m_Metadata, Type: smithy.ShapeTypeList})
+var sResultSetOptions_decimalReturnType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "decimalReturnType", ID: &iDecimalReturnType, Members: &mDecimalReturnType, Type: smithy.ShapeTypeEnum})
+var sResultSetOptions_longReturnType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "longReturnType", ID: &iLongReturnType, Members: &mLongReturnType, Type: smithy.ShapeTypeEnum})
+var s_Row_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValue, Members: &mValue, Type: smithy.ShapeTypeUnion})
+var sSecretsErrorException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sSqlParameter_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ParameterName, Type: smithy.ShapeTypeString})
+var sSqlParameter_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iField, Members: &mField, Type: smithy.ShapeTypeUnion})
+var sSqlParameter_typeHint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "typeHint", ID: &iTypeHint, Members: &mTypeHint, Type: smithy.ShapeTypeEnum})
+var s_SqlParameterSets_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SqlParametersList, Members: &m_SqlParametersList, Type: smithy.ShapeTypeList})
+var s_SqlParametersList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSqlParameter, Members: &mSqlParameter, Type: smithy.ShapeTypeStructure})
+var s_SqlRecords_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_FieldList, Members: &m_FieldList, Type: smithy.ShapeTypeList})
+var sSqlStatementResult_resultFrame = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resultFrame", ID: &iResultFrame, Members: &mResultFrame, Type: smithy.ShapeTypeStructure})
+var sSqlStatementResult_numberOfRecordsUpdated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "numberOfRecordsUpdated", ID: &i_RecordsUpdated, Type: smithy.ShapeTypeLong})
+var s_SqlStatementResults_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSqlStatementResult, Members: &mSqlStatementResult, Type: smithy.ShapeTypeStructure})
+var sStatementTimeoutException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sStatementTimeoutException_dbConnectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dbConnectionId", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var s_StringArray_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString})
+var sStructValue_attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributes", ID: &i_ArrayValueList, Type: smithy.ShapeTypeList})
+var sTransactionNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sTypeHint_JSON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JSON", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTypeHint_UUID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UUID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTypeHint_TIMESTAMP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIMESTAMP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTypeHint_DATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTypeHint_TIME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTypeHint_DECIMAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DECIMAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sUnsupportedResultException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sUpdateResult_generatedFields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "generatedFields", ID: &i_FieldList, Members: &m_FieldList, Type: smithy.ShapeTypeList})
+var s_UpdateResults_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUpdateResult, Members: &mUpdateResult, Type: smithy.ShapeTypeStructure})
+var sValue_isNull = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isNull", ID: &i_BoxedBoolean, Type: smithy.ShapeTypeBoolean})
+var sValue_bitValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bitValue", ID: &i_BoxedBoolean, Type: smithy.ShapeTypeBoolean})
+var sValue_bigIntValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bigIntValue", ID: &i_BoxedLong, Type: smithy.ShapeTypeLong})
+var sValue_intValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "intValue", ID: &i_BoxedInteger, Type: smithy.ShapeTypeInteger})
+var sValue_doubleValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "doubleValue", ID: &i_BoxedDouble, Type: smithy.ShapeTypeDouble})
+var sValue_realValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "realValue", ID: &i_BoxedFloat, Type: smithy.ShapeTypeFloat})
+var sValue_stringValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stringValue", ID: &i_String, Type: smithy.ShapeTypeString})
+var sValue_blobValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blobValue", ID: &i_Blob, Type: smithy.ShapeTypeBlob})
+var sValue_arrayValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arrayValues", ID: &i_ArrayValueList, Type: smithy.ShapeTypeList})
+var sValue_structValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "structValue", ID: &iStructValue, Members: &mStructValue, Type: smithy.ShapeTypeStructure})
+var sBatchExecuteStatementRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sBatchExecuteStatementRequest_secretArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secretArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sBatchExecuteStatementRequest_sql = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sql", ID: &i_SqlStatement, Type: smithy.ShapeTypeString})
+var sBatchExecuteStatementRequest_database = smithy.NewStaticSchema(smithy.StaticSchema{Member: "database", ID: &i_DbName, Type: smithy.ShapeTypeString})
+var sBatchExecuteStatementRequest_schema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schema", ID: &i_DbName, Type: smithy.ShapeTypeString})
+var sBatchExecuteStatementRequest_parameterSets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameterSets", ID: &i_SqlParameterSets, Members: &m_SqlParameterSets, Type: smithy.ShapeTypeList})
+var sBatchExecuteStatementRequest_transactionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "transactionId", ID: &i_Id, Type: smithy.ShapeTypeString})
+var sBatchExecuteStatementResponse_updateResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateResults", ID: &i_UpdateResults, Members: &m_UpdateResults, Type: smithy.ShapeTypeList})
+var sBeginTransactionRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sBeginTransactionRequest_secretArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secretArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sBeginTransactionRequest_database = smithy.NewStaticSchema(smithy.StaticSchema{Member: "database", ID: &i_DbName, Type: smithy.ShapeTypeString})
+var sBeginTransactionRequest_schema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schema", ID: &i_DbName, Type: smithy.ShapeTypeString})
+var sBeginTransactionResponse_transactionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "transactionId", ID: &i_Id, Type: smithy.ShapeTypeString})
+var sCommitTransactionRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sCommitTransactionRequest_secretArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secretArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sCommitTransactionRequest_transactionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "transactionId", ID: &i_Id, Type: smithy.ShapeTypeString})
+var sCommitTransactionResponse_transactionStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "transactionStatus", ID: &i_TransactionStatus, Type: smithy.ShapeTypeString})
+var sExecuteSqlRequest_dbClusterOrInstanceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dbClusterOrInstanceArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sExecuteSqlRequest_awsSecretStoreArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsSecretStoreArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sExecuteSqlRequest_sqlStatements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sqlStatements", ID: &i_SqlStatement, Type: smithy.ShapeTypeString})
+var sExecuteSqlRequest_database = smithy.NewStaticSchema(smithy.StaticSchema{Member: "database", ID: &i_DbName, Type: smithy.ShapeTypeString})
+var sExecuteSqlRequest_schema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schema", ID: &i_DbName, Type: smithy.ShapeTypeString})
+var sExecuteSqlResponse_sqlStatementResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sqlStatementResults", ID: &i_SqlStatementResults, Members: &m_SqlStatementResults, Type: smithy.ShapeTypeList})
+var sExecuteStatementRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sExecuteStatementRequest_secretArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secretArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sExecuteStatementRequest_sql = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sql", ID: &i_SqlStatement, Type: smithy.ShapeTypeString})
+var sExecuteStatementRequest_database = smithy.NewStaticSchema(smithy.StaticSchema{Member: "database", ID: &i_DbName, Type: smithy.ShapeTypeString})
+var sExecuteStatementRequest_schema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schema", ID: &i_DbName, Type: smithy.ShapeTypeString})
+var sExecuteStatementRequest_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_SqlParametersList, Members: &m_SqlParametersList, Type: smithy.ShapeTypeList})
+var sExecuteStatementRequest_transactionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "transactionId", ID: &i_Id, Type: smithy.ShapeTypeString})
+var sExecuteStatementRequest_includeResultMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "includeResultMetadata", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sExecuteStatementRequest_continueAfterTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "continueAfterTimeout", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sExecuteStatementRequest_resultSetOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resultSetOptions", ID: &iResultSetOptions, Members: &mResultSetOptions, Type: smithy.ShapeTypeStructure})
+var sExecuteStatementRequest_formatRecordsAs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "formatRecordsAs", ID: &iRecordsFormatType, Members: &mRecordsFormatType, Type: smithy.ShapeTypeEnum})
+var sExecuteStatementResponse_records = smithy.NewStaticSchema(smithy.StaticSchema{Member: "records", ID: &i_SqlRecords, Members: &m_SqlRecords, Type: smithy.ShapeTypeList})
+var sExecuteStatementResponse_columnMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "columnMetadata", ID: &i_Metadata, Members: &m_Metadata, Type: smithy.ShapeTypeList})
+var sExecuteStatementResponse_numberOfRecordsUpdated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "numberOfRecordsUpdated", ID: &i_RecordsUpdated, Type: smithy.ShapeTypeLong})
+var sExecuteStatementResponse_generatedFields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "generatedFields", ID: &i_FieldList, Members: &m_FieldList, Type: smithy.ShapeTypeList})
+var sExecuteStatementResponse_formattedRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "formattedRecords", ID: &i_FormattedSqlRecords, Type: smithy.ShapeTypeString})
+var sRollbackTransactionRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sRollbackTransactionRequest_secretArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secretArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sRollbackTransactionRequest_transactionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "transactionId", ID: &i_Id, Type: smithy.ShapeTypeString})
+var sRollbackTransactionResponse_transactionStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "transactionStatus", ID: &i_TransactionStatus, Type: smithy.ShapeTypeString})
+
+// Members of recursive shapes would make the variables' initializers refer to
+// each other in a cycle, which Go rejects, so they are completed here.
 func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", _ErrorMessage)
-
-	_BooleanArray_member = _BooleanArray.AddMember("member", _BoxedBoolean)
-
-	_LongArray_member = _LongArray.AddMember("member", _BoxedLong)
-
-	_DoubleArray_member = _DoubleArray.AddMember("member", _BoxedDouble)
-
-	_StringArray_member = _StringArray.AddMember("member", _String)
-
-	ArrayValue_booleanValues = ArrayValue.AddMember("booleanValues", _BooleanArray)
-
-	ArrayValue_longValues = ArrayValue.AddMember("longValues", _LongArray)
-
-	ArrayValue_doubleValues = ArrayValue.AddMember("doubleValues", _DoubleArray)
-
-	ArrayValue_stringValues = ArrayValue.AddMember("stringValues", _StringArray)
-
-	ArrayValue_arrayValues = ArrayValue.AddMember("arrayValues", _ArrayOfArray)
-
-	_ArrayOfArray_member = _ArrayOfArray.AddMember("member", ArrayValue)
-
-	StructValue_attributes = StructValue.AddMember("attributes", _ArrayValueList)
-
-	Value_isNull = Value.AddMember("isNull", _BoxedBoolean)
-
-	Value_bitValue = Value.AddMember("bitValue", _BoxedBoolean)
-
-	Value_bigIntValue = Value.AddMember("bigIntValue", _BoxedLong)
-
-	Value_intValue = Value.AddMember("intValue", _BoxedInteger)
-
-	Value_doubleValue = Value.AddMember("doubleValue", _BoxedDouble)
-
-	Value_realValue = Value.AddMember("realValue", _BoxedFloat)
-
-	Value_stringValue = Value.AddMember("stringValue", _String)
-
-	Value_blobValue = Value.AddMember("blobValue", _Blob)
-
-	Value_arrayValues = Value.AddMember("arrayValues", _ArrayValueList)
-
-	Value_structValue = Value.AddMember("structValue", StructValue)
-
-	_ArrayValueList_member = _ArrayValueList.AddMember("member", Value)
-
-	BadRequestException_message = BadRequestException.AddMember("message", _ErrorMessage)
-
-	ColumnMetadata_name = ColumnMetadata.AddMember("name", _String)
-
-	ColumnMetadata_type = ColumnMetadata.AddMember("type", _Integer)
-
-	ColumnMetadata_typeName = ColumnMetadata.AddMember("typeName", _String)
-
-	ColumnMetadata_label = ColumnMetadata.AddMember("label", _String)
-
-	ColumnMetadata_schemaName = ColumnMetadata.AddMember("schemaName", _String)
-
-	ColumnMetadata_tableName = ColumnMetadata.AddMember("tableName", _String)
-
-	ColumnMetadata_isAutoIncrement = ColumnMetadata.AddMember("isAutoIncrement", _Boolean)
-
-	ColumnMetadata_isSigned = ColumnMetadata.AddMember("isSigned", _Boolean)
-
-	ColumnMetadata_isCurrency = ColumnMetadata.AddMember("isCurrency", _Boolean)
-
-	ColumnMetadata_isCaseSensitive = ColumnMetadata.AddMember("isCaseSensitive", _Boolean)
-
-	ColumnMetadata_nullable = ColumnMetadata.AddMember("nullable", _Integer)
-
-	ColumnMetadata_precision = ColumnMetadata.AddMember("precision", _Integer)
-
-	ColumnMetadata_scale = ColumnMetadata.AddMember("scale", _Integer)
-
-	ColumnMetadata_arrayBaseColumnType = ColumnMetadata.AddMember("arrayBaseColumnType", _Integer)
-
-	DatabaseErrorException_message = DatabaseErrorException.AddMember("message", _ErrorMessage)
-
-	DatabaseNotFoundException_message = DatabaseNotFoundException.AddMember("message", _ErrorMessage)
-
-	DatabaseResumingException_message = DatabaseResumingException.AddMember("message", _ErrorMessage)
-
-	DecimalReturnType_STRING = DecimalReturnType.AddMember("STRING", smithyprelude.Unit)
-
-	DecimalReturnType_DOUBLE_OR_LONG = DecimalReturnType.AddMember("DOUBLE_OR_LONG", smithyprelude.Unit)
-
-	Field_isNull = Field.AddMember("isNull", _BoxedBoolean)
-
-	Field_booleanValue = Field.AddMember("booleanValue", _BoxedBoolean)
-
-	Field_longValue = Field.AddMember("longValue", _BoxedLong)
-
-	Field_doubleValue = Field.AddMember("doubleValue", _BoxedDouble)
-
-	Field_stringValue = Field.AddMember("stringValue", _String)
-
-	Field_blobValue = Field.AddMember("blobValue", _Blob)
-
-	Field_arrayValue = Field.AddMember("arrayValue", ArrayValue)
-
-	_FieldList_member = _FieldList.AddMember("member", Field)
-
-	ForbiddenException_message = ForbiddenException.AddMember("message", _ErrorMessage)
-
-	HttpEndpointNotEnabledException_message = HttpEndpointNotEnabledException.AddMember("message", _ErrorMessage)
-
-	InvalidResourceStateException_message = InvalidResourceStateException.AddMember("message", _ErrorMessage)
-
-	InvalidSecretException_message = InvalidSecretException.AddMember("message", _ErrorMessage)
-
-	LongReturnType_STRING = LongReturnType.AddMember("STRING", smithyprelude.Unit)
-
-	LongReturnType_LONG = LongReturnType.AddMember("LONG", smithyprelude.Unit)
-
-	_Metadata_member = _Metadata.AddMember("member", ColumnMetadata)
-
-	NotFoundException_message = NotFoundException.AddMember("message", _ErrorMessage)
-
-	_Row_member = _Row.AddMember("member", Value)
-
-	Record_values = Record.AddMember("values", _Row)
-
-	_Records_member = _Records.AddMember("member", Record)
-
-	RecordsFormatType_NONE = RecordsFormatType.AddMember("NONE", smithyprelude.Unit)
-
-	RecordsFormatType_JSON = RecordsFormatType.AddMember("JSON", smithyprelude.Unit)
-
-	ResultSetMetadata_columnCount = ResultSetMetadata.AddMember("columnCount", _Long)
-
-	ResultSetMetadata_columnMetadata = ResultSetMetadata.AddMember("columnMetadata", _Metadata)
-
-	ResultFrame_resultSetMetadata = ResultFrame.AddMember("resultSetMetadata", ResultSetMetadata)
-
-	ResultFrame_records = ResultFrame.AddMember("records", _Records)
-
-	ResultSetOptions_decimalReturnType = ResultSetOptions.AddMember("decimalReturnType", DecimalReturnType)
-
-	ResultSetOptions_longReturnType = ResultSetOptions.AddMember("longReturnType", LongReturnType)
-
-	SecretsErrorException_message = SecretsErrorException.AddMember("message", _ErrorMessage)
-
-	TypeHint_JSON = TypeHint.AddMember("JSON", smithyprelude.Unit)
-
-	TypeHint_UUID = TypeHint.AddMember("UUID", smithyprelude.Unit)
-
-	TypeHint_TIMESTAMP = TypeHint.AddMember("TIMESTAMP", smithyprelude.Unit)
-
-	TypeHint_DATE = TypeHint.AddMember("DATE", smithyprelude.Unit)
-
-	TypeHint_TIME = TypeHint.AddMember("TIME", smithyprelude.Unit)
-
-	TypeHint_DECIMAL = TypeHint.AddMember("DECIMAL", smithyprelude.Unit)
-
-	SqlParameter_name = SqlParameter.AddMember("name", _ParameterName)
-
-	SqlParameter_value = SqlParameter.AddMember("value", Field)
-
-	SqlParameter_typeHint = SqlParameter.AddMember("typeHint", TypeHint)
-
-	_SqlParametersList_member = _SqlParametersList.AddMember("member", SqlParameter)
-
-	_SqlParameterSets_member = _SqlParameterSets.AddMember("member", _SqlParametersList)
-
-	_SqlRecords_member = _SqlRecords.AddMember("member", _FieldList)
-
-	SqlStatementResult_resultFrame = SqlStatementResult.AddMember("resultFrame", ResultFrame)
-
-	SqlStatementResult_numberOfRecordsUpdated = SqlStatementResult.AddMember("numberOfRecordsUpdated", _RecordsUpdated)
-
-	_SqlStatementResults_member = _SqlStatementResults.AddMember("member", SqlStatementResult)
-
-	StatementTimeoutException_message = StatementTimeoutException.AddMember("message", _ErrorMessage)
-
-	StatementTimeoutException_dbConnectionId = StatementTimeoutException.AddMember("dbConnectionId", _Long)
-
-	TransactionNotFoundException_message = TransactionNotFoundException.AddMember("message", _ErrorMessage)
-
-	UnsupportedResultException_message = UnsupportedResultException.AddMember("message", _ErrorMessage)
-
-	UpdateResult_generatedFields = UpdateResult.AddMember("generatedFields", _FieldList)
-
-	_UpdateResults_member = _UpdateResults.AddMember("member", UpdateResult)
-
-	BatchExecuteStatementRequest_resourceArn = BatchExecuteStatementRequest.AddMember("resourceArn", _Arn)
-
-	BatchExecuteStatementRequest_secretArn = BatchExecuteStatementRequest.AddMember("secretArn", _Arn)
-
-	BatchExecuteStatementRequest_sql = BatchExecuteStatementRequest.AddMember("sql", _SqlStatement)
-
-	BatchExecuteStatementRequest_database = BatchExecuteStatementRequest.AddMember("database", _DbName)
-
-	BatchExecuteStatementRequest_schema = BatchExecuteStatementRequest.AddMember("schema", _DbName)
-
-	BatchExecuteStatementRequest_parameterSets = BatchExecuteStatementRequest.AddMember("parameterSets", _SqlParameterSets)
-
-	BatchExecuteStatementRequest_transactionId = BatchExecuteStatementRequest.AddMember("transactionId", _Id)
-
-	BatchExecuteStatementResponse_updateResults = BatchExecuteStatementResponse.AddMember("updateResults", _UpdateResults)
-
-	BeginTransactionRequest_resourceArn = BeginTransactionRequest.AddMember("resourceArn", _Arn)
-
-	BeginTransactionRequest_secretArn = BeginTransactionRequest.AddMember("secretArn", _Arn)
-
-	BeginTransactionRequest_database = BeginTransactionRequest.AddMember("database", _DbName)
-
-	BeginTransactionRequest_schema = BeginTransactionRequest.AddMember("schema", _DbName)
-
-	BeginTransactionResponse_transactionId = BeginTransactionResponse.AddMember("transactionId", _Id)
-
-	CommitTransactionRequest_resourceArn = CommitTransactionRequest.AddMember("resourceArn", _Arn)
-
-	CommitTransactionRequest_secretArn = CommitTransactionRequest.AddMember("secretArn", _Arn)
-
-	CommitTransactionRequest_transactionId = CommitTransactionRequest.AddMember("transactionId", _Id)
-
-	CommitTransactionResponse_transactionStatus = CommitTransactionResponse.AddMember("transactionStatus", _TransactionStatus)
-
-	ExecuteSqlRequest_dbClusterOrInstanceArn = ExecuteSqlRequest.AddMember("dbClusterOrInstanceArn", _Arn)
-
-	ExecuteSqlRequest_awsSecretStoreArn = ExecuteSqlRequest.AddMember("awsSecretStoreArn", _Arn)
-
-	ExecuteSqlRequest_sqlStatements = ExecuteSqlRequest.AddMember("sqlStatements", _SqlStatement)
-
-	ExecuteSqlRequest_database = ExecuteSqlRequest.AddMember("database", _DbName)
-
-	ExecuteSqlRequest_schema = ExecuteSqlRequest.AddMember("schema", _DbName)
-
-	ExecuteSqlResponse_sqlStatementResults = ExecuteSqlResponse.AddMember("sqlStatementResults", _SqlStatementResults)
-
-	ExecuteStatementRequest_resourceArn = ExecuteStatementRequest.AddMember("resourceArn", _Arn)
-
-	ExecuteStatementRequest_secretArn = ExecuteStatementRequest.AddMember("secretArn", _Arn)
-
-	ExecuteStatementRequest_sql = ExecuteStatementRequest.AddMember("sql", _SqlStatement)
-
-	ExecuteStatementRequest_database = ExecuteStatementRequest.AddMember("database", _DbName)
-
-	ExecuteStatementRequest_schema = ExecuteStatementRequest.AddMember("schema", _DbName)
-
-	ExecuteStatementRequest_parameters = ExecuteStatementRequest.AddMember("parameters", _SqlParametersList)
-
-	ExecuteStatementRequest_transactionId = ExecuteStatementRequest.AddMember("transactionId", _Id)
-
-	ExecuteStatementRequest_includeResultMetadata = ExecuteStatementRequest.AddMember("includeResultMetadata", _Boolean)
-
-	ExecuteStatementRequest_continueAfterTimeout = ExecuteStatementRequest.AddMember("continueAfterTimeout", _Boolean)
-
-	ExecuteStatementRequest_resultSetOptions = ExecuteStatementRequest.AddMember("resultSetOptions", ResultSetOptions)
-
-	ExecuteStatementRequest_formatRecordsAs = ExecuteStatementRequest.AddMember("formatRecordsAs", RecordsFormatType)
-
-	ExecuteStatementResponse_records = ExecuteStatementResponse.AddMember("records", _SqlRecords)
-
-	ExecuteStatementResponse_columnMetadata = ExecuteStatementResponse.AddMember("columnMetadata", _Metadata)
-
-	ExecuteStatementResponse_numberOfRecordsUpdated = ExecuteStatementResponse.AddMember("numberOfRecordsUpdated", _RecordsUpdated)
-
-	ExecuteStatementResponse_generatedFields = ExecuteStatementResponse.AddMember("generatedFields", _FieldList)
-
-	ExecuteStatementResponse_formattedRecords = ExecuteStatementResponse.AddMember("formattedRecords", _FormattedSqlRecords)
-
-	RollbackTransactionRequest_resourceArn = RollbackTransactionRequest.AddMember("resourceArn", _Arn)
-
-	RollbackTransactionRequest_secretArn = RollbackTransactionRequest.AddMember("secretArn", _Arn)
-
-	RollbackTransactionRequest_transactionId = RollbackTransactionRequest.AddMember("transactionId", _Id)
-
-	RollbackTransactionResponse_transactionStatus = RollbackTransactionResponse.AddMember("transactionStatus", _TransactionStatus)
-
+	sArrayValue_arrayValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arrayValues", ID: &i_ArrayOfArray, Members: &m_ArrayOfArray, Type: smithy.ShapeTypeList})
+	sStructValue_attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributes", ID: &i_ArrayValueList, Members: &m_ArrayValueList, Type: smithy.ShapeTypeList})
+	sValue_arrayValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arrayValues", ID: &i_ArrayValueList, Members: &m_ArrayValueList, Type: smithy.ShapeTypeList})
 }
+
+var BatchExecuteStatement = &sBatchExecuteStatement
+
+var BeginTransaction = &sBeginTransaction
+
+var CommitTransaction = &sCommitTransaction
+
+var ExecuteSql = &sExecuteSql
+
+var ExecuteStatement = &sExecuteStatement
+
+var RollbackTransaction = &sRollbackTransaction
+
+var _RdsDataService = &s_RdsDataService
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var _Arn = &s_Arn
+
+var _ArrayOfArray = &s_ArrayOfArray
+var _ArrayOfArray_member = &s_ArrayOfArray_member
+
+var ArrayValue = &sArrayValue
+var ArrayValue_booleanValues = &sArrayValue_booleanValues
+var ArrayValue_longValues = &sArrayValue_longValues
+var ArrayValue_doubleValues = &sArrayValue_doubleValues
+var ArrayValue_stringValues = &sArrayValue_stringValues
+var ArrayValue_arrayValues = &sArrayValue_arrayValues
+
+var _ArrayValueList = &s_ArrayValueList
+var _ArrayValueList_member = &s_ArrayValueList_member
+
+var BadRequestException = &sBadRequestException
+var BadRequestException_message = &sBadRequestException_message
+
+var _Blob = &s_Blob
+
+var _Boolean = &s_Boolean
+
+var _BooleanArray = &s_BooleanArray
+var _BooleanArray_member = &s_BooleanArray_member
+
+var _BoxedBoolean = &s_BoxedBoolean
+
+var _BoxedDouble = &s_BoxedDouble
+
+var _BoxedFloat = &s_BoxedFloat
+
+var _BoxedInteger = &s_BoxedInteger
+
+var _BoxedLong = &s_BoxedLong
+
+var ColumnMetadata = &sColumnMetadata
+var ColumnMetadata_name = &sColumnMetadata_name
+var ColumnMetadata_type = &sColumnMetadata_type
+var ColumnMetadata_typeName = &sColumnMetadata_typeName
+var ColumnMetadata_label = &sColumnMetadata_label
+var ColumnMetadata_schemaName = &sColumnMetadata_schemaName
+var ColumnMetadata_tableName = &sColumnMetadata_tableName
+var ColumnMetadata_isAutoIncrement = &sColumnMetadata_isAutoIncrement
+var ColumnMetadata_isSigned = &sColumnMetadata_isSigned
+var ColumnMetadata_isCurrency = &sColumnMetadata_isCurrency
+var ColumnMetadata_isCaseSensitive = &sColumnMetadata_isCaseSensitive
+var ColumnMetadata_nullable = &sColumnMetadata_nullable
+var ColumnMetadata_precision = &sColumnMetadata_precision
+var ColumnMetadata_scale = &sColumnMetadata_scale
+var ColumnMetadata_arrayBaseColumnType = &sColumnMetadata_arrayBaseColumnType
+
+var DatabaseErrorException = &sDatabaseErrorException
+var DatabaseErrorException_message = &sDatabaseErrorException_message
+
+var DatabaseNotFoundException = &sDatabaseNotFoundException
+var DatabaseNotFoundException_message = &sDatabaseNotFoundException_message
+
+var DatabaseResumingException = &sDatabaseResumingException
+var DatabaseResumingException_message = &sDatabaseResumingException_message
+
+var DatabaseUnavailableException = &sDatabaseUnavailableException
+
+var _DbName = &s_DbName
+
+var DecimalReturnType = &sDecimalReturnType
+var DecimalReturnType_STRING = &sDecimalReturnType_STRING
+var DecimalReturnType_DOUBLE_OR_LONG = &sDecimalReturnType_DOUBLE_OR_LONG
+
+var _DoubleArray = &s_DoubleArray
+var _DoubleArray_member = &s_DoubleArray_member
+
+var _ErrorMessage = &s_ErrorMessage
+
+var Field = &sField
+var Field_isNull = &sField_isNull
+var Field_booleanValue = &sField_booleanValue
+var Field_longValue = &sField_longValue
+var Field_doubleValue = &sField_doubleValue
+var Field_stringValue = &sField_stringValue
+var Field_blobValue = &sField_blobValue
+var Field_arrayValue = &sField_arrayValue
+
+var _FieldList = &s_FieldList
+var _FieldList_member = &s_FieldList_member
+
+var ForbiddenException = &sForbiddenException
+var ForbiddenException_message = &sForbiddenException_message
+
+var _FormattedSqlRecords = &s_FormattedSqlRecords
+
+var HttpEndpointNotEnabledException = &sHttpEndpointNotEnabledException
+var HttpEndpointNotEnabledException_message = &sHttpEndpointNotEnabledException_message
+
+var _Id = &s_Id
+
+var _Integer = &s_Integer
+
+var InternalServerErrorException = &sInternalServerErrorException
+
+var InvalidResourceStateException = &sInvalidResourceStateException
+var InvalidResourceStateException_message = &sInvalidResourceStateException_message
+
+var InvalidSecretException = &sInvalidSecretException
+var InvalidSecretException_message = &sInvalidSecretException_message
+
+var _Long = &s_Long
+
+var _LongArray = &s_LongArray
+var _LongArray_member = &s_LongArray_member
+
+var LongReturnType = &sLongReturnType
+var LongReturnType_STRING = &sLongReturnType_STRING
+var LongReturnType_LONG = &sLongReturnType_LONG
+
+var _Metadata = &s_Metadata
+var _Metadata_member = &s_Metadata_member
+
+var NotFoundException = &sNotFoundException
+var NotFoundException_message = &sNotFoundException_message
+
+var _ParameterName = &s_ParameterName
+
+var Record = &sRecord
+var Record_values = &sRecord_values
+
+var _Records = &s_Records
+var _Records_member = &s_Records_member
+
+var RecordsFormatType = &sRecordsFormatType
+var RecordsFormatType_NONE = &sRecordsFormatType_NONE
+var RecordsFormatType_JSON = &sRecordsFormatType_JSON
+
+var _RecordsUpdated = &s_RecordsUpdated
+
+var ResultFrame = &sResultFrame
+var ResultFrame_resultSetMetadata = &sResultFrame_resultSetMetadata
+var ResultFrame_records = &sResultFrame_records
+
+var ResultSetMetadata = &sResultSetMetadata
+var ResultSetMetadata_columnCount = &sResultSetMetadata_columnCount
+var ResultSetMetadata_columnMetadata = &sResultSetMetadata_columnMetadata
+
+var ResultSetOptions = &sResultSetOptions
+var ResultSetOptions_decimalReturnType = &sResultSetOptions_decimalReturnType
+var ResultSetOptions_longReturnType = &sResultSetOptions_longReturnType
+
+var _Row = &s_Row
+var _Row_member = &s_Row_member
+
+var SecretsErrorException = &sSecretsErrorException
+var SecretsErrorException_message = &sSecretsErrorException_message
+
+var ServiceUnavailableError = &sServiceUnavailableError
+
+var SqlParameter = &sSqlParameter
+var SqlParameter_name = &sSqlParameter_name
+var SqlParameter_value = &sSqlParameter_value
+var SqlParameter_typeHint = &sSqlParameter_typeHint
+
+var _SqlParameterSets = &s_SqlParameterSets
+var _SqlParameterSets_member = &s_SqlParameterSets_member
+
+var _SqlParametersList = &s_SqlParametersList
+var _SqlParametersList_member = &s_SqlParametersList_member
+
+var _SqlRecords = &s_SqlRecords
+var _SqlRecords_member = &s_SqlRecords_member
+
+var _SqlStatement = &s_SqlStatement
+
+var SqlStatementResult = &sSqlStatementResult
+var SqlStatementResult_resultFrame = &sSqlStatementResult_resultFrame
+var SqlStatementResult_numberOfRecordsUpdated = &sSqlStatementResult_numberOfRecordsUpdated
+
+var _SqlStatementResults = &s_SqlStatementResults
+var _SqlStatementResults_member = &s_SqlStatementResults_member
+
+var StatementTimeoutException = &sStatementTimeoutException
+var StatementTimeoutException_message = &sStatementTimeoutException_message
+var StatementTimeoutException_dbConnectionId = &sStatementTimeoutException_dbConnectionId
+
+var _String = &s_String
+
+var _StringArray = &s_StringArray
+var _StringArray_member = &s_StringArray_member
+
+var StructValue = &sStructValue
+var StructValue_attributes = &sStructValue_attributes
+
+var TransactionNotFoundException = &sTransactionNotFoundException
+var TransactionNotFoundException_message = &sTransactionNotFoundException_message
+
+var _TransactionStatus = &s_TransactionStatus
+
+var TypeHint = &sTypeHint
+var TypeHint_JSON = &sTypeHint_JSON
+var TypeHint_UUID = &sTypeHint_UUID
+var TypeHint_TIMESTAMP = &sTypeHint_TIMESTAMP
+var TypeHint_DATE = &sTypeHint_DATE
+var TypeHint_TIME = &sTypeHint_TIME
+var TypeHint_DECIMAL = &sTypeHint_DECIMAL
+
+var UnsupportedResultException = &sUnsupportedResultException
+var UnsupportedResultException_message = &sUnsupportedResultException_message
+
+var UpdateResult = &sUpdateResult
+var UpdateResult_generatedFields = &sUpdateResult_generatedFields
+
+var _UpdateResults = &s_UpdateResults
+var _UpdateResults_member = &s_UpdateResults_member
+
+var Value = &sValue
+var Value_isNull = &sValue_isNull
+var Value_bitValue = &sValue_bitValue
+var Value_bigIntValue = &sValue_bigIntValue
+var Value_intValue = &sValue_intValue
+var Value_doubleValue = &sValue_doubleValue
+var Value_realValue = &sValue_realValue
+var Value_stringValue = &sValue_stringValue
+var Value_blobValue = &sValue_blobValue
+var Value_arrayValues = &sValue_arrayValues
+var Value_structValue = &sValue_structValue
+
+var BatchExecuteStatementRequest = &sBatchExecuteStatementRequest
+var BatchExecuteStatementRequest_resourceArn = &sBatchExecuteStatementRequest_resourceArn
+var BatchExecuteStatementRequest_secretArn = &sBatchExecuteStatementRequest_secretArn
+var BatchExecuteStatementRequest_sql = &sBatchExecuteStatementRequest_sql
+var BatchExecuteStatementRequest_database = &sBatchExecuteStatementRequest_database
+var BatchExecuteStatementRequest_schema = &sBatchExecuteStatementRequest_schema
+var BatchExecuteStatementRequest_parameterSets = &sBatchExecuteStatementRequest_parameterSets
+var BatchExecuteStatementRequest_transactionId = &sBatchExecuteStatementRequest_transactionId
+
+var BatchExecuteStatementResponse = &sBatchExecuteStatementResponse
+var BatchExecuteStatementResponse_updateResults = &sBatchExecuteStatementResponse_updateResults
+
+var BeginTransactionRequest = &sBeginTransactionRequest
+var BeginTransactionRequest_resourceArn = &sBeginTransactionRequest_resourceArn
+var BeginTransactionRequest_secretArn = &sBeginTransactionRequest_secretArn
+var BeginTransactionRequest_database = &sBeginTransactionRequest_database
+var BeginTransactionRequest_schema = &sBeginTransactionRequest_schema
+
+var BeginTransactionResponse = &sBeginTransactionResponse
+var BeginTransactionResponse_transactionId = &sBeginTransactionResponse_transactionId
+
+var CommitTransactionRequest = &sCommitTransactionRequest
+var CommitTransactionRequest_resourceArn = &sCommitTransactionRequest_resourceArn
+var CommitTransactionRequest_secretArn = &sCommitTransactionRequest_secretArn
+var CommitTransactionRequest_transactionId = &sCommitTransactionRequest_transactionId
+
+var CommitTransactionResponse = &sCommitTransactionResponse
+var CommitTransactionResponse_transactionStatus = &sCommitTransactionResponse_transactionStatus
+
+var ExecuteSqlRequest = &sExecuteSqlRequest
+var ExecuteSqlRequest_dbClusterOrInstanceArn = &sExecuteSqlRequest_dbClusterOrInstanceArn
+var ExecuteSqlRequest_awsSecretStoreArn = &sExecuteSqlRequest_awsSecretStoreArn
+var ExecuteSqlRequest_sqlStatements = &sExecuteSqlRequest_sqlStatements
+var ExecuteSqlRequest_database = &sExecuteSqlRequest_database
+var ExecuteSqlRequest_schema = &sExecuteSqlRequest_schema
+
+var ExecuteSqlResponse = &sExecuteSqlResponse
+var ExecuteSqlResponse_sqlStatementResults = &sExecuteSqlResponse_sqlStatementResults
+
+var ExecuteStatementRequest = &sExecuteStatementRequest
+var ExecuteStatementRequest_resourceArn = &sExecuteStatementRequest_resourceArn
+var ExecuteStatementRequest_secretArn = &sExecuteStatementRequest_secretArn
+var ExecuteStatementRequest_sql = &sExecuteStatementRequest_sql
+var ExecuteStatementRequest_database = &sExecuteStatementRequest_database
+var ExecuteStatementRequest_schema = &sExecuteStatementRequest_schema
+var ExecuteStatementRequest_parameters = &sExecuteStatementRequest_parameters
+var ExecuteStatementRequest_transactionId = &sExecuteStatementRequest_transactionId
+var ExecuteStatementRequest_includeResultMetadata = &sExecuteStatementRequest_includeResultMetadata
+var ExecuteStatementRequest_continueAfterTimeout = &sExecuteStatementRequest_continueAfterTimeout
+var ExecuteStatementRequest_resultSetOptions = &sExecuteStatementRequest_resultSetOptions
+var ExecuteStatementRequest_formatRecordsAs = &sExecuteStatementRequest_formatRecordsAs
+
+var ExecuteStatementResponse = &sExecuteStatementResponse
+var ExecuteStatementResponse_records = &sExecuteStatementResponse_records
+var ExecuteStatementResponse_columnMetadata = &sExecuteStatementResponse_columnMetadata
+var ExecuteStatementResponse_numberOfRecordsUpdated = &sExecuteStatementResponse_numberOfRecordsUpdated
+var ExecuteStatementResponse_generatedFields = &sExecuteStatementResponse_generatedFields
+var ExecuteStatementResponse_formattedRecords = &sExecuteStatementResponse_formattedRecords
+
+var RollbackTransactionRequest = &sRollbackTransactionRequest
+var RollbackTransactionRequest_resourceArn = &sRollbackTransactionRequest_resourceArn
+var RollbackTransactionRequest_secretArn = &sRollbackTransactionRequest_secretArn
+var RollbackTransactionRequest_transactionId = &sRollbackTransactionRequest_transactionId
+
+var RollbackTransactionResponse = &sRollbackTransactionResponse
+var RollbackTransactionResponse_transactionStatus = &sRollbackTransactionResponse_transactionStatus
+
+var RdsDataService = &smithy.ServiceSchema{Schema: &s_RdsDataService, Version: "2018-08-01"}

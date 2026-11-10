@@ -4,1401 +4,1047 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var BatchAddChannelRoleToAccessors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "BatchAddChannelRoleToAccessors",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	iBatchAddChannelRoleToAccessors            = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "BatchAddChannelRoleToAccessors"}
+	iBatchAddRole                              = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "BatchAddRole"}
+	iBatchRemoveChannelRoleFromAccessors       = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "BatchRemoveChannelRoleFromAccessors"}
+	iBatchRemoveRole                           = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "BatchRemoveRole"}
+	iCreateChannel                             = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "CreateChannel"}
+	iCreateSpace                               = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "CreateSpace"}
+	iDeleteSpace                               = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "DeleteSpace"}
+	iDeregisterAdmin                           = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "DeregisterAdmin"}
+	iGetChannel                                = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "GetChannel"}
+	iGetSpace                                  = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "GetSpace"}
+	iListChannels                              = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "ListChannels"}
+	iListSpaces                                = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "ListSpaces"}
+	iListTagsForResource                       = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "ListTagsForResource"}
+	iRegisterAdmin                             = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "RegisterAdmin"}
+	iSendInvites                               = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "SendInvites"}
+	iTagResource                               = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "TagResource"}
+	iUntagResource                             = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "UntagResource"}
+	iUpdateChannel                             = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "UpdateChannel"}
+	iUpdateSpace                               = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "UpdateSpace"}
+	i_RepostSpace                              = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "RepostSpace"}
+	iAccessDeniedException                     = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "AccessDeniedException"}
+	i_AccessorId                               = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "AccessorId"}
+	i_AccessorIdList                           = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "AccessorIdList"}
+	i_AdminId                                  = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "AdminId"}
+	i_AllowedDomainsList                       = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "AllowedDomainsList"}
+	i_Arn                                      = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "Arn"}
+	iBatchError                                = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "BatchError"}
+	i_BatchErrorList                           = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "BatchErrorList"}
+	iChannelData                               = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "ChannelData"}
+	i_ChannelDescription                       = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "ChannelDescription"}
+	i_ChannelId                                = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "ChannelId"}
+	i_ChannelName                              = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "ChannelName"}
+	iChannelRole                               = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "ChannelRole"}
+	i_ChannelRoleList                          = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "ChannelRoleList"}
+	i_ChannelRoles                             = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "ChannelRoles"}
+	i_ChannelsList                             = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "ChannelsList"}
+	iChannelStatus                             = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "ChannelStatus"}
+	i_ClientId                                 = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "ClientId"}
+	iConfigurationStatus                       = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "ConfigurationStatus"}
+	iConflictException                         = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "ConflictException"}
+	i_ContentSize                              = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "ContentSize"}
+	i_EmailDomain                              = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "EmailDomain"}
+	i_ErrorCode                                = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "ErrorCode"}
+	i_ErrorMessage                             = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "ErrorMessage"}
+	iFeatureEnableParameter                    = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "FeatureEnableParameter"}
+	iFeatureEnableStatus                       = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "FeatureEnableStatus"}
+	i_GroupAdmins                              = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "GroupAdmins"}
+	i_GroupCount                               = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "GroupCount"}
+	i_IdentityStoreId                          = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "IdentityStoreId"}
+	iInternalServerException                   = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "InternalServerException"}
+	i_InviteBody                               = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "InviteBody"}
+	i_InviteTitle                              = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "InviteTitle"}
+	i_KMSKey                                   = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "KMSKey"}
+	i_ListChannelsLimit                        = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "ListChannelsLimit"}
+	i_ListSpacesLimit                          = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "ListSpacesLimit"}
+	i_ProvisioningStatus                       = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "ProvisioningStatus"}
+	iResourceNotFoundException                 = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "ResourceNotFoundException"}
+	iRole                                      = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "Role"}
+	i_RoleList                                 = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "RoleList"}
+	i_Roles                                    = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "Roles"}
+	iServiceQuotaExceededException             = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "ServiceQuotaExceededException"}
+	iSpaceData                                 = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "SpaceData"}
+	i_SpaceDescription                         = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "SpaceDescription"}
+	i_SpaceId                                  = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "SpaceId"}
+	i_SpaceName                                = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "SpaceName"}
+	i_SpacesList                               = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "SpacesList"}
+	i_SpaceSubdomain                           = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "SpaceSubdomain"}
+	i_StorageLimit                             = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "StorageLimit"}
+	iSupportedEmailDomainsParameters           = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "SupportedEmailDomainsParameters"}
+	iSupportedEmailDomainsStatus               = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "SupportedEmailDomainsStatus"}
+	i_TagKey                                   = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "TagKey"}
+	i_TagKeyList                               = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "TagKeyList"}
+	i_Tags                                     = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "Tags"}
+	i_TagValue                                 = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "TagValue"}
+	iThrottlingException                       = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "ThrottlingException"}
+	iTierLevel                                 = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "TierLevel"}
+	i_Url                                      = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "Url"}
+	i_UserAdmins                               = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "UserAdmins"}
+	i_UserCount                                = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "UserCount"}
+	iValidationException                       = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "ValidationException"}
+	iValidationExceptionField                  = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "ValidationExceptionField"}
+	i_ValidationExceptionFieldList             = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "ValidationExceptionFieldList"}
+	iValidationExceptionReason                 = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "ValidationExceptionReason"}
+	iVanityDomainStatus                        = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "VanityDomainStatus"}
+	iBatchAddChannelRoleToAccessorsInput       = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "BatchAddChannelRoleToAccessorsInput"}
+	iBatchAddChannelRoleToAccessorsOutput      = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "BatchAddChannelRoleToAccessorsOutput"}
+	iBatchAddRoleInput                         = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "BatchAddRoleInput"}
+	iBatchAddRoleOutput                        = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "BatchAddRoleOutput"}
+	iBatchRemoveChannelRoleFromAccessorsInput  = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "BatchRemoveChannelRoleFromAccessorsInput"}
+	iBatchRemoveChannelRoleFromAccessorsOutput = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "BatchRemoveChannelRoleFromAccessorsOutput"}
+	iBatchRemoveRoleInput                      = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "BatchRemoveRoleInput"}
+	iBatchRemoveRoleOutput                     = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "BatchRemoveRoleOutput"}
+	iCreateChannelInput                        = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "CreateChannelInput"}
+	iCreateChannelOutput                       = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "CreateChannelOutput"}
+	iCreateSpaceInput                          = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "CreateSpaceInput"}
+	iCreateSpaceOutput                         = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "CreateSpaceOutput"}
+	iDeleteSpaceInput                          = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "DeleteSpaceInput"}
+	iDeregisterAdminInput                      = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "DeregisterAdminInput"}
+	iGetChannelInput                           = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "GetChannelInput"}
+	iGetChannelOutput                          = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "GetChannelOutput"}
+	iGetSpaceInput                             = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "GetSpaceInput"}
+	iGetSpaceOutput                            = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "GetSpaceOutput"}
+	iListChannelsInput                         = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "ListChannelsInput"}
+	iListChannelsOutput                        = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "ListChannelsOutput"}
+	iListSpacesInput                           = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "ListSpacesInput"}
+	iListSpacesOutput                          = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "ListSpacesOutput"}
+	iListTagsForResourceRequest                = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse               = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "ListTagsForResourceResponse"}
+	iRegisterAdminInput                        = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "RegisterAdminInput"}
+	iSendInvitesInput                          = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "SendInvitesInput"}
+	iTagResourceRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "TagResourceRequest"}
+	iTagResourceResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "TagResourceResponse"}
+	iUntagResourceRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "UntagResourceResponse"}
+	iUpdateChannelInput                        = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "UpdateChannelInput"}
+	iUpdateChannelOutput                       = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "UpdateChannelOutput"}
+	iUpdateSpaceInput                          = smithy.ShapeID{Namespace: "com.amazonaws.repostspace", Name: "UpdateSpaceInput"}
+	pString                                    = smithy.ShapeID{Namespace: "smithy.api", Name: "String"}
+	pTimestamp                                 = smithy.ShapeID{Namespace: "smithy.api", Name: "Timestamp"}
+	pUnit                                      = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+	pInteger                                   = smithy.ShapeID{Namespace: "smithy.api", Name: "Integer"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/spaces/{spaceId}/channels/{channelId}/roles",
-	Code: 200})
-
-var BatchAddRole = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "BatchAddRole",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/spaces/{spaceId}/roles",
-	Code: 200})
-
-var BatchRemoveChannelRoleFromAccessors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "BatchRemoveChannelRoleFromAccessors",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/spaces/{spaceId}/channels/{channelId}/roles",
-	Code: 200})
-
-var BatchRemoveRole = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "BatchRemoveRole",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/spaces/{spaceId}/roles",
-	Code: 200})
-
-var CreateChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "CreateChannel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/spaces/{spaceId}/channels",
-	Code: 200})
-
-var CreateSpace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "CreateSpace",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/spaces",
-	Code: 200})
-
-var DeleteSpace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "DeleteSpace",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/spaces/{spaceId}",
-	Code: 200})
-
-var DeregisterAdmin = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "DeregisterAdmin",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/spaces/{spaceId}/admins/{adminId}",
-	Code: 200})
-
-var GetChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "GetChannel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/spaces/{spaceId}/channels/{channelId}",
-	Code: 200})
-
-var GetSpace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "GetSpace",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/spaces/{spaceId}",
-	Code: 200})
-
-var ListChannels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ListChannels",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/spaces/{spaceId}/channels",
-	Code: 200})
-
-var ListSpaces = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ListSpaces",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/spaces",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var RegisterAdmin = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "RegisterAdmin",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/spaces/{spaceId}/admins/{adminId}",
-	Code: 200})
-
-var SendInvites = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "SendInvites",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/spaces/{spaceId}/invite",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UpdateChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "UpdateChannel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/spaces/{spaceId}/channels/{channelId}",
-	Code: 200})
-
-var UpdateSpace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "UpdateSpace",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/spaces/{spaceId}",
-	Code: 200})
-
-var _RepostSpace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "RepostSpace",
-}, smithy.ShapeTypeService, 0)
-
-var RepostSpace = smithy.NewServiceSchema(_RepostSpace, "2022-05-13")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var _AccessorId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "AccessorId",
-}, smithy.ShapeTypeString, 0)
-
-var _AccessorIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "AccessorIdList",
-}, smithy.ShapeTypeList, 1)
-var _AccessorIdList_member *smithy.Schema
-
-var _AdminId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "AdminId",
-}, smithy.ShapeTypeString, 0)
-
-var _AllowedDomainsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "AllowedDomainsList",
-}, smithy.ShapeTypeList, 1)
-var _AllowedDomainsList_member *smithy.Schema
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var BatchError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "BatchError",
-}, smithy.ShapeTypeStructure, 3)
-var BatchError_accessorId *smithy.Schema
-
-var BatchError_error *smithy.Schema
-
-var BatchError_message *smithy.Schema
-
-var _BatchErrorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "BatchErrorList",
-}, smithy.ShapeTypeList, 1)
-var _BatchErrorList_member *smithy.Schema
-
-var ChannelData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ChannelData",
-}, smithy.ShapeTypeStructure, 9)
-var ChannelData_spaceId *smithy.Schema
-
-var ChannelData_channelId *smithy.Schema
-
-var ChannelData_channelName *smithy.Schema
-
-var ChannelData_channelDescription *smithy.Schema
-
-var ChannelData_createDateTime *smithy.Schema
-
-var ChannelData_deleteDateTime *smithy.Schema
-
-var ChannelData_channelStatus *smithy.Schema
-
-var ChannelData_userCount *smithy.Schema
-
-var ChannelData_groupCount *smithy.Schema
-
-var _ChannelDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ChannelDescription",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ChannelId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ChannelId",
-}, smithy.ShapeTypeString, 0)
-
-var _ChannelName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ChannelName",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ChannelRole = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ChannelRole",
-}, smithy.ShapeTypeEnum, 4)
-var ChannelRole_ASKER *smithy.Schema
-
-var ChannelRole_EXPERT *smithy.Schema
-
-var ChannelRole_MODERATOR *smithy.Schema
-
-var ChannelRole_SUPPORTREQUESTOR *smithy.Schema
-
-var _ChannelRoleList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ChannelRoleList",
-}, smithy.ShapeTypeList, 1)
-var _ChannelRoleList_member *smithy.Schema
-
-var _ChannelRoles = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ChannelRoles",
-}, smithy.ShapeTypeMap, 2)
-var _ChannelRoles_key *smithy.Schema
-
-var _ChannelRoles_value *smithy.Schema
-
-var _ChannelsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ChannelsList",
-}, smithy.ShapeTypeList, 1)
-var _ChannelsList_member *smithy.Schema
-
-var ChannelStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ChannelStatus",
-}, smithy.ShapeTypeEnum, 6)
-var ChannelStatus_CREATED *smithy.Schema
-
-var ChannelStatus_CREATING *smithy.Schema
-
-var ChannelStatus_CREATE_FAILED *smithy.Schema
-
-var ChannelStatus_DELETED *smithy.Schema
-
-var ChannelStatus_DELETING *smithy.Schema
-
-var ChannelStatus_DELETE_FAILED *smithy.Schema
-
-var _ClientId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ClientId",
-}, smithy.ShapeTypeString, 0)
-
-var ConfigurationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ConfigurationStatus",
-}, smithy.ShapeTypeEnum, 2)
-var ConfigurationStatus_CONFIGURED *smithy.Schema
-
-var ConfigurationStatus_UNCONFIGURED *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var ConflictException_resourceId *smithy.Schema
-
-var ConflictException_resourceType *smithy.Schema
-
-var _ContentSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ContentSize",
-}, smithy.ShapeTypeLong, 0)
-
-var _EmailDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "EmailDomain",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ErrorCode",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var FeatureEnableParameter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "FeatureEnableParameter",
-}, smithy.ShapeTypeEnum, 2)
-var FeatureEnableParameter_ENABLED *smithy.Schema
-
-var FeatureEnableParameter_DISABLED *smithy.Schema
-
-var FeatureEnableStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "FeatureEnableStatus",
-}, smithy.ShapeTypeEnum, 3)
-var FeatureEnableStatus_ENABLED *smithy.Schema
-
-var FeatureEnableStatus_DISABLED *smithy.Schema
-
-var FeatureEnableStatus_NOT_ALLOWED *smithy.Schema
-
-var _GroupAdmins = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "GroupAdmins",
-}, smithy.ShapeTypeList, 1)
-var _GroupAdmins_member *smithy.Schema
-
-var _GroupCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "GroupCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var _IdentityStoreId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "IdentityStoreId",
-}, smithy.ShapeTypeString, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var InternalServerException_retryAfterSeconds *smithy.Schema
-
-var _InviteBody = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "InviteBody",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _InviteTitle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "InviteTitle",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _KMSKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "KMSKey",
-}, smithy.ShapeTypeString, 0)
-
-var _ListChannelsLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ListChannelsLimit",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListSpacesLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ListSpacesLimit",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ProvisioningStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ProvisioningStatus",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceNotFoundException_resourceId *smithy.Schema
-
-var ResourceNotFoundException_resourceType *smithy.Schema
-
-var Role = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "Role",
-}, smithy.ShapeTypeEnum, 4)
-var Role_EXPERT *smithy.Schema
-
-var Role_MODERATOR *smithy.Schema
-
-var Role_ADMINISTRATOR *smithy.Schema
-
-var Role_SUPPORTREQUESTOR *smithy.Schema
-
-var _RoleList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "RoleList",
-}, smithy.ShapeTypeList, 1)
-var _RoleList_member *smithy.Schema
-
-var _Roles = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "Roles",
-}, smithy.ShapeTypeMap, 2)
-var _Roles_key *smithy.Schema
-
-var _Roles_value *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var ServiceQuotaExceededException_resourceId *smithy.Schema
-
-var ServiceQuotaExceededException_resourceType *smithy.Schema
-
-var ServiceQuotaExceededException_serviceCode *smithy.Schema
-
-var ServiceQuotaExceededException_quotaCode *smithy.Schema
-
-var SpaceData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "SpaceData",
-}, smithy.ShapeTypeStructure, 17)
-var SpaceData_spaceId *smithy.Schema
-
-var SpaceData_arn *smithy.Schema
-
-var SpaceData_name *smithy.Schema
-
-var SpaceData_description *smithy.Schema
-
-var SpaceData_status *smithy.Schema
-
-var SpaceData_configurationStatus *smithy.Schema
-
-var SpaceData_vanityDomainStatus *smithy.Schema
-
-var SpaceData_vanityDomain *smithy.Schema
-
-var SpaceData_randomDomain *smithy.Schema
-
-var SpaceData_tier *smithy.Schema
-
-var SpaceData_storageLimit *smithy.Schema
-
-var SpaceData_createDateTime *smithy.Schema
-
-var SpaceData_deleteDateTime *smithy.Schema
-
-var SpaceData_userKMSKey *smithy.Schema
-
-var SpaceData_userCount *smithy.Schema
-
-var SpaceData_contentSize *smithy.Schema
-
-var SpaceData_supportedEmailDomains *smithy.Schema
-
-var _SpaceDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "SpaceDescription",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _SpaceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "SpaceId",
-}, smithy.ShapeTypeString, 0)
-
-var _SpaceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "SpaceName",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _SpacesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "SpacesList",
-}, smithy.ShapeTypeList, 1)
-var _SpacesList_member *smithy.Schema
-
-var _SpaceSubdomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "SpaceSubdomain",
-}, smithy.ShapeTypeString, 0)
-
-var _StorageLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "StorageLimit",
-}, smithy.ShapeTypeLong, 0)
-
-var SupportedEmailDomainsParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "SupportedEmailDomainsParameters",
-}, smithy.ShapeTypeStructure, 2)
-var SupportedEmailDomainsParameters_enabled *smithy.Schema
-
-var SupportedEmailDomainsParameters_allowedDomains *smithy.Schema
-
-var SupportedEmailDomainsStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "SupportedEmailDomainsStatus",
-}, smithy.ShapeTypeStructure, 2)
-var SupportedEmailDomainsStatus_enabled *smithy.Schema
-
-var SupportedEmailDomainsStatus_allowedDomains *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _Tags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "Tags",
-}, smithy.ShapeTypeMap, 2, &smithytraits.Sensitive{})
-var _Tags_key *smithy.Schema
-
-var _Tags_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ThrottlingException_serviceCode *smithy.Schema
-
-var ThrottlingException_quotaCode *smithy.Schema
-
-var ThrottlingException_retryAfterSeconds *smithy.Schema
-
-var TierLevel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "TierLevel",
-}, smithy.ShapeTypeEnum, 2)
-var TierLevel_BASIC *smithy.Schema
-
-var TierLevel_STANDARD *smithy.Schema
-
-var _Url = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "Url",
-}, smithy.ShapeTypeString, 0)
-
-var _UserAdmins = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "UserAdmins",
-}, smithy.ShapeTypeList, 1)
-var _UserAdmins_member *smithy.Schema
-
-var _UserCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "UserCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var ValidationException_reason *smithy.Schema
-
-var ValidationException_fieldList *smithy.Schema
-
-var ValidationExceptionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ValidationExceptionField",
-}, smithy.ShapeTypeStructure, 2)
-var ValidationExceptionField_name *smithy.Schema
-
-var ValidationExceptionField_message *smithy.Schema
-
-var _ValidationExceptionFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ValidationExceptionFieldList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationExceptionFieldList_member *smithy.Schema
-
-var ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeEnum, 4)
-var ValidationExceptionReason_UNKNOWN_OPERATION *smithy.Schema
-
-var ValidationExceptionReason_CANNOT_PARSE *smithy.Schema
-
-var ValidationExceptionReason_FIELD_VALIDATION_FAILED *smithy.Schema
-
-var ValidationExceptionReason_OTHER *smithy.Schema
-
-var VanityDomainStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "VanityDomainStatus",
-}, smithy.ShapeTypeEnum, 3)
-var VanityDomainStatus_PENDING *smithy.Schema
-
-var VanityDomainStatus_APPROVED *smithy.Schema
-
-var VanityDomainStatus_UNAPPROVED *smithy.Schema
-
-var BatchAddChannelRoleToAccessorsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "BatchAddChannelRoleToAccessorsInput",
-}, smithy.ShapeTypeStructure, 4)
-var BatchAddChannelRoleToAccessorsInput_spaceId *smithy.Schema
-
-var BatchAddChannelRoleToAccessorsInput_channelId *smithy.Schema
-
-var BatchAddChannelRoleToAccessorsInput_accessorIds *smithy.Schema
-
-var BatchAddChannelRoleToAccessorsInput_channelRole *smithy.Schema
-
-var BatchAddChannelRoleToAccessorsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "BatchAddChannelRoleToAccessorsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var BatchAddChannelRoleToAccessorsOutput_addedAccessorIds *smithy.Schema
-
-var BatchAddChannelRoleToAccessorsOutput_errors *smithy.Schema
-
-var BatchAddRoleInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "BatchAddRoleInput",
-}, smithy.ShapeTypeStructure, 3)
-var BatchAddRoleInput_spaceId *smithy.Schema
-
-var BatchAddRoleInput_accessorIds *smithy.Schema
-
-var BatchAddRoleInput_role *smithy.Schema
-
-var BatchAddRoleOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "BatchAddRoleOutput",
-}, smithy.ShapeTypeStructure, 2)
-var BatchAddRoleOutput_addedAccessorIds *smithy.Schema
-
-var BatchAddRoleOutput_errors *smithy.Schema
-
-var BatchRemoveChannelRoleFromAccessorsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "BatchRemoveChannelRoleFromAccessorsInput",
-}, smithy.ShapeTypeStructure, 4)
-var BatchRemoveChannelRoleFromAccessorsInput_spaceId *smithy.Schema
-
-var BatchRemoveChannelRoleFromAccessorsInput_channelId *smithy.Schema
-
-var BatchRemoveChannelRoleFromAccessorsInput_accessorIds *smithy.Schema
-
-var BatchRemoveChannelRoleFromAccessorsInput_channelRole *smithy.Schema
-
-var BatchRemoveChannelRoleFromAccessorsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "BatchRemoveChannelRoleFromAccessorsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var BatchRemoveChannelRoleFromAccessorsOutput_removedAccessorIds *smithy.Schema
-
-var BatchRemoveChannelRoleFromAccessorsOutput_errors *smithy.Schema
-
-var BatchRemoveRoleInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "BatchRemoveRoleInput",
-}, smithy.ShapeTypeStructure, 3)
-var BatchRemoveRoleInput_spaceId *smithy.Schema
-
-var BatchRemoveRoleInput_accessorIds *smithy.Schema
-
-var BatchRemoveRoleInput_role *smithy.Schema
-
-var BatchRemoveRoleOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "BatchRemoveRoleOutput",
-}, smithy.ShapeTypeStructure, 2)
-var BatchRemoveRoleOutput_removedAccessorIds *smithy.Schema
-
-var BatchRemoveRoleOutput_errors *smithy.Schema
-
-var CreateChannelInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "CreateChannelInput",
-}, smithy.ShapeTypeStructure, 3)
-var CreateChannelInput_spaceId *smithy.Schema
-
-var CreateChannelInput_channelName *smithy.Schema
-
-var CreateChannelInput_channelDescription *smithy.Schema
-
-var CreateChannelOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "CreateChannelOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateChannelOutput_channelId *smithy.Schema
-
-var CreateSpaceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "CreateSpaceInput",
-}, smithy.ShapeTypeStructure, 8)
-var CreateSpaceInput_name *smithy.Schema
-
-var CreateSpaceInput_subdomain *smithy.Schema
-
-var CreateSpaceInput_tier *smithy.Schema
-
-var CreateSpaceInput_description *smithy.Schema
-
-var CreateSpaceInput_userKMSKey *smithy.Schema
-
-var CreateSpaceInput_tags *smithy.Schema
-
-var CreateSpaceInput_roleArn *smithy.Schema
-
-var CreateSpaceInput_supportedEmailDomains *smithy.Schema
-
-var CreateSpaceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "CreateSpaceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateSpaceOutput_spaceId *smithy.Schema
-
-var DeleteSpaceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "DeleteSpaceInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteSpaceInput_spaceId *smithy.Schema
-
-var DeregisterAdminInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "DeregisterAdminInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeregisterAdminInput_spaceId *smithy.Schema
-
-var DeregisterAdminInput_adminId *smithy.Schema
-
-var GetChannelInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "GetChannelInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetChannelInput_spaceId *smithy.Schema
-
-var GetChannelInput_channelId *smithy.Schema
-
-var GetChannelOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "GetChannelOutput",
-}, smithy.ShapeTypeStructure, 8)
-var GetChannelOutput_spaceId *smithy.Schema
-
-var GetChannelOutput_channelId *smithy.Schema
-
-var GetChannelOutput_channelName *smithy.Schema
-
-var GetChannelOutput_channelDescription *smithy.Schema
-
-var GetChannelOutput_createDateTime *smithy.Schema
-
-var GetChannelOutput_deleteDateTime *smithy.Schema
-
-var GetChannelOutput_channelRoles *smithy.Schema
-
-var GetChannelOutput_channelStatus *smithy.Schema
-
-var GetSpaceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "GetSpaceInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetSpaceInput_spaceId *smithy.Schema
-
-var GetSpaceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "GetSpaceOutput",
-}, smithy.ShapeTypeStructure, 24)
-var GetSpaceOutput_spaceId *smithy.Schema
-
-var GetSpaceOutput_arn *smithy.Schema
-
-var GetSpaceOutput_name *smithy.Schema
-
-var GetSpaceOutput_status *smithy.Schema
-
-var GetSpaceOutput_configurationStatus *smithy.Schema
-
-var GetSpaceOutput_clientId *smithy.Schema
-
-var GetSpaceOutput_identityStoreId *smithy.Schema
-
-var GetSpaceOutput_applicationArn *smithy.Schema
-
-var GetSpaceOutput_description *smithy.Schema
-
-var GetSpaceOutput_vanityDomainStatus *smithy.Schema
-
-var GetSpaceOutput_vanityDomain *smithy.Schema
-
-var GetSpaceOutput_randomDomain *smithy.Schema
-
-var GetSpaceOutput_customerRoleArn *smithy.Schema
-
-var GetSpaceOutput_createDateTime *smithy.Schema
-
-var GetSpaceOutput_deleteDateTime *smithy.Schema
-
-var GetSpaceOutput_tier *smithy.Schema
-
-var GetSpaceOutput_storageLimit *smithy.Schema
-
-var GetSpaceOutput_userAdmins *smithy.Schema
-
-var GetSpaceOutput_groupAdmins *smithy.Schema
-
-var GetSpaceOutput_roles *smithy.Schema
-
-var GetSpaceOutput_userKMSKey *smithy.Schema
-
-var GetSpaceOutput_userCount *smithy.Schema
-
-var GetSpaceOutput_contentSize *smithy.Schema
-
-var GetSpaceOutput_supportedEmailDomains *smithy.Schema
-
-var ListChannelsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ListChannelsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListChannelsInput_spaceId *smithy.Schema
-
-var ListChannelsInput_nextToken *smithy.Schema
-
-var ListChannelsInput_maxResults *smithy.Schema
-
-var ListChannelsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ListChannelsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListChannelsOutput_channels *smithy.Schema
-
-var ListChannelsOutput_nextToken *smithy.Schema
-
-var ListSpacesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ListSpacesInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListSpacesInput_nextToken *smithy.Schema
-
-var ListSpacesInput_maxResults *smithy.Schema
-
-var ListSpacesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ListSpacesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListSpacesOutput_spaces *smithy.Schema
-
-var ListSpacesOutput_nextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_resourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var RegisterAdminInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "RegisterAdminInput",
-}, smithy.ShapeTypeStructure, 2)
-var RegisterAdminInput_spaceId *smithy.Schema
-
-var RegisterAdminInput_adminId *smithy.Schema
-
-var SendInvitesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "SendInvitesInput",
-}, smithy.ShapeTypeStructure, 4)
-var SendInvitesInput_spaceId *smithy.Schema
-
-var SendInvitesInput_accessorIds *smithy.Schema
-
-var SendInvitesInput_title *smithy.Schema
-
-var SendInvitesInput_body *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateChannelInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "UpdateChannelInput",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateChannelInput_spaceId *smithy.Schema
-
-var UpdateChannelInput_channelId *smithy.Schema
-
-var UpdateChannelInput_channelName *smithy.Schema
-
-var UpdateChannelInput_channelDescription *smithy.Schema
-
-var UpdateChannelOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "UpdateChannelOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateSpaceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.repostspace",
-	Name:      "UpdateSpaceInput",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateSpaceInput_spaceId *smithy.Schema
-
-var UpdateSpaceInput_description *smithy.Schema
-
-var UpdateSpaceInput_tier *smithy.Schema
-
-var UpdateSpaceInput_roleArn *smithy.Schema
-
-var UpdateSpaceInput_supportedEmailDomains *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	_AccessorIdList_member = _AccessorIdList.AddMember("member", _AccessorId)
-
-	_AllowedDomainsList_member = _AllowedDomainsList.AddMember("member", _EmailDomain)
-
-	BatchError_accessorId = BatchError.AddMember("accessorId", _AccessorId)
-
-	BatchError_error = BatchError.AddMember("error", _ErrorCode)
-
-	BatchError_message = BatchError.AddMember("message", _ErrorMessage)
-
-	_BatchErrorList_member = _BatchErrorList.AddMember("member", BatchError)
-
-	ChannelStatus_CREATED = ChannelStatus.AddMember("CREATED", smithyprelude.Unit)
-
-	ChannelStatus_CREATING = ChannelStatus.AddMember("CREATING", smithyprelude.Unit)
-
-	ChannelStatus_CREATE_FAILED = ChannelStatus.AddMember("CREATE_FAILED", smithyprelude.Unit)
-
-	ChannelStatus_DELETED = ChannelStatus.AddMember("DELETED", smithyprelude.Unit)
-
-	ChannelStatus_DELETING = ChannelStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	ChannelStatus_DELETE_FAILED = ChannelStatus.AddMember("DELETE_FAILED", smithyprelude.Unit)
-
-	ChannelData_spaceId = ChannelData.AddMember("spaceId", _SpaceId)
-
-	ChannelData_channelId = ChannelData.AddMember("channelId", _ChannelId)
-
-	ChannelData_channelName = ChannelData.AddMember("channelName", _ChannelName)
-
-	ChannelData_channelDescription = ChannelData.AddMember("channelDescription", _ChannelDescription)
-
-	ChannelData_createDateTime = ChannelData.AddMember("createDateTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	ChannelData_deleteDateTime = ChannelData.AddMember("deleteDateTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	ChannelData_channelStatus = ChannelData.AddMember("channelStatus", ChannelStatus)
-
-	ChannelData_userCount = ChannelData.AddMember("userCount", _UserCount)
-
-	ChannelData_groupCount = ChannelData.AddMember("groupCount", _GroupCount)
-
-	ChannelRole_ASKER = ChannelRole.AddMember("ASKER", smithyprelude.Unit)
-
-	ChannelRole_EXPERT = ChannelRole.AddMember("EXPERT", smithyprelude.Unit)
-
-	ChannelRole_MODERATOR = ChannelRole.AddMember("MODERATOR", smithyprelude.Unit)
-
-	ChannelRole_SUPPORTREQUESTOR = ChannelRole.AddMember("SUPPORTREQUESTOR", smithyprelude.Unit)
-
-	_ChannelRoleList_member = _ChannelRoleList.AddMember("member", ChannelRole)
-
-	_ChannelRoles_key = _ChannelRoles.AddMember("key", _AccessorId)
-
-	_ChannelRoles_value = _ChannelRoles.AddMember("value", _ChannelRoleList)
-
-	_ChannelsList_member = _ChannelsList.AddMember("member", ChannelData)
-
-	ConfigurationStatus_CONFIGURED = ConfigurationStatus.AddMember("CONFIGURED", smithyprelude.Unit)
-
-	ConfigurationStatus_UNCONFIGURED = ConfigurationStatus.AddMember("UNCONFIGURED", smithyprelude.Unit)
-
-	ConflictException_message = ConflictException.AddMember("message", smithyprelude.String)
-
-	ConflictException_resourceId = ConflictException.AddMember("resourceId", smithyprelude.String)
-
-	ConflictException_resourceType = ConflictException.AddMember("resourceType", smithyprelude.String)
-
-	FeatureEnableParameter_ENABLED = FeatureEnableParameter.AddMember("ENABLED", smithyprelude.Unit)
-
-	FeatureEnableParameter_DISABLED = FeatureEnableParameter.AddMember("DISABLED", smithyprelude.Unit)
-
-	FeatureEnableStatus_ENABLED = FeatureEnableStatus.AddMember("ENABLED", smithyprelude.Unit)
-
-	FeatureEnableStatus_DISABLED = FeatureEnableStatus.AddMember("DISABLED", smithyprelude.Unit)
-
-	FeatureEnableStatus_NOT_ALLOWED = FeatureEnableStatus.AddMember("NOT_ALLOWED", smithyprelude.Unit)
-
-	_GroupAdmins_member = _GroupAdmins.AddMember("member", _AdminId)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	InternalServerException_retryAfterSeconds = InternalServerException.AddMember("retryAfterSeconds", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	ResourceNotFoundException_resourceId = ResourceNotFoundException.AddMember("resourceId", smithyprelude.String)
-
-	ResourceNotFoundException_resourceType = ResourceNotFoundException.AddMember("resourceType", smithyprelude.String)
-
-	Role_EXPERT = Role.AddMember("EXPERT", smithyprelude.Unit)
-
-	Role_MODERATOR = Role.AddMember("MODERATOR", smithyprelude.Unit)
-
-	Role_ADMINISTRATOR = Role.AddMember("ADMINISTRATOR", smithyprelude.Unit)
-
-	Role_SUPPORTREQUESTOR = Role.AddMember("SUPPORTREQUESTOR", smithyprelude.Unit)
-
-	_RoleList_member = _RoleList.AddMember("member", Role)
-
-	_Roles_key = _Roles.AddMember("key", _AccessorId)
-
-	_Roles_value = _Roles.AddMember("value", _RoleList)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", smithyprelude.String)
-
-	ServiceQuotaExceededException_resourceId = ServiceQuotaExceededException.AddMember("resourceId", smithyprelude.String)
-
-	ServiceQuotaExceededException_resourceType = ServiceQuotaExceededException.AddMember("resourceType", smithyprelude.String)
-
-	ServiceQuotaExceededException_serviceCode = ServiceQuotaExceededException.AddMember("serviceCode", smithyprelude.String)
-
-	ServiceQuotaExceededException_quotaCode = ServiceQuotaExceededException.AddMember("quotaCode", smithyprelude.String)
-
-	VanityDomainStatus_PENDING = VanityDomainStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	VanityDomainStatus_APPROVED = VanityDomainStatus.AddMember("APPROVED", smithyprelude.Unit)
-
-	VanityDomainStatus_UNAPPROVED = VanityDomainStatus.AddMember("UNAPPROVED", smithyprelude.Unit)
-
-	TierLevel_BASIC = TierLevel.AddMember("BASIC", smithyprelude.Unit)
-
-	TierLevel_STANDARD = TierLevel.AddMember("STANDARD", smithyprelude.Unit)
-
-	SupportedEmailDomainsStatus_enabled = SupportedEmailDomainsStatus.AddMember("enabled", FeatureEnableStatus)
-
-	SupportedEmailDomainsStatus_allowedDomains = SupportedEmailDomainsStatus.AddMember("allowedDomains", _AllowedDomainsList)
-
-	SpaceData_spaceId = SpaceData.AddMember("spaceId", _SpaceId)
-
-	SpaceData_arn = SpaceData.AddMember("arn", _Arn)
-
-	SpaceData_name = SpaceData.AddMember("name", _SpaceName)
-
-	SpaceData_description = SpaceData.AddMember("description", _SpaceDescription)
-
-	SpaceData_status = SpaceData.AddMember("status", _ProvisioningStatus)
-
-	SpaceData_configurationStatus = SpaceData.AddMember("configurationStatus", ConfigurationStatus)
-
-	SpaceData_vanityDomainStatus = SpaceData.AddMember("vanityDomainStatus", VanityDomainStatus)
-
-	SpaceData_vanityDomain = SpaceData.AddMember("vanityDomain", _Url)
-
-	SpaceData_randomDomain = SpaceData.AddMember("randomDomain", _Url)
-
-	SpaceData_tier = SpaceData.AddMember("tier", TierLevel)
-
-	SpaceData_storageLimit = SpaceData.AddMember("storageLimit", _StorageLimit)
-
-	SpaceData_createDateTime = SpaceData.AddMember("createDateTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	SpaceData_deleteDateTime = SpaceData.AddMember("deleteDateTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	SpaceData_userKMSKey = SpaceData.AddMember("userKMSKey", _KMSKey)
-
-	SpaceData_userCount = SpaceData.AddMember("userCount", _UserCount)
-
-	SpaceData_contentSize = SpaceData.AddMember("contentSize", _ContentSize)
-
-	SpaceData_supportedEmailDomains = SpaceData.AddMember("supportedEmailDomains", SupportedEmailDomainsStatus)
-
-	_SpacesList_member = _SpacesList.AddMember("member", SpaceData)
-
-	SupportedEmailDomainsParameters_enabled = SupportedEmailDomainsParameters.AddMember("enabled", FeatureEnableParameter)
-
-	SupportedEmailDomainsParameters_allowedDomains = SupportedEmailDomainsParameters.AddMember("allowedDomains", _AllowedDomainsList)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_Tags_key = _Tags.AddMember("key", _TagKey)
-
-	_Tags_value = _Tags.AddMember("value", _TagValue)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
-
-	ThrottlingException_serviceCode = ThrottlingException.AddMember("serviceCode", smithyprelude.String)
-
-	ThrottlingException_quotaCode = ThrottlingException.AddMember("quotaCode", smithyprelude.String)
-
-	ThrottlingException_retryAfterSeconds = ThrottlingException.AddMember("retryAfterSeconds", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	_UserAdmins_member = _UserAdmins.AddMember("member", _AdminId)
-
-	ValidationExceptionReason_UNKNOWN_OPERATION = ValidationExceptionReason.AddMember("UNKNOWN_OPERATION", smithyprelude.Unit)
-
-	ValidationExceptionReason_CANNOT_PARSE = ValidationExceptionReason.AddMember("CANNOT_PARSE", smithyprelude.Unit)
-
-	ValidationExceptionReason_FIELD_VALIDATION_FAILED = ValidationExceptionReason.AddMember("FIELD_VALIDATION_FAILED", smithyprelude.Unit)
-
-	ValidationExceptionReason_OTHER = ValidationExceptionReason.AddMember("OTHER", smithyprelude.Unit)
-
-	ValidationExceptionField_name = ValidationExceptionField.AddMember("name", smithyprelude.String)
-
-	ValidationExceptionField_message = ValidationExceptionField.AddMember("message", smithyprelude.String)
-
-	_ValidationExceptionFieldList_member = _ValidationExceptionFieldList.AddMember("member", ValidationExceptionField)
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	ValidationException_reason = ValidationException.AddMember("reason", ValidationExceptionReason)
-
-	ValidationException_fieldList = ValidationException.AddMember("fieldList", _ValidationExceptionFieldList)
-
-	BatchAddChannelRoleToAccessorsInput_spaceId = BatchAddChannelRoleToAccessorsInput.AddMember("spaceId", _SpaceId, &smithytraits.HTTPLabel{})
-
-	BatchAddChannelRoleToAccessorsInput_channelId = BatchAddChannelRoleToAccessorsInput.AddMember("channelId", _ChannelId, &smithytraits.HTTPLabel{})
-
-	BatchAddChannelRoleToAccessorsInput_accessorIds = BatchAddChannelRoleToAccessorsInput.AddMember("accessorIds", _AccessorIdList)
-
-	BatchAddChannelRoleToAccessorsInput_channelRole = BatchAddChannelRoleToAccessorsInput.AddMember("channelRole", ChannelRole)
-
-	BatchAddChannelRoleToAccessorsOutput_addedAccessorIds = BatchAddChannelRoleToAccessorsOutput.AddMember("addedAccessorIds", _AccessorIdList)
-
-	BatchAddChannelRoleToAccessorsOutput_errors = BatchAddChannelRoleToAccessorsOutput.AddMember("errors", _BatchErrorList)
-
-	BatchAddRoleInput_spaceId = BatchAddRoleInput.AddMember("spaceId", _SpaceId, &smithytraits.HTTPLabel{})
-
-	BatchAddRoleInput_accessorIds = BatchAddRoleInput.AddMember("accessorIds", _AccessorIdList)
-
-	BatchAddRoleInput_role = BatchAddRoleInput.AddMember("role", Role)
-
-	BatchAddRoleOutput_addedAccessorIds = BatchAddRoleOutput.AddMember("addedAccessorIds", _AccessorIdList)
-
-	BatchAddRoleOutput_errors = BatchAddRoleOutput.AddMember("errors", _BatchErrorList)
-
-	BatchRemoveChannelRoleFromAccessorsInput_spaceId = BatchRemoveChannelRoleFromAccessorsInput.AddMember("spaceId", _SpaceId, &smithytraits.HTTPLabel{})
-
-	BatchRemoveChannelRoleFromAccessorsInput_channelId = BatchRemoveChannelRoleFromAccessorsInput.AddMember("channelId", _ChannelId, &smithytraits.HTTPLabel{})
-
-	BatchRemoveChannelRoleFromAccessorsInput_accessorIds = BatchRemoveChannelRoleFromAccessorsInput.AddMember("accessorIds", _AccessorIdList)
-
-	BatchRemoveChannelRoleFromAccessorsInput_channelRole = BatchRemoveChannelRoleFromAccessorsInput.AddMember("channelRole", ChannelRole)
-
-	BatchRemoveChannelRoleFromAccessorsOutput_removedAccessorIds = BatchRemoveChannelRoleFromAccessorsOutput.AddMember("removedAccessorIds", _AccessorIdList)
-
-	BatchRemoveChannelRoleFromAccessorsOutput_errors = BatchRemoveChannelRoleFromAccessorsOutput.AddMember("errors", _BatchErrorList)
-
-	BatchRemoveRoleInput_spaceId = BatchRemoveRoleInput.AddMember("spaceId", _SpaceId, &smithytraits.HTTPLabel{})
-
-	BatchRemoveRoleInput_accessorIds = BatchRemoveRoleInput.AddMember("accessorIds", _AccessorIdList)
-
-	BatchRemoveRoleInput_role = BatchRemoveRoleInput.AddMember("role", Role)
-
-	BatchRemoveRoleOutput_removedAccessorIds = BatchRemoveRoleOutput.AddMember("removedAccessorIds", _AccessorIdList)
-
-	BatchRemoveRoleOutput_errors = BatchRemoveRoleOutput.AddMember("errors", _BatchErrorList)
-
-	CreateChannelInput_spaceId = CreateChannelInput.AddMember("spaceId", _SpaceId, &smithytraits.HTTPLabel{})
-
-	CreateChannelInput_channelName = CreateChannelInput.AddMember("channelName", _ChannelName)
-
-	CreateChannelInput_channelDescription = CreateChannelInput.AddMember("channelDescription", _ChannelDescription)
-
-	CreateChannelOutput_channelId = CreateChannelOutput.AddMember("channelId", _ChannelId)
-
-	CreateSpaceInput_name = CreateSpaceInput.AddMember("name", _SpaceName)
-
-	CreateSpaceInput_subdomain = CreateSpaceInput.AddMember("subdomain", _SpaceSubdomain)
-
-	CreateSpaceInput_tier = CreateSpaceInput.AddMember("tier", TierLevel)
-
-	CreateSpaceInput_description = CreateSpaceInput.AddMember("description", _SpaceDescription)
-
-	CreateSpaceInput_userKMSKey = CreateSpaceInput.AddMember("userKMSKey", _KMSKey)
-
-	CreateSpaceInput_tags = CreateSpaceInput.AddMember("tags", _Tags)
-
-	CreateSpaceInput_roleArn = CreateSpaceInput.AddMember("roleArn", _Arn)
-
-	CreateSpaceInput_supportedEmailDomains = CreateSpaceInput.AddMember("supportedEmailDomains", SupportedEmailDomainsParameters)
-
-	CreateSpaceOutput_spaceId = CreateSpaceOutput.AddMember("spaceId", _SpaceId)
-
-	DeleteSpaceInput_spaceId = DeleteSpaceInput.AddMember("spaceId", _SpaceId, &smithytraits.HTTPLabel{})
-
-	DeregisterAdminInput_spaceId = DeregisterAdminInput.AddMember("spaceId", _SpaceId, &smithytraits.HTTPLabel{})
-
-	DeregisterAdminInput_adminId = DeregisterAdminInput.AddMember("adminId", _AdminId, &smithytraits.HTTPLabel{})
-
-	GetChannelInput_spaceId = GetChannelInput.AddMember("spaceId", _SpaceId, &smithytraits.HTTPLabel{})
-
-	GetChannelInput_channelId = GetChannelInput.AddMember("channelId", _ChannelId, &smithytraits.HTTPLabel{})
-
-	GetChannelOutput_spaceId = GetChannelOutput.AddMember("spaceId", _SpaceId)
-
-	GetChannelOutput_channelId = GetChannelOutput.AddMember("channelId", _ChannelId)
-
-	GetChannelOutput_channelName = GetChannelOutput.AddMember("channelName", _ChannelName)
-
-	GetChannelOutput_channelDescription = GetChannelOutput.AddMember("channelDescription", _ChannelDescription)
-
-	GetChannelOutput_createDateTime = GetChannelOutput.AddMember("createDateTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetChannelOutput_deleteDateTime = GetChannelOutput.AddMember("deleteDateTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetChannelOutput_channelRoles = GetChannelOutput.AddMember("channelRoles", _ChannelRoles)
-
-	GetChannelOutput_channelStatus = GetChannelOutput.AddMember("channelStatus", ChannelStatus)
-
-	GetSpaceInput_spaceId = GetSpaceInput.AddMember("spaceId", _SpaceId, &smithytraits.HTTPLabel{})
-
-	GetSpaceOutput_spaceId = GetSpaceOutput.AddMember("spaceId", _SpaceId)
-
-	GetSpaceOutput_arn = GetSpaceOutput.AddMember("arn", _Arn)
-
-	GetSpaceOutput_name = GetSpaceOutput.AddMember("name", _SpaceName)
-
-	GetSpaceOutput_status = GetSpaceOutput.AddMember("status", _ProvisioningStatus)
-
-	GetSpaceOutput_configurationStatus = GetSpaceOutput.AddMember("configurationStatus", ConfigurationStatus)
-
-	GetSpaceOutput_clientId = GetSpaceOutput.AddMember("clientId", _ClientId)
-
-	GetSpaceOutput_identityStoreId = GetSpaceOutput.AddMember("identityStoreId", _IdentityStoreId)
-
-	GetSpaceOutput_applicationArn = GetSpaceOutput.AddMember("applicationArn", _Arn)
-
-	GetSpaceOutput_description = GetSpaceOutput.AddMember("description", _SpaceDescription)
-
-	GetSpaceOutput_vanityDomainStatus = GetSpaceOutput.AddMember("vanityDomainStatus", VanityDomainStatus)
-
-	GetSpaceOutput_vanityDomain = GetSpaceOutput.AddMember("vanityDomain", _Url)
-
-	GetSpaceOutput_randomDomain = GetSpaceOutput.AddMember("randomDomain", _Url)
-
-	GetSpaceOutput_customerRoleArn = GetSpaceOutput.AddMember("customerRoleArn", _Arn)
-
-	GetSpaceOutput_createDateTime = GetSpaceOutput.AddMember("createDateTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetSpaceOutput_deleteDateTime = GetSpaceOutput.AddMember("deleteDateTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetSpaceOutput_tier = GetSpaceOutput.AddMember("tier", TierLevel)
-
-	GetSpaceOutput_storageLimit = GetSpaceOutput.AddMember("storageLimit", _StorageLimit)
-
-	GetSpaceOutput_userAdmins = GetSpaceOutput.AddMember("userAdmins", _UserAdmins)
-
-	GetSpaceOutput_groupAdmins = GetSpaceOutput.AddMember("groupAdmins", _GroupAdmins)
-
-	GetSpaceOutput_roles = GetSpaceOutput.AddMember("roles", _Roles)
-
-	GetSpaceOutput_userKMSKey = GetSpaceOutput.AddMember("userKMSKey", _KMSKey)
-
-	GetSpaceOutput_userCount = GetSpaceOutput.AddMember("userCount", _UserCount)
-
-	GetSpaceOutput_contentSize = GetSpaceOutput.AddMember("contentSize", _ContentSize)
-
-	GetSpaceOutput_supportedEmailDomains = GetSpaceOutput.AddMember("supportedEmailDomains", SupportedEmailDomainsStatus)
-
-	ListChannelsInput_spaceId = ListChannelsInput.AddMember("spaceId", _SpaceId, &smithytraits.HTTPLabel{})
-
-	ListChannelsInput_nextToken = ListChannelsInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListChannelsInput_maxResults = ListChannelsInput.AddMember("maxResults", _ListChannelsLimit, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListChannelsOutput_channels = ListChannelsOutput.AddMember("channels", _ChannelsList)
-
-	ListChannelsOutput_nextToken = ListChannelsOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListSpacesInput_nextToken = ListSpacesInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListSpacesInput_maxResults = ListSpacesInput.AddMember("maxResults", _ListSpacesLimit, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListSpacesOutput_spaces = ListSpacesOutput.AddMember("spaces", _SpacesList)
-
-	ListSpacesOutput_nextToken = ListSpacesOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", _Arn, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _Tags)
-
-	RegisterAdminInput_spaceId = RegisterAdminInput.AddMember("spaceId", _SpaceId, &smithytraits.HTTPLabel{})
-
-	RegisterAdminInput_adminId = RegisterAdminInput.AddMember("adminId", _AdminId, &smithytraits.HTTPLabel{})
-
-	SendInvitesInput_spaceId = SendInvitesInput.AddMember("spaceId", _SpaceId, &smithytraits.HTTPLabel{})
-
-	SendInvitesInput_accessorIds = SendInvitesInput.AddMember("accessorIds", _AccessorIdList)
-
-	SendInvitesInput_title = SendInvitesInput.AddMember("title", _InviteTitle)
-
-	SendInvitesInput_body = SendInvitesInput.AddMember("body", _InviteBody)
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _Arn, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _Tags)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", _Arn, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateChannelInput_spaceId = UpdateChannelInput.AddMember("spaceId", _SpaceId, &smithytraits.HTTPLabel{})
-
-	UpdateChannelInput_channelId = UpdateChannelInput.AddMember("channelId", _ChannelId, &smithytraits.HTTPLabel{})
-
-	UpdateChannelInput_channelName = UpdateChannelInput.AddMember("channelName", _ChannelName)
-
-	UpdateChannelInput_channelDescription = UpdateChannelInput.AddMember("channelDescription", _ChannelDescription)
-
-	UpdateSpaceInput_spaceId = UpdateSpaceInput.AddMember("spaceId", _SpaceId, &smithytraits.HTTPLabel{})
-
-	UpdateSpaceInput_description = UpdateSpaceInput.AddMember("description", _SpaceDescription)
-
-	UpdateSpaceInput_tier = UpdateSpaceInput.AddMember("tier", TierLevel)
-
-	UpdateSpaceInput_roleArn = UpdateSpaceInput.AddMember("roleArn", _Arn)
-
-	UpdateSpaceInput_supportedEmailDomains = UpdateSpaceInput.AddMember("supportedEmailDomains", SupportedEmailDomainsParameters)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Retry-After"}}, DirectMask: 0x80}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var m_AccessorIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AccessorIdList_member}}
+var m_AllowedDomainsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AllowedDomainsList_member}}
+var mBatchError = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchError_accessorId, &sBatchError_error, &sBatchError_message}}
+var m_BatchErrorList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchErrorList_member}}
+var mChannelData = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelData_spaceId, &sChannelData_channelId, &sChannelData_channelName, &sChannelData_channelDescription, &sChannelData_createDateTime, &sChannelData_deleteDateTime, &sChannelData_channelStatus, &sChannelData_userCount, &sChannelData_groupCount}, Seed: 4, Slots: []uint16{
+	0, 8, 1, 0, 0, 0, 7, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 2, 3, 0, 0,
+	5, 6, 0, 0, 0, 0, 0, 9,
+}}
+var mChannelRole = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelRole_ASKER, &sChannelRole_EXPERT, &sChannelRole_MODERATOR, &sChannelRole_SUPPORTREQUESTOR}}
+var m_ChannelRoleList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ChannelRoleList_member}}
+var m_ChannelRoles = smithy.SchemaMembers{List: []*smithy.Schema{&s_ChannelRoles_key, &s_ChannelRoles_value}}
+var m_ChannelsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ChannelsList_member}}
+var mChannelStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelStatus_CREATED, &sChannelStatus_CREATING, &sChannelStatus_CREATE_FAILED, &sChannelStatus_DELETED, &sChannelStatus_DELETING, &sChannelStatus_DELETE_FAILED}}
+var mConfigurationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sConfigurationStatus_CONFIGURED, &sConfigurationStatus_UNCONFIGURED}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message, &sConflictException_resourceId, &sConflictException_resourceType}}
+var mFeatureEnableParameter = smithy.SchemaMembers{List: []*smithy.Schema{&sFeatureEnableParameter_ENABLED, &sFeatureEnableParameter_DISABLED}}
+var mFeatureEnableStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sFeatureEnableStatus_ENABLED, &sFeatureEnableStatus_DISABLED, &sFeatureEnableStatus_NOT_ALLOWED}}
+var m_GroupAdmins = smithy.SchemaMembers{List: []*smithy.Schema{&s_GroupAdmins_member}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message, &sInternalServerException_retryAfterSeconds}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message, &sResourceNotFoundException_resourceId, &sResourceNotFoundException_resourceType}}
+var mRole = smithy.SchemaMembers{List: []*smithy.Schema{&sRole_EXPERT, &sRole_MODERATOR, &sRole_ADMINISTRATOR, &sRole_SUPPORTREQUESTOR}}
+var m_RoleList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RoleList_member}}
+var m_Roles = smithy.SchemaMembers{List: []*smithy.Schema{&s_Roles_key, &s_Roles_value}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message, &sServiceQuotaExceededException_resourceId, &sServiceQuotaExceededException_resourceType, &sServiceQuotaExceededException_serviceCode, &sServiceQuotaExceededException_quotaCode}}
+var mSpaceData = smithy.SchemaMembers{List: []*smithy.Schema{&sSpaceData_spaceId, &sSpaceData_arn, &sSpaceData_name, &sSpaceData_description, &sSpaceData_status, &sSpaceData_configurationStatus, &sSpaceData_vanityDomainStatus, &sSpaceData_vanityDomain, &sSpaceData_randomDomain, &sSpaceData_tier, &sSpaceData_storageLimit, &sSpaceData_createDateTime, &sSpaceData_deleteDateTime, &sSpaceData_userKMSKey, &sSpaceData_userCount, &sSpaceData_contentSize, &sSpaceData_supportedEmailDomains}, Seed: 5, Slots: []uint16{
+	0, 2, 0, 0, 5, 12, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	9, 0, 0, 15, 10, 0, 1, 0, 4, 0, 0, 0, 0, 0, 0, 0, 14, 0, 11, 6, 0, 0, 0, 8,
+	0, 0, 0, 0, 0, 0, 13, 0, 0, 0, 0, 16, 17, 0, 0, 3,
+}}
+var m_SpacesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SpacesList_member}}
+var mSupportedEmailDomainsParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sSupportedEmailDomainsParameters_enabled, &sSupportedEmailDomainsParameters_allowedDomains}}
+var mSupportedEmailDomainsStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sSupportedEmailDomainsStatus_enabled, &sSupportedEmailDomainsStatus_allowedDomains}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_Tags = smithy.SchemaMembers{List: []*smithy.Schema{&s_Tags_key, &s_Tags_value}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message, &sThrottlingException_serviceCode, &sThrottlingException_quotaCode, &sThrottlingException_retryAfterSeconds}}
+var mTierLevel = smithy.SchemaMembers{List: []*smithy.Schema{&sTierLevel_BASIC, &sTierLevel_STANDARD}}
+var m_UserAdmins = smithy.SchemaMembers{List: []*smithy.Schema{&s_UserAdmins_member}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message, &sValidationException_reason, &sValidationException_fieldList}}
+var mValidationExceptionField = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionField_name, &sValidationExceptionField_message}}
+var m_ValidationExceptionFieldList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ValidationExceptionFieldList_member}}
+var mValidationExceptionReason = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionReason_UNKNOWN_OPERATION, &sValidationExceptionReason_CANNOT_PARSE, &sValidationExceptionReason_FIELD_VALIDATION_FAILED, &sValidationExceptionReason_OTHER}}
+var mVanityDomainStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sVanityDomainStatus_PENDING, &sVanityDomainStatus_APPROVED, &sVanityDomainStatus_UNAPPROVED}}
+var mBatchAddChannelRoleToAccessorsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchAddChannelRoleToAccessorsInput_spaceId, &sBatchAddChannelRoleToAccessorsInput_channelId, &sBatchAddChannelRoleToAccessorsInput_accessorIds, &sBatchAddChannelRoleToAccessorsInput_channelRole}}
+var mBatchAddChannelRoleToAccessorsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchAddChannelRoleToAccessorsOutput_addedAccessorIds, &sBatchAddChannelRoleToAccessorsOutput_errors}}
+var mBatchAddRoleInput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchAddRoleInput_spaceId, &sBatchAddRoleInput_accessorIds, &sBatchAddRoleInput_role}}
+var mBatchAddRoleOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchAddRoleOutput_addedAccessorIds, &sBatchAddRoleOutput_errors}}
+var mBatchRemoveChannelRoleFromAccessorsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchRemoveChannelRoleFromAccessorsInput_spaceId, &sBatchRemoveChannelRoleFromAccessorsInput_channelId, &sBatchRemoveChannelRoleFromAccessorsInput_accessorIds, &sBatchRemoveChannelRoleFromAccessorsInput_channelRole}}
+var mBatchRemoveChannelRoleFromAccessorsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchRemoveChannelRoleFromAccessorsOutput_removedAccessorIds, &sBatchRemoveChannelRoleFromAccessorsOutput_errors}}
+var mBatchRemoveRoleInput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchRemoveRoleInput_spaceId, &sBatchRemoveRoleInput_accessorIds, &sBatchRemoveRoleInput_role}}
+var mBatchRemoveRoleOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchRemoveRoleOutput_removedAccessorIds, &sBatchRemoveRoleOutput_errors}}
+var mCreateChannelInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateChannelInput_spaceId, &sCreateChannelInput_channelName, &sCreateChannelInput_channelDescription}}
+var mCreateChannelOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateChannelOutput_channelId}}
+var mCreateSpaceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSpaceInput_name, &sCreateSpaceInput_subdomain, &sCreateSpaceInput_tier, &sCreateSpaceInput_description, &sCreateSpaceInput_userKMSKey, &sCreateSpaceInput_tags, &sCreateSpaceInput_roleArn, &sCreateSpaceInput_supportedEmailDomains}}
+var mCreateSpaceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSpaceOutput_spaceId}}
+var mDeleteSpaceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSpaceInput_spaceId}}
+var mDeregisterAdminInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeregisterAdminInput_spaceId, &sDeregisterAdminInput_adminId}}
+var mGetChannelInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetChannelInput_spaceId, &sGetChannelInput_channelId}}
+var mGetChannelOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetChannelOutput_spaceId, &sGetChannelOutput_channelId, &sGetChannelOutput_channelName, &sGetChannelOutput_channelDescription, &sGetChannelOutput_createDateTime, &sGetChannelOutput_deleteDateTime, &sGetChannelOutput_channelRoles, &sGetChannelOutput_channelStatus}}
+var mGetSpaceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSpaceInput_spaceId}}
+var mGetSpaceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSpaceOutput_spaceId, &sGetSpaceOutput_arn, &sGetSpaceOutput_name, &sGetSpaceOutput_status, &sGetSpaceOutput_configurationStatus, &sGetSpaceOutput_clientId, &sGetSpaceOutput_identityStoreId, &sGetSpaceOutput_applicationArn, &sGetSpaceOutput_description, &sGetSpaceOutput_vanityDomainStatus, &sGetSpaceOutput_vanityDomain, &sGetSpaceOutput_randomDomain, &sGetSpaceOutput_customerRoleArn, &sGetSpaceOutput_createDateTime, &sGetSpaceOutput_deleteDateTime, &sGetSpaceOutput_tier, &sGetSpaceOutput_storageLimit, &sGetSpaceOutput_userAdmins, &sGetSpaceOutput_groupAdmins, &sGetSpaceOutput_roles, &sGetSpaceOutput_userKMSKey, &sGetSpaceOutput_userCount, &sGetSpaceOutput_contentSize, &sGetSpaceOutput_supportedEmailDomains}, Seed: 14, Slots: []uint16{
+	0, 0, 0, 0, 0, 14, 0, 2, 21, 13, 4, 0, 0, 3, 0, 0, 1, 17, 19, 0, 0, 0, 5, 0,
+	0, 0, 0, 16, 0, 9, 7, 18, 6, 0, 12, 0, 0, 24, 23, 0, 0, 0, 8, 0, 0, 0, 0, 0,
+	0, 10, 11, 0, 0, 0, 20, 0, 0, 0, 0, 15, 0, 22, 0, 0,
+}}
+var mListChannelsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListChannelsInput_spaceId, &sListChannelsInput_nextToken, &sListChannelsInput_maxResults}}
+var mListChannelsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListChannelsOutput_channels, &sListChannelsOutput_nextToken}}
+var mListSpacesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListSpacesInput_nextToken, &sListSpacesInput_maxResults}}
+var mListSpacesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListSpacesOutput_spaces, &sListSpacesOutput_nextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_resourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_tags}}
+var mRegisterAdminInput = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisterAdminInput_spaceId, &sRegisterAdminInput_adminId}}
+var mSendInvitesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sSendInvitesInput_spaceId, &sSendInvitesInput_accessorIds, &sSendInvitesInput_title, &sSendInvitesInput_body}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_resourceArn, &sTagResourceRequest_tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_resourceArn, &sUntagResourceRequest_tagKeys}}
+var mUpdateChannelInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateChannelInput_spaceId, &sUpdateChannelInput_channelId, &sUpdateChannelInput_channelName, &sUpdateChannelInput_channelDescription}}
+var mUpdateSpaceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSpaceInput_spaceId, &sUpdateSpaceInput_description, &sUpdateSpaceInput_tier, &sUpdateSpaceInput_roleArn, &sUpdateSpaceInput_supportedEmailDomains}}
+
+var sBatchAddChannelRoleToAccessors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchAddChannelRoleToAccessors, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sBatchAddRole = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchAddRole, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sBatchRemoveChannelRoleFromAccessors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchRemoveChannelRoleFromAccessors, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sBatchRemoveRole = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchRemoveRole, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sCreateChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannel, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sCreateSpace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSpace, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var sDeleteSpace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSpace, Traits: &t6, Type: smithy.ShapeTypeOperation})
+var sDeregisterAdmin = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterAdmin, Traits: &t7, Type: smithy.ShapeTypeOperation})
+var sGetChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChannel, Traits: &t8, Type: smithy.ShapeTypeOperation})
+var sGetSpace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSpace, Traits: &t9, Type: smithy.ShapeTypeOperation})
+var sListChannels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannels, Traits: &t10, Type: smithy.ShapeTypeOperation})
+var sListSpaces = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSpaces, Traits: &t11, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t12, Type: smithy.ShapeTypeOperation})
+var sRegisterAdmin = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterAdmin, Traits: &t13, Type: smithy.ShapeTypeOperation})
+var sSendInvites = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendInvites, Traits: &t14, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t15, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t16, Type: smithy.ShapeTypeOperation})
+var sUpdateChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChannel, Traits: &t17, Type: smithy.ShapeTypeOperation})
+var sUpdateSpace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSpace, Traits: &t18, Type: smithy.ShapeTypeOperation})
+var s_RepostSpace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepostSpace, Type: smithy.ShapeTypeService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t19, Type: smithy.ShapeTypeStructure})
+var s_AccessorId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessorId, Type: smithy.ShapeTypeString})
+var s_AccessorIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessorIdList, Members: &m_AccessorIdList, Type: smithy.ShapeTypeList})
+var s_AdminId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AdminId, Type: smithy.ShapeTypeString})
+var s_AllowedDomainsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AllowedDomainsList, Members: &m_AllowedDomainsList, Type: smithy.ShapeTypeList})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sBatchError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchError, Members: &mBatchError, Type: smithy.ShapeTypeStructure})
+var s_BatchErrorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchErrorList, Members: &m_BatchErrorList, Type: smithy.ShapeTypeList})
+var sChannelData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelData, Members: &mChannelData, Type: smithy.ShapeTypeStructure})
+var s_ChannelDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelDescription, Traits: &t22, Type: smithy.ShapeTypeString})
+var s_ChannelId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelId, Type: smithy.ShapeTypeString})
+var s_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelName, Traits: &t22, Type: smithy.ShapeTypeString})
+var sChannelRole = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelRole, Members: &mChannelRole, Type: smithy.ShapeTypeEnum})
+var s_ChannelRoleList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelRoleList, Members: &m_ChannelRoleList, Type: smithy.ShapeTypeList})
+var s_ChannelRoles = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelRoles, Members: &m_ChannelRoles, Type: smithy.ShapeTypeMap})
+var s_ChannelsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelsList, Members: &m_ChannelsList, Type: smithy.ShapeTypeList})
+var sChannelStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelStatus, Members: &mChannelStatus, Type: smithy.ShapeTypeEnum})
+var s_ClientId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientId, Type: smithy.ShapeTypeString})
+var sConfigurationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigurationStatus, Members: &mConfigurationStatus, Type: smithy.ShapeTypeEnum})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t23, Type: smithy.ShapeTypeStructure})
+var s_ContentSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContentSize, Type: smithy.ShapeTypeLong})
+var s_EmailDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EmailDomain, Traits: &t22, Type: smithy.ShapeTypeString})
+var s_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorCode, Type: smithy.ShapeTypeInteger})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sFeatureEnableParameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFeatureEnableParameter, Members: &mFeatureEnableParameter, Type: smithy.ShapeTypeEnum})
+var sFeatureEnableStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFeatureEnableStatus, Members: &mFeatureEnableStatus, Type: smithy.ShapeTypeEnum})
+var s_GroupAdmins = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GroupAdmins, Members: &m_GroupAdmins, Type: smithy.ShapeTypeList})
+var s_GroupCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GroupCount, Type: smithy.ShapeTypeInteger})
+var s_IdentityStoreId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdentityStoreId, Type: smithy.ShapeTypeString})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t24, Type: smithy.ShapeTypeStructure})
+var s_InviteBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InviteBody, Traits: &t22, Type: smithy.ShapeTypeString})
+var s_InviteTitle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InviteTitle, Traits: &t22, Type: smithy.ShapeTypeString})
+var s_KMSKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KMSKey, Type: smithy.ShapeTypeString})
+var s_ListChannelsLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListChannelsLimit, Type: smithy.ShapeTypeInteger})
+var s_ListSpacesLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListSpacesLimit, Type: smithy.ShapeTypeInteger})
+var s_ProvisioningStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProvisioningStatus, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t26, Type: smithy.ShapeTypeStructure})
+var sRole = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRole, Members: &mRole, Type: smithy.ShapeTypeEnum})
+var s_RoleList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleList, Members: &m_RoleList, Type: smithy.ShapeTypeList})
+var s_Roles = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Roles, Members: &m_Roles, Type: smithy.ShapeTypeMap})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t27, Type: smithy.ShapeTypeStructure})
+var sSpaceData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSpaceData, Members: &mSpaceData, Type: smithy.ShapeTypeStructure})
+var s_SpaceDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SpaceDescription, Traits: &t22, Type: smithy.ShapeTypeString})
+var s_SpaceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SpaceId, Type: smithy.ShapeTypeString})
+var s_SpaceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SpaceName, Traits: &t22, Type: smithy.ShapeTypeString})
+var s_SpacesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SpacesList, Members: &m_SpacesList, Type: smithy.ShapeTypeList})
+var s_SpaceSubdomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SpaceSubdomain, Type: smithy.ShapeTypeString})
+var s_StorageLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StorageLimit, Type: smithy.ShapeTypeLong})
+var sSupportedEmailDomainsParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSupportedEmailDomainsParameters, Members: &mSupportedEmailDomainsParameters, Type: smithy.ShapeTypeStructure})
+var sSupportedEmailDomainsStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSupportedEmailDomainsStatus, Members: &mSupportedEmailDomainsStatus, Type: smithy.ShapeTypeStructure})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Traits: &t22, Type: smithy.ShapeTypeMap})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t28, Type: smithy.ShapeTypeStructure})
+var sTierLevel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTierLevel, Members: &mTierLevel, Type: smithy.ShapeTypeEnum})
+var s_Url = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Url, Type: smithy.ShapeTypeString})
+var s_UserAdmins = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserAdmins, Members: &m_UserAdmins, Type: smithy.ShapeTypeList})
+var s_UserCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserCount, Type: smithy.ShapeTypeInteger})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t29, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure})
+var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList})
+var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum})
+var sVanityDomainStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVanityDomainStatus, Members: &mVanityDomainStatus, Type: smithy.ShapeTypeEnum})
+var sBatchAddChannelRoleToAccessorsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchAddChannelRoleToAccessorsInput, Members: &mBatchAddChannelRoleToAccessorsInput, Type: smithy.ShapeTypeStructure})
+var sBatchAddChannelRoleToAccessorsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchAddChannelRoleToAccessorsOutput, Members: &mBatchAddChannelRoleToAccessorsOutput, Type: smithy.ShapeTypeStructure})
+var sBatchAddRoleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchAddRoleInput, Members: &mBatchAddRoleInput, Type: smithy.ShapeTypeStructure})
+var sBatchAddRoleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchAddRoleOutput, Members: &mBatchAddRoleOutput, Type: smithy.ShapeTypeStructure})
+var sBatchRemoveChannelRoleFromAccessorsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchRemoveChannelRoleFromAccessorsInput, Members: &mBatchRemoveChannelRoleFromAccessorsInput, Type: smithy.ShapeTypeStructure})
+var sBatchRemoveChannelRoleFromAccessorsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchRemoveChannelRoleFromAccessorsOutput, Members: &mBatchRemoveChannelRoleFromAccessorsOutput, Type: smithy.ShapeTypeStructure})
+var sBatchRemoveRoleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchRemoveRoleInput, Members: &mBatchRemoveRoleInput, Type: smithy.ShapeTypeStructure})
+var sBatchRemoveRoleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchRemoveRoleOutput, Members: &mBatchRemoveRoleOutput, Type: smithy.ShapeTypeStructure})
+var sCreateChannelInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannelInput, Members: &mCreateChannelInput, Type: smithy.ShapeTypeStructure})
+var sCreateChannelOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannelOutput, Members: &mCreateChannelOutput, Type: smithy.ShapeTypeStructure})
+var sCreateSpaceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSpaceInput, Members: &mCreateSpaceInput, Type: smithy.ShapeTypeStructure})
+var sCreateSpaceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSpaceOutput, Members: &mCreateSpaceOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteSpaceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSpaceInput, Members: &mDeleteSpaceInput, Type: smithy.ShapeTypeStructure})
+var sDeregisterAdminInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterAdminInput, Members: &mDeregisterAdminInput, Type: smithy.ShapeTypeStructure})
+var sGetChannelInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChannelInput, Members: &mGetChannelInput, Type: smithy.ShapeTypeStructure})
+var sGetChannelOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChannelOutput, Members: &mGetChannelOutput, Type: smithy.ShapeTypeStructure})
+var sGetSpaceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSpaceInput, Members: &mGetSpaceInput, Type: smithy.ShapeTypeStructure})
+var sGetSpaceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSpaceOutput, Members: &mGetSpaceOutput, Type: smithy.ShapeTypeStructure})
+var sListChannelsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelsInput, Members: &mListChannelsInput, Type: smithy.ShapeTypeStructure})
+var sListChannelsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelsOutput, Members: &mListChannelsOutput, Type: smithy.ShapeTypeStructure})
+var sListSpacesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSpacesInput, Members: &mListSpacesInput, Type: smithy.ShapeTypeStructure})
+var sListSpacesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSpacesOutput, Members: &mListSpacesOutput, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure})
+var sRegisterAdminInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterAdminInput, Members: &mRegisterAdminInput, Type: smithy.ShapeTypeStructure})
+var sSendInvitesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendInvitesInput, Members: &mSendInvitesInput, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateChannelInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChannelInput, Members: &mUpdateChannelInput, Type: smithy.ShapeTypeStructure})
+var sUpdateChannelOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChannelOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateSpaceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSpaceInput, Members: &mUpdateSpaceInput, Type: smithy.ShapeTypeStructure})
+
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var s_AccessorIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AccessorId, Type: smithy.ShapeTypeString})
+var s_AllowedDomainsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_EmailDomain, Traits: &t20, Type: smithy.ShapeTypeString})
+var sBatchError_accessorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessorId", ID: &i_AccessorId, Type: smithy.ShapeTypeString})
+var sBatchError_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &i_ErrorCode, Type: smithy.ShapeTypeInteger})
+var sBatchError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_BatchErrorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchError, Members: &mBatchError, Type: smithy.ShapeTypeStructure})
+var sChannelData_spaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceId", ID: &i_SpaceId, Type: smithy.ShapeTypeString})
+var sChannelData_channelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelId", ID: &i_ChannelId, Type: smithy.ShapeTypeString})
+var sChannelData_channelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelName", ID: &i_ChannelName, Traits: &t20, Type: smithy.ShapeTypeString})
+var sChannelData_channelDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelDescription", ID: &i_ChannelDescription, Traits: &t20, Type: smithy.ShapeTypeString})
+var sChannelData_createDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createDateTime", ID: &pTimestamp, Traits: &t21, Type: smithy.ShapeTypeTimestamp})
+var sChannelData_deleteDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleteDateTime", ID: &pTimestamp, Traits: &t21, Type: smithy.ShapeTypeTimestamp})
+var sChannelData_channelStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelStatus", ID: &iChannelStatus, Members: &mChannelStatus, Type: smithy.ShapeTypeEnum})
+var sChannelData_userCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userCount", ID: &i_UserCount, Type: smithy.ShapeTypeInteger})
+var sChannelData_groupCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupCount", ID: &i_GroupCount, Type: smithy.ShapeTypeInteger})
+var sChannelRole_ASKER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASKER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChannelRole_EXPERT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPERT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChannelRole_MODERATOR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MODERATOR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChannelRole_SUPPORTREQUESTOR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUPPORTREQUESTOR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_ChannelRoleList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iChannelRole, Members: &mChannelRole, Type: smithy.ShapeTypeEnum})
+var s_ChannelRoles_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_AccessorId, Type: smithy.ShapeTypeString})
+var s_ChannelRoles_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ChannelRoleList, Members: &m_ChannelRoleList, Type: smithy.ShapeTypeList})
+var s_ChannelsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iChannelData, Members: &mChannelData, Type: smithy.ShapeTypeStructure})
+var sChannelStatus_CREATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChannelStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChannelStatus_CREATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChannelStatus_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChannelStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChannelStatus_DELETE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConfigurationStatus_CONFIGURED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONFIGURED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConfigurationStatus_UNCONFIGURED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNCONFIGURED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sConflictException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString})
+var sConflictException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString})
+var sFeatureEnableParameter_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFeatureEnableParameter_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFeatureEnableStatus_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFeatureEnableStatus_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFeatureEnableStatus_NOT_ALLOWED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_ALLOWED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_GroupAdmins_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AdminId, Type: smithy.ShapeTypeString})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sInternalServerException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &pInteger, Traits: &t25, Type: smithy.ShapeTypeInteger})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString})
+var sRole_EXPERT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPERT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRole_MODERATOR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MODERATOR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRole_ADMINISTRATOR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADMINISTRATOR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRole_SUPPORTREQUESTOR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUPPORTREQUESTOR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_RoleList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRole, Members: &mRole, Type: smithy.ShapeTypeEnum})
+var s_Roles_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_AccessorId, Type: smithy.ShapeTypeString})
+var s_Roles_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_RoleList, Members: &m_RoleList, Type: smithy.ShapeTypeList})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &pString, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &pString, Type: smithy.ShapeTypeString})
+var sSpaceData_spaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceId", ID: &i_SpaceId, Type: smithy.ShapeTypeString})
+var sSpaceData_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sSpaceData_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SpaceName, Traits: &t20, Type: smithy.ShapeTypeString})
+var sSpaceData_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_SpaceDescription, Traits: &t20, Type: smithy.ShapeTypeString})
+var sSpaceData_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_ProvisioningStatus, Type: smithy.ShapeTypeString})
+var sSpaceData_configurationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configurationStatus", ID: &iConfigurationStatus, Members: &mConfigurationStatus, Type: smithy.ShapeTypeEnum})
+var sSpaceData_vanityDomainStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vanityDomainStatus", ID: &iVanityDomainStatus, Members: &mVanityDomainStatus, Type: smithy.ShapeTypeEnum})
+var sSpaceData_vanityDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vanityDomain", ID: &i_Url, Type: smithy.ShapeTypeString})
+var sSpaceData_randomDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "randomDomain", ID: &i_Url, Type: smithy.ShapeTypeString})
+var sSpaceData_tier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tier", ID: &iTierLevel, Members: &mTierLevel, Type: smithy.ShapeTypeEnum})
+var sSpaceData_storageLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "storageLimit", ID: &i_StorageLimit, Type: smithy.ShapeTypeLong})
+var sSpaceData_createDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createDateTime", ID: &pTimestamp, Traits: &t21, Type: smithy.ShapeTypeTimestamp})
+var sSpaceData_deleteDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleteDateTime", ID: &pTimestamp, Traits: &t21, Type: smithy.ShapeTypeTimestamp})
+var sSpaceData_userKMSKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userKMSKey", ID: &i_KMSKey, Type: smithy.ShapeTypeString})
+var sSpaceData_userCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userCount", ID: &i_UserCount, Type: smithy.ShapeTypeInteger})
+var sSpaceData_contentSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentSize", ID: &i_ContentSize, Type: smithy.ShapeTypeLong})
+var sSpaceData_supportedEmailDomains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportedEmailDomains", ID: &iSupportedEmailDomainsStatus, Members: &mSupportedEmailDomainsStatus, Type: smithy.ShapeTypeStructure})
+var s_SpacesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSpaceData, Members: &mSpaceData, Type: smithy.ShapeTypeStructure})
+var sSupportedEmailDomainsParameters_enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabled", ID: &iFeatureEnableParameter, Members: &mFeatureEnableParameter, Type: smithy.ShapeTypeEnum})
+var sSupportedEmailDomainsParameters_allowedDomains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allowedDomains", ID: &i_AllowedDomainsList, Members: &m_AllowedDomainsList, Type: smithy.ShapeTypeList})
+var sSupportedEmailDomainsStatus_enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabled", ID: &iFeatureEnableStatus, Members: &mFeatureEnableStatus, Type: smithy.ShapeTypeEnum})
+var sSupportedEmailDomainsStatus_allowedDomains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allowedDomains", ID: &i_AllowedDomainsList, Members: &m_AllowedDomainsList, Type: smithy.ShapeTypeList})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_Tags_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_Tags_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sThrottlingException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &pString, Type: smithy.ShapeTypeString})
+var sThrottlingException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &pString, Type: smithy.ShapeTypeString})
+var sThrottlingException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &pInteger, Traits: &t25, Type: smithy.ShapeTypeInteger})
+var sTierLevel_BASIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BASIC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTierLevel_STANDARD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STANDARD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_UserAdmins_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AdminId, Type: smithy.ShapeTypeString})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sValidationException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum})
+var sValidationException_fieldList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldList", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList})
+var sValidationExceptionField_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString})
+var sValidationExceptionField_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionReason_UNKNOWN_OPERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN_OPERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionReason_CANNOT_PARSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANNOT_PARSE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionReason_FIELD_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIELD_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionReason_OTHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVanityDomainStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVanityDomainStatus_APPROVED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APPROVED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVanityDomainStatus_UNAPPROVED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNAPPROVED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBatchAddChannelRoleToAccessorsInput_spaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceId", ID: &i_SpaceId, Traits: &t30, Type: smithy.ShapeTypeString})
+var sBatchAddChannelRoleToAccessorsInput_channelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelId", ID: &i_ChannelId, Traits: &t30, Type: smithy.ShapeTypeString})
+var sBatchAddChannelRoleToAccessorsInput_accessorIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessorIds", ID: &i_AccessorIdList, Members: &m_AccessorIdList, Type: smithy.ShapeTypeList})
+var sBatchAddChannelRoleToAccessorsInput_channelRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelRole", ID: &iChannelRole, Members: &mChannelRole, Type: smithy.ShapeTypeEnum})
+var sBatchAddChannelRoleToAccessorsOutput_addedAccessorIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "addedAccessorIds", ID: &i_AccessorIdList, Members: &m_AccessorIdList, Type: smithy.ShapeTypeList})
+var sBatchAddChannelRoleToAccessorsOutput_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_BatchErrorList, Members: &m_BatchErrorList, Type: smithy.ShapeTypeList})
+var sBatchAddRoleInput_spaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceId", ID: &i_SpaceId, Traits: &t30, Type: smithy.ShapeTypeString})
+var sBatchAddRoleInput_accessorIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessorIds", ID: &i_AccessorIdList, Members: &m_AccessorIdList, Type: smithy.ShapeTypeList})
+var sBatchAddRoleInput_role = smithy.NewStaticSchema(smithy.StaticSchema{Member: "role", ID: &iRole, Members: &mRole, Type: smithy.ShapeTypeEnum})
+var sBatchAddRoleOutput_addedAccessorIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "addedAccessorIds", ID: &i_AccessorIdList, Members: &m_AccessorIdList, Type: smithy.ShapeTypeList})
+var sBatchAddRoleOutput_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_BatchErrorList, Members: &m_BatchErrorList, Type: smithy.ShapeTypeList})
+var sBatchRemoveChannelRoleFromAccessorsInput_spaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceId", ID: &i_SpaceId, Traits: &t30, Type: smithy.ShapeTypeString})
+var sBatchRemoveChannelRoleFromAccessorsInput_channelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelId", ID: &i_ChannelId, Traits: &t30, Type: smithy.ShapeTypeString})
+var sBatchRemoveChannelRoleFromAccessorsInput_accessorIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessorIds", ID: &i_AccessorIdList, Members: &m_AccessorIdList, Type: smithy.ShapeTypeList})
+var sBatchRemoveChannelRoleFromAccessorsInput_channelRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelRole", ID: &iChannelRole, Members: &mChannelRole, Type: smithy.ShapeTypeEnum})
+var sBatchRemoveChannelRoleFromAccessorsOutput_removedAccessorIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "removedAccessorIds", ID: &i_AccessorIdList, Members: &m_AccessorIdList, Type: smithy.ShapeTypeList})
+var sBatchRemoveChannelRoleFromAccessorsOutput_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_BatchErrorList, Members: &m_BatchErrorList, Type: smithy.ShapeTypeList})
+var sBatchRemoveRoleInput_spaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceId", ID: &i_SpaceId, Traits: &t30, Type: smithy.ShapeTypeString})
+var sBatchRemoveRoleInput_accessorIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessorIds", ID: &i_AccessorIdList, Members: &m_AccessorIdList, Type: smithy.ShapeTypeList})
+var sBatchRemoveRoleInput_role = smithy.NewStaticSchema(smithy.StaticSchema{Member: "role", ID: &iRole, Members: &mRole, Type: smithy.ShapeTypeEnum})
+var sBatchRemoveRoleOutput_removedAccessorIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "removedAccessorIds", ID: &i_AccessorIdList, Members: &m_AccessorIdList, Type: smithy.ShapeTypeList})
+var sBatchRemoveRoleOutput_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_BatchErrorList, Members: &m_BatchErrorList, Type: smithy.ShapeTypeList})
+var sCreateChannelInput_spaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceId", ID: &i_SpaceId, Traits: &t30, Type: smithy.ShapeTypeString})
+var sCreateChannelInput_channelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelName", ID: &i_ChannelName, Traits: &t20, Type: smithy.ShapeTypeString})
+var sCreateChannelInput_channelDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelDescription", ID: &i_ChannelDescription, Traits: &t20, Type: smithy.ShapeTypeString})
+var sCreateChannelOutput_channelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelId", ID: &i_ChannelId, Type: smithy.ShapeTypeString})
+var sCreateSpaceInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SpaceName, Traits: &t20, Type: smithy.ShapeTypeString})
+var sCreateSpaceInput_subdomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subdomain", ID: &i_SpaceSubdomain, Type: smithy.ShapeTypeString})
+var sCreateSpaceInput_tier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tier", ID: &iTierLevel, Members: &mTierLevel, Type: smithy.ShapeTypeEnum})
+var sCreateSpaceInput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_SpaceDescription, Traits: &t20, Type: smithy.ShapeTypeString})
+var sCreateSpaceInput_userKMSKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userKMSKey", ID: &i_KMSKey, Type: smithy.ShapeTypeString})
+var sCreateSpaceInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Traits: &t20, Type: smithy.ShapeTypeMap})
+var sCreateSpaceInput_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sCreateSpaceInput_supportedEmailDomains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportedEmailDomains", ID: &iSupportedEmailDomainsParameters, Members: &mSupportedEmailDomainsParameters, Type: smithy.ShapeTypeStructure})
+var sCreateSpaceOutput_spaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceId", ID: &i_SpaceId, Type: smithy.ShapeTypeString})
+var sDeleteSpaceInput_spaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceId", ID: &i_SpaceId, Traits: &t30, Type: smithy.ShapeTypeString})
+var sDeregisterAdminInput_spaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceId", ID: &i_SpaceId, Traits: &t30, Type: smithy.ShapeTypeString})
+var sDeregisterAdminInput_adminId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "adminId", ID: &i_AdminId, Traits: &t30, Type: smithy.ShapeTypeString})
+var sGetChannelInput_spaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceId", ID: &i_SpaceId, Traits: &t30, Type: smithy.ShapeTypeString})
+var sGetChannelInput_channelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelId", ID: &i_ChannelId, Traits: &t30, Type: smithy.ShapeTypeString})
+var sGetChannelOutput_spaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceId", ID: &i_SpaceId, Type: smithy.ShapeTypeString})
+var sGetChannelOutput_channelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelId", ID: &i_ChannelId, Type: smithy.ShapeTypeString})
+var sGetChannelOutput_channelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelName", ID: &i_ChannelName, Traits: &t20, Type: smithy.ShapeTypeString})
+var sGetChannelOutput_channelDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelDescription", ID: &i_ChannelDescription, Traits: &t20, Type: smithy.ShapeTypeString})
+var sGetChannelOutput_createDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createDateTime", ID: &pTimestamp, Traits: &t21, Type: smithy.ShapeTypeTimestamp})
+var sGetChannelOutput_deleteDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleteDateTime", ID: &pTimestamp, Traits: &t21, Type: smithy.ShapeTypeTimestamp})
+var sGetChannelOutput_channelRoles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelRoles", ID: &i_ChannelRoles, Members: &m_ChannelRoles, Type: smithy.ShapeTypeMap})
+var sGetChannelOutput_channelStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelStatus", ID: &iChannelStatus, Members: &mChannelStatus, Type: smithy.ShapeTypeEnum})
+var sGetSpaceInput_spaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceId", ID: &i_SpaceId, Traits: &t30, Type: smithy.ShapeTypeString})
+var sGetSpaceOutput_spaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceId", ID: &i_SpaceId, Type: smithy.ShapeTypeString})
+var sGetSpaceOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sGetSpaceOutput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SpaceName, Traits: &t20, Type: smithy.ShapeTypeString})
+var sGetSpaceOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_ProvisioningStatus, Type: smithy.ShapeTypeString})
+var sGetSpaceOutput_configurationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configurationStatus", ID: &iConfigurationStatus, Members: &mConfigurationStatus, Type: smithy.ShapeTypeEnum})
+var sGetSpaceOutput_clientId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientId", ID: &i_ClientId, Type: smithy.ShapeTypeString})
+var sGetSpaceOutput_identityStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identityStoreId", ID: &i_IdentityStoreId, Type: smithy.ShapeTypeString})
+var sGetSpaceOutput_applicationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "applicationArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sGetSpaceOutput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_SpaceDescription, Traits: &t20, Type: smithy.ShapeTypeString})
+var sGetSpaceOutput_vanityDomainStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vanityDomainStatus", ID: &iVanityDomainStatus, Members: &mVanityDomainStatus, Type: smithy.ShapeTypeEnum})
+var sGetSpaceOutput_vanityDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vanityDomain", ID: &i_Url, Type: smithy.ShapeTypeString})
+var sGetSpaceOutput_randomDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "randomDomain", ID: &i_Url, Type: smithy.ShapeTypeString})
+var sGetSpaceOutput_customerRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customerRoleArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sGetSpaceOutput_createDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createDateTime", ID: &pTimestamp, Traits: &t21, Type: smithy.ShapeTypeTimestamp})
+var sGetSpaceOutput_deleteDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleteDateTime", ID: &pTimestamp, Traits: &t21, Type: smithy.ShapeTypeTimestamp})
+var sGetSpaceOutput_tier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tier", ID: &iTierLevel, Members: &mTierLevel, Type: smithy.ShapeTypeEnum})
+var sGetSpaceOutput_storageLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "storageLimit", ID: &i_StorageLimit, Type: smithy.ShapeTypeLong})
+var sGetSpaceOutput_userAdmins = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userAdmins", ID: &i_UserAdmins, Members: &m_UserAdmins, Type: smithy.ShapeTypeList})
+var sGetSpaceOutput_groupAdmins = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupAdmins", ID: &i_GroupAdmins, Members: &m_GroupAdmins, Type: smithy.ShapeTypeList})
+var sGetSpaceOutput_roles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roles", ID: &i_Roles, Members: &m_Roles, Type: smithy.ShapeTypeMap})
+var sGetSpaceOutput_userKMSKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userKMSKey", ID: &i_KMSKey, Type: smithy.ShapeTypeString})
+var sGetSpaceOutput_userCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userCount", ID: &i_UserCount, Type: smithy.ShapeTypeInteger})
+var sGetSpaceOutput_contentSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentSize", ID: &i_ContentSize, Type: smithy.ShapeTypeLong})
+var sGetSpaceOutput_supportedEmailDomains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportedEmailDomains", ID: &iSupportedEmailDomainsStatus, Members: &mSupportedEmailDomainsStatus, Type: smithy.ShapeTypeStructure})
+var sListChannelsInput_spaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceId", ID: &i_SpaceId, Traits: &t30, Type: smithy.ShapeTypeString})
+var sListChannelsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t31, Type: smithy.ShapeTypeString})
+var sListChannelsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListChannelsLimit, Traits: &t32, Type: smithy.ShapeTypeInteger})
+var sListChannelsOutput_channels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channels", ID: &i_ChannelsList, Members: &m_ChannelsList, Type: smithy.ShapeTypeList})
+var sListChannelsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListSpacesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t31, Type: smithy.ShapeTypeString})
+var sListSpacesInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListSpacesLimit, Traits: &t32, Type: smithy.ShapeTypeInteger})
+var sListSpacesOutput_spaces = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaces", ID: &i_SpacesList, Members: &m_SpacesList, Type: smithy.ShapeTypeList})
+var sListSpacesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t30, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Traits: &t20, Type: smithy.ShapeTypeMap})
+var sRegisterAdminInput_spaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceId", ID: &i_SpaceId, Traits: &t30, Type: smithy.ShapeTypeString})
+var sRegisterAdminInput_adminId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "adminId", ID: &i_AdminId, Traits: &t30, Type: smithy.ShapeTypeString})
+var sSendInvitesInput_spaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceId", ID: &i_SpaceId, Traits: &t30, Type: smithy.ShapeTypeString})
+var sSendInvitesInput_accessorIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessorIds", ID: &i_AccessorIdList, Members: &m_AccessorIdList, Type: smithy.ShapeTypeList})
+var sSendInvitesInput_title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "title", ID: &i_InviteTitle, Traits: &t20, Type: smithy.ShapeTypeString})
+var sSendInvitesInput_body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "body", ID: &i_InviteBody, Traits: &t20, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t30, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Traits: &t20, Type: smithy.ShapeTypeMap})
+var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t30, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t33, Type: smithy.ShapeTypeList})
+var sUpdateChannelInput_spaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceId", ID: &i_SpaceId, Traits: &t30, Type: smithy.ShapeTypeString})
+var sUpdateChannelInput_channelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelId", ID: &i_ChannelId, Traits: &t30, Type: smithy.ShapeTypeString})
+var sUpdateChannelInput_channelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelName", ID: &i_ChannelName, Traits: &t20, Type: smithy.ShapeTypeString})
+var sUpdateChannelInput_channelDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channelDescription", ID: &i_ChannelDescription, Traits: &t20, Type: smithy.ShapeTypeString})
+var sUpdateSpaceInput_spaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spaceId", ID: &i_SpaceId, Traits: &t30, Type: smithy.ShapeTypeString})
+var sUpdateSpaceInput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_SpaceDescription, Traits: &t20, Type: smithy.ShapeTypeString})
+var sUpdateSpaceInput_tier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tier", ID: &iTierLevel, Members: &mTierLevel, Type: smithy.ShapeTypeEnum})
+var sUpdateSpaceInput_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sUpdateSpaceInput_supportedEmailDomains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportedEmailDomains", ID: &iSupportedEmailDomainsParameters, Members: &mSupportedEmailDomainsParameters, Type: smithy.ShapeTypeStructure})
+
+var BatchAddChannelRoleToAccessors = &sBatchAddChannelRoleToAccessors
+
+var BatchAddRole = &sBatchAddRole
+
+var BatchRemoveChannelRoleFromAccessors = &sBatchRemoveChannelRoleFromAccessors
+
+var BatchRemoveRole = &sBatchRemoveRole
+
+var CreateChannel = &sCreateChannel
+
+var CreateSpace = &sCreateSpace
+
+var DeleteSpace = &sDeleteSpace
+
+var DeregisterAdmin = &sDeregisterAdmin
+
+var GetChannel = &sGetChannel
+
+var GetSpace = &sGetSpace
+
+var ListChannels = &sListChannels
+
+var ListSpaces = &sListSpaces
+
+var ListTagsForResource = &sListTagsForResource
+
+var RegisterAdmin = &sRegisterAdmin
+
+var SendInvites = &sSendInvites
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateChannel = &sUpdateChannel
+
+var UpdateSpace = &sUpdateSpace
+
+var _RepostSpace = &s_RepostSpace
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var _AccessorId = &s_AccessorId
+
+var _AccessorIdList = &s_AccessorIdList
+var _AccessorIdList_member = &s_AccessorIdList_member
+
+var _AdminId = &s_AdminId
+
+var _AllowedDomainsList = &s_AllowedDomainsList
+var _AllowedDomainsList_member = &s_AllowedDomainsList_member
+
+var _Arn = &s_Arn
+
+var BatchError = &sBatchError
+var BatchError_accessorId = &sBatchError_accessorId
+var BatchError_error = &sBatchError_error
+var BatchError_message = &sBatchError_message
+
+var _BatchErrorList = &s_BatchErrorList
+var _BatchErrorList_member = &s_BatchErrorList_member
+
+var ChannelData = &sChannelData
+var ChannelData_spaceId = &sChannelData_spaceId
+var ChannelData_channelId = &sChannelData_channelId
+var ChannelData_channelName = &sChannelData_channelName
+var ChannelData_channelDescription = &sChannelData_channelDescription
+var ChannelData_createDateTime = &sChannelData_createDateTime
+var ChannelData_deleteDateTime = &sChannelData_deleteDateTime
+var ChannelData_channelStatus = &sChannelData_channelStatus
+var ChannelData_userCount = &sChannelData_userCount
+var ChannelData_groupCount = &sChannelData_groupCount
+
+var _ChannelDescription = &s_ChannelDescription
+
+var _ChannelId = &s_ChannelId
+
+var _ChannelName = &s_ChannelName
+
+var ChannelRole = &sChannelRole
+var ChannelRole_ASKER = &sChannelRole_ASKER
+var ChannelRole_EXPERT = &sChannelRole_EXPERT
+var ChannelRole_MODERATOR = &sChannelRole_MODERATOR
+var ChannelRole_SUPPORTREQUESTOR = &sChannelRole_SUPPORTREQUESTOR
+
+var _ChannelRoleList = &s_ChannelRoleList
+var _ChannelRoleList_member = &s_ChannelRoleList_member
+
+var _ChannelRoles = &s_ChannelRoles
+var _ChannelRoles_key = &s_ChannelRoles_key
+var _ChannelRoles_value = &s_ChannelRoles_value
+
+var _ChannelsList = &s_ChannelsList
+var _ChannelsList_member = &s_ChannelsList_member
+
+var ChannelStatus = &sChannelStatus
+var ChannelStatus_CREATED = &sChannelStatus_CREATED
+var ChannelStatus_CREATING = &sChannelStatus_CREATING
+var ChannelStatus_CREATE_FAILED = &sChannelStatus_CREATE_FAILED
+var ChannelStatus_DELETED = &sChannelStatus_DELETED
+var ChannelStatus_DELETING = &sChannelStatus_DELETING
+var ChannelStatus_DELETE_FAILED = &sChannelStatus_DELETE_FAILED
+
+var _ClientId = &s_ClientId
+
+var ConfigurationStatus = &sConfigurationStatus
+var ConfigurationStatus_CONFIGURED = &sConfigurationStatus_CONFIGURED
+var ConfigurationStatus_UNCONFIGURED = &sConfigurationStatus_UNCONFIGURED
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+var ConflictException_resourceId = &sConflictException_resourceId
+var ConflictException_resourceType = &sConflictException_resourceType
+
+var _ContentSize = &s_ContentSize
+
+var _EmailDomain = &s_EmailDomain
+
+var _ErrorCode = &s_ErrorCode
+
+var _ErrorMessage = &s_ErrorMessage
+
+var FeatureEnableParameter = &sFeatureEnableParameter
+var FeatureEnableParameter_ENABLED = &sFeatureEnableParameter_ENABLED
+var FeatureEnableParameter_DISABLED = &sFeatureEnableParameter_DISABLED
+
+var FeatureEnableStatus = &sFeatureEnableStatus
+var FeatureEnableStatus_ENABLED = &sFeatureEnableStatus_ENABLED
+var FeatureEnableStatus_DISABLED = &sFeatureEnableStatus_DISABLED
+var FeatureEnableStatus_NOT_ALLOWED = &sFeatureEnableStatus_NOT_ALLOWED
+
+var _GroupAdmins = &s_GroupAdmins
+var _GroupAdmins_member = &s_GroupAdmins_member
+
+var _GroupCount = &s_GroupCount
+
+var _IdentityStoreId = &s_IdentityStoreId
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+var InternalServerException_retryAfterSeconds = &sInternalServerException_retryAfterSeconds
+
+var _InviteBody = &s_InviteBody
+
+var _InviteTitle = &s_InviteTitle
+
+var _KMSKey = &s_KMSKey
+
+var _ListChannelsLimit = &s_ListChannelsLimit
+
+var _ListSpacesLimit = &s_ListSpacesLimit
+
+var _ProvisioningStatus = &s_ProvisioningStatus
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+var ResourceNotFoundException_resourceId = &sResourceNotFoundException_resourceId
+var ResourceNotFoundException_resourceType = &sResourceNotFoundException_resourceType
+
+var Role = &sRole
+var Role_EXPERT = &sRole_EXPERT
+var Role_MODERATOR = &sRole_MODERATOR
+var Role_ADMINISTRATOR = &sRole_ADMINISTRATOR
+var Role_SUPPORTREQUESTOR = &sRole_SUPPORTREQUESTOR
+
+var _RoleList = &s_RoleList
+var _RoleList_member = &s_RoleList_member
+
+var _Roles = &s_Roles
+var _Roles_key = &s_Roles_key
+var _Roles_value = &s_Roles_value
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+var ServiceQuotaExceededException_resourceId = &sServiceQuotaExceededException_resourceId
+var ServiceQuotaExceededException_resourceType = &sServiceQuotaExceededException_resourceType
+var ServiceQuotaExceededException_serviceCode = &sServiceQuotaExceededException_serviceCode
+var ServiceQuotaExceededException_quotaCode = &sServiceQuotaExceededException_quotaCode
+
+var SpaceData = &sSpaceData
+var SpaceData_spaceId = &sSpaceData_spaceId
+var SpaceData_arn = &sSpaceData_arn
+var SpaceData_name = &sSpaceData_name
+var SpaceData_description = &sSpaceData_description
+var SpaceData_status = &sSpaceData_status
+var SpaceData_configurationStatus = &sSpaceData_configurationStatus
+var SpaceData_vanityDomainStatus = &sSpaceData_vanityDomainStatus
+var SpaceData_vanityDomain = &sSpaceData_vanityDomain
+var SpaceData_randomDomain = &sSpaceData_randomDomain
+var SpaceData_tier = &sSpaceData_tier
+var SpaceData_storageLimit = &sSpaceData_storageLimit
+var SpaceData_createDateTime = &sSpaceData_createDateTime
+var SpaceData_deleteDateTime = &sSpaceData_deleteDateTime
+var SpaceData_userKMSKey = &sSpaceData_userKMSKey
+var SpaceData_userCount = &sSpaceData_userCount
+var SpaceData_contentSize = &sSpaceData_contentSize
+var SpaceData_supportedEmailDomains = &sSpaceData_supportedEmailDomains
+
+var _SpaceDescription = &s_SpaceDescription
+
+var _SpaceId = &s_SpaceId
+
+var _SpaceName = &s_SpaceName
+
+var _SpacesList = &s_SpacesList
+var _SpacesList_member = &s_SpacesList_member
+
+var _SpaceSubdomain = &s_SpaceSubdomain
+
+var _StorageLimit = &s_StorageLimit
+
+var SupportedEmailDomainsParameters = &sSupportedEmailDomainsParameters
+var SupportedEmailDomainsParameters_enabled = &sSupportedEmailDomainsParameters_enabled
+var SupportedEmailDomainsParameters_allowedDomains = &sSupportedEmailDomainsParameters_allowedDomains
+
+var SupportedEmailDomainsStatus = &sSupportedEmailDomainsStatus
+var SupportedEmailDomainsStatus_enabled = &sSupportedEmailDomainsStatus_enabled
+var SupportedEmailDomainsStatus_allowedDomains = &sSupportedEmailDomainsStatus_allowedDomains
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _Tags = &s_Tags
+var _Tags_key = &s_Tags_key
+var _Tags_value = &s_Tags_value
+
+var _TagValue = &s_TagValue
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+var ThrottlingException_serviceCode = &sThrottlingException_serviceCode
+var ThrottlingException_quotaCode = &sThrottlingException_quotaCode
+var ThrottlingException_retryAfterSeconds = &sThrottlingException_retryAfterSeconds
+
+var TierLevel = &sTierLevel
+var TierLevel_BASIC = &sTierLevel_BASIC
+var TierLevel_STANDARD = &sTierLevel_STANDARD
+
+var _Url = &s_Url
+
+var _UserAdmins = &s_UserAdmins
+var _UserAdmins_member = &s_UserAdmins_member
+
+var _UserCount = &s_UserCount
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+var ValidationException_reason = &sValidationException_reason
+var ValidationException_fieldList = &sValidationException_fieldList
+
+var ValidationExceptionField = &sValidationExceptionField
+var ValidationExceptionField_name = &sValidationExceptionField_name
+var ValidationExceptionField_message = &sValidationExceptionField_message
+
+var _ValidationExceptionFieldList = &s_ValidationExceptionFieldList
+var _ValidationExceptionFieldList_member = &s_ValidationExceptionFieldList_member
+
+var ValidationExceptionReason = &sValidationExceptionReason
+var ValidationExceptionReason_UNKNOWN_OPERATION = &sValidationExceptionReason_UNKNOWN_OPERATION
+var ValidationExceptionReason_CANNOT_PARSE = &sValidationExceptionReason_CANNOT_PARSE
+var ValidationExceptionReason_FIELD_VALIDATION_FAILED = &sValidationExceptionReason_FIELD_VALIDATION_FAILED
+var ValidationExceptionReason_OTHER = &sValidationExceptionReason_OTHER
+
+var VanityDomainStatus = &sVanityDomainStatus
+var VanityDomainStatus_PENDING = &sVanityDomainStatus_PENDING
+var VanityDomainStatus_APPROVED = &sVanityDomainStatus_APPROVED
+var VanityDomainStatus_UNAPPROVED = &sVanityDomainStatus_UNAPPROVED
+
+var BatchAddChannelRoleToAccessorsInput = &sBatchAddChannelRoleToAccessorsInput
+var BatchAddChannelRoleToAccessorsInput_spaceId = &sBatchAddChannelRoleToAccessorsInput_spaceId
+var BatchAddChannelRoleToAccessorsInput_channelId = &sBatchAddChannelRoleToAccessorsInput_channelId
+var BatchAddChannelRoleToAccessorsInput_accessorIds = &sBatchAddChannelRoleToAccessorsInput_accessorIds
+var BatchAddChannelRoleToAccessorsInput_channelRole = &sBatchAddChannelRoleToAccessorsInput_channelRole
+
+var BatchAddChannelRoleToAccessorsOutput = &sBatchAddChannelRoleToAccessorsOutput
+var BatchAddChannelRoleToAccessorsOutput_addedAccessorIds = &sBatchAddChannelRoleToAccessorsOutput_addedAccessorIds
+var BatchAddChannelRoleToAccessorsOutput_errors = &sBatchAddChannelRoleToAccessorsOutput_errors
+
+var BatchAddRoleInput = &sBatchAddRoleInput
+var BatchAddRoleInput_spaceId = &sBatchAddRoleInput_spaceId
+var BatchAddRoleInput_accessorIds = &sBatchAddRoleInput_accessorIds
+var BatchAddRoleInput_role = &sBatchAddRoleInput_role
+
+var BatchAddRoleOutput = &sBatchAddRoleOutput
+var BatchAddRoleOutput_addedAccessorIds = &sBatchAddRoleOutput_addedAccessorIds
+var BatchAddRoleOutput_errors = &sBatchAddRoleOutput_errors
+
+var BatchRemoveChannelRoleFromAccessorsInput = &sBatchRemoveChannelRoleFromAccessorsInput
+var BatchRemoveChannelRoleFromAccessorsInput_spaceId = &sBatchRemoveChannelRoleFromAccessorsInput_spaceId
+var BatchRemoveChannelRoleFromAccessorsInput_channelId = &sBatchRemoveChannelRoleFromAccessorsInput_channelId
+var BatchRemoveChannelRoleFromAccessorsInput_accessorIds = &sBatchRemoveChannelRoleFromAccessorsInput_accessorIds
+var BatchRemoveChannelRoleFromAccessorsInput_channelRole = &sBatchRemoveChannelRoleFromAccessorsInput_channelRole
+
+var BatchRemoveChannelRoleFromAccessorsOutput = &sBatchRemoveChannelRoleFromAccessorsOutput
+var BatchRemoveChannelRoleFromAccessorsOutput_removedAccessorIds = &sBatchRemoveChannelRoleFromAccessorsOutput_removedAccessorIds
+var BatchRemoveChannelRoleFromAccessorsOutput_errors = &sBatchRemoveChannelRoleFromAccessorsOutput_errors
+
+var BatchRemoveRoleInput = &sBatchRemoveRoleInput
+var BatchRemoveRoleInput_spaceId = &sBatchRemoveRoleInput_spaceId
+var BatchRemoveRoleInput_accessorIds = &sBatchRemoveRoleInput_accessorIds
+var BatchRemoveRoleInput_role = &sBatchRemoveRoleInput_role
+
+var BatchRemoveRoleOutput = &sBatchRemoveRoleOutput
+var BatchRemoveRoleOutput_removedAccessorIds = &sBatchRemoveRoleOutput_removedAccessorIds
+var BatchRemoveRoleOutput_errors = &sBatchRemoveRoleOutput_errors
+
+var CreateChannelInput = &sCreateChannelInput
+var CreateChannelInput_spaceId = &sCreateChannelInput_spaceId
+var CreateChannelInput_channelName = &sCreateChannelInput_channelName
+var CreateChannelInput_channelDescription = &sCreateChannelInput_channelDescription
+
+var CreateChannelOutput = &sCreateChannelOutput
+var CreateChannelOutput_channelId = &sCreateChannelOutput_channelId
+
+var CreateSpaceInput = &sCreateSpaceInput
+var CreateSpaceInput_name = &sCreateSpaceInput_name
+var CreateSpaceInput_subdomain = &sCreateSpaceInput_subdomain
+var CreateSpaceInput_tier = &sCreateSpaceInput_tier
+var CreateSpaceInput_description = &sCreateSpaceInput_description
+var CreateSpaceInput_userKMSKey = &sCreateSpaceInput_userKMSKey
+var CreateSpaceInput_tags = &sCreateSpaceInput_tags
+var CreateSpaceInput_roleArn = &sCreateSpaceInput_roleArn
+var CreateSpaceInput_supportedEmailDomains = &sCreateSpaceInput_supportedEmailDomains
+
+var CreateSpaceOutput = &sCreateSpaceOutput
+var CreateSpaceOutput_spaceId = &sCreateSpaceOutput_spaceId
+
+var DeleteSpaceInput = &sDeleteSpaceInput
+var DeleteSpaceInput_spaceId = &sDeleteSpaceInput_spaceId
+
+var DeregisterAdminInput = &sDeregisterAdminInput
+var DeregisterAdminInput_spaceId = &sDeregisterAdminInput_spaceId
+var DeregisterAdminInput_adminId = &sDeregisterAdminInput_adminId
+
+var GetChannelInput = &sGetChannelInput
+var GetChannelInput_spaceId = &sGetChannelInput_spaceId
+var GetChannelInput_channelId = &sGetChannelInput_channelId
+
+var GetChannelOutput = &sGetChannelOutput
+var GetChannelOutput_spaceId = &sGetChannelOutput_spaceId
+var GetChannelOutput_channelId = &sGetChannelOutput_channelId
+var GetChannelOutput_channelName = &sGetChannelOutput_channelName
+var GetChannelOutput_channelDescription = &sGetChannelOutput_channelDescription
+var GetChannelOutput_createDateTime = &sGetChannelOutput_createDateTime
+var GetChannelOutput_deleteDateTime = &sGetChannelOutput_deleteDateTime
+var GetChannelOutput_channelRoles = &sGetChannelOutput_channelRoles
+var GetChannelOutput_channelStatus = &sGetChannelOutput_channelStatus
+
+var GetSpaceInput = &sGetSpaceInput
+var GetSpaceInput_spaceId = &sGetSpaceInput_spaceId
+
+var GetSpaceOutput = &sGetSpaceOutput
+var GetSpaceOutput_spaceId = &sGetSpaceOutput_spaceId
+var GetSpaceOutput_arn = &sGetSpaceOutput_arn
+var GetSpaceOutput_name = &sGetSpaceOutput_name
+var GetSpaceOutput_status = &sGetSpaceOutput_status
+var GetSpaceOutput_configurationStatus = &sGetSpaceOutput_configurationStatus
+var GetSpaceOutput_clientId = &sGetSpaceOutput_clientId
+var GetSpaceOutput_identityStoreId = &sGetSpaceOutput_identityStoreId
+var GetSpaceOutput_applicationArn = &sGetSpaceOutput_applicationArn
+var GetSpaceOutput_description = &sGetSpaceOutput_description
+var GetSpaceOutput_vanityDomainStatus = &sGetSpaceOutput_vanityDomainStatus
+var GetSpaceOutput_vanityDomain = &sGetSpaceOutput_vanityDomain
+var GetSpaceOutput_randomDomain = &sGetSpaceOutput_randomDomain
+var GetSpaceOutput_customerRoleArn = &sGetSpaceOutput_customerRoleArn
+var GetSpaceOutput_createDateTime = &sGetSpaceOutput_createDateTime
+var GetSpaceOutput_deleteDateTime = &sGetSpaceOutput_deleteDateTime
+var GetSpaceOutput_tier = &sGetSpaceOutput_tier
+var GetSpaceOutput_storageLimit = &sGetSpaceOutput_storageLimit
+var GetSpaceOutput_userAdmins = &sGetSpaceOutput_userAdmins
+var GetSpaceOutput_groupAdmins = &sGetSpaceOutput_groupAdmins
+var GetSpaceOutput_roles = &sGetSpaceOutput_roles
+var GetSpaceOutput_userKMSKey = &sGetSpaceOutput_userKMSKey
+var GetSpaceOutput_userCount = &sGetSpaceOutput_userCount
+var GetSpaceOutput_contentSize = &sGetSpaceOutput_contentSize
+var GetSpaceOutput_supportedEmailDomains = &sGetSpaceOutput_supportedEmailDomains
+
+var ListChannelsInput = &sListChannelsInput
+var ListChannelsInput_spaceId = &sListChannelsInput_spaceId
+var ListChannelsInput_nextToken = &sListChannelsInput_nextToken
+var ListChannelsInput_maxResults = &sListChannelsInput_maxResults
+
+var ListChannelsOutput = &sListChannelsOutput
+var ListChannelsOutput_channels = &sListChannelsOutput_channels
+var ListChannelsOutput_nextToken = &sListChannelsOutput_nextToken
+
+var ListSpacesInput = &sListSpacesInput
+var ListSpacesInput_nextToken = &sListSpacesInput_nextToken
+var ListSpacesInput_maxResults = &sListSpacesInput_maxResults
+
+var ListSpacesOutput = &sListSpacesOutput
+var ListSpacesOutput_spaces = &sListSpacesOutput_spaces
+var ListSpacesOutput_nextToken = &sListSpacesOutput_nextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_resourceArn = &sListTagsForResourceRequest_resourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_tags = &sListTagsForResourceResponse_tags
+
+var RegisterAdminInput = &sRegisterAdminInput
+var RegisterAdminInput_spaceId = &sRegisterAdminInput_spaceId
+var RegisterAdminInput_adminId = &sRegisterAdminInput_adminId
+
+var SendInvitesInput = &sSendInvitesInput
+var SendInvitesInput_spaceId = &sSendInvitesInput_spaceId
+var SendInvitesInput_accessorIds = &sSendInvitesInput_accessorIds
+var SendInvitesInput_title = &sSendInvitesInput_title
+var SendInvitesInput_body = &sSendInvitesInput_body
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_resourceArn = &sTagResourceRequest_resourceArn
+var TagResourceRequest_tags = &sTagResourceRequest_tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_resourceArn = &sUntagResourceRequest_resourceArn
+var UntagResourceRequest_tagKeys = &sUntagResourceRequest_tagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateChannelInput = &sUpdateChannelInput
+var UpdateChannelInput_spaceId = &sUpdateChannelInput_spaceId
+var UpdateChannelInput_channelId = &sUpdateChannelInput_channelId
+var UpdateChannelInput_channelName = &sUpdateChannelInput_channelName
+var UpdateChannelInput_channelDescription = &sUpdateChannelInput_channelDescription
+
+var UpdateChannelOutput = &sUpdateChannelOutput
+
+var UpdateSpaceInput = &sUpdateSpaceInput
+var UpdateSpaceInput_spaceId = &sUpdateSpaceInput_spaceId
+var UpdateSpaceInput_description = &sUpdateSpaceInput_description
+var UpdateSpaceInput_tier = &sUpdateSpaceInput_tier
+var UpdateSpaceInput_roleArn = &sUpdateSpaceInput_roleArn
+var UpdateSpaceInput_supportedEmailDomains = &sUpdateSpaceInput_supportedEmailDomains
+
+var RepostSpace = &smithy.ServiceSchema{Schema: &s_RepostSpace, Version: "2022-05-13"}

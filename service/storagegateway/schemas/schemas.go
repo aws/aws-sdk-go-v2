@@ -4,5921 +4,4244 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var ActivateGateway = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ActivateGateway",
-}, smithy.ShapeTypeOperation, 0)
-
-var AddCache = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AddCache",
-}, smithy.ShapeTypeOperation, 0)
-
-var AddTagsToResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AddTagsToResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var AddUploadBuffer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AddUploadBuffer",
-}, smithy.ShapeTypeOperation, 0)
-
-var AddWorkingStorage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AddWorkingStorage",
-}, smithy.ShapeTypeOperation, 0)
-
-var AssignTapePool = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AssignTapePool",
-}, smithy.ShapeTypeOperation, 0)
-
-var AssociateFileSystem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AssociateFileSystem",
-}, smithy.ShapeTypeOperation, 0)
-
-var AttachVolume = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AttachVolume",
-}, smithy.ShapeTypeOperation, 0)
-
-var CancelArchival = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CancelArchival",
-}, smithy.ShapeTypeOperation, 0)
-
-var CancelCacheReport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CancelCacheReport",
-}, smithy.ShapeTypeOperation, 0)
-
-var CancelRetrieval = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CancelRetrieval",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateCachediSCSIVolume = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateCachediSCSIVolume",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateNFSFileShare = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateNFSFileShare",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateSMBFileShare = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateSMBFileShare",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateSnapshot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateSnapshot",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateSnapshotFromVolumeRecoveryPoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateSnapshotFromVolumeRecoveryPoint",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateStorediSCSIVolume = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateStorediSCSIVolume",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateTapePool = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateTapePool",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateTapes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateTapes",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateTapeWithBarcode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateTapeWithBarcode",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteAutomaticTapeCreationPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteAutomaticTapeCreationPolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteBandwidthRateLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteBandwidthRateLimit",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteCacheReport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteCacheReport",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteChapCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteChapCredentials",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteFileShare = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteFileShare",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteGateway = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteGateway",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteSnapshotSchedule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteSnapshotSchedule",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteTape = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteTape",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteTapeArchive = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteTapeArchive",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteTapePool = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteTapePool",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteVolume = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteVolume",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeAvailabilityMonitorTest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeAvailabilityMonitorTest",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeBandwidthRateLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeBandwidthRateLimit",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeBandwidthRateLimitSchedule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeBandwidthRateLimitSchedule",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeCache = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeCache",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeCachediSCSIVolumes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeCachediSCSIVolumes",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeCacheReport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeCacheReport",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeChapCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeChapCredentials",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeFileSystemAssociations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeFileSystemAssociations",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeGatewayInformation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeGatewayInformation",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeMaintenanceStartTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeMaintenanceStartTime",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeNFSFileShares = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeNFSFileShares",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeSMBFileShares = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeSMBFileShares",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeSMBSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeSMBSettings",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeSnapshotSchedule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeSnapshotSchedule",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeStorediSCSIVolumes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeStorediSCSIVolumes",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeTapeArchives = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeTapeArchives",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeTapeRecoveryPoints = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeTapeRecoveryPoints",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeTapes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeTapes",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeUploadBuffer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeUploadBuffer",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeVTLDevices = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeVTLDevices",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeWorkingStorage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeWorkingStorage",
-}, smithy.ShapeTypeOperation, 0)
-
-var DetachVolume = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DetachVolume",
-}, smithy.ShapeTypeOperation, 0)
-
-var DisableGateway = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DisableGateway",
-}, smithy.ShapeTypeOperation, 0)
-
-var DisassociateFileSystem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DisassociateFileSystem",
-}, smithy.ShapeTypeOperation, 0)
-
-var EvictFilesFailingUpload = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "EvictFilesFailingUpload",
-}, smithy.ShapeTypeOperation, 0)
-
-var JoinDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "JoinDomain",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListAutomaticTapeCreationPolicies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListAutomaticTapeCreationPolicies",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListCacheReports = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListCacheReports",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListFileShares = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListFileShares",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListFileSystemAssociations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListFileSystemAssociations",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListGateways = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListGateways",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListLocalDisks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListLocalDisks",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTapePools = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListTapePools",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTapes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListTapes",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListVolumeInitiators = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListVolumeInitiators",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListVolumeRecoveryPoints = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListVolumeRecoveryPoints",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListVolumes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListVolumes",
-}, smithy.ShapeTypeOperation, 0)
-
-var NotifyWhenUploaded = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "NotifyWhenUploaded",
-}, smithy.ShapeTypeOperation, 0)
-
-var RefreshCache = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "RefreshCache",
-}, smithy.ShapeTypeOperation, 0)
-
-var RemoveTagsFromResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "RemoveTagsFromResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var ResetCache = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ResetCache",
-}, smithy.ShapeTypeOperation, 0)
-
-var RetrieveTapeArchive = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "RetrieveTapeArchive",
-}, smithy.ShapeTypeOperation, 0)
-
-var RetrieveTapeRecoveryPoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "RetrieveTapeRecoveryPoint",
-}, smithy.ShapeTypeOperation, 0)
-
-var SetLocalConsolePassword = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "SetLocalConsolePassword",
-}, smithy.ShapeTypeOperation, 0)
-
-var SetSMBGuestPassword = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "SetSMBGuestPassword",
-}, smithy.ShapeTypeOperation, 0)
-
-var ShutdownGateway = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ShutdownGateway",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartAvailabilityMonitorTest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "StartAvailabilityMonitorTest",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartCacheReport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "StartCacheReport",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartGateway = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "StartGateway",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateAutomaticTapeCreationPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateAutomaticTapeCreationPolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateBandwidthRateLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateBandwidthRateLimit",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateBandwidthRateLimitSchedule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateBandwidthRateLimitSchedule",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateChapCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateChapCredentials",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateFileSystemAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateFileSystemAssociation",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateGatewayInformation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateGatewayInformation",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateGatewaySoftwareNow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateGatewaySoftwareNow",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateMaintenanceStartTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateMaintenanceStartTime",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateNFSFileShare = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateNFSFileShare",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateSMBFileShare = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateSMBFileShare",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateSMBFileShareVisibility = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateSMBFileShareVisibility",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateSMBLocalGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateSMBLocalGroups",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateSMBSecurityStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateSMBSecurityStrategy",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateSnapshotSchedule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateSnapshotSchedule",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateVTLDeviceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateVTLDeviceType",
-}, smithy.ShapeTypeOperation, 0)
-
-var _StorageGateway_20130630 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "StorageGateway_20130630",
-}, smithy.ShapeTypeService, 0, &smithytraits.XMLNamespace{URI: "http://storagegateway.amazonaws.com/doc/2013-06-30"})
-
-var StorageGateway_20130630 = smithy.NewServiceSchema(_StorageGateway_20130630, "2013-06-30")
-
-var _ActivationKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ActivationKey",
-}, smithy.ShapeTypeString, 0)
-
-var ActiveDirectoryStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ActiveDirectoryStatus",
-}, smithy.ShapeTypeEnum, 8)
-var ActiveDirectoryStatus_ACCESS_DENIED *smithy.Schema
-
-var ActiveDirectoryStatus_DETACHED *smithy.Schema
-
-var ActiveDirectoryStatus_JOINED *smithy.Schema
-
-var ActiveDirectoryStatus_JOINING *smithy.Schema
-
-var ActiveDirectoryStatus_NETWORK_ERROR *smithy.Schema
-
-var ActiveDirectoryStatus_TIMEOUT *smithy.Schema
-
-var ActiveDirectoryStatus_UNKNOWN_ERROR *smithy.Schema
-
-var ActiveDirectoryStatus_INSUFFICIENT_PERMISSIONS *smithy.Schema
-
-var _AuditDestinationARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AuditDestinationARN",
-}, smithy.ShapeTypeString, 0)
-
-var _Authentication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "Authentication",
-}, smithy.ShapeTypeString, 0)
-
-var AutomaticTapeCreationPolicyInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AutomaticTapeCreationPolicyInfo",
-}, smithy.ShapeTypeStructure, 2)
-var AutomaticTapeCreationPolicyInfo_AutomaticTapeCreationRules *smithy.Schema
-
-var AutomaticTapeCreationPolicyInfo_GatewayARN *smithy.Schema
-
-var _AutomaticTapeCreationPolicyInfos = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AutomaticTapeCreationPolicyInfos",
-}, smithy.ShapeTypeList, 1)
-var _AutomaticTapeCreationPolicyInfos_member *smithy.Schema
-
-var AutomaticTapeCreationRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AutomaticTapeCreationRule",
-}, smithy.ShapeTypeStructure, 5)
-var AutomaticTapeCreationRule_TapeBarcodePrefix *smithy.Schema
-
-var AutomaticTapeCreationRule_PoolId *smithy.Schema
-
-var AutomaticTapeCreationRule_TapeSizeInBytes *smithy.Schema
-
-var AutomaticTapeCreationRule_MinimumNumTapes *smithy.Schema
-
-var AutomaticTapeCreationRule_Worm *smithy.Schema
-
-var _AutomaticTapeCreationRules = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AutomaticTapeCreationRules",
-}, smithy.ShapeTypeList, 1)
-var _AutomaticTapeCreationRules_member *smithy.Schema
-
-var AutomaticUpdatePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AutomaticUpdatePolicy",
-}, smithy.ShapeTypeEnum, 2)
-var AutomaticUpdatePolicy_ALL_VERSIONS *smithy.Schema
-
-var AutomaticUpdatePolicy_EMERGENCY_VERSIONS_ONLY *smithy.Schema
-
-var AvailabilityMonitorTestStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AvailabilityMonitorTestStatus",
-}, smithy.ShapeTypeEnum, 3)
-var AvailabilityMonitorTestStatus_COMPLETE *smithy.Schema
-
-var AvailabilityMonitorTestStatus_FAILED *smithy.Schema
-
-var AvailabilityMonitorTestStatus_PENDING *smithy.Schema
-
-var _BandwidthDownloadRateLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "BandwidthDownloadRateLimit",
-}, smithy.ShapeTypeLong, 0)
-
-var BandwidthRateLimitInterval = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "BandwidthRateLimitInterval",
-}, smithy.ShapeTypeStructure, 7)
-var BandwidthRateLimitInterval_StartHourOfDay *smithy.Schema
-
-var BandwidthRateLimitInterval_StartMinuteOfHour *smithy.Schema
-
-var BandwidthRateLimitInterval_EndHourOfDay *smithy.Schema
-
-var BandwidthRateLimitInterval_EndMinuteOfHour *smithy.Schema
-
-var BandwidthRateLimitInterval_DaysOfWeek *smithy.Schema
-
-var BandwidthRateLimitInterval_AverageUploadRateLimitInBitsPerSec *smithy.Schema
-
-var BandwidthRateLimitInterval_AverageDownloadRateLimitInBitsPerSec *smithy.Schema
-
-var _BandwidthRateLimitIntervals = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "BandwidthRateLimitIntervals",
-}, smithy.ShapeTypeList, 1)
-var _BandwidthRateLimitIntervals_member *smithy.Schema
-
-var _BandwidthType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "BandwidthType",
-}, smithy.ShapeTypeString, 0)
-
-var _BandwidthUploadRateLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "BandwidthUploadRateLimit",
-}, smithy.ShapeTypeLong, 0)
-
-var _Boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "Boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _Boolean2 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "Boolean2",
-}, smithy.ShapeTypeBoolean, 0)
-
-var CacheAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CacheAttributes",
-}, smithy.ShapeTypeStructure, 1)
-var CacheAttributes_CacheStaleTimeoutInSeconds *smithy.Schema
-
-var CachediSCSIVolume = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CachediSCSIVolume",
-}, smithy.ShapeTypeStructure, 13)
-var CachediSCSIVolume_VolumeARN *smithy.Schema
-
-var CachediSCSIVolume_VolumeId *smithy.Schema
-
-var CachediSCSIVolume_VolumeType *smithy.Schema
-
-var CachediSCSIVolume_VolumeStatus *smithy.Schema
-
-var CachediSCSIVolume_VolumeAttachmentStatus *smithy.Schema
-
-var CachediSCSIVolume_VolumeSizeInBytes *smithy.Schema
-
-var CachediSCSIVolume_VolumeProgress *smithy.Schema
-
-var CachediSCSIVolume_SourceSnapshotId *smithy.Schema
-
-var CachediSCSIVolume_VolumeiSCSIAttributes *smithy.Schema
-
-var CachediSCSIVolume_CreatedDate *smithy.Schema
-
-var CachediSCSIVolume_VolumeUsedInBytes *smithy.Schema
-
-var CachediSCSIVolume_KMSKey *smithy.Schema
-
-var CachediSCSIVolume_TargetName *smithy.Schema
-
-var _CachediSCSIVolumes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CachediSCSIVolumes",
-}, smithy.ShapeTypeList, 1)
-var _CachediSCSIVolumes_member *smithy.Schema
-
-var _CacheReportARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CacheReportARN",
-}, smithy.ShapeTypeString, 0)
-
-var CacheReportFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CacheReportFilter",
-}, smithy.ShapeTypeStructure, 2)
-var CacheReportFilter_Name *smithy.Schema
-
-var CacheReportFilter_Values *smithy.Schema
-
-var _CacheReportFilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CacheReportFilterList",
-}, smithy.ShapeTypeList, 1)
-var _CacheReportFilterList_member *smithy.Schema
-
-var CacheReportFilterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CacheReportFilterName",
-}, smithy.ShapeTypeEnum, 2)
-var CacheReportFilterName_UploadState *smithy.Schema
-
-var CacheReportFilterName_UploadFailureReason *smithy.Schema
-
-var _CacheReportFilterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CacheReportFilterValue",
-}, smithy.ShapeTypeString, 0)
-
-var _CacheReportFilterValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CacheReportFilterValues",
-}, smithy.ShapeTypeList, 1)
-var _CacheReportFilterValues_member *smithy.Schema
-
-var CacheReportInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CacheReportInfo",
-}, smithy.ShapeTypeStructure, 12)
-var CacheReportInfo_CacheReportARN *smithy.Schema
-
-var CacheReportInfo_CacheReportStatus *smithy.Schema
-
-var CacheReportInfo_ReportCompletionPercent *smithy.Schema
-
-var CacheReportInfo_EndTime *smithy.Schema
-
-var CacheReportInfo_Role *smithy.Schema
-
-var CacheReportInfo_FileShareARN *smithy.Schema
-
-var CacheReportInfo_LocationARN *smithy.Schema
-
-var CacheReportInfo_StartTime *smithy.Schema
-
-var CacheReportInfo_InclusionFilters *smithy.Schema
-
-var CacheReportInfo_ExclusionFilters *smithy.Schema
-
-var CacheReportInfo_ReportName *smithy.Schema
-
-var CacheReportInfo_Tags *smithy.Schema
-
-var _CacheReportList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CacheReportList",
-}, smithy.ShapeTypeList, 1)
-var _CacheReportList_member *smithy.Schema
-
-var _CacheReportName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CacheReportName",
-}, smithy.ShapeTypeString, 0)
-
-var CacheReportStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CacheReportStatus",
-}, smithy.ShapeTypeEnum, 5)
-var CacheReportStatus_IN_PROGRESS *smithy.Schema
-
-var CacheReportStatus_COMPLETED *smithy.Schema
-
-var CacheReportStatus_CANCELED *smithy.Schema
-
-var CacheReportStatus_FAILED *smithy.Schema
-
-var CacheReportStatus_ERROR *smithy.Schema
-
-var _CacheStaleTimeoutInSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CacheStaleTimeoutInSeconds",
-}, smithy.ShapeTypeInteger, 0)
-
-var CaseSensitivity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CaseSensitivity",
-}, smithy.ShapeTypeEnum, 2)
-var CaseSensitivity_ClientSpecified *smithy.Schema
-
-var CaseSensitivity_CaseSensitive *smithy.Schema
-
-var _ChapCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ChapCredentials",
-}, smithy.ShapeTypeList, 1)
-var _ChapCredentials_member *smithy.Schema
-
-var ChapInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ChapInfo",
-}, smithy.ShapeTypeStructure, 4)
-var ChapInfo_TargetARN *smithy.Schema
-
-var ChapInfo_SecretToAuthenticateInitiator *smithy.Schema
-
-var ChapInfo_InitiatorName *smithy.Schema
-
-var ChapInfo_SecretToAuthenticateTarget *smithy.Schema
-
-var _ChapSecret = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ChapSecret",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ClientToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ClientToken",
-}, smithy.ShapeTypeString, 0)
-
-var _CloudWatchLogGroupARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CloudWatchLogGroupARN",
-}, smithy.ShapeTypeString, 0)
-
-var _CreatedDate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreatedDate",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _DayOfMonth = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DayOfMonth",
-}, smithy.ShapeTypeInteger, 0)
-
-var _DayOfWeek = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DayOfWeek",
-}, smithy.ShapeTypeInteger, 0)
-
-var _DaysOfWeek = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DaysOfWeek",
-}, smithy.ShapeTypeList, 1)
-var _DaysOfWeek_member *smithy.Schema
-
-var _DeprecationDate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeprecationDate",
-}, smithy.ShapeTypeString, 0)
-
-var _Description = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "Description",
-}, smithy.ShapeTypeString, 0)
-
-var DeviceiSCSIAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeviceiSCSIAttributes",
-}, smithy.ShapeTypeStructure, 4)
-var DeviceiSCSIAttributes_TargetARN *smithy.Schema
-
-var DeviceiSCSIAttributes_NetworkInterfaceId *smithy.Schema
-
-var DeviceiSCSIAttributes_NetworkInterfacePort *smithy.Schema
-
-var DeviceiSCSIAttributes_ChapEnabled *smithy.Schema
-
-var _DeviceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeviceType",
-}, smithy.ShapeTypeString, 0)
-
-var Disk = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "Disk",
-}, smithy.ShapeTypeStructure, 8)
-var Disk_DiskId *smithy.Schema
-
-var Disk_DiskPath *smithy.Schema
-
-var Disk_DiskNode *smithy.Schema
-
-var Disk_DiskStatus *smithy.Schema
-
-var Disk_DiskSizeInBytes *smithy.Schema
-
-var Disk_DiskAllocationType *smithy.Schema
-
-var Disk_DiskAllocationResource *smithy.Schema
-
-var Disk_DiskAttributeList *smithy.Schema
-
-var _DiskAllocationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DiskAllocationType",
-}, smithy.ShapeTypeString, 0)
-
-var _DiskAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DiskAttribute",
-}, smithy.ShapeTypeString, 0)
-
-var _DiskAttributeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DiskAttributeList",
-}, smithy.ShapeTypeList, 1)
-var _DiskAttributeList_member *smithy.Schema
-
-var _DiskId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DiskId",
-}, smithy.ShapeTypeString, 0)
-
-var _DiskIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DiskIds",
-}, smithy.ShapeTypeList, 1)
-var _DiskIds_member *smithy.Schema
-
-var _Disks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "Disks",
-}, smithy.ShapeTypeList, 1)
-var _Disks_member *smithy.Schema
-
-var _DNSHostName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DNSHostName",
-}, smithy.ShapeTypeString, 0)
-
-var _DomainName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DomainName",
-}, smithy.ShapeTypeString, 0)
-
-var _DomainUserName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DomainUserName",
-}, smithy.ShapeTypeString, 0)
-
-var _DomainUserPassword = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DomainUserPassword",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _double = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "double",
-}, smithy.ShapeTypeDouble, 0)
-
-var _DoubleObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DoubleObject",
-}, smithy.ShapeTypeDouble, 0)
-
-var _Ec2InstanceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "Ec2InstanceId",
-}, smithy.ShapeTypeString, 0)
-
-var _Ec2InstanceRegion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "Ec2InstanceRegion",
-}, smithy.ShapeTypeString, 0)
-
-var EncryptionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "EncryptionType",
-}, smithy.ShapeTypeEnum, 3)
-var EncryptionType_SseS3 *smithy.Schema
-
-var EncryptionType_SseKms *smithy.Schema
-
-var EncryptionType_DsseKms *smithy.Schema
-
-var EndpointNetworkConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "EndpointNetworkConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var EndpointNetworkConfiguration_IpAddresses *smithy.Schema
-
-var _EndpointType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "EndpointType",
-}, smithy.ShapeTypeString, 0)
-
-var ErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ErrorCode",
-}, smithy.ShapeTypeEnum, 62)
-var ErrorCode_ActivationKeyExpired *smithy.Schema
-
-var ErrorCode_ActivationKeyInvalid *smithy.Schema
-
-var ErrorCode_ActivationKeyNotFound *smithy.Schema
-
-var ErrorCode_GatewayInternalError *smithy.Schema
-
-var ErrorCode_GatewayNotConnected *smithy.Schema
-
-var ErrorCode_GatewayNotFound *smithy.Schema
-
-var ErrorCode_GatewayProxyNetworkConnectionBusy *smithy.Schema
-
-var ErrorCode_AuthenticationFailure *smithy.Schema
-
-var ErrorCode_BandwidthThrottleScheduleNotFound *smithy.Schema
-
-var ErrorCode_Blocked *smithy.Schema
-
-var ErrorCode_CannotExportSnapshot *smithy.Schema
-
-var ErrorCode_ChapCredentialNotFound *smithy.Schema
-
-var ErrorCode_DiskAlreadyAllocated *smithy.Schema
-
-var ErrorCode_DiskDoesNotExist *smithy.Schema
-
-var ErrorCode_DiskSizeGreaterThanVolumeMaxSize *smithy.Schema
-
-var ErrorCode_DiskSizeLessThanVolumeSize *smithy.Schema
-
-var ErrorCode_DiskSizeNotGigAligned *smithy.Schema
-
-var ErrorCode_DuplicateCertificateInfo *smithy.Schema
-
-var ErrorCode_DuplicateSchedule *smithy.Schema
-
-var ErrorCode_EndpointNotFound *smithy.Schema
-
-var ErrorCode_IAMNotSupported *smithy.Schema
-
-var ErrorCode_InitiatorInvalid *smithy.Schema
-
-var ErrorCode_InitiatorNotFound *smithy.Schema
-
-var ErrorCode_InternalError *smithy.Schema
-
-var ErrorCode_InvalidGateway *smithy.Schema
-
-var ErrorCode_InvalidEndpoint *smithy.Schema
-
-var ErrorCode_InvalidParameters *smithy.Schema
-
-var ErrorCode_InvalidSchedule *smithy.Schema
-
-var ErrorCode_LocalStorageLimitExceeded *smithy.Schema
-
-var ErrorCode_LunAlreadyAllocated_ *smithy.Schema
-
-var ErrorCode_LunInvalid *smithy.Schema
-
-var ErrorCode_JoinDomainInProgress *smithy.Schema
-
-var ErrorCode_MaximumContentLengthExceeded *smithy.Schema
-
-var ErrorCode_MaximumTapeCartridgeCountExceeded *smithy.Schema
-
-var ErrorCode_MaximumVolumeCountExceeded *smithy.Schema
-
-var ErrorCode_NetworkConfigurationChanged *smithy.Schema
-
-var ErrorCode_NoDisksAvailable *smithy.Schema
-
-var ErrorCode_NotImplemented *smithy.Schema
-
-var ErrorCode_NotSupported *smithy.Schema
-
-var ErrorCode_OperationAborted *smithy.Schema
-
-var ErrorCode_OutdatedGateway *smithy.Schema
-
-var ErrorCode_ParametersNotImplemented *smithy.Schema
-
-var ErrorCode_RegionInvalid *smithy.Schema
-
-var ErrorCode_RequestTimeout *smithy.Schema
-
-var ErrorCode_ServiceUnavailable *smithy.Schema
-
-var ErrorCode_SnapshotDeleted *smithy.Schema
-
-var ErrorCode_SnapshotIdInvalid *smithy.Schema
-
-var ErrorCode_SnapshotInProgress *smithy.Schema
-
-var ErrorCode_SnapshotNotFound *smithy.Schema
-
-var ErrorCode_SnapshotScheduleNotFound *smithy.Schema
-
-var ErrorCode_StagingAreaFull *smithy.Schema
-
-var ErrorCode_StorageFailure *smithy.Schema
-
-var ErrorCode_TapeCartridgeNotFound *smithy.Schema
-
-var ErrorCode_TargetAlreadyExists *smithy.Schema
-
-var ErrorCode_TargetInvalid *smithy.Schema
-
-var ErrorCode_TargetNotFound *smithy.Schema
-
-var ErrorCode_UnauthorizedOperation *smithy.Schema
-
-var ErrorCode_VolumeAlreadyExists *smithy.Schema
-
-var ErrorCode_VolumeIdInvalid *smithy.Schema
-
-var ErrorCode_VolumeInUse *smithy.Schema
-
-var ErrorCode_VolumeNotFound *smithy.Schema
-
-var ErrorCode_VolumeNotReady *smithy.Schema
-
-var _errorDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "errorDetails",
-}, smithy.ShapeTypeMap, 2)
-var _errorDetails_key *smithy.Schema
-
-var _errorDetails_value *smithy.Schema
-
-var _FileShareARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "FileShareARN",
-}, smithy.ShapeTypeString, 0)
-
-var _FileShareARNList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "FileShareARNList",
-}, smithy.ShapeTypeList, 1)
-var _FileShareARNList_member *smithy.Schema
-
-var _FileShareClientList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "FileShareClientList",
-}, smithy.ShapeTypeList, 1)
-var _FileShareClientList_member *smithy.Schema
-
-var _FileShareId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "FileShareId",
-}, smithy.ShapeTypeString, 0)
-
-var FileShareInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "FileShareInfo",
-}, smithy.ShapeTypeStructure, 5)
-var FileShareInfo_FileShareType *smithy.Schema
-
-var FileShareInfo_FileShareARN *smithy.Schema
-
-var FileShareInfo_FileShareId *smithy.Schema
-
-var FileShareInfo_FileShareStatus *smithy.Schema
-
-var FileShareInfo_GatewayARN *smithy.Schema
-
-var _FileShareInfoList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "FileShareInfoList",
-}, smithy.ShapeTypeList, 1)
-var _FileShareInfoList_member *smithy.Schema
-
-var _FileShareName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "FileShareName",
-}, smithy.ShapeTypeString, 0)
-
-var _FileShareStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "FileShareStatus",
-}, smithy.ShapeTypeString, 0)
-
-var FileShareType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "FileShareType",
-}, smithy.ShapeTypeEnum, 2)
-var FileShareType_NFS *smithy.Schema
-
-var FileShareType_SMB *smithy.Schema
-
-var _FileSystemAssociationARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "FileSystemAssociationARN",
-}, smithy.ShapeTypeString, 0)
-
-var _FileSystemAssociationARNList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "FileSystemAssociationARNList",
-}, smithy.ShapeTypeList, 1)
-var _FileSystemAssociationARNList_member *smithy.Schema
-
-var _FileSystemAssociationId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "FileSystemAssociationId",
-}, smithy.ShapeTypeString, 0)
-
-var FileSystemAssociationInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "FileSystemAssociationInfo",
-}, smithy.ShapeTypeStructure, 9)
-var FileSystemAssociationInfo_FileSystemAssociationARN *smithy.Schema
-
-var FileSystemAssociationInfo_LocationARN *smithy.Schema
-
-var FileSystemAssociationInfo_FileSystemAssociationStatus *smithy.Schema
-
-var FileSystemAssociationInfo_AuditDestinationARN *smithy.Schema
-
-var FileSystemAssociationInfo_GatewayARN *smithy.Schema
-
-var FileSystemAssociationInfo_Tags *smithy.Schema
-
-var FileSystemAssociationInfo_CacheAttributes *smithy.Schema
-
-var FileSystemAssociationInfo_EndpointNetworkConfiguration *smithy.Schema
-
-var FileSystemAssociationInfo_FileSystemAssociationStatusDetails *smithy.Schema
-
-var _FileSystemAssociationInfoList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "FileSystemAssociationInfoList",
-}, smithy.ShapeTypeList, 1)
-var _FileSystemAssociationInfoList_member *smithy.Schema
-
-var _FileSystemAssociationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "FileSystemAssociationStatus",
-}, smithy.ShapeTypeString, 0)
-
-var FileSystemAssociationStatusDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "FileSystemAssociationStatusDetail",
-}, smithy.ShapeTypeStructure, 1)
-var FileSystemAssociationStatusDetail_ErrorCode *smithy.Schema
-
-var _FileSystemAssociationStatusDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "FileSystemAssociationStatusDetails",
-}, smithy.ShapeTypeList, 1)
-var _FileSystemAssociationStatusDetails_member *smithy.Schema
-
-var FileSystemAssociationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "FileSystemAssociationSummary",
-}, smithy.ShapeTypeStructure, 4)
-var FileSystemAssociationSummary_FileSystemAssociationId *smithy.Schema
-
-var FileSystemAssociationSummary_FileSystemAssociationARN *smithy.Schema
-
-var FileSystemAssociationSummary_FileSystemAssociationStatus *smithy.Schema
-
-var FileSystemAssociationSummary_GatewayARN *smithy.Schema
-
-var _FileSystemAssociationSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "FileSystemAssociationSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _FileSystemAssociationSummaryList_member *smithy.Schema
-
-var _FileSystemAssociationSyncErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "FileSystemAssociationSyncErrorCode",
-}, smithy.ShapeTypeString, 0)
-
-var _FileSystemLocationARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "FileSystemLocationARN",
-}, smithy.ShapeTypeString, 0)
-
-var _Folder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "Folder",
-}, smithy.ShapeTypeString, 0)
-
-var _FolderList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "FolderList",
-}, smithy.ShapeTypeList, 1)
-var _FolderList_member *smithy.Schema
-
-var _GatewayARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "GatewayARN",
-}, smithy.ShapeTypeString, 0)
-
-var GatewayCapacity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "GatewayCapacity",
-}, smithy.ShapeTypeEnum, 3)
-var GatewayCapacity_Small *smithy.Schema
-
-var GatewayCapacity_Medium *smithy.Schema
-
-var GatewayCapacity_Large *smithy.Schema
-
-var _GatewayId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "GatewayId",
-}, smithy.ShapeTypeString, 0)
-
-var GatewayInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "GatewayInfo",
-}, smithy.ShapeTypeStructure, 11)
-var GatewayInfo_GatewayId *smithy.Schema
-
-var GatewayInfo_GatewayARN *smithy.Schema
-
-var GatewayInfo_GatewayType *smithy.Schema
-
-var GatewayInfo_GatewayOperationalState *smithy.Schema
-
-var GatewayInfo_GatewayName *smithy.Schema
-
-var GatewayInfo_Ec2InstanceId *smithy.Schema
-
-var GatewayInfo_Ec2InstanceRegion *smithy.Schema
-
-var GatewayInfo_HostEnvironment *smithy.Schema
-
-var GatewayInfo_HostEnvironmentId *smithy.Schema
-
-var GatewayInfo_DeprecationDate *smithy.Schema
-
-var GatewayInfo_SoftwareVersion *smithy.Schema
-
-var _GatewayName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "GatewayName",
-}, smithy.ShapeTypeString, 0)
-
-var _GatewayNetworkInterfaces = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "GatewayNetworkInterfaces",
-}, smithy.ShapeTypeList, 1)
-var _GatewayNetworkInterfaces_member *smithy.Schema
-
-var _GatewayOperationalState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "GatewayOperationalState",
-}, smithy.ShapeTypeString, 0)
-
-var _Gateways = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "Gateways",
-}, smithy.ShapeTypeList, 1)
-var _Gateways_member *smithy.Schema
-
-var _GatewayState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "GatewayState",
-}, smithy.ShapeTypeString, 0)
-
-var _GatewayTimezone = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "GatewayTimezone",
-}, smithy.ShapeTypeString, 0)
-
-var _GatewayType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "GatewayType",
-}, smithy.ShapeTypeString, 0)
-
-var _Host = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "Host",
-}, smithy.ShapeTypeString, 0)
-
-var HostEnvironment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "HostEnvironment",
-}, smithy.ShapeTypeEnum, 6)
-var HostEnvironment_VMWARE *smithy.Schema
-
-var HostEnvironment_HYPER_V *smithy.Schema
-
-var HostEnvironment_EC2 *smithy.Schema
-
-var HostEnvironment_KVM *smithy.Schema
-
-var HostEnvironment_OTHER *smithy.Schema
-
-var HostEnvironment_SNOWBALL *smithy.Schema
-
-var _HostEnvironmentId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "HostEnvironmentId",
-}, smithy.ShapeTypeString, 0)
-
-var _Hosts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "Hosts",
-}, smithy.ShapeTypeList, 1)
-var _Hosts_member *smithy.Schema
-
-var _HourOfDay = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "HourOfDay",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Initiator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "Initiator",
-}, smithy.ShapeTypeString, 0)
-
-var _Initiators = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "Initiators",
-}, smithy.ShapeTypeList, 1)
-var _Initiators_member *smithy.Schema
-
-var _integer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "integer",
-}, smithy.ShapeTypeInteger, 0)
-
-var InternalServerError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "InternalServerError",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerError_message *smithy.Schema
-
-var InternalServerError_error *smithy.Schema
-
-var InvalidGatewayRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "InvalidGatewayRequestException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidGatewayRequestException_message *smithy.Schema
-
-var InvalidGatewayRequestException_error *smithy.Schema
-
-var _IpAddressList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "IpAddressList",
-}, smithy.ShapeTypeList, 1)
-var _IpAddressList_member *smithy.Schema
-
-var _IPV4Address = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "IPV4Address",
-}, smithy.ShapeTypeString, 0)
-
-var _Ipv4OrIpv6AddressCIDR = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "Ipv4OrIpv6AddressCIDR",
-}, smithy.ShapeTypeString, 0)
-
-var _IqnName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "IqnName",
-}, smithy.ShapeTypeString, 0)
-
-var _KMSKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "KMSKey",
-}, smithy.ShapeTypeString, 0)
-
-var _LastSoftwareUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "LastSoftwareUpdate",
-}, smithy.ShapeTypeString, 0)
-
-var _LocalConsolePassword = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "LocalConsolePassword",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _LocationARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "LocationARN",
-}, smithy.ShapeTypeString, 0)
-
-var _long = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "long",
-}, smithy.ShapeTypeLong, 0)
-
-var _Marker = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "Marker",
-}, smithy.ShapeTypeString, 0)
-
-var _MediumChangerType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "MediumChangerType",
-}, smithy.ShapeTypeString, 0)
-
-var _MinimumNumTapes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "MinimumNumTapes",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MinuteOfHour = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "MinuteOfHour",
-}, smithy.ShapeTypeInteger, 0)
-
-var NetworkInterface = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "NetworkInterface",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Sensitive{})
-var NetworkInterface_Ipv4Address *smithy.Schema
-
-var NetworkInterface_MacAddress *smithy.Schema
-
-var NetworkInterface_Ipv6Address *smithy.Schema
-
-var _NetworkInterfaceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "NetworkInterfaceId",
-}, smithy.ShapeTypeString, 0)
-
-var _NextUpdateAvailabilityDate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "NextUpdateAvailabilityDate",
-}, smithy.ShapeTypeString, 0)
-
-var NFSFileShareDefaults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "NFSFileShareDefaults",
-}, smithy.ShapeTypeStructure, 4)
-var NFSFileShareDefaults_FileMode *smithy.Schema
-
-var NFSFileShareDefaults_DirectoryMode *smithy.Schema
-
-var NFSFileShareDefaults_GroupId *smithy.Schema
-
-var NFSFileShareDefaults_OwnerId *smithy.Schema
-
-var NFSFileShareInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "NFSFileShareInfo",
-}, smithy.ShapeTypeStructure, 25)
-var NFSFileShareInfo_NFSFileShareDefaults *smithy.Schema
-
-var NFSFileShareInfo_FileShareARN *smithy.Schema
-
-var NFSFileShareInfo_FileShareId *smithy.Schema
-
-var NFSFileShareInfo_FileShareStatus *smithy.Schema
-
-var NFSFileShareInfo_GatewayARN *smithy.Schema
-
-var NFSFileShareInfo_EncryptionType *smithy.Schema
-
-var NFSFileShareInfo_KMSEncrypted *smithy.Schema
-
-var NFSFileShareInfo_KMSKey *smithy.Schema
-
-var NFSFileShareInfo_Path *smithy.Schema
-
-var NFSFileShareInfo_Role *smithy.Schema
-
-var NFSFileShareInfo_LocationARN *smithy.Schema
-
-var NFSFileShareInfo_DefaultStorageClass *smithy.Schema
-
-var NFSFileShareInfo_ObjectACL *smithy.Schema
-
-var NFSFileShareInfo_ClientList *smithy.Schema
-
-var NFSFileShareInfo_Squash *smithy.Schema
-
-var NFSFileShareInfo_ReadOnly *smithy.Schema
-
-var NFSFileShareInfo_GuessMIMETypeEnabled *smithy.Schema
-
-var NFSFileShareInfo_RequesterPays *smithy.Schema
-
-var NFSFileShareInfo_Tags *smithy.Schema
-
-var NFSFileShareInfo_FileShareName *smithy.Schema
-
-var NFSFileShareInfo_CacheAttributes *smithy.Schema
-
-var NFSFileShareInfo_NotificationPolicy *smithy.Schema
-
-var NFSFileShareInfo_VPCEndpointDNSName *smithy.Schema
-
-var NFSFileShareInfo_BucketRegion *smithy.Schema
-
-var NFSFileShareInfo_AuditDestinationARN *smithy.Schema
-
-var _NFSFileShareInfoList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "NFSFileShareInfoList",
-}, smithy.ShapeTypeList, 1)
-var _NFSFileShareInfoList_member *smithy.Schema
-
-var _NotificationId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "NotificationId",
-}, smithy.ShapeTypeString, 0)
-
-var _NotificationPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "NotificationPolicy",
-}, smithy.ShapeTypeString, 0)
-
-var _NumTapesToCreate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "NumTapesToCreate",
-}, smithy.ShapeTypeInteger, 0)
-
-var ObjectACL = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ObjectACL",
-}, smithy.ShapeTypeEnum, 7)
-var ObjectACL_private *smithy.Schema
-
-var ObjectACL_public_read *smithy.Schema
-
-var ObjectACL_public_read_write *smithy.Schema
-
-var ObjectACL_authenticated_read *smithy.Schema
-
-var ObjectACL_bucket_owner_read *smithy.Schema
-
-var ObjectACL_bucket_owner_full_control *smithy.Schema
-
-var ObjectACL_aws_exec_read *smithy.Schema
-
-var _OrganizationalUnit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "OrganizationalUnit",
-}, smithy.ShapeTypeString, 0)
-
-var _Path = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "Path",
-}, smithy.ShapeTypeString, 0)
-
-var _PermissionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "PermissionId",
-}, smithy.ShapeTypeLong, 0)
-
-var _PermissionMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "PermissionMode",
-}, smithy.ShapeTypeString, 0)
-
-var _PoolARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "PoolARN",
-}, smithy.ShapeTypeString, 0)
-
-var _PoolARNs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "PoolARNs",
-}, smithy.ShapeTypeList, 1)
-var _PoolARNs_member *smithy.Schema
-
-var _PoolId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "PoolId",
-}, smithy.ShapeTypeString, 0)
-
-var PoolInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "PoolInfo",
-}, smithy.ShapeTypeStructure, 6)
-var PoolInfo_PoolARN *smithy.Schema
-
-var PoolInfo_PoolName *smithy.Schema
-
-var PoolInfo_StorageClass *smithy.Schema
-
-var PoolInfo_RetentionLockType *smithy.Schema
-
-var PoolInfo_RetentionLockTimeInDays *smithy.Schema
-
-var PoolInfo_PoolStatus *smithy.Schema
-
-var _PoolInfos = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "PoolInfos",
-}, smithy.ShapeTypeList, 1)
-var _PoolInfos_member *smithy.Schema
-
-var _PoolName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "PoolName",
-}, smithy.ShapeTypeString, 0)
-
-var PoolStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "PoolStatus",
-}, smithy.ShapeTypeEnum, 2)
-var PoolStatus_ACTIVE *smithy.Schema
-
-var PoolStatus_DELETED *smithy.Schema
-
-var _PositiveIntObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "PositiveIntObject",
-}, smithy.ShapeTypeInteger, 0)
-
-var _RecurrenceInHours = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "RecurrenceInHours",
-}, smithy.ShapeTypeInteger, 0)
-
-var _RegionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "RegionId",
-}, smithy.ShapeTypeString, 0)
-
-var _ReportCompletionPercent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ReportCompletionPercent",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ResourceARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ResourceARN",
-}, smithy.ShapeTypeString, 0)
-
-var _RetentionLockTimeInDays = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "RetentionLockTimeInDays",
-}, smithy.ShapeTypeInteger, 0)
-
-var RetentionLockType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "RetentionLockType",
-}, smithy.ShapeTypeEnum, 3)
-var RetentionLockType_COMPLIANCE *smithy.Schema
-
-var RetentionLockType_GOVERNANCE *smithy.Schema
-
-var RetentionLockType_NONE *smithy.Schema
-
-var _Role = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "Role",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceUnavailableError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ServiceUnavailableError",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 503})
-var ServiceUnavailableError_message *smithy.Schema
-
-var ServiceUnavailableError_error *smithy.Schema
-
-var SMBFileShareInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "SMBFileShareInfo",
-}, smithy.ShapeTypeStructure, 30)
-var SMBFileShareInfo_FileShareARN *smithy.Schema
-
-var SMBFileShareInfo_FileShareId *smithy.Schema
-
-var SMBFileShareInfo_FileShareStatus *smithy.Schema
-
-var SMBFileShareInfo_GatewayARN *smithy.Schema
-
-var SMBFileShareInfo_EncryptionType *smithy.Schema
-
-var SMBFileShareInfo_KMSEncrypted *smithy.Schema
-
-var SMBFileShareInfo_KMSKey *smithy.Schema
-
-var SMBFileShareInfo_Path *smithy.Schema
-
-var SMBFileShareInfo_Role *smithy.Schema
-
-var SMBFileShareInfo_LocationARN *smithy.Schema
-
-var SMBFileShareInfo_DefaultStorageClass *smithy.Schema
-
-var SMBFileShareInfo_ObjectACL *smithy.Schema
-
-var SMBFileShareInfo_ReadOnly *smithy.Schema
-
-var SMBFileShareInfo_GuessMIMETypeEnabled *smithy.Schema
-
-var SMBFileShareInfo_RequesterPays *smithy.Schema
-
-var SMBFileShareInfo_SMBACLEnabled *smithy.Schema
-
-var SMBFileShareInfo_AccessBasedEnumeration *smithy.Schema
-
-var SMBFileShareInfo_AdminUserList *smithy.Schema
-
-var SMBFileShareInfo_ValidUserList *smithy.Schema
-
-var SMBFileShareInfo_InvalidUserList *smithy.Schema
-
-var SMBFileShareInfo_AuditDestinationARN *smithy.Schema
-
-var SMBFileShareInfo_Authentication *smithy.Schema
-
-var SMBFileShareInfo_CaseSensitivity *smithy.Schema
-
-var SMBFileShareInfo_Tags *smithy.Schema
-
-var SMBFileShareInfo_FileShareName *smithy.Schema
-
-var SMBFileShareInfo_CacheAttributes *smithy.Schema
-
-var SMBFileShareInfo_NotificationPolicy *smithy.Schema
-
-var SMBFileShareInfo_VPCEndpointDNSName *smithy.Schema
-
-var SMBFileShareInfo_BucketRegion *smithy.Schema
-
-var SMBFileShareInfo_OplocksEnabled *smithy.Schema
-
-var _SMBFileShareInfoList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "SMBFileShareInfoList",
-}, smithy.ShapeTypeList, 1)
-var _SMBFileShareInfoList_member *smithy.Schema
-
-var _SMBGuestPassword = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "SMBGuestPassword",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var SMBLocalGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "SMBLocalGroups",
-}, smithy.ShapeTypeStructure, 1)
-var SMBLocalGroups_GatewayAdmins *smithy.Schema
-
-var SMBSecurityStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "SMBSecurityStrategy",
-}, smithy.ShapeTypeEnum, 4)
-var SMBSecurityStrategy_ClientSpecified *smithy.Schema
-
-var SMBSecurityStrategy_MandatorySigning *smithy.Schema
-
-var SMBSecurityStrategy_MandatoryEncryption *smithy.Schema
-
-var SMBSecurityStrategy_MandatoryEncryptionNoAes128 *smithy.Schema
-
-var _SnapshotDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "SnapshotDescription",
-}, smithy.ShapeTypeString, 0)
-
-var _SnapshotId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "SnapshotId",
-}, smithy.ShapeTypeString, 0)
-
-var SoftwareUpdatePreferences = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "SoftwareUpdatePreferences",
-}, smithy.ShapeTypeStructure, 1)
-var SoftwareUpdatePreferences_AutomaticUpdatePolicy *smithy.Schema
-
-var _SoftwareUpdatesEndDate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "SoftwareUpdatesEndDate",
-}, smithy.ShapeTypeString, 0)
-
-var _SoftwareVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "SoftwareVersion",
-}, smithy.ShapeTypeString, 0)
-
-var _Squash = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "Squash",
-}, smithy.ShapeTypeString, 0)
-
-var _StorageClass = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "StorageClass",
-}, smithy.ShapeTypeString, 0)
-
-var StorageGatewayError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "StorageGatewayError",
-}, smithy.ShapeTypeStructure, 2)
-var StorageGatewayError_errorCode *smithy.Schema
-
-var StorageGatewayError_errorDetails *smithy.Schema
-
-var StorediSCSIVolume = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "StorediSCSIVolume",
-}, smithy.ShapeTypeStructure, 15)
-var StorediSCSIVolume_VolumeARN *smithy.Schema
-
-var StorediSCSIVolume_VolumeId *smithy.Schema
-
-var StorediSCSIVolume_VolumeType *smithy.Schema
-
-var StorediSCSIVolume_VolumeStatus *smithy.Schema
-
-var StorediSCSIVolume_VolumeAttachmentStatus *smithy.Schema
-
-var StorediSCSIVolume_VolumeSizeInBytes *smithy.Schema
-
-var StorediSCSIVolume_VolumeProgress *smithy.Schema
-
-var StorediSCSIVolume_VolumeDiskId *smithy.Schema
-
-var StorediSCSIVolume_SourceSnapshotId *smithy.Schema
-
-var StorediSCSIVolume_PreservedExistingData *smithy.Schema
-
-var StorediSCSIVolume_VolumeiSCSIAttributes *smithy.Schema
-
-var StorediSCSIVolume_CreatedDate *smithy.Schema
-
-var StorediSCSIVolume_VolumeUsedInBytes *smithy.Schema
-
-var StorediSCSIVolume_KMSKey *smithy.Schema
-
-var StorediSCSIVolume_TargetName *smithy.Schema
-
-var _StorediSCSIVolumes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "StorediSCSIVolumes",
-}, smithy.ShapeTypeList, 1)
-var _StorediSCSIVolumes_member *smithy.Schema
-
-var _string = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "string",
-}, smithy.ShapeTypeString, 0)
-
-var _SupportedGatewayCapacities = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "SupportedGatewayCapacities",
-}, smithy.ShapeTypeList, 1)
-var _SupportedGatewayCapacities_member *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "TagKeys",
-}, smithy.ShapeTypeList, 1)
-var _TagKeys_member *smithy.Schema
-
-var _Tags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "Tags",
-}, smithy.ShapeTypeList, 1)
-var _Tags_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var Tape = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "Tape",
-}, smithy.ShapeTypeStructure, 13)
-var Tape_TapeARN *smithy.Schema
-
-var Tape_TapeBarcode *smithy.Schema
-
-var Tape_TapeCreatedDate *smithy.Schema
-
-var Tape_TapeSizeInBytes *smithy.Schema
-
-var Tape_TapeStatus *smithy.Schema
-
-var Tape_VTLDevice *smithy.Schema
-
-var Tape_Progress *smithy.Schema
-
-var Tape_TapeUsedInBytes *smithy.Schema
-
-var Tape_KMSKey *smithy.Schema
-
-var Tape_PoolId *smithy.Schema
-
-var Tape_Worm *smithy.Schema
-
-var Tape_RetentionStartDate *smithy.Schema
-
-var Tape_PoolEntryDate *smithy.Schema
-
-var TapeArchive = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "TapeArchive",
-}, smithy.ShapeTypeStructure, 13)
-var TapeArchive_TapeARN *smithy.Schema
-
-var TapeArchive_TapeBarcode *smithy.Schema
-
-var TapeArchive_TapeCreatedDate *smithy.Schema
-
-var TapeArchive_TapeSizeInBytes *smithy.Schema
-
-var TapeArchive_CompletionTime *smithy.Schema
-
-var TapeArchive_RetrievedTo *smithy.Schema
-
-var TapeArchive_TapeStatus *smithy.Schema
-
-var TapeArchive_TapeUsedInBytes *smithy.Schema
-
-var TapeArchive_KMSKey *smithy.Schema
-
-var TapeArchive_PoolId *smithy.Schema
-
-var TapeArchive_Worm *smithy.Schema
-
-var TapeArchive_RetentionStartDate *smithy.Schema
-
-var TapeArchive_PoolEntryDate *smithy.Schema
-
-var _TapeArchives = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "TapeArchives",
-}, smithy.ShapeTypeList, 1)
-var _TapeArchives_member *smithy.Schema
-
-var _TapeArchiveStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "TapeArchiveStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _TapeARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "TapeARN",
-}, smithy.ShapeTypeString, 0)
-
-var _TapeARNs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "TapeARNs",
-}, smithy.ShapeTypeList, 1)
-var _TapeARNs_member *smithy.Schema
-
-var _TapeBarcode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "TapeBarcode",
-}, smithy.ShapeTypeString, 0)
-
-var _TapeBarcodePrefix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "TapeBarcodePrefix",
-}, smithy.ShapeTypeString, 0)
-
-var _TapeDriveType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "TapeDriveType",
-}, smithy.ShapeTypeString, 0)
-
-var TapeInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "TapeInfo",
-}, smithy.ShapeTypeStructure, 8)
-var TapeInfo_TapeARN *smithy.Schema
-
-var TapeInfo_TapeBarcode *smithy.Schema
-
-var TapeInfo_TapeSizeInBytes *smithy.Schema
-
-var TapeInfo_TapeStatus *smithy.Schema
-
-var TapeInfo_GatewayARN *smithy.Schema
-
-var TapeInfo_PoolId *smithy.Schema
-
-var TapeInfo_RetentionStartDate *smithy.Schema
-
-var TapeInfo_PoolEntryDate *smithy.Schema
-
-var _TapeInfos = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "TapeInfos",
-}, smithy.ShapeTypeList, 1)
-var _TapeInfos_member *smithy.Schema
-
-var TapeRecoveryPointInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "TapeRecoveryPointInfo",
-}, smithy.ShapeTypeStructure, 4)
-var TapeRecoveryPointInfo_TapeARN *smithy.Schema
-
-var TapeRecoveryPointInfo_TapeRecoveryPointTime *smithy.Schema
-
-var TapeRecoveryPointInfo_TapeSizeInBytes *smithy.Schema
-
-var TapeRecoveryPointInfo_TapeStatus *smithy.Schema
-
-var _TapeRecoveryPointInfos = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "TapeRecoveryPointInfos",
-}, smithy.ShapeTypeList, 1)
-var _TapeRecoveryPointInfos_member *smithy.Schema
-
-var _TapeRecoveryPointStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "TapeRecoveryPointStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _Tapes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "Tapes",
-}, smithy.ShapeTypeList, 1)
-var _Tapes_member *smithy.Schema
-
-var _TapeSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "TapeSize",
-}, smithy.ShapeTypeLong, 0)
-
-var _TapeStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "TapeStatus",
-}, smithy.ShapeTypeString, 0)
-
-var TapeStorageClass = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "TapeStorageClass",
-}, smithy.ShapeTypeEnum, 2)
-var TapeStorageClass_DEEP_ARCHIVE *smithy.Schema
-
-var TapeStorageClass_GLACIER *smithy.Schema
-
-var _TapeUsage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "TapeUsage",
-}, smithy.ShapeTypeLong, 0)
-
-var _TargetARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "TargetARN",
-}, smithy.ShapeTypeString, 0)
-
-var _TargetName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "TargetName",
-}, smithy.ShapeTypeString, 0)
-
-var _Time = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "Time",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _TimeoutInSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "TimeoutInSeconds",
-}, smithy.ShapeTypeInteger, 0)
-
-var _UserList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UserList",
-}, smithy.ShapeTypeList, 1)
-var _UserList_member *smithy.Schema
-
-var _UserListUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UserListUser",
-}, smithy.ShapeTypeString, 0)
-
-var _VolumeARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "VolumeARN",
-}, smithy.ShapeTypeString, 0)
-
-var _VolumeARNs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "VolumeARNs",
-}, smithy.ShapeTypeList, 1)
-var _VolumeARNs_member *smithy.Schema
-
-var _VolumeAttachmentStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "VolumeAttachmentStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _VolumeId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "VolumeId",
-}, smithy.ShapeTypeString, 0)
-
-var VolumeInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "VolumeInfo",
-}, smithy.ShapeTypeStructure, 7)
-var VolumeInfo_VolumeARN *smithy.Schema
-
-var VolumeInfo_VolumeId *smithy.Schema
-
-var VolumeInfo_GatewayARN *smithy.Schema
-
-var VolumeInfo_GatewayId *smithy.Schema
-
-var VolumeInfo_VolumeType *smithy.Schema
-
-var VolumeInfo_VolumeSizeInBytes *smithy.Schema
-
-var VolumeInfo_VolumeAttachmentStatus *smithy.Schema
-
-var _VolumeInfos = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "VolumeInfos",
-}, smithy.ShapeTypeList, 1)
-var _VolumeInfos_member *smithy.Schema
-
-var VolumeiSCSIAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "VolumeiSCSIAttributes",
-}, smithy.ShapeTypeStructure, 5)
-var VolumeiSCSIAttributes_TargetARN *smithy.Schema
-
-var VolumeiSCSIAttributes_NetworkInterfaceId *smithy.Schema
-
-var VolumeiSCSIAttributes_NetworkInterfacePort *smithy.Schema
-
-var VolumeiSCSIAttributes_LunNumber *smithy.Schema
-
-var VolumeiSCSIAttributes_ChapEnabled *smithy.Schema
-
-var VolumeRecoveryPointInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "VolumeRecoveryPointInfo",
-}, smithy.ShapeTypeStructure, 4)
-var VolumeRecoveryPointInfo_VolumeARN *smithy.Schema
-
-var VolumeRecoveryPointInfo_VolumeSizeInBytes *smithy.Schema
-
-var VolumeRecoveryPointInfo_VolumeUsageInBytes *smithy.Schema
-
-var VolumeRecoveryPointInfo_VolumeRecoveryPointTime *smithy.Schema
-
-var _VolumeRecoveryPointInfos = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "VolumeRecoveryPointInfos",
-}, smithy.ShapeTypeList, 1)
-var _VolumeRecoveryPointInfos_member *smithy.Schema
-
-var _VolumeStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "VolumeStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _VolumeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "VolumeType",
-}, smithy.ShapeTypeString, 0)
-
-var _VolumeUsedInBytes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "VolumeUsedInBytes",
-}, smithy.ShapeTypeLong, 0)
-
-var VTLDevice = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "VTLDevice",
-}, smithy.ShapeTypeStructure, 5)
-var VTLDevice_VTLDeviceARN *smithy.Schema
-
-var VTLDevice_VTLDeviceType *smithy.Schema
-
-var VTLDevice_VTLDeviceVendor *smithy.Schema
-
-var VTLDevice_VTLDeviceProductIdentifier *smithy.Schema
-
-var VTLDevice_DeviceiSCSIAttributes *smithy.Schema
-
-var _VTLDeviceARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "VTLDeviceARN",
-}, smithy.ShapeTypeString, 0)
-
-var _VTLDeviceARNs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "VTLDeviceARNs",
-}, smithy.ShapeTypeList, 1)
-var _VTLDeviceARNs_member *smithy.Schema
-
-var _VTLDeviceProductIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "VTLDeviceProductIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _VTLDevices = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "VTLDevices",
-}, smithy.ShapeTypeList, 1)
-var _VTLDevices_member *smithy.Schema
-
-var _VTLDeviceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "VTLDeviceType",
-}, smithy.ShapeTypeString, 0)
-
-var _VTLDeviceVendor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "VTLDeviceVendor",
-}, smithy.ShapeTypeString, 0)
-
-var ActivateGatewayInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ActivateGatewayInput",
-}, smithy.ShapeTypeStructure, 8)
-var ActivateGatewayInput_ActivationKey *smithy.Schema
-
-var ActivateGatewayInput_GatewayName *smithy.Schema
-
-var ActivateGatewayInput_GatewayTimezone *smithy.Schema
-
-var ActivateGatewayInput_GatewayRegion *smithy.Schema
-
-var ActivateGatewayInput_GatewayType *smithy.Schema
-
-var ActivateGatewayInput_TapeDriveType *smithy.Schema
-
-var ActivateGatewayInput_MediumChangerType *smithy.Schema
-
-var ActivateGatewayInput_Tags *smithy.Schema
-
-var ActivateGatewayOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ActivateGatewayOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ActivateGatewayOutput_GatewayARN *smithy.Schema
-
-var AddCacheInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AddCacheInput",
-}, smithy.ShapeTypeStructure, 2)
-var AddCacheInput_GatewayARN *smithy.Schema
-
-var AddCacheInput_DiskIds *smithy.Schema
-
-var AddCacheOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AddCacheOutput",
-}, smithy.ShapeTypeStructure, 1)
-var AddCacheOutput_GatewayARN *smithy.Schema
-
-var AddTagsToResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AddTagsToResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var AddTagsToResourceInput_ResourceARN *smithy.Schema
-
-var AddTagsToResourceInput_Tags *smithy.Schema
-
-var AddTagsToResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AddTagsToResourceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var AddTagsToResourceOutput_ResourceARN *smithy.Schema
-
-var AddUploadBufferInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AddUploadBufferInput",
-}, smithy.ShapeTypeStructure, 2)
-var AddUploadBufferInput_GatewayARN *smithy.Schema
-
-var AddUploadBufferInput_DiskIds *smithy.Schema
-
-var AddUploadBufferOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AddUploadBufferOutput",
-}, smithy.ShapeTypeStructure, 1)
-var AddUploadBufferOutput_GatewayARN *smithy.Schema
-
-var AddWorkingStorageInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AddWorkingStorageInput",
-}, smithy.ShapeTypeStructure, 2)
-var AddWorkingStorageInput_GatewayARN *smithy.Schema
-
-var AddWorkingStorageInput_DiskIds *smithy.Schema
-
-var AddWorkingStorageOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AddWorkingStorageOutput",
-}, smithy.ShapeTypeStructure, 1)
-var AddWorkingStorageOutput_GatewayARN *smithy.Schema
-
-var AssignTapePoolInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AssignTapePoolInput",
-}, smithy.ShapeTypeStructure, 3)
-var AssignTapePoolInput_TapeARN *smithy.Schema
-
-var AssignTapePoolInput_PoolId *smithy.Schema
-
-var AssignTapePoolInput_BypassGovernanceRetention *smithy.Schema
-
-var AssignTapePoolOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AssignTapePoolOutput",
-}, smithy.ShapeTypeStructure, 1)
-var AssignTapePoolOutput_TapeARN *smithy.Schema
-
-var AssociateFileSystemInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AssociateFileSystemInput",
-}, smithy.ShapeTypeStructure, 9)
-var AssociateFileSystemInput_UserName *smithy.Schema
-
-var AssociateFileSystemInput_Password *smithy.Schema
-
-var AssociateFileSystemInput_ClientToken *smithy.Schema
-
-var AssociateFileSystemInput_GatewayARN *smithy.Schema
-
-var AssociateFileSystemInput_LocationARN *smithy.Schema
-
-var AssociateFileSystemInput_Tags *smithy.Schema
-
-var AssociateFileSystemInput_AuditDestinationARN *smithy.Schema
-
-var AssociateFileSystemInput_CacheAttributes *smithy.Schema
-
-var AssociateFileSystemInput_EndpointNetworkConfiguration *smithy.Schema
-
-var AssociateFileSystemOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AssociateFileSystemOutput",
-}, smithy.ShapeTypeStructure, 1)
-var AssociateFileSystemOutput_FileSystemAssociationARN *smithy.Schema
-
-var AttachVolumeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AttachVolumeInput",
-}, smithy.ShapeTypeStructure, 5)
-var AttachVolumeInput_GatewayARN *smithy.Schema
-
-var AttachVolumeInput_TargetName *smithy.Schema
-
-var AttachVolumeInput_VolumeARN *smithy.Schema
-
-var AttachVolumeInput_NetworkInterfaceId *smithy.Schema
-
-var AttachVolumeInput_DiskId *smithy.Schema
-
-var AttachVolumeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "AttachVolumeOutput",
-}, smithy.ShapeTypeStructure, 2)
-var AttachVolumeOutput_VolumeARN *smithy.Schema
-
-var AttachVolumeOutput_TargetARN *smithy.Schema
-
-var CancelArchivalInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CancelArchivalInput",
-}, smithy.ShapeTypeStructure, 2)
-var CancelArchivalInput_GatewayARN *smithy.Schema
-
-var CancelArchivalInput_TapeARN *smithy.Schema
-
-var CancelArchivalOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CancelArchivalOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CancelArchivalOutput_TapeARN *smithy.Schema
-
-var CancelCacheReportInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CancelCacheReportInput",
-}, smithy.ShapeTypeStructure, 1)
-var CancelCacheReportInput_CacheReportARN *smithy.Schema
-
-var CancelCacheReportOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CancelCacheReportOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CancelCacheReportOutput_CacheReportARN *smithy.Schema
-
-var CancelRetrievalInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CancelRetrievalInput",
-}, smithy.ShapeTypeStructure, 2)
-var CancelRetrievalInput_GatewayARN *smithy.Schema
-
-var CancelRetrievalInput_TapeARN *smithy.Schema
-
-var CancelRetrievalOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CancelRetrievalOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CancelRetrievalOutput_TapeARN *smithy.Schema
-
-var CreateCachediSCSIVolumeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateCachediSCSIVolumeInput",
-}, smithy.ShapeTypeStructure, 10)
-var CreateCachediSCSIVolumeInput_GatewayARN *smithy.Schema
-
-var CreateCachediSCSIVolumeInput_VolumeSizeInBytes *smithy.Schema
-
-var CreateCachediSCSIVolumeInput_SnapshotId *smithy.Schema
-
-var CreateCachediSCSIVolumeInput_TargetName *smithy.Schema
-
-var CreateCachediSCSIVolumeInput_SourceVolumeARN *smithy.Schema
-
-var CreateCachediSCSIVolumeInput_NetworkInterfaceId *smithy.Schema
-
-var CreateCachediSCSIVolumeInput_ClientToken *smithy.Schema
-
-var CreateCachediSCSIVolumeInput_KMSEncrypted *smithy.Schema
-
-var CreateCachediSCSIVolumeInput_KMSKey *smithy.Schema
-
-var CreateCachediSCSIVolumeInput_Tags *smithy.Schema
-
-var CreateCachediSCSIVolumeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateCachediSCSIVolumeOutput",
-}, smithy.ShapeTypeStructure, 2)
-var CreateCachediSCSIVolumeOutput_VolumeARN *smithy.Schema
-
-var CreateCachediSCSIVolumeOutput_TargetARN *smithy.Schema
-
-var CreateNFSFileShareInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateNFSFileShareInput",
-}, smithy.ShapeTypeStructure, 22)
-var CreateNFSFileShareInput_ClientToken *smithy.Schema
-
-var CreateNFSFileShareInput_NFSFileShareDefaults *smithy.Schema
-
-var CreateNFSFileShareInput_GatewayARN *smithy.Schema
-
-var CreateNFSFileShareInput_EncryptionType *smithy.Schema
-
-var CreateNFSFileShareInput_KMSEncrypted *smithy.Schema
-
-var CreateNFSFileShareInput_KMSKey *smithy.Schema
-
-var CreateNFSFileShareInput_Role *smithy.Schema
-
-var CreateNFSFileShareInput_LocationARN *smithy.Schema
-
-var CreateNFSFileShareInput_DefaultStorageClass *smithy.Schema
-
-var CreateNFSFileShareInput_ObjectACL *smithy.Schema
-
-var CreateNFSFileShareInput_ClientList *smithy.Schema
-
-var CreateNFSFileShareInput_Squash *smithy.Schema
-
-var CreateNFSFileShareInput_ReadOnly *smithy.Schema
-
-var CreateNFSFileShareInput_GuessMIMETypeEnabled *smithy.Schema
-
-var CreateNFSFileShareInput_RequesterPays *smithy.Schema
-
-var CreateNFSFileShareInput_Tags *smithy.Schema
-
-var CreateNFSFileShareInput_FileShareName *smithy.Schema
-
-var CreateNFSFileShareInput_CacheAttributes *smithy.Schema
-
-var CreateNFSFileShareInput_NotificationPolicy *smithy.Schema
-
-var CreateNFSFileShareInput_VPCEndpointDNSName *smithy.Schema
-
-var CreateNFSFileShareInput_BucketRegion *smithy.Schema
-
-var CreateNFSFileShareInput_AuditDestinationARN *smithy.Schema
-
-var CreateNFSFileShareOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateNFSFileShareOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateNFSFileShareOutput_FileShareARN *smithy.Schema
-
-var CreateSMBFileShareInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateSMBFileShareInput",
-}, smithy.ShapeTypeStructure, 27)
-var CreateSMBFileShareInput_ClientToken *smithy.Schema
-
-var CreateSMBFileShareInput_GatewayARN *smithy.Schema
-
-var CreateSMBFileShareInput_EncryptionType *smithy.Schema
-
-var CreateSMBFileShareInput_KMSEncrypted *smithy.Schema
-
-var CreateSMBFileShareInput_KMSKey *smithy.Schema
-
-var CreateSMBFileShareInput_Role *smithy.Schema
-
-var CreateSMBFileShareInput_LocationARN *smithy.Schema
-
-var CreateSMBFileShareInput_DefaultStorageClass *smithy.Schema
-
-var CreateSMBFileShareInput_ObjectACL *smithy.Schema
-
-var CreateSMBFileShareInput_ReadOnly *smithy.Schema
-
-var CreateSMBFileShareInput_GuessMIMETypeEnabled *smithy.Schema
-
-var CreateSMBFileShareInput_RequesterPays *smithy.Schema
-
-var CreateSMBFileShareInput_SMBACLEnabled *smithy.Schema
-
-var CreateSMBFileShareInput_AccessBasedEnumeration *smithy.Schema
-
-var CreateSMBFileShareInput_AdminUserList *smithy.Schema
-
-var CreateSMBFileShareInput_ValidUserList *smithy.Schema
-
-var CreateSMBFileShareInput_InvalidUserList *smithy.Schema
-
-var CreateSMBFileShareInput_AuditDestinationARN *smithy.Schema
-
-var CreateSMBFileShareInput_Authentication *smithy.Schema
-
-var CreateSMBFileShareInput_CaseSensitivity *smithy.Schema
-
-var CreateSMBFileShareInput_Tags *smithy.Schema
-
-var CreateSMBFileShareInput_FileShareName *smithy.Schema
-
-var CreateSMBFileShareInput_CacheAttributes *smithy.Schema
-
-var CreateSMBFileShareInput_NotificationPolicy *smithy.Schema
-
-var CreateSMBFileShareInput_VPCEndpointDNSName *smithy.Schema
-
-var CreateSMBFileShareInput_BucketRegion *smithy.Schema
-
-var CreateSMBFileShareInput_OplocksEnabled *smithy.Schema
-
-var CreateSMBFileShareOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateSMBFileShareOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateSMBFileShareOutput_FileShareARN *smithy.Schema
-
-var CreateSnapshotFromVolumeRecoveryPointInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateSnapshotFromVolumeRecoveryPointInput",
-}, smithy.ShapeTypeStructure, 3)
-var CreateSnapshotFromVolumeRecoveryPointInput_VolumeARN *smithy.Schema
-
-var CreateSnapshotFromVolumeRecoveryPointInput_SnapshotDescription *smithy.Schema
-
-var CreateSnapshotFromVolumeRecoveryPointInput_Tags *smithy.Schema
-
-var CreateSnapshotFromVolumeRecoveryPointOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateSnapshotFromVolumeRecoveryPointOutput",
-}, smithy.ShapeTypeStructure, 3)
-var CreateSnapshotFromVolumeRecoveryPointOutput_SnapshotId *smithy.Schema
-
-var CreateSnapshotFromVolumeRecoveryPointOutput_VolumeARN *smithy.Schema
-
-var CreateSnapshotFromVolumeRecoveryPointOutput_VolumeRecoveryPointTime *smithy.Schema
-
-var CreateSnapshotInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateSnapshotInput",
-}, smithy.ShapeTypeStructure, 3)
-var CreateSnapshotInput_VolumeARN *smithy.Schema
-
-var CreateSnapshotInput_SnapshotDescription *smithy.Schema
-
-var CreateSnapshotInput_Tags *smithy.Schema
-
-var CreateSnapshotOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateSnapshotOutput",
-}, smithy.ShapeTypeStructure, 2)
-var CreateSnapshotOutput_VolumeARN *smithy.Schema
-
-var CreateSnapshotOutput_SnapshotId *smithy.Schema
-
-var CreateStorediSCSIVolumeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateStorediSCSIVolumeInput",
-}, smithy.ShapeTypeStructure, 9)
-var CreateStorediSCSIVolumeInput_GatewayARN *smithy.Schema
-
-var CreateStorediSCSIVolumeInput_DiskId *smithy.Schema
-
-var CreateStorediSCSIVolumeInput_SnapshotId *smithy.Schema
-
-var CreateStorediSCSIVolumeInput_PreserveExistingData *smithy.Schema
-
-var CreateStorediSCSIVolumeInput_TargetName *smithy.Schema
-
-var CreateStorediSCSIVolumeInput_NetworkInterfaceId *smithy.Schema
-
-var CreateStorediSCSIVolumeInput_KMSEncrypted *smithy.Schema
-
-var CreateStorediSCSIVolumeInput_KMSKey *smithy.Schema
-
-var CreateStorediSCSIVolumeInput_Tags *smithy.Schema
-
-var CreateStorediSCSIVolumeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateStorediSCSIVolumeOutput",
-}, smithy.ShapeTypeStructure, 3)
-var CreateStorediSCSIVolumeOutput_VolumeARN *smithy.Schema
-
-var CreateStorediSCSIVolumeOutput_VolumeSizeInBytes *smithy.Schema
-
-var CreateStorediSCSIVolumeOutput_TargetARN *smithy.Schema
-
-var CreateTapePoolInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateTapePoolInput",
-}, smithy.ShapeTypeStructure, 5)
-var CreateTapePoolInput_PoolName *smithy.Schema
-
-var CreateTapePoolInput_StorageClass *smithy.Schema
-
-var CreateTapePoolInput_RetentionLockType *smithy.Schema
-
-var CreateTapePoolInput_RetentionLockTimeInDays *smithy.Schema
-
-var CreateTapePoolInput_Tags *smithy.Schema
-
-var CreateTapePoolOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateTapePoolOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateTapePoolOutput_PoolARN *smithy.Schema
-
-var CreateTapesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateTapesInput",
-}, smithy.ShapeTypeStructure, 10)
-var CreateTapesInput_GatewayARN *smithy.Schema
-
-var CreateTapesInput_TapeSizeInBytes *smithy.Schema
-
-var CreateTapesInput_ClientToken *smithy.Schema
-
-var CreateTapesInput_NumTapesToCreate *smithy.Schema
-
-var CreateTapesInput_TapeBarcodePrefix *smithy.Schema
-
-var CreateTapesInput_KMSEncrypted *smithy.Schema
-
-var CreateTapesInput_KMSKey *smithy.Schema
-
-var CreateTapesInput_PoolId *smithy.Schema
-
-var CreateTapesInput_Worm *smithy.Schema
-
-var CreateTapesInput_Tags *smithy.Schema
-
-var CreateTapesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateTapesOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateTapesOutput_TapeARNs *smithy.Schema
-
-var CreateTapeWithBarcodeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateTapeWithBarcodeInput",
-}, smithy.ShapeTypeStructure, 8)
-var CreateTapeWithBarcodeInput_GatewayARN *smithy.Schema
-
-var CreateTapeWithBarcodeInput_TapeSizeInBytes *smithy.Schema
-
-var CreateTapeWithBarcodeInput_TapeBarcode *smithy.Schema
-
-var CreateTapeWithBarcodeInput_KMSEncrypted *smithy.Schema
-
-var CreateTapeWithBarcodeInput_KMSKey *smithy.Schema
-
-var CreateTapeWithBarcodeInput_PoolId *smithy.Schema
-
-var CreateTapeWithBarcodeInput_Worm *smithy.Schema
-
-var CreateTapeWithBarcodeInput_Tags *smithy.Schema
-
-var CreateTapeWithBarcodeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "CreateTapeWithBarcodeOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateTapeWithBarcodeOutput_TapeARN *smithy.Schema
-
-var DeleteAutomaticTapeCreationPolicyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteAutomaticTapeCreationPolicyInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteAutomaticTapeCreationPolicyInput_GatewayARN *smithy.Schema
-
-var DeleteAutomaticTapeCreationPolicyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteAutomaticTapeCreationPolicyOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteAutomaticTapeCreationPolicyOutput_GatewayARN *smithy.Schema
-
-var DeleteBandwidthRateLimitInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteBandwidthRateLimitInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteBandwidthRateLimitInput_GatewayARN *smithy.Schema
-
-var DeleteBandwidthRateLimitInput_BandwidthType *smithy.Schema
-
-var DeleteBandwidthRateLimitOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteBandwidthRateLimitOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteBandwidthRateLimitOutput_GatewayARN *smithy.Schema
-
-var DeleteCacheReportInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteCacheReportInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteCacheReportInput_CacheReportARN *smithy.Schema
-
-var DeleteCacheReportOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteCacheReportOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteCacheReportOutput_CacheReportARN *smithy.Schema
-
-var DeleteChapCredentialsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteChapCredentialsInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteChapCredentialsInput_TargetARN *smithy.Schema
-
-var DeleteChapCredentialsInput_InitiatorName *smithy.Schema
-
-var DeleteChapCredentialsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteChapCredentialsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteChapCredentialsOutput_TargetARN *smithy.Schema
-
-var DeleteChapCredentialsOutput_InitiatorName *smithy.Schema
-
-var DeleteFileShareInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteFileShareInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteFileShareInput_FileShareARN *smithy.Schema
-
-var DeleteFileShareInput_ForceDelete *smithy.Schema
-
-var DeleteFileShareOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteFileShareOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteFileShareOutput_FileShareARN *smithy.Schema
-
-var DeleteGatewayInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteGatewayInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteGatewayInput_GatewayARN *smithy.Schema
-
-var DeleteGatewayOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteGatewayOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteGatewayOutput_GatewayARN *smithy.Schema
-
-var DeleteSnapshotScheduleInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteSnapshotScheduleInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteSnapshotScheduleInput_VolumeARN *smithy.Schema
-
-var DeleteSnapshotScheduleOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteSnapshotScheduleOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteSnapshotScheduleOutput_VolumeARN *smithy.Schema
-
-var DeleteTapeArchiveInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteTapeArchiveInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteTapeArchiveInput_TapeARN *smithy.Schema
-
-var DeleteTapeArchiveInput_BypassGovernanceRetention *smithy.Schema
-
-var DeleteTapeArchiveOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteTapeArchiveOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteTapeArchiveOutput_TapeARN *smithy.Schema
-
-var DeleteTapeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteTapeInput",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteTapeInput_GatewayARN *smithy.Schema
-
-var DeleteTapeInput_TapeARN *smithy.Schema
-
-var DeleteTapeInput_BypassGovernanceRetention *smithy.Schema
-
-var DeleteTapeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteTapeOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteTapeOutput_TapeARN *smithy.Schema
-
-var DeleteTapePoolInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteTapePoolInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteTapePoolInput_PoolARN *smithy.Schema
-
-var DeleteTapePoolOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteTapePoolOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteTapePoolOutput_PoolARN *smithy.Schema
-
-var DeleteVolumeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteVolumeInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteVolumeInput_VolumeARN *smithy.Schema
-
-var DeleteVolumeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DeleteVolumeOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteVolumeOutput_VolumeARN *smithy.Schema
-
-var DescribeAvailabilityMonitorTestInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeAvailabilityMonitorTestInput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeAvailabilityMonitorTestInput_GatewayARN *smithy.Schema
-
-var DescribeAvailabilityMonitorTestOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeAvailabilityMonitorTestOutput",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeAvailabilityMonitorTestOutput_GatewayARN *smithy.Schema
-
-var DescribeAvailabilityMonitorTestOutput_Status *smithy.Schema
-
-var DescribeAvailabilityMonitorTestOutput_StartTime *smithy.Schema
-
-var DescribeBandwidthRateLimitInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeBandwidthRateLimitInput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeBandwidthRateLimitInput_GatewayARN *smithy.Schema
-
-var DescribeBandwidthRateLimitOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeBandwidthRateLimitOutput",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeBandwidthRateLimitOutput_GatewayARN *smithy.Schema
-
-var DescribeBandwidthRateLimitOutput_AverageUploadRateLimitInBitsPerSec *smithy.Schema
-
-var DescribeBandwidthRateLimitOutput_AverageDownloadRateLimitInBitsPerSec *smithy.Schema
-
-var DescribeBandwidthRateLimitScheduleInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeBandwidthRateLimitScheduleInput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeBandwidthRateLimitScheduleInput_GatewayARN *smithy.Schema
-
-var DescribeBandwidthRateLimitScheduleOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeBandwidthRateLimitScheduleOutput",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeBandwidthRateLimitScheduleOutput_GatewayARN *smithy.Schema
-
-var DescribeBandwidthRateLimitScheduleOutput_BandwidthRateLimitIntervals *smithy.Schema
-
-var DescribeCachediSCSIVolumesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeCachediSCSIVolumesInput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeCachediSCSIVolumesInput_VolumeARNs *smithy.Schema
-
-var DescribeCachediSCSIVolumesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeCachediSCSIVolumesOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeCachediSCSIVolumesOutput_CachediSCSIVolumes *smithy.Schema
-
-var DescribeCacheInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeCacheInput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeCacheInput_GatewayARN *smithy.Schema
-
-var DescribeCacheOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeCacheOutput",
-}, smithy.ShapeTypeStructure, 7)
-var DescribeCacheOutput_GatewayARN *smithy.Schema
-
-var DescribeCacheOutput_DiskIds *smithy.Schema
-
-var DescribeCacheOutput_CacheAllocatedInBytes *smithy.Schema
-
-var DescribeCacheOutput_CacheUsedPercentage *smithy.Schema
-
-var DescribeCacheOutput_CacheDirtyPercentage *smithy.Schema
-
-var DescribeCacheOutput_CacheHitPercentage *smithy.Schema
-
-var DescribeCacheOutput_CacheMissPercentage *smithy.Schema
-
-var DescribeCacheReportInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeCacheReportInput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeCacheReportInput_CacheReportARN *smithy.Schema
-
-var DescribeCacheReportOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeCacheReportOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeCacheReportOutput_CacheReportInfo *smithy.Schema
-
-var DescribeChapCredentialsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeChapCredentialsInput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeChapCredentialsInput_TargetARN *smithy.Schema
-
-var DescribeChapCredentialsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeChapCredentialsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeChapCredentialsOutput_ChapCredentials *smithy.Schema
-
-var DescribeFileSystemAssociationsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeFileSystemAssociationsInput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeFileSystemAssociationsInput_FileSystemAssociationARNList *smithy.Schema
-
-var DescribeFileSystemAssociationsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeFileSystemAssociationsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeFileSystemAssociationsOutput_FileSystemAssociationInfoList *smithy.Schema
-
-var DescribeGatewayInformationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeGatewayInformationInput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeGatewayInformationInput_GatewayARN *smithy.Schema
-
-var DescribeGatewayInformationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeGatewayInformationOutput",
-}, smithy.ShapeTypeStructure, 22)
-var DescribeGatewayInformationOutput_GatewayARN *smithy.Schema
-
-var DescribeGatewayInformationOutput_GatewayId *smithy.Schema
-
-var DescribeGatewayInformationOutput_GatewayName *smithy.Schema
-
-var DescribeGatewayInformationOutput_GatewayTimezone *smithy.Schema
-
-var DescribeGatewayInformationOutput_GatewayState *smithy.Schema
-
-var DescribeGatewayInformationOutput_GatewayNetworkInterfaces *smithy.Schema
-
-var DescribeGatewayInformationOutput_GatewayType *smithy.Schema
-
-var DescribeGatewayInformationOutput_NextUpdateAvailabilityDate *smithy.Schema
-
-var DescribeGatewayInformationOutput_LastSoftwareUpdate *smithy.Schema
-
-var DescribeGatewayInformationOutput_Ec2InstanceId *smithy.Schema
-
-var DescribeGatewayInformationOutput_Ec2InstanceRegion *smithy.Schema
-
-var DescribeGatewayInformationOutput_Tags *smithy.Schema
-
-var DescribeGatewayInformationOutput_VPCEndpoint *smithy.Schema
-
-var DescribeGatewayInformationOutput_CloudWatchLogGroupARN *smithy.Schema
-
-var DescribeGatewayInformationOutput_HostEnvironment *smithy.Schema
-
-var DescribeGatewayInformationOutput_EndpointType *smithy.Schema
-
-var DescribeGatewayInformationOutput_SoftwareUpdatesEndDate *smithy.Schema
-
-var DescribeGatewayInformationOutput_DeprecationDate *smithy.Schema
-
-var DescribeGatewayInformationOutput_GatewayCapacity *smithy.Schema
-
-var DescribeGatewayInformationOutput_SupportedGatewayCapacities *smithy.Schema
-
-var DescribeGatewayInformationOutput_HostEnvironmentId *smithy.Schema
-
-var DescribeGatewayInformationOutput_SoftwareVersion *smithy.Schema
-
-var DescribeMaintenanceStartTimeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeMaintenanceStartTimeInput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeMaintenanceStartTimeInput_GatewayARN *smithy.Schema
-
-var DescribeMaintenanceStartTimeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeMaintenanceStartTimeOutput",
-}, smithy.ShapeTypeStructure, 7)
-var DescribeMaintenanceStartTimeOutput_GatewayARN *smithy.Schema
-
-var DescribeMaintenanceStartTimeOutput_HourOfDay *smithy.Schema
-
-var DescribeMaintenanceStartTimeOutput_MinuteOfHour *smithy.Schema
-
-var DescribeMaintenanceStartTimeOutput_DayOfWeek *smithy.Schema
-
-var DescribeMaintenanceStartTimeOutput_DayOfMonth *smithy.Schema
-
-var DescribeMaintenanceStartTimeOutput_Timezone *smithy.Schema
-
-var DescribeMaintenanceStartTimeOutput_SoftwareUpdatePreferences *smithy.Schema
-
-var DescribeNFSFileSharesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeNFSFileSharesInput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeNFSFileSharesInput_FileShareARNList *smithy.Schema
-
-var DescribeNFSFileSharesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeNFSFileSharesOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeNFSFileSharesOutput_NFSFileShareInfoList *smithy.Schema
-
-var DescribeSMBFileSharesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeSMBFileSharesInput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeSMBFileSharesInput_FileShareARNList *smithy.Schema
-
-var DescribeSMBFileSharesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeSMBFileSharesOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeSMBFileSharesOutput_SMBFileShareInfoList *smithy.Schema
-
-var DescribeSMBSettingsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeSMBSettingsInput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeSMBSettingsInput_GatewayARN *smithy.Schema
-
-var DescribeSMBSettingsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeSMBSettingsOutput",
-}, smithy.ShapeTypeStructure, 7)
-var DescribeSMBSettingsOutput_GatewayARN *smithy.Schema
-
-var DescribeSMBSettingsOutput_DomainName *smithy.Schema
-
-var DescribeSMBSettingsOutput_ActiveDirectoryStatus *smithy.Schema
-
-var DescribeSMBSettingsOutput_SMBGuestPasswordSet *smithy.Schema
-
-var DescribeSMBSettingsOutput_SMBSecurityStrategy *smithy.Schema
-
-var DescribeSMBSettingsOutput_FileSharesVisible *smithy.Schema
-
-var DescribeSMBSettingsOutput_SMBLocalGroups *smithy.Schema
-
-var DescribeSnapshotScheduleInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeSnapshotScheduleInput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeSnapshotScheduleInput_VolumeARN *smithy.Schema
-
-var DescribeSnapshotScheduleOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeSnapshotScheduleOutput",
-}, smithy.ShapeTypeStructure, 6)
-var DescribeSnapshotScheduleOutput_VolumeARN *smithy.Schema
-
-var DescribeSnapshotScheduleOutput_StartAt *smithy.Schema
-
-var DescribeSnapshotScheduleOutput_RecurrenceInHours *smithy.Schema
-
-var DescribeSnapshotScheduleOutput_Description *smithy.Schema
-
-var DescribeSnapshotScheduleOutput_Timezone *smithy.Schema
-
-var DescribeSnapshotScheduleOutput_Tags *smithy.Schema
-
-var DescribeStorediSCSIVolumesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeStorediSCSIVolumesInput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeStorediSCSIVolumesInput_VolumeARNs *smithy.Schema
-
-var DescribeStorediSCSIVolumesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeStorediSCSIVolumesOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeStorediSCSIVolumesOutput_StorediSCSIVolumes *smithy.Schema
-
-var DescribeTapeArchivesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeTapeArchivesInput",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeTapeArchivesInput_TapeARNs *smithy.Schema
-
-var DescribeTapeArchivesInput_Marker *smithy.Schema
-
-var DescribeTapeArchivesInput_Limit *smithy.Schema
-
-var DescribeTapeArchivesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeTapeArchivesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeTapeArchivesOutput_TapeArchives *smithy.Schema
-
-var DescribeTapeArchivesOutput_Marker *smithy.Schema
-
-var DescribeTapeRecoveryPointsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeTapeRecoveryPointsInput",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeTapeRecoveryPointsInput_GatewayARN *smithy.Schema
-
-var DescribeTapeRecoveryPointsInput_Marker *smithy.Schema
-
-var DescribeTapeRecoveryPointsInput_Limit *smithy.Schema
-
-var DescribeTapeRecoveryPointsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeTapeRecoveryPointsOutput",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeTapeRecoveryPointsOutput_GatewayARN *smithy.Schema
-
-var DescribeTapeRecoveryPointsOutput_TapeRecoveryPointInfos *smithy.Schema
-
-var DescribeTapeRecoveryPointsOutput_Marker *smithy.Schema
-
-var DescribeTapesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeTapesInput",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeTapesInput_GatewayARN *smithy.Schema
-
-var DescribeTapesInput_TapeARNs *smithy.Schema
-
-var DescribeTapesInput_Marker *smithy.Schema
-
-var DescribeTapesInput_Limit *smithy.Schema
-
-var DescribeTapesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeTapesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeTapesOutput_Tapes *smithy.Schema
-
-var DescribeTapesOutput_Marker *smithy.Schema
-
-var DescribeUploadBufferInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeUploadBufferInput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeUploadBufferInput_GatewayARN *smithy.Schema
-
-var DescribeUploadBufferOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeUploadBufferOutput",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeUploadBufferOutput_GatewayARN *smithy.Schema
-
-var DescribeUploadBufferOutput_DiskIds *smithy.Schema
-
-var DescribeUploadBufferOutput_UploadBufferUsedInBytes *smithy.Schema
-
-var DescribeUploadBufferOutput_UploadBufferAllocatedInBytes *smithy.Schema
-
-var DescribeVTLDevicesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeVTLDevicesInput",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeVTLDevicesInput_GatewayARN *smithy.Schema
-
-var DescribeVTLDevicesInput_VTLDeviceARNs *smithy.Schema
-
-var DescribeVTLDevicesInput_Marker *smithy.Schema
-
-var DescribeVTLDevicesInput_Limit *smithy.Schema
-
-var DescribeVTLDevicesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeVTLDevicesOutput",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeVTLDevicesOutput_GatewayARN *smithy.Schema
-
-var DescribeVTLDevicesOutput_VTLDevices *smithy.Schema
-
-var DescribeVTLDevicesOutput_Marker *smithy.Schema
-
-var DescribeWorkingStorageInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeWorkingStorageInput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeWorkingStorageInput_GatewayARN *smithy.Schema
-
-var DescribeWorkingStorageOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DescribeWorkingStorageOutput",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeWorkingStorageOutput_GatewayARN *smithy.Schema
-
-var DescribeWorkingStorageOutput_DiskIds *smithy.Schema
-
-var DescribeWorkingStorageOutput_WorkingStorageUsedInBytes *smithy.Schema
-
-var DescribeWorkingStorageOutput_WorkingStorageAllocatedInBytes *smithy.Schema
-
-var DetachVolumeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DetachVolumeInput",
-}, smithy.ShapeTypeStructure, 2)
-var DetachVolumeInput_VolumeARN *smithy.Schema
-
-var DetachVolumeInput_ForceDetach *smithy.Schema
-
-var DetachVolumeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DetachVolumeOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DetachVolumeOutput_VolumeARN *smithy.Schema
-
-var DisableGatewayInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DisableGatewayInput",
-}, smithy.ShapeTypeStructure, 1)
-var DisableGatewayInput_GatewayARN *smithy.Schema
-
-var DisableGatewayOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DisableGatewayOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DisableGatewayOutput_GatewayARN *smithy.Schema
-
-var DisassociateFileSystemInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DisassociateFileSystemInput",
-}, smithy.ShapeTypeStructure, 2)
-var DisassociateFileSystemInput_FileSystemAssociationARN *smithy.Schema
-
-var DisassociateFileSystemInput_ForceDelete *smithy.Schema
-
-var DisassociateFileSystemOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "DisassociateFileSystemOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DisassociateFileSystemOutput_FileSystemAssociationARN *smithy.Schema
-
-var EvictFilesFailingUploadInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "EvictFilesFailingUploadInput",
-}, smithy.ShapeTypeStructure, 2)
-var EvictFilesFailingUploadInput_FileShareARN *smithy.Schema
-
-var EvictFilesFailingUploadInput_ForceRemove *smithy.Schema
-
-var EvictFilesFailingUploadOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "EvictFilesFailingUploadOutput",
-}, smithy.ShapeTypeStructure, 1)
-var EvictFilesFailingUploadOutput_NotificationId *smithy.Schema
-
-var JoinDomainInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "JoinDomainInput",
-}, smithy.ShapeTypeStructure, 7)
-var JoinDomainInput_GatewayARN *smithy.Schema
-
-var JoinDomainInput_DomainName *smithy.Schema
-
-var JoinDomainInput_OrganizationalUnit *smithy.Schema
-
-var JoinDomainInput_DomainControllers *smithy.Schema
-
-var JoinDomainInput_TimeoutInSeconds *smithy.Schema
-
-var JoinDomainInput_UserName *smithy.Schema
-
-var JoinDomainInput_Password *smithy.Schema
-
-var JoinDomainOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "JoinDomainOutput",
-}, smithy.ShapeTypeStructure, 2)
-var JoinDomainOutput_GatewayARN *smithy.Schema
-
-var JoinDomainOutput_ActiveDirectoryStatus *smithy.Schema
-
-var ListAutomaticTapeCreationPoliciesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListAutomaticTapeCreationPoliciesInput",
-}, smithy.ShapeTypeStructure, 1)
-var ListAutomaticTapeCreationPoliciesInput_GatewayARN *smithy.Schema
-
-var ListAutomaticTapeCreationPoliciesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListAutomaticTapeCreationPoliciesOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ListAutomaticTapeCreationPoliciesOutput_AutomaticTapeCreationPolicyInfos *smithy.Schema
-
-var ListCacheReportsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListCacheReportsInput",
-}, smithy.ShapeTypeStructure, 1)
-var ListCacheReportsInput_Marker *smithy.Schema
-
-var ListCacheReportsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListCacheReportsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListCacheReportsOutput_CacheReportList *smithy.Schema
-
-var ListCacheReportsOutput_Marker *smithy.Schema
-
-var ListFileSharesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListFileSharesInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListFileSharesInput_GatewayARN *smithy.Schema
-
-var ListFileSharesInput_Limit *smithy.Schema
-
-var ListFileSharesInput_Marker *smithy.Schema
-
-var ListFileSharesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListFileSharesOutput",
-}, smithy.ShapeTypeStructure, 3)
-var ListFileSharesOutput_Marker *smithy.Schema
-
-var ListFileSharesOutput_NextMarker *smithy.Schema
-
-var ListFileSharesOutput_FileShareInfoList *smithy.Schema
-
-var ListFileSystemAssociationsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListFileSystemAssociationsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListFileSystemAssociationsInput_GatewayARN *smithy.Schema
-
-var ListFileSystemAssociationsInput_Limit *smithy.Schema
-
-var ListFileSystemAssociationsInput_Marker *smithy.Schema
-
-var ListFileSystemAssociationsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListFileSystemAssociationsOutput",
-}, smithy.ShapeTypeStructure, 3)
-var ListFileSystemAssociationsOutput_Marker *smithy.Schema
-
-var ListFileSystemAssociationsOutput_NextMarker *smithy.Schema
-
-var ListFileSystemAssociationsOutput_FileSystemAssociationSummaryList *smithy.Schema
-
-var ListGatewaysInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListGatewaysInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListGatewaysInput_Marker *smithy.Schema
-
-var ListGatewaysInput_Limit *smithy.Schema
-
-var ListGatewaysOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListGatewaysOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListGatewaysOutput_Gateways *smithy.Schema
-
-var ListGatewaysOutput_Marker *smithy.Schema
-
-var ListLocalDisksInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListLocalDisksInput",
-}, smithy.ShapeTypeStructure, 1)
-var ListLocalDisksInput_GatewayARN *smithy.Schema
-
-var ListLocalDisksOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListLocalDisksOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListLocalDisksOutput_GatewayARN *smithy.Schema
-
-var ListLocalDisksOutput_Disks *smithy.Schema
-
-var ListTagsForResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListTagsForResourceInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListTagsForResourceInput_ResourceARN *smithy.Schema
-
-var ListTagsForResourceInput_Marker *smithy.Schema
-
-var ListTagsForResourceInput_Limit *smithy.Schema
-
-var ListTagsForResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListTagsForResourceOutput",
-}, smithy.ShapeTypeStructure, 3)
-var ListTagsForResourceOutput_ResourceARN *smithy.Schema
-
-var ListTagsForResourceOutput_Marker *smithy.Schema
-
-var ListTagsForResourceOutput_Tags *smithy.Schema
-
-var ListTapePoolsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListTapePoolsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListTapePoolsInput_PoolARNs *smithy.Schema
-
-var ListTapePoolsInput_Marker *smithy.Schema
-
-var ListTapePoolsInput_Limit *smithy.Schema
-
-var ListTapePoolsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListTapePoolsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListTapePoolsOutput_PoolInfos *smithy.Schema
-
-var ListTapePoolsOutput_Marker *smithy.Schema
-
-var ListTapesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListTapesInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListTapesInput_TapeARNs *smithy.Schema
-
-var ListTapesInput_Marker *smithy.Schema
-
-var ListTapesInput_Limit *smithy.Schema
-
-var ListTapesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListTapesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListTapesOutput_TapeInfos *smithy.Schema
-
-var ListTapesOutput_Marker *smithy.Schema
-
-var ListVolumeInitiatorsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListVolumeInitiatorsInput",
-}, smithy.ShapeTypeStructure, 1)
-var ListVolumeInitiatorsInput_VolumeARN *smithy.Schema
-
-var ListVolumeInitiatorsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListVolumeInitiatorsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ListVolumeInitiatorsOutput_Initiators *smithy.Schema
-
-var ListVolumeRecoveryPointsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListVolumeRecoveryPointsInput",
-}, smithy.ShapeTypeStructure, 1)
-var ListVolumeRecoveryPointsInput_GatewayARN *smithy.Schema
-
-var ListVolumeRecoveryPointsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListVolumeRecoveryPointsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListVolumeRecoveryPointsOutput_GatewayARN *smithy.Schema
-
-var ListVolumeRecoveryPointsOutput_VolumeRecoveryPointInfos *smithy.Schema
-
-var ListVolumesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListVolumesInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListVolumesInput_GatewayARN *smithy.Schema
-
-var ListVolumesInput_Marker *smithy.Schema
-
-var ListVolumesInput_Limit *smithy.Schema
-
-var ListVolumesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ListVolumesOutput",
-}, smithy.ShapeTypeStructure, 3)
-var ListVolumesOutput_GatewayARN *smithy.Schema
-
-var ListVolumesOutput_Marker *smithy.Schema
-
-var ListVolumesOutput_VolumeInfos *smithy.Schema
-
-var NotifyWhenUploadedInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "NotifyWhenUploadedInput",
-}, smithy.ShapeTypeStructure, 1)
-var NotifyWhenUploadedInput_FileShareARN *smithy.Schema
-
-var NotifyWhenUploadedOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "NotifyWhenUploadedOutput",
-}, smithy.ShapeTypeStructure, 2)
-var NotifyWhenUploadedOutput_FileShareARN *smithy.Schema
-
-var NotifyWhenUploadedOutput_NotificationId *smithy.Schema
-
-var RefreshCacheInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "RefreshCacheInput",
-}, smithy.ShapeTypeStructure, 3)
-var RefreshCacheInput_FileShareARN *smithy.Schema
-
-var RefreshCacheInput_FolderList *smithy.Schema
-
-var RefreshCacheInput_Recursive *smithy.Schema
-
-var RefreshCacheOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "RefreshCacheOutput",
-}, smithy.ShapeTypeStructure, 2)
-var RefreshCacheOutput_FileShareARN *smithy.Schema
-
-var RefreshCacheOutput_NotificationId *smithy.Schema
-
-var RemoveTagsFromResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "RemoveTagsFromResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var RemoveTagsFromResourceInput_ResourceARN *smithy.Schema
-
-var RemoveTagsFromResourceInput_TagKeys *smithy.Schema
-
-var RemoveTagsFromResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "RemoveTagsFromResourceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var RemoveTagsFromResourceOutput_ResourceARN *smithy.Schema
-
-var ResetCacheInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ResetCacheInput",
-}, smithy.ShapeTypeStructure, 1)
-var ResetCacheInput_GatewayARN *smithy.Schema
-
-var ResetCacheOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ResetCacheOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ResetCacheOutput_GatewayARN *smithy.Schema
-
-var RetrieveTapeArchiveInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "RetrieveTapeArchiveInput",
-}, smithy.ShapeTypeStructure, 2)
-var RetrieveTapeArchiveInput_TapeARN *smithy.Schema
-
-var RetrieveTapeArchiveInput_GatewayARN *smithy.Schema
-
-var RetrieveTapeArchiveOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "RetrieveTapeArchiveOutput",
-}, smithy.ShapeTypeStructure, 1)
-var RetrieveTapeArchiveOutput_TapeARN *smithy.Schema
-
-var RetrieveTapeRecoveryPointInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "RetrieveTapeRecoveryPointInput",
-}, smithy.ShapeTypeStructure, 2)
-var RetrieveTapeRecoveryPointInput_TapeARN *smithy.Schema
-
-var RetrieveTapeRecoveryPointInput_GatewayARN *smithy.Schema
-
-var RetrieveTapeRecoveryPointOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "RetrieveTapeRecoveryPointOutput",
-}, smithy.ShapeTypeStructure, 1)
-var RetrieveTapeRecoveryPointOutput_TapeARN *smithy.Schema
-
-var SetLocalConsolePasswordInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "SetLocalConsolePasswordInput",
-}, smithy.ShapeTypeStructure, 2)
-var SetLocalConsolePasswordInput_GatewayARN *smithy.Schema
-
-var SetLocalConsolePasswordInput_LocalConsolePassword *smithy.Schema
-
-var SetLocalConsolePasswordOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "SetLocalConsolePasswordOutput",
-}, smithy.ShapeTypeStructure, 1)
-var SetLocalConsolePasswordOutput_GatewayARN *smithy.Schema
-
-var SetSMBGuestPasswordInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "SetSMBGuestPasswordInput",
-}, smithy.ShapeTypeStructure, 2)
-var SetSMBGuestPasswordInput_GatewayARN *smithy.Schema
-
-var SetSMBGuestPasswordInput_Password *smithy.Schema
-
-var SetSMBGuestPasswordOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "SetSMBGuestPasswordOutput",
-}, smithy.ShapeTypeStructure, 1)
-var SetSMBGuestPasswordOutput_GatewayARN *smithy.Schema
-
-var ShutdownGatewayInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ShutdownGatewayInput",
-}, smithy.ShapeTypeStructure, 1)
-var ShutdownGatewayInput_GatewayARN *smithy.Schema
-
-var ShutdownGatewayOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "ShutdownGatewayOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ShutdownGatewayOutput_GatewayARN *smithy.Schema
-
-var StartAvailabilityMonitorTestInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "StartAvailabilityMonitorTestInput",
-}, smithy.ShapeTypeStructure, 1)
-var StartAvailabilityMonitorTestInput_GatewayARN *smithy.Schema
-
-var StartAvailabilityMonitorTestOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "StartAvailabilityMonitorTestOutput",
-}, smithy.ShapeTypeStructure, 1)
-var StartAvailabilityMonitorTestOutput_GatewayARN *smithy.Schema
-
-var StartCacheReportInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "StartCacheReportInput",
-}, smithy.ShapeTypeStructure, 9)
-var StartCacheReportInput_FileShareARN *smithy.Schema
-
-var StartCacheReportInput_Role *smithy.Schema
-
-var StartCacheReportInput_LocationARN *smithy.Schema
-
-var StartCacheReportInput_BucketRegion *smithy.Schema
-
-var StartCacheReportInput_VPCEndpointDNSName *smithy.Schema
-
-var StartCacheReportInput_InclusionFilters *smithy.Schema
-
-var StartCacheReportInput_ExclusionFilters *smithy.Schema
-
-var StartCacheReportInput_ClientToken *smithy.Schema
-
-var StartCacheReportInput_Tags *smithy.Schema
-
-var StartCacheReportOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "StartCacheReportOutput",
-}, smithy.ShapeTypeStructure, 1)
-var StartCacheReportOutput_CacheReportARN *smithy.Schema
-
-var StartGatewayInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "StartGatewayInput",
-}, smithy.ShapeTypeStructure, 1)
-var StartGatewayInput_GatewayARN *smithy.Schema
-
-var StartGatewayOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "StartGatewayOutput",
-}, smithy.ShapeTypeStructure, 1)
-var StartGatewayOutput_GatewayARN *smithy.Schema
-
-var UpdateAutomaticTapeCreationPolicyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateAutomaticTapeCreationPolicyInput",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateAutomaticTapeCreationPolicyInput_AutomaticTapeCreationRules *smithy.Schema
-
-var UpdateAutomaticTapeCreationPolicyInput_GatewayARN *smithy.Schema
-
-var UpdateAutomaticTapeCreationPolicyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateAutomaticTapeCreationPolicyOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateAutomaticTapeCreationPolicyOutput_GatewayARN *smithy.Schema
-
-var UpdateBandwidthRateLimitInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateBandwidthRateLimitInput",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateBandwidthRateLimitInput_GatewayARN *smithy.Schema
-
-var UpdateBandwidthRateLimitInput_AverageUploadRateLimitInBitsPerSec *smithy.Schema
-
-var UpdateBandwidthRateLimitInput_AverageDownloadRateLimitInBitsPerSec *smithy.Schema
-
-var UpdateBandwidthRateLimitOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateBandwidthRateLimitOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateBandwidthRateLimitOutput_GatewayARN *smithy.Schema
-
-var UpdateBandwidthRateLimitScheduleInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateBandwidthRateLimitScheduleInput",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateBandwidthRateLimitScheduleInput_GatewayARN *smithy.Schema
-
-var UpdateBandwidthRateLimitScheduleInput_BandwidthRateLimitIntervals *smithy.Schema
-
-var UpdateBandwidthRateLimitScheduleOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateBandwidthRateLimitScheduleOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateBandwidthRateLimitScheduleOutput_GatewayARN *smithy.Schema
-
-var UpdateChapCredentialsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateChapCredentialsInput",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateChapCredentialsInput_TargetARN *smithy.Schema
-
-var UpdateChapCredentialsInput_SecretToAuthenticateInitiator *smithy.Schema
-
-var UpdateChapCredentialsInput_InitiatorName *smithy.Schema
-
-var UpdateChapCredentialsInput_SecretToAuthenticateTarget *smithy.Schema
-
-var UpdateChapCredentialsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateChapCredentialsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateChapCredentialsOutput_TargetARN *smithy.Schema
-
-var UpdateChapCredentialsOutput_InitiatorName *smithy.Schema
-
-var UpdateFileSystemAssociationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateFileSystemAssociationInput",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateFileSystemAssociationInput_FileSystemAssociationARN *smithy.Schema
-
-var UpdateFileSystemAssociationInput_UserName *smithy.Schema
-
-var UpdateFileSystemAssociationInput_Password *smithy.Schema
-
-var UpdateFileSystemAssociationInput_AuditDestinationARN *smithy.Schema
-
-var UpdateFileSystemAssociationInput_CacheAttributes *smithy.Schema
-
-var UpdateFileSystemAssociationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateFileSystemAssociationOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateFileSystemAssociationOutput_FileSystemAssociationARN *smithy.Schema
-
-var UpdateGatewayInformationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateGatewayInformationInput",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateGatewayInformationInput_GatewayARN *smithy.Schema
-
-var UpdateGatewayInformationInput_GatewayName *smithy.Schema
-
-var UpdateGatewayInformationInput_GatewayTimezone *smithy.Schema
-
-var UpdateGatewayInformationInput_CloudWatchLogGroupARN *smithy.Schema
-
-var UpdateGatewayInformationInput_GatewayCapacity *smithy.Schema
-
-var UpdateGatewayInformationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateGatewayInformationOutput",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateGatewayInformationOutput_GatewayARN *smithy.Schema
-
-var UpdateGatewayInformationOutput_GatewayName *smithy.Schema
-
-var UpdateGatewaySoftwareNowInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateGatewaySoftwareNowInput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateGatewaySoftwareNowInput_GatewayARN *smithy.Schema
-
-var UpdateGatewaySoftwareNowOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateGatewaySoftwareNowOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateGatewaySoftwareNowOutput_GatewayARN *smithy.Schema
-
-var UpdateMaintenanceStartTimeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateMaintenanceStartTimeInput",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateMaintenanceStartTimeInput_GatewayARN *smithy.Schema
-
-var UpdateMaintenanceStartTimeInput_HourOfDay *smithy.Schema
-
-var UpdateMaintenanceStartTimeInput_MinuteOfHour *smithy.Schema
-
-var UpdateMaintenanceStartTimeInput_DayOfWeek *smithy.Schema
-
-var UpdateMaintenanceStartTimeInput_DayOfMonth *smithy.Schema
-
-var UpdateMaintenanceStartTimeInput_SoftwareUpdatePreferences *smithy.Schema
-
-var UpdateMaintenanceStartTimeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateMaintenanceStartTimeOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateMaintenanceStartTimeOutput_GatewayARN *smithy.Schema
-
-var UpdateNFSFileShareInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateNFSFileShareInput",
-}, smithy.ShapeTypeStructure, 16)
-var UpdateNFSFileShareInput_FileShareARN *smithy.Schema
-
-var UpdateNFSFileShareInput_EncryptionType *smithy.Schema
-
-var UpdateNFSFileShareInput_KMSEncrypted *smithy.Schema
-
-var UpdateNFSFileShareInput_KMSKey *smithy.Schema
-
-var UpdateNFSFileShareInput_NFSFileShareDefaults *smithy.Schema
-
-var UpdateNFSFileShareInput_DefaultStorageClass *smithy.Schema
-
-var UpdateNFSFileShareInput_ObjectACL *smithy.Schema
-
-var UpdateNFSFileShareInput_ClientList *smithy.Schema
-
-var UpdateNFSFileShareInput_Squash *smithy.Schema
-
-var UpdateNFSFileShareInput_ReadOnly *smithy.Schema
-
-var UpdateNFSFileShareInput_GuessMIMETypeEnabled *smithy.Schema
-
-var UpdateNFSFileShareInput_RequesterPays *smithy.Schema
-
-var UpdateNFSFileShareInput_FileShareName *smithy.Schema
-
-var UpdateNFSFileShareInput_CacheAttributes *smithy.Schema
-
-var UpdateNFSFileShareInput_NotificationPolicy *smithy.Schema
-
-var UpdateNFSFileShareInput_AuditDestinationARN *smithy.Schema
-
-var UpdateNFSFileShareOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateNFSFileShareOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateNFSFileShareOutput_FileShareARN *smithy.Schema
-
-var UpdateSMBFileShareInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateSMBFileShareInput",
-}, smithy.ShapeTypeStructure, 20)
-var UpdateSMBFileShareInput_FileShareARN *smithy.Schema
-
-var UpdateSMBFileShareInput_EncryptionType *smithy.Schema
-
-var UpdateSMBFileShareInput_KMSEncrypted *smithy.Schema
-
-var UpdateSMBFileShareInput_KMSKey *smithy.Schema
-
-var UpdateSMBFileShareInput_DefaultStorageClass *smithy.Schema
-
-var UpdateSMBFileShareInput_ObjectACL *smithy.Schema
-
-var UpdateSMBFileShareInput_ReadOnly *smithy.Schema
-
-var UpdateSMBFileShareInput_GuessMIMETypeEnabled *smithy.Schema
-
-var UpdateSMBFileShareInput_RequesterPays *smithy.Schema
-
-var UpdateSMBFileShareInput_SMBACLEnabled *smithy.Schema
-
-var UpdateSMBFileShareInput_AccessBasedEnumeration *smithy.Schema
-
-var UpdateSMBFileShareInput_AdminUserList *smithy.Schema
-
-var UpdateSMBFileShareInput_ValidUserList *smithy.Schema
-
-var UpdateSMBFileShareInput_InvalidUserList *smithy.Schema
-
-var UpdateSMBFileShareInput_AuditDestinationARN *smithy.Schema
-
-var UpdateSMBFileShareInput_CaseSensitivity *smithy.Schema
-
-var UpdateSMBFileShareInput_FileShareName *smithy.Schema
-
-var UpdateSMBFileShareInput_CacheAttributes *smithy.Schema
-
-var UpdateSMBFileShareInput_NotificationPolicy *smithy.Schema
-
-var UpdateSMBFileShareInput_OplocksEnabled *smithy.Schema
-
-var UpdateSMBFileShareOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateSMBFileShareOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateSMBFileShareOutput_FileShareARN *smithy.Schema
-
-var UpdateSMBFileShareVisibilityInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateSMBFileShareVisibilityInput",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateSMBFileShareVisibilityInput_GatewayARN *smithy.Schema
-
-var UpdateSMBFileShareVisibilityInput_FileSharesVisible *smithy.Schema
-
-var UpdateSMBFileShareVisibilityOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateSMBFileShareVisibilityOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateSMBFileShareVisibilityOutput_GatewayARN *smithy.Schema
-
-var UpdateSMBLocalGroupsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateSMBLocalGroupsInput",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateSMBLocalGroupsInput_GatewayARN *smithy.Schema
-
-var UpdateSMBLocalGroupsInput_SMBLocalGroups *smithy.Schema
-
-var UpdateSMBLocalGroupsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateSMBLocalGroupsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateSMBLocalGroupsOutput_GatewayARN *smithy.Schema
-
-var UpdateSMBSecurityStrategyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateSMBSecurityStrategyInput",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateSMBSecurityStrategyInput_GatewayARN *smithy.Schema
-
-var UpdateSMBSecurityStrategyInput_SMBSecurityStrategy *smithy.Schema
-
-var UpdateSMBSecurityStrategyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateSMBSecurityStrategyOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateSMBSecurityStrategyOutput_GatewayARN *smithy.Schema
-
-var UpdateSnapshotScheduleInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateSnapshotScheduleInput",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateSnapshotScheduleInput_VolumeARN *smithy.Schema
-
-var UpdateSnapshotScheduleInput_StartAt *smithy.Schema
-
-var UpdateSnapshotScheduleInput_RecurrenceInHours *smithy.Schema
-
-var UpdateSnapshotScheduleInput_Description *smithy.Schema
-
-var UpdateSnapshotScheduleInput_Tags *smithy.Schema
-
-var UpdateSnapshotScheduleOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateSnapshotScheduleOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateSnapshotScheduleOutput_VolumeARN *smithy.Schema
-
-var UpdateVTLDeviceTypeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateVTLDeviceTypeInput",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateVTLDeviceTypeInput_VTLDeviceARN *smithy.Schema
-
-var UpdateVTLDeviceTypeInput_DeviceType *smithy.Schema
-
-var UpdateVTLDeviceTypeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.storagegateway",
-	Name:      "UpdateVTLDeviceTypeOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateVTLDeviceTypeOutput_VTLDeviceARN *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	ActiveDirectoryStatus_ACCESS_DENIED = ActiveDirectoryStatus.AddMember("ACCESS_DENIED", smithyprelude.Unit)
-
-	ActiveDirectoryStatus_DETACHED = ActiveDirectoryStatus.AddMember("DETACHED", smithyprelude.Unit)
-
-	ActiveDirectoryStatus_JOINED = ActiveDirectoryStatus.AddMember("JOINED", smithyprelude.Unit)
-
-	ActiveDirectoryStatus_JOINING = ActiveDirectoryStatus.AddMember("JOINING", smithyprelude.Unit)
-
-	ActiveDirectoryStatus_NETWORK_ERROR = ActiveDirectoryStatus.AddMember("NETWORK_ERROR", smithyprelude.Unit)
-
-	ActiveDirectoryStatus_TIMEOUT = ActiveDirectoryStatus.AddMember("TIMEOUT", smithyprelude.Unit)
-
-	ActiveDirectoryStatus_UNKNOWN_ERROR = ActiveDirectoryStatus.AddMember("UNKNOWN_ERROR", smithyprelude.Unit)
-
-	ActiveDirectoryStatus_INSUFFICIENT_PERMISSIONS = ActiveDirectoryStatus.AddMember("INSUFFICIENT_PERMISSIONS", smithyprelude.Unit)
-
-	AutomaticTapeCreationRule_TapeBarcodePrefix = AutomaticTapeCreationRule.AddMember("TapeBarcodePrefix", _TapeBarcodePrefix)
-
-	AutomaticTapeCreationRule_PoolId = AutomaticTapeCreationRule.AddMember("PoolId", _PoolId)
-
-	AutomaticTapeCreationRule_TapeSizeInBytes = AutomaticTapeCreationRule.AddMember("TapeSizeInBytes", _TapeSize)
-
-	AutomaticTapeCreationRule_MinimumNumTapes = AutomaticTapeCreationRule.AddMember("MinimumNumTapes", _MinimumNumTapes)
-
-	AutomaticTapeCreationRule_Worm = AutomaticTapeCreationRule.AddMember("Worm", _Boolean2)
-
-	_AutomaticTapeCreationRules_member = _AutomaticTapeCreationRules.AddMember("member", AutomaticTapeCreationRule)
-
-	AutomaticTapeCreationPolicyInfo_AutomaticTapeCreationRules = AutomaticTapeCreationPolicyInfo.AddMember("AutomaticTapeCreationRules", _AutomaticTapeCreationRules)
-
-	AutomaticTapeCreationPolicyInfo_GatewayARN = AutomaticTapeCreationPolicyInfo.AddMember("GatewayARN", _GatewayARN)
-
-	_AutomaticTapeCreationPolicyInfos_member = _AutomaticTapeCreationPolicyInfos.AddMember("member", AutomaticTapeCreationPolicyInfo)
-
-	AutomaticUpdatePolicy_ALL_VERSIONS = AutomaticUpdatePolicy.AddMember("ALL_VERSIONS", smithyprelude.Unit)
-
-	AutomaticUpdatePolicy_EMERGENCY_VERSIONS_ONLY = AutomaticUpdatePolicy.AddMember("EMERGENCY_VERSIONS_ONLY", smithyprelude.Unit)
-
-	AvailabilityMonitorTestStatus_COMPLETE = AvailabilityMonitorTestStatus.AddMember("COMPLETE", smithyprelude.Unit)
-
-	AvailabilityMonitorTestStatus_FAILED = AvailabilityMonitorTestStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	AvailabilityMonitorTestStatus_PENDING = AvailabilityMonitorTestStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	_DaysOfWeek_member = _DaysOfWeek.AddMember("member", _DayOfWeek)
-
-	BandwidthRateLimitInterval_StartHourOfDay = BandwidthRateLimitInterval.AddMember("StartHourOfDay", _HourOfDay)
-
-	BandwidthRateLimitInterval_StartMinuteOfHour = BandwidthRateLimitInterval.AddMember("StartMinuteOfHour", _MinuteOfHour)
-
-	BandwidthRateLimitInterval_EndHourOfDay = BandwidthRateLimitInterval.AddMember("EndHourOfDay", _HourOfDay)
-
-	BandwidthRateLimitInterval_EndMinuteOfHour = BandwidthRateLimitInterval.AddMember("EndMinuteOfHour", _MinuteOfHour)
-
-	BandwidthRateLimitInterval_DaysOfWeek = BandwidthRateLimitInterval.AddMember("DaysOfWeek", _DaysOfWeek)
-
-	BandwidthRateLimitInterval_AverageUploadRateLimitInBitsPerSec = BandwidthRateLimitInterval.AddMember("AverageUploadRateLimitInBitsPerSec", _BandwidthUploadRateLimit)
-
-	BandwidthRateLimitInterval_AverageDownloadRateLimitInBitsPerSec = BandwidthRateLimitInterval.AddMember("AverageDownloadRateLimitInBitsPerSec", _BandwidthDownloadRateLimit)
-
-	_BandwidthRateLimitIntervals_member = _BandwidthRateLimitIntervals.AddMember("member", BandwidthRateLimitInterval)
-
-	CacheAttributes_CacheStaleTimeoutInSeconds = CacheAttributes.AddMember("CacheStaleTimeoutInSeconds", _CacheStaleTimeoutInSeconds)
-
-	VolumeiSCSIAttributes_TargetARN = VolumeiSCSIAttributes.AddMember("TargetARN", _TargetARN)
-
-	VolumeiSCSIAttributes_NetworkInterfaceId = VolumeiSCSIAttributes.AddMember("NetworkInterfaceId", _NetworkInterfaceId)
-
-	VolumeiSCSIAttributes_NetworkInterfacePort = VolumeiSCSIAttributes.AddMember("NetworkInterfacePort", _integer)
-
-	VolumeiSCSIAttributes_LunNumber = VolumeiSCSIAttributes.AddMember("LunNumber", _PositiveIntObject)
-
-	VolumeiSCSIAttributes_ChapEnabled = VolumeiSCSIAttributes.AddMember("ChapEnabled", _Boolean2)
-
-	CachediSCSIVolume_VolumeARN = CachediSCSIVolume.AddMember("VolumeARN", _VolumeARN)
-
-	CachediSCSIVolume_VolumeId = CachediSCSIVolume.AddMember("VolumeId", _VolumeId)
-
-	CachediSCSIVolume_VolumeType = CachediSCSIVolume.AddMember("VolumeType", _VolumeType)
-
-	CachediSCSIVolume_VolumeStatus = CachediSCSIVolume.AddMember("VolumeStatus", _VolumeStatus)
-
-	CachediSCSIVolume_VolumeAttachmentStatus = CachediSCSIVolume.AddMember("VolumeAttachmentStatus", _VolumeAttachmentStatus)
-
-	CachediSCSIVolume_VolumeSizeInBytes = CachediSCSIVolume.AddMember("VolumeSizeInBytes", _long)
-
-	CachediSCSIVolume_VolumeProgress = CachediSCSIVolume.AddMember("VolumeProgress", _DoubleObject)
-
-	CachediSCSIVolume_SourceSnapshotId = CachediSCSIVolume.AddMember("SourceSnapshotId", _SnapshotId)
-
-	CachediSCSIVolume_VolumeiSCSIAttributes = CachediSCSIVolume.AddMember("VolumeiSCSIAttributes", VolumeiSCSIAttributes)
-
-	CachediSCSIVolume_CreatedDate = CachediSCSIVolume.AddMember("CreatedDate", _CreatedDate)
-
-	CachediSCSIVolume_VolumeUsedInBytes = CachediSCSIVolume.AddMember("VolumeUsedInBytes", _VolumeUsedInBytes)
-
-	CachediSCSIVolume_KMSKey = CachediSCSIVolume.AddMember("KMSKey", _KMSKey)
-
-	CachediSCSIVolume_TargetName = CachediSCSIVolume.AddMember("TargetName", _TargetName)
-
-	_CachediSCSIVolumes_member = _CachediSCSIVolumes.AddMember("member", CachediSCSIVolume)
-
-	CacheReportFilterName_UploadState = CacheReportFilterName.AddMember("UploadState", smithyprelude.Unit)
-
-	CacheReportFilterName_UploadFailureReason = CacheReportFilterName.AddMember("UploadFailureReason", smithyprelude.Unit)
-
-	_CacheReportFilterValues_member = _CacheReportFilterValues.AddMember("member", _CacheReportFilterValue)
-
-	CacheReportFilter_Name = CacheReportFilter.AddMember("Name", CacheReportFilterName)
-
-	CacheReportFilter_Values = CacheReportFilter.AddMember("Values", _CacheReportFilterValues)
-
-	_CacheReportFilterList_member = _CacheReportFilterList.AddMember("member", CacheReportFilter)
-
-	CacheReportStatus_IN_PROGRESS = CacheReportStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	CacheReportStatus_COMPLETED = CacheReportStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	CacheReportStatus_CANCELED = CacheReportStatus.AddMember("CANCELED", smithyprelude.Unit)
-
-	CacheReportStatus_FAILED = CacheReportStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	CacheReportStatus_ERROR = CacheReportStatus.AddMember("ERROR", smithyprelude.Unit)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_Tags_member = _Tags.AddMember("member", Tag)
-
-	CacheReportInfo_CacheReportARN = CacheReportInfo.AddMember("CacheReportARN", _CacheReportARN)
-
-	CacheReportInfo_CacheReportStatus = CacheReportInfo.AddMember("CacheReportStatus", CacheReportStatus)
-
-	CacheReportInfo_ReportCompletionPercent = CacheReportInfo.AddMember("ReportCompletionPercent", _ReportCompletionPercent)
-
-	CacheReportInfo_EndTime = CacheReportInfo.AddMember("EndTime", _Time)
-
-	CacheReportInfo_Role = CacheReportInfo.AddMember("Role", _Role)
-
-	CacheReportInfo_FileShareARN = CacheReportInfo.AddMember("FileShareARN", _FileShareARN)
-
-	CacheReportInfo_LocationARN = CacheReportInfo.AddMember("LocationARN", _LocationARN)
-
-	CacheReportInfo_StartTime = CacheReportInfo.AddMember("StartTime", _Time)
-
-	CacheReportInfo_InclusionFilters = CacheReportInfo.AddMember("InclusionFilters", _CacheReportFilterList)
-
-	CacheReportInfo_ExclusionFilters = CacheReportInfo.AddMember("ExclusionFilters", _CacheReportFilterList)
-
-	CacheReportInfo_ReportName = CacheReportInfo.AddMember("ReportName", _CacheReportName)
-
-	CacheReportInfo_Tags = CacheReportInfo.AddMember("Tags", _Tags)
-
-	_CacheReportList_member = _CacheReportList.AddMember("member", CacheReportInfo)
-
-	CaseSensitivity_ClientSpecified = CaseSensitivity.AddMember("ClientSpecified", smithyprelude.Unit)
-
-	CaseSensitivity_CaseSensitive = CaseSensitivity.AddMember("CaseSensitive", smithyprelude.Unit)
-
-	ChapInfo_TargetARN = ChapInfo.AddMember("TargetARN", _TargetARN)
-
-	ChapInfo_SecretToAuthenticateInitiator = ChapInfo.AddMember("SecretToAuthenticateInitiator", _ChapSecret)
-
-	ChapInfo_InitiatorName = ChapInfo.AddMember("InitiatorName", _IqnName)
-
-	ChapInfo_SecretToAuthenticateTarget = ChapInfo.AddMember("SecretToAuthenticateTarget", _ChapSecret)
-
-	_ChapCredentials_member = _ChapCredentials.AddMember("member", ChapInfo)
-
-	DeviceiSCSIAttributes_TargetARN = DeviceiSCSIAttributes.AddMember("TargetARN", _TargetARN)
-
-	DeviceiSCSIAttributes_NetworkInterfaceId = DeviceiSCSIAttributes.AddMember("NetworkInterfaceId", _NetworkInterfaceId)
-
-	DeviceiSCSIAttributes_NetworkInterfacePort = DeviceiSCSIAttributes.AddMember("NetworkInterfacePort", _integer)
-
-	DeviceiSCSIAttributes_ChapEnabled = DeviceiSCSIAttributes.AddMember("ChapEnabled", _Boolean2)
-
-	_DiskAttributeList_member = _DiskAttributeList.AddMember("member", _DiskAttribute)
-
-	Disk_DiskId = Disk.AddMember("DiskId", _DiskId)
-
-	Disk_DiskPath = Disk.AddMember("DiskPath", _string)
-
-	Disk_DiskNode = Disk.AddMember("DiskNode", _string)
-
-	Disk_DiskStatus = Disk.AddMember("DiskStatus", _string)
-
-	Disk_DiskSizeInBytes = Disk.AddMember("DiskSizeInBytes", _long)
-
-	Disk_DiskAllocationType = Disk.AddMember("DiskAllocationType", _DiskAllocationType)
-
-	Disk_DiskAllocationResource = Disk.AddMember("DiskAllocationResource", _string)
-
-	Disk_DiskAttributeList = Disk.AddMember("DiskAttributeList", _DiskAttributeList)
-
-	_DiskIds_member = _DiskIds.AddMember("member", _DiskId)
-
-	_Disks_member = _Disks.AddMember("member", Disk)
-
-	EncryptionType_SseS3 = EncryptionType.AddMember("SseS3", smithyprelude.Unit)
-
-	EncryptionType_SseKms = EncryptionType.AddMember("SseKms", smithyprelude.Unit)
-
-	EncryptionType_DsseKms = EncryptionType.AddMember("DsseKms", smithyprelude.Unit)
-
-	_IpAddressList_member = _IpAddressList.AddMember("member", _IPV4Address)
-
-	EndpointNetworkConfiguration_IpAddresses = EndpointNetworkConfiguration.AddMember("IpAddresses", _IpAddressList)
-
-	ErrorCode_ActivationKeyExpired = ErrorCode.AddMember("ActivationKeyExpired", smithyprelude.Unit)
-
-	ErrorCode_ActivationKeyInvalid = ErrorCode.AddMember("ActivationKeyInvalid", smithyprelude.Unit)
-
-	ErrorCode_ActivationKeyNotFound = ErrorCode.AddMember("ActivationKeyNotFound", smithyprelude.Unit)
-
-	ErrorCode_GatewayInternalError = ErrorCode.AddMember("GatewayInternalError", smithyprelude.Unit)
-
-	ErrorCode_GatewayNotConnected = ErrorCode.AddMember("GatewayNotConnected", smithyprelude.Unit)
-
-	ErrorCode_GatewayNotFound = ErrorCode.AddMember("GatewayNotFound", smithyprelude.Unit)
-
-	ErrorCode_GatewayProxyNetworkConnectionBusy = ErrorCode.AddMember("GatewayProxyNetworkConnectionBusy", smithyprelude.Unit)
-
-	ErrorCode_AuthenticationFailure = ErrorCode.AddMember("AuthenticationFailure", smithyprelude.Unit)
-
-	ErrorCode_BandwidthThrottleScheduleNotFound = ErrorCode.AddMember("BandwidthThrottleScheduleNotFound", smithyprelude.Unit)
-
-	ErrorCode_Blocked = ErrorCode.AddMember("Blocked", smithyprelude.Unit)
-
-	ErrorCode_CannotExportSnapshot = ErrorCode.AddMember("CannotExportSnapshot", smithyprelude.Unit)
-
-	ErrorCode_ChapCredentialNotFound = ErrorCode.AddMember("ChapCredentialNotFound", smithyprelude.Unit)
-
-	ErrorCode_DiskAlreadyAllocated = ErrorCode.AddMember("DiskAlreadyAllocated", smithyprelude.Unit)
-
-	ErrorCode_DiskDoesNotExist = ErrorCode.AddMember("DiskDoesNotExist", smithyprelude.Unit)
-
-	ErrorCode_DiskSizeGreaterThanVolumeMaxSize = ErrorCode.AddMember("DiskSizeGreaterThanVolumeMaxSize", smithyprelude.Unit)
-
-	ErrorCode_DiskSizeLessThanVolumeSize = ErrorCode.AddMember("DiskSizeLessThanVolumeSize", smithyprelude.Unit)
-
-	ErrorCode_DiskSizeNotGigAligned = ErrorCode.AddMember("DiskSizeNotGigAligned", smithyprelude.Unit)
-
-	ErrorCode_DuplicateCertificateInfo = ErrorCode.AddMember("DuplicateCertificateInfo", smithyprelude.Unit)
-
-	ErrorCode_DuplicateSchedule = ErrorCode.AddMember("DuplicateSchedule", smithyprelude.Unit)
-
-	ErrorCode_EndpointNotFound = ErrorCode.AddMember("EndpointNotFound", smithyprelude.Unit)
-
-	ErrorCode_IAMNotSupported = ErrorCode.AddMember("IAMNotSupported", smithyprelude.Unit)
-
-	ErrorCode_InitiatorInvalid = ErrorCode.AddMember("InitiatorInvalid", smithyprelude.Unit)
-
-	ErrorCode_InitiatorNotFound = ErrorCode.AddMember("InitiatorNotFound", smithyprelude.Unit)
-
-	ErrorCode_InternalError = ErrorCode.AddMember("InternalError", smithyprelude.Unit)
-
-	ErrorCode_InvalidGateway = ErrorCode.AddMember("InvalidGateway", smithyprelude.Unit)
-
-	ErrorCode_InvalidEndpoint = ErrorCode.AddMember("InvalidEndpoint", smithyprelude.Unit)
-
-	ErrorCode_InvalidParameters = ErrorCode.AddMember("InvalidParameters", smithyprelude.Unit)
-
-	ErrorCode_InvalidSchedule = ErrorCode.AddMember("InvalidSchedule", smithyprelude.Unit)
-
-	ErrorCode_LocalStorageLimitExceeded = ErrorCode.AddMember("LocalStorageLimitExceeded", smithyprelude.Unit)
-
-	ErrorCode_LunAlreadyAllocated_ = ErrorCode.AddMember("LunAlreadyAllocated_", smithyprelude.Unit)
-
-	ErrorCode_LunInvalid = ErrorCode.AddMember("LunInvalid", smithyprelude.Unit)
-
-	ErrorCode_JoinDomainInProgress = ErrorCode.AddMember("JoinDomainInProgress", smithyprelude.Unit)
-
-	ErrorCode_MaximumContentLengthExceeded = ErrorCode.AddMember("MaximumContentLengthExceeded", smithyprelude.Unit)
-
-	ErrorCode_MaximumTapeCartridgeCountExceeded = ErrorCode.AddMember("MaximumTapeCartridgeCountExceeded", smithyprelude.Unit)
-
-	ErrorCode_MaximumVolumeCountExceeded = ErrorCode.AddMember("MaximumVolumeCountExceeded", smithyprelude.Unit)
-
-	ErrorCode_NetworkConfigurationChanged = ErrorCode.AddMember("NetworkConfigurationChanged", smithyprelude.Unit)
-
-	ErrorCode_NoDisksAvailable = ErrorCode.AddMember("NoDisksAvailable", smithyprelude.Unit)
-
-	ErrorCode_NotImplemented = ErrorCode.AddMember("NotImplemented", smithyprelude.Unit)
-
-	ErrorCode_NotSupported = ErrorCode.AddMember("NotSupported", smithyprelude.Unit)
-
-	ErrorCode_OperationAborted = ErrorCode.AddMember("OperationAborted", smithyprelude.Unit)
-
-	ErrorCode_OutdatedGateway = ErrorCode.AddMember("OutdatedGateway", smithyprelude.Unit)
-
-	ErrorCode_ParametersNotImplemented = ErrorCode.AddMember("ParametersNotImplemented", smithyprelude.Unit)
-
-	ErrorCode_RegionInvalid = ErrorCode.AddMember("RegionInvalid", smithyprelude.Unit)
-
-	ErrorCode_RequestTimeout = ErrorCode.AddMember("RequestTimeout", smithyprelude.Unit)
-
-	ErrorCode_ServiceUnavailable = ErrorCode.AddMember("ServiceUnavailable", smithyprelude.Unit)
-
-	ErrorCode_SnapshotDeleted = ErrorCode.AddMember("SnapshotDeleted", smithyprelude.Unit)
-
-	ErrorCode_SnapshotIdInvalid = ErrorCode.AddMember("SnapshotIdInvalid", smithyprelude.Unit)
-
-	ErrorCode_SnapshotInProgress = ErrorCode.AddMember("SnapshotInProgress", smithyprelude.Unit)
-
-	ErrorCode_SnapshotNotFound = ErrorCode.AddMember("SnapshotNotFound", smithyprelude.Unit)
-
-	ErrorCode_SnapshotScheduleNotFound = ErrorCode.AddMember("SnapshotScheduleNotFound", smithyprelude.Unit)
-
-	ErrorCode_StagingAreaFull = ErrorCode.AddMember("StagingAreaFull", smithyprelude.Unit)
-
-	ErrorCode_StorageFailure = ErrorCode.AddMember("StorageFailure", smithyprelude.Unit)
-
-	ErrorCode_TapeCartridgeNotFound = ErrorCode.AddMember("TapeCartridgeNotFound", smithyprelude.Unit)
-
-	ErrorCode_TargetAlreadyExists = ErrorCode.AddMember("TargetAlreadyExists", smithyprelude.Unit)
-
-	ErrorCode_TargetInvalid = ErrorCode.AddMember("TargetInvalid", smithyprelude.Unit)
-
-	ErrorCode_TargetNotFound = ErrorCode.AddMember("TargetNotFound", smithyprelude.Unit)
-
-	ErrorCode_UnauthorizedOperation = ErrorCode.AddMember("UnauthorizedOperation", smithyprelude.Unit)
-
-	ErrorCode_VolumeAlreadyExists = ErrorCode.AddMember("VolumeAlreadyExists", smithyprelude.Unit)
-
-	ErrorCode_VolumeIdInvalid = ErrorCode.AddMember("VolumeIdInvalid", smithyprelude.Unit)
-
-	ErrorCode_VolumeInUse = ErrorCode.AddMember("VolumeInUse", smithyprelude.Unit)
-
-	ErrorCode_VolumeNotFound = ErrorCode.AddMember("VolumeNotFound", smithyprelude.Unit)
-
-	ErrorCode_VolumeNotReady = ErrorCode.AddMember("VolumeNotReady", smithyprelude.Unit)
-
-	_errorDetails_key = _errorDetails.AddMember("key", _string)
-
-	_errorDetails_value = _errorDetails.AddMember("value", _string)
-
-	_FileShareARNList_member = _FileShareARNList.AddMember("member", _FileShareARN)
-
-	_FileShareClientList_member = _FileShareClientList.AddMember("member", _Ipv4OrIpv6AddressCIDR)
-
-	FileShareType_NFS = FileShareType.AddMember("NFS", smithyprelude.Unit)
-
-	FileShareType_SMB = FileShareType.AddMember("SMB", smithyprelude.Unit)
-
-	FileShareInfo_FileShareType = FileShareInfo.AddMember("FileShareType", FileShareType)
-
-	FileShareInfo_FileShareARN = FileShareInfo.AddMember("FileShareARN", _FileShareARN)
-
-	FileShareInfo_FileShareId = FileShareInfo.AddMember("FileShareId", _FileShareId)
-
-	FileShareInfo_FileShareStatus = FileShareInfo.AddMember("FileShareStatus", _FileShareStatus)
-
-	FileShareInfo_GatewayARN = FileShareInfo.AddMember("GatewayARN", _GatewayARN)
-
-	_FileShareInfoList_member = _FileShareInfoList.AddMember("member", FileShareInfo)
-
-	_FileSystemAssociationARNList_member = _FileSystemAssociationARNList.AddMember("member", _FileSystemAssociationARN)
-
-	FileSystemAssociationStatusDetail_ErrorCode = FileSystemAssociationStatusDetail.AddMember("ErrorCode", _FileSystemAssociationSyncErrorCode)
-
-	_FileSystemAssociationStatusDetails_member = _FileSystemAssociationStatusDetails.AddMember("member", FileSystemAssociationStatusDetail)
-
-	FileSystemAssociationInfo_FileSystemAssociationARN = FileSystemAssociationInfo.AddMember("FileSystemAssociationARN", _FileSystemAssociationARN)
-
-	FileSystemAssociationInfo_LocationARN = FileSystemAssociationInfo.AddMember("LocationARN", _FileSystemLocationARN)
-
-	FileSystemAssociationInfo_FileSystemAssociationStatus = FileSystemAssociationInfo.AddMember("FileSystemAssociationStatus", _FileSystemAssociationStatus)
-
-	FileSystemAssociationInfo_AuditDestinationARN = FileSystemAssociationInfo.AddMember("AuditDestinationARN", _AuditDestinationARN)
-
-	FileSystemAssociationInfo_GatewayARN = FileSystemAssociationInfo.AddMember("GatewayARN", _GatewayARN)
-
-	FileSystemAssociationInfo_Tags = FileSystemAssociationInfo.AddMember("Tags", _Tags)
-
-	FileSystemAssociationInfo_CacheAttributes = FileSystemAssociationInfo.AddMember("CacheAttributes", CacheAttributes)
-
-	FileSystemAssociationInfo_EndpointNetworkConfiguration = FileSystemAssociationInfo.AddMember("EndpointNetworkConfiguration", EndpointNetworkConfiguration)
-
-	FileSystemAssociationInfo_FileSystemAssociationStatusDetails = FileSystemAssociationInfo.AddMember("FileSystemAssociationStatusDetails", _FileSystemAssociationStatusDetails)
-
-	_FileSystemAssociationInfoList_member = _FileSystemAssociationInfoList.AddMember("member", FileSystemAssociationInfo)
-
-	FileSystemAssociationSummary_FileSystemAssociationId = FileSystemAssociationSummary.AddMember("FileSystemAssociationId", _FileSystemAssociationId)
-
-	FileSystemAssociationSummary_FileSystemAssociationARN = FileSystemAssociationSummary.AddMember("FileSystemAssociationARN", _FileSystemAssociationARN)
-
-	FileSystemAssociationSummary_FileSystemAssociationStatus = FileSystemAssociationSummary.AddMember("FileSystemAssociationStatus", _FileSystemAssociationStatus)
-
-	FileSystemAssociationSummary_GatewayARN = FileSystemAssociationSummary.AddMember("GatewayARN", _GatewayARN)
-
-	_FileSystemAssociationSummaryList_member = _FileSystemAssociationSummaryList.AddMember("member", FileSystemAssociationSummary)
-
-	_FolderList_member = _FolderList.AddMember("member", _Folder)
-
-	GatewayCapacity_Small = GatewayCapacity.AddMember("Small", smithyprelude.Unit)
-
-	GatewayCapacity_Medium = GatewayCapacity.AddMember("Medium", smithyprelude.Unit)
-
-	GatewayCapacity_Large = GatewayCapacity.AddMember("Large", smithyprelude.Unit)
-
-	HostEnvironment_VMWARE = HostEnvironment.AddMember("VMWARE", smithyprelude.Unit)
-
-	HostEnvironment_HYPER_V = HostEnvironment.AddMember("HYPER_V", smithyprelude.Unit)
-
-	HostEnvironment_EC2 = HostEnvironment.AddMember("EC2", smithyprelude.Unit)
-
-	HostEnvironment_KVM = HostEnvironment.AddMember("KVM", smithyprelude.Unit)
-
-	HostEnvironment_OTHER = HostEnvironment.AddMember("OTHER", smithyprelude.Unit)
-
-	HostEnvironment_SNOWBALL = HostEnvironment.AddMember("SNOWBALL", smithyprelude.Unit)
-
-	GatewayInfo_GatewayId = GatewayInfo.AddMember("GatewayId", _GatewayId)
-
-	GatewayInfo_GatewayARN = GatewayInfo.AddMember("GatewayARN", _GatewayARN)
-
-	GatewayInfo_GatewayType = GatewayInfo.AddMember("GatewayType", _GatewayType)
-
-	GatewayInfo_GatewayOperationalState = GatewayInfo.AddMember("GatewayOperationalState", _GatewayOperationalState)
-
-	GatewayInfo_GatewayName = GatewayInfo.AddMember("GatewayName", _string)
-
-	GatewayInfo_Ec2InstanceId = GatewayInfo.AddMember("Ec2InstanceId", _Ec2InstanceId)
-
-	GatewayInfo_Ec2InstanceRegion = GatewayInfo.AddMember("Ec2InstanceRegion", _Ec2InstanceRegion)
-
-	GatewayInfo_HostEnvironment = GatewayInfo.AddMember("HostEnvironment", HostEnvironment)
-
-	GatewayInfo_HostEnvironmentId = GatewayInfo.AddMember("HostEnvironmentId", _HostEnvironmentId)
-
-	GatewayInfo_DeprecationDate = GatewayInfo.AddMember("DeprecationDate", _DeprecationDate)
-
-	GatewayInfo_SoftwareVersion = GatewayInfo.AddMember("SoftwareVersion", _SoftwareVersion)
-
-	NetworkInterface_Ipv4Address = NetworkInterface.AddMember("Ipv4Address", _string)
-
-	NetworkInterface_MacAddress = NetworkInterface.AddMember("MacAddress", _string)
-
-	NetworkInterface_Ipv6Address = NetworkInterface.AddMember("Ipv6Address", _string)
-
-	_GatewayNetworkInterfaces_member = _GatewayNetworkInterfaces.AddMember("member", NetworkInterface)
-
-	_Gateways_member = _Gateways.AddMember("member", GatewayInfo)
-
-	_Hosts_member = _Hosts.AddMember("member", _Host)
-
-	_Initiators_member = _Initiators.AddMember("member", _Initiator)
-
-	StorageGatewayError_errorCode = StorageGatewayError.AddMember("errorCode", ErrorCode)
-
-	StorageGatewayError_errorDetails = StorageGatewayError.AddMember("errorDetails", _errorDetails)
-
-	InternalServerError_message = InternalServerError.AddMember("message", _string)
-
-	InternalServerError_error = InternalServerError.AddMember("error", StorageGatewayError)
-
-	InvalidGatewayRequestException_message = InvalidGatewayRequestException.AddMember("message", _string)
-
-	InvalidGatewayRequestException_error = InvalidGatewayRequestException.AddMember("error", StorageGatewayError)
-
-	NFSFileShareDefaults_FileMode = NFSFileShareDefaults.AddMember("FileMode", _PermissionMode)
-
-	NFSFileShareDefaults_DirectoryMode = NFSFileShareDefaults.AddMember("DirectoryMode", _PermissionMode)
-
-	NFSFileShareDefaults_GroupId = NFSFileShareDefaults.AddMember("GroupId", _PermissionId)
-
-	NFSFileShareDefaults_OwnerId = NFSFileShareDefaults.AddMember("OwnerId", _PermissionId)
-
-	ObjectACL_private = ObjectACL.AddMember("private", smithyprelude.Unit)
-
-	ObjectACL_public_read = ObjectACL.AddMember("public_read", smithyprelude.Unit)
-
-	ObjectACL_public_read_write = ObjectACL.AddMember("public_read_write", smithyprelude.Unit)
-
-	ObjectACL_authenticated_read = ObjectACL.AddMember("authenticated_read", smithyprelude.Unit)
-
-	ObjectACL_bucket_owner_read = ObjectACL.AddMember("bucket_owner_read", smithyprelude.Unit)
-
-	ObjectACL_bucket_owner_full_control = ObjectACL.AddMember("bucket_owner_full_control", smithyprelude.Unit)
-
-	ObjectACL_aws_exec_read = ObjectACL.AddMember("aws_exec_read", smithyprelude.Unit)
-
-	NFSFileShareInfo_NFSFileShareDefaults = NFSFileShareInfo.AddMember("NFSFileShareDefaults", NFSFileShareDefaults)
-
-	NFSFileShareInfo_FileShareARN = NFSFileShareInfo.AddMember("FileShareARN", _FileShareARN)
-
-	NFSFileShareInfo_FileShareId = NFSFileShareInfo.AddMember("FileShareId", _FileShareId)
-
-	NFSFileShareInfo_FileShareStatus = NFSFileShareInfo.AddMember("FileShareStatus", _FileShareStatus)
-
-	NFSFileShareInfo_GatewayARN = NFSFileShareInfo.AddMember("GatewayARN", _GatewayARN)
-
-	NFSFileShareInfo_EncryptionType = NFSFileShareInfo.AddMember("EncryptionType", EncryptionType)
-
-	NFSFileShareInfo_KMSEncrypted = NFSFileShareInfo.AddMember("KMSEncrypted", _Boolean2)
-
-	NFSFileShareInfo_KMSKey = NFSFileShareInfo.AddMember("KMSKey", _KMSKey)
-
-	NFSFileShareInfo_Path = NFSFileShareInfo.AddMember("Path", _Path)
-
-	NFSFileShareInfo_Role = NFSFileShareInfo.AddMember("Role", _Role)
-
-	NFSFileShareInfo_LocationARN = NFSFileShareInfo.AddMember("LocationARN", _LocationARN)
-
-	NFSFileShareInfo_DefaultStorageClass = NFSFileShareInfo.AddMember("DefaultStorageClass", _StorageClass)
-
-	NFSFileShareInfo_ObjectACL = NFSFileShareInfo.AddMember("ObjectACL", ObjectACL)
-
-	NFSFileShareInfo_ClientList = NFSFileShareInfo.AddMember("ClientList", _FileShareClientList)
-
-	NFSFileShareInfo_Squash = NFSFileShareInfo.AddMember("Squash", _Squash)
-
-	NFSFileShareInfo_ReadOnly = NFSFileShareInfo.AddMember("ReadOnly", _Boolean)
-
-	NFSFileShareInfo_GuessMIMETypeEnabled = NFSFileShareInfo.AddMember("GuessMIMETypeEnabled", _Boolean)
-
-	NFSFileShareInfo_RequesterPays = NFSFileShareInfo.AddMember("RequesterPays", _Boolean)
-
-	NFSFileShareInfo_Tags = NFSFileShareInfo.AddMember("Tags", _Tags)
-
-	NFSFileShareInfo_FileShareName = NFSFileShareInfo.AddMember("FileShareName", _FileShareName)
-
-	NFSFileShareInfo_CacheAttributes = NFSFileShareInfo.AddMember("CacheAttributes", CacheAttributes)
-
-	NFSFileShareInfo_NotificationPolicy = NFSFileShareInfo.AddMember("NotificationPolicy", _NotificationPolicy)
-
-	NFSFileShareInfo_VPCEndpointDNSName = NFSFileShareInfo.AddMember("VPCEndpointDNSName", _DNSHostName)
-
-	NFSFileShareInfo_BucketRegion = NFSFileShareInfo.AddMember("BucketRegion", _RegionId)
-
-	NFSFileShareInfo_AuditDestinationARN = NFSFileShareInfo.AddMember("AuditDestinationARN", _AuditDestinationARN)
-
-	_NFSFileShareInfoList_member = _NFSFileShareInfoList.AddMember("member", NFSFileShareInfo)
-
-	_PoolARNs_member = _PoolARNs.AddMember("member", _PoolARN)
-
-	TapeStorageClass_DEEP_ARCHIVE = TapeStorageClass.AddMember("DEEP_ARCHIVE", smithyprelude.Unit)
-
-	TapeStorageClass_GLACIER = TapeStorageClass.AddMember("GLACIER", smithyprelude.Unit)
-
-	RetentionLockType_COMPLIANCE = RetentionLockType.AddMember("COMPLIANCE", smithyprelude.Unit)
-
-	RetentionLockType_GOVERNANCE = RetentionLockType.AddMember("GOVERNANCE", smithyprelude.Unit)
-
-	RetentionLockType_NONE = RetentionLockType.AddMember("NONE", smithyprelude.Unit)
-
-	PoolStatus_ACTIVE = PoolStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	PoolStatus_DELETED = PoolStatus.AddMember("DELETED", smithyprelude.Unit)
-
-	PoolInfo_PoolARN = PoolInfo.AddMember("PoolARN", _PoolARN)
-
-	PoolInfo_PoolName = PoolInfo.AddMember("PoolName", _PoolName)
-
-	PoolInfo_StorageClass = PoolInfo.AddMember("StorageClass", TapeStorageClass)
-
-	PoolInfo_RetentionLockType = PoolInfo.AddMember("RetentionLockType", RetentionLockType)
-
-	PoolInfo_RetentionLockTimeInDays = PoolInfo.AddMember("RetentionLockTimeInDays", _RetentionLockTimeInDays)
-
-	PoolInfo_PoolStatus = PoolInfo.AddMember("PoolStatus", PoolStatus)
-
-	_PoolInfos_member = _PoolInfos.AddMember("member", PoolInfo)
-
-	ServiceUnavailableError_message = ServiceUnavailableError.AddMember("message", _string)
-
-	ServiceUnavailableError_error = ServiceUnavailableError.AddMember("error", StorageGatewayError)
-
-	_UserList_member = _UserList.AddMember("member", _UserListUser)
-
-	SMBFileShareInfo_FileShareARN = SMBFileShareInfo.AddMember("FileShareARN", _FileShareARN)
-
-	SMBFileShareInfo_FileShareId = SMBFileShareInfo.AddMember("FileShareId", _FileShareId)
-
-	SMBFileShareInfo_FileShareStatus = SMBFileShareInfo.AddMember("FileShareStatus", _FileShareStatus)
-
-	SMBFileShareInfo_GatewayARN = SMBFileShareInfo.AddMember("GatewayARN", _GatewayARN)
-
-	SMBFileShareInfo_EncryptionType = SMBFileShareInfo.AddMember("EncryptionType", EncryptionType)
-
-	SMBFileShareInfo_KMSEncrypted = SMBFileShareInfo.AddMember("KMSEncrypted", _Boolean2)
-
-	SMBFileShareInfo_KMSKey = SMBFileShareInfo.AddMember("KMSKey", _KMSKey)
-
-	SMBFileShareInfo_Path = SMBFileShareInfo.AddMember("Path", _Path)
-
-	SMBFileShareInfo_Role = SMBFileShareInfo.AddMember("Role", _Role)
-
-	SMBFileShareInfo_LocationARN = SMBFileShareInfo.AddMember("LocationARN", _LocationARN)
-
-	SMBFileShareInfo_DefaultStorageClass = SMBFileShareInfo.AddMember("DefaultStorageClass", _StorageClass)
-
-	SMBFileShareInfo_ObjectACL = SMBFileShareInfo.AddMember("ObjectACL", ObjectACL)
-
-	SMBFileShareInfo_ReadOnly = SMBFileShareInfo.AddMember("ReadOnly", _Boolean)
-
-	SMBFileShareInfo_GuessMIMETypeEnabled = SMBFileShareInfo.AddMember("GuessMIMETypeEnabled", _Boolean)
-
-	SMBFileShareInfo_RequesterPays = SMBFileShareInfo.AddMember("RequesterPays", _Boolean)
-
-	SMBFileShareInfo_SMBACLEnabled = SMBFileShareInfo.AddMember("SMBACLEnabled", _Boolean)
-
-	SMBFileShareInfo_AccessBasedEnumeration = SMBFileShareInfo.AddMember("AccessBasedEnumeration", _Boolean)
-
-	SMBFileShareInfo_AdminUserList = SMBFileShareInfo.AddMember("AdminUserList", _UserList)
-
-	SMBFileShareInfo_ValidUserList = SMBFileShareInfo.AddMember("ValidUserList", _UserList)
-
-	SMBFileShareInfo_InvalidUserList = SMBFileShareInfo.AddMember("InvalidUserList", _UserList)
-
-	SMBFileShareInfo_AuditDestinationARN = SMBFileShareInfo.AddMember("AuditDestinationARN", _AuditDestinationARN)
-
-	SMBFileShareInfo_Authentication = SMBFileShareInfo.AddMember("Authentication", _Authentication)
-
-	SMBFileShareInfo_CaseSensitivity = SMBFileShareInfo.AddMember("CaseSensitivity", CaseSensitivity)
-
-	SMBFileShareInfo_Tags = SMBFileShareInfo.AddMember("Tags", _Tags)
-
-	SMBFileShareInfo_FileShareName = SMBFileShareInfo.AddMember("FileShareName", _FileShareName)
-
-	SMBFileShareInfo_CacheAttributes = SMBFileShareInfo.AddMember("CacheAttributes", CacheAttributes)
-
-	SMBFileShareInfo_NotificationPolicy = SMBFileShareInfo.AddMember("NotificationPolicy", _NotificationPolicy)
-
-	SMBFileShareInfo_VPCEndpointDNSName = SMBFileShareInfo.AddMember("VPCEndpointDNSName", _DNSHostName)
-
-	SMBFileShareInfo_BucketRegion = SMBFileShareInfo.AddMember("BucketRegion", _RegionId)
-
-	SMBFileShareInfo_OplocksEnabled = SMBFileShareInfo.AddMember("OplocksEnabled", _Boolean)
-
-	_SMBFileShareInfoList_member = _SMBFileShareInfoList.AddMember("member", SMBFileShareInfo)
-
-	SMBLocalGroups_GatewayAdmins = SMBLocalGroups.AddMember("GatewayAdmins", _UserList)
-
-	SMBSecurityStrategy_ClientSpecified = SMBSecurityStrategy.AddMember("ClientSpecified", smithyprelude.Unit)
-
-	SMBSecurityStrategy_MandatorySigning = SMBSecurityStrategy.AddMember("MandatorySigning", smithyprelude.Unit)
-
-	SMBSecurityStrategy_MandatoryEncryption = SMBSecurityStrategy.AddMember("MandatoryEncryption", smithyprelude.Unit)
-
-	SMBSecurityStrategy_MandatoryEncryptionNoAes128 = SMBSecurityStrategy.AddMember("MandatoryEncryptionNoAes128", smithyprelude.Unit)
-
-	SoftwareUpdatePreferences_AutomaticUpdatePolicy = SoftwareUpdatePreferences.AddMember("AutomaticUpdatePolicy", AutomaticUpdatePolicy)
-
-	StorediSCSIVolume_VolumeARN = StorediSCSIVolume.AddMember("VolumeARN", _VolumeARN)
-
-	StorediSCSIVolume_VolumeId = StorediSCSIVolume.AddMember("VolumeId", _VolumeId)
-
-	StorediSCSIVolume_VolumeType = StorediSCSIVolume.AddMember("VolumeType", _VolumeType)
-
-	StorediSCSIVolume_VolumeStatus = StorediSCSIVolume.AddMember("VolumeStatus", _VolumeStatus)
-
-	StorediSCSIVolume_VolumeAttachmentStatus = StorediSCSIVolume.AddMember("VolumeAttachmentStatus", _VolumeAttachmentStatus)
-
-	StorediSCSIVolume_VolumeSizeInBytes = StorediSCSIVolume.AddMember("VolumeSizeInBytes", _long)
-
-	StorediSCSIVolume_VolumeProgress = StorediSCSIVolume.AddMember("VolumeProgress", _DoubleObject)
-
-	StorediSCSIVolume_VolumeDiskId = StorediSCSIVolume.AddMember("VolumeDiskId", _DiskId)
-
-	StorediSCSIVolume_SourceSnapshotId = StorediSCSIVolume.AddMember("SourceSnapshotId", _SnapshotId)
-
-	StorediSCSIVolume_PreservedExistingData = StorediSCSIVolume.AddMember("PreservedExistingData", _Boolean2)
-
-	StorediSCSIVolume_VolumeiSCSIAttributes = StorediSCSIVolume.AddMember("VolumeiSCSIAttributes", VolumeiSCSIAttributes)
-
-	StorediSCSIVolume_CreatedDate = StorediSCSIVolume.AddMember("CreatedDate", _CreatedDate)
-
-	StorediSCSIVolume_VolumeUsedInBytes = StorediSCSIVolume.AddMember("VolumeUsedInBytes", _VolumeUsedInBytes)
-
-	StorediSCSIVolume_KMSKey = StorediSCSIVolume.AddMember("KMSKey", _KMSKey)
-
-	StorediSCSIVolume_TargetName = StorediSCSIVolume.AddMember("TargetName", _TargetName)
-
-	_StorediSCSIVolumes_member = _StorediSCSIVolumes.AddMember("member", StorediSCSIVolume)
-
-	_SupportedGatewayCapacities_member = _SupportedGatewayCapacities.AddMember("member", GatewayCapacity)
-
-	_TagKeys_member = _TagKeys.AddMember("member", _TagKey)
-
-	Tape_TapeARN = Tape.AddMember("TapeARN", _TapeARN)
-
-	Tape_TapeBarcode = Tape.AddMember("TapeBarcode", _TapeBarcode)
-
-	Tape_TapeCreatedDate = Tape.AddMember("TapeCreatedDate", _Time)
-
-	Tape_TapeSizeInBytes = Tape.AddMember("TapeSizeInBytes", _TapeSize)
-
-	Tape_TapeStatus = Tape.AddMember("TapeStatus", _TapeStatus)
-
-	Tape_VTLDevice = Tape.AddMember("VTLDevice", _VTLDeviceARN)
-
-	Tape_Progress = Tape.AddMember("Progress", _DoubleObject)
-
-	Tape_TapeUsedInBytes = Tape.AddMember("TapeUsedInBytes", _TapeUsage)
-
-	Tape_KMSKey = Tape.AddMember("KMSKey", _KMSKey)
-
-	Tape_PoolId = Tape.AddMember("PoolId", _PoolId)
-
-	Tape_Worm = Tape.AddMember("Worm", _Boolean2)
-
-	Tape_RetentionStartDate = Tape.AddMember("RetentionStartDate", _Time)
-
-	Tape_PoolEntryDate = Tape.AddMember("PoolEntryDate", _Time)
-
-	TapeArchive_TapeARN = TapeArchive.AddMember("TapeARN", _TapeARN)
-
-	TapeArchive_TapeBarcode = TapeArchive.AddMember("TapeBarcode", _TapeBarcode)
-
-	TapeArchive_TapeCreatedDate = TapeArchive.AddMember("TapeCreatedDate", _Time)
-
-	TapeArchive_TapeSizeInBytes = TapeArchive.AddMember("TapeSizeInBytes", _TapeSize)
-
-	TapeArchive_CompletionTime = TapeArchive.AddMember("CompletionTime", _Time)
-
-	TapeArchive_RetrievedTo = TapeArchive.AddMember("RetrievedTo", _GatewayARN)
-
-	TapeArchive_TapeStatus = TapeArchive.AddMember("TapeStatus", _TapeArchiveStatus)
-
-	TapeArchive_TapeUsedInBytes = TapeArchive.AddMember("TapeUsedInBytes", _TapeUsage)
-
-	TapeArchive_KMSKey = TapeArchive.AddMember("KMSKey", _KMSKey)
-
-	TapeArchive_PoolId = TapeArchive.AddMember("PoolId", _PoolId)
-
-	TapeArchive_Worm = TapeArchive.AddMember("Worm", _Boolean2)
-
-	TapeArchive_RetentionStartDate = TapeArchive.AddMember("RetentionStartDate", _Time)
-
-	TapeArchive_PoolEntryDate = TapeArchive.AddMember("PoolEntryDate", _Time)
-
-	_TapeArchives_member = _TapeArchives.AddMember("member", TapeArchive)
-
-	_TapeARNs_member = _TapeARNs.AddMember("member", _TapeARN)
-
-	TapeInfo_TapeARN = TapeInfo.AddMember("TapeARN", _TapeARN)
-
-	TapeInfo_TapeBarcode = TapeInfo.AddMember("TapeBarcode", _TapeBarcode)
-
-	TapeInfo_TapeSizeInBytes = TapeInfo.AddMember("TapeSizeInBytes", _TapeSize)
-
-	TapeInfo_TapeStatus = TapeInfo.AddMember("TapeStatus", _TapeStatus)
-
-	TapeInfo_GatewayARN = TapeInfo.AddMember("GatewayARN", _GatewayARN)
-
-	TapeInfo_PoolId = TapeInfo.AddMember("PoolId", _PoolId)
-
-	TapeInfo_RetentionStartDate = TapeInfo.AddMember("RetentionStartDate", _Time)
-
-	TapeInfo_PoolEntryDate = TapeInfo.AddMember("PoolEntryDate", _Time)
-
-	_TapeInfos_member = _TapeInfos.AddMember("member", TapeInfo)
-
-	TapeRecoveryPointInfo_TapeARN = TapeRecoveryPointInfo.AddMember("TapeARN", _TapeARN)
-
-	TapeRecoveryPointInfo_TapeRecoveryPointTime = TapeRecoveryPointInfo.AddMember("TapeRecoveryPointTime", _Time)
-
-	TapeRecoveryPointInfo_TapeSizeInBytes = TapeRecoveryPointInfo.AddMember("TapeSizeInBytes", _TapeSize)
-
-	TapeRecoveryPointInfo_TapeStatus = TapeRecoveryPointInfo.AddMember("TapeStatus", _TapeRecoveryPointStatus)
-
-	_TapeRecoveryPointInfos_member = _TapeRecoveryPointInfos.AddMember("member", TapeRecoveryPointInfo)
-
-	_Tapes_member = _Tapes.AddMember("member", Tape)
-
-	_VolumeARNs_member = _VolumeARNs.AddMember("member", _VolumeARN)
-
-	VolumeInfo_VolumeARN = VolumeInfo.AddMember("VolumeARN", _VolumeARN)
-
-	VolumeInfo_VolumeId = VolumeInfo.AddMember("VolumeId", _VolumeId)
-
-	VolumeInfo_GatewayARN = VolumeInfo.AddMember("GatewayARN", _GatewayARN)
-
-	VolumeInfo_GatewayId = VolumeInfo.AddMember("GatewayId", _GatewayId)
-
-	VolumeInfo_VolumeType = VolumeInfo.AddMember("VolumeType", _VolumeType)
-
-	VolumeInfo_VolumeSizeInBytes = VolumeInfo.AddMember("VolumeSizeInBytes", _long)
-
-	VolumeInfo_VolumeAttachmentStatus = VolumeInfo.AddMember("VolumeAttachmentStatus", _VolumeAttachmentStatus)
-
-	_VolumeInfos_member = _VolumeInfos.AddMember("member", VolumeInfo)
-
-	VolumeRecoveryPointInfo_VolumeARN = VolumeRecoveryPointInfo.AddMember("VolumeARN", _VolumeARN)
-
-	VolumeRecoveryPointInfo_VolumeSizeInBytes = VolumeRecoveryPointInfo.AddMember("VolumeSizeInBytes", _long)
-
-	VolumeRecoveryPointInfo_VolumeUsageInBytes = VolumeRecoveryPointInfo.AddMember("VolumeUsageInBytes", _long)
-
-	VolumeRecoveryPointInfo_VolumeRecoveryPointTime = VolumeRecoveryPointInfo.AddMember("VolumeRecoveryPointTime", _string)
-
-	_VolumeRecoveryPointInfos_member = _VolumeRecoveryPointInfos.AddMember("member", VolumeRecoveryPointInfo)
-
-	VTLDevice_VTLDeviceARN = VTLDevice.AddMember("VTLDeviceARN", _VTLDeviceARN)
-
-	VTLDevice_VTLDeviceType = VTLDevice.AddMember("VTLDeviceType", _VTLDeviceType)
-
-	VTLDevice_VTLDeviceVendor = VTLDevice.AddMember("VTLDeviceVendor", _VTLDeviceVendor)
-
-	VTLDevice_VTLDeviceProductIdentifier = VTLDevice.AddMember("VTLDeviceProductIdentifier", _VTLDeviceProductIdentifier)
-
-	VTLDevice_DeviceiSCSIAttributes = VTLDevice.AddMember("DeviceiSCSIAttributes", DeviceiSCSIAttributes)
-
-	_VTLDeviceARNs_member = _VTLDeviceARNs.AddMember("member", _VTLDeviceARN)
-
-	_VTLDevices_member = _VTLDevices.AddMember("member", VTLDevice)
-
-	ActivateGatewayInput_ActivationKey = ActivateGatewayInput.AddMember("ActivationKey", _ActivationKey)
-
-	ActivateGatewayInput_GatewayName = ActivateGatewayInput.AddMember("GatewayName", _GatewayName)
-
-	ActivateGatewayInput_GatewayTimezone = ActivateGatewayInput.AddMember("GatewayTimezone", _GatewayTimezone)
-
-	ActivateGatewayInput_GatewayRegion = ActivateGatewayInput.AddMember("GatewayRegion", _RegionId)
-
-	ActivateGatewayInput_GatewayType = ActivateGatewayInput.AddMember("GatewayType", _GatewayType)
-
-	ActivateGatewayInput_TapeDriveType = ActivateGatewayInput.AddMember("TapeDriveType", _TapeDriveType)
-
-	ActivateGatewayInput_MediumChangerType = ActivateGatewayInput.AddMember("MediumChangerType", _MediumChangerType)
-
-	ActivateGatewayInput_Tags = ActivateGatewayInput.AddMember("Tags", _Tags)
-
-	ActivateGatewayOutput_GatewayARN = ActivateGatewayOutput.AddMember("GatewayARN", _GatewayARN)
-
-	AddCacheInput_GatewayARN = AddCacheInput.AddMember("GatewayARN", _GatewayARN)
-
-	AddCacheInput_DiskIds = AddCacheInput.AddMember("DiskIds", _DiskIds)
-
-	AddCacheOutput_GatewayARN = AddCacheOutput.AddMember("GatewayARN", _GatewayARN)
-
-	AddTagsToResourceInput_ResourceARN = AddTagsToResourceInput.AddMember("ResourceARN", _ResourceARN)
-
-	AddTagsToResourceInput_Tags = AddTagsToResourceInput.AddMember("Tags", _Tags)
-
-	AddTagsToResourceOutput_ResourceARN = AddTagsToResourceOutput.AddMember("ResourceARN", _ResourceARN)
-
-	AddUploadBufferInput_GatewayARN = AddUploadBufferInput.AddMember("GatewayARN", _GatewayARN)
-
-	AddUploadBufferInput_DiskIds = AddUploadBufferInput.AddMember("DiskIds", _DiskIds)
-
-	AddUploadBufferOutput_GatewayARN = AddUploadBufferOutput.AddMember("GatewayARN", _GatewayARN)
-
-	AddWorkingStorageInput_GatewayARN = AddWorkingStorageInput.AddMember("GatewayARN", _GatewayARN)
-
-	AddWorkingStorageInput_DiskIds = AddWorkingStorageInput.AddMember("DiskIds", _DiskIds)
-
-	AddWorkingStorageOutput_GatewayARN = AddWorkingStorageOutput.AddMember("GatewayARN", _GatewayARN)
-
-	AssignTapePoolInput_TapeARN = AssignTapePoolInput.AddMember("TapeARN", _TapeARN)
-
-	AssignTapePoolInput_PoolId = AssignTapePoolInput.AddMember("PoolId", _PoolId)
-
-	AssignTapePoolInput_BypassGovernanceRetention = AssignTapePoolInput.AddMember("BypassGovernanceRetention", _Boolean2)
-
-	AssignTapePoolOutput_TapeARN = AssignTapePoolOutput.AddMember("TapeARN", _TapeARN)
-
-	AssociateFileSystemInput_UserName = AssociateFileSystemInput.AddMember("UserName", _DomainUserName)
-
-	AssociateFileSystemInput_Password = AssociateFileSystemInput.AddMember("Password", _DomainUserPassword)
-
-	AssociateFileSystemInput_ClientToken = AssociateFileSystemInput.AddMember("ClientToken", _ClientToken)
-
-	AssociateFileSystemInput_GatewayARN = AssociateFileSystemInput.AddMember("GatewayARN", _GatewayARN)
-
-	AssociateFileSystemInput_LocationARN = AssociateFileSystemInput.AddMember("LocationARN", _FileSystemLocationARN)
-
-	AssociateFileSystemInput_Tags = AssociateFileSystemInput.AddMember("Tags", _Tags)
-
-	AssociateFileSystemInput_AuditDestinationARN = AssociateFileSystemInput.AddMember("AuditDestinationARN", _AuditDestinationARN)
-
-	AssociateFileSystemInput_CacheAttributes = AssociateFileSystemInput.AddMember("CacheAttributes", CacheAttributes)
-
-	AssociateFileSystemInput_EndpointNetworkConfiguration = AssociateFileSystemInput.AddMember("EndpointNetworkConfiguration", EndpointNetworkConfiguration)
-
-	AssociateFileSystemOutput_FileSystemAssociationARN = AssociateFileSystemOutput.AddMember("FileSystemAssociationARN", _FileSystemAssociationARN)
-
-	AttachVolumeInput_GatewayARN = AttachVolumeInput.AddMember("GatewayARN", _GatewayARN)
-
-	AttachVolumeInput_TargetName = AttachVolumeInput.AddMember("TargetName", _TargetName)
-
-	AttachVolumeInput_VolumeARN = AttachVolumeInput.AddMember("VolumeARN", _VolumeARN)
-
-	AttachVolumeInput_NetworkInterfaceId = AttachVolumeInput.AddMember("NetworkInterfaceId", _NetworkInterfaceId)
-
-	AttachVolumeInput_DiskId = AttachVolumeInput.AddMember("DiskId", _DiskId)
-
-	AttachVolumeOutput_VolumeARN = AttachVolumeOutput.AddMember("VolumeARN", _VolumeARN)
-
-	AttachVolumeOutput_TargetARN = AttachVolumeOutput.AddMember("TargetARN", _TargetARN)
-
-	CancelArchivalInput_GatewayARN = CancelArchivalInput.AddMember("GatewayARN", _GatewayARN)
-
-	CancelArchivalInput_TapeARN = CancelArchivalInput.AddMember("TapeARN", _TapeARN)
-
-	CancelArchivalOutput_TapeARN = CancelArchivalOutput.AddMember("TapeARN", _TapeARN)
-
-	CancelCacheReportInput_CacheReportARN = CancelCacheReportInput.AddMember("CacheReportARN", _CacheReportARN)
-
-	CancelCacheReportOutput_CacheReportARN = CancelCacheReportOutput.AddMember("CacheReportARN", _CacheReportARN)
-
-	CancelRetrievalInput_GatewayARN = CancelRetrievalInput.AddMember("GatewayARN", _GatewayARN)
-
-	CancelRetrievalInput_TapeARN = CancelRetrievalInput.AddMember("TapeARN", _TapeARN)
-
-	CancelRetrievalOutput_TapeARN = CancelRetrievalOutput.AddMember("TapeARN", _TapeARN)
-
-	CreateCachediSCSIVolumeInput_GatewayARN = CreateCachediSCSIVolumeInput.AddMember("GatewayARN", _GatewayARN)
-
-	CreateCachediSCSIVolumeInput_VolumeSizeInBytes = CreateCachediSCSIVolumeInput.AddMember("VolumeSizeInBytes", _long)
-
-	CreateCachediSCSIVolumeInput_SnapshotId = CreateCachediSCSIVolumeInput.AddMember("SnapshotId", _SnapshotId)
-
-	CreateCachediSCSIVolumeInput_TargetName = CreateCachediSCSIVolumeInput.AddMember("TargetName", _TargetName)
-
-	CreateCachediSCSIVolumeInput_SourceVolumeARN = CreateCachediSCSIVolumeInput.AddMember("SourceVolumeARN", _VolumeARN)
-
-	CreateCachediSCSIVolumeInput_NetworkInterfaceId = CreateCachediSCSIVolumeInput.AddMember("NetworkInterfaceId", _NetworkInterfaceId)
-
-	CreateCachediSCSIVolumeInput_ClientToken = CreateCachediSCSIVolumeInput.AddMember("ClientToken", _ClientToken)
-
-	CreateCachediSCSIVolumeInput_KMSEncrypted = CreateCachediSCSIVolumeInput.AddMember("KMSEncrypted", _Boolean)
-
-	CreateCachediSCSIVolumeInput_KMSKey = CreateCachediSCSIVolumeInput.AddMember("KMSKey", _KMSKey)
-
-	CreateCachediSCSIVolumeInput_Tags = CreateCachediSCSIVolumeInput.AddMember("Tags", _Tags)
-
-	CreateCachediSCSIVolumeOutput_VolumeARN = CreateCachediSCSIVolumeOutput.AddMember("VolumeARN", _VolumeARN)
-
-	CreateCachediSCSIVolumeOutput_TargetARN = CreateCachediSCSIVolumeOutput.AddMember("TargetARN", _TargetARN)
-
-	CreateNFSFileShareInput_ClientToken = CreateNFSFileShareInput.AddMember("ClientToken", _ClientToken)
-
-	CreateNFSFileShareInput_NFSFileShareDefaults = CreateNFSFileShareInput.AddMember("NFSFileShareDefaults", NFSFileShareDefaults)
-
-	CreateNFSFileShareInput_GatewayARN = CreateNFSFileShareInput.AddMember("GatewayARN", _GatewayARN)
-
-	CreateNFSFileShareInput_EncryptionType = CreateNFSFileShareInput.AddMember("EncryptionType", EncryptionType)
-
-	CreateNFSFileShareInput_KMSEncrypted = CreateNFSFileShareInput.AddMember("KMSEncrypted", _Boolean)
-
-	CreateNFSFileShareInput_KMSKey = CreateNFSFileShareInput.AddMember("KMSKey", _KMSKey)
-
-	CreateNFSFileShareInput_Role = CreateNFSFileShareInput.AddMember("Role", _Role)
-
-	CreateNFSFileShareInput_LocationARN = CreateNFSFileShareInput.AddMember("LocationARN", _LocationARN)
-
-	CreateNFSFileShareInput_DefaultStorageClass = CreateNFSFileShareInput.AddMember("DefaultStorageClass", _StorageClass)
-
-	CreateNFSFileShareInput_ObjectACL = CreateNFSFileShareInput.AddMember("ObjectACL", ObjectACL)
-
-	CreateNFSFileShareInput_ClientList = CreateNFSFileShareInput.AddMember("ClientList", _FileShareClientList)
-
-	CreateNFSFileShareInput_Squash = CreateNFSFileShareInput.AddMember("Squash", _Squash)
-
-	CreateNFSFileShareInput_ReadOnly = CreateNFSFileShareInput.AddMember("ReadOnly", _Boolean)
-
-	CreateNFSFileShareInput_GuessMIMETypeEnabled = CreateNFSFileShareInput.AddMember("GuessMIMETypeEnabled", _Boolean)
-
-	CreateNFSFileShareInput_RequesterPays = CreateNFSFileShareInput.AddMember("RequesterPays", _Boolean)
-
-	CreateNFSFileShareInput_Tags = CreateNFSFileShareInput.AddMember("Tags", _Tags)
-
-	CreateNFSFileShareInput_FileShareName = CreateNFSFileShareInput.AddMember("FileShareName", _FileShareName)
-
-	CreateNFSFileShareInput_CacheAttributes = CreateNFSFileShareInput.AddMember("CacheAttributes", CacheAttributes)
-
-	CreateNFSFileShareInput_NotificationPolicy = CreateNFSFileShareInput.AddMember("NotificationPolicy", _NotificationPolicy)
-
-	CreateNFSFileShareInput_VPCEndpointDNSName = CreateNFSFileShareInput.AddMember("VPCEndpointDNSName", _DNSHostName)
-
-	CreateNFSFileShareInput_BucketRegion = CreateNFSFileShareInput.AddMember("BucketRegion", _RegionId)
-
-	CreateNFSFileShareInput_AuditDestinationARN = CreateNFSFileShareInput.AddMember("AuditDestinationARN", _AuditDestinationARN)
-
-	CreateNFSFileShareOutput_FileShareARN = CreateNFSFileShareOutput.AddMember("FileShareARN", _FileShareARN)
-
-	CreateSMBFileShareInput_ClientToken = CreateSMBFileShareInput.AddMember("ClientToken", _ClientToken)
-
-	CreateSMBFileShareInput_GatewayARN = CreateSMBFileShareInput.AddMember("GatewayARN", _GatewayARN)
-
-	CreateSMBFileShareInput_EncryptionType = CreateSMBFileShareInput.AddMember("EncryptionType", EncryptionType)
-
-	CreateSMBFileShareInput_KMSEncrypted = CreateSMBFileShareInput.AddMember("KMSEncrypted", _Boolean)
-
-	CreateSMBFileShareInput_KMSKey = CreateSMBFileShareInput.AddMember("KMSKey", _KMSKey)
-
-	CreateSMBFileShareInput_Role = CreateSMBFileShareInput.AddMember("Role", _Role)
-
-	CreateSMBFileShareInput_LocationARN = CreateSMBFileShareInput.AddMember("LocationARN", _LocationARN)
-
-	CreateSMBFileShareInput_DefaultStorageClass = CreateSMBFileShareInput.AddMember("DefaultStorageClass", _StorageClass)
-
-	CreateSMBFileShareInput_ObjectACL = CreateSMBFileShareInput.AddMember("ObjectACL", ObjectACL)
-
-	CreateSMBFileShareInput_ReadOnly = CreateSMBFileShareInput.AddMember("ReadOnly", _Boolean)
-
-	CreateSMBFileShareInput_GuessMIMETypeEnabled = CreateSMBFileShareInput.AddMember("GuessMIMETypeEnabled", _Boolean)
-
-	CreateSMBFileShareInput_RequesterPays = CreateSMBFileShareInput.AddMember("RequesterPays", _Boolean)
-
-	CreateSMBFileShareInput_SMBACLEnabled = CreateSMBFileShareInput.AddMember("SMBACLEnabled", _Boolean)
-
-	CreateSMBFileShareInput_AccessBasedEnumeration = CreateSMBFileShareInput.AddMember("AccessBasedEnumeration", _Boolean)
-
-	CreateSMBFileShareInput_AdminUserList = CreateSMBFileShareInput.AddMember("AdminUserList", _UserList)
-
-	CreateSMBFileShareInput_ValidUserList = CreateSMBFileShareInput.AddMember("ValidUserList", _UserList)
-
-	CreateSMBFileShareInput_InvalidUserList = CreateSMBFileShareInput.AddMember("InvalidUserList", _UserList)
-
-	CreateSMBFileShareInput_AuditDestinationARN = CreateSMBFileShareInput.AddMember("AuditDestinationARN", _AuditDestinationARN)
-
-	CreateSMBFileShareInput_Authentication = CreateSMBFileShareInput.AddMember("Authentication", _Authentication)
-
-	CreateSMBFileShareInput_CaseSensitivity = CreateSMBFileShareInput.AddMember("CaseSensitivity", CaseSensitivity)
-
-	CreateSMBFileShareInput_Tags = CreateSMBFileShareInput.AddMember("Tags", _Tags)
-
-	CreateSMBFileShareInput_FileShareName = CreateSMBFileShareInput.AddMember("FileShareName", _FileShareName)
-
-	CreateSMBFileShareInput_CacheAttributes = CreateSMBFileShareInput.AddMember("CacheAttributes", CacheAttributes)
-
-	CreateSMBFileShareInput_NotificationPolicy = CreateSMBFileShareInput.AddMember("NotificationPolicy", _NotificationPolicy)
-
-	CreateSMBFileShareInput_VPCEndpointDNSName = CreateSMBFileShareInput.AddMember("VPCEndpointDNSName", _DNSHostName)
-
-	CreateSMBFileShareInput_BucketRegion = CreateSMBFileShareInput.AddMember("BucketRegion", _RegionId)
-
-	CreateSMBFileShareInput_OplocksEnabled = CreateSMBFileShareInput.AddMember("OplocksEnabled", _Boolean)
-
-	CreateSMBFileShareOutput_FileShareARN = CreateSMBFileShareOutput.AddMember("FileShareARN", _FileShareARN)
-
-	CreateSnapshotFromVolumeRecoveryPointInput_VolumeARN = CreateSnapshotFromVolumeRecoveryPointInput.AddMember("VolumeARN", _VolumeARN)
-
-	CreateSnapshotFromVolumeRecoveryPointInput_SnapshotDescription = CreateSnapshotFromVolumeRecoveryPointInput.AddMember("SnapshotDescription", _SnapshotDescription)
-
-	CreateSnapshotFromVolumeRecoveryPointInput_Tags = CreateSnapshotFromVolumeRecoveryPointInput.AddMember("Tags", _Tags)
-
-	CreateSnapshotFromVolumeRecoveryPointOutput_SnapshotId = CreateSnapshotFromVolumeRecoveryPointOutput.AddMember("SnapshotId", _SnapshotId)
-
-	CreateSnapshotFromVolumeRecoveryPointOutput_VolumeARN = CreateSnapshotFromVolumeRecoveryPointOutput.AddMember("VolumeARN", _VolumeARN)
-
-	CreateSnapshotFromVolumeRecoveryPointOutput_VolumeRecoveryPointTime = CreateSnapshotFromVolumeRecoveryPointOutput.AddMember("VolumeRecoveryPointTime", _string)
-
-	CreateSnapshotInput_VolumeARN = CreateSnapshotInput.AddMember("VolumeARN", _VolumeARN)
-
-	CreateSnapshotInput_SnapshotDescription = CreateSnapshotInput.AddMember("SnapshotDescription", _SnapshotDescription)
-
-	CreateSnapshotInput_Tags = CreateSnapshotInput.AddMember("Tags", _Tags)
-
-	CreateSnapshotOutput_VolumeARN = CreateSnapshotOutput.AddMember("VolumeARN", _VolumeARN)
-
-	CreateSnapshotOutput_SnapshotId = CreateSnapshotOutput.AddMember("SnapshotId", _SnapshotId)
-
-	CreateStorediSCSIVolumeInput_GatewayARN = CreateStorediSCSIVolumeInput.AddMember("GatewayARN", _GatewayARN)
-
-	CreateStorediSCSIVolumeInput_DiskId = CreateStorediSCSIVolumeInput.AddMember("DiskId", _DiskId)
-
-	CreateStorediSCSIVolumeInput_SnapshotId = CreateStorediSCSIVolumeInput.AddMember("SnapshotId", _SnapshotId)
-
-	CreateStorediSCSIVolumeInput_PreserveExistingData = CreateStorediSCSIVolumeInput.AddMember("PreserveExistingData", _Boolean2)
-
-	CreateStorediSCSIVolumeInput_TargetName = CreateStorediSCSIVolumeInput.AddMember("TargetName", _TargetName)
-
-	CreateStorediSCSIVolumeInput_NetworkInterfaceId = CreateStorediSCSIVolumeInput.AddMember("NetworkInterfaceId", _NetworkInterfaceId)
-
-	CreateStorediSCSIVolumeInput_KMSEncrypted = CreateStorediSCSIVolumeInput.AddMember("KMSEncrypted", _Boolean)
-
-	CreateStorediSCSIVolumeInput_KMSKey = CreateStorediSCSIVolumeInput.AddMember("KMSKey", _KMSKey)
-
-	CreateStorediSCSIVolumeInput_Tags = CreateStorediSCSIVolumeInput.AddMember("Tags", _Tags)
-
-	CreateStorediSCSIVolumeOutput_VolumeARN = CreateStorediSCSIVolumeOutput.AddMember("VolumeARN", _VolumeARN)
-
-	CreateStorediSCSIVolumeOutput_VolumeSizeInBytes = CreateStorediSCSIVolumeOutput.AddMember("VolumeSizeInBytes", _long)
-
-	CreateStorediSCSIVolumeOutput_TargetARN = CreateStorediSCSIVolumeOutput.AddMember("TargetARN", _TargetARN)
-
-	CreateTapePoolInput_PoolName = CreateTapePoolInput.AddMember("PoolName", _PoolName)
-
-	CreateTapePoolInput_StorageClass = CreateTapePoolInput.AddMember("StorageClass", TapeStorageClass)
-
-	CreateTapePoolInput_RetentionLockType = CreateTapePoolInput.AddMember("RetentionLockType", RetentionLockType)
-
-	CreateTapePoolInput_RetentionLockTimeInDays = CreateTapePoolInput.AddMember("RetentionLockTimeInDays", _RetentionLockTimeInDays)
-
-	CreateTapePoolInput_Tags = CreateTapePoolInput.AddMember("Tags", _Tags)
-
-	CreateTapePoolOutput_PoolARN = CreateTapePoolOutput.AddMember("PoolARN", _PoolARN)
-
-	CreateTapesInput_GatewayARN = CreateTapesInput.AddMember("GatewayARN", _GatewayARN)
-
-	CreateTapesInput_TapeSizeInBytes = CreateTapesInput.AddMember("TapeSizeInBytes", _TapeSize)
-
-	CreateTapesInput_ClientToken = CreateTapesInput.AddMember("ClientToken", _ClientToken)
-
-	CreateTapesInput_NumTapesToCreate = CreateTapesInput.AddMember("NumTapesToCreate", _NumTapesToCreate)
-
-	CreateTapesInput_TapeBarcodePrefix = CreateTapesInput.AddMember("TapeBarcodePrefix", _TapeBarcodePrefix)
-
-	CreateTapesInput_KMSEncrypted = CreateTapesInput.AddMember("KMSEncrypted", _Boolean)
-
-	CreateTapesInput_KMSKey = CreateTapesInput.AddMember("KMSKey", _KMSKey)
-
-	CreateTapesInput_PoolId = CreateTapesInput.AddMember("PoolId", _PoolId)
-
-	CreateTapesInput_Worm = CreateTapesInput.AddMember("Worm", _Boolean2)
-
-	CreateTapesInput_Tags = CreateTapesInput.AddMember("Tags", _Tags)
-
-	CreateTapesOutput_TapeARNs = CreateTapesOutput.AddMember("TapeARNs", _TapeARNs)
-
-	CreateTapeWithBarcodeInput_GatewayARN = CreateTapeWithBarcodeInput.AddMember("GatewayARN", _GatewayARN)
-
-	CreateTapeWithBarcodeInput_TapeSizeInBytes = CreateTapeWithBarcodeInput.AddMember("TapeSizeInBytes", _TapeSize)
-
-	CreateTapeWithBarcodeInput_TapeBarcode = CreateTapeWithBarcodeInput.AddMember("TapeBarcode", _TapeBarcode)
-
-	CreateTapeWithBarcodeInput_KMSEncrypted = CreateTapeWithBarcodeInput.AddMember("KMSEncrypted", _Boolean)
-
-	CreateTapeWithBarcodeInput_KMSKey = CreateTapeWithBarcodeInput.AddMember("KMSKey", _KMSKey)
-
-	CreateTapeWithBarcodeInput_PoolId = CreateTapeWithBarcodeInput.AddMember("PoolId", _PoolId)
-
-	CreateTapeWithBarcodeInput_Worm = CreateTapeWithBarcodeInput.AddMember("Worm", _Boolean2)
-
-	CreateTapeWithBarcodeInput_Tags = CreateTapeWithBarcodeInput.AddMember("Tags", _Tags)
-
-	CreateTapeWithBarcodeOutput_TapeARN = CreateTapeWithBarcodeOutput.AddMember("TapeARN", _TapeARN)
-
-	DeleteAutomaticTapeCreationPolicyInput_GatewayARN = DeleteAutomaticTapeCreationPolicyInput.AddMember("GatewayARN", _GatewayARN)
-
-	DeleteAutomaticTapeCreationPolicyOutput_GatewayARN = DeleteAutomaticTapeCreationPolicyOutput.AddMember("GatewayARN", _GatewayARN)
-
-	DeleteBandwidthRateLimitInput_GatewayARN = DeleteBandwidthRateLimitInput.AddMember("GatewayARN", _GatewayARN)
-
-	DeleteBandwidthRateLimitInput_BandwidthType = DeleteBandwidthRateLimitInput.AddMember("BandwidthType", _BandwidthType)
-
-	DeleteBandwidthRateLimitOutput_GatewayARN = DeleteBandwidthRateLimitOutput.AddMember("GatewayARN", _GatewayARN)
-
-	DeleteCacheReportInput_CacheReportARN = DeleteCacheReportInput.AddMember("CacheReportARN", _CacheReportARN)
-
-	DeleteCacheReportOutput_CacheReportARN = DeleteCacheReportOutput.AddMember("CacheReportARN", _CacheReportARN)
-
-	DeleteChapCredentialsInput_TargetARN = DeleteChapCredentialsInput.AddMember("TargetARN", _TargetARN)
-
-	DeleteChapCredentialsInput_InitiatorName = DeleteChapCredentialsInput.AddMember("InitiatorName", _IqnName)
-
-	DeleteChapCredentialsOutput_TargetARN = DeleteChapCredentialsOutput.AddMember("TargetARN", _TargetARN)
-
-	DeleteChapCredentialsOutput_InitiatorName = DeleteChapCredentialsOutput.AddMember("InitiatorName", _IqnName)
-
-	DeleteFileShareInput_FileShareARN = DeleteFileShareInput.AddMember("FileShareARN", _FileShareARN)
-
-	DeleteFileShareInput_ForceDelete = DeleteFileShareInput.AddMember("ForceDelete", _Boolean2)
-
-	DeleteFileShareOutput_FileShareARN = DeleteFileShareOutput.AddMember("FileShareARN", _FileShareARN)
-
-	DeleteGatewayInput_GatewayARN = DeleteGatewayInput.AddMember("GatewayARN", _GatewayARN)
-
-	DeleteGatewayOutput_GatewayARN = DeleteGatewayOutput.AddMember("GatewayARN", _GatewayARN)
-
-	DeleteSnapshotScheduleInput_VolumeARN = DeleteSnapshotScheduleInput.AddMember("VolumeARN", _VolumeARN)
-
-	DeleteSnapshotScheduleOutput_VolumeARN = DeleteSnapshotScheduleOutput.AddMember("VolumeARN", _VolumeARN)
-
-	DeleteTapeArchiveInput_TapeARN = DeleteTapeArchiveInput.AddMember("TapeARN", _TapeARN)
-
-	DeleteTapeArchiveInput_BypassGovernanceRetention = DeleteTapeArchiveInput.AddMember("BypassGovernanceRetention", _Boolean2)
-
-	DeleteTapeArchiveOutput_TapeARN = DeleteTapeArchiveOutput.AddMember("TapeARN", _TapeARN)
-
-	DeleteTapeInput_GatewayARN = DeleteTapeInput.AddMember("GatewayARN", _GatewayARN)
-
-	DeleteTapeInput_TapeARN = DeleteTapeInput.AddMember("TapeARN", _TapeARN)
-
-	DeleteTapeInput_BypassGovernanceRetention = DeleteTapeInput.AddMember("BypassGovernanceRetention", _Boolean2)
-
-	DeleteTapeOutput_TapeARN = DeleteTapeOutput.AddMember("TapeARN", _TapeARN)
-
-	DeleteTapePoolInput_PoolARN = DeleteTapePoolInput.AddMember("PoolARN", _PoolARN)
-
-	DeleteTapePoolOutput_PoolARN = DeleteTapePoolOutput.AddMember("PoolARN", _PoolARN)
-
-	DeleteVolumeInput_VolumeARN = DeleteVolumeInput.AddMember("VolumeARN", _VolumeARN)
-
-	DeleteVolumeOutput_VolumeARN = DeleteVolumeOutput.AddMember("VolumeARN", _VolumeARN)
-
-	DescribeAvailabilityMonitorTestInput_GatewayARN = DescribeAvailabilityMonitorTestInput.AddMember("GatewayARN", _GatewayARN)
-
-	DescribeAvailabilityMonitorTestOutput_GatewayARN = DescribeAvailabilityMonitorTestOutput.AddMember("GatewayARN", _GatewayARN)
-
-	DescribeAvailabilityMonitorTestOutput_Status = DescribeAvailabilityMonitorTestOutput.AddMember("Status", AvailabilityMonitorTestStatus)
-
-	DescribeAvailabilityMonitorTestOutput_StartTime = DescribeAvailabilityMonitorTestOutput.AddMember("StartTime", _Time)
-
-	DescribeBandwidthRateLimitInput_GatewayARN = DescribeBandwidthRateLimitInput.AddMember("GatewayARN", _GatewayARN)
-
-	DescribeBandwidthRateLimitOutput_GatewayARN = DescribeBandwidthRateLimitOutput.AddMember("GatewayARN", _GatewayARN)
-
-	DescribeBandwidthRateLimitOutput_AverageUploadRateLimitInBitsPerSec = DescribeBandwidthRateLimitOutput.AddMember("AverageUploadRateLimitInBitsPerSec", _BandwidthUploadRateLimit)
-
-	DescribeBandwidthRateLimitOutput_AverageDownloadRateLimitInBitsPerSec = DescribeBandwidthRateLimitOutput.AddMember("AverageDownloadRateLimitInBitsPerSec", _BandwidthDownloadRateLimit)
-
-	DescribeBandwidthRateLimitScheduleInput_GatewayARN = DescribeBandwidthRateLimitScheduleInput.AddMember("GatewayARN", _GatewayARN)
-
-	DescribeBandwidthRateLimitScheduleOutput_GatewayARN = DescribeBandwidthRateLimitScheduleOutput.AddMember("GatewayARN", _GatewayARN)
-
-	DescribeBandwidthRateLimitScheduleOutput_BandwidthRateLimitIntervals = DescribeBandwidthRateLimitScheduleOutput.AddMember("BandwidthRateLimitIntervals", _BandwidthRateLimitIntervals)
-
-	DescribeCachediSCSIVolumesInput_VolumeARNs = DescribeCachediSCSIVolumesInput.AddMember("VolumeARNs", _VolumeARNs)
-
-	DescribeCachediSCSIVolumesOutput_CachediSCSIVolumes = DescribeCachediSCSIVolumesOutput.AddMember("CachediSCSIVolumes", _CachediSCSIVolumes)
-
-	DescribeCacheInput_GatewayARN = DescribeCacheInput.AddMember("GatewayARN", _GatewayARN)
-
-	DescribeCacheOutput_GatewayARN = DescribeCacheOutput.AddMember("GatewayARN", _GatewayARN)
-
-	DescribeCacheOutput_DiskIds = DescribeCacheOutput.AddMember("DiskIds", _DiskIds)
-
-	DescribeCacheOutput_CacheAllocatedInBytes = DescribeCacheOutput.AddMember("CacheAllocatedInBytes", _long)
-
-	DescribeCacheOutput_CacheUsedPercentage = DescribeCacheOutput.AddMember("CacheUsedPercentage", _double)
-
-	DescribeCacheOutput_CacheDirtyPercentage = DescribeCacheOutput.AddMember("CacheDirtyPercentage", _double)
-
-	DescribeCacheOutput_CacheHitPercentage = DescribeCacheOutput.AddMember("CacheHitPercentage", _double)
-
-	DescribeCacheOutput_CacheMissPercentage = DescribeCacheOutput.AddMember("CacheMissPercentage", _double)
-
-	DescribeCacheReportInput_CacheReportARN = DescribeCacheReportInput.AddMember("CacheReportARN", _CacheReportARN)
-
-	DescribeCacheReportOutput_CacheReportInfo = DescribeCacheReportOutput.AddMember("CacheReportInfo", CacheReportInfo)
-
-	DescribeChapCredentialsInput_TargetARN = DescribeChapCredentialsInput.AddMember("TargetARN", _TargetARN)
-
-	DescribeChapCredentialsOutput_ChapCredentials = DescribeChapCredentialsOutput.AddMember("ChapCredentials", _ChapCredentials)
-
-	DescribeFileSystemAssociationsInput_FileSystemAssociationARNList = DescribeFileSystemAssociationsInput.AddMember("FileSystemAssociationARNList", _FileSystemAssociationARNList)
-
-	DescribeFileSystemAssociationsOutput_FileSystemAssociationInfoList = DescribeFileSystemAssociationsOutput.AddMember("FileSystemAssociationInfoList", _FileSystemAssociationInfoList)
-
-	DescribeGatewayInformationInput_GatewayARN = DescribeGatewayInformationInput.AddMember("GatewayARN", _GatewayARN)
-
-	DescribeGatewayInformationOutput_GatewayARN = DescribeGatewayInformationOutput.AddMember("GatewayARN", _GatewayARN)
-
-	DescribeGatewayInformationOutput_GatewayId = DescribeGatewayInformationOutput.AddMember("GatewayId", _GatewayId)
-
-	DescribeGatewayInformationOutput_GatewayName = DescribeGatewayInformationOutput.AddMember("GatewayName", _string)
-
-	DescribeGatewayInformationOutput_GatewayTimezone = DescribeGatewayInformationOutput.AddMember("GatewayTimezone", _GatewayTimezone)
-
-	DescribeGatewayInformationOutput_GatewayState = DescribeGatewayInformationOutput.AddMember("GatewayState", _GatewayState)
-
-	DescribeGatewayInformationOutput_GatewayNetworkInterfaces = DescribeGatewayInformationOutput.AddMember("GatewayNetworkInterfaces", _GatewayNetworkInterfaces)
-
-	DescribeGatewayInformationOutput_GatewayType = DescribeGatewayInformationOutput.AddMember("GatewayType", _GatewayType)
-
-	DescribeGatewayInformationOutput_NextUpdateAvailabilityDate = DescribeGatewayInformationOutput.AddMember("NextUpdateAvailabilityDate", _NextUpdateAvailabilityDate)
-
-	DescribeGatewayInformationOutput_LastSoftwareUpdate = DescribeGatewayInformationOutput.AddMember("LastSoftwareUpdate", _LastSoftwareUpdate)
-
-	DescribeGatewayInformationOutput_Ec2InstanceId = DescribeGatewayInformationOutput.AddMember("Ec2InstanceId", _Ec2InstanceId)
-
-	DescribeGatewayInformationOutput_Ec2InstanceRegion = DescribeGatewayInformationOutput.AddMember("Ec2InstanceRegion", _Ec2InstanceRegion)
-
-	DescribeGatewayInformationOutput_Tags = DescribeGatewayInformationOutput.AddMember("Tags", _Tags)
-
-	DescribeGatewayInformationOutput_VPCEndpoint = DescribeGatewayInformationOutput.AddMember("VPCEndpoint", _string)
-
-	DescribeGatewayInformationOutput_CloudWatchLogGroupARN = DescribeGatewayInformationOutput.AddMember("CloudWatchLogGroupARN", _CloudWatchLogGroupARN)
-
-	DescribeGatewayInformationOutput_HostEnvironment = DescribeGatewayInformationOutput.AddMember("HostEnvironment", HostEnvironment)
-
-	DescribeGatewayInformationOutput_EndpointType = DescribeGatewayInformationOutput.AddMember("EndpointType", _EndpointType)
-
-	DescribeGatewayInformationOutput_SoftwareUpdatesEndDate = DescribeGatewayInformationOutput.AddMember("SoftwareUpdatesEndDate", _SoftwareUpdatesEndDate)
-
-	DescribeGatewayInformationOutput_DeprecationDate = DescribeGatewayInformationOutput.AddMember("DeprecationDate", _DeprecationDate)
-
-	DescribeGatewayInformationOutput_GatewayCapacity = DescribeGatewayInformationOutput.AddMember("GatewayCapacity", GatewayCapacity)
-
-	DescribeGatewayInformationOutput_SupportedGatewayCapacities = DescribeGatewayInformationOutput.AddMember("SupportedGatewayCapacities", _SupportedGatewayCapacities)
-
-	DescribeGatewayInformationOutput_HostEnvironmentId = DescribeGatewayInformationOutput.AddMember("HostEnvironmentId", _HostEnvironmentId)
-
-	DescribeGatewayInformationOutput_SoftwareVersion = DescribeGatewayInformationOutput.AddMember("SoftwareVersion", _SoftwareVersion)
-
-	DescribeMaintenanceStartTimeInput_GatewayARN = DescribeMaintenanceStartTimeInput.AddMember("GatewayARN", _GatewayARN)
-
-	DescribeMaintenanceStartTimeOutput_GatewayARN = DescribeMaintenanceStartTimeOutput.AddMember("GatewayARN", _GatewayARN)
-
-	DescribeMaintenanceStartTimeOutput_HourOfDay = DescribeMaintenanceStartTimeOutput.AddMember("HourOfDay", _HourOfDay)
-
-	DescribeMaintenanceStartTimeOutput_MinuteOfHour = DescribeMaintenanceStartTimeOutput.AddMember("MinuteOfHour", _MinuteOfHour)
-
-	DescribeMaintenanceStartTimeOutput_DayOfWeek = DescribeMaintenanceStartTimeOutput.AddMember("DayOfWeek", _DayOfWeek)
-
-	DescribeMaintenanceStartTimeOutput_DayOfMonth = DescribeMaintenanceStartTimeOutput.AddMember("DayOfMonth", _DayOfMonth)
-
-	DescribeMaintenanceStartTimeOutput_Timezone = DescribeMaintenanceStartTimeOutput.AddMember("Timezone", _GatewayTimezone)
-
-	DescribeMaintenanceStartTimeOutput_SoftwareUpdatePreferences = DescribeMaintenanceStartTimeOutput.AddMember("SoftwareUpdatePreferences", SoftwareUpdatePreferences)
-
-	DescribeNFSFileSharesInput_FileShareARNList = DescribeNFSFileSharesInput.AddMember("FileShareARNList", _FileShareARNList)
-
-	DescribeNFSFileSharesOutput_NFSFileShareInfoList = DescribeNFSFileSharesOutput.AddMember("NFSFileShareInfoList", _NFSFileShareInfoList)
-
-	DescribeSMBFileSharesInput_FileShareARNList = DescribeSMBFileSharesInput.AddMember("FileShareARNList", _FileShareARNList)
-
-	DescribeSMBFileSharesOutput_SMBFileShareInfoList = DescribeSMBFileSharesOutput.AddMember("SMBFileShareInfoList", _SMBFileShareInfoList)
-
-	DescribeSMBSettingsInput_GatewayARN = DescribeSMBSettingsInput.AddMember("GatewayARN", _GatewayARN)
-
-	DescribeSMBSettingsOutput_GatewayARN = DescribeSMBSettingsOutput.AddMember("GatewayARN", _GatewayARN)
-
-	DescribeSMBSettingsOutput_DomainName = DescribeSMBSettingsOutput.AddMember("DomainName", _DomainName)
-
-	DescribeSMBSettingsOutput_ActiveDirectoryStatus = DescribeSMBSettingsOutput.AddMember("ActiveDirectoryStatus", ActiveDirectoryStatus)
-
-	DescribeSMBSettingsOutput_SMBGuestPasswordSet = DescribeSMBSettingsOutput.AddMember("SMBGuestPasswordSet", _Boolean)
-
-	DescribeSMBSettingsOutput_SMBSecurityStrategy = DescribeSMBSettingsOutput.AddMember("SMBSecurityStrategy", SMBSecurityStrategy)
-
-	DescribeSMBSettingsOutput_FileSharesVisible = DescribeSMBSettingsOutput.AddMember("FileSharesVisible", _Boolean)
-
-	DescribeSMBSettingsOutput_SMBLocalGroups = DescribeSMBSettingsOutput.AddMember("SMBLocalGroups", SMBLocalGroups)
-
-	DescribeSnapshotScheduleInput_VolumeARN = DescribeSnapshotScheduleInput.AddMember("VolumeARN", _VolumeARN)
-
-	DescribeSnapshotScheduleOutput_VolumeARN = DescribeSnapshotScheduleOutput.AddMember("VolumeARN", _VolumeARN)
-
-	DescribeSnapshotScheduleOutput_StartAt = DescribeSnapshotScheduleOutput.AddMember("StartAt", _HourOfDay)
-
-	DescribeSnapshotScheduleOutput_RecurrenceInHours = DescribeSnapshotScheduleOutput.AddMember("RecurrenceInHours", _RecurrenceInHours)
-
-	DescribeSnapshotScheduleOutput_Description = DescribeSnapshotScheduleOutput.AddMember("Description", _Description)
-
-	DescribeSnapshotScheduleOutput_Timezone = DescribeSnapshotScheduleOutput.AddMember("Timezone", _GatewayTimezone)
-
-	DescribeSnapshotScheduleOutput_Tags = DescribeSnapshotScheduleOutput.AddMember("Tags", _Tags)
-
-	DescribeStorediSCSIVolumesInput_VolumeARNs = DescribeStorediSCSIVolumesInput.AddMember("VolumeARNs", _VolumeARNs)
-
-	DescribeStorediSCSIVolumesOutput_StorediSCSIVolumes = DescribeStorediSCSIVolumesOutput.AddMember("StorediSCSIVolumes", _StorediSCSIVolumes)
-
-	DescribeTapeArchivesInput_TapeARNs = DescribeTapeArchivesInput.AddMember("TapeARNs", _TapeARNs)
-
-	DescribeTapeArchivesInput_Marker = DescribeTapeArchivesInput.AddMember("Marker", _Marker)
-
-	DescribeTapeArchivesInput_Limit = DescribeTapeArchivesInput.AddMember("Limit", _PositiveIntObject)
-
-	DescribeTapeArchivesOutput_TapeArchives = DescribeTapeArchivesOutput.AddMember("TapeArchives", _TapeArchives)
-
-	DescribeTapeArchivesOutput_Marker = DescribeTapeArchivesOutput.AddMember("Marker", _Marker)
-
-	DescribeTapeRecoveryPointsInput_GatewayARN = DescribeTapeRecoveryPointsInput.AddMember("GatewayARN", _GatewayARN)
-
-	DescribeTapeRecoveryPointsInput_Marker = DescribeTapeRecoveryPointsInput.AddMember("Marker", _Marker)
-
-	DescribeTapeRecoveryPointsInput_Limit = DescribeTapeRecoveryPointsInput.AddMember("Limit", _PositiveIntObject)
-
-	DescribeTapeRecoveryPointsOutput_GatewayARN = DescribeTapeRecoveryPointsOutput.AddMember("GatewayARN", _GatewayARN)
-
-	DescribeTapeRecoveryPointsOutput_TapeRecoveryPointInfos = DescribeTapeRecoveryPointsOutput.AddMember("TapeRecoveryPointInfos", _TapeRecoveryPointInfos)
-
-	DescribeTapeRecoveryPointsOutput_Marker = DescribeTapeRecoveryPointsOutput.AddMember("Marker", _Marker)
-
-	DescribeTapesInput_GatewayARN = DescribeTapesInput.AddMember("GatewayARN", _GatewayARN)
-
-	DescribeTapesInput_TapeARNs = DescribeTapesInput.AddMember("TapeARNs", _TapeARNs)
-
-	DescribeTapesInput_Marker = DescribeTapesInput.AddMember("Marker", _Marker)
-
-	DescribeTapesInput_Limit = DescribeTapesInput.AddMember("Limit", _PositiveIntObject)
-
-	DescribeTapesOutput_Tapes = DescribeTapesOutput.AddMember("Tapes", _Tapes)
-
-	DescribeTapesOutput_Marker = DescribeTapesOutput.AddMember("Marker", _Marker)
-
-	DescribeUploadBufferInput_GatewayARN = DescribeUploadBufferInput.AddMember("GatewayARN", _GatewayARN)
-
-	DescribeUploadBufferOutput_GatewayARN = DescribeUploadBufferOutput.AddMember("GatewayARN", _GatewayARN)
-
-	DescribeUploadBufferOutput_DiskIds = DescribeUploadBufferOutput.AddMember("DiskIds", _DiskIds)
-
-	DescribeUploadBufferOutput_UploadBufferUsedInBytes = DescribeUploadBufferOutput.AddMember("UploadBufferUsedInBytes", _long)
-
-	DescribeUploadBufferOutput_UploadBufferAllocatedInBytes = DescribeUploadBufferOutput.AddMember("UploadBufferAllocatedInBytes", _long)
-
-	DescribeVTLDevicesInput_GatewayARN = DescribeVTLDevicesInput.AddMember("GatewayARN", _GatewayARN)
-
-	DescribeVTLDevicesInput_VTLDeviceARNs = DescribeVTLDevicesInput.AddMember("VTLDeviceARNs", _VTLDeviceARNs)
-
-	DescribeVTLDevicesInput_Marker = DescribeVTLDevicesInput.AddMember("Marker", _Marker)
-
-	DescribeVTLDevicesInput_Limit = DescribeVTLDevicesInput.AddMember("Limit", _PositiveIntObject)
-
-	DescribeVTLDevicesOutput_GatewayARN = DescribeVTLDevicesOutput.AddMember("GatewayARN", _GatewayARN)
-
-	DescribeVTLDevicesOutput_VTLDevices = DescribeVTLDevicesOutput.AddMember("VTLDevices", _VTLDevices)
-
-	DescribeVTLDevicesOutput_Marker = DescribeVTLDevicesOutput.AddMember("Marker", _Marker)
-
-	DescribeWorkingStorageInput_GatewayARN = DescribeWorkingStorageInput.AddMember("GatewayARN", _GatewayARN)
-
-	DescribeWorkingStorageOutput_GatewayARN = DescribeWorkingStorageOutput.AddMember("GatewayARN", _GatewayARN)
-
-	DescribeWorkingStorageOutput_DiskIds = DescribeWorkingStorageOutput.AddMember("DiskIds", _DiskIds)
-
-	DescribeWorkingStorageOutput_WorkingStorageUsedInBytes = DescribeWorkingStorageOutput.AddMember("WorkingStorageUsedInBytes", _long)
-
-	DescribeWorkingStorageOutput_WorkingStorageAllocatedInBytes = DescribeWorkingStorageOutput.AddMember("WorkingStorageAllocatedInBytes", _long)
-
-	DetachVolumeInput_VolumeARN = DetachVolumeInput.AddMember("VolumeARN", _VolumeARN)
-
-	DetachVolumeInput_ForceDetach = DetachVolumeInput.AddMember("ForceDetach", _Boolean)
-
-	DetachVolumeOutput_VolumeARN = DetachVolumeOutput.AddMember("VolumeARN", _VolumeARN)
-
-	DisableGatewayInput_GatewayARN = DisableGatewayInput.AddMember("GatewayARN", _GatewayARN)
-
-	DisableGatewayOutput_GatewayARN = DisableGatewayOutput.AddMember("GatewayARN", _GatewayARN)
-
-	DisassociateFileSystemInput_FileSystemAssociationARN = DisassociateFileSystemInput.AddMember("FileSystemAssociationARN", _FileSystemAssociationARN)
-
-	DisassociateFileSystemInput_ForceDelete = DisassociateFileSystemInput.AddMember("ForceDelete", _Boolean2)
-
-	DisassociateFileSystemOutput_FileSystemAssociationARN = DisassociateFileSystemOutput.AddMember("FileSystemAssociationARN", _FileSystemAssociationARN)
-
-	EvictFilesFailingUploadInput_FileShareARN = EvictFilesFailingUploadInput.AddMember("FileShareARN", _FileShareARN)
-
-	EvictFilesFailingUploadInput_ForceRemove = EvictFilesFailingUploadInput.AddMember("ForceRemove", _Boolean2)
-
-	EvictFilesFailingUploadOutput_NotificationId = EvictFilesFailingUploadOutput.AddMember("NotificationId", _string)
-
-	JoinDomainInput_GatewayARN = JoinDomainInput.AddMember("GatewayARN", _GatewayARN)
-
-	JoinDomainInput_DomainName = JoinDomainInput.AddMember("DomainName", _DomainName)
-
-	JoinDomainInput_OrganizationalUnit = JoinDomainInput.AddMember("OrganizationalUnit", _OrganizationalUnit)
-
-	JoinDomainInput_DomainControllers = JoinDomainInput.AddMember("DomainControllers", _Hosts)
-
-	JoinDomainInput_TimeoutInSeconds = JoinDomainInput.AddMember("TimeoutInSeconds", _TimeoutInSeconds)
-
-	JoinDomainInput_UserName = JoinDomainInput.AddMember("UserName", _DomainUserName)
-
-	JoinDomainInput_Password = JoinDomainInput.AddMember("Password", _DomainUserPassword)
-
-	JoinDomainOutput_GatewayARN = JoinDomainOutput.AddMember("GatewayARN", _GatewayARN)
-
-	JoinDomainOutput_ActiveDirectoryStatus = JoinDomainOutput.AddMember("ActiveDirectoryStatus", ActiveDirectoryStatus)
-
-	ListAutomaticTapeCreationPoliciesInput_GatewayARN = ListAutomaticTapeCreationPoliciesInput.AddMember("GatewayARN", _GatewayARN)
-
-	ListAutomaticTapeCreationPoliciesOutput_AutomaticTapeCreationPolicyInfos = ListAutomaticTapeCreationPoliciesOutput.AddMember("AutomaticTapeCreationPolicyInfos", _AutomaticTapeCreationPolicyInfos)
-
-	ListCacheReportsInput_Marker = ListCacheReportsInput.AddMember("Marker", _Marker)
-
-	ListCacheReportsOutput_CacheReportList = ListCacheReportsOutput.AddMember("CacheReportList", _CacheReportList)
-
-	ListCacheReportsOutput_Marker = ListCacheReportsOutput.AddMember("Marker", _Marker)
-
-	ListFileSharesInput_GatewayARN = ListFileSharesInput.AddMember("GatewayARN", _GatewayARN)
-
-	ListFileSharesInput_Limit = ListFileSharesInput.AddMember("Limit", _PositiveIntObject)
-
-	ListFileSharesInput_Marker = ListFileSharesInput.AddMember("Marker", _Marker)
-
-	ListFileSharesOutput_Marker = ListFileSharesOutput.AddMember("Marker", _Marker)
-
-	ListFileSharesOutput_NextMarker = ListFileSharesOutput.AddMember("NextMarker", _Marker)
-
-	ListFileSharesOutput_FileShareInfoList = ListFileSharesOutput.AddMember("FileShareInfoList", _FileShareInfoList)
-
-	ListFileSystemAssociationsInput_GatewayARN = ListFileSystemAssociationsInput.AddMember("GatewayARN", _GatewayARN)
-
-	ListFileSystemAssociationsInput_Limit = ListFileSystemAssociationsInput.AddMember("Limit", _PositiveIntObject)
-
-	ListFileSystemAssociationsInput_Marker = ListFileSystemAssociationsInput.AddMember("Marker", _Marker)
-
-	ListFileSystemAssociationsOutput_Marker = ListFileSystemAssociationsOutput.AddMember("Marker", _Marker)
-
-	ListFileSystemAssociationsOutput_NextMarker = ListFileSystemAssociationsOutput.AddMember("NextMarker", _Marker)
-
-	ListFileSystemAssociationsOutput_FileSystemAssociationSummaryList = ListFileSystemAssociationsOutput.AddMember("FileSystemAssociationSummaryList", _FileSystemAssociationSummaryList)
-
-	ListGatewaysInput_Marker = ListGatewaysInput.AddMember("Marker", _Marker)
-
-	ListGatewaysInput_Limit = ListGatewaysInput.AddMember("Limit", _PositiveIntObject)
-
-	ListGatewaysOutput_Gateways = ListGatewaysOutput.AddMember("Gateways", _Gateways)
-
-	ListGatewaysOutput_Marker = ListGatewaysOutput.AddMember("Marker", _Marker)
-
-	ListLocalDisksInput_GatewayARN = ListLocalDisksInput.AddMember("GatewayARN", _GatewayARN)
-
-	ListLocalDisksOutput_GatewayARN = ListLocalDisksOutput.AddMember("GatewayARN", _GatewayARN)
-
-	ListLocalDisksOutput_Disks = ListLocalDisksOutput.AddMember("Disks", _Disks)
-
-	ListTagsForResourceInput_ResourceARN = ListTagsForResourceInput.AddMember("ResourceARN", _ResourceARN)
-
-	ListTagsForResourceInput_Marker = ListTagsForResourceInput.AddMember("Marker", _Marker)
-
-	ListTagsForResourceInput_Limit = ListTagsForResourceInput.AddMember("Limit", _PositiveIntObject)
-
-	ListTagsForResourceOutput_ResourceARN = ListTagsForResourceOutput.AddMember("ResourceARN", _ResourceARN)
-
-	ListTagsForResourceOutput_Marker = ListTagsForResourceOutput.AddMember("Marker", _Marker)
-
-	ListTagsForResourceOutput_Tags = ListTagsForResourceOutput.AddMember("Tags", _Tags)
-
-	ListTapePoolsInput_PoolARNs = ListTapePoolsInput.AddMember("PoolARNs", _PoolARNs)
-
-	ListTapePoolsInput_Marker = ListTapePoolsInput.AddMember("Marker", _Marker)
-
-	ListTapePoolsInput_Limit = ListTapePoolsInput.AddMember("Limit", _PositiveIntObject)
-
-	ListTapePoolsOutput_PoolInfos = ListTapePoolsOutput.AddMember("PoolInfos", _PoolInfos)
-
-	ListTapePoolsOutput_Marker = ListTapePoolsOutput.AddMember("Marker", _Marker)
-
-	ListTapesInput_TapeARNs = ListTapesInput.AddMember("TapeARNs", _TapeARNs)
-
-	ListTapesInput_Marker = ListTapesInput.AddMember("Marker", _Marker)
-
-	ListTapesInput_Limit = ListTapesInput.AddMember("Limit", _PositiveIntObject)
-
-	ListTapesOutput_TapeInfos = ListTapesOutput.AddMember("TapeInfos", _TapeInfos)
-
-	ListTapesOutput_Marker = ListTapesOutput.AddMember("Marker", _Marker)
-
-	ListVolumeInitiatorsInput_VolumeARN = ListVolumeInitiatorsInput.AddMember("VolumeARN", _VolumeARN)
-
-	ListVolumeInitiatorsOutput_Initiators = ListVolumeInitiatorsOutput.AddMember("Initiators", _Initiators)
-
-	ListVolumeRecoveryPointsInput_GatewayARN = ListVolumeRecoveryPointsInput.AddMember("GatewayARN", _GatewayARN)
-
-	ListVolumeRecoveryPointsOutput_GatewayARN = ListVolumeRecoveryPointsOutput.AddMember("GatewayARN", _GatewayARN)
-
-	ListVolumeRecoveryPointsOutput_VolumeRecoveryPointInfos = ListVolumeRecoveryPointsOutput.AddMember("VolumeRecoveryPointInfos", _VolumeRecoveryPointInfos)
-
-	ListVolumesInput_GatewayARN = ListVolumesInput.AddMember("GatewayARN", _GatewayARN)
-
-	ListVolumesInput_Marker = ListVolumesInput.AddMember("Marker", _Marker)
-
-	ListVolumesInput_Limit = ListVolumesInput.AddMember("Limit", _PositiveIntObject)
-
-	ListVolumesOutput_GatewayARN = ListVolumesOutput.AddMember("GatewayARN", _GatewayARN)
-
-	ListVolumesOutput_Marker = ListVolumesOutput.AddMember("Marker", _Marker)
-
-	ListVolumesOutput_VolumeInfos = ListVolumesOutput.AddMember("VolumeInfos", _VolumeInfos)
-
-	NotifyWhenUploadedInput_FileShareARN = NotifyWhenUploadedInput.AddMember("FileShareARN", _FileShareARN)
-
-	NotifyWhenUploadedOutput_FileShareARN = NotifyWhenUploadedOutput.AddMember("FileShareARN", _FileShareARN)
-
-	NotifyWhenUploadedOutput_NotificationId = NotifyWhenUploadedOutput.AddMember("NotificationId", _NotificationId)
-
-	RefreshCacheInput_FileShareARN = RefreshCacheInput.AddMember("FileShareARN", _FileShareARN)
-
-	RefreshCacheInput_FolderList = RefreshCacheInput.AddMember("FolderList", _FolderList)
-
-	RefreshCacheInput_Recursive = RefreshCacheInput.AddMember("Recursive", _Boolean)
-
-	RefreshCacheOutput_FileShareARN = RefreshCacheOutput.AddMember("FileShareARN", _FileShareARN)
-
-	RefreshCacheOutput_NotificationId = RefreshCacheOutput.AddMember("NotificationId", _NotificationId)
-
-	RemoveTagsFromResourceInput_ResourceARN = RemoveTagsFromResourceInput.AddMember("ResourceARN", _ResourceARN)
-
-	RemoveTagsFromResourceInput_TagKeys = RemoveTagsFromResourceInput.AddMember("TagKeys", _TagKeys)
-
-	RemoveTagsFromResourceOutput_ResourceARN = RemoveTagsFromResourceOutput.AddMember("ResourceARN", _ResourceARN)
-
-	ResetCacheInput_GatewayARN = ResetCacheInput.AddMember("GatewayARN", _GatewayARN)
-
-	ResetCacheOutput_GatewayARN = ResetCacheOutput.AddMember("GatewayARN", _GatewayARN)
-
-	RetrieveTapeArchiveInput_TapeARN = RetrieveTapeArchiveInput.AddMember("TapeARN", _TapeARN)
-
-	RetrieveTapeArchiveInput_GatewayARN = RetrieveTapeArchiveInput.AddMember("GatewayARN", _GatewayARN)
-
-	RetrieveTapeArchiveOutput_TapeARN = RetrieveTapeArchiveOutput.AddMember("TapeARN", _TapeARN)
-
-	RetrieveTapeRecoveryPointInput_TapeARN = RetrieveTapeRecoveryPointInput.AddMember("TapeARN", _TapeARN)
-
-	RetrieveTapeRecoveryPointInput_GatewayARN = RetrieveTapeRecoveryPointInput.AddMember("GatewayARN", _GatewayARN)
-
-	RetrieveTapeRecoveryPointOutput_TapeARN = RetrieveTapeRecoveryPointOutput.AddMember("TapeARN", _TapeARN)
-
-	SetLocalConsolePasswordInput_GatewayARN = SetLocalConsolePasswordInput.AddMember("GatewayARN", _GatewayARN)
-
-	SetLocalConsolePasswordInput_LocalConsolePassword = SetLocalConsolePasswordInput.AddMember("LocalConsolePassword", _LocalConsolePassword)
-
-	SetLocalConsolePasswordOutput_GatewayARN = SetLocalConsolePasswordOutput.AddMember("GatewayARN", _GatewayARN)
-
-	SetSMBGuestPasswordInput_GatewayARN = SetSMBGuestPasswordInput.AddMember("GatewayARN", _GatewayARN)
-
-	SetSMBGuestPasswordInput_Password = SetSMBGuestPasswordInput.AddMember("Password", _SMBGuestPassword)
-
-	SetSMBGuestPasswordOutput_GatewayARN = SetSMBGuestPasswordOutput.AddMember("GatewayARN", _GatewayARN)
-
-	ShutdownGatewayInput_GatewayARN = ShutdownGatewayInput.AddMember("GatewayARN", _GatewayARN)
-
-	ShutdownGatewayOutput_GatewayARN = ShutdownGatewayOutput.AddMember("GatewayARN", _GatewayARN)
-
-	StartAvailabilityMonitorTestInput_GatewayARN = StartAvailabilityMonitorTestInput.AddMember("GatewayARN", _GatewayARN)
-
-	StartAvailabilityMonitorTestOutput_GatewayARN = StartAvailabilityMonitorTestOutput.AddMember("GatewayARN", _GatewayARN)
-
-	StartCacheReportInput_FileShareARN = StartCacheReportInput.AddMember("FileShareARN", _FileShareARN)
-
-	StartCacheReportInput_Role = StartCacheReportInput.AddMember("Role", _Role)
-
-	StartCacheReportInput_LocationARN = StartCacheReportInput.AddMember("LocationARN", _LocationARN)
-
-	StartCacheReportInput_BucketRegion = StartCacheReportInput.AddMember("BucketRegion", _RegionId)
-
-	StartCacheReportInput_VPCEndpointDNSName = StartCacheReportInput.AddMember("VPCEndpointDNSName", _DNSHostName)
-
-	StartCacheReportInput_InclusionFilters = StartCacheReportInput.AddMember("InclusionFilters", _CacheReportFilterList)
-
-	StartCacheReportInput_ExclusionFilters = StartCacheReportInput.AddMember("ExclusionFilters", _CacheReportFilterList)
-
-	StartCacheReportInput_ClientToken = StartCacheReportInput.AddMember("ClientToken", _ClientToken)
-
-	StartCacheReportInput_Tags = StartCacheReportInput.AddMember("Tags", _Tags)
-
-	StartCacheReportOutput_CacheReportARN = StartCacheReportOutput.AddMember("CacheReportARN", _CacheReportARN)
-
-	StartGatewayInput_GatewayARN = StartGatewayInput.AddMember("GatewayARN", _GatewayARN)
-
-	StartGatewayOutput_GatewayARN = StartGatewayOutput.AddMember("GatewayARN", _GatewayARN)
-
-	UpdateAutomaticTapeCreationPolicyInput_AutomaticTapeCreationRules = UpdateAutomaticTapeCreationPolicyInput.AddMember("AutomaticTapeCreationRules", _AutomaticTapeCreationRules)
-
-	UpdateAutomaticTapeCreationPolicyInput_GatewayARN = UpdateAutomaticTapeCreationPolicyInput.AddMember("GatewayARN", _GatewayARN)
-
-	UpdateAutomaticTapeCreationPolicyOutput_GatewayARN = UpdateAutomaticTapeCreationPolicyOutput.AddMember("GatewayARN", _GatewayARN)
-
-	UpdateBandwidthRateLimitInput_GatewayARN = UpdateBandwidthRateLimitInput.AddMember("GatewayARN", _GatewayARN)
-
-	UpdateBandwidthRateLimitInput_AverageUploadRateLimitInBitsPerSec = UpdateBandwidthRateLimitInput.AddMember("AverageUploadRateLimitInBitsPerSec", _BandwidthUploadRateLimit)
-
-	UpdateBandwidthRateLimitInput_AverageDownloadRateLimitInBitsPerSec = UpdateBandwidthRateLimitInput.AddMember("AverageDownloadRateLimitInBitsPerSec", _BandwidthDownloadRateLimit)
-
-	UpdateBandwidthRateLimitOutput_GatewayARN = UpdateBandwidthRateLimitOutput.AddMember("GatewayARN", _GatewayARN)
-
-	UpdateBandwidthRateLimitScheduleInput_GatewayARN = UpdateBandwidthRateLimitScheduleInput.AddMember("GatewayARN", _GatewayARN)
-
-	UpdateBandwidthRateLimitScheduleInput_BandwidthRateLimitIntervals = UpdateBandwidthRateLimitScheduleInput.AddMember("BandwidthRateLimitIntervals", _BandwidthRateLimitIntervals)
-
-	UpdateBandwidthRateLimitScheduleOutput_GatewayARN = UpdateBandwidthRateLimitScheduleOutput.AddMember("GatewayARN", _GatewayARN)
-
-	UpdateChapCredentialsInput_TargetARN = UpdateChapCredentialsInput.AddMember("TargetARN", _TargetARN)
-
-	UpdateChapCredentialsInput_SecretToAuthenticateInitiator = UpdateChapCredentialsInput.AddMember("SecretToAuthenticateInitiator", _ChapSecret)
-
-	UpdateChapCredentialsInput_InitiatorName = UpdateChapCredentialsInput.AddMember("InitiatorName", _IqnName)
-
-	UpdateChapCredentialsInput_SecretToAuthenticateTarget = UpdateChapCredentialsInput.AddMember("SecretToAuthenticateTarget", _ChapSecret)
-
-	UpdateChapCredentialsOutput_TargetARN = UpdateChapCredentialsOutput.AddMember("TargetARN", _TargetARN)
-
-	UpdateChapCredentialsOutput_InitiatorName = UpdateChapCredentialsOutput.AddMember("InitiatorName", _IqnName)
-
-	UpdateFileSystemAssociationInput_FileSystemAssociationARN = UpdateFileSystemAssociationInput.AddMember("FileSystemAssociationARN", _FileSystemAssociationARN)
-
-	UpdateFileSystemAssociationInput_UserName = UpdateFileSystemAssociationInput.AddMember("UserName", _DomainUserName)
-
-	UpdateFileSystemAssociationInput_Password = UpdateFileSystemAssociationInput.AddMember("Password", _DomainUserPassword)
-
-	UpdateFileSystemAssociationInput_AuditDestinationARN = UpdateFileSystemAssociationInput.AddMember("AuditDestinationARN", _AuditDestinationARN)
-
-	UpdateFileSystemAssociationInput_CacheAttributes = UpdateFileSystemAssociationInput.AddMember("CacheAttributes", CacheAttributes)
-
-	UpdateFileSystemAssociationOutput_FileSystemAssociationARN = UpdateFileSystemAssociationOutput.AddMember("FileSystemAssociationARN", _FileSystemAssociationARN)
-
-	UpdateGatewayInformationInput_GatewayARN = UpdateGatewayInformationInput.AddMember("GatewayARN", _GatewayARN)
-
-	UpdateGatewayInformationInput_GatewayName = UpdateGatewayInformationInput.AddMember("GatewayName", _GatewayName)
-
-	UpdateGatewayInformationInput_GatewayTimezone = UpdateGatewayInformationInput.AddMember("GatewayTimezone", _GatewayTimezone)
-
-	UpdateGatewayInformationInput_CloudWatchLogGroupARN = UpdateGatewayInformationInput.AddMember("CloudWatchLogGroupARN", _CloudWatchLogGroupARN)
-
-	UpdateGatewayInformationInput_GatewayCapacity = UpdateGatewayInformationInput.AddMember("GatewayCapacity", GatewayCapacity)
-
-	UpdateGatewayInformationOutput_GatewayARN = UpdateGatewayInformationOutput.AddMember("GatewayARN", _GatewayARN)
-
-	UpdateGatewayInformationOutput_GatewayName = UpdateGatewayInformationOutput.AddMember("GatewayName", _string)
-
-	UpdateGatewaySoftwareNowInput_GatewayARN = UpdateGatewaySoftwareNowInput.AddMember("GatewayARN", _GatewayARN)
-
-	UpdateGatewaySoftwareNowOutput_GatewayARN = UpdateGatewaySoftwareNowOutput.AddMember("GatewayARN", _GatewayARN)
-
-	UpdateMaintenanceStartTimeInput_GatewayARN = UpdateMaintenanceStartTimeInput.AddMember("GatewayARN", _GatewayARN)
-
-	UpdateMaintenanceStartTimeInput_HourOfDay = UpdateMaintenanceStartTimeInput.AddMember("HourOfDay", _HourOfDay)
-
-	UpdateMaintenanceStartTimeInput_MinuteOfHour = UpdateMaintenanceStartTimeInput.AddMember("MinuteOfHour", _MinuteOfHour)
-
-	UpdateMaintenanceStartTimeInput_DayOfWeek = UpdateMaintenanceStartTimeInput.AddMember("DayOfWeek", _DayOfWeek)
-
-	UpdateMaintenanceStartTimeInput_DayOfMonth = UpdateMaintenanceStartTimeInput.AddMember("DayOfMonth", _DayOfMonth)
-
-	UpdateMaintenanceStartTimeInput_SoftwareUpdatePreferences = UpdateMaintenanceStartTimeInput.AddMember("SoftwareUpdatePreferences", SoftwareUpdatePreferences)
-
-	UpdateMaintenanceStartTimeOutput_GatewayARN = UpdateMaintenanceStartTimeOutput.AddMember("GatewayARN", _GatewayARN)
-
-	UpdateNFSFileShareInput_FileShareARN = UpdateNFSFileShareInput.AddMember("FileShareARN", _FileShareARN)
-
-	UpdateNFSFileShareInput_EncryptionType = UpdateNFSFileShareInput.AddMember("EncryptionType", EncryptionType)
-
-	UpdateNFSFileShareInput_KMSEncrypted = UpdateNFSFileShareInput.AddMember("KMSEncrypted", _Boolean)
-
-	UpdateNFSFileShareInput_KMSKey = UpdateNFSFileShareInput.AddMember("KMSKey", _KMSKey)
-
-	UpdateNFSFileShareInput_NFSFileShareDefaults = UpdateNFSFileShareInput.AddMember("NFSFileShareDefaults", NFSFileShareDefaults)
-
-	UpdateNFSFileShareInput_DefaultStorageClass = UpdateNFSFileShareInput.AddMember("DefaultStorageClass", _StorageClass)
-
-	UpdateNFSFileShareInput_ObjectACL = UpdateNFSFileShareInput.AddMember("ObjectACL", ObjectACL)
-
-	UpdateNFSFileShareInput_ClientList = UpdateNFSFileShareInput.AddMember("ClientList", _FileShareClientList)
-
-	UpdateNFSFileShareInput_Squash = UpdateNFSFileShareInput.AddMember("Squash", _Squash)
-
-	UpdateNFSFileShareInput_ReadOnly = UpdateNFSFileShareInput.AddMember("ReadOnly", _Boolean)
-
-	UpdateNFSFileShareInput_GuessMIMETypeEnabled = UpdateNFSFileShareInput.AddMember("GuessMIMETypeEnabled", _Boolean)
-
-	UpdateNFSFileShareInput_RequesterPays = UpdateNFSFileShareInput.AddMember("RequesterPays", _Boolean)
-
-	UpdateNFSFileShareInput_FileShareName = UpdateNFSFileShareInput.AddMember("FileShareName", _FileShareName)
-
-	UpdateNFSFileShareInput_CacheAttributes = UpdateNFSFileShareInput.AddMember("CacheAttributes", CacheAttributes)
-
-	UpdateNFSFileShareInput_NotificationPolicy = UpdateNFSFileShareInput.AddMember("NotificationPolicy", _NotificationPolicy)
-
-	UpdateNFSFileShareInput_AuditDestinationARN = UpdateNFSFileShareInput.AddMember("AuditDestinationARN", _AuditDestinationARN)
-
-	UpdateNFSFileShareOutput_FileShareARN = UpdateNFSFileShareOutput.AddMember("FileShareARN", _FileShareARN)
-
-	UpdateSMBFileShareInput_FileShareARN = UpdateSMBFileShareInput.AddMember("FileShareARN", _FileShareARN)
-
-	UpdateSMBFileShareInput_EncryptionType = UpdateSMBFileShareInput.AddMember("EncryptionType", EncryptionType)
-
-	UpdateSMBFileShareInput_KMSEncrypted = UpdateSMBFileShareInput.AddMember("KMSEncrypted", _Boolean)
-
-	UpdateSMBFileShareInput_KMSKey = UpdateSMBFileShareInput.AddMember("KMSKey", _KMSKey)
-
-	UpdateSMBFileShareInput_DefaultStorageClass = UpdateSMBFileShareInput.AddMember("DefaultStorageClass", _StorageClass)
-
-	UpdateSMBFileShareInput_ObjectACL = UpdateSMBFileShareInput.AddMember("ObjectACL", ObjectACL)
-
-	UpdateSMBFileShareInput_ReadOnly = UpdateSMBFileShareInput.AddMember("ReadOnly", _Boolean)
-
-	UpdateSMBFileShareInput_GuessMIMETypeEnabled = UpdateSMBFileShareInput.AddMember("GuessMIMETypeEnabled", _Boolean)
-
-	UpdateSMBFileShareInput_RequesterPays = UpdateSMBFileShareInput.AddMember("RequesterPays", _Boolean)
-
-	UpdateSMBFileShareInput_SMBACLEnabled = UpdateSMBFileShareInput.AddMember("SMBACLEnabled", _Boolean)
-
-	UpdateSMBFileShareInput_AccessBasedEnumeration = UpdateSMBFileShareInput.AddMember("AccessBasedEnumeration", _Boolean)
-
-	UpdateSMBFileShareInput_AdminUserList = UpdateSMBFileShareInput.AddMember("AdminUserList", _UserList)
-
-	UpdateSMBFileShareInput_ValidUserList = UpdateSMBFileShareInput.AddMember("ValidUserList", _UserList)
-
-	UpdateSMBFileShareInput_InvalidUserList = UpdateSMBFileShareInput.AddMember("InvalidUserList", _UserList)
-
-	UpdateSMBFileShareInput_AuditDestinationARN = UpdateSMBFileShareInput.AddMember("AuditDestinationARN", _AuditDestinationARN)
-
-	UpdateSMBFileShareInput_CaseSensitivity = UpdateSMBFileShareInput.AddMember("CaseSensitivity", CaseSensitivity)
-
-	UpdateSMBFileShareInput_FileShareName = UpdateSMBFileShareInput.AddMember("FileShareName", _FileShareName)
-
-	UpdateSMBFileShareInput_CacheAttributes = UpdateSMBFileShareInput.AddMember("CacheAttributes", CacheAttributes)
-
-	UpdateSMBFileShareInput_NotificationPolicy = UpdateSMBFileShareInput.AddMember("NotificationPolicy", _NotificationPolicy)
-
-	UpdateSMBFileShareInput_OplocksEnabled = UpdateSMBFileShareInput.AddMember("OplocksEnabled", _Boolean)
-
-	UpdateSMBFileShareOutput_FileShareARN = UpdateSMBFileShareOutput.AddMember("FileShareARN", _FileShareARN)
-
-	UpdateSMBFileShareVisibilityInput_GatewayARN = UpdateSMBFileShareVisibilityInput.AddMember("GatewayARN", _GatewayARN)
-
-	UpdateSMBFileShareVisibilityInput_FileSharesVisible = UpdateSMBFileShareVisibilityInput.AddMember("FileSharesVisible", _Boolean)
-
-	UpdateSMBFileShareVisibilityOutput_GatewayARN = UpdateSMBFileShareVisibilityOutput.AddMember("GatewayARN", _GatewayARN)
-
-	UpdateSMBLocalGroupsInput_GatewayARN = UpdateSMBLocalGroupsInput.AddMember("GatewayARN", _GatewayARN)
-
-	UpdateSMBLocalGroupsInput_SMBLocalGroups = UpdateSMBLocalGroupsInput.AddMember("SMBLocalGroups", SMBLocalGroups)
-
-	UpdateSMBLocalGroupsOutput_GatewayARN = UpdateSMBLocalGroupsOutput.AddMember("GatewayARN", _GatewayARN)
-
-	UpdateSMBSecurityStrategyInput_GatewayARN = UpdateSMBSecurityStrategyInput.AddMember("GatewayARN", _GatewayARN)
-
-	UpdateSMBSecurityStrategyInput_SMBSecurityStrategy = UpdateSMBSecurityStrategyInput.AddMember("SMBSecurityStrategy", SMBSecurityStrategy)
-
-	UpdateSMBSecurityStrategyOutput_GatewayARN = UpdateSMBSecurityStrategyOutput.AddMember("GatewayARN", _GatewayARN)
-
-	UpdateSnapshotScheduleInput_VolumeARN = UpdateSnapshotScheduleInput.AddMember("VolumeARN", _VolumeARN)
-
-	UpdateSnapshotScheduleInput_StartAt = UpdateSnapshotScheduleInput.AddMember("StartAt", _HourOfDay)
-
-	UpdateSnapshotScheduleInput_RecurrenceInHours = UpdateSnapshotScheduleInput.AddMember("RecurrenceInHours", _RecurrenceInHours)
-
-	UpdateSnapshotScheduleInput_Description = UpdateSnapshotScheduleInput.AddMember("Description", _Description)
-
-	UpdateSnapshotScheduleInput_Tags = UpdateSnapshotScheduleInput.AddMember("Tags", _Tags)
-
-	UpdateSnapshotScheduleOutput_VolumeARN = UpdateSnapshotScheduleOutput.AddMember("VolumeARN", _VolumeARN)
-
-	UpdateVTLDeviceTypeInput_VTLDeviceARN = UpdateVTLDeviceTypeInput.AddMember("VTLDeviceARN", _VTLDeviceARN)
-
-	UpdateVTLDeviceTypeInput_DeviceType = UpdateVTLDeviceTypeInput.AddMember("DeviceType", _DeviceType)
-
-	UpdateVTLDeviceTypeOutput_VTLDeviceARN = UpdateVTLDeviceTypeOutput.AddMember("VTLDeviceARN", _VTLDeviceARN)
-
-}
+var (
+	iActivateGateway                             = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ActivateGateway"}
+	iAddCache                                    = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "AddCache"}
+	iAddTagsToResource                           = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "AddTagsToResource"}
+	iAddUploadBuffer                             = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "AddUploadBuffer"}
+	iAddWorkingStorage                           = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "AddWorkingStorage"}
+	iAssignTapePool                              = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "AssignTapePool"}
+	iAssociateFileSystem                         = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "AssociateFileSystem"}
+	iAttachVolume                                = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "AttachVolume"}
+	iCancelArchival                              = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CancelArchival"}
+	iCancelCacheReport                           = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CancelCacheReport"}
+	iCancelRetrieval                             = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CancelRetrieval"}
+	iCreateCachediSCSIVolume                     = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CreateCachediSCSIVolume"}
+	iCreateNFSFileShare                          = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CreateNFSFileShare"}
+	iCreateSMBFileShare                          = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CreateSMBFileShare"}
+	iCreateSnapshot                              = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CreateSnapshot"}
+	iCreateSnapshotFromVolumeRecoveryPoint       = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CreateSnapshotFromVolumeRecoveryPoint"}
+	iCreateStorediSCSIVolume                     = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CreateStorediSCSIVolume"}
+	iCreateTapePool                              = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CreateTapePool"}
+	iCreateTapes                                 = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CreateTapes"}
+	iCreateTapeWithBarcode                       = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CreateTapeWithBarcode"}
+	iDeleteAutomaticTapeCreationPolicy           = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DeleteAutomaticTapeCreationPolicy"}
+	iDeleteBandwidthRateLimit                    = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DeleteBandwidthRateLimit"}
+	iDeleteCacheReport                           = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DeleteCacheReport"}
+	iDeleteChapCredentials                       = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DeleteChapCredentials"}
+	iDeleteFileShare                             = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DeleteFileShare"}
+	iDeleteGateway                               = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DeleteGateway"}
+	iDeleteSnapshotSchedule                      = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DeleteSnapshotSchedule"}
+	iDeleteTape                                  = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DeleteTape"}
+	iDeleteTapeArchive                           = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DeleteTapeArchive"}
+	iDeleteTapePool                              = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DeleteTapePool"}
+	iDeleteVolume                                = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DeleteVolume"}
+	iDescribeAvailabilityMonitorTest             = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeAvailabilityMonitorTest"}
+	iDescribeBandwidthRateLimit                  = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeBandwidthRateLimit"}
+	iDescribeBandwidthRateLimitSchedule          = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeBandwidthRateLimitSchedule"}
+	iDescribeCache                               = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeCache"}
+	iDescribeCachediSCSIVolumes                  = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeCachediSCSIVolumes"}
+	iDescribeCacheReport                         = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeCacheReport"}
+	iDescribeChapCredentials                     = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeChapCredentials"}
+	iDescribeFileSystemAssociations              = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeFileSystemAssociations"}
+	iDescribeGatewayInformation                  = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeGatewayInformation"}
+	iDescribeMaintenanceStartTime                = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeMaintenanceStartTime"}
+	iDescribeNFSFileShares                       = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeNFSFileShares"}
+	iDescribeSMBFileShares                       = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeSMBFileShares"}
+	iDescribeSMBSettings                         = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeSMBSettings"}
+	iDescribeSnapshotSchedule                    = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeSnapshotSchedule"}
+	iDescribeStorediSCSIVolumes                  = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeStorediSCSIVolumes"}
+	iDescribeTapeArchives                        = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeTapeArchives"}
+	iDescribeTapeRecoveryPoints                  = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeTapeRecoveryPoints"}
+	iDescribeTapes                               = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeTapes"}
+	iDescribeUploadBuffer                        = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeUploadBuffer"}
+	iDescribeVTLDevices                          = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeVTLDevices"}
+	iDescribeWorkingStorage                      = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeWorkingStorage"}
+	iDetachVolume                                = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DetachVolume"}
+	iDisableGateway                              = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DisableGateway"}
+	iDisassociateFileSystem                      = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DisassociateFileSystem"}
+	iEvictFilesFailingUpload                     = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "EvictFilesFailingUpload"}
+	iJoinDomain                                  = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "JoinDomain"}
+	iListAutomaticTapeCreationPolicies           = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ListAutomaticTapeCreationPolicies"}
+	iListCacheReports                            = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ListCacheReports"}
+	iListFileShares                              = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ListFileShares"}
+	iListFileSystemAssociations                  = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ListFileSystemAssociations"}
+	iListGateways                                = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ListGateways"}
+	iListLocalDisks                              = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ListLocalDisks"}
+	iListTagsForResource                         = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ListTagsForResource"}
+	iListTapePools                               = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ListTapePools"}
+	iListTapes                                   = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ListTapes"}
+	iListVolumeInitiators                        = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ListVolumeInitiators"}
+	iListVolumeRecoveryPoints                    = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ListVolumeRecoveryPoints"}
+	iListVolumes                                 = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ListVolumes"}
+	iNotifyWhenUploaded                          = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "NotifyWhenUploaded"}
+	iRefreshCache                                = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "RefreshCache"}
+	iRemoveTagsFromResource                      = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "RemoveTagsFromResource"}
+	iResetCache                                  = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ResetCache"}
+	iRetrieveTapeArchive                         = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "RetrieveTapeArchive"}
+	iRetrieveTapeRecoveryPoint                   = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "RetrieveTapeRecoveryPoint"}
+	iSetLocalConsolePassword                     = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "SetLocalConsolePassword"}
+	iSetSMBGuestPassword                         = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "SetSMBGuestPassword"}
+	iShutdownGateway                             = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ShutdownGateway"}
+	iStartAvailabilityMonitorTest                = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "StartAvailabilityMonitorTest"}
+	iStartCacheReport                            = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "StartCacheReport"}
+	iStartGateway                                = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "StartGateway"}
+	iUpdateAutomaticTapeCreationPolicy           = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "UpdateAutomaticTapeCreationPolicy"}
+	iUpdateBandwidthRateLimit                    = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "UpdateBandwidthRateLimit"}
+	iUpdateBandwidthRateLimitSchedule            = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "UpdateBandwidthRateLimitSchedule"}
+	iUpdateChapCredentials                       = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "UpdateChapCredentials"}
+	iUpdateFileSystemAssociation                 = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "UpdateFileSystemAssociation"}
+	iUpdateGatewayInformation                    = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "UpdateGatewayInformation"}
+	iUpdateGatewaySoftwareNow                    = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "UpdateGatewaySoftwareNow"}
+	iUpdateMaintenanceStartTime                  = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "UpdateMaintenanceStartTime"}
+	iUpdateNFSFileShare                          = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "UpdateNFSFileShare"}
+	iUpdateSMBFileShare                          = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "UpdateSMBFileShare"}
+	iUpdateSMBFileShareVisibility                = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "UpdateSMBFileShareVisibility"}
+	iUpdateSMBLocalGroups                        = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "UpdateSMBLocalGroups"}
+	iUpdateSMBSecurityStrategy                   = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "UpdateSMBSecurityStrategy"}
+	iUpdateSnapshotSchedule                      = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "UpdateSnapshotSchedule"}
+	iUpdateVTLDeviceType                         = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "UpdateVTLDeviceType"}
+	i_StorageGateway_20130630                    = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "StorageGateway_20130630"}
+	i_ActivationKey                              = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ActivationKey"}
+	iActiveDirectoryStatus                       = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ActiveDirectoryStatus"}
+	i_AuditDestinationARN                        = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "AuditDestinationARN"}
+	i_Authentication                             = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "Authentication"}
+	iAutomaticTapeCreationPolicyInfo             = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "AutomaticTapeCreationPolicyInfo"}
+	i_AutomaticTapeCreationPolicyInfos           = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "AutomaticTapeCreationPolicyInfos"}
+	iAutomaticTapeCreationRule                   = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "AutomaticTapeCreationRule"}
+	i_AutomaticTapeCreationRules                 = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "AutomaticTapeCreationRules"}
+	iAutomaticUpdatePolicy                       = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "AutomaticUpdatePolicy"}
+	iAvailabilityMonitorTestStatus               = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "AvailabilityMonitorTestStatus"}
+	i_BandwidthDownloadRateLimit                 = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "BandwidthDownloadRateLimit"}
+	iBandwidthRateLimitInterval                  = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "BandwidthRateLimitInterval"}
+	i_BandwidthRateLimitIntervals                = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "BandwidthRateLimitIntervals"}
+	i_BandwidthType                              = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "BandwidthType"}
+	i_BandwidthUploadRateLimit                   = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "BandwidthUploadRateLimit"}
+	i_Boolean                                    = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "Boolean"}
+	i_Boolean2                                   = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "Boolean2"}
+	iCacheAttributes                             = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CacheAttributes"}
+	iCachediSCSIVolume                           = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CachediSCSIVolume"}
+	i_CachediSCSIVolumes                         = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CachediSCSIVolumes"}
+	i_CacheReportARN                             = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CacheReportARN"}
+	iCacheReportFilter                           = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CacheReportFilter"}
+	i_CacheReportFilterList                      = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CacheReportFilterList"}
+	iCacheReportFilterName                       = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CacheReportFilterName"}
+	i_CacheReportFilterValue                     = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CacheReportFilterValue"}
+	i_CacheReportFilterValues                    = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CacheReportFilterValues"}
+	iCacheReportInfo                             = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CacheReportInfo"}
+	i_CacheReportList                            = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CacheReportList"}
+	i_CacheReportName                            = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CacheReportName"}
+	iCacheReportStatus                           = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CacheReportStatus"}
+	i_CacheStaleTimeoutInSeconds                 = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CacheStaleTimeoutInSeconds"}
+	iCaseSensitivity                             = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CaseSensitivity"}
+	i_ChapCredentials                            = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ChapCredentials"}
+	iChapInfo                                    = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ChapInfo"}
+	i_ChapSecret                                 = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ChapSecret"}
+	i_ClientToken                                = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ClientToken"}
+	i_CloudWatchLogGroupARN                      = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CloudWatchLogGroupARN"}
+	i_CreatedDate                                = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CreatedDate"}
+	i_DayOfMonth                                 = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DayOfMonth"}
+	i_DayOfWeek                                  = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DayOfWeek"}
+	i_DaysOfWeek                                 = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DaysOfWeek"}
+	i_DeprecationDate                            = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DeprecationDate"}
+	i_Description                                = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "Description"}
+	iDeviceiSCSIAttributes                       = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DeviceiSCSIAttributes"}
+	i_DeviceType                                 = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DeviceType"}
+	iDisk                                        = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "Disk"}
+	i_DiskAllocationType                         = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DiskAllocationType"}
+	i_DiskAttribute                              = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DiskAttribute"}
+	i_DiskAttributeList                          = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DiskAttributeList"}
+	i_DiskId                                     = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DiskId"}
+	i_DiskIds                                    = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DiskIds"}
+	i_Disks                                      = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "Disks"}
+	i_DNSHostName                                = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DNSHostName"}
+	i_DomainName                                 = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DomainName"}
+	i_DomainUserName                             = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DomainUserName"}
+	i_DomainUserPassword                         = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DomainUserPassword"}
+	i_double                                     = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "double"}
+	i_DoubleObject                               = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DoubleObject"}
+	i_Ec2InstanceId                              = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "Ec2InstanceId"}
+	i_Ec2InstanceRegion                          = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "Ec2InstanceRegion"}
+	iEncryptionType                              = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "EncryptionType"}
+	iEndpointNetworkConfiguration                = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "EndpointNetworkConfiguration"}
+	i_EndpointType                               = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "EndpointType"}
+	iErrorCode                                   = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ErrorCode"}
+	i_errorDetails                               = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "errorDetails"}
+	i_FileShareARN                               = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "FileShareARN"}
+	i_FileShareARNList                           = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "FileShareARNList"}
+	i_FileShareClientList                        = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "FileShareClientList"}
+	i_FileShareId                                = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "FileShareId"}
+	iFileShareInfo                               = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "FileShareInfo"}
+	i_FileShareInfoList                          = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "FileShareInfoList"}
+	i_FileShareName                              = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "FileShareName"}
+	i_FileShareStatus                            = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "FileShareStatus"}
+	iFileShareType                               = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "FileShareType"}
+	i_FileSystemAssociationARN                   = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "FileSystemAssociationARN"}
+	i_FileSystemAssociationARNList               = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "FileSystemAssociationARNList"}
+	i_FileSystemAssociationId                    = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "FileSystemAssociationId"}
+	iFileSystemAssociationInfo                   = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "FileSystemAssociationInfo"}
+	i_FileSystemAssociationInfoList              = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "FileSystemAssociationInfoList"}
+	i_FileSystemAssociationStatus                = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "FileSystemAssociationStatus"}
+	iFileSystemAssociationStatusDetail           = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "FileSystemAssociationStatusDetail"}
+	i_FileSystemAssociationStatusDetails         = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "FileSystemAssociationStatusDetails"}
+	iFileSystemAssociationSummary                = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "FileSystemAssociationSummary"}
+	i_FileSystemAssociationSummaryList           = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "FileSystemAssociationSummaryList"}
+	i_FileSystemAssociationSyncErrorCode         = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "FileSystemAssociationSyncErrorCode"}
+	i_FileSystemLocationARN                      = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "FileSystemLocationARN"}
+	i_Folder                                     = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "Folder"}
+	i_FolderList                                 = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "FolderList"}
+	i_GatewayARN                                 = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "GatewayARN"}
+	iGatewayCapacity                             = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "GatewayCapacity"}
+	i_GatewayId                                  = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "GatewayId"}
+	iGatewayInfo                                 = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "GatewayInfo"}
+	i_GatewayName                                = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "GatewayName"}
+	i_GatewayNetworkInterfaces                   = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "GatewayNetworkInterfaces"}
+	i_GatewayOperationalState                    = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "GatewayOperationalState"}
+	i_Gateways                                   = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "Gateways"}
+	i_GatewayState                               = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "GatewayState"}
+	i_GatewayTimezone                            = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "GatewayTimezone"}
+	i_GatewayType                                = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "GatewayType"}
+	i_Host                                       = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "Host"}
+	iHostEnvironment                             = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "HostEnvironment"}
+	i_HostEnvironmentId                          = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "HostEnvironmentId"}
+	i_Hosts                                      = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "Hosts"}
+	i_HourOfDay                                  = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "HourOfDay"}
+	i_Initiator                                  = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "Initiator"}
+	i_Initiators                                 = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "Initiators"}
+	i_integer                                    = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "integer"}
+	iInternalServerError                         = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "InternalServerError"}
+	iInvalidGatewayRequestException              = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "InvalidGatewayRequestException"}
+	i_IpAddressList                              = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "IpAddressList"}
+	i_IPV4Address                                = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "IPV4Address"}
+	i_Ipv4OrIpv6AddressCIDR                      = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "Ipv4OrIpv6AddressCIDR"}
+	i_IqnName                                    = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "IqnName"}
+	i_KMSKey                                     = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "KMSKey"}
+	i_LastSoftwareUpdate                         = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "LastSoftwareUpdate"}
+	i_LocalConsolePassword                       = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "LocalConsolePassword"}
+	i_LocationARN                                = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "LocationARN"}
+	i_long                                       = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "long"}
+	i_Marker                                     = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "Marker"}
+	i_MediumChangerType                          = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "MediumChangerType"}
+	i_MinimumNumTapes                            = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "MinimumNumTapes"}
+	i_MinuteOfHour                               = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "MinuteOfHour"}
+	iNetworkInterface                            = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "NetworkInterface"}
+	i_NetworkInterfaceId                         = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "NetworkInterfaceId"}
+	i_NextUpdateAvailabilityDate                 = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "NextUpdateAvailabilityDate"}
+	iNFSFileShareDefaults                        = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "NFSFileShareDefaults"}
+	iNFSFileShareInfo                            = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "NFSFileShareInfo"}
+	i_NFSFileShareInfoList                       = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "NFSFileShareInfoList"}
+	i_NotificationId                             = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "NotificationId"}
+	i_NotificationPolicy                         = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "NotificationPolicy"}
+	i_NumTapesToCreate                           = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "NumTapesToCreate"}
+	iObjectACL                                   = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ObjectACL"}
+	i_OrganizationalUnit                         = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "OrganizationalUnit"}
+	i_Path                                       = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "Path"}
+	i_PermissionId                               = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "PermissionId"}
+	i_PermissionMode                             = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "PermissionMode"}
+	i_PoolARN                                    = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "PoolARN"}
+	i_PoolARNs                                   = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "PoolARNs"}
+	i_PoolId                                     = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "PoolId"}
+	iPoolInfo                                    = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "PoolInfo"}
+	i_PoolInfos                                  = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "PoolInfos"}
+	i_PoolName                                   = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "PoolName"}
+	iPoolStatus                                  = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "PoolStatus"}
+	i_PositiveIntObject                          = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "PositiveIntObject"}
+	i_RecurrenceInHours                          = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "RecurrenceInHours"}
+	i_RegionId                                   = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "RegionId"}
+	i_ReportCompletionPercent                    = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ReportCompletionPercent"}
+	i_ResourceARN                                = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ResourceARN"}
+	i_RetentionLockTimeInDays                    = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "RetentionLockTimeInDays"}
+	iRetentionLockType                           = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "RetentionLockType"}
+	i_Role                                       = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "Role"}
+	iServiceUnavailableError                     = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ServiceUnavailableError"}
+	iSMBFileShareInfo                            = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "SMBFileShareInfo"}
+	i_SMBFileShareInfoList                       = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "SMBFileShareInfoList"}
+	i_SMBGuestPassword                           = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "SMBGuestPassword"}
+	iSMBLocalGroups                              = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "SMBLocalGroups"}
+	iSMBSecurityStrategy                         = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "SMBSecurityStrategy"}
+	i_SnapshotDescription                        = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "SnapshotDescription"}
+	i_SnapshotId                                 = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "SnapshotId"}
+	iSoftwareUpdatePreferences                   = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "SoftwareUpdatePreferences"}
+	i_SoftwareUpdatesEndDate                     = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "SoftwareUpdatesEndDate"}
+	i_SoftwareVersion                            = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "SoftwareVersion"}
+	i_Squash                                     = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "Squash"}
+	i_StorageClass                               = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "StorageClass"}
+	iStorageGatewayError                         = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "StorageGatewayError"}
+	iStorediSCSIVolume                           = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "StorediSCSIVolume"}
+	i_StorediSCSIVolumes                         = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "StorediSCSIVolumes"}
+	i_string                                     = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "string"}
+	i_SupportedGatewayCapacities                 = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "SupportedGatewayCapacities"}
+	iTag                                         = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "Tag"}
+	i_TagKey                                     = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "TagKey"}
+	i_TagKeys                                    = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "TagKeys"}
+	i_Tags                                       = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "Tags"}
+	i_TagValue                                   = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "TagValue"}
+	iTape                                        = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "Tape"}
+	iTapeArchive                                 = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "TapeArchive"}
+	i_TapeArchives                               = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "TapeArchives"}
+	i_TapeArchiveStatus                          = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "TapeArchiveStatus"}
+	i_TapeARN                                    = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "TapeARN"}
+	i_TapeARNs                                   = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "TapeARNs"}
+	i_TapeBarcode                                = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "TapeBarcode"}
+	i_TapeBarcodePrefix                          = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "TapeBarcodePrefix"}
+	i_TapeDriveType                              = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "TapeDriveType"}
+	iTapeInfo                                    = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "TapeInfo"}
+	i_TapeInfos                                  = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "TapeInfos"}
+	iTapeRecoveryPointInfo                       = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "TapeRecoveryPointInfo"}
+	i_TapeRecoveryPointInfos                     = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "TapeRecoveryPointInfos"}
+	i_TapeRecoveryPointStatus                    = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "TapeRecoveryPointStatus"}
+	i_Tapes                                      = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "Tapes"}
+	i_TapeSize                                   = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "TapeSize"}
+	i_TapeStatus                                 = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "TapeStatus"}
+	iTapeStorageClass                            = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "TapeStorageClass"}
+	i_TapeUsage                                  = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "TapeUsage"}
+	i_TargetARN                                  = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "TargetARN"}
+	i_TargetName                                 = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "TargetName"}
+	i_Time                                       = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "Time"}
+	i_TimeoutInSeconds                           = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "TimeoutInSeconds"}
+	i_UserList                                   = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "UserList"}
+	i_UserListUser                               = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "UserListUser"}
+	i_VolumeARN                                  = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "VolumeARN"}
+	i_VolumeARNs                                 = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "VolumeARNs"}
+	i_VolumeAttachmentStatus                     = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "VolumeAttachmentStatus"}
+	i_VolumeId                                   = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "VolumeId"}
+	iVolumeInfo                                  = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "VolumeInfo"}
+	i_VolumeInfos                                = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "VolumeInfos"}
+	iVolumeiSCSIAttributes                       = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "VolumeiSCSIAttributes"}
+	iVolumeRecoveryPointInfo                     = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "VolumeRecoveryPointInfo"}
+	i_VolumeRecoveryPointInfos                   = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "VolumeRecoveryPointInfos"}
+	i_VolumeStatus                               = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "VolumeStatus"}
+	i_VolumeType                                 = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "VolumeType"}
+	i_VolumeUsedInBytes                          = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "VolumeUsedInBytes"}
+	iVTLDevice                                   = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "VTLDevice"}
+	i_VTLDeviceARN                               = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "VTLDeviceARN"}
+	i_VTLDeviceARNs                              = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "VTLDeviceARNs"}
+	i_VTLDeviceProductIdentifier                 = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "VTLDeviceProductIdentifier"}
+	i_VTLDevices                                 = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "VTLDevices"}
+	i_VTLDeviceType                              = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "VTLDeviceType"}
+	i_VTLDeviceVendor                            = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "VTLDeviceVendor"}
+	iActivateGatewayInput                        = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ActivateGatewayInput"}
+	iActivateGatewayOutput                       = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ActivateGatewayOutput"}
+	iAddCacheInput                               = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "AddCacheInput"}
+	iAddCacheOutput                              = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "AddCacheOutput"}
+	iAddTagsToResourceInput                      = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "AddTagsToResourceInput"}
+	iAddTagsToResourceOutput                     = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "AddTagsToResourceOutput"}
+	iAddUploadBufferInput                        = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "AddUploadBufferInput"}
+	iAddUploadBufferOutput                       = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "AddUploadBufferOutput"}
+	iAddWorkingStorageInput                      = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "AddWorkingStorageInput"}
+	iAddWorkingStorageOutput                     = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "AddWorkingStorageOutput"}
+	iAssignTapePoolInput                         = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "AssignTapePoolInput"}
+	iAssignTapePoolOutput                        = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "AssignTapePoolOutput"}
+	iAssociateFileSystemInput                    = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "AssociateFileSystemInput"}
+	iAssociateFileSystemOutput                   = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "AssociateFileSystemOutput"}
+	iAttachVolumeInput                           = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "AttachVolumeInput"}
+	iAttachVolumeOutput                          = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "AttachVolumeOutput"}
+	iCancelArchivalInput                         = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CancelArchivalInput"}
+	iCancelArchivalOutput                        = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CancelArchivalOutput"}
+	iCancelCacheReportInput                      = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CancelCacheReportInput"}
+	iCancelCacheReportOutput                     = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CancelCacheReportOutput"}
+	iCancelRetrievalInput                        = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CancelRetrievalInput"}
+	iCancelRetrievalOutput                       = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CancelRetrievalOutput"}
+	iCreateCachediSCSIVolumeInput                = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CreateCachediSCSIVolumeInput"}
+	iCreateCachediSCSIVolumeOutput               = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CreateCachediSCSIVolumeOutput"}
+	iCreateNFSFileShareInput                     = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CreateNFSFileShareInput"}
+	iCreateNFSFileShareOutput                    = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CreateNFSFileShareOutput"}
+	iCreateSMBFileShareInput                     = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CreateSMBFileShareInput"}
+	iCreateSMBFileShareOutput                    = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CreateSMBFileShareOutput"}
+	iCreateSnapshotFromVolumeRecoveryPointInput  = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CreateSnapshotFromVolumeRecoveryPointInput"}
+	iCreateSnapshotFromVolumeRecoveryPointOutput = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CreateSnapshotFromVolumeRecoveryPointOutput"}
+	iCreateSnapshotInput                         = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CreateSnapshotInput"}
+	iCreateSnapshotOutput                        = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CreateSnapshotOutput"}
+	iCreateStorediSCSIVolumeInput                = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CreateStorediSCSIVolumeInput"}
+	iCreateStorediSCSIVolumeOutput               = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CreateStorediSCSIVolumeOutput"}
+	iCreateTapePoolInput                         = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CreateTapePoolInput"}
+	iCreateTapePoolOutput                        = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CreateTapePoolOutput"}
+	iCreateTapesInput                            = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CreateTapesInput"}
+	iCreateTapesOutput                           = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CreateTapesOutput"}
+	iCreateTapeWithBarcodeInput                  = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CreateTapeWithBarcodeInput"}
+	iCreateTapeWithBarcodeOutput                 = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "CreateTapeWithBarcodeOutput"}
+	iDeleteAutomaticTapeCreationPolicyInput      = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DeleteAutomaticTapeCreationPolicyInput"}
+	iDeleteAutomaticTapeCreationPolicyOutput     = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DeleteAutomaticTapeCreationPolicyOutput"}
+	iDeleteBandwidthRateLimitInput               = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DeleteBandwidthRateLimitInput"}
+	iDeleteBandwidthRateLimitOutput              = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DeleteBandwidthRateLimitOutput"}
+	iDeleteCacheReportInput                      = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DeleteCacheReportInput"}
+	iDeleteCacheReportOutput                     = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DeleteCacheReportOutput"}
+	iDeleteChapCredentialsInput                  = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DeleteChapCredentialsInput"}
+	iDeleteChapCredentialsOutput                 = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DeleteChapCredentialsOutput"}
+	iDeleteFileShareInput                        = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DeleteFileShareInput"}
+	iDeleteFileShareOutput                       = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DeleteFileShareOutput"}
+	iDeleteGatewayInput                          = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DeleteGatewayInput"}
+	iDeleteGatewayOutput                         = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DeleteGatewayOutput"}
+	iDeleteSnapshotScheduleInput                 = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DeleteSnapshotScheduleInput"}
+	iDeleteSnapshotScheduleOutput                = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DeleteSnapshotScheduleOutput"}
+	iDeleteTapeArchiveInput                      = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DeleteTapeArchiveInput"}
+	iDeleteTapeArchiveOutput                     = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DeleteTapeArchiveOutput"}
+	iDeleteTapeInput                             = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DeleteTapeInput"}
+	iDeleteTapeOutput                            = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DeleteTapeOutput"}
+	iDeleteTapePoolInput                         = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DeleteTapePoolInput"}
+	iDeleteTapePoolOutput                        = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DeleteTapePoolOutput"}
+	iDeleteVolumeInput                           = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DeleteVolumeInput"}
+	iDeleteVolumeOutput                          = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DeleteVolumeOutput"}
+	iDescribeAvailabilityMonitorTestInput        = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeAvailabilityMonitorTestInput"}
+	iDescribeAvailabilityMonitorTestOutput       = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeAvailabilityMonitorTestOutput"}
+	iDescribeBandwidthRateLimitInput             = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeBandwidthRateLimitInput"}
+	iDescribeBandwidthRateLimitOutput            = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeBandwidthRateLimitOutput"}
+	iDescribeBandwidthRateLimitScheduleInput     = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeBandwidthRateLimitScheduleInput"}
+	iDescribeBandwidthRateLimitScheduleOutput    = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeBandwidthRateLimitScheduleOutput"}
+	iDescribeCachediSCSIVolumesInput             = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeCachediSCSIVolumesInput"}
+	iDescribeCachediSCSIVolumesOutput            = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeCachediSCSIVolumesOutput"}
+	iDescribeCacheInput                          = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeCacheInput"}
+	iDescribeCacheOutput                         = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeCacheOutput"}
+	iDescribeCacheReportInput                    = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeCacheReportInput"}
+	iDescribeCacheReportOutput                   = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeCacheReportOutput"}
+	iDescribeChapCredentialsInput                = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeChapCredentialsInput"}
+	iDescribeChapCredentialsOutput               = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeChapCredentialsOutput"}
+	iDescribeFileSystemAssociationsInput         = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeFileSystemAssociationsInput"}
+	iDescribeFileSystemAssociationsOutput        = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeFileSystemAssociationsOutput"}
+	iDescribeGatewayInformationInput             = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeGatewayInformationInput"}
+	iDescribeGatewayInformationOutput            = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeGatewayInformationOutput"}
+	iDescribeMaintenanceStartTimeInput           = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeMaintenanceStartTimeInput"}
+	iDescribeMaintenanceStartTimeOutput          = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeMaintenanceStartTimeOutput"}
+	iDescribeNFSFileSharesInput                  = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeNFSFileSharesInput"}
+	iDescribeNFSFileSharesOutput                 = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeNFSFileSharesOutput"}
+	iDescribeSMBFileSharesInput                  = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeSMBFileSharesInput"}
+	iDescribeSMBFileSharesOutput                 = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeSMBFileSharesOutput"}
+	iDescribeSMBSettingsInput                    = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeSMBSettingsInput"}
+	iDescribeSMBSettingsOutput                   = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeSMBSettingsOutput"}
+	iDescribeSnapshotScheduleInput               = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeSnapshotScheduleInput"}
+	iDescribeSnapshotScheduleOutput              = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeSnapshotScheduleOutput"}
+	iDescribeStorediSCSIVolumesInput             = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeStorediSCSIVolumesInput"}
+	iDescribeStorediSCSIVolumesOutput            = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeStorediSCSIVolumesOutput"}
+	iDescribeTapeArchivesInput                   = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeTapeArchivesInput"}
+	iDescribeTapeArchivesOutput                  = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeTapeArchivesOutput"}
+	iDescribeTapeRecoveryPointsInput             = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeTapeRecoveryPointsInput"}
+	iDescribeTapeRecoveryPointsOutput            = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeTapeRecoveryPointsOutput"}
+	iDescribeTapesInput                          = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeTapesInput"}
+	iDescribeTapesOutput                         = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeTapesOutput"}
+	iDescribeUploadBufferInput                   = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeUploadBufferInput"}
+	iDescribeUploadBufferOutput                  = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeUploadBufferOutput"}
+	iDescribeVTLDevicesInput                     = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeVTLDevicesInput"}
+	iDescribeVTLDevicesOutput                    = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeVTLDevicesOutput"}
+	iDescribeWorkingStorageInput                 = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeWorkingStorageInput"}
+	iDescribeWorkingStorageOutput                = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DescribeWorkingStorageOutput"}
+	iDetachVolumeInput                           = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DetachVolumeInput"}
+	iDetachVolumeOutput                          = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DetachVolumeOutput"}
+	iDisableGatewayInput                         = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DisableGatewayInput"}
+	iDisableGatewayOutput                        = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DisableGatewayOutput"}
+	iDisassociateFileSystemInput                 = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DisassociateFileSystemInput"}
+	iDisassociateFileSystemOutput                = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "DisassociateFileSystemOutput"}
+	iEvictFilesFailingUploadInput                = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "EvictFilesFailingUploadInput"}
+	iEvictFilesFailingUploadOutput               = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "EvictFilesFailingUploadOutput"}
+	iJoinDomainInput                             = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "JoinDomainInput"}
+	iJoinDomainOutput                            = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "JoinDomainOutput"}
+	iListAutomaticTapeCreationPoliciesInput      = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ListAutomaticTapeCreationPoliciesInput"}
+	iListAutomaticTapeCreationPoliciesOutput     = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ListAutomaticTapeCreationPoliciesOutput"}
+	iListCacheReportsInput                       = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ListCacheReportsInput"}
+	iListCacheReportsOutput                      = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ListCacheReportsOutput"}
+	iListFileSharesInput                         = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ListFileSharesInput"}
+	iListFileSharesOutput                        = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ListFileSharesOutput"}
+	iListFileSystemAssociationsInput             = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ListFileSystemAssociationsInput"}
+	iListFileSystemAssociationsOutput            = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ListFileSystemAssociationsOutput"}
+	iListGatewaysInput                           = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ListGatewaysInput"}
+	iListGatewaysOutput                          = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ListGatewaysOutput"}
+	iListLocalDisksInput                         = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ListLocalDisksInput"}
+	iListLocalDisksOutput                        = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ListLocalDisksOutput"}
+	iListTagsForResourceInput                    = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ListTagsForResourceInput"}
+	iListTagsForResourceOutput                   = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ListTagsForResourceOutput"}
+	iListTapePoolsInput                          = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ListTapePoolsInput"}
+	iListTapePoolsOutput                         = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ListTapePoolsOutput"}
+	iListTapesInput                              = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ListTapesInput"}
+	iListTapesOutput                             = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ListTapesOutput"}
+	iListVolumeInitiatorsInput                   = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ListVolumeInitiatorsInput"}
+	iListVolumeInitiatorsOutput                  = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ListVolumeInitiatorsOutput"}
+	iListVolumeRecoveryPointsInput               = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ListVolumeRecoveryPointsInput"}
+	iListVolumeRecoveryPointsOutput              = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ListVolumeRecoveryPointsOutput"}
+	iListVolumesInput                            = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ListVolumesInput"}
+	iListVolumesOutput                           = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ListVolumesOutput"}
+	iNotifyWhenUploadedInput                     = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "NotifyWhenUploadedInput"}
+	iNotifyWhenUploadedOutput                    = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "NotifyWhenUploadedOutput"}
+	iRefreshCacheInput                           = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "RefreshCacheInput"}
+	iRefreshCacheOutput                          = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "RefreshCacheOutput"}
+	iRemoveTagsFromResourceInput                 = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "RemoveTagsFromResourceInput"}
+	iRemoveTagsFromResourceOutput                = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "RemoveTagsFromResourceOutput"}
+	iResetCacheInput                             = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ResetCacheInput"}
+	iResetCacheOutput                            = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ResetCacheOutput"}
+	iRetrieveTapeArchiveInput                    = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "RetrieveTapeArchiveInput"}
+	iRetrieveTapeArchiveOutput                   = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "RetrieveTapeArchiveOutput"}
+	iRetrieveTapeRecoveryPointInput              = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "RetrieveTapeRecoveryPointInput"}
+	iRetrieveTapeRecoveryPointOutput             = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "RetrieveTapeRecoveryPointOutput"}
+	iSetLocalConsolePasswordInput                = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "SetLocalConsolePasswordInput"}
+	iSetLocalConsolePasswordOutput               = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "SetLocalConsolePasswordOutput"}
+	iSetSMBGuestPasswordInput                    = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "SetSMBGuestPasswordInput"}
+	iSetSMBGuestPasswordOutput                   = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "SetSMBGuestPasswordOutput"}
+	iShutdownGatewayInput                        = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ShutdownGatewayInput"}
+	iShutdownGatewayOutput                       = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "ShutdownGatewayOutput"}
+	iStartAvailabilityMonitorTestInput           = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "StartAvailabilityMonitorTestInput"}
+	iStartAvailabilityMonitorTestOutput          = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "StartAvailabilityMonitorTestOutput"}
+	iStartCacheReportInput                       = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "StartCacheReportInput"}
+	iStartCacheReportOutput                      = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "StartCacheReportOutput"}
+	iStartGatewayInput                           = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "StartGatewayInput"}
+	iStartGatewayOutput                          = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "StartGatewayOutput"}
+	iUpdateAutomaticTapeCreationPolicyInput      = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "UpdateAutomaticTapeCreationPolicyInput"}
+	iUpdateAutomaticTapeCreationPolicyOutput     = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "UpdateAutomaticTapeCreationPolicyOutput"}
+	iUpdateBandwidthRateLimitInput               = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "UpdateBandwidthRateLimitInput"}
+	iUpdateBandwidthRateLimitOutput              = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "UpdateBandwidthRateLimitOutput"}
+	iUpdateBandwidthRateLimitScheduleInput       = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "UpdateBandwidthRateLimitScheduleInput"}
+	iUpdateBandwidthRateLimitScheduleOutput      = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "UpdateBandwidthRateLimitScheduleOutput"}
+	iUpdateChapCredentialsInput                  = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "UpdateChapCredentialsInput"}
+	iUpdateChapCredentialsOutput                 = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "UpdateChapCredentialsOutput"}
+	iUpdateFileSystemAssociationInput            = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "UpdateFileSystemAssociationInput"}
+	iUpdateFileSystemAssociationOutput           = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "UpdateFileSystemAssociationOutput"}
+	iUpdateGatewayInformationInput               = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "UpdateGatewayInformationInput"}
+	iUpdateGatewayInformationOutput              = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "UpdateGatewayInformationOutput"}
+	iUpdateGatewaySoftwareNowInput               = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "UpdateGatewaySoftwareNowInput"}
+	iUpdateGatewaySoftwareNowOutput              = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "UpdateGatewaySoftwareNowOutput"}
+	iUpdateMaintenanceStartTimeInput             = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "UpdateMaintenanceStartTimeInput"}
+	iUpdateMaintenanceStartTimeOutput            = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "UpdateMaintenanceStartTimeOutput"}
+	iUpdateNFSFileShareInput                     = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "UpdateNFSFileShareInput"}
+	iUpdateNFSFileShareOutput                    = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "UpdateNFSFileShareOutput"}
+	iUpdateSMBFileShareInput                     = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "UpdateSMBFileShareInput"}
+	iUpdateSMBFileShareOutput                    = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "UpdateSMBFileShareOutput"}
+	iUpdateSMBFileShareVisibilityInput           = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "UpdateSMBFileShareVisibilityInput"}
+	iUpdateSMBFileShareVisibilityOutput          = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "UpdateSMBFileShareVisibilityOutput"}
+	iUpdateSMBLocalGroupsInput                   = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "UpdateSMBLocalGroupsInput"}
+	iUpdateSMBLocalGroupsOutput                  = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "UpdateSMBLocalGroupsOutput"}
+	iUpdateSMBSecurityStrategyInput              = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "UpdateSMBSecurityStrategyInput"}
+	iUpdateSMBSecurityStrategyOutput             = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "UpdateSMBSecurityStrategyOutput"}
+	iUpdateSnapshotScheduleInput                 = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "UpdateSnapshotScheduleInput"}
+	iUpdateSnapshotScheduleOutput                = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "UpdateSnapshotScheduleOutput"}
+	iUpdateVTLDeviceTypeInput                    = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "UpdateVTLDeviceTypeInput"}
+	iUpdateVTLDeviceTypeOutput                   = smithy.ShapeID{Namespace: "com.amazonaws.storagegateway", Name: "UpdateVTLDeviceTypeOutput"}
+	pUnit                                        = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLNamespace{URI: "http://storagegateway.amazonaws.com/doc/2013-06-30"}}, DirectMask: 0x8000}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 503}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+
+var mActiveDirectoryStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sActiveDirectoryStatus_ACCESS_DENIED, &sActiveDirectoryStatus_DETACHED, &sActiveDirectoryStatus_JOINED, &sActiveDirectoryStatus_JOINING, &sActiveDirectoryStatus_NETWORK_ERROR, &sActiveDirectoryStatus_TIMEOUT, &sActiveDirectoryStatus_UNKNOWN_ERROR, &sActiveDirectoryStatus_INSUFFICIENT_PERMISSIONS}}
+var mAutomaticTapeCreationPolicyInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sAutomaticTapeCreationPolicyInfo_AutomaticTapeCreationRules, &sAutomaticTapeCreationPolicyInfo_GatewayARN}}
+var m_AutomaticTapeCreationPolicyInfos = smithy.SchemaMembers{List: []*smithy.Schema{&s_AutomaticTapeCreationPolicyInfos_member}}
+var mAutomaticTapeCreationRule = smithy.SchemaMembers{List: []*smithy.Schema{&sAutomaticTapeCreationRule_TapeBarcodePrefix, &sAutomaticTapeCreationRule_PoolId, &sAutomaticTapeCreationRule_TapeSizeInBytes, &sAutomaticTapeCreationRule_MinimumNumTapes, &sAutomaticTapeCreationRule_Worm}}
+var m_AutomaticTapeCreationRules = smithy.SchemaMembers{List: []*smithy.Schema{&s_AutomaticTapeCreationRules_member}}
+var mAutomaticUpdatePolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sAutomaticUpdatePolicy_ALL_VERSIONS, &sAutomaticUpdatePolicy_EMERGENCY_VERSIONS_ONLY}}
+var mAvailabilityMonitorTestStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sAvailabilityMonitorTestStatus_COMPLETE, &sAvailabilityMonitorTestStatus_FAILED, &sAvailabilityMonitorTestStatus_PENDING}}
+var mBandwidthRateLimitInterval = smithy.SchemaMembers{List: []*smithy.Schema{&sBandwidthRateLimitInterval_StartHourOfDay, &sBandwidthRateLimitInterval_StartMinuteOfHour, &sBandwidthRateLimitInterval_EndHourOfDay, &sBandwidthRateLimitInterval_EndMinuteOfHour, &sBandwidthRateLimitInterval_DaysOfWeek, &sBandwidthRateLimitInterval_AverageUploadRateLimitInBitsPerSec, &sBandwidthRateLimitInterval_AverageDownloadRateLimitInBitsPerSec}}
+var m_BandwidthRateLimitIntervals = smithy.SchemaMembers{List: []*smithy.Schema{&s_BandwidthRateLimitIntervals_member}}
+var mCacheAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sCacheAttributes_CacheStaleTimeoutInSeconds}}
+var mCachediSCSIVolume = smithy.SchemaMembers{List: []*smithy.Schema{&sCachediSCSIVolume_VolumeARN, &sCachediSCSIVolume_VolumeId, &sCachediSCSIVolume_VolumeType, &sCachediSCSIVolume_VolumeStatus, &sCachediSCSIVolume_VolumeAttachmentStatus, &sCachediSCSIVolume_VolumeSizeInBytes, &sCachediSCSIVolume_VolumeProgress, &sCachediSCSIVolume_SourceSnapshotId, &sCachediSCSIVolume_VolumeiSCSIAttributes, &sCachediSCSIVolume_CreatedDate, &sCachediSCSIVolume_VolumeUsedInBytes, &sCachediSCSIVolume_KMSKey, &sCachediSCSIVolume_TargetName}, Seed: 3, Slots: []uint16{
+	0, 0, 0, 11, 6, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 4, 1, 0, 2, 0, 0, 0, 13, 0,
+	8, 0, 12, 0, 9, 5, 7, 3,
+}}
+var m_CachediSCSIVolumes = smithy.SchemaMembers{List: []*smithy.Schema{&s_CachediSCSIVolumes_member}}
+var mCacheReportFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sCacheReportFilter_Name, &sCacheReportFilter_Values}}
+var m_CacheReportFilterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CacheReportFilterList_member}}
+var mCacheReportFilterName = smithy.SchemaMembers{List: []*smithy.Schema{&sCacheReportFilterName_UploadState, &sCacheReportFilterName_UploadFailureReason}}
+var m_CacheReportFilterValues = smithy.SchemaMembers{List: []*smithy.Schema{&s_CacheReportFilterValues_member}}
+var mCacheReportInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sCacheReportInfo_CacheReportARN, &sCacheReportInfo_CacheReportStatus, &sCacheReportInfo_ReportCompletionPercent, &sCacheReportInfo_EndTime, &sCacheReportInfo_Role, &sCacheReportInfo_FileShareARN, &sCacheReportInfo_LocationARN, &sCacheReportInfo_StartTime, &sCacheReportInfo_InclusionFilters, &sCacheReportInfo_ExclusionFilters, &sCacheReportInfo_ReportName, &sCacheReportInfo_Tags}, Seed: 11, Slots: []uint16{
+	8, 0, 0, 0, 0, 0, 0, 10, 12, 0, 0, 0, 9, 3, 0, 1, 6, 0, 0, 0, 0, 5, 0, 2,
+	0, 0, 0, 7, 0, 0, 11, 4,
+}}
+var m_CacheReportList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CacheReportList_member}}
+var mCacheReportStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sCacheReportStatus_IN_PROGRESS, &sCacheReportStatus_COMPLETED, &sCacheReportStatus_CANCELED, &sCacheReportStatus_FAILED, &sCacheReportStatus_ERROR}}
+var mCaseSensitivity = smithy.SchemaMembers{List: []*smithy.Schema{&sCaseSensitivity_ClientSpecified, &sCaseSensitivity_CaseSensitive}}
+var m_ChapCredentials = smithy.SchemaMembers{List: []*smithy.Schema{&s_ChapCredentials_member}}
+var mChapInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sChapInfo_TargetARN, &sChapInfo_SecretToAuthenticateInitiator, &sChapInfo_InitiatorName, &sChapInfo_SecretToAuthenticateTarget}}
+var m_DaysOfWeek = smithy.SchemaMembers{List: []*smithy.Schema{&s_DaysOfWeek_member}}
+var mDeviceiSCSIAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sDeviceiSCSIAttributes_TargetARN, &sDeviceiSCSIAttributes_NetworkInterfaceId, &sDeviceiSCSIAttributes_NetworkInterfacePort, &sDeviceiSCSIAttributes_ChapEnabled}}
+var mDisk = smithy.SchemaMembers{List: []*smithy.Schema{&sDisk_DiskId, &sDisk_DiskPath, &sDisk_DiskNode, &sDisk_DiskStatus, &sDisk_DiskSizeInBytes, &sDisk_DiskAllocationType, &sDisk_DiskAllocationResource, &sDisk_DiskAttributeList}}
+var m_DiskAttributeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DiskAttributeList_member}}
+var m_DiskIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_DiskIds_member}}
+var m_Disks = smithy.SchemaMembers{List: []*smithy.Schema{&s_Disks_member}}
+var mEncryptionType = smithy.SchemaMembers{List: []*smithy.Schema{&sEncryptionType_SseS3, &sEncryptionType_SseKms, &sEncryptionType_DsseKms}}
+var mEndpointNetworkConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sEndpointNetworkConfiguration_IpAddresses}}
+var mErrorCode = smithy.SchemaMembers{List: []*smithy.Schema{&sErrorCode_ActivationKeyExpired, &sErrorCode_ActivationKeyInvalid, &sErrorCode_ActivationKeyNotFound, &sErrorCode_GatewayInternalError, &sErrorCode_GatewayNotConnected, &sErrorCode_GatewayNotFound, &sErrorCode_GatewayProxyNetworkConnectionBusy, &sErrorCode_AuthenticationFailure, &sErrorCode_BandwidthThrottleScheduleNotFound, &sErrorCode_Blocked, &sErrorCode_CannotExportSnapshot, &sErrorCode_ChapCredentialNotFound, &sErrorCode_DiskAlreadyAllocated, &sErrorCode_DiskDoesNotExist, &sErrorCode_DiskSizeGreaterThanVolumeMaxSize, &sErrorCode_DiskSizeLessThanVolumeSize, &sErrorCode_DiskSizeNotGigAligned, &sErrorCode_DuplicateCertificateInfo, &sErrorCode_DuplicateSchedule, &sErrorCode_EndpointNotFound, &sErrorCode_IAMNotSupported, &sErrorCode_InitiatorInvalid, &sErrorCode_InitiatorNotFound, &sErrorCode_InternalError, &sErrorCode_InvalidGateway, &sErrorCode_InvalidEndpoint, &sErrorCode_InvalidParameters, &sErrorCode_InvalidSchedule, &sErrorCode_LocalStorageLimitExceeded, &sErrorCode_LunAlreadyAllocated_, &sErrorCode_LunInvalid, &sErrorCode_JoinDomainInProgress, &sErrorCode_MaximumContentLengthExceeded, &sErrorCode_MaximumTapeCartridgeCountExceeded, &sErrorCode_MaximumVolumeCountExceeded, &sErrorCode_NetworkConfigurationChanged, &sErrorCode_NoDisksAvailable, &sErrorCode_NotImplemented, &sErrorCode_NotSupported, &sErrorCode_OperationAborted, &sErrorCode_OutdatedGateway, &sErrorCode_ParametersNotImplemented, &sErrorCode_RegionInvalid, &sErrorCode_RequestTimeout, &sErrorCode_ServiceUnavailable, &sErrorCode_SnapshotDeleted, &sErrorCode_SnapshotIdInvalid, &sErrorCode_SnapshotInProgress, &sErrorCode_SnapshotNotFound, &sErrorCode_SnapshotScheduleNotFound, &sErrorCode_StagingAreaFull, &sErrorCode_StorageFailure, &sErrorCode_TapeCartridgeNotFound, &sErrorCode_TargetAlreadyExists, &sErrorCode_TargetInvalid, &sErrorCode_TargetNotFound, &sErrorCode_UnauthorizedOperation, &sErrorCode_VolumeAlreadyExists, &sErrorCode_VolumeIdInvalid, &sErrorCode_VolumeInUse, &sErrorCode_VolumeNotFound, &sErrorCode_VolumeNotReady}, Seed: 4451, Slots: []uint16{
+	0, 29, 46, 6, 0, 0, 0, 23, 59, 0, 0, 0, 8, 0, 56, 0, 40, 49, 13, 0, 57, 0, 37, 0,
+	0, 0, 0, 0, 0, 0, 51, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 31, 0, 0, 43, 0, 7,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 26, 0, 17, 0, 0, 4, 32, 0, 0, 0, 0, 21, 0, 12,
+	0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 10, 0, 54, 0, 1, 0, 0, 0, 0,
+	48, 0, 0, 47, 0, 27, 0, 0, 50, 0, 33, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 42, 0, 0, 0, 52, 0, 28, 0, 0, 0, 0, 0, 5, 55, 0, 25, 0, 0, 0,
+	18, 0, 0, 0, 0, 0, 41, 0, 0, 0, 24, 38, 0, 0, 0, 0, 14, 0, 45, 0, 58, 34, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 15, 36, 0, 0, 0, 0, 0, 0, 0, 0,
+	11, 0, 39, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 0, 44,
+	19, 30, 0, 0, 0, 0, 0, 0, 0, 60, 0, 53, 35, 0, 0, 0, 0, 0, 62, 0, 0, 3, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 22, 0, 0, 0, 0, 0, 0, 61,
+}}
+var m_errorDetails = smithy.SchemaMembers{List: []*smithy.Schema{&s_errorDetails_key, &s_errorDetails_value}}
+var m_FileShareARNList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FileShareARNList_member}}
+var m_FileShareClientList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FileShareClientList_member}}
+var mFileShareInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sFileShareInfo_FileShareType, &sFileShareInfo_FileShareARN, &sFileShareInfo_FileShareId, &sFileShareInfo_FileShareStatus, &sFileShareInfo_GatewayARN}}
+var m_FileShareInfoList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FileShareInfoList_member}}
+var mFileShareType = smithy.SchemaMembers{List: []*smithy.Schema{&sFileShareType_NFS, &sFileShareType_SMB}}
+var m_FileSystemAssociationARNList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FileSystemAssociationARNList_member}}
+var mFileSystemAssociationInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sFileSystemAssociationInfo_FileSystemAssociationARN, &sFileSystemAssociationInfo_LocationARN, &sFileSystemAssociationInfo_FileSystemAssociationStatus, &sFileSystemAssociationInfo_AuditDestinationARN, &sFileSystemAssociationInfo_GatewayARN, &sFileSystemAssociationInfo_Tags, &sFileSystemAssociationInfo_CacheAttributes, &sFileSystemAssociationInfo_EndpointNetworkConfiguration, &sFileSystemAssociationInfo_FileSystemAssociationStatusDetails}, Seed: 2, Slots: []uint16{
+	0, 0, 1, 0, 0, 0, 0, 9, 0, 0, 7, 0, 4, 6, 0, 0, 3, 5, 0, 0, 0, 0, 0, 0,
+	2, 0, 0, 0, 0, 0, 8, 0,
+}}
+var m_FileSystemAssociationInfoList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FileSystemAssociationInfoList_member}}
+var mFileSystemAssociationStatusDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sFileSystemAssociationStatusDetail_ErrorCode}}
+var m_FileSystemAssociationStatusDetails = smithy.SchemaMembers{List: []*smithy.Schema{&s_FileSystemAssociationStatusDetails_member}}
+var mFileSystemAssociationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sFileSystemAssociationSummary_FileSystemAssociationId, &sFileSystemAssociationSummary_FileSystemAssociationARN, &sFileSystemAssociationSummary_FileSystemAssociationStatus, &sFileSystemAssociationSummary_GatewayARN}}
+var m_FileSystemAssociationSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FileSystemAssociationSummaryList_member}}
+var m_FolderList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FolderList_member}}
+var mGatewayCapacity = smithy.SchemaMembers{List: []*smithy.Schema{&sGatewayCapacity_Small, &sGatewayCapacity_Medium, &sGatewayCapacity_Large}}
+var mGatewayInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sGatewayInfo_GatewayId, &sGatewayInfo_GatewayARN, &sGatewayInfo_GatewayType, &sGatewayInfo_GatewayOperationalState, &sGatewayInfo_GatewayName, &sGatewayInfo_Ec2InstanceId, &sGatewayInfo_Ec2InstanceRegion, &sGatewayInfo_HostEnvironment, &sGatewayInfo_HostEnvironmentId, &sGatewayInfo_DeprecationDate, &sGatewayInfo_SoftwareVersion}, Seed: 9, Slots: []uint16{
+	11, 0, 0, 2, 0, 0, 0, 9, 0, 0, 0, 0, 0, 1, 0, 0, 4, 0, 0, 7, 3, 8, 10, 6,
+	0, 0, 0, 0, 0, 5, 0, 0,
+}}
+var m_GatewayNetworkInterfaces = smithy.SchemaMembers{List: []*smithy.Schema{&s_GatewayNetworkInterfaces_member}}
+var m_Gateways = smithy.SchemaMembers{List: []*smithy.Schema{&s_Gateways_member}}
+var mHostEnvironment = smithy.SchemaMembers{List: []*smithy.Schema{&sHostEnvironment_VMWARE, &sHostEnvironment_HYPER_V, &sHostEnvironment_EC2, &sHostEnvironment_KVM, &sHostEnvironment_OTHER, &sHostEnvironment_SNOWBALL}}
+var m_Hosts = smithy.SchemaMembers{List: []*smithy.Schema{&s_Hosts_member}}
+var m_Initiators = smithy.SchemaMembers{List: []*smithy.Schema{&s_Initiators_member}}
+var mInternalServerError = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerError_message, &sInternalServerError_error}}
+var mInvalidGatewayRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidGatewayRequestException_message, &sInvalidGatewayRequestException_error}}
+var m_IpAddressList = smithy.SchemaMembers{List: []*smithy.Schema{&s_IpAddressList_member}}
+var mNetworkInterface = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkInterface_Ipv4Address, &sNetworkInterface_MacAddress, &sNetworkInterface_Ipv6Address}}
+var mNFSFileShareDefaults = smithy.SchemaMembers{List: []*smithy.Schema{&sNFSFileShareDefaults_FileMode, &sNFSFileShareDefaults_DirectoryMode, &sNFSFileShareDefaults_GroupId, &sNFSFileShareDefaults_OwnerId}}
+var mNFSFileShareInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sNFSFileShareInfo_NFSFileShareDefaults, &sNFSFileShareInfo_FileShareARN, &sNFSFileShareInfo_FileShareId, &sNFSFileShareInfo_FileShareStatus, &sNFSFileShareInfo_GatewayARN, &sNFSFileShareInfo_EncryptionType, &sNFSFileShareInfo_KMSEncrypted, &sNFSFileShareInfo_KMSKey, &sNFSFileShareInfo_Path, &sNFSFileShareInfo_Role, &sNFSFileShareInfo_LocationARN, &sNFSFileShareInfo_DefaultStorageClass, &sNFSFileShareInfo_ObjectACL, &sNFSFileShareInfo_ClientList, &sNFSFileShareInfo_Squash, &sNFSFileShareInfo_ReadOnly, &sNFSFileShareInfo_GuessMIMETypeEnabled, &sNFSFileShareInfo_RequesterPays, &sNFSFileShareInfo_Tags, &sNFSFileShareInfo_FileShareName, &sNFSFileShareInfo_CacheAttributes, &sNFSFileShareInfo_NotificationPolicy, &sNFSFileShareInfo_VPCEndpointDNSName, &sNFSFileShareInfo_BucketRegion, &sNFSFileShareInfo_AuditDestinationARN}, Seed: 233, Slots: []uint16{
+	0, 22, 0, 16, 0, 4, 0, 0, 0, 10, 0, 0, 0, 0, 14, 0, 8, 1, 0, 0, 6, 0, 0, 0,
+	23, 0, 0, 24, 0, 0, 0, 19, 0, 0, 18, 9, 0, 0, 20, 0, 21, 11, 25, 17, 0, 0, 0, 15,
+	2, 13, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 5, 7,
+}}
+var m_NFSFileShareInfoList = smithy.SchemaMembers{List: []*smithy.Schema{&s_NFSFileShareInfoList_member}}
+var mObjectACL = smithy.SchemaMembers{List: []*smithy.Schema{&sObjectACL_private, &sObjectACL_public_read, &sObjectACL_public_read_write, &sObjectACL_authenticated_read, &sObjectACL_bucket_owner_read, &sObjectACL_bucket_owner_full_control, &sObjectACL_aws_exec_read}}
+var m_PoolARNs = smithy.SchemaMembers{List: []*smithy.Schema{&s_PoolARNs_member}}
+var mPoolInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sPoolInfo_PoolARN, &sPoolInfo_PoolName, &sPoolInfo_StorageClass, &sPoolInfo_RetentionLockType, &sPoolInfo_RetentionLockTimeInDays, &sPoolInfo_PoolStatus}}
+var m_PoolInfos = smithy.SchemaMembers{List: []*smithy.Schema{&s_PoolInfos_member}}
+var mPoolStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sPoolStatus_ACTIVE, &sPoolStatus_DELETED}}
+var mRetentionLockType = smithy.SchemaMembers{List: []*smithy.Schema{&sRetentionLockType_COMPLIANCE, &sRetentionLockType_GOVERNANCE, &sRetentionLockType_NONE}}
+var mServiceUnavailableError = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceUnavailableError_message, &sServiceUnavailableError_error}}
+var mSMBFileShareInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sSMBFileShareInfo_FileShareARN, &sSMBFileShareInfo_FileShareId, &sSMBFileShareInfo_FileShareStatus, &sSMBFileShareInfo_GatewayARN, &sSMBFileShareInfo_EncryptionType, &sSMBFileShareInfo_KMSEncrypted, &sSMBFileShareInfo_KMSKey, &sSMBFileShareInfo_Path, &sSMBFileShareInfo_Role, &sSMBFileShareInfo_LocationARN, &sSMBFileShareInfo_DefaultStorageClass, &sSMBFileShareInfo_ObjectACL, &sSMBFileShareInfo_ReadOnly, &sSMBFileShareInfo_GuessMIMETypeEnabled, &sSMBFileShareInfo_RequesterPays, &sSMBFileShareInfo_SMBACLEnabled, &sSMBFileShareInfo_AccessBasedEnumeration, &sSMBFileShareInfo_AdminUserList, &sSMBFileShareInfo_ValidUserList, &sSMBFileShareInfo_InvalidUserList, &sSMBFileShareInfo_AuditDestinationARN, &sSMBFileShareInfo_Authentication, &sSMBFileShareInfo_CaseSensitivity, &sSMBFileShareInfo_Tags, &sSMBFileShareInfo_FileShareName, &sSMBFileShareInfo_CacheAttributes, &sSMBFileShareInfo_NotificationPolicy, &sSMBFileShareInfo_VPCEndpointDNSName, &sSMBFileShareInfo_BucketRegion, &sSMBFileShareInfo_OplocksEnabled}, Seed: 1444, Slots: []uint16{
+	0, 8, 30, 0, 0, 0, 19, 0, 0, 5, 3, 0, 16, 29, 0, 0, 28, 26, 0, 0, 0, 18, 0, 15,
+	0, 0, 25, 6, 0, 0, 23, 0, 13, 17, 0, 0, 0, 12, 20, 14, 0, 0, 10, 2, 0, 4, 24, 0,
+	0, 0, 0, 1, 0, 0, 0, 11, 22, 7, 27, 0, 0, 9, 21, 0,
+}}
+var m_SMBFileShareInfoList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SMBFileShareInfoList_member}}
+var mSMBLocalGroups = smithy.SchemaMembers{List: []*smithy.Schema{&sSMBLocalGroups_GatewayAdmins}}
+var mSMBSecurityStrategy = smithy.SchemaMembers{List: []*smithy.Schema{&sSMBSecurityStrategy_ClientSpecified, &sSMBSecurityStrategy_MandatorySigning, &sSMBSecurityStrategy_MandatoryEncryption, &sSMBSecurityStrategy_MandatoryEncryptionNoAes128}}
+var mSoftwareUpdatePreferences = smithy.SchemaMembers{List: []*smithy.Schema{&sSoftwareUpdatePreferences_AutomaticUpdatePolicy}}
+var mStorageGatewayError = smithy.SchemaMembers{List: []*smithy.Schema{&sStorageGatewayError_errorCode, &sStorageGatewayError_errorDetails}}
+var mStorediSCSIVolume = smithy.SchemaMembers{List: []*smithy.Schema{&sStorediSCSIVolume_VolumeARN, &sStorediSCSIVolume_VolumeId, &sStorediSCSIVolume_VolumeType, &sStorediSCSIVolume_VolumeStatus, &sStorediSCSIVolume_VolumeAttachmentStatus, &sStorediSCSIVolume_VolumeSizeInBytes, &sStorediSCSIVolume_VolumeProgress, &sStorediSCSIVolume_VolumeDiskId, &sStorediSCSIVolume_SourceSnapshotId, &sStorediSCSIVolume_PreservedExistingData, &sStorediSCSIVolume_VolumeiSCSIAttributes, &sStorediSCSIVolume_CreatedDate, &sStorediSCSIVolume_VolumeUsedInBytes, &sStorediSCSIVolume_KMSKey, &sStorediSCSIVolume_TargetName}, Seed: 62, Slots: []uint16{
+	9, 0, 0, 0, 0, 0, 7, 0, 0, 15, 0, 8, 10, 0, 0, 0, 13, 0, 4, 0, 0, 0, 0, 3,
+	2, 6, 11, 5, 0, 14, 12, 1,
+}}
+var m_StorediSCSIVolumes = smithy.SchemaMembers{List: []*smithy.Schema{&s_StorediSCSIVolumes_member}}
+var m_SupportedGatewayCapacities = smithy.SchemaMembers{List: []*smithy.Schema{&s_SupportedGatewayCapacities_member}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var m_TagKeys = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeys_member}}
+var m_Tags = smithy.SchemaMembers{List: []*smithy.Schema{&s_Tags_member}}
+var mTape = smithy.SchemaMembers{List: []*smithy.Schema{&sTape_TapeARN, &sTape_TapeBarcode, &sTape_TapeCreatedDate, &sTape_TapeSizeInBytes, &sTape_TapeStatus, &sTape_VTLDevice, &sTape_Progress, &sTape_TapeUsedInBytes, &sTape_KMSKey, &sTape_PoolId, &sTape_Worm, &sTape_RetentionStartDate, &sTape_PoolEntryDate}, Seed: 1, Slots: []uint16{
+	1, 0, 0, 0, 12, 2, 7, 0, 5, 0, 0, 0, 10, 0, 0, 0, 0, 9, 0, 3, 13, 0, 0, 8,
+	0, 0, 6, 0, 11, 0, 4, 0,
+}}
+var mTapeArchive = smithy.SchemaMembers{List: []*smithy.Schema{&sTapeArchive_TapeARN, &sTapeArchive_TapeBarcode, &sTapeArchive_TapeCreatedDate, &sTapeArchive_TapeSizeInBytes, &sTapeArchive_CompletionTime, &sTapeArchive_RetrievedTo, &sTapeArchive_TapeStatus, &sTapeArchive_TapeUsedInBytes, &sTapeArchive_KMSKey, &sTapeArchive_PoolId, &sTapeArchive_Worm, &sTapeArchive_RetentionStartDate, &sTapeArchive_PoolEntryDate}, Seed: 13, Slots: []uint16{
+	10, 0, 13, 11, 0, 0, 0, 0, 0, 12, 3, 2, 0, 0, 0, 0, 0, 0, 8, 4, 0, 6, 1, 7,
+	0, 9, 0, 0, 0, 0, 5, 0,
+}}
+var m_TapeArchives = smithy.SchemaMembers{List: []*smithy.Schema{&s_TapeArchives_member}}
+var m_TapeARNs = smithy.SchemaMembers{List: []*smithy.Schema{&s_TapeARNs_member}}
+var mTapeInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sTapeInfo_TapeARN, &sTapeInfo_TapeBarcode, &sTapeInfo_TapeSizeInBytes, &sTapeInfo_TapeStatus, &sTapeInfo_GatewayARN, &sTapeInfo_PoolId, &sTapeInfo_RetentionStartDate, &sTapeInfo_PoolEntryDate}}
+var m_TapeInfos = smithy.SchemaMembers{List: []*smithy.Schema{&s_TapeInfos_member}}
+var mTapeRecoveryPointInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sTapeRecoveryPointInfo_TapeARN, &sTapeRecoveryPointInfo_TapeRecoveryPointTime, &sTapeRecoveryPointInfo_TapeSizeInBytes, &sTapeRecoveryPointInfo_TapeStatus}}
+var m_TapeRecoveryPointInfos = smithy.SchemaMembers{List: []*smithy.Schema{&s_TapeRecoveryPointInfos_member}}
+var m_Tapes = smithy.SchemaMembers{List: []*smithy.Schema{&s_Tapes_member}}
+var mTapeStorageClass = smithy.SchemaMembers{List: []*smithy.Schema{&sTapeStorageClass_DEEP_ARCHIVE, &sTapeStorageClass_GLACIER}}
+var m_UserList = smithy.SchemaMembers{List: []*smithy.Schema{&s_UserList_member}}
+var m_VolumeARNs = smithy.SchemaMembers{List: []*smithy.Schema{&s_VolumeARNs_member}}
+var mVolumeInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sVolumeInfo_VolumeARN, &sVolumeInfo_VolumeId, &sVolumeInfo_GatewayARN, &sVolumeInfo_GatewayId, &sVolumeInfo_VolumeType, &sVolumeInfo_VolumeSizeInBytes, &sVolumeInfo_VolumeAttachmentStatus}}
+var m_VolumeInfos = smithy.SchemaMembers{List: []*smithy.Schema{&s_VolumeInfos_member}}
+var mVolumeiSCSIAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sVolumeiSCSIAttributes_TargetARN, &sVolumeiSCSIAttributes_NetworkInterfaceId, &sVolumeiSCSIAttributes_NetworkInterfacePort, &sVolumeiSCSIAttributes_LunNumber, &sVolumeiSCSIAttributes_ChapEnabled}}
+var mVolumeRecoveryPointInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sVolumeRecoveryPointInfo_VolumeARN, &sVolumeRecoveryPointInfo_VolumeSizeInBytes, &sVolumeRecoveryPointInfo_VolumeUsageInBytes, &sVolumeRecoveryPointInfo_VolumeRecoveryPointTime}}
+var m_VolumeRecoveryPointInfos = smithy.SchemaMembers{List: []*smithy.Schema{&s_VolumeRecoveryPointInfos_member}}
+var mVTLDevice = smithy.SchemaMembers{List: []*smithy.Schema{&sVTLDevice_VTLDeviceARN, &sVTLDevice_VTLDeviceType, &sVTLDevice_VTLDeviceVendor, &sVTLDevice_VTLDeviceProductIdentifier, &sVTLDevice_DeviceiSCSIAttributes}}
+var m_VTLDeviceARNs = smithy.SchemaMembers{List: []*smithy.Schema{&s_VTLDeviceARNs_member}}
+var m_VTLDevices = smithy.SchemaMembers{List: []*smithy.Schema{&s_VTLDevices_member}}
+var mActivateGatewayInput = smithy.SchemaMembers{List: []*smithy.Schema{&sActivateGatewayInput_ActivationKey, &sActivateGatewayInput_GatewayName, &sActivateGatewayInput_GatewayTimezone, &sActivateGatewayInput_GatewayRegion, &sActivateGatewayInput_GatewayType, &sActivateGatewayInput_TapeDriveType, &sActivateGatewayInput_MediumChangerType, &sActivateGatewayInput_Tags}}
+var mActivateGatewayOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sActivateGatewayOutput_GatewayARN}}
+var mAddCacheInput = smithy.SchemaMembers{List: []*smithy.Schema{&sAddCacheInput_GatewayARN, &sAddCacheInput_DiskIds}}
+var mAddCacheOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sAddCacheOutput_GatewayARN}}
+var mAddTagsToResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sAddTagsToResourceInput_ResourceARN, &sAddTagsToResourceInput_Tags}}
+var mAddTagsToResourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sAddTagsToResourceOutput_ResourceARN}}
+var mAddUploadBufferInput = smithy.SchemaMembers{List: []*smithy.Schema{&sAddUploadBufferInput_GatewayARN, &sAddUploadBufferInput_DiskIds}}
+var mAddUploadBufferOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sAddUploadBufferOutput_GatewayARN}}
+var mAddWorkingStorageInput = smithy.SchemaMembers{List: []*smithy.Schema{&sAddWorkingStorageInput_GatewayARN, &sAddWorkingStorageInput_DiskIds}}
+var mAddWorkingStorageOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sAddWorkingStorageOutput_GatewayARN}}
+var mAssignTapePoolInput = smithy.SchemaMembers{List: []*smithy.Schema{&sAssignTapePoolInput_TapeARN, &sAssignTapePoolInput_PoolId, &sAssignTapePoolInput_BypassGovernanceRetention}}
+var mAssignTapePoolOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sAssignTapePoolOutput_TapeARN}}
+var mAssociateFileSystemInput = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateFileSystemInput_UserName, &sAssociateFileSystemInput_Password, &sAssociateFileSystemInput_ClientToken, &sAssociateFileSystemInput_GatewayARN, &sAssociateFileSystemInput_LocationARN, &sAssociateFileSystemInput_Tags, &sAssociateFileSystemInput_AuditDestinationARN, &sAssociateFileSystemInput_CacheAttributes, &sAssociateFileSystemInput_EndpointNetworkConfiguration}, Seed: 1, Slots: []uint16{
+	0, 6, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 2, 0, 7, 0, 1, 0, 0, 0, 9, 0,
+	0, 0, 0, 0, 3, 0, 0, 8,
+}}
+var mAssociateFileSystemOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateFileSystemOutput_FileSystemAssociationARN}}
+var mAttachVolumeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sAttachVolumeInput_GatewayARN, &sAttachVolumeInput_TargetName, &sAttachVolumeInput_VolumeARN, &sAttachVolumeInput_NetworkInterfaceId, &sAttachVolumeInput_DiskId}}
+var mAttachVolumeOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sAttachVolumeOutput_VolumeARN, &sAttachVolumeOutput_TargetARN}}
+var mCancelArchivalInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelArchivalInput_GatewayARN, &sCancelArchivalInput_TapeARN}}
+var mCancelArchivalOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelArchivalOutput_TapeARN}}
+var mCancelCacheReportInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelCacheReportInput_CacheReportARN}}
+var mCancelCacheReportOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelCacheReportOutput_CacheReportARN}}
+var mCancelRetrievalInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelRetrievalInput_GatewayARN, &sCancelRetrievalInput_TapeARN}}
+var mCancelRetrievalOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelRetrievalOutput_TapeARN}}
+var mCreateCachediSCSIVolumeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCachediSCSIVolumeInput_GatewayARN, &sCreateCachediSCSIVolumeInput_VolumeSizeInBytes, &sCreateCachediSCSIVolumeInput_SnapshotId, &sCreateCachediSCSIVolumeInput_TargetName, &sCreateCachediSCSIVolumeInput_SourceVolumeARN, &sCreateCachediSCSIVolumeInput_NetworkInterfaceId, &sCreateCachediSCSIVolumeInput_ClientToken, &sCreateCachediSCSIVolumeInput_KMSEncrypted, &sCreateCachediSCSIVolumeInput_KMSKey, &sCreateCachediSCSIVolumeInput_Tags}, Seed: 2, Slots: []uint16{
+	0, 0, 0, 2, 8, 0, 0, 0, 0, 0, 0, 3, 5, 10, 0, 0, 4, 1, 0, 0, 0, 0, 7, 0,
+	6, 0, 0, 0, 0, 0, 0, 9,
+}}
+var mCreateCachediSCSIVolumeOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCachediSCSIVolumeOutput_VolumeARN, &sCreateCachediSCSIVolumeOutput_TargetARN}}
+var mCreateNFSFileShareInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateNFSFileShareInput_ClientToken, &sCreateNFSFileShareInput_NFSFileShareDefaults, &sCreateNFSFileShareInput_GatewayARN, &sCreateNFSFileShareInput_EncryptionType, &sCreateNFSFileShareInput_KMSEncrypted, &sCreateNFSFileShareInput_KMSKey, &sCreateNFSFileShareInput_Role, &sCreateNFSFileShareInput_LocationARN, &sCreateNFSFileShareInput_DefaultStorageClass, &sCreateNFSFileShareInput_ObjectACL, &sCreateNFSFileShareInput_ClientList, &sCreateNFSFileShareInput_Squash, &sCreateNFSFileShareInput_ReadOnly, &sCreateNFSFileShareInput_GuessMIMETypeEnabled, &sCreateNFSFileShareInput_RequesterPays, &sCreateNFSFileShareInput_Tags, &sCreateNFSFileShareInput_FileShareName, &sCreateNFSFileShareInput_CacheAttributes, &sCreateNFSFileShareInput_NotificationPolicy, &sCreateNFSFileShareInput_VPCEndpointDNSName, &sCreateNFSFileShareInput_BucketRegion, &sCreateNFSFileShareInput_AuditDestinationARN}, Seed: 1, Slots: []uint16{
+	0, 0, 7, 0, 0, 0, 13, 10, 0, 15, 0, 0, 0, 0, 0, 20, 11, 6, 0, 0, 0, 0, 0, 12,
+	0, 0, 0, 17, 0, 14, 0, 0, 0, 16, 8, 0, 0, 0, 0, 0, 0, 0, 0, 5, 3, 0, 19, 0,
+	22, 0, 21, 0, 0, 0, 4, 9, 0, 0, 0, 0, 1, 2, 0, 18,
+}}
+var mCreateNFSFileShareOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateNFSFileShareOutput_FileShareARN}}
+var mCreateSMBFileShareInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSMBFileShareInput_ClientToken, &sCreateSMBFileShareInput_GatewayARN, &sCreateSMBFileShareInput_EncryptionType, &sCreateSMBFileShareInput_KMSEncrypted, &sCreateSMBFileShareInput_KMSKey, &sCreateSMBFileShareInput_Role, &sCreateSMBFileShareInput_LocationARN, &sCreateSMBFileShareInput_DefaultStorageClass, &sCreateSMBFileShareInput_ObjectACL, &sCreateSMBFileShareInput_ReadOnly, &sCreateSMBFileShareInput_GuessMIMETypeEnabled, &sCreateSMBFileShareInput_RequesterPays, &sCreateSMBFileShareInput_SMBACLEnabled, &sCreateSMBFileShareInput_AccessBasedEnumeration, &sCreateSMBFileShareInput_AdminUserList, &sCreateSMBFileShareInput_ValidUserList, &sCreateSMBFileShareInput_InvalidUserList, &sCreateSMBFileShareInput_AuditDestinationARN, &sCreateSMBFileShareInput_Authentication, &sCreateSMBFileShareInput_CaseSensitivity, &sCreateSMBFileShareInput_Tags, &sCreateSMBFileShareInput_FileShareName, &sCreateSMBFileShareInput_CacheAttributes, &sCreateSMBFileShareInput_NotificationPolicy, &sCreateSMBFileShareInput_VPCEndpointDNSName, &sCreateSMBFileShareInput_BucketRegion, &sCreateSMBFileShareInput_OplocksEnabled}, Seed: 44, Slots: []uint16{
+	0, 0, 0, 0, 0, 27, 24, 0, 0, 18, 2, 0, 0, 7, 0, 0, 0, 21, 0, 4, 11, 0, 25, 10,
+	12, 0, 0, 22, 0, 0, 0, 0, 13, 0, 5, 0, 0, 19, 3, 20, 0, 0, 8, 0, 23, 0, 0, 0,
+	16, 26, 0, 1, 0, 0, 14, 0, 15, 9, 0, 17, 0, 6, 0, 0,
+}}
+var mCreateSMBFileShareOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSMBFileShareOutput_FileShareARN}}
+var mCreateSnapshotFromVolumeRecoveryPointInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSnapshotFromVolumeRecoveryPointInput_VolumeARN, &sCreateSnapshotFromVolumeRecoveryPointInput_SnapshotDescription, &sCreateSnapshotFromVolumeRecoveryPointInput_Tags}}
+var mCreateSnapshotFromVolumeRecoveryPointOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSnapshotFromVolumeRecoveryPointOutput_SnapshotId, &sCreateSnapshotFromVolumeRecoveryPointOutput_VolumeARN, &sCreateSnapshotFromVolumeRecoveryPointOutput_VolumeRecoveryPointTime}}
+var mCreateSnapshotInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSnapshotInput_VolumeARN, &sCreateSnapshotInput_SnapshotDescription, &sCreateSnapshotInput_Tags}}
+var mCreateSnapshotOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSnapshotOutput_VolumeARN, &sCreateSnapshotOutput_SnapshotId}}
+var mCreateStorediSCSIVolumeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateStorediSCSIVolumeInput_GatewayARN, &sCreateStorediSCSIVolumeInput_DiskId, &sCreateStorediSCSIVolumeInput_SnapshotId, &sCreateStorediSCSIVolumeInput_PreserveExistingData, &sCreateStorediSCSIVolumeInput_TargetName, &sCreateStorediSCSIVolumeInput_NetworkInterfaceId, &sCreateStorediSCSIVolumeInput_KMSEncrypted, &sCreateStorediSCSIVolumeInput_KMSKey, &sCreateStorediSCSIVolumeInput_Tags}, Seed: 2, Slots: []uint16{
+	0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 3, 0, 9, 0, 2, 5, 1, 0, 0, 4, 0, 0, 0,
+	6, 0, 0, 0, 0, 0, 0, 8,
+}}
+var mCreateStorediSCSIVolumeOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateStorediSCSIVolumeOutput_VolumeARN, &sCreateStorediSCSIVolumeOutput_VolumeSizeInBytes, &sCreateStorediSCSIVolumeOutput_TargetARN}}
+var mCreateTapePoolInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTapePoolInput_PoolName, &sCreateTapePoolInput_StorageClass, &sCreateTapePoolInput_RetentionLockType, &sCreateTapePoolInput_RetentionLockTimeInDays, &sCreateTapePoolInput_Tags}}
+var mCreateTapePoolOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTapePoolOutput_PoolARN}}
+var mCreateTapesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTapesInput_GatewayARN, &sCreateTapesInput_TapeSizeInBytes, &sCreateTapesInput_ClientToken, &sCreateTapesInput_NumTapesToCreate, &sCreateTapesInput_TapeBarcodePrefix, &sCreateTapesInput_KMSEncrypted, &sCreateTapesInput_KMSKey, &sCreateTapesInput_PoolId, &sCreateTapesInput_Worm, &sCreateTapesInput_Tags}, Seed: 10, Slots: []uint16{
+	0, 0, 7, 0, 0, 0, 8, 0, 9, 0, 0, 6, 5, 0, 10, 2, 0, 0, 0, 0, 0, 0, 0, 0,
+	1, 0, 0, 0, 3, 0, 0, 4,
+}}
+var mCreateTapesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTapesOutput_TapeARNs}}
+var mCreateTapeWithBarcodeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTapeWithBarcodeInput_GatewayARN, &sCreateTapeWithBarcodeInput_TapeSizeInBytes, &sCreateTapeWithBarcodeInput_TapeBarcode, &sCreateTapeWithBarcodeInput_KMSEncrypted, &sCreateTapeWithBarcodeInput_KMSKey, &sCreateTapeWithBarcodeInput_PoolId, &sCreateTapeWithBarcodeInput_Worm, &sCreateTapeWithBarcodeInput_Tags}}
+var mCreateTapeWithBarcodeOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTapeWithBarcodeOutput_TapeARN}}
+var mDeleteAutomaticTapeCreationPolicyInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAutomaticTapeCreationPolicyInput_GatewayARN}}
+var mDeleteAutomaticTapeCreationPolicyOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAutomaticTapeCreationPolicyOutput_GatewayARN}}
+var mDeleteBandwidthRateLimitInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteBandwidthRateLimitInput_GatewayARN, &sDeleteBandwidthRateLimitInput_BandwidthType}}
+var mDeleteBandwidthRateLimitOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteBandwidthRateLimitOutput_GatewayARN}}
+var mDeleteCacheReportInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteCacheReportInput_CacheReportARN}}
+var mDeleteCacheReportOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteCacheReportOutput_CacheReportARN}}
+var mDeleteChapCredentialsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteChapCredentialsInput_TargetARN, &sDeleteChapCredentialsInput_InitiatorName}}
+var mDeleteChapCredentialsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteChapCredentialsOutput_TargetARN, &sDeleteChapCredentialsOutput_InitiatorName}}
+var mDeleteFileShareInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteFileShareInput_FileShareARN, &sDeleteFileShareInput_ForceDelete}}
+var mDeleteFileShareOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteFileShareOutput_FileShareARN}}
+var mDeleteGatewayInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteGatewayInput_GatewayARN}}
+var mDeleteGatewayOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteGatewayOutput_GatewayARN}}
+var mDeleteSnapshotScheduleInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSnapshotScheduleInput_VolumeARN}}
+var mDeleteSnapshotScheduleOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSnapshotScheduleOutput_VolumeARN}}
+var mDeleteTapeArchiveInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTapeArchiveInput_TapeARN, &sDeleteTapeArchiveInput_BypassGovernanceRetention}}
+var mDeleteTapeArchiveOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTapeArchiveOutput_TapeARN}}
+var mDeleteTapeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTapeInput_GatewayARN, &sDeleteTapeInput_TapeARN, &sDeleteTapeInput_BypassGovernanceRetention}}
+var mDeleteTapeOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTapeOutput_TapeARN}}
+var mDeleteTapePoolInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTapePoolInput_PoolARN}}
+var mDeleteTapePoolOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTapePoolOutput_PoolARN}}
+var mDeleteVolumeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteVolumeInput_VolumeARN}}
+var mDeleteVolumeOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteVolumeOutput_VolumeARN}}
+var mDescribeAvailabilityMonitorTestInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAvailabilityMonitorTestInput_GatewayARN}}
+var mDescribeAvailabilityMonitorTestOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAvailabilityMonitorTestOutput_GatewayARN, &sDescribeAvailabilityMonitorTestOutput_Status, &sDescribeAvailabilityMonitorTestOutput_StartTime}}
+var mDescribeBandwidthRateLimitInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeBandwidthRateLimitInput_GatewayARN}}
+var mDescribeBandwidthRateLimitOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeBandwidthRateLimitOutput_GatewayARN, &sDescribeBandwidthRateLimitOutput_AverageUploadRateLimitInBitsPerSec, &sDescribeBandwidthRateLimitOutput_AverageDownloadRateLimitInBitsPerSec}}
+var mDescribeBandwidthRateLimitScheduleInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeBandwidthRateLimitScheduleInput_GatewayARN}}
+var mDescribeBandwidthRateLimitScheduleOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeBandwidthRateLimitScheduleOutput_GatewayARN, &sDescribeBandwidthRateLimitScheduleOutput_BandwidthRateLimitIntervals}}
+var mDescribeCachediSCSIVolumesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeCachediSCSIVolumesInput_VolumeARNs}}
+var mDescribeCachediSCSIVolumesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeCachediSCSIVolumesOutput_CachediSCSIVolumes}}
+var mDescribeCacheInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeCacheInput_GatewayARN}}
+var mDescribeCacheOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeCacheOutput_GatewayARN, &sDescribeCacheOutput_DiskIds, &sDescribeCacheOutput_CacheAllocatedInBytes, &sDescribeCacheOutput_CacheUsedPercentage, &sDescribeCacheOutput_CacheDirtyPercentage, &sDescribeCacheOutput_CacheHitPercentage, &sDescribeCacheOutput_CacheMissPercentage}}
+var mDescribeCacheReportInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeCacheReportInput_CacheReportARN}}
+var mDescribeCacheReportOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeCacheReportOutput_CacheReportInfo}}
+var mDescribeChapCredentialsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeChapCredentialsInput_TargetARN}}
+var mDescribeChapCredentialsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeChapCredentialsOutput_ChapCredentials}}
+var mDescribeFileSystemAssociationsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeFileSystemAssociationsInput_FileSystemAssociationARNList}}
+var mDescribeFileSystemAssociationsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeFileSystemAssociationsOutput_FileSystemAssociationInfoList}}
+var mDescribeGatewayInformationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeGatewayInformationInput_GatewayARN}}
+var mDescribeGatewayInformationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeGatewayInformationOutput_GatewayARN, &sDescribeGatewayInformationOutput_GatewayId, &sDescribeGatewayInformationOutput_GatewayName, &sDescribeGatewayInformationOutput_GatewayTimezone, &sDescribeGatewayInformationOutput_GatewayState, &sDescribeGatewayInformationOutput_GatewayNetworkInterfaces, &sDescribeGatewayInformationOutput_GatewayType, &sDescribeGatewayInformationOutput_NextUpdateAvailabilityDate, &sDescribeGatewayInformationOutput_LastSoftwareUpdate, &sDescribeGatewayInformationOutput_Ec2InstanceId, &sDescribeGatewayInformationOutput_Ec2InstanceRegion, &sDescribeGatewayInformationOutput_Tags, &sDescribeGatewayInformationOutput_VPCEndpoint, &sDescribeGatewayInformationOutput_CloudWatchLogGroupARN, &sDescribeGatewayInformationOutput_HostEnvironment, &sDescribeGatewayInformationOutput_EndpointType, &sDescribeGatewayInformationOutput_SoftwareUpdatesEndDate, &sDescribeGatewayInformationOutput_DeprecationDate, &sDescribeGatewayInformationOutput_GatewayCapacity, &sDescribeGatewayInformationOutput_SupportedGatewayCapacities, &sDescribeGatewayInformationOutput_HostEnvironmentId, &sDescribeGatewayInformationOutput_SoftwareVersion}, Seed: 118, Slots: []uint16{
+	0, 15, 0, 16, 0, 21, 0, 3, 0, 0, 11, 19, 0, 0, 0, 0, 0, 17, 0, 0, 6, 0, 12, 0,
+	1, 0, 0, 0, 14, 0, 0, 10, 22, 20, 0, 0, 0, 0, 0, 13, 0, 5, 0, 0, 9, 0, 2, 0,
+	7, 0, 0, 0, 0, 0, 0, 0, 0, 4, 18, 0, 0, 0, 0, 8,
+}}
+var mDescribeMaintenanceStartTimeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeMaintenanceStartTimeInput_GatewayARN}}
+var mDescribeMaintenanceStartTimeOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeMaintenanceStartTimeOutput_GatewayARN, &sDescribeMaintenanceStartTimeOutput_HourOfDay, &sDescribeMaintenanceStartTimeOutput_MinuteOfHour, &sDescribeMaintenanceStartTimeOutput_DayOfWeek, &sDescribeMaintenanceStartTimeOutput_DayOfMonth, &sDescribeMaintenanceStartTimeOutput_Timezone, &sDescribeMaintenanceStartTimeOutput_SoftwareUpdatePreferences}}
+var mDescribeNFSFileSharesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeNFSFileSharesInput_FileShareARNList}}
+var mDescribeNFSFileSharesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeNFSFileSharesOutput_NFSFileShareInfoList}}
+var mDescribeSMBFileSharesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSMBFileSharesInput_FileShareARNList}}
+var mDescribeSMBFileSharesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSMBFileSharesOutput_SMBFileShareInfoList}}
+var mDescribeSMBSettingsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSMBSettingsInput_GatewayARN}}
+var mDescribeSMBSettingsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSMBSettingsOutput_GatewayARN, &sDescribeSMBSettingsOutput_DomainName, &sDescribeSMBSettingsOutput_ActiveDirectoryStatus, &sDescribeSMBSettingsOutput_SMBGuestPasswordSet, &sDescribeSMBSettingsOutput_SMBSecurityStrategy, &sDescribeSMBSettingsOutput_FileSharesVisible, &sDescribeSMBSettingsOutput_SMBLocalGroups}}
+var mDescribeSnapshotScheduleInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSnapshotScheduleInput_VolumeARN}}
+var mDescribeSnapshotScheduleOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSnapshotScheduleOutput_VolumeARN, &sDescribeSnapshotScheduleOutput_StartAt, &sDescribeSnapshotScheduleOutput_RecurrenceInHours, &sDescribeSnapshotScheduleOutput_Description, &sDescribeSnapshotScheduleOutput_Timezone, &sDescribeSnapshotScheduleOutput_Tags}}
+var mDescribeStorediSCSIVolumesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeStorediSCSIVolumesInput_VolumeARNs}}
+var mDescribeStorediSCSIVolumesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeStorediSCSIVolumesOutput_StorediSCSIVolumes}}
+var mDescribeTapeArchivesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeTapeArchivesInput_TapeARNs, &sDescribeTapeArchivesInput_Marker, &sDescribeTapeArchivesInput_Limit}}
+var mDescribeTapeArchivesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeTapeArchivesOutput_TapeArchives, &sDescribeTapeArchivesOutput_Marker}}
+var mDescribeTapeRecoveryPointsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeTapeRecoveryPointsInput_GatewayARN, &sDescribeTapeRecoveryPointsInput_Marker, &sDescribeTapeRecoveryPointsInput_Limit}}
+var mDescribeTapeRecoveryPointsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeTapeRecoveryPointsOutput_GatewayARN, &sDescribeTapeRecoveryPointsOutput_TapeRecoveryPointInfos, &sDescribeTapeRecoveryPointsOutput_Marker}}
+var mDescribeTapesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeTapesInput_GatewayARN, &sDescribeTapesInput_TapeARNs, &sDescribeTapesInput_Marker, &sDescribeTapesInput_Limit}}
+var mDescribeTapesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeTapesOutput_Tapes, &sDescribeTapesOutput_Marker}}
+var mDescribeUploadBufferInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeUploadBufferInput_GatewayARN}}
+var mDescribeUploadBufferOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeUploadBufferOutput_GatewayARN, &sDescribeUploadBufferOutput_DiskIds, &sDescribeUploadBufferOutput_UploadBufferUsedInBytes, &sDescribeUploadBufferOutput_UploadBufferAllocatedInBytes}}
+var mDescribeVTLDevicesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeVTLDevicesInput_GatewayARN, &sDescribeVTLDevicesInput_VTLDeviceARNs, &sDescribeVTLDevicesInput_Marker, &sDescribeVTLDevicesInput_Limit}}
+var mDescribeVTLDevicesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeVTLDevicesOutput_GatewayARN, &sDescribeVTLDevicesOutput_VTLDevices, &sDescribeVTLDevicesOutput_Marker}}
+var mDescribeWorkingStorageInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeWorkingStorageInput_GatewayARN}}
+var mDescribeWorkingStorageOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeWorkingStorageOutput_GatewayARN, &sDescribeWorkingStorageOutput_DiskIds, &sDescribeWorkingStorageOutput_WorkingStorageUsedInBytes, &sDescribeWorkingStorageOutput_WorkingStorageAllocatedInBytes}}
+var mDetachVolumeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDetachVolumeInput_VolumeARN, &sDetachVolumeInput_ForceDetach}}
+var mDetachVolumeOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDetachVolumeOutput_VolumeARN}}
+var mDisableGatewayInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDisableGatewayInput_GatewayARN}}
+var mDisableGatewayOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDisableGatewayOutput_GatewayARN}}
+var mDisassociateFileSystemInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateFileSystemInput_FileSystemAssociationARN, &sDisassociateFileSystemInput_ForceDelete}}
+var mDisassociateFileSystemOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateFileSystemOutput_FileSystemAssociationARN}}
+var mEvictFilesFailingUploadInput = smithy.SchemaMembers{List: []*smithy.Schema{&sEvictFilesFailingUploadInput_FileShareARN, &sEvictFilesFailingUploadInput_ForceRemove}}
+var mEvictFilesFailingUploadOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sEvictFilesFailingUploadOutput_NotificationId}}
+var mJoinDomainInput = smithy.SchemaMembers{List: []*smithy.Schema{&sJoinDomainInput_GatewayARN, &sJoinDomainInput_DomainName, &sJoinDomainInput_OrganizationalUnit, &sJoinDomainInput_DomainControllers, &sJoinDomainInput_TimeoutInSeconds, &sJoinDomainInput_UserName, &sJoinDomainInput_Password}}
+var mJoinDomainOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sJoinDomainOutput_GatewayARN, &sJoinDomainOutput_ActiveDirectoryStatus}}
+var mListAutomaticTapeCreationPoliciesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListAutomaticTapeCreationPoliciesInput_GatewayARN}}
+var mListAutomaticTapeCreationPoliciesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListAutomaticTapeCreationPoliciesOutput_AutomaticTapeCreationPolicyInfos}}
+var mListCacheReportsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListCacheReportsInput_Marker}}
+var mListCacheReportsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListCacheReportsOutput_CacheReportList, &sListCacheReportsOutput_Marker}}
+var mListFileSharesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListFileSharesInput_GatewayARN, &sListFileSharesInput_Limit, &sListFileSharesInput_Marker}}
+var mListFileSharesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListFileSharesOutput_Marker, &sListFileSharesOutput_NextMarker, &sListFileSharesOutput_FileShareInfoList}}
+var mListFileSystemAssociationsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListFileSystemAssociationsInput_GatewayARN, &sListFileSystemAssociationsInput_Limit, &sListFileSystemAssociationsInput_Marker}}
+var mListFileSystemAssociationsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListFileSystemAssociationsOutput_Marker, &sListFileSystemAssociationsOutput_NextMarker, &sListFileSystemAssociationsOutput_FileSystemAssociationSummaryList}}
+var mListGatewaysInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListGatewaysInput_Marker, &sListGatewaysInput_Limit}}
+var mListGatewaysOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListGatewaysOutput_Gateways, &sListGatewaysOutput_Marker}}
+var mListLocalDisksInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListLocalDisksInput_GatewayARN}}
+var mListLocalDisksOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListLocalDisksOutput_GatewayARN, &sListLocalDisksOutput_Disks}}
+var mListTagsForResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceInput_ResourceARN, &sListTagsForResourceInput_Marker, &sListTagsForResourceInput_Limit}}
+var mListTagsForResourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceOutput_ResourceARN, &sListTagsForResourceOutput_Marker, &sListTagsForResourceOutput_Tags}}
+var mListTapePoolsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTapePoolsInput_PoolARNs, &sListTapePoolsInput_Marker, &sListTapePoolsInput_Limit}}
+var mListTapePoolsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTapePoolsOutput_PoolInfos, &sListTapePoolsOutput_Marker}}
+var mListTapesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTapesInput_TapeARNs, &sListTapesInput_Marker, &sListTapesInput_Limit}}
+var mListTapesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTapesOutput_TapeInfos, &sListTapesOutput_Marker}}
+var mListVolumeInitiatorsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListVolumeInitiatorsInput_VolumeARN}}
+var mListVolumeInitiatorsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListVolumeInitiatorsOutput_Initiators}}
+var mListVolumeRecoveryPointsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListVolumeRecoveryPointsInput_GatewayARN}}
+var mListVolumeRecoveryPointsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListVolumeRecoveryPointsOutput_GatewayARN, &sListVolumeRecoveryPointsOutput_VolumeRecoveryPointInfos}}
+var mListVolumesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListVolumesInput_GatewayARN, &sListVolumesInput_Marker, &sListVolumesInput_Limit}}
+var mListVolumesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListVolumesOutput_GatewayARN, &sListVolumesOutput_Marker, &sListVolumesOutput_VolumeInfos}}
+var mNotifyWhenUploadedInput = smithy.SchemaMembers{List: []*smithy.Schema{&sNotifyWhenUploadedInput_FileShareARN}}
+var mNotifyWhenUploadedOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sNotifyWhenUploadedOutput_FileShareARN, &sNotifyWhenUploadedOutput_NotificationId}}
+var mRefreshCacheInput = smithy.SchemaMembers{List: []*smithy.Schema{&sRefreshCacheInput_FileShareARN, &sRefreshCacheInput_FolderList, &sRefreshCacheInput_Recursive}}
+var mRefreshCacheOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sRefreshCacheOutput_FileShareARN, &sRefreshCacheOutput_NotificationId}}
+var mRemoveTagsFromResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sRemoveTagsFromResourceInput_ResourceARN, &sRemoveTagsFromResourceInput_TagKeys}}
+var mRemoveTagsFromResourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sRemoveTagsFromResourceOutput_ResourceARN}}
+var mResetCacheInput = smithy.SchemaMembers{List: []*smithy.Schema{&sResetCacheInput_GatewayARN}}
+var mResetCacheOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sResetCacheOutput_GatewayARN}}
+var mRetrieveTapeArchiveInput = smithy.SchemaMembers{List: []*smithy.Schema{&sRetrieveTapeArchiveInput_TapeARN, &sRetrieveTapeArchiveInput_GatewayARN}}
+var mRetrieveTapeArchiveOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sRetrieveTapeArchiveOutput_TapeARN}}
+var mRetrieveTapeRecoveryPointInput = smithy.SchemaMembers{List: []*smithy.Schema{&sRetrieveTapeRecoveryPointInput_TapeARN, &sRetrieveTapeRecoveryPointInput_GatewayARN}}
+var mRetrieveTapeRecoveryPointOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sRetrieveTapeRecoveryPointOutput_TapeARN}}
+var mSetLocalConsolePasswordInput = smithy.SchemaMembers{List: []*smithy.Schema{&sSetLocalConsolePasswordInput_GatewayARN, &sSetLocalConsolePasswordInput_LocalConsolePassword}}
+var mSetLocalConsolePasswordOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sSetLocalConsolePasswordOutput_GatewayARN}}
+var mSetSMBGuestPasswordInput = smithy.SchemaMembers{List: []*smithy.Schema{&sSetSMBGuestPasswordInput_GatewayARN, &sSetSMBGuestPasswordInput_Password}}
+var mSetSMBGuestPasswordOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sSetSMBGuestPasswordOutput_GatewayARN}}
+var mShutdownGatewayInput = smithy.SchemaMembers{List: []*smithy.Schema{&sShutdownGatewayInput_GatewayARN}}
+var mShutdownGatewayOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sShutdownGatewayOutput_GatewayARN}}
+var mStartAvailabilityMonitorTestInput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartAvailabilityMonitorTestInput_GatewayARN}}
+var mStartAvailabilityMonitorTestOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartAvailabilityMonitorTestOutput_GatewayARN}}
+var mStartCacheReportInput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartCacheReportInput_FileShareARN, &sStartCacheReportInput_Role, &sStartCacheReportInput_LocationARN, &sStartCacheReportInput_BucketRegion, &sStartCacheReportInput_VPCEndpointDNSName, &sStartCacheReportInput_InclusionFilters, &sStartCacheReportInput_ExclusionFilters, &sStartCacheReportInput_ClientToken, &sStartCacheReportInput_Tags}, Seed: 4, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 9, 0, 5, 8, 4, 3, 0, 0,
+	0, 0, 1, 0, 0, 7, 0, 2,
+}}
+var mStartCacheReportOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartCacheReportOutput_CacheReportARN}}
+var mStartGatewayInput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartGatewayInput_GatewayARN}}
+var mStartGatewayOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartGatewayOutput_GatewayARN}}
+var mUpdateAutomaticTapeCreationPolicyInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAutomaticTapeCreationPolicyInput_AutomaticTapeCreationRules, &sUpdateAutomaticTapeCreationPolicyInput_GatewayARN}}
+var mUpdateAutomaticTapeCreationPolicyOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAutomaticTapeCreationPolicyOutput_GatewayARN}}
+var mUpdateBandwidthRateLimitInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateBandwidthRateLimitInput_GatewayARN, &sUpdateBandwidthRateLimitInput_AverageUploadRateLimitInBitsPerSec, &sUpdateBandwidthRateLimitInput_AverageDownloadRateLimitInBitsPerSec}}
+var mUpdateBandwidthRateLimitOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateBandwidthRateLimitOutput_GatewayARN}}
+var mUpdateBandwidthRateLimitScheduleInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateBandwidthRateLimitScheduleInput_GatewayARN, &sUpdateBandwidthRateLimitScheduleInput_BandwidthRateLimitIntervals}}
+var mUpdateBandwidthRateLimitScheduleOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateBandwidthRateLimitScheduleOutput_GatewayARN}}
+var mUpdateChapCredentialsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateChapCredentialsInput_TargetARN, &sUpdateChapCredentialsInput_SecretToAuthenticateInitiator, &sUpdateChapCredentialsInput_InitiatorName, &sUpdateChapCredentialsInput_SecretToAuthenticateTarget}}
+var mUpdateChapCredentialsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateChapCredentialsOutput_TargetARN, &sUpdateChapCredentialsOutput_InitiatorName}}
+var mUpdateFileSystemAssociationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateFileSystemAssociationInput_FileSystemAssociationARN, &sUpdateFileSystemAssociationInput_UserName, &sUpdateFileSystemAssociationInput_Password, &sUpdateFileSystemAssociationInput_AuditDestinationARN, &sUpdateFileSystemAssociationInput_CacheAttributes}}
+var mUpdateFileSystemAssociationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateFileSystemAssociationOutput_FileSystemAssociationARN}}
+var mUpdateGatewayInformationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateGatewayInformationInput_GatewayARN, &sUpdateGatewayInformationInput_GatewayName, &sUpdateGatewayInformationInput_GatewayTimezone, &sUpdateGatewayInformationInput_CloudWatchLogGroupARN, &sUpdateGatewayInformationInput_GatewayCapacity}}
+var mUpdateGatewayInformationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateGatewayInformationOutput_GatewayARN, &sUpdateGatewayInformationOutput_GatewayName}}
+var mUpdateGatewaySoftwareNowInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateGatewaySoftwareNowInput_GatewayARN}}
+var mUpdateGatewaySoftwareNowOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateGatewaySoftwareNowOutput_GatewayARN}}
+var mUpdateMaintenanceStartTimeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateMaintenanceStartTimeInput_GatewayARN, &sUpdateMaintenanceStartTimeInput_HourOfDay, &sUpdateMaintenanceStartTimeInput_MinuteOfHour, &sUpdateMaintenanceStartTimeInput_DayOfWeek, &sUpdateMaintenanceStartTimeInput_DayOfMonth, &sUpdateMaintenanceStartTimeInput_SoftwareUpdatePreferences}}
+var mUpdateMaintenanceStartTimeOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateMaintenanceStartTimeOutput_GatewayARN}}
+var mUpdateNFSFileShareInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateNFSFileShareInput_FileShareARN, &sUpdateNFSFileShareInput_EncryptionType, &sUpdateNFSFileShareInput_KMSEncrypted, &sUpdateNFSFileShareInput_KMSKey, &sUpdateNFSFileShareInput_NFSFileShareDefaults, &sUpdateNFSFileShareInput_DefaultStorageClass, &sUpdateNFSFileShareInput_ObjectACL, &sUpdateNFSFileShareInput_ClientList, &sUpdateNFSFileShareInput_Squash, &sUpdateNFSFileShareInput_ReadOnly, &sUpdateNFSFileShareInput_GuessMIMETypeEnabled, &sUpdateNFSFileShareInput_RequesterPays, &sUpdateNFSFileShareInput_FileShareName, &sUpdateNFSFileShareInput_CacheAttributes, &sUpdateNFSFileShareInput_NotificationPolicy, &sUpdateNFSFileShareInput_AuditDestinationARN}, Seed: 101, Slots: []uint16{
+	3, 14, 0, 0, 0, 0, 9, 7, 0, 1, 15, 13, 8, 16, 0, 0, 0, 6, 0, 4, 2, 0, 0, 0,
+	10, 0, 0, 11, 12, 0, 0, 5,
+}}
+var mUpdateNFSFileShareOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateNFSFileShareOutput_FileShareARN}}
+var mUpdateSMBFileShareInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSMBFileShareInput_FileShareARN, &sUpdateSMBFileShareInput_EncryptionType, &sUpdateSMBFileShareInput_KMSEncrypted, &sUpdateSMBFileShareInput_KMSKey, &sUpdateSMBFileShareInput_DefaultStorageClass, &sUpdateSMBFileShareInput_ObjectACL, &sUpdateSMBFileShareInput_ReadOnly, &sUpdateSMBFileShareInput_GuessMIMETypeEnabled, &sUpdateSMBFileShareInput_RequesterPays, &sUpdateSMBFileShareInput_SMBACLEnabled, &sUpdateSMBFileShareInput_AccessBasedEnumeration, &sUpdateSMBFileShareInput_AdminUserList, &sUpdateSMBFileShareInput_ValidUserList, &sUpdateSMBFileShareInput_InvalidUserList, &sUpdateSMBFileShareInput_AuditDestinationARN, &sUpdateSMBFileShareInput_CaseSensitivity, &sUpdateSMBFileShareInput_FileShareName, &sUpdateSMBFileShareInput_CacheAttributes, &sUpdateSMBFileShareInput_NotificationPolicy, &sUpdateSMBFileShareInput_OplocksEnabled}, Seed: 2, Slots: []uint16{
+	0, 0, 0, 0, 3, 0, 2, 0, 0, 10, 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17, 14,
+	19, 0, 0, 0, 5, 0, 7, 0, 0, 0, 0, 0, 0, 0, 6, 20, 13, 0, 18, 0, 0, 0, 1, 0,
+	0, 0, 0, 11, 8, 0, 0, 0, 0, 12, 16, 9, 0, 0, 0, 4,
+}}
+var mUpdateSMBFileShareOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSMBFileShareOutput_FileShareARN}}
+var mUpdateSMBFileShareVisibilityInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSMBFileShareVisibilityInput_GatewayARN, &sUpdateSMBFileShareVisibilityInput_FileSharesVisible}}
+var mUpdateSMBFileShareVisibilityOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSMBFileShareVisibilityOutput_GatewayARN}}
+var mUpdateSMBLocalGroupsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSMBLocalGroupsInput_GatewayARN, &sUpdateSMBLocalGroupsInput_SMBLocalGroups}}
+var mUpdateSMBLocalGroupsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSMBLocalGroupsOutput_GatewayARN}}
+var mUpdateSMBSecurityStrategyInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSMBSecurityStrategyInput_GatewayARN, &sUpdateSMBSecurityStrategyInput_SMBSecurityStrategy}}
+var mUpdateSMBSecurityStrategyOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSMBSecurityStrategyOutput_GatewayARN}}
+var mUpdateSnapshotScheduleInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSnapshotScheduleInput_VolumeARN, &sUpdateSnapshotScheduleInput_StartAt, &sUpdateSnapshotScheduleInput_RecurrenceInHours, &sUpdateSnapshotScheduleInput_Description, &sUpdateSnapshotScheduleInput_Tags}}
+var mUpdateSnapshotScheduleOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSnapshotScheduleOutput_VolumeARN}}
+var mUpdateVTLDeviceTypeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateVTLDeviceTypeInput_VTLDeviceARN, &sUpdateVTLDeviceTypeInput_DeviceType}}
+var mUpdateVTLDeviceTypeOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateVTLDeviceTypeOutput_VTLDeviceARN}}
+
+var sActivateGateway = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActivateGateway, Type: smithy.ShapeTypeOperation})
+var sAddCache = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddCache, Type: smithy.ShapeTypeOperation})
+var sAddTagsToResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddTagsToResource, Type: smithy.ShapeTypeOperation})
+var sAddUploadBuffer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddUploadBuffer, Type: smithy.ShapeTypeOperation})
+var sAddWorkingStorage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddWorkingStorage, Type: smithy.ShapeTypeOperation})
+var sAssignTapePool = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssignTapePool, Type: smithy.ShapeTypeOperation})
+var sAssociateFileSystem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateFileSystem, Type: smithy.ShapeTypeOperation})
+var sAttachVolume = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachVolume, Type: smithy.ShapeTypeOperation})
+var sCancelArchival = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelArchival, Type: smithy.ShapeTypeOperation})
+var sCancelCacheReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelCacheReport, Type: smithy.ShapeTypeOperation})
+var sCancelRetrieval = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelRetrieval, Type: smithy.ShapeTypeOperation})
+var sCreateCachediSCSIVolume = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCachediSCSIVolume, Type: smithy.ShapeTypeOperation})
+var sCreateNFSFileShare = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateNFSFileShare, Type: smithy.ShapeTypeOperation})
+var sCreateSMBFileShare = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSMBFileShare, Type: smithy.ShapeTypeOperation})
+var sCreateSnapshot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSnapshot, Type: smithy.ShapeTypeOperation})
+var sCreateSnapshotFromVolumeRecoveryPoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSnapshotFromVolumeRecoveryPoint, Type: smithy.ShapeTypeOperation})
+var sCreateStorediSCSIVolume = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStorediSCSIVolume, Type: smithy.ShapeTypeOperation})
+var sCreateTapePool = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTapePool, Type: smithy.ShapeTypeOperation})
+var sCreateTapes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTapes, Type: smithy.ShapeTypeOperation})
+var sCreateTapeWithBarcode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTapeWithBarcode, Type: smithy.ShapeTypeOperation})
+var sDeleteAutomaticTapeCreationPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAutomaticTapeCreationPolicy, Type: smithy.ShapeTypeOperation})
+var sDeleteBandwidthRateLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBandwidthRateLimit, Type: smithy.ShapeTypeOperation})
+var sDeleteCacheReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCacheReport, Type: smithy.ShapeTypeOperation})
+var sDeleteChapCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChapCredentials, Type: smithy.ShapeTypeOperation})
+var sDeleteFileShare = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFileShare, Type: smithy.ShapeTypeOperation})
+var sDeleteGateway = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteGateway, Type: smithy.ShapeTypeOperation})
+var sDeleteSnapshotSchedule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSnapshotSchedule, Type: smithy.ShapeTypeOperation})
+var sDeleteTape = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTape, Type: smithy.ShapeTypeOperation})
+var sDeleteTapeArchive = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTapeArchive, Type: smithy.ShapeTypeOperation})
+var sDeleteTapePool = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTapePool, Type: smithy.ShapeTypeOperation})
+var sDeleteVolume = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVolume, Type: smithy.ShapeTypeOperation})
+var sDescribeAvailabilityMonitorTest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAvailabilityMonitorTest, Type: smithy.ShapeTypeOperation})
+var sDescribeBandwidthRateLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBandwidthRateLimit, Type: smithy.ShapeTypeOperation})
+var sDescribeBandwidthRateLimitSchedule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBandwidthRateLimitSchedule, Type: smithy.ShapeTypeOperation})
+var sDescribeCache = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCache, Type: smithy.ShapeTypeOperation})
+var sDescribeCachediSCSIVolumes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCachediSCSIVolumes, Type: smithy.ShapeTypeOperation})
+var sDescribeCacheReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCacheReport, Type: smithy.ShapeTypeOperation})
+var sDescribeChapCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeChapCredentials, Type: smithy.ShapeTypeOperation})
+var sDescribeFileSystemAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFileSystemAssociations, Type: smithy.ShapeTypeOperation})
+var sDescribeGatewayInformation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeGatewayInformation, Type: smithy.ShapeTypeOperation})
+var sDescribeMaintenanceStartTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeMaintenanceStartTime, Type: smithy.ShapeTypeOperation})
+var sDescribeNFSFileShares = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeNFSFileShares, Type: smithy.ShapeTypeOperation})
+var sDescribeSMBFileShares = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSMBFileShares, Type: smithy.ShapeTypeOperation})
+var sDescribeSMBSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSMBSettings, Type: smithy.ShapeTypeOperation})
+var sDescribeSnapshotSchedule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSnapshotSchedule, Type: smithy.ShapeTypeOperation})
+var sDescribeStorediSCSIVolumes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeStorediSCSIVolumes, Type: smithy.ShapeTypeOperation})
+var sDescribeTapeArchives = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTapeArchives, Type: smithy.ShapeTypeOperation})
+var sDescribeTapeRecoveryPoints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTapeRecoveryPoints, Type: smithy.ShapeTypeOperation})
+var sDescribeTapes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTapes, Type: smithy.ShapeTypeOperation})
+var sDescribeUploadBuffer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeUploadBuffer, Type: smithy.ShapeTypeOperation})
+var sDescribeVTLDevices = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeVTLDevices, Type: smithy.ShapeTypeOperation})
+var sDescribeWorkingStorage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeWorkingStorage, Type: smithy.ShapeTypeOperation})
+var sDetachVolume = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDetachVolume, Type: smithy.ShapeTypeOperation})
+var sDisableGateway = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableGateway, Type: smithy.ShapeTypeOperation})
+var sDisassociateFileSystem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateFileSystem, Type: smithy.ShapeTypeOperation})
+var sEvictFilesFailingUpload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvictFilesFailingUpload, Type: smithy.ShapeTypeOperation})
+var sJoinDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJoinDomain, Type: smithy.ShapeTypeOperation})
+var sListAutomaticTapeCreationPolicies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAutomaticTapeCreationPolicies, Type: smithy.ShapeTypeOperation})
+var sListCacheReports = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCacheReports, Type: smithy.ShapeTypeOperation})
+var sListFileShares = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFileShares, Type: smithy.ShapeTypeOperation})
+var sListFileSystemAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFileSystemAssociations, Type: smithy.ShapeTypeOperation})
+var sListGateways = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGateways, Type: smithy.ShapeTypeOperation})
+var sListLocalDisks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLocalDisks, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation})
+var sListTapePools = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTapePools, Type: smithy.ShapeTypeOperation})
+var sListTapes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTapes, Type: smithy.ShapeTypeOperation})
+var sListVolumeInitiators = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVolumeInitiators, Type: smithy.ShapeTypeOperation})
+var sListVolumeRecoveryPoints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVolumeRecoveryPoints, Type: smithy.ShapeTypeOperation})
+var sListVolumes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVolumes, Type: smithy.ShapeTypeOperation})
+var sNotifyWhenUploaded = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotifyWhenUploaded, Type: smithy.ShapeTypeOperation})
+var sRefreshCache = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRefreshCache, Type: smithy.ShapeTypeOperation})
+var sRemoveTagsFromResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveTagsFromResource, Type: smithy.ShapeTypeOperation})
+var sResetCache = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetCache, Type: smithy.ShapeTypeOperation})
+var sRetrieveTapeArchive = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetrieveTapeArchive, Type: smithy.ShapeTypeOperation})
+var sRetrieveTapeRecoveryPoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetrieveTapeRecoveryPoint, Type: smithy.ShapeTypeOperation})
+var sSetLocalConsolePassword = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetLocalConsolePassword, Type: smithy.ShapeTypeOperation})
+var sSetSMBGuestPassword = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetSMBGuestPassword, Type: smithy.ShapeTypeOperation})
+var sShutdownGateway = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShutdownGateway, Type: smithy.ShapeTypeOperation})
+var sStartAvailabilityMonitorTest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartAvailabilityMonitorTest, Type: smithy.ShapeTypeOperation})
+var sStartCacheReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartCacheReport, Type: smithy.ShapeTypeOperation})
+var sStartGateway = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartGateway, Type: smithy.ShapeTypeOperation})
+var sUpdateAutomaticTapeCreationPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAutomaticTapeCreationPolicy, Type: smithy.ShapeTypeOperation})
+var sUpdateBandwidthRateLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBandwidthRateLimit, Type: smithy.ShapeTypeOperation})
+var sUpdateBandwidthRateLimitSchedule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBandwidthRateLimitSchedule, Type: smithy.ShapeTypeOperation})
+var sUpdateChapCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChapCredentials, Type: smithy.ShapeTypeOperation})
+var sUpdateFileSystemAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFileSystemAssociation, Type: smithy.ShapeTypeOperation})
+var sUpdateGatewayInformation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateGatewayInformation, Type: smithy.ShapeTypeOperation})
+var sUpdateGatewaySoftwareNow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateGatewaySoftwareNow, Type: smithy.ShapeTypeOperation})
+var sUpdateMaintenanceStartTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMaintenanceStartTime, Type: smithy.ShapeTypeOperation})
+var sUpdateNFSFileShare = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNFSFileShare, Type: smithy.ShapeTypeOperation})
+var sUpdateSMBFileShare = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSMBFileShare, Type: smithy.ShapeTypeOperation})
+var sUpdateSMBFileShareVisibility = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSMBFileShareVisibility, Type: smithy.ShapeTypeOperation})
+var sUpdateSMBLocalGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSMBLocalGroups, Type: smithy.ShapeTypeOperation})
+var sUpdateSMBSecurityStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSMBSecurityStrategy, Type: smithy.ShapeTypeOperation})
+var sUpdateSnapshotSchedule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSnapshotSchedule, Type: smithy.ShapeTypeOperation})
+var sUpdateVTLDeviceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVTLDeviceType, Type: smithy.ShapeTypeOperation})
+var s_StorageGateway_20130630 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StorageGateway_20130630, Traits: &t0, Type: smithy.ShapeTypeService})
+var s_ActivationKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActivationKey, Type: smithy.ShapeTypeString})
+var sActiveDirectoryStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActiveDirectoryStatus, Members: &mActiveDirectoryStatus, Type: smithy.ShapeTypeEnum})
+var s_AuditDestinationARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuditDestinationARN, Type: smithy.ShapeTypeString})
+var s_Authentication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Authentication, Type: smithy.ShapeTypeString})
+var sAutomaticTapeCreationPolicyInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutomaticTapeCreationPolicyInfo, Members: &mAutomaticTapeCreationPolicyInfo, Type: smithy.ShapeTypeStructure})
+var s_AutomaticTapeCreationPolicyInfos = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AutomaticTapeCreationPolicyInfos, Members: &m_AutomaticTapeCreationPolicyInfos, Type: smithy.ShapeTypeList})
+var sAutomaticTapeCreationRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutomaticTapeCreationRule, Members: &mAutomaticTapeCreationRule, Type: smithy.ShapeTypeStructure})
+var s_AutomaticTapeCreationRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AutomaticTapeCreationRules, Members: &m_AutomaticTapeCreationRules, Type: smithy.ShapeTypeList})
+var sAutomaticUpdatePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutomaticUpdatePolicy, Members: &mAutomaticUpdatePolicy, Type: smithy.ShapeTypeEnum})
+var sAvailabilityMonitorTestStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAvailabilityMonitorTestStatus, Members: &mAvailabilityMonitorTestStatus, Type: smithy.ShapeTypeEnum})
+var s_BandwidthDownloadRateLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BandwidthDownloadRateLimit, Type: smithy.ShapeTypeLong})
+var sBandwidthRateLimitInterval = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBandwidthRateLimitInterval, Members: &mBandwidthRateLimitInterval, Type: smithy.ShapeTypeStructure})
+var s_BandwidthRateLimitIntervals = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BandwidthRateLimitIntervals, Members: &m_BandwidthRateLimitIntervals, Type: smithy.ShapeTypeList})
+var s_BandwidthType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BandwidthType, Type: smithy.ShapeTypeString})
+var s_BandwidthUploadRateLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BandwidthUploadRateLimit, Type: smithy.ShapeTypeLong})
+var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var s_Boolean2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean2, Type: smithy.ShapeTypeBoolean})
+var sCacheAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCacheAttributes, Members: &mCacheAttributes, Type: smithy.ShapeTypeStructure})
+var sCachediSCSIVolume = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCachediSCSIVolume, Members: &mCachediSCSIVolume, Type: smithy.ShapeTypeStructure})
+var s_CachediSCSIVolumes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CachediSCSIVolumes, Members: &m_CachediSCSIVolumes, Type: smithy.ShapeTypeList})
+var s_CacheReportARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CacheReportARN, Type: smithy.ShapeTypeString})
+var sCacheReportFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCacheReportFilter, Members: &mCacheReportFilter, Type: smithy.ShapeTypeStructure})
+var s_CacheReportFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CacheReportFilterList, Members: &m_CacheReportFilterList, Type: smithy.ShapeTypeList})
+var sCacheReportFilterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCacheReportFilterName, Members: &mCacheReportFilterName, Type: smithy.ShapeTypeEnum})
+var s_CacheReportFilterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CacheReportFilterValue, Type: smithy.ShapeTypeString})
+var s_CacheReportFilterValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CacheReportFilterValues, Members: &m_CacheReportFilterValues, Type: smithy.ShapeTypeList})
+var sCacheReportInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCacheReportInfo, Members: &mCacheReportInfo, Type: smithy.ShapeTypeStructure})
+var s_CacheReportList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CacheReportList, Members: &m_CacheReportList, Type: smithy.ShapeTypeList})
+var s_CacheReportName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CacheReportName, Type: smithy.ShapeTypeString})
+var sCacheReportStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCacheReportStatus, Members: &mCacheReportStatus, Type: smithy.ShapeTypeEnum})
+var s_CacheStaleTimeoutInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CacheStaleTimeoutInSeconds, Type: smithy.ShapeTypeInteger})
+var sCaseSensitivity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCaseSensitivity, Members: &mCaseSensitivity, Type: smithy.ShapeTypeEnum})
+var s_ChapCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChapCredentials, Members: &m_ChapCredentials, Type: smithy.ShapeTypeList})
+var sChapInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChapInfo, Members: &mChapInfo, Type: smithy.ShapeTypeStructure})
+var s_ChapSecret = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChapSecret, Traits: &t2, Type: smithy.ShapeTypeString})
+var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var s_CloudWatchLogGroupARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CloudWatchLogGroupARN, Type: smithy.ShapeTypeString})
+var s_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreatedDate, Type: smithy.ShapeTypeTimestamp})
+var s_DayOfMonth = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DayOfMonth, Type: smithy.ShapeTypeInteger})
+var s_DayOfWeek = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DayOfWeek, Type: smithy.ShapeTypeInteger})
+var s_DaysOfWeek = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DaysOfWeek, Members: &m_DaysOfWeek, Type: smithy.ShapeTypeList})
+var s_DeprecationDate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeprecationDate, Type: smithy.ShapeTypeString})
+var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Type: smithy.ShapeTypeString})
+var sDeviceiSCSIAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeviceiSCSIAttributes, Members: &mDeviceiSCSIAttributes, Type: smithy.ShapeTypeStructure})
+var s_DeviceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeviceType, Type: smithy.ShapeTypeString})
+var sDisk = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisk, Members: &mDisk, Type: smithy.ShapeTypeStructure})
+var s_DiskAllocationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DiskAllocationType, Type: smithy.ShapeTypeString})
+var s_DiskAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DiskAttribute, Type: smithy.ShapeTypeString})
+var s_DiskAttributeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DiskAttributeList, Members: &m_DiskAttributeList, Type: smithy.ShapeTypeList})
+var s_DiskId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DiskId, Type: smithy.ShapeTypeString})
+var s_DiskIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DiskIds, Members: &m_DiskIds, Type: smithy.ShapeTypeList})
+var s_Disks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Disks, Members: &m_Disks, Type: smithy.ShapeTypeList})
+var s_DNSHostName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DNSHostName, Type: smithy.ShapeTypeString})
+var s_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var s_DomainUserName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainUserName, Type: smithy.ShapeTypeString})
+var s_DomainUserPassword = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainUserPassword, Traits: &t2, Type: smithy.ShapeTypeString})
+var s_double = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_double, Type: smithy.ShapeTypeDouble})
+var s_DoubleObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DoubleObject, Type: smithy.ShapeTypeDouble})
+var s_Ec2InstanceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Ec2InstanceId, Type: smithy.ShapeTypeString})
+var s_Ec2InstanceRegion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Ec2InstanceRegion, Type: smithy.ShapeTypeString})
+var sEncryptionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionType, Members: &mEncryptionType, Type: smithy.ShapeTypeEnum})
+var sEndpointNetworkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEndpointNetworkConfiguration, Members: &mEndpointNetworkConfiguration, Type: smithy.ShapeTypeStructure})
+var s_EndpointType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EndpointType, Type: smithy.ShapeTypeString})
+var sErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum})
+var s_errorDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_errorDetails, Members: &m_errorDetails, Type: smithy.ShapeTypeMap})
+var s_FileShareARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileShareARN, Type: smithy.ShapeTypeString})
+var s_FileShareARNList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileShareARNList, Members: &m_FileShareARNList, Type: smithy.ShapeTypeList})
+var s_FileShareClientList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileShareClientList, Members: &m_FileShareClientList, Type: smithy.ShapeTypeList})
+var s_FileShareId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileShareId, Type: smithy.ShapeTypeString})
+var sFileShareInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileShareInfo, Members: &mFileShareInfo, Type: smithy.ShapeTypeStructure})
+var s_FileShareInfoList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileShareInfoList, Members: &m_FileShareInfoList, Type: smithy.ShapeTypeList})
+var s_FileShareName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileShareName, Type: smithy.ShapeTypeString})
+var s_FileShareStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileShareStatus, Type: smithy.ShapeTypeString})
+var sFileShareType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileShareType, Members: &mFileShareType, Type: smithy.ShapeTypeEnum})
+var s_FileSystemAssociationARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileSystemAssociationARN, Type: smithy.ShapeTypeString})
+var s_FileSystemAssociationARNList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileSystemAssociationARNList, Members: &m_FileSystemAssociationARNList, Type: smithy.ShapeTypeList})
+var s_FileSystemAssociationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileSystemAssociationId, Type: smithy.ShapeTypeString})
+var sFileSystemAssociationInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileSystemAssociationInfo, Members: &mFileSystemAssociationInfo, Type: smithy.ShapeTypeStructure})
+var s_FileSystemAssociationInfoList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileSystemAssociationInfoList, Members: &m_FileSystemAssociationInfoList, Type: smithy.ShapeTypeList})
+var s_FileSystemAssociationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileSystemAssociationStatus, Type: smithy.ShapeTypeString})
+var sFileSystemAssociationStatusDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileSystemAssociationStatusDetail, Members: &mFileSystemAssociationStatusDetail, Type: smithy.ShapeTypeStructure})
+var s_FileSystemAssociationStatusDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileSystemAssociationStatusDetails, Members: &m_FileSystemAssociationStatusDetails, Type: smithy.ShapeTypeList})
+var sFileSystemAssociationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileSystemAssociationSummary, Members: &mFileSystemAssociationSummary, Type: smithy.ShapeTypeStructure})
+var s_FileSystemAssociationSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileSystemAssociationSummaryList, Members: &m_FileSystemAssociationSummaryList, Type: smithy.ShapeTypeList})
+var s_FileSystemAssociationSyncErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileSystemAssociationSyncErrorCode, Type: smithy.ShapeTypeString})
+var s_FileSystemLocationARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileSystemLocationARN, Type: smithy.ShapeTypeString})
+var s_Folder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Folder, Type: smithy.ShapeTypeString})
+var s_FolderList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FolderList, Members: &m_FolderList, Type: smithy.ShapeTypeList})
+var s_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sGatewayCapacity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGatewayCapacity, Members: &mGatewayCapacity, Type: smithy.ShapeTypeEnum})
+var s_GatewayId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GatewayId, Type: smithy.ShapeTypeString})
+var sGatewayInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGatewayInfo, Members: &mGatewayInfo, Type: smithy.ShapeTypeStructure})
+var s_GatewayName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GatewayName, Type: smithy.ShapeTypeString})
+var s_GatewayNetworkInterfaces = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GatewayNetworkInterfaces, Members: &m_GatewayNetworkInterfaces, Type: smithy.ShapeTypeList})
+var s_GatewayOperationalState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GatewayOperationalState, Type: smithy.ShapeTypeString})
+var s_Gateways = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Gateways, Members: &m_Gateways, Type: smithy.ShapeTypeList})
+var s_GatewayState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GatewayState, Type: smithy.ShapeTypeString})
+var s_GatewayTimezone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GatewayTimezone, Type: smithy.ShapeTypeString})
+var s_GatewayType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GatewayType, Type: smithy.ShapeTypeString})
+var s_Host = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Host, Type: smithy.ShapeTypeString})
+var sHostEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHostEnvironment, Members: &mHostEnvironment, Type: smithy.ShapeTypeEnum})
+var s_HostEnvironmentId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HostEnvironmentId, Type: smithy.ShapeTypeString})
+var s_Hosts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Hosts, Members: &m_Hosts, Type: smithy.ShapeTypeList})
+var s_HourOfDay = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HourOfDay, Type: smithy.ShapeTypeInteger})
+var s_Initiator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Initiator, Type: smithy.ShapeTypeString})
+var s_Initiators = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Initiators, Members: &m_Initiators, Type: smithy.ShapeTypeList})
+var s_integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_integer, Type: smithy.ShapeTypeInteger})
+var sInternalServerError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerError, Members: &mInternalServerError, Traits: &t3, Type: smithy.ShapeTypeStructure})
+var sInvalidGatewayRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidGatewayRequestException, Members: &mInvalidGatewayRequestException, Traits: &t4, Type: smithy.ShapeTypeStructure})
+var s_IpAddressList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IpAddressList, Members: &m_IpAddressList, Type: smithy.ShapeTypeList})
+var s_IPV4Address = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IPV4Address, Type: smithy.ShapeTypeString})
+var s_Ipv4OrIpv6AddressCIDR = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Ipv4OrIpv6AddressCIDR, Type: smithy.ShapeTypeString})
+var s_IqnName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IqnName, Type: smithy.ShapeTypeString})
+var s_KMSKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KMSKey, Type: smithy.ShapeTypeString})
+var s_LastSoftwareUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastSoftwareUpdate, Type: smithy.ShapeTypeString})
+var s_LocalConsolePassword = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LocalConsolePassword, Traits: &t2, Type: smithy.ShapeTypeString})
+var s_LocationARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LocationARN, Type: smithy.ShapeTypeString})
+var s_long = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_long, Type: smithy.ShapeTypeLong})
+var s_Marker = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Marker, Type: smithy.ShapeTypeString})
+var s_MediumChangerType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MediumChangerType, Type: smithy.ShapeTypeString})
+var s_MinimumNumTapes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MinimumNumTapes, Type: smithy.ShapeTypeInteger})
+var s_MinuteOfHour = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MinuteOfHour, Type: smithy.ShapeTypeInteger})
+var sNetworkInterface = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkInterface, Members: &mNetworkInterface, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var s_NetworkInterfaceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkInterfaceId, Type: smithy.ShapeTypeString})
+var s_NextUpdateAvailabilityDate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextUpdateAvailabilityDate, Type: smithy.ShapeTypeString})
+var sNFSFileShareDefaults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNFSFileShareDefaults, Members: &mNFSFileShareDefaults, Type: smithy.ShapeTypeStructure})
+var sNFSFileShareInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNFSFileShareInfo, Members: &mNFSFileShareInfo, Type: smithy.ShapeTypeStructure})
+var s_NFSFileShareInfoList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NFSFileShareInfoList, Members: &m_NFSFileShareInfoList, Type: smithy.ShapeTypeList})
+var s_NotificationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NotificationId, Type: smithy.ShapeTypeString})
+var s_NotificationPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NotificationPolicy, Type: smithy.ShapeTypeString})
+var s_NumTapesToCreate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NumTapesToCreate, Type: smithy.ShapeTypeInteger})
+var sObjectACL = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iObjectACL, Members: &mObjectACL, Type: smithy.ShapeTypeEnum})
+var s_OrganizationalUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrganizationalUnit, Type: smithy.ShapeTypeString})
+var s_Path = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Path, Type: smithy.ShapeTypeString})
+var s_PermissionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PermissionId, Type: smithy.ShapeTypeLong})
+var s_PermissionMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PermissionMode, Type: smithy.ShapeTypeString})
+var s_PoolARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PoolARN, Type: smithy.ShapeTypeString})
+var s_PoolARNs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PoolARNs, Members: &m_PoolARNs, Type: smithy.ShapeTypeList})
+var s_PoolId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PoolId, Type: smithy.ShapeTypeString})
+var sPoolInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPoolInfo, Members: &mPoolInfo, Type: smithy.ShapeTypeStructure})
+var s_PoolInfos = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PoolInfos, Members: &m_PoolInfos, Type: smithy.ShapeTypeList})
+var s_PoolName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PoolName, Type: smithy.ShapeTypeString})
+var sPoolStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPoolStatus, Members: &mPoolStatus, Type: smithy.ShapeTypeEnum})
+var s_PositiveIntObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PositiveIntObject, Type: smithy.ShapeTypeInteger})
+var s_RecurrenceInHours = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecurrenceInHours, Type: smithy.ShapeTypeInteger})
+var s_RegionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegionId, Type: smithy.ShapeTypeString})
+var s_ReportCompletionPercent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReportCompletionPercent, Type: smithy.ShapeTypeInteger})
+var s_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var s_RetentionLockTimeInDays = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RetentionLockTimeInDays, Type: smithy.ShapeTypeInteger})
+var sRetentionLockType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetentionLockType, Members: &mRetentionLockType, Type: smithy.ShapeTypeEnum})
+var s_Role = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Role, Type: smithy.ShapeTypeString})
+var sServiceUnavailableError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceUnavailableError, Members: &mServiceUnavailableError, Traits: &t5, Type: smithy.ShapeTypeStructure})
+var sSMBFileShareInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSMBFileShareInfo, Members: &mSMBFileShareInfo, Type: smithy.ShapeTypeStructure})
+var s_SMBFileShareInfoList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SMBFileShareInfoList, Members: &m_SMBFileShareInfoList, Type: smithy.ShapeTypeList})
+var s_SMBGuestPassword = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SMBGuestPassword, Traits: &t2, Type: smithy.ShapeTypeString})
+var sSMBLocalGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSMBLocalGroups, Members: &mSMBLocalGroups, Type: smithy.ShapeTypeStructure})
+var sSMBSecurityStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSMBSecurityStrategy, Members: &mSMBSecurityStrategy, Type: smithy.ShapeTypeEnum})
+var s_SnapshotDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnapshotDescription, Type: smithy.ShapeTypeString})
+var s_SnapshotId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnapshotId, Type: smithy.ShapeTypeString})
+var sSoftwareUpdatePreferences = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSoftwareUpdatePreferences, Members: &mSoftwareUpdatePreferences, Type: smithy.ShapeTypeStructure})
+var s_SoftwareUpdatesEndDate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SoftwareUpdatesEndDate, Type: smithy.ShapeTypeString})
+var s_SoftwareVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SoftwareVersion, Type: smithy.ShapeTypeString})
+var s_Squash = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Squash, Type: smithy.ShapeTypeString})
+var s_StorageClass = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StorageClass, Type: smithy.ShapeTypeString})
+var sStorageGatewayError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStorageGatewayError, Members: &mStorageGatewayError, Type: smithy.ShapeTypeStructure})
+var sStorediSCSIVolume = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStorediSCSIVolume, Members: &mStorediSCSIVolume, Type: smithy.ShapeTypeStructure})
+var s_StorediSCSIVolumes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StorediSCSIVolumes, Members: &m_StorediSCSIVolumes, Type: smithy.ShapeTypeList})
+var s_string = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_string, Type: smithy.ShapeTypeString})
+var s_SupportedGatewayCapacities = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SupportedGatewayCapacities, Members: &m_SupportedGatewayCapacities, Type: smithy.ShapeTypeList})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeys, Members: &m_TagKeys, Type: smithy.ShapeTypeList})
+var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sTape = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTape, Members: &mTape, Type: smithy.ShapeTypeStructure})
+var sTapeArchive = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTapeArchive, Members: &mTapeArchive, Type: smithy.ShapeTypeStructure})
+var s_TapeArchives = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TapeArchives, Members: &m_TapeArchives, Type: smithy.ShapeTypeList})
+var s_TapeArchiveStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TapeArchiveStatus, Type: smithy.ShapeTypeString})
+var s_TapeARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TapeARN, Type: smithy.ShapeTypeString})
+var s_TapeARNs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TapeARNs, Members: &m_TapeARNs, Type: smithy.ShapeTypeList})
+var s_TapeBarcode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TapeBarcode, Type: smithy.ShapeTypeString})
+var s_TapeBarcodePrefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TapeBarcodePrefix, Type: smithy.ShapeTypeString})
+var s_TapeDriveType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TapeDriveType, Type: smithy.ShapeTypeString})
+var sTapeInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTapeInfo, Members: &mTapeInfo, Type: smithy.ShapeTypeStructure})
+var s_TapeInfos = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TapeInfos, Members: &m_TapeInfos, Type: smithy.ShapeTypeList})
+var sTapeRecoveryPointInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTapeRecoveryPointInfo, Members: &mTapeRecoveryPointInfo, Type: smithy.ShapeTypeStructure})
+var s_TapeRecoveryPointInfos = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TapeRecoveryPointInfos, Members: &m_TapeRecoveryPointInfos, Type: smithy.ShapeTypeList})
+var s_TapeRecoveryPointStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TapeRecoveryPointStatus, Type: smithy.ShapeTypeString})
+var s_Tapes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tapes, Members: &m_Tapes, Type: smithy.ShapeTypeList})
+var s_TapeSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TapeSize, Type: smithy.ShapeTypeLong})
+var s_TapeStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TapeStatus, Type: smithy.ShapeTypeString})
+var sTapeStorageClass = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTapeStorageClass, Members: &mTapeStorageClass, Type: smithy.ShapeTypeEnum})
+var s_TapeUsage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TapeUsage, Type: smithy.ShapeTypeLong})
+var s_TargetARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetARN, Type: smithy.ShapeTypeString})
+var s_TargetName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetName, Type: smithy.ShapeTypeString})
+var s_Time = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Time, Type: smithy.ShapeTypeTimestamp})
+var s_TimeoutInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimeoutInSeconds, Type: smithy.ShapeTypeInteger})
+var s_UserList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserList, Members: &m_UserList, Type: smithy.ShapeTypeList})
+var s_UserListUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserListUser, Type: smithy.ShapeTypeString})
+var s_VolumeARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VolumeARN, Type: smithy.ShapeTypeString})
+var s_VolumeARNs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VolumeARNs, Members: &m_VolumeARNs, Type: smithy.ShapeTypeList})
+var s_VolumeAttachmentStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VolumeAttachmentStatus, Type: smithy.ShapeTypeString})
+var s_VolumeId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VolumeId, Type: smithy.ShapeTypeString})
+var sVolumeInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVolumeInfo, Members: &mVolumeInfo, Type: smithy.ShapeTypeStructure})
+var s_VolumeInfos = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VolumeInfos, Members: &m_VolumeInfos, Type: smithy.ShapeTypeList})
+var sVolumeiSCSIAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVolumeiSCSIAttributes, Members: &mVolumeiSCSIAttributes, Type: smithy.ShapeTypeStructure})
+var sVolumeRecoveryPointInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVolumeRecoveryPointInfo, Members: &mVolumeRecoveryPointInfo, Type: smithy.ShapeTypeStructure})
+var s_VolumeRecoveryPointInfos = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VolumeRecoveryPointInfos, Members: &m_VolumeRecoveryPointInfos, Type: smithy.ShapeTypeList})
+var s_VolumeStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VolumeStatus, Type: smithy.ShapeTypeString})
+var s_VolumeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VolumeType, Type: smithy.ShapeTypeString})
+var s_VolumeUsedInBytes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VolumeUsedInBytes, Type: smithy.ShapeTypeLong})
+var sVTLDevice = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVTLDevice, Members: &mVTLDevice, Type: smithy.ShapeTypeStructure})
+var s_VTLDeviceARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VTLDeviceARN, Type: smithy.ShapeTypeString})
+var s_VTLDeviceARNs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VTLDeviceARNs, Members: &m_VTLDeviceARNs, Type: smithy.ShapeTypeList})
+var s_VTLDeviceProductIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VTLDeviceProductIdentifier, Type: smithy.ShapeTypeString})
+var s_VTLDevices = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VTLDevices, Members: &m_VTLDevices, Type: smithy.ShapeTypeList})
+var s_VTLDeviceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VTLDeviceType, Type: smithy.ShapeTypeString})
+var s_VTLDeviceVendor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VTLDeviceVendor, Type: smithy.ShapeTypeString})
+var sActivateGatewayInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActivateGatewayInput, Members: &mActivateGatewayInput, Type: smithy.ShapeTypeStructure})
+var sActivateGatewayOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActivateGatewayOutput, Members: &mActivateGatewayOutput, Type: smithy.ShapeTypeStructure})
+var sAddCacheInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddCacheInput, Members: &mAddCacheInput, Type: smithy.ShapeTypeStructure})
+var sAddCacheOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddCacheOutput, Members: &mAddCacheOutput, Type: smithy.ShapeTypeStructure})
+var sAddTagsToResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddTagsToResourceInput, Members: &mAddTagsToResourceInput, Type: smithy.ShapeTypeStructure})
+var sAddTagsToResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddTagsToResourceOutput, Members: &mAddTagsToResourceOutput, Type: smithy.ShapeTypeStructure})
+var sAddUploadBufferInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddUploadBufferInput, Members: &mAddUploadBufferInput, Type: smithy.ShapeTypeStructure})
+var sAddUploadBufferOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddUploadBufferOutput, Members: &mAddUploadBufferOutput, Type: smithy.ShapeTypeStructure})
+var sAddWorkingStorageInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddWorkingStorageInput, Members: &mAddWorkingStorageInput, Type: smithy.ShapeTypeStructure})
+var sAddWorkingStorageOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddWorkingStorageOutput, Members: &mAddWorkingStorageOutput, Type: smithy.ShapeTypeStructure})
+var sAssignTapePoolInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssignTapePoolInput, Members: &mAssignTapePoolInput, Type: smithy.ShapeTypeStructure})
+var sAssignTapePoolOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssignTapePoolOutput, Members: &mAssignTapePoolOutput, Type: smithy.ShapeTypeStructure})
+var sAssociateFileSystemInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateFileSystemInput, Members: &mAssociateFileSystemInput, Type: smithy.ShapeTypeStructure})
+var sAssociateFileSystemOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateFileSystemOutput, Members: &mAssociateFileSystemOutput, Type: smithy.ShapeTypeStructure})
+var sAttachVolumeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachVolumeInput, Members: &mAttachVolumeInput, Type: smithy.ShapeTypeStructure})
+var sAttachVolumeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachVolumeOutput, Members: &mAttachVolumeOutput, Type: smithy.ShapeTypeStructure})
+var sCancelArchivalInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelArchivalInput, Members: &mCancelArchivalInput, Type: smithy.ShapeTypeStructure})
+var sCancelArchivalOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelArchivalOutput, Members: &mCancelArchivalOutput, Type: smithy.ShapeTypeStructure})
+var sCancelCacheReportInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelCacheReportInput, Members: &mCancelCacheReportInput, Type: smithy.ShapeTypeStructure})
+var sCancelCacheReportOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelCacheReportOutput, Members: &mCancelCacheReportOutput, Type: smithy.ShapeTypeStructure})
+var sCancelRetrievalInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelRetrievalInput, Members: &mCancelRetrievalInput, Type: smithy.ShapeTypeStructure})
+var sCancelRetrievalOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelRetrievalOutput, Members: &mCancelRetrievalOutput, Type: smithy.ShapeTypeStructure})
+var sCreateCachediSCSIVolumeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCachediSCSIVolumeInput, Members: &mCreateCachediSCSIVolumeInput, Type: smithy.ShapeTypeStructure})
+var sCreateCachediSCSIVolumeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCachediSCSIVolumeOutput, Members: &mCreateCachediSCSIVolumeOutput, Type: smithy.ShapeTypeStructure})
+var sCreateNFSFileShareInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateNFSFileShareInput, Members: &mCreateNFSFileShareInput, Type: smithy.ShapeTypeStructure})
+var sCreateNFSFileShareOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateNFSFileShareOutput, Members: &mCreateNFSFileShareOutput, Type: smithy.ShapeTypeStructure})
+var sCreateSMBFileShareInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSMBFileShareInput, Members: &mCreateSMBFileShareInput, Type: smithy.ShapeTypeStructure})
+var sCreateSMBFileShareOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSMBFileShareOutput, Members: &mCreateSMBFileShareOutput, Type: smithy.ShapeTypeStructure})
+var sCreateSnapshotFromVolumeRecoveryPointInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSnapshotFromVolumeRecoveryPointInput, Members: &mCreateSnapshotFromVolumeRecoveryPointInput, Type: smithy.ShapeTypeStructure})
+var sCreateSnapshotFromVolumeRecoveryPointOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSnapshotFromVolumeRecoveryPointOutput, Members: &mCreateSnapshotFromVolumeRecoveryPointOutput, Type: smithy.ShapeTypeStructure})
+var sCreateSnapshotInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSnapshotInput, Members: &mCreateSnapshotInput, Type: smithy.ShapeTypeStructure})
+var sCreateSnapshotOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSnapshotOutput, Members: &mCreateSnapshotOutput, Type: smithy.ShapeTypeStructure})
+var sCreateStorediSCSIVolumeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStorediSCSIVolumeInput, Members: &mCreateStorediSCSIVolumeInput, Type: smithy.ShapeTypeStructure})
+var sCreateStorediSCSIVolumeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStorediSCSIVolumeOutput, Members: &mCreateStorediSCSIVolumeOutput, Type: smithy.ShapeTypeStructure})
+var sCreateTapePoolInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTapePoolInput, Members: &mCreateTapePoolInput, Type: smithy.ShapeTypeStructure})
+var sCreateTapePoolOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTapePoolOutput, Members: &mCreateTapePoolOutput, Type: smithy.ShapeTypeStructure})
+var sCreateTapesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTapesInput, Members: &mCreateTapesInput, Type: smithy.ShapeTypeStructure})
+var sCreateTapesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTapesOutput, Members: &mCreateTapesOutput, Type: smithy.ShapeTypeStructure})
+var sCreateTapeWithBarcodeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTapeWithBarcodeInput, Members: &mCreateTapeWithBarcodeInput, Type: smithy.ShapeTypeStructure})
+var sCreateTapeWithBarcodeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTapeWithBarcodeOutput, Members: &mCreateTapeWithBarcodeOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteAutomaticTapeCreationPolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAutomaticTapeCreationPolicyInput, Members: &mDeleteAutomaticTapeCreationPolicyInput, Type: smithy.ShapeTypeStructure})
+var sDeleteAutomaticTapeCreationPolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAutomaticTapeCreationPolicyOutput, Members: &mDeleteAutomaticTapeCreationPolicyOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteBandwidthRateLimitInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBandwidthRateLimitInput, Members: &mDeleteBandwidthRateLimitInput, Type: smithy.ShapeTypeStructure})
+var sDeleteBandwidthRateLimitOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBandwidthRateLimitOutput, Members: &mDeleteBandwidthRateLimitOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteCacheReportInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCacheReportInput, Members: &mDeleteCacheReportInput, Type: smithy.ShapeTypeStructure})
+var sDeleteCacheReportOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCacheReportOutput, Members: &mDeleteCacheReportOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteChapCredentialsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChapCredentialsInput, Members: &mDeleteChapCredentialsInput, Type: smithy.ShapeTypeStructure})
+var sDeleteChapCredentialsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChapCredentialsOutput, Members: &mDeleteChapCredentialsOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteFileShareInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFileShareInput, Members: &mDeleteFileShareInput, Type: smithy.ShapeTypeStructure})
+var sDeleteFileShareOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFileShareOutput, Members: &mDeleteFileShareOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteGatewayInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteGatewayInput, Members: &mDeleteGatewayInput, Type: smithy.ShapeTypeStructure})
+var sDeleteGatewayOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteGatewayOutput, Members: &mDeleteGatewayOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteSnapshotScheduleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSnapshotScheduleInput, Members: &mDeleteSnapshotScheduleInput, Type: smithy.ShapeTypeStructure})
+var sDeleteSnapshotScheduleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSnapshotScheduleOutput, Members: &mDeleteSnapshotScheduleOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteTapeArchiveInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTapeArchiveInput, Members: &mDeleteTapeArchiveInput, Type: smithy.ShapeTypeStructure})
+var sDeleteTapeArchiveOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTapeArchiveOutput, Members: &mDeleteTapeArchiveOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteTapeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTapeInput, Members: &mDeleteTapeInput, Type: smithy.ShapeTypeStructure})
+var sDeleteTapeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTapeOutput, Members: &mDeleteTapeOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteTapePoolInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTapePoolInput, Members: &mDeleteTapePoolInput, Type: smithy.ShapeTypeStructure})
+var sDeleteTapePoolOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTapePoolOutput, Members: &mDeleteTapePoolOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteVolumeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVolumeInput, Members: &mDeleteVolumeInput, Type: smithy.ShapeTypeStructure})
+var sDeleteVolumeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVolumeOutput, Members: &mDeleteVolumeOutput, Type: smithy.ShapeTypeStructure})
+var sDescribeAvailabilityMonitorTestInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAvailabilityMonitorTestInput, Members: &mDescribeAvailabilityMonitorTestInput, Type: smithy.ShapeTypeStructure})
+var sDescribeAvailabilityMonitorTestOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAvailabilityMonitorTestOutput, Members: &mDescribeAvailabilityMonitorTestOutput, Type: smithy.ShapeTypeStructure})
+var sDescribeBandwidthRateLimitInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBandwidthRateLimitInput, Members: &mDescribeBandwidthRateLimitInput, Type: smithy.ShapeTypeStructure})
+var sDescribeBandwidthRateLimitOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBandwidthRateLimitOutput, Members: &mDescribeBandwidthRateLimitOutput, Type: smithy.ShapeTypeStructure})
+var sDescribeBandwidthRateLimitScheduleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBandwidthRateLimitScheduleInput, Members: &mDescribeBandwidthRateLimitScheduleInput, Type: smithy.ShapeTypeStructure})
+var sDescribeBandwidthRateLimitScheduleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBandwidthRateLimitScheduleOutput, Members: &mDescribeBandwidthRateLimitScheduleOutput, Type: smithy.ShapeTypeStructure})
+var sDescribeCachediSCSIVolumesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCachediSCSIVolumesInput, Members: &mDescribeCachediSCSIVolumesInput, Type: smithy.ShapeTypeStructure})
+var sDescribeCachediSCSIVolumesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCachediSCSIVolumesOutput, Members: &mDescribeCachediSCSIVolumesOutput, Type: smithy.ShapeTypeStructure})
+var sDescribeCacheInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCacheInput, Members: &mDescribeCacheInput, Type: smithy.ShapeTypeStructure})
+var sDescribeCacheOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCacheOutput, Members: &mDescribeCacheOutput, Type: smithy.ShapeTypeStructure})
+var sDescribeCacheReportInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCacheReportInput, Members: &mDescribeCacheReportInput, Type: smithy.ShapeTypeStructure})
+var sDescribeCacheReportOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCacheReportOutput, Members: &mDescribeCacheReportOutput, Type: smithy.ShapeTypeStructure})
+var sDescribeChapCredentialsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeChapCredentialsInput, Members: &mDescribeChapCredentialsInput, Type: smithy.ShapeTypeStructure})
+var sDescribeChapCredentialsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeChapCredentialsOutput, Members: &mDescribeChapCredentialsOutput, Type: smithy.ShapeTypeStructure})
+var sDescribeFileSystemAssociationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFileSystemAssociationsInput, Members: &mDescribeFileSystemAssociationsInput, Type: smithy.ShapeTypeStructure})
+var sDescribeFileSystemAssociationsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFileSystemAssociationsOutput, Members: &mDescribeFileSystemAssociationsOutput, Type: smithy.ShapeTypeStructure})
+var sDescribeGatewayInformationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeGatewayInformationInput, Members: &mDescribeGatewayInformationInput, Type: smithy.ShapeTypeStructure})
+var sDescribeGatewayInformationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeGatewayInformationOutput, Members: &mDescribeGatewayInformationOutput, Type: smithy.ShapeTypeStructure})
+var sDescribeMaintenanceStartTimeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeMaintenanceStartTimeInput, Members: &mDescribeMaintenanceStartTimeInput, Type: smithy.ShapeTypeStructure})
+var sDescribeMaintenanceStartTimeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeMaintenanceStartTimeOutput, Members: &mDescribeMaintenanceStartTimeOutput, Type: smithy.ShapeTypeStructure})
+var sDescribeNFSFileSharesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeNFSFileSharesInput, Members: &mDescribeNFSFileSharesInput, Type: smithy.ShapeTypeStructure})
+var sDescribeNFSFileSharesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeNFSFileSharesOutput, Members: &mDescribeNFSFileSharesOutput, Type: smithy.ShapeTypeStructure})
+var sDescribeSMBFileSharesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSMBFileSharesInput, Members: &mDescribeSMBFileSharesInput, Type: smithy.ShapeTypeStructure})
+var sDescribeSMBFileSharesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSMBFileSharesOutput, Members: &mDescribeSMBFileSharesOutput, Type: smithy.ShapeTypeStructure})
+var sDescribeSMBSettingsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSMBSettingsInput, Members: &mDescribeSMBSettingsInput, Type: smithy.ShapeTypeStructure})
+var sDescribeSMBSettingsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSMBSettingsOutput, Members: &mDescribeSMBSettingsOutput, Type: smithy.ShapeTypeStructure})
+var sDescribeSnapshotScheduleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSnapshotScheduleInput, Members: &mDescribeSnapshotScheduleInput, Type: smithy.ShapeTypeStructure})
+var sDescribeSnapshotScheduleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSnapshotScheduleOutput, Members: &mDescribeSnapshotScheduleOutput, Type: smithy.ShapeTypeStructure})
+var sDescribeStorediSCSIVolumesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeStorediSCSIVolumesInput, Members: &mDescribeStorediSCSIVolumesInput, Type: smithy.ShapeTypeStructure})
+var sDescribeStorediSCSIVolumesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeStorediSCSIVolumesOutput, Members: &mDescribeStorediSCSIVolumesOutput, Type: smithy.ShapeTypeStructure})
+var sDescribeTapeArchivesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTapeArchivesInput, Members: &mDescribeTapeArchivesInput, Type: smithy.ShapeTypeStructure})
+var sDescribeTapeArchivesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTapeArchivesOutput, Members: &mDescribeTapeArchivesOutput, Type: smithy.ShapeTypeStructure})
+var sDescribeTapeRecoveryPointsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTapeRecoveryPointsInput, Members: &mDescribeTapeRecoveryPointsInput, Type: smithy.ShapeTypeStructure})
+var sDescribeTapeRecoveryPointsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTapeRecoveryPointsOutput, Members: &mDescribeTapeRecoveryPointsOutput, Type: smithy.ShapeTypeStructure})
+var sDescribeTapesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTapesInput, Members: &mDescribeTapesInput, Type: smithy.ShapeTypeStructure})
+var sDescribeTapesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTapesOutput, Members: &mDescribeTapesOutput, Type: smithy.ShapeTypeStructure})
+var sDescribeUploadBufferInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeUploadBufferInput, Members: &mDescribeUploadBufferInput, Type: smithy.ShapeTypeStructure})
+var sDescribeUploadBufferOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeUploadBufferOutput, Members: &mDescribeUploadBufferOutput, Type: smithy.ShapeTypeStructure})
+var sDescribeVTLDevicesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeVTLDevicesInput, Members: &mDescribeVTLDevicesInput, Type: smithy.ShapeTypeStructure})
+var sDescribeVTLDevicesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeVTLDevicesOutput, Members: &mDescribeVTLDevicesOutput, Type: smithy.ShapeTypeStructure})
+var sDescribeWorkingStorageInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeWorkingStorageInput, Members: &mDescribeWorkingStorageInput, Type: smithy.ShapeTypeStructure})
+var sDescribeWorkingStorageOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeWorkingStorageOutput, Members: &mDescribeWorkingStorageOutput, Type: smithy.ShapeTypeStructure})
+var sDetachVolumeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDetachVolumeInput, Members: &mDetachVolumeInput, Type: smithy.ShapeTypeStructure})
+var sDetachVolumeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDetachVolumeOutput, Members: &mDetachVolumeOutput, Type: smithy.ShapeTypeStructure})
+var sDisableGatewayInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableGatewayInput, Members: &mDisableGatewayInput, Type: smithy.ShapeTypeStructure})
+var sDisableGatewayOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableGatewayOutput, Members: &mDisableGatewayOutput, Type: smithy.ShapeTypeStructure})
+var sDisassociateFileSystemInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateFileSystemInput, Members: &mDisassociateFileSystemInput, Type: smithy.ShapeTypeStructure})
+var sDisassociateFileSystemOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateFileSystemOutput, Members: &mDisassociateFileSystemOutput, Type: smithy.ShapeTypeStructure})
+var sEvictFilesFailingUploadInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvictFilesFailingUploadInput, Members: &mEvictFilesFailingUploadInput, Type: smithy.ShapeTypeStructure})
+var sEvictFilesFailingUploadOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvictFilesFailingUploadOutput, Members: &mEvictFilesFailingUploadOutput, Type: smithy.ShapeTypeStructure})
+var sJoinDomainInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJoinDomainInput, Members: &mJoinDomainInput, Type: smithy.ShapeTypeStructure})
+var sJoinDomainOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJoinDomainOutput, Members: &mJoinDomainOutput, Type: smithy.ShapeTypeStructure})
+var sListAutomaticTapeCreationPoliciesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAutomaticTapeCreationPoliciesInput, Members: &mListAutomaticTapeCreationPoliciesInput, Type: smithy.ShapeTypeStructure})
+var sListAutomaticTapeCreationPoliciesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAutomaticTapeCreationPoliciesOutput, Members: &mListAutomaticTapeCreationPoliciesOutput, Type: smithy.ShapeTypeStructure})
+var sListCacheReportsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCacheReportsInput, Members: &mListCacheReportsInput, Type: smithy.ShapeTypeStructure})
+var sListCacheReportsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCacheReportsOutput, Members: &mListCacheReportsOutput, Type: smithy.ShapeTypeStructure})
+var sListFileSharesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFileSharesInput, Members: &mListFileSharesInput, Type: smithy.ShapeTypeStructure})
+var sListFileSharesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFileSharesOutput, Members: &mListFileSharesOutput, Type: smithy.ShapeTypeStructure})
+var sListFileSystemAssociationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFileSystemAssociationsInput, Members: &mListFileSystemAssociationsInput, Type: smithy.ShapeTypeStructure})
+var sListFileSystemAssociationsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFileSystemAssociationsOutput, Members: &mListFileSystemAssociationsOutput, Type: smithy.ShapeTypeStructure})
+var sListGatewaysInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGatewaysInput, Members: &mListGatewaysInput, Type: smithy.ShapeTypeStructure})
+var sListGatewaysOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGatewaysOutput, Members: &mListGatewaysOutput, Type: smithy.ShapeTypeStructure})
+var sListLocalDisksInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLocalDisksInput, Members: &mListLocalDisksInput, Type: smithy.ShapeTypeStructure})
+var sListLocalDisksOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLocalDisksOutput, Members: &mListLocalDisksOutput, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceInput, Members: &mListTagsForResourceInput, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceOutput, Members: &mListTagsForResourceOutput, Type: smithy.ShapeTypeStructure})
+var sListTapePoolsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTapePoolsInput, Members: &mListTapePoolsInput, Type: smithy.ShapeTypeStructure})
+var sListTapePoolsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTapePoolsOutput, Members: &mListTapePoolsOutput, Type: smithy.ShapeTypeStructure})
+var sListTapesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTapesInput, Members: &mListTapesInput, Type: smithy.ShapeTypeStructure})
+var sListTapesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTapesOutput, Members: &mListTapesOutput, Type: smithy.ShapeTypeStructure})
+var sListVolumeInitiatorsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVolumeInitiatorsInput, Members: &mListVolumeInitiatorsInput, Type: smithy.ShapeTypeStructure})
+var sListVolumeInitiatorsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVolumeInitiatorsOutput, Members: &mListVolumeInitiatorsOutput, Type: smithy.ShapeTypeStructure})
+var sListVolumeRecoveryPointsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVolumeRecoveryPointsInput, Members: &mListVolumeRecoveryPointsInput, Type: smithy.ShapeTypeStructure})
+var sListVolumeRecoveryPointsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVolumeRecoveryPointsOutput, Members: &mListVolumeRecoveryPointsOutput, Type: smithy.ShapeTypeStructure})
+var sListVolumesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVolumesInput, Members: &mListVolumesInput, Type: smithy.ShapeTypeStructure})
+var sListVolumesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVolumesOutput, Members: &mListVolumesOutput, Type: smithy.ShapeTypeStructure})
+var sNotifyWhenUploadedInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotifyWhenUploadedInput, Members: &mNotifyWhenUploadedInput, Type: smithy.ShapeTypeStructure})
+var sNotifyWhenUploadedOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotifyWhenUploadedOutput, Members: &mNotifyWhenUploadedOutput, Type: smithy.ShapeTypeStructure})
+var sRefreshCacheInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRefreshCacheInput, Members: &mRefreshCacheInput, Type: smithy.ShapeTypeStructure})
+var sRefreshCacheOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRefreshCacheOutput, Members: &mRefreshCacheOutput, Type: smithy.ShapeTypeStructure})
+var sRemoveTagsFromResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveTagsFromResourceInput, Members: &mRemoveTagsFromResourceInput, Type: smithy.ShapeTypeStructure})
+var sRemoveTagsFromResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveTagsFromResourceOutput, Members: &mRemoveTagsFromResourceOutput, Type: smithy.ShapeTypeStructure})
+var sResetCacheInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetCacheInput, Members: &mResetCacheInput, Type: smithy.ShapeTypeStructure})
+var sResetCacheOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetCacheOutput, Members: &mResetCacheOutput, Type: smithy.ShapeTypeStructure})
+var sRetrieveTapeArchiveInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetrieveTapeArchiveInput, Members: &mRetrieveTapeArchiveInput, Type: smithy.ShapeTypeStructure})
+var sRetrieveTapeArchiveOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetrieveTapeArchiveOutput, Members: &mRetrieveTapeArchiveOutput, Type: smithy.ShapeTypeStructure})
+var sRetrieveTapeRecoveryPointInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetrieveTapeRecoveryPointInput, Members: &mRetrieveTapeRecoveryPointInput, Type: smithy.ShapeTypeStructure})
+var sRetrieveTapeRecoveryPointOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetrieveTapeRecoveryPointOutput, Members: &mRetrieveTapeRecoveryPointOutput, Type: smithy.ShapeTypeStructure})
+var sSetLocalConsolePasswordInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetLocalConsolePasswordInput, Members: &mSetLocalConsolePasswordInput, Type: smithy.ShapeTypeStructure})
+var sSetLocalConsolePasswordOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetLocalConsolePasswordOutput, Members: &mSetLocalConsolePasswordOutput, Type: smithy.ShapeTypeStructure})
+var sSetSMBGuestPasswordInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetSMBGuestPasswordInput, Members: &mSetSMBGuestPasswordInput, Type: smithy.ShapeTypeStructure})
+var sSetSMBGuestPasswordOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetSMBGuestPasswordOutput, Members: &mSetSMBGuestPasswordOutput, Type: smithy.ShapeTypeStructure})
+var sShutdownGatewayInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShutdownGatewayInput, Members: &mShutdownGatewayInput, Type: smithy.ShapeTypeStructure})
+var sShutdownGatewayOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShutdownGatewayOutput, Members: &mShutdownGatewayOutput, Type: smithy.ShapeTypeStructure})
+var sStartAvailabilityMonitorTestInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartAvailabilityMonitorTestInput, Members: &mStartAvailabilityMonitorTestInput, Type: smithy.ShapeTypeStructure})
+var sStartAvailabilityMonitorTestOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartAvailabilityMonitorTestOutput, Members: &mStartAvailabilityMonitorTestOutput, Type: smithy.ShapeTypeStructure})
+var sStartCacheReportInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartCacheReportInput, Members: &mStartCacheReportInput, Type: smithy.ShapeTypeStructure})
+var sStartCacheReportOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartCacheReportOutput, Members: &mStartCacheReportOutput, Type: smithy.ShapeTypeStructure})
+var sStartGatewayInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartGatewayInput, Members: &mStartGatewayInput, Type: smithy.ShapeTypeStructure})
+var sStartGatewayOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartGatewayOutput, Members: &mStartGatewayOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateAutomaticTapeCreationPolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAutomaticTapeCreationPolicyInput, Members: &mUpdateAutomaticTapeCreationPolicyInput, Type: smithy.ShapeTypeStructure})
+var sUpdateAutomaticTapeCreationPolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAutomaticTapeCreationPolicyOutput, Members: &mUpdateAutomaticTapeCreationPolicyOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateBandwidthRateLimitInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBandwidthRateLimitInput, Members: &mUpdateBandwidthRateLimitInput, Type: smithy.ShapeTypeStructure})
+var sUpdateBandwidthRateLimitOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBandwidthRateLimitOutput, Members: &mUpdateBandwidthRateLimitOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateBandwidthRateLimitScheduleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBandwidthRateLimitScheduleInput, Members: &mUpdateBandwidthRateLimitScheduleInput, Type: smithy.ShapeTypeStructure})
+var sUpdateBandwidthRateLimitScheduleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBandwidthRateLimitScheduleOutput, Members: &mUpdateBandwidthRateLimitScheduleOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateChapCredentialsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChapCredentialsInput, Members: &mUpdateChapCredentialsInput, Type: smithy.ShapeTypeStructure})
+var sUpdateChapCredentialsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChapCredentialsOutput, Members: &mUpdateChapCredentialsOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateFileSystemAssociationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFileSystemAssociationInput, Members: &mUpdateFileSystemAssociationInput, Type: smithy.ShapeTypeStructure})
+var sUpdateFileSystemAssociationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFileSystemAssociationOutput, Members: &mUpdateFileSystemAssociationOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateGatewayInformationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateGatewayInformationInput, Members: &mUpdateGatewayInformationInput, Type: smithy.ShapeTypeStructure})
+var sUpdateGatewayInformationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateGatewayInformationOutput, Members: &mUpdateGatewayInformationOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateGatewaySoftwareNowInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateGatewaySoftwareNowInput, Members: &mUpdateGatewaySoftwareNowInput, Type: smithy.ShapeTypeStructure})
+var sUpdateGatewaySoftwareNowOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateGatewaySoftwareNowOutput, Members: &mUpdateGatewaySoftwareNowOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateMaintenanceStartTimeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMaintenanceStartTimeInput, Members: &mUpdateMaintenanceStartTimeInput, Type: smithy.ShapeTypeStructure})
+var sUpdateMaintenanceStartTimeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMaintenanceStartTimeOutput, Members: &mUpdateMaintenanceStartTimeOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateNFSFileShareInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNFSFileShareInput, Members: &mUpdateNFSFileShareInput, Type: smithy.ShapeTypeStructure})
+var sUpdateNFSFileShareOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNFSFileShareOutput, Members: &mUpdateNFSFileShareOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateSMBFileShareInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSMBFileShareInput, Members: &mUpdateSMBFileShareInput, Type: smithy.ShapeTypeStructure})
+var sUpdateSMBFileShareOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSMBFileShareOutput, Members: &mUpdateSMBFileShareOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateSMBFileShareVisibilityInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSMBFileShareVisibilityInput, Members: &mUpdateSMBFileShareVisibilityInput, Type: smithy.ShapeTypeStructure})
+var sUpdateSMBFileShareVisibilityOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSMBFileShareVisibilityOutput, Members: &mUpdateSMBFileShareVisibilityOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateSMBLocalGroupsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSMBLocalGroupsInput, Members: &mUpdateSMBLocalGroupsInput, Type: smithy.ShapeTypeStructure})
+var sUpdateSMBLocalGroupsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSMBLocalGroupsOutput, Members: &mUpdateSMBLocalGroupsOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateSMBSecurityStrategyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSMBSecurityStrategyInput, Members: &mUpdateSMBSecurityStrategyInput, Type: smithy.ShapeTypeStructure})
+var sUpdateSMBSecurityStrategyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSMBSecurityStrategyOutput, Members: &mUpdateSMBSecurityStrategyOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateSnapshotScheduleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSnapshotScheduleInput, Members: &mUpdateSnapshotScheduleInput, Type: smithy.ShapeTypeStructure})
+var sUpdateSnapshotScheduleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSnapshotScheduleOutput, Members: &mUpdateSnapshotScheduleOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateVTLDeviceTypeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVTLDeviceTypeInput, Members: &mUpdateVTLDeviceTypeInput, Type: smithy.ShapeTypeStructure})
+var sUpdateVTLDeviceTypeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVTLDeviceTypeOutput, Members: &mUpdateVTLDeviceTypeOutput, Type: smithy.ShapeTypeStructure})
+
+var sActiveDirectoryStatus_ACCESS_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCESS_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sActiveDirectoryStatus_DETACHED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DETACHED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sActiveDirectoryStatus_JOINED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JOINED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sActiveDirectoryStatus_JOINING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JOINING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sActiveDirectoryStatus_NETWORK_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NETWORK_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sActiveDirectoryStatus_TIMEOUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIMEOUT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sActiveDirectoryStatus_UNKNOWN_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sActiveDirectoryStatus_INSUFFICIENT_PERMISSIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSUFFICIENT_PERMISSIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAutomaticTapeCreationPolicyInfo_AutomaticTapeCreationRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutomaticTapeCreationRules", ID: &i_AutomaticTapeCreationRules, Members: &m_AutomaticTapeCreationRules, Type: smithy.ShapeTypeList})
+var sAutomaticTapeCreationPolicyInfo_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var s_AutomaticTapeCreationPolicyInfos_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAutomaticTapeCreationPolicyInfo, Members: &mAutomaticTapeCreationPolicyInfo, Type: smithy.ShapeTypeStructure})
+var sAutomaticTapeCreationRule_TapeBarcodePrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeBarcodePrefix", ID: &i_TapeBarcodePrefix, Type: smithy.ShapeTypeString})
+var sAutomaticTapeCreationRule_PoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoolId", ID: &i_PoolId, Type: smithy.ShapeTypeString})
+var sAutomaticTapeCreationRule_TapeSizeInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeSizeInBytes", ID: &i_TapeSize, Type: smithy.ShapeTypeLong})
+var sAutomaticTapeCreationRule_MinimumNumTapes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinimumNumTapes", ID: &i_MinimumNumTapes, Type: smithy.ShapeTypeInteger})
+var sAutomaticTapeCreationRule_Worm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Worm", ID: &i_Boolean2, Type: smithy.ShapeTypeBoolean})
+var s_AutomaticTapeCreationRules_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAutomaticTapeCreationRule, Members: &mAutomaticTapeCreationRule, Type: smithy.ShapeTypeStructure})
+var sAutomaticUpdatePolicy_ALL_VERSIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL_VERSIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAutomaticUpdatePolicy_EMERGENCY_VERSIONS_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EMERGENCY_VERSIONS_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAvailabilityMonitorTestStatus_COMPLETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAvailabilityMonitorTestStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAvailabilityMonitorTestStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBandwidthRateLimitInterval_StartHourOfDay = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartHourOfDay", ID: &i_HourOfDay, Type: smithy.ShapeTypeInteger})
+var sBandwidthRateLimitInterval_StartMinuteOfHour = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartMinuteOfHour", ID: &i_MinuteOfHour, Type: smithy.ShapeTypeInteger})
+var sBandwidthRateLimitInterval_EndHourOfDay = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndHourOfDay", ID: &i_HourOfDay, Type: smithy.ShapeTypeInteger})
+var sBandwidthRateLimitInterval_EndMinuteOfHour = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndMinuteOfHour", ID: &i_MinuteOfHour, Type: smithy.ShapeTypeInteger})
+var sBandwidthRateLimitInterval_DaysOfWeek = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DaysOfWeek", ID: &i_DaysOfWeek, Members: &m_DaysOfWeek, Type: smithy.ShapeTypeList})
+var sBandwidthRateLimitInterval_AverageUploadRateLimitInBitsPerSec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AverageUploadRateLimitInBitsPerSec", ID: &i_BandwidthUploadRateLimit, Type: smithy.ShapeTypeLong})
+var sBandwidthRateLimitInterval_AverageDownloadRateLimitInBitsPerSec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AverageDownloadRateLimitInBitsPerSec", ID: &i_BandwidthDownloadRateLimit, Type: smithy.ShapeTypeLong})
+var s_BandwidthRateLimitIntervals_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBandwidthRateLimitInterval, Members: &mBandwidthRateLimitInterval, Type: smithy.ShapeTypeStructure})
+var sCacheAttributes_CacheStaleTimeoutInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CacheStaleTimeoutInSeconds", ID: &i_CacheStaleTimeoutInSeconds, Type: smithy.ShapeTypeInteger})
+var sCachediSCSIVolume_VolumeARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeARN", ID: &i_VolumeARN, Type: smithy.ShapeTypeString})
+var sCachediSCSIVolume_VolumeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeId", ID: &i_VolumeId, Type: smithy.ShapeTypeString})
+var sCachediSCSIVolume_VolumeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeType", ID: &i_VolumeType, Type: smithy.ShapeTypeString})
+var sCachediSCSIVolume_VolumeStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeStatus", ID: &i_VolumeStatus, Type: smithy.ShapeTypeString})
+var sCachediSCSIVolume_VolumeAttachmentStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeAttachmentStatus", ID: &i_VolumeAttachmentStatus, Type: smithy.ShapeTypeString})
+var sCachediSCSIVolume_VolumeSizeInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeSizeInBytes", ID: &i_long, Type: smithy.ShapeTypeLong})
+var sCachediSCSIVolume_VolumeProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeProgress", ID: &i_DoubleObject, Type: smithy.ShapeTypeDouble})
+var sCachediSCSIVolume_SourceSnapshotId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceSnapshotId", ID: &i_SnapshotId, Type: smithy.ShapeTypeString})
+var sCachediSCSIVolume_VolumeiSCSIAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeiSCSIAttributes", ID: &iVolumeiSCSIAttributes, Members: &mVolumeiSCSIAttributes, Type: smithy.ShapeTypeStructure})
+var sCachediSCSIVolume_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &i_CreatedDate, Type: smithy.ShapeTypeTimestamp})
+var sCachediSCSIVolume_VolumeUsedInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeUsedInBytes", ID: &i_VolumeUsedInBytes, Type: smithy.ShapeTypeLong})
+var sCachediSCSIVolume_KMSKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMSKey", ID: &i_KMSKey, Type: smithy.ShapeTypeString})
+var sCachediSCSIVolume_TargetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetName", ID: &i_TargetName, Type: smithy.ShapeTypeString})
+var s_CachediSCSIVolumes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCachediSCSIVolume, Members: &mCachediSCSIVolume, Type: smithy.ShapeTypeStructure})
+var sCacheReportFilter_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &iCacheReportFilterName, Members: &mCacheReportFilterName, Type: smithy.ShapeTypeEnum})
+var sCacheReportFilter_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_CacheReportFilterValues, Members: &m_CacheReportFilterValues, Type: smithy.ShapeTypeList})
+var s_CacheReportFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCacheReportFilter, Members: &mCacheReportFilter, Type: smithy.ShapeTypeStructure})
+var sCacheReportFilterName_UploadState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UploadState", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCacheReportFilterName_UploadFailureReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UploadFailureReason", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_CacheReportFilterValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CacheReportFilterValue, Type: smithy.ShapeTypeString})
+var sCacheReportInfo_CacheReportARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CacheReportARN", ID: &i_CacheReportARN, Type: smithy.ShapeTypeString})
+var sCacheReportInfo_CacheReportStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CacheReportStatus", ID: &iCacheReportStatus, Members: &mCacheReportStatus, Type: smithy.ShapeTypeEnum})
+var sCacheReportInfo_ReportCompletionPercent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReportCompletionPercent", ID: &i_ReportCompletionPercent, Type: smithy.ShapeTypeInteger})
+var sCacheReportInfo_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i_Time, Type: smithy.ShapeTypeTimestamp})
+var sCacheReportInfo_Role = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Role", ID: &i_Role, Type: smithy.ShapeTypeString})
+var sCacheReportInfo_FileShareARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileShareARN", ID: &i_FileShareARN, Type: smithy.ShapeTypeString})
+var sCacheReportInfo_LocationARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationARN", ID: &i_LocationARN, Type: smithy.ShapeTypeString})
+var sCacheReportInfo_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_Time, Type: smithy.ShapeTypeTimestamp})
+var sCacheReportInfo_InclusionFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InclusionFilters", ID: &i_CacheReportFilterList, Members: &m_CacheReportFilterList, Type: smithy.ShapeTypeList})
+var sCacheReportInfo_ExclusionFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExclusionFilters", ID: &i_CacheReportFilterList, Members: &m_CacheReportFilterList, Type: smithy.ShapeTypeList})
+var sCacheReportInfo_ReportName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReportName", ID: &i_CacheReportName, Type: smithy.ShapeTypeString})
+var sCacheReportInfo_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var s_CacheReportList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCacheReportInfo, Members: &mCacheReportInfo, Type: smithy.ShapeTypeStructure})
+var sCacheReportStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCacheReportStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCacheReportStatus_CANCELED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCacheReportStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCacheReportStatus_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCaseSensitivity_ClientSpecified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientSpecified", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCaseSensitivity_CaseSensitive = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CaseSensitive", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_ChapCredentials_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iChapInfo, Members: &mChapInfo, Type: smithy.ShapeTypeStructure})
+var sChapInfo_TargetARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetARN", ID: &i_TargetARN, Type: smithy.ShapeTypeString})
+var sChapInfo_SecretToAuthenticateInitiator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretToAuthenticateInitiator", ID: &i_ChapSecret, Traits: &t1, Type: smithy.ShapeTypeString})
+var sChapInfo_InitiatorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InitiatorName", ID: &i_IqnName, Type: smithy.ShapeTypeString})
+var sChapInfo_SecretToAuthenticateTarget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretToAuthenticateTarget", ID: &i_ChapSecret, Traits: &t1, Type: smithy.ShapeTypeString})
+var s_DaysOfWeek_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_DayOfWeek, Type: smithy.ShapeTypeInteger})
+var sDeviceiSCSIAttributes_TargetARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetARN", ID: &i_TargetARN, Type: smithy.ShapeTypeString})
+var sDeviceiSCSIAttributes_NetworkInterfaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkInterfaceId", ID: &i_NetworkInterfaceId, Type: smithy.ShapeTypeString})
+var sDeviceiSCSIAttributes_NetworkInterfacePort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkInterfacePort", ID: &i_integer, Type: smithy.ShapeTypeInteger})
+var sDeviceiSCSIAttributes_ChapEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChapEnabled", ID: &i_Boolean2, Type: smithy.ShapeTypeBoolean})
+var sDisk_DiskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiskId", ID: &i_DiskId, Type: smithy.ShapeTypeString})
+var sDisk_DiskPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiskPath", ID: &i_string, Type: smithy.ShapeTypeString})
+var sDisk_DiskNode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiskNode", ID: &i_string, Type: smithy.ShapeTypeString})
+var sDisk_DiskStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiskStatus", ID: &i_string, Type: smithy.ShapeTypeString})
+var sDisk_DiskSizeInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiskSizeInBytes", ID: &i_long, Type: smithy.ShapeTypeLong})
+var sDisk_DiskAllocationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiskAllocationType", ID: &i_DiskAllocationType, Type: smithy.ShapeTypeString})
+var sDisk_DiskAllocationResource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiskAllocationResource", ID: &i_string, Type: smithy.ShapeTypeString})
+var sDisk_DiskAttributeList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiskAttributeList", ID: &i_DiskAttributeList, Members: &m_DiskAttributeList, Type: smithy.ShapeTypeList})
+var s_DiskAttributeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_DiskAttribute, Type: smithy.ShapeTypeString})
+var s_DiskIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_DiskId, Type: smithy.ShapeTypeString})
+var s_Disks_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDisk, Members: &mDisk, Type: smithy.ShapeTypeStructure})
+var sEncryptionType_SseS3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SseS3", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEncryptionType_SseKms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SseKms", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEncryptionType_DsseKms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DsseKms", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEndpointNetworkConfiguration_IpAddresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddresses", ID: &i_IpAddressList, Members: &m_IpAddressList, Type: smithy.ShapeTypeList})
+var sErrorCode_ActivationKeyExpired = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActivationKeyExpired", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_ActivationKeyInvalid = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActivationKeyInvalid", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_ActivationKeyNotFound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActivationKeyNotFound", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_GatewayInternalError = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayInternalError", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_GatewayNotConnected = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayNotConnected", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_GatewayNotFound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayNotFound", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_GatewayProxyNetworkConnectionBusy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayProxyNetworkConnectionBusy", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_AuthenticationFailure = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthenticationFailure", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_BandwidthThrottleScheduleNotFound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BandwidthThrottleScheduleNotFound", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_Blocked = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Blocked", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_CannotExportSnapshot = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CannotExportSnapshot", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_ChapCredentialNotFound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChapCredentialNotFound", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_DiskAlreadyAllocated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiskAlreadyAllocated", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_DiskDoesNotExist = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiskDoesNotExist", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_DiskSizeGreaterThanVolumeMaxSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiskSizeGreaterThanVolumeMaxSize", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_DiskSizeLessThanVolumeSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiskSizeLessThanVolumeSize", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_DiskSizeNotGigAligned = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiskSizeNotGigAligned", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_DuplicateCertificateInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DuplicateCertificateInfo", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_DuplicateSchedule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DuplicateSchedule", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_EndpointNotFound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointNotFound", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_IAMNotSupported = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IAMNotSupported", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_InitiatorInvalid = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InitiatorInvalid", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_InitiatorNotFound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InitiatorNotFound", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_InternalError = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InternalError", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_InvalidGateway = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvalidGateway", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_InvalidEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvalidEndpoint", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_InvalidParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvalidParameters", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_InvalidSchedule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvalidSchedule", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_LocalStorageLimitExceeded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocalStorageLimitExceeded", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_LunAlreadyAllocated_ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LunAlreadyAllocated_", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_LunInvalid = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LunInvalid", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_JoinDomainInProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JoinDomainInProgress", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_MaximumContentLengthExceeded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaximumContentLengthExceeded", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_MaximumTapeCartridgeCountExceeded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaximumTapeCartridgeCountExceeded", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_MaximumVolumeCountExceeded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaximumVolumeCountExceeded", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_NetworkConfigurationChanged = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkConfigurationChanged", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_NoDisksAvailable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NoDisksAvailable", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_NotImplemented = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotImplemented", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_NotSupported = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotSupported", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_OperationAborted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationAborted", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_OutdatedGateway = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutdatedGateway", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_ParametersNotImplemented = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParametersNotImplemented", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_RegionInvalid = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegionInvalid", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_RequestTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestTimeout", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_ServiceUnavailable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceUnavailable", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_SnapshotDeleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotDeleted", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_SnapshotIdInvalid = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotIdInvalid", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_SnapshotInProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotInProgress", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_SnapshotNotFound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotNotFound", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_SnapshotScheduleNotFound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotScheduleNotFound", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_StagingAreaFull = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StagingAreaFull", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_StorageFailure = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageFailure", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_TapeCartridgeNotFound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeCartridgeNotFound", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_TargetAlreadyExists = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetAlreadyExists", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_TargetInvalid = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetInvalid", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_TargetNotFound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetNotFound", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_UnauthorizedOperation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UnauthorizedOperation", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_VolumeAlreadyExists = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeAlreadyExists", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_VolumeIdInvalid = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeIdInvalid", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_VolumeInUse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeInUse", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_VolumeNotFound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeNotFound", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_VolumeNotReady = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeNotReady", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_errorDetails_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_string, Type: smithy.ShapeTypeString})
+var s_errorDetails_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_string, Type: smithy.ShapeTypeString})
+var s_FileShareARNList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_FileShareARN, Type: smithy.ShapeTypeString})
+var s_FileShareClientList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Ipv4OrIpv6AddressCIDR, Type: smithy.ShapeTypeString})
+var sFileShareInfo_FileShareType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileShareType", ID: &iFileShareType, Members: &mFileShareType, Type: smithy.ShapeTypeEnum})
+var sFileShareInfo_FileShareARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileShareARN", ID: &i_FileShareARN, Type: smithy.ShapeTypeString})
+var sFileShareInfo_FileShareId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileShareId", ID: &i_FileShareId, Type: smithy.ShapeTypeString})
+var sFileShareInfo_FileShareStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileShareStatus", ID: &i_FileShareStatus, Type: smithy.ShapeTypeString})
+var sFileShareInfo_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var s_FileShareInfoList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFileShareInfo, Members: &mFileShareInfo, Type: smithy.ShapeTypeStructure})
+var sFileShareType_NFS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NFS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFileShareType_SMB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SMB", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_FileSystemAssociationARNList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_FileSystemAssociationARN, Type: smithy.ShapeTypeString})
+var sFileSystemAssociationInfo_FileSystemAssociationARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemAssociationARN", ID: &i_FileSystemAssociationARN, Type: smithy.ShapeTypeString})
+var sFileSystemAssociationInfo_LocationARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationARN", ID: &i_FileSystemLocationARN, Type: smithy.ShapeTypeString})
+var sFileSystemAssociationInfo_FileSystemAssociationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemAssociationStatus", ID: &i_FileSystemAssociationStatus, Type: smithy.ShapeTypeString})
+var sFileSystemAssociationInfo_AuditDestinationARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuditDestinationARN", ID: &i_AuditDestinationARN, Type: smithy.ShapeTypeString})
+var sFileSystemAssociationInfo_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sFileSystemAssociationInfo_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sFileSystemAssociationInfo_CacheAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CacheAttributes", ID: &iCacheAttributes, Members: &mCacheAttributes, Type: smithy.ShapeTypeStructure})
+var sFileSystemAssociationInfo_EndpointNetworkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointNetworkConfiguration", ID: &iEndpointNetworkConfiguration, Members: &mEndpointNetworkConfiguration, Type: smithy.ShapeTypeStructure})
+var sFileSystemAssociationInfo_FileSystemAssociationStatusDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemAssociationStatusDetails", ID: &i_FileSystemAssociationStatusDetails, Members: &m_FileSystemAssociationStatusDetails, Type: smithy.ShapeTypeList})
+var s_FileSystemAssociationInfoList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFileSystemAssociationInfo, Members: &mFileSystemAssociationInfo, Type: smithy.ShapeTypeStructure})
+var sFileSystemAssociationStatusDetail_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_FileSystemAssociationSyncErrorCode, Type: smithy.ShapeTypeString})
+var s_FileSystemAssociationStatusDetails_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFileSystemAssociationStatusDetail, Members: &mFileSystemAssociationStatusDetail, Type: smithy.ShapeTypeStructure})
+var sFileSystemAssociationSummary_FileSystemAssociationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemAssociationId", ID: &i_FileSystemAssociationId, Type: smithy.ShapeTypeString})
+var sFileSystemAssociationSummary_FileSystemAssociationARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemAssociationARN", ID: &i_FileSystemAssociationARN, Type: smithy.ShapeTypeString})
+var sFileSystemAssociationSummary_FileSystemAssociationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemAssociationStatus", ID: &i_FileSystemAssociationStatus, Type: smithy.ShapeTypeString})
+var sFileSystemAssociationSummary_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var s_FileSystemAssociationSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFileSystemAssociationSummary, Members: &mFileSystemAssociationSummary, Type: smithy.ShapeTypeStructure})
+var s_FolderList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Folder, Type: smithy.ShapeTypeString})
+var sGatewayCapacity_Small = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Small", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sGatewayCapacity_Medium = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Medium", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sGatewayCapacity_Large = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Large", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sGatewayInfo_GatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayId", ID: &i_GatewayId, Type: smithy.ShapeTypeString})
+var sGatewayInfo_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sGatewayInfo_GatewayType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayType", ID: &i_GatewayType, Type: smithy.ShapeTypeString})
+var sGatewayInfo_GatewayOperationalState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayOperationalState", ID: &i_GatewayOperationalState, Type: smithy.ShapeTypeString})
+var sGatewayInfo_GatewayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayName", ID: &i_string, Type: smithy.ShapeTypeString})
+var sGatewayInfo_Ec2InstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ec2InstanceId", ID: &i_Ec2InstanceId, Type: smithy.ShapeTypeString})
+var sGatewayInfo_Ec2InstanceRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ec2InstanceRegion", ID: &i_Ec2InstanceRegion, Type: smithy.ShapeTypeString})
+var sGatewayInfo_HostEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HostEnvironment", ID: &iHostEnvironment, Members: &mHostEnvironment, Type: smithy.ShapeTypeEnum})
+var sGatewayInfo_HostEnvironmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HostEnvironmentId", ID: &i_HostEnvironmentId, Type: smithy.ShapeTypeString})
+var sGatewayInfo_DeprecationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeprecationDate", ID: &i_DeprecationDate, Type: smithy.ShapeTypeString})
+var sGatewayInfo_SoftwareVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SoftwareVersion", ID: &i_SoftwareVersion, Type: smithy.ShapeTypeString})
+var s_GatewayNetworkInterfaces_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNetworkInterface, Members: &mNetworkInterface, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_Gateways_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGatewayInfo, Members: &mGatewayInfo, Type: smithy.ShapeTypeStructure})
+var sHostEnvironment_VMWARE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VMWARE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHostEnvironment_HYPER_V = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HYPER_V", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHostEnvironment_EC2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EC2", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHostEnvironment_KVM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KVM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHostEnvironment_OTHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHostEnvironment_SNOWBALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SNOWBALL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_Hosts_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Host, Type: smithy.ShapeTypeString})
+var s_Initiators_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Initiator, Type: smithy.ShapeTypeString})
+var sInternalServerError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_string, Type: smithy.ShapeTypeString})
+var sInternalServerError_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &iStorageGatewayError, Members: &mStorageGatewayError, Type: smithy.ShapeTypeStructure})
+var sInvalidGatewayRequestException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_string, Type: smithy.ShapeTypeString})
+var sInvalidGatewayRequestException_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &iStorageGatewayError, Members: &mStorageGatewayError, Type: smithy.ShapeTypeStructure})
+var s_IpAddressList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_IPV4Address, Type: smithy.ShapeTypeString})
+var sNetworkInterface_Ipv4Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ipv4Address", ID: &i_string, Type: smithy.ShapeTypeString})
+var sNetworkInterface_MacAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MacAddress", ID: &i_string, Type: smithy.ShapeTypeString})
+var sNetworkInterface_Ipv6Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ipv6Address", ID: &i_string, Type: smithy.ShapeTypeString})
+var sNFSFileShareDefaults_FileMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileMode", ID: &i_PermissionMode, Type: smithy.ShapeTypeString})
+var sNFSFileShareDefaults_DirectoryMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryMode", ID: &i_PermissionMode, Type: smithy.ShapeTypeString})
+var sNFSFileShareDefaults_GroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupId", ID: &i_PermissionId, Type: smithy.ShapeTypeLong})
+var sNFSFileShareDefaults_OwnerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OwnerId", ID: &i_PermissionId, Type: smithy.ShapeTypeLong})
+var sNFSFileShareInfo_NFSFileShareDefaults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NFSFileShareDefaults", ID: &iNFSFileShareDefaults, Members: &mNFSFileShareDefaults, Type: smithy.ShapeTypeStructure})
+var sNFSFileShareInfo_FileShareARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileShareARN", ID: &i_FileShareARN, Type: smithy.ShapeTypeString})
+var sNFSFileShareInfo_FileShareId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileShareId", ID: &i_FileShareId, Type: smithy.ShapeTypeString})
+var sNFSFileShareInfo_FileShareStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileShareStatus", ID: &i_FileShareStatus, Type: smithy.ShapeTypeString})
+var sNFSFileShareInfo_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sNFSFileShareInfo_EncryptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionType", ID: &iEncryptionType, Members: &mEncryptionType, Type: smithy.ShapeTypeEnum})
+var sNFSFileShareInfo_KMSEncrypted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMSEncrypted", ID: &i_Boolean2, Type: smithy.ShapeTypeBoolean})
+var sNFSFileShareInfo_KMSKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMSKey", ID: &i_KMSKey, Type: smithy.ShapeTypeString})
+var sNFSFileShareInfo_Path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Path", ID: &i_Path, Type: smithy.ShapeTypeString})
+var sNFSFileShareInfo_Role = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Role", ID: &i_Role, Type: smithy.ShapeTypeString})
+var sNFSFileShareInfo_LocationARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationARN", ID: &i_LocationARN, Type: smithy.ShapeTypeString})
+var sNFSFileShareInfo_DefaultStorageClass = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultStorageClass", ID: &i_StorageClass, Type: smithy.ShapeTypeString})
+var sNFSFileShareInfo_ObjectACL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectACL", ID: &iObjectACL, Members: &mObjectACL, Type: smithy.ShapeTypeEnum})
+var sNFSFileShareInfo_ClientList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientList", ID: &i_FileShareClientList, Members: &m_FileShareClientList, Type: smithy.ShapeTypeList})
+var sNFSFileShareInfo_Squash = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Squash", ID: &i_Squash, Type: smithy.ShapeTypeString})
+var sNFSFileShareInfo_ReadOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadOnly", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sNFSFileShareInfo_GuessMIMETypeEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GuessMIMETypeEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sNFSFileShareInfo_RequesterPays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequesterPays", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sNFSFileShareInfo_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sNFSFileShareInfo_FileShareName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileShareName", ID: &i_FileShareName, Type: smithy.ShapeTypeString})
+var sNFSFileShareInfo_CacheAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CacheAttributes", ID: &iCacheAttributes, Members: &mCacheAttributes, Type: smithy.ShapeTypeStructure})
+var sNFSFileShareInfo_NotificationPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotificationPolicy", ID: &i_NotificationPolicy, Type: smithy.ShapeTypeString})
+var sNFSFileShareInfo_VPCEndpointDNSName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPCEndpointDNSName", ID: &i_DNSHostName, Type: smithy.ShapeTypeString})
+var sNFSFileShareInfo_BucketRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketRegion", ID: &i_RegionId, Type: smithy.ShapeTypeString})
+var sNFSFileShareInfo_AuditDestinationARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuditDestinationARN", ID: &i_AuditDestinationARN, Type: smithy.ShapeTypeString})
+var s_NFSFileShareInfoList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNFSFileShareInfo, Members: &mNFSFileShareInfo, Type: smithy.ShapeTypeStructure})
+var sObjectACL_private = smithy.NewStaticSchema(smithy.StaticSchema{Member: "private", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sObjectACL_public_read = smithy.NewStaticSchema(smithy.StaticSchema{Member: "public_read", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sObjectACL_public_read_write = smithy.NewStaticSchema(smithy.StaticSchema{Member: "public_read_write", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sObjectACL_authenticated_read = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authenticated_read", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sObjectACL_bucket_owner_read = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucket_owner_read", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sObjectACL_bucket_owner_full_control = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucket_owner_full_control", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sObjectACL_aws_exec_read = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aws_exec_read", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_PoolARNs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_PoolARN, Type: smithy.ShapeTypeString})
+var sPoolInfo_PoolARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoolARN", ID: &i_PoolARN, Type: smithy.ShapeTypeString})
+var sPoolInfo_PoolName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoolName", ID: &i_PoolName, Type: smithy.ShapeTypeString})
+var sPoolInfo_StorageClass = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageClass", ID: &iTapeStorageClass, Members: &mTapeStorageClass, Type: smithy.ShapeTypeEnum})
+var sPoolInfo_RetentionLockType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionLockType", ID: &iRetentionLockType, Members: &mRetentionLockType, Type: smithy.ShapeTypeEnum})
+var sPoolInfo_RetentionLockTimeInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionLockTimeInDays", ID: &i_RetentionLockTimeInDays, Type: smithy.ShapeTypeInteger})
+var sPoolInfo_PoolStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoolStatus", ID: &iPoolStatus, Members: &mPoolStatus, Type: smithy.ShapeTypeEnum})
+var s_PoolInfos_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPoolInfo, Members: &mPoolInfo, Type: smithy.ShapeTypeStructure})
+var sPoolStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPoolStatus_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRetentionLockType_COMPLIANCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLIANCE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRetentionLockType_GOVERNANCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GOVERNANCE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRetentionLockType_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceUnavailableError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_string, Type: smithy.ShapeTypeString})
+var sServiceUnavailableError_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &iStorageGatewayError, Members: &mStorageGatewayError, Type: smithy.ShapeTypeStructure})
+var sSMBFileShareInfo_FileShareARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileShareARN", ID: &i_FileShareARN, Type: smithy.ShapeTypeString})
+var sSMBFileShareInfo_FileShareId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileShareId", ID: &i_FileShareId, Type: smithy.ShapeTypeString})
+var sSMBFileShareInfo_FileShareStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileShareStatus", ID: &i_FileShareStatus, Type: smithy.ShapeTypeString})
+var sSMBFileShareInfo_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sSMBFileShareInfo_EncryptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionType", ID: &iEncryptionType, Members: &mEncryptionType, Type: smithy.ShapeTypeEnum})
+var sSMBFileShareInfo_KMSEncrypted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMSEncrypted", ID: &i_Boolean2, Type: smithy.ShapeTypeBoolean})
+var sSMBFileShareInfo_KMSKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMSKey", ID: &i_KMSKey, Type: smithy.ShapeTypeString})
+var sSMBFileShareInfo_Path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Path", ID: &i_Path, Type: smithy.ShapeTypeString})
+var sSMBFileShareInfo_Role = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Role", ID: &i_Role, Type: smithy.ShapeTypeString})
+var sSMBFileShareInfo_LocationARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationARN", ID: &i_LocationARN, Type: smithy.ShapeTypeString})
+var sSMBFileShareInfo_DefaultStorageClass = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultStorageClass", ID: &i_StorageClass, Type: smithy.ShapeTypeString})
+var sSMBFileShareInfo_ObjectACL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectACL", ID: &iObjectACL, Members: &mObjectACL, Type: smithy.ShapeTypeEnum})
+var sSMBFileShareInfo_ReadOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadOnly", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sSMBFileShareInfo_GuessMIMETypeEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GuessMIMETypeEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sSMBFileShareInfo_RequesterPays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequesterPays", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sSMBFileShareInfo_SMBACLEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SMBACLEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sSMBFileShareInfo_AccessBasedEnumeration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessBasedEnumeration", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sSMBFileShareInfo_AdminUserList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdminUserList", ID: &i_UserList, Members: &m_UserList, Type: smithy.ShapeTypeList})
+var sSMBFileShareInfo_ValidUserList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValidUserList", ID: &i_UserList, Members: &m_UserList, Type: smithy.ShapeTypeList})
+var sSMBFileShareInfo_InvalidUserList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvalidUserList", ID: &i_UserList, Members: &m_UserList, Type: smithy.ShapeTypeList})
+var sSMBFileShareInfo_AuditDestinationARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuditDestinationARN", ID: &i_AuditDestinationARN, Type: smithy.ShapeTypeString})
+var sSMBFileShareInfo_Authentication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Authentication", ID: &i_Authentication, Type: smithy.ShapeTypeString})
+var sSMBFileShareInfo_CaseSensitivity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CaseSensitivity", ID: &iCaseSensitivity, Members: &mCaseSensitivity, Type: smithy.ShapeTypeEnum})
+var sSMBFileShareInfo_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sSMBFileShareInfo_FileShareName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileShareName", ID: &i_FileShareName, Type: smithy.ShapeTypeString})
+var sSMBFileShareInfo_CacheAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CacheAttributes", ID: &iCacheAttributes, Members: &mCacheAttributes, Type: smithy.ShapeTypeStructure})
+var sSMBFileShareInfo_NotificationPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotificationPolicy", ID: &i_NotificationPolicy, Type: smithy.ShapeTypeString})
+var sSMBFileShareInfo_VPCEndpointDNSName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPCEndpointDNSName", ID: &i_DNSHostName, Type: smithy.ShapeTypeString})
+var sSMBFileShareInfo_BucketRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketRegion", ID: &i_RegionId, Type: smithy.ShapeTypeString})
+var sSMBFileShareInfo_OplocksEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OplocksEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var s_SMBFileShareInfoList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSMBFileShareInfo, Members: &mSMBFileShareInfo, Type: smithy.ShapeTypeStructure})
+var sSMBLocalGroups_GatewayAdmins = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayAdmins", ID: &i_UserList, Members: &m_UserList, Type: smithy.ShapeTypeList})
+var sSMBSecurityStrategy_ClientSpecified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientSpecified", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSMBSecurityStrategy_MandatorySigning = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MandatorySigning", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSMBSecurityStrategy_MandatoryEncryption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MandatoryEncryption", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSMBSecurityStrategy_MandatoryEncryptionNoAes128 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MandatoryEncryptionNoAes128", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSoftwareUpdatePreferences_AutomaticUpdatePolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutomaticUpdatePolicy", ID: &iAutomaticUpdatePolicy, Members: &mAutomaticUpdatePolicy, Type: smithy.ShapeTypeEnum})
+var sStorageGatewayError_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum})
+var sStorageGatewayError_errorDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorDetails", ID: &i_errorDetails, Members: &m_errorDetails, Type: smithy.ShapeTypeMap})
+var sStorediSCSIVolume_VolumeARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeARN", ID: &i_VolumeARN, Type: smithy.ShapeTypeString})
+var sStorediSCSIVolume_VolumeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeId", ID: &i_VolumeId, Type: smithy.ShapeTypeString})
+var sStorediSCSIVolume_VolumeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeType", ID: &i_VolumeType, Type: smithy.ShapeTypeString})
+var sStorediSCSIVolume_VolumeStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeStatus", ID: &i_VolumeStatus, Type: smithy.ShapeTypeString})
+var sStorediSCSIVolume_VolumeAttachmentStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeAttachmentStatus", ID: &i_VolumeAttachmentStatus, Type: smithy.ShapeTypeString})
+var sStorediSCSIVolume_VolumeSizeInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeSizeInBytes", ID: &i_long, Type: smithy.ShapeTypeLong})
+var sStorediSCSIVolume_VolumeProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeProgress", ID: &i_DoubleObject, Type: smithy.ShapeTypeDouble})
+var sStorediSCSIVolume_VolumeDiskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeDiskId", ID: &i_DiskId, Type: smithy.ShapeTypeString})
+var sStorediSCSIVolume_SourceSnapshotId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceSnapshotId", ID: &i_SnapshotId, Type: smithy.ShapeTypeString})
+var sStorediSCSIVolume_PreservedExistingData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreservedExistingData", ID: &i_Boolean2, Type: smithy.ShapeTypeBoolean})
+var sStorediSCSIVolume_VolumeiSCSIAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeiSCSIAttributes", ID: &iVolumeiSCSIAttributes, Members: &mVolumeiSCSIAttributes, Type: smithy.ShapeTypeStructure})
+var sStorediSCSIVolume_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &i_CreatedDate, Type: smithy.ShapeTypeTimestamp})
+var sStorediSCSIVolume_VolumeUsedInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeUsedInBytes", ID: &i_VolumeUsedInBytes, Type: smithy.ShapeTypeLong})
+var sStorediSCSIVolume_KMSKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMSKey", ID: &i_KMSKey, Type: smithy.ShapeTypeString})
+var sStorediSCSIVolume_TargetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetName", ID: &i_TargetName, Type: smithy.ShapeTypeString})
+var s_StorediSCSIVolumes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStorediSCSIVolume, Members: &mStorediSCSIVolume, Type: smithy.ShapeTypeStructure})
+var s_SupportedGatewayCapacities_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGatewayCapacity, Members: &mGatewayCapacity, Type: smithy.ShapeTypeEnum})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_TagKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_Tags_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var sTape_TapeARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeARN", ID: &i_TapeARN, Type: smithy.ShapeTypeString})
+var sTape_TapeBarcode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeBarcode", ID: &i_TapeBarcode, Type: smithy.ShapeTypeString})
+var sTape_TapeCreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeCreatedDate", ID: &i_Time, Type: smithy.ShapeTypeTimestamp})
+var sTape_TapeSizeInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeSizeInBytes", ID: &i_TapeSize, Type: smithy.ShapeTypeLong})
+var sTape_TapeStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeStatus", ID: &i_TapeStatus, Type: smithy.ShapeTypeString})
+var sTape_VTLDevice = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VTLDevice", ID: &i_VTLDeviceARN, Type: smithy.ShapeTypeString})
+var sTape_Progress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Progress", ID: &i_DoubleObject, Type: smithy.ShapeTypeDouble})
+var sTape_TapeUsedInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeUsedInBytes", ID: &i_TapeUsage, Type: smithy.ShapeTypeLong})
+var sTape_KMSKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMSKey", ID: &i_KMSKey, Type: smithy.ShapeTypeString})
+var sTape_PoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoolId", ID: &i_PoolId, Type: smithy.ShapeTypeString})
+var sTape_Worm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Worm", ID: &i_Boolean2, Type: smithy.ShapeTypeBoolean})
+var sTape_RetentionStartDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionStartDate", ID: &i_Time, Type: smithy.ShapeTypeTimestamp})
+var sTape_PoolEntryDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoolEntryDate", ID: &i_Time, Type: smithy.ShapeTypeTimestamp})
+var sTapeArchive_TapeARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeARN", ID: &i_TapeARN, Type: smithy.ShapeTypeString})
+var sTapeArchive_TapeBarcode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeBarcode", ID: &i_TapeBarcode, Type: smithy.ShapeTypeString})
+var sTapeArchive_TapeCreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeCreatedDate", ID: &i_Time, Type: smithy.ShapeTypeTimestamp})
+var sTapeArchive_TapeSizeInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeSizeInBytes", ID: &i_TapeSize, Type: smithy.ShapeTypeLong})
+var sTapeArchive_CompletionTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompletionTime", ID: &i_Time, Type: smithy.ShapeTypeTimestamp})
+var sTapeArchive_RetrievedTo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetrievedTo", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sTapeArchive_TapeStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeStatus", ID: &i_TapeArchiveStatus, Type: smithy.ShapeTypeString})
+var sTapeArchive_TapeUsedInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeUsedInBytes", ID: &i_TapeUsage, Type: smithy.ShapeTypeLong})
+var sTapeArchive_KMSKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMSKey", ID: &i_KMSKey, Type: smithy.ShapeTypeString})
+var sTapeArchive_PoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoolId", ID: &i_PoolId, Type: smithy.ShapeTypeString})
+var sTapeArchive_Worm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Worm", ID: &i_Boolean2, Type: smithy.ShapeTypeBoolean})
+var sTapeArchive_RetentionStartDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionStartDate", ID: &i_Time, Type: smithy.ShapeTypeTimestamp})
+var sTapeArchive_PoolEntryDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoolEntryDate", ID: &i_Time, Type: smithy.ShapeTypeTimestamp})
+var s_TapeArchives_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTapeArchive, Members: &mTapeArchive, Type: smithy.ShapeTypeStructure})
+var s_TapeARNs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TapeARN, Type: smithy.ShapeTypeString})
+var sTapeInfo_TapeARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeARN", ID: &i_TapeARN, Type: smithy.ShapeTypeString})
+var sTapeInfo_TapeBarcode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeBarcode", ID: &i_TapeBarcode, Type: smithy.ShapeTypeString})
+var sTapeInfo_TapeSizeInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeSizeInBytes", ID: &i_TapeSize, Type: smithy.ShapeTypeLong})
+var sTapeInfo_TapeStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeStatus", ID: &i_TapeStatus, Type: smithy.ShapeTypeString})
+var sTapeInfo_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sTapeInfo_PoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoolId", ID: &i_PoolId, Type: smithy.ShapeTypeString})
+var sTapeInfo_RetentionStartDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionStartDate", ID: &i_Time, Type: smithy.ShapeTypeTimestamp})
+var sTapeInfo_PoolEntryDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoolEntryDate", ID: &i_Time, Type: smithy.ShapeTypeTimestamp})
+var s_TapeInfos_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTapeInfo, Members: &mTapeInfo, Type: smithy.ShapeTypeStructure})
+var sTapeRecoveryPointInfo_TapeARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeARN", ID: &i_TapeARN, Type: smithy.ShapeTypeString})
+var sTapeRecoveryPointInfo_TapeRecoveryPointTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeRecoveryPointTime", ID: &i_Time, Type: smithy.ShapeTypeTimestamp})
+var sTapeRecoveryPointInfo_TapeSizeInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeSizeInBytes", ID: &i_TapeSize, Type: smithy.ShapeTypeLong})
+var sTapeRecoveryPointInfo_TapeStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeStatus", ID: &i_TapeRecoveryPointStatus, Type: smithy.ShapeTypeString})
+var s_TapeRecoveryPointInfos_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTapeRecoveryPointInfo, Members: &mTapeRecoveryPointInfo, Type: smithy.ShapeTypeStructure})
+var s_Tapes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTape, Members: &mTape, Type: smithy.ShapeTypeStructure})
+var sTapeStorageClass_DEEP_ARCHIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEEP_ARCHIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTapeStorageClass_GLACIER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GLACIER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_UserList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_UserListUser, Type: smithy.ShapeTypeString})
+var s_VolumeARNs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_VolumeARN, Type: smithy.ShapeTypeString})
+var sVolumeInfo_VolumeARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeARN", ID: &i_VolumeARN, Type: smithy.ShapeTypeString})
+var sVolumeInfo_VolumeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeId", ID: &i_VolumeId, Type: smithy.ShapeTypeString})
+var sVolumeInfo_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sVolumeInfo_GatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayId", ID: &i_GatewayId, Type: smithy.ShapeTypeString})
+var sVolumeInfo_VolumeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeType", ID: &i_VolumeType, Type: smithy.ShapeTypeString})
+var sVolumeInfo_VolumeSizeInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeSizeInBytes", ID: &i_long, Type: smithy.ShapeTypeLong})
+var sVolumeInfo_VolumeAttachmentStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeAttachmentStatus", ID: &i_VolumeAttachmentStatus, Type: smithy.ShapeTypeString})
+var s_VolumeInfos_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVolumeInfo, Members: &mVolumeInfo, Type: smithy.ShapeTypeStructure})
+var sVolumeiSCSIAttributes_TargetARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetARN", ID: &i_TargetARN, Type: smithy.ShapeTypeString})
+var sVolumeiSCSIAttributes_NetworkInterfaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkInterfaceId", ID: &i_NetworkInterfaceId, Type: smithy.ShapeTypeString})
+var sVolumeiSCSIAttributes_NetworkInterfacePort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkInterfacePort", ID: &i_integer, Type: smithy.ShapeTypeInteger})
+var sVolumeiSCSIAttributes_LunNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LunNumber", ID: &i_PositiveIntObject, Type: smithy.ShapeTypeInteger})
+var sVolumeiSCSIAttributes_ChapEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChapEnabled", ID: &i_Boolean2, Type: smithy.ShapeTypeBoolean})
+var sVolumeRecoveryPointInfo_VolumeARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeARN", ID: &i_VolumeARN, Type: smithy.ShapeTypeString})
+var sVolumeRecoveryPointInfo_VolumeSizeInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeSizeInBytes", ID: &i_long, Type: smithy.ShapeTypeLong})
+var sVolumeRecoveryPointInfo_VolumeUsageInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeUsageInBytes", ID: &i_long, Type: smithy.ShapeTypeLong})
+var sVolumeRecoveryPointInfo_VolumeRecoveryPointTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeRecoveryPointTime", ID: &i_string, Type: smithy.ShapeTypeString})
+var s_VolumeRecoveryPointInfos_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVolumeRecoveryPointInfo, Members: &mVolumeRecoveryPointInfo, Type: smithy.ShapeTypeStructure})
+var sVTLDevice_VTLDeviceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VTLDeviceARN", ID: &i_VTLDeviceARN, Type: smithy.ShapeTypeString})
+var sVTLDevice_VTLDeviceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VTLDeviceType", ID: &i_VTLDeviceType, Type: smithy.ShapeTypeString})
+var sVTLDevice_VTLDeviceVendor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VTLDeviceVendor", ID: &i_VTLDeviceVendor, Type: smithy.ShapeTypeString})
+var sVTLDevice_VTLDeviceProductIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VTLDeviceProductIdentifier", ID: &i_VTLDeviceProductIdentifier, Type: smithy.ShapeTypeString})
+var sVTLDevice_DeviceiSCSIAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceiSCSIAttributes", ID: &iDeviceiSCSIAttributes, Members: &mDeviceiSCSIAttributes, Type: smithy.ShapeTypeStructure})
+var s_VTLDeviceARNs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_VTLDeviceARN, Type: smithy.ShapeTypeString})
+var s_VTLDevices_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVTLDevice, Members: &mVTLDevice, Type: smithy.ShapeTypeStructure})
+var sActivateGatewayInput_ActivationKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActivationKey", ID: &i_ActivationKey, Type: smithy.ShapeTypeString})
+var sActivateGatewayInput_GatewayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayName", ID: &i_GatewayName, Type: smithy.ShapeTypeString})
+var sActivateGatewayInput_GatewayTimezone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayTimezone", ID: &i_GatewayTimezone, Type: smithy.ShapeTypeString})
+var sActivateGatewayInput_GatewayRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayRegion", ID: &i_RegionId, Type: smithy.ShapeTypeString})
+var sActivateGatewayInput_GatewayType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayType", ID: &i_GatewayType, Type: smithy.ShapeTypeString})
+var sActivateGatewayInput_TapeDriveType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeDriveType", ID: &i_TapeDriveType, Type: smithy.ShapeTypeString})
+var sActivateGatewayInput_MediumChangerType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediumChangerType", ID: &i_MediumChangerType, Type: smithy.ShapeTypeString})
+var sActivateGatewayInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sActivateGatewayOutput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sAddCacheInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sAddCacheInput_DiskIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiskIds", ID: &i_DiskIds, Members: &m_DiskIds, Type: smithy.ShapeTypeList})
+var sAddCacheOutput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sAddTagsToResourceInput_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sAddTagsToResourceInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sAddTagsToResourceOutput_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sAddUploadBufferInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sAddUploadBufferInput_DiskIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiskIds", ID: &i_DiskIds, Members: &m_DiskIds, Type: smithy.ShapeTypeList})
+var sAddUploadBufferOutput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sAddWorkingStorageInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sAddWorkingStorageInput_DiskIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiskIds", ID: &i_DiskIds, Members: &m_DiskIds, Type: smithy.ShapeTypeList})
+var sAddWorkingStorageOutput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sAssignTapePoolInput_TapeARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeARN", ID: &i_TapeARN, Type: smithy.ShapeTypeString})
+var sAssignTapePoolInput_PoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoolId", ID: &i_PoolId, Type: smithy.ShapeTypeString})
+var sAssignTapePoolInput_BypassGovernanceRetention = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BypassGovernanceRetention", ID: &i_Boolean2, Type: smithy.ShapeTypeBoolean})
+var sAssignTapePoolOutput_TapeARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeARN", ID: &i_TapeARN, Type: smithy.ShapeTypeString})
+var sAssociateFileSystemInput_UserName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserName", ID: &i_DomainUserName, Type: smithy.ShapeTypeString})
+var sAssociateFileSystemInput_Password = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Password", ID: &i_DomainUserPassword, Traits: &t1, Type: smithy.ShapeTypeString})
+var sAssociateFileSystemInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sAssociateFileSystemInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sAssociateFileSystemInput_LocationARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationARN", ID: &i_FileSystemLocationARN, Type: smithy.ShapeTypeString})
+var sAssociateFileSystemInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sAssociateFileSystemInput_AuditDestinationARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuditDestinationARN", ID: &i_AuditDestinationARN, Type: smithy.ShapeTypeString})
+var sAssociateFileSystemInput_CacheAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CacheAttributes", ID: &iCacheAttributes, Members: &mCacheAttributes, Type: smithy.ShapeTypeStructure})
+var sAssociateFileSystemInput_EndpointNetworkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointNetworkConfiguration", ID: &iEndpointNetworkConfiguration, Members: &mEndpointNetworkConfiguration, Type: smithy.ShapeTypeStructure})
+var sAssociateFileSystemOutput_FileSystemAssociationARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemAssociationARN", ID: &i_FileSystemAssociationARN, Type: smithy.ShapeTypeString})
+var sAttachVolumeInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sAttachVolumeInput_TargetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetName", ID: &i_TargetName, Type: smithy.ShapeTypeString})
+var sAttachVolumeInput_VolumeARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeARN", ID: &i_VolumeARN, Type: smithy.ShapeTypeString})
+var sAttachVolumeInput_NetworkInterfaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkInterfaceId", ID: &i_NetworkInterfaceId, Type: smithy.ShapeTypeString})
+var sAttachVolumeInput_DiskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiskId", ID: &i_DiskId, Type: smithy.ShapeTypeString})
+var sAttachVolumeOutput_VolumeARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeARN", ID: &i_VolumeARN, Type: smithy.ShapeTypeString})
+var sAttachVolumeOutput_TargetARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetARN", ID: &i_TargetARN, Type: smithy.ShapeTypeString})
+var sCancelArchivalInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sCancelArchivalInput_TapeARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeARN", ID: &i_TapeARN, Type: smithy.ShapeTypeString})
+var sCancelArchivalOutput_TapeARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeARN", ID: &i_TapeARN, Type: smithy.ShapeTypeString})
+var sCancelCacheReportInput_CacheReportARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CacheReportARN", ID: &i_CacheReportARN, Type: smithy.ShapeTypeString})
+var sCancelCacheReportOutput_CacheReportARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CacheReportARN", ID: &i_CacheReportARN, Type: smithy.ShapeTypeString})
+var sCancelRetrievalInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sCancelRetrievalInput_TapeARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeARN", ID: &i_TapeARN, Type: smithy.ShapeTypeString})
+var sCancelRetrievalOutput_TapeARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeARN", ID: &i_TapeARN, Type: smithy.ShapeTypeString})
+var sCreateCachediSCSIVolumeInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sCreateCachediSCSIVolumeInput_VolumeSizeInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeSizeInBytes", ID: &i_long, Type: smithy.ShapeTypeLong})
+var sCreateCachediSCSIVolumeInput_SnapshotId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotId", ID: &i_SnapshotId, Type: smithy.ShapeTypeString})
+var sCreateCachediSCSIVolumeInput_TargetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetName", ID: &i_TargetName, Type: smithy.ShapeTypeString})
+var sCreateCachediSCSIVolumeInput_SourceVolumeARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceVolumeARN", ID: &i_VolumeARN, Type: smithy.ShapeTypeString})
+var sCreateCachediSCSIVolumeInput_NetworkInterfaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkInterfaceId", ID: &i_NetworkInterfaceId, Type: smithy.ShapeTypeString})
+var sCreateCachediSCSIVolumeInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateCachediSCSIVolumeInput_KMSEncrypted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMSEncrypted", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sCreateCachediSCSIVolumeInput_KMSKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMSKey", ID: &i_KMSKey, Type: smithy.ShapeTypeString})
+var sCreateCachediSCSIVolumeInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sCreateCachediSCSIVolumeOutput_VolumeARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeARN", ID: &i_VolumeARN, Type: smithy.ShapeTypeString})
+var sCreateCachediSCSIVolumeOutput_TargetARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetARN", ID: &i_TargetARN, Type: smithy.ShapeTypeString})
+var sCreateNFSFileShareInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateNFSFileShareInput_NFSFileShareDefaults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NFSFileShareDefaults", ID: &iNFSFileShareDefaults, Members: &mNFSFileShareDefaults, Type: smithy.ShapeTypeStructure})
+var sCreateNFSFileShareInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sCreateNFSFileShareInput_EncryptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionType", ID: &iEncryptionType, Members: &mEncryptionType, Type: smithy.ShapeTypeEnum})
+var sCreateNFSFileShareInput_KMSEncrypted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMSEncrypted", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sCreateNFSFileShareInput_KMSKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMSKey", ID: &i_KMSKey, Type: smithy.ShapeTypeString})
+var sCreateNFSFileShareInput_Role = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Role", ID: &i_Role, Type: smithy.ShapeTypeString})
+var sCreateNFSFileShareInput_LocationARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationARN", ID: &i_LocationARN, Type: smithy.ShapeTypeString})
+var sCreateNFSFileShareInput_DefaultStorageClass = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultStorageClass", ID: &i_StorageClass, Type: smithy.ShapeTypeString})
+var sCreateNFSFileShareInput_ObjectACL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectACL", ID: &iObjectACL, Members: &mObjectACL, Type: smithy.ShapeTypeEnum})
+var sCreateNFSFileShareInput_ClientList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientList", ID: &i_FileShareClientList, Members: &m_FileShareClientList, Type: smithy.ShapeTypeList})
+var sCreateNFSFileShareInput_Squash = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Squash", ID: &i_Squash, Type: smithy.ShapeTypeString})
+var sCreateNFSFileShareInput_ReadOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadOnly", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sCreateNFSFileShareInput_GuessMIMETypeEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GuessMIMETypeEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sCreateNFSFileShareInput_RequesterPays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequesterPays", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sCreateNFSFileShareInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sCreateNFSFileShareInput_FileShareName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileShareName", ID: &i_FileShareName, Type: smithy.ShapeTypeString})
+var sCreateNFSFileShareInput_CacheAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CacheAttributes", ID: &iCacheAttributes, Members: &mCacheAttributes, Type: smithy.ShapeTypeStructure})
+var sCreateNFSFileShareInput_NotificationPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotificationPolicy", ID: &i_NotificationPolicy, Type: smithy.ShapeTypeString})
+var sCreateNFSFileShareInput_VPCEndpointDNSName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPCEndpointDNSName", ID: &i_DNSHostName, Type: smithy.ShapeTypeString})
+var sCreateNFSFileShareInput_BucketRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketRegion", ID: &i_RegionId, Type: smithy.ShapeTypeString})
+var sCreateNFSFileShareInput_AuditDestinationARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuditDestinationARN", ID: &i_AuditDestinationARN, Type: smithy.ShapeTypeString})
+var sCreateNFSFileShareOutput_FileShareARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileShareARN", ID: &i_FileShareARN, Type: smithy.ShapeTypeString})
+var sCreateSMBFileShareInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateSMBFileShareInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sCreateSMBFileShareInput_EncryptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionType", ID: &iEncryptionType, Members: &mEncryptionType, Type: smithy.ShapeTypeEnum})
+var sCreateSMBFileShareInput_KMSEncrypted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMSEncrypted", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sCreateSMBFileShareInput_KMSKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMSKey", ID: &i_KMSKey, Type: smithy.ShapeTypeString})
+var sCreateSMBFileShareInput_Role = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Role", ID: &i_Role, Type: smithy.ShapeTypeString})
+var sCreateSMBFileShareInput_LocationARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationARN", ID: &i_LocationARN, Type: smithy.ShapeTypeString})
+var sCreateSMBFileShareInput_DefaultStorageClass = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultStorageClass", ID: &i_StorageClass, Type: smithy.ShapeTypeString})
+var sCreateSMBFileShareInput_ObjectACL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectACL", ID: &iObjectACL, Members: &mObjectACL, Type: smithy.ShapeTypeEnum})
+var sCreateSMBFileShareInput_ReadOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadOnly", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sCreateSMBFileShareInput_GuessMIMETypeEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GuessMIMETypeEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sCreateSMBFileShareInput_RequesterPays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequesterPays", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sCreateSMBFileShareInput_SMBACLEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SMBACLEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sCreateSMBFileShareInput_AccessBasedEnumeration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessBasedEnumeration", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sCreateSMBFileShareInput_AdminUserList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdminUserList", ID: &i_UserList, Members: &m_UserList, Type: smithy.ShapeTypeList})
+var sCreateSMBFileShareInput_ValidUserList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValidUserList", ID: &i_UserList, Members: &m_UserList, Type: smithy.ShapeTypeList})
+var sCreateSMBFileShareInput_InvalidUserList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvalidUserList", ID: &i_UserList, Members: &m_UserList, Type: smithy.ShapeTypeList})
+var sCreateSMBFileShareInput_AuditDestinationARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuditDestinationARN", ID: &i_AuditDestinationARN, Type: smithy.ShapeTypeString})
+var sCreateSMBFileShareInput_Authentication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Authentication", ID: &i_Authentication, Type: smithy.ShapeTypeString})
+var sCreateSMBFileShareInput_CaseSensitivity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CaseSensitivity", ID: &iCaseSensitivity, Members: &mCaseSensitivity, Type: smithy.ShapeTypeEnum})
+var sCreateSMBFileShareInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sCreateSMBFileShareInput_FileShareName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileShareName", ID: &i_FileShareName, Type: smithy.ShapeTypeString})
+var sCreateSMBFileShareInput_CacheAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CacheAttributes", ID: &iCacheAttributes, Members: &mCacheAttributes, Type: smithy.ShapeTypeStructure})
+var sCreateSMBFileShareInput_NotificationPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotificationPolicy", ID: &i_NotificationPolicy, Type: smithy.ShapeTypeString})
+var sCreateSMBFileShareInput_VPCEndpointDNSName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPCEndpointDNSName", ID: &i_DNSHostName, Type: smithy.ShapeTypeString})
+var sCreateSMBFileShareInput_BucketRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketRegion", ID: &i_RegionId, Type: smithy.ShapeTypeString})
+var sCreateSMBFileShareInput_OplocksEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OplocksEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sCreateSMBFileShareOutput_FileShareARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileShareARN", ID: &i_FileShareARN, Type: smithy.ShapeTypeString})
+var sCreateSnapshotFromVolumeRecoveryPointInput_VolumeARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeARN", ID: &i_VolumeARN, Type: smithy.ShapeTypeString})
+var sCreateSnapshotFromVolumeRecoveryPointInput_SnapshotDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotDescription", ID: &i_SnapshotDescription, Type: smithy.ShapeTypeString})
+var sCreateSnapshotFromVolumeRecoveryPointInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sCreateSnapshotFromVolumeRecoveryPointOutput_SnapshotId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotId", ID: &i_SnapshotId, Type: smithy.ShapeTypeString})
+var sCreateSnapshotFromVolumeRecoveryPointOutput_VolumeARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeARN", ID: &i_VolumeARN, Type: smithy.ShapeTypeString})
+var sCreateSnapshotFromVolumeRecoveryPointOutput_VolumeRecoveryPointTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeRecoveryPointTime", ID: &i_string, Type: smithy.ShapeTypeString})
+var sCreateSnapshotInput_VolumeARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeARN", ID: &i_VolumeARN, Type: smithy.ShapeTypeString})
+var sCreateSnapshotInput_SnapshotDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotDescription", ID: &i_SnapshotDescription, Type: smithy.ShapeTypeString})
+var sCreateSnapshotInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sCreateSnapshotOutput_VolumeARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeARN", ID: &i_VolumeARN, Type: smithy.ShapeTypeString})
+var sCreateSnapshotOutput_SnapshotId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotId", ID: &i_SnapshotId, Type: smithy.ShapeTypeString})
+var sCreateStorediSCSIVolumeInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sCreateStorediSCSIVolumeInput_DiskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiskId", ID: &i_DiskId, Type: smithy.ShapeTypeString})
+var sCreateStorediSCSIVolumeInput_SnapshotId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotId", ID: &i_SnapshotId, Type: smithy.ShapeTypeString})
+var sCreateStorediSCSIVolumeInput_PreserveExistingData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreserveExistingData", ID: &i_Boolean2, Type: smithy.ShapeTypeBoolean})
+var sCreateStorediSCSIVolumeInput_TargetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetName", ID: &i_TargetName, Type: smithy.ShapeTypeString})
+var sCreateStorediSCSIVolumeInput_NetworkInterfaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkInterfaceId", ID: &i_NetworkInterfaceId, Type: smithy.ShapeTypeString})
+var sCreateStorediSCSIVolumeInput_KMSEncrypted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMSEncrypted", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sCreateStorediSCSIVolumeInput_KMSKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMSKey", ID: &i_KMSKey, Type: smithy.ShapeTypeString})
+var sCreateStorediSCSIVolumeInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sCreateStorediSCSIVolumeOutput_VolumeARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeARN", ID: &i_VolumeARN, Type: smithy.ShapeTypeString})
+var sCreateStorediSCSIVolumeOutput_VolumeSizeInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeSizeInBytes", ID: &i_long, Type: smithy.ShapeTypeLong})
+var sCreateStorediSCSIVolumeOutput_TargetARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetARN", ID: &i_TargetARN, Type: smithy.ShapeTypeString})
+var sCreateTapePoolInput_PoolName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoolName", ID: &i_PoolName, Type: smithy.ShapeTypeString})
+var sCreateTapePoolInput_StorageClass = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageClass", ID: &iTapeStorageClass, Members: &mTapeStorageClass, Type: smithy.ShapeTypeEnum})
+var sCreateTapePoolInput_RetentionLockType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionLockType", ID: &iRetentionLockType, Members: &mRetentionLockType, Type: smithy.ShapeTypeEnum})
+var sCreateTapePoolInput_RetentionLockTimeInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionLockTimeInDays", ID: &i_RetentionLockTimeInDays, Type: smithy.ShapeTypeInteger})
+var sCreateTapePoolInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sCreateTapePoolOutput_PoolARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoolARN", ID: &i_PoolARN, Type: smithy.ShapeTypeString})
+var sCreateTapesInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sCreateTapesInput_TapeSizeInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeSizeInBytes", ID: &i_TapeSize, Type: smithy.ShapeTypeLong})
+var sCreateTapesInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateTapesInput_NumTapesToCreate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumTapesToCreate", ID: &i_NumTapesToCreate, Type: smithy.ShapeTypeInteger})
+var sCreateTapesInput_TapeBarcodePrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeBarcodePrefix", ID: &i_TapeBarcodePrefix, Type: smithy.ShapeTypeString})
+var sCreateTapesInput_KMSEncrypted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMSEncrypted", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sCreateTapesInput_KMSKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMSKey", ID: &i_KMSKey, Type: smithy.ShapeTypeString})
+var sCreateTapesInput_PoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoolId", ID: &i_PoolId, Type: smithy.ShapeTypeString})
+var sCreateTapesInput_Worm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Worm", ID: &i_Boolean2, Type: smithy.ShapeTypeBoolean})
+var sCreateTapesInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sCreateTapesOutput_TapeARNs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeARNs", ID: &i_TapeARNs, Members: &m_TapeARNs, Type: smithy.ShapeTypeList})
+var sCreateTapeWithBarcodeInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sCreateTapeWithBarcodeInput_TapeSizeInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeSizeInBytes", ID: &i_TapeSize, Type: smithy.ShapeTypeLong})
+var sCreateTapeWithBarcodeInput_TapeBarcode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeBarcode", ID: &i_TapeBarcode, Type: smithy.ShapeTypeString})
+var sCreateTapeWithBarcodeInput_KMSEncrypted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMSEncrypted", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sCreateTapeWithBarcodeInput_KMSKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMSKey", ID: &i_KMSKey, Type: smithy.ShapeTypeString})
+var sCreateTapeWithBarcodeInput_PoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoolId", ID: &i_PoolId, Type: smithy.ShapeTypeString})
+var sCreateTapeWithBarcodeInput_Worm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Worm", ID: &i_Boolean2, Type: smithy.ShapeTypeBoolean})
+var sCreateTapeWithBarcodeInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sCreateTapeWithBarcodeOutput_TapeARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeARN", ID: &i_TapeARN, Type: smithy.ShapeTypeString})
+var sDeleteAutomaticTapeCreationPolicyInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sDeleteAutomaticTapeCreationPolicyOutput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sDeleteBandwidthRateLimitInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sDeleteBandwidthRateLimitInput_BandwidthType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BandwidthType", ID: &i_BandwidthType, Type: smithy.ShapeTypeString})
+var sDeleteBandwidthRateLimitOutput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sDeleteCacheReportInput_CacheReportARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CacheReportARN", ID: &i_CacheReportARN, Type: smithy.ShapeTypeString})
+var sDeleteCacheReportOutput_CacheReportARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CacheReportARN", ID: &i_CacheReportARN, Type: smithy.ShapeTypeString})
+var sDeleteChapCredentialsInput_TargetARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetARN", ID: &i_TargetARN, Type: smithy.ShapeTypeString})
+var sDeleteChapCredentialsInput_InitiatorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InitiatorName", ID: &i_IqnName, Type: smithy.ShapeTypeString})
+var sDeleteChapCredentialsOutput_TargetARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetARN", ID: &i_TargetARN, Type: smithy.ShapeTypeString})
+var sDeleteChapCredentialsOutput_InitiatorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InitiatorName", ID: &i_IqnName, Type: smithy.ShapeTypeString})
+var sDeleteFileShareInput_FileShareARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileShareARN", ID: &i_FileShareARN, Type: smithy.ShapeTypeString})
+var sDeleteFileShareInput_ForceDelete = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForceDelete", ID: &i_Boolean2, Type: smithy.ShapeTypeBoolean})
+var sDeleteFileShareOutput_FileShareARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileShareARN", ID: &i_FileShareARN, Type: smithy.ShapeTypeString})
+var sDeleteGatewayInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sDeleteGatewayOutput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sDeleteSnapshotScheduleInput_VolumeARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeARN", ID: &i_VolumeARN, Type: smithy.ShapeTypeString})
+var sDeleteSnapshotScheduleOutput_VolumeARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeARN", ID: &i_VolumeARN, Type: smithy.ShapeTypeString})
+var sDeleteTapeArchiveInput_TapeARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeARN", ID: &i_TapeARN, Type: smithy.ShapeTypeString})
+var sDeleteTapeArchiveInput_BypassGovernanceRetention = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BypassGovernanceRetention", ID: &i_Boolean2, Type: smithy.ShapeTypeBoolean})
+var sDeleteTapeArchiveOutput_TapeARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeARN", ID: &i_TapeARN, Type: smithy.ShapeTypeString})
+var sDeleteTapeInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sDeleteTapeInput_TapeARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeARN", ID: &i_TapeARN, Type: smithy.ShapeTypeString})
+var sDeleteTapeInput_BypassGovernanceRetention = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BypassGovernanceRetention", ID: &i_Boolean2, Type: smithy.ShapeTypeBoolean})
+var sDeleteTapeOutput_TapeARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeARN", ID: &i_TapeARN, Type: smithy.ShapeTypeString})
+var sDeleteTapePoolInput_PoolARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoolARN", ID: &i_PoolARN, Type: smithy.ShapeTypeString})
+var sDeleteTapePoolOutput_PoolARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoolARN", ID: &i_PoolARN, Type: smithy.ShapeTypeString})
+var sDeleteVolumeInput_VolumeARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeARN", ID: &i_VolumeARN, Type: smithy.ShapeTypeString})
+var sDeleteVolumeOutput_VolumeARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeARN", ID: &i_VolumeARN, Type: smithy.ShapeTypeString})
+var sDescribeAvailabilityMonitorTestInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sDescribeAvailabilityMonitorTestOutput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sDescribeAvailabilityMonitorTestOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iAvailabilityMonitorTestStatus, Members: &mAvailabilityMonitorTestStatus, Type: smithy.ShapeTypeEnum})
+var sDescribeAvailabilityMonitorTestOutput_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_Time, Type: smithy.ShapeTypeTimestamp})
+var sDescribeBandwidthRateLimitInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sDescribeBandwidthRateLimitOutput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sDescribeBandwidthRateLimitOutput_AverageUploadRateLimitInBitsPerSec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AverageUploadRateLimitInBitsPerSec", ID: &i_BandwidthUploadRateLimit, Type: smithy.ShapeTypeLong})
+var sDescribeBandwidthRateLimitOutput_AverageDownloadRateLimitInBitsPerSec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AverageDownloadRateLimitInBitsPerSec", ID: &i_BandwidthDownloadRateLimit, Type: smithy.ShapeTypeLong})
+var sDescribeBandwidthRateLimitScheduleInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sDescribeBandwidthRateLimitScheduleOutput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sDescribeBandwidthRateLimitScheduleOutput_BandwidthRateLimitIntervals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BandwidthRateLimitIntervals", ID: &i_BandwidthRateLimitIntervals, Members: &m_BandwidthRateLimitIntervals, Type: smithy.ShapeTypeList})
+var sDescribeCachediSCSIVolumesInput_VolumeARNs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeARNs", ID: &i_VolumeARNs, Members: &m_VolumeARNs, Type: smithy.ShapeTypeList})
+var sDescribeCachediSCSIVolumesOutput_CachediSCSIVolumes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CachediSCSIVolumes", ID: &i_CachediSCSIVolumes, Members: &m_CachediSCSIVolumes, Type: smithy.ShapeTypeList})
+var sDescribeCacheInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sDescribeCacheOutput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sDescribeCacheOutput_DiskIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiskIds", ID: &i_DiskIds, Members: &m_DiskIds, Type: smithy.ShapeTypeList})
+var sDescribeCacheOutput_CacheAllocatedInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CacheAllocatedInBytes", ID: &i_long, Type: smithy.ShapeTypeLong})
+var sDescribeCacheOutput_CacheUsedPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CacheUsedPercentage", ID: &i_double, Type: smithy.ShapeTypeDouble})
+var sDescribeCacheOutput_CacheDirtyPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CacheDirtyPercentage", ID: &i_double, Type: smithy.ShapeTypeDouble})
+var sDescribeCacheOutput_CacheHitPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CacheHitPercentage", ID: &i_double, Type: smithy.ShapeTypeDouble})
+var sDescribeCacheOutput_CacheMissPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CacheMissPercentage", ID: &i_double, Type: smithy.ShapeTypeDouble})
+var sDescribeCacheReportInput_CacheReportARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CacheReportARN", ID: &i_CacheReportARN, Type: smithy.ShapeTypeString})
+var sDescribeCacheReportOutput_CacheReportInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CacheReportInfo", ID: &iCacheReportInfo, Members: &mCacheReportInfo, Type: smithy.ShapeTypeStructure})
+var sDescribeChapCredentialsInput_TargetARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetARN", ID: &i_TargetARN, Type: smithy.ShapeTypeString})
+var sDescribeChapCredentialsOutput_ChapCredentials = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChapCredentials", ID: &i_ChapCredentials, Members: &m_ChapCredentials, Type: smithy.ShapeTypeList})
+var sDescribeFileSystemAssociationsInput_FileSystemAssociationARNList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemAssociationARNList", ID: &i_FileSystemAssociationARNList, Members: &m_FileSystemAssociationARNList, Type: smithy.ShapeTypeList})
+var sDescribeFileSystemAssociationsOutput_FileSystemAssociationInfoList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemAssociationInfoList", ID: &i_FileSystemAssociationInfoList, Members: &m_FileSystemAssociationInfoList, Type: smithy.ShapeTypeList})
+var sDescribeGatewayInformationInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sDescribeGatewayInformationOutput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sDescribeGatewayInformationOutput_GatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayId", ID: &i_GatewayId, Type: smithy.ShapeTypeString})
+var sDescribeGatewayInformationOutput_GatewayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayName", ID: &i_string, Type: smithy.ShapeTypeString})
+var sDescribeGatewayInformationOutput_GatewayTimezone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayTimezone", ID: &i_GatewayTimezone, Type: smithy.ShapeTypeString})
+var sDescribeGatewayInformationOutput_GatewayState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayState", ID: &i_GatewayState, Type: smithy.ShapeTypeString})
+var sDescribeGatewayInformationOutput_GatewayNetworkInterfaces = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayNetworkInterfaces", ID: &i_GatewayNetworkInterfaces, Members: &m_GatewayNetworkInterfaces, Type: smithy.ShapeTypeList})
+var sDescribeGatewayInformationOutput_GatewayType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayType", ID: &i_GatewayType, Type: smithy.ShapeTypeString})
+var sDescribeGatewayInformationOutput_NextUpdateAvailabilityDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextUpdateAvailabilityDate", ID: &i_NextUpdateAvailabilityDate, Type: smithy.ShapeTypeString})
+var sDescribeGatewayInformationOutput_LastSoftwareUpdate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastSoftwareUpdate", ID: &i_LastSoftwareUpdate, Type: smithy.ShapeTypeString})
+var sDescribeGatewayInformationOutput_Ec2InstanceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ec2InstanceId", ID: &i_Ec2InstanceId, Type: smithy.ShapeTypeString})
+var sDescribeGatewayInformationOutput_Ec2InstanceRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ec2InstanceRegion", ID: &i_Ec2InstanceRegion, Type: smithy.ShapeTypeString})
+var sDescribeGatewayInformationOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sDescribeGatewayInformationOutput_VPCEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPCEndpoint", ID: &i_string, Type: smithy.ShapeTypeString})
+var sDescribeGatewayInformationOutput_CloudWatchLogGroupARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchLogGroupARN", ID: &i_CloudWatchLogGroupARN, Type: smithy.ShapeTypeString})
+var sDescribeGatewayInformationOutput_HostEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HostEnvironment", ID: &iHostEnvironment, Members: &mHostEnvironment, Type: smithy.ShapeTypeEnum})
+var sDescribeGatewayInformationOutput_EndpointType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointType", ID: &i_EndpointType, Type: smithy.ShapeTypeString})
+var sDescribeGatewayInformationOutput_SoftwareUpdatesEndDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SoftwareUpdatesEndDate", ID: &i_SoftwareUpdatesEndDate, Type: smithy.ShapeTypeString})
+var sDescribeGatewayInformationOutput_DeprecationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeprecationDate", ID: &i_DeprecationDate, Type: smithy.ShapeTypeString})
+var sDescribeGatewayInformationOutput_GatewayCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayCapacity", ID: &iGatewayCapacity, Members: &mGatewayCapacity, Type: smithy.ShapeTypeEnum})
+var sDescribeGatewayInformationOutput_SupportedGatewayCapacities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupportedGatewayCapacities", ID: &i_SupportedGatewayCapacities, Members: &m_SupportedGatewayCapacities, Type: smithy.ShapeTypeList})
+var sDescribeGatewayInformationOutput_HostEnvironmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HostEnvironmentId", ID: &i_HostEnvironmentId, Type: smithy.ShapeTypeString})
+var sDescribeGatewayInformationOutput_SoftwareVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SoftwareVersion", ID: &i_SoftwareVersion, Type: smithy.ShapeTypeString})
+var sDescribeMaintenanceStartTimeInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sDescribeMaintenanceStartTimeOutput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sDescribeMaintenanceStartTimeOutput_HourOfDay = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HourOfDay", ID: &i_HourOfDay, Type: smithy.ShapeTypeInteger})
+var sDescribeMaintenanceStartTimeOutput_MinuteOfHour = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinuteOfHour", ID: &i_MinuteOfHour, Type: smithy.ShapeTypeInteger})
+var sDescribeMaintenanceStartTimeOutput_DayOfWeek = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DayOfWeek", ID: &i_DayOfWeek, Type: smithy.ShapeTypeInteger})
+var sDescribeMaintenanceStartTimeOutput_DayOfMonth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DayOfMonth", ID: &i_DayOfMonth, Type: smithy.ShapeTypeInteger})
+var sDescribeMaintenanceStartTimeOutput_Timezone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timezone", ID: &i_GatewayTimezone, Type: smithy.ShapeTypeString})
+var sDescribeMaintenanceStartTimeOutput_SoftwareUpdatePreferences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SoftwareUpdatePreferences", ID: &iSoftwareUpdatePreferences, Members: &mSoftwareUpdatePreferences, Type: smithy.ShapeTypeStructure})
+var sDescribeNFSFileSharesInput_FileShareARNList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileShareARNList", ID: &i_FileShareARNList, Members: &m_FileShareARNList, Type: smithy.ShapeTypeList})
+var sDescribeNFSFileSharesOutput_NFSFileShareInfoList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NFSFileShareInfoList", ID: &i_NFSFileShareInfoList, Members: &m_NFSFileShareInfoList, Type: smithy.ShapeTypeList})
+var sDescribeSMBFileSharesInput_FileShareARNList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileShareARNList", ID: &i_FileShareARNList, Members: &m_FileShareARNList, Type: smithy.ShapeTypeList})
+var sDescribeSMBFileSharesOutput_SMBFileShareInfoList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SMBFileShareInfoList", ID: &i_SMBFileShareInfoList, Members: &m_SMBFileShareInfoList, Type: smithy.ShapeTypeList})
+var sDescribeSMBSettingsInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sDescribeSMBSettingsOutput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sDescribeSMBSettingsOutput_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sDescribeSMBSettingsOutput_ActiveDirectoryStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActiveDirectoryStatus", ID: &iActiveDirectoryStatus, Members: &mActiveDirectoryStatus, Type: smithy.ShapeTypeEnum})
+var sDescribeSMBSettingsOutput_SMBGuestPasswordSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SMBGuestPasswordSet", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sDescribeSMBSettingsOutput_SMBSecurityStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SMBSecurityStrategy", ID: &iSMBSecurityStrategy, Members: &mSMBSecurityStrategy, Type: smithy.ShapeTypeEnum})
+var sDescribeSMBSettingsOutput_FileSharesVisible = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSharesVisible", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sDescribeSMBSettingsOutput_SMBLocalGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SMBLocalGroups", ID: &iSMBLocalGroups, Members: &mSMBLocalGroups, Type: smithy.ShapeTypeStructure})
+var sDescribeSnapshotScheduleInput_VolumeARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeARN", ID: &i_VolumeARN, Type: smithy.ShapeTypeString})
+var sDescribeSnapshotScheduleOutput_VolumeARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeARN", ID: &i_VolumeARN, Type: smithy.ShapeTypeString})
+var sDescribeSnapshotScheduleOutput_StartAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartAt", ID: &i_HourOfDay, Type: smithy.ShapeTypeInteger})
+var sDescribeSnapshotScheduleOutput_RecurrenceInHours = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecurrenceInHours", ID: &i_RecurrenceInHours, Type: smithy.ShapeTypeInteger})
+var sDescribeSnapshotScheduleOutput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sDescribeSnapshotScheduleOutput_Timezone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timezone", ID: &i_GatewayTimezone, Type: smithy.ShapeTypeString})
+var sDescribeSnapshotScheduleOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sDescribeStorediSCSIVolumesInput_VolumeARNs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeARNs", ID: &i_VolumeARNs, Members: &m_VolumeARNs, Type: smithy.ShapeTypeList})
+var sDescribeStorediSCSIVolumesOutput_StorediSCSIVolumes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorediSCSIVolumes", ID: &i_StorediSCSIVolumes, Members: &m_StorediSCSIVolumes, Type: smithy.ShapeTypeList})
+var sDescribeTapeArchivesInput_TapeARNs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeARNs", ID: &i_TapeARNs, Members: &m_TapeARNs, Type: smithy.ShapeTypeList})
+var sDescribeTapeArchivesInput_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_Marker, Type: smithy.ShapeTypeString})
+var sDescribeTapeArchivesInput_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_PositiveIntObject, Type: smithy.ShapeTypeInteger})
+var sDescribeTapeArchivesOutput_TapeArchives = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeArchives", ID: &i_TapeArchives, Members: &m_TapeArchives, Type: smithy.ShapeTypeList})
+var sDescribeTapeArchivesOutput_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_Marker, Type: smithy.ShapeTypeString})
+var sDescribeTapeRecoveryPointsInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sDescribeTapeRecoveryPointsInput_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_Marker, Type: smithy.ShapeTypeString})
+var sDescribeTapeRecoveryPointsInput_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_PositiveIntObject, Type: smithy.ShapeTypeInteger})
+var sDescribeTapeRecoveryPointsOutput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sDescribeTapeRecoveryPointsOutput_TapeRecoveryPointInfos = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeRecoveryPointInfos", ID: &i_TapeRecoveryPointInfos, Members: &m_TapeRecoveryPointInfos, Type: smithy.ShapeTypeList})
+var sDescribeTapeRecoveryPointsOutput_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_Marker, Type: smithy.ShapeTypeString})
+var sDescribeTapesInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sDescribeTapesInput_TapeARNs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeARNs", ID: &i_TapeARNs, Members: &m_TapeARNs, Type: smithy.ShapeTypeList})
+var sDescribeTapesInput_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_Marker, Type: smithy.ShapeTypeString})
+var sDescribeTapesInput_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_PositiveIntObject, Type: smithy.ShapeTypeInteger})
+var sDescribeTapesOutput_Tapes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tapes", ID: &i_Tapes, Members: &m_Tapes, Type: smithy.ShapeTypeList})
+var sDescribeTapesOutput_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_Marker, Type: smithy.ShapeTypeString})
+var sDescribeUploadBufferInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sDescribeUploadBufferOutput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sDescribeUploadBufferOutput_DiskIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiskIds", ID: &i_DiskIds, Members: &m_DiskIds, Type: smithy.ShapeTypeList})
+var sDescribeUploadBufferOutput_UploadBufferUsedInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UploadBufferUsedInBytes", ID: &i_long, Type: smithy.ShapeTypeLong})
+var sDescribeUploadBufferOutput_UploadBufferAllocatedInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UploadBufferAllocatedInBytes", ID: &i_long, Type: smithy.ShapeTypeLong})
+var sDescribeVTLDevicesInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sDescribeVTLDevicesInput_VTLDeviceARNs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VTLDeviceARNs", ID: &i_VTLDeviceARNs, Members: &m_VTLDeviceARNs, Type: smithy.ShapeTypeList})
+var sDescribeVTLDevicesInput_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_Marker, Type: smithy.ShapeTypeString})
+var sDescribeVTLDevicesInput_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_PositiveIntObject, Type: smithy.ShapeTypeInteger})
+var sDescribeVTLDevicesOutput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sDescribeVTLDevicesOutput_VTLDevices = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VTLDevices", ID: &i_VTLDevices, Members: &m_VTLDevices, Type: smithy.ShapeTypeList})
+var sDescribeVTLDevicesOutput_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_Marker, Type: smithy.ShapeTypeString})
+var sDescribeWorkingStorageInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sDescribeWorkingStorageOutput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sDescribeWorkingStorageOutput_DiskIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiskIds", ID: &i_DiskIds, Members: &m_DiskIds, Type: smithy.ShapeTypeList})
+var sDescribeWorkingStorageOutput_WorkingStorageUsedInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkingStorageUsedInBytes", ID: &i_long, Type: smithy.ShapeTypeLong})
+var sDescribeWorkingStorageOutput_WorkingStorageAllocatedInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkingStorageAllocatedInBytes", ID: &i_long, Type: smithy.ShapeTypeLong})
+var sDetachVolumeInput_VolumeARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeARN", ID: &i_VolumeARN, Type: smithy.ShapeTypeString})
+var sDetachVolumeInput_ForceDetach = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForceDetach", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sDetachVolumeOutput_VolumeARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeARN", ID: &i_VolumeARN, Type: smithy.ShapeTypeString})
+var sDisableGatewayInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sDisableGatewayOutput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sDisassociateFileSystemInput_FileSystemAssociationARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemAssociationARN", ID: &i_FileSystemAssociationARN, Type: smithy.ShapeTypeString})
+var sDisassociateFileSystemInput_ForceDelete = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForceDelete", ID: &i_Boolean2, Type: smithy.ShapeTypeBoolean})
+var sDisassociateFileSystemOutput_FileSystemAssociationARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemAssociationARN", ID: &i_FileSystemAssociationARN, Type: smithy.ShapeTypeString})
+var sEvictFilesFailingUploadInput_FileShareARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileShareARN", ID: &i_FileShareARN, Type: smithy.ShapeTypeString})
+var sEvictFilesFailingUploadInput_ForceRemove = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForceRemove", ID: &i_Boolean2, Type: smithy.ShapeTypeBoolean})
+var sEvictFilesFailingUploadOutput_NotificationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotificationId", ID: &i_string, Type: smithy.ShapeTypeString})
+var sJoinDomainInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sJoinDomainInput_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sJoinDomainInput_OrganizationalUnit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationalUnit", ID: &i_OrganizationalUnit, Type: smithy.ShapeTypeString})
+var sJoinDomainInput_DomainControllers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainControllers", ID: &i_Hosts, Members: &m_Hosts, Type: smithy.ShapeTypeList})
+var sJoinDomainInput_TimeoutInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeoutInSeconds", ID: &i_TimeoutInSeconds, Type: smithy.ShapeTypeInteger})
+var sJoinDomainInput_UserName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserName", ID: &i_DomainUserName, Type: smithy.ShapeTypeString})
+var sJoinDomainInput_Password = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Password", ID: &i_DomainUserPassword, Traits: &t1, Type: smithy.ShapeTypeString})
+var sJoinDomainOutput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sJoinDomainOutput_ActiveDirectoryStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActiveDirectoryStatus", ID: &iActiveDirectoryStatus, Members: &mActiveDirectoryStatus, Type: smithy.ShapeTypeEnum})
+var sListAutomaticTapeCreationPoliciesInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sListAutomaticTapeCreationPoliciesOutput_AutomaticTapeCreationPolicyInfos = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutomaticTapeCreationPolicyInfos", ID: &i_AutomaticTapeCreationPolicyInfos, Members: &m_AutomaticTapeCreationPolicyInfos, Type: smithy.ShapeTypeList})
+var sListCacheReportsInput_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_Marker, Type: smithy.ShapeTypeString})
+var sListCacheReportsOutput_CacheReportList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CacheReportList", ID: &i_CacheReportList, Members: &m_CacheReportList, Type: smithy.ShapeTypeList})
+var sListCacheReportsOutput_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_Marker, Type: smithy.ShapeTypeString})
+var sListFileSharesInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sListFileSharesInput_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_PositiveIntObject, Type: smithy.ShapeTypeInteger})
+var sListFileSharesInput_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_Marker, Type: smithy.ShapeTypeString})
+var sListFileSharesOutput_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_Marker, Type: smithy.ShapeTypeString})
+var sListFileSharesOutput_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_Marker, Type: smithy.ShapeTypeString})
+var sListFileSharesOutput_FileShareInfoList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileShareInfoList", ID: &i_FileShareInfoList, Members: &m_FileShareInfoList, Type: smithy.ShapeTypeList})
+var sListFileSystemAssociationsInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sListFileSystemAssociationsInput_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_PositiveIntObject, Type: smithy.ShapeTypeInteger})
+var sListFileSystemAssociationsInput_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_Marker, Type: smithy.ShapeTypeString})
+var sListFileSystemAssociationsOutput_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_Marker, Type: smithy.ShapeTypeString})
+var sListFileSystemAssociationsOutput_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_Marker, Type: smithy.ShapeTypeString})
+var sListFileSystemAssociationsOutput_FileSystemAssociationSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemAssociationSummaryList", ID: &i_FileSystemAssociationSummaryList, Members: &m_FileSystemAssociationSummaryList, Type: smithy.ShapeTypeList})
+var sListGatewaysInput_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_Marker, Type: smithy.ShapeTypeString})
+var sListGatewaysInput_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_PositiveIntObject, Type: smithy.ShapeTypeInteger})
+var sListGatewaysOutput_Gateways = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Gateways", ID: &i_Gateways, Members: &m_Gateways, Type: smithy.ShapeTypeList})
+var sListGatewaysOutput_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_Marker, Type: smithy.ShapeTypeString})
+var sListLocalDisksInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sListLocalDisksOutput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sListLocalDisksOutput_Disks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Disks", ID: &i_Disks, Members: &m_Disks, Type: smithy.ShapeTypeList})
+var sListTagsForResourceInput_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sListTagsForResourceInput_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_Marker, Type: smithy.ShapeTypeString})
+var sListTagsForResourceInput_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_PositiveIntObject, Type: smithy.ShapeTypeInteger})
+var sListTagsForResourceOutput_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sListTagsForResourceOutput_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_Marker, Type: smithy.ShapeTypeString})
+var sListTagsForResourceOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sListTapePoolsInput_PoolARNs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoolARNs", ID: &i_PoolARNs, Members: &m_PoolARNs, Type: smithy.ShapeTypeList})
+var sListTapePoolsInput_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_Marker, Type: smithy.ShapeTypeString})
+var sListTapePoolsInput_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_PositiveIntObject, Type: smithy.ShapeTypeInteger})
+var sListTapePoolsOutput_PoolInfos = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoolInfos", ID: &i_PoolInfos, Members: &m_PoolInfos, Type: smithy.ShapeTypeList})
+var sListTapePoolsOutput_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_Marker, Type: smithy.ShapeTypeString})
+var sListTapesInput_TapeARNs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeARNs", ID: &i_TapeARNs, Members: &m_TapeARNs, Type: smithy.ShapeTypeList})
+var sListTapesInput_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_Marker, Type: smithy.ShapeTypeString})
+var sListTapesInput_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_PositiveIntObject, Type: smithy.ShapeTypeInteger})
+var sListTapesOutput_TapeInfos = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeInfos", ID: &i_TapeInfos, Members: &m_TapeInfos, Type: smithy.ShapeTypeList})
+var sListTapesOutput_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_Marker, Type: smithy.ShapeTypeString})
+var sListVolumeInitiatorsInput_VolumeARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeARN", ID: &i_VolumeARN, Type: smithy.ShapeTypeString})
+var sListVolumeInitiatorsOutput_Initiators = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Initiators", ID: &i_Initiators, Members: &m_Initiators, Type: smithy.ShapeTypeList})
+var sListVolumeRecoveryPointsInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sListVolumeRecoveryPointsOutput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sListVolumeRecoveryPointsOutput_VolumeRecoveryPointInfos = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeRecoveryPointInfos", ID: &i_VolumeRecoveryPointInfos, Members: &m_VolumeRecoveryPointInfos, Type: smithy.ShapeTypeList})
+var sListVolumesInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sListVolumesInput_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_Marker, Type: smithy.ShapeTypeString})
+var sListVolumesInput_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_PositiveIntObject, Type: smithy.ShapeTypeInteger})
+var sListVolumesOutput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sListVolumesOutput_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_Marker, Type: smithy.ShapeTypeString})
+var sListVolumesOutput_VolumeInfos = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeInfos", ID: &i_VolumeInfos, Members: &m_VolumeInfos, Type: smithy.ShapeTypeList})
+var sNotifyWhenUploadedInput_FileShareARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileShareARN", ID: &i_FileShareARN, Type: smithy.ShapeTypeString})
+var sNotifyWhenUploadedOutput_FileShareARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileShareARN", ID: &i_FileShareARN, Type: smithy.ShapeTypeString})
+var sNotifyWhenUploadedOutput_NotificationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotificationId", ID: &i_NotificationId, Type: smithy.ShapeTypeString})
+var sRefreshCacheInput_FileShareARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileShareARN", ID: &i_FileShareARN, Type: smithy.ShapeTypeString})
+var sRefreshCacheInput_FolderList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FolderList", ID: &i_FolderList, Members: &m_FolderList, Type: smithy.ShapeTypeList})
+var sRefreshCacheInput_Recursive = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Recursive", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sRefreshCacheOutput_FileShareARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileShareARN", ID: &i_FileShareARN, Type: smithy.ShapeTypeString})
+var sRefreshCacheOutput_NotificationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotificationId", ID: &i_NotificationId, Type: smithy.ShapeTypeString})
+var sRemoveTagsFromResourceInput_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sRemoveTagsFromResourceInput_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeys, Members: &m_TagKeys, Type: smithy.ShapeTypeList})
+var sRemoveTagsFromResourceOutput_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sResetCacheInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sResetCacheOutput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sRetrieveTapeArchiveInput_TapeARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeARN", ID: &i_TapeARN, Type: smithy.ShapeTypeString})
+var sRetrieveTapeArchiveInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sRetrieveTapeArchiveOutput_TapeARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeARN", ID: &i_TapeARN, Type: smithy.ShapeTypeString})
+var sRetrieveTapeRecoveryPointInput_TapeARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeARN", ID: &i_TapeARN, Type: smithy.ShapeTypeString})
+var sRetrieveTapeRecoveryPointInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sRetrieveTapeRecoveryPointOutput_TapeARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TapeARN", ID: &i_TapeARN, Type: smithy.ShapeTypeString})
+var sSetLocalConsolePasswordInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sSetLocalConsolePasswordInput_LocalConsolePassword = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocalConsolePassword", ID: &i_LocalConsolePassword, Traits: &t1, Type: smithy.ShapeTypeString})
+var sSetLocalConsolePasswordOutput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sSetSMBGuestPasswordInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sSetSMBGuestPasswordInput_Password = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Password", ID: &i_SMBGuestPassword, Traits: &t1, Type: smithy.ShapeTypeString})
+var sSetSMBGuestPasswordOutput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sShutdownGatewayInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sShutdownGatewayOutput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sStartAvailabilityMonitorTestInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sStartAvailabilityMonitorTestOutput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sStartCacheReportInput_FileShareARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileShareARN", ID: &i_FileShareARN, Type: smithy.ShapeTypeString})
+var sStartCacheReportInput_Role = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Role", ID: &i_Role, Type: smithy.ShapeTypeString})
+var sStartCacheReportInput_LocationARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocationARN", ID: &i_LocationARN, Type: smithy.ShapeTypeString})
+var sStartCacheReportInput_BucketRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketRegion", ID: &i_RegionId, Type: smithy.ShapeTypeString})
+var sStartCacheReportInput_VPCEndpointDNSName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPCEndpointDNSName", ID: &i_DNSHostName, Type: smithy.ShapeTypeString})
+var sStartCacheReportInput_InclusionFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InclusionFilters", ID: &i_CacheReportFilterList, Members: &m_CacheReportFilterList, Type: smithy.ShapeTypeList})
+var sStartCacheReportInput_ExclusionFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExclusionFilters", ID: &i_CacheReportFilterList, Members: &m_CacheReportFilterList, Type: smithy.ShapeTypeList})
+var sStartCacheReportInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sStartCacheReportInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sStartCacheReportOutput_CacheReportARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CacheReportARN", ID: &i_CacheReportARN, Type: smithy.ShapeTypeString})
+var sStartGatewayInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sStartGatewayOutput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sUpdateAutomaticTapeCreationPolicyInput_AutomaticTapeCreationRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutomaticTapeCreationRules", ID: &i_AutomaticTapeCreationRules, Members: &m_AutomaticTapeCreationRules, Type: smithy.ShapeTypeList})
+var sUpdateAutomaticTapeCreationPolicyInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sUpdateAutomaticTapeCreationPolicyOutput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sUpdateBandwidthRateLimitInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sUpdateBandwidthRateLimitInput_AverageUploadRateLimitInBitsPerSec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AverageUploadRateLimitInBitsPerSec", ID: &i_BandwidthUploadRateLimit, Type: smithy.ShapeTypeLong})
+var sUpdateBandwidthRateLimitInput_AverageDownloadRateLimitInBitsPerSec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AverageDownloadRateLimitInBitsPerSec", ID: &i_BandwidthDownloadRateLimit, Type: smithy.ShapeTypeLong})
+var sUpdateBandwidthRateLimitOutput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sUpdateBandwidthRateLimitScheduleInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sUpdateBandwidthRateLimitScheduleInput_BandwidthRateLimitIntervals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BandwidthRateLimitIntervals", ID: &i_BandwidthRateLimitIntervals, Members: &m_BandwidthRateLimitIntervals, Type: smithy.ShapeTypeList})
+var sUpdateBandwidthRateLimitScheduleOutput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sUpdateChapCredentialsInput_TargetARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetARN", ID: &i_TargetARN, Type: smithy.ShapeTypeString})
+var sUpdateChapCredentialsInput_SecretToAuthenticateInitiator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretToAuthenticateInitiator", ID: &i_ChapSecret, Traits: &t1, Type: smithy.ShapeTypeString})
+var sUpdateChapCredentialsInput_InitiatorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InitiatorName", ID: &i_IqnName, Type: smithy.ShapeTypeString})
+var sUpdateChapCredentialsInput_SecretToAuthenticateTarget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretToAuthenticateTarget", ID: &i_ChapSecret, Traits: &t1, Type: smithy.ShapeTypeString})
+var sUpdateChapCredentialsOutput_TargetARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetARN", ID: &i_TargetARN, Type: smithy.ShapeTypeString})
+var sUpdateChapCredentialsOutput_InitiatorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InitiatorName", ID: &i_IqnName, Type: smithy.ShapeTypeString})
+var sUpdateFileSystemAssociationInput_FileSystemAssociationARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemAssociationARN", ID: &i_FileSystemAssociationARN, Type: smithy.ShapeTypeString})
+var sUpdateFileSystemAssociationInput_UserName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserName", ID: &i_DomainUserName, Type: smithy.ShapeTypeString})
+var sUpdateFileSystemAssociationInput_Password = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Password", ID: &i_DomainUserPassword, Traits: &t1, Type: smithy.ShapeTypeString})
+var sUpdateFileSystemAssociationInput_AuditDestinationARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuditDestinationARN", ID: &i_AuditDestinationARN, Type: smithy.ShapeTypeString})
+var sUpdateFileSystemAssociationInput_CacheAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CacheAttributes", ID: &iCacheAttributes, Members: &mCacheAttributes, Type: smithy.ShapeTypeStructure})
+var sUpdateFileSystemAssociationOutput_FileSystemAssociationARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemAssociationARN", ID: &i_FileSystemAssociationARN, Type: smithy.ShapeTypeString})
+var sUpdateGatewayInformationInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sUpdateGatewayInformationInput_GatewayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayName", ID: &i_GatewayName, Type: smithy.ShapeTypeString})
+var sUpdateGatewayInformationInput_GatewayTimezone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayTimezone", ID: &i_GatewayTimezone, Type: smithy.ShapeTypeString})
+var sUpdateGatewayInformationInput_CloudWatchLogGroupARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchLogGroupARN", ID: &i_CloudWatchLogGroupARN, Type: smithy.ShapeTypeString})
+var sUpdateGatewayInformationInput_GatewayCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayCapacity", ID: &iGatewayCapacity, Members: &mGatewayCapacity, Type: smithy.ShapeTypeEnum})
+var sUpdateGatewayInformationOutput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sUpdateGatewayInformationOutput_GatewayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayName", ID: &i_string, Type: smithy.ShapeTypeString})
+var sUpdateGatewaySoftwareNowInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sUpdateGatewaySoftwareNowOutput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sUpdateMaintenanceStartTimeInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sUpdateMaintenanceStartTimeInput_HourOfDay = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HourOfDay", ID: &i_HourOfDay, Type: smithy.ShapeTypeInteger})
+var sUpdateMaintenanceStartTimeInput_MinuteOfHour = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinuteOfHour", ID: &i_MinuteOfHour, Type: smithy.ShapeTypeInteger})
+var sUpdateMaintenanceStartTimeInput_DayOfWeek = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DayOfWeek", ID: &i_DayOfWeek, Type: smithy.ShapeTypeInteger})
+var sUpdateMaintenanceStartTimeInput_DayOfMonth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DayOfMonth", ID: &i_DayOfMonth, Type: smithy.ShapeTypeInteger})
+var sUpdateMaintenanceStartTimeInput_SoftwareUpdatePreferences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SoftwareUpdatePreferences", ID: &iSoftwareUpdatePreferences, Members: &mSoftwareUpdatePreferences, Type: smithy.ShapeTypeStructure})
+var sUpdateMaintenanceStartTimeOutput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sUpdateNFSFileShareInput_FileShareARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileShareARN", ID: &i_FileShareARN, Type: smithy.ShapeTypeString})
+var sUpdateNFSFileShareInput_EncryptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionType", ID: &iEncryptionType, Members: &mEncryptionType, Type: smithy.ShapeTypeEnum})
+var sUpdateNFSFileShareInput_KMSEncrypted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMSEncrypted", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sUpdateNFSFileShareInput_KMSKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMSKey", ID: &i_KMSKey, Type: smithy.ShapeTypeString})
+var sUpdateNFSFileShareInput_NFSFileShareDefaults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NFSFileShareDefaults", ID: &iNFSFileShareDefaults, Members: &mNFSFileShareDefaults, Type: smithy.ShapeTypeStructure})
+var sUpdateNFSFileShareInput_DefaultStorageClass = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultStorageClass", ID: &i_StorageClass, Type: smithy.ShapeTypeString})
+var sUpdateNFSFileShareInput_ObjectACL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectACL", ID: &iObjectACL, Members: &mObjectACL, Type: smithy.ShapeTypeEnum})
+var sUpdateNFSFileShareInput_ClientList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientList", ID: &i_FileShareClientList, Members: &m_FileShareClientList, Type: smithy.ShapeTypeList})
+var sUpdateNFSFileShareInput_Squash = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Squash", ID: &i_Squash, Type: smithy.ShapeTypeString})
+var sUpdateNFSFileShareInput_ReadOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadOnly", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sUpdateNFSFileShareInput_GuessMIMETypeEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GuessMIMETypeEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sUpdateNFSFileShareInput_RequesterPays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequesterPays", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sUpdateNFSFileShareInput_FileShareName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileShareName", ID: &i_FileShareName, Type: smithy.ShapeTypeString})
+var sUpdateNFSFileShareInput_CacheAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CacheAttributes", ID: &iCacheAttributes, Members: &mCacheAttributes, Type: smithy.ShapeTypeStructure})
+var sUpdateNFSFileShareInput_NotificationPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotificationPolicy", ID: &i_NotificationPolicy, Type: smithy.ShapeTypeString})
+var sUpdateNFSFileShareInput_AuditDestinationARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuditDestinationARN", ID: &i_AuditDestinationARN, Type: smithy.ShapeTypeString})
+var sUpdateNFSFileShareOutput_FileShareARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileShareARN", ID: &i_FileShareARN, Type: smithy.ShapeTypeString})
+var sUpdateSMBFileShareInput_FileShareARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileShareARN", ID: &i_FileShareARN, Type: smithy.ShapeTypeString})
+var sUpdateSMBFileShareInput_EncryptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionType", ID: &iEncryptionType, Members: &mEncryptionType, Type: smithy.ShapeTypeEnum})
+var sUpdateSMBFileShareInput_KMSEncrypted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMSEncrypted", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sUpdateSMBFileShareInput_KMSKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMSKey", ID: &i_KMSKey, Type: smithy.ShapeTypeString})
+var sUpdateSMBFileShareInput_DefaultStorageClass = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultStorageClass", ID: &i_StorageClass, Type: smithy.ShapeTypeString})
+var sUpdateSMBFileShareInput_ObjectACL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectACL", ID: &iObjectACL, Members: &mObjectACL, Type: smithy.ShapeTypeEnum})
+var sUpdateSMBFileShareInput_ReadOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadOnly", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sUpdateSMBFileShareInput_GuessMIMETypeEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GuessMIMETypeEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sUpdateSMBFileShareInput_RequesterPays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequesterPays", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sUpdateSMBFileShareInput_SMBACLEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SMBACLEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sUpdateSMBFileShareInput_AccessBasedEnumeration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessBasedEnumeration", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sUpdateSMBFileShareInput_AdminUserList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdminUserList", ID: &i_UserList, Members: &m_UserList, Type: smithy.ShapeTypeList})
+var sUpdateSMBFileShareInput_ValidUserList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValidUserList", ID: &i_UserList, Members: &m_UserList, Type: smithy.ShapeTypeList})
+var sUpdateSMBFileShareInput_InvalidUserList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvalidUserList", ID: &i_UserList, Members: &m_UserList, Type: smithy.ShapeTypeList})
+var sUpdateSMBFileShareInput_AuditDestinationARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuditDestinationARN", ID: &i_AuditDestinationARN, Type: smithy.ShapeTypeString})
+var sUpdateSMBFileShareInput_CaseSensitivity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CaseSensitivity", ID: &iCaseSensitivity, Members: &mCaseSensitivity, Type: smithy.ShapeTypeEnum})
+var sUpdateSMBFileShareInput_FileShareName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileShareName", ID: &i_FileShareName, Type: smithy.ShapeTypeString})
+var sUpdateSMBFileShareInput_CacheAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CacheAttributes", ID: &iCacheAttributes, Members: &mCacheAttributes, Type: smithy.ShapeTypeStructure})
+var sUpdateSMBFileShareInput_NotificationPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotificationPolicy", ID: &i_NotificationPolicy, Type: smithy.ShapeTypeString})
+var sUpdateSMBFileShareInput_OplocksEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OplocksEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sUpdateSMBFileShareOutput_FileShareARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileShareARN", ID: &i_FileShareARN, Type: smithy.ShapeTypeString})
+var sUpdateSMBFileShareVisibilityInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sUpdateSMBFileShareVisibilityInput_FileSharesVisible = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSharesVisible", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sUpdateSMBFileShareVisibilityOutput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sUpdateSMBLocalGroupsInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sUpdateSMBLocalGroupsInput_SMBLocalGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SMBLocalGroups", ID: &iSMBLocalGroups, Members: &mSMBLocalGroups, Type: smithy.ShapeTypeStructure})
+var sUpdateSMBLocalGroupsOutput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sUpdateSMBSecurityStrategyInput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sUpdateSMBSecurityStrategyInput_SMBSecurityStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SMBSecurityStrategy", ID: &iSMBSecurityStrategy, Members: &mSMBSecurityStrategy, Type: smithy.ShapeTypeEnum})
+var sUpdateSMBSecurityStrategyOutput_GatewayARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GatewayARN", ID: &i_GatewayARN, Type: smithy.ShapeTypeString})
+var sUpdateSnapshotScheduleInput_VolumeARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeARN", ID: &i_VolumeARN, Type: smithy.ShapeTypeString})
+var sUpdateSnapshotScheduleInput_StartAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartAt", ID: &i_HourOfDay, Type: smithy.ShapeTypeInteger})
+var sUpdateSnapshotScheduleInput_RecurrenceInHours = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecurrenceInHours", ID: &i_RecurrenceInHours, Type: smithy.ShapeTypeInteger})
+var sUpdateSnapshotScheduleInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sUpdateSnapshotScheduleInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sUpdateSnapshotScheduleOutput_VolumeARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeARN", ID: &i_VolumeARN, Type: smithy.ShapeTypeString})
+var sUpdateVTLDeviceTypeInput_VTLDeviceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VTLDeviceARN", ID: &i_VTLDeviceARN, Type: smithy.ShapeTypeString})
+var sUpdateVTLDeviceTypeInput_DeviceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceType", ID: &i_DeviceType, Type: smithy.ShapeTypeString})
+var sUpdateVTLDeviceTypeOutput_VTLDeviceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VTLDeviceARN", ID: &i_VTLDeviceARN, Type: smithy.ShapeTypeString})
+
+var ActivateGateway = &sActivateGateway
+
+var AddCache = &sAddCache
+
+var AddTagsToResource = &sAddTagsToResource
+
+var AddUploadBuffer = &sAddUploadBuffer
+
+var AddWorkingStorage = &sAddWorkingStorage
+
+var AssignTapePool = &sAssignTapePool
+
+var AssociateFileSystem = &sAssociateFileSystem
+
+var AttachVolume = &sAttachVolume
+
+var CancelArchival = &sCancelArchival
+
+var CancelCacheReport = &sCancelCacheReport
+
+var CancelRetrieval = &sCancelRetrieval
+
+var CreateCachediSCSIVolume = &sCreateCachediSCSIVolume
+
+var CreateNFSFileShare = &sCreateNFSFileShare
+
+var CreateSMBFileShare = &sCreateSMBFileShare
+
+var CreateSnapshot = &sCreateSnapshot
+
+var CreateSnapshotFromVolumeRecoveryPoint = &sCreateSnapshotFromVolumeRecoveryPoint
+
+var CreateStorediSCSIVolume = &sCreateStorediSCSIVolume
+
+var CreateTapePool = &sCreateTapePool
+
+var CreateTapes = &sCreateTapes
+
+var CreateTapeWithBarcode = &sCreateTapeWithBarcode
+
+var DeleteAutomaticTapeCreationPolicy = &sDeleteAutomaticTapeCreationPolicy
+
+var DeleteBandwidthRateLimit = &sDeleteBandwidthRateLimit
+
+var DeleteCacheReport = &sDeleteCacheReport
+
+var DeleteChapCredentials = &sDeleteChapCredentials
+
+var DeleteFileShare = &sDeleteFileShare
+
+var DeleteGateway = &sDeleteGateway
+
+var DeleteSnapshotSchedule = &sDeleteSnapshotSchedule
+
+var DeleteTape = &sDeleteTape
+
+var DeleteTapeArchive = &sDeleteTapeArchive
+
+var DeleteTapePool = &sDeleteTapePool
+
+var DeleteVolume = &sDeleteVolume
+
+var DescribeAvailabilityMonitorTest = &sDescribeAvailabilityMonitorTest
+
+var DescribeBandwidthRateLimit = &sDescribeBandwidthRateLimit
+
+var DescribeBandwidthRateLimitSchedule = &sDescribeBandwidthRateLimitSchedule
+
+var DescribeCache = &sDescribeCache
+
+var DescribeCachediSCSIVolumes = &sDescribeCachediSCSIVolumes
+
+var DescribeCacheReport = &sDescribeCacheReport
+
+var DescribeChapCredentials = &sDescribeChapCredentials
+
+var DescribeFileSystemAssociations = &sDescribeFileSystemAssociations
+
+var DescribeGatewayInformation = &sDescribeGatewayInformation
+
+var DescribeMaintenanceStartTime = &sDescribeMaintenanceStartTime
+
+var DescribeNFSFileShares = &sDescribeNFSFileShares
+
+var DescribeSMBFileShares = &sDescribeSMBFileShares
+
+var DescribeSMBSettings = &sDescribeSMBSettings
+
+var DescribeSnapshotSchedule = &sDescribeSnapshotSchedule
+
+var DescribeStorediSCSIVolumes = &sDescribeStorediSCSIVolumes
+
+var DescribeTapeArchives = &sDescribeTapeArchives
+
+var DescribeTapeRecoveryPoints = &sDescribeTapeRecoveryPoints
+
+var DescribeTapes = &sDescribeTapes
+
+var DescribeUploadBuffer = &sDescribeUploadBuffer
+
+var DescribeVTLDevices = &sDescribeVTLDevices
+
+var DescribeWorkingStorage = &sDescribeWorkingStorage
+
+var DetachVolume = &sDetachVolume
+
+var DisableGateway = &sDisableGateway
+
+var DisassociateFileSystem = &sDisassociateFileSystem
+
+var EvictFilesFailingUpload = &sEvictFilesFailingUpload
+
+var JoinDomain = &sJoinDomain
+
+var ListAutomaticTapeCreationPolicies = &sListAutomaticTapeCreationPolicies
+
+var ListCacheReports = &sListCacheReports
+
+var ListFileShares = &sListFileShares
+
+var ListFileSystemAssociations = &sListFileSystemAssociations
+
+var ListGateways = &sListGateways
+
+var ListLocalDisks = &sListLocalDisks
+
+var ListTagsForResource = &sListTagsForResource
+
+var ListTapePools = &sListTapePools
+
+var ListTapes = &sListTapes
+
+var ListVolumeInitiators = &sListVolumeInitiators
+
+var ListVolumeRecoveryPoints = &sListVolumeRecoveryPoints
+
+var ListVolumes = &sListVolumes
+
+var NotifyWhenUploaded = &sNotifyWhenUploaded
+
+var RefreshCache = &sRefreshCache
+
+var RemoveTagsFromResource = &sRemoveTagsFromResource
+
+var ResetCache = &sResetCache
+
+var RetrieveTapeArchive = &sRetrieveTapeArchive
+
+var RetrieveTapeRecoveryPoint = &sRetrieveTapeRecoveryPoint
+
+var SetLocalConsolePassword = &sSetLocalConsolePassword
+
+var SetSMBGuestPassword = &sSetSMBGuestPassword
+
+var ShutdownGateway = &sShutdownGateway
+
+var StartAvailabilityMonitorTest = &sStartAvailabilityMonitorTest
+
+var StartCacheReport = &sStartCacheReport
+
+var StartGateway = &sStartGateway
+
+var UpdateAutomaticTapeCreationPolicy = &sUpdateAutomaticTapeCreationPolicy
+
+var UpdateBandwidthRateLimit = &sUpdateBandwidthRateLimit
+
+var UpdateBandwidthRateLimitSchedule = &sUpdateBandwidthRateLimitSchedule
+
+var UpdateChapCredentials = &sUpdateChapCredentials
+
+var UpdateFileSystemAssociation = &sUpdateFileSystemAssociation
+
+var UpdateGatewayInformation = &sUpdateGatewayInformation
+
+var UpdateGatewaySoftwareNow = &sUpdateGatewaySoftwareNow
+
+var UpdateMaintenanceStartTime = &sUpdateMaintenanceStartTime
+
+var UpdateNFSFileShare = &sUpdateNFSFileShare
+
+var UpdateSMBFileShare = &sUpdateSMBFileShare
+
+var UpdateSMBFileShareVisibility = &sUpdateSMBFileShareVisibility
+
+var UpdateSMBLocalGroups = &sUpdateSMBLocalGroups
+
+var UpdateSMBSecurityStrategy = &sUpdateSMBSecurityStrategy
+
+var UpdateSnapshotSchedule = &sUpdateSnapshotSchedule
+
+var UpdateVTLDeviceType = &sUpdateVTLDeviceType
+
+var _StorageGateway_20130630 = &s_StorageGateway_20130630
+
+var _ActivationKey = &s_ActivationKey
+
+var ActiveDirectoryStatus = &sActiveDirectoryStatus
+var ActiveDirectoryStatus_ACCESS_DENIED = &sActiveDirectoryStatus_ACCESS_DENIED
+var ActiveDirectoryStatus_DETACHED = &sActiveDirectoryStatus_DETACHED
+var ActiveDirectoryStatus_JOINED = &sActiveDirectoryStatus_JOINED
+var ActiveDirectoryStatus_JOINING = &sActiveDirectoryStatus_JOINING
+var ActiveDirectoryStatus_NETWORK_ERROR = &sActiveDirectoryStatus_NETWORK_ERROR
+var ActiveDirectoryStatus_TIMEOUT = &sActiveDirectoryStatus_TIMEOUT
+var ActiveDirectoryStatus_UNKNOWN_ERROR = &sActiveDirectoryStatus_UNKNOWN_ERROR
+var ActiveDirectoryStatus_INSUFFICIENT_PERMISSIONS = &sActiveDirectoryStatus_INSUFFICIENT_PERMISSIONS
+
+var _AuditDestinationARN = &s_AuditDestinationARN
+
+var _Authentication = &s_Authentication
+
+var AutomaticTapeCreationPolicyInfo = &sAutomaticTapeCreationPolicyInfo
+var AutomaticTapeCreationPolicyInfo_AutomaticTapeCreationRules = &sAutomaticTapeCreationPolicyInfo_AutomaticTapeCreationRules
+var AutomaticTapeCreationPolicyInfo_GatewayARN = &sAutomaticTapeCreationPolicyInfo_GatewayARN
+
+var _AutomaticTapeCreationPolicyInfos = &s_AutomaticTapeCreationPolicyInfos
+var _AutomaticTapeCreationPolicyInfos_member = &s_AutomaticTapeCreationPolicyInfos_member
+
+var AutomaticTapeCreationRule = &sAutomaticTapeCreationRule
+var AutomaticTapeCreationRule_TapeBarcodePrefix = &sAutomaticTapeCreationRule_TapeBarcodePrefix
+var AutomaticTapeCreationRule_PoolId = &sAutomaticTapeCreationRule_PoolId
+var AutomaticTapeCreationRule_TapeSizeInBytes = &sAutomaticTapeCreationRule_TapeSizeInBytes
+var AutomaticTapeCreationRule_MinimumNumTapes = &sAutomaticTapeCreationRule_MinimumNumTapes
+var AutomaticTapeCreationRule_Worm = &sAutomaticTapeCreationRule_Worm
+
+var _AutomaticTapeCreationRules = &s_AutomaticTapeCreationRules
+var _AutomaticTapeCreationRules_member = &s_AutomaticTapeCreationRules_member
+
+var AutomaticUpdatePolicy = &sAutomaticUpdatePolicy
+var AutomaticUpdatePolicy_ALL_VERSIONS = &sAutomaticUpdatePolicy_ALL_VERSIONS
+var AutomaticUpdatePolicy_EMERGENCY_VERSIONS_ONLY = &sAutomaticUpdatePolicy_EMERGENCY_VERSIONS_ONLY
+
+var AvailabilityMonitorTestStatus = &sAvailabilityMonitorTestStatus
+var AvailabilityMonitorTestStatus_COMPLETE = &sAvailabilityMonitorTestStatus_COMPLETE
+var AvailabilityMonitorTestStatus_FAILED = &sAvailabilityMonitorTestStatus_FAILED
+var AvailabilityMonitorTestStatus_PENDING = &sAvailabilityMonitorTestStatus_PENDING
+
+var _BandwidthDownloadRateLimit = &s_BandwidthDownloadRateLimit
+
+var BandwidthRateLimitInterval = &sBandwidthRateLimitInterval
+var BandwidthRateLimitInterval_StartHourOfDay = &sBandwidthRateLimitInterval_StartHourOfDay
+var BandwidthRateLimitInterval_StartMinuteOfHour = &sBandwidthRateLimitInterval_StartMinuteOfHour
+var BandwidthRateLimitInterval_EndHourOfDay = &sBandwidthRateLimitInterval_EndHourOfDay
+var BandwidthRateLimitInterval_EndMinuteOfHour = &sBandwidthRateLimitInterval_EndMinuteOfHour
+var BandwidthRateLimitInterval_DaysOfWeek = &sBandwidthRateLimitInterval_DaysOfWeek
+var BandwidthRateLimitInterval_AverageUploadRateLimitInBitsPerSec = &sBandwidthRateLimitInterval_AverageUploadRateLimitInBitsPerSec
+var BandwidthRateLimitInterval_AverageDownloadRateLimitInBitsPerSec = &sBandwidthRateLimitInterval_AverageDownloadRateLimitInBitsPerSec
+
+var _BandwidthRateLimitIntervals = &s_BandwidthRateLimitIntervals
+var _BandwidthRateLimitIntervals_member = &s_BandwidthRateLimitIntervals_member
+
+var _BandwidthType = &s_BandwidthType
+
+var _BandwidthUploadRateLimit = &s_BandwidthUploadRateLimit
+
+var _Boolean = &s_Boolean
+
+var _Boolean2 = &s_Boolean2
+
+var CacheAttributes = &sCacheAttributes
+var CacheAttributes_CacheStaleTimeoutInSeconds = &sCacheAttributes_CacheStaleTimeoutInSeconds
+
+var CachediSCSIVolume = &sCachediSCSIVolume
+var CachediSCSIVolume_VolumeARN = &sCachediSCSIVolume_VolumeARN
+var CachediSCSIVolume_VolumeId = &sCachediSCSIVolume_VolumeId
+var CachediSCSIVolume_VolumeType = &sCachediSCSIVolume_VolumeType
+var CachediSCSIVolume_VolumeStatus = &sCachediSCSIVolume_VolumeStatus
+var CachediSCSIVolume_VolumeAttachmentStatus = &sCachediSCSIVolume_VolumeAttachmentStatus
+var CachediSCSIVolume_VolumeSizeInBytes = &sCachediSCSIVolume_VolumeSizeInBytes
+var CachediSCSIVolume_VolumeProgress = &sCachediSCSIVolume_VolumeProgress
+var CachediSCSIVolume_SourceSnapshotId = &sCachediSCSIVolume_SourceSnapshotId
+var CachediSCSIVolume_VolumeiSCSIAttributes = &sCachediSCSIVolume_VolumeiSCSIAttributes
+var CachediSCSIVolume_CreatedDate = &sCachediSCSIVolume_CreatedDate
+var CachediSCSIVolume_VolumeUsedInBytes = &sCachediSCSIVolume_VolumeUsedInBytes
+var CachediSCSIVolume_KMSKey = &sCachediSCSIVolume_KMSKey
+var CachediSCSIVolume_TargetName = &sCachediSCSIVolume_TargetName
+
+var _CachediSCSIVolumes = &s_CachediSCSIVolumes
+var _CachediSCSIVolumes_member = &s_CachediSCSIVolumes_member
+
+var _CacheReportARN = &s_CacheReportARN
+
+var CacheReportFilter = &sCacheReportFilter
+var CacheReportFilter_Name = &sCacheReportFilter_Name
+var CacheReportFilter_Values = &sCacheReportFilter_Values
+
+var _CacheReportFilterList = &s_CacheReportFilterList
+var _CacheReportFilterList_member = &s_CacheReportFilterList_member
+
+var CacheReportFilterName = &sCacheReportFilterName
+var CacheReportFilterName_UploadState = &sCacheReportFilterName_UploadState
+var CacheReportFilterName_UploadFailureReason = &sCacheReportFilterName_UploadFailureReason
+
+var _CacheReportFilterValue = &s_CacheReportFilterValue
+
+var _CacheReportFilterValues = &s_CacheReportFilterValues
+var _CacheReportFilterValues_member = &s_CacheReportFilterValues_member
+
+var CacheReportInfo = &sCacheReportInfo
+var CacheReportInfo_CacheReportARN = &sCacheReportInfo_CacheReportARN
+var CacheReportInfo_CacheReportStatus = &sCacheReportInfo_CacheReportStatus
+var CacheReportInfo_ReportCompletionPercent = &sCacheReportInfo_ReportCompletionPercent
+var CacheReportInfo_EndTime = &sCacheReportInfo_EndTime
+var CacheReportInfo_Role = &sCacheReportInfo_Role
+var CacheReportInfo_FileShareARN = &sCacheReportInfo_FileShareARN
+var CacheReportInfo_LocationARN = &sCacheReportInfo_LocationARN
+var CacheReportInfo_StartTime = &sCacheReportInfo_StartTime
+var CacheReportInfo_InclusionFilters = &sCacheReportInfo_InclusionFilters
+var CacheReportInfo_ExclusionFilters = &sCacheReportInfo_ExclusionFilters
+var CacheReportInfo_ReportName = &sCacheReportInfo_ReportName
+var CacheReportInfo_Tags = &sCacheReportInfo_Tags
+
+var _CacheReportList = &s_CacheReportList
+var _CacheReportList_member = &s_CacheReportList_member
+
+var _CacheReportName = &s_CacheReportName
+
+var CacheReportStatus = &sCacheReportStatus
+var CacheReportStatus_IN_PROGRESS = &sCacheReportStatus_IN_PROGRESS
+var CacheReportStatus_COMPLETED = &sCacheReportStatus_COMPLETED
+var CacheReportStatus_CANCELED = &sCacheReportStatus_CANCELED
+var CacheReportStatus_FAILED = &sCacheReportStatus_FAILED
+var CacheReportStatus_ERROR = &sCacheReportStatus_ERROR
+
+var _CacheStaleTimeoutInSeconds = &s_CacheStaleTimeoutInSeconds
+
+var CaseSensitivity = &sCaseSensitivity
+var CaseSensitivity_ClientSpecified = &sCaseSensitivity_ClientSpecified
+var CaseSensitivity_CaseSensitive = &sCaseSensitivity_CaseSensitive
+
+var _ChapCredentials = &s_ChapCredentials
+var _ChapCredentials_member = &s_ChapCredentials_member
+
+var ChapInfo = &sChapInfo
+var ChapInfo_TargetARN = &sChapInfo_TargetARN
+var ChapInfo_SecretToAuthenticateInitiator = &sChapInfo_SecretToAuthenticateInitiator
+var ChapInfo_InitiatorName = &sChapInfo_InitiatorName
+var ChapInfo_SecretToAuthenticateTarget = &sChapInfo_SecretToAuthenticateTarget
+
+var _ChapSecret = &s_ChapSecret
+
+var _ClientToken = &s_ClientToken
+
+var _CloudWatchLogGroupARN = &s_CloudWatchLogGroupARN
+
+var _CreatedDate = &s_CreatedDate
+
+var _DayOfMonth = &s_DayOfMonth
+
+var _DayOfWeek = &s_DayOfWeek
+
+var _DaysOfWeek = &s_DaysOfWeek
+var _DaysOfWeek_member = &s_DaysOfWeek_member
+
+var _DeprecationDate = &s_DeprecationDate
+
+var _Description = &s_Description
+
+var DeviceiSCSIAttributes = &sDeviceiSCSIAttributes
+var DeviceiSCSIAttributes_TargetARN = &sDeviceiSCSIAttributes_TargetARN
+var DeviceiSCSIAttributes_NetworkInterfaceId = &sDeviceiSCSIAttributes_NetworkInterfaceId
+var DeviceiSCSIAttributes_NetworkInterfacePort = &sDeviceiSCSIAttributes_NetworkInterfacePort
+var DeviceiSCSIAttributes_ChapEnabled = &sDeviceiSCSIAttributes_ChapEnabled
+
+var _DeviceType = &s_DeviceType
+
+var Disk = &sDisk
+var Disk_DiskId = &sDisk_DiskId
+var Disk_DiskPath = &sDisk_DiskPath
+var Disk_DiskNode = &sDisk_DiskNode
+var Disk_DiskStatus = &sDisk_DiskStatus
+var Disk_DiskSizeInBytes = &sDisk_DiskSizeInBytes
+var Disk_DiskAllocationType = &sDisk_DiskAllocationType
+var Disk_DiskAllocationResource = &sDisk_DiskAllocationResource
+var Disk_DiskAttributeList = &sDisk_DiskAttributeList
+
+var _DiskAllocationType = &s_DiskAllocationType
+
+var _DiskAttribute = &s_DiskAttribute
+
+var _DiskAttributeList = &s_DiskAttributeList
+var _DiskAttributeList_member = &s_DiskAttributeList_member
+
+var _DiskId = &s_DiskId
+
+var _DiskIds = &s_DiskIds
+var _DiskIds_member = &s_DiskIds_member
+
+var _Disks = &s_Disks
+var _Disks_member = &s_Disks_member
+
+var _DNSHostName = &s_DNSHostName
+
+var _DomainName = &s_DomainName
+
+var _DomainUserName = &s_DomainUserName
+
+var _DomainUserPassword = &s_DomainUserPassword
+
+var _double = &s_double
+
+var _DoubleObject = &s_DoubleObject
+
+var _Ec2InstanceId = &s_Ec2InstanceId
+
+var _Ec2InstanceRegion = &s_Ec2InstanceRegion
+
+var EncryptionType = &sEncryptionType
+var EncryptionType_SseS3 = &sEncryptionType_SseS3
+var EncryptionType_SseKms = &sEncryptionType_SseKms
+var EncryptionType_DsseKms = &sEncryptionType_DsseKms
+
+var EndpointNetworkConfiguration = &sEndpointNetworkConfiguration
+var EndpointNetworkConfiguration_IpAddresses = &sEndpointNetworkConfiguration_IpAddresses
+
+var _EndpointType = &s_EndpointType
+
+var ErrorCode = &sErrorCode
+var ErrorCode_ActivationKeyExpired = &sErrorCode_ActivationKeyExpired
+var ErrorCode_ActivationKeyInvalid = &sErrorCode_ActivationKeyInvalid
+var ErrorCode_ActivationKeyNotFound = &sErrorCode_ActivationKeyNotFound
+var ErrorCode_GatewayInternalError = &sErrorCode_GatewayInternalError
+var ErrorCode_GatewayNotConnected = &sErrorCode_GatewayNotConnected
+var ErrorCode_GatewayNotFound = &sErrorCode_GatewayNotFound
+var ErrorCode_GatewayProxyNetworkConnectionBusy = &sErrorCode_GatewayProxyNetworkConnectionBusy
+var ErrorCode_AuthenticationFailure = &sErrorCode_AuthenticationFailure
+var ErrorCode_BandwidthThrottleScheduleNotFound = &sErrorCode_BandwidthThrottleScheduleNotFound
+var ErrorCode_Blocked = &sErrorCode_Blocked
+var ErrorCode_CannotExportSnapshot = &sErrorCode_CannotExportSnapshot
+var ErrorCode_ChapCredentialNotFound = &sErrorCode_ChapCredentialNotFound
+var ErrorCode_DiskAlreadyAllocated = &sErrorCode_DiskAlreadyAllocated
+var ErrorCode_DiskDoesNotExist = &sErrorCode_DiskDoesNotExist
+var ErrorCode_DiskSizeGreaterThanVolumeMaxSize = &sErrorCode_DiskSizeGreaterThanVolumeMaxSize
+var ErrorCode_DiskSizeLessThanVolumeSize = &sErrorCode_DiskSizeLessThanVolumeSize
+var ErrorCode_DiskSizeNotGigAligned = &sErrorCode_DiskSizeNotGigAligned
+var ErrorCode_DuplicateCertificateInfo = &sErrorCode_DuplicateCertificateInfo
+var ErrorCode_DuplicateSchedule = &sErrorCode_DuplicateSchedule
+var ErrorCode_EndpointNotFound = &sErrorCode_EndpointNotFound
+var ErrorCode_IAMNotSupported = &sErrorCode_IAMNotSupported
+var ErrorCode_InitiatorInvalid = &sErrorCode_InitiatorInvalid
+var ErrorCode_InitiatorNotFound = &sErrorCode_InitiatorNotFound
+var ErrorCode_InternalError = &sErrorCode_InternalError
+var ErrorCode_InvalidGateway = &sErrorCode_InvalidGateway
+var ErrorCode_InvalidEndpoint = &sErrorCode_InvalidEndpoint
+var ErrorCode_InvalidParameters = &sErrorCode_InvalidParameters
+var ErrorCode_InvalidSchedule = &sErrorCode_InvalidSchedule
+var ErrorCode_LocalStorageLimitExceeded = &sErrorCode_LocalStorageLimitExceeded
+var ErrorCode_LunAlreadyAllocated_ = &sErrorCode_LunAlreadyAllocated_
+var ErrorCode_LunInvalid = &sErrorCode_LunInvalid
+var ErrorCode_JoinDomainInProgress = &sErrorCode_JoinDomainInProgress
+var ErrorCode_MaximumContentLengthExceeded = &sErrorCode_MaximumContentLengthExceeded
+var ErrorCode_MaximumTapeCartridgeCountExceeded = &sErrorCode_MaximumTapeCartridgeCountExceeded
+var ErrorCode_MaximumVolumeCountExceeded = &sErrorCode_MaximumVolumeCountExceeded
+var ErrorCode_NetworkConfigurationChanged = &sErrorCode_NetworkConfigurationChanged
+var ErrorCode_NoDisksAvailable = &sErrorCode_NoDisksAvailable
+var ErrorCode_NotImplemented = &sErrorCode_NotImplemented
+var ErrorCode_NotSupported = &sErrorCode_NotSupported
+var ErrorCode_OperationAborted = &sErrorCode_OperationAborted
+var ErrorCode_OutdatedGateway = &sErrorCode_OutdatedGateway
+var ErrorCode_ParametersNotImplemented = &sErrorCode_ParametersNotImplemented
+var ErrorCode_RegionInvalid = &sErrorCode_RegionInvalid
+var ErrorCode_RequestTimeout = &sErrorCode_RequestTimeout
+var ErrorCode_ServiceUnavailable = &sErrorCode_ServiceUnavailable
+var ErrorCode_SnapshotDeleted = &sErrorCode_SnapshotDeleted
+var ErrorCode_SnapshotIdInvalid = &sErrorCode_SnapshotIdInvalid
+var ErrorCode_SnapshotInProgress = &sErrorCode_SnapshotInProgress
+var ErrorCode_SnapshotNotFound = &sErrorCode_SnapshotNotFound
+var ErrorCode_SnapshotScheduleNotFound = &sErrorCode_SnapshotScheduleNotFound
+var ErrorCode_StagingAreaFull = &sErrorCode_StagingAreaFull
+var ErrorCode_StorageFailure = &sErrorCode_StorageFailure
+var ErrorCode_TapeCartridgeNotFound = &sErrorCode_TapeCartridgeNotFound
+var ErrorCode_TargetAlreadyExists = &sErrorCode_TargetAlreadyExists
+var ErrorCode_TargetInvalid = &sErrorCode_TargetInvalid
+var ErrorCode_TargetNotFound = &sErrorCode_TargetNotFound
+var ErrorCode_UnauthorizedOperation = &sErrorCode_UnauthorizedOperation
+var ErrorCode_VolumeAlreadyExists = &sErrorCode_VolumeAlreadyExists
+var ErrorCode_VolumeIdInvalid = &sErrorCode_VolumeIdInvalid
+var ErrorCode_VolumeInUse = &sErrorCode_VolumeInUse
+var ErrorCode_VolumeNotFound = &sErrorCode_VolumeNotFound
+var ErrorCode_VolumeNotReady = &sErrorCode_VolumeNotReady
+
+var _errorDetails = &s_errorDetails
+var _errorDetails_key = &s_errorDetails_key
+var _errorDetails_value = &s_errorDetails_value
+
+var _FileShareARN = &s_FileShareARN
+
+var _FileShareARNList = &s_FileShareARNList
+var _FileShareARNList_member = &s_FileShareARNList_member
+
+var _FileShareClientList = &s_FileShareClientList
+var _FileShareClientList_member = &s_FileShareClientList_member
+
+var _FileShareId = &s_FileShareId
+
+var FileShareInfo = &sFileShareInfo
+var FileShareInfo_FileShareType = &sFileShareInfo_FileShareType
+var FileShareInfo_FileShareARN = &sFileShareInfo_FileShareARN
+var FileShareInfo_FileShareId = &sFileShareInfo_FileShareId
+var FileShareInfo_FileShareStatus = &sFileShareInfo_FileShareStatus
+var FileShareInfo_GatewayARN = &sFileShareInfo_GatewayARN
+
+var _FileShareInfoList = &s_FileShareInfoList
+var _FileShareInfoList_member = &s_FileShareInfoList_member
+
+var _FileShareName = &s_FileShareName
+
+var _FileShareStatus = &s_FileShareStatus
+
+var FileShareType = &sFileShareType
+var FileShareType_NFS = &sFileShareType_NFS
+var FileShareType_SMB = &sFileShareType_SMB
+
+var _FileSystemAssociationARN = &s_FileSystemAssociationARN
+
+var _FileSystemAssociationARNList = &s_FileSystemAssociationARNList
+var _FileSystemAssociationARNList_member = &s_FileSystemAssociationARNList_member
+
+var _FileSystemAssociationId = &s_FileSystemAssociationId
+
+var FileSystemAssociationInfo = &sFileSystemAssociationInfo
+var FileSystemAssociationInfo_FileSystemAssociationARN = &sFileSystemAssociationInfo_FileSystemAssociationARN
+var FileSystemAssociationInfo_LocationARN = &sFileSystemAssociationInfo_LocationARN
+var FileSystemAssociationInfo_FileSystemAssociationStatus = &sFileSystemAssociationInfo_FileSystemAssociationStatus
+var FileSystemAssociationInfo_AuditDestinationARN = &sFileSystemAssociationInfo_AuditDestinationARN
+var FileSystemAssociationInfo_GatewayARN = &sFileSystemAssociationInfo_GatewayARN
+var FileSystemAssociationInfo_Tags = &sFileSystemAssociationInfo_Tags
+var FileSystemAssociationInfo_CacheAttributes = &sFileSystemAssociationInfo_CacheAttributes
+var FileSystemAssociationInfo_EndpointNetworkConfiguration = &sFileSystemAssociationInfo_EndpointNetworkConfiguration
+var FileSystemAssociationInfo_FileSystemAssociationStatusDetails = &sFileSystemAssociationInfo_FileSystemAssociationStatusDetails
+
+var _FileSystemAssociationInfoList = &s_FileSystemAssociationInfoList
+var _FileSystemAssociationInfoList_member = &s_FileSystemAssociationInfoList_member
+
+var _FileSystemAssociationStatus = &s_FileSystemAssociationStatus
+
+var FileSystemAssociationStatusDetail = &sFileSystemAssociationStatusDetail
+var FileSystemAssociationStatusDetail_ErrorCode = &sFileSystemAssociationStatusDetail_ErrorCode
+
+var _FileSystemAssociationStatusDetails = &s_FileSystemAssociationStatusDetails
+var _FileSystemAssociationStatusDetails_member = &s_FileSystemAssociationStatusDetails_member
+
+var FileSystemAssociationSummary = &sFileSystemAssociationSummary
+var FileSystemAssociationSummary_FileSystemAssociationId = &sFileSystemAssociationSummary_FileSystemAssociationId
+var FileSystemAssociationSummary_FileSystemAssociationARN = &sFileSystemAssociationSummary_FileSystemAssociationARN
+var FileSystemAssociationSummary_FileSystemAssociationStatus = &sFileSystemAssociationSummary_FileSystemAssociationStatus
+var FileSystemAssociationSummary_GatewayARN = &sFileSystemAssociationSummary_GatewayARN
+
+var _FileSystemAssociationSummaryList = &s_FileSystemAssociationSummaryList
+var _FileSystemAssociationSummaryList_member = &s_FileSystemAssociationSummaryList_member
+
+var _FileSystemAssociationSyncErrorCode = &s_FileSystemAssociationSyncErrorCode
+
+var _FileSystemLocationARN = &s_FileSystemLocationARN
+
+var _Folder = &s_Folder
+
+var _FolderList = &s_FolderList
+var _FolderList_member = &s_FolderList_member
+
+var _GatewayARN = &s_GatewayARN
+
+var GatewayCapacity = &sGatewayCapacity
+var GatewayCapacity_Small = &sGatewayCapacity_Small
+var GatewayCapacity_Medium = &sGatewayCapacity_Medium
+var GatewayCapacity_Large = &sGatewayCapacity_Large
+
+var _GatewayId = &s_GatewayId
+
+var GatewayInfo = &sGatewayInfo
+var GatewayInfo_GatewayId = &sGatewayInfo_GatewayId
+var GatewayInfo_GatewayARN = &sGatewayInfo_GatewayARN
+var GatewayInfo_GatewayType = &sGatewayInfo_GatewayType
+var GatewayInfo_GatewayOperationalState = &sGatewayInfo_GatewayOperationalState
+var GatewayInfo_GatewayName = &sGatewayInfo_GatewayName
+var GatewayInfo_Ec2InstanceId = &sGatewayInfo_Ec2InstanceId
+var GatewayInfo_Ec2InstanceRegion = &sGatewayInfo_Ec2InstanceRegion
+var GatewayInfo_HostEnvironment = &sGatewayInfo_HostEnvironment
+var GatewayInfo_HostEnvironmentId = &sGatewayInfo_HostEnvironmentId
+var GatewayInfo_DeprecationDate = &sGatewayInfo_DeprecationDate
+var GatewayInfo_SoftwareVersion = &sGatewayInfo_SoftwareVersion
+
+var _GatewayName = &s_GatewayName
+
+var _GatewayNetworkInterfaces = &s_GatewayNetworkInterfaces
+var _GatewayNetworkInterfaces_member = &s_GatewayNetworkInterfaces_member
+
+var _GatewayOperationalState = &s_GatewayOperationalState
+
+var _Gateways = &s_Gateways
+var _Gateways_member = &s_Gateways_member
+
+var _GatewayState = &s_GatewayState
+
+var _GatewayTimezone = &s_GatewayTimezone
+
+var _GatewayType = &s_GatewayType
+
+var _Host = &s_Host
+
+var HostEnvironment = &sHostEnvironment
+var HostEnvironment_VMWARE = &sHostEnvironment_VMWARE
+var HostEnvironment_HYPER_V = &sHostEnvironment_HYPER_V
+var HostEnvironment_EC2 = &sHostEnvironment_EC2
+var HostEnvironment_KVM = &sHostEnvironment_KVM
+var HostEnvironment_OTHER = &sHostEnvironment_OTHER
+var HostEnvironment_SNOWBALL = &sHostEnvironment_SNOWBALL
+
+var _HostEnvironmentId = &s_HostEnvironmentId
+
+var _Hosts = &s_Hosts
+var _Hosts_member = &s_Hosts_member
+
+var _HourOfDay = &s_HourOfDay
+
+var _Initiator = &s_Initiator
+
+var _Initiators = &s_Initiators
+var _Initiators_member = &s_Initiators_member
+
+var _integer = &s_integer
+
+var InternalServerError = &sInternalServerError
+var InternalServerError_message = &sInternalServerError_message
+var InternalServerError_error = &sInternalServerError_error
+
+var InvalidGatewayRequestException = &sInvalidGatewayRequestException
+var InvalidGatewayRequestException_message = &sInvalidGatewayRequestException_message
+var InvalidGatewayRequestException_error = &sInvalidGatewayRequestException_error
+
+var _IpAddressList = &s_IpAddressList
+var _IpAddressList_member = &s_IpAddressList_member
+
+var _IPV4Address = &s_IPV4Address
+
+var _Ipv4OrIpv6AddressCIDR = &s_Ipv4OrIpv6AddressCIDR
+
+var _IqnName = &s_IqnName
+
+var _KMSKey = &s_KMSKey
+
+var _LastSoftwareUpdate = &s_LastSoftwareUpdate
+
+var _LocalConsolePassword = &s_LocalConsolePassword
+
+var _LocationARN = &s_LocationARN
+
+var _long = &s_long
+
+var _Marker = &s_Marker
+
+var _MediumChangerType = &s_MediumChangerType
+
+var _MinimumNumTapes = &s_MinimumNumTapes
+
+var _MinuteOfHour = &s_MinuteOfHour
+
+var NetworkInterface = &sNetworkInterface
+var NetworkInterface_Ipv4Address = &sNetworkInterface_Ipv4Address
+var NetworkInterface_MacAddress = &sNetworkInterface_MacAddress
+var NetworkInterface_Ipv6Address = &sNetworkInterface_Ipv6Address
+
+var _NetworkInterfaceId = &s_NetworkInterfaceId
+
+var _NextUpdateAvailabilityDate = &s_NextUpdateAvailabilityDate
+
+var NFSFileShareDefaults = &sNFSFileShareDefaults
+var NFSFileShareDefaults_FileMode = &sNFSFileShareDefaults_FileMode
+var NFSFileShareDefaults_DirectoryMode = &sNFSFileShareDefaults_DirectoryMode
+var NFSFileShareDefaults_GroupId = &sNFSFileShareDefaults_GroupId
+var NFSFileShareDefaults_OwnerId = &sNFSFileShareDefaults_OwnerId
+
+var NFSFileShareInfo = &sNFSFileShareInfo
+var NFSFileShareInfo_NFSFileShareDefaults = &sNFSFileShareInfo_NFSFileShareDefaults
+var NFSFileShareInfo_FileShareARN = &sNFSFileShareInfo_FileShareARN
+var NFSFileShareInfo_FileShareId = &sNFSFileShareInfo_FileShareId
+var NFSFileShareInfo_FileShareStatus = &sNFSFileShareInfo_FileShareStatus
+var NFSFileShareInfo_GatewayARN = &sNFSFileShareInfo_GatewayARN
+var NFSFileShareInfo_EncryptionType = &sNFSFileShareInfo_EncryptionType
+var NFSFileShareInfo_KMSEncrypted = &sNFSFileShareInfo_KMSEncrypted
+var NFSFileShareInfo_KMSKey = &sNFSFileShareInfo_KMSKey
+var NFSFileShareInfo_Path = &sNFSFileShareInfo_Path
+var NFSFileShareInfo_Role = &sNFSFileShareInfo_Role
+var NFSFileShareInfo_LocationARN = &sNFSFileShareInfo_LocationARN
+var NFSFileShareInfo_DefaultStorageClass = &sNFSFileShareInfo_DefaultStorageClass
+var NFSFileShareInfo_ObjectACL = &sNFSFileShareInfo_ObjectACL
+var NFSFileShareInfo_ClientList = &sNFSFileShareInfo_ClientList
+var NFSFileShareInfo_Squash = &sNFSFileShareInfo_Squash
+var NFSFileShareInfo_ReadOnly = &sNFSFileShareInfo_ReadOnly
+var NFSFileShareInfo_GuessMIMETypeEnabled = &sNFSFileShareInfo_GuessMIMETypeEnabled
+var NFSFileShareInfo_RequesterPays = &sNFSFileShareInfo_RequesterPays
+var NFSFileShareInfo_Tags = &sNFSFileShareInfo_Tags
+var NFSFileShareInfo_FileShareName = &sNFSFileShareInfo_FileShareName
+var NFSFileShareInfo_CacheAttributes = &sNFSFileShareInfo_CacheAttributes
+var NFSFileShareInfo_NotificationPolicy = &sNFSFileShareInfo_NotificationPolicy
+var NFSFileShareInfo_VPCEndpointDNSName = &sNFSFileShareInfo_VPCEndpointDNSName
+var NFSFileShareInfo_BucketRegion = &sNFSFileShareInfo_BucketRegion
+var NFSFileShareInfo_AuditDestinationARN = &sNFSFileShareInfo_AuditDestinationARN
+
+var _NFSFileShareInfoList = &s_NFSFileShareInfoList
+var _NFSFileShareInfoList_member = &s_NFSFileShareInfoList_member
+
+var _NotificationId = &s_NotificationId
+
+var _NotificationPolicy = &s_NotificationPolicy
+
+var _NumTapesToCreate = &s_NumTapesToCreate
+
+var ObjectACL = &sObjectACL
+var ObjectACL_private = &sObjectACL_private
+var ObjectACL_public_read = &sObjectACL_public_read
+var ObjectACL_public_read_write = &sObjectACL_public_read_write
+var ObjectACL_authenticated_read = &sObjectACL_authenticated_read
+var ObjectACL_bucket_owner_read = &sObjectACL_bucket_owner_read
+var ObjectACL_bucket_owner_full_control = &sObjectACL_bucket_owner_full_control
+var ObjectACL_aws_exec_read = &sObjectACL_aws_exec_read
+
+var _OrganizationalUnit = &s_OrganizationalUnit
+
+var _Path = &s_Path
+
+var _PermissionId = &s_PermissionId
+
+var _PermissionMode = &s_PermissionMode
+
+var _PoolARN = &s_PoolARN
+
+var _PoolARNs = &s_PoolARNs
+var _PoolARNs_member = &s_PoolARNs_member
+
+var _PoolId = &s_PoolId
+
+var PoolInfo = &sPoolInfo
+var PoolInfo_PoolARN = &sPoolInfo_PoolARN
+var PoolInfo_PoolName = &sPoolInfo_PoolName
+var PoolInfo_StorageClass = &sPoolInfo_StorageClass
+var PoolInfo_RetentionLockType = &sPoolInfo_RetentionLockType
+var PoolInfo_RetentionLockTimeInDays = &sPoolInfo_RetentionLockTimeInDays
+var PoolInfo_PoolStatus = &sPoolInfo_PoolStatus
+
+var _PoolInfos = &s_PoolInfos
+var _PoolInfos_member = &s_PoolInfos_member
+
+var _PoolName = &s_PoolName
+
+var PoolStatus = &sPoolStatus
+var PoolStatus_ACTIVE = &sPoolStatus_ACTIVE
+var PoolStatus_DELETED = &sPoolStatus_DELETED
+
+var _PositiveIntObject = &s_PositiveIntObject
+
+var _RecurrenceInHours = &s_RecurrenceInHours
+
+var _RegionId = &s_RegionId
+
+var _ReportCompletionPercent = &s_ReportCompletionPercent
+
+var _ResourceARN = &s_ResourceARN
+
+var _RetentionLockTimeInDays = &s_RetentionLockTimeInDays
+
+var RetentionLockType = &sRetentionLockType
+var RetentionLockType_COMPLIANCE = &sRetentionLockType_COMPLIANCE
+var RetentionLockType_GOVERNANCE = &sRetentionLockType_GOVERNANCE
+var RetentionLockType_NONE = &sRetentionLockType_NONE
+
+var _Role = &s_Role
+
+var ServiceUnavailableError = &sServiceUnavailableError
+var ServiceUnavailableError_message = &sServiceUnavailableError_message
+var ServiceUnavailableError_error = &sServiceUnavailableError_error
+
+var SMBFileShareInfo = &sSMBFileShareInfo
+var SMBFileShareInfo_FileShareARN = &sSMBFileShareInfo_FileShareARN
+var SMBFileShareInfo_FileShareId = &sSMBFileShareInfo_FileShareId
+var SMBFileShareInfo_FileShareStatus = &sSMBFileShareInfo_FileShareStatus
+var SMBFileShareInfo_GatewayARN = &sSMBFileShareInfo_GatewayARN
+var SMBFileShareInfo_EncryptionType = &sSMBFileShareInfo_EncryptionType
+var SMBFileShareInfo_KMSEncrypted = &sSMBFileShareInfo_KMSEncrypted
+var SMBFileShareInfo_KMSKey = &sSMBFileShareInfo_KMSKey
+var SMBFileShareInfo_Path = &sSMBFileShareInfo_Path
+var SMBFileShareInfo_Role = &sSMBFileShareInfo_Role
+var SMBFileShareInfo_LocationARN = &sSMBFileShareInfo_LocationARN
+var SMBFileShareInfo_DefaultStorageClass = &sSMBFileShareInfo_DefaultStorageClass
+var SMBFileShareInfo_ObjectACL = &sSMBFileShareInfo_ObjectACL
+var SMBFileShareInfo_ReadOnly = &sSMBFileShareInfo_ReadOnly
+var SMBFileShareInfo_GuessMIMETypeEnabled = &sSMBFileShareInfo_GuessMIMETypeEnabled
+var SMBFileShareInfo_RequesterPays = &sSMBFileShareInfo_RequesterPays
+var SMBFileShareInfo_SMBACLEnabled = &sSMBFileShareInfo_SMBACLEnabled
+var SMBFileShareInfo_AccessBasedEnumeration = &sSMBFileShareInfo_AccessBasedEnumeration
+var SMBFileShareInfo_AdminUserList = &sSMBFileShareInfo_AdminUserList
+var SMBFileShareInfo_ValidUserList = &sSMBFileShareInfo_ValidUserList
+var SMBFileShareInfo_InvalidUserList = &sSMBFileShareInfo_InvalidUserList
+var SMBFileShareInfo_AuditDestinationARN = &sSMBFileShareInfo_AuditDestinationARN
+var SMBFileShareInfo_Authentication = &sSMBFileShareInfo_Authentication
+var SMBFileShareInfo_CaseSensitivity = &sSMBFileShareInfo_CaseSensitivity
+var SMBFileShareInfo_Tags = &sSMBFileShareInfo_Tags
+var SMBFileShareInfo_FileShareName = &sSMBFileShareInfo_FileShareName
+var SMBFileShareInfo_CacheAttributes = &sSMBFileShareInfo_CacheAttributes
+var SMBFileShareInfo_NotificationPolicy = &sSMBFileShareInfo_NotificationPolicy
+var SMBFileShareInfo_VPCEndpointDNSName = &sSMBFileShareInfo_VPCEndpointDNSName
+var SMBFileShareInfo_BucketRegion = &sSMBFileShareInfo_BucketRegion
+var SMBFileShareInfo_OplocksEnabled = &sSMBFileShareInfo_OplocksEnabled
+
+var _SMBFileShareInfoList = &s_SMBFileShareInfoList
+var _SMBFileShareInfoList_member = &s_SMBFileShareInfoList_member
+
+var _SMBGuestPassword = &s_SMBGuestPassword
+
+var SMBLocalGroups = &sSMBLocalGroups
+var SMBLocalGroups_GatewayAdmins = &sSMBLocalGroups_GatewayAdmins
+
+var SMBSecurityStrategy = &sSMBSecurityStrategy
+var SMBSecurityStrategy_ClientSpecified = &sSMBSecurityStrategy_ClientSpecified
+var SMBSecurityStrategy_MandatorySigning = &sSMBSecurityStrategy_MandatorySigning
+var SMBSecurityStrategy_MandatoryEncryption = &sSMBSecurityStrategy_MandatoryEncryption
+var SMBSecurityStrategy_MandatoryEncryptionNoAes128 = &sSMBSecurityStrategy_MandatoryEncryptionNoAes128
+
+var _SnapshotDescription = &s_SnapshotDescription
+
+var _SnapshotId = &s_SnapshotId
+
+var SoftwareUpdatePreferences = &sSoftwareUpdatePreferences
+var SoftwareUpdatePreferences_AutomaticUpdatePolicy = &sSoftwareUpdatePreferences_AutomaticUpdatePolicy
+
+var _SoftwareUpdatesEndDate = &s_SoftwareUpdatesEndDate
+
+var _SoftwareVersion = &s_SoftwareVersion
+
+var _Squash = &s_Squash
+
+var _StorageClass = &s_StorageClass
+
+var StorageGatewayError = &sStorageGatewayError
+var StorageGatewayError_errorCode = &sStorageGatewayError_errorCode
+var StorageGatewayError_errorDetails = &sStorageGatewayError_errorDetails
+
+var StorediSCSIVolume = &sStorediSCSIVolume
+var StorediSCSIVolume_VolumeARN = &sStorediSCSIVolume_VolumeARN
+var StorediSCSIVolume_VolumeId = &sStorediSCSIVolume_VolumeId
+var StorediSCSIVolume_VolumeType = &sStorediSCSIVolume_VolumeType
+var StorediSCSIVolume_VolumeStatus = &sStorediSCSIVolume_VolumeStatus
+var StorediSCSIVolume_VolumeAttachmentStatus = &sStorediSCSIVolume_VolumeAttachmentStatus
+var StorediSCSIVolume_VolumeSizeInBytes = &sStorediSCSIVolume_VolumeSizeInBytes
+var StorediSCSIVolume_VolumeProgress = &sStorediSCSIVolume_VolumeProgress
+var StorediSCSIVolume_VolumeDiskId = &sStorediSCSIVolume_VolumeDiskId
+var StorediSCSIVolume_SourceSnapshotId = &sStorediSCSIVolume_SourceSnapshotId
+var StorediSCSIVolume_PreservedExistingData = &sStorediSCSIVolume_PreservedExistingData
+var StorediSCSIVolume_VolumeiSCSIAttributes = &sStorediSCSIVolume_VolumeiSCSIAttributes
+var StorediSCSIVolume_CreatedDate = &sStorediSCSIVolume_CreatedDate
+var StorediSCSIVolume_VolumeUsedInBytes = &sStorediSCSIVolume_VolumeUsedInBytes
+var StorediSCSIVolume_KMSKey = &sStorediSCSIVolume_KMSKey
+var StorediSCSIVolume_TargetName = &sStorediSCSIVolume_TargetName
+
+var _StorediSCSIVolumes = &s_StorediSCSIVolumes
+var _StorediSCSIVolumes_member = &s_StorediSCSIVolumes_member
+
+var _string = &s_string
+
+var _SupportedGatewayCapacities = &s_SupportedGatewayCapacities
+var _SupportedGatewayCapacities_member = &s_SupportedGatewayCapacities_member
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var _TagKey = &s_TagKey
+
+var _TagKeys = &s_TagKeys
+var _TagKeys_member = &s_TagKeys_member
+
+var _Tags = &s_Tags
+var _Tags_member = &s_Tags_member
+
+var _TagValue = &s_TagValue
+
+var Tape = &sTape
+var Tape_TapeARN = &sTape_TapeARN
+var Tape_TapeBarcode = &sTape_TapeBarcode
+var Tape_TapeCreatedDate = &sTape_TapeCreatedDate
+var Tape_TapeSizeInBytes = &sTape_TapeSizeInBytes
+var Tape_TapeStatus = &sTape_TapeStatus
+var Tape_VTLDevice = &sTape_VTLDevice
+var Tape_Progress = &sTape_Progress
+var Tape_TapeUsedInBytes = &sTape_TapeUsedInBytes
+var Tape_KMSKey = &sTape_KMSKey
+var Tape_PoolId = &sTape_PoolId
+var Tape_Worm = &sTape_Worm
+var Tape_RetentionStartDate = &sTape_RetentionStartDate
+var Tape_PoolEntryDate = &sTape_PoolEntryDate
+
+var TapeArchive = &sTapeArchive
+var TapeArchive_TapeARN = &sTapeArchive_TapeARN
+var TapeArchive_TapeBarcode = &sTapeArchive_TapeBarcode
+var TapeArchive_TapeCreatedDate = &sTapeArchive_TapeCreatedDate
+var TapeArchive_TapeSizeInBytes = &sTapeArchive_TapeSizeInBytes
+var TapeArchive_CompletionTime = &sTapeArchive_CompletionTime
+var TapeArchive_RetrievedTo = &sTapeArchive_RetrievedTo
+var TapeArchive_TapeStatus = &sTapeArchive_TapeStatus
+var TapeArchive_TapeUsedInBytes = &sTapeArchive_TapeUsedInBytes
+var TapeArchive_KMSKey = &sTapeArchive_KMSKey
+var TapeArchive_PoolId = &sTapeArchive_PoolId
+var TapeArchive_Worm = &sTapeArchive_Worm
+var TapeArchive_RetentionStartDate = &sTapeArchive_RetentionStartDate
+var TapeArchive_PoolEntryDate = &sTapeArchive_PoolEntryDate
+
+var _TapeArchives = &s_TapeArchives
+var _TapeArchives_member = &s_TapeArchives_member
+
+var _TapeArchiveStatus = &s_TapeArchiveStatus
+
+var _TapeARN = &s_TapeARN
+
+var _TapeARNs = &s_TapeARNs
+var _TapeARNs_member = &s_TapeARNs_member
+
+var _TapeBarcode = &s_TapeBarcode
+
+var _TapeBarcodePrefix = &s_TapeBarcodePrefix
+
+var _TapeDriveType = &s_TapeDriveType
+
+var TapeInfo = &sTapeInfo
+var TapeInfo_TapeARN = &sTapeInfo_TapeARN
+var TapeInfo_TapeBarcode = &sTapeInfo_TapeBarcode
+var TapeInfo_TapeSizeInBytes = &sTapeInfo_TapeSizeInBytes
+var TapeInfo_TapeStatus = &sTapeInfo_TapeStatus
+var TapeInfo_GatewayARN = &sTapeInfo_GatewayARN
+var TapeInfo_PoolId = &sTapeInfo_PoolId
+var TapeInfo_RetentionStartDate = &sTapeInfo_RetentionStartDate
+var TapeInfo_PoolEntryDate = &sTapeInfo_PoolEntryDate
+
+var _TapeInfos = &s_TapeInfos
+var _TapeInfos_member = &s_TapeInfos_member
+
+var TapeRecoveryPointInfo = &sTapeRecoveryPointInfo
+var TapeRecoveryPointInfo_TapeARN = &sTapeRecoveryPointInfo_TapeARN
+var TapeRecoveryPointInfo_TapeRecoveryPointTime = &sTapeRecoveryPointInfo_TapeRecoveryPointTime
+var TapeRecoveryPointInfo_TapeSizeInBytes = &sTapeRecoveryPointInfo_TapeSizeInBytes
+var TapeRecoveryPointInfo_TapeStatus = &sTapeRecoveryPointInfo_TapeStatus
+
+var _TapeRecoveryPointInfos = &s_TapeRecoveryPointInfos
+var _TapeRecoveryPointInfos_member = &s_TapeRecoveryPointInfos_member
+
+var _TapeRecoveryPointStatus = &s_TapeRecoveryPointStatus
+
+var _Tapes = &s_Tapes
+var _Tapes_member = &s_Tapes_member
+
+var _TapeSize = &s_TapeSize
+
+var _TapeStatus = &s_TapeStatus
+
+var TapeStorageClass = &sTapeStorageClass
+var TapeStorageClass_DEEP_ARCHIVE = &sTapeStorageClass_DEEP_ARCHIVE
+var TapeStorageClass_GLACIER = &sTapeStorageClass_GLACIER
+
+var _TapeUsage = &s_TapeUsage
+
+var _TargetARN = &s_TargetARN
+
+var _TargetName = &s_TargetName
+
+var _Time = &s_Time
+
+var _TimeoutInSeconds = &s_TimeoutInSeconds
+
+var _UserList = &s_UserList
+var _UserList_member = &s_UserList_member
+
+var _UserListUser = &s_UserListUser
+
+var _VolumeARN = &s_VolumeARN
+
+var _VolumeARNs = &s_VolumeARNs
+var _VolumeARNs_member = &s_VolumeARNs_member
+
+var _VolumeAttachmentStatus = &s_VolumeAttachmentStatus
+
+var _VolumeId = &s_VolumeId
+
+var VolumeInfo = &sVolumeInfo
+var VolumeInfo_VolumeARN = &sVolumeInfo_VolumeARN
+var VolumeInfo_VolumeId = &sVolumeInfo_VolumeId
+var VolumeInfo_GatewayARN = &sVolumeInfo_GatewayARN
+var VolumeInfo_GatewayId = &sVolumeInfo_GatewayId
+var VolumeInfo_VolumeType = &sVolumeInfo_VolumeType
+var VolumeInfo_VolumeSizeInBytes = &sVolumeInfo_VolumeSizeInBytes
+var VolumeInfo_VolumeAttachmentStatus = &sVolumeInfo_VolumeAttachmentStatus
+
+var _VolumeInfos = &s_VolumeInfos
+var _VolumeInfos_member = &s_VolumeInfos_member
+
+var VolumeiSCSIAttributes = &sVolumeiSCSIAttributes
+var VolumeiSCSIAttributes_TargetARN = &sVolumeiSCSIAttributes_TargetARN
+var VolumeiSCSIAttributes_NetworkInterfaceId = &sVolumeiSCSIAttributes_NetworkInterfaceId
+var VolumeiSCSIAttributes_NetworkInterfacePort = &sVolumeiSCSIAttributes_NetworkInterfacePort
+var VolumeiSCSIAttributes_LunNumber = &sVolumeiSCSIAttributes_LunNumber
+var VolumeiSCSIAttributes_ChapEnabled = &sVolumeiSCSIAttributes_ChapEnabled
+
+var VolumeRecoveryPointInfo = &sVolumeRecoveryPointInfo
+var VolumeRecoveryPointInfo_VolumeARN = &sVolumeRecoveryPointInfo_VolumeARN
+var VolumeRecoveryPointInfo_VolumeSizeInBytes = &sVolumeRecoveryPointInfo_VolumeSizeInBytes
+var VolumeRecoveryPointInfo_VolumeUsageInBytes = &sVolumeRecoveryPointInfo_VolumeUsageInBytes
+var VolumeRecoveryPointInfo_VolumeRecoveryPointTime = &sVolumeRecoveryPointInfo_VolumeRecoveryPointTime
+
+var _VolumeRecoveryPointInfos = &s_VolumeRecoveryPointInfos
+var _VolumeRecoveryPointInfos_member = &s_VolumeRecoveryPointInfos_member
+
+var _VolumeStatus = &s_VolumeStatus
+
+var _VolumeType = &s_VolumeType
+
+var _VolumeUsedInBytes = &s_VolumeUsedInBytes
+
+var VTLDevice = &sVTLDevice
+var VTLDevice_VTLDeviceARN = &sVTLDevice_VTLDeviceARN
+var VTLDevice_VTLDeviceType = &sVTLDevice_VTLDeviceType
+var VTLDevice_VTLDeviceVendor = &sVTLDevice_VTLDeviceVendor
+var VTLDevice_VTLDeviceProductIdentifier = &sVTLDevice_VTLDeviceProductIdentifier
+var VTLDevice_DeviceiSCSIAttributes = &sVTLDevice_DeviceiSCSIAttributes
+
+var _VTLDeviceARN = &s_VTLDeviceARN
+
+var _VTLDeviceARNs = &s_VTLDeviceARNs
+var _VTLDeviceARNs_member = &s_VTLDeviceARNs_member
+
+var _VTLDeviceProductIdentifier = &s_VTLDeviceProductIdentifier
+
+var _VTLDevices = &s_VTLDevices
+var _VTLDevices_member = &s_VTLDevices_member
+
+var _VTLDeviceType = &s_VTLDeviceType
+
+var _VTLDeviceVendor = &s_VTLDeviceVendor
+
+var ActivateGatewayInput = &sActivateGatewayInput
+var ActivateGatewayInput_ActivationKey = &sActivateGatewayInput_ActivationKey
+var ActivateGatewayInput_GatewayName = &sActivateGatewayInput_GatewayName
+var ActivateGatewayInput_GatewayTimezone = &sActivateGatewayInput_GatewayTimezone
+var ActivateGatewayInput_GatewayRegion = &sActivateGatewayInput_GatewayRegion
+var ActivateGatewayInput_GatewayType = &sActivateGatewayInput_GatewayType
+var ActivateGatewayInput_TapeDriveType = &sActivateGatewayInput_TapeDriveType
+var ActivateGatewayInput_MediumChangerType = &sActivateGatewayInput_MediumChangerType
+var ActivateGatewayInput_Tags = &sActivateGatewayInput_Tags
+
+var ActivateGatewayOutput = &sActivateGatewayOutput
+var ActivateGatewayOutput_GatewayARN = &sActivateGatewayOutput_GatewayARN
+
+var AddCacheInput = &sAddCacheInput
+var AddCacheInput_GatewayARN = &sAddCacheInput_GatewayARN
+var AddCacheInput_DiskIds = &sAddCacheInput_DiskIds
+
+var AddCacheOutput = &sAddCacheOutput
+var AddCacheOutput_GatewayARN = &sAddCacheOutput_GatewayARN
+
+var AddTagsToResourceInput = &sAddTagsToResourceInput
+var AddTagsToResourceInput_ResourceARN = &sAddTagsToResourceInput_ResourceARN
+var AddTagsToResourceInput_Tags = &sAddTagsToResourceInput_Tags
+
+var AddTagsToResourceOutput = &sAddTagsToResourceOutput
+var AddTagsToResourceOutput_ResourceARN = &sAddTagsToResourceOutput_ResourceARN
+
+var AddUploadBufferInput = &sAddUploadBufferInput
+var AddUploadBufferInput_GatewayARN = &sAddUploadBufferInput_GatewayARN
+var AddUploadBufferInput_DiskIds = &sAddUploadBufferInput_DiskIds
+
+var AddUploadBufferOutput = &sAddUploadBufferOutput
+var AddUploadBufferOutput_GatewayARN = &sAddUploadBufferOutput_GatewayARN
+
+var AddWorkingStorageInput = &sAddWorkingStorageInput
+var AddWorkingStorageInput_GatewayARN = &sAddWorkingStorageInput_GatewayARN
+var AddWorkingStorageInput_DiskIds = &sAddWorkingStorageInput_DiskIds
+
+var AddWorkingStorageOutput = &sAddWorkingStorageOutput
+var AddWorkingStorageOutput_GatewayARN = &sAddWorkingStorageOutput_GatewayARN
+
+var AssignTapePoolInput = &sAssignTapePoolInput
+var AssignTapePoolInput_TapeARN = &sAssignTapePoolInput_TapeARN
+var AssignTapePoolInput_PoolId = &sAssignTapePoolInput_PoolId
+var AssignTapePoolInput_BypassGovernanceRetention = &sAssignTapePoolInput_BypassGovernanceRetention
+
+var AssignTapePoolOutput = &sAssignTapePoolOutput
+var AssignTapePoolOutput_TapeARN = &sAssignTapePoolOutput_TapeARN
+
+var AssociateFileSystemInput = &sAssociateFileSystemInput
+var AssociateFileSystemInput_UserName = &sAssociateFileSystemInput_UserName
+var AssociateFileSystemInput_Password = &sAssociateFileSystemInput_Password
+var AssociateFileSystemInput_ClientToken = &sAssociateFileSystemInput_ClientToken
+var AssociateFileSystemInput_GatewayARN = &sAssociateFileSystemInput_GatewayARN
+var AssociateFileSystemInput_LocationARN = &sAssociateFileSystemInput_LocationARN
+var AssociateFileSystemInput_Tags = &sAssociateFileSystemInput_Tags
+var AssociateFileSystemInput_AuditDestinationARN = &sAssociateFileSystemInput_AuditDestinationARN
+var AssociateFileSystemInput_CacheAttributes = &sAssociateFileSystemInput_CacheAttributes
+var AssociateFileSystemInput_EndpointNetworkConfiguration = &sAssociateFileSystemInput_EndpointNetworkConfiguration
+
+var AssociateFileSystemOutput = &sAssociateFileSystemOutput
+var AssociateFileSystemOutput_FileSystemAssociationARN = &sAssociateFileSystemOutput_FileSystemAssociationARN
+
+var AttachVolumeInput = &sAttachVolumeInput
+var AttachVolumeInput_GatewayARN = &sAttachVolumeInput_GatewayARN
+var AttachVolumeInput_TargetName = &sAttachVolumeInput_TargetName
+var AttachVolumeInput_VolumeARN = &sAttachVolumeInput_VolumeARN
+var AttachVolumeInput_NetworkInterfaceId = &sAttachVolumeInput_NetworkInterfaceId
+var AttachVolumeInput_DiskId = &sAttachVolumeInput_DiskId
+
+var AttachVolumeOutput = &sAttachVolumeOutput
+var AttachVolumeOutput_VolumeARN = &sAttachVolumeOutput_VolumeARN
+var AttachVolumeOutput_TargetARN = &sAttachVolumeOutput_TargetARN
+
+var CancelArchivalInput = &sCancelArchivalInput
+var CancelArchivalInput_GatewayARN = &sCancelArchivalInput_GatewayARN
+var CancelArchivalInput_TapeARN = &sCancelArchivalInput_TapeARN
+
+var CancelArchivalOutput = &sCancelArchivalOutput
+var CancelArchivalOutput_TapeARN = &sCancelArchivalOutput_TapeARN
+
+var CancelCacheReportInput = &sCancelCacheReportInput
+var CancelCacheReportInput_CacheReportARN = &sCancelCacheReportInput_CacheReportARN
+
+var CancelCacheReportOutput = &sCancelCacheReportOutput
+var CancelCacheReportOutput_CacheReportARN = &sCancelCacheReportOutput_CacheReportARN
+
+var CancelRetrievalInput = &sCancelRetrievalInput
+var CancelRetrievalInput_GatewayARN = &sCancelRetrievalInput_GatewayARN
+var CancelRetrievalInput_TapeARN = &sCancelRetrievalInput_TapeARN
+
+var CancelRetrievalOutput = &sCancelRetrievalOutput
+var CancelRetrievalOutput_TapeARN = &sCancelRetrievalOutput_TapeARN
+
+var CreateCachediSCSIVolumeInput = &sCreateCachediSCSIVolumeInput
+var CreateCachediSCSIVolumeInput_GatewayARN = &sCreateCachediSCSIVolumeInput_GatewayARN
+var CreateCachediSCSIVolumeInput_VolumeSizeInBytes = &sCreateCachediSCSIVolumeInput_VolumeSizeInBytes
+var CreateCachediSCSIVolumeInput_SnapshotId = &sCreateCachediSCSIVolumeInput_SnapshotId
+var CreateCachediSCSIVolumeInput_TargetName = &sCreateCachediSCSIVolumeInput_TargetName
+var CreateCachediSCSIVolumeInput_SourceVolumeARN = &sCreateCachediSCSIVolumeInput_SourceVolumeARN
+var CreateCachediSCSIVolumeInput_NetworkInterfaceId = &sCreateCachediSCSIVolumeInput_NetworkInterfaceId
+var CreateCachediSCSIVolumeInput_ClientToken = &sCreateCachediSCSIVolumeInput_ClientToken
+var CreateCachediSCSIVolumeInput_KMSEncrypted = &sCreateCachediSCSIVolumeInput_KMSEncrypted
+var CreateCachediSCSIVolumeInput_KMSKey = &sCreateCachediSCSIVolumeInput_KMSKey
+var CreateCachediSCSIVolumeInput_Tags = &sCreateCachediSCSIVolumeInput_Tags
+
+var CreateCachediSCSIVolumeOutput = &sCreateCachediSCSIVolumeOutput
+var CreateCachediSCSIVolumeOutput_VolumeARN = &sCreateCachediSCSIVolumeOutput_VolumeARN
+var CreateCachediSCSIVolumeOutput_TargetARN = &sCreateCachediSCSIVolumeOutput_TargetARN
+
+var CreateNFSFileShareInput = &sCreateNFSFileShareInput
+var CreateNFSFileShareInput_ClientToken = &sCreateNFSFileShareInput_ClientToken
+var CreateNFSFileShareInput_NFSFileShareDefaults = &sCreateNFSFileShareInput_NFSFileShareDefaults
+var CreateNFSFileShareInput_GatewayARN = &sCreateNFSFileShareInput_GatewayARN
+var CreateNFSFileShareInput_EncryptionType = &sCreateNFSFileShareInput_EncryptionType
+var CreateNFSFileShareInput_KMSEncrypted = &sCreateNFSFileShareInput_KMSEncrypted
+var CreateNFSFileShareInput_KMSKey = &sCreateNFSFileShareInput_KMSKey
+var CreateNFSFileShareInput_Role = &sCreateNFSFileShareInput_Role
+var CreateNFSFileShareInput_LocationARN = &sCreateNFSFileShareInput_LocationARN
+var CreateNFSFileShareInput_DefaultStorageClass = &sCreateNFSFileShareInput_DefaultStorageClass
+var CreateNFSFileShareInput_ObjectACL = &sCreateNFSFileShareInput_ObjectACL
+var CreateNFSFileShareInput_ClientList = &sCreateNFSFileShareInput_ClientList
+var CreateNFSFileShareInput_Squash = &sCreateNFSFileShareInput_Squash
+var CreateNFSFileShareInput_ReadOnly = &sCreateNFSFileShareInput_ReadOnly
+var CreateNFSFileShareInput_GuessMIMETypeEnabled = &sCreateNFSFileShareInput_GuessMIMETypeEnabled
+var CreateNFSFileShareInput_RequesterPays = &sCreateNFSFileShareInput_RequesterPays
+var CreateNFSFileShareInput_Tags = &sCreateNFSFileShareInput_Tags
+var CreateNFSFileShareInput_FileShareName = &sCreateNFSFileShareInput_FileShareName
+var CreateNFSFileShareInput_CacheAttributes = &sCreateNFSFileShareInput_CacheAttributes
+var CreateNFSFileShareInput_NotificationPolicy = &sCreateNFSFileShareInput_NotificationPolicy
+var CreateNFSFileShareInput_VPCEndpointDNSName = &sCreateNFSFileShareInput_VPCEndpointDNSName
+var CreateNFSFileShareInput_BucketRegion = &sCreateNFSFileShareInput_BucketRegion
+var CreateNFSFileShareInput_AuditDestinationARN = &sCreateNFSFileShareInput_AuditDestinationARN
+
+var CreateNFSFileShareOutput = &sCreateNFSFileShareOutput
+var CreateNFSFileShareOutput_FileShareARN = &sCreateNFSFileShareOutput_FileShareARN
+
+var CreateSMBFileShareInput = &sCreateSMBFileShareInput
+var CreateSMBFileShareInput_ClientToken = &sCreateSMBFileShareInput_ClientToken
+var CreateSMBFileShareInput_GatewayARN = &sCreateSMBFileShareInput_GatewayARN
+var CreateSMBFileShareInput_EncryptionType = &sCreateSMBFileShareInput_EncryptionType
+var CreateSMBFileShareInput_KMSEncrypted = &sCreateSMBFileShareInput_KMSEncrypted
+var CreateSMBFileShareInput_KMSKey = &sCreateSMBFileShareInput_KMSKey
+var CreateSMBFileShareInput_Role = &sCreateSMBFileShareInput_Role
+var CreateSMBFileShareInput_LocationARN = &sCreateSMBFileShareInput_LocationARN
+var CreateSMBFileShareInput_DefaultStorageClass = &sCreateSMBFileShareInput_DefaultStorageClass
+var CreateSMBFileShareInput_ObjectACL = &sCreateSMBFileShareInput_ObjectACL
+var CreateSMBFileShareInput_ReadOnly = &sCreateSMBFileShareInput_ReadOnly
+var CreateSMBFileShareInput_GuessMIMETypeEnabled = &sCreateSMBFileShareInput_GuessMIMETypeEnabled
+var CreateSMBFileShareInput_RequesterPays = &sCreateSMBFileShareInput_RequesterPays
+var CreateSMBFileShareInput_SMBACLEnabled = &sCreateSMBFileShareInput_SMBACLEnabled
+var CreateSMBFileShareInput_AccessBasedEnumeration = &sCreateSMBFileShareInput_AccessBasedEnumeration
+var CreateSMBFileShareInput_AdminUserList = &sCreateSMBFileShareInput_AdminUserList
+var CreateSMBFileShareInput_ValidUserList = &sCreateSMBFileShareInput_ValidUserList
+var CreateSMBFileShareInput_InvalidUserList = &sCreateSMBFileShareInput_InvalidUserList
+var CreateSMBFileShareInput_AuditDestinationARN = &sCreateSMBFileShareInput_AuditDestinationARN
+var CreateSMBFileShareInput_Authentication = &sCreateSMBFileShareInput_Authentication
+var CreateSMBFileShareInput_CaseSensitivity = &sCreateSMBFileShareInput_CaseSensitivity
+var CreateSMBFileShareInput_Tags = &sCreateSMBFileShareInput_Tags
+var CreateSMBFileShareInput_FileShareName = &sCreateSMBFileShareInput_FileShareName
+var CreateSMBFileShareInput_CacheAttributes = &sCreateSMBFileShareInput_CacheAttributes
+var CreateSMBFileShareInput_NotificationPolicy = &sCreateSMBFileShareInput_NotificationPolicy
+var CreateSMBFileShareInput_VPCEndpointDNSName = &sCreateSMBFileShareInput_VPCEndpointDNSName
+var CreateSMBFileShareInput_BucketRegion = &sCreateSMBFileShareInput_BucketRegion
+var CreateSMBFileShareInput_OplocksEnabled = &sCreateSMBFileShareInput_OplocksEnabled
+
+var CreateSMBFileShareOutput = &sCreateSMBFileShareOutput
+var CreateSMBFileShareOutput_FileShareARN = &sCreateSMBFileShareOutput_FileShareARN
+
+var CreateSnapshotFromVolumeRecoveryPointInput = &sCreateSnapshotFromVolumeRecoveryPointInput
+var CreateSnapshotFromVolumeRecoveryPointInput_VolumeARN = &sCreateSnapshotFromVolumeRecoveryPointInput_VolumeARN
+var CreateSnapshotFromVolumeRecoveryPointInput_SnapshotDescription = &sCreateSnapshotFromVolumeRecoveryPointInput_SnapshotDescription
+var CreateSnapshotFromVolumeRecoveryPointInput_Tags = &sCreateSnapshotFromVolumeRecoveryPointInput_Tags
+
+var CreateSnapshotFromVolumeRecoveryPointOutput = &sCreateSnapshotFromVolumeRecoveryPointOutput
+var CreateSnapshotFromVolumeRecoveryPointOutput_SnapshotId = &sCreateSnapshotFromVolumeRecoveryPointOutput_SnapshotId
+var CreateSnapshotFromVolumeRecoveryPointOutput_VolumeARN = &sCreateSnapshotFromVolumeRecoveryPointOutput_VolumeARN
+var CreateSnapshotFromVolumeRecoveryPointOutput_VolumeRecoveryPointTime = &sCreateSnapshotFromVolumeRecoveryPointOutput_VolumeRecoveryPointTime
+
+var CreateSnapshotInput = &sCreateSnapshotInput
+var CreateSnapshotInput_VolumeARN = &sCreateSnapshotInput_VolumeARN
+var CreateSnapshotInput_SnapshotDescription = &sCreateSnapshotInput_SnapshotDescription
+var CreateSnapshotInput_Tags = &sCreateSnapshotInput_Tags
+
+var CreateSnapshotOutput = &sCreateSnapshotOutput
+var CreateSnapshotOutput_VolumeARN = &sCreateSnapshotOutput_VolumeARN
+var CreateSnapshotOutput_SnapshotId = &sCreateSnapshotOutput_SnapshotId
+
+var CreateStorediSCSIVolumeInput = &sCreateStorediSCSIVolumeInput
+var CreateStorediSCSIVolumeInput_GatewayARN = &sCreateStorediSCSIVolumeInput_GatewayARN
+var CreateStorediSCSIVolumeInput_DiskId = &sCreateStorediSCSIVolumeInput_DiskId
+var CreateStorediSCSIVolumeInput_SnapshotId = &sCreateStorediSCSIVolumeInput_SnapshotId
+var CreateStorediSCSIVolumeInput_PreserveExistingData = &sCreateStorediSCSIVolumeInput_PreserveExistingData
+var CreateStorediSCSIVolumeInput_TargetName = &sCreateStorediSCSIVolumeInput_TargetName
+var CreateStorediSCSIVolumeInput_NetworkInterfaceId = &sCreateStorediSCSIVolumeInput_NetworkInterfaceId
+var CreateStorediSCSIVolumeInput_KMSEncrypted = &sCreateStorediSCSIVolumeInput_KMSEncrypted
+var CreateStorediSCSIVolumeInput_KMSKey = &sCreateStorediSCSIVolumeInput_KMSKey
+var CreateStorediSCSIVolumeInput_Tags = &sCreateStorediSCSIVolumeInput_Tags
+
+var CreateStorediSCSIVolumeOutput = &sCreateStorediSCSIVolumeOutput
+var CreateStorediSCSIVolumeOutput_VolumeARN = &sCreateStorediSCSIVolumeOutput_VolumeARN
+var CreateStorediSCSIVolumeOutput_VolumeSizeInBytes = &sCreateStorediSCSIVolumeOutput_VolumeSizeInBytes
+var CreateStorediSCSIVolumeOutput_TargetARN = &sCreateStorediSCSIVolumeOutput_TargetARN
+
+var CreateTapePoolInput = &sCreateTapePoolInput
+var CreateTapePoolInput_PoolName = &sCreateTapePoolInput_PoolName
+var CreateTapePoolInput_StorageClass = &sCreateTapePoolInput_StorageClass
+var CreateTapePoolInput_RetentionLockType = &sCreateTapePoolInput_RetentionLockType
+var CreateTapePoolInput_RetentionLockTimeInDays = &sCreateTapePoolInput_RetentionLockTimeInDays
+var CreateTapePoolInput_Tags = &sCreateTapePoolInput_Tags
+
+var CreateTapePoolOutput = &sCreateTapePoolOutput
+var CreateTapePoolOutput_PoolARN = &sCreateTapePoolOutput_PoolARN
+
+var CreateTapesInput = &sCreateTapesInput
+var CreateTapesInput_GatewayARN = &sCreateTapesInput_GatewayARN
+var CreateTapesInput_TapeSizeInBytes = &sCreateTapesInput_TapeSizeInBytes
+var CreateTapesInput_ClientToken = &sCreateTapesInput_ClientToken
+var CreateTapesInput_NumTapesToCreate = &sCreateTapesInput_NumTapesToCreate
+var CreateTapesInput_TapeBarcodePrefix = &sCreateTapesInput_TapeBarcodePrefix
+var CreateTapesInput_KMSEncrypted = &sCreateTapesInput_KMSEncrypted
+var CreateTapesInput_KMSKey = &sCreateTapesInput_KMSKey
+var CreateTapesInput_PoolId = &sCreateTapesInput_PoolId
+var CreateTapesInput_Worm = &sCreateTapesInput_Worm
+var CreateTapesInput_Tags = &sCreateTapesInput_Tags
+
+var CreateTapesOutput = &sCreateTapesOutput
+var CreateTapesOutput_TapeARNs = &sCreateTapesOutput_TapeARNs
+
+var CreateTapeWithBarcodeInput = &sCreateTapeWithBarcodeInput
+var CreateTapeWithBarcodeInput_GatewayARN = &sCreateTapeWithBarcodeInput_GatewayARN
+var CreateTapeWithBarcodeInput_TapeSizeInBytes = &sCreateTapeWithBarcodeInput_TapeSizeInBytes
+var CreateTapeWithBarcodeInput_TapeBarcode = &sCreateTapeWithBarcodeInput_TapeBarcode
+var CreateTapeWithBarcodeInput_KMSEncrypted = &sCreateTapeWithBarcodeInput_KMSEncrypted
+var CreateTapeWithBarcodeInput_KMSKey = &sCreateTapeWithBarcodeInput_KMSKey
+var CreateTapeWithBarcodeInput_PoolId = &sCreateTapeWithBarcodeInput_PoolId
+var CreateTapeWithBarcodeInput_Worm = &sCreateTapeWithBarcodeInput_Worm
+var CreateTapeWithBarcodeInput_Tags = &sCreateTapeWithBarcodeInput_Tags
+
+var CreateTapeWithBarcodeOutput = &sCreateTapeWithBarcodeOutput
+var CreateTapeWithBarcodeOutput_TapeARN = &sCreateTapeWithBarcodeOutput_TapeARN
+
+var DeleteAutomaticTapeCreationPolicyInput = &sDeleteAutomaticTapeCreationPolicyInput
+var DeleteAutomaticTapeCreationPolicyInput_GatewayARN = &sDeleteAutomaticTapeCreationPolicyInput_GatewayARN
+
+var DeleteAutomaticTapeCreationPolicyOutput = &sDeleteAutomaticTapeCreationPolicyOutput
+var DeleteAutomaticTapeCreationPolicyOutput_GatewayARN = &sDeleteAutomaticTapeCreationPolicyOutput_GatewayARN
+
+var DeleteBandwidthRateLimitInput = &sDeleteBandwidthRateLimitInput
+var DeleteBandwidthRateLimitInput_GatewayARN = &sDeleteBandwidthRateLimitInput_GatewayARN
+var DeleteBandwidthRateLimitInput_BandwidthType = &sDeleteBandwidthRateLimitInput_BandwidthType
+
+var DeleteBandwidthRateLimitOutput = &sDeleteBandwidthRateLimitOutput
+var DeleteBandwidthRateLimitOutput_GatewayARN = &sDeleteBandwidthRateLimitOutput_GatewayARN
+
+var DeleteCacheReportInput = &sDeleteCacheReportInput
+var DeleteCacheReportInput_CacheReportARN = &sDeleteCacheReportInput_CacheReportARN
+
+var DeleteCacheReportOutput = &sDeleteCacheReportOutput
+var DeleteCacheReportOutput_CacheReportARN = &sDeleteCacheReportOutput_CacheReportARN
+
+var DeleteChapCredentialsInput = &sDeleteChapCredentialsInput
+var DeleteChapCredentialsInput_TargetARN = &sDeleteChapCredentialsInput_TargetARN
+var DeleteChapCredentialsInput_InitiatorName = &sDeleteChapCredentialsInput_InitiatorName
+
+var DeleteChapCredentialsOutput = &sDeleteChapCredentialsOutput
+var DeleteChapCredentialsOutput_TargetARN = &sDeleteChapCredentialsOutput_TargetARN
+var DeleteChapCredentialsOutput_InitiatorName = &sDeleteChapCredentialsOutput_InitiatorName
+
+var DeleteFileShareInput = &sDeleteFileShareInput
+var DeleteFileShareInput_FileShareARN = &sDeleteFileShareInput_FileShareARN
+var DeleteFileShareInput_ForceDelete = &sDeleteFileShareInput_ForceDelete
+
+var DeleteFileShareOutput = &sDeleteFileShareOutput
+var DeleteFileShareOutput_FileShareARN = &sDeleteFileShareOutput_FileShareARN
+
+var DeleteGatewayInput = &sDeleteGatewayInput
+var DeleteGatewayInput_GatewayARN = &sDeleteGatewayInput_GatewayARN
+
+var DeleteGatewayOutput = &sDeleteGatewayOutput
+var DeleteGatewayOutput_GatewayARN = &sDeleteGatewayOutput_GatewayARN
+
+var DeleteSnapshotScheduleInput = &sDeleteSnapshotScheduleInput
+var DeleteSnapshotScheduleInput_VolumeARN = &sDeleteSnapshotScheduleInput_VolumeARN
+
+var DeleteSnapshotScheduleOutput = &sDeleteSnapshotScheduleOutput
+var DeleteSnapshotScheduleOutput_VolumeARN = &sDeleteSnapshotScheduleOutput_VolumeARN
+
+var DeleteTapeArchiveInput = &sDeleteTapeArchiveInput
+var DeleteTapeArchiveInput_TapeARN = &sDeleteTapeArchiveInput_TapeARN
+var DeleteTapeArchiveInput_BypassGovernanceRetention = &sDeleteTapeArchiveInput_BypassGovernanceRetention
+
+var DeleteTapeArchiveOutput = &sDeleteTapeArchiveOutput
+var DeleteTapeArchiveOutput_TapeARN = &sDeleteTapeArchiveOutput_TapeARN
+
+var DeleteTapeInput = &sDeleteTapeInput
+var DeleteTapeInput_GatewayARN = &sDeleteTapeInput_GatewayARN
+var DeleteTapeInput_TapeARN = &sDeleteTapeInput_TapeARN
+var DeleteTapeInput_BypassGovernanceRetention = &sDeleteTapeInput_BypassGovernanceRetention
+
+var DeleteTapeOutput = &sDeleteTapeOutput
+var DeleteTapeOutput_TapeARN = &sDeleteTapeOutput_TapeARN
+
+var DeleteTapePoolInput = &sDeleteTapePoolInput
+var DeleteTapePoolInput_PoolARN = &sDeleteTapePoolInput_PoolARN
+
+var DeleteTapePoolOutput = &sDeleteTapePoolOutput
+var DeleteTapePoolOutput_PoolARN = &sDeleteTapePoolOutput_PoolARN
+
+var DeleteVolumeInput = &sDeleteVolumeInput
+var DeleteVolumeInput_VolumeARN = &sDeleteVolumeInput_VolumeARN
+
+var DeleteVolumeOutput = &sDeleteVolumeOutput
+var DeleteVolumeOutput_VolumeARN = &sDeleteVolumeOutput_VolumeARN
+
+var DescribeAvailabilityMonitorTestInput = &sDescribeAvailabilityMonitorTestInput
+var DescribeAvailabilityMonitorTestInput_GatewayARN = &sDescribeAvailabilityMonitorTestInput_GatewayARN
+
+var DescribeAvailabilityMonitorTestOutput = &sDescribeAvailabilityMonitorTestOutput
+var DescribeAvailabilityMonitorTestOutput_GatewayARN = &sDescribeAvailabilityMonitorTestOutput_GatewayARN
+var DescribeAvailabilityMonitorTestOutput_Status = &sDescribeAvailabilityMonitorTestOutput_Status
+var DescribeAvailabilityMonitorTestOutput_StartTime = &sDescribeAvailabilityMonitorTestOutput_StartTime
+
+var DescribeBandwidthRateLimitInput = &sDescribeBandwidthRateLimitInput
+var DescribeBandwidthRateLimitInput_GatewayARN = &sDescribeBandwidthRateLimitInput_GatewayARN
+
+var DescribeBandwidthRateLimitOutput = &sDescribeBandwidthRateLimitOutput
+var DescribeBandwidthRateLimitOutput_GatewayARN = &sDescribeBandwidthRateLimitOutput_GatewayARN
+var DescribeBandwidthRateLimitOutput_AverageUploadRateLimitInBitsPerSec = &sDescribeBandwidthRateLimitOutput_AverageUploadRateLimitInBitsPerSec
+var DescribeBandwidthRateLimitOutput_AverageDownloadRateLimitInBitsPerSec = &sDescribeBandwidthRateLimitOutput_AverageDownloadRateLimitInBitsPerSec
+
+var DescribeBandwidthRateLimitScheduleInput = &sDescribeBandwidthRateLimitScheduleInput
+var DescribeBandwidthRateLimitScheduleInput_GatewayARN = &sDescribeBandwidthRateLimitScheduleInput_GatewayARN
+
+var DescribeBandwidthRateLimitScheduleOutput = &sDescribeBandwidthRateLimitScheduleOutput
+var DescribeBandwidthRateLimitScheduleOutput_GatewayARN = &sDescribeBandwidthRateLimitScheduleOutput_GatewayARN
+var DescribeBandwidthRateLimitScheduleOutput_BandwidthRateLimitIntervals = &sDescribeBandwidthRateLimitScheduleOutput_BandwidthRateLimitIntervals
+
+var DescribeCachediSCSIVolumesInput = &sDescribeCachediSCSIVolumesInput
+var DescribeCachediSCSIVolumesInput_VolumeARNs = &sDescribeCachediSCSIVolumesInput_VolumeARNs
+
+var DescribeCachediSCSIVolumesOutput = &sDescribeCachediSCSIVolumesOutput
+var DescribeCachediSCSIVolumesOutput_CachediSCSIVolumes = &sDescribeCachediSCSIVolumesOutput_CachediSCSIVolumes
+
+var DescribeCacheInput = &sDescribeCacheInput
+var DescribeCacheInput_GatewayARN = &sDescribeCacheInput_GatewayARN
+
+var DescribeCacheOutput = &sDescribeCacheOutput
+var DescribeCacheOutput_GatewayARN = &sDescribeCacheOutput_GatewayARN
+var DescribeCacheOutput_DiskIds = &sDescribeCacheOutput_DiskIds
+var DescribeCacheOutput_CacheAllocatedInBytes = &sDescribeCacheOutput_CacheAllocatedInBytes
+var DescribeCacheOutput_CacheUsedPercentage = &sDescribeCacheOutput_CacheUsedPercentage
+var DescribeCacheOutput_CacheDirtyPercentage = &sDescribeCacheOutput_CacheDirtyPercentage
+var DescribeCacheOutput_CacheHitPercentage = &sDescribeCacheOutput_CacheHitPercentage
+var DescribeCacheOutput_CacheMissPercentage = &sDescribeCacheOutput_CacheMissPercentage
+
+var DescribeCacheReportInput = &sDescribeCacheReportInput
+var DescribeCacheReportInput_CacheReportARN = &sDescribeCacheReportInput_CacheReportARN
+
+var DescribeCacheReportOutput = &sDescribeCacheReportOutput
+var DescribeCacheReportOutput_CacheReportInfo = &sDescribeCacheReportOutput_CacheReportInfo
+
+var DescribeChapCredentialsInput = &sDescribeChapCredentialsInput
+var DescribeChapCredentialsInput_TargetARN = &sDescribeChapCredentialsInput_TargetARN
+
+var DescribeChapCredentialsOutput = &sDescribeChapCredentialsOutput
+var DescribeChapCredentialsOutput_ChapCredentials = &sDescribeChapCredentialsOutput_ChapCredentials
+
+var DescribeFileSystemAssociationsInput = &sDescribeFileSystemAssociationsInput
+var DescribeFileSystemAssociationsInput_FileSystemAssociationARNList = &sDescribeFileSystemAssociationsInput_FileSystemAssociationARNList
+
+var DescribeFileSystemAssociationsOutput = &sDescribeFileSystemAssociationsOutput
+var DescribeFileSystemAssociationsOutput_FileSystemAssociationInfoList = &sDescribeFileSystemAssociationsOutput_FileSystemAssociationInfoList
+
+var DescribeGatewayInformationInput = &sDescribeGatewayInformationInput
+var DescribeGatewayInformationInput_GatewayARN = &sDescribeGatewayInformationInput_GatewayARN
+
+var DescribeGatewayInformationOutput = &sDescribeGatewayInformationOutput
+var DescribeGatewayInformationOutput_GatewayARN = &sDescribeGatewayInformationOutput_GatewayARN
+var DescribeGatewayInformationOutput_GatewayId = &sDescribeGatewayInformationOutput_GatewayId
+var DescribeGatewayInformationOutput_GatewayName = &sDescribeGatewayInformationOutput_GatewayName
+var DescribeGatewayInformationOutput_GatewayTimezone = &sDescribeGatewayInformationOutput_GatewayTimezone
+var DescribeGatewayInformationOutput_GatewayState = &sDescribeGatewayInformationOutput_GatewayState
+var DescribeGatewayInformationOutput_GatewayNetworkInterfaces = &sDescribeGatewayInformationOutput_GatewayNetworkInterfaces
+var DescribeGatewayInformationOutput_GatewayType = &sDescribeGatewayInformationOutput_GatewayType
+var DescribeGatewayInformationOutput_NextUpdateAvailabilityDate = &sDescribeGatewayInformationOutput_NextUpdateAvailabilityDate
+var DescribeGatewayInformationOutput_LastSoftwareUpdate = &sDescribeGatewayInformationOutput_LastSoftwareUpdate
+var DescribeGatewayInformationOutput_Ec2InstanceId = &sDescribeGatewayInformationOutput_Ec2InstanceId
+var DescribeGatewayInformationOutput_Ec2InstanceRegion = &sDescribeGatewayInformationOutput_Ec2InstanceRegion
+var DescribeGatewayInformationOutput_Tags = &sDescribeGatewayInformationOutput_Tags
+var DescribeGatewayInformationOutput_VPCEndpoint = &sDescribeGatewayInformationOutput_VPCEndpoint
+var DescribeGatewayInformationOutput_CloudWatchLogGroupARN = &sDescribeGatewayInformationOutput_CloudWatchLogGroupARN
+var DescribeGatewayInformationOutput_HostEnvironment = &sDescribeGatewayInformationOutput_HostEnvironment
+var DescribeGatewayInformationOutput_EndpointType = &sDescribeGatewayInformationOutput_EndpointType
+var DescribeGatewayInformationOutput_SoftwareUpdatesEndDate = &sDescribeGatewayInformationOutput_SoftwareUpdatesEndDate
+var DescribeGatewayInformationOutput_DeprecationDate = &sDescribeGatewayInformationOutput_DeprecationDate
+var DescribeGatewayInformationOutput_GatewayCapacity = &sDescribeGatewayInformationOutput_GatewayCapacity
+var DescribeGatewayInformationOutput_SupportedGatewayCapacities = &sDescribeGatewayInformationOutput_SupportedGatewayCapacities
+var DescribeGatewayInformationOutput_HostEnvironmentId = &sDescribeGatewayInformationOutput_HostEnvironmentId
+var DescribeGatewayInformationOutput_SoftwareVersion = &sDescribeGatewayInformationOutput_SoftwareVersion
+
+var DescribeMaintenanceStartTimeInput = &sDescribeMaintenanceStartTimeInput
+var DescribeMaintenanceStartTimeInput_GatewayARN = &sDescribeMaintenanceStartTimeInput_GatewayARN
+
+var DescribeMaintenanceStartTimeOutput = &sDescribeMaintenanceStartTimeOutput
+var DescribeMaintenanceStartTimeOutput_GatewayARN = &sDescribeMaintenanceStartTimeOutput_GatewayARN
+var DescribeMaintenanceStartTimeOutput_HourOfDay = &sDescribeMaintenanceStartTimeOutput_HourOfDay
+var DescribeMaintenanceStartTimeOutput_MinuteOfHour = &sDescribeMaintenanceStartTimeOutput_MinuteOfHour
+var DescribeMaintenanceStartTimeOutput_DayOfWeek = &sDescribeMaintenanceStartTimeOutput_DayOfWeek
+var DescribeMaintenanceStartTimeOutput_DayOfMonth = &sDescribeMaintenanceStartTimeOutput_DayOfMonth
+var DescribeMaintenanceStartTimeOutput_Timezone = &sDescribeMaintenanceStartTimeOutput_Timezone
+var DescribeMaintenanceStartTimeOutput_SoftwareUpdatePreferences = &sDescribeMaintenanceStartTimeOutput_SoftwareUpdatePreferences
+
+var DescribeNFSFileSharesInput = &sDescribeNFSFileSharesInput
+var DescribeNFSFileSharesInput_FileShareARNList = &sDescribeNFSFileSharesInput_FileShareARNList
+
+var DescribeNFSFileSharesOutput = &sDescribeNFSFileSharesOutput
+var DescribeNFSFileSharesOutput_NFSFileShareInfoList = &sDescribeNFSFileSharesOutput_NFSFileShareInfoList
+
+var DescribeSMBFileSharesInput = &sDescribeSMBFileSharesInput
+var DescribeSMBFileSharesInput_FileShareARNList = &sDescribeSMBFileSharesInput_FileShareARNList
+
+var DescribeSMBFileSharesOutput = &sDescribeSMBFileSharesOutput
+var DescribeSMBFileSharesOutput_SMBFileShareInfoList = &sDescribeSMBFileSharesOutput_SMBFileShareInfoList
+
+var DescribeSMBSettingsInput = &sDescribeSMBSettingsInput
+var DescribeSMBSettingsInput_GatewayARN = &sDescribeSMBSettingsInput_GatewayARN
+
+var DescribeSMBSettingsOutput = &sDescribeSMBSettingsOutput
+var DescribeSMBSettingsOutput_GatewayARN = &sDescribeSMBSettingsOutput_GatewayARN
+var DescribeSMBSettingsOutput_DomainName = &sDescribeSMBSettingsOutput_DomainName
+var DescribeSMBSettingsOutput_ActiveDirectoryStatus = &sDescribeSMBSettingsOutput_ActiveDirectoryStatus
+var DescribeSMBSettingsOutput_SMBGuestPasswordSet = &sDescribeSMBSettingsOutput_SMBGuestPasswordSet
+var DescribeSMBSettingsOutput_SMBSecurityStrategy = &sDescribeSMBSettingsOutput_SMBSecurityStrategy
+var DescribeSMBSettingsOutput_FileSharesVisible = &sDescribeSMBSettingsOutput_FileSharesVisible
+var DescribeSMBSettingsOutput_SMBLocalGroups = &sDescribeSMBSettingsOutput_SMBLocalGroups
+
+var DescribeSnapshotScheduleInput = &sDescribeSnapshotScheduleInput
+var DescribeSnapshotScheduleInput_VolumeARN = &sDescribeSnapshotScheduleInput_VolumeARN
+
+var DescribeSnapshotScheduleOutput = &sDescribeSnapshotScheduleOutput
+var DescribeSnapshotScheduleOutput_VolumeARN = &sDescribeSnapshotScheduleOutput_VolumeARN
+var DescribeSnapshotScheduleOutput_StartAt = &sDescribeSnapshotScheduleOutput_StartAt
+var DescribeSnapshotScheduleOutput_RecurrenceInHours = &sDescribeSnapshotScheduleOutput_RecurrenceInHours
+var DescribeSnapshotScheduleOutput_Description = &sDescribeSnapshotScheduleOutput_Description
+var DescribeSnapshotScheduleOutput_Timezone = &sDescribeSnapshotScheduleOutput_Timezone
+var DescribeSnapshotScheduleOutput_Tags = &sDescribeSnapshotScheduleOutput_Tags
+
+var DescribeStorediSCSIVolumesInput = &sDescribeStorediSCSIVolumesInput
+var DescribeStorediSCSIVolumesInput_VolumeARNs = &sDescribeStorediSCSIVolumesInput_VolumeARNs
+
+var DescribeStorediSCSIVolumesOutput = &sDescribeStorediSCSIVolumesOutput
+var DescribeStorediSCSIVolumesOutput_StorediSCSIVolumes = &sDescribeStorediSCSIVolumesOutput_StorediSCSIVolumes
+
+var DescribeTapeArchivesInput = &sDescribeTapeArchivesInput
+var DescribeTapeArchivesInput_TapeARNs = &sDescribeTapeArchivesInput_TapeARNs
+var DescribeTapeArchivesInput_Marker = &sDescribeTapeArchivesInput_Marker
+var DescribeTapeArchivesInput_Limit = &sDescribeTapeArchivesInput_Limit
+
+var DescribeTapeArchivesOutput = &sDescribeTapeArchivesOutput
+var DescribeTapeArchivesOutput_TapeArchives = &sDescribeTapeArchivesOutput_TapeArchives
+var DescribeTapeArchivesOutput_Marker = &sDescribeTapeArchivesOutput_Marker
+
+var DescribeTapeRecoveryPointsInput = &sDescribeTapeRecoveryPointsInput
+var DescribeTapeRecoveryPointsInput_GatewayARN = &sDescribeTapeRecoveryPointsInput_GatewayARN
+var DescribeTapeRecoveryPointsInput_Marker = &sDescribeTapeRecoveryPointsInput_Marker
+var DescribeTapeRecoveryPointsInput_Limit = &sDescribeTapeRecoveryPointsInput_Limit
+
+var DescribeTapeRecoveryPointsOutput = &sDescribeTapeRecoveryPointsOutput
+var DescribeTapeRecoveryPointsOutput_GatewayARN = &sDescribeTapeRecoveryPointsOutput_GatewayARN
+var DescribeTapeRecoveryPointsOutput_TapeRecoveryPointInfos = &sDescribeTapeRecoveryPointsOutput_TapeRecoveryPointInfos
+var DescribeTapeRecoveryPointsOutput_Marker = &sDescribeTapeRecoveryPointsOutput_Marker
+
+var DescribeTapesInput = &sDescribeTapesInput
+var DescribeTapesInput_GatewayARN = &sDescribeTapesInput_GatewayARN
+var DescribeTapesInput_TapeARNs = &sDescribeTapesInput_TapeARNs
+var DescribeTapesInput_Marker = &sDescribeTapesInput_Marker
+var DescribeTapesInput_Limit = &sDescribeTapesInput_Limit
+
+var DescribeTapesOutput = &sDescribeTapesOutput
+var DescribeTapesOutput_Tapes = &sDescribeTapesOutput_Tapes
+var DescribeTapesOutput_Marker = &sDescribeTapesOutput_Marker
+
+var DescribeUploadBufferInput = &sDescribeUploadBufferInput
+var DescribeUploadBufferInput_GatewayARN = &sDescribeUploadBufferInput_GatewayARN
+
+var DescribeUploadBufferOutput = &sDescribeUploadBufferOutput
+var DescribeUploadBufferOutput_GatewayARN = &sDescribeUploadBufferOutput_GatewayARN
+var DescribeUploadBufferOutput_DiskIds = &sDescribeUploadBufferOutput_DiskIds
+var DescribeUploadBufferOutput_UploadBufferUsedInBytes = &sDescribeUploadBufferOutput_UploadBufferUsedInBytes
+var DescribeUploadBufferOutput_UploadBufferAllocatedInBytes = &sDescribeUploadBufferOutput_UploadBufferAllocatedInBytes
+
+var DescribeVTLDevicesInput = &sDescribeVTLDevicesInput
+var DescribeVTLDevicesInput_GatewayARN = &sDescribeVTLDevicesInput_GatewayARN
+var DescribeVTLDevicesInput_VTLDeviceARNs = &sDescribeVTLDevicesInput_VTLDeviceARNs
+var DescribeVTLDevicesInput_Marker = &sDescribeVTLDevicesInput_Marker
+var DescribeVTLDevicesInput_Limit = &sDescribeVTLDevicesInput_Limit
+
+var DescribeVTLDevicesOutput = &sDescribeVTLDevicesOutput
+var DescribeVTLDevicesOutput_GatewayARN = &sDescribeVTLDevicesOutput_GatewayARN
+var DescribeVTLDevicesOutput_VTLDevices = &sDescribeVTLDevicesOutput_VTLDevices
+var DescribeVTLDevicesOutput_Marker = &sDescribeVTLDevicesOutput_Marker
+
+var DescribeWorkingStorageInput = &sDescribeWorkingStorageInput
+var DescribeWorkingStorageInput_GatewayARN = &sDescribeWorkingStorageInput_GatewayARN
+
+var DescribeWorkingStorageOutput = &sDescribeWorkingStorageOutput
+var DescribeWorkingStorageOutput_GatewayARN = &sDescribeWorkingStorageOutput_GatewayARN
+var DescribeWorkingStorageOutput_DiskIds = &sDescribeWorkingStorageOutput_DiskIds
+var DescribeWorkingStorageOutput_WorkingStorageUsedInBytes = &sDescribeWorkingStorageOutput_WorkingStorageUsedInBytes
+var DescribeWorkingStorageOutput_WorkingStorageAllocatedInBytes = &sDescribeWorkingStorageOutput_WorkingStorageAllocatedInBytes
+
+var DetachVolumeInput = &sDetachVolumeInput
+var DetachVolumeInput_VolumeARN = &sDetachVolumeInput_VolumeARN
+var DetachVolumeInput_ForceDetach = &sDetachVolumeInput_ForceDetach
+
+var DetachVolumeOutput = &sDetachVolumeOutput
+var DetachVolumeOutput_VolumeARN = &sDetachVolumeOutput_VolumeARN
+
+var DisableGatewayInput = &sDisableGatewayInput
+var DisableGatewayInput_GatewayARN = &sDisableGatewayInput_GatewayARN
+
+var DisableGatewayOutput = &sDisableGatewayOutput
+var DisableGatewayOutput_GatewayARN = &sDisableGatewayOutput_GatewayARN
+
+var DisassociateFileSystemInput = &sDisassociateFileSystemInput
+var DisassociateFileSystemInput_FileSystemAssociationARN = &sDisassociateFileSystemInput_FileSystemAssociationARN
+var DisassociateFileSystemInput_ForceDelete = &sDisassociateFileSystemInput_ForceDelete
+
+var DisassociateFileSystemOutput = &sDisassociateFileSystemOutput
+var DisassociateFileSystemOutput_FileSystemAssociationARN = &sDisassociateFileSystemOutput_FileSystemAssociationARN
+
+var EvictFilesFailingUploadInput = &sEvictFilesFailingUploadInput
+var EvictFilesFailingUploadInput_FileShareARN = &sEvictFilesFailingUploadInput_FileShareARN
+var EvictFilesFailingUploadInput_ForceRemove = &sEvictFilesFailingUploadInput_ForceRemove
+
+var EvictFilesFailingUploadOutput = &sEvictFilesFailingUploadOutput
+var EvictFilesFailingUploadOutput_NotificationId = &sEvictFilesFailingUploadOutput_NotificationId
+
+var JoinDomainInput = &sJoinDomainInput
+var JoinDomainInput_GatewayARN = &sJoinDomainInput_GatewayARN
+var JoinDomainInput_DomainName = &sJoinDomainInput_DomainName
+var JoinDomainInput_OrganizationalUnit = &sJoinDomainInput_OrganizationalUnit
+var JoinDomainInput_DomainControllers = &sJoinDomainInput_DomainControllers
+var JoinDomainInput_TimeoutInSeconds = &sJoinDomainInput_TimeoutInSeconds
+var JoinDomainInput_UserName = &sJoinDomainInput_UserName
+var JoinDomainInput_Password = &sJoinDomainInput_Password
+
+var JoinDomainOutput = &sJoinDomainOutput
+var JoinDomainOutput_GatewayARN = &sJoinDomainOutput_GatewayARN
+var JoinDomainOutput_ActiveDirectoryStatus = &sJoinDomainOutput_ActiveDirectoryStatus
+
+var ListAutomaticTapeCreationPoliciesInput = &sListAutomaticTapeCreationPoliciesInput
+var ListAutomaticTapeCreationPoliciesInput_GatewayARN = &sListAutomaticTapeCreationPoliciesInput_GatewayARN
+
+var ListAutomaticTapeCreationPoliciesOutput = &sListAutomaticTapeCreationPoliciesOutput
+var ListAutomaticTapeCreationPoliciesOutput_AutomaticTapeCreationPolicyInfos = &sListAutomaticTapeCreationPoliciesOutput_AutomaticTapeCreationPolicyInfos
+
+var ListCacheReportsInput = &sListCacheReportsInput
+var ListCacheReportsInput_Marker = &sListCacheReportsInput_Marker
+
+var ListCacheReportsOutput = &sListCacheReportsOutput
+var ListCacheReportsOutput_CacheReportList = &sListCacheReportsOutput_CacheReportList
+var ListCacheReportsOutput_Marker = &sListCacheReportsOutput_Marker
+
+var ListFileSharesInput = &sListFileSharesInput
+var ListFileSharesInput_GatewayARN = &sListFileSharesInput_GatewayARN
+var ListFileSharesInput_Limit = &sListFileSharesInput_Limit
+var ListFileSharesInput_Marker = &sListFileSharesInput_Marker
+
+var ListFileSharesOutput = &sListFileSharesOutput
+var ListFileSharesOutput_Marker = &sListFileSharesOutput_Marker
+var ListFileSharesOutput_NextMarker = &sListFileSharesOutput_NextMarker
+var ListFileSharesOutput_FileShareInfoList = &sListFileSharesOutput_FileShareInfoList
+
+var ListFileSystemAssociationsInput = &sListFileSystemAssociationsInput
+var ListFileSystemAssociationsInput_GatewayARN = &sListFileSystemAssociationsInput_GatewayARN
+var ListFileSystemAssociationsInput_Limit = &sListFileSystemAssociationsInput_Limit
+var ListFileSystemAssociationsInput_Marker = &sListFileSystemAssociationsInput_Marker
+
+var ListFileSystemAssociationsOutput = &sListFileSystemAssociationsOutput
+var ListFileSystemAssociationsOutput_Marker = &sListFileSystemAssociationsOutput_Marker
+var ListFileSystemAssociationsOutput_NextMarker = &sListFileSystemAssociationsOutput_NextMarker
+var ListFileSystemAssociationsOutput_FileSystemAssociationSummaryList = &sListFileSystemAssociationsOutput_FileSystemAssociationSummaryList
+
+var ListGatewaysInput = &sListGatewaysInput
+var ListGatewaysInput_Marker = &sListGatewaysInput_Marker
+var ListGatewaysInput_Limit = &sListGatewaysInput_Limit
+
+var ListGatewaysOutput = &sListGatewaysOutput
+var ListGatewaysOutput_Gateways = &sListGatewaysOutput_Gateways
+var ListGatewaysOutput_Marker = &sListGatewaysOutput_Marker
+
+var ListLocalDisksInput = &sListLocalDisksInput
+var ListLocalDisksInput_GatewayARN = &sListLocalDisksInput_GatewayARN
+
+var ListLocalDisksOutput = &sListLocalDisksOutput
+var ListLocalDisksOutput_GatewayARN = &sListLocalDisksOutput_GatewayARN
+var ListLocalDisksOutput_Disks = &sListLocalDisksOutput_Disks
+
+var ListTagsForResourceInput = &sListTagsForResourceInput
+var ListTagsForResourceInput_ResourceARN = &sListTagsForResourceInput_ResourceARN
+var ListTagsForResourceInput_Marker = &sListTagsForResourceInput_Marker
+var ListTagsForResourceInput_Limit = &sListTagsForResourceInput_Limit
+
+var ListTagsForResourceOutput = &sListTagsForResourceOutput
+var ListTagsForResourceOutput_ResourceARN = &sListTagsForResourceOutput_ResourceARN
+var ListTagsForResourceOutput_Marker = &sListTagsForResourceOutput_Marker
+var ListTagsForResourceOutput_Tags = &sListTagsForResourceOutput_Tags
+
+var ListTapePoolsInput = &sListTapePoolsInput
+var ListTapePoolsInput_PoolARNs = &sListTapePoolsInput_PoolARNs
+var ListTapePoolsInput_Marker = &sListTapePoolsInput_Marker
+var ListTapePoolsInput_Limit = &sListTapePoolsInput_Limit
+
+var ListTapePoolsOutput = &sListTapePoolsOutput
+var ListTapePoolsOutput_PoolInfos = &sListTapePoolsOutput_PoolInfos
+var ListTapePoolsOutput_Marker = &sListTapePoolsOutput_Marker
+
+var ListTapesInput = &sListTapesInput
+var ListTapesInput_TapeARNs = &sListTapesInput_TapeARNs
+var ListTapesInput_Marker = &sListTapesInput_Marker
+var ListTapesInput_Limit = &sListTapesInput_Limit
+
+var ListTapesOutput = &sListTapesOutput
+var ListTapesOutput_TapeInfos = &sListTapesOutput_TapeInfos
+var ListTapesOutput_Marker = &sListTapesOutput_Marker
+
+var ListVolumeInitiatorsInput = &sListVolumeInitiatorsInput
+var ListVolumeInitiatorsInput_VolumeARN = &sListVolumeInitiatorsInput_VolumeARN
+
+var ListVolumeInitiatorsOutput = &sListVolumeInitiatorsOutput
+var ListVolumeInitiatorsOutput_Initiators = &sListVolumeInitiatorsOutput_Initiators
+
+var ListVolumeRecoveryPointsInput = &sListVolumeRecoveryPointsInput
+var ListVolumeRecoveryPointsInput_GatewayARN = &sListVolumeRecoveryPointsInput_GatewayARN
+
+var ListVolumeRecoveryPointsOutput = &sListVolumeRecoveryPointsOutput
+var ListVolumeRecoveryPointsOutput_GatewayARN = &sListVolumeRecoveryPointsOutput_GatewayARN
+var ListVolumeRecoveryPointsOutput_VolumeRecoveryPointInfos = &sListVolumeRecoveryPointsOutput_VolumeRecoveryPointInfos
+
+var ListVolumesInput = &sListVolumesInput
+var ListVolumesInput_GatewayARN = &sListVolumesInput_GatewayARN
+var ListVolumesInput_Marker = &sListVolumesInput_Marker
+var ListVolumesInput_Limit = &sListVolumesInput_Limit
+
+var ListVolumesOutput = &sListVolumesOutput
+var ListVolumesOutput_GatewayARN = &sListVolumesOutput_GatewayARN
+var ListVolumesOutput_Marker = &sListVolumesOutput_Marker
+var ListVolumesOutput_VolumeInfos = &sListVolumesOutput_VolumeInfos
+
+var NotifyWhenUploadedInput = &sNotifyWhenUploadedInput
+var NotifyWhenUploadedInput_FileShareARN = &sNotifyWhenUploadedInput_FileShareARN
+
+var NotifyWhenUploadedOutput = &sNotifyWhenUploadedOutput
+var NotifyWhenUploadedOutput_FileShareARN = &sNotifyWhenUploadedOutput_FileShareARN
+var NotifyWhenUploadedOutput_NotificationId = &sNotifyWhenUploadedOutput_NotificationId
+
+var RefreshCacheInput = &sRefreshCacheInput
+var RefreshCacheInput_FileShareARN = &sRefreshCacheInput_FileShareARN
+var RefreshCacheInput_FolderList = &sRefreshCacheInput_FolderList
+var RefreshCacheInput_Recursive = &sRefreshCacheInput_Recursive
+
+var RefreshCacheOutput = &sRefreshCacheOutput
+var RefreshCacheOutput_FileShareARN = &sRefreshCacheOutput_FileShareARN
+var RefreshCacheOutput_NotificationId = &sRefreshCacheOutput_NotificationId
+
+var RemoveTagsFromResourceInput = &sRemoveTagsFromResourceInput
+var RemoveTagsFromResourceInput_ResourceARN = &sRemoveTagsFromResourceInput_ResourceARN
+var RemoveTagsFromResourceInput_TagKeys = &sRemoveTagsFromResourceInput_TagKeys
+
+var RemoveTagsFromResourceOutput = &sRemoveTagsFromResourceOutput
+var RemoveTagsFromResourceOutput_ResourceARN = &sRemoveTagsFromResourceOutput_ResourceARN
+
+var ResetCacheInput = &sResetCacheInput
+var ResetCacheInput_GatewayARN = &sResetCacheInput_GatewayARN
+
+var ResetCacheOutput = &sResetCacheOutput
+var ResetCacheOutput_GatewayARN = &sResetCacheOutput_GatewayARN
+
+var RetrieveTapeArchiveInput = &sRetrieveTapeArchiveInput
+var RetrieveTapeArchiveInput_TapeARN = &sRetrieveTapeArchiveInput_TapeARN
+var RetrieveTapeArchiveInput_GatewayARN = &sRetrieveTapeArchiveInput_GatewayARN
+
+var RetrieveTapeArchiveOutput = &sRetrieveTapeArchiveOutput
+var RetrieveTapeArchiveOutput_TapeARN = &sRetrieveTapeArchiveOutput_TapeARN
+
+var RetrieveTapeRecoveryPointInput = &sRetrieveTapeRecoveryPointInput
+var RetrieveTapeRecoveryPointInput_TapeARN = &sRetrieveTapeRecoveryPointInput_TapeARN
+var RetrieveTapeRecoveryPointInput_GatewayARN = &sRetrieveTapeRecoveryPointInput_GatewayARN
+
+var RetrieveTapeRecoveryPointOutput = &sRetrieveTapeRecoveryPointOutput
+var RetrieveTapeRecoveryPointOutput_TapeARN = &sRetrieveTapeRecoveryPointOutput_TapeARN
+
+var SetLocalConsolePasswordInput = &sSetLocalConsolePasswordInput
+var SetLocalConsolePasswordInput_GatewayARN = &sSetLocalConsolePasswordInput_GatewayARN
+var SetLocalConsolePasswordInput_LocalConsolePassword = &sSetLocalConsolePasswordInput_LocalConsolePassword
+
+var SetLocalConsolePasswordOutput = &sSetLocalConsolePasswordOutput
+var SetLocalConsolePasswordOutput_GatewayARN = &sSetLocalConsolePasswordOutput_GatewayARN
+
+var SetSMBGuestPasswordInput = &sSetSMBGuestPasswordInput
+var SetSMBGuestPasswordInput_GatewayARN = &sSetSMBGuestPasswordInput_GatewayARN
+var SetSMBGuestPasswordInput_Password = &sSetSMBGuestPasswordInput_Password
+
+var SetSMBGuestPasswordOutput = &sSetSMBGuestPasswordOutput
+var SetSMBGuestPasswordOutput_GatewayARN = &sSetSMBGuestPasswordOutput_GatewayARN
+
+var ShutdownGatewayInput = &sShutdownGatewayInput
+var ShutdownGatewayInput_GatewayARN = &sShutdownGatewayInput_GatewayARN
+
+var ShutdownGatewayOutput = &sShutdownGatewayOutput
+var ShutdownGatewayOutput_GatewayARN = &sShutdownGatewayOutput_GatewayARN
+
+var StartAvailabilityMonitorTestInput = &sStartAvailabilityMonitorTestInput
+var StartAvailabilityMonitorTestInput_GatewayARN = &sStartAvailabilityMonitorTestInput_GatewayARN
+
+var StartAvailabilityMonitorTestOutput = &sStartAvailabilityMonitorTestOutput
+var StartAvailabilityMonitorTestOutput_GatewayARN = &sStartAvailabilityMonitorTestOutput_GatewayARN
+
+var StartCacheReportInput = &sStartCacheReportInput
+var StartCacheReportInput_FileShareARN = &sStartCacheReportInput_FileShareARN
+var StartCacheReportInput_Role = &sStartCacheReportInput_Role
+var StartCacheReportInput_LocationARN = &sStartCacheReportInput_LocationARN
+var StartCacheReportInput_BucketRegion = &sStartCacheReportInput_BucketRegion
+var StartCacheReportInput_VPCEndpointDNSName = &sStartCacheReportInput_VPCEndpointDNSName
+var StartCacheReportInput_InclusionFilters = &sStartCacheReportInput_InclusionFilters
+var StartCacheReportInput_ExclusionFilters = &sStartCacheReportInput_ExclusionFilters
+var StartCacheReportInput_ClientToken = &sStartCacheReportInput_ClientToken
+var StartCacheReportInput_Tags = &sStartCacheReportInput_Tags
+
+var StartCacheReportOutput = &sStartCacheReportOutput
+var StartCacheReportOutput_CacheReportARN = &sStartCacheReportOutput_CacheReportARN
+
+var StartGatewayInput = &sStartGatewayInput
+var StartGatewayInput_GatewayARN = &sStartGatewayInput_GatewayARN
+
+var StartGatewayOutput = &sStartGatewayOutput
+var StartGatewayOutput_GatewayARN = &sStartGatewayOutput_GatewayARN
+
+var UpdateAutomaticTapeCreationPolicyInput = &sUpdateAutomaticTapeCreationPolicyInput
+var UpdateAutomaticTapeCreationPolicyInput_AutomaticTapeCreationRules = &sUpdateAutomaticTapeCreationPolicyInput_AutomaticTapeCreationRules
+var UpdateAutomaticTapeCreationPolicyInput_GatewayARN = &sUpdateAutomaticTapeCreationPolicyInput_GatewayARN
+
+var UpdateAutomaticTapeCreationPolicyOutput = &sUpdateAutomaticTapeCreationPolicyOutput
+var UpdateAutomaticTapeCreationPolicyOutput_GatewayARN = &sUpdateAutomaticTapeCreationPolicyOutput_GatewayARN
+
+var UpdateBandwidthRateLimitInput = &sUpdateBandwidthRateLimitInput
+var UpdateBandwidthRateLimitInput_GatewayARN = &sUpdateBandwidthRateLimitInput_GatewayARN
+var UpdateBandwidthRateLimitInput_AverageUploadRateLimitInBitsPerSec = &sUpdateBandwidthRateLimitInput_AverageUploadRateLimitInBitsPerSec
+var UpdateBandwidthRateLimitInput_AverageDownloadRateLimitInBitsPerSec = &sUpdateBandwidthRateLimitInput_AverageDownloadRateLimitInBitsPerSec
+
+var UpdateBandwidthRateLimitOutput = &sUpdateBandwidthRateLimitOutput
+var UpdateBandwidthRateLimitOutput_GatewayARN = &sUpdateBandwidthRateLimitOutput_GatewayARN
+
+var UpdateBandwidthRateLimitScheduleInput = &sUpdateBandwidthRateLimitScheduleInput
+var UpdateBandwidthRateLimitScheduleInput_GatewayARN = &sUpdateBandwidthRateLimitScheduleInput_GatewayARN
+var UpdateBandwidthRateLimitScheduleInput_BandwidthRateLimitIntervals = &sUpdateBandwidthRateLimitScheduleInput_BandwidthRateLimitIntervals
+
+var UpdateBandwidthRateLimitScheduleOutput = &sUpdateBandwidthRateLimitScheduleOutput
+var UpdateBandwidthRateLimitScheduleOutput_GatewayARN = &sUpdateBandwidthRateLimitScheduleOutput_GatewayARN
+
+var UpdateChapCredentialsInput = &sUpdateChapCredentialsInput
+var UpdateChapCredentialsInput_TargetARN = &sUpdateChapCredentialsInput_TargetARN
+var UpdateChapCredentialsInput_SecretToAuthenticateInitiator = &sUpdateChapCredentialsInput_SecretToAuthenticateInitiator
+var UpdateChapCredentialsInput_InitiatorName = &sUpdateChapCredentialsInput_InitiatorName
+var UpdateChapCredentialsInput_SecretToAuthenticateTarget = &sUpdateChapCredentialsInput_SecretToAuthenticateTarget
+
+var UpdateChapCredentialsOutput = &sUpdateChapCredentialsOutput
+var UpdateChapCredentialsOutput_TargetARN = &sUpdateChapCredentialsOutput_TargetARN
+var UpdateChapCredentialsOutput_InitiatorName = &sUpdateChapCredentialsOutput_InitiatorName
+
+var UpdateFileSystemAssociationInput = &sUpdateFileSystemAssociationInput
+var UpdateFileSystemAssociationInput_FileSystemAssociationARN = &sUpdateFileSystemAssociationInput_FileSystemAssociationARN
+var UpdateFileSystemAssociationInput_UserName = &sUpdateFileSystemAssociationInput_UserName
+var UpdateFileSystemAssociationInput_Password = &sUpdateFileSystemAssociationInput_Password
+var UpdateFileSystemAssociationInput_AuditDestinationARN = &sUpdateFileSystemAssociationInput_AuditDestinationARN
+var UpdateFileSystemAssociationInput_CacheAttributes = &sUpdateFileSystemAssociationInput_CacheAttributes
+
+var UpdateFileSystemAssociationOutput = &sUpdateFileSystemAssociationOutput
+var UpdateFileSystemAssociationOutput_FileSystemAssociationARN = &sUpdateFileSystemAssociationOutput_FileSystemAssociationARN
+
+var UpdateGatewayInformationInput = &sUpdateGatewayInformationInput
+var UpdateGatewayInformationInput_GatewayARN = &sUpdateGatewayInformationInput_GatewayARN
+var UpdateGatewayInformationInput_GatewayName = &sUpdateGatewayInformationInput_GatewayName
+var UpdateGatewayInformationInput_GatewayTimezone = &sUpdateGatewayInformationInput_GatewayTimezone
+var UpdateGatewayInformationInput_CloudWatchLogGroupARN = &sUpdateGatewayInformationInput_CloudWatchLogGroupARN
+var UpdateGatewayInformationInput_GatewayCapacity = &sUpdateGatewayInformationInput_GatewayCapacity
+
+var UpdateGatewayInformationOutput = &sUpdateGatewayInformationOutput
+var UpdateGatewayInformationOutput_GatewayARN = &sUpdateGatewayInformationOutput_GatewayARN
+var UpdateGatewayInformationOutput_GatewayName = &sUpdateGatewayInformationOutput_GatewayName
+
+var UpdateGatewaySoftwareNowInput = &sUpdateGatewaySoftwareNowInput
+var UpdateGatewaySoftwareNowInput_GatewayARN = &sUpdateGatewaySoftwareNowInput_GatewayARN
+
+var UpdateGatewaySoftwareNowOutput = &sUpdateGatewaySoftwareNowOutput
+var UpdateGatewaySoftwareNowOutput_GatewayARN = &sUpdateGatewaySoftwareNowOutput_GatewayARN
+
+var UpdateMaintenanceStartTimeInput = &sUpdateMaintenanceStartTimeInput
+var UpdateMaintenanceStartTimeInput_GatewayARN = &sUpdateMaintenanceStartTimeInput_GatewayARN
+var UpdateMaintenanceStartTimeInput_HourOfDay = &sUpdateMaintenanceStartTimeInput_HourOfDay
+var UpdateMaintenanceStartTimeInput_MinuteOfHour = &sUpdateMaintenanceStartTimeInput_MinuteOfHour
+var UpdateMaintenanceStartTimeInput_DayOfWeek = &sUpdateMaintenanceStartTimeInput_DayOfWeek
+var UpdateMaintenanceStartTimeInput_DayOfMonth = &sUpdateMaintenanceStartTimeInput_DayOfMonth
+var UpdateMaintenanceStartTimeInput_SoftwareUpdatePreferences = &sUpdateMaintenanceStartTimeInput_SoftwareUpdatePreferences
+
+var UpdateMaintenanceStartTimeOutput = &sUpdateMaintenanceStartTimeOutput
+var UpdateMaintenanceStartTimeOutput_GatewayARN = &sUpdateMaintenanceStartTimeOutput_GatewayARN
+
+var UpdateNFSFileShareInput = &sUpdateNFSFileShareInput
+var UpdateNFSFileShareInput_FileShareARN = &sUpdateNFSFileShareInput_FileShareARN
+var UpdateNFSFileShareInput_EncryptionType = &sUpdateNFSFileShareInput_EncryptionType
+var UpdateNFSFileShareInput_KMSEncrypted = &sUpdateNFSFileShareInput_KMSEncrypted
+var UpdateNFSFileShareInput_KMSKey = &sUpdateNFSFileShareInput_KMSKey
+var UpdateNFSFileShareInput_NFSFileShareDefaults = &sUpdateNFSFileShareInput_NFSFileShareDefaults
+var UpdateNFSFileShareInput_DefaultStorageClass = &sUpdateNFSFileShareInput_DefaultStorageClass
+var UpdateNFSFileShareInput_ObjectACL = &sUpdateNFSFileShareInput_ObjectACL
+var UpdateNFSFileShareInput_ClientList = &sUpdateNFSFileShareInput_ClientList
+var UpdateNFSFileShareInput_Squash = &sUpdateNFSFileShareInput_Squash
+var UpdateNFSFileShareInput_ReadOnly = &sUpdateNFSFileShareInput_ReadOnly
+var UpdateNFSFileShareInput_GuessMIMETypeEnabled = &sUpdateNFSFileShareInput_GuessMIMETypeEnabled
+var UpdateNFSFileShareInput_RequesterPays = &sUpdateNFSFileShareInput_RequesterPays
+var UpdateNFSFileShareInput_FileShareName = &sUpdateNFSFileShareInput_FileShareName
+var UpdateNFSFileShareInput_CacheAttributes = &sUpdateNFSFileShareInput_CacheAttributes
+var UpdateNFSFileShareInput_NotificationPolicy = &sUpdateNFSFileShareInput_NotificationPolicy
+var UpdateNFSFileShareInput_AuditDestinationARN = &sUpdateNFSFileShareInput_AuditDestinationARN
+
+var UpdateNFSFileShareOutput = &sUpdateNFSFileShareOutput
+var UpdateNFSFileShareOutput_FileShareARN = &sUpdateNFSFileShareOutput_FileShareARN
+
+var UpdateSMBFileShareInput = &sUpdateSMBFileShareInput
+var UpdateSMBFileShareInput_FileShareARN = &sUpdateSMBFileShareInput_FileShareARN
+var UpdateSMBFileShareInput_EncryptionType = &sUpdateSMBFileShareInput_EncryptionType
+var UpdateSMBFileShareInput_KMSEncrypted = &sUpdateSMBFileShareInput_KMSEncrypted
+var UpdateSMBFileShareInput_KMSKey = &sUpdateSMBFileShareInput_KMSKey
+var UpdateSMBFileShareInput_DefaultStorageClass = &sUpdateSMBFileShareInput_DefaultStorageClass
+var UpdateSMBFileShareInput_ObjectACL = &sUpdateSMBFileShareInput_ObjectACL
+var UpdateSMBFileShareInput_ReadOnly = &sUpdateSMBFileShareInput_ReadOnly
+var UpdateSMBFileShareInput_GuessMIMETypeEnabled = &sUpdateSMBFileShareInput_GuessMIMETypeEnabled
+var UpdateSMBFileShareInput_RequesterPays = &sUpdateSMBFileShareInput_RequesterPays
+var UpdateSMBFileShareInput_SMBACLEnabled = &sUpdateSMBFileShareInput_SMBACLEnabled
+var UpdateSMBFileShareInput_AccessBasedEnumeration = &sUpdateSMBFileShareInput_AccessBasedEnumeration
+var UpdateSMBFileShareInput_AdminUserList = &sUpdateSMBFileShareInput_AdminUserList
+var UpdateSMBFileShareInput_ValidUserList = &sUpdateSMBFileShareInput_ValidUserList
+var UpdateSMBFileShareInput_InvalidUserList = &sUpdateSMBFileShareInput_InvalidUserList
+var UpdateSMBFileShareInput_AuditDestinationARN = &sUpdateSMBFileShareInput_AuditDestinationARN
+var UpdateSMBFileShareInput_CaseSensitivity = &sUpdateSMBFileShareInput_CaseSensitivity
+var UpdateSMBFileShareInput_FileShareName = &sUpdateSMBFileShareInput_FileShareName
+var UpdateSMBFileShareInput_CacheAttributes = &sUpdateSMBFileShareInput_CacheAttributes
+var UpdateSMBFileShareInput_NotificationPolicy = &sUpdateSMBFileShareInput_NotificationPolicy
+var UpdateSMBFileShareInput_OplocksEnabled = &sUpdateSMBFileShareInput_OplocksEnabled
+
+var UpdateSMBFileShareOutput = &sUpdateSMBFileShareOutput
+var UpdateSMBFileShareOutput_FileShareARN = &sUpdateSMBFileShareOutput_FileShareARN
+
+var UpdateSMBFileShareVisibilityInput = &sUpdateSMBFileShareVisibilityInput
+var UpdateSMBFileShareVisibilityInput_GatewayARN = &sUpdateSMBFileShareVisibilityInput_GatewayARN
+var UpdateSMBFileShareVisibilityInput_FileSharesVisible = &sUpdateSMBFileShareVisibilityInput_FileSharesVisible
+
+var UpdateSMBFileShareVisibilityOutput = &sUpdateSMBFileShareVisibilityOutput
+var UpdateSMBFileShareVisibilityOutput_GatewayARN = &sUpdateSMBFileShareVisibilityOutput_GatewayARN
+
+var UpdateSMBLocalGroupsInput = &sUpdateSMBLocalGroupsInput
+var UpdateSMBLocalGroupsInput_GatewayARN = &sUpdateSMBLocalGroupsInput_GatewayARN
+var UpdateSMBLocalGroupsInput_SMBLocalGroups = &sUpdateSMBLocalGroupsInput_SMBLocalGroups
+
+var UpdateSMBLocalGroupsOutput = &sUpdateSMBLocalGroupsOutput
+var UpdateSMBLocalGroupsOutput_GatewayARN = &sUpdateSMBLocalGroupsOutput_GatewayARN
+
+var UpdateSMBSecurityStrategyInput = &sUpdateSMBSecurityStrategyInput
+var UpdateSMBSecurityStrategyInput_GatewayARN = &sUpdateSMBSecurityStrategyInput_GatewayARN
+var UpdateSMBSecurityStrategyInput_SMBSecurityStrategy = &sUpdateSMBSecurityStrategyInput_SMBSecurityStrategy
+
+var UpdateSMBSecurityStrategyOutput = &sUpdateSMBSecurityStrategyOutput
+var UpdateSMBSecurityStrategyOutput_GatewayARN = &sUpdateSMBSecurityStrategyOutput_GatewayARN
+
+var UpdateSnapshotScheduleInput = &sUpdateSnapshotScheduleInput
+var UpdateSnapshotScheduleInput_VolumeARN = &sUpdateSnapshotScheduleInput_VolumeARN
+var UpdateSnapshotScheduleInput_StartAt = &sUpdateSnapshotScheduleInput_StartAt
+var UpdateSnapshotScheduleInput_RecurrenceInHours = &sUpdateSnapshotScheduleInput_RecurrenceInHours
+var UpdateSnapshotScheduleInput_Description = &sUpdateSnapshotScheduleInput_Description
+var UpdateSnapshotScheduleInput_Tags = &sUpdateSnapshotScheduleInput_Tags
+
+var UpdateSnapshotScheduleOutput = &sUpdateSnapshotScheduleOutput
+var UpdateSnapshotScheduleOutput_VolumeARN = &sUpdateSnapshotScheduleOutput_VolumeARN
+
+var UpdateVTLDeviceTypeInput = &sUpdateVTLDeviceTypeInput
+var UpdateVTLDeviceTypeInput_VTLDeviceARN = &sUpdateVTLDeviceTypeInput_VTLDeviceARN
+var UpdateVTLDeviceTypeInput_DeviceType = &sUpdateVTLDeviceTypeInput_DeviceType
+
+var UpdateVTLDeviceTypeOutput = &sUpdateVTLDeviceTypeOutput
+var UpdateVTLDeviceTypeOutput_VTLDeviceARN = &sUpdateVTLDeviceTypeOutput_VTLDeviceARN
+
+var StorageGateway_20130630 = &smithy.ServiceSchema{Schema: &s_StorageGateway_20130630, Version: "2013-06-30"}

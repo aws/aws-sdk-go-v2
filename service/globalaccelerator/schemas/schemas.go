@@ -4,2883 +4,2171 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AddCustomRoutingEndpoints = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "AddCustomRoutingEndpoints",
-}, smithy.ShapeTypeOperation, 0)
-
-var AddEndpoints = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "AddEndpoints",
-}, smithy.ShapeTypeOperation, 0)
-
-var AdvertiseByoipCidr = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "AdvertiseByoipCidr",
-}, smithy.ShapeTypeOperation, 0)
-
-var AllowCustomRoutingTraffic = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "AllowCustomRoutingTraffic",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateAccelerator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "CreateAccelerator",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateCrossAccountAttachment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "CreateCrossAccountAttachment",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateCustomRoutingAccelerator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "CreateCustomRoutingAccelerator",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateCustomRoutingEndpointGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "CreateCustomRoutingEndpointGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateCustomRoutingListener = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "CreateCustomRoutingListener",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateEndpointGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "CreateEndpointGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateListener = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "CreateListener",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteAccelerator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DeleteAccelerator",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteCrossAccountAttachment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DeleteCrossAccountAttachment",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteCustomRoutingAccelerator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DeleteCustomRoutingAccelerator",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteCustomRoutingEndpointGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DeleteCustomRoutingEndpointGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteCustomRoutingListener = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DeleteCustomRoutingListener",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteEndpointGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DeleteEndpointGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteListener = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DeleteListener",
-}, smithy.ShapeTypeOperation, 0)
-
-var DenyCustomRoutingTraffic = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DenyCustomRoutingTraffic",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeprovisionByoipCidr = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DeprovisionByoipCidr",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeAccelerator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DescribeAccelerator",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeAcceleratorAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DescribeAcceleratorAttributes",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeCrossAccountAttachment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DescribeCrossAccountAttachment",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeCustomRoutingAccelerator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DescribeCustomRoutingAccelerator",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeCustomRoutingAcceleratorAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DescribeCustomRoutingAcceleratorAttributes",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeCustomRoutingEndpointGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DescribeCustomRoutingEndpointGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeCustomRoutingListener = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DescribeCustomRoutingListener",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeEndpointGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DescribeEndpointGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeListener = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DescribeListener",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListAccelerators = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ListAccelerators",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListByoipCidrs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ListByoipCidrs",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListCrossAccountAttachments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ListCrossAccountAttachments",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListCrossAccountResourceAccounts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ListCrossAccountResourceAccounts",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListCrossAccountResources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ListCrossAccountResources",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListCustomRoutingAccelerators = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ListCustomRoutingAccelerators",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListCustomRoutingEndpointGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ListCustomRoutingEndpointGroups",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListCustomRoutingListeners = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ListCustomRoutingListeners",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListCustomRoutingPortMappings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ListCustomRoutingPortMappings",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListCustomRoutingPortMappingsByDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ListCustomRoutingPortMappingsByDestination",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListEndpointGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ListEndpointGroups",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListListeners = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ListListeners",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var ProvisionByoipCidr = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ProvisionByoipCidr",
-}, smithy.ShapeTypeOperation, 0)
-
-var RemoveCustomRoutingEndpoints = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "RemoveCustomRoutingEndpoints",
-}, smithy.ShapeTypeOperation, 0)
-
-var RemoveEndpoints = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "RemoveEndpoints",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateAccelerator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "UpdateAccelerator",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateAcceleratorAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "UpdateAcceleratorAttributes",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateCrossAccountAttachment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "UpdateCrossAccountAttachment",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateCustomRoutingAccelerator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "UpdateCustomRoutingAccelerator",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateCustomRoutingAcceleratorAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "UpdateCustomRoutingAcceleratorAttributes",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateCustomRoutingListener = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "UpdateCustomRoutingListener",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateEndpointGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "UpdateEndpointGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateListener = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "UpdateListener",
-}, smithy.ShapeTypeOperation, 0)
-
-var WithdrawByoipCidr = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "WithdrawByoipCidr",
-}, smithy.ShapeTypeOperation, 0)
-
-var _GlobalAccelerator_V20180706 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "GlobalAccelerator_V20180706",
-}, smithy.ShapeTypeService, 0)
-
-var GlobalAccelerator_V20180706 = smithy.NewServiceSchema(_GlobalAccelerator_V20180706, "2018-08-08")
-
-var Accelerator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "Accelerator",
-}, smithy.ShapeTypeStructure, 11)
-var Accelerator_AcceleratorArn *smithy.Schema
-
-var Accelerator_Name *smithy.Schema
-
-var Accelerator_IpAddressType *smithy.Schema
-
-var Accelerator_Enabled *smithy.Schema
-
-var Accelerator_IpSets *smithy.Schema
-
-var Accelerator_DnsName *smithy.Schema
-
-var Accelerator_Status *smithy.Schema
-
-var Accelerator_CreatedTime *smithy.Schema
-
-var Accelerator_LastModifiedTime *smithy.Schema
-
-var Accelerator_DualStackDnsName *smithy.Schema
-
-var Accelerator_Events *smithy.Schema
-
-var AcceleratorAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "AcceleratorAttributes",
-}, smithy.ShapeTypeStructure, 3)
-var AcceleratorAttributes_FlowLogsEnabled *smithy.Schema
-
-var AcceleratorAttributes_FlowLogsS3Bucket *smithy.Schema
-
-var AcceleratorAttributes_FlowLogsS3Prefix *smithy.Schema
-
-var AcceleratorEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "AcceleratorEvent",
-}, smithy.ShapeTypeStructure, 2)
-var AcceleratorEvent_Message *smithy.Schema
-
-var AcceleratorEvent_Timestamp *smithy.Schema
-
-var _AcceleratorEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "AcceleratorEvents",
-}, smithy.ShapeTypeList, 1)
-var _AcceleratorEvents_member *smithy.Schema
-
-var AcceleratorNotDisabledException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "AcceleratorNotDisabledException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var AcceleratorNotDisabledException_Message *smithy.Schema
-
-var AcceleratorNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "AcceleratorNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var AcceleratorNotFoundException_Message *smithy.Schema
-
-var _Accelerators = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "Accelerators",
-}, smithy.ShapeTypeList, 1)
-var _Accelerators_member *smithy.Schema
-
-var AcceleratorStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "AcceleratorStatus",
-}, smithy.ShapeTypeEnum, 2)
-var AcceleratorStatus_DEPLOYED *smithy.Schema
-
-var AcceleratorStatus_IN_PROGRESS *smithy.Schema
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var AssociatedEndpointGroupFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "AssociatedEndpointGroupFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var AssociatedEndpointGroupFoundException_Message *smithy.Schema
-
-var AssociatedListenerFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "AssociatedListenerFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var AssociatedListenerFoundException_Message *smithy.Schema
-
-var Attachment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "Attachment",
-}, smithy.ShapeTypeStructure, 6)
-var Attachment_AttachmentArn *smithy.Schema
-
-var Attachment_Name *smithy.Schema
-
-var Attachment_Principals *smithy.Schema
-
-var Attachment_Resources *smithy.Schema
-
-var Attachment_LastModifiedTime *smithy.Schema
-
-var Attachment_CreatedTime *smithy.Schema
-
-var _AttachmentName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "AttachmentName",
-}, smithy.ShapeTypeString, 0)
-
-var AttachmentNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "AttachmentNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var AttachmentNotFoundException_Message *smithy.Schema
-
-var _Attachments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "Attachments",
-}, smithy.ShapeTypeList, 1)
-var _Attachments_member *smithy.Schema
-
-var _AwsAccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "AwsAccountId",
-}, smithy.ShapeTypeString, 0)
-
-var _AwsAccountIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "AwsAccountIds",
-}, smithy.ShapeTypeList, 1)
-var _AwsAccountIds_member *smithy.Schema
-
-var ByoipCidr = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ByoipCidr",
-}, smithy.ShapeTypeStructure, 3)
-var ByoipCidr_Cidr *smithy.Schema
-
-var ByoipCidr_State *smithy.Schema
-
-var ByoipCidr_Events *smithy.Schema
-
-var ByoipCidrEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ByoipCidrEvent",
-}, smithy.ShapeTypeStructure, 2)
-var ByoipCidrEvent_Message *smithy.Schema
-
-var ByoipCidrEvent_Timestamp *smithy.Schema
-
-var _ByoipCidrEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ByoipCidrEvents",
-}, smithy.ShapeTypeList, 1)
-var _ByoipCidrEvents_member *smithy.Schema
-
-var ByoipCidrNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ByoipCidrNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ByoipCidrNotFoundException_Message *smithy.Schema
-
-var _ByoipCidrs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ByoipCidrs",
-}, smithy.ShapeTypeList, 1)
-var _ByoipCidrs_member *smithy.Schema
-
-var ByoipCidrState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ByoipCidrState",
-}, smithy.ShapeTypeEnum, 11)
-var ByoipCidrState_PENDING_PROVISIONING *smithy.Schema
-
-var ByoipCidrState_READY *smithy.Schema
-
-var ByoipCidrState_PENDING_ADVERTISING *smithy.Schema
-
-var ByoipCidrState_ADVERTISING *smithy.Schema
-
-var ByoipCidrState_PENDING_WITHDRAWING *smithy.Schema
-
-var ByoipCidrState_PENDING_DEPROVISIONING *smithy.Schema
-
-var ByoipCidrState_DEPROVISIONED *smithy.Schema
-
-var ByoipCidrState_FAILED_PROVISION *smithy.Schema
-
-var ByoipCidrState_FAILED_ADVERTISING *smithy.Schema
-
-var ByoipCidrState_FAILED_WITHDRAW *smithy.Schema
-
-var ByoipCidrState_FAILED_DEPROVISION *smithy.Schema
-
-var CidrAuthorizationContext = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "CidrAuthorizationContext",
-}, smithy.ShapeTypeStructure, 2)
-var CidrAuthorizationContext_Message *smithy.Schema
-
-var CidrAuthorizationContext_Signature *smithy.Schema
-
-var ClientAffinity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ClientAffinity",
-}, smithy.ShapeTypeEnum, 2)
-var ClientAffinity_NONE *smithy.Schema
-
-var ClientAffinity_SOURCE_IP *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_Message *smithy.Schema
-
-var CrossAccountResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "CrossAccountResource",
-}, smithy.ShapeTypeStructure, 3)
-var CrossAccountResource_EndpointId *smithy.Schema
-
-var CrossAccountResource_Cidr *smithy.Schema
-
-var CrossAccountResource_AttachmentArn *smithy.Schema
-
-var _CrossAccountResources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "CrossAccountResources",
-}, smithy.ShapeTypeList, 1)
-var _CrossAccountResources_member *smithy.Schema
-
-var CustomRoutingAccelerator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "CustomRoutingAccelerator",
-}, smithy.ShapeTypeStructure, 9)
-var CustomRoutingAccelerator_AcceleratorArn *smithy.Schema
-
-var CustomRoutingAccelerator_Name *smithy.Schema
-
-var CustomRoutingAccelerator_IpAddressType *smithy.Schema
-
-var CustomRoutingAccelerator_Enabled *smithy.Schema
-
-var CustomRoutingAccelerator_IpSets *smithy.Schema
-
-var CustomRoutingAccelerator_DnsName *smithy.Schema
-
-var CustomRoutingAccelerator_Status *smithy.Schema
-
-var CustomRoutingAccelerator_CreatedTime *smithy.Schema
-
-var CustomRoutingAccelerator_LastModifiedTime *smithy.Schema
-
-var CustomRoutingAcceleratorAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "CustomRoutingAcceleratorAttributes",
-}, smithy.ShapeTypeStructure, 3)
-var CustomRoutingAcceleratorAttributes_FlowLogsEnabled *smithy.Schema
-
-var CustomRoutingAcceleratorAttributes_FlowLogsS3Bucket *smithy.Schema
-
-var CustomRoutingAcceleratorAttributes_FlowLogsS3Prefix *smithy.Schema
-
-var _CustomRoutingAccelerators = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "CustomRoutingAccelerators",
-}, smithy.ShapeTypeList, 1)
-var _CustomRoutingAccelerators_member *smithy.Schema
-
-var CustomRoutingAcceleratorStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "CustomRoutingAcceleratorStatus",
-}, smithy.ShapeTypeEnum, 2)
-var CustomRoutingAcceleratorStatus_DEPLOYED *smithy.Schema
-
-var CustomRoutingAcceleratorStatus_IN_PROGRESS *smithy.Schema
-
-var CustomRoutingDestinationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "CustomRoutingDestinationConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var CustomRoutingDestinationConfiguration_FromPort *smithy.Schema
-
-var CustomRoutingDestinationConfiguration_ToPort *smithy.Schema
-
-var CustomRoutingDestinationConfiguration_Protocols *smithy.Schema
-
-var _CustomRoutingDestinationConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "CustomRoutingDestinationConfigurations",
-}, smithy.ShapeTypeList, 1)
-var _CustomRoutingDestinationConfigurations_member *smithy.Schema
-
-var CustomRoutingDestinationDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "CustomRoutingDestinationDescription",
-}, smithy.ShapeTypeStructure, 3)
-var CustomRoutingDestinationDescription_FromPort *smithy.Schema
-
-var CustomRoutingDestinationDescription_ToPort *smithy.Schema
-
-var CustomRoutingDestinationDescription_Protocols *smithy.Schema
-
-var _CustomRoutingDestinationDescriptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "CustomRoutingDestinationDescriptions",
-}, smithy.ShapeTypeList, 1)
-var _CustomRoutingDestinationDescriptions_member *smithy.Schema
-
-var CustomRoutingDestinationTrafficState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "CustomRoutingDestinationTrafficState",
-}, smithy.ShapeTypeEnum, 2)
-var CustomRoutingDestinationTrafficState_ALLOW *smithy.Schema
-
-var CustomRoutingDestinationTrafficState_DENY *smithy.Schema
-
-var CustomRoutingEndpointConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "CustomRoutingEndpointConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var CustomRoutingEndpointConfiguration_EndpointId *smithy.Schema
-
-var CustomRoutingEndpointConfiguration_AttachmentArn *smithy.Schema
-
-var _CustomRoutingEndpointConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "CustomRoutingEndpointConfigurations",
-}, smithy.ShapeTypeList, 1)
-var _CustomRoutingEndpointConfigurations_member *smithy.Schema
-
-var CustomRoutingEndpointDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "CustomRoutingEndpointDescription",
-}, smithy.ShapeTypeStructure, 1)
-var CustomRoutingEndpointDescription_EndpointId *smithy.Schema
-
-var _CustomRoutingEndpointDescriptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "CustomRoutingEndpointDescriptions",
-}, smithy.ShapeTypeList, 1)
-var _CustomRoutingEndpointDescriptions_member *smithy.Schema
-
-var CustomRoutingEndpointGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "CustomRoutingEndpointGroup",
-}, smithy.ShapeTypeStructure, 4)
-var CustomRoutingEndpointGroup_EndpointGroupArn *smithy.Schema
-
-var CustomRoutingEndpointGroup_EndpointGroupRegion *smithy.Schema
-
-var CustomRoutingEndpointGroup_DestinationDescriptions *smithy.Schema
-
-var CustomRoutingEndpointGroup_EndpointDescriptions *smithy.Schema
-
-var _CustomRoutingEndpointGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "CustomRoutingEndpointGroups",
-}, smithy.ShapeTypeList, 1)
-var _CustomRoutingEndpointGroups_member *smithy.Schema
-
-var CustomRoutingListener = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "CustomRoutingListener",
-}, smithy.ShapeTypeStructure, 2)
-var CustomRoutingListener_ListenerArn *smithy.Schema
-
-var CustomRoutingListener_PortRanges *smithy.Schema
-
-var _CustomRoutingListeners = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "CustomRoutingListeners",
-}, smithy.ShapeTypeList, 1)
-var _CustomRoutingListeners_member *smithy.Schema
-
-var CustomRoutingProtocol = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "CustomRoutingProtocol",
-}, smithy.ShapeTypeEnum, 2)
-var CustomRoutingProtocol_TCP *smithy.Schema
-
-var CustomRoutingProtocol_UDP *smithy.Schema
-
-var _CustomRoutingProtocols = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "CustomRoutingProtocols",
-}, smithy.ShapeTypeList, 1)
-var _CustomRoutingProtocols_member *smithy.Schema
-
-var _DestinationAddresses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DestinationAddresses",
-}, smithy.ShapeTypeList, 1)
-var _DestinationAddresses_member *smithy.Schema
-
-var DestinationPortMapping = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DestinationPortMapping",
-}, smithy.ShapeTypeStructure, 8)
-var DestinationPortMapping_AcceleratorArn *smithy.Schema
-
-var DestinationPortMapping_AcceleratorSocketAddresses *smithy.Schema
-
-var DestinationPortMapping_EndpointGroupArn *smithy.Schema
-
-var DestinationPortMapping_EndpointId *smithy.Schema
-
-var DestinationPortMapping_EndpointGroupRegion *smithy.Schema
-
-var DestinationPortMapping_DestinationSocketAddress *smithy.Schema
-
-var DestinationPortMapping_IpAddressType *smithy.Schema
-
-var DestinationPortMapping_DestinationTrafficState *smithy.Schema
-
-var _DestinationPortMappings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DestinationPortMappings",
-}, smithy.ShapeTypeList, 1)
-var _DestinationPortMappings_member *smithy.Schema
-
-var _DestinationPorts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DestinationPorts",
-}, smithy.ShapeTypeList, 1)
-var _DestinationPorts_member *smithy.Schema
-
-var EndpointAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "EndpointAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var EndpointAlreadyExistsException_Message *smithy.Schema
-
-var EndpointConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "EndpointConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var EndpointConfiguration_EndpointId *smithy.Schema
-
-var EndpointConfiguration_Weight *smithy.Schema
-
-var EndpointConfiguration_ClientIPPreservationEnabled *smithy.Schema
-
-var EndpointConfiguration_AttachmentArn *smithy.Schema
-
-var _EndpointConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "EndpointConfigurations",
-}, smithy.ShapeTypeList, 1)
-var _EndpointConfigurations_member *smithy.Schema
-
-var EndpointDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "EndpointDescription",
-}, smithy.ShapeTypeStructure, 5)
-var EndpointDescription_EndpointId *smithy.Schema
-
-var EndpointDescription_Weight *smithy.Schema
-
-var EndpointDescription_HealthState *smithy.Schema
-
-var EndpointDescription_HealthReason *smithy.Schema
-
-var EndpointDescription_ClientIPPreservationEnabled *smithy.Schema
-
-var _EndpointDescriptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "EndpointDescriptions",
-}, smithy.ShapeTypeList, 1)
-var _EndpointDescriptions_member *smithy.Schema
-
-var EndpointGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "EndpointGroup",
-}, smithy.ShapeTypeStructure, 10)
-var EndpointGroup_EndpointGroupArn *smithy.Schema
-
-var EndpointGroup_EndpointGroupRegion *smithy.Schema
-
-var EndpointGroup_EndpointDescriptions *smithy.Schema
-
-var EndpointGroup_TrafficDialPercentage *smithy.Schema
-
-var EndpointGroup_HealthCheckPort *smithy.Schema
-
-var EndpointGroup_HealthCheckProtocol *smithy.Schema
-
-var EndpointGroup_HealthCheckPath *smithy.Schema
-
-var EndpointGroup_HealthCheckIntervalSeconds *smithy.Schema
-
-var EndpointGroup_ThresholdCount *smithy.Schema
-
-var EndpointGroup_PortOverrides *smithy.Schema
-
-var EndpointGroupAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "EndpointGroupAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var EndpointGroupAlreadyExistsException_Message *smithy.Schema
-
-var EndpointGroupNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "EndpointGroupNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var EndpointGroupNotFoundException_Message *smithy.Schema
-
-var _EndpointGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "EndpointGroups",
-}, smithy.ShapeTypeList, 1)
-var _EndpointGroups_member *smithy.Schema
-
-var EndpointIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "EndpointIdentifier",
-}, smithy.ShapeTypeStructure, 2)
-var EndpointIdentifier_EndpointId *smithy.Schema
-
-var EndpointIdentifier_ClientIPPreservationEnabled *smithy.Schema
-
-var _EndpointIdentifiers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "EndpointIdentifiers",
-}, smithy.ShapeTypeList, 1)
-var _EndpointIdentifiers_member *smithy.Schema
-
-var _EndpointIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "EndpointIds",
-}, smithy.ShapeTypeList, 1)
-var _EndpointIds_member *smithy.Schema
-
-var EndpointNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "EndpointNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var EndpointNotFoundException_Message *smithy.Schema
-
-var _EndpointWeight = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "EndpointWeight",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _GenericBoolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "GenericBoolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _GenericString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "GenericString",
-}, smithy.ShapeTypeString, 0)
-
-var _HealthCheckIntervalSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "HealthCheckIntervalSeconds",
-}, smithy.ShapeTypeInteger, 0)
-
-var _HealthCheckPath = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "HealthCheckPath",
-}, smithy.ShapeTypeString, 0)
-
-var _HealthCheckPort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "HealthCheckPort",
-}, smithy.ShapeTypeInteger, 0)
-
-var HealthCheckProtocol = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "HealthCheckProtocol",
-}, smithy.ShapeTypeEnum, 3)
-var HealthCheckProtocol_TCP *smithy.Schema
-
-var HealthCheckProtocol_HTTP *smithy.Schema
-
-var HealthCheckProtocol_HTTPS *smithy.Schema
-
-var HealthState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "HealthState",
-}, smithy.ShapeTypeEnum, 3)
-var HealthState_INITIAL *smithy.Schema
-
-var HealthState_HEALTHY *smithy.Schema
-
-var HealthState_UNHEALTHY *smithy.Schema
-
-var _IdempotencyToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "IdempotencyToken",
-}, smithy.ShapeTypeString, 0)
-
-var IncorrectCidrStateException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "IncorrectCidrStateException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var IncorrectCidrStateException_Message *smithy.Schema
-
-var InternalServiceErrorException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "InternalServiceErrorException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServiceErrorException_Message *smithy.Schema
-
-var InvalidArgumentException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "InvalidArgumentException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidArgumentException_Message *smithy.Schema
-
-var InvalidNextTokenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "InvalidNextTokenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidNextTokenException_Message *smithy.Schema
-
-var InvalidPortRangeException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "InvalidPortRangeException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidPortRangeException_Message *smithy.Schema
-
-var _IpAddress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "IpAddress",
-}, smithy.ShapeTypeString, 0)
-
-var IpAddressDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "IpAddressDetail",
-}, smithy.ShapeTypeStructure, 2)
-var IpAddressDetail_IpAddress *smithy.Schema
-
-var IpAddressDetail_NetworkZone *smithy.Schema
-
-var _IpAddressDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "IpAddressDetails",
-}, smithy.ShapeTypeList, 1)
-var _IpAddressDetails_member *smithy.Schema
-
-var _IpAddresses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "IpAddresses",
-}, smithy.ShapeTypeList, 1)
-var _IpAddresses_member *smithy.Schema
-
-var IpAddressFamily = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "IpAddressFamily",
-}, smithy.ShapeTypeEnum, 2)
-var IpAddressFamily_IPv4 *smithy.Schema
-
-var IpAddressFamily_IPv6 *smithy.Schema
-
-var IpAddressType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "IpAddressType",
-}, smithy.ShapeTypeEnum, 2)
-var IpAddressType_IPV4 *smithy.Schema
-
-var IpAddressType_DUAL_STACK *smithy.Schema
-
-var IpSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "IpSet",
-}, smithy.ShapeTypeStructure, 4)
-var IpSet_IpFamily *smithy.Schema
-
-var IpSet_IpAddresses *smithy.Schema
-
-var IpSet_IpAddressFamily *smithy.Schema
-
-var IpSet_IpAddressDetails *smithy.Schema
-
-var _IpSets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "IpSets",
-}, smithy.ShapeTypeList, 1)
-var _IpSets_member *smithy.Schema
-
-var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var LimitExceededException_Message *smithy.Schema
-
-var Listener = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "Listener",
-}, smithy.ShapeTypeStructure, 4)
-var Listener_ListenerArn *smithy.Schema
-
-var Listener_PortRanges *smithy.Schema
-
-var Listener_Protocol *smithy.Schema
-
-var Listener_ClientAffinity *smithy.Schema
-
-var ListenerNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ListenerNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ListenerNotFoundException_Message *smithy.Schema
-
-var _Listeners = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "Listeners",
-}, smithy.ShapeTypeList, 1)
-var _Listeners_member *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _NetworkZone = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "NetworkZone",
-}, smithy.ShapeTypeString, 0)
-
-var PortMapping = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "PortMapping",
-}, smithy.ShapeTypeStructure, 6)
-var PortMapping_AcceleratorPort *smithy.Schema
-
-var PortMapping_EndpointGroupArn *smithy.Schema
-
-var PortMapping_EndpointId *smithy.Schema
-
-var PortMapping_DestinationSocketAddress *smithy.Schema
-
-var PortMapping_Protocols *smithy.Schema
-
-var PortMapping_DestinationTrafficState *smithy.Schema
-
-var _PortMappings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "PortMappings",
-}, smithy.ShapeTypeList, 1)
-var _PortMappings_member *smithy.Schema
-
-var _PortMappingsMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "PortMappingsMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _PortNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "PortNumber",
-}, smithy.ShapeTypeInteger, 0)
-
-var PortOverride = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "PortOverride",
-}, smithy.ShapeTypeStructure, 2)
-var PortOverride_ListenerPort *smithy.Schema
-
-var PortOverride_EndpointPort *smithy.Schema
-
-var _PortOverrides = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "PortOverrides",
-}, smithy.ShapeTypeList, 1)
-var _PortOverrides_member *smithy.Schema
-
-var PortRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "PortRange",
-}, smithy.ShapeTypeStructure, 2)
-var PortRange_FromPort *smithy.Schema
-
-var PortRange_ToPort *smithy.Schema
-
-var _PortRanges = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "PortRanges",
-}, smithy.ShapeTypeList, 1)
-var _PortRanges_member *smithy.Schema
-
-var _Principal = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "Principal",
-}, smithy.ShapeTypeString, 0)
-
-var _Principals = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "Principals",
-}, smithy.ShapeTypeList, 1)
-var _Principals_member *smithy.Schema
-
-var Protocol = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "Protocol",
-}, smithy.ShapeTypeEnum, 2)
-var Protocol_TCP *smithy.Schema
-
-var Protocol_UDP *smithy.Schema
-
-var _Protocols = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "Protocols",
-}, smithy.ShapeTypeList, 1)
-var _Protocols_member *smithy.Schema
-
-var Resource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "Resource",
-}, smithy.ShapeTypeStructure, 3)
-var Resource_EndpointId *smithy.Schema
-
-var Resource_Cidr *smithy.Schema
-
-var Resource_Region *smithy.Schema
-
-var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var _Resources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "Resources",
-}, smithy.ShapeTypeList, 1)
-var _Resources_member *smithy.Schema
-
-var SocketAddress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "SocketAddress",
-}, smithy.ShapeTypeStructure, 2)
-var SocketAddress_IpAddress *smithy.Schema
-
-var SocketAddress_Port *smithy.Schema
-
-var _SocketAddresses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "SocketAddresses",
-}, smithy.ShapeTypeList, 1)
-var _SocketAddresses_member *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "TagKeys",
-}, smithy.ShapeTypeList, 1)
-var _TagKeys_member *smithy.Schema
-
-var _Tags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "Tags",
-}, smithy.ShapeTypeList, 1)
-var _Tags_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _ThresholdCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ThresholdCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _TrafficDialPercentage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "TrafficDialPercentage",
-}, smithy.ShapeTypeFloat, 0)
-
-var TransactionInProgressException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "TransactionInProgressException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var TransactionInProgressException_Message *smithy.Schema
-
-var AddCustomRoutingEndpointsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "AddCustomRoutingEndpointsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var AddCustomRoutingEndpointsRequest_EndpointConfigurations *smithy.Schema
-
-var AddCustomRoutingEndpointsRequest_EndpointGroupArn *smithy.Schema
-
-var AddCustomRoutingEndpointsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "AddCustomRoutingEndpointsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var AddCustomRoutingEndpointsResponse_EndpointDescriptions *smithy.Schema
-
-var AddCustomRoutingEndpointsResponse_EndpointGroupArn *smithy.Schema
-
-var AddEndpointsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "AddEndpointsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var AddEndpointsRequest_EndpointConfigurations *smithy.Schema
-
-var AddEndpointsRequest_EndpointGroupArn *smithy.Schema
-
-var AddEndpointsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "AddEndpointsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var AddEndpointsResponse_EndpointDescriptions *smithy.Schema
-
-var AddEndpointsResponse_EndpointGroupArn *smithy.Schema
-
-var AdvertiseByoipCidrRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "AdvertiseByoipCidrRequest",
-}, smithy.ShapeTypeStructure, 1)
-var AdvertiseByoipCidrRequest_Cidr *smithy.Schema
-
-var AdvertiseByoipCidrResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "AdvertiseByoipCidrResponse",
-}, smithy.ShapeTypeStructure, 1)
-var AdvertiseByoipCidrResponse_ByoipCidr *smithy.Schema
-
-var AllowCustomRoutingTrafficRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "AllowCustomRoutingTrafficRequest",
-}, smithy.ShapeTypeStructure, 5)
-var AllowCustomRoutingTrafficRequest_EndpointGroupArn *smithy.Schema
-
-var AllowCustomRoutingTrafficRequest_EndpointId *smithy.Schema
-
-var AllowCustomRoutingTrafficRequest_DestinationAddresses *smithy.Schema
-
-var AllowCustomRoutingTrafficRequest_DestinationPorts *smithy.Schema
-
-var AllowCustomRoutingTrafficRequest_AllowAllTrafficToEndpoint *smithy.Schema
-
-var CreateAcceleratorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "CreateAcceleratorRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateAcceleratorRequest_Name *smithy.Schema
-
-var CreateAcceleratorRequest_IpAddressType *smithy.Schema
-
-var CreateAcceleratorRequest_IpAddresses *smithy.Schema
-
-var CreateAcceleratorRequest_Enabled *smithy.Schema
-
-var CreateAcceleratorRequest_IdempotencyToken *smithy.Schema
-
-var CreateAcceleratorRequest_Tags *smithy.Schema
-
-var CreateAcceleratorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "CreateAcceleratorResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateAcceleratorResponse_Accelerator *smithy.Schema
-
-var CreateCrossAccountAttachmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "CreateCrossAccountAttachmentRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateCrossAccountAttachmentRequest_Name *smithy.Schema
-
-var CreateCrossAccountAttachmentRequest_Principals *smithy.Schema
-
-var CreateCrossAccountAttachmentRequest_Resources *smithy.Schema
-
-var CreateCrossAccountAttachmentRequest_IdempotencyToken *smithy.Schema
-
-var CreateCrossAccountAttachmentRequest_Tags *smithy.Schema
-
-var CreateCrossAccountAttachmentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "CreateCrossAccountAttachmentResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateCrossAccountAttachmentResponse_CrossAccountAttachment *smithy.Schema
-
-var CreateCustomRoutingAcceleratorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "CreateCustomRoutingAcceleratorRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateCustomRoutingAcceleratorRequest_Name *smithy.Schema
-
-var CreateCustomRoutingAcceleratorRequest_IpAddressType *smithy.Schema
-
-var CreateCustomRoutingAcceleratorRequest_IpAddresses *smithy.Schema
-
-var CreateCustomRoutingAcceleratorRequest_Enabled *smithy.Schema
-
-var CreateCustomRoutingAcceleratorRequest_IdempotencyToken *smithy.Schema
-
-var CreateCustomRoutingAcceleratorRequest_Tags *smithy.Schema
-
-var CreateCustomRoutingAcceleratorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "CreateCustomRoutingAcceleratorResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateCustomRoutingAcceleratorResponse_Accelerator *smithy.Schema
-
-var CreateCustomRoutingEndpointGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "CreateCustomRoutingEndpointGroupRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateCustomRoutingEndpointGroupRequest_ListenerArn *smithy.Schema
-
-var CreateCustomRoutingEndpointGroupRequest_EndpointGroupRegion *smithy.Schema
-
-var CreateCustomRoutingEndpointGroupRequest_DestinationConfigurations *smithy.Schema
-
-var CreateCustomRoutingEndpointGroupRequest_IdempotencyToken *smithy.Schema
-
-var CreateCustomRoutingEndpointGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "CreateCustomRoutingEndpointGroupResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateCustomRoutingEndpointGroupResponse_EndpointGroup *smithy.Schema
-
-var CreateCustomRoutingListenerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "CreateCustomRoutingListenerRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateCustomRoutingListenerRequest_AcceleratorArn *smithy.Schema
-
-var CreateCustomRoutingListenerRequest_PortRanges *smithy.Schema
-
-var CreateCustomRoutingListenerRequest_IdempotencyToken *smithy.Schema
-
-var CreateCustomRoutingListenerResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "CreateCustomRoutingListenerResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateCustomRoutingListenerResponse_Listener *smithy.Schema
-
-var CreateEndpointGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "CreateEndpointGroupRequest",
-}, smithy.ShapeTypeStructure, 11)
-var CreateEndpointGroupRequest_ListenerArn *smithy.Schema
-
-var CreateEndpointGroupRequest_EndpointGroupRegion *smithy.Schema
-
-var CreateEndpointGroupRequest_EndpointConfigurations *smithy.Schema
-
-var CreateEndpointGroupRequest_TrafficDialPercentage *smithy.Schema
-
-var CreateEndpointGroupRequest_HealthCheckPort *smithy.Schema
-
-var CreateEndpointGroupRequest_HealthCheckProtocol *smithy.Schema
-
-var CreateEndpointGroupRequest_HealthCheckPath *smithy.Schema
-
-var CreateEndpointGroupRequest_HealthCheckIntervalSeconds *smithy.Schema
-
-var CreateEndpointGroupRequest_ThresholdCount *smithy.Schema
-
-var CreateEndpointGroupRequest_IdempotencyToken *smithy.Schema
-
-var CreateEndpointGroupRequest_PortOverrides *smithy.Schema
-
-var CreateEndpointGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "CreateEndpointGroupResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateEndpointGroupResponse_EndpointGroup *smithy.Schema
-
-var CreateListenerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "CreateListenerRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateListenerRequest_AcceleratorArn *smithy.Schema
-
-var CreateListenerRequest_PortRanges *smithy.Schema
-
-var CreateListenerRequest_Protocol *smithy.Schema
-
-var CreateListenerRequest_ClientAffinity *smithy.Schema
-
-var CreateListenerRequest_IdempotencyToken *smithy.Schema
-
-var CreateListenerResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "CreateListenerResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateListenerResponse_Listener *smithy.Schema
-
-var DeleteAcceleratorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DeleteAcceleratorRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteAcceleratorRequest_AcceleratorArn *smithy.Schema
-
-var DeleteCrossAccountAttachmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DeleteCrossAccountAttachmentRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteCrossAccountAttachmentRequest_AttachmentArn *smithy.Schema
-
-var DeleteCustomRoutingAcceleratorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DeleteCustomRoutingAcceleratorRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteCustomRoutingAcceleratorRequest_AcceleratorArn *smithy.Schema
-
-var DeleteCustomRoutingEndpointGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DeleteCustomRoutingEndpointGroupRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteCustomRoutingEndpointGroupRequest_EndpointGroupArn *smithy.Schema
-
-var DeleteCustomRoutingListenerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DeleteCustomRoutingListenerRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteCustomRoutingListenerRequest_ListenerArn *smithy.Schema
-
-var DeleteEndpointGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DeleteEndpointGroupRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteEndpointGroupRequest_EndpointGroupArn *smithy.Schema
-
-var DeleteListenerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DeleteListenerRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteListenerRequest_ListenerArn *smithy.Schema
-
-var DenyCustomRoutingTrafficRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DenyCustomRoutingTrafficRequest",
-}, smithy.ShapeTypeStructure, 5)
-var DenyCustomRoutingTrafficRequest_EndpointGroupArn *smithy.Schema
-
-var DenyCustomRoutingTrafficRequest_EndpointId *smithy.Schema
-
-var DenyCustomRoutingTrafficRequest_DestinationAddresses *smithy.Schema
-
-var DenyCustomRoutingTrafficRequest_DestinationPorts *smithy.Schema
-
-var DenyCustomRoutingTrafficRequest_DenyAllTrafficToEndpoint *smithy.Schema
-
-var DeprovisionByoipCidrRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DeprovisionByoipCidrRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeprovisionByoipCidrRequest_Cidr *smithy.Schema
-
-var DeprovisionByoipCidrResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DeprovisionByoipCidrResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeprovisionByoipCidrResponse_ByoipCidr *smithy.Schema
-
-var DescribeAcceleratorAttributesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DescribeAcceleratorAttributesRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeAcceleratorAttributesRequest_AcceleratorArn *smithy.Schema
-
-var DescribeAcceleratorAttributesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DescribeAcceleratorAttributesResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeAcceleratorAttributesResponse_AcceleratorAttributes *smithy.Schema
-
-var DescribeAcceleratorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DescribeAcceleratorRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeAcceleratorRequest_AcceleratorArn *smithy.Schema
-
-var DescribeAcceleratorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DescribeAcceleratorResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeAcceleratorResponse_Accelerator *smithy.Schema
-
-var DescribeCrossAccountAttachmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DescribeCrossAccountAttachmentRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeCrossAccountAttachmentRequest_AttachmentArn *smithy.Schema
-
-var DescribeCrossAccountAttachmentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DescribeCrossAccountAttachmentResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeCrossAccountAttachmentResponse_CrossAccountAttachment *smithy.Schema
-
-var DescribeCustomRoutingAcceleratorAttributesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DescribeCustomRoutingAcceleratorAttributesRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeCustomRoutingAcceleratorAttributesRequest_AcceleratorArn *smithy.Schema
-
-var DescribeCustomRoutingAcceleratorAttributesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DescribeCustomRoutingAcceleratorAttributesResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeCustomRoutingAcceleratorAttributesResponse_AcceleratorAttributes *smithy.Schema
-
-var DescribeCustomRoutingAcceleratorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DescribeCustomRoutingAcceleratorRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeCustomRoutingAcceleratorRequest_AcceleratorArn *smithy.Schema
-
-var DescribeCustomRoutingAcceleratorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DescribeCustomRoutingAcceleratorResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeCustomRoutingAcceleratorResponse_Accelerator *smithy.Schema
-
-var DescribeCustomRoutingEndpointGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DescribeCustomRoutingEndpointGroupRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeCustomRoutingEndpointGroupRequest_EndpointGroupArn *smithy.Schema
-
-var DescribeCustomRoutingEndpointGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DescribeCustomRoutingEndpointGroupResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeCustomRoutingEndpointGroupResponse_EndpointGroup *smithy.Schema
-
-var DescribeCustomRoutingListenerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DescribeCustomRoutingListenerRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeCustomRoutingListenerRequest_ListenerArn *smithy.Schema
-
-var DescribeCustomRoutingListenerResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DescribeCustomRoutingListenerResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeCustomRoutingListenerResponse_Listener *smithy.Schema
-
-var DescribeEndpointGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DescribeEndpointGroupRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeEndpointGroupRequest_EndpointGroupArn *smithy.Schema
-
-var DescribeEndpointGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DescribeEndpointGroupResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeEndpointGroupResponse_EndpointGroup *smithy.Schema
-
-var DescribeListenerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DescribeListenerRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeListenerRequest_ListenerArn *smithy.Schema
-
-var DescribeListenerResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "DescribeListenerResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeListenerResponse_Listener *smithy.Schema
-
-var ListAcceleratorsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ListAcceleratorsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListAcceleratorsRequest_MaxResults *smithy.Schema
-
-var ListAcceleratorsRequest_NextToken *smithy.Schema
-
-var ListAcceleratorsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ListAcceleratorsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAcceleratorsResponse_Accelerators *smithy.Schema
-
-var ListAcceleratorsResponse_NextToken *smithy.Schema
-
-var ListByoipCidrsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ListByoipCidrsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListByoipCidrsRequest_MaxResults *smithy.Schema
-
-var ListByoipCidrsRequest_NextToken *smithy.Schema
-
-var ListByoipCidrsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ListByoipCidrsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListByoipCidrsResponse_ByoipCidrs *smithy.Schema
-
-var ListByoipCidrsResponse_NextToken *smithy.Schema
-
-var ListCrossAccountAttachmentsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ListCrossAccountAttachmentsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListCrossAccountAttachmentsRequest_MaxResults *smithy.Schema
-
-var ListCrossAccountAttachmentsRequest_NextToken *smithy.Schema
-
-var ListCrossAccountAttachmentsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ListCrossAccountAttachmentsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListCrossAccountAttachmentsResponse_CrossAccountAttachments *smithy.Schema
-
-var ListCrossAccountAttachmentsResponse_NextToken *smithy.Schema
-
-var ListCrossAccountResourceAccountsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ListCrossAccountResourceAccountsRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var ListCrossAccountResourceAccountsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ListCrossAccountResourceAccountsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListCrossAccountResourceAccountsResponse_ResourceOwnerAwsAccountIds *smithy.Schema
-
-var ListCrossAccountResourcesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ListCrossAccountResourcesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListCrossAccountResourcesRequest_AcceleratorArn *smithy.Schema
-
-var ListCrossAccountResourcesRequest_ResourceOwnerAwsAccountId *smithy.Schema
-
-var ListCrossAccountResourcesRequest_MaxResults *smithy.Schema
-
-var ListCrossAccountResourcesRequest_NextToken *smithy.Schema
-
-var ListCrossAccountResourcesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ListCrossAccountResourcesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListCrossAccountResourcesResponse_CrossAccountResources *smithy.Schema
-
-var ListCrossAccountResourcesResponse_NextToken *smithy.Schema
-
-var ListCustomRoutingAcceleratorsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ListCustomRoutingAcceleratorsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListCustomRoutingAcceleratorsRequest_MaxResults *smithy.Schema
-
-var ListCustomRoutingAcceleratorsRequest_NextToken *smithy.Schema
-
-var ListCustomRoutingAcceleratorsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ListCustomRoutingAcceleratorsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListCustomRoutingAcceleratorsResponse_Accelerators *smithy.Schema
-
-var ListCustomRoutingAcceleratorsResponse_NextToken *smithy.Schema
-
-var ListCustomRoutingEndpointGroupsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ListCustomRoutingEndpointGroupsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListCustomRoutingEndpointGroupsRequest_ListenerArn *smithy.Schema
-
-var ListCustomRoutingEndpointGroupsRequest_MaxResults *smithy.Schema
-
-var ListCustomRoutingEndpointGroupsRequest_NextToken *smithy.Schema
-
-var ListCustomRoutingEndpointGroupsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ListCustomRoutingEndpointGroupsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListCustomRoutingEndpointGroupsResponse_EndpointGroups *smithy.Schema
-
-var ListCustomRoutingEndpointGroupsResponse_NextToken *smithy.Schema
-
-var ListCustomRoutingListenersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ListCustomRoutingListenersRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListCustomRoutingListenersRequest_AcceleratorArn *smithy.Schema
-
-var ListCustomRoutingListenersRequest_MaxResults *smithy.Schema
-
-var ListCustomRoutingListenersRequest_NextToken *smithy.Schema
-
-var ListCustomRoutingListenersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ListCustomRoutingListenersResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListCustomRoutingListenersResponse_Listeners *smithy.Schema
-
-var ListCustomRoutingListenersResponse_NextToken *smithy.Schema
-
-var ListCustomRoutingPortMappingsByDestinationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ListCustomRoutingPortMappingsByDestinationRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListCustomRoutingPortMappingsByDestinationRequest_EndpointId *smithy.Schema
-
-var ListCustomRoutingPortMappingsByDestinationRequest_DestinationAddress *smithy.Schema
-
-var ListCustomRoutingPortMappingsByDestinationRequest_MaxResults *smithy.Schema
-
-var ListCustomRoutingPortMappingsByDestinationRequest_NextToken *smithy.Schema
-
-var ListCustomRoutingPortMappingsByDestinationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ListCustomRoutingPortMappingsByDestinationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListCustomRoutingPortMappingsByDestinationResponse_DestinationPortMappings *smithy.Schema
-
-var ListCustomRoutingPortMappingsByDestinationResponse_NextToken *smithy.Schema
-
-var ListCustomRoutingPortMappingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ListCustomRoutingPortMappingsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListCustomRoutingPortMappingsRequest_AcceleratorArn *smithy.Schema
-
-var ListCustomRoutingPortMappingsRequest_EndpointGroupArn *smithy.Schema
-
-var ListCustomRoutingPortMappingsRequest_MaxResults *smithy.Schema
-
-var ListCustomRoutingPortMappingsRequest_NextToken *smithy.Schema
-
-var ListCustomRoutingPortMappingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ListCustomRoutingPortMappingsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListCustomRoutingPortMappingsResponse_PortMappings *smithy.Schema
-
-var ListCustomRoutingPortMappingsResponse_NextToken *smithy.Schema
-
-var ListEndpointGroupsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ListEndpointGroupsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListEndpointGroupsRequest_ListenerArn *smithy.Schema
-
-var ListEndpointGroupsRequest_MaxResults *smithy.Schema
-
-var ListEndpointGroupsRequest_NextToken *smithy.Schema
-
-var ListEndpointGroupsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ListEndpointGroupsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListEndpointGroupsResponse_EndpointGroups *smithy.Schema
-
-var ListEndpointGroupsResponse_NextToken *smithy.Schema
-
-var ListListenersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ListListenersRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListListenersRequest_AcceleratorArn *smithy.Schema
-
-var ListListenersRequest_MaxResults *smithy.Schema
-
-var ListListenersRequest_NextToken *smithy.Schema
-
-var ListListenersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ListListenersResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListListenersResponse_Listeners *smithy.Schema
-
-var ListListenersResponse_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var ProvisionByoipCidrRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ProvisionByoipCidrRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ProvisionByoipCidrRequest_Cidr *smithy.Schema
-
-var ProvisionByoipCidrRequest_CidrAuthorizationContext *smithy.Schema
-
-var ProvisionByoipCidrResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "ProvisionByoipCidrResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ProvisionByoipCidrResponse_ByoipCidr *smithy.Schema
-
-var RemoveCustomRoutingEndpointsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "RemoveCustomRoutingEndpointsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var RemoveCustomRoutingEndpointsRequest_EndpointIds *smithy.Schema
-
-var RemoveCustomRoutingEndpointsRequest_EndpointGroupArn *smithy.Schema
-
-var RemoveEndpointsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "RemoveEndpointsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var RemoveEndpointsRequest_EndpointIdentifiers *smithy.Schema
-
-var RemoveEndpointsRequest_EndpointGroupArn *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceArn *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceArn *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateAcceleratorAttributesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "UpdateAcceleratorAttributesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateAcceleratorAttributesRequest_AcceleratorArn *smithy.Schema
-
-var UpdateAcceleratorAttributesRequest_FlowLogsEnabled *smithy.Schema
-
-var UpdateAcceleratorAttributesRequest_FlowLogsS3Bucket *smithy.Schema
-
-var UpdateAcceleratorAttributesRequest_FlowLogsS3Prefix *smithy.Schema
-
-var UpdateAcceleratorAttributesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "UpdateAcceleratorAttributesResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateAcceleratorAttributesResponse_AcceleratorAttributes *smithy.Schema
-
-var UpdateAcceleratorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "UpdateAcceleratorRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateAcceleratorRequest_AcceleratorArn *smithy.Schema
-
-var UpdateAcceleratorRequest_Name *smithy.Schema
-
-var UpdateAcceleratorRequest_IpAddressType *smithy.Schema
-
-var UpdateAcceleratorRequest_IpAddresses *smithy.Schema
-
-var UpdateAcceleratorRequest_Enabled *smithy.Schema
-
-var UpdateAcceleratorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "UpdateAcceleratorResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateAcceleratorResponse_Accelerator *smithy.Schema
-
-var UpdateCrossAccountAttachmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "UpdateCrossAccountAttachmentRequest",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateCrossAccountAttachmentRequest_AttachmentArn *smithy.Schema
-
-var UpdateCrossAccountAttachmentRequest_Name *smithy.Schema
-
-var UpdateCrossAccountAttachmentRequest_AddPrincipals *smithy.Schema
-
-var UpdateCrossAccountAttachmentRequest_RemovePrincipals *smithy.Schema
-
-var UpdateCrossAccountAttachmentRequest_AddResources *smithy.Schema
-
-var UpdateCrossAccountAttachmentRequest_RemoveResources *smithy.Schema
-
-var UpdateCrossAccountAttachmentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "UpdateCrossAccountAttachmentResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateCrossAccountAttachmentResponse_CrossAccountAttachment *smithy.Schema
-
-var UpdateCustomRoutingAcceleratorAttributesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "UpdateCustomRoutingAcceleratorAttributesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateCustomRoutingAcceleratorAttributesRequest_AcceleratorArn *smithy.Schema
-
-var UpdateCustomRoutingAcceleratorAttributesRequest_FlowLogsEnabled *smithy.Schema
-
-var UpdateCustomRoutingAcceleratorAttributesRequest_FlowLogsS3Bucket *smithy.Schema
-
-var UpdateCustomRoutingAcceleratorAttributesRequest_FlowLogsS3Prefix *smithy.Schema
-
-var UpdateCustomRoutingAcceleratorAttributesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "UpdateCustomRoutingAcceleratorAttributesResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateCustomRoutingAcceleratorAttributesResponse_AcceleratorAttributes *smithy.Schema
-
-var UpdateCustomRoutingAcceleratorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "UpdateCustomRoutingAcceleratorRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateCustomRoutingAcceleratorRequest_AcceleratorArn *smithy.Schema
-
-var UpdateCustomRoutingAcceleratorRequest_Name *smithy.Schema
-
-var UpdateCustomRoutingAcceleratorRequest_IpAddressType *smithy.Schema
-
-var UpdateCustomRoutingAcceleratorRequest_IpAddresses *smithy.Schema
-
-var UpdateCustomRoutingAcceleratorRequest_Enabled *smithy.Schema
-
-var UpdateCustomRoutingAcceleratorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "UpdateCustomRoutingAcceleratorResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateCustomRoutingAcceleratorResponse_Accelerator *smithy.Schema
-
-var UpdateCustomRoutingListenerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "UpdateCustomRoutingListenerRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateCustomRoutingListenerRequest_ListenerArn *smithy.Schema
-
-var UpdateCustomRoutingListenerRequest_PortRanges *smithy.Schema
-
-var UpdateCustomRoutingListenerResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "UpdateCustomRoutingListenerResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateCustomRoutingListenerResponse_Listener *smithy.Schema
-
-var UpdateEndpointGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "UpdateEndpointGroupRequest",
-}, smithy.ShapeTypeStructure, 9)
-var UpdateEndpointGroupRequest_EndpointGroupArn *smithy.Schema
-
-var UpdateEndpointGroupRequest_EndpointConfigurations *smithy.Schema
-
-var UpdateEndpointGroupRequest_TrafficDialPercentage *smithy.Schema
-
-var UpdateEndpointGroupRequest_HealthCheckPort *smithy.Schema
-
-var UpdateEndpointGroupRequest_HealthCheckProtocol *smithy.Schema
-
-var UpdateEndpointGroupRequest_HealthCheckPath *smithy.Schema
-
-var UpdateEndpointGroupRequest_HealthCheckIntervalSeconds *smithy.Schema
-
-var UpdateEndpointGroupRequest_ThresholdCount *smithy.Schema
-
-var UpdateEndpointGroupRequest_PortOverrides *smithy.Schema
-
-var UpdateEndpointGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "UpdateEndpointGroupResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateEndpointGroupResponse_EndpointGroup *smithy.Schema
-
-var UpdateListenerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "UpdateListenerRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateListenerRequest_ListenerArn *smithy.Schema
-
-var UpdateListenerRequest_PortRanges *smithy.Schema
-
-var UpdateListenerRequest_Protocol *smithy.Schema
-
-var UpdateListenerRequest_ClientAffinity *smithy.Schema
-
-var UpdateListenerResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "UpdateListenerResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateListenerResponse_Listener *smithy.Schema
-
-var WithdrawByoipCidrRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "WithdrawByoipCidrRequest",
-}, smithy.ShapeTypeStructure, 1)
-var WithdrawByoipCidrRequest_Cidr *smithy.Schema
-
-var WithdrawByoipCidrResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.globalaccelerator",
-	Name:      "WithdrawByoipCidrResponse",
-}, smithy.ShapeTypeStructure, 1)
-var WithdrawByoipCidrResponse_ByoipCidr *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	IpAddressType_IPV4 = IpAddressType.AddMember("IPV4", smithyprelude.Unit)
-
-	IpAddressType_DUAL_STACK = IpAddressType.AddMember("DUAL_STACK", smithyprelude.Unit)
-
-	_IpAddresses_member = _IpAddresses.AddMember("member", _IpAddress)
-
-	IpAddressFamily_IPv4 = IpAddressFamily.AddMember("IPv4", smithyprelude.Unit)
-
-	IpAddressFamily_IPv6 = IpAddressFamily.AddMember("IPv6", smithyprelude.Unit)
-
-	IpAddressDetail_IpAddress = IpAddressDetail.AddMember("IpAddress", _IpAddress)
-
-	IpAddressDetail_NetworkZone = IpAddressDetail.AddMember("NetworkZone", _NetworkZone)
-
-	_IpAddressDetails_member = _IpAddressDetails.AddMember("member", IpAddressDetail)
-
-	IpSet_IpFamily = IpSet.AddMember("IpFamily", _GenericString)
-
-	IpSet_IpAddresses = IpSet.AddMember("IpAddresses", _IpAddresses)
-
-	IpSet_IpAddressFamily = IpSet.AddMember("IpAddressFamily", IpAddressFamily)
-
-	IpSet_IpAddressDetails = IpSet.AddMember("IpAddressDetails", _IpAddressDetails)
-
-	_IpSets_member = _IpSets.AddMember("member", IpSet)
-
-	AcceleratorStatus_DEPLOYED = AcceleratorStatus.AddMember("DEPLOYED", smithyprelude.Unit)
-
-	AcceleratorStatus_IN_PROGRESS = AcceleratorStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	AcceleratorEvent_Message = AcceleratorEvent.AddMember("Message", _GenericString)
-
-	AcceleratorEvent_Timestamp = AcceleratorEvent.AddMember("Timestamp", _Timestamp)
-
-	_AcceleratorEvents_member = _AcceleratorEvents.AddMember("member", AcceleratorEvent)
-
-	Accelerator_AcceleratorArn = Accelerator.AddMember("AcceleratorArn", _GenericString)
-
-	Accelerator_Name = Accelerator.AddMember("Name", _GenericString)
-
-	Accelerator_IpAddressType = Accelerator.AddMember("IpAddressType", IpAddressType)
-
-	Accelerator_Enabled = Accelerator.AddMember("Enabled", _GenericBoolean)
-
-	Accelerator_IpSets = Accelerator.AddMember("IpSets", _IpSets)
-
-	Accelerator_DnsName = Accelerator.AddMember("DnsName", _GenericString)
-
-	Accelerator_Status = Accelerator.AddMember("Status", AcceleratorStatus)
-
-	Accelerator_CreatedTime = Accelerator.AddMember("CreatedTime", _Timestamp)
-
-	Accelerator_LastModifiedTime = Accelerator.AddMember("LastModifiedTime", _Timestamp)
-
-	Accelerator_DualStackDnsName = Accelerator.AddMember("DualStackDnsName", _GenericString)
-
-	Accelerator_Events = Accelerator.AddMember("Events", _AcceleratorEvents)
-
-	AcceleratorAttributes_FlowLogsEnabled = AcceleratorAttributes.AddMember("FlowLogsEnabled", _GenericBoolean)
-
-	AcceleratorAttributes_FlowLogsS3Bucket = AcceleratorAttributes.AddMember("FlowLogsS3Bucket", _GenericString)
-
-	AcceleratorAttributes_FlowLogsS3Prefix = AcceleratorAttributes.AddMember("FlowLogsS3Prefix", _GenericString)
-
-	AcceleratorNotDisabledException_Message = AcceleratorNotDisabledException.AddMember("Message", _ErrorMessage)
-
-	AcceleratorNotFoundException_Message = AcceleratorNotFoundException.AddMember("Message", _ErrorMessage)
-
-	_Accelerators_member = _Accelerators.AddMember("member", Accelerator)
-
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _ErrorMessage)
-
-	AssociatedEndpointGroupFoundException_Message = AssociatedEndpointGroupFoundException.AddMember("Message", _ErrorMessage)
-
-	AssociatedListenerFoundException_Message = AssociatedListenerFoundException.AddMember("Message", _ErrorMessage)
-
-	_Principals_member = _Principals.AddMember("member", _Principal)
-
-	Resource_EndpointId = Resource.AddMember("EndpointId", _GenericString)
-
-	Resource_Cidr = Resource.AddMember("Cidr", _GenericString)
-
-	Resource_Region = Resource.AddMember("Region", _GenericString)
-
-	_Resources_member = _Resources.AddMember("member", Resource)
-
-	Attachment_AttachmentArn = Attachment.AddMember("AttachmentArn", _GenericString)
-
-	Attachment_Name = Attachment.AddMember("Name", _AttachmentName)
-
-	Attachment_Principals = Attachment.AddMember("Principals", _Principals)
-
-	Attachment_Resources = Attachment.AddMember("Resources", _Resources)
-
-	Attachment_LastModifiedTime = Attachment.AddMember("LastModifiedTime", _Timestamp)
-
-	Attachment_CreatedTime = Attachment.AddMember("CreatedTime", _Timestamp)
-
-	AttachmentNotFoundException_Message = AttachmentNotFoundException.AddMember("Message", _ErrorMessage)
-
-	_Attachments_member = _Attachments.AddMember("member", Attachment)
-
-	_AwsAccountIds_member = _AwsAccountIds.AddMember("member", _AwsAccountId)
-
-	ByoipCidrState_PENDING_PROVISIONING = ByoipCidrState.AddMember("PENDING_PROVISIONING", smithyprelude.Unit)
-
-	ByoipCidrState_READY = ByoipCidrState.AddMember("READY", smithyprelude.Unit)
-
-	ByoipCidrState_PENDING_ADVERTISING = ByoipCidrState.AddMember("PENDING_ADVERTISING", smithyprelude.Unit)
-
-	ByoipCidrState_ADVERTISING = ByoipCidrState.AddMember("ADVERTISING", smithyprelude.Unit)
-
-	ByoipCidrState_PENDING_WITHDRAWING = ByoipCidrState.AddMember("PENDING_WITHDRAWING", smithyprelude.Unit)
-
-	ByoipCidrState_PENDING_DEPROVISIONING = ByoipCidrState.AddMember("PENDING_DEPROVISIONING", smithyprelude.Unit)
-
-	ByoipCidrState_DEPROVISIONED = ByoipCidrState.AddMember("DEPROVISIONED", smithyprelude.Unit)
-
-	ByoipCidrState_FAILED_PROVISION = ByoipCidrState.AddMember("FAILED_PROVISION", smithyprelude.Unit)
-
-	ByoipCidrState_FAILED_ADVERTISING = ByoipCidrState.AddMember("FAILED_ADVERTISING", smithyprelude.Unit)
-
-	ByoipCidrState_FAILED_WITHDRAW = ByoipCidrState.AddMember("FAILED_WITHDRAW", smithyprelude.Unit)
-
-	ByoipCidrState_FAILED_DEPROVISION = ByoipCidrState.AddMember("FAILED_DEPROVISION", smithyprelude.Unit)
-
-	ByoipCidrEvent_Message = ByoipCidrEvent.AddMember("Message", _GenericString)
-
-	ByoipCidrEvent_Timestamp = ByoipCidrEvent.AddMember("Timestamp", _Timestamp)
-
-	_ByoipCidrEvents_member = _ByoipCidrEvents.AddMember("member", ByoipCidrEvent)
-
-	ByoipCidr_Cidr = ByoipCidr.AddMember("Cidr", _GenericString)
-
-	ByoipCidr_State = ByoipCidr.AddMember("State", ByoipCidrState)
-
-	ByoipCidr_Events = ByoipCidr.AddMember("Events", _ByoipCidrEvents)
-
-	ByoipCidrNotFoundException_Message = ByoipCidrNotFoundException.AddMember("Message", _ErrorMessage)
-
-	_ByoipCidrs_member = _ByoipCidrs.AddMember("member", ByoipCidr)
-
-	CidrAuthorizationContext_Message = CidrAuthorizationContext.AddMember("Message", _GenericString)
-
-	CidrAuthorizationContext_Signature = CidrAuthorizationContext.AddMember("Signature", _GenericString)
-
-	ClientAffinity_NONE = ClientAffinity.AddMember("NONE", smithyprelude.Unit)
-
-	ClientAffinity_SOURCE_IP = ClientAffinity.AddMember("SOURCE_IP", smithyprelude.Unit)
-
-	ConflictException_Message = ConflictException.AddMember("Message", _ErrorMessage)
-
-	CrossAccountResource_EndpointId = CrossAccountResource.AddMember("EndpointId", _GenericString)
-
-	CrossAccountResource_Cidr = CrossAccountResource.AddMember("Cidr", _GenericString)
-
-	CrossAccountResource_AttachmentArn = CrossAccountResource.AddMember("AttachmentArn", _GenericString)
-
-	_CrossAccountResources_member = _CrossAccountResources.AddMember("member", CrossAccountResource)
-
-	CustomRoutingAcceleratorStatus_DEPLOYED = CustomRoutingAcceleratorStatus.AddMember("DEPLOYED", smithyprelude.Unit)
-
-	CustomRoutingAcceleratorStatus_IN_PROGRESS = CustomRoutingAcceleratorStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	CustomRoutingAccelerator_AcceleratorArn = CustomRoutingAccelerator.AddMember("AcceleratorArn", _GenericString)
-
-	CustomRoutingAccelerator_Name = CustomRoutingAccelerator.AddMember("Name", _GenericString)
-
-	CustomRoutingAccelerator_IpAddressType = CustomRoutingAccelerator.AddMember("IpAddressType", IpAddressType)
-
-	CustomRoutingAccelerator_Enabled = CustomRoutingAccelerator.AddMember("Enabled", _GenericBoolean)
-
-	CustomRoutingAccelerator_IpSets = CustomRoutingAccelerator.AddMember("IpSets", _IpSets)
-
-	CustomRoutingAccelerator_DnsName = CustomRoutingAccelerator.AddMember("DnsName", _GenericString)
-
-	CustomRoutingAccelerator_Status = CustomRoutingAccelerator.AddMember("Status", CustomRoutingAcceleratorStatus)
-
-	CustomRoutingAccelerator_CreatedTime = CustomRoutingAccelerator.AddMember("CreatedTime", _Timestamp)
-
-	CustomRoutingAccelerator_LastModifiedTime = CustomRoutingAccelerator.AddMember("LastModifiedTime", _Timestamp)
-
-	CustomRoutingAcceleratorAttributes_FlowLogsEnabled = CustomRoutingAcceleratorAttributes.AddMember("FlowLogsEnabled", _GenericBoolean)
-
-	CustomRoutingAcceleratorAttributes_FlowLogsS3Bucket = CustomRoutingAcceleratorAttributes.AddMember("FlowLogsS3Bucket", _GenericString)
-
-	CustomRoutingAcceleratorAttributes_FlowLogsS3Prefix = CustomRoutingAcceleratorAttributes.AddMember("FlowLogsS3Prefix", _GenericString)
-
-	_CustomRoutingAccelerators_member = _CustomRoutingAccelerators.AddMember("member", CustomRoutingAccelerator)
-
-	CustomRoutingProtocol_TCP = CustomRoutingProtocol.AddMember("TCP", smithyprelude.Unit)
-
-	CustomRoutingProtocol_UDP = CustomRoutingProtocol.AddMember("UDP", smithyprelude.Unit)
-
-	_CustomRoutingProtocols_member = _CustomRoutingProtocols.AddMember("member", CustomRoutingProtocol)
-
-	CustomRoutingDestinationConfiguration_FromPort = CustomRoutingDestinationConfiguration.AddMember("FromPort", _PortNumber)
-
-	CustomRoutingDestinationConfiguration_ToPort = CustomRoutingDestinationConfiguration.AddMember("ToPort", _PortNumber)
-
-	CustomRoutingDestinationConfiguration_Protocols = CustomRoutingDestinationConfiguration.AddMember("Protocols", _CustomRoutingProtocols)
-
-	_CustomRoutingDestinationConfigurations_member = _CustomRoutingDestinationConfigurations.AddMember("member", CustomRoutingDestinationConfiguration)
-
-	Protocol_TCP = Protocol.AddMember("TCP", smithyprelude.Unit)
-
-	Protocol_UDP = Protocol.AddMember("UDP", smithyprelude.Unit)
-
-	_Protocols_member = _Protocols.AddMember("member", Protocol)
-
-	CustomRoutingDestinationDescription_FromPort = CustomRoutingDestinationDescription.AddMember("FromPort", _PortNumber)
-
-	CustomRoutingDestinationDescription_ToPort = CustomRoutingDestinationDescription.AddMember("ToPort", _PortNumber)
-
-	CustomRoutingDestinationDescription_Protocols = CustomRoutingDestinationDescription.AddMember("Protocols", _Protocols)
-
-	_CustomRoutingDestinationDescriptions_member = _CustomRoutingDestinationDescriptions.AddMember("member", CustomRoutingDestinationDescription)
-
-	CustomRoutingDestinationTrafficState_ALLOW = CustomRoutingDestinationTrafficState.AddMember("ALLOW", smithyprelude.Unit)
-
-	CustomRoutingDestinationTrafficState_DENY = CustomRoutingDestinationTrafficState.AddMember("DENY", smithyprelude.Unit)
-
-	CustomRoutingEndpointConfiguration_EndpointId = CustomRoutingEndpointConfiguration.AddMember("EndpointId", _GenericString)
-
-	CustomRoutingEndpointConfiguration_AttachmentArn = CustomRoutingEndpointConfiguration.AddMember("AttachmentArn", _GenericString)
-
-	_CustomRoutingEndpointConfigurations_member = _CustomRoutingEndpointConfigurations.AddMember("member", CustomRoutingEndpointConfiguration)
-
-	CustomRoutingEndpointDescription_EndpointId = CustomRoutingEndpointDescription.AddMember("EndpointId", _GenericString)
-
-	_CustomRoutingEndpointDescriptions_member = _CustomRoutingEndpointDescriptions.AddMember("member", CustomRoutingEndpointDescription)
-
-	CustomRoutingEndpointGroup_EndpointGroupArn = CustomRoutingEndpointGroup.AddMember("EndpointGroupArn", _GenericString)
-
-	CustomRoutingEndpointGroup_EndpointGroupRegion = CustomRoutingEndpointGroup.AddMember("EndpointGroupRegion", _GenericString)
-
-	CustomRoutingEndpointGroup_DestinationDescriptions = CustomRoutingEndpointGroup.AddMember("DestinationDescriptions", _CustomRoutingDestinationDescriptions)
-
-	CustomRoutingEndpointGroup_EndpointDescriptions = CustomRoutingEndpointGroup.AddMember("EndpointDescriptions", _CustomRoutingEndpointDescriptions)
-
-	_CustomRoutingEndpointGroups_member = _CustomRoutingEndpointGroups.AddMember("member", CustomRoutingEndpointGroup)
-
-	PortRange_FromPort = PortRange.AddMember("FromPort", _PortNumber)
-
-	PortRange_ToPort = PortRange.AddMember("ToPort", _PortNumber)
-
-	_PortRanges_member = _PortRanges.AddMember("member", PortRange)
-
-	CustomRoutingListener_ListenerArn = CustomRoutingListener.AddMember("ListenerArn", _GenericString)
-
-	CustomRoutingListener_PortRanges = CustomRoutingListener.AddMember("PortRanges", _PortRanges)
-
-	_CustomRoutingListeners_member = _CustomRoutingListeners.AddMember("member", CustomRoutingListener)
-
-	_DestinationAddresses_member = _DestinationAddresses.AddMember("member", _IpAddress)
-
-	SocketAddress_IpAddress = SocketAddress.AddMember("IpAddress", _GenericString)
-
-	SocketAddress_Port = SocketAddress.AddMember("Port", _PortNumber)
-
-	_SocketAddresses_member = _SocketAddresses.AddMember("member", SocketAddress)
-
-	DestinationPortMapping_AcceleratorArn = DestinationPortMapping.AddMember("AcceleratorArn", _GenericString)
-
-	DestinationPortMapping_AcceleratorSocketAddresses = DestinationPortMapping.AddMember("AcceleratorSocketAddresses", _SocketAddresses)
-
-	DestinationPortMapping_EndpointGroupArn = DestinationPortMapping.AddMember("EndpointGroupArn", _GenericString)
-
-	DestinationPortMapping_EndpointId = DestinationPortMapping.AddMember("EndpointId", _GenericString)
-
-	DestinationPortMapping_EndpointGroupRegion = DestinationPortMapping.AddMember("EndpointGroupRegion", _GenericString)
-
-	DestinationPortMapping_DestinationSocketAddress = DestinationPortMapping.AddMember("DestinationSocketAddress", SocketAddress)
-
-	DestinationPortMapping_IpAddressType = DestinationPortMapping.AddMember("IpAddressType", IpAddressType)
-
-	DestinationPortMapping_DestinationTrafficState = DestinationPortMapping.AddMember("DestinationTrafficState", CustomRoutingDestinationTrafficState)
-
-	_DestinationPortMappings_member = _DestinationPortMappings.AddMember("member", DestinationPortMapping)
-
-	_DestinationPorts_member = _DestinationPorts.AddMember("member", _PortNumber)
-
-	EndpointAlreadyExistsException_Message = EndpointAlreadyExistsException.AddMember("Message", _ErrorMessage)
-
-	EndpointConfiguration_EndpointId = EndpointConfiguration.AddMember("EndpointId", _GenericString)
-
-	EndpointConfiguration_Weight = EndpointConfiguration.AddMember("Weight", _EndpointWeight)
-
-	EndpointConfiguration_ClientIPPreservationEnabled = EndpointConfiguration.AddMember("ClientIPPreservationEnabled", _GenericBoolean)
-
-	EndpointConfiguration_AttachmentArn = EndpointConfiguration.AddMember("AttachmentArn", _GenericString)
-
-	_EndpointConfigurations_member = _EndpointConfigurations.AddMember("member", EndpointConfiguration)
-
-	HealthState_INITIAL = HealthState.AddMember("INITIAL", smithyprelude.Unit)
-
-	HealthState_HEALTHY = HealthState.AddMember("HEALTHY", smithyprelude.Unit)
-
-	HealthState_UNHEALTHY = HealthState.AddMember("UNHEALTHY", smithyprelude.Unit)
-
-	EndpointDescription_EndpointId = EndpointDescription.AddMember("EndpointId", _GenericString)
-
-	EndpointDescription_Weight = EndpointDescription.AddMember("Weight", _EndpointWeight)
-
-	EndpointDescription_HealthState = EndpointDescription.AddMember("HealthState", HealthState)
-
-	EndpointDescription_HealthReason = EndpointDescription.AddMember("HealthReason", _GenericString)
-
-	EndpointDescription_ClientIPPreservationEnabled = EndpointDescription.AddMember("ClientIPPreservationEnabled", _GenericBoolean)
-
-	_EndpointDescriptions_member = _EndpointDescriptions.AddMember("member", EndpointDescription)
-
-	HealthCheckProtocol_TCP = HealthCheckProtocol.AddMember("TCP", smithyprelude.Unit)
-
-	HealthCheckProtocol_HTTP = HealthCheckProtocol.AddMember("HTTP", smithyprelude.Unit)
-
-	HealthCheckProtocol_HTTPS = HealthCheckProtocol.AddMember("HTTPS", smithyprelude.Unit)
-
-	PortOverride_ListenerPort = PortOverride.AddMember("ListenerPort", _PortNumber)
-
-	PortOverride_EndpointPort = PortOverride.AddMember("EndpointPort", _PortNumber)
-
-	_PortOverrides_member = _PortOverrides.AddMember("member", PortOverride)
-
-	EndpointGroup_EndpointGroupArn = EndpointGroup.AddMember("EndpointGroupArn", _GenericString)
-
-	EndpointGroup_EndpointGroupRegion = EndpointGroup.AddMember("EndpointGroupRegion", _GenericString)
-
-	EndpointGroup_EndpointDescriptions = EndpointGroup.AddMember("EndpointDescriptions", _EndpointDescriptions)
-
-	EndpointGroup_TrafficDialPercentage = EndpointGroup.AddMember("TrafficDialPercentage", _TrafficDialPercentage)
-
-	EndpointGroup_HealthCheckPort = EndpointGroup.AddMember("HealthCheckPort", _HealthCheckPort)
-
-	EndpointGroup_HealthCheckProtocol = EndpointGroup.AddMember("HealthCheckProtocol", HealthCheckProtocol)
-
-	EndpointGroup_HealthCheckPath = EndpointGroup.AddMember("HealthCheckPath", _HealthCheckPath)
-
-	EndpointGroup_HealthCheckIntervalSeconds = EndpointGroup.AddMember("HealthCheckIntervalSeconds", _HealthCheckIntervalSeconds)
-
-	EndpointGroup_ThresholdCount = EndpointGroup.AddMember("ThresholdCount", _ThresholdCount)
-
-	EndpointGroup_PortOverrides = EndpointGroup.AddMember("PortOverrides", _PortOverrides)
-
-	EndpointGroupAlreadyExistsException_Message = EndpointGroupAlreadyExistsException.AddMember("Message", _ErrorMessage)
-
-	EndpointGroupNotFoundException_Message = EndpointGroupNotFoundException.AddMember("Message", _ErrorMessage)
-
-	_EndpointGroups_member = _EndpointGroups.AddMember("member", EndpointGroup)
-
-	EndpointIdentifier_EndpointId = EndpointIdentifier.AddMember("EndpointId", _GenericString)
-
-	EndpointIdentifier_ClientIPPreservationEnabled = EndpointIdentifier.AddMember("ClientIPPreservationEnabled", _GenericBoolean)
-
-	_EndpointIdentifiers_member = _EndpointIdentifiers.AddMember("member", EndpointIdentifier)
-
-	_EndpointIds_member = _EndpointIds.AddMember("member", _GenericString)
-
-	EndpointNotFoundException_Message = EndpointNotFoundException.AddMember("Message", _ErrorMessage)
-
-	IncorrectCidrStateException_Message = IncorrectCidrStateException.AddMember("Message", _ErrorMessage)
-
-	InternalServiceErrorException_Message = InternalServiceErrorException.AddMember("Message", _ErrorMessage)
-
-	InvalidArgumentException_Message = InvalidArgumentException.AddMember("Message", _ErrorMessage)
-
-	InvalidNextTokenException_Message = InvalidNextTokenException.AddMember("Message", _ErrorMessage)
-
-	InvalidPortRangeException_Message = InvalidPortRangeException.AddMember("Message", _ErrorMessage)
-
-	LimitExceededException_Message = LimitExceededException.AddMember("Message", _ErrorMessage)
-
-	Listener_ListenerArn = Listener.AddMember("ListenerArn", _GenericString)
-
-	Listener_PortRanges = Listener.AddMember("PortRanges", _PortRanges)
-
-	Listener_Protocol = Listener.AddMember("Protocol", Protocol)
-
-	Listener_ClientAffinity = Listener.AddMember("ClientAffinity", ClientAffinity)
-
-	ListenerNotFoundException_Message = ListenerNotFoundException.AddMember("Message", _ErrorMessage)
-
-	_Listeners_member = _Listeners.AddMember("member", Listener)
-
-	PortMapping_AcceleratorPort = PortMapping.AddMember("AcceleratorPort", _PortNumber)
-
-	PortMapping_EndpointGroupArn = PortMapping.AddMember("EndpointGroupArn", _GenericString)
-
-	PortMapping_EndpointId = PortMapping.AddMember("EndpointId", _GenericString)
-
-	PortMapping_DestinationSocketAddress = PortMapping.AddMember("DestinationSocketAddress", SocketAddress)
-
-	PortMapping_Protocols = PortMapping.AddMember("Protocols", _CustomRoutingProtocols)
-
-	PortMapping_DestinationTrafficState = PortMapping.AddMember("DestinationTrafficState", CustomRoutingDestinationTrafficState)
-
-	_PortMappings_member = _PortMappings.AddMember("member", PortMapping)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagKeys_member = _TagKeys.AddMember("member", _TagKey)
-
-	_Tags_member = _Tags.AddMember("member", Tag)
-
-	TransactionInProgressException_Message = TransactionInProgressException.AddMember("Message", _ErrorMessage)
-
-	AddCustomRoutingEndpointsRequest_EndpointConfigurations = AddCustomRoutingEndpointsRequest.AddMember("EndpointConfigurations", _CustomRoutingEndpointConfigurations)
-
-	AddCustomRoutingEndpointsRequest_EndpointGroupArn = AddCustomRoutingEndpointsRequest.AddMember("EndpointGroupArn", _GenericString)
-
-	AddCustomRoutingEndpointsResponse_EndpointDescriptions = AddCustomRoutingEndpointsResponse.AddMember("EndpointDescriptions", _CustomRoutingEndpointDescriptions)
-
-	AddCustomRoutingEndpointsResponse_EndpointGroupArn = AddCustomRoutingEndpointsResponse.AddMember("EndpointGroupArn", _GenericString)
-
-	AddEndpointsRequest_EndpointConfigurations = AddEndpointsRequest.AddMember("EndpointConfigurations", _EndpointConfigurations)
-
-	AddEndpointsRequest_EndpointGroupArn = AddEndpointsRequest.AddMember("EndpointGroupArn", _GenericString)
-
-	AddEndpointsResponse_EndpointDescriptions = AddEndpointsResponse.AddMember("EndpointDescriptions", _EndpointDescriptions)
-
-	AddEndpointsResponse_EndpointGroupArn = AddEndpointsResponse.AddMember("EndpointGroupArn", _GenericString)
-
-	AdvertiseByoipCidrRequest_Cidr = AdvertiseByoipCidrRequest.AddMember("Cidr", _GenericString)
-
-	AdvertiseByoipCidrResponse_ByoipCidr = AdvertiseByoipCidrResponse.AddMember("ByoipCidr", ByoipCidr)
-
-	AllowCustomRoutingTrafficRequest_EndpointGroupArn = AllowCustomRoutingTrafficRequest.AddMember("EndpointGroupArn", _GenericString)
-
-	AllowCustomRoutingTrafficRequest_EndpointId = AllowCustomRoutingTrafficRequest.AddMember("EndpointId", _GenericString)
-
-	AllowCustomRoutingTrafficRequest_DestinationAddresses = AllowCustomRoutingTrafficRequest.AddMember("DestinationAddresses", _DestinationAddresses)
-
-	AllowCustomRoutingTrafficRequest_DestinationPorts = AllowCustomRoutingTrafficRequest.AddMember("DestinationPorts", _DestinationPorts)
-
-	AllowCustomRoutingTrafficRequest_AllowAllTrafficToEndpoint = AllowCustomRoutingTrafficRequest.AddMember("AllowAllTrafficToEndpoint", _GenericBoolean)
-
-	CreateAcceleratorRequest_Name = CreateAcceleratorRequest.AddMember("Name", _GenericString)
-
-	CreateAcceleratorRequest_IpAddressType = CreateAcceleratorRequest.AddMember("IpAddressType", IpAddressType)
-
-	CreateAcceleratorRequest_IpAddresses = CreateAcceleratorRequest.AddMember("IpAddresses", _IpAddresses)
-
-	CreateAcceleratorRequest_Enabled = CreateAcceleratorRequest.AddMember("Enabled", _GenericBoolean)
-
-	CreateAcceleratorRequest_IdempotencyToken = CreateAcceleratorRequest.AddMember("IdempotencyToken", _IdempotencyToken)
-
-	CreateAcceleratorRequest_Tags = CreateAcceleratorRequest.AddMember("Tags", _Tags)
-
-	CreateAcceleratorResponse_Accelerator = CreateAcceleratorResponse.AddMember("Accelerator", Accelerator)
-
-	CreateCrossAccountAttachmentRequest_Name = CreateCrossAccountAttachmentRequest.AddMember("Name", _AttachmentName)
-
-	CreateCrossAccountAttachmentRequest_Principals = CreateCrossAccountAttachmentRequest.AddMember("Principals", _Principals)
-
-	CreateCrossAccountAttachmentRequest_Resources = CreateCrossAccountAttachmentRequest.AddMember("Resources", _Resources)
-
-	CreateCrossAccountAttachmentRequest_IdempotencyToken = CreateCrossAccountAttachmentRequest.AddMember("IdempotencyToken", _IdempotencyToken)
-
-	CreateCrossAccountAttachmentRequest_Tags = CreateCrossAccountAttachmentRequest.AddMember("Tags", _Tags)
-
-	CreateCrossAccountAttachmentResponse_CrossAccountAttachment = CreateCrossAccountAttachmentResponse.AddMember("CrossAccountAttachment", Attachment)
-
-	CreateCustomRoutingAcceleratorRequest_Name = CreateCustomRoutingAcceleratorRequest.AddMember("Name", _GenericString)
-
-	CreateCustomRoutingAcceleratorRequest_IpAddressType = CreateCustomRoutingAcceleratorRequest.AddMember("IpAddressType", IpAddressType)
-
-	CreateCustomRoutingAcceleratorRequest_IpAddresses = CreateCustomRoutingAcceleratorRequest.AddMember("IpAddresses", _IpAddresses)
-
-	CreateCustomRoutingAcceleratorRequest_Enabled = CreateCustomRoutingAcceleratorRequest.AddMember("Enabled", _GenericBoolean)
-
-	CreateCustomRoutingAcceleratorRequest_IdempotencyToken = CreateCustomRoutingAcceleratorRequest.AddMember("IdempotencyToken", _IdempotencyToken)
-
-	CreateCustomRoutingAcceleratorRequest_Tags = CreateCustomRoutingAcceleratorRequest.AddMember("Tags", _Tags)
-
-	CreateCustomRoutingAcceleratorResponse_Accelerator = CreateCustomRoutingAcceleratorResponse.AddMember("Accelerator", CustomRoutingAccelerator)
-
-	CreateCustomRoutingEndpointGroupRequest_ListenerArn = CreateCustomRoutingEndpointGroupRequest.AddMember("ListenerArn", _GenericString)
-
-	CreateCustomRoutingEndpointGroupRequest_EndpointGroupRegion = CreateCustomRoutingEndpointGroupRequest.AddMember("EndpointGroupRegion", _GenericString)
-
-	CreateCustomRoutingEndpointGroupRequest_DestinationConfigurations = CreateCustomRoutingEndpointGroupRequest.AddMember("DestinationConfigurations", _CustomRoutingDestinationConfigurations)
-
-	CreateCustomRoutingEndpointGroupRequest_IdempotencyToken = CreateCustomRoutingEndpointGroupRequest.AddMember("IdempotencyToken", _IdempotencyToken)
-
-	CreateCustomRoutingEndpointGroupResponse_EndpointGroup = CreateCustomRoutingEndpointGroupResponse.AddMember("EndpointGroup", CustomRoutingEndpointGroup)
-
-	CreateCustomRoutingListenerRequest_AcceleratorArn = CreateCustomRoutingListenerRequest.AddMember("AcceleratorArn", _GenericString)
-
-	CreateCustomRoutingListenerRequest_PortRanges = CreateCustomRoutingListenerRequest.AddMember("PortRanges", _PortRanges)
-
-	CreateCustomRoutingListenerRequest_IdempotencyToken = CreateCustomRoutingListenerRequest.AddMember("IdempotencyToken", _IdempotencyToken)
-
-	CreateCustomRoutingListenerResponse_Listener = CreateCustomRoutingListenerResponse.AddMember("Listener", CustomRoutingListener)
-
-	CreateEndpointGroupRequest_ListenerArn = CreateEndpointGroupRequest.AddMember("ListenerArn", _GenericString)
-
-	CreateEndpointGroupRequest_EndpointGroupRegion = CreateEndpointGroupRequest.AddMember("EndpointGroupRegion", _GenericString)
-
-	CreateEndpointGroupRequest_EndpointConfigurations = CreateEndpointGroupRequest.AddMember("EndpointConfigurations", _EndpointConfigurations)
-
-	CreateEndpointGroupRequest_TrafficDialPercentage = CreateEndpointGroupRequest.AddMember("TrafficDialPercentage", _TrafficDialPercentage)
-
-	CreateEndpointGroupRequest_HealthCheckPort = CreateEndpointGroupRequest.AddMember("HealthCheckPort", _HealthCheckPort)
-
-	CreateEndpointGroupRequest_HealthCheckProtocol = CreateEndpointGroupRequest.AddMember("HealthCheckProtocol", HealthCheckProtocol)
-
-	CreateEndpointGroupRequest_HealthCheckPath = CreateEndpointGroupRequest.AddMember("HealthCheckPath", _HealthCheckPath)
-
-	CreateEndpointGroupRequest_HealthCheckIntervalSeconds = CreateEndpointGroupRequest.AddMember("HealthCheckIntervalSeconds", _HealthCheckIntervalSeconds)
-
-	CreateEndpointGroupRequest_ThresholdCount = CreateEndpointGroupRequest.AddMember("ThresholdCount", _ThresholdCount)
-
-	CreateEndpointGroupRequest_IdempotencyToken = CreateEndpointGroupRequest.AddMember("IdempotencyToken", _IdempotencyToken)
-
-	CreateEndpointGroupRequest_PortOverrides = CreateEndpointGroupRequest.AddMember("PortOverrides", _PortOverrides)
-
-	CreateEndpointGroupResponse_EndpointGroup = CreateEndpointGroupResponse.AddMember("EndpointGroup", EndpointGroup)
-
-	CreateListenerRequest_AcceleratorArn = CreateListenerRequest.AddMember("AcceleratorArn", _GenericString)
-
-	CreateListenerRequest_PortRanges = CreateListenerRequest.AddMember("PortRanges", _PortRanges)
-
-	CreateListenerRequest_Protocol = CreateListenerRequest.AddMember("Protocol", Protocol)
-
-	CreateListenerRequest_ClientAffinity = CreateListenerRequest.AddMember("ClientAffinity", ClientAffinity)
-
-	CreateListenerRequest_IdempotencyToken = CreateListenerRequest.AddMember("IdempotencyToken", _IdempotencyToken)
-
-	CreateListenerResponse_Listener = CreateListenerResponse.AddMember("Listener", Listener)
-
-	DeleteAcceleratorRequest_AcceleratorArn = DeleteAcceleratorRequest.AddMember("AcceleratorArn", _GenericString)
-
-	DeleteCrossAccountAttachmentRequest_AttachmentArn = DeleteCrossAccountAttachmentRequest.AddMember("AttachmentArn", _GenericString)
-
-	DeleteCustomRoutingAcceleratorRequest_AcceleratorArn = DeleteCustomRoutingAcceleratorRequest.AddMember("AcceleratorArn", _GenericString)
-
-	DeleteCustomRoutingEndpointGroupRequest_EndpointGroupArn = DeleteCustomRoutingEndpointGroupRequest.AddMember("EndpointGroupArn", _GenericString)
-
-	DeleteCustomRoutingListenerRequest_ListenerArn = DeleteCustomRoutingListenerRequest.AddMember("ListenerArn", _GenericString)
-
-	DeleteEndpointGroupRequest_EndpointGroupArn = DeleteEndpointGroupRequest.AddMember("EndpointGroupArn", _GenericString)
-
-	DeleteListenerRequest_ListenerArn = DeleteListenerRequest.AddMember("ListenerArn", _GenericString)
-
-	DenyCustomRoutingTrafficRequest_EndpointGroupArn = DenyCustomRoutingTrafficRequest.AddMember("EndpointGroupArn", _GenericString)
-
-	DenyCustomRoutingTrafficRequest_EndpointId = DenyCustomRoutingTrafficRequest.AddMember("EndpointId", _GenericString)
-
-	DenyCustomRoutingTrafficRequest_DestinationAddresses = DenyCustomRoutingTrafficRequest.AddMember("DestinationAddresses", _DestinationAddresses)
-
-	DenyCustomRoutingTrafficRequest_DestinationPorts = DenyCustomRoutingTrafficRequest.AddMember("DestinationPorts", _DestinationPorts)
-
-	DenyCustomRoutingTrafficRequest_DenyAllTrafficToEndpoint = DenyCustomRoutingTrafficRequest.AddMember("DenyAllTrafficToEndpoint", _GenericBoolean)
-
-	DeprovisionByoipCidrRequest_Cidr = DeprovisionByoipCidrRequest.AddMember("Cidr", _GenericString)
-
-	DeprovisionByoipCidrResponse_ByoipCidr = DeprovisionByoipCidrResponse.AddMember("ByoipCidr", ByoipCidr)
-
-	DescribeAcceleratorAttributesRequest_AcceleratorArn = DescribeAcceleratorAttributesRequest.AddMember("AcceleratorArn", _GenericString)
-
-	DescribeAcceleratorAttributesResponse_AcceleratorAttributes = DescribeAcceleratorAttributesResponse.AddMember("AcceleratorAttributes", AcceleratorAttributes)
-
-	DescribeAcceleratorRequest_AcceleratorArn = DescribeAcceleratorRequest.AddMember("AcceleratorArn", _GenericString)
-
-	DescribeAcceleratorResponse_Accelerator = DescribeAcceleratorResponse.AddMember("Accelerator", Accelerator)
-
-	DescribeCrossAccountAttachmentRequest_AttachmentArn = DescribeCrossAccountAttachmentRequest.AddMember("AttachmentArn", _GenericString)
-
-	DescribeCrossAccountAttachmentResponse_CrossAccountAttachment = DescribeCrossAccountAttachmentResponse.AddMember("CrossAccountAttachment", Attachment)
-
-	DescribeCustomRoutingAcceleratorAttributesRequest_AcceleratorArn = DescribeCustomRoutingAcceleratorAttributesRequest.AddMember("AcceleratorArn", _GenericString)
-
-	DescribeCustomRoutingAcceleratorAttributesResponse_AcceleratorAttributes = DescribeCustomRoutingAcceleratorAttributesResponse.AddMember("AcceleratorAttributes", CustomRoutingAcceleratorAttributes)
-
-	DescribeCustomRoutingAcceleratorRequest_AcceleratorArn = DescribeCustomRoutingAcceleratorRequest.AddMember("AcceleratorArn", _GenericString)
-
-	DescribeCustomRoutingAcceleratorResponse_Accelerator = DescribeCustomRoutingAcceleratorResponse.AddMember("Accelerator", CustomRoutingAccelerator)
-
-	DescribeCustomRoutingEndpointGroupRequest_EndpointGroupArn = DescribeCustomRoutingEndpointGroupRequest.AddMember("EndpointGroupArn", _GenericString)
-
-	DescribeCustomRoutingEndpointGroupResponse_EndpointGroup = DescribeCustomRoutingEndpointGroupResponse.AddMember("EndpointGroup", CustomRoutingEndpointGroup)
-
-	DescribeCustomRoutingListenerRequest_ListenerArn = DescribeCustomRoutingListenerRequest.AddMember("ListenerArn", _GenericString)
-
-	DescribeCustomRoutingListenerResponse_Listener = DescribeCustomRoutingListenerResponse.AddMember("Listener", CustomRoutingListener)
-
-	DescribeEndpointGroupRequest_EndpointGroupArn = DescribeEndpointGroupRequest.AddMember("EndpointGroupArn", _GenericString)
-
-	DescribeEndpointGroupResponse_EndpointGroup = DescribeEndpointGroupResponse.AddMember("EndpointGroup", EndpointGroup)
-
-	DescribeListenerRequest_ListenerArn = DescribeListenerRequest.AddMember("ListenerArn", _GenericString)
-
-	DescribeListenerResponse_Listener = DescribeListenerResponse.AddMember("Listener", Listener)
-
-	ListAcceleratorsRequest_MaxResults = ListAcceleratorsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListAcceleratorsRequest_NextToken = ListAcceleratorsRequest.AddMember("NextToken", _GenericString)
-
-	ListAcceleratorsResponse_Accelerators = ListAcceleratorsResponse.AddMember("Accelerators", _Accelerators)
-
-	ListAcceleratorsResponse_NextToken = ListAcceleratorsResponse.AddMember("NextToken", _GenericString)
-
-	ListByoipCidrsRequest_MaxResults = ListByoipCidrsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListByoipCidrsRequest_NextToken = ListByoipCidrsRequest.AddMember("NextToken", _GenericString)
-
-	ListByoipCidrsResponse_ByoipCidrs = ListByoipCidrsResponse.AddMember("ByoipCidrs", _ByoipCidrs)
-
-	ListByoipCidrsResponse_NextToken = ListByoipCidrsResponse.AddMember("NextToken", _GenericString)
-
-	ListCrossAccountAttachmentsRequest_MaxResults = ListCrossAccountAttachmentsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListCrossAccountAttachmentsRequest_NextToken = ListCrossAccountAttachmentsRequest.AddMember("NextToken", _GenericString)
-
-	ListCrossAccountAttachmentsResponse_CrossAccountAttachments = ListCrossAccountAttachmentsResponse.AddMember("CrossAccountAttachments", _Attachments)
-
-	ListCrossAccountAttachmentsResponse_NextToken = ListCrossAccountAttachmentsResponse.AddMember("NextToken", _GenericString)
-
-	ListCrossAccountResourceAccountsResponse_ResourceOwnerAwsAccountIds = ListCrossAccountResourceAccountsResponse.AddMember("ResourceOwnerAwsAccountIds", _AwsAccountIds)
-
-	ListCrossAccountResourcesRequest_AcceleratorArn = ListCrossAccountResourcesRequest.AddMember("AcceleratorArn", _GenericString)
-
-	ListCrossAccountResourcesRequest_ResourceOwnerAwsAccountId = ListCrossAccountResourcesRequest.AddMember("ResourceOwnerAwsAccountId", _AwsAccountId)
-
-	ListCrossAccountResourcesRequest_MaxResults = ListCrossAccountResourcesRequest.AddMember("MaxResults", _MaxResults)
-
-	ListCrossAccountResourcesRequest_NextToken = ListCrossAccountResourcesRequest.AddMember("NextToken", _GenericString)
-
-	ListCrossAccountResourcesResponse_CrossAccountResources = ListCrossAccountResourcesResponse.AddMember("CrossAccountResources", _CrossAccountResources)
-
-	ListCrossAccountResourcesResponse_NextToken = ListCrossAccountResourcesResponse.AddMember("NextToken", _GenericString)
-
-	ListCustomRoutingAcceleratorsRequest_MaxResults = ListCustomRoutingAcceleratorsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListCustomRoutingAcceleratorsRequest_NextToken = ListCustomRoutingAcceleratorsRequest.AddMember("NextToken", _GenericString)
-
-	ListCustomRoutingAcceleratorsResponse_Accelerators = ListCustomRoutingAcceleratorsResponse.AddMember("Accelerators", _CustomRoutingAccelerators)
-
-	ListCustomRoutingAcceleratorsResponse_NextToken = ListCustomRoutingAcceleratorsResponse.AddMember("NextToken", _GenericString)
-
-	ListCustomRoutingEndpointGroupsRequest_ListenerArn = ListCustomRoutingEndpointGroupsRequest.AddMember("ListenerArn", _GenericString)
-
-	ListCustomRoutingEndpointGroupsRequest_MaxResults = ListCustomRoutingEndpointGroupsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListCustomRoutingEndpointGroupsRequest_NextToken = ListCustomRoutingEndpointGroupsRequest.AddMember("NextToken", _GenericString)
-
-	ListCustomRoutingEndpointGroupsResponse_EndpointGroups = ListCustomRoutingEndpointGroupsResponse.AddMember("EndpointGroups", _CustomRoutingEndpointGroups)
-
-	ListCustomRoutingEndpointGroupsResponse_NextToken = ListCustomRoutingEndpointGroupsResponse.AddMember("NextToken", _GenericString)
-
-	ListCustomRoutingListenersRequest_AcceleratorArn = ListCustomRoutingListenersRequest.AddMember("AcceleratorArn", _GenericString)
-
-	ListCustomRoutingListenersRequest_MaxResults = ListCustomRoutingListenersRequest.AddMember("MaxResults", _MaxResults)
-
-	ListCustomRoutingListenersRequest_NextToken = ListCustomRoutingListenersRequest.AddMember("NextToken", _GenericString)
-
-	ListCustomRoutingListenersResponse_Listeners = ListCustomRoutingListenersResponse.AddMember("Listeners", _CustomRoutingListeners)
-
-	ListCustomRoutingListenersResponse_NextToken = ListCustomRoutingListenersResponse.AddMember("NextToken", _GenericString)
-
-	ListCustomRoutingPortMappingsByDestinationRequest_EndpointId = ListCustomRoutingPortMappingsByDestinationRequest.AddMember("EndpointId", _GenericString)
-
-	ListCustomRoutingPortMappingsByDestinationRequest_DestinationAddress = ListCustomRoutingPortMappingsByDestinationRequest.AddMember("DestinationAddress", _GenericString)
-
-	ListCustomRoutingPortMappingsByDestinationRequest_MaxResults = ListCustomRoutingPortMappingsByDestinationRequest.AddMember("MaxResults", _PortMappingsMaxResults)
-
-	ListCustomRoutingPortMappingsByDestinationRequest_NextToken = ListCustomRoutingPortMappingsByDestinationRequest.AddMember("NextToken", _GenericString)
-
-	ListCustomRoutingPortMappingsByDestinationResponse_DestinationPortMappings = ListCustomRoutingPortMappingsByDestinationResponse.AddMember("DestinationPortMappings", _DestinationPortMappings)
-
-	ListCustomRoutingPortMappingsByDestinationResponse_NextToken = ListCustomRoutingPortMappingsByDestinationResponse.AddMember("NextToken", _GenericString)
-
-	ListCustomRoutingPortMappingsRequest_AcceleratorArn = ListCustomRoutingPortMappingsRequest.AddMember("AcceleratorArn", _GenericString)
-
-	ListCustomRoutingPortMappingsRequest_EndpointGroupArn = ListCustomRoutingPortMappingsRequest.AddMember("EndpointGroupArn", _GenericString)
-
-	ListCustomRoutingPortMappingsRequest_MaxResults = ListCustomRoutingPortMappingsRequest.AddMember("MaxResults", _PortMappingsMaxResults)
-
-	ListCustomRoutingPortMappingsRequest_NextToken = ListCustomRoutingPortMappingsRequest.AddMember("NextToken", _GenericString)
-
-	ListCustomRoutingPortMappingsResponse_PortMappings = ListCustomRoutingPortMappingsResponse.AddMember("PortMappings", _PortMappings)
-
-	ListCustomRoutingPortMappingsResponse_NextToken = ListCustomRoutingPortMappingsResponse.AddMember("NextToken", _GenericString)
-
-	ListEndpointGroupsRequest_ListenerArn = ListEndpointGroupsRequest.AddMember("ListenerArn", _GenericString)
-
-	ListEndpointGroupsRequest_MaxResults = ListEndpointGroupsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListEndpointGroupsRequest_NextToken = ListEndpointGroupsRequest.AddMember("NextToken", _GenericString)
-
-	ListEndpointGroupsResponse_EndpointGroups = ListEndpointGroupsResponse.AddMember("EndpointGroups", _EndpointGroups)
-
-	ListEndpointGroupsResponse_NextToken = ListEndpointGroupsResponse.AddMember("NextToken", _GenericString)
-
-	ListListenersRequest_AcceleratorArn = ListListenersRequest.AddMember("AcceleratorArn", _GenericString)
-
-	ListListenersRequest_MaxResults = ListListenersRequest.AddMember("MaxResults", _MaxResults)
-
-	ListListenersRequest_NextToken = ListListenersRequest.AddMember("NextToken", _GenericString)
-
-	ListListenersResponse_Listeners = ListListenersResponse.AddMember("Listeners", _Listeners)
-
-	ListListenersResponse_NextToken = ListListenersResponse.AddMember("NextToken", _GenericString)
-
-	ListTagsForResourceRequest_ResourceArn = ListTagsForResourceRequest.AddMember("ResourceArn", _ResourceArn)
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _Tags)
-
-	ProvisionByoipCidrRequest_Cidr = ProvisionByoipCidrRequest.AddMember("Cidr", _GenericString)
-
-	ProvisionByoipCidrRequest_CidrAuthorizationContext = ProvisionByoipCidrRequest.AddMember("CidrAuthorizationContext", CidrAuthorizationContext)
-
-	ProvisionByoipCidrResponse_ByoipCidr = ProvisionByoipCidrResponse.AddMember("ByoipCidr", ByoipCidr)
-
-	RemoveCustomRoutingEndpointsRequest_EndpointIds = RemoveCustomRoutingEndpointsRequest.AddMember("EndpointIds", _EndpointIds)
-
-	RemoveCustomRoutingEndpointsRequest_EndpointGroupArn = RemoveCustomRoutingEndpointsRequest.AddMember("EndpointGroupArn", _GenericString)
-
-	RemoveEndpointsRequest_EndpointIdentifiers = RemoveEndpointsRequest.AddMember("EndpointIdentifiers", _EndpointIdentifiers)
-
-	RemoveEndpointsRequest_EndpointGroupArn = RemoveEndpointsRequest.AddMember("EndpointGroupArn", _GenericString)
-
-	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", _ResourceArn)
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _Tags)
-
-	UntagResourceRequest_ResourceArn = UntagResourceRequest.AddMember("ResourceArn", _ResourceArn)
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeys)
-
-	UpdateAcceleratorAttributesRequest_AcceleratorArn = UpdateAcceleratorAttributesRequest.AddMember("AcceleratorArn", _GenericString)
-
-	UpdateAcceleratorAttributesRequest_FlowLogsEnabled = UpdateAcceleratorAttributesRequest.AddMember("FlowLogsEnabled", _GenericBoolean)
-
-	UpdateAcceleratorAttributesRequest_FlowLogsS3Bucket = UpdateAcceleratorAttributesRequest.AddMember("FlowLogsS3Bucket", _GenericString)
-
-	UpdateAcceleratorAttributesRequest_FlowLogsS3Prefix = UpdateAcceleratorAttributesRequest.AddMember("FlowLogsS3Prefix", _GenericString)
-
-	UpdateAcceleratorAttributesResponse_AcceleratorAttributes = UpdateAcceleratorAttributesResponse.AddMember("AcceleratorAttributes", AcceleratorAttributes)
-
-	UpdateAcceleratorRequest_AcceleratorArn = UpdateAcceleratorRequest.AddMember("AcceleratorArn", _GenericString)
-
-	UpdateAcceleratorRequest_Name = UpdateAcceleratorRequest.AddMember("Name", _GenericString)
-
-	UpdateAcceleratorRequest_IpAddressType = UpdateAcceleratorRequest.AddMember("IpAddressType", IpAddressType)
-
-	UpdateAcceleratorRequest_IpAddresses = UpdateAcceleratorRequest.AddMember("IpAddresses", _IpAddresses)
-
-	UpdateAcceleratorRequest_Enabled = UpdateAcceleratorRequest.AddMember("Enabled", _GenericBoolean)
-
-	UpdateAcceleratorResponse_Accelerator = UpdateAcceleratorResponse.AddMember("Accelerator", Accelerator)
-
-	UpdateCrossAccountAttachmentRequest_AttachmentArn = UpdateCrossAccountAttachmentRequest.AddMember("AttachmentArn", _GenericString)
-
-	UpdateCrossAccountAttachmentRequest_Name = UpdateCrossAccountAttachmentRequest.AddMember("Name", _AttachmentName)
-
-	UpdateCrossAccountAttachmentRequest_AddPrincipals = UpdateCrossAccountAttachmentRequest.AddMember("AddPrincipals", _Principals)
-
-	UpdateCrossAccountAttachmentRequest_RemovePrincipals = UpdateCrossAccountAttachmentRequest.AddMember("RemovePrincipals", _Principals)
-
-	UpdateCrossAccountAttachmentRequest_AddResources = UpdateCrossAccountAttachmentRequest.AddMember("AddResources", _Resources)
-
-	UpdateCrossAccountAttachmentRequest_RemoveResources = UpdateCrossAccountAttachmentRequest.AddMember("RemoveResources", _Resources)
-
-	UpdateCrossAccountAttachmentResponse_CrossAccountAttachment = UpdateCrossAccountAttachmentResponse.AddMember("CrossAccountAttachment", Attachment)
-
-	UpdateCustomRoutingAcceleratorAttributesRequest_AcceleratorArn = UpdateCustomRoutingAcceleratorAttributesRequest.AddMember("AcceleratorArn", _GenericString)
-
-	UpdateCustomRoutingAcceleratorAttributesRequest_FlowLogsEnabled = UpdateCustomRoutingAcceleratorAttributesRequest.AddMember("FlowLogsEnabled", _GenericBoolean)
-
-	UpdateCustomRoutingAcceleratorAttributesRequest_FlowLogsS3Bucket = UpdateCustomRoutingAcceleratorAttributesRequest.AddMember("FlowLogsS3Bucket", _GenericString)
-
-	UpdateCustomRoutingAcceleratorAttributesRequest_FlowLogsS3Prefix = UpdateCustomRoutingAcceleratorAttributesRequest.AddMember("FlowLogsS3Prefix", _GenericString)
-
-	UpdateCustomRoutingAcceleratorAttributesResponse_AcceleratorAttributes = UpdateCustomRoutingAcceleratorAttributesResponse.AddMember("AcceleratorAttributes", CustomRoutingAcceleratorAttributes)
-
-	UpdateCustomRoutingAcceleratorRequest_AcceleratorArn = UpdateCustomRoutingAcceleratorRequest.AddMember("AcceleratorArn", _GenericString)
-
-	UpdateCustomRoutingAcceleratorRequest_Name = UpdateCustomRoutingAcceleratorRequest.AddMember("Name", _GenericString)
-
-	UpdateCustomRoutingAcceleratorRequest_IpAddressType = UpdateCustomRoutingAcceleratorRequest.AddMember("IpAddressType", IpAddressType)
-
-	UpdateCustomRoutingAcceleratorRequest_IpAddresses = UpdateCustomRoutingAcceleratorRequest.AddMember("IpAddresses", _IpAddresses)
-
-	UpdateCustomRoutingAcceleratorRequest_Enabled = UpdateCustomRoutingAcceleratorRequest.AddMember("Enabled", _GenericBoolean)
-
-	UpdateCustomRoutingAcceleratorResponse_Accelerator = UpdateCustomRoutingAcceleratorResponse.AddMember("Accelerator", CustomRoutingAccelerator)
-
-	UpdateCustomRoutingListenerRequest_ListenerArn = UpdateCustomRoutingListenerRequest.AddMember("ListenerArn", _GenericString)
-
-	UpdateCustomRoutingListenerRequest_PortRanges = UpdateCustomRoutingListenerRequest.AddMember("PortRanges", _PortRanges)
-
-	UpdateCustomRoutingListenerResponse_Listener = UpdateCustomRoutingListenerResponse.AddMember("Listener", CustomRoutingListener)
-
-	UpdateEndpointGroupRequest_EndpointGroupArn = UpdateEndpointGroupRequest.AddMember("EndpointGroupArn", _GenericString)
-
-	UpdateEndpointGroupRequest_EndpointConfigurations = UpdateEndpointGroupRequest.AddMember("EndpointConfigurations", _EndpointConfigurations)
-
-	UpdateEndpointGroupRequest_TrafficDialPercentage = UpdateEndpointGroupRequest.AddMember("TrafficDialPercentage", _TrafficDialPercentage)
-
-	UpdateEndpointGroupRequest_HealthCheckPort = UpdateEndpointGroupRequest.AddMember("HealthCheckPort", _HealthCheckPort)
-
-	UpdateEndpointGroupRequest_HealthCheckProtocol = UpdateEndpointGroupRequest.AddMember("HealthCheckProtocol", HealthCheckProtocol)
-
-	UpdateEndpointGroupRequest_HealthCheckPath = UpdateEndpointGroupRequest.AddMember("HealthCheckPath", _HealthCheckPath)
-
-	UpdateEndpointGroupRequest_HealthCheckIntervalSeconds = UpdateEndpointGroupRequest.AddMember("HealthCheckIntervalSeconds", _HealthCheckIntervalSeconds)
-
-	UpdateEndpointGroupRequest_ThresholdCount = UpdateEndpointGroupRequest.AddMember("ThresholdCount", _ThresholdCount)
-
-	UpdateEndpointGroupRequest_PortOverrides = UpdateEndpointGroupRequest.AddMember("PortOverrides", _PortOverrides)
-
-	UpdateEndpointGroupResponse_EndpointGroup = UpdateEndpointGroupResponse.AddMember("EndpointGroup", EndpointGroup)
-
-	UpdateListenerRequest_ListenerArn = UpdateListenerRequest.AddMember("ListenerArn", _GenericString)
-
-	UpdateListenerRequest_PortRanges = UpdateListenerRequest.AddMember("PortRanges", _PortRanges)
-
-	UpdateListenerRequest_Protocol = UpdateListenerRequest.AddMember("Protocol", Protocol)
-
-	UpdateListenerRequest_ClientAffinity = UpdateListenerRequest.AddMember("ClientAffinity", ClientAffinity)
-
-	UpdateListenerResponse_Listener = UpdateListenerResponse.AddMember("Listener", Listener)
-
-	WithdrawByoipCidrRequest_Cidr = WithdrawByoipCidrRequest.AddMember("Cidr", _GenericString)
-
-	WithdrawByoipCidrResponse_ByoipCidr = WithdrawByoipCidrResponse.AddMember("ByoipCidr", ByoipCidr)
-
-}
+var (
+	iAddCustomRoutingEndpoints                          = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "AddCustomRoutingEndpoints"}
+	iAddEndpoints                                       = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "AddEndpoints"}
+	iAdvertiseByoipCidr                                 = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "AdvertiseByoipCidr"}
+	iAllowCustomRoutingTraffic                          = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "AllowCustomRoutingTraffic"}
+	iCreateAccelerator                                  = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "CreateAccelerator"}
+	iCreateCrossAccountAttachment                       = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "CreateCrossAccountAttachment"}
+	iCreateCustomRoutingAccelerator                     = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "CreateCustomRoutingAccelerator"}
+	iCreateCustomRoutingEndpointGroup                   = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "CreateCustomRoutingEndpointGroup"}
+	iCreateCustomRoutingListener                        = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "CreateCustomRoutingListener"}
+	iCreateEndpointGroup                                = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "CreateEndpointGroup"}
+	iCreateListener                                     = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "CreateListener"}
+	iDeleteAccelerator                                  = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DeleteAccelerator"}
+	iDeleteCrossAccountAttachment                       = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DeleteCrossAccountAttachment"}
+	iDeleteCustomRoutingAccelerator                     = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DeleteCustomRoutingAccelerator"}
+	iDeleteCustomRoutingEndpointGroup                   = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DeleteCustomRoutingEndpointGroup"}
+	iDeleteCustomRoutingListener                        = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DeleteCustomRoutingListener"}
+	iDeleteEndpointGroup                                = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DeleteEndpointGroup"}
+	iDeleteListener                                     = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DeleteListener"}
+	iDenyCustomRoutingTraffic                           = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DenyCustomRoutingTraffic"}
+	iDeprovisionByoipCidr                               = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DeprovisionByoipCidr"}
+	iDescribeAccelerator                                = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DescribeAccelerator"}
+	iDescribeAcceleratorAttributes                      = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DescribeAcceleratorAttributes"}
+	iDescribeCrossAccountAttachment                     = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DescribeCrossAccountAttachment"}
+	iDescribeCustomRoutingAccelerator                   = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DescribeCustomRoutingAccelerator"}
+	iDescribeCustomRoutingAcceleratorAttributes         = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DescribeCustomRoutingAcceleratorAttributes"}
+	iDescribeCustomRoutingEndpointGroup                 = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DescribeCustomRoutingEndpointGroup"}
+	iDescribeCustomRoutingListener                      = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DescribeCustomRoutingListener"}
+	iDescribeEndpointGroup                              = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DescribeEndpointGroup"}
+	iDescribeListener                                   = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DescribeListener"}
+	iListAccelerators                                   = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ListAccelerators"}
+	iListByoipCidrs                                     = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ListByoipCidrs"}
+	iListCrossAccountAttachments                        = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ListCrossAccountAttachments"}
+	iListCrossAccountResourceAccounts                   = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ListCrossAccountResourceAccounts"}
+	iListCrossAccountResources                          = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ListCrossAccountResources"}
+	iListCustomRoutingAccelerators                      = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ListCustomRoutingAccelerators"}
+	iListCustomRoutingEndpointGroups                    = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ListCustomRoutingEndpointGroups"}
+	iListCustomRoutingListeners                         = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ListCustomRoutingListeners"}
+	iListCustomRoutingPortMappings                      = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ListCustomRoutingPortMappings"}
+	iListCustomRoutingPortMappingsByDestination         = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ListCustomRoutingPortMappingsByDestination"}
+	iListEndpointGroups                                 = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ListEndpointGroups"}
+	iListListeners                                      = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ListListeners"}
+	iListTagsForResource                                = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ListTagsForResource"}
+	iProvisionByoipCidr                                 = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ProvisionByoipCidr"}
+	iRemoveCustomRoutingEndpoints                       = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "RemoveCustomRoutingEndpoints"}
+	iRemoveEndpoints                                    = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "RemoveEndpoints"}
+	iTagResource                                        = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "TagResource"}
+	iUntagResource                                      = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "UntagResource"}
+	iUpdateAccelerator                                  = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "UpdateAccelerator"}
+	iUpdateAcceleratorAttributes                        = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "UpdateAcceleratorAttributes"}
+	iUpdateCrossAccountAttachment                       = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "UpdateCrossAccountAttachment"}
+	iUpdateCustomRoutingAccelerator                     = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "UpdateCustomRoutingAccelerator"}
+	iUpdateCustomRoutingAcceleratorAttributes           = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "UpdateCustomRoutingAcceleratorAttributes"}
+	iUpdateCustomRoutingListener                        = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "UpdateCustomRoutingListener"}
+	iUpdateEndpointGroup                                = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "UpdateEndpointGroup"}
+	iUpdateListener                                     = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "UpdateListener"}
+	iWithdrawByoipCidr                                  = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "WithdrawByoipCidr"}
+	i_GlobalAccelerator_V20180706                       = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "GlobalAccelerator_V20180706"}
+	iAccelerator                                        = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "Accelerator"}
+	iAcceleratorAttributes                              = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "AcceleratorAttributes"}
+	iAcceleratorEvent                                   = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "AcceleratorEvent"}
+	i_AcceleratorEvents                                 = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "AcceleratorEvents"}
+	iAcceleratorNotDisabledException                    = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "AcceleratorNotDisabledException"}
+	iAcceleratorNotFoundException                       = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "AcceleratorNotFoundException"}
+	i_Accelerators                                      = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "Accelerators"}
+	iAcceleratorStatus                                  = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "AcceleratorStatus"}
+	iAccessDeniedException                              = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "AccessDeniedException"}
+	iAssociatedEndpointGroupFoundException              = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "AssociatedEndpointGroupFoundException"}
+	iAssociatedListenerFoundException                   = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "AssociatedListenerFoundException"}
+	iAttachment                                         = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "Attachment"}
+	i_AttachmentName                                    = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "AttachmentName"}
+	iAttachmentNotFoundException                        = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "AttachmentNotFoundException"}
+	i_Attachments                                       = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "Attachments"}
+	i_AwsAccountId                                      = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "AwsAccountId"}
+	i_AwsAccountIds                                     = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "AwsAccountIds"}
+	iByoipCidr                                          = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ByoipCidr"}
+	iByoipCidrEvent                                     = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ByoipCidrEvent"}
+	i_ByoipCidrEvents                                   = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ByoipCidrEvents"}
+	iByoipCidrNotFoundException                         = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ByoipCidrNotFoundException"}
+	i_ByoipCidrs                                        = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ByoipCidrs"}
+	iByoipCidrState                                     = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ByoipCidrState"}
+	iCidrAuthorizationContext                           = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "CidrAuthorizationContext"}
+	iClientAffinity                                     = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ClientAffinity"}
+	iConflictException                                  = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ConflictException"}
+	iCrossAccountResource                               = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "CrossAccountResource"}
+	i_CrossAccountResources                             = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "CrossAccountResources"}
+	iCustomRoutingAccelerator                           = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "CustomRoutingAccelerator"}
+	iCustomRoutingAcceleratorAttributes                 = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "CustomRoutingAcceleratorAttributes"}
+	i_CustomRoutingAccelerators                         = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "CustomRoutingAccelerators"}
+	iCustomRoutingAcceleratorStatus                     = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "CustomRoutingAcceleratorStatus"}
+	iCustomRoutingDestinationConfiguration              = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "CustomRoutingDestinationConfiguration"}
+	i_CustomRoutingDestinationConfigurations            = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "CustomRoutingDestinationConfigurations"}
+	iCustomRoutingDestinationDescription                = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "CustomRoutingDestinationDescription"}
+	i_CustomRoutingDestinationDescriptions              = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "CustomRoutingDestinationDescriptions"}
+	iCustomRoutingDestinationTrafficState               = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "CustomRoutingDestinationTrafficState"}
+	iCustomRoutingEndpointConfiguration                 = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "CustomRoutingEndpointConfiguration"}
+	i_CustomRoutingEndpointConfigurations               = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "CustomRoutingEndpointConfigurations"}
+	iCustomRoutingEndpointDescription                   = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "CustomRoutingEndpointDescription"}
+	i_CustomRoutingEndpointDescriptions                 = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "CustomRoutingEndpointDescriptions"}
+	iCustomRoutingEndpointGroup                         = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "CustomRoutingEndpointGroup"}
+	i_CustomRoutingEndpointGroups                       = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "CustomRoutingEndpointGroups"}
+	iCustomRoutingListener                              = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "CustomRoutingListener"}
+	i_CustomRoutingListeners                            = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "CustomRoutingListeners"}
+	iCustomRoutingProtocol                              = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "CustomRoutingProtocol"}
+	i_CustomRoutingProtocols                            = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "CustomRoutingProtocols"}
+	i_DestinationAddresses                              = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DestinationAddresses"}
+	iDestinationPortMapping                             = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DestinationPortMapping"}
+	i_DestinationPortMappings                           = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DestinationPortMappings"}
+	i_DestinationPorts                                  = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DestinationPorts"}
+	iEndpointAlreadyExistsException                     = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "EndpointAlreadyExistsException"}
+	iEndpointConfiguration                              = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "EndpointConfiguration"}
+	i_EndpointConfigurations                            = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "EndpointConfigurations"}
+	iEndpointDescription                                = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "EndpointDescription"}
+	i_EndpointDescriptions                              = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "EndpointDescriptions"}
+	iEndpointGroup                                      = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "EndpointGroup"}
+	iEndpointGroupAlreadyExistsException                = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "EndpointGroupAlreadyExistsException"}
+	iEndpointGroupNotFoundException                     = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "EndpointGroupNotFoundException"}
+	i_EndpointGroups                                    = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "EndpointGroups"}
+	iEndpointIdentifier                                 = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "EndpointIdentifier"}
+	i_EndpointIdentifiers                               = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "EndpointIdentifiers"}
+	i_EndpointIds                                       = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "EndpointIds"}
+	iEndpointNotFoundException                          = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "EndpointNotFoundException"}
+	i_EndpointWeight                                    = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "EndpointWeight"}
+	i_ErrorMessage                                      = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ErrorMessage"}
+	i_GenericBoolean                                    = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "GenericBoolean"}
+	i_GenericString                                     = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "GenericString"}
+	i_HealthCheckIntervalSeconds                        = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "HealthCheckIntervalSeconds"}
+	i_HealthCheckPath                                   = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "HealthCheckPath"}
+	i_HealthCheckPort                                   = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "HealthCheckPort"}
+	iHealthCheckProtocol                                = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "HealthCheckProtocol"}
+	iHealthState                                        = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "HealthState"}
+	i_IdempotencyToken                                  = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "IdempotencyToken"}
+	iIncorrectCidrStateException                        = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "IncorrectCidrStateException"}
+	iInternalServiceErrorException                      = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "InternalServiceErrorException"}
+	iInvalidArgumentException                           = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "InvalidArgumentException"}
+	iInvalidNextTokenException                          = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "InvalidNextTokenException"}
+	iInvalidPortRangeException                          = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "InvalidPortRangeException"}
+	i_IpAddress                                         = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "IpAddress"}
+	iIpAddressDetail                                    = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "IpAddressDetail"}
+	i_IpAddressDetails                                  = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "IpAddressDetails"}
+	i_IpAddresses                                       = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "IpAddresses"}
+	iIpAddressFamily                                    = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "IpAddressFamily"}
+	iIpAddressType                                      = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "IpAddressType"}
+	iIpSet                                              = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "IpSet"}
+	i_IpSets                                            = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "IpSets"}
+	iLimitExceededException                             = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "LimitExceededException"}
+	iListener                                           = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "Listener"}
+	iListenerNotFoundException                          = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ListenerNotFoundException"}
+	i_Listeners                                         = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "Listeners"}
+	i_MaxResults                                        = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "MaxResults"}
+	i_NetworkZone                                       = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "NetworkZone"}
+	iPortMapping                                        = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "PortMapping"}
+	i_PortMappings                                      = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "PortMappings"}
+	i_PortMappingsMaxResults                            = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "PortMappingsMaxResults"}
+	i_PortNumber                                        = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "PortNumber"}
+	iPortOverride                                       = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "PortOverride"}
+	i_PortOverrides                                     = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "PortOverrides"}
+	iPortRange                                          = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "PortRange"}
+	i_PortRanges                                        = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "PortRanges"}
+	i_Principal                                         = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "Principal"}
+	i_Principals                                        = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "Principals"}
+	iProtocol                                           = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "Protocol"}
+	i_Protocols                                         = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "Protocols"}
+	iResource                                           = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "Resource"}
+	i_ResourceArn                                       = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ResourceArn"}
+	i_Resources                                         = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "Resources"}
+	iSocketAddress                                      = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "SocketAddress"}
+	i_SocketAddresses                                   = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "SocketAddresses"}
+	iTag                                                = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "Tag"}
+	i_TagKey                                            = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "TagKey"}
+	i_TagKeys                                           = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "TagKeys"}
+	i_Tags                                              = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "Tags"}
+	i_TagValue                                          = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "TagValue"}
+	i_ThresholdCount                                    = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ThresholdCount"}
+	i_Timestamp                                         = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "Timestamp"}
+	i_TrafficDialPercentage                             = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "TrafficDialPercentage"}
+	iTransactionInProgressException                     = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "TransactionInProgressException"}
+	iAddCustomRoutingEndpointsRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "AddCustomRoutingEndpointsRequest"}
+	iAddCustomRoutingEndpointsResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "AddCustomRoutingEndpointsResponse"}
+	iAddEndpointsRequest                                = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "AddEndpointsRequest"}
+	iAddEndpointsResponse                               = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "AddEndpointsResponse"}
+	iAdvertiseByoipCidrRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "AdvertiseByoipCidrRequest"}
+	iAdvertiseByoipCidrResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "AdvertiseByoipCidrResponse"}
+	iAllowCustomRoutingTrafficRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "AllowCustomRoutingTrafficRequest"}
+	iCreateAcceleratorRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "CreateAcceleratorRequest"}
+	iCreateAcceleratorResponse                          = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "CreateAcceleratorResponse"}
+	iCreateCrossAccountAttachmentRequest                = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "CreateCrossAccountAttachmentRequest"}
+	iCreateCrossAccountAttachmentResponse               = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "CreateCrossAccountAttachmentResponse"}
+	iCreateCustomRoutingAcceleratorRequest              = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "CreateCustomRoutingAcceleratorRequest"}
+	iCreateCustomRoutingAcceleratorResponse             = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "CreateCustomRoutingAcceleratorResponse"}
+	iCreateCustomRoutingEndpointGroupRequest            = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "CreateCustomRoutingEndpointGroupRequest"}
+	iCreateCustomRoutingEndpointGroupResponse           = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "CreateCustomRoutingEndpointGroupResponse"}
+	iCreateCustomRoutingListenerRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "CreateCustomRoutingListenerRequest"}
+	iCreateCustomRoutingListenerResponse                = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "CreateCustomRoutingListenerResponse"}
+	iCreateEndpointGroupRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "CreateEndpointGroupRequest"}
+	iCreateEndpointGroupResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "CreateEndpointGroupResponse"}
+	iCreateListenerRequest                              = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "CreateListenerRequest"}
+	iCreateListenerResponse                             = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "CreateListenerResponse"}
+	iDeleteAcceleratorRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DeleteAcceleratorRequest"}
+	iDeleteCrossAccountAttachmentRequest                = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DeleteCrossAccountAttachmentRequest"}
+	iDeleteCustomRoutingAcceleratorRequest              = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DeleteCustomRoutingAcceleratorRequest"}
+	iDeleteCustomRoutingEndpointGroupRequest            = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DeleteCustomRoutingEndpointGroupRequest"}
+	iDeleteCustomRoutingListenerRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DeleteCustomRoutingListenerRequest"}
+	iDeleteEndpointGroupRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DeleteEndpointGroupRequest"}
+	iDeleteListenerRequest                              = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DeleteListenerRequest"}
+	iDenyCustomRoutingTrafficRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DenyCustomRoutingTrafficRequest"}
+	iDeprovisionByoipCidrRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DeprovisionByoipCidrRequest"}
+	iDeprovisionByoipCidrResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DeprovisionByoipCidrResponse"}
+	iDescribeAcceleratorAttributesRequest               = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DescribeAcceleratorAttributesRequest"}
+	iDescribeAcceleratorAttributesResponse              = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DescribeAcceleratorAttributesResponse"}
+	iDescribeAcceleratorRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DescribeAcceleratorRequest"}
+	iDescribeAcceleratorResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DescribeAcceleratorResponse"}
+	iDescribeCrossAccountAttachmentRequest              = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DescribeCrossAccountAttachmentRequest"}
+	iDescribeCrossAccountAttachmentResponse             = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DescribeCrossAccountAttachmentResponse"}
+	iDescribeCustomRoutingAcceleratorAttributesRequest  = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DescribeCustomRoutingAcceleratorAttributesRequest"}
+	iDescribeCustomRoutingAcceleratorAttributesResponse = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DescribeCustomRoutingAcceleratorAttributesResponse"}
+	iDescribeCustomRoutingAcceleratorRequest            = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DescribeCustomRoutingAcceleratorRequest"}
+	iDescribeCustomRoutingAcceleratorResponse           = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DescribeCustomRoutingAcceleratorResponse"}
+	iDescribeCustomRoutingEndpointGroupRequest          = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DescribeCustomRoutingEndpointGroupRequest"}
+	iDescribeCustomRoutingEndpointGroupResponse         = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DescribeCustomRoutingEndpointGroupResponse"}
+	iDescribeCustomRoutingListenerRequest               = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DescribeCustomRoutingListenerRequest"}
+	iDescribeCustomRoutingListenerResponse              = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DescribeCustomRoutingListenerResponse"}
+	iDescribeEndpointGroupRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DescribeEndpointGroupRequest"}
+	iDescribeEndpointGroupResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DescribeEndpointGroupResponse"}
+	iDescribeListenerRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DescribeListenerRequest"}
+	iDescribeListenerResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "DescribeListenerResponse"}
+	iListAcceleratorsRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ListAcceleratorsRequest"}
+	iListAcceleratorsResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ListAcceleratorsResponse"}
+	iListByoipCidrsRequest                              = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ListByoipCidrsRequest"}
+	iListByoipCidrsResponse                             = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ListByoipCidrsResponse"}
+	iListCrossAccountAttachmentsRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ListCrossAccountAttachmentsRequest"}
+	iListCrossAccountAttachmentsResponse                = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ListCrossAccountAttachmentsResponse"}
+	iListCrossAccountResourceAccountsRequest            = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ListCrossAccountResourceAccountsRequest"}
+	iListCrossAccountResourceAccountsResponse           = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ListCrossAccountResourceAccountsResponse"}
+	iListCrossAccountResourcesRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ListCrossAccountResourcesRequest"}
+	iListCrossAccountResourcesResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ListCrossAccountResourcesResponse"}
+	iListCustomRoutingAcceleratorsRequest               = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ListCustomRoutingAcceleratorsRequest"}
+	iListCustomRoutingAcceleratorsResponse              = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ListCustomRoutingAcceleratorsResponse"}
+	iListCustomRoutingEndpointGroupsRequest             = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ListCustomRoutingEndpointGroupsRequest"}
+	iListCustomRoutingEndpointGroupsResponse            = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ListCustomRoutingEndpointGroupsResponse"}
+	iListCustomRoutingListenersRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ListCustomRoutingListenersRequest"}
+	iListCustomRoutingListenersResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ListCustomRoutingListenersResponse"}
+	iListCustomRoutingPortMappingsByDestinationRequest  = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ListCustomRoutingPortMappingsByDestinationRequest"}
+	iListCustomRoutingPortMappingsByDestinationResponse = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ListCustomRoutingPortMappingsByDestinationResponse"}
+	iListCustomRoutingPortMappingsRequest               = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ListCustomRoutingPortMappingsRequest"}
+	iListCustomRoutingPortMappingsResponse              = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ListCustomRoutingPortMappingsResponse"}
+	iListEndpointGroupsRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ListEndpointGroupsRequest"}
+	iListEndpointGroupsResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ListEndpointGroupsResponse"}
+	iListListenersRequest                               = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ListListenersRequest"}
+	iListListenersResponse                              = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ListListenersResponse"}
+	iListTagsForResourceRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ListTagsForResourceResponse"}
+	iProvisionByoipCidrRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ProvisionByoipCidrRequest"}
+	iProvisionByoipCidrResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "ProvisionByoipCidrResponse"}
+	iRemoveCustomRoutingEndpointsRequest                = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "RemoveCustomRoutingEndpointsRequest"}
+	iRemoveEndpointsRequest                             = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "RemoveEndpointsRequest"}
+	iTagResourceRequest                                 = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "TagResourceRequest"}
+	iTagResourceResponse                                = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "TagResourceResponse"}
+	iUntagResourceRequest                               = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                              = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "UntagResourceResponse"}
+	iUpdateAcceleratorAttributesRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "UpdateAcceleratorAttributesRequest"}
+	iUpdateAcceleratorAttributesResponse                = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "UpdateAcceleratorAttributesResponse"}
+	iUpdateAcceleratorRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "UpdateAcceleratorRequest"}
+	iUpdateAcceleratorResponse                          = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "UpdateAcceleratorResponse"}
+	iUpdateCrossAccountAttachmentRequest                = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "UpdateCrossAccountAttachmentRequest"}
+	iUpdateCrossAccountAttachmentResponse               = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "UpdateCrossAccountAttachmentResponse"}
+	iUpdateCustomRoutingAcceleratorAttributesRequest    = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "UpdateCustomRoutingAcceleratorAttributesRequest"}
+	iUpdateCustomRoutingAcceleratorAttributesResponse   = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "UpdateCustomRoutingAcceleratorAttributesResponse"}
+	iUpdateCustomRoutingAcceleratorRequest              = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "UpdateCustomRoutingAcceleratorRequest"}
+	iUpdateCustomRoutingAcceleratorResponse             = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "UpdateCustomRoutingAcceleratorResponse"}
+	iUpdateCustomRoutingListenerRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "UpdateCustomRoutingListenerRequest"}
+	iUpdateCustomRoutingListenerResponse                = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "UpdateCustomRoutingListenerResponse"}
+	iUpdateEndpointGroupRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "UpdateEndpointGroupRequest"}
+	iUpdateEndpointGroupResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "UpdateEndpointGroupResponse"}
+	iUpdateListenerRequest                              = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "UpdateListenerRequest"}
+	iUpdateListenerResponse                             = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "UpdateListenerResponse"}
+	iWithdrawByoipCidrRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "WithdrawByoipCidrRequest"}
+	iWithdrawByoipCidrResponse                          = smithy.ShapeID{Namespace: "com.amazonaws.globalaccelerator", Name: "WithdrawByoipCidrResponse"}
+	pUnit                                               = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+
+var mAccelerator = smithy.SchemaMembers{List: []*smithy.Schema{&sAccelerator_AcceleratorArn, &sAccelerator_Name, &sAccelerator_IpAddressType, &sAccelerator_Enabled, &sAccelerator_IpSets, &sAccelerator_DnsName, &sAccelerator_Status, &sAccelerator_CreatedTime, &sAccelerator_LastModifiedTime, &sAccelerator_DualStackDnsName, &sAccelerator_Events}, Seed: 8, Slots: []uint16{
+	8, 2, 0, 0, 0, 6, 0, 0, 0, 4, 1, 3, 0, 0, 9, 0, 0, 0, 0, 0, 0, 7, 10, 5,
+	0, 0, 0, 0, 0, 0, 11, 0,
+}}
+var mAcceleratorAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sAcceleratorAttributes_FlowLogsEnabled, &sAcceleratorAttributes_FlowLogsS3Bucket, &sAcceleratorAttributes_FlowLogsS3Prefix}}
+var mAcceleratorEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sAcceleratorEvent_Message, &sAcceleratorEvent_Timestamp}}
+var m_AcceleratorEvents = smithy.SchemaMembers{List: []*smithy.Schema{&s_AcceleratorEvents_member}}
+var mAcceleratorNotDisabledException = smithy.SchemaMembers{List: []*smithy.Schema{&sAcceleratorNotDisabledException_Message}}
+var mAcceleratorNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sAcceleratorNotFoundException_Message}}
+var m_Accelerators = smithy.SchemaMembers{List: []*smithy.Schema{&s_Accelerators_member}}
+var mAcceleratorStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sAcceleratorStatus_DEPLOYED, &sAcceleratorStatus_IN_PROGRESS}}
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_Message}}
+var mAssociatedEndpointGroupFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociatedEndpointGroupFoundException_Message}}
+var mAssociatedListenerFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociatedListenerFoundException_Message}}
+var mAttachment = smithy.SchemaMembers{List: []*smithy.Schema{&sAttachment_AttachmentArn, &sAttachment_Name, &sAttachment_Principals, &sAttachment_Resources, &sAttachment_LastModifiedTime, &sAttachment_CreatedTime}}
+var mAttachmentNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sAttachmentNotFoundException_Message}}
+var m_Attachments = smithy.SchemaMembers{List: []*smithy.Schema{&s_Attachments_member}}
+var m_AwsAccountIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_AwsAccountIds_member}}
+var mByoipCidr = smithy.SchemaMembers{List: []*smithy.Schema{&sByoipCidr_Cidr, &sByoipCidr_State, &sByoipCidr_Events}}
+var mByoipCidrEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sByoipCidrEvent_Message, &sByoipCidrEvent_Timestamp}}
+var m_ByoipCidrEvents = smithy.SchemaMembers{List: []*smithy.Schema{&s_ByoipCidrEvents_member}}
+var mByoipCidrNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sByoipCidrNotFoundException_Message}}
+var m_ByoipCidrs = smithy.SchemaMembers{List: []*smithy.Schema{&s_ByoipCidrs_member}}
+var mByoipCidrState = smithy.SchemaMembers{List: []*smithy.Schema{&sByoipCidrState_PENDING_PROVISIONING, &sByoipCidrState_READY, &sByoipCidrState_PENDING_ADVERTISING, &sByoipCidrState_ADVERTISING, &sByoipCidrState_PENDING_WITHDRAWING, &sByoipCidrState_PENDING_DEPROVISIONING, &sByoipCidrState_DEPROVISIONED, &sByoipCidrState_FAILED_PROVISION, &sByoipCidrState_FAILED_ADVERTISING, &sByoipCidrState_FAILED_WITHDRAW, &sByoipCidrState_FAILED_DEPROVISION}, Seed: 2, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 0, 11, 0, 0, 3, 1, 0, 9, 6, 0, 2, 0, 0, 10, 0, 4, 5,
+	0, 7, 0, 0, 0, 0, 8, 0,
+}}
+var mCidrAuthorizationContext = smithy.SchemaMembers{List: []*smithy.Schema{&sCidrAuthorizationContext_Message, &sCidrAuthorizationContext_Signature}}
+var mClientAffinity = smithy.SchemaMembers{List: []*smithy.Schema{&sClientAffinity_NONE, &sClientAffinity_SOURCE_IP}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_Message}}
+var mCrossAccountResource = smithy.SchemaMembers{List: []*smithy.Schema{&sCrossAccountResource_EndpointId, &sCrossAccountResource_Cidr, &sCrossAccountResource_AttachmentArn}}
+var m_CrossAccountResources = smithy.SchemaMembers{List: []*smithy.Schema{&s_CrossAccountResources_member}}
+var mCustomRoutingAccelerator = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomRoutingAccelerator_AcceleratorArn, &sCustomRoutingAccelerator_Name, &sCustomRoutingAccelerator_IpAddressType, &sCustomRoutingAccelerator_Enabled, &sCustomRoutingAccelerator_IpSets, &sCustomRoutingAccelerator_DnsName, &sCustomRoutingAccelerator_Status, &sCustomRoutingAccelerator_CreatedTime, &sCustomRoutingAccelerator_LastModifiedTime}, Seed: 3, Slots: []uint16{
+	3, 0, 6, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 9, 0, 0, 0, 0, 0,
+	0, 0, 4, 5, 8, 1, 0, 0,
+}}
+var mCustomRoutingAcceleratorAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomRoutingAcceleratorAttributes_FlowLogsEnabled, &sCustomRoutingAcceleratorAttributes_FlowLogsS3Bucket, &sCustomRoutingAcceleratorAttributes_FlowLogsS3Prefix}}
+var m_CustomRoutingAccelerators = smithy.SchemaMembers{List: []*smithy.Schema{&s_CustomRoutingAccelerators_member}}
+var mCustomRoutingAcceleratorStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomRoutingAcceleratorStatus_DEPLOYED, &sCustomRoutingAcceleratorStatus_IN_PROGRESS}}
+var mCustomRoutingDestinationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomRoutingDestinationConfiguration_FromPort, &sCustomRoutingDestinationConfiguration_ToPort, &sCustomRoutingDestinationConfiguration_Protocols}}
+var m_CustomRoutingDestinationConfigurations = smithy.SchemaMembers{List: []*smithy.Schema{&s_CustomRoutingDestinationConfigurations_member}}
+var mCustomRoutingDestinationDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomRoutingDestinationDescription_FromPort, &sCustomRoutingDestinationDescription_ToPort, &sCustomRoutingDestinationDescription_Protocols}}
+var m_CustomRoutingDestinationDescriptions = smithy.SchemaMembers{List: []*smithy.Schema{&s_CustomRoutingDestinationDescriptions_member}}
+var mCustomRoutingDestinationTrafficState = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomRoutingDestinationTrafficState_ALLOW, &sCustomRoutingDestinationTrafficState_DENY}}
+var mCustomRoutingEndpointConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomRoutingEndpointConfiguration_EndpointId, &sCustomRoutingEndpointConfiguration_AttachmentArn}}
+var m_CustomRoutingEndpointConfigurations = smithy.SchemaMembers{List: []*smithy.Schema{&s_CustomRoutingEndpointConfigurations_member}}
+var mCustomRoutingEndpointDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomRoutingEndpointDescription_EndpointId}}
+var m_CustomRoutingEndpointDescriptions = smithy.SchemaMembers{List: []*smithy.Schema{&s_CustomRoutingEndpointDescriptions_member}}
+var mCustomRoutingEndpointGroup = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomRoutingEndpointGroup_EndpointGroupArn, &sCustomRoutingEndpointGroup_EndpointGroupRegion, &sCustomRoutingEndpointGroup_DestinationDescriptions, &sCustomRoutingEndpointGroup_EndpointDescriptions}}
+var m_CustomRoutingEndpointGroups = smithy.SchemaMembers{List: []*smithy.Schema{&s_CustomRoutingEndpointGroups_member}}
+var mCustomRoutingListener = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomRoutingListener_ListenerArn, &sCustomRoutingListener_PortRanges}}
+var m_CustomRoutingListeners = smithy.SchemaMembers{List: []*smithy.Schema{&s_CustomRoutingListeners_member}}
+var mCustomRoutingProtocol = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomRoutingProtocol_TCP, &sCustomRoutingProtocol_UDP}}
+var m_CustomRoutingProtocols = smithy.SchemaMembers{List: []*smithy.Schema{&s_CustomRoutingProtocols_member}}
+var m_DestinationAddresses = smithy.SchemaMembers{List: []*smithy.Schema{&s_DestinationAddresses_member}}
+var mDestinationPortMapping = smithy.SchemaMembers{List: []*smithy.Schema{&sDestinationPortMapping_AcceleratorArn, &sDestinationPortMapping_AcceleratorSocketAddresses, &sDestinationPortMapping_EndpointGroupArn, &sDestinationPortMapping_EndpointId, &sDestinationPortMapping_EndpointGroupRegion, &sDestinationPortMapping_DestinationSocketAddress, &sDestinationPortMapping_IpAddressType, &sDestinationPortMapping_DestinationTrafficState}}
+var m_DestinationPortMappings = smithy.SchemaMembers{List: []*smithy.Schema{&s_DestinationPortMappings_member}}
+var m_DestinationPorts = smithy.SchemaMembers{List: []*smithy.Schema{&s_DestinationPorts_member}}
+var mEndpointAlreadyExistsException = smithy.SchemaMembers{List: []*smithy.Schema{&sEndpointAlreadyExistsException_Message}}
+var mEndpointConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sEndpointConfiguration_EndpointId, &sEndpointConfiguration_Weight, &sEndpointConfiguration_ClientIPPreservationEnabled, &sEndpointConfiguration_AttachmentArn}}
+var m_EndpointConfigurations = smithy.SchemaMembers{List: []*smithy.Schema{&s_EndpointConfigurations_member}}
+var mEndpointDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sEndpointDescription_EndpointId, &sEndpointDescription_Weight, &sEndpointDescription_HealthState, &sEndpointDescription_HealthReason, &sEndpointDescription_ClientIPPreservationEnabled}}
+var m_EndpointDescriptions = smithy.SchemaMembers{List: []*smithy.Schema{&s_EndpointDescriptions_member}}
+var mEndpointGroup = smithy.SchemaMembers{List: []*smithy.Schema{&sEndpointGroup_EndpointGroupArn, &sEndpointGroup_EndpointGroupRegion, &sEndpointGroup_EndpointDescriptions, &sEndpointGroup_TrafficDialPercentage, &sEndpointGroup_HealthCheckPort, &sEndpointGroup_HealthCheckProtocol, &sEndpointGroup_HealthCheckPath, &sEndpointGroup_HealthCheckIntervalSeconds, &sEndpointGroup_ThresholdCount, &sEndpointGroup_PortOverrides}, Seed: 3, Slots: []uint16{
+	0, 1, 0, 5, 6, 0, 2, 0, 0, 0, 3, 0, 0, 10, 0, 0, 0, 7, 0, 0, 0, 8, 0, 0,
+	9, 4, 0, 0, 0, 0, 0, 0,
+}}
+var mEndpointGroupAlreadyExistsException = smithy.SchemaMembers{List: []*smithy.Schema{&sEndpointGroupAlreadyExistsException_Message}}
+var mEndpointGroupNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sEndpointGroupNotFoundException_Message}}
+var m_EndpointGroups = smithy.SchemaMembers{List: []*smithy.Schema{&s_EndpointGroups_member}}
+var mEndpointIdentifier = smithy.SchemaMembers{List: []*smithy.Schema{&sEndpointIdentifier_EndpointId, &sEndpointIdentifier_ClientIPPreservationEnabled}}
+var m_EndpointIdentifiers = smithy.SchemaMembers{List: []*smithy.Schema{&s_EndpointIdentifiers_member}}
+var m_EndpointIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_EndpointIds_member}}
+var mEndpointNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sEndpointNotFoundException_Message}}
+var mHealthCheckProtocol = smithy.SchemaMembers{List: []*smithy.Schema{&sHealthCheckProtocol_TCP, &sHealthCheckProtocol_HTTP, &sHealthCheckProtocol_HTTPS}}
+var mHealthState = smithy.SchemaMembers{List: []*smithy.Schema{&sHealthState_INITIAL, &sHealthState_HEALTHY, &sHealthState_UNHEALTHY}}
+var mIncorrectCidrStateException = smithy.SchemaMembers{List: []*smithy.Schema{&sIncorrectCidrStateException_Message}}
+var mInternalServiceErrorException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServiceErrorException_Message}}
+var mInvalidArgumentException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidArgumentException_Message}}
+var mInvalidNextTokenException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidNextTokenException_Message}}
+var mInvalidPortRangeException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidPortRangeException_Message}}
+var mIpAddressDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sIpAddressDetail_IpAddress, &sIpAddressDetail_NetworkZone}}
+var m_IpAddressDetails = smithy.SchemaMembers{List: []*smithy.Schema{&s_IpAddressDetails_member}}
+var m_IpAddresses = smithy.SchemaMembers{List: []*smithy.Schema{&s_IpAddresses_member}}
+var mIpAddressFamily = smithy.SchemaMembers{List: []*smithy.Schema{&sIpAddressFamily_IPv4, &sIpAddressFamily_IPv6}}
+var mIpAddressType = smithy.SchemaMembers{List: []*smithy.Schema{&sIpAddressType_IPV4, &sIpAddressType_DUAL_STACK}}
+var mIpSet = smithy.SchemaMembers{List: []*smithy.Schema{&sIpSet_IpFamily, &sIpSet_IpAddresses, &sIpSet_IpAddressFamily, &sIpSet_IpAddressDetails}}
+var m_IpSets = smithy.SchemaMembers{List: []*smithy.Schema{&s_IpSets_member}}
+var mLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sLimitExceededException_Message}}
+var mListener = smithy.SchemaMembers{List: []*smithy.Schema{&sListener_ListenerArn, &sListener_PortRanges, &sListener_Protocol, &sListener_ClientAffinity}}
+var mListenerNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sListenerNotFoundException_Message}}
+var m_Listeners = smithy.SchemaMembers{List: []*smithy.Schema{&s_Listeners_member}}
+var mPortMapping = smithy.SchemaMembers{List: []*smithy.Schema{&sPortMapping_AcceleratorPort, &sPortMapping_EndpointGroupArn, &sPortMapping_EndpointId, &sPortMapping_DestinationSocketAddress, &sPortMapping_Protocols, &sPortMapping_DestinationTrafficState}}
+var m_PortMappings = smithy.SchemaMembers{List: []*smithy.Schema{&s_PortMappings_member}}
+var mPortOverride = smithy.SchemaMembers{List: []*smithy.Schema{&sPortOverride_ListenerPort, &sPortOverride_EndpointPort}}
+var m_PortOverrides = smithy.SchemaMembers{List: []*smithy.Schema{&s_PortOverrides_member}}
+var mPortRange = smithy.SchemaMembers{List: []*smithy.Schema{&sPortRange_FromPort, &sPortRange_ToPort}}
+var m_PortRanges = smithy.SchemaMembers{List: []*smithy.Schema{&s_PortRanges_member}}
+var m_Principals = smithy.SchemaMembers{List: []*smithy.Schema{&s_Principals_member}}
+var mProtocol = smithy.SchemaMembers{List: []*smithy.Schema{&sProtocol_TCP, &sProtocol_UDP}}
+var m_Protocols = smithy.SchemaMembers{List: []*smithy.Schema{&s_Protocols_member}}
+var mResource = smithy.SchemaMembers{List: []*smithy.Schema{&sResource_EndpointId, &sResource_Cidr, &sResource_Region}}
+var m_Resources = smithy.SchemaMembers{List: []*smithy.Schema{&s_Resources_member}}
+var mSocketAddress = smithy.SchemaMembers{List: []*smithy.Schema{&sSocketAddress_IpAddress, &sSocketAddress_Port}}
+var m_SocketAddresses = smithy.SchemaMembers{List: []*smithy.Schema{&s_SocketAddresses_member}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var m_TagKeys = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeys_member}}
+var m_Tags = smithy.SchemaMembers{List: []*smithy.Schema{&s_Tags_member}}
+var mTransactionInProgressException = smithy.SchemaMembers{List: []*smithy.Schema{&sTransactionInProgressException_Message}}
+var mAddCustomRoutingEndpointsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAddCustomRoutingEndpointsRequest_EndpointConfigurations, &sAddCustomRoutingEndpointsRequest_EndpointGroupArn}}
+var mAddCustomRoutingEndpointsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAddCustomRoutingEndpointsResponse_EndpointDescriptions, &sAddCustomRoutingEndpointsResponse_EndpointGroupArn}}
+var mAddEndpointsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAddEndpointsRequest_EndpointConfigurations, &sAddEndpointsRequest_EndpointGroupArn}}
+var mAddEndpointsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAddEndpointsResponse_EndpointDescriptions, &sAddEndpointsResponse_EndpointGroupArn}}
+var mAdvertiseByoipCidrRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAdvertiseByoipCidrRequest_Cidr}}
+var mAdvertiseByoipCidrResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAdvertiseByoipCidrResponse_ByoipCidr}}
+var mAllowCustomRoutingTrafficRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAllowCustomRoutingTrafficRequest_EndpointGroupArn, &sAllowCustomRoutingTrafficRequest_EndpointId, &sAllowCustomRoutingTrafficRequest_DestinationAddresses, &sAllowCustomRoutingTrafficRequest_DestinationPorts, &sAllowCustomRoutingTrafficRequest_AllowAllTrafficToEndpoint}}
+var mCreateAcceleratorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAcceleratorRequest_Name, &sCreateAcceleratorRequest_IpAddressType, &sCreateAcceleratorRequest_IpAddresses, &sCreateAcceleratorRequest_Enabled, &sCreateAcceleratorRequest_IdempotencyToken, &sCreateAcceleratorRequest_Tags}}
+var mCreateAcceleratorResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAcceleratorResponse_Accelerator}}
+var mCreateCrossAccountAttachmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCrossAccountAttachmentRequest_Name, &sCreateCrossAccountAttachmentRequest_Principals, &sCreateCrossAccountAttachmentRequest_Resources, &sCreateCrossAccountAttachmentRequest_IdempotencyToken, &sCreateCrossAccountAttachmentRequest_Tags}}
+var mCreateCrossAccountAttachmentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCrossAccountAttachmentResponse_CrossAccountAttachment}}
+var mCreateCustomRoutingAcceleratorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCustomRoutingAcceleratorRequest_Name, &sCreateCustomRoutingAcceleratorRequest_IpAddressType, &sCreateCustomRoutingAcceleratorRequest_IpAddresses, &sCreateCustomRoutingAcceleratorRequest_Enabled, &sCreateCustomRoutingAcceleratorRequest_IdempotencyToken, &sCreateCustomRoutingAcceleratorRequest_Tags}}
+var mCreateCustomRoutingAcceleratorResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCustomRoutingAcceleratorResponse_Accelerator}}
+var mCreateCustomRoutingEndpointGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCustomRoutingEndpointGroupRequest_ListenerArn, &sCreateCustomRoutingEndpointGroupRequest_EndpointGroupRegion, &sCreateCustomRoutingEndpointGroupRequest_DestinationConfigurations, &sCreateCustomRoutingEndpointGroupRequest_IdempotencyToken}}
+var mCreateCustomRoutingEndpointGroupResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCustomRoutingEndpointGroupResponse_EndpointGroup}}
+var mCreateCustomRoutingListenerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCustomRoutingListenerRequest_AcceleratorArn, &sCreateCustomRoutingListenerRequest_PortRanges, &sCreateCustomRoutingListenerRequest_IdempotencyToken}}
+var mCreateCustomRoutingListenerResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCustomRoutingListenerResponse_Listener}}
+var mCreateEndpointGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateEndpointGroupRequest_ListenerArn, &sCreateEndpointGroupRequest_EndpointGroupRegion, &sCreateEndpointGroupRequest_EndpointConfigurations, &sCreateEndpointGroupRequest_TrafficDialPercentage, &sCreateEndpointGroupRequest_HealthCheckPort, &sCreateEndpointGroupRequest_HealthCheckProtocol, &sCreateEndpointGroupRequest_HealthCheckPath, &sCreateEndpointGroupRequest_HealthCheckIntervalSeconds, &sCreateEndpointGroupRequest_ThresholdCount, &sCreateEndpointGroupRequest_IdempotencyToken, &sCreateEndpointGroupRequest_PortOverrides}, Seed: 3, Slots: []uint16{
+	0, 0, 0, 5, 6, 1, 2, 0, 0, 0, 0, 0, 0, 11, 0, 0, 0, 7, 0, 10, 0, 8, 0, 3,
+	9, 4, 0, 0, 0, 0, 0, 0,
+}}
+var mCreateEndpointGroupResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateEndpointGroupResponse_EndpointGroup}}
+var mCreateListenerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateListenerRequest_AcceleratorArn, &sCreateListenerRequest_PortRanges, &sCreateListenerRequest_Protocol, &sCreateListenerRequest_ClientAffinity, &sCreateListenerRequest_IdempotencyToken}}
+var mCreateListenerResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateListenerResponse_Listener}}
+var mDeleteAcceleratorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAcceleratorRequest_AcceleratorArn}}
+var mDeleteCrossAccountAttachmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteCrossAccountAttachmentRequest_AttachmentArn}}
+var mDeleteCustomRoutingAcceleratorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteCustomRoutingAcceleratorRequest_AcceleratorArn}}
+var mDeleteCustomRoutingEndpointGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteCustomRoutingEndpointGroupRequest_EndpointGroupArn}}
+var mDeleteCustomRoutingListenerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteCustomRoutingListenerRequest_ListenerArn}}
+var mDeleteEndpointGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteEndpointGroupRequest_EndpointGroupArn}}
+var mDeleteListenerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteListenerRequest_ListenerArn}}
+var mDenyCustomRoutingTrafficRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDenyCustomRoutingTrafficRequest_EndpointGroupArn, &sDenyCustomRoutingTrafficRequest_EndpointId, &sDenyCustomRoutingTrafficRequest_DestinationAddresses, &sDenyCustomRoutingTrafficRequest_DestinationPorts, &sDenyCustomRoutingTrafficRequest_DenyAllTrafficToEndpoint}}
+var mDeprovisionByoipCidrRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeprovisionByoipCidrRequest_Cidr}}
+var mDeprovisionByoipCidrResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeprovisionByoipCidrResponse_ByoipCidr}}
+var mDescribeAcceleratorAttributesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAcceleratorAttributesRequest_AcceleratorArn}}
+var mDescribeAcceleratorAttributesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAcceleratorAttributesResponse_AcceleratorAttributes}}
+var mDescribeAcceleratorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAcceleratorRequest_AcceleratorArn}}
+var mDescribeAcceleratorResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAcceleratorResponse_Accelerator}}
+var mDescribeCrossAccountAttachmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeCrossAccountAttachmentRequest_AttachmentArn}}
+var mDescribeCrossAccountAttachmentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeCrossAccountAttachmentResponse_CrossAccountAttachment}}
+var mDescribeCustomRoutingAcceleratorAttributesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeCustomRoutingAcceleratorAttributesRequest_AcceleratorArn}}
+var mDescribeCustomRoutingAcceleratorAttributesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeCustomRoutingAcceleratorAttributesResponse_AcceleratorAttributes}}
+var mDescribeCustomRoutingAcceleratorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeCustomRoutingAcceleratorRequest_AcceleratorArn}}
+var mDescribeCustomRoutingAcceleratorResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeCustomRoutingAcceleratorResponse_Accelerator}}
+var mDescribeCustomRoutingEndpointGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeCustomRoutingEndpointGroupRequest_EndpointGroupArn}}
+var mDescribeCustomRoutingEndpointGroupResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeCustomRoutingEndpointGroupResponse_EndpointGroup}}
+var mDescribeCustomRoutingListenerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeCustomRoutingListenerRequest_ListenerArn}}
+var mDescribeCustomRoutingListenerResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeCustomRoutingListenerResponse_Listener}}
+var mDescribeEndpointGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEndpointGroupRequest_EndpointGroupArn}}
+var mDescribeEndpointGroupResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEndpointGroupResponse_EndpointGroup}}
+var mDescribeListenerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeListenerRequest_ListenerArn}}
+var mDescribeListenerResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeListenerResponse_Listener}}
+var mListAcceleratorsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAcceleratorsRequest_MaxResults, &sListAcceleratorsRequest_NextToken}}
+var mListAcceleratorsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAcceleratorsResponse_Accelerators, &sListAcceleratorsResponse_NextToken}}
+var mListByoipCidrsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListByoipCidrsRequest_MaxResults, &sListByoipCidrsRequest_NextToken}}
+var mListByoipCidrsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListByoipCidrsResponse_ByoipCidrs, &sListByoipCidrsResponse_NextToken}}
+var mListCrossAccountAttachmentsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListCrossAccountAttachmentsRequest_MaxResults, &sListCrossAccountAttachmentsRequest_NextToken}}
+var mListCrossAccountAttachmentsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListCrossAccountAttachmentsResponse_CrossAccountAttachments, &sListCrossAccountAttachmentsResponse_NextToken}}
+var mListCrossAccountResourceAccountsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListCrossAccountResourceAccountsResponse_ResourceOwnerAwsAccountIds}}
+var mListCrossAccountResourcesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListCrossAccountResourcesRequest_AcceleratorArn, &sListCrossAccountResourcesRequest_ResourceOwnerAwsAccountId, &sListCrossAccountResourcesRequest_MaxResults, &sListCrossAccountResourcesRequest_NextToken}}
+var mListCrossAccountResourcesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListCrossAccountResourcesResponse_CrossAccountResources, &sListCrossAccountResourcesResponse_NextToken}}
+var mListCustomRoutingAcceleratorsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListCustomRoutingAcceleratorsRequest_MaxResults, &sListCustomRoutingAcceleratorsRequest_NextToken}}
+var mListCustomRoutingAcceleratorsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListCustomRoutingAcceleratorsResponse_Accelerators, &sListCustomRoutingAcceleratorsResponse_NextToken}}
+var mListCustomRoutingEndpointGroupsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListCustomRoutingEndpointGroupsRequest_ListenerArn, &sListCustomRoutingEndpointGroupsRequest_MaxResults, &sListCustomRoutingEndpointGroupsRequest_NextToken}}
+var mListCustomRoutingEndpointGroupsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListCustomRoutingEndpointGroupsResponse_EndpointGroups, &sListCustomRoutingEndpointGroupsResponse_NextToken}}
+var mListCustomRoutingListenersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListCustomRoutingListenersRequest_AcceleratorArn, &sListCustomRoutingListenersRequest_MaxResults, &sListCustomRoutingListenersRequest_NextToken}}
+var mListCustomRoutingListenersResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListCustomRoutingListenersResponse_Listeners, &sListCustomRoutingListenersResponse_NextToken}}
+var mListCustomRoutingPortMappingsByDestinationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListCustomRoutingPortMappingsByDestinationRequest_EndpointId, &sListCustomRoutingPortMappingsByDestinationRequest_DestinationAddress, &sListCustomRoutingPortMappingsByDestinationRequest_MaxResults, &sListCustomRoutingPortMappingsByDestinationRequest_NextToken}}
+var mListCustomRoutingPortMappingsByDestinationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListCustomRoutingPortMappingsByDestinationResponse_DestinationPortMappings, &sListCustomRoutingPortMappingsByDestinationResponse_NextToken}}
+var mListCustomRoutingPortMappingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListCustomRoutingPortMappingsRequest_AcceleratorArn, &sListCustomRoutingPortMappingsRequest_EndpointGroupArn, &sListCustomRoutingPortMappingsRequest_MaxResults, &sListCustomRoutingPortMappingsRequest_NextToken}}
+var mListCustomRoutingPortMappingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListCustomRoutingPortMappingsResponse_PortMappings, &sListCustomRoutingPortMappingsResponse_NextToken}}
+var mListEndpointGroupsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListEndpointGroupsRequest_ListenerArn, &sListEndpointGroupsRequest_MaxResults, &sListEndpointGroupsRequest_NextToken}}
+var mListEndpointGroupsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListEndpointGroupsResponse_EndpointGroups, &sListEndpointGroupsResponse_NextToken}}
+var mListListenersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListListenersRequest_AcceleratorArn, &sListListenersRequest_MaxResults, &sListListenersRequest_NextToken}}
+var mListListenersResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListListenersResponse_Listeners, &sListListenersResponse_NextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_Tags}}
+var mProvisionByoipCidrRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sProvisionByoipCidrRequest_Cidr, &sProvisionByoipCidrRequest_CidrAuthorizationContext}}
+var mProvisionByoipCidrResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sProvisionByoipCidrResponse_ByoipCidr}}
+var mRemoveCustomRoutingEndpointsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRemoveCustomRoutingEndpointsRequest_EndpointIds, &sRemoveCustomRoutingEndpointsRequest_EndpointGroupArn}}
+var mRemoveEndpointsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRemoveEndpointsRequest_EndpointIdentifiers, &sRemoveEndpointsRequest_EndpointGroupArn}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceArn, &sTagResourceRequest_Tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceArn, &sUntagResourceRequest_TagKeys}}
+var mUpdateAcceleratorAttributesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAcceleratorAttributesRequest_AcceleratorArn, &sUpdateAcceleratorAttributesRequest_FlowLogsEnabled, &sUpdateAcceleratorAttributesRequest_FlowLogsS3Bucket, &sUpdateAcceleratorAttributesRequest_FlowLogsS3Prefix}}
+var mUpdateAcceleratorAttributesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAcceleratorAttributesResponse_AcceleratorAttributes}}
+var mUpdateAcceleratorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAcceleratorRequest_AcceleratorArn, &sUpdateAcceleratorRequest_Name, &sUpdateAcceleratorRequest_IpAddressType, &sUpdateAcceleratorRequest_IpAddresses, &sUpdateAcceleratorRequest_Enabled}}
+var mUpdateAcceleratorResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAcceleratorResponse_Accelerator}}
+var mUpdateCrossAccountAttachmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateCrossAccountAttachmentRequest_AttachmentArn, &sUpdateCrossAccountAttachmentRequest_Name, &sUpdateCrossAccountAttachmentRequest_AddPrincipals, &sUpdateCrossAccountAttachmentRequest_RemovePrincipals, &sUpdateCrossAccountAttachmentRequest_AddResources, &sUpdateCrossAccountAttachmentRequest_RemoveResources}}
+var mUpdateCrossAccountAttachmentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateCrossAccountAttachmentResponse_CrossAccountAttachment}}
+var mUpdateCustomRoutingAcceleratorAttributesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateCustomRoutingAcceleratorAttributesRequest_AcceleratorArn, &sUpdateCustomRoutingAcceleratorAttributesRequest_FlowLogsEnabled, &sUpdateCustomRoutingAcceleratorAttributesRequest_FlowLogsS3Bucket, &sUpdateCustomRoutingAcceleratorAttributesRequest_FlowLogsS3Prefix}}
+var mUpdateCustomRoutingAcceleratorAttributesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateCustomRoutingAcceleratorAttributesResponse_AcceleratorAttributes}}
+var mUpdateCustomRoutingAcceleratorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateCustomRoutingAcceleratorRequest_AcceleratorArn, &sUpdateCustomRoutingAcceleratorRequest_Name, &sUpdateCustomRoutingAcceleratorRequest_IpAddressType, &sUpdateCustomRoutingAcceleratorRequest_IpAddresses, &sUpdateCustomRoutingAcceleratorRequest_Enabled}}
+var mUpdateCustomRoutingAcceleratorResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateCustomRoutingAcceleratorResponse_Accelerator}}
+var mUpdateCustomRoutingListenerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateCustomRoutingListenerRequest_ListenerArn, &sUpdateCustomRoutingListenerRequest_PortRanges}}
+var mUpdateCustomRoutingListenerResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateCustomRoutingListenerResponse_Listener}}
+var mUpdateEndpointGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateEndpointGroupRequest_EndpointGroupArn, &sUpdateEndpointGroupRequest_EndpointConfigurations, &sUpdateEndpointGroupRequest_TrafficDialPercentage, &sUpdateEndpointGroupRequest_HealthCheckPort, &sUpdateEndpointGroupRequest_HealthCheckProtocol, &sUpdateEndpointGroupRequest_HealthCheckPath, &sUpdateEndpointGroupRequest_HealthCheckIntervalSeconds, &sUpdateEndpointGroupRequest_ThresholdCount, &sUpdateEndpointGroupRequest_PortOverrides}, Seed: 3, Slots: []uint16{
+	0, 1, 0, 4, 5, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 6, 0, 0, 0, 7, 0, 2,
+	8, 3, 0, 0, 0, 0, 0, 0,
+}}
+var mUpdateEndpointGroupResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateEndpointGroupResponse_EndpointGroup}}
+var mUpdateListenerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateListenerRequest_ListenerArn, &sUpdateListenerRequest_PortRanges, &sUpdateListenerRequest_Protocol, &sUpdateListenerRequest_ClientAffinity}}
+var mUpdateListenerResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateListenerResponse_Listener}}
+var mWithdrawByoipCidrRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sWithdrawByoipCidrRequest_Cidr}}
+var mWithdrawByoipCidrResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sWithdrawByoipCidrResponse_ByoipCidr}}
+
+var sAddCustomRoutingEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddCustomRoutingEndpoints, Type: smithy.ShapeTypeOperation})
+var sAddEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddEndpoints, Type: smithy.ShapeTypeOperation})
+var sAdvertiseByoipCidr = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdvertiseByoipCidr, Type: smithy.ShapeTypeOperation})
+var sAllowCustomRoutingTraffic = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAllowCustomRoutingTraffic, Type: smithy.ShapeTypeOperation})
+var sCreateAccelerator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAccelerator, Type: smithy.ShapeTypeOperation})
+var sCreateCrossAccountAttachment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCrossAccountAttachment, Type: smithy.ShapeTypeOperation})
+var sCreateCustomRoutingAccelerator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCustomRoutingAccelerator, Type: smithy.ShapeTypeOperation})
+var sCreateCustomRoutingEndpointGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCustomRoutingEndpointGroup, Type: smithy.ShapeTypeOperation})
+var sCreateCustomRoutingListener = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCustomRoutingListener, Type: smithy.ShapeTypeOperation})
+var sCreateEndpointGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEndpointGroup, Type: smithy.ShapeTypeOperation})
+var sCreateListener = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateListener, Type: smithy.ShapeTypeOperation})
+var sDeleteAccelerator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAccelerator, Type: smithy.ShapeTypeOperation})
+var sDeleteCrossAccountAttachment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCrossAccountAttachment, Type: smithy.ShapeTypeOperation})
+var sDeleteCustomRoutingAccelerator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCustomRoutingAccelerator, Type: smithy.ShapeTypeOperation})
+var sDeleteCustomRoutingEndpointGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCustomRoutingEndpointGroup, Type: smithy.ShapeTypeOperation})
+var sDeleteCustomRoutingListener = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCustomRoutingListener, Type: smithy.ShapeTypeOperation})
+var sDeleteEndpointGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEndpointGroup, Type: smithy.ShapeTypeOperation})
+var sDeleteListener = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteListener, Type: smithy.ShapeTypeOperation})
+var sDenyCustomRoutingTraffic = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDenyCustomRoutingTraffic, Type: smithy.ShapeTypeOperation})
+var sDeprovisionByoipCidr = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeprovisionByoipCidr, Type: smithy.ShapeTypeOperation})
+var sDescribeAccelerator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAccelerator, Type: smithy.ShapeTypeOperation})
+var sDescribeAcceleratorAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAcceleratorAttributes, Type: smithy.ShapeTypeOperation})
+var sDescribeCrossAccountAttachment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCrossAccountAttachment, Type: smithy.ShapeTypeOperation})
+var sDescribeCustomRoutingAccelerator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCustomRoutingAccelerator, Type: smithy.ShapeTypeOperation})
+var sDescribeCustomRoutingAcceleratorAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCustomRoutingAcceleratorAttributes, Type: smithy.ShapeTypeOperation})
+var sDescribeCustomRoutingEndpointGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCustomRoutingEndpointGroup, Type: smithy.ShapeTypeOperation})
+var sDescribeCustomRoutingListener = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCustomRoutingListener, Type: smithy.ShapeTypeOperation})
+var sDescribeEndpointGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEndpointGroup, Type: smithy.ShapeTypeOperation})
+var sDescribeListener = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeListener, Type: smithy.ShapeTypeOperation})
+var sListAccelerators = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccelerators, Type: smithy.ShapeTypeOperation})
+var sListByoipCidrs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListByoipCidrs, Type: smithy.ShapeTypeOperation})
+var sListCrossAccountAttachments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCrossAccountAttachments, Type: smithy.ShapeTypeOperation})
+var sListCrossAccountResourceAccounts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCrossAccountResourceAccounts, Type: smithy.ShapeTypeOperation})
+var sListCrossAccountResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCrossAccountResources, Type: smithy.ShapeTypeOperation})
+var sListCustomRoutingAccelerators = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCustomRoutingAccelerators, Type: smithy.ShapeTypeOperation})
+var sListCustomRoutingEndpointGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCustomRoutingEndpointGroups, Type: smithy.ShapeTypeOperation})
+var sListCustomRoutingListeners = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCustomRoutingListeners, Type: smithy.ShapeTypeOperation})
+var sListCustomRoutingPortMappings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCustomRoutingPortMappings, Type: smithy.ShapeTypeOperation})
+var sListCustomRoutingPortMappingsByDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCustomRoutingPortMappingsByDestination, Type: smithy.ShapeTypeOperation})
+var sListEndpointGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEndpointGroups, Type: smithy.ShapeTypeOperation})
+var sListListeners = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListListeners, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation})
+var sProvisionByoipCidr = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProvisionByoipCidr, Type: smithy.ShapeTypeOperation})
+var sRemoveCustomRoutingEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveCustomRoutingEndpoints, Type: smithy.ShapeTypeOperation})
+var sRemoveEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveEndpoints, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation})
+var sUpdateAccelerator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAccelerator, Type: smithy.ShapeTypeOperation})
+var sUpdateAcceleratorAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAcceleratorAttributes, Type: smithy.ShapeTypeOperation})
+var sUpdateCrossAccountAttachment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCrossAccountAttachment, Type: smithy.ShapeTypeOperation})
+var sUpdateCustomRoutingAccelerator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCustomRoutingAccelerator, Type: smithy.ShapeTypeOperation})
+var sUpdateCustomRoutingAcceleratorAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCustomRoutingAcceleratorAttributes, Type: smithy.ShapeTypeOperation})
+var sUpdateCustomRoutingListener = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCustomRoutingListener, Type: smithy.ShapeTypeOperation})
+var sUpdateEndpointGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEndpointGroup, Type: smithy.ShapeTypeOperation})
+var sUpdateListener = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateListener, Type: smithy.ShapeTypeOperation})
+var sWithdrawByoipCidr = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWithdrawByoipCidr, Type: smithy.ShapeTypeOperation})
+var s_GlobalAccelerator_V20180706 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GlobalAccelerator_V20180706, Type: smithy.ShapeTypeService})
+var sAccelerator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccelerator, Members: &mAccelerator, Type: smithy.ShapeTypeStructure})
+var sAcceleratorAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceleratorAttributes, Members: &mAcceleratorAttributes, Type: smithy.ShapeTypeStructure})
+var sAcceleratorEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceleratorEvent, Members: &mAcceleratorEvent, Type: smithy.ShapeTypeStructure})
+var s_AcceleratorEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AcceleratorEvents, Members: &m_AcceleratorEvents, Type: smithy.ShapeTypeList})
+var sAcceleratorNotDisabledException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceleratorNotDisabledException, Members: &mAcceleratorNotDisabledException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var sAcceleratorNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceleratorNotFoundException, Members: &mAcceleratorNotFoundException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_Accelerators = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Accelerators, Members: &m_Accelerators, Type: smithy.ShapeTypeList})
+var sAcceleratorStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceleratorStatus, Members: &mAcceleratorStatus, Type: smithy.ShapeTypeEnum})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var sAssociatedEndpointGroupFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociatedEndpointGroupFoundException, Members: &mAssociatedEndpointGroupFoundException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var sAssociatedListenerFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociatedListenerFoundException, Members: &mAssociatedListenerFoundException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var sAttachment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachment, Members: &mAttachment, Type: smithy.ShapeTypeStructure})
+var s_AttachmentName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttachmentName, Type: smithy.ShapeTypeString})
+var sAttachmentNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachmentNotFoundException, Members: &mAttachmentNotFoundException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_Attachments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Attachments, Members: &m_Attachments, Type: smithy.ShapeTypeList})
+var s_AwsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsAccountId, Type: smithy.ShapeTypeString})
+var s_AwsAccountIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsAccountIds, Members: &m_AwsAccountIds, Type: smithy.ShapeTypeList})
+var sByoipCidr = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iByoipCidr, Members: &mByoipCidr, Type: smithy.ShapeTypeStructure})
+var sByoipCidrEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iByoipCidrEvent, Members: &mByoipCidrEvent, Type: smithy.ShapeTypeStructure})
+var s_ByoipCidrEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ByoipCidrEvents, Members: &m_ByoipCidrEvents, Type: smithy.ShapeTypeList})
+var sByoipCidrNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iByoipCidrNotFoundException, Members: &mByoipCidrNotFoundException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_ByoipCidrs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ByoipCidrs, Members: &m_ByoipCidrs, Type: smithy.ShapeTypeList})
+var sByoipCidrState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iByoipCidrState, Members: &mByoipCidrState, Type: smithy.ShapeTypeEnum})
+var sCidrAuthorizationContext = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCidrAuthorizationContext, Members: &mCidrAuthorizationContext, Type: smithy.ShapeTypeStructure})
+var sClientAffinity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClientAffinity, Members: &mClientAffinity, Type: smithy.ShapeTypeEnum})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t3, Type: smithy.ShapeTypeStructure})
+var sCrossAccountResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCrossAccountResource, Members: &mCrossAccountResource, Type: smithy.ShapeTypeStructure})
+var s_CrossAccountResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CrossAccountResources, Members: &m_CrossAccountResources, Type: smithy.ShapeTypeList})
+var sCustomRoutingAccelerator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomRoutingAccelerator, Members: &mCustomRoutingAccelerator, Type: smithy.ShapeTypeStructure})
+var sCustomRoutingAcceleratorAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomRoutingAcceleratorAttributes, Members: &mCustomRoutingAcceleratorAttributes, Type: smithy.ShapeTypeStructure})
+var s_CustomRoutingAccelerators = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomRoutingAccelerators, Members: &m_CustomRoutingAccelerators, Type: smithy.ShapeTypeList})
+var sCustomRoutingAcceleratorStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomRoutingAcceleratorStatus, Members: &mCustomRoutingAcceleratorStatus, Type: smithy.ShapeTypeEnum})
+var sCustomRoutingDestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomRoutingDestinationConfiguration, Members: &mCustomRoutingDestinationConfiguration, Type: smithy.ShapeTypeStructure})
+var s_CustomRoutingDestinationConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomRoutingDestinationConfigurations, Members: &m_CustomRoutingDestinationConfigurations, Type: smithy.ShapeTypeList})
+var sCustomRoutingDestinationDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomRoutingDestinationDescription, Members: &mCustomRoutingDestinationDescription, Type: smithy.ShapeTypeStructure})
+var s_CustomRoutingDestinationDescriptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomRoutingDestinationDescriptions, Members: &m_CustomRoutingDestinationDescriptions, Type: smithy.ShapeTypeList})
+var sCustomRoutingDestinationTrafficState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomRoutingDestinationTrafficState, Members: &mCustomRoutingDestinationTrafficState, Type: smithy.ShapeTypeEnum})
+var sCustomRoutingEndpointConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomRoutingEndpointConfiguration, Members: &mCustomRoutingEndpointConfiguration, Type: smithy.ShapeTypeStructure})
+var s_CustomRoutingEndpointConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomRoutingEndpointConfigurations, Members: &m_CustomRoutingEndpointConfigurations, Type: smithy.ShapeTypeList})
+var sCustomRoutingEndpointDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomRoutingEndpointDescription, Members: &mCustomRoutingEndpointDescription, Type: smithy.ShapeTypeStructure})
+var s_CustomRoutingEndpointDescriptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomRoutingEndpointDescriptions, Members: &m_CustomRoutingEndpointDescriptions, Type: smithy.ShapeTypeList})
+var sCustomRoutingEndpointGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomRoutingEndpointGroup, Members: &mCustomRoutingEndpointGroup, Type: smithy.ShapeTypeStructure})
+var s_CustomRoutingEndpointGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomRoutingEndpointGroups, Members: &m_CustomRoutingEndpointGroups, Type: smithy.ShapeTypeList})
+var sCustomRoutingListener = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomRoutingListener, Members: &mCustomRoutingListener, Type: smithy.ShapeTypeStructure})
+var s_CustomRoutingListeners = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomRoutingListeners, Members: &m_CustomRoutingListeners, Type: smithy.ShapeTypeList})
+var sCustomRoutingProtocol = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomRoutingProtocol, Members: &mCustomRoutingProtocol, Type: smithy.ShapeTypeEnum})
+var s_CustomRoutingProtocols = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomRoutingProtocols, Members: &m_CustomRoutingProtocols, Type: smithy.ShapeTypeList})
+var s_DestinationAddresses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DestinationAddresses, Members: &m_DestinationAddresses, Type: smithy.ShapeTypeList})
+var sDestinationPortMapping = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDestinationPortMapping, Members: &mDestinationPortMapping, Type: smithy.ShapeTypeStructure})
+var s_DestinationPortMappings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DestinationPortMappings, Members: &m_DestinationPortMappings, Type: smithy.ShapeTypeList})
+var s_DestinationPorts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DestinationPorts, Members: &m_DestinationPorts, Type: smithy.ShapeTypeList})
+var sEndpointAlreadyExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEndpointAlreadyExistsException, Members: &mEndpointAlreadyExistsException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var sEndpointConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEndpointConfiguration, Members: &mEndpointConfiguration, Type: smithy.ShapeTypeStructure})
+var s_EndpointConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EndpointConfigurations, Members: &m_EndpointConfigurations, Type: smithy.ShapeTypeList})
+var sEndpointDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEndpointDescription, Members: &mEndpointDescription, Type: smithy.ShapeTypeStructure})
+var s_EndpointDescriptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EndpointDescriptions, Members: &m_EndpointDescriptions, Type: smithy.ShapeTypeList})
+var sEndpointGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEndpointGroup, Members: &mEndpointGroup, Type: smithy.ShapeTypeStructure})
+var sEndpointGroupAlreadyExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEndpointGroupAlreadyExistsException, Members: &mEndpointGroupAlreadyExistsException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var sEndpointGroupNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEndpointGroupNotFoundException, Members: &mEndpointGroupNotFoundException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_EndpointGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EndpointGroups, Members: &m_EndpointGroups, Type: smithy.ShapeTypeList})
+var sEndpointIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEndpointIdentifier, Members: &mEndpointIdentifier, Type: smithy.ShapeTypeStructure})
+var s_EndpointIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EndpointIdentifiers, Members: &m_EndpointIdentifiers, Type: smithy.ShapeTypeList})
+var s_EndpointIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EndpointIds, Members: &m_EndpointIds, Type: smithy.ShapeTypeList})
+var sEndpointNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEndpointNotFoundException, Members: &mEndpointNotFoundException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_EndpointWeight = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EndpointWeight, Type: smithy.ShapeTypeInteger})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_GenericBoolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GenericBoolean, Type: smithy.ShapeTypeBoolean})
+var s_GenericString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var s_HealthCheckIntervalSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HealthCheckIntervalSeconds, Type: smithy.ShapeTypeInteger})
+var s_HealthCheckPath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HealthCheckPath, Type: smithy.ShapeTypeString})
+var s_HealthCheckPort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HealthCheckPort, Type: smithy.ShapeTypeInteger})
+var sHealthCheckProtocol = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHealthCheckProtocol, Members: &mHealthCheckProtocol, Type: smithy.ShapeTypeEnum})
+var sHealthState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHealthState, Members: &mHealthState, Type: smithy.ShapeTypeEnum})
+var s_IdempotencyToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString})
+var sIncorrectCidrStateException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIncorrectCidrStateException, Members: &mIncorrectCidrStateException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sInternalServiceErrorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServiceErrorException, Members: &mInternalServiceErrorException, Traits: &t4, Type: smithy.ShapeTypeStructure})
+var sInvalidArgumentException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidArgumentException, Members: &mInvalidArgumentException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var sInvalidNextTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidNextTokenException, Members: &mInvalidNextTokenException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var sInvalidPortRangeException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidPortRangeException, Members: &mInvalidPortRangeException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var s_IpAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IpAddress, Type: smithy.ShapeTypeString})
+var sIpAddressDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIpAddressDetail, Members: &mIpAddressDetail, Type: smithy.ShapeTypeStructure})
+var s_IpAddressDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IpAddressDetails, Members: &m_IpAddressDetails, Type: smithy.ShapeTypeList})
+var s_IpAddresses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IpAddresses, Members: &m_IpAddresses, Type: smithy.ShapeTypeList})
+var sIpAddressFamily = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIpAddressFamily, Members: &mIpAddressFamily, Type: smithy.ShapeTypeEnum})
+var sIpAddressType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIpAddressType, Members: &mIpAddressType, Type: smithy.ShapeTypeEnum})
+var sIpSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIpSet, Members: &mIpSet, Type: smithy.ShapeTypeStructure})
+var s_IpSets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IpSets, Members: &m_IpSets, Type: smithy.ShapeTypeList})
+var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var sListener = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListener, Members: &mListener, Type: smithy.ShapeTypeStructure})
+var sListenerNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListenerNotFoundException, Members: &mListenerNotFoundException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_Listeners = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Listeners, Members: &m_Listeners, Type: smithy.ShapeTypeList})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var s_NetworkZone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkZone, Type: smithy.ShapeTypeString})
+var sPortMapping = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPortMapping, Members: &mPortMapping, Type: smithy.ShapeTypeStructure})
+var s_PortMappings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PortMappings, Members: &m_PortMappings, Type: smithy.ShapeTypeList})
+var s_PortMappingsMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PortMappingsMaxResults, Type: smithy.ShapeTypeInteger})
+var s_PortNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PortNumber, Type: smithy.ShapeTypeInteger})
+var sPortOverride = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPortOverride, Members: &mPortOverride, Type: smithy.ShapeTypeStructure})
+var s_PortOverrides = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PortOverrides, Members: &m_PortOverrides, Type: smithy.ShapeTypeList})
+var sPortRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPortRange, Members: &mPortRange, Type: smithy.ShapeTypeStructure})
+var s_PortRanges = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PortRanges, Members: &m_PortRanges, Type: smithy.ShapeTypeList})
+var s_Principal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Principal, Type: smithy.ShapeTypeString})
+var s_Principals = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Principals, Members: &m_Principals, Type: smithy.ShapeTypeList})
+var sProtocol = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProtocol, Members: &mProtocol, Type: smithy.ShapeTypeEnum})
+var s_Protocols = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Protocols, Members: &m_Protocols, Type: smithy.ShapeTypeList})
+var sResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResource, Members: &mResource, Type: smithy.ShapeTypeStructure})
+var s_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var s_Resources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Resources, Members: &m_Resources, Type: smithy.ShapeTypeList})
+var sSocketAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSocketAddress, Members: &mSocketAddress, Type: smithy.ShapeTypeStructure})
+var s_SocketAddresses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SocketAddresses, Members: &m_SocketAddresses, Type: smithy.ShapeTypeList})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeys, Members: &m_TagKeys, Type: smithy.ShapeTypeList})
+var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_ThresholdCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ThresholdCount, Type: smithy.ShapeTypeInteger})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var s_TrafficDialPercentage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrafficDialPercentage, Type: smithy.ShapeTypeFloat})
+var sTransactionInProgressException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTransactionInProgressException, Members: &mTransactionInProgressException, Traits: &t3, Type: smithy.ShapeTypeStructure})
+var sAddCustomRoutingEndpointsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddCustomRoutingEndpointsRequest, Members: &mAddCustomRoutingEndpointsRequest, Type: smithy.ShapeTypeStructure})
+var sAddCustomRoutingEndpointsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddCustomRoutingEndpointsResponse, Members: &mAddCustomRoutingEndpointsResponse, Type: smithy.ShapeTypeStructure})
+var sAddEndpointsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddEndpointsRequest, Members: &mAddEndpointsRequest, Type: smithy.ShapeTypeStructure})
+var sAddEndpointsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddEndpointsResponse, Members: &mAddEndpointsResponse, Type: smithy.ShapeTypeStructure})
+var sAdvertiseByoipCidrRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdvertiseByoipCidrRequest, Members: &mAdvertiseByoipCidrRequest, Type: smithy.ShapeTypeStructure})
+var sAdvertiseByoipCidrResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdvertiseByoipCidrResponse, Members: &mAdvertiseByoipCidrResponse, Type: smithy.ShapeTypeStructure})
+var sAllowCustomRoutingTrafficRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAllowCustomRoutingTrafficRequest, Members: &mAllowCustomRoutingTrafficRequest, Type: smithy.ShapeTypeStructure})
+var sCreateAcceleratorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAcceleratorRequest, Members: &mCreateAcceleratorRequest, Type: smithy.ShapeTypeStructure})
+var sCreateAcceleratorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAcceleratorResponse, Members: &mCreateAcceleratorResponse, Type: smithy.ShapeTypeStructure})
+var sCreateCrossAccountAttachmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCrossAccountAttachmentRequest, Members: &mCreateCrossAccountAttachmentRequest, Type: smithy.ShapeTypeStructure})
+var sCreateCrossAccountAttachmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCrossAccountAttachmentResponse, Members: &mCreateCrossAccountAttachmentResponse, Type: smithy.ShapeTypeStructure})
+var sCreateCustomRoutingAcceleratorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCustomRoutingAcceleratorRequest, Members: &mCreateCustomRoutingAcceleratorRequest, Type: smithy.ShapeTypeStructure})
+var sCreateCustomRoutingAcceleratorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCustomRoutingAcceleratorResponse, Members: &mCreateCustomRoutingAcceleratorResponse, Type: smithy.ShapeTypeStructure})
+var sCreateCustomRoutingEndpointGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCustomRoutingEndpointGroupRequest, Members: &mCreateCustomRoutingEndpointGroupRequest, Type: smithy.ShapeTypeStructure})
+var sCreateCustomRoutingEndpointGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCustomRoutingEndpointGroupResponse, Members: &mCreateCustomRoutingEndpointGroupResponse, Type: smithy.ShapeTypeStructure})
+var sCreateCustomRoutingListenerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCustomRoutingListenerRequest, Members: &mCreateCustomRoutingListenerRequest, Type: smithy.ShapeTypeStructure})
+var sCreateCustomRoutingListenerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCustomRoutingListenerResponse, Members: &mCreateCustomRoutingListenerResponse, Type: smithy.ShapeTypeStructure})
+var sCreateEndpointGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEndpointGroupRequest, Members: &mCreateEndpointGroupRequest, Type: smithy.ShapeTypeStructure})
+var sCreateEndpointGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEndpointGroupResponse, Members: &mCreateEndpointGroupResponse, Type: smithy.ShapeTypeStructure})
+var sCreateListenerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateListenerRequest, Members: &mCreateListenerRequest, Type: smithy.ShapeTypeStructure})
+var sCreateListenerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateListenerResponse, Members: &mCreateListenerResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteAcceleratorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAcceleratorRequest, Members: &mDeleteAcceleratorRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteCrossAccountAttachmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCrossAccountAttachmentRequest, Members: &mDeleteCrossAccountAttachmentRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteCustomRoutingAcceleratorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCustomRoutingAcceleratorRequest, Members: &mDeleteCustomRoutingAcceleratorRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteCustomRoutingEndpointGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCustomRoutingEndpointGroupRequest, Members: &mDeleteCustomRoutingEndpointGroupRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteCustomRoutingListenerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCustomRoutingListenerRequest, Members: &mDeleteCustomRoutingListenerRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteEndpointGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEndpointGroupRequest, Members: &mDeleteEndpointGroupRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteListenerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteListenerRequest, Members: &mDeleteListenerRequest, Type: smithy.ShapeTypeStructure})
+var sDenyCustomRoutingTrafficRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDenyCustomRoutingTrafficRequest, Members: &mDenyCustomRoutingTrafficRequest, Type: smithy.ShapeTypeStructure})
+var sDeprovisionByoipCidrRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeprovisionByoipCidrRequest, Members: &mDeprovisionByoipCidrRequest, Type: smithy.ShapeTypeStructure})
+var sDeprovisionByoipCidrResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeprovisionByoipCidrResponse, Members: &mDeprovisionByoipCidrResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeAcceleratorAttributesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAcceleratorAttributesRequest, Members: &mDescribeAcceleratorAttributesRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeAcceleratorAttributesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAcceleratorAttributesResponse, Members: &mDescribeAcceleratorAttributesResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeAcceleratorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAcceleratorRequest, Members: &mDescribeAcceleratorRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeAcceleratorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAcceleratorResponse, Members: &mDescribeAcceleratorResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeCrossAccountAttachmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCrossAccountAttachmentRequest, Members: &mDescribeCrossAccountAttachmentRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeCrossAccountAttachmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCrossAccountAttachmentResponse, Members: &mDescribeCrossAccountAttachmentResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeCustomRoutingAcceleratorAttributesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCustomRoutingAcceleratorAttributesRequest, Members: &mDescribeCustomRoutingAcceleratorAttributesRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeCustomRoutingAcceleratorAttributesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCustomRoutingAcceleratorAttributesResponse, Members: &mDescribeCustomRoutingAcceleratorAttributesResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeCustomRoutingAcceleratorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCustomRoutingAcceleratorRequest, Members: &mDescribeCustomRoutingAcceleratorRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeCustomRoutingAcceleratorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCustomRoutingAcceleratorResponse, Members: &mDescribeCustomRoutingAcceleratorResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeCustomRoutingEndpointGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCustomRoutingEndpointGroupRequest, Members: &mDescribeCustomRoutingEndpointGroupRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeCustomRoutingEndpointGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCustomRoutingEndpointGroupResponse, Members: &mDescribeCustomRoutingEndpointGroupResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeCustomRoutingListenerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCustomRoutingListenerRequest, Members: &mDescribeCustomRoutingListenerRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeCustomRoutingListenerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCustomRoutingListenerResponse, Members: &mDescribeCustomRoutingListenerResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeEndpointGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEndpointGroupRequest, Members: &mDescribeEndpointGroupRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeEndpointGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEndpointGroupResponse, Members: &mDescribeEndpointGroupResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeListenerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeListenerRequest, Members: &mDescribeListenerRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeListenerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeListenerResponse, Members: &mDescribeListenerResponse, Type: smithy.ShapeTypeStructure})
+var sListAcceleratorsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAcceleratorsRequest, Members: &mListAcceleratorsRequest, Type: smithy.ShapeTypeStructure})
+var sListAcceleratorsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAcceleratorsResponse, Members: &mListAcceleratorsResponse, Type: smithy.ShapeTypeStructure})
+var sListByoipCidrsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListByoipCidrsRequest, Members: &mListByoipCidrsRequest, Type: smithy.ShapeTypeStructure})
+var sListByoipCidrsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListByoipCidrsResponse, Members: &mListByoipCidrsResponse, Type: smithy.ShapeTypeStructure})
+var sListCrossAccountAttachmentsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCrossAccountAttachmentsRequest, Members: &mListCrossAccountAttachmentsRequest, Type: smithy.ShapeTypeStructure})
+var sListCrossAccountAttachmentsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCrossAccountAttachmentsResponse, Members: &mListCrossAccountAttachmentsResponse, Type: smithy.ShapeTypeStructure})
+var sListCrossAccountResourceAccountsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCrossAccountResourceAccountsRequest, Type: smithy.ShapeTypeStructure})
+var sListCrossAccountResourceAccountsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCrossAccountResourceAccountsResponse, Members: &mListCrossAccountResourceAccountsResponse, Type: smithy.ShapeTypeStructure})
+var sListCrossAccountResourcesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCrossAccountResourcesRequest, Members: &mListCrossAccountResourcesRequest, Type: smithy.ShapeTypeStructure})
+var sListCrossAccountResourcesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCrossAccountResourcesResponse, Members: &mListCrossAccountResourcesResponse, Type: smithy.ShapeTypeStructure})
+var sListCustomRoutingAcceleratorsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCustomRoutingAcceleratorsRequest, Members: &mListCustomRoutingAcceleratorsRequest, Type: smithy.ShapeTypeStructure})
+var sListCustomRoutingAcceleratorsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCustomRoutingAcceleratorsResponse, Members: &mListCustomRoutingAcceleratorsResponse, Type: smithy.ShapeTypeStructure})
+var sListCustomRoutingEndpointGroupsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCustomRoutingEndpointGroupsRequest, Members: &mListCustomRoutingEndpointGroupsRequest, Type: smithy.ShapeTypeStructure})
+var sListCustomRoutingEndpointGroupsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCustomRoutingEndpointGroupsResponse, Members: &mListCustomRoutingEndpointGroupsResponse, Type: smithy.ShapeTypeStructure})
+var sListCustomRoutingListenersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCustomRoutingListenersRequest, Members: &mListCustomRoutingListenersRequest, Type: smithy.ShapeTypeStructure})
+var sListCustomRoutingListenersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCustomRoutingListenersResponse, Members: &mListCustomRoutingListenersResponse, Type: smithy.ShapeTypeStructure})
+var sListCustomRoutingPortMappingsByDestinationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCustomRoutingPortMappingsByDestinationRequest, Members: &mListCustomRoutingPortMappingsByDestinationRequest, Type: smithy.ShapeTypeStructure})
+var sListCustomRoutingPortMappingsByDestinationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCustomRoutingPortMappingsByDestinationResponse, Members: &mListCustomRoutingPortMappingsByDestinationResponse, Type: smithy.ShapeTypeStructure})
+var sListCustomRoutingPortMappingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCustomRoutingPortMappingsRequest, Members: &mListCustomRoutingPortMappingsRequest, Type: smithy.ShapeTypeStructure})
+var sListCustomRoutingPortMappingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCustomRoutingPortMappingsResponse, Members: &mListCustomRoutingPortMappingsResponse, Type: smithy.ShapeTypeStructure})
+var sListEndpointGroupsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEndpointGroupsRequest, Members: &mListEndpointGroupsRequest, Type: smithy.ShapeTypeStructure})
+var sListEndpointGroupsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEndpointGroupsResponse, Members: &mListEndpointGroupsResponse, Type: smithy.ShapeTypeStructure})
+var sListListenersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListListenersRequest, Members: &mListListenersRequest, Type: smithy.ShapeTypeStructure})
+var sListListenersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListListenersResponse, Members: &mListListenersResponse, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure})
+var sProvisionByoipCidrRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProvisionByoipCidrRequest, Members: &mProvisionByoipCidrRequest, Type: smithy.ShapeTypeStructure})
+var sProvisionByoipCidrResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProvisionByoipCidrResponse, Members: &mProvisionByoipCidrResponse, Type: smithy.ShapeTypeStructure})
+var sRemoveCustomRoutingEndpointsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveCustomRoutingEndpointsRequest, Members: &mRemoveCustomRoutingEndpointsRequest, Type: smithy.ShapeTypeStructure})
+var sRemoveEndpointsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveEndpointsRequest, Members: &mRemoveEndpointsRequest, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateAcceleratorAttributesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAcceleratorAttributesRequest, Members: &mUpdateAcceleratorAttributesRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateAcceleratorAttributesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAcceleratorAttributesResponse, Members: &mUpdateAcceleratorAttributesResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateAcceleratorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAcceleratorRequest, Members: &mUpdateAcceleratorRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateAcceleratorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAcceleratorResponse, Members: &mUpdateAcceleratorResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateCrossAccountAttachmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCrossAccountAttachmentRequest, Members: &mUpdateCrossAccountAttachmentRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateCrossAccountAttachmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCrossAccountAttachmentResponse, Members: &mUpdateCrossAccountAttachmentResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateCustomRoutingAcceleratorAttributesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCustomRoutingAcceleratorAttributesRequest, Members: &mUpdateCustomRoutingAcceleratorAttributesRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateCustomRoutingAcceleratorAttributesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCustomRoutingAcceleratorAttributesResponse, Members: &mUpdateCustomRoutingAcceleratorAttributesResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateCustomRoutingAcceleratorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCustomRoutingAcceleratorRequest, Members: &mUpdateCustomRoutingAcceleratorRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateCustomRoutingAcceleratorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCustomRoutingAcceleratorResponse, Members: &mUpdateCustomRoutingAcceleratorResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateCustomRoutingListenerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCustomRoutingListenerRequest, Members: &mUpdateCustomRoutingListenerRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateCustomRoutingListenerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCustomRoutingListenerResponse, Members: &mUpdateCustomRoutingListenerResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateEndpointGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEndpointGroupRequest, Members: &mUpdateEndpointGroupRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateEndpointGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEndpointGroupResponse, Members: &mUpdateEndpointGroupResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateListenerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateListenerRequest, Members: &mUpdateListenerRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateListenerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateListenerResponse, Members: &mUpdateListenerResponse, Type: smithy.ShapeTypeStructure})
+var sWithdrawByoipCidrRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWithdrawByoipCidrRequest, Members: &mWithdrawByoipCidrRequest, Type: smithy.ShapeTypeStructure})
+var sWithdrawByoipCidrResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWithdrawByoipCidrResponse, Members: &mWithdrawByoipCidrResponse, Type: smithy.ShapeTypeStructure})
+
+var sAccelerator_AcceleratorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcceleratorArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sAccelerator_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sAccelerator_IpAddressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddressType", ID: &iIpAddressType, Members: &mIpAddressType, Type: smithy.ShapeTypeEnum})
+var sAccelerator_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_GenericBoolean, Type: smithy.ShapeTypeBoolean})
+var sAccelerator_IpSets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpSets", ID: &i_IpSets, Members: &m_IpSets, Type: smithy.ShapeTypeList})
+var sAccelerator_DnsName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsName", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sAccelerator_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iAcceleratorStatus, Members: &mAcceleratorStatus, Type: smithy.ShapeTypeEnum})
+var sAccelerator_CreatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sAccelerator_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sAccelerator_DualStackDnsName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DualStackDnsName", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sAccelerator_Events = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Events", ID: &i_AcceleratorEvents, Members: &m_AcceleratorEvents, Type: smithy.ShapeTypeList})
+var sAcceleratorAttributes_FlowLogsEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowLogsEnabled", ID: &i_GenericBoolean, Type: smithy.ShapeTypeBoolean})
+var sAcceleratorAttributes_FlowLogsS3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowLogsS3Bucket", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sAcceleratorAttributes_FlowLogsS3Prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowLogsS3Prefix", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sAcceleratorEvent_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sAcceleratorEvent_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var s_AcceleratorEvents_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAcceleratorEvent, Members: &mAcceleratorEvent, Type: smithy.ShapeTypeStructure})
+var sAcceleratorNotDisabledException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sAcceleratorNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_Accelerators_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAccelerator, Members: &mAccelerator, Type: smithy.ShapeTypeStructure})
+var sAcceleratorStatus_DEPLOYED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPLOYED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAcceleratorStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sAssociatedEndpointGroupFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sAssociatedListenerFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sAttachment_AttachmentArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachmentArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sAttachment_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_AttachmentName, Type: smithy.ShapeTypeString})
+var sAttachment_Principals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Principals", ID: &i_Principals, Members: &m_Principals, Type: smithy.ShapeTypeList})
+var sAttachment_Resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resources", ID: &i_Resources, Members: &m_Resources, Type: smithy.ShapeTypeList})
+var sAttachment_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sAttachment_CreatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sAttachmentNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_Attachments_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAttachment, Members: &mAttachment, Type: smithy.ShapeTypeStructure})
+var s_AwsAccountIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AwsAccountId, Type: smithy.ShapeTypeString})
+var sByoipCidr_Cidr = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cidr", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sByoipCidr_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iByoipCidrState, Members: &mByoipCidrState, Type: smithy.ShapeTypeEnum})
+var sByoipCidr_Events = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Events", ID: &i_ByoipCidrEvents, Members: &m_ByoipCidrEvents, Type: smithy.ShapeTypeList})
+var sByoipCidrEvent_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sByoipCidrEvent_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var s_ByoipCidrEvents_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iByoipCidrEvent, Members: &mByoipCidrEvent, Type: smithy.ShapeTypeStructure})
+var sByoipCidrNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_ByoipCidrs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iByoipCidr, Members: &mByoipCidr, Type: smithy.ShapeTypeStructure})
+var sByoipCidrState_PENDING_PROVISIONING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_PROVISIONING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sByoipCidrState_READY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "READY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sByoipCidrState_PENDING_ADVERTISING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_ADVERTISING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sByoipCidrState_ADVERTISING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADVERTISING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sByoipCidrState_PENDING_WITHDRAWING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_WITHDRAWING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sByoipCidrState_PENDING_DEPROVISIONING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_DEPROVISIONING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sByoipCidrState_DEPROVISIONED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPROVISIONED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sByoipCidrState_FAILED_PROVISION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED_PROVISION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sByoipCidrState_FAILED_ADVERTISING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED_ADVERTISING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sByoipCidrState_FAILED_WITHDRAW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED_WITHDRAW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sByoipCidrState_FAILED_DEPROVISION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED_DEPROVISION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCidrAuthorizationContext_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sCidrAuthorizationContext_Signature = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Signature", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sClientAffinity_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sClientAffinity_SOURCE_IP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SOURCE_IP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sCrossAccountResource_EndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointId", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sCrossAccountResource_Cidr = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cidr", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sCrossAccountResource_AttachmentArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachmentArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var s_CrossAccountResources_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCrossAccountResource, Members: &mCrossAccountResource, Type: smithy.ShapeTypeStructure})
+var sCustomRoutingAccelerator_AcceleratorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcceleratorArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sCustomRoutingAccelerator_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sCustomRoutingAccelerator_IpAddressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddressType", ID: &iIpAddressType, Members: &mIpAddressType, Type: smithy.ShapeTypeEnum})
+var sCustomRoutingAccelerator_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_GenericBoolean, Type: smithy.ShapeTypeBoolean})
+var sCustomRoutingAccelerator_IpSets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpSets", ID: &i_IpSets, Members: &m_IpSets, Type: smithy.ShapeTypeList})
+var sCustomRoutingAccelerator_DnsName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsName", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sCustomRoutingAccelerator_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iCustomRoutingAcceleratorStatus, Members: &mCustomRoutingAcceleratorStatus, Type: smithy.ShapeTypeEnum})
+var sCustomRoutingAccelerator_CreatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sCustomRoutingAccelerator_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sCustomRoutingAcceleratorAttributes_FlowLogsEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowLogsEnabled", ID: &i_GenericBoolean, Type: smithy.ShapeTypeBoolean})
+var sCustomRoutingAcceleratorAttributes_FlowLogsS3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowLogsS3Bucket", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sCustomRoutingAcceleratorAttributes_FlowLogsS3Prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowLogsS3Prefix", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var s_CustomRoutingAccelerators_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCustomRoutingAccelerator, Members: &mCustomRoutingAccelerator, Type: smithy.ShapeTypeStructure})
+var sCustomRoutingAcceleratorStatus_DEPLOYED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPLOYED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCustomRoutingAcceleratorStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCustomRoutingDestinationConfiguration_FromPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FromPort", ID: &i_PortNumber, Type: smithy.ShapeTypeInteger})
+var sCustomRoutingDestinationConfiguration_ToPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ToPort", ID: &i_PortNumber, Type: smithy.ShapeTypeInteger})
+var sCustomRoutingDestinationConfiguration_Protocols = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocols", ID: &i_CustomRoutingProtocols, Members: &m_CustomRoutingProtocols, Type: smithy.ShapeTypeList})
+var s_CustomRoutingDestinationConfigurations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCustomRoutingDestinationConfiguration, Members: &mCustomRoutingDestinationConfiguration, Type: smithy.ShapeTypeStructure})
+var sCustomRoutingDestinationDescription_FromPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FromPort", ID: &i_PortNumber, Type: smithy.ShapeTypeInteger})
+var sCustomRoutingDestinationDescription_ToPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ToPort", ID: &i_PortNumber, Type: smithy.ShapeTypeInteger})
+var sCustomRoutingDestinationDescription_Protocols = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocols", ID: &i_Protocols, Members: &m_Protocols, Type: smithy.ShapeTypeList})
+var s_CustomRoutingDestinationDescriptions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCustomRoutingDestinationDescription, Members: &mCustomRoutingDestinationDescription, Type: smithy.ShapeTypeStructure})
+var sCustomRoutingDestinationTrafficState_ALLOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALLOW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCustomRoutingDestinationTrafficState_DENY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DENY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCustomRoutingEndpointConfiguration_EndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointId", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sCustomRoutingEndpointConfiguration_AttachmentArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachmentArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var s_CustomRoutingEndpointConfigurations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCustomRoutingEndpointConfiguration, Members: &mCustomRoutingEndpointConfiguration, Type: smithy.ShapeTypeStructure})
+var sCustomRoutingEndpointDescription_EndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointId", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var s_CustomRoutingEndpointDescriptions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCustomRoutingEndpointDescription, Members: &mCustomRoutingEndpointDescription, Type: smithy.ShapeTypeStructure})
+var sCustomRoutingEndpointGroup_EndpointGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointGroupArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sCustomRoutingEndpointGroup_EndpointGroupRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointGroupRegion", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sCustomRoutingEndpointGroup_DestinationDescriptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationDescriptions", ID: &i_CustomRoutingDestinationDescriptions, Members: &m_CustomRoutingDestinationDescriptions, Type: smithy.ShapeTypeList})
+var sCustomRoutingEndpointGroup_EndpointDescriptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointDescriptions", ID: &i_CustomRoutingEndpointDescriptions, Members: &m_CustomRoutingEndpointDescriptions, Type: smithy.ShapeTypeList})
+var s_CustomRoutingEndpointGroups_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCustomRoutingEndpointGroup, Members: &mCustomRoutingEndpointGroup, Type: smithy.ShapeTypeStructure})
+var sCustomRoutingListener_ListenerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListenerArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sCustomRoutingListener_PortRanges = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortRanges", ID: &i_PortRanges, Members: &m_PortRanges, Type: smithy.ShapeTypeList})
+var s_CustomRoutingListeners_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCustomRoutingListener, Members: &mCustomRoutingListener, Type: smithy.ShapeTypeStructure})
+var sCustomRoutingProtocol_TCP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TCP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCustomRoutingProtocol_UDP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UDP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_CustomRoutingProtocols_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCustomRoutingProtocol, Members: &mCustomRoutingProtocol, Type: smithy.ShapeTypeEnum})
+var s_DestinationAddresses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_IpAddress, Type: smithy.ShapeTypeString})
+var sDestinationPortMapping_AcceleratorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcceleratorArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sDestinationPortMapping_AcceleratorSocketAddresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcceleratorSocketAddresses", ID: &i_SocketAddresses, Members: &m_SocketAddresses, Type: smithy.ShapeTypeList})
+var sDestinationPortMapping_EndpointGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointGroupArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sDestinationPortMapping_EndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointId", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sDestinationPortMapping_EndpointGroupRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointGroupRegion", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sDestinationPortMapping_DestinationSocketAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationSocketAddress", ID: &iSocketAddress, Members: &mSocketAddress, Type: smithy.ShapeTypeStructure})
+var sDestinationPortMapping_IpAddressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddressType", ID: &iIpAddressType, Members: &mIpAddressType, Type: smithy.ShapeTypeEnum})
+var sDestinationPortMapping_DestinationTrafficState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationTrafficState", ID: &iCustomRoutingDestinationTrafficState, Members: &mCustomRoutingDestinationTrafficState, Type: smithy.ShapeTypeEnum})
+var s_DestinationPortMappings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDestinationPortMapping, Members: &mDestinationPortMapping, Type: smithy.ShapeTypeStructure})
+var s_DestinationPorts_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_PortNumber, Type: smithy.ShapeTypeInteger})
+var sEndpointAlreadyExistsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sEndpointConfiguration_EndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointId", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sEndpointConfiguration_Weight = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Weight", ID: &i_EndpointWeight, Type: smithy.ShapeTypeInteger})
+var sEndpointConfiguration_ClientIPPreservationEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientIPPreservationEnabled", ID: &i_GenericBoolean, Type: smithy.ShapeTypeBoolean})
+var sEndpointConfiguration_AttachmentArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachmentArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var s_EndpointConfigurations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEndpointConfiguration, Members: &mEndpointConfiguration, Type: smithy.ShapeTypeStructure})
+var sEndpointDescription_EndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointId", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sEndpointDescription_Weight = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Weight", ID: &i_EndpointWeight, Type: smithy.ShapeTypeInteger})
+var sEndpointDescription_HealthState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthState", ID: &iHealthState, Members: &mHealthState, Type: smithy.ShapeTypeEnum})
+var sEndpointDescription_HealthReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthReason", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sEndpointDescription_ClientIPPreservationEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientIPPreservationEnabled", ID: &i_GenericBoolean, Type: smithy.ShapeTypeBoolean})
+var s_EndpointDescriptions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEndpointDescription, Members: &mEndpointDescription, Type: smithy.ShapeTypeStructure})
+var sEndpointGroup_EndpointGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointGroupArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sEndpointGroup_EndpointGroupRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointGroupRegion", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sEndpointGroup_EndpointDescriptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointDescriptions", ID: &i_EndpointDescriptions, Members: &m_EndpointDescriptions, Type: smithy.ShapeTypeList})
+var sEndpointGroup_TrafficDialPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrafficDialPercentage", ID: &i_TrafficDialPercentage, Type: smithy.ShapeTypeFloat})
+var sEndpointGroup_HealthCheckPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthCheckPort", ID: &i_HealthCheckPort, Type: smithy.ShapeTypeInteger})
+var sEndpointGroup_HealthCheckProtocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthCheckProtocol", ID: &iHealthCheckProtocol, Members: &mHealthCheckProtocol, Type: smithy.ShapeTypeEnum})
+var sEndpointGroup_HealthCheckPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthCheckPath", ID: &i_HealthCheckPath, Type: smithy.ShapeTypeString})
+var sEndpointGroup_HealthCheckIntervalSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthCheckIntervalSeconds", ID: &i_HealthCheckIntervalSeconds, Type: smithy.ShapeTypeInteger})
+var sEndpointGroup_ThresholdCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThresholdCount", ID: &i_ThresholdCount, Type: smithy.ShapeTypeInteger})
+var sEndpointGroup_PortOverrides = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortOverrides", ID: &i_PortOverrides, Members: &m_PortOverrides, Type: smithy.ShapeTypeList})
+var sEndpointGroupAlreadyExistsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sEndpointGroupNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_EndpointGroups_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEndpointGroup, Members: &mEndpointGroup, Type: smithy.ShapeTypeStructure})
+var sEndpointIdentifier_EndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointId", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sEndpointIdentifier_ClientIPPreservationEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientIPPreservationEnabled", ID: &i_GenericBoolean, Type: smithy.ShapeTypeBoolean})
+var s_EndpointIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEndpointIdentifier, Members: &mEndpointIdentifier, Type: smithy.ShapeTypeStructure})
+var s_EndpointIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sEndpointNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sHealthCheckProtocol_TCP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TCP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHealthCheckProtocol_HTTP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTTP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHealthCheckProtocol_HTTPS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTTPS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHealthState_INITIAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INITIAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHealthState_HEALTHY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HEALTHY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHealthState_UNHEALTHY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNHEALTHY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIncorrectCidrStateException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInternalServiceErrorException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidArgumentException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidNextTokenException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidPortRangeException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sIpAddressDetail_IpAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddress", ID: &i_IpAddress, Type: smithy.ShapeTypeString})
+var sIpAddressDetail_NetworkZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkZone", ID: &i_NetworkZone, Type: smithy.ShapeTypeString})
+var s_IpAddressDetails_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIpAddressDetail, Members: &mIpAddressDetail, Type: smithy.ShapeTypeStructure})
+var s_IpAddresses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_IpAddress, Type: smithy.ShapeTypeString})
+var sIpAddressFamily_IPv4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPv4", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIpAddressFamily_IPv6 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPv6", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIpAddressType_IPV4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPV4", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIpAddressType_DUAL_STACK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUAL_STACK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIpSet_IpFamily = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpFamily", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sIpSet_IpAddresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddresses", ID: &i_IpAddresses, Members: &m_IpAddresses, Type: smithy.ShapeTypeList})
+var sIpSet_IpAddressFamily = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddressFamily", ID: &iIpAddressFamily, Members: &mIpAddressFamily, Type: smithy.ShapeTypeEnum})
+var sIpSet_IpAddressDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddressDetails", ID: &i_IpAddressDetails, Members: &m_IpAddressDetails, Type: smithy.ShapeTypeList})
+var s_IpSets_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIpSet, Members: &mIpSet, Type: smithy.ShapeTypeStructure})
+var sLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sListener_ListenerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListenerArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sListener_PortRanges = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortRanges", ID: &i_PortRanges, Members: &m_PortRanges, Type: smithy.ShapeTypeList})
+var sListener_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &iProtocol, Members: &mProtocol, Type: smithy.ShapeTypeEnum})
+var sListener_ClientAffinity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientAffinity", ID: &iClientAffinity, Members: &mClientAffinity, Type: smithy.ShapeTypeEnum})
+var sListenerNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_Listeners_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListener, Members: &mListener, Type: smithy.ShapeTypeStructure})
+var sPortMapping_AcceleratorPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcceleratorPort", ID: &i_PortNumber, Type: smithy.ShapeTypeInteger})
+var sPortMapping_EndpointGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointGroupArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sPortMapping_EndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointId", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sPortMapping_DestinationSocketAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationSocketAddress", ID: &iSocketAddress, Members: &mSocketAddress, Type: smithy.ShapeTypeStructure})
+var sPortMapping_Protocols = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocols", ID: &i_CustomRoutingProtocols, Members: &m_CustomRoutingProtocols, Type: smithy.ShapeTypeList})
+var sPortMapping_DestinationTrafficState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationTrafficState", ID: &iCustomRoutingDestinationTrafficState, Members: &mCustomRoutingDestinationTrafficState, Type: smithy.ShapeTypeEnum})
+var s_PortMappings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPortMapping, Members: &mPortMapping, Type: smithy.ShapeTypeStructure})
+var sPortOverride_ListenerPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListenerPort", ID: &i_PortNumber, Type: smithy.ShapeTypeInteger})
+var sPortOverride_EndpointPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointPort", ID: &i_PortNumber, Type: smithy.ShapeTypeInteger})
+var s_PortOverrides_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPortOverride, Members: &mPortOverride, Type: smithy.ShapeTypeStructure})
+var sPortRange_FromPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FromPort", ID: &i_PortNumber, Type: smithy.ShapeTypeInteger})
+var sPortRange_ToPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ToPort", ID: &i_PortNumber, Type: smithy.ShapeTypeInteger})
+var s_PortRanges_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPortRange, Members: &mPortRange, Type: smithy.ShapeTypeStructure})
+var s_Principals_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Principal, Type: smithy.ShapeTypeString})
+var sProtocol_TCP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TCP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sProtocol_UDP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UDP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_Protocols_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProtocol, Members: &mProtocol, Type: smithy.ShapeTypeEnum})
+var sResource_EndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointId", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sResource_Cidr = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cidr", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sResource_Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Region", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var s_Resources_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResource, Members: &mResource, Type: smithy.ShapeTypeStructure})
+var sSocketAddress_IpAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddress", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sSocketAddress_Port = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Port", ID: &i_PortNumber, Type: smithy.ShapeTypeInteger})
+var s_SocketAddresses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSocketAddress, Members: &mSocketAddress, Type: smithy.ShapeTypeStructure})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_TagKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_Tags_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var sTransactionInProgressException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sAddCustomRoutingEndpointsRequest_EndpointConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointConfigurations", ID: &i_CustomRoutingEndpointConfigurations, Members: &m_CustomRoutingEndpointConfigurations, Type: smithy.ShapeTypeList})
+var sAddCustomRoutingEndpointsRequest_EndpointGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointGroupArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sAddCustomRoutingEndpointsResponse_EndpointDescriptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointDescriptions", ID: &i_CustomRoutingEndpointDescriptions, Members: &m_CustomRoutingEndpointDescriptions, Type: smithy.ShapeTypeList})
+var sAddCustomRoutingEndpointsResponse_EndpointGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointGroupArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sAddEndpointsRequest_EndpointConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointConfigurations", ID: &i_EndpointConfigurations, Members: &m_EndpointConfigurations, Type: smithy.ShapeTypeList})
+var sAddEndpointsRequest_EndpointGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointGroupArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sAddEndpointsResponse_EndpointDescriptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointDescriptions", ID: &i_EndpointDescriptions, Members: &m_EndpointDescriptions, Type: smithy.ShapeTypeList})
+var sAddEndpointsResponse_EndpointGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointGroupArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sAdvertiseByoipCidrRequest_Cidr = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cidr", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sAdvertiseByoipCidrResponse_ByoipCidr = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ByoipCidr", ID: &iByoipCidr, Members: &mByoipCidr, Type: smithy.ShapeTypeStructure})
+var sAllowCustomRoutingTrafficRequest_EndpointGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointGroupArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sAllowCustomRoutingTrafficRequest_EndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointId", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sAllowCustomRoutingTrafficRequest_DestinationAddresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationAddresses", ID: &i_DestinationAddresses, Members: &m_DestinationAddresses, Type: smithy.ShapeTypeList})
+var sAllowCustomRoutingTrafficRequest_DestinationPorts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationPorts", ID: &i_DestinationPorts, Members: &m_DestinationPorts, Type: smithy.ShapeTypeList})
+var sAllowCustomRoutingTrafficRequest_AllowAllTrafficToEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllowAllTrafficToEndpoint", ID: &i_GenericBoolean, Type: smithy.ShapeTypeBoolean})
+var sCreateAcceleratorRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sCreateAcceleratorRequest_IpAddressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddressType", ID: &iIpAddressType, Members: &mIpAddressType, Type: smithy.ShapeTypeEnum})
+var sCreateAcceleratorRequest_IpAddresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddresses", ID: &i_IpAddresses, Members: &m_IpAddresses, Type: smithy.ShapeTypeList})
+var sCreateAcceleratorRequest_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_GenericBoolean, Type: smithy.ShapeTypeBoolean})
+var sCreateAcceleratorRequest_IdempotencyToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdempotencyToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString})
+var sCreateAcceleratorRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sCreateAcceleratorResponse_Accelerator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Accelerator", ID: &iAccelerator, Members: &mAccelerator, Type: smithy.ShapeTypeStructure})
+var sCreateCrossAccountAttachmentRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_AttachmentName, Type: smithy.ShapeTypeString})
+var sCreateCrossAccountAttachmentRequest_Principals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Principals", ID: &i_Principals, Members: &m_Principals, Type: smithy.ShapeTypeList})
+var sCreateCrossAccountAttachmentRequest_Resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resources", ID: &i_Resources, Members: &m_Resources, Type: smithy.ShapeTypeList})
+var sCreateCrossAccountAttachmentRequest_IdempotencyToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdempotencyToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString})
+var sCreateCrossAccountAttachmentRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sCreateCrossAccountAttachmentResponse_CrossAccountAttachment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CrossAccountAttachment", ID: &iAttachment, Members: &mAttachment, Type: smithy.ShapeTypeStructure})
+var sCreateCustomRoutingAcceleratorRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sCreateCustomRoutingAcceleratorRequest_IpAddressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddressType", ID: &iIpAddressType, Members: &mIpAddressType, Type: smithy.ShapeTypeEnum})
+var sCreateCustomRoutingAcceleratorRequest_IpAddresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddresses", ID: &i_IpAddresses, Members: &m_IpAddresses, Type: smithy.ShapeTypeList})
+var sCreateCustomRoutingAcceleratorRequest_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_GenericBoolean, Type: smithy.ShapeTypeBoolean})
+var sCreateCustomRoutingAcceleratorRequest_IdempotencyToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdempotencyToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString})
+var sCreateCustomRoutingAcceleratorRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sCreateCustomRoutingAcceleratorResponse_Accelerator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Accelerator", ID: &iCustomRoutingAccelerator, Members: &mCustomRoutingAccelerator, Type: smithy.ShapeTypeStructure})
+var sCreateCustomRoutingEndpointGroupRequest_ListenerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListenerArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sCreateCustomRoutingEndpointGroupRequest_EndpointGroupRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointGroupRegion", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sCreateCustomRoutingEndpointGroupRequest_DestinationConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationConfigurations", ID: &i_CustomRoutingDestinationConfigurations, Members: &m_CustomRoutingDestinationConfigurations, Type: smithy.ShapeTypeList})
+var sCreateCustomRoutingEndpointGroupRequest_IdempotencyToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdempotencyToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString})
+var sCreateCustomRoutingEndpointGroupResponse_EndpointGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointGroup", ID: &iCustomRoutingEndpointGroup, Members: &mCustomRoutingEndpointGroup, Type: smithy.ShapeTypeStructure})
+var sCreateCustomRoutingListenerRequest_AcceleratorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcceleratorArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sCreateCustomRoutingListenerRequest_PortRanges = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortRanges", ID: &i_PortRanges, Members: &m_PortRanges, Type: smithy.ShapeTypeList})
+var sCreateCustomRoutingListenerRequest_IdempotencyToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdempotencyToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString})
+var sCreateCustomRoutingListenerResponse_Listener = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Listener", ID: &iCustomRoutingListener, Members: &mCustomRoutingListener, Type: smithy.ShapeTypeStructure})
+var sCreateEndpointGroupRequest_ListenerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListenerArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sCreateEndpointGroupRequest_EndpointGroupRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointGroupRegion", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sCreateEndpointGroupRequest_EndpointConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointConfigurations", ID: &i_EndpointConfigurations, Members: &m_EndpointConfigurations, Type: smithy.ShapeTypeList})
+var sCreateEndpointGroupRequest_TrafficDialPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrafficDialPercentage", ID: &i_TrafficDialPercentage, Type: smithy.ShapeTypeFloat})
+var sCreateEndpointGroupRequest_HealthCheckPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthCheckPort", ID: &i_HealthCheckPort, Type: smithy.ShapeTypeInteger})
+var sCreateEndpointGroupRequest_HealthCheckProtocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthCheckProtocol", ID: &iHealthCheckProtocol, Members: &mHealthCheckProtocol, Type: smithy.ShapeTypeEnum})
+var sCreateEndpointGroupRequest_HealthCheckPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthCheckPath", ID: &i_HealthCheckPath, Type: smithy.ShapeTypeString})
+var sCreateEndpointGroupRequest_HealthCheckIntervalSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthCheckIntervalSeconds", ID: &i_HealthCheckIntervalSeconds, Type: smithy.ShapeTypeInteger})
+var sCreateEndpointGroupRequest_ThresholdCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThresholdCount", ID: &i_ThresholdCount, Type: smithy.ShapeTypeInteger})
+var sCreateEndpointGroupRequest_IdempotencyToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdempotencyToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString})
+var sCreateEndpointGroupRequest_PortOverrides = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortOverrides", ID: &i_PortOverrides, Members: &m_PortOverrides, Type: smithy.ShapeTypeList})
+var sCreateEndpointGroupResponse_EndpointGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointGroup", ID: &iEndpointGroup, Members: &mEndpointGroup, Type: smithy.ShapeTypeStructure})
+var sCreateListenerRequest_AcceleratorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcceleratorArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sCreateListenerRequest_PortRanges = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortRanges", ID: &i_PortRanges, Members: &m_PortRanges, Type: smithy.ShapeTypeList})
+var sCreateListenerRequest_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &iProtocol, Members: &mProtocol, Type: smithy.ShapeTypeEnum})
+var sCreateListenerRequest_ClientAffinity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientAffinity", ID: &iClientAffinity, Members: &mClientAffinity, Type: smithy.ShapeTypeEnum})
+var sCreateListenerRequest_IdempotencyToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdempotencyToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString})
+var sCreateListenerResponse_Listener = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Listener", ID: &iListener, Members: &mListener, Type: smithy.ShapeTypeStructure})
+var sDeleteAcceleratorRequest_AcceleratorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcceleratorArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sDeleteCrossAccountAttachmentRequest_AttachmentArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachmentArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sDeleteCustomRoutingAcceleratorRequest_AcceleratorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcceleratorArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sDeleteCustomRoutingEndpointGroupRequest_EndpointGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointGroupArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sDeleteCustomRoutingListenerRequest_ListenerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListenerArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sDeleteEndpointGroupRequest_EndpointGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointGroupArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sDeleteListenerRequest_ListenerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListenerArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sDenyCustomRoutingTrafficRequest_EndpointGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointGroupArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sDenyCustomRoutingTrafficRequest_EndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointId", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sDenyCustomRoutingTrafficRequest_DestinationAddresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationAddresses", ID: &i_DestinationAddresses, Members: &m_DestinationAddresses, Type: smithy.ShapeTypeList})
+var sDenyCustomRoutingTrafficRequest_DestinationPorts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationPorts", ID: &i_DestinationPorts, Members: &m_DestinationPorts, Type: smithy.ShapeTypeList})
+var sDenyCustomRoutingTrafficRequest_DenyAllTrafficToEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DenyAllTrafficToEndpoint", ID: &i_GenericBoolean, Type: smithy.ShapeTypeBoolean})
+var sDeprovisionByoipCidrRequest_Cidr = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cidr", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sDeprovisionByoipCidrResponse_ByoipCidr = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ByoipCidr", ID: &iByoipCidr, Members: &mByoipCidr, Type: smithy.ShapeTypeStructure})
+var sDescribeAcceleratorAttributesRequest_AcceleratorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcceleratorArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sDescribeAcceleratorAttributesResponse_AcceleratorAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcceleratorAttributes", ID: &iAcceleratorAttributes, Members: &mAcceleratorAttributes, Type: smithy.ShapeTypeStructure})
+var sDescribeAcceleratorRequest_AcceleratorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcceleratorArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sDescribeAcceleratorResponse_Accelerator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Accelerator", ID: &iAccelerator, Members: &mAccelerator, Type: smithy.ShapeTypeStructure})
+var sDescribeCrossAccountAttachmentRequest_AttachmentArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachmentArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sDescribeCrossAccountAttachmentResponse_CrossAccountAttachment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CrossAccountAttachment", ID: &iAttachment, Members: &mAttachment, Type: smithy.ShapeTypeStructure})
+var sDescribeCustomRoutingAcceleratorAttributesRequest_AcceleratorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcceleratorArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sDescribeCustomRoutingAcceleratorAttributesResponse_AcceleratorAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcceleratorAttributes", ID: &iCustomRoutingAcceleratorAttributes, Members: &mCustomRoutingAcceleratorAttributes, Type: smithy.ShapeTypeStructure})
+var sDescribeCustomRoutingAcceleratorRequest_AcceleratorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcceleratorArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sDescribeCustomRoutingAcceleratorResponse_Accelerator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Accelerator", ID: &iCustomRoutingAccelerator, Members: &mCustomRoutingAccelerator, Type: smithy.ShapeTypeStructure})
+var sDescribeCustomRoutingEndpointGroupRequest_EndpointGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointGroupArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sDescribeCustomRoutingEndpointGroupResponse_EndpointGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointGroup", ID: &iCustomRoutingEndpointGroup, Members: &mCustomRoutingEndpointGroup, Type: smithy.ShapeTypeStructure})
+var sDescribeCustomRoutingListenerRequest_ListenerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListenerArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sDescribeCustomRoutingListenerResponse_Listener = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Listener", ID: &iCustomRoutingListener, Members: &mCustomRoutingListener, Type: smithy.ShapeTypeStructure})
+var sDescribeEndpointGroupRequest_EndpointGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointGroupArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sDescribeEndpointGroupResponse_EndpointGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointGroup", ID: &iEndpointGroup, Members: &mEndpointGroup, Type: smithy.ShapeTypeStructure})
+var sDescribeListenerRequest_ListenerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListenerArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sDescribeListenerResponse_Listener = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Listener", ID: &iListener, Members: &mListener, Type: smithy.ShapeTypeStructure})
+var sListAcceleratorsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListAcceleratorsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sListAcceleratorsResponse_Accelerators = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Accelerators", ID: &i_Accelerators, Members: &m_Accelerators, Type: smithy.ShapeTypeList})
+var sListAcceleratorsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sListByoipCidrsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListByoipCidrsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sListByoipCidrsResponse_ByoipCidrs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ByoipCidrs", ID: &i_ByoipCidrs, Members: &m_ByoipCidrs, Type: smithy.ShapeTypeList})
+var sListByoipCidrsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sListCrossAccountAttachmentsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListCrossAccountAttachmentsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sListCrossAccountAttachmentsResponse_CrossAccountAttachments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CrossAccountAttachments", ID: &i_Attachments, Members: &m_Attachments, Type: smithy.ShapeTypeList})
+var sListCrossAccountAttachmentsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sListCrossAccountResourceAccountsResponse_ResourceOwnerAwsAccountIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceOwnerAwsAccountIds", ID: &i_AwsAccountIds, Members: &m_AwsAccountIds, Type: smithy.ShapeTypeList})
+var sListCrossAccountResourcesRequest_AcceleratorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcceleratorArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sListCrossAccountResourcesRequest_ResourceOwnerAwsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceOwnerAwsAccountId", ID: &i_AwsAccountId, Type: smithy.ShapeTypeString})
+var sListCrossAccountResourcesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListCrossAccountResourcesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sListCrossAccountResourcesResponse_CrossAccountResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CrossAccountResources", ID: &i_CrossAccountResources, Members: &m_CrossAccountResources, Type: smithy.ShapeTypeList})
+var sListCrossAccountResourcesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sListCustomRoutingAcceleratorsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListCustomRoutingAcceleratorsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sListCustomRoutingAcceleratorsResponse_Accelerators = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Accelerators", ID: &i_CustomRoutingAccelerators, Members: &m_CustomRoutingAccelerators, Type: smithy.ShapeTypeList})
+var sListCustomRoutingAcceleratorsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sListCustomRoutingEndpointGroupsRequest_ListenerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListenerArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sListCustomRoutingEndpointGroupsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListCustomRoutingEndpointGroupsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sListCustomRoutingEndpointGroupsResponse_EndpointGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointGroups", ID: &i_CustomRoutingEndpointGroups, Members: &m_CustomRoutingEndpointGroups, Type: smithy.ShapeTypeList})
+var sListCustomRoutingEndpointGroupsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sListCustomRoutingListenersRequest_AcceleratorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcceleratorArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sListCustomRoutingListenersRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListCustomRoutingListenersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sListCustomRoutingListenersResponse_Listeners = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Listeners", ID: &i_CustomRoutingListeners, Members: &m_CustomRoutingListeners, Type: smithy.ShapeTypeList})
+var sListCustomRoutingListenersResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sListCustomRoutingPortMappingsByDestinationRequest_EndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointId", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sListCustomRoutingPortMappingsByDestinationRequest_DestinationAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationAddress", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sListCustomRoutingPortMappingsByDestinationRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PortMappingsMaxResults, Type: smithy.ShapeTypeInteger})
+var sListCustomRoutingPortMappingsByDestinationRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sListCustomRoutingPortMappingsByDestinationResponse_DestinationPortMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationPortMappings", ID: &i_DestinationPortMappings, Members: &m_DestinationPortMappings, Type: smithy.ShapeTypeList})
+var sListCustomRoutingPortMappingsByDestinationResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sListCustomRoutingPortMappingsRequest_AcceleratorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcceleratorArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sListCustomRoutingPortMappingsRequest_EndpointGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointGroupArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sListCustomRoutingPortMappingsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PortMappingsMaxResults, Type: smithy.ShapeTypeInteger})
+var sListCustomRoutingPortMappingsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sListCustomRoutingPortMappingsResponse_PortMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortMappings", ID: &i_PortMappings, Members: &m_PortMappings, Type: smithy.ShapeTypeList})
+var sListCustomRoutingPortMappingsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sListEndpointGroupsRequest_ListenerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListenerArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sListEndpointGroupsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListEndpointGroupsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sListEndpointGroupsResponse_EndpointGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointGroups", ID: &i_EndpointGroups, Members: &m_EndpointGroups, Type: smithy.ShapeTypeList})
+var sListEndpointGroupsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sListListenersRequest_AcceleratorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcceleratorArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sListListenersRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListListenersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sListListenersResponse_Listeners = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Listeners", ID: &i_Listeners, Members: &m_Listeners, Type: smithy.ShapeTypeList})
+var sListListenersResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sProvisionByoipCidrRequest_Cidr = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cidr", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sProvisionByoipCidrRequest_CidrAuthorizationContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CidrAuthorizationContext", ID: &iCidrAuthorizationContext, Members: &mCidrAuthorizationContext, Type: smithy.ShapeTypeStructure})
+var sProvisionByoipCidrResponse_ByoipCidr = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ByoipCidr", ID: &iByoipCidr, Members: &mByoipCidr, Type: smithy.ShapeTypeStructure})
+var sRemoveCustomRoutingEndpointsRequest_EndpointIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointIds", ID: &i_EndpointIds, Members: &m_EndpointIds, Type: smithy.ShapeTypeList})
+var sRemoveCustomRoutingEndpointsRequest_EndpointGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointGroupArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sRemoveEndpointsRequest_EndpointIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointIdentifiers", ID: &i_EndpointIdentifiers, Members: &m_EndpointIdentifiers, Type: smithy.ShapeTypeList})
+var sRemoveEndpointsRequest_EndpointGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointGroupArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeys, Members: &m_TagKeys, Type: smithy.ShapeTypeList})
+var sUpdateAcceleratorAttributesRequest_AcceleratorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcceleratorArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sUpdateAcceleratorAttributesRequest_FlowLogsEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowLogsEnabled", ID: &i_GenericBoolean, Type: smithy.ShapeTypeBoolean})
+var sUpdateAcceleratorAttributesRequest_FlowLogsS3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowLogsS3Bucket", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sUpdateAcceleratorAttributesRequest_FlowLogsS3Prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowLogsS3Prefix", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sUpdateAcceleratorAttributesResponse_AcceleratorAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcceleratorAttributes", ID: &iAcceleratorAttributes, Members: &mAcceleratorAttributes, Type: smithy.ShapeTypeStructure})
+var sUpdateAcceleratorRequest_AcceleratorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcceleratorArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sUpdateAcceleratorRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sUpdateAcceleratorRequest_IpAddressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddressType", ID: &iIpAddressType, Members: &mIpAddressType, Type: smithy.ShapeTypeEnum})
+var sUpdateAcceleratorRequest_IpAddresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddresses", ID: &i_IpAddresses, Members: &m_IpAddresses, Type: smithy.ShapeTypeList})
+var sUpdateAcceleratorRequest_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_GenericBoolean, Type: smithy.ShapeTypeBoolean})
+var sUpdateAcceleratorResponse_Accelerator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Accelerator", ID: &iAccelerator, Members: &mAccelerator, Type: smithy.ShapeTypeStructure})
+var sUpdateCrossAccountAttachmentRequest_AttachmentArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachmentArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sUpdateCrossAccountAttachmentRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_AttachmentName, Type: smithy.ShapeTypeString})
+var sUpdateCrossAccountAttachmentRequest_AddPrincipals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddPrincipals", ID: &i_Principals, Members: &m_Principals, Type: smithy.ShapeTypeList})
+var sUpdateCrossAccountAttachmentRequest_RemovePrincipals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemovePrincipals", ID: &i_Principals, Members: &m_Principals, Type: smithy.ShapeTypeList})
+var sUpdateCrossAccountAttachmentRequest_AddResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddResources", ID: &i_Resources, Members: &m_Resources, Type: smithy.ShapeTypeList})
+var sUpdateCrossAccountAttachmentRequest_RemoveResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemoveResources", ID: &i_Resources, Members: &m_Resources, Type: smithy.ShapeTypeList})
+var sUpdateCrossAccountAttachmentResponse_CrossAccountAttachment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CrossAccountAttachment", ID: &iAttachment, Members: &mAttachment, Type: smithy.ShapeTypeStructure})
+var sUpdateCustomRoutingAcceleratorAttributesRequest_AcceleratorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcceleratorArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sUpdateCustomRoutingAcceleratorAttributesRequest_FlowLogsEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowLogsEnabled", ID: &i_GenericBoolean, Type: smithy.ShapeTypeBoolean})
+var sUpdateCustomRoutingAcceleratorAttributesRequest_FlowLogsS3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowLogsS3Bucket", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sUpdateCustomRoutingAcceleratorAttributesRequest_FlowLogsS3Prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowLogsS3Prefix", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sUpdateCustomRoutingAcceleratorAttributesResponse_AcceleratorAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcceleratorAttributes", ID: &iCustomRoutingAcceleratorAttributes, Members: &mCustomRoutingAcceleratorAttributes, Type: smithy.ShapeTypeStructure})
+var sUpdateCustomRoutingAcceleratorRequest_AcceleratorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcceleratorArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sUpdateCustomRoutingAcceleratorRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sUpdateCustomRoutingAcceleratorRequest_IpAddressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddressType", ID: &iIpAddressType, Members: &mIpAddressType, Type: smithy.ShapeTypeEnum})
+var sUpdateCustomRoutingAcceleratorRequest_IpAddresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddresses", ID: &i_IpAddresses, Members: &m_IpAddresses, Type: smithy.ShapeTypeList})
+var sUpdateCustomRoutingAcceleratorRequest_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_GenericBoolean, Type: smithy.ShapeTypeBoolean})
+var sUpdateCustomRoutingAcceleratorResponse_Accelerator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Accelerator", ID: &iCustomRoutingAccelerator, Members: &mCustomRoutingAccelerator, Type: smithy.ShapeTypeStructure})
+var sUpdateCustomRoutingListenerRequest_ListenerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListenerArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sUpdateCustomRoutingListenerRequest_PortRanges = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortRanges", ID: &i_PortRanges, Members: &m_PortRanges, Type: smithy.ShapeTypeList})
+var sUpdateCustomRoutingListenerResponse_Listener = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Listener", ID: &iCustomRoutingListener, Members: &mCustomRoutingListener, Type: smithy.ShapeTypeStructure})
+var sUpdateEndpointGroupRequest_EndpointGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointGroupArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sUpdateEndpointGroupRequest_EndpointConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointConfigurations", ID: &i_EndpointConfigurations, Members: &m_EndpointConfigurations, Type: smithy.ShapeTypeList})
+var sUpdateEndpointGroupRequest_TrafficDialPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrafficDialPercentage", ID: &i_TrafficDialPercentage, Type: smithy.ShapeTypeFloat})
+var sUpdateEndpointGroupRequest_HealthCheckPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthCheckPort", ID: &i_HealthCheckPort, Type: smithy.ShapeTypeInteger})
+var sUpdateEndpointGroupRequest_HealthCheckProtocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthCheckProtocol", ID: &iHealthCheckProtocol, Members: &mHealthCheckProtocol, Type: smithy.ShapeTypeEnum})
+var sUpdateEndpointGroupRequest_HealthCheckPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthCheckPath", ID: &i_HealthCheckPath, Type: smithy.ShapeTypeString})
+var sUpdateEndpointGroupRequest_HealthCheckIntervalSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthCheckIntervalSeconds", ID: &i_HealthCheckIntervalSeconds, Type: smithy.ShapeTypeInteger})
+var sUpdateEndpointGroupRequest_ThresholdCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThresholdCount", ID: &i_ThresholdCount, Type: smithy.ShapeTypeInteger})
+var sUpdateEndpointGroupRequest_PortOverrides = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortOverrides", ID: &i_PortOverrides, Members: &m_PortOverrides, Type: smithy.ShapeTypeList})
+var sUpdateEndpointGroupResponse_EndpointGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointGroup", ID: &iEndpointGroup, Members: &mEndpointGroup, Type: smithy.ShapeTypeStructure})
+var sUpdateListenerRequest_ListenerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListenerArn", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sUpdateListenerRequest_PortRanges = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortRanges", ID: &i_PortRanges, Members: &m_PortRanges, Type: smithy.ShapeTypeList})
+var sUpdateListenerRequest_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &iProtocol, Members: &mProtocol, Type: smithy.ShapeTypeEnum})
+var sUpdateListenerRequest_ClientAffinity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientAffinity", ID: &iClientAffinity, Members: &mClientAffinity, Type: smithy.ShapeTypeEnum})
+var sUpdateListenerResponse_Listener = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Listener", ID: &iListener, Members: &mListener, Type: smithy.ShapeTypeStructure})
+var sWithdrawByoipCidrRequest_Cidr = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cidr", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sWithdrawByoipCidrResponse_ByoipCidr = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ByoipCidr", ID: &iByoipCidr, Members: &mByoipCidr, Type: smithy.ShapeTypeStructure})
+
+var AddCustomRoutingEndpoints = &sAddCustomRoutingEndpoints
+
+var AddEndpoints = &sAddEndpoints
+
+var AdvertiseByoipCidr = &sAdvertiseByoipCidr
+
+var AllowCustomRoutingTraffic = &sAllowCustomRoutingTraffic
+
+var CreateAccelerator = &sCreateAccelerator
+
+var CreateCrossAccountAttachment = &sCreateCrossAccountAttachment
+
+var CreateCustomRoutingAccelerator = &sCreateCustomRoutingAccelerator
+
+var CreateCustomRoutingEndpointGroup = &sCreateCustomRoutingEndpointGroup
+
+var CreateCustomRoutingListener = &sCreateCustomRoutingListener
+
+var CreateEndpointGroup = &sCreateEndpointGroup
+
+var CreateListener = &sCreateListener
+
+var DeleteAccelerator = &sDeleteAccelerator
+
+var DeleteCrossAccountAttachment = &sDeleteCrossAccountAttachment
+
+var DeleteCustomRoutingAccelerator = &sDeleteCustomRoutingAccelerator
+
+var DeleteCustomRoutingEndpointGroup = &sDeleteCustomRoutingEndpointGroup
+
+var DeleteCustomRoutingListener = &sDeleteCustomRoutingListener
+
+var DeleteEndpointGroup = &sDeleteEndpointGroup
+
+var DeleteListener = &sDeleteListener
+
+var DenyCustomRoutingTraffic = &sDenyCustomRoutingTraffic
+
+var DeprovisionByoipCidr = &sDeprovisionByoipCidr
+
+var DescribeAccelerator = &sDescribeAccelerator
+
+var DescribeAcceleratorAttributes = &sDescribeAcceleratorAttributes
+
+var DescribeCrossAccountAttachment = &sDescribeCrossAccountAttachment
+
+var DescribeCustomRoutingAccelerator = &sDescribeCustomRoutingAccelerator
+
+var DescribeCustomRoutingAcceleratorAttributes = &sDescribeCustomRoutingAcceleratorAttributes
+
+var DescribeCustomRoutingEndpointGroup = &sDescribeCustomRoutingEndpointGroup
+
+var DescribeCustomRoutingListener = &sDescribeCustomRoutingListener
+
+var DescribeEndpointGroup = &sDescribeEndpointGroup
+
+var DescribeListener = &sDescribeListener
+
+var ListAccelerators = &sListAccelerators
+
+var ListByoipCidrs = &sListByoipCidrs
+
+var ListCrossAccountAttachments = &sListCrossAccountAttachments
+
+var ListCrossAccountResourceAccounts = &sListCrossAccountResourceAccounts
+
+var ListCrossAccountResources = &sListCrossAccountResources
+
+var ListCustomRoutingAccelerators = &sListCustomRoutingAccelerators
+
+var ListCustomRoutingEndpointGroups = &sListCustomRoutingEndpointGroups
+
+var ListCustomRoutingListeners = &sListCustomRoutingListeners
+
+var ListCustomRoutingPortMappings = &sListCustomRoutingPortMappings
+
+var ListCustomRoutingPortMappingsByDestination = &sListCustomRoutingPortMappingsByDestination
+
+var ListEndpointGroups = &sListEndpointGroups
+
+var ListListeners = &sListListeners
+
+var ListTagsForResource = &sListTagsForResource
+
+var ProvisionByoipCidr = &sProvisionByoipCidr
+
+var RemoveCustomRoutingEndpoints = &sRemoveCustomRoutingEndpoints
+
+var RemoveEndpoints = &sRemoveEndpoints
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateAccelerator = &sUpdateAccelerator
+
+var UpdateAcceleratorAttributes = &sUpdateAcceleratorAttributes
+
+var UpdateCrossAccountAttachment = &sUpdateCrossAccountAttachment
+
+var UpdateCustomRoutingAccelerator = &sUpdateCustomRoutingAccelerator
+
+var UpdateCustomRoutingAcceleratorAttributes = &sUpdateCustomRoutingAcceleratorAttributes
+
+var UpdateCustomRoutingListener = &sUpdateCustomRoutingListener
+
+var UpdateEndpointGroup = &sUpdateEndpointGroup
+
+var UpdateListener = &sUpdateListener
+
+var WithdrawByoipCidr = &sWithdrawByoipCidr
+
+var _GlobalAccelerator_V20180706 = &s_GlobalAccelerator_V20180706
+
+var Accelerator = &sAccelerator
+var Accelerator_AcceleratorArn = &sAccelerator_AcceleratorArn
+var Accelerator_Name = &sAccelerator_Name
+var Accelerator_IpAddressType = &sAccelerator_IpAddressType
+var Accelerator_Enabled = &sAccelerator_Enabled
+var Accelerator_IpSets = &sAccelerator_IpSets
+var Accelerator_DnsName = &sAccelerator_DnsName
+var Accelerator_Status = &sAccelerator_Status
+var Accelerator_CreatedTime = &sAccelerator_CreatedTime
+var Accelerator_LastModifiedTime = &sAccelerator_LastModifiedTime
+var Accelerator_DualStackDnsName = &sAccelerator_DualStackDnsName
+var Accelerator_Events = &sAccelerator_Events
+
+var AcceleratorAttributes = &sAcceleratorAttributes
+var AcceleratorAttributes_FlowLogsEnabled = &sAcceleratorAttributes_FlowLogsEnabled
+var AcceleratorAttributes_FlowLogsS3Bucket = &sAcceleratorAttributes_FlowLogsS3Bucket
+var AcceleratorAttributes_FlowLogsS3Prefix = &sAcceleratorAttributes_FlowLogsS3Prefix
+
+var AcceleratorEvent = &sAcceleratorEvent
+var AcceleratorEvent_Message = &sAcceleratorEvent_Message
+var AcceleratorEvent_Timestamp = &sAcceleratorEvent_Timestamp
+
+var _AcceleratorEvents = &s_AcceleratorEvents
+var _AcceleratorEvents_member = &s_AcceleratorEvents_member
+
+var AcceleratorNotDisabledException = &sAcceleratorNotDisabledException
+var AcceleratorNotDisabledException_Message = &sAcceleratorNotDisabledException_Message
+
+var AcceleratorNotFoundException = &sAcceleratorNotFoundException
+var AcceleratorNotFoundException_Message = &sAcceleratorNotFoundException_Message
+
+var _Accelerators = &s_Accelerators
+var _Accelerators_member = &s_Accelerators_member
+
+var AcceleratorStatus = &sAcceleratorStatus
+var AcceleratorStatus_DEPLOYED = &sAcceleratorStatus_DEPLOYED
+var AcceleratorStatus_IN_PROGRESS = &sAcceleratorStatus_IN_PROGRESS
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_Message = &sAccessDeniedException_Message
+
+var AssociatedEndpointGroupFoundException = &sAssociatedEndpointGroupFoundException
+var AssociatedEndpointGroupFoundException_Message = &sAssociatedEndpointGroupFoundException_Message
+
+var AssociatedListenerFoundException = &sAssociatedListenerFoundException
+var AssociatedListenerFoundException_Message = &sAssociatedListenerFoundException_Message
+
+var Attachment = &sAttachment
+var Attachment_AttachmentArn = &sAttachment_AttachmentArn
+var Attachment_Name = &sAttachment_Name
+var Attachment_Principals = &sAttachment_Principals
+var Attachment_Resources = &sAttachment_Resources
+var Attachment_LastModifiedTime = &sAttachment_LastModifiedTime
+var Attachment_CreatedTime = &sAttachment_CreatedTime
+
+var _AttachmentName = &s_AttachmentName
+
+var AttachmentNotFoundException = &sAttachmentNotFoundException
+var AttachmentNotFoundException_Message = &sAttachmentNotFoundException_Message
+
+var _Attachments = &s_Attachments
+var _Attachments_member = &s_Attachments_member
+
+var _AwsAccountId = &s_AwsAccountId
+
+var _AwsAccountIds = &s_AwsAccountIds
+var _AwsAccountIds_member = &s_AwsAccountIds_member
+
+var ByoipCidr = &sByoipCidr
+var ByoipCidr_Cidr = &sByoipCidr_Cidr
+var ByoipCidr_State = &sByoipCidr_State
+var ByoipCidr_Events = &sByoipCidr_Events
+
+var ByoipCidrEvent = &sByoipCidrEvent
+var ByoipCidrEvent_Message = &sByoipCidrEvent_Message
+var ByoipCidrEvent_Timestamp = &sByoipCidrEvent_Timestamp
+
+var _ByoipCidrEvents = &s_ByoipCidrEvents
+var _ByoipCidrEvents_member = &s_ByoipCidrEvents_member
+
+var ByoipCidrNotFoundException = &sByoipCidrNotFoundException
+var ByoipCidrNotFoundException_Message = &sByoipCidrNotFoundException_Message
+
+var _ByoipCidrs = &s_ByoipCidrs
+var _ByoipCidrs_member = &s_ByoipCidrs_member
+
+var ByoipCidrState = &sByoipCidrState
+var ByoipCidrState_PENDING_PROVISIONING = &sByoipCidrState_PENDING_PROVISIONING
+var ByoipCidrState_READY = &sByoipCidrState_READY
+var ByoipCidrState_PENDING_ADVERTISING = &sByoipCidrState_PENDING_ADVERTISING
+var ByoipCidrState_ADVERTISING = &sByoipCidrState_ADVERTISING
+var ByoipCidrState_PENDING_WITHDRAWING = &sByoipCidrState_PENDING_WITHDRAWING
+var ByoipCidrState_PENDING_DEPROVISIONING = &sByoipCidrState_PENDING_DEPROVISIONING
+var ByoipCidrState_DEPROVISIONED = &sByoipCidrState_DEPROVISIONED
+var ByoipCidrState_FAILED_PROVISION = &sByoipCidrState_FAILED_PROVISION
+var ByoipCidrState_FAILED_ADVERTISING = &sByoipCidrState_FAILED_ADVERTISING
+var ByoipCidrState_FAILED_WITHDRAW = &sByoipCidrState_FAILED_WITHDRAW
+var ByoipCidrState_FAILED_DEPROVISION = &sByoipCidrState_FAILED_DEPROVISION
+
+var CidrAuthorizationContext = &sCidrAuthorizationContext
+var CidrAuthorizationContext_Message = &sCidrAuthorizationContext_Message
+var CidrAuthorizationContext_Signature = &sCidrAuthorizationContext_Signature
+
+var ClientAffinity = &sClientAffinity
+var ClientAffinity_NONE = &sClientAffinity_NONE
+var ClientAffinity_SOURCE_IP = &sClientAffinity_SOURCE_IP
+
+var ConflictException = &sConflictException
+var ConflictException_Message = &sConflictException_Message
+
+var CrossAccountResource = &sCrossAccountResource
+var CrossAccountResource_EndpointId = &sCrossAccountResource_EndpointId
+var CrossAccountResource_Cidr = &sCrossAccountResource_Cidr
+var CrossAccountResource_AttachmentArn = &sCrossAccountResource_AttachmentArn
+
+var _CrossAccountResources = &s_CrossAccountResources
+var _CrossAccountResources_member = &s_CrossAccountResources_member
+
+var CustomRoutingAccelerator = &sCustomRoutingAccelerator
+var CustomRoutingAccelerator_AcceleratorArn = &sCustomRoutingAccelerator_AcceleratorArn
+var CustomRoutingAccelerator_Name = &sCustomRoutingAccelerator_Name
+var CustomRoutingAccelerator_IpAddressType = &sCustomRoutingAccelerator_IpAddressType
+var CustomRoutingAccelerator_Enabled = &sCustomRoutingAccelerator_Enabled
+var CustomRoutingAccelerator_IpSets = &sCustomRoutingAccelerator_IpSets
+var CustomRoutingAccelerator_DnsName = &sCustomRoutingAccelerator_DnsName
+var CustomRoutingAccelerator_Status = &sCustomRoutingAccelerator_Status
+var CustomRoutingAccelerator_CreatedTime = &sCustomRoutingAccelerator_CreatedTime
+var CustomRoutingAccelerator_LastModifiedTime = &sCustomRoutingAccelerator_LastModifiedTime
+
+var CustomRoutingAcceleratorAttributes = &sCustomRoutingAcceleratorAttributes
+var CustomRoutingAcceleratorAttributes_FlowLogsEnabled = &sCustomRoutingAcceleratorAttributes_FlowLogsEnabled
+var CustomRoutingAcceleratorAttributes_FlowLogsS3Bucket = &sCustomRoutingAcceleratorAttributes_FlowLogsS3Bucket
+var CustomRoutingAcceleratorAttributes_FlowLogsS3Prefix = &sCustomRoutingAcceleratorAttributes_FlowLogsS3Prefix
+
+var _CustomRoutingAccelerators = &s_CustomRoutingAccelerators
+var _CustomRoutingAccelerators_member = &s_CustomRoutingAccelerators_member
+
+var CustomRoutingAcceleratorStatus = &sCustomRoutingAcceleratorStatus
+var CustomRoutingAcceleratorStatus_DEPLOYED = &sCustomRoutingAcceleratorStatus_DEPLOYED
+var CustomRoutingAcceleratorStatus_IN_PROGRESS = &sCustomRoutingAcceleratorStatus_IN_PROGRESS
+
+var CustomRoutingDestinationConfiguration = &sCustomRoutingDestinationConfiguration
+var CustomRoutingDestinationConfiguration_FromPort = &sCustomRoutingDestinationConfiguration_FromPort
+var CustomRoutingDestinationConfiguration_ToPort = &sCustomRoutingDestinationConfiguration_ToPort
+var CustomRoutingDestinationConfiguration_Protocols = &sCustomRoutingDestinationConfiguration_Protocols
+
+var _CustomRoutingDestinationConfigurations = &s_CustomRoutingDestinationConfigurations
+var _CustomRoutingDestinationConfigurations_member = &s_CustomRoutingDestinationConfigurations_member
+
+var CustomRoutingDestinationDescription = &sCustomRoutingDestinationDescription
+var CustomRoutingDestinationDescription_FromPort = &sCustomRoutingDestinationDescription_FromPort
+var CustomRoutingDestinationDescription_ToPort = &sCustomRoutingDestinationDescription_ToPort
+var CustomRoutingDestinationDescription_Protocols = &sCustomRoutingDestinationDescription_Protocols
+
+var _CustomRoutingDestinationDescriptions = &s_CustomRoutingDestinationDescriptions
+var _CustomRoutingDestinationDescriptions_member = &s_CustomRoutingDestinationDescriptions_member
+
+var CustomRoutingDestinationTrafficState = &sCustomRoutingDestinationTrafficState
+var CustomRoutingDestinationTrafficState_ALLOW = &sCustomRoutingDestinationTrafficState_ALLOW
+var CustomRoutingDestinationTrafficState_DENY = &sCustomRoutingDestinationTrafficState_DENY
+
+var CustomRoutingEndpointConfiguration = &sCustomRoutingEndpointConfiguration
+var CustomRoutingEndpointConfiguration_EndpointId = &sCustomRoutingEndpointConfiguration_EndpointId
+var CustomRoutingEndpointConfiguration_AttachmentArn = &sCustomRoutingEndpointConfiguration_AttachmentArn
+
+var _CustomRoutingEndpointConfigurations = &s_CustomRoutingEndpointConfigurations
+var _CustomRoutingEndpointConfigurations_member = &s_CustomRoutingEndpointConfigurations_member
+
+var CustomRoutingEndpointDescription = &sCustomRoutingEndpointDescription
+var CustomRoutingEndpointDescription_EndpointId = &sCustomRoutingEndpointDescription_EndpointId
+
+var _CustomRoutingEndpointDescriptions = &s_CustomRoutingEndpointDescriptions
+var _CustomRoutingEndpointDescriptions_member = &s_CustomRoutingEndpointDescriptions_member
+
+var CustomRoutingEndpointGroup = &sCustomRoutingEndpointGroup
+var CustomRoutingEndpointGroup_EndpointGroupArn = &sCustomRoutingEndpointGroup_EndpointGroupArn
+var CustomRoutingEndpointGroup_EndpointGroupRegion = &sCustomRoutingEndpointGroup_EndpointGroupRegion
+var CustomRoutingEndpointGroup_DestinationDescriptions = &sCustomRoutingEndpointGroup_DestinationDescriptions
+var CustomRoutingEndpointGroup_EndpointDescriptions = &sCustomRoutingEndpointGroup_EndpointDescriptions
+
+var _CustomRoutingEndpointGroups = &s_CustomRoutingEndpointGroups
+var _CustomRoutingEndpointGroups_member = &s_CustomRoutingEndpointGroups_member
+
+var CustomRoutingListener = &sCustomRoutingListener
+var CustomRoutingListener_ListenerArn = &sCustomRoutingListener_ListenerArn
+var CustomRoutingListener_PortRanges = &sCustomRoutingListener_PortRanges
+
+var _CustomRoutingListeners = &s_CustomRoutingListeners
+var _CustomRoutingListeners_member = &s_CustomRoutingListeners_member
+
+var CustomRoutingProtocol = &sCustomRoutingProtocol
+var CustomRoutingProtocol_TCP = &sCustomRoutingProtocol_TCP
+var CustomRoutingProtocol_UDP = &sCustomRoutingProtocol_UDP
+
+var _CustomRoutingProtocols = &s_CustomRoutingProtocols
+var _CustomRoutingProtocols_member = &s_CustomRoutingProtocols_member
+
+var _DestinationAddresses = &s_DestinationAddresses
+var _DestinationAddresses_member = &s_DestinationAddresses_member
+
+var DestinationPortMapping = &sDestinationPortMapping
+var DestinationPortMapping_AcceleratorArn = &sDestinationPortMapping_AcceleratorArn
+var DestinationPortMapping_AcceleratorSocketAddresses = &sDestinationPortMapping_AcceleratorSocketAddresses
+var DestinationPortMapping_EndpointGroupArn = &sDestinationPortMapping_EndpointGroupArn
+var DestinationPortMapping_EndpointId = &sDestinationPortMapping_EndpointId
+var DestinationPortMapping_EndpointGroupRegion = &sDestinationPortMapping_EndpointGroupRegion
+var DestinationPortMapping_DestinationSocketAddress = &sDestinationPortMapping_DestinationSocketAddress
+var DestinationPortMapping_IpAddressType = &sDestinationPortMapping_IpAddressType
+var DestinationPortMapping_DestinationTrafficState = &sDestinationPortMapping_DestinationTrafficState
+
+var _DestinationPortMappings = &s_DestinationPortMappings
+var _DestinationPortMappings_member = &s_DestinationPortMappings_member
+
+var _DestinationPorts = &s_DestinationPorts
+var _DestinationPorts_member = &s_DestinationPorts_member
+
+var EndpointAlreadyExistsException = &sEndpointAlreadyExistsException
+var EndpointAlreadyExistsException_Message = &sEndpointAlreadyExistsException_Message
+
+var EndpointConfiguration = &sEndpointConfiguration
+var EndpointConfiguration_EndpointId = &sEndpointConfiguration_EndpointId
+var EndpointConfiguration_Weight = &sEndpointConfiguration_Weight
+var EndpointConfiguration_ClientIPPreservationEnabled = &sEndpointConfiguration_ClientIPPreservationEnabled
+var EndpointConfiguration_AttachmentArn = &sEndpointConfiguration_AttachmentArn
+
+var _EndpointConfigurations = &s_EndpointConfigurations
+var _EndpointConfigurations_member = &s_EndpointConfigurations_member
+
+var EndpointDescription = &sEndpointDescription
+var EndpointDescription_EndpointId = &sEndpointDescription_EndpointId
+var EndpointDescription_Weight = &sEndpointDescription_Weight
+var EndpointDescription_HealthState = &sEndpointDescription_HealthState
+var EndpointDescription_HealthReason = &sEndpointDescription_HealthReason
+var EndpointDescription_ClientIPPreservationEnabled = &sEndpointDescription_ClientIPPreservationEnabled
+
+var _EndpointDescriptions = &s_EndpointDescriptions
+var _EndpointDescriptions_member = &s_EndpointDescriptions_member
+
+var EndpointGroup = &sEndpointGroup
+var EndpointGroup_EndpointGroupArn = &sEndpointGroup_EndpointGroupArn
+var EndpointGroup_EndpointGroupRegion = &sEndpointGroup_EndpointGroupRegion
+var EndpointGroup_EndpointDescriptions = &sEndpointGroup_EndpointDescriptions
+var EndpointGroup_TrafficDialPercentage = &sEndpointGroup_TrafficDialPercentage
+var EndpointGroup_HealthCheckPort = &sEndpointGroup_HealthCheckPort
+var EndpointGroup_HealthCheckProtocol = &sEndpointGroup_HealthCheckProtocol
+var EndpointGroup_HealthCheckPath = &sEndpointGroup_HealthCheckPath
+var EndpointGroup_HealthCheckIntervalSeconds = &sEndpointGroup_HealthCheckIntervalSeconds
+var EndpointGroup_ThresholdCount = &sEndpointGroup_ThresholdCount
+var EndpointGroup_PortOverrides = &sEndpointGroup_PortOverrides
+
+var EndpointGroupAlreadyExistsException = &sEndpointGroupAlreadyExistsException
+var EndpointGroupAlreadyExistsException_Message = &sEndpointGroupAlreadyExistsException_Message
+
+var EndpointGroupNotFoundException = &sEndpointGroupNotFoundException
+var EndpointGroupNotFoundException_Message = &sEndpointGroupNotFoundException_Message
+
+var _EndpointGroups = &s_EndpointGroups
+var _EndpointGroups_member = &s_EndpointGroups_member
+
+var EndpointIdentifier = &sEndpointIdentifier
+var EndpointIdentifier_EndpointId = &sEndpointIdentifier_EndpointId
+var EndpointIdentifier_ClientIPPreservationEnabled = &sEndpointIdentifier_ClientIPPreservationEnabled
+
+var _EndpointIdentifiers = &s_EndpointIdentifiers
+var _EndpointIdentifiers_member = &s_EndpointIdentifiers_member
+
+var _EndpointIds = &s_EndpointIds
+var _EndpointIds_member = &s_EndpointIds_member
+
+var EndpointNotFoundException = &sEndpointNotFoundException
+var EndpointNotFoundException_Message = &sEndpointNotFoundException_Message
+
+var _EndpointWeight = &s_EndpointWeight
+
+var _ErrorMessage = &s_ErrorMessage
+
+var _GenericBoolean = &s_GenericBoolean
+
+var _GenericString = &s_GenericString
+
+var _HealthCheckIntervalSeconds = &s_HealthCheckIntervalSeconds
+
+var _HealthCheckPath = &s_HealthCheckPath
+
+var _HealthCheckPort = &s_HealthCheckPort
+
+var HealthCheckProtocol = &sHealthCheckProtocol
+var HealthCheckProtocol_TCP = &sHealthCheckProtocol_TCP
+var HealthCheckProtocol_HTTP = &sHealthCheckProtocol_HTTP
+var HealthCheckProtocol_HTTPS = &sHealthCheckProtocol_HTTPS
+
+var HealthState = &sHealthState
+var HealthState_INITIAL = &sHealthState_INITIAL
+var HealthState_HEALTHY = &sHealthState_HEALTHY
+var HealthState_UNHEALTHY = &sHealthState_UNHEALTHY
+
+var _IdempotencyToken = &s_IdempotencyToken
+
+var IncorrectCidrStateException = &sIncorrectCidrStateException
+var IncorrectCidrStateException_Message = &sIncorrectCidrStateException_Message
+
+var InternalServiceErrorException = &sInternalServiceErrorException
+var InternalServiceErrorException_Message = &sInternalServiceErrorException_Message
+
+var InvalidArgumentException = &sInvalidArgumentException
+var InvalidArgumentException_Message = &sInvalidArgumentException_Message
+
+var InvalidNextTokenException = &sInvalidNextTokenException
+var InvalidNextTokenException_Message = &sInvalidNextTokenException_Message
+
+var InvalidPortRangeException = &sInvalidPortRangeException
+var InvalidPortRangeException_Message = &sInvalidPortRangeException_Message
+
+var _IpAddress = &s_IpAddress
+
+var IpAddressDetail = &sIpAddressDetail
+var IpAddressDetail_IpAddress = &sIpAddressDetail_IpAddress
+var IpAddressDetail_NetworkZone = &sIpAddressDetail_NetworkZone
+
+var _IpAddressDetails = &s_IpAddressDetails
+var _IpAddressDetails_member = &s_IpAddressDetails_member
+
+var _IpAddresses = &s_IpAddresses
+var _IpAddresses_member = &s_IpAddresses_member
+
+var IpAddressFamily = &sIpAddressFamily
+var IpAddressFamily_IPv4 = &sIpAddressFamily_IPv4
+var IpAddressFamily_IPv6 = &sIpAddressFamily_IPv6
+
+var IpAddressType = &sIpAddressType
+var IpAddressType_IPV4 = &sIpAddressType_IPV4
+var IpAddressType_DUAL_STACK = &sIpAddressType_DUAL_STACK
+
+var IpSet = &sIpSet
+var IpSet_IpFamily = &sIpSet_IpFamily
+var IpSet_IpAddresses = &sIpSet_IpAddresses
+var IpSet_IpAddressFamily = &sIpSet_IpAddressFamily
+var IpSet_IpAddressDetails = &sIpSet_IpAddressDetails
+
+var _IpSets = &s_IpSets
+var _IpSets_member = &s_IpSets_member
+
+var LimitExceededException = &sLimitExceededException
+var LimitExceededException_Message = &sLimitExceededException_Message
+
+var Listener = &sListener
+var Listener_ListenerArn = &sListener_ListenerArn
+var Listener_PortRanges = &sListener_PortRanges
+var Listener_Protocol = &sListener_Protocol
+var Listener_ClientAffinity = &sListener_ClientAffinity
+
+var ListenerNotFoundException = &sListenerNotFoundException
+var ListenerNotFoundException_Message = &sListenerNotFoundException_Message
+
+var _Listeners = &s_Listeners
+var _Listeners_member = &s_Listeners_member
+
+var _MaxResults = &s_MaxResults
+
+var _NetworkZone = &s_NetworkZone
+
+var PortMapping = &sPortMapping
+var PortMapping_AcceleratorPort = &sPortMapping_AcceleratorPort
+var PortMapping_EndpointGroupArn = &sPortMapping_EndpointGroupArn
+var PortMapping_EndpointId = &sPortMapping_EndpointId
+var PortMapping_DestinationSocketAddress = &sPortMapping_DestinationSocketAddress
+var PortMapping_Protocols = &sPortMapping_Protocols
+var PortMapping_DestinationTrafficState = &sPortMapping_DestinationTrafficState
+
+var _PortMappings = &s_PortMappings
+var _PortMappings_member = &s_PortMappings_member
+
+var _PortMappingsMaxResults = &s_PortMappingsMaxResults
+
+var _PortNumber = &s_PortNumber
+
+var PortOverride = &sPortOverride
+var PortOverride_ListenerPort = &sPortOverride_ListenerPort
+var PortOverride_EndpointPort = &sPortOverride_EndpointPort
+
+var _PortOverrides = &s_PortOverrides
+var _PortOverrides_member = &s_PortOverrides_member
+
+var PortRange = &sPortRange
+var PortRange_FromPort = &sPortRange_FromPort
+var PortRange_ToPort = &sPortRange_ToPort
+
+var _PortRanges = &s_PortRanges
+var _PortRanges_member = &s_PortRanges_member
+
+var _Principal = &s_Principal
+
+var _Principals = &s_Principals
+var _Principals_member = &s_Principals_member
+
+var Protocol = &sProtocol
+var Protocol_TCP = &sProtocol_TCP
+var Protocol_UDP = &sProtocol_UDP
+
+var _Protocols = &s_Protocols
+var _Protocols_member = &s_Protocols_member
+
+var Resource = &sResource
+var Resource_EndpointId = &sResource_EndpointId
+var Resource_Cidr = &sResource_Cidr
+var Resource_Region = &sResource_Region
+
+var _ResourceArn = &s_ResourceArn
+
+var _Resources = &s_Resources
+var _Resources_member = &s_Resources_member
+
+var SocketAddress = &sSocketAddress
+var SocketAddress_IpAddress = &sSocketAddress_IpAddress
+var SocketAddress_Port = &sSocketAddress_Port
+
+var _SocketAddresses = &s_SocketAddresses
+var _SocketAddresses_member = &s_SocketAddresses_member
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var _TagKey = &s_TagKey
+
+var _TagKeys = &s_TagKeys
+var _TagKeys_member = &s_TagKeys_member
+
+var _Tags = &s_Tags
+var _Tags_member = &s_Tags_member
+
+var _TagValue = &s_TagValue
+
+var _ThresholdCount = &s_ThresholdCount
+
+var _Timestamp = &s_Timestamp
+
+var _TrafficDialPercentage = &s_TrafficDialPercentage
+
+var TransactionInProgressException = &sTransactionInProgressException
+var TransactionInProgressException_Message = &sTransactionInProgressException_Message
+
+var AddCustomRoutingEndpointsRequest = &sAddCustomRoutingEndpointsRequest
+var AddCustomRoutingEndpointsRequest_EndpointConfigurations = &sAddCustomRoutingEndpointsRequest_EndpointConfigurations
+var AddCustomRoutingEndpointsRequest_EndpointGroupArn = &sAddCustomRoutingEndpointsRequest_EndpointGroupArn
+
+var AddCustomRoutingEndpointsResponse = &sAddCustomRoutingEndpointsResponse
+var AddCustomRoutingEndpointsResponse_EndpointDescriptions = &sAddCustomRoutingEndpointsResponse_EndpointDescriptions
+var AddCustomRoutingEndpointsResponse_EndpointGroupArn = &sAddCustomRoutingEndpointsResponse_EndpointGroupArn
+
+var AddEndpointsRequest = &sAddEndpointsRequest
+var AddEndpointsRequest_EndpointConfigurations = &sAddEndpointsRequest_EndpointConfigurations
+var AddEndpointsRequest_EndpointGroupArn = &sAddEndpointsRequest_EndpointGroupArn
+
+var AddEndpointsResponse = &sAddEndpointsResponse
+var AddEndpointsResponse_EndpointDescriptions = &sAddEndpointsResponse_EndpointDescriptions
+var AddEndpointsResponse_EndpointGroupArn = &sAddEndpointsResponse_EndpointGroupArn
+
+var AdvertiseByoipCidrRequest = &sAdvertiseByoipCidrRequest
+var AdvertiseByoipCidrRequest_Cidr = &sAdvertiseByoipCidrRequest_Cidr
+
+var AdvertiseByoipCidrResponse = &sAdvertiseByoipCidrResponse
+var AdvertiseByoipCidrResponse_ByoipCidr = &sAdvertiseByoipCidrResponse_ByoipCidr
+
+var AllowCustomRoutingTrafficRequest = &sAllowCustomRoutingTrafficRequest
+var AllowCustomRoutingTrafficRequest_EndpointGroupArn = &sAllowCustomRoutingTrafficRequest_EndpointGroupArn
+var AllowCustomRoutingTrafficRequest_EndpointId = &sAllowCustomRoutingTrafficRequest_EndpointId
+var AllowCustomRoutingTrafficRequest_DestinationAddresses = &sAllowCustomRoutingTrafficRequest_DestinationAddresses
+var AllowCustomRoutingTrafficRequest_DestinationPorts = &sAllowCustomRoutingTrafficRequest_DestinationPorts
+var AllowCustomRoutingTrafficRequest_AllowAllTrafficToEndpoint = &sAllowCustomRoutingTrafficRequest_AllowAllTrafficToEndpoint
+
+var CreateAcceleratorRequest = &sCreateAcceleratorRequest
+var CreateAcceleratorRequest_Name = &sCreateAcceleratorRequest_Name
+var CreateAcceleratorRequest_IpAddressType = &sCreateAcceleratorRequest_IpAddressType
+var CreateAcceleratorRequest_IpAddresses = &sCreateAcceleratorRequest_IpAddresses
+var CreateAcceleratorRequest_Enabled = &sCreateAcceleratorRequest_Enabled
+var CreateAcceleratorRequest_IdempotencyToken = &sCreateAcceleratorRequest_IdempotencyToken
+var CreateAcceleratorRequest_Tags = &sCreateAcceleratorRequest_Tags
+
+var CreateAcceleratorResponse = &sCreateAcceleratorResponse
+var CreateAcceleratorResponse_Accelerator = &sCreateAcceleratorResponse_Accelerator
+
+var CreateCrossAccountAttachmentRequest = &sCreateCrossAccountAttachmentRequest
+var CreateCrossAccountAttachmentRequest_Name = &sCreateCrossAccountAttachmentRequest_Name
+var CreateCrossAccountAttachmentRequest_Principals = &sCreateCrossAccountAttachmentRequest_Principals
+var CreateCrossAccountAttachmentRequest_Resources = &sCreateCrossAccountAttachmentRequest_Resources
+var CreateCrossAccountAttachmentRequest_IdempotencyToken = &sCreateCrossAccountAttachmentRequest_IdempotencyToken
+var CreateCrossAccountAttachmentRequest_Tags = &sCreateCrossAccountAttachmentRequest_Tags
+
+var CreateCrossAccountAttachmentResponse = &sCreateCrossAccountAttachmentResponse
+var CreateCrossAccountAttachmentResponse_CrossAccountAttachment = &sCreateCrossAccountAttachmentResponse_CrossAccountAttachment
+
+var CreateCustomRoutingAcceleratorRequest = &sCreateCustomRoutingAcceleratorRequest
+var CreateCustomRoutingAcceleratorRequest_Name = &sCreateCustomRoutingAcceleratorRequest_Name
+var CreateCustomRoutingAcceleratorRequest_IpAddressType = &sCreateCustomRoutingAcceleratorRequest_IpAddressType
+var CreateCustomRoutingAcceleratorRequest_IpAddresses = &sCreateCustomRoutingAcceleratorRequest_IpAddresses
+var CreateCustomRoutingAcceleratorRequest_Enabled = &sCreateCustomRoutingAcceleratorRequest_Enabled
+var CreateCustomRoutingAcceleratorRequest_IdempotencyToken = &sCreateCustomRoutingAcceleratorRequest_IdempotencyToken
+var CreateCustomRoutingAcceleratorRequest_Tags = &sCreateCustomRoutingAcceleratorRequest_Tags
+
+var CreateCustomRoutingAcceleratorResponse = &sCreateCustomRoutingAcceleratorResponse
+var CreateCustomRoutingAcceleratorResponse_Accelerator = &sCreateCustomRoutingAcceleratorResponse_Accelerator
+
+var CreateCustomRoutingEndpointGroupRequest = &sCreateCustomRoutingEndpointGroupRequest
+var CreateCustomRoutingEndpointGroupRequest_ListenerArn = &sCreateCustomRoutingEndpointGroupRequest_ListenerArn
+var CreateCustomRoutingEndpointGroupRequest_EndpointGroupRegion = &sCreateCustomRoutingEndpointGroupRequest_EndpointGroupRegion
+var CreateCustomRoutingEndpointGroupRequest_DestinationConfigurations = &sCreateCustomRoutingEndpointGroupRequest_DestinationConfigurations
+var CreateCustomRoutingEndpointGroupRequest_IdempotencyToken = &sCreateCustomRoutingEndpointGroupRequest_IdempotencyToken
+
+var CreateCustomRoutingEndpointGroupResponse = &sCreateCustomRoutingEndpointGroupResponse
+var CreateCustomRoutingEndpointGroupResponse_EndpointGroup = &sCreateCustomRoutingEndpointGroupResponse_EndpointGroup
+
+var CreateCustomRoutingListenerRequest = &sCreateCustomRoutingListenerRequest
+var CreateCustomRoutingListenerRequest_AcceleratorArn = &sCreateCustomRoutingListenerRequest_AcceleratorArn
+var CreateCustomRoutingListenerRequest_PortRanges = &sCreateCustomRoutingListenerRequest_PortRanges
+var CreateCustomRoutingListenerRequest_IdempotencyToken = &sCreateCustomRoutingListenerRequest_IdempotencyToken
+
+var CreateCustomRoutingListenerResponse = &sCreateCustomRoutingListenerResponse
+var CreateCustomRoutingListenerResponse_Listener = &sCreateCustomRoutingListenerResponse_Listener
+
+var CreateEndpointGroupRequest = &sCreateEndpointGroupRequest
+var CreateEndpointGroupRequest_ListenerArn = &sCreateEndpointGroupRequest_ListenerArn
+var CreateEndpointGroupRequest_EndpointGroupRegion = &sCreateEndpointGroupRequest_EndpointGroupRegion
+var CreateEndpointGroupRequest_EndpointConfigurations = &sCreateEndpointGroupRequest_EndpointConfigurations
+var CreateEndpointGroupRequest_TrafficDialPercentage = &sCreateEndpointGroupRequest_TrafficDialPercentage
+var CreateEndpointGroupRequest_HealthCheckPort = &sCreateEndpointGroupRequest_HealthCheckPort
+var CreateEndpointGroupRequest_HealthCheckProtocol = &sCreateEndpointGroupRequest_HealthCheckProtocol
+var CreateEndpointGroupRequest_HealthCheckPath = &sCreateEndpointGroupRequest_HealthCheckPath
+var CreateEndpointGroupRequest_HealthCheckIntervalSeconds = &sCreateEndpointGroupRequest_HealthCheckIntervalSeconds
+var CreateEndpointGroupRequest_ThresholdCount = &sCreateEndpointGroupRequest_ThresholdCount
+var CreateEndpointGroupRequest_IdempotencyToken = &sCreateEndpointGroupRequest_IdempotencyToken
+var CreateEndpointGroupRequest_PortOverrides = &sCreateEndpointGroupRequest_PortOverrides
+
+var CreateEndpointGroupResponse = &sCreateEndpointGroupResponse
+var CreateEndpointGroupResponse_EndpointGroup = &sCreateEndpointGroupResponse_EndpointGroup
+
+var CreateListenerRequest = &sCreateListenerRequest
+var CreateListenerRequest_AcceleratorArn = &sCreateListenerRequest_AcceleratorArn
+var CreateListenerRequest_PortRanges = &sCreateListenerRequest_PortRanges
+var CreateListenerRequest_Protocol = &sCreateListenerRequest_Protocol
+var CreateListenerRequest_ClientAffinity = &sCreateListenerRequest_ClientAffinity
+var CreateListenerRequest_IdempotencyToken = &sCreateListenerRequest_IdempotencyToken
+
+var CreateListenerResponse = &sCreateListenerResponse
+var CreateListenerResponse_Listener = &sCreateListenerResponse_Listener
+
+var DeleteAcceleratorRequest = &sDeleteAcceleratorRequest
+var DeleteAcceleratorRequest_AcceleratorArn = &sDeleteAcceleratorRequest_AcceleratorArn
+
+var DeleteCrossAccountAttachmentRequest = &sDeleteCrossAccountAttachmentRequest
+var DeleteCrossAccountAttachmentRequest_AttachmentArn = &sDeleteCrossAccountAttachmentRequest_AttachmentArn
+
+var DeleteCustomRoutingAcceleratorRequest = &sDeleteCustomRoutingAcceleratorRequest
+var DeleteCustomRoutingAcceleratorRequest_AcceleratorArn = &sDeleteCustomRoutingAcceleratorRequest_AcceleratorArn
+
+var DeleteCustomRoutingEndpointGroupRequest = &sDeleteCustomRoutingEndpointGroupRequest
+var DeleteCustomRoutingEndpointGroupRequest_EndpointGroupArn = &sDeleteCustomRoutingEndpointGroupRequest_EndpointGroupArn
+
+var DeleteCustomRoutingListenerRequest = &sDeleteCustomRoutingListenerRequest
+var DeleteCustomRoutingListenerRequest_ListenerArn = &sDeleteCustomRoutingListenerRequest_ListenerArn
+
+var DeleteEndpointGroupRequest = &sDeleteEndpointGroupRequest
+var DeleteEndpointGroupRequest_EndpointGroupArn = &sDeleteEndpointGroupRequest_EndpointGroupArn
+
+var DeleteListenerRequest = &sDeleteListenerRequest
+var DeleteListenerRequest_ListenerArn = &sDeleteListenerRequest_ListenerArn
+
+var DenyCustomRoutingTrafficRequest = &sDenyCustomRoutingTrafficRequest
+var DenyCustomRoutingTrafficRequest_EndpointGroupArn = &sDenyCustomRoutingTrafficRequest_EndpointGroupArn
+var DenyCustomRoutingTrafficRequest_EndpointId = &sDenyCustomRoutingTrafficRequest_EndpointId
+var DenyCustomRoutingTrafficRequest_DestinationAddresses = &sDenyCustomRoutingTrafficRequest_DestinationAddresses
+var DenyCustomRoutingTrafficRequest_DestinationPorts = &sDenyCustomRoutingTrafficRequest_DestinationPorts
+var DenyCustomRoutingTrafficRequest_DenyAllTrafficToEndpoint = &sDenyCustomRoutingTrafficRequest_DenyAllTrafficToEndpoint
+
+var DeprovisionByoipCidrRequest = &sDeprovisionByoipCidrRequest
+var DeprovisionByoipCidrRequest_Cidr = &sDeprovisionByoipCidrRequest_Cidr
+
+var DeprovisionByoipCidrResponse = &sDeprovisionByoipCidrResponse
+var DeprovisionByoipCidrResponse_ByoipCidr = &sDeprovisionByoipCidrResponse_ByoipCidr
+
+var DescribeAcceleratorAttributesRequest = &sDescribeAcceleratorAttributesRequest
+var DescribeAcceleratorAttributesRequest_AcceleratorArn = &sDescribeAcceleratorAttributesRequest_AcceleratorArn
+
+var DescribeAcceleratorAttributesResponse = &sDescribeAcceleratorAttributesResponse
+var DescribeAcceleratorAttributesResponse_AcceleratorAttributes = &sDescribeAcceleratorAttributesResponse_AcceleratorAttributes
+
+var DescribeAcceleratorRequest = &sDescribeAcceleratorRequest
+var DescribeAcceleratorRequest_AcceleratorArn = &sDescribeAcceleratorRequest_AcceleratorArn
+
+var DescribeAcceleratorResponse = &sDescribeAcceleratorResponse
+var DescribeAcceleratorResponse_Accelerator = &sDescribeAcceleratorResponse_Accelerator
+
+var DescribeCrossAccountAttachmentRequest = &sDescribeCrossAccountAttachmentRequest
+var DescribeCrossAccountAttachmentRequest_AttachmentArn = &sDescribeCrossAccountAttachmentRequest_AttachmentArn
+
+var DescribeCrossAccountAttachmentResponse = &sDescribeCrossAccountAttachmentResponse
+var DescribeCrossAccountAttachmentResponse_CrossAccountAttachment = &sDescribeCrossAccountAttachmentResponse_CrossAccountAttachment
+
+var DescribeCustomRoutingAcceleratorAttributesRequest = &sDescribeCustomRoutingAcceleratorAttributesRequest
+var DescribeCustomRoutingAcceleratorAttributesRequest_AcceleratorArn = &sDescribeCustomRoutingAcceleratorAttributesRequest_AcceleratorArn
+
+var DescribeCustomRoutingAcceleratorAttributesResponse = &sDescribeCustomRoutingAcceleratorAttributesResponse
+var DescribeCustomRoutingAcceleratorAttributesResponse_AcceleratorAttributes = &sDescribeCustomRoutingAcceleratorAttributesResponse_AcceleratorAttributes
+
+var DescribeCustomRoutingAcceleratorRequest = &sDescribeCustomRoutingAcceleratorRequest
+var DescribeCustomRoutingAcceleratorRequest_AcceleratorArn = &sDescribeCustomRoutingAcceleratorRequest_AcceleratorArn
+
+var DescribeCustomRoutingAcceleratorResponse = &sDescribeCustomRoutingAcceleratorResponse
+var DescribeCustomRoutingAcceleratorResponse_Accelerator = &sDescribeCustomRoutingAcceleratorResponse_Accelerator
+
+var DescribeCustomRoutingEndpointGroupRequest = &sDescribeCustomRoutingEndpointGroupRequest
+var DescribeCustomRoutingEndpointGroupRequest_EndpointGroupArn = &sDescribeCustomRoutingEndpointGroupRequest_EndpointGroupArn
+
+var DescribeCustomRoutingEndpointGroupResponse = &sDescribeCustomRoutingEndpointGroupResponse
+var DescribeCustomRoutingEndpointGroupResponse_EndpointGroup = &sDescribeCustomRoutingEndpointGroupResponse_EndpointGroup
+
+var DescribeCustomRoutingListenerRequest = &sDescribeCustomRoutingListenerRequest
+var DescribeCustomRoutingListenerRequest_ListenerArn = &sDescribeCustomRoutingListenerRequest_ListenerArn
+
+var DescribeCustomRoutingListenerResponse = &sDescribeCustomRoutingListenerResponse
+var DescribeCustomRoutingListenerResponse_Listener = &sDescribeCustomRoutingListenerResponse_Listener
+
+var DescribeEndpointGroupRequest = &sDescribeEndpointGroupRequest
+var DescribeEndpointGroupRequest_EndpointGroupArn = &sDescribeEndpointGroupRequest_EndpointGroupArn
+
+var DescribeEndpointGroupResponse = &sDescribeEndpointGroupResponse
+var DescribeEndpointGroupResponse_EndpointGroup = &sDescribeEndpointGroupResponse_EndpointGroup
+
+var DescribeListenerRequest = &sDescribeListenerRequest
+var DescribeListenerRequest_ListenerArn = &sDescribeListenerRequest_ListenerArn
+
+var DescribeListenerResponse = &sDescribeListenerResponse
+var DescribeListenerResponse_Listener = &sDescribeListenerResponse_Listener
+
+var ListAcceleratorsRequest = &sListAcceleratorsRequest
+var ListAcceleratorsRequest_MaxResults = &sListAcceleratorsRequest_MaxResults
+var ListAcceleratorsRequest_NextToken = &sListAcceleratorsRequest_NextToken
+
+var ListAcceleratorsResponse = &sListAcceleratorsResponse
+var ListAcceleratorsResponse_Accelerators = &sListAcceleratorsResponse_Accelerators
+var ListAcceleratorsResponse_NextToken = &sListAcceleratorsResponse_NextToken
+
+var ListByoipCidrsRequest = &sListByoipCidrsRequest
+var ListByoipCidrsRequest_MaxResults = &sListByoipCidrsRequest_MaxResults
+var ListByoipCidrsRequest_NextToken = &sListByoipCidrsRequest_NextToken
+
+var ListByoipCidrsResponse = &sListByoipCidrsResponse
+var ListByoipCidrsResponse_ByoipCidrs = &sListByoipCidrsResponse_ByoipCidrs
+var ListByoipCidrsResponse_NextToken = &sListByoipCidrsResponse_NextToken
+
+var ListCrossAccountAttachmentsRequest = &sListCrossAccountAttachmentsRequest
+var ListCrossAccountAttachmentsRequest_MaxResults = &sListCrossAccountAttachmentsRequest_MaxResults
+var ListCrossAccountAttachmentsRequest_NextToken = &sListCrossAccountAttachmentsRequest_NextToken
+
+var ListCrossAccountAttachmentsResponse = &sListCrossAccountAttachmentsResponse
+var ListCrossAccountAttachmentsResponse_CrossAccountAttachments = &sListCrossAccountAttachmentsResponse_CrossAccountAttachments
+var ListCrossAccountAttachmentsResponse_NextToken = &sListCrossAccountAttachmentsResponse_NextToken
+
+var ListCrossAccountResourceAccountsRequest = &sListCrossAccountResourceAccountsRequest
+
+var ListCrossAccountResourceAccountsResponse = &sListCrossAccountResourceAccountsResponse
+var ListCrossAccountResourceAccountsResponse_ResourceOwnerAwsAccountIds = &sListCrossAccountResourceAccountsResponse_ResourceOwnerAwsAccountIds
+
+var ListCrossAccountResourcesRequest = &sListCrossAccountResourcesRequest
+var ListCrossAccountResourcesRequest_AcceleratorArn = &sListCrossAccountResourcesRequest_AcceleratorArn
+var ListCrossAccountResourcesRequest_ResourceOwnerAwsAccountId = &sListCrossAccountResourcesRequest_ResourceOwnerAwsAccountId
+var ListCrossAccountResourcesRequest_MaxResults = &sListCrossAccountResourcesRequest_MaxResults
+var ListCrossAccountResourcesRequest_NextToken = &sListCrossAccountResourcesRequest_NextToken
+
+var ListCrossAccountResourcesResponse = &sListCrossAccountResourcesResponse
+var ListCrossAccountResourcesResponse_CrossAccountResources = &sListCrossAccountResourcesResponse_CrossAccountResources
+var ListCrossAccountResourcesResponse_NextToken = &sListCrossAccountResourcesResponse_NextToken
+
+var ListCustomRoutingAcceleratorsRequest = &sListCustomRoutingAcceleratorsRequest
+var ListCustomRoutingAcceleratorsRequest_MaxResults = &sListCustomRoutingAcceleratorsRequest_MaxResults
+var ListCustomRoutingAcceleratorsRequest_NextToken = &sListCustomRoutingAcceleratorsRequest_NextToken
+
+var ListCustomRoutingAcceleratorsResponse = &sListCustomRoutingAcceleratorsResponse
+var ListCustomRoutingAcceleratorsResponse_Accelerators = &sListCustomRoutingAcceleratorsResponse_Accelerators
+var ListCustomRoutingAcceleratorsResponse_NextToken = &sListCustomRoutingAcceleratorsResponse_NextToken
+
+var ListCustomRoutingEndpointGroupsRequest = &sListCustomRoutingEndpointGroupsRequest
+var ListCustomRoutingEndpointGroupsRequest_ListenerArn = &sListCustomRoutingEndpointGroupsRequest_ListenerArn
+var ListCustomRoutingEndpointGroupsRequest_MaxResults = &sListCustomRoutingEndpointGroupsRequest_MaxResults
+var ListCustomRoutingEndpointGroupsRequest_NextToken = &sListCustomRoutingEndpointGroupsRequest_NextToken
+
+var ListCustomRoutingEndpointGroupsResponse = &sListCustomRoutingEndpointGroupsResponse
+var ListCustomRoutingEndpointGroupsResponse_EndpointGroups = &sListCustomRoutingEndpointGroupsResponse_EndpointGroups
+var ListCustomRoutingEndpointGroupsResponse_NextToken = &sListCustomRoutingEndpointGroupsResponse_NextToken
+
+var ListCustomRoutingListenersRequest = &sListCustomRoutingListenersRequest
+var ListCustomRoutingListenersRequest_AcceleratorArn = &sListCustomRoutingListenersRequest_AcceleratorArn
+var ListCustomRoutingListenersRequest_MaxResults = &sListCustomRoutingListenersRequest_MaxResults
+var ListCustomRoutingListenersRequest_NextToken = &sListCustomRoutingListenersRequest_NextToken
+
+var ListCustomRoutingListenersResponse = &sListCustomRoutingListenersResponse
+var ListCustomRoutingListenersResponse_Listeners = &sListCustomRoutingListenersResponse_Listeners
+var ListCustomRoutingListenersResponse_NextToken = &sListCustomRoutingListenersResponse_NextToken
+
+var ListCustomRoutingPortMappingsByDestinationRequest = &sListCustomRoutingPortMappingsByDestinationRequest
+var ListCustomRoutingPortMappingsByDestinationRequest_EndpointId = &sListCustomRoutingPortMappingsByDestinationRequest_EndpointId
+var ListCustomRoutingPortMappingsByDestinationRequest_DestinationAddress = &sListCustomRoutingPortMappingsByDestinationRequest_DestinationAddress
+var ListCustomRoutingPortMappingsByDestinationRequest_MaxResults = &sListCustomRoutingPortMappingsByDestinationRequest_MaxResults
+var ListCustomRoutingPortMappingsByDestinationRequest_NextToken = &sListCustomRoutingPortMappingsByDestinationRequest_NextToken
+
+var ListCustomRoutingPortMappingsByDestinationResponse = &sListCustomRoutingPortMappingsByDestinationResponse
+var ListCustomRoutingPortMappingsByDestinationResponse_DestinationPortMappings = &sListCustomRoutingPortMappingsByDestinationResponse_DestinationPortMappings
+var ListCustomRoutingPortMappingsByDestinationResponse_NextToken = &sListCustomRoutingPortMappingsByDestinationResponse_NextToken
+
+var ListCustomRoutingPortMappingsRequest = &sListCustomRoutingPortMappingsRequest
+var ListCustomRoutingPortMappingsRequest_AcceleratorArn = &sListCustomRoutingPortMappingsRequest_AcceleratorArn
+var ListCustomRoutingPortMappingsRequest_EndpointGroupArn = &sListCustomRoutingPortMappingsRequest_EndpointGroupArn
+var ListCustomRoutingPortMappingsRequest_MaxResults = &sListCustomRoutingPortMappingsRequest_MaxResults
+var ListCustomRoutingPortMappingsRequest_NextToken = &sListCustomRoutingPortMappingsRequest_NextToken
+
+var ListCustomRoutingPortMappingsResponse = &sListCustomRoutingPortMappingsResponse
+var ListCustomRoutingPortMappingsResponse_PortMappings = &sListCustomRoutingPortMappingsResponse_PortMappings
+var ListCustomRoutingPortMappingsResponse_NextToken = &sListCustomRoutingPortMappingsResponse_NextToken
+
+var ListEndpointGroupsRequest = &sListEndpointGroupsRequest
+var ListEndpointGroupsRequest_ListenerArn = &sListEndpointGroupsRequest_ListenerArn
+var ListEndpointGroupsRequest_MaxResults = &sListEndpointGroupsRequest_MaxResults
+var ListEndpointGroupsRequest_NextToken = &sListEndpointGroupsRequest_NextToken
+
+var ListEndpointGroupsResponse = &sListEndpointGroupsResponse
+var ListEndpointGroupsResponse_EndpointGroups = &sListEndpointGroupsResponse_EndpointGroups
+var ListEndpointGroupsResponse_NextToken = &sListEndpointGroupsResponse_NextToken
+
+var ListListenersRequest = &sListListenersRequest
+var ListListenersRequest_AcceleratorArn = &sListListenersRequest_AcceleratorArn
+var ListListenersRequest_MaxResults = &sListListenersRequest_MaxResults
+var ListListenersRequest_NextToken = &sListListenersRequest_NextToken
+
+var ListListenersResponse = &sListListenersResponse
+var ListListenersResponse_Listeners = &sListListenersResponse_Listeners
+var ListListenersResponse_NextToken = &sListListenersResponse_NextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceArn = &sListTagsForResourceRequest_ResourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_Tags = &sListTagsForResourceResponse_Tags
+
+var ProvisionByoipCidrRequest = &sProvisionByoipCidrRequest
+var ProvisionByoipCidrRequest_Cidr = &sProvisionByoipCidrRequest_Cidr
+var ProvisionByoipCidrRequest_CidrAuthorizationContext = &sProvisionByoipCidrRequest_CidrAuthorizationContext
+
+var ProvisionByoipCidrResponse = &sProvisionByoipCidrResponse
+var ProvisionByoipCidrResponse_ByoipCidr = &sProvisionByoipCidrResponse_ByoipCidr
+
+var RemoveCustomRoutingEndpointsRequest = &sRemoveCustomRoutingEndpointsRequest
+var RemoveCustomRoutingEndpointsRequest_EndpointIds = &sRemoveCustomRoutingEndpointsRequest_EndpointIds
+var RemoveCustomRoutingEndpointsRequest_EndpointGroupArn = &sRemoveCustomRoutingEndpointsRequest_EndpointGroupArn
+
+var RemoveEndpointsRequest = &sRemoveEndpointsRequest
+var RemoveEndpointsRequest_EndpointIdentifiers = &sRemoveEndpointsRequest_EndpointIdentifiers
+var RemoveEndpointsRequest_EndpointGroupArn = &sRemoveEndpointsRequest_EndpointGroupArn
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceArn = &sTagResourceRequest_ResourceArn
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceArn = &sUntagResourceRequest_ResourceArn
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateAcceleratorAttributesRequest = &sUpdateAcceleratorAttributesRequest
+var UpdateAcceleratorAttributesRequest_AcceleratorArn = &sUpdateAcceleratorAttributesRequest_AcceleratorArn
+var UpdateAcceleratorAttributesRequest_FlowLogsEnabled = &sUpdateAcceleratorAttributesRequest_FlowLogsEnabled
+var UpdateAcceleratorAttributesRequest_FlowLogsS3Bucket = &sUpdateAcceleratorAttributesRequest_FlowLogsS3Bucket
+var UpdateAcceleratorAttributesRequest_FlowLogsS3Prefix = &sUpdateAcceleratorAttributesRequest_FlowLogsS3Prefix
+
+var UpdateAcceleratorAttributesResponse = &sUpdateAcceleratorAttributesResponse
+var UpdateAcceleratorAttributesResponse_AcceleratorAttributes = &sUpdateAcceleratorAttributesResponse_AcceleratorAttributes
+
+var UpdateAcceleratorRequest = &sUpdateAcceleratorRequest
+var UpdateAcceleratorRequest_AcceleratorArn = &sUpdateAcceleratorRequest_AcceleratorArn
+var UpdateAcceleratorRequest_Name = &sUpdateAcceleratorRequest_Name
+var UpdateAcceleratorRequest_IpAddressType = &sUpdateAcceleratorRequest_IpAddressType
+var UpdateAcceleratorRequest_IpAddresses = &sUpdateAcceleratorRequest_IpAddresses
+var UpdateAcceleratorRequest_Enabled = &sUpdateAcceleratorRequest_Enabled
+
+var UpdateAcceleratorResponse = &sUpdateAcceleratorResponse
+var UpdateAcceleratorResponse_Accelerator = &sUpdateAcceleratorResponse_Accelerator
+
+var UpdateCrossAccountAttachmentRequest = &sUpdateCrossAccountAttachmentRequest
+var UpdateCrossAccountAttachmentRequest_AttachmentArn = &sUpdateCrossAccountAttachmentRequest_AttachmentArn
+var UpdateCrossAccountAttachmentRequest_Name = &sUpdateCrossAccountAttachmentRequest_Name
+var UpdateCrossAccountAttachmentRequest_AddPrincipals = &sUpdateCrossAccountAttachmentRequest_AddPrincipals
+var UpdateCrossAccountAttachmentRequest_RemovePrincipals = &sUpdateCrossAccountAttachmentRequest_RemovePrincipals
+var UpdateCrossAccountAttachmentRequest_AddResources = &sUpdateCrossAccountAttachmentRequest_AddResources
+var UpdateCrossAccountAttachmentRequest_RemoveResources = &sUpdateCrossAccountAttachmentRequest_RemoveResources
+
+var UpdateCrossAccountAttachmentResponse = &sUpdateCrossAccountAttachmentResponse
+var UpdateCrossAccountAttachmentResponse_CrossAccountAttachment = &sUpdateCrossAccountAttachmentResponse_CrossAccountAttachment
+
+var UpdateCustomRoutingAcceleratorAttributesRequest = &sUpdateCustomRoutingAcceleratorAttributesRequest
+var UpdateCustomRoutingAcceleratorAttributesRequest_AcceleratorArn = &sUpdateCustomRoutingAcceleratorAttributesRequest_AcceleratorArn
+var UpdateCustomRoutingAcceleratorAttributesRequest_FlowLogsEnabled = &sUpdateCustomRoutingAcceleratorAttributesRequest_FlowLogsEnabled
+var UpdateCustomRoutingAcceleratorAttributesRequest_FlowLogsS3Bucket = &sUpdateCustomRoutingAcceleratorAttributesRequest_FlowLogsS3Bucket
+var UpdateCustomRoutingAcceleratorAttributesRequest_FlowLogsS3Prefix = &sUpdateCustomRoutingAcceleratorAttributesRequest_FlowLogsS3Prefix
+
+var UpdateCustomRoutingAcceleratorAttributesResponse = &sUpdateCustomRoutingAcceleratorAttributesResponse
+var UpdateCustomRoutingAcceleratorAttributesResponse_AcceleratorAttributes = &sUpdateCustomRoutingAcceleratorAttributesResponse_AcceleratorAttributes
+
+var UpdateCustomRoutingAcceleratorRequest = &sUpdateCustomRoutingAcceleratorRequest
+var UpdateCustomRoutingAcceleratorRequest_AcceleratorArn = &sUpdateCustomRoutingAcceleratorRequest_AcceleratorArn
+var UpdateCustomRoutingAcceleratorRequest_Name = &sUpdateCustomRoutingAcceleratorRequest_Name
+var UpdateCustomRoutingAcceleratorRequest_IpAddressType = &sUpdateCustomRoutingAcceleratorRequest_IpAddressType
+var UpdateCustomRoutingAcceleratorRequest_IpAddresses = &sUpdateCustomRoutingAcceleratorRequest_IpAddresses
+var UpdateCustomRoutingAcceleratorRequest_Enabled = &sUpdateCustomRoutingAcceleratorRequest_Enabled
+
+var UpdateCustomRoutingAcceleratorResponse = &sUpdateCustomRoutingAcceleratorResponse
+var UpdateCustomRoutingAcceleratorResponse_Accelerator = &sUpdateCustomRoutingAcceleratorResponse_Accelerator
+
+var UpdateCustomRoutingListenerRequest = &sUpdateCustomRoutingListenerRequest
+var UpdateCustomRoutingListenerRequest_ListenerArn = &sUpdateCustomRoutingListenerRequest_ListenerArn
+var UpdateCustomRoutingListenerRequest_PortRanges = &sUpdateCustomRoutingListenerRequest_PortRanges
+
+var UpdateCustomRoutingListenerResponse = &sUpdateCustomRoutingListenerResponse
+var UpdateCustomRoutingListenerResponse_Listener = &sUpdateCustomRoutingListenerResponse_Listener
+
+var UpdateEndpointGroupRequest = &sUpdateEndpointGroupRequest
+var UpdateEndpointGroupRequest_EndpointGroupArn = &sUpdateEndpointGroupRequest_EndpointGroupArn
+var UpdateEndpointGroupRequest_EndpointConfigurations = &sUpdateEndpointGroupRequest_EndpointConfigurations
+var UpdateEndpointGroupRequest_TrafficDialPercentage = &sUpdateEndpointGroupRequest_TrafficDialPercentage
+var UpdateEndpointGroupRequest_HealthCheckPort = &sUpdateEndpointGroupRequest_HealthCheckPort
+var UpdateEndpointGroupRequest_HealthCheckProtocol = &sUpdateEndpointGroupRequest_HealthCheckProtocol
+var UpdateEndpointGroupRequest_HealthCheckPath = &sUpdateEndpointGroupRequest_HealthCheckPath
+var UpdateEndpointGroupRequest_HealthCheckIntervalSeconds = &sUpdateEndpointGroupRequest_HealthCheckIntervalSeconds
+var UpdateEndpointGroupRequest_ThresholdCount = &sUpdateEndpointGroupRequest_ThresholdCount
+var UpdateEndpointGroupRequest_PortOverrides = &sUpdateEndpointGroupRequest_PortOverrides
+
+var UpdateEndpointGroupResponse = &sUpdateEndpointGroupResponse
+var UpdateEndpointGroupResponse_EndpointGroup = &sUpdateEndpointGroupResponse_EndpointGroup
+
+var UpdateListenerRequest = &sUpdateListenerRequest
+var UpdateListenerRequest_ListenerArn = &sUpdateListenerRequest_ListenerArn
+var UpdateListenerRequest_PortRanges = &sUpdateListenerRequest_PortRanges
+var UpdateListenerRequest_Protocol = &sUpdateListenerRequest_Protocol
+var UpdateListenerRequest_ClientAffinity = &sUpdateListenerRequest_ClientAffinity
+
+var UpdateListenerResponse = &sUpdateListenerResponse
+var UpdateListenerResponse_Listener = &sUpdateListenerResponse_Listener
+
+var WithdrawByoipCidrRequest = &sWithdrawByoipCidrRequest
+var WithdrawByoipCidrRequest_Cidr = &sWithdrawByoipCidrRequest_Cidr
+
+var WithdrawByoipCidrResponse = &sWithdrawByoipCidrResponse
+var WithdrawByoipCidrResponse_ByoipCidr = &sWithdrawByoipCidrResponse_ByoipCidr
+
+var GlobalAccelerator_V20180706 = &smithy.ServiceSchema{Schema: &s_GlobalAccelerator_V20180706, Version: "2018-08-08"}
